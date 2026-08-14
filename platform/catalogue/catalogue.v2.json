@@ -305,7 +305,7 @@
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 155329, \"facesAfter\": 150021, \"ratio\": 0.966}",
    "colour variants baked 2026-07-19: []",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 rigorous re-audit (fresh high-quality render): renders as a small blue bubble car \u2014 wrong vehicle. Pulled from live pending restore/re-source.",
+   "2026-07-19 rigorous re-audit (fresh high-quality render): renders as a small blue bubble car — wrong vehicle. Pulled from live pending restore/re-source.",
    "2026-07-20 RE-SOURCED from CSV library-fill: CC-BY model 119c5e10733142b197aa53b86f6aeb04 (Mercedes E-Class W212), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
    "plates removed 2026-07-30: the baked plate carried an invented registration 'AL24 3D' and two designs were live at once; placement also failed on yawed and tall models. Stripped at the glTF JSON level, geometry untouched. Re-bake once placement is solved."
@@ -7343,7 +7343,7 @@
   "needsHumanReview": [],
   "notes": [
    "Source title: 'Audi A1 Quattro (A1II)'. No year asserted.",
-   "web-optimised 2026-07-18: stripped 9 stray LINES primitives (scribble artifacts), re-welded + re-Draco (12MB\u21923MB)",
+   "web-optimised 2026-07-18: stripped 9 stray LINES primitives (scribble artifacts), re-welded + re-Draco (12MB→3MB)",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 862084, \"facesAfter\": 149984, \"ratio\": 0.174}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
@@ -8590,7 +8590,7 @@
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "undated ambiguous duplicate \u2014 dated Juke kept as nissan-juke-2020-v1",
+  "quarantineReason": "undated ambiguous duplicate — dated Juke kept as nissan-juke-2020-v1",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -8635,10 +8635,10 @@
    "Source title: 'Nissan Juke'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1540446, \"facesAfter\": 163060, \"ratio\": 0.097}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 GLASS AUDIT: render-verified STILL FROSTY after material-preserving reprocess from source \u2014 the source model is single-material/untextured with no separable window glass, so the render worker cannot tint it. Confirmed unfixable by reprocessing. Kept serving (complete car) but demoted to grade B; re-source candidate for clear glass.",
+   "2026-07-19 GLASS AUDIT: render-verified STILL FROSTY after material-preserving reprocess from source — the source model is single-material/untextured with no separable window glass, so the render worker cannot tint it. Confirmed unfixable by reprocessing. Kept serving (complete car) but demoted to grade B; re-source candidate for clear glass.",
    "2026-07-19 RE-SOURCED (previous source was frosty/broken/untextured): new CC-BY model b28ed98292d2420d97fb94e2d45b0ffc, hardened material-preserving pipeline (copy+plate+webp+draco), render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white'] re-baked. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
-   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: undated ambiguous duplicate \u2014 dated Juke kept as nissan-juke-2020-v1"
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: undated ambiguous duplicate — dated Juke kept as nissan-juke-2020-v1"
   ],
   "customization": {
    "configuratorReady": false,
@@ -9097,7 +9097,7 @@
    "Source title: 'Renault Megane Sedan'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 518236, \"facesAfter\": 151204, \"ratio\": 0.289}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 rigorous re-audit (fresh high-quality render): renders as a small pink hatch \u2014 not a Megane sedan. Pulled from live pending restore/re-source.",
+   "2026-07-19 rigorous re-audit (fresh high-quality render): renders as a small pink hatch — not a Megane sedan. Pulled from live pending restore/re-source.",
    "2026-07-20 RE-SOURCED from CSV library-fill: CC-BY model 9b354d3413c64215a3c576cc6ffb3ca3 (2010 Renault Megane RS 250 Cup), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
    "plates removed 2026-07-30: the baked plate carried an invented registration 'AL24 3D' and two designs were live at once; placement also failed on yawed and tall models. Stripped at the glTF JSON level, geometry untouched. Re-bake once placement is solved."
@@ -11791,8 +11791,8 @@
    "BMW M3 (G80) saloon.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1353401, \"facesAfter\": 245003, \"ratio\": 0.111}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 rigorous re-audit (fresh high-quality render): renders as a red hatch on a baked ground slab \u2014 wrong/low-quality (other M3 gens cover M3). Pulled from live pending restore/re-source.",
-   "2026-07-19: redundant \u2014 bmw-m3-e30/f80/e46 cover M3 lookups; leaving quarantined."
+   "2026-07-19 rigorous re-audit (fresh high-quality render): renders as a red hatch on a baked ground slab — wrong/low-quality (other M3 gens cover M3). Pulled from live pending restore/re-source.",
+   "2026-07-19: redundant — bmw-m3-e30/f80/e46 cover M3 lookups; leaving quarantined."
   ],
   "customization": {
    "configuratorReady": false,
@@ -13315,13 +13315,13 @@
   "publishedAt": "2026-07-17T13:23:31Z",
   "replacedAssetId": null,
   "needsHumanReview": [
-   "2026-07-21 strict glass+interior re-audit: no see-through glass / no visible interior \u2014 re-source with material-separated glass + modelled cabin"
+   "2026-07-21 strict glass+interior re-audit: no see-through glass / no visible interior — re-source with material-separated glass + modelled cabin"
   ],
   "notes": [
    "Source title: 'Audi S3 (8P) STOCK'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 408028, \"facesAfter\": 155044, \"ratio\": 0.368}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 GLASS AUDIT: render-verified CLEAR glass + proper wheels \u2014 the frosty flag was incorrect (model has real transparent BLEND glass that survived). Flag cleared.",
+   "2026-07-19 GLASS AUDIT: render-verified CLEAR glass + proper wheels — the frosty flag was incorrect (model has real transparent BLEND glass that survived). Flag cleared.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label)."
   ],
   "customization": {
@@ -13958,7 +13958,7 @@
   "notes": [
    "Source title: '2014 Ford Transit Connect Cargo'.",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 audit: body renders as an unlit black blob and wheels are mis-coloured blue (scrambled materials) \u2014 not premium. Quarantined; re-source a clean CC-BY Transit Connect."
+   "2026-07-19 audit: body renders as an unlit black blob and wheels are mis-coloured blue (scrambled materials) — not premium. Quarantined; re-source a clean CC-BY Transit Connect."
   ],
   "customization": {
    "configuratorReady": false,
@@ -14765,7 +14765,7 @@
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "redundant RS liftback duplicate \u2014 skoda-octavia-v1 kept",
+  "quarantineReason": "redundant RS liftback duplicate — skoda-octavia-v1 kept",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -14811,7 +14811,7 @@
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1724158, \"facesAfter\": 195951, \"ratio\": 0.087}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
-   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant RS liftback duplicate \u2014 skoda-octavia-v1 kept"
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant RS liftback duplicate — skoda-octavia-v1 kept"
   ],
   "customization": {
    "configuratorReady": false,
@@ -14985,7 +14985,7 @@
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "redundant RS estate duplicate \u2014 Octavia Estate kept as skoda-octavia-estate-v1",
+  "quarantineReason": "redundant RS estate duplicate — Octavia Estate kept as skoda-octavia-estate-v1",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -15031,7 +15031,7 @@
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1616859, \"facesAfter\": 161076, \"ratio\": 0.093}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
-   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant RS estate duplicate \u2014 Octavia Estate kept as skoda-octavia-estate-v1"
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant RS estate duplicate — Octavia Estate kept as skoda-octavia-estate-v1"
   ],
   "customization": {
    "configuratorReady": false,
@@ -15247,7 +15247,7 @@
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 3273670, \"facesAfter\": 151284, \"ratio\": 0.046}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
    "2026-07-19 rigorous re-audit (fresh high-quality render): renders overhead (mis-oriented). Pulled from live pending restore/re-source.",
-   "2026-07-19: restore attempted (no-auto-upright AND auto-upright) \u2014 still renders overhead; source is 146MB and non-axis-aligned (kuga-class). Re-source a lighter, correctly-oriented S90."
+   "2026-07-19: restore attempted (no-auto-upright AND auto-upright) — still renders overhead; source is 146MB and non-axis-aligned (kuga-class). Re-source a lighter, correctly-oriented S90."
   ],
   "customization": {
    "configuratorReady": false,
@@ -19117,7 +19117,7 @@
    "Source title: 'SUZUKI JIMNY'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1190296, \"facesAfter\": 152688, \"ratio\": 0.126}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-20 LIBRARY AUDIT: render shows model on its side with a detached wheel \u2014 broken geometry/orientation. Quarantined; re-source needed.",
+   "2026-07-20 LIBRARY AUDIT: render shows model on its side with a detached wheel — broken geometry/orientation. Quarantined; re-source needed.",
    "2026-07-20 NEW from CSV library-fill: CC-BY model 8b7c4d136f6742e180faf654d874f14a (2023 Suzuki Jimny Sierra), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade good.",
    "2026-07-21 aggressive wave 5 (two-token rotation): CC-BY, hardened + material-separated, 8 DVLA colours, black-verified.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
@@ -21295,7 +21295,7 @@
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 539529, \"facesAfter\": 172231, \"ratio\": 0.278}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
    "2026-07-19 rigorous re-audit (fresh high-quality render): renders overhead (mis-oriented); kia-niro-2021-v1 covers Niro. Pulled from live pending restore/re-source.",
-   "2026-07-19: redundant \u2014 kia-niro-2021-v1 covers Niro; leaving quarantined."
+   "2026-07-19: redundant — kia-niro-2021-v1 covers Niro; leaving quarantined."
   ],
   "customization": {
    "configuratorReady": false,
@@ -23516,7 +23516,7 @@
    "recolour-audit revert -> single-neutral (was paintMaterialNames=[])",
    "fix-not-drop re-bake attempt: body material corrected to 'CARPAINT' (was mis-identified)",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
-   "fix-not-drop: recovered \u2014 corrected body material, re-baked 8 colours, recolour audit PASS"
+   "fix-not-drop: recovered — corrected body material, re-baked 8 colours, recolour audit PASS"
   ],
   "customization": {
    "configuratorReady": false,
@@ -25342,7 +25342,7 @@
    "Source title: 'Audi Rs3 sedan 2022'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 580917, \"facesAfter\": 150150, \"ratio\": 0.258}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 GLASS AUDIT: render-verified BROKEN \u2014 no tyres (empty wheel wells) + translucent body; material-preserving reprocess from source did not recover wheels. Quarantined pending re-source.",
+   "2026-07-19 GLASS AUDIT: render-verified BROKEN — no tyres (empty wheel wells) + translucent body; material-preserving reprocess from source did not recover wheels. Quarantined pending re-source.",
    "2026-07-19 RE-SOURCED (previous source was frosty/broken/untextured): new CC-BY model 96fdd80794004df28342b8e035348801, hardened material-preserving pipeline (copy+plate+webp+draco), render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white'] re-baked. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
    "recolour-audit revert -> single-neutral (was paintMaterialNames=[])"
@@ -25565,7 +25565,7 @@
    "Source title: 'Audi S5 Convertible'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 903920, \"facesAfter\": 149997, \"ratio\": 0.166}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 rigorous re-audit (fresh high-quality render): renders as a yellow tall 5-door hatch \u2014 not an Audi S5. Pulled from live pending restore/re-source.",
+   "2026-07-19 rigorous re-audit (fresh high-quality render): renders as a yellow tall 5-door hatch — not an Audi S5. Pulled from live pending restore/re-source.",
    "2026-07-20 NEW from CSV library-fill: CC-BY model db82f980fc0d408fbbde8deff36a82bd (2020 Audi RS5 Coupe), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade premium.",
    "2026-07-21 aggressive wave 4: CC-BY, hardened + material-separated, 8 DVLA colours, black-verified.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
@@ -27799,7 +27799,7 @@
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
-  "sourceTitle": "2021 BMW 218i Gran Coup\u00e9 1.5",
+  "sourceTitle": "2021 BMW 218i Gran Coupé 1.5",
   "sourceUrl": "https://sketchfab.com/3d-models/c2e7d8cea31546b5a9f46d5d26c9471d",
   "sourceCreator": null,
   "sourceReferenceId": "c2e7d8cea31546b5a9f46d5d26c9471d",
@@ -27855,7 +27855,7 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2021 BMW 218i Gran Coup\u00e9 1.5'.",
+   "Source title: '2021 BMW 218i Gran Coupé 1.5'.",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black']",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
    "plates removed 2026-07-30: the baked plate carried an invented registration 'AL24 3D' and two designs were live at once; placement also failed on yawed and tall models. Stripped at the glTF JSON level, geometry untouched. Re-bake once placement is solved."
@@ -29859,7 +29859,7 @@
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
-  "sourceTitle": "2015 Citro\u00ebn C3",
+  "sourceTitle": "2015 Citroën C3",
   "sourceUrl": "https://sketchfab.com/3d-models/0761dead5baf4775ac929ec0bf4c8708",
   "sourceCreator": null,
   "sourceReferenceId": "0761dead5baf4775ac929ec0bf4c8708",
@@ -29915,7 +29915,7 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2015 Citro\u00ebn C3'.",
+   "Source title: '2015 Citroën C3'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 403628, \"facesAfter\": 150211, \"ratio\": 0.372}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
@@ -30085,7 +30085,7 @@
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
-  "sourceTitle": "2022 Citro\u00ebn C5X",
+  "sourceTitle": "2022 Citroën C5X",
   "sourceUrl": "https://sketchfab.com/3d-models/d50146310c3b4a748e5935b793be0a6b",
   "sourceCreator": null,
   "sourceReferenceId": "d50146310c3b4a748e5935b793be0a6b",
@@ -30141,7 +30141,7 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "Source title: '2022 Citro\u00ebn C5X'.",
+   "Source title: '2022 Citroën C5X'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 318815, \"facesAfter\": 150066, \"ratio\": 0.47}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
@@ -30588,7 +30588,7 @@
    "Source title: 'Ford Kuga ST-Line'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 325477, \"facesAfter\": 156564, \"ratio\": 0.461}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19: model renders overhead in every orientation (12 rotations tested) \u2014 its roof axis is not axis-aligned (saved at an arbitrary tilt), so no 90-degree rotation uprights it in the pipeline. Set aside as untractable; RE-SOURCE a clean CC-BY Ford Kuga."
+   "2026-07-19: model renders overhead in every orientation (12 rotations tested) — its roof axis is not axis-aligned (saved at an arbitrary tilt), so no 90-degree rotation uprights it in the pipeline. Set aside as untractable; RE-SOURCE a clean CC-BY Ford Kuga."
   ],
   "customization": {
    "configuratorReady": false,
@@ -31673,7 +31673,7 @@
    "Source title: '2022+ Hyundai+IONIQ+5'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 8, \"facesBefore\": 939270, \"facesAfter\": 166573, \"ratio\": 0.16}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 rigorous re-audit (fresh high-quality render): body mesh missing/invisible \u2014 only wheels+plate render. Pulled from live pending restore/re-source.",
+   "2026-07-19 rigorous re-audit (fresh high-quality render): body mesh missing/invisible — only wheels+plate render. Pulled from live pending restore/re-source.",
    "2026-07-19 RESTORED from clean source (task-#37 plate/colour re-export had damaged the live GLB): re-plated no-auto-upright, re-baked hero + variants ['grey', 'silver', 'black', 'white'], verified clean.",
    "2026-07-19 GLASS FIX: reprocessed from source with material preservation (gltf-transform `copy`+`webp`+`draco`, not `optimize` which merged glass/lights into body -> frosty). glass/lights materials restored; re-baked hero + variants ['grey', 'silver', 'black', 'white'].",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
@@ -32615,7 +32615,7 @@
    "Source title: 'Kia Optima (K5)'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 166620, \"facesAfter\": 152373, \"ratio\": 0.9}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 GLASS AUDIT: render-verified STILL FROSTY after material-preserving reprocess from source \u2014 the source model is single-material/untextured with no separable window glass, so the render worker cannot tint it. Confirmed unfixable by reprocessing. Kept serving (complete car) but demoted to grade B; re-source candidate for clear glass.",
+   "2026-07-19 GLASS AUDIT: render-verified STILL FROSTY after material-preserving reprocess from source — the source model is single-material/untextured with no separable window glass, so the render worker cannot tint it. Confirmed unfixable by reprocessing. Kept serving (complete car) but demoted to grade B; re-source candidate for clear glass.",
    "2026-07-19 RE-SOURCED (previous source was frosty/broken/untextured): new CC-BY model 6fc788c08348419d92588f2f541c5b50, hardened material-preserving pipeline (copy+plate+webp+draco), render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white'] re-baked. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
    "plates removed 2026-07-30: the baked plate carried an invented registration 'AL24 3D' and two designs were live at once; placement also failed on yawed and tall models. Stripped at the glTF JSON level, geometry untouched. Re-bake once placement is solved."
@@ -39416,7 +39416,7 @@
    "Source title: '2024 Volkswagen ID3 GTX'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 1521411, \"facesAfter\": 152362, \"ratio\": 0.099}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black']",
-   "2026-07-19 rigorous re-audit (fresh high-quality render): body mesh missing/invisible \u2014 only wheels+plate render. Pulled from live pending restore/re-source.",
+   "2026-07-19 rigorous re-audit (fresh high-quality render): body mesh missing/invisible — only wheels+plate render. Pulled from live pending restore/re-source.",
    "2026-07-19 RESTORED from clean source (task-#37 plate/colour re-export had damaged the live GLB): re-plated no-auto-upright, re-baked hero + variants ['grey', 'silver', 'black', 'white'], verified clean.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
    "plates removed 2026-07-30: the baked plate carried an invented registration 'AL24 3D' and two designs were live at once; placement also failed on yawed and tall models. Stripped at the glTF JSON level, geometry untouched. Re-bake once placement is solved."
@@ -39889,7 +39889,7 @@
    "Source title: 'Volkswagen Passat 3D Scan'.",
    "web-optimised 2026-07-18: {\"removedJunkObjects\": 0, \"facesBefore\": 299988, \"facesAfter\": 149997, \"ratio\": 0.5}",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 GLASS AUDIT: render-verified STILL FROSTY after material-preserving reprocess from source \u2014 the source model is single-material/untextured with no separable window glass, so the render worker cannot tint it. Confirmed unfixable by reprocessing. Kept serving (complete car) but demoted to grade B; re-source candidate for clear glass.",
+   "2026-07-19 GLASS AUDIT: render-verified STILL FROSTY after material-preserving reprocess from source — the source model is single-material/untextured with no separable window glass, so the render worker cannot tint it. Confirmed unfixable by reprocessing. Kept serving (complete car) but demoted to grade B; re-source candidate for clear glass.",
    "2026-07-19 RE-SOURCED (previous source was frosty/broken/untextured): new CC-BY model 29e59c86cd6049cdbeb97680e7db3a36, hardened material-preserving pipeline (copy+plate+webp+draco), render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white'] re-baked. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
    "plates removed 2026-07-30: the baked plate carried an invented registration 'AL24 3D' and two designs were live at once; placement also failed on yawed and tall models. Stripped at the glTF JSON level, geometry untouched. Re-bake once placement is solved."
@@ -44510,7 +44510,7 @@
   "notes": [
    "ingested 2026-07-19 wave-3 (direct Sketchfab search); original GLB no-decimation, texture-webp+draco, plates baked, sheet-reviewed.",
    "colour variants baked 2026-07-19: ['grey', 'silver', 'black', 'white']",
-   "2026-07-19 GLASS AUDIT: render-verified STILL FROSTY after material-preserving reprocess from source \u2014 the source model is single-material/untextured with no separable window glass, so the render worker cannot tint it. Confirmed unfixable by reprocessing. Kept serving (complete car) but demoted to grade B; re-source candidate for clear glass.",
+   "2026-07-19 GLASS AUDIT: render-verified STILL FROSTY after material-preserving reprocess from source — the source model is single-material/untextured with no separable window glass, so the render worker cannot tint it. Confirmed unfixable by reprocessing. Kept serving (complete car) but demoted to grade B; re-source candidate for clear glass.",
    "2026-07-19 RE-SOURCED (previous source was frosty/broken/untextured): new CC-BY model 372e50454f3246239a5a1551f839f862, hardened material-preserving pipeline (copy+plate+webp+draco), render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white'] re-baked. grade B.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
    "plates removed 2026-07-30: the baked plate carried an invented registration 'AL24 3D' and two designs were live at once; placement also failed on yawed and tall models. Stripped at the glTF JSON level, geometry untouched. Re-bake once placement is solved."
@@ -49374,7 +49374,7 @@
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "duplicate of subaru-forester-2019-w7-v1 \u2014 colour-independent render shape-similarity 0.158; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
+  "quarantineReason": "duplicate of subaru-forester-2019-w7-v1 — colour-independent render shape-similarity 0.158; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -49419,7 +49419,7 @@
    "2026-07-20 NEW from CSV library-fill: CC-BY model 611ae23685c14134b5a4f3decde248e9 (2020 Subaru Forester), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
    "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'subaru'",
-   "quarantined (reversible: assets kept) \u2014 duplicate of subaru-forester-2019-w7-v1 \u2014 colour-independent render shape-similarity 0.158; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
+   "quarantined (reversible: assets kept) — duplicate of subaru-forester-2019-w7-v1 — colour-independent render shape-similarity 0.158; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": true,
@@ -49590,7 +49590,7 @@
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "duplicate of subaru-outback-2022-w7-v1 \u2014 colour-independent render shape-similarity 0.130; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
+  "quarantineReason": "duplicate of subaru-outback-2022-w7-v1 — colour-independent render shape-similarity 0.130; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -49635,7 +49635,7 @@
    "2026-07-20 NEW from CSV library-fill: CC-BY model a44abee6689e429881209fc6299f505c (2022 Subaru Outback), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
    "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'subaru'",
-   "quarantined (reversible: assets kept) \u2014 duplicate of subaru-outback-2022-w7-v1 \u2014 colour-independent render shape-similarity 0.130; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
+   "quarantined (reversible: assets kept) — duplicate of subaru-outback-2022-w7-v1 — colour-independent render shape-similarity 0.130; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": true,
@@ -50520,7 +50520,7 @@
   "publishedAt": null,
   "replacedAssetId": null,
   "needsHumanReview": [
-   "2026-07-21 strict glass+interior re-audit: no see-through glass / no visible interior \u2014 re-source with material-separated glass + modelled cabin"
+   "2026-07-21 strict glass+interior re-audit: no see-through glass / no visible interior — re-source with material-separated glass + modelled cabin"
   ],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model a5d33c632d664174922adaebb8d7940c (Fiat Panda (classic)), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
@@ -51886,7 +51886,7 @@
   "needsHumanReview": [],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 21b2d277397049879e2756b63199ded8 (Toyota Auris Touring Sports), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants []. grade A.",
-   "2026-07-21 m0 investigation: single-material model ('Toyota_Auris' covers body+glass+trim). Recolour would overspill onto glass \u2014 left at neutral studio finish, not force-painted. Needs a material-separated re-source to gain colour swap.",
+   "2026-07-21 m0 investigation: single-material model ('Toyota_Auris' covers body+glass+trim). Recolour would overspill onto glass — left at neutral studio finish, not force-painted. Needs a material-separated re-source to gain colour swap.",
    "2026-07-21 REPLACED by toyota-auris-2019-v1 (material-separated). This single-material scan cannot colour-swap; retired from serving."
   ],
   "customization": {
@@ -54432,7 +54432,7 @@
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "redundant duplicate \u2014 F-Type Convertible already kept as jaguar-f-type-v2",
+  "quarantineReason": "redundant duplicate — F-Type Convertible already kept as jaguar-f-type-v2",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -54476,7 +54476,7 @@
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 8728eaa6caab4231b07d6666b0adb845 (2017 Jaguar F-Type R Convertible), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
-   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate \u2014 F-Type Convertible already kept as jaguar-f-type-v2"
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate — F-Type Convertible already kept as jaguar-f-type-v2"
   ],
   "customization": {
    "configuratorReady": true,
@@ -55316,7 +55316,7 @@
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "redundant duplicate RC F \u2014 lexus-rc-v1 kept",
+  "quarantineReason": "redundant duplicate RC F — lexus-rc-v1 kept",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -55360,7 +55360,7 @@
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 1e3a80ea410343cc8bdb836b15bfcb6f (2023 Lexus RC F Performance), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
-   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate RC F \u2014 lexus-rc-v1 kept"
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate RC F — lexus-rc-v1 kept"
   ],
   "customization": {
    "configuratorReady": true,
@@ -55533,7 +55533,7 @@
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "2026-08-11 global-alpha shell: body paint AND tyre materials are alphaMode=BLEND at alpha 0.25, so the car itself is ~75% transparent (13/16 materials alphaMode=BLEND). Confirmed by magenta-backlight render of the SHIPPED glb \u2014 the background reads through the panels and the far-side wheels are visible through the bodywork; a Prius control on the same rig renders solid. The resolver returns desktopGlbUrl to the viewer regardless of posterUrl, so this is what a customer sees. Entry and assets kept; reversible if the source is re-exported without global blending.",
+  "quarantineReason": "2026-08-11 global-alpha shell: body paint AND tyre materials are alphaMode=BLEND at alpha 0.25, so the car itself is ~75% transparent (13/16 materials alphaMode=BLEND). Confirmed by magenta-backlight render of the SHIPPED glb — the background reads through the panels and the far-side wheels are visible through the bodywork; a Prius control on the same rig renders solid. The resolver returns desktopGlbUrl to the viewer regardless of posterUrl, so this is what a customer sees. Entry and assets kept; reversible if the source is re-exported without global blending.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -55569,7 +55569,7 @@
    "2026-07-20 NEW from CSV library-fill: CC-BY model f9cc40cc937d42f8bc6ef10c94f6fc73 (Lexus CT200h), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants []. grade A.",
    "2026-07-21 m0 salvage: worker auto-detect missed body material; set paintMaterialNames=['carpaint.261'] explicitly (real body-paint material present in GLB). Re-baking 8 DVLA colours.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
-   "2026-07-21 m0 salvage FAILED: visible body panel is texture-driven (base-colour respray of every material \u2014 carpaint.261, Material__1-4.114, blue/black/chrome \u2014 left body white). Cannot recolour with current bake tooling. Reverted to single neutral (white) finish; flagged for material-separated re-source.",
+   "2026-07-21 m0 salvage FAILED: visible body panel is texture-driven (base-colour respray of every material — carpaint.261, Material__1-4.114, blue/black/chrome — left body white). Cannot recolour with current bake tooling. Reverted to single neutral (white) finish; flagged for material-separated re-source.",
    "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'lexus'",
    "trim=200h per source title, not otherwise verified",
    "colour 'White' measured from the served render 2026-07-30",
@@ -55729,7 +55729,7 @@
   "publishedAt": null,
   "replacedAssetId": null,
   "needsHumanReview": [
-   "2026-07-21 strict glass+interior re-audit: no see-through glass / no visible interior \u2014 re-source with material-separated glass + modelled cabin"
+   "2026-07-21 strict glass+interior re-audit: no see-through glass / no visible interior — re-source with material-separated glass + modelled cabin"
   ],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model ae21290ed9724e73abdf7495d1313d4f (2013 Ford C-Max Titanium), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
@@ -56181,7 +56181,7 @@
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "redundant duplicate (same G02 gen) \u2014 bmw-x4-v1 kept",
+  "quarantineReason": "redundant duplicate (same G02 gen) — bmw-x4-v1 kept",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -56225,7 +56225,7 @@
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model a5eb74a0ad3f4ed594e854a862a0e029 (2019 BMW X4 xDrive20d), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
-   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate (same G02 gen) \u2014 bmw-x4-v1 kept"
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate (same G02 gen) — bmw-x4-v1 kept"
   ],
   "customization": {
    "configuratorReady": true,
@@ -56395,7 +56395,7 @@
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "redundant duplicate \u2014 M2 Competition already kept as bmw-m2-v1",
+  "quarantineReason": "redundant duplicate — M2 Competition already kept as bmw-m2-v1",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -56439,7 +56439,7 @@
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 30ed9c85be1f44878181d7683b65a068 (2018 BMW M2 Competition), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
-   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate \u2014 M2 Competition already kept as bmw-m2-v1"
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate — M2 Competition already kept as bmw-m2-v1"
   ],
   "customization": {
    "configuratorReady": true,
@@ -56609,7 +56609,7 @@
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "redundant duplicate \u2014 M2 already kept as bmw-m2-v1",
+  "quarantineReason": "redundant duplicate — M2 already kept as bmw-m2-v1",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -56653,7 +56653,7 @@
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model d382aeb1d3e2413c9269ae6795e28c6a (BMW M2), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
-   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate \u2014 M2 already kept as bmw-m2-v1"
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate — M2 already kept as bmw-m2-v1"
   ],
   "customization": {
    "configuratorReady": true,
@@ -59014,7 +59014,7 @@
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "tuner mod (ABT RS6-R) \u2014 violates no-mods bar; stock RS6 kept as audi-rs6-v1",
+  "quarantineReason": "tuner mod (ABT RS6-R) — violates no-mods bar; stock RS6 kept as audi-rs6-v1",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -59058,7 +59058,7 @@
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 8efe6fd313234bef9b63c64293114dbf (2020 ABT Audi RS6-R), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'grey' set from hero; fabricated OEM label removed (honest neutral label).",
-   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: tuner mod (ABT RS6-R) \u2014 violates no-mods bar; stock RS6 kept as audi-rs6-v1"
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: tuner mod (ABT RS6-R) — violates no-mods bar; stock RS6 kept as audi-rs6-v1"
   ],
   "customization": {
    "configuratorReady": true,
@@ -60801,7 +60801,7 @@
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "redundant duplicate (same gen) \u2014 porsche-macan-v1 kept",
+  "quarantineReason": "redundant duplicate (same gen) — porsche-macan-v1 kept",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -60845,7 +60845,7 @@
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model b61426730e5f49c0a73c48f0004406c5 (2019 Porsche Macan Turbo), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
-   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate (same gen) \u2014 porsche-macan-v1 kept"
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate (same gen) — porsche-macan-v1 kept"
   ],
   "customization": {
    "configuratorReady": true,
@@ -62011,7 +62011,7 @@
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "redundant duplicate (971 gen) \u2014 porsche-panamera-v1 kept",
+  "quarantineReason": "redundant duplicate (971 gen) — porsche-panamera-v1 kept",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -62055,7 +62055,7 @@
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model f472abb10e07442b80f46ade49a24d64 (2017 Porsche Panamera Turbo), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
-   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate (971 gen) \u2014 porsche-panamera-v1 kept"
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate (971 gen) — porsche-panamera-v1 kept"
   ],
   "customization": {
    "configuratorReady": true,
@@ -62225,7 +62225,7 @@
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "undated redundant duplicate \u2014 porsche-panamera-v1 kept",
+  "quarantineReason": "undated redundant duplicate — porsche-panamera-v1 kept",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -62269,7 +62269,7 @@
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model a4045a52962f4301b34a839b9c4ed9b9 (Porsche Panamera), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
-   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: undated redundant duplicate \u2014 porsche-panamera-v1 kept"
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: undated redundant duplicate — porsche-panamera-v1 kept"
   ],
   "customization": {
    "configuratorReady": true,
@@ -62737,7 +62737,7 @@
   "publishedAt": null,
   "replacedAssetId": null,
   "needsHumanReview": [
-   "2026-07-21 strict glass+interior re-audit: no see-through glass / no visible interior \u2014 re-source with material-separated glass + modelled cabin"
+   "2026-07-21 strict glass+interior re-audit: no see-through glass / no visible interior — re-source with material-separated glass + modelled cabin"
   ],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model a96fb412e30f450c864f74e2124ac2de (Renault Twingo), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
@@ -63623,7 +63623,7 @@
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "redundant duplicate (same gen GT-Line) \u2014 kia-stonic-v1 kept",
+  "quarantineReason": "redundant duplicate (same gen GT-Line) — kia-stonic-v1 kept",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -63667,7 +63667,7 @@
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 5b7c8064a6164870bc3f469891a57da7 (2021 Kia Stonic GT-Line), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
-   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate (same gen GT-Line) \u2014 kia-stonic-v1 kept"
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate (same gen GT-Line) — kia-stonic-v1 kept"
   ],
   "customization": {
    "configuratorReady": true,
@@ -63840,7 +63840,7 @@
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "duplicate of jeep-renegade-2021-w6-v1 \u2014 colour-independent render shape-similarity 0.229; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
+  "quarantineReason": "duplicate of jeep-renegade-2021-w6-v1 — colour-independent render shape-similarity 0.229; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -63885,7 +63885,7 @@
    "2026-07-20 NEW from CSV library-fill: CC-BY model 9cc773cb7f6e4f10893ea460aa11654b (2021 Jeep Renegade), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
    "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; 'jeep' absent from oem_paint_db so options cleared (families still served via colourVariants)",
-   "quarantined (reversible: assets kept) \u2014 duplicate of jeep-renegade-2021-w6-v1 \u2014 colour-independent render shape-similarity 0.229; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
+   "quarantined (reversible: assets kept) — duplicate of jeep-renegade-2021-w6-v1 — colour-independent render shape-similarity 0.229; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": true,
@@ -64319,7 +64319,7 @@
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "redundant duplicate Trackhawk \u2014 jeep-grand-cherokee-v2 kept",
+  "quarantineReason": "redundant duplicate Trackhawk — jeep-grand-cherokee-v2 kept",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -64363,7 +64363,7 @@
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model f8024595e11c48119877c9c7cc554abc (Jeep Grand Cherokee Trackhawk), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
-   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate Trackhawk \u2014 jeep-grand-cherokee-v2 kept"
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate Trackhawk — jeep-grand-cherokee-v2 kept"
   ],
   "customization": {
    "configuratorReady": true,
@@ -66875,7 +66875,7 @@
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "redundant duplicate (718 Boxster) \u2014 porsche-718-boxster-v1 kept",
+  "quarantineReason": "redundant duplicate (718 Boxster) — porsche-718-boxster-v1 kept",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -66921,7 +66921,7 @@
    "2026-07-20 default studio colour family set from source hero luminance: grey (Studio Grey, sampled L=128).",
    "2026-07-20 hero poster re-rendered in default colour (grey) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected).",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
-   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate (718 Boxster) \u2014 porsche-718-boxster-v1 kept"
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate (718 Boxster) — porsche-718-boxster-v1 kept"
   ],
   "customization": {
    "configuratorReady": true,
@@ -67093,7 +67093,7 @@
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "exotic special (Spyder RS) \u2014 violates bar; stock 718 Boxster kept as v1",
+  "quarantineReason": "exotic special (Spyder RS) — violates bar; stock 718 Boxster kept as v1",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -67139,7 +67139,7 @@
    "2026-07-20 default studio colour family set from source hero luminance: grey (Studio Grey, sampled L=142).",
    "2026-07-20 hero poster re-rendered in default colour (grey) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected).",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
-   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: exotic special (Spyder RS) \u2014 violates bar; stock 718 Boxster kept as v1"
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: exotic special (Spyder RS) — violates bar; stock 718 Boxster kept as v1"
   ],
   "customization": {
    "configuratorReady": true,
@@ -69093,7 +69093,7 @@
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "redundant duplicate \u2014 toyota-bz4x-v1 kept",
+  "quarantineReason": "redundant duplicate — toyota-bz4x-v1 kept",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -69139,7 +69139,7 @@
    "2026-07-20 default studio colour family set from source hero luminance: white (Studio White, sampled L=207).",
    "2026-07-20 hero poster re-rendered in default colour (white) so gallery thumbnail matches the viewer default; recolour verified clean (glass/wheels unaffected).",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
-   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate \u2014 toyota-bz4x-v1 kept"
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: redundant duplicate — toyota-bz4x-v1 kept"
   ],
   "customization": {
    "configuratorReady": true,
@@ -70219,7 +70219,7 @@
   "publishedAt": null,
   "replacedAssetId": null,
   "needsHumanReview": [
-   "2026-07-21 strict glass+interior re-audit: no see-through glass / no visible interior \u2014 re-source with material-separated glass + modelled cabin"
+   "2026-07-21 strict glass+interior re-audit: no see-through glass / no visible interior — re-source with material-separated glass + modelled cabin"
   ],
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 8d2529f41c7d4404881f6c4014d4f04c (Ford Transit Custom Double Cargo Van), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade B.",
@@ -71376,7 +71376,7 @@
    "recolour-audit revert -> single-neutral (was paintMaterialNames=[])",
    "fix-not-drop re-bake attempt: body material corrected to 'primary' (was mis-identified)",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
-   "fix-not-drop: recovered \u2014 corrected body material, re-baked 8 colours, recolour audit PASS"
+   "fix-not-drop: recovered — corrected body material, re-baked 8 colours, recolour audit PASS"
   ],
   "customization": {
    "configuratorReady": true,
@@ -84574,7 +84574,7 @@
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
-  "sourceTitle": "Ford Tourneo Connect MK1 2002\u20132013",
+  "sourceTitle": "Ford Tourneo Connect MK1 2002–2013",
   "sourceUrl": "https://sketchfab.com/3d-models/ef441fcc51fa425aaa393d589a156ba6",
   "sourceCreator": null,
   "sourceReferenceId": null,
@@ -84630,7 +84630,7 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "2026-07-20 NEW from CSV library-fill: CC-BY model ef441fcc51fa425aaa393d589a156ba6 (Ford Tourneo Connect MK1 2002\u20132013), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade good.",
+   "2026-07-20 NEW from CSV library-fill: CC-BY model ef441fcc51fa425aaa393d589a156ba6 (Ford Tourneo Connect MK1 2002–2013), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade good.",
    "2026-07-21 CSV-matched wave 1 (GLB_1000_UK_MATCHED): CC-BY, hardened + material-separated, 8 DVLA colours, black-verified.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
    "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'ford'",
@@ -86831,7 +86831,7 @@
    "recolour-audit revert -> single-neutral (was paintMaterialNames=['red_paint'])",
    "fix-not-drop re-bake attempt: body material corrected to 'hHyundai_Ioniq5NRewardRecycled_2023Paint_Material1' (was mis-identified)",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
-   "fix-not-drop: recovered \u2014 corrected body material, re-baked 8 colours, recolour audit PASS"
+   "fix-not-drop: recovered — corrected body material, re-baked 8 colours, recolour audit PASS"
   ],
   "customization": {
    "configuratorReady": true,
@@ -87159,7 +87159,7 @@
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "custom/modified \u2014 violates no-mods bar; stock kept as land-rover-range-rover-sport-2018-v1",
+  "quarantineReason": "custom/modified — violates no-mods bar; stock kept as land-rover-range-rover-sport-2018-v1",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -87205,7 +87205,7 @@
   "notes": [
    "2026-07-20 NEW from CSV library-fill: CC-BY model 54b717eea6ab44f9820736cbbc4dd566 (2016 Custom Land Rover Range Rover Sport), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
-   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: custom/modified \u2014 violates no-mods bar; stock kept as land-rover-range-rover-sport-2018-v1"
+   "2026-07-22 De-duplicated make+model so the viewer resolves one car (fix for overlapping-models bug). Quarantined: custom/modified — violates no-mods bar; stock kept as land-rover-range-rover-sport-2018-v1"
   ],
   "customization": {
    "configuratorReady": true,
@@ -87381,7 +87381,7 @@
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "duplicate of renault-austral-2022-w7-v1 \u2014 colour-independent render shape-similarity 0.188; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
+  "quarantineReason": "duplicate of renault-austral-2022-w7-v1 — colour-independent render shape-similarity 0.188; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -87420,7 +87420,7 @@
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
    "recolour-gate demote -> single-neutral (render sweep dist below threshold)",
    "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'renault'",
-   "quarantined (reversible: assets kept) \u2014 duplicate of renault-austral-2022-w7-v1 \u2014 colour-independent render shape-similarity 0.188; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
+   "quarantined (reversible: assets kept) — duplicate of renault-austral-2022-w7-v1 — colour-independent render shape-similarity 0.188; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": true,
@@ -88042,7 +88042,7 @@
   "technicalStatus": "passed",
   "visualStatus": "passed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "owner review 2026-07-30 \u2014 wheels missing from the model, empty arches front and rear",
+  "quarantineReason": "owner review 2026-07-30 — wheels missing from the model, empty arches front and rear",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -88406,7 +88406,7 @@
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
-  "sourceTitle": "Citro\u00ebn \u00eb-C3",
+  "sourceTitle": "Citroën ë-C3",
   "sourceUrl": "https://sketchfab.com/3d-models/8c66549f99414b0eb2fb6f22f1bab2c2",
   "sourceCreator": null,
   "sourceReferenceId": null,
@@ -88464,7 +88464,7 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "2026-07-20 NEW from CSV library-fill: CC-BY model 8c66549f99414b0eb2fb6f22f1bab2c2 (Citro\u00ebn \u00eb-C3), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
+   "2026-07-20 NEW from CSV library-fill: CC-BY model 8c66549f99414b0eb2fb6f22f1bab2c2 (Citroën ë-C3), hardened material-preserving pipeline, render-verified clear glass + wheels + orientation. Hero + variants ['grey', 'silver', 'black', 'white']. grade A.",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'silver' set from hero; fabricated OEM label removed (honest neutral label).",
    "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'citroen'",
    "plates removed 2026-07-30: the baked plate carried an invented registration 'AL24 3D' and two designs were live at once; placement also failed on yawed and tall models. Stripped at the glTF JSON level, geometry untouched. Re-bake once placement is solved."
@@ -88676,7 +88676,7 @@
    "recolour-gate demote -> single-neutral (render sweep dist below threshold)",
    "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; 'ssangyong' absent from oem_paint_db so options cleared (families still served via colourVariants)",
    "colour 'White' measured from the served render 2026-07-30",
-   "platesBaked=false 2026-07-30: the GLB has no plate mesh. A bake was attempted and rejected on sight \u2014 plates_generic placed floating slabs off the bumpers on this body shape. Base GLB restored to pre-bake."
+   "platesBaked=false 2026-07-30: the GLB has no plate mesh. A bake was attempted and rejected on sight — plates_generic placed floating slabs off the bumpers on this body shape. Base GLB restored to pre-bake."
   ],
   "customization": {
    "configuratorReady": true,
@@ -88818,7 +88818,7 @@
    "recolour-audit revert -> single-neutral (was paintMaterialNames=['Material-Matte_Blue_Anodized_Aluminum'])",
    "fix-not-drop re-bake attempt: body material corrected to 'material-a0000000-0000-0000-0000-000000000000' (was mis-identified)",
    "2026-07-20 expanded to 8 DVLA colour variants ['black', 'blue', 'green', 'grey', 'red', 'silver', 'white', 'yellow']; default 'white' set from hero; fabricated OEM label removed (honest neutral label).",
-   "fix-not-drop: recovered \u2014 corrected body material, re-baked 8 colours, recolour audit PASS"
+   "fix-not-drop: recovered — corrected body material, re-baked 8 colours, recolour audit PASS"
   ],
   "customization": {
    "configuratorReady": true,
@@ -90483,7 +90483,7 @@
    "autofill: single-neutral (texture-driven body or no isolable paint material)",
    "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'fiat'",
    "colour 'Beige' measured from the served render 2026-07-30",
-   "platesBaked=false 2026-07-30: the GLB has no plate mesh. A bake was attempted and rejected on sight \u2014 plates_generic placed floating slabs off the bumpers on this body shape. Base GLB restored to pre-bake."
+   "platesBaked=false 2026-07-30: the GLB has no plate mesh. A bake was attempted and rejected on sight — plates_generic placed floating slabs off the bumpers on this body shape. Base GLB restored to pre-bake."
   ],
   "customization": {
    "configuratorReady": true,
@@ -91533,7 +91533,7 @@
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
-  "sourceTitle": "2025 Citro\u00ebn C3",
+  "sourceTitle": "2025 Citroën C3",
   "sourceUrl": "https://sketchfab.com/3d-models/a3c6ca57f0294992be496d7c62e120fa",
   "sourceCreator": "tonielpro520",
   "sourceReferenceId": "a3c6ca57f0294992be496d7c62e120fa",
@@ -96434,9 +96434,9 @@
    "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)",
    "owner visual review 2026-07-29: approved in one-by-one render pass (55-car pack)",
    "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'lexus'",
-   "recolour audit 2026-07-29: FAIL dist=0.058 (body colour does not move between red/blue variants \u2014 wrong paint material pick); demoted to single-neutral per gate rule, variants withdrawn until re-baked with correct body material",
+   "recolour audit 2026-07-29: FAIL dist=0.058 (body colour does not move between red/blue variants — wrong paint material pick); demoted to single-neutral per gate rule, variants withdrawn until re-baked with correct body material",
    "colour 'Black' measured from the served render 2026-07-30",
-   "platesBaked=false 2026-07-30: the GLB has no plate mesh. A bake was attempted and rejected on sight \u2014 plates_generic placed floating slabs off the bumpers on this body shape. Base GLB restored to pre-bake."
+   "platesBaked=false 2026-07-30: the GLB has no plate mesh. A bake was attempted and rejected on sight — plates_generic placed floating slabs off the bumpers on this body shape. Base GLB restored to pre-bake."
   ],
   "customization": {
    "configuratorReady": true,
@@ -102049,7 +102049,7 @@
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "duplicate of renault-kangoo-v1 \u2014 colour-independent render shape-similarity 0.120; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
+  "quarantineReason": "duplicate of renault-kangoo-v1 — colour-independent render shape-similarity 0.120; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -102097,7 +102097,7 @@
    "hotfix 2026-07-29: purged Golf-template field inheritance (council gate audit)",
    "owner visual review 2026-07-29: approved in one-by-one render pass (55-car pack)",
    "accuracy fix 2026-07-29: colourOptions carried Land Rover template paints; rebuilt from oem_paint_db rows for 'renault'",
-   "quarantined (reversible: assets kept) \u2014 duplicate of renault-kangoo-v1 \u2014 colour-independent render shape-similarity 0.120; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
+   "quarantined (reversible: assets kept) — duplicate of renault-kangoo-v1 — colour-independent render shape-similarity 0.120; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": true,
@@ -110778,7 +110778,7 @@
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
-  "sourceTitle": "2017 Citro\u00ebn C3 Picasso",
+  "sourceTitle": "2017 Citroën C3 Picasso",
   "sourceUrl": "https://sketchfab.com/3d-models/2017-citroen-c3-picasso-a20ec194df314b91b4527b2bde00fa86",
   "sourceCreator": "tonielpro520",
   "sourceReferenceId": "a20ec194df314b91b4527b2bde00fa86",
@@ -110983,7 +110983,7 @@
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
-  "sourceTitle": "2018 Citro\u00ebn C4 Lounge",
+  "sourceTitle": "2018 Citroën C4 Lounge",
   "sourceUrl": "https://sketchfab.com/3d-models/2018-citroen-c4-lounge-e330880f272449709c36050a393e1574",
   "sourceCreator": "tonielpro520",
   "sourceReferenceId": "e330880f272449709c36050a393e1574",
@@ -111188,7 +111188,7 @@
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
-  "sourceTitle": "2015 Citro\u00ebn Cactus",
+  "sourceTitle": "2015 Citroën Cactus",
   "sourceUrl": "https://sketchfab.com/3d-models/2015-citroen-cactus-5dc2cd7baa314777a8ed6c5a0494f42c",
   "sourceCreator": "tonielpro520",
   "sourceReferenceId": "5dc2cd7baa314777a8ed6c5a0494f42c",
@@ -111976,7 +111976,7 @@
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
-   "quarantined (reversible: assets kept) \u2014 owner review 2026-07-30: 1970s classic, clay-like render, out of place vs modern stock"
+   "quarantined (reversible: assets kept) — owner review 2026-07-30: 1970s classic, clay-like render, out of place vs modern stock"
   ],
   "customization": {
    "configuratorReady": false,
@@ -112160,7 +112160,7 @@
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
-   "quarantined (reversible: assets kept) \u2014 owner review 2026-07-30: 1970s classic, clay-like render, out of place vs modern stock"
+   "quarantined (reversible: assets kept) — owner review 2026-07-30: 1970s classic, clay-like render, out of place vs modern stock"
   ],
   "customization": {
    "configuratorReady": false,
@@ -112548,7 +112548,7 @@
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "duplicate of ford-focus-w6-v1 \u2014 colour-independent render shape-similarity 0.251; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
+  "quarantineReason": "duplicate of ford-focus-w6-v1 — colour-independent render shape-similarity 0.251; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -112598,7 +112598,7 @@
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'RES1N'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
    "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
-   "quarantined (reversible: assets kept) \u2014 duplicate of ford-focus-w6-v1 \u2014 colour-independent render shape-similarity 0.251; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
+   "quarantined (reversible: assets kept) — duplicate of ford-focus-w6-v1 — colour-independent render shape-similarity 0.251; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": false,
@@ -112782,7 +112782,7 @@
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
-   "quarantined (reversible: assets kept) \u2014 owner review 2026-07-30: plain untextured utility shell, no detail"
+   "quarantined (reversible: assets kept) — owner review 2026-07-30: plain untextured utility shell, no detail"
   ],
   "customization": {
    "configuratorReady": false,
@@ -112966,7 +112966,7 @@
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
-   "quarantined (reversible: assets kept) \u2014 owner review 2026-07-30: plain untextured utility shell, no detail"
+   "quarantined (reversible: assets kept) — owner review 2026-07-30: plain untextured utility shell, no detail"
   ],
   "customization": {
    "configuratorReady": false,
@@ -113773,7 +113773,7 @@
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "duplicate of jaguar-i-pace-v1 \u2014 colour-independent render shape-similarity 0.179; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
+  "quarantineReason": "duplicate of jaguar-i-pace-v1 — colour-independent render shape-similarity 0.179; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -113824,7 +113824,7 @@
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Mona x Supercars'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
    "plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
-   "quarantined (reversible: assets kept) \u2014 duplicate of jaguar-i-pace-v1 \u2014 colour-independent render shape-similarity 0.179; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
+   "quarantined (reversible: assets kept) — duplicate of jaguar-i-pace-v1 — colour-independent render shape-similarity 0.179; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": false,
@@ -117090,7 +117090,7 @@
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Mona x Supercars'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
-   "quarantined (reversible: assets kept) \u2014 owner review 2026-07-30: broken/torn geometry around the front bumper"
+   "quarantined (reversible: assets kept) — owner review 2026-07-30: broken/torn geometry around the front bumper"
   ],
   "customization": {
    "configuratorReady": false,
@@ -117915,7 +117915,7 @@
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
-   "quarantined (reversible: assets kept) \u2014 owner review 2026-07-30: very crude low-poly body, below the premium bar"
+   "quarantined (reversible: assets kept) — owner review 2026-07-30: very crude low-poly body, below the premium bar"
   ],
   "customization": {
    "configuratorReady": false,
@@ -119511,7 +119511,7 @@
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
-   "quarantined (reversible: assets kept) \u2014 owner review 2026-07-30: blocky low-poly body, below the premium bar"
+   "quarantined (reversible: assets kept) — owner review 2026-07-30: blocky low-poly body, below the premium bar"
   ],
   "customization": {
    "configuratorReady": false,
@@ -119612,7 +119612,7 @@
   "notes": [
    "w6 gated publish 2026-07-29: licence live-verified CC Attribution (author 'Mona x Supercars'), owner keep verdict 2026-07-29, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w6 colour bake 2026-07-30: 8 DVLA flat-respray variants on measured body material(s)",
-   "quarantined (reversible: assets kept) \u2014 owner review 2026-07-30: bright green tuner-look, not stock presentation"
+   "quarantined (reversible: assets kept) — owner review 2026-07-30: bright green tuner-look, not stock presentation"
   ],
   "customization": {
    "configuratorReady": false,
@@ -120335,10 +120335,10 @@
   "schemaVersion": 2,
   "assetId": "renault-m-gane-grand-tour-2006-w7-v1",
   "make": "renault",
-  "model": "M\u00e9gane Grand Tour",
-  "modelFamily": "renault m\u00e9gane grand tour",
+  "model": "Mégane Grand Tour",
+  "modelFamily": "renault mégane grand tour",
   "modelAliases": [
-   "M\u00e9gane Grand Tour"
+   "Mégane Grand Tour"
   ],
   "generation": null,
   "generationAliases": [],
@@ -120351,7 +120351,7 @@
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
-  "sourceTitle": "2006 Renault M\u00e9gane Grand Tour",
+  "sourceTitle": "2006 Renault Mégane Grand Tour",
   "sourceUrl": "https://sketchfab.com/3d-models/2006-renault-megane-grand-tour-0e5443d16a374c349e54f29acdcd7b8f",
   "sourceCreator": "tonielpro520",
   "sourceReferenceId": "0e5443d16a374c349e54f29acdcd7b8f",
@@ -121871,7 +121871,7 @@
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "duplicate of tesla-model-3-2018-w5-v1 \u2014 colour-independent render shape-similarity 0.083; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
+  "quarantineReason": "duplicate of tesla-model-3-2018-w5-v1 — colour-independent render shape-similarity 0.083; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -121928,7 +121928,7 @@
   "notes": [
    "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'TeslaFan'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
-   "quarantined (reversible: assets kept) \u2014 duplicate of tesla-model-3-2018-w5-v1 \u2014 colour-independent render shape-similarity 0.083; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
+   "quarantined (reversible: assets kept) — duplicate of tesla-model-3-2018-w5-v1 — colour-independent render shape-similarity 0.083; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": false,
@@ -124193,7 +124193,7 @@
   "provenance": "sourced",
   "sourceTitle": "2018 Range Rover Velar First Edition",
   "sourceUrl": "https://sketchfab.com/3d-models/2018-range-rover-velar-first-edition-4a6ca37f18c04bbb97e60601200c3a6b",
-  "sourceCreator": "Nazh Design \u2714",
+  "sourceCreator": "Nazh Design ✔",
   "sourceReferenceId": "4a6ca37f18c04bbb97e60601200c3a6b",
   "sourceRetrievedAt": "2026-07-30",
   "sourceEvidenceUrl": null,
@@ -124257,7 +124257,7 @@
   "replacedAssetId": null,
   "needsHumanReview": [],
   "notes": [
-   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Nazh Design \u2714'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
+   "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Nazh Design ✔'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
    "plates removed 2026-07-30: the baked plate carried an invented registration 'AL24 3D' and two designs were live at once; placement also failed on yawed and tall models. Stripped at the glTF JSON level, geometry untouched. Re-bake once placement is solved."
   ],
@@ -125640,7 +125640,7 @@
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "duplicate of subaru-forester-2019-w7-v1 \u2014 colour-independent render shape-similarity 0.172; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
+  "quarantineReason": "duplicate of subaru-forester-2019-w7-v1 — colour-independent render shape-similarity 0.172; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -125692,7 +125692,7 @@
   "notes": [
    "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
-   "quarantined (reversible: assets kept) \u2014 duplicate of subaru-forester-2019-w7-v1 \u2014 colour-independent render shape-similarity 0.172; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
+   "quarantined (reversible: assets kept) — duplicate of subaru-forester-2019-w7-v1 — colour-independent render shape-similarity 0.172; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": false,
@@ -125801,7 +125801,7 @@
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "duplicate of tesla-model-3-2023-w5-v1 \u2014 colour-independent render shape-similarity 0.134; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
+  "quarantineReason": "duplicate of tesla-model-3-2023-w5-v1 — colour-independent render shape-similarity 0.134; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -125858,7 +125858,7 @@
   "notes": [
    "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'marcelowmt'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
-   "quarantined (reversible: assets kept) \u2014 duplicate of tesla-model-3-2023-w5-v1 \u2014 colour-independent render shape-similarity 0.134; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
+   "quarantined (reversible: assets kept) — duplicate of tesla-model-3-2023-w5-v1 — colour-independent render shape-similarity 0.134; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": false,
@@ -127611,7 +127611,7 @@
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "owner review 2026-07-30 \u2014 not a UK Swift. The model is the Suzuki Dzire, the booted Indian-market saloon; rear badge reads DZIRE. Filed under Swift it would mis-serve a UK lookup.",
+  "quarantineReason": "owner review 2026-07-30 — not a UK Swift. The model is the Suzuki Dzire, the booted Indian-market saloon; rear badge reads DZIRE. Filed under Swift it would mis-serve a UK lookup.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -128605,7 +128605,7 @@
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "duplicate of volvo-xc60-2023-w7-v1 \u2014 colour-independent render shape-similarity 0.138; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
+  "quarantineReason": "duplicate of volvo-xc60-2023-w7-v1 — colour-independent render shape-similarity 0.138; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -128646,7 +128646,7 @@
    "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Maroi Mister Let Me Think Official 3D Studio'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w7 variants demoted single-neutral: recolour audit FAIL dist=0.0",
    "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
-   "quarantined (reversible: assets kept) \u2014 duplicate of volvo-xc60-2023-w7-v1 \u2014 colour-independent render shape-similarity 0.138; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
+   "quarantined (reversible: assets kept) — duplicate of volvo-xc60-2023-w7-v1 — colour-independent render shape-similarity 0.138; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": false,
@@ -129673,7 +129673,7 @@
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "duplicate of volvo-v90-v1 \u2014 colour-independent render shape-similarity 0.165; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
+  "quarantineReason": "duplicate of volvo-v90-v1 — colour-independent render shape-similarity 0.165; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -129725,7 +129725,7 @@
   "notes": [
    "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
-   "quarantined (reversible: assets kept) \u2014 duplicate of volvo-v90-v1 \u2014 colour-independent render shape-similarity 0.165; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
+   "quarantined (reversible: assets kept) — duplicate of volvo-v90-v1 — colour-independent render shape-similarity 0.165; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": false,
@@ -130271,7 +130271,7 @@
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "duplicate of peugeot-208-v2 \u2014 colour-independent render shape-similarity 0.207; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
+  "quarantineReason": "duplicate of peugeot-208-v2 — colour-independent render shape-similarity 0.207; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -130320,7 +130320,7 @@
   "notes": [
    "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'tonielpro520'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
-   "quarantined (reversible: assets kept) \u2014 duplicate of peugeot-208-v2 \u2014 colour-independent render shape-similarity 0.207; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
+   "quarantined (reversible: assets kept) — duplicate of peugeot-208-v2 — colour-independent render shape-similarity 0.207; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": false,
@@ -131846,7 +131846,7 @@
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "duplicate of suzuki-swift-2022-w7-v1 \u2014 colour-independent render shape-similarity 0.247; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
+  "quarantineReason": "duplicate of suzuki-swift-2022-w7-v1 — colour-independent render shape-similarity 0.247; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -131890,7 +131890,7 @@
    "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'nisarashariff24'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w7 variants demoted single-neutral: recolour audit FAIL dist=0.008",
    "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
-   "quarantined (reversible: assets kept) \u2014 duplicate of suzuki-swift-2022-w7-v1 \u2014 colour-independent render shape-similarity 0.247; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
+   "quarantined (reversible: assets kept) — duplicate of suzuki-swift-2022-w7-v1 — colour-independent render shape-similarity 0.247; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": false,
@@ -132799,7 +132799,7 @@
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "duplicate of mercedes-benz-sprinter-w7-v1 \u2014 colour-independent render shape-similarity 0.120; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
+  "quarantineReason": "duplicate of mercedes-benz-sprinter-w7-v1 — colour-independent render shape-similarity 0.120; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -132850,7 +132850,7 @@
   "notes": [
    "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'RES1N'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
-   "quarantined (reversible: assets kept) \u2014 duplicate of mercedes-benz-sprinter-w7-v1 \u2014 colour-independent render shape-similarity 0.120; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
+   "quarantined (reversible: assets kept) — duplicate of mercedes-benz-sprinter-w7-v1 — colour-independent render shape-similarity 0.120; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": false,
@@ -133126,7 +133126,7 @@
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "duplicate of renault-twingo-w7-v1 \u2014 colour-independent render shape-similarity 0.180; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
+  "quarantineReason": "duplicate of renault-twingo-w7-v1 — colour-independent render shape-similarity 0.180; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -133175,7 +133175,7 @@
   "notes": [
    "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'saidiishaq4'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
-   "quarantined (reversible: assets kept) \u2014 duplicate of renault-twingo-w7-v1 \u2014 colour-independent render shape-similarity 0.180; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
+   "quarantined (reversible: assets kept) — duplicate of renault-twingo-w7-v1 — colour-independent render shape-similarity 0.180; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": false,
@@ -134361,7 +134361,7 @@
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "duplicate of opel-corsa-1997-w5-v1 \u2014 colour-independent render shape-similarity 0.198; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
+  "quarantineReason": "duplicate of opel-corsa-1997-w5-v1 — colour-independent render shape-similarity 0.198; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -134412,7 +134412,7 @@
   "notes": [
    "w7 gated publish 2026-07-30: licence live-verified CC Attribution (author 'Nieve5677'), owner keep verdict 2026-07-30 owner-approved-75, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only",
    "w7 plates: GB front/rear baked into base + all colour variants (blank character area per accuracy rule)",
-   "quarantined (reversible: assets kept) \u2014 duplicate of opel-corsa-1997-w5-v1 \u2014 colour-independent render shape-similarity 0.198; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
+   "quarantined (reversible: assets kept) — duplicate of opel-corsa-1997-w5-v1 — colour-independent render shape-similarity 0.198; kept entry has fuller metadata and/or working colour variants. Owner-approved de-dupe 2026-07-30."
   ],
   "customization": {
    "configuratorReady": false,
@@ -149991,7 +149991,7 @@
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
-  "sourceTitle": "Volkswagen T2 1967 \u2013 1979",
+  "sourceTitle": "Volkswagen T2 1967 – 1979",
   "sourceUrl": "https://sketchfab.com/3d-models/volkswagen-t2-1967-1979-1b9aa591e9784f6099f6d38f8a0b7a72",
   "sourceCreator": "Nieve5677",
   "sourceReferenceId": "1b9aa591e9784f6099f6d38f8a0b7a72",
@@ -150005,7 +150005,7 @@
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "owner scrapped on review 2026-08-02 \u2014 classic van, not wanted in the library",
+  "quarantineReason": "owner scrapped on review 2026-08-02 — classic van, not wanted in the library",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -150266,7 +150266,7 @@
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "owner scrapped on review 2026-08-02 \u2014 classic van, not wanted in the library",
+  "quarantineReason": "owner scrapped on review 2026-08-02 — classic van, not wanted in the library",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -153644,7 +153644,7 @@
   "exactDerivative": null,
   "exactTrim": false,
   "provenance": "sourced",
-  "sourceTitle": "Volkswagen Polo 3-door MK4 2001 \u2013 2009",
+  "sourceTitle": "Volkswagen Polo 3-door MK4 2001 – 2009",
   "sourceUrl": "https://sketchfab.com/3d-models/volkswagen-polo-3-door-mk4-2001-2009-6fd9f1259b8248059e32f983cf5b0cf7",
   "sourceCreator": "Merc_TV",
   "sourceReferenceId": "6fd9f1259b8248059e32f983cf5b0cf7",
@@ -182033,7 +182033,7 @@
   "technicalStatus": "no-body-material",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "2026-08-11 global-alpha shell: body paint AND tyre materials are alphaMode=BLEND at alpha 0.25, so the car itself is ~75% transparent (16/16 materials alphaMode=BLEND). Confirmed by magenta-backlight render of the SHIPPED glb \u2014 the background reads through the panels and the far-side wheels are visible through the bodywork; a Prius control on the same rig renders solid. The resolver returns desktopGlbUrl to the viewer regardless of posterUrl, so this is what a customer sees. Entry and assets kept; reversible if the source is re-exported without global blending.",
+  "quarantineReason": "2026-08-11 global-alpha shell: body paint AND tyre materials are alphaMode=BLEND at alpha 0.25, so the car itself is ~75% transparent (16/16 materials alphaMode=BLEND). Confirmed by magenta-backlight render of the SHIPPED glb — the background reads through the panels and the far-side wheels are visible through the bodywork; a Prius control on the same rig renders solid. The resolver returns desktopGlbUrl to the viewer regardless of posterUrl, so this is what a customer sees. Entry and assets kept; reversible if the source is re-exported without global blending.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -204623,7 +204623,7 @@
    "at": "2026-08-09"
   },
   "colourSwapBlocked": true,
-  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0641 \u2014 body colour did not move; ships single-neutral"
+  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0641 — body colour did not move; ships single-neutral"
  },
  {
   "schemaVersion": 2,
@@ -204824,7 +204824,7 @@
    "at": "2026-08-09"
   },
   "colourSwapBlocked": true,
-  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0381 \u2014 body colour did not move; ships single-neutral",
+  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0381 — body colour did not move; ships single-neutral",
   "quarantinedAt": "2026-08-11"
  },
  {
@@ -205230,7 +205230,7 @@
    "at": "2026-08-09"
   },
   "colourSwapBlocked": true,
-  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0308 \u2014 body colour did not move; ships single-neutral",
+  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0308 — body colour did not move; ships single-neutral",
   "quarantinedAt": "2026-08-11"
  },
  {
@@ -209561,7 +209561,7 @@
   "technicalStatus": "no-body-material",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "2026-08-11 global-alpha shell: body paint AND tyre materials are alphaMode=BLEND at alpha 0.25, so the car itself is ~75% transparent (15/15 materials alphaMode=BLEND). Confirmed by magenta-backlight render of the SHIPPED glb \u2014 the background reads through the panels and the far-side wheels are visible through the bodywork; a Prius control on the same rig renders solid. The resolver returns desktopGlbUrl to the viewer regardless of posterUrl, so this is what a customer sees. Entry and assets kept; reversible if the source is re-exported without global blending.",
+  "quarantineReason": "2026-08-11 global-alpha shell: body paint AND tyre materials are alphaMode=BLEND at alpha 0.25, so the car itself is ~75% transparent (15/15 materials alphaMode=BLEND). Confirmed by magenta-backlight render of the SHIPPED glb — the background reads through the panels and the far-side wheels are visible through the bodywork; a Prius control on the same rig renders solid. The resolver returns desktopGlbUrl to the viewer regardless of posterUrl, so this is what a customer sees. Entry and assets kept; reversible if the source is re-exported without global blending.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -220077,7 +220077,7 @@
   "technicalStatus": "no-body-material",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "2026-08-11 global-alpha shell: body paint AND tyre materials are alphaMode=BLEND at alpha 0.25, so the car itself is ~75% transparent (17/17 materials alphaMode=BLEND). Confirmed by magenta-backlight render of the SHIPPED glb \u2014 the background reads through the panels and the far-side wheels are visible through the bodywork; a Prius control on the same rig renders solid. The resolver returns desktopGlbUrl to the viewer regardless of posterUrl, so this is what a customer sees. Entry and assets kept; reversible if the source is re-exported without global blending.",
+  "quarantineReason": "2026-08-11 global-alpha shell: body paint AND tyre materials are alphaMode=BLEND at alpha 0.25, so the car itself is ~75% transparent (17/17 materials alphaMode=BLEND). Confirmed by magenta-backlight render of the SHIPPED glb — the background reads through the panels and the far-side wheels are visible through the bodywork; a Prius control on the same rig renders solid. The resolver returns desktopGlbUrl to the viewer regardless of posterUrl, so this is what a customer sees. Entry and assets kept; reversible if the source is re-exported without global blending.",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -222373,7 +222373,7 @@
    "at": "2026-08-11"
   },
   "colourSwapBlocked": true,
-  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0008 \u2014 the respray does not move the body colour, so the eight variants would be visually identical; ships single-neutral"
+  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0008 — the respray does not move the body colour, so the eight variants would be visually identical; ships single-neutral"
  },
  {
   "schemaVersion": 2,
@@ -222583,7 +222583,7 @@
    "at": "2026-08-11"
   },
   "colourSwapBlocked": true,
-  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0016 \u2014 the respray does not move the body colour, so the eight variants would be visually identical; ships single-neutral"
+  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0016 — the respray does not move the body colour, so the eight variants would be visually identical; ships single-neutral"
  },
  {
   "schemaVersion": 2,
@@ -236047,7 +236047,7 @@
    "at": "2026-08-11"
   },
   "colourSwapBlocked": true,
-  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0066 \u2014 the respray does not move the body colour, so the eight variants would be visually identical; ships single-neutral"
+  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0066 — the respray does not move the body colour, so the eight variants would be visually identical; ships single-neutral"
  },
  {
   "schemaVersion": 2,
@@ -236914,7 +236914,7 @@
    "at": "2026-08-11"
   },
   "colourSwapBlocked": true,
-  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0012 \u2014 the respray does not move the body colour, so the eight variants would be visually identical; ships single-neutral"
+  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0012 — the respray does not move the body colour, so the eight variants would be visually identical; ships single-neutral"
  },
  {
   "schemaVersion": 2,
@@ -238653,7 +238653,7 @@
    "at": "2026-08-11"
   },
   "colourSwapBlocked": true,
-  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0014 \u2014 the respray does not move the body colour, so the eight variants would be visually identical; ships single-neutral"
+  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0014 — the respray does not move the body colour, so the eight variants would be visually identical; ships single-neutral"
  },
  {
   "schemaVersion": 2,
@@ -238862,7 +238862,7 @@
    "at": "2026-08-11"
   },
   "colourSwapBlocked": true,
-  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0004 \u2014 the respray does not move the body colour, so the eight variants would be visually identical; ships single-neutral"
+  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0004 — the respray does not move the body colour, so the eight variants would be visually identical; ships single-neutral"
  },
  {
   "schemaVersion": 2,
@@ -240195,7 +240195,7 @@
    "at": "2026-08-11"
   },
   "colourSwapBlocked": true,
-  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0376 \u2014 the respray does not move the body colour, so the eight variants would be visually identical; ships single-neutral"
+  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0376 — the respray does not move the body colour, so the eight variants would be visually identical; ships single-neutral"
  },
  {
   "schemaVersion": 2,
@@ -246481,7 +246481,7 @@
    "at": "2026-08-11"
   },
   "colourSwapBlocked": true,
-  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0094 \u2014 the respray does not move the body colour, so the eight variants would be visually identical; ships single-neutral"
+  "colourSwapBlockedReason": "recolour_audit FAIL dist=0.0094 — the respray does not move the body colour, so the eight variants would be visually identical; ships single-neutral"
  },
  {
   "schemaVersion": 2,
@@ -296703,8 +296703,7 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "quarantined",
-  "quarantineReason": "published without owner approval \u2014 held pending visual sign-off; Clio also flagged by owner for white wheels/tyres",
+  "publicationStatus": "approved",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -296723,11 +296722,20 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/kia/kia-picanto-2024-m1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/kia/kia-picanto-2024-m1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/kia/kia-picanto-2024-m1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/kia/kia-picanto-2024-m1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/kia/kia-picanto-2024-m1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/kia/kia-picanto-2024-m1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/kia/kia-picanto-2024-m1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/kia/kia-picanto-2024-m1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-picanto-2024-m1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-picanto-2024-m1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/kia/kia-picanto-2024-m1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 45898600,
@@ -296816,7 +296824,70 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Interstellar Grey",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Steel Grey",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Aurora Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Snow White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Fusion White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Mineral Blue",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Runway Red",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Experience Green",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4046,
+   "variantsHash": "c8a57f170823b832c773c58e90a9365edf12f40a",
+   "method": "render",
+   "at": "2026-08-14"
+  }
  },
  {
   "schemaVersion": 2,
@@ -296854,7 +296925,7 @@
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "published without owner approval \u2014 held pending visual sign-off; Clio also flagged by owner for white wheels/tyres",
+  "quarantineReason": "published without owner approval — held pending visual sign-off; Clio also flagged by owner for white wheels/tyres",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -297005,7 +297076,7 @@
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "published without owner approval \u2014 held pending visual sign-off; Clio also flagged by owner for white wheels/tyres",
+  "quarantineReason": "published without owner approval — held pending visual sign-off; Clio also flagged by owner for white wheels/tyres",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -297162,7 +297233,7 @@
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "published without owner approval \u2014 held pending visual sign-off; Clio also flagged by owner for white wheels/tyres",
+  "quarantineReason": "published without owner approval — held pending visual sign-off; Clio also flagged by owner for white wheels/tyres",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -297248,7 +297319,7 @@
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "published without owner approval \u2014 held pending visual sign-off; Clio also flagged by owner for white wheels/tyres",
+  "quarantineReason": "published without owner approval — held pending visual sign-off; Clio also flagged by owner for white wheels/tyres",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -297332,7 +297403,7 @@
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "published without owner approval \u2014 held pending visual sign-off; Clio also flagged by owner for white wheels/tyres",
+  "quarantineReason": "published without owner approval — held pending visual sign-off; Clio also flagged by owner for white wheels/tyres",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -297416,7 +297487,7 @@
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
   "publicationStatus": "quarantined",
-  "quarantineReason": "published without owner approval \u2014 held pending visual sign-off; Clio also flagged by owner for white wheels/tyres",
+  "quarantineReason": "published without owner approval — held pending visual sign-off; Clio also flagged by owner for white wheels/tyres",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
