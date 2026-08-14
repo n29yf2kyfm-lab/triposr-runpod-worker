@@ -6,6 +6,7 @@ every expected number can be worked longhand in the comments beside it.
 import unittest
 
 import model3d as M
+import electrics
 import heatloss
 import ventilation
 
@@ -148,8 +149,63 @@ class TestVentilation(unittest.TestCase):
         M._absorb_buildability(model, extra)
         self.assertIn("heat", model)
         self.assertIn("vent", model)
+        self.assertIn("elec", model)
         self.assertGreater(model["heat"]["totals"]["loss_W"], 0)
         self.assertTrue(model["vent"]["extract_fans"])
+
+
+class TestElectrics(unittest.TestCase):
+    def _model(self):
+        rooms = [M.Room("Living room", 0.0, 0.0, 4.0, 5.0, kind="room"),
+                 M.Room("Kitchen", 4.0, 0.0, 3.0, 5.0, kind="kitchen"),
+                 M.Room("Hall", 0.0, 5.0, 3.0, 2.0, kind="circulation"),
+                 M.Room("Bathroom", 3.0, 5.0, 2.0, 2.0, kind="wet"),
+                 M.Room("Bed 1", 5.0, 5.0, 2.0, 2.0, kind="room")]
+        return M.build(rooms, storeys=1, storey_height=2.7,
+                       roof={"pitch_deg": 30.0, "kind": "gabled",
+                             "overhang": 0.3, "max_span_m": 12.0})
+
+    def setUp(self):
+        self.out = electrics.design(self._model())
+        self.by_name = {r["name"]: r for r in self.out["rooms"]}
+
+    def test_socket_counts_follow_room_use(self):
+        self.assertEqual(self.by_name["Living room"]["sockets_twin"], 5)
+        self.assertEqual(self.by_name["Kitchen"]["sockets_twin"], 6)
+        # 2x2 bedroom is under 10 m2 -> single-bed count
+        self.assertEqual(self.by_name["Bed 1"]["sockets_twin"], 3)
+        # bathrooms get none, BS 7671 section 701
+        self.assertEqual(self.by_name["Bathroom"]["sockets_twin"], 0)
+        self.assertEqual(self.by_name["Bathroom"]["placed"], [])
+
+    def test_sockets_land_on_the_rooms_own_walls(self):
+        for r in self.out["rooms"]:
+            room = next(m for m in self._model()["rooms"]
+                        if m["name"] == r["name"])
+            x0, y0 = room["x"], room["y"]
+            x1, y1 = x0 + room["width_m"], y0 + room["depth_m"]
+            for s in r["placed"]:
+                on_edge = (abs(s["y"] - y0) < 1e-6 or abs(s["y"] - y1) < 1e-6
+                           or abs(s["x"] - x0) < 1e-6
+                           or abs(s["x"] - x1) < 1e-6)
+                self.assertTrue(on_edge, f"{r['name']} socket off-wall: {s}")
+                self.assertTrue(x0 <= s["x"] <= x1 and y0 <= s["y"] <= y1)
+
+    def test_kitchen_sockets_at_worktop_height(self):
+        self.assertEqual(self.by_name["Kitchen"]["socket_height_m"], 1.10)
+        self.assertEqual(self.by_name["Living room"]["socket_height_m"], 0.45)
+
+    def test_detection_grade_d1(self):
+        kinds = {(a["type"], a["name"]) for a in self.out["alarms"]}
+        self.assertIn(("smoke", "Hall"), kinds)
+        self.assertIn(("heat", "Kitchen"), kinds)
+
+    def test_consumer_unit_in_hall_and_circuits_match_storeys(self):
+        self.assertEqual(self.out["consumer_unit"]["room"], "Hall")
+        names = [c["name"] for c in self.out["circuits"]]
+        self.assertNotIn("Ring final - first floor", names)  # one storey
+        self.assertIn("Ring final - ground floor", names)
+        self.assertIn("Kitchen ring final", names)
 
 
 if __name__ == "__main__":

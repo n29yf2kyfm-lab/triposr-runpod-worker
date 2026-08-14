@@ -1406,6 +1406,11 @@ def _with_buildability(model):
         out["vent"] = ventilation.design(model)
     except ImportError:                     # pragma: no cover - optional
         pass
+    try:
+        import electrics
+        out["elec"] = electrics.design(model, heat=out.get("heat"))
+    except ImportError:                     # pragma: no cover - optional
+        pass
 
     # THE RULES ENGINE FINALLY RUNS. regs.py has carried measured Part K,
     # B1 and F limits since it was written and was imported by nothing but
@@ -1468,6 +1473,8 @@ def _absorb_buildability(model, extra):
         model["heat"] = extra["heat"]
     if extra.get("vent"):
         model["vent"] = extra["vent"]
+    if extra.get("elec"):
+        model["elec"] = extra["elec"]
     model["warnings"] = list(extra["warnings"])
 
 
