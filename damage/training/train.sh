@@ -232,17 +232,36 @@ PY
 # transfer of that many small objects stalled dead against HTTP 429 at 6%.
 echo "=== fetch corpus + index ==="
 python - <<'PY' || exit 30
-import os, tarfile, concurrent.futures as cf
+import os, time, tarfile, concurrent.futures as cf
 from huggingface_hub import snapshot_download, list_repo_files
 repo, tok = os.environ["CORPUS_REPO"], os.environ["HF_TOKEN"]
 # allow_patterns, not the whole repo: a failed per-file upload left 9,999
 # loose images/ objects behind, and deleting them costs commits against a
 # 128/hour limit that the same failure had already exhausted. Skipping them
 # on download is free and leaves the repo honest about its own history.
-p = snapshot_download(repo_id=repo, repo_type="dataset", token=tok,
-                      local_dir="/workspace/corpus", max_workers=16,
-                      allow_patterns=["shards/*", "idx/*",
-                                      "merged640/_annotations.coco.json"])
+# max_workers=4, not 16: the smoke run drove the Hub's xet-read-token
+# endpoint into HTTP 429 and died on the download. Twenty-seven 500MB files
+# are bandwidth-bound anyway, so the extra concurrency bought nothing and
+# cost the run.
+def fetch():
+    return snapshot_download(repo_id=repo, repo_type="dataset", token=tok,
+                      local_dir="/workspace/corpus", max_workers=4,
+                             allow_patterns=["shards/*", "idx/*",
+                                             "merged640/_annotations.coco.json"])
+
+# A rate-limited download must wait, not die: the corpus is the one thing the
+# run cannot proceed without, and the pod is already billing by this point.
+for attempt in range(6):
+    try:
+        p = fetch()
+        break
+    except Exception as e:
+        wait = min(900, 60 * 2 ** attempt)
+        print(f"fetch retry {attempt+1}/6 in {wait}s: {type(e).__name__} "
+              f"{str(e)[:160]}", flush=True)
+        time.sleep(wait)
+else:
+    raise SystemExit("corpus fetch failed after 6 attempts")
 print("corpus at", p)
 
 img_dir = "/workspace/corpus/merged640/images"

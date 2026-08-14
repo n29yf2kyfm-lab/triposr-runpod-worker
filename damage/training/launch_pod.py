@@ -109,6 +109,30 @@ def launch(args, env, gpu):
     return gql(q, {"in": payload}, args.api_key)["podFindAndDeployOnDemand"]
 
 
+# The pod runs what is in the HF repo, NOT what is on this disk. The smoke run
+# died because train.sh had been edited locally and never re-uploaded: the pod
+# fetched a version without allow_patterns, pulled 10,033 files instead of 32,
+# and drove the Hub's read endpoint into HTTP 429. Publishing on every launch
+# removes that whole class of failure rather than the one instance of it.
+SCRIPTS = ("train.sh", "train_detector.py", "materialise_index.py",
+           "augment.py", "watermark_aug.py", "class_map.py")
+
+
+def publish_scripts(repo, token, here=None):
+    from huggingface_hub import HfApi
+    api = HfApi(token=token)
+    here = here or os.path.dirname(os.path.abspath(__file__))
+    sent = []
+    for f in SCRIPTS:
+        path = os.path.join(here, f)
+        if not os.path.exists(path):
+            raise SystemExit(f"cannot publish: {path} is missing")
+        api.upload_file(path_or_fileobj=path, path_in_repo=f,
+                        repo_id=repo, repo_type="model")
+        sent.append(f)
+    return sent
+
+
 def launch_with_fallback(args, env):
     """Try each GPU in turn. Returns (pod, gpu) or raises.
 
@@ -156,6 +180,10 @@ def main():
                     help="only used to price the run and warn")
     ap.add_argument("--name", default=None)
     ap.add_argument("--tag", default=None)
+    ap.add_argument("--no-publish", dest="publish", action="store_false",
+                    default=True,
+                    help="do not upload the local scripts before launching "
+                         "(the pod then runs whatever the repo already holds)")
     ap.add_argument("--no-fallback", dest="fallback", action="store_false",
                     default=True,
                     help="do not try other GPUs when capacity is refused")
@@ -205,6 +233,10 @@ def main():
     if a.dry_run:
         print("\n(dry run — no pod created)")
         return 0
+
+    if a.publish:
+        sent = publish_scripts(a.hf_repo, a.hf_token)
+        print(f"published     {len(sent)} scripts -> {a.hf_repo}")
 
     pod, gpu = launch_with_fallback(a, env)
     print(f"\npod {pod['id']}  {pod.get('name')}  {pod.get('desiredStatus')}"
