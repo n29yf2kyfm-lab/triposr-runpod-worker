@@ -47,9 +47,16 @@ import trimesh
 def grid_fingerprint(V, resolutions=range(64, 641, 16), eps_frac=0.02):
     """Fraction of vertices lying on a lattice, maximised over resolutions.
 
-    MC normalises the field to a cube, so the lattice spans the LONGEST axis.
-    eps is a fraction of one cell, not an absolute — a coarse grid gets a
-    proportionally looser tolerance, otherwise fine grids win by default.
+    KNOWN LIMITATION (council audit 2026-08-14): the lattice is anchored to the
+    MESH's own min/max, but a generator's marching grid spans the generation
+    BOUNDS (e.g. +-1.01), which the mesh never reaches — so scale and offset
+    are both wrong and a real lattice can score at baseline. The sweep also
+    steps by 16, so odd resolutions (380) are missed. A baseline score
+    therefore means "no lattice DETECTED", never "no lattice exists". Verified
+    the hard way: Hunyuan 2.1's default extractor IS classic marching cubes
+    (surface_extractors.py, skimage measure.marching_cubes), yet our meshes
+    score baseline here. Use sharp_share and the dihedral histogram as the
+    load-bearing metrics; they measure the surface, not the extraction grid.
     """
     lo = V.min(0)
     span = (V.max(0) - lo).max()

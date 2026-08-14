@@ -28,15 +28,24 @@ here. **It is not what our files show.**
 
 Two findings in that table:
 
-1. **My grid hypothesis was wrong, and measurably so.** `grid_score` — the share
-   of vertices with ≥2 coordinates landing on a common lattice, the Marching-Cubes
-   fingerprint — sits at the random baseline for every generated file, *including
-   the raw pre-decimation mesh* where decimation cannot be blamed. There is no
-   lattice. The reason is that Hunyuan3D 2.1 does not use Marching Cubes: it uses
-   `DMCSurfaceExtractor` via the DISO library, i.e. **differentiable Dual Marching
-   Cubes**, which places a free vertex inside each cell and is documented to
-   produce *"more uniform triangle distribution and smoother surfaces"*. The
-   extractor is explicitly chosen to be smooth.
+1. **My grid hypothesis found nothing — and the audit corrected WHY, twice.**
+   `grid_score` — the share of vertices with ≥2 coordinates landing on a common
+   lattice — sits at the random baseline for every generated file, *including
+   the raw pre-decimation mesh*.
+   **CORRECTED 2026-08-14 (council audit, verified against the cloned 2.1
+   source):** the first version of this section said Hunyuan 2.1 "does not use
+   Marching Cubes, it uses DISO/DiffDMC". That was documentation-sourced and is
+   WRONG for our runs: `model.py:207` defaults to `MCSurfaceExtractor()`, which
+   is skimage `measure.marching_cubes` — **classic MC**. `DMCSurfaceExtractor`
+   (DiffDMC) exists but only engages via `enable_flashvdm_decoder()`, which our
+   pipelines never call. Second correction: a lattice fingerprint SHOULD
+   therefore exist, and my detector's failure to find one is methodological —
+   it infers the cell size from the MESH extents, but the true grid spans the
+   generator's bounds (±1.01), which the mesh never reaches, so scale and
+   offset are both wrong; its resolution sweep also steps by 16 and skipped
+   380, the resolution we actually ran. "No lattice" is therefore NOT
+   established — "my detector cannot see the lattice" is. The melt conclusion
+   below does not rest on this metric.
 2. **The raw mesh is smoother than the decimated one** (0.4 % vs 0.8 %). Whatever
    sharpness exists is being *created* by decimation, not destroyed by it. The
    field itself has no creases in it.

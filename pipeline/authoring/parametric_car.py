@@ -309,21 +309,6 @@ def build(car, nu=NU, nv=NV):
     # clean circular lip, and only then are the interior quads dropped.
     arch_r = car.RW * 1.16
     axles = [car.L * (car.u_front - 0.5), car.L * (car.u_rear - 0.5)]
-    for i in range(NUu):
-        flank = car.halfwidth(us[i]) * 0.5
-        for j in range(nv):
-            x, y, z = P[i, j]
-            if z < flank or REG[i, j] > 3:
-                continue
-            for ax in axles:
-                d = math.hypot(x - ax, y - car.RW)
-                if d < 1e-6 or abs(d - arch_r) > arch_r * 0.16:
-                    continue
-                k = arch_r / d
-                P[i, j, 0] = ax + (x - ax) * k
-                P[i, j, 1] = car.RW + (y - car.RW) * k
-                break
-
     arch = np.zeros((NUu - 1, nv - 1), dtype=bool)
     for i in range(NUu - 1):
         flank = car.halfwidth(us[i]) * 0.5
@@ -336,6 +321,32 @@ def build(car, nu=NU, nv=NV):
                 if math.hypot(x - ax, y - car.RW) < arch_r * 0.995:
                     arch[i, j] = True
                     break
+
+    # Project the OPENING'S BOUNDARY VERTICES onto the arch circle. Cutting
+    # whole quads leaves a pixel staircase at the rim (v1); snapping every
+    # nearby vertex lumps the wing (v4); the correct rule is: exactly the kept
+    # vertices that border a removed quad get projected radially onto the
+    # circle, everything else stays untouched.
+    NUq, nvq = arch.shape
+    for i in range(NUu):
+        for j in range(nv):
+            adj_removed = any(arch[ii, jj]
+                              for ii in (i - 1, i) for jj in (j - 1, j)
+                              if 0 <= ii < NUq and 0 <= jj < nvq)
+            adj_kept = any(not arch[ii, jj]
+                           for ii in (i - 1, i) for jj in (j - 1, j)
+                           if 0 <= ii < NUq and 0 <= jj < nvq)
+            if not (adj_removed and adj_kept):
+                continue
+            x, y = P[i, j, 0], P[i, j, 1]
+            for ax in axles:
+                d = math.hypot(x - ax, y - car.RW)
+                if d < 1e-6 or abs(d - arch_r) > arch_r * 0.35:
+                    continue
+                k = arch_r / d
+                P[i, j, 0] = ax + (x - ax) * k
+                P[i, j, 1] = car.RW + (y - car.RW) * k
+                break
 
     def emit(mask, mirror=True):
         """Turn a quad mask over the (station, section) grid into a mesh."""
