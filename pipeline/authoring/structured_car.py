@@ -326,7 +326,8 @@ def section_marks(REG, us):
             "shoulder": frac(shoulder_j)}
 
 
-def build_structured(car, out, root_name=None, textured=True):
+def build_structured(car, out, root_name=None, textured=True, photo=None,
+                    photo_view="side"):
     from skin import paint_skin
 
     g = GLB(generator=f"structured_car/{car.name}")
@@ -335,6 +336,13 @@ def build_structured(car, out, root_name=None, textured=True):
 
     if textured:
         base_png, normal_png = paint_skin(car, section_marks(REG, us))
+        if photo:
+            # bake the real car photo into the same texture space, then keep
+            # the AO/seam map on top so the engraved shut lines still read
+            from photo_skin import bake, composite_ao
+            shot, stats = bake(car, P, us, photo, view=photo_view)
+            print(f"photo bake: {stats}")
+            base_png = composite_ao(shot, base_png)
         t_base = g.texture(base_png)
         t_norm = g.texture(normal_png)
         m_paint = g.material("Material_0", [0.72, 0.73, 0.75, 1.0], 0.10, 0.28,
@@ -478,6 +486,9 @@ def main():
     for k in ("length", "width", "height", "wheelbase", "track",
               "wheel_d", "tyre_w"):
         ap.add_argument(f"--{k.replace('_','-')}", type=float, dest=k)
+    ap.add_argument("--photo", help="background-removed car photo to bake on")
+    ap.add_argument("--photo-view", default="side",
+                    choices=["side", "3q", "front", "rear"])
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
 
@@ -499,7 +510,8 @@ def main():
     name = a.name or (f"{a.make}-{a.model}" if a.make else
                       os.path.splitext(os.path.basename(a.out))[0])
     car = Car(name=name, **spec)
-    size, g = build_structured(car, a.out, root_name=name)
+    size, g = build_structured(car, a.out, root_name=name,
+                               photo=a.photo, photo_view=a.photo_view)
     print(f"{a.out}: {size/1024:.0f} KB, {len(g.g['meshes'])} meshes, "
           f"{len(g.g['materials'])} materials")
     print_tree(g)
