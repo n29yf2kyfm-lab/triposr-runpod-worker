@@ -1,0 +1,97 @@
+# Human-verified procedure template: front brake pad replacement.
+#
+# THIS FILE IS THE ACCURACY CONTRACT. The AI never invents mechanical facts —
+# it only words/voices what a template says, so every template must be
+# reviewed by a human who knows the procedure before it ships. Narration
+# supports {placeholders} filled from vehicle_defaults, overridable per
+# request (e.g. vehicle="a 2020 Golf R").
+id: brake_pads_front
+title: "How to Change Front Brake Pads"
+category: brakes
+safety_critical: true
+disclaimer: >-
+  General guidance for educational purposes. Always follow your vehicle
+  manufacturer's manual and torque specifications. Brakes are
+  safety-critical — if in doubt, have the work done by a professional.
+tools:
+  - Jack and axle stands
+  - Wheel brace / breaker bar
+  - Socket set
+  - Brake caliper piston tool or G-clamp
+  - Torque wrench
+  - Copper grease / brake lubricant
+vehicle_defaults:
+  vehicle: "your car"
+  wheel_torque: "the torque specified in your handbook"
+steps:
+  - id: prep
+    title: "Prepare the car"
+    broll: workshop/tools_bench
+    narration: >-
+      Before you start, park {vehicle} on firm, level ground, apply the
+      handbrake, and put the car in gear or park. Loosen the front wheel
+      bolts half a turn while the wheels are still on the ground.
+    card:
+      - "Level ground, handbrake on"
+      - "Crack wheel bolts before lifting"
+  - id: lift
+    title: "Lift and secure"
+    broll: workshop/jack_points
+    narration: >-
+      Jack the car up at the manufacturer's jacking point, and always
+      support it on an axle stand. Never work under a car held only by a
+      jack. Then remove the wheel bolts and lift the wheel away.
+    card:
+      - "Use the correct jacking point"
+      - "Axle stands — always"
+  - id: wheel_off
+    title: "Remove the wheel"
+    broll: workshop/wheel_off
+    narration: >-
+      With the wheel off you can see the brake disc and the caliper that
+      clamps the pads onto it.
+    card:
+      - "Wheel off — caliper visible"
+  - id: caliper
+    title: "Free the caliper"
+    broll: workshop/caliper_closeup
+    narration: >-
+      Undo the caliper slider bolts, then lift the caliper off the disc and
+      support it so it never hangs on the brake hose. The old pads slide
+      out of the carrier.
+    card:
+      - "Undo slider bolts"
+      - "Never let the caliper hang by its hose"
+  - id: new_pads
+    title: "Fit the new pads"
+    broll: workshop/caliper_closeup
+    narration: >-
+      Wind or press the caliper piston back to make room for the new,
+      thicker pads — keep an eye on the brake fluid reservoir as the level
+      rises. Apply a little brake lubricant to the pad contact points,
+      never on the friction surface, then fit the new pads and refit the
+      caliper, tightening its bolts properly.
+    card:
+      - "Press piston back slowly"
+      - "Lubricant on contact points only"
+  - id: refit
+    title: "Refit the wheel"
+    broll: workshop/wheel_off
+    narration: >-
+      Refit the wheel, lower the car, and tighten the wheel bolts in a
+      star pattern to {wheel_torque}.
+    card:
+      - "Tighten in a star pattern"
+      - "Torque to spec"
+  - id: bed_in
+    title: "Pump and bed in"
+    broll: workshop/ramp_up
+    narration: >-
+      Before driving, pump the brake pedal until it feels firm — the first
+      press after a pad change does nothing, and that catches people out.
+      Then bed the pads in with gentle braking for the first hundred miles
+      or so, and repeat the whole job on the other side of the axle. Brake
+      pads are always replaced in pairs across an axle.
+    card:
+      - "Pump the pedal before driving"
+      - "Replace pads in axle pairs"
