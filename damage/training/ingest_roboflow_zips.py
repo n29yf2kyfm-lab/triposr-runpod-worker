@@ -74,7 +74,8 @@ CLASS_RULES = [
     # structural before dent — a shoved bumper is not a ding
     (("missing", "detach", "torn", "tear", "structural", "severe damage",
       "smash", "crush", "collaps", "deform", "bent", "misalign", "panel gap",
-      "gap", "hilang", "kayip"), "structural"),
+      "gap", "hilang", "kayip", "wreck", "totaled", "total loss",
+      "write off"), "structural"),
     (("broken", "break", "shatter", "damaged part", "broken part",
       "sidemirror damage", "side mirror damage", "mirror damage",
       "rusak", "hasar"), "structural"),
