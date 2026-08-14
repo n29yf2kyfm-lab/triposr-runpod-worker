@@ -117,9 +117,53 @@ What "own model" realistically means, stated once so it is never re-litigated:
 
 **The training asset we already own (counted 2026-08-14):** 1,026 approved,
 audited, material-separated GLBs. This is exactly the (views → mesh) pair data
-these models fine-tune on, and it is clean — unlike the Stage C/D pool that
-caused the old regression. Sample-verify it anyway before training (standing
-rule).
+these models fine-tune on.
+
+### ⚠ MEASURED 2026-08-14, BEFORE ANY TRAINING SPEND — the premise was half wrong
+
+The plan assumed "our cars are crisp, generated cars are soft, so fine-tuning
+teaches crispness". **Nobody had measured whether our catalogue actually carries
+the detail we want taught.** `pipeline/trellis/crease_density.py` measures it:
+total length of edges whose dihedral angle is 25–150°, divided by the bounding-box
+diagonal (scale-free), i.e. how much genuinely sharp geometry a mesh contains.
+
+| mesh | faces | crease/diag |
+|---|---|---|
+| Kia Sportage (ours) | 585k | **270.7** |
+| Kia Picanto (ours) | 458k | **227.8** |
+| Skoda Octavia RS (ours) | 674k | **162.1** |
+| **Hi3DGen (generated)** | 523k | 92.4 |
+| **Hunyuan3D-2.1 (generated)** | 665k | **63.3** |
+| MG ZS (ours) | 1.13M | 47.9 |
+| MG4 (ours) | 1.05M | 30.9 |
+| Hunyuan3D-2.0 (generated) | 626k | 29.8 |
+| MG3 (ours) | 894k | 12.0 |
+
+**Three of six sampled catalogue cars carry LESS sharp geometry than what
+Hunyuan-2.1 already generates.** Fine-tuning on those would teach the model to be
+*softer*, not sharper. "Train on all 1,026" is therefore wrong and is struck from
+this plan.
+
+**The confound was tested and ruled out.** Coarse tessellation can fake creases
+through faceting, and the raw numbers looked like that (the 458k Picanto scored
+above the 1.13M MG ZS). Control: decimating MG ZS 1,133,062 → 280,498 faces moved
+its score only 47.9 → 51.2 (+7%). Tessellation density does not drive the metric;
+the spread is real geometric variation between cars.
+
+**What this changes:**
+1. **Phase 2a gains a CURATION step.** Score all 1,026 by crease density, keep the
+   top slice (the Sportage/Picanto/Octavia band, ~4x the generated car), and
+   train only on that. Cheap: the scorer is local and free.
+2. **The headroom is real but narrower than assumed** — our best cars are ~4x the
+   generated Golf, not "the whole catalogue is better".
+3. If the curated set turns out to be small (say <150 cars), that is itself a
+   finding, and it should be reported before the pilot spend rather than trained
+   through.
+
+**Limit of the metric, stated so it is not over-read:** it counts sharp geometry,
+not GOOD geometry. Hi3DGen scores 92.4 largely because it is NOISY (ragged window
+borders — visible in the Phase 1 sheet). Curate with crease density AND the
+existing audit/eye, never on the number alone.
 
 **The exact training-data spec (read from the 2.1 repo, not guessed):**
 per object `{uid}_sdf.npz` + `{uid}_surface.npz` + `{uid}_watertight.obj`
