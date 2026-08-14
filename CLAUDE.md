@@ -221,21 +221,37 @@ eight variants. Measured on the top view it goes [253.9,253.9,254.3] ->
 [163.9,21.1,23.7] — it was painted all along, and the white was a blown highlight.
 Same clipping trap as the AgX white-tyre episode. Measure the pixels.
 
-## glass_probe: `alpha_shell` fires on BLEND-at-alpha-1.0 (open, 2026-08-14)
+## glass_probe: `alpha_shell` fired on BLEND-at-alpha-1.0 (FIXED 2026-08-14)
 
-Found on the Kia Sportage GT-Line, which reports `alpha_shell=true` and is a
+Found on the Kia Sportage GT-Line, which reported `alpha_shell=true` and is a
 perfectly normal car: 37 of its 43 materials are opaque and the 6 transparent ones
 are exactly window / glass_Clear / glass_tinted / red_glass / light / red_light.
-The flag fires on `st_black`, a trim material with `alphaMode=BLEND` but
-**baseColorFactor alpha = 1.0** — declared blend, actually opaque.
+The flag fired on `st_black`, a **textured** trim material with `alphaMode=BLEND`
+but **baseColorFactor alpha = 1.0** — declared blend, actually opaque.
+`build_car.py` gate G3 treats `alpha_shell` as a HARD FAIL, so a good car was one
+gate away from a scrap.
 
-`build_car.py` gate G3 treats `alpha_shell` as a HARD FAIL, so this can scrap a
-good car on one mislabelled trim material. The genuine global-alpha shell signature
-is unaffected (every material transparent at ~0.25, `body mats=0, cov=0.000`).
-The fix is to require the body-ish material to be ACTUALLY transparent — factor
-alpha < 1.0 or a transmission extension — not merely `alphaMode != OPAQUE`.
-NOT YET FIXED: changing glass_probe requires the PORSCHE_GLASS.json re-validation
-this file mandates, and that was not run. Do not "just tweak it" without that.
+**Cause: the `tex_alpha` limb of `is_trans` was being reused for the body test.**
+That limb is right for GLAZING — a textured BLEND material asserts per-texel alpha,
+and it exists precisely to stop this probe culling genuinely-clear Porsches — and
+wrong for bodywork, where exporters set BLEND routinely on textures whose alpha
+channel is solid. The body test now uses FACTOR transparency only: `alpha < 1.0`
+or a transmission extension.
+
+**No detection lost, and that is measured rather than argued:** all five confirmed
+shells in `retro_alpha_shell.json` are FACTOR defects at alpha 0.25 (vray_CarPaint,
+carpaint.261, carpaint+tire, plus the Panda and Leaf); none depend on texture alpha.
+
+**`pipeline/ingest/validate_glass_probe.py` runs both ground truths** —
+PORSCHE_GLASS.json for the glazing verdict, retro_alpha_shell.json for
+`alpha_shell`. Run it BEFORE and AFTER any change to this file and **diff PER CAR,
+not just the totals**: this fix scored 107/107 and 5/5 both ways with zero per-car
+movement, and matching totals alone would not have proved that. "I did not touch
+that code path" is not evidence — this project has been burned by exactly that.
+
+**"Ambiguous" counts as a PASS in that harness, deliberately.** Under the owner's
+ruling ambiguous routes to the eye and is never a fail, so scoring it as a miss
+would tune the probe toward culling good cars.
 
 ## RENDER-SIDE INVERSION: the mechanism, found at last (2026-08-11, Mazda wave)
 
