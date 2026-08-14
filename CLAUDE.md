@@ -1092,6 +1092,45 @@ automated "PASS" as if the car is good.
   in doubt, it does not ship. Truth over volume — a smaller honest catalogue beats
   a padded one full of low-tier scans.
 
+## Announce BEFORE any customer-visible change lands (owner escalation 2026-08-14)
+
+The legacy serving index (car-renders/catalogue.json) was 151 cars stale against
+the owner's own 2026-08-11 quarantine wave. Syncing it was CONTENT-correct and
+PROCESS-wrong: it visibly shrank the live gallery while the owner was looking at
+it, with no warning, and the owner's next message was "What the fuk happen".
+The publish-approval rule was read as covering only ADDING cars; it does not.
+
+The rule as it now stands: **any change a customer or the owner can SEE — adding,
+removing, re-serving, index rebuilds, resolver behaviour — is announced to the
+owner BEFORE it lands, with the revert path stated.** De-listing already-scrapped
+cars is still the owner's own decision being propagated, but the timing of a
+visible change is itself a decision, and it is the owner's too. Back up the live
+file first (car-renders/backups/, pattern already in build_legacy_index.py),
+verify the WRITTEN file after, and verify the backup actually fetches (200), not
+merely that the upload returned 200.
+
+Related fact worth keeping: the two serving paths can DIVERGE silently — the
+resolver reads catalogue.v2.json, the app gallery reads catalogue.json, and only
+v2 was updated by the 2026-08-11 wave. After any quarantine wave, diff the two
+files' publicationStatus maps; 151 disagreements sat unnoticed for three days.
+
+## Never print a pod's raw JSON — env carries the keys (found by audit 2026-08-14)
+
+`GET /v1/pods/<id>` returns the pod's env INLINE — SB_KEY, HF_TOKEN, everything
+the bootstrap was given. Piping that through json.tool put both keys into this
+session's transcript, which persists across rollbacks and has been harvested for
+credentials before. Use `pipeline/qc/pod_state.py` (env names only) for pod
+diagnosis. SB_KEY was already due rotation from the earlier set-x leak; HF_TOKEN
+joined it after this one.
+
+## The render rig's azimuth convention (burned renders discovering it, 2026-08-14)
+
+For a glTF Y-up car with its length on X: **az 0/180 = side views, az 90/270 =
+end-on views, az 35/125/215/305 = the four three-quarter views** (215 = rear
+3/4). The wave's "side" tile is az 0-family, not 270. Written down because two
+renders were burned rediscovering it in one session.
+
+
 ## Root-cause analysis method (apply whenever investigating a problem)
 
 Saved at the user's request. When something breaks, is slow, is wrong, or
