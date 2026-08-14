@@ -78,6 +78,36 @@ def preflight(corpus, index):
     return problems
 
 
+def retry_call(fn, what, attempts=8):
+    """Run fn(), waiting out the Hub's stated rate-limit window on failure.
+
+    Applies to EVERY upload, not just the shard loop. The first sharded run
+    died with the 429 traceback escaping straight out of upload_folder,
+    because only the shard uploads were wrapped and the index upload — which
+    runs first — was not. A retry that covers most of the calls covers none of
+    the run.
+    """
+    import re
+    import time
+    for attempt in range(attempts):
+        try:
+            return fn()
+        except Exception as e:
+            msg = str(e)
+            m = re.search(r"retry this action in (\d+) minute", msg)
+            m2 = re.search(r"Retry after (\d+) second", msg)
+            if m:
+                wait = int(m.group(1)) * 60 + 30
+            elif m2:
+                wait = int(m2.group(1)) + 15
+            else:
+                wait = min(600, 2 ** attempt * 15)
+            print(f"      {what}: retry {attempt+1}/{attempts} in {wait}s "
+                  f"({type(e).__name__} {msg[:90]})", flush=True)
+            time.sleep(wait)
+    raise SystemExit(f"gave up on {what}")
+
+
 def upload_shards(api, repo, img_dir, shard_mb, scratch):
     """Tar the images into ~shard_mb pieces, uploading and deleting each.
 
@@ -117,32 +147,9 @@ def upload_shards(api, repo, img_dir, shard_mb, scratch):
         mb = os.path.getsize(local) / 1e6
         print(f"  [{i+1}/{len(shards)}] {remote}  {len(members):,} images  "
               f"{mb:.0f}MB", flush=True)
-        # The Hub caps repository commits at 128/hour and states exactly how
-        # long to wait. Honour that number. A geometric backoff topping out
-        # near two minutes just exhausts its retries against a limit measured
-        # in tens of minutes, which is how the first attempt died.
-        for attempt in range(8):
-            try:
-                api.upload_file(path_or_fileobj=local, path_in_repo=remote,
-                                repo_id=repo, repo_type="dataset")
-                break
-            except Exception as e:
-                import re
-                import time
-                msg = str(e)
-                m = re.search(r"retry this action in (\d+) minute", msg)
-                m2 = re.search(r"Retry after (\d+) second", msg)
-                if m:
-                    wait = int(m.group(1)) * 60 + 30
-                elif m2:
-                    wait = int(m2.group(1)) + 15
-                else:
-                    wait = min(600, 2 ** attempt * 15)
-                print(f"      retry {attempt+1}/8 in {wait}s: "
-                      f"{type(e).__name__} {msg[:100]}", flush=True)
-                time.sleep(wait)
-        else:
-            raise SystemExit(f"gave up on {remote}")
+        retry_call(lambda: api.upload_file(
+            path_or_fileobj=local, path_in_repo=remote,
+            repo_id=repo, repo_type="dataset"), remote)
         os.remove(local)          # under 4GB free: never hold two shards
     print(f"\nall {len(shards)} shards uploaded")
 
@@ -182,12 +189,13 @@ def main():
     # Staged separately so the small, frequently-rebuilt index can be
     # refreshed without re-sending 14GB of pixels.
     print(f"\nuploading index -> {a.repo}:idx/")
-    api.upload_folder(folder_path=a.index, path_in_repo="idx",
-                      repo_id=a.repo, repo_type="dataset")
-    api.upload_file(path_or_fileobj=os.path.join(a.corpus,
-                                                 "_annotations.coco.json"),
-                    path_in_repo="merged640/_annotations.coco.json",
-                    repo_id=a.repo, repo_type="dataset")
+    retry_call(lambda: api.upload_folder(
+        folder_path=a.index, path_in_repo="idx",
+        repo_id=a.repo, repo_type="dataset"), "idx/")
+    retry_call(lambda: api.upload_file(
+        path_or_fileobj=os.path.join(a.corpus, "_annotations.coco.json"),
+        path_in_repo="merged640/_annotations.coco.json",
+        repo_id=a.repo, repo_type="dataset"), "_annotations.coco.json")
 
     upload_shards(api, a.repo, os.path.join(a.corpus, "images"),
                   a.shard_mb, a.scratch)
