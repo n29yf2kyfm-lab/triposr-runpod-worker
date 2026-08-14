@@ -302,6 +302,18 @@ def _plan(value):
         if height is not None:
             room["height_m"] = height
         room["kind"] = str(item.get("kind") or "room").strip() or "room"
+        # WHICH FLOORS THE ROOM IS ON. Without these two, a real two-floor
+        # plan submitted through the API silently collapsed into repeated
+        # plates: the model, the take-off and every buildability check ran
+        # against a different building from the one the caller described.
+        n = item.get("storeys")
+        if n is not None:
+            room["storeys"] = _int(n, f"plan.rooms[{i}].storeys", None,
+                                   1, MAX_STOREYS)
+        base = item.get("base_level")
+        if base is not None:
+            room["base_level"] = _int(base, f"plan.rooms[{i}].base_level",
+                                      0, 0, MAX_STOREYS - 1)
         rooms.append(room)
 
     out = {"rooms": rooms}
@@ -353,6 +365,24 @@ def _plan(value):
                              1.5, 20.0)
     out["storey_height_m"] = _float(value.get("storey_height_m"),
                                     "plan.storey_height_m", None, 1.8, 25.0)
+
+    # PARTY WALLS: which boundary lines are shared with the neighbour, so a
+    # semi's shared flank is not treated as sky. [["x", 0.0], ["y", 8.5]].
+    party = value.get("party_walls")
+    if party is not None:
+        if not isinstance(party, (list, tuple)):
+            raise InputError('plan.party_walls must be a list of '
+                             '[axis, coordinate] pairs, e.g. [["x", 0.0]]')
+        out_party = []
+        for i, edge in enumerate(party):
+            if (not isinstance(edge, (list, tuple)) or len(edge) != 2
+                    or edge[0] not in ("x", "y")):
+                raise InputError(
+                    f'plan.party_walls[{i}] must be ["x"|"y", metres]')
+            out_party.append([edge[0],
+                              _float(edge[1], f"plan.party_walls[{i}]",
+                                     0.0, -1000.0, 1000.0)])
+        out["party_walls"] = out_party
 
     roof = value.get("roof")
     if roof is not None:

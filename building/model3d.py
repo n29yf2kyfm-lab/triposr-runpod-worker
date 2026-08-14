@@ -221,6 +221,12 @@ class Wall:
                 "storeys": self.storeys,
                 "base_level": self.base_level,
                 "shared_storeys": self.shared_storeys,
+                # A WALL CAN BE "EXTERNAL" AND FACE A CAVITY. void_facing is
+                # computed at build time and was then thrown away here, so
+                # every consumer of the exported JSON — glazing checks, heat
+                # loss, the viewer — treated a 100mm void strip as facade.
+                "void_facing": bool(getattr(self, "void_facing", False)),
+                "party": bool(getattr(self, "party", False)),
                 "net_area_m2": round(self.area_m2, 2),
                 "openings": self.openings}
 
@@ -700,7 +706,7 @@ def _union_area(rooms):
 # --- the model --------------------------------------------------------------
 
 def build(rooms, schedule=None, wall_openings=True, storeys=1,
-          storey_height=None, roof=None, front_door=True):
+          storey_height=None, roof=None, front_door=True, party_edges=None):
     """Rooms in, a whole building out.
 
     `storeys` repeats the floor plate upward. That is what a conversion of
@@ -717,10 +723,27 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
 
     walls = walls_from_rooms(rooms)
 
+    # A PARTY WALL IS THE NEIGHBOUR'S HOUSE, NOT THE SKY. On a semi or a
+    # terrace the probe finds no room beyond the shared line and calls it
+    # external — which put rule windows through next door's living room and
+    # would cost the whole line as heat-loss brickwork. The caller states
+    # which boundary lines are shared: [["x", 0.0], ["y", 8.5]].
+    for axis, coord in (party_edges or []):
+        for wall in walls:
+            (ax, ay), (bx, by) = wall.start, wall.end
+            on = (abs(ax - coord) < 1e-6 and abs(bx - coord) < 1e-6) \
+                if axis == "x" else \
+                (abs(ay - coord) < 1e-6 and abs(by - coord) < 1e-6)
+            if on and wall.external:
+                wall.party = True
+
     if wall_openings:
         for wall in walls:
             if getattr(wall, "void_facing", False):
                 # No window onto a 100mm cavity, and no door into it either.
+                continue
+            if getattr(wall, "party", False):
+                # And none through the neighbour's lounge.
                 continue
             if wall.external and wall.length_m >= 1.8:
                 # ONE WINDOW PER ROOM, NOT PER WALL. A single window in the
@@ -1356,7 +1379,65 @@ def _with_buildability(model):
     for f in result["findings"]:
         if f["severity"] == "refuse":
             out["warnings"].append("NOT BUILDABLE: " + f["message"])
+
+    # THE RULES ENGINE FINALLY RUNS. regs.py has carried measured Part K,
+    # B1 and F limits since it was written and was imported by nothing but
+    # its own tests — the pipeline's "compliance findings" silently excluded
+    # every one. The stair the fitter just designed is judged by the rules
+    # engine's own arithmetic, and every habitable room gets the 1/20 purge
+    # check from the openings the model actually carries.
+    try:
+        import regs
+    except ImportError:                     # pragma: no cover - optional
+        return out
+    findings = []
+    stair = result.get("stair")
+    if stair and stair.get("rise_m") and stair.get("going_m"):
+        findings += regs.check_stair(stair["rise_m"], stair["going_m"],
+                                     uncertainty=0.0,
+                                     location=stair.get("in_room"))
+    storeys = model.get("storeys", 1)
+    for room in model["rooms"]:
+        if room.get("kind") not in buildable.HABITABLE:
+            continue
+        base = room.get("base_level") or 0
+        span = room.get("storeys")
+        top = storeys if span is None else base + int(span)
+        for level in range(base, top):
+            openable = sum(
+                o["width"] * o["height"]
+                for o in buildable._openings_of(model, room, level)
+                if o["kind"] == "window")
+            findings += regs.check_purge_ventilation(
+                openable, room["area_m2"],
+                location=f"{room['name']} L{level}")
+    summary = regs.summarise(findings)
+    out["regs"] = summary
+    for item in summary["critical"]:
+        if item.get("verdict") == "fail":
+            out["warnings"].append("REGS FAIL: " + item["message"])
     return out
+
+
+def _absorb_buildability(model, extra):
+    """Fold the check's outcome INTO the model before anything exports it.
+
+    The stair becomes part of the geometry record — a floor plan cannot be
+    drawn from a model that does not know where its staircase is — and the
+    promoted warnings travel in the model's own warning list, so a JSON
+    consumer sees exactly what the API caller sees.
+    """
+    result = extra.get("buildable")
+    if not result:
+        return
+    if result.get("stair"):
+        model["stair"] = result["stair"]
+    model["buildable"] = {"buildable": result["buildable"],
+                          "counts": result["counts"],
+                          "findings": result["findings"]}
+    if extra.get("regs"):
+        model["regs"] = extra["regs"]
+    model["warnings"] = list(extra["warnings"])
 
 
 def run_mode(spec, prog, output_dir):
@@ -1382,10 +1463,12 @@ def run_mode(spec, prog, output_dir):
         local = roomplan.fetch_export(spec, directory)
         prog.stage("building")
         model = roomplan.to_model(roomplan.parse(local))
+        extra = _with_buildability(model)
+        _absorb_buildability(model, extra)
         prog.stage("exporting")
         artifacts = _export_artifacts(
             model, directory, spec.get("scan_id") or "roomplan")
-        return artifacts, _with_buildability(model)
+        return artifacts, extra
 
     if not entries:
         raise ModelError(
@@ -1401,7 +1484,12 @@ def run_mode(spec, prog, output_dir):
             width=e.get("width_m") or e.get("width"),
             depth=e.get("depth_m") or e.get("depth"),
             height=e.get("height_m") or plan.get("height_m"),
-            kind=e.get("kind", "room")))
+            kind=e.get("kind", "room"),
+            # None means "every storey", exactly as Room defines it — the
+            # two fields the whole per-level machinery hangs off, and the
+            # two this constructor was silently discarding.
+            storeys=e.get("storeys"),
+            base_level=int(e.get("base_level") or 0)))
 
     # A schedule given directly wins; otherwise read the drawing's own.
     sched = plan.get("schedule")
@@ -1428,7 +1516,8 @@ def run_mode(spec, prog, output_dir):
                   storeys=int(plan.get("storeys", 1)),
                   storey_height=plan.get("storey_height_m"),
                   roof=plan.get("roof"),
-                  front_door=plan.get("front_door", True))
+                  front_door=plan.get("front_door", True),
+                  party_edges=plan.get("party_walls"))
 
     if sched_note:
         model["warnings"].append(sched_note)
@@ -1439,11 +1528,18 @@ def run_mode(spec, prog, output_dir):
             "along in a re-used job body. Send the scan without a plan to "
             "model from it.")
 
+    # THE CHECK RUNS BEFORE THE EXPORT, AND THE STAIR GOES INTO THE MODEL.
+    # The other way round, the fitted flight existed only in the returned
+    # wrapper: every exported file — the JSON a floor plan would be drawn
+    # from included — described a house with no staircase in it.
+    extra = _with_buildability(model)
+    _absorb_buildability(model, extra)
+
     prog.stage("exporting")
     directory = paths.ensure(output_dir)
     artifacts = _export_artifacts(model, directory,
                                   spec.get("scan_id") or "model")
-    return artifacts, _with_buildability(model)
+    return artifacts, extra
 
 
 def _export_artifacts(model, directory, scan):

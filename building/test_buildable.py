@@ -319,6 +319,69 @@ check("10b and every refusal is promoted into the warnings",
 check("10c the artifacts still came out — this reports, it does not block",
       bool(_arts))
 
+# --- 11. the review's wiring fixes, locked down ---------------------------
+# 11a THE STAIR IS IN THE EXPORTED MODEL. The check used to run after the
+# export, so every file on disk described a house with no staircase.
+with tempfile.TemporaryDirectory() as _d2:
+    _a3, _x3 = M.run_mode({"plan": {
+        "rooms": [{"name": "Hall", "kind": "circulation",
+                   "x": 0, "y": 0, "width_m": 2.4, "depth_m": 5.0,
+                   "storeys": 1},
+                  {"name": "Living", "x": 2.4, "y": 0,
+                   "width_m": 5.0, "depth_m": 5.0, "storeys": 1},
+                  {"name": "Landing", "kind": "circulation",
+                   "x": 0, "y": 0, "width_m": 2.4, "depth_m": 5.0,
+                   "storeys": 1, "base_level": 1},
+                  {"name": "Bed 1", "x": 2.4, "y": 0,
+                   "width_m": 5.0, "depth_m": 5.0,
+                   "storeys": 1, "base_level": 1}],
+        "storeys": 2, "storey_height_m": 2.70}}, _Prog(), _d2)
+    import json as _json
+    _js = _json.load(open(os.path.join(
+        _d2, [f for f in os.listdir(_d2) if f.endswith(".json")][0])))
+check("11a the exported JSON carries the fitted stair",
+      "stair" in _js and _js["stair"].get("lands_in") == "Landing",
+      str(_js.get("stair")))
+# The fixture's rule-placed glazing genuinely fails Part O now that every
+# storey is counted — which is itself the fix working. What 11b guards is
+# ABSORPTION: the file on disk says exactly what the API caller was told.
+check("11b and the exported verdict matches what the API caller was told",
+      _js.get("buildable", {}).get("buildable")
+      == _x3["buildable"]["buildable"]
+      and _js["buildable"]["counts"] == _x3["buildable"]["counts"],
+      str(_js.get("buildable", {}).get("counts")))
+# 11c THE RULES ENGINE RUNS. regs.py was imported by nothing but its own
+# tests; now every model job gets its stair judged and purge checked.
+check("11c regs findings ride alongside the model",
+      "regs" in _x3 and _x3["regs"]["checked"] > 0,
+      str(_x3.get("regs", {}).get("counts")))
+check("11d and the stair the fitter designed passes the rules engine",
+      _x3["regs"]["counts"]["fail"] == 0, str(_x3["regs"]["counts"]))
+
+# 11e PART O COUNTS EVERY STOREY A WINDOW REPEATS ON. A repeated-plate
+# window was counted once against an every-storey floor area.
+_rep = {"rooms": [], "storeys": 2, "storey_height_m": 2.7,
+        "walls": [{"external": True, "start": [0, 0], "end": [10, 0],
+                   "openings": [{"kind": "window", "along": 0.1,
+                                 "width": 10.0, "height": 1.2,
+                                 "level": None}]}],
+        "totals": {"floor_area_m2": 100.0}}
+check("11e a level=None window is glazing on BOTH storeys",
+      codes(B.overheating(_rep, "N")) == ["O-GLAZING"],
+      str(B.overheating(_rep, "N")))
+# 12.0m2 x2 = 24% fails N; counted once it was 12% and passed silently.
+
+# 11f A PARTY WALL GETS NO RULE WINDOWS. A semi's shared flank was sky.
+_semi = M.build([M.Room("Living", 0, 0, 5.0, 5.0, kind="room")],
+                storeys=1, party_edges=[["x", 0.0]])
+_party = [w for w in _semi["walls"] if w.get("party")]
+check("11f the shared flank is marked party and carries no windows",
+      len(_party) == 1 and not any(
+          o["kind"] == "window" for o in _party[0]["openings"]),
+      str(_party))
+check("11g void_facing now survives into the wall JSON",
+      all("void_facing" in w for w in _semi["walls"]))
+
 print()
 for f in FAILED:
     print(f"FAIL  {f}")

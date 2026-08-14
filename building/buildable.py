@@ -472,8 +472,24 @@ def overheating(model, orientation="N"):
     knows it until there is a site. Defaulting to North gives the most
     generous limit there is, so a failure here fails on ANY orientation.
     """
+    # A REPEATED-PLATE WINDOW EXISTS ON EVERY STOREY IT REPEATS ON. Openings
+    # with level=None were counted once while the floor area below counted
+    # every storey, understating glazing by the storey count — a 24% house
+    # read as 12% and sailed through. Multiply by the same storey span the
+    # wall-area figures use. Walls facing a cavity (void_facing) are not
+    # facades and carry no glazing worth counting.
+    storeys = model.get("storeys", 1)
+
+    def _wall_levels(w):
+        base = w.get("base_level") or 0
+        n = w.get("storeys")
+        top = storeys if n is None else min(base + int(n), storeys)
+        return max(0, top - base)
+
     glazed = sum(o["width"] * o["height"]
-                 for w in model["walls"] if w["external"]
+                 * (_wall_levels(w) if o.get("level") is None else 1)
+                 for w in model["walls"]
+                 if w["external"] and not w.get("void_facing")
                  for o in w.get("openings", []) if o["kind"] == "window")
     floor = model["totals"]["floor_area_m2"]
     if floor <= 0:
