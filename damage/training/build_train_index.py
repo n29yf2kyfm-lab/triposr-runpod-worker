@@ -61,6 +61,19 @@ Only BOX-SAFE operations are listed: horizontal flip, crop-and-resize,
 photometric jitter (brightness / contrast / saturation), and mild blur or
 sharpen. Each has an exact bounding-box transform, or none at all.
 
+Two further flags sit OUTSIDE the recipe cycle, `wm` and `sn` — synthetic
+watermark and grain/recompression. They are outside it on purpose. A recipe is
+chosen by repeat number, so recipe frequency follows how heavily a class was
+repeated, and a rare class that got twelve copies would carry a different
+augmentation mix from a common class that got one. For ordinary augmentation
+that is harmless. For these two it would be fatal, because their entire job is
+to be UNCORRELATED WITH THE CLASS: they exist to stop the network reading
+"Dreamstime tiling" as "smashed windscreen", a shortcut that is genuinely
+present in this corpus because stock agencies over-supply dramatic damage. So
+they are drawn per sample from the image sha alone, at a fixed rate, and land
+on every class equally. Nothing is discarded for being watermarked; the mark is
+made uninformative instead. See watermark_aug.py.
+
 FREE ROTATION IS DELIBERATELY EXCLUDED — DO NOT ADD IT. Rotating an image means
 re-fitting an axis-aligned rectangle around a rotated box, which inflates every
 box slightly. Applied a dozen times over to drag a thin class up to its target,
@@ -125,6 +138,15 @@ RECIPES = (
 # Above this, a class is not being balanced, it is being cloned. Reported rather
 # than silently applied.
 UNHEALTHY_MULTIPLIER = 15.0
+
+# Fraction of TRAIN samples that get a synthetic agency-style watermark, and a
+# grain/recompression pass, stamped on regardless of class. Nothing is deleted
+# for carrying a real watermark; instead the mark is made statistically useless
+# (watermark_aug.py has the argument and the measurement). Roughly half is the
+# efficient choice: it maximises the entropy of the mark, so knowing whether an
+# image is marked tells the network as close to nothing as arithmetic allows.
+WM_RATE = 0.50
+SOURCE_NOISE_RATE = 0.35
 
 
 # ---------------------------------------------------------------- ingest ----
@@ -349,8 +371,21 @@ def split_sizes(n):
     return n - n_valid - n_test, n_valid, n_test
 
 
-def split_originals(images, seed):
-    """Assign every original to exactly one split. Mutates `images` in place."""
+def split_originals(images, seed, train_only=None):
+    """Assign every original to exactly one split. Mutates `images` in place.
+
+    `train_only` is a set of shas barred from valid and test — images carrying
+    a burned-in annotation, per clean_dataset.VERDICT_POLICY. They are useful
+    training material and harmless there, but an evaluation image with its own
+    label printed on it lets the model score by reading, and the number that
+    comes back would be measuring OCR rather than damage detection.
+
+    They are sorted to the FRONT of each class before the split boundary is
+    drawn, so they fill train from the start and the train/valid/test SIZES are
+    completely unchanged. Excluding them from the eval pool without doing this
+    would silently shrink valid and test.
+    """
+    train_only = train_only or set()
     global_box_counts = {}
     for rec in images:
         for c, n in rec["counts"].items():
@@ -368,6 +403,22 @@ def split_originals(images, seed):
         # class does not move when another class gains or loses images.
         random.Random(f"{seed}:{cls}").shuffle(rows)
         n_tr, n_va, n_te = split_sizes(len(rows))
+        if train_only:
+            # Stable partition: pinned images keep their shuffled order, so a
+            # class with none of them splits byte-identically to before.
+            pinned = [r for r in rows if r["sha"] in train_only]
+            rest = [r for r in rows if r["sha"] not in train_only]
+            if len(pinned) > n_tr:
+                # More pinned images than train can hold. Silently spilling
+                # them into valid is exactly the leak this exists to stop, so
+                # the overflow is dropped from the build and reported instead.
+                for r in pinned[n_tr:]:
+                    r["split"] = "excluded"     # never emitted, never counted
+                pinned = pinned[:n_tr]
+                rows = pinned + rest
+                n_tr, n_va, n_te = split_sizes(len(rows))
+            else:
+                rows = pinned + rest
         for i, rec in enumerate(rows):
             rec["split"] = ("train" if i < n_tr else
                             "valid" if i < n_tr + n_va else "test")
@@ -478,6 +529,32 @@ def sample_seed(sha, rep):
     return (int(sha[:8], 16) ^ ((rep + 1) * 2654435761)) & 0xFFFFFFFF
 
 
+def _bernoulli(sha, rep, salt, rate):
+    """Deterministic coin drawn from image content only — never from class.
+
+    That independence is the whole mechanism (see watermark_aug.py): a feature
+    present at the same rate in every class carries no information about the
+    class, so the network cannot use it as a shortcut. If this draw were ever
+    conditioned on the label, it would MANUFACTURE the correlation it exists to
+    destroy, so it takes the sha and nothing else.
+    """
+    h = int(hashlib.sha256(f"{salt}:{sha}:{rep}".encode()).hexdigest()[:8], 16)
+    return (h / 0xFFFFFFFF) < rate
+
+
+def mark_flags(sha, rep, split):
+    """(watermark, source_noise) for one sample.
+
+    Train only. Valid and test stay exactly as they arrived — the measurement
+    has to be taken on real pixels, and an augmented validation set measures
+    the augmentation.
+    """
+    if split != "train":
+        return False, False
+    return (_bernoulli(sha, rep, "wm", WM_RATE),
+            _bernoulli(sha, rep, "sn", SOURCE_NOISE_RATE))
+
+
 def build_samples(images, reps):
     """The full sample list, train ordered by repeat number.
 
@@ -495,15 +572,17 @@ def build_samples(images, reps):
             if reps.get(rec["sha"], 1) <= rep:
                 continue
             recipe = [] if rep == 0 else list(RECIPES[(rep - 1) % len(RECIPES)])
+            wm, sn = mark_flags(rec["sha"], rep, "train")
             out.append({"split": "train", "sha": rec["sha"],
                         "file": rec["file"], "rep": rep, "recipe": recipe,
+                        "wm": wm, "sn": sn,
                         "seed": sample_seed(rec["sha"], rep)})
     for split in ("valid", "test"):
         for rec in sorted([r for r in images if r["split"] == split],
                           key=lambda r: r["sha"]):
             # Never repeated, never augmented. This is the honest measurement.
             out.append({"split": split, "sha": rec["sha"], "file": rec["file"],
-                        "rep": 0, "recipe": [],
+                        "rep": 0, "recipe": [], "wm": False, "sn": False,
                         "seed": sample_seed(rec["sha"], 0)})
     return out
 
@@ -632,16 +711,51 @@ def format_report(plan):
 
 # ------------------------------------------------------------------ build ---
 
+def load_train_only(path):
+    """Read a train-only pin list: bare shas, or jsonl rows with a `sha`.
+
+    Also accepts clean_dataset's own cache format, keeping only the verdicts
+    whose policy is "train_only" — so the output of the cleaning pass can be
+    handed straight in without an intermediate conversion step.
+    """
+    if not path:
+        return set()
+    try:
+        from clean_dataset import policy_for
+    except Exception:                                       # pragma: no cover
+        def policy_for(_v):
+            return "train_only"
+    out = set()
+    with open(path) as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            if line.startswith("{"):
+                try:
+                    r = json.loads(line)
+                except ValueError:
+                    continue
+                sha = r.get("sha")
+                if sha and ("verdict" not in r
+                            or policy_for(r["verdict"]) == "train_only"):
+                    out.add(sha)
+            else:
+                out.add(line.split()[0])
+    return out
+
+
 def build(root, out_dir, target_per_class=None, max_repeat=15, seed=1337,
           unit="boxes", unhealthy=UNHEALTHY_MULTIPLIER, sha_cache=None,
-          report_only=False, verbose=True):
+          report_only=False, verbose=True, train_only=None):
     """Do the whole thing. Returns (plan, samples, images)."""
     root = os.path.abspath(root)
     images, stats = load_originals(root, sha_cache, verbose)
     if not images:
         raise SystemExit(f"no usable images found under {root}")
 
-    split_by_owner, global_box_counts = split_originals(images, seed)
+    split_by_owner, global_box_counts = split_originals(images, seed,
+                                                       train_only)
 
     train_recs = [r for r in images if r["split"] == "train"]
     real_train = count_units(train_recs, {r["sha"]: 1 for r in train_recs}, unit)
@@ -791,6 +905,60 @@ def selftest(root, target_per_class=None, max_repeat=15, seed=1337,
         check("reported achieved counts match the emitted index",
               not mismatch, str(mismatch or "exact"))
 
+        # 4c. THE DECORRELATION PROPERTY. Synthetic watermarks only neutralise
+        #     the real ones if they land on every class at the SAME rate; a
+        #     skewed stamp would create exactly the shortcut it is meant to
+        #     destroy. Measured per class against WM_RATE, not assumed.
+        wm_by_cls, n_by_cls = {}, {}
+        for s in samples:
+            if s["split"] != "train":
+                continue
+            for c in by_sha[s["sha"]]["counts"]:
+                n_by_cls[c] = n_by_cls.get(c, 0) + 1
+                wm_by_cls[c] = wm_by_cls.get(c, 0) + (1 if s["wm"] else 0)
+        skew = {}
+        for c, n in n_by_cls.items():
+            if n < 200:                    # too few to bound meaningfully
+                continue
+            rate = wm_by_cls[c] / n
+            # 4 binomial sigma, so a correct build effectively never trips it
+            tol = 4.0 * (WM_RATE * (1 - WM_RATE) / n) ** 0.5
+            if abs(rate - WM_RATE) > max(tol, 0.02):
+                skew[c] = round(rate, 4)
+        rates = {c: round(wm_by_cls[c] / n, 3) for c, n in n_by_cls.items()}
+        check(f"watermark rate is class-independent (target {WM_RATE}) {rates}",
+              not skew, f"skewed: {skew}")
+
+        # 4d. valid and test must carry no synthetic marks at all, or the
+        #     score measures the augmentation rather than the model
+        dirty = sum(1 for s in samples
+                    if s["split"] != "train" and (s["wm"] or s["sn"]))
+        check("valid and test carry zero synthetic marks", dirty == 0,
+              f"{dirty} marked eval samples")
+
+        # 4e. train_only pinning: images with a burned-in label must never
+        #     reach valid or test, and pinning them must not shrink either.
+        all_shas = sorted({r["sha"] for r in images})
+        pin = set(all_shas[::7])                 # ~14% of the corpus
+        import tempfile as _tf
+        with _tf.TemporaryDirectory() as c:
+            plan_p, samples_p, images_p = build(
+                root, c, target_per_class, max_repeat, seed, unit,
+                verbose=False, train_only=pin)
+            leaked = [s["sha"] for s in samples_p
+                      if s["split"] != "train" and s["sha"] in pin]
+            check(f"pinned images never reach valid or test ({len(pin)} pinned)",
+                  not leaked, f"{len(leaked)} leaked")
+            sz = {k: sum(1 for r in images_p if r["split"] == k)
+                  for k in ("train", "valid", "test")}
+            sz0 = {k: sum(1 for r in images if r["split"] == k)
+                   for k in ("train", "valid", "test")}
+            check(f"pinning leaves split sizes unchanged {sz}",
+                  sz == sz0, f"{sz} vs {sz0}")
+            evalpool = [s for s in samples_p if s["split"] in ("valid", "test")]
+            check("eval pool is still non-empty after pinning",
+                  len(evalpool) > 0, f"{len(evalpool)}")
+
         # 5. byte-identical reruns
         da, db = _dir_digest(a), _dir_digest(b)
         check("two runs with the same seed are byte-identical",
@@ -866,6 +1034,11 @@ def main():
                     help="count the target in annotation boxes (default) or "
                          "in images")
     ap.add_argument("--seed", type=int, default=1337)
+    ap.add_argument("--train-only-list",
+                    help="file of shas (one per line, or jsonl with a 'sha' "
+                         "field) barred from valid/test. Images with a "
+                         "burned-in label: fine to train on, never to score "
+                         "on. See clean_dataset.VERDICT_POLICY.")
     ap.add_argument("--unhealthy-multiplier", type=float,
                     default=UNHEALTHY_MULTIPLIER,
                     help="flag any class needing more than this multiplier "
@@ -887,10 +1060,14 @@ def main():
     if not args.report_only and not args.out:
         ap.error("--out is required unless --report-only is given")
 
+    pin = load_train_only(args.train_only_list)
+    if pin:
+        print(f"train-only pins: {len(pin):,} shas barred from valid/test")
+
     plan, _samples, _images = build(
         args.coco, args.out, args.target_per_class, args.max_repeat,
         args.seed, args.unit, args.unhealthy_multiplier, args.sha_cache,
-        report_only=args.report_only)
+        report_only=args.report_only, train_only=pin)
     print(format_report(plan))
     if args.report_only:
         print("\n--report-only: nothing was written.")

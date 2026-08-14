@@ -309,6 +309,45 @@ def classify(path, use_ocr=True):
 VERDICTS = ("kept", "burned_in_annotation", "annotation_suspect",
             "stock_licensed", "destroyed", "unreadable")
 
+# What a verdict COSTS an image. Detecting something is not the same as
+# discarding it, and this table is where that distinction is made once instead
+# of being implied by whichever caller happens to act on the verdict.
+#
+#   "keep"       usable everywhere, train and eval alike
+#   "train_only" usable for training, barred from valid and test
+#   "drop"       no usable pixels at all
+#
+# stock_licensed is "keep" and that is a deliberate reversal. A watermark is
+# class-INDEPENDENT decoration: the same string on everything an agency sells,
+# carrying no information about whether the car is dented. It only becomes a
+# problem when marked images cluster into one class, and that is fixed properly
+# in watermark_aug.py by stamping synthetic marks across every class at an
+# equal rate — measured at 0.844 accuracy for a probe exploiting a skewed mark
+# against 0.512, chance, once the rate is levelled. Deleting the image was
+# always the crude fix for a problem the augmentation solves outright.
+#
+# burned_in_annotation is NOT the same thing and does not get the same
+# treatment. The word "scratch" printed on a scratch is class-DEPENDENT text —
+# the correlation is the entire content of the mark, so no amount of random
+# stamping dilutes it. Such an image can still teach a detector something from
+# the car underneath, so it trains; but in valid or test it would let the model
+# score by reading a caption, and the number that comes back would be measuring
+# OCR. It trains, it never scores. annotation_suspect is the same risk on
+# weaker evidence — roughly half are red cars and rust — so it takes the same
+# cautious route rather than being deleted on a coin flip.
+VERDICT_POLICY = {
+    "kept": "keep",
+    "stock_licensed": "keep",
+    "burned_in_annotation": "train_only",
+    "annotation_suspect": "train_only",
+    "destroyed": "drop",
+    "unreadable": "drop",
+}
+
+
+def policy_for(verdict):
+    return VERDICT_POLICY.get(verdict or "kept", "keep")
+
 
 def _report(counts, examples, label):
     total = sum(counts.values())
