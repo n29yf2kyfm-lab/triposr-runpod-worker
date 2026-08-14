@@ -201,6 +201,42 @@ with `steel` and every trim material, because clay_rebuild gives all dark trim o
 value. And a second strong candidate is ADVISORY only — on the Juke `black_matt`
 moves 17% and is genuine unpainted cladding that must not be resprayed.
 
+**RANK CANDIDATES BY SURFACE AREA, NOT VERTEX COUNT** (fixed 2026-08-14 on the
+2026 Clio). A smooth body panel is a few big quads and is vertex-CHEAP; tyres,
+arch liners and interiors are vertex-dense. The Clio's body is **18.4% of area but
+only 4.8% of verts**, while its tyre/arch/interior material is 66.1% of area at
+39.5% of verts — ranking by verts put the body 11th of 12 and off the end of the
+candidate list, and the probe reported "no confident body material" on a car whose
+body was sitting right there.
+
+**And the lamp exclusion ate a COLOUR NAME.** The Clio's body is
+`M_0132_LightGray`; `light` matched it, so it was never a candidate. Same class as
+the `backlight_glass` trap this file already records, reproduced inside my own
+regex. `light` must not be followed by gray/grey/blue/green/red/brown/beige/silver.
+Both fixes re-validated: 6/6, the five known-good answers unchanged.
+
+**A SPECULAR HIGHLIGHT IS NOT A MATERIAL BOUNDARY.** On the Clio's red control the
+roof LOOKED unpainted in both 3/4 views, which would have meant a grey roof on all
+eight variants. Measured on the top view it goes [253.9,253.9,254.3] ->
+[163.9,21.1,23.7] — it was painted all along, and the white was a blown highlight.
+Same clipping trap as the AgX white-tyre episode. Measure the pixels.
+
+## glass_probe: `alpha_shell` fires on BLEND-at-alpha-1.0 (open, 2026-08-14)
+
+Found on the Kia Sportage GT-Line, which reports `alpha_shell=true` and is a
+perfectly normal car: 37 of its 43 materials are opaque and the 6 transparent ones
+are exactly window / glass_Clear / glass_tinted / red_glass / light / red_light.
+The flag fires on `st_black`, a trim material with `alphaMode=BLEND` but
+**baseColorFactor alpha = 1.0** — declared blend, actually opaque.
+
+`build_car.py` gate G3 treats `alpha_shell` as a HARD FAIL, so this can scrap a
+good car on one mislabelled trim material. The genuine global-alpha shell signature
+is unaffected (every material transparent at ~0.25, `body mats=0, cov=0.000`).
+The fix is to require the body-ish material to be ACTUALLY transparent — factor
+alpha < 1.0 or a transmission extension — not merely `alphaMode != OPAQUE`.
+NOT YET FIXED: changing glass_probe requires the PORSCHE_GLASS.json re-validation
+this file mandates, and that was not run. Do not "just tweak it" without that.
+
 ## RENDER-SIDE INVERSION: the mechanism, found at last (2026-08-11, Mazda wave)
 
 This file has carried "the worker flips some cars at render time (~8% measured on the
