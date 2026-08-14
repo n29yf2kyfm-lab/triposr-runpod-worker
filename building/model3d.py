@@ -1412,6 +1412,15 @@ def _with_buildability(model):
     except ImportError:                     # pragma: no cover - optional
         pass
 
+    # The bill of quantities counts what the services designs
+    # specified, so it runs LAST of the design passes.
+    try:
+        import quantities as _q
+        out["quantities_bill"] = _q.bill(model, heat=out.get("heat"),
+                                         elec=out.get("elec"))
+    except ImportError:                     # pragma: no cover - optional
+        pass
+
     # THE RULES ENGINE FINALLY RUNS. regs.py has carried measured Part K,
     # B1 and F limits since it was written and was imported by nothing but
     # its own tests — the pipeline's "compliance findings" silently excluded
@@ -1475,6 +1484,8 @@ def _absorb_buildability(model, extra):
         model["vent"] = extra["vent"]
     if extra.get("elec"):
         model["elec"] = extra["elec"]
+    if extra.get("quantities_bill"):
+        model["quantities_bill"] = extra["quantities_bill"]
     model["warnings"] = list(extra["warnings"])
 
 

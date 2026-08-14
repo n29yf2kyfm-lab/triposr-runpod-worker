@@ -8,6 +8,7 @@ import unittest
 import model3d as M
 import electrics
 import heatloss
+import quantities
 import ventilation
 
 
@@ -206,6 +207,86 @@ class TestElectrics(unittest.TestCase):
         self.assertNotIn("Ring final - first floor", names)  # one storey
         self.assertIn("Ring final - ground floor", names)
         self.assertIn("Kitchen ring final", names)
+
+
+class TestQuantities(unittest.TestCase):
+    """Longhand checks: one plain box whose arithmetic fits in a comment."""
+
+    def _model(self):
+        rooms = [M.Room("Living room", 0.0, 0.0, 4.0, 5.0, kind="room")]
+        model = M.build(rooms, storeys=1, storey_height=2.7,
+                        roof={"pitch_deg": 30.0, "kind": "gabled",
+                              "overhang": 0.3, "max_span_m": 12.0})
+        return model
+
+    def test_brick_count_longhand(self):
+        model = self._model()
+        b = quantities.bill(model)
+        bricks = next(L for L in b["groups"]["masonry"]
+                      if L["item"] == "Facing bricks")
+        # Perimeter 18 m x 2.4 m = 43.2 m2 gross, less the model's rule
+        # openings; x60/m2, +5% waste. Bound it rather than chase the
+        # rule-window areas: gross gives 2,592 + waste = 2,722 max.
+        self.assertLess(bricks["quantity"], 43.2 * 60 * 1.05 + 1)
+        self.assertGreater(bricks["quantity"], 30.0 * 60)
+        self.assertIn("60/m2", bricks["basis"])
+
+    def test_level_none_openings_repeat_per_storey(self):
+        rooms = [M.Room("Living room", 0.0, 0.0, 4.0, 5.0, kind="room")]
+        m1 = M.build(rooms, storeys=1, storey_height=2.7,
+                     roof={"pitch_deg": 30.0, "kind": "gabled",
+                           "overhang": 0.3, "max_span_m": 12.0})
+        m2 = M.build([M.Room("Living room", 0.0, 0.0, 4.0, 5.0,
+                             kind="room", storeys=2)], storeys=2,
+                     storey_height=2.7,
+                     roof={"pitch_deg": 30.0, "kind": "gabled",
+                           "overhang": 0.3, "max_span_m": 12.0})
+        n1, _, c1, _ = quantities._external(m1)
+        n2, _, c2, _ = quantities._external(m2)
+        # two storeys: roughly double the net wall and at least as many
+        # opening repeats — never the single-storey figures
+        self.assertGreater(n2, n1 * 1.7)
+        self.assertGreaterEqual(c2, c1)
+
+    def test_roof_tiles_from_sloped_area(self):
+        model = self._model()
+        b = quantities.bill(model)
+        tiles = next(L for L in b["groups"]["roof"]
+                     if L["item"].startswith("Roof covering"))
+        area = model["roof"]["sloped_area_m2"]
+        self.assertAlmostEqual(tiles["net_quantity"], area * 10.5,
+                               delta=1.0)
+        # switching covering changes the count by the coverage ratio
+        b2 = quantities.bill(model, covering="plain_tile")
+        tiles2 = next(L for L in b2["groups"]["roof"]
+                      if L["item"].startswith("Roof covering"))
+        self.assertAlmostEqual(tiles2["net_quantity"] / tiles["net_quantity"],
+                               60.0 / 10.5, places=1)
+
+    def test_services_lengths_follow_designs(self):
+        model = self._model()
+        heat = heatloss.design(model)
+        elec = electrics.design(model, heat=heat)
+        b = quantities.bill(model, heat=heat, elec=elec)
+        cable = next(L for L in b["groups"]["services"]
+                     if L["item"].startswith("2.5mm2"))
+        self.assertAlmostEqual(
+            cable["net_quantity"],
+            elec["sockets_twin_total"] * quantities.CABLE_M_PER_SOCKET,
+            delta=0.1)
+
+    def test_pipeline_carries_the_bill(self):
+        model = self._model()
+        extra = M._with_buildability(model)
+        M._absorb_buildability(model, extra)
+        self.assertIn("quantities_bill", model)
+        groups = model["quantities_bill"]["groups"]
+        self.assertTrue(groups["masonry"] and groups["roof"]
+                        and groups["finishes"])
+        # sockets existed by the time the bill ran, so cable is non-zero
+        cable = next(L for L in groups["services"]
+                     if L["item"].startswith("2.5mm2"))
+        self.assertGreater(cable["quantity"], 0)
 
 
 if __name__ == "__main__":
