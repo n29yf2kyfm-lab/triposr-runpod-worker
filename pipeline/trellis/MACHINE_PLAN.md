@@ -88,6 +88,16 @@ Three-way sheet: `scratchpad p1/base_shootout3.jpg`, quad_views rig.
 fine-tune path. Hi3DGen stays as a label/normal source if ever needed; do not
 re-run it as a shape candidate.
 
+**"Is there a Hunyuan 3 to clone?" — checked 2026-08-14, answer NO.** Tencent's
+official HF org holds exactly: 1, 2, 2mini, 2mv, 2.1, Part, Omni. The 3.0/3.5
+tier is API-only; weights never released. Two findings that support this plan:
+Hunyuan3D-Part is itself tagged `finetune:tencent/Hunyuan3D-2.1` — Tencent
+builds its own specialist models by fine-tuning 2.1, the exact move we are
+making with cars. And our Phase 2a dataset is in Hunyuan's native training
+layout, so if a 3.x ever opens (a standing revisit trigger) the dataset
+transfers as-is. Hunyuan3D-Omni (2.1-based, control signals: point cloud /
+bbox / skeleton) is parked as a possible later conditioning add-on.
+
 ### Phase 2 — OUR OWN MODEL: fine-tune open weights on our own catalogue
 
 **Owner decision 2026-08-14: no commercial API in the loop. The machine must be
