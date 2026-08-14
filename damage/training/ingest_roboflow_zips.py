@@ -86,7 +86,7 @@ CLASS_RULES = [
       # the source project and a mapper that only knows correct spellings is
       # a mapper that silently drops a tenth of the corpus.
       "dislocat", "disalocat", "lost part", "body puncture",
-      "deframe"), "structural"),
+      "deframe", "separation", "separated"), "structural"),
     (("broken", "break", "shatter", "damaged part", "broken part",
       "sidemirror damage", "side mirror damage", "mirror damage",
       "rusak", "hasar"), "structural"),
