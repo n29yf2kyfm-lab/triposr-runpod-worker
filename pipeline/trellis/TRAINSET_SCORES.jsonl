@@ -394,3 +394,237 @@
 {"assetId": "hyundai-tucson-2015-w12-v1", "make": "hyundai", "model": "Tucson", "bytes": 1152688, "crease": 58.3, "faces": 33152, "diag": 541.52}
 {"assetId": "volkswagen-golf-2016-w12-v1", "make": "volkswagen", "model": "Golf", "bytes": 7266684, "crease": 101.8, "faces": 95364, "diag": 5.0}
 {"assetId": "bmw-m3-2023-w12-v1", "make": "bmw", "model": "M3", "bytes": 12767808, "error": "ValueError: chunk was not expected length!"}
+{"assetId": "skoda-octavia-2021-w12-v1", "make": "skoda", "model": "Octavia", "bytes": 11159812, "crease": 28.1, "faces": 169999, "diag": 14.23}
+{"assetId": "honda-civic-2023-w12-v1", "make": "honda", "model": "Civic", "bytes": 17663716, "crease": 278.1, "faces": 237181, "diag": 5.32}
+{"assetId": "byd-seal-2024-w12-v1", "make": "byd", "model": "Seal", "bytes": 20407352, "crease": 0.0, "faces": 136564, "diag": 540.88}
+{"assetId": "volkswagen-golf-2025-w12-v1", "make": "volkswagen", "model": "Golf", "bytes": 22256408, "crease": 271.6, "faces": 489700, "diag": 5.0}
+{"assetId": "bmw-m4-w12-v1", "make": "bmw", "model": "M4", "bytes": 23548860, "crease": 70.8, "faces": 506866, "diag": 477.15}
+{"assetId": "jeep-compass-2022-w12-v1", "make": "jeep", "model": "Compass", "bytes": 14697996, "crease": 275.8, "faces": 334688, "diag": 5.13}
+{"assetId": "mercedes-benz-a-class-2018-w12-v1", "make": "mercedes-benz", "model": "A-Class", "bytes": 16032196, "crease": 113.4, "faces": 367949, "diag": 26.94}
+{"assetId": "vauxhall-astra-2012-w12-v1", "make": "vauxhall", "model": "Astra", "bytes": 13543284, "crease": 28.6, "faces": 349965, "diag": 3336.92}
+{"assetId": "peugeot-206-2002-w12-v1", "make": "peugeot", "model": "206", "bytes": 4591168, "crease": 38.8, "faces": 87701, "diag": 16.44}
+{"assetId": "mercedes-benz-e-class-w12-v1", "make": "mercedes-benz", "model": "E-Class", "bytes": 37334564, "crease": 229.4, "faces": 362853, "diag": 5.52}
+{"assetId": "peugeot-3008-w12-v1", "make": "peugeot", "model": "3008", "bytes": 6043804, "crease": 100.8, "faces": 69517, "diag": 509.34}
+{"assetId": "audi-a4-2005-w12-v1", "make": "audi", "model": "A4", "bytes": 3163756, "crease": 64.7, "faces": 31831, "diag": 5.19}
+{"assetId": "volkswagen-golf-2002-w12-v1", "make": "volkswagen", "model": "Golf", "bytes": 4984672, "crease": 69.8, "faces": 81853, "diag": 5.03}
+{"assetId": "nissan-micra-2004-w12-v1", "make": "nissan", "model": "Micra", "bytes": 3398552, "crease": 23.6, "faces": 78591, "diag": 9.16}
+{"assetId": "ford-focus-2006-w12-v1", "make": "ford", "model": "Focus", "bytes": 2423080, "crease": 66.5, "faces": 32943, "diag": 5.04}
+{"assetId": "ford-focus-2009-w12-v1", "make": "ford", "model": "Focus", "bytes": 9145468, "crease": 120.8, "faces": 187374, "diag": 5.44}
+{"assetId": "ford-fiesta-2009-w12-v1", "make": "ford", "model": "Fiesta", "bytes": 6939504, "crease": 46.7, "faces": 32321, "diag": 4.77}
+{"assetId": "land-rover-range-rover-evoque-2011-w12-v1", "make": "land-rover", "model": "Range Rover Evoque", "bytes": 3399888, "crease": 75.5, "faces": 45672, "diag": 5.09}
+{"assetId": "ford-focus-2013-w12-v1", "make": "ford", "model": "Focus", "bytes": 3949436, "crease": 28.4, "faces": 64682, "diag": 5.09}
+{"assetId": "honda-civic-2015-w12-v1", "make": "honda", "model": "Civic", "bytes": 4394436, "crease": 111.4, "faces": 56710, "diag": 5.1}
+{"assetId": "ford-mustang-2015-w12-v1", "make": "ford", "model": "Mustang", "bytes": 4597584, "crease": 107.3, "faces": 63242, "diag": 5.48}
+{"assetId": "bmw-x3-2018-w12-v1", "make": "bmw", "model": "X3", "bytes": 6842456, "crease": 16.6, "faces": 78321, "diag": 217.99}
+{"assetId": "bmw-x5-2019-w12-v1", "make": "bmw", "model": "X5", "bytes": 6656984, "crease": 42.3, "faces": 106718, "diag": 6.31}
+{"assetId": "bmw-3-series-2014-w12-v1", "make": "bmw", "model": "3 Series", "bytes": 31615912, "crease": 217.2, "faces": 939641, "diag": 13354.48}
+{"assetId": "bmw-x1-2020-w12-v1", "make": "bmw", "model": "X1", "bytes": 12746512, "crease": 0.2, "faces": 109951, "diag": 7.43}
+{"assetId": "skoda-octavia-2019-w12-v1", "make": "skoda", "model": "Octavia", "bytes": 7986408, "crease": 72.2, "faces": 132520, "diag": 531.21}
+{"assetId": "skoda-kamiq-2020-w12-v1", "make": "skoda", "model": "Kamiq", "bytes": 6929684, "crease": 44.4, "faces": 115379, "diag": 513.53}
+{"assetId": "skoda-kodiaq-2020-w12-v1", "make": "skoda", "model": "Kodiaq", "bytes": 12038372, "crease": 51.1, "faces": 206890, "diag": 5.44}
+{"assetId": "porsche-718-cayman-2020-w12-v1", "make": "porsche", "model": "718 Cayman", "bytes": 12745324, "crease": 212.2, "faces": 199186, "diag": 5.14}
+{"assetId": "bmw-3-series-2021-w12-v1", "make": "bmw", "model": "3 Series", "bytes": 9523188, "crease": 40.9, "faces": 210110, "diag": 10.35}
+{"assetId": "ford-mustang-mach-e-2021-w12-v1", "make": "ford", "model": "Mustang Mach-E", "bytes": 16184448, "crease": 240.7, "faces": 268045, "diag": 5.53}
+{"assetId": "volkswagen-golf-2021-w12-v1", "make": "volkswagen", "model": "Golf", "bytes": 25384364, "crease": 219.7, "faces": 543082, "diag": 5.0}
+{"assetId": "volkswagen-polo-2021-w12-v1", "make": "volkswagen", "model": "Polo", "bytes": 12330016, "crease": 46.3, "faces": 212740, "diag": 478.14}
+{"assetId": "volkswagen-golf-2020-w12-v1", "make": "volkswagen", "model": "Golf", "bytes": 5615704, "draco": true, "crease": 196.0, "faces": 1860567, "diag": 501.08}
+{"assetId": "hyundai-tucson-2022-w12-v1", "make": "hyundai", "model": "Tucson", "bytes": 17540396, "crease": 34.2, "faces": 331797, "diag": 5229.95}
+{"assetId": "hyundai-elantra-2022-w12-v1", "make": "hyundai", "model": "Elantra", "bytes": 16475980, "crease": 283.0, "faces": 251445, "diag": 5.43}
+{"assetId": "mercedes-benz-e-class-2022-w12-v1", "make": "mercedes-benz", "model": "E-Class", "bytes": 5056960, "draco": true, "crease": 1.2, "faces": 474610, "diag": 878.08}
+{"assetId": "volkswagen-polo-2022-w12-v1", "make": "volkswagen", "model": "Polo", "bytes": 39546296, "crease": 116.4, "faces": 1241118, "diag": 5068.6}
+{"assetId": "volkswagen-golf-2025-w12-v2", "make": "volkswagen", "model": "Golf", "bytes": 21812472, "crease": 247.9, "faces": 474647, "diag": 5.0}
+{"assetId": "volkswagen-tiguan-2022-w12-v1", "make": "volkswagen", "model": "Tiguan", "bytes": 36450652, "crease": 30.7, "faces": 729652, "diag": 60.08}
+{"assetId": "suzuki-swift-2024-w12-v1", "make": "suzuki", "model": "Swift", "bytes": 26514600, "crease": 265.4, "faces": 478578, "diag": 4.62}
+{"assetId": "volkswagen-passat-2025-w12-v1", "make": "volkswagen", "model": "Passat", "bytes": 17211324, "crease": 205.8, "faces": 339017, "diag": 5.65}
+{"assetId": "fiat-500-w12-v1", "make": "fiat", "model": "500", "bytes": 29045940, "crease": 20.1, "faces": 783133, "diag": 690.98}
+{"assetId": "peugeot-e-2008-w12-v1", "make": "peugeot", "model": "e-2008", "bytes": 33443192, "crease": 159.5, "faces": 703028, "diag": 5.23}
+{"assetId": "mercedes-benz-c-class-w12-v1", "make": "mercedes-benz", "model": "C-Class", "bytes": 7382876, "draco": true, "crease": 0.0, "faces": 1132844, "diag": 5410.25}
+{"assetId": "peugeot-508-w12-v1", "make": "peugeot", "model": "508", "bytes": 7378296, "draco": true, "crease": 183.8, "faces": 873961, "diag": 6.08}
+{"assetId": "volkswagen-golf-w12-v1", "make": "volkswagen", "model": "Golf", "bytes": 11257168, "crease": 190.0, "faces": 239153, "diag": 10.53}
+{"assetId": "suzuki-swift-w12-v1", "make": "suzuki", "model": "Swift", "bytes": 15526528, "crease": 1.7, "faces": 424172, "diag": 4871.75}
+{"assetId": "volvo-v60-2013-w12-v1", "make": "volvo", "model": "V60", "bytes": 3704096, "crease": 7.5, "faces": 53130, "diag": 5.43}
+{"assetId": "volkswagen-fox-2004-vw1-v1", "make": "volkswagen", "model": "fox", "bytes": 13278136, "crease": 3.3, "faces": 132181, "diag": 4.8}
+{"assetId": "volkswagen-new-beetle-2006-vw2-v1", "make": "volkswagen", "model": "new beetle", "bytes": 11784464, "crease": 1.4, "faces": 134126, "diag": 4.83}
+{"assetId": "volkswagen-sharan-vw1-v1", "make": "volkswagen", "model": "sharan", "bytes": 39651540, "crease": 72.8, "faces": 521632, "diag": 5.63}
+{"assetId": "volkswagen-golf-2017-vw2-v1", "make": "volkswagen", "model": "golf", "bytes": 30563616, "crease": 38.7, "faces": 818042, "diag": 402.45}
+{"assetId": "volkswagen-golf-gti-2025-vw2-v1", "make": "volkswagen", "model": "golf gti", "bytes": 30729888, "crease": 22.9, "faces": 550051, "diag": 745.28}
+{"assetId": "volkswagen-golf-gti-vw2-v1", "make": "volkswagen", "model": "golf gti", "bytes": 33154224, "crease": 121.7, "faces": 318160, "diag": 660.14}
+{"assetId": "volkswagen-golf-r-2019-vw2-v1", "make": "volkswagen", "model": "golf r", "bytes": 18472484, "crease": 187.6, "faces": 297935, "diag": 5.05}
+{"assetId": "volkswagen-id-buzz-2021-vw2-v1", "make": "volkswagen", "model": "id buzz", "bytes": 8324928, "crease": 243.3, "faces": 242243, "diag": 509.34}
+{"assetId": "volkswagen-jetta-2019-vw2-v1", "make": "volkswagen", "model": "jetta", "bytes": 21205048, "crease": 130.4, "faces": 376518, "diag": 643.66}
+{"assetId": "volkswagen-golf-gti-2021-vw2-v1", "make": "volkswagen", "model": "golf gti", "bytes": 19975272, "crease": 108.7, "faces": 260361, "diag": 5.02}
+{"assetId": "volkswagen-jetta-2010-vw2-v1", "make": "volkswagen", "model": "jetta", "bytes": 26917260, "crease": 134.1, "faces": 851147, "diag": 516.74}
+{"assetId": "volkswagen-polo-gti-2023-vw2-v1", "make": "volkswagen", "model": "polo gti", "bytes": 14367340, "crease": 0.0, "faces": 416184, "diag": 769065.43}
+{"assetId": "volkswagen-polo-gti-2011-vw2-v1", "make": "volkswagen", "model": "polo gti", "bytes": 9740944, "crease": 3.3, "faces": 176657, "diag": 350.69}
+{"assetId": "volkswagen-scirocco-r-2015-vw2-v1", "make": "volkswagen", "model": "scirocco r", "bytes": 10345424, "crease": 196.7, "faces": 123583, "diag": 12.59}
+{"assetId": "volkswagen-t-cross-vw2-v1", "make": "volkswagen", "model": "t-cross", "bytes": 10033608, "crease": 74.5, "faces": 172102, "diag": 498.09}
+{"assetId": "volkswagen-transporter-2003-vw2-v1", "make": "volkswagen", "model": "transporter", "bytes": 3773308, "crease": 64.3, "faces": 96410, "diag": 18.2}
+{"assetId": "volkswagen-tiguan-2020-vw2-v1", "make": "volkswagen", "model": "tiguan", "bytes": 15977768, "crease": 41.0, "faces": 192580, "diag": 5.41}
+{"assetId": "land-rover-range-rover-sport-2015-rr1-v1", "make": "land-rover", "model": "range rover sport", "bytes": 5471164, "crease": 146.5, "faces": 74127, "diag": 5.67}
+{"assetId": "land-rover-range-rover-sport-2018-rr1-v1", "make": "land-rover", "model": "range rover sport", "bytes": 23172552, "crease": 135.6, "faces": 523344, "diag": 3.43}
+{"assetId": "land-rover-range-rover-sport-2023-rr1-v1", "make": "land-rover", "model": "range rover sport", "bytes": 16370368, "crease": 45.2, "faces": 448577, "diag": 140.71}
+{"assetId": "audi-a3-ad1-v1", "make": "audi", "model": "a3", "bytes": 25780860, "crease": 114.1, "faces": 537706, "diag": 9.94}
+{"assetId": "audi-a3-2021-ad1-v1", "make": "audi", "model": "a3", "bytes": 10474272, "crease": 102.8, "faces": 194324, "diag": 5.22}
+{"assetId": "audi-a6-c7-ad1-v1", "make": "audi", "model": "a6 c7", "bytes": 32459864, "crease": 202.7, "faces": 461408, "diag": 5.69}
+{"assetId": "audi-q3-sportback-ad1-v1", "make": "audi", "model": "q3 sportback", "bytes": 10598892, "crease": 267.7, "faces": 343432, "diag": 6.45}
+{"assetId": "audi-a6-c8-ad1-v1", "make": "audi", "model": "a6 c8", "bytes": 31180744, "crease": 156.0, "faces": 301880, "diag": 7.0}
+{"assetId": "audi-tt-rs-2006-ad1-v1", "make": "audi", "model": "tt rs", "bytes": 36373252, "crease": 127.3, "faces": 1110206, "diag": 481.31}
+{"assetId": "audi-tts-ad1-v1", "make": "audi", "model": "tts", "bytes": 27884640, "crease": 184.1, "faces": 616899, "diag": 465.26}
+{"assetId": "audi-a7-2017-ad1-v1", "make": "audi", "model": "a7", "bytes": 30510772, "crease": 33.0, "faces": 790810, "diag": 16385.83}
+{"assetId": "audi-s5-2021-ad1-v1", "make": "audi", "model": "s5", "bytes": 47739028, "crease": 0.0, "faces": 464574, "diag": 239.02}
+{"assetId": "audi-q4-e-tron-ad1-v1", "make": "audi", "model": "q4 e-tron", "bytes": 39796736, "error": "ValueError: chunk was not expected length!"}
+{"assetId": "audi-s3-ad1-v1", "make": "audi", "model": "s3", "bytes": 25392748, "crease": 0.0, "faces": 200145, "diag": 5.05}
+{"assetId": "audi-rs5-2021-ad1-v1", "make": "audi", "model": "rs5", "bytes": 22942736, "crease": 284.2, "faces": 517930, "diag": 5.35}
+{"assetId": "audi-rs5-2020-ad1-v1", "make": "audi", "model": "rs5", "bytes": 10589144, "crease": 48.0, "faces": 231932, "diag": 5.3}
+{"assetId": "audi-s1-ad1-v1", "make": "audi", "model": "s1", "bytes": 17001912, "crease": 32.6, "faces": 202329, "diag": 18.05}
+{"assetId": "audi-rs-e-tron-gt-2026-ad1-v1", "make": "audi", "model": "rs e-tron gt", "bytes": 25878660, "crease": 92.7, "faces": 760129, "diag": 8800.58}
+{"assetId": "bmw-3-series-touring-bm1-v1", "make": "bmw", "model": "3 series touring", "bytes": 31596060, "crease": 217.2, "faces": 939641, "diag": 13354.48}
+{"assetId": "bmw-m1-bm1-v1", "make": "bmw", "model": "m1", "bytes": 29956952, "crease": 128.9, "faces": 914173, "diag": 5.29}
+{"assetId": "bmw-m4-competition-2021-bm1-v1", "make": "bmw", "model": "m4 competition", "bytes": 34309084, "crease": 31.3, "faces": 682507, "diag": 521.7}
+{"assetId": "bmw-850csi-e31-1996-bm1-v1", "make": "bmw", "model": "850csi e31", "bytes": 28196392, "crease": 140.5, "faces": 668986, "diag": 508.78}
+{"assetId": "bmw-728i-e23-1982-bm1-v1", "make": "bmw", "model": "728i e23", "bytes": 23176408, "crease": 124.4, "faces": 701369, "diag": 546.9}
+{"assetId": "bmw-z8-2000-bm1-v1", "make": "bmw", "model": "z8", "bytes": 23477760, "crease": 101.8, "faces": 580279, "diag": 404.57}
+{"assetId": "bmw-x6-m-2022-bm1-v1", "make": "bmw", "model": "x6 m", "bytes": 20404672, "crease": 0.2, "faces": 492890, "diag": 505.46}
+{"assetId": "bmw-x7-m60i-bm1-v1", "make": "bmw", "model": "x7 m60i", "bytes": 14716308, "crease": 377.1, "faces": 437850, "diag": 5.32}
+{"assetId": "bmw-m235i-bm2-v1", "make": "bmw", "model": "m235i", "bytes": 27513656, "crease": 205.9, "faces": 373855, "diag": 5.16}
+{"assetId": "bmw-m440i-gran-coupe-2022-bm1-v1", "make": "bmw", "model": "m440i gran coupe", "bytes": 20546840, "crease": 22.5, "faces": 413530, "diag": 3867.63}
+{"assetId": "bmw-330i-2019-bm2-v1", "make": "bmw", "model": "330i", "bytes": 18394164, "crease": 233.6, "faces": 344811, "diag": 5.45}
+{"assetId": "bmw-5-series-1995-bm2-v1", "make": "bmw", "model": "5 series", "bytes": 10648928, "crease": 165.7, "faces": 286684, "diag": 5.67}
+{"assetId": "bmw-m5-2024-bm2-v1", "make": "bmw", "model": "m5", "bytes": 32063492, "crease": 3.1, "faces": 279953, "diag": 11083.31}
+{"assetId": "bmw-m5-2003-bm2-v1", "make": "bmw", "model": "m5", "bytes": 24443496, "crease": 37.9, "faces": 270475, "diag": 94.46}
+{"assetId": "bmw-x5-1999-bm2-v1", "make": "bmw", "model": "x5", "bytes": 29224656, "crease": 44.9, "faces": 209596, "diag": 5.48}
+{"assetId": "bmw-8-series-2020-bm2-v1", "make": "bmw", "model": "8 series", "bytes": 18108188, "crease": 98.3, "faces": 206876, "diag": 5.47}
+{"assetId": "bmw-m6-2004-bm2-v1", "make": "bmw", "model": "m6", "bytes": 16200240, "crease": 14.8, "faces": 182050, "diag": 75.97}
+{"assetId": "bmw-1m-bm2-v1", "make": "bmw", "model": "1m", "bytes": 7250264, "crease": 58.2, "faces": 100582, "diag": 514.4}
+{"assetId": "bmw-m850i-2020-bm2-v1", "make": "bmw", "model": "m850i", "bytes": 6430672, "crease": 50.5, "faces": 87756, "diag": 5.72}
+{"assetId": "bmw-3-0-csl-1973-bm2-v1", "make": "bmw", "model": "3.0 csl", "bytes": 5291572, "crease": 84.0, "faces": 86494, "diag": 5.18}
+{"assetId": "bmw-m4-2018-bm2-v1", "make": "bmw", "model": "m4", "bytes": 6017576, "crease": 108.1, "faces": 65819, "diag": 5.31}
+{"assetId": "bmw-318ti-bm3-v1", "make": "bmw", "model": "318ti", "bytes": 6384784, "crease": 9.2, "faces": 108743, "diag": 56332.79}
+{"assetId": "bmw-i8-bm3-v1", "make": "bmw", "model": "i8", "bytes": 39402928, "crease": 342.5, "faces": 912700, "diag": 209.16}
+{"assetId": "bmw-m2-2023-bm3-v1", "make": "bmw", "model": "m2", "bytes": 38217500, "crease": 160.1, "faces": 867798, "diag": 6.85}
+{"assetId": "bmw-x5-m-2020-bm3-v1", "make": "bmw", "model": "x5 m", "bytes": 19014304, "crease": 50.3, "faces": 319318, "diag": 10113.66}
+{"assetId": "bmw-m235i-2014-bm3-v1", "make": "bmw", "model": "m235i", "bytes": 8125684, "crease": 53.5, "faces": 120281, "diag": 23.16}
+{"assetId": "bmw-isetta-1956-bm3-v1", "make": "bmw", "model": "isetta", "bytes": 4902628, "crease": 96.8, "faces": 91107, "diag": 3.12}
+{"assetId": "bmw-x6-m-2015-bm3-v1", "make": "bmw", "model": "x6 m", "bytes": 5284892, "crease": 118.5, "faces": 61519, "diag": 5.66}
+{"assetId": "bmw-i7-2023-bm3-v1", "make": "bmw", "model": "i7", "bytes": 21252440, "crease": 0.0, "faces": 210142, "diag": 240.17}
+{"assetId": "bmw-5-series-1988-bm3-v1", "make": "bmw", "model": "5 series", "bytes": 7148440, "crease": 0.5, "faces": 125574, "diag": 254.82}
+{"assetId": "bmw-m5-2025-bm3-v1", "make": "bmw", "model": "m5", "bytes": 21082208, "crease": 404.2, "faces": 391091, "diag": 5.8}
+{"assetId": "jaguar-xkr-2009-ib1-v1", "make": "jaguar", "model": "xkr", "bytes": 5360380, "crease": 32.9, "faces": 41636, "diag": 537.69}
+{"assetId": "audi-quattro-1980-ib1-v1", "make": "audi", "model": "quattro", "bytes": 3180404, "crease": 32.9, "faces": 48787, "diag": 5.06}
+{"assetId": "jaguar-xj220-1992-ib1-v1", "make": "jaguar", "model": "xj220", "bytes": 20500868, "crease": 266.8, "faces": 362418, "diag": 5.62}
+{"assetId": "volkswagen-golf-gti-1976-ib1-v1", "make": "volkswagen", "model": "golf gti", "bytes": 3838096, "crease": 119.1, "faces": 48825, "diag": 4.26}
+{"assetId": "seat-exeo-2009-st1-v2", "make": "seat", "model": "exeo", "bytes": 15473556, "crease": 42.3, "faces": 461548, "diag": 749.85}
+{"assetId": "seat-toledo-1999-st1-v1", "make": "seat", "model": "toledo", "bytes": 13417904, "crease": 204.9, "faces": 450414, "diag": 52.0}
+{"assetId": "seat-exeo-2009-st1-v1", "make": "seat", "model": "exeo", "bytes": 17666308, "crease": 39.6, "faces": 521805, "diag": 95851.13}
+{"assetId": "seat-alhambra-2010-st1-v1", "make": "seat", "model": "alhambra", "bytes": 22889724, "crease": 87.8, "faces": 595345, "diag": 20.67}
+{"assetId": "seat-toledo-2004-st1-v1", "make": "seat", "model": "toledo", "bytes": 7352268, "crease": 48.0, "faces": 209291, "diag": 424.97}
+{"assetId": "seat-alhambra-2000-st2-v1", "make": "seat", "model": "alhambra", "bytes": 12300156, "crease": 94.7, "faces": 413170, "diag": 194.86}
+{"assetId": "toyota-gr-corolla-2023-tw1-v1", "make": "toyota", "model": "gr-corolla", "bytes": 18979056, "crease": 253.6, "faces": 482036, "diag": 22.33}
+{"assetId": "seat-alhambra-2015-st1-v1", "make": "seat", "model": "alhambra", "bytes": 33683368, "crease": 105.7, "faces": 985084, "diag": 592.71}
+{"assetId": "toyota-gr86-2023-tw1-v1", "make": "toyota", "model": "gr86", "bytes": 18044200, "crease": 31.4, "faces": 244180, "diag": 0.92}
+{"assetId": "toyota-bz4x-tw1-v1", "make": "toyota", "model": "bz4x", "bytes": 35908096, "crease": 201.9, "faces": 431616, "diag": 5.38}
+{"assetId": "toyota-prius-2016-tw1-v1", "make": "toyota", "model": "prius", "bytes": 44890436, "crease": 4.2, "faces": 438303, "diag": 5.22}
+{"assetId": "toyota-land-cruiser-1998-tw1-v1", "make": "toyota", "model": "land-cruiser", "bytes": 21909684, "crease": 148.9, "faces": 837272, "diag": 556.99}
+{"assetId": "toyota-iq-tw1-v1", "make": "toyota", "model": "iq", "bytes": 15663168, "crease": 379.2, "faces": 604159, "diag": 4.0}
+{"assetId": "toyota-celica-1981-tw1-v1", "make": "toyota", "model": "celica", "bytes": 24771440, "crease": 121.8, "faces": 813795, "diag": 497.97}
+{"assetId": "toyota-supra-tw1-v1", "make": "toyota", "model": "supra", "bytes": 29314540, "crease": 502.5, "faces": 855272, "diag": 5.17}
+{"assetId": "toyota-mirai-tw1-v1", "make": "toyota", "model": "mirai", "bytes": 11449260, "crease": 42.8, "faces": 194757, "diag": 5.67}
+{"assetId": "toyota-gt86-tw1-v1", "make": "toyota", "model": "gt86", "bytes": 37399636, "crease": 108.4, "faces": 1152374, "diag": 30.49}
+{"assetId": "toyota-c-hr-2022-tw1-v1", "make": "toyota", "model": "c-hr", "bytes": 10253524, "crease": 86.8, "faces": 200817, "diag": 5.07}
+{"assetId": "toyota-highlander-2020-tw1-v1", "make": "toyota", "model": "highlander", "bytes": 16062388, "crease": 110.3, "faces": 200288, "diag": 5.69}
+{"assetId": "toyota-prius-2010-tw1-v1", "make": "toyota", "model": "prius", "bytes": 29250724, "crease": 138.0, "faces": 963253, "diag": 514.0}
+{"assetId": "toyota-supra-tw1-v2", "make": "toyota", "model": "supra", "bytes": 32144580, "crease": 124.9, "faces": 989357, "diag": 512.68}
+{"assetId": "toyota-camry-1997-tw1-v1", "make": "toyota", "model": "camry", "bytes": 36967316, "crease": 120.0, "faces": 998603, "diag": 538.41}
+{"assetId": "toyota-avensis-tw1-v1", "make": "toyota", "model": "avensis", "bytes": 34605720, "crease": 105.7, "faces": 1130789, "diag": 526.35}
+{"assetId": "toyota-avensis-tw1-v2", "make": "toyota", "model": "avensis", "bytes": 28895072, "crease": 127.5, "faces": 884404, "diag": 518.85}
+{"assetId": "toyota-proace-city-verso-2020-tw1-v1", "make": "toyota", "model": "proace-city-verso", "bytes": 43767948, "crease": 0.0, "faces": 420392, "diag": 233.73}
+{"assetId": "toyota-rav4-2021-tw1-v1", "make": "toyota", "model": "rav4", "bytes": 13401120, "crease": 118.9, "faces": 274565, "diag": 1099.3}
+{"assetId": "toyota-camry-2007-tw1-v1", "make": "toyota", "model": "camry", "bytes": 36599088, "crease": 264.9, "faces": 1124430, "diag": 541.8}
+{"assetId": "toyota-hilux-2005-tw1-v1", "make": "toyota", "model": "hilux", "bytes": 38430996, "crease": 136.3, "faces": 1195696, "diag": 556.91}
+{"assetId": "toyota-hilux-1988-tw1-v1", "make": "toyota", "model": "hilux", "bytes": 28947500, "crease": 186.7, "faces": 827028, "diag": 513.37}
+{"assetId": "toyota-gr-yaris-2021-tw2-v1", "make": "toyota", "model": "gr-yaris", "bytes": 20342652, "crease": 411.4, "faces": 431232, "diag": 4.75}
+{"assetId": "toyota-land-cruiser-2024-tw1-v1", "make": "toyota", "model": "land-cruiser", "bytes": 46559156, "crease": 279.7, "faces": 1101024, "diag": 6.23}
+{"assetId": "toyota-hilux-1978-tw1-v1", "make": "toyota", "model": "hilux", "bytes": 36577360, "crease": 133.4, "faces": 1140236, "diag": 526.95}
+{"assetId": "mercedes-benz-gl-class-2012-mw1-v1", "make": "mercedes-benz", "model": "gl-class", "bytes": 6656236, "crease": 10.4, "faces": 102126, "diag": 24.79}
+{"assetId": "mercedes-benz-gl-class-2011-mw1-v1", "make": "mercedes-benz", "model": "gl-class", "bytes": 46356784, "crease": 10.0, "faces": 945899, "diag": 577.13}
+{"assetId": "mercedes-benz-slr-mclaren-2004-mw1-v1", "make": "mercedes-benz", "model": "slr-mclaren", "bytes": 37859160, "crease": 395.2, "faces": 743808, "diag": 5.24}
+{"assetId": "mercedes-benz-sls-amg-2012-mw1-v1", "make": "mercedes-benz", "model": "sls-amg", "bytes": 13984240, "crease": 172.6, "faces": 96822, "diag": 10.83}
+{"assetId": "mercedes-benz-m-class-2013-mw1-v1", "make": "mercedes-benz", "model": "m-class", "bytes": 6887232, "crease": 0.2, "faces": 67582, "diag": 5591.03}
+{"assetId": "mercedes-benz-cls-2013-mw1-v1", "make": "mercedes-benz", "model": "cls", "bytes": 6481136, "crease": 91.0, "faces": 126859, "diag": 5774.26}
+{"assetId": "mercedes-benz-sls-amg-2013-mw1-v1", "make": "mercedes-benz", "model": "sls-amg", "bytes": 19012944, "crease": 196.2, "faces": 339995, "diag": 6.62}
+{"assetId": "mercedes-benz-eqv-2020-mw1-v1", "make": "mercedes-benz", "model": "eqv", "bytes": 44658912, "crease": 0.0, "faces": 431283, "diag": 231.05}
+{"assetId": "mercedes-benz-300-sl-mw1-v1", "make": "mercedes-benz", "model": "300-sl", "bytes": 22359332, "crease": 206.6, "faces": 640458, "diag": 687.23}
+{"assetId": "mercedes-benz-slr-mclaren-mw1-v1", "make": "mercedes-benz", "model": "slr-mclaren", "bytes": 2724292, "crease": 84.0, "faces": 66582, "diag": 5.2}
+{"assetId": "mercedes-benz-c-class-mw1-v2", "make": "mercedes-benz", "model": "c-class", "bytes": 24014804, "crease": 140.5, "faces": 743516, "diag": 511.36}
+{"assetId": "mercedes-benz-c-class-mw1-v3", "make": "mercedes-benz", "model": "c-class", "bytes": 21008124, "crease": 131.1, "faces": 644745, "diag": 507.56}
+{"assetId": "mercedes-benz-e-class-mw1-v1", "make": "mercedes-benz", "model": "e-class", "bytes": 40842412, "crease": 143.8, "faces": 1178577, "diag": 529.77}
+{"assetId": "mercedes-benz-e-class-mw1-v5", "make": "mercedes-benz", "model": "e-class", "bytes": 27098600, "crease": 130.3, "faces": 883968, "diag": 534.55}
+{"assetId": "mercedes-benz-e-class-2010-mw1-v1", "make": "mercedes-benz", "model": "e-class", "bytes": 39262940, "crease": 139.7, "faces": 1010070, "diag": 549.72}
+{"assetId": "mercedes-benz-gla-mw1-v1", "make": "mercedes-benz", "model": "gla", "bytes": 11778448, "crease": 283.0, "faces": 443654, "diag": 5.12}
+{"assetId": "mercedes-benz-glc-mw1-v2", "make": "mercedes-benz", "model": "glc", "bytes": 40603380, "crease": 191.4, "faces": 1109418, "diag": 552.94}
+{"assetId": "mercedes-benz-glk-mw1-v1", "make": "mercedes-benz", "model": "glk", "bytes": 44888556, "crease": 25.2, "faces": 936289, "diag": 523.92}
+{"assetId": "mercedes-benz-ponton-mw1-v1", "make": "mercedes-benz", "model": "ponton", "bytes": 41933888, "crease": 157.5, "faces": 1148662, "diag": 506.33}
+{"assetId": "mercedes-benz-s-class-1999-mw1-v1", "make": "mercedes-benz", "model": "s-class", "bytes": 21062792, "crease": 164.4, "faces": 673694, "diag": 574.58}
+{"assetId": "mercedes-benz-s-class-1979-mw1-v1", "make": "mercedes-benz", "model": "s-class", "bytes": 31874128, "crease": 109.0, "faces": 1042111, "diag": 557.45}
+{"assetId": "mercedes-benz-s-class-2003-mw1-v1", "make": "mercedes-benz", "model": "s-class", "bytes": 27725012, "crease": 259.4, "faces": 885846, "diag": 572.03}
+{"assetId": "mercedes-benz-sl-class-1963-mw1-v1", "make": "mercedes-benz", "model": "sl-class", "bytes": 34241108, "crease": 128.7, "faces": 981465, "diag": 466.49}
+{"assetId": "mercedes-benz-amg-gt-mw1-v1", "make": "mercedes-benz", "model": "amg-gt", "bytes": 22075900, "crease": 150.9, "faces": 158161, "diag": 5.25}
+{"assetId": "mercedes-benz-sl-class-mw1-v1", "make": "mercedes-benz", "model": "sl-class", "bytes": 25912944, "crease": 155.0, "faces": 860964, "diag": 478.3}
+{"assetId": "mercedes-benz-clk-gtr-mw1-v1", "make": "mercedes-benz", "model": "clk-gtr", "bytes": 14682400, "crease": 103.6, "faces": 216817, "diag": 5.54}
+{"assetId": "mercedes-benz-cls-mw1-v2", "make": "mercedes-benz", "model": "cls", "bytes": 16479700, "crease": 27.4, "faces": 356887, "diag": 65.52}
+{"assetId": "mercedes-benz-g-class-mw1-v1", "make": "mercedes-benz", "model": "g-class", "bytes": 33053320, "crease": 39.6, "faces": 445907, "diag": 262.77}
+{"assetId": "mercedes-benz-slr-mclaren-mw1-v2", "make": "mercedes-benz", "model": "slr-mclaren", "bytes": 23225664, "crease": 202.1, "faces": 312546, "diag": 204.43}
+{"assetId": "mercedes-benz-sls-amg-mw1-v1", "make": "mercedes-benz", "model": "sls-amg", "bytes": 9694132, "crease": 98.9, "faces": 153309, "diag": 22.5}
+{"assetId": "peugeot-3008-pw1-v1", "make": "peugeot", "model": "3008", "bytes": 5709880, "crease": 100.8, "faces": 69517, "diag": 509.34}
+{"assetId": "mercedes-benz-sls-amg-2012-mw1-v3", "make": "mercedes-benz", "model": "sls-amg", "bytes": 37187844, "crease": 156.3, "faces": 946757, "diag": 35.41}
+{"assetId": "peugeot-307-pw1-v1", "make": "peugeot", "model": "307", "bytes": 33563956, "crease": 398.8, "faces": 799152, "diag": 196.08}
+{"assetId": "peugeot-206-2000-pw1-v1", "make": "peugeot", "model": "206", "bytes": 12065536, "crease": 4.8, "faces": 115247, "diag": 4.67}
+{"assetId": "peugeot-205-1997-pw1-v1", "make": "peugeot", "model": "205", "bytes": 23927708, "crease": 2.7, "faces": 244213, "diag": 4.39}
+{"assetId": "peugeot-2008-2018-pw1-v1", "make": "peugeot", "model": "2008", "bytes": 42652996, "crease": 4.6, "faces": 400461, "diag": 4.99}
+{"assetId": "peugeot-2008-2020-pw1-v1", "make": "peugeot", "model": "2008", "bytes": 28683440, "crease": 0.0, "faces": 361568, "diag": 210.82}
+{"assetId": "peugeot-205-pw1-v1", "make": "peugeot", "model": "205", "bytes": 23336548, "crease": 92.5, "faces": 575012, "diag": 1705.13}
+{"assetId": "peugeot-207-pw1-v1", "make": "peugeot", "model": "207", "bytes": 5394216, "crease": 119.7, "faces": 145900, "diag": 5265.7}
+{"assetId": "peugeot-207-pw1-v2", "make": "peugeot", "model": "207", "bytes": 17056768, "crease": 139.6, "faces": 523008, "diag": 464.28}
+{"assetId": "peugeot-rcz-pw1-v1", "make": "peugeot", "model": "rcz", "bytes": 5918472, "crease": 101.6, "faces": 115391, "diag": 3.36}
+{"assetId": "peugeot-404-pw1-v1", "make": "peugeot", "model": "404", "bytes": 6953996, "crease": 41.2, "faces": 65040, "diag": 5.36}
+{"assetId": "peugeot-308-2026-pw1-v1", "make": "peugeot", "model": "308", "bytes": 42339652, "crease": 282.8, "faces": 913119, "diag": 7.73}
+{"assetId": "peugeot-308-pw1-v1", "make": "peugeot", "model": "308", "bytes": 23260588, "crease": 70.5, "faces": 257132, "diag": 5.25}
+{"assetId": "honda-insight-2010-hw1-v1", "make": "honda", "model": "insight", "bytes": 34606304, "crease": 268.6, "faces": 1176215, "diag": 511.48}
+{"assetId": "peugeot-207-pw1-v3", "make": "peugeot", "model": "207", "bytes": 40045272, "crease": 76.0, "faces": 324181, "diag": 11.63}
+{"assetId": "honda-concerto-1988-hw1-v1", "make": "honda", "model": "concerto", "bytes": 41501712, "crease": 151.8, "faces": 1118518, "diag": 497.25}
+{"assetId": "honda-integra-1995-hw1-v1", "make": "honda", "model": "integra", "bytes": 33580268, "crease": 93.1, "faces": 1102118, "diag": 492.79}
+{"assetId": "honda-prelude-1983-hw1-v1", "make": "honda", "model": "prelude", "bytes": 32684100, "crease": 212.5, "faces": 1056796, "diag": 497.02}
+{"assetId": "honda-cr-x-1988-hw1-v1", "make": "honda", "model": "cr-x", "bytes": 38687548, "crease": 132.2, "faces": 1047311, "diag": 430.56}
+{"assetId": "honda-odyssey-1999-hw1-v1", "make": "honda", "model": "odyssey", "bytes": 35018584, "crease": 212.0, "faces": 1050287, "diag": 544.03}
+{"assetId": "honda-prelude-1978-hw1-v1", "make": "honda", "model": "prelude", "bytes": 32103732, "crease": 167.8, "faces": 1005261, "diag": 460.84}
+{"assetId": "honda-odyssey-2008-hw1-v1", "make": "honda", "model": "odyssey", "bytes": 31521456, "crease": 145.4, "faces": 1041666, "diag": 580.96}
+{"assetId": "honda-hr-v-2025-hw1-v1", "make": "honda", "model": "hr-v", "bytes": 45102536, "crease": 0.0, "faces": 994296, "diag": 206.74}
+{"assetId": "honda-beat-1991-hw1-v1", "make": "honda", "model": "beat", "bytes": 35006076, "crease": 113.5, "faces": 989413, "diag": 380.07}
+{"assetId": "honda-cr-z-2011-hw1-v1", "make": "honda", "model": "cr-z", "bytes": 31529424, "crease": 104.8, "faces": 970700, "diag": 473.83}
+{"assetId": "honda-accord-2021-hw1-v1", "make": "honda", "model": "accord", "bytes": 40059996, "crease": 458.8, "faces": 933379, "diag": 157.39}
+{"assetId": "honda-accord-hw1-v1", "make": "honda", "model": "accord", "bytes": 36151660, "crease": 125.8, "faces": 1081048, "diag": 536.58}
+{"assetId": "honda-s660-2015-hw1-v1", "make": "honda", "model": "s660", "bytes": 29177936, "crease": 147.4, "faces": 928330, "diag": 388.54}
+{"assetId": "honda-accord-1998-hw1-v1", "make": "honda", "model": "accord", "bytes": 33722556, "crease": 120.8, "faces": 910214, "diag": 530.16}
+{"assetId": "honda-accord-2011-hw1-v1", "make": "honda", "model": "accord", "bytes": 34368200, "crease": 131.8, "faces": 907038, "diag": 536.4}
+{"assetId": "honda-odyssey-2011-hw1-v1", "make": "honda", "model": "odyssey", "bytes": 26471996, "crease": 261.8, "faces": 918108, "diag": 588.75}
+{"assetId": "honda-accord-2009-hw1-v1", "make": "honda", "model": "accord", "bytes": 34037836, "crease": 138.1, "faces": 897602, "diag": 539.78}
+{"assetId": "honda-accord-2003-hw1-v1", "make": "honda", "model": "accord", "bytes": 27358216, "crease": 229.1, "faces": 878310, "diag": 529.87}
+{"assetId": "honda-prelude-1997-hw1-v1", "make": "honda", "model": "prelude", "bytes": 30194648, "crease": 120.5, "faces": 837177, "diag": 513.27}
+{"assetId": "honda-crosstour-hw1-v1", "make": "honda", "model": "crosstour", "bytes": 36219616, "crease": 18.6, "faces": 784468, "diag": 562.88}
+{"assetId": "honda-odyssey-1994-hw1-v1", "make": "honda", "model": "odyssey", "bytes": 23855944, "crease": 108.2, "faces": 688230, "diag": 534.98}
+{"assetId": "honda-civic-1987-hw1-v1", "make": "honda", "model": "civic", "bytes": 22057468, "crease": 147.0, "faces": 657812, "diag": 480.31}
+{"assetId": "honda-odyssey-2001-hw1-v1", "make": "honda", "model": "odyssey", "bytes": 23506260, "crease": 134.6, "faces": 646253, "diag": 5.39}
+{"assetId": "honda-nsx-1992-hw1-v1", "make": "honda", "model": "nsx", "bytes": 22479516, "crease": 127.5, "faces": 655938, "diag": 498.84}
+{"assetId": "honda-civic-1996-hw1-v1", "make": "honda", "model": "civic", "bytes": 19793168, "crease": 133.0, "faces": 581707, "diag": 512.45}
+{"assetId": "honda-civic-1991-hw1-v1", "make": "honda", "model": "civic", "bytes": 19143768, "crease": 150.1, "faces": 608322, "diag": 469.24}
+{"assetId": "honda-civic-1976-hw1-v1", "make": "honda", "model": "civic", "bytes": 17783292, "crease": 138.4, "faces": 565474, "diag": 423.84}
+{"assetId": "honda-nsx-1992-hw1-v2", "make": "honda", "model": "nsx", "bytes": 18587696, "crease": 282.8, "faces": 349458, "diag": 5.04}
+{"assetId": "honda-cr-x-1995-hw1-v1", "make": "honda", "model": "cr-x", "bytes": 14358732, "crease": 96.0, "faces": 273133, "diag": 4.58}
+{"assetId": "honda-hr-v-2001-hw1-v1", "make": "honda", "model": "hr-v", "bytes": 34390652, "crease": 131.0, "faces": 895929, "diag": 479.76}
+{"assetId": "honda-s2000-1999-hw1-v1", "make": "honda", "model": "s2000", "bytes": 14043972, "crease": 79.0, "faces": 253654, "diag": 15.35}
+{"assetId": "honda-civic-2023-hw1-v1", "make": "honda", "model": "civic", "bytes": 11529892, "crease": 49.2, "faces": 236664, "diag": 5.19}
+{"assetId": "honda-civic-1999-hw1-v1", "make": "honda", "model": "civic", "bytes": 11142648, "crease": 131.3, "faces": 188170, "diag": 5.04}
+{"assetId": "honda-nsx-1992-hw1-v3", "make": "honda", "model": "nsx", "bytes": 10947716, "crease": 46.2, "faces": 234946, "diag": 4.97}
+{"assetId": "honda-civic-hw1-v2", "make": "honda", "model": "civic", "bytes": 8398772, "crease": 136.4, "faces": 185659, "diag": 5.25}
+{"assetId": "honda-cr-v-2001-hw1-v1", "make": "honda", "model": "cr-v", "bytes": 2224956, "crease": 84.9, "faces": 65287, "diag": 17.73}
+{"assetId": "honda-jazz-2016-hw1-v1", "make": "honda", "model": "jazz", "bytes": 4957876, "crease": 27.9, "faces": 118755, "diag": 104.86}
