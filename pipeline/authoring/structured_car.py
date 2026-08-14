@@ -179,9 +179,15 @@ def glass_mask(car, us, REG):
     return g
 
 
-def emit_grid(P, sel, side):
-    """Mesh the selected quads for ONE side (+1 right, -1 left)."""
-    V, F, idx = [], [], {}
+def emit_grid(P, sel, side, us=None):
+    """Mesh the selected quads for ONE side (+1 right, -1 left).
+
+    When `us` is given, also returns per-vertex UVs in the skin's texture
+    space: u along the car (the loft parameter itself), v = section fraction.
+    Both sides share the map — mirror symmetry, like a real car's livery.
+    """
+    V, F, UV, idx = [], [], [], {}
+    NUu, nv = P.shape[0], P.shape[1]
 
     def vid(i, j):
         key = (i, j)
@@ -191,9 +197,10 @@ def emit_grid(P, sel, side):
                 p[2] = -p[2]
             idx[key] = len(V)
             V.append(p)
+            if us is not None:
+                UV.append([us[i], 1.0 - j / (nv - 1)])
         return idx[key]
 
-    NUu, nv = P.shape[0], P.shape[1]
     for i in range(NUu - 1):
         for j in range(nv - 1):
             if not sel[i, j]:
@@ -205,7 +212,11 @@ def emit_grid(P, sel, side):
             else:
                 F += [[a, c, b], [a, d, c]]
     if not V:
-        return np.zeros((0, 3)), np.zeros((0, 3), dtype=np.uint32)
+        z = np.zeros((0, 3))
+        return (z, np.zeros((0, 3), dtype=np.uint32),
+                np.zeros((0, 2))) if us is not None else (z, np.zeros((0, 3), dtype=np.uint32))
+    if us is not None:
+        return np.array(V), np.array(F, dtype=np.uint32), np.array(UV)
     return np.array(V), np.array(F, dtype=np.uint32)
 
 
@@ -286,9 +297,42 @@ def plates(car):
     return out                                # [front, rear]
 
 
-def build_structured(car, out, root_name=None):
+def section_marks(REG, us):
+    """Measure the skin's v-landmarks from the REAL grid, mid-cabin station.
+
+    skin.py paints the swage line, sill band and handles at these fractions;
+    measuring them from REG (instead of hardcoding) keeps paint and geometry
+    agreeing for every body style. v runs 1 - j/(nv-1) to match emit_grid.
+    """
+    i = int(np.argmin(np.abs(us - 0.5)))
+    row = REG[i]
+    nv = len(row)
+
+    def frac(j):
+        return 1.0 - j / (nv - 1)
+    sill_j = max(np.where(row <= 1)[0]) if (row <= 1).any() else 4
+    belt_j = min(np.where(row == 4)[0]) if (row == 4).any() else nv // 2
+    sh = np.where(row == 3)[0]
+    shoulder_j = int(sh.mean()) if len(sh) else (sill_j + belt_j) // 2
+    return {"sill": frac(sill_j), "belt": frac(belt_j),
+            "shoulder": frac(shoulder_j)}
+
+
+def build_structured(car, out, root_name=None, textured=True):
+    from skin import paint_skin
+
     g = GLB(generator=f"structured_car/{car.name}")
-    m_paint = g.material("Material_0", [0.72, 0.73, 0.75, 1.0], 0.10, 0.28)
+
+    P, REG, us, arch, axles, arch_r = loft(car)
+
+    if textured:
+        base_png, normal_png = paint_skin(car, section_marks(REG, us))
+        t_base = g.texture(base_png)
+        t_norm = g.texture(normal_png)
+        m_paint = g.material("Material_0", [0.72, 0.73, 0.75, 1.0], 0.10, 0.28,
+                             base_tex=t_base, normal_tex=t_norm)
+    else:
+        m_paint = g.material("Material_0", [0.72, 0.73, 0.75, 1.0], 0.10, 0.28)
     m_glass = g.material("Glass_Tint", [0.03, 0.04, 0.05, 0.26], 0.0, 0.05, blend=True)
     m_tyre = g.material("Tyre_Rubber", [0.026, 0.026, 0.030, 1.0], 0.0, 0.92)
     m_rim = g.material("Rim_Alloy", [0.52, 0.53, 0.55, 1.0], 0.92, 0.28)
@@ -302,49 +346,62 @@ def build_structured(car, out, root_name=None):
     n_bump = g.group("bumpers", root)
     n_whl = g.group("wheels", root)
 
-    P, REG, us, arch, axles, arch_r = loft(car)
     gmask = glass_mask(car, us, REG)
     names = classify(car, us, REG, gmask)
     names[arch] = None                                     # arch holes
+    uv_us = us if textured else None
 
     def sel(name):
         return np.array([[names[i, j] == name for j in range(names.shape[1])]
                          for i in range(names.shape[0])])
 
+    def emit_both(mask):
+        parts = [emit_grid(P, mask, +1, us=uv_us), emit_grid(P, mask, -1, us=uv_us)]
+        Vs = [p[0] for p in parts if len(p[1])]
+        if not Vs:
+            return None
+        V = np.concatenate(Vs)
+        off, Fs, UVs = 0, [], []
+        for p in parts:
+            if len(p[1]):
+                Fs.append(p[1] + off)
+                off += len(p[0])
+                if uv_us is not None:
+                    UVs.append(p[2])
+        UV = np.concatenate(UVs) if UVs else None
+        return V, np.concatenate(Fs), UV
+
     # symmetric panels: one mesh spanning both sides
     for pn in ("hood", "roof", "trunk", "shell", "bumper_front", "bumper_rear"):
-        m = sel(pn)
-        parts = [emit_grid(P, m, +1), emit_grid(P, m, -1)]
-        Vs = [v for v, f in parts if len(f)]
-        if not Vs:
+        got = emit_both(sel(pn))
+        if not got:
             continue
-        V = np.concatenate(Vs)
-        off, Fs = 0, []
-        for v, f in parts:
-            if len(f):
-                Fs.append(f + off)
-                off += len(v)
+        V, F, UV = got
         parent = n_bump if pn.startswith("bumper") else n_body
-        g.mesh(pn, V, np.concatenate(Fs), m_paint, parent=parent)
+        g.mesh(pn, V, F, m_paint, parent=parent, uvs=UV)
 
     # doors: four separate panels, L/R from the grid side
     for pn, out_name_r, out_name_l in (("door_front", "door_FR", "door_FL"),
                                        ("door_rear", "door_RR", "door_RL")):
         m = sel(pn)
         # UK viewer convention in this repo: +z = right side of the car
-        V, F = emit_grid(P, m, +1)
-        g.mesh(out_name_r, V, F, m_paint, parent=n_body)
-        V, F = emit_grid(P, m, -1)
-        g.mesh(out_name_l, V, F, m_paint, parent=n_body)
+        for side, nm in ((+1, out_name_r), (-1, out_name_l)):
+            got = emit_grid(P, m, side, us=uv_us)
+            V, F = got[0], got[1]
+            UV = got[2] if uv_us is not None else None
+            g.mesh(nm, V, F, m_paint, parent=n_body, uvs=UV)
 
-    # caps join the bumpers
+    # caps join the bumpers. They share Material_0 (so resprays cover them),
+    # so they need TEXCOORD_0 too — pinned to a blank white patch of the map.
     (cfV, cfF), (crV, crF) = caps(P)
-    g.mesh("bumper_front_cap", cfV, cfF, m_paint, parent=n_bump)
-    g.mesh("bumper_rear_cap", crV, crF, m_paint, parent=n_bump)
+    blank = lambda V: (np.full((len(V), 2), [0.5, 0.02])    # noqa: E731
+                       if textured else None)
+    g.mesh("bumper_front_cap", cfV, cfF, m_paint, parent=n_bump, uvs=blank(cfV))
+    g.mesh("bumper_rear_cap", crV, crF, m_paint, parent=n_bump, uvs=blank(crV))
 
     # glass, one mesh both sides
     parts = [emit_grid(P, gmask & ~arch, +1), emit_grid(P, gmask & ~arch, -1)]
-    V = np.concatenate([v for v, f in parts])
+    V = np.concatenate([p[0] for p in parts])
     F = np.concatenate([parts[0][1], parts[1][1] + len(parts[0][0])])
     g.mesh("glass", V, F, m_glass, parent=root)
 

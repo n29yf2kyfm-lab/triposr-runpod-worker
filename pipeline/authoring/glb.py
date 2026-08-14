@@ -88,9 +88,37 @@ class GLB:
             self.g["nodes"][parent].setdefault("children", []).append(idx)
         return idx
 
+    def texture(self, png_bytes):
+        """Embed a PNG in the BIN chunk and return a texture index.
+
+        Textures ride the same buffer as the geometry — images carry a
+        bufferView + mimeType instead of a URI, which keeps the GLB
+        self-contained (and is exactly the layout the ranged-read probes in
+        pipeline/ingest already know how to walk).
+        """
+        view = self._view(png_bytes, None)
+        # bufferViews for images must not carry a target
+        del self.g["bufferViews"][view]["target"]
+        self.g.setdefault("images", []).append(
+            {"bufferView": view, "mimeType": "image/png"})
+        self.g.setdefault("samplers", [])
+        if not self.g["samplers"]:
+            self.g["samplers"].append({"magFilter": 9729, "minFilter": 9987,
+                                       "wrapS": 10497, "wrapT": 10497})
+        self.g.setdefault("textures", []).append(
+            {"source": len(self.g["images"]) - 1, "sampler": 0})
+        return len(self.g["textures"]) - 1
+
     def material(self, name, base, metal=0.0, rough=0.5, blend=False,
-                 double_sided=True, emissive=None):
-        """Create (or reuse) a named material and return its index."""
+                 double_sided=True, emissive=None, base_tex=None,
+                 normal_tex=None, normal_scale=1.0):
+        """Create (or reuse) a named material and return its index.
+
+        base_tex / normal_tex are texture indices from texture(). The
+        baseColorFactor stays authoritative for resprays: glTF multiplies
+        factor x texture, so respray_gltf's factor rewrite tints the textured
+        panels exactly as it tints flat ones.
+        """
         if name in self._mat_index:
             return self._mat_index[name]
         m = {
@@ -102,6 +130,11 @@ class GLB:
             },
             "doubleSided": bool(double_sided),
         }
+        if base_tex is not None:
+            m["pbrMetallicRoughness"]["baseColorTexture"] = {"index": base_tex}
+        if normal_tex is not None:
+            m["normalTexture"] = {"index": normal_tex,
+                                  "scale": float(normal_scale)}
         if blend:
             m["alphaMode"] = "BLEND"
         if emissive:
@@ -110,12 +143,13 @@ class GLB:
         self._mat_index[name] = len(self.g["materials"]) - 1
         return self._mat_index[name]
 
-    def mesh(self, name, V, F, material, normals=None, parent=None):
+    def mesh(self, name, V, F, material, normals=None, parent=None, uvs=None):
         """Add one triangle mesh as its own node, optionally under a group.
 
         Separate nodes, not one merged primitive: part separation is what makes
         the material rulings enforceable (paint can never reach a tyre that is
-        its own mesh with its own material).
+        its own mesh with its own material). `uvs` is an (n,2) array in [0,1];
+        required on any mesh whose material carries a texture.
         """
         V = np.ascontiguousarray(V, dtype=np.float32)
         F = np.ascontiguousarray(F, dtype=np.uint32)
@@ -129,8 +163,14 @@ class GLB:
         ap = self._acc(vp, 5126, len(V), "VEC3", V.min(0).tolist(), V.max(0).tolist())
         an = self._acc(vn, 5126, len(V), "VEC3")
         ai = self._acc(vi, 5125, F.size, "SCALAR")
+        attrs = {"POSITION": ap, "NORMAL": an}
+        if uvs is not None:
+            U = np.ascontiguousarray(uvs, dtype=np.float32)
+            assert len(U) == len(V), f"{name}: {len(U)} uvs for {len(V)} verts"
+            vt = self._view(U.tobytes(), 34962)
+            attrs["TEXCOORD_0"] = self._acc(vt, 5126, len(U), "VEC2")
         self.g["meshes"].append({"name": name, "primitives": [{
-            "attributes": {"POSITION": ap, "NORMAL": an},
+            "attributes": attrs,
             "indices": ai, "material": material}]})
         self.g["nodes"].append({"mesh": len(self.g["meshes"]) - 1, "name": name})
         idx = len(self.g["nodes"]) - 1
