@@ -73,6 +73,21 @@ class GLB:
         return len(self.g["accessors"]) - 1
 
     # ---------------------------------------------------------------- public
+    def group(self, name, parent=None):
+        """An empty node used purely to give the file a readable part tree.
+
+        The owner's spec (2026-08-14) is a NAMED hierarchy — body/hood,
+        wheels/wheel_FL and so on — because a GLB whose outline reads like a
+        parts list is inspectable, repairable and re-materialable per panel.
+        """
+        self.g["nodes"].append({"name": name})
+        idx = len(self.g["nodes"]) - 1
+        if parent is None:
+            self.g["scenes"][0]["nodes"].append(idx)
+        else:
+            self.g["nodes"][parent].setdefault("children", []).append(idx)
+        return idx
+
     def material(self, name, base, metal=0.0, rough=0.5, blend=False,
                  double_sided=True, emissive=None):
         """Create (or reuse) a named material and return its index."""
@@ -95,8 +110,8 @@ class GLB:
         self._mat_index[name] = len(self.g["materials"]) - 1
         return self._mat_index[name]
 
-    def mesh(self, name, V, F, material, normals=None):
-        """Add one triangle mesh as its own node.
+    def mesh(self, name, V, F, material, normals=None, parent=None):
+        """Add one triangle mesh as its own node, optionally under a group.
 
         Separate nodes, not one merged primitive: part separation is what makes
         the material rulings enforceable (paint can never reach a tyre that is
@@ -105,7 +120,7 @@ class GLB:
         V = np.ascontiguousarray(V, dtype=np.float32)
         F = np.ascontiguousarray(F, dtype=np.uint32)
         if len(F) == 0:
-            return
+            return None
         N = vertex_normals(V, F) if normals is None else np.ascontiguousarray(
             normals, dtype=np.float32)
         vp = self._view(V.tobytes(), 34962)
@@ -118,7 +133,12 @@ class GLB:
             "attributes": {"POSITION": ap, "NORMAL": an},
             "indices": ai, "material": material}]})
         self.g["nodes"].append({"mesh": len(self.g["meshes"]) - 1, "name": name})
-        self.g["scenes"][0]["nodes"].append(len(self.g["nodes"]) - 1)
+        idx = len(self.g["nodes"]) - 1
+        if parent is None:
+            self.g["scenes"][0]["nodes"].append(idx)
+        else:
+            self.g["nodes"][parent].setdefault("children", []).append(idx)
+        return idx
 
     def save(self, path):
         while len(self.bin) % 4:
