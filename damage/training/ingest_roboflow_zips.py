@@ -212,8 +212,15 @@ def ingest_zip(zpath, out_img_dir, seen, images, anns, max_side, counters):
 
                 seen.add(h)
                 img_id = len(images) + 1
+                # `src` records which export an image came from. Omitting it
+                # cost real work: rust-detection-38s6e was ingested before the
+                # OFF_MATERIAL rule existed, and without a source field there
+                # was no way to find its images again and strip the copper
+                # corrosion — the whole project had to be re-fetched and
+                # hash-matched to undo one mistake.
                 images.append({"id": img_id, "file_name": os.path.basename(dst),
-                               "width": nW, "height": nH, "sha": h})
+                               "width": nW, "height": nH, "sha": h,
+                               "src": counters.get("_src", "")})
                 for final, bbox in rows:
                     if not bbox or len(bbox) != 4:
                         continue
@@ -280,6 +287,7 @@ def main():
             print(f"STOPPING: {free_gb():.1f} GB free")
             break
         zp = os.path.join(args.zips, z)
+        counters["_src"] = z[:-4].replace("__", "/")
         n = ingest_zip(zp, img_dir, seen, images, anns, args.max_side, counters)
         if args.delete_zips:
             try:
