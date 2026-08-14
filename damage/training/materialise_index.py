@@ -167,7 +167,7 @@ def materialise(index_dir, corpus, out, workers=8, limit=0,
                          "bbox": bb, "area": round(bb[2] * bb[3], 2),
                          "iscrowd": 0})
                     aid[sp] += 1
-            if verbose and done % 20000 == 0:
+            if verbose and done % 5000 == 0:
                 el = time.time() - t0
                 print(f"  {done:,}/{len(samples):,}  {done/el:.0f}/s  "
                       f"dropped {dropped:,}", flush=True)

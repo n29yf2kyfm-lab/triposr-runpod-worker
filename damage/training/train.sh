@@ -26,10 +26,42 @@ LOG="$WORK/train.log"
 exec > >(tee -a "$LOG") 2>&1
 TAG="${RUN_TAG:-run}"
 
+# HEARTBEAT: publish the log WHILE running, not only at exit.
+#
+# A smoke run hung for 87 minutes and had to be stopped from outside. The EXIT
+# trap never fired, so it produced no log at all and the hang is permanently
+# undiagnosable — 87 minutes of billing bought nothing but the knowledge that
+# something was slow. A run that can only be observed after it ends cannot be
+# debugged while it is costing money, and a 14-hour run is 14 hours of that.
+#
+# Every 5 minutes = 12 commits/hour, comfortably under the Hub's 128/hour
+# repository limit even across a 14-hour run with checkpoint uploads on top.
+# Failures here are swallowed: the heartbeat must never be able to kill the
+# training it exists to observe.
+(
+  while true; do
+    sleep 300
+    python - <<'PY' >/dev/null 2>&1
+import os
+from huggingface_hub import HfApi
+try:
+    HfApi(token=os.environ["HF_TOKEN"]).upload_file(
+        path_or_fileobj="/workspace/train.log",
+        path_in_repo="logs/%s.live.log" % os.environ.get("RUN_TAG", "run"),
+        repo_id=os.environ["HF_REPO"])
+except Exception:
+    pass
+PY
+  done
+) &
+HEARTBEAT_PID=$!
+echo "heartbeat pid $HEARTBEAT_PID -> logs/$TAG.live.log every 5 min"
+
 
 finish() {
   code=$?
   set +x
+  kill "$HEARTBEAT_PID" 2>/dev/null
   echo "=== exit code $code ==="
   # Upload the log FIRST — it is the only diagnostic that survives the pod.
   python - <<'PY' || echo "log upload failed"
@@ -313,9 +345,15 @@ du -sh prepared || true
 head -c 200 prepared/labels.txt; echo
 
 echo "=== train ==="
-python train_detector.py --data prepared --out runs \
+# HARD WALL-CLOCK CAP. train() runs to completion and this script has no other
+# way to bound it, so a throughput estimate that is wrong by 2x turns a 14-hour
+# budget into a 28-hour bill. `timeout` returns 124 and execution continues to
+# the publish step below, which already handles a non-zero training result —
+# a partially trained checkpoint is worth vastly more than nothing.
+timeout "${MAX_HOURS:-13}h" python train_detector.py --data prepared --out runs \
   --epochs "${EPOCHS:-15}" --batch-size "${BATCH:-8}"
 TRAIN_RC=$?
+[ "$TRAIN_RC" = "124" ] && echo "TRAINING HIT THE ${MAX_HOURS:-13}h CAP — publishing what exists"
 echo "train_detector rc=$TRAIN_RC"
 
 # PUBLISH THE CHECKPOINT BEFORE ANYTHING ELSE CAN FAIL.
