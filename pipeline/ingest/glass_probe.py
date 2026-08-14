@@ -163,7 +163,25 @@ def probe(uid, stage="staging/jeep", url=None):
         # The genuine signature is untouched -- a real global-alpha shell names
         # 'carpaint' and 'tire' (Volvo XC60, and six Toyota Avensis/Land Cruiser
         # in this wave, all at the documented alpha 0.25), and neither is GLASSY.
-        if BODYISH.search(nm) and is_trans and not GLASSY.search(nm):
+        # FACTOR-ONLY for the body test, deliberately NOT `is_trans`. Fixed
+        # 2026-08-14 on kia-sportage-2023: its trim material `st_black` is
+        # alphaMode=BLEND with baseColorFactor alpha 1.0 AND a texture, so the
+        # `tex_alpha` limb of `is_trans` fired and the car was reported
+        # alpha_shell -- a car with 37 of 43 materials opaque and glazing that
+        # is exactly window/glass_Clear/glass_tinted/red_glass/light/red_light.
+        # build_car gate G3 treats alpha_shell as a HARD FAIL, so this was a
+        # good car one gate away from being scrapped.
+        #
+        # `tex_alpha` is right for GLAZING and wrong here. A textured BLEND
+        # material is asserting per-texel alpha, which for a window means "this
+        # is glass" but for bodywork usually means nothing at all -- exporters
+        # set BLEND routinely on textures whose alpha channel is solid. The
+        # global-alpha shell this test exists to catch is a FACTOR defect: every
+        # one of the five in retro_alpha_shell.json carries baseColorFactor
+        # alpha 0.25 (vray_CarPaint, carpaint.261, carpaint + tire), and not one
+        # depends on texture alpha. So the narrower test loses no real detection.
+        body_is_trans = alpha < 1.0 or tr > 0
+        if BODYISH.search(nm) and body_is_trans and not GLASSY.search(nm):
             body_trans.append({"name": nm, "alpha": round(alpha, 3), "mode": mode})
         if not textured:
             untex += 1
