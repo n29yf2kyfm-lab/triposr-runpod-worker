@@ -71,19 +71,22 @@ catalogue — the owner has already refused to ship one.
 Total cost to KNOW the answer: **under $50.** No step publishes anything;
 owner eyeballs every output (standing rule 2026-08-14).
 
-### Phase 1 — Hi3DGen, the last untested open lever (~$0.50, one day)
+### Phase 1 — pick the base. SETTLED 2026-08-14, $0 spent.
 
-The only documented open-weights candidate claimed to be sharper by design
-(normal-map-bridged geometry). Same Golf reference images as every previous
-test so results are comparable.
+Both candidates turned out to already have Golf artefacts in the bucket from
+earlier runs (`staging/hybrid/hi3dgen_car.glb`, `hunyuan21/golf_gte_eval.glb`),
+so the shootout was done locally from existing evidence — no GPU rented.
+Three-way sheet: `scratchpad p1/base_shootout3.jpg`, quad_views rig.
 
-**GATE (owner rubric, judged at 5×):** visible door/bonnet shut lines, crisp
-bumper intakes, no melt on the front end — side-by-side against the Hunyuan
-mesh of the same car.
-- **Pass** → Hi3DGen becomes the shape stage; the existing finisher
-  (hybrid_transfer → wheel_swap → build_car gates) drops on top unchanged.
-- **Fail** → the open-weights route is CLOSED on current tech. No more
-  open-model experiments; the record already shows they share one ceiling.
+| Base | Geometry | Trainability |
+|---|---|---|
+| Hi3DGen | most nose micro-detail (grille slats, badge) but NOISY: ragged window borders, fused blob wheels | **inference-only** (verified in repo), MIT, TRELLIS-adapted |
+| **Hunyuan3D-2.1** | **best overall**: glazing separates with visible pillars, wheels with spokes, faint door lines, clean panels — far beyond 2.0 | **full training code released**, explicitly for community fine-tuning |
+| Hunyuan3D-2.0 | smooth blob (the recorded baseline) | superseded |
+
+**VERDICT: the base is Hunyuan3D-2.1.** Best geometry AND the only official
+fine-tune path. Hi3DGen stays as a label/normal source if ever needed; do not
+re-run it as a shape candidate.
 
 ### Phase 2 — OUR OWN MODEL: fine-tune open weights on our own catalogue
 
@@ -108,15 +111,27 @@ these models fine-tune on, and it is clean — unlike the Stage C/D pool that
 caused the old regression. Sample-verify it anyway before training (standing
 rule).
 
-**Phase 2a — dataset build (~$30–80 GPU, reusable forever):** render 8–24
-views per car for all 1,026 (only 6 have turntable frames today). Our render
-worker does 5–7s/frame. Output: the ExpertCarCheck car dataset — durable value
-whatever base model wins, and it also serves any future model swap.
+**The exact training-data spec (read from the 2.1 repo, not guessed):**
+per object `{uid}_sdf.npz` + `{uid}_surface.npz` + `{uid}_watertight.obj`
+plus `render_cond/000..023.png` (24 posed views) + `transforms.json` — and
+**their `tools/` directory generates all of it from a raw mesh**, so we run
+their preprocessor over our GLBs rather than inventing a renderer. Training
+enters at `main.py` / `train_demo.sh`; an overfitting config and an 8-case
+mini-trainset exist for smoke-testing; stated minimum is 10GB VRAM (default
+recipe is 8-GPU DeepSpeed, a pilot does not need that).
 
-**Phase 2b — fine-tune pilot (~$150–400, 1× H100 for days):** LoRA/short
-fine-tune of the winning base from Phase 1 (Hunyuan3D-2.1 published training
-code; verify Hi3DGen's at execution time) on the ~200 best cars first.
-**GATE:** same Golf reference through base vs pilot, side by side at 5× —
+**Phase 2a-0 — trainer smoke test (~$1–2, hours):** run `train_demo.sh` on
+their own mini-trainset on one rented GPU. Proves the training loop end to end
+before a penny goes to data. (The P3-SAM lesson: scan the import graph and
+preflight the bootstrap URL before renting.)
+
+**Phase 2a — preprocess OUR cars with THEIR tools:** pilot slice first — the
+~200 best cars (~$2–8), full 1,026 (~$10–40) only after the pilot gate passes.
+Output is the ExpertCarCheck training set in 2.1's native layout: durable,
+owned, reusable.
+
+**Phase 2b — fine-tune pilot (~$150–400):** the 200-car set, single node.
+**GATE:** same Golf reference through base 2.1 vs pilot, side by side at 5× —
 panels crisper, lamp structure appears, shut lines begin to read. Any doubt =
 fail.
 
