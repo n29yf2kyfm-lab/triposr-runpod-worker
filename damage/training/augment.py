@@ -71,6 +71,10 @@ def hflip(img, boxes):
     return out, [[1.0 - x - w, y, w, h] for (x, y, w, h) in boxes]
 
 
+def _keep_all(boxes):
+    return list(range(len(boxes)))
+
+
 def crop(img, boxes, rng):
     """Random window, resized back to the original size.
 
@@ -87,8 +91,8 @@ def crop(img, boxes, rng):
         fx0, fy0 = x0 / W, y0 / H
         fw, fh = cw / W, ch / H
 
-        kept = []
-        for (x, y, w, h) in boxes:
+        kept, kept_idx = [], []
+        for bi, (x, y, w, h) in enumerate(boxes):
             nx0 = _clip01((x - fx0) / fw)
             ny0 = _clip01((y - fy0) / fh)
             nx1 = _clip01((x + w - fx0) / fw)
@@ -103,13 +107,14 @@ def crop(img, boxes, rng):
             if before > 0 and after / before < MIN_BOX_KEEP:
                 continue
             kept.append([nx0, ny0, nw, nh])
+            kept_idx.append(bi)
 
         if boxes and not kept:
             continue
         out = img.crop((x0, y0, x0 + cw, y0 + ch)).resize((W, H),
                                                           Image.BILINEAR)
-        return out, kept
-    return img, boxes
+        return out, kept, kept_idx
+    return img, boxes, _keep_all(boxes)
 
 
 def photometric(img, rng):
@@ -130,8 +135,18 @@ def sharpen(img, rng):
         threshold=3))
 
 
-def apply_row(img, boxes, row):
-    """Apply one index.jsonl row. Pure function of (img, boxes, row)."""
+def apply_row(img, boxes, row, with_indices=False):
+    """Apply one index.jsonl row. Pure function of (img, boxes, row).
+
+    With with_indices=True returns (img, boxes, keep) where `keep` gives, for
+    each surviving box, its position in the INPUT list. A caller carrying class
+    ids alongside the boxes needs that: a crop can drop a box from the middle,
+    and matching survivors back by position then shifts every id after it, so
+    the classes silently rotate. Re-rendering box-by-box to find out is not an
+    alternative — crop() retries when a window would lose a box, which advances
+    the RNG by a different amount per box and hands each one a DIFFERENT crop
+    window from the image they are all stored against.
+    """
     rng = random.Random(row.get("seed", 0))
     recipe = row.get("recipe") or []
     if img.mode != "RGB":
@@ -140,8 +155,10 @@ def apply_row(img, boxes, row):
 
     if "hflip" in recipe:
         img, boxes = hflip(img, boxes)
+    keep = _keep_all(boxes)
     if "crop" in recipe:
-        img, boxes = crop(img, boxes, rng)
+        img, boxes, kidx = crop(img, boxes, rng)
+        keep = [keep[i] for i in kidx]
     if "photometric" in recipe:
         img = photometric(img, rng)
     if "blur" in recipe:
@@ -157,7 +174,14 @@ def apply_row(img, boxes, row):
 
     boxes = [[_clip01(x), _clip01(y), _clip01(w), _clip01(h)]
              for (x, y, w, h) in boxes]
-    return img, [b for b in boxes if b[2] > 0 and b[3] > 0]
+    final, fkeep = [], []
+    for b, k in zip(boxes, keep):
+        if b[2] > 0 and b[3] > 0:
+            final.append(b)
+            fkeep.append(k)
+    if with_indices:
+        return img, final, fkeep
+    return img, final
 
 
 # -------------------------------------------------------------- selftest ----

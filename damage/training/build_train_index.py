@@ -390,7 +390,65 @@ def split_sizes(n):
     return n - n_valid - n_test, n_valid, n_test
 
 
-def split_originals(images, seed, train_only=None):
+MAX_DUPE_GROUP = 50
+
+
+def _snap_to_groups(rows, n_tr, n_va, n_te):
+    """Move each split boundary to the nearest gap BETWEEN duplicate groups.
+
+    Without this the 80/10/10 arithmetic can land mid-group and put siblings of
+    one photograph on both sides — the precise leak grouping exists to close.
+    Boundaries only ever move forward, so train can grow by at most one group
+    and neither valid nor test can be emptied while any group remains.
+    """
+    n = len(rows)
+
+    def advance(b):
+        while 0 < b < n and rows[b]["dupe_key"] == rows[b - 1]["dupe_key"]:
+            b += 1
+        return b
+
+    b1 = advance(n_tr)
+    b2 = advance(max(b1, n_tr + n_va))
+    if b2 > n:
+        b2 = n
+    if b1 > b2:
+        b1 = b2
+    return b1, b2 - b1, n - b2
+
+
+def load_dupe_groups(path, images_by_sha=None):
+    """near_dupes.json -> {sha: group_id}, for splitting by PHOTOGRAPH.
+
+    Groups larger than MAX_DUPE_GROUP are ignored. Visual inspection of the two
+    largest (725 and 711 members) found them to be unrelated close-ups of
+    smooth, low-texture panels, where dHash has almost no gradient to work
+    with and collapses everything together. Only 18 groups exceed 50 members,
+    covering 2,471 images, so discarding them costs almost nothing — while
+    forcing 725 unrelated images into one split would badly distort it.
+    """
+    if not path:
+        return {}
+    with open(path) as f:
+        doc = json.load(f)
+    stem_to_sha = {}
+    if images_by_sha:
+        for sha in images_by_sha:
+            stem_to_sha[sha[:20]] = sha
+    out = {}
+    dropped = 0
+    for gi, grp in enumerate(doc.get("groups", [])):
+        if len(grp) > MAX_DUPE_GROUP:
+            dropped += 1
+            continue
+        for fn in grp:
+            stem = os.path.splitext(os.path.basename(str(fn)))[0]
+            sha = stem_to_sha.get(stem, stem)
+            out[sha] = gi
+    return out
+
+
+def split_originals(images, seed, train_only=None, dupe_of=None):
     """Assign every original to exactly one split. Mutates `images` in place.
 
     `train_only` is a set of shas barred from valid and test — images carrying
@@ -405,39 +463,80 @@ def split_originals(images, seed, train_only=None):
     would silently shrink valid and test.
     """
     train_only = train_only or set()
+    dupe_of = dupe_of or {}
     global_box_counts = {}
     for rec in images:
         for c, n in rec["counts"].items():
             global_box_counts[c] = global_box_counts.get(c, 0) + n
 
-    strata = {}
     for rec in images:
         rec["owner"] = owning_class(rec, global_box_counts)
+
+    # SPLIT BY PHOTOGRAPH, NOT BY FILE. Roughly 44% of this corpus is
+    # near-duplicate: public projects publish their AUGMENTED training sets, so
+    # one photo arrives 3-20 times as colour-shifted and re-cropped copies with
+    # different bytes and therefore different shas. Splitting by sha scatters
+    # those siblings across train and valid, and the model is then scored on
+    # pictures it memorised. Every member of a duplicate group is therefore
+    # tied to one representative and the whole group moves together.
+    #
+    # The group's owner class is the rarest among its members, matching the
+    # single-image rule: the scarcest signal decides the stratum, so a rare
+    # class still gets a true 80/10/10 spread.
+    rank = {c: n for c, n in global_box_counts.items()}
+    reps = {}
+    for rec in images:
+        g = dupe_of.get(rec["sha"])
+        key = f"g{g}" if g is not None else rec["sha"]
+        rec["dupe_key"] = key
+        cur = reps.get(key)
+        if cur is None or rank.get(rec["owner"], 0) < rank.get(cur, 0):
+            reps[key] = rec["owner"]
+    for rec in images:
+        rec["owner"] = reps[rec["dupe_key"]]
+
+    strata = {}
+    by_key = {}
+    for rec in images:
         strata.setdefault(rec["owner"], []).append(rec)
+        by_key.setdefault(rec["dupe_key"], []).append(rec)
 
     per_class_split = {}
     for cls in sorted(strata):
         rows = sorted(strata[cls], key=lambda r: r["sha"])
         # One RNG stream per class, keyed by the class name, so the split of one
         # class does not move when another class gains or loses images.
-        random.Random(f"{seed}:{cls}").shuffle(rows)
-        n_tr, n_va, n_te = split_sizes(len(rows))
+        # Shuffle GROUPS, then flatten, so members stay adjacent and any
+        # boundary can cut between groups but never through one.
+        keys = sorted({r["dupe_key"] for r in rows})
+        random.Random(f"{seed}:{cls}").shuffle(keys)
+        pos = {k: i for i, k in enumerate(keys)}
+        rows.sort(key=lambda r: (pos[r["dupe_key"]], r["sha"]))
         if train_only:
-            # Stable partition: pinned images keep their shuffled order, so a
-            # class with none of them splits byte-identically to before.
-            pinned = [r for r in rows if r["sha"] in train_only]
-            rest = [r for r in rows if r["sha"] not in train_only]
-            if len(pinned) > n_tr:
-                # More pinned images than train can hold. Silently spilling
-                # them into valid is exactly the leak this exists to stop, so
-                # the overflow is dropped from the build and reported instead.
-                for r in pinned[n_tr:]:
+            # Pinning is decided PER GROUP, not per image. Partitioning by
+            # individual sha would tear a duplicate group in half — pinned
+            # members to the front, the rest left behind — reintroducing the
+            # leak that grouping just closed. If any member carries a burned-in
+            # label, the whole group trains and none of it scores.
+            pinned_keys = {r["dupe_key"] for r in rows
+                           if r["sha"] in train_only}
+            pinned = [r for r in rows if r["dupe_key"] in pinned_keys]
+            rest = [r for r in rows if r["dupe_key"] not in pinned_keys]
+            rows = pinned + rest
+            cap = split_sizes(len(rows))[0]
+            if len(pinned) > cap:
+                # More pinned images than train can hold. Spilling them into
+                # valid is exactly what this prevents, so the overflow leaves
+                # the build — on a group boundary — and is reported.
+                cut = cap
+                while 0 < cut < len(pinned) and \
+                        pinned[cut]["dupe_key"] == pinned[cut - 1]["dupe_key"]:
+                    cut -= 1
+                for r in pinned[cut:]:
                     r["split"] = "excluded"     # never emitted, never counted
-                pinned = pinned[:n_tr]
-                rows = pinned + rest
-                n_tr, n_va, n_te = split_sizes(len(rows))
-            else:
-                rows = pinned + rest
+                rows = pinned[:cut] + rest
+        n_tr, n_va, n_te = split_sizes(len(rows))
+        n_tr, n_va, n_te = _snap_to_groups(rows, n_tr, n_va, n_te)
         for i, rec in enumerate(rows):
             rec["split"] = ("train" if i < n_tr else
                             "valid" if i < n_tr + n_va else "test")
@@ -784,7 +883,7 @@ def load_train_only(path):
 def build(root, out_dir, target_per_class=None, max_repeat=15, seed=1337,
           unit="boxes", unhealthy=UNHEALTHY_MULTIPLIER, sha_cache=None,
           report_only=False, verbose=True, train_only=None,
-          merge_groups=False):
+          merge_groups=False, dupe_groups=None):
     """Do the whole thing. Returns (plan, samples, images)."""
     global GROUPED
     GROUPED = bool(merge_groups)
@@ -793,8 +892,15 @@ def build(root, out_dir, target_per_class=None, max_repeat=15, seed=1337,
     if not images:
         raise SystemExit(f"no usable images found under {root}")
 
+    dupe_of = (dupe_groups if isinstance(dupe_groups, dict)
+               else load_dupe_groups(dupe_groups,
+                                     {r["sha"]: 1 for r in images}))
+    if verbose and dupe_of:
+        ng = len(set(dupe_of.values()))
+        print(f"duplicate groups: {ng:,} covering {len(dupe_of):,} images "
+              f"— split by photograph, not by file")
     split_by_owner, global_box_counts = split_originals(images, seed,
-                                                       train_only)
+                                                        train_only, dupe_of)
 
     train_recs = [r for r in images if r["split"] == "train"]
     real_train = count_units(train_recs, {r["sha"]: 1 for r in train_recs}, unit)
@@ -1035,6 +1141,50 @@ def selftest(root, target_per_class=None, max_repeat=15, seed=1337,
             check(f"grouping preserves the box count ({n_gr} vs {n_un})",
                   n_gr == n_un, f"{n_gr} vs {n_un}")
 
+        # 4g. NEAR-DUPLICATE GROUPING. The corpus is ~44% near-duplicate —
+        #     public projects publish their augmented training sets, so one
+        #     photograph arrives many times with different bytes and different
+        #     shas. If a group straddles train and valid, the model is scored
+        #     on a picture it memorised and the number goes up for the worst
+        #     possible reason. Synthetic groups here, so the property is tested
+        #     rather than the particular corpus.
+        allsha = sorted({r["sha"] for r in images})
+        synth = {}
+        for i, sh in enumerate(allsha):
+            synth[sh] = i // 5          # groups of five consecutive shas
+        with _tf.TemporaryDirectory() as ddir:
+            dplan, dsamples, dimages = build(
+                root, ddir, target_per_class, max_repeat, seed, unit,
+                verbose=False, dupe_groups=synth)
+            split_of = {}
+            for r in dimages:
+                split_of.setdefault(synth[r["sha"]], set()).add(r["split"])
+            straddling = {g: s for g, s in split_of.items() if len(s) > 1}
+            check(f"no duplicate group straddles a split "
+                  f"({len(split_of)} groups)",
+                  not straddling, f"{len(straddling)} straddle: "
+                                  f"{list(straddling.items())[:3]}")
+            sizes = {k: sum(1 for r in dimages if r["split"] == k)
+                     for k in ("train", "valid", "test")}
+            check(f"grouped split still fills every split {sizes}",
+                  all(v > 0 for v in sizes.values()), str(sizes))
+            tot = sum(sizes.values())
+            frac = sizes["train"] / max(1, tot)
+            check(f"grouped train share stays near 80% ({frac:.1%})",
+                  0.70 <= frac <= 0.90, f"{frac:.3f}")
+            check("grouping loses no images",
+                  tot == len(images), f"{tot} vs {len(images)}")
+
+            # pinning and grouping together: a pin must move the whole group
+            pinned = {allsha[0]}
+            _p2, s2, i2 = build(root, ddir, target_per_class, max_repeat, seed,
+                                unit, verbose=False, dupe_groups=synth,
+                                train_only=pinned)
+            g0 = synth[allsha[0]]
+            where = {r["split"] for r in i2 if synth[r["sha"]] == g0}
+            check(f"pinning one image pins its whole duplicate group {where}",
+                  where <= {"train", "excluded"}, str(where))
+
         # 5. byte-identical reruns
         da, db = _dir_digest(a), _dir_digest(b)
         check("two runs with the same seed are byte-identical",
@@ -1110,6 +1260,10 @@ def main():
                     help="count the target in annotation boxes (default) or "
                          "in images")
     ap.add_argument("--seed", type=int, default=1337)
+    ap.add_argument("--dupe-groups",
+                    help="near_dupes.json — force every near-duplicate group "
+                         "into a single split, so augmented siblings of one "
+                         "photograph cannot straddle train and valid")
     ap.add_argument("--merge-groups", action="store_true",
                     help="fold FINAL_CLASSES into class_map.TRAIN_GROUPS, so "
                          "balance comes from merging related damage rather "
@@ -1148,7 +1302,7 @@ def main():
         args.coco, args.out, args.target_per_class, args.max_repeat,
         args.seed, args.unit, args.unhealthy_multiplier, args.sha_cache,
         report_only=args.report_only, train_only=pin,
-        merge_groups=args.merge_groups)
+        merge_groups=args.merge_groups, dupe_groups=args.dupe_groups)
     print(format_report(plan))
     if args.report_only:
         print("\n--report-only: nothing was written.")
