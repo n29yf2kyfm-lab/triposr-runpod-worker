@@ -316,12 +316,24 @@ def parse_page(url, html, lastmod=""):
     if dm:
         desc = html_mod.unescape(dm.group(1)).strip()
 
-    # The article body. DLE wraps post content in .full-text / #news-id-N; fall
-    # back to the whole document so a template change degrades to noisy-but-
-    # present rather than silently empty.
-    bm = re.search(r'(?is)<div class="full-text[^"]*"[^>]*>(.*?)'
-                   r'<div class="story_tools', html)
-    body_html = bm.group(1) if bm else html
+    # The article body, from the start of the post to the story_tools div that
+    # closes it. Two openers are tried: DLE's classic .full-text, and the
+    # <article class="... fullstory"> this site actually serves. The second was
+    # added after the first silently stopped matching: the fall-back to the
+    # whole document is NOT harmless, because the page's "Related News" block
+    # lists OTHER vehicles' "... Body repair manual" titles, and those set
+    # has_body_repair_procedures on 91% of rows that should not have it. So the
+    # fall-back now also trims everything from the related-posts footer on,
+    # keeping a future template change noisy-but-scoped rather than wrong.
+    bm = (re.search(r'(?is)<div class="full-text[^"]*"[^>]*>(.*?)'
+                    r'<div class="story_tools', html)
+          or re.search(r'(?is)<article[^>]*class="[^"]*fullstory[^"]*"[^>]*>'
+                       r'(.*?)<div class="story_tools', html))
+    if bm:
+        body_html = bm.group(1)
+    else:
+        body_html = re.split(r'(?is)<div class="fullstory_foot|Related News',
+                             html)[0]
     body_text = _text(body_html)
 
     price = None
