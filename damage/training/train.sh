@@ -228,15 +228,43 @@ PY
 #
 # So the cleaned corpus and its index ship as a dataset repo, and the pod only
 # renders them.
+# Images arrive as ~30 tar shards, not 167,157 loose files. A per-file
+# transfer of that many small objects stalled dead against HTTP 429 at 6%.
 echo "=== fetch corpus + index ==="
 python - <<'PY' || exit 30
-import os
-from huggingface_hub import snapshot_download
-p = snapshot_download(repo_id=os.environ["CORPUS_REPO"], repo_type="dataset",
-                      token=os.environ["HF_TOKEN"],
-                      local_dir="/workspace/corpus",
-                      max_workers=16)
+import os, tarfile, concurrent.futures as cf
+from huggingface_hub import snapshot_download, list_repo_files
+repo, tok = os.environ["CORPUS_REPO"], os.environ["HF_TOKEN"]
+# allow_patterns, not the whole repo: a failed per-file upload left 9,999
+# loose images/ objects behind, and deleting them costs commits against a
+# 128/hour limit that the same failure had already exhausted. Skipping them
+# on download is free and leaves the repo honest about its own history.
+p = snapshot_download(repo_id=repo, repo_type="dataset", token=tok,
+                      local_dir="/workspace/corpus", max_workers=16,
+                      allow_patterns=["shards/*", "idx/*",
+                                      "merged640/_annotations.coco.json"])
 print("corpus at", p)
+
+img_dir = "/workspace/corpus/merged640/images"
+os.makedirs(img_dir, exist_ok=True)
+shards = sorted(f for f in os.listdir("/workspace/corpus/shards")
+                if f.endswith(".tar"))
+def untar(name):
+    with tarfile.open(os.path.join("/workspace/corpus/shards", name)) as tf:
+        tf.extractall(img_dir)
+    return name
+with cf.ThreadPoolExecutor(8) as ex:
+    for n in ex.map(untar, shards):
+        print("extracted", n, flush=True)
+n = len(os.listdir(img_dir))
+print(f"{n} images extracted from {len(shards)} shards")
+# The materialise step would otherwise fail image by image, long after the
+# download is paid for.
+assert n > 100000, f"only {n} images extracted"
+# Reclaim the tars: the pod holds corpus + extracted images + materialised
+# samples at once, and the tars are dead weight once unpacked.
+for s in shards:
+    os.remove(os.path.join("/workspace/corpus/shards", s))
 PY
 du -sh corpus || true
 

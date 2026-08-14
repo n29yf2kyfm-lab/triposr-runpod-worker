@@ -12,10 +12,16 @@ WHAT GOES UP
     idx/{index,images}.jsonl           the split-and-balance plan
     idx/{classes,plan}.json            the class vocabulary and the report
 
-Roughly 14GB at the ~8.7MB/s measured from this container: about half an hour.
-upload_large_folder chunks, retries and RESUMES, which matters because a
-transfer of that length will be interrupted at least once and restarting from
-zero each time would never finish.
+IMAGES GO UP AS TARBALLS, NOT AS 167,157 FILES.
+The per-file upload stalled dead at 9,999 images with HTTP 429 on every
+request: a repo with that many small objects is the wrong shape for the Hub,
+which says so itself ("Consider reorganising into sub-folders"). Sharding into
+~500MB tars turns 167k requests into about thirty, which no rate limiter
+objects to, and moves far more bytes per second besides.
+
+Shards are built ONE AT A TIME and deleted after upload, because there is under
+4GB free here and the corpus is 14GB. Building them all first would fill the
+disk before the first byte was sent.
 
     python publish_corpus.py --repo user/damage-corpus --token hf_xxx
     python publish_corpus.py --repo ... --token ... --dry-run
@@ -72,6 +78,75 @@ def preflight(corpus, index):
     return problems
 
 
+def upload_shards(api, repo, img_dir, shard_mb, scratch):
+    """Tar the images into ~shard_mb pieces, uploading and deleting each.
+
+    Resumable: shards already present in the repo are skipped, so an
+    interrupted run continues rather than restarting. Names are deterministic
+    (images_0000.tar) and membership follows sorted filename order, so shard N
+    holds the same images on every run and "already uploaded" is meaningful.
+    """
+    import tarfile
+    os.makedirs(scratch, exist_ok=True)
+    existing = {f for f in api.list_repo_files(repo, repo_type="dataset")
+                if f.startswith("shards/")}
+    names = sorted(os.listdir(img_dir))
+    budget = shard_mb * 1024 * 1024
+
+    shards, cur, cur_bytes = [], [], 0
+    for n in names:
+        sz = os.path.getsize(os.path.join(img_dir, n))
+        if cur and cur_bytes + sz > budget:
+            shards.append(cur)
+            cur, cur_bytes = [], 0
+        cur.append(n)
+        cur_bytes += sz
+    if cur:
+        shards.append(cur)
+
+    print(f"\n{len(names):,} images -> {len(shards)} shards of ~{shard_mb}MB")
+    for i, members in enumerate(shards):
+        remote = f"shards/images_{i:04d}.tar"
+        if remote in existing:
+            print(f"  [{i+1}/{len(shards)}] {remote} already uploaded")
+            continue
+        local = os.path.join(scratch, os.path.basename(remote))
+        with tarfile.open(local, "w") as tf:
+            for m in members:
+                tf.add(os.path.join(img_dir, m), arcname=m)
+        mb = os.path.getsize(local) / 1e6
+        print(f"  [{i+1}/{len(shards)}] {remote}  {len(members):,} images  "
+              f"{mb:.0f}MB", flush=True)
+        # The Hub caps repository commits at 128/hour and states exactly how
+        # long to wait. Honour that number. A geometric backoff topping out
+        # near two minutes just exhausts its retries against a limit measured
+        # in tens of minutes, which is how the first attempt died.
+        for attempt in range(8):
+            try:
+                api.upload_file(path_or_fileobj=local, path_in_repo=remote,
+                                repo_id=repo, repo_type="dataset")
+                break
+            except Exception as e:
+                import re
+                import time
+                msg = str(e)
+                m = re.search(r"retry this action in (\d+) minute", msg)
+                m2 = re.search(r"Retry after (\d+) second", msg)
+                if m:
+                    wait = int(m.group(1)) * 60 + 30
+                elif m2:
+                    wait = int(m2.group(1)) + 15
+                else:
+                    wait = min(600, 2 ** attempt * 15)
+                print(f"      retry {attempt+1}/8 in {wait}s: "
+                      f"{type(e).__name__} {msg[:100]}", flush=True)
+                time.sleep(wait)
+        else:
+            raise SystemExit(f"gave up on {remote}")
+        os.remove(local)          # under 4GB free: never hold two shards
+    print(f"\nall {len(shards)} shards uploaded")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--corpus", default="/home/user/rf/merged640")
@@ -79,6 +154,9 @@ def main():
     ap.add_argument("--repo", required=True, help="e.g. user/damage-corpus")
     ap.add_argument("--token", default=os.environ.get("HF_TOKEN"))
     ap.add_argument("--private", action="store_true", default=True)
+    ap.add_argument("--shard-mb", type=int, default=500,
+                    help="approximate size of each tar shard")
+    ap.add_argument("--scratch", default="/home/user/rf/_shards")
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
 
@@ -101,19 +179,18 @@ def main():
     api.create_repo(a.repo, repo_type="dataset", private=a.private,
                     exist_ok=True)
 
-    # Staged as two uploads so the small, frequently-rebuilt index can be
+    # Staged separately so the small, frequently-rebuilt index can be
     # refreshed without re-sending 14GB of pixels.
     print(f"\nuploading index -> {a.repo}:idx/")
     api.upload_folder(folder_path=a.index, path_in_repo="idx",
                       repo_id=a.repo, repo_type="dataset")
+    api.upload_file(path_or_fileobj=os.path.join(a.corpus,
+                                                 "_annotations.coco.json"),
+                    path_in_repo="merged640/_annotations.coco.json",
+                    repo_id=a.repo, repo_type="dataset")
 
-    print(f"uploading corpus -> {a.repo}:merged640/  (~14GB, resumable)")
-    try:
-        api.upload_large_folder(folder_path=a.corpus, repo_id=a.repo,
-                                repo_type="dataset", num_workers=8)
-    except AttributeError:                       # older huggingface_hub
-        api.upload_folder(folder_path=a.corpus, path_in_repo="merged640",
-                          repo_id=a.repo, repo_type="dataset")
+    upload_shards(api, a.repo, os.path.join(a.corpus, "images"),
+                  a.shard_mb, a.scratch)
     print(f"\ndone: https://huggingface.co/datasets/{a.repo}")
     print(f"set CORPUS_REPO={a.repo} for train.sh")
 
