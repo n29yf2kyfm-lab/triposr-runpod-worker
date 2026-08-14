@@ -56,8 +56,10 @@ def loft(car, nu=NU, nv=NV):
     NUu = len(us)
     P = np.zeros((NUu, nv, 3))
     REG = np.zeros((NUu, nv), dtype=int)
+    CREASE = np.zeros(nv, dtype=bool)          # section indices that are creases
     for i, u in enumerate(us):
-        sec, reg = car.section(u, nv)
+        sec, reg, cr = car.section(u, nv)
+        CREASE |= cr
         inset = 0.0
         reg_mask = np.zeros(nv, dtype=bool)
         for su, (r0, r1) in seams:
@@ -116,7 +118,7 @@ def loft(car, nu=NU, nv=NV):
                 P[i, j, 0] = ax + (x - ax) * k
                 P[i, j, 1] = car.RW + (y - car.RW) * k
                 break
-    return P, REG, us, arch, axles, arch_r
+    return P, REG, us, arch, axles, arch_r, CREASE
 
 
 def classify(car, us, REG, glassband):
@@ -179,7 +181,7 @@ def glass_mask(car, us, REG):
     return g
 
 
-def emit_grid(P, sel, side, us=None):
+def emit_grid(P, sel, side, us=None, crease=None):
     """Mesh the selected quads for ONE side (+1 right, -1 left).
 
     When `us` is given, also returns per-vertex UVs in the skin's texture
@@ -189,8 +191,13 @@ def emit_grid(P, sel, side, us=None):
     V, F, UV, idx = [], [], [], {}
     NUu, nv = P.shape[0], P.shape[1]
 
-    def vid(i, j):
-        key = (i, j)
+    def vid(i, j, band=0):
+        # A crease is made by DUPLICATING the row: quads below the crease and
+        # quads above it get their own copies of the same point, so the smooth
+        # vertex normal is computed per side and the shading breaks cleanly.
+        # This is how a hard edge is expressed in glTF — there is no crease
+        # attribute in the format; you split the vertex.
+        key = (i, j, band if (crease is not None and crease[j]) else 0)
         if key not in idx:
             p = P[i, j].copy()
             if side < 0:
@@ -205,8 +212,9 @@ def emit_grid(P, sel, side, us=None):
         for j in range(nv - 1):
             if not sel[i, j]:
                 continue
-            a, b = vid(i, j), vid(i + 1, j)
-            c, d = vid(i + 1, j + 1), vid(i, j + 1)
+            # this quad sits ABOVE row j and BELOW row j+1
+            a, b = vid(i, j, +1), vid(i + 1, j, +1)
+            c, d = vid(i + 1, j + 1, -1), vid(i, j + 1, -1)
             if side > 0:
                 F += [[a, b, c], [a, c, d]]
             else:
@@ -323,7 +331,7 @@ def build_structured(car, out, root_name=None, textured=True):
 
     g = GLB(generator=f"structured_car/{car.name}")
 
-    P, REG, us, arch, axles, arch_r = loft(car)
+    P, REG, us, arch, axles, arch_r, CREASE = loft(car)
 
     if textured:
         base_png, normal_png = paint_skin(car, section_marks(REG, us))
@@ -356,7 +364,8 @@ def build_structured(car, out, root_name=None, textured=True):
                          for i in range(names.shape[0])])
 
     def emit_both(mask):
-        parts = [emit_grid(P, mask, +1, us=uv_us), emit_grid(P, mask, -1, us=uv_us)]
+        parts = [emit_grid(P, mask, +1, us=uv_us, crease=CREASE),
+                 emit_grid(P, mask, -1, us=uv_us, crease=CREASE)]
         Vs = [p[0] for p in parts if len(p[1])]
         if not Vs:
             return None
@@ -386,7 +395,7 @@ def build_structured(car, out, root_name=None, textured=True):
         m = sel(pn)
         # UK viewer convention in this repo: +z = right side of the car
         for side, nm in ((+1, out_name_r), (-1, out_name_l)):
-            got = emit_grid(P, m, side, us=uv_us)
+            got = emit_grid(P, m, side, us=uv_us, crease=CREASE)
             V, F = got[0], got[1]
             UV = got[2] if uv_us is not None else None
             g.mesh(nm, V, F, m_paint, parent=n_body, uvs=UV)

@@ -214,6 +214,13 @@ class Car:
             (y1, 0.0),                               # 8 roof centre
         ]
         regions = [0, 0, 1, 2, 3, 4, 4, 5, 5]
+        # FEATURE LINES. These landmarks are creases on a real car — the sill
+        # step, the shoulder (widest point, where the highlight turns), the
+        # beltline break and the roof rail. Everything else is surface.
+        # Measured 2026-08-14: blending across these is exactly why the lofted
+        # car read as soap while a crude box sketch measured 11x more real
+        # edges. Sharpness on a car is PLACED, not inherited.
+        crease_landmarks = [2, 3, 4, 6]
         P = np.array(pts, dtype=np.float64)
         # chordal resample with light smoothing so the section reads as surfaced
         d = np.r_[0.0, np.cumsum(np.linalg.norm(np.diff(P, axis=0), axis=1))]
@@ -224,11 +231,20 @@ class Car:
         for k in range(2):
             out[:, k] = np.interp(t, d, P[:, k])
         reg[:] = np.interp(t, d, regions).round().astype(int)
-        # one pass of Laplacian smoothing on the interior keeps the corners soft
-        # without losing the landmarks' proportions
+        # nearest resampled index to each feature landmark
+        crease = np.zeros(nv, dtype=bool)
+        for li in crease_landmarks:
+            crease[int(np.argmin(np.abs(t - d[li])))] = True
+        # Laplacian smoothing everywhere EXCEPT across a crease: the crease
+        # point and its two neighbours keep their exact positions, so the
+        # corner survives instead of being averaged into a fillet.
         sm = out.copy()
         sm[1:-1] = 0.25 * out[:-2] + 0.5 * out[1:-1] + 0.25 * out[2:]
-        return sm, reg
+        protect = crease.copy()
+        protect[1:] |= crease[:-1]
+        protect[:-1] |= crease[1:]
+        sm[protect] = out[protect]
+        return sm, reg, crease
 
     # ------------------------------------------------------------- shut lines
     def shut_positions(self):
@@ -263,7 +279,7 @@ def build(car, nu=NU, nv=NV):
     P = np.zeros((NUu, nv, 3))
     REG = np.zeros((NUu, nv), dtype=int)
     for i, u in enumerate(us):
-        sec, reg = car.section(u, nv)
+        sec, reg, _cr = car.section(u, nv)
         inset = 0.0
         for su, (r0, r1) in seams:
             if abs(u - su) <= SHUT_W * 0.5:
