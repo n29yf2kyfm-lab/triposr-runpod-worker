@@ -125,6 +125,82 @@ the respray edited the invisible one, and it shipped eight files that were diffe
 disk and identical on screen (recolour_audit dist=0.004). Replaced by a different source
 mesh that stamps at 0.342.
 
+## A wrong POSE is not a defect — flip it, don't scrap it (2026-08-14)
+
+`pipeline/ingest/pose_fix.py`. Every car the pose gate ever caught was scrapped:
+three upside-down Toyotas, an upside-down M-Class, an on-side ML and A-Class, a CL
+on end, the wheels-up J100. A wrong pose is a RIGID TRANSFORM, not a bad mesh. The
+Hyundai Tucson 2022 rejected at `tob=1.262` had real spokes, the parametric jewel
+grille, lamp internals and sound materials — it was stored 180 degrees over, and
+nothing else was wrong with it. Rolled upright it published the same day.
+
+**Decide on PHYSICAL evidence, not on the pose gate's own signal.** Verifying a flip
+with `top_over_bot` would be circular — that proxy is the thing that was inverted.
+pose_fix measures in WORLD coordinates with glTF +Y up: the **tyre material must sit
+in the bottom of the car's height and the glazing above it**. Upright cars cluster
+hard — 0.219, 0.220, 0.221, 0.228 across four published controls — against 0.781 for
+the wheels-up Tucson. Lamp lenses are excluded from the glazing sample (the
+`backlight`/`lights_glass` trap). Written as a root-node quaternion with the BIN
+chunk verbatim, so like clay_rebuild it cannot damage geometry; rotations are
+determinant +1 so winding and normals stay valid — never add a mirror to that set.
+
+**It rescues the ORIENTATION class only, and it refuses the rest.** Measured on the
+three orientation rejects available: Tucson genuinely flipped -> rescued; 1999 Jeep
+Grand Cherokee -> `ALREADY UPRIGHT` (tyres already at 0.174; it is a roofless
+disassembled KIT, the open cabin is what widened its top third) -> genuine scrap;
+"Jaguar f pace" -> refused, and it is a photogrammetry scan of a single bumper
+bracket 0.49 units long, not a car. `h_over_l` is rotation-invariant, so the
+floorpan/wreck rejects (h/l 0.15-0.19) can never be fixed by rotation and pose_fix
+correctly will not try.
+
+**THE WORKER'S OWN UPSIDE-DOWN DETECTOR IS UNREACHABLE FOR MOST CARS.**
+`render/handler.py` has a 180-flip check that samples top-third vs bottom-third
+width — but it is NESTED INSIDE `if uext[2] > 1.25 * max(uext[0], uext[1])`, the
+length-on-Z branch. Any car authored horizontally (which is most of them) never
+reaches it. That is why the Tucson rendered wheels-up, and it is also why the fix
+belongs at ingest. Useful corollary: because that outer branch does not fire, the
+worker will not re-roll a pose-fixed car.
+
+**trimesh in this container has NO Draco handler** — it prints "values are
+placeholder zeros" to stderr and returns an all-zero vertex array (100% zero on
+bmw-m3-e30, 63,234 verts). `geom_audit`'s docstring claimed it "decompresses draco";
+that was FALSE and is corrected. From those zeros `geom_signals` computed
+`h_over_l=0.23`, one hundredth above its own 0.22 reject floor — it failed open only
+by the luck of the 9.99 sentinel being downgraded after the Chrysler wave. Unreadable
+geometry now RAISES, so `gpu_wave.pose_gate` logs `pose-gate-skipped` and a human can
+see the car was never judged. Exposure is low today because Sketchfab SOURCES arrive
+uncompressed and it is our own published OUTPUTS that carry Draco — that is a property
+of current supply, not a guarantee. Decompress with `gltf-transform copy` first.
+
+## The material NAMED "carpaint" is routinely NOT the body (2026-08-14)
+
+`pipeline/qc/body_probe.py`. CLAUDE.md already warned that a respray raising no error
+can still be wrong (Toyota #41 pink, #62 black; corolla-cross at dist=0.004). Here is
+the mechanism, isolated: on the Tucson, **`Carpaint_Simple_Onyx2` is the B/C-pillar
+covers, roof rails and window surrounds, `Carpaint_Simple_Onyx3` is the WHEEL SPOKES,
+and the body skin is `Material_2125670220`** — a junk name no regex would ever pick.
+Baking off the carpaint name gave eight byte-different, visually identical variants,
+dist=0.038. Corrected to the junk name: PASS at 0.265. It cost a full publish cycle.
+
+**Find it by PAINTING a candidate and LOOKING** — the cross-check this file already
+endorses for tyres. body_probe paints each candidate magenta (nothing on a car is
+magenta; red collides with lamps and calipers), renders one 3/4 view and measures the
+share of the silhouette that moved. Validated 5/5, four of them against cars whose
+`paintMaterialNames` already stamp PASS so the probe had to AGREE with a known answer:
+Tucson 40.2% (runner-up 12.8%), Juke `body` 42.0%, Astra `carpaint` 55.6%, Mondeo
+`Frozen_White` 56.6%, RAV4 `Super_Sonic_Red` 36.7%.
+
+**Vertex share is NOT the discriminator** — on the Tucson the decoy has the LARGEST
+vertex share (13.4%) and paints 5.8% of the car. This is also why it is not a rerun of
+`clay_geoclass`, which inferred class from bbox/area and failed its control.
+
+**It does not replace `body_candidates.py`**, which finds paint SPLIT across
+same-colour siblings. The two fail on opposite cars. Clustering cannot resolve the
+Tucson, measured: its body material sits in a 13-strong cluster at [0.12,0.12,0.13]
+with `steel` and every trim material, because clay_rebuild gives all dark trim one
+value. And a second strong candidate is ADVISORY only — on the Juke `black_matt`
+moves 17% and is genuine unpainted cladding that must not be resprayed.
+
 ## RENDER-SIDE INVERSION: the mechanism, found at last (2026-08-11, Mazda wave)
 
 This file has carried "the worker flips some cars at render time (~8% measured on the
