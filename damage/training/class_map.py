@@ -169,3 +169,72 @@ if __name__ == "__main__":
     print(summary())
     print(f"\nnegatives (never balanced up): {NEGATIVE_CLASSES}")
     print(f"parked (too few to train):     {PARKED_CLASSES}")
+
+
+# --------------------------------------------------------- training groups ---
+# Merging classes so that BALANCE COMES FROM GROUPING, NOT FROM CLONING.
+#
+# The six-class split cannot be balanced honestly. Real train boxes run from
+# scratch_scuff at 169,844 down to rust_paint at 5,884 — a 29x spread — so
+# levelling up the thin end needs multipliers of 17.8x and 28.9x, both past the
+# 15x ceiling that separates balancing from cloning. Fifteen near-identical
+# copies of one photograph do not carry fifteen photographs' worth of signal;
+# they teach the detector that particular car.
+#
+# Grouping fixes the ratio at the source. Required multipliers drop to:
+#
+#     surface      175,728   1.00x
+#     dent          81,798   2.15x
+#     structural    21,173   8.30x
+#     broken_part   21,420   8.21x
+#
+# all comfortably inside the ceiling, with no class relying on heavy repetition.
+#
+# The groups are chosen by what the damage IS, not by what balances neatly:
+#
+#   surface      The paint and finish layer, whatever disturbed it — scratches,
+#                scuffs, chips, fade, corrosion, bad respray work. Folding rust
+#                in here also matches the actual inspection domain: modern cars
+#                rarely rust, and when the paint layer is wrong it is far more
+#                often a mismatch or a poor repair than corrosion.
+#   dent         Metal deformed, panel intact.
+#   structural   Deformation severe enough to be a structural question rather
+#                than a cosmetic one. Kept apart from `dent` deliberately: the
+#                two price differently and one of them gates a safety warning,
+#                so merging them to save 8x of repetition would be trading the
+#                product's most consequential distinction for arithmetic.
+#   broken_part  A component is broken rather than marked — glass cracked, lamp
+#                or wheel damaged. Distinct from `surface` because it is a part
+#                to replace, not a finish to correct.
+#
+# Every member of a group still resolves through FINAL_CLASSES first, so source
+# names map exactly as before; this only decides what the model is asked to
+# separate.
+TRAIN_GROUPS = {
+    "surface":     {"members": ("scratch_scuff", "rust_paint"),
+                    "colour": "#58a6ff", "canonical": "scratch",
+                    "structural": False},
+    "dent":        {"members": ("dent",),
+                    "colour": "#f0883e", "canonical": "dent",
+                    "structural": True},
+    "structural":  {"members": ("structural",),
+                    "colour": "#db6d28", "canonical": "deformation",
+                    "structural": True},
+    "broken_part": {"members": ("crack_glass", "lamp_wheel"),
+                    "colour": "#f85149", "canonical": "crack",
+                    "structural": True},
+}
+
+_GROUP_OF = {m: g for g, spec in TRAIN_GROUPS.items()
+             for m in spec["members"]}
+
+
+def group_for(final_class):
+    """FINAL_CLASSES name -> training group name. Identity if ungrouped."""
+    return _GROUP_OF.get(final_class, final_class)
+
+
+def _check_groups():
+    missing = sorted(set(FINAL_CLASSES) - set(_GROUP_OF))
+    extra = sorted(set(_GROUP_OF) - set(FINAL_CLASSES))
+    return missing, extra

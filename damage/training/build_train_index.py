@@ -190,16 +190,26 @@ def find_coco_files(root):
     return hits
 
 
+# Set by build() when --merge-groups is given. Module-level rather than
+# threaded through every call because resolve_class is reached from several
+# places and a half-grouped corpus — some boxes grouped, some not — would be
+# far worse than either choice made consistently.
+GROUPED = False
+
+
 def resolve_class(name):
     """Source category name -> final training class, or None if not trained.
 
     Already-final names (the merged corpus writes them straight out) are
     accepted first; anything else goes through class_map's source lookups.
+    When GROUPED, the result is folded into its training group, so balance
+    comes from merging related damage rather than from cloning thin classes.
     """
     n = str(name).strip()
-    if n in CM.FINAL_CLASSES:
-        return n
-    return CM.resolve(n)
+    final = n if n in CM.FINAL_CLASSES else CM.resolve(n)
+    if final and GROUPED:
+        return CM.group_for(final)
+    return final
 
 
 def load_originals(root, sha_cache_path=None, verbose=True):
@@ -247,8 +257,17 @@ def load_originals(root, sha_cache_path=None, verbose=True):
             stats["images_seen"] += 1
             abspath = os.path.join(img_dir, im.get("file_name", ""))
             if not os.path.isfile(abspath):
-                stats["images_missing_file"] += 1
-                continue
+                # Roboflow exports keep the JPEGs beside the COCO file, but
+                # ingest_roboflow_zips and merge_coco_source write them to an
+                # images/ subdirectory. Both layouts are real corpora in this
+                # project, so both resolve here rather than one of them being
+                # counted as 167,157 missing files.
+                alt = os.path.join(img_dir, "images", im.get("file_name", ""))
+                if os.path.isfile(alt):
+                    abspath = alt
+                else:
+                    stats["images_missing_file"] += 1
+                    continue
 
             sha = im.get("sha")
             if not sha:
@@ -589,19 +608,32 @@ def build_samples(images, reps):
 
 def classes_document(global_box_counts, images):
     """classes.json — index, colour and canonical id, all from class_map."""
-    idx = CM.class_index()
     img_counts = {}
     for rec in images:
         for c in rec["counts"]:
             img_counts[c] = img_counts.get(c, 0) + 1
+
+    # Under --merge-groups the model's vocabulary IS the group set, so
+    # classes.json must describe groups. Emitting the six ungrouped classes
+    # here while training four would put labels.txt out of step with the
+    # weights, which is the exact failure prepare_data.py warns about: every
+    # prediction mislabelled while the run looks perfectly healthy.
+    if GROUPED:
+        spec = {g: dict(v, members=list(v["members"]))
+                for g, v in CM.TRAIN_GROUPS.items()}
+    else:
+        spec = {n: dict(v, members=[n]) for n, v in CM.FINAL_CLASSES.items()}
+    idx = {name: i + 1 for i, name in enumerate(sorted(spec))}
+
     rows = []
-    for name in sorted(CM.FINAL_CLASSES):
-        d = CM.FINAL_CLASSES[name]
+    for name in sorted(spec):
+        d = spec[name]
         rows.append({
             "name": name,
             "index": idx[name],
-            "colour": CM.colour(name),
-            "canonical": CM.canonical(name),
+            "colour": d["colour"],
+            "canonical": d["canonical"],
+            "members": d["members"],
             "structural": bool(d.get("structural")),
             "boxes_in_corpus": global_box_counts.get(name, 0),
             "images_in_corpus": img_counts.get(name, 0),
@@ -618,7 +650,11 @@ def classes_document(global_box_counts, images):
 
 def write_outputs(out_dir, samples, images, classes_doc, plan):
     os.makedirs(out_dir, exist_ok=True)
-    idx = CM.class_index()
+    # Taken FROM classes_doc, not recomputed from class_map. Under
+    # --merge-groups the vocabulary is the group set, and a second independent
+    # derivation here is exactly how images.jsonl ends up numbering classes
+    # differently from the labels.txt the model is trained against.
+    idx = classes_doc["name_to_index"]
 
     with open(os.path.join(out_dir, "index.jsonl"), "w") as f:
         for s in samples:
@@ -747,8 +783,11 @@ def load_train_only(path):
 
 def build(root, out_dir, target_per_class=None, max_repeat=15, seed=1337,
           unit="boxes", unhealthy=UNHEALTHY_MULTIPLIER, sha_cache=None,
-          report_only=False, verbose=True, train_only=None):
+          report_only=False, verbose=True, train_only=None,
+          merge_groups=False):
     """Do the whole thing. Returns (plan, samples, images)."""
+    global GROUPED
+    GROUPED = bool(merge_groups)
     root = os.path.abspath(root)
     images, stats = load_originals(root, sha_cache, verbose)
     if not images:
@@ -959,6 +998,43 @@ def selftest(root, target_per_class=None, max_repeat=15, seed=1337,
             check("eval pool is still non-empty after pinning",
                   len(evalpool) > 0, f"{len(evalpool)}")
 
+        # 4f. --merge-groups must build end to end and stay self-consistent.
+        #     It did not: write_outputs re-derived the class index from
+        #     class_map instead of taking it from classes.json, so a grouped
+        #     build died on KeyError 'surface' AFTER writing a complete
+        #     index.jsonl — the failure mode that leaves a half-written output
+        #     directory looking plausible.
+        with _tf.TemporaryDirectory() as gdir:
+            gplan, gsamples, gimages = build(
+                root, gdir, target_per_class, max_repeat, seed, unit,
+                verbose=False, merge_groups=True)
+            with open(os.path.join(gdir, "classes.json")) as fh:
+                gcls = json.load(fh)
+            names = {r["name"] for r in gcls["classes"]}
+            check(f"--merge-groups writes the group vocabulary {sorted(names)}",
+                  names == set(CM.TRAIN_GROUPS), str(sorted(names)))
+            wrote = sorted(os.listdir(gdir))
+            check(f"--merge-groups writes all four outputs {wrote}",
+                  wrote == ["classes.json", "images.jsonl", "index.jsonl",
+                            "plan.json"], str(wrote))
+            valid_ids = set(gcls["name_to_index"].values())
+            bad = 0
+            with open(os.path.join(gdir, "images.jsonl")) as fh:
+                for ln in fh:
+                    for bb in json.loads(ln)["boxes"]:
+                        if bb[0] not in valid_ids:
+                            bad += 1
+            check("grouped box class ids all appear in classes.json",
+                  bad == 0, f"{bad} unknown ids")
+            gowners = {r["owner"] for r in gimages}
+            check("grouped owners are group names",
+                  gowners <= set(CM.TRAIN_GROUPS), str(sorted(gowners)))
+            # grouping must not lose or invent boxes
+            n_un = sum(len(r["boxes"]) for r in images)
+            n_gr = sum(len(r["boxes"]) for r in gimages)
+            check(f"grouping preserves the box count ({n_gr} vs {n_un})",
+                  n_gr == n_un, f"{n_gr} vs {n_un}")
+
         # 5. byte-identical reruns
         da, db = _dir_digest(a), _dir_digest(b)
         check("two runs with the same seed are byte-identical",
@@ -1034,6 +1110,10 @@ def main():
                     help="count the target in annotation boxes (default) or "
                          "in images")
     ap.add_argument("--seed", type=int, default=1337)
+    ap.add_argument("--merge-groups", action="store_true",
+                    help="fold FINAL_CLASSES into class_map.TRAIN_GROUPS, so "
+                         "balance comes from merging related damage rather "
+                         "than from 15x cloning of the thin classes")
     ap.add_argument("--train-only-list",
                     help="file of shas (one per line, or jsonl with a 'sha' "
                          "field) barred from valid/test. Images with a "
@@ -1067,7 +1147,8 @@ def main():
     plan, _samples, _images = build(
         args.coco, args.out, args.target_per_class, args.max_repeat,
         args.seed, args.unit, args.unhealthy_multiplier, args.sha_cache,
-        report_only=args.report_only, train_only=pin)
+        report_only=args.report_only, train_only=pin,
+        merge_groups=args.merge_groups)
     print(format_report(plan))
     if args.report_only:
         print("\n--report-only: nothing was written.")
