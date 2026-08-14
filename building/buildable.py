@@ -187,9 +187,14 @@ def fit_stair(rooms, storeys, storey_height_m, level=0):
     if not below:
         findings.append(_finding(
             "K-NOHALL", "refuse",
-            "There is no circulation space on the entrance storey for a "
-            "stair to rise from.",
-            fix="Give the plan a hall.", ref="AD K Section 1"))
+            ("There is no circulation space on the entrance storey for a "
+             "stair to rise from." if level == 0 else
+             f"Level {level} has no circulation space for the flight to "
+             f"level {level + 1} to rise from."),
+            fix="Give the plan a hall." if level == 0 else
+                f"Give level {level} a landing the next flight can leave "
+                f"from.",
+            ref="AD K Section 1"))
         return None, findings
 
     best = None
@@ -438,9 +443,15 @@ def escape(model):
         for r in rooms:
             if not _on_level(r, level, storeys):
                 continue
-            if not (r.get("kind") in HABITABLE
-                    and r["name"].lower().startswith(("bed", "master"))):
+            # EVERY HABITABLE ROOM NEEDS A WAY OUT, NOT JUST THE ONES NAMED
+            # "BEDROOM". AD B 2.10 covers habitable rooms; keying on the
+            # name let a first-floor Studio with no window at all pass
+            # without a word. Kitchens are the one habitable exception.
+            kind = r.get("kind")
+            name = r["name"].lower()
+            if kind not in HABITABLE or kind == "kitchen":
                 continue
+            is_bedroom = name.startswith(("bed", "master"))
             ok = []
             for o in _openings_of(model, r, level):
                 if o["kind"] != "window":
@@ -454,7 +465,7 @@ def escape(model):
                     ok.append(o)
             if not ok:
                 findings.append(_finding(
-                    "B-ESCAPE", "refuse",
+                    "B-ESCAPE", "refuse" if is_bedroom else "change",
                     f"{r['name']} has no window that can be escaped through: "
                     f"needs {ESCAPE_MIN_AREA_M2} m2 clear, "
                     f"{ESCAPE_MIN_CLEAR_M * 1000:.0f}mm in both directions, "
@@ -524,11 +535,18 @@ def check(model, orientation="N"):
     rooms = model["rooms"]
     storeys = model.get("storeys", 1)
     per = model.get("storey_height_m", 2.7)
-    findings, stair = [], None
+    findings, stair, stairs = [], None, []
 
-    if storeys > 1:
-        stair, f = fit_stair(rooms, storeys, per, level=0)
+    # EVERY STOREY NEEDS A FLIGHT TO THE ONE ABOVE, not just the ground
+    # floor. Checking level 0 alone passed a three-storey house whose top
+    # floor could not be reached at all — the 0->1 flight was fine, and
+    # nobody asked how you get from 1 to 2.
+    for lv in range(storeys - 1):
+        s, f = fit_stair(rooms, storeys, per, level=lv)
         findings += f
+        stairs.append(s)
+        if lv == 0:
+            stair = s
     for level in range(storeys):
         _, f = circulation(rooms, storeys, level)
         findings += f
@@ -541,6 +559,7 @@ def check(model, orientation="N"):
     return {
         "buildable": not refusals,
         "stair": stair,
+        "stairs": stairs,
         "findings": findings,
         "counts": {s: sum(1 for f in findings if f["severity"] == s)
                    for s in ("refuse", "change", "query")},

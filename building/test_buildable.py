@@ -382,6 +382,73 @@ check("11f the shared flank is marked party and carries no windows",
 check("11g void_facing now survives into the wall JSON",
       all("void_facing" in w for w in _semi["walls"]))
 
+# --- 12. edge cases that were bugs -----------------------------------------
+# 12a A THREE-STOREY HOUSE NEEDS TWO FLIGHTS. Only level 0's stair was ever
+# checked, so a top floor nothing could reach raised no K finding at all.
+_r12 = B.check(M.build(
+    [M.Room("Hall", 0, 0, 2.4, 5.0, kind="circulation", storeys=1),
+     M.Room("Living", 2.4, 0, 5.0, 5.0, storeys=1),
+     M.Room("Landing", 0, 0, 2.4, 5.0, kind="circulation",
+            storeys=1, base_level=1),
+     M.Room("Bed 1", 2.4, 0, 5.0, 5.0, storeys=1, base_level=1),
+     M.Room("Bed 2", 0, 0, 7.4, 5.0, storeys=1, base_level=2)],
+    storeys=3, storey_height=2.7))
+check("12a an unreachable top floor raises a K refusal",
+      any(f["code"].startswith("K-") for f in _r12["findings"]),
+      str(sorted({f["code"] for f in _r12["findings"]})))
+check("12b and every inter-storey flight is reported",
+      len(_r12.get("stairs", [])) == 2, str(len(_r12.get("stairs", []))))
+
+# 12c A ROOM ABOVE THE BUILDING'S TOP IS REFUSED, NOT VANISHED. It used to
+# stay in the schedule while contributing to no wall, floor or export.
+try:
+    M.build([M.Room("Living", 0, 0, 5, 5, storeys=1),
+             M.Room("Ghost", 0, 0, 5, 5, storeys=1, base_level=3)],
+            storeys=1)
+    check("12c a room floating above the top storey is refused", False)
+except M.ModelError as e:
+    check("12c a room floating above the top storey is refused",
+          "base_level" in str(e), str(e))
+
+# 12d ...and validation refuses it at the door, naming the field.
+import validation as _V
+try:
+    _V.parse_job({"mode": "model", "plan": {
+        "rooms": [{"name": "A", "x": 0, "y": 0, "width_m": 5, "depth_m": 5},
+                  {"name": "Ghost", "x": 0, "y": 0, "width_m": 5,
+                   "depth_m": 5, "base_level": 4}],
+        "storeys": 1}})
+    check("12d validation refuses base_level above plan.storeys", False)
+except _V.InputError as e:
+    check("12d validation refuses base_level above plan.storeys",
+          "base_level" in str(e) and "storeys" in str(e), str(e))
+
+# 12e ESCAPE IS A MATTER OF KIND, NOT NAMING. A first-floor habitable room
+# with no window passed silently because its name did not start with "bed".
+_r12e = B.check(M.build(
+    [M.Room("Hall", 0, 0, 2.4, 5.0, kind="circulation", storeys=1),
+     M.Room("Living", 2.4, 0, 5.0, 5.0, storeys=1),
+     M.Room("Landing", 0, 0, 2.4, 5.0, kind="circulation",
+            storeys=1, base_level=1),
+     M.Room("Studio", 2.4, 0, 5.0, 5.0, storeys=1, base_level=1)],
+    storeys=2, storey_height=2.7, wall_openings=False))
+_esc = [f for f in _r12e["findings"] if f["code"] == "B-ESCAPE"]
+check("12e a windowless first-floor Studio raises an escape finding",
+      any(f["room"] == "Studio" for f in _esc), str(_esc))
+check("12f as a change, while a windowless BEDROOM stays a refusal",
+      all(f["severity"] == "change" for f in _esc if f["room"] == "Studio")
+      and any(x["code"] == "B-ESCAPE" and x["severity"] == "refuse"
+              for x in B.check(M.build(
+                  [M.Room("Hall", 0, 0, 2.4, 5.0, kind="circulation",
+                          storeys=1),
+                   M.Room("Living", 2.4, 0, 5.0, 5.0, storeys=1),
+                   M.Room("Landing", 0, 0, 2.4, 5.0, kind="circulation",
+                          storeys=1, base_level=1),
+                   M.Room("Bed 1", 2.4, 0, 5.0, 5.0, storeys=1,
+                          base_level=1)],
+                  storeys=2, storey_height=2.7,
+                  wall_openings=False))["findings"]))
+
 print()
 for f in FAILED:
     print(f"FAIL  {f}")

@@ -357,6 +357,17 @@ def _plan(value):
 
     out["storeys"] = _int(value.get("storeys"), "plan.storeys", 1, 1,
                           MAX_STOREYS)
+    # A ROOM CANNOT START AT OR ABOVE THE BUILDING'S TOP. Left unchecked,
+    # the job ran and the room silently vanished from every total — the
+    # model builder refuses this too, but the API should say no at the door
+    # with the field name rather than fail mid-job.
+    for i, r in enumerate(rooms):
+        if r.get("base_level", 0) >= out["storeys"]:
+            raise InputError(
+                f"plan.rooms[{i}] ({r['name']}): base_level "
+                f"{r['base_level']} needs plan.storeys of at least "
+                f"{r['base_level'] + 1}, and the plan says "
+                f"{out['storeys']}.")
     # Ground-floor entrance door, on by default — a dwelling has one, and
     # the first real render came back without. False for outbuildings and
     # single-room plates where an invented entrance would be wrong.

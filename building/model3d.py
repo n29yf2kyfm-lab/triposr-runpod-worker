@@ -721,6 +721,18 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
     if storeys < 1 or storeys > 20:
         raise ModelError(f"{storeys} storeys is not a building")
 
+    # A ROOM ABOVE THE ROOF IS A CONTRADICTION, NOT A ROOM. base_level at or
+    # past the building's storey count left the room in the schedule but in
+    # no wall, no floor total and no export — it silently vanished, which is
+    # worse than either building it or refusing it. Refuse, with the fix.
+    for r in rooms:
+        if r.base_level >= storeys:
+            raise ModelError(
+                f"{r.name}: base_level {r.base_level} puts the room at or "
+                f"above the building's top — the model has {storeys} "
+                f"storey(s), so levels run 0 to {storeys - 1}. Raise "
+                f"plan.storeys or lower the room.")
+
     walls = walls_from_rooms(rooms)
 
     # A PARTY WALL IS THE NEIGHBOUR'S HOUSE, NOT THE SKY. On a semi or a
