@@ -35,6 +35,9 @@ docs/DESIGN_LANGUAGE.md — Georgian/vernacular pattern rules, archviz.
 docs/MATERIALS_AND_COST.md — materials, merchants, build economics.
 docs/GROUND_AND_FLOW.md — soil, foundations, site, space syntax.
 docs/ESTIMATING_RATES.md — every quantity rate with its source.
+docs/DWELLING_SIZES.md — what UK houses actually measure.
+docs/IMAGE_TO_3D.md — pictures→3D tools, interop, printing, and the
+  fusion rule: generated meshes give appearance, never dimensions.
 
 ## Current build queue (from the corrections/work orders)
 
