@@ -52,10 +52,18 @@ CLASS_RULES = [
       "broken glass", "windshield crack", "windscreen crack", "glass crack",
       "cracked glass", "glass chip", "glass-chip", "glass spider",
       "broken windshield", "broken window", "smashed glass"), "crack_glass"),
+    # "<part>-Damage" compounds. Found by reading the ingester's own unmapped
+    # report: Rear-windscreen-Damage (253), Front-Windscreen-Damage (140) and
+    # Sidemirror-Damage (185) were being discarded because the rules only knew
+    # "<part> crack" and NON_DAMAGE only matches the bare part name. Glass
+    # damage is a class we are short of, so losing it mattered.
+    (("windscreen damage", "windshield damage", "window damage",
+      "glass damage"), "crack_glass"),
     (("crack", "cracked", "fissure", "kirik", "retak"), "crack_glass"),
     # lamps and wheels before generic "broken"/"damage"
     (("lamp", "headlight", "head light", "tail light", "taillight", "fog light",
-      "indicator", "light broken", "broken light", "lampu"), "lamp_wheel"),
+      "indicator", "light broken", "broken light", "lampu", "signlight",
+      "signal light"), "lamp_wheel"),
     (("tire", "tyre", "wheel", "rim", "alloy", "flat tire", "tire burst",
       "ban ", "lastik"), "lamp_wheel"),
     # corrosion / paint
@@ -68,6 +76,7 @@ CLASS_RULES = [
       "smash", "crush", "collaps", "deform", "bent", "misalign", "panel gap",
       "gap", "hilang", "kayip"), "structural"),
     (("broken", "break", "shatter", "damaged part", "broken part",
+      "sidemirror damage", "side mirror damage", "mirror damage",
       "rusak", "hasar"), "structural"),
     # scratch family before dent, since "scratch-dent" strings are common
     (("scratch", "scuff", "scrape", "abrasion", "swirl", "graze", "key mark",
