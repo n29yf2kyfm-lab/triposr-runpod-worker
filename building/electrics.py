@@ -41,6 +41,7 @@ SOCKET_COUNTS = {
     "bedroom_double": 4, "bedroom_single": 3,
     "hall": 1, "landing": 1, "corridor": 0,
     "utility": 2, "wc": 0, "bathroom": 0,
+    "garage": 2,                # a pair of twins for tools and charger
 }
 
 CIRCUITS = [
@@ -86,6 +87,8 @@ def _socket_count(room):
         return SOCKET_COUNTS["corridor"]
     if kind == "kitchen":
         return SOCKET_COUNTS["kitchen"]
+    if kind == "garage":
+        return SOCKET_COUNTS["garage"]
     if kind == "circulation":
         return SOCKET_COUNTS["hall"]
     if kind == "wet":

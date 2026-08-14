@@ -197,6 +197,12 @@ def design(model):
     for room in model["rooms"]:
         kind = room.get("kind", "room")
         name = room.get("name", "room")
+        if kind == "garage":
+            # unheated space: no emitter, excluded from the design loss.
+            # (Simplification: walls between house and garage are treated
+            # as adiabatic like other partitions; a colder-than-house
+            # garage makes that slightly optimistic for adjoining rooms.)
+            continue
         ti = _room_temp(kind, name)
         dt = ti - dt_out
         h = _wall_height(model, room)
