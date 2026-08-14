@@ -1392,6 +1392,21 @@ def _with_buildability(model):
         if f["severity"] == "refuse":
             out["warnings"].append("NOT BUILDABLE: " + f["message"])
 
+    # Heating and ventilation ride along with buildability: the design
+    # heat loss is computed from the same measured walls and openings the
+    # geometry carries, and Part F rates from the same room schedule — so
+    # a model never ships without its radiators and its fans.
+    try:
+        import heatloss
+        out["heat"] = heatloss.design(model)
+    except ImportError:                     # pragma: no cover - optional
+        pass
+    try:
+        import ventilation
+        out["vent"] = ventilation.design(model)
+    except ImportError:                     # pragma: no cover - optional
+        pass
+
     # THE RULES ENGINE FINALLY RUNS. regs.py has carried measured Part K,
     # B1 and F limits since it was written and was imported by nothing but
     # its own tests — the pipeline's "compliance findings" silently excluded
@@ -1449,6 +1464,10 @@ def _absorb_buildability(model, extra):
                           "findings": result["findings"]}
     if extra.get("regs"):
         model["regs"] = extra["regs"]
+    if extra.get("heat"):
+        model["heat"] = extra["heat"]
+    if extra.get("vent"):
+        model["vent"] = extra["vent"]
     model["warnings"] = list(extra["warnings"])
 
 
