@@ -171,6 +171,21 @@ pip install -q --upgrade torch torchvision --index-url "https://download.pytorch
 # request aborts the whole install. Ignoring that one package lets pip put its
 # own copy alongside instead of failing.
 pip install -q --ignore-installed blinker "rfdetr[train,loggers]" || exit 14
+
+# REASSERT THE DRIVER-MATCHED TORCH. rfdetr's dependency resolution upgrades
+# torch to whatever PyPI serves by default — on this run 2.6.0+cu124 became
+# 2.13.0+cu130, which wants a CUDA 13 driver against the machine's 12.4, and
+# the run died at the CUDA check. The check below was already positioned after
+# rfdetr precisely because this had happened before; it caught the problem and
+# could not repair it, so the repair goes here.
+#
+# Machine-dependent, which is what makes it nasty: the same install succeeded
+# on a Blackwell card with a newer driver minutes earlier, and failed on an
+# A6000 at driver 550. Pinning to the driver-derived index makes it
+# deterministic on both. --no-deps so nothing else shifts underneath it.
+pip install -q --force-reinstall --no-deps torch torchvision \
+  --index-url "https://download.pytorch.org/whl/$IDX" || exit 16
+python -c "import torch;print('torch after re-pin:', torch.__version__)"
 # So the smoke test now checks the TRAINING path, not just the import: the
 # gate must fail on the same thing the real run would.
 # CUDA is verified AFTER rfdetr, never before. v4 printed "torch 2.6.0+cu124
