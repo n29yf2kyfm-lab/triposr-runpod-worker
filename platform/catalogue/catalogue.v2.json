@@ -296197,5 +296197,257 @@
    "method": "render",
    "at": "2026-08-13"
   }
+ },
+ {
+  "schemaVersion": 2,
+  "assetId": "toyota-rav4-2021-cr4-v1",
+  "make": "toyota",
+  "model": "RAV4",
+  "modelFamily": "toyota rav4",
+  "modelAliases": [
+   "RAV4"
+  ],
+  "generation": null,
+  "generationAliases": [],
+  "generationConfirmed": false,
+  "yearStart": 2021,
+  "yearEnd": null,
+  "bodyStyle": null,
+  "compatibleFuelTypes": [],
+  "compatibleTrimFamilies": [
+   "Prime PHEV"
+  ],
+  "exactDerivative": null,
+  "exactTrim": false,
+  "provenance": "sourced",
+  "sourceTitle": "",
+  "sourceUrl": "",
+  "sourceCreator": "",
+  "sourceReferenceId": "15be15530b0f46f6928fe5cde9fd4ed3",
+  "sourceRetrievedAt": "2026-08-14",
+  "sourceEvidenceUrl": null,
+  "licence": "CC Attribution",
+  "generatedFromReference": false,
+  "referenceImageCount": 0,
+  "accuracyGrade": "representative",
+  "qualityGrade": "B",
+  "technicalStatus": "passed",
+  "visualStatus": "owner-reviewed",
+  "publicationStatus": "approved",
+  "quarantineReason": null,
+  "hasInterior": false,
+  "interiorMode": "none",
+  "hasSeparateDoors": false,
+  "hasSeparateBonnet": false,
+  "hasSeparateBoot": false,
+  "supportsOpenableParts": false,
+  "paintMaterialNames": [
+   "M_2021_Toyota_RAV4_Prime_PHEV_BlackRoof",
+   "M_2021_Toyota_RAV4_Prime_PHEV_Super_Sonic_Red",
+   "M_2021_Toyota_RAV4_Prime_PHEV_UnderCarrier",
+   "M_2021_Toyota_RAV4_Prime_PHEV_lambert1"
+  ],
+  "glassMaterialNames": [
+   "M_2021_Toyota_RAV4_Prime_PHEV_Windows",
+   "M_2021_Toyota_RAV4_Prime_PHEV_WindowsTrims",
+   "M_2021_Toyota_RAV4_Prime_PHEV_HeadLightsGlass"
+  ],
+  "defaultColourFamily": null,
+  "renderColourLabel": null,
+  "oemPaintVerified": false,
+  "oemPaintCode": null,
+  "oemPaintName": null,
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-rav4-2021-cr4-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-rav4-2021-cr4-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-rav4-2021-cr4-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-rav4-2021-cr4-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-rav4-2021-cr4-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-rav4-2021-cr4-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-rav4-2021-cr4-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/toyota/toyota-rav4-2021-cr4-v1__yellow.glb"
+  },
+  "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-rav4-2021-cr4-v1.glb",
+  "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-rav4-2021-cr4-v1.glb",
+  "fallbackGlbUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/toyota/toyota-rav4-2021-cr4-v1/hero.jpg",
+  "turntableUrl": null,
+  "interiorUrl": null,
+  "fileSizeBytes": 45753576,
+  "mobileFileSizeBytes": 45753576,
+  "triangleCount": null,
+  "vertexCount": null,
+  "textureMemoryBytes": null,
+  "maxTextureResolution": null,
+  "contentHash": "07cc1fdfa568ac84e40f8d98a42a66c38e5a2b4c760eee33e8250722b9edd790",
+  "pipelineVersion": "publish-batch-cr4-2026-08-14",
+  "publishedAt": "2026-08-14",
+  "replacedAssetId": null,
+  "needsHumanReview": [],
+  "notes": [
+   "cr4 gated publish 2026-08-14: licence recorded as 'CC Attribution' (author ''), owner keep verdict 2026-08-14, sha256-verified against reviewed file; year/trim from review manifest (title-verbatim or owner-confirmed) only"
+  ],
+  "customization": {
+   "configuratorReady": false,
+   "componentPipelineVersion": "publish-batch-cr4",
+   "wheelSets": [],
+   "wraps": [],
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Decuma Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Decuma Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Manhattan Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Manhattan Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Attitude Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Attitude Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Eclipse Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eclipse Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Pure White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Pure White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Platinum White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Platinum White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Silver Blade Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Silver Blade Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Juniper Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Juniper Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Scarlet Flare",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Scarlet Flare",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cyan Splash",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cyan Splash",
+     "glbUrl": null
+    }
+   ]
+  },
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Decuma Grey Metallic",
+     "colourFamily": "Dark Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Manhattan Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Silver Blade Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Attitude Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Eclipse Black Metallic",
+     "colourFamily": "Black",
+     "finish": "Metallic"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Pure White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    },
+    {
+     "oemPaintName": "Platinum White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Juniper Blue Metallic",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Cyan Splash",
+     "colourFamily": "Turquoise Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Scarlet Flare",
+     "colourFamily": "Red",
+     "finish": "Pearl"
+    }
+   ],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2925,
+   "variantsHash": "183c021a0b79f750bbfb2b8a77e512fc153f2f55",
+   "method": "render",
+   "at": "2026-08-14"
+  }
  }
 ]
