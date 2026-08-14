@@ -61,15 +61,23 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, os.path.join(REPO, "pipeline", "ingest"))
 sys.path.insert(0, os.path.join(REPO, "pipeline", "publish"))
 
-from pose_fix import load_glb, world_points        # noqa: E402
+from pose_fix import (load_glb, world_points, read_accessor,   # noqa: E402
+                      _node_matrix)
 import respray_gltf                                 # noqa: E402
 
 # Names that are never the body. Deliberately conservative: this only removes
 # candidates, and a name it fails to exclude simply costs one extra render.
+# COLOUR WORDS MUST SURVIVE THE LAMP RULE. Measured on the 2026 Clio: its body
+# material is `M_0132_LightGray`, and `light` ate it -- the car then had NO body
+# candidate at all and the probe reported "no confident body material" on a car
+# whose body was sitting right there. This is the same class as CLAUDE.md's
+# `backlight_glass` trap, reproduced here; the lamp rule now requires `light`
+# NOT to be followed by a colour word.
 SKIP_RE = (
     r"glass|window|windscreen|windshield|"
     r"tire|tyre|rubber|"
-    r"lamp|light|drl|blink|indicat|"
+    r"lamp|light(?!\s*_?\s*(gray|grey|blue|green|red|brown|beige|silver))|"
+    r"drl|blink|indicat|"
     r"interior|seat|dash|leather|fabric|carpet|"
     r"plate|badge|emblem|logo|"
     r"brake|caliper|rotor|disc"
@@ -136,11 +144,68 @@ bpy.ops.render.render(write_still=True)
 '''
 
 
+def _tri_area(js, bin_, pr, W):
+    """World-space surface area of one primitive, or None if unindexed."""
+    pos = pr.get("attributes", {}).get("POSITION")
+    if pos is None:
+        return 0.0
+    V = read_accessor(js, bin_, pos)
+    Vw = (W[:3, :3] @ V.T).T + W[:3, 3]
+    ia = pr.get("indices")
+    I = (read_accessor(js, bin_, ia).astype(np.int64).ravel()
+         if ia is not None else np.arange(len(Vw)))
+    n = (len(I) // 3) * 3
+    if n < 3:
+        return 0.0
+    T = Vw[I[:n].reshape(-1, 3)]
+    return float(0.5 * np.linalg.norm(
+        np.cross(T[:, 1] - T[:, 0], T[:, 2] - T[:, 0]), axis=1).sum())
+
+
+def material_area(glb):
+    """{material name: world-space surface area}.
+
+    RANK BY AREA, NOT VERTEX COUNT. Vertex share is a bad proxy for how much of
+    the car a material covers, and it cost a real miss: on the 2026 Clio the
+    body is 18.4% of AREA but only 4.8% of verts, while the tyres/arches/interior
+    material is 66.1% of area at 39.5% of verts. A smooth body panel is
+    vertex-CHEAP -- it is a few big quads -- whereas tyres, arch liners and
+    interiors are vertex-dense. Ranking by verts pushed the body off the end of
+    the candidate list entirely.
+    """
+    js, bin_ = load_glb(glb)
+    nodes = js.get("nodes", [])
+    mats = js.get("materials", [])
+    roots = []
+    for s in js.get("scenes", [{}]):
+        roots += s.get("nodes", [])
+    if not roots:
+        roots = list(range(len(nodes)))
+    area = {}
+
+    def walk(i, M):
+        nd = nodes[i]
+        W = M @ _node_matrix(nd)
+        if "mesh" in nd:
+            for pr in js["meshes"][nd["mesh"]].get("primitives", []):
+                mi = pr.get("material")
+                nm = mats[mi].get("name", "") if mi is not None and mi < len(mats) else ""
+                area[nm] = area.get(nm, 0.0) + _tri_area(js, bin_, pr, W)
+        for c in nd.get("children", []):
+            walk(c, W)
+
+    for r in roots:
+        walk(r, np.eye(4))
+    return area
+
+
 def candidates(glb, top):
-    """Plausible body materials, richest vertex share first."""
+    """Plausible body materials, largest surface area first."""
     import re
     js, bin_ = load_glb(glb)
     prims = world_points(js, bin_)
+    area = material_area(glb)
+    tot_area = sum(area.values()) or 1.0
     alpha = {}
     for m in js.get("materials", []):
         pbr = m.get("pbrMetallicRoughness", {})
@@ -170,9 +235,10 @@ def candidates(glb, top):
         ext = bb[1] - bb[0]
         span = float(np.mean(ext / np.maximum(full, 1e-9)))
         rows.append({"name": nm, "verts": n, "vert_share": round(n / tot, 4),
+                     "area_share": round(area.get(nm, 0.0) / tot_area, 4),
                      "bbox_span": round(span, 3)})
     # a body material must both cover ground and reach across the car
-    rows.sort(key=lambda r: -(r["vert_share"] * (0.25 + r["bbox_span"])))
+    rows.sort(key=lambda r: -(r["area_share"] * (0.25 + r["bbox_span"])))
     return rows[:top]
 
 
@@ -234,11 +300,11 @@ def main():
     if a.keep_renders:
         os.makedirs(a.keep_renders, exist_ok=True)
     rows = probe(a.glb, a.top, a.keep_renders)
-    print(f"{'material':38s} {'vshare':>7s} {'span':>6s} {'PAINTED':>8s}")
+    print(f"{'material':38s} {'area%':>7s} {'vert%':>7s} {'span':>6s} {'PAINTED':>8s}")
     for r in rows:
         sh = "  n/a" if r.get("share") is None else f"{100*r['share']:6.1f}%"
-        print(f"  {r['name'][:36]:36s} {100*r['vert_share']:6.1f}% "
-              f"{r['bbox_span']:6.2f} {sh}"
+        print(f"  {r['name'][:36]:36s} {100*r['area_share']:6.1f}% "
+              f"{100*r['vert_share']:6.1f}% {r['bbox_span']:6.2f} {sh}"
               + (f"   {r['note']}" if r.get("note") else ""))
     best = rows[0] if rows and rows[0].get("share") else None
     if best and best["share"] >= 0.15:
