@@ -296924,8 +296924,7 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "quarantined",
-  "quarantineReason": "published without owner approval — held pending visual sign-off; Clio also flagged by owner for white wheels/tyres",
+  "publicationStatus": "approved",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -296945,11 +296944,20 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/kia/kia-sportage-2023-m1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/kia/kia-sportage-2023-m1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/kia/kia-sportage-2023-m1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/kia/kia-sportage-2023-m1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/kia/kia-sportage-2023-m1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/kia/kia-sportage-2023-m1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/kia/kia-sportage-2023-m1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/kia/kia-sportage-2023-m1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2023-m1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2023-m1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/kia/kia-sportage-2023-m1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 25983152,
@@ -297038,7 +297046,70 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Interstellar Grey",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Steel Grey",
+     "colourFamily": "Grey",
+     "finish": "Metallic"
+    }
+   ],
+   "silver": [],
+   "black": [
+    {
+     "oemPaintName": "Aurora Black Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Snow White Pearl",
+     "colourFamily": "Pearl White",
+     "finish": "Pearl"
+    },
+    {
+     "oemPaintName": "Fusion White",
+     "colourFamily": "White",
+     "finish": "Solid"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Mineral Blue",
+     "colourFamily": "Blue",
+     "finish": "Metallic"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Runway Red",
+     "colourFamily": "Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Experience Green",
+     "colourFamily": "Dark Green",
+     "finish": "Metallic"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4039,
+   "variantsHash": "49a0d100199c747bde8689b2fbfe94e45ee83de3",
+   "method": "render",
+   "at": "2026-08-14"
+  }
  },
  {
   "schemaVersion": 2,
@@ -297075,8 +297146,7 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "quarantined",
-  "quarantineReason": "published without owner approval — held pending visual sign-off; Clio also flagged by owner for white wheels/tyres",
+  "publicationStatus": "approved",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -297096,11 +297166,20 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/skoda/skoda-octavia-2025-m1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/skoda/skoda-octavia-2025-m1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/skoda/skoda-octavia-2025-m1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/skoda/skoda-octavia-2025-m1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/skoda/skoda-octavia-2025-m1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/skoda/skoda-octavia-2025-m1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/skoda/skoda-octavia-2025-m1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/skoda/skoda-octavia-2025-m1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-2025-m1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-2025-m1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/skoda/skoda-octavia-2025-m1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 19555912,
@@ -297197,7 +297276,76 @@
     }
    ]
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [
+    {
+     "oemPaintName": "Graphite Grey Metallic",
+     "colourFamily": "Gunmetal Grey",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Steel Grey",
+     "colourFamily": "Cement Grey",
+     "finish": "Solid"
+    }
+   ],
+   "silver": [
+    {
+     "oemPaintName": "Brilliant Silver Metallic",
+     "colourFamily": "Silver",
+     "finish": "Metallic"
+    }
+   ],
+   "black": [
+    {
+     "oemPaintName": "Black Magic Pearl",
+     "colourFamily": "Black",
+     "finish": "Pearl"
+    }
+   ],
+   "white": [
+    {
+     "oemPaintName": "Moon White Metallic",
+     "colourFamily": "White",
+     "finish": "Metallic"
+    }
+   ],
+   "blue": [
+    {
+     "oemPaintName": "Race Blue Metallic",
+     "colourFamily": "Racing Blue",
+     "finish": "Metallic"
+    },
+    {
+     "oemPaintName": "Energy Blue",
+     "colourFamily": "Light Blue",
+     "finish": "Solid"
+    }
+   ],
+   "red": [
+    {
+     "oemPaintName": "Velvet Red Metallic",
+     "colourFamily": "Dark Red",
+     "finish": "Metallic"
+    }
+   ],
+   "green": [
+    {
+     "oemPaintName": "Mamba Green",
+     "colourFamily": "Bright Green",
+     "finish": "Solid"
+    }
+   ],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3443,
+   "variantsHash": "22a91556f7b8d871670914faacbd77399e6c0cce",
+   "method": "render",
+   "at": "2026-08-14"
+  }
  },
  {
   "schemaVersion": 2,
@@ -297232,8 +297380,7 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "quarantined",
-  "quarantineReason": "published without owner approval — held pending visual sign-off; Clio also flagged by owner for white wheels/tyres",
+  "publicationStatus": "approved",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -297255,11 +297402,20 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mg/mg-zs-2025-m1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mg/mg-zs-2025-m1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mg/mg-zs-2025-m1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mg/mg-zs-2025-m1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mg/mg-zs-2025-m1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mg/mg-zs-2025-m1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mg/mg-zs-2025-m1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mg/mg-zs-2025-m1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mg/mg-zs-2025-m1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mg/mg-zs-2025-m1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/mg/mg-zs-2025-m1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 42676928,
@@ -297283,7 +297439,24 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [],
+   "silver": [],
+   "black": [],
+   "white": [],
+   "blue": [],
+   "red": [],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4047,
+   "variantsHash": "1fc1a06a4ebedf75e56c33fe0882dc8bda2f3a85",
+   "method": "render",
+   "at": "2026-08-14"
+  }
  },
  {
   "schemaVersion": 2,
@@ -297318,8 +297491,7 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "quarantined",
-  "quarantineReason": "published without owner approval — held pending visual sign-off; Clio also flagged by owner for white wheels/tyres",
+  "publicationStatus": "approved",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -297339,11 +297511,20 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mg/mg-mg4-2025-m1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mg/mg-mg4-2025-m1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mg/mg-mg4-2025-m1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mg/mg-mg4-2025-m1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mg/mg-mg4-2025-m1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mg/mg-mg4-2025-m1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mg/mg-mg4-2025-m1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mg/mg-mg4-2025-m1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mg/mg-mg4-2025-m1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mg/mg-mg4-2025-m1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/mg/mg-mg4-2025-m1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 36103444,
@@ -297367,7 +297548,24 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [],
+   "silver": [],
+   "black": [],
+   "white": [],
+   "blue": [],
+   "red": [],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4247,
+   "variantsHash": "90c8533dfa0474a64de3a3344a2bf902e4baf334",
+   "method": "render",
+   "at": "2026-08-14"
+  }
  },
  {
   "schemaVersion": 2,
@@ -297402,8 +297600,7 @@
   "qualityGrade": "B",
   "technicalStatus": "passed",
   "visualStatus": "owner-reviewed",
-  "publicationStatus": "quarantined",
-  "quarantineReason": "published without owner approval — held pending visual sign-off; Clio also flagged by owner for white wheels/tyres",
+  "publicationStatus": "approved",
   "hasInterior": false,
   "interiorMode": "none",
   "hasSeparateDoors": false,
@@ -297423,11 +297620,20 @@
   "oemPaintVerified": false,
   "oemPaintCode": null,
   "oemPaintName": null,
-  "colourVariants": {},
+  "colourVariants": {
+   "grey": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mg/mg-mg3-2025-m1-v1__grey.glb",
+   "silver": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mg/mg-mg3-2025-m1-v1__silver.glb",
+   "black": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mg/mg-mg3-2025-m1-v1__black.glb",
+   "white": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mg/mg-mg3-2025-m1-v1__white.glb",
+   "blue": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mg/mg-mg3-2025-m1-v1__blue.glb",
+   "red": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mg/mg-mg3-2025-m1-v1__red.glb",
+   "green": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mg/mg-mg3-2025-m1-v1__green.glb",
+   "yellow": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/library/mg/mg-mg3-2025-m1-v1__yellow.glb"
+  },
   "desktopGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mg/mg-mg3-2025-m1-v1.glb",
   "mobileGlbUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mg/mg-mg3-2025-m1-v1.glb",
   "fallbackGlbUrl": null,
-  "posterUrl": null,
+  "posterUrl": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finished/mg/mg-mg3-2025-m1-v1/hero.jpg",
   "turntableUrl": null,
   "interiorUrl": null,
   "fileSizeBytes": 37991172,
@@ -297451,7 +297657,24 @@
    "wraps": [],
    "colourOptions": []
   },
-  "platesBaked": false
+  "platesBaked": false,
+  "colourVariantPaints": {
+   "grey": [],
+   "silver": [],
+   "black": [],
+   "white": [],
+   "blue": [],
+   "red": [],
+   "green": [],
+   "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4117,
+   "variantsHash": "c8f37888b18e74295f9923a0aac0bcf5360d1ce0",
+   "method": "render",
+   "at": "2026-08-14"
+  }
  },
  {
   "schemaVersion": 2,
