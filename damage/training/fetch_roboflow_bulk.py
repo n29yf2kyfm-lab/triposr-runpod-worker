@@ -147,6 +147,9 @@ def main():
     ap.add_argument("--api-key", required=True)
     ap.add_argument("--min-free-gb", type=float, default=3.0)
     ap.add_argument("--limit", type=int, default=0, help="0 = all")
+    ap.add_argument("--shard", default=None,
+                    help="i/n — take only this slice of the audited projects, "
+                         "so N agents can fetch disjoint sets without racing")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
@@ -155,6 +158,13 @@ def main():
     sess.headers.update({"User-Agent": "triposr-damage-dataset/1.0"})
 
     rows = load_manifests(args.manifests)
+    if args.shard:
+        # Round-robin on index rather than a hash, because rows are sorted
+        # biggest-first: this hands every shard a comparable mix of large and
+        # small exports instead of dumping all the 10k-image projects on one.
+        i, n = (int(x) for x in str(args.shard).split("/"))
+        rows = [r for k, r in enumerate(rows) if k % n == i]
+        print(f"shard {i}/{n}: {len(rows)} projects")
     if args.limit:
         rows = rows[:args.limit]
     total_imgs = sum(r.get("images") or 0 for r in rows)
