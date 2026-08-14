@@ -132,3 +132,265 @@
 {"assetId": "mitsubishi-asx-v1", "make": "mitsubishi", "model": "asx", "bytes": 3896012, "draco": true, "crease": 147.2, "faces": 712524, "diag": 5128.04}
 {"assetId": "alfa-romeo-giulietta-v1", "make": "alfa-romeo", "model": "giulietta", "bytes": 2126816, "draco": true, "crease": 6.6, "faces": 30972, "diag": 149.3}
 {"assetId": "mini-clubman-v1", "make": "mini", "model": "clubman", "bytes": 2640640, "draco": true, "crease": 296.8, "faces": 1151660, "diag": 469.91}
+{"assetId": "suzuki-ignis-v1", "make": "suzuki", "model": "ignis", "bytes": 1297556, "draco": true, "crease": 19.0, "faces": 408435, "diag": 291.29}
+{"assetId": "nissan-pulsar-v1", "make": "nissan", "model": "pulsar", "bytes": 874612, "draco": true, "crease": 3.9, "faces": 23400, "diag": 167.69}
+{"assetId": "suzuki-baleno-v1", "make": "suzuki", "model": "baleno", "bytes": 2871472, "draco": true, "crease": 130.5, "faces": 707610, "diag": 7.77}
+{"assetId": "kia-ceed-v1", "make": "kia", "model": "ceed", "bytes": 660756, "draco": true, "crease": 3.5, "faces": 268393, "diag": 152.65}
+{"assetId": "land-rover-range-rover-sport-2018-v1", "make": "land-rover", "model": "range-rover-sport", "bytes": 1760200, "draco": true, "crease": 98.4, "faces": 523348, "diag": 6.04}
+{"assetId": "hyundai-i10-v1", "make": "hyundai", "model": "i10", "bytes": 5649932, "draco": true, "crease": 0.0, "faces": 481807, "diag": 301.56}
+{"assetId": "renault-captur-v1", "make": "renault", "model": "captur", "bytes": 2245664, "draco": true, "crease": 150.0, "faces": 875514, "diag": 6.45}
+{"assetId": "skoda-superb-v1", "make": "Skoda", "model": "Superb", "bytes": 1641764, "draco": true, "crease": 33.1, "faces": 216033, "diag": 40.46}
+{"assetId": "peugeot-3008-v1", "make": "peugeot", "model": "3008", "bytes": 773792, "draco": true, "crease": 77.5, "faces": 69321, "diag": 665.57}
+{"assetId": "dacia-duster-v1", "make": "dacia", "model": "duster", "bytes": 711684, "draco": true, "crease": 98.3, "faces": 31086, "diag": 492.78}
+{"assetId": "tesla-model-y-v1", "make": "tesla", "model": "model y", "bytes": 1070792, "draco": true, "crease": 164.8, "faces": 307360, "diag": 8.14}
+{"assetId": "audi-a3-v1", "make": "audi", "model": "a3", "bytes": 359516, "draco": true, "crease": 37.5, "faces": 28453, "diag": 5.79}
+{"assetId": "bmw-1-series-v1", "make": "bmw", "model": "1 series", "bytes": 517232, "draco": true, "crease": 43.7, "faces": 33173, "diag": 4.97}
+{"assetId": "bmw-4-series-v1", "make": "bmw", "model": "4 series", "bytes": 898720, "draco": true, "crease": 14.9, "faces": 92170, "diag": 217.31}
+{"assetId": "vauxhall-zafira-v1", "make": "vauxhall", "model": "zafira", "bytes": 977564, "draco": true, "crease": 2.3, "faces": 94305, "diag": 6.48}
+{"assetId": "jaguar-xe-v1", "make": "jaguar", "model": "xe", "bytes": 2156852, "draco": true, "crease": 268.0, "faces": 224236, "diag": 5.45}
+{"assetId": "volkswagen-id4-v1", "make": "volkswagen", "model": "id.4", "bytes": 2639848, "draco": true, "crease": 180.9, "faces": 925648, "diag": 5302.53}
+{"assetId": "fiat-tipo-v1", "make": "fiat", "model": "tipo", "bytes": 2587496, "draco": true, "crease": 138.5, "faces": 719485, "diag": 7.31}
+{"assetId": "nissan-note-v1", "make": "nissan", "model": "note", "bytes": 437988, "draco": true, "crease": 73.3, "faces": 37609, "diag": 491.01}
+{"assetId": "tesla-model-s-v1", "make": "tesla", "model": "model s", "bytes": 3677492, "draco": true, "crease": 169.6, "faces": 558293, "diag": 5.74}
+{"assetId": "toyota-c-hr-v1", "make": "toyota", "model": "c-hr", "bytes": 1583312, "draco": true, "crease": 125.6, "faces": 201069, "diag": 5.12}
+{"assetId": "tesla-model-x-v1", "make": "tesla", "model": "model x", "bytes": 2890208, "draco": true, "crease": 69.3, "faces": 846083, "diag": 314.71}
+{"assetId": "toyota-prius-v1", "make": "toyota", "model": "prius", "bytes": 1426972, "draco": true, "crease": 109.2, "faces": 179515, "diag": 5.3}
+{"assetId": "toyota-hilux-v1", "make": "toyota", "model": "hilux", "bytes": 4544492, "draco": true, "crease": 212.6, "faces": 982537, "diag": 8.27}
+{"assetId": "toyota-land-cruiser-v1", "make": "toyota", "model": "land cruiser", "bytes": 2130924, "draco": true, "crease": 324.4, "faces": 408530, "diag": 5.95}
+{"assetId": "toyota-gt86-v1", "make": "toyota", "model": "gt86", "bytes": 3718540, "draco": true, "crease": 155.0, "faces": 1152378, "diag": 39.84}
+{"assetId": "toyota-camry-v1", "make": "toyota", "model": "camry", "bytes": 1431508, "draco": true, "crease": 98.5, "faces": 176595, "diag": 55.35}
+{"assetId": "jaguar-f-type-v1", "make": "jaguar", "model": "f-type", "bytes": 2114960, "draco": true, "crease": 197.4, "faces": 461245, "diag": 7.71}
+{"assetId": "toyota-corolla-v1", "make": "toyota", "model": "corolla", "bytes": 2930644, "draco": true, "crease": 292.0, "faces": 1062848, "diag": 301.42}
+{"assetId": "jaguar-f-type-v2", "make": "jaguar", "model": "F-Type Convertible", "bytes": 2457308, "draco": true, "crease": 229.5, "faces": 240736, "diag": 5.19}
+{"assetId": "jaguar-i-pace-v1", "make": "jaguar", "model": "i-pace", "bytes": 1051868, "draco": true, "crease": 171.4, "faces": 274818, "diag": 16.66}
+{"assetId": "bmw-x4-v1", "make": "bmw", "model": "x4", "bytes": 1029456, "draco": true, "crease": 0.2, "faces": 83918, "diag": 7.21}
+{"assetId": "lexus-es-v1", "make": "lexus", "model": "es", "bytes": 1972524, "draco": true, "crease": 26.2, "faces": 200212, "diag": 30.75}
+{"assetId": "lexus-rc-v1", "make": "Lexus", "model": "RC", "bytes": 2008856, "draco": true, "crease": 103.7, "faces": 282981, "diag": 15.8}
+{"assetId": "mercedes-benz-gle-v1", "make": "mercedes-benz", "model": "gle", "bytes": 591036, "draco": true, "crease": 32.6, "faces": 44323, "diag": 5.63}
+{"assetId": "bmw-7-series-v1", "make": "bmw", "model": "7 series", "bytes": 1040024, "draco": true, "crease": 0.0, "faces": 85190, "diag": 8371.4}
+{"assetId": "mercedes-benz-v-class-v1", "make": "mercedes-benz", "model": "v-class", "bytes": 1565208, "draco": true, "crease": 293.2, "faces": 232965, "diag": 627.35}
+{"assetId": "audi-rs4-v1", "make": "audi", "model": "RS4 (2013)", "bytes": 678468, "draco": true, "crease": 16.8, "faces": 25982, "diag": 5.34}
+{"assetId": "audi-rs4-v2", "make": "audi", "model": "rs4", "bytes": 1116948, "draco": true, "crease": 97.7, "faces": 79583, "diag": 5.45}
+{"assetId": "audi-q4-e-tron-v1", "make": "audi", "model": "q4 e-tron", "bytes": 5173928, "draco": true, "crease": 0.0, "faces": 466420, "diag": 1601.26}
+{"assetId": "audi-rs6-v1", "make": "audi", "model": "rs6", "bytes": 2806100, "draco": true, "crease": 292.1, "faces": 233677, "diag": 5.7}
+{"assetId": "toyota-yaris-v1", "make": "toyota", "model": "GR Yaris", "bytes": 3164496, "draco": true, "crease": 416.6, "faces": 431232, "diag": 4.75}
+{"assetId": "mercedes-benz-cla-v1", "make": "mercedes-benz", "model": "CLA Shooting Brake", "bytes": 1590404, "draco": true, "crease": 197.7, "faces": 123993, "diag": 5.41}
+{"assetId": "mercedes-benz-cla-v2", "make": "mercedes-benz", "model": "cla", "bytes": 2625312, "draco": true, "crease": 256.5, "faces": 325517, "diag": 5.41}
+{"assetId": "ford-mustang-v1", "make": "ford", "model": "mustang", "bytes": 2337700, "draco": true, "crease": 222.1, "faces": 348335, "diag": 6.34}
+{"assetId": "porsche-macan-v1", "make": "porsche", "model": "macan", "bytes": 400256, "draco": true, "crease": 73.1, "faces": 44694, "diag": 5.23}
+{"assetId": "bmw-m2-v1", "make": "bmw", "model": "m2", "bytes": 3162992, "draco": true, "crease": 231.3, "faces": 215101, "diag": 5.2}
+{"assetId": "porsche-cayenne-v2", "make": "porsche", "model": "Cayenne (2009)", "bytes": 742020, "draco": true, "crease": 56.4, "faces": 32603, "diag": 5.26}
+{"assetId": "porsche-cayenne-v1", "make": "porsche", "model": "cayenne", "bytes": 3984756, "draco": true, "crease": 212.0, "faces": 250921, "diag": 5.19}
+{"assetId": "volkswagen-scirocco-v1", "make": "volkswagen", "model": "scirocco", "bytes": 1782632, "draco": true, "crease": 196.0, "faces": 123575, "diag": 5.27}
+{"assetId": "porsche-cayenne-v3", "make": "porsche", "model": "Cayenne Coupe", "bytes": 3179528, "draco": true, "crease": 77.4, "faces": 118521, "diag": 5.19}
+{"assetId": "porsche-panamera-v1", "make": "porsche", "model": "panamera", "bytes": 2830208, "draco": true, "crease": 247.3, "faces": 241633, "diag": 5.11}
+{"assetId": "renault-kangoo-v1", "make": "renault", "model": "kangoo", "bytes": 3373492, "draco": true, "crease": 236.5, "faces": 1127975, "diag": 5.51}
+{"assetId": "kia-stonic-v1", "make": "kia", "model": "stonic", "bytes": 5772092, "draco": true, "crease": 312.1, "faces": 468235, "diag": 5.31}
+{"assetId": "jeep-wrangler-v1", "make": "jeep", "model": "wrangler", "bytes": 492524, "draco": true, "crease": 61.3, "faces": 33858, "diag": 5.4}
+{"assetId": "jeep-compass-v1", "make": "jeep", "model": "compass", "bytes": 3337804, "draco": true, "crease": 26.8, "faces": 486581, "diag": 532.97}
+{"assetId": "jeep-grand-cherokee-v2", "make": "jeep", "model": "grand cherokee", "bytes": 2158596, "draco": true, "crease": 241.7, "faces": 227372, "diag": 5.23}
+{"assetId": "suzuki-sx4-v1", "make": "suzuki", "model": "sx4", "bytes": 756748, "draco": true, "crease": 40.0, "faces": 72555, "diag": 9.7}
+{"assetId": "jeep-grand-cherokee-v3", "make": "jeep", "model": "Grand Cherokee MK2", "bytes": 5267820, "draco": true, "crease": 192.0, "faces": 1174340, "diag": 5.36}
+{"assetId": "subaru-wrx-v2", "make": "subaru", "model": "wrx", "bytes": 1631704, "draco": true, "crease": 98.9, "faces": 51838, "diag": 5.16}
+{"assetId": "honda-insight-v1", "make": "honda", "model": "insight", "bytes": 3332216, "draco": true, "crease": 319.8, "faces": 1176219, "diag": 5.28}
+{"assetId": "mazda-2-v1", "make": "mazda", "model": "2", "bytes": 1262788, "draco": true, "crease": 117.8, "faces": 183665, "diag": 5.5}
+{"assetId": "mazda-rx-8-v1", "make": "mazda", "model": "rx-8", "bytes": 1712712, "draco": true, "crease": 111.1, "faces": 117120, "diag": 5.09}
+{"assetId": "porsche-718-boxster-v1", "make": "porsche", "model": "718 boxster", "bytes": 1134608, "draco": true, "crease": 176.7, "faces": 151312, "diag": 5.17}
+{"assetId": "honda-nsx-v1", "make": "honda", "model": "nsx", "bytes": 1089924, "draco": true, "crease": 253.6, "faces": 173587, "diag": 5.22}
+{"assetId": "volkswagen-jetta-v1", "make": "volkswagen", "model": "jetta", "bytes": 2411280, "draco": true, "crease": 178.7, "faces": 376166, "diag": 5.37}
+{"assetId": "alfa-romeo-mito-v1", "make": "alfa-romeo", "model": "mito", "bytes": 1287236, "draco": true, "crease": 94.3, "faces": 175037, "diag": 4.81}
+{"assetId": "mercedes-benz-vito-v1", "make": "mercedes-benz", "model": "vito", "bytes": 2610152, "draco": true, "crease": 215.5, "faces": 528672, "diag": 5.74}
+{"assetId": "mini-convertible-v1", "make": "mini", "model": "convertible", "bytes": 3560860, "draco": true, "crease": 50.5, "faces": 992910, "diag": 5.41}
+{"assetId": "skoda-rapid-v1", "make": "skoda", "model": "rapid", "bytes": 1096560, "draco": true, "crease": 31.2, "faces": 107257, "diag": 5.21}
+{"assetId": "polestar-2-v1", "make": "polestar", "model": "2", "bytes": 893552, "draco": true, "crease": 59.5, "faces": 96913, "diag": 5.13}
+{"assetId": "toyota-bz4x-v1", "make": "toyota", "model": "bz4x", "bytes": 3889460, "draco": true, "crease": 163.5, "faces": 512098, "diag": 5.25}
+{"assetId": "cupra-ateca-v1", "make": "cupra", "model": "ateca", "bytes": 6216404, "draco": true, "crease": 0.1, "faces": 465812, "diag": 5.3}
+{"assetId": "volvo-c30-v1", "make": "volvo", "model": "c30", "bytes": 3023428, "draco": true, "crease": 0.6, "faces": 200852, "diag": 4.98}
+{"assetId": "toyota-proace-v1", "make": "toyota", "model": "proace", "bytes": 6204132, "draco": true, "crease": 0.2, "faces": 420396, "diag": 5.29}
+{"assetId": "fiat-ducato-v1", "make": "fiat", "model": "ducato", "bytes": 216800, "draco": true, "crease": 69.7, "faces": 35490, "diag": 5.47}
+{"assetId": "nissan-nv200-v1", "make": "nissan", "model": "nv200", "bytes": 4755856, "draco": true, "crease": 5.3, "faces": 281811, "diag": 5.4}
+{"assetId": "mini-countryman-v2", "make": "mini", "model": "countryman", "bytes": 200852, "draco": true, "crease": 70.4, "faces": 32264, "diag": 5.27}
+{"assetId": "volkswagen-golf-mk7-v1", "make": "volkswagen", "model": "Golf Mk7", "bytes": 1057096, "draco": true, "crease": 96.7, "faces": 107578, "diag": 5.22}
+{"assetId": "nissan-350z-2006-v1", "make": "nissan", "model": "350Z", "bytes": 520776, "draco": true, "crease": 66.0, "faces": 43105, "diag": 5.17}
+{"assetId": "hyundai-i30-2018-v1", "make": "hyundai", "model": "i30 N", "bytes": 666696, "draco": true, "crease": 51.0, "faces": 30898, "diag": 5.26}
+{"assetId": "toyota-yaris-2001-v1", "make": "toyota", "model": "yaris", "bytes": 1449184, "draco": true, "crease": 50.7, "faces": 101180, "diag": 4.51}
+{"assetId": "honda-s2000-v1", "make": "honda", "model": "S2000", "bytes": 1421020, "draco": true, "crease": 94.0, "faces": 52827, "diag": 470.87}
+{"assetId": "volkswagen-amarok-2017-v1", "make": "volkswagen", "model": "Amarok", "bytes": 1827720, "draco": true, "crease": 213.8, "faces": 293430, "diag": 5.18}
+{"assetId": "mitsubishi-lancer-evolution-v1", "make": "mitsubishi", "model": "Lancer Evolution", "bytes": 2069884, "draco": true, "crease": 274.6, "faces": 225046, "diag": 5.21}
+{"assetId": "jaguar-xk-2009-v1", "make": "jaguar", "model": "XK", "bytes": 930944, "draco": true, "crease": 32.1, "faces": 41640, "diag": 5.09}
+{"assetId": "bmw-z4-m40i-2019-v1", "make": "bmw", "model": "Z4", "bytes": 3171496, "draco": true, "crease": 237.9, "faces": 235110, "diag": 5.02}
+{"assetId": "mg-zs-2025-v1", "make": "mg", "model": "ZS", "bytes": 4666044, "draco": true, "crease": 272.7, "faces": 1133066, "diag": 5.29}
+{"assetId": "mg-4-2025-v1", "make": "mg", "model": "4", "bytes": 3359500, "draco": true, "crease": 279.0, "faces": 1052144, "diag": 5.32}
+{"assetId": "mg-3-2025-v1", "make": "mg", "model": "3", "bytes": 3881680, "draco": true, "crease": 176.8, "faces": 894339, "diag": 5.31}
+{"assetId": "volkswagen-id-buzz-v1", "make": "volkswagen", "model": "ID Buzz", "bytes": 2853852, "draco": true, "crease": 142.9, "faces": 1085128, "diag": 5.36}
+{"assetId": "volkswagen-multivan-v1", "make": "volkswagen", "model": "Multivan", "bytes": 3506416, "draco": true, "crease": 228.4, "faces": 1252872, "diag": 5.3}
+{"assetId": "alfa-romeo-tonale-v1", "make": "alfa-romeo", "model": "Tonale", "bytes": 4088824, "draco": true, "crease": 0.8, "faces": 236142, "diag": 5.3}
+{"assetId": "bentley-bentayga-v1", "make": "bentley", "model": "Bentayga", "bytes": 2276656, "draco": true, "crease": 277.7, "faces": 219074, "diag": 5.18}
+{"assetId": "kia-ev9-v1", "make": "kia", "model": "EV9", "bytes": 7091052, "draco": true, "crease": 265.8, "faces": 568264, "diag": 5.86}
+{"assetId": "aston-martin-dbx-v1", "make": "aston-martin", "model": "DBX", "bytes": 2424644, "draco": true, "crease": 27.7, "faces": 94527, "diag": 5.17}
+{"assetId": "cupra-tavascan-v1", "make": "cupra", "model": "Tavascan", "bytes": 3753480, "draco": true, "crease": 170.1, "faces": 1273126, "diag": 5.25}
+{"assetId": "maserati-levante-v1", "make": "maserati", "model": "Levante", "bytes": 484696, "draco": true, "crease": 87.0, "faces": 45106, "diag": 5.16}
+{"assetId": "toyota-gr86-v1", "make": "toyota", "model": "GR86", "bytes": 2067936, "draco": true, "crease": 272.2, "faces": 319460, "diag": 5.2}
+{"assetId": "toyota-highlander-v1", "make": "toyota", "model": "Highlander", "bytes": 1574548, "draco": true, "crease": 137.8, "faces": 200292, "diag": 5.74}
+{"assetId": "bmw-xm-v1", "make": "bmw", "model": "XM", "bytes": 8603792, "error": "unreadable"}
+{"assetId": "lotus-emira-v1", "make": "lotus", "model": "Emira", "bytes": 1210476, "draco": true, "crease": 99.1, "faces": 102057, "diag": 5.19}
+{"assetId": "smart-fortwo-v1", "make": "smart", "model": "ForTwo", "bytes": 1999020, "draco": true, "crease": 94.0, "faces": 264753, "diag": 3.86}
+{"assetId": "rolls-royce-cullinan-v1", "make": "rolls-royce", "model": "Cullinan", "bytes": 244508, "draco": true, "crease": 21.7, "faces": 8348, "diag": 5.13}
+{"assetId": "ford-escort-v1", "make": "ford", "model": "Escort", "bytes": 1495744, "draco": true, "crease": 53.5, "faces": 20482, "diag": 5.33}
+{"assetId": "mg-5-2025-v1", "make": "mg", "model": "5", "bytes": 2926160, "draco": true, "crease": 224.5, "faces": 802592, "diag": 5.18}
+{"assetId": "toyota-gr-supra-v1", "make": "toyota", "model": "Supra", "bytes": 1786136, "draco": true, "crease": 174.0, "faces": 193035, "diag": 5.19}
+{"assetId": "ferrari-roma-v1", "make": "ferrari", "model": "Roma", "bytes": 3341156, "draco": true, "crease": 219.0, "faces": 241011, "diag": 5.14}
+{"assetId": "aston-martin-dbs-v1", "make": "aston-martin", "model": "DBS", "bytes": 2293168, "draco": true, "crease": 27.1, "faces": 38811, "diag": 5.09}
+{"assetId": "mclaren-artura-v1", "make": "mclaren", "model": "Artura", "bytes": 3210024, "draco": true, "crease": 213.0, "faces": 226145, "diag": 5.14}
+{"assetId": "chevrolet-corvette-v1", "make": "chevrolet", "model": "Corvette", "bytes": 1913324, "draco": true, "crease": 54.5, "faces": 263678, "diag": 5.99}
+{"assetId": "lotus-emeya-v1", "make": "lotus", "model": "Emeya", "bytes": 1397908, "draco": true, "crease": 74.4, "faces": 88834, "diag": 5.81}
+{"assetId": "audi-rs7-v1", "make": "audi", "model": "RS7", "bytes": 3076276, "draco": true, "crease": 261.1, "faces": 229230, "diag": 5.1}
+{"assetId": "mitsubishi-mirage-v1", "make": "mitsubishi", "model": "Mirage", "bytes": 3848964, "draco": true, "crease": 320.0, "faces": 610951, "diag": 5.45}
+{"assetId": "ferrari-f8-v1", "make": "Ferrari", "model": "F8", "bytes": 655168, "draco": true, "crease": 44.3, "faces": 48164, "diag": 5.33}
+{"assetId": "suzuki-across-v1", "make": "suzuki", "model": "Across", "bytes": 3010956, "draco": true, "crease": 139.8, "faces": 1039500, "diag": 5.27}
+{"assetId": "toyota-vellfire-v1", "make": "toyota", "model": "Vellfire", "bytes": 3452300, "draco": true, "crease": 192.6, "faces": 1294984, "diag": 5.24}
+{"assetId": "ferrari-812-v1", "make": "ferrari", "model": "812", "bytes": 1981872, "draco": true, "crease": 177.3, "faces": 142550, "diag": 5.14}
+{"assetId": "ferrari-sf90-v1", "make": "ferrari", "model": "SF90", "bytes": 4237444, "draco": true, "crease": 220.9, "faces": 245337, "diag": 5.15}
+{"assetId": "ferrari-purosangue-v1", "make": "ferrari", "model": "Purosangue", "bytes": 4061128, "draco": true, "crease": 261.9, "faces": 256484, "diag": 5.16}
+{"assetId": "volkswagen-beetle-v1", "make": "volkswagen", "model": "Beetle", "bytes": 647188, "draco": true, "crease": 98.7, "faces": 84533, "diag": 5.15}
+{"assetId": "jaguar-e-type-v1", "make": "jaguar", "model": "E-Type", "bytes": 1341548, "draco": true, "crease": 152.1, "faces": 178337, "diag": 5.0}
+{"assetId": "rolls-royce-ghost-v1", "make": "Rolls-Royce", "model": "Ghost", "bytes": 3491716, "draco": true, "crease": 287.9, "faces": 765833, "diag": 5.97}
+{"assetId": "mg-cyberster-v1", "make": "mg", "model": "Cyberster", "bytes": 2043000, "draco": true, "crease": 257.2, "faces": 459556, "diag": 2.78}
+{"assetId": "nissan-elgrand-v1", "make": "nissan", "model": "Elgrand", "bytes": 1689740, "draco": true, "crease": 87.5, "faces": 280958, "diag": 5.33}
+{"assetId": "peugeot-boxer-v1", "make": "peugeot", "model": "Boxer", "bytes": 3789928, "draco": true, "crease": 136.1, "faces": 886527, "diag": 5.23}
+{"assetId": "peugeot-205-v1", "make": "peugeot", "model": "205", "bytes": 2469848, "draco": true, "crease": 117.9, "faces": 575008, "diag": 13.66}
+{"assetId": "hyundai-elantra-v1", "make": "hyundai", "model": "Elantra", "bytes": 7107028, "draco": true, "crease": 0.5, "faces": 500251, "diag": 5.15}
+{"assetId": "byd-atto3-v1", "make": "BYD", "model": "Atto 3", "bytes": 2171432, "draco": true, "crease": 5.7, "faces": 144379, "diag": 5.28}
+{"assetId": "byd-dolphin-v1", "make": "BYD", "model": "Dolphin", "bytes": 3732312, "draco": true, "crease": 137.0, "faces": 434099, "diag": 5.39}
+{"assetId": "byd-seal-v1", "make": "BYD", "model": "Seal", "bytes": 2794216, "draco": true, "crease": 0.0, "faces": 136564, "diag": 540.88}
+{"assetId": "alpine-a110-v1", "make": "Alpine", "model": "A110", "bytes": 1674704, "draco": true, "crease": 142.0, "faces": 657547, "diag": 5.18}
+{"assetId": "audi-s3-v1", "make": "AUDI", "model": "S3", "bytes": 495892, "draco": true, "crease": 17.4, "faces": 34823, "diag": 4.85}
+{"assetId": "cupra-terramar-v1", "make": "CUPRA", "model": "Terramar", "bytes": 11454184, "draco": true, "crease": 1072.6, "faces": 623759, "diag": 52.45}
+{"assetId": "citroen-e-c3-v1", "make": "CITROEN", "model": "E-C3 +", "bytes": 4401416, "draco": true, "crease": 95.5, "faces": 1338749, "diag": 5.17}
+{"assetId": "ssangyong-tivoli-v1", "make": "SsangYong", "model": "Tivoli", "bytes": 5155516, "draco": true, "crease": 23.5, "faces": 607080, "diag": 4.96}
+{"assetId": "subaru-xv-v1", "make": "SUBARU", "model": "Xv", "bytes": 5867676, "draco": true, "crease": 198.4, "faces": 2075282, "diag": 31.13}
+{"assetId": "audi-e-tron-v1", "make": "AUDI", "model": "e-tron", "bytes": 258256, "draco": true, "crease": 28.1, "faces": 41537, "diag": 7768.23}
+{"assetId": "suzuki-swace-v1", "make": "SUZUKI", "model": "Swace", "bytes": 5922544, "draco": true, "crease": 184.5, "faces": 1746608, "diag": 528.3}
+{"assetId": "seat-mii-v1", "make": "SEAT", "model": "Mii", "bytes": 5673588, "draco": true, "crease": 120.0, "faces": 1192783, "diag": 6.14}
+{"assetId": "peugeot-206-v1", "make": "PEUGEOT", "model": "206", "bytes": 836644, "draco": true, "crease": 69.6, "faces": 171861, "diag": 468.26}
+{"assetId": "audi-a2-v1", "make": "Audi", "model": "A2", "bytes": 148636, "draco": true, "crease": 8.5, "faces": 24113, "diag": 365.79}
+{"assetId": "fiat-500l-v1", "make": "Fiat", "model": "500L", "bytes": 734808, "draco": true, "crease": 281.0, "faces": 55199, "diag": 1.73}
+{"assetId": "mg-mg4-v1", "make": "MG", "model": "MG4", "bytes": 3040836, "draco": true, "crease": 48.7, "faces": 1052140, "diag": 444.33}
+{"assetId": "audi-q3-2014-w5-v1", "make": "audi", "model": "Audi Q3", "bytes": 5952140, "draco": true, "crease": 17.9, "faces": 539688, "diag": 5.08}
+{"assetId": "cupra-formentor-2021-w5-v1", "make": "cupra", "model": "Formentor", "bytes": 6192368, "draco": true, "crease": 196.9, "faces": 1633965, "diag": 203.28}
+{"assetId": "ford-ka-sedan-2015-w5-v1", "make": "ford", "model": "Ford Ka Sedan", "bytes": 5413008, "draco": true, "crease": 5.9, "faces": 634420, "diag": 5.03}
+{"assetId": "ford-ecosport-2012-w5-v1", "make": "ford", "model": "Ford EcoSport", "bytes": 8405740, "draco": true, "crease": 17.0, "faces": 804727, "diag": 4.92}
+{"assetId": "honda-accord-2017-w5-v1", "make": "honda", "model": "Honda Accord", "bytes": 2449636, "draco": true, "crease": 68.7, "faces": 769978, "diag": 5.79}
+{"assetId": "honda-civic-2016-w5-v1", "make": "honda", "model": "Honda Civic", "bytes": 1702060, "draco": true, "crease": 74.4, "faces": 663667, "diag": 28.29}
+{"assetId": "honda-civic-2007-w5-v1", "make": "honda", "model": "Honda Civic", "bytes": 3260680, "draco": true, "crease": 320.5, "faces": 1082343, "diag": 495.24}
+{"assetId": "hyundai-ioniq-6-w5-v1", "make": "hyundai", "model": "Ioniq 6", "bytes": 11794260, "draco": true, "crease": 114.7, "faces": 1005938, "diag": 610.34}
+{"assetId": "land-rover-range-rover-sport-2018-w5-v1", "make": "land-rover", "model": "Range Rover Sport", "bytes": 4878628, "draco": true, "crease": 167.3, "faces": 523344, "diag": 3.43}
+{"assetId": "land-rover-defender-w5-v1", "make": "land-rover", "model": "Defender 110", "bytes": 4938144, "draco": true, "crease": 198.1, "faces": 959680, "diag": 5.48}
+{"assetId": "lexus-lm-hybrid-w5-v1", "make": "Lexus", "model": "LM", "bytes": 5620136, "draco": true, "crease": 544.0, "faces": 528724, "diag": 23.92}
+{"assetId": "mazda-mx-5-2014-w5-v1", "make": "mazda", "model": "Mazda MX-5", "bytes": 3772208, "draco": true, "crease": 213.8, "faces": 1306252, "diag": 450.3}
+{"assetId": "mercedes-benz-mercedes-vito-w5-v1", "make": "mercedes-benz", "model": "Mercedes Vito", "bytes": 10116656, "draco": true, "crease": 191.8, "faces": 550378, "diag": 6.26}
+{"assetId": "mercedes-benz-mercedes-vito-2010-w5-v1", "make": "mercedes-benz", "model": "Mercedes Vito", "bytes": 7572704, "draco": true, "crease": 209.5, "faces": 528668, "diag": 5.92}
+{"assetId": "mini-cooper-s-2011-w5-v1", "make": "mini", "model": "Cooper S Convertible", "bytes": 3095240, "draco": true, "crease": 178.6, "faces": 992580, "diag": 450.95}
+{"assetId": "mitsubishi-asx-w5-v1", "make": "mitsubishi", "model": "Mitsubishi ASX", "bytes": 2825396, "draco": true, "crease": 146.2, "faces": 712534, "diag": 5128.04}
+{"assetId": "mitsubishi-asx-2011-w5-v1", "make": "mitsubishi", "model": "Mitsubishi ASX", "bytes": 3869816, "draco": true, "crease": 168.3, "faces": 1293058, "diag": 504.55}
+{"assetId": "nissan-navara-w5-v1", "make": "nissan", "model": "Nissan Navara", "bytes": 4047488, "draco": true, "crease": 135.0, "faces": 612955, "diag": 751.59}
+{"assetId": "nissan-juke-2011-w5-v1", "make": "nissan", "model": "Juke", "bytes": 3099340, "draco": true, "crease": 149.4, "faces": 1077400, "diag": 487.27}
+{"assetId": "nissan-navara-2022-w5-v1", "make": "nissan", "model": "Nissan Navara", "bytes": 3060180, "draco": true, "crease": 135.0, "faces": 612955, "diag": 751.59}
+{"assetId": "nissan-nv200-2010-w5-v1", "make": "nissan", "model": "NV200", "bytes": 2747804, "draco": true, "crease": 151.7, "faces": 971576, "diag": 524.08}
+{"assetId": "opel-astra-2012-w5-v1", "make": "opel", "model": "Astra", "bytes": 2477908, "draco": true, "crease": 139.6, "faces": 891014, "diag": 511.64}
+{"assetId": "nissan-qashqai-2010-w5-v1", "make": "nissan", "model": "Qashqai", "bytes": 4407492, "draco": true, "crease": 161.1, "faces": 1369193, "diag": 517.03}
+{"assetId": "opel-corsa-1997-w5-v1", "make": "opel", "model": "Corsa", "bytes": 11484020, "error": "unreadable"}
+{"assetId": "peugeot-2008-2020-w5-v1", "make": "peugeot", "model": "Peugeot 2008", "bytes": 5183468, "draco": true, "crease": 0.0, "faces": 361568, "diag": 17545.51}
+{"assetId": "peugeot-308-2012-w5-v1", "make": "peugeot", "model": "Peugeot 308", "bytes": 2441244, "draco": true, "crease": 170.6, "faces": 821303, "diag": 507.62}
+{"assetId": "skoda-fabia-2011-w5-v1", "make": "skoda", "model": "Skoda Fabia", "bytes": 4349348, "draco": true, "crease": 160.1, "faces": 1172440, "diag": 474.5}
+{"assetId": "seat-tarraco-fr-2021-w5-v1", "make": "seat", "model": "Seat Tarraco FR", "bytes": 4257372, "draco": true, "crease": 279.1, "faces": 1205827, "diag": 2.15}
+{"assetId": "skoda-octavia-2014-w5-v1", "make": "skoda", "model": "Skoda Octavia", "bytes": 3712764, "draco": true, "crease": 117.9, "faces": 1011049, "diag": 827.14}
+{"assetId": "skoda-superb-2009-w5-v1", "make": "skoda", "model": "Skoda Superb", "bytes": 2469552, "draco": true, "crease": 93.0, "faces": 593699, "diag": 6.23}
+{"assetId": "skoda-octavia-combi-2017-w5-v1", "make": "skoda", "model": "Skoda Octavia Combi", "bytes": 3551528, "draco": true, "crease": 349.9, "faces": 1434188, "diag": 526.06}
+{"assetId": "suzuki-alto-2024-w5-v1", "make": "suzuki", "model": "Suzuki Alto", "bytes": 7417140, "draco": true, "crease": 310.7, "faces": 728150, "diag": 12.0}
+{"assetId": "tesla-model-3-w5-v1", "make": "tesla", "model": "Model 3", "bytes": 3608672, "draco": true, "crease": 145.0, "faces": 684315, "diag": 601.14}
+{"assetId": "suzuki-ignis-2022-w5-v1", "make": "suzuki", "model": "Suzuki Ignis", "bytes": 3821924, "draco": true, "crease": 2.2, "faces": 818084, "diag": 4577.37}
+{"assetId": "tesla-model-3-2018-w5-v1", "make": "tesla", "model": "Model 3", "bytes": 3963288, "draco": true, "crease": 244.9, "faces": 684315, "diag": 6.58}
+{"assetId": "tesla-model-3-2023-w5-v1", "make": "tesla", "model": "Model 3", "bytes": 3793192, "draco": true, "crease": 244.9, "faces": 684315, "diag": 6.58}
+{"assetId": "toyota-rav4-2000-w5-v1", "make": "toyota", "model": "Toyota RAV4", "bytes": 3114032, "draco": true, "crease": 225.4, "faces": 1080418, "diag": 492.36}
+{"assetId": "volkswagen-vw-golf-w5-v1", "make": "volkswagen", "model": "Golf Cabriolet Mk1", "bytes": 5306516, "draco": true, "crease": 157.8, "faces": 765978, "diag": 565.65}
+{"assetId": "vauxhall-opel-mokka-2021-w5-v1", "make": "vauxhall", "model": "Opel Mokka", "bytes": 3048144, "draco": true, "crease": 182.1, "faces": 1052017, "diag": 496.71}
+{"assetId": "byd-dolphin-2025-w6-v1", "make": "byd", "model": "Dolphin", "bytes": 2933980, "draco": true, "crease": 78.8, "faces": 443022, "diag": 2.89}
+{"assetId": "byd-dolphin-mini-2024-w6-v1", "make": "byd", "model": "Dolphin Mini", "bytes": 3495552, "draco": true, "crease": 3.1, "faces": 250572, "diag": 4.53}
+{"assetId": "citroen-c4-lounge-2018-w6-v1", "make": "citroen", "model": "C4 Lounge", "bytes": 2247284, "draco": true, "crease": 0.6, "faces": 100289, "diag": 5.39}
+{"assetId": "citroen-c3-picasso-2017-w6-v1", "make": "citroen", "model": "C3 Picasso", "bytes": 4235508, "draco": true, "crease": 0.7, "faces": 372300, "diag": 4.92}
+{"assetId": "fiat-bravo-2011-w6-v1", "make": "fiat", "model": "Bravo", "bytes": 2428200, "draco": true, "crease": 1.2, "faces": 107793, "diag": 5.25}
+{"assetId": "citroen-cactus-2015-w6-v1", "make": "citroen", "model": "Cactus", "bytes": 4244592, "draco": true, "crease": 6.5, "faces": 383248, "diag": 4.95}
+{"assetId": "genesis-g70-w6-v1", "make": "genesis", "model": "G70", "bytes": 3441920, "draco": true, "crease": 156.1, "faces": 1201788, "diag": 13.76}
+{"assetId": "hyundai-kona-w6-v1", "make": "hyundai", "model": "Kona", "bytes": 2662832, "draco": true, "crease": 357.0, "faces": 606499, "diag": 421.03}
+{"assetId": "genesis-g70-w6-v2", "make": "Genesis", "model": "G70", "bytes": 4539200, "draco": true, "crease": 165.3, "faces": 1229752, "diag": 5.36}
+{"assetId": "hyundai-kona-w6-v2", "make": "hyundai", "model": "Kona", "bytes": 2662128, "draco": true, "crease": 0.3, "faces": 248124, "diag": 494.96}
+{"assetId": "jaguar-xf-2014-w6-v1", "make": "jaguar", "model": "XF", "bytes": 8158380, "draco": true, "crease": 118.1, "faces": 264260, "diag": 22.48}
+{"assetId": "jaguar-xj-2010-w6-v1", "make": "jaguar", "model": "XJ", "bytes": 3666140, "draco": true, "crease": 112.1, "faces": 1108856, "diag": 587.62}
+{"assetId": "jeep-renegade-2021-w6-v1", "make": "jeep", "model": "Renegade", "bytes": 4892536, "draco": true, "crease": 8.6, "faces": 232977, "diag": 4.94}
+{"assetId": "kia-carnival-w6-v1", "make": "kia", "model": "Carnival", "bytes": 1330300, "draco": true, "crease": 182.9, "faces": 450832, "diag": 6.11}
+{"assetId": "kia-ev6-2022-w6-v1", "make": "kia", "model": "EV6", "bytes": 4977032, "draco": true, "crease": 0.5, "faces": 367996, "diag": 220.0}
+{"assetId": "kia-picanto-w6-v1", "make": "kia", "model": "Picanto", "bytes": 1367564, "draco": true, "crease": 228.3, "faces": 417573, "diag": 4.96}
+{"assetId": "kia-carnival-2022-w6-v1", "make": "kia", "model": "Carnival", "bytes": 6542384, "draco": true, "crease": 5.3, "faces": 444581, "diag": 6.11}
+{"assetId": "kia-sportage-w6-v1", "make": "kia", "model": "Sportage", "bytes": 1377200, "draco": true, "crease": 161.3, "faces": 330616, "diag": 15.73}
+{"assetId": "land-rover-defender-w6-v1", "make": "land-rover", "model": "Defender", "bytes": 4294348, "draco": true, "crease": 198.4, "faces": 110650, "diag": 0.05}
+{"assetId": "kia-sportage-2011-w6-v1", "make": "kia", "model": "Sportage", "bytes": 3541768, "draco": true, "crease": 220.1, "faces": 1102830, "diag": 521.13}
+{"assetId": "land-rover-defender-2021-w6-v1", "make": "land-rover", "model": "Defender", "bytes": 3218428, "draco": true, "crease": 2.3, "faces": 359298, "diag": 196.46}
+{"assetId": "land-rover-range-rover-evoque-2011-w6-v1", "make": "land-rover", "model": "Range Rover Evoque", "bytes": 2987980, "draco": true, "crease": 95.5, "faces": 124110, "diag": 5.11}
+{"assetId": "lexus-es-hybrid-w6-v1", "make": "lexus", "model": "ES Hybrid", "bytes": 4179572, "draco": true, "crease": 34.4, "faces": 200212, "diag": 23.44}
+{"assetId": "mazda-3-2011-w6-v1", "make": "mazda", "model": "3", "bytes": 1919392, "draco": true, "crease": 109.3, "faces": 640728, "diag": 525.72}
+{"assetId": "mazda-3-2003-w6-v1", "make": "mazda", "model": "3", "bytes": 4646928, "draco": true, "crease": 233.7, "faces": 1512054, "diag": 503.59}
+{"assetId": "mazda-mx-5-w6-v1", "make": "mazda", "model": "MX-5", "bytes": 2361872, "draco": true, "crease": 171.8, "faces": 764943, "diag": 455.49}
+{"assetId": "mitsubishi-i-miev-2010-w6-v1", "make": "mitsubishi", "model": "I MiEV", "bytes": 1407096, "draco": true, "crease": 0.3, "faces": 123371, "diag": 4250.24}
+{"assetId": "nissan-micra-w6-v1", "make": "Nissan", "model": "Micra", "bytes": 3805008, "draco": true, "crease": 178.9, "faces": 243853, "diag": 4.75}
+{"assetId": "nissan-juke-w6-v1", "make": "nissan", "model": "Juke", "bytes": 2678048, "draco": true, "crease": 11.3, "faces": 355354, "diag": 919.38}
+{"assetId": "opel-astra-1991-w6-v1", "make": "opel", "model": "Astra", "bytes": 3365492, "draco": true, "crease": 205.5, "faces": 994265, "diag": 475.14}
+{"assetId": "renault-koleos-2008-w7-v1", "make": "renault", "model": "Koleos", "bytes": 6118612, "draco": true, "crease": 0.0, "faces": 582706, "diag": 6.24}
+{"assetId": "peugeot-308-2012-w7-v1", "make": "peugeot", "model": "308", "bytes": 2518460, "draco": true, "crease": 187.9, "faces": 842445, "diag": 527.64}
+{"assetId": "renault-m-gane-grand-tour-2006-w7-v1", "make": "renault", "model": "M\u00e9gane Grand Tour", "bytes": 3063096, "draco": true, "crease": 0.5, "faces": 165277, "diag": 5.19}
+{"assetId": "renault-austral-2022-w7-v1", "make": "renault", "model": "Austral", "bytes": 7079368, "draco": true, "crease": 22.7, "faces": 699654, "diag": 21.4}
+{"assetId": "mitsubishi-eclipse-cross-w7-v1", "make": "mitsubishi", "model": "Eclipse Cross", "bytes": 6762880, "draco": true, "crease": 114.1, "faces": 1559224, "diag": 524.02}
+{"assetId": "volkswagen-polo-w7-v1", "make": "volkswagen", "model": "Polo", "bytes": 1083372, "draco": true, "crease": 0.0, "faces": 171508, "diag": 183.72}
+{"assetId": "lexus-rx450h-2023-w7-v1", "make": "lexus", "model": "RX450h", "bytes": 8310384, "draco": true, "crease": 0.9, "faces": 590470, "diag": 283.21}
+{"assetId": "mercedes-benz-s600-1999-w7-v1", "make": "mercedes-benz", "model": "S600", "bytes": 2050888, "draco": true, "crease": 190.3, "faces": 673698, "diag": 576.39}
+{"assetId": "mazda-cx-5-2017-w7-v1", "make": "mazda", "model": "CX-5", "bytes": 12355460, "draco": true, "crease": 401.9, "faces": 3503134, "diag": 525.74}
+{"assetId": "polestar-2-w7-v1", "make": "polestar", "model": "2", "bytes": 37982192, "draco": true, "crease": 206.7, "faces": 835145, "diag": 20.78}
+{"assetId": "tesla-model-3-2024-w7-v1", "make": "tesla", "model": "Model 3", "bytes": 2044876, "draco": true, "crease": 66.5, "faces": 178193, "diag": 19.88}
+{"assetId": "tesla-model-3-w7-v2", "make": "tesla", "model": "Model 3", "bytes": 2994780, "draco": true, "crease": 267.6, "faces": 684319, "diag": 4.58}
+{"assetId": "toyota-corolla-w7-v1", "make": "toyota", "model": "Corolla", "bytes": 1515924, "draco": true, "crease": 179.3, "faces": 444532, "diag": 677.57}
+{"assetId": "renault-clio-2020-w7-v1", "make": "renault", "model": "Clio", "bytes": 3560588, "draco": true, "crease": 29.2, "faces": 328026, "diag": 4.82}
+{"assetId": "tesla-model-y-2021-w7-v1", "make": "tesla", "model": "Model Y", "bytes": 3454216, "draco": true, "crease": 1.9, "faces": 286940, "diag": 5.48}
+{"assetId": "lexus-ls-2018-w7-v1", "make": "lexus", "model": "LS", "bytes": 9264288, "draco": true, "crease": 438.3, "faces": 2542480, "diag": 603.22}
+{"assetId": "skoda-fabia-w7-v1", "make": "skoda", "model": "Fabia", "bytes": 2749124, "draco": true, "crease": 168.9, "faces": 992412, "diag": 68.64}
+{"assetId": "opel-astra-1998-w7-v1", "make": "opel", "model": "Astra", "bytes": 7202976, "draco": true, "crease": 9.2, "faces": 589472, "diag": 4.87}
+{"assetId": "dacia-lodgy-2024-w7-v1", "make": "dacia", "model": "Lodgy", "bytes": 15307784, "draco": true, "crease": 235.9, "faces": 4167012, "diag": 5.76}
+{"assetId": "kia-picanto-2012-w7-v1", "make": "kia", "model": "Picanto", "bytes": 8827924, "draco": true, "crease": 389.5, "faces": 3168455, "diag": 436.84}
+{"assetId": "kia-sportage-2018-w7-v1", "make": "kia", "model": "Sportage", "bytes": 6824144, "draco": true, "crease": 18.6, "faces": 561453, "diag": 5.26}
+{"assetId": "volvo-xc60-2023-w7-v1", "make": "volvo", "model": "XC60", "bytes": 6078360, "draco": true, "crease": 13.4, "faces": 467776, "diag": 5.4}
+{"assetId": "subaru-outback-2022-w7-v1", "make": "subaru", "model": "Outback", "bytes": 6681652, "draco": true, "crease": 0.3, "faces": 481982, "diag": 1118.94}
+{"assetId": "renault-clio-2023-w7-v1", "make": "renault", "model": "Clio", "bytes": 5973984, "draco": true, "crease": 1.8, "faces": 548078, "diag": 6.03}
+{"assetId": "kia-niro-hybrid-2020-w7-v1", "make": "kia", "model": "Niro Hybrid", "bytes": 6451780, "draco": true, "crease": 9.7, "faces": 483354, "diag": 1057.13}
+{"assetId": "tesla-model-3-w7-v3", "make": "tesla", "model": "Model 3", "bytes": 2426596, "draco": true, "crease": 240.6, "faces": 737165, "diag": 16.83}
+{"assetId": "lexus-nx-2017-w7-v1", "make": "lexus", "model": "NX", "bytes": 10873204, "draco": true, "crease": 468.2, "faces": 3897146, "diag": 545.02}
+{"assetId": "renault-clio-2010-w7-v1", "make": "renault", "model": "Clio", "bytes": 2500840, "draco": true, "crease": 202.0, "faces": 850158, "diag": 482.06}
+{"assetId": "land-rover-defender-2021-w7-v1", "make": "land-rover", "model": "Defender", "bytes": 6624372, "draco": true, "crease": 374.7, "faces": 2033964, "diag": 5.41}
+{"assetId": "mini-cooper-w7-v1", "make": "mini", "model": "Cooper", "bytes": 21326460, "draco": true, "crease": 82.4, "faces": 676648, "diag": 9.79}
+{"assetId": "ford-focus-2012-w7-v1", "make": "ford", "model": "Focus", "bytes": 4382980, "draco": true, "crease": 224.0, "faces": 1371509, "diag": 515.92}
+{"assetId": "mitsubishi-galant-w7-v1", "make": "mitsubishi", "model": "Galant", "bytes": 13173564, "draco": true, "crease": 215.5, "faces": 2242354, "diag": 5.21}
+{"assetId": "skoda-fabia-2011-w7-v1", "make": "skoda", "model": "Fabia", "bytes": 4595888, "draco": true, "crease": 172.1, "faces": 1219251, "diag": 500.81}
+{"assetId": "mercedes-benz-sprinter-w7-v1", "make": "mercedes-benz", "model": "Sprinter", "bytes": 3429384, "draco": true, "crease": 277.7, "faces": 1139830, "diag": 762.7}
+{"assetId": "mini-cooper-s-2011-w7-v1", "make": "mini", "model": "Cooper S", "bytes": 3102056, "draco": true, "crease": 183.6, "faces": 991004, "diag": 451.57}
+{"assetId": "peugeot-308-2012-w7-v2", "make": "peugeot", "model": "308", "bytes": 2411432, "draco": true, "crease": 163.5, "faces": 783013, "diag": 512.99}
+{"assetId": "volkswagen-vw-beetle-w7-v1", "make": "volkswagen", "model": "VW Beetle", "bytes": 2326156, "draco": true, "crease": 115.5, "faces": 1011970, "diag": 5.26}
+{"assetId": "land-rover-defender-w7-v1", "make": "land-rover", "model": "Defender", "bytes": 3683068, "draco": true, "crease": 261.2, "faces": 1447688, "diag": 587.08}
+{"assetId": "jeep-wrangler-1997-w8-v1", "make": "jeep", "model": "Wrangler", "bytes": 39426076, "crease": 158.0, "faces": 651334, "diag": 5.47}
+{"assetId": "hyundai-santa-fe-w7-v1", "make": "hyundai", "model": "Santa Fe", "bytes": 11286868, "draco": true, "crease": 345.8, "faces": 3643800, "diag": 546.25}
+{"assetId": "renault-clio-w8-v1", "make": "renault", "model": "Clio", "bytes": 14379468, "crease": 125.7, "faces": 238326, "diag": 5.49}
+{"assetId": "ford-ranger-w7-v1", "make": "ford", "model": "Ranger", "bytes": 4116796, "draco": true, "crease": 70.4, "faces": 983464, "diag": 5.96}
+{"assetId": "honda-jazz-2016-w9-v1", "make": "honda", "model": "Jazz", "bytes": 4938612, "crease": 27.9, "faces": 118755, "diag": 104.86}
+{"assetId": "honda-jazz-2020-w9-v1", "make": "honda", "model": "Jazz", "bytes": 9549228, "crease": 3.7, "faces": 110470, "diag": 11.93}
+{"assetId": "mercedes-benz-eqe-w8-v1", "make": "mercedes-benz", "model": "EQE", "bytes": 25420860, "crease": 226.8, "faces": 1091612, "diag": 5.23}
+{"assetId": "peugeot-407-w9-v1", "make": "peugeot", "model": "407", "bytes": 15921092, "crease": 118.3, "faces": 270320, "diag": 5.31}
+{"assetId": "hyundai-tucson-2015-w12-v1", "make": "hyundai", "model": "Tucson", "bytes": 1152688, "crease": 58.3, "faces": 33152, "diag": 541.52}
+{"assetId": "volkswagen-golf-2016-w12-v1", "make": "volkswagen", "model": "Golf", "bytes": 7266684, "crease": 101.8, "faces": 95364, "diag": 5.0}
+{"assetId": "bmw-m3-2023-w12-v1", "make": "bmw", "model": "M3", "bytes": 12767808, "error": "ValueError: chunk was not expected length!"}
