@@ -495,7 +495,8 @@ echo "=== train ==="
 # a partially trained checkpoint is worth vastly more than nothing.
 timeout "${MAX_HOURS:-13}h" python -u train_detector.py --data prepared --out runs \
   --epochs "${EPOCHS:-15}" --batch-size "${BATCH:-8}" \
-  --num-workers "${NUM_WORKERS:-4}"
+  --num-workers "${NUM_WORKERS:-4}" \
+  --model "${MODEL:-base}" --resolution "${RESOLUTION:-560}"
 TRAIN_RC=$?
 [ "$TRAIN_RC" = "124" ] && echo "TRAINING HIT THE ${MAX_HOURS:-13}h CAP — publishing what exists"
 echo "train_detector rc=$TRAIN_RC"

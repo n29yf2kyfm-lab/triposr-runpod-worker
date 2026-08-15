@@ -174,6 +174,15 @@ def main():
                     help="GB; holds corpus + materialised samples + wheels")
     ap.add_argument("--epochs", type=int, default=12)
     ap.add_argument("--batch", type=int, default=8)
+    ap.add_argument("--model", default="base", choices=["base", "large"],
+                    help="RF-DETR size. The GPU measured 40-46%% utilisation "
+                         "and starved a third of the time, so it is data-bound "
+                         "not compute-bound: extra capacity largely fills time "
+                         "the card was already idle")
+    ap.add_argument("--resolution", type=int, default=560,
+                    help="input size. 728 targets the weakest class directly — "
+                         "surface scored AP 0.17 and scratches are thin, which "
+                         "is what 560 loses first")
     ap.add_argument("--num-workers", type=int, default=4,
                     help="DataLoader workers. 4 was chosen while a memory "
                          "blowup was unexplained; with that understood the "
@@ -235,6 +244,8 @@ def main():
     # command line here never reaches the pod: a run quoted at 20 hours would
     # have silently used train.sh's 13-hour default.
     env["MAX_HOURS"] = str(int(a.hours))
+    env["MODEL"] = a.model
+    env["RESOLUTION"] = str(a.resolution)
 
     print(f"gpu          {a.gpu}   disk {a.disk}GB   cloud {a.cloud}")
     print(f"run          tag={a.tag} epochs={a.epochs} batch={a.batch}"
