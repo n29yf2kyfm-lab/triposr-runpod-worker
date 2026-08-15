@@ -49,21 +49,32 @@ df -h /workspace | tail -1
 stage native_check
 # CHEAPEST POSSIBLE FAILURE: if this image lacks the TRELLIS.2 CUDA
 # extensions the whole plan is void — find out in 20 seconds, not 20 minutes.
+#
+# v1 OF THIS CHECK WAS ITSELF WRONG and failed a healthy image ($0.05,
+# 2026-08-15) — the exact "a safety check that is itself wrong costs exactly
+# as much as no safety check" trap in CLAUDE.md. It demanded torchsparse AND
+# spconv; both are ALTERNATIVE sparse-conv backends, imported lazily by
+# pixal3d/modules/sparse/conv/conv.py via
+#   importlib.import_module(f'..conv_{config.CONV}')
+# and the default in config.py is CONV='flex_gemm', which the image HAS.
+# Only the four genuinely-on-the-default-path extensions are hard.
 python3 - <<'PY' || die NATIVE_MISSING
 import importlib, traceback
-need = ["o_voxel", "cumesh", "flex_gemm", "nvdiffrast", "torchsparse",
-        "spconv", "utils3d"]
+hard = ["o_voxel", "cumesh", "flex_gemm", "nvdiffrast"]
+soft = ["torchsparse", "spconv", "utils3d"]   # alt backends / pip-installable
 missing = []
-for m in need:
+for m in hard + soft:
     try:
         importlib.import_module(m); print("ok", m)
     except Exception:
-        missing.append(m); traceback.print_exc()
-print("MISSING_NATIVE:", missing)
-# utils3d ships as a wheel we install below; the rest MUST already exist
-hard = [m for m in missing if m != "utils3d"]
-if hard:
-    raise SystemExit(f"image lacks TRELLIS.2 extensions: {hard}")
+        missing.append(m)
+        if m in hard:
+            traceback.print_exc()
+print("MISSING:", missing)
+bad = [m for m in missing if m in hard]
+if bad:
+    raise SystemExit(f"image lacks TRELLIS.2 extensions on the default "
+                     f"path: {bad}")
 PY
 
 stage clone
@@ -77,6 +88,10 @@ stage deps
 # (they are the entire reason we chose this image). Install, then ASSERT.
 pip install -q -r requirements.txt 2>&1 | tail -8
 pip install -q https://github.com/LDYang694/Storages/releases/download/20260430/utils3d-0.0.2-py3-none-any.whl 2>&1 | tail -2
+# spconv as a PREBUILT-wheel fallback backend (~30s, never a source build —
+# the flash-attn lesson). flex_gemm is the default and is already present;
+# this only buys SPARSE_CONV_BACKEND=spconv as a retry if flex_gemm misbehaves.
+pip install -q spconv-cu124 2>&1 | tail -2 || echo "spconv wheel unavailable — flex_gemm only"
 TORCH_AFTER=$(python3 -c "import torch;print(torch.__version__)")
 echo "TORCH_AFTER=$TORCH_AFTER (before=$TORCH_BEFORE)"
 if [ "$TORCH_BEFORE" != "$TORCH_AFTER" ]; then
@@ -97,6 +112,9 @@ python3 -c "from PIL import Image; im=Image.open('/workspace/golf.png'); print('
 stage infer
 cd /workspace/pixal
 export ATTN_BACKEND=sdpa
+# be EXPLICIT about the sparse backend rather than trusting a default that a
+# future release could change — flex_gemm is what this image actually carries
+export SPARSE_CONV_BACKEND=flex_gemm
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 export HF_HOME=/workspace/hf
 # standard 1536 first; fall back to low-VRAM 1536, then 1024. Each attempt
