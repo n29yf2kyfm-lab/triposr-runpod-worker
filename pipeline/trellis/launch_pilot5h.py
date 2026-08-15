@@ -36,6 +36,15 @@ def main(cars_file):
     put(cars_file, "cars.txt", sb_key)
     put(os.path.join(HERE, "hy21_render.py"), "hy21_render.py", sb_key)
     put(os.path.join(HERE, "hy21_pilot5h.sh"), "hy21_pilot5h.sh", sb_key)
+    # the A/B eval image: the Golf front-3/4 RGBA capture (survives in staging)
+    golf = ("https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/"
+            "car-meshes/staging/carglb/golf-gti-mk8-demo/f34.png")
+    import tempfile as _tf
+    with _tf.NamedTemporaryFile(suffix=".png", delete=False) as gf:
+        gf.write(urllib.request.urlopen(golf, timeout=60).read())
+        gpath = gf.name
+    put(gpath, "golf.png", sb_key)
+    os.unlink(gpath)
     import tempfile
     with tempfile.NamedTemporaryFile("w", suffix=".txt", delete=False) as tf:
         tf.write("=== STAGE:launching ===\n")

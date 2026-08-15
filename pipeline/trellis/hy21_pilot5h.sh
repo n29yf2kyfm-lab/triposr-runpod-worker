@@ -76,6 +76,7 @@ stage fetch_ours
 cd /workspace
 curl -fsSL "$SB/public/$PRE/hy21_render.py" -o hy21_render.py || die FETCH_RENDER
 curl -fsSL "$SB/public/$PRE/cars.txt" -o cars.txt || die FETCH_LIST
+curl -fsSL "$SB/public/$PRE/golf.png" -o golf.png || die FETCH_GOLF
 wc -l cars.txt
 
 stage preflight_imports
@@ -263,19 +264,51 @@ PY
 [ -f /workspace/loss.png ] && sb_file loss.png /workspace/loss.png
 [ -f /workspace/loss.csv ] && sb_file loss.csv /workspace/loss.csv
 
-stage hf_upload
-python3 - "$CKPT" <<'PY' || die HF_UPLOAD
-import os, sys
-from huggingface_hub import HfApi
-api = HfApi(token=os.environ["HF_TOKEN"])
-repo = "Alamj/alam3d-v2-pilot5h"
-api.create_repo(repo, private=True, exist_ok=True)
-api.upload_file(path_or_fileobj=sys.argv[1], path_in_repo="pilot5h_last.ckpt",
-                repo_id=repo)
-api.upload_file(path_or_fileobj="/workspace/boot.log", path_in_repo="boot.log",
-                repo_id=repo)
-print("uploaded to", repo)
+stage ab_eval
+# THE EXPERIMENT'S ACTUAL QUESTION (owner: "try with golf see if any changes"):
+# same Golf capture through BASE 2.1 weights and the fresh checkpoint, same
+# seed, both GLBs to the bucket. Runs in the SAME pod so the checkpoint never
+# needs to survive a transfer (HF_TOKEN is read-only — measured).
+cd /workspace/repo/hy3dshape
+python3 - "$CFG" "$CKPT" <<'PY' || die AB_EVAL
+import gc, sys, yaml, torch
+from PIL import Image
+sys.path.insert(0, '.')
+from hy3dshape.pipelines import Hunyuan3DDiTFlowMatchingPipeline
+from hy3dshape.utils import instantiate_from_config
+
+img = Image.open('/workspace/golf.png').convert('RGBA')
+pipe = Hunyuan3DDiTFlowMatchingPipeline.from_pretrained('tencent/Hunyuan3D-2.1')
+mesh = pipe(image=img, generator=torch.Generator().manual_seed(42))[0]
+mesh.export('/workspace/golf_base.glb')
+print('BASE_DONE', len(mesh.faces))
+
+cfg = yaml.safe_load(open(sys.argv[1]))
+model = instantiate_from_config(cfg['model']['params']['denoiser_cfg'])
+sd = torch.load(sys.argv[2], map_location='cpu')
+sd = sd.get('state_dict', sd)
+best, best_n = None, -1
+for pref in ('model.', '_forward_module.model.', ''):
+    cand = {k[len(pref):]: v for k, v in sd.items() if k.startswith(pref)}
+    hit = len(set(cand) & set(model.state_dict()))
+    print('prefix', repr(pref), 'matches', hit)
+    if hit > best_n:
+        best, best_n = cand, hit
+assert best_n > 100, 'checkpoint keys do not match denoiser'
+msg = model.load_state_dict(best, strict=False)
+print('missing:', len(msg.missing_keys), 'unexpected:', len(msg.unexpected_keys))
+assert len(msg.missing_keys) == 0, msg.missing_keys[:5]
+old = pipe.model
+pipe.model = model.cuda().half()
+del old, sd, best
+gc.collect(); torch.cuda.empty_cache()
+mesh = pipe(image=img, generator=torch.Generator().manual_seed(42))[0]
+mesh.export('/workspace/golf_tuned.glb')
+print('TUNED_DONE', len(mesh.faces))
 PY
+sb_file golf_base.glb /workspace/golf_base.glb
+sb_file golf_tuned.glb /workspace/golf_tuned.glb
+ls -la /workspace/golf_*.glb
 
 echo "=== PILOT_OK ==="
 report "log.txt"
