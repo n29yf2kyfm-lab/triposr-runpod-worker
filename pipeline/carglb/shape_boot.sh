@@ -26,7 +26,7 @@ die()   { echo "=== FAIL:$1 ==="; report; sleep infinity; }
 
 stage boot
 nvidia-smi || die NO_GPU
-apt-get update -qq && apt-get install -y -qq --no-install-recommends libopengl0 libegl1 libgl1 2>&1 | tail -1
+apt-get update -qq && apt-get install -y -qq --no-install-recommends libopengl0 libegl1 libgl1 xvfb libxrender1 libxext6 2>&1 | tail -1
 
 stage clone
 cd /workspace
@@ -93,7 +93,9 @@ pip install -q diffusers==0.31.0 numpy==1.26.4 2>&1 | tail -1
 python3 -c "import torch, diffusers; assert torch.cuda.is_available(); print('PC_STACK_OK', diffusers.__version__)" || die PC_STACK
 # PYTHONPATH: the script imports 'src.*' relative to the REPO ROOT — the
 # exact trap CLAUDE.md recorded from the first PartCrafter deployment
-timeout 2400 env PYTHONPATH=/workspace/pc python3 scripts/inference_partcrafter.py \
+# xvfb: the script's render_utils imports pyrender -> pyglet -> X11 at module
+# level — the FOURTH trap from CLAUDE.md's original PartCrafter deployment list
+timeout 2400 env PYTHONPATH=/workspace/pc xvfb-run -a python3 scripts/inference_partcrafter.py \
   --image_path /workspace/f34.png \
   --num_parts 16 --output_dir /workspace/results/pc --tag job --seed 0 || die PARTS
 [ -s /workspace/results/pc/job/object.glb ] || die PARTS_NO_OBJECT
