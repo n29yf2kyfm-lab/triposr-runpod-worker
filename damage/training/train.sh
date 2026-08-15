@@ -74,35 +74,48 @@ echo "heartbeat pid $HEARTBEAT_PID -> logs/$TAG.live.log every 5 min"
 # Killing the main shell fires the EXIT trap, which uploads the log, publishes
 # any checkpoint, and stops the pod. A wedged run therefore costs 25 minutes,
 # not however long until someone happens to look.
-STALL_MINUTES="${STALL_MINUTES:-25}"
+STALL_MINUTES="${STALL_MINUTES:-45}"
 MAIN_PID=$$
 (
-  # set +x IS LOAD-BEARING. With tracing on, this loop's own `stat` and `sleep`
-  # lines land in train.log — the very file it measures for growth — so the log
-  # always grew, `still` reset to zero every cycle, and the watchdog could
-  # never fire. A stall detector that writes to its own input detects nothing.
+  # set +x IS LOAD-BEARING: with tracing on, this loop's own output lands in
+  # train.log and, in the first version, in the very measurement it used to
+  # detect a stall — so the log always grew and the watchdog could never fire.
   set +x
-  last=0; still=0
+  #
+  # THE SIGNAL IS GPU UTILISATION, NOT LOG GROWTH.
+  #
+  # Measuring the log was wrong in both directions. It false-negatived while
+  # the loop traced into its own input, and it would have false-POSITIVED here:
+  # RF-DETR prints nothing between epochs, and an epoch over 369,762 images is
+  # hours long, so a perfectly healthy run looks identical to a wedged one.
+  # Killing on silence would have destroyed the run it was meant to protect.
+  #
+  # A hung DataLoader sits at 0% GPU. Training does not. That distinguishes the
+  # two cases directly instead of inferring from a side effect, and the samples
+  # are written to the log so the run is observable even while RF-DETR is quiet.
+  idle=0
   while true; do
     sleep 300
-    now=$(stat -c %s "$LOG" 2>/dev/null || echo 0)
-    if [ "$now" = "$last" ]; then
-      still=$((still + 5))
-      echo "WATCHDOG: log unchanged for ${still}m (${now} bytes)" >> "$LOG"
-      if [ "$still" -ge "$STALL_MINUTES" ]; then
-        echo "WATCHDOG: STALLED ${still}m with no output — killing run" >> "$LOG"
+    read -r util mem < <(nvidia-smi --query-gpu=utilization.gpu,memory.used \
+      --format=csv,noheader,nounits 2>/dev/null | head -1 | tr -d ',')
+    util="${util:-0}"
+    echo "GPU: ${util}% util, ${mem:-?} MiB used" >> "$LOG"
+    if [ "$util" -lt 5 ] 2>/dev/null; then
+      idle=$((idle + 5))
+      if [ "$idle" -ge "$STALL_MINUTES" ]; then
+        echo "WATCHDOG: GPU idle ${idle}m — run is wedged, killing" >> "$LOG"
         kill -TERM "$MAIN_PID" 2>/dev/null
         sleep 30
         kill -KILL "$MAIN_PID" 2>/dev/null
         exit 1
       fi
     else
-      still=0; last="$now"
+      idle=0
     fi
   done
 ) &
 WATCHDOG_PID=$!
-echo "watchdog pid $WATCHDOG_PID — kills the run after ${STALL_MINUTES}m of silence"
+echo "watchdog pid $WATCHDOG_PID — kills the run after ${STALL_MINUTES}m of GPU idle"
 
 
 finish() {
