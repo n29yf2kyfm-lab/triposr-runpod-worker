@@ -205,7 +205,7 @@ def run_shape_pod(folder, manifest, out_dir, timeout_s=5400):
                          f"log: {log_url}")
     os.makedirs(out_dir, exist_ok=True)
     got = {}
-    for f in ("shape.glb", "parts.glb"):
+    for f in ("shape.glb", "parts.glb", "nparts.txt"):
         try:
             data = urllib.request.urlopen(f"{SB}/public/{pre}/{f}",
                                           timeout=300).read()
@@ -213,6 +213,31 @@ def run_shape_pod(folder, manifest, out_dir, timeout_s=5400):
             got[f] = len(data)
         except Exception:
             got[f] = None
+    # size-cap fallback: object.glb may bounce off the bucket's per-file cap;
+    # the pod also uploads each part_NN.glb, which we merge locally
+    if not got.get("parts.glb") and got.get("nparts.txt"):
+        import trimesh
+        n = int(open(os.path.join(out_dir, "nparts.txt")).read().strip())
+        scene = trimesh.Scene()
+        pulled = 0
+        for i in range(n):
+            fn = f"part_{i:02}.glb"
+            try:
+                data = urllib.request.urlopen(f"{SB}/public/{pre}/{fn}",
+                                              timeout=300).read()
+                lp = os.path.join(out_dir, fn)
+                open(lp, "wb").write(data)
+                part = trimesh.load(lp, force="mesh")
+                scene.add_geometry(part, node_name=f"part_{i:02}",
+                                   geom_name=f"part_{i:02}")
+                pulled += 1
+            except Exception as e:                               # noqa: BLE001
+                print(f"  part {fn} failed: {e}")
+        if pulled:
+            merged = os.path.join(out_dir, "parts.glb")
+            scene.export(merged)
+            got["parts.glb"] = os.path.getsize(merged)
+            print(f"merged {pulled}/{n} parts locally")
     print("pulled:", got)
     if not got.get("shape.glb"):
         raise SystemExit("shape.glb missing from bucket after ALL_OK")

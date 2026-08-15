@@ -20,6 +20,12 @@ put() { ( set +x
   curl -s -X POST -H "apikey: ${SB_KEY}" -H "Authorization: Bearer ${SB_KEY}" \
        -H "x-upsert: true" -H "Content-Type: application/octet-stream" \
        --data-binary @"$2" "$SB/$PRE/$1" >/dev/null 2>&1 ) || true; }
+# critical uploads must SAY whether they landed — a swallowed 400 on parts.glb
+# cost a full attempt (the bucket has a per-file size cap; big files bounce)
+put_c() { C=$( set +x; curl -s -o /dev/null -w '%{http_code}' -X POST \
+  -H "apikey: ${SB_KEY}" -H "Authorization: Bearer ${SB_KEY}" \
+  -H "x-upsert: true" -H "Content-Type: application/octet-stream" \
+  --data-binary @"$2" "$SB/$PRE/$1" ); echo "PUT $1 ($(stat -c%s "$2")B) -> $C"; }
 report() { put shape_log.txt "$LOG"; }
 stage() { echo "=== STAGE:$1 ==="; report; }
 die()   { echo "=== FAIL:$1 ==="; report; sleep infinity; }
@@ -104,7 +110,16 @@ timeout 2400 env PYTHONPATH=/workspace/pc xvfb-run -a python3 scripts/inference_
   --image_path /workspace/f34.png \
   --num_parts 16 --output_dir /workspace/results/pc --tag job --seed 0 || die PARTS
 [ -s /workspace/results/pc/job/object.glb ] || die PARTS_NO_OBJECT
-put parts.glb /workspace/results/pc/job/object.glb
+put_c parts.glb /workspace/results/pc/job/object.glb
+# fallback for the size cap: each part individually (small) + a count marker
+N=0
+for f in /workspace/results/pc/job/part_*.glb; do
+  [ -s "$f" ] || continue
+  put_c "$(basename "$f")" "$f"
+  N=$((N+1))
+done
+echo "$N" > /workspace/results/nparts.txt
+put_c nparts.txt /workspace/results/nparts.txt
 report
 
 stage verify
