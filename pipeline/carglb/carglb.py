@@ -351,6 +351,20 @@ def run_local(shape_glb, parts_glb, dims, out_glb, renders_dir=None,
         if p.returncode != 0:
             raise SystemExit(f"build_car gates failed ({p.returncode}) — the "
                              "car is NOT shippable; read the gate output above")
+        # review finding 9: build_car takes no length and does not rescale,
+        # so this branch reached dim_gate at generator-normalised scale
+        # (~130% length error, blamed on the mesh). Scale to spec here,
+        # exactly as fit_panes does on the primary path.
+        import trimesh
+        sc_ = trimesh.load(out_glb)
+        import numpy as _np
+        allv = _np.vstack([g.vertices for g in sc_.geometry.values()])
+        ext_ = allv.max(0) - allv.min(0)
+        k = (dims["length"] / 1000.0) / float(ext_.max())
+        for g in sc_.geometry.values():
+            g.vertices = _np.asarray(g.vertices) * k
+        sc_.export(out_glb)
+        print(f"  fallback rescaled x{k:.3f} to {dims['length']/1000.0}m")
     outputs = [out_glb]
     # review finding 5: the primary path never ran glass_probe or the
     # material-set check — the owner's hard-fail gate was only enforced on
@@ -429,9 +443,15 @@ def dim_gate(glb, dims, max_lwh=(2.0, 3.0, 3.0), max_wb=12.0):
     # find axes on a loose clip first
     ext0 = np.percentile(V, 99.8, axis=0) - np.percentile(V, 0.2, axis=0)
     L = int(np.argmax(ext0))
-    rest = [i for i in range(3) if i != L]
-    H = rest[int(np.argmin(ext0[np.array(rest)]))]
-    W = [i for i in rest if i != H][0]
+    # Y is up by glTF spec (review finding 4): min-extent relabelled width
+    # as height on van shapes and failed correct vehicles twice over
+    if L != 1:
+        H = 1
+        W = [i for i in (0, 2) if i != L][0]
+    else:
+        rest = [0, 2]
+        H = rest[int(np.argmin(ext0[np.array(rest)]))]
+        W = [i for i in rest if i != H][0]
     # per-axis robustness, calibrated 2026-08-15: LENGTH is exact by
     # construction (fit_panes scales to it) so clip barely (0.02%); WIDTH
     # spec EXCLUDES mirrors and the mesh contains both mirrors and stray

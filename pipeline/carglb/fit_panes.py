@@ -58,11 +58,23 @@ from glb import GLB                                            # noqa: E402
 
 
 def axes_of(V):
+    """Review finding 4: the old rule called the SMALLER of the two
+    non-length extents "height", which relabels width as height on any van
+    or boxy SUV (measured: Crafter proportions [5.14, 1.99, 1.90] failed two
+    dimension checks and swapped the silhouette views). glTF is Y-up BY SPEC
+    and every frame in this chain keeps Y up (authoring: length X, up Y;
+    catalogue: length Z, up Y) — partcrafter_materials already trusts this.
+    Only fall back to min-extent when the length itself is on Y, which no
+    car in this pipeline has ever had."""
     ext = V.max(0) - V.min(0)
     L = int(np.argmax(ext))
-    rest = [i for i in range(3) if i != L]
-    H = rest[int(np.argmin(ext[rest]))]
-    W = [i for i in rest if i != H][0]
+    if L != 1:
+        H = 1
+        W = [i for i in (0, 2) if i != L][0]
+    else:
+        rest = [0, 2]
+        H = rest[int(np.argmin(ext[rest]))]
+        W = [i for i in rest if i != H][0]
     return L, H, W
 
 

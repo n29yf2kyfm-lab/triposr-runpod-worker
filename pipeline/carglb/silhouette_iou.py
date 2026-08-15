@@ -38,11 +38,14 @@ from PIL import Image
 
 
 def axes_of(ext):
+    """Y is up by glTF spec (review finding 4 — min-extent relabels width as
+    height on van shapes; see fit_panes.axes_of for the measured case)."""
     L = int(np.argmax(ext))
-    rest = [i for i in range(3) if i != L]
-    H = rest[int(np.argmin(ext[rest]))]
-    W = [i for i in rest if i != H][0]
-    return L, H, W
+    if L != 1:
+        return L, 1, [i for i in (0, 2) if i != L][0]
+    rest = [0, 2]
+    H = rest[int(np.argmin(np.asarray(ext)[rest]))]
+    return L, H, [i for i in rest if i != H][0]
 
 
 def close_mask(m, r=2):
