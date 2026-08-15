@@ -90,7 +90,12 @@ grep -viE '^(torch|torchvision)([=<>]|$)' settings/requirements.txt > /tmp/rpc.t
 pip install -q -r /tmp/rpc.txt 2>&1 | tail -2
 # PartCrafter's requirements may float diffusers again — re-pin and re-assert
 pip install -q diffusers==0.31.0 numpy==1.26.4 2>&1 | tail -1
-python3 -c "import torch, diffusers; assert torch.cuda.is_available(); print('PC_STACK_OK', diffusers.__version__)" || die PC_STACK
+# torch_cluster is imported by the VAE but absent from PartCrafter's own
+# requirements — full static import scan found it as the ONLY gap. PyG wheel
+# index, matching the image's torch (same pattern as P3-SAM's torch-scatter).
+pip install -q torch-cluster -f https://data.pyg.org/whl/torch-2.4.0+cu124.html 2>&1 | tail -1
+# assert the EXACT import chain the inference script runs, not a proxy
+python3 -c "import sys; sys.path.insert(0,'/workspace/pc'); from src.pipelines.pipeline_partcrafter import PartCrafterPipeline; import torch; assert torch.cuda.is_available(); print('PC_STACK_OK')" || die PC_STACK
 # PYTHONPATH: the script imports 'src.*' relative to the REPO ROOT — the
 # exact trap CLAUDE.md recorded from the first PartCrafter deployment
 # xvfb: the script's render_utils imports pyrender -> pyglet -> X11 at module
