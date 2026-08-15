@@ -93,9 +93,31 @@ MAIN_PID=$$
   # A hung DataLoader sits at 0% GPU. Training does not. That distinguishes the
   # two cases directly instead of inferring from a side effect, and the samples
   # are written to the log so the run is observable even while RF-DETR is quiet.
-  idle=0
+  # TWO PHASES, because the GPU is SUPPOSED to be idle for the first hour.
+  # Dependency installs, a 14GB download and rendering 403,193 samples are all
+  # CPU and disk work — arming a GPU-idle rule from the start would have killed
+  # the run during materialise, at 45 minutes, every single time. Before
+  # training begins the log is the right signal (those stages print constantly);
+  # once "=== train ===" appears, RF-DETR goes quiet and only the GPU can say
+  # whether anything is happening.
+  idle=0; lastsz=0; quiet=0
   while true; do
     sleep 300
+    if ! grep -q "^=== train ===" "$LOG" 2>/dev/null; then
+      now=$(stat -c %s "$LOG" 2>/dev/null || echo 0)
+      if [ "$now" = "$lastsz" ]; then
+        quiet=$((quiet + 5))
+        echo "WATCHDOG: pre-training, log static ${quiet}m" >> "$LOG"
+        if [ "$quiet" -ge 30 ]; then
+          echo "WATCHDOG: setup wedged ${quiet}m — killing" >> "$LOG"
+          kill -TERM "$MAIN_PID" 2>/dev/null; sleep 30
+          kill -KILL "$MAIN_PID" 2>/dev/null; exit 1
+        fi
+      else
+        quiet=0; lastsz="$now"
+      fi
+      continue
+    fi
     read -r util mem < <(nvidia-smi --query-gpu=utilization.gpu,memory.used \
       --format=csv,noheader,nounits 2>/dev/null | head -1 | tr -d ',')
     util="${util:-0}"
