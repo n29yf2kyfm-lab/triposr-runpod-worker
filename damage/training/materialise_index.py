@@ -46,8 +46,19 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 _CTX = {}
 
+# More than this multiplies memory without adding throughput.
+MAX_WORKERS = 12
 
-def _load(index_dir):
+
+def _load(index_dir, want_samples=True):
+    """Read the index. `want_samples` exists because parsing it is expensive.
+
+    index.jsonl is 86MB and images.jsonl is 58MB. A worker needs only the
+    latter, and loading both in every worker is what hung a run: with
+    --workers $(nproc) on a 32-64 core box, each child parsed 144MB into
+    1-2GB of Python objects, so the pool needed tens of gigabytes before it
+    rendered a single image. It never printed an error — it thrashed.
+    """
     with open(os.path.join(index_dir, "classes.json")) as f:
         classes = json.load(f)
     boxes = {}
@@ -56,18 +67,11 @@ def _load(index_dir):
             r = json.loads(ln)
             boxes[r["sha"]] = r
     samples = []
-    with open(os.path.join(index_dir, "index.jsonl")) as f:
-        for ln in f:
-            samples.append(json.loads(ln))
+    if want_samples:
+        with open(os.path.join(index_dir, "index.jsonl")) as f:
+            for ln in f:
+                samples.append(json.loads(ln))
     return classes, boxes, samples
-
-
-def _init(corpus, index_dir, out):
-    from PIL import Image                                    # noqa: F401
-    import augment
-    classes, boxes, _s = _load(index_dir)
-    _CTX.update(corpus=corpus, out=out, boxes=boxes, augment=augment,
-                name_to_index=classes["name_to_index"])
 
 
 def _one(sample):
@@ -160,15 +164,28 @@ def materialise(index_dir, corpus, out, workers=8, limit=0,
     _b.seek(0)
     assert _Im.open(_b).size == (16, 16), "PIL cannot round-trip a JPEG"
 
-    from multiprocessing import Pool
+    # Children inherit _CTX through fork's copy-on-write instead of each
+    # rebuilding it. One parse, one copy in memory, no initializer.
+    import augment as _aug
+    _CTX.update(corpus=corpus, out=out, boxes=_boxes, augment=_aug,
+                name_to_index=classes["name_to_index"])
+
+    import multiprocessing as _mp
+    ctx = _mp.get_context("fork")
+    Pool = ctx.Pool
     acc = {sp: {"images": [], "annotations": []} for sp in splits}
     nid = {sp: 1 for sp in splits}
     aid = {sp: 1 for sp in splits}
     done = dropped = 0
     t0 = time.time()
 
-    with Pool(workers, initializer=_init,
-              initargs=(corpus, index_dir, out)) as pool:
+    # Capped: more workers than this buys nothing (the stage is disk and JPEG
+    # bound) and multiplies the resident set by the same factor.
+    workers = max(1, min(workers, MAX_WORKERS))
+    if verbose:
+        print(f"materialising {len(samples):,} samples with {workers} workers",
+              flush=True)
+    with Pool(workers) as pool:
         for res in pool.imap_unordered(_one, samples, chunksize=64):
             done += 1
             if res is None:

@@ -57,11 +57,53 @@ PY
 HEARTBEAT_PID=$!
 echo "heartbeat pid $HEARTBEAT_PID -> logs/$TAG.live.log every 5 min"
 
+# STALL WATCHDOG — IN THE POD, BECAUSE NOTHING ELSE IS RELIABLY AWAKE.
+#
+# An hourly check from the controlling session was promised and did not
+# happen: that scheduler only fires while its session is alive and idle, and
+# it simply never ran. A pod then sat hung for two and a half hours. The
+# controlling session is not a monitor and must never be treated as one.
+#
+# The pod is the only thing guaranteed to be running, so the pod watches
+# itself: if train.log stops growing for STALL_MINUTES, the run is wedged and
+# is killed. Every stage here writes progress — download percentages,
+# per-shard extraction, materialise counts every 5,000, training epochs — so
+# a log that has not grown in 25 minutes is not a slow stage, it is a dead one.
+#
+# Killing the main shell fires the EXIT trap, which uploads the log, publishes
+# any checkpoint, and stops the pod. A wedged run therefore costs 25 minutes,
+# not however long until someone happens to look.
+STALL_MINUTES="${STALL_MINUTES:-25}"
+MAIN_PID=$$
+(
+  last=0; still=0
+  while true; do
+    sleep 300
+    now=$(stat -c %s "$LOG" 2>/dev/null || echo 0)
+    if [ "$now" = "$last" ]; then
+      still=$((still + 5))
+      echo "WATCHDOG: log unchanged for ${still}m (${now} bytes)" >> "$LOG"
+      if [ "$still" -ge "$STALL_MINUTES" ]; then
+        echo "WATCHDOG: STALLED ${still}m with no output — killing run" >> "$LOG"
+        kill -TERM "$MAIN_PID" 2>/dev/null
+        sleep 30
+        kill -KILL "$MAIN_PID" 2>/dev/null
+        exit 1
+      fi
+    else
+      still=0; last="$now"
+    fi
+  done
+) &
+WATCHDOG_PID=$!
+echo "watchdog pid $WATCHDOG_PID — kills the run after ${STALL_MINUTES}m of silence"
+
 
 finish() {
   code=$?
   set +x
   kill "$HEARTBEAT_PID" 2>/dev/null
+  kill "$WATCHDOG_PID" 2>/dev/null
   echo "=== exit code $code ==="
   # Upload the log FIRST — it is the only diagnostic that survives the pod.
   python - <<'PY' || echo "log upload failed"
