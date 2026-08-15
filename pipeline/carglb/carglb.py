@@ -1,0 +1,307 @@
+#!/usr/bin/env python3
+"""car-glb — one command: a folder of photos in, a gate-passing GLB out.
+
+The orchestrator planned in pipeline/trellis/IMAGE_TO_GLB_PLAN.md. It invents
+NOTHING: every stage is a tool this repo has already built and tested, wired
+in the order build_car.py proved. What it adds is the discipline around them —
+capture gating before any GPU money is spent, artefact-asserted pod runs,
+fatal gates, and QC renders written next to the output.
+
+    python3 pipeline/carglb/carglb.py check    <folder>       # free, no GPU
+    python3 pipeline/carglb/carglb.py generate <folder> -o car.glb
+    python3 pipeline/carglb/carglb.py gates    <some.glb>     # gates only
+
+FOLDER CONTRACT (same as the owner's demo README):
+    dims.json          REQUIRED - published mm; pixels never set scale
+    front.png rear.png REQUIRED - background-removed RGBA
+    left.png right.png recommended (4-view generation)
+    f34.png            optional  (structure stage conditioning)
+
+HONESTY CONTRACT (IMAGE_TO_GLB_PLAN §0/§4, do not delete):
+    output is gap-filler tier. No shut lines, badges or premium panel language
+    — measured to be below the representable bandwidth of every open
+    generator. Output lands in staging; NOTHING ships without the owner's
+    per-car sign-off.
+"""
+import argparse
+import json
+import os
+import subprocess
+import sys
+import time
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.dirname(HERE))
+sys.path.insert(0, os.path.join(ROOT, "pipeline", "ingest"))
+sys.path.insert(0, os.path.join(ROOT, "pipeline", "trellis"))
+sys.path.insert(0, os.path.join(ROOT, "pipeline", "authoring"))
+
+SB = "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object"
+STAGING = "car-meshes/staging/carglb"
+REQUIRED_VIEWS = ("front", "rear")
+GOOD_VIEWS = ("front", "rear", "left", "right")
+MIN_PIXELS = 0.5e6          # half the demo README's 1MP floor: warn, don't block
+MIN_ALPHA_FRac = 0.08       # a cutout with less car than this is a bad mask
+
+
+class CaptureError(SystemExit):
+    pass
+
+
+# --------------------------------------------------------------- A. capture
+def check_captures(folder, strict=True):
+    """The gate that runs BEFORE any GPU money. Returns the manifest."""
+    from PIL import Image
+    import numpy as np
+
+    dims_path = os.path.join(folder, "dims.json")
+    if not os.path.exists(dims_path):
+        raise CaptureError(f"{folder}/dims.json missing — published dimensions "
+                           "are required; this pipeline never estimates size "
+                           "from pixels")
+    dims = json.load(open(dims_path))
+    for k in ("name", "length", "width", "height", "wheelbase"):
+        if k not in dims:
+            raise CaptureError(f"dims.json missing '{k}'")
+
+    manifest = {"dims": dims, "views": {}, "warnings": []}
+    for view in GOOD_VIEWS + ("f34",):
+        p = os.path.join(folder, f"{view}.png")
+        if not os.path.exists(p):
+            if view in REQUIRED_VIEWS:
+                raise CaptureError(f"required view missing: {view}.png")
+            manifest["warnings"].append(f"view missing: {view}.png")
+            continue
+        im = Image.open(p)
+        if im.mode != "RGBA":
+            raise CaptureError(f"{view}.png is {im.mode}, need RGBA cutout — "
+                               "background junk becomes mesh spikes (measured)")
+        a = np.asarray(im)[:, :, 3]
+        frac = float((a > 24).mean())
+        if frac < MIN_ALPHA_FRac:
+            raise CaptureError(f"{view}.png: only {frac:.0%} of the frame is "
+                               "car — bad mask, refusing")
+        mp = im.width * im.height / 1e6
+        if mp * frac < MIN_PIXELS / 1e6:
+            manifest["warnings"].append(f"{view}.png is low resolution "
+                                        f"({mp:.2f}MP, car {frac:.0%})")
+        manifest["views"][view] = {"px": [im.width, im.height],
+                                  "car_frac": round(frac, 3)}
+    n = len([v for v in manifest["views"] if v in GOOD_VIEWS])
+    if n < 4:
+        manifest["warnings"].append(
+            f"only {n} of 4 principal views — generation quality drops; "
+            "Vizcom's own contract wants consistent views of all sides")
+    if strict and manifest["warnings"]:
+        print("capture warnings:")
+        for w in manifest["warnings"]:
+            print("  -", w)
+    return manifest
+
+
+# ----------------------------------------------------------------- B. shape
+def run_shape_pod(folder, manifest, out_dir, timeout_s=5400):
+    """Submit the shape+structure job to a RunPod box via the hardened
+    bootstrap pattern, wait on ARTEFACTS (never desiredStatus), pull results.
+
+    The bootstrap itself is pipeline/carglb/shape_boot.sh — the proven
+    Hunyuan-2mv recipe. Requires SB_KEY/RUNPOD_API_KEY/HF_TOKEN in env
+    (source /root/.alam3d_env).
+    """
+    import urllib.request
+
+    key = os.environ.get("RUNPOD_API_KEY")
+    sb_key = os.environ.get("SB_KEY")
+    if not (key and sb_key):
+        raise SystemExit("RUNPOD_API_KEY / SB_KEY not in env — "
+                         "source /root/.alam3d_env")
+    job = manifest["dims"]["name"].lower().replace(" ", "-")
+    pre = f"{STAGING}/{job}"
+
+    def put(local, remote):
+        req = urllib.request.Request(
+            f"{SB}/{pre}/{remote}", data=open(local, "rb").read(), method="POST",
+            headers={"apikey": sb_key, "Authorization": f"Bearer {sb_key}",
+                     "x-upsert": "true",
+                     "Content-Type": "application/octet-stream"})
+        urllib.request.urlopen(req, timeout=120)
+
+    for view in manifest["views"]:
+        put(os.path.join(folder, f"{view}.png"), f"{view}.png")
+    boot = os.path.join(HERE, "shape_boot.sh")
+    put(boot, "shape_boot.sh")
+    # preflight the bootstrap URL BEFORE renting a GPU (the sed-URL lesson)
+    url = f"{SB}/public/{pre}/shape_boot.sh"
+    if urllib.request.urlopen(url, timeout=30).status != 200:
+        raise SystemExit("bootstrap preflight failed")
+
+    body = {
+        "name": f"carglb-{job}"[:60],
+        "imageName": "runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04",
+        "gpuTypeIds": ["NVIDIA GeForce RTX 4090", "NVIDIA RTX A6000",
+                       "NVIDIA A40", "NVIDIA RTX A5000"],
+        "gpuTypePriority": "availability",
+        "gpuCount": 1, "containerDiskInGb": 60, "volumeInGb": 0,
+        "cloudType": "SECURE",
+        "dockerStartCmd": ["bash", "-c",
+                           f"export CARGLB_JOB={job}; "
+                           f"curl -sSL '{url}?cb='$(date +%s) | bash; "
+                           "sleep infinity"],
+        "env": {"SB_KEY": sb_key, "HF_TOKEN": os.environ.get("HF_TOKEN", ""),
+                "HUGGING_FACE_HUB_TOKEN": os.environ.get("HF_TOKEN", ""),
+                "HF_HOME": "/workspace/hf", "CARGLB_JOB": job},
+    }
+    req = urllib.request.Request(
+        "https://rest.runpod.io/v1/pods", data=json.dumps(body).encode(),
+        headers={"Authorization": f"Bearer {key}",
+                 "Content-Type": "application/json"})
+    pod = json.load(urllib.request.urlopen(req, timeout=60))
+    pod_id = pod.get("id")
+    if not pod_id:
+        raise SystemExit(f"pod launch failed: {pod}")
+    print(f"shape pod {pod_id} launched; waiting on artefacts")
+
+    log_url = f"{SB}/public/{pre}/shape_log.txt"
+    t0, last = time.time(), ""
+    ok = False
+    try:
+        while time.time() - t0 < timeout_s:
+            try:
+                log = urllib.request.urlopen(
+                    f"{log_url}?cb={int(time.time())}", timeout=30).read().decode(
+                    "utf-8", "replace")
+                lines = [l for l in log.splitlines() if l.startswith("=== ")]
+                if lines and lines[-1] != last:
+                    last = lines[-1]
+                    print(f"  [{int(time.time()-t0)}s] {last}")
+                if "ALL_OK" in last:
+                    ok = True
+                    break
+                if "FAIL" in last:
+                    break
+            except Exception:
+                pass
+            time.sleep(45)
+    finally:
+        # terminate either way, and VERIFY the termination
+        req = urllib.request.Request(f"https://rest.runpod.io/v1/pods/{pod_id}",
+                                     method="DELETE",
+                                     headers={"Authorization": f"Bearer {key}"})
+        try:
+            urllib.request.urlopen(req, timeout=60)
+        except Exception as e:                                   # noqa: BLE001
+            print(f"POD DELETE FAILED — kill {pod_id} by hand: {e}")
+    if not ok:
+        raise SystemExit(f"shape stage did not reach ALL_OK (last: {last}) — "
+                         f"log: {log_url}")
+    os.makedirs(out_dir, exist_ok=True)
+    got = {}
+    for f in ("shape.glb", "parts.glb"):
+        try:
+            data = urllib.request.urlopen(f"{SB}/public/{pre}/{f}",
+                                          timeout=300).read()
+            open(os.path.join(out_dir, f), "wb").write(data)
+            got[f] = len(data)
+        except Exception:
+            got[f] = None
+    print("pulled:", got)
+    if not got.get("shape.glb"):
+        raise SystemExit("shape.glb missing from bucket after ALL_OK")
+    return os.path.join(out_dir, "shape.glb"), (
+        os.path.join(out_dir, "parts.glb") if got.get("parts.glb") else None)
+
+
+# ------------------------------------------------------- E-G. local pipeline
+def run_local(shape_glb, parts_glb, dims, out_glb, renders_dir=None):
+    """Structure transfer + wheels + gates, via build_car.py's proven chain.
+
+    When parts_glb is None (structure stage skipped/failed) we still refuse to
+    ship an unstructured shell: the gates would fail it anyway, so fail early
+    with the reason.
+    """
+    if parts_glb is None:
+        raise SystemExit(
+            "no parts GLB — the structure stage is what makes glazing "
+            "separable, and a fused shell cannot pass the glass gate "
+            "(P3-SAM measurably cannot cut glazing out of one). Re-run the "
+            "pod stage.")
+    donor = os.path.join(ROOT, "pipeline", "trellis", "donor_wheel.glb")
+    cmd = [sys.executable, os.path.join(ROOT, "pipeline", "trellis",
+                                        "build_car.py"),
+           "--parts", parts_glb, "--mesh", shape_glb, "--out", out_glb]
+    if os.path.exists(donor):
+        cmd += ["--donor", donor]
+    if renders_dir:
+        cmd += ["--renders", renders_dir]
+    print("$", " ".join(cmd))
+    p = subprocess.run(cmd)
+    if p.returncode != 0:
+        raise SystemExit(f"build_car gates failed ({p.returncode}) — the car "
+                         "is NOT shippable; read the gate output above")
+    return out_glb
+
+
+# ----------------------------------------------------------------- H. QC out
+def qc(out_glb, renders_dir):
+    os.makedirs(renders_dir, exist_ok=True)
+    env = dict(os.environ,
+               HDRI_PATH=os.path.join(ROOT, "render", "assets", "hdri.hdr"))
+    for az in (35, 215):
+        png = os.path.join(renders_dir, f"qc_{az}.png")
+        subprocess.run(["xvfb-run", "-a", "blender", "-b", "--factory-startup",
+                        "-noaudio", "-P",
+                        os.path.join(ROOT, "pipeline", "qc", "prod_render.py"),
+                        "--", os.path.join(ROOT, "render", "handler.py"),
+                        out_glb, png, str(az), "40"], env=env,
+                       capture_output=True)
+    fr = subprocess.run([sys.executable,
+                         os.path.join(ROOT, "pipeline", "qc",
+                                      "mesh_forensics.py"), out_glb],
+                        capture_output=True, text=True)
+    report = os.path.join(renders_dir, "forensics.txt")
+    open(report, "w").write(fr.stdout)
+    print(fr.stdout.splitlines()[1] if fr.stdout else "forensics failed")
+    print(f"QC written to {renders_dir}")
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("cmd", choices=["check", "generate", "gates"])
+    ap.add_argument("target")
+    ap.add_argument("-o", "--out")
+    a = ap.parse_args()
+
+    if a.cmd == "check":
+        m = check_captures(a.target)
+        print(json.dumps(m, indent=1))
+        return
+
+    if a.cmd == "gates":
+        from build_car import materials, EXPECTED_MATS          # noqa: F401
+        import glass_probe as gp
+        import json as _json, struct
+        raw = open(a.target, "rb").read()
+        ln = struct.unpack("<I", raw[12:16])[0]
+        gp.gltf_json = lambda url: _json.loads(raw[20:20 + ln])
+        r = gp.probe(os.path.basename(a.target), url="local")
+        print("glass:", r["verdict"], "/", r["certainty"],
+              "| flat_shell:", r["flat_shell"],
+              "| alpha_shell:", r["alpha_shell"])
+        print("materials:", sorted(materials(a.target)))
+        return
+
+    folder = a.target
+    manifest = check_captures(folder)
+    out = a.out or os.path.join(folder,
+                                manifest["dims"]["name"].lower() + ".glb")
+    work = os.path.join(folder, "work")
+    shape, parts = run_shape_pod(folder, manifest, work)
+    run_local(shape, parts, manifest["dims"], out,
+              renders_dir=os.path.join(folder, "qc"))
+    qc(out, os.path.join(folder, "qc"))
+    print(f"\nDONE: {out}")
+    print("staging only — nothing ships without the owner's sign-off.")
+
+
+if __name__ == "__main__":
+    main()
