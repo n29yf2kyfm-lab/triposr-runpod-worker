@@ -226,11 +226,24 @@ def run_local(shape_glb, parts_glb, dims, out_glb, renders_dir=None):
             "(P3-SAM measurably cannot cut glazing out of one). Re-run the "
             "pod stage.")
     donor = os.path.join(ROOT, "pipeline", "trellis", "donor_wheel.glb")
+    if not os.path.exists(donor):
+        # the 12MB donor binary lives in the bucket, not in git — fetch the
+        # catalogue GR Supra and decompress it (wheel_swap needs raw geometry;
+        # Draco donors import as placeholder zeros, the paid-for trap)
+        import urllib.request
+        src = (SB + "/public/car-meshes/finished/toyota/toyota-gr-supra-v1.glb")
+        tmp = donor + ".draco"
+        open(tmp, "wb").write(urllib.request.urlopen(src, timeout=300).read())
+        r = subprocess.run(["gltf-transform", "copy", tmp, donor],
+                           capture_output=True, text=True)
+        os.unlink(tmp)
+        if r.returncode != 0 or not os.path.exists(donor):
+            raise SystemExit(f"donor fetch/decompress failed: {r.stderr[-300:]}")
+        print("wheel donor fetched from catalogue")
     cmd = [sys.executable, os.path.join(ROOT, "pipeline", "trellis",
                                         "build_car.py"),
            "--parts", parts_glb, "--mesh", shape_glb, "--out", out_glb]
-    if os.path.exists(donor):
-        cmd += ["--donor", donor]
+    cmd += ["--donor", donor]
     if renders_dir:
         cmd += ["--renders", renders_dir]
     print("$", " ".join(cmd))

@@ -9,3 +9,4 @@ __pycache__/
 # says nothing a commit message does not. The catalogue and the manifests are
 # the durable record.
 pipeline/publish/publish_jobs.jsonl
+pipeline/trellis/donor_wheel.glb
