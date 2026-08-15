@@ -1246,6 +1246,33 @@ injection, i.e. the same class of lever that made Hi3DGen beat TRELLIS.
      3/4 input). It must be canonicalised — an oriented bounding box works —
      before any of our tooling can touch it. Nothing downstream expects this.
 
+## FINE-TUNE v2: THE TRAJECTORY ANSWER — collapse starts by step 200 (2026-08-15)
+
+The redesigned run (base_lr cut 5x to 2e-6, checkpoint every 200 steps, a
+Golf RENDERED FROM EVERY CHECKPOINT in the same pod) answered the question
+v1 could not: there is NO sweet spot. Evidence: 8-tile trajectory sheet,
+base + steps 200-1400, all through the production rig.
+
+  * BASE: a recognisable Golf (soft, but a car — wheels, arches, DLO).
+  * step 200: already NOT the Golf — a generic soft saloon. The identity
+    is the first thing to go, after just 200 gentle steps on 20 cars.
+  * steps 400-1400: melted shells, most rendering UPSIDE-DOWN — training
+    on our data destroyed pose stability too. A brief partial recovery
+    (~step 1200, soft MPV-ish car, still wrong) then melt again.
+  * Face counts told the same story early: base 628k, every checkpoint
+    264-388k.
+
+So on Hunyuan-2.1's own trainer, full-model fine-tuning on a small car set
+DEGRADES from the first checkpoint even at 2e-6. Do NOT spend the 200-car
+pilot ($150-400) on this recipe — the evidence says it fails not from too
+few cars but from full-model training itself at this scale. Reopen only
+with (a) adapter/LoRA training (peft is already installed in the env),
+(b) in-training render evals as a first-class stage (the same-pod sweep
+pattern, now proven), and (c) a dataset in the thousands, not tens.
+Machinery status: prep/train/sweep/eval all work end to end; two clean runs,
+weights preserved through same-pod eval. The machinery is not the blocker.
+The recipe is.
+
 ## THE 1h FINE-TUNE MADE THE MODEL WORSE, AND THE METRIC SAID OTHERWISE (2026-08-15)
 
 Second run, 20 cars (chunked-SDF fix took prep from 8/16 to 20/20), 1900
