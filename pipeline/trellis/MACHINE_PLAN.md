@@ -46,6 +46,31 @@ different generators all produced the same softness: it is not a settings
 problem. The 1536³-class tier (Hunyuan3D 3.0/3.5, Hitem3D, Tripo/Rodin latest)
 is commercial-API only.
 
+**CORRECTION 2026-08-15 — "the 1536 tier is commercial-API only" IS NO LONGER
+TRUE.** `TencentARC/Pixal3D` (SIGGRAPH 2026) ships **MIT-licensed weights on
+HuggingFace**, runs a **1536 cascade** (1024 low-VRAM mode) and exports GLB
+with PBR. Two reasons it is worth ONE gated test rather than a shrug:
+  * it is built on the **TRELLIS.2 backbone we have already run**, changing the
+    CONDITIONING — pixel back-projection lifting multi-scale image features
+    into a 3D volume, instead of loose attention injection. Conditioning is the
+    exact lever that produced this project's only measured tier change
+    (Hi3DGen = TRELLIS + normal-map conditioning, crease 145 vs 37);
+  * it therefore is NOT the "turn the resolution knob" experiment we already
+    ran and closed.
+Against it, from OUR OWN measurements: we ran TRELLIS.2 at `1536_cascade` and
+recorded "wheels and grille slats genuinely improve; **panel surfacing does
+not**". Resolution alone is necessary-not-sufficient on this exact backbone.
+The project page publishes **no quantitative comparisons** — only hand-aligned
+qualitative shots vs TRELLIS.2 and HY3D v3.1 — so "near-reconstruction-level
+fidelity" is a claim, not evidence. Parts separation is not mentioned, so
+assume a fused shell and expect `fit_panes` to refuse it (hollow-cabin guard)
+and the hybrid path to be needed for glazing.
+**Pre-registered gate before any adoption:** same Golf capture, measure
+`crease_density` and `sharp_share` against the recorded ladder (Hunyuan-2.1
+63.3 / Hi3DGen 92.4 noisy / our catalogue keepers 162–271). It must beat
+**Hi3DGen's crease 145 / sharp_share 2.07%** on mesh_forensics AND survive the
+eye, or the route stays closed. Est. cost ~$0.30–0.50, one pod.
+
 ### The interior standard — stated plainly
 
 **No generator tested produces an interior.** Hunyuan emits a closed shell;
