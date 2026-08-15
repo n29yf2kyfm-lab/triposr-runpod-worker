@@ -142,6 +142,24 @@ def materialise(index_dir, corpus, out, workers=8, limit=0,
         cats.append({"id": r["index"], "name": r["name"],
                      "supercategory": r["canonical"]})
 
+    # PROVE THE WORKER ENVIRONMENT BEFORE FORKING INTO IT.
+    #
+    # Pool workers that raise inside their initializer do not report anything:
+    # they die, imap_unordered blocks forever, and the process sits at zero CPU
+    # with no traceback on stdout. A rented GPU hung 87 minutes that way — the
+    # cause was a Pillow whose compiled extension did not match its package,
+    # which is invisible until something actually encodes an image.
+    #
+    # So the parent does exactly what a worker does, first. A crash here costs
+    # a second and names the problem; the same crash inside a worker costs
+    # however long it takes someone to notice the silence.
+    import io
+    from PIL import Image as _Im
+    _b = io.BytesIO()
+    _Im.new("RGB", (16, 16), (9, 9, 9)).save(_b, "JPEG")
+    _b.seek(0)
+    assert _Im.open(_b).size == (16, 16), "PIL cannot round-trip a JPEG"
+
     from multiprocessing import Pool
     acc = {sp: {"images": [], "annotations": []} for sp in splits}
     nid = {sp: 1 for sp in splits}

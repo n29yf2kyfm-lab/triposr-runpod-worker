@@ -218,6 +218,34 @@ pip install -q --ignore-installed blinker "rfdetr[train,loggers]" || exit 14
 pip install -q --force-reinstall --no-deps torch torchvision \
   --index-url "https://download.pytorch.org/whl/$IDX" || exit 16
 python -c "import torch;print('torch after re-pin:', torch.__version__)"
+
+# PILLOW MUST BE REINSTALLED AND PROVEN TO IMPORT.
+#
+# Two runs were lost to this. The image ships a Pillow whose compiled
+# extension does not match its Python package:
+#   ImportError: PIL/_imaging...so: undefined symbol: ImagingJpeg2KEncode
+# and something in the torch/rfdetr install chain leaves it that way. The
+# failure is invisible where it happens: materialise_index's Pool workers all
+# die inside their initialiser, imap_unordered then blocks forever, and the pod
+# sits at 100% idle burning money with no error on stdout. One smoke run hung
+# 87 minutes on exactly this and had to be killed from outside.
+#
+# --no-cache-dir because a cached wheel is how the mismatch survives a
+# reinstall. The import is then EXERCISED, not just attempted: `import PIL`
+# alone succeeds on the broken install, because the extension is only loaded
+# when Image is used.
+pip install -q --force-reinstall --no-cache-dir Pillow || exit 17
+python - <<'PY' || exit 18
+from PIL import Image
+import io
+im = Image.new("RGB", (32, 32), (1, 2, 3))
+b = io.BytesIO()
+im.save(b, "JPEG")           # exercises the encoder the mismatch hides in
+b.seek(0)
+assert Image.open(b).size == (32, 32)
+print("Pillow OK:", Image.__version__ if hasattr(Image, "__version__")
+      else __import__("PIL").__version__)
+PY
 # So the smoke test now checks the TRAINING path, not just the import: the
 # gate must fail on the same thing the real run would.
 # CUDA is verified AFTER rfdetr, never before. v4 printed "torch 2.6.0+cu124
