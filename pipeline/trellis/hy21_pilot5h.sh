@@ -109,6 +109,36 @@ sed -i "s/def training_step(self, batch, batch_idx, optimizer_idx=0)/def trainin
 sed -i "s/def validation_step(self, batch, batch_idx, optimizer_idx=0)/def validation_step(self, batch, batch_idx)/" hy3dshape/models/diffusion/flow_matching_sit.py
 grep -c "optimizer_idx" hy3dshape/models/diffusion/flow_matching_sit.py | grep -q "^0$" || die PATCH_STEPS
 
+stage patch_tools
+# pip's current libigl drifted from the API their tool was written against.
+# FOUR drifts, each found by running the tool (first on the pod's sanity car,
+# then locally to exit 0 on a real mesh.ply, 2026-08-15):
+#   1. signed_distance returns 4 values, tool unpacks 3 -> starred unpacks
+#   2. marching_cubes also grew extra returns -> starred unpack
+#   3. return_normals kwarg dropped; float64/int64 dtypes now strict
+#   4. write_obj renamed writeOBJ
+python3 - <<'PY' || die PATCH_TOOLS
+import ast, re
+p = "/workspace/repo/hy3dshape/tools/watertight/watertight_and_sample.py"
+s = open(p).read()
+s = re.sub(r"^(\s*)([\w]+), (I, C|_, _) = igl\.signed_distance\(",
+           r"\1\2, \3, *_extra = igl.signed_distance(", s, flags=re.M)
+n = len(re.findall(r"\*_extra = igl\.signed_distance\(", s))
+assert n == 7, f"expected 7 patched unpacks, got {n}"
+s = s.replace("mc_verts, mc_faces = igl.marching_cubes(",
+              "mc_verts, mc_faces, *_extra = igl.marching_cubes(")
+s = re.sub(r"\s*return_normals=False,\n", "\n", s)
+s = s.replace("return_normals=False)", ")").replace(",\n            )", ")")
+s = s.replace(".astype(np.float32)", ".astype(np.float64)")
+s = s.replace("mesh.vertices, mesh.faces",
+              "np.asarray(mesh.vertices, np.float64), np.asarray(mesh.faces, np.int64)")
+s = s.replace("igl.write_obj(", "igl.writeOBJ(")
+assert "return_normals" not in s
+ast.parse(s)
+open(p, "w").write(s)
+print("patched: 7 signed_distance + marching_cubes + kwargs/dtypes + writeOBJ")
+PY
+
 prep_one() {  # prep_one <uid>  -> 0 on success; rc/wt logs left in /tmp
   local U=$1 G=/workspace/car.glb OUTD="$DATA/$1"
   rm -f "$G"
