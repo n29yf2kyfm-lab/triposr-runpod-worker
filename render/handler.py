@@ -1130,7 +1130,13 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
     cam_d.lens = float(os.environ.get("LENS", "100"))
     cam = bpy.data.objects.new("C", cam_d)
     bpy.context.collection.objects.link(cam)
-    dist = size * float(os.environ.get("DIST", "2.1"))
+    # Distance must track the LENS or framing changes with it: going 62 -> 100
+    # narrowed the field of view ~1.6x and cropped the car out of frame
+    # (measured 2026-08-15 on the Pixal3D Golf, immediately after the lens
+    # switch). Scaling by lens/62 keeps every historical framing identical at
+    # 62mm while making the default lens-invariant.
+    dist = (size * float(os.environ.get("DIST", "2.1"))
+            * (cam_d.lens / 62.0))
     fx, fy = math.sin(az), -math.cos(az)
     loc = (c[0] + dist * fx, c[1] + dist * fy, c[2] + size * elev)
     cam.location = loc
