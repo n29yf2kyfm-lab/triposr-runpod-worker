@@ -8,9 +8,11 @@ keeps paying for.
 
 Status key: [ ] open · [x] fixed · [~] partially addressed
 
+**2026-08-15 (same day): all 12 confirmed findings fixed and integration-tested; commits c7f84a9, fb497ba, 055286c. The OUT_AXIS sign regression introduced while fixing finding 1 was itself caught by a mirror-check render — the render remains the arbiter. Plausibles remain open except wheel centres.**
+
 ## Confirmed — would produce a wrong result
 
-- [ ] **1. photo_project bakes the texture MIRRORED.** With length on X, nose
+- [x] **1. photo_project bakes the texture MIRRORED.** With length on X, nose
   +X and Y up (right-handed), `right = forward x up = X x Y = +Z`. `group_of`
   labels +Z faces "left" and feeds them `left.png`, so every side photo lands
   on the opposite flank and both end photos are mirrored too. Number plates
@@ -18,58 +20,58 @@ Status key: [ ] open · [x] fixed · [~] partially addressed
   `nose_positive_x` flag controls TWO degrees of freedom (which end is the
   nose, and handedness), so no value of it is correct for a nose=+X mesh —
   and `carglb.py` never passes the flag at all.
-- [ ] **2. The glass CLAMP paints over the headlamps.** `CLAMP["front"]=0.53`
+- [x] **2. The glass CLAMP paints over the headlamps.** `CLAMP["front"]=0.53`
   reassigns every front-group face above 53% of car height to flat paint. A
   Golf's lamps span ~0.52-0.62; on an SUV the whole lamp is above it. The
   module exists to supply lamp graphics and erases the top half of them —
   the owner's recorded 2026-08-12 complaint ("the lights got paint over").
-- [ ] **3. silhouette_iou's end views cannot see a bad front end.** The
+- [x] **3. silhouette_iou's end views cannot see a bad front end.** The
   silhouette cache is keyed on the projection plane, so front.png and
   rear.png score against ONE mask, and an ortho projection along length is
   the union of all cross-sections. Measured on a synthetic car with the nose
   collapsed to 0.45x: END IoU 1.0000 (identical), SIDE IoU 0.8849. The gate
   reports 2 real measurements as 4, and its docstring's headline claim is
   false.
-- [ ] **4. `axes_of` mislabels height/width on tall vehicles.** It calls the
+- [x] **4. `axes_of` mislabels height/width on tall vehicles.** It calls the
   SMALLER of the two non-length extents "height". Measured on VW-Crafter
   proportions [5.14, 1.99, 1.90] it returns width-as-height. Consequences:
   dim_gate compares height against the width spec and fails a correct van
   twice; silhouette side/end views swap; fit_panes lays the car on its side.
   Three copies of this function share the defect. Disambiguate by gravity /
   wheel position, not by min extent.
-- [ ] **5. The primary path never runs glass_probe or EXPECTED_MATS.** Only
+- [x] **5. The primary path never runs glass_probe or EXPECTED_MATS.** Only
   the fused-shell fallback and the standalone `gates` subcommand do.
   fit_panes' docstring claims glazing is "clear/proven by construction";
   nothing verifies the written file. The owner's hard-fail rule (opaque
   glazing) is the one gate the main path skips.
-- [ ] **6. A glazing GATE FAIL is indistinguishable from "not applicable".**
+- [x] **6. A glazing GATE FAIL is indistinguishable from "not applicable".**
   fit_panes exits 1 for the hollow-cabin refusal, for no-apertures AND for
   an out-of-band glass share; run_local reads any non-zero as "refused" and
   silently reroutes a QUALITY FAILURE into the fused-shell chain. Needs
   distinct exit codes (2 = inapplicable, 1 = fail). It also leaves the
   `.paned.glb` (whose own message says do NOT ship it) on disk.
-- [ ] **7. The hero variant is ungated but gets a provenance manifest.**
+- [x] **7. The hero variant is ungated but gets a provenance manifest.**
   Gates run on the flat build only; `write_manifest` runs on both. A hash
   that reads as approved for a file that passed zero geometry gates.
-- [ ] **8. `qc()` swallows every failure.** Blender return codes unchecked,
+- [x] **8. `qc()` swallows every failure.** Blender return codes unchecked,
   output PNGs never verified, `forensics.txt` written regardless, and it
   prints "QC written" unconditionally. Also an IndexError on single-line
   forensics output.
-- [ ] **9. The fused-shell fallback can never pass dim_gate.** fit_panes
+- [x] **9. The fused-shell fallback can never pass dim_gate.** fit_panes
   rescales to real metres; `build_car.build()` takes no length and does not
   scale, so branch B is gated at generator-normalised scale (~130% length
   error) and the message blames the mesh.
-- [ ] **10. `paint_colour` silently falls back to an END photo.** Only
+- [x] **10. `paint_colour` silently falls back to an END photo.** Only
   front/rear are REQUIRED by the capture gate, so a 2-view capture samples
   "door skin" from the grille/lamp strip and paints the whole car that
   colour — the exact two-tone defect the function was written to prevent.
-- [ ] **11. Nothing verifies the nose direction.** `orient_catalogue` reads
+- [x] **11. Nothing verifies the nose direction.** `orient_catalogue` reads
   no geometry — it stamps a fixed quaternion. `fit_panes.remap` guarantees
   length-on-X but never which END. If a mesh arrives nose-−X the catalogue
   rotation puts the nose at +Z, 180 deg from convention, and every studio
   azimuth is the wrong tile — the failure that module exists to prevent.
   The silhouette gate deliberately mirror-maxes, so it cannot catch it.
-- [ ] **12. `mat_for`'s default is BODY PAINT.** Any geometry whose names
+- [x] **12. `mat_for`'s default is BODY PAINT.** Any geometry whose names
   match no pattern is written as paint. A rename of `lib_tyre_*` upstream
   ships painted tyres — an owner hard-fail. The default should be
   Arch_Cavity, or a raise.
