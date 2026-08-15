@@ -14,8 +14,8 @@
 set -x
 export DEBIAN_FRONTEND=noninteractive
 START=$(date +%s)
-BUDGET=18000                 # 5h wall
-RESERVE=1500                 # keep 25 min for ckpt upload + verify
+BUDGET=${BUDGET:-10800}      # 3h wall (owner: "Train 3 hrs just to test")
+RESERVE=1200                 # keep 20 min for ckpt upload + verify
 LOG=/workspace/boot.log
 mkdir -p /workspace
 exec > >(tee -a "$LOG") 2>&1
@@ -51,7 +51,8 @@ cd /workspace/repo/hy3dshape
 
 stage deps
 apt-get update -qq && apt-get install -y -qq --no-install-recommends \
-  libopengl0 libegl1 libgl1 xvfb libxi6 libxrender1 libxkbcommon0 libsm6 \
+  libopengl0 libegl1 libgl1 xvfb xauth libxi6 libxrender1 libxkbcommon0 \
+  libxkbcommon-x11-0 libxrandr2 libxinerama1 libxcursor1 libsm6 \
   libice6 libxfixes3 libxxf86vm1 2>&1 | tail -2
 grep -viE '^(torch|torchvision)$' requirements.txt > /tmp/reqs_notorch.txt
 pip install -q -r /tmp/reqs_notorch.txt 2>&1 | tail -5
@@ -107,33 +108,54 @@ sed -i "s/def training_step(self, batch, batch_idx, optimizer_idx=0)/def trainin
 sed -i "s/def validation_step(self, batch, batch_idx, optimizer_idx=0)/def validation_step(self, batch, batch_idx)/" hy3dshape/models/diffusion/flow_matching_sit.py
 grep -c "optimizer_idx" hy3dshape/models/diffusion/flow_matching_sit.py | grep -q "^0$" || die PATCH_STEPS
 
+prep_one() {  # prep_one <uid>  -> 0 on success; rc/wt logs left in /tmp
+  local U=$1 G=/workspace/car.glb OUTD="$DATA/$1"
+  rm -f "$G"
+  curl -fsSL "$SB/public/$PRE/glb/${U}.glb" -o "$G" || { echo "dlfail" > /tmp/rc.log; return 1; }
+  # Cycles in -b needs no display: run blender DIRECTLY. v1 wrapped this in
+  # xvfb-run and every car died unseen (the image ships no xauth, so xvfb-run
+  # itself fails before blender starts). xauth is installed now anyway.
+  $BL -b --factory-startup -noaudio -P /workspace/hy21_render.py -- \
+       --object "$G" --output_folder "$OUTD/render_cond" --views 24 \
+       --resolution 512 --samples 12 > /tmp/rc.log 2>&1 \
+   && python3 /workspace/repo/hy3dshape/tools/watertight/watertight_and_sample.py \
+       --input_obj "$OUTD/render_cond/mesh.ply" \
+       --output_prefix "$OUTD/geo_data/$U" > /tmp/wt.log 2>&1 \
+   && [ -f "$OUTD/geo_data/${U}_surface.npz" ] \
+   && [ -f "$OUTD/render_cond/023.png" ]
+}
+
+stage prep_sanity
+# ONE car, decisive, BEFORE the loop: if the environment is broken, name the
+# cause in the bucket and die for pennies — v1 burned 45 cars with the real
+# error trapped in an unuploaded /tmp file.
+DATA=/workspace/prep
+mkdir -p "$DATA"
+FIRST=$(head -1 /workspace/cars.txt)
+if ! prep_one "$FIRST"; then
+  sb_file rc_fail.log /tmp/rc.log
+  [ -f /tmp/wt.log ] && sb_file wt_fail.log /tmp/wt.log
+  tail -n 20 /tmp/rc.log; tail -n 20 /tmp/wt.log 2>/dev/null
+  die PREP_BROKEN
+fi
+echo "CAROK $FIRST (sanity)"
+
 stage prep_cars
 # time-budgeted: render 24 geo views + surface sampling per car; a car that
 # fails is logged and skipped, never fatal. Stop when the prep window closes.
-PREP_DEADLINE=$((START + 7200))
-DATA=/workspace/prep
-mkdir -p "$DATA"
-N_OK=0; N_FAIL=0
+PREP_DEADLINE=$((START + 4500))
+N_OK=1; N_FAIL=0
 while read -r UID_; do
   [ -z "$UID_" ] && continue
+  [ "$UID_" = "$FIRST" ] && continue
   NOW=$(date +%s)
   if [ "$NOW" -ge "$PREP_DEADLINE" ]; then echo "PREP_WINDOW_CLOSED"; break; fi
-  G=/workspace/car.glb
-  rm -f "$G"
-  curl -fsSL "$SB/public/$PRE/glb/${UID_}.glb" -o "$G" || { echo "CARFAIL $UID_ dl"; N_FAIL=$((N_FAIL+1)); continue; }
-  OUTD="$DATA/$UID_"
-  if xvfb-run -a $BL -b --factory-startup -noaudio -P /workspace/hy21_render.py -- \
-       --object "$G" --output_folder "$OUTD/render_cond" --views 24 \
-       --resolution 512 --samples 12 > /tmp/rc.log 2>&1 \
-     && python3 /workspace/repo/hy3dshape/tools/watertight/watertight_and_sample.py \
-       --input_obj "$OUTD/render_cond/mesh.ply" \
-       --output_prefix "$OUTD/geo_data/$UID_" > /tmp/wt.log 2>&1 \
-     && [ -f "$OUTD/geo_data/${UID_}_surface.npz" ] \
-     && [ -f "$OUTD/render_cond/023.png" ]; then
+  if prep_one "$UID_"; then
     N_OK=$((N_OK+1)); echo "CAROK $UID_ ($N_OK)"
   else
-    N_FAIL=$((N_FAIL+1)); echo "CARFAIL $UID_"; tail -4 /tmp/rc.log /tmp/wt.log
-    rm -rf "$OUTD"
+    N_FAIL=$((N_FAIL+1)); echo "CARFAIL $UID_"
+    tail -n 4 /tmp/rc.log; tail -n 4 /tmp/wt.log 2>/dev/null
+    rm -rf "$DATA/$UID_"
   fi
   if [ $((N_OK % 5)) -eq 0 ]; then report "log.txt"; fi
 done < /workspace/cars.txt
