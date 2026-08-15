@@ -39,6 +39,7 @@ TAG="${RUN_TAG:-run}"
 # Failures here are swallowed: the heartbeat must never be able to kill the
 # training it exists to observe.
 (
+  set +x            # this loop must not write to the log it is uploading
   while true; do
     sleep 300
     python - <<'PY' >/dev/null 2>&1
@@ -76,6 +77,11 @@ echo "heartbeat pid $HEARTBEAT_PID -> logs/$TAG.live.log every 5 min"
 STALL_MINUTES="${STALL_MINUTES:-25}"
 MAIN_PID=$$
 (
+  # set +x IS LOAD-BEARING. With tracing on, this loop's own `stat` and `sleep`
+  # lines land in train.log — the very file it measures for growth — so the log
+  # always grew, `still` reset to zero every cycle, and the watchdog could
+  # never fire. A stall detector that writes to its own input detects nothing.
+  set +x
   last=0; still=0
   while true; do
     sleep 300
@@ -409,7 +415,7 @@ du -sh corpus || true
 # is how the smoke run stays short: same code path, fewer samples, so a failure
 # costs minutes instead of the whole budget.
 echo "=== materialise the index ==="
-python materialise_index.py --index corpus/idx --corpus corpus/merged640 \
+python -u materialise_index.py --index corpus/idx --corpus corpus/merged640 \
   --out prepared --workers "$(nproc)" ${LIMIT:+--limit $LIMIT} || exit 31
 du -sh prepared || true
 head -c 200 prepared/labels.txt; echo
@@ -420,7 +426,7 @@ echo "=== train ==="
 # budget into a 28-hour bill. `timeout` returns 124 and execution continues to
 # the publish step below, which already handles a non-zero training result —
 # a partially trained checkpoint is worth vastly more than nothing.
-timeout "${MAX_HOURS:-13}h" python train_detector.py --data prepared --out runs \
+timeout "${MAX_HOURS:-13}h" python -u train_detector.py --data prepared --out runs \
   --epochs "${EPOCHS:-15}" --batch-size "${BATCH:-8}"
 TRAIN_RC=$?
 [ "$TRAIN_RC" = "124" ] && echo "TRAINING HIT THE ${MAX_HOURS:-13}h CAP — publishing what exists"

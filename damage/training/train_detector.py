@@ -26,6 +26,10 @@ def main():
     ap.add_argument("--grad-accum", type=int, default=4)
     ap.add_argument("--lr", type=float, default=1e-4)
     ap.add_argument("--resolution", type=int, default=560)
+    ap.add_argument("--num-workers", type=int, default=4,
+                    help="DataLoader workers; each builds its own COCO index, "
+                         "so the library default can exhaust RAM on a corpus "
+                         "this size")
     ap.add_argument("--model", default="base", choices=["base", "large"])
     ap.add_argument("--skip-train", action="store_true",
                     help="export/benchmark an existing checkpoint only")
@@ -43,6 +47,13 @@ def main():
 
     if not args.skip_train:
         t0 = time.time()
+        # num_workers IS CAPPED DELIBERATELY. Each DataLoader worker builds
+        # its own pycocotools index, and the train split here is 369,762
+        # images with 862,550 boxes — roughly 170MB of JSON that inflates to
+        # gigabytes of Python objects per process. At the library default that
+        # is tens of gigabytes before a single batch is read, which is exactly
+        # how the materialise stage wedged: no error, no output, just a box
+        # thrashing. Four workers keep the GPU fed at this batch size.
         model.train(
             dataset_dir=args.data,
             epochs=args.epochs,
@@ -50,6 +61,7 @@ def main():
             grad_accum_steps=args.grad_accum,
             lr=args.lr,
             output_dir=args.out,
+            num_workers=args.num_workers,
         )
         print(f"\ntrained in {(time.time() - t0) / 60:.1f} min")
 
