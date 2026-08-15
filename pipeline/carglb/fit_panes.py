@@ -24,7 +24,16 @@ unreachable by paint, respray touches Material_0 only.
 Usage:
     python3 pipeline/carglb/fit_panes.py shape.glb out.glb
 
-STATUS 2026-08-15, measured on the Golf run: WORKING BUT RAGGED — v1.
+STATUS v2 2026-08-15, measured on the Golf run: COMPLETE CAR, GATES PASS.
+  glass_probe clear/proven · glass 7.06% of faces (band 2.5-9.5%) ·
+  crease_density 183 (2/3 catalogue) · windscreen+backlight paned via the
+  oblique rake projections (dominant region only — the oblique view also sees
+  underbody gaps that fake dozens of small apertures) · side windows paned ·
+  interior reads through tint in the production render. Remaining polish for
+  v3: pane speckle at edges (per-pixel grid; fit a smooth plane instead) and
+  roofline noise. Earlier v1 status kept below for the record.
+
+STATUS v1 (superseded): WORKING BUT RAGGED.
   * side apertures: found (2 per side, the door windows) and paned; the
     rear-quarter pane bleeds around the C-pillar and pane edges leak above
     the roofline (the dilate step ignores the silhouette boundary).
@@ -168,10 +177,16 @@ def fit(src, out_glb, res=256, inset_frac=0.004, min_frac=0.0015):
         av = (norm(C[:, H], H) * (res - 1)).astype(int)
         sil = np.zeros((res, res), dtype=bool)
         sil[av, au] = True
+        # densify: fill each column between the car's top and bottom rows —
+        # sparse centroid hits leave speckle holes that fake apertures
+        for col in range(res):
+            rows = np.where(sil[:, col])[0]
+            if len(rows) > 1:
+                sil[rows.min():rows.max() + 1, col] = True
         # aperture = inside silhouette, cabin band, NO outward surface
         band = np.zeros((res, res), dtype=bool)
         band[int(res * 0.45):int(res * 0.97), int(res * 0.06):int(res * 0.94)] = True
-        aperture = dilate(band & sil & ~covered) & ~covered
+        aperture = dilate(band & sil & ~covered) & ~covered & sil
         lvl = sliding_row_max(np.where(covered, img, -np.inf), win)
         regs = regions(aperture, min_px)
         print(f"side {'+' if sign > 0 else '-'}: aperture px "
@@ -195,9 +210,13 @@ def fit(src, out_glb, res=256, inset_frac=0.004, min_frac=0.0015):
     av = (norm(C[:, W], W) * (res - 1)).astype(int)
     sil = np.zeros((res, res), dtype=bool)
     sil[av, au] = True
+    for col in range(res):
+        rows = np.where(sil[:, col])[0]
+        if len(rows) > 1:
+            sil[rows.min():rows.max() + 1, col] = True
     band = np.zeros((res, res), dtype=bool)
     band[int(res * 0.12):int(res * 0.88), int(res * 0.05):int(res * 0.95)] = True
-    aperture = dilate(band & sil & ~covered, 3) & ~covered
+    aperture = dilate(band & sil & ~covered, 3) & ~covered & sil
     lvl = sliding_row_max(np.where(covered, img, -np.inf), win)
     regs = regions(aperture, max(20, min_px // 3))
     print(f"top      : aperture px {aperture.sum()} -> {len(regs)} regions "
@@ -207,6 +226,82 @@ def fit(src, out_glb, res=256, inset_frac=0.004, min_frac=0.0015):
             r, lo[L], ext[L] / (res - 1), lo[W], ext[W] / (res - 1),
             lvl, L, W, H, +1, inset)
         panes.append((pv, pf))
+
+    # ---------------- raked screens: oblique projections -------------------
+    # straight-down fragments a raked windscreen (measured: 51/37-px crumbs).
+    # Project along the rake instead: axis = cos(a)*L_hat (+/- nose) +
+    # sin(a)*H_hat, with the screen band selected by position.
+    for nose_sign, l_lo, l_hi in ((+1, 0.55, 0.95), (-1, 0.05, 0.45)):
+        a = np.radians(35)
+        d_ax = np.zeros(3)
+        d_ax[L] = nose_sign * np.cos(a)
+        d_ax[H] = np.sin(a)
+        # oblique coords: p1 along the rake-projected length, p2 = width
+        t_ax = np.zeros(3)
+        t_ax[L] = -nose_sign * np.sin(a)
+        t_ax[H] = np.cos(a)
+        depth_v = C @ d_ax                     # distance along view axis
+        p1 = C @ t_ax
+        p2 = C[:, W]
+        nsel = (N @ d_ax) > 0.25
+        lf = norm(C[:, L], L)
+        band_sel = (lf > l_lo) & (lf < l_hi) & (norm(C[:, H], H) > 0.45)
+        sel = nsel & band_sel
+        if sel.sum() < 100:
+            continue
+        p1n = (p1[sel] - p1[sel].min()) / max(np.ptp(p1[sel]), 1e-9)
+        p2n = (p2[sel] - lo[W]) / ext[W]
+        u = (p1n * (res - 1)).astype(int)
+        v = np.clip((p2n * (res - 1)).astype(int), 0, res - 1)
+        img = np.full((res, res), -np.inf)
+        np.maximum.at(img, (v, u), depth_v[sel])
+        covered = np.isfinite(img)
+        allsel = band_sel
+        ap1 = (p1[allsel] - p1[sel].min()) / max(np.ptp(p1[sel]), 1e-9)
+        ap2 = (p2[allsel] - lo[W]) / ext[W]
+        sau = np.clip((ap1 * (res - 1)).astype(int), 0, res - 1)
+        sav = np.clip((ap2 * (res - 1)).astype(int), 0, res - 1)
+        sil2 = np.zeros((res, res), dtype=bool)
+        sil2[sav, sau] = True
+        for col in range(res):
+            rows = np.where(sil2[:, col])[0]
+            if len(rows) > 1:
+                sil2[rows.min():rows.max() + 1, col] = True
+        aperture = dilate(sil2 & ~covered) & ~covered & sil2
+        lvl = sliding_row_max(np.where(covered, img, -np.inf), win)
+        regs = regions(aperture, max(30, min_px // 2))
+        # keep only the DOMINANT region: the screen. The oblique view also sees
+        # underbody/interior gaps, which fake dozens of small apertures
+        # (measured: 19 and 23 regions; the real screens were 12k and 7k px).
+        regs = sorted(regs, key=len)[-1:] if regs else []
+        print(f"rake {'front' if nose_sign>0 else 'rear'}: aperture px "
+              f"{aperture.sum()} -> kept {[len(r) for r in regs]}")
+        for r in regs:
+            # rebuild 3D points from oblique pixel coords
+            Vs, Fs, index = [], [], {}
+            have = set(map(tuple, r))
+            for (py, pxx) in have:
+                lv = lvl[min(py, res - 1), min(pxx, res - 1)]
+                if not np.isfinite(lv):
+                    continue
+                for dy, dx in ((0, 0), (1, 0), (0, 1), (1, 1)):
+                    key = (py + dy, pxx + dx)
+                    if key not in index:
+                        yy, xx = key
+                        l2 = lvl[min(yy, res - 1), min(xx, res - 1)]
+                        if not np.isfinite(l2):
+                            l2 = lv
+                        t1 = p1[sel].min() + xx / (res - 1) * np.ptp(p1[sel])
+                        t2 = lo[W] + yy / (res - 1) * ext[W]
+                        pt = t_ax * t1 + d_ax * (l2 - inset)
+                        pt[W] = t2
+                        index[key] = len(Vs)
+                        Vs.append(pt)
+                a = index[(py, pxx)]; b = index[(py + 1, pxx)]
+                c = index[(py + 1, pxx + 1)]; d = index[(py, pxx + 1)]
+                Fs += [[a, b, c], [a, c, d]]
+            if Vs:
+                panes.append((np.array(Vs), np.array(Fs, dtype=np.uint32)))
 
     if not panes:
         raise SystemExit("no apertures found — this mesh is not the "
