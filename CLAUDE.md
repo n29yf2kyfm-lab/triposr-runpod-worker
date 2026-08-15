@@ -1158,6 +1158,77 @@ underperforms — do NOT stop at the first plausible explanation. Run this:
 Only produce the full template when there is a real problem to investigate —
 don't fabricate an RCA when nothing is broken.
 
+## PIXAL3D BREAKS THE SURFACING CEILING — measured 2026-08-15, $1.30
+
+`TencentARC/Pixal3D` (SIGGRAPH 2026, **MIT weights on HF**) is the first
+generated car in this project's history to reach catalogue-grade geometry.
+Same Golf capture, same rig, pre-registered gate written BEFORE the run:
+
+| mesh | crease/diag | sharp_share |
+|---|---|---|
+| Hunyuan-2.1 (base) | 43.0 | 0.5% |
+| Hi3DGen (previous best) | 145 | 2.07% |
+| **Pixal3D** | **271.6** | **5.07%** |
+| our best catalogue cars | 162–271 (Sportage 270.7) | — |
+
+It PASSED, decisively, and the renders back the number: headlamp internals,
+grille slats, a door shut line, formed mirrors, real wheel spokes, glass that
+reads as glass. This overturns "every open model hits the same ceiling" —
+the ceiling was the CONDITIONING, not the resolution. Pixal3D is the
+TRELLIS.2 backbone with pixel back-projection instead of loose attention
+injection, i.e. the same class of lever that made Hi3DGen beat TRELLIS.
+
+**Deployment facts (all paid for, do not re-derive):**
+  * Base env = our OWN `trellis2-worker-4b` image (template i1mk2n9dap). It
+    already carries o_voxel/cumesh/flex_gemm/nvdiffrast + torch 2.6.0+cu124,
+    which turns "follow the TRELLIS.2 install" from an hour of CUDA source
+    builds into a pip install.
+  * torchsparse/spconv are NOT needed — they are alternative sparse-conv
+    backends, imported lazily; the default `CONV='flex_gemm'` is present.
+  * `natten` IS needed (the NAF upsampler in the image conditioner) and my
+    grep for the package name found ZERO hits — a grep is not a dependency
+    analysis. Prebuilt wheel `natten-0.17.5+torch260cu124-cp310` works
+    despite the README asking for 0.21.0. NEVER the source build.
+  * `briaai/RMBG-2.0` is GATED (403) and is built EAGERLY in **three**
+    pipeline modules. Our inputs are RGBA cutouts so background removal is
+    dead code — patch all three sites and assert the count.
+  * ATTN_BACKEND=sdpa removes flash_attn.
+  * Ran at FULL `--resolution 1536` on an A100 80GB, ~12 min, no low-VRAM
+    fallback needed. 955k faces, 41MB, with real PBR textures.
+
+**TWO STRUCTURAL CAVEATS, both measured:**
+  1. **Fused shell** — `fit_panes` correctly REFUSED it (largest side
+     aperture 0px). Glazing still needs the fused-shell path. Predicted in
+     writing before the run.
+  2. **PIXEL-ALIGNED means CAMERA SPACE, not canonical pose.** The car comes
+     out lying diagonally in its volume (raw ext 0.909 x 0.528 x 0.915 for a
+     3/4 input). It must be canonicalised — an oriented bounding box works —
+     before any of our tooling can touch it. Nothing downstream expects this.
+
+## THE 1h FINE-TUNE MADE THE MODEL WORSE, AND THE METRIC SAID OTHERWISE (2026-08-15)
+
+Second run, 20 cars (chunked-SDF fix took prep from 8/16 to 20/20), 1900
+steps, checkpoint loaded cleanly (752 keys, 0 missing). Every NUMBER said
+success: loss fell 1.85 -> 1.05 (the first run was flat at 1.9), and
+crease_density went 43 -> **132, a 3x gain**.
+
+**The render is a melted blob. Not a car.** The "extra creases" were NOISE.
+
+This is the exact trap this file already documents — *"the metric counts
+sharp geometry, not GOOD geometry; Hi3DGen scores 92.4 largely because it is
+NOISY"* — and it caught us anyway, because a 3x gain plus a falling loss is
+extremely persuasive. **A falling training loss on 20 cars is evidence of
+memorisation, not of learning.** Rules, hard:
+  * NEVER judge a fine-tune by loss or crease density. Render it and LOOK.
+    The eye is the arbiter; that is why the gate was pre-registered with
+    "AND survive the eye" in it.
+  * A tiny-dataset short fine-tune can CATASTROPHICALLY degrade a 2.5B model
+    in one hour. Do not assume "a little training can only help a little".
+Cost ~$3.50. The training machinery is proven end to end (prep -> train ->
+checkpoint -> same-pod A/B inference); what is NOT proven is that any amount
+of our data improves the output, and on this evidence the burden of proof
+sits with the fine-tune route, not against it.
+
 ## Alam-3D v2 first training run — the 1h pilot, measured (2026-08-15)
 
 Owner-directed experiment ("put all glb in pod and train... 1 hr just to test").
