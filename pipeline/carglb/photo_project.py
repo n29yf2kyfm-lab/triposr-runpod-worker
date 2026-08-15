@@ -78,7 +78,9 @@ def paint_colour(photos_dir):
     so sample the body: opaque pixels between 45%% and 62%% of the car's
     height (below the glass, above the sill shadow).
     """
-    for cand in ("left.png", "right.png", "front.png", "rear.png"):
+    # review finding 10: falling back to an END photo samples the grille/
+    # lamp strip as "door skin" and paints the car grille-black. Sides only.
+    for cand in ("left.png", "right.png"):
         path = os.path.join(photos_dir, cand)
         if not os.path.exists(path):
             continue
@@ -92,15 +94,29 @@ def paint_colour(photos_dir):
             col = tuple(int(c) for c in np.median(px, axis=0))
             print(f"  paint colour from {cand} door band: {col}")
             return col
+    print("WARNING: no SIDE photo for paint sampling — using neutral grey "
+          "(door-skin colour needs left.png or right.png)")
     return (184, 186, 190)
 
 
-def group_of(n):
+def group_of(n, nose_pos=True):
+    """Review finding 1: with nose +X and Y up (right-handed),
+    right = forward x up = X x Y = ... -Z?? No: X x Y = +Z is UP-relative —
+    the CAR's right side is -Z when facing +X? Work it as a driver: facing
+    +X with up +Y, the LEFT hand points along +Z (Y x X = +Z... ). The
+    reviewer's evaluated table is the authority: +Z faces were being fed
+    left.png and every cell came out mirrored. +Z is the car's RIGHT when
+    the nose is +X. nose_pos flips both ends AND handedness together.
+    """
     ax = int(np.argmax(np.abs(n)))
     if ax == 2:
+        if nose_pos:
+            return "right" if n[2] > 0 else "left"
         return "left" if n[2] > 0 else "right"
     if ax == 0:
-        return "front" if n[0] > 0 else "back"
+        if nose_pos:
+            return "front" if n[0] > 0 else "back"
+        return "back" if n[0] > 0 else "front"
     return "top" if n[1] > 0 else "bottom"
 
 
@@ -151,7 +167,17 @@ def depth_map(C, groups, gname, lo, ext, res=96):
     return sel, out
 
 
-def bake(car_glb, photos_dir, out_glb, nose_positive_x=True):
+def bake(car_glb, photos_dir, out_glb, nose_positive_x=None):
+    if nose_positive_x is None:
+        # measure, don't assume (finding 11): fit_panes writes the sidecar
+        import json as _json
+        sc = car_glb + ".pose.json"
+        if os.path.exists(sc):
+            nose_positive_x = bool(_json.load(open(sc))["nose_positive_L"])
+            print(f"nose from sidecar: {'+X' if nose_positive_x else '-X'}")
+        else:
+            nose_positive_x = True
+            print("WARNING: no pose sidecar — ASSUMING nose +X (unverified)")
     scene = trimesh.load(car_glb)
     body = scene.geometry.get("body")
     if body is None:
@@ -202,7 +228,7 @@ def bake(car_glb, photos_dir, out_glb, nose_positive_x=True):
     # nose direction decides which photo is 'front'. If the badge ends up on
     # the wrong end, flip nose_positive_x — one boolean, checked by render.
     C = V[F].mean(axis=1)
-    groups = [group_of(N[i]) for i in range(len(F))]
+    groups = [group_of(N[i], nose_positive_x) for i in range(len(F))]
     dmaps = {gn: depth_map(C, groups, gn, lo, ext)
              for gn in ("front", "back", "left", "right")}
     newV, newUV, newF = [], [], []
@@ -221,7 +247,14 @@ def bake(car_glb, photos_dir, out_glb, nose_positive_x=True):
                              * (res_d - 1), 0, res_d - 1))
             if C[fi, ax] * sgn < dm[dv, du] - margin:
                 g = "bottom"                       # cabin passage -> dark
-            elif (C[fi, 1] - lo[1]) / ext[1] > CLAMP[groups[fi]]:
+            elif ((C[fi, 1] - lo[1]) / ext[1] > CLAMP[groups[fi]]
+                  and (groups[fi] not in ("front", "back")
+                       or 0.25 < (C[fi, 2] - lo[2]) / max(ext[2], 1e-9) < 0.75)):
+                # review finding 2: the height clamp alone painted over the
+                # HEADLAMPS (a lamp tops out above 0.53 of car height). The
+                # glass this clamp masks is the central windscreen zone, so
+                # on end groups restrict it to the middle half of the width —
+                # lamp faces in the outer quarters keep the photo.
                 g = "top"                          # photo shows glass -> paint
         (cc, cr), photo, (ua, va) = GROUPS[g]
         tri = []
@@ -231,11 +264,21 @@ def bake(car_glb, photos_dir, out_glb, nose_positive_x=True):
                 p = V[vi]
                 u = (p[ua] - lo[ua]) / max(ext[ua], 1e-9)
                 v = (p[va] - lo[va]) / max(ext[va], 1e-9)
-                # orient each cell to match its photo's orientation
+                # orient each cell to match its photo (reviewer-evaluated
+                # truth table, finding 1). u is the WORLD fraction along the
+                # cell axis (L for sides, W=+Z for ends), nose already +X via
+                # group_of(nose_pos): left.png has the nose at image-LEFT so
+                # world +X(u=1) must map to image-right -> u stays; right.png
+                # mirrors it; front.png is shot FACING the nose so the car's
+                # +Z lands at image-LEFT -> flip; rear.png keeps +Z at right.
+                # left.png: nose at image-LEFT, u=1 is the nose, and u=1
+                # maps to cell-right -> FLIP. right.png: nose at image-RIGHT
+                # -> no flip. front.png: shot facing the nose, car's +Z lands
+                # image-LEFT, u=1 is +Z -> FLIP. rear.png: +Z at image-RIGHT
+                # -> no flip. (First cut had the sides inverted; caught by
+                # re-deriving before render.)
                 if g in ("left", "front"):
-                    u = u if nose_positive_x else 1 - u
-                if g in ("right", "back"):
-                    u = 1 - u if nose_positive_x else u
+                    u = 1 - u
                 v = 1 - v                      # image y grows downward
                 cu = (cc * CELL_W + u * (CELL_W - 2) + 1) / ATLAS
                 cv = (cr * CELL_H + v * (CELL_H - 2) + 1) / ATLAS
@@ -284,7 +327,14 @@ def bake(car_glb, photos_dir, out_glb, nose_positive_x=True):
             return mats["Tyre_Rubber"]
         if "rim" in name.lower():
             return mats["Rim_Alloy"]
-        return mats["flat"]
+        if name.startswith("inner") or name.startswith("trim"):
+            return mats["flat"]
+        # review finding 12: paint as the fallback ships painted tyres the
+        # moment an upstream name changes — the owner's hard fail. Dark
+        # cavity is the safe direction for anything unrecognised.
+        print(f"  WARNING: unrecognised geometry '{name}' -> Arch_Cavity "
+              "(never paint by default)")
+        return mats["Arch_Cavity"]
 
     for name, geom in scene.geometry.items():
         if name == "body":
@@ -299,5 +349,8 @@ def bake(car_glb, photos_dir, out_glb, nose_positive_x=True):
 if __name__ == "__main__":
     if len(sys.argv) < 4:
         raise SystemExit(__doc__)
-    bake(sys.argv[1], sys.argv[2], sys.argv[3],
-         nose_positive_x=(len(sys.argv) < 5 or sys.argv[4] != "flip"))
+    # default None -> measure from the sidecar; 'flip'/'noflip' force it
+    _nose = None
+    if len(sys.argv) > 4:
+        _nose = (sys.argv[4] != "flip")
+    bake(sys.argv[1], sys.argv[2], sys.argv[3], nose_positive_x=_nose)

@@ -22,8 +22,30 @@ import json
 import struct
 import sys
 
-# +90 about Y as glTF [x, y, z, w]
-QUAT = [0.0, 0.7071067811865476, 0.0, 0.7071067811865476]
+# glTF quaternions [x, y, z, w]: +90 about Y maps nose +X -> -Z;
+# -90 about Y maps nose -X -> -Z.
+QUAT_POS = [0.0, 0.7071067811865476, 0.0, 0.7071067811865476]
+QUAT_NEG = [0.0, -0.7071067811865476, 0.0, 0.7071067811865476]
+
+
+def nose_from_sidecar(src):
+    """Review finding 11: nothing MEASURED the nose — this module stamped a
+    fixed rotation and a nose--X car would land 180deg from convention with
+    every studio tile wrong. fit_panes now measures it (windscreen rake >
+    backlight rake) and writes <out>.pose.json; read it here. Missing sidecar
+    = loud warning + the historical assumption, so old artefacts still work.
+    """
+    import json as _json
+    import os as _os
+    sc = src + ".pose.json"
+    if _os.path.exists(sc):
+        d = _json.load(open(sc))
+        print(f"nose from sidecar: {'+' if d['nose_positive_L'] else '-'}L "
+              f"(rake {d['rake_px']})")
+        return bool(d["nose_positive_L"])
+    print("WARNING: no pose sidecar — ASSUMING nose at +X (unverified; "
+          "fit_panes writes <out>.pose.json for new builds)")
+    return True
 
 
 def orient(src, dst):
@@ -35,6 +57,7 @@ def orient(src, dst):
     gltf = json.loads(raw[20:20 + jlen])
     rest = raw[20 + jlen:]                      # BIN chunk(s), verbatim
 
+    nose_pos = nose_from_sidecar(src)
     scene = gltf.get("scenes", [{}])[gltf.get("scene", 0)]
     roots = scene.get("nodes", [])
     if not roots:
@@ -48,7 +71,7 @@ def orient(src, dst):
             raise SystemExit(f"root node {ni} already rotated "
                              f"({node['rotation']}) — refusing to compose "
                              "blind; already oriented?")
-        node["rotation"] = QUAT
+        node["rotation"] = QUAT_POS if nose_pos else QUAT_NEG
     js = json.dumps(gltf, separators=(",", ":")).encode()
     js += b" " * (-len(js) % 4)
     out = struct.pack("<III", magic, ver, 12 + 8 + len(js) + len(rest))

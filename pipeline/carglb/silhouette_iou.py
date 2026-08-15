@@ -161,8 +161,18 @@ def main():
     r = score(a.car_glb, a.photos_dir, a.res)
     if not r:
         raise SystemExit("no capture photos found — gate not applicable")
+    # review finding 3: front.png and rear.png score against ONE union
+    # silhouette (an ortho projection along length is the union of all
+    # cross-sections) — a single measurement that CANNOT see a bad nose
+    # (measured: nose collapsed to 0.45x left end IoU at exactly 1.0000
+    # while the side dropped to 0.88). Merge them into one honest score.
+    ends = [v for k, v in r.items() if k in ("front.png", "rear.png")]
+    r = {k: v for k, v in r.items() if k not in ("front.png", "rear.png")}
+    if ends:
+        r["end(union)"] = sum(ends) / len(ends)
+    print(f"  ({len(r)} independent measurements)")
     for k, v in sorted(r.items()):
-        print(f"  {k:10s} IoU {v:.4f}")
+        print(f"  {k:12s} IoU {v:.4f}")
     worst = min(r.values()); mean = sum(r.values()) / len(r)
     print(f"silhouette IoU: mean {mean:.4f}  worst {worst:.4f} "
           f"(gates: mean>={a.min_mean}, worst>={a.min_worst})")

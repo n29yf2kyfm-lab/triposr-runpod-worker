@@ -255,6 +255,7 @@ def fit(src, out_glb, res=256, inset_frac=0.004, min_frac=0.0015,
         return (a - lo[ax]) / ext[ax]
 
     panes = []
+    rake_px = {+1: 0, -1: 0}
     side_region_max = 0
     # ---------------- side apertures --------------------------------------
     for sign in (+1, -1):
@@ -304,12 +305,12 @@ def fit(src, out_glb, res=256, inset_frac=0.004, min_frac=0.0015,
     # render body-coloured. So the side view is the admissibility test for
     # the WHOLE fit, rakes included.
     if side_region_max < 0.006 * res * res:
-        raise SystemExit(
-            f"REFUSING: largest side-window aperture is {side_region_max}px "
-            f"(< {0.006*res*res:.0f}px at res={res}) — this mesh has no "
-            "hollow cabin (fused shell). Panes over fused skin would fool "
-            "glass_probe while windows render body-coloured. Use the "
-            "fused-shell path (hybrid_transfer) instead.")
+        print(f"REFUSING: largest side-window aperture is {side_region_max}px "
+              f"(< {0.006*res*res:.0f}px at res={res}) — this mesh has no "
+              "hollow cabin (fused shell). Panes over fused skin would fool "
+              "glass_probe while windows render body-coloured. Use the "
+              "fused-shell path (hybrid_transfer) instead.")
+        sys.exit(2)
 
     # ---------------- windscreen / backlight ------------------------------
     sel = N[:, H] > 0.20
@@ -387,6 +388,7 @@ def fit(src, out_glb, res=256, inset_frac=0.004, min_frac=0.0015,
         # underbody/interior gaps, which fake dozens of small apertures
         # (measured: 19 and 23 regions; the real screens were 12k and 7k px).
         regs = sorted(regs, key=len)[-1:] if regs else []
+        rake_px[nose_sign] = len(regs[0]) if regs else 0
         print(f"rake {'front' if nose_sign>0 else 'rear'}: aperture px "
               f"{aperture.sum()} -> kept {[len(r) for r in regs]}")
         for r in regs:
@@ -424,8 +426,8 @@ def fit(src, out_glb, res=256, inset_frac=0.004, min_frac=0.0015,
                 panes.append((np.array(Vs), np.array(Fs, dtype=np.uint32)))
 
     if not panes:
-        raise SystemExit("no apertures found — this mesh is not the "
-                         "open-aperture kind")
+        print("no apertures found — this mesh is not the open-aperture kind")
+        sys.exit(2)
 
     # ---------------- assemble the structured GLB -------------------------
     sc = (length_m / ext[L]) if length_m else 1.0
@@ -536,13 +538,30 @@ def fit(src, out_glb, res=256, inset_frac=0.004, min_frac=0.0015,
     share = tot_pane_faces / all_faces * 100
     print(f"wrote {out_glb} ({size/1e6:.1f}MB)  glass faces {tot_pane_faces} "
           f"= {share:.2f}% of car (gate band 2.5-9.5%)")
+    # NOSE SIDECAR (review findings 1+11): a windscreen is always bigger than
+    # a backlight, and the rake pass measures both. Golf: front 11508px vs
+    # rear 6513px with the nose at +L. Stamp the verdict into a sidecar so
+    # photo_project and orient_catalogue MEASURE the nose instead of assuming
+    # it — the assumption baked mirrored badges and could rotate a car 180deg.
+    import json as _json
+    nose_positive = rake_px[+1] >= rake_px[-1]
+    _json.dump({"nose_positive_L": bool(nose_positive),
+                "rake_px": {"posL": rake_px[+1], "negL": rake_px[-1]},
+                "length_axis": int(L)},
+               open(out_glb + ".pose.json", "w"))
+    print(f"nose sidecar: nose at {'+L' if nose_positive else '-L'} "
+          f"(windscreen {max(rake_px.values())}px vs backlight "
+          f"{min(rake_px.values())}px)")
     # the band is a GATE, not a caption (a gate nobody enforces is a gate that
     # does not exist — CLAUDE.md). File is kept for forensics; exit is loud.
+    # EXIT CODES (review finding 6): 1 = QUALITY FAIL (do not ship, do not
+    # fall back); 2 = NOT APPLICABLE (fused shell / no apertures — the
+    # fused-shell chain is the right route). run_local branches on this.
     if not (2.5 <= share <= 9.5):
-        raise SystemExit(
-            f"GATE FAIL: glass {share:.2f}% outside 2.5-9.5% — panes do not "
-            f"look like a real car's glazing. {out_glb} kept for inspection; "
-            "do NOT ship it.")
+        print(f"GATE FAIL: glass {share:.2f}% outside 2.5-9.5% — panes do "
+              f"not look like a real car's glazing. {out_glb} kept for "
+              "inspection; do NOT ship it.")
+        sys.exit(1)
     return out_glb
 
 

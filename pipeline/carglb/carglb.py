@@ -287,6 +287,14 @@ def run_local(shape_glb, parts_glb, dims, out_glb, renders_dir=None,
            shape_glb, paned, str(dims["length"] / 1000.0)]
     print("$", " ".join(cmd))
     p = subprocess.run(cmd)
+    # review finding 6: exit 2 = NOT APPLICABLE (fused shell, no apertures)
+    # -> the fused-shell chain is the right route. exit 1 = QUALITY FAIL —
+    # rerouting that into the fallback would launder a bad car through a
+    # different labeller, so it is a hard stop.
+    if p.returncode == 1:
+        raise SystemExit("fit_panes GATE FAIL (exit 1) — quality failure, "
+                         "NOT shippable, and not a fused-shell candidate "
+                         "either. Read the gate output above.")
     if p.returncode == 0:
         # WHEEL DIAMETER: wheel_swap's --dia defaults to 0.46, inherited from
         # a 2026-08-12 test car, and run_local never passed it — so the Golf
@@ -313,6 +321,17 @@ def run_local(shape_glb, parts_glb, dims, out_glb, renders_dir=None,
         if p.returncode != 0:
             raise SystemExit(f"wheel_swap failed ({p.returncode}) — the car "
                              "is NOT shippable")
+        # hand the nose sidecar forward: fit_panes wrote it next to its OWN
+        # output, but photo_project and orient_catalogue look next to the
+        # final artefacts (integration-tested: without this they warn and
+        # fall back to the +X assumption)
+        sc = paned + ".pose.json"
+        if os.path.exists(sc):
+            import shutil
+            shutil.copy(sc, out_glb + ".pose.json")
+            shutil.copy(sc, out_glb.replace(".glb", "_hero.glb")
+                        + ".pose.json")
+            os.unlink(sc)
         os.unlink(paned)
     else:
         print("fit_panes refused — falling back to the fused-shell chain")
@@ -333,6 +352,11 @@ def run_local(shape_glb, parts_glb, dims, out_glb, renders_dir=None,
             raise SystemExit(f"build_car gates failed ({p.returncode}) — the "
                              "car is NOT shippable; read the gate output above")
     outputs = [out_glb]
+    # review finding 5: the primary path never ran glass_probe or the
+    # material-set check — the owner's hard-fail gate was only enforced on
+    # the fallback path and the standalone subcommand. Gate the flat build
+    # HERE, before any hero bake.
+    run_material_gates(out_glb)
     if photos_dir:
         hero = out_glb.replace(".glb", "_hero.glb")
         cmd = [sys.executable,
@@ -340,6 +364,9 @@ def run_local(shape_glb, parts_glb, dims, out_glb, renders_dir=None,
                             "photo_project.py"), out_glb, photos_dir, hero]
         print("$", " ".join(cmd))
         if subprocess.run(cmd).returncode == 0:
+            # review finding 7: the hero got a provenance manifest without
+            # passing a single gate. Gate it like the flat build.
+            run_material_gates(hero)
             print(f"hero (photo-textured) variant: {hero}")
             outputs.append(hero)
         else:
@@ -369,6 +396,18 @@ def run_local(shape_glb, parts_glb, dims, out_glb, renders_dir=None,
     for f in outputs:
         write_manifest(f, dims)
     return out_glb
+
+
+def run_material_gates(glb):
+    """glass_probe + EXPECTED_MATS on an artefact, as run_local's own gate
+    (review finding 5). Reuses the 'gates' subcommand in a subprocess so the
+    sys.path setup stays in one place."""
+    r = subprocess.run([sys.executable, os.path.abspath(__file__),
+                        "gates", glb])
+    if r.returncode != 0:
+        raise SystemExit(f"material gates FAILED on {os.path.basename(glb)} "
+                         "— NOT shippable")
+    print(f"  material gates PASS ({os.path.basename(glb)})")
 
 
 def dim_gate(glb, dims, max_lwh=(2.0, 3.0, 3.0), max_wb=12.0):
@@ -469,19 +508,27 @@ def qc(out_glb, renders_dir):
                HDRI_PATH=os.path.join(ROOT, "render", "assets", "hdri.hdr"))
     for az in (35, 215):
         png = os.path.join(renders_dir, f"qc_{az}.png")
-        subprocess.run(["xvfb-run", "-a", "blender", "-b", "--factory-startup",
-                        "-noaudio", "-P",
-                        os.path.join(ROOT, "pipeline", "qc", "prod_render.py"),
-                        "--", os.path.join(ROOT, "render", "handler.py"),
-                        out_glb, png, str(az), "40"], env=env,
-                       capture_output=True)
+        r = subprocess.run(["xvfb-run", "-a", "blender", "-b",
+                            "--factory-startup", "-noaudio", "-P",
+                            os.path.join(ROOT, "pipeline", "qc",
+                                         "prod_render.py"),
+                            "--", os.path.join(ROOT, "render", "handler.py"),
+                            out_glb, png, str(az), "40"], env=env,
+                           capture_output=True, text=True)
+        # review finding 8: this used to swallow every failure and print
+        # "QC written" over an empty directory
+        if r.returncode != 0 or not os.path.exists(png):
+            print(f"  QC RENDER FAILED az={az} rc={r.returncode}: "
+                  f"{(r.stderr or r.stdout or '')[-300:]}")
     fr = subprocess.run([sys.executable,
                          os.path.join(ROOT, "pipeline", "qc",
                                       "mesh_forensics.py"), out_glb],
                         capture_output=True, text=True)
     report = os.path.join(renders_dir, "forensics.txt")
     open(report, "w").write(fr.stdout)
-    print(fr.stdout.splitlines()[1] if fr.stdout else "forensics failed")
+    _lines = (fr.stdout or "").splitlines()
+    print(_lines[1] if len(_lines) > 1
+          else f"forensics failed (rc={fr.returncode})")
     print(f"QC written to {renders_dir}")
 
 
