@@ -135,9 +135,26 @@ s = s.replace("mesh.vertices, mesh.faces",
               "np.asarray(mesh.vertices, np.float64), np.asarray(mesh.faces, np.int64)")
 s = s.replace("igl.write_obj(", "igl.writeOBJ(")
 assert "return_normals" not in s
+# 5. CHUNK the SDF queries: the single-call version feeds the whole grid to
+#    libigl and dies with a C++ bad_alloc cascade ("terminate called
+#    recursively") on larger meshes — killed ~half the cars on two pods,
+#    host-RAM dependent. Chunked version proven locally, outputs
+#    statistically identical (2026-08-15).
+helper = (
+    "\ndef _sd_chunked(P, V, F, chunk=1_000_000, **kw):\n"
+    "    outs = []\n"
+    "    for i in range(0, len(P), chunk):\n"
+    "        outs.append(igl.signed_distance(P[i:i + chunk], V, F, **kw))\n"
+    "    return tuple(np.concatenate([o[j] for o in outs])\n"
+    "                 for j in range(len(outs[0])))\n\n"
+)
+anchor = "def random_sample_pointcloud"
+s = s.replace(anchor, helper + anchor, 1)
+s = s.replace("*_extra = igl.signed_distance(", "*_extra = _sd_chunked(")
 ast.parse(s)
 open(p, "w").write(s)
-print("patched: 7 signed_distance + marching_cubes + kwargs/dtypes + writeOBJ")
+print("patched: 7 signed_distance (chunked) + marching_cubes + kwargs/dtypes"
+      " + writeOBJ")
 PY
 
 prep_one() {  # prep_one <uid>  -> 0 on success; rc/wt logs left in /tmp
@@ -175,7 +192,7 @@ echo "CAROK $FIRST (sanity)"
 stage prep_cars
 # time-budgeted: render 24 geo views + surface sampling per car; a car that
 # fails is logged and skipped, never fatal. Stop when the prep window closes.
-PREP_DEADLINE=$((START + 1800))
+PREP_DEADLINE=$((START + 2400))
 N_OK=1; N_FAIL=0
 while read -r UID_; do
   [ -z "$UID_" ] && continue

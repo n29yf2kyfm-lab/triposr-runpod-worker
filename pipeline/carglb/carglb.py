@@ -338,11 +338,115 @@ def run_local(shape_glb, parts_glb, dims, out_glb, renders_dir=None,
         p = subprocess.run(cmd)
         if p.returncode != 0:
             raise SystemExit(f"orient_catalogue failed on {f}")
+    # GEOMETRY-mode gates (2026-08-15 adoptions): silhouette IoU vs the
+    # captures + dimension checks vs dims.json, then a sha256 manifest per
+    # output. Appearance mode (studio PBR renders) lives in qc().
+    if photos_dir:
+        cmd = [sys.executable,
+               os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                            "silhouette_iou.py"), out_glb, photos_dir]
+        print("$", " ".join(cmd))
+        if subprocess.run(cmd).returncode != 0:
+            raise SystemExit("silhouette gate failed — NOT shippable")
+    dim_gate(out_glb, dims)
+    for f in outputs:
+        write_manifest(f, dims)
     return out_glb
+
+
+def dim_gate(glb, dims, max_lwh=(2.0, 3.0, 3.0), max_wb=12.0):
+    """Dimension gate vs the published spec (research-review adoption #2).
+
+    Thresholds are CALIBRATED to the current tier's reference car
+    (golf_final, 2026-08-15: length 1.07%, width 1.79%, height 0.79%,
+    wheelbase 8.22%) — regression tripwires, tightened as the tier improves.
+    The wheelbase number is a REAL generator signature, not measurement
+    noise: measured from the donor tyre centroids (exact), Hi3DGen placed
+    the Golf's arches ~11cm inboard per axle. Anything past 12% means the
+    proportions are broken in a way the h/l ratio cannot see.
+    """
+    import numpy as np
+    import trimesh
+    sc = trimesh.load(glb)
+    m = trimesh.util.concatenate(list(sc.geometry.values()))
+    V = np.asarray(m.vertices)
+    # find axes on a loose clip first
+    ext0 = np.percentile(V, 99.8, axis=0) - np.percentile(V, 0.2, axis=0)
+    L = int(np.argmax(ext0))
+    rest = [i for i in range(3) if i != L]
+    H = rest[int(np.argmin(ext0[np.array(rest)]))]
+    W = [i for i in rest if i != H][0]
+    # per-axis robustness, calibrated 2026-08-15: LENGTH is exact by
+    # construction (fit_panes scales to it) so clip barely (0.02%); WIDTH
+    # spec EXCLUDES mirrors and the mesh contains both mirrors and stray
+    # junk verts — a 0.2% clip removed them (1.815m measured vs a 10.4%
+    # false fail at 0.1%); HEIGHT same clip for symmetry.
+    ext = np.empty(3)
+    ext[L] = (np.percentile(V[:, L], 99.98) - np.percentile(V[:, L], 0.02))
+    for ax in (W, H):
+        ext[ax] = (np.percentile(V[:, ax], 99.8)
+                   - np.percentile(V[:, ax], 0.2))
+    fails = []
+    for name, ax, spec_mm, tol in (("length", L, dims["length"], max_lwh[0]),
+                                   ("width", W, dims["width"], max_lwh[1]),
+                                   ("height", H, dims["height"], max_lwh[2])):
+        err = 100 * abs(ext[ax] - spec_mm / 1000) / (spec_mm / 1000)
+        print(f"  dim {name:9s} mesh {ext[ax]:.3f}m spec {spec_mm/1000:.3f}m "
+              f"err {err:.2f}% (max {tol}%)")
+        if err > tol:
+            fails.append(name)
+    # wheelbase from donor tyre centroids (exact for our chain); skip with a
+    # note when no donors are present — the lowest-band cluster estimator
+    # was measured 9% off from sill contamination, worse than no number
+    tyres = [np.asarray(g.vertices).mean(0)
+             for n, g in sc.geometry.items() if n.startswith("lib_tyre")]
+    if len(tyres) == 4 and dims.get("wheelbase"):
+        C = np.array(tyres)
+        mid = C[:, L].mean()
+        wb = abs(C[C[:, L] > mid][:, L].mean()
+                 - C[C[:, L] < mid][:, L].mean())
+        err = 100 * abs(wb - dims["wheelbase"] / 1000) / (dims["wheelbase"] / 1000)
+        print(f"  dim wheelbase mesh {wb:.3f}m spec {dims['wheelbase']/1000:.3f}m "
+              f"err {err:.2f}% (max {max_wb}%)")
+        if err > max_wb:
+            fails.append("wheelbase")
+    else:
+        print("  dim wheelbase: no lib_tyre donors — skipped (low-confidence "
+              "estimators are worse than no number, measured)")
+    if fails:
+        raise SystemExit(f"GATE FAIL: dimensions out of tolerance: {fails}")
+    print("dimension gate PASS")
+
+
+def write_manifest(glb, dims):
+    """sha256 provenance manifest next to each artefact (adoption #4).
+
+    An approved hash is immutable — one changed byte is a NEW candidate."""
+    import hashlib
+    import datetime
+    h = hashlib.sha256(open(glb, "rb").read()).hexdigest()
+    man = {"file": os.path.basename(glb), "sha256": h,
+           "bytes": os.path.getsize(glb),
+           "vehicle": dims.get("name"),
+           "dims_mm": {k: dims.get(k) for k in
+                       ("length", "width", "height", "wheelbase")},
+           "generator": "carglb",
+           "created": datetime.datetime.utcnow().isoformat() + "Z"}
+    out = glb + ".manifest.json"
+    json.dump(man, open(out, "w"), indent=1)
+    print(f"  manifest {os.path.basename(out)} sha256={h[:16]}…")
 
 
 # ----------------------------------------------------------------- H. QC out
 def qc(out_glb, renders_dir):
+    """APPEARANCE-mode QC: studio PBR renders through the production rig.
+
+    Dual-mode split (research-review adoption #3): GEOMETRY questions are
+    answered by mask/dimension gates (silhouette_iou + dim_gate — paint,
+    lighting and reflections cannot influence them); APPEARANCE questions
+    are answered here, under the shipping rig. Never blend the two into one
+    similarity score.
+    """
     os.makedirs(renders_dir, exist_ok=True)
     env = dict(os.environ,
                HDRI_PATH=os.path.join(ROOT, "render", "assets", "hdri.hdr"))
@@ -369,6 +473,8 @@ def main():
     ap.add_argument("cmd", choices=["check", "generate", "gates"])
     ap.add_argument("target")
     ap.add_argument("-o", "--out")
+    ap.add_argument("--dims", help="dims.json for the dimension gate")
+    ap.add_argument("--photos", help="capture dir for the silhouette gate")
     a = ap.parse_args()
 
     if a.cmd == "check":
@@ -395,6 +501,14 @@ def main():
         if r["verdict"] == "opaque" and r["certainty"] == "proven":
             raise SystemExit("GATE FAIL: glazing opaque (proven) — owner "
                              "ruling 2026-08-11: hard fail")
+        if a.dims:
+            dim_gate(a.target, json.load(open(a.dims)))
+        if a.photos:
+            cmd = [sys.executable,
+                   os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                "silhouette_iou.py"), a.target, a.photos]
+            if subprocess.run(cmd).returncode != 0:
+                raise SystemExit("GATE FAIL: silhouette IoU")
         return
 
     folder = a.target
