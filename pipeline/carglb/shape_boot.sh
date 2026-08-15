@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 # car-glb SHAPE + STRUCTURE stage — one pod boot, two generator runs.
-#   1. Hunyuan3D-2mv on the labelled views  -> shape.glb   (the surface)
-#   2. PartCrafter num_parts=16 on f34/front -> parts.glb  (the structure:
-#      the canopy label is what makes glazing separable downstream)
-# Recipe is the PROVEN one (yaris_mv_boot.sh + the PartCrafter runs): timm,
-# torch pin + assert, xtrace-off puts, artefact asserts, fail = named stage.
-# Env: SB_KEY, HF_TOKEN, HF_HOME, CARGLB_JOB (the staging subfolder).
+#   1. Hi3DGen on the f34 view      -> shape.glb  (EXPERIMENT WINNER 2026-08-15:
+#      crease_density 145 vs Hunyuan 37; real window openings, shut lines)
+#   2. PartCrafter num_parts=16     -> parts.glb  (the canopy/wheel labels)
+# Every pin below was PAID FOR: xformers from bare pypi drags in a new torch
+# ('torchvision::nms does not exist'); latest diffusers registers a
+# flash-attn-3 op torch 2.4 cannot parse ('Parameter q has unsupported type').
+# Env: SB_KEY, HF_TOKEN, HF_HOME, CARGLB_JOB (staging subfolder).
 set -x
 export DEBIAN_FRONTEND=noninteractive PIP_ROOT_USER_ACTION=ignore
+export SPCONV_ALGO=native ATTN_BACKEND=xformers SPARSE_ATTN_BACKEND=xformers
 LOG=/workspace/boot.log
 mkdir -p /workspace/results
 exec > >(tee -a "$LOG") 2>&1
@@ -28,82 +30,70 @@ apt-get update -qq && apt-get install -y -qq --no-install-recommends libopengl0 
 
 stage clone
 cd /workspace
-git clone --depth 1 https://github.com/Tencent/Hunyuan3D-2.git h2 || die CLONE_H2
-git clone --depth 1 https://github.com/wgsxm/PartCrafter.git pc || true
+git clone --depth 1 https://github.com/Stable-X/Hi3DGen hi3 || die CLONE_HI3
+git clone --depth 1 https://github.com/wgsxm/PartCrafter pc || die CLONE_PC
 
 stage deps
-cd /workspace/h2
-grep -viE '^(torch|torchvision)([=<>]|$)' requirements.txt > /tmp/r2.txt
-pip install -q -r /tmp/r2.txt 2>&1 | tail -2
-pip install -q -e . 2>&1 | tail -1
-pip install -q timm 2>&1 | tail -1
-pip install -q torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cu124 2>&1 | tail -1
-python3 -c "import torch; assert torch.cuda.is_available(); print('TORCH_OK', torch.__version__)" || die TORCH
-python3 -c "import sys; sys.path.insert(0,'/workspace/h2'); from hy3dgen.shapegen import Hunyuan3DDiTFlowMatchingPipeline; print('h2 ok')" || die IMPORT
+cd /workspace/hi3
+pip install -q -r requirements.txt 2>&1 | tail -2
+pip install -q spconv-cu121 2>&1 | tail -1
+pip install -q xformers==0.0.27.post2 --no-deps 2>&1 | tail -1
+pip install -q diffusers==0.31.0 2>&1 | tail -1
+python3 -c "import torch, torchvision, xformers, spconv; from torchvision import transforms; from diffusers.models.autoencoders import autoencoder_kl; assert torch.cuda.is_available(); print('STACK_OK', torch.__version__, torchvision.__version__)" || die STACK
 report
 
 stage photos
-ANY=0
-for V in front rear left right f34; do
-  curl -fsSL "$SB/public/$PRE/$V.png" -o /workspace/$V.png && ANY=1
-done
-[ "$ANY" = "1" ] || die NO_PHOTOS
+curl -fsSL "$SB/public/$PRE/f34.png" -o /workspace/f34.png || die PHOTO
 
 stage shape
+cd /workspace/hi3
 timeout 3000 python3 - <<'PY' || die SHAPE
 import os, sys
-sys.path.insert(0, '/workspace/h2')
+os.environ['SPCONV_ALGO'] = 'native'
+sys.path.insert(0, '/workspace/hi3')
+import torch
 from PIL import Image
-from hy3dgen.shapegen import (Hunyuan3DDiTFlowMatchingPipeline, FloaterRemover,
-                              DegenerateFaceRemover, FaceReducer)
-from huggingface_hub import list_repo_files
-views = {}
-mapping = {'front': 'front', 'rear': 'back', 'left': 'left', 'right': 'right'}
-for local, key in mapping.items():
-    p = f'/workspace/{local}.png'
-    if os.path.exists(p):
-        views[key] = Image.open(p)
-print('views:', sorted(views))
-files = list_repo_files('tencent/Hunyuan3D-2mv')
-dits = sorted({f.split('/')[0] for f in files if f.split('/')[0].startswith('hunyuan3d-dit')})
-pick = next((d for d in dits if 'mv' in d and 'turbo' not in d), dits[0])
-pipe = Hunyuan3DDiTFlowMatchingPipeline.from_pretrained('tencent/Hunyuan3D-2mv', subfolder=pick)
-mesh = pipe(image=views, num_inference_steps=50, octree_resolution=380,
-            num_chunks=20000, output_type='trimesh')[0]
-m = FloaterRemover()(mesh); m = DegenerateFaceRemover()(m)
-m = FaceReducer()(m, max_facenum=400000)
-m.export('/workspace/results/shape.glb')
-print('SHAPE_OK', len(m.vertices))
+from huggingface_hub import snapshot_download
+os.makedirs('weights', exist_ok=True)
+for mid in ("Stable-X/trellis-normal-v0-1", "Stable-X/yoso-normal-v1-8-1", "ZhengPeng7/BiRefNet"):
+    p = os.path.join('weights', mid.split('/')[-1])
+    if not os.path.exists(p):
+        snapshot_download(repo_id=mid, local_dir=p, force_download=False)
+from hi3dgen.pipelines import Hi3DGenPipeline
+pipe = Hi3DGenPipeline.from_pretrained("weights/trellis-normal-v0-1")
+pipe.cuda()
+normal_predictor = torch.hub.load("hugoycj/StableNormal", "StableNormal_turbo",
+                                  trust_repo=True, yoso_version='yoso-normal-v1-8-1',
+                                  local_cache_dir='./weights')
+img = Image.open('/workspace/f34.png')
+img = pipe.preprocess_image(img, resolution=1024)
+normal = normal_predictor(img, resolution=768, match_input_resolution=True, data_type='object')
+out = pipe.run(normal, seed=1, formats=["mesh"], preprocess_image=False,
+               sparse_structure_sampler_params={"steps": 50, "cfg_strength": 3},
+               slat_sampler_params={"steps": 6, "cfg_strength": 3})
+mesh = out['mesh'][0].to_trimesh(transform_pose=True)
+mesh.export('/workspace/results/shape.glb')
+print('SHAPE_OK', len(mesh.vertices))
 PY
 put shape.glb /workspace/results/shape.glb
 report
 
 stage parts
-# PartCrafter is a QUALITY upgrade, not a hard dependency of this stage —
-# downstream refuses to gate without it, so a failure here is loud but the
-# shape still uploads for inspection.
-timeout 2400 python3 - <<'PY' || echo "PARTS_FAILED (non-fatal here, fatal downstream)"
-import os, sys
-sys.path.insert(0, '/workspace/pc')
-from PIL import Image
-img_path = '/workspace/f34.png' if os.path.exists('/workspace/f34.png') else '/workspace/front.png'
-# PartCrafter's own inference entry (as proven in the 2026-08-12 runs)
-os.chdir('/workspace/pc')
-os.system(f"pip install -q -r requirements.txt 2>&1 | tail -1")
-r = os.system(f"python3 inference.py --image {img_path} --num_parts 16 --output /workspace/results/parts_dir")
-assert r == 0
-# find the combined object glb
-for root, _, fs in os.walk('/workspace/results/parts_dir'):
-    for f in fs:
-        if f.endswith('.glb'):
-            import shutil; shutil.copy(os.path.join(root, f), '/workspace/results/parts.glb')
-print('PARTS_OK')
-PY
-[ -s /workspace/results/parts.glb ] && put parts.glb /workspace/results/parts.glb
+cd /workspace/pc
+grep -viE '^(torch|torchvision)([=<>]|$)' settings/requirements.txt > /tmp/rpc.txt
+pip install -q -r /tmp/rpc.txt 2>&1 | tail -2
+# PartCrafter's requirements may float diffusers again — re-pin and re-assert
+pip install -q diffusers==0.31.0 numpy==1.26.4 2>&1 | tail -1
+python3 -c "import torch, diffusers; assert torch.cuda.is_available(); print('PC_STACK_OK', diffusers.__version__)" || die PC_STACK
+timeout 2400 python3 scripts/inference_partcrafter.py --image_path /workspace/f34.png \
+  --num_parts 16 --output_dir /workspace/results/pc --tag job --seed 0 || die PARTS
+[ -s /workspace/results/pc/job/object.glb ] || die PARTS_NO_OBJECT
+put parts.glb /workspace/results/pc/job/object.glb
 report
 
 stage verify
 [ -s /workspace/results/shape.glb ] || die MISSING_SHAPE
+[ -s /workspace/results/pc/job/object.glb ] || die MISSING_PARTS
 echo "=== SHAPE_ALL_OK ==="
 report
 sleep infinity
