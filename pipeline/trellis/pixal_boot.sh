@@ -11,12 +11,18 @@
 # and shipped. Reusing that image turns an hour of source builds into a pip
 # install. Read from the import graph, not the README.
 #
-# Two README steps are DELIBERATELY SKIPPED, both verified by reading code:
-#   * natten==0.21.0 --no-build-isolation  -> `natten` appears NOWHERE in the
-#     Python sources (grep, 0 hits). It is a training/vestigial dep and a
-#     source build we refuse to pay for.
+# One README step is DELIBERATELY SKIPPED, verified by reading code:
 #   * flash_attn -> ATTN_BACKEND=sdpa is supported in
 #     pixal3d/modules/attention/full_attn.py and documented in the README.
+#
+# CORRECTION 2026-08-15: I previously skipped natten too, claiming it was
+# "vestigial" because `grep -rn natten *.py` returned 0 hits. THAT WAS WRONG
+# and cost a run ($0.29): natten is imported by the NAF upsampler that the
+# image conditioner uses (`use_naf_upsample: True` in inference.py's
+# IMAGE_COND_CONFIGS), reached through a dependency rather than a direct
+# import, so grep could never see it. A grep for the package NAME is not a
+# dependency analysis. Installed below from a PREBUILT wheel — never the
+# README's `--no-build-isolation` source build (the flash-attn lesson).
 set -x
 export DEBIAN_FRONTEND=noninteractive
 START=$(date +%s)
@@ -92,6 +98,16 @@ pip install -q https://github.com/LDYang694/Storages/releases/download/20260430/
 # the flash-attn lesson). flex_gemm is the default and is already present;
 # this only buys SPARSE_CONV_BACKEND=spconv as a retry if flex_gemm misbehaves.
 pip install -q spconv-cu124 2>&1 | tail -2 || echo "spconv wheel unavailable — flex_gemm only"
+# natten: PREBUILT wheel matching this image exactly (torch 2.6.0 + cu124 +
+# cp310, confirmed present in the SHI-Labs index). The README asks for 0.21.0
+# built from source; the index tops out at 0.17.5, so if the NAF upsampler
+# needs a newer API this will fail LOUDLY at import rather than after a
+# 30-minute build.
+PYTAG=$(python3 -c "import sys;print(f'cp{sys.version_info.major}{sys.version_info.minor}')")
+NATTEN_WHL="https://github.com/SHI-Labs/NATTEN/releases/download/v0.17.5/natten-0.17.5%2Btorch260cu124-${PYTAG}-${PYTAG}-linux_x86_64.whl"
+echo "natten wheel: $NATTEN_WHL"
+pip install -q "$NATTEN_WHL" 2>&1 | tail -3 || die NATTEN_WHEEL
+python3 -c "import natten; print('natten', natten.__version__)" || die NATTEN_IMPORT
 TORCH_AFTER=$(python3 -c "import torch;print(torch.__version__)")
 echo "TORCH_AFTER=$TORCH_AFTER (before=$TORCH_BEFORE)"
 if [ "$TORCH_BEFORE" != "$TORCH_AFTER" ]; then
