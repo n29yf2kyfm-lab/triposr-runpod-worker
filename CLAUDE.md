@@ -1158,6 +1158,47 @@ underperforms — do NOT stop at the first plausible explanation. Run this:
 Only produce the full template when there is a real problem to investigate —
 don't fabricate an RCA when nothing is broken.
 
+## car-glb: Hi3DGen route SOLVED materials+identity, gated end to end (2026-08-15)
+
+The photos→GLB machine now lives at `pipeline/carglb/` (carglb.py orchestrator;
+full results in pipeline/trellis/IMAGE_TO_GLB_PLAN.md §6–7). The Golf demo run is
+the first generated car to pass EVERY material gate. Durable facts, all measured:
+
+- **Hi3DGen glazing is neither holes nor surfaces**: the skin wraps THROUGH the
+  window apertures into a modelled cabin — watertight, 0 boundary loops. Glass
+  must be CONSTRUCTED (`fit_panes.py`: cabin-band raster cells with no outward
+  surface = windows; least-squares plane per region), never detected (boundary
+  loops found 0; recess detection marked 15–22% of the car).
+- **The side view is the admissibility test for the whole fit.** Open mesh:
+  largest side aperture region 1508px at res=256. Fused Hunyuan shell: 139px —
+  yet its solid windscreen fooled the OBLIQUE rake projections into 4.36% fake
+  glass, inside the gate band. fit_panes hard-refuses when the largest side
+  region < 0.6% of the raster; the fused shell then goes down build_car's
+  hybrid fallback. Verified both directions.
+- **Paint must be NAMED `carpaint`.** The render worker's recolour targets paint
+  by name; with no paint-named material its heuristic fallback tinted 93.7% of
+  the car INCLUDING the wheels (red control). hybrid_transfer/build_car renamed
+  from `Material_0` 2026-08-15; `carglb gates` enforces EXPECTED_MATS + the
+  opaque-proven ruling as hard fails.
+- **Identity lives in texture, not geometry** (viewer is 5mm/px). `photo_project
+  .py` box-projects the four ortho capture photos onto the body (3x2 atlas, per-
+  group vertex split, planar UVs = the ortho captures exactly); badges/grille/
+  lamps land on their modelled features. Top/bottom atlas cells MUST be filled
+  with paint colour sampled from a side photo's door band — neutral grey
+  rendered a two-tone silver-roof car. Textured build = HERO variant only; the
+  flat-paint build stays the respray base (photo bake embeds the capture
+  colour). A flat pane mirror-flashing the studio key light is NOT a texture
+  fault — seen as a white window rectangle, it is specular, check before
+  "fixing".
+- **Wheels are made paint-proof by donor swap** (catalogue GR Supra via
+  gltf-transform decompress — Draco donors import as zeros in Blender/trimesh).
+  Visible tyres on Hi3DGen meshes are FUSED into the shell and 2 of 4 detached
+  "barrels" were SEATS: wheel centres must come from quadrant-clustered lowest-
+  22% shell faces, then carve.
+- **Surfacing ceiling UNCHANGED**: still gap-filler tier, owner's verdict
+  stands. Structure/materials/identity are solved and gated; panel crispness is
+  the open gap and no open generator has beaten it.
+
 ## PartCrafter TESTED on a real car (2026-08-12): parts yes, glazing NO
 
 Ran PartCrafter end to end on a RunPod A5000 against a clean 3/4 render of

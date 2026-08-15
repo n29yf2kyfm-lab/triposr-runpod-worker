@@ -189,3 +189,51 @@ fallback for cars where one view underdetermines the far side. Next cheap
 step: run Hi3DGen on ALL FOUR views' normal maps? — not supported natively;
 instead test Hi3DGen + hybrid structure stage end to end through car-glb on
 one real photo set.
+
+## 7. END-TO-END RESULT + THE IDENTITY FIX (2026-08-15, later the same day)
+
+The recommended step was run: Hi3DGen through car-glb on the Golf photo set,
+one pod, ~$0.30. The chain now stands as **shape pod (Hi3DGen + PartCrafter)
+→ fit_panes → wheel_swap → photo_project**, and the orchestrator's
+`run_local` drives exactly that, with build_car's hybrid chain kept only as
+the fused-shell fallback.
+
+**Glazing had to be CONSTRUCTED, not detected.** Hi3DGen's "window openings"
+are not holes and not surfaces — the skin wraps THROUGH the apertures into a
+modelled cabin (watertight, 0 boundary loops, 13 bodies). glaze_openings
+(caps boundary loops) found nothing to cap; recess detection marked 15-22% of
+the car; hybrid_transfer got 1.0% glass because PartCrafter emitted five
+overlapping mega-parts. What works is `pipeline/carglb/fit_panes.py`:
+rasterise each side, find cabin-band raster cells with NO outward surface
+(those ARE the windows), fit a least-squares plane per region, inset, done.
+Golf: glass 8.21%, glass_probe clear/proven — the first generated car in
+this project to pass every material gate.
+
+**Admissibility guard, measured both ways:** a real open mesh shows large
+side-window apertures (largest region 1508px at res=256); a fused Hunyuan
+shell shows speckle (139px) yet its solid windscreen still fooled the
+oblique rake projections into 4.36% fake "glass". So the SIDE view is the
+admissibility test for the whole fit: largest side region < 0.6% of the
+raster → hard refuse, fall back to the fused-shell chain.
+
+**Identity lives in texture (photo_project.py).** At the viewer's 5mm/px the
+grille, lamps and badges are shading, not geometry — so bake the four ortho
+capture photos onto the body via a box-projection atlas (6 normal-groups →
+3x2 cells, per-group vertex split, planar UVs that match the orthographic
+captures exactly). Verified on the Golf: VW roundels, GTD script, grille and
+lamp graphics all land on their modelled features. Two rules paid for:
+top/bottom cells must be filled with the PAINT colour sampled from the door
+band of a side photo (neutral grey rendered a silver-roofed two-tone), and
+the textured build is the HERO variant only — flat-paint build stays the
+respray/swatch base.
+
+**Paint is named `carpaint`, everywhere.** The render worker's recolour
+targets paint BY NAME; without it the heuristic fallback tinted 93.7% of the
+car including the wheels (red control). hybrid_transfer/build_car renamed
+from Material_0 accordingly; `carglb gates` now enforces EXPECTED_MATS and
+the opaque-proven owner ruling as hard fails.
+
+Ceiling unchanged and stated honestly: surfacing is still a gap-filler tier
+below the premium bar (owner verdict stands). What changed is that structure,
+materials and identity are now solved and GATED; the remaining gap is panel
+crispness, which no open generator has beaten yet.

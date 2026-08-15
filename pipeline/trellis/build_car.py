@@ -41,7 +41,7 @@ sys.path.insert(0, os.path.join(ROOT, "pipeline", "publish"))
 # Post-wheel-swap material set. Wheel_Dark does NOT survive the swap: those
 # faces are recoloured to Arch_Cavity and the library wheel contributes
 # Tyre_Rubber + Rim_Alloy. Expecting Wheel_Dark failed a correct car.
-EXPECTED_MATS = {"Material_0", "Glass_Tint", "Arch_Cavity", "Tyre_Rubber", "Rim_Alloy"}
+EXPECTED_MATS = {"carpaint", "Glass_Tint", "Arch_Cavity", "Tyre_Rubber", "Rim_Alloy"}
 
 # MEASURED, not assumed. 16 audited catalogue cars sampled 2026-08-12; the 11
 # carrying a named glass material gave: min 0.9, p10 2.4, median 5.0, p90 7.7,
@@ -137,14 +137,14 @@ def build(parts, mesh, donor, out, renders=None, dia=0.46, keep_going=False):
     # --- stage 5: respray control ------------------------------------------
     import respray_gltf
     red = os.path.join(tmp, "red.glb")
-    respray_gltf.respray(out, red, ["Material_0"], "b00509")
+    respray_gltf.respray(out, red, ["carpaint"], "b00509")
     before = {m["name"]: m.get("pbrMetallicRoughness", {}).get("baseColorFactor")
               for m in _gltf_json(out).get("materials", [])}
     after = {m["name"]: m.get("pbrMetallicRoughness", {}).get("baseColorFactor")
              for m in _gltf_json(red).get("materials", [])}
-    body_changed = before.get("Material_0") != after.get("Material_0")
+    body_changed = before.get("carpaint") != after.get("carpaint")
     others_held = all(before.get(k) == after.get(k)
-                      for k in have if k != "Material_0")
+                      for k in have if k != "carpaint")
     gate("G5_respray_control", body_changed and others_held,
          f"body changed={body_changed}, others unchanged={others_held}")
 

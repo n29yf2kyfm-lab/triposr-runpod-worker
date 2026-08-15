@@ -41,7 +41,7 @@ STAGING = "car-meshes/staging/carglb"
 REQUIRED_VIEWS = ("front", "rear")
 GOOD_VIEWS = ("front", "rear", "left", "right")
 MIN_PIXELS = 0.5e6          # half the demo README's 1MP floor: warn, don't block
-MIN_ALPHA_FRac = 0.08       # a cutout with less car than this is a bad mask
+MIN_ALPHA_FRAC = 0.08       # a cutout with less car than this is a bad mask
 
 
 class CaptureError(SystemExit):
@@ -78,7 +78,7 @@ def check_captures(folder, strict=True):
                                "background junk becomes mesh spikes (measured)")
         a = np.asarray(im)[:, :, 3]
         frac = float((a > 24).mean())
-        if frac < MIN_ALPHA_FRac:
+        if frac < MIN_ALPHA_FRAC:
             raise CaptureError(f"{view}.png: only {frac:.0%} of the frame is "
                                "car — bad mask, refusing")
         mp = im.width * im.height / 1e6
@@ -246,19 +246,7 @@ def run_shape_pod(folder, manifest, out_dir, timeout_s=5400):
 
 
 # ------------------------------------------------------- E-G. local pipeline
-def run_local(shape_glb, parts_glb, dims, out_glb, renders_dir=None):
-    """Structure transfer + wheels + gates, via build_car.py's proven chain.
-
-    When parts_glb is None (structure stage skipped/failed) we still refuse to
-    ship an unstructured shell: the gates would fail it anyway, so fail early
-    with the reason.
-    """
-    if parts_glb is None:
-        raise SystemExit(
-            "no parts GLB — the structure stage is what makes glazing "
-            "separable, and a fused shell cannot pass the glass gate "
-            "(P3-SAM measurably cannot cut glazing out of one). Re-run the "
-            "pod stage.")
+def ensure_donor():
     donor = os.path.join(ROOT, "pipeline", "trellis", "donor_wheel.glb")
     if not os.path.exists(donor):
         # the 12MB donor binary lives in the bucket, not in git — fetch the
@@ -274,17 +262,69 @@ def run_local(shape_glb, parts_glb, dims, out_glb, renders_dir=None):
         if r.returncode != 0 or not os.path.exists(donor):
             raise SystemExit(f"donor fetch/decompress failed: {r.stderr[-300:]}")
         print("wheel donor fetched from catalogue")
-    cmd = [sys.executable, os.path.join(ROOT, "pipeline", "trellis",
-                                        "build_car.py"),
-           "--parts", parts_glb, "--mesh", shape_glb, "--out", out_glb]
-    cmd += ["--donor", donor]
-    if renders_dir:
-        cmd += ["--renders", renders_dir]
+    return donor
+
+
+def run_local(shape_glb, parts_glb, dims, out_glb, renders_dir=None,
+              photos_dir=None):
+    """Panes + wheels + gates. Two paths, tried in evidence order.
+
+    A) OPEN-GLAZING path (Hi3DGen's mode, measured 2026-08-15): fit_panes
+       constructs the glazing from the apertures and needs NO parts GLB. Its
+       hollow-cabin guard refuses fused shells (largest side aperture 139px
+       vs 1508px on a real one), so trying it first is safe.
+    B) FUSED-SHELL fallback: build_car.py's hybrid chain, which needs the
+       PartCrafter parts to label glazing.
+    Then wheel_swap puts catalogue donor wheels on either result, and if the
+    capture photos are to hand, photo_project bakes them on as the HERO
+    variant (identity: grille/badges/lamps live in texture at viewer scale).
+    """
+    donor = ensure_donor()
+    paned = out_glb + ".paned.glb"
+    cmd = [sys.executable,
+           os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                        "fit_panes.py"),
+           shape_glb, paned, str(dims["length"] / 1000.0)]
     print("$", " ".join(cmd))
     p = subprocess.run(cmd)
-    if p.returncode != 0:
-        raise SystemExit(f"build_car gates failed ({p.returncode}) — the car "
-                         "is NOT shippable; read the gate output above")
+    if p.returncode == 0:
+        cmd = [sys.executable, os.path.join(ROOT, "pipeline", "trellis",
+                                            "wheel_swap.py"),
+               "--car", paned, "--donor", donor, "--out", out_glb]
+        print("$", " ".join(cmd))
+        p = subprocess.run(cmd)
+        if p.returncode != 0:
+            raise SystemExit(f"wheel_swap failed ({p.returncode}) — the car "
+                             "is NOT shippable")
+        os.unlink(paned)
+    else:
+        print("fit_panes refused — falling back to the fused-shell chain")
+        if parts_glb is None:
+            raise SystemExit(
+                "no parts GLB — a fused shell needs the structure stage to "
+                "label glazing (P3-SAM measurably cannot cut glazing out of "
+                "one). Re-run the pod stage.")
+        cmd = [sys.executable, os.path.join(ROOT, "pipeline", "trellis",
+                                            "build_car.py"),
+               "--parts", parts_glb, "--mesh", shape_glb, "--out", out_glb,
+               "--donor", donor]
+        if renders_dir:
+            cmd += ["--renders", renders_dir]
+        print("$", " ".join(cmd))
+        p = subprocess.run(cmd)
+        if p.returncode != 0:
+            raise SystemExit(f"build_car gates failed ({p.returncode}) — the "
+                             "car is NOT shippable; read the gate output above")
+    if photos_dir:
+        hero = out_glb.replace(".glb", "_hero.glb")
+        cmd = [sys.executable,
+               os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                            "photo_project.py"), out_glb, photos_dir, hero]
+        print("$", " ".join(cmd))
+        if subprocess.run(cmd).returncode == 0:
+            print(f"hero (photo-textured) variant: {hero}")
+        else:
+            print("photo bake failed — flat build stands alone")
     return out_glb
 
 
@@ -334,7 +374,14 @@ def main():
         print("glass:", r["verdict"], "/", r["certainty"],
               "| flat_shell:", r["flat_shell"],
               "| alpha_shell:", r["alpha_shell"])
-        print("materials:", sorted(materials(a.target)))
+        have = set(materials(a.target))
+        print("materials:", sorted(have))
+        missing = EXPECTED_MATS - have
+        if missing:
+            raise SystemExit(f"GATE FAIL: missing materials {sorted(missing)}")
+        if r["verdict"] == "opaque" and r["certainty"] == "proven":
+            raise SystemExit("GATE FAIL: glazing opaque (proven) — owner "
+                             "ruling 2026-08-11: hard fail")
         return
 
     folder = a.target
@@ -344,7 +391,7 @@ def main():
     work = os.path.join(folder, "work")
     shape, parts = run_shape_pod(folder, manifest, work)
     run_local(shape, parts, manifest["dims"], out,
-              renders_dir=os.path.join(folder, "qc"))
+              renders_dir=os.path.join(folder, "qc"), photos_dir=folder)
     qc(out, os.path.join(folder, "qc"))
     print(f"\nDONE: {out}")
     print("staging only — nothing ships without the owner's sign-off.")

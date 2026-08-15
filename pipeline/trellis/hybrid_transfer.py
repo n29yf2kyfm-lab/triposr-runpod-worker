@@ -29,7 +29,7 @@ labels onto the Hunyuan mesh per-face:
      label islands,
   6. canopy faces split roof/glass by |n_up| (ROOF_NORMAL_UP shared with
      partcrafter_materials),
-  7. export one GLB with the proven golf scheme (Material_0 / Glass_Tint /
+  7. export one GLB with the proven golf scheme (carpaint / Glass_Tint /
      Wheel_Dark / Interior_Dark / Lamp_Lens).
 
 VALIDATED on the test pair: glass_probe "clear (proven)", red-control
@@ -74,8 +74,12 @@ import os
 ROOF_HEIGHT = float(os.environ.get("ROOF_HEIGHT", "0.90"))
 
 LABS = ["body", "canopy", "wheel", "interior", "lamp"]
+# paint MUST be named 'carpaint': the render worker's recolour targets paint
+# BY NAME, and with no paint-named material it falls back to a heuristic body
+# pick that tinted 93.7% of a car including its wheels (red control,
+# 2026-08-15). Was 'Material_0' until then.
 MATS = {
-    "body":     PBRMaterial(name="Material_0",    baseColorFactor=[0.60, 0.61, 0.63, 1.0],
+    "body":     PBRMaterial(name="carpaint",      baseColorFactor=[0.60, 0.61, 0.63, 1.0],
                             metallicFactor=0.1, roughnessFactor=0.35),
     "glass":    PBRMaterial(name="Glass_Tint",    baseColorFactor=[0.030, 0.035, 0.045, 0.72],
                             metallicFactor=0.0, roughnessFactor=0.05, alphaMode="BLEND"),

@@ -188,6 +188,7 @@ def fit(src, out_glb, res=256, inset_frac=0.004, min_frac=0.0015,
         return (a - lo[ax]) / ext[ax]
 
     panes = []
+    side_region_max = 0
     # ---------------- side apertures --------------------------------------
     for sign in (+1, -1):
         sel = (N[:, W] * sign > 0.25)
@@ -219,10 +220,29 @@ def fit(src, out_glb, res=256, inset_frac=0.004, min_frac=0.0015,
               f"{aperture.sum()} -> {len(regs)} regions "
               f"{[len(r) for r in regs]}")
         for r in regs:
+            side_region_max = max(side_region_max, len(r))
             pv, pf = pane_from_region(
                 r, lo[L], ext[L] / (res - 1), lo[H], ext[H] / (res - 1),
                 lvl, L, H, W, sign, inset)
             panes.append((pv, pf))
+
+    # ---------------- hollow-cabin guard -----------------------------------
+    # A mesh with REAL glazing passages always shows big side-window
+    # apertures (Golf/Hi3DGen: largest side region 1508px at res=256). A
+    # FUSED shell (Hunyuan) shows only speckle there (largest 139px) — but
+    # its solid windscreen still fooled the oblique rake projections into
+    # 4.36%% "glass", inside the gate band. Measured 2026-08-15 on
+    # hy_shape_fixed.glb. Constructing panes over fused skin is the forged
+    # clear-glass failure mode: glass_probe would pass a car whose windows
+    # render body-coloured. So the side view is the admissibility test for
+    # the WHOLE fit, rakes included.
+    if side_region_max < 0.006 * res * res:
+        raise SystemExit(
+            f"REFUSING: largest side-window aperture is {side_region_max}px "
+            f"(< {0.006*res*res:.0f}px at res={res}) — this mesh has no "
+            "hollow cabin (fused shell). Panes over fused skin would fool "
+            "glass_probe while windows render body-coloured. Use the "
+            "fused-shell path (hybrid_transfer) instead.")
 
     # ---------------- windscreen / backlight ------------------------------
     sel = N[:, H] > 0.20
@@ -426,6 +446,13 @@ def fit(src, out_glb, res=256, inset_frac=0.004, min_frac=0.0015,
     share = tot_pane_faces / all_faces * 100
     print(f"wrote {out_glb} ({size/1e6:.1f}MB)  glass faces {tot_pane_faces} "
           f"= {share:.2f}% of car (gate band 2.5-9.5%)")
+    # the band is a GATE, not a caption (a gate nobody enforces is a gate that
+    # does not exist — CLAUDE.md). File is kept for forensics; exit is loud.
+    if not (2.5 <= share <= 9.5):
+        raise SystemExit(
+            f"GATE FAIL: glass {share:.2f}% outside 2.5-9.5% — panes do not "
+            f"look like a real car's glazing. {out_glb} kept for inspection; "
+            "do NOT ship it.")
     return out_glb
 
 
