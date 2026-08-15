@@ -220,7 +220,11 @@ import sys, re
 p = sys.argv[1]; s = open(p).read()
 s = s.replace("tools/mini_trainset/preprocessed", "/workspace/prep")
 s = re.sub(r"steps:\s*[\d_]+",            "steps: 1000000", s, count=1)
-s = re.sub(r"every_n_train_steps:\s*\d+", "every_n_train_steps: 250", s, count=1)
+# LR: the 2026-08-15 run at the shipped 1e-5 destroyed the model in
+# 1900 steps on 20 cars (loss 1.85->1.05, output a melted blob). A
+# small dataset needs a small step; 2e-6 is 5x gentler.
+s = re.sub(r"base_lr:\s*\S+", "base_lr: 2e-6", s, count=1)
+s = re.sub(r"every_n_train_steps:\s*\d+", "every_n_train_steps: 200", s, count=1)
 s = re.sub(r"val_check_interval:\s*\d+",  "val_check_interval: 200", s, count=1)
 s = re.sub(r"limit_val_batches:\s*\d+",   "limit_val_batches: 1", s, count=1)
 s = re.sub(r"batch_size:\s*\d+",          "batch_size: 2", s, count=1)
@@ -287,7 +291,9 @@ stage ab_eval
 # seed, both GLBs to the bucket. Runs in the SAME pod so the checkpoint never
 # needs to survive a transfer (HF_TOKEN is read-only — measured).
 cd /workspace/repo/hy3dshape
-python3 - "$CFG" "$CKPT" <<'PY' || die AB_EVAL
+CKPTS=$(find "$OUT" -name "*.ckpt" | sort | tr '\n' ',')
+echo "CKPT_SWEEP=$CKPTS"
+python3 - "$CFG" "$CKPTS" <<'PY' || die AB_EVAL
 import gc, sys, yaml, torch
 from PIL import Image
 sys.path.insert(0, '.')
@@ -296,33 +302,47 @@ from hy3dshape.utils import instantiate_from_config
 
 img = Image.open('/workspace/golf.png').convert('RGBA')
 pipe = Hunyuan3DDiTFlowMatchingPipeline.from_pretrained('tencent/Hunyuan3D-2.1')
+base_model = pipe.model
 mesh = pipe(image=img, generator=torch.Generator().manual_seed(42))[0]
 mesh.export('/workspace/golf_base.glb')
-print('BASE_DONE', len(mesh.faces))
+print('BASE_DONE', len(mesh.faces), flush=True)
 
+# Sweep EVERY saved checkpoint. The previous run rendered only the LAST one,
+# so "the fine-tune failed" could not be separated from "it passed through a
+# good state and then collapsed". The trajectory answers that, and a mid-run
+# checkpoint that beats base is the whole prize.
 cfg = yaml.safe_load(open(sys.argv[1]))
-model = instantiate_from_config(cfg['model']['params']['denoiser_cfg'])
-sd = torch.load(sys.argv[2], map_location='cpu')
-sd = sd.get('state_dict', sd)
-best, best_n = None, -1
-for pref in ('model.', '_forward_module.model.', ''):
-    cand = {k[len(pref):]: v for k, v in sd.items() if k.startswith(pref)}
-    hit = len(set(cand) & set(model.state_dict()))
-    print('prefix', repr(pref), 'matches', hit)
-    if hit > best_n:
-        best, best_n = cand, hit
-assert best_n > 100, 'checkpoint keys do not match denoiser'
-msg = model.load_state_dict(best, strict=False)
-print('missing:', len(msg.missing_keys), 'unexpected:', len(msg.unexpected_keys))
-assert len(msg.missing_keys) == 0, msg.missing_keys[:5]
-old = pipe.model
-pipe.model = model.cuda().half()
-del old, sd, best
-gc.collect(); torch.cuda.empty_cache()
-mesh = pipe(image=img, generator=torch.Generator().manual_seed(42))[0]
-mesh.export('/workspace/golf_tuned.glb')
-print('TUNED_DONE', len(mesh.faces))
+for ck in [c for c in sys.argv[2].split(',') if c.strip()]:
+    tag = ck.rstrip('/').split('=')[-1].split('.')[0]
+    try:
+        model = instantiate_from_config(cfg['model']['params']['denoiser_cfg'])
+        sd = torch.load(ck, map_location='cpu')
+        sd = sd.get('state_dict', sd)
+        best, best_n = None, -1
+        for pref in ('model.', '_forward_module.model.', ''):
+            cand = {k[len(pref):]: v for k, v in sd.items() if k.startswith(pref)}
+            hit = len(set(cand) & set(model.state_dict()))
+            if hit > best_n:
+                best, best_n = cand, hit
+        assert best_n > 100, f'{tag}: checkpoint keys do not match denoiser'
+        msg = model.load_state_dict(best, strict=False)
+        assert len(msg.missing_keys) == 0, msg.missing_keys[:5]
+        pipe.model = model.cuda().half()
+        del sd, best
+        gc.collect(); torch.cuda.empty_cache()
+        mesh = pipe(image=img, generator=torch.Generator().manual_seed(42))[0]
+        out = f'/workspace/golf_step{tag}.glb'
+        mesh.export(out)
+        print(f'STEP_DONE {tag} faces={len(mesh.faces)} -> {out}', flush=True)
+    except Exception as e:
+        print(f'STEP_FAIL {tag}: {type(e).__name__}: {e}', flush=True)
+    finally:
+        pipe.model = base_model
+        gc.collect(); torch.cuda.empty_cache()
 PY
+for f in /workspace/golf_step*.glb; do
+  [ -e "$f" ] && sb_file "$(basename $f)" "$f"
+done
 sb_file golf_base.glb /workspace/golf_base.glb
 sb_file golf_tuned.glb /workspace/golf_tuned.glb
 ls -la /workspace/golf_*.glb
