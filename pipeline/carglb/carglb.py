@@ -288,9 +288,26 @@ def run_local(shape_glb, parts_glb, dims, out_glb, renders_dir=None,
     print("$", " ".join(cmd))
     p = subprocess.run(cmd)
     if p.returncode == 0:
+        # WHEEL DIAMETER: wheel_swap's --dia defaults to 0.46, inherited from
+        # a 2026-08-12 test car, and run_local never passed it — so the Golf
+        # shipped 458mm wheels against a real ~660mm, ~30% undersized and
+        # visibly sunk in its arches (measured 2026-08-15). Published
+        # dimensions are the authority here exactly as they are for length:
+        # this pipeline never estimates size from pixels. dims.json may carry
+        # `wheel_diameter` (mm); absent that, derive it from the car's own
+        # proportions and SAY SO, rather than silently using a constant.
+        dia = dims.get("wheel_diameter")
+        if dia:
+            dia_m = dia / 1000.0
+            print(f"wheel diameter {dia_m:.3f}m (from dims.json)")
+        else:
+            dia_m = round(0.155 * dims["length"] / 1000.0, 3)
+            print(f"wheel diameter {dia_m:.3f}m (ESTIMATED at 15.5% of "
+                  f"length — add 'wheel_diameter' to dims.json to fix it)")
         cmd = [sys.executable, os.path.join(ROOT, "pipeline", "trellis",
                                             "wheel_swap.py"),
-               "--car", paned, "--donor", donor, "--out", out_glb]
+               "--car", paned, "--donor", donor, "--out", out_glb,
+               "--dia", str(dia_m)]
         print("$", " ".join(cmd))
         p = subprocess.run(cmd)
         if p.returncode != 0:

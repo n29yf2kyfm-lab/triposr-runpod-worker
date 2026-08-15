@@ -182,6 +182,61 @@ def pane_from_region(px, u_lo, u_scale, v_lo, v_scale, level_img, axisL,
     return np.array(Vs), np.array(Fs, dtype=np.uint32)
 
 
+def _contact_centres(SC, L, H, W, lo, ext, band=0.015):
+    """Wheel centres from the four GROUND-CONTACT PATCHES.
+
+    Returns four centres (L from the patch median, H lifted to the wheel
+    radius) or None if the guards fail. Guards, so a melt mesh with no clean
+    patches cannot silently produce nonsense: each patch must be a plausible
+    tyre footprint (< 12% of car length), and the two sides must agree on
+    wheelbase to within 1% of length.
+    """
+    con = SC[:, H] < lo[H] + band * ext[H]
+    if con.sum() < 200:
+        return None
+    wmid = np.median(SC[con, W])
+    per_side = []
+    for sw in (+1, -1):
+        side = con & ((SC[:, W] - wmid) * sw > 0)
+        if side.sum() < 60:
+            return None
+        lm = np.median(SC[side, L])
+        axles = []
+        for sl in (+1, -1):
+            q = side & ((SC[:, L] - lm) * sl > 0)
+            if q.sum() < 20:
+                return None
+            span = np.ptp(SC[q, L])
+            if span > 0.12 * ext[L]:      # not a footprint — a sill or floor
+                return None
+            axles.append((np.median(SC[q, L]), np.median(SC[q, W])))
+        per_side.append(axles)
+    wb = [abs(a[0][0] - a[1][0]) for a in per_side]
+    if abs(wb[0] - wb[1]) > 0.01 * ext[L]:
+        return None                        # sides disagree — distrust both
+    # PLAUSIBILITY. Real cars sit at 55-65% of length (catalogue Golf
+    # measures 60.5% here, correctly); 45-75% is generous and still rejects
+    # a degenerate patch split by orders of magnitude. Kept as defence in
+    # depth rather than because a specific case demanded it — the other
+    # guards are what reject the Hi3DGen shell, whose contact band is
+    # contaminated by an underbody sitting as low as the tyres.
+    mean_wb = float(np.mean(wb))
+    if not (0.45 * ext[L] <= mean_wb <= 0.75 * ext[L]):
+        return None
+    r_wheel = 0.085 * ext[L]
+    out = []
+    for axles in per_side:
+        for (cl, cw) in axles:
+            c = np.zeros(3)
+            c[L] = cl
+            c[W] = cw
+            c[H] = lo[H] + r_wheel
+            out.append(c)
+    print(f"  contact-patch wheelbase {np.mean(wb):.3f} "
+          f"(sides {wb[0]:.3f}/{wb[1]:.3f})")
+    return out
+
+
 def fit(src, out_glb, res=256, inset_frac=0.004, min_frac=0.0015,
         length_m=None):
     m = trimesh.load(src, force="mesh")
@@ -414,19 +469,33 @@ def fit(src, out_glb, res=256, inset_frac=0.004, min_frac=0.0015,
     wheel_faces_mask = np.zeros(len(shellF), dtype=bool)
     # wheel centres from the SHELL, not the small bodies: two of the four
     # 'barrels' turned out to be SEATS (measured: wheel_swap then placed a
-    # wheel mid-car and found no tyre faces at one corner). The tyres are the
-    # lowest 22% of the shell; quadrant-cluster them and take each cluster's
-    # centre.
-    low = SC[:, H] < lo[H] + 0.22 * ext[H]
-    lmid = SC[low, L].mean()
-    wmid = SC[low, W].mean()
-    centres = []
-    for sl in (+1, -1):
-        for sw in (+1, -1):
-            q = low & ((SC[:, L] - lmid) * sl > 0) & ((SC[:, W] - wmid) * sw > 0)
-            if q.sum() < 50:
-                continue
-            centres.append(SC[q].mean(axis=0))
+    # wheel mid-car and found no tyre faces at one corner).
+    #
+    # v5 (2026-08-15): from the GROUND-CONTACT PATCHES, not a 22% band.
+    # The old band took the MEAN of an entire half-car of lower shell —
+    # underbody, sills, splitter, bumper — so the front centre landed 116mm
+    # BEHIND the true axle and the assembled car measured a 8.2% short
+    # wheelbase. Only tyres can touch the ground, so a ~1.5% band isolates
+    # them. Validated: catalogue Golf control 2631mm vs 2620 true (0.42%),
+    # and this mesh 2517mm — matching three independent estimators, which
+    # proves the remaining 4.2% is the GENERATOR drawing its arches inboard,
+    # not our placement. Fails OPEN to the old estimator: a wrong centre only
+    # mislabels faces, so a warning beats a refusal.
+    centres = _contact_centres(SC, L, H, W, lo, ext)
+    if centres is None:
+        print("  WARNING: contact-patch centres failed guard — falling back "
+              "to the 22% band estimator (expect a short wheelbase)")
+        low = SC[:, H] < lo[H] + 0.22 * ext[H]
+        lmid = SC[low, L].mean()
+        wmid = SC[low, W].mean()
+        centres = []
+        for sl in (+1, -1):
+            for sw in (+1, -1):
+                q = low & ((SC[:, L] - lmid) * sl > 0) \
+                    & ((SC[:, W] - wmid) * sw > 0)
+                if q.sum() < 50:
+                    continue
+                centres.append(SC[q].mean(axis=0))
     r_wheel = 0.085 * ext[L]
     for c in centres:
         dLH = np.hypot(SC[:, L] - c[L], SC[:, H] - c[H])
