@@ -152,3 +152,40 @@ Only worth $150–400 after levers 1–2 are measured.
 1. Approve the two $1 experiments (Hi3DGen, 4-view)?
 2. Approve building the orchestrator CLI around the proven chain?
 3. The fine-tune pilot stays parked until 1 is measured — agreed?
+
+---
+
+## 6. EXPERIMENT RESULTS (2026-08-15, total cost $0.16, both pods verified terminated)
+
+Same catalogue Golf GTI mk8, five perfectly consistent RGBA views, production
+rig, pre-registered gates. Evidence: car-meshes/exp0815/verdict.jpg.
+
+**Lever 2 — 4-view vs 2-view Hunyuan-2mv: PASSED its gate.** Only view count
+varied. The 2-view mesh is a bloated van (h/l 0.46); the 4-view mesh has the
+Golf's silhouette, roofline and arches (h/l 0.36 vs real 0.345). Sharpness
+unchanged (0.5-0.6%), exactly as predicted — view count buys COHERENCE, not
+edges. car-glb should always send 4 views.
+
+**Lever 1 — Hi3DGen: formal gate MISSED, practical result is a TIER CHANGE.**
+sharp_share 2.07% vs the pre-registered >=3% (Hunyuan same-car baseline 0.5%).
+But crease_density **145** vs Hunyuan's 37-39 — level with the owner's v4
+authored car (143), 2/3 of catalogue (215). And the renders show things no
+generated car in this project has ever had: REAL WINDOW OPENINGS with the
+interior visible through the backlight, a bonnet shut line, grille slats, arch
+lips, a rear diffuser. Glazing comes out as HOLES, not opaque shell — which is
+the GOOD failure mode: our authoring layer already knows how to fit Glass_Tint
+panes into openings, whereas carving glass out of a fused shell was measurably
+impossible.
+
+Deploy traps paid for (runs 1-2, ~$0.10): bare-pypi xformers drags in a new
+torch ('torchvision::nms does not exist') -> pin xformers==0.0.27.post2
+--no-deps; latest diffusers registers a flash-attn-3 op that torch 2.4's
+infer_schema rejects ('Parameter q has unsupported type') -> pin
+diffusers==0.31.0. Both asserted in hi3_boot.sh's stack check now.
+
+**Decision recommended:** stage C of car-glb becomes **Hi3DGen** (single
+image, feed the f34), with the 4-view Hunyuan-2mv retained as the coherence
+fallback for cars where one view underdetermines the far side. Next cheap
+step: run Hi3DGen on ALL FOUR views' normal maps? — not supported natively;
+instead test Hi3DGen + hybrid structure stage end to end through car-glb on
+one real photo set.
