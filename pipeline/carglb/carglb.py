@@ -130,6 +130,15 @@ def run_shape_pod(folder, manifest, out_dir, timeout_s=5400):
         put(os.path.join(folder, f"{view}.png"), f"{view}.png")
     boot = os.path.join(HERE, "shape_boot.sh")
     put(boot, "shape_boot.sh")
+    # RESET the job log before launching: the monitor reads the log's last
+    # marker, and a stale FAIL from a previous attempt killed a healthy fresh
+    # pod at t=0 (measured). The pod's first report overwrites this.
+    import tempfile
+    with tempfile.NamedTemporaryFile("w", suffix=".txt", delete=False) as tf:
+        tf.write("=== STAGE:launching ===\n")
+        tmplog = tf.name
+    put(tmplog, "shape_log.txt")
+    os.unlink(tmplog)
     # preflight the bootstrap URL BEFORE renting a GPU (the sed-URL lesson)
     url = f"{SB}/public/{pre}/shape_boot.sh"
     if urllib.request.urlopen(url, timeout=30).status != 200:
