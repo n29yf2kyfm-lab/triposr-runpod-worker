@@ -43,15 +43,47 @@ TAG="${RUN_TAG:-run}"
   while true; do
     sleep 300
     python - <<'PY' >/dev/null 2>&1
-import os
+import os, glob
 from huggingface_hub import HfApi
+tag = os.environ.get("RUN_TAG", "run")
+api = HfApi(token=os.environ["HF_TOKEN"])
 try:
-    HfApi(token=os.environ["HF_TOKEN"]).upload_file(
-        path_or_fileobj="/workspace/train.log",
-        path_in_repo="logs/%s.live.log" % os.environ.get("RUN_TAG", "run"),
-        repo_id=os.environ["HF_REPO"])
+    api.upload_file(path_or_fileobj="/workspace/train.log",
+                    path_in_repo="logs/%s.live.log" % tag,
+                    repo_id=os.environ["HF_REPO"])
 except Exception:
     pass
+
+# SHIP EACH CHECKPOINT AS SOON AS IT EXISTS.
+#
+# Publishing only from the EXIT trap loses the model. Stopping a pod gave the
+# trap enough time for a 30KB log and not for a 200MB checkpoint: the log
+# arrived, the weights did not, and epoch 1 was gone. On a 20-hour run
+# interrupted at hour 19 that would be the whole job.
+#
+# A checkpoint is re-uploaded only when its size changes, so a stable file
+# costs one stat and nothing else. Checkpoints are written per epoch, so this
+# adds a handful of commits against the Hub's 128/hour limit.
+seen = {}
+mark = "/workspace/.uploaded"
+if os.path.exists(mark):
+    for line in open(mark):
+        k, _, v = line.strip().partition("\t")
+        seen[k] = v
+for pth in sorted(glob.glob("/workspace/runs/**/*.pth", recursive=True)):
+    try:
+        sz = str(os.path.getsize(pth))
+        if seen.get(pth) == sz:
+            continue
+        api.upload_file(path_or_fileobj=pth,
+                        path_in_repo="%s/%s" % (tag, os.path.basename(pth)),
+                        repo_id=os.environ["HF_REPO"])
+        seen[pth] = sz
+        with open(mark, "w") as f:
+            for k, v in seen.items():
+                f.write("%s\t%s\n" % (k, v))
+    except Exception:
+        pass
 PY
   done
 ) &
@@ -462,7 +494,8 @@ echo "=== train ==="
 # the publish step below, which already handles a non-zero training result —
 # a partially trained checkpoint is worth vastly more than nothing.
 timeout "${MAX_HOURS:-13}h" python -u train_detector.py --data prepared --out runs \
-  --epochs "${EPOCHS:-15}" --batch-size "${BATCH:-8}"
+  --epochs "${EPOCHS:-15}" --batch-size "${BATCH:-8}" \
+  --num-workers "${NUM_WORKERS:-4}"
 TRAIN_RC=$?
 [ "$TRAIN_RC" = "124" ] && echo "TRAINING HIT THE ${MAX_HOURS:-13}h CAP — publishing what exists"
 echo "train_detector rc=$TRAIN_RC"

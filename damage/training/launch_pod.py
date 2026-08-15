@@ -174,6 +174,11 @@ def main():
                     help="GB; holds corpus + materialised samples + wheels")
     ap.add_argument("--epochs", type=int, default=12)
     ap.add_argument("--batch", type=int, default=8)
+    ap.add_argument("--num-workers", type=int, default=4,
+                    help="DataLoader workers. 4 was chosen while a memory "
+                         "blowup was unexplained; with that understood the "
+                         "GPU measured 40%% mean utilisation and starved 35%% "
+                         "of the time, so this is the throughput lever")
     ap.add_argument("--limit", type=int, default=0,
                     help="cap materialised samples (smoke runs)")
     ap.add_argument("--hours", type=float, default=14.0,
@@ -222,6 +227,7 @@ def main():
     }
     if a.limit:
         env["LIMIT"] = str(a.limit)
+    env["NUM_WORKERS"] = str(a.num_workers)
 
     print(f"gpu          {a.gpu}   disk {a.disk}GB   cloud {a.cloud}")
     print(f"run          tag={a.tag} epochs={a.epochs} batch={a.batch}"
