@@ -84,6 +84,33 @@ def dilate(mask, n=2):
     return out
 
 
+def erode(mask, n=1):
+    out = mask.copy()
+    for _ in range(n):
+        d = out.copy()
+        d[1:, :] &= out[:-1, :]; d[:-1, :] &= out[1:, :]
+        d[:, 1:] &= out[:, :-1]; d[:, :-1] &= out[:, 1:]
+        out = d
+    return out
+
+
+def fit_plane(px, lvl):
+    """Least-squares plane level = a*x + b*y + c over the region's FINITE
+    sliding-max samples. A per-pixel level made the panes speckle (each pixel
+    at its own stepped max); glass is flat — one plane per pane is both truer
+    and visually clean."""
+    ys, xs, zs = [], [], []
+    for (py, pxx) in px:
+        v = lvl[min(py, lvl.shape[0] - 1), min(pxx, lvl.shape[1] - 1)]
+        if np.isfinite(v):
+            ys.append(py); xs.append(pxx); zs.append(v)
+    if len(zs) < 3:
+        return None
+    A = np.c_[xs, ys, np.ones(len(zs))]
+    coef, *_ = np.linalg.lstsq(A, np.array(zs), rcond=None)
+    return coef        # a, b, c
+
+
 def regions(mask, min_px):
     """4-connected components of a boolean image, dependency-free BFS."""
     lab = np.zeros(mask.shape, dtype=int)
@@ -112,18 +139,19 @@ def regions(mask, min_px):
 
 def pane_from_region(px, u_lo, u_scale, v_lo, v_scale, level_img, axisL,
                      axisH, axisW, sign, inset):
-    """A pane mesh over the region's pixels at (local pillar level - inset).
+    """A pane mesh over the region's pixels on a PLANE-FIT level (v3).
 
-    Grid-quadded per pixel: crude, but the pane is flat glass — density is
-    irrelevant, silhouette is everything.
+    v2 set each vertex at its own sliding-max level, which stepped pixel to
+    pixel — the render showed speckle across every pane. Glass is flat: fit
+    one least-squares plane per pane and put every vertex on it.
     """
+    plane = fit_plane(px, level_img)
+    if plane is None:
+        return np.zeros((0, 3)), np.zeros((0, 3), dtype=np.uint32)
+    a_, b_, c_ = plane
     Vs, Fs, index = [], [], {}
     have = set(map(tuple, px))
     for (py, pxx) in have:
-        lv = level_img[min(py, level_img.shape[0] - 1),
-                       min(pxx, level_img.shape[1] - 1)]
-        if not np.isfinite(lv):
-            continue                      # no skin level nearby: skip pixel
         for dy, dx in ((0, 0), (1, 0), (0, 1), (1, 1)):
             key = (py + dy, pxx + dx)
             if key not in index:
@@ -131,11 +159,7 @@ def pane_from_region(px, u_lo, u_scale, v_lo, v_scale, level_img, axisL,
                 p = np.zeros(3)
                 p[axisL] = u_lo + xx * u_scale
                 p[axisH] = v_lo + yy * v_scale
-                lvl = level_img[min(yy, level_img.shape[0] - 1),
-                                min(xx, level_img.shape[1] - 1)]
-                if not np.isfinite(lvl):
-                    lvl = lv              # corner off the skin: use pixel level
-                p[axisW] = (lvl - inset) * sign
+                p[axisW] = (a_ * xx + b_ * yy + c_ - inset) * sign
                 index[key] = len(Vs)
                 Vs.append(p)
         a = index[(py, pxx)]
@@ -188,6 +212,7 @@ def fit(src, out_glb, res=256, inset_frac=0.004, min_frac=0.0015):
         band[int(res * 0.45):int(res * 0.97), int(res * 0.06):int(res * 0.94)] = True
         aperture = dilate(band & sil & ~covered) & ~covered & sil
         lvl = sliding_row_max(np.where(covered, img, -np.inf), win)
+        aperture = erode(aperture, 1)
         regs = regions(aperture, min_px)
         print(f"side {'+' if sign > 0 else '-'}: aperture px "
               f"{aperture.sum()} -> {len(regs)} regions "
@@ -267,7 +292,7 @@ def fit(src, out_glb, res=256, inset_frac=0.004, min_frac=0.0015):
             rows = np.where(sil2[:, col])[0]
             if len(rows) > 1:
                 sil2[rows.min():rows.max() + 1, col] = True
-        aperture = dilate(sil2 & ~covered) & ~covered & sil2
+        aperture = erode(dilate(sil2 & ~covered) & ~covered & sil2, 1)
         lvl = sliding_row_max(np.where(covered, img, -np.inf), win)
         regs = regions(aperture, max(30, min_px // 2))
         # keep only the DOMINANT region: the screen. The oblique view also sees
@@ -277,20 +302,18 @@ def fit(src, out_glb, res=256, inset_frac=0.004, min_frac=0.0015):
         print(f"rake {'front' if nose_sign>0 else 'rear'}: aperture px "
               f"{aperture.sum()} -> kept {[len(r) for r in regs]}")
         for r in regs:
-            # rebuild 3D points from oblique pixel coords
+            plane = fit_plane(r, lvl)
+            if plane is None:
+                continue
+            pa, pb, pc = plane
             Vs, Fs, index = [], [], {}
             have = set(map(tuple, r))
             for (py, pxx) in have:
-                lv = lvl[min(py, res - 1), min(pxx, res - 1)]
-                if not np.isfinite(lv):
-                    continue
                 for dy, dx in ((0, 0), (1, 0), (0, 1), (1, 1)):
                     key = (py + dy, pxx + dx)
                     if key not in index:
                         yy, xx = key
-                        l2 = lvl[min(yy, res - 1), min(xx, res - 1)]
-                        if not np.isfinite(l2):
-                            l2 = lv
+                        l2 = pa * xx + pb * yy + pc
                         t1 = p1[sel].min() + xx / (res - 1) * np.ptp(p1[sel])
                         t2 = lo[W] + yy / (res - 1) * ext[W]
                         pt = t_ax * t1 + d_ax * (l2 - inset)
