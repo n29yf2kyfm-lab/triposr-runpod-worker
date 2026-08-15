@@ -78,7 +78,7 @@ def main(cars_file):
     log_url = f"{SB}/public/{PRE}/log.txt"
     t0, last, ok = time.time(), "", False
     try:
-        while time.time() - t0 < 13200:          # 3h40 hard stop
+        while time.time() - t0 < 10800:          # 3h hard stop
             try:
                 log = urllib.request.urlopen(
                     f"{log_url}?cb={int(time.time())}", timeout=30

@@ -14,8 +14,9 @@
 set -x
 export DEBIAN_FRONTEND=noninteractive
 START=$(date +%s)
-BUDGET=${BUDGET:-10800}      # 3h wall (owner: "Train 3 hrs just to test")
-RESERVE=1200                 # keep 20 min for ckpt upload + verify
+BUDGET=${BUDGET:-9000}       # absolute wall safety (2.5h)
+TRAIN_CAP=${TRAIN_CAP:-3600}  # owner 2026-08-15: "Do 1 hr just to test"
+RESERVE=900                  # keep 15 min for ckpt upload + verify
 LOG=/workspace/boot.log
 mkdir -p /workspace
 exec > >(tee -a "$LOG") 2>&1
@@ -143,7 +144,7 @@ echo "CAROK $FIRST (sanity)"
 stage prep_cars
 # time-budgeted: render 24 geo views + surface sampling per car; a car that
 # fails is logged and skipped, never fatal. Stop when the prep window closes.
-PREP_DEADLINE=$((START + 4500))
+PREP_DEADLINE=$((START + 1800))
 N_OK=1; N_FAIL=0
 while read -r UID_; do
   [ -z "$UID_" ] && continue
@@ -190,7 +191,8 @@ OUT=/workspace/out_pilot
 mkdir -p "$OUT"
 NOW=$(date +%s)
 TRAIN_SECS=$((START + BUDGET - NOW - RESERVE))
-[ "$TRAIN_SECS" -ge 1800 ] || die NO_TIME_LEFT_FOR_TRAINING
+if [ "$TRAIN_SECS" -gt "$TRAIN_CAP" ]; then TRAIN_SECS=$TRAIN_CAP; fi
+[ "$TRAIN_SECS" -ge 900 ] || die NO_TIME_LEFT_FOR_TRAINING
 echo "TRAIN_SECS=$TRAIN_SECS"
 timeout "$TRAIN_SECS" python3 main.py \
   --num_nodes 1 --num_gpus 1 \
