@@ -1158,6 +1158,47 @@ underperforms — do NOT stop at the first plausible explanation. Run this:
 Only produce the full template when there is a real problem to investigate —
 don't fabricate an RCA when nothing is broken.
 
+## glass_probe CAN BE FOOLED — the RED CONTROL is the arbiter (2026-08-15)
+
+Ran `assign_materials` on the Pixal3D Golf. It reported 307 parts (body 44,
+glass 148, wheel 40, interior 75) — vastly better than TRELLIS.2's 12,558
+useless fragments — and after renaming to our convention the gate stack said:
+
+    glass: clear / proven | flat_shell: False | alpha_shell: False
+    materials: [Arch_Cavity, Glass_Tint, Interior_Dark, Rim_Alloy,
+                Tyre_Rubber, carpaint]     -> ALL GATES PASS
+
+**The studio render looked flawless: dark glazing with the interior visible,
+black tyres, grey alloys. The RED CONTROL turned the windows and the tyres
+red with the body.** The separation was fake and every automated gate missed
+it. I reported "all gates pass" before running the control — do not repeat
+that; the control is not a formality, it is the verdict.
+
+**The mechanism, and why the probe cannot see it:** Pixal3D bakes a PBR
+texture that PAINTS dark windows and black tyres onto ONE body material.
+`glass_probe` asks "does a properly transparent material EXIST in this file",
+not "is it bound to the glazing GEOMETRY". assign_materials created a real
+`Glass_Tint` on 148 tiny fragments, so the probe passed on a car whose actual
+windows are body-material texels.
+
+**The tell was printed and I read past it: `coverage: 0.949`.** This file
+already warns that cov > 0.90 means one material covers the whole model,
+glass and tyres included, and that `toyota-auris-v1` was RETIRED for exactly
+that. Treat cov > 0.90 on a GENERATED car as a red-control requirement, not
+a note.
+
+**Standing rule from here:** a generated car is not material-clear until a
+`--colour red` respray leaves glazing and tyres dark. Gates + eye + texture
+all agreed and all three were wrong; only the respray was right. Note this
+is the same class as the 2026-08-10 finding in reverse — there the sheet
+manufactured a DEFECT, here the texture manufactures a PASS.
+
+**Where this leaves Pixal3D:** geometry genuinely solved (crease 271.6,
+catalogue grade); materials NOT solved — for material purposes it is still a
+fused shell, and loose-part splitting cannot recover the glazing. Next step
+is PartCrafter on the same image and a canopy-label transfer onto the
+Pixal3D mesh (hybrid_transfer), which is the tooling that already exists.
+
 ## PIXAL3D BREAKS THE SURFACING CEILING — measured 2026-08-15, $1.30
 
 `TencentARC/Pixal3D` (SIGGRAPH 2026, **MIT weights on HF**) is the first
