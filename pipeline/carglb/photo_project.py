@@ -130,11 +130,21 @@ CABIN = (36, 36, 40)          # what interior passage skin + underbody get
 
 # outward axis and sign per photo group (authoring frame: X length, Y up,
 # Z width)
-OUT_AXIS = {"front": (0, +1), "back": (0, -1), "left": (2, +1),
-            "right": (2, -1)}
+# Signs must FOLLOW group_of's naming (they did not, and after the
+# handedness fix every exterior side face tested as interior -> the whole
+# flank baked cabin-dark; caught in the mirror-check render). With nose +X:
+# right = +Z, left = -Z. out_axis() flips all four when the nose is -X,
+# exactly as group_of swaps its labels.
+def out_axis(nose_pos=True):
+    s = 1 if nose_pos else -1
+    return {"front": (0, +s), "back": (0, -s),
+            "right": (2, +s), "left": (2, -s)}
 
 
-def depth_map(C, groups, gname, lo, ext, res=96):
+OUT_AXIS = out_axis(True)          # legacy import surface
+
+
+def depth_map(C, groups, gname, lo, ext, res=96, oax=None):
     """Per cell, the outermost surface offset of this group's faces.
 
     Splits EXTERIOR skin from the CABIN PASSAGE skin behind the glass panes:
@@ -148,7 +158,7 @@ def depth_map(C, groups, gname, lo, ext, res=96):
     dm = np.full((res, res), -np.inf)
     if not sel.any():
         return sel, dm
-    ax, sgn = OUT_AXIS[gname]
+    ax, sgn = (oax or OUT_AXIS)[gname]
     ua = 2 if ax == 0 else 0            # cell plane = (other horizontal, up)
     u = np.clip(((C[sel, ua] - lo[ua]) / max(ext[ua], 1e-9) * (res - 1)), 0,
                 res - 1).astype(int)
@@ -229,15 +239,16 @@ def bake(car_glb, photos_dir, out_glb, nose_positive_x=None):
     # the wrong end, flip nose_positive_x — one boolean, checked by render.
     C = V[F].mean(axis=1)
     groups = [group_of(N[i], nose_positive_x) for i in range(len(F))]
-    dmaps = {gn: depth_map(C, groups, gn, lo, ext)
+    oax = out_axis(nose_positive_x)
+    dmaps = {gn: depth_map(C, groups, gn, lo, ext, oax=oax)
              for gn in ("front", "back", "left", "right")}
     newV, newUV, newF = [], [], []
     index = {}
     for fi, face in enumerate(F):
         g = groups[fi]
-        if g in OUT_AXIS:
+        if g in oax:
             _, dm = dmaps[g]
-            ax, sgn = OUT_AXIS[g]
+            ax, sgn = oax[g]
             ua2 = 2 if ax == 0 else 0
             margin = 0.05 * ext[ax]
             res_d = dm.shape[0]
