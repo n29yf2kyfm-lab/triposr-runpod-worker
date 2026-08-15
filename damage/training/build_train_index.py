@@ -208,7 +208,8 @@ def resolve_class(name):
     n = str(name).strip()
     final = n if n in CM.FINAL_CLASSES else CM.resolve(n)
     if final and GROUPED:
-        return CM.group_for(final)
+        return (CM.group_for_v2(final) if GROUPED == "v2"
+                else CM.group_for(final))
     return final
 
 
@@ -718,8 +719,9 @@ def classes_document(global_box_counts, images):
     # weights, which is the exact failure prepare_data.py warns about: every
     # prediction mislabelled while the run looks perfectly healthy.
     if GROUPED:
+        src = CM.TRAIN_GROUPS_V2 if GROUPED == "v2" else CM.TRAIN_GROUPS
         spec = {g: dict(v, members=list(v["members"]))
-                for g, v in CM.TRAIN_GROUPS.items()}
+                for g, v in src.items()}
     else:
         spec = {n: dict(v, members=[n]) for n, v in CM.FINAL_CLASSES.items()}
     idx = {name: i + 1 for i, name in enumerate(sorted(spec))}
@@ -886,7 +888,9 @@ def build(root, out_dir, target_per_class=None, max_repeat=15, seed=1337,
           merge_groups=False, dupe_groups=None):
     """Do the whole thing. Returns (plan, samples, images)."""
     global GROUPED
-    GROUPED = bool(merge_groups)
+    # "v2" merges structural into dent as one deformation class; True keeps the
+    # original four. Measured reason for v2 is in class_map.TRAIN_GROUPS_V2.
+    GROUPED = merge_groups if merge_groups in ("v2",) else bool(merge_groups)
     root = os.path.abspath(root)
     images, stats = load_originals(root, sha_cache, verbose)
     if not images:
@@ -1264,6 +1268,10 @@ def main():
                     help="near_dupes.json — force every near-duplicate group "
                          "into a single split, so augmented siblings of one "
                          "photograph cannot straddle train and valid")
+    ap.add_argument("--groups-v2", action="store_true",
+                    help="three classes: surface, deformation (dent+"
+                         "structural), broken_part. Merges the scarce "
+                         "structural class into dent after it scored AP 0.16")
     ap.add_argument("--merge-groups", action="store_true",
                     help="fold FINAL_CLASSES into class_map.TRAIN_GROUPS, so "
                          "balance comes from merging related damage rather "
@@ -1302,7 +1310,8 @@ def main():
         args.coco, args.out, args.target_per_class, args.max_repeat,
         args.seed, args.unit, args.unhealthy_multiplier, args.sha_cache,
         report_only=args.report_only, train_only=pin,
-        merge_groups=args.merge_groups, dupe_groups=args.dupe_groups)
+        merge_groups=("v2" if args.groups_v2 else args.merge_groups),
+        dupe_groups=args.dupe_groups)
     print(format_report(plan))
     if args.report_only:
         print("\n--report-only: nothing was written.")

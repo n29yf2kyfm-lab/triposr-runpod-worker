@@ -238,3 +238,55 @@ def _check_groups():
     missing = sorted(set(FINAL_CLASSES) - set(_GROUP_OF))
     extra = sorted(set(_GROUP_OF) - set(FINAL_CLASSES))
     return missing, extra
+
+
+# ------------------------------------------------- v2: merge the weak class ---
+# Measured after one epoch on the four-group split:
+#
+#     broken_part  AP 0.4281   21,370 boxes
+#     dent         AP 0.3115   81,707
+#     surface      AP 0.1725  174,875
+#     structural   AP 0.1610   21,199
+#
+# The two weak classes are weak for OPPOSITE reasons, and only one of them is
+# fixable by merging.
+#
+# `structural` is SCARCE: 21,199 real boxes needing 8.9x repetition to reach
+# target, so the model sees a few thousand distinct examples many times over.
+# Folding it into `dent` gives one deformation class with 102,906 real boxes
+# and a 2.1x multiplier — the merge does what merges are good for.
+#
+# `surface` is ABUNDANT: 174,875 boxes, the largest class, needing no
+# repetition at all. Its 0.17 is not a data-quantity problem, it is the label
+# ambiguity that was flagged before any of this trained — where a scratch ends
+# is genuinely unclear, and forty-one source projects each drew that line
+# differently. No regrouping fixes that; only relabelling would.
+#
+# WHAT MERGING COSTS. The four-group split deliberately kept `structural`
+# apart from `dent` because they price differently and one gates a safety
+# warning. That distinction now has to be recovered at inference from box area
+# and severity instead of from the class head — a worse place for it, but a
+# 0.16 AP class is not carrying that distinction reliably either.
+TRAIN_GROUPS_V2 = {
+    "surface":     {"members": ("scratch_scuff", "rust_paint"),
+                    "colour": "#58a6ff", "canonical": "scratch",
+                    "structural": False},
+    "deformation": {"members": ("dent", "structural"),
+                    "colour": "#f0883e", "canonical": "dent",
+                    "structural": True},
+    "broken_part": {"members": ("crack_glass", "lamp_wheel"),
+                    "colour": "#f85149", "canonical": "crack",
+                    "structural": True},
+}
+
+_GROUP_OF_V2 = {m: g for g, spec in TRAIN_GROUPS_V2.items()
+                for m in spec["members"]}
+
+
+def group_for_v2(final_class):
+    return _GROUP_OF_V2.get(final_class, final_class)
+
+
+def _check_groups_v2():
+    return (sorted(set(FINAL_CLASSES) - set(_GROUP_OF_V2)),
+            sorted(set(_GROUP_OF_V2) - set(FINAL_CLASSES)))
