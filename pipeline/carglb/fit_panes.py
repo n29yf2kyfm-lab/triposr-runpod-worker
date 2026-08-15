@@ -170,7 +170,8 @@ def pane_from_region(px, u_lo, u_scale, v_lo, v_scale, level_img, axisL,
     return np.array(Vs), np.array(Fs, dtype=np.uint32)
 
 
-def fit(src, out_glb, res=256, inset_frac=0.004, min_frac=0.0015):
+def fit(src, out_glb, res=256, inset_frac=0.004, min_frac=0.0015,
+        length_m=None):
     m = trimesh.load(src, force="mesh")
     V = np.asarray(m.vertices)
     N = m.face_normals
@@ -331,6 +332,24 @@ def fit(src, out_glb, res=256, inset_frac=0.004, min_frac=0.0015):
                          "open-aperture kind")
 
     # ---------------- assemble the structured GLB -------------------------
+    sc = (length_m / ext[L]) if length_m else 1.0
+
+    def remap(P):
+        # wheel_swap and the catalogue expect length on X, up on Y, width Z.
+        # This must be a ROTATION, not a permutation: (L,H,W)=(2,1,0) is an
+        # odd permutation (det -1) and mirrored the whole car, inverting every
+        # face winding (measured: glass rendered solid). Negating one axis
+        # restores det +1.
+        out = np.empty_like(P)
+        out[:, 0] = P[:, L]
+        out[:, 1] = P[:, H]
+        out[:, 2] = P[:, W]
+        perm = np.zeros((3, 3))
+        perm[0, L] = perm[1, H] = perm[2, W] = 1
+        if np.linalg.det(perm) < 0:
+            out[:, 2] = -out[:, 2]
+        return out * sc
+
     bodies = m.split(only_watertight=False)
     bodies = sorted(bodies, key=lambda b: -len(b.faces))
     shell, rest = bodies[0], bodies[1:]
@@ -345,20 +364,62 @@ def fit(src, out_glb, res=256, inset_frac=0.004, min_frac=0.0015):
     print(f"assembly: shell {len(shell.faces)}f, wheels {len(wheels)}, "
           f"trims {len(trims)}")
 
+    # CARVE the shell's fused tyre surfaces into the wheel group. The four
+    # separate bodies are only the INNER BARRELS — the visible tyres are part
+    # of the shell (measured: the red control painted the wheels red). Faces
+    # within a wheel-sized cylinder of a barrel centre belong to the wheel.
+    shellV, shellF = np.asarray(shell.vertices), np.asarray(shell.faces)
+    SC = shellV[shellF].mean(axis=1)
+    wheel_faces_mask = np.zeros(len(shellF), dtype=bool)
+    # wheel centres from the SHELL, not the small bodies: two of the four
+    # 'barrels' turned out to be SEATS (measured: wheel_swap then placed a
+    # wheel mid-car and found no tyre faces at one corner). The tyres are the
+    # lowest 22% of the shell; quadrant-cluster them and take each cluster's
+    # centre.
+    low = SC[:, H] < lo[H] + 0.22 * ext[H]
+    lmid = SC[low, L].mean()
+    wmid = SC[low, W].mean()
+    centres = []
+    for sl in (+1, -1):
+        for sw in (+1, -1):
+            q = low & ((SC[:, L] - lmid) * sl > 0) & ((SC[:, W] - wmid) * sw > 0)
+            if q.sum() < 50:
+                continue
+            centres.append(SC[q].mean(axis=0))
+    r_wheel = 0.085 * ext[L]
+    for c in centres:
+        dLH = np.hypot(SC[:, L] - c[L], SC[:, H] - c[H])
+        dW = np.abs(SC[:, W] - c[W])
+        wheel_faces_mask |= (dLH < r_wheel) & (dW < 0.07 * ext[L])
+    print(f"wheel centres: {len(centres)}; carved {wheel_faces_mask.sum()} "
+          f"shell faces into the wheel group")
+
     g = GLB(generator="carglb/fit_panes")
-    m_paint = g.material("Material_0", [0.72, 0.73, 0.75, 1.0], 0.10, 0.28)
+    # 'carpaint' is the catalogue's paint-material convention and what the
+    # render worker's recolour TARGETS BY NAME. v3 shipped 'Material_0' and
+    # the red control promptly painted the wheels red: with no paint-named
+    # material the handler tints 93.7% of the car. Named correctly, the
+    # respray touches only this material — measured, not assumed.
+    m_paint = g.material("carpaint", [0.72, 0.73, 0.75, 1.0], 0.10, 0.28)
     m_glass = g.material("Glass_Tint", [0.03, 0.04, 0.05, 0.26], 0.0, 0.05,
                          blend=True)
     m_tyre = g.material("Tyre_Rubber", [0.026, 0.026, 0.030, 1.0], 0.0, 0.92)
     root = g.group("car")
-    g.mesh("body", shell.vertices, shell.faces, m_paint, parent=root)
+    g.mesh("body", remap(shellV), shellF[~wheel_faces_mask], m_paint,
+           parent=root)
     for i, b in enumerate(trims):
-        g.mesh(f"trim_{i}", b.vertices, b.faces, m_paint, parent=root)
-    for i, b in enumerate(wheels):
-        g.mesh(f"wheel_{i}", b.vertices, b.faces, m_tyre, parent=root)
+        g.mesh(f"trim_{i}", remap(np.asarray(b.vertices)),
+               np.asarray(b.faces), m_paint, parent=root)
+    # ONE combined 'wheel' geometry (wheel_swap's contract): carved shell
+    # faces + the four barrels
+    g.mesh("wheel", remap(shellV), shellF[wheel_faces_mask], m_tyre,
+           parent=root)
+    for i, b in enumerate(wheels):     # ex-'barrels': seats/underbody bits
+        g.mesh(f"inner_{i}", remap(np.asarray(b.vertices)),
+               np.asarray(b.faces), m_paint, parent=root)
     tot_pane_faces = 0
     for i, (pv, pf) in enumerate(panes):
-        g.mesh(f"glass_{i}", pv, pf, m_glass, parent=root)
+        g.mesh(f"glass_{i}", remap(pv), pf, m_glass, parent=root)
         tot_pane_faces += len(pf)
     size = g.save(out_glb)
     all_faces = len(shell.faces) + sum(len(b.faces) for b in rest) + tot_pane_faces
@@ -369,6 +430,7 @@ def fit(src, out_glb, res=256, inset_frac=0.004, min_frac=0.0015):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
+    if len(sys.argv) < 3:
         raise SystemExit(__doc__)
-    fit(sys.argv[1], sys.argv[2])
+    fit(sys.argv[1], sys.argv[2],
+        length_m=float(sys.argv[3]) if len(sys.argv) > 3 else None)
