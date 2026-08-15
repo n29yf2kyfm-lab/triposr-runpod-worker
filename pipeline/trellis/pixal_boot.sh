@@ -114,12 +114,15 @@ stage patch_rembg
 # removal is dead code for us. Make the eager load non-fatal.
 # The two later uses are already safe: one is guarded `is not None`, the
 # other sits inside the no-alpha branch we never take.
+# THERE ARE THREE construction sites, not one — pixal3d_image_to_3d.py (the
+# pipeline inference.py actually uses), trellis2_image_to_3d.py and
+# trellis2_texturing.py. v1 of this patch hit only the texturing one, the run
+# still 403'd, and $0.32 bought the lesson: patch EVERY site and ASSERT THE
+# COUNT rather than trusting the first grep hit.
 python3 - <<'PY' || die PATCH_REMBG
-p = "/workspace/pixal/pixal3d/pipelines/trellis2_texturing.py"
-s = open(p).read()
+import ast, glob
 old = ("        pipeline.rembg_model = getattr(rembg, "
        "args['rembg_model']['name'])(**args['rembg_model']['args'])\n")
-assert old in s, "rembg construction line not found — repo changed, re-read it"
 new = ("        try:\n"
        "            pipeline.rembg_model = getattr(rembg, "
        "args['rembg_model']['name'])(**args['rembg_model']['args'])\n"
@@ -127,9 +130,17 @@ new = ("        try:\n"
        "            print(f'[patched] rembg unavailable ({type(_e).__name__})"
        " - RGBA-input-only mode')\n"
        "            pipeline.rembg_model = None\n")
-open(p, "w").write(s.replace(old, new, 1))
-import ast; ast.parse(open(p).read())
-print("patched: rembg eager load is now non-fatal")
+n = 0
+for p in glob.glob("/workspace/pixal/pixal3d/pipelines/*.py"):
+    s = open(p).read()
+    if old in s:
+        s = s.replace(old, new)
+        open(p, "w").write(s)
+        ast.parse(s)
+        n += 1
+        print("patched", p)
+assert n == 3, f"expected 3 rembg construction sites, patched {n} — repo changed"
+print(f"patched {n}/3 rembg eager loads (all non-fatal now)")
 PY
 
 stage fetch_image
