@@ -46,6 +46,11 @@ stage photos
 curl -fsSL "$SB/public/$PRE/f34.png" -o /workspace/f34.png || die PHOTO
 
 stage shape
+# idempotent resume: if a previous run already uploaded the shape, skip the
+# whole Hi3DGen pass (a PartCrafter failure should not re-bill the shape)
+if curl -fsSL "$SB/public/$PRE/shape.glb" -o /workspace/results/shape.glb 2>/dev/null && [ -s /workspace/results/shape.glb ]; then
+  echo "SHAPE_RESUMED from bucket"
+else
 cd /workspace/hi3
 timeout 3000 python3 - <<'PY' || die SHAPE
 import os, sys
@@ -76,6 +81,7 @@ mesh.export('/workspace/results/shape.glb')
 print('SHAPE_OK', len(mesh.vertices))
 PY
 put shape.glb /workspace/results/shape.glb
+fi
 report
 
 stage parts
@@ -85,7 +91,10 @@ pip install -q -r /tmp/rpc.txt 2>&1 | tail -2
 # PartCrafter's requirements may float diffusers again — re-pin and re-assert
 pip install -q diffusers==0.31.0 numpy==1.26.4 2>&1 | tail -1
 python3 -c "import torch, diffusers; assert torch.cuda.is_available(); print('PC_STACK_OK', diffusers.__version__)" || die PC_STACK
-timeout 2400 python3 scripts/inference_partcrafter.py --image_path /workspace/f34.png \
+# PYTHONPATH: the script imports 'src.*' relative to the REPO ROOT — the
+# exact trap CLAUDE.md recorded from the first PartCrafter deployment
+timeout 2400 env PYTHONPATH=/workspace/pc python3 scripts/inference_partcrafter.py \
+  --image_path /workspace/f34.png \
   --num_parts 16 --output_dir /workspace/results/pc --tag job --seed 0 || die PARTS
 [ -s /workspace/results/pc/job/object.glb ] || die PARTS_NO_OBJECT
 put parts.glb /workspace/results/pc/job/object.glb
