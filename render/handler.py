@@ -1120,7 +1120,14 @@ def _render(bpy, glb, out, colour, plate_reg, az_deg, elev, zfrac,
 
     # camera
     cam_d = bpy.data.cameras.new("C")
-    cam_d.lens = float(os.environ.get("LENS", "62"))
+    # 100mm telephoto: automotive press/configurator convention (85-135mm).
+    # Owner-approved 2026-08-15 after eyeballing a 62-vs-100 comparison on the
+    # catalogue Golf — 100 reads longer and calmer, less nose exaggeration.
+    # REVERT: the previous default was 62. This is an env override, so a single
+    # render can be put back with LENS=62 without touching the code.
+    # NOTE: existing posters were rendered at 62 and are NOT retroactively
+    # changed; the catalogue is mixed until a re-render wave is run.
+    cam_d.lens = float(os.environ.get("LENS", "100"))
     cam = bpy.data.objects.new("C", cam_d)
     bpy.context.collection.objects.link(cam)
     dist = size * float(os.environ.get("DIST", "2.1"))
