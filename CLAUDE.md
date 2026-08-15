@@ -1158,6 +1158,44 @@ underperforms — do NOT stop at the first plausible explanation. Run this:
 Only produce the full template when there is a real problem to investigate —
 don't fabricate an RCA when nothing is broken.
 
+## Alam-3D v2 first training run — the 1h pilot, measured (2026-08-15)
+
+Owner-directed experiment ("put all glb in pod and train... 1 hr just to test").
+It RAN END TO END: 8 curated catalogue cars preprocessed on-pod, Tencent 2.1
+weights loaded via their finetuning config, **1,900 steps, checkpoint written
+at step 1750**. Whole campaign ~$4.60 across three pods. Durable lessons:
+
+- **The full training path is proven and committed** (`hy21_pilot5h.sh` +
+  `launch_pilot5h.py`): boot→train in ~32 min, wall-capped, artefact-monitored,
+  watchdog-deleted. The next run has zero discovery cost.
+- **Loss was FLAT (~1.9) over 1,900 steps and that is the EXPECTED reading** —
+  flow-matching total_loss is noise-dominated; an hour on 8 cars cannot move a
+  2.5B model visibly. Only the real pilot (200 cars, $150–400) with BASE-VS-
+  TUNED RENDERS can answer the quality question. Do not re-run 1h experiments
+  expecting a different curve.
+- **pip libigl has drifted 4 ways from Hunyuan's watertight tool** (4-value
+  signed_distance, marching_cubes extras, dropped return_normals + strict
+  dtypes, write_obj→writeOBJ). All patched in hy21_pilot5h.sh's patch_tools,
+  PROVEN exit-0 locally first. Also: the tool core-dumps ("terminate called
+  recursively", C++ crash) on ~half our meshes — mesh-dependent, skip-and-log;
+  chunked SDF queries are the Phase 2a fix.
+- **xvfb-run on the runpod image dies before blender starts (no xauth).**
+  Cycles -b needs no display: run blender DIRECTLY. And the SANITY-CAR pattern
+  (one car first, upload its rc/wt logs, die PREP_BROKEN) turned a $12
+  silent-failure class into a $0.15 named-failure class — keep it in every
+  data-prep pod.
+- **The per-car error log must be UPLOADED, not tailed** — v1 burned 45 cars
+  with the real error in an unuploaded /tmp file. And `tail -4 f1 f2` is not
+  portable (GNU rejects obsolete -N with multiple files); use `tail -n 4`.
+- **HF_TOKEN is READ-ONLY — a checkpoint cannot be uploaded with it.** The 1h
+  run's weights died with the pod because of this. Before any run whose weights
+  matter: write-scoped token from the owner, or stash on a RunPod network
+  volume. The loss curve survived only because loss.csv/png went to the bucket
+  BEFORE the HF stage — always upload cheap artefacts before expensive ones.
+- **Balance-driven GPU choice**: A100-only list, no H100 fallback, when the
+  balance could not survive an H100 run — a pod killed at zero balance loses
+  its artefacts AND blocks every other endpoint on the account.
+
 ## car-glb: Hi3DGen route SOLVED materials+identity, gated end to end (2026-08-15)
 
 The photos→GLB machine now lives at `pipeline/carglb/` (carglb.py orchestrator;
