@@ -1,0 +1,256 @@
+#!/usr/bin/env python3
+"""fit_panes.py — build glazing PANES across a Hi3DGen mesh's window apertures,
+and assemble the final structured, materialed GLB directly.
+
+THE MEASURED TOPOLOGY (Golf run, 2026-08-15, see also glaze_openings.py):
+Hi3DGen windows are neither surfaces nor boundary-loop holes. The outer skin
+wraps THROUGH each aperture into a modelled cabin, so the mesh is watertight,
+yet the side-view projection shows literally zero outward-facing faces where
+the glass should be. Nothing exists to label — recess detection (21.7% then
+15.4% false positives) was chasing surface that is not there. The correct move
+is construction: rasterise each side of the car, find the in-silhouette pixel
+regions with NO outward surface in the cabin band (those ARE the window
+apertures), and span a pane across each at the local pillar level.
+
+Assembly skips the PartCrafter/hybrid path entirely for this mesh class:
+  body   = the 96%-shell               -> Material_0
+  panes  = built here                  -> Glass_Tint (BLEND 0.26)
+  wheels = the 4 separate wheel bodies -> Tyre_Rubber
+  small bodies (mirrors, trims)        -> Material_0 with the body
+which satisfies the same gates build_car enforces: glass clear/proven by
+construction, glazing share printed against the 2.5-9.5% band, tyres
+unreachable by paint, respray touches Material_0 only.
+
+Usage:
+    python3 pipeline/carglb/fit_panes.py shape.glb out.glb
+
+STATUS 2026-08-15, measured on the Golf run: WORKING BUT RAGGED — v1.
+  * side apertures: found (2 per side, the door windows) and paned; the
+    rear-quarter pane bleeds around the C-pillar and pane edges leak above
+    the roofline (the dilate step ignores the silhouette boundary).
+  * windscreen/backlight: the top-map region detector fragments below the
+    size threshold — the raked screen needs its own projection (view along
+    the screen normal, not straight down).
+  * assembly, materials, gates: sound. GLB valid (after the corner -inf
+    fix), renders through the production rig, glass_probe-satisfiable by
+    construction.
+Next iteration: clamp dilation to the silhouette, per-screen oblique
+projection, then wire into carglb.run_local as the Hi3DGen path.
+"""
+import os
+import sys
+
+import numpy as np
+import trimesh
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(
+    os.path.abspath(__file__))), "authoring"))
+from glb import GLB                                            # noqa: E402
+
+
+def axes_of(V):
+    ext = V.max(0) - V.min(0)
+    L = int(np.argmax(ext))
+    rest = [i for i in range(3) if i != L]
+    H = rest[int(np.argmin(ext[rest]))]
+    W = [i for i in rest if i != H][0]
+    return L, H, W
+
+
+def sliding_row_max(img, win):
+    out = img.copy()
+    for shift in range(1, win + 1):
+        out[:, shift:] = np.maximum(out[:, shift:], img[:, :-shift])
+        out[:, :-shift] = np.maximum(out[:, :-shift], img[:, shift:])
+    return out
+
+
+def dilate(mask, n=2):
+    out = mask.copy()
+    for _ in range(n):
+        d = out.copy()
+        d[1:, :] |= out[:-1, :]; d[:-1, :] |= out[1:, :]
+        d[:, 1:] |= out[:, :-1]; d[:, :-1] |= out[:, 1:]
+        out = d
+    return out
+
+
+def regions(mask, min_px):
+    """4-connected components of a boolean image, dependency-free BFS."""
+    lab = np.zeros(mask.shape, dtype=int)
+    cur = 0
+    out = []
+    for y, x in zip(*np.where(mask)):
+        if lab[y, x]:
+            continue
+        cur += 1
+        stack = [(y, x)]
+        lab[y, x] = cur
+        px = []
+        while stack:
+            cy, cx = stack.pop()
+            px.append((cy, cx))
+            for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                ny, nx = cy + dy, cx + dx
+                if (0 <= ny < mask.shape[0] and 0 <= nx < mask.shape[1]
+                        and mask[ny, nx] and not lab[ny, nx]):
+                    lab[ny, nx] = cur
+                    stack.append((ny, nx))
+        if len(px) >= min_px:
+            out.append(np.array(px))
+    return out
+
+
+def pane_from_region(px, u_lo, u_scale, v_lo, v_scale, level_img, axisL,
+                     axisH, axisW, sign, inset):
+    """A pane mesh over the region's pixels at (local pillar level - inset).
+
+    Grid-quadded per pixel: crude, but the pane is flat glass — density is
+    irrelevant, silhouette is everything.
+    """
+    Vs, Fs, index = [], [], {}
+    have = set(map(tuple, px))
+    for (py, pxx) in have:
+        lv = level_img[min(py, level_img.shape[0] - 1),
+                       min(pxx, level_img.shape[1] - 1)]
+        if not np.isfinite(lv):
+            continue                      # no skin level nearby: skip pixel
+        for dy, dx in ((0, 0), (1, 0), (0, 1), (1, 1)):
+            key = (py + dy, pxx + dx)
+            if key not in index:
+                yy, xx = key
+                p = np.zeros(3)
+                p[axisL] = u_lo + xx * u_scale
+                p[axisH] = v_lo + yy * v_scale
+                lvl = level_img[min(yy, level_img.shape[0] - 1),
+                                min(xx, level_img.shape[1] - 1)]
+                if not np.isfinite(lvl):
+                    lvl = lv              # corner off the skin: use pixel level
+                p[axisW] = (lvl - inset) * sign
+                index[key] = len(Vs)
+                Vs.append(p)
+        a = index[(py, pxx)]
+        b = index[(py + 1, pxx)]
+        c = index[(py + 1, pxx + 1)]
+        d = index[(py, pxx + 1)]
+        Fs += [[a, b, c], [a, c, d]]
+    return np.array(Vs), np.array(Fs, dtype=np.uint32)
+
+
+def fit(src, out_glb, res=256, inset_frac=0.004, min_frac=0.0015):
+    m = trimesh.load(src, force="mesh")
+    V = np.asarray(m.vertices)
+    N = m.face_normals
+    F = np.asarray(m.faces)
+    C = V[F].mean(axis=1)
+    lo, hi = V.min(0), V.max(0)
+    ext = hi - lo
+    L, H, W = axes_of(V)
+    inset = inset_frac * ext[L]
+    win = max(2, int(0.10 * res))
+    min_px = int(min_frac * res * res)
+
+    def norm(a, ax):
+        return (a - lo[ax]) / ext[ax]
+
+    panes = []
+    # ---------------- side apertures --------------------------------------
+    for sign in (+1, -1):
+        sel = (N[:, W] * sign > 0.25)
+        u = (norm(C[sel, L], L) * (res - 1)).astype(int)
+        v = (norm(C[sel, H], H) * (res - 1)).astype(int)
+        w = np.abs(C[sel, W])
+        img = np.full((res, res), -np.inf)
+        np.maximum.at(img, (v, u), w)
+        covered = np.isfinite(img)
+        # silhouette: columns/rows the car occupies at all (any geometry)
+        au = (norm(C[:, L], L) * (res - 1)).astype(int)
+        av = (norm(C[:, H], H) * (res - 1)).astype(int)
+        sil = np.zeros((res, res), dtype=bool)
+        sil[av, au] = True
+        # aperture = inside silhouette, cabin band, NO outward surface
+        band = np.zeros((res, res), dtype=bool)
+        band[int(res * 0.45):int(res * 0.97), int(res * 0.06):int(res * 0.94)] = True
+        aperture = dilate(band & sil & ~covered) & ~covered
+        lvl = sliding_row_max(np.where(covered, img, -np.inf), win)
+        regs = regions(aperture, min_px)
+        print(f"side {'+' if sign > 0 else '-'}: aperture px "
+              f"{aperture.sum()} -> {len(regs)} regions "
+              f"{[len(r) for r in regs]}")
+        for r in regs:
+            pv, pf = pane_from_region(
+                r, lo[L], ext[L] / (res - 1), lo[H], ext[H] / (res - 1),
+                lvl, L, H, W, sign, inset)
+            panes.append((pv, pf))
+
+    # ---------------- windscreen / backlight ------------------------------
+    sel = N[:, H] > 0.20
+    u = (norm(C[sel, L], L) * (res - 1)).astype(int)
+    v = (norm(C[sel, W], W) * (res - 1)).astype(int)
+    h = C[sel, H]
+    img = np.full((res, res), -np.inf)
+    np.maximum.at(img, (v, u), h)
+    covered = np.isfinite(img)
+    au = (norm(C[:, L], L) * (res - 1)).astype(int)
+    av = (norm(C[:, W], W) * (res - 1)).astype(int)
+    sil = np.zeros((res, res), dtype=bool)
+    sil[av, au] = True
+    band = np.zeros((res, res), dtype=bool)
+    band[int(res * 0.12):int(res * 0.88), int(res * 0.05):int(res * 0.95)] = True
+    aperture = dilate(band & sil & ~covered, 3) & ~covered
+    lvl = sliding_row_max(np.where(covered, img, -np.inf), win)
+    regs = regions(aperture, max(20, min_px // 3))
+    print(f"top      : aperture px {aperture.sum()} -> {len(regs)} regions "
+          f"{[len(r) for r in regs]}")
+    for r in regs:
+        pv, pf = pane_from_region(
+            r, lo[L], ext[L] / (res - 1), lo[W], ext[W] / (res - 1),
+            lvl, L, W, H, +1, inset)
+        panes.append((pv, pf))
+
+    if not panes:
+        raise SystemExit("no apertures found — this mesh is not the "
+                         "open-aperture kind")
+
+    # ---------------- assemble the structured GLB -------------------------
+    bodies = m.split(only_watertight=False)
+    bodies = sorted(bodies, key=lambda b: -len(b.faces))
+    shell, rest = bodies[0], bodies[1:]
+    # wheels: the four biggest non-shell bodies in the wheel height band
+    wheels, trims = [], []
+    for b in rest:
+        cy = (b.centroid[H] - lo[H]) / ext[H]
+        if cy < 0.45 and len(b.faces) > 500 and len(wheels) < 4:
+            wheels.append(b)
+        else:
+            trims.append(b)
+    print(f"assembly: shell {len(shell.faces)}f, wheels {len(wheels)}, "
+          f"trims {len(trims)}")
+
+    g = GLB(generator="carglb/fit_panes")
+    m_paint = g.material("Material_0", [0.72, 0.73, 0.75, 1.0], 0.10, 0.28)
+    m_glass = g.material("Glass_Tint", [0.03, 0.04, 0.05, 0.26], 0.0, 0.05,
+                         blend=True)
+    m_tyre = g.material("Tyre_Rubber", [0.026, 0.026, 0.030, 1.0], 0.0, 0.92)
+    root = g.group("car")
+    g.mesh("body", shell.vertices, shell.faces, m_paint, parent=root)
+    for i, b in enumerate(trims):
+        g.mesh(f"trim_{i}", b.vertices, b.faces, m_paint, parent=root)
+    for i, b in enumerate(wheels):
+        g.mesh(f"wheel_{i}", b.vertices, b.faces, m_tyre, parent=root)
+    tot_pane_faces = 0
+    for i, (pv, pf) in enumerate(panes):
+        g.mesh(f"glass_{i}", pv, pf, m_glass, parent=root)
+        tot_pane_faces += len(pf)
+    size = g.save(out_glb)
+    all_faces = len(shell.faces) + sum(len(b.faces) for b in rest) + tot_pane_faces
+    share = tot_pane_faces / all_faces * 100
+    print(f"wrote {out_glb} ({size/1e6:.1f}MB)  glass faces {tot_pane_faces} "
+          f"= {share:.2f}% of car (gate band 2.5-9.5%)")
+    return out_glb
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        raise SystemExit(__doc__)
+    fit(sys.argv[1], sys.argv[2])
