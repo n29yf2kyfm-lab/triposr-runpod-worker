@@ -104,10 +104,50 @@ assert torch.cuda.is_available()
 print("post-deps OK: torch", torch.__version__, "+ native extensions intact")
 PY
 
+stage patch_rembg
+# briaai/RMBG-2.0 is GATED on HuggingFace (403, measured 2026-08-15) and the
+# pipeline's from_pretrained builds it EAGERLY — so it dies before reaching
+# the code that would skip it. And it WOULD skip it: preprocess_image checks
+#   if input.mode == 'RGBA' and not np.all(alpha == 255): has_alpha = True
+# and only calls rembg when has_alpha is False. Our capture contract REQUIRES
+# background-removed RGBA (carglb's capture gate enforces it), so background
+# removal is dead code for us. Make the eager load non-fatal.
+# The two later uses are already safe: one is guarded `is not None`, the
+# other sits inside the no-alpha branch we never take.
+python3 - <<'PY' || die PATCH_REMBG
+p = "/workspace/pixal/pixal3d/pipelines/trellis2_texturing.py"
+s = open(p).read()
+old = ("        pipeline.rembg_model = getattr(rembg, "
+       "args['rembg_model']['name'])(**args['rembg_model']['args'])\n")
+assert old in s, "rembg construction line not found — repo changed, re-read it"
+new = ("        try:\n"
+       "            pipeline.rembg_model = getattr(rembg, "
+       "args['rembg_model']['name'])(**args['rembg_model']['args'])\n"
+       "        except Exception as _e:\n"
+       "            print(f'[patched] rembg unavailable ({type(_e).__name__})"
+       " - RGBA-input-only mode')\n"
+       "            pipeline.rembg_model = None\n")
+open(p, "w").write(s.replace(old, new, 1))
+import ast; ast.parse(open(p).read())
+print("patched: rembg eager load is now non-fatal")
+PY
+
 stage fetch_image
 cd /workspace
 curl -fsSL "$SB/public/$PRE/golf.png" -o golf.png || die FETCH_GOLF
-python3 -c "from PIL import Image; im=Image.open('/workspace/golf.png'); print('input', im.size, im.mode)"
+# HARD GUARD: with rembg disabled, an image without a real alpha mask would
+# silently take the dead path. Assert the contract instead.
+python3 - <<'PY' || die INPUT_NOT_RGBA_CUTOUT
+import numpy as np
+from PIL import Image
+im = Image.open('/workspace/golf.png')
+print('input', im.size, im.mode)
+assert im.mode == 'RGBA', f'need RGBA cutout, got {im.mode}'
+a = np.array(im)[:, :, 3]
+assert not np.all(a == 255), 'alpha is all-255 — not a cutout'
+print('alpha OK: %d levels, car frac %.3f' % (len(np.unique(a)),
+                                              float((a > 24).mean())))
+PY
 
 stage infer
 cd /workspace/pixal
