@@ -1198,6 +1198,26 @@ the first generated car to pass EVERY material gate. Durable facts, all measured
 - **Surfacing ceiling UNCHANGED**: still gap-filler tier, owner's verdict
   stands. Structure/materials/identity are solved and gated; panel crispness is
   the open gap and no open generator has beaten it.
+- **Round 2 (same day), the "fix everything" pass — three more measured facts:**
+  (1) The white bonnet patch on the textured car is the RIG, not the bake: the
+  catalogue Golf resprayed red through the same rig clips the SAME region at
+  the same rate (14.1% vs 13.5% pixels >250). Ours only reads worse because
+  surface noise marbles the highlight. Do NOT chase it with smoothing —
+  measured: Taubin 8 iters kills crease_density 145→36 (Hunyuan level), even
+  1 iter costs 145→98 and a third of sharp_share. Noise and creases do not
+  separate at this granularity.
+  (2) Glass-pixel bleed: the photos show GLASS above ~0.55 height, and baking
+  those pixels marbles the scuttle/cant rails white. photo_project depth-splits
+  every horizontal group (exterior within margin of the cell's outermost
+  surface; passage skin → cabin-dark cell) and clamps exterior faces above
+  CLAMP height to paint.
+  (3) AXIS CONVENTION: catalogue cars are length-on-Z, NOSE at −Z, Y up —
+  measured on the shipped mk8. carglb authors length-on-X internally (every
+  tool assumes it) and `orient_catalogue.py` rotates as the chain's LAST step
+  via a root-node quaternion (pose_fix pattern, BIN verbatim). Without it every
+  studio tile lands the wrong view. The rig azimuth note above ("215 = rear
+  3/4") is for length-on-X cars only — a length-Z car shows different views at
+  the same az; match tiles against a catalogue control, not the note.
 
 ## PartCrafter TESTED on a real car (2026-08-12): parts yes, glazing NO
 

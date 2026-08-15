@@ -17,8 +17,16 @@ METHOD — box-projection atlas, no unwrap:
     is a direct resample of the photo into the cell;
   * vertices are split per group (a vertex shared by a side face and a roof
     face needs different UVs — same mechanics as the crease split);
-  * top/bottom cells carry flat paint (no orthographic top photo in the
-    contract; the roof is featureless anyway).
+  * the top cell carries the PAINT colour sampled from a side photo's door
+    band (neutral grey rendered a silver-roofed two-tone car — measured);
+    the bottom cell is CABIN dark for the underbody and roof lining;
+  * front/back faces are DEPTH-SPLIT: Hi3DGen wraps one skin through the
+    apertures, so those groups contain both the scuttle and the passage
+    behind the windscreen. Exterior = within a margin of the cell's
+    outermost surface; passage faces go to the dark cell (paint there would
+    read as body-coloured windows). Exterior faces above CLAMP height get
+    paint — the photo shows glass at that height, and baking it painted a
+    white marble patch on the bonnet (measured, tex_az125).
 
 RESPRAY TRADE, stated plainly: the photo bakes the CAPTURE car's colour into
 baseColorTexture. factor x texture still tints, but over silver paint a blue
@@ -96,6 +104,53 @@ def group_of(n):
     return "top" if n[1] > 0 else "bottom"
 
 
+# Above this height fraction the photos show GLASS, not body — baking those
+# pixels put a white marble patch on the bonnet (front photo's windscreen at
+# scuttle height, measured tex_az125) and white streaks along the cant rails
+# (side photos' DLO reflections, measured tex4_az125). Exterior faces above
+# the line get paint instead.
+CLAMP = {"front": 0.53, "back": 0.58, "left": 0.58, "right": 0.58}
+CABIN = (36, 36, 40)          # what interior passage skin + underbody get
+
+# outward axis and sign per photo group (authoring frame: X length, Y up,
+# Z width)
+OUT_AXIS = {"front": (0, +1), "back": (0, -1), "left": (2, +1),
+            "right": (2, -1)}
+
+
+def depth_map(C, groups, gname, lo, ext, res=96):
+    """Per cell, the outermost surface offset of this group's faces.
+
+    Splits EXTERIOR skin from the CABIN PASSAGE skin behind the glass panes:
+    Hi3DGen wraps one continuous surface through the window apertures, so
+    'front'-group faces include both the scuttle AND the surface behind the
+    windscreen — and the passage baked the photo's glass pixels as white
+    marble. A face is exterior iff it sits within a margin of the outermost
+    surface in its cell.
+    """
+    sel = np.array([g == gname for g in groups])
+    dm = np.full((res, res), -np.inf)
+    if not sel.any():
+        return sel, dm
+    ax, sgn = OUT_AXIS[gname]
+    ua = 2 if ax == 0 else 0            # cell plane = (other horizontal, up)
+    u = np.clip(((C[sel, ua] - lo[ua]) / max(ext[ua], 1e-9) * (res - 1)), 0,
+                res - 1).astype(int)
+    v = np.clip(((C[sel, 1] - lo[1]) / max(ext[1], 1e-9) * (res - 1)), 0,
+                res - 1).astype(int)
+    np.maximum.at(dm, (v, u), C[sel, ax] * sgn)
+    # 3x3 max-filter so a cell boundary can't strand an exterior face
+    out = dm.copy()
+    for dy in (-1, 0, 1):
+        for dx in (-1, 0, 1):
+            out[max(0, dy):res + min(0, dy), max(0, dx):res + min(0, dx)] = \
+                np.maximum(out[max(0, dy):res + min(0, dy),
+                               max(0, dx):res + min(0, dx)],
+                           dm[max(0, -dy):res - max(0, dy),
+                              max(0, -dx):res - max(0, dx)])
+    return sel, out
+
+
 def bake(car_glb, photos_dir, out_glb, nose_positive_x=True):
     scene = trimesh.load(car_glb)
     body = scene.geometry.get("body")
@@ -110,7 +165,14 @@ def bake(car_glb, photos_dir, out_glb, nose_positive_x=True):
     # ---- build the atlas ---------------------------------------------------
     paint = paint_colour(photos_dir)
     atlas = Image.new("RGB", (ATLAS, ATLAS), paint)
-    for gname, ((cc, cr), photo, (ua, va)) in GROUPS.items():
+    groups_cfg = dict(GROUPS)
+    if not nose_positive_x:
+        # the +X end is the TAIL: swap which photo lands on which end (the
+        # UV flip alone would bake the front photo onto the back of the car)
+        (c1, _, a1), (c2, _, a2) = groups_cfg["front"], groups_cfg["back"]
+        groups_cfg["front"] = (c1, "rear.png", a1)
+        groups_cfg["back"] = (c2, "front.png", a2)
+    for gname, ((cc, cr), photo, (ua, va)) in groups_cfg.items():
         if photo is None:
             continue
         path = os.path.join(photos_dir, photo)
@@ -125,6 +187,13 @@ def bake(car_glb, photos_dir, out_glb, nose_positive_x=True):
         crop = Image.alpha_composite(bg, crop).convert("RGB")
         cell = crop.resize((CELL_W, CELL_H), Image.LANCZOS)
         atlas.paste(cell, (cc * CELL_W, cr * CELL_H))
+    # bottom cell = CABIN dark, not paint: it textures the underbody, the
+    # roof lining and (via reassignment below) the passage skin behind the
+    # glass panes — paint red behind a windscreen reads as body-coloured
+    # windows, the exact defect the owner ruling scraps cars for
+    (bc, br), _, _ = GROUPS["bottom"]
+    atlas.paste(Image.new("RGB", (CELL_W, CELL_H), CABIN),
+                (bc * CELL_W, br * CELL_H))
     buf = io.BytesIO()
     atlas.save(buf, "PNG", optimize=True)
     atlas_png = buf.getvalue()
@@ -132,10 +201,28 @@ def bake(car_glb, photos_dir, out_glb, nose_positive_x=True):
     # ---- per-group vertex split + UVs -------------------------------------
     # nose direction decides which photo is 'front'. If the badge ends up on
     # the wrong end, flip nose_positive_x — one boolean, checked by render.
+    C = V[F].mean(axis=1)
+    groups = [group_of(N[i]) for i in range(len(F))]
+    dmaps = {gn: depth_map(C, groups, gn, lo, ext)
+             for gn in ("front", "back", "left", "right")}
     newV, newUV, newF = [], [], []
     index = {}
     for fi, face in enumerate(F):
-        g = group_of(N[fi])
+        g = groups[fi]
+        if g in OUT_AXIS:
+            _, dm = dmaps[g]
+            ax, sgn = OUT_AXIS[g]
+            ua2 = 2 if ax == 0 else 0
+            margin = 0.05 * ext[ax]
+            res_d = dm.shape[0]
+            du = int(np.clip((C[fi, ua2] - lo[ua2]) / max(ext[ua2], 1e-9)
+                             * (res_d - 1), 0, res_d - 1))
+            dv = int(np.clip((C[fi, 1] - lo[1]) / max(ext[1], 1e-9)
+                             * (res_d - 1), 0, res_d - 1))
+            if C[fi, ax] * sgn < dm[dv, du] - margin:
+                g = "bottom"                       # cabin passage -> dark
+            elif (C[fi, 1] - lo[1]) / ext[1] > CLAMP[groups[fi]]:
+                g = "top"                          # photo shows glass -> paint
         (cc, cr), photo, (ua, va) = GROUPS[g]
         tri = []
         for vi in face:

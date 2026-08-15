@@ -149,6 +149,16 @@ def pane_from_region(px, u_lo, u_scale, v_lo, v_scale, level_img, axisL,
     if plane is None:
         return np.zeros((0, 3)), np.zeros((0, 3), dtype=np.uint32)
     a_, b_, c_ = plane
+    # BOW the pane outward. A perfectly flat pane mirror-flashes the studio
+    # key light as a solid white rectangle (seen on the windscreen and one
+    # side window in every eyeball render); real glass carries ~2% sagitta,
+    # which spreads that reflection into a streak. Paraboloid, peak at the
+    # region centre, capped at 80% of the inset so the crown stays behind
+    # the surrounding skin level.
+    cy_, cx_ = px[:, 0].mean(), px[:, 1].mean()
+    hy_ = max(px[:, 0].max() - cy_, cy_ - px[:, 0].min(), 1.0)
+    hx_ = max(px[:, 1].max() - cx_, cx_ - px[:, 1].min(), 1.0)
+    sag = min(0.06 * min(hx_ * u_scale, hy_ * v_scale) * 2, 0.8 * inset)
     Vs, Fs, index = [], [], {}
     have = set(map(tuple, px))
     for (py, pxx) in have:
@@ -156,10 +166,12 @@ def pane_from_region(px, u_lo, u_scale, v_lo, v_scale, level_img, axisL,
             key = (py + dy, pxx + dx)
             if key not in index:
                 yy, xx = key
+                r2 = min(((yy - cy_) / hy_) ** 2 + ((xx - cx_) / hx_) ** 2, 1.0)
                 p = np.zeros(3)
                 p[axisL] = u_lo + xx * u_scale
                 p[axisH] = v_lo + yy * v_scale
-                p[axisW] = (a_ * xx + b_ * yy + c_ - inset) * sign
+                p[axisW] = (a_ * xx + b_ * yy + c_ - inset
+                            + sag * (1.0 - r2)) * sign
                 index[key] = len(Vs)
                 Vs.append(p)
         a = index[(py, pxx)]
@@ -327,6 +339,13 @@ def fit(src, out_glb, res=256, inset_frac=0.004, min_frac=0.0015,
             if plane is None:
                 continue
             pa, pb, pc = plane
+            # same anti-flash bow as pane_from_region (the windscreen is the
+            # worst offender — the biggest flat mirror on the car)
+            rcy, rcx = r[:, 0].mean(), r[:, 1].mean()
+            rhy = max(r[:, 0].max() - rcy, rcy - r[:, 0].min(), 1.0)
+            rhx = max(r[:, 1].max() - rcx, rcx - r[:, 1].min(), 1.0)
+            sag = min(0.12 * min(rhx * np.ptp(p1[sel]) / (res - 1),
+                                 rhy * ext[W] / (res - 1)), 0.8 * inset)
             Vs, Fs, index = [], [], {}
             have = set(map(tuple, r))
             for (py, pxx) in have:
@@ -334,10 +353,12 @@ def fit(src, out_glb, res=256, inset_frac=0.004, min_frac=0.0015,
                     key = (py + dy, pxx + dx)
                     if key not in index:
                         yy, xx = key
+                        r2 = min(((yy - rcy) / rhy) ** 2
+                                 + ((xx - rcx) / rhx) ** 2, 1.0)
                         l2 = pa * xx + pb * yy + pc
                         t1 = p1[sel].min() + xx / (res - 1) * np.ptp(p1[sel])
                         t2 = lo[W] + yy / (res - 1) * ext[W]
-                        pt = t_ax * t1 + d_ax * (l2 - inset)
+                        pt = t_ax * t1 + d_ax * (l2 - inset + sag * (1 - r2))
                         pt[W] = t2
                         index[key] = len(Vs)
                         Vs.append(pt)

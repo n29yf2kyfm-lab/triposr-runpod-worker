@@ -315,6 +315,7 @@ def run_local(shape_glb, parts_glb, dims, out_glb, renders_dir=None,
         if p.returncode != 0:
             raise SystemExit(f"build_car gates failed ({p.returncode}) — the "
                              "car is NOT shippable; read the gate output above")
+    outputs = [out_glb]
     if photos_dir:
         hero = out_glb.replace(".glb", "_hero.glb")
         cmd = [sys.executable,
@@ -323,8 +324,20 @@ def run_local(shape_glb, parts_glb, dims, out_glb, renders_dir=None,
         print("$", " ".join(cmd))
         if subprocess.run(cmd).returncode == 0:
             print(f"hero (photo-textured) variant: {hero}")
+            outputs.append(hero)
         else:
             print("photo bake failed — flat build stands alone")
+    # LAST step: rotate to the catalogue axis convention (length Z, nose -Z)
+    # so the studio rig's absolute azimuths land the same tiles as every
+    # shipped car. Internal tools all assume the authoring frame, which is
+    # why this must stay last.
+    for f in outputs:
+        cmd = [sys.executable,
+               os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                            "orient_catalogue.py"), f, f]
+        p = subprocess.run(cmd)
+        if p.returncode != 0:
+            raise SystemExit(f"orient_catalogue failed on {f}")
     return out_glb
 
 
