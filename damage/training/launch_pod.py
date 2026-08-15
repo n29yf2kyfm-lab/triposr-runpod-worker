@@ -182,7 +182,9 @@ def main():
     ap.add_argument("--limit", type=int, default=0,
                     help="cap materialised samples (smoke runs)")
     ap.add_argument("--hours", type=float, default=14.0,
-                    help="only used to price the run and warn")
+                    help="wall-clock cap passed to the pod as MAX_HOURS; "
+                         "training is killed at this point and whatever "
+                         "checkpoint exists is published")
     ap.add_argument("--name", default=None)
     ap.add_argument("--tag", default=None)
     ap.add_argument("--no-publish", dest="publish", action="store_false",
@@ -228,6 +230,11 @@ def main():
     if a.limit:
         env["LIMIT"] = str(a.limit)
     env["NUM_WORKERS"] = str(a.num_workers)
+    # MAX_HOURS must be PASSED, not just exported in the caller's shell. The
+    # launcher builds the pod environment explicitly, so an env var set on the
+    # command line here never reaches the pod: a run quoted at 20 hours would
+    # have silently used train.sh's 13-hour default.
+    env["MAX_HOURS"] = str(int(a.hours))
 
     print(f"gpu          {a.gpu}   disk {a.disk}GB   cloud {a.cloud}")
     print(f"run          tag={a.tag} epochs={a.epochs} batch={a.batch}"
