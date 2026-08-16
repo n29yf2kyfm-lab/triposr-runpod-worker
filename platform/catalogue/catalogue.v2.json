@@ -297909,7 +297909,80 @@
    "componentPipelineVersion": "publish-batch-vx1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -298021,7 +298094,80 @@
    "componentPipelineVersion": "publish-batch-vx1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -298132,7 +298278,80 @@
    "componentPipelineVersion": "publish-batch-vx1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -298244,7 +298463,80 @@
    "componentPipelineVersion": "publish-batch-vx1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -298355,7 +298647,80 @@
    "componentPipelineVersion": "publish-batch-vx1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -298466,7 +298831,80 @@
    "componentPipelineVersion": "publish-batch-vx1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -298577,7 +299015,80 @@
    "componentPipelineVersion": "publish-batch-vx1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -298688,7 +299199,80 @@
    "componentPipelineVersion": "publish-batch-vx1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -298799,7 +299383,80 @@
    "componentPipelineVersion": "publish-batch-vx1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -298910,7 +299567,80 @@
    "componentPipelineVersion": "publish-batch-vx1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -298922,6 +299652,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3302,
+   "variantsHash": "60f2687793c49b182be4b8471fdeebe7a9de5b02",
+   "method": "render",
+   "at": "2026-08-16"
   }
  },
  {
@@ -299014,7 +299751,80 @@
    "componentPipelineVersion": "publish-batch-vx1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -299026,6 +299836,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.2661,
+   "variantsHash": "663e5006042a3af17b8559a19bc836421074c357",
+   "method": "render",
+   "at": "2026-08-16"
   }
  },
  {
@@ -299118,7 +299935,80 @@
    "componentPipelineVersion": "publish-batch-vx1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -299130,6 +300020,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3719,
+   "variantsHash": "34cbb5bc0268aa6cdfaf524f710fde6047f1b3da",
+   "method": "render",
+   "at": "2026-08-16"
   }
  },
  {
@@ -299226,7 +300123,80 @@
    "componentPipelineVersion": "publish-batch-vx1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -299238,6 +300208,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4227,
+   "variantsHash": "b57360b0769a673b4e286e3b2f0afaaa1506e9a1",
+   "method": "render",
+   "at": "2026-08-16"
   }
  },
  {
@@ -299330,7 +300307,80 @@
    "componentPipelineVersion": "publish-batch-vx1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -299342,6 +300392,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3338,
+   "variantsHash": "41f3622224ba5aedbc6a5f60be8375772364a059",
+   "method": "render",
+   "at": "2026-08-16"
   }
  },
  {
@@ -299434,7 +300491,80 @@
    "componentPipelineVersion": "publish-batch-vx1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -299446,6 +300576,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4073,
+   "variantsHash": "e56f2497982c1970e7e1f48d51bc53aa1f72d481",
+   "method": "render",
+   "at": "2026-08-16"
   }
  },
  {
@@ -299538,7 +300675,80 @@
    "componentPipelineVersion": "publish-batch-vx1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -299550,6 +300760,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4233,
+   "variantsHash": "d2402d172d7f826dd78fcbc11b4db2538f487220",
+   "method": "render",
+   "at": "2026-08-16"
   }
  },
  {
@@ -299642,7 +300859,80 @@
    "componentPipelineVersion": "publish-batch-vx1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -299654,6 +300944,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3083,
+   "variantsHash": "8e1356324b2e37032dee06c09ff16896f33ff75e",
+   "method": "render",
+   "at": "2026-08-16"
   }
  },
  {
@@ -299745,7 +301042,80 @@
    "componentPipelineVersion": "publish-batch-vx1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -299757,6 +301127,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3833,
+   "variantsHash": "920ad8d8de9b9ef277bc4358c725508be41d5f95",
+   "method": "render",
+   "at": "2026-08-16"
   }
  },
  {
@@ -299850,7 +301227,80 @@
    "componentPipelineVersion": "publish-batch-vx1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -299862,6 +301312,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4192,
+   "variantsHash": "01611f21ede4db11d8a6e162004482502cf750e9",
+   "method": "render",
+   "at": "2026-08-16"
   }
  },
  {
@@ -299952,7 +301409,80 @@
    "componentPipelineVersion": "publish-batch-vx1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -299964,6 +301494,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.3927,
+   "variantsHash": "80b9bb88239d6b164e8ab6005dc9dc5f9cdbc3e7",
+   "method": "render",
+   "at": "2026-08-16"
   }
  },
  {
@@ -300070,7 +301607,80 @@
    "componentPipelineVersion": "publish-batch-vx1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -300082,6 +301692,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.4067,
+   "variantsHash": "f3acfecb9cb732ad26ecc24c3abe4006f0b2f89b",
+   "method": "render",
+   "at": "2026-08-16"
   }
  },
  {
@@ -300174,7 +301791,80 @@
    "componentPipelineVersion": "publish-batch-vx1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -300186,6 +301876,13 @@
    "red": [],
    "green": [],
    "yellow": []
+  },
+  "recolourAudit": {
+   "status": "pass",
+   "dist": 0.348,
+   "variantsHash": "4c5e0b6cb2baaf4d490947273cd2837b3913b1e2",
+   "method": "render",
+   "at": "2026-08-16"
   }
  }
 ]
