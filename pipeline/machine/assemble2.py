@@ -52,8 +52,29 @@ print(f"aperture rim: {int((np.load(LAB) == GLASS).sum() - (label == GLASS).sum(
 
 out = trimesh.Scene()
 
-# body keeps the baked texture (grille/badge/lamp graphics live there)
+# body keeps the baked texture (grille/badge/lamp graphics live there).
+# Floating chips inside window apertures (census: 8,644 in the left side
+# window) get painted by the respray and read as white dots on the glass —
+# drop flagged candidates that sit in SMALL components; the aperture
+# surround ring is connected to the main shell and always survives.
+pzc = np.load(PANES)
+cand = set(pzc["body_cand"].tolist()) if "body_cand" in pzc else set()
 idx = np.where(label == BODY)[0]
+if cand:
+    import scipy.sparse as sp2
+    adj2 = m.face_adjacency
+    bm = label == BODY
+    same2 = bm[adj2[:, 0]] & bm[adj2[:, 1]]
+    g2 = sp2.csr_matrix((np.ones(int(same2.sum())),
+                         (adj2[same2, 0], adj2[same2, 1])),
+                        shape=(len(label), len(label)))
+    from collections import Counter as C2
+    _, comp2 = sp2.csgraph.connected_components(g2 + g2.T, directed=False)
+    sizes2 = C2(comp2[bm])
+    chips = np.array([i for i in idx
+                      if i in cand and sizes2[comp2[i]] < 300])
+    idx = np.array([i for i in idx if i not in set(chips.tolist())])
+    print(f"body: dropped {len(chips)} floating aperture chips")
 body = m.submesh([idx], append=True)
 if hasattr(body.visual, "material") and body.visual.material is not None:
     body.visual.material.name = "carpaint"
@@ -87,15 +108,25 @@ for key, (name, mat) in flat_mats.items():
 # greenhouse band, dark matte. The neural interior has holes — bright
 # studio light leaks through them and reads as white dots on the glass;
 # a solid occluder guarantees a uniform dark cabin behind every pane.
-H0, H1 = m.vertices[:, 1].min(), m.vertices[:, 1].max()
-band = m.vertices[(m.vertices[:, 1] > H0 + 0.45 * (H1 - H0)) &
-                  (m.vertices[:, 1] < H0 + 0.97 * (H1 - H0))]
-hull = trimesh.convex.convex_hull(band)
+# hull of the GLASS FACES' centroids: that IS the greenhouse envelope, so
+# the occluder follows the windscreen rake by construction and can never
+# reach the bonnet (v12's greenhouse-band hull poked through it as a grey
+# wedge — the band included bonnet-height verts at the nose). Shrunk inward
+# so the cabin reads recessed, near-black so it stays dark under the key.
+hull = trimesh.convex.convex_hull(cent[np.load(LAB) == GLASS])
 hc = hull.vertices.mean(0)
-hull.vertices = hc + 0.90 * (hull.vertices - hc)
+# NEAR-FLUSH, uniform 3% shrink. The white-dot saga (v11-v15, three wrong
+# theories, census and all): the dots are a VIEW-DEPENDENT through-path —
+# straight-on side views render clean, oblique views skim over the
+# occluder's shoulder wherever an anisotropic shrink pulls it off the
+# glass, and the bright backdrop shines through gaps in the neural roof
+# lining. A near-BLACK matte occluder sitting almost flush behind every
+# pane closes the path from all angles and reads as correct dark glass
+# (v11's mistake was 22-grey — a LIT slab, not the flush placement).
+hull.vertices = hc + (hull.vertices - hc) * 0.97
 hull.visual = trimesh.visual.TextureVisuals(material=PBRMaterial(
-    name="cabin_occluder", baseColorFactor=[22, 22, 25, 255],
-    metallicFactor=0.0, roughnessFactor=0.95))
+    name="cabin_occluder", baseColorFactor=[9, 9, 11, 255],
+    metallicFactor=0.0, roughnessFactor=1.0))
 out.add_geometry(hull, node_name="cabin_occluder", geom_name="cabin_occluder")
 print(f"cabin occluder: {len(hull.faces)} tris")
 
