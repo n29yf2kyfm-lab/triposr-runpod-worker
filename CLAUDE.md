@@ -1801,6 +1801,47 @@ evidence sheet + blue control + labels in `staging/gseg/`).
   * Depth-convention self-calibration (z vs ray length per view) and the glTF→Blender
     axis map `(x,y,z)→(x,−z,y)` are both in seg_project.py — do not re-derive.
 
+## THE MACHINE (pipeline/machine/) — owner-ordered build, v3 state (2026-08-16)
+
+Owner rejected "park the generation route" in plain terms and ordered the machine
+finished. It now exists as `pipeline/machine/` (canon.py, seg_boundary.py,
+surface_clean.py, glass_smooth.py, machine.py orchestrator + README) — one command
+from a canonicalised GLB to a gated car. Three iterations on the Pixal Golf in one
+session, every stage validated by render:
+
+  * **seg_boundary.py — per-window 2D stencils** (the pattern that beat boundary
+    dither in the 2026-08-13 glazing session): fit a plane per glass region,
+    rasterise, close/fill/gaussian, restamp. Glass becomes EXHAUSTIVE — any glass
+    face outside every stencil reverts to body, which deleted the tailgate chrome
+    smear and 73,781 stray faces in one rule. Lamp hygiene lives here too: DINO
+    "tail light" boxes over-shoot into a full-width band (13,364 faces on the
+    Golf), and dark-gloss Lamp_Lens renders that band as mirror chrome — evict
+    lamp label at zc<0.45 to body.
+  * **surface_clean.py — bilateral NORMAL filtering, NOT Taubin.** Taubin was
+    measured to kill creases with the noise (145→36); bilateral weights neighbour
+    normals by normal-difference so creases survive while panel noise averages
+    out. Crease metric 635→380 on the Golf, and the RENDER (the arbiter)
+    confirmed panels calmed with grille/shut lines intact. Fragment-soup safety:
+    weld duplicated border verts first (338,427 on the Golf), filter on welded
+    topology, scatter displacements back — seams stay sealed by construction.
+  * **glass_smooth.py — quadric flatten of glass regions** (glass is smooth by
+    nature; noise under forced-transmission glass renders as mirror shards).
+    Windscreen noise rms 19.7→4.9 per-mille. KNOWN LIMIT: regions weld into
+    mega-regions (51k faces spanning rear screen + neighbours, fit rms 117‰) and
+    one quadric across different windows leaves residual crinkle — split by
+    normal clustering before fitting is the identified next fix.
+  * v3 verdicts: ALL material gates pass (glass_probe clear/proven, blue control
+    holds, cov 0.351 carpaint). Front/side/3-4 production views clean; the REAR
+    SCREEN is the remaining sore spot (mega-region residual + noisy grey interior
+    visible through worker-forced transmission). Agent eye still SCRAP on
+    surfacing — panels below premium. Evidence: staging/gseg/ (GSEG3_SHEET.jpg,
+    p3_control_blue.png, MACHINE_PROGRESS.jpg v1→v3 strip, golf_seg3.glb).
+  * Local-vs-production trap, measured twice this session: the LOCAL harness
+    renders our authored glass (BLEND 0.35, dark) and dark-gloss lamps, so rear
+    defects hide; the production worker FORCES transmission=1.0 onto glass-named
+    materials, exposing every residual facet and the interior behind it. A clean
+    local rear is NOT evidence — only the production tile is.
+
 ## Alam 3D / TRELLIS.2: measured ceiling on automotive surfacing (2026-08-09)
 
 Tested end to end on a 2011 Yaris XP90 from two Toyota press photos. The machine WORKS —
