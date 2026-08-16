@@ -1756,6 +1756,51 @@ that image-to-3D cannot currently produce a premium car, and the money belongs i
 sourcing or licensed heroes, not here.** Do not reopen the material work — it is
 finished and it was never the thing that made the car look bad.
 
+## 2D-seg material pipeline on Pixal geometry: gates pass, surfacing verdict stands (2026-08-16)
+
+The one untested lever from the hybrid post-mortem — 2D segmentation of calibrated
+multi-view renders projected onto the mesh — is now BUILT and MEASURED on the Pixal3D
+Golf (`pipeline/trellis/seg_views.py` → `seg_masks.py` → `seg_project.py` →
+`seg_refine.py` → `seg_assemble.py`; staged `car-meshes/staging/gseg/golf_seg.glb`,
+evidence sheet + blue control + labels in `staging/gseg/`).
+
+**Result, honestly split:**
+  * EVERY material gate passes on machine geometry, on merit, for the first time:
+    glass_probe clear PROVEN (factor BLEND alpha 0.353, no name tricks needed even
+    though the worker's override would also fire on "glass"); production blue control
+    at az215 shows body fully blue, glazing took ZERO paint, tyres stayed black; worker
+    telemetry `coverage 0.327, materials ['carpaint'], paint_named True` on all 5
+    frames; textured body keeps Pixal's baked grille/badge/lamp detail.
+  * SURFACING still fails the premium bar — agent eye (claude CLI, EYE_RUBRIC) said
+    SCRAP with a `material-split` flag, my eye concurs: ragged crinkled glass borders
+    (worst at the rear screen), chrome smear across part of the tailgate lamp band,
+    faceted panels, a small roof spike. Better than the Hunyuan hybrid, still below
+    catalogue. Owner eyeball is the final verdict.
+  * So the standing conclusion is UNCHANGED: materials are a solved layer (now solved
+    on TWO geometry sources); the open problem is generator surfacing, full stop.
+
+**Traps this build paid for, do not re-pay:**
+  * **DINO/SAM box filtering must be relative to the CAR silhouette, not the image.**
+    The car is only ~18% of a calibrated frame, so an image-relative "reject huge
+    boxes" filter passes whole-car boxes and every class mask becomes the car
+    (measured: glass px ≈ wheel px ≈ lamp px ≈ car area). Filter against the on-car
+    pixel mask from the Blender depth EXR (free, exact), clip each SAM mask to its
+    box, and pick the best-scoring sub-mask whose area plausibly fits the box.
+  * **Pixal meshes are fragment soup (307 shells), so topological connected-components
+    is useless for wheel splitting** — biggest cluster was 1,004 of 64k wheel faces.
+    Cluster SPATIALLY by the four known wheel corners (length/side quadrants), then
+    split tyre/rim by radius percentile within each corner.
+  * **The glass band gate needs an exterior denominator on generated meshes.** 43% of
+    Pixal faces are interior/unseen, so glass-as-%-of-all-faces (16.8) blows the old
+    2.5–9.5 band that was calibrated on sourced shells; as % of exterior-seen faces it
+    is the number to band. The render + blue control arbitrated: the glass area is
+    correct on the car.
+  * **claude CLI headless denies all tools by default** — an eye-audit subprocess needs
+    `--allowedTools Read --add-dir <sheets_dir>` or it answers "I don't have
+    permission" and the stage silently degrades.
+  * Depth-convention self-calibration (z vs ray length per view) and the glTF→Blender
+    axis map `(x,y,z)→(x,−z,y)` are both in seg_project.py — do not re-derive.
+
 ## Alam 3D / TRELLIS.2: measured ceiling on automotive surfacing (2026-08-09)
 
 Tested end to end on a 2011 Yaris XP90 from two Toyota press photos. The machine WORKS —
