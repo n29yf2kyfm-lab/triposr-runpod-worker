@@ -1923,6 +1923,43 @@ now land on the test bed. Chain for reruns when only MASKS change:
 lamp_boost -> seg_project -> seg_refine -> seg_boundary -> seg_assemble(reuse
 canon_flat: glass smoothing depends only on glass labels) -> blender_finish.
 
+**v10-v19: COMPONENT RECONSTRUCTION (owner-relayed v10 review: "stop cosmetic
+passes, rebuild components"), and the white-dot saga.** New stages, all in
+pipeline/machine/: `glass_panes.py` (fresh grid mesh per window on the fitted
+quadric, clipped to the stencil outline, dilated 4 cells to tuck behind the
+aperture), `assemble2.py` (panes replace blob glass; blob wheels ->
+Arch_Cavity; four DONOR catalogue wheels placed from quadrant labels;
+constructed near-black cabin occluder from the glass-centroid hull at 3%
+shrink; aperture-chip and inner-skin purges), `toggle_probe.py` (local
+worker-style render with components toggled off — THE debugging stage).
+
+THE WHITE-DOT SAGA, written down so its lesson survives: white dots on the
+left-flank glass survived SIX wrong theories across v10-v16 — inner-skin
+fragments (purged 4,285), occluder too short/too narrow/too light (three
+geometry variants), floating body chips (census found 8,644, dropped
+11,641), a ray-probe that "confirmed" a through-path fix at 98%. Every fix
+removed real junk; none was the renderer of the dots, and each production
+round cost real money. COMPONENT BISECTION answered in ONE local run:
+no-glass render = clean, so the dots were the PANES — overlapping boundary
+stencils give one physical window several region ids, so the left flank
+carried FOUR stacked quadric sheets, and grazing transmission through
+intersecting sheets blooms white. Merging regions (aligned normals +
+overlapping bboxes) before fitting: 10 regions -> 4 windows, dots GONE in
+production. RULES: (1) when a defect survives two fixes, STOP THEORISING and
+bisect components — the machine has toggle_probe for exactly this; (2) a
+probe built on your own assumed mechanism proves nothing (the ray probe
+passed while the render failed); (3) chip/purge heuristics must be
+conservative near aperture edges — the first dropper (<3000 faces) ate real
+window surround and holed the shell (<300 + 9% margin is the calibration).
+
+v19 state: every window renders as ONE clean dark glass sheet in production,
+blue control best-ever (body blue, glass dark, tyres black, dark cabin).
+Remaining on the test bed: A-pillar corner sliver (aperture exceeds all
+stamped glass; dilation 10 pokes the pane above the header — don't), tailgate
+lamp band chrome, roof spike, quarter-panel wobble, trim-level identity.
+Evidence: staging/gseg/ GSEG19_SHEET.jpg, p19_control_blue.png,
+bisect_grid.jpg, golf_v19.glb.
+
 ## Alam 3D / TRELLIS.2: measured ceiling on automotive surfacing (2026-08-09)
 
 Tested end to end on a 2011 Yaris XP90 from two Toyota press photos. The machine WORKS —
