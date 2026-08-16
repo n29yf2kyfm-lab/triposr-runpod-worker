@@ -1,0 +1,5731 @@
+[
+ {
+  "uid": "05ce22fe3b104504b92db5c0451cc57a",
+  "verdict": "unknown",
+  "error": "HTTPError: HTTP Error 400: Bad Request",
+  "name": "Vauxhall Tube Vent"
+ },
+ {
+  "uid": "77e3948b52b34493a8faef84c0c93668",
+  "verdict": "unknown",
+  "error": "HTTPError: HTTP Error 400: Bad Request",
+  "name": "Vauxhall Park Model Village"
+ },
+ {
+  "uid": "800b7a08d061436aa7720fec3688b42b",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Vauxhall Vectra BFL GSi 1999-2002"
+ },
+ {
+  "uid": "3f6e7cdda4034190bf96a1bda62d0b74",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 48,
+  "n_transparent": 9,
+  "glazing_named": [
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "VauxhallInsigniaVXR_bodyglass_clear",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "VauxhallInsigniaVXR_gps_screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "VauxhallInsigniaVXR_bodyglass_tint_int",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "VauxhallInsigniaVXR_bodyglass_clear_int",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "VauxhallInsigniaVXR_bodyglass_tint",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "VauxhallInsigniaVXR_bodyglass_clear",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "VauxhallInsigniaVXR_tailglass",
+    "alpha": 0.8,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "VauxhallInsigniaVXR_headglass_clear",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "VauxhallInsigniaVXR_bodyglass_tint_int",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "VauxhallInsigniaVXR_tailglass_clear",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "VauxhallInsigniaVXR_bodyglass_clear_int",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel/Vauxhall Insignia A 2008-2017"
+ },
+ {
+  "uid": "59b9e22df74a4d639712dce56abb517f",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 10,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Vauxhall Astra J 2012-2015"
+ },
+ {
+  "uid": "bf1473fbdc1040738861c7a3c1e23d59",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 10,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Vauxhall Astra J 2015-2020"
+ },
+ {
+  "uid": "6ffbd9a114144aa2aed929ae83ebbe87",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 43,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "htvectrac_glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "clearglass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 5,
+  "name": "Opel/Vauxhall Vectra C 2002-2008"
+ },
+ {
+  "uid": "4eb704a9864f430ba0284d1f3bd0bc59",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 41,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "VECTRA_WINDOWS_IN_LHD",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "VECTRA_WINDOWS_IN_RHD",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "VECTRA_WINDOWS_OUT",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "TCC_GLASS_LOGO",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "TCC_GLASS_LOGO_IN",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "VECTRA_BLACKGLASS",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Vauxhall Vectra B BTCC 1998"
+ },
+ {
+  "uid": "f8016dcd5e45481b92c2fa0c8342a650",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "n_materials": 78,
+  "n_transparent": 6,
+  "glazing_named": [],
+  "transparent": [
+   {
+    "name": "Lente_farol",
+    "alpha": 0.341,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "prozorci__spec_t1",
+    "alpha": 0.84,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Matte__BF000000_1",
+    "alpha": 0.749,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "stiker__spec_tra1",
+    "alpha": 0.84,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "tst_racing__spec1",
+    "alpha": 0.749,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "1__spec_trans_1",
+    "alpha": 0.84,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 38,
+  "name": "Opel/Vauxhall Vectra B GSi 2001"
+ },
+ {
+  "uid": "c5df8ed6b465425f9d2169c488fff47c",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 1,
+  "name": "3D Scanned Vauxhall Grandland X (2017) [Free]"
+ },
+ {
+  "uid": "6622bfecb3594cbc8ec2add5ee299493",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 67,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "Glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Glass1",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "blackGlass_FFFFFF99",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 1,
+  "name": "Vauxhall Monaro 2001-2005"
+ },
+ {
+  "uid": "8e27ed75fb9f4613925b7f402f586ba4",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 75,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "WINDOW_PAINT",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "black_glass03",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "VIDRO_IN",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "SETA_GLASS",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Vauxhall Cavalier MK3 1993-1995"
+ },
+ {
+  "uid": "d6824e905b3945e7a14cf8e1f605f99c",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 38,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Vauxhall Vectra C Sedan 2002-2008"
+ },
+ {
+  "uid": "9b0b424b42e9493d8dd9fad8cd52dee5",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 1,
+  "name": "3D Scanned Vauxhall Corsa E 3-door (2014) [Free]"
+ },
+ {
+  "uid": "7851ae3e70934577b1bdb445a260eb9f",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 19,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "ylinsignia_windows",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Vauxhall Insignia VXR 2008-2017"
+ },
+ {
+  "uid": "ac1051715f164cdaa05e4bbea7640e0c",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 1,
+  "name": "3D Scanned Vauxhall Zafira C (2011) [Free]"
+ },
+ {
+  "uid": "ef117f70c0cc4338905945df9f354acb",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "agilia_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel /Vauxhall Agila B 2008-2014"
+ },
+ {
+  "uid": "3bf75d7bc8a14207be8e4680f603a4dc",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 1,
+  "name": "3D Scanned Vauxhall Astra K Tourer (2015) [Free]"
+ },
+ {
+  "uid": "a2911781c9a94ef7926d1526bef80b45",
+  "verdict": "unknown",
+  "error": "HTTPError: HTTP Error 400: Bad Request",
+  "name": "Opel Movano Free"
+ },
+ {
+  "uid": "a5df2bfa33194fffb7eb59c73bdbecd8",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 18,
+  "n_transparent": 5,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "orangeglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "redglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Frontera A 1992"
+ },
+ {
+  "uid": "e7f718a16a76402180beac62390b47e7",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 18,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "Opel_Frontera_Mk1_A_5door_1992_windowglass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Opel_Frontera_Mk1_A_5door_1992_clearglass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Opel_Frontera_Mk1_A_5door_1992_darkglass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Frontera A -5door 1991-1998"
+ },
+ {
+  "uid": "62ef2d7b65db47ba9f5f1440e73e3f32",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 18,
+  "n_transparent": 5,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "orangeglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "redglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Frontera A 1991-1998"
+ },
+ {
+  "uid": "bd693d71240b4e6faa7a1e8d0ea62f45",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "clearglass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Meriva B 2010-2017"
+ },
+ {
+  "uid": "db8b02b4f6d1422ab33421c2e859785b",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 16,
+  "glazing_named": [
+   {
+    "name": "windowglass.002",
+    "alpha": 0.7,
+    "mode": "BLEND",
+    "transmission": 0.3,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass.003",
+    "alpha": 0.8,
+    "mode": "BLEND",
+    "transmission": 0.2,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "wire_255255255",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "via": "factor"
+   },
+   {
+    "name": "wire_225180000",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "via": "factor"
+   },
+   {
+    "name": "wire_080080080",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "via": "factor"
+   },
+   {
+    "name": "wire_035035172",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "via": "factor"
+   },
+   {
+    "name": "carpaint.003",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "via": "factor"
+   },
+   {
+    "name": "windowglass.002",
+    "alpha": 0.7,
+    "mode": "BLEND",
+    "transmission": 0.3,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": true,
+  "body_transparent": [
+   {
+    "name": "carpaint.003",
+    "alpha": 0.25,
+    "mode": "BLEND"
+   },
+   {
+    "name": "black.003",
+    "alpha": 0.25,
+    "mode": "BLEND"
+   },
+   {
+    "name": "tire.003",
+    "alpha": 0.25,
+    "mode": "BLEND"
+   }
+  ],
+  "n_textures": 0,
+  "name": "Opel Meriva"
+ },
+ {
+  "uid": "75282e3214014671808f91e6e32da700",
+  "verdict": "unknown",
+  "error": "HTTPError: HTTP Error 400: Bad Request",
+  "name": "1909 Opel Coupe"
+ },
+ {
+  "uid": "139ac39c9afe47e19347ea9a7dca3ef0",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "orangeglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "redglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Tigra (Mk2) Twin Top"
+ },
+ {
+  "uid": "66032aa237e84e6a8d055487efc2c849",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Corsa Spare Tire Area - Creality Sermoon P1"
+ },
+ {
+  "uid": "a6f5e130d65d4e438bdeba0f7c0a3e1f",
+  "verdict": "unknown",
+  "error": "HTTPError: HTTP Error 400: Bad Request",
+  "name": "Opel Vivaro"
+ },
+ {
+  "uid": "7629579dca92446888ede3a77de83a64",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 18,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "o_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "r_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "matte_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "d_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel-vivaro-cargo-l-2020"
+ },
+ {
+  "uid": "bb515e39d8bb43338494afb8d4da944a",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 18,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "r_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "matte_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "o_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "d_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Vivaro 2020"
+ },
+ {
+  "uid": "d599df54a13841f2a45cda53f19c8197",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "orangeglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "redglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Senator B 1987"
+ },
+ {
+  "uid": "1a9f9be6d17b42ad8c1c0e35d5021312",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 18,
+  "n_transparent": 5,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "darkglass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "orangeglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "redglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel_ Ampera_2011"
+ },
+ {
+  "uid": "86fa9c4ad2db427cbd797738db3a9fa8",
+  "verdict": "unknown",
+  "error": "HTTPError: HTTP Error 400: Bad Request",
+  "name": "Opel Astra L Since 2021"
+ },
+ {
+  "uid": "9ba0595e1533473c8e977926fbb3daff",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "orangeglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "redglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Ascona A Voyage 1970"
+ },
+ {
+  "uid": "a35ea18c5dd14753bc67429b2ed8c09c",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "orangeglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "redglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Campo Sports Cab 1997"
+ },
+ {
+  "uid": "b3313f3426b24a4dbe135a57f6ec2c7d",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 15,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "orangeglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "redglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Kapitan (Mk4) 1956"
+ },
+ {
+  "uid": "e37e5b75a4474980a881cbdb89b08e2b",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Omega V8 Tuned 2002"
+ },
+ {
+  "uid": "894a320019714ff0a1b1182afe6945f0",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 1,
+  "name": "Opel Frontera"
+ },
+ {
+  "uid": "9517720f580e454cbf838beef310536b",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "orangeglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "redglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Corsa 5Door 2011 Remake"
+ },
+ {
+  "uid": "87f9b94946b0445597b630df4ffd8e81",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "orangeglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "redglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Omega A sedan 1987"
+ },
+ {
+  "uid": "6b308cc9be4b4c388e479155e16fae23",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "clearglass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Omega A 1986-1994"
+ },
+ {
+  "uid": "edbde7324cac4ca0b9b87848e688b7ba",
+  "verdict": "unknown",
+  "error": "HTTPError: HTTP Error 400: Bad Request",
+  "name": "Opel Astra L"
+ },
+ {
+  "uid": "76eb5642aff94745870f2d16621b58fa",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 52,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass_black",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Car Design"
+ },
+ {
+  "uid": "98c1da6e2e414f988cf5a9aa2b3fb21e",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 22,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass_black",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Fs Opel Astra CAR Design"
+ },
+ {
+  "uid": "61baa03b289242589e160e33b51343cd",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 15,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "orangeglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "redglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Kadett C 1975"
+ },
+ {
+  "uid": "e96e5c50db2347f7a8b7d1d43cd26251",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 3,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "redglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Blitz Flatbed Truck"
+ },
+ {
+  "uid": "02a1c2b4ecdc4bbf9ca98f9ac0c212ae",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "orangeglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "redglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Tigra (Mk1)"
+ },
+ {
+  "uid": "a57777caf9dc41cba39bef61a94dd18f",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "clearglass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Tigra A 1994-2000"
+ },
+ {
+  "uid": "d281b422e1b142f4a9c31387c9d2f7ef",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 15,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "windowglass.001",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "clearglass.001",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Calibra 16v 1989-1997"
+ },
+ {
+  "uid": "bbdcf8f1a9424f19bb8a5fbd8b750792",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "orangeglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "redglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Rekord A 1963"
+ },
+ {
+  "uid": "ac3456e3120d47d282b6ff8c02f959b0",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 1,
+  "name": "Opel Air Vent test"
+ },
+ {
+  "uid": "154f19805fbb4957b6aae8e3b23f9471",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 18,
+  "n_transparent": 8,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "LicPlate_black",
+    "alpha": 0.0,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "LicPlate_blue",
+    "alpha": 0.0,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "LicPlate_white",
+    "alpha": 0.0,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "LicPlate_yellow",
+    "alpha": 0.0,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "orangeglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": true,
+  "body_transparent": [
+   {
+    "name": "LicPlate_black",
+    "alpha": 0.0,
+    "mode": "BLEND"
+   }
+  ],
+  "n_textures": 0,
+  "name": "Opel Calibra 1990"
+ },
+ {
+  "uid": "d6f46ab57e124e56afd65fe80d120453",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 18,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "orangeglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "redglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Calibra 1990"
+ },
+ {
+  "uid": "c31f5eca5aa84faea700a58880afafbb",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "orangeglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "redglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Rekord D 1972"
+ },
+ {
+  "uid": "6b744222151d42f4a8e327d93aa3cce9",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 18,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "orangeglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "redglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Olympia Rekord 1956"
+ },
+ {
+  "uid": "f9d48b038ee440c2abfcff2501b25d6e",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "orangeglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "redglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Olympia 1938"
+ },
+ {
+  "uid": "593aa1f2f5904256923e5621ef1dfd7f",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 100,
+  "n_transparent": 2,
+  "glazing_named": [
+   {
+    "name": "vivace_glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "astrah_essentia_screen",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Clear-Glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "lansdale_screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "vivace_gps_screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [
+   {
+    "name": "astrah_sybm",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "badge",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "texture-alpha"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 28,
+  "name": "Opel Astra H 2004/2007-2012"
+ },
+ {
+  "uid": "40e57abf5e164ef6a5e5f1734417a219",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "orangeglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "redglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Omega B 1999"
+ },
+ {
+  "uid": "722d5601bd9741a4ac0d79acffe65e3a",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 16,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.7,
+    "mode": "BLEND",
+    "transmission": 0.3,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.8,
+    "mode": "BLEND",
+    "transmission": 0.2,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "Material__2",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "via": "factor"
+   },
+   {
+    "name": "Material__1",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "via": "factor"
+   },
+   {
+    "name": "Material__3",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "via": "factor"
+   },
+   {
+    "name": "Material__4",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "via": "factor"
+   },
+   {
+    "name": "black",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "via": "factor"
+   },
+   {
+    "name": "chrome",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": true,
+  "body_transparent": [
+   {
+    "name": "black",
+    "alpha": 0.25,
+    "mode": "BLEND"
+   },
+   {
+    "name": "carpaint",
+    "alpha": 0.25,
+    "mode": "BLEND"
+   },
+   {
+    "name": "tire",
+    "alpha": 0.25,
+    "mode": "BLEND"
+   }
+  ],
+  "n_textures": 0,
+  "name": "Opel Omega BFL 1999-2003"
+ },
+ {
+  "uid": "10b2cdd0717442a898b595f1fd0be7ee",
+  "verdict": "ambiguous",
+  "certainty": "inferred",
+  "n_materials": 60,
+  "n_transparent": 10,
+  "glazing_named": [],
+  "transparent": [
+   {
+    "name": "material_24",
+    "alpha": 1.0,
+    "mode": "MASK",
+    "transmission": 0,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "material_25",
+    "alpha": 1.0,
+    "mode": "MASK",
+    "transmission": 0,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "material_26",
+    "alpha": 1.0,
+    "mode": "MASK",
+    "transmission": 0,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "material_27",
+    "alpha": 1.0,
+    "mode": "MASK",
+    "transmission": 0,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "material_31",
+    "alpha": 1.0,
+    "mode": "MASK",
+    "transmission": 0,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "material_33",
+    "alpha": 1.0,
+    "mode": "MASK",
+    "transmission": 0,
+    "via": "texture-alpha"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 27,
+  "name": "Opel Omega B 1999 (IRL-Spec)"
+ },
+ {
+  "uid": "77d6c5963a364c7d9d481f0e6209287a",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 71,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "vivace_glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "vivace_gps_screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "lansdale_screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Astra H 5-Door 2004-2014"
+ },
+ {
+  "uid": "6ecbc6d632b44cd4af639aae698006a3",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 12,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 14,
+  "name": "Opel Astra H 2004-2014"
+ },
+ {
+  "uid": "3f1bbea9691a497ca55f2b4a8cb38b83",
+  "verdict": "unknown",
+  "error": "HTTPError: HTTP Error 400: Bad Request",
+  "name": "Opel Astra H 2004-2014"
+ },
+ {
+  "uid": "707a2165d5d04310afeb4c88399a8b41",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 3,
+  "glazing_named": [
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "clearglass",
+    "alpha": 0.2,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "redglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "windowglass",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Rekord P2 1960"
+ },
+ {
+  "uid": "40a8b00dc3de4d34ba964f8dcfd2dfd1",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel alloy wheel"
+ },
+ {
+  "uid": "8c8162c11a364f95bf3adb0ee96fe5f2",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 12,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 3,
+  "name": "Opel Antara 2006-2017"
+ },
+ {
+  "uid": "2782ca5891b04fd6ad79d979c3737bf9",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Kadett C Blinker Housing"
+ },
+ {
+  "uid": "fd1ed795ab5d4394b78746a1765f96e1",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 41,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "astrakb16_glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "d_glass_0",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "astrakb16_gps_screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 7,
+  "name": "Opel Astra K 2015-2022"
+ },
+ {
+  "uid": "7a80120b242f42279666d9d74213cfce",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 1,
+  "name": "Opel Astra 1.4T 2013 Dashboard (interior)"
+ },
+ {
+  "uid": "4368728814a445c2816efc060b8dba3f",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 12,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Astra G OPC 2002-2004"
+ },
+ {
+  "uid": "bd253615b1f841e9876724d1f953ab4b",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 73,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 75,
+  "name": "Opel Astra G UK OPC/GSi 1999-2013"
+ },
+ {
+  "uid": "b0758197f9064f0ca6d73a226007c781",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 49,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "etk800_glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Insignia A 2008-2017"
+ },
+ {
+  "uid": "1529dcd6e563477781a65a84a2b0f22c",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Astra H GTC 2004-2014"
+ },
+ {
+  "uid": "60aa7b644f2845019eccfb8570f26b20",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel+senator_stls"
+ },
+ {
+  "uid": "7227f314059449b594dce2ea30bb3d32",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Astra"
+ },
+ {
+  "uid": "38dd35042f7f4d9d9fd8519493a59fcd",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Zafira 2001"
+ },
+ {
+  "uid": "90ffb23daea049168975e68b09f9b92d",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 10,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 1,
+  "name": "Opel Astra G 1998-2004"
+ },
+ {
+  "uid": "9e64bec9a74541908ce31c49aed28849",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 28,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "front_glass.0",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Glass_-_Glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Astra G 3-Door 2002"
+ },
+ {
+  "uid": "0c7a50857f8b4302b290a0654f8b2bc7",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 10,
+  "n_transparent": 3,
+  "glazing_named": [
+   {
+    "name": "glass",
+    "alpha": 0.1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "glass.001",
+    "alpha": 0.95,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "KAPI_3.3",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "glass",
+    "alpha": 0.1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "glass.001",
+    "alpha": 0.95,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 2,
+  "name": "Opel Astra J Sedan"
+ },
+ {
+  "uid": "4935752f09fd4f6b915cb12f0d3340aa",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 51,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "windshield_front",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "windshield_rear",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "CAR_GLASS_STRONG",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 11,
+  "name": "Opel Astra Bertone G 1998-2013"
+ },
+ {
+  "uid": "f697ea3ecc0343a7b18607aaf397ebe0",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 7,
+  "n_transparent": 2,
+  "glazing_named": [
+   {
+    "name": "Glass_ridges_white_2",
+    "alpha": 0.427,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Glass_Basic_Grey",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "Glass_ridges_white_2",
+    "alpha": 0.427,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Glass_Basic_Grey",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 1,
+  "name": "Opel Blitz 1939"
+ },
+ {
+  "uid": "f559575fbad3426ea4f717e2c42205c7",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 49,
+  "n_transparent": 7,
+  "glazing_named": [
+   {
+    "name": "Window_Covering_02",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Translucent_Glass_Blue",
+    "alpha": 0.169,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Gray",
+    "alpha": 0.522,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Green_Dark",
+    "alpha": 0.502,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "Translucent_Glass_Blue",
+    "alpha": 0.169,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "edge_color2062030255",
+    "alpha": 0.0,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "edge_color198198198255",
+    "alpha": 0.0,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "edge_color142142142255",
+    "alpha": 0.0,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Gray",
+    "alpha": 0.522,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Green_Dark",
+    "alpha": 0.502,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 6,
+  "name": "opel interior ajustes"
+ },
+ {
+  "uid": "66c795a562784fdda5b6da5777bd87c5",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 1,
+  "glazing_named": [
+   {
+    "name": "glass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "glass",
+    "alpha": 0.5,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 4,
+  "name": "Opel GT 2007"
+ },
+ {
+  "uid": "cd72649048d84df39267083bb83dbda4",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 18,
+  "n_transparent": 2,
+  "glazing_named": [
+   {
+    "name": "glass",
+    "alpha": 0.516,
+    "mode": "BLEND",
+    "transmission": 0.484,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "glass",
+    "alpha": 0.516,
+    "mode": "BLEND",
+    "transmission": 0.484,
+    "via": "factor"
+   },
+   {
+    "name": "BRAKEDISC_ROTOR1",
+    "alpha": 1.0,
+    "mode": "MASK",
+    "transmission": 0,
+    "via": "texture-alpha"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 6,
+  "name": "2008 Opel GT 2.0 Turbo"
+ },
+ {
+  "uid": "138d8ded78784eb8a5ff3100da300211",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 12,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "euvan_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "euvan_glass_int",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "euvan_gps_screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Combo E 2018"
+ },
+ {
+  "uid": "d73fa054fab44bb0bb3883113e8a09c0",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 3,
+  "glazing_named": [
+   {
+    "name": "r_glass",
+    "alpha": 0.44,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "glass",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "d_glass",
+    "alpha": 0.6,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "r_glass",
+    "alpha": 0.44,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "glass",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "d_glass",
+    "alpha": 0.6,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 4,
+  "name": "Opel Zafira B 2005-2014"
+ },
+ {
+  "uid": "614cb293956248a89d32ad239e5e7015",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 1,
+  "name": "Opel Corsa E X15 Front Center Console"
+ },
+ {
+  "uid": "4ea34779724241358f1f7e0a1fdd212b",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 812,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "vehicle_generic_glasswindows2",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Cascada 2013-2019"
+ },
+ {
+  "uid": "2d77d54c70cb436ba1371828c214a7cd",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Astra GTC 2012"
+ },
+ {
+  "uid": "59dbbf48a79f491a9ecb4881ab777d2c",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 16,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "OPEL Astra GTC 2012.FBX"
+ },
+ {
+  "uid": "540d6efc64174d6fb66c109e9aaf363c",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "n_materials": 32,
+  "n_transparent": 5,
+  "glazing_named": [],
+  "transparent": [
+   {
+    "name": "Material",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Material.017",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Material.010",
+    "alpha": 0.985,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Material.012",
+    "alpha": 0.985,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Material.011",
+    "alpha": 0.985,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 2,
+  "name": "Opel Speedster"
+ },
+ {
+  "uid": "24ee8f52bcbc409484754f4b2712cd56",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 15,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Frontera B 1998"
+ },
+ {
+  "uid": "cdee735d66ad4725a563a5b5ac033275",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel monza"
+ },
+ {
+  "uid": "ef2030998dc743028e6d45973164349a",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "opel astra h pandizot clip 3d print"
+ },
+ {
+  "uid": "3e49d0bab0954061897781d83955987e",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "n_materials": 100,
+  "n_transparent": 4,
+  "glazing_named": [],
+  "transparent": [
+   {
+    "name": "prozorci__spec_t1",
+    "alpha": 0.84,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "prozorci__spec_t1_434",
+    "alpha": 0.84,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "stiker__spec_tra1",
+    "alpha": 0.84,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "1__spec_trans_1",
+    "alpha": 0.84,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 99,
+  "name": "Opel Vectra B GSI 2001"
+ },
+ {
+  "uid": "ffa5bfe27f644ddfbe393b315d076cfa",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Steering Wheel Opel"
+ },
+ {
+  "uid": "bb236980955643ee90a4f8eb37b9115a",
+  "verdict": "ambiguous",
+  "certainty": "proven",
+  "n_materials": 79,
+  "n_transparent": 6,
+  "glazing_named": [
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "astraf_glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "astraf_TintGlass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "astraf_BlueGlass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass.005",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Peugeot_406_glass.003",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [
+   {
+    "name": "lowpressure",
+    "alpha": 0.0,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "roth_interior2",
+    "alpha": 0.0,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "roth_interior3",
+    "alpha": 0.0,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "lights_astra_spec",
+    "alpha": 0.612,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "lights__spec_trans_.005",
+    "alpha": 0.612,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "astra_gsi_transparent_taillight__spec_trans_.004",
+    "alpha": 0.918,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Astra F 3-Door 1991-2002"
+ },
+ {
+  "uid": "769509481dbe4beda3110ad8d16f6502",
+  "verdict": "faded",
+  "certainty": "proven",
+  "n_materials": 41,
+  "n_transparent": 12,
+  "glazing_named": [
+   {
+    "name": "Glassprio10020011Mtl",
+    "alpha": 0.999,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Glass4prio21Mtl",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "Glassprio11Mtl",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "Glassprio10010011Mtl",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "texture-alpha"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "Beziercurve0170011Mtl",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "Lcd10010011Mtl",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "Glassprio10020011Mtl",
+    "alpha": 0.999,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Lampytylneszklo1Mtl",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "Glass4prio21Mtl",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "Glassprio11Mtl",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "texture-alpha"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 25,
+  "name": "1996 Opel Calibra V6 4x4-ITC DTM"
+ },
+ {
+  "uid": "1ec8323593de4601b333e6368058168e",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 68,
+  "n_transparent": 3,
+  "glazing_named": [
+   {
+    "name": "Gray_Glass_1",
+    "alpha": 0.502,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "Gray_Glass_1",
+    "alpha": 0.502,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Red_Glass_2",
+    "alpha": 0.502,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "material_9",
+    "alpha": 0.878,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Vectra C 2002"
+ },
+ {
+  "uid": "b9486f9d93eb4cfc988d1155e99f48dc",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 40,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "VECTRA_WINDOWS_IN_LHD",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "VECTRA_WINDOWS_OUT",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "TCC_GLASS_LOGO",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "TCC_GLASS_LOGO_IN",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "VECTRA_BLACKGLASS",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Vectra B STW 1998"
+ },
+ {
+  "uid": "52f4995cb9f0482a8aad486e41548534",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 36,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "clearglass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "htvectrac_glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 11,
+  "name": "Opel Vectra C 2002-2005"
+ },
+ {
+  "uid": "1d7549f2cc0640b3abc46a5345d0ef49",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 36,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "clearglass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "htvectrac_glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 10,
+  "name": "Opel Vectra C 2002-2005"
+ },
+ {
+  "uid": "bf4a55b4526743b4b4b8851c06dfea1a",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 27,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "insigniab_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 4,
+  "name": "Opel insignia sports tourer turbo exclusive 2017"
+ },
+ {
+  "uid": "82d1344bfa0d481da9c5a7db5a6c6752",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 23,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass_base",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 4,
+  "name": "Opel Corsa 5-door D 2006-2014"
+ },
+ {
+  "uid": "eef5225a9f644cce912e29fa672234e9",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 37,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "clearglass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "htvectrac_glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 10,
+  "name": "Opel Vectra C 2002-2005"
+ },
+ {
+  "uid": "ca9df21b5f924a699603c48e8a98db71",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 37,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "clearglass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "htvectrac_glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 11,
+  "name": "Opel Vectra C 2002-2005"
+ },
+ {
+  "uid": "fb11a43e37464ad9931fdcbadf55e4dd",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 24,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Astra J Sports Tourer 2012"
+ },
+ {
+  "uid": "4ae6f5279d4e448baedf92d495036954",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 37,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "htvectrac_glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "clearglass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 11,
+  "name": "Opel Vectra C 2002-2005"
+ },
+ {
+  "uid": "4559521e31134baf9b607f0f2186d4e8",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 36,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "htvectrac_glass",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "clearglass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 10,
+  "name": "Opel Vectra C 2002-2005"
+ },
+ {
+  "uid": "e16d7d7bcafe470babb969538651577d",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 76,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Astra V8 Coupe DTM 2003"
+ },
+ {
+  "uid": "d6bf2c81f0ac4aca9baa5bfc45a52636",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "n_materials": 72,
+  "n_transparent": 11,
+  "glazing_named": [],
+  "transparent": [
+   {
+    "name": "Material_131987",
+    "alpha": 0.556,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Material_139J",
+    "alpha": 0.715,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Material_141J",
+    "alpha": 0.78,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Material_142U",
+    "alpha": 0.653,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Material_14365",
+    "alpha": 0.543,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Material_144I",
+    "alpha": 0.653,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 6,
+  "name": "Opel Speedster"
+ },
+ {
+  "uid": "8d622a59fe194c0796e46069cc8b28a4",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 72,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Speedster 2000-2005"
+ },
+ {
+  "uid": "d39c4d785fb84743a1be1276856daeaa",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 1,
+  "name": "Opel frontera"
+ },
+ {
+  "uid": "b0cab0a018cc4e26beb2483f9db8103c",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 48,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "insignia1_screen",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "insignia1_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Insignia OPC 2009"
+ },
+ {
+  "uid": "fd88de4c5c834b199bc4501d440af711",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 45,
+  "n_transparent": 17,
+  "glazing_named": [
+   {
+    "name": "pessima_glass",
+    "alpha": 1,
+    "mode": "MASK",
+    "transmission": 0,
+    "transparent": true,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "glass.003",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [
+   {
+    "name": "pessima_glass",
+    "alpha": 1,
+    "mode": "MASK",
+    "transmission": 0,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "vectra_lightglass_alt",
+    "alpha": 1,
+    "mode": "MASK",
+    "transmission": 0,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "vectra_tint",
+    "alpha": 1,
+    "mode": "MASK",
+    "transmission": 0,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "vectra_foglight",
+    "alpha": 1,
+    "mode": "MASK",
+    "transmission": 0,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "etk800",
+    "alpha": 1,
+    "mode": "MASK",
+    "transmission": 0,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "etk800_lettering",
+    "alpha": 1,
+    "mode": "MASK",
+    "transmission": 0,
+    "via": "texture-alpha"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 10,
+  "name": "Opel Vectra B 1997"
+ },
+ {
+  "uid": "45215e62b31343b58db7213b28cfacf6",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 84,
+  "n_transparent": 34,
+  "glazing_named": [
+   {
+    "name": "Windowsint1Mtl",
+    "alpha": 0.3,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "Ope5astrav803lod0htor291vertic69dcb031Mtl",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "Ope5astrav803cockpimetal1280ve111316e1Mtl",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "Ope5astrav803cockpibadge4vertib4124751Mtl",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "Ope5astrav803cockpiybadge49vert152b4341Mtl",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "Ope5astrav803cockpi1308vertices77a13511Mtl",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "Step171Mtl",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "texture-alpha"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 66,
+  "name": "2003 Opel Astra V8 Coupe DTM"
+ },
+ {
+  "uid": "e809e4970d404b7283af06e16aa63cd0",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 49,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "glass.001",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Glass_0",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Vivaro A 2006-2014"
+ },
+ {
+  "uid": "dcb21bc97b61419db82389db4f1b364e",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Blitz 3,6-6700A from the 1940`s"
+ },
+ {
+  "uid": "201c66ba18fe454eb1c97e37ac07c0a5",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 36,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "window",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Omega B Sedan 1994-2003"
+ },
+ {
+  "uid": "b446410a800243f8820f730f4bae25f2",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 1,
+  "name": "Snowy Opel Astra  2007 Obj"
+ },
+ {
+  "uid": "8d9fb48251e64ec28d79d613c94f84c1",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 1,
+  "name": "Opel Olympia Israel"
+ },
+ {
+  "uid": "5d4997cd8c804d7497a02367523710e5",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 36,
+  "n_transparent": 1,
+  "glazing_named": [
+   {
+    "name": "Opelomega_glass",
+    "alpha": 0.15,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [
+   {
+    "name": "Opelomega_glass",
+    "alpha": 0.15,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 9,
+  "name": "Opel Omega A 1986-1998"
+ },
+ {
+  "uid": "1aa3f6b3e2a8489c8a79633aae4ff096",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 1,
+  "name": "Opel Astra K Steering wheel/dashboard. Polycam"
+ },
+ {
+  "uid": "6b07c0479d3a43c2a862d21d2d7c0085",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 100,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "vehicle_generic_glasswindows2",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "vehicle_generic_glasswindows2_0",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "vehicle_generic_glasswindows2_1",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "vehicle_generic_glasswindows2_2",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "vehicle_generic_glasswindows2_3",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "vehicle_generic_glasswindows2_4",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Zafira A 1999-2013"
+ },
+ {
+  "uid": "c86e5692b5784173b9bcdd01e92670cf",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 32,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 8,
+  "name": "Opel Vectra C 2002-2008"
+ },
+ {
+  "uid": "88867268d228490da73b99d3126dc25c",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 6,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 5,
+  "name": "1970 Opel GT #3DST51"
+ },
+ {
+  "uid": "20d38076ae184715b70414acfae95f03",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 48,
+  "n_transparent": 2,
+  "glazing_named": [
+   {
+    "name": "Translucent_Glass_Tinted",
+    "alpha": 0.27,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Tinted_1",
+    "alpha": 0.48,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "Translucent_Glass_Tinted",
+    "alpha": 0.27,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Tinted_1",
+    "alpha": 0.48,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 13,
+  "name": "opel barra A"
+ },
+ {
+  "uid": "058c337033914718bef758f6f0cfcd9e",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "\u041f\u043e\u0434\u0443\u0448\u043a\u0430 \u0433\u043b\u0443\u0448\u0438\u0442\u0435\u043b\u044f \u0430\\\u043c Opel 140033310"
+ },
+ {
+  "uid": "979f231d0b014ff19e87d02759546591",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 42,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "windowtrim",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "vectra_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 2,
+  "name": "Opel Vectra B 2001"
+ },
+ {
+  "uid": "9d5335f72aef462c8f77ea2dc4b04029",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 38,
+  "n_transparent": 2,
+  "glazing_named": [
+   {
+    "name": "Translucent_Glass_Tinted",
+    "alpha": 0.27,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Tinted_1",
+    "alpha": 0.48,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "Translucent_Glass_Tinted",
+    "alpha": 0.27,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Tinted_1",
+    "alpha": 0.48,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 13,
+  "name": "OPEL NEW"
+ },
+ {
+  "uid": "d21e3f61c5fc464dbcbcee3e3f4c5b67",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 33,
+  "n_transparent": 1,
+  "glazing_named": [
+   {
+    "name": "glass.003",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass.002",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [
+   {
+    "name": "door_rr_ok.7",
+    "alpha": 1,
+    "mode": "MASK",
+    "transmission": 0,
+    "via": "texture-alpha"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 17,
+  "name": "Opel Movano"
+ },
+ {
+  "uid": "c46cbd8563314225a655878bbe5ad37e",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 100,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 99,
+  "name": "Opel Astra F 1996 Estate"
+ },
+ {
+  "uid": "9d129a9b6c3e4066a72bfac9cbd974f2",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 1,
+  "name": "Opel Kadett C"
+ },
+ {
+  "uid": "aa68019a13ca495f97988c1465f8fbb3",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 54,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "Translucent_Glass_Tinted",
+    "alpha": 0.27,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Tinted_1",
+    "alpha": 0.48,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "edge_color000255",
+    "alpha": 0.0,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "edge_color0335255",
+    "alpha": 0.026,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Tinted",
+    "alpha": 0.27,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Tinted_1",
+    "alpha": 0.48,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 17,
+  "name": "concesionaria opel"
+ },
+ {
+  "uid": "9fedd4afac6d400884b90a95451a4835",
+  "verdict": "ambiguous",
+  "certainty": "inferred",
+  "n_materials": 8,
+  "n_transparent": 1,
+  "glazing_named": [],
+  "transparent": [
+   {
+    "name": "Material_43",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "texture-alpha"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 21,
+  "name": "Opel Blitz Truck"
+ },
+ {
+  "uid": "ef481fbb93d84acca4f7b6b2f4c81db7",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 29,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "insignia1_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass.003",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Insignia A Sports Tourer 2008-2017"
+ },
+ {
+  "uid": "b092793ca1f14ce6a2013865ba596c8b",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 1,
+  "name": "Opel center console pocket"
+ },
+ {
+  "uid": "8f1db54136da4a59abd5e8e916797fe0",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 24,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "opel-fl-glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "opel-glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "opel-glass_black",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 6,
+  "name": "Opel Signum 2003-2008"
+ },
+ {
+  "uid": "a638d4936c3a4cb9ac16b951fc4b752b",
+  "verdict": "clear",
+  "certainty": "inferred",
+  "n_materials": 28,
+  "n_transparent": 5,
+  "glazing_named": [],
+  "transparent": [
+   {
+    "name": "Matte__9D333F1",
+    "alpha": 0.62,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "vehiclelights3",
+    "alpha": 0.51,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "vehiclelights1",
+    "alpha": 0.678,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "vehiclelights2",
+    "alpha": 0.71,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Matte__E1",
+    "alpha": 0.922,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Astra H 2008"
+ },
+ {
+  "uid": "04d9c63c3b364688b192077fc23d8a2c",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 19,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "Carro_Vidro_Laranja",
+    "alpha": 0.131,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Carro_Vidros",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Carro_Vidros1",
+    "alpha": 0.29,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Carro_Vidros_Vermelhos",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "Carro_Vidro_Laranja",
+    "alpha": 0.131,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Carro_Vidros",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Carro_Vidros1",
+    "alpha": 0.29,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Carro_Vidros_Vermelhos",
+    "alpha": 0.4,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 5,
+  "name": "2002 Opel Zafira"
+ },
+ {
+  "uid": "932dbc50e4544635902221a31db3bd7e",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 26,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Asta J 5-door 2009-2015"
+ },
+ {
+  "uid": "0389d91b59b948a2bc693ce96f810625",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 1,
+  "name": "Opel Astra 1.0t enginebay"
+ },
+ {
+  "uid": "77a1ead16e46446ebcc3900bae35767a",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "GEARBOX STICK INLAY OPEL ASTRA G/ZAFIRA PART 1"
+ },
+ {
+  "uid": "f5040ee0dc604b289b007c2e2792f706",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 23,
+  "n_transparent": 6,
+  "glazing_named": [
+   {
+    "name": "dirty_windshield",
+    "alpha": 1,
+    "mode": "MASK",
+    "transmission": 0,
+    "transparent": true,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "Glass",
+    "alpha": 0.285,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "dirty_glass",
+    "alpha": 1,
+    "mode": "MASK",
+    "transmission": 0,
+    "transparent": true,
+    "via": "texture-alpha"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "Glass",
+    "alpha": 0.285,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "dirty_glass",
+    "alpha": 1,
+    "mode": "MASK",
+    "transmission": 0,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "headlight_glass",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "via": "factor"
+   },
+   {
+    "name": "tail_light",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "via": "factor"
+   },
+   {
+    "name": "dirty_windshield",
+    "alpha": 1,
+    "mode": "MASK",
+    "transmission": 0,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "bottle",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 30,
+  "name": "WW2 Field Kitchen Truck (Based on Opel) FREE"
+ },
+ {
+  "uid": "c4f4629326864a6e9c8139e614d71b32",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 36,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "glass_invisible",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "astrah_glass",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "astrah_screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 1,
+  "name": "Opel Astra H Sedan 2004-2014"
+ },
+ {
+  "uid": "cdb6ff6ba5ae4f6e9a7347205f1de162",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 17,
+  "n_transparent": 4,
+  "glazing_named": [
+   {
+    "name": "dirty_windshield",
+    "alpha": 1,
+    "mode": "MASK",
+    "transmission": 0,
+    "transparent": true,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "Glass",
+    "alpha": 0.206,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "dirty_glass",
+    "alpha": 1,
+    "mode": "MASK",
+    "transmission": 0,
+    "transparent": true,
+    "via": "texture-alpha"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "Glass",
+    "alpha": 0.206,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "dirty_glass",
+    "alpha": 1,
+    "mode": "MASK",
+    "transmission": 0,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "headlight_glass",
+    "alpha": 0.25,
+    "mode": "BLEND",
+    "transmission": 1.0,
+    "via": "factor"
+   },
+   {
+    "name": "dirty_windshield",
+    "alpha": 1,
+    "mode": "MASK",
+    "transmission": 0,
+    "via": "texture-alpha"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 20,
+  "name": "WW2 Flak truck (Based on Opel) FREE"
+ },
+ {
+  "uid": "4d94cf00c84b4305a934e1eb5dda7fbd",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Adam Rocks 2012-2019"
+ },
+ {
+  "uid": "ebfcbe8a80464f2aa65fb19c90070647",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 29,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Kadett E"
+ },
+ {
+  "uid": "904087825d38496e862b5d26f534a4e7",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 25,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "Phare_vitre",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Vitre",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Vitre_noir",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "Vitre_sun",
+    "alpha": 1,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": true,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Zafira YOUR_NAN"
+ },
+ {
+  "uid": "41d37b0401c1415e9beccd420e1ffecd",
+  "verdict": "ambiguous",
+  "certainty": "inferred",
+  "n_materials": 8,
+  "n_transparent": 2,
+  "glazing_named": [],
+  "transparent": [
+   {
+    "name": "tex_54394_0",
+    "alpha": 1.0,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "texture-alpha"
+   },
+   {
+    "name": "tex_54472_0",
+    "alpha": 1,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "texture-alpha"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 14,
+  "name": "opel blitz"
+ },
+ {
+  "uid": "45b53d216f2b46908d02fc906d5f0e6d",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 31,
+  "n_transparent": 3,
+  "glazing_named": [
+   {
+    "name": "Translucent_Glass_Green_Dark",
+    "alpha": 0.749,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Gray",
+    "alpha": 0.502,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "Matte__7B1",
+    "alpha": 0.49,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Green_Dark",
+    "alpha": 0.749,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Gray",
+    "alpha": 0.502,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Vectra Liftback C 2007"
+ },
+ {
+  "uid": "4477034d00594ca698a4f50fee096c47",
+  "verdict": "opaque",
+  "certainty": "proven",
+  "n_materials": 34,
+  "n_transparent": 0,
+  "glazing_named": [
+   {
+    "name": "astravxr_glas",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "astravxr_blackglas",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   },
+   {
+    "name": "sunburst_screen",
+    "alpha": 1.0,
+    "mode": "OPAQUE",
+    "transmission": 0,
+    "transparent": false,
+    "via": null
+   }
+  ],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Astra VXR"
+ },
+ {
+  "uid": "0a19f0ea49684a1abb0cb3e74d02eafd",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 21,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Meriva A 2003-2010"
+ },
+ {
+  "uid": "cb02904a3b8b4686a8c2d19d4ba45a5f",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 24,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Astra G White"
+ },
+ {
+  "uid": "89b90ac3b5fd4863bf8f975d00762754",
+  "verdict": "clear",
+  "certainty": "proven",
+  "n_materials": 19,
+  "n_transparent": 2,
+  "glazing_named": [
+   {
+    "name": "Translucent_Glass_Gray",
+    "alpha": 0.522,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Green_Dark",
+    "alpha": 0.502,
+    "mode": "BLEND",
+    "transmission": 0,
+    "transparent": true,
+    "via": "factor"
+   }
+  ],
+  "transparent": [
+   {
+    "name": "Translucent_Glass_Gray",
+    "alpha": 0.522,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   },
+   {
+    "name": "Translucent_Glass_Green_Dark",
+    "alpha": 0.502,
+    "mode": "BLEND",
+    "transmission": 0,
+    "via": "factor"
+   }
+  ],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "Opel Corsa D OPC 2010"
+ },
+ {
+  "uid": "bd4d3bd934df44d080c85f213ea8ebff",
+  "verdict": "opaque",
+  "certainty": "inferred",
+  "n_materials": 1,
+  "n_transparent": 0,
+  "glazing_named": [],
+  "transparent": [],
+  "flat_shell": false,
+  "alpha_shell": false,
+  "body_transparent": [],
+  "n_textures": 0,
+  "name": "GEARBOX STICK INLAY OPEL ASTRA G/ZAFIRA PART 2"
+ }
+]
