@@ -46,25 +46,69 @@ Vw = V[weld].copy()
 Fw = inv[Fc]
 
 mw = trimesh.Trimesh(vertices=Vw, faces=Fw, process=False)
-adj = mw.face_adjacency
 gmask = label == GLASS
-same = gmask[adj[:, 0]] & gmask[adj[:, 1]]
-g = sp.csr_matrix((np.ones(int(same.sum())), (adj[same, 0], adj[same, 1])),
-                  shape=(len(label), len(label)))
-_, comp = sp.csgraph.connected_components(g + g.T, directed=False)
-comp = comp.copy(); comp[~gmask] = -1
+
+# grouping: PREFER the per-window region ids seg_boundary saves — welded
+# connectivity merges the whole greenhouse into one blob (measured: one 51k
+# region spanning rear screen + both flanks, quadric rms 117 per-mille).
+reg_file = LAB.replace(".npy", "_regions.npy")
+import os
+if os.path.exists(reg_file):
+    comp = np.load(reg_file).astype(np.int64)
+    comp[~gmask] = -1
+    print(f"grouping by seg_boundary window ids ({reg_file})")
+else:
+    adj0 = mw.face_adjacency
+    same = gmask[adj0[:, 0]] & gmask[adj0[:, 1]]
+    g = sp.csr_matrix((np.ones(int(same.sum())), (adj0[same, 0], adj0[same, 1])),
+                      shape=(len(label), len(label)))
+    _, comp = sp.csgraph.connected_components(g + g.T, directed=False)
+    comp = comp.copy(); comp[~gmask] = -1
+    print("grouping by welded connectivity (no regions file)")
 
 # vertices of non-glass faces: frozen (keeps the glass rim sealed to the body)
 nonglass_v = np.zeros(len(Vw), bool)
 nonglass_v[Fw[~gmask].ravel()] = True
 
-moved_total = 0
-for cid, n in Counter(comp[gmask]).items():
-    if n < MIN_REGION:
-        continue
-    fidx = np.where(comp == cid)[0]
+fn = mw.face_normals
+
+# A connected "region" can weld SEVERAL windows into one blob (measured on the
+# gseg Golf: 51k faces spanning the rear screen and its neighbours, fit rms
+# 117 per-mille — one quadric across different windows is garbage and pulling
+# toward it makes things WORSE). So: fit; if the residual says "not one
+# surface", split the faces by k-means on their NORMALS and recurse.
+RMS_OK = 0.030          # absolute units; a real single window fits well under this
+RMS_CEIL = 0.050        # a leaf STILL above this is not a window surface: NO pull
+MAX_DEPTH = 3
+
+
+def kmeans2(N):
+    d = N @ N.T if len(N) < 3 else None
+    i0 = 0
+    i1 = int(np.argmin(N @ N[i0]))
+    c = np.stack([N[i0], N[i1]])
+    for _ in range(12):
+        a = (N @ c.T).argmax(1)
+        nc = np.stack([N[a == k].mean(0) if (a == k).any() else c[k]
+                       for k in range(2)])
+        nc /= np.linalg.norm(nc, axis=1, keepdims=True).clip(1e-12)
+        if np.allclose(nc, c):
+            break
+        c = nc
+    return a
+
+
+def region_verts(fidx):
     vids = np.unique(Fw[fidx].ravel())
-    vids = vids[~nonglass_v[vids]]
+    return vids[~nonglass_v[vids]]
+
+
+moved_total = 0
+queue = [(np.where(comp == cid)[0], 0) for cid, n in
+         Counter(comp[gmask]).items() if n >= MIN_REGION and cid != -1]
+while queue:
+    fidx, depth = queue.pop()
+    vids = region_verts(fidx)
     if len(vids) < 50:
         continue
     P = Vw[vids]
@@ -76,12 +120,24 @@ for cid, n in Counter(comp[gmask]).items():
     h = (P - ctr) @ nrm
     A = np.stack([np.ones_like(u), u, v, u * u, u * v, v * v], 1)
     coef, *_ = np.linalg.lstsq(A, h, rcond=None)
-    hfit = A @ coef
-    resid = h - hfit
+    resid = h - A @ coef
+    rms = float(resid.std())
+    if rms > RMS_OK and depth < MAX_DEPTH and len(fidx) >= 2 * MIN_REGION:
+        a = kmeans2(fn[fidx])
+        if 0 < int(a.sum()) < len(a):
+            print(f"  split {len(fidx)} faces (rms {rms*1000:.1f}) -> "
+                  f"{int((a==0).sum())} + {int((a==1).sum())}")
+            queue.append((fidx[a == 0], depth + 1))
+            queue.append((fidx[a == 1], depth + 1))
+            continue
+    if rms > RMS_CEIL:
+        print(f"  SKIP {len(fidx)} faces: rms {rms*1000:.1f} — not one surface, "
+              f"pulling would deform, leaving geometry alone")
+        continue
     Vw[vids] -= PULL * resid[:, None] * nrm
     moved_total += len(vids)
-    print(f"  region {cid}: {n} faces, {len(vids)} verts, "
-          f"noise rms {resid.std()*1000:.2f} -> {(resid.std()*(1-PULL))*1000:.2f} (per-mille)")
+    print(f"  fit {len(fidx)} faces, {len(vids)} verts, "
+          f"rms {rms*1000:.2f} -> {rms*(1-PULL)*1000:.2f} (per-mille)")
 
 print(f"flattened {moved_total} glass verts (pull={PULL})")
 Vnew = Vw[inv]

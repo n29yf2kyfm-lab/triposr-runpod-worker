@@ -57,7 +57,11 @@ print(f"glass regions >= {MIN_REGION} faces: {len(regions)} "
       f"(of {len(sizes)} total, {int(mask.sum())} glass faces)")
 
 stamped_glass = np.zeros(F, bool)
-for cid in regions:
+# which WINDOW stamped each glass face: glass_smooth fits per window, because
+# welded mesh connectivity merges the whole greenhouse into one blob (measured
+# on the gseg Golf: one 51k-face "region" spanning rear screen + both flanks)
+stamp_region = np.full(F, -1, np.int32)
+for ordinal, cid in enumerate(regions):
     ridx = np.where(comp == cid)[0]
     pts = cent[ridx]
     ctr = pts.mean(0)
@@ -93,6 +97,7 @@ for cid in regions:
     inside = sm[cv, cu]
     label[ci[inside]] = GLASS
     stamped_glass[ci[inside]] = True
+    stamp_region[ci[inside]] = ordinal
     out_idx = ci[~inside]           # outside this stencil: revert glass -> body,
     flip = out_idx[(label[out_idx] == GLASS) & ~stamped_glass[out_idx]]
     label[flip] = BODY              # unless another region already stamped it
@@ -141,7 +146,9 @@ for target in range(5):
         if cnt:
             label[comp2 == cid] = cnt.most_common(1)[0][0]
 
+stamp_region[label != GLASS] = -1
 np.save(OUT, label)
+np.save(OUT.replace(".npy", "_regions.npy"), stamp_region)
 NAMES = ["body", "glass", "wheel", "lamp", "interior"]
 share = {NAMES[i]: round(100 * float((label == i).mean()), 2) for i in range(5)}
 print("face share:", share)

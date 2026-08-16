@@ -64,8 +64,16 @@ mats = {
            roughnessFactor=0.08)),
 }
 
+# interior/unseen gets a DARK MATTE material, not the baked texture: the
+# production worker forces transmission onto the glass, and a noisy grey
+# textured cabin seen through it reads as crinkled silver (gseg Golf v3's
+# rear screen). A dark cabin is what real catalogue cars show through glass.
+mats[UNSEEN] = ("interior", PBRMaterial(name="interior",
+                baseColorFactor=[26, 26, 29, 255], metallicFactor=0.0,
+                roughnessFactor=0.9))
+
 out = trimesh.Scene()
-for key, name in ((BODY, "carpaint"), (UNSEEN, "interior")):
+for key, name in ((BODY, "carpaint"),):
     idx = np.where(lab2 == key)[0]
     if not len(idx):
         continue
