@@ -1960,6 +1960,23 @@ lamp band chrome, roof spike, quarter-panel wobble, trim-level identity.
 Evidence: staging/gseg/ GSEG19_SHEET.jpg, p19_control_blue.png,
 bisect_grid.jpg, golf_v19.glb.
 
+**v20-v26 (same night): frit, proof pack, rear rebuild — the review list is
+worked through.** New stages: ceramic frit borders on every pane (material
+name must NOT contain "glass" or the worker's override clears the band) +
+aperture backstop + brake disc/caliper per corner (v22);
+`proof_pack.py` — six passes x four cameras on checkerboard (full/
+glass_only/interior_only/no_body/wireframe/exploded), the P23 component-
+existence evidence standard, zero GPU (v23); `rear_kit.py` — constructed
+tail-lamp lens units fitted over the rear lamp clusters (22mm proud so blob
+geometry stays behind), number plate + frame on a fitted plinth (v24-26).
+On the blue control the constructed lamps HOLD THEIR RED through a respray —
+component behaviour, the thing label-paint could never do. Az convention
+burned a render AGAIN (az 90/270 are the end-on views — it is written above,
+read it). Remaining on the Golf: blob hatch/bumper SURFACES (the licensed-
+mesh line the v10 review itself drew), windscreen stencil shortfall (right
+side, aperture-driven stencils are the identified fix), panel waves, trim
+identity. Machine: 15 stages, all committed through 5337f54.
+
 ## Alam 3D / TRELLIS.2: measured ceiling on automotive surfacing (2026-08-09)
 
 Tested end to end on a 2011 Yaris XP90 from two Toyota press photos. The machine WORKS —
