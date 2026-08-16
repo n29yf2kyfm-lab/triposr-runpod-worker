@@ -1442,7 +1442,12 @@ Two qualifications, measured:
     classifier must FIND it (mid-band, above body sill, encloses cabin), not assume
     an index.
 Evidence: scratchpad pc16_colored.png / pc16_canopy.png / pc16_body.png; results
-tarball at car-meshes/partcrafter_run/results16b.tgz.
+tarball at car-meshes/partcrafter_run/results16b.tgz. **CORRECTION 2026-08-16: that
+tarball is NOT in the bucket** — the prefix holds only bootstrap scripts, hi3_logs.tgz
+and a 112-byte hi3_results.tgz. The upload was lost (rollback or failed PUT, undetermined).
+The only surviving copies of the 16-part material work are the scratchpad's pc16_mat.glb /
+pc16_mat_red.glb — treat them as unbacked, and do not trust this file's claims that an
+artefact is bucket-backed without listing the prefix first.
 
 **RUNPOD POD DEPLOYMENT, two traps that cost ~$0.40 and 80 minutes:**
   1. **A pod whose dockerStartCmd EXITS gets RESTARTED.** Ending the command with
