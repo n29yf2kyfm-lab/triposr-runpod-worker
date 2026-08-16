@@ -68,13 +68,36 @@ flat_mats = {
            roughnessFactor=0.08)),
     WHEEL: ("Arch_Cavity", PBRMaterial(**CAVITY_MAT)),
 }
+# inner-skin interior fragments hugging the pane surfaces poke through the
+# glass as white dots (v10 left flank) — glass_panes flags them, drop here
+pz0 = np.load(PANES)
+skin_drop = set(pz0["drop"].tolist()) if "drop" in pz0 else set()
 for key, (name, mat) in flat_mats.items():
     idx = np.where(label == key)[0]
+    if key == UNSEEN and skin_drop:
+        idx = np.array([i for i in idx if i not in skin_drop])
+        print(f"interior: dropped {len(skin_drop)} inner-skin faces")
     if not len(idx):
         continue
     sub = trimesh.Trimesh(vertices=m.vertices, faces=m.faces[idx], process=True)
     sub.visual = trimesh.visual.TextureVisuals(material=mat)
     out.add_geometry(sub, node_name=name, geom_name=name)
+
+# constructed simplified cabin (review item 2): a shrunken hull of the
+# greenhouse band, dark matte. The neural interior has holes — bright
+# studio light leaks through them and reads as white dots on the glass;
+# a solid occluder guarantees a uniform dark cabin behind every pane.
+H0, H1 = m.vertices[:, 1].min(), m.vertices[:, 1].max()
+band = m.vertices[(m.vertices[:, 1] > H0 + 0.45 * (H1 - H0)) &
+                  (m.vertices[:, 1] < H0 + 0.97 * (H1 - H0))]
+hull = trimesh.convex.convex_hull(band)
+hc = hull.vertices.mean(0)
+hull.vertices = hc + 0.90 * (hull.vertices - hc)
+hull.visual = trimesh.visual.TextureVisuals(material=PBRMaterial(
+    name="cabin_occluder", baseColorFactor=[22, 22, 25, 255],
+    metallicFactor=0.0, roughnessFactor=0.95))
+out.add_geometry(hull, node_name="cabin_occluder", geom_name="cabin_occluder")
+print(f"cabin occluder: {len(hull.faces)} tris")
 
 # constructed glazing
 pz = np.load(PANES)
