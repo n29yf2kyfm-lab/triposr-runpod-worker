@@ -51,6 +51,17 @@ for _ in range(2):
 print(f"aperture rim: {int((np.load(LAB) == GLASS).sum() - (label == GLASS).sum())} "
       f"glass border faces kept as body surround")
 
+# parametric rear kit: the ragged rear lamp LABEL contributes nothing —
+# paint it body so only the designed lens units read as lamps
+if REAR:
+    rz0 = np.load(REAR)
+    if "parametric" in rz0:
+        xr = cent[:, 0]
+        xfr = (xr - xr.min()) / (xr.max() - xr.min())
+        rl = (label == LAMP) & (xfr < 0.20)
+        label[rl] = BODY
+        print(f"parametric rear: {int(rl.sum())} blob lamp faces painted body")
+
 out = trimesh.Scene()
 
 # body keeps the baked texture (grille/badge/lamp graphics live there).

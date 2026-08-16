@@ -19,6 +19,7 @@ import trimesh
 from trimesh.visual.material import PBRMaterial
 
 CANON, LAB, PANES, OUTD = sys.argv[1:5]
+REARKIT = sys.argv[5] if len(sys.argv) > 5 else None   # parametric lamp npz
 os.makedirs(OUTD, exist_ok=True)
 BODY, GLASS, WHEEL, LAMP, UNSEEN = 0, 1, 2, 3, 4
 
@@ -45,6 +46,11 @@ def mat(name):
 
 out = trimesh.Scene()
 rear = xf < 0.18
+label = label.copy()
+if REARKIT is not None:
+    # parametric build: the blob lamp label was painted body — the machine's
+    # lamps ARE the designed lens units, which get the magenta below
+    label[(label == LAMP) & rear] = BODY
 groups = {
     "lamp_mag":  (label == LAMP) & rear,
     "bumper_yellow": (label == BODY) & (xf < 0.10) & (y < H0 + 0.33 * H),
@@ -72,6 +78,17 @@ for sel, name in ((pxf < 0.22, "glass_blue"), (pxf >= 0.22, "dark")):
                            process=True)
     part.visual = trimesh.visual.TextureVisuals(material=mat(name))
     out.add_geometry(part, node_name=f"pane_{name}", geom_name=f"pane_{name}")
+
+if REARKIT is not None:
+    rz = np.load(REARKIT)
+    lens = trimesh.Trimesh(vertices=rz["lens_v"], faces=rz["lens_f"],
+                           process=True)
+    lens.visual = trimesh.visual.TextureVisuals(material=mat("lamp_mag"))
+    out.add_geometry(lens, node_name="lens_mag", geom_name="lens_mag")
+    for vk, fk in (("plate_v", "plate_f"), ("frame_v", "frame_f")):
+        p = trimesh.Trimesh(vertices=rz[vk], faces=rz[fk], process=True)
+        p.visual = trimesh.visual.TextureVisuals(material=mat("dark"))
+        out.add_geometry(p, node_name=fk, geom_name=fk)
 
 glb = os.path.join(OUTD, "rear_diag.glb")
 out.export(glb)
@@ -105,10 +122,27 @@ scn.collection.objects.link(sun); sun.data.energy = 3.5
 sun.rotation_euler = (math.radians(50), 0, math.radians(210))
 cam = bpy.data.objects.new("c", bpy.data.cameras.new("c"))
 scn.collection.objects.link(cam); scn.camera = cam
-for name, az, el in [("rear_straight", 270, 8), ("rear34_L", 215, 12), ("rear34_R", 305, 12)]:
+def wire_mat():
+    m = bpy.data.materials.new("wire"); m.use_nodes = True
+    nt = m.node_tree; nt.nodes.clear()
+    wf = nt.nodes.new("ShaderNodeWireframe"); wf.inputs[0].default_value = 0.0015
+    e1 = nt.nodes.new("ShaderNodeEmission"); e1.inputs["Color"].default_value = (1, 1, 1, 1)
+    e2 = nt.nodes.new("ShaderNodeEmission"); e2.inputs["Color"].default_value = (0, 0, 0, 1)
+    mix = nt.nodes.new("ShaderNodeMixShader")
+    outn = nt.nodes.new("ShaderNodeOutputMaterial")
+    nt.links.new(wf.outputs[0], mix.inputs[0])
+    nt.links.new(e1.outputs[0], mix.inputs[1])
+    nt.links.new(e2.outputs[0], mix.inputs[2])
+    nt.links.new(mix.outputs[0], outn.inputs[0])
+    return m
+
+views = [("rear_straight", 270, 8, None), ("rear34_L", 215, 12, None),
+         ("rear34_R", 305, 12, None), ("wireframe", 270, 8, wire_mat())]
+for name, az, el, ovr in views:
     a, e = math.radians(az), math.radians(el); d = size*1.6
     cam.location = (ctr.x + d*math.cos(e)*math.sin(a), ctr.y - d*math.cos(e)*math.cos(a), ctr.z + d*math.sin(e))
     cam.rotation_euler = (mathutils.Vector(ctr)-cam.location).to_track_quat('-Z','Y').to_euler()
+    scn.view_layers[0].material_override = ovr
     scn.render.filepath = argv[1] + f"/diag_{name}.png"
     bpy.ops.render.render(write_still=True)
 print("REAR_DIAG_DONE")
