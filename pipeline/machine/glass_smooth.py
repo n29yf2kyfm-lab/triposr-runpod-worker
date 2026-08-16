@@ -134,10 +134,34 @@ while queue:
         print(f"  SKIP {len(fidx)} faces: rms {rms*1000:.1f} — not one surface, "
               f"pulling would deform, leaving geometry alone")
         continue
-    Vw[vids] -= PULL * resid[:, None] * nrm
+    # taper the pull to zero at the region border: border verts are frozen
+    # (sealed to the body), so a full pull one ring in tilts the border faces
+    # sharply and they render as dark chips along every window edge (seen on
+    # the gseg Golf v5). Ramp over TAPER_RINGS vertex rings instead.
+    TAPER_RINGS = 4
+    allv = np.unique(Fw[fidx].ravel())
+    frozen = set(allv[nonglass_v[allv]].tolist())
+    nb = {}
+    for tri in Fw[fidx]:
+        for a_, b_ in ((0, 1), (1, 2), (2, 0)):
+            nb.setdefault(tri[a_], set()).add(tri[b_])
+            nb.setdefault(tri[b_], set()).add(tri[a_])
+    dist = {v: 0 for v in frozen}
+    frontier = set(frozen)
+    for ring in range(1, TAPER_RINGS + 1):
+        nxt = set()
+        for v_ in frontier:
+            for w_ in nb.get(v_, ()):
+                if w_ not in dist:
+                    dist[w_] = ring
+                    nxt.add(w_)
+        frontier = nxt
+    wgt = np.array([min(1.0, dist.get(v_, TAPER_RINGS + 1) / (TAPER_RINGS + 1))
+                    for v_ in vids])
+    Vw[vids] -= (wgt * PULL)[:, None] * resid[:, None] * nrm
     moved_total += len(vids)
     print(f"  fit {len(fidx)} faces, {len(vids)} verts, "
-          f"rms {rms*1000:.2f} -> {rms*(1-PULL)*1000:.2f} (per-mille)")
+          f"rms {rms*1000:.2f} -> {rms*(1-PULL)*1000:.2f} (per-mille), tapered")
 
 print(f"flattened {moved_total} glass verts (pull={PULL})")
 Vnew = Vw[inv]
