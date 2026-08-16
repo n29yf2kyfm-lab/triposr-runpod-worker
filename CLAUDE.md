@@ -1868,6 +1868,42 @@ GSEG6_SHEET.jpg, MACHINE_V1_V6.jpg start-vs-now strip):**
     glass", i.e. Pixal's own surface. THE MACHINE'S LAYERS ARE NOW DONE:
     everything fixable by labels/geometry-hygiene is fixed; the remaining gap is
     generator surfacing, which no downstream pass can add detail back into.
+    [SUPERSEDED SAME DAY by the v7 normals finding below — most of the
+    "crystalline" look was NOT Pixal's surface.]
+
+**v7: THE CRYSTALLINE LOOK WAS MISSING VERTEX NORMALS (2026-08-16, evening).**
+The assembled GLBs carried ZERO NORMAL accessors — trimesh submesh exports drop
+them, the exact finish_car lesson from 2026-08-13, re-paid because nothing
+verified it. Every triangle shaded flat; the studio clearcoat turned that into
+crumpled foil, and THREE eye audits blamed "generator surfacing" for what was
+largely a shading bug. `normals_fix.py` (weld positions per material, average
+area-weighted face normals per welded id, VERIFY the accessor exists after
+export) transformed the production render: paint sits on smooth panels, glass
+reflects coherently. RULE: no machine GLB ships without NORMAL accessors
+verified present — machine.py runs normals_fix as a mandatory final stage.
+Do not blame a generator's surface until the file's normals are proven good.
+
+**v8 + the external QC review (owner-relayed, same evening).** Owner pasted an
+external review of the v6 sheet: "crumpled foil / QC_REJECT / improve Blender /
+licensed meshes for the catalogue, image-to-3D as labelled fallback". Its fix
+list matched what was already underway (weighted normals = the v7 fix, exactly);
+its misdiagnoses worth remembering: the "blue recolour leak" was the forced-
+transmission glass mirroring the studio (blue control proves paint holds), and
+semantic separation DID exist (six PBR materials). Built in response:
+  * `blender_finish.py` — Blender-native finishing: remove_doubles is UV-SAFE
+    (UVs are loop data in Blender — merging verts never breaks the texture),
+    auto-smooth 40 deg, Weighted Normal keep_sharp, light Laplacian
+    (volume-preserving) on the body only. Body 329k->193k verts truly welded.
+  * `qc_turntables.py` — clay / world-normal / material-ID passes, 4 az each.
+    The v8 clay shows genuinely smooth panels; the matID row shows clean label
+    separation. These run BEFORE showroom renders, per the review's standard.
+  * The Golf asset itself: QC_REJECT for the catalogue per the review — it is
+    the machine's TEST BED, never a catalogue entry. Catalogue supply remains
+    sourced/licensed meshes (owner ruling 2026-08-13, reaffirmed by the review).
+  * Still open on the Golf: headlamps render body-colour (DINO found ZERO
+    headlight boxes in both head-on views at thr 0.25 — `lamp_boost.py` exists
+    to re-detect at 0.16 with more prompts, not yet run through the chain);
+    rear lamp band still a touch wide; roof spike (antenna-class) remains.
 
 ## Alam 3D / TRELLIS.2: measured ceiling on automotive surfacing (2026-08-09)
 
