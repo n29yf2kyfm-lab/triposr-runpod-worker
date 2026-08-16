@@ -42940,6 +42940,74 @@
    "variantsHash": "5840434e3966b973bd79dedcb2d47737adee7d10",
    "method": "render",
    "at": "2026-07-23"
+  },
+  "customization": {
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Cumulus Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cumulus Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Selenium Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenium Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Nera Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nera Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Bianca White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Bianca White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Okenite White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Okenite White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Vertigo Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vertigo Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Elixir Red",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Elixir Red",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Olivine Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Olivine Green",
+     "glbUrl": null
+    }
+   ]
   }
  },
  {
@@ -43401,6 +43469,90 @@
    "variantsHash": "09f7b83abf593af26e1d78d71bfceaf7160d6025",
    "method": "render",
    "at": "2026-07-23"
+  },
+  "customization": {
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Magnetic Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carbonised Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbonised Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Agate Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Agate Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Frozen White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Frozen White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Moondust Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Moondust Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Chrome Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Chrome Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Desert Island Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Desert Island Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Fantastic Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fantastic Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Mean Green",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Mean Green",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Grabber Blue",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Grabber Blue",
+     "glbUrl": null
+    }
+   ]
   }
  },
  {
@@ -43535,7 +43687,123 @@
    "M Sport Pro",
    "SE",
    "Sport"
-  ]
+  ],
+  "customization": {
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Brooklyn Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Brooklyn Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Skyscraper Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Skyscraper Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "gunmetal",
+     "label": "Dravit Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Dravit Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mineral Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Black Sapphire Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Black Sapphire Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Alpine White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alpine White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Mineral White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portimao Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portimao Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Tanzanite Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Tanzanite Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Phytonic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Phytonic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Isle of Man Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Isle of Man Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "purple",
+     "label": "Thundernight Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Thundernight Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Toronto Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Toronto Red Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  },
  {
   "schemaVersion": 2,
@@ -43800,7 +44068,67 @@
    "Play",
    "RS Line",
    "S Edition"
-  ]
+  ],
+  "customization": {
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Shadow Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Shadow Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Glacier White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Glacier White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Diamond White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Diamond White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Iron Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Iron Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Flame Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Flame Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "orange",
+     "label": "Valencia Orange",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Valencia Orange",
+     "glbUrl": null
+    }
+   ]
+  }
  },
  {
   "schemaVersion": 2,
@@ -44069,7 +44397,75 @@
    "R-Dynamic",
    "S",
    "SE"
-  ]
+  ],
+  "customization": {
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Firenze Red Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Firenze Red Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  },
  {
   "schemaVersion": 2,
@@ -44202,7 +44598,75 @@
    "Exclusive",
    "John Cooper Works",
    "Sport"
-  ]
+  ],
+  "customization": {
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Rooftop Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Rooftop Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Melting Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Melting Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Midnight Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Midnight Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Nanuq White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Nanuq White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "British Racing Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "British Racing Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Island Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Island Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Rebel Green",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Rebel Green",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Chili Red",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Chili Red",
+     "glbUrl": null
+    }
+   ]
+  }
  },
  {
   "schemaVersion": 2,
@@ -44328,6 +44792,58 @@
    "variantsHash": "a6e238a4826a2358e01b91cef6e342b0ce7b9fcc",
    "method": "render",
    "at": "2026-07-23"
+  },
+  "customization": {
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Jet Black Mica",
+     "hex": null,
+     "finish": "mica",
+     "oemPaintName": "Jet Black Mica",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "White Diamond",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "White Diamond",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Sterling Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Sterling Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Lightning Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lightning Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Red Diamond",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Red Diamond",
+     "glbUrl": null
+    }
+   ]
   }
  },
  {
@@ -44584,6 +45100,58 @@
    "variantsHash": "f1c6f1342a82807e05b98b4d331f4201f364a77d",
    "method": "render",
    "at": "2026-07-23"
+  },
+  "customization": {
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Jet Black Mica",
+     "hex": null,
+     "finish": "mica",
+     "oemPaintName": "Jet Black Mica",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "White Diamond",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "White Diamond",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Sterling Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Sterling Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Lightning Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lightning Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Red Diamond",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Red Diamond",
+     "glbUrl": null
+    }
+   ]
   }
  },
  {
@@ -44708,7 +45276,67 @@
   "compatibleFuelTypes": [
    "diesel",
    "petrol"
-  ]
+  ],
+  "customization": {
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Vesuvio Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vesuvio Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Vulcano Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Vulcano Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Alfa White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alfa White",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Alfa Red",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Alfa Red",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Competizione Red",
+     "hex": null,
+     "finish": "tri-coat",
+     "oemPaintName": "Competizione Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Misano Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Misano Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Montreal Green",
+     "hex": null,
+     "finish": "tri-coat",
+     "oemPaintName": "Montreal Green",
+     "glbUrl": null
+    }
+   ]
+  }
  },
  {
   "schemaVersion": 2,
@@ -45368,7 +45996,75 @@
    "N-Design",
    "Tekna",
    "Visia"
-  ]
+  ],
+  "customization": {
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Gun Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Gun Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Ceramic Grey",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Ceramic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Storm White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Storm White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Pearl Black",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Pearl Black",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Blade Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Blade Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Magnetic Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Magnetic Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Fuji Sunset Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Fuji Sunset Red",
+     "glbUrl": null
+    },
+    {
+     "family": "burgundy",
+     "label": "Burgundy Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Burgundy Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  },
  {
   "schemaVersion": 2,
@@ -45504,7 +46200,75 @@
    "GT",
    "GT-Line",
    "GT-Line S"
-  ]
+  ],
+  "customization": {
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Interstellar Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Interstellar Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Steel Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Steel Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Aurora Black Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Aurora Black Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Snow White Pearl",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Snow White Pearl",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fusion White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fusion White",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Runway Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Runway Red",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Mineral Blue",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mineral Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Experience Green",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Experience Green",
+     "glbUrl": null
+    }
+   ]
+  }
  },
  {
   "schemaVersion": 2,
@@ -45761,7 +46525,83 @@
    "diesel",
    "hybrid",
    "petrol"
-  ]
+  ],
+  "customization": {
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Eiger Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Eiger Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Carpathian Grey Premium Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carpathian Grey Premium Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Hakuba Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Hakuba Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Santorini Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Santorini Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Fuji White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Fuji White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Ostuni Pearl White",
+     "hex": null,
+     "finish": "pearl",
+     "oemPaintName": "Ostuni Pearl White",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Portofino Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Portofino Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "green",
+     "label": "Belgravia Green Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Belgravia Green Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "bronze",
+     "label": "Lantau Bronze Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Lantau Bronze Metallic",
+     "glbUrl": null
+    }
+   ]
+  }
  },
  {
   "schemaVersion": 2,
@@ -57381,7 +58221,88 @@
    "componentPipelineVersion": "overnight-2026-07-16",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -57548,7 +58469,88 @@
    "componentPipelineVersion": "overnight-2026-07-16",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -59761,7 +60763,88 @@
    "componentPipelineVersion": "overnight-2026-07-16",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -59927,7 +61010,88 @@
    "componentPipelineVersion": "overnight-2026-07-16",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -68282,7 +69446,88 @@
    "componentPipelineVersion": "overnight-2026-07-16",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -79584,7 +80829,64 @@
    "componentPipelineVersion": "overnight-2026-07-16",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Tempest Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Tempest Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Black Diamond",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Black Diamond",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "English White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "English White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Jubilee Silver",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Jubilee Silver",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Salamanca Blue",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Salamanca Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Midnight Sapphire",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Midnight Sapphire",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -83199,7 +84501,64 @@
    "componentPipelineVersion": "overnight-2026-07-16",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Tempest Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Tempest Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Black Diamond",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Black Diamond",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "English White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "English White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Jubilee Silver",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Jubilee Silver",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Salamanca Blue",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Salamanca Blue",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Midnight Sapphire",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Midnight Sapphire",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {},
@@ -96842,7 +98201,88 @@
    "componentPipelineVersion": "overnight-2026-07-16",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -97004,7 +98444,88 @@
    "componentPipelineVersion": "overnight-2026-07-16",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -100052,7 +101573,80 @@
    "componentPipelineVersion": "overnight-2026-07-16",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -100373,7 +101967,80 @@
    "componentPipelineVersion": "overnight-2026-07-16",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -119310,7 +120977,80 @@
    "componentPipelineVersion": "publish-batch-w6",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "recolourAudit": {
@@ -122588,7 +124328,88 @@
    "componentPipelineVersion": "publish-batch-w7",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "recolourAudit": {
@@ -126912,7 +128733,80 @@
    "componentPipelineVersion": "publish-batch-w7",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Graphic Grey",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphic Grey",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Quartz Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Quartz Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Carbon Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Carbon Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Diamond Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Diamond Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Arctic White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Arctic White",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "Crystal Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crystal Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "yellow",
+     "label": "Electric Yellow",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Electric Yellow",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Cobalt Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cobalt Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "Crimson Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Crimson Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "recolourAudit": {
@@ -132688,7 +134582,88 @@
    "componentPipelineVersion": "publish-batch-w7",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "recolourAudit": {
@@ -136054,7 +138029,88 @@
    "componentPipelineVersion": "publish-batch-w8",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "recolourAudit": {
@@ -139005,7 +141061,88 @@
    "componentPipelineVersion": "publish-batch-w12",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "recolourAudit": {
@@ -139175,7 +141312,88 @@
    "componentPipelineVersion": "publish-batch-w12",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "recolourAudit": {
@@ -146370,7 +148588,88 @@
    "componentPipelineVersion": "publish-batch-w12",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "recolourAudit": {
@@ -148118,7 +150417,88 @@
    "componentPipelineVersion": "publish-batch-w12",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "recolourAudit": {
@@ -183184,7 +185564,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -183435,7 +185896,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -183600,7 +186142,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -183766,7 +186389,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -184098,7 +186802,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -184264,7 +187049,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -184429,7 +187295,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -184596,7 +187543,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -184926,7 +187954,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -185509,7 +188618,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -186180,7 +189370,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -186347,7 +189618,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -186846,7 +190198,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -187520,7 +190953,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -187688,7 +191202,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -187855,7 +191450,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -188024,7 +191700,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -188192,7 +191949,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -188359,7 +192197,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -188527,7 +192446,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -188694,7 +192694,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -188860,7 +192941,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -189196,7 +193358,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -189363,7 +193606,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -189530,7 +193854,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -189863,7 +194268,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -190029,7 +194515,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -190194,7 +194761,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -190359,7 +195007,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -190528,7 +195257,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
@@ -190694,7 +195504,88 @@
    "componentPipelineVersion": "publish-batch-mw1",
    "wheelSets": [],
    "wraps": [],
-   "colourOptions": []
+   "colourOptions": [
+    {
+     "family": "grey",
+     "label": "Selenite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Selenite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Mountain Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Mountain Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "grey",
+     "label": "Graphite Grey Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Graphite Grey Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Obsidian Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Obsidian Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "black",
+     "label": "Cosmos Black Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Cosmos Black Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Polar White",
+     "hex": null,
+     "finish": "solid",
+     "oemPaintName": "Polar White",
+     "glbUrl": null
+    },
+    {
+     "family": "white",
+     "label": "Digital White Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Digital White Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "silver",
+     "label": "High-Tech Silver Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "High-Tech Silver Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "blue",
+     "label": "Spectral Blue Metallic",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "Spectral Blue Metallic",
+     "glbUrl": null
+    },
+    {
+     "family": "red",
+     "label": "MANUFAKTUR Patagonia Red",
+     "hex": null,
+     "finish": "metallic",
+     "oemPaintName": "MANUFAKTUR Patagonia Red",
+     "glbUrl": null
+    }
+   ]
   },
   "platesBaked": false,
   "colourVariantPaints": {
