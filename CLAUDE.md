@@ -1904,6 +1904,24 @@ semantic separation DID exist (six PBR materials). Built in response:
     headlight boxes in both head-on views at thr 0.25 — `lamp_boost.py` exists
     to re-detect at 0.16 with more prompts, not yet run through the chain);
     rear lamp band still a touch wide; roof spike (antenna-class) remains.
+    [headlamps FIXED in v9, below]
+
+**v9: headlamps recovered (owner "Yeah", same evening).** lamp_boost through
+the chain: 8-11k lamp px per nose view where the default threshold found zero.
+Two lamp-hygiene lessons became fences in seg_boundary:
+  * the centre-band eviction must be REAR-ONLY — modern DRL bars cross the
+    grille and headlamp inner halves sit near the centreline; the old
+    both-ends rule was re-creating the body-coloured-headlight defect.
+  * smoothing/island-absorption can walk lamp label onto sills and valances
+    AFTER seg_project's zone prior has run (measured: pink sill patch on the
+    v9 matID). Lamp now only survives at the ends (xf<0.20|xf>0.80) above
+    bumper-lip height (yf>0.15). The matID turntable is the check that
+    caught both — run it before every production round.
+v9 production: dark gloss lamps + grille bar against the paint; all four of
+the owner's asks (smooth body / grille+lights / clear glass / paint sits on)
+now land on the test bed. Chain for reruns when only MASKS change:
+lamp_boost -> seg_project -> seg_refine -> seg_boundary -> seg_assemble(reuse
+canon_flat: glass smoothing depends only on glass labels) -> blender_finish.
 
 ## Alam 3D / TRELLIS.2: measured ceiling on automotive surfacing (2026-08-09)
 
