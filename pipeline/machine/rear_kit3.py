@@ -76,13 +76,26 @@ for sw in (1, -1):
     # sample the real surface X at each grid CORNER
     gy, gz = np.meshgrid(ys, zs, indexing="ij")
     q = np.stack([gy.ravel(), sw * gz.ravel()], 1)
-    d, idx = tree.query(q, k=5)
+    d, idx = tree.query(q, k=12)
     xs_ = RS[idx, 0]
     w = 1.0 / np.clip(d, 1e-4, None)
     xs_ = (xs_ * w).sum(1) / w.sum(1)          # inverse-distance blend
     far = d.min(1) > 0.12                       # no surface nearby -> skip cell
     xs_ = xs_.reshape(ny, nz)
     far = far.reshape(ny, nz)
+    # a lens is SMOOTH: the sampled shell carries the generator's noise, and
+    # inheriting it gives the ragged lamp edge seen on the v30 diagnostic.
+    # Smooth the depth field, then fit a gentle quadric through it so the
+    # unit reads as one moulded surface following the car's real curvature.
+    from scipy import ndimage as _nd
+    xs_ = _nd.gaussian_filter(xs_, 2.5, mode="nearest")
+    gy2, gz2 = np.meshgrid(ys - ys.mean(), zs - zs.mean(), indexing="ij")
+    Aq = np.stack([np.ones(gy2.size), gy2.ravel(), gz2.ravel(),
+                   gy2.ravel()**2, (gy2 * gz2).ravel(), gz2.ravel()**2], 1)
+    sel_fit = (inside & ~far).ravel()
+    if sel_fit.sum() > 40:
+        cq, *_ = np.linalg.lstsq(Aq[sel_fit], xs_.ravel()[sel_fit], rcond=None)
+        xs_ = (Aq @ cq).reshape(ny, nz)
 
     ok = inside & ~far
     if ok.sum() < 50:
