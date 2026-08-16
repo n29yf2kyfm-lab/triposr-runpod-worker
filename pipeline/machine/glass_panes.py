@@ -27,6 +27,7 @@ GAUSS_SIGMA = 2.2
 OFFSET = 0.012        # push the pane OUTBOARD: the fit sits inboard of the
                       # blob surface, and inner-skin interior fragments poke
                       # through as white dots (measured, v10 left flank)
+FRIT_CELLS = 3        # ceramic frit band width, in stencil cells
 SHELL_OUT = 0.03      # interior faces from 3cm outside the pane surface...
 SHELL_IN = 0.10       # ...to 10cm inside it are floating skin/junk: against
                       # the dark occluder every lit fragment reads as a white
@@ -80,7 +81,8 @@ for r in info:
     groups.setdefault(find(r), []).append(r)
 print(f"{len(info)} regions -> {len(groups)} merged windows")
 
-all_v, all_f, all_r, off = [], [], [], 0
+all_v, all_f, all_r, all_frit, off = [], [], [], [], 0
+bs_v, bs_f, bs_off = [], [], 0
 for gid, members in sorted(groups.items()):
     fidx = np.concatenate([info[r][0] for r in members])
     rid = gid
@@ -108,11 +110,13 @@ for gid, members in sorted(groups.items()):
     ras[iv, iu] = True
     ras = ndimage.binary_closing(ras, iterations=3)
     ras = ndimage.binary_fill_holes(ras)
-    sm = ndimage.gaussian_filter(ras.astype(np.float32), GAUSS_SIGMA) > 0.5
-    # DILATE two cells: the pane must tuck BEHIND the body aperture edge.
-    # (v10 first cut eroded instead — that left a visible gap ring around
-    # every window, the review's "black cracks" defect, self-inflicted.)
-    sm = ndimage.binary_dilation(sm, iterations=4)
+    smc = ndimage.gaussian_filter(ras.astype(np.float32), GAUSS_SIGMA) > 0.5
+    # full pane = stencil DILATED 4 cells (tucks behind the aperture edge);
+    # the CLEAR area is the stencil ERODED by the frit width — the ring
+    # between them is the CERAMIC FRIT band (black opaque, like real glass):
+    # it seals every aperture-edge artefact including the A-pillar sliver.
+    sm = ndimage.binary_dilation(smc, iterations=4)
+    clear = ndimage.binary_erosion(smc, iterations=FRIT_CELLS)
 
     # grid vertices at cell corners where any adjacent cell is inside
     corner = np.zeros((gh + 1, gw + 1), bool)
@@ -135,10 +139,38 @@ for gid, members in sorted(groups.items()):
     q = np.stack([vid[fy, fx], vid[fy, fx + 1],
                   vid[fy + 1, fx + 1], vid[fy + 1, fx]], 1)
     tris = np.concatenate([q[:, [0, 1, 2]], q[:, [0, 2, 3]]])
+    isfrit = ~clear[fy, fx]
     all_v.append(verts)
     all_f.append(tris + off)
     all_r.append(np.full(len(tris), rid))
+    all_frit.append(np.concatenate([isfrit, isfrit]))
     off += len(verts)
+
+    # BACKSTOP: the aperture can exceed every stamped stencil (the A-pillar
+    # corner hole, v18-v21) and edge styling cannot cover a hole. Emit a much
+    # larger copy of the pane surface pushed INBOARD — behind the shell it is
+    # invisible, but any sightline through an aperture gap now ends on dark
+    # backstop instead of the studio backdrop.
+    bs = ndimage.binary_dilation(smc, iterations=15)
+    corner2 = np.zeros((gh + 1, gw + 1), bool)
+    corner2[:-1, :-1] |= bs; corner2[1:, :-1] |= bs
+    corner2[:-1, 1:] |= bs;  corner2[1:, 1:] |= bs
+    vid2 = np.full((gh + 1, gw + 1), -1, np.int64)
+    cy2, cx2 = np.where(corner2)
+    vid2[cy2, cx2] = np.arange(len(cy2))
+    cu2b = lo[0] + cx2 * cell
+    cv2b = lo[1] + cy2 * cell
+    ch2 = (coef[0] + coef[1] * cu2b + coef[2] * cv2b +
+           coef[3] * cu2b * cu2b + coef[4] * cu2b * cv2b + coef[5] * cv2b * cv2b)
+    bverts = (ctr + cu2b[:, None] * b1 + cv2b[:, None] * b2 +
+              ch2[:, None] * nrm - 0.05 * outward)
+    by, bx = np.where(bs)
+    q2 = np.stack([vid2[by, bx], vid2[by, bx + 1],
+                   vid2[by + 1, bx + 1], vid2[by + 1, bx]], 1)
+    btris = np.concatenate([q2[:, [0, 1, 2]], q2[:, [0, 2, 3]]])
+    bs_v.append(bverts)
+    bs_f.append(btris + bs_off)
+    bs_off += len(bverts)
 
     # flag inner-skin interior fragments inside this window's shell
     ic = cent[int_idx]
@@ -185,8 +217,9 @@ for gid, members in sorted(groups.items()):
           f"inner-skin flagged {int(hit.sum())}")
 
 V = np.vstack(all_v); F = np.vstack(all_f); R = np.concatenate(all_r)
-np.savez(OUT, vertices=V, faces=F, region=R, drop=np.where(drop)[0],
-         body_cand=np.where(body_cand)[0])
+np.savez(OUT, vertices=V, faces=F, region=R, frit=np.concatenate(all_frit),
+         bs_vertices=np.vstack(bs_v), bs_faces=np.vstack(bs_f),
+         drop=np.where(drop)[0], body_cand=np.where(body_cand)[0])
 print(f"panes: {len(V)} verts, {len(F)} tris total, "
       f"{int(drop.sum())} inner-skin + {int(body_cand.sum())} body-chip "
       f"candidates flagged -> {OUT}")

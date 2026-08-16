@@ -123,20 +123,43 @@ hc = hull.vertices.mean(0)
 # lining. A near-BLACK matte occluder sitting almost flush behind every
 # pane closes the path from all angles and reads as correct dark glass
 # (v11's mistake was 22-grey — a LIT slab, not the flush placement).
-hull.vertices = hc + (hull.vertices - hc) * 0.97
+hull.vertices = hc + (hull.vertices - hc) * 0.93   # a touch deeper (v20):
 hull.visual = trimesh.visual.TextureVisuals(material=PBRMaterial(
-    name="cabin_occluder", baseColorFactor=[9, 9, 11, 255],
-    metallicFactor=0.0, roughnessFactor=1.0))
+    name="cabin_occluder", baseColorFactor=[14, 14, 17, 255],  # + two shades
+    metallicFactor=0.0, roughnessFactor=1.0))      # lighter, so the glass
+                                                   # reads tinted-with-depth
+                                                   # instead of flat grey
 out.add_geometry(hull, node_name="cabin_occluder", geom_name="cabin_occluder")
 print(f"cabin occluder: {len(hull.faces)} tris")
 
-# constructed glazing
+# constructed glazing: clear centre + ceramic FRIT band around each pane
+# (real-glass look; the frit also seals every aperture-edge artefact).
+# The frit material name must NOT contain "glass" — the render worker
+# forces transmission onto glass-named materials and would clear the band.
 pz = np.load(PANES)
-glass = trimesh.Trimesh(vertices=pz["vertices"], faces=pz["faces"], process=True)
-glass.visual = trimesh.visual.TextureVisuals(material=PBRMaterial(
-    name="glass", baseColorFactor=[20, 24, 28, 90], metallicFactor=0.0,
-    roughnessFactor=0.05, alphaMode="BLEND", doubleSided=True))
-out.add_geometry(glass, node_name="glass", geom_name="glass")
+frit_mask = pz["frit"] if "frit" in pz else np.zeros(len(pz["faces"]), bool)
+for sel, name, mat in (
+        (~frit_mask, "glass", PBRMaterial(
+            name="glass", baseColorFactor=[20, 24, 28, 90], metallicFactor=0.0,
+            roughnessFactor=0.05, alphaMode="BLEND", doubleSided=True)),
+        (frit_mask, "frit_band", PBRMaterial(
+            name="frit_band", baseColorFactor=[8, 8, 9, 255],
+            metallicFactor=0.0, roughnessFactor=0.55, doubleSided=True))):
+    if not sel.any():
+        continue
+    part = trimesh.Trimesh(vertices=pz["vertices"], faces=pz["faces"][sel],
+                           process=True)
+    part.visual = trimesh.visual.TextureVisuals(material=mat)
+    out.add_geometry(part, node_name=name, geom_name=name)
+if "bs_vertices" in pz:
+    back = trimesh.Trimesh(vertices=pz["bs_vertices"], faces=pz["bs_faces"],
+                           process=True)
+    back.visual = trimesh.visual.TextureVisuals(material=PBRMaterial(
+        name="aperture_backstop", baseColorFactor=[10, 10, 12, 255],
+        metallicFactor=0.0, roughnessFactor=1.0, doubleSided=True))
+    out.add_geometry(back, node_name="aperture_backstop",
+                     geom_name="aperture_backstop")
+    print(f"aperture backstop: {len(back.faces)} tris")
 
 # donor wheels, positioned from the machine's own wheel labels
 tyre_d, rim_d, d_dia, d_wid = load_donor(DONOR, DGEOM)
@@ -155,6 +178,27 @@ for sl in (1, -1):
         dia = float(np.clip(2 * np.percentile(r, 96), 0.50, 0.80))
         outer = float(np.percentile(np.abs(q[:, 2]), 98)) * sw
         s = dia / d_dia
+        # brake kit (v20, per review: a wheel ASSEMBLY needs disc + caliper):
+        # silver disc cylinder behind the spokes, red caliper block at the
+        # leading top quarter — reads instantly as a real corner assembly
+        zc_ = (outer - sw * 0.012) - sw * (d_wid * s) * 0.62
+        disc = trimesh.creation.cylinder(radius=0.31 * dia, height=0.02,
+                                         sections=48)
+        disc.apply_transform(
+            trimesh.transformations.rotation_matrix(np.pi / 2, [1, 0, 0]))
+        disc.apply_translation([cx, dia / 2, zc_])
+        disc.visual = trimesh.visual.TextureVisuals(material=PBRMaterial(
+            name="Brake_Disc", baseColorFactor=[120, 121, 124, 255],
+            metallicFactor=0.9, roughnessFactor=0.45))
+        out.add_geometry(disc, node_name=f"disc_{placed}",
+                         geom_name=f"disc_{placed}")
+        cal = trimesh.creation.box(extents=[0.16 * dia, 0.11 * dia, 0.055])
+        cal.apply_translation([cx + 0.20 * dia * sl, dia / 2 + 0.20 * dia, zc_])
+        cal.visual = trimesh.visual.TextureVisuals(material=PBRMaterial(
+            name="Brake_Caliper", baseColorFactor=[150, 22, 26, 255],
+            metallicFactor=0.2, roughnessFactor=0.5))
+        out.add_geometry(cal, node_name=f"cal_{placed}",
+                         geom_name=f"cal_{placed}")
         for part, nm in ((tyre_d, "Tyre_Rubber"), (rim_d, "Rim_Alloy")):
             inst = part.copy()
             inst.apply_scale(s)
