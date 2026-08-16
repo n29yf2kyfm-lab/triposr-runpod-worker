@@ -1842,6 +1842,33 @@ session, every stage validated by render:
     materials, exposing every residual facet and the interior behind it. A clean
     local rear is NOT evidence — only the production tile is.
 
+**v4–v6 SAME DAY (owner said "Go"), each fix diagnosed by measurement then
+render-verified — the machine's current best is v6 (staging/gseg/golf_seg6.glb,
+GSEG6_SHEET.jpg, MACHINE_V1_V6.jpg start-vs-now strip):**
+  * The tailgate "chrome band" was NOT glass — label census showed 13,364 LAMP
+    faces spanning the tailgate (DINO "tail light" boxes over-shoot) and the
+    dark-gloss lens renders as mirror chrome. Lamp centre-band eviction
+    (zc<0.45) in seg_boundary killed it. Lamps kept at the corners.
+  * Welded connectivity merges the whole greenhouse into ONE 51k-face "glass
+    region" (rms 117‰ — quadric garbage; normal-split leaves still 60-140‰).
+    The fix is architectural: seg_boundary saves per-WINDOW region ids at stamp
+    time, glass_smooth fits per window — every fit then lands 9-20‰ -> 2-5‰
+    like real glass. Plus a safety ceiling: leaves above 50‰ are never pulled.
+  * Interior/unseen now gets DARK MATTE in seg_assemble, not the baked texture:
+    the worker forces transmission onto glass and a noisy grey textured cabin
+    behind it reads as crinkled silver.
+  * Tapered pull at region borders (4 vertex rings): border verts are frozen to
+    keep the glass sealed to the body, so a full pull one ring in tilted border
+    faces into a dark chip ring along every window edge (v5's new defect).
+  * Local render trap #2: BLEND glass renders as stochastic dither in the local
+    harness at low samples (the "speckled windscreen") — an artefact of hashed
+    transparency, not the file. Production arbitrates.
+  * v6 verdicts: all material gates pass, blue control perfect, side view
+    genuinely clean. Agent eye: still SCRAP — "crystalline faceting on body and
+    glass", i.e. Pixal's own surface. THE MACHINE'S LAYERS ARE NOW DONE:
+    everything fixable by labels/geometry-hygiene is fixed; the remaining gap is
+    generator surfacing, which no downstream pass can add detail back into.
+
 ## Alam 3D / TRELLIS.2: measured ceiling on automotive surfacing (2026-08-09)
 
 Tested end to end on a 2011 Yaris XP90 from two Toyota press photos. The machine WORKS —
