@@ -59,14 +59,16 @@ def stage_seg(canon, work):
 
 
 def stage_finish(canon, work):
+    labels_b = os.path.join(work, "car_labels_b.npy")
     sh([sys.executable, os.path.join(HERE, "seg_boundary.py"),
-        canon, os.path.join(work, "car_labels_r.npy"),
-        os.path.join(work, "car_labels_b.npy")])
+        canon, os.path.join(work, "car_labels_r.npy"), labels_b])
     clean = os.path.join(work, "canon_clean.glb")
     sh([sys.executable, os.path.join(HERE, "surface_clean.py"), canon, clean])
+    flat = os.path.join(work, "canon_flat.glb")
+    sh([sys.executable, os.path.join(HERE, "glass_smooth.py"),
+        clean, labels_b, flat])
     sh([sys.executable, os.path.join(TRELLIS, "seg_assemble.py"),
-        clean, os.path.join(work, "car_labels_b.npy"),
-        os.path.join(work, "car_final.glb")])
+        flat, labels_b, os.path.join(work, "car_final.glb")])
 
 
 def stage_gates(work, tag):
