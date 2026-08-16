@@ -215,14 +215,42 @@ known_sources = {e.get("sourceReferenceId") for e in cat if e.get("sourceReferen
 known_ids = {e["assetId"] for e in cat}
 paints = {}
 for r in csv.DictReader(open(PAINT_DB)):
-    paints.setdefault(r["MANUFACTURER"].strip().lower(), []).append(r)
+    # Key on the SAME normalised form the lookup uses. The DB writes
+    # "Mercedes-Benz" with a hyphen while the lookup has always converted
+    # hyphens to spaces, so every Mercedes entry ever published carried an
+    # empty colourOptions list (measured 2026-08-16: 56 live cars). Keying
+    # both sides identically is the fix; no make loses paints by it.
+    paints.setdefault(r["MANUFACTURER"].strip().lower().replace("-", " "), []).append(r)
+
+def _paint_make(make):
+    """Resolve the make through the SAME alias map the resolver uses.
+
+    The paint DB is keyed by UK marque (it holds 9 `vauxhall` rows and no
+    `opel` rows), while a source title states the marque the uploader typed.
+    platform/resolver/index.ts normalises BOTH the vehicle's make and the
+    asset's make through aliases.json, so an entry filed `opel` matches a
+    DVLA "VAUXHALL" lookup correctly — but this lookup used the raw string
+    and silently returned [] for every aliased marque. Measured 2026-08-16:
+    the whole vx1 wave shipped with empty colourOptions while real Vauxhall
+    paints existed. Falls back to the raw make when the alias map is
+    unreachable, which is the old behaviour and never worse.
+    """
+    m = make.lower().replace("-", " ").strip()
+    try:
+        with urllib.request.urlopen(
+                f"{SB_BASE}/public/car-renders/resolver/aliases.json", timeout=20) as r:
+            al = json.load(r).get("make", {})
+        return (al.get(m) or m).lower().replace("-", " ")
+    except Exception:
+        return m
+
 
 def colour_options(make):
     return [{"family": r["COLOUR_FAMILY"].strip().split()[-1].lower(),
              "label": r["OEM_PAINT_NAME"].strip(), "hex": None,
              "finish": r["FINISH"].strip().lower(),
              "oemPaintName": r["OEM_PAINT_NAME"].strip(), "glbUrl": None}
-            for r in paints.get(make.lower().replace("-", " "), [])]
+            for r in paints.get(_paint_make(make), [])]
 
 def slug(s):
     return re.sub(r"-+", "-", re.sub(r"[^a-z0-9]+", "-", s.lower())).strip("-")
