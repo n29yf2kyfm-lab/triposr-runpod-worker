@@ -1131,6 +1131,40 @@ end-on views, az 35/125/215/305 = the four three-quarter views** (215 = rear
 renders were burned rediscovering it in one session.
 
 
+## Council audit 2026-08-16 (night): why the machine campaign kept making mistakes
+
+Owner-ordered self-review after repeated reviewer rejections (v26 lamp pass,
+white-dot saga, crumpled-foil normals). ROOT CAUSE: velocity outrunning
+verification IN A SPECIFIC DIRECTION — fixes get verified after building,
+FOUNDATIONS do not get verified before building. Every rejected pass was
+built correctly on something unvalidated (lenses on a garbage label, styling
+over a stencil shortfall, six dot theories on unexamined components).
+
+The five failures and their mechanisms, kept short because the rules matter
+more: (1) crumpled foil = missing NORMAL accessors, a lesson ALREADY in this
+file — prose memory does not fire at use-time; (2) white dots = six plausible
+fixes each removing real junk, progress-feel masking wrong diagnosis, and a
+self-built ray probe that "confirmed" my own hypothesis while the render
+falsified it — a probe that cannot distinguish rival theories is not
+evidence; (3) v26 lamps fitted over a label a free clay render would have
+condemned first; (4) az convention burned renders twice in one day while
+written above; (5) cosmetic passes (frit/lens/occluder tweaks) repeatedly
+applied where the defect was structural — full-car beauty sheets average
+away component failures, which is why they passed my eye and failed the
+reviewer's.
+
+RULES NOW BINDING ON THE MACHINE:
+  * DIAGNOSTIC-FIRST GATE: no production render of a changed zone until its
+    clay/matID diagnostic (rear_diag / qc_turntables) passed. Same standing
+    as normals_fix.
+  * ONE failed fix -> component bisection (toggle_probe). Not two. One.
+  * A probe must be able to prove the RIVAL theory; write down what that
+    observation would look like before building the probe.
+  * Conventions become code, not prose (az mappings, pose constants).
+  * Every delivered artefact self-describes on the image: version, what
+    changed, and any expected-odd feature (the "duplicate" bisect tiles C/D
+    cost a review round for want of one caption line).
+
 ## Root-cause analysis method (apply whenever investigating a problem)
 
 Saved at the user's request. When something breaks, is slow, is wrong, or
