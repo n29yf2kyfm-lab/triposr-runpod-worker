@@ -290,3 +290,78 @@ def group_for_v2(final_class):
 def _check_groups_v2():
     return (sorted(set(FINAL_CLASSES) - set(_GROUP_OF_V2)),
             sorted(set(_GROUP_OF_V2) - set(FINAL_CLASSES)))
+
+
+# ----------------------------------------------- painted body panels (v3) ---
+# PAINT MISMATCH IS A MEASUREMENT BETWEEN PANELS, NOT A CLASS TO DETECT.
+#
+# Searching four platforms for labelled "paint mismatch", "panel gap" and
+# "fading" returned zero examples, and that absence is not an oversight in the
+# public data — it is the wrong shape for the problem. A respray does not look
+# like anything on its own; it looks WRONG NEXT TO THE PANEL BESIDE IT. So the
+# detector's job is to find the panels, and the comparison does the rest:
+# segment adjacent panels, measure their colour and gloss, and flag the pair
+# that disagrees. No labelled mismatch is required, which is fortunate, since
+# none exists.
+#
+# Only PAINTED BODY panels are listed. Glass, wheels, lights, grille, mirrors
+# and plates are excluded: comparing the colour of a windscreen against a wing
+# says nothing about paintwork, and including them would generate false
+# mismatches on every car. Bumpers are kept but flagged `plastic` — they are
+# painted and worth comparing, but moulded plastic takes colour slightly
+# differently from steel even from the factory, so a bumper-to-wing difference
+# needs a wider tolerance than wing-to-door.
+PAINTED_PANELS = {
+    "hood":          {"plastic": False, "adjacent": ("fender", "windshield")},
+    "roof":          {"plastic": False, "adjacent": ("quarter_panel",)},
+    "trunk":         {"plastic": False, "adjacent": ("quarter_panel",
+                                                     "back_bumper")},
+    "fender":        {"plastic": False, "adjacent": ("hood", "front_door",
+                                                     "front_bumper")},
+    "front_door":    {"plastic": False, "adjacent": ("fender", "back_door",
+                                                     "rocker_panel")},
+    "back_door":     {"plastic": False, "adjacent": ("front_door",
+                                                     "quarter_panel",
+                                                     "rocker_panel")},
+    "quarter_panel": {"plastic": False, "adjacent": ("back_door", "roof",
+                                                     "trunk", "back_bumper")},
+    "rocker_panel":  {"plastic": False, "adjacent": ("front_door",
+                                                     "back_door")},
+    "front_bumper":  {"plastic": True,  "adjacent": ("fender",)},
+    "back_bumper":   {"plastic": True,  "adjacent": ("quarter_panel",
+                                                     "trunk")},
+}
+
+# Present in cardata_parts but deliberately NOT compared for paint.
+NON_PAINTED = ("windshield", "back_windshield", "front_window", "back_window",
+               "front_wheel", "back_wheel", "headlight", "tail_light",
+               "mirror", "grille", "license_plate")
+
+
+def is_painted_panel(name):
+    return str(name).strip().lower() in PAINTED_PANELS
+
+
+def panel_neighbours(name):
+    """Panels whose paint SHOULD match this one on an unrepaired car."""
+    spec = PAINTED_PANELS.get(str(name).strip().lower())
+    return tuple(spec["adjacent"]) if spec else ()
+
+
+def _check_panels():
+    # Adjacency MUST be symmetric. Three pairs were one-directional on the
+    # first draft — rocker/back_door, front_bumper/fender, back_bumper/quarter
+    # — which would have reported a mismatch from one side of the pair and not
+    # the other, depending only on which panel the loop reached first. A
+    # finding that appears or vanishes with iteration order is worse than no
+    # finding at all, so this is checked rather than assumed.
+    bad = [p for spec in PAINTED_PANELS.values() for p in spec["adjacent"]
+           if p not in PAINTED_PANELS and p not in NON_PAINTED]
+    # adjacency must be symmetric among painted panels, or a mismatch would be
+    # reported from one side only depending on iteration order
+    asym = []
+    for a, spec in PAINTED_PANELS.items():
+        for b in spec["adjacent"]:
+            if b in PAINTED_PANELS and a not in PAINTED_PANELS[b]["adjacent"]:
+                asym.append((a, b))
+    return bad, asym
