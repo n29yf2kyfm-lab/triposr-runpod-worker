@@ -27,6 +27,7 @@ sys.path.insert(0, __file__.rsplit("/", 3)[0] + "/pipeline/trellis")
 from wheel_swap import load_donor, CAVITY_MAT
 
 CANON, LAB, PANES, DONOR, DGEOM, OUT = sys.argv[1:7]
+REAR = sys.argv[7] if len(sys.argv) > 7 else None   # rear_kit.py npz
 BODY, GLASS, WHEEL, LAMP, UNSEEN = 0, 1, 2, 3, 4
 
 sc = trimesh.load(CANON, force="scene")
@@ -160,6 +161,24 @@ if "bs_vertices" in pz:
     out.add_geometry(back, node_name="aperture_backstop",
                      geom_name="aperture_backstop")
     print(f"aperture backstop: {len(back.faces)} tris")
+
+# rear kit: constructed tail lamp lenses + number plate (rear_kit.py)
+if REAR:
+    rz = np.load(REAR)
+    for vk, fk, name, mat in (
+            ("lens_v", "lens_f", "Tail_Lens", PBRMaterial(
+                name="Tail_Lens", baseColorFactor=[52, 7, 9, 255],
+                metallicFactor=0.0, roughnessFactor=0.12, doubleSided=True)),
+            ("frame_v", "frame_f", "Plate_Frame", PBRMaterial(
+                name="Plate_Frame", baseColorFactor=[12, 12, 13, 255],
+                metallicFactor=0.0, roughnessFactor=0.6, doubleSided=True)),
+            ("plate_v", "plate_f", "Number_Plate", PBRMaterial(
+                name="Number_Plate", baseColorFactor=[228, 228, 220, 255],
+                metallicFactor=0.0, roughnessFactor=0.55, doubleSided=True))):
+        part = trimesh.Trimesh(vertices=rz[vk], faces=rz[fk], process=True)
+        part.visual = trimesh.visual.TextureVisuals(material=mat)
+        out.add_geometry(part, node_name=name, geom_name=name)
+    print("rear kit: tail lenses + plate + frame added")
 
 # donor wheels, positioned from the machine's own wheel labels
 tyre_d, rim_d, d_dia, d_wid = load_donor(DONOR, DGEOM)
