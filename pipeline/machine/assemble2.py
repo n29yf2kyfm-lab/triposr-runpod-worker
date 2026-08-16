@@ -1,0 +1,123 @@
+#!/usr/bin/env python3
+"""assemble2.py — v10 COMPONENT assembly: constructed panes + donor wheels.
+
+The v10 review standard: stop repairing neural-blob components, replace
+them. This assembler builds the car from:
+  * body     — original geometry + baked texture, material `carpaint`
+  * interior — original geometry, dark matte (reads as cabin through glass)
+  * lamp     — original geometry, dark gloss lens
+  * glass    — CONSTRUCTED panes from glass_panes.py (the blob glass faces
+               are dropped entirely; the panes sit on each window's fitted
+               quadric with a clean outline)
+  * wheels   — DONOR geometry (audited catalogue wheel, GR Supra FL; the
+               wheel_swap.py method: donor contributes geometry only,
+               tyre/rim split by radius, our materials). Original
+               wheel-labeled faces become a near-black Arch_Cavity — deleting
+               them holes the shell; a dark cavity reads as arch shadow.
+
+Run: python3 assemble2.py <canon.glb> <labels.npy> <panes.npz> <donor.glb>
+                          <donor_geom> <out.glb>
+"""
+import sys
+import numpy as np
+import trimesh
+from trimesh.visual.material import PBRMaterial
+
+sys.path.insert(0, __file__.rsplit("/", 3)[0] + "/pipeline/trellis")
+from wheel_swap import load_donor, CAVITY_MAT
+
+CANON, LAB, PANES, DONOR, DGEOM, OUT = sys.argv[1:7]
+BODY, GLASS, WHEEL, LAMP, UNSEEN = 0, 1, 2, 3, 4
+
+sc = trimesh.load(CANON, force="scene")
+m = trimesh.util.concatenate([g for g in sc.geometry.values()])
+label = np.load(LAB).copy()
+cent = m.triangles_center
+
+# the outermost two rings of blob-glass faces are the WINDOW SURROUND, not
+# glass: keep them as body so the aperture edge stays body-coloured and the
+# constructed pane tucks behind a solid rim (dropping them left a dark gap
+# ring around every window — measured on the v10 first cut's clay)
+adj = m.face_adjacency
+for _ in range(2):
+    gm_ = label == GLASS
+    ring = np.zeros(len(label), bool)
+    edge = gm_[adj[:, 0]] != gm_[adj[:, 1]]
+    ring[adj[edge, 0]] = True
+    ring[adj[edge, 1]] = True
+    flip = ring & gm_
+    label[flip] = BODY
+print(f"aperture rim: {int((np.load(LAB) == GLASS).sum() - (label == GLASS).sum())} "
+      f"glass border faces kept as body surround")
+
+out = trimesh.Scene()
+
+# body keeps the baked texture (grille/badge/lamp graphics live there)
+idx = np.where(label == BODY)[0]
+body = m.submesh([idx], append=True)
+if hasattr(body.visual, "material") and body.visual.material is not None:
+    body.visual.material.name = "carpaint"
+out.add_geometry(body, node_name="carpaint", geom_name="carpaint")
+
+flat_mats = {
+    UNSEEN: ("interior", PBRMaterial(name="interior",
+             baseColorFactor=[26, 26, 29, 255], metallicFactor=0.0,
+             roughnessFactor=0.9)),
+    LAMP: ("Lamp_Lens", PBRMaterial(name="Lamp_Lens",
+           baseColorFactor=[15, 15, 17, 255], metallicFactor=0.0,
+           roughnessFactor=0.08)),
+    WHEEL: ("Arch_Cavity", PBRMaterial(**CAVITY_MAT)),
+}
+for key, (name, mat) in flat_mats.items():
+    idx = np.where(label == key)[0]
+    if not len(idx):
+        continue
+    sub = trimesh.Trimesh(vertices=m.vertices, faces=m.faces[idx], process=True)
+    sub.visual = trimesh.visual.TextureVisuals(material=mat)
+    out.add_geometry(sub, node_name=name, geom_name=name)
+
+# constructed glazing
+pz = np.load(PANES)
+glass = trimesh.Trimesh(vertices=pz["vertices"], faces=pz["faces"], process=True)
+glass.visual = trimesh.visual.TextureVisuals(material=PBRMaterial(
+    name="glass", baseColorFactor=[20, 24, 28, 90], metallicFactor=0.0,
+    roughnessFactor=0.05, alphaMode="BLEND", doubleSided=True))
+out.add_geometry(glass, node_name="glass", geom_name="glass")
+
+# donor wheels, positioned from the machine's own wheel labels
+tyre_d, rim_d, d_dia, d_wid = load_donor(DONOR, DGEOM)
+wc = cent[label == WHEEL]
+x_mid = wc[:, 0].mean()
+placed = 0
+for sl in (1, -1):
+    for sw in (1, -1):
+        q = wc[((wc[:, 0] - x_mid) * sl > 0) & (wc[:, 2] * sw > 0)]
+        if len(q) < 200:
+            print(f"corner {sl:+d}/{sw:+d}: too few wheel faces — skipped")
+            continue
+        cx = float(np.median(q[:, 0]))
+        cy = float(np.median(q[:, 1]))
+        r = np.hypot(q[:, 0] - cx, q[:, 1] - cy)
+        dia = float(np.clip(2 * np.percentile(r, 96), 0.50, 0.80))
+        outer = float(np.percentile(np.abs(q[:, 2]), 98)) * sw
+        s = dia / d_dia
+        for part, nm in ((tyre_d, "Tyre_Rubber"), (rim_d, "Rim_Alloy")):
+            inst = part.copy()
+            inst.apply_scale(s)
+            ang = np.pi / 2 if sw > 0 else -np.pi / 2
+            inst.apply_transform(
+                trimesh.transformations.rotation_matrix(ang, [0, 1, 0]))
+            inst.apply_translation([cx, dia / 2,
+                                    (outer - sw * 0.012) - sw * (d_wid * s) / 2])
+            out.add_geometry(inst, node_name=f"{nm}_{placed}",
+                             geom_name=f"{nm}_{placed}")
+        placed += 1
+        print(f"wheel {sl:+d}/{sw:+d}: x={cx:.2f} axle_y={cy:.2f} "
+              f"dia={dia:.2f} outer_z={outer:+.2f}")
+if placed < 4:
+    raise SystemExit(f"only {placed}/4 wheels placed — refusing a "
+                     f"{placed}-wheeled car")
+
+out.export(OUT)
+import os
+print("assembled v10:", OUT, os.path.getsize(OUT), "bytes")
