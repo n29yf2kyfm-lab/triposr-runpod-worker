@@ -1165,6 +1165,168 @@ def _split_for_openings(lo, hi, wall, level=0):
     return out
 
 
+
+# --- IFC services ---------------------------------------------------------
+
+# Every routed run and every terminal, as the IFC4 entities a contractor's
+# software expects — so the file that opens in Revit or Solibri carries the
+# first fix, not just the shell. Grouped into IfcDistributionSystems so the
+# heating, the power and the drainage arrive as SYSTEMS rather than loose
+# geometry.
+_MEP_SEGMENT = {
+    "heating": ("IfcPipeSegment", "RIGIDSEGMENT"),
+    "drainage": ("IfcPipeSegment", "RIGIDSEGMENT"),
+    "power": ("IfcCableSegment", "CABLESEGMENT"),
+}
+_MEP_SYSTEM = {
+    "heating": "HEATING",
+    "power": "ELECTRICAL",
+    "drainage": "DRAINAGE",
+}
+_MEP_TERMINAL = {
+    "radiator": ("IfcSpaceHeater", "RADIATOR"),
+    "extract fan": ("IfcAirTerminal", "EXHAUSTVENT"),
+    "boiler": ("IfcBoiler", "STEAM"),
+    "consumer unit": ("IfcElectricDistributionBoard", "CONSUMERUNIT"),
+    "smoke alarm": ("IfcAlarm", "MANUALPULL"),
+    "heat alarm": ("IfcAlarm", "MANUALPULL"),
+    "soil stack": ("IfcPipeSegment", "RIGIDSEGMENT"),
+}
+
+
+def _mep_radius_m(size):
+    """Metres of radius from a size label like '15mm copper' or '2.5mm2 T&E'.
+
+    A cable is not round in the way a pipe is; twin-and-earth is flat, so
+    its ~3mm equivalent radius here is a drawing convenience and says so.
+    """
+    digits = ""
+    for ch in str(size):
+        if ch.isdigit() or (ch == "." and digits):
+            digits += ch
+        elif digits:
+            break
+    if "mm2" in str(size) or "T&E" in str(size):
+        return 0.003
+    try:
+        return max(0.004, float(digits) / 2000.0)
+    except ValueError:                       # pragma: no cover - odd label
+        return 0.01
+
+
+def _ifc_services(f, run, body, storeys, model, per):
+    """Write mep.py's routes and terminals into the open IFC file."""
+    mep = model.get("mep") or {}
+    runs = mep.get("runs") or []
+    if not runs and not mep.get("terminals"):
+        return 0
+
+    import ifcopenshell.api.system
+
+    systems, written = {}, 0
+
+    def system_for(name):
+        if name not in systems:
+            sysname = {"heating": "Heating", "power": "Power",
+                       "drainage": "Drainage above and below ground"}
+            sysobj = run("root.create_entity", f,
+                         ifc_class="IfcDistributionSystem",
+                         name=sysname.get(name, name.title()))
+            sysobj.PredefinedType = _MEP_SYSTEM.get(name)
+            systems[name] = sysobj
+        return systems[name]
+
+    def storey_for(level):
+        if level is None:
+            return storeys[0]
+        return storeys[min(max(int(level), 0), len(storeys) - 1)]
+
+    def place_along(el, a, b, radius):
+        """A circular solid swept from a to b — the pipe or cable itself."""
+        dx, dy, dz = (b[0] - a[0], b[1] - a[1], b[2] - a[2])
+        length = math.sqrt(dx * dx + dy * dy + dz * dz)
+        if length < 1e-6:
+            return False
+        zx, zy, zz = dx / length, dy / length, dz / length
+        # any axis perpendicular to the run will do for the profile's x
+        if abs(zz) < 0.9:
+            ux, uy, uz = -zy, zx, 0.0
+        else:
+            ux, uy, uz = 1.0, 0.0, 0.0
+        un = math.sqrt(ux * ux + uy * uy + uz * uz)
+        ux, uy, uz = ux / un, uy / un, uz / un
+        vx = zy * uz - zz * uy
+        vy = zz * ux - zx * uz
+        vz = zx * uy - zy * ux
+        # plan (x, y, z) is the IFC world too — no flip, unlike the GLB
+        run("geometry.edit_object_placement", f, product=el, matrix=(
+            (ux, vx, zx, a[0]), (uy, vy, zy, a[1]), (uz, vz, zz, a[2]),
+            (0.0, 0.0, 0.0, 1.0)))
+        profile = f.create_entity("IfcCircleProfileDef", ProfileType="AREA",
+                                  Radius=float(radius))
+        solid = f.create_entity(
+            "IfcExtrudedAreaSolid", SweptArea=profile,
+            Position=f.create_entity(
+                "IfcAxis2Placement3D",
+                Location=f.create_entity("IfcCartesianPoint",
+                                         Coordinates=(0.0, 0.0, 0.0))),
+            ExtrudedDirection=f.create_entity("IfcDirection",
+                                              DirectionRatios=(0.0, 0.0, 1.0)),
+            Depth=float(length))
+        shape = f.create_entity(
+            "IfcShapeRepresentation", ContextOfItems=body,
+            RepresentationIdentifier="Body", RepresentationType="SweptSolid",
+            Items=[solid])
+        run("geometry.assign_representation", f, product=el,
+            representation=shape)
+        return True
+
+    for r in runs:
+        cls, ptype = _MEP_SEGMENT.get(r["system"], ("IfcPipeSegment",
+                                                    "RIGIDSEGMENT"))
+        radius = _mep_radius_m(r.get("size"))
+        sysobj = system_for(r["system"])
+        pts = r["points"]
+        for i in range(len(pts) - 1):
+            a, b = pts[i], pts[i + 1]
+            # A zero-length segment must not become an entity at all: an
+            # element with no placement and no representation is junk in
+            # somebody else's model, and it validates as a real object.
+            if math.dist(a, b) < 1e-6:
+                continue
+            el = run("root.create_entity", f, ifc_class=cls,
+                     name=f"{r['service']} {r.get('size', '')}".strip())
+            el.PredefinedType = ptype
+            if not place_along(el, a, b, radius):
+                continue
+            run("spatial.assign_container", f, products=[el],
+                relating_structure=storey_for(r.get("level")))
+            ifcopenshell.api.system.assign_system(f, products=[el],
+                                                  system=sysobj)
+            written += 1
+
+    for t in mep.get("terminals") or []:
+        spec = _MEP_TERMINAL.get(t.get("type"))
+        if not spec or t.get("x") is None:
+            continue
+        cls, ptype = spec
+        el = run("root.create_entity", f, ifc_class=cls,
+                 name=f"{t['type']} — {t.get('room', '')}".strip(" —"))
+        try:
+            el.PredefinedType = ptype
+        except Exception:                    # pragma: no cover - schema
+            pass
+        lv = int(t.get("level") or 0)
+        z = t.get("z") if t.get("z") is not None else lv * per + 0.5
+        a = (t["x"], t["y"], z)
+        b = (t["x"], t["y"], z + 0.6)
+        if place_along(el, a, b, 0.12):
+            run("spatial.assign_container", f, products=[el],
+                relating_structure=storey_for(lv))
+            written += 1
+    return written
+
+
 def write_ifc(model, path, project_name="Modelled Building"):
     """IFC4 with the WHOLE building in it, not a husk of it.
 
@@ -1363,6 +1525,8 @@ def write_ifc(model, path, project_name="Modelled Building"):
         base = min(int(room.get("base_level") or 0), storeys_n - 1)
         run("aggregate.assign_object", f, products=[space],
             relating_object=storeys[base])
+
+    _ifc_services(f, run, body, storeys, model, per)
 
     f.write(path)
     return path
