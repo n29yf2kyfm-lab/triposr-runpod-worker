@@ -67,8 +67,13 @@ def stage_finish(canon, work):
     flat = os.path.join(work, "canon_flat.glb")
     sh([sys.executable, os.path.join(HERE, "glass_smooth.py"),
         clean, labels_b, flat])
+    raw = os.path.join(work, "car_raw.glb")
     sh([sys.executable, os.path.join(TRELLIS, "seg_assemble.py"),
-        flat, labels_b, os.path.join(work, "car_final.glb")])
+        flat, labels_b, raw])
+    # NEVER ship without this: trimesh submesh exports drop vertex normals and
+    # the car renders as crumpled foil (measured v6 -> v7)
+    sh([sys.executable, os.path.join(HERE, "normals_fix.py"),
+        raw, os.path.join(work, "car_final.glb")])
 
 
 def stage_gates(work, tag):
