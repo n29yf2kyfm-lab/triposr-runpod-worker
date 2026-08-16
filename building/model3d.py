@@ -1412,12 +1412,22 @@ def _with_buildability(model):
     except ImportError:                     # pragma: no cover - optional
         pass
 
+    # Every pipe and wire ROUTED, not estimated — needs the heating,
+    # electrical and ventilation designs above it.
+    try:
+        import mep as _mep
+        out["mep"] = _mep.design(model, heat=out.get("heat"),
+                                 elec=out.get("elec"), vent=out.get("vent"))
+    except ImportError:                     # pragma: no cover - optional
+        pass
+
     # The bill of quantities counts what the services designs
     # specified, so it runs LAST of the design passes.
     try:
         import quantities as _q
         out["quantities_bill"] = _q.bill(model, heat=out.get("heat"),
-                                         elec=out.get("elec"))
+                                         elec=out.get("elec"),
+                                         mep=out.get("mep"))
     except ImportError:                     # pragma: no cover - optional
         pass
 
@@ -1484,6 +1494,8 @@ def _absorb_buildability(model, extra):
         model["vent"] = extra["vent"]
     if extra.get("elec"):
         model["elec"] = extra["elec"]
+    if extra.get("mep"):
+        model["mep"] = extra["mep"]
     if extra.get("quantities_bill"):
         model["quantities_bill"] = extra["quantities_bill"]
     model["warnings"] = list(extra["warnings"])

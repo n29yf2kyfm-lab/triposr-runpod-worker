@@ -209,11 +209,38 @@ def finishes(model):
     ]
 
 
-def services(model, heat=None, elec=None):
+def services(model, heat=None, elec=None, mep=None):
+    """Cable and pipe: ROUTED lengths when mep.py has drawn the runs,
+    estimating rules only as the fallback.
+
+    The difference matters and is stated per line. A rule of thumb says
+    "8 m of twin-and-earth per socket" and is a defensible guess; a routed
+    ring says how far the cable actually travels through this house.
+    """
     # the pipeline computes heat/elec in the same pass as this bill, so
     # they arrive as arguments there; a saved model carries them itself
     elec = elec if elec is not None else (model.get("elec") or {})
     heat = heat if heat is not None else (model.get("heat") or {})
+    mep = mep if mep is not None else (model.get("mep") or {})
+    routed = mep.get("totals_m") or {}
+    if routed:
+        out = []
+        for key in sorted(routed):
+            system, size = key.split(":", 1)
+            waste = "cable" if system == "power" else "pipe"
+            out.append(_line(f"{size} ({system})", routed[key], "m",
+                             f"routed runs measured off the model, "
+                             f"{system} system", waste))
+        rads = sum(1 for r in heat.get("rooms", []) if r.get("radiator"))
+        if rads:
+            out.append(_line("Radiators (as heat design)", rads, "no",
+                             "heatloss.design emitter schedule"))
+        term = mep.get("terminals") or []
+        stacks = sum(1 for t in term if t.get("type") == "soil stack")
+        if stacks:
+            out.append(_line("Soil stack + fittings", stacks, "no",
+                             "one ventilated stack at the wet rooms"))
+        return out
     ext = model.get("extent_m") or {}
     plan_len = float(ext.get("x", [0, 8])[1]) + float(ext.get("y", [0, 8])[1])
     sockets = int(elec.get("sockets_twin_total") or 0)
@@ -238,13 +265,14 @@ def services(model, heat=None, elec=None):
     return out
 
 
-def bill(model, covering="concrete_interlocking", heat=None, elec=None):
+def bill(model, covering="concrete_interlocking", heat=None, elec=None,
+         mep=None):
     """The full bill of quantities, grouped by trade."""
     groups = {
         "masonry": masonry(model),
         "roof": roof(model, covering),
         "finishes": finishes(model),
-        "services": services(model, heat=heat, elec=elec),
+        "services": services(model, heat=heat, elec=elec, mep=mep),
     }
     return {
         "groups": groups,
@@ -254,8 +282,9 @@ def bill(model, covering="concrete_interlocking", heat=None, elec=None):
             "never hidden in the rate.",
             "Internal door count is an estimate until internal doors are "
             "geometric.",
-            "Cable and pipe lengths are estimating rules of thumb, not "
-            "routed runs — first-fix drawings govern.",
+            "Cable and pipe come from mep.py's routed runs where they "
+            "exist, and from estimating rules only as a fallback; each "
+            "line says which.",
             "takeoff.py prices this bill; rates live in the user's rate "
             "card.",
         ],
