@@ -109,17 +109,29 @@ stray = (label == GLASS) & ~stamped_glass
 label[stray] = BODY
 print(f"stray glass reverted to body: {int(stray.sum())}")
 
-# lamp hygiene: real lamps live in the OUTER thirds. Measured on the gseg
-# Golf v2: 13,364 lamp faces spanned the tailgate as a full-width band
-# (DINO's "tail light" boxes over-shoot), and the dark-gloss lens material
-# renders that band as mirror chrome. Evict centre-span lamp label to body —
-# the baked texture carries the real lamp graphics there anyway.
+# lamp hygiene, REAR ONLY: measured on the gseg Golf v2, 13,364 lamp faces
+# spanned the tailgate as a full-width band (DINO's "tail light" boxes
+# over-shoot) and the dark-gloss lens renders that band as mirror chrome.
+# The nose is exempt: modern front ends run DRL bars across the grille and
+# the inner halves of the headlamps sit near the centreline — evicting
+# there re-creates the body-coloured-headlight defect this stage fights.
 z = cent[:, 2]
 half_w = max(abs(z.min()), abs(z.max()))
 zc = np.abs(z) / half_w
-lamp_mid = (label == LAMP) & (zc < 0.45)
+x_ = cent[:, 0]
+xf_ = (x_ - x_.min()) / (x_.max() - x_.min())
+rear_half = xf_ < 0.5          # rear = low-x end on the canonical Pixal pose
+lamp_mid = (label == LAMP) & (zc < 0.45) & rear_half
 label[lamp_mid] = BODY
-print(f"lamp centre-band evicted to body: {int(lamp_mid.sum())}")
+print(f"lamp centre-band (rear) evicted to body: {int(lamp_mid.sum())}")
+# and lamps only live at the ends, above the bumper lip: smoothing/absorption
+# can walk lamp label onto sills and valances after seg_project's zone prior
+# has already run (measured on v9: pink sill patch + lower-lip band)
+y_ = cent[:, 1]
+yf_ = (y_ - y_.min()) / (y_.max() - y_.min())
+lamp_out = (label == LAMP) & ~(((xf_ < 0.20) | (xf_ > 0.80)) & (yf_ > 0.15))
+label[lamp_out] = BODY
+print(f"lamp outside end-zones/height evicted to body: {int(lamp_out.sum())}")
 
 # absorb crumbs the restamp left behind (single scan per label)
 for target in range(5):
