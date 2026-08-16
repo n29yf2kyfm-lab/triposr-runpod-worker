@@ -138,6 +138,12 @@
   "at": "2026-08-09"
  },
  {
+  "uid": "3f1bbea9691a497ca55f2b4a8cb38b83",
+  "name": "Opel Astra H 2004-2014",
+  "reason": "too big 61MB",
+  "at": "2026-08-16"
+ },
+ {
   "uid": "41dbe9246783499a82b709231342fde7",
   "name": "BYD ROXAS",
   "reason": "too big 52MB",
@@ -282,6 +288,12 @@
   "at": "2026-08-11"
  },
  {
+  "uid": "75282e3214014671808f91e6e32da700",
+  "name": "1909 Opel Coupe",
+  "reason": "too big 77MB",
+  "at": "2026-08-16"
+ },
+ {
   "uid": "76a2a2b9f3f843d3978c7d56748027e0",
   "name": "nissan-gt-r35-rocket-bunny",
   "reason": "too big 82MB",
@@ -316,6 +328,12 @@
   "name": "2023 Honda civic type r",
   "reason": "too big 55MB",
   "at": "2026-08-10"
+ },
+ {
+  "uid": "86fa9c4ad2db427cbd797738db3a9fa8",
+  "name": "Opel Astra L Since 2021",
+  "reason": "too big 71MB",
+  "at": "2026-08-16"
  },
  {
   "uid": "8714bd49a382438590d81a8c484fd14d",
@@ -396,10 +414,22 @@
   "at": "2026-08-09"
  },
  {
+  "uid": "a2911781c9a94ef7926d1526bef80b45",
+  "name": "Opel Movano Free",
+  "reason": "too big 95MB",
+  "at": "2026-08-16"
+ },
+ {
   "uid": "a3408aed72a343a3b96cabdebad8e853",
   "name": "Blue Nissan Skyline GT-R R34 Widebody",
   "reason": "too big 54MB",
   "at": "2026-08-09"
+ },
+ {
+  "uid": "a6f5e130d65d4e438bdeba0f7c0a3e1f",
+  "name": "Opel Vivaro",
+  "reason": "too big 95MB",
+  "at": "2026-08-16"
  },
  {
   "uid": "a713161ef2044b308f270de3d60c0e3d",
@@ -556,6 +586,12 @@
   "name": "Subaru Brz | www.vecarz.com",
   "reason": "too big 104MB",
   "at": "2026-08-11"
+ },
+ {
+  "uid": "edbde7324cac4ca0b9b87848e688b7ba",
+  "name": "Opel Astra L",
+  "reason": "too big 92MB",
+  "at": "2026-08-16"
  },
  {
   "uid": "f0702fae150f4cfd98065def645edbde",
