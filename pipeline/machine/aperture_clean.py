@@ -36,28 +36,39 @@ from scipy.sparse.csgraph import connected_components
 INP, OUT = sys.argv[1], sys.argv[2]
 FOOT = INP.replace(".glb", "_nodes.json")
 TAG_ONLY = "--tag" in sys.argv          # write a magenta-tagged GLB, delete nothing
-for a in sys.argv[3:]:
-    if a.endswith(".json"):
+SPEC_PATH = None
+args = sys.argv[3:]
+for i, a in enumerate(args):
+    if a == "--spec":
+        SPEC_PATH = args[i + 1]
+    elif a.endswith(".json") and (i == 0 or args[i - 1] != "--spec"):
         FOOT = a
-RIM_KEEP = 0.020 # m: never delete within this band of the aperture rim — the
+import os as _os
+sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+from carspec import CarSpec
+spec = CarSpec.load(SPEC_PATH) if SPEC_PATH else CarSpec.empty()
+BODY_LABEL = spec.label("body", "carpaint")
+
+# The physical constants below were MEASURED on the V41 Golf body
+# (L 4.284m) and scale with car size — on a quarter-scale body a 20mm rim
+# band would be the whole pillar. They are scaled by measured body length
+# relative to the calibration body, tagged APPROXIMATE off-calibration.
+CAL_L = 4.284
+RIM_KEEP0 = 0.020 # m: never delete within this band of the aperture rim — the
                  # rim faces are STRUCTURAL. Deleting them tore an open notch
                  # in the rear quarter (seen in the V45 locked render); the
                  # teeth that actually matter hang deeper into the opening.
-OUTBOARD = 0.08  # m: a face further outboard than this is a FIXTURE, not a tooth
+OUTBOARD0 = 0.08 # m: a face further outboard than this is a FIXTURE, not a tooth
                  # (measured: wing mirror sits 194mm outboard of the glass plane,
                  #  melt teeth hang at or inboard of it)
-MAXPATCH = 400   # a 60-face guard SPARED the roof-rail strips that ARE the
-                 # fringe (they run 0.55-0.95m long), so it fixed less, not
-                 # more. Component shape does not separate debris from panel
-                 # here: the big selected clumps are wide flat rail strips
-                 # (dy/dx 0.04-0.48), not fins. Measured 2026-08-18.
-TAIL_KEEP = 0.20 # m from the footprint's rearmost point: the pane footprint
+MAXPATCH = 400   # faces — topological, NOT scaled. A 60-face guard SPARED the
+                 # roof-rail strips that ARE the fringe (they run 0.55-0.95m
+                 # long), so it fixed less, not more. Measured 2026-08-18.
+TAIL_KEEP0 = 0.20 # m from the footprint's rearmost point: the pane footprint
                  # over-covers the C-pillar/quarter there, and deleting inside
                  # it tore the quarter open (V46 rear-quarter regression).
                  # The footprint is unreliable in that corner, so nothing is
                  # removed from it — recorded as an untreated zone, not a fix.
-PANES = ("Glass_Side_FR", "Glass_Side_RR", "Glass_Side_FL", "Glass_Side_RL",
-         "Glass_Windscreen", "Glass_Rear_Screen")
 
 
 def boundary_loop_xy(mesh, axis=(0, 1)):
@@ -104,7 +115,19 @@ def inside_poly(pts, poly):
 
 
 sc = trimesh.load(INP, force="scene")
-cp = sc.geometry["carpaint"]
+if BODY_LABEL not in sc.geometry:
+    raise SystemExit(f"REFUSED: body node {BODY_LABEL!r} absent; scene has "
+                     f"{sorted(sc.geometry)[:20]}")
+cp = sc.geometry[BODY_LABEL]
+L_body = float(cp.vertices[:, 0].max() - cp.vertices[:, 0].min())
+SCALE = L_body / CAL_L
+RIM_KEEP = RIM_KEEP0 * SCALE
+OUTBOARD = OUTBOARD0 * SCALE
+TAIL_KEEP = TAIL_KEEP0 * SCALE
+print(f"body length {L_body:.3f}m -> constant scale {SCALE:.3f} "
+      f"(rim {RIM_KEEP*1000:.0f}mm, outboard {OUTBOARD*1000:.0f}mm, "
+      f"tail {TAIL_KEEP*1000:.0f}mm"
+      + ("; APPROXIMATE — off the calibration body)" if abs(SCALE-1) > 0.05 else ")"))
 tri = cp.triangles
 cent = cp.triangles_center
 a = np.linalg.norm(tri[:, 1] - tri[:, 0], axis=1)
@@ -115,13 +138,23 @@ area = np.sqrt(np.maximum(s * (s - a) * (s - b_) * (s - c_), 1e-20))
 aspect = np.maximum.reduce([a, b_, c_]) / np.maximum(2 * area / np.maximum(s, 1e-9), 1e-9)
 
 # GUARD CHECK: pillar-band aspect distribution, printed so the assumption
-# that pillars are ordinary triangles is verified rather than trusted
-pill = (cent[:, 1] > 0.95) & (cent[:, 1] < 1.25) & (np.abs(cent[:, 2]) > 0.55) & \
-       (cent[:, 0] > -0.30) & (cent[:, 0] < -0.15)
-if pill.sum():
-    print(f"pillar-band guard: {pill.sum()} faces, aspect median "
-          f"{np.median(aspect[pill]):.2f}, p95 {np.percentile(aspect[pill], 95):.2f} "
-          f"(NOTE: pillars are themselves slivers — this is why aspect is NOT a filter)")
+# that pillars are ordinary triangles is verified rather than trusted.
+# Band derived from the side-pane footprints (was absolute V41 coords).
+_foot_pre = json.load(open(FOOT)).get("_footprints", {})
+_sideP = [np.asarray(v) for k, v in _foot_pre.items() if "Side" in k]
+if _sideP:
+    _sp = np.vstack(_sideP)
+    _y0, _y1 = _sp[:, 1].min(), _sp[:, 1].max()
+    _midx = float(np.median(_sp[:, 0]))
+    _bw = 0.035 * (_sp[:, 0].max() - _sp[:, 0].min())
+    pill = ((cent[:, 1] > _y0 + 0.2 * (_y1 - _y0)) &
+            (cent[:, 1] < _y0 + 0.8 * (_y1 - _y0)) &
+            (np.abs(cent[:, 2]) > 0.85 * np.median(np.abs(_sp[:, 2]))) &
+            (cent[:, 0] > _midx - _bw) & (cent[:, 0] < _midx + _bw))
+    if pill.sum():
+        print(f"pillar-band guard: {pill.sum()} faces, aspect median "
+              f"{np.median(aspect[pill]):.2f}, p95 {np.percentile(aspect[pill], 95):.2f} "
+              f"(NOTE: pillars are themselves slivers — this is why aspect is NOT a filter)")
 
 faces = cp.faces
 vi = cp.vertices
@@ -147,7 +180,7 @@ for pane, loop in foot.items():
         poly = np.c_[(P - ctr0) @ u_ax, (P - ctr0) @ v_ax]
         rel = cent - ctr0
         cu, cv, cn = rel @ u_ax, rel @ v_ax, rel @ n_ax
-        ins = inside_poly(np.c_[cu, cv], poly) & (np.abs(cn) < 0.10)
+        ins = inside_poly(np.c_[cu, cv], poly) & (np.abs(cn) < 0.10 * SCALE)
         seg0 = poly; seg1 = np.roll(seg0, -1, axis=0)
         d = seg1 - seg0
         L2 = np.maximum((d * d).sum(1), 1e-12)
@@ -171,7 +204,9 @@ for pane, loop in foot.items():
     ins = inside_poly(cent[:, axis], poly)
     if side:
         zs = np.sign(P[:, 2].mean())
-        ins &= (np.sign(cent[:, depth_axis]) == zs) & (np.abs(cent[:, depth_axis]) > 0.45)
+        # depth screen from the pane's own footprint, not absolute coords
+        ins &= (np.sign(cent[:, depth_axis]) == zs) & \
+               (np.abs(cent[:, depth_axis]) > 0.7 * np.median(np.abs(P[:, 2])))
     # LOCAL outboard limit: compare each face against the pane surface at its
     # own (x,y), not a global median — the pane is curved
     t = cKDTree(P[:, axis])
@@ -230,7 +265,7 @@ if TAG_ONLY:
     o = trimesh.Scene()
     for node in sc.graph.nodes_geometry:
         T, gn = sc.graph[node]
-        g = rest if gn == "carpaint" else sc.geometry[gn]
+        g = rest if gn == BODY_LABEL else sc.geometry[gn]
         if gn not in o.geometry:
             o.add_geometry(g, geom_name=gn, node_name=node, transform=T)
         else:

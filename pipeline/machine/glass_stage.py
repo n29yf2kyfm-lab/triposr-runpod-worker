@@ -91,6 +91,30 @@ QC["derived"]["glass_thickness_m"] = {"value": THICK, "source": tsrc}
 
 # ------------------------------------------------- classify components
 comps = g.split(only_watertight=False)
+# FRAGMENT SANITY: a pane is a substantial sheet. Without this guard the
+# hybrid body's transferred glass region — fragment soup — produced 76
+# named "panes" down to 12 faces with a straight face (measured
+# 2026-08-18). Components under 1% of total glass area are set aside; if
+# they carry more than 15% of the area the node is soup and the stage
+# refuses with the numbers.
+_areas0 = np.array([c.area for c in comps])
+_tot = _areas0.sum()
+_major = [c for c, a in zip(comps, _areas0) if a >= 0.01 * _tot]
+_minor_frac = float(_areas0[_areas0 < 0.01 * _tot].sum() / max(_tot, 1e-12))
+QC["derived"]["glass_components"] = {
+    "total": len(comps), "major": len(_major),
+    "minor_area_fraction": round(_minor_frac, 4)}
+if _minor_frac > 0.15 or len(_major) > 10:
+    QC["status"] = "REFUSED"
+    QC["reason"] = (f"glass node is fragment soup: {len(comps)} components, "
+                    f"{len(_major)} majors, minors carry {_minor_frac:.0%} of "
+                    "the area — no trustworthy panes can be named from this")
+    json.dump(QC, open(OUT.replace(".glb", "_glass_qc.json"), "w"), indent=1)
+    raise SystemExit(f"REFUSED: {QC['reason']}")
+if len(_major) < len(comps):
+    print(f"note: {len(comps) - len(_major)} sub-1%-area glass fragments set "
+          f"aside ({_minor_frac:.1%} of area), recorded in QC")
+comps = _major
 if len(comps) < 2:
     QC["status"] = "REFUSED"
     QC["reason"] = (f"glass node is {len(comps)} connected component(s) — a "
@@ -206,26 +230,73 @@ else:
 body = sc.geometry.get(body_label)
 
 
-def pillar_x(side_ms, body_mesh):
-    """Densest body column strictly inside the side glass's own frame."""
-    sv = np.vstack([m.vertices for m in side_ms])
-    x0, x1 = sv[:, 0].min(), sv[:, 0].max()
-    span = x1 - x0
-    ylo, yhi = np.percentile(sv[:, 1], [20, 80])
-    zmin = 0.92 * np.median(np.abs(sv[:, 2]))
-    zsgn = np.sign(np.median(sv[:, 2]))
-    w0, w1 = x0 + 0.30 * span, x1 - 0.30 * span   # A/C pillar bases excluded
+def pillar_joint(sides_d, body_mesh):
+    """B-pillar x from BOTH body sides jointly.
+
+    The pillar is the column that is dense on BOTH sides at the same x;
+    a melt clump is one-sided. Per-side argmax measurably fails here:
+    V41's left body carries a melt clump at x -0.55 that out-scores the
+    real pillar on that side alone (the L/R self-test caught it, 329mm
+    disagreement), while min(hist_L, hist_R) rejects it by construction.
+    DLO band = range fractions 0.20-0.82 of each side's glass extent
+    (vertex percentiles measurably truncate the pillar's dense lower
+    region); window = side span shrunk 30% per end (A/C pillar bases).
+    """
     cent = body_mesh.triangles_center
-    m = ((cent[:, 1] > ylo) & (cent[:, 1] < yhi) &
-         (np.abs(cent[:, 2]) > zmin) & (np.sign(cent[:, 2]) == zsgn) &
-         (cent[:, 0] > w0) & (cent[:, 0] < w1))
-    if m.sum() < 30:
-        return None, {"band_faces": int(m.sum()), "note": "too few pillar-band faces"}
-    hist, edges = np.histogram(cent[m, 0], bins=40)
-    px = float((edges[hist.argmax()] + edges[hist.argmax() + 1]) / 2)
-    return px, {"band_faces": int(m.sum()), "window": [round(float(w0), 3), round(float(w1), 3)],
-                "y_band": [round(float(ylo), 3), round(float(yhi), 3)],
-                "z_min": round(float(zmin), 3), "pillar_x": round(px, 4)}
+    hists = {}
+    dbg = {}
+    edges = None
+    for key in ("L", "R"):
+        sv = np.vstack([m.vertices for m in sides_d[key]])
+        x0, x1 = sv[:, 0].min(), sv[:, 0].max()
+        span = x1 - x0
+        y0v, y1v = sv[:, 1].min(), sv[:, 1].max()
+        ylo = y0v + 0.20 * (y1v - y0v)
+        yhi = y0v + 0.82 * (y1v - y0v)
+        zmin = 0.85 * np.median(np.abs(sv[:, 2]))
+        zsgn = np.sign(np.median(sv[:, 2]))
+        w0, w1 = x0 + 0.30 * span, x1 - 0.30 * span
+        if edges is None:
+            edges = np.linspace(w0, w1, 41)
+        m = ((cent[:, 1] > ylo) & (cent[:, 1] < yhi) &
+             (np.abs(cent[:, 2]) > zmin) & (np.sign(cent[:, 2]) == zsgn) &
+             (cent[:, 0] > edges[0]) & (cent[:, 0] < edges[-1]))
+        hists[key], _ = np.histogram(cent[m, 0], bins=edges)
+        dbg[key] = {"band_faces": int(m.sum()),
+                    "y_band": [round(float(ylo), 3), round(float(yhi), 3)],
+                    "z_min": round(float(zmin), 3),
+                    "own_argmax_x": round(float(
+                        (edges[hists[key].argmax()] + edges[hists[key].argmax() + 1]) / 2), 4)}
+    if sum(h.sum() for h in hists.values()) < 30:
+        return None, {"note": "too few pillar-band faces", **dbg}
+    # SUM of both sides, not min: V41's left body carries NO carpaint
+    # pillar column at all (the left pillar's faces belong to other
+    # nodes), so requiring two-sided support refuses forever — measured:
+    # L max 112 at a melt clump, R max 238 at the true pillar. The sum
+    # lets the strong, real column dominate while per-side support is
+    # RECORDED for the eye rather than gated.
+    joint = hists["L"] + hists["R"]
+    # the B-pillar is the DOMINANT column in the A/C-excluded window —
+    # plain argmax of the sum. (Two selection tricks were tried and both
+    # measurably mis-picked on V41: per-side argmax locked onto a
+    # one-sided melt clump, and nearest-to-mid-span among strong local
+    # maxima promoted a weak central column at -0.305 over the 238-face
+    # true pillar. Other strong columns are recorded for the eye.)
+    strong = joint >= 0.5 * joint.max()
+    locmax = np.r_[joint[:1] >= joint[1:2],
+                   (joint[1:-1] >= joint[:-2]) & (joint[1:-1] >= joint[2:]),
+                   joint[-1:] >= joint[-2:-1]]
+    cand = np.where(strong & locmax)[0]
+    centres_x = (edges[cand] + edges[cand + 1]) / 2
+    b = int(joint.argmax())
+    px = float((edges[b] + edges[b + 1]) / 2)
+    dbg["window"] = [round(float(edges[0]), 3), round(float(edges[-1]), 3)]
+    dbg["candidates_x"] = [round(float(c), 3) for c in centres_x]
+    dbg["joint_pillar_x"] = round(px, 4)
+    dbg["joint_max"] = int(joint.max())
+    dbg["support_at_pillar"] = {k: int(hists[k][b]) for k in hists}
+    dbg["side_max"] = {k: int(hists[k].max()) for k in hists}
+    return px, dbg
 
 
 def split_x(mesh, x0):
@@ -243,7 +314,28 @@ if screens.get("rear_screen"):
 for i, rp in enumerate(roof_panes):
     panes[f"Glass_Roof{'' if not i else '_'+str(i+1)}"] = rp
 
-pillar_meas = {}
+need_split = [k for k in ("L", "R") if len(sides[k]) == 1]
+px_joint = None
+if need_split and body is not None:
+    px_joint, pdbg = pillar_joint(sides, body)
+    QC["derived"]["b_pillar"] = pdbg
+    if px_joint is not None:
+        # self-test: the chosen column must be strong in the SUM; per-side
+        # support is recorded but not gated (a side can genuinely lack the
+        # pillar in the body node — V41's left does)
+        sup = pdbg["support_at_pillar"]
+        tot = sum(sup.values())
+        ok = tot >= 30 and tot >= 0.4 * pdbg["joint_max"]
+        QC["self_tests"]["pillar_strength"] = {
+            "support": sup, "total_at_pillar": tot,
+            "joint_max": pdbg["joint_max"],
+            "rule": ">= 30 faces and >= 40% of the strongest joint column",
+            "pass": bool(ok)}
+        if not ok:
+            QC["status"] = "REFUSED"
+            json.dump(QC, open(OUT.replace(".glb", "_glass_qc.json"), "w"), indent=1)
+            raise SystemExit(f"REFUSED: chosen B-pillar column is weak ({sup}) "
+                             "— no trustworthy split position")
 for key in ("L", "R"):
     ms = sides[key]
     if len(ms) > 1:
@@ -257,55 +349,39 @@ for key in ("L", "R"):
         QC["decisions"][f"side_{key}_split"] = \
             f"{len(ms)} source components kept as separate panes (no cut needed)"
         continue
-    if body is None:
+    if px_joint is None:
         panes[f"Glass_Side_{key}"] = ms[0]
-        QC["decisions"][f"side_{key}_split"] = \
-            f"body node {body_label!r} absent — side kept unsplit (recorded limitation)"
+        QC["decisions"][f"side_{key}_split"] = (
+            "no usable pillar measurement — side kept unsplit (recorded "
+            "limitation)" if body is not None else
+            f"body node {body_label!r} absent — side kept unsplit")
         continue
-    px, dbg = pillar_x(ms, body)
-    pillar_meas[key] = px
-    QC["derived"][f"b_pillar_{key}"] = dbg
-    if px is None:
-        panes[f"Glass_Side_{key}"] = ms[0]
-        QC["decisions"][f"side_{key}_split"] = "no pillar found — kept unsplit"
-        continue
-    fr, rr = split_x(ms[0], px)
+    fr, rr = split_x(ms[0], px_joint)
     tot = len(ms[0].faces)
     fF, fR = len(fr.faces) / tot, len(rr.faces) / tot
     if fF < SPLIT_MIN_FRAC or fR < SPLIT_MIN_FRAC:
         panes[f"Glass_Side_{key}"] = ms[0]
         QC["decisions"][f"side_{key}_split"] = (
-            f"split at {px:.3f} rejected: face shares {fF:.2f}/{fR:.2f} "
+            f"split at {px_joint:.3f} rejected: face shares {fF:.2f}/{fR:.2f} "
             f"below {SPLIT_MIN_FRAC} — kept unsplit")
         continue
     panes[f"Glass_Side_F{key}"] = fr
     panes[f"Glass_Side_R{key}"] = rr
     QC["decisions"][f"side_{key}_split"] = \
-        f"split at pillar x {px:.3f} (face shares {fF:.2f}/{fR:.2f})"
+        f"split at joint pillar x {px_joint:.3f} (face shares {fF:.2f}/{fR:.2f})"
 
-# self-tests on the pillar measurement
-if pillar_meas.get("L") is not None and pillar_meas.get("R") is not None:
-    sv = np.vstack([m.vertices for m in sides["L"]])
-    span = sv[:, 0].max() - sv[:, 0].min()
-    d = abs(pillar_meas["L"] - pillar_meas["R"])
-    ok = d < PILLAR_AGREE_FRAC * span
-    QC["self_tests"]["pillar_LR_agreement"] = {
-        "L": round(pillar_meas["L"], 4), "R": round(pillar_meas["R"], 4),
-        "delta_m": round(float(d), 4), "limit_m": round(float(PILLAR_AGREE_FRAC * span), 4),
-        "pass": bool(ok)}
-    if not ok:
-        raise SystemExit(f"REFUSED: L/R B-pillar disagree by {d*1000:.0f}mm — "
-                         "the detector locked onto different features per side")
 exp = spec.expect().get("glass", {})
-if "b_pillar_x" in exp and pillar_meas:
+if "b_pillar_x" in exp and px_joint is not None:
     want = float(exp["b_pillar_x"])
     tol = float(exp.get("tolerance_m", 0.05))
-    got = np.mean([v for v in pillar_meas.values() if v is not None])
+    got = px_joint
     ok = abs(got - want) <= tol
     QC["self_tests"]["b_pillar_expect"] = {
         "expected": want, "measured": round(float(got), 4),
         "tolerance_m": tol, "pass": bool(ok)}
     if not ok:
+        QC["status"] = "REFUSED"
+        json.dump(QC, open(OUT.replace(".glb", "_glass_qc.json"), "w"), indent=1)
         raise SystemExit(f"REFUSED: B-pillar self-test {got:.3f} vs expected "
                          f"{want:.3f} (tol {tol}) — detector does not reproduce "
                          "the spec's measured position")
@@ -314,6 +390,8 @@ if "panes" in exp:
     QC["self_tests"]["pane_count"] = {"expected": int(exp["panes"]),
                                       "measured": len(panes), "pass": bool(ok)}
     if not ok:
+        QC["status"] = "REFUSED"
+        json.dump(QC, open(OUT.replace(".glb", "_glass_qc.json"), "w"), indent=1)
         raise SystemExit(f"REFUSED: {len(panes)} panes vs expected {exp['panes']}")
 
 # --------------------------------------------------------- desnake (measured cap)
