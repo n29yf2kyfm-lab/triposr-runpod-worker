@@ -66,6 +66,12 @@
       "rear": -1.256
     },
     "tolerance_m": 0.06,
-    "note": "detector self-test values: arch positions previously measured on this body (Arch_Cavity quadrant clusters, 2026-08-18). The geometric detector must reproduce them without labels."
+    "note": "detector self-test values: the SOURCE body's arch positions as measured pre-alignment (Arch_Cavity quadrant clusters, 2026-08-18). Their span (2.503) deliberately differs from wheelbase_m (2.619) because the source body's arches ARE wrong — that is what body_align corrects. Post-alignment runs self-test against the DERIVED spec body_align emits, not this block.",
+    "glass": {
+      "b_pillar_x": -0.237,
+      "tolerance_m": 0.05,
+      "panes": 6,
+      "note": "V41-frame values (glass stage runs on the baseline, pre-alignment): B-pillar centre measured 2026-08-18 from the densest carpaint column in the DLO band; 6 panes = windscreen, 4 sides, rear screen."
+    }
   }
 }

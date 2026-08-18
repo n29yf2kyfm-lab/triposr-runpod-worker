@@ -444,7 +444,86 @@ def main():
 
     gy = det["ground_y"]
     R, W = tyre["radius_m"], tyre["width_m"]
-    CY = gy + R
+    if fused_mode:
+        # contact-cluster ground is measured evidence (the original fused
+        # tyres' own footprint) — it stays the placement authority here
+        CY = gy + R
+        report["ride_height"] = {
+            "centre_y": round(float(CY), 5),
+            "derivation": "fused contact-cluster ground + tyre R (measured)"}
+    else:
+        # RIDE HEIGHT FROM THE ARCH CEILING, not from min-y "ground".
+        # (V53 finding, 2026-08-18, from independent verification: ground_y
+        # = raw skin min keyed the whole car's stance to ONE junk melt
+        # vertex 175mm below the bumper's real underside. The physical
+        # constraint on the wheel is the ARCH CEILING — the lowest skin
+        # directly above each wheel column. p5 of the column makes the
+        # measure robust to melt teeth; verts below 0.8R can't be a
+        # ceiling for a tyre of radius R and are excluded so under-sill
+        # junk cannot fake one. 1.02 = apex-above-centre ratio measured on
+        # the V41 body (APPROXIMATE): tyre top clears the ceiling by 2%R.)
+        ceilings = {}
+        for tag, (xc, zc) in (("FR", (det["front_x"], +tf / 2)),
+                              ("FL", (det["front_x"], -tf / 2)),
+                              ("RR", (det["rear_x"], +tr / 2)),
+                              ("RL", (det["rear_x"], -tr / 2))):
+            m = (np.abs(skin_pts[:, 0] - xc) < 0.35 * R) & \
+                (np.abs(skin_pts[:, 2] - zc) < W / 2)
+            ys = skin_pts[m, 1]
+            ys = ys[ys > gy + 0.8 * R]
+            if len(ys) < 20:
+                ceilings = None
+                break
+            ceilings[tag] = float(np.percentile(ys, 5))
+        # robust underside: lowest y with >= 30 verts in the 10mm above it,
+        # so ONE junk vertex cannot define the ground (V53: it did)
+        ys_all = np.sort(skin_pts[:, 1])
+        nhead = min(2000, len(ys_all))
+        upper = np.searchsorted(ys_all, ys_all[:nhead] + 0.010)
+        dense = np.where(upper - np.arange(nhead) >= 30)[0]
+        gy_rob = float(ys_all[dense[0]] if len(dense) else ys_all[0])
+        Hsk = float(np.percentile(skin_pts[:, 1], 99.8)) - gy_rob
+        if ceilings is None:
+            CY = gy_rob + R
+            report["ride_height"] = {
+                "centre_y": round(float(CY), 5),
+                "derivation": "FALLBACK robust underside + R — arch columns "
+                              "held too few verts for a ceiling measure"}
+        else:
+            CY_tuck = min(ceilings.values()) - 1.02 * R
+            # underside clearance the tuck would leave. Real cars run
+            # ground-clearance/height ~5-13% (Golf 140/1456 = 9.6%); above
+            # 15% the "lip" is judged a MELT WEB across the wheel zone —
+            # the carve manufactures the opening there, so the body stands
+            # on its own underside instead. Measured both ways on 3 bodies
+            # 2026-08-18: Golf 4.6% (real lip, tuck), hybrid 21.7% (web,
+            # ground), threshold 0.15 x H is APPROXIMATE and recorded.
+            clr = gy_rob - (CY_tuck - R)
+            if clr > 0.15 * Hsk:
+                CY = gy_rob + R
+                mode_note = (f"arch-tuck would float the underside "
+                             f"{clr*1000:.0f}mm ({100*clr/Hsk:.1f}% of body "
+                             "height > 15%) — ceiling judged melt web; "
+                             "grounded to robust underside, carve opens the arch")
+            else:
+                CY = CY_tuck
+                mode_note = (f"tucked to arch ceiling (underside clearance "
+                             f"{clr*1000:.0f}mm = {100*clr/Hsk:.1f}% of body "
+                             "height, plausible)")
+            report["ride_height"] = {
+                "centre_y": round(float(CY), 5),
+                "mode": "tuck" if CY is CY_tuck or CY == CY_tuck else "grounded-web",
+                "arch_ceilings": {k: round(v, 5) for k, v in ceilings.items()},
+                "underside_robust_y": round(gy_rob, 5),
+                "underside_clearance_if_tucked_m": round(float(clr), 5),
+                "derivation": "min per-corner arch ceiling (p5 of wheel "
+                              "column skin) - 1.02 x R vs robust-underside "
+                              "grounding; " + mode_note,
+                "ground_y_raw_min": round(float(gy), 5),
+                "note": "raw min-y is reported but no longer used for "
+                        "placement (junk-vertex immunity)"}
+    print(f"ride height: wheel centre y {CY:.4f} "
+          f"({report['ride_height']['derivation'].splitlines()[0]})")
     centres = {"FR": (det["front_x"], CY, +tf / 2),
                "FL": (det["front_x"], CY, -tf / 2),
                "RR": (det["rear_x"], CY, +tr / 2),
@@ -499,6 +578,57 @@ def main():
                                       "result": "PASS" if ok else "FAIL"}
         print(f"carve self-check (direct void): {resid} -> "
               f"{'PASS' if ok else 'FAIL'}")
+
+    # ---------------- ground plane: clamp + canonicalise to y=0 ----------
+    # Nothing but the tyres may sit below the road. The independent
+    # verification (2026-08-18) found 954 underbody-melt verts up to 39mm
+    # below the contact plane and a single bumper junk vertex AT it —
+    # physically impossible geometry. Verts below the plane are CLAMPED to
+    # it (recorded per node); a node needing more than 1% clamped means the
+    # grounding itself is wrong, and the stage refuses instead of hiding it.
+    plane = CY - R
+    clamp_rep = {}
+    for gname in list(out.geometry):
+        g = out.geometry[gname]
+        v2 = g.vertices.copy()
+        below = v2[:, 1] < plane - 5e-4
+        if not below.any():
+            continue
+        frac = below.sum() / len(v2)
+        if frac > 0.01:
+            raise SystemExit(
+                f"REFUSED: {gname} has {frac:.1%} of verts below the "
+                "contact plane — that is a grounding error, not junk")
+        depth = float((plane - v2[below, 1]).max() * 1000)
+        v2[below, 1] = plane
+        g.vertices = v2
+        tri = g.triangles
+        area = np.linalg.norm(np.cross(tri[:, 1] - tri[:, 0],
+                                       tri[:, 2] - tri[:, 0]), axis=1)
+        if (area < 1e-10).any():
+            g.update_faces(area >= 1e-10)
+            g.remove_unreferenced_vertices()
+        vn = np.array(g.vertex_normals)
+        bad = np.linalg.norm(vn, axis=1) < 1e-6
+        if bad.any():
+            vn[bad] = [0.0, 1.0, 0.0]
+            g.vertex_normals = vn
+        clamp_rep[gname] = {"verts_clamped": int(below.sum()),
+                            "max_depth_mm": round(depth, 1)}
+        print(f"  ground clamp: {gname} {below.sum()} verts "
+              f"(max {depth:.1f}mm below road) raised to the plane")
+    # canonical frame: tyre contact = y 0 exactly. The QC rig's checker
+    # ground is fixed at y=0, so without this every render floats the car
+    # by the old plane offset (39mm on V53 — measured).
+    for gname in list(out.geometry):
+        out.geometry[gname].apply_translation([0.0, -plane, 0.0])
+    skin_pts = np.vstack([out.geometry[n].vertices for n in skin_names])
+    CY -= plane
+    centres = {t: (xc, CY, zc) for t, (xc, _, zc) in centres.items()}
+    report["ground"] = {
+        "contact_plane_canonical_y": 0.0,
+        "shift_applied_m": round(float(plane), 5),
+        "clamped": clamp_rep or "nothing below the plane"}
 
     MATS = {"TYRE_MASTER": ([12, 12, 14], 0.0, 0.90),
             "RIM_MASTER": ([120, 123, 128], 0.85, 0.35),
@@ -565,7 +695,7 @@ def main():
                                                           abs(axis[2])))), 4),
             "camber_deg": round(float(np.degrees(np.arctan2(abs(axis[1]),
                                                              abs(axis[2])))), 4),
-            "contact_vs_ground_mm": round(1000 * float(tv[:, 1].min() - gy), 3)}
+            "contact_vs_ground_mm": round(1000 * float(tv[:, 1].min()), 3)}
     if body_label in sc2.geometry:
         cpv = sc2.geometry[body_label].vertices
     else:
@@ -606,6 +736,20 @@ def main():
                                   for q in qcw.values()), 4),
         "body_half_width": round(float(np.percentile(np.abs(cpv[:, 2]), 99.7)), 4),
         "instancing_one_mesh_four_nodes": bool(shared)}
+    if not fused_mode and report["ride_height"].get("arch_ceilings"):
+        # tyre top must clear the measured arch ceiling at every corner —
+        # a hard gate only in tuck mode; in grounded-web mode the carve
+        # legitimately opened the arch above the (fake) ceiling, so the
+        # numbers are recorded as information, not a verdict
+        clr = {t: round(1000 * ((c - plane) - (CY + R)), 1)
+               for t, c in report["ride_height"]["arch_ceilings"].items()}
+        report["gates"]["arch_ceiling_clearance_mm"] = clr
+        if report["ride_height"].get("mode") == "tuck":
+            report["gates"]["arch_ceiling_clearance_result"] = \
+                "PASS" if min(clr.values()) >= 0 else "FAIL"
+        else:
+            report["gates"]["arch_ceiling_clearance_result"] = \
+                "N/A (grounded-web mode — carve manufactured the opening)"
     json.dump(report, open(qc_path, "w"), indent=1)
     print(json.dumps(report["gates"], indent=1))
     print(f"wrote {out_path} ({os.path.getsize(out_path)} bytes) + {qc_path}")
