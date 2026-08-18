@@ -83,6 +83,41 @@ def grid_smooth(A, shape, sigma=1.4):
     return out
 
 
+def envelope(pos, nrm, shape, body_pts, r_lat=0.012, cap=0.045):
+    """Push each grid point out to the local body MAXIMUM along its normal.
+
+    The smoothed wrap is a low-pass of a bumpy surface, so relief above
+    the mean pokes through the lens (measured on v37: rear outer R 61% of
+    lens points occluded by body, median 19mm). Riding the outward
+    envelope instead makes poke-through impossible by construction; the
+    lens follows the panel's real local relief. `cap` stops a distant
+    fixture (spoiler lip, arch flare) being mistaken for panel relief.
+    The offset FIELD is lightly smoothed so single-triangle spikes do not
+    print through to the lens face.
+    """
+    t = cKDTree(body_pts)
+    r = float(np.hypot(cap, r_lat))
+    off = np.zeros(len(pos))
+    for k, ids in enumerate(t.query_ball_point(pos, r)):
+        if not ids:
+            continue
+        d = body_pts[ids] - pos[k]
+        proj = d @ nrm[k]
+        lat = np.linalg.norm(d - np.outer(proj, nrm[k]), axis=1)
+        m = (lat < r_lat) & (proj > 0) & (proj < cap)
+        if m.any():
+            off[k] = proj[m].max()
+    # smooth spreads lifts to neighbours; max() keeps every measured
+    # constraint satisfied — plain smoothing ERODES peaks and the relief
+    # pokes back through (measured on v38: lamps fragmented into shards)
+    sm = ndimage.gaussian_filter(off.reshape(shape), 0.8, mode="nearest").ravel()
+    off = np.maximum(off, sm)
+    print(f"  envelope: {np.count_nonzero(off)} pts lifted, "
+          f"median {np.median(off[off>0])*1000:.0f}mm max {off.max()*1000:.0f}mm"
+          if (off > 0).any() else "  envelope: flush already")
+    return pos + nrm * (off + 0.002)[:, None]
+
+
 def solid_from_grid(pos, nrm, shape, off, t):
     """Closed lens solid: outer skin, inner skin, perimeter wall."""
     ny, nx = shape
@@ -119,6 +154,7 @@ def taper(u, lo_out, hi_out, lo_in, hi_in):
 NTH, NYO = 34, 12
 thetas = np.radians(np.linspace(206, 74, NTH))     # inboard tail -> quarter wrap
 pts = []
+nrm_con = []                       # CONSTRUCTION normals — see below
 for k, th in enumerate(thetas):
     u = k / (NTH - 1)
     ylo, yhi = taper(u, Y_LO, Y_HI, Y_LO + 0.02, Y_HI - 0.03)
@@ -126,12 +162,19 @@ for k, th in enumerate(thetas):
     for yy in np.linspace(ylo, yhi, NYO):
         p = PIVOT + 0.24 * dirv
         pts.append([p[0], yy, p[2]])
+        nrm_con.append(dirv)
 pts = np.array(pts)
-pos, nrm, far = wrap(pts)
-pos, nrm, far = wrap(pos)          # second pass from on-surface: unclumps
+pos, _, far = wrap(pts)
+pos, _, far = wrap(pos)            # second pass from on-surface: unclumps
 print(f"outer unit: wrap distances mean {far.mean()*1000:.0f}mm max {far.max()*1000:.0f}mm")
-pos = grid_smooth(pos, (NTH, NYO)); nrm = grid_smooth(nrm, (NTH, NYO))
-nrm /= np.clip(np.linalg.norm(nrm, axis=1, keepdims=True), 1e-9, None)
+# NEVER use body normals for orientation: 46% of body faces in the lamp
+# band have FLIPPED normals (measured 2026-08-18 — the melt zone is
+# fragment soup), so wrap-averaged normals pointed 202/240 tail grid
+# points INTO the car and every lens before this fix was built inside-out.
+# The outward direction is known BY CONSTRUCTION: the radial sweep dir.
+nrm = np.array(nrm_con)
+pos = grid_smooth(pos, (NTH, NYO))
+pos = envelope(pos, nrm, (NTH, NYO), P_all)
 outer_R = solid_from_grid(pos, nrm, (NTH, NYO), OFF, THICK)
 ext = outer_R.vertices.max(0) - outer_R.vertices.min(0)
 print(f"outer unit solid: {len(outer_R.faces)} faces, "
@@ -157,12 +200,13 @@ d2, i2 = t2.query(pts[:, 1:3], k=8)
 w2 = 1.0 / np.clip(d2, 1e-4, None)
 px = (P_rf[i2, 0] * w2).sum(1) / w2.sum(1)
 pos = np.stack([px, pts[:, 1], pts[:, 2]], 1)
-nrm = (N_rf[i2] * w2[..., None]).sum(1)
-nrm /= np.clip(np.linalg.norm(nrm, axis=1, keepdims=True), 1e-9, None)
 far = d2.min(1)
 print(f"hatch unit: (y,z) lookup distances mean {far.mean()*1000:.0f}mm max {far.max()*1000:.0f}mm")
-pos = grid_smooth(pos, (NZ, NYH)); nrm = grid_smooth(nrm, (NZ, NYH))
-nrm /= np.clip(np.linalg.norm(nrm, axis=1, keepdims=True), 1e-9, None)
+# construction normal: the hatch face looks straight rearward (-x); body
+# normals are untrustworthy here (46% flipped in the melt zone)
+nrm = np.tile([-1.0, 0.0, 0.0], (len(pos), 1))
+pos = grid_smooth(pos, (NZ, NYH))
+pos = envelope(pos, nrm, (NZ, NYH), P_rf)
 hatch_R = solid_from_grid(pos, nrm, (NZ, NYH), OFF, THICK)
 ext = hatch_R.vertices.max(0) - hatch_R.vertices.min(0)
 print(f"hatch unit solid: {len(hatch_R.faces)} faces, "

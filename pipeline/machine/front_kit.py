@@ -59,6 +59,36 @@ def grid_smooth(A, shape, sigma=1.4):
     return o
 
 
+def envelope(pos, nrm, shape, body_pts, r_lat=0.012, cap=0.045):
+    """Ride the outward MAXIMUM of local body relief (see rear_lamps4).
+
+    Measured on v37: head lens L had 77% of its points occluded by body
+    (median 34mm) because the smoothed wrap is the low-pass of a bumpy
+    nose. The envelope makes poke-through impossible by construction.
+    """
+    t = cKDTree(body_pts)
+    r = float(np.hypot(cap, r_lat))
+    off = np.zeros(len(pos))
+    for k, ids in enumerate(t.query_ball_point(pos, r)):
+        if not ids:
+            continue
+        d = body_pts[ids] - pos[k]
+        proj = d @ nrm[k]
+        lat = np.linalg.norm(d - np.outer(proj, nrm[k]), axis=1)
+        m = (lat < r_lat) & (proj > 0) & (proj < cap)
+        if m.any():
+            off[k] = proj[m].max()
+    # smooth spreads lifts to neighbours; max() keeps every measured
+    # constraint satisfied — plain smoothing ERODES peaks and the relief
+    # pokes back through (measured on v38: lamps fragmented into shards)
+    sm = ndimage.gaussian_filter(off.reshape(shape), 0.8, mode="nearest").ravel()
+    off = np.maximum(off, sm)
+    print(f"  envelope: {np.count_nonzero(off)} pts lifted, "
+          f"median {np.median(off[off>0])*1000:.0f}mm max {off.max()*1000:.0f}mm"
+          if (off > 0).any() else "  envelope: flush already")
+    return pos + nrm * (off + 0.002)[:, None]
+
+
 def solid(pos, nrm, shape, off, t):
     ny, nx = shape
     n = ny * nx
@@ -85,6 +115,7 @@ Y_LO, Y_HI = GY + 0.415 * H, GY + 0.545 * H
 PIVOT = np.array([XMAX - 0.22, 0.0, 0.795 * HW - 0.14])
 NTH, NY = 26, 10
 pts = []
+nrm_con = []
 for k, th in enumerate(np.radians(np.linspace(-26, 106, NTH))):
     u = 1 - k / (NTH - 1)
     span = (Y_HI - Y_LO)
@@ -94,11 +125,15 @@ for k, th in enumerate(np.radians(np.linspace(-26, 106, NTH))):
     for yy in np.linspace(ylo, yhi, NY):
         p = PIVOT + 0.24 * dirv
         pts.append([p[0], yy, p[2]])
-pos, nrm, far = wrap(np.array(pts))
-pos, nrm, far = wrap(pos)
+        nrm_con.append(dirv)
+pos, _, far = wrap(np.array(pts))
+pos, _, far = wrap(pos)
 print(f"headlamp wrap mean {far.mean()*1000:.0f}mm max {far.max()*1000:.0f}mm")
-pos = grid_smooth(pos, (NTH, NY)); nrm = grid_smooth(nrm, (NTH, NY))
-nrm /= np.clip(np.linalg.norm(nrm, axis=1, keepdims=True), 1e-9, None)
+# construction normals (radial sweep dirs) — body normals are ~46% flipped
+# in melt zones and built every earlier lens inside-out (see rear_lamps4)
+nrm = np.array(nrm_con)
+pos = grid_smooth(pos, (NTH, NY))
+pos = envelope(pos, nrm, (NTH, NY), P_all)
 hl_R = solid(pos, nrm, (NTH, NY), OFF, THICK)
 hl_L = hl_R.copy(); hl_L.vertices = hl_L.vertices * [1, 1, -1]
 hl_L.faces = hl_L.faces[:, ::-1]; hl_L.fix_normals()
@@ -121,10 +156,8 @@ def panel(name, z0, z1, y0f, y1f, nz, ny, col, rough):
     w2 = 1.0 / np.clip(d2, 1e-4, None)
     px = (P_nf[i2, 0] * w2).sum(1) / w2.sum(1)
     pos = np.stack([px, g[:, 1], g[:, 2]], 1)
-    nrm = (N_nf[i2] * w2[..., None]).sum(1)
-    nrm /= np.clip(np.linalg.norm(nrm, axis=1, keepdims=True), 1e-9, None)
-    pos = grid_smooth(pos, (nz, ny)); nrm2 = grid_smooth(nrm, (nz, ny))
-    nrm2 /= np.clip(np.linalg.norm(nrm2, axis=1, keepdims=True), 1e-9, None)
+    pos = grid_smooth(pos, (nz, ny))
+    nrm2 = np.tile([1.0, 0.0, 0.0], (len(pos), 1))   # nose faces +x
     m = solid(pos, nrm2, (nz, ny), 0.004, 0.012)
     parts.append((name, m, col, rough))
     print(f"  {name}: {len(m.faces)} faces, wt={m.is_watertight}")
