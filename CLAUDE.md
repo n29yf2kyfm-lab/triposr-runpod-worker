@@ -2465,3 +2465,44 @@ zero validator errors · ~30fps mobile orbit · clean model-viewer/Three.js load
 · human-approved 360 · production score >= 85/100.
 
 Completion is NOT reportable if only colours, masks or shaders changed.
+
+## The machine's lamp fix: never orient off generated-body normals (2026-08-18)
+
+The v37-v39 "fragmented lamp" bug cost three fix attempts before bisection found
+the root cause: **46% of body faces in the gseg Golf's lamp band carry FLIPPED
+normals** (28% strongly inward — melt zones are fragment soup), so the
+shrink-wrap's inverse-distance-averaged normal field pointed 202/240 tail grid
+points INTO the car. Every lens solid before the fix was extruded inside-out;
+only its crests showed, reading as "painted patches" — which is why more
+stand-off and more envelope both made it WORSE (they amplified along the flipped
+directions).
+
+* **Orientation comes from CONSTRUCTION, never from body normals**: the radial
+  sweep direction for corner units, -x for the hatch face, +x for nose panels.
+  Positions still shrink-wrap to the real surface; only the direction field is
+  synthetic. rear_lamps4.py + front_kit.py both do this now.
+* **The envelope pass** (lens rides the outward MAXIMUM of local relief) is
+  correct but only along trustworthy normals, with lateral reach covering the
+  full grid cell (12mm for ~16mm spacing) and peak-preserving smoothing
+  (`max(raw, smoothed)` — plain gaussian ERODES the lifted peaks and relief
+  pokes back through).
+* **Do NOT carve body-side lamp apertures by vertex pull** — lamp_recess.py
+  tried it, tore stretched-triangle shards across both lamps (the recorded
+  "vertex-pull DENTS panels" failure, reproduced). File kept as evidence.
+* Two probe traps from the same investigation: a (y,z)-disc occlusion probe
+  conflates corner-wrap lens points with tail-face occluders (they are BEHIND
+  by construction at az 270), and perimeter-wall edge normals fool a
+  footprint probe into 50mm+ phantom depths. The render at the diag azimuth is
+  the only unconfused witness.
+* This container's Blender has NO OpenImageDenoiser: `use_denoising=True`
+  raises RuntimeError and the render dies AFTER "Blender quit" prints — a
+  re-render can silently leave stale frames. grep for the script's own DONE
+  marker, never for Blender's exit.
+
+v40 state: 48 named components, lamps verified straight+3/4 (diag40/fdiag40),
+materials_pass sets carpaint metallic 0 / rough 0.24 / clearcoat 1.0@0.08
+(carpaint previously shipped glTF DEFAULTS metallic=1 — the flat-shell trap),
+gltf-transform validate 0 errors on full + 5.75MB mobile export (--join false
+preserves component names; trimesh cannot read meshopt output — validate with
+gltf-transform, inspect bbox via `gltf-transform inspect`). Deliverables +
+qc_final.json + evidence sheets bucket-backed at car-meshes/staging/machine_v40/.
