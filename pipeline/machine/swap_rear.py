@@ -31,10 +31,22 @@ for name, g in sc.geometry.items():
 print(f"kept {kept} components untouched, replacing {REPLACED}")
 
 rz = np.load(KIT)
+LENS_MAT = dict(baseColorFactor=[52, 7, 9, 255], metallicFactor=0.0,
+                roughnessFactor=0.12, doubleSided=True)
+# four-solid kit (rear_lamps4): left/right outer + hatch units as separate
+# nodes, all prefixed Tail_Lens_ so a future swap strips them cleanly
+four = [("ro_v", "ro_f", "Tail_Lens_RO"), ("rh_v", "rh_f", "Tail_Lens_RH"),
+        ("lo_v", "lo_f", "Tail_Lens_LO"), ("lh_v", "lh_f", "Tail_Lens_LH")]
+if all(v in rz for v, _, _ in four):
+    for vk, fk, name in four:
+        part = trimesh.Trimesh(vertices=rz[vk], faces=rz[fk], process=True)
+        part.visual = trimesh.visual.TextureVisuals(
+            material=PBRMaterial(name=name, **LENS_MAT))
+        out.add_geometry(part, node_name=name, geom_name=name)
+        print(f"  + {name}: {len(part.faces)} faces")
 for vk, fk, name, mat in (
         ("lens_v", "lens_f", "Tail_Lens", PBRMaterial(
-            name="Tail_Lens", baseColorFactor=[52, 7, 9, 255],
-            metallicFactor=0.0, roughnessFactor=0.12, doubleSided=True)),
+            name="Tail_Lens", **LENS_MAT)),
         ("frame_v", "frame_f", "Plate_Frame", PBRMaterial(
             name="Plate_Frame", baseColorFactor=[12, 12, 13, 255],
             metallicFactor=0.0, roughnessFactor=0.6, doubleSided=True)),
