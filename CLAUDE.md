@@ -1477,11 +1477,11 @@ Two qualifications, measured:
     an index.
 Evidence: scratchpad pc16_colored.png / pc16_canopy.png / pc16_body.png; results
 tarball at car-meshes/partcrafter_run/results16b.tgz. **CORRECTION 2026-08-16: that
-tarball is NOT in the bucket** — the prefix holds only bootstrap scripts, hi3_logs.tgz
-and a 112-byte hi3_results.tgz. The upload was lost (rollback or failed PUT, undetermined).
-The only surviving copies of the 16-part material work are the scratchpad's pc16_mat.glb /
-pc16_mat_red.glb — treat them as unbacked, and do not trust this file's claims that an
-artefact is bucket-backed without listing the prefix first.
+tarball was reported missing from the bucket. RE-CHECKED 2026-08-18: results16b.tgz
+(44.8MB) IS in the prefix, along with results_golf_pc.tgz (44.8MB) — the 08-16 check
+was wrong (probably a truncated 50-row listing; the prefix holds 90+ objects). The
+lesson stands in general form: list the FULL prefix (offset pagination) before claiming
+an artefact is or is not bucket-backed.
 
 **RUNPOD POD DEPLOYMENT, two traps that cost ~$0.40 and 80 minutes:**
   1. **A pod whose dockerStartCmd EXITS gets RESTARTED.** Ending the command with
@@ -2506,3 +2506,34 @@ gltf-transform validate 0 errors on full + 5.75MB mobile export (--join false
 preserves component names; trimesh cannot read meshopt output — validate with
 gltf-transform, inspect bbox via `gltf-transform inspect`). Deliverables +
 qc_final.json + evidence sheets bucket-backed at car-meshes/staging/machine_v40/.
+
+## PartCrafter on the FIXED car: clean input -> clean parts (2026-08-18)
+
+Owner-ordered: render the machine's V41 golf (component wheels, aligned
+stance) and feed THAT to PartCrafter-16, instead of the original melt
+capture. Pod 6j9ckxait7fk2r, A5000-class, ~10 min, ~$0.15. The result
+overturns the working assumption that PartCrafter's value is fixed:
+
+  * ALL FOUR WHEELS emit as separate closed meshes WITH SPOKES — the V41
+    master wheel structure is recognised and regenerated per-part.
+  * The glazing canopy separates cleanly (p09, 15.6%), and the body part
+    (p10, 39.8%) has OPEN window apertures with the interior behind them
+    — far beyond the fused-shell output of the melt-capture runs.
+  * So part decomposition quality tracks INPUT quality, hard. A repaired
+    render is a better conditioning image than a raw generator render.
+    Evidence: partcrafter_run/PC41_SHEET.jpg + results_golf_v41.tgz.
+
+Ops lessons from the same run, all paid for:
+  * THE IN-POD FUSE DID NOT FIRE. finish() ran (results uploaded, marker
+    set) but the pod survived at desiredStatus=RUNNING / runtime=null
+    until an EXTERNAL DELETE — the RunPod-injected in-pod key apparently
+    cannot delete its own pod via REST. Never trust the in-pod delete:
+    verify pod 404 from outside as soon as results land.
+  * A range-request probe on a Supabase object returns HTTP 206, not 200
+    — a watcher matching *200* spins forever on a SUCCEEDED run. Match
+    2xx, and read the stage markers before believing any timeout.
+  * REST /v1/pods rejects unknown gpuTypeIds with a whole-request 400
+    ("NVIDIA RTX 3090" is not an id; "NVIDIA GeForce RTX 3090" is), and
+    a 60GB containerDisk ask can 500 with "machine does not have the
+    resources" — 40GB matched instantly. GPU ids come from GraphQL
+    gpuTypes, not REST (no /v1/gputypes endpoint).
