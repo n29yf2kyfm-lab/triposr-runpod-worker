@@ -1,26 +1,14 @@
 #!/usr/bin/env python3
-"""wheel_master.py — ONE clean master wheel assembly (V41 wheel gate, Stage 3).
+"""wheel_master.py — SUPERSEDED by wheel_stage.py (2026-08-18).
 
-Replaces the four independently-scaled donor wheels (measured on v40:
-radius spread 0.316-0.338 = 6.9%, width 0.263-0.281, 37mm L/R centre
-asymmetry). One parametric assembly, instanced four times by wheel_gate.py
-with rigid transforms only — identical geometry by construction.
-
-Dimensions: 225/45 R17 — a published standard VW Golf Mk8 fitment, and it
-matches this body's own arch measurements (old tyre radius ~0.317, arch
-liner radial p95 0.314-0.349). Trim level is UNVERIFIED, so the wheel
-DESIGN is a neutral production 10-spoke and the fit is marked PROVISIONAL.
-
-  tyre OD = (17*25.4 + 2*225*0.45) mm = 634.3 mm -> R 0.3172
-  tyre width 225 mm; rim 17" (R 0.2159); disc 310 mm class (R 0.155)
-
-Local frame: origin at hub centre, rotation axis = +Z (width axis),
-outboard face at +Z, scale 1,1,1. Parts are separate named objects:
-TYRE_MASTER, RIM_MASTER, HUB_MASTER, BRAKE_DISC_MASTER,
-BRAKE_CALIPER_MASTER.
-
-Run: python3 wheel_master.py <out.npz>
+Owner standard: the machine is car-agnostic SOFTWARE. This script carried
+the Golf's numbers (axle x, tracks, tyre dims) as source-code literals and
+is kept only as history. Car data now lives in specs/*.json (carspec.py)
+and the stage logic in wheel_stage.py, which detects arches geometrically
+and self-tests against spec.expect before placing anything. Do not extend
+this file.
 """
+
 import json
 import sys
 import numpy as np

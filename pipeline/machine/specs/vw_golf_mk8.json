@@ -1,0 +1,63 @@
+{
+  "identity": {
+    "make": "volkswagen",
+    "model": "golf",
+    "note": "Mk8 hatch. Year/trim NOT verifiable from references \u2014 never guessed (accuracy rule). This file is DATA: published figures with sources; the machine's stage code contains no car-specific numbers."
+  },
+  "dimensions": {
+    "length_m": {
+      "value": 4.284,
+      "source": "published VW Golf Mk8 hatch dimensions"
+    },
+    "width_m": {
+      "value": 1.789,
+      "source": "published VW Golf Mk8 hatch dimensions (excl. mirrors)"
+    },
+    "height_m": {
+      "value": 1.456,
+      "source": "published VW Golf Mk8 hatch dimensions"
+    },
+    "wheelbase_m": {
+      "value": 2.619,
+      "source": "published VW Golf Mk8 hatch dimensions"
+    },
+    "track_front_m": {
+      "value": 1.549,
+      "source": "published VW Golf Mk8 dimensions"
+    },
+    "track_rear_m": {
+      "value": 1.52,
+      "source": "published VW Golf Mk8 dimensions"
+    }
+  },
+  "tyre": {
+    "spec": "225/45R17",
+    "source": "published standard Mk8 Golf fitment; matches this body's measured arch radius (old tyres ~0.317m). Trim unverified -> wheel DESIGN is provisional neutral 10-spoke."
+  },
+  "labels": {
+    "body": "carpaint",
+    "wheel_strip_prefixes": [
+      "Tyre_Rubber",
+      "Rim_Alloy",
+      "disc_",
+      "cal_",
+      "WHEEL_",
+      "Arch_Cavity",
+      "LINER_"
+    ],
+    "liner_name": "ARCH_LINER",
+    "body_skin_nodes": [
+      "carpaint",
+      "Rear_Hatch",
+      "Rear_Bumper"
+    ]
+  },
+  "expect": {
+    "axle_x": {
+      "front": 1.247,
+      "rear": -1.256
+    },
+    "tolerance_m": 0.06,
+    "note": "detector self-test values: arch positions previously measured on this body (Arch_Cavity quadrant clusters, 2026-08-18). The geometric detector must reproduce them without labels."
+  }
+}

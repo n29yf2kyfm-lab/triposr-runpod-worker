@@ -126,10 +126,26 @@ for hname, h in housings:
     out.add_geometry(h, geom_name=hname, node_name=hname)
     print(f"  {hname}: {len(h.faces)} faces (lens copy offset 15mm inboard)")
 
-# constructed diffuser: slab under the bumper, rear face
-xr = L0 + 0.10 * (L1 - L0)
-dif = trimesh.creation.box(extents=[0.10, 0.070, 1.10])
-dif.apply_translation([L0 + 0.10, H0 + 0.085, 0.0])
+# constructed diffuser: tucked under the BUMPER'S OWN lower skirt.
+# (First cut placed it at body-min-x + 0.10 — that floated it detached
+# behind the car, caught in the V51 side ortho. Derive from the bumper.)
+bv = bump_m.vertices
+# anchor on the CENTRAL TAIL STRIP of the bumper (|z| small, away from
+# the arch corners, rear quarter of the bumper's x-range): its lowest
+# edge is the skirt bottom; the diffuser tucks up 1cm INTO it so the
+# two always connect. Two failed derivations are recorded in git
+# history: body-min-x floated the slab behind the car (caught in a side
+# ortho), and a fixed y-band caught the arch corners (skirt_x -1.46).
+skirt_w = float(np.percentile(np.abs(bv[:, 2]), 90)) * 2 * 0.75
+strip = bv[(np.abs(bv[:, 2]) < 0.3 * skirt_w) &
+           (bv[:, 0] < np.percentile(bv[:, 0], 25))]
+skirt_bot = float(np.percentile(strip[:, 1], 5))
+band = strip[strip[:, 1] < skirt_bot + 0.08]
+skirt_rear_x = float(np.percentile(band[:, 0], 3))
+dif = trimesh.creation.box(extents=[0.10, 0.070, skirt_w])
+dif.apply_translation([skirt_rear_x + 0.08, skirt_bot + 0.01 - 0.035, 0.0])
+print(f"  Rear_Diffuser: skirt bottom {skirt_bot:.2f}, rear x {skirt_rear_x:.2f}, "
+      f"slab top {skirt_bot+0.01:.2f} (tail-strip derived, 1cm overlap)")
 dif.visual = trimesh.visual.TextureVisuals(material=PBRMaterial(
     name="Rear_Diffuser", baseColorFactor=[22, 22, 24, 255],
     metallicFactor=0.0, roughnessFactor=0.9))

@@ -1,32 +1,14 @@
 #!/usr/bin/env python3
-"""wheel_gate.py — V41 wheel/axle rebuild: remove, instance, place, verify.
+"""wheel_gate.py — SUPERSEDED by wheel_stage.py (2026-08-18).
 
-Stage 2  removes ALL old wheel geometry (the four independently-scaled
-         donor copies: radius spread 0.316-0.338, 37mm L/R asymmetry) and
-         the fused melt fragments measured INSIDE the front wheel volumes
-         (faces fully inside the wheel cylinder only — the arch boundary
-         is never touched).
-Stage 4  places FOUR TRUE INSTANCES of the master assembly: one geometry
-         per part, four scene-graph nodes with rigid transforms. Right
-         side = pure translation; left side = 180 deg yaw about +Y then
-         translation (det +1, no mirror; wheel axis stays parallel to Z,
-         so toe = camber = 0 by construction).
-Stage 8  computes every numeric gate FROM THE EXPORTED FILE (measure what
-         shipped, not intentions) -> wheel_qc.json.
-
-Placement reference (documented):
-  front axle x  = +1.247   (both front arch clusters agree)
-  rear  axle x  = -1.256   (mean of asymmetric rear liners -1.234/-1.278;
-                            per-side deviation +/-22mm recorded)
-  wheelbase     =  2.503   ARCH-DERIVED, marked APPROXIMATE per rule 8.
-                            Published Mk8 spec is 2.619; this body's arch
-                            geometry is -4.4% and rule 9 forbids editing
-                            the shell to fake the spec.
-  track         =  F 1.549 / R 1.520 (published Mk8 dimensions)
-  centre height =  R_tyre (contact patch exactly on ground y=0)
-
-Run: python3 wheel_gate.py <v40.glb> <wheel_master.npz> <out_v41.glb> <qc.json>
+Owner standard: the machine is car-agnostic SOFTWARE. This script carried
+the Golf's numbers (axle x, tracks, tyre dims) as source-code literals and
+is kept only as history. Car data now lives in specs/*.json (carspec.py)
+and the stage logic in wheel_stage.py, which detects arches geometrically
+and self-tests against spec.expect before placing anything. Do not extend
+this file.
 """
+
 import json
 import sys
 import numpy as np
