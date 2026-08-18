@@ -2415,3 +2415,53 @@ Rules of the tool, learned the same evening:
     render. Run it after any rule change.
   * Scope: FRESH candidates only. The 64 scrapped live cars stay scrapped
     (owner ruling 2026-08-11) unless the owner explicitly reopens them.
+
+## THE PRODUCTION BRIEF — standing spec for the machine (owner-relayed, 2026-08-18)
+
+The reviewer's full production brief is now THE spec for pipeline/machine/. It
+supersedes ad-hoc iteration. Operative rules, verbatim in spirit:
+
+NON-NEGOTIABLE RULES
+ 1. Never conceal geometry defects with paint, smoothing, blur, dark materials
+    or masks. 2. Masks guide reconstruction; they never replace component
+    geometry. 3. Never claim a component fixed without diagnostic renders.
+ 4. Preserve the latest working version before changes. 5. Versioned
+    filenames; never overwrite the source GLB. 6. Vehicle identity must not
+    change between angles. 7. Make/model/generation/year/trim confirmed from
+    references only — never guessed. 8. If a neural section cannot be repaired
+    economically, REPLACE it with clean reconstructed geometry. 9. Continue
+    through implementation/testing/rendering without stopping per stage.
+ 10. Record every modification in the QC report.
+
+PHASES: 1 forensic GLB inspection (+official glTF validator, qc_baseline.json)
+· 2 references & camera alignment (dims ±1%, silhouette IoU >= 0.95) · 3 semantic
+component structure (named objects: shell, bonnet, bumpers, fenders, doors,
+quarters, hatch, all glass pieces, head/rear lamps split outer+hatch, grille,
+mirrors, handles, trim, plate recesses, wheels, interior) · 4 body-shell
+correction (no smoothing-as-disguise) · 5 real glass (fitted curvature, edge
+thickness, 2-3mm standoff, 3-5mm ceramic border) + simplified interior (dash,
+seats, console, steering wheel, door cards, floor) with real parallax · 6
+complete rear rebuild (lamp positions are LANDMARKS ONLY; four separate lamp
+solids L/R outer + L/R hatch, wrap the corners, lens thickness + housing;
+hatch/lamps/bumper structurally separate) · 7 front rebuild (headlight solids,
+grilles, intakes, badge, plate recess) · 8 wheels (one clean assembly — tyre,
+rim, hub, disc, caliper — instanced on four measured centres) · 9 PBR materials
+(separate: paint/glass/tyre/rim/brake/lenses/chrome/trim/interior/plates; no
+baked lighting; paint metallic 0, rough .18-.30, clearcoat 1 @ .05-.12) · 10
+UV + optimisation + export (2K textures, WebP/KTX2, LODs, Meshopt/Draco,
+target ~5MB mobile GLB, ZERO validator errors).
+
+DIAGNOSTIC OUTPUTS REQUIRED (never beauty-only): clay, wireframe, normals,
+material-ID, glass-only, interior-only, body-hidden, exploded, straight
+front + rear, both sides, four 3/4s, roof view, 360 turntable, final blue
+showroom. Rear diagnostic colours: L lamp MAGENTA, R lamp ORANGE, hatch CYAN,
+bumper YELLOW, rear glass DARK BLUE, body grey.
+
+ACCEPTANCE GATES: identity verified · dims ±1% · silhouette >=95% · no ripples
+at 1440p · no holes/fragments/melt · clean component boundaries · separate
+glass/lamps/wheels/bumpers/hatch · stable glass all angles · interior depth +
+parallax · wheel alignment · no material leakage · no painted-on components ·
+zero validator errors · ~30fps mobile orbit · clean model-viewer/Three.js load
+· human-approved 360 · production score >= 85/100.
+
+Completion is NOT reportable if only colours, masks or shaders changed.
