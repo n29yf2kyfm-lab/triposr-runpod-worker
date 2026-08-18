@@ -154,9 +154,16 @@ def parse_segments(payload):
     return {
         "source": "google_solar",
         "quality": payload.get("imageryQuality"),
-        "imagery_date": (f"{date.get('year')}-{date.get('month'):02d}-"
-                         f"{date.get('day'):02d}"
-                         if date.get("year") else None),
+        # ALL THREE PARTS OR NO DATE. Gating on year alone let a partial
+        # imageryDate ({"year": 2023}, month/day absent or null) reach the
+        # :02d format with None and raise TypeError — killing a roof job
+        # whose free LIDAR path had already finished. A partial date is not
+        # a date; report None rather than fabricate a "-None-" string.
+        "imagery_date": (
+            f"{date.get('year')}-{date.get('month'):02d}-"
+            f"{date.get('day'):02d}"
+            if all(isinstance(date.get(k), int)
+                   for k in ("year", "month", "day")) else None),
         "footprint_m2": footprint,
         "roof_ground_area_m2": roof_ground,
         # Kept under its old name because roof.py and the tests read it, but

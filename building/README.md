@@ -200,10 +200,14 @@ claiming success.
 python building/test_handler.py
 ```
 
-That file alone carries 221 assertions; the whole suite is **1996 across 20 files** — run
-them all with `for f in building/test_*.py; do python "$f"; done`. No GPU. Same approach as
-the vehicle worker: stub the heavy modules, then test the contract logic. CI runs these
-**before** building the image, so a broken contract never reaches a deployable tag.
+That file is one harness of many; the suite is every `test_*.py` in this directory — run
+them all with `for f in building/test_*.py; do python "$f"; done`. No GPU. Totals are
+deliberately not written here: two hardcoded counts drifted from the code they described
+(the stated file count ended up under half the real one), and a stale number reads like
+lost test files. `ls building/test_*.py | wc -l` and the pass totals each harness prints
+are the measurement. Same approach as the vehicle worker: stub the heavy modules, then
+test the contract logic. CI runs these **before** building the image, so a broken
+contract never reaches a deployable tag.
 
 Almost network-free: `test_handler.py` makes a handful of live calls to `api.postcodes.io`
 while exercising geocoding failure paths. Every other file is offline, and the tests assert

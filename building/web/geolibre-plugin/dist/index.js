@@ -124,7 +124,14 @@ function footprintRing(model) {
       }
       if (!moved) break;
       if (key(ring[ring.length - 1]) === key(ring[0]) && used.size > 2) {
-        return { ring: ring.slice(0, -1), traced: true };
+        // A closure only counts when it consumed every external segment:
+        // a detached annex or courtyard leaves a second loop, and a
+        // partial ring must not travel labelled as traced (geo.py does
+        // the same check).
+        if (used.size === segs.length) {
+          return { ring: ring.slice(0, -1), traced: true };
+        }
+        break;
       }
     }
   }
@@ -156,6 +163,37 @@ function polygon(anchor, ring, props) {
   };
 }
 
+// The rear wall line as [x0, x1, y] pieces, left to right — Class A
+// depth is measured from the ACTUAL rear wall, so over a recessed rear
+// wing the bounding-box rear line would over-claim. Mirrors
+// siteplan._rear_profile, which is the authority.
+function rearProfile(ring) {
+  const xs = [...new Set(ring.map((p) => p[0]))].sort((a, b) => a - b);
+  const pieces = [];
+  for (let k = 0; k < xs.length - 1; k++) {
+    const x0 = xs[k];
+    const x1 = xs[k + 1];
+    const mid = (x0 + x1) / 2;
+    let top = null;
+    for (let i = 0; i < ring.length; i++) {
+      const [ax, ay] = ring[i];
+      const [bx, by] = ring[(i + 1) % ring.length];
+      if (Math.min(ax, bx) < mid && mid < Math.max(ax, bx)) {
+        const y = ay + ((by - ay) * (mid - ax)) / (bx - ax);
+        top = top === null ? y : Math.max(top, y);
+      }
+    }
+    if (top === null) continue;
+    const last = pieces[pieces.length - 1];
+    if (last && Math.abs(last[2] - top) < 1e-9 && Math.abs(last[1] - x0) < 1e-9) {
+      last[1] = x1;
+    } else {
+      pieces.push([x0, x1, top]);
+    }
+  }
+  return pieces;
+}
+
 function buildLayers(model, anchor, opts) {
   const { ring, traced } = footprintRing(model);
   const t = model.totals || {};
@@ -177,7 +215,11 @@ function buildLayers(model, anchor, opts) {
     ],
   };
 
-  const m = opts.redLineMargin;
+  // Default matches siteplan.layers(red_line_margin_m=6.0). buildLayers
+  // is a public surface (exported, and on window.__BUILDER_SITEPLAN__),
+  // and an omitted margin used to arrive here as undefined and turn the
+  // whole red line into NaN corners — silently broken GeoJSON.
+  const m = Number.isFinite(opts.redLineMargin) ? opts.redLineMargin : 6;
   out.red = {
     type: "FeatureCollection",
     features: [
@@ -204,19 +246,34 @@ function buildLayers(model, anchor, opts) {
         ? PD_DEPTH.larger
         : PD_DEPTH.single;
     const depth = opts.pdDetached ? table.detached : table.other;
+    // Depth off the traced rear wall(s), never the extent box: bottom
+    // edge follows the rear staircase left to right, top edge walks the
+    // same staircase pushed out by the depth, right to left. Matches
+    // siteplan.permitted_development_local.
+    let pdRing;
+    if (traced) {
+      const pieces = rearProfile(ring);
+      pdRing = [];
+      for (const [x0, x1, y] of pieces) pdRing.push([x0, y], [x1, y]);
+      for (const [x0, x1, y] of [...pieces].reverse()) {
+        pdRing.push([x1, y + depth], [x0, y + depth]);
+      }
+    } else {
+      pdRing = [
+        [ex[0], ey[1]],
+        [ex[1], ey[1]],
+        [ex[1], ey[1] + depth],
+        [ex[0], ey[1] + depth],
+      ];
+    }
     out.pd = {
       type: "FeatureCollection",
       features: [
-        polygon(
-          anchor,
-          [
-            [ex[0], ey[1]],
-            [ex[1], ey[1]],
-            [ex[1], ey[1] + depth],
-            [ex[0], ey[1] + depth],
-          ],
-          { layer: "pd envelope", depth_m: depth, warning: PD_WARNING },
-        ),
+        polygon(anchor, pdRing, {
+          layer: "pd envelope",
+          depth_m: depth,
+          warning: PD_WARNING,
+        }),
       ],
     };
     out.info.pdDepth = depth;
@@ -236,6 +293,13 @@ function buildLayers(model, anchor, opts) {
         ...ring.map(([x, y]) => [x + dx, y + dy]),
       ]);
       out.info.reach = reach;
+      // The plan-frame offset the shadow is cast along. Exposed so the
+      // parity test can pin the DIRECTION against siteplan.py — reach
+      // and altitude alone would pass with the shadow drawn on the
+      // sunward side.
+      out.info.azimuth = (az * 180) / Math.PI;
+      out.info.dx = dx;
+      out.info.dy = dy;
       out.shadow = {
         type: "FeatureCollection",
         features: [
@@ -256,6 +320,22 @@ function buildLayers(model, anchor, opts) {
 /* ------------------------------------------------------------- the UI */
 
 const CSS_PREFIX = "gl-builder";
+
+// Every layer this plugin ever adds, so a redraw can clear exactly its
+// own footprint on the map and nothing of the host's.
+const OWN_LAYERS = ["Shadow", "PD envelope", "Red line", "Building"];
+
+function removeOwnLayers(app) {
+  const rm = app.removeGeoJsonLayer || app.removeLayer;
+  if (typeof rm !== "function") return;
+  for (const name of OWN_LAYERS) {
+    try {
+      rm.call(app, name);
+    } catch (err) {
+      /* a layer not yet added is not an error worth throwing over */
+    }
+  }
+}
 
 function el(tag, cls, text) {
   const n = document.createElement(tag);
@@ -321,6 +401,12 @@ function renderPanel(app, state, container) {
   function draw() {
     if (!state.model || !state.anchor) return;
     const layers = buildLayers(state.model, state.anchor, opts);
+    // Clear our own layers before re-adding. Without this, a shadow
+    // drawn at noon stayed on the map after the slider dropped the sun
+    // below the 3° cutoff — the numbers said "sun too low" while the
+    // map still showed the shade — and hosts that append rather than
+    // replace stacked duplicates on every slider tick.
+    removeOwnLayers(app);
     // Draw beneath first so the building reads on top.
     if (layers.shadow) app.addGeoJsonLayer("Shadow", layers.shadow);
     if (layers.pd) app.addGeoJsonLayer("PD envelope", layers.pd);
@@ -422,7 +508,7 @@ function renderPanel(app, state, container) {
 const plugin = {
   id: ID,
   name: "Builder — site plan",
-  version: "0.1.0",
+  version: "0.2.0",
 
   activate(app) {
     const state = {

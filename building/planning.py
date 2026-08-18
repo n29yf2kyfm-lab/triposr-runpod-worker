@@ -204,8 +204,15 @@ NEARBY_DATASETS = (
 # Altering a listed building without consent is a criminal offence, so the
 # one designation that must never be missed was the one that could not be
 # found. Anything whose own boundary can contain the site belongs here.
+# tree-preservation-zone was missing from this tuple against the rule the
+# paragraph above states: a TPO zone's boundary can contain the site, and
+# arriving only through the nearby search it was worded as the NEIGHBOUR'S
+# tree ("Being the neighbour's tree changes nothing...") when it stood on
+# the plot, undercounted in totals.on_site and sorted below genuine on-site
+# findings. Severity survived only thanks to NEARBY_STILL_CRITICAL; the
+# "means" text a builder acts on was wrong.
 POINT_ALSO = ("listed-building", "scheduled-monument",
-              "locally-listed-building")
+              "locally-listed-building", "tree-preservation-zone")
 
 # Context rather than constraint: who the application goes to.
 CONTEXT_DATASETS = ("local-planning-authority", "parish", "ward")

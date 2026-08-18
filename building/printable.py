@@ -166,7 +166,13 @@ def build(model, scale_denom=DEFAULT_SCALE, base_plate=True,
             if printed < min_wall_mm:
                 want = _nozzle_round(min_wall_mm)
                 t_m = want * scale_denom / 1000.0
-                if level == 0:
+                # Record the wall on the FIRST storey it stands on, not on
+                # level 0. Gating the report on level == 0 meant a wall
+                # that only exists upstairs — the partition of a set-back
+                # upper storey, base_level 1 — was fattened on every level
+                # it appears and never reported, so the "not dimensionally
+                # true" note stayed silent about a wall that had changed.
+                if level == int(w.get("base_level") or 0):
                     thickened.append({
                         "wall": i, "kind": "external" if w.get("external")
                         else "partition",

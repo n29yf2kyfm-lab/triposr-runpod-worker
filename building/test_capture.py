@@ -153,8 +153,18 @@ check("5e the plan is a real session, not a token one",
       40 < len(p["shots"]) < 400, str(len(p["shots"])))
 check("5f three passes, including LiDAR", len(p["passes"]) == 3
       and any("LiDAR" in r["name"] for r in p["passes"]))
-check("5g the close pass stays in LiDAR range",
-      all("LiDAR" not in r["name"] or True for r in p["passes"]))
+# The first version of this check ended in `or True` — a tautology that
+# passed whatever the pass said. capture.py carries the range only in the
+# pass's note text, so the note is what can be pinned: every LiDAR pass
+# must state the walking distance, and the constant it states must be
+# Apple LiDAR's confident ~5m — at 50m the depth sensor is extrapolating
+# and the scale anchor the pass exists for is noise.
+check("5g the close pass states the 5m LiDAR range in its instruction",
+      C.LIDAR_RANGE_M == 5.0
+      and all("LiDAR" not in r["name"]
+              or f"within {C.LIDAR_RANGE_M:.0f}m" in r["note"]
+              for r in p["passes"]),
+      str([r["note"] for r in p["passes"] if "LiDAR" in r["name"]]))
 check("5h it warns about what it cannot see",
       "fences" in p["warning"] and "parked cars" in p["warning"])
 check("5i and about walking rather than turning",

@@ -69,6 +69,25 @@ def _rect(r):
     return (r["x"], r["y"], r["x"] + r["width_m"], r["y"] + r["depth_m"])
 
 
+def _is_bedroom(room):
+    """Is this a room somebody sleeps in? The KIND says so, the name only
+    hints.
+
+    A NURSERY IS A BEDROOM. Test 12e already established that escape is a
+    matter of kind, not naming — and then the SEVERITY of the very same
+    findings was still keyed on the name starting "bed"/"master", so a
+    first-floor {name: Nursery, kind: bedroom} with no way out was a
+    'change' while an identical room called Bedroom 4 was a refusal. The
+    declared kind decides; the name prefix only stands in when the kind is
+    the generic "room".
+    """
+    kind = room.get("kind")
+    name = (room.get("name") or "").lower()
+    if kind == "bedroom":
+        return True
+    return kind in (None, "room") and name.startswith(("bed", "master"))
+
+
 def _level_span(r, storeys):
     base = r.get("base_level") or 0
     n = r.get("storeys")
@@ -372,9 +391,8 @@ def circulation(rooms, storeys, level):
 
     # A BEDROOM ENTERED THROUGH A BEDROOM IS NOT A BEDROOM.
     for r in on:
-        name, kind = r["name"], r.get("kind")
-        if kind not in HABITABLE or not name.lower().startswith(
-                ("bed", "master")):
+        name = r["name"]
+        if not _is_bedroom(r):
             continue
         onto = max((shared_wall_m(r, by_name[c]) for c in circ), default=0.0)
         if onto + 1e-9 < DOOR_STRUCTURAL_M:
@@ -424,6 +442,24 @@ def _openings_of(model, room, level):
     return out
 
 
+def _has_escape_window(model, room, level):
+    """Does the room have a window a person could get out of?
+
+    The one Part B test, applied wherever a design leans on it: area,
+    both clear dimensions AND the sill, together — a window that passes
+    two of the three is not an escape route.
+    """
+    for o in _openings_of(model, room, level):
+        if o["kind"] != "window":
+            continue
+        if (o["width"] * o["height"] + 1e-9 >= ESCAPE_MIN_AREA_M2
+                and o["width"] + 1e-9 >= ESCAPE_MIN_CLEAR_M
+                and o["height"] + 1e-9 >= ESCAPE_MIN_CLEAR_M
+                and o.get("sill", 0.0) <= ESCAPE_MAX_SILL_M + 1e-9):
+            return True
+    return False
+
+
 def escape(model):
     """Can you get out of every bedroom above the ground floor?"""
     rooms, storeys = model["rooms"], model.get("storeys", 1)
@@ -448,22 +484,10 @@ def escape(model):
             # name let a first-floor Studio with no window at all pass
             # without a word. Kitchens are the one habitable exception.
             kind = r.get("kind")
-            name = r["name"].lower()
             if kind not in HABITABLE or kind == "kitchen":
                 continue
-            is_bedroom = name.startswith(("bed", "master"))
-            ok = []
-            for o in _openings_of(model, r, level):
-                if o["kind"] != "window":
-                    continue
-                sill = o.get("sill", 0.0)
-                area = o["width"] * o["height"]
-                if (area + 1e-9 >= ESCAPE_MIN_AREA_M2
-                        and o["width"] + 1e-9 >= ESCAPE_MIN_CLEAR_M
-                        and o["height"] + 1e-9 >= ESCAPE_MIN_CLEAR_M
-                        and sill <= ESCAPE_MAX_SILL_M + 1e-9):
-                    ok.append(o)
-            if not ok:
+            is_bedroom = _is_bedroom(r)
+            if not _has_escape_window(model, r, level):
                 findings.append(_finding(
                     "B-ESCAPE", "refuse" if is_bedroom else "change",
                     f"{r['name']} has no window that can be escaped through: "
@@ -547,8 +571,33 @@ def check(model, orientation="N"):
         stairs.append(s)
         if lv == 0:
             stair = s
+    by_name = {r["name"]: r for r in rooms}
     for level in range(storeys):
         _, f = circulation(rooms, storeys, level)
+        # AN INNER ROOM IS ONLY ACCEPTABLE WITH THE WINDOW IT LEANS ON.
+        # circulation() downgrades a depth-2 inner habitable room to a
+        # 'change' citing AD B 2.11's escape-window allowance — but
+        # escape() starts at level 1, so on the ground floor nobody ever
+        # looked for the window, and a windowless inner study sailed
+        # through on a condition nothing had verified. Here, where the
+        # walls are to hand, the window is actually checked: no compliant
+        # escape window, no allowance. Kitchens are the exception 2.11
+        # itself makes (kitchen/laundry/bath/WC inner rooms are permitted
+        # outright).
+        for fd in f:
+            if fd["code"] != "CIRC-INNER":
+                continue
+            r = by_name.get(fd["room"])
+            if r is None or r.get("kind") == "kitchen":
+                continue
+            if not _has_escape_window(model, r, level):
+                fd["severity"] = "refuse"
+                fd["message"] += (
+                    " It has no compliant escape window, so the AD B 2.11 "
+                    "allowance for inner rooms does not apply.")
+                fd["fix"] = ("Give it an escape window (0.33 m2 clear, "
+                             "450mm both ways, sill under 1100mm), or run "
+                             "circulation to it.")
         findings += f
     findings += escape(model)
     findings += overheating(model, orientation)

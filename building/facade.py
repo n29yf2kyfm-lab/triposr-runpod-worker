@@ -120,7 +120,6 @@ def rectify(image, corners_px, width_m, height_m,
     # PIL's PERSPECTIVE transform wants coefficients mapping DESTINATION
     # back into the SOURCE, so solve that direction directly.
     inv = solve_homography(dst, [tuple(map(float, c)) for c in corners_px])
-    fwd = solve_homography([tuple(map(float, c)) for c in corners_px], dst)
     try:
         from PIL import Image
     except ImportError:                          # pragma: no cover
@@ -130,12 +129,18 @@ def rectify(image, corners_px, width_m, height_m,
             "without it")
     out = image.transform((w_px, h_px), Image.PERSPECTIVE, inv,
                           resample=Image.BICUBIC)
+    # No corner residual in meta, deliberately. Four point pairs determine
+    # the homography exactly, so residual() over those same four points is
+    # ~0 for ANY corners — garbage included. It used to sit here as
+    # "corner_residual_px" and read as a quality measurement that never
+    # happened: a tautology wearing a metric's clothes. The verification
+    # that IS real is independent — check_brick_course, against a ruler
+    # the photograph carries in its own brickwork.
     meta = {
         "px_per_m": px_per_m,
         "width_m": float(width_m), "height_m": float(height_m),
         "size_px": [w_px, h_px],
         "corners_px": [list(map(float, c)) for c in corners_px],
-        "corner_residual_px": round(residual(fwd, corners_px, dst), 4),
         "notes": [
             "Rectified to the wall PLANE. Anything proud of it — bays, "
             "reveals, porches, gutters — is correct only where it meets "
@@ -218,8 +223,11 @@ def check_brick_course(meta, course_px, courses=1):
 
 
 def describe(meta):
+    # The corner residual is gone from this line on purpose: it printed
+    # 0.000 px for every rectification, garbage corners included, because
+    # an exact 4-point solve reproduces its own corners by construction.
+    # Scale verification, when wanted, is check_brick_course — a real one.
     return (f"Elevation {meta['width_m']:.2f} x {meta['height_m']:.2f} m "
             f"rectified to {meta['size_px'][0]} x {meta['size_px'][1]} px "
             f"at {meta['px_per_m']:.0f} px/m "
-            f"({1000.0 / meta['px_per_m']:.1f} mm per pixel), "
-            f"corner residual {meta['corner_residual_px']:.3f} px")
+            f"({1000.0 / meta['px_per_m']:.1f} mm per pixel)")

@@ -114,6 +114,19 @@ with tempfile.TemporaryDirectory() as td:
           "checked against nothing" in result["site"], result["site"])
     check("3i orientation note is in the delivered stats",
           "z-up" in result["orientation"])
+    # The docstring once claimed footprint-fit yaw into the building frame;
+    # run() only swaps the up-axis and grounds. The claim and the code must
+    # agree, and the delivered stats must state the real frame.
+    check("3i2 the stats say the splat is NOT in the building frame",
+          "NOT" in result.get("frame", "")
+          and "building" in result.get("frame", ""),
+          str(result.get("frame")))
+    check("3i3 and point at the alignment step a compositor needs",
+          "to_building_frame" in result.get("frame", ""))
+    check("3i4 the module docstring states the splat stays in the scan "
+          "frame",
+          "NOT rotated into the building's local frame"
+          in " ".join(SC.__doc__.split()))
 
     stats = json.load(open(os.path.join(td, "t1.scan.json")))
     check("3j the stats file matches the result",

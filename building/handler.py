@@ -12,16 +12,19 @@ on trellis2/**, so this directory cannot rebuild the production vehicle
 image. The duplicated helpers in validation.py and delivery.py are that
 isolation, deliberately paid for.
 
-Status: eleven of thirteen modes run for real — reconstruct, register,
-roof, price, supply, valuation, planning, structure, services and drawing.
-Condition and design report the phase that implements them rather than
-pretending to work, and reconstruct's orchestration is complete but its
-model call has never been run on a GPU.
+Status: every mode validation.MODES accepts dispatches to a real module —
+the table in _pipeline_available is the authoritative list — EXCEPT
+condition and design, which report the phase that implements them rather
+than pretending to work. reconstruct's orchestration is complete but its
+model call has never been run on a GPU. Counts are deliberately not written
+here: an earlier hand count ("eleven of thirteen") went stale as modes
+shipped and quietly told auditors that four live surfaces did not exist, so
+test_handler.py now pins the two exceptions to the dispatch table instead.
 
-That list is kept honest deliberately. Three forensic audits of this code
-found a mode that crashed on every job, an X-ray that could not report a
-hazard, and wall lengths five times over — all behind green ticks, all found
-by executing rather than reading, with 1231 tests passing throughout.
+That statement is kept honest deliberately. Three forensic audits of this
+code found a mode that crashed on every job, an X-ray that could not report
+a hazard, and wall lengths five times over — all behind green ticks, all
+found by executing rather than reading, with 1231 tests passing throughout.
 """
 import os
 import sys
@@ -295,8 +298,19 @@ def handler(job):
             "artifacts": delivered,
         }
         result.update(extra or {})
-        if warnings:
-            result["warnings"] = warnings
+        # MERGE the module's warnings with the handler's, never replace.
+        # `extra` carries the warnings the mode module promoted precisely so
+        # a caller reading only result["warnings"] cannot miss them — NOT
+        # BUILDABLE and REGS FAIL from model mode, the BS 7671
+        # outside-every-zone count from services. Assigning the handler-local
+        # list over the top erased them on any job that also had an
+        # anchor-scale or delivery warning, which for services is essentially
+        # every job. Module warnings come first: they are the louder ones.
+        module_warnings = list((extra or {}).get("warnings") or [])
+        merged = module_warnings + [w for w in warnings
+                                    if w not in module_warnings]
+        if merged:
+            result["warnings"] = merged
         # On EVERY path, as the comment below _fail says. It was persisted
         # only on the two failure paths, so the successful scans — the ones
         # actually worth keeping — got no durable record at all.

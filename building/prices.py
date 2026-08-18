@@ -71,9 +71,18 @@ REFRESH_INTERVAL_DAYS = 7
 CATALOGUE = {
     "roof_covering": {
         "unit": "each",
-        ECONOMY:  {"spec": "Concrete interlocking tile", "life_years": 40},
-        STANDARD: {"spec": "Concrete plain tile", "life_years": 60},
-        PREMIUM:  {"spec": "Natural slate", "life_years": 100},
+        # covers_per_m2 is what makes the three tiers comparable at all.
+        # They are different tile types laying 10.5, 60 and 20 to the
+        # square metre (docs/ESTIMATING_RATES.md gauges), so a per-tile
+        # price comparison inverts reality: a plain tile at £0.55 looks
+        # cheaper than an interlocking one at £1.20, but a square metre
+        # of plain tile costs nearly three times as much.
+        ECONOMY:  {"spec": "Concrete interlocking tile", "life_years": 40,
+                   "covers_per_m2": 10.5},
+        STANDARD: {"spec": "Concrete plain tile", "life_years": 60,
+                   "covers_per_m2": 60.0},
+        PREMIUM:  {"spec": "Natural slate", "life_years": 100,
+                   "covers_per_m2": 20.0},
         "index_series": "roofing_tiles_slate",
     },
     "battens": {
@@ -356,16 +365,35 @@ def compare_tiers(observations, product, today=None):
 
     priced = {t: v["price"] for t, v in out["tiers"].items() if v["price"]}
     if len(priced) >= 2:
-        cheapest = min(priced.values())
-        for tier, p in priced.items():
+        # Tiers of a per-each product are not always the same object. The
+        # roof coverings are different tile types laying 10.5, 60 and 20
+        # to the square metre, so comparing their per-tile prices showed
+        # plain tile as "cheapest" and interlocking at +118% when, per
+        # square metre of roof, the truth was the reverse — inverted by up
+        # to 6x. Where every priced tier declares its coverage, every
+        # comparison figure is computed on the installed square metre.
+        cover = {t: CATALOGUE[product][t].get("covers_per_m2")
+                 for t in priced}
+        per_m2 = all(cover.values())
+        basis = ({t: p * cover[t] for t, p in priced.items()} if per_m2
+                 else dict(priced))
+        if per_m2:
+            for tier, cost in basis.items():
+                out["tiers"][tier]["price_per_m2"] = round(cost, 2)
+            out["comparison_basis"] = (
+                "per m2 installed, using each tier's own coverage rate — "
+                "the tiers lay different counts to the square metre, so "
+                "per-unit prices are not comparable")
+        cheapest = min(basis.values())
+        for tier, cost in basis.items():
             out["tiers"][tier]["vs_cheapest_pct"] = round(
-                (p / cheapest - 1) * 100, 1)
-        # Whole-life comparison, where a life expectancy exists. A premium
-        # covering at twice the price and three times the life is cheaper
-        # per year, and that is the argument a customer actually responds to.
+                (cost / cheapest - 1) * 100, 1)
+        # Whole-life comparison, where a life expectancy exists — on the
+        # same common basis, so a long life cannot launder a unit mix-up.
         for tier, v in out["tiers"].items():
-            if v.get("price") and v.get("life_years"):
-                v["cost_per_year"] = round(v["price"] / v["life_years"], 3)
+            if tier in basis and v.get("life_years"):
+                v["cost_per_year"] = round(
+                    basis[tier] / v["life_years"], 3)
     return out
 
 

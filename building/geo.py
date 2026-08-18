@@ -103,7 +103,12 @@ def footprint_local(model):
     L is a wrong drawing, not a simplified one.
 
     Falls back to the extent rectangle if the walls do not chain into a
-    closed ring, and says so in the returned flag.
+    SINGLE closed ring, and says so in the returned flag. A detached
+    annex or a courtyard plan produces two or more wall loops; tracing
+    just the loop that happens to come first and calling it THE footprint
+    would report a measured-looking area that quietly excludes a whole
+    building, so a closure only counts when every external segment was
+    consumed by it.
     """
     segs = []
     for w in model["walls"]:
@@ -130,7 +135,12 @@ def footprint_local(model):
             else:
                 break
             if ring[-1] == ring[0] and len(used) > 2:
-                return ring[:-1], True
+                if len(used) == len(segs):
+                    return ring[:-1], True
+                # The ring closed but external segments remain — a second
+                # loop exists (detached annex, courtyard). A partial ring
+                # must not travel labelled as traced.
+                break
     ex, ey = model["extent_m"]["x"], model["extent_m"]["y"]
     return [(ex[0], ey[0]), (ex[1], ey[0]),
             (ex[1], ey[1]), (ex[0], ey[1])], False
@@ -169,7 +179,8 @@ def geojson(model, anchor, red_line_margin_m=None, rooms=False):
             "eaves_m": t.get("eaves_height_m"),
             "ridge_m": t.get("ridge_height_m"),
             "outline": "traced from external walls" if traced
-                       else "extent rectangle (walls did not close)",
+                       else "extent rectangle (external walls did not "
+                            "chain into a single closed ring)",
         },
     })
 

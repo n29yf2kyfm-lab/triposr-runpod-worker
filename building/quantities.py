@@ -235,7 +235,10 @@ def services(model, heat=None, elec=None, mep=None):
             out.append(_line(f"{size} ({system})", routed[key], "m",
                              f"routed runs measured off the model, "
                              f"{system} system", waste))
-        rads = sum(1 for r in heat.get("rooms", []) if r.get("radiator"))
+        # Every emitter takes its own pair of tails — a big bathroom's
+        # towel rail is a second radiator to the plumber, not a fitting.
+        rads = sum(1 for r in heat.get("rooms", [])
+                   for e in (r.get("radiator"), r.get("towel_rail")) if e)
         if rads:
             out.append(_line("Radiators (as heat design)", rads, "no",
                              "heatloss.design emitter schedule"))
@@ -250,7 +253,8 @@ def services(model, heat=None, elec=None, mep=None):
     sockets = int(elec.get("sockets_twin_total") or 0)
     rooms_n = sum(1 for _ in model["rooms"])
     lights = rooms_n * LIGHTS_PER_ROOM
-    rads = sum(1 for r in heat.get("rooms", []) if r.get("radiator"))
+    rads = sum(1 for r in heat.get("rooms", [])
+               for e in (r.get("radiator"), r.get("towel_rail")) if e)
     out = [
         _line("2.5mm2 T&E cable", sockets * CABLE_M_PER_SOCKET, "m",
               f"{CABLE_M_PER_SOCKET:.0f} m per socket x {sockets}",
@@ -289,7 +293,8 @@ def bill(model, covering="concrete_interlocking", heat=None, elec=None,
             "Cable and pipe come from mep.py's routed runs where they "
             "exist, and from estimating rules only as a fallback; each "
             "line says which.",
-            "takeoff.py prices this bill; rates live in the user's rate "
-            "card.",
+            "This bill is measured, not priced. takeoff.py prices "
+            "roof-mode takeoffs only; the masonry, finishes and services "
+            "trades are unpriced until a rate-card pricing path exists.",
         ],
     }

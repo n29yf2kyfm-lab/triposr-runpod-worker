@@ -234,6 +234,29 @@ check("6f-4 a zero-area segment alongside a real one is simply ignored",
 check("6f-5 and compare copes",
       S.compare(MINE, zero) is not None)
 
+# A PARTIAL imageryDate MUST NOT TAKE THE JOB DOWN. {"year": 2023} with
+# month/day absent (or null) used to hit f"{None:02d}" and raise TypeError
+# out of parse_segments — which roof.run calls after the free LIDAR path
+# has already produced quantities. A partial date is no date.
+_seg = [{"pitchDegrees": 35.0, "azimuthDegrees": 90.0,
+         "stats": {"areaMeters2": 61.0}}]
+_yr_only = S.parse_segments({"imageryDate": {"year": 2023},
+                             "solarPotential": {"roofSegmentStats": _seg}})
+check("6f-6 a year-only imageryDate parses without raising",
+      _yr_only is not None)
+check("6f-7 and reports no date rather than a fabricated one",
+      _yr_only["imagery_date"] is None, str(_yr_only["imagery_date"]))
+_null_day = S.parse_segments({"imageryDate": {"year": 2023, "month": 7,
+                                              "day": None},
+                              "solarPotential":
+                              {"roofSegmentStats": _seg}})
+check("6f-8 a null day likewise",
+      _null_day["imagery_date"] is None, str(_null_day["imagery_date"]))
+# The complete date still formats — hand-checked against the section 4
+# fixture: {"year": 2024, "month": 1, "day": 1} -> "2024-01-01".
+check("6f-9 a complete date still formats zero-padded",
+      Q["imagery_date"] == "2024-01-01", str(Q["imagery_date"]))
+
 check("6h the key is read from the environment, never hard-coded",
       "AIza" not in open(os.path.join(HERE, "solar.py")).read())
 check("6i and the module names the env var it wants",

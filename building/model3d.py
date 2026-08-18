@@ -33,6 +33,10 @@ DEFAULT_WALL_THICKNESS_M = 0.100        # internal stud partition over studs
 DEFAULT_EXTERNAL_THICKNESS_M = 0.300    # cavity wall, brick + cavity + block
 DEFAULT_CEILING_HEIGHT_M = 2.400        # Part M / typical new build
 DEFAULT_SLAB_M = 0.150
+# Widest gap between blocks that still reads as a construction void: a
+# cavity strip is 100-600mm; anything wider is open air an L-plan notch
+# leaves, which loses heat like any other garden-facing wall.
+VOID_MAX_M = 0.6
 
 # Approved Document M and BS 4787. A door is not a hole of arbitrary size.
 DOOR_W_M, DOOR_H_M = 0.838, 1.981       # 838mm leaf — Part M minimum clear
@@ -126,6 +130,7 @@ def check_against_schedule(rooms, schedule, tolerance=0.05):
     # one name, and comparing only the larger of them against the schedule
     # reported a 9.5% error on a room whose two parts add up exactly.
     out, worst = [], 0.0
+    missing = 0
     grouped = {}
     for r in rooms:
         grouped.setdefault(r.name.strip().lower(), []).append(r)
@@ -133,8 +138,16 @@ def check_against_schedule(rooms, schedule, tolerance=0.05):
     for name, stated in (schedule or {}).items():
         parts = grouped.get(name.strip().lower())
         if not parts:
+            # A ROOM THAT WAS NEVER MODELLED IS THE WORST DISAGREEMENT
+            # THERE IS. This branch used to skip past `worst`, so a
+            # schedule with a whole room absent from the model still came
+            # back within_tolerance: True — the headline said the model
+            # matched the drawing while a scheduled room did not exist.
+            # The row said "not modelled", but nobody reads the rows when
+            # the boolean says fine. Missing rooms fail the verdict.
             out.append({"room": name, "stated_m2": stated, "modelled_m2": None,
                         "status": "not modelled"})
+            missing += 1
             continue
         modelled = sum(p.area_m2 for p in parts)
         error = abs(modelled - stated) / stated if stated else 0.0
@@ -150,7 +163,8 @@ def check_against_schedule(rooms, schedule, tolerance=0.05):
         out.append(entry)
     return {"rooms": out,
             "worst_error_pct": round(worst * 100, 1),
-            "within_tolerance": worst <= tolerance,
+            "not_modelled": missing,
+            "within_tolerance": worst <= tolerance and missing == 0,
             "tolerance_pct": round(tolerance * 100, 1)}
 
 
@@ -351,7 +365,13 @@ def walls_from_rooms(rooms, internal=DEFAULT_WALL_THICKNESS_M,
         if both == 2:
             depth_levels = []
             for hits in sides:
-                lv = [(r.storeys if r.storeys is not None else 10**6)
+                # A block's reach is base + storeys: a bedroom stacked at
+                # base_level 1 tops out at level 2, and counting only its
+                # storeys said 1 — which told heatloss the wall behind it
+                # was facade a level early, on both sides of the wall.
+                lv = [(10**6 if r.storeys is None
+                       else int(getattr(r, "base_level", 0) or 0)
+                       + int(r.storeys))
                       for r in hits]
                 depth_levels.append(max(lv))
             wall.shared_storeys = min(depth_levels)
@@ -372,7 +392,8 @@ def walls_from_rooms(rooms, internal=DEFAULT_WALL_THICKNESS_M,
     # brickwork pressed against it.
     #
     # The tell is cheap: if the outside probe point still lands inside the
-    # plan's own bounding box, the wall faces a void, not the sky.
+    # plan's own bounding box, the wall MAY face a void — confirmed only
+    # if another block stands within a cavity's width of it.
     if rooms:
         ex0 = min(r.x for r in rooms); ex1 = max(r.x + r.width for r in rooms)
         ey0 = min(r.y for r in rooms); ey1 = max(r.y + r.depth for r in rooms)
@@ -393,8 +414,25 @@ def walls_from_rooms(rooms, internal=DEFAULT_WALL_THICKNESS_M,
                           and r.y - 1e-6 <= py <= r.y + r.depth + 1e-6
                           for r in rooms)
             if not in_room:
-                wall.void_facing = (ex0 + 1e-6 < px < ex1 - 1e-6
-                                    and ey0 + 1e-6 < py < ey1 - 1e-6)
+                inside_bbox = (ex0 + 1e-6 < px < ex1 - 1e-6
+                               and ey0 + 1e-6 < py < ey1 - 1e-6)
+                # Inside the bounding box is necessary but NOT sufficient:
+                # the open notch of an L-plan sits inside the box and is
+                # still garden. A void is a NARROW strip between blocks,
+                # so keep walking outward — another room within a cavity's
+                # width makes it a void; open air past that is sky, and
+                # calling it a void told heatloss the wall was adiabatic.
+                facing_block = False
+                if inside_bbox:
+                    for k in range(1, int(VOID_MAX_M / 0.1) + 1):
+                        qx = mx + nx * (step + k * 0.1) * sign
+                        qy = my + ny * (step + k * 0.1) * sign
+                        if any(r.x - 1e-6 <= qx <= r.x + r.width + 1e-6
+                               and r.y - 1e-6 <= qy <= r.y + r.depth + 1e-6
+                               for r in rooms):
+                            facing_block = True
+                            break
+                wall.void_facing = inside_bbox and facing_block
                 break
 
     # PUT THE PIECES BACK TOGETHER WHERE THEY ARE ONE WALL. Cutting every
@@ -807,8 +845,24 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
                 a += 0.1
             if not placed and dw.length_m >= DOOR_W_M + 0.2:
                 # A short front wall whose window leaves no room: the door
-                # matters more than the window it displaces.
-                dw.openings.clear()
+                # matters more than the window it displaces — ON THE GROUND
+                # FLOOR. clear() also threw away the level=None windows
+                # that repeat on every storey, so a narrow-fronted
+                # two-storey plan lost its first-floor window — and with it
+                # the escape opening — to make space for a door that only
+                # exists at level 0. Keep the displaced openings by pinning
+                # them to each upper storey the wall actually stands on.
+                displaced = [o for o in dw.openings
+                             if o.get("level") is None]
+                dw.openings = [o for o in dw.openings
+                               if o.get("level") not in (None, 0)]
+                top = storeys if dw.storeys is None else \
+                    min(dw.base_level + dw.storeys, storeys)
+                for lv in range(dw.base_level + 1, top):
+                    for o in displaced:
+                        dw.add_opening(o["kind"], o["along"], o["width"],
+                                       o["height"], o.get("sill", 0.0),
+                                       level=lv)
                 dw.add_opening("door", (dw.length_m - DOOR_W_M) / 2,
                                DOOR_W_M, DOOR_H_M, level=0)
     # The eaves sit on TOP OF THE TOPMOST WALL, not a floor zone above it.
@@ -1014,6 +1068,40 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
 
 # --- export -----------------------------------------------------------------
 
+def _floor_plates(model, level):
+    """The floor of one storey, as (x0, y0, x1, y1) rectangles.
+
+    THE FLOOR IS THE ROOMS, NOT THE BOUNDING BOX. The GLB learned this
+    first: one slab across extent_m hung a floor plate in mid-air over
+    the empty half of every L-plan and put a phantom first floor on
+    every single-storey block. The OBJ and IFC writers kept the
+    bounding-box slab after the GLB was fixed, so the mesh a client
+    orbits and the IFC a surveyor takes quantities off described
+    DIFFERENT buildings — the IFC counted floor over open sky. One rule
+    here, used by all three, so they cannot drift apart again. The
+    extent is only a fallback for a model that carries no rooms at all.
+    """
+    storeys = model.get("storeys", 1)
+    plates = []
+    for r in model.get("rooms") or []:
+        base = r.get("base_level") or 0
+        n = r.get("storeys")
+        top = storeys if n is None else base + int(n)
+        if base <= level < top:
+            plates.append((r["x"], r["y"],
+                           r["x"] + r["width_m"], r["y"] + r["depth_m"]))
+    if plates:
+        return plates
+    if model.get("rooms"):
+        # A level no room stands on has NO floor. Falling back to the
+        # extent here would re-admit the phantom bounding-box plate this
+        # function exists to kill, one degenerate model at a time.
+        return []
+    x0, x1 = model["extent_m"]["x"]
+    y0, y1 = model["extent_m"]["y"]
+    return [(x0, y0, x1, y1)]
+
+
 def write_obj(model, path):
     """Wavefront OBJ — opens in anything, no library needed.
 
@@ -1034,8 +1122,6 @@ def write_obj(model, path):
                   (1, 5, 6, 2), (2, 6, 7, 3), (3, 7, 4, 0)]:
             faces.append(tuple(base + i for i in f))
 
-    x0, x1 = model["extent_m"]["x"]
-    y0, y1 = model["extent_m"]["y"]
     storeys = model.get("storeys", 1)
     per = model.get("storey_height_m", DEFAULT_CEILING_HEIGHT_M)
 
@@ -1044,7 +1130,11 @@ def write_obj(model, path):
     # produced a three-storey block as a bungalow.
     for level in range(storeys):
         z = level * per
-        box(x0, y0, z - DEFAULT_SLAB_M, x1, y1, z, f"slab_L{level}")
+        # One slab per room standing on this level — see _floor_plates.
+        for pi, (fx0, fy0, fx1, fy1) in enumerate(_floor_plates(model,
+                                                                level)):
+            box(fx0, fy0, z - DEFAULT_SLAB_M, fx1, fy1, z,
+                f"slab_L{level}_{pi}")
         for i, w in enumerate(model["walls"]):
             if not _wall_on_level(w, level):
                 continue
@@ -1185,6 +1275,9 @@ _MEP_SYSTEM = {
 }
 _MEP_TERMINAL = {
     "radiator": ("IfcSpaceHeater", "RADIATOR"),
+    # IFC4's IfcSpaceHeaterTypeEnum has no towel-rail value; RADIATOR is
+    # the honest nearest — the name and wattage ride in the properties.
+    "towel rail": ("IfcSpaceHeater", "RADIATOR"),
     "extract fan": ("IfcAirTerminal", "EXHAUSTVENT"),
     "boiler": ("IfcBoiler", "STEAM"),
     "consumer unit": ("IfcElectricDistributionBoard", "CONSUMERUNIT"),
@@ -1381,8 +1474,6 @@ def write_ifc(model, path, project_name="Modelled Building"):
 
     storeys_n = model.get("storeys", 1)
     per = model.get("storey_height_m", DEFAULT_CEILING_HEIGHT_M)
-    x0, x1 = model["extent_m"]["x"]
-    y0, y1 = model["extent_m"]["y"]
 
     def box_at(el, wx, wy, wz, ux, uy, ldim, tdim, ddim):
         """A swept solid ldim x tdim extruded up ddim, at a world placement
@@ -1424,13 +1515,19 @@ def write_ifc(model, path, project_name="Modelled Building"):
     for level, st in enumerate(storeys):
         z = level * per
 
-        # The floor plate. Extruded downward-thick so its top is the FFL.
-        slab = run("root.create_entity", f, ifc_class="IfcSlab",
-                   name=f"Floor slab L{level}", predefined_type="FLOOR")
-        run("spatial.assign_container", f, products=[slab],
-            relating_structure=st)
-        box_at(slab, x0, y0, z - DEFAULT_SLAB_M, 1.0, 0.0,
-               x1 - x0, (y1 - y0), DEFAULT_SLAB_M)
+        # The floor plates, one per room on this level — see _floor_plates:
+        # a single extent-wide slab put an IFC floor over the open sky
+        # above every single-storey block. Extruded downward-thick so the
+        # top of each is the FFL.
+        for pi, (fx0, fy0, fx1, fy1) in enumerate(_floor_plates(model,
+                                                                level)):
+            slab = run("root.create_entity", f, ifc_class="IfcSlab",
+                       name=f"Floor slab L{level}.{pi}",
+                       predefined_type="FLOOR")
+            run("spatial.assign_container", f, products=[slab],
+                relating_structure=st)
+            box_at(slab, fx0, fy0, z - DEFAULT_SLAB_M, 1.0, 0.0,
+                   fx1 - fx0, fy1 - fy0, DEFAULT_SLAB_M)
 
         for i, w in enumerate(model["walls"]):
             if not _wall_on_level(w, level):
@@ -1883,8 +1980,6 @@ def _glb_mesh(model):
 
     storeys = model.get("storeys", 1)
     per = model.get("storey_height_m", DEFAULT_CEILING_HEIGHT_M)
-    x0, x1 = model["extent_m"]["x"]
-    y0, y1 = model["extent_m"]["y"]
 
     rooms = model.get("rooms") or []
 
@@ -1900,16 +1995,11 @@ def _glb_mesh(model):
         # across extent_m gave every L-shaped plan a floor plate hanging in
         # mid-air past the walls — over the garage, out beyond the return —
         # which reads as a modelling error the moment anyone orbits it.
+        # The rule lives in _floor_plates now, shared with OBJ and IFC.
         above = [r for r in rooms if _room_on_level(r, level + 1)]
-        floors = [r for r in rooms if _room_on_level(r, level)]
-        if floors:
-            for r in floors:
-                fx0, fy0 = r["x"], r["y"]
-                fx1, fy1 = fx0 + r["width_m"], fy0 + r["depth_m"]
-                emit("slab", [(fx0, fy0, z), (fx1, fy0, z),
-                              (fx1, fy1, z), (fx0, fy1, z)])
-        else:
-            emit("slab", [(x0, y0, z), (x1, y0, z), (x1, y1, z), (x0, y1, z)])
+        for fx0, fy0, fx1, fy1 in _floor_plates(model, level):
+            emit("slab", [(fx0, fy0, z), (fx1, fy0, z),
+                          (fx1, fy1, z), (fx0, fy1, z)])
         for w in model["walls"]:
             if not _wall_on_level(w, level):
                 continue
@@ -2206,10 +2296,25 @@ def apply_facade_openings(model, openings, facade_y=0.0):
 
     has_door = any(o["kind"] == "door" for o in openings)
     todo = list(openings)
+    door_entry = None
     if not has_door and saved_door is not None:
-        todo.append(dict(saved_door[1]))
+        # THE SAVED DOOR IS IN THE WRONG FRAME. Its 'along' was measured
+        # along its wall FROM THE WALL'S START; everything else in todo is
+        # facade x straight off the photo. On a plan whose front wall does
+        # not start at x=0 the untranslated door either missed every wall
+        # and silently vanished, or landed on a different wall metres from
+        # where it stood — while the result still said door_preserved:
+        # True. Translate it into the facade frame before queuing, and
+        # report it preserved only if it was actually re-placed below.
+        dwall, d = saved_door
+        d = dict(d)
+        ax, bx = dwall["start"][0], dwall["end"][0]
+        d["along"] = (ax + d["along"]) if ax <= bx \
+            else (ax - d["along"] - d["width"])
+        door_entry = d
+        todo.append(d)
 
-    applied, skipped = 0, 0
+    applied, skipped, door_applied = 0, 0, False
     placed_spans = {id(w): [] for w in fronts}
     for o in sorted(todo, key=lambda o: o["along"]):
         hit = None
@@ -2249,7 +2354,9 @@ def apply_facade_openings(model, openings, facade_y=0.0):
                               "sill": o.get("sill", 0.0),
                               "level": o.get("level")})
         applied += 1
+        if o is door_entry:
+            door_applied = True
 
     retotal(model)
     return {"applied": applied, "skipped": skipped,
-            "door_preserved": (not has_door and saved_door is not None)}
+            "door_preserved": door_applied}

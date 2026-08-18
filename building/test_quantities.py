@@ -62,6 +62,20 @@ class TestExternalDefaultStoreys(unittest.TestCase):
         self.assertEqual(perim, 0.0)
 
 
+class TestBillNotes(unittest.TestCase):
+    def test_the_bill_does_not_claim_a_pricing_path_that_does_not_exist(self):
+        """The shipped note said 'takeoff.py prices this bill', but
+        takeoff.py only prices a roof-mode takeoff dict — nothing in the
+        repo prices the masonry, finishes or services groups. The note
+        must say what is actually true: the bill is measured, and those
+        trades are unpriced until a rate-card pricing path exists."""
+        model = M.build(_plate(), storeys=1, storey_height=2.7, roof=ROOF)
+        notes = " ".join(Q.bill(model)["notes"])
+        self.assertNotIn("prices this bill", notes)
+        self.assertIn("unpriced", notes)
+        self.assertIn("roof-mode takeoffs only", notes)
+
+
 class TestBrickSanityAnchor(unittest.TestCase):
     def test_a_three_bed_detached_lands_in_the_trade_band(self):
         """The module's own stated anchor: a 3-bed detached takes

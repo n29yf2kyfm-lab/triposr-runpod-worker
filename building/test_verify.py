@@ -82,10 +82,36 @@ check("3e no source -> UNLOCATABLE",
 
 # --- 4. postcode-only (no building source) still gets judged, not dropped ---
 # When ONLY weak sources exist, fall back to judging them rather than
-# returning nothing — a coarse answer with a caveat beats silence.
+# returning nothing — a coarse answer with a caveat beats silence. But the
+# postcode centroid is a street point, not a building, so agreement in the
+# fallback set is capped at UNCONFIRMED: a false CONFIRMED here once claimed
+# "2 independent building-level sources agree" off a road geocode and the
+# postcode centre, which cannot name a house.
 pv = V.agreement({"postcode": o, "street_view_road": offset(5)})
-check("4a with no building-level pair it judges what it has",
-      pv[0] in ("CONFIRMED", "UNCONFIRMED"), pv[0])
+check("4a with no building-level pair it judges what it has, capped",
+      pv[0] == "UNCONFIRMED", f"{pv[0]}: {pv[2]}")
+check("4b and the message says what was judged, not 'building-level'",
+      "fewer than two are building-level" in pv[2], pv[2])
+
+# One building-level source plus the postcode is still not a confirmation —
+# the module's own rule is that one building-level source alone stays
+# UNCONFIRMED, and adding the street-level centroid cannot upgrade that.
+sp = V.agreement({"street_view": o, "postcode": offset(10)})
+check("4c street_view + postcode within 10m is UNCONFIRMED",
+      sp[0] == "UNCONFIRMED", f"{sp[0]}: {sp[2]}")
+check("4d and no longer claims building-level agreement",
+      "independent building-level sources agree" not in sp[2], sp[2])
+
+# Two genuine building-level sources are unaffected by the cap.
+check("4e two building-level sources still CONFIRM",
+      V.agreement({"street_view": o,
+                   "solar_building": offset(10)})[0] == "CONFIRMED")
+
+# Past the CONFIRM threshold the fallback still degrades honestly.
+check("4f a wide fallback spread is still UNCONFIRMED/CONFLICT, never "
+      "CONFIRMED",
+      V.agreement({"postcode": o,
+                   "street_view_road": offset(45)})[0] == "UNCONFIRMED")
 
 
 print()

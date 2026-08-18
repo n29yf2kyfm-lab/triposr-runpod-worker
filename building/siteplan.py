@@ -136,13 +136,49 @@ def shadow_local(model, anchor, day_of_year=355, solar_hour=12.0):
     return _hull(list(ring) + [(x + dx, y + dy) for x, y in ring]), info
 
 
+def _rear_profile(ring):
+    """The rear wall line as (x0, x1, y) pieces, left to right.
+
+    Class A measures its depth 'beyond the rear wall of the original
+    dwellinghouse' — the ACTUAL rear wall, per the gov.uk technical
+    guide. On an L-shaped plan the bounding-box rear line sits metres
+    beyond a recessed wing's real rear wall, so an envelope drawn off
+    the box quietly over-claims the permitted depth there. This walks
+    the traced footprint instead: for each x-interval between the
+    ring's vertices, the rear wall is the topmost boundary crossing.
+    """
+    xs = sorted({x for x, _ in ring})
+    n = len(ring)
+    pieces = []
+    for x0, x1 in zip(xs[:-1], xs[1:]):
+        mid = (x0 + x1) / 2.0
+        top = None
+        for i in range(n):
+            ax, ay = ring[i]
+            bx, by = ring[(i + 1) % n]
+            if min(ax, bx) < mid < max(ax, bx):
+                y = ay + (by - ay) * (mid - ax) / (bx - ax)
+                top = y if top is None else max(top, y)
+        if top is None:
+            continue
+        if pieces and abs(pieces[-1][2] - top) < 1e-9 \
+                and abs(pieces[-1][1] - x0) < 1e-9:
+            pieces[-1] = (pieces[-1][0], x1, pieces[-1][2])
+        else:
+            pieces.append((x0, x1, top))
+    return pieces
+
+
 def permitted_development_local(model, detached=True, larger=False,
                                 two_storey=False):
     """The Class A envelope for a REAR extension, in plan metres.
 
-    Drawn off the rear elevation of the existing building — which is the
-    face at the largest y in this project's convention — because that is
-    where a householder extension goes.
+    Drawn off the rear elevation of the existing building — the face(s)
+    at the largest y in this project's convention — because that is
+    where a householder extension goes. The depth is measured from each
+    rear WALL, taken from the traced footprint, not from the extent
+    box: over a recessed rear wing the box line would hand out depth
+    the GPDO never granted.
     """
     ex, ey = model["extent_m"]["x"], model["extent_m"]["y"]
     if two_storey:
@@ -158,11 +194,31 @@ def permitted_development_local(model, detached=True, larger=False,
         depth = (PD_REAR_SINGLE_DETACHED_M if detached
                  else PD_REAR_SINGLE_OTHER_M)
         note = "single-storey rear within Class A without prior approval"
-    ring = [(ex[0], ey[1]), (ex[1], ey[1]),
-            (ex[1], ey[1] + depth), (ex[0], ey[1] + depth)]
+    fp, traced = geo.footprint_local(model)
+    if traced:
+        pieces = _rear_profile(fp)
+        # Bottom edge follows the rear walls left to right; top edge is
+        # the same staircase pushed out by the permitted depth, walked
+        # back right to left. Constant depth keeps the polygon simple.
+        ring = []
+        for x0, x1, y in pieces:
+            ring += [(x0, y), (x1, y)]
+        for x0, x1, y in reversed(pieces):
+            ring += [(x1, y + depth), (x0, y + depth)]
+        ring = [p for i, p in enumerate(ring) if p != ring[i - 1]]
+        rear_line = "traced rear wall(s), per x-interval of the footprint"
+    else:
+        # The footprint fell back to the extent rectangle and said so;
+        # the envelope can only be as honest as the outline it sits on.
+        ring = [(ex[0], ey[1]), (ex[1], ey[1]),
+                (ex[1], ey[1] + depth), (ex[0], ey[1] + depth)]
+        rear_line = ("extent rectangle rear line — the walls did not "
+                     "chain into a single ring, so the rear wall could "
+                     "not be traced")
     return ring, {
         "depth_m": depth, "detached": bool(detached),
         "larger": bool(larger), "two_storey": bool(two_storey),
+        "rear_line": rear_line,
         "note": note,
         "warning": ("ENVELOPE, NOT PERMISSION. Class A is removed by "
                     "Article 4 directions and does not apply to flats or "
@@ -211,11 +267,21 @@ def layers(model, anchor, red_line_margin_m=6.0, rooms=False,
                     STYLE["pd"]))
     if shadow is not None:
         ring, info = shadow_local(model, anchor, **shadow)
+        name = (f"Shadow {info['solar_hour']:.0f}h "
+                f"day {info['day_of_year']}")
         if ring:
-            out.append((f"Shadow {info['solar_hour']:.0f}h "
-                        f"day {info['day_of_year']}",
-                        _fc([_feature(anchor, ring, "shadow", info)]),
+            out.append((name, _fc([_feature(anchor, ring, "shadow", info)]),
                         STYLE["shadow"]))
+        else:
+            # shadow_local refused to draw — the sun is at or below the
+            # cutoff. Dropping the layer here used to bury that refusal:
+            # the project showed no shadow and nothing said why, which
+            # reads as 'casts no shadow' rather than 'refused to draw
+            # one'. The refusal travels as an empty layer carrying the
+            # note, so the deliverable says so on its own face.
+            fc = _fc([])
+            fc["properties"] = dict(info)
+            out.append((name + " — refused", fc, STYLE["shadow"]))
     if rooms and "room" in by_layer:
         out.append(("Rooms", _fc(by_layer["room"]), STYLE["rooms"]))
     if services and model.get("mep"):
@@ -276,4 +342,8 @@ def describe(model, anchor, **kwargs):
     for layer_name, data, _ in layers(model, anchor, **kwargs):
         n = len(data["features"])
         lines.append(f"  {layer_name:<34} {n} feature(s)")
+        note = (data.get("properties") or {}).get("note")
+        if note and not n:
+            # an empty layer is a refusal, and a refusal must say why
+            lines.append(f"    {note}")
     return "\n".join(lines)

@@ -131,10 +131,31 @@ check("3k and confidence drops to low", r_noindex["confidence"] == "low")
 
 # Recency must be scored against the DATE THE VALUATION IS FOR, not the real
 # clock. Reading date.today() here made every backtest quietly wrong about
-# how fresh its own comparables were.
-_hist = V.value_from_comparables(COMPS, 92.0, "S", INDEX, date(2025, 8, 1))
-check("3l a historical valuation scores recency against its own date",
-      _hist["confidence"] in ("good", "fair", "low"), _hist["confidence"])
+# how fresh its own comparables were. Pinned by BEHAVIOUR, not source text:
+# the same eight comparables valued at two different dates must score
+# differently. (The old 3l asserted confidence in ('good','fair','low') —
+# every value _confidence can return, so it could never fail.)
+#
+# Hand-worked: eight tight S-type comps sold 2024-2025, spread ~4% after
+# indexing. Valued at 2025-08-01 all eight are under 2 years old, so
+# 8 kept + spread <= 0.25 + 3+ recent -> "good". Valued at 2028-06-01 the
+# same sales are 3-4 years old — still inside the 5-year comparable window,
+# but ZERO are recent — so "good" is out of reach and the answer is "fair".
+# A _confidence that read the real clock would call both runs the same.
+_recency_comps = [sale(240_000, 2024, area=88.0), sale(245_000, 2024, area=89.0),
+                  sale(250_000, 2024, area=90.0), sale(252_000, 2024, area=91.0),
+                  sale(255_000, 2025, area=92.0), sale(258_000, 2025, area=93.0),
+                  sale(262_000, 2025, area=94.0), sale(268_000, 2025, area=96.0)]
+_ext_index = {date(y, m, 1): 100.0 + (y - 2020) * 5.0
+              for y in range(2019, 2030) for m in (1, 4, 7, 10)}
+_fresh = V.value_from_comparables(_recency_comps, 92.0, "S", _ext_index,
+                                  date(2025, 8, 1))
+_stale = V.value_from_comparables(_recency_comps, 92.0, "S", _ext_index,
+                                  date(2028, 6, 1))
+check("3l fresh comparables score good against their own date",
+      _fresh["confidence"] == "good", _fresh["confidence"])
+check("3l2 the same comparables gone stale score lower",
+      _stale["confidence"] == "fair", _stale["confidence"])
 import inspect  # noqa: E402
 check("3m _confidence takes today rather than reading the clock",
       "today=None" in inspect.signature(V._confidence).__str__()
@@ -752,8 +773,36 @@ check("r3 apostrophes drop, not hyphenate",
       == "kings-lynn-and-west-norfolk",
       V.region_slug("King's Lynn and West Norfolk"))
 check("r4 nothing in, None out", V.region_slug("") is None)
-check("r5 derive_region survives a dead lookup",
-      V.derive_region("not even a postcode") in (None,) or True)
+
+# r5 used to read `in (None,) or True` — a tautology that passed for ANY
+# return value, so a derive_region that invented a region slug for garbage
+# input would have sailed through. Fake the geocoder both ways instead:
+# a dead lookup must give None (falling back to the explicit-region path),
+# and a live one must give the district's slug — never a guess.
+_real_roof = sys.modules.get("roof")
+_fake_roof = types.ModuleType("roof")
+
+
+def _dead_lookup(_postcode):
+    raise RuntimeError("postcode lookup unavailable")
+
+
+_fake_roof._geocode_uk_full = _dead_lookup
+sys.modules["roof"] = _fake_roof
+try:
+    check("r5 a dead lookup gives None, not a fabricated region",
+          V.derive_region("not even a postcode") is None,
+          str(V.derive_region("not even a postcode")))
+    _fake_roof._geocode_uk_full = \
+        lambda pc: {"admin_district": "Birmingham"}
+    check("r6 a live lookup gives the district's slug",
+          V.derive_region("B36 8AR") == "birmingham",
+          str(V.derive_region("B36 8AR")))
+finally:
+    if _real_roof is not None:
+        sys.modules["roof"] = _real_roof
+    else:
+        sys.modules.pop("roof", None)
 
 print()
 for f in FAILED:

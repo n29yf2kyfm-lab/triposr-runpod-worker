@@ -270,7 +270,7 @@ def _attach(openings, walls, warnings):
     and within the wall's run.
     """
     by_id = {w["id"]: w for w in walls}
-    placed = dropped = 0
+    placed = dropped = oversized = 0
     for o in openings:
         w = by_id.get(o["parent"]) if o["parent"] else None
         if w is None:
@@ -288,6 +288,16 @@ def _attach(openings, walls, warnings):
             w = best
         if w is None:
             dropped += 1
+            continue
+        if o["width"] > w["length"]:
+            # RoomPlan splits walls into segments on imperfect scans, so a
+            # 0.9m door can arrive parented to (or nearest to) a 0.8m stub.
+            # The clamp below keeps the full width, and Wall.add_opening
+            # rightly refuses an opening wider than its wall — which used
+            # to kill the whole job for a scan that is otherwise fine,
+            # while an opening attached to NOTHING was merely warned about.
+            # Same contract for both: drop it, and say so.
+            oversized += 1
             continue
         ax, ay = w["start"]
         ux = (w["end"][0] - ax) / w["length"]
@@ -309,6 +319,12 @@ def _attach(openings, walls, warnings):
             f"{dropped} opening(s) could not be attached to any wall "
             f"(no parentIdentifier and nothing within {ATTACH_M}m) — they "
             f"are missing from the model and its quantities.")
+    if oversized:
+        warnings.append(
+            f"{oversized} opening(s) are wider than the wall segment the "
+            f"scan put them on (RoomPlan splits walls on imperfect scans) "
+            f"— dropped, so they are missing from the model and its "
+            f"quantities.")
     return placed
 
 

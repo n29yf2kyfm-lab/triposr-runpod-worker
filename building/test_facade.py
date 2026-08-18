@@ -78,6 +78,18 @@ class TestMeasurement(unittest.TestCase):
         b = facade.opening_from_box(self.meta, (420, 630, 150, 300))
         self.assertEqual(a, b)
 
+    def test_describe_offers_no_fake_verification(self):
+        """residual() over the four solving points is ~0 by construction
+        — garbage corners included — so describe() printing 'corner
+        residual 0.000 px' presented a tautology as a quality check. The
+        real, independent check is check_brick_course; describe() must
+        not dress the rectification in a metric that measured nothing."""
+        text = facade.describe(self.meta)
+        self.assertNotIn("residual", text)
+        # the honest facts are still all there
+        self.assertIn("9.40 x 5.10 m", text)
+        self.assertIn("150 px/m", text)
+
     def test_brick_course_confirms_or_denies_the_scale(self):
         ok = facade.check_brick_course(self.meta, 0.075 * 150.0)
         self.assertTrue(ok["agrees"])
@@ -130,7 +142,10 @@ class TestRectifyRoundTrip(unittest.TestCase):
         rect, meta = facade.rectify(photo, corners, self.W_M, self.H_M,
                                     px_per_m=150)
         self.assertEqual(rect.size, tuple(meta["size_px"]))
-        self.assertLess(meta["corner_residual_px"], 1e-6)
+        # No corner_residual_px: an exact 4-point solve reproduces its own
+        # corners for ANY input, so the field was a 0.000 that read as
+        # verification and measured nothing. It must stay out of meta.
+        self.assertNotIn("corner_residual_px", meta)
 
         s = meta["px_per_m"]
         a0, a1, sill, head = self.WIN

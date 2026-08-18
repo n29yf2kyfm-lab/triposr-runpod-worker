@@ -216,14 +216,24 @@ def deliver(path, object_name, inline_key=None, allow_inline=True):
 
     out = {"url": url, "size_bytes": size, "path": path}
 
+    inlined = False
     if allow_inline and inline_key and size and size <= MAX_INLINE_BYTES:
         with open(path, "rb") as f:
             out[inline_key] = base64.b64encode(f.read()).decode("utf-8")
+        inlined = True
 
-    if not url and size > MAX_INLINE_BYTES:
-        # No upload channel and too large to inline: the caller cannot get
-        # this file. Reporting "success" here would be a lie — the artifact
-        # dies with the worker.
+    if not url and not inlined:
+        # No upload channel and no inline copy: the caller cannot get this
+        # file by ANY route. Reporting "success" here would be a lie — the
+        # artifact dies with the worker.
+        #
+        # The gate used to be `size > MAX_INLINE_BYTES`, which assumed the
+        # only way a file goes undelivered is by being too big. But most
+        # artifact tuples — every OBJ/GLB/IFC from model mode, the services
+        # JSON — ship with inline_key=None, so a small file on a worker with
+        # no storage came back as {url: null} inside a success response with
+        # not a word said, exactly the silent loss the module header
+        # promises never happens.
         #
         # The two causes need different words. "Not configured" is a
         # deployment step somebody has not done; a configured store that
@@ -238,10 +248,12 @@ def deliver(path, object_name, inline_key=None, allow_inline=True):
         else:
             cause = ("object storage is not configured "
                      "(SUPABASE_URL/KEY/BUCKET)")
+        how = (f"is {size / 1e6:.1f}MB — too large to inline"
+               if size > MAX_INLINE_BYTES else "was not delivered inline")
         out["warning"] = (
-            f"{os.path.basename(path)} is {size / 1e6:.1f}MB — too large to "
-            f"inline, and {cause}. The file exists only on the worker "
-            f"volume at {path} and will be lost when the worker recycles.")
+            f"{os.path.basename(path)} {how}, and {cause}. The file exists "
+            f"only on the worker volume at {path} and will be lost when the "
+            f"worker recycles.")
     return out
 
 

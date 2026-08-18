@@ -18,8 +18,12 @@ spacing (AD A / PD 6697); squote.app brickwork quantities.
   sand per m³ of mortar.
 - Wall ties 2.5/m² (900×450 staggered, AD A) + ~10% uplift for the
   extra rows at reveals, verges and movement joints.
-- Sanity anchor: 3-bed detached = 7,000–10,000 facing bricks. Our
-  3-bed demo computes 7,969. That agreement is the point of the anchor.
+- Sanity anchor: 3-bed detached = 7,000–10,000 facing bricks.
+  Enforced, not quoted: `test_quantities.py` (`TestBrickSanityAnchor`)
+  builds a two-storey 3-bed and asserts the computed count lands inside
+  that band on every run. An earlier version of this line cited a single
+  computed figure with no test behind it, and the figure went stale —
+  the band held by a test is the anchor; a remembered number is not.
 
 ## Roofing
 

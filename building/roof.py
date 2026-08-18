@@ -353,7 +353,22 @@ def fetch_footprint(lat, lon, radius_m=30):
     if os.path.exists(cached):
         try:
             with open(cached) as f:
-                return [tuple(p) for p in json.load(f)]
+                data = json.load(f)
+            # THE CACHE HIT USED TO SKIP THE DIAGNOSTICS. Returning here
+            # without touching _LAST_CHOICE meant a warm worker attached the
+            # PREVIOUS property's building-choice record to this job — its
+            # candidate count, areas and ambiguity flag reported as if
+            # measured for this house — and a cold-start hit reported none,
+            # silencing the "a postcode is not a building" warning while the
+            # ambiguity it warns about was unchanged. The choice is now
+            # cached alongside the polygon and restored on every hit. An
+            # old-format cache (a bare point list) carries no diagnostics:
+            # report none rather than whatever the last job left behind.
+            _LAST_CHOICE.clear()
+            if isinstance(data, dict):
+                _LAST_CHOICE.update(data.get("choice") or {})
+                return [tuple(p) for p in data["polygon"]]
+            return [tuple(p) for p in data]
         except Exception:
             pass
 
@@ -388,7 +403,9 @@ def fetch_footprint(lat, lon, radius_m=30):
     try:
         paths.ensure(FOOTPRINT_CACHE_DIR)
         with open(cached, "w") as f:
-            json.dump(polygon, f)
+            # Polygon AND choice, so a cache hit can report which building
+            # was measured — see the hit path above for why.
+            json.dump({"polygon": polygon, "choice": choice}, f)
     except Exception as e:
         print(f"footprint cache write skipped: {e}", file=sys.stderr)
     return polygon
@@ -463,6 +480,26 @@ def distance_to_boundary(x, y, polygon):
 # around a metre. Testing 0.5 to 1.25m showed no further gain beyond 0.5m,
 # only fewer samples, so this is the conservative end of a flat optimum.
 BOUNDARY_INSET_M = 1.0
+
+# THE FOOTPRINT AND THE RASTER ARE NOT ON THE SAME DATUM, AND THAT MUST BE
+# SAID. The OSM footprint arrives in WGS84 and is positioned on the National
+# Grid through osgb.py's single-Helmert shift — the transform whose own
+# header says ~5m accuracy and "NOT good enough to position a building
+# footprint". The EA raster it clips carries true (OSTN15-grade) OSGB
+# coordinates, so the polygon sits with a systematic offset against the 1m
+# cells: 3.6m measured at the OS control point in test_roof.py, worst in
+# western GB. The 1m boundary inset above budgets only for OSM digitisation
+# error, so on one side it can lose genuine eaves-row samples and on the
+# other admit wall-straddling cells the inset was measured to remove,
+# nudging the fitted pitch and eaves height. Fixing it needs an OSTN15 grid
+# this stdlib-only module deliberately does not carry; until then the
+# residual is stated on every clipped result rather than left silent.
+FOOTPRINT_DATUM_NOTE = (
+    "The building outline was positioned with a single-Helmert WGS84->OSGB "
+    "datum shift, which carries a systematic offset of typically 1-3.5m "
+    "(up to ~5m) against the LIDAR grid. Edge samples may be gained or lost "
+    "by that shift, so pitch and eaves height near the wall line carry a "
+    "small extra uncertainty beyond the stated vertical RMSE.")
 
 # Below this sampling density the roof is described by too few points for
 # edge topology to be trustworthy, even though pitch and area still are.
@@ -798,6 +835,9 @@ def run(spec, prog, output_dir):
                 f"understated where 1m cells straddle the wall line.")
         eaves_m = polygon_perimeter(footprint)
         footprint_area = polygon_area(footprint)
+        # The polygon just used to clip the raster is Helmert-positioned;
+        # the raster is not. Say so — see FOOTPRINT_DATUM_NOTE.
+        notes.append(FOOTPRINT_DATUM_NOTE)
         prog.note(f"{before} -> {len(inside)} in footprint -> {len(points)} "
                   f"clear of the {BOUNDARY_INSET_M}m edge")
     elif not spec.get("allow_unclipped"):
@@ -869,9 +909,22 @@ def run(spec, prog, output_dir):
     # and its coverage is not universal.
     solar_result = cross_check = None
     if solar.available():
-        solar_result = solar.parse_segments(
-            solar.fetch_building_insights(location["lat"], location["lon"]))
-        cross_check = solar.compare(q, solar_result)
+        # The whole block degrades to a note on ANY failure. fetch is
+        # already None-on-failure, but the parse was unguarded, and a
+        # malformed response (a partial imageryDate did exactly this) took
+        # down a roof job the free path had already completed — the one
+        # thing the enhancement must never do. propose.py wraps its solar
+        # calls the same way.
+        try:
+            solar_result = solar.parse_segments(
+                solar.fetch_building_insights(location["lat"],
+                                              location["lon"]))
+            cross_check = solar.compare(q, solar_result)
+        except Exception as e:
+            solar_result = cross_check = None
+            notes.append(
+                f"Google Solar cross-check failed ({type(e).__name__}), so "
+                f"the LIDAR figures stand alone, not cross-checked.")
         if cross_check:
             notes.extend(cross_check.get("notes", []))
             prog.note("cross-checked against Google Solar",

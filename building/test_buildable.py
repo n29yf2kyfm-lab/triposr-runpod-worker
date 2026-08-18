@@ -449,6 +449,65 @@ check("12f as a change, while a windowless BEDROOM stays a refusal",
                   storeys=2, storey_height=2.7,
                   wall_openings=False))["findings"]))
 
+# 12g THE ESCAPE WINDOW AN INNER ROOM LEANS ON IS ACTUALLY CHECKED. The
+# CIRC-INNER downgrade cited AD B 2.11's escape-window allowance, but
+# escape() starts at level 1, so on the ground floor nobody ever looked for
+# the window — a windowless inner study passed on a condition nothing had
+# verified.
+_inner = [M.Room("Hall", 0, 0, 2.0, 4.0, kind="circulation"),
+          M.Room("Living", 2.0, 0, 4.0, 4.0),
+          M.Room("Study", 6.0, 0, 3.0, 4.0)]
+_rg = B.check(M.build(_inner, storeys=1, wall_openings=False))
+_gi = [f for f in _rg["findings"] if f["code"] == "CIRC-INNER"]
+check("12g a windowless ground-floor inner room is refused, not noted",
+      any(f["room"] == "Study" and f["severity"] == "refuse" for f in _gi),
+      str(_gi))
+check("12g2 and the refusal says the 2.11 allowance does not apply",
+      any("escape window" in f["message"] for f in _gi), str(_gi))
+check("12g3 so the plan is not buildable", _rg["buildable"] is False)
+# Give the same study its rule glazing (1.2 x 1.2m at a 900mm sill — a
+# compliant escape window) and the allowance genuinely holds: back to a
+# 'change'.
+_rg2 = B.check(M.build(_inner, storeys=1))
+check("12g4 with a compliant window the inner room is a change again",
+      [f["severity"] for f in _rg2["findings"]
+       if f["code"] == "CIRC-INNER"] == ["change"],
+      str([(f["code"], f["severity"]) for f in _rg2["findings"]]))
+
+# 12h SEVERITY FOLLOWS THE KIND TOO. 12e made escape COVERAGE a matter of
+# kind, not naming — and then a first-floor {name: Nursery, kind: bedroom}
+# with no way out was still only a 'change' because the severity was keyed
+# on the name starting "bed"/"master". Somebody sleeps in there; what the
+# door label says does not change the fire.
+_rn = B.check(M.build(
+    [M.Room("Hall", 0, 0, 2.4, 5.0, kind="circulation", storeys=1),
+     M.Room("Living", 2.4, 0, 5.0, 5.0, storeys=1),
+     M.Room("Landing", 0, 0, 2.4, 5.0, kind="circulation",
+            storeys=1, base_level=1),
+     M.Room("Nursery", 2.4, 0, 5.0, 5.0, kind="bedroom",
+            storeys=1, base_level=1)],
+    storeys=2, storey_height=2.7, wall_openings=False))
+check("12h a windowless first-floor Nursery of kind bedroom is a refusal",
+      any(f["code"] == "B-ESCAPE" and f["room"] == "Nursery"
+          and f["severity"] == "refuse" for f in _rn["findings"]),
+      str([(f["code"], f["severity"], f["room"])
+           for f in _rn["findings"]]))
+check("12h2 so the renamed bedroom no longer passes the gate",
+      _rn["buildable"] is False)
+
+# And the doorway check keys on kind the same way: the narrow fixture from
+# section 5, with the master renamed to Nursery and declared kind=bedroom,
+# still has only 600mm onto the landing.
+_nursery_narrow = [
+    room("Landing", 3.6, 4.6, 2.4, 3.9, kind="circulation", base=1),
+    room("Nursery", 0.0, 0.0, 4.2, 4.6, kind="bedroom", base=1),
+    room("Bathroom", 4.2, 2.2, 2.2, 2.4, kind="wet", base=1),
+    room("Bed 3", 0.0, 4.6, 3.6, 3.9, base=1)]
+_, _fn = B.circulation(_nursery_narrow, 2, 1)
+check("12h3 a kind=bedroom room with 600mm onto circulation gets M-NODOOR",
+      any(x["code"] == "M-NODOOR" and x["room"] == "Nursery" for x in _fn),
+      str(codes(_fn)))
+
 print()
 for f in FAILED:
     print(f"FAIL  {f}")

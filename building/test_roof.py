@@ -79,6 +79,34 @@ except ValueError as ex:
 bb = osgb.bbox_around(500000, 200000, 60)
 check("1h bbox spans 2x radius", bb == (499940, 199940, 500060, 200060), str(bb))
 
+# THE REAL HELMERT ERROR, MEASURED, NOT ASSUMED. osgb.py's header claims
+# ~5m and roof.py's clip-site note claims typically 1-3.5m against the
+# OSTN-registered raster. The OS guide's own control pair pins both: the
+# Caister tower's ETRS89 position 52°39'28.8282"N 1°42'57.8663"E
+# corresponds to OSGB36 E 651409.903 N 313177.270 through the full OSTN
+# transformation, so the distance between that truth and the single-Helmert
+# answer IS the datum residual the footprint clip carries. Measured here:
+# 3.58m — inside the documented ~5m, and real enough that pretending the
+# polygon and the raster share a datum would be a lie.
+_e_h, _n_h = osgb.latlon_to_easting_northing(52 + 39 / 60 + 28.8282 / 3600,
+                                             1 + 42 / 60 + 57.8663 / 3600)
+_helmert_err_m = math.hypot(_e_h - 651409.903, _n_h - 313177.270)
+check("1i the Helmert residual at the OS control point is within the "
+      "documented ~5m", _helmert_err_m < 5.0, f"{_helmert_err_m:.2f}m")
+check("1j and is genuinely metres, not noise — the offset the clip note "
+      "must disclose", 1.0 < _helmert_err_m, f"{_helmert_err_m:.2f}m")
+# The pin is the APPEND CALL on a code line, not the constant's name
+# anywhere in the source — a comment mentioning the constant satisfied
+# the old check even with the append deleted.
+_run_code_lines = [ln.split("#", 1)[0] for ln in
+                   __import__("inspect").getsource(roof.run).splitlines()]
+check("1k the clipped result carries that disclosure",
+      "Helmert" in roof.FOOTPRINT_DATUM_NOTE
+      and "1-3.5m" in roof.FOOTPRINT_DATUM_NOTE
+      and any("notes.append(FOOTPRINT_DATUM_NOTE)" in ln
+              for ln in _run_code_lines),
+      roof.FOOTPRINT_DATUM_NOTE)
+
 
 # ==========================================================================
 # Roof geometry
@@ -250,6 +278,47 @@ check("5l plain tile needs ~6x the units",
       q2["materials"]["covering_units"] > 5 * q["materials"]["covering_units"])
 check("5m area unchanged by covering",
       q2["sloped_area_m2"] == q["sloped_area_m2"])
+
+# TILES DO NOT GO ON FLAT ROOFS. A pitched plane and a flat one in the same
+# footprint (house + flat-roofed extension) must not be tiled together.
+# Hand-worked with cell_area = 1: 40 pitched samples at 35 degrees give
+# sloped 40/cos(35) = 48.83 m2, 12 flat samples give 12.00 m2.
+#   covering_units = ceil(48.83 * 10.5 * 1.1) = 564   (was over both)
+#   battens_m      = 48.83 * 2.9 * 1.1       = 155.8  (was over both)
+#   membrane_m2    = 48.83 * 1.15            = 56.2   (was 70.0)
+_pit = rg.Plane(math.tan(PITCH), 0.0, 3.0,
+                points=[(i, 0, 0) for i in range(40)])
+_flt = rg.Plane(0.0, 0.0, 3.0, points=[(i, 5, 0) for i in range(12)])
+q3 = rg.quantities([_pit, _flt], [], 1.0, 1.0)
+_ps = 40.0 / math.cos(PITCH)
+check("5n tiles cover the pitched planes only",
+      q3["materials"]["covering_units"] == math.ceil(_ps * 10.5 * 1.1),
+      f'{q3["materials"]["covering_units"]} vs {math.ceil(_ps * 11.0)}')
+check("5o battens too",
+      abs(q3["materials"]["battens_m"] - round(_ps * 2.9 * 1.1, 1)) < 0.05,
+      str(q3["materials"]["battens_m"]))
+check("5p and tile underlay",
+      abs(q3["materials"]["membrane_m2"] - round(_ps * 1.15, 1)) < 0.05,
+      str(q3["materials"]["membrane_m2"]))
+check("5q the flat area is split out for its own covering, not priced as "
+      "tiles",
+      q3["materials"]["flat_roof_m2"] == 12.0
+      and q3["flat_area_m2"] == 12.0,
+      str(q3["materials"]["flat_roof_m2"]))
+check("5r and the basis says so",
+      "pitched planes only" in q3["materials"]["covering_basis"],
+      q3["materials"]["covering_basis"])
+# The total sloped area still reports the whole roof — only the tile
+# figures narrow to the pitched part.
+check("5s sloped_area_m2 still covers the whole roof",
+      abs(q3["sloped_area_m2"] - (_ps + 12.0)) < 0.05,
+      str(q3["sloped_area_m2"]))
+# A pure gable is unchanged by the split.
+check("5t a roof with no flat plane bills exactly as before",
+      abs(q["materials"]["covering_units"]
+          - q["sloped_area_m2"] * 10.5 * 1.1) < 1.5
+      and q["materials"]["flat_roof_m2"] == 0.0,
+      str(q["materials"]))
 
 # --- uncertainty ----------------------------------------------------------
 check("6a pitch uncertainty over 4m run",
@@ -505,6 +574,36 @@ try:
     cached = roof.fetch_footprint(52.5014, -1.8067)
     check("9i a cached footprint needs no network at all",
           cached is not None and _calls == [], str(_calls))
+
+    # THE CACHE MUST CARRY THE CHOICE DIAGNOSTICS TOO. The hit path used to
+    # return before _LAST_CHOICE was touched, so a warm worker's second job
+    # reported the FIRST property's candidate count and ambiguity flag as
+    # its own, and a cold-start hit reported none — silencing the "a
+    # postcode is not a building" warning. Poison the module global with a
+    # stale record and prove a cache hit replaces it with this property's.
+    roof._LAST_CHOICE.clear()
+    roof._LAST_CHOICE.update({"candidates": 99, "stale_marker": True})
+    roof.fetch_footprint(52.5014, -1.8067)
+    check("9j a cache hit restores THIS property's choice diagnostics",
+          roof._LAST_CHOICE.get("candidates") == 1
+          and "stale_marker" not in roof._LAST_CHOICE,
+          str(dict(roof._LAST_CHOICE)))
+
+    # An old-format cache file (a bare point list, from before the choice
+    # was stored) carries no diagnostics: report none rather than the
+    # previous job's.
+    import json as _json
+    _old = os.listdir(roof.FOOTPRINT_CACHE_DIR)[0]
+    with open(os.path.join(roof.FOOTPRINT_CACHE_DIR, _old), "w") as _f:
+        _json.dump([[413200.0, 289290.0], [413210.0, 289290.0],
+                    [413210.0, 289300.0], [413200.0, 289300.0]], _f)
+    roof._LAST_CHOICE.clear()
+    roof._LAST_CHOICE.update({"candidates": 99, "stale_marker": True})
+    _old_poly = roof.fetch_footprint(52.5014, -1.8067)
+    check("9k an old-format cache still returns its polygon",
+          _old_poly is not None and len(_old_poly) == 4, str(_old_poly))
+    check("9l but reports no diagnostics rather than the previous job's",
+          dict(roof._LAST_CHOICE) == {}, str(dict(roof._LAST_CHOICE)))
 finally:
     roof.FOOTPRINT_SOURCES = _saved_sources
     roof.FOOTPRINT_CACHE_DIR = _saved_cache

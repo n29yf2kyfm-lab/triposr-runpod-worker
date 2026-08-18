@@ -596,8 +596,8 @@ for _acc in ["Drywall screws for plasterboard 38mm box of 200",
 # implemented — TILES_PER_M2 and COVERAGE_NOTE were referenced only by their
 # own definitions. A merchant quoting slate by the covered square metre is
 # not quoting what the catalogue prices, which is per tile.
-for _desc, _per_m2 in [("Natural slate 500x250 roofing", 21.0),
-                       ("Concrete interlocking roof tile", 9.7),
+for _desc, _per_m2 in [("Natural slate 500x250 roofing", 20.0),
+                       ("Concrete interlocking roof tile", 10.5),
                        ("Concrete plain roof tile", 60.0)]:
     _line = S.normalise_line(
         S.Line(description=_desc, price=48.50, unit="m2", vat=S.VAT_EX),
@@ -609,7 +609,7 @@ for _desc, _per_m2 in [("Natural slate 500x250 roofing", 21.0),
           any("ASSUMED" in n and "check this line" in n
               for n in _line.notes), str(_line.notes))
 
-# Interlocking is 9.7 per m2 and plain is 60 — a factor of six. Where the
+# Interlocking is 10.5 per m2 and plain is 60 — a factor of six. Where the
 # description does not say which, nothing is converted.
 _vague = S.normalise_line(
     S.Line(description="Roof tile", price=48.50, unit="m2", vat=S.VAT_EX),
@@ -666,6 +666,57 @@ check("12s the real product still matches",
       == "plasterboard")
 check("12t and so does a batten",
       S.match_product("Roofing batten 25x50 treated")[0] == "battens")
+
+# The pence convention with a unit suffix. "85p ea" and "50p per m2" are
+# ordinary merchant shorthand; requiring "Np" to be the WHOLE cell read
+# them as POUNDS — a 100x overprice, and £50/m2 sits inside the insulation
+# plausibility band, so nothing downstream would have caught it.
+for _text, _want in [("85p ea", 0.85), ("50p per m2", 0.50),
+                     ("85p", 0.85)]:
+    check(f"13a {_text!r} is pence, not pounds",
+          abs(S.parse_money(_text) - _want) < 1e-9,
+          str(S.parse_money(_text)))
+# A count that merely starts with a p-word must not read as pence.
+check("13b '12 pack' is twelve pounds, not twelve pence",
+      S.parse_money("12 pack") == 12.0, str(S.parse_money("12 pack")))
+check("13c '85 pcs' likewise", S.parse_money("85 pcs") == 85.0,
+      str(S.parse_money("85 pcs")))
+check("13d '£85p' stays the typo it always was",
+      S.parse_money("£85p") == 85.0, str(S.parse_money("£85p")))
+check("13e a decimal keeps the pounds reading",
+      S.parse_money("2.50 per m2") == 2.50, str(S.parse_money("2.50 per m2")))
+
+# A row's price cell can also STATE the basis — "12.00 ex VAT" printed
+# beside the number is where merchants actually put it. Detecting the
+# basis from description+unit only ignored that statement, so a
+# file-level 'inc' divided an explicitly ex-VAT line by 1.2: the same
+# two-identical-tiles 16.7% error vat_basis_of itself already fixed once.
+_csv_pricecell = ("Description,Price\n"
+                  "Concrete Interlocking Roof Tile,\"1.32 ex VAT\"\n"
+                  "Concrete Plain Roof Tile,85p ea\n")
+_rows = S.read_csv(_csv_pricecell, vat=S.VAT_INC)
+check("13f 'ex VAT' beside the price overrides the file default",
+      _rows[0].vat == S.VAT_EX, str(_rows[0].vat))
+S.normalise_line(_rows[0])
+check("13g so the price is not divided by 1.2",
+      abs(_rows[0].unit_price_ex_vat - 1.32) < 1e-9,
+      str(_rows[0].unit_price_ex_vat))
+check("13h a pence-with-unit price cell reads as pence end to end",
+      abs(_rows[1].price - 0.85) < 1e-9, str(_rows[1].price))
+
+# ...and a file whose ONLY VAT statements live in the price column must
+# import, per read_csv's own contract that a row's text overrides the
+# default — it used to be refused as saying nothing about VAT.
+_rep = S.import_price_list(
+    "Description,Price\n"
+    "Concrete Interlocking Roof Tile,\"1.32 ex VAT\"\n"
+    "Concrete Plain Roof Tile,\"0.66 inc VAT\"\n", when=TODAY)
+check("13i VAT stated only beside the prices is enough to import",
+      _rep["matched"] == 2, str(_rep.get("warnings")))
+_plain = [o for o in _rep["observations"]
+          if o.tier == prices.STANDARD][0]
+check("13j and the inc-VAT line is stripped to ex: 0.66 / 1.2 = 0.55",
+      abs(_plain.price - 0.55) < 1e-6, str(_plain.price))
 
 
 # ==========================================================================

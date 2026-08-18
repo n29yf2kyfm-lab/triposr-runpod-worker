@@ -182,7 +182,12 @@ def agreement(points):
     thresholds are testable without a live key.
     """
     building = [(k, v) for k, v in points.items() if k in BUILDING_LEVEL]
-    judged = building if len(building) >= 2 else list(points.items())
+    # With fewer than two building-level answers the judgement falls back to
+    # every point it has — including the postcode centroid, which the block
+    # above rules out as a vote. A coarse answer with a caveat still beats
+    # silence, but it is a DIFFERENT judgement and the verdict must say so.
+    fallback = len(building) < 2
+    judged = list(points.items()) if fallback else building
     locs = [v for _, v in judged]
     spread = 0.0
     for i in range(len(locs)):
@@ -199,6 +204,21 @@ def agreement(points):
             f"Only {names[0]} answered — one source cannot confirm a house. "
             f"Proceeding is a guess; add a postcode or gps.")
     if spread <= CONFIRM_M:
+        if fallback:
+            # Tight agreement in the fallback set used to come back as
+            # CONFIRMED with a message claiming "independent building-level
+            # sources agree" — but one of those points was a street/unit
+            # centroid, and a road geocode landing near the postcode centre
+            # is routine on a terrace street, wrong house included. One
+            # building-level source alone must stay UNCONFIRMED, so a
+            # building-level source plus the postcode must too: the module
+            # promise is "never a false CONFIRMED".
+            return "UNCONFIRMED", spread, (
+                f"{n} sources ({', '.join(names)}) agree within "
+                f"{spread:.0f}m, but fewer than two are building-level — "
+                f"the postcode centroid is a street point, not a building, "
+                f"so this cannot confirm the house. Add gps or wait for a "
+                f"Solar/Street View building match before modelling.")
         return "CONFIRMED", spread, (
             f"{n} independent building-level sources agree within "
             f"{spread:.0f}m — this is one building.")

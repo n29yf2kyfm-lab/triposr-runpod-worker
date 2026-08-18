@@ -76,7 +76,39 @@ check("3d but not one beyond the pad", not T._in_box(box, (1.6, 0, 0), 1.3))
 check("3e default pad is the tuned value", abs(T.BOX_PAD - 1.30) < 1e-9)
 
 
-# --- 4. no key means no crash, just an empty result -------------------------
+# --- 4. a 200 with a non-JSON body is a failure, not a crash ----------------
+# A proxy interstitial, quota HTML page or truncated body can arrive with
+# status 200, so raise_for_status passes and r.json() raises. fetch_house
+# promises "tiles ... or []"; a JSONDecodeError escaping it broke that
+# contract.
+import tempfile  # noqa: E402
+
+
+class _HtmlResp:
+    """A 200 response whose body is a quota page, not JSON."""
+    content = b"<html>quota exceeded</html>"
+
+    def json(self):
+        raise ValueError("Expecting value: line 1 column 1 (char 0)")
+
+
+_td = tempfile.mkdtemp()
+_w = T.Walker((0.0, 0.0, 0.0), _td, key="k")
+_w._fetch = lambda uri: _HtmlResp()
+check("4a-1 a non-JSON root body returns [], the documented failure result",
+      _w.run() == [])
+
+_w2 = T.Walker((0.0, 0.0, 0.0), _td, key="k")
+_w2._fetch = lambda uri: _HtmlResp()
+# No boundingVolume -> the node contains the target, so the subtree IS
+# fetched; its garbage body must be skipped like a dead fetch, keeping
+# whatever was already kept below (nothing here).
+check("4a-2 a non-JSON subtree body is skipped, not raised",
+      _w2._descend({"content": {"uri": "/v1/3dtiles/sub.json"}}) is False)
+check("4a-3 and no tile was invented from it", _w2.glbs == [])
+
+
+# --- 5. no key means no crash, just an empty result -------------------------
 _saved = {k: os.environ.pop(k, None)
           for k in ("GOOGLE_SOLAR_API_KEY", "GOOGLE_AI_API_KEY")}
 try:

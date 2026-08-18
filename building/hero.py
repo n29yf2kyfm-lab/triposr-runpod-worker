@@ -61,11 +61,25 @@ def gemini_key():
 
 
 def _prompt(model, time_of_day="day"):
-    """The instruction, written around what must NOT change."""
-    site = model.get("site") or {}
+    """The instruction, written around what must NOT change.
+
+    THE ROOF SENTENCES ARE READ FROM THE MODEL, NOT FROM A TEMPLATE. This
+    used to hard-code "There is ONE roof... do not add a second ridge...
+    or any valley" and "the low flat-roofed block" — true for the common
+    case, and an argument with the measured render the moment roof_over
+    legitimately splits a deep plan into parallel ranges with a valley
+    between them, or the extension is a storey of the house rather than a
+    flat-topped outrigger. A prompt that forbids a valley the render
+    actually shows is instructing the restyle to erase measured geometry —
+    the one failure this whole module exists to prevent. So the fixed-
+    geometry clauses are derived from model["roof"] (ranges, kind) and the
+    model's flat caps, and only ever assert what the render really draws.
+    """
     fit = model.get("extension_fit") or {}
     built = fit.get("built_m") or {}
     storeys = model.get("storeys", 2)
+    roof = model.get("roof") or None
+    caps = model.get("caps") or []
     light = {
         "day": ("bright overcast British daylight, soft shadows, "
                 "clean midday sky with light cloud"),
@@ -73,6 +87,47 @@ def _prompt(model, time_of_day="day"):
                  "through the windows, deep blue sky"),
         "morning": "clear early morning light, long soft shadows, pale sky",
     }.get(time_of_day, "bright overcast British daylight")
+
+    if roof:
+        ranges = int(roof.get("ranges") or 1)
+        kind = roof.get("kind") or "pitched"
+        if ranges > 1:
+            roof_rule = (
+                f"- The main roof is measured as {ranges} parallel {kind} "
+                "ranges with a valley gutter where they meet. Every ridge "
+                "and every valley stays exactly where drawn — do not merge "
+                "the ranges into one roof, and do not add ranges that are "
+                "not drawn.\n")
+        else:
+            roof_rule = (
+                "- There is ONE pitched roof over the tall block. Do not "
+                "add a second ridge, a cross-gable, a hip that is not "
+                "already drawn, or any valley.\n")
+        main_roof = "a pitched concrete-tile roof"
+    else:
+        roof_rule = (
+            "- The main block has a FLAT top, exactly as drawn. Do not add "
+            "a ridge, a pitch or a gable.\n")
+        main_roof = "a flat roof, exactly as drawn"
+
+    # The extension is only "flat-roofed" when the model actually caps it —
+    # a block that stops short of the building's top gets a flat cap; a
+    # full-height or built-over extension sits under the main roof and
+    # calling it flat contradicts the render.
+    if caps:
+        ext_rule = (
+            "- The low flat-roofed block spans exactly the width already "
+            "drawn. Do not shorten, narrow or reshape it.\n")
+        ext_label = "The lower flat-roofed block"
+        ext_surface = ("same brick, dark grey single-ply membrane roof, "
+                       "slim aluminium-framed glazing")
+    else:
+        ext_rule = (
+            "- The extension block spans exactly the footprint already "
+            "drawn. Do not shorten, narrow or reshape it.\n")
+        ext_label = "The extension block"
+        ext_surface = ("same brick, roof exactly as drawn, slim "
+                       "aluminium-framed glazing")
 
     return (
         "RETEXTURE THIS EXACT IMAGE. Do not re-render it, do not re-compose "
@@ -83,10 +138,8 @@ def _prompt(model, time_of_day="day"):
         "ABSOLUTE CONSTRAINT — THE GEOMETRY IS FIXED AND MEASURED:\n"
         "- Keep the silhouette identical. Every roofline, eaves line, ridge, "
         "corner and wall edge stays on exactly the same pixels.\n"
-        "- There is ONE roof over the tall block. Do not add a second ridge, "
-        "a cross-gable, a hip that is not already drawn, or any valley.\n"
-        "- The low flat-roofed block spans exactly the width already drawn. "
-        "Do not shorten, narrow or reshape it.\n"
+        + roof_rule
+        + ext_rule +
         "- Do NOT add buildings, storeys, dormers, porches, chimneys, "
         "garages, bay windows or roof lights.\n"
         "- Do NOT move the camera, change the framing, or alter any "
@@ -95,11 +148,10 @@ def _prompt(model, time_of_day="day"):
         "openings to a blank wall or remove one that is there.\n\n"
         "WHAT TO CHANGE — SURFACES AND LIGHT ONLY:\n"
         f"- The {storeys}-storey block is red-brown facing brick with "
-        "realistic mortar courses and a pitched concrete-tile roof.\n"
-        f"- The lower flat-roofed block is the proposed extension, "
-        f"{built.get('width', '')}m by {built.get('depth', '')}m — same "
-        "brick, dark grey single-ply membrane roof, slim aluminium-framed "
-        "glazing.\n"
+        f"realistic mortar courses and {main_roof}.\n"
+        f"- {ext_label} is the proposed extension, "
+        f"{built.get('width', '')}m by {built.get('depth', '')}m — "
+        f"{ext_surface}.\n"
         "- Windows become real glass with reflections and visible frames.\n"
         "- Add UK domestic context on the ground only: lawn, a paved patio, "
         "a fence line at the plot edge.\n"

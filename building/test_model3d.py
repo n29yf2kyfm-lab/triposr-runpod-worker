@@ -139,6 +139,19 @@ check("2h a scheduled room that was never modelled is reported",
       missing["rooms"][0]["status"] == "not modelled")
 check("2i and is not silently scored as agreeing",
       missing["rooms"][0]["modelled_m2"] is None)
+# A MISSING ROOM MUST FAIL THE HEADLINE, NOT JUST ITS OWN ROW. The row said
+# "not modelled" while within_tolerance stayed True, so any consumer that
+# reads the boolean — which is all of them — was told the model matched a
+# drawing it was missing a whole room from.
+check("2l a missing room fails the verdict, not just its own row",
+      not missing["within_tolerance"], str(missing))
+check("2m and the summary counts what was never modelled",
+      missing.get("not_modelled") == 1, str(missing.get("not_modelled")))
+_all_there = M.check_against_schedule(
+    [room("Lounge", 0, 0, 4.0, 4.0)], {"Lounge": 16.0})
+check("2n a fully modelled schedule still passes",
+      _all_there["within_tolerance"]
+      and _all_there.get("not_modelled") == 0, str(_all_there))
 
 case = M.check_against_schedule([room("kitchen / dining", 0, 0, 4.57, 4.2)],
                                 {"Kitchen / Dining": 19.2})
@@ -573,7 +586,8 @@ check("7c faces index vertices that exist",
 
 # EVERY STOREY, NOT JUST THE FIRST. The first version wrote the ground floor
 # only, so a three-storey block came out as a bungalow — and looked fine.
-check("7d every storey is written", all(f"slab_L{i}" in gs for i in range(3)),
+check("7d every storey is written",
+      all(any(g.startswith(f"slab_L{i}") for g in gs) for i in range(3)),
       str([g for g in gs if g.startswith("slab")]))
 check("7e the roof is written as its own group", "roof" in gs)
 
@@ -589,6 +603,40 @@ flat_zs = [float(ln.split()[2]) for ln in open(flat_obj).read().splitlines()
            if ln.startswith("v ")]
 check("7h a roofless model stops at the eaves",
       abs(max(flat_zs) - one["eaves_z_m"]) < 0.01, str(max(flat_zs)))
+
+# THE FLOOR IS THE ROOMS, NOT THE BOUNDING BOX — in the OBJ too. The GLB
+# was fixed and the OBJ kept the extent-wide slab, so the mesh a client
+# orbits and the file a builder opens described different buildings: an
+# 8x6 house with an 8x3 single-storey extension got a first-floor plate
+# hanging over the extension's open sky. Main house spans y 0..6; nothing
+# on level 1 may reach past it.
+_extm = M.build([room("Main", 0, 0, 8.0, 6.0),
+                 room("Extension", 0, 6.0, 8.0, 3.0, storeys=1)],
+                storeys=2, storey_height=2.7)
+_extp = os.path.join(tmp, "ext.obj")
+M.write_obj(_extm, _extp)
+_evs, _cur, _l1 = [], None, []
+for _ln in open(_extp):
+    if _ln.startswith("v "):
+        _evs.append([float(t) for t in _ln.split()[1:]])
+    elif _ln.startswith("g "):
+        _cur = _ln.split(None, 1)[1].strip()
+    elif _ln.startswith("f ") and _cur and _cur.startswith("slab_L1"):
+        _l1 += [int(t) for t in _ln.split()[1:]]
+check("7i no first-floor slab is written over a single-storey extension",
+      bool(_l1) and all(-_evs[i - 1][2] <= 6.0 + 1e-6 for i in _l1),
+      str(sorted({round(-_evs[i - 1][2], 2) for i in _l1})))
+# and the ground floor still covers the extension it stands on
+_l0 = []
+_cur = None
+for _ln in open(_extp):
+    if _ln.startswith("g "):
+        _cur = _ln.split(None, 1)[1].strip()
+    elif _ln.startswith("f ") and _cur and _cur.startswith("slab_L0"):
+        _l0 += [int(t) for t in _ln.split()[1:]]
+check("7j while the ground slab still reaches the extension's back wall",
+      any(-_evs[i - 1][2] > 8.9 for i in _l0),
+      str(sorted({round(-_evs[i - 1][2], 2) for i in _l0})))
 
 # EVERY RANGE IS DRAWN. A double-pile roof drawn as one range is the same
 # class of error as a three-storey block drawn as a bungalow: it looks fine
@@ -638,6 +686,29 @@ if HAVE_IFC:
     check("8d and reopens in ifcopenshell", f.schema.startswith("IFC4"))
     check("8e with the walls actually present",
           len(f.by_type("IfcWall")) > 0, str(len(f.by_type("IfcWall"))))
+
+    # THE IFC FLOOR IS THE ROOMS TOO. write_ifc kept the bounding-box slab
+    # after the GLB was fixed, so an IFC-native takeoff counted a "Floor
+    # slab L1" spanning the single-storey extension — 8x9m of first floor
+    # where the true first floor is the 8x6m main house, the extra 24 m2
+    # of it over open sky. Per-room plates: two on L0, one on L1, and the
+    # L1 profile must be the main house, 8.0 x 6.0.
+    _ifc2 = M.write_ifc(_extm, os.path.join(tmp, "ext.ifc"))
+    _f2 = ifcopenshell.open(_ifc2)
+    _floors = [s for s in _f2.by_type("IfcSlab")
+               if s.PredefinedType == "FLOOR"]
+    check("8f one floor slab per room per storey",
+          len(_floors) == 3,
+          str([s.Name for s in _floors]))
+    _l1s = [s for s in _floors if "L1" in (s.Name or "")]
+
+    def _plate(s):
+        prof = s.Representation.Representations[0].Items[0].SweptArea
+        return (round(prof.XDim, 3), round(prof.YDim, 3))
+
+    check("8g the first-floor slab is the main house, not the bounding box",
+          len(_l1s) == 1 and _plate(_l1s[0]) == (8.0, 6.0),
+          str([_plate(s) for s in _l1s]))
 else:
     check("8a IFC export skipped — ifcopenshell not installed", True)
 
@@ -1323,6 +1394,67 @@ _down = [o for w in _front_walls for o in w["openings"]
          if o.get("level") == 0 and M._wall_on_level(w, 0)]
 check("33c the ground-floor door and garage door are still downstairs",
       len(_down) == 2, f"{len(_down)} of 2")
+
+# THE SAVED DOOR IS WALL-LOCAL, THE PHOTO OPENINGS ARE FACADE X. When the
+# photo carries no door the rule-placed door is re-queued — but its 'along'
+# was measured from ITS WALL'S START, and the placement loop compares
+# facade x. On a plan that does not start at x=0 the frames disagree: the
+# door missed every wall and vanished, while the result still said
+# door_preserved: True. Lounge at x 3..7: the rule door sits at local
+# 0.25, which is facade x 3.25, and it must come back at local 0.25.
+_off = M.build([room("Lounge", 3.0, 0.0, 4.0, 4.0)], storeys=1)
+_r34 = M.apply_facade_openings(_off, [
+    {"kind": "window", "along": 5.2, "width": 1.2, "height": 1.2,
+     "sill": 0.9, "level": 0},
+], facade_y=0.0)
+_fw = [w for w in _off["walls"] if w["external"]
+       and w["start"][1] == 0.0 and w["end"][1] == 0.0]
+_doors = [o for w in _fw for o in w["openings"] if o["kind"] == "door"]
+check("34a the rule door survives on a plan offset from x=0",
+      len(_doors) == 1, str(_doors))
+check("34b at the same spot it stood — local 0.25 on the 3..7 wall",
+      _doors and abs(_doors[0]["along"] - 0.25) < 1e-6, str(_doors))
+check("34c and door_preserved says so", _r34["door_preserved"] is True,
+      str(_r34))
+check("34d the model still counts its door", _off["totals"]["doors"] >= 1,
+      str(_off["totals"]["doors"]))
+
+# AND door_preserved MUST REPORT WHAT HAPPENED, NOT WHAT WAS HOPED. A photo
+# window filling the whole frontage leaves the re-queued door nowhere to
+# go; saying "door preserved" about a house with no door is the lie the
+# flag existed to prevent.
+_off2 = M.build([room("Lounge", 3.0, 0.0, 4.0, 4.0)], storeys=1)
+_r35 = M.apply_facade_openings(_off2, [
+    {"kind": "window", "along": 3.05, "width": 3.9, "height": 1.2,
+     "sill": 0.9, "level": 0},
+], facade_y=0.0)
+check("34e a door that could not be re-placed is not claimed preserved",
+      _r35["door_preserved"] is False, str(_r35))
+
+# ---- 35. the short-front fallback keeps the upper windows ----------------
+# A 1.9m front wall: the rule window (0.35..1.55) blocks every door slot,
+# so the fallback replaces it with a centred door. clear() also deleted
+# the level=None window that repeats per storey — the first floor of a
+# narrow-fronted house lost its only window, and with it the escape
+# opening. The window must survive, pinned to the upper storey.
+_narrow = M.build([room("Snug", 0.0, 0.0, 1.9, 3.5)], storeys=2,
+                  storey_height=2.7)
+_nfw = [w for w in _narrow["walls"] if w["external"]
+        and w["start"][1] == 0.0 and w["end"][1] == 0.0]
+check("35a the narrow front still gets its ground-floor door",
+      any(o["kind"] == "door" and o.get("level") == 0
+          for w in _nfw for o in w["openings"]),
+      str([w["openings"] for w in _nfw]))
+_nwin = [o for w in _nfw for o in w["openings"]
+         if o["kind"] == "window" and o.get("level") == 1]
+check("35b and the displaced window is pinned to the first floor",
+      len(_nwin) == 1, str([w["openings"] for w in _nfw]))
+check("35c at the spot the rule put it — centred, along 0.35",
+      _nwin and abs(_nwin[0]["along"] - 0.35) < 1e-6, str(_nwin))
+check("35d nothing floats on the ground floor where the door now is",
+      not any(o["kind"] == "window" and o.get("level") in (None, 0)
+              for w in _nfw for o in w["openings"]),
+      str([w["openings"] for w in _nfw]))
 
 print()
 for f in FAILED:

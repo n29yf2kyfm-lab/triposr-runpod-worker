@@ -33,7 +33,7 @@ parsing code around it:
            which follows from the pitch and headlap of the actual roof, so
            it is an assumption and is labelled as one — and where the
            description does not say whether the tiles are interlocking
-           (9.7/m2), plain (60/m2) or slate (21/m2), nothing is converted at
+           (10.5/m2), plain (60/m2) or slate (20/m2), nothing is converted at
            all. That is a factor of six, which is not a guess worth making.
 
 Pure stdlib. Network fetches are lazy and always behind validation.
@@ -233,9 +233,14 @@ def parse_money(text):
         return None
     if _EXPONENT.search(cleaned):
         return None
-    # Strip a trailing "p" pence convention only when there is no decimal
-    # point and no pound sign: "85p" is 0.85, but "£85p" is a typo we ignore.
-    pence = bool(re.fullmatch(r"\d+\s*p", cleaned, re.I))
+    # Read the "p" pence convention only when there is no decimal point and
+    # no pound sign: "85p" is 0.85, but "£85p" is a typo we ignore. The
+    # pence amount may carry unit words after it — requiring "Np" to be the
+    # WHOLE cell read "85p ea" and "50p per m2" as pounds, a 100x overprice
+    # that sat inside the plausibility band for the cheaper-per-unit
+    # products. The \b keeps "12 pack" and "85 pcs" from reading as pence.
+    pence = (bool(re.match(r"\d+\s*p\b", cleaned, re.I))
+             and "£" not in cleaned and "." not in cleaned)
 
     match = _MONEY.search(cleaned.replace("£", " "))
     if not match:
@@ -453,10 +458,15 @@ def parse_area_m2(description):
 # Tiles per square metre at typical gauge. These are ASSUMPTIONS — the true
 # figure depends on the batten gauge chosen for the actual roof pitch and
 # headlap — so anything derived from them is flagged.
+# The same coverage figures the rest of the pipeline uses —
+# docs/ESTIMATING_RATES.md, the verified ledger quantities.py and
+# roof_geometry.py bill from. This table once said 9.7 and 21 from
+# memory, so a merchant's per-m2 line converted to a different tile
+# count than the take-off ordered.
 TILES_PER_M2 = {
-    "concrete_interlocking": 9.7,
+    "concrete_interlocking": 10.5,
     "concrete_plain": 60.0,
-    "natural_slate": 21.0,      # 500x250 at 75mm lap
+    "natural_slate": 20.0,      # 500x250 at ~100mm lap
 }
 
 COVERAGE_NOTE = (
@@ -779,7 +789,7 @@ def _convert_unit(price, have, wanted, product, line):
     # The gauge is genuinely an assumption — it follows from the pitch and
     # headlap of the actual roof — so the note carries "check this line" and
     # the report escalation picks it up. Where the covering cannot be told
-    # apart, nothing is converted: concrete interlocking runs at 9.7 tiles
+    # apart, nothing is converted: concrete interlocking runs at 10.5 tiles
     # per m2 and plain tiles at 60, a factor of six, and guessing between
     # them would be far worse than declining.
     if have == "m2" and wanted == "each" and product == "roof_covering":
@@ -792,7 +802,7 @@ def _convert_unit(price, have, wanted, product, line):
         line.notes.append(
             "priced per m2 but the catalogue prices roofing per tile, and "
             "the description does not say whether these are interlocking "
-            "(9.7/m2), plain (60/m2) or slate (21/m2) — a factor of six. "
+            "(10.5/m2), plain (60/m2) or slate (20/m2) — a factor of six. "
             "Not converted, check this line")
         return price
 
@@ -808,7 +818,7 @@ def _convert_unit(price, have, wanted, product, line):
 def _covering_family(description):
     """Which coverage rate a roofing line implies. None if it cannot be told.
 
-    A concrete interlocking tile covers 9.7 per m2 and a plain tile 60 — a
+    A concrete interlocking tile covers 10.5 per m2 and a plain tile 60 — a
     factor of six — so guessing between them would be far worse than
     refusing. Only an explicit word in the description decides it.
     """
@@ -861,15 +871,22 @@ def read_csv(text, vat=VAT_UNKNOWN, channel="published", supplier=None):
         if not description:
             continue
         raw_unit = _cell(row, columns.get("unit"))
+        raw_price = _cell(row, columns.get("price"))
         blob = f"{description} {raw_unit or ''}"
         out.append(Line(
             description=description.strip(),
-            price=parse_money(_cell(row, columns.get("price"))),
+            price=parse_money(raw_price),
             unit=raw_unit,
             sku=_cell(row, columns.get("sku")),
             supplier=_cell(row, columns.get("supplier")) or supplier,
             pack=parse_pack(blob),
-            vat=vat_basis_of(blob, default=vat),
+            # The VAT basis is read from the price cell too. A merchant
+            # that states the basis per row usually prints it BESIDE the
+            # number — "12.00 ex VAT" — and detecting from description and
+            # unit alone ignored exactly that statement, so the file-level
+            # default won and an explicitly ex-VAT line was divided by
+            # 1.2: two identical tiles 16.7% apart, again.
+            vat=vat_basis_of(f"{blob} {raw_price or ''}", default=vat),
         ))
     return out
 

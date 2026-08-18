@@ -47,7 +47,12 @@ which is what the manifest contract asks for.
    drag the hour slider or pick a season.
 
 The footprint is traced from the model's external walls, so an L-shaped
-house draws as an L, not as its bounding box.
+house draws as an L, not as its bounding box — and the PD envelope is
+measured from each traced rear wall, so a recessed rear wing is not
+handed depth the GPDO never granted. When the walls do not chain into a
+single ring (a detached annex, say), both fall back to the extent
+rectangle and say so, rather than presenting a partial trace as
+measured.
 
 ## Keeping the maths honest
 
@@ -55,9 +60,14 @@ The solar geometry, the GPDO depths and the tangent-plane transform exist
 twice: here in JavaScript, and in `building/siteplan.py` and
 `building/geo.py` in Python. Two implementations of the same geometry is
 a promise to keep them equal, so `test_siteplan.py::TestPluginParity`
-runs this bundle under node and fails if the two disagree on the
-footprint area, the shadow reach, the sun's altitude or the PD depth.
-Python is the authority — it is the one with the rest of the tests.
+runs this bundle under node and fails if the two disagree — on an
+L-shaped plan, where disagreement is actually visible: the traced
+footprint ring vertex for vertex, the sun's altitude and azimuth, the
+shadow's reach and the direction it is cast along, the PD envelope ring,
+and the tangent-plane transform on a sample point. A second test drives
+`draw()` against a stub host and fails if a stale shadow survives the
+sun dropping below the cutoff. Python is the authority — it is the one
+with the rest of the tests.
 
 ## What it does not claim
 

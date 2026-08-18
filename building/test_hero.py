@@ -230,6 +230,71 @@ class TestLayerOntoMesh(unittest.TestCase):
         self.assertNotEqual(px[45, 50], px[55, 50])
 
 
+class TestPrompt(unittest.TestCase):
+    """_prompt must describe the render it was given, not a template house.
+
+    The template version asserted 'ONE roof... do not add a second ridge
+    ... or any valley' and 'the low flat-roofed block' whatever the model
+    held — so a legitimate multi-range roof, or an extension built as a
+    storey of the house, got a prompt instructing the restyle to erase
+    measured geometry. These pin the clauses to the model's own data.
+    """
+
+    def test_a_single_range_roof_stays_single(self):
+        model = {"storeys": 2,
+                 "roof": {"kind": "hipped", "ranges": 1, "valley_m": 0.0},
+                 "caps": [{"kind": "flat"}],
+                 "extension_fit": {"built_m": {"width": 4.0, "depth": 3.0}}}
+        p = hero._prompt(model)
+        self.assertIn("ONE pitched roof", p)
+        self.assertIn("or any valley", p)
+        self.assertIn("flat-roofed block", p)
+
+    def test_a_multi_range_roof_keeps_its_valleys(self):
+        # roof_over splits a span past MAX_ROOF_SPAN_M into 2 ranges with a
+        # valley between them — the render draws it, so the prompt must not
+        # forbid it.
+        model = {"storeys": 2,
+                 "roof": {"kind": "hipped", "ranges": 2, "valley_m": 8.2},
+                 "caps": [], "extension_fit": {}}
+        p = hero._prompt(model)
+        self.assertIn("2 parallel hipped ranges", p)
+        self.assertIn("valley gutter", p)
+        self.assertNotIn("ONE pitched roof", p)
+        self.assertNotIn("or any valley", p)   # the erase order is gone
+
+    def test_a_flat_topped_model_is_not_given_a_tile_roof(self):
+        # No Solar data -> no roof_spec -> model["roof"] is None. Telling
+        # the restyle this house has a pitched tile roof invents one.
+        model = {"storeys": 1, "roof": None, "caps": [], "extension_fit": {}}
+        p = hero._prompt(model)
+        self.assertNotIn("concrete-tile", p)
+        self.assertNotIn("pitched concrete", p)
+        self.assertIn("FLAT top", p)
+
+    def test_an_uncapped_extension_is_not_called_flat_roofed(self):
+        # An "over" extension is a storey of the house under the main roof:
+        # model3d gives it no flat cap, so 'the low flat-roofed block'
+        # would describe a block the render does not contain.
+        model = {"storeys": 2,
+                 "roof": {"kind": "hipped", "ranges": 1},
+                 "caps": [],
+                 "extension_fit": {"type": "over",
+                                   "built_m": {"width": 3.2, "depth": 6.0}}}
+        p = hero._prompt(model)
+        self.assertNotIn("flat-roofed block", p)
+        self.assertNotIn("membrane roof", p)
+        self.assertIn("extension block", p)
+
+    def test_the_measured_size_still_reaches_the_prompt(self):
+        model = {"storeys": 2,
+                 "roof": {"kind": "gabled", "ranges": 1},
+                 "caps": [{"kind": "flat"}],
+                 "extension_fit": {"built_m": {"width": 4.0, "depth": 3.0}}}
+        p = hero._prompt(model)
+        self.assertIn("4.0m by 3.0m", p)
+
+
 class TestMontagePrompt(unittest.TestCase):
     def test_the_size_comes_from_the_survey(self):
         p = hero.montage_prompt({"type": "rear", "storeys": 1,

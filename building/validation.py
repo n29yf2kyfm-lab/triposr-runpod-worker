@@ -889,9 +889,57 @@ def parse_job(job_input):
         spec["render_zone"] = checked
     else:
         spec["render_zone"] = None
-    spec["extension"] = (job_input.get("extension")
-                         if isinstance(job_input.get("extension"), dict)
-                         else None)
+    # The designed-extension brief. It used to pass on an isinstance-dict
+    # check alone, so {"ceiling_height_m": "nan"} sailed through to
+    # propose's float() — NaN is truthy, so the or-default never applied —
+    # and came out the other side as NaN wall heights and a bare NaN token
+    # in the exported JSON. That is exactly the class of value _float exists
+    # to refuse on every other numeric input, and the brief that DRIVES the
+    # designed geometry was the one input that never got it. The fit-to-plot
+    # ranges (depth 1-12m, storeys 1-3) stay propose's own, so its measured
+    # "reduced"/"moved" answers still happen; this stops what nothing
+    # downstream stops — NaN, infinity, and dimensions that are not
+    # positive numbers.
+    ext = job_input.get("extension")
+    if isinstance(ext, dict):
+        ext = dict(ext)             # never mutate the caller's input
+        for f in ("depth_m", "width_m", "length_m", "return_width_m",
+                  "bay_width_m", "ceiling_height_m"):
+            if ext.get(f) is not None:
+                ext[f] = _float(ext[f], f"extension.{f}")
+                if ext[f] <= 0:
+                    raise InputError(
+                        f"extension.{f} must be a positive dimension in "
+                        f"metres, got {ext[f]!r}")
+        # A domestic ceiling outside this range is a unit mistake, not a
+        # design choice — 2400 arrives when someone types millimetres.
+        # Nothing after this point checks it: propose builds the room at
+        # whatever height survives here, so 1e6 was a kilometre-tall wall.
+        ch = ext.get("ceiling_height_m")
+        if ch is not None and not 1.8 <= ch <= 4.5:
+            raise InputError(
+                f"extension.ceiling_height_m of {ch}m is not a domestic "
+                f"ceiling (1.8 to 4.5m). Check the units — metres, not "
+                f"millimetres.")
+        if ext.get("storeys") is not None:
+            ext["storeys"] = _int(ext["storeys"], "extension.storeys")
+        if ext.get("type") is not None:
+            ext["type"] = _one_of(str(ext["type"]).strip().lower(),
+                                  "extension.type",
+                                  ("rear", "side", "wrap", "over"))
+        if ext.get("side") is not None:
+            ext["side"] = _one_of(str(ext["side"]).strip().lower(),
+                                  "extension.side", ("east", "west"))
+        spec["extension"] = ext
+    else:
+        spec["extension"] = None
+    # The interpreter carrying the bpy module for the Cycles render pass.
+    # propose.py reads spec.get("render_python") three times, and this
+    # whitelist never passed the field through — so it was documented, read
+    # and unreachable, and every caller silently got the default interpreter
+    # probe instead of the one they named.
+    spec["render_python"] = (str(job_input.get("render_python") or "").strip()
+                             or None)
 
     spec["extension_m2"] = _float(job_input.get("extension_m2"),
                                   "extension_m2", None, 1.0, 500.0)

@@ -132,9 +132,10 @@ def _blocked(pos, spans, clear=0.35):
     return any(a - clear <= pos <= b + clear for a, b in spans)
 
 
-def _place_sockets(model, room, level, count, rad):
+def _place_sockets(model, room, level, count, emitters):
     """Distribute twin sockets along the room's own walls, clear of
-    floor-level openings and the radiator the heat design placed."""
+    floor-level openings and every emitter the heat design placed —
+    the towel rail as much as the panel radiator."""
     x0, y0 = room["x"], room["y"]
     x1, y1 = x0 + room["width_m"], y0 + room["depth_m"]
     edges = [
@@ -163,12 +164,16 @@ def _place_sockets(model, room, level, count, rad):
                 along = px if axis == "x" else py
                 if _blocked(along, spans):
                     continue
-                if rad:
+                blocked_by_emitter = False
+                for rad in (emitters or []):
                     rx0, ry0 = rad["x"] - rad["w"] / 2, rad["y"] - rad["d"] / 2
                     rx1, ry1 = rad["x"] + rad["w"] / 2, rad["y"] + rad["d"] / 2
                     if (rx0 - 0.15 <= px <= rx1 + 0.15
                             and ry0 - 0.15 <= py <= ry1 + 0.15):
-                        continue
+                        blocked_by_emitter = True
+                        break
+                if blocked_by_emitter:
+                    continue
                 if any(abs(px - s["x"]) < 0.5 and abs(py - s["y"]) < 0.5
                        for s in out):
                     continue
@@ -183,8 +188,11 @@ def design(model, heat=None):
     rads = {}
     if heat:
         for hr in heat.get("rooms", []):
-            if hr.get("radiator"):
-                rads[(hr["name"], hr["level"])] = hr["radiator"]
+            # both emitters block a socket — the towel rail hangs on a
+            # wall exactly like the panel does
+            for e in (hr.get("radiator"), hr.get("towel_rail")):
+                if e:
+                    rads.setdefault((hr["name"], e["level"]), []).append(e)
 
     rooms_out, sockets_total, alarms = [], 0, []
     cu = None
@@ -204,10 +212,14 @@ def design(model, heat=None):
                 "switch_height_m": SWITCH_HEIGHT_M,
             })
             sockets_total += count
-            # BS 5839-6 Grade D1: smoke in every circulation space per
-            # storey, heat in the kitchen, all interlinked.
-            if kind in ("circulation",) and (lname.startswith("hall")
-                                             or lname.startswith("landing")):
+            # Grade D2 Category LD3: smoke in every circulation space per
+            # storey, heat in the kitchen, all interlinked. THE ALARM
+            # FOLLOWS THE KIND, NOT THE NAME — this used to also require
+            # the name to start "hall"/"landing", so a circulation space
+            # called Corridor or Entrance got no smoke alarm while the
+            # notes went on claiming the LD3 minimum was met. Any
+            # circulation room is the escape route, whatever its label.
+            if kind == "circulation":
                 alarms.append({"type": "smoke", "name": name,
                                "level": level,
                                "x": round(room["x"] + room["width_m"] / 2, 3),
@@ -230,6 +242,25 @@ def design(model, heat=None):
                       "y": round(room["y"] + 0.3, 3), "height_m": 1.4}
                 break
 
+    # THE LD3 CLAIM HAS TO BE TRUE BEFORE IT IS MADE. A storey with no
+    # circulation space gets no smoke alarm from the loop above, and a
+    # note stating the AD B minimum is met over a bare alarm list is the
+    # silent mislead this codebase refuses. Say which storeys are covered,
+    # or say plainly that the minimum is not met as drawn.
+    smoke_levels = {a["level"] for a in alarms if a["type"] == "smoke"}
+    uncovered = [lv for lv in range(storeys) if lv not in smoke_levels]
+    detection_note = (
+        "Detection: AD B minimum is Grade D2 Category LD3 (smoke in "
+        "escape-route circulation, every storey); the kitchen heat "
+        "alarm here exceeds that minimum per BS 5839-6."
+        if not uncovered else
+        "Detection: AD B requires Grade D2 Category LD3 — smoke in the "
+        "escape-route circulation of every storey — and storey(s) "
+        + ", ".join(str(lv) for lv in uncovered)
+        + " have no circulation space to carry one, so the minimum is "
+          "NOT met as drawn. The installer must site an alarm on the "
+          "escape route there.")
+
     return {
         "rooms": rooms_out,
         "sockets_twin_total": sockets_total,
@@ -244,9 +275,7 @@ def design(model, heat=None):
             "Cable runs must stay in BS 7671 522.6.202 safe zones: "
             "vertical/horizontal from each accessory. Routes shown on the "
             "plan are indicative ring-final runs, not measured drops.",
-            "Detection: AD B minimum is Grade D2 Category LD3 (smoke in "
-            "escape-route circulation, every storey); the kitchen heat "
-            "alarm here exceeds that minimum per BS 5839-6.",
+            detection_note,
             "Bathrooms/WCs carry no socket outlets (BS 7671 section 701).",
             "Part P: this is a first-fix design for pricing; a registered "
             "installer certifies the installation.",

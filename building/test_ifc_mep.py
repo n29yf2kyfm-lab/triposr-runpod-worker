@@ -98,7 +98,10 @@ class TestIfcServices(unittest.TestCase):
 
     def test_terminals_are_real_ifc_objects(self):
         rads = self.f.by_type("IfcSpaceHeater")
-        want = sum(1 for r in self.model["heat"]["rooms"] if r["radiator"])
+        # every emitter is a space heater — a big bathroom carries a
+        # towel rail AND the panel sized for the balance
+        want = sum(1 for r in self.model["heat"]["rooms"]
+                   for e in (r.get("radiator"), r.get("towel_rail")) if e)
         self.assertEqual(len(rads), want)
         self.assertEqual(len(self.f.by_type("IfcBoiler")), 1)
         self.assertEqual(len(self.f.by_type("IfcElectricDistributionBoard")),

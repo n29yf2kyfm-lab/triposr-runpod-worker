@@ -167,6 +167,20 @@ for job_input, expected in cases:
 IMPLEMENTED = {m for m in H.PHASE_OF_MODE if H._pipeline_available(m)}
 check("8-0 roof is implemented", "roof" in IMPLEMENTED, str(IMPLEMENTED))
 
+# The handler docstring is the file's honesty statement, and it went stale
+# the slow way: "eleven of thirteen modes run for real" while sixteen were
+# defined and fourteen dispatched — model, scan, propose and render were
+# live surfaces the statement said did not exist, so nobody audited them.
+# It now names the exceptions instead of counting, and this pins those
+# exceptions to the dispatch table so the statement cannot rot silently.
+_unimplemented = {m for m in validation.MODES if not H._pipeline_available(m)}
+check("8-4 condition and design are the only unimplemented modes",
+      _unimplemented == {"condition", "design"}, str(_unimplemented))
+check("8-5 the docstring names those exceptions",
+      "condition and design" in H.__doc__, H.__doc__[:400])
+check("8-6 the stale hand count is gone from the claim",
+      "eleven of thirteen modes run for real" not in H.__doc__)
+
 for mode, (phase, _desc) in H.PHASE_OF_MODE.items():
     if mode in IMPLEMENTED:
         continue
@@ -262,6 +276,23 @@ check("11c large file not inlined", "ply_b64" not in d)
 check("11d large file undeliverable warns loudly", "warning" in d, str(d)[:160])
 check("11e warning names the risk",
       "lost when the worker recycles" in d.get("warning", ""))
+
+# The middle case the old `size > MAX_INLINE_BYTES` guard missed: SMALL,
+# but with no inline key and no storage. Every OBJ/GLB/IFC from model mode
+# and the services JSON ship inline_key=None, so with storage unconfigured
+# each came back {url: null} inside a success response and died with the
+# worker, silently — the exact loss the delivery header promises is loud.
+d = delivery.deliver(small, "test/small-nokey.obj")
+check("11f a small file with no inline key and no storage warns",
+      "warning" in d, str(d)[:160])
+check("11g that warning names the loss",
+      "lost when the worker recycles" in d.get("warning", ""))
+check("11h and does not claim the file was too large",
+      "too large" not in d.get("warning", ""), d.get("warning", ""))
+# Inline delivery IS retrieval: the small-with-key case must stay clean.
+d = delivery.deliver(small, "test/small.ply", inline_key="ply_b64")
+check("11i a small inlined file still carries no warning",
+      "warning" not in d, str(d)[:160])
 
 # ---- Test 12: content types for building formats -------------------------
 check("12a ifc content type",
@@ -384,6 +415,11 @@ _REQUIRED_FIELDS = {
     "reconstruct": ["image_urls", "video_url", "scale_source",
                     "scale_reference_m", "scale_reference_units",
                     "scale_observations"],
+    # render_python earns its place here the hard way: propose.py read
+    # spec.get("render_python") three times while parse_job never passed it
+    # through, so the field was documented, read, and unreachable — the
+    # exact dead-input pattern this block exists to catch.
+    "propose": ["extension", "render_python"],
 }
 _spec_keys = set(parse_job({"mode": "price",
                             "quantities": {"battens": 1.0}}))
@@ -1073,6 +1109,118 @@ finally:
     (delivery.SUPABASE_URL, delivery.SUPABASE_KEY,
      delivery.SUPABASE_BUCKET) = _saved22
     delivery._requests = lambda: __import__("requests")
+
+
+# ---- 23. module warnings must survive the handler-local ones ---------------
+# services.run returns its BS 7671 outside-every-zone count in
+# extra["warnings"]; model mode promotes NOT BUILDABLE / REGS FAIL the same
+# way, "so they cannot be missed by a caller that only reads those". The
+# success path did result.update(extra) and then assigned the handler-local
+# list over the top — so on any job that also had an anchor-scale or
+# delivery warning (essentially every services job) the hazard vanished
+# from the one key it was promoted into.
+_saved_dispatch23 = H._dispatch
+try:
+    def _d23(mode, spec, prog):
+        return [], {"services": {"ok": True},
+                    "warnings": ["1 cable run(s) sit outside every BS 7671 "
+                                 "permitted zone at less than 50mm depth"]}
+    H._dispatch = _d23
+    # services + point cloud + no depth -> scale_source "anchors" -> the
+    # handler-local warning fires, which is what used to do the clobbering.
+    _r = run({"mode": "services",
+              "point_cloud_url": "https://example.com/a.ply"})
+    _ws = _r.get("warnings", [])
+    check("23a the module's hazard warning survives",
+          any("BS 7671" in w for w in _ws), str(_ws)[:200])
+    check("23b the handler's own warning survives beside it",
+          any("scale reference in frame" in w for w in _ws), str(_ws)[:200])
+    check("23c the module's warning comes first — it is the louder one",
+          bool(_ws) and "BS 7671" in _ws[0], str(_ws[:1]))
+
+    # And a warning present in both lists appears once, not twice.
+    def _d23b(mode, spec, prog):
+        return [], {"warnings": [
+            "No LiDAR depth in this capture — scale will be derived from "
+            "known-object anchors (UK brick coursing outside, Part M socket "
+            "and switch heights inside). Include a scale reference in frame, "
+            "and treat exported dimensions as provisional until validated."]}
+    H._dispatch = _d23b
+    _r = run({"mode": "services",
+              "point_cloud_url": "https://example.com/a.ply"})
+    _ws = _r.get("warnings", [])
+    check("23d a warning stated by both sides is not duplicated",
+          len(_ws) == len(set(_ws)) == 1, str(_ws))
+finally:
+    H._dispatch = _saved_dispatch23
+
+
+# ---- 24. the extension brief gets the same refusals as every other number --
+# It used to pass on an isinstance-dict check alone, so a NaN ceiling
+# height sailed into propose's float() (NaN is truthy — the or-default
+# never applies), out through model3d.Room (which validates only
+# width/depth/area), and into json.dump as a bare NaN token. The brief
+# that DRIVES the designed geometry was the one input _float never saw.
+_ok = parse_job({"mode": "propose", "address": "12 Acacia Avenue",
+                 "extension": {"type": "rear", "depth_m": 4.0,
+                               "ceiling_height_m": 2.4, "storeys": 2,
+                               "side": "east", "facade": False}})
+check("24a a well-formed brief passes with its numbers intact",
+      _ok["extension"]["depth_m"] == 4.0
+      and _ok["extension"]["ceiling_height_m"] == 2.4
+      and _ok["extension"]["storeys"] == 2, str(_ok["extension"]))
+check("24b non-numeric flags ride through untouched",
+      _ok["extension"]["facade"] is False, str(_ok["extension"]))
+check("24c type and side are normalised to lowercase",
+      parse_job({"mode": "propose", "address": "x",
+                 "extension": {"type": "Rear"}})["extension"]["type"]
+      == "rear")
+
+for _bad, _label in [({"ceiling_height_m": "nan"}, "NaN ceiling"),
+                     ({"ceiling_height_m": float("inf")}, "infinite ceiling"),
+                     ({"ceiling_height_m": 1e6}, "kilometre-tall ceiling"),
+                     ({"ceiling_height_m": 2400}, "millimetre ceiling"),
+                     ({"depth_m": float("nan")}, "NaN depth"),
+                     ({"width_m": -3.0}, "negative width"),
+                     ({"bay_width_m": "nan"}, "NaN bay width"),
+                     ({"storeys": "two"}, "non-integer storeys"),
+                     ({"type": "granny_annex"}, "unknown type"),
+                     ({"side": "north"}, "unknown side")]:
+    try:
+        parse_job({"mode": "propose", "address": "12 Acacia Avenue",
+                   "extension": _bad})
+        check(f"24d a brief with a {_label} is refused", False, "accepted")
+    except InputError:
+        check(f"24d a brief with a {_label} is refused", True)
+
+# Absent fields stay absent — propose's own defaults must still apply.
+check("24e an empty brief is still a valid brief",
+      parse_job({"mode": "propose", "address": "x",
+                 "extension": {}})["extension"] == {})
+check("24f render_python reaches the spec",
+      parse_job({"mode": "propose", "address": "x",
+                 "render_python": "/opt/blender/python"})["render_python"]
+      == "/opt/blender/python")
+check("24g and defaults to None, not empty string",
+      parse_job({"mode": "propose", "address": "x"})["render_python"]
+      is None)
+
+
+# ---- 25. stated numbers in the docs are measured or absent -----------------
+# The README's Tests section twice shipped hardcoded totals that drifted
+# (a stated file count under half the real one), and the rates ledger
+# claimed a 3-bed brick figure nothing in the repo computed. Both now point
+# at the thing that measures them, and this keeps it that way.
+_readme = open(os.path.join(HERE, "README.md")).read()
+check("25a the README does not hardcode a suite total",
+      not _re.search(r"\d+\s+across\s+\d+\s+files", _readme))
+check("25b the README still says how to run the whole suite",
+      "for f in building/test_*.py" in _readme)
+_ledger = open(os.path.join(HERE, "docs", "ESTIMATING_RATES.md")).read()
+check("25c the rates ledger cites the test that enforces the brick anchor",
+      "TestBrickSanityAnchor" in _ledger)
+check("25d the unreproducible one-off figure is gone",
+      "7,969" not in _ledger)
 
 
 # ---- summary --------------------------------------------------------------

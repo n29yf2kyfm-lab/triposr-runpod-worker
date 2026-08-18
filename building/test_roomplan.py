@@ -241,6 +241,30 @@ check("6a openings attach by proximity without parentIdentifier",
       _m6["totals"]["doors"] == 1 and _m6["totals"]["windows"] == 1,
       f"{_m6['totals']['doors']}/{_m6['totals']['windows']}")
 
+# --- 6b. an opening wider than its wall is dropped, not a crash --------------
+# RoomPlan splits walls into segments on imperfect scans, so a 0.9m door can
+# arrive parented to a 0.8m stub. _attach clamps `along` to 0 but keeps the
+# width, and Wall.add_opening refuses an opening wider than its wall — which
+# used to raise ModelError and kill the whole job for a scan that is
+# otherwise fine, while an opening attached to NOTHING was merely warned
+# about. Same contract for both now: dropped, with a warning.
+_over = json.loads(json.dumps(EXPORT))
+_over["walls"] = _over["walls"] + [_wall(2.1, 1.0, 0, 0.8, ident="w-stub")]
+_over["doors"] = _over["doors"] + [
+    _opening("door", 2.1, 1.0, 0.9, 1.981, 0.02, "w-stub")]
+try:
+    _m6b = R.to_model(R.parse(_over))
+    check("6b a door wider than its stub wall does not kill the model", True)
+    check("6c it is dropped with a warning that says why",
+          any("wider than the wall" in w for w in _m6b["warnings"]),
+          str(_m6b["warnings"]))
+    check("6d the model keeps the openings that DO fit",
+          _m6b["totals"]["doors"] == 1 and _m6b["totals"]["windows"] == 1,
+          f"{_m6b['totals']['doors']}/{_m6b['totals']['windows']}")
+except Exception as e:  # the old behaviour: ModelError out of add_opening
+    check("6b a door wider than its stub wall does not kill the model",
+          False, f"{type(e).__name__}: {e}")
+
 # --- 7. a file path works and a missing one is refused -----------------------
 
 with tempfile.TemporaryDirectory() as td:

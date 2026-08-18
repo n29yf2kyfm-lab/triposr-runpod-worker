@@ -15,9 +15,15 @@ WHAT THIS MODE ACTUALLY DOES with the .ply it is given:
   scale     compared against the building's mapped footprint when an
             address/gps is given — a splat at 0.3x scale is caught HERE,
             not after someone composites an extension into it at 0.3x
-  position  rotated and translated into the building's own local frame
-            (front elevation on y=0), the same frame the measured model
-            uses, so the two can meet in one scene
+  position  up-axis normalised (z-up phone exports rotated to y-up) and
+            the ground put at y=0 — and NOTHING MORE. The splat keeps the
+            pose solver's arbitrary plan rotation and origin; it is NOT
+            rotated into the building's local frame. An earlier draft of
+            this header claimed footprint-fit yaw alignment that run()
+            never performed, and a caller compositing the measured model
+            on the strength of that claim would land the extension at the
+            wrong place and angle — the stats JSON now states the frame
+            so nobody composites on an alignment that never happened
   preview   an honest point-cloud render, drawn by code — the full splat
             renderer belongs in the app (gsplat / GaussianSplats3D, both
             checked MIT/Apache), not in a CPU worker
@@ -27,8 +33,10 @@ WHAT THIS MODE ACTUALLY DOES with the .ply it is given:
 WHAT IT REFUSES TO PRETEND. A splat is photographic, not measured — the
 sanity report says so on every job. The scale check needs the footprint, so
 with no address it can only report the raw span with a warning. And the
-alignment is coarse (footprint-fit yaw, ground-plane z): fine for viewing an
-extension in the scene, not for setting out foundations.
+splat is delivered in its own scan frame: putting it in the building's
+local frame needs a fitted yaw and origin (splat.to_building_frame exists
+for exactly that), which this mode does not compute and therefore does not
+claim.
 """
 import json
 import math
@@ -231,6 +239,15 @@ def run(spec, prog, output_dir):
     report["orientation"] = up_note
     report["ground_shift_m"] = ground_shift
     report["site"] = site_note
+    # The frame, in writing. The module header once claimed the splat was
+    # rotated into the building's local frame when run() only swapped the
+    # up-axis and grounded it — anyone compositing the measured model into
+    # the .ply off that claim would place it at the wrong angle and origin.
+    report["frame"] = (
+        "scan frame: up-axis normalised and ground at y=0 only — NOT "
+        "rotated into the building's local frame. Compositing the measured "
+        "model into this splat needs an explicit alignment "
+        "(splat.to_building_frame with a fitted yaw and origin).")
     if "warning" in report:
         prog.note(report["warning"])
 

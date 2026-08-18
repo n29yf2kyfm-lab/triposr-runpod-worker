@@ -116,7 +116,12 @@ check("3g fillings actually fill their openings",
 slabs = by("IfcSlab")
 floors = [s for s in slabs if s.PredefinedType == "FLOOR"]
 caps = [s for s in slabs if s.PredefinedType == "ROOF"]
-check("4a one floor slab per storey", len(floors) == 2, str(len(floors)))
+# Floor plates follow the ROOMS on each level, not the bounding box: the
+# two-storey house contributes one plate per storey and the single-storey
+# extension its own — a box-per-storey put a phantom plate over the
+# extension's open air at level 1.
+check("4a a floor slab per room-covered plate, not per bounding box",
+      len(floors) == 3, str(len(floors)))
 check("4b the extension's flat cap is in the file", len(caps) == 1,
       str(len(caps)))
 check("4c the pitched roof is in the file", len(by("IfcRoof")) == 1,

@@ -22,9 +22,14 @@ except ImportError:                              # pragma: no cover
 LAT, LON = 52.4862, -1.8904                      # Birmingham
 
 
-def _house():
+def _house(l_shape=False):
     rooms = [M.Room("Living room", 0.0, 0.0, 4.0, 5.0, kind="room"),
              M.Room("Hall", 4.0, 0.0, 2.0, 5.0, kind="circulation")]
+    if l_shape:
+        # Kitchen wing over x 0-4 with its rear wall at y=8; the hall's
+        # rear wall stays at y=5 — the recessed-wing case the PD
+        # envelope must respect.
+        rooms.append(M.Room("Kitchen", 0.0, 5.0, 4.0, 3.0, kind="kitchen"))
     return M.build(rooms, storeys=2, storey_height=2.7,
                    roof={"pitch_deg": 35.0, "kind": "gabled",
                          "overhang": 0.3, "max_span_m": 12.0})
@@ -122,6 +127,35 @@ class TestPermittedDevelopment(unittest.TestCase):
         self.assertAlmostEqual(max(y for _, y in ring), ey + info["depth_m"],
                                places=6)
 
+    def test_a_recessed_wing_keeps_its_own_rear_wall(self):
+        """Hand-worked on the L-plan: kitchen wing (x 0-4) rear wall at
+        y=8, hall (x 4-6) rear wall at y=5, detached depth 4 m. Each
+        wing gets 4 m beyond ITS OWN rear wall — 8..12 and 5..9 — so
+        the envelope area is 4x4 + 2x4 = 24 m2. The old extent-box line
+        gave the hall a strip out to y=12, 7 m beyond its actual rear
+        wall, where the GPDO grants 4."""
+        m = _house(l_shape=True)
+        ring, info = S.permitted_development_local(m, detached=True)
+        self.assertEqual(set(ring),
+                         {(0.0, 8.0), (4.0, 8.0), (4.0, 5.0), (6.0, 5.0),
+                          (6.0, 9.0), (4.0, 9.0), (4.0, 12.0), (0.0, 12.0)})
+        self.assertAlmostEqual(geo._area(ring), 24.0, places=6)
+        self.assertLessEqual(
+            max(y for x, y in ring if 4.0 < x <= 6.0), 9.0)
+        self.assertIn("traced rear wall", info["rear_line"])
+
+    def test_an_untraceable_footprint_says_so_on_the_envelope(self):
+        """When the walls do not chain into one ring the envelope falls
+        back to the extent rear line — and must say so rather than
+        looking as authoritative as a traced one."""
+        m = _house()
+        m["walls"] = [w for w in m["walls"]
+                      if not w.get("external")]      # nothing to trace
+        ring, info = S.permitted_development_local(m, detached=True)
+        ey = m["extent_m"]["y"][1]
+        self.assertAlmostEqual(min(y for _, y in ring), ey, places=6)
+        self.assertIn("could not be traced", info["rear_line"])
+
 
 class TestLayers(unittest.TestCase):
     def setUp(self):
@@ -153,6 +187,24 @@ class TestLayers(unittest.TestCase):
             self.assertIn("line_color", style)
             for f in data["features"]:
                 self.assertIn(f["geometry"]["type"], ("Polygon", "LineString"))
+
+    def test_a_refused_shadow_still_appears_and_says_why(self):
+        """Refuse rather than silently mislead: at 17:00 on day 355 the
+        Birmingham sun is below the 3-degree cutoff, so shadow_local
+        refuses. The refusal used to vanish here — no layer, no note —
+        which read as 'casts no shadow at that hour'. Now it travels as
+        an empty, named layer carrying shadow_local's note."""
+        got = S.layers(self.m, self.a,
+                       shadow={"day_of_year": 355, "solar_hour": 17.0})
+        shadows = [(n, fc) for n, fc, _ in got if n.startswith("Shadow")]
+        self.assertEqual(len(shadows), 1)
+        name, fc = shadows[0]
+        self.assertIn("refused", name)
+        self.assertEqual(fc["features"], [])
+        self.assertIn("below 3 degrees", fc["properties"]["note"])
+        text = S.describe(self.m, self.a,
+                          shadow={"day_of_year": 355, "solar_hour": 17.0})
+        self.assertIn("no usable shadow", text)
 
     def test_services_ride_onto_the_map_when_the_model_has_them(self):
         self.m["mep"] = {"runs": [
@@ -197,21 +249,42 @@ class TestPluginParity(unittest.TestCase):
     absent the test skips rather than pretending to have checked.
     """
 
-    def test_javascript_agrees_with_python(self):
-        import json
+    @staticmethod
+    def _node():
         import shutil
-        import subprocess
+        return shutil.which("node")
 
-        node = shutil.which("node")
-        if not node:
-            self.skipTest("node not installed")
+    def _run_node(self, script):
+        import subprocess
+        node = self._node()
+        out = subprocess.run(
+            [node, "--input-type=module", "-e", script],
+            capture_output=True, text=True, timeout=120)
+        self.assertEqual(out.returncode, 0, out.stderr[:800])
+        import json
+        return json.loads(out.stdout.strip().splitlines()[-1])
+
+    def _entry(self):
         here = os.path.dirname(os.path.abspath(__file__))
-        entry = os.path.join(here, "web", "geolibre-plugin", "dist",
-                             "index.js")
+        return os.path.join(here, "web", "geolibre-plugin", "dist",
+                            "index.js")
+
+    def test_javascript_agrees_with_python(self):
+        """Parity on the L-SHAPED plan, where the two implementations
+        can actually disagree: on a rectangle the traced ring and the
+        bbox fallback have the same area, so a broken JS chaining loop
+        would pass unseen; and reach/altitude are direction-blind, so a
+        sign flip in theta/dx/dy would draw the shadow on the sunward
+        side with the old four scalars still green."""
+        import json
+
+        if not self._node():
+            self.skipTest("node not installed")
+        entry = self._entry()
         if not os.path.exists(entry):
             self.skipTest("plugin bundle not present")
 
-        m = _house()
+        m = _house(l_shape=True)
         a = geo.Anchor(LAT, LON, bearing_deg=20.0, source="test")
         with tempfile.TemporaryDirectory() as d:
             mp = os.path.join(d, "model.json")
@@ -221,31 +294,139 @@ class TestPluginParity(unittest.TestCase):
                 "import fs from 'node:fs';"
                 f"const m = await import({entry!r});"
                 f"const model = JSON.parse(fs.readFileSync({mp!r},'utf8'));"
-                "const L = m.buildLayers(model,"
-                f"{{lon:{LON},lat:{LAT},bearing:20}},"
-                "{redLineMargin:6,pd:true,pdDetached:true,shadow:true,"
-                "day:355,hour:12});"
+                f"const anchor = {{lon:{LON},lat:{LAT},bearing:20}};"
+                "const fpr = m.footprintRing(model);"
+                # no redLineMargin on purpose: the exported API must
+                # default it, not hand back NaN corners
+                "const L = m.buildLayers(model,anchor,"
+                "{pd:true,pdDetached:true,shadow:true,day:355,hour:12});"
                 "const s = m.sunPosition(%r,355,12);" % LAT +
+                "const pt = m.localToWgs84(anchor,3.3,5.1);"
                 "console.log(JSON.stringify({"
+                "ring:fpr.ring, traced:fpr.traced,"
                 "footprint:L.building.features[0].properties.footprint_m2,"
                 "reach:L.info.reach, alt:s.alt*180/Math.PI,"
-                "pd:L.info.pdDepth}));"
+                "az:L.info.azimuth, dx:L.info.dx, dy:L.info.dy,"
+                "pd:L.info.pdDepth,"
+                "pdCoords:L.pd.features[0].geometry.coordinates[0],"
+                "redCoords:L.red.features[0].geometry.coordinates[0],"
+                "pt:pt}));"
             )
-            out = subprocess.run(
-                [node, "--input-type=module", "-e", script],
-                capture_output=True, text=True, timeout=120)
-            self.assertEqual(out.returncode, 0, out.stderr[:400])
-            js = json.loads(out.stdout.strip().splitlines()[-1])
+            js = self._run_node(script)
 
-        fp, _ = geo.footprint_local(m)
+        # the traced footprint ring, vertex for vertex
+        fp, traced = geo.footprint_local(m)
+        self.assertTrue(traced)
+        self.assertTrue(js["traced"])
+        self.assertEqual([(float(x), float(y)) for x, y in js["ring"]],
+                         list(fp))
         self.assertAlmostEqual(js["footprint"], geo._area(fp), delta=0.02)
 
+        # sun position and the direction the shadow is cast along
+        alt, az = S.sun_position(LAT, 355, 12.0)
         _, info = S.shadow_local(m, a, 355, 12.0)
         self.assertAlmostEqual(js["reach"], info["reach_m"], delta=0.05)
         self.assertAlmostEqual(js["alt"], info["altitude_deg"], delta=0.05)
+        self.assertAlmostEqual(js["az"], math.degrees(az), delta=0.01)
+        height = info["height_m"]
+        reach = height / math.tan(alt)
+        theta = az - math.radians(a.bearing_deg)
+        self.assertAlmostEqual(js["dx"], -reach * math.sin(theta),
+                               delta=1e-6)
+        self.assertAlmostEqual(js["dy"], -reach * math.cos(theta),
+                               delta=1e-6)
+        # hand-worked signs: noon sun due south casts the shadow north;
+        # a plan bearing 20 deg east of north tips it slightly west in
+        # the plan's frame, so dy > 0 and dx < 0
+        self.assertGreater(js["dy"], 0.0)
+        self.assertLess(js["dx"], 0.0)
 
-        _, pd = S.permitted_development_local(m, detached=True)
+        # the PD envelope ring, on the recessed-wing plan
+        pd_ring, pd = S.permitted_development_local(m, detached=True)
         self.assertEqual(js["pd"], pd["depth_m"])
+        want = [list(geo.local_to_wgs84(a, x, y)) for x, y in pd_ring]
+        want.append(want[0])
+        self.assertEqual(len(js["pdCoords"]), len(want))
+        for got, exp in zip(js["pdCoords"], want):
+            self.assertAlmostEqual(got[0], exp[0], places=9)
+            self.assertAlmostEqual(got[1], exp[1], places=9)
+
+        # the tangent-plane transform itself, and the defaulted red line
+        lon, lat = geo.local_to_wgs84(a, 3.3, 5.1)
+        self.assertAlmostEqual(js["pt"][0], lon, places=9)
+        self.assertAlmostEqual(js["pt"][1], lat, places=9)
+        bx, by = geo.wgs84_to_local(a, js["pt"][0], js["pt"][1])
+        self.assertAlmostEqual(bx, 3.3, places=3)
+        self.assertAlmostEqual(by, 5.1, places=3)
+        ex, ey = m["extent_m"]["x"], m["extent_m"]["y"]
+        corner = geo.local_to_wgs84(a, ex[0] - 6.0, ey[0] - 6.0)
+        for c in js["redCoords"]:
+            self.assertIsNotNone(c[0])          # NaN serializes as null
+            self.assertIsNotNone(c[1])
+        self.assertAlmostEqual(js["redCoords"][0][0], corner[0], places=9)
+        self.assertAlmostEqual(js["redCoords"][0][1], corner[1], places=9)
+
+    def test_a_redraw_clears_its_own_stale_layers(self):
+        """Slide from noon to 17:00 on day 355: the sun drops below the
+        cutoff, buildLayers returns no shadow — and the noon shadow must
+        LEAVE the map, not linger under a 'sun too low' caption. Runs
+        draw() under node against a stub host that records layer calls."""
+        import json
+
+        if not self._node():
+            self.skipTest("node not installed")
+        entry = self._entry()
+        if not os.path.exists(entry):
+            self.skipTest("plugin bundle not present")
+
+        m = _house()
+        with tempfile.TemporaryDirectory() as d:
+            mp = os.path.join(d, "model.json")
+            with open(mp, "w") as fh:
+                json.dump(m, fh)
+            script = (
+                "import fs from 'node:fs';"
+                "const fake = () => ({ append(){}, });"
+                "globalThis.window = {};"
+                "globalThis.document = {"
+                "  createElement: () => fake(),"
+                "  createTextNode: () => ({}),"
+                "};"
+                "const calls = [];"
+                "const app = {"
+                "  addGeoJsonLayer: (n) => calls.push('add:' + n),"
+                "  removeGeoJsonLayer: (n) => calls.push('rm:' + n),"
+                "  getMap: () => null,"
+                "  registerFloatingPanel: ({render}) => { render(fake()); },"
+                "};"
+                f"const mod = await import({entry!r});"
+                "const plugin = mod.default;"
+                "plugin.activate(app);"
+                "const st = plugin._state;"
+                f"st.model = JSON.parse(fs.readFileSync({mp!r},'utf8'));"
+                f"st.anchor = {{lon:{LON},lat:{LAT},bearing:0}};"
+                "st.opts.day = 355; st.opts.hour = 12;"
+                "calls.length = 0; st.draw();"
+                "const noon = calls.slice();"
+                "st.opts.hour = 17;"
+                "calls.length = 0; st.draw();"
+                "const dusk = calls.slice();"
+                "console.log(JSON.stringify({noon, dusk}));"
+            )
+            js = self._run_node(script)
+
+        # at noon the shadow is drawn — after clearing, so removals of
+        # every plugin layer precede any add
+        self.assertIn("add:Shadow", js["noon"])
+        first_add = min(i for i, c in enumerate(js["noon"])
+                        if c.startswith("add:"))
+        for name in ("Shadow", "PD envelope", "Red line", "Building"):
+            self.assertIn(f"rm:{name}", js["noon"][:first_add])
+        # at 17:00 the sun is below the cutoff: the stale shadow is
+        # removed and no new one is added, while the building remains
+        self.assertIn("rm:Shadow", js["dusk"])
+        self.assertNotIn("add:Shadow", js["dusk"])
+        self.assertIn("add:Building", js["dusk"])
 
 
 if __name__ == "__main__":

@@ -177,7 +177,16 @@ class Walker:
             r = self._fetch(uri)
             if r is None:
                 return kept_below
-            sub = r.json()
+            try:
+                sub = r.json()
+            except Exception as e:
+                # A 200 whose body is not JSON — a proxy interstitial, a
+                # quota HTML page, a truncated read — is a failed fetch,
+                # not a crash: fetch_house promises tiles or [], and
+                # _fetch already treats transport failures as a skip.
+                print(f"  tiles: skip non-JSON body "
+                      f"({type(e).__name__}) {uri[:60]}", file=sys.stderr)
+                return kept_below
             return self._descend(sub.get("root") or sub, depth + 1) \
                 or kept_below
 
@@ -199,7 +208,15 @@ class Walker:
         r = self._fetch(ROOT_URL)
         if r is None:
             return []
-        doc = r.json()
+        try:
+            doc = r.json()
+        except Exception as e:
+            # Same contract as a dead endpoint: root.json served with a
+            # non-JSON body means no tiles, not an exception escaping
+            # fetch_house's documented tiles-or-[] return.
+            print(f"  tiles: root.json body is not JSON "
+                  f"({type(e).__name__}) — no tiles", file=sys.stderr)
+            return []
         self._descend(doc.get("root") or doc)
         return self.glbs
 

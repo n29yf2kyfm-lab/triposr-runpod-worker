@@ -107,7 +107,17 @@ def choose_mode(dwelling_type=None, side_clearances=None, is_row=None):
     both_open = None
     if side_clearances:
         vals = [side_clearances.get(s) for s in FLANKS]
-        if all(v is not None for v in vals):
+        measured = [v for v in vals if v is not None]
+        # A MEASURED flank below the open bar IS a contradiction, however
+        # many flanks went unmeasured. This used to require BOTH flanks
+        # before it would disagree with the listing, so a detached listing
+        # with one flank measured at 1.3m (under the 2.0m open bar, barely
+        # over the party-wall cut) and the other missing orbited on the
+        # false reason "no flank measurement to contradict it". Only fully
+        # absent data may leave the question open.
+        if measured and any(v < FREE_SIDE_M for v in measured):
+            both_open = False
+        elif all(v is not None for v in vals):
             both_open = all(v >= FREE_SIDE_M for v in vals)
 
     if connected is False and both_open:

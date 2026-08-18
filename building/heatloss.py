@@ -95,6 +95,40 @@ def _levels_of(room, storeys):
     return range(base, min(top, storeys))
 
 
+def _wall_at_level(w, level):
+    """Is this wall built on this storey? model3d's convention: storeys=None
+    means every storey above base_level, an integer caps it there."""
+    base = int(w.get("base_level") or 0)
+    n = w.get("storeys")
+    if level < base:
+        return False
+    return n is None or level < base + int(n)
+
+
+def _covered_above(model, room, level):
+    """Is another room built directly over this one at `level`?
+
+    Mirrors model3d's roof-cap rule: a block only has sky over it where
+    nothing is built on top. Both sides heated means adiabatic, same as
+    any partition."""
+    storeys = int(model.get("storeys") or 1)
+    for o in model["rooms"]:
+        if o is room:
+            continue
+        base = int(o.get("base_level") or 0)
+        n = o.get("storeys")
+        top = storeys if n is None else base + int(n)
+        if not (base <= level < top):
+            continue
+        ox = (min(room["x"] + room["width_m"], o["x"] + o["width_m"])
+              - max(room["x"], o["x"]))
+        oy = (min(room["y"] + room["depth_m"], o["y"] + o["depth_m"])
+              - max(room["y"], o["y"]))
+        if ox > 0.05 and oy > 0.05:
+            return True
+    return False
+
+
 def _envelope(model, room, level):
     """External wall runs bounding this room at this level.
 
@@ -106,7 +140,23 @@ def _envelope(model, room, level):
     rx0, ry0 = room["x"], room["y"]
     rx1, ry1 = rx0 + room["width_m"], ry0 + room["depth_m"]
     for w in model["walls"]:
-        if not w.get("external") or w.get("party"):
+        # A party wall has the neighbour's heated house behind it, and a
+        # void_facing wall has a 100mm cavity INSIDE the plan behind it —
+        # model3d exports the flag precisely so nobody costs a void strip
+        # as facade at -3 C. Both are adiabatic here, like any partition.
+        if w.get("party") or w.get("void_facing"):
+            continue
+        if not _wall_at_level(w, level):
+            continue
+        # External is a per-LEVEL fact, not a plan-level one. The wall
+        # between the house and a single-storey wing is internal at ground
+        # but faces open air above the wing's roof; model3d records the
+        # boundary as shared_storeys. Keying on the plan-level flag alone
+        # gave the first-floor bedroom behind an extension no rear facade
+        # at all — no fabric loss, no radiator wall.
+        shared = w.get("shared_storeys")
+        if not (w.get("external")
+                or (shared is not None and level >= shared)):
             continue
         (ax, ay), (bx, by) = w["start"], w["end"]
         if abs(ax - bx) < 1e-6:                      # runs along y
@@ -142,7 +192,10 @@ def _wall_height(model, room):
 def _place_radiator(model, room, level, need_w):
     """Put the radiator where a heating engineer would: under the biggest
     window on an external wall, or failing that on the longest clear
-    external run. Returns the plan rectangle the viewer can draw."""
+    external run, in the smallest panel type that carries need_w in the
+    length that wall can take. Returns the plan rectangle the viewer can
+    draw, with a shortfall_W entry when even a K3 at that length cannot
+    meet the need."""
     best = None                # (window_width, wall, opening)
     runs = []                  # (clear_len, wall, lo, hi)
     for w, lo, hi, ops in _envelope(model, room, level):
@@ -153,25 +206,29 @@ def _place_radiator(model, room, level, need_w):
                 best = (o["width"], w, o)
         if not ops:
             runs.append((hi - lo, w, lo, hi))
-    kind = "K1" if need_w <= 0.9 * RAD_W_PER_M["K1"] else "K2"
-    length = need_w / RAD_W_PER_M[kind]
-    if length > RAD_MAX_LEN_M:
-        kind = "K3"
-        length = need_w / RAD_W_PER_M[kind]
-    length = min(max(0.4, math.ceil(length * 10) / 10), RAD_MAX_LEN_M)
-    output = round(RAD_W_PER_M[kind] * length)
-
     if best:
         _, w, o = best
-        length = min(length, max(0.4, o["width"] - 0.05))
+        avail = max(0.4, o["width"] - 0.05)
         at = o["at"] + o["width"] / 2
     elif runs:
         runs.sort(reverse=True)
         clear, w, lo, hi = runs[0]
-        length = min(length, max(0.4, clear - 0.2))
+        avail = max(0.4, clear - 0.2)
         at = (lo + hi) / 2
     else:
         return None            # no external wall to hang it on
+    avail = min(avail, RAD_MAX_LEN_M)
+
+    # Pick the panel type AFTER the wall has said how long it can be.
+    # Choosing the type first and then clipping to the window quietly cut
+    # a K2 down to a narrow sill and shipped a radiator a third below the
+    # loss printed beside it; a narrower window does not shrink the loss,
+    # it calls for a deeper panel.
+    kind = "K1" if need_w <= 0.9 * RAD_W_PER_M["K1"] else "K2"
+    if need_w / RAD_W_PER_M[kind] > avail:
+        kind = "K3" if need_w / RAD_W_PER_M["K2"] > avail else "K2"
+    length = need_w / RAD_W_PER_M[kind]
+    length = min(max(0.4, math.ceil(length * 10) / 10), avail)
     output = round(RAD_W_PER_M[kind] * length)
 
     (ax, ay), (bx, by) = w["start"], w["end"]
@@ -183,10 +240,17 @@ def _place_radiator(model, room, level, need_w):
     else:
         side = 1.0 if room["y"] + room["depth_m"] / 2 > ay else -1.0
         cx, cy, rw, rd, axis = at, ay + side * inset, length, depth, "x"
-    return {"type": kind, "len_m": round(length, 2), "output_W": output,
-            "level": level, "axis": axis,
-            "x": round(cx, 3), "y": round(cy, 3),
-            "w": round(rw, 3), "d": round(rd, 3)}
+    rad = {"type": kind, "len_m": round(length, 2), "output_W": output,
+           "level": level, "axis": axis,
+           "x": round(cx, 3), "y": round(cy, 3),
+           "w": round(rw, 3), "d": round(rd, 3)}
+    if output + 0.5 < need_w:
+        # Even the deepest panel at the length the wall takes falls short.
+        # Say so on the record rather than let the shortfall hide between
+        # two honest-looking numbers: this is the slice of the room's
+        # design loss the emitter cannot deliver at 70/60.
+        rad["shortfall_W"] = round((need_w - output) * DT_CORRECTION)
+    return rad
 
 
 def design(model):
@@ -194,6 +258,7 @@ def design(model):
     storeys = int(model.get("storeys") or 1)
     dt_out = DESIGN_EXTERNAL_C
     rooms_out, total_w = [], 0.0
+    unplaced, undersized = [], []
     for room in model["rooms"]:
         kind = room.get("kind", "room")
         name = room.get("name", "room")
@@ -207,7 +272,8 @@ def design(model):
         dt = ti - dt_out
         h = _wall_height(model, room)
         area = float(room["area_m2"])
-        for level in _levels_of(room, storeys):
+        levels = list(_levels_of(room, storeys))
+        for level in levels:
             gross = glazed = door_a = 0.0
             glaz_list = []
             for w, lo, hi, ops in _envelope(model, room, level):
@@ -223,7 +289,16 @@ def design(model):
             fabric_wk = (wall_net * U_VALUES["wall"]
                          + glazed * U_VALUES["window"]
                          + door_a * U_VALUES["door"])
-            if level == storeys - 1:
+            # The roof term belongs to the ROOM's top level, not the
+            # building's. Gating it on storeys-1 alone left the classic
+            # single-storey kitchen extension of a two-storey house with
+            # no roof loss at all — its top level never equals the
+            # building's, yet there is nothing over it but sky. Mirror
+            # model3d's roof-cap rule: sky above unless another room is
+            # built directly on top (heated both sides, so adiabatic).
+            if level == levels[-1] and (
+                    level == storeys - 1
+                    or not _covered_above(model, room, level + 1)):
                 fabric_wk += area * U_VALUES["roof"]
             if level == 0:
                 fabric_wk += area * U_VALUES["floor"]
@@ -233,23 +308,37 @@ def design(model):
             total_w += loss
 
             need = loss / DT_CORRECTION
-            rad = None
+            rad = towel = None
             if loss >= MIN_EMITTER_W:
                 if name.lower().startswith("bath") or kind in ("bathroom",
                                                               "ensuite"):
-                    rad = {"type": "towel", "len_m": 0.5,
-                           "output_W": round(TOWEL_RAIL_W), "level": level,
-                           "axis": "x", "x": round(room["x"] + 0.45, 3),
-                           "y": round(room["y"] + room["depth_m"] - 0.12, 3),
-                           "w": 0.5, "d": 0.12}
+                    towel = {"type": "towel", "len_m": 0.5,
+                             "output_W": round(TOWEL_RAIL_W), "level": level,
+                             "axis": "x", "x": round(room["x"] + 0.45, 3),
+                             "y": round(room["y"] + room["depth_m"] - 0.12,
+                                        3),
+                             "w": 0.5, "d": 0.12}
+                    rad = towel
                     if TOWEL_RAIL_W < need:
+                        # The rail cannot carry the room alone, so a panel
+                        # sized for the balance JOINS it. Letting the panel
+                        # replace the rail shipped the bathroom exactly
+                        # TOWEL_RAIL_W short of its own stated loss.
                         extra = _place_radiator(model, room, level,
                                                 need - TOWEL_RAIL_W)
                         if extra:
                             rad = extra
+                        else:
+                            towel["shortfall_W"] = round(
+                                (need - TOWEL_RAIL_W) * DT_CORRECTION)
                 else:
                     rad = _place_radiator(model, room, level, need)
-            rooms_out.append({
+                if rad is None:
+                    unplaced.append("%s (L%d)" % (name, level))
+                elif rad.get("shortfall_W"):
+                    undersized.append("%s (L%d, %d W short)"
+                                      % (name, level, rad["shortfall_W"]))
+            rec = {
                 "name": name, "level": level, "temp_C": ti,
                 "floor_m2": round(area, 2), "volume_m3": round(area * h, 1),
                 "wall_net_m2": round(wall_net, 2),
@@ -259,7 +348,10 @@ def design(model):
                 "vent_WK": round(vent_wk, 1),
                 "loss_W": round(loss),
                 "radiator": rad,
-            })
+            }
+            if towel is not None and rad is not towel:
+                rec["towel_rail"] = towel
+            rooms_out.append(rec)
     # Boiler/heat-pump headline: space heating at design + a note that a
     # combi is sized by hot water, not by this number.
     out = {
@@ -284,4 +376,17 @@ def design(model):
             "flow temperature.",
         ],
     }
+    # A missing or short emitter is a design fact, not a formatting
+    # choice: say it in the notes rather than leave a null or a small
+    # number sitting silently beside a big loss.
+    if unplaced:
+        out["notes"].append(
+            "No emitter could be placed for: %s — the loss is real but no "
+            "external wall or window would take a radiator; heat for these "
+            "rooms must come from elsewhere." % ", ".join(unplaced))
+    if undersized:
+        out["notes"].append(
+            "Emitters fall short of the design loss for: %s — the largest "
+            "panel the wall takes does not carry the room at 70/60 "
+            "(shortfall_W on the radiator record)." % ", ".join(undersized))
     return out

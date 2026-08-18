@@ -107,6 +107,23 @@ class TestFootprint(unittest.TestCase):
         self.assertAlmostEqual(geo._area(ring), 6.0 * 5.0 + 4.0 * 3.0,
                                delta=0.05)
 
+    def test_a_detached_annex_is_not_passed_off_as_traced(self):
+        """Two buildings are two wall loops. The chain used to close the
+        first loop and return it as THE footprint, traced=True — a 6x5
+        main house plus a 3x3 detached annex reported 30 m2 as measured
+        when 39 m2 stands on the plot. The honest answer is the extent
+        rectangle (0..12 x 0..5 = 60 m2 here), flagged as a fallback."""
+        rooms = [M.Room("Living room", 0.0, 0.0, 6.0, 5.0, kind="room"),
+                 M.Room("Annex", 9.0, 0.0, 3.0, 3.0, kind="room")]
+        m = M.build(rooms, storeys=1, storey_height=2.7,
+                    roof={"pitch_deg": 35.0, "kind": "gabled",
+                          "overhang": 0.3, "max_span_m": 12.0})
+        ring, traced = geo.footprint_local(m)
+        self.assertFalse(traced)
+        self.assertAlmostEqual(geo._area(ring), 12.0 * 5.0, delta=0.01)
+        f = geo.geojson(m, geo.Anchor(*BHAM))["features"][0]
+        self.assertIn("single closed ring", f["properties"]["outline"])
+
 
 class TestGeoJSON(unittest.TestCase):
     def setUp(self):

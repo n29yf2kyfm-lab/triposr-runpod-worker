@@ -8,11 +8,15 @@ socket"), and nothing downstream could draw them, clash them or count
 them truthfully.
 
 This module routes them. Every run is an orthogonal polyline in the
-building's own coordinates, at the height services actually occupy — the
-floor void for distribution, the ceiling void for lighting, a riser at
-the stack — so the lengths are measured off a route rather than guessed
-from a per-item average, and a viewer or an IFC export has something to
-carry.
+building's own coordinates (drainage additionally falls at its gradient
+along those plan-orthogonal legs), at the height services actually
+occupy — the floor void for distribution, the ceiling void for lighting,
+a riser at the stack — so the lengths are measured off a route rather
+than guessed from a per-item average, and a viewer or an IFC export has
+something to carry. Routes are kept inside the room-covered plan, not
+merely the bounding box — on an L-shaped plan those differ by a notch of
+open air — and where no orthogonal corner can stay inside, the run says
+so on its note instead of pretending.
 
 WHAT THIS IS NOT. These are DESIGN routes, not an installer's first fix.
 They are orthogonal, they take the sensible leg order, and they do not
@@ -64,25 +68,70 @@ def _run(system, service, size, level, points, note=None):
     return out
 
 
-def _inside(model, x, y):
-    ex, ey = model["extent_m"]["x"], model["extent_m"]["y"]
-    return ex[0] - 1e-6 <= x <= ex[1] + 1e-6 and ey[0] - 1e-6 <= y <= ey[1] + 1e-6
+# A point counts as in the building when it lies in a room, give or
+# take a wall's worth of slack either side.
+WALL_TOL_M = 0.35
 
 
-def _leg(model, a, b, z):
+def _room_on_level(model, r, level):
+    """model3d's storey convention: storeys=None means every storey
+    above base_level, an int caps the room at its own top."""
+    base = int(r.get("base_level") or 0)
+    n = r.get("storeys")
+    total = int(model.get("storeys") or 1)
+    top = total if n is None else min(base + int(n), total)
+    return base <= level < top
+
+
+def _inside(model, x, y, level=None):
+    """Is (x, y) actually in the building on this level?
+
+    The first cut tested the extent bounding box, which on an L-shaped
+    plan approves the notch — open air — so routes were drawn through
+    it. The building is the rooms, not the box around them: a point is
+    inside only when some room on the level covers it (within a wall's
+    tolerance). level=None means any level will do.
+    """
+    for r in model["rooms"]:
+        if level is not None and not _room_on_level(model, r, level):
+            continue
+        if (r["x"] - WALL_TOL_M <= x <= r["x"] + r["width_m"] + WALL_TOL_M
+                and r["y"] - WALL_TOL_M <= y <= r["y"] + r["depth_m"]
+                + WALL_TOL_M):
+            return True
+    return False
+
+
+def _leg(model, a, b, z, level=None):
     """Two-leg orthogonal route from a to b at height z.
 
     Takes whichever leg order keeps the corner inside the building; a
     service that leaves the envelope and comes back is not a route.
+    Returns (points, warning): when NEITHER corner lands in a room there
+    is no honest two-leg route, and rather than silently drawing one
+    through open air (which this once did) the route is emitted with a
+    warning the caller must carry on the run.
     """
     (ax, ay), (bx, by) = a, b
     c1, c2 = (bx, ay), (ax, by)
-    corner = c1 if _inside(model, *c1) else (c2 if _inside(model, *c2) else c1)
+    warn = None
+    if _inside(model, c1[0], c1[1], level):
+        corner = c1
+    elif _inside(model, c2[0], c2[1], level):
+        corner = c2
+    else:
+        corner = c1
+        warn = ("ROUTE LEAVES THE BUILDING: neither orthogonal corner "
+                "lands in a room on this level")
     pts = [(ax, ay, z)]
     if abs(corner[0] - ax) > 1e-6 or abs(corner[1] - ay) > 1e-6:
         pts.append((corner[0], corner[1], z))
     pts.append((bx, by, z))
-    return pts
+    return pts, warn
+
+
+def _note(base, warn):
+    return f"{base} — {warn}" if warn else base
 
 
 def _rooms_of_kind(model, kinds, level=None):
@@ -103,7 +152,13 @@ def _centre(r):
 def plant(model):
     """Where the boiler goes: utility if there is one, else the kitchen.
 
-    Against an external wall, because a combi needs a flue.
+    Against an external wall, because a combi needs a flue — and
+    "external" means the room face actually sits on the envelope. This
+    once tested only the left and back faces, so a room touching
+    neither got its boiler on an internal partition while the record
+    still implied a flue could go there. All four faces are checked
+    now, and when none reaches the extent the boiler is still placed
+    but the record says the flue is unresolved instead of pretending.
     """
     for kinds in (("wet",), ("kitchen",)):
         for r in _rooms_of_kind(model, kinds, level=0):
@@ -111,14 +166,28 @@ def plant(model):
             if kinds == ("wet",) and not name.startswith("util"):
                 continue
             ex = model["extent_m"]
-            # nearest external face of this room
-            x = r["x"] + 0.35 if abs(r["x"] - ex["x"][0]) < 0.35 \
-                else r["x"] + r["width_m"] - 0.35
-            y = r["y"] + r["depth_m"] - 0.35 \
-                if abs(r["y"] + r["depth_m"] - ex["y"][1]) < 0.35 \
-                else r["y"] + 0.35
-            return {"type": "boiler", "kind": "combi", "room": r["name"],
-                    "x": round(x, 3), "y": round(y, 3), "z": 1.5, "level": 0}
+            x0, x1 = r["x"], r["x"] + r["width_m"]
+            y0, y1 = r["y"], r["y"] + r["depth_m"]
+            cx, cy = _centre(r)
+            faces = []
+            if abs(x0 - ex["x"][0]) < WALL_TOL_M:
+                faces.append((x0 + 0.35, cy))
+            if abs(x1 - ex["x"][1]) < WALL_TOL_M:
+                faces.append((x1 - 0.35, cy))
+            if abs(y1 - ex["y"][1]) < WALL_TOL_M:
+                faces.append((cx, y1 - 0.35))
+            if abs(y0 - ex["y"][0]) < WALL_TOL_M:
+                faces.append((cx, y0 + 0.35))
+            out = {"type": "boiler", "kind": "combi", "room": r["name"],
+                   "z": 1.5, "level": 0}
+            if faces:
+                bx, by = faces[0]
+            else:
+                bx, by = x1 - 0.35, cy
+                out["note"] = ("no external wall: room touches no face of "
+                               "the envelope, flue position unresolved")
+            out["x"], out["y"] = round(bx, 3), round(by, 3)
+            return out
     return None
 
 
@@ -181,26 +250,38 @@ def heating(model, heat, boiler=None):
                              [(riser_at["x"], riser_at["y"], z0),
                               (riser_at["x"], riser_at["y"], z1)],
                              "riser to the upper storey"))
-        runs += [_run("heating", svc, f"{PRIMARY_MM}mm copper", 0,
-                      _leg(model, src, (riser_at["x"], riser_at["y"]),
-                           -FLOOR_VOID_M), "boiler to riser")
-                 for svc in ("flow", "return")]
+        for svc in ("flow", "return"):
+            pts, warn = _leg(model, src, (riser_at["x"], riser_at["y"]),
+                             -FLOOR_VOID_M, level=0)
+            runs.append(_run("heating", svc, f"{PRIMARY_MM}mm copper", 0,
+                             pts, _note("boiler to riser", warn)))
 
     for hr in heat.get("rooms", []):
-        rad = hr.get("radiator")
-        if not rad:
-            continue
-        lv = int(rad.get("level") or 0)
-        z = lv * per - FLOOR_VOID_M
-        origin = src if lv == 0 else (riser_at["x"], riser_at["y"])
-        target = (rad["x"], rad["y"])
-        for svc, off in (("flow", -0.05), ("return", 0.05)):
-            pts = _leg(model, origin, target, z)
-            # rise to the radiator tails
-            pts.append((target[0] + off, target[1], lv * per + RAD_TAIL_M))
-            runs.append(_run("heating", svc, f"{BRANCH_MM}mm copper", lv, pts,
-                             f"to {hr['name']} radiator "
-                             f"({rad.get('output_W')} W)"))
+        # A big bathroom carries TWO emitters — the towel rail plus the
+        # panel sized for the balance — and each needs its own pair of
+        # tails, or the bill under-counts the copper the plumber lays.
+        for rad in (hr.get("radiator"), hr.get("towel_rail")):
+            if not rad:
+                continue
+            kind = ("towel rail" if rad.get("type") == "towel"
+                    else "radiator")
+            lv = int(rad.get("level") or 0)
+            z = lv * per - FLOOR_VOID_M
+            origin = src if lv == 0 else (riser_at["x"], riser_at["y"])
+            target = (rad["x"], rad["y"])
+            for svc, off in (("flow", -0.05), ("return", 0.05)):
+                pts, warn = _leg(model, origin, target, z, level=lv)
+                # rise to the radiator tails: jog the 50mm flow/return
+                # offset horizontally in the void FIRST, then rise
+                # vertically — done as one move this was a diagonal, which
+                # broke the promise that every run is orthogonal
+                pts.append((target[0] + off, target[1], z))
+                pts.append((target[0] + off, target[1],
+                            lv * per + RAD_TAIL_M))
+                runs.append(_run("heating", svc, f"{BRANCH_MM}mm copper",
+                                 lv, pts,
+                                 _note(f"to {hr['name']} {kind} "
+                                       f"({rad.get('output_W')} W)", warn)))
     return runs
 
 
@@ -234,35 +315,58 @@ def power(model, elec):
                               (src[0], src[1], z)],
                              f"consumer unit to level {lv}"))
         for s, room in order:
-            pts = _leg(model, node, (s["x"], s["y"]), z)
+            pts, warn = _leg(model, node, (s["x"], s["y"]), z, level=lv)
             # THE SAFE ZONE: the last leg to an accessory is a vertical
             # drop/rise in line with it (BS 7671 522.6.202)
             pts.append((s["x"], s["y"], lv * per + s.get("h", 0.45)))
             runs.append(_run("power", "ring final", RING_MM2, lv, pts,
-                             f"{room['name']} outlet"))
+                             _note(f"{room['name']} outlet", warn)))
             node = (s["x"], s["y"])
-        runs.append(_run("power", "ring final", RING_MM2, lv,
-                         _leg(model, node, (src[0], src[1]), z),
-                         "ring returns to the consumer unit"))
+        pts, warn = _leg(model, node, (src[0], src[1]), z, level=lv)
+        runs.append(_run("power", "ring final", RING_MM2, lv, pts,
+                         _note("ring returns to the consumer unit", warn)))
+        if lv > 0:
+            # a ring is TWO legs at the consumer unit. The outgoing
+            # riser above fed the ring up; the return must come back
+            # down, or the measured copper is a storey short and the
+            # routed "ring" is a single-leg radial.
+            runs.append(_run("power", "ring final riser", RING_MM2, None,
+                             [(src[0], src[1], z),
+                              (src[0], src[1], -FLOOR_VOID_M)],
+                             f"level {lv} ring returns to the "
+                             "consumer unit"))
 
     # lighting: one pendant per room, fed in the ceiling void
     storeys = int(model.get("storeys") or 1)
     for lv in range(storeys):
         z = lv * per + per - CEILING_VOID_M
+        rooms_here = [r for r in model["rooms"]
+                      if int(r.get("base_level") or 0) == lv
+                      and r.get("kind") != "garage"]
+        if not rooms_here:
+            continue
+        if lv > 0:
+            # the upper lighting circuit starts at the consumer unit,
+            # which lives at level 0 — without this riser the circuit
+            # dangled unfed in the upper ceiling void and its vertical
+            # run was never counted, unlike the ring finals which
+            # always drew theirs.
+            runs.append(_run("power", "lighting riser", LIGHT_MM2, None,
+                             [(src[0], src[1], -FLOOR_VOID_M),
+                              (src[0], src[1], z)],
+                             f"consumer unit to level {lv} lighting"))
         node = (src[0], src[1])
-        for r in model["rooms"]:
-            if int(r.get("base_level") or 0) != lv or r.get("kind") == "garage":
-                continue
+        for r in rooms_here:
             c = _centre(r)
-            runs.append(_run("power", "lighting", LIGHT_MM2, lv,
-                             _leg(model, node, c, z),
-                             f"{r['name']} pendant"))
+            pts, warn = _leg(model, node, c, z, level=lv)
+            runs.append(_run("power", "lighting", LIGHT_MM2, lv, pts,
+                             _note(f"{r['name']} pendant", warn)))
             node = c
     for r in _rooms_of_kind(model, ("kitchen",), level=0):
         c = _centre(r)
-        runs.append(_run("power", "cooker radial", COOKER_MM2, 0,
-                         _leg(model, src, c, -FLOOR_VOID_M),
-                         "45A cooker point"))
+        pts, warn = _leg(model, src, c, -FLOOR_VOID_M, level=0)
+        runs.append(_run("power", "cooker radial", COOKER_MM2, 0, pts,
+                         _note("45A cooker point", warn)))
     return runs
 
 
@@ -297,18 +401,29 @@ def drainage(model):
                         ("waste", WASTE_BASIN_MM)]
         for svc, size in fittings:
             z_start = lv * per + 0.15
-            pts = _leg(model, c, (stack["x"], stack["y"]), z_start)
-            run_len = _length([(p[0], p[1], 0) for p in pts])
-            # fall to the stack: the connection sits LOWER than the fitting
-            pts[-1] = (pts[-1][0], pts[-1][1], z_start - run_len * WASTE_FALL)
-            runs.append(_run("drainage", svc, f"{size}mm PVCu", lv, pts,
-                             f"{r['name']} at 1:40 fall"))
+            pts, warn = _leg(model, c, (stack["x"], stack["y"]), z_start,
+                             level=lv)
+            # fall to the stack: 1:40 along the WHOLE route, not just
+            # the last point. Dropping only the end left the leg round
+            # the corner dead level, and a level waste pipe does not
+            # drain — every segment now falls at the stated gradient.
+            fell, cum = [pts[0]], 0.0
+            for prev, p in zip(pts, pts[1:]):
+                cum += _dist((prev[0], prev[1]), (p[0], p[1]))
+                fell.append((p[0], p[1], z_start - cum * WASTE_FALL))
+            runs.append(_run("drainage", svc, f"{size}mm PVCu", lv, fell,
+                             _note(f"{r['name']} at 1:40 fall", warn)))
 
     ey = model["extent_m"]["y"]
+    # the drop is computed from the routed length, because a fixed
+    # 0.3m drop labelled "1:40 min" went shallower than 1:40 as soon
+    # as the run passed 12m — the geometry must match its own label
+    drain_len = (ey[1] + 4.0) - stack["y"]
     runs.append(_run("drainage", "underground drain", f"{SOIL_MM}mm", None,
                      [(stack["x"], stack["y"], -0.6),
-                      (stack["x"], ey[1] + 4.0, -0.9)],
-                     "stack base to the boundary connection, 1:40 min"))
+                      (stack["x"], ey[1] + 4.0,
+                       -0.6 - drain_len * WASTE_FALL)],
+                     "stack base to the boundary connection, at 1:40"))
     return runs, stack
 
 
@@ -336,12 +451,14 @@ def design(model, heat=None, elec=None, vent=None):
     if stack:
         terminals.append({"type": "soil stack", **stack})
     for hr in (heat or {}).get("rooms", []):
-        if hr.get("radiator"):
-            terminals.append({"type": "radiator", "room": hr["name"],
-                              "level": hr["radiator"]["level"],
-                              "x": hr["radiator"]["x"],
-                              "y": hr["radiator"]["y"],
-                              "output_W": hr["radiator"]["output_W"]})
+        for key, tname in (("radiator", "radiator"),
+                           ("towel_rail", "towel rail")):
+            e = hr.get(key)
+            if e:
+                terminals.append({"type": tname, "room": hr["name"],
+                                  "level": e["level"], "x": e["x"],
+                                  "y": e["y"],
+                                  "output_W": e["output_W"]})
     for f in (vent or {}).get("extract_fans", []):
         terminals.append({"type": "extract fan", "room": f["name"],
                           "level": f["level"], "x": f["x"], "y": f["y"],

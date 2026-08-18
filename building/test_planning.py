@@ -517,6 +517,43 @@ finally:
 check("9c a listing at the site reaches screen() as on-site",
       any(f["dataset"] == "listed-building" and f["on_site"]
           for f in _screen["constraints"]))
+check("9c2 tree preservation zones are asked at the point too — a TPO "
+      "boundary can contain the site",
+      "tree-preservation-zone" in P.SITE_DATASETS + P.POINT_ALSO)
+
+# AND THE SAME END-TO-END PROOF FOR A TPO ON THE PLOT. Fed only through the
+# nearby search it was reported as "the neighbour's tree" when it stood on
+# the site. The stub answers only what it is asked, so this fails unless
+# the point query itself carries the dataset.
+
+
+def _fake_point_tpo(lat, lon, datasets=P.SITE_DATASETS, timeout=None):
+    if "tree-preservation-zone" not in datasets:
+        return []
+    return [{"dataset": "tree-preservation-zone", "name": "TPO 99",
+             "entity": 88}]
+
+
+P.fetch_at_point = _fake_point_tpo
+P.fetch_nearby = lambda *a, **k: []
+try:
+    _screen_tpo = P.screen(52.49, -1.99)
+finally:
+    P.fetch_at_point, P.fetch_nearby = _real_point, _real_near
+
+_tpo_site = [f for f in _screen_tpo["constraints"]
+             if f["dataset"] == "tree-preservation-zone"]
+check("9c3 a TPO containing the site arrives as on-site",
+      len(_tpo_site) == 1 and _tpo_site[0]["on_site"] is True,
+      str(_tpo_site))
+check("9c4 worded as the site's own duty, not the neighbour's tree",
+      _tpo_site and "neighbour's tree" not in _tpo_site[0]["means"],
+      _tpo_site and _tpo_site[0]["means"])
+check("9c5 counted in totals.on_site",
+      _screen_tpo["totals"]["on_site"] == 1, str(_screen_tpo["totals"]))
+check("9c6 and still critical",
+      _tpo_site and _tpo_site[0]["severity"] == P.CRITICAL,
+      _tpo_site and str(_tpo_site[0]["severity"]))
 check("9d and the answer is consent required, not permitted development",
       _screen["permitted_development"]["status"] == "consent_required",
       _screen["permitted_development"]["status"])

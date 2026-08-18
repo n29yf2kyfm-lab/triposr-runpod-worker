@@ -87,6 +87,35 @@ class TestPrintable(unittest.TestCase):
         _, at50 = printable.build(self.model, scale_denom=50)
         self.assertEqual(at50["thickened"], [])
 
+    def test_upper_only_walls_are_declared_when_thickened(self):
+        """A wall that only exists upstairs must still be reported.
+
+        The report used to be gated on level == 0, so the partition of a
+        set-back upper storey (base_level 1) was silently fattened: the
+        model changed and the 'not dimensionally true' note never
+        appeared. Ground floor here is one open room — its only thin
+        walls are the two bedrooms' shared partition, upstairs only.
+        """
+        rooms = [M.Room("Living room", 0.0, 0.0, 6.0, 5.0, kind="room",
+                        storeys=1),
+                 M.Room("Bedroom 1", 0.0, 0.0, 3.0, 5.0, kind="room",
+                        base_level=1, storeys=1),
+                 M.Room("Bedroom 2", 3.0, 0.0, 3.0, 5.0, kind="room",
+                        base_level=1, storeys=1)]
+        model = M.build(rooms, storeys=2, storey_height=2.7)
+        _, rep = printable.build(model, scale_denom=100)
+        # 100mm partition at 1:100 prints 1.0mm and is lifted to 1.6mm
+        # (four 0.4mm nozzle widths) — and it must SAY so.
+        self.assertTrue(rep["thickened"], "upper-only wall not reported")
+        for t in rep["thickened"]:
+            self.assertEqual(t["kind"], "partition")
+            self.assertAlmostEqual(t["as_designed_mm"], 1.0, places=2)
+            self.assertEqual(t["printed_mm"], 1.6)
+            self.assertEqual(
+                model["walls"][t["wall"]].get("base_level"), 1,
+                "the reported wall should be the upstairs partition")
+        self.assertTrue(any("thickened" in n for n in rep["notes"]))
+
     def test_thickening_rounds_to_whole_nozzle_widths(self):
         _, rep = printable.build(self.model, scale_denom=100)
         for t in rep["thickened"]:
