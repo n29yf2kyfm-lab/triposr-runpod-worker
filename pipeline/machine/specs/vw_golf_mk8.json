@@ -28,6 +28,14 @@
     "track_rear_m": {
       "value": 1.52,
       "source": "published VW Golf Mk8 dimensions"
+    },
+    "front_overhang_m": {
+      "value": 0.88,
+      "source": "published Mk8 proportions (L 4.284 - WB 2.619 = 1.665 total; front/rear split per published side profile)"
+    },
+    "rear_overhang_m": {
+      "value": 0.785,
+      "source": "published Mk8 proportions (see front_overhang_m)"
     }
   },
   "tyre": {
