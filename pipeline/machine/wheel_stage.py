@@ -138,7 +138,7 @@ def build_master(tyre):
 
 
 # ---------------------------------------------------------------- detection
-def detect_arches(v, report):
+def detect_arches(v, report, strict=True):
     """Find the four wheel openings GEOMETRICALLY: the wheel arch is where
     the side skin's lower edge (the sill line) jumps upward. No labels.
 
@@ -226,9 +226,12 @@ def detect_arches(v, report):
                           ("rear", lambda c: c["x"] <= midx)):
             pool = [c for c in cands if sel(c) and c["len"] <= maxbins]
             if not pool:
-                raise SystemExit(
-                    f"arch detection: no plausible {half} opening on side "
-                    f"{sname} (runs: {dbg}) — inspect the body input")
+                msg = (f"arch detection: no plausible {half} opening on side "
+                       f"{sname} (runs: {dbg})")
+                if strict:
+                    raise SystemExit(msg + " — inspect the body input")
+                print(msg + " — falling back to fused-wheel detection")
+                return None
             best = max(pool, key=lambda c: c["len"])
             b0, b1 = best["b"]
             # centre estimator = APEX POSITION, not extent midpoint: melt
@@ -263,6 +266,57 @@ def detect_arches(v, report):
     print(f"arches: front x {det['front_x']} (asym {det['front_asym_mm']}mm), "
           f"rear x {det['rear_x']} (asym {det['rear_asym_mm']}mm), "
           f"apex_y mean {det['arch_apex_y_mean']}")
+    return det
+
+
+def detect_fused_wheels(v, report):
+    """FUSED-WHEEL MODE: the wheels are moulded into the shell, so there
+    are no arch openings — but the tyres touch the ground. Cluster the
+    ground-contact band along x: two clusters = the axles. Track comes
+    from the contact patches' own z centroids. Everything derived here is
+    APPROXIMATE by definition and tagged so.
+    """
+    gy = float(v[:, 1].min())
+    H = float(np.percentile(v[:, 1], 99.8)) - gy
+    HW = float(np.percentile(np.abs(v[:, 2]), 99.7))
+    band = v[v[:, 1] < gy + 0.05 * H]
+    if len(band) < 100:
+        raise SystemExit("fused-wheel detection: no ground-contact band")
+    L0, L1 = float(v[:, 0].min()), float(v[:, 0].max())
+    nb = 80
+    edges = np.linspace(L0, L1, nb + 1)
+    hist, _ = np.histogram(band[:, 0], bins=edges)
+    on = hist > max(3, 0.02 * hist.max())
+    runs, cur = [], None
+    for b in range(nb):
+        if on[b]:
+            cur = [b, b] if cur is None else [cur[0], b]
+        else:
+            if cur:
+                runs.append(cur); cur = None
+    if cur:
+        runs.append(cur)
+    runs = sorted(runs, key=lambda r: -hist[r[0]:r[1] + 1].sum())[:2]
+    if len(runs) < 2:
+        raise SystemExit(f"fused-wheel detection: found {len(runs)} ground "
+                         "clusters (need 2 axles) — inspect the body input")
+    cs = []
+    for r in sorted(runs, key=lambda r: -(edges[r[0]])):
+        m = (band[:, 0] >= edges[r[0]]) & (band[:, 0] <= edges[r[1] + 1])
+        pts = band[m]
+        cs.append({"x": float(pts[:, 0].mean()),
+                   "track": float(np.abs(pts[:, 2]).mean() * 2),
+                   "n": int(m.sum())})
+    det = {"method": "FUSED-WHEEL ground-contact clustering (APPROXIMATE)",
+           "front_x": round(cs[0]["x"], 4), "rear_x": round(cs[1]["x"], 4),
+           "front_asym_mm": -1, "rear_asym_mm": -1,
+           "track_front_measured": round(cs[0]["track"], 4),
+           "track_rear_measured": round(cs[1]["track"], 4),
+           "arch_apex_y_mean": round(gy + 0.37 * H, 4),
+           "ground_y": round(gy, 5), "half_width": round(HW, 4)}
+    report["arch_detection"] = det
+    print(f"FUSED mode: axles x {det['front_x']}/{det['rear_x']}, "
+          f"contact tracks {det['track_front_measured']}/{det['track_rear_measured']}")
     return det
 
 
@@ -306,9 +360,26 @@ def main():
     if not skin_names:
         raise SystemExit("no geometry left after strip — nothing to detect on")
     skin_pts = np.vstack([out.geometry[n].vertices for n in skin_names])
+    # CANONICAL ORIENTATION: the machine works length-on-X, y-up. Raw
+    # generator meshes arrive with length on Z (measured: Hi3DGen ships
+    # z-long). Detect by horizontal extents and rotate the WHOLE scene
+    # into canon; the transform is recorded in the QC.
+    ex = skin_pts[:, 0].max() - skin_pts[:, 0].min()
+    ez = skin_pts[:, 2].max() - skin_pts[:, 2].min()
+    if ez > ex * 1.15:
+        ROT = trimesh.transformations.rotation_matrix(np.pi / 2, [0, 1, 0])
+        for gname in list(out.geometry):
+            g = out.geometry[gname]
+            g.apply_transform(ROT)
+        skin_pts = np.vstack([out.geometry[n].vertices for n in skin_names])
+        report["canonicalised"] = "rotated 90deg about Y (length was on Z)"
+        print("canonicalised: length was on Z, rotated to X")
     print(f"body skin for detection: {skin_names[:6]}"
           + (" ..." if len(skin_names) > 6 else "") + f" ({len(skin_pts)} verts)")
-    det = detect_arches(skin_pts, report)
+    det = detect_arches(skin_pts, report, strict=False)
+    fused_mode = det is None
+    if fused_mode:
+        det = detect_fused_wheels(skin_pts, report)
 
     exp = spec.expect()
     if exp.get("axle_x"):
@@ -327,21 +398,35 @@ def main():
 
     tyre = spec.tyre()
     if tyre is None:
-        apex = det["arch_apex_y_mean"] - det["ground_y"]
-        R = apex / 1.18
-        tyre = {"spec": f"measured (arch apex {apex:.3f}m)",
-                "source": "APPROXIMATE — fitted from arch openings (no spec supplied)",
+        if fused_mode:
+            gyH = det["ground_y"]
+            Hcar = float(np.percentile(skin_pts[:, 1], 99.8)) - gyH
+            R = 0.218 * Hcar
+            src = ("APPROXIMATE — 0.218 x body height heuristic "
+                   "(fused wheels: no openings to fit; ratio from real "
+                   "hatch proportions)")
+        else:
+            apex = det["arch_apex_y_mean"] - det["ground_y"]
+            R = apex / 1.18
+            src = "APPROXIMATE — fitted from arch openings (no spec supplied)"
+        tyre = {"spec": f"measured R={R:.3f}", "source": src,
                 "width_m": R * 0.71, "radius_m": R, "rim_r_m": R * 0.68,
                 "aspect": None}
-        print(f"no tyre spec: fitted APPROXIMATE R={R:.3f} from arches")
+        print(f"no tyre spec: {src.split(chr(10))[0]} R={R:.3f}")
     report["tyre"] = {k: (round(v, 5) if isinstance(v, float) else v)
                      for k, v in tyre.items()}
 
     tf, tf_src = spec.dim("track_front_m")
     tr, tr_src = spec.dim("track_rear_m")
+    if tf is None and fused_mode and det.get("track_front_measured"):
+        tf, tf_src = det["track_front_measured"], \
+            "APPROXIMATE — measured from fused ground-contact patches"
     if tf is None:
         tf, tf_src = det["half_width"] * 2 * 0.855, \
             "APPROXIMATE — 0.855 x body width (no spec)"
+    if tr is None and fused_mode and det.get("track_rear_measured"):
+        tr, tr_src = det["track_rear_measured"], \
+            "APPROXIMATE — measured from fused ground-contact patches"
     if tr is None:
         tr, tr_src = tf * 0.981, "APPROXIMATE — from front track (no spec)"
     wb_spec, wb_src = spec.dim("wheelbase_m")
@@ -398,6 +483,22 @@ def main():
                   f"(+{(area < 1e-10).sum()} degenerate, {bad.sum()} zero-normals fixed)")
             total_cut += int(kill.sum())
     report["fused_faces_cut"] = total_cut
+    if fused_mode:
+        # POST-CARVE SELF-CHECK — direct: the carved cylinders must be
+        # EMPTY of skin geometry. (An opening-based re-detection check
+        # failed on a body whose melt arch-lip fringe hangs low enough to
+        # keep the sill profile from "seeing" the new openings, while the
+        # render showed a perfectly good carve — wrong criterion, changed.)
+        sp2 = np.vstack([out.geometry[n].vertices for n in skin_names])
+        resid = {}
+        for tag, (xc, yc, zc) in centres.items():
+            r = np.linalg.norm(sp2[:, :2] - [xc, yc], axis=1)
+            resid[tag] = int(((np.abs(sp2[:, 2] - zc) < W / 2) & (r < R)).sum())
+        ok = all(v == 0 for v in resid.values())
+        report["carve_self_check"] = {"residual_skin_verts_in_carve": resid,
+                                      "result": "PASS" if ok else "FAIL"}
+        print(f"carve self-check (direct void): {resid} -> "
+              f"{'PASS' if ok else 'FAIL'}")
 
     MATS = {"TYRE_MASTER": ([12, 12, 14], 0.0, 0.90),
             "RIM_MASTER": ([120, 123, 128], 0.85, 0.35),
