@@ -69,25 +69,76 @@ PILLAR_AGREE_FRAC = 0.03  # L/R pillar x must agree within this frac of span
 
 # ---------------------------------------------------------------- load
 sc = trimesh.load(INP, force="scene")
+# BAKE the node hierarchy first. Catalogue sources carry node transforms
+# (scale/rotation hierarchies); editing raw geometry under a transformed
+# node computes T*R*v instead of R*T*v — measured on uid 1fc46cb3, whose
+# body rendered microscopic after canonicalisation while the identity-
+# transform glass rendered fine. Every node becomes an identity-transform
+# copy of its world-transformed geometry; instanced nodes get suffixed
+# geometry names so nothing collides.
+_baked = trimesh.Scene()
+_seen = {}
+for _node in sc.graph.nodes_geometry:
+    _T, _gn = sc.graph[_node]
+    _g = sc.geometry[_gn].copy()
+    if not np.allclose(_T, np.eye(4)):
+        _g.apply_transform(_T)
+    _name = _gn if _gn not in _seen else f"{_gn}__inst{_seen[_gn]}"
+    _seen[_gn] = _seen.get(_gn, 0) + 1
+    _baked.add_geometry(_g, geom_name=_name, node_name=_node)
+sc = _baked
 glass_label = spec.label("glass", "glass")
 body_label = spec.label("body", "carpaint")
 frit_label = spec.label("frit", "frit_band")
 
-if glass_label not in sc.geometry:
+# labels.glass may be a LIST: real sources ship glazing as several named
+# nodes (per-window meshes — measured on catalogue uid 1fc46cb3: boot,
+# both doors, three windscreen/quarter pieces, with LAMP glass in
+# separate lamp nodes that must not be swept in)
+glass_names = glass_label if isinstance(glass_label, list) else [glass_label]
+glass_names = [n for n in glass_names if n in sc.geometry]
+if not glass_names:
     names = sorted(sc.geometry.keys())
     QC["status"] = "REFUSED"
-    QC["reason"] = (f"no glass source geometry: node {glass_label!r} absent. "
-                    f"Scene nodes: {names[:40]}")
+    QC["reason"] = (f"no glass source geometry: {spec.label('glass', 'glass')!r} "
+                    f"absent. Scene nodes: {names[:40]}")
     json.dump(QC, open(OUT.replace(".glb", "_glass_qc.json"), "w"), indent=1)
     raise SystemExit(f"REFUSED: {QC['reason']}\n"
                      "A car with no labelled glass geometry needs glass "
                      "synthesis, which this stage does not fake.")
 
-g = sc.geometry[glass_label]
+# CANONICAL ORIENTATION: the stage classifies along x (length). Catalogue
+# cars ship length-on-Z (nose at -Z, y up — measured convention); rotate
+# the whole scene into canon like wheel_stage does, and record it.
+_allv = np.vstack([g_.vertices for g_ in sc.geometry.values()])
+_ex = _allv[:, 0].max() - _allv[:, 0].min()
+_ez = _allv[:, 2].max() - _allv[:, 2].min()
+if _ez > _ex * 1.15:
+    _ROT = trimesh.transformations.rotation_matrix(np.pi / 2, [0, 1, 0])
+    for _gn in list(sc.geometry):
+        sc.geometry[_gn].apply_transform(_ROT)
+    QC["canonicalised"] = "rotated 90deg about Y (length was on Z)"
+    print("canonicalised: length was on Z, rotated to X")
+
+g = trimesh.util.concatenate([sc.geometry[n] for n in glass_names]) \
+    if len(glass_names) > 1 else sc.geometry[glass_names[0]]
+QC["derived"]["glass_source_nodes"] = glass_names
+
+# SCALE: sources arrive at arbitrary units (uid 1fc46cb3 is a 3.7cm car —
+# authored 100x with node scale 0.01). The stage's absolute-physical
+# constants scale with measured body length relative to a nominal 4.3m
+# car, tagged APPROXIMATE off-nominal; spec glass_thickness_m overrides.
+_L_meas = float(_allv[:, 2].max() - _allv[:, 2].min()) if _ez > _ex * 1.15 \
+    else float(_ex)
+SCALE_F = _L_meas / 4.3
+QC["derived"]["body_length_measured_m"] = round(_L_meas, 4)
 THICK, tsrc = spec.dim("glass_thickness_m")
 if THICK is None:
-    THICK, tsrc = 0.004, "APPROXIMATE default (real glazing 3-5mm); no spec value"
+    THICK = 0.004 * SCALE_F
+    tsrc = (f"APPROXIMATE default 4mm scaled by measured length "
+            f"({_L_meas:.3f}m / nominal 4.3m); no spec value")
 QC["derived"]["glass_thickness_m"] = {"value": THICK, "source": tsrc}
+QUADRIC_RMS_MAX = QUADRIC_RMS_MAX * SCALE_F
 
 # ------------------------------------------------- classify components
 comps = g.split(only_watertight=False)
@@ -104,7 +155,7 @@ _minor_frac = float(_areas0[_areas0 < 0.01 * _tot].sum() / max(_tot, 1e-12))
 QC["derived"]["glass_components"] = {
     "total": len(comps), "major": len(_major),
     "minor_area_fraction": round(_minor_frac, 4)}
-if _minor_frac > 0.15 or len(_major) > 10:
+if _minor_frac > 0.15:
     QC["status"] = "REFUSED"
     QC["reason"] = (f"glass node is fragment soup: {len(comps)} components, "
                     f"{len(_major)} majors, minors carry {_minor_frac:.0%} of "
@@ -126,18 +177,72 @@ if len(comps) < 2:
 areas = np.array([c.area for c in comps])
 cents = np.array([c.triangles_center.mean(0) if len(c.faces) else c.vertices.mean(0)
                   for c in comps])
-cabin = (cents * areas[:, None]).sum(0) / areas.sum()
 gx0 = min(c.vertices[:, 0].min() for c in comps)
 gx1 = max(c.vertices[:, 0].max() for c in comps)
 gspan = gx1 - gx0
+
+
+def concat(ms):
+    return ms[0] if len(ms) == 1 else trimesh.util.concatenate(ms)
+
+
+# PANE GROUPING: real sources model a window as TWO coincident sheets —
+# inner + outer skin (measured on 1fc46cb3: windscreen 15.1%+14.9% at the
+# same centroid, every door pane a 5.7%+5.7% pair). Such a pane already
+# HAS thickness, so it must be one unit and must not be thickened again.
+# Group = centroid distance < 5% of the glass x-span AND extents within
+# 2x per axis (a big centre pane never groups with a nearby quarter).
+PRE = {}                      # id(mesh) -> source pane was double-skinned
+order = np.argsort(-areas)
+used = np.zeros(len(comps), bool)
+groups = []
+for i in order:
+    if used[i]:
+        continue
+    grp = [int(i)]
+    used[i] = True
+    for j in order:
+        if used[j]:
+            continue
+        if np.linalg.norm(cents[i] - cents[j]) < 0.05 * gspan:
+            ei = np.maximum(comps[i].extents, 1e-6)
+            ej = np.maximum(comps[j].extents, 1e-6)
+            if np.all(np.maximum(ei, ej) / np.minimum(ei, ej) < 2.0):
+                grp.append(int(j))
+                used[j] = True
+    groups.append(grp)
+QC["derived"]["pane_grouping"] = {
+    "groups": len(groups),
+    "double_skinned": sum(1 for g in groups if len(g) >= 2),
+    "note": "coincident inner/outer sheets grouped as one pane; grouped "
+            "panes keep their source thickness (thicken skipped)"}
+if len(groups) > 16:
+    QC["status"] = "REFUSED"
+    QC["reason"] = (f"{len(groups)} pane groups after grouping — a real car "
+                    "peaks around 10; this is not nameable glazing")
+    json.dump(QC, open(OUT.replace(".glb", "_glass_qc.json"), "w"), indent=1)
+    raise SystemExit(f"REFUSED: {QC['reason']}")
+
+units = []                    # (group_mesh, largest_sheet)
+for grp in groups:
+    gm = concat([comps[k] for k in grp])
+    if len(grp) >= 2:
+        PRE[id(gm)] = True
+    units.append((gm, comps[grp[0]]))
+
+u_area = np.array([u.area for u, _ in units])
+u_cent = np.array([u.triangles_center.mean(0) for u, _ in units])
+cabin = (u_cent * u_area[:, None]).sum(0) / u_area.sum()
 
 sides = {"L": [], "R": []}
 screens = {}
 roof_panes = []
 cls_log = []
-for c, ct, ar in zip(comps, cents, areas):
-    fn = c.face_normals
-    fa = c.area_faces
+for (gm, main), ct in zip(units, u_cent):
+    # normal from the LARGEST sheet only: a double-skinned pane's two
+    # sheets carry opposing normals whose area-weighted sum cancels
+    fn = main.face_normals
+    fa = main.area_faces
     n = (fn * fa[:, None]).sum(0)
     n /= max(np.linalg.norm(n), 1e-12)
     if n @ (ct - cabin) < 0:      # orient outward, away from the cabin
@@ -146,17 +251,17 @@ for c, ct, ar in zip(comps, cents, areas):
     xfrac = (ct[0] - gx0) / max(gspan, 1e-9)
     if lat:
         key = "L" if ct[2] < cabin[2] else "R"
-        sides[key].append(c)
-        cls_log.append([f"side_{key}", round(float(xfrac), 2), len(c.faces)])
+        sides[key].append(gm)
+        cls_log.append([f"side_{key}", round(float(xfrac), 2), len(gm.faces)])
     elif xfrac > 0.6:
-        screens.setdefault("windscreen", []).append(c)
-        cls_log.append(["windscreen", round(float(xfrac), 2), len(c.faces)])
+        screens.setdefault("windscreen", []).append(gm)
+        cls_log.append(["windscreen", round(float(xfrac), 2), len(gm.faces)])
     elif xfrac < 0.4:
-        screens.setdefault("rear_screen", []).append(c)
-        cls_log.append(["rear_screen", round(float(xfrac), 2), len(c.faces)])
+        screens.setdefault("rear_screen", []).append(gm)
+        cls_log.append(["rear_screen", round(float(xfrac), 2), len(gm.faces)])
     else:
-        roof_panes.append(c)
-        cls_log.append(["roof", round(float(xfrac), 2), len(c.faces)])
+        roof_panes.append(gm)
+        cls_log.append(["roof", round(float(xfrac), 2), len(gm.faces)])
 QC["derived"]["component_classification"] = {
     "note": "area-weighted outward normal laterality + x-fraction of the "
             "glass group's own span (screens at the ends, roof mid-cabin)",
@@ -166,10 +271,6 @@ if not sides["L"] or not sides["R"] or "windscreen" not in screens:
     QC["reason"] = f"classification incomplete: {cls_log}"
     json.dump(QC, open(OUT.replace(".glb", "_glass_qc.json"), "w"), indent=1)
     raise SystemExit(f"REFUSED: {QC['reason']}")
-
-
-def concat(ms):
-    return ms[0] if len(ms) == 1 else trimesh.util.concatenate(ms)
 
 
 # ------------------------------------- conditional incomplete-side rebuild
@@ -213,6 +314,8 @@ if ratio < ASYM_REBUILD:
     Vm[:, 2] += -0.002 if np.median(V[:, 2]) > cabin[2] else 0.002
     Rm.vertices = Vm
     Rm.faces = Rm.faces[:, ::-1]
+    if any(PRE.get(id(m)) for m in sides[lng]):
+        PRE[id(Rm)] = True
     sides[short] = [Rm]
     # self-test: extents must now mirror
     eS = xext(sides[short])
@@ -308,9 +411,15 @@ def split_x(mesh, x0):
 
 panes = {}
 if screens.get("windscreen"):
-    panes["Glass_Windscreen"] = concat(screens["windscreen"])
+    _w = concat(screens["windscreen"])
+    if any(PRE.get(id(m)) for m in screens["windscreen"]):
+        PRE[id(_w)] = True
+    panes["Glass_Windscreen"] = _w
 if screens.get("rear_screen"):
-    panes["Glass_Rear_Screen"] = concat(screens["rear_screen"])
+    _r = concat(screens["rear_screen"])
+    if any(PRE.get(id(m)) for m in screens["rear_screen"]):
+        PRE[id(_r)] = True
+    panes["Glass_Rear_Screen"] = _r
 for i, rp in enumerate(roof_panes):
     panes[f"Glass_Roof{'' if not i else '_'+str(i+1)}"] = rp
 
@@ -357,6 +466,8 @@ for key in ("L", "R"):
             f"body node {body_label!r} absent — side kept unsplit")
         continue
     fr, rr = split_x(ms[0], px_joint)
+    if PRE.get(id(ms[0])):
+        PRE[id(fr)] = PRE[id(rr)] = True
     tot = len(ms[0].faces)
     fF, fR = len(fr.faces) / tot, len(rr.faces) / tot
     if fF < SPLIT_MIN_FRAC or fR < SPLIT_MIN_FRAC:
@@ -447,6 +558,23 @@ def desnake(mesh, iters=14, label=""):
     pitch = float(np.median(np.concatenate(steps)))
     max_disp = 1.5 * pitch
     before = turning_angle(m, loops)
+    # desnake removes VOXEL QUANTISATION. The raw turning angle cannot
+    # gate this alone: mean |turn| scales with boundary vertex count (a
+    # clean 20-vert rectangle measures ~18 deg). Gate on the ratio to the
+    # pane's own expected clean turning, 360/n per loop: V41 staircases
+    # measure 25-40x that baseline; clean low-poly catalogue panes
+    # measure 1-2x (both measured 2026-08-18). Below 5x the pane is
+    # judged un-quantised and left alone, recorded.
+    nbv = int(sum(len(l) for l in loops))
+    baseline = 360.0 * len(loops) / max(nbv, 1)
+    ratio_q = before / max(baseline, 1e-9)
+    if ratio_q < 5.0:
+        return m, {"loops": len(loops), "boundary_verts": nbv,
+                   "pitch_mm_measured": round(pitch * 1000, 2),
+                   "turning_before_deg": round(float(before), 2),
+                   "quantisation_ratio": round(float(ratio_q), 1),
+                   "skipped": "turning under 5x the clean baseline — no "
+                              "quantisation to remove"}
     orig = m.vertices.copy()
     V = m.vertices.copy()
     for _ in range(iters):
@@ -498,7 +626,7 @@ def thicken(mesh, outward_hint):
 out = trimesh.Scene()
 for node in sc.graph.nodes_geometry:
     T, gn = sc.graph[node]
-    if gn == glass_label:
+    if gn in glass_names:
         continue
     geom = sc.geometry[gn]
     if gn == frit_label:
@@ -512,6 +640,7 @@ for node in sc.graph.nodes_geometry:
 table = {}
 footprints = {}
 for name, mesh in panes.items():
+    pre = bool(PRE.get(id(mesh)))
     mesh, st = desnake(mesh, label=name)
     if st:
         QC.setdefault("desnake", {})[name] = st
@@ -522,7 +651,12 @@ for name, mesh in panes.items():
     hint = mesh.vertices.mean(0) - cabin
     if np.linalg.norm(hint) < 1e-9:
         hint = np.array([0.0, 1.0, 0.0])
-    solid, nb = thicken(mesh, hint)
+    if pre:
+        # source pane is double-skinned — it already carries thickness;
+        # adding an inner shell would quadruple the surfaces
+        solid, nb = mesh, 0
+    else:
+        solid, nb = thicken(mesh, hint)
     mat = PBRMaterial(name=name, baseColorFactor=[20, 24, 28, 90],
                       metallicFactor=0.0, roughnessFactor=0.05,
                       alphaMode="BLEND", doubleSided=True)
@@ -533,7 +667,8 @@ for name, mesh in panes.items():
                    "boundary_edges_stitched": int(nb),
                    "bbox_min": [round(float(x), 3) for x in b[0]],
                    "bbox_max": [round(float(x), 3) for x in b[1]],
-                   "thickness_m": THICK}
+                   "thickness_m": ("source double-skinned (kept)" if pre
+                                   else THICK)}
     print(f"  {name}: {len(solid.faces)} faces, wall from {nb} boundary edges")
 
 out.export(OUT, include_normals=True)
@@ -543,6 +678,21 @@ missing = [m2.get("name") for m2 in j["meshes"]
            if any("NORMAL" not in p["attributes"] for p in m2["primitives"])]
 if missing:
     raise SystemExit(f"REFUSED: NORMAL missing on {missing[:5]}")
+# trimesh export DROPS TANGENT accessors (measured: 29 tangent-space
+# warnings introduced on a source carrying normal maps — same defect
+# family as the dropped-NORMALs lesson). Regenerate via gltf-transform
+# when any material needs a tangent space.
+if any("normalTexture" in (m2 or {}) for m2 in j.get("materials", [])):
+    import subprocess
+    r = subprocess.run(["gltf-transform", "tangents", OUT, OUT],
+                       capture_output=True, text=True)
+    QC["derived"]["tangents"] = ("regenerated (source carries normal maps; "
+                                 "trimesh drops TANGENT)" if r.returncode == 0
+                                 else f"REGENERATION FAILED: {r.stderr[-120:]}")
+    print(f"tangents: {'regenerated' if r.returncode == 0 else 'FAILED'}")
+    with open(OUT, "rb") as fh:
+        fh.seek(12); ln, _ = struct.unpack("<II", fh.read(8))
+        j = json.loads(fh.read(ln))
 names = [m2.get("name") for m2 in j["meshes"]]
 absent = [n for n in panes if n not in names]
 if absent:

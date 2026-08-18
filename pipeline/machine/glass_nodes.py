@@ -1,5 +1,20 @@
 #!/usr/bin/env python3
-"""glass_nodes.py — Stage 2 of the V41 repair brief: REAL glass nodes.
+"""glass_nodes.py — DEPRECATED: use glass_stage.py (car-agnostic Stage 2).
+
+This script is the V41 DEVELOPMENT RECORD — its constants are V41-tuned
+(absolute coordinates, unconditional right-side rebuild, fixed 18mm
+desnake cap). glass_stage.py supersedes it: spec-driven labels, geometric
+classification, conditional rebuild, measured desnake cap with a
+quantisation-ratio gate, double-skin pane grouping, hierarchy baking,
+scale-relative constants, and self-tests that refuse instead of shipping
+a wrong cut. Validated 2026-08-18 on four bodies: V41 Golf (reproduces
+this script's output), hybrid melt (honest refusal), a fused-glazing
+catalogue car (honest refusal), and a multi-node double-skinned classic
+Golf GTI (8 panes, validator clean). Kept for the record only.
+
+Original docstring follows.
+
+Stage 2 of the V41 repair brief: REAL glass nodes.
 
 From the locked baseline's single merged "glass" node this stage builds:
 

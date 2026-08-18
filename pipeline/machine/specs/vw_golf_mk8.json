@@ -36,6 +36,10 @@
     "rear_overhang_m": {
       "value": 0.785,
       "source": "published Mk8 proportions (see front_overhang_m)"
+    },
+    "glass_thickness_m": {
+      "value": 0.004,
+      "source": "typical laminated automotive glazing 3-5mm; pinned so the stage's length-scaled default never drifts this car"
     }
   },
   "tyre": {
