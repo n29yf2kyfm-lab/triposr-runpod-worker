@@ -492,6 +492,58 @@ except S.StructureError as e:
     check("9j a floor-first point order is still accepted", False, str(e))
 
 
+# ---- 10. an open doorway must not drain the floor --------------------------
+# A real scan of a room with an open doorway has points only above the door
+# head in the opening, so the traced front wall has a 0.9m gap. The border
+# flood used to pour through it and mark the whole room outside: 0.43 m2
+# against a true 20.0, delivered silently. Gaps up to a door's width are
+# bridged before flooding, and a fill that still collapses is delivered
+# WITH a warning, never bare.
+def make_doorway_room(width=W, depth=D, height=H, step=STEP,
+                      door_at=2.0, door_w=0.9, head=2.0):
+    """make_room, with an ordinary open doorway in the front wall."""
+    pts = []
+    nx, ny = int(width / step), int(depth / step)
+    for i in range(nx + 1):
+        for j in range(ny + 1):
+            x, y = i * step, j * step
+            pts.append((x, y, 0.0))
+            pts.append((x, y, height))
+    nz = int(height / step)
+    for k in range(1, nz):
+        z = k * step
+        for i in range(nx + 1):
+            x = i * step
+            if not (door_at <= x <= door_at + door_w and z < head):
+                pts.append((x, 0.0, z))            # front, gap at the door
+            pts.append((x, depth, z))
+        for j in range(ny + 1):
+            pts.append((0.0, j * step, z))
+            pts.append((width, j * step, z))
+    return pts
+
+
+_d = S.segment(make_doorway_room(), voxel_m=0.02)
+_ds = _d["storeys"][0]
+check("10a a room with an open doorway keeps its floor area",
+      abs(_ds["floor_area_m2"] - 20.0) <= 1.5, f"{_ds['floor_area_m2']}m2")
+check("10b and carries no collapse warning",
+      not _ds.get("floor_area_note"), str(_ds.get("floor_area_note")))
+
+# Walls that genuinely do not enclose anything: the number still comes back,
+# but with the warning riding on it — a wildly wrong area delivered with
+# confidence is the exact thing this module refuses to do.
+_a, _note = S._envelope_area([
+    {"start": (0.0, 0.0), "end": (5.0, 0.0)},
+    {"start": (0.0, 4.0), "end": (5.0, 4.0)}])
+check("10c an unclosed trace warns instead of asserting",
+      _note is not None and "NOT trustworthy" in _note, str(_note))
+check("10d a sealed room still returns no note",
+      S._envelope_area(S.segment(make_thick_room(thickness=0.0),
+                                 voxel_m=0.02)["storeys"][0]["walls"])[1]
+      is None)
+
+
 # ==========================================================================
 print()
 for f in FAILED:

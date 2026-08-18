@@ -304,8 +304,35 @@ import progress  # noqa: E402
 check("9g progress has a stage plan", len(progress.STAGE_PLANS["propose"]) > 0)
 check("9h every stage run() emits is in the plan",
       set(["locating", "footprint", "orientation", "clearances", "roof",
-           "designing", "exporting", "rendering", "photoreal"])
+           "designing", "checking", "exporting", "rendering", "photoreal"])
       == set(progress.STAGE_PLANS["propose"]))
+
+# --- 10. the gate ------------------------------------------------------------
+# VISION rule 3: buildable.check + regs run before anything is shown or
+# exported. This mode shipped IFC and photoreal renders with no gate at all
+# — the review's critical finding. The wiring is pinned on the source so it
+# cannot quietly disappear again, and the fold is exercised on a real model.
+import inspect  # noqa: E402
+_src = inspect.getsource(P.run)
+_gate = _src.find("_with_buildability")
+_fold = _src.find("_absorb_buildability")
+_export = _src.find("_export_artifacts")
+check("10a run() calls the buildability gate", _gate != -1)
+check("10b run() folds the verdict into the model", _fold != -1)
+check("10c the gate runs BEFORE the export", -1 < _gate < _export)
+check("10d the fold runs BEFORE the export", -1 < _fold < _export)
+
+import model3d  # noqa: E402
+_gm = model3d.build(
+    [model3d.Room("Living room", 0.0, 0.0, 4.0, 5.0, kind="room"),
+     model3d.Room("Hall", 4.0, 0.0, 2.0, 5.0, kind="circulation")],
+    storeys=2, storey_height=2.7,
+    roof={"pitch_deg": 30.0, "kind": "gabled", "overhang": 0.3,
+          "max_span_m": 12.0})
+_gx = model3d._with_buildability(_gm)
+model3d._absorb_buildability(_gm, _gx)
+check("10e the folded model carries a buildable verdict",
+      "buildable" in _gm and "buildable" in _gm["buildable"])
 
 
 

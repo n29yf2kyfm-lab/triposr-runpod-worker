@@ -174,6 +174,27 @@ try:
 except V.ServicesError as e:
     check("4h zones need the wall's dimensions", "width" in str(e))
 
+# Containment, not overlap. The accessory's zone is the 150mm strip
+# through it and the WHOLE run must sit inside: one socket used to pass an
+# entire mid-height run that merely crossed its vertical line, with metres
+# of drillable-depth cable in no permitted zone at all.
+crossing = {"u_m": 0.5, "v_m": 1.2, "depth_m": 0.02, "length_m": 3.0,
+            "axis": "horizontal"}
+check("4i a run CROSSING a socket's vertical line is not zoned by it",
+      not V.in_safe_zone(crossing, WALL, socket)["in_zone"])
+drop = {"u_m": 2.0, "v_m": 0.6, "depth_m": 0.02, "length_m": 1.0,
+        "axis": "vertical"}
+check("4j a vertical drop over the socket is",
+      V.in_safe_zone(drop, WALL, socket)["in_zone"])
+level = {"u_m": 0.5, "v_m": 0.45, "depth_m": 0.02, "length_m": 3.0,
+         "axis": "horizontal"}
+check("4k a horizontal run at the socket's own height is",
+      V.in_safe_zone(level, WALL, socket)["in_zone"])
+check("4l and the crossing run FAILS the full assessment",
+      V.check_run(dict(crossing, thickness_m=0.0040, width_m=0.0100,
+                       flat_share=1.0),
+                  WALL, socket)["compliance"]["verdict"] == "FAIL")
+
 
 # ---- 5. the finding that matters ------------------------------------------
 # A shallow cable outside every permitted zone. This is the output worth more

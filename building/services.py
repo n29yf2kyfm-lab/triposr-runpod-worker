@@ -587,15 +587,22 @@ def in_safe_zone(run, wall, accessories=None):
     if u1 <= SAFE_ZONE_M or width - u0 <= SAFE_ZONE_M:
         reasons.append("within 150mm of a wall angle")
 
+    # An accessory's zone is the 150mm STRIP through it, and the whole run
+    # must sit inside the strip — a vertical drop over a socket qualifies,
+    # a long shallow run that merely CROSSES the socket's line does not.
+    # The old test was overlap, not containment: one socket anywhere along
+    # a 3.7m run passed the entire run, with metres of drillable-depth
+    # cable in no permitted zone at all.
     for accessory in (accessories or []):
+        name = accessory.get("name", "an accessory")
         au = accessory.get("u_m")
-        if au is not None and u0 - SAFE_ZONE_M <= au <= u1 + SAFE_ZONE_M:
-            reasons.append(
-                f"vertically in line with {accessory.get('name', 'an accessory')}")
+        if (au is not None
+                and au - SAFE_ZONE_M <= u0 and u1 <= au + SAFE_ZONE_M):
+            reasons.append(f"vertically in line with {name}")
         av = accessory.get("v_m")
-        if av is not None and v0 - SAFE_ZONE_M <= av <= v1 + SAFE_ZONE_M:
-            reasons.append(
-                f"horizontally in line with {accessory.get('name', 'an accessory')}")
+        if (av is not None
+                and av - SAFE_ZONE_M <= v0 and v1 <= av + SAFE_ZONE_M):
+            reasons.append(f"horizontally in line with {name}")
 
     return {"in_zone": bool(reasons), "reasons": reasons}
 

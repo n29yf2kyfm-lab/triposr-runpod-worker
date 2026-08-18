@@ -98,12 +98,16 @@ def _external(model):
     storey the wall stands. Sanity anchor: a 3-bed detached lands in
     the 7,000-10,000 facing-brick band the trade quotes.
     """
+    storeys = int(model.get("storeys") or 1)
     net = openings_a = perim = 0.0
     n_open = 0
     for w in model["walls"]:
         if not w.get("external"):
             continue
-        n_st = int(w.get("storeys") or 1)
+        # storeys=None on a wall means "stands on every storey above its
+        # base" — model3d's convention. Reading it as 1 halved the brick
+        # order on every plain two-storey job.
+        n_st = len(_levels_of(w, storeys))
         gross = float(w["length_m"]) * float(w["height_m"]) * n_st
         wall_open = 0.0
         for o in w.get("openings", []):

@@ -1405,6 +1405,22 @@ def run(spec, prog, output_dir):
         "the existing house are placed by rule. Check on site before "
         "ordering or building.")
 
+    # THE GATE RUNS BEFORE THE EXPORT — the same rule model mode enforces.
+    # This mode was skipping it: an extension whose upper floor no
+    # compliant stair could reach shipped as "success" with photoreal
+    # renders and no NOT BUILDABLE warning. The check's refusals are
+    # folded into the model's own warnings so every export carries them,
+    # and heat, ventilation, electrics and the bill ride along the same
+    # way they do for a typed plan.
+    prog.stage("checking")
+    gate = model3d._with_buildability(model)
+    model3d._absorb_buildability(model, gate)
+    refusals = [w for w in model.get("warnings", [])
+                if w.startswith(("NOT BUILDABLE", "REGS FAIL"))]
+    if refusals:
+        prog.note(f"{len(refusals)} buildability/regs refusal(s) — "
+                  "delivered with warnings, not hidden")
+
     prog.stage("exporting")
     scan = spec.get("scan_id") or "proposal"
     artifacts = model3d._export_artifacts(model, output_dir, scan)

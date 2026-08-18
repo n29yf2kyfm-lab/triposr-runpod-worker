@@ -68,8 +68,8 @@ STAGE_PLANS = {
     "render":      ["aerial", "rendering", "delivering"],
     "scan":        ["fetching", "verifying", "orienting", "delivering"],
     "propose":     ["locating", "footprint", "orientation",
-                    "clearances", "roof", "designing", "exporting",
-                    "rendering", "photoreal"],
+                    "clearances", "roof", "designing", "checking",
+                    "exporting", "rendering", "photoreal"],
 }
 
 

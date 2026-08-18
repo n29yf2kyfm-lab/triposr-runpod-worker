@@ -57,6 +57,16 @@ WALL_VERTICAL_SHARE = 0.55
 # Below this, a wall run is a doorframe or a stub, not a wall.
 MIN_WALL_LENGTH_M = 0.4
 
+# An open doorway leaves a gap in the traced wall (a scan only sees points
+# above the door head). Gaps up to a generous door width between wall ends
+# are bridged before the floor-area flood, or the fill leaks through and
+# marks the whole room outside. 1.1m covers a 1076mm doorset.
+DOORWAY_BRIDGE_M = 1.1
+
+# If the flood-filled area is under this share of the wall extent, the trace
+# did not close and the number is delivered with a warning, not bare.
+ENVELOPE_COLLAPSE_SHARE = 0.3
+
 # Used only when a scan saw one face of a wall and its thickness is therefore
 # not observable. A UK internal stud partition is 100mm over the studs.
 DEFAULT_WALL_THICKNESS_M = 0.1
@@ -627,10 +637,15 @@ def segment(points, voxel_m=VOXEL_M):
             sum(w["length_m"] for w in storey["walls"]), 2)
         # Floor area from the wall envelope, not the point extent: the extent
         # includes anything the scanner saw through a doorway.
-        storey["floor_area_m2"] = _envelope_area(storey["walls"])
+        area, area_note = _envelope_area(storey["walls"])
+        storey["floor_area_m2"] = area
+        if area_note:
+            storey["floor_area_note"] = area_note
 
     warnings = []
     for i, storey in enumerate(storeys):
+        if storey.get("floor_area_note"):
+            warnings.append(f"Storey {i + 1}: {storey['floor_area_note']}")
         if not storey["plausible"]:
             warnings.append(
                 f"Storey {i + 1} is {storey['height_m']:.2f}m floor to "
@@ -714,51 +729,84 @@ def _envelope_area(walls):
     ring to run a shoelace over. Filling the cells the walls bound and
     counting them handles L, T, U and stepped plans without pretending the
     tracer produced something it did not.
+
+    DOORWAYS ARE GAPS. A real scan of a room with an open doorway leaves a
+    break in the traced wall (points only above the door head), and a flood
+    from the border pours through it, marking the whole room outside — a
+    5x4m room came back as 0.43 m2, silently. Gaps up to a door's width
+    between wall ends are bridged before flooding; the bridge is a barrier
+    only, its cells are doorway floor. If the fill still collapses against
+    the wall extent, the number is returned WITH a warning note instead of
+    alone, because a wildly wrong area delivered with confidence is the
+    exact thing this project refuses to do.
+
+    Returns (area_m2, note) — note is None when the fill is trustworthy.
     """
     if not walls:
-        return 0.0
+        return 0.0, None
 
     cell = WALL_CELL_M
     xs = [w["start"][0] for w in walls] + [w["end"][0] for w in walls]
     ys = [w["start"][1] for w in walls] + [w["end"][1] for w in walls]
     x0, x1, y0, y1 = min(xs), max(xs), min(ys), max(ys)
     if x1 - x0 <= 0 or y1 - y0 <= 0:
-        return 0.0
+        return 0.0, None
 
     nx = int(math.ceil((x1 - x0) / cell)) + 1
     ny = int(math.ceil((y1 - y0) / cell)) + 1
     if nx * ny > 4_000_000:          # a 100m x 100m plan at 50mm; beyond that
-        return round((x1 - x0) * (y1 - y0), 2)   # the grid is not worth it
+        return round((x1 - x0) * (y1 - y0), 2), \
+            "plan too large for the fill grid — area is the wall extent"
 
     wall = [[False] * ny for _ in range(nx)]
-    for w in walls:
-        (ax, ay), (bx, by) = w["start"], w["end"]
+
+    def _stamp(grid, ax, ay, bx, by):
         steps = int(math.ceil(max(abs(bx - ax), abs(by - ay)) / cell)) + 1
         for s in range(steps + 1):
             t = s / steps
             i = int(round((ax + (bx - ax) * t - x0) / cell))
             j = int(round((ay + (by - ay) * t - y0) / cell))
             if 0 <= i < nx and 0 <= j < ny:
-                wall[i][j] = True
+                grid[i][j] = True
+
+    for w in walls:
+        (ax, ay), (bx, by) = w["start"], w["end"]
+        _stamp(wall, ax, ay, bx, by)
+
+    # Bridge door-sized gaps between wall ends so the flood cannot leak
+    # through an open doorway. Bridges block the flood but are NOT wall:
+    # the floor runs through a doorway.
+    bridge = [[False] * ny for _ in range(nx)]
+    ends = [w["start"] for w in walls] + [w["end"] for w in walls]
+    for a in range(len(ends)):
+        for b in range(a + 1, len(ends)):
+            gap = math.dist(ends[a], ends[b])
+            if cell < gap <= DOORWAY_BRIDGE_M:
+                _stamp(bridge, ends[a][0], ends[a][1],
+                       ends[b][0], ends[b][1])
 
     # Flood from the border. What the flood cannot reach is inside.
     outside = [[False] * ny for _ in range(nx)]
     stack = []
+
+    def _barrier(i, j):
+        return wall[i][j] or bridge[i][j]
+
     for i in range(nx):
         for j in (0, ny - 1):
-            if not wall[i][j] and not outside[i][j]:
+            if not _barrier(i, j) and not outside[i][j]:
                 outside[i][j] = True
                 stack.append((i, j))
     for j in range(ny):
         for i in (0, nx - 1):
-            if not wall[i][j] and not outside[i][j]:
+            if not _barrier(i, j) and not outside[i][j]:
                 outside[i][j] = True
                 stack.append((i, j))
     while stack:
         i, j = stack.pop()
         for di, dj in ((1, 0), (-1, 0), (0, 1), (0, -1)):
             a, b = i + di, j + dj
-            if 0 <= a < nx and 0 <= b < ny and not wall[a][b] \
+            if 0 <= a < nx and 0 <= b < ny and not _barrier(a, b) \
                     and not outside[a][b]:
                 outside[a][b] = True
                 stack.append((a, b))
@@ -768,7 +816,18 @@ def _envelope_area(walls):
     # Wall cells are half floor, half wall; counting them whole overstates a
     # small room and dropping them understates every room.
     on_wall = sum(1 for i in range(nx) for j in range(ny) if wall[i][j])
-    return round((inside + on_wall * 0.5) * cell * cell, 2)
+    area = round((inside + on_wall * 0.5) * cell * cell, 2)
+
+    # The refusal-to-mislead check: if what the walls bound is a sliver of
+    # the extent they span, the trace did not close and the fill leaked.
+    extent = (x1 - x0) * (y1 - y0)
+    if extent > 1.0 and area < ENVELOPE_COLLAPSE_SHARE * extent:
+        return area, (
+            f"the traced walls do not enclose the plan: the fill bounds "
+            f"{area:.2f} m2 inside a {extent:.1f} m2 wall extent, so the "
+            f"trace has openings wider than a door and the area is NOT "
+            f"trustworthy — do not order from it")
+    return area, None
 
 
 # --- IFC -------------------------------------------------------------------
