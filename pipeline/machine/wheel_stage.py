@@ -505,6 +505,15 @@ def main():
                              f"{clr*1000:.0f}mm ({100*clr/Hsk:.1f}% of body "
                              "height > 15%) — ceiling judged melt web; "
                              "grounded to robust underside, carve opens the arch")
+            elif clr < 0:
+                # SUBMERGED underside (measured on the Yaris XP130 source:
+                # -9mm): tucking would hang the body below the tyres'
+                # contact plane, which is physically impossible — the
+                # tyres are the lowest point of a car. Ground instead.
+                CY = gy_rob + R
+                mode_note = (f"arch-tuck would SUBMERGE the underside "
+                             f"{-clr*1000:.0f}mm below the contact plane — "
+                             "grounded to robust underside instead")
             else:
                 CY = CY_tuck
                 mode_note = (f"tucked to arch ceiling (underside clearance "
