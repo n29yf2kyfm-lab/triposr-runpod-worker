@@ -26,14 +26,26 @@ from scipy.spatial import cKDTree
 
 GLB, LAB, OUT = sys.argv[1], sys.argv[2], sys.argv[3]
 BODY = 0
-PROUD = 0.030          # metres proud of the sampled surface
+PROUD = 0.048          # metres proud of the sampled surface
 CELL = 0.010           # lamp grid cell
 
 sc = trimesh.load(GLB, force="scene")
-m = trimesh.util.concatenate([g for g in sc.geometry.values()])
+# Labels file, or "-" to take the body surface from an ASSEMBLED car GLB's
+# `carpaint` node. The second mode exists because the intermediate meshes
+# are scratch files and the container is ephemeral (rollback 2026-08-17 ate
+# canon_flat9.glb); the shipped car is bucket-backed and always recoverable.
+if LAB == "-":
+    body_geo = [g for n, g in sc.geometry.items() if "carpaint" in n]
+    if not body_geo:
+        raise SystemExit("no 'carpaint' geometry in that GLB")
+    m = trimesh.util.concatenate(body_geo)
+    label = np.zeros(len(m.faces), np.int8)          # all body
+    print(f"body surface from carpaint node: {len(m.faces)} faces")
+else:
+    m = trimesh.util.concatenate([g for g in sc.geometry.values()])
+    label = np.load(LAB)
 cent = m.triangles_center
 fn = m.face_normals
-label = np.load(LAB)
 x, y, z = cent[:, 0], cent[:, 1], cent[:, 2]
 L0 = x.min(); H0 = y.min(); H = y.max() - H0
 xf = (x - L0) / (x.max() - L0)
@@ -48,7 +60,7 @@ tree = cKDTree(RS[:, 1:3])                 # lookup in (y, z)
 print(f"rear surface samples: {len(RS)}")
 
 # designed lamp outline, in (|z| fraction of half-width, y fraction of height)
-ZF_OUT, ZF_IN = 0.90, 0.40
+ZF_OUT, ZF_IN = 0.79, 0.40
 YF_OUT_LO, YF_OUT_HI = 0.475, 0.605        # outboard: deeper unit
 YF_IN_LO, YF_IN_HI = 0.512, 0.575          # inboard: tapered
 
@@ -71,8 +83,17 @@ for j, yy in enumerate(ys):
         inside[j, i] = outline(zz / HALF_W, (yy - H0) / H)
 print(f"lamp grid {ny}x{nz}, {int(inside.sum())} cells inside outline")
 
+# tail-plane clamp: a lamp cell whose sampled X sits more than MAX_WRAP
+# forward of the rearmost surface at its height has wrapped around the body
+# corner onto the QUARTER PANEL. Measured on v31: the left unit ran 45cm
+# deep against the right's 34cm and put a lens wedge on the flank (the
+# reviewer read that as a bad "red selection"; it is bad PLACEMENT).
+MAX_WRAP = 0.13
+
 lens_v, lens_f, off = [], [], 0
-for sw in (1, -1):
+for sw in (1,):                 # build ONE lamp, then MIRROR it below —
+                                # sampling each side independently is what
+                                # made the two units differ in the first place
     # sample the real surface X at each grid CORNER
     gy, gz = np.meshgrid(ys, zs, indexing="ij")
     q = np.stack([gy.ravel(), sw * gz.ravel()], 1)
@@ -97,7 +118,11 @@ for sw in (1, -1):
         cq, *_ = np.linalg.lstsq(Aq[sel_fit], xs_.ravel()[sel_fit], rcond=None)
         xs_ = (Aq @ cq).reshape(ny, nz)
 
-    ok = inside & ~far
+    tail_x = np.min(np.where(inside & ~far, xs_, np.inf), axis=1, keepdims=True)
+    wrapped = xs_ > (tail_x + MAX_WRAP)
+    ok = inside & ~far & ~wrapped
+    print(f"lamp: {int((inside & ~far).sum())} cells on surface, "
+          f"{int((inside & ~far & wrapped).sum())} rejected as quarter-panel wrap")
     if ok.sum() < 50:
         print(f"lamp {sw:+d}: only {int(ok.sum())} valid cells — skipped")
         continue
@@ -118,7 +143,14 @@ for sw in (1, -1):
     lens_v.append(verts); lens_f.append(tris + off); off += len(verts)
     ext = verts.max(0) - verts.min(0)
     print(f"lamp {sw:+d}: {int(ok.sum())} cells -> {len(verts)} verts / "
-          f"{len(tris)} tris, unit {ext[2]:.2f}w x {ext[1]:.2f}h")
+          f"{len(tris)} tris, unit {ext[2]:.2f}w x {ext[1]:.2f}h x {ext[0]:.2f} deep")
+
+    # MIRROR for the opposite side: symmetry BY CONSTRUCTION, never by two
+    # independent samplings happening to agree (they did not)
+    mv = verts.copy(); mv[:, 2] = -mv[:, 2]
+    mf = tris[:, ::-1]                      # flip winding so normals stay out
+    lens_v.append(mv); lens_f.append(mf + off); off += len(mv)
+    print(f"lamp {-sw:+d}: mirrored copy ({len(mv)} verts)")
 
 # ---- number plate + frame, sampled the same way
 pz_sel = (label == BODY) & (xf < 0.06) & (np.abs(z) < 0.30) & \
