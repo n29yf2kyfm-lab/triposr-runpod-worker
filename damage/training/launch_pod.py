@@ -51,10 +51,29 @@ DEFAULT_GPU = GPU_FALLBACKS[0]
 # AFTER the 14GB corpus download and the materialise step — an hour of billing
 # for nothing — so the unsuitable cards are excluded before the pod is created
 # rather than discovered at the first batch.
+#
+# ANCHORED ON A MEASUREMENT, because the first version was guesswork and was
+# wrong by a factor of four: it demanded 48GB for 728px at batch 4, which
+# actually used 8,449 MiB on the A6000 that ran it. Being wrong in the "safe"
+# direction is not free — it is what pushed that run to batch 4, and batch 4 at
+# 728px is roughly half the throughput of the batch 16 configuration that has
+# six measured epochs behind it. An over-cautious limit cost more than an OOM
+# would have.
+#
+#   measured: base model, 728px, batch 4  ->  8.3 GB
+MEASURED_GB, MEASURED_RES, MEASURED_BATCH = 8.3, 728, 4
+FIXED_GB = 3.0          # weights, optimiser state, CUDA context
+
+
 def min_vram_for(resolution, batch, model):
-    base = 24 if model == "base" else 32
-    scale = (resolution / 560.0) ** 2 * (batch / 8.0)
-    return int(math.ceil(base * max(1.0, scale) / 8.0) * 8)
+    per_unit = ((MEASURED_GB - FIXED_GB)
+                / (MEASURED_BATCH * (MEASURED_RES / 560.0) ** 2))
+    need = FIXED_GB + per_unit * batch * (resolution / 560.0) ** 2
+    if model != "base":
+        need *= 1.6
+    # 40% headroom for fragmentation and the evaluation pass, then round up to
+    # the card tiers that actually exist.
+    return int(math.ceil(need * 1.4 / 8.0) * 8)
 
 # Torch is upgraded by train.sh from the driver anyway, so the image only needs
 # to be a sane CUDA base with python.
