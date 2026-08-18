@@ -49,6 +49,20 @@ docs/IMAGE_TO_3D.md — pictures→3D tools, interop, printing, and the
 5. materials.py — bond/skin/covering catalogue driving viewer+pricing.
 6. NDSS + M4(2) rule pack; climate lookup for design temperatures.
 7. Georgian facade mode; street-level and golden-hour presets.
+8. Wire safety.py (scaffold/work-at-height plan from the measured roof)
+   and terrain.py (levels, cut/fill from LIDAR) into propose — the last
+   two built-but-unwired modules. Their natural seams: safety after the
+   roof measurement, terrain when the LIDAR raster is already in hand.
+9. facade.py (photo rectification) joins the scan pipeline when capture
+   delivers elevation photos — item 1 of docs/IMAGE_TO_3D.md.
+
+Wired in the review fix round (previously built and reachable from
+nothing): verify.py (propose verifies the building before modelling),
+visualmode.py (the Cycles pass obeys the elevation verdict), geo.py +
+siteplan.py (location-plan GeoJSON + GeoLibre project ship with every
+proposal), brief.py (plain-English briefs become the structured
+extension), printable.py (print_scale in a model/propose job returns
+the STL).
 
 A professional-grade claim is earned per module: coded from the primary
 source, tested against longhand arithmetic, and cross-checked against a

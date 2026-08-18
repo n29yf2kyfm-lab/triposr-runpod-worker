@@ -1762,6 +1762,25 @@ def _absorb_buildability(model, extra):
     model["warnings"] = list(extra["warnings"])
 
 
+def _maybe_print(model, spec, directory, scan, artifacts):
+    """The opt-in desk model. printable.py was built, tested and wired to
+    nothing; print_scale in the job is what reaches it now."""
+    if not spec.get("print_scale"):
+        return
+    try:
+        import printable
+        stl = os.path.join(directory,
+                           f"{scan}_scale_1_{spec['print_scale']}.stl")
+        _, prep = printable.write_stl(model, stl,
+                                      scale_denom=spec["print_scale"])
+        artifacts.append((stl, f"print/{os.path.basename(stl)}", None))
+        model["print"] = prep
+    except Exception as e:
+        import sys as _sys
+        print(f"printable skipped: {type(e).__name__}: {e}",
+              file=_sys.stderr)
+
+
 def run_mode(spec, prog, output_dir):
     """Model mode entry point.
 
@@ -1790,6 +1809,8 @@ def run_mode(spec, prog, output_dir):
         prog.stage("exporting")
         artifacts = _export_artifacts(
             model, directory, spec.get("scan_id") or "roomplan")
+        _maybe_print(model, spec, directory,
+                     spec.get("scan_id") or "roomplan", artifacts)
         return artifacts, extra
 
     if not entries:
@@ -1861,6 +1882,8 @@ def run_mode(spec, prog, output_dir):
     directory = paths.ensure(output_dir)
     artifacts = _export_artifacts(model, directory,
                                   spec.get("scan_id") or "model")
+    _maybe_print(model, spec, directory, spec.get("scan_id") or "model",
+                 artifacts)
     return artifacts, extra
 
 

@@ -334,6 +334,52 @@ model3d._absorb_buildability(_gm, _gx)
 check("10e the folded model carries a buildable verdict",
       "buildable" in _gm and "buildable" in _gm["buildable"])
 
+# --- 11. the modules that were built and wired to nothing --------------------
+# The review's wiring finding: verify.py (the correct house, VERIFIED),
+# visualmode.py (how the house may honestly be shown), geo/siteplan (the
+# site on the planet), brief.py (plain English in) and printable.py (the
+# desk model) all existed, all tested, all reachable from no production
+# path. The wiring is pinned on the source the same way the gate is.
+check("11a run() verifies the building before modelling it",
+      "cross_check" in _src and _src.find("cross_check") < _src.find(
+          "model3d.build"))
+check("11b run() asks visualmode how the house may be shown",
+      "choose_mode" in _src)
+check("11c the Cycles pass obeys the elevation verdict",
+      '"elevation"' in _src and "extra_angles" in _src)
+check("11d run() exports the location-plan GeoJSON",
+      "write_geojson" in _src)
+check("11e run() writes the GeoLibre project when the library is there",
+      "write_project" in _src)
+check("11f run() reads a plain-English brief when no structured one came",
+      "to_extension_spec" in _src)
+check("11g the desk model is opt-in from the job",
+      "print_scale" in _src and "write_stl" in _src)
+check("11h model mode prints too",
+      "_maybe_print" in
+      __import__("inspect").getsource(model3d.run_mode))
+
+# The inputs actually reach the code: validation must pass them through.
+_spec_b = validation.parse_job({"mode": "propose", "address": "B36 8AR",
+                                "brief": "single storey rear extension",
+                                "print_scale": 50})
+check("11i the brief survives validation",
+      _spec_b["brief"] == "single storey rear extension")
+check("11j print_scale survives validation", _spec_b["print_scale"] == 50)
+
+# And the brief parser produces the structured extension propose expects.
+import brief as _briefmod  # noqa: E402
+_ext = _briefmod.to_extension_spec(
+    _briefmod.parse("single storey rear extension with a bigger kitchen"))
+check("11k plain English becomes a rear extension",
+      _ext["type"] == "rear" and _ext["storeys"] == 1, str(_ext))
+
+# The visual gate itself: a measured party wall forbids the orbit.
+import visualmode as _vm  # noqa: E402
+_verdict = _vm.choose_mode(side_clearances={"east": 0.0, "west": 12.0})
+check("11l a party wall forces the front elevation",
+      _verdict["mode"] == "elevation", str(_verdict))
+
 
 
 # AN "OVER" EXTENSION IS A FLOOR OF THE HOUSE — it must take the measured

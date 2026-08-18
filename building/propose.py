@@ -920,6 +920,23 @@ def run(spec, prog, output_dir):
     lat, lon = location["lat"], location["lon"]
     prog.note(f"{lat:.6f}, {lon:.6f} — {location['grid_ref']}")
 
+    # VISION's first pipeline step: the CORRECT house, verified, before a
+    # single wall is modelled. verify.py had carried this check since it
+    # was written and was imported by nothing — every proposal modelled
+    # and priced whatever the geocoder said. Its verdict rides on the
+    # model; a conflict is a warning, not a crash, because the sources and
+    # distances are in the report for a human to adjudicate.
+    verification = None
+    try:
+        import verify as verifymod
+        verification = verifymod.cross_check(
+            address=spec.get("address"), postcode=spec.get("postcode"),
+            gps=spec.get("gps"))
+        prog.note(f"building verification: {verification['verdict']}")
+    except Exception as e:
+        print(f"verification skipped: {type(e).__name__}: {e}",
+              file=sys.stderr)
+
     prog.stage("footprint")
     polygon = roofmod.fetch_footprint(lat, lon, radius_m=40)
     if not polygon:
@@ -1056,6 +1073,22 @@ def run(spec, prog, output_dir):
               f"{clearances['east']}m, west {clearances['west']}m, rear "
               f"{clearances['north']}m")
 
+    # HOW THIS HOUSE MAY HONESTLY BE SHOWN. visualmode.py decides, from
+    # the measured flanks, whether an orbit is truthful or whether a
+    # connected house gets its front elevation only — an orbit of a
+    # mid-terrace shows a fake flank or the neighbour, the exact thing
+    # this project refuses to do. The gate existed, tested, wired to
+    # nothing; the Cycles pass below obeys it now.
+    vmode = None
+    try:
+        import visualmode
+        vmode = visualmode.choose_mode(side_clearances=clearances,
+                                       is_row=bool(bay))
+        prog.note(f"visual mode: {vmode['mode']} — {vmode['reason']}")
+    except Exception as e:
+        print(f"visual mode skipped: {type(e).__name__}: {e}",
+              file=sys.stderr)
+
     prog.stage("roof")
     roof_info = None
     if solar.available():
@@ -1143,7 +1176,23 @@ def run(spec, prog, output_dir):
                       file=sys.stderr)
 
     prog.stage("designing")
-    brief = spec.get("extension") or {}
+    # A brief typed in plain English becomes the structured extension when
+    # no structured one arrived — brief.py's whole job, which nothing in
+    # production called. A structured brief still wins: deliberate numbers
+    # beat parsed prose.
+    ext_from_words = None
+    if not spec.get("extension") and spec.get("brief"):
+        try:
+            import brief as briefmod
+            ext_from_words = briefmod.to_extension_spec(
+                briefmod.parse(spec["brief"]))
+            prog.note(f"brief read: {ext_from_words.get('storeys', 1)}-"
+                      f"storey {ext_from_words['type']} extension — from "
+                      f"the plain-English brief")
+        except Exception as e:
+            print(f"brief parse skipped: {type(e).__name__}: {e}",
+                  file=sys.stderr)
+    brief = spec.get("extension") or ext_from_words or {}
     # The existing house as the blocks actually in the outline, not as one
     # bounding box. Falls back to the box when the outline is already
     # rectangular or too ragged to decompose.
@@ -1334,6 +1383,22 @@ def run(spec, prog, output_dir):
         },
     }
     model["extension_fit"] = fit
+    if verification:
+        model["verification"] = verification
+        if verification.get("verdict") != "CONFIRMED":
+            model["warnings"].append(
+                f"BUILDING VERIFICATION {verification['verdict']}: the "
+                f"located point could not be confirmed as this dwelling "
+                f"across independent sources — check the address and the "
+                f"outline before relying on the proposal.")
+    if vmode:
+        model["visual_mode"] = vmode
+    if ext_from_words:
+        model["brief_source"] = {
+            "text": spec.get("brief"),
+            "read_as": ext_from_words,
+            "note": "extension brief parsed from plain English — depths "
+                    "and widths are defaults, not stated dimensions"}
     model["site"]["existing_plan_source"] = plan_source
     if bay:
         model["site"]["terrace_bay"] = bay
@@ -1425,6 +1490,59 @@ def run(spec, prog, output_dir):
     scan = spec.get("scan_id") or "proposal"
     artifacts = model3d._export_artifacts(model, output_dir, scan)
 
+    # THE SITE ON THE ACTUAL PLANET. This mode measured a real location,
+    # so the location-plan GeoJSON a planning application validates on
+    # ships with the job — geo.py and siteplan.py existed for exactly
+    # this and were reachable from nothing. The anchor's absolute
+    # accuracy is the geocode's and says so; the plan origin is recovered
+    # from the survey frame so the footprint sits where it was measured,
+    # not on the geocoder's centroid.
+    try:
+        import geo as geomod
+        de = origin_en[0] - location["easting"]
+        dn = origin_en[1] - location["northing"]
+        m_lat, m_lon = geomod._m_per_deg(lat)
+        anchor = geomod.Anchor(
+            lat + dn / m_lat, lon + de / m_lon,
+            bearing_deg=(model["site"]["front_bearing_deg"] + 180.0) % 360.0,
+            source="geocoded point + survey frame — absolute accuracy is "
+                   "the geocode's")
+        gj = os.path.join(output_dir, f"{scan}.site.geojson")
+        geomod.write_geojson(model, anchor, gj, red_line_margin_m=6.0)
+        artifacts.append((gj, f"site/{scan}.site.geojson", None))
+        try:
+            import siteplan as sitemod
+            pj = os.path.join(output_dir, f"{scan}.site.geolibre.json")
+            sitemod.write_project(
+                model, anchor, pj, name=spec.get("address") or scan,
+                pd={"detached": (model.get("visual_mode") or {})
+                    .get("mode") == "orbit"})
+            artifacts.append((pj, f"site/{scan}.site.geolibre.json", None))
+        except ImportError:
+            pass                     # geolibre is optional; GeoJSON is not
+        prog.note("site plan: GeoJSON exported")
+    except Exception as e:
+        print(f"site plan skipped: {type(e).__name__}: {e}", file=sys.stderr)
+
+    # The desk model. Opt-in (print_scale in the job): an STL is a
+    # physical deliverable, and printable.py reports every wall it had to
+    # thicken to survive the nozzle.
+    if spec.get("print_scale"):
+        try:
+            import printable
+            stl = os.path.join(output_dir,
+                               f"{scan}_scale_1_{spec['print_scale']}.stl")
+            _, prep = printable.write_stl(model, stl,
+                                          scale_denom=spec["print_scale"])
+            artifacts.append((stl, f"print/{os.path.basename(stl)}", None))
+            model["print"] = prep
+            prog.note(f"printable STL at 1:{spec['print_scale']}: "
+                      f"{prep['size_mm']['x']:.0f} x "
+                      f"{prep['size_mm']['y']:.0f} mm")
+        except Exception as e:
+            print(f"printable skipped: {type(e).__name__}: {e}",
+                  file=sys.stderr)
+
     # Ship pictures alongside the files. A GLB proves nothing to the person
     # holding the phone, and every geometry fault this mode has had was
     # obvious in a render and invisible in the quantities.
@@ -1450,20 +1568,31 @@ def run(spec, prog, output_dir):
             ok, why = blend.available(spec.get("render_python"))
             if ok:
                 prog.stage("rendering")
+                # visualmode's verdict bites HERE: a connected house gets
+                # its front elevation, because the corner orbit of a
+                # mid-terrace shows either a fake flank or the neighbour.
+                if (model.get("visual_mode") or {}).get("mode") \
+                        == "elevation":
+                    hero_yaw, hero_pitch = 0, 10
+                    extra_angles = ()
+                else:
+                    hero_yaw, hero_pitch = 35, 16
+                    extra_angles = ((215, 20), (0, 6))
                 # The hero angle keeps its silhouette mask — that mask is
                 # what lets the photoreal pass be bounded by the geometry
                 # instead of asked nicely to respect it.
                 hero_mask = os.path.join(output_dir, f"{scan}.mask.png")
                 blend.render(glb, os.path.join(
                     output_dir, f"{scan}.corner.cycles.png"),
-                    yaw_deg=35, pitch_deg=16,
+                    yaw_deg=hero_yaw, pitch_deg=hero_pitch,
                     python=spec.get("render_python"), keep_mask=hero_mask)
                 shots_hq = [(os.path.join(
                     output_dir, f"{scan}.corner.cycles.png"),
                     f"renders/{scan}.corner.cycles.png", None)]
-                shots_hq += blend.views(
-                    glb, output_dir, scan, angles=((215, 20), (0, 6)),
-                    python=spec.get("render_python"))
+                if extra_angles:
+                    shots_hq += blend.views(
+                        glb, output_dir, scan, angles=extra_angles,
+                        python=spec.get("render_python"))
                 artifacts += shots_hq
                 model["cycles_renders"] = [os.path.basename(p)
                                            for p, _, _ in shots_hq]

@@ -941,6 +941,18 @@ def parse_job(job_input):
     spec["render_python"] = (str(job_input.get("render_python") or "").strip()
                              or None)
 
+    # A plain-English brief ("single storey rear extension with a bigger
+    # kitchen"). brief.py turns it into the structured extension above when
+    # no structured one was given — whitelisted here or it is dead input,
+    # the same trap render_python fell into.
+    spec["brief"] = (str(job_input.get("brief") or "").strip() or None)
+
+    # A 3D-printable scale model of the result. Off unless asked for: an
+    # STL is a physical deliverable, not a by-product. 1:50 is the desk
+    # model; 1:10 to 1:500 covers everything a printer can hold.
+    spec["print_scale"] = _int(job_input.get("print_scale"), "print_scale",
+                               None, 10, 500)
+
     spec["extension_m2"] = _float(job_input.get("extension_m2"),
                                   "extension_m2", None, 1.0, 500.0)
     spec["build_cost"] = _float(job_input.get("build_cost"), "build_cost",
