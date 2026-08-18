@@ -1,0 +1,21 @@
+{
+  "identity": {
+    "make": "volkswagen",
+    "model": "golf",
+    "note": "Hunyuan3D-2 hybrid build (different generator + topology from the Pixal chain). NO dimensions supplied on purpose: this spec exists to test the measured-fallback path \u2014 every derived value must come out tagged APPROXIMATE."
+  },
+  "labels": {
+    "body": "body",
+    "wheel_strip_prefixes": [
+      "lib_tyre",
+      "lib_rim",
+      "lib_hub",
+      "lib_disc",
+      "lib_cal",
+      "WHEEL_",
+      "LINER_",
+      "arch_liner",
+      "wheel"
+    ]
+  }
+}

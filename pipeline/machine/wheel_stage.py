@@ -295,8 +295,19 @@ def main():
 
     skin_names = spec.label("body_skin_nodes", [body_label])
     skin_names = [n for n in skin_names if n in out.geometry]
+    if not skin_names:
+        # unknown mesh naming (first different-car run crashed here with a
+        # bare numpy error): fall back to EVERYTHING that survived the
+        # strip, and say so — the spec can name skin nodes once known
+        skin_names = list(out.geometry)
+        print(f"note: configured body nodes not found; using all "
+              f"{len(skin_names)} geometries as skin: {skin_names[:8]}"
+              + (" ..." if len(skin_names) > 8 else ""))
+    if not skin_names:
+        raise SystemExit("no geometry left after strip — nothing to detect on")
     skin_pts = np.vstack([out.geometry[n].vertices for n in skin_names])
-    print(f"body skin for detection: {skin_names} ({len(skin_pts)} verts)")
+    print(f"body skin for detection: {skin_names[:6]}"
+          + (" ..." if len(skin_names) > 6 else "") + f" ({len(skin_pts)} verts)")
     det = detect_arches(skin_pts, report)
 
     exp = spec.expect()
@@ -454,7 +465,11 @@ def main():
             "camber_deg": round(float(np.degrees(np.arctan2(abs(axis[1]),
                                                              abs(axis[2])))), 4),
             "contact_vs_ground_mm": round(1000 * float(tv[:, 1].min() - gy), 3)}
-    cpv = sc2.geometry[body_label].vertices
+    if body_label in sc2.geometry:
+        cpv = sc2.geometry[body_label].vertices
+    else:
+        cpv = np.vstack([sc2.geometry[n].vertices for n in sc2.geometry
+                         if not n.endswith("_MASTER") and n != "ARCH_LINER"])
     hits = {}
     for tag, (xc, yc, zc) in centres.items():
         r = np.linalg.norm(cpv[:, :2] - [xc, yc], axis=1)
