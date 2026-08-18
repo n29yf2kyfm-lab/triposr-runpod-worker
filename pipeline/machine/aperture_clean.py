@@ -46,7 +46,16 @@ RIM_KEEP = 0.020 # m: never delete within this band of the aperture rim — the
 OUTBOARD = 0.08  # m: a face further outboard than this is a FIXTURE, not a tooth
                  # (measured: wing mirror sits 194mm outboard of the glass plane,
                  #  melt teeth hang at or inboard of it)
-MAXPATCH = 400
+MAXPATCH = 400   # a 60-face guard SPARED the roof-rail strips that ARE the
+                 # fringe (they run 0.55-0.95m long), so it fixed less, not
+                 # more. Component shape does not separate debris from panel
+                 # here: the big selected clumps are wide flat rail strips
+                 # (dy/dx 0.04-0.48), not fins. Measured 2026-08-18.
+TAIL_KEEP = 0.20 # m from the footprint's rearmost point: the pane footprint
+                 # over-covers the C-pillar/quarter there, and deleting inside
+                 # it tore the quarter open (V46 rear-quarter regression).
+                 # The footprint is unreliable in that corner, so nothing is
+                 # removed from it — recorded as an untreated zone, not a fix.
 PANES = ("Glass_Side_FR", "Glass_Side_RR", "Glass_Side_FL", "Glass_Side_RL",
          "Glass_Windscreen", "Glass_Rear_Screen")
 
@@ -158,14 +167,17 @@ for pane, loop in foot.items():
     tpar = np.clip(((C[:, None, :] - seg0[None]) * d[None]).sum(2) / L2[None], 0, 1)
     proj = seg0[None] + tpar[..., None] * d[None]
     rim_dist = np.linalg.norm(C[:, None, :] - proj, axis=2).min(1)
-    sel = ins & ~outb & (rim_dist > RIM_KEEP)
+    tail = cent[:, 0] < (P[:, 0].min() + TAIL_KEEP)
+    sel = ins & ~outb & (rim_dist > RIM_KEEP) & ~tail
     kill |= sel
     report[pane] = {"inside_footprint": int(ins.sum()),
                     "excluded_as_outboard_fixture": int((ins & outb).sum()),
                     "excluded_as_rim_structure": int((ins & ~outb & (rim_dist <= RIM_KEEP)).sum()),
+                    "excluded_as_tail_corner": int((ins & tail).sum()),
                     "selected": int(sel.sum())}
-    print(f"  {pane}: inside {ins.sum()}, outboard spared {(ins & outb).sum()}, "
-          f"rim spared {(ins & ~outb & (rim_dist <= RIM_KEEP)).sum()}, selected {sel.sum()}")
+    print(f"  {pane}: inside {ins.sum()}, outboard {(ins & outb).sum()}, "
+          f"rim {(ins & ~outb & (rim_dist <= RIM_KEEP)).sum()}, "
+          f"tail-corner {(ins & tail).sum()}, selected {sel.sum()}")
 
 # patch-size guard: never delete a large connected region
 idx = np.where(kill)[0]
@@ -247,7 +259,7 @@ if missing:
     raise SystemExit(f"REFUSED: NORMAL missing on {missing[:4]}")
 report["_totals"] = {"carpaint_before": int(before), "carpaint_after": int(len(cp.faces)),
                      "removed": int(kill.sum()), "outboard_limit_m": OUTBOARD,
-                     "rim_keep_m": RIM_KEEP, "fill_faces_added": int(filled),
+                     "rim_keep_m": RIM_KEEP, "tail_keep_m": TAIL_KEEP, "fill_faces_added": int(filled),
                      "boundary_edges_before": bnd_before,
                      "boundary_edges_after_cut": bnd_mid,
                      "boundary_edges_after_fill": bnd_after,
