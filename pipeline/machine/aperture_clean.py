@@ -34,8 +34,18 @@ from scipy.sparse import coo_matrix
 from scipy.sparse.csgraph import connected_components
 
 INP, OUT = sys.argv[1], sys.argv[2]
-FOOT = sys.argv[3] if len(sys.argv) > 3 else INP.replace(".glb", "_nodes.json")
-ASPECT = 6.0     # secondary filter only — the FOOTPRINT does the work
+FOOT = INP.replace(".glb", "_nodes.json")
+TAG_ONLY = "--tag" in sys.argv          # write a magenta-tagged GLB, delete nothing
+for a in sys.argv[3:]:
+    if a.endswith(".json"):
+        FOOT = a
+RIM_KEEP = 0.020 # m: never delete within this band of the aperture rim — the
+                 # rim faces are STRUCTURAL. Deleting them tore an open notch
+                 # in the rear quarter (seen in the V45 locked render); the
+                 # teeth that actually matter hang deeper into the opening.
+OUTBOARD = 0.08  # m: a face further outboard than this is a FIXTURE, not a tooth
+                 # (measured: wing mirror sits 194mm outboard of the glass plane,
+                 #  melt teeth hang at or inboard of it)
 MAXPATCH = 400
 PANES = ("Glass_Side_FR", "Glass_Side_RR", "Glass_Side_FL", "Glass_Side_RL",
          "Glass_Windscreen", "Glass_Rear_Screen")
@@ -101,8 +111,8 @@ pill = (cent[:, 1] > 0.95) & (cent[:, 1] < 1.25) & (np.abs(cent[:, 2]) > 0.55) &
        (cent[:, 0] > -0.30) & (cent[:, 0] < -0.15)
 if pill.sum():
     print(f"pillar-band guard: {pill.sum()} faces, aspect median "
-          f"{np.median(aspect[pill]):.2f}, p95 {np.percentile(aspect[pill], 95):.2f}, "
-          f"share above cut {100 * (aspect[pill] > ASPECT).mean():.1f}%")
+          f"{np.median(aspect[pill]):.2f}, p95 {np.percentile(aspect[pill], 95):.2f} "
+          f"(NOTE: pillars are themselves slivers — this is why aspect is NOT a filter)")
 
 faces = cp.faces
 vi = cp.vertices
@@ -111,26 +121,51 @@ report = {}
 foot = json.load(open(FOOT)).get("_footprints", {})
 if not foot:
     raise SystemExit(f"no _footprints in {FOOT} — rebuild glass with the current glass_nodes.py")
+from scipy.spatial import cKDTree
 for pane, loop in foot.items():
+    # SIDE PANES ONLY. The windscreen/rear-screen footprints projected to
+    # (z,y) enclose the whole nose and tail of the car — measured 14,775 and
+    # 14,602 body faces "inside", which is the projection failing, not a
+    # defect. Those apertures need their own probe; this stage does not
+    # pretend to cover them.
+    if "Side" not in pane:
+        continue
     P = np.asarray(loop, float)
-    axis = [0, 1] if "Side" in pane else [2, 1]
+    side = True
+    axis = [0, 1] if side else [2, 1]
+    depth_axis = 2 if side else 0
     poly = P[:, axis]
-    v_in = inside_poly(vi[:, axis], poly)
-    allin = v_in[faces].all(1)
-    if "Side" in pane:
-        zside = np.sign(P[:, 2].mean())
-        allin &= (np.sign(cent[:, 2]) == zside) & (np.abs(cent[:, 2]) > 0.45)
-        # depth band: only faces near the pane surface can be teeth
-        zmid = float(np.median(P[:, 2]))
-        allin &= np.abs(cent[:, 2] - zmid) < 0.10
+    # centroid-inside, NOT all-three-inside: a tooth hangs from the rim, so
+    # its base vertex sits ON the boundary and an all-inside rule misses it
+    ins = inside_poly(cent[:, axis], poly)
+    if side:
+        zs = np.sign(P[:, 2].mean())
+        ins &= (np.sign(cent[:, depth_axis]) == zs) & (np.abs(cent[:, depth_axis]) > 0.45)
+    # LOCAL outboard limit: compare each face against the pane surface at its
+    # own (x,y), not a global median — the pane is curved
+    t = cKDTree(P[:, axis])
+    _, ni = t.query(cent[:, axis], k=1)
+    local = P[ni, depth_axis]
+    if side:
+        outb = (np.abs(cent[:, depth_axis]) - np.abs(local)) > OUTBOARD
     else:
-        xmid = float(np.median(P[:, 0]))
-        allin &= np.abs(cent[:, 0] - xmid) < 0.14
-    sel = allin & (aspect > ASPECT)
+        outb = (np.abs(cent[:, depth_axis]) - np.abs(local)) > OUTBOARD
+    # distance from each candidate centroid to the aperture rim polyline
+    seg0 = P[:, axis]; seg1 = np.roll(seg0, -1, axis=0)
+    d = seg1 - seg0
+    L2 = np.maximum((d * d).sum(1), 1e-12)
+    C = cent[:, axis]
+    tpar = np.clip(((C[:, None, :] - seg0[None]) * d[None]).sum(2) / L2[None], 0, 1)
+    proj = seg0[None] + tpar[..., None] * d[None]
+    rim_dist = np.linalg.norm(C[:, None, :] - proj, axis=2).min(1)
+    sel = ins & ~outb & (rim_dist > RIM_KEEP)
     kill |= sel
-    report[pane] = {"faces_inside_footprint": int(allin.sum()),
-                    "slivers_selected": int(sel.sum())}
-    print(f"  {pane}: {allin.sum()} faces inside TRUE footprint, {sel.sum()} selected")
+    report[pane] = {"inside_footprint": int(ins.sum()),
+                    "excluded_as_outboard_fixture": int((ins & outb).sum()),
+                    "excluded_as_rim_structure": int((ins & ~outb & (rim_dist <= RIM_KEEP)).sum()),
+                    "selected": int(sel.sum())}
+    print(f"  {pane}: inside {ins.sum()}, outboard spared {(ins & outb).sum()}, "
+          f"rim spared {(ins & ~outb & (rim_dist <= RIM_KEEP)).sum()}, selected {sel.sum()}")
 
 # patch-size guard: never delete a large connected region
 idx = np.where(kill)[0]
@@ -151,10 +186,50 @@ if len(idx):
         kill[idx[spared]] = False
         print(f"patch guard: spared {spared.sum()} faces in {len(big)} large patches")
 
+if TAG_ONLY:
+    from trimesh.visual.material import PBRMaterial
+    tag = cp.copy(); tag.update_faces(kill); tag.remove_unreferenced_vertices()
+    tag.visual = trimesh.visual.TextureVisuals(material=PBRMaterial(
+        name="TAG", baseColorFactor=[255, 0, 220, 255], metallicFactor=0.0,
+        roughnessFactor=0.4))
+    rest = cp.copy(); rest.update_faces(~kill); rest.remove_unreferenced_vertices()
+    o = trimesh.Scene()
+    for node in sc.graph.nodes_geometry:
+        T, gn = sc.graph[node]
+        g = rest if gn == "carpaint" else sc.geometry[gn]
+        if gn not in o.geometry:
+            o.add_geometry(g, geom_name=gn, node_name=node, transform=T)
+        else:
+            o.graph.update(frame_to=node, matrix=T, geometry=gn)
+    o.add_geometry(tag, geom_name="TAG", node_name="TAG")
+    o.export(OUT, include_normals=True)
+    print(f"TAG MODE: {kill.sum()} faces tagged magenta -> {OUT} (nothing deleted)")
+    raise SystemExit(0)
+
 before = len(cp.faces)
+eu0, cnt0 = np.unique(np.sort(cp.edges, axis=1), axis=0, return_counts=True)
+bnd_before = int((cnt0 == 1).sum())
 cp.update_faces(~kill)
 cp.remove_unreferenced_vertices()
-print(f"carpaint {before} -> {len(cp.faces)} faces ({kill.sum()} melt teeth removed)")
+eu1, cnt1 = np.unique(np.sort(cp.edges, axis=1), axis=0, return_counts=True)
+bnd_mid = int((cnt1 == 1).sum())
+# Cutting teeth opens boundary. Left unfilled it reads as a TEAR in the
+# body (seen at the rear quarter in the V45 locked render), which is a
+# regression, not a repair — so the holes are closed here.
+# GLOBAL fill_holes() IS A REGRESSION — DO NOT RE-ENABLE. Measured on
+# V47: the shell carries 217,726 PRE-EXISTING boundary edges (it is
+# fragment soup, not a closed surface), so a global fill added 17,902
+# faces and scattered dark garbage triangles across the door skin in the
+# locked right_ortho render. The cut itself REDUCES boundary (217,726 ->
+# 214,746) because teeth carry their own boundary with them; there is no
+# net hole to fill. Any future fill must be local to the cut and
+# validated on the same locked camera.
+filled = 0
+eu2, cnt2 = np.unique(np.sort(cp.edges, axis=1), axis=0, return_counts=True)
+bnd_after = int((cnt2 == 1).sum())
+print(f"carpaint {before} -> {len(cp.faces)} faces ({kill.sum()} teeth cut, "
+      f"{filled} fill faces added — global fill disabled, see docstring)")
+print(f"boundary edges: {bnd_before} before -> {bnd_mid} after cut -> {bnd_after} after fill")
 
 out = trimesh.Scene()
 for node in sc.graph.nodes_geometry:
@@ -171,7 +246,11 @@ missing = [m.get("name") for m in j["meshes"]
 if missing:
     raise SystemExit(f"REFUSED: NORMAL missing on {missing[:4]}")
 report["_totals"] = {"carpaint_before": int(before), "carpaint_after": int(len(cp.faces)),
-                     "removed": int(kill.sum()), "aspect_cut": ASPECT,
+                     "removed": int(kill.sum()), "outboard_limit_m": OUTBOARD,
+                     "rim_keep_m": RIM_KEEP, "fill_faces_added": int(filled),
+                     "boundary_edges_before": bnd_before,
+                     "boundary_edges_after_cut": bnd_mid,
+                     "boundary_edges_after_fill": bnd_after,
                      "max_patch": MAXPATCH}
 json.dump(report, open(OUT.replace(".glb", "_aperture.json"), "w"), indent=1)
 print(f"wrote {OUT} ({os.path.getsize(OUT)} bytes)")
