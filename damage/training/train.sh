@@ -521,6 +521,7 @@ echo "=== train ==="
 # a partially trained checkpoint is worth vastly more than nothing.
 timeout "${MAX_HOURS:-13}h" python -u train_detector.py --data prepared --out runs \
   --epochs "${EPOCHS:-15}" --batch-size "${BATCH:-8}" \
+  --grad-accum "${GRAD_ACCUM:-4}" \
   --num-workers "${NUM_WORKERS:-4}" \
   --model "${MODEL:-base}" --resolution "${RESOLUTION:-560}"
 TRAIN_RC=$?
@@ -558,7 +559,34 @@ for p in glob.glob("prepared/labels.txt"):
                     repo_id=repo, token=os.environ["HF_TOKEN"])
 print("checkpoints uploaded:", n)
 PY
-[ "$TRAIN_RC" = "0" ] || exit 40
+# EXPORT FROM THE CHECKPOINT WHEN TRAINING DID NOT EXIT CLEANLY.
+#
+# The 3-class run hit the wall-clock cap, so TRAIN_RC was 124, so this line
+# used to `exit 40` and the run produced no ONNX at all — six epochs of a paid
+# GPU delivered weights that the CPU worker could not load. Hitting the cap is
+# the EXPECTED way a long run ends, not a failure: the cap is what stops the
+# bill. Training's own in-process export dies with it (its DataLoader workers
+# take the signal too), so the export is re-run here as a fresh process
+# against the checkpoint that was just published.
+if [ "$TRAIN_RC" != "0" ]; then
+  BEST=""
+  for cand in runs/checkpoint_best_ema.pth runs/checkpoint_best_regular.pth \
+              runs/checkpoint.pth; do
+    [ -f "$cand" ] && BEST="$cand" && break
+  done
+  if [ -z "$BEST" ]; then
+    BEST=$(ls -1t runs/**/*.pth runs/*.pth 2>/dev/null | head -1)
+  fi
+  if [ -n "$BEST" ]; then
+    echo "=== training rc=$TRAIN_RC; exporting from $BEST ==="
+    python -u train_detector.py --data prepared --out runs --skip-train \
+      --weights "$BEST" --model "${MODEL:-base}" \
+      --resolution "${RESOLUTION:-560}" || echo "export failed (continuing)"
+  else
+    echo "no checkpoint to export from"
+    exit 40
+  fi
+fi
 
 echo "=== publish ==="
 python - <<'PY' || exit 50

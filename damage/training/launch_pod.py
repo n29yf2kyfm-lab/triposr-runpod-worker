@@ -23,6 +23,7 @@ the download is paid for.
 """
 import argparse
 import json
+import math
 import os
 import sys
 GQL = "https://api.runpod.io/graphql"
@@ -34,15 +35,26 @@ GQL = "https://api.runpod.io/graphql"
 # predict deployability: A6000, A40 and 4090 all reported stock and all
 # refused to deploy, while the Blackwell did. So this is a FALLBACK LIST tried
 # in order, not one choice. All carry >=24GB, enough for RF-DETR at batch 8.
-GPU_FALLBACKS = (
-    "NVIDIA RTX A6000",              # 48GB
-    "NVIDIA A40",                    # 48GB
-    "NVIDIA RTX PRO 4500 Blackwell",  # 32GB
-    "NVIDIA GeForce RTX 4090",       # 24GB
-    "NVIDIA GeForce RTX 3090",       # 24GB
-    "NVIDIA RTX A5000",              # 24GB
-)
+GPU_VRAM = {
+    "NVIDIA RTX A6000": 48,
+    "NVIDIA A40": 48,
+    "NVIDIA RTX PRO 4500 Blackwell": 32,
+    "NVIDIA GeForce RTX 4090": 24,
+    "NVIDIA GeForce RTX 3090": 24,
+    "NVIDIA RTX A5000": 24,
+}
+GPU_FALLBACKS = tuple(GPU_VRAM)
 DEFAULT_GPU = GPU_FALLBACKS[0]
+
+# Activations scale with the square of the input side, so the resolution and
+# the batch size together decide what VRAM is needed. A card that OOMs does so
+# AFTER the 14GB corpus download and the materialise step — an hour of billing
+# for nothing — so the unsuitable cards are excluded before the pod is created
+# rather than discovered at the first batch.
+def min_vram_for(resolution, batch, model):
+    base = 24 if model == "base" else 32
+    scale = (resolution / 560.0) ** 2 * (batch / 8.0)
+    return int(math.ceil(base * max(1.0, scale) / 8.0) * 8)
 
 # Torch is upgraded by train.sh from the driver anyway, so the image only needs
 # to be a sane CUDA base with python.
@@ -144,6 +156,16 @@ def launch_with_fallback(args, env):
     tried = []
     order = ([args.gpu] + [g for g in GPU_FALLBACKS if g != args.gpu]
              if args.fallback else [args.gpu])
+    need = min_vram_for(args.resolution, args.batch, args.model)
+    skipped = [g for g in order if GPU_VRAM.get(g, 999) < need]
+    order = [g for g in order if GPU_VRAM.get(g, 999) >= need]
+    if skipped:
+        print(f"  need >={need}GB at {args.resolution}px batch {args.batch}; "
+              f"excluding {', '.join(skipped)}")
+    if not order:
+        raise SystemExit(
+            f"no configured GPU has the {need}GB needed at resolution "
+            f"{args.resolution} batch {args.batch}; lower one of them")
     for gpu in order:
         try:
             pod = launch(args, env, gpu)
@@ -174,6 +196,12 @@ def main():
                     help="GB; holds corpus + materialised samples + wheels")
     ap.add_argument("--epochs", type=int, default=12)
     ap.add_argument("--batch", type=int, default=8)
+    ap.add_argument("--grad-accum", type=int, default=4,
+                    help="gradient accumulation steps. batch x grad-accum is "
+                         "the effective batch, so halving --batch and doubling "
+                         "this trains identically on half the VRAM — which is "
+                         "how a high resolution stays deployable on a 24GB "
+                         "card instead of waiting for a 48GB one")
     ap.add_argument("--model", default="base", choices=["base", "large"],
                     help="RF-DETR size. The GPU measured 40-46%% utilisation "
                          "and starved a third of the time, so it is data-bound "
@@ -235,6 +263,7 @@ def main():
         "RUN_TAG": a.tag,
         "EPOCHS": str(a.epochs),
         "BATCH": str(a.batch),
+        "GRAD_ACCUM": str(a.grad_accum),
     }
     if a.limit:
         env["LIMIT"] = str(a.limit)
@@ -249,6 +278,7 @@ def main():
 
     print(f"gpu          {a.gpu}   disk {a.disk}GB   cloud {a.cloud}")
     print(f"run          tag={a.tag} epochs={a.epochs} batch={a.batch}"
+          f"x{a.grad_accum} res={a.resolution} model={a.model}"
           + (f" limit={a.limit}" if a.limit else " (full corpus)"))
     print(f"corpus       {a.corpus_repo}")
     print(f"output       {a.hf_repo}")

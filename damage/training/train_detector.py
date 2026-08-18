@@ -32,7 +32,14 @@ def main():
                          "this size")
     ap.add_argument("--model", default="base", choices=["base", "large"])
     ap.add_argument("--skip-train", action="store_true",
-                    help="export/benchmark an existing checkpoint only")
+                    help="export/benchmark an existing checkpoint only; "
+                         "requires --weights")
+    ap.add_argument("--weights", default=None,
+                    help="checkpoint to load before exporting. Mandatory with "
+                         "--skip-train: without it the export runs on a "
+                         "freshly initialised model and produces a valid ONNX "
+                         "file containing random weights, which is worse than "
+                         "no file at all because it looks like a result")
     args = ap.parse_args()
 
     labels_path = os.path.join(args.data, "labels.txt")
@@ -41,9 +48,18 @@ def main():
     print(f"labels ({len(labels)}): {labels}")
     os.makedirs(args.out, exist_ok=True)
 
+    if args.skip_train and not args.weights:
+        raise SystemExit(
+            "--skip-train without --weights would export an untrained model. "
+            "Pass the checkpoint to export.")
+
     from rfdetr import RFDETRBase, RFDETRLarge
     Model = RFDETRBase if args.model == "base" else RFDETRLarge
-    model = Model(resolution=args.resolution)
+    if args.weights:
+        model = _load_weights(Model, args.resolution, args.weights,
+                              len(labels) - 1)
+    else:
+        model = Model(resolution=args.resolution)
 
     if not args.skip_train:
         t0 = time.time()
@@ -85,6 +101,87 @@ def main():
             "DAMAGE_DETECTOR_SIZE": args.resolution,
         }, f, indent=2)
     print(f"\nwrote {args.out}/deploy.json — these are the endpoint env vars.")
+
+
+def _load_weights(Model, resolution, ckpt, num_classes):
+    """Build the model with a trained checkpoint in it, and PROVE it loaded.
+
+    This exists because the export path used to construct a fresh model and
+    export that. It never raised — a randomly initialised RF-DETR exports
+    perfectly well — so the failure mode was an ONNX file of the right size
+    and shape that detected nothing, which is the worst kind of artefact to
+    ship because it looks like success.
+
+    rfdetr's constructor keyword for this has moved between releases and the
+    pod installs whatever is current, so several shapes are tried. What is NOT
+    negotiable is the verification: a parameter tensor is compared against the
+    checkpoint's own copy, and a mismatch raises rather than warns.
+    """
+    import torch
+    if not os.path.exists(ckpt):
+        raise SystemExit(f"--weights: no such file {ckpt}")
+    blob = torch.load(ckpt, map_location="cpu", weights_only=False)
+    state = blob.get("model", blob) if isinstance(blob, dict) else blob
+    if hasattr(state, "state_dict"):
+        state = state.state_dict()
+    print(f"checkpoint {ckpt}: {len(state)} tensors"
+          + (f", epoch {blob['epoch']}" if isinstance(blob, dict)
+             and "epoch" in blob else ""))
+
+    attempts = [
+        {"pretrain_weights": ckpt, "num_classes": num_classes},
+        {"pretrain_weights": ckpt},
+        {"pretrained_weights": ckpt},
+    ]
+    model = last = None
+    for kw in attempts:
+        try:
+            model = Model(resolution=resolution, **kw)
+            print(f"constructed with {sorted(kw)}")
+            break
+        except Exception as e:
+            last = f"{sorted(kw)}: {type(e).__name__} {e}"
+            print("  " + last)
+    if model is None:
+        raise SystemExit(f"could not load {ckpt} into the model; last: {last}")
+
+    # --- verify, do not assume ---
+    torch_module = None
+    for path in ("model.model", "model", "_model"):
+        obj = model
+        for part in path.split("."):
+            obj = getattr(obj, part, None)
+            if obj is None:
+                break
+        if obj is not None and hasattr(obj, "state_dict"):
+            torch_module = obj
+            break
+    if torch_module is None:
+        raise SystemExit("cannot reach the torch module to verify the load; "
+                         "refusing to export weights I cannot check")
+
+    live = torch_module.state_dict()
+    checked = matched = 0
+    for k, v in state.items():
+        if not hasattr(v, "shape"):
+            continue
+        lk = k[7:] if k.startswith("module.") else k
+        if lk in live and live[lk].shape == v.shape:
+            checked += 1
+            if torch.allclose(live[lk].float().cpu(), v.float().cpu(),
+                              atol=1e-5):
+                matched += 1
+            if checked >= 20:
+                break
+    if checked == 0:
+        raise SystemExit("no comparable tensors between checkpoint and model; "
+                         "the load cannot be verified")
+    print(f"weight check: {matched}/{checked} sampled tensors match the "
+          f"checkpoint")
+    if matched < checked:
+        raise SystemExit("the constructed model does not hold the checkpoint's "
+                         "weights — refusing to export an untrained model")
+    return model
 
 
 def _find_onnx(root):
