@@ -132,15 +132,37 @@ if not foot:
     raise SystemExit(f"no _footprints in {FOOT} — rebuild glass with the current glass_nodes.py")
 from scipy.spatial import cKDTree
 for pane, loop in foot.items():
-    # SIDE PANES ONLY. The windscreen/rear-screen footprints projected to
-    # (z,y) enclose the whole nose and tail of the car — measured 14,775 and
-    # 14,602 body faces "inside", which is the projection failing, not a
-    # defect. Those apertures need their own probe; this stage does not
-    # pretend to cover them.
-    if "Side" not in pane:
-        continue
     P = np.asarray(loop, float)
-    side = True
+    side = "Side" in pane
+    if not side:
+        # SCREENS: a world-axis projection of a raked screen encloses the
+        # whole nose/tail (measured 14,775 faces "inside" — projection
+        # failure, not defect). Work in the pane's OWN principal frame:
+        # PCA of the footprint gives (u,v) in the glass plane and n normal;
+        # candidates must sit within a thin slab along n, so the bonnet and
+        # tailgate below/behind the glass can never be selected.
+        ctr0 = P.mean(0)
+        _, _, Vt = np.linalg.svd(P - ctr0, full_matrices=False)
+        u_ax, v_ax, n_ax = Vt[0], Vt[1], Vt[2]
+        poly = np.c_[(P - ctr0) @ u_ax, (P - ctr0) @ v_ax]
+        rel = cent - ctr0
+        cu, cv, cn = rel @ u_ax, rel @ v_ax, rel @ n_ax
+        ins = inside_poly(np.c_[cu, cv], poly) & (np.abs(cn) < 0.10)
+        seg0 = poly; seg1 = np.roll(seg0, -1, axis=0)
+        d = seg1 - seg0
+        L2 = np.maximum((d * d).sum(1), 1e-12)
+        C = np.c_[cu, cv]
+        tpar = np.clip(((C[:, None, :] - seg0[None]) * d[None]).sum(2) / L2[None], 0, 1)
+        proj = seg0[None] + tpar[..., None] * d[None]
+        rim_dist = np.linalg.norm(C[:, None, :] - proj, axis=2).min(1)
+        sel = ins & (rim_dist > RIM_KEEP)
+        kill |= sel
+        report[pane] = {"inside_footprint": int(ins.sum()),
+                        "excluded_as_rim_structure": int((ins & (rim_dist <= RIM_KEEP)).sum()),
+                        "selected": int(sel.sum()), "frame": "PCA plane"}
+        print(f"  {pane}: slab-inside {ins.sum()}, rim spared "
+              f"{(ins & (rim_dist <= RIM_KEEP)).sum()}, selected {sel.sum()}")
+        continue
     axis = [0, 1] if side else [2, 1]
     depth_axis = 2 if side else 0
     poly = P[:, axis]
