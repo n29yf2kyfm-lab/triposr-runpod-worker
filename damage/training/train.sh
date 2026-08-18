@@ -141,7 +141,13 @@ MAIN_PID=$$
         quiet=$((quiet + 5))
         echo "WATCHDOG: pre-training, log static ${quiet}m" >> "$LOG"
         if [ "$quiet" -ge 30 ]; then
-          echo "WATCHDOG: setup wedged ${quiet}m — killing" >> "$LOG"
+          echo "WATCHDOG: setup wedged ${quiet}m" >> "$LOG"
+          for pid in $(pgrep -f "materialise_index.py|train.sh" 2>/dev/null); do
+            echo "--- py-spy dump pid $pid ---" >> "$LOG"
+            py-spy dump --pid "$pid" >> "$LOG" 2>&1 || true
+          done
+          free -g >> "$LOG" 2>&1
+          echo "WATCHDOG: killing after diagnostics" >> "$LOG"
           kill -TERM "$MAIN_PID" 2>/dev/null; sleep 30
           kill -KILL "$MAIN_PID" 2>/dev/null; exit 1
         fi
@@ -157,7 +163,20 @@ MAIN_PID=$$
     if [ "$util" -lt 5 ] 2>/dev/null; then
       idle=$((idle + 5))
       if [ "$idle" -ge "$STALL_MINUTES" ]; then
-        echo "WATCHDOG: GPU idle ${idle}m — run is wedged, killing" >> "$LOG"
+        echo "WATCHDOG: GPU idle ${idle}m — run is wedged" >> "$LOG"
+        # DUMP THE STACK BEFORE KILLING. Once the process is dead the reason is
+        # gone, and the log then records only that something stopped — which is
+        # exactly the useless state three earlier hangs left behind.
+        for pid in $(pgrep -f "train_detector.py|materialise_index.py" 2>/dev/null); do
+          echo "--- py-spy dump pid $pid ---" >> "$LOG"
+          py-spy dump --pid "$pid" >> "$LOG" 2>&1 || \
+            echo "(py-spy failed on $pid)" >> "$LOG"
+        done
+        echo "--- python processes ---" >> "$LOG"
+        ps -eo pid,etime,rss,args --no-headers | grep -c python >> "$LOG" 2>&1
+        echo "--- memory ---" >> "$LOG"
+        free -g >> "$LOG" 2>&1
+        echo "WATCHDOG: killing after diagnostics" >> "$LOG"
         kill -TERM "$MAIN_PID" 2>/dev/null
         sleep 30
         kill -KILL "$MAIN_PID" 2>/dev/null
@@ -281,6 +300,13 @@ pip install -q huggingface_hub || exit 11
 # installed made the export look supported right up to the moment it raised
 # "Module onnx is not installed!".
 pip install -q onnx onnxruntime || exit 12
+# py-spy prints the stack of a RUNNING process without stopping it. Three hangs
+# in this project cost 87 minutes, 55 minutes and 2.5 hours respectively, and
+# every one of them would have been named in seconds by a stack dump: the first
+# was stuck importing PIL/_imaging.so, the second in a Pool initializer, the
+# third in a DataLoader. A watchdog that says "it stalled" is worth far less
+# than one that says WHERE.
+pip install -q py-spy || echo "py-spy unavailable (diagnostics degraded)"
 
 # Torch MUST come first and be >= 2.5. The base image ships 2.4.1, and current
 # transformers refuses to enable its PyTorch integration below 2.5 — it prints
