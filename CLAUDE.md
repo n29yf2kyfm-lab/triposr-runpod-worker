@@ -2011,6 +2011,47 @@ mesh line the v10 review itself drew), windscreen stencil shortfall (right
 side, aperture-driven stencils are the identified fix), panel waves, trim
 identity. Machine: 15 stages, all committed through 5337f54.
 
+## Hi3DGen TESTED on a real car (2026-08-18, Yaris XP130 from two Wikimedia photos)
+
+The record's "sharper geometry by design" prediction is CONFIRMED — and so is a
+new blocker no amount of post-processing fixes.
+
+**What it produced (front-3/4 photo, single view, ~90s on a 4090, ~$0.02/gen):**
+the FIRST generated mesh in this project with real SHUT LINES, crisp multi-spoke
+wheels, door handles and a readable mirror. Normal-bridging genuinely clears the
+melt ceiling that TRELLIS.2 / PartCrafter / Hunyuan3D-2 all hit. Renders in
+scratchpad yaris_gen/hfy/.
+
+**The new blocker, measured not eyeballed: PERSPECTIVE BAKE.** Hi3DGen is
+single-image; the photo's perspective enters the geometry. Half-width by x-slice
+on the front-photo mesh: front 0.878, mid 0.858, rear 0.653 — the far end of the
+car generated ~25% NARROWER. Height also came out 54% tall (2.33m at true length
+vs 1.51m published). A y/z affine fixes height; NOTHING linear fixes the taper,
+and the far-end wheels are too shallow for contact clustering (fused-wheel
+detection finds 1 cluster). Each single-view run makes a car that is only right
+at its photographed end.
+
+**Consequences:** (1) the pair of meshes (front + rear run) are each half-good —
+fusing halves is research, not pipeline; (2) the fix is TRUE MULTI-VIEW
+conditioning, which Hi3DGen does not have — the commercial tier does
+(Hunyuan 3.1 Pro multiview via fal.ai, ~$0.68/car, needs an owner-created key);
+(3) a cheaper partial mitigation worth ONE run: long-lens near-orthographic side
+photos bake less perspective.
+
+**Deployment traps paid for tonight (all fixed in the bucket hi3dgen_run/ scripts):**
+xtrace in a bootstrap ECHOES AUTH HEADERS into the public log (SB_KEY leaked ->
+logs deleted, ROTATE THE KEY); Supabase public-URL CDN caches served STALE boot
+scripts and code tarballs (fetch via the authed endpoint, never public, for
+anything a pod executes); markers must be RUN-ID-NAMESPACED or a previous run's
+heartbeat masquerades as progress (misread once); a curl speed gate must use -L
+and a >=10MB range or HF's redirect measures 0.0 and fails every host; a
+10x-slow host loses the whole hour (speed-gate first 20s, fail fast); diffusers
+must be pinned to the model's era (latest diffusers registers flash-attn-3
+custom ops that torch 2.4 cannot schema-parse); yoso weights need
+variant="fp16" and the snapshot dir passed as yoso_version; hubconf's dinov2
+try/except hides a NameError and re-downloads 1.2GB from GitHub at EVERY
+pipeline load. Full run on a good host: under 3 minutes end to end.
+
 ## Alam 3D / TRELLIS.2: measured ceiling on automotive surfacing (2026-08-09)
 
 Tested end to end on a 2011 Yaris XP90 from two Toyota press photos. The machine WORKS —
