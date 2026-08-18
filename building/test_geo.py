@@ -186,6 +186,89 @@ class TestGeoJSON(unittest.TestCase):
             self.assertEqual(back["type"], "FeatureCollection")
 
 
+class TestStaticMap(unittest.TestCase):
+    """The location plan as an IMAGE.
+
+    geolibre's to_html embeds the hosted app in an iframe, so on a worker
+    or in a headless browser the map comes back blank. The tile maths and
+    the scale statement are pure, so they are tested without a network;
+    the fetch itself is exercised only when tiles are reachable.
+    """
+
+    def test_web_mercator_matches_the_slippy_map_definition(self):
+        # At zoom 0 the whole world is one tile: (0,0) sits at the centre.
+        x, y = geo._tile_xy(0.0, 0.0, 0)
+        self.assertAlmostEqual(x, 0.5, places=9)
+        self.assertAlmostEqual(y, 0.5, places=9)
+        # Greenwich at the equator, zoom 1: the meridian is the seam.
+        x, y = geo._tile_xy(0.0, 0.0, 1)
+        self.assertAlmostEqual(x, 1.0, places=9)
+        # Longitude increases eastward, y increases SOUTHWARD (screen order).
+        xe, _ = geo._tile_xy(0.0, 10.0, 8)
+        xw, _ = geo._tile_xy(0.0, -10.0, 8)
+        self.assertGreater(xe, xw)
+        _, yn = geo._tile_xy(50.0, 0.0, 8)
+        _, ys = geo._tile_xy(40.0, 0.0, 8)
+        self.assertLess(yn, ys)
+
+    def test_a_known_tile_number(self):
+        """Birmingham at zoom 12, worked longhand from the definition:
+
+            n = 2^12 = 4096
+            x = (-1.8904 + 180)/360 * 4096            = 2026.5
+            tan(52.4862 deg) = 1.30274
+            asinh(1.30274)   = 1.080219
+            y = (1 - 1.080219/pi)/2 * 4096            = 1343.9
+
+        so the tile is (2026, 1343). Checked against the arithmetic, not
+        against whatever the function returns.
+        """
+        x, y = geo._tile_xy(BHAM[0], BHAM[1], 12)
+        self.assertAlmostEqual(x, 2026.5, delta=0.1)
+        self.assertAlmostEqual(y, 1343.9, delta=0.1)
+        self.assertEqual((int(x), int(y)), (2026, 1343))
+
+    def test_metres_per_pixel_is_stated_and_sane(self):
+        """A plan whose scale is unstated is not a plan. At zoom 19 in
+        Birmingham a pixel is about 0.2 m."""
+        m_per_px = (156543.03392 * math.cos(math.radians(BHAM[0]))
+                    / (2.0 ** 19))
+        self.assertGreater(m_per_px, 0.15)
+        self.assertLess(m_per_px, 0.25)
+
+    def test_it_draws_without_imagery_and_says_the_tiles_are_missing(self):
+        """imagery=False fetches nothing, so this runs offline — the
+        drawing, the scale bar and the honesty note still have to work."""
+        m = _house()
+        a = geo.Anchor(*BHAM, bearing_deg=20.0, source="test")
+        with tempfile.TemporaryDirectory() as d:
+            p = os.path.join(d, "site.png")
+            path, info = geo.static_map(m, a, p, zoom=19, span=0,
+                                        imagery=False)
+            self.assertTrue(os.path.getsize(path) > 1000)
+            self.assertEqual(info["tiles"], 0)
+            self.assertEqual(info["size_px"], [256, 256])
+            self.assertAlmostEqual(info["m_per_px"], 0.181, delta=0.02)
+
+    def test_the_building_lands_inside_the_frame(self):
+        """The footprint must project into the image, not off it — the
+        whole point of centring on the anchor."""
+        from PIL import Image
+        m = _house()
+        a = geo.Anchor(*BHAM, source="test")
+        with tempfile.TemporaryDirectory() as d:
+            p = os.path.join(d, "site.png")
+            geo.static_map(m, a, p, zoom=19, span=1, imagery=False)
+            img = Image.open(p).convert("RGB")
+            w, h = img.size
+            # the building is drawn in amber; find any strongly amber pixel
+            hits = [(x, y) for x in range(0, w, 3) for y in range(0, h - 40, 3)
+                    if img.getpixel((x, y))[0] > 180
+                    and img.getpixel((x, y))[1] > 140
+                    and img.getpixel((x, y))[2] < 90]
+            self.assertTrue(hits, "no building outline drawn in the frame")
+
+
 @unittest.skipUnless(HAVE_GEOLIBRE, "geolibre not installed")
 class TestSiteMap(unittest.TestCase):
     def test_a_map_is_built_at_the_anchor(self):

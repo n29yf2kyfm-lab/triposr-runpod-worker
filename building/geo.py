@@ -281,6 +281,115 @@ def site_map(model, anchor, basemap="positron", zoom=19,
     return m
 
 
+# --- a map you can actually put in a document ------------------------------
+# site_map() hands back a LIVE geolibre widget, which is the right thing in
+# a notebook and useless everywhere else: geolibre.Map.to_html() writes an
+# <iframe> pointing at the hosted app (web.geolibre.app), so on a worker,
+# in CI, or in any headless browser sandbox the page renders EMPTY — the
+# app refuses to frame from file://, and the frame lands on an error page.
+# A location plan is a deliverable, not a widget, so the tiles are fetched
+# and composited here and the drawing is done on top of them. Same imagery
+# layer, same attribution, no hosted application in the path.
+TILE_PX = 256
+
+
+def _tile_xy(lat_deg, lon_deg, zoom):
+    """(lon, lat) -> fractional slippy-map tile coordinates (Web Mercator)."""
+    n = 2.0 ** zoom
+    x = (lon_deg + 180.0) / 360.0 * n
+    y = (1.0 - math.asinh(math.tan(math.radians(lat_deg))) / math.pi) / 2.0 * n
+    return x, y
+
+
+def static_map(model, anchor, path, zoom=19, span=1, red_line_margin_m=6.0,
+               rooms=False, imagery=True, timeout=40):
+    """Write a PNG location plan: aerial tiles with the building drawn on.
+
+    span is tiles either side of centre, so the image is
+    (2*span+1) * 256 px square. Returns (path, info) where info records the
+    zoom actually used, how many tiles arrived and the metres per pixel —
+    a plan whose scale is unstated is not a plan.
+
+    Missing tiles are left dark rather than faked, and the count is
+    reported: imagery coverage runs out at high zoom in places (Esri has
+    no level 20 over parts of Birmingham), and a map that quietly drew
+    nothing would be worse than one that says so.
+    """
+    try:
+        from PIL import Image, ImageDraw
+    except ImportError:                          # pragma: no cover - optional
+        raise RuntimeError("static_map needs Pillow (pip install pillow)")
+    import requests
+
+    cx, cy = _tile_xy(anchor.lat, anchor.lon, zoom)
+    x0, y0 = int(cx) - span, int(cy) - span
+    n = 2 * span + 1
+    img = Image.new("RGB", (n * TILE_PX, n * TILE_PX), (36, 36, 36))
+    got = 0
+    if imagery:
+        for i in range(n):
+            for j in range(n):
+                url = IMAGERY_XYZ.format(z=zoom, x=x0 + i, y=y0 + j)
+                try:
+                    r = requests.get(url, timeout=timeout)
+                    if r.status_code == 200 and r.content:
+                        import io
+                        img.paste(Image.open(io.BytesIO(r.content))
+                                  .convert("RGB"), (i * TILE_PX, j * TILE_PX))
+                        got += 1
+                except Exception:                # a missing tile is not fatal
+                    pass
+
+    def to_px(lon_, lat_):
+        px, py = _tile_xy(lat_, lon_, zoom)
+        return ((px - x0) * TILE_PX, (py - y0) * TILE_PX)
+
+    dr = ImageDraw.Draw(img, "RGBA")
+    data = geojson(model, anchor, red_line_margin_m=red_line_margin_m,
+                   rooms=rooms)
+    STYLE = {"red line": ((255, 40, 40, 255), 3),
+             "building": ((255, 214, 0, 255), 3),
+             "ridge":    ((255, 255, 255, 200), 2),
+             "room":     ((120, 210, 255, 180), 1)}
+    for f in data["features"]:
+        colour, width = STYLE.get(f["properties"]["layer"],
+                                  ((255, 255, 255, 200), 2))
+        g = f["geometry"]
+        if g["type"] == "Polygon":
+            pts = [to_px(p[0], p[1]) for p in g["coordinates"][0]]
+        else:
+            pts = [to_px(p[0], p[1]) for p in g["coordinates"]]
+        if len(pts) > 1:
+            dr.line(pts, fill=colour, width=width)
+
+    m_per_px = (156543.03392 * math.cos(math.radians(anchor.lat))
+                / (2.0 ** zoom))
+    # The caption carries the scale AND the anchor's provenance, so it is
+    # laid out in lines that fit the image: running it as one string ran
+    # the accuracy warning off the right edge, which is the one part of a
+    # location plan that must never be the bit that gets cut.
+    lines = [f"{model.get('name') or 'Proposed dwelling'}",
+             f"{m_per_px:.2f} m/px at zoom {zoom} — "
+             f"imagery: {IMAGERY_ATTR}",
+             f"position is only as good as the anchor: {anchor.source}"]
+    lh = 13
+    bar = lh * len(lines) + 9
+    dr.rectangle([0, img.size[1] - bar, img.size[0], img.size[1]],
+                 fill=(0, 0, 0, 200))
+    for i, line in enumerate(lines):
+        while len(line) * 6 > img.size[0] - 14 and len(line) > 12:
+            line = line[:-4] + "…"
+        dr.text((7, img.size[1] - bar + 5 + i * lh), line,
+                fill=(255, 255, 255, 255))
+    img.save(path)
+    return path, {"zoom": zoom, "tiles": got, "tiles_expected": n * n,
+                  "m_per_px": round(m_per_px, 3),
+                  "size_px": list(img.size),
+                  "note": ("imagery incomplete at this zoom — "
+                           "try a lower zoom" if imagery and got < n * n
+                           else "")}
+
+
 def describe(anchor, model=None):
     ring, traced = footprint_local(model) if model else ([], False)
     lines = [f"Anchored at {anchor.lat:.6f}, {anchor.lon:.6f} "
