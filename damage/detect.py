@@ -98,6 +98,48 @@ def severity_from_box(damage_type, area_frac, confidence=1.0):
     return int(max(1, min(10, min(ceiling, round(sev)))))
 
 
+# A measured severity tier, on the 1-10 scale the rest of the pipeline speaks.
+# Both ladders share this table; "medium" and "severe" mean the same thing on
+# either, which is why they map to the same number.
+TIER_SEVERITY = {"faint": 2, "light": 3, "minor": 3, "medium": 5,
+                 "major": 7, "deep": 7, "severe": 9}
+
+# Below this, the severity module's own confidence is too low to override the
+# extent-based estimate. A dent photographed in flat diffuse light lands here,
+# and its grade is a guess dressed as a measurement.
+GRADE_TRUST = 0.4
+
+
+def severity_from_grade(damage_type, area_frac, confidence, grade):
+    """Severity from a MEASURED depth or deformation, falling back to extent.
+
+    Extent alone gets insurance-grade scans backwards, which is the whole
+    reason severity_grade.py exists. A 30cm faint clearcoat scuff covers far more of
+    the frame than a 1cm scratch through to primer, so the area rule rates the
+    scuff — which polishes out — above the one that needs the panel resprayed.
+
+    So depth leads and extent modifies, 70/30. Extent still counts, because a
+    deep scratch across a whole door is worse than the same depth in one spot,
+    and because the tier ladder has only five rungs.
+
+    When the measurement does not trust itself, extent is used unchanged. A
+    number that is wrong is worse than a number that is coarse.
+    """
+    size_sev = severity_from_box(damage_type, area_frac, confidence)
+    if not grade or not grade.get("tier"):
+        return size_sev, None
+    if float(grade.get("confidence") or 0) < GRADE_TRUST:
+        return size_sev, "low-confidence measurement; severity from extent"
+    tier_sev = TIER_SEVERITY.get(grade["tier"])
+    if tier_sev is None:
+        return size_sev, None
+    blended = 0.7 * tier_sev + 0.3 * size_sev
+    ceiling = SEVERITY_CEILING.get(damage_type, 10)
+    floor = SEVERITY_FLOOR.get(damage_type, 2)
+    sev = int(max(1, min(10, min(ceiling, max(floor, round(blended))))))
+    return sev, None
+
+
 def _box_area_frac(box, image_size):
     """Fraction of the image covered by an (x1, y1, x2, y2) box."""
     x1, y1, x2, y2 = [float(v) for v in box]
@@ -162,7 +204,38 @@ def detections_to_findings(detections, image_size, image_index=0,
             continue
         area = _box_area_frac(box, image_size)
         cx, cy = _box_centre_frac(box, image_size)
-        sev = severity_from_box(dtype, area, score)
+        grade = d.get("grade")
+        sev, caveat = severity_from_grade(dtype, area, score, grade)
+        evidence = [
+            f"detector found {label or dtype} at "
+            f"{cx * 100:.0f}%,{cy * 100:.0f}% of the frame, covering "
+            f"{area * 100:.1f}% of the image (confidence {score:.2f})"
+        ]
+        if grade and grade.get("tier"):
+            m = grade.get("metrics") or {}
+            # The evidence names the MEASUREMENT, not just its conclusion, so
+            # a disputed grade can be checked against the photo rather than
+            # argued about. An insurance report that says "deep" and cannot
+            # say why is an opinion.
+            bits = [f"graded {grade['tier']}",
+                    f"depth score {grade.get('score')}",
+                    f"basis {grade.get('basis')}"]
+            if grade.get("basis") == "chroma" and m.get("ref_C"):
+                lost = 1.0 - (m.get("dmg_C", 0) / m["ref_C"])
+                bits.append(f"{lost * 100:.0f}% of the paint's colour is "
+                            f"absent inside the damage")
+            if grade.get("basis") == "lightness":
+                bits.append("paint too neutral for a colour comparison; "
+                            "graded on lightness alone")
+            if grade.get("basis") == "curvature" and m.get("curv_ratio"):
+                bits.append(f"reflection is bent {m['curv_ratio']:.1f}x more "
+                            f"than the undamaged paint around it")
+            if m.get("length_px"):
+                bits.append(f"{m['length_px']:.0f}x{m.get('width_px', 0):.0f}px")
+            bits.append(f"measurement confidence {grade.get('confidence')}")
+            evidence.append("; ".join(bits))
+        if caveat:
+            evidence.append(caveat)
         out.append({
             "panel": panel_hint or d.get("panel") or "body_other",
             "damage_type": dtype,
@@ -178,11 +251,7 @@ def detections_to_findings(detections, image_size, image_index=0,
             # every log looked healthy. Normalised also survives the report
             # being rendered at any resolution, which pixels do not.
             "bbox": _to_norm_xywh(box, image_size),
-            "evidence": [
-                f"detector found {label or dtype} at "
-                f"{cx * 100:.0f}%,{cy * 100:.0f}% of the frame, covering "
-                f"{area * 100:.1f}% of the image (confidence {score:.2f})"
-            ],
+            "evidence": evidence,
         })
     return out
 
@@ -239,8 +308,25 @@ def onnx_detect(image_path, session=None, input_size=None, labels=None,
             model_path, providers=["CPUExecutionProvider"])
 
     img = Image.open(image_path).convert("RGB")
+    return onnx_detect_image(img, session=session, input_size=size,
+                             labels=labels, min_confidence=min_confidence)
+
+
+def onnx_detect_image(img, session, input_size=None, labels=None,
+                      min_confidence=None):
+    """The same inference, on an already-open image.
+
+    Split out because tiled_detect hands this function crops that were never
+    files. Re-encoding each of a dozen tiles to disk so the path-based version
+    could re-decode it would dominate the runtime of the very feature that
+    exists to make inference thorough.
+    """
+    import numpy as np
+
+    size = input_size or int(os.environ.get("DAMAGE_DETECTOR_SIZE", "640"))
     orig = img.size
-    arr = np.asarray(img.resize((size, size)), dtype=np.float32) / 255.0
+    arr = np.asarray(img.convert("RGB").resize((size, size)),
+                     dtype=np.float32) / 255.0
     arr = np.transpose(arr, (2, 0, 1))[None, ...]
 
     outputs = session.run(None, {session.get_inputs()[0].name: arr})
@@ -336,14 +422,66 @@ def detector_backend():
             state["session"] = onnxruntime.InferenceSession(
                 model_path, providers=["CPUExecutionProvider"])
         labels = _labels_from_env()
+        size = int(os.environ.get("DAMAGE_DETECTOR_SIZE", "640"))
+        # TILING IS ON BY DEFAULT and DAMAGE_TILED=0 turns it off. The default
+        # is the way round it is because the whole reason this backend exists
+        # is fine damage: at 728 a 3px scratch in a 4032px photo is half a
+        # pixel, so a single whole-frame pass cannot see the thing the product
+        # is for. Off is for benchmarking against the old behaviour.
+        tiled = os.environ.get("DAMAGE_TILED", "1") not in ("0", "false", "no")
+        # Grading opens every image a second time in severity.measure, so it
+        # is separately switchable — but it is what turns a box into a claim
+        # an assessor can act on, so it too defaults on.
+        do_grade = os.environ.get("DAMAGE_GRADE", "1") not in ("0", "false",
+                                                               "no")
         per_image = []
         for ref in image_refs:
             path = _local_path(ref)
-            dets = onnx_detect(path, session=state["session"], labels=labels)
-            per_image.append((dets, Image.open(path).size, None))
+            img = Image.open(path).convert("RGB")
+            if tiled:
+                from tiled_detect import tiled_detect as _tiled
+
+                def run(crop, _sess=state["session"], _lab=labels, _s=size):
+                    return onnx_detect_image(crop, session=_sess, labels=_lab,
+                                             input_size=_s)
+
+                dets = _tiled(img, run, model_size=size)
+            else:
+                dets = onnx_detect(path, session=state["session"],
+                                   labels=labels)
+            if do_grade:
+                _attach_grades(img, dets)
+            per_image.append((dets, img.size, None))
         return detections_to_json(per_image)
 
     return vision_fn
+
+
+def _attach_grades(img, dets):
+    """Measure each detection and hang the verdict on it.
+
+    Failures are swallowed PER DETECTION. A grade is an enrichment: if the
+    measurement cannot be made — the box is two pixels wide, the crop is
+    degenerate — the finding should still be reported with its extent-based
+    severity rather than the whole photo failing. Losing a real dent because
+    a scratch beside it could not be measured would be a bad trade.
+    """
+    try:                                # flat import, as the worker runs it
+        from severity_grade import grade as _grade
+    except ImportError:                 # package import
+        from damage.severity_grade import grade as _grade
+    for d in dets:
+        b = d.get("box")
+        if not b or len(b) != 4:
+            continue
+        x1, y1, x2, y2 = [float(v) for v in b]
+        if x2 <= x1 or y2 <= y1:
+            continue
+        try:
+            d["grade"] = _grade(img, (x1, y1, x2 - x1, y2 - y1),
+                                str(d.get("label", "")).lower())
+        except Exception:
+            pass
 
 
 def _labels_from_env():

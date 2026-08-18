@@ -29,17 +29,44 @@ folder order — BEFORE it fits anything. A weak correlation means the
 measurement is wrong and no choice of cut points will save it; that is a result
 worth seeing, not one worth optimising away.
 
-THE IMAGES HAVE NO BOXES, SO A BOX IS ASSUMED
----------------------------------------------
-These are close-up damage photographs, so the damage is central. The measured
-box is the middle 50% of the frame. That is an approximation and it costs
-accuracy — some folder images are wide shots where the middle 50% is mostly
-undamaged paint — so the fit is run on the images where the measurement found a
-coherent damage region at all, and the rejection count is printed rather than
-hidden. Silently dropping a third of the sample and reporting a clean number
-would be the failure mode here.
+THE BOX PROBLEM, AND WHY --centre DOES NOT WORK
+-----------------------------------------------
+The measurement needs a box: it compares the damage inside one against the
+undamaged paint in a ring outside it. These images have no boxes, so the first
+version assumed the damage was central and measured the middle 50% of the
+frame. That assumption is WRONG for this corpus, and the run said so rather
+than producing a plausible number:
+
+    Spearman rank correlation, centre box:      -0.059   (n=1158)
+
+The diagnosis is in the reference itself. If the ring were paint, the
+undamaged pixels inside the box would sit 2-4 dE from it. Measured:
+
+    folder            damage-vs-ref dE    background-vs-ref dE
+    no_damage              43.9                  16.7
+    scratch_faint          40.7                  11.4
+    scratch_deep           49.6                  12.2
+    scratch_severe         32.7                  14.6
+
+A background 16.7 dE from its own reference is not paint. These are whole-car
+and roadside photographs, not damage close-ups, so the ring contains sky, road
+and trim, and the "damage" Otsu finds inside the box is frequently just the
+next part of the scene. It shows up most clearly at the severe end, where the
+damage fills the frame and the ring has no undamaged paint in it at all —
+which is why scratch_severe scored LOWEST for separability, below no_damage.
+
+So the centre box cannot calibrate this and the physics defaults stand. That
+is a real result: a fitted number from this data would have been noise wearing
+a decimal point.
+
+--boxes-from-detector IS THE FIX, and it costs nothing extra. The detector
+being trained on the six-class index produces exactly the boxes this is
+missing. Run it over the same folders, keep the highest-scoring damage box per
+image, and the folder name is still the severity label. Same 2,065 ordered
+scratches, but measured where the damage actually is.
 
     python calibrate_severity.py --drive /home/user/drive_images
+    python calibrate_severity.py --drive ... --boxes-from-detector
     python calibrate_severity.py --drive ... --measure-only   # cache, no fit
 """
 import argparse
@@ -50,7 +77,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__)))))
 
-from damage import severity  # noqa: E402
+from damage import severity_grade as severity  # noqa: E402
 
 # Folder -> ordinal rank. The gaps are meaningful: scratch_light does not exist
 # in the Drive corpus, so the ladder has a hole in it and the fit must not
@@ -62,6 +89,17 @@ DENT_FOLDERS = {"dent_minor": 0, "dent_medium": 1,
                 "dent_major": 2, "dent_severe": 3}
 
 CENTRE_FRAC = 0.5
+
+# Long side the calibration images are reduced to before measuring. The Drive
+# folders hold everything from 460px thumbnails to 4160px originals, and an
+# 8-megapixel Lab conversion takes over a second — 2,000 scratches would be
+# most of an hour. Reducing is safe HERE and only here: every quantity the
+# score is built from is a ratio (chroma against the surrounding paint,
+# curvature against the same panel's baseline, box area against frame area)
+# and none of them changes with scale. It also makes the folders comparable to
+# each other, which they otherwise are not. Inference does NOT do this — there
+# the whole point is native resolution.
+MAX_SIDE = 1200
 
 
 def centre_box(size, frac=CENTRE_FRAC):
@@ -99,7 +137,35 @@ def spearman(xs, ys):
     return num / (dx * dy) if dx and dy else 0.0
 
 
-def measure_folder(root, folder, limit, kind):
+def detector_box(img, kind, session, labels, size):
+    """Highest-scoring damage box of the right family, or None.
+
+    The folder already states what KIND of damage is in the picture, so the
+    detector is only being asked where — a much easier question than the one
+    it was trained on, and one it can answer even when its class is wrong.
+    A scratch folder therefore accepts any surface-family box.
+    """
+    import sys as _sys
+    _sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__)))))
+    from detect import onnx_detect_image
+    want = ({"scratch_scuff", "rust_paint", "scratch", "surface"}
+            if kind == "scratch"
+            else {"dent", "structural", "deformation"})
+    dets = [d for d in onnx_detect_image(img, session=session, labels=labels,
+                                         input_size=size, min_confidence=0.15)
+            if str(d.get("label", "")).lower() in want]
+    if not dets:
+        return None
+    d = max(dets, key=lambda d: d["score"])
+    x1, y1, x2, y2 = d["box"]
+    if x2 - x1 < 8 or y2 - y1 < 8:
+        return None
+    return (x1, y1, x2 - x1, y2 - y1)
+
+
+def measure_folder(root, folder, limit, kind, max_side=MAX_SIDE,
+                   detector=None):
     """Score every image in one severity folder. Returns (scores, rejected)."""
     from PIL import Image
     d = os.path.join(root, folder)
@@ -107,12 +173,25 @@ def measure_folder(root, folder, limit, kind):
         return [], 0
     names = sorted(os.listdir(d))[:limit] if limit else sorted(os.listdir(d))
     out, rejected = [], 0
-    for n in names:
+    print(f"  measuring {folder} ({len(names)} images) ...", flush=True)
+    for i, n in enumerate(names):
+        if i and i % 250 == 0:
+            print(f"    {i}/{len(names)}", flush=True)
         p = os.path.join(d, n)
         try:
             with Image.open(p) as im:
                 im = im.convert("RGB")
-                box = centre_box(im.size)
+                if max(im.size) > max_side:
+                    k = max_side / float(max(im.size))
+                    im = im.resize((max(8, int(im.size[0] * k)),
+                                    max(8, int(im.size[1] * k))))
+                if detector is not None:
+                    box = detector_box(im, kind, *detector)
+                    if box is None:
+                        rejected += 1
+                        continue
+                else:
+                    box = centre_box(im.size)
                 m = severity.measure(im, box)
                 if m is None:
                     rejected += 1
@@ -189,7 +268,32 @@ def fit_cuts(samples, tier_names, ranks):
     return {boundaries[i][0]: best[i] for i in range(len(boundaries))}, best_acc
 
 
-def run(root, limit, out_path, measure_only):
+def open_detector():
+    """(session, labels, size) for the exported ONNX, or raise with the reason."""
+    try:
+        import onnxruntime
+    except ImportError:
+        raise SystemExit("--boxes-from-detector needs onnxruntime: "
+                         "pip install onnxruntime")
+    model = os.environ.get("DAMAGE_DETECTOR_MODEL")
+    if not model or not os.path.exists(model):
+        raise SystemExit(
+            "--boxes-from-detector needs DAMAGE_DETECTOR_MODEL pointing at the "
+            "exported ONNX. Until the six-class run finishes there is no such "
+            "file, and the centre-box mode cannot substitute for it — see this "
+            "module's docstring for why.")
+    labels = [s.strip() for s in
+              os.environ.get("DAMAGE_DETECTOR_LABELS", "").split(",")
+              if s.strip()] or None
+    size = int(os.environ.get("DAMAGE_DETECTOR_SIZE", "728"))
+    sess = onnxruntime.InferenceSession(model,
+                                        providers=["CPUExecutionProvider"])
+    print(f"detector {model} at {size}px, labels {labels}")
+    return sess, labels, size
+
+
+def run(root, limit, out_path, measure_only, max_side=MAX_SIDE,
+        detector=None):
     report = {}
     for kind, folders in (("scratch", SCRATCH_FOLDERS),
                           ("dent", DENT_FOLDERS)):
@@ -197,7 +301,8 @@ def run(root, limit, out_path, measure_only):
                  else severity.DENT_TIERS)
         samples, lines = [], []
         for folder, rank in sorted(folders.items(), key=lambda kv: kv[1]):
-            scores, rejected = measure_folder(root, folder, limit, kind)
+            scores, rejected = measure_folder(root, folder, limit, kind,
+                                              max_side, detector)
             n = len(scores)
             if n:
                 scores_sorted = sorted(scores)
@@ -311,6 +416,12 @@ def main():
     ap.add_argument("--limit", type=int, default=0,
                     help="cap images per folder (0 = all)")
     ap.add_argument("--out", default=severity.CALIBRATION_FILE)
+    ap.add_argument("--max-side", type=int, default=MAX_SIDE)
+    ap.add_argument("--boxes-from-detector", action="store_true",
+                    help="take the box from the trained detector instead of "
+                         "assuming the damage is central. The centre-box "
+                         "assumption measured -0.059 rank correlation on this "
+                         "corpus; see the module docstring")
     ap.add_argument("--measure-only", action="store_true")
     ap.add_argument("--selftest", action="store_true")
     a = ap.parse_args()
@@ -318,7 +429,8 @@ def main():
         return _selftest()
     if not os.path.isdir(a.drive):
         raise SystemExit(f"no such directory: {a.drive}")
-    run(a.drive, a.limit, a.out, a.measure_only)
+    det = open_detector() if a.boxes_from_detector else None
+    run(a.drive, a.limit, a.out, a.measure_only, a.max_side, det)
     return 0
 
 
