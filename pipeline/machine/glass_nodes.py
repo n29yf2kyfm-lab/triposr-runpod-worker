@@ -66,6 +66,91 @@ BPX = float((edges[hist.argmax()] + edges[hist.argmax() + 1]) / 2)
 print(f"B-pillar centre x = {BPX:.3f} (from {m.sum()} pillar-band faces)")
 
 
+def boundary_loops(mesh):
+    """Ordered boundary loops (lists of vertex indices)."""
+    eu, cnt = np.unique(np.sort(mesh.edges, axis=1), axis=0, return_counts=True)
+    b = eu[cnt == 1]
+    adj = {}
+    for a, c in b:
+        adj.setdefault(int(a), []).append(int(c))
+        adj.setdefault(int(c), []).append(int(a))
+    seen, loops = set(), []
+    for start in adj:
+        if start in seen:
+            continue
+        loop, cur, prev = [start], start, None
+        seen.add(start)
+        while True:
+            nxt = [n for n in adj[cur] if n != prev]
+            nxt = [n for n in nxt if n not in seen] or [n for n in nxt if n == start]
+            if not nxt:
+                break
+            n = nxt[0]
+            if n == start:
+                break
+            loop.append(n); seen.add(n); prev, cur = cur, n
+        if len(loop) > 6:
+            loops.append(loop)
+    return loops
+
+
+def turning_angle(mesh, loops):
+    """Mean |turn| between consecutive boundary edges — the staircase metric.
+
+    A voxel staircase alternates ~90 deg turns; a smooth curve stays low.
+    """
+    tot, n = 0.0, 0
+    for lp in loops:
+        P = mesh.vertices[lp]
+        d = np.roll(P, -1, axis=0) - P
+        ln = np.linalg.norm(d, axis=1, keepdims=True)
+        d = d / np.clip(ln, 1e-9, None)
+        dot = np.clip((d * np.roll(d, -1, axis=0)).sum(1), -1, 1)
+        tot += np.degrees(np.arccos(dot)).sum(); n += len(lp)
+    return tot / max(n, 1)
+
+
+def desnake(mesh, iters=14, max_disp=0.018, label=""):
+    """Remove VOXEL QUANTISATION from boundary loops.
+
+    Laplacian smoothing applied ONLY to boundary-loop vertices, with a hard
+    per-vertex displacement cap (default 18mm — the measured staircase
+    amplitude is ~10-15mm). The cap is what makes this a de-quantisation
+    and not a reshaping: no boundary vertex can travel further than the
+    staircase it is removing, so the silhouette cannot be redrawn.
+    Interior vertices are never touched.
+    """
+    m = mesh.copy()
+    loops = boundary_loops(m)
+    if not loops:
+        return m, None
+    before = turning_angle(m, loops)
+    orig = m.vertices.copy()
+    V = m.vertices.copy()
+    for _ in range(iters):
+        for lp in loops:
+            P = V[lp]
+            sm = 0.5 * P + 0.25 * np.roll(P, 1, axis=0) + 0.25 * np.roll(P, -1, axis=0)
+            V[lp] = sm
+    disp = V - orig
+    d = np.linalg.norm(disp, axis=1)
+    over = d > max_disp
+    if over.any():
+        V[over] = orig[over] + disp[over] * (max_disp / d[over])[:, None]
+    m.vertices = V
+    after = turning_angle(m, loops)
+    stats = {"loops": len(loops),
+             "boundary_verts": int(sum(len(l) for l in loops)),
+             "turning_before_deg": round(float(before), 2),
+             "turning_after_deg": round(float(after), 2),
+             "max_disp_mm": round(float(np.linalg.norm(V - orig, axis=1).max() * 1000), 2),
+             "mean_disp_mm": round(float(np.linalg.norm(V - orig, axis=1)[d > 0].mean() * 1000), 2)}
+    print(f"  desnake {label}: turning {stats['turning_before_deg']} -> "
+          f"{stats['turning_after_deg']} deg over {stats['loops']} loops, "
+          f"max disp {stats['max_disp_mm']}mm")
+    return m, stats
+
+
 def split_x(mesh, x0):
     keepf = mesh.triangles_center[:, 0] >= x0
     fr = mesh.copy(); fr.update_faces(keepf); fr.remove_unreferenced_vertices()
@@ -113,12 +198,27 @@ for node in sc.graph.nodes_geometry:
     T, gn = sc.graph[node]
     if gn == "glass":
         continue
+    geom = sc.geometry[gn]
+    if gn == "frit_band":
+        geom, fst = desnake(geom, label="frit_band")
     if gn not in out.geometry:
-        out.add_geometry(sc.geometry[gn], geom_name=gn, node_name=node, transform=T)
+        out.add_geometry(geom, geom_name=gn, node_name=node, transform=T)
     else:
         out.graph.update(frame_to=node, matrix=T, geometry=gn)
 table = {}
+desnake_stats = {}
+footprints = {}
 for name, (mesh, hint) in panes.items():
+    mesh, st = desnake(mesh, label=name)
+    if st:
+        desnake_stats[name] = st
+    # export the PRE-THICKEN boundary loop: thicken() closes the pane, so
+    # the footprint is unrecoverable downstream (aperture_clean needs it
+    # to tell a melt tooth from a pillar — measured 2026-08-18)
+    lps = boundary_loops(mesh)
+    if lps:
+        lp = max(lps, key=len)
+        footprints[name] = mesh.vertices[lp].tolist()
     solid, nb = thicken(mesh, hint)
     mat = PBRMaterial(name=name, baseColorFactor=[20, 24, 28, 90],
                       metallicFactor=0.0, roughnessFactor=0.05,
@@ -141,6 +241,12 @@ missing = [m2.get("name") for m2 in j["meshes"]
            if any("NORMAL" not in p["attributes"] for p in m2["primitives"])]
 if missing:
     raise SystemExit(f"REFUSED: NORMAL missing on {missing[:5]}")
+table["_desnake"] = desnake_stats
+table["_footprints"] = footprints
+try:
+    table["_desnake"]["frit_band"] = fst
+except NameError:
+    pass
 json.dump(table, open(OUT.replace(".glb", "_nodes.json"), "w"), indent=1)
 print(f"wrote {OUT} ({os.path.getsize(OUT)} bytes), NORMALs verified, "
       f"node table -> {OUT.replace('.glb','_nodes.json')}")
