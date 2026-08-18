@@ -1,0 +1,8 @@
+{
+  "id": "builder-siteplan",
+  "name": "Builder — site plan",
+  "version": "0.1.0",
+  "entry": "dist/index.js",
+  "description": "Drop a measured building model on the map: footprint traced from the external walls, red line, the Class A permitted-development envelope, and the shadow it throws at any hour and season.",
+  "style": "dist/style.css"
+}
