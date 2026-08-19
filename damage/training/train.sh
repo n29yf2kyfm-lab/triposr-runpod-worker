@@ -463,6 +463,7 @@ PY
 echo "=== gpu preflight ==="
 python - <<'PYGPU' || exit 14
 import sys
+import time
 import torch
 print("torch", torch.__version__, "cuda", torch.version.cuda,
       "cudnn", torch.backends.cudnn.version())
@@ -470,15 +471,48 @@ if not torch.cuda.is_available():
     print("PREFLIGHT FAIL: no CUDA device visible")
     sys.exit(1)
 print("device:", torch.cuda.get_device_name(0))
-try:
-    x = torch.randn(1, 3, 64, 64, device="cuda")
-    w = torch.randn(8, 3, 3, 3, device="cuda")
-    y = torch.nn.functional.conv2d(x, w)
-    torch.cuda.synchronize()
-    print("cudnn conv OK", tuple(y.shape))
-except Exception as e:
-    print(f"PREFLIGHT FAIL: {type(e).__name__}: {e}")
-    print("This machine cannot run cuDNN. Relaunch — it is host-specific.")
+free, total = torch.cuda.mem_get_info()
+print(f"vram: {free/2**30:.1f} GiB free of {total/2**30:.1f} GiB")
+print("cudnn available:", torch.backends.cudnn.is_available(),
+      "enabled:", torch.backends.cudnn.enabled)
+
+# RETRY, because the first diagnosis was wrong. Two DIFFERENT machines with
+# DIFFERENT drivers (CUDA 12.8/torch 2.11 and CUDA 12.4/torch 2.6) failed
+# identically, so "bad host, relaunch" was not the explanation. cuDNN's handle
+# creation is also the first real GPU allocation of the run, which makes it the
+# place a transient shortage or a slow device init surfaces — both worth
+# retrying before writing the machine off.
+ok = False
+for attempt in (1, 2, 3):
+    try:
+        x = torch.randn(1, 3, 64, 64, device="cuda")
+        w = torch.randn(8, 3, 3, 3, device="cuda")
+        y = torch.nn.functional.conv2d(x, w)
+        torch.cuda.synchronize()
+        print(f"cudnn conv OK on attempt {attempt}", tuple(y.shape))
+        ok = True
+        break
+    except Exception as e:
+        print(f"  attempt {attempt}: {type(e).__name__}: {str(e)[:120]}")
+        torch.cuda.empty_cache()
+        time.sleep(5)
+
+if not ok:
+    # Prove whether the GPU works at all without cuDNN. If this passes, the
+    # card and the driver are fine and only cuDNN is broken, which is a
+    # different problem from a dead GPU and needs saying so.
+    try:
+        torch.backends.cudnn.enabled = False
+        y = torch.nn.functional.conv2d(
+            torch.randn(1, 3, 64, 64, device="cuda"),
+            torch.randn(8, 3, 3, 3, device="cuda"))
+        torch.cuda.synchronize()
+        print("PREFLIGHT FAIL: cuDNN is broken but the GPU itself works "
+              "(conv succeeded with cudnn disabled).")
+        print("Training without cuDNN is far too slow to be worth it.")
+    except Exception as e2:
+        print(f"PREFLIGHT FAIL: the GPU cannot convolve at all: "
+              f"{type(e2).__name__}: {str(e2)[:120]}")
     sys.exit(1)
 PYGPU
 
