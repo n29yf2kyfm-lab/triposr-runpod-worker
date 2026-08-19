@@ -2685,3 +2685,51 @@ REMAINING to the premium bar on generated cars (honest OPENs): front/rear compon
 separate, surfacing panel quality, windscreen pane forward reach on the perspective-baked
 mesh, ragged aperture silhouettes at arch lips. These are brief phases 5-8 — construction,
 not cleanup.
+
+## Ultra audit round (2026-08-19, owner: "fix the fail, forensic audit the codes")
+
+Result: the gate table went 8 PASS / 4 FAIL -> **12 PASS / 0 FAIL** (5 honest OPENs +
+1 NOT TESTED remain: doors, surfacing bar, overhang spec values, interior depth,
+mobile device). Inventory 12/34 -> **34/34**. Tracks at EXACT spec 1.460/1.450.
+Chain now: canon_dims -> wheels -> glass presplit/build -> aperture -> rear lamp
+solids -> rear separation -> front kit -> front separation -> interior -> materials
+-> finish -> carve touch-up -> normals -> validate -> turntables -> mobile (1.0MB).
+Evidence: car-meshes/staging/yaris/ (yaris_premium_v2.glb, YARIS_ULTRA_SHEET.jpg,
+premium_run3_evidence.tgz). Every fix below is committed with its measurement.
+
+**THE INSTANCE-COLLAPSE CLASS — check every scene-rebuild loop.** swap_rear and
+add_parts rebuilt scenes by iterating `sc.geometry.items()`: an INSTANCED master
+(wheel_stage: one mesh, four transform nodes) collapses to a single origin node and
+three wheels VANISH, silently. Worked on V41 only because that chain shipped baked
+per-corner geometries. stage7's own "No path to WHEEL_FR" refusal caught it. The
+graph-preserving loop (`sc.graph.nodes_geometry` + transforms) is mandatory; grep for
+`geometry.items()` in any new stage.
+
+**Downstream stages BAKE instance transforms** (measured: from glass_stage's output
+on, T.x reads 0.000 with vertices moved). Any consumer reading a node TRANSLATION
+gets zeros: front_separate's bumper classifier got 0 faces off T[0,3]; stage7's track
+measure read 0.0000 earlier. Rule (now in three places): measure from TRANSFORMED
+VERTICES, never the graph.
+
+**One shared carpaint material, not synced copies.** After panel separation the paint
+family held per-panel material instances: stage7 one_physical_paint measured 2
+value-sets AND the respray path would have painted the shell but left every panel
+grey (recolour targets the material NAMED carpaint). materials_pass now rebinds panel
+primitives to the carpaint index and removes orphans with a full index remap.
+
+**The detaper corrects the perspective bake** (canon_dims): single-image meshes bake
+camera perspective — flank profile 25% narrower at the far end; the axle zones could
+not take spec track (flank guard was tucking 150mm/side). Per-slice z correction to
+parallel sides over the wheelbase span, capped/smoothed/recorded, then a global width
+renorm because per-bin p99 targets are not the global p99.7 the verify measures (its
+own refusal caught the +2.6% overshoot — the guards guard the guards).
+
+**Flank guard reads the arch LIP (p99.5), not p97** — p97 is typical panel depth and
+cost 20mm of track on the detapered body. **Carve clamp must match the gate exactly**
+(r < R, not 0.995R — 5 verts survived in the ring). **Nose-at-+X is now enforced in
+canon_dims** from the glass label (windscreen = larger, more raked end cluster; flips
+180 only on a confident ratio) — every kit stage builds by XMAX/XMIN and nothing had
+verified the direction.
+
+Also paid for AGAIN tonight: `until ! pgrep -f "premium.py"` — the wrapper self-match
+trap this file already documents. Killed via TaskStop; wait on artifacts or monitors.
