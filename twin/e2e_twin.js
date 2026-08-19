@@ -246,6 +246,117 @@ const check = (name, cond, detail = '') =>
   await page.waitForTimeout(700);
   await page.screenshot({ path: '/tmp/twin_plan.png' });
 
+  /* --- rooms: what turns MASSING into a verdict ----------------------- */
+  const massing = await page.evaluate(
+    () => document.getElementById('assess').innerText);
+  check('with no rooms drawn the gate says MASSING, not "illegal"',
+        /MASSING/.test(massing), massing.slice(0, 40).replace(/\n/g, ' '));
+
+  // Put the extension back — the knock-through is the job this is for.
+  await page.evaluate(() => window.__twinUI.applyCommand({
+    kind: 'extend', block_id: 'existing', edge: 'rear',
+    depth_m: 4.0, storeys: 1 }));
+  await page.waitForFunction(
+    () => window.__twinUI.project.building.blocks.length === 2, null,
+    { timeout: 30000 });
+
+  await page.click('#layoutBtn');
+  await page.waitForFunction(
+    () => (window.__twinUI.project.plan.levels[0].rooms || []).length > 1,
+    null, { timeout: 30000 });
+  await page.waitForTimeout(500);
+  await page.screenshot({ path: '/tmp/twin_plan_rooms.png' });
+
+  const laid = await page.evaluate(() => {
+    const L = window.__twinUI.project.plan.levels;
+    return { ground: L[0].rooms.length,
+             levels: L.length,
+             bare: L.filter((l) => !(l.rooms || []).length).length,
+             blocks: new Set(L[0].rooms.map((r) => r.block_id)).size,
+             roomArea: L[0].room_area_m2, area: L[0].area_m2,
+             names: L[0].rooms.map((r) => r.name).join(', ') };
+  });
+  check('one click lays out the whole house, not one floor of one block',
+        laid.ground >= 4 && laid.bare === 0 && laid.blocks === 2,
+        `${laid.ground} rooms, ${laid.levels} level(s), ` +
+        `${laid.bare} left bare, ${laid.blocks} blocks`);
+  check('the rooms fill the plan with no gaps left over',
+        Math.abs(laid.roomArea - laid.area) < 0.2,
+        `rooms ${laid.roomArea} of ${laid.area} m2`);
+  check('and they are named as a person would name them',
+        /Hall/.test(laid.names) && /Kitchen/.test(laid.names),
+        laid.names.slice(0, 70));
+
+  await page.waitForFunction(
+    () => !/MASSING/.test(document.getElementById('assess').innerText),
+    null, { timeout: 60000 });
+  const withRooms = await page.evaluate(
+    () => document.getElementById('assess').innerText);
+  check('with rooms drawn the gate gives a real verdict, not MASSING',
+        !/MASSING/.test(withRooms),
+        withRooms.slice(0, 60).replace(/\n/g, ' '));
+  check('and it now finds the inner room the layout actually has',
+        /inner room|rooms deep/i.test(withRooms));
+
+  // Select a room by clicking it on the plan, exactly as a user would.
+  const picked = await page.evaluate(() => {
+    const p = window.__twinUI.plan;
+    const L = window.__twinUI.project.plan.levels[0];
+    const r = L.rooms.find((x) => x.kind === 'kitchen');
+    const s = p.toPx(r.x + r.width / 2, r.y + r.depth / 2);
+    const b = p.canvas.getBoundingClientRect();
+    return { x: b.left + s[0] / p.pixelRatio,
+             y: b.top + s[1] / p.pixelRatio, id: r.id };
+  });
+  await page.mouse.click(picked.x, picked.y);
+  await page.waitForTimeout(300);
+  const panelShown = await page.evaluate(
+    () => getComputedStyle(document.getElementById('roomPanel')).display);
+  check('clicking a room on the plan selects it', panelShown !== 'none',
+        panelShown);
+
+  await page.fill('#roomName', 'Kitchen/diner');
+  await page.click('#roomApply');
+  await page.waitForFunction(
+    () => (window.__twinUI.project.plan.levels[0].rooms || [])
+      .some((r) => r.name === 'Kitchen/diner'), null, { timeout: 30000 });
+  check('renaming a room writes through the same command path', true);
+
+  // The knock-through, and the refusal it clears.
+  const preMerge = await page.evaluate(
+    () => document.getElementById('assess').innerText);
+  await page.mouse.click(picked.x, picked.y);
+  await page.waitForTimeout(300);
+  const nRooms = await page.evaluate(
+    () => window.__twinUI.project.plan.levels[0].rooms.length);
+  await page.click('#roomMerge');
+  await page.waitForFunction(
+    (n) => window.__twinUI.project.plan.levels[0].rooms.length === n - 1,
+    nRooms, { timeout: 30000 });
+  await page.waitForTimeout(1200);
+  const postMerge = await page.evaluate(
+    () => document.getElementById('assess').innerText);
+  check('knocking through makes one room out of two',
+        /rooms deep|inner room/i.test(preMerge) &&
+        !/rooms deep|inner room/i.test(postMerge),
+        postMerge.slice(0, 60).replace(/\n/g, ' '));
+  await page.screenshot({ path: '/tmp/twin_plan_merged.png' });
+
+  // And the rooms survive an undo/redo round trip with the same ids —
+  // replay mints them from a seed, not a fresh uuid.
+  const ids = await page.evaluate(
+    () => window.__twinUI.project.plan.levels[0].rooms
+      .map((r) => r.id).sort().join(','));
+  await page.click('#undo');
+  await page.waitForTimeout(900);
+  await page.click('#redo');
+  await page.waitForFunction(
+    (s) => window.__twinUI.project.plan.levels[0].rooms
+      .map((r) => r.id).sort().join(',') === s, ids, { timeout: 30000 })
+    .then(() => check('undo and redo bring the same rooms back, same ids', true))
+    .catch(() => check('undo and redo bring the same rooms back, same ids',
+                       false, 'ids changed on replay'));
+
   check('no page errors', errors.length === 0, errors.slice(0, 2).join(' | '));
   await browser.close();
 

@@ -183,6 +183,30 @@ summary{cursor:pointer;color:var(--dim);font-size:12px}
         <div class="dim small">Becomes a validated command, not a picture.</div>
       </div>
 
+      <div class="sect"><h3>Rooms</h3>
+        <div class="row">
+          <button id="layoutBtn" class="primary">Lay out rooms</button>
+          <span class="dim small">then tap a room, or drag a partition</span>
+        </div>
+        <div id="roomPanel" style="display:none">
+          <div class="row">
+            <input id="roomName" style="flex:1" placeholder="room name">
+            <select id="roomKind">
+              <option value="room">Habitable</option>
+              <option value="circulation">Hall / landing</option>
+              <option value="kitchen">Kitchen</option>
+              <option value="wet">Bath / WC</option>
+              <option value="store">Store</option>
+            </select>
+          </div>
+          <div class="row">
+            <button id="roomApply" class="primary">Apply</button>
+            <button id="roomMerge">Knock through</button>
+            <span id="roomArea" class="dim small"></span>
+          </div>
+        </div>
+      </div>
+
       <div class="sect"><h3>Pricing</h3>
         <div class="row">
           <select id="region">

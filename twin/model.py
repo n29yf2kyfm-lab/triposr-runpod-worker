@@ -155,6 +155,53 @@ class Block:
 
 
 @dataclass
+class Room:
+    """A room inside a block, on one level. The unit the REGULATIONS see.
+
+    Until rooms exist the regulations gate can only say "massing": there
+    is no hall for a stair to rise from, no habitable room to need an
+    escape window, no wet room to extract from. A room is therefore not
+    decoration on the drawing — it is what turns a compliance verdict
+    from a shrug into an answer.
+
+    `kind` is the load-bearing field. buildable.py branches on
+    circulation / room / kitchen / wet, and getting it wrong is how a
+    hall becomes a bedroom that needs a window.
+    """
+    id: str
+    block_id: str
+    level: int
+    name: str
+    kind: str                # room | circulation | kitchen | wet | store
+    x: float
+    y: float
+    width: float
+    depth: float
+    classification: str = CLASS_USER
+
+    def ring(self):
+        return rect_ring(self.x, self.y, self.width, self.depth)
+
+    def area(self):
+        return self.width * self.depth
+
+    def as_dict(self):
+        d = asdict(self)
+        d.update(ring=self.ring(), area_m2=round(self.area(), 2))
+        return d
+
+
+ROOM_KINDS = ("room", "circulation", "kitchen", "wet", "store")
+
+# Minimum sensible dimensions. Not regulations — Part K and the NDSS have
+# the real numbers and buildable.py checks them — but a partition dragged
+# to 400 mm is a mistake, not a design, and refusing it early is kinder
+# than a compliance failure three screens later.
+MIN_ROOM_M = 0.9
+MIN_ROOM_AREA_M2 = 1.2
+
+
+@dataclass
 class Opening:
     id: str
     block_id: str
@@ -179,6 +226,7 @@ class Building:
     anchor_lon: float
     bearing_deg: float                 # compass bearing of local +y
     blocks: List[Block] = field(default_factory=list)
+    rooms: List[Room] = field(default_factory=list)
     openings: List[Opening] = field(default_factory=list)
     traced_ring: Optional[list] = None       # the real outline, in metres
     source: Optional[dict] = None            # provenance of the footprint
@@ -214,6 +262,18 @@ class Building:
             if b.id == block_id:
                 return b
         return None
+
+    def room(self, room_id):
+        for r in self.rooms:
+            if r.id == room_id:
+                return r
+        return None
+
+    def rooms_on(self, level):
+        return [r for r in self.rooms if r.level == level]
+
+    def has_rooms(self):
+        return bool(self.rooms)
 
     def existing(self):
         """The block that came from the survey, not from an edit."""
@@ -253,6 +313,8 @@ class Building:
         return {
             "footprint_m2": round(self.footprint(), 2),
             "gia_m2": round(self.gia(), 2),
+            "rooms": len(self.rooms),
+            "room_area_m2": round(sum(r.area() for r in self.rooms), 2),
             "eaves_height_m": round(self.eaves_m(), 2),
             "ridge_height_m": round(self.ridge_m(), 2),
             "blocks": [{"id": b.id, "name": b.name,
@@ -295,6 +357,7 @@ class Building:
             "address": self.address,
             "ground_m_aod": self.ground_m_aod,
             "blocks": [b.as_dict() for b in self.blocks],
+            "rooms": [r.as_dict() for r in self.rooms],
             "openings": [o.as_dict() for o in self.openings],
             "traced_ring": self.traced_ring,
             "source": self.source,
@@ -407,14 +470,133 @@ def to_engine_rooms(bld):
         sys.path.insert(0, p)
     import model3d as M
 
+    # REAL ROOMS WHEN THEY EXIST. A block with rooms drawn in it goes to
+    # the engine as those rooms, so the regulations gate sees a hall, a
+    # kitchen and a bathroom rather than one solid lump. Only a block
+    # with nothing drawn in it falls back to being its own room, and
+    # design.assess labels that case "massing" so nobody mistakes the
+    # resulting refusals for a verdict on the design.
+    # A ROOM CAN SPAN TWO BLOCKS. Knocking a kitchen through into a rear
+    # extension makes one room across the old wall, which is the whole
+    # point of the job — so the fallback cannot be "this block has no
+    # rooms OF ITS OWN". It must be "this block is not covered by any
+    # room", or the extension gets a phantom room laid over the real one
+    # and the gate reports an island that cannot be entered.
     rooms = []
+    emitted = set()
+    for r in bld.rooms:
+        key = (r.level, id(r))
+        if key in emitted:
+            continue
+        emitted.add(key)
+        h = None
+        for b in bld.blocks:
+            if b.base_level <= r.level < b.base_level + b.storeys:
+                h = round(b.storey_height - 0.35, 2)
+                break
+        rooms.append(M.Room(
+            r.name, round(r.x, 3), round(r.y, 3),
+            round(r.width, 3), round(r.depth, 3),
+            kind=r.kind, storeys=1, base_level=r.level,
+            height=h or (DEFAULT_STOREY_H - 0.35)))
+
+    def _covered(blk, level):
+        """Fraction of a block's plan already occupied by rooms."""
+        area = blk.width * blk.depth
+        if area <= 0:
+            return 1.0
+        hit = 0.0
+        for r in bld.rooms:
+            if r.level != level:
+                continue
+            ox = min(blk.x + blk.width, r.x + r.width) - max(blk.x, r.x)
+            oy = min(blk.y + blk.depth, r.y + r.depth) - max(blk.y, r.y)
+            if ox > 0 and oy > 0:
+                hit += ox * oy
+        return hit / area
+
     for b in bld.blocks:
         for lvl in range(b.storeys):
+            level = b.base_level + lvl
+            if _covered(b, level) > 0.6:
+                continue
             rooms.append(M.Room(
-                f"{b.name} L{b.base_level + lvl}",
+                f"{b.name} L{level}",
                 round(b.x, 3), round(b.y, 3),
                 round(b.width, 3), round(b.depth, 3),
-                kind="room", storeys=1,
-                base_level=b.base_level + lvl,
+                kind="room", storeys=1, base_level=level,
                 height=round(b.storey_height - 0.35, 2)))
     return rooms, M
+
+
+def auto_layout(bld, block_id, level=0, id_seed=None, id_start=0):
+    """A sensible STARTING layout for a block, not a design.
+
+    A blank rectangle is a bad place to start from and a wrong place to
+    stay: the gate needs a hall, and a user asked to draw one from
+    nothing will not bother. This lays out the ordinary UK arrangement
+    for the level — hall down one side on the ground floor with the
+    living space beside it and the kitchen at the back; landing and
+    bedrooms above — sized to whatever the block actually is.
+
+    It is explicitly a starting point. Every room is user-classified and
+    every partition is draggable, and the note says so.
+
+    `id_seed` MATTERS MORE THAN IT LOOKS. Undo replays the history, so a
+    room id minted from a fresh uuid on every apply() comes back
+    different after an undo/redo round trip — the same room under a new
+    name, which strands the selection and refuses the next command that
+    names it. The caller mints one seed when the command is constructed
+    and the ids fall out of it deterministically.
+    """
+    blk = bld.block(block_id)
+    if blk is None:
+        raise ValueError(f"no block {block_id!r}")
+    if not (blk.base_level <= level < blk.base_level + blk.storeys):
+        raise ValueError(f"block {block_id!r} has no level {level}")
+    w, d = blk.width, blk.depth
+    out = []
+    # AN EXTENSION IS NOT A HOUSE. Laying a hall-and-rooms plan into a
+    # 4 m rear extension produces rooms reached through rooms, which the
+    # gate correctly refuses as inner rooms. What actually gets built is
+    # one open space, so that is what is laid out — and it is the user's
+    # to change.
+    is_extension = any(
+        o is not blk and o.classification != CLASS_USER
+        for o in bld.blocks) and blk.classification == CLASS_USER
+
+    seed = id_seed or uuid.uuid4().hex[:6]
+
+    def R(name, kind, x, y, rw, rd):
+        out.append(Room(
+            id=f"rm-{seed}-{id_start + len(out)}",
+            block_id=blk.id, level=level,
+            name=name, kind=kind, x=round(blk.x + x, 3),
+            y=round(blk.y + y, 3), width=round(rw, 3), depth=round(rd, 3)))
+
+    # A hall wide enough to be one, but never more than a third of the
+    # frontage — on a narrow terrace that is what actually gets built.
+    hall_w = max(0.9, min(1.95, w * 0.33))
+    if is_extension or w < 2.4 or d < 3.0:
+        # Too small to subdivide sensibly, or an extension: one room.
+        R("Kitchen/diner" if is_extension else "Room",
+          "kitchen" if is_extension else "room", 0, 0, w, d)
+        return out
+
+    if level == blk.base_level:
+        kitchen_d = min(max(3.0, d * 0.34), d - 2.5)
+        front_d = d - kitchen_d
+        R("Hall", "circulation", 0, 0, hall_w, front_d)
+        R("Living room", "room", hall_w, 0, w - hall_w, front_d * 0.58)
+        R("Dining room", "room", hall_w, front_d * 0.58,
+          w - hall_w, front_d * 0.42)
+        R("Kitchen", "kitchen", 0, front_d, w, kitchen_d)
+    else:
+        bath_d = min(max(1.9, d * 0.2), d - 3.0)
+        rest_d = d - bath_d
+        R("Landing", "circulation", 0, 0, hall_w, rest_d)
+        R("Bedroom 1", "room", hall_w, 0, w - hall_w, rest_d * 0.55)
+        R("Bedroom 2", "room", hall_w, rest_d * 0.55,
+          w - hall_w, rest_d * 0.45)
+        R("Bathroom", "wet", 0, rest_d, w, bath_d)
+    return out

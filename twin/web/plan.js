@@ -112,6 +112,34 @@ export class PlanView {
       ctx.fill();
     }
 
+    // ROOMS, under the walls. Drawn from the same model the 3D and the
+    // regulations gate read, so a room shown here is a room the gate saw.
+    const KIND_FILL = { circulation: '#4fc3f722', kitchen: '#ffb26b22',
+                        wet: '#7fd6ff22', store: '#9aa3b022',
+                        room: '#39ff8814' };
+    for (const r of (L.rooms || [])) {
+      ctx.beginPath();
+      r.ring.forEach(([x, y], i) => {
+        const p = this.toPx(x, y);
+        i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]);
+      });
+      ctx.closePath();
+      ctx.fillStyle = KIND_FILL[r.kind] || KIND_FILL.room;
+      ctx.fill();
+    }
+
+    // Partitions between rooms, thinner than the envelope.
+    for (const w of (L.partitions || [])) {
+      const [a, b] = w.points;
+      const p0 = this.toPx(a[0], a[1]), p1 = this.toPx(b[0], b[1]);
+      ctx.beginPath();
+      ctx.moveTo(p0[0], p0[1]); ctx.lineTo(p1[0], p1[1]);
+      ctx.lineWidth = Math.max(1.5 * r, 0.1 * this.scale * r);
+      ctx.strokeStyle = this.selected && this.selected.id === w.id
+        ? '#ffffff' : '#8d97a8';
+      ctx.stroke();
+    }
+
     // Walls, at real thickness.
     for (const w of L.walls) {
       const [a, b] = w.points;
@@ -158,6 +186,18 @@ export class PlanView {
 
     // Dimensions and labels.
     ctx.font = `${12 * r}px ui-monospace, SFMono-Regular, monospace`;
+    for (const rm of (L.rooms || [])) {
+      const c = this.toPx(rm.x + rm.width / 2, rm.y + rm.depth / 2);
+      ctx.fillStyle = '#eef1f6';
+      ctx.textAlign = 'center';
+      ctx.fillText(rm.name, c[0], c[1] - 3 * r);
+      ctx.fillStyle = '#98a0ae';
+      ctx.fillText(`${rm.area_m2} m²`, c[0], c[1] + 13 * r);
+      if (this.scale > 14) {
+        ctx.fillText(`${rm.width.toFixed(2)} × ${rm.depth.toFixed(2)}`,
+                     c[0], c[1] + 27 * r);
+      }
+    }
     for (const b of L.blocks) {
       const xs = b.ring.map((p) => p[0]), ys = b.ring.map((p) => p[1]);
       const x0 = Math.min(...xs), x1 = Math.max(...xs);
@@ -259,7 +299,10 @@ export class PlanView {
     const L = this.levelData();
     if (!L) return null;
     let best = null, bestd = 0.6;
-    for (const w of L.walls) {
+    /* Partitions first: an internal wall sits inside the block, so a tap
+     * near one would otherwise be swallowed by the envelope wall behind
+     * it and the user would drag the whole house instead of a room. */
+    for (const w of [...(L.partitions || []), ...L.walls]) {
       const [a, b] = w.points;
       const vx = b[0] - a[0], vy = b[1] - a[1];
       const len2 = vx * vx + vy * vy || 1;
@@ -269,6 +312,15 @@ export class PlanView {
       if (d < bestd) { best = w; bestd = d; }
     }
     return best;
+  }
+
+  roomAt(planX, planY) {
+    const L = this.levelData();
+    for (const r of ((L && L.rooms) || [])) {
+      if (planX >= r.x && planX <= r.x + r.width &&
+          planY >= r.y && planY <= r.y + r.depth) return r;
+    }
+    return null;
   }
 
   _bind() {
@@ -288,12 +340,19 @@ export class PlanView {
         this.draw();
         this.onPick && this.onPick(hit);
       } else {
-        drag = { id: e.pointerId, pan: [e.clientX, e.clientY] };
+        // No wall under the pointer. That is not nothing: the inside of
+        // a room is where a person clicks to select it, and only a
+        // pointer that then MOVES is a pan. Keep where it went down so
+        // the release can tell the two apart.
+        drag = { id: e.pointerId, pan: [e.clientX, e.clientY],
+                 start: [px, py], moved: 0 };
       }
     });
     cv.addEventListener('pointermove', (e) => {
       if (!drag || e.pointerId !== drag.id) return;
       if (drag.pan) {
+        drag.moved += Math.abs(e.clientX - drag.pan[0]) +
+                      Math.abs(e.clientY - drag.pan[1]);
         this.pan = [this.pan[0] + (e.clientX - drag.pan[0]),
                     this.pan[1] + (e.clientY - drag.pan[1])];
         drag.pan = [e.clientX, e.clientY];
@@ -318,8 +377,14 @@ export class PlanView {
     const end = (e) => {
       if (!drag || e.pointerId !== drag.id) return;
       const d = drag; drag = null; this.ghost = null;
+      const tapped = d.start && (d.wall ? Math.abs(d.by || 0) < 0.1
+                                        : (d.moved || 0) < 5);
       if (d.wall && d.by && Math.abs(d.by) >= 0.1 && this.onDrag) {
         this.onDrag(d.wall, d.by);
+      } else if (tapped && this.onRoom) {
+        const rm = this.roomAt(d.start[0], d.start[1]);
+        if (rm) this.onRoom(rm);
+        else this.draw();
       } else {
         this.draw();
       }

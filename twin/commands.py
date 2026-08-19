@@ -29,8 +29,9 @@ import math
 import uuid
 from typing import List, Optional
 
-from .model import (Block, Building, Opening, CLASS_USER, MIN_WALL_M,
-                    rect_ring)
+from .model import (Block, Building, MIN_ROOM_AREA_M2, MIN_ROOM_M,
+                    MIN_WALL_M, Opening, ROOM_KINDS, Room, CLASS_USER,
+                    auto_layout, rect_ring)
 
 
 class CommandError(ValueError):
@@ -242,6 +243,248 @@ class AddOpening(Command):
         return bld
 
 
+class AutoLayout(Command):
+    """Lay standard rooms into a block, so the regs gate has something."""
+    kind = "auto_layout"
+    #: not an id for anything this command creates — a SEED, so that the
+    #: rooms it lays out are named the same on every replay. See
+    #: model.auto_layout.
+    mints_id = "lay"
+
+    def apply(self, bld):
+        p = self.params
+        seq = 0
+        # No block and no level named means the whole building: that is
+        # what "lay out the rooms" means to a person, and laying out one
+        # level of one block leaves the rest as solid lumps that the
+        # regulations gate then reports as inner rooms.
+        bids = ([p["block_id"]] if p.get("block_id")
+                else [b.id for b in bld.blocks])
+        levels = ([int(p["level"])] if p.get("level") is not None
+                  else None)
+        made_any = False
+        for bid in bids:
+            blk = bld.block(bid)
+            if blk is None:
+                raise CommandError(f"no block {bid!r}")
+            want = (levels if levels is not None
+                    else list(range(blk.base_level,
+                                    blk.base_level + blk.storeys)))
+            for level in want:
+                if not (blk.base_level <= level
+                        < blk.base_level + blk.storeys):
+                    continue
+                try:
+                    made = auto_layout(bld, bid, level,
+                                       id_seed=p["id"].split("-", 1)[-1],
+                                       id_start=seq)
+                except ValueError as e:
+                    raise CommandError(str(e))
+                seq += len(made)
+                bld.rooms = [r for r in bld.rooms
+                             if not (r.block_id == bid and r.level == level)]
+                bld.rooms.extend(made)
+                made_any = True
+        if not made_any:
+            raise CommandError("nothing to lay out on that level")
+        return bld
+
+
+class AddRoom(Command):
+    kind = "add_room"
+    mints_id = "rm"
+
+    def apply(self, bld):
+        p = self.params
+        blk = bld.block(p.get("block_id") or "existing")
+        if blk is None:
+            raise CommandError(f"no block {p.get('block_id')!r}")
+        kind = p.get("room_kind", "room")
+        if kind not in ROOM_KINDS:
+            raise CommandError(
+                f"room kind must be one of {', '.join(ROOM_KINDS)}")
+        w, d = float(p.get("width_m", 3.0)), float(p.get("depth_m", 3.0))
+        if w < MIN_ROOM_M or d < MIN_ROOM_M:
+            raise CommandError(
+                f"a {w:g} x {d:g} m room is smaller than {MIN_ROOM_M} m "
+                f"across — that is a cupboard, not a room")
+        x = float(p.get("x", blk.x))
+        y = float(p.get("y", blk.y))
+        if not (blk.x - 1e-6 <= x and blk.y - 1e-6 <= y
+                and x + w <= blk.x + blk.width + 1e-6
+                and y + d <= blk.y + blk.depth + 1e-6):
+            raise CommandError(
+                "the room does not fit inside the block it belongs to")
+        bld.rooms.append(Room(
+            id=p["id"], block_id=blk.id, level=int(p.get("level", 0)),
+            name=p.get("name") or kind.title(), kind=kind,
+            x=round(x, 3), y=round(y, 3),
+            width=round(w, 3), depth=round(d, 3)))
+        return bld
+
+
+class MovePartition(Command):
+    """Drag an internal wall: the room grows, its neighbour shrinks.
+
+    THE POINT OF DOING IT AS A PAIR. Moving one room's wall and leaving
+    the next one alone opens a gap or an overlap, and a plan with a
+    150 mm void between two rooms measures wrong in every direction. The
+    neighbour on the far side of that wall moves with it, or the command
+    is refused.
+    """
+    kind = "move_partition"
+
+    def apply(self, bld):
+        p = self.params
+        room = bld.room(p["room_id"])
+        if room is None:
+            raise CommandError(f"no room {p['room_id']!r}")
+        edge, by = p["edge"], float(p["by_m"])
+        blk = bld.block(room.block_id)
+
+        def bounds(r):
+            return r.x, r.y, r.x + r.width, r.y + r.depth
+
+        x0, y0, x1, y1 = bounds(room)
+        line = {"front": y0, "rear": y1, "left": x0, "right": x1}[edge]
+        axis = 1 if edge in ("front", "rear") else 0
+        # Whoever shares that line, on the same level, in the same block.
+        touching = []
+        for other in bld.rooms:
+            if other is room or other.level != room.level:
+                continue
+            if other.block_id != room.block_id:
+                continue
+            ox0, oy0, ox1, oy1 = bounds(other)
+            far = {"front": oy1, "rear": oy0, "left": ox1, "right": ox0}[edge]
+            if abs(far - line) < 1e-6:
+                # and they must actually overlap along the wall
+                a0, a1 = (x0, x1) if axis == 1 else (y0, y1)
+                b0, b1 = (ox0, ox1) if axis == 1 else (oy0, oy1)
+                if min(a1, b1) - max(a0, b0) > 1e-6:
+                    touching.append(other)
+
+        def resize(r, e, amount):
+            if e == "rear":
+                r.depth += amount
+            elif e == "front":
+                r.y -= amount
+                r.depth += amount
+            elif e == "right":
+                r.width += amount
+            else:
+                r.x -= amount
+                r.width += amount
+
+        opposite = {"front": "rear", "rear": "front",
+                    "left": "right", "right": "left"}[edge]
+        trial = [(room, edge, by)] + [(o, opposite, -by) for o in touching]
+        for r, e, amount in trial:
+            resize(r, e, amount)
+        bad = [r for r, _, _ in trial
+               if r.width < MIN_ROOM_M or r.depth < MIN_ROOM_M
+               or r.area() < MIN_ROOM_AREA_M2]
+        if bad:
+            for r, e, amount in trial:
+                resize(r, e, -amount)
+            raise CommandError(
+                f"that would leave {bad[0].name} at {bad[0].width:.2f} x "
+                f"{bad[0].depth:.2f} m — too small to be a room")
+        if not touching and blk is not None:
+            # An external wall of the block: the room may not leave it.
+            if (room.x < blk.x - 1e-6 or room.y < blk.y - 1e-6
+                    or room.x + room.width > blk.x + blk.width + 1e-6
+                    or room.y + room.depth > blk.y + blk.depth + 1e-6):
+                resize(room, edge, -by)
+                raise CommandError(
+                    "that wall is the outside of the building — move the "
+                    "block's wall instead, and the rooms follow")
+        for r, _, _ in trial:
+            r.x, r.y = round(r.x, 3), round(r.y, 3)
+            r.width, r.depth = round(r.width, 3), round(r.depth, 3)
+        return bld
+
+
+class SetRoom(Command):
+    kind = "set_room"
+
+    def apply(self, bld):
+        p = self.params
+        room = bld.room(p["room_id"])
+        if room is None:
+            raise CommandError(f"no room {p['room_id']!r}")
+        if p.get("name"):
+            room.name = str(p["name"])[:60]
+        if p.get("room_kind"):
+            if p["room_kind"] not in ROOM_KINDS:
+                raise CommandError(
+                    f"room kind must be one of {', '.join(ROOM_KINDS)}")
+            room.kind = p["room_kind"]
+        return bld
+
+
+class RemoveRoom(Command):
+    kind = "remove_room"
+
+    def apply(self, bld):
+        n = len(bld.rooms)
+        bld.rooms = [r for r in bld.rooms if r.id != self.params["room_id"]]
+        if len(bld.rooms) == n:
+            raise CommandError(f"no room {self.params['room_id']!r}")
+        return bld
+
+
+class MergeRooms(Command):
+    """Knock two rooms into one. The commonest job on a rear extension.
+
+    A kitchen with an extension behind it reads to the regulations gate
+    as a room inside a room — correctly, while there is still a wall
+    between them. On site that wall comes out and the two become one
+    space, and this is that operation: the rooms must be adjacent and
+    together form a rectangle, or the result is an L-shape the model
+    cannot represent and the command is refused rather than fudged.
+    """
+    kind = "merge_rooms"
+
+    def apply(self, bld):
+        p = self.params
+        a, b = bld.room(p["room_id"]), bld.room(p["other_id"])
+        if a is None or b is None:
+            raise CommandError("both rooms must exist to merge them")
+        if a is b:
+            raise CommandError("a room cannot be merged with itself")
+        if a.level != b.level:
+            raise CommandError("rooms on different floors cannot be merged")
+        ax0, ay0, ax1, ay1 = a.x, a.y, a.x + a.width, a.y + a.depth
+        bx0, by0, bx1, by1 = b.x, b.y, b.x + b.width, b.y + b.depth
+        same_x = abs(ax0 - bx0) < 1e-6 and abs(ax1 - bx1) < 1e-6
+        same_y = abs(ay0 - by0) < 1e-6 and abs(ay1 - by1) < 1e-6
+        touch_y = abs(ay1 - by0) < 1e-6 or abs(by1 - ay0) < 1e-6
+        touch_x = abs(ax1 - bx0) < 1e-6 or abs(bx1 - ax0) < 1e-6
+        if not ((same_x and touch_y) or (same_y and touch_x)):
+            raise CommandError(
+                f"{a.name} and {b.name} do not share a full wall, so "
+                f"knocking them together would leave an L-shaped room — "
+                f"which this model cannot measure. Line the walls up "
+                f"first, or keep them separate.")
+        a.x, a.y = round(min(ax0, bx0), 3), round(min(ay0, by0), 3)
+        a.width = round(max(ax1, bx1) - a.x, 3)
+        a.depth = round(max(ay1, by1) - a.y, 3)
+        if p.get("name"):
+            a.name = str(p["name"])[:60]
+        elif a.name != b.name:
+            a.name = f"{a.name}/{b.name}".replace("Kitchen/Kitchen", "Kitchen")
+        # The merged space takes the more demanding kind: a kitchen that
+        # swallows a dining area is still a kitchen for extract and for
+        # the fire risk the gate assesses.
+        rank = {"store": 0, "circulation": 1, "room": 2, "kitchen": 3,
+                "wet": 3}
+        if rank.get(b.kind, 0) > rank.get(a.kind, 0):
+            a.kind = b.kind
+        bld.rooms = [r for r in bld.rooms if r.id != b.id]
+        return bld
+
+
 class RemoveBlock(Command):
     kind = "remove_block"
 
@@ -256,11 +499,14 @@ class RemoveBlock(Command):
         if len(bld.blocks) == n:
             raise CommandError(f"no block {bid!r} to remove")
         bld.openings = [o for o in bld.openings if o.block_id != bid]
+        bld.rooms = [r for r in bld.rooms if r.block_id != bid]
         return bld
 
 
 REGISTRY = {c.kind: c for c in (Extend, MoveWall, SetStoreys, SetRoof,
-                                AddOpening, RemoveBlock)}
+                                AddOpening, RemoveBlock, AutoLayout,
+                                AddRoom, MovePartition, SetRoom,
+                                RemoveRoom, MergeRooms)}
 
 
 def make(command_kind, **params):
@@ -410,6 +656,20 @@ def parse_instruction(text: str, bld: Building):
                         pitch_deg=pitch or 30.0,
                         label=f"{kind or 'gabled'} roof"
                               + (f" at {pitch:g}" if pitch else ""))
+
+    if any(w in t for w in ("lay out", "layout", "add rooms", "draw rooms",
+                            "room layout")):
+        # "lay out the rooms" means the WHOLE building unless a level is
+        # named. Pinning it to the existing block's ground floor left the
+        # upper floor and the extension as solid lumps, which the gate
+        # then reported as missing circulation and an inner room — a
+        # refusal caused by the parser, not by the design.
+        import re as _re
+        m = _re.search(r"(?:floor|level)\s*(\d)", t)
+        kw = {"label": "lay out standard rooms"}
+        if m:
+            kw["level"] = int(m.group(1))
+        return make("auto_layout", **kw)
 
     if any(w in t for w in ("window", "door", "bifold", "patio")):
         kind = ("bifold" if "bifold" in t else

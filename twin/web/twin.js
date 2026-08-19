@@ -18,6 +18,7 @@ let viewer = null;
 let plan = null;
 let baseline = null;     // as-found massing, for before/after
 let showBaseline = false;
+let selectedRoom = null;
 
 function status(msg, ms = 4000) {
   const el = $('tstatus');
@@ -79,9 +80,25 @@ function ensureViews() {
     /* THE DIRECT-MANIPULATION PATH. A dragged wall becomes the same
      * validated command a typed instruction would produce. */
     plan.onDrag = (wall, by) => {
-      applyCommand({ kind: 'move_wall', block_id: wall.block,
-                     edge: wall.edge, by_m: by,
-                     label: `${wall.edge} wall ${by > 0 ? '+' : ''}${by} m` });
+      // A partition carries `room`; an envelope wall carries `block`.
+      // Same gesture, different command, one write path.
+      if (wall.room) {
+        applyCommand({ kind: 'move_partition', room_id: wall.room,
+                       edge: wall.edge, by_m: by,
+                       label: `partition ${by > 0 ? '+' : ''}${by} m` });
+      } else {
+        applyCommand({ kind: 'move_wall', block_id: wall.block,
+                       edge: wall.edge, by_m: by,
+                       label: `${wall.edge} wall ${by > 0 ? '+' : ''}${by} m` });
+      }
+    };
+    plan.onRoom = (room) => {
+      selectedRoom = room;
+      $('roomName').value = room.name;
+      $('roomKind').value = room.kind;
+      $('roomPanel').style.display = 'block';
+      $('roomArea').textContent =
+        `${room.area_m2} m² · ${room.width.toFixed(2)} × ${room.depth.toFixed(2)} m`;
     };
   }
 }
@@ -307,6 +324,40 @@ export function initTwinUI() {
     const el = $(id);
     if (el) el.onchange = () => refreshAssessment();
   }
+  $('layoutBtn').onclick = () => applyCommand(
+    { kind: 'auto_layout', label: 'lay out standard rooms' });
+  $('roomApply').onclick = () => {
+    if (!selectedRoom) return;
+    applyCommand({ kind: 'set_room', room_id: selectedRoom.id,
+                   name: $('roomName').value,
+                   room_kind: $('roomKind').value,
+                   label: `${$('roomName').value} (${$('roomKind').value})` });
+    $('roomPanel').style.display = 'none';
+  };
+  $('roomMerge').onclick = () => {
+    if (!selectedRoom || !project) return;
+    // Merge with whichever neighbour shares a full wall — the knock
+    // through. The server refuses anything that would leave an L.
+    const L = project.plan.levels[plan.level];
+    const a = selectedRoom;
+    const mate = (L.rooms || []).find((r) => {
+      if (r.id === a.id) return false;
+      const sameX = Math.abs(r.x - a.x) < 1e-6 &&
+                    Math.abs(r.width - a.width) < 1e-6;
+      const sameY = Math.abs(r.y - a.y) < 1e-6 &&
+                    Math.abs(r.depth - a.depth) < 1e-6;
+      const touchY = Math.abs(a.y + a.depth - r.y) < 1e-6 ||
+                     Math.abs(r.y + r.depth - a.y) < 1e-6;
+      const touchX = Math.abs(a.x + a.width - r.x) < 1e-6 ||
+                     Math.abs(r.x + r.width - a.x) < 1e-6;
+      return (sameX && touchY) || (sameY && touchX);
+    });
+    if (!mate) { status('No neighbour shares a full wall with this room',
+                        5000); return; }
+    applyCommand({ kind: 'merge_rooms', room_id: a.id, other_id: mate.id,
+                   label: `knock ${a.name} through to ${mate.name}` });
+    $('roomPanel').style.display = 'none';
+  };
   $('beforeAfter').onchange = (e) => {
     showBaseline = e.target.checked;
     render._framed = true;

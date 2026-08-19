@@ -832,6 +832,247 @@ class TestDesignBridge(unittest.TestCase):
         self.assertIn("not about the extension", a["compliance"]["note"])
 
 
+# ----------------------------------------------------------------- rooms
+class TestRooms(unittest.TestCase):
+    """Rooms are what turn the regulations gate from a shrug into an
+    answer, so these tests are about the gate's view of them as much as
+    about the geometry."""
+
+    def _project(self, storeys=2, extend=True):
+        from twin import commands, model
+        f = geodesy.LocalFrame(52.4856, -1.8476)
+        ring = [list(f.to_lonlat(x, y)) for x, y in
+                [(0, 0), (6, 0), (6, 10), (0, 10), (0, 0)]]
+        bld = model.from_footprint({
+            "type": "Feature", "id": "way/1",
+            "properties": {"levels": str(storeys)},
+            "geometry": {"type": "Polygon", "coordinates": [ring]}})
+        pj = commands.Project(bld)
+        if extend:
+            pj.apply(commands.make("extend", block_id="existing",
+                                   edge="rear", depth_m=4.0, storeys=1))
+        return pj, commands
+
+    def test_a_laid_out_level_covers_its_block_with_no_gaps(self):
+        pj, C = self._project(extend=False)
+        pj.apply(C.make("auto_layout", block_id="existing", level=0))
+        blk = pj.current().block("existing")
+        rooms = pj.current().rooms_on(0)
+        self.assertGreaterEqual(len(rooms), 4)
+        self.assertAlmostEqual(sum(r.area() for r in rooms),
+                               blk.width * blk.depth, places=1)
+        for r in rooms:
+            self.assertGreaterEqual(r.x, blk.x - 1e-6)
+            self.assertLessEqual(r.x + r.width, blk.x + blk.width + 1e-6)
+
+    def test_laying_out_the_rooms_does_the_whole_house_not_one_floor(self):
+        """The parser used to pin block and level, which left the upper
+        floor and the extension as lumps and produced refusals that were
+        the parser's fault, not the design's."""
+        pj, C = self._project()
+        pj.apply(C.parse_instruction("lay out the rooms", pj.current()))
+        cur = pj.current()
+        self.assertTrue(cur.rooms_on(0))
+        self.assertTrue(cur.rooms_on(1), "the first floor was left a lump")
+        blocks = {r.block_id for r in cur.rooms}
+        self.assertEqual(len(blocks), len(cur.blocks),
+                         "the extension was left a lump")
+
+    def test_an_extension_is_laid_out_as_one_space_not_a_little_house(self):
+        """A hall-and-rooms plan inside a 4 m extension makes inner
+        rooms, which the gate then refuses — for the layout, not the
+        design."""
+        pj, C = self._project()
+        ext = [b.id for b in pj.current().blocks if b.id != "existing"][0]
+        pj.apply(C.make("auto_layout", block_id=ext, level=0))
+        rooms = [r for r in pj.current().rooms if r.block_id == ext]
+        self.assertEqual(len(rooms), 1)
+        self.assertEqual(rooms[0].kind, "kitchen")
+
+    def test_drawn_rooms_reach_the_engine_and_the_block_lump_does_not(self):
+        from twin import model
+        pj, C = self._project(extend=False)
+        pj.apply(C.make("auto_layout", block_id="existing", level=0))
+        rooms, _M = model.to_engine_rooms(pj.current())
+        names = [r.name for r in rooms if r.base_level == 0]
+        self.assertIn("Hall", names)
+        self.assertFalse([n for n in names if n.endswith(" L0")],
+                         "a phantom whole-block room was laid over the "
+                         "real ones")
+
+    def test_a_block_with_nothing_drawn_in_it_still_reaches_the_engine(self):
+        from twin import model
+        pj, C = self._project()
+        pj.apply(C.make("auto_layout", block_id="existing", level=0))
+        rooms, _M = model.to_engine_rooms(pj.current())
+        ext = [b for b in pj.current().blocks if b.id != "existing"][0]
+        self.assertTrue([r for r in rooms if r.name.startswith(ext.name)],
+                        "the un-laid-out extension vanished from the model")
+
+    def test_a_room_spanning_two_blocks_does_not_get_a_lump_laid_over_it(self):
+        """The knock-through case: one room across the old rear wall.
+        The fallback must ask 'is this block covered', not 'does this
+        block own a room'."""
+        from twin import model
+        pj, C = self._project()
+        pj.apply(C.parse_instruction("lay out the rooms", pj.current()))
+        cur = pj.current()
+        kitchen = [r for r in cur.rooms_on(0) if r.kind == "kitchen"]
+        self.assertEqual(len(kitchen), 2)
+        pj.apply(C.make("merge_rooms", room_id=kitchen[0].id,
+                        other_id=kitchen[1].id))
+        rooms, _M = model.to_engine_rooms(pj.current())
+        lumps = [r for r in rooms if r.name.endswith(" L0")]
+        self.assertFalse(lumps, f"phantom rooms over a merged space: "
+                                f"{[r.name for r in lumps]}")
+
+    def test_the_verdict_stops_saying_massing_once_rooms_exist(self):
+        from twin import design
+        pj, C = self._project()
+        before = design.assess(pj.current())
+        self.assertEqual(before["compliance"]["stage"], "massing")
+        pj.apply(C.parse_instruction("lay out the rooms", pj.current()))
+        after = design.assess(pj.current())
+        self.assertEqual(after["compliance"]["stage"], "design")
+
+    def test_the_knock_through_clears_the_inner_room_refusal(self):
+        """The whole reason merge_rooms exists: on site that wall comes
+        out, and the verdict has to follow the building."""
+        from twin import design
+        pj, C = self._project()
+        pj.apply(C.parse_instruction("lay out the rooms", pj.current()))
+        codes = {f["code"] for f in
+                 design.assess(pj.current())["compliance"]["findings"]
+                 if f["severity"] == "refuse"}
+        self.assertIn("CIRC-INNER2", codes)
+        kitchen = [r for r in pj.current().rooms_on(0) if r.kind == "kitchen"]
+        pj.apply(C.make("merge_rooms", room_id=kitchen[0].id,
+                        other_id=kitchen[1].id))
+        after = {f["code"] for f in
+                 design.assess(pj.current())["compliance"]["findings"]
+                 if f["severity"] == "refuse"}
+        self.assertNotIn("CIRC-INNER2", after)
+
+    def test_two_rooms_that_would_leave_an_l_shape_are_not_merged(self):
+        pj, C = self._project(extend=False)
+        pj.apply(C.make("auto_layout", block_id="existing", level=0))
+        cur = pj.current()
+        hall = [r for r in cur.rooms_on(0) if r.kind == "circulation"][0]
+        kitchen = [r for r in cur.rooms_on(0) if r.kind == "kitchen"][0]
+        living = [r for r in cur.rooms_on(0) if r.name == "Living room"][0]
+        # hall + kitchen share only part of a wall
+        with self.assertRaises(C.CommandError) as cm:
+            pj.apply(C.make("merge_rooms", room_id=hall.id,
+                            other_id=kitchen.id))
+        self.assertIn("L-shaped", str(cm.exception))
+        self.assertIsNotNone(pj.current().room(living.id))
+
+    def test_a_dragged_partition_moves_the_room_on_the_other_side_too(self):
+        """Move one and leave the other and the plan has a 150 mm void
+        in it that measures wrong in every direction."""
+        pj, C = self._project(extend=False)
+        pj.apply(C.make("auto_layout", block_id="existing", level=0))
+        cur = pj.current()
+        living = [r for r in cur.rooms_on(0) if r.name == "Living room"][0]
+        dining = [r for r in cur.rooms_on(0) if r.name == "Dining room"][0]
+        before = living.area() + dining.area()
+        pj.apply(C.make("move_partition", room_id=living.id,
+                        edge="rear", by_m=0.5))
+        cur = pj.current()
+        living = cur.room(living.id)
+        dining = cur.room(dining.id)
+        self.assertAlmostEqual(living.y + living.depth, dining.y, places=3)
+        self.assertAlmostEqual(living.area() + dining.area(), before,
+                               places=2)
+
+    def test_a_partition_dragged_through_its_neighbour_is_refused(self):
+        pj, C = self._project(extend=False)
+        pj.apply(C.make("auto_layout", block_id="existing", level=0))
+        living = [r for r in pj.current().rooms_on(0)
+                  if r.name == "Living room"][0]
+        with self.assertRaises(C.CommandError) as cm:
+            pj.apply(C.make("move_partition", room_id=living.id,
+                            edge="rear", by_m=40.0))
+        self.assertIn("too small", str(cm.exception))
+        # and nothing moved
+        self.assertEqual(pj.current().room(living.id).depth, living.depth)
+
+    def test_an_external_wall_is_not_draggable_as_a_partition(self):
+        pj, C = self._project(extend=False)
+        pj.apply(C.make("auto_layout", block_id="existing", level=0))
+        hall = [r for r in pj.current().rooms_on(0)
+                if r.kind == "circulation"][0]
+        with self.assertRaises(C.CommandError) as cm:
+            pj.apply(C.make("move_partition", room_id=hall.id,
+                            edge="left", by_m=1.0))
+        self.assertIn("outside of the building", str(cm.exception))
+
+    def test_a_cupboard_sized_room_is_refused_not_drawn(self):
+        pj, C = self._project(extend=False)
+        with self.assertRaises(C.CommandError) as cm:
+            pj.apply(C.make("add_room", block_id="existing",
+                            width_m=0.4, depth_m=3.0))
+        self.assertIn("cupboard", str(cm.exception))
+
+    def test_a_room_outside_its_block_is_refused(self):
+        pj, C = self._project(extend=False)
+        blk = pj.current().block("existing")
+        with self.assertRaises(C.CommandError):
+            pj.apply(C.make("add_room", block_id="existing",
+                            x=blk.x, y=blk.y,
+                            width_m=blk.width + 5.0, depth_m=3.0))
+
+    def test_an_invented_room_kind_is_refused(self):
+        pj, C = self._project(extend=False)
+        with self.assertRaises(C.CommandError) as cm:
+            pj.apply(C.make("add_room", block_id="existing",
+                            room_kind="snug"))
+        self.assertIn("circulation", str(cm.exception))
+
+    def test_deleting_a_block_takes_its_rooms_with_it(self):
+        pj, C = self._project()
+        pj.apply(C.parse_instruction("lay out the rooms", pj.current()))
+        ext = [b.id for b in pj.current().blocks if b.id != "existing"][0]
+        pj.apply(C.make("remove_block", block_id=ext))
+        self.assertFalse([r for r in pj.current().rooms
+                          if r.block_id == ext],
+                         "orphan rooms floating where the extension was")
+
+    def test_undo_and_redo_of_a_layout_land_on_the_same_geometry(self):
+        pj, C = self._project(extend=False)
+        pj.apply(C.make("auto_layout", block_id="existing", level=0))
+        pj.apply(C.make("add_room", block_id="existing", name="Utility",
+                        room_kind="store", width_m=2.0, depth_m=2.0))
+        before = [r.as_dict() for r in pj.current().rooms]
+        pj.undo()
+        pj.redo()
+        self.assertEqual([r.as_dict() for r in pj.current().rooms], before)
+
+    def test_the_plan_ships_the_rooms_and_their_partitions(self):
+        from twin import design
+        pj, C = self._project(extend=False)
+        pj.apply(C.make("auto_layout", block_id="existing", level=0))
+        lvl = design.floor_plan(pj.current())["levels"][0]
+        self.assertEqual(len(lvl["rooms"]), len(pj.current().rooms_on(0)))
+        self.assertTrue(lvl["partitions"], "no internal walls to drag")
+        self.assertAlmostEqual(lvl["room_area_m2"], lvl["area_m2"], places=1)
+        for r in lvl["rooms"]:
+            self.assertIn("ring", r)
+            self.assertIn(r["kind"], ("room", "circulation", "kitchen",
+                                      "wet", "store"))
+
+    def test_renaming_a_room_does_not_move_it(self):
+        pj, C = self._project(extend=False)
+        pj.apply(C.make("auto_layout", block_id="existing", level=0))
+        room = pj.current().rooms_on(0)[0]
+        where = (room.x, room.y, room.width, room.depth)
+        pj.apply(C.make("set_room", room_id=room.id, name="Front hall",
+                        room_kind="circulation"))
+        now = pj.current().room(room.id)
+        self.assertEqual(now.name, "Front hall")
+        self.assertEqual((now.x, now.y, now.width, now.depth), where)
+
+
 # --------------------------------------------------------------- imagery
 class TestImagery(unittest.TestCase):
     def setUp(self):

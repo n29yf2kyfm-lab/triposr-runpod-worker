@@ -106,10 +106,15 @@ def assess(bld, *, region=None, vat="standard", calibrate_per_m2=None):
         # — and a block model has none, so it refuses every time. Saying
         # "not buildable" without that context reads as "your extension
         # is illegal", which is a different and untrue statement.
+        # WHETHER THIS IS A MASSING IS A FACT ABOUT THE MODEL, not a
+        # guess from the finding codes. Once rooms are drawn, a Part O
+        # glazing refusal is a real answer about a real design, and
+        # filing it under "massing" would tell the user to ignore a
+        # finding they should act on.
         codes = {f["code"] for f in chk["findings"]}
-        massing_only = bool(codes) and codes <= {
+        massing_only = (not bld.has_rooms()) and bool(codes) and codes <= {
             "CIRC-NONE", "K-NOHALL", "O-GLAZING", "B-NOESCAPE",
-            "INNER-ROOM", "K-NOSTAIR"}
+            "INNER-ROOM", "K-NOSTAIR", "CIRC-ISLAND", "CIRC-INNER2"}
         out["compliance"]["stage"] = "massing" if massing_only else "design"
         out["compliance"]["note"] = (
             "This is a MASSING model — solid blocks with no room layout "
@@ -211,8 +216,31 @@ def floor_plan(bld):
                                   ((pts[1][0] - pts[0][0]) ** 2 +
                                    (pts[1][1] - pts[0][1]) ** 2) ** 0.5, 2)})
         ops = [o.as_dict() for o in bld.openings if o.level == lvl]
+        rooms = [r.as_dict() for r in bld.rooms_on(lvl)]
+        # Partitions: the internal walls implied by the room rectangles.
+        parts = []
+        for r in bld.rooms_on(lvl):
+            for eid, ename, pts, _n in (
+                    (f"{r.id}:front", "front",
+                     [[r.x, r.y], [r.x + r.width, r.y]], None),
+                    (f"{r.id}:right", "right",
+                     [[r.x + r.width, r.y],
+                      [r.x + r.width, r.y + r.depth]], None),
+                    (f"{r.id}:rear", "rear",
+                     [[r.x + r.width, r.y + r.depth],
+                      [r.x, r.y + r.depth]], None),
+                    (f"{r.id}:left", "left",
+                     [[r.x, r.y + r.depth], [r.x, r.y]], None)):
+                parts.append({"id": eid, "room": r.id, "edge": ename,
+                              "points": pts,
+                              "length_m": round(
+                                  ((pts[1][0] - pts[0][0]) ** 2 +
+                                   (pts[1][1] - pts[0][1]) ** 2) ** 0.5, 2)})
         levels.append({"level": lvl, "blocks": blocks, "walls": walls,
+                       "rooms": rooms, "partitions": parts,
                        "openings": ops,
+                       "room_area_m2": round(
+                           sum(r["area_m2"] for r in rooms), 2),
                        "area_m2": round(sum(b["area_m2"] for b in blocks), 2)})
     return {"available": True, "levels": levels,
             "storey_height_m": max((b.storey_height for b in bld.blocks),
