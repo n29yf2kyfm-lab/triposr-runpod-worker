@@ -133,8 +133,11 @@ if not _skin_names:
                      f"scene has {sorted(sc.geometry)[:20]}")
 skin = np.vstack([sc.geometry[n].vertices for n in _skin_names]
                  + [sc.geometry[n].vertices for n in
-                    ("Bonnet", "Front_Bumper", "Front_Wing_L", "Front_Wing_R")
-                    if n in sc.geometry])
+                    ("Bonnet", "Front_Bumper", "Front_Wing_L", "Front_Wing_R",
+                     "Rear_Hatch", "Rear_Bumper")   # rear panels separated
+                    if n in sc.geometry])           # too — without them the
+                                                    # rear overhang measured
+                                                    # NEGATIVE (run3: -0.127)
 fx = (qw["FR"]["c"][0] + qw["FL"]["c"][0]) / 2
 rx = (qw["RR"]["c"][0] + qw["RL"]["c"][0]) / 2
 FO, _ = spec.dim("front_overhang_m")

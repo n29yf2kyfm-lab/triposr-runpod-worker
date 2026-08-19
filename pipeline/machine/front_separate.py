@@ -90,9 +90,13 @@ QC["derived"]["cowl_x"] = {"value": round(cowl_x, 4), "source": cowl_src}
 # ---- front axle
 fx, fx_src = None, None
 if "WHEEL_FR__TYRE_MASTER" in sc.graph.nodes_geometry:
-    T, _ = sc.graph["WHEEL_FR__TYRE_MASTER"]
-    fx = float(T[0, 3])
-    fx_src = "WHEEL_FR node translation (stage-1 contract)"
+    # from transformed VERTICES, not the node translation: downstream
+    # stages bake instance transforms (measured: T.x read 0.000 on run3's
+    # baked chain, bumper got 0 faces) — the vertex cloud is true either way
+    _T, _gn = sc.graph["WHEEL_FR__TYRE_MASTER"]
+    _tv = trimesh.transform_points(sc.geometry[_gn].vertices, _T)
+    fx = float((_tv[:, 0].min() + _tv[:, 0].max()) / 2)
+    fx_src = "WHEEL_FR tyre vertex-cloud centre (bake-proof)"
 else:
     try:
         from wheel_stage import detect_arches

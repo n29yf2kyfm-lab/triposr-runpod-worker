@@ -29,8 +29,38 @@ with open(INP, "rb") as f:
 j = json.loads(jraw)
 
 CLEAR = {"clearcoatFactor": 1.0, "clearcoatRoughnessFactor": 0.08}
+# the PAINT FAMILY becomes ONE SHARED MATERIAL, not synced copies: the
+# separation stages give each panel its own material instance, which (a)
+# failed stage7's one_physical_paint gate (2 value-sets across 6 painted
+# parts, run3) and (b) breaks the respray path — the render worker and
+# colour_variants target the material NAMED "carpaint", so a recolour
+# would paint the shell and leave every panel grey. Rebind panel
+# primitives to the carpaint material index and drop the orphans.
+PAINT_ALIASES = ("Bonnet", "Front_Bumper", "Front_Wing_L", "Front_Wing_R",
+                 "Rear_Hatch", "Rear_Bumper", "carpaint_hatch",
+                 "carpaint_bumper")
 touched = []
-for m in j.get("materials", []):
+mats = j.get("materials", [])
+cp_idx = next((i for i, m in enumerate(mats)
+               if m.get("name") == "carpaint"), None)
+alias_idx = {i for i, m in enumerate(mats) if m.get("name") in PAINT_ALIASES}
+if cp_idx is not None and alias_idx:
+    for mesh in j.get("meshes", []):
+        for pr in mesh.get("primitives", []):
+            if pr.get("material") in alias_idx:
+                pr["material"] = cp_idx
+    keep = [i for i in range(len(mats)) if i not in alias_idx]
+    remap = {old: new for new, old in enumerate(keep)}
+    j["materials"] = [mats[i] for i in keep]
+    for mesh in j.get("meshes", []):
+        for pr in mesh.get("primitives", []):
+            if "material" in pr:
+                pr["material"] = remap[pr["material"]]
+    mats = j["materials"]
+    cp_idx = remap[cp_idx]
+    touched.append(f"paint family rebound to shared carpaint "
+                   f"({len(alias_idx)} panel materials removed)")
+for m in mats:
     name = m.get("name", "")
     pbr = m.setdefault("pbrMetallicRoughness", {})
     if name == "carpaint":
