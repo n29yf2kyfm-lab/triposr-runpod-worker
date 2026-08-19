@@ -19,6 +19,29 @@ is deliberately recall-heavy, and the only question is the exchange rate.
 This prints that exchange rate, measured, so the choice is made from numbers
 rather than from a preference.
 
+THE HEADLINE RECALL IS A MACRO AVERAGE, AND THAT IS NOT WHAT A USER FEELS
+------------------------------------------------------------------------
+Running this against the shipped ONNX produced a recall far below the run's
+reported 0.5208, which looked at first like an export bug. It is not. The
+arithmetic settles it exactly:
+
+    per-class recalls   0.5890  0.4838  0.8280  0.6373  0.3023  0.2842
+    mean of those six                                            0.5208
+    RF-DETR reported Recall                                      0.5208
+
+RF-DETR macro-averages: every class counts once, regardless of how common it
+is. That flatters this model badly, because the classes it is good at are the
+RARE ones — lamp_wheel recalls 0.828 from 11,788 boxes — while the class that
+dominates the corpus is the one it is worst at: scratch_scuff, 169,412 boxes,
+recall 0.302.
+
+A customer does not photograph one of each class. They photograph a car, and
+most of what is wrong with it is scratches. So the number that predicts their
+experience is the MICRO recall — pooled over every box, dominated by the
+common classes — and that is what this measures. It is materially lower than
+the headline, and reporting the headline as if it were the user-facing figure
+would be the single most misleading thing in this project.
+
 WHAT IS COMPARED
 ----------------
 Predictions come from the exported ONNX — the artefact that actually ships, not
