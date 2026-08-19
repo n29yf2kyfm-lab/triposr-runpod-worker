@@ -400,11 +400,13 @@ def carve_touchup(car_glb, wheel_qc, out_glb, log_path):
                 for c in centres:
                     d2 = v[:, :2] - c[:2]
                     r = np.linalg.norm(d2, axis=1)
-                    res = (r < R * 0.995) & (np.abs(v[:, 2] - c[2]) < Wd / 2)
+                    # r < R exactly — the 0.995 margin left 5 verts in the
+                    # 0.995R..R ring that stage7's d < R gate still counts
+                    res = (r < R) & (np.abs(v[:, 2] - c[2]) < Wd / 2)
                     if res.any():
                         v2 = v.copy()
                         v2[res, :2] = c[:2] + d2[res] / \
-                            np.maximum(r[res], 1e-9)[:, None] * (R * 1.001)
+                            np.maximum(r[res], 1e-9)[:, None] * (R * 1.002)
                         g.vertices = v2
                         v = v2
                         lf.write(f"carve_touchup: {name} clamped "
