@@ -99,27 +99,47 @@ MIN_LONG_EDGE = 2000
 # engine bays and detail crops far more often than they are usable cars.
 MIN_ASPECT, MAX_ASPECT = 1.15, 2.60
 
-# Junk the title can tell us about before we spend a download. Deliberately
-# anchored with (?<![a-z]) rather than \b: underscores and digits are everywhere
-# in Commons filenames, and \b would miss "_rally_" style tokens.
+# Junk the title can tell us about before we spend a download.
+#
+# ANCHORING. \b will not do: underscores and digits are everywhere in Commons
+# filenames, so \btoy\b does not behave as expected inside "Yaris_toy_01". _L/_R
+# treat a letter on either side as "inside a longer word" instead.
+#
+# BOTH EDGES ARE MANDATORY ON EVERY GROUP. The first draft of this regex applied
+# _L only, and "toy" duly matched inside "TOYota" -- which silently rejected
+# every Toyota in the test set. This is the same failure class CLAUDE.md records
+# for nameplate_filter's bare digits: a short token is only safe when both its
+# edges are pinned. If you add an alternative, put it INSIDE an existing
+# {_L}(...){_R} group.
+#
+# TWO TOKENS ARE DELIBERATELY ABSENT, do not "complete" the list by adding them:
+#   * "seat"  -- SEAT is a MARQUE (Ibiza, Leon). Interiors are already caught by
+#                interior|dashboard|cockpit, so bare "seat" buys nothing and
+#                would reject a whole marque.
+#   * "cab"   -- "Double Cab" / "Single Cab" are body styles on every pickup in
+#                the catalogue. "taxi" catches the thing we actually mean.
+# And "racing" carries a negative lookahead because British Racing Green is a
+# COLOUR that appears in perfectly good Jaguar and Aston titles.
 _L = r"(?<![a-z])"
 _R = r"(?![a-z])"
 REJECT_TITLE = re.compile(
     # liveried / competition / service vehicles -- the brief excludes these
-    rf"{_L}(rally|wrc|racing|race|racecar|nascar|drift|motorsport|circuit|"
-    rf"police|polizei|politie|gendarmerie|taxi|cab|ambulance|fire.?brigade|"
-    rf"feuerwehr|military|army|driving.?school|livery|liveried|"
-    rf"decal|wrap(ped)?|advert)"
+    rf"{_L}(rally|wrc|racing(?!\s+green)|races?|racecars?|nascar|drift|"
+    rf"motorsport|police|polizei|politie|gendarmerie|taxis?|ambulances?|"
+    rf"fire.?brigade|feuerwehr|military|army|driving.?school|liveried|livery|"
+    rf"decals?|wrapped|adverts?){_R}"
     # not a whole exterior car
-    rf"|{_L}(interior|dashboard|dash|cockpit|engine|motor.?bay|boot|trunk|"
-    rf"gearbox|transmission|badge|emblem|logo|headlamp|headlight|taillight|"
-    rf"tail.?lamp|wheel|alloy|hubcap|steering|seat|door.?card|grille)"
+    rf"|{_L}(interiors?|dashboards?|cockpits?|engines?|motor.?bay|boot.?lid|"
+    rf"gearbox|transmission|badges?|emblems?|logos?|headlamps?|headlights?|"
+    rf"taillights?|tail.?lamps?|wheels?|alloys?|hubcaps?|steering|"
+    rf"door.?cards?|grilles?){_R}"
     # not a real car
-    rf"|{_L}(model.?car|diecast|die.?cast|miniature|toy|scale.?model|lego|"
-    rf"replica|rendering|render|drawing|sketch|blueprint|patent|"
-    rf"wreck|wrecked|crash|crashed|scrap|junk|rust|abandoned|burn(t|ed)?)"
-    rf"|{_L}(assembly.?line|factory|production.?line|showroom.?floor)"
-    rf"|{_L}(cutaway|chassis|frame|skeleton)",
+    rf"|{_L}(model.?cars?|diecast|die.?cast|miniature|toys?|scale.?model|lego|"
+    rf"replicas?|renderings?|renders?|drawings?|sketch|blueprint|patent|"
+    rf"wrecks?|wrecked|crash(ed|es)?|scrap(ped|yard)?|junk|rusty|rusted|"
+    rf"abandoned|burnt|burned){_R}"
+    rf"|{_L}(assembly.?line|factory|production.?line){_R}"
+    rf"|{_L}(cutaways?|chassis|skeleton){_R}",
     re.I)
 
 # View hints in the filename. Commons' prolific car contributors number their
@@ -183,11 +203,22 @@ def gate_for(url, wm_interval, ov_interval):
     return _GATES[host]
 
 
+def _lower_headers(h):
+    """Header names are case-insensitive on the wire but dict() freezes the case.
+
+    Varnish and envoy disagree about "Content-Type" vs "content-type" on the
+    very same host depending on which tier answers, and a case-sensitive lookup
+    would make every download report "not-an-image" instead of saving the file.
+    """
+    return {k.lower(): v for k, v in dict(h).items()}
+
+
 def http_get(url, gate, timeout=180, tries=4, max_sleep=900):
     """GET with Retry-After-honouring backoff. Returns (status, headers, body).
 
-    Never raises on an HTTP status -- the caller logs the honest code. Only a
-    transport failure after all tries comes back as status "EXC".
+    Headers come back lower-cased. Never raises on an HTTP status -- the caller
+    logs the honest code. Only a transport failure after all tries comes back as
+    status "EXC".
     """
     last = None
     for attempt in range(1, tries + 1):
@@ -199,7 +230,7 @@ def http_get(url, gate, timeout=180, tries=4, max_sleep=900):
         try:
             with urllib.request.urlopen(rq, timeout=timeout) as r:
                 gate.relax()
-                return r.status, dict(r.headers), r.read()
+                return r.status, _lower_headers(r.headers), r.read()
         except urllib.error.HTTPError as e:
             body = b""
             try:
@@ -220,7 +251,7 @@ def http_get(url, gate, timeout=180, tries=4, max_sleep=900):
                 if attempt < tries:
                     time.sleep(nap)
                     continue
-            return e.code, dict(e.headers), body
+            return e.code, _lower_headers(e.headers), body
         except Exception as e:                      # transport / TLS / timeout
             last = e
             if attempt < tries:
@@ -340,14 +371,14 @@ def download(cand, outdir, wm_interval, ov_interval, max_bytes):
     url = cand["url"]
     gate = gate_for(url, wm_interval, ov_interval)
     st, hdrs, body = http_get(url, gate)
-    if st != 200 or not (hdrs.get("Content-Type", "")).startswith("image"):
+    if st != 200 or not hdrs.get("content-type", "").startswith("image"):
         if st == 200:
-            return None, f"not-an-image:{hdrs.get('Content-Type')}"
+            return None, f"not-an-image:{hdrs.get('content-type')}"
         # one shot at the allowlisted 1920px thumb before giving up
         alt = fallback_thumb(url)
         if alt:
             st2, h2, b2 = http_get(alt, gate)
-            if st2 == 200 and h2.get("Content-Type", "").startswith("image"):
+            if st2 == 200 and h2.get("content-type", "").startswith("image"):
                 st, hdrs, body = st2, h2, b2
             else:
                 return None, f"http-{st}(thumb-{st2})"
@@ -356,7 +387,7 @@ def download(cand, outdir, wm_interval, ov_interval, max_bytes):
     if len(body) > max_bytes:
         return None, f"too-large:{len(body)}"
     ext = ".jpg"
-    ct = hdrs.get("Content-Type", "")
+    ct = hdrs.get("content-type", "")
     if "png" in ct:
         ext = ".png"
     elif "webp" in ct:
