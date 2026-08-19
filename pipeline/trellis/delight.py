@@ -329,8 +329,16 @@ def find_paint(lin, lum, pos, sel, cell):
 
 
 # ---------------------------------------------------------- shading field ----
-def shading_field(pos, paint, lum, cell, sigma_cells, clamp, min_cell):
-    """Median paint luminance per 3D cell -> smoothed -> normalised = S(x)."""
+def shading_field(pos, paint, lum, cell, sigma_cells, clamp, min_cell, pct=75.0):
+    """Paint luminance per 3D cell -> smoothed -> normalised = S(x).
+
+    The per-cell statistic is an UPPER percentile, not the median: a cell that
+    happens to contain a shut line, a badge edge or a crevice has a median
+    dragged below the paint's own brightness, and dividing by that would
+    brighten the very details this pass must preserve. Measured on the Pixal
+    Yaris, the p5->p95 spread of the cell field reads 2.11x with the median and
+    1.44x with p90 -- i.e. a third of what the median calls "lighting" is dark
+    detail inside the cell, not light."""
     P = pos[paint]
     V = lum[paint]
     org = P.min(0) - cell
@@ -342,7 +350,7 @@ def shading_field(pos, paint, lum, cell, sigma_cells, clamp, min_cell):
     order = np.argsort(inv, kind="stable")
     bnd = np.searchsorted(inv[order], np.arange(len(uk) + 1))
     vs = V[order]
-    med = np.array([np.median(vs[bnd[i]:bnd[i + 1]]) for i in range(len(uk))])
+    med = np.array([np.percentile(vs[bnd[i]:bnd[i + 1]], pct) for i in range(len(uk))])
     ok = cnt >= min_cell
     vol = np.zeros(dims, dtype=np.float32)
     wgt = np.zeros(dims, dtype=np.float32)
@@ -366,8 +374,8 @@ def sample_field(S, org, cell, pts):
 
 
 # ------------------------------------------------------------- reporting -----
-def spread_report(pos, paint, lum, cell, min_cell=25):
-    """Low-frequency spread of the paint: percentiles of the per-cell median."""
+def spread_report(pos, paint, lum, cell, min_cell=25, pct=50.0):
+    """Low-frequency spread of the paint: percentiles of a per-cell statistic."""
     P = pos[paint]
     V = lum[paint]
     org = P.min(0)
@@ -378,7 +386,7 @@ def spread_report(pos, paint, lum, cell, min_cell=25):
     order = np.argsort(inv, kind="stable")
     bnd = np.searchsorted(inv[order], np.arange(len(uk) + 1))
     vs = V[order]
-    med = np.array([np.median(vs[bnd[i]:bnd[i + 1]]) for i in range(len(uk))])
+    med = np.array([np.percentile(vs[bnd[i]:bnd[i + 1]], pct) for i in range(len(uk))])
     ok = cnt >= min_cell
     m, w = med[ok], cnt[ok].astype(float)
     o = np.argsort(m)
@@ -417,6 +425,7 @@ def main():
     ap.add_argument("--min-spread", type=float, default=1.15, help="refuse below this p95/p5 of the paint field")
     ap.add_argument("--cell-frac", type=float, default=0.035, help="cell size as a fraction of the body LENGTH")
     ap.add_argument("--sigma-cells", type=float, default=1.5, help="smoothing of the lighting field, in cells")
+    ap.add_argument("--field-pct", type=float, default=75.0, help="per-cell percentile used as the paint's own brightness")
     ap.add_argument("--clamp", type=float, default=1.6, help="max correction factor either way")
     ap.add_argument("--geo-res", type=int, default=1024, help="resolution of the texel->geometry maps")
     ap.add_argument("--min-sky", type=float, default=0.25, help="sky-visibility cut for the paint candidates")
@@ -542,12 +551,16 @@ def main():
 
     # --- measure BEFORE -----------------------------------------------------
     before = spread_report(pos_all, paint, lum_all, cell)
+    before90 = spread_report(pos_all, paint, lum_all, cell, pct=90.0)
     trends = axis_trends(pos_all, paint, lum_all)
-    print("\nBAKED LIGHTING MEASURED (paint, median per %.1f%%-of-length cell, %d cells):"
+    print("\nBAKED LIGHTING MEASURED (paint, per %.1f%%-of-length cell, %d cells):"
           % (100 * args.cell_frac, before["cells"]))
-    print("  linear luminance  p5 %.3f  p25 %.3f  med %.3f  p75 %.3f  p95 %.3f"
+    print("  cell median  linear luminance  p5 %.3f  p25 %.3f  med %.3f  p75 %.3f  p95 %.3f"
           % (before["p5"], before["p25"], before["p50"], before["p75"], before["p95"]))
-    print("  low-frequency spread p95/p5 = %.2fx   interquartile = %.2fx" % (before["spread"], before["iqr"]))
+    print("  low-frequency spread p95/p5 = %.2fx (cell median) / %.2fx (cell p90, robust to dark detail)"
+          % (before["spread"], before90["spread"]))
+    print("  interquartile        p75/p25 = %.2fx (cell median) / %.2fx (cell p90)"
+          % (before["iqr"], before90["iqr"]))
     for name, r in trends:
         print("  trend along the %-8s body axis: %.2fx end to end" % (name, r))
     print("  high-frequency detail (residual log-luminance std): %.4f" % before["detail_std"])
@@ -558,7 +571,7 @@ def main():
 
     # --- fit and apply ------------------------------------------------------
     S, org, cellsz, ref, nsup, ncell = shading_field(
-        pos_all, paint, lum_all, cell, args.sigma_cells, args.clamp, min_cell=25)
+        pos_all, paint, lum_all, cell, args.sigma_cells, args.clamp, min_cell=25, pct=args.field_pct)
     fs = sample_field(S, org, cellsz, pos_all[paint])
     print("\nlighting field: %d cells from %d paint texels, correction %.3f..%.3f (median %.3f); "
           "%.0f%% of paint area moves by more than 10%%"
@@ -566,15 +579,16 @@ def main():
 
     lum_new = lum_all / np.maximum(sample_field(S, org, cellsz, pos_all), 1e-3)
     after = spread_report(pos_all, paint, lum_new, cell)
-    print("AFTER: spread p95/p5 = %.2fx (was %.2fx), interquartile = %.2fx (was %.2fx), "
-          "detail std %.4f (was %.4f)"
-          % (after["spread"], before["spread"], after["iqr"], before["iqr"],
-             after["detail_std"], before["detail_std"]))
+    after90 = spread_report(pos_all, paint, lum_new, cell, pct=90.0)
+    print("AFTER: spread p95/p5 %.2fx -> %.2fx (cell median), %.2fx -> %.2fx (cell p90); "
+          "interquartile %.2fx -> %.2fx; detail std %.4f -> %.4f (must not move)"
+          % (before["spread"], after["spread"], before90["spread"], after90["spread"],
+             before["iqr"], after["iqr"], before["detail_std"], after["detail_std"]))
     for (name, r0), (_, r1) in zip(trends, axis_trends(pos_all, paint, lum_new)):
         print("  trend along the %-8s axis: %.2fx -> %.2fx" % (name, r0, r1))
 
     rep = dict(input=args.inp, output=args.out, body_length=length, cell=cell,
-               paint=info, before=before, after=after,
+               paint=info, before=before, after=after, before_p90=before90, after_p90=after90,
                trends_before=dict(trends), trends_after=dict(axis_trends(pos_all, paint, lum_new)),
                field_min=float(fs.min()), field_max=float(fs.max()))
     if args.report:

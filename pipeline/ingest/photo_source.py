@@ -433,8 +433,18 @@ def download(cand, outdir, wm_interval, ov_interval, max_bytes):
 # --------------------------------------------------------------------------
 # Optional quality check: rembg cutout + car pixel fraction
 # --------------------------------------------------------------------------
-def cutout_fraction(path, outdir):
-    """Return (fraction, cutout_path, error). Import is lazy -- rembg is heavy."""
+def cutout_fraction(path, outdir, model="birefnet-general", probe_px=1024):
+    """Return (fraction, cutout_path, error). Import is lazy -- rembg is heavy.
+
+    This is a SCREENING measurement, not the production cutout: it answers "does
+    a car occupy a sensible share of this frame", so it runs on a downscaled
+    copy. That matters because there is no GPU here -- measured on this box,
+    birefnet-general at 1600px takes minutes per image on CPU, which would put a
+    20-car run into the hour range for a number that does not change. 1024px
+    gives the same fraction far faster; `isnet-general-use` is faster still and
+    is already cached alongside birefnet if you want to trade a little edge
+    quality for speed.
+    """
     try:
         from PIL import Image
         from rembg import remove, new_session
@@ -445,11 +455,12 @@ def cutout_fraction(path, outdir):
         try:
             _RSESS
         except NameError:
-            _RSESS = new_session("birefnet-general")
+            _RSESS = {}
+        if model not in _RSESS:
+            _RSESS[model] = new_session(model)
         im = Image.open(path).convert("RGB")
-        # cutting out at full 4000px costs minutes on CPU for no extra signal
-        im.thumbnail((1600, 1600))
-        cut = remove(im, session=_RSESS)
+        im.thumbnail((probe_px, probe_px))
+        cut = remove(im, session=_RSESS[model])
         alpha = cut.split()[-1]
         px = list(alpha.getdata())
         frac = sum(1 for p in px if p > 128) / float(len(px))
@@ -503,6 +514,10 @@ def main():
                     help="Openverse source filter (wikimedia|flickr|...)")
     ap.add_argument("--cutout", action="store_true",
                     help="run rembg and record the car pixel fraction")
+    ap.add_argument("--cutout-model", default="birefnet-general",
+                    help="rembg model (birefnet-general | isnet-general-use)")
+    ap.add_argument("--cutout-px", type=int, default=1024,
+                    help="downscale before the screening cutout (CPU-bound)")
     ap.add_argument("--state", help="resume file (default <out>/photo_source_state.json)")
     ap.add_argument("--retry-failed", action="store_true",
                     help="re-attempt cars previously recorded as failed")
@@ -580,7 +595,8 @@ def main():
                 rec["dropped"].append({"title": c["title"][:90], "reason": derr})
                 continue
             if a.cutout:
-                frac, cp, cerr = cutout_fraction(fn, a.out)
+                frac, cp, cerr = cutout_fraction(fn, a.out, a.cutout_model,
+                                                 a.cutout_px)
                 c["cutout_fraction"] = frac
                 c["cutout_file"] = cp
                 c["cutout_error"] = cerr
