@@ -2733,3 +2733,48 @@ verified the direction.
 
 Also paid for AGAIN tonight: `until ! pgrep -f "premium.py"` — the wrapper self-match
 trap this file already documents. Killed via TaskStop; wait on artifacts or monitors.
+
+## PIXAL3D ON THE YARIS: the best generated car this project has produced (2026-08-19)
+
+Owner asked for a three-month review to pick the best decision; the review said the
+fine-tune route is measured-dead (collapse by step 200, three runs) and the untested
+combination was **Pixal3D geometry -> tonight's premium machine**. Ran it. The raw
+generator output is, by eye, the first generated car that looks like a real car:
+Toyota badge on the grille, headlamp units with internal structure, door shut lines,
+door handles, formed mirrors, alloy spokes, number plate, tail lamps. Nothing in
+TRELLIS/PartCrafter/Hunyuan/Hi3DGen came close to this.
+
+Numbers: 918,715 faces, 38.7MB, **crease density 159.1** (Hunyuan 43, Hi3DGen 145,
+catalogue band 162-271, the Aug-15 Pixal Golf 271.6). NOTE the Yaris scores well
+BELOW that Golf run — the metric and the eye disagree in the safe direction here, and
+the eye is the arbiter (this file's own rule). Input was the same Wikimedia front 3/4
+RGBA cutout the Hi3DGen run used; a better capture is the obvious next lever.
+Evidence: car-meshes/pixal_test/pixal_golf.glb (raw, 38.7MB) and
+car-meshes/staging/yaris_pixal/PIXAL_YARIS.jpg (4-view sheet).
+
+**Two upstream breakages fixed to get here (the Aug-15 recipe no longer ran):**
+  * `inference.py` now imports MoGe-2 for camera estimation (`from moge.model.v2
+    import MoGeModel`) — install `git+https://github.com/microsoft/MoGe.git`.
+  * MoGe drags huggingface-hub to >=1.x, which breaks the image's transformers
+    (`<1.0 required`) at import time. Repin `huggingface-hub>=0.34.0,<1.0` AFTER it
+    and assert `import transformers` + the moge import BEFORE renting inference
+    minutes. Same clobber class as the torch guard. Both runs died at ~$0.15 each
+    because the asserts sit in the deps stage; the third run produced the mesh.
+
+**Known state of the raw output, do not overclaim:**
+  * texture carries BAKED LIGHTING (sky reflections painted into the glazing) — the
+    production brief forbids that in base colour; it needs de-lighting or the
+    material pipeline's own glass.
+  * ONE fused shell, one material — glass_probe would read opaque, paint would cover
+    the tyres. This is the documented Pixal caveat and exactly what the 2D-seg
+    material chain + premium.py exist to fix.
+  * canon.py is mandatory first (pixel-aligned = CAMERA space): raw ext
+    0.913 x 0.436 x 0.946 -> canonical L 0.970 W 0.561 H 0.407.
+
+**Bucket 413s above ~25MB** on the plain object POST path — the pod's own uploader
+handles the 38MB raw, a local `--data-binary` POST does not. Derive canon locally
+from the bucketed raw rather than trying to store it.
+
+Two container rollbacks hit during this run. Recovery was clean both times (origin +
+bucket), but note: **a rollback also wipes pip installs** — the local CPU torch/
+transformers stack for the seg pipeline had to be reinstalled twice.
