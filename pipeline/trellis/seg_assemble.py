@@ -11,6 +11,7 @@ Lamps get a dark gloss lens.
 
 Run: python3 seg_assemble.py <canon.glb> <labels.npy> <out.glb>
 """
+import os
 import sys
 import numpy as np
 import trimesh
@@ -61,13 +62,23 @@ mats = {
     TYRE: ("Tyre_Rubber", PBRMaterial(name="Tyre_Rubber",
            baseColorFactor=[12, 12, 13, 255], metallicFactor=0.0,
            roughnessFactor=0.9)),
-    RIM: ("Rim_Alloy", PBRMaterial(name="Rim_Alloy",
-          baseColorFactor=[168, 170, 175, 255], metallicFactor=0.9,
-          roughnessFactor=0.35)),
     LAMP: ("Lamp_Lens", PBRMaterial(name="Lamp_Lens",
            baseColorFactor=[15, 15, 17, 255], metallicFactor=0.0,
            roughnessFactor=0.08)),
 }
+# THE RIM KEEPS ITS TEXTURE. A flat Rim_Alloy colour is right for a SOURCED
+# car (the "never trust a wheel's own material table" rule — those ship
+# whole wheels as one pale material), but on a generated mesh whose texture
+# carries real photographic spoke detail it PAINTS THAT DETAIL OUT: measured
+# on the Pixal Yaris, a 5x wheel crop showed a flat grey disc where the raw
+# generator render had readable alloy spokes. Keep the pixels, and let the
+# TYRE material do the job the rule actually cares about (black rubber).
+# RIM_FLAT=1 restores the old behaviour for a source with a fake wheel material.
+RIM_FLAT = os.environ.get("RIM_FLAT") == "1"
+if RIM_FLAT:
+    mats[RIM] = ("Rim_Alloy", PBRMaterial(name="Rim_Alloy",
+                 baseColorFactor=[168, 170, 175, 255], metallicFactor=0.9,
+                 roughnessFactor=0.35))
 
 # interior/unseen gets a DARK MATTE material, not the baked texture: the
 # production worker forces transmission onto the glass, and a noisy grey
@@ -78,7 +89,8 @@ mats[UNSEEN] = ("interior", PBRMaterial(name="interior",
                 roughnessFactor=0.9))
 
 out = trimesh.Scene()
-for key, name in ((BODY, "carpaint"),):
+_textured = [(BODY, "carpaint")] + ([] if RIM_FLAT else [(RIM, "Rim_Alloy")])
+for key, name in _textured:
     idx = np.where(lab2 == key)[0]
     if not len(idx):
         continue
