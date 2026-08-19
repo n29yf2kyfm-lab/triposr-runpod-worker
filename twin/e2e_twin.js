@@ -449,6 +449,50 @@ const check = (name, cond, detail = '') =>
   await page.click('#undo');
   await page.waitForTimeout(700);
 
+  /* --- real ground under the model ------------------------------------ */
+  /* Tolerant of the data, strict about the CODE: the LIDAR service can
+   * be down and a house can be outside coverage, so either the imagery
+   * arrives with its attribution on the frame, or the panel says in
+   * words why it did not. Silence is the only failure. */
+  const ground = await page.waitForFunction(
+    () => {
+      const n = document.getElementById('groundNote').innerText;
+      return (window.__twinUI.viewer && window.__twinUI.viewer.groundTex)
+        || /not|no |unreachable|coverage|key/i.test(n);
+    }, null, { timeout: 120000 }).then(() => true).catch(() => false);
+  const gInfo = await page.evaluate(() => ({
+    tex: !!(window.__twinUI.viewer && window.__twinUI.viewer.groundTex),
+    note: document.getElementById('groundNote').innerText,
+    credit: document.getElementById('groundCredit').innerText,
+    shown: getComputedStyle(
+      document.getElementById('groundCredit')).display !== 'none',
+    corners: window.__twinUI.viewer && window.__twinUI.viewer.groundQuad,
+  }));
+  check('the ground either loads or says why not', ground,
+        gInfo.note.slice(0, 90));
+  if (gInfo.tex) {
+    check('imagery carries its attribution ON the frame',
+          gInfo.shown && gInfo.credit.length > 8, gInfo.credit.slice(0, 70));
+    check('and it is placed in the building frame, rotated with the house',
+          Array.isArray(gInfo.corners) && gInfo.corners.length === 4 &&
+          gInfo.corners.every((c) => Math.abs(c[0]) < 500 &&
+                                     Math.abs(c[1]) < 500),
+          JSON.stringify(gInfo.corners));
+  }
+
+  await page.selectOption('#ground', 'off');
+  await page.waitForFunction(
+    () => !window.__twinUI.viewer.groundTex, null, { timeout: 20000 });
+  check('turning the ground off clears the texture', true);
+  await page.selectOption('#ground', 'mapbox-satellite');
+  await page.waitForFunction(
+    () => /MAPBOX_TOKEN|key/i.test(
+      document.getElementById('groundNote').innerText), null,
+    { timeout: 30000 })
+    .then(() => check('a source with no key says which key it needs', true))
+    .catch(() => check('a source with no key says which key it needs', false,
+                       'no mention of the token'));
+
   /* --- the drawing set: a real PDF, at a real scale ------------------- */
   await page.selectOption('#paper', 'A3');
   await page.selectOption('#sheetScale', '');

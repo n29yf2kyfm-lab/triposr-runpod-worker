@@ -219,8 +219,9 @@ class MeshBuilder {
   groundImage(corners) {
     const P = (x, y, z) => [x, z, -y];
     const [sw, se, ne, nw] = corners;
-    this.quad(P(sw[0], sw[1], 0), P(se[0], se[1], 0),
-              P(ne[0], ne[1], 0), P(nw[0], nw[1], 0),
+    const z = 0.015;            // clear of the plane it lies on
+    this.quad(P(sw[0], sw[1], z), P(se[0], se[1], z),
+              P(ne[0], ne[1], z), P(nw[0], nw[1], z),
               [1, 1, 1], [[0, 1], [1, 1], [1, 0], [0, 0]]);
   }
 
@@ -290,12 +291,16 @@ export class Viewer3D {
     if (!solids.length) { minx = miny = -5; maxx = maxy = 5; }
     this._massing = massing;
     const pad = Math.max(8, (maxx - minx) * 0.8);
-    if (this.groundTex && this.groundQuad) {
-      mb.groundImage(this.groundQuad);
-    } else {
-      mb.ground(minx - pad, miny - pad, maxx + pad, maxy + pad,
-                [0.18, 0.21, 0.17]);
-    }
+    /* The plain plane is drawn EITHER WAY, and the imagery sits just
+     * above it. The imagery covers a fixed box round the house, so on
+     * its own it left a void at the edge of the world that read as a
+     * hole in the ground. Underlay first, photograph on top. */
+    // Big enough that the camera never sees its edge at any orbit;
+    // it costs two triangles.
+    const gpad = Math.max(pad, 400);
+    mb.ground(minx - gpad, miny - gpad, maxx + gpad, maxy + gpad,
+              [0.18, 0.21, 0.17]);
+    if (this.groundTex && this.groundQuad) mb.groundImage(this.groundQuad);
     if (massing.traced_ring && opts.showTraced !== false) {
       // The surveyed outline, laid on the ground as a thin plate so the
       // fitted rectangle can be compared against what was actually there.

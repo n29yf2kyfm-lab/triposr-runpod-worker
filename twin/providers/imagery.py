@@ -362,12 +362,11 @@ def mosaic(source, west, south, east, north, target_px=1024, session=None):
     if isinstance(source, str):
         try:
             source = get(source)
-        except KeyError:
+        except (KeyError, ValueError):
             return None, f"no imagery source named {source!r}"
-    bad = source.blocked_reasons()
-    if bad:
+    ok, bad = source.usable()
+    if not ok:
         return None, "; ".join(bad)
-    licences.check(source.licence, licences.USE_RENDER)
 
     z = zoom_for(west, south, east, north, target_px, source.max_zoom)
     x0f, y1f = _merc_xy(west, south, z)

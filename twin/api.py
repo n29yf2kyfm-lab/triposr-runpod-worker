@@ -400,7 +400,10 @@ def project_ground(pid):
     pj = _project(pid)
     bld = pj.current()
     margin = _float("margin_m", required=False, lo=0, hi=200)
-    margin = max(6.0, min(120.0, 25.0 if margin is None else margin))
+    # 45 m of street either side: enough that the neighbours, the road
+    # and the back gardens are in shot, which is what makes the model
+    # read as standing somewhere rather than floating.
+    margin = max(6.0, min(120.0, 45.0 if margin is None else margin))
     want = request.args.get("source")
 
     xs, ys = [], []
@@ -424,20 +427,43 @@ def project_ground(pid):
     country = "GB"
     order = ([want] if want else
              [s["key"] for s in img.for_country(country) if s["usable"]])
-    tried, png, info = [], None, None
-    for key in order:
-        tried.append(key)
-        try:
-            src = img.get(key)
-        except KeyError:
-            continue
-        if key == "lidar-hillshade":
-            png, info = img.render_lidar_surface(west, south, east, north)
-        else:
-            png, info = img.mosaic(src, west, south, east, north)
+    # CACHED ON THE BOX, NOT THE PROJECT. The LIDAR fetch takes seconds,
+    # and the same ground serves every edit of the same house — and the
+    # neighbour's twin too. Keyed on the rounded box so a nudge of the
+    # extension does not re-fetch a picture of the same street.
+    ckey = cache_mod.Cache.key("ground", want or "auto",
+                               *(round(v, 4) for v in
+                                 (west, south, east, north)))
+    hit = _cache.get(ckey)
+    if hit is not None:
+        png = base64.b64decode(hit["png"])
+        info, tried = hit["info"], hit["asked"]
+    else:
+        tried, png, info = [], None, None
+        for key in order:
+            tried.append(key)
+            try:
+                src = img.get(key)
+            except (KeyError, ValueError):
+                continue
+            if key == "lidar-hillshade":
+                png, info = img.render_lidar_surface(west, south, east, north)
+            else:
+                png, info = img.mosaic(src, west, south, east, north)
+            if png:
+                break
+            png = None
         if png:
-            break
-        png = None
+            # The cache refuses a licence that forbids keeping a copy,
+            # so a source we may only stream is simply never stored.
+            try:
+                _cache.put(ckey, info.get("source", "lidar-hillshade"),
+                           info.get("licence", "ogl-3.0"),
+                           {"png": base64.b64encode(png).decode(),
+                            "info": info, "asked": tried},
+                           ttl=90 * 86400)
+            except Exception:
+                pass
     if not png:
         return _out({"available": False, "status": "DATA NOT AVAILABLE",
                      "reason": (info if isinstance(info, str) else

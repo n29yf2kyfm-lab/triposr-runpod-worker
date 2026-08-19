@@ -1453,6 +1453,109 @@ class TestReviewFindings(unittest.TestCase):
         self.assertFalse(any(t.startswith("W0") for t in texts))
 
 
+# ------------------------------------------------------- ground imagery
+class TestGround(unittest.TestCase):
+    """Imagery draped under the 3D model. The maths that places it is
+    the part that can be wrong silently, so that is what is tested."""
+
+    def _project(self):
+        from twin import commands, model
+        f = geodesy.LocalFrame(52.4856, -1.8476)
+        ring = [list(f.to_lonlat(x, y)) for x, y in
+                [(0, 0), (6, 0), (6, 10), (0, 10), (0, 0)]]
+        bld = model.from_footprint({
+            "type": "Feature", "id": "way/1", "properties": {"levels": "2"},
+            "geometry": {"type": "Polygon", "coordinates": [ring]}})
+        bld.bearing_deg = 20.4          # a real terrace is never square to north
+        return commands.Project(bld)
+
+    def test_the_zoom_matches_the_detail_asked_for(self):
+        from twin.providers import imagery
+        # A 60 m box at 1024 px wants roughly 6 cm per pixel: z21.
+        z = imagery.zoom_for(-1.8480, 52.4850, -1.8471, 52.4856, 1024, 22)
+        self.assertGreaterEqual(z, 19)
+        self.assertLessEqual(z, 22)
+
+    def test_a_source_cannot_be_asked_beyond_the_zoom_it_publishes(self):
+        """Past its max, a tile server returns grey 'no data' images that
+        read as a rendering fault rather than a missing licence."""
+        from twin.providers import imagery
+        self.assertEqual(
+            imagery.zoom_for(-1.848, 52.485, -1.8479, 52.4851, 4096, 17), 17)
+
+    def test_a_keyed_source_is_refused_before_a_single_tile_is_fetched(self):
+        from twin.providers import imagery
+        png, reason = imagery.mosaic("mapbox-satellite", -1.848, 52.485,
+                                     -1.847, 52.486)
+        self.assertIsNone(png)
+        self.assertIn("MAPBOX_TOKEN", reason)
+
+    def test_an_unknown_source_is_named_not_swallowed(self):
+        from twin.providers import imagery
+        png, reason = imagery.mosaic("not-a-source", -1.848, 52.485,
+                                     -1.847, 52.486)
+        self.assertIsNone(png)
+        self.assertIn("not-a-source", reason)
+
+    def test_the_ground_comes_back_in_the_buildings_own_frame(self):
+        """The corners must be ROTATED with the building. Handing the
+        browser a lon/lat box would drape imagery square to north under
+        a house that stands at 20 degrees to it."""
+        from twin import api as A
+        from twin.providers import imagery
+        pj = self._project()
+        A._projects[pj.id] = pj
+        fake = (b"\x89PNG\r\n\x1a\n" + b"\0" * 32,
+                {"bounds": [-1.8485, 52.4850, -1.8467, 52.4862],
+                 "cell_m": 1.0, "licence": "ogl-3.0",
+                 "attribution": "Environment Agency", "source": "lidar"})
+        real = imagery.render_lidar_surface
+        real_get = type(A._cache).get
+        imagery.render_lidar_surface = lambda *a, **k: fake
+        # Force a cache miss, and PUT IT BACK — patching a class and
+        # walking away leaves every later test running against a cache
+        # that always misses, which is how a suite starts lying.
+        type(A._cache).get = lambda self, k: None
+        try:
+            r = A.app.test_client().get(f"/api/project/{pj.id}/ground")
+        finally:
+            imagery.render_lidar_surface = real
+            type(A._cache).get = real_get
+        self.assertEqual(r.status_code, 200)
+        d = r.get_json()
+        self.assertTrue(d["available"], d)
+        self.assertEqual(len(d["corners_m"]), 4)
+        # Rotated: no edge of the quad is axis-aligned in the local frame.
+        xs = [c[0] for c in d["corners_m"]]
+        ys = [c[1] for c in d["corners_m"]]
+        self.assertGreater(max(xs) - min(xs), 1.0)
+        self.assertGreater(max(ys) - min(ys), 1.0)
+        for i in range(4):
+            a, b = d["corners_m"][i], d["corners_m"][(i + 1) % 4]
+            self.assertGreater(abs(a[0] - b[0]), 1e-3,
+                               "an edge is square to the local frame, so "
+                               "the bearing was not applied")
+        self.assertIn("Environment Agency", d["attribution"])
+
+    def test_the_ground_says_what_it_needs_when_there_is_none(self):
+        from twin import api as A
+        from twin.providers import imagery
+        pj = self._project()
+        A._projects[pj.id] = pj
+        real = imagery.render_lidar_surface
+        imagery.render_lidar_surface = lambda *a, **k: (None, "no coverage")
+        try:
+            r = A.app.test_client().get(
+                f"/api/project/{pj.id}/ground?source=lidar-hillshade")
+        finally:
+            imagery.render_lidar_surface = real
+        d = r.get_json()
+        self.assertFalse(d["available"])
+        self.assertEqual(d["status"], "DATA NOT AVAILABLE")
+        self.assertIn("no coverage", d["reason"])
+        self.assertIn("key of", d["note"])
+
+
 # ---------------------------------------------------------- drawing sheets
 class TestSheets(unittest.TestCase):
     """A drawing is a document with a scale you can put a rule against.

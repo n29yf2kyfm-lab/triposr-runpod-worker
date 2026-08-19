@@ -58,6 +58,7 @@ export async function openTwin(lat, lon) {
   render();
   status('');
   refreshAssessment();
+  loadGround();                       // slow, and not worth waiting for
   return body;
 }
 
@@ -101,6 +102,50 @@ function ensureViews() {
         `${room.area_m2} m² · ${room.width.toFixed(2)} × ${room.depth.toFixed(2)} m`;
     };
   }
+}
+
+/* --- real ground under the model -------------------------------------- */
+/* Fetched AFTER the twin is on screen, never before. The LIDAR service
+ * takes seconds on a cold box, and a blank screen while it thinks is a
+ * worse first impression than a grey plane that improves a moment
+ * later. Failure is reported in words and the grey plane stays. */
+let groundToken = 0;
+
+async function loadGround() {
+  if (!project || !viewer) return;
+  const want = $('ground').value;
+  const note = $('groundNote');
+  const credit = $('groundCredit');
+  const mine = ++groundToken;
+
+  if (want === 'off') {
+    viewer.clearGround();
+    credit.style.display = 'none';
+    note.textContent = 'No imagery — the model stands on a plain plane.';
+    return;
+  }
+  note.textContent = 'Fetching the ground…';
+  const q = want === 'auto' ? '' : `?source=${encodeURIComponent(want)}`;
+  const { body } = await api(`/api/project/${project.project_id}/ground${q}`);
+  if (mine !== groundToken) return;          // a newer request won
+  if (!body.available) {
+    viewer.clearGround();
+    credit.style.display = 'none';
+    note.innerHTML = `<span style="color:#e2a33a">${esc(body.reason
+      || 'no imagery here')}</span>` + (body.note ? `<br>${esc(body.note)}` : '');
+    return;
+  }
+  try {
+    await viewer.setGround(body.image, body.corners_m, body);
+  } catch (e) {
+    note.textContent = `The imagery would not draw: ${e.message}`;
+    return;
+  }
+  if (mine !== groundToken) return;
+  credit.textContent = body.attribution || '';
+  credit.style.display = body.attribution ? 'block' : 'none';
+  note.textContent = `${body.source} · ${body.resolution_m} m per pixel`
+    + ` · ${body.licence}`;
 }
 
 /* --- the one write path ----------------------------------------------- */
@@ -393,6 +438,8 @@ export function initTwinUI() {
    * anything that could NOT be drawn are on screen before a PDF opens in
    * another tab — a set with a missing elevation should say so here, not
    * be discovered by counting pages. */
+  $('ground').onchange = () => loadGround();
+
   $('sheetsBtn').onclick = async () => {
     if (!project) return;
     const q = `paper=${encodeURIComponent($('paper').value)}` +
