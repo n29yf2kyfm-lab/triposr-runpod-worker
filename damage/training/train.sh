@@ -446,6 +446,42 @@ PY
 # renders them.
 # Images arrive as ~30 tar shards, not 167,157 loose files. A per-file
 # transfer of that many small objects stalled dead against HTTP 429 at 6%.
+# GPU PREFLIGHT — one real convolution, before any data is fetched.
+#
+# The first panel run died with "cuDNN error: CUDNN_STATUS_NOT_INITIALIZED" at
+# the first training batch. Everything before it had worked: deps installed,
+# the dataset downloaded and extracted, 1,002 files verified. The fault was the
+# machine, not the run — and it was discovered only after all of that had been
+# paid for.
+#
+# nvidia-smi does NOT catch this. It reports a healthy GPU on a host whose
+# cuDNN cannot initialise, because it never asks cuDNN for anything. So the
+# check has to be an actual convolution on the actual device: it is the
+# cheapest possible instance of the exact operation that failed, it runs in
+# under a second, and a failure here means "relaunch onto another machine"
+# rather than "debug the pipeline".
+echo "=== gpu preflight ==="
+python - <<'PYGPU' || exit 14
+import sys
+import torch
+print("torch", torch.__version__, "cuda", torch.version.cuda,
+      "cudnn", torch.backends.cudnn.version())
+if not torch.cuda.is_available():
+    print("PREFLIGHT FAIL: no CUDA device visible")
+    sys.exit(1)
+print("device:", torch.cuda.get_device_name(0))
+try:
+    x = torch.randn(1, 3, 64, 64, device="cuda")
+    w = torch.randn(8, 3, 3, 3, device="cuda")
+    y = torch.nn.functional.conv2d(x, w)
+    torch.cuda.synchronize()
+    print("cudnn conv OK", tuple(y.shape))
+except Exception as e:
+    print(f"PREFLIGHT FAIL: {type(e).__name__}: {e}")
+    print("This machine cannot run cuDNN. Relaunch — it is host-specific.")
+    sys.exit(1)
+PYGPU
+
 # PANEL MODE. The panel dataset is 998 images and 692MB — three orders of
 # magnitude smaller than the damage corpus — so none of the shard machinery
 # below applies to it. It ships as ONE tar already in RF-DETR's train/valid/test
