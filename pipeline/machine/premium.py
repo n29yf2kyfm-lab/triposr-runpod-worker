@@ -284,22 +284,28 @@ def main():
 
 def apply_interior(car_glb, kit_npz, out_glb, log_path):
     """Merge interior_kit parts into the car scene. Kit x-coords assume a
-    CENTRED-x car (V-chain convention); a corner-origin or offset car gets
-    the kit shifted to its own x-midpoint. Recorded in the log."""
+    CENTRED-x car of the V-chain calibration length (4.284m); a shorter or
+    offset car gets the kit x-SCALED by its own length ratio and shifted
+    to its x-midpoint — the unscaled kit poked the dashboard through the
+    Yaris's cowl (measured, red-control render). Recorded in the log."""
     import numpy as np
     import trimesh
     from trimesh.visual.material import PBRMaterial
+    CAL_L = 4.284
     with open(log_path, "a") as lf:
         try:
             sc = trimesh.load(car_glb, force="scene")
             allv = np.vstack([g.vertices for g in sc.geometry.values()])
             xmid = float((allv[:, 0].max() + allv[:, 0].min()) / 2)
+            xscale = float((allv[:, 0].max() - allv[:, 0].min()) / CAL_L)
             z = np.load(kit_npz)
             manifest = json.loads(bytes(z["manifest"]).decode())
             for part in manifest:
                 m = trimesh.Trimesh(vertices=z[part["v"]].copy(),
                                     faces=z[part["f"]].copy(), process=False)
-                m.apply_translation([xmid, 0, 0])
+                v2 = m.vertices.copy()
+                v2[:, 0] = v2[:, 0] * xscale + xmid
+                m.vertices = v2
                 col = list(part["color"]) + [255]
                 m.visual = trimesh.visual.TextureVisuals(
                     material=PBRMaterial(name=part["name"],

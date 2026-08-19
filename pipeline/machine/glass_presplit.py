@@ -161,13 +161,23 @@ if len(panes) < 2:
     json.dump(QC, open(OUT.replace(".glb", "_presplit_qc.json"), "w"), indent=1)
     raise SystemExit(f"REFUSED: {QC['reason']}")
 
+def _fresh_visual(src):
+    """A NEW TextureVisuals holding the source's material. Reassigning the
+    ORIGINAL visuals object onto a mesh with a different vertex count left
+    a stale-length uv array behind — the export then dropped the material
+    binding and the evicted roof faces rendered default-white and took no
+    paint (measured on the Yaris premium red control)."""
+    mat = getattr(src.visual, "material", None)
+    return trimesh.visual.TextureVisuals(material=mat)
+
+
 new_glass = trimesh.util.concatenate(panes)
-new_glass.visual = g.visual
+new_glass.visual = _fresh_visual(g)
 if evict.any():
     ev = g.submesh([np.where(evict)[0]], append=True)
-    ev.visual = body.visual
+    ev.visual = _fresh_visual(body)
     new_body = trimesh.util.concatenate([body, ev])
-    new_body.visual = body.visual
+    new_body.visual = _fresh_visual(body)
 else:
     new_body = body
 
