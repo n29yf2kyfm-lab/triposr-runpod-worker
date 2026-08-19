@@ -87,3 +87,29 @@ keep in sync.
   switching, and drag-to-edit that goes through the same command path.
 
     node twin/e2e_twin.js      # 18 browser tests over stages 2-5
+
+## Pricing
+
+`building/estimate.py` turns a measured bill into a builder's estimate:
+materials, labour by trade with hours, preliminaries, overhead and
+profit, contingency, professional fees, VAT and a **range**.
+
+Three things keep it honest:
+
+1. **It declares its coverage.** Ten standard work packages; the
+   estimate says which are priced and which are missing, and a partial
+   bill is labelled PARTIAL with the exclusions listed.
+2. **It declares its rate provenance.** Shipped rates are indicative and
+   say so on every estimate. Your own rates, or invoice-derived rates
+   through `prices.py`, replace them and the estimate reports the mix.
+3. **It sanity-checks itself in £/m².** Small domestic work costs
+   £1,800–£3,200/m²; an estimate landing outside that band says so in
+   words, and tells you whether the cause is missing work or low rates.
+
+**Calibration** is the feature that makes it yours:
+
+    card, report = estimate.calibrate(bill, gia_m2, known_per_m2=2200)
+
+One job you have really done, and every rate is scaled to your business.
+Region (12 UK regions) and VAT basis (20% / 5% / 0%, per HMRC Notice
+708) are selectable in the UI.

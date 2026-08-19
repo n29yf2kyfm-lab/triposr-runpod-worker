@@ -175,7 +175,12 @@ function drawHistory() {
 async function refreshAssessment() {
   if (!project) return;
   $('assess').innerHTML = '<div class="dim">checking…</div>';
-  const { body } = await api(`/api/project/${project.project_id}/assess`);
+  const region = $('region') ? $('region').value : '';
+  const vat = $('vat') ? $('vat').value : 'standard';
+  const cal = $('calRate') && $('calRate').value
+    ? `&calibrate_per_m2=${encodeURIComponent($('calRate').value)}` : '';
+  const { body } = await api(
+    `/api/project/${project.project_id}/assess?region=${region}&vat=${vat}${cal}`);
   if (!body.available) {
     $('assess').innerHTML = `<div class="na">DATA NOT AVAILABLE<small>${
       esc(body.reason)}</small></div>`;
@@ -218,6 +223,42 @@ async function refreshAssessment() {
     html += '</details>';
   } else if (q) {
     html += `<div class="na small">${esc(q.reason || '')}</div>`;
+  }
+  const e = body.estimate;
+  if (e && e.available !== false) {
+    const t = e.totals, pm = e.per_m2;
+    html += `<div class="sect"><h3>Estimate</h3>`;
+    html += `<div class="price">£${Math.round(t.gross).toLocaleString()}` +
+      `<span class="dim small"> incl VAT</span></div>`;
+    html += `<div class="dim small">realistic range £${
+      Math.round(t.range_low).toLocaleString()} – £${
+      Math.round(t.range_high).toLocaleString()}</div>`;
+    if (pm) {
+      const band = /inside/.test(pm.verdict) ? 'v-ok' : 'v-massing';
+      html += `<div class="verdict ${band}" style="margin-top:7px">£${
+        pm.gross_per_m2.toLocaleString()} / m²</div>`;
+      html += `<div class="dim small">${esc(pm.verdict)}</div>`;
+    }
+    html += [['Materials', e.materials.total],
+             [`Labour (${e.labour.hours} hrs)`, e.labour.total],
+             ['Preliminaries', e.preliminaries.total],
+             ['Overhead &amp; profit', e.overhead_profit.total],
+             ['Contingency', e.contingency.total],
+             ['Professional fees', e.professional_fees.total],
+             [`VAT ${(t.vat_rate * 100).toFixed(0)}%`, t.vat]]
+      .map(([k, v]) => `<div class="kv"><span>${k}</span><span>£${
+        Math.round(v).toLocaleString()}</span></div>`).join('');
+    if (e.status === 'PARTIAL') {
+      html += `<div class="warn">PARTIAL PRICE — excludes ${
+        esc(e.excludes.join('; '))}</div>`;
+    }
+    html += `<div class="warn">${esc(e.rate_provenance.confidence)}</div>`;
+    html += `<details><summary>Rates &amp; VAT</summary><div class="prov">` +
+      `${esc(e.rate_provenance.basis)}<br><br>${esc(e.vat_basis)}` +
+      `<br><br>${esc(e.disclaimer)}</div></details>`;
+    html += `</div>`;
+  } else if (e) {
+    html += `<div class="na small">${esc(e.reason || '')}</div>`;
   }
   $('assess').innerHTML = html;
 }
@@ -262,6 +303,10 @@ export function initTwinUI() {
     $('projBtn').textContent = ortho ? 'Orthographic' : 'Perspective';
   };
 
+  for (const id of ['region', 'vat', 'calRate']) {
+    const el = $(id);
+    if (el) el.onchange = () => refreshAssessment();
+  }
   $('beforeAfter').onchange = (e) => {
     showBaseline = e.target.checked;
     render._framed = true;

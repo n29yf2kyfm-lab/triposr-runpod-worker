@@ -431,14 +431,212 @@ def services(model, heat=None, elec=None, mep=None):
     return out
 
 
+# --------------------------------------------------------- the rest of it
+# WHAT WAS MEASURED AND WHAT WAS NOT. The four groups above are real
+# work, and they are roughly a third of a domestic job: no foundations,
+# no roof timbers, no windows, no insulation, no fit-out. Pricing that
+# and calling it the cost is how an estimate becomes a trap — estimate.py
+# refuses to present a partial bill as a whole one, and these functions
+# close the gap so it does not have to.
+#
+# Every figure here comes off the SAME geometry as the rest of the bill;
+# nothing new is assumed about the building that the model does not say.
+# Where a real design decision is missing — ground conditions, the beam
+# over the opening — the line is an ALLOWANCE and says so, because a
+# placeholder that admits what it is beats a gap in the price.
+
+TRENCH_WIDTH_M = 0.6            # mass-fill strip footing, domestic
+TRENCH_DEPTH_M = 1.0            # to a frost-free bearing in normal ground
+DPM_LAP = 1.15
+SLAB_THICK_M = 0.15
+RAFTER_SPACING_M = 0.40
+JOIST_SPACING_M = 0.40
+BLINDING_M = 0.05
+HARDCORE_M = 0.15
+
+
+def _ground_area(model):
+    # The EXPORTED room carries area_m2 (and width_m/depth_m); `width`
+    # and `depth` are attributes of the Room OBJECT, not of the dict the
+    # model ships. Reading the wrong one raised KeyError on every bill.
+    a = 0.0
+    for r in model.get("rooms", []):
+        if int(r.get("base_level") or 0) == 0:
+            a += float(r.get("area_m2") or 0.0)
+    if a:
+        return a
+    ex = model.get("extent_m") or {}
+    if ex:
+        return (ex["x"][1] - ex["x"][0]) * (ex["y"][1] - ex["y"][0])
+    return 0.0
+
+
+def substructure(model):
+    """Dig, concrete, slab and the layers under it, from the perimeter."""
+    _, _, _, perim = _external(model)
+    ga = _ground_area(model)
+    trench_m3 = perim * TRENCH_WIDTH_M * TRENCH_DEPTH_M
+    return [
+        _line("Excavate foundation trench", trench_m3, "m3",
+              f"{perim:.1f} m perimeter x {TRENCH_WIDTH_M} m x "
+              f"{TRENCH_DEPTH_M} m deep. NORMAL GROUND ASSUMED — a site "
+              f"investigation governs the depth and could double this"),
+        _line("Cart away spoil", trench_m3 * 1.25, "m3",
+              "bulked 25% on excavated volume"),
+        _line("Foundation concrete C20", trench_m3 * 0.75, "m3",
+              "trench fill to underside of dpc"),
+        _line("Hardcore sub-base", ga * HARDCORE_M, "m3",
+              f"{ga:.1f} m2 x {HARDCORE_M} m consolidated"),
+        _line("Sand blinding", ga * BLINDING_M, "m3",
+              f"{ga:.1f} m2 x {BLINDING_M} m"),
+        _line("DPM 1200g", ga * DPM_LAP, "m2",
+              f"{ga:.1f} m2 x {DPM_LAP} for laps and upstands"),
+        _line("Floor insulation PIR 100mm", ga, "m2",
+              f"{ga:.1f} m2 to Part L", "board"),
+        _line("Ground slab concrete C25", ga * SLAB_THICK_M, "m3",
+              f"{ga:.1f} m2 x {SLAB_THICK_M} m"),
+        _line("A252 mesh", ga, "m2", "one layer in the slab"),
+    ]
+
+
+def structural_timber(model):
+    """Rafters, joists, plates and the beam over what gets knocked out."""
+    rf = model.get("roof") or {}
+    sloped = float(rf.get("sloped_area_m2") or 0.0)
+    ridge_m = float(rf.get("ridge_m") or 0.0)
+    _, _, _, perim = _external(model)
+    storeys = int(model.get("storeys") or 1)
+    upper = 0.0
+    for r in model.get("rooms", []):
+        if int(r.get("base_level") or 0) >= 1:
+            upper += float(r.get("area_m2") or 0.0)
+    return [
+        _line("Rafters 47x150 C24", sloped / RAFTER_SPACING_M, "m",
+              f"{sloped:.1f} m2 of roof at {RAFTER_SPACING_M} m centres",
+              "timber"),
+        _line("Ridge board and purlins 47x200", max(ridge_m, 1.0) * 2.2, "m",
+              "ridge plus one purlin per slope", "timber"),
+        _line("Wall plate 100x50 treated", perim, "m",
+              f"{perim:.1f} m of wall head", "timber"),
+        _line("Floor joists 47x220 C24", upper / JOIST_SPACING_M, "m",
+              f"{upper:.1f} m2 of upper floor at {JOIST_SPACING_M} m "
+              f"centres", "timber"),
+        _line("Steel beam over opening (ALLOWANCE)",
+              1.0 if storeys > 1 else 0.0, "no",
+              "one allowance for opening up to the new work. A structural "
+              "engineer sizes it; this keeps it in the price and is NOT a "
+              "design"),
+        _line("Restraint straps and joist hangers", max(6.0, perim / 2),
+              "no", "lateral restraint at wall plate and floor level"),
+    ]
+
+
+def external_openings(model):
+    """Windows and doors as UNITS, counted off the model's openings."""
+    storeys = int(model.get("storeys") or 1)
+    win_a = 0.0
+    n_win = n_door = 0
+    for w in model["walls"]:
+        if not w.get("external") or w.get("party"):
+            continue
+        faces = list(_levels_of(w, storeys))
+        for o in w.get("openings", []):
+            reps = len(faces) if o.get("level") is None else 1
+            if o.get("kind") == "door":
+                n_door += reps
+            else:
+                win_a += float(o["width"]) * float(o["height"]) * reps
+                n_win += reps
+    return [
+        _line("Windows, PVCu double glazed", win_a, "m2",
+              f"{n_win} opening(s) measured off the model, supply and fix, "
+              f"trickle vents to Part F"),
+        _line("External door sets", float(n_door), "no",
+              f"{n_door} external opening(s) measured off the model"),
+        _line("Cavity closers", (n_win + n_door) * 5.0, "m",
+              "perimeter of each opening, averaged"),
+        _line("Window boards", win_a * 0.8, "m",
+              "one per window at the measured widths", "timber"),
+    ]
+
+
+def insulation(model):
+    """Cavity, floor and roof, over the areas already measured."""
+    net, _, _, _ = _external(model)
+    rf = model.get("roof") or {}
+    plan = float(rf.get("plan_area_m2") or 0.0)
+    return [
+        _line("Cavity insulation 100mm", net, "m2",
+              f"{net:.1f} m2 of external wall, full fill", "board"),
+        _line("Loft insulation 300mm", plan, "m2",
+              f"{plan:.1f} m2 of roof plan area to Part L"),
+    ]
+
+
+def fit_out(model, elec=None):
+    """Boiler, consumer unit, accessories, sanitaryware and kitchen."""
+    elec = elec or model.get("elec") or {}
+    rooms = model.get("rooms", [])
+    kinds = [r.get("kind") for r in rooms]
+    n_wet = sum(1 for k in kinds if k == "wet")
+    n_kitchen = sum(1 for k in kinds if k == "kitchen")
+    sockets = float(elec.get("sockets_twin_total") or 0.0)
+    circuits = len(elec.get("circuits") or []) or 6
+    lights = max(1.0, len(rooms) * LIGHTS_PER_ROOM)
+    return [
+        _line("Consumer unit and circuits", 1.0, "no",
+              f"{circuits} circuits from the electrical design"),
+        _line("Twin sockets", sockets or len(rooms) * 3.0, "no",
+              "from the electrical design where present"),
+        _line("Light fittings and switches", lights, "no",
+              f"{LIGHTS_PER_ROOM}/room averaged"),
+        _line("Smoke and heat alarms",
+              float(max(2, len(elec.get("alarms") or []))), "no",
+              "interlinked, mains with battery backup"),
+        _line("Boiler and controls (ALLOWANCE)", 1.0, "no",
+              "one system boiler. The heat loss calculation sizes it — "
+              "heatloss.py already has the room-by-room figures"),
+        _line("Bathroom suite", float(n_wet), "no",
+              f"{n_wet} wet room(s) in the plan"),
+        _line("Kitchen units and worktop (ALLOWANCE)", float(n_kitchen),
+              "no", f"{n_kitchen} kitchen(s) in the plan. A mid-range "
+              f"allowance, not a specification"),
+    ]
+
+
+def external_works(model):
+    """Drainage connection, and making good what the work disturbs."""
+    _, _, _, perim = _external(model)
+    mep = model.get("mep") or {}
+    drain_m = 0.0
+    for run in (mep.get("runs") or []):
+        if "drain" in str(run.get("system", "")).lower():
+            drain_m += float(run.get("length_m") or 0.0)
+    return [
+        _line("Drain run to existing manhole", max(6.0, drain_m), "m",
+              "routed runs where they exist, else a 6 m allowance — the "
+              "actual connection point governs"),
+        _line("Inspection chamber", 1.0, "no",
+              "one chamber allowance at the connection"),
+        _line("Make good paving and ground", perim * 0.9, "m2",
+              f"a 0.9 m working strip round {perim:.1f} m of new wall"),
+    ]
+
+
 def bill(model, covering="concrete_interlocking", heat=None, elec=None,
          mep=None):
     """The full bill of quantities, grouped by trade."""
     groups = {
+        "substructure": substructure(model),
         "masonry": masonry(model),
+        "structural_timber": structural_timber(model),
         "roof": roof(model, covering),
+        "external_openings": external_openings(model),
+        "insulation": insulation(model),
         "finishes": finishes(model),
         "services": services(model, heat=heat, elec=elec, mep=mep),
+        "fit_out": fit_out(model, elec=elec),
+        "external_works": external_works(model),
     }
     return {
         "groups": groups,

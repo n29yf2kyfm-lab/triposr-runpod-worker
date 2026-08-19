@@ -905,6 +905,146 @@ class TestImagery(unittest.TestCase):
         self.assertTrue(isinstance(why, str) and why)
 
 
+# --------------------------------------------------------------- pricing
+class TestEstimate(unittest.TestCase):
+    def setUp(self):
+        import sys as _s, os as _o
+        b = _o.path.join(_o.path.dirname(_o.path.dirname(
+            _o.path.abspath(__file__))), "building")
+        if b not in _s.path:
+            _s.path.insert(0, b)
+        import estimate, model3d as M, quantities as Q
+        self.E, self.Q = estimate, Q
+        self.model = M.build(
+            [M.Room("Room", 0.0, 0.0, 6.0, 10.0, kind="room")],
+            storeys=2, storey_height=2.65,
+            roof={"pitch_deg": 30.0, "kind": "gabled", "overhang": 0.3,
+                  "ridge_along": "y", "max_span_m": 12.0})
+        self.bill = Q.bill(self.model)
+
+    def test_the_bill_now_covers_every_standard_package(self):
+        """It used to cover four of ten — no foundations, no roof
+        timbers, no windows, no insulation, no fit-out — and pricing
+        that would have been a trap."""
+        cov = self.E.coverage(self.bill)
+        self.assertTrue(cov["complete"],
+                        [a["package"] for a in cov["absent"]])
+        self.assertEqual(cov["priced_packages"], cov["total_packages"])
+
+    def test_nothing_in_the_bill_goes_unpriced_in_silence(self):
+        p = self.E.price_bill(self.bill)
+        self.assertEqual(p["unpriced"], [],
+                         "an unpriced line must be reported, and there "
+                         "should be none for the standard bill")
+
+    def test_a_partial_bill_is_labelled_partial_and_widens_the_range(self):
+        thin = {"groups": {"masonry": self.bill["groups"]["masonry"]}}
+        p = self.E.price_bill(thin, estimate_class="concept")
+        self.assertEqual(p["status"], "PARTIAL")
+        self.assertIn("PARTIAL PRICE", p["disclaimer"])
+        self.assertGreater(len(p["excludes"]), 5)
+        full = self.E.price_bill(self.bill, estimate_class="concept")
+        self.assertGreater(
+            p["totals"]["range_high"] / p["totals"]["gross"],
+            full["totals"]["range_high"] / full["totals"]["gross"],
+            "a bill missing work must widen the range upward")
+
+    def test_the_estimate_is_a_range_not_a_single_number(self):
+        p = self.E.price_bill(self.bill, estimate_class="order_of_magnitude")
+        t = p["totals"]
+        self.assertLess(t["range_low"], t["gross"])
+        self.assertGreater(t["range_high"], t["gross"])
+        self.assertIn("ESTIMATE, not a quotation", p["disclaimer"])
+
+    def test_a_looser_estimate_class_gives_a_wider_range(self):
+        loose = self.E.price_bill(self.bill,
+                                  estimate_class="order_of_magnitude")
+        tight = self.E.price_bill(self.bill, estimate_class="tender")
+        spread = lambda p: (p["totals"]["range_high"]
+                            - p["totals"]["range_low"]) / p["totals"]["gross"]
+        self.assertGreater(spread(loose), spread(tight) * 2)
+
+    def test_vat_is_applied_at_the_rate_the_work_actually_attracts(self):
+        std = self.E.price_bill(self.bill, vat="standard")
+        zero = self.E.price_bill(self.bill, vat="zero")
+        self.assertAlmostEqual(std["totals"]["vat"],
+                               std["totals"]["net"] * 0.20, delta=1.0)
+        self.assertEqual(zero["totals"]["vat"], 0.0)
+        self.assertAlmostEqual(zero["totals"]["gross"],
+                               zero["totals"]["net"], delta=0.01)
+        self.assertIn("708", std["disclaimer"])
+
+    def test_region_moves_the_price_the_way_it_moves_in_life(self):
+        lon = self.E.price_bill(self.bill, self.E.RateCard(region="london"))
+        ne = self.E.price_bill(self.bill, self.E.RateCard(region="north_east"))
+        self.assertGreater(lon["totals"]["gross"], ne["totals"]["gross"])
+        ratio = lon["totals"]["gross"] / ne["totals"]["gross"]
+        self.assertAlmostEqual(ratio, 1.12 / 0.93, delta=0.02)
+
+    def test_an_unknown_region_is_refused_rather_than_defaulted(self):
+        with self.assertRaises(ValueError):
+            self.E.RateCard(region="narnia")
+
+    def test_the_estimate_says_how_much_of_itself_is_guessed(self):
+        p = self.E.price_bill(self.bill)
+        self.assertEqual(p["rate_provenance"]["from_your_own_rates"], 0)
+        self.assertIn("indicative", p["rate_provenance"]["confidence"])
+        own = self.E.RateCard(materials={"Facing bricks": 0.61})
+        p2 = self.E.price_bill(self.bill, own)
+        self.assertEqual(p2["rate_provenance"]["from_your_own_rates"], 1)
+
+    def test_calibration_reproduces_the_job_you_gave_it(self):
+        """One real job in, and the card prices like your business."""
+        card, rep = self.E.calibrate(self.bill, 120.0, known_per_m2=2200.0)
+        p = self.E.price_bill(self.bill, card)
+        m = self.E.per_m2(p, 120.0)
+        self.assertAlmostEqual(m["gross_per_m2"], 2200.0, delta=25.0)
+        self.assertGreater(rep["factor"], 1.0)
+        self.assertIn("multiplied by", rep["note"])
+
+    def test_calibration_accepts_a_total_as_well_as_a_rate(self):
+        card, rep = self.E.calibrate(self.bill, 120.0, known_cost=264000.0)
+        p = self.E.price_bill(self.bill, card)
+        self.assertAlmostEqual(p["totals"]["gross"], 264000.0, delta=2500.0)
+
+    def test_an_implausible_calibration_is_refused(self):
+        with self.assertRaises(ValueError):
+            self.E.calibrate(self.bill, 120.0, known_per_m2=50.0)
+        with self.assertRaises(ValueError):
+            self.E.calibrate(self.bill, 120.0)
+
+    def test_the_per_m2_sanity_check_calls_out_a_low_number(self):
+        """The check that stops an incomplete or under-rated estimate
+        being quoted: it must say so in words, not just in a number."""
+        p = self.E.price_bill(self.bill)
+        m = self.E.per_m2(p, 120.0)
+        self.assertLess(m["gross_per_m2"], self.E.TYPICAL_GROSS_PER_M2[0])
+        self.assertIn("below", m["verdict"])
+        self.assertIn("calibrate", m["verdict"])
+
+    def test_labour_is_priced_by_trade_with_hours_shown(self):
+        p = self.E.price_bill(self.bill)
+        trades = {l["trade"] for l in p["labour"]["lines"]}
+        self.assertIn("bricklayer", trades)
+        self.assertIn("groundworker", trades)
+        self.assertGreater(p["labour"]["hours"], 100)
+        for l in p["labour"]["lines"]:
+            self.assertGreater(l["rate_per_hour"], 10)
+
+    def test_the_totals_add_up(self):
+        p = self.E.price_bill(self.bill, vat="standard")
+        t = p["totals"]
+        measured = p["materials"]["total"] + p["labour"]["total"]
+        self.assertAlmostEqual(t["measured_works"], measured, delta=0.5)
+        built = (measured + p["preliminaries"]["total"]
+                 + p["overhead_profit"]["total"]
+                 + p["contingency"]["total"])
+        self.assertAlmostEqual(t["build_total"], built, delta=0.5)
+        self.assertAlmostEqual(
+            t["net"], built + p["professional_fees"]["total"], delta=0.5)
+        self.assertAlmostEqual(t["gross"], t["net"] + t["vat"], delta=0.5)
+
+
 # ------------------------------------------------------------------ live
 @unittest.skipUnless(LIVE, "set TWIN_LIVE=1 to hit real endpoints")
 class TestLive(unittest.TestCase):

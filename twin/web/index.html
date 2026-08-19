@@ -183,6 +183,36 @@ summary{cursor:pointer;color:var(--dim);font-size:12px}
         <div class="dim small">Becomes a validated command, not a picture.</div>
       </div>
 
+      <div class="sect"><h3>Pricing</h3>
+        <div class="row">
+          <select id="region">
+            <option value="west_midlands">West Midlands</option>
+            <option value="london">London</option>
+            <option value="south_east">South East</option>
+            <option value="east">East</option>
+            <option value="south_west">South West</option>
+            <option value="east_midlands">East Midlands</option>
+            <option value="north_west">North West</option>
+            <option value="yorkshire">Yorkshire</option>
+            <option value="north_east">North East</option>
+            <option value="wales">Wales</option>
+            <option value="scotland">Scotland</option>
+            <option value="northern_ireland">Northern Ireland</option>
+          </select>
+          <select id="vat">
+            <option value="standard">VAT 20%</option>
+            <option value="reduced">VAT 5%</option>
+            <option value="zero">VAT 0%</option>
+            <option value="none">No VAT</option>
+          </select>
+        </div>
+        <div class="row">
+          <input id="calRate" type="number" placeholder="your £/m²"
+                 style="width:110px" step="50">
+          <span class="dim small">calibrate to a job you have done</span>
+        </div>
+      </div>
+
       <div class="sect"><h3>Regulations &amp; quantities</h3>
         <div id="assess"></div></div>
 
@@ -235,6 +265,7 @@ summary{cursor:pointer;color:var(--dim);font-size:12px}
   border-radius:7px;padding:6px 11px;font:12px inherit;cursor:pointer}
 #side button.primary{background:var(--accent);color:#111;font-weight:600;
   border-color:var(--accent)}
+.price{font-size:27px;font-weight:700;letter-spacing:-.5px;margin:2px 0 2px}
 .verdict{padding:7px 10px;border-radius:8px;font-weight:600;font-size:12.5px;
   margin-bottom:7px}
 .v-ok{background:rgba(57,255,136,.15);color:var(--user)}

@@ -302,9 +302,38 @@ def project_restore(pid):
 
 @app.get("/api/project/<pid>/assess")
 def project_assess(pid):
-    """Regulations gate + bill of quantities, from the real engine."""
+    """Regulations gate, bill of quantities and a priced estimate."""
     from . import design as design_mod
-    return jsonify(design_mod.assess(_project(pid).current()))
+    per_m2 = request.args.get("calibrate_per_m2")
+    return jsonify(design_mod.assess(
+        _project(pid).current(),
+        region=request.args.get("region"),
+        vat=request.args.get("vat", "standard"),
+        calibrate_per_m2=float(per_m2) if per_m2 else None))
+
+
+@app.get("/api/rates")
+def rates():
+    """The rate card, its regions, VAT bases and what they mean."""
+    import sys as _sys
+    import os as _os
+    b = _os.path.join(_os.path.dirname(_os.path.dirname(
+        _os.path.abspath(__file__))), "building")
+    if b not in _sys.path:
+        _sys.path.insert(0, b)
+    import estimate as E
+    return jsonify({
+        "available": True,
+        "basis": E.RATE_BASIS, "date": E.RATE_CARD_DATE,
+        "regions": {k: {"factor": v[0], "name": v[1]}
+                    for k, v in E.REGIONS.items()},
+        "vat": {k: {"rate": v[0], "note": v[1]}
+                for k, v in E.VAT_RATES.items()},
+        "estimate_classes": {k: {"low": v[0], "high": v[1], "note": v[2]}
+                             for k, v in E.CLASSES.items()},
+        "typical_gross_per_m2": list(E.TYPICAL_GROSS_PER_M2),
+        "packages": {k: v[1] for k, v in E.PACKAGES.items()},
+    })
 
 
 @app.get("/api/project/<pid>/baseline")

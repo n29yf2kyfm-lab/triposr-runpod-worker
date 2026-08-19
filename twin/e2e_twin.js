@@ -160,6 +160,49 @@ const check = (name, cond, detail = '') =>
         /Facing bricks|Roof covering|Plasterboard/.test(assess),
         assess.slice(0, 120));
 
+  // Pricing: a priced estimate, a range, and an honest sanity verdict.
+  await page.waitForFunction(
+    () => /£[\d,]+/.test(document.getElementById('assess').innerText), null,
+    { timeout: 60000 });
+  const money = await page.innerText('#assess');
+  check('the estimate shows a price with VAT',
+        /£[\d,]+\s*incl VAT/.test(money.replace(/\n/g, ' ')),
+        money.slice(0, 90));
+  check('and a range, not a single number',
+        /realistic range £[\d,]+ – £[\d,]+/.test(money.replace(/\n/g, ' ')));
+  check('and a £/m2 figure with a verdict on it',
+        /\/ m²/.test(money) && /band/.test(money));
+  check('and it says how much of itself is indicative',
+        /indicative/.test(money), money.slice(0, 60));
+
+  // Calibrating to a real rate must move the price and the verdict.
+  const beforeCal = await page.evaluate(async () => {
+    const r = await fetch(`/api/project/${window.__twinUI.project.project_id}/assess`);
+    return (await r.json()).estimate.totals.gross;
+  });
+  await page.fill('#calRate', '2200');
+  await page.dispatchEvent('#calRate', 'change');
+  await page.waitForFunction(
+    (b) => {
+      const t = document.getElementById('assess').innerText;
+      return /inside the usual/.test(t);
+    }, beforeCal, { timeout: 60000 });
+  const afterCal = await page.evaluate(async () => {
+    const r = await fetch(`/api/project/${window.__twinUI.project.project_id}` +
+                          `/assess?calibrate_per_m2=2200`);
+    const j = await r.json();
+    return { gross: j.estimate.totals.gross,
+             per_m2: j.estimate.per_m2.gross_per_m2,
+             verdict: j.estimate.per_m2.verdict };
+  });
+  check('calibrating to your own rate lands the £/m2 on it',
+        Math.abs(afterCal.per_m2 - 2200) < 60, afterCal.per_m2);
+  check('and the sanity verdict then reads as in-band',
+        /inside the usual/.test(afterCal.verdict), afterCal.verdict.slice(0, 60));
+  check('and the price moved because of it',
+        afterCal.gross > beforeCal * 1.5,
+        `${Math.round(beforeCal)} -> ${Math.round(afterCal.gross)}`);
+
   // 16-17: before/after.
   await page.click('#tabs button[data-tab="3d"]');
   await page.waitForTimeout(400);

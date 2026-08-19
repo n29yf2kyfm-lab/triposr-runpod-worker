@@ -74,8 +74,8 @@ def build_engine_model(bld):
     return model, M
 
 
-def assess(bld):
-    """Regs gate + quantities + totals for the current design."""
+def assess(bld, *, region=None, vat="standard", calibrate_per_m2=None):
+    """Regs gate + quantities + a priced estimate for the current design."""
     out = {"available": True}
     try:
         model, M = build_engine_model(bld)
@@ -129,8 +129,8 @@ def assess(bld):
     except Exception:
         pass
 
+    import quantities as Q
     try:
-        import quantities as Q
         bill = Q.bill(model)
         out["quantities"] = {
             "groups": {k: [{"item": L["item"], "quantity": L["quantity"],
@@ -142,6 +142,30 @@ def assess(bld):
     except Exception as e:
         out["quantities"] = {"available": False,
                              "reason": f"take-off unavailable: {e}"}
+
+    # PRICE IT. The bill is measured; estimate.py turns it into money and
+    # — crucially — declares its own coverage, its rate provenance and a
+    # range, so a partial or uncalibrated estimate cannot pose as a quote.
+    try:
+        import estimate as E
+        card = E.RateCard(region=region or E.DEFAULT_REGION)
+        if calibrate_per_m2:
+            card, _rep = E.calibrate(
+                Q.bill(model), max(1.0, float(
+                    (model.get("totals") or {}).get("floor_area_m2") or 1.0)),
+                known_per_m2=float(calibrate_per_m2), card=card)
+        priced = E.price_bill(
+            Q.bill(model), card,
+            estimate_class=("order_of_magnitude"
+                            if out.get("compliance", {}).get("stage")
+                            == "massing" else "concept"),
+            vat=vat or "standard")
+        gia = float((model.get("totals") or {}).get("floor_area_m2") or 0.0)
+        priced["per_m2"] = E.per_m2(priced, gia) if gia else None
+        out["estimate"] = priced
+    except Exception as e:
+        out["estimate"] = {"available": False,
+                           "reason": f"pricing unavailable: {e}"}
 
     t = model.get("totals") or {}
     out["totals"] = {
