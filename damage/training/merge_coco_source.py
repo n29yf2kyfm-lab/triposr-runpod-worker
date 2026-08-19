@@ -39,6 +39,28 @@ from PIL import Image
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import class_map as CM
 
+# 640 IS A CEILING ON WHAT THE DETECTOR CAN EVER LEARN ABOUT SCRATCHES, and it
+# is worth stating plainly here because the consequence shows up far away.
+#
+# A real hairline scratch is a millimetre or two on a car. In a 640px picture
+# of a whole panel that is one or two pixels; in a picture of a whole car it is
+# less than one. So the corpus does not contain sharp scratches at all, and no
+# amount of training can recover what was never captured.
+#
+# Measured consequence: scratch_scuff went 0.186 -> 0.192 -> 0.205 over three
+# epochs while every other class gained two to five times as much. That is not
+# an under-trained class, it is a class whose evidence was thrown away before
+# training started.
+#
+# It also explains why training at 728 was pointless — 728 is LARGER than the
+# source images, so that run upscaled 640px pictures and asked the network to
+# find detail upscaling cannot create — and why tiling cannot be measured on
+# this corpus: a whole 640px image is a single tile, while a 4032px phone photo
+# is twenty.
+#
+# Raising this number does nothing on its own. The sources are already ~640;
+# fixing it needs higher-resolution captures, which is a data problem, not a
+# training one.
 MAX_SIDE = 640
 
 
