@@ -289,5 +289,118 @@ class TestSiteMap(unittest.TestCase):
         self.assertIn("imagery=True", str(cm.exception))
 
 
+class TestInteractiveMapIsActuallyOffline(unittest.TestCase):
+    """The whole point of the viewer is that it works with no signal.
+
+    Every test here stubs the tile fetch, so the suite never touches the
+    network — and the assertions are about what ends up IN the file,
+    which is the property that decides whether it works down a hole with
+    no reception.
+    """
+
+    @staticmethod
+    def _read(path):
+        with open(path) as fh:
+            return fh.read()
+
+    # A 256x256 JPEG, so the encoder path is real without a download.
+    def _tile_bytes(self):
+        import io
+        from PIL import Image
+        buf = io.BytesIO()
+        Image.new("RGB", (256, 256), (30, 60, 30)).save(buf, "JPEG")
+        return buf.getvalue()
+
+    def _build(self, zooms=(17, 18, 19), span=1, missing=()):
+        model = _house()
+        model["name"] = "Test dwelling"
+        anchor = geo.Anchor(*BHAM, bearing_deg=20.0, source="test fixture")
+        blob = self._tile_bytes()
+
+        def fake(anchor_, zooms_, span_, timeout_):
+            tiles = {}
+            for z in zooms_:
+                cx, cy = geo._tile_xy(anchor_.lat, anchor_.lon, z)
+                x0, y0 = int(cx) - span_, int(cy) - span_
+                for i in range(2 * span_ + 1):
+                    for j in range(2 * span_ + 1):
+                        tiles[f"{z}/{x0 + i}/{y0 + j}"] = blob
+            for k in missing:
+                tiles.pop(k, None)
+            return tiles, list(missing)
+
+        real = geo._fetch_tiles
+        geo._fetch_tiles = fake
+        try:
+            path = os.path.join(tempfile.mkdtemp(), "map.html")
+            return geo.interactive_map(model, anchor, path, zooms=zooms,
+                                       span=span), model, anchor
+        finally:
+            geo._fetch_tiles = real
+
+    def test_nothing_in_the_page_points_at_the_network(self):
+        (path, info), _, _ = self._build()
+        body = self._read(path)
+        self.assertTrue(info["offline"])
+        # Every image source must be a data: URI. One http src and the
+        # page is a grey box on a site with no signal.
+        import re
+        srcs = re.findall(r'src\s*=\s*["\']([^"\']+)', body)
+        for s in srcs:
+            self.assertTrue(s.startswith("data:"), f"external src: {s}")
+        # No script/style/font pulled from anywhere either.
+        self.assertNotIn("<script src", body)
+        self.assertNotIn("@import", body)
+        # The imagery host may appear ONLY as attribution text, never as
+        # a URL the page would fetch.
+        self.assertNotIn("https://server.arcgisonline.com", body)
+
+    def test_every_tile_is_embedded_not_referenced(self):
+        (path, info), _, _ = self._build(zooms=(18, 19), span=1)
+        self.assertEqual(info["tiles"], 2 * 9)
+        self.assertEqual(info["tiles"], info["tiles_expected"])
+        body = self._read(path)
+        self.assertEqual(body.count("data:image/jpeg;base64,"), 18)
+
+    def test_the_drawing_travels_with_the_map(self):
+        (path, _), model, anchor = self._build()
+        body = self._read(path)
+        # The footprint the model measured is in the page, georeferenced.
+        data = geo.geojson(model, anchor, red_line_margin_m=6.0, rooms=True)
+        lon, lat = data["features"][0]["geometry"]["coordinates"][0][0]
+        self.assertIn(f"{round(lon, 6)}"[:8], body)
+        for layer in ("building", "red line"):
+            self.assertIn(layer, body)
+
+    def test_missing_tiles_are_reported_not_hidden(self):
+        cx, cy = geo._tile_xy(BHAM[0], BHAM[1], 19)
+        gone = f"19/{int(cx) - 1}/{int(cy) - 1}"
+        (path, info), _, _ = self._build(missing=(gone,))
+        self.assertIn(gone, info["missing"])
+        self.assertLess(info["tiles"], info["tiles_expected"])
+        self.assertIn("dark squares", info["note"])
+
+    def test_a_map_with_no_imagery_at_all_is_refused(self):
+        """A blank page is worse than an error: it looks like a map that
+        found nothing there, rather than a fetch that failed."""
+        model = _house()
+        anchor = geo.Anchor(*BHAM)
+        real = geo._fetch_tiles
+        geo._fetch_tiles = lambda *a, **k: ({}, ["19/1/1"])
+        try:
+            with self.assertRaises(RuntimeError) as cm:
+                geo.interactive_map(model, anchor,
+                                    os.path.join(tempfile.mkdtemp(), "m.html"))
+            self.assertIn("blank page", str(cm.exception))
+        finally:
+            geo._fetch_tiles = real
+
+    def test_the_anchor_provenance_survives_into_the_page(self):
+        """static_map prints it; the viewer must too. A map that has lost
+        the caveat about its own position is the dangerous kind."""
+        (path, _), _, anchor = self._build()
+        self.assertIn(anchor.source, self._read(path))
+
+
 if __name__ == "__main__":
     unittest.main()

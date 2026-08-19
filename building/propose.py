@@ -1520,6 +1520,26 @@ def run(spec, prog, output_dir):
             artifacts.append((pj, f"site/{scan}.site.geolibre.json", None))
         except ImportError:
             pass                     # geolibre is optional; GeoJSON is not
+
+        # THE MAP THAT WORKS DOWN A HOLE. GeoJSON needs software to read
+        # it and the geolibre project needs a website; neither is any use
+        # standing in the garden with no signal. This is one HTML file
+        # with the imagery baked in — pan, zoom, layers, scale bar, tape
+        # measure — that opens on a phone with the network off.
+        try:
+            imap = os.path.join(output_dir, f"{scan}.site.html")
+            _, minfo = geomod.interactive_map(
+                model, anchor, imap, zooms=(17, 18, 19), span=1,
+                red_line_margin_m=6.0, rooms=True)
+            artifacts.append((imap, f"site/{scan}.site.html", None))
+            prog.note(f"offline map: {minfo['tiles']}/"
+                      f"{minfo['tiles_expected']} tiles, "
+                      f"{minfo['bytes'] / 1e6:.1f} MB"
+                      + (f" — {minfo['note']}" if minfo["note"] else ""))
+        except Exception as e:
+            # A failed tile fetch must not cost the job its GeoJSON.
+            print(f"offline map skipped: {type(e).__name__}: {e}",
+                  file=sys.stderr)
         prog.note("site plan: GeoJSON exported")
     except Exception as e:
         print(f"site plan skipped: {type(e).__name__}: {e}", file=sys.stderr)
