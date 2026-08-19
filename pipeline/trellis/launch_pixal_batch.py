@@ -101,8 +101,20 @@ def main(golf_png):
 
     log_url = f"{SB}/public/{PRE}/log.txt"
     t0, last, ok = time.time(), "", False
+    # BOOT WATCHDOG. A dead host reports desiredStatus RUNNING with runtime
+    # None forever — measured 2026-08-19: 26 min stuck at "launching", $0.69
+    # burned, and only a human noticed. If the bootstrap has not moved past
+    # "launching" within BOOT_LIMIT the host is dead: kill it and say so,
+    # rather than renting silence. (Poll PROGRESS, never desire.)
+    BOOT_LIMIT = float(os.environ.get("PIXAL_BOOT_LIMIT_S", "600"))
     try:
-        while time.time() - t0 < 14400:   # batch: up to 4h          # 90 min hard stop
+        while time.time() - t0 < 14400:   # batch: up to 4h
+            if (last in ("", "=== STAGE:launching ===")
+                    and time.time() - t0 > BOOT_LIMIT):
+                print(f"DEAD HOST: no progress past '{last or 'nothing'}' in "
+                      f"{BOOT_LIMIT/60:.0f} min — killing pod {pod_id}; "
+                      "relaunch to land on a different host.", flush=True)
+                break
             try:
                 log = urllib.request.urlopen(
                     f"{log_url}?cb={int(time.time())}", timeout=30
