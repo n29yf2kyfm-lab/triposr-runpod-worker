@@ -322,24 +322,44 @@ const check = (name, cond, detail = '') =>
       .some((r) => r.name === 'Kitchen/diner'), null, { timeout: 30000 });
   check('renaming a room writes through the same command path', true);
 
-  // The knock-through, and the refusal it clears.
-  const preMerge = await page.evaluate(
-    () => document.getElementById('assess').innerText);
+  /* THE KNOCK-THROUGH. What is asserted here is what is TRUE OF EVERY
+   * BUILDING: two rooms become one, the floor area is conserved, and
+   * the verdict is recomputed from the new layout.
+   *
+   * What is NOT asserted here is that it clears the inner-room refusal.
+   * That depends on where the hall reaches in the particular house
+   * Overpass returns, so it made this check pass or fail on which
+   * building came back — a test that reports the weather. The claim is
+   * worth making, so it is made where the geometry is controlled:
+   * TestRooms.test_the_knock_through_clears_the_inner_room_refusal. */
+  const preMerge = await page.evaluate(() => {
+    const L = window.__twinUI.project.plan.levels[0];
+    return { rooms: L.rooms.length, area: L.room_area_m2,
+             verdict: document.getElementById('assess').innerText };
+  });
   await page.mouse.click(picked.x, picked.y);
   await page.waitForTimeout(300);
-  const nRooms = await page.evaluate(
-    () => window.__twinUI.project.plan.levels[0].rooms.length);
   await page.click('#roomMerge');
-  await page.waitForFunction(
+  const merged = await page.waitForFunction(
     (n) => window.__twinUI.project.plan.levels[0].rooms.length === n - 1,
-    nRooms, { timeout: 30000 });
-  await page.waitForTimeout(1200);
-  const postMerge = await page.evaluate(
-    () => document.getElementById('assess').innerText);
+    preMerge.rooms, { timeout: 30000 }).then(() => true).catch(() => false);
+  const postMerge = await page.evaluate(() => {
+    const L = window.__twinUI.project.plan.levels[0];
+    const big = L.rooms.reduce((a, b) => (b.area_m2 > a.area_m2 ? b : a));
+    return { rooms: L.rooms.length, area: L.room_area_m2,
+             biggest: `${big.name} ${big.area_m2} m²` };
+  });
   check('knocking through makes one room out of two',
-        /rooms deep|inner room/i.test(preMerge) &&
-        !/rooms deep|inner room/i.test(postMerge),
-        postMerge.slice(0, 60).replace(/\n/g, ' '));
+        merged && postMerge.rooms === preMerge.rooms - 1,
+        `${preMerge.rooms} rooms -> ${postMerge.rooms}, now ${postMerge.biggest}`);
+  check('and the floor area is conserved by the knock-through',
+        Math.abs(postMerge.area - preMerge.area) < 0.05,
+        `${preMerge.area} -> ${postMerge.area} m²`);
+  const reassessed = await page.waitForFunction(
+    (v) => document.getElementById('assess').innerText !== v,
+    preMerge.verdict, { timeout: 60000 }).then(() => true).catch(() => false);
+  check('and the verdict is recomputed from the new layout', reassessed);
+
   await page.screenshot({ path: '/tmp/twin_plan_merged.png' });
 
   // And the rooms survive an undo/redo round trip with the same ids —

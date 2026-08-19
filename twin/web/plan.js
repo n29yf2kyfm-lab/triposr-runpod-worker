@@ -236,15 +236,31 @@ export class PlanView {
     ctx.font = `${12 * r}px ui-monospace, SFMono-Regular, monospace`;
     for (const rm of (L.rooms || [])) {
       const c = this.toPx(rm.x + rm.width / 2, rm.y + rm.depth / 2);
-      ctx.fillStyle = '#eef1f6';
-      ctx.textAlign = 'center';
-      ctx.fillText(rm.name, c[0], c[1] - 3 * r);
-      ctx.fillStyle = '#98a0ae';
-      ctx.fillText(`${rm.area_m2} m²`, c[0], c[1] + 13 * r);
+      const lines = [rm.name, `${rm.area_m2} m²`];
       if (this.scale > 14) {
-        ctx.fillText(`${rm.width.toFixed(2)} × ${rm.depth.toFixed(2)}`,
-                     c[0], c[1] + 27 * r);
+        lines.push(`${rm.width.toFixed(2)} × ${rm.depth.toFixed(2)}`);
       }
+      /* A HALL IS NARROWER THAN ITS OWN NAME. Centred text in a 1.55 m
+       * hall ran straight through both walls and over the rooms beside
+       * it. So: if the label does not fit across the room, turn it and
+       * read it up the room — which is what a drawn plan does — and if
+       * it does not fit that way either, drop to the area alone. */
+      const wide = Math.max(...lines.map((t) => ctx.measureText(t).width));
+      const across = rm.width * this.scale * r;
+      const along = rm.depth * this.scale * r;
+      const turn = wide > across - 8 * r && along > across;
+      ctx.save();
+      ctx.translate(c[0], c[1]);
+      if (turn) ctx.rotate(-Math.PI / 2);
+      ctx.textAlign = 'center';
+      const room = turn ? along : across;
+      const show = wide > room - 8 * r ? lines.slice(1, 2) : lines;
+      show.forEach((t, i) => {
+        ctx.fillStyle = (i === 0 && show.length > 1) ? '#eef1f6' : '#98a0ae';
+        ctx.fillText(t, 0, (i - (show.length - 1) / 2) * 14 * r + 4 * r);
+      });
+      ctx.restore();
+      ctx.textAlign = 'center';
     }
     for (const b of L.blocks) {
       const xs = b.ring.map((p) => p[0]), ys = b.ring.map((p) => p[1]);
@@ -252,12 +268,32 @@ export class PlanView {
       const y0 = Math.min(...ys), y1 = Math.max(...ys);
       this._dim(ctx, r, [x0, y0 - 0.9], [x1, y0 - 0.9], `${(x1 - x0).toFixed(2)} m`);
       this._dim(ctx, r, [x1 + 0.9, y0], [x1 + 0.9, y1], `${(y1 - y0).toFixed(2)} m`);
-      const c = this.toPx((x0 + x1) / 2, (y0 + y1) / 2);
-      ctx.fillStyle = '#eef1f6';
-      ctx.textAlign = 'center';
-      ctx.fillText(b.name, c[0], c[1] - 4 * r);
-      ctx.fillStyle = '#98a0ae';
-      ctx.fillText(`${b.area_m2} m²`, c[0], c[1] + 14 * r);
+      /* THE BLOCK NAME GOES IN THE MIDDLE — WHICH IS WHERE A ROOM IS.
+       * Once rooms are drawn, "Existing building 65.59 m²" landed on top
+       * of "Dining room 12.18 m²" and both became unreadable. A plan
+       * labels ROOMS; the block is named quietly in its corner, and only
+       * while it has no rooms of its own does it take the middle. */
+      const covered = (L.rooms || []).some(
+        (rm) => rm.x + rm.width > x0 + 1e-6 && rm.x < x1 - 1e-6 &&
+                rm.y + rm.depth > y0 + 1e-6 && rm.y < y1 - 1e-6);
+      ctx.textAlign = covered ? 'left' : 'center';
+      if (covered) {
+        // Bottom-left INSIDE the block: the top-left corner is where the
+        // next block's width dimension lands, and the two collided.
+        const c = this.toPx(x0, y0);
+        ctx.fillStyle = '#7b8494';
+        ctx.textAlign = 'left';
+        const room = (x1 - x0) * this.scale * r - 10 * r;
+        const full = `${b.name} · ${b.area_m2} m²`;
+        ctx.fillText(ctx.measureText(full).width <= room ? full : b.name,
+                     c[0] + 5 * r, c[1] - 6 * r);
+      } else {
+        const c = this.toPx((x0 + x1) / 2, (y0 + y1) / 2);
+        ctx.fillStyle = '#eef1f6';
+        ctx.fillText(b.name, c[0], c[1] - 4 * r);
+        ctx.fillStyle = '#98a0ae';
+        ctx.fillText(`${b.area_m2} m²`, c[0], c[1] + 14 * r);
+      }
     }
 
     this._north(ctx, r);
