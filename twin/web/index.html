@@ -140,7 +140,9 @@ summary{cursor:pointer;color:var(--dim);font-size:12px}
 
   <div id="wsbody">
     <div id="canvasWrap">
-      <div id="pane3d"><canvas id="view3d"></canvas></div>
+      <div id="pane3d"><canvas id="view3d"></canvas>
+        <div id="groundCredit"></div>
+      </div>
       <div id="paneplan" style="display:none">
         <div id="levels"></div>
         <canvas id="viewplan"></canvas>
@@ -205,6 +207,21 @@ summary{cursor:pointer;color:var(--dim);font-size:12px}
             <span id="roomArea" class="dim small"></span>
           </div>
         </div>
+      </div>
+
+      <div class="sect"><h3>Ground under the model</h3>
+        <div class="row">
+          <select id="ground" style="flex:1">
+            <option value="auto">Best available</option>
+            <option value="lidar-hillshade">LIDAR relief — England, free</option>
+            <option value="esri-keyed">Esri aerial — needs your key</option>
+            <option value="mapbox-satellite">Mapbox satellite — needs your key</option>
+            <option value="maptiler-satellite">MapTiler satellite — needs your key</option>
+            <option value="off">None</option>
+          </select>
+        </div>
+        <div id="groundNote" class="dim small">Real imagery draped under the
+          3D, placed by the same projection the model uses.</div>
       </div>
 
       <div class="sect"><h3>Drawings</h3>
@@ -290,6 +307,12 @@ summary{cursor:pointer;color:var(--dim);font-size:12px}
 #canvasWrap{flex:1;position:relative;min-width:0}
 #pane3d,#paneplan{position:absolute;inset:0}
 #view3d,#viewplan{width:100%;height:100%;display:block}
+/* The imagery credit sits ON the frame, because every licence that
+   lets us show aerial requires attribution wherever it appears — a
+   line in a settings panel nobody opens does not discharge that. */
+#groundCredit{position:absolute;left:10px;bottom:8px;font-size:11px;
+  color:#c8cedb;background:rgba(10,12,16,.62);padding:3px 7px;
+  border-radius:4px;pointer-events:none;max-width:70%;display:none}
 #levels{position:absolute;left:12px;top:12px;z-index:2;display:flex;gap:4px}
 #levels button{background:rgba(18,21,27,.9);color:var(--ink);
   border:1px solid var(--line);border-radius:7px;padding:5px 10px;

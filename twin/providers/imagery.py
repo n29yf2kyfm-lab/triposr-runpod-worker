@@ -318,3 +318,120 @@ def render_lidar_surface(west, south, east, north, max_px=1400):
         "method": "Horn shaded relief, light from 315 deg at 45 deg, "
                   "1.6x vertical exaggeration, tinted by height",
     }
+
+
+# ------------------------------------------------------------- mosaic
+#: Never ask a tile server for more than this in one go. A drag on the
+#: zoom control should not become a hundred requests to somebody else's
+#: infrastructure, and every source here has terms about rate.
+MAX_TILES = 42
+TILE_PX = 256
+
+
+def _merc_xy(lon, lat, z):
+    """Web Mercator tile coordinates, fractional."""
+    n = 2.0 ** z
+    x = (lon + 180.0) / 360.0 * n
+    la = math.radians(max(-85.05112878, min(85.05112878, lat)))
+    y = (1.0 - math.log(math.tan(la) + 1.0 / math.cos(la)) / math.pi) / 2.0 * n
+    return x, y
+
+
+def zoom_for(west, south, east, north, target_px, max_zoom):
+    """The zoom whose pixels are closest to the detail asked for.
+
+    Asking for a higher zoom than the source publishes returns grey
+    "no data" tiles that look like a rendering fault, so the source's
+    own max_zoom is the ceiling — not a suggestion.
+    """
+    span = max(1e-9, east - west)
+    ideal = math.log2(target_px * 360.0 / (TILE_PX * span))
+    return max(0, min(int(max_zoom), int(round(ideal))))
+
+
+def mosaic(source, west, south, east, north, target_px=1024, session=None):
+    """Stitch a source's tiles into one image of exactly this box.
+
+    Returns (png_bytes, info) or (None, reason). The licence is checked
+    for RENDER before a single tile is requested, and the key — if the
+    source needs one — never leaves this process.
+    """
+    from PIL import Image
+    import requests
+
+    if isinstance(source, str):
+        try:
+            source = get(source)
+        except KeyError:
+            return None, f"no imagery source named {source!r}"
+    bad = source.blocked_reasons()
+    if bad:
+        return None, "; ".join(bad)
+    licences.check(source.licence, licences.USE_RENDER)
+
+    z = zoom_for(west, south, east, north, target_px, source.max_zoom)
+    x0f, y1f = _merc_xy(west, south, z)
+    x1f, y0f = _merc_xy(east, north, z)
+    tx0, tx1 = int(math.floor(x0f)), int(math.floor(x1f))
+    ty0, ty1 = int(math.floor(y0f)), int(math.floor(y1f))
+    # Shrink the zoom until the request is a polite size.
+    while ((tx1 - tx0 + 1) * (ty1 - ty0 + 1) > MAX_TILES) and z > 0:
+        z -= 1
+        x0f, y1f = _merc_xy(west, south, z)
+        x1f, y0f = _merc_xy(east, north, z)
+        tx0, tx1 = int(math.floor(x0f)), int(math.floor(x1f))
+        ty0, ty1 = int(math.floor(y0f)), int(math.floor(y1f))
+
+    s = session or requests.Session()
+    cols, rows = tx1 - tx0 + 1, ty1 - ty0 + 1
+    sheet = Image.new("RGB", (cols * TILE_PX, rows * TILE_PX), (28, 30, 36))
+    got = 0
+    for tx in range(tx0, tx1 + 1):
+        for ty in range(ty0, ty1 + 1):
+            try:
+                r = s.get(tile_url(source, z, tx, ty), timeout=20,
+                          headers={"User-Agent": os.environ.get(
+                              "TWIN_USER_AGENT",
+                              "property-twin/1.0 (+local)")})
+                if r.status_code != 200 or not r.content:
+                    continue
+                t = Image.open(io.BytesIO(r.content)).convert("RGB")
+                if t.size != (TILE_PX, TILE_PX):
+                    t = t.resize((TILE_PX, TILE_PX), Image.LANCZOS)
+                sheet.paste(t, ((tx - tx0) * TILE_PX, (ty - ty0) * TILE_PX))
+                got += 1
+            except Exception:
+                continue
+    if not got:
+        return None, (f"{source.name} returned no tiles — the service may "
+                      f"be unreachable, or the key may not cover this area")
+
+    # Crop to the requested box exactly, so the caller can place the
+    # image by its own bounds instead of guessing at tile edges.
+    left = (x0f - tx0) * TILE_PX
+    right = (x1f - tx0) * TILE_PX
+    top = (y0f - ty0) * TILE_PX
+    bottom = (y1f - ty0) * TILE_PX
+    img = sheet.crop((int(round(left)), int(round(top)),
+                      max(int(round(left)) + 1, int(round(right))),
+                      max(int(round(top)) + 1, int(round(bottom)))))
+    if max(img.size) > target_px * 1.6:
+        sc = target_px * 1.6 / max(img.size)
+        img = img.resize((max(1, int(img.width * sc)),
+                          max(1, int(img.height * sc))), Image.LANCZOS)
+    buf = io.BytesIO()
+    img.save(buf, "JPEG", quality=86, optimize=True)
+    ground_res = 156543.03392 * math.cos(math.radians(
+        (south + north) / 2.0)) / (2 ** z)
+    return buf.getvalue(), {
+        "bounds": [west, south, east, north],
+        "size_px": list(img.size),
+        "zoom": z,
+        "tiles": got,
+        "resolution_m": round(ground_res, 3),
+        "source": source.key,
+        "licence": source.licence,
+        "attribution": source.attribution,
+        "format": "image/jpeg",
+        "method": f"{got} tiles at z{z}, stitched and cropped to the box",
+    }

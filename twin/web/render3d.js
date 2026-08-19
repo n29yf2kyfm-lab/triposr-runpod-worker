@@ -21,14 +21,17 @@ const VERT = `
 attribute vec3 aPos;
 attribute vec3 aNormal;
 attribute vec3 aColor;
+attribute vec3 aUV;          /* s, t, and 1.0 where the vertex is mapped */
 uniform mat4 uMVP;
 uniform mat4 uModel;
 varying vec3 vNormal;
 varying vec3 vColor;
 varying vec3 vWorld;
+varying vec3 vUV;
 void main() {
   vNormal = mat3(uModel) * aNormal;
   vColor = aColor;
+  vUV = aUV;
   vWorld = (uModel * vec4(aPos, 1.0)).xyz;
   gl_Position = uMVP * vec4(aPos, 1.0);
 }`;
@@ -38,8 +41,10 @@ precision mediump float;
 varying vec3 vNormal;
 varying vec3 vColor;
 varying vec3 vWorld;
+varying vec3 vUV;
 uniform vec3 uSun;
 uniform float uOpacity;
+uniform sampler2D uGround;
 void main() {
   vec3 n = normalize(vNormal);
   float d = max(dot(n, normalize(uSun)), 0.0);
@@ -47,6 +52,14 @@ void main() {
      face is shaded rather than black — a black wall reads as a hole. */
   float sky = 0.5 + 0.5 * n.y;
   vec3 lit = vColor * (0.30 + 0.30 * sky + 0.62 * d);
+  if (vUV.z > 0.5) {
+    /* AERIAL IMAGERY IS ALREADY LIT. It was photographed in real sun,
+       so running it through the same lambert as a wall lights it
+       twice and it comes out looking like painted card. Show it near
+       enough as captured, knocked back a shade so the model reads in
+       front of it. */
+    lit = texture2D(uGround, vUV.xy).rgb * 0.94;
+  }
   gl_FragColor = vec4(lit, uOpacity);
 }`;
 
@@ -107,18 +120,29 @@ export const CLASS_RGB = {
  * models here are tens of triangles, not millions; a rebuild costs
  * microseconds and removes every class of stale-buffer bug. */
 class MeshBuilder {
-  constructor() { this.pos = []; this.nrm = []; this.col = []; }
+  constructor() {
+    this.pos = []; this.nrm = []; this.col = []; this.uv = [];
+  }
 
-  tri(a, b, c, colour) {
+  /* `uvs` is optional: three [s, t] pairs when this triangle is to be
+   * drawn from the ground image instead of its own colour. The third
+   * component is the flag the shader branches on, so an untextured
+   * mesh needs no second draw call and no second program. */
+  tri(a, b, c, colour, uvs) {
     const n = norm(cross(sub(b, a), sub(c, a)));
-    for (const p of [a, b, c]) {
+    [a, b, c].forEach((p, i) => {
       this.pos.push(p[0], p[1], p[2]);
       this.nrm.push(n[0], n[1], n[2]);
       this.col.push(colour[0], colour[1], colour[2]);
-    }
+      if (uvs) this.uv.push(uvs[i][0], uvs[i][1], 1);
+      else this.uv.push(0, 0, 0);
+    });
   }
 
-  quad(a, b, c, d, colour) { this.tri(a, b, c, colour); this.tri(a, c, d, colour); }
+  quad(a, b, c, d, colour, uvs) {
+    this.tri(a, b, c, colour, uvs && [uvs[0], uvs[1], uvs[2]]);
+    this.tri(a, c, d, colour, uvs && [uvs[0], uvs[2], uvs[3]]);
+  }
 
   /* A block: walls from base to eaves, plus its roof. Plan coordinates
    * are (x, y) metres in the building frame; GL is y-up, so plan y maps
@@ -188,6 +212,18 @@ class MeshBuilder {
     this.quad(P(x0, y0, 0), P(x1, y0, 0), P(x1, y1, 0), P(x0, y1, 0), colour);
   }
 
+  /* The imagery, draped where it actually belongs. The corners arrive
+   * from the server already rotated into the building frame, so a house
+   * that sits at 20 degrees to north gets imagery at 20 degrees too
+   * rather than an axis-aligned smear under a rotated model. */
+  groundImage(corners) {
+    const P = (x, y, z) => [x, z, -y];
+    const [sw, se, ne, nw] = corners;
+    this.quad(P(sw[0], sw[1], 0), P(se[0], se[1], 0),
+              P(ne[0], ne[1], 0), P(nw[0], nw[1], 0),
+              [1, 1, 1], [[0, 1], [1, 1], [1, 0], [0, 0]]);
+  }
+
   count() { return this.pos.length / 3; }
 }
 
@@ -210,13 +246,18 @@ export class Viewer3D {
       aPos: gl.getAttribLocation(p, 'aPos'),
       aNormal: gl.getAttribLocation(p, 'aNormal'),
       aColor: gl.getAttribLocation(p, 'aColor'),
+      aUV: gl.getAttribLocation(p, 'aUV'),
       uMVP: gl.getUniformLocation(p, 'uMVP'),
       uModel: gl.getUniformLocation(p, 'uModel'),
       uSun: gl.getUniformLocation(p, 'uSun'),
       uOpacity: gl.getUniformLocation(p, 'uOpacity'),
+      uGround: gl.getUniformLocation(p, 'uGround'),
     };
     this.buf = { pos: gl.createBuffer(), nrm: gl.createBuffer(),
-                 col: gl.createBuffer() };
+                 col: gl.createBuffer(), uv: gl.createBuffer() };
+    this.groundTex = null;      // GL texture, once imagery has arrived
+    this.groundQuad = null;     // its four corners, in building metres
+    this.groundInfo = null;     // source, licence, attribution
     this.vertices = 0;
     this.yaw = 0.7; this.pitch = 0.55; this.dist = 40;
     this.target = [0, 0, 0];
@@ -247,9 +288,14 @@ export class Viewer3D {
       }
     }
     if (!solids.length) { minx = miny = -5; maxx = maxy = 5; }
+    this._massing = massing;
     const pad = Math.max(8, (maxx - minx) * 0.8);
-    mb.ground(minx - pad, miny - pad, maxx + pad, maxy + pad,
-              [0.18, 0.21, 0.17]);
+    if (this.groundTex && this.groundQuad) {
+      mb.groundImage(this.groundQuad);
+    } else {
+      mb.ground(minx - pad, miny - pad, maxx + pad, maxy + pad,
+                [0.18, 0.21, 0.17]);
+    }
     if (massing.traced_ring && opts.showTraced !== false) {
       // The surveyed outline, laid on the ground as a thin plate so the
       // fitted rectangle can be compared against what was actually there.
@@ -280,7 +326,61 @@ export class Viewer3D {
     put(this.buf.pos, mb.pos);
     put(this.buf.nrm, mb.nrm);
     put(this.buf.col, mb.col);
+    put(this.buf.uv, mb.uv);
     this.vertices = mb.count();
+  }
+
+  /* Drape real imagery under the model.
+   *
+   * WHY THIS MATTERS MORE THAN IT LOOKS. A correct model on a blank
+   * plane still reads as CGI, because a building with no context looks
+   * like a render of nothing — which is exactly the complaint that a
+   * measured model "does not look like the house". The imagery is not
+   * decoration: it is the only thing on screen that tells you the
+   * model is standing in the right place, at the right angle, at the
+   * right size, against its actual neighbours.
+   *
+   * It stays a TEXTURE and never becomes geometry. Nothing measured is
+   * taken from it, so no licence that permits display but forbids
+   * extraction is strained by it — and the attribution travels with it
+   * in groundInfo for whatever is showing the canvas to print.
+   */
+  setGround(imageUrl, cornersM, info) {
+    return new Promise((resolve, reject) => {
+      const gl = this.gl;
+      const im = new Image();
+      im.onload = () => {
+        const t = gl.createTexture();
+        gl.bindTexture(gl.TEXTURE_2D, t);
+        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB,
+                      gl.UNSIGNED_BYTE, im);
+        /* WebGL1 will not mipmap a non-power-of-two image, and every
+         * stitched crop is one. Clamp and stay linear, or the ground
+         * comes back black with no error anywhere. */
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+        if (this.groundTex) gl.deleteTexture(this.groundTex);
+        this.groundTex = t;
+        this.groundQuad = cornersM;
+        this.groundInfo = info || null;
+        if (this._massing) this.setMassing(this._massing, { frame: false });
+        else this.render();
+        resolve(true);
+      };
+      im.onerror = () => reject(new Error('ground imagery would not load'));
+      im.src = imageUrl;
+    });
+  }
+
+  clearGround() {
+    if (this.groundTex) this.gl.deleteTexture(this.groundTex);
+    this.groundTex = null;
+    this.groundQuad = null;
+    this.groundInfo = null;
+    if (this._massing) this.setMassing(this._massing, { frame: false });
   }
 
   setView(name) {
@@ -339,6 +439,12 @@ export class Viewer3D {
     attach(this.buf.pos, this.loc.aPos, 3);
     attach(this.buf.nrm, this.loc.aNormal, 3);
     attach(this.buf.col, this.loc.aColor, 3);
+    attach(this.buf.uv, this.loc.aUV, 3);
+    if (this.groundTex) {
+      gl.activeTexture(gl.TEXTURE0);
+      gl.bindTexture(gl.TEXTURE_2D, this.groundTex);
+      gl.uniform1i(this.loc.uGround, 0);
+    }
     gl.drawArrays(gl.TRIANGLES, 0, this.vertices);
   }
 

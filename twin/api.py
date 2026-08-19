@@ -383,6 +383,90 @@ def project_sheets_pdf(pid):
     })
 
 
+@app.get("/api/project/<pid>/ground")
+def project_ground(pid):
+    """Real imagery for the ground under THIS building, already placed.
+
+    The 3D view drew the house on a flat coloured plane, which is why a
+    correct model still read as CGI: a building with no context looks
+    like a render of nothing. This drapes real imagery under it.
+
+    The corners come back in BUILDING-FRAME METRES, not lon/lat. The
+    projection maths lives in one place — here — so the browser cannot
+    drift from the server about where the ground is, and a rotated
+    house lands on rotated imagery rather than an axis-aligned smear.
+    """
+    from .providers import imagery as img
+    pj = _project(pid)
+    bld = pj.current()
+    margin = _float("margin_m", required=False, lo=0, hi=200)
+    margin = max(6.0, min(120.0, 25.0 if margin is None else margin))
+    want = request.args.get("source")
+
+    xs, ys = [], []
+    for b in bld.blocks:
+        xs += [b.x - margin, b.x + b.width + margin]
+        ys += [b.y - margin, b.y + b.depth + margin]
+    if not xs:
+        return _out({"available": False, "status": "DATA NOT AVAILABLE",
+                     "reason": "there is no building to stand on",
+                     "asked": []})
+    # Corners of the local box -> lon/lat, then the lon/lat box that
+    # contains them. The building frame is rotated, so the imagery box
+    # must cover the rotated rectangle, not just its own diagonal.
+    corners = [bld.to_lonlat(x, y)
+               for x in (min(xs), max(xs)) for y in (min(ys), max(ys))]
+    west = min(c[0] for c in corners)
+    east = max(c[0] for c in corners)
+    south = min(c[1] for c in corners)
+    north = max(c[1] for c in corners)
+
+    country = "GB"
+    order = ([want] if want else
+             [s["key"] for s in img.for_country(country) if s["usable"]])
+    tried, png, info = [], None, None
+    for key in order:
+        tried.append(key)
+        try:
+            src = img.get(key)
+        except KeyError:
+            continue
+        if key == "lidar-hillshade":
+            png, info = img.render_lidar_surface(west, south, east, north)
+        else:
+            png, info = img.mosaic(src, west, south, east, north)
+        if png:
+            break
+        png = None
+    if not png:
+        return _out({"available": False, "status": "DATA NOT AVAILABLE",
+                     "reason": (info if isinstance(info, str) else
+                                "no usable imagery source here"),
+                     "asked": tried,
+                     "note": "Sub-metre aerial worldwide needs a key of "
+                             "your own — Esri, Mapbox, MapTiler and OS "
+                             "all have free tiers that permit commercial "
+                             "use. The key goes on the server."})
+
+    # Back to building-frame metres, so the viewer just draws a quad.
+    w2, s2, e2, n2 = info["bounds"]
+    quad = [bld.from_lonlat(w2, s2), bld.from_lonlat(e2, s2),
+            bld.from_lonlat(e2, n2), bld.from_lonlat(w2, n2)]
+    mime = info.get("format", "image/png")
+    return jsonify({
+        "available": True,
+        "image": f"data:{mime};base64," + base64.b64encode(png).decode(),
+        "corners_m": [[round(x, 3), round(y, 3)] for x, y in quad],
+        "bounds": info["bounds"],
+        "source": info.get("source", "lidar-hillshade"),
+        "licence": info.get("licence"),
+        "attribution": info.get("attribution"),
+        "resolution_m": info.get("resolution_m") or info.get("cell_m"),
+        "method": info.get("method"),
+        "asked": tried,
+    })
+
+
 @app.get("/api/rates")
 def rates():
     """The rate card, its regions, VAT bases and what they mean."""
