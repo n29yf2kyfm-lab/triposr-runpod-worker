@@ -94,6 +94,11 @@ stage deps
 # (they are the entire reason we chose this image). Install, then ASSERT.
 pip install -q -r requirements.txt 2>&1 | tail -8
 pip install -q https://github.com/LDYang694/Storages/releases/download/20260430/utils3d-0.0.2-py3-none-any.whl 2>&1 | tail -2
+# MoGe-2: upstream inference.py grew a camera-estimation import since the
+# 2026-08-15 run (`from moge.model.v2 import MoGeModel`) — the 2026-08-19
+# rerun died INFER_ALL_MODES on exactly this. Weights auto-download from HF.
+pip install -q git+https://github.com/microsoft/MoGe.git 2>&1 | tail -2 || die MOGE_INSTALL
+python3 -c "from moge.model.v2 import MoGeModel" || die MOGE_IMPORT
 # spconv as a PREBUILT-wheel fallback backend (~30s, never a source build —
 # the flash-attn lesson). flex_gemm is the default and is already present;
 # this only buys SPARSE_CONV_BACKEND=spconv as a retry if flex_gemm misbehaves.
