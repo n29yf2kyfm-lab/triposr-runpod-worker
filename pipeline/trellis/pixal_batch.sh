@@ -178,6 +178,17 @@ stage fetch_manifest
 cd /workspace
 curl -fsSL "$SB/public/$PRE/batch.json" -o batch.json || die FETCH_MANIFEST
 python3 -c "import json;d=json.load(open('/workspace/batch.json'));print('batch cars:',len(d));assert d" || die BAD_MANIFEST
+# THE MEASUREMENT STAGE HAD NEVER RUN (found 2026-08-19). The launcher uploads
+# crease_density.py to the bucket, the per-car block guards on
+# `[ -f /workspace/crease_density.py ]`, and NOTHING EVER FETCHED IT — so the
+# guard was false on every pod of every batch and the metric silently skipped.
+# It is not fatal (the mesh is still uploaded and can be measured locally), but
+# it must be LOUD: a missing measurement now says so in the log instead of
+# reading as a clean run with no numbers.
+curl -fsSL "$SB/public/$PRE/crease_density.py" -o crease_density.py \
+  && echo "MEASURE: crease_density.py fetched" \
+  || echo "MEASURE UNAVAILABLE: crease_density.py could not be fetched — \
+cars will upload WITHOUT a crease number; measure them locally"
 
 export ATTN_BACKEND=sdpa
 export SPARSE_CONV_BACKEND=flex_gemm
@@ -226,8 +237,12 @@ PY2
   ls -la "/workspace/out_${TAG}.glb"
   sb_file "out_${TAG}.glb" "/workspace/out_${TAG}.glb"
   if [ -f /workspace/crease_density.py ]; then
+    echo "MEASURE $TAG" | tee -a /workspace/crease_all.txt
     python3 /workspace/crease_density.py "/workspace/out_${TAG}.glb" 2>&1 | tail -4 \
-      | tee -a /workspace/crease_all.txt
+      | tee -a /workspace/crease_all.txt \
+      || echo "MEASURE FAILED $TAG" | tee -a /workspace/crease_all.txt
+  else
+    echo "MEASURE SKIPPED $TAG (no crease_density.py)" | tee -a /workspace/crease_all.txt
   fi
   DONE=$((DONE+1))
   echo "=== PROGRESS: done=$DONE failed=$FAILED ==="
