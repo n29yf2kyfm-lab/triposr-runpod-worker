@@ -2600,17 +2600,31 @@ normals_fix → studio worker renders + red control. Durable facts:
   worker recolour ['carpaint'] cov 0.77, red control holds (body red, glazing dark,
   tyre dark). Grey unpainted arch surrounds = wheel-label spill up to 0.82 of height —
   cosmetic, visible in sheet. Material layer: solved on a THIRD geometry source.
-- **THE POSE MISREAD, do not repeat:** the worker renders READ as "car rolled on its
-  side" and it was upright all along. An arch-less slug body (fused shallow wheels, no
-  wheel openings) plus soft panels has no visual up cues, and I nearly launched a
-  worker-side pose investigation. The 5-minute settle: import the GLB in local Blender
-  and print world extents + wheel-material Z range (upright = wheels at bottom), then
-  ONE local known-camera render. Numbers first, eye second, worker never guilty until
-  both agree. Related trap: trimesh Scene.apply_transform stores a ROOT NODE transform
-  — geometry.vertices still shows pre-transform coords; that is not a failed rotation.
-- **Verdict unchanged:** geometry remains the blocker — no arches, taper, slug
-  silhouette. This pipeline cannot add wheel openings back. The route to a shippable
-  generated Yaris is multiview conditioning (fal.ai Hunyuan 3.1 Pro, owner key) or
-  machine component rebuild on a better base mesh.
-- Evidence: car-meshes/staging/yaris/ (yaris_hybrid.glb, YARIS_PC_SHEET.jpg,
-  transfer_report.json); parts at partcrafter_run/results_yaris_pc.tgz.
+- **CORRECTION (same night, owner caught it): THE CAR WAS ON ITS SIDE ALL ALONG, and
+  I "proved" it upright with circular evidence.** My first read of the renders (rolled)
+  was RIGHT; I then overruled the eye with a wheel-LABEL Z-range check — but the labels
+  were generated under the same wrong up-axis assumption, so they proved nothing. The
+  z-up→y-up conversion of the Hi3DGen mesh had rolled the car onto its side (up along
+  ±Z), the dims normalisation then swapped height/width, the transfer ran every up-axis
+  prior against a flank, and the "glass band" in the sheet was glazing painted along
+  the upward-facing SIDE of the car. Owner's one glance beat three of my measurements.
+  * THE TELL, worth automating: width-by-height deciles bulging EQUALLY at BOTH
+    extremes (1.61/1.61 vs 1.46 mid) = left+right wheel bulges = the car is on its
+    side. An upright car bulges only at the bottom. This is measurable in seconds
+    from raw vertices with no labels and no render.
+  * A LABEL-derived position (wheel material Z range) can NEVER verify pose on a mesh
+    whose labels were assigned assuming that pose — same circularity pose_fix already
+    documents for top_over_bot. Verify pose from raw geometry or a render with a known
+    camera showing recognisable features (badge, wheels, mirrors), never from labels.
+  * Fix: -90° roll about the length axis, re-normalise (height↔width had been swapped:
+    real 1.510 height / 1.695 width), decided by rendering BOTH roll signs and looking
+    (rollB showed badge+mirrors+wheels upright). Alignment to PartCrafter improved
+    0.0568 ("poor fit") → 0.0325 immediately — the misalignment WAS the roll.
+  * The earlier "Hi3DGen 54% too tall / rear 25% narrower" numbers were measured on
+    the side-lying mesh with height/width swapped — the taper is real but its axis
+    attribution needs re-measuring before anyone acts on it.
+  * Related trap that briefly confused the debug: trimesh Scene.apply_transform stores
+    a ROOT NODE transform — geometry.vertices still shows pre-transform coords; that
+    is not a failed rotation.
+- Evidence: car-meshes/staging/yaris/ (yaris_hybrid.glb + corrected yaris_hybrid2,
+  YARIS_PC_SHEET.jpg, transfer_report.json); parts at partcrafter_run/results_yaris_pc.tgz.
