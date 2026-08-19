@@ -98,6 +98,11 @@ pip install -q https://github.com/LDYang694/Storages/releases/download/20260430/
 # 2026-08-15 run (`from moge.model.v2 import MoGeModel`) — the 2026-08-19
 # rerun died INFER_ALL_MODES on exactly this. Weights auto-download from HF.
 pip install -q git+https://github.com/microsoft/MoGe.git 2>&1 | tail -2 || die MOGE_INSTALL
+# MoGe drags huggingface-hub to >=1.x which breaks the image's transformers
+# (<1.0 required — measured: run 2 died on ImportError at inference start).
+# Same clobber class as the torch guard: repin, then assert BOTH imports.
+pip install -q "huggingface-hub>=0.34.0,<1.0" 2>&1 | tail -2
+python3 -c "import transformers" || die HUB_REPIN
 python3 -c "from moge.model.v2 import MoGeModel" || die MOGE_IMPORT
 # spconv as a PREBUILT-wheel fallback backend (~30s, never a source build —
 # the flash-attn lesson). flex_gemm is the default and is already present;
