@@ -2828,3 +2828,39 @@ part. Measured: `process=True` DOES drop unreferenced vertices (6 kept from 98 o
 finish chain ran on the old labels (glass 13.52% instead of 5.45%) without a word of
 complaint. Re-run seg_refine after any seg_project change, or delete the downstream
 .npy files so a stale read cannot happen silently.
+
+## The RIM must stay TEXTURED on a generated car — and the WORKER then repaints it (2026-08-19)
+
+Two findings from materialising the Pixal Yaris, in the order they were proved.
+
+**1. A flat Rim_Alloy colour paints out real wheel detail.** seg_assemble gave every
+non-body class a flat material, so the rim became a solid grey disc — measured with a
+5x wheel crop (the documented tyre-verdict method), against a raw generator render
+that shows readable multi-spoke alloys. The "never trust a wheel's own material table"
+rule was written for SOURCED cars that ship a whole wheel as one pale material; it is
+actively wrong for a generated mesh whose TEXTURE carries photographic wheel detail.
+Rim now takes the textured-submesh path; the TYRE still gets flat dark rubber, which
+is what the rule actually cares about. `RIM_FLAT=1` restores the old behaviour.
+
+**2. The FILE passes the red control; the production WORKER fails it.** Split proved,
+do not confuse them again:
+  * FILE: materials and textures are fully distinct (carpaint→image 0, Rim_Alloy→image
+    2 — checked in the glTF JSON, after two wrong guesses that they shared a material
+    and then a texture). A NAME-TARGETED respray of `carpaint` — what colour_variants
+    and the viewer do — renders body red with rims silver, spokes intact, glass and
+    tyres dark. PASS.
+  * WORKER: the studio render came back with RED WHEELS. The worker picks paint
+    HEURISTICALLY (this file already records it "picks a body material heuristically
+    at render time"), and a bright, neutral, TEXTURED rim looks exactly like bodywork
+    to it. Worker-side defect, not file-side. Do not repin the shared worker mid-flight
+    (the warm-worker rule); for a worker-rendered wave use `RIM_FLAT=1`, or fix the
+    handler to skip materials it did not name.
+**Which artefact decides:** for entries whose posterUrl/turntableUrl are NULL the
+resolver hands `desktopGlbUrl` straight to the viewer, so THE FILE is what the customer
+sees and the file-level control is the one that governs. A poster-backed wave is the
+other way round.
+
+**Also measured here: the studio worker render is WORSE than a plain local Blender
+render on a textured generated car** — its studio paint + HDRI on top of an already-
+baked texture reads as crumpled chrome foil. The local render is the honest preview of
+what the viewer gets. Judge a textured generated car from the file, not the rig.
