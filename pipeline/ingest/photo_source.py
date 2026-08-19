@@ -213,6 +213,20 @@ def _lower_headers(h):
     return {k.lower(): v for k, v in dict(h).items()}
 
 
+# Only genuinely retryable codes. 401 was in this set for about ten minutes on
+# the strength of one "transient" Openverse failure -- it is NOT transient, see
+# OV_MAX_ANON_PAGE_SIZE below, and retrying it four times just wasted 14s per
+# call while reporting the wrong cause. 403 is excluded on the agent proxy
+# README's instruction: a 403 is an egress-policy denial, to be reported.
+TRANSIENT = {500, 502, 503, 504}
+
+# Measured 2026-08-19: page_size 20 -> 200, page_size 21 -> 401
+# {"detail":"page_size may not exceed 20 for anonymous requests"}. The 401 is
+# what makes this worth a constant -- it reads as "your key is bad" when in fact
+# no key is needed, and the fix is to ask for fewer results.
+OV_MAX_ANON_PAGE_SIZE = 20
+
+
 def http_get(url, gate, timeout=180, tries=4, max_sleep=900):
     """GET with Retry-After-honouring backoff. Returns (status, headers, body).
 
@@ -251,6 +265,14 @@ def http_get(url, gate, timeout=180, tries=4, max_sleep=900):
                 if attempt < tries:
                     time.sleep(nap)
                     continue
+            elif e.code in TRANSIENT:
+                if attempt < tries:
+                    nap = min(30.0, 2 ** attempt)
+                    log(f"    transient {e.code} on "
+                        f"{urllib.parse.urlparse(url).netloc} -> retry in {nap:.0f}s "
+                        f"(attempt {attempt}/{tries})")
+                    time.sleep(nap)
+                    continue
             return e.code, _lower_headers(e.headers), body
         except Exception as e:                      # transport / TLS / timeout
             last = e
@@ -265,6 +287,10 @@ def http_get(url, gate, timeout=180, tries=4, max_sleep=900):
 # --------------------------------------------------------------------------
 def openverse_search(query, page_size, wm_interval, ov_interval, source="wikimedia"):
     """Return (candidates, error_or_None). Licence fields copied verbatim."""
+    if page_size > OV_MAX_ANON_PAGE_SIZE:
+        log(f"    page_size {page_size} > {OV_MAX_ANON_PAGE_SIZE} would 401 "
+            f"(anonymous ceiling) -- clamping")
+        page_size = OV_MAX_ANON_PAGE_SIZE
     qs = urllib.parse.urlencode({
         "q": query,
         "page_size": str(page_size),

@@ -213,10 +213,40 @@ def build_texel_maps(prims, res, geo_res):
     return mask.reshape(res, res), m.reshape(geo_res, geo_res), pos.reshape(geo_res, geo_res, 3)
 
 
-def exteriority(pos, gmask, all_pts, grid=160, dirs=16, steps=20, seed=0):
-    """Fraction of a uniform hemisphere-ish bundle of rays that escapes the
-    occupancy grid. The inside face of a fused shell scores ~0 and is thereby
-    kept out of the lighting estimate."""
+def body_frame(pts):
+    """Principal axes of the body, pose-agnostic: rows = length, width, up.
+
+    Same idea as pipeline/machine/canon.py (a car is always length > width >
+    height, and the FLOOR slab covers more footprint than the roof slab), but
+    by vertex PCA instead of an oriented bounding box so this file needs no
+    trimesh. Measured against canon.py's OBB on the Pixal Yaris: PCA gives
+    extents 0.975/0.567/0.436 against the OBB's 0.970/0.562/0.407 -- same
+    ordering, same axes, close enough to name the up direction."""
+    C = pts - pts.mean(0)
+    _, _, Vt = np.linalg.svd(C[:: max(1, len(C) // 60000)], full_matrices=False)
+    proj = C @ Vt.T
+    ext = np.ptp(proj, axis=0)
+    order = np.argsort(ext)[::-1]
+    Vt = Vt[order]
+    proj = proj[:, order]
+    up = proj[:, 2]
+    lo, hi = np.percentile(up, [2, 98])
+    h = hi - lo
+    fp = lambda q: 0.0 if len(q) < 10 else float(np.ptp(q[:, 0]) * np.ptp(q[:, 1]))
+    if fp(proj[up < lo + 0.06 * h]) < fp(proj[up > hi - 0.06 * h]):
+        Vt[2] = -Vt[2]                       # the wide slab must be the floor
+    return Vt, float(ext[order][0])
+
+
+def sky_visibility(pos, gmask, all_pts, up, grid=160, dirs=16, steps=20, seed=0):
+    """Fraction of an upper-hemisphere ray bundle that escapes the occupancy
+    grid: how much of the sky this texel can see.
+
+    Plain exteriority is not enough to find paint -- the black underbody and
+    the inside of a fused shell can both let rays escape downwards, and on the
+    Pixal Yaris a whole-sphere test handed the paint finder the near-black
+    underbody (median linear luminance 0.002) as the widest-spread cluster.
+    Sky visibility is also the physically right weight for baked daylight."""
     lo = all_pts.min(0)
     span = float((all_pts.max(0) - lo).max())
     occ = np.zeros((grid, grid, grid), dtype=bool)
@@ -224,8 +254,9 @@ def exteriority(pos, gmask, all_pts, grid=160, dirs=16, steps=20, seed=0):
     occ[gi[:, 0], gi[:, 1], gi[:, 2]] = True
     P = pos[gmask]
     rng = np.random.default_rng(seed)
-    D = rng.normal(size=(dirs, 3))
+    D = rng.normal(size=(dirs * 4, 3))
     D /= np.linalg.norm(D, axis=1, keepdims=True)
+    D = D[D @ up > 0.2][:dirs]
     step = span / grid * 1.6
     vis = np.zeros(len(P), dtype=np.float32)
     for d in D:
@@ -239,7 +270,7 @@ def exteriority(pos, gmask, all_pts, grid=160, dirs=16, steps=20, seed=0):
             alive &= ~(occ[ij[:, 0], ij[:, 1], ij[:, 2]] & ~oob)
         vis += alive
     out = np.zeros(gmask.shape, dtype=np.float32)
-    out[gmask] = vis / dirs
+    out[gmask] = vis / max(len(D), 1)
     return out
 
 
@@ -384,11 +415,11 @@ def main():
     ap.add_argument("--dry-run", action="store_true", help="measure only, write nothing")
     ap.add_argument("--force", action="store_true", help="write even if the baked lighting is below --min-spread")
     ap.add_argument("--min-spread", type=float, default=1.15, help="refuse below this p95/p5 of the paint field")
-    ap.add_argument("--cell-frac", type=float, default=0.030, help="cell size as a fraction of the body diagonal")
+    ap.add_argument("--cell-frac", type=float, default=0.035, help="cell size as a fraction of the body LENGTH")
     ap.add_argument("--sigma-cells", type=float, default=1.5, help="smoothing of the lighting field, in cells")
     ap.add_argument("--clamp", type=float, default=1.6, help="max correction factor either way")
     ap.add_argument("--geo-res", type=int, default=1024, help="resolution of the texel->geometry maps")
-    ap.add_argument("--ext-ao", type=float, default=0.35, help="exteriority cut (fraction of escaping rays)")
+    ap.add_argument("--min-sky", type=float, default=0.25, help="sky-visibility cut for the paint candidates")
     ap.add_argument("--min-paint-frac", type=float, default=0.10, help="refuse if the paint class is smaller than this share of the exterior")
     ap.add_argument("--lossy", type=int, default=0, help="re-encode WebP at this quality instead of lossless")
     ap.add_argument("--report", help="write the measurements to this JSON file")
@@ -429,10 +460,13 @@ def main():
         refuse("no primitive carries a base-colour texture")
 
     all_pts = np.concatenate([p for prims in by_img.values() for p, _, _ in prims])
-    diag = float(np.linalg.norm(all_pts.max(0) - all_pts.min(0)))
-    cell = args.cell_frac * diag
-    print("mesh: %d primitives, %d base-colour image(s), body diagonal %.3f -> cell %.1f mm-equivalent"
-          % (sum(len(v) for v in by_img.values()), len(by_img), diag, cell / diag * 4000))
+    frame, length = body_frame(all_pts)
+    up = frame[2]
+    cell = args.cell_frac * length
+    print("mesh: %d primitives, %d base-colour image(s); body length %.3f, up axis (%.2f %.2f %.2f), "
+          "lighting cell %.1f%% of length (%.0f mm on a 4 m car)"
+          % (sum(len(v) for v in by_img.values()), len(by_img), length, up[0], up[1], up[2],
+             100 * args.cell_frac, args.cell_frac * 4000))
 
     # --- decode textures and build texel maps -------------------------------
     layers = []
@@ -478,29 +512,29 @@ def main():
         L["lin"] = srgb_to_linear(col).astype(np.float32)
         L["lum"] = (L["lin"] @ LUMW).astype(np.float32)
 
-    # --- exteriority --------------------------------------------------------
+    # --- sky visibility -----------------------------------------------------
     sub = all_pts[:: max(1, len(all_pts) // 400000)]
     for L in layers:
-        L["ao"] = exteriority(L["pos"], L["valid"], sub)
+        L["sky"] = sky_visibility(L["pos"], L["valid"], sub, up)
 
-    ext = np.concatenate([L["ao"][L["valid"]] > args.ext_ao for L in layers])
+    ext = np.concatenate([L["sky"][L["valid"]] > args.min_sky for L in layers])
     pos_all = np.concatenate([L["pos"][L["valid"]] for L in layers])
     lin_all = np.concatenate([L["lin"][L["valid"]] for L in layers])
     lum_all = np.concatenate([L["lum"][L["valid"]] for L in layers])
     if ext.sum() < 5000:
-        refuse("only %d exterior texels -- the mesh is not a closed body or the atlas is tiny" % ext.sum())
-    print("texels: %d covered, %d exterior (%.0f%%)" % (len(ext), ext.sum(), 100 * ext.mean()))
+        refuse("only %d sky-lit texels -- the mesh is not a closed body or the atlas is tiny" % ext.sum())
+    print("texels: %d covered, %d sky-lit (%.0f%%)" % (len(ext), ext.sum(), 100 * ext.mean()))
 
     # --- paint class --------------------------------------------------------
     paint, info = find_paint(lin_all, lum_all, pos_all, ext, cell)
     if paint is None:
         refuse("no colour cluster found on the exterior")
-    print("paint class: %d texels = %.0f%% of the exterior, chromaticity (%.3f, %.3f), median luminance %.3f"
+    print("paint class: %d texels = %.0f%% of the sky-lit surface, chromaticity (%.3f, %.3f), median luminance %.3f"
           % (paint.sum(), 100 * info["frac_of_exterior"], info["chroma"][0], info["chroma"][1], info["median_lum"]))
     print("             spread over %d of %d body cells (%.0f%%)"
           % (info["coverage_cells"], info["total_cells"], 100 * info["coverage_cells"] / max(info["total_cells"], 1)))
     if info["frac_of_exterior"] < args.min_paint_frac:
-        refuse("paint class is only %.0f%% of the exterior (need %.0f%%) -- cannot tell paint from trim"
+        refuse("paint class is only %.0f%% of the sky-lit surface (need %.0f%%) -- cannot tell paint from trim"
                % (100 * info["frac_of_exterior"], 100 * args.min_paint_frac))
     if info["coverage_cells"] < 0.25 * info["total_cells"]:
         refuse("the dominant colour cluster covers only %.0f%% of the body -- it is a part, not the paint"
@@ -509,8 +543,8 @@ def main():
     # --- measure BEFORE -----------------------------------------------------
     before = spread_report(pos_all, paint, lum_all, cell)
     trends = axis_trends(pos_all, paint, lum_all)
-    print("\nBAKED LIGHTING MEASURED (paint, median per %.0f mm-equivalent cell, %d cells):"
-          % (cell / diag * 4000, before["cells"]))
+    print("\nBAKED LIGHTING MEASURED (paint, median per %.1f%%-of-length cell, %d cells):"
+          % (100 * args.cell_frac, before["cells"]))
     print("  linear luminance  p5 %.3f  p25 %.3f  med %.3f  p75 %.3f  p95 %.3f"
           % (before["p5"], before["p25"], before["p50"], before["p75"], before["p95"]))
     print("  low-frequency spread p95/p5 = %.2fx   interquartile = %.2fx" % (before["spread"], before["iqr"]))
@@ -539,7 +573,7 @@ def main():
     for (name, r0), (_, r1) in zip(trends, axis_trends(pos_all, paint, lum_new)):
         print("  trend along the %-8s axis: %.2fx -> %.2fx" % (name, r0, r1))
 
-    rep = dict(input=args.inp, output=args.out, diagonal=diag, cell=cell,
+    rep = dict(input=args.inp, output=args.out, body_length=length, cell=cell,
                paint=info, before=before, after=after,
                trends_before=dict(trends), trends_after=dict(axis_trends(pos_all, paint, lum_new)),
                field_min=float(fs.min()), field_max=float(fs.max()))
