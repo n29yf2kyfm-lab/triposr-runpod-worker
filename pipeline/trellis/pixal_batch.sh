@@ -31,7 +31,12 @@ mkdir -p /workspace
 exec > >(tee -a "$LOG") 2>&1
 
 SB="https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object"
-PRE="car-meshes/pixal_test"
+# MUST match launch_pixal_batch.py's PRE. It did not (2026-08-19): the
+# launcher uploaded to pixal_batch while this said pixal_test, so every pod
+# booted correctly, failed FETCH_MANIFEST, and reported to a log nobody was
+# watching — which read as four "dead hosts" in a row and cost four healthy
+# pods before the old log was checked.
+PRE="car-meshes/pixal_batch"
 
 report() { ( set +x
   curl -s -X POST -H "apikey: ${SB_KEY}" -H "Authorization: Bearer ${SB_KEY}" \
