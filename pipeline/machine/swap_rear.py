@@ -23,12 +23,22 @@ REPLACED = ("Tail_Lens", "Number_Plate", "Plate_Frame")
 sc = trimesh.load(CAR, force="scene")
 out = trimesh.Scene()
 kept = 0
-for name, g in sc.geometry.items():
-    if any(name.startswith(r) for r in REPLACED):
+# GRAPH-PRESERVING copy (forensic fix 2026-08-19): the old geometry-items
+# rebuild collapsed INSTANCED nodes — wheel_stage ships ONE master mesh on
+# FOUR transform nodes, and iterating geometries kept a single node at the
+# origin, silently deleting three wheels. Copy the node graph, not the
+# geometry dict.
+for node in sc.graph.nodes_geometry:
+    T, gn = sc.graph[node]
+    if any(node.startswith(r) or gn.startswith(r) for r in REPLACED):
         continue
-    out.add_geometry(g, node_name=name, geom_name=name)
+    if gn not in out.geometry:
+        out.add_geometry(sc.geometry[gn], geom_name=gn, node_name=node,
+                         transform=T)
+    else:
+        out.graph.update(frame_to=node, matrix=T, geometry=gn)
     kept += 1
-print(f"kept {kept} components untouched, replacing {REPLACED}")
+print(f"kept {kept} nodes untouched, replacing {REPLACED}")
 
 rz = np.load(KIT)
 LENS_MAT = dict(baseColorFactor=[52, 7, 9, 255], metallicFactor=0.0,

@@ -23,10 +23,19 @@ names = {p["name"] for p in manifest}
 sc = trimesh.load(CAR, force="scene")
 out = trimesh.Scene()
 kept = 0
-for name, g in sc.geometry.items():
-    if name in names:
+# GRAPH-PRESERVING copy (forensic fix 2026-08-19, same class as swap_rear):
+# a geometry-items rebuild collapses instanced nodes — wheel_stage's four
+# wheel transforms on one master mesh became a single origin node and
+# three wheels vanished. Copy the node graph.
+for node in sc.graph.nodes_geometry:
+    T, gn = sc.graph[node]
+    if node in names or gn in names:
         continue
-    out.add_geometry(g, node_name=name, geom_name=name)
+    if gn not in out.geometry:
+        out.add_geometry(sc.geometry[gn], geom_name=gn, node_name=node,
+                         transform=T)
+    else:
+        out.graph.update(frame_to=node, matrix=T, geometry=gn)
     kept += 1
 
 for p in manifest:

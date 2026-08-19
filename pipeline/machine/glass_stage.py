@@ -308,9 +308,8 @@ if ratio < ASYM_REBUILD:
     Vm = Rm.vertices.copy()
     Am = np.c_[np.ones(len(Vm)), Vm[:, 0], Vm[:, 1], Vm[:, 0]**2,
                Vm[:, 0]*Vm[:, 1], Vm[:, 1]**2]
-    Vm[:, 2] = Am @ coef - np.sign(coef[0]) * 0.0  # surface value first
+    Vm[:, 2] = Am @ coef
     # inset 2mm INTO the cabin so the rebuilt pane cannot z-fight the frit
-    inset = 0.002 * (-1 if cabin[2] > np.median(V[:, 2]) else 1)
     Vm[:, 2] += -0.002 if np.median(V[:, 2]) > cabin[2] else 0.002
     Rm.vertices = Vm
     Rm.faces = Rm.faces[:, ::-1]

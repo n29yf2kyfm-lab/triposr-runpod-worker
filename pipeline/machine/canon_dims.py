@@ -105,6 +105,50 @@ if abs(gy) > 1e-4:
         g.apply_translation([0.0, -gy, 0.0])
     allv = np.vstack([g.vertices for g in geoms.values()])
     ops.append(f"grounded (y shifted {-gy:+.3f})")
+
+# ---- NOSE at +X, enforced -----------------------------------------------
+# Every downstream stage assumes it (glass_stage names screens by xfrac,
+# front_kit builds at XMAX, rear_lamps4 at XMIN, detect_fused calls the
+# higher-x axle "front") and nothing verified it — a nose-at--X car would
+# get its headlamps on the tailgate with no refusal. When a glass label
+# exists, resolve it: of the two end-facing glazing clusters, the
+# WINDSCREEN has the larger area and the more raked (up-tilted) normals —
+# true across hatch/saloon/SUV. Flip 180deg about Y only on a confident
+# ratio; otherwise record the ambiguity and leave the frame alone.
+glass_label = spec.label("glass", "glass")
+if glass_label in geoms:
+    gg = geoms[glass_label]
+    fn = gg.face_normals
+    fa = gg.area_faces
+    fc = gg.triangles_center
+    endish = np.abs(fn[:, 0]) >= 0.30
+    xmid = float((allv[:, 0].max() + allv[:, 0].min()) / 2)
+    score = {}
+    for tag, m in (("high", endish & (fc[:, 0] > xmid)),
+                   ("low", endish & (fc[:, 0] <= xmid))):
+        if m.sum() < 50:
+            score[tag] = 0.0
+            continue
+        area = float(fa[m].sum())
+        rake = float(np.average(np.abs(fn[m, 1]), weights=fa[m]))
+        score[tag] = area * (0.5 + rake)
+    QC["derived"]["nose_check"] = {
+        "score_high_x": round(score.get("high", 0.0), 4),
+        "score_low_x": round(score.get("low", 0.0), 4),
+        "rule": "windscreen = larger area x more raked end cluster"}
+    hi, lo = score.get("high", 0.0), score.get("low", 0.0)
+    if lo > 1.3 * hi and lo > 0:
+        R180 = trimesh.transformations.rotation_matrix(np.pi, [0, 1, 0])
+        for g in geoms.values():
+            g.apply_transform(R180)
+        allv = np.vstack([g.vertices for g in geoms.values()])
+        ops.append("flipped 180deg about Y (windscreen was at low x)")
+        QC["derived"]["nose_check"]["action"] = "flipped"
+    elif hi >= lo:
+        QC["derived"]["nose_check"]["action"] = "nose already at +X"
+    else:
+        QC["derived"]["nose_check"]["action"] = (
+            "AMBIGUOUS (ratio under 1.3) — frame left alone, check the render")
 QC["derived"]["frame_ops"] = ops or ["already canonical"]
 
 # ---- dims to spec -------------------------------------------------------
@@ -188,6 +232,24 @@ if s_bin.max() > 1.005:
 else:
     print("detaper: profile already parallel — no correction")
 QC["derived"]["detaper"] = corr
+
+# renormalise overall width after the detaper: the per-bin p99 targets do
+# not equal the global p99.7 the dims verify measures (run3 measured the
+# mismatch at +2.6% and the verify correctly refused). One uniform z
+# scale restores the global statistic while keeping the parallel profile.
+cp = geoms["carpaint"].vertices
+H3 = float(np.percentile(cp[:, 1], 99.8))
+fl3 = cp[cp[:, 1] < 0.75 * H3]
+W3 = 2 * float(np.percentile(np.abs(fl3[:, 2]), 99.7))
+specW = spec.dim("width_m")[0]
+if specW and abs(W3 / specW - 1) > 0.002:
+    sz3 = specW / W3
+    for g in geoms.values():
+        v = g.vertices.copy()
+        v[:, 2] *= sz3
+        g.vertices = v
+    QC["derived"]["detaper"]["width_renorm"] = round(sz3, 4)
+    print(f"detaper width renorm: x{sz3:.4f}")
 
 out = trimesh.Scene()
 for n, g in geoms.items():

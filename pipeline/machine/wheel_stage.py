@@ -478,8 +478,14 @@ def main():
                         & (skin_pts[:, 1] < gy0 + 0.55 * H0)]
         if len(zone) < 200:
             continue
-        flank = float(np.percentile(np.abs(zone[:, 2]), 97))
-        tmax = 2 * (flank - 0.010 - Wt / 2)
+        # p99.5, not p97: the physical constraint on the tyre face is the
+        # ARCH LIP — the outermost local feature — and p97 reads typical
+        # panel depth instead, costing 20mm of track on a detapered body
+        # (measured run3: 1.437 vs spec 1.46 with the lip clearly wider).
+        # The guard still catches a genuinely narrow body: pre-detaper this
+        # statistic sat at 0.73 against the 0.82 the spec track needs.
+        flank = float(np.percentile(np.abs(zone[:, 2]), 99.5))
+        tmax = 2 * (flank - 0.008 - Wt / 2)
         if axle == "front" and tf > tmax:
             report.setdefault("track_narrowed", {})["front"] = {
                 "spec": round(tf, 4), "used": round(tmax, 4),
