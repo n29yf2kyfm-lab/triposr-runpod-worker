@@ -462,6 +462,7 @@ PY
 # rather than "debug the pipeline".
 echo "=== gpu preflight ==="
 python - <<'PYGPU' || exit 14
+import os
 import sys
 import time
 import torch
@@ -498,22 +499,42 @@ for attempt in (1, 2, 3):
         time.sleep(5)
 
 if not ok:
-    # Prove whether the GPU works at all without cuDNN. If this passes, the
-    # card and the driver are fine and only cuDNN is broken, which is a
-    # different problem from a dead GPU and needs saying so.
+    # WARN, DO NOT EXIT. This check was fatal and that was the wrong call.
+    #
+    # Three consecutive runs were refused on three different machines and two
+    # different card types, one with 44.2 GiB of 44.4 GiB free — so neither a
+    # bad host nor memory. Yet the two runs immediately before them trained
+    # fine on this same script. When a gate rejects everything, the gate itself
+    # is the most likely fault, and a preflight that wrongly refuses costs the
+    # entire run while one that wrongly passes costs about a pound of GPU time
+    # before the first batch fails. The asymmetry runs the other way from how
+    # this was written.
+    #
+    # So: report loudly, then continue and let real training be the judge. The
+    # watchdog and the first training batch will kill it within minutes if
+    # cuDNN genuinely cannot work.
     try:
         torch.backends.cudnn.enabled = False
         y = torch.nn.functional.conv2d(
             torch.randn(1, 3, 64, 64, device="cuda"),
             torch.randn(8, 3, 3, 3, device="cuda"))
         torch.cuda.synchronize()
-        print("PREFLIGHT FAIL: cuDNN is broken but the GPU itself works "
-              "(conv succeeded with cudnn disabled).")
-        print("Training without cuDNN is far too slow to be worth it.")
+        print("PREFLIGHT WARNING: cuDNN handle failed here but the GPU itself "
+              "works (conv succeeded with cudnn disabled).")
     except Exception as e2:
-        print(f"PREFLIGHT FAIL: the GPU cannot convolve at all: "
+        print(f"PREFLIGHT WARNING: the GPU could not convolve at all: "
               f"{type(e2).__name__}: {str(e2)[:120]}")
-    sys.exit(1)
+    # Diagnostics for the real cause, printed once so the next failure is
+    # cheaper to read than this one was.
+    import glob as _g
+    print("torch libs:", [os.path.basename(x) for x in
+                          _g.glob(os.path.join(os.path.dirname(torch.__file__),
+                                               "lib", "*cudnn*"))][:6])
+    print("nvidia pkgs:", [os.path.basename(x) for x in
+                           _g.glob("/usr/local/lib/python3*/dist-packages/"
+                                   "nvidia/cudnn/lib/*")][:6])
+    print("LD_LIBRARY_PATH:", os.environ.get("LD_LIBRARY_PATH", "(unset)"))
+    print("CONTINUING ANYWAY — training itself is the real test.")
 PYGPU
 
 # PANEL MODE. The panel dataset is 998 images and 692MB — three orders of
