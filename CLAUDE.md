@@ -2778,3 +2778,53 @@ from the bucketed raw rather than trying to store it.
 Two container rollbacks hit during this run. Recovery was clean both times (origin +
 bucket), but note: **a rollback also wipes pip installs** — the local CPU torch/
 transformers stack for the seg pipeline had to be reinstalled twice.
+
+## THE GLASS BAND GATE WAS NEVER A REAL-CAR BAND (measured 2026-08-19)
+
+Found while auditing the seg chain on the Pixal Yaris. The gate read FAIL on labels
+the EYE confirmed as correct (red glass sitting exactly on the windows in the label
+render), which is the signature of a wrong metric rather than wrong work.
+
+It was wrong twice over:
+  1. **It counted FACES.** Face count is tessellation-dependent — measured on this
+     mesh, glass faces are **1.58x smaller** than body faces, so counting inflates
+     the glass share against any area-calibrated intuition. AREA is the physical
+     quantity and is what a "share of the car" means.
+  2. **The 2.5-9.5% band was never measured.** Ten LIVE catalogue cars (Draco-decoded
+     with `gltf-transform copy` first — trimesh cannot read Draco, the recorded trap),
+     glass by material name with mirrors/lamps excluded, glass as % of TOTAL AREA:
+       min 1.12 (VW Polo) · p10 2.62 · median 5.75 · p90 12.21 · max 12.24 (BMW M440i)
+     **A real BMW busts the old 9.5% ceiling on its own.** Values in
+     /tmp cal_result.json at the time; re-derive with the snippet in seg_project.py's
+     gate comment if needed.
+
+Gate is now **glass AREA / total AREA, banded 1.0-13.0%**, with the calibration and its
+provenance written into the code. The Pixal Yaris scores **5.56% — the catalogue
+median** — and PASSES. The 2026-08-16 note ("band it as % of exterior-seen faces")
+was half right: it spotted the denominator problem, proposed a different wrong
+denominator, and never recalibrated. Do not band a share without measuring the band.
+
+**Two more real defects in the same audit, both measured:**
+  * **ROOF RULE MISSING.** 46.2% of projected glass faced UP (|n_y|>0.7). DINO's
+    "car window" boxes enclose the whole greenhouse, so roof skin votes glass in every
+    view that sees it. Ported `hybrid_transfer._roofish`: in the cabin MID-BAND there
+    is no raked screen, so up-facing there is roof by construction; only the end
+    quarters may hold a steep screen face. Returned 15.7k faces to body.
+  * **DEPTH TOLERANCE WAS CAMERA-RELATIVE**: `0.02 x mean ray` = 0.048 units here =
+    ~5% of the car's own LENGTH (~19cm on a real Yaris), so surfaces BEHIND the
+    glazing passed the "is this the visible surface" test. Now mesh-relative
+    (`SEG_DEPTH_TOL_FRAC x diag`, default 0.0025). NOTE: tightening it did NOT change
+    the glass/exterior RATIO (28%->19-21% across 0.0025-0.02) because the seen set
+    shrinks with it — which is exactly how the metric, not the labels, was convicted.
+
+**A suspicion I tested and DISPROVED, recorded so nobody "fixes" it:** seg_assemble
+builds each material submesh as `Trimesh(vertices=m.vertices, faces=m.faces[idx],
+process=True)` and I expected it to carry the whole 918k-vertex array into every
+part. Measured: `process=True` DOES drop unreferenced vertices (6 kept from 98 on a
+4-face submesh). No bloat. Not a defect.
+
+**Stale-intermediate trap, paid tonight:** `machine.py finish` consumes
+`car_labels_r.npy`. Re-running seg_project alone leaves that file STALE, and the whole
+finish chain ran on the old labels (glass 13.52% instead of 5.45%) without a word of
+complaint. Re-run seg_refine after any seg_project change, or delete the downstream
+.npy files so a stale read cannot happen silently.
