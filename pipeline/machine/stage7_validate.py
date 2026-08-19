@@ -89,9 +89,16 @@ gate("doors_separate", "OPEN", "doors not separated from shell",
 sc = trimesh.load(INP, force="scene")
 qw = {}
 for tag in ("FR", "FL", "RR", "RL"):
-    T, _ = sc.graph[f"WHEEL_{tag}__TYRE_MASTER"]
-    tv = trimesh.transform_points(sc.geometry["TYRE_MASTER"].vertices, T)
-    ax = T[:3, :3] @ [0, 0, 1]
+    T, gname = sc.graph[f"WHEEL_{tag}__TYRE_MASTER"]
+    tv = trimesh.transform_points(sc.geometry[gname].vertices, T)
+    # centre and axis from the transformed VERTICES, not the node
+    # transform: a Blender finishing round-trip BAKES instance transforms
+    # (T becomes identity, geometry duplicated per corner) and the old
+    # T-based read then measured every track as 0.0000 on a correct file.
+    cen = (tv.min(0) + tv.max(0)) / 2
+    _, _, Vt = np.linalg.svd(tv - cen, full_matrices=False)
+    ax = Vt[2]                       # a tyre is a disc: axis = min-variance
+    T = np.eye(4); T[:3, 3] = cen    # keep the shape the gates below expect
     qw[tag] = {"c": T[:3, 3], "bot": float(tv[:, 1].min()),
                "toe": float(np.degrees(np.arctan2(abs(ax[0]), abs(ax[2])))),
                "camber": float(np.degrees(np.arctan2(abs(ax[1]), abs(ax[2]))))}
@@ -117,8 +124,14 @@ gate("toe_camber", "PASS" if max(max(q['toe'], q['camber']) for q in qw.values()
      else "FAIL", "0.0000°", "<0.01°")
 
 # ---- 4 proportions from skin extremes vs placed axles
-skin = np.vstack([sc.geometry[n].vertices for n in
-                  spec.label("body_skin_nodes", ["carpaint"]) if n in sc.geometry]
+_skin_names = [n for n in
+               spec.label("body_skin_nodes", [spec.label("body", "carpaint")])
+               if n in sc.geometry]
+if not _skin_names:
+    raise SystemExit(f"no body skin nodes found (looked for "
+                     f"{spec.label('body_skin_nodes', [spec.label('body', 'carpaint')])}); "
+                     f"scene has {sorted(sc.geometry)[:20]}")
+skin = np.vstack([sc.geometry[n].vertices for n in _skin_names]
                  + [sc.geometry[n].vertices for n in
                     ("Bonnet", "Front_Bumper", "Front_Wing_L", "Front_Wing_R")
                     if n in sc.geometry])
@@ -128,11 +141,19 @@ FO, _ = spec.dim("front_overhang_m")
 RO, _ = spec.dim("rear_overhang_m")
 fo = float(skin[:, 0].max()) - fx
 ro = rx - float(skin[:, 0].min())
-ef, er = 100 * (fo / FO - 1), 100 * (ro / RO - 1)
-gate("front_overhang", "PASS" if abs(ef) <= 1 else "FAIL",
-     f"{fo:.4f} ({ef:+.2f}%)", "±1%")
-gate("rear_overhang", "PASS" if abs(er) <= 1 else "FAIL",
-     f"{ro:.4f} ({er:+.2f}%)", "±1%")
+if FO is None or RO is None:
+    # a spec that omits overhangs is following the no-fabrication rule —
+    # record the measured values as information, never invent a target
+    gate("front_overhang", "OPEN", f"measured {fo:.4f}m — no spec value",
+         "spec omits front_overhang_m")
+    gate("rear_overhang", "OPEN", f"measured {ro:.4f}m — no spec value",
+         "spec omits rear_overhang_m")
+else:
+    ef, er = 100 * (fo / FO - 1), 100 * (ro / RO - 1)
+    gate("front_overhang", "PASS" if abs(ef) <= 1 else "FAIL",
+         f"{fo:.4f} ({ef:+.2f}%)", "±1%")
+    gate("rear_overhang", "PASS" if abs(er) <= 1 else "FAIL",
+         f"{ro:.4f} ({er:+.2f}%)", "±1%")
 
 # ---- 5 skin/tyre intersection
 R = float((trimesh.transform_points(sc.geometry["TYRE_MASTER"].vertices,

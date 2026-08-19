@@ -114,6 +114,25 @@ def inside_poly(pts, poly):
     return inside
 
 
+def rim_distance(C, poly, chunk=20000):
+    """Min distance from each 2D point to the closed polyline, CHUNKED.
+    The one-shot broadcast builds an (N_pts x N_loop x 2) temp — measured
+    456k faces x 1778 loop points = ~13GB and an OOM kill (RC=137) on the
+    Yaris premium chain. Same maths, bounded memory."""
+    seg0 = poly
+    seg1 = np.roll(seg0, -1, axis=0)
+    d = seg1 - seg0
+    L2 = np.maximum((d * d).sum(1), 1e-12)
+    out = np.empty(len(C))
+    for i in range(0, len(C), chunk):
+        Cc = C[i:i + chunk]
+        tpar = np.clip(((Cc[:, None, :] - seg0[None]) * d[None]).sum(2)
+                       / L2[None], 0, 1)
+        proj = seg0[None] + tpar[..., None] * d[None]
+        out[i:i + chunk] = np.linalg.norm(Cc[:, None, :] - proj, axis=2).min(1)
+    return out
+
+
 sc = trimesh.load(INP, force="scene")
 if BODY_LABEL not in sc.geometry:
     raise SystemExit(f"REFUSED: body node {BODY_LABEL!r} absent; scene has "
@@ -181,13 +200,7 @@ for pane, loop in foot.items():
         rel = cent - ctr0
         cu, cv, cn = rel @ u_ax, rel @ v_ax, rel @ n_ax
         ins = inside_poly(np.c_[cu, cv], poly) & (np.abs(cn) < 0.10 * SCALE)
-        seg0 = poly; seg1 = np.roll(seg0, -1, axis=0)
-        d = seg1 - seg0
-        L2 = np.maximum((d * d).sum(1), 1e-12)
-        C = np.c_[cu, cv]
-        tpar = np.clip(((C[:, None, :] - seg0[None]) * d[None]).sum(2) / L2[None], 0, 1)
-        proj = seg0[None] + tpar[..., None] * d[None]
-        rim_dist = np.linalg.norm(C[:, None, :] - proj, axis=2).min(1)
+        rim_dist = rim_distance(np.c_[cu, cv], poly)
         sel = ins & (rim_dist > RIM_KEEP)
         kill |= sel
         report[pane] = {"inside_footprint": int(ins.sum()),
@@ -217,13 +230,7 @@ for pane, loop in foot.items():
     else:
         outb = (np.abs(cent[:, depth_axis]) - np.abs(local)) > OUTBOARD
     # distance from each candidate centroid to the aperture rim polyline
-    seg0 = P[:, axis]; seg1 = np.roll(seg0, -1, axis=0)
-    d = seg1 - seg0
-    L2 = np.maximum((d * d).sum(1), 1e-12)
-    C = cent[:, axis]
-    tpar = np.clip(((C[:, None, :] - seg0[None]) * d[None]).sum(2) / L2[None], 0, 1)
-    proj = seg0[None] + tpar[..., None] * d[None]
-    rim_dist = np.linalg.norm(C[:, None, :] - proj, axis=2).min(1)
+    rim_dist = rim_distance(cent[:, axis], P[:, axis])
     tail = cent[:, 0] < (P[:, 0].min() + TAIL_KEEP)
     sel = ins & ~outb & (rim_dist > RIM_KEEP) & ~tail
     kill |= sel

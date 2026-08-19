@@ -334,10 +334,19 @@ def main():
     body_label = spec.label("body", "carpaint")
     out = trimesh.Scene()
     removed = []
+    stripped_pts = []
     for node in sc.graph.nodes_geometry:
         T, gn = sc.graph[node]
         if any(node.startswith(p) or gn.startswith(p) for p in strip):
             removed.append(node)
+            # a fused generated car carries its ONLY axle evidence in the
+            # wheel-labelled blob geometry (the body's own underbody is a
+            # continuous ground smear — measured on the Yaris hybrid: one
+            # ground cluster, both detectors blind). Stripped geometry is
+            # kept as DETECTION EVIDENCE only; it never reaches the output.
+            g = sc.geometry[gn]
+            stripped_pts.append(trimesh.transform_points(g.vertices, T)
+                                if T is not None else g.vertices)
             continue
         if gn not in out.geometry:
             out.add_geometry(sc.geometry[gn], geom_name=gn, node_name=node,
@@ -374,12 +383,38 @@ def main():
         skin_pts = np.vstack([out.geometry[n].vertices for n in skin_names])
         report["canonicalised"] = "rotated 90deg about Y (length was on Z)"
         print("canonicalised: length was on Z, rotated to X")
+    # Z-CENTRING GUARD: everything downstream assumes the car straddles
+    # z=0 — detect_arches splits sides by sign(z), placement is +-track/2.
+    # A corner-origin mesh (z in [0, W], measured on the Yaris hybrid:
+    # wheels placed around the LEFT EDGE, arch detector saw one side)
+    # passes every other check silently. Recentre and record.
+    zmid = float((skin_pts[:, 2].max() + skin_pts[:, 2].min()) / 2)
+    zw = float(skin_pts[:, 2].max() - skin_pts[:, 2].min())
+    if abs(zmid) > 0.05 * zw:
+        for gname in list(out.geometry):
+            out.geometry[gname].apply_translation([0.0, 0.0, -zmid])
+        skin_pts = np.vstack([out.geometry[n].vertices for n in skin_names])
+        report["z_recentred"] = round(zmid, 4)
+        print(f"z-centring guard: mesh straddled z={zmid:+.3f}, recentred to 0")
     print(f"body skin for detection: {skin_names[:6]}"
           + (" ..." if len(skin_names) > 6 else "") + f" ({len(skin_pts)} verts)")
     det = detect_arches(skin_pts, report, strict=False)
     fused_mode = det is None
     if fused_mode:
-        det = detect_fused_wheels(skin_pts, report)
+        # include stripped wheel-labelled geometry as evidence: its tyres
+        # touch the road at the two axles, which is exactly the signal the
+        # ground-contact clustering needs. Canonicalise it the same way.
+        det_pts = skin_pts
+        if stripped_pts:
+            spx = np.vstack(stripped_pts)
+            if report.get("canonicalised"):
+                spx = trimesh.transform_points(spx, ROT)
+            if report.get("z_recentred"):
+                spx = spx - [0.0, 0.0, report["z_recentred"]]
+            det_pts = np.vstack([skin_pts, spx])
+            report["fused_detection_evidence"] = (
+                f"skin + {len(spx)} verts from stripped wheel-labelled nodes")
+        det = detect_fused_wheels(det_pts, report)
 
     exp = spec.expect()
     if exp.get("axle_x"):
@@ -429,6 +464,40 @@ def main():
             "APPROXIMATE — measured from fused ground-contact patches"
     if tr is None:
         tr, tr_src = tf * 0.981, "APPROXIMATE — from front track (no spec)"
+    # FLANK GUARD: spec tracks describe the REAL car; a generated body can
+    # be narrower (perspective bake — measured on the Yaris hybrid: flank
+    # half-width 0.776 vs real 0.8475, spec track left the tyres 40mm
+    # proud of the body). The tyre's outer face must sit inside the body's
+    # own arch-zone flank by a small inset; narrow the track when the spec
+    # value would poke through, and record it as a deviation from spec.
+    gy0 = float(skin_pts[:, 1].min())
+    H0 = float(np.percentile(skin_pts[:, 1], 99.8)) - gy0
+    Wt = tyre["width_m"] if tyre else 0.18
+    for axle, dkey in (("front", "front_x"), ("rear", "rear_x")):
+        zone = skin_pts[(np.abs(skin_pts[:, 0] - det[dkey]) < 0.45)
+                        & (skin_pts[:, 1] < gy0 + 0.55 * H0)]
+        if len(zone) < 200:
+            continue
+        flank = float(np.percentile(np.abs(zone[:, 2]), 97))
+        tmax = 2 * (flank - 0.010 - Wt / 2)
+        if axle == "front" and tf > tmax:
+            report.setdefault("track_narrowed", {})["front"] = {
+                "spec": round(tf, 4), "used": round(tmax, 4),
+                "flank_half_width": round(flank, 4)}
+            tf, tf_src = tmax, (tf_src + " — NARROWED to the body's own "
+                                "arch-zone flank (generated body narrower "
+                                "than spec width)")
+            print(f"  flank guard: front track {report['track_narrowed']['front']['spec']}"
+                  f" -> {tmax:.3f} (flank {flank:.3f})")
+        if axle == "rear" and tr > tmax:
+            report.setdefault("track_narrowed", {})["rear"] = {
+                "spec": round(tr, 4), "used": round(tmax, 4),
+                "flank_half_width": round(flank, 4)}
+            tr, tr_src = tmax, (tr_src + " — NARROWED to the body's own "
+                                "arch-zone flank (generated body narrower "
+                                "than spec width)")
+            print(f"  flank guard: rear track {report['track_narrowed']['rear']['spec']}"
+                  f" -> {tmax:.3f} (flank {flank:.3f})")
     wb_spec, wb_src = spec.dim("wheelbase_m")
     wb_used = det["front_x"] - det["rear_x"]
     report["placement"] = {

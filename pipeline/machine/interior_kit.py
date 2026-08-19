@@ -17,7 +17,16 @@ import trimesh
 CAR, OUT = sys.argv[1], sys.argv[2]
 
 sc = trimesh.load(CAR, force="scene")
-cp = [g for n, g in sc.geometry.items() if "carpaint" in n][0]
+# body node by NAME first, then by MATERIAL name, then the largest mesh —
+# hybrid/labelled cars name the node 'body' with material 'carpaint'
+_cands = [g for n, g in sc.geometry.items() if "carpaint" in n or n == "body"]
+if not _cands:
+    _cands = [g for g in sc.geometry.values()
+              if getattr(getattr(g.visual, "material", None), "name", "")
+              == "carpaint"]
+if not _cands:
+    _cands = [max(sc.geometry.values(), key=lambda g: len(g.faces))]
+cp = _cands[0]
 v = cp.vertices
 GY = float(v[:, 1].min())
 H = float(np.percentile(v[:, 1], 99.8)) - GY
