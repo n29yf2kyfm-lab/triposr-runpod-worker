@@ -446,6 +446,37 @@ PY
 # renders them.
 # Images arrive as ~30 tar shards, not 167,157 loose files. A per-file
 # transfer of that many small objects stalled dead against HTTP 429 at 6%.
+# PANEL MODE. The panel dataset is 998 images and 692MB — three orders of
+# magnitude smaller than the damage corpus — so none of the shard machinery
+# below applies to it. It ships as ONE tar already in RF-DETR's train/valid/test
+# layout, which means no index, no materialise step, and no class mapping on the
+# pod at all. Everything else in this script is shared deliberately: the
+# driver-matched torch pin, the Pillow round-trip proof, the EXIT trap that
+# stops the pod, the heartbeat that publishes checkpoints, and the export path
+# that survives the wall-clock cap were each paid for by a failed run, and a
+# separate script for panels would have had to learn all of them again.
+if [ "${DATASET_MODE:-damage}" = "panels" ]; then
+  echo "=== fetch panel dataset ==="
+  python - <<'PYPANEL' || exit 30
+import os, tarfile
+from huggingface_hub import hf_hub_download
+p = hf_hub_download(repo_id=os.environ["CORPUS_REPO"], filename="panels.tar",
+                    repo_type="dataset", token=os.environ["HF_TOKEN"],
+                    local_dir="/workspace")
+with tarfile.open(p) as tf:
+    tf.extractall("/workspace/prepared")
+os.remove(p)
+n = sum(len(fs) for _, _, fs in os.walk("/workspace/prepared"))
+print(f"{n} files extracted")
+# The damage run's equivalent assert caught a truncated download before it
+# reached the GPU. Same guard, sized for this dataset.
+assert n > 900, f"only {n} files extracted — download looks truncated"
+PYPANEL
+  # The tar carries labels.txt at its root alongside train/valid/test, which is
+  # exactly the layout train_detector.py expects from materialise_index.
+  du -sh prepared || true
+  head -c 300 prepared/labels.txt; echo
+else
 echo "=== fetch corpus + index ==="
 python - <<'PY' || exit 30
 import os, time, tarfile, concurrent.futures as cf
@@ -512,6 +543,8 @@ python -u materialise_index.py --index corpus/idx --corpus corpus/merged640 \
   --out prepared --workers "$(nproc)" ${LIMIT:+--limit $LIMIT} || exit 31
 du -sh prepared || true
 head -c 200 prepared/labels.txt; echo
+
+fi
 
 echo "=== train ==="
 # HARD WALL-CLOCK CAP. train() runs to completion and this script has no other

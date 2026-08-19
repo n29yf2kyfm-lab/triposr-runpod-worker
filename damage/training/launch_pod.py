@@ -207,6 +207,12 @@ def main():
     ap.add_argument("--hf-token", default=os.environ.get("HF_TOKEN"))
     ap.add_argument("--hf-repo", default="Alamj/damage-detector")
     ap.add_argument("--corpus-repo", default="Alamj/damage-corpus")
+    ap.add_argument("--dataset-mode", default="damage",
+                    choices=["damage", "panels"],
+                    help="panels fetches one pre-built tar instead of the "
+                         "shard corpus and skips materialise entirely — the "
+                         "panel set is 998 images, so none of that machinery "
+                         "applies to it")
     ap.add_argument("--gpu", default=DEFAULT_GPU)
     ap.add_argument("--image", default=DEFAULT_IMAGE)
     ap.add_argument("--cloud", default="ALL", choices=["ALL", "SECURE",
@@ -280,6 +286,7 @@ def main():
         "CORPUS_REPO": a.corpus_repo,
         "RUNPOD_API_KEY": a.api_key,      # so the pod can stop ITSELF
         "RUN_TAG": a.tag,
+        "DATASET_MODE": a.dataset_mode,
         "EPOCHS": str(a.epochs),
         "BATCH": str(a.batch),
         "GRAD_ACCUM": str(a.grad_accum),
@@ -299,7 +306,7 @@ def main():
     print(f"run          tag={a.tag} epochs={a.epochs} batch={a.batch}"
           f"x{a.grad_accum} res={a.resolution} model={a.model}"
           + (f" limit={a.limit}" if a.limit else " (full corpus)"))
-    print(f"corpus       {a.corpus_repo}")
+    print(f"corpus       {a.corpus_repo}  (mode {a.dataset_mode})")
     print(f"output       {a.hf_repo}")
     print("env keys     " + ", ".join(sorted(env)))
 
