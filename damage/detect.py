@@ -346,9 +346,16 @@ def parse_detections(outputs, orig_size, model_size, labels=None,
     floor = DEFAULT_MIN_CONFIDENCE if min_confidence is None else min_confidence
     if not outputs:
         return []
-    boxes, scores, class_ids = _unpack_outputs(outputs)
-    sx = float(orig_size[0]) / float(model_size[0])
-    sy = float(orig_size[1]) / float(model_size[1])
+    # RF-DETR's boxes are already normalised, so they scale by the ORIGINAL
+    # size and not by the model/original ratio. Mixing the two conventions is
+    # how a box ends up at a plausible-looking but wrong place.
+    if _is_rfdetr(outputs):
+        boxes, scores, class_ids = _unpack_rfdetr(outputs, orig_size, floor)
+        sx = sy = 1.0
+    else:
+        boxes, scores, class_ids = _unpack_outputs(outputs)
+        sx = float(orig_size[0]) / float(model_size[0])
+        sy = float(orig_size[1]) / float(model_size[1])
     dets = []
     for box, score, cid in zip(boxes, scores, class_ids):
         if float(score) < floor:
@@ -362,6 +369,76 @@ def parse_detections(outputs, orig_size, model_size, labels=None,
                     float(box[2]) * sx, float(box[3]) * sy],
         })
     return dets
+
+
+def _is_rfdetr(outputs):
+    """Two outputs, (1,N,4) boxes and (1,N,C) class logits — the DETR family.
+
+    Shape-based, not name-based: exporters rename tensors between versions and
+    a name check would break silently on the next export.
+    """
+    if len(outputs) != 2:
+        return False
+    try:
+        import numpy as np
+        a, b = np.asarray(outputs[0]), np.asarray(outputs[1])
+    except Exception:
+        return False
+    return (a.ndim == 3 and b.ndim == 3 and a.shape[-1] == 4
+            and a.shape[1] == b.shape[1] and b.shape[-1] >= 2)
+
+
+def _unpack_rfdetr(outputs, orig_size, min_confidence):
+    """RF-DETR ONNX -> (boxes_xyxy_pixels, scores, class_ids).
+
+    THIS EXISTS BECAUSE THE GENERIC PARSER WAS WRONG IN THREE WAYS AT ONCE, and
+    every one of them was invisible. The module shipped without weights to test
+    against, so the contract was written from the common case and never
+    verified. Run against the real exported model it produced garbage while
+    looking perfectly healthy — the session loads, the tensors come back, the
+    parser returns boxes, and nothing raises.
+
+    What the model actually emits:
+
+        dets   (1, 300, 4)   normalised cx, cy, w, h in 0..1
+        labels (1, 300, C)   raw LOGITS, not probabilities
+
+    Against a parser expecting pixel x1,y1,x2,y2 and ready-made scores. So the
+    boxes were read as corners when they were centres, and the "scores" were
+    negative logits that no confidence floor would ever pass.
+
+    Three specifics that matter:
+
+    * SIGMOID, NOT SOFTMAX. The DETR family trains with sigmoid focal loss, so
+      each class is an independent probability. Softmax here would normalise
+      across classes and invent confidence for a query that matched nothing.
+
+    * CLASS 0 IS SKIPPED. Index 0 is the reserved `_placeholder_` that keeps
+      COCO ids 1-based, matching labels.txt. Taking an argmax over all C would
+      let the placeholder win a query and emit a detection with no class.
+
+    * NO NMS. DETR does set prediction — its queries are already one-per-object
+      by construction, and running NMS over them removes genuinely adjacent
+      damage. This is the one architecture where suppression is wrong.
+    """
+    import numpy as np
+    boxes = np.asarray(outputs[0])[0]          # (N, 4) cxcywh normalised
+    logits = np.asarray(outputs[1])[0]         # (N, C) raw
+    probs = 1.0 / (1.0 + np.exp(-logits))      # sigmoid: independent per class
+    probs = probs[:, 1:]                       # drop the reserved placeholder
+    cls = probs.argmax(axis=1) + 1             # back to 1-based class ids
+    score = probs.max(axis=1)
+
+    W, H = float(orig_size[0]), float(orig_size[1])
+    cx, cy, w, h = boxes[:, 0], boxes[:, 1], boxes[:, 2], boxes[:, 3]
+    x1 = (cx - w / 2.0) * W
+    y1 = (cy - h / 2.0) * H
+    x2 = (cx + w / 2.0) * W
+    y2 = (cy + h / 2.0) * H
+    keep = score >= (min_confidence if min_confidence is not None
+                     else DEFAULT_MIN_CONFIDENCE)
+    return (np.stack([x1, y1, x2, y2], axis=1)[keep],
+            score[keep], cls[keep])
 
 
 def _unpack_outputs(outputs):

@@ -1196,6 +1196,58 @@ check("20p and only the explicit one reaches filler_suspect",
       ["class"] == "not_measurable")
 
 
+# ---- RF-DETR ONNX output contract -----------------------------------------
+# These pin the real exported model's format, verified against
+# detector/v8-6class/rfdetr-base.onnx:
+#     dets   (1, 300, 4)  normalised cx, cy, w, h
+#     labels (1, 300, 7)  raw logits
+# The generic parser assumed pixel x1,y1,x2,y2 corners plus ready-made scores
+# and was wrong in three ways at once, silently: it read centres as corners and
+# treated negative logits as confidences, so nothing ever cleared the floor and
+# nothing ever raised. Every assertion here is a way that failure could return.
+import numpy as _np                                                   # noqa: E402
+
+_L = ["_placeholder_", "crack_glass", "dent", "lamp_wheel", "rust_paint",
+      "scratch_scuff", "structural"]
+_dets = _np.zeros((1, 3, 4), dtype="float32")
+_dets[0, 0] = [0.5, 0.5, 0.2, 0.4]      # centred, 20% x 40%
+_dets[0, 1] = [0.25, 0.25, 0.1, 0.1]
+_dets[0, 2] = [0.9, 0.9, 0.05, 0.05]
+_log = _np.full((1, 3, 7), -9.0, dtype="float32")
+_log[0, 0, 2] = 3.0                      # dent, sigmoid 0.953
+_log[0, 1, 5] = 1.0                      # scratch_scuff, sigmoid 0.731
+_out = DET.parse_detections([_dets, _log], (1000, 500), (560, 560), _L, 0.3)
+
+check("21a rfdetr output shape is recognised", DET._is_rfdetr([_dets, _log]))
+check("21b a (boxes,scores,labels) triple is NOT taken for rfdetr",
+      not DET._is_rfdetr([_dets, _log, _log]))
+check("21c cxcywh becomes pixel corners on the ORIGINAL frame",
+      _out and _out[0]["box"] == [400.0, 150.0, 600.0, 350.0],
+      str(_out[0]["box"]) if _out else "none")
+check("21d logits become probabilities through a sigmoid",
+      _out and abs(_out[0]["score"] - 0.9525741) < 1e-5)
+check("21e the class index survives dropping the placeholder",
+      _out and _out[0]["label"] == "dent")
+check("21f a second class maps correctly too",
+      len(_out) > 1 and _out[1]["label"] == "scratch_scuff")
+check("21g queries below the floor are dropped", len(_out) == 2,
+      f"{len(_out)} kept")
+# The placeholder must never win a query, or a detection arrives with no class.
+_ph = _np.full((1, 1, 7), -9.0, dtype="float32")
+_ph[0, 0, 0] = 5.0
+check("21h the reserved placeholder can never be predicted",
+      DET.parse_detections([_dets[:, :1], _ph], (100, 100), (560, 560),
+                           _L, 0.3) == [])
+# A normalised box must not be scaled by the model/original ratio as well.
+_one = _np.array([[[0.5, 0.5, 1.0, 1.0]]], dtype="float32")
+_onel = _np.full((1, 1, 7), -9.0, dtype="float32")
+_onel[0, 0, 1] = 3.0
+_full = DET.parse_detections([_one, _onel], (800, 600), (560, 560), _L, 0.3)
+check("21i a full-frame box maps to the full frame, not a scaled one",
+      _full and _full[0]["box"] == [0.0, 0.0, 800.0, 600.0],
+      str(_full[0]["box"]) if _full else "none")
+
+
 # ---- report ---------------------------------------------------------------
 print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")
 for f in FAILED:
