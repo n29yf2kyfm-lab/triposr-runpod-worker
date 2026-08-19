@@ -199,9 +199,22 @@ def estimate_scale(observations, min_observations=MIN_OBSERVATIONS):
     # Weights now apply, but capped: no single observation may carry more
     # than half the total, so precision-weighting can refine the answer
     # without any one reading being able to dictate it.
+    #
+    # The cap is each weight against the SUM OF THE OTHERS. Capping against
+    # half the RAW total looked equivalent and was not: clipping the big
+    # weight shrinks the total too, so a door leaf (specified to 0.5%,
+    # weight ~200) reading high within its outlier allowance still held two
+    # thirds of the FINAL total and the weighted median sat exactly on the
+    # door, against a socket and a ceiling that agreed with each other. At
+    # most one weight can exceed the sum of the rest, so at most one is
+    # clipped — to exactly half the final total, where it can tie but never
+    # decide the median alone.
     raw = [o.effective_weight for o in kept]
-    cap = max(raw) if len(kept) == 1 else sum(raw) / 2.0
-    final_pairs = [(o.scale, min(w, cap)) for o, w in zip(kept, raw)]
+    if len(raw) > 1:
+        capped = [min(w, sum(raw) - w) for w in raw]
+    else:
+        capped = raw
+    final_pairs = [(o.scale, w) for o, w in zip(kept, capped)]
     scale = _weighted_median(final_pairs)
 
     scales = [s for s, _ in final_pairs]

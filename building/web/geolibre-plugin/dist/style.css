@@ -1,0 +1,14 @@
+/* Scoped with a gl-builder- prefix: plugin CSS is injected globally into
+   the host document, so unprefixed rules would restyle GeoLibre itself. */
+.gl-builder-root { font: 13px/1.45 system-ui, -apple-system, sans-serif; padding: 4px 2px; }
+.gl-builder-hint { font-weight: 600; margin: 10px 0 4px; opacity: .75; }
+.gl-builder-file { width: 100%; }
+.gl-builder-check { display: block; margin: 3px 0; }
+.gl-builder-bearing { width: 68px; }
+.gl-builder-slider { width: 100%; margin: 6px 0 2px; accent-color: #c8410d; }
+.gl-builder-seasons { display: flex; gap: 6px; }
+.gl-builder-season { flex: 1; padding: 5px 2px; cursor: pointer; font: 600 11px/1 system-ui, sans-serif; }
+.gl-builder-status { margin-top: 10px; opacity: .8; }
+.gl-builder-numbers { margin-top: 4px; font-variant-numeric: tabular-nums; font-weight: 600; }
+.gl-builder-warn { margin-top: 12px; padding: 8px; font-size: 11px; line-height: 1.4;
+  border-left: 3px solid #d1002a; background: rgba(209, 0, 42, .06); }

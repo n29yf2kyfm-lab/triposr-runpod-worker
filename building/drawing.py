@@ -87,45 +87,200 @@ class DrawingError(ValueError):
 
 # --- reading the scale off the sheet ---------------------------------------
 
-# "1:50", "1 : 100", "Scale 1/50", "SCALE 1:20 @ A1"
-_SCALE_NOTE = re.compile(r"\b1\s*[:/]\s*(\d{1,4})\b")
-# "NTS", "not to scale", "do not scale"
+# "1:50", "1 : 100", "Scale 1/50", "SCALE 1:20 @ A1", "1:1,250"
+#
+# The thousands separator is not optional. Location and block plans are
+# drawn at 1:1250 and 1:2500 — the Ordnance Survey scales — and every
+# drawing office writes them "1:1,250". Without the comma in the pattern
+# that parsed as 1:1, which is a 1250x error on every length, and it was a
+# real location plan that showed it.
+_SCALE_NOTE = re.compile(r"\b1\s*[:/]\s*(\d{1,3}(?:[,  ]\d{3})+|\d{1,4})\b")
+
+# The same ratio, but explicitly labelled as the drawing scale. Preferred
+# over any bare 1:N, because a sheet carries several ratios that are not the
+# scale — see _GRADIENT below.
+_SCALE_LABELLED = re.compile(
+    r"\bscales?\b\s*[:=]?\s*(?:@?\s*[A-Z0-9]*\s*)??1\s*[:/]\s*(\d{1,4})\b",
+    re.I)
+
+# Ratios that are NOT the drawing scale. "FALL 1:40" is on nearly every UK
+# ground-floor and drainage plan and "GRADIENT 1:12" on any sheet with a
+# ramp; taking the first 1:N on the page read a 1:100 drawing as 1:40, which
+# is every length out by 20% and every area by 44%, delivered with a
+# confident explanatory note.
+_GRADIENT = re.compile(
+    r"\b(?:falls?|gradients?|slopes?|pitch(?:es)?|grade|mix|ratio|"
+    r"crossfall|camber)\b[^.;\n]{0,24}?1\s*[:/]\s*\d{1,4}\b", re.I)
+
+# Scales an architect actually draws at — BS 1192 / RIBA convention. A 1:40
+# or 1:12 is not among them, which is a second, independent reason to
+# distrust a drainage fall that has wandered into the scale slot.
+STANDARD_SCALES = (1, 2, 5, 10, 20, 25, 50, 100, 200, 500, 1000, 1250, 2500)
+
+# A GRAPHIC SCALE BAR — the little ruler printed on a drawing so it can be
+# measured after photocopying. It reads "1:50 0 0.5m 1 1.5 2 2.5 3 3.5m",
+# and a sheet carries a whole bank of them: 1:50, 1:100, 1:200, 1:500,
+# 1:1,250, 1:2,500. NOT ONE of them is the drawing's scale — they are a
+# legend.
+#
+# Found on a real architect's elevation. The ranker took the first bare
+# ratio on the page, which was the top of the scale-bar bank, and only got
+# the right answer because that sheet's bar happened to start at its true
+# scale. Shift the bar to start at 1:20 and the same drawing measures 5x
+# out, silently.
+#
+# The tell is what FOLLOWS the ratio: a zero, then a run of distances.
+_SCALE_BAR = re.compile(
+    r"1\s*[:/]\s*\d{1,3}(?:[,  ]\d{3})*\s+0\s+[\d.]+\s*(?:m|mm)\b", re.I)
+
+# "1:100 @ A1" — a ratio stated together with the sheet it was drawn for.
+# The strongest signal there is, because it is the drawing office saying
+# exactly that, and a scale bar never carries one.
+_RATIO_WITH_SHEET = re.compile(
+    r"1\s*[:/]\s*(\d{1,3}(?:[,  ]\d{3})*|\d{1,4})\s*"
+    r"(?:@|\bat\b|\bon\b|\()\s*A[0-4]\b", re.I)
+
+# "NTS" or "not to scale" — a statement that the drawing HAS no scale.
 _NOT_TO_SCALE = re.compile(
-    r"\b(n\.?t\.?s\.?|not\s+to\s+scale|do\s+not\s+scale)\b", re.I)
-# "@ A1", "at A3", "(A1)"
-_SHEET_NOTE = re.compile(r"[@(\s]\s*(A[0-4])\b", re.I)
+    r"\b(n\.?t\.?s\.?|not\s+to\s+scale)\b", re.I)
+
+# "DO NOT SCALE FROM THIS DRAWING" — universal UK boilerplate, printed on
+# essentially every professionally issued sheet INCLUDING ones that state
+# their scale. It instructs the reader to use the figured dimensions in
+# preference to measuring; it does not mean the drawing is unscaled.
+# Treating it as "not to scale" refused every real drawing this mode exists
+# to read.
+_DO_NOT_SCALE_BOILERPLATE = re.compile(
+    r"\bdo\s+not\s+scale\b", re.I)
+
+# The sheet a scale was drawn FOR must be MARKED as such: "@ A1", "(A1)",
+# "at A1", "A1 original". A bare " A2" matches a room label, a grid
+# reference or "REV A3", and rescaled the whole sheet by 41% on a length and
+# 100% on an area.
+_SHEET_NOTE = re.compile(
+    r"(?:@|\bat\b|\bon\b|\(|\bsheet\b\s*:?|\bsize\b\s*:?|\bpaper\b\s*:?)"
+    r"\s*(A[0-4])\b"
+    r"|\b(A[0-4])\s*(?:sheet|size|original|paper)\b", re.I)
+
+
+def _ratio_candidates(text):
+    """Every 1:N on the sheet, with the reason to trust or distrust it."""
+    blob = str(text)
+    excluded = set()
+    for match in _GRADIENT.finditer(blob):
+        for inner in _SCALE_NOTE.finditer(match.group(0)):
+            excluded.add(match.start() + inner.start())
+
+    scale_bar = set()
+    for match in _SCALE_BAR.finditer(blob):
+        for inner in _SCALE_NOTE.finditer(match.group(0)):
+            scale_bar.add(match.start() + inner.start())
+
+    labelled = {m.start(1) for m in _SCALE_LABELLED.finditer(blob)}
+    with_sheet = {m.start(1) for m in _RATIO_WITH_SHEET.finditer(blob)}
+
+    out = []
+    for match in _SCALE_NOTE.finditer(blob):
+        try:
+            ratio = int(re.sub(r"[,  ]", "", match.group(1)))
+        except ValueError:
+            continue
+        if not 1 <= ratio <= 5000:
+            continue
+        out.append({
+            "ratio": ratio,
+            "at": match.start(),
+            "gradient": match.start() in excluded,
+            "scale_bar": match.start() in scale_bar,
+            "labelled": match.start(1) in labelled,
+            "with_sheet": match.start(1) in with_sheet,
+            "standard": ratio in STANDARD_SCALES,
+        })
+    return out
 
 
 def parse_scale_note(text):
     """Find a drawing scale in a block of text. None if absent.
 
     Returns the ratio denominator: "1:50" -> 50.
+
+    A sheet carries several ratios and only one of them is the scale, so
+    they are RANKED rather than taken in reading order. Strongest first:
+
+      1. stated with its sheet — "1:100 @ A1". The drawing office saying
+         exactly what this is, and a scale bar never carries one.
+      2. labelled "SCALE".
+      3. not part of a graphic scale bar.
+      4. a standard architectural scale rather than an arbitrary number.
+      5. whichever comes first.
+
+    Ratios after "fall", "gradient" or "pitch" are discarded outright, and
+    so are the entries of a scale-bar ruler unless there is nothing else on
+    the sheet at all — in which case the top of the bar is a fair guess and
+    the caller still has to confirm the scale before anything is measured.
     """
     if not text:
         return None
-    if _NOT_TO_SCALE.search(str(text)):
+    candidates = [c for c in _ratio_candidates(text) if not c["gradient"]]
+    if not candidates:
         return None
-    match = _SCALE_NOTE.search(str(text))
-    if not match:
-        return None
-    try:
-        ratio = int(match.group(1))
-    except ValueError:
-        return None
-    return ratio if 1 <= ratio <= 5000 else None
+    real = [c for c in candidates if not c["scale_bar"]]
+    candidates = real or candidates
+    candidates.sort(key=lambda c: (not c["with_sheet"], not c["labelled"],
+                                   not c["standard"], c["at"]))
+    return candidates[0]["ratio"]
 
 
 def parse_sheet_note(text):
-    """Find the sheet size a scale was drawn FOR — the "@ A1" in "1:50 @ A1"."""
+    """Find the sheet size a scale was drawn FOR — the "@ A1" in "1:50 @ A1".
+
+    The marker is required. Without one, "BEDROOM A2" on a genuinely A3
+    sheet rescaled every length by 41% and every area by 100%, and reported
+    it in a confident note explaining the correction it had just invented.
+    """
     if not text:
         return None
     match = _SHEET_NOTE.search(str(text))
-    return match.group(1).upper() if match else None
+    if not match:
+        return None
+    return (match.group(1) or match.group(2)).upper()
 
 
 def is_not_to_scale(text):
-    """True if the sheet says not to scale. That is a refusal, not a warning."""
-    return bool(text and _NOT_TO_SCALE.search(str(text)))
+    """True if the sheet states it has no scale.
+
+    "DO NOT SCALE FROM THIS DRAWING" does not count on its own, and the
+    distinction is the difference between this mode working and refusing
+    every drawing put in front of it. That phrase is boilerplate on
+    essentially every professionally issued UK sheet, including ones that
+    print their scale two lines below it: it tells the reader to prefer the
+    figured dimensions, not that the drawing is unscaled.
+
+    "NTS" with no scale anywhere on the sheet IS a refusal — there is
+    genuinely nothing to measure against.
+    """
+    if not text:
+        return False
+    blob = str(text)
+    if not _NOT_TO_SCALE.search(blob):
+        return False
+    # An explicit scale on the same sheet outranks it: the NTS most likely
+    # belongs to a detail view, and which view is being measured is exactly
+    # what confirmation exists to settle.
+    return parse_scale_note(blob) is None
+
+
+def has_do_not_scale_note(text):
+    """Whether the sheet carries the standard "do not scale" instruction."""
+    return bool(text and _DO_NOT_SCALE_BOILERPLATE.search(str(text)))
+
+
+def mixed_scale_warning(text):
+    """Whether a sheet states a scale AND says some part is not to scale."""
+    if not text:
+        return False
+    return bool(_NOT_TO_SCALE.search(str(text))) and \
+        parse_scale_note(text) is not None
 
 
 def detect_paper_size(width_pt, height_pt):
@@ -304,9 +459,24 @@ def resolve_scale(note_text=None, page_size_pt=None, calibration=None,
 
     if note_text and is_not_to_scale(note_text):
         raise DrawingError(
-            "this sheet is marked not to scale, so nothing on it can be "
+            "this sheet states it has no scale, so nothing on it can be "
             "measured. Use a dimensioned sheet, or calibrate against a "
             "known dimension and pass it explicitly.")
+
+    if note_text and mixed_scale_warning(note_text):
+        notes.append(
+            "This sheet states a scale AND marks something on it not to "
+            "scale, which normally means a detail or a section is drawn "
+            "differently from the plan. Confirm you are measuring the view "
+            "the scale belongs to.")
+
+    if note_text and has_do_not_scale_note(note_text):
+        notes.append(
+            "The sheet carries the standard \"do not scale from this "
+            "drawing\" instruction. That is on essentially every issued UK "
+            "sheet and does not mean the drawing is unscaled — it means the "
+            "figured dimensions are the authority. Where a dimension is "
+            "printed, use it in preference to anything measured here.")
 
     stated = parse_scale_note(note_text)
     stated_sheet = parse_sheet_note(note_text)
@@ -417,6 +587,62 @@ def polygon_perimeter_points(ring):
     return polyline_length_points(list(ring) + [ring[0]])
 
 
+def _segments_cross(a, b, c, d):
+    """Whether segment a-b properly crosses segment c-d."""
+    def side(p, q, r):
+        value = ((q[0] - p[0]) * (r[1] - p[1])
+                 - (q[1] - p[1]) * (r[0] - p[0]))
+        if abs(value) < 1e-12:
+            return 0
+        return 1 if value > 0 else -1
+
+    d1, d2 = side(c, d, a), side(c, d, b)
+    d3, d4 = side(a, b, c), side(a, b, d)
+    # Proper crossing only. Rings share endpoints between consecutive edges
+    # by construction, and touching at a shared vertex is not an error.
+    return d1 * d2 < 0 and d3 * d4 < 0
+
+
+def is_self_intersecting(ring):
+    """Whether a traced ring crosses itself.
+
+    The shoelace formula returns a confident number for a ring that crosses
+    itself, and the number is meaningless: the two lobes have opposite
+    winding and partly cancel. A bowtie traced as (0,0) (6,0) (0,4) (2,4)
+    comes back as 8.0 with nothing to say the trace was wrong.
+
+    This is a realistic mis-trace, not a contrived one — it is what happens
+    when someone clicks two corners of a room in the wrong order, and the
+    result looks plausible enough to price.
+    """
+    points = list(ring)
+    count = len(points)
+    if count < 4:
+        return False
+    edges = [(points[i], points[(i + 1) % count]) for i in range(count)]
+    for i in range(count):
+        for j in range(i + 2, count):
+            if i == 0 and j == count - 1:
+                continue          # first and last edges share a vertex
+            if _segments_cross(*edges[i], *edges[j]):
+                return True
+    return False
+
+
+def _point_in_ring(point, ring):
+    """Ray casting. True if the point is inside the ring."""
+    x, y = point
+    inside = False
+    count = len(ring)
+    for i in range(count):
+        x1, y1 = ring[i]
+        x2, y2 = ring[(i + 1) % count]
+        if (y1 > y) != (y2 > y):
+            if y2 != y1 and x < x1 + (y - y1) * (x2 - x1) / (y2 - y1):
+                inside = not inside
+    return inside
+
+
 def measure_area(ring, scale, name=None, deductions=None):
     """One traced region as a real-world area.
 
@@ -432,9 +658,30 @@ def measure_area(ring, scale, name=None, deductions=None):
             f"{name or 'this region'} does not enclose an area — a traced "
             f"boundary needs at least three points and must not be a line.")
 
+    # A ring that crosses itself has two lobes of opposite winding, which
+    # partly cancel in the shoelace sum. The number that comes out is
+    # confident and meaningless, and clicking two corners in the wrong order
+    # is exactly how a real trace goes wrong.
+    if is_self_intersecting(ring):
+        raise DrawingError(
+            f"{name or 'this region'} crosses itself, so it does not enclose "
+            f"a single area and its shoelace area is meaningless. Re-trace "
+            f"the boundary in order round the room.")
+
     gross = scale.area_m2(gross_points)
     taken = 0.0
     for hole in (deductions or []):
+        # A deduction traced outside the region it is deducted from is a
+        # mis-click, and subtracting it silently removed 2 m2 for a hole
+        # 100m away. Judged on the hole's centroid, which is inside it for
+        # any convex opening and for every rectangular one.
+        centre = (sum(p[0] for p in hole) / len(hole),
+                  sum(p[1] for p in hole) / len(hole))
+        if not _point_in_ring(centre, ring):
+            raise DrawingError(
+                f"{name or 'this region'}: a deduction was traced outside "
+                f"the boundary it is being taken out of. Check the openings "
+                f"were traced on the right region.")
         taken += scale.area_m2(polygon_area_points(hole))
 
     net = gross - taken
@@ -566,33 +813,52 @@ def run(spec, prog, output_dir):
       MEASURE   traced regions and runs come back with the scale confirmed,
                 and quantities are produced.
 
-    The split is the whole design. It makes it structurally impossible to get
-    a quantity out of this module without a person having seen the scale
-    first.
+    The split is the whole design, but the claim it used to make for itself
+    — that this is "structurally impossible to get a quantity out of without
+    a person having seen the scale" — was not true. confirm_scale sat in the
+    same request as the tracing, so one call with an auto-detected scale and
+    the flag set produced measurements with no round trip and nobody having
+    looked at anything.
+
+    What is true now: confirm_scale may carry the RATIO the user read off
+    the sheet, and a mismatch against the resolved scale refuses. A caller
+    who confirmed 1:50 cannot be handed quantities measured at 1:100 because
+    the page size changed between one request and the next. A bare `true` is
+    still accepted — a caller who genuinely looked is entitled to say so —
+    but only the value form cannot go stale, and the difference is recorded
+    in the output as `confirmed_as`.
     """
     import json
 
     prog.stage("fetching")
     pdf_url = spec.get("drawing_url")
     traced = spec.get("traced")
+    local_pdf = spec.get("drawing_path")
 
-    if not pdf_url and not traced:
+    if not pdf_url and not local_pdf and not traced:
         raise DrawingError(
-            "drawing mode needs drawing_url (a PDF to inspect), or traced "
-            "geometry to measure.")
+            "drawing mode needs drawing_url or drawing_path (a PDF to "
+            "inspect), or traced geometry to measure.")
 
     page = None
-    if pdf_url:
+    local = spec.get("drawing_path")
+    if pdf_url or local:
         import validation
-        local = spec.get("drawing_path")
+        # A local file is a complete source on its own. This used to sit
+        # behind `if pdf_url:`, so drawing_path could only ever act as a
+        # cache for a URL that had to be supplied anyway — the one case it
+        # exists for, a file already on the worker, could not run at all.
         if local and os.path.exists(local):
             path = local
+        elif not pdf_url:
+            raise DrawingError(
+                f"drawing_path {local!r} does not exist on this worker. Pass "
+                f"drawing_url, or write the file to the volume first.")
         else:
-            validation.check_fetchable_url(pdf_url, "drawing_url")
-            import requests
             os.makedirs(output_dir, exist_ok=True)
             path = os.path.join(output_dir, "drawing.pdf")
-            response = requests.get(pdf_url, timeout=120)
+            response = validation.fetch_checked(pdf_url, "drawing_url",
+                                                timeout=120)
             response.raise_for_status()
             with open(path, "wb") as f:
                 f.write(response.content)
@@ -618,8 +884,34 @@ def run(spec, prog, output_dir):
         note_text=note_text, page_size_pt=page_size,
         calibration=spec.get("calibration"),
         override_ratio=spec.get("scale_ratio"))
-    scale.confirmed = bool(spec.get("confirm_scale"))
+    # BOUND TO THE VALUE, not just asserted. confirm_scale may be `true` —
+    # a bare assertion — or the ratio the user actually read off the sheet.
+    # When it carries a number, it must agree with the scale that was
+    # resolved, so a caller who confirmed 1:50 cannot be handed quantities
+    # measured at 1:100 because the sheet was reprinted at A3 between one
+    # request and the next. A bare `true` is still accepted, because a
+    # caller who genuinely looked is entitled to say so, but the value form
+    # is the one that cannot go stale.
+    confirmation = spec.get("confirm_scale")
+    if isinstance(confirmation, (int, float)) and not isinstance(
+            confirmation, bool):
+        stated = float(confirmation)
+        if stated <= 0:
+            raise DrawingError("confirm_scale must be a positive ratio")
+        if abs(stated - scale.ratio) > max(0.5, scale.ratio * 0.005):
+            raise DrawingError(
+                f"you confirmed 1:{stated:g}, but this sheet resolves to "
+                f"1:{scale.ratio:g} ({scale.source}). Something changed "
+                f"between looking and measuring — most often the page size, "
+                f"which halves or doubles the scale. Nothing is measured "
+                f"until the two agree.")
+        scale.confirmed = True
+    else:
+        scale.confirmed = bool(confirmation)
     result["scale"] = scale.as_dict()
+    result["scale"]["confirmed_as"] = (
+        float(confirmation) if isinstance(confirmation, (int, float))
+        and not isinstance(confirmation, bool) else None)
 
     if not scale.confirmed:
         result["status"] = "scale_unconfirmed"

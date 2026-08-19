@@ -5,3 +5,7 @@ Pillow
 requests
 trimesh
 huggingface_hub
+# Site mapping: puts the measured model on the actual plot (geo.py).
+# Lightweight — a MapLibre widget, no GDAL stack; the GeoJSON export
+# works without it.
+geolibre

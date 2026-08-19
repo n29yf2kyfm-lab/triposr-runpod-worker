@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Property Digital Twin</title>
+<style>
+:root{
+  --bg:#0e1116; --panel:rgba(18,21,27,.92); --line:#262b35;
+  --ink:#eef1f6; --dim:#98a0ae; --accent:#ffd600;
+  --verified:#ffd600; --derived:#4fc3f7; --estimated:#b085f5; --user:#39ff88;
+  --bad:#ff6b6b;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);
+  font:14px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  overflow:hidden;-webkit-text-size-adjust:100%}
+#map{position:fixed;inset:0;width:100%;height:100%;display:block;cursor:grab}
+#map.dragging{cursor:grabbing}
+
+.panel{position:fixed;background:var(--panel);border:1px solid var(--line);
+  border-radius:14px;backdrop-filter:blur(14px);
+  box-shadow:0 8px 34px rgba(0,0,0,.5)}
+
+/* search */
+#searchWrap{top:14px;left:14px;width:min(390px,calc(100vw - 28px));padding:0;
+  overflow:hidden}
+#searchRow{display:flex;align-items:center;gap:8px;padding:11px 13px}
+#q{flex:1;background:none;border:0;color:var(--ink);font:15px inherit;outline:none}
+#q::placeholder{color:var(--dim)}
+#go{background:var(--accent);color:#111;border:0;border-radius:8px;
+  padding:7px 13px;font:600 13px inherit;cursor:pointer}
+#go:disabled{opacity:.45;cursor:default}
+#results{max-height:min(46vh,380px);overflow:auto;border-top:1px solid var(--line)}
+#results:empty{display:none}
+.res{padding:9px 13px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.05)}
+.res:hover{background:rgba(255,255,255,.06)}
+.res b{font-weight:600}
+.res .sub{color:var(--dim);font-size:12px}
+
+/* property panel */
+#prop{top:14px;right:14px;width:min(370px,calc(100vw - 28px));
+  max-height:calc(100vh - 120px);overflow:auto;padding:14px;display:none}
+#prop h2{margin:0 0 2px;font-size:16px}
+#prop .addr{color:var(--dim);font-size:12px;margin-bottom:12px}
+.sect{border-top:1px solid var(--line);padding:10px 0 4px}
+.sect h3{margin:0 0 7px;font-size:11px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--dim)}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:2px 0}
+.kv span:first-child{color:var(--dim)}
+.kv span:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.na{color:var(--bad);font-size:12px}
+.na small{display:block;color:var(--dim);font-weight:400;margin-top:2px}
+.badge{display:inline-block;font-size:10px;letter-spacing:.06em;padding:2px 7px;
+  border-radius:99px;text-transform:uppercase;font-weight:700}
+.b-verified{background:rgba(255,214,0,.16);color:var(--verified)}
+.b-derived{background:rgba(79,195,247,.16);color:var(--derived)}
+.b-estimated{background:rgba(176,133,245,.16);color:var(--estimated)}
+.b-user{background:rgba(57,255,136,.16);color:var(--user)}
+details{margin-top:6px}
+summary{cursor:pointer;color:var(--dim);font-size:12px}
+.prov{font-size:11px;color:var(--dim);word-break:break-word;
+  background:rgba(0,0,0,.3);padding:7px 9px;border-radius:7px;margin-top:6px}
+.prov code{color:#9fb4d0}
+
+/* legend + scale */
+#imageryWrap{left:14px;bottom:132px;padding:9px 11px;font-size:12px;
+  display:flex;gap:8px;align-items:center}
+#imageryWrap label{color:var(--dim)}
+#imagery{background:#1b1e25;color:var(--ink);border:1px solid var(--line);
+  border-radius:7px;padding:5px 7px;font:12px inherit;max-width:230px}
+#legend{left:14px;bottom:14px;padding:10px 12px;font-size:12px}
+#legend .row{display:flex;align-items:center;gap:7px;margin:3px 0}
+#legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+#scale{right:14px;bottom:14px;padding:8px 11px;font-size:12px}
+#bar{height:5px;background:var(--ink);border:1px solid #000;border-top:0;
+  margin-top:4px;transition:width .12s}
+#status{left:50%;transform:translateX(-50%);bottom:14px;padding:8px 14px;
+  font-size:12.5px;display:none;max-width:min(560px,92vw)}
+#attrib{position:fixed;right:14px;bottom:70px;font-size:10.5px;color:var(--dim);
+  text-align:right;pointer-events:none;text-shadow:0 1px 3px #000}
+@media (max-width:640px){
+  #prop{top:auto;bottom:0;left:0;right:0;width:100%;max-height:56vh;
+    border-radius:16px 16px 0 0}
+  #legend{display:none}
+}
+</style>
+</head>
+<body>
+<canvas id="map"></canvas>
+
+<div class="panel" id="searchWrap">
+  <div id="searchRow">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none"
+         stroke="#98a0ae" stroke-width="2"><circle cx="11" cy="11" r="7"/>
+      <path d="M20 20l-3.5-3.5"/></svg>
+    <input id="q" placeholder="Postcode, address or place — anywhere"
+           autocomplete="off" spellcheck="false">
+    <button id="go">Search</button>
+  </div>
+  <div id="results"></div>
+</div>
+
+<div class="panel" id="prop"></div>
+
+<div class="panel" id="imageryWrap">
+  <label for="imagery">Imagery</label>
+  <select id="imagery"></select>
+</div>
+
+<div class="panel" id="legend">
+  <div class="row"><i style="background:var(--verified)"></i>Verified — surveyed/published</div>
+  <div class="row"><i style="background:var(--derived)"></i>Derived — computed from measurement</div>
+  <div class="row"><i style="background:var(--estimated)"></i>Estimated — inferred by rule</div>
+  <div class="row"><i style="background:var(--user)"></i>User — drawn by you</div>
+</div>
+
+<!-- Stages 2-5: the editable twin workspace -->
+<div id="workspace">
+  <div id="wsbar">
+    <b>Digital twin</b>
+    <div id="tabs">
+      <button data-tab="3d" class="on">3D</button>
+      <button data-tab="plan">Floor plan</button>
+    </div>
+    <div id="views">
+      <button data-view="iso" class="on">Iso</button>
+      <button data-view="top">Top</button>
+      <button data-view="front">Front</button>
+      <button data-view="rear">Rear</button>
+      <button data-view="left">Left</button>
+      <button data-view="right">Right</button>
+    </div>
+    <button id="projBtn">Perspective</button>
+    <label class="chk"><input type="checkbox" id="beforeAfter"> Before</label>
+    <button id="undo">Undo</button>
+    <button id="redo">Redo</button>
+    <button id="closeTwin">Close</button>
+  </div>
+
+  <div id="wsbody">
+    <div id="canvasWrap">
+      <div id="pane3d"><canvas id="view3d"></canvas>
+        <div id="groundCredit"></div>
+      </div>
+      <div id="paneplan" style="display:none">
+        <div id="levels"></div>
+        <canvas id="viewplan"></canvas>
+        <div id="selInfo" class="dim small">tap a wall, then drag it</div>
+      </div>
+      <div id="sunWrap">
+        <input type="range" id="sunTime" min="4" max="21" step="1" value="12">
+        <span id="sunLabel" class="dim small">21 Jun 12:00</span>
+      </div>
+    </div>
+
+    <div id="side">
+      <div class="sect"><h3>Measurements</h3><div id="summary"></div></div>
+
+      <div class="sect"><h3>Add an extension</h3>
+        <div class="row">
+          <select id="extEdge">
+            <option value="rear">Rear</option>
+            <option value="front">Front</option>
+            <option value="left">Left</option>
+            <option value="right">Right</option>
+          </select>
+          <input id="extDepth" type="number" value="4" min="0.5" step="0.5"
+                 style="width:62px"> m
+          <select id="extStoreys">
+            <option value="1">1 storey</option>
+            <option value="2">2 storeys</option>
+          </select>
+          <button id="extendBtn" class="primary">Add</button>
+        </div>
+        <div class="dim small">Or drag a wall on the floor plan.</div>
+      </div>
+
+      <div class="sect"><h3>Ask for a change</h3>
+        <div class="row">
+          <input id="ask" placeholder="add a 4 m rear extension"
+                 style="flex:1">
+          <button id="askBtn">Go</button>
+        </div>
+        <div class="dim small">Becomes a validated command, not a picture.</div>
+      </div>
+
+      <div class="sect"><h3>Rooms</h3>
+        <div class="row">
+          <button id="layoutBtn" class="primary">Lay out rooms</button>
+          <span class="dim small">then tap a room, or drag a partition</span>
+        </div>
+        <div id="roomPanel" style="display:none">
+          <div class="row">
+            <input id="roomName" style="flex:1" placeholder="room name">
+            <select id="roomKind">
+              <option value="room">Habitable</option>
+              <option value="circulation">Hall / landing</option>
+              <option value="kitchen">Kitchen</option>
+              <option value="wet">Bath / WC</option>
+              <option value="store">Store</option>
+            </select>
+          </div>
+          <div class="row">
+            <button id="roomApply" class="primary">Apply</button>
+            <button id="roomMerge">Knock through</button>
+            <span id="roomArea" class="dim small"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sect"><h3>Ground under the model</h3>
+        <div class="row">
+          <select id="ground" style="flex:1">
+            <option value="auto">Best available</option>
+            <option value="lidar-hillshade">LIDAR relief — England, free</option>
+            <option value="esri-keyed">Esri aerial — needs your key</option>
+            <option value="mapbox-satellite">Mapbox satellite — needs your key</option>
+            <option value="maptiler-satellite">MapTiler satellite — needs your key</option>
+            <option value="off">None</option>
+          </select>
+        </div>
+        <div id="groundNote" class="dim small">Real imagery draped under the
+          3D, placed by the same projection the model uses.</div>
+      </div>
+
+      <div class="sect"><h3>Drawings</h3>
+        <div class="row">
+          <select id="paper">
+            <option value="A3">A3</option>
+            <option value="A2">A2</option>
+            <option value="A1">A1</option>
+            <option value="A4">A4</option>
+          </select>
+          <select id="sheetScale">
+            <option value="">fit to a standard scale</option>
+            <option value="50">1:50</option>
+            <option value="100">1:100</option>
+            <option value="200">1:200</option>
+          </select>
+          <button id="sheetsBtn" class="primary">Drawing set</button>
+        </div>
+        <div id="sheetList" class="dim small">
+          Plans, sections, elevations and schedules, true to scale, with a
+          title block and the source attribution the licence needs.
+        </div>
+      </div>
+
+      <div class="sect"><h3>Pricing</h3>
+        <div class="row">
+          <select id="region">
+            <option value="west_midlands">West Midlands</option>
+            <option value="london">London</option>
+            <option value="south_east">South East</option>
+            <option value="east">East</option>
+            <option value="south_west">South West</option>
+            <option value="east_midlands">East Midlands</option>
+            <option value="north_west">North West</option>
+            <option value="yorkshire">Yorkshire</option>
+            <option value="north_east">North East</option>
+            <option value="wales">Wales</option>
+            <option value="scotland">Scotland</option>
+            <option value="northern_ireland">Northern Ireland</option>
+          </select>
+          <select id="vat">
+            <option value="standard">VAT 20%</option>
+            <option value="reduced">VAT 5%</option>
+            <option value="zero">VAT 0%</option>
+            <option value="none">No VAT</option>
+          </select>
+        </div>
+        <div class="row">
+          <input id="calRate" type="number" placeholder="your £/m²"
+                 style="width:110px" step="50">
+          <span class="dim small">calibrate to a job you have done</span>
+        </div>
+      </div>
+
+      <div class="sect"><h3>Regulations &amp; quantities</h3>
+        <div id="assess"></div></div>
+
+      <div class="sect"><h3>Version history</h3><div id="hist"></div></div>
+    </div>
+  </div>
+  <div id="tstatus"></div>
+</div>
+
+<div class="panel" id="scale"><span id="scaleTxt">—</span><div id="bar"></div></div>
+<div class="panel" id="status"></div>
+<div id="attrib"></div>
+
+<style>
+#workspace{position:fixed;inset:0;background:#0b0d12;z-index:40;
+  display:none;flex-direction:column}
+#wsbar{display:flex;align-items:center;gap:8px;padding:9px 12px;
+  border-bottom:1px solid var(--line);background:#12151b;flex-wrap:wrap}
+#wsbar b{margin-right:6px}
+#wsbar button,#tabs button,#views button{background:#20242d;color:var(--ink);
+  border:1px solid var(--line);border-radius:7px;padding:5px 10px;
+  font:12px inherit;cursor:pointer}
+#wsbar button:disabled{opacity:.4;cursor:default}
+#tabs,#views{display:flex;gap:4px}
+#tabs button.on,#views button.on{background:var(--accent);color:#111;
+  border-color:var(--accent);font-weight:600}
+.chk{display:flex;gap:5px;align-items:center;font-size:12px;color:var(--dim)}
+#wsbody{flex:1;display:flex;min-height:0}
+#canvasWrap{flex:1;position:relative;min-width:0}
+#pane3d,#paneplan{position:absolute;inset:0}
+#view3d,#viewplan{width:100%;height:100%;display:block}
+/* The imagery credit sits ON the frame, because every licence that
+   lets us show aerial requires attribution wherever it appears — a
+   line in a settings panel nobody opens does not discharge that. */
+#groundCredit{position:absolute;left:10px;bottom:8px;font-size:11px;
+  color:#c8cedb;background:rgba(10,12,16,.62);padding:3px 7px;
+  border-radius:4px;pointer-events:none;max-width:70%;display:none}
+#levels{position:absolute;left:12px;top:12px;z-index:2;display:flex;gap:4px}
+#levels button{background:rgba(18,21,27,.9);color:var(--ink);
+  border:1px solid var(--line);border-radius:7px;padding:5px 10px;
+  font:12px inherit;cursor:pointer}
+#levels button.on{background:var(--accent);color:#111;font-weight:600}
+#selInfo{position:absolute;left:12px;bottom:12px;background:rgba(18,21,27,.9);
+  padding:5px 9px;border-radius:7px}
+#sunWrap{position:absolute;right:12px;bottom:12px;background:rgba(18,21,27,.9);
+  padding:7px 11px;border-radius:9px;display:flex;gap:9px;align-items:center}
+#sunTime{width:150px}
+#side{width:360px;border-left:1px solid var(--line);overflow:auto;
+  padding:12px 14px;background:#12151b}
+#side .row{display:flex;gap:6px;align-items:center;margin-bottom:6px;
+  flex-wrap:wrap}
+#side select,#side input{background:#1b1e25;color:var(--ink);
+  border:1px solid var(--line);border-radius:7px;padding:5px 7px;
+  font:12px inherit}
+#side button{background:#20242d;color:var(--ink);border:1px solid var(--line);
+  border-radius:7px;padding:6px 11px;font:12px inherit;cursor:pointer}
+#side button.primary{background:var(--accent);color:#111;font-weight:600;
+  border-color:var(--accent)}
+.price{font-size:27px;font-weight:700;letter-spacing:-.5px;margin:2px 0 2px}
+.verdict{padding:7px 10px;border-radius:8px;font-weight:600;font-size:12.5px;
+  margin-bottom:7px}
+.v-ok{background:rgba(57,255,136,.15);color:var(--user)}
+.v-no{background:rgba(255,107,107,.15);color:var(--bad)}
+.v-massing{background:rgba(176,133,245,.15);color:var(--estimated)}
+.finding{font-size:11.5px;color:#d8d2c4;margin:4px 0;padding-left:8px;
+  border-left:2px solid var(--bad)}
+.trade{margin-top:8px;font-size:10.5px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--dim)}
+.warn{font-size:11.5px;color:#ffd08a;margin-top:6px;line-height:1.4}
+.small{font-size:11.5px}
+.dim{color:var(--dim)}
+.hrow{font-size:12px;padding:4px 6px;border-radius:6px;cursor:pointer}
+.hrow:hover{background:rgba(255,255,255,.06)}
+#tstatus{position:fixed;left:50%;transform:translateX(-50%);bottom:16px;
+  background:rgba(14,14,16,.95);border:1px solid var(--line);
+  padding:9px 15px;border-radius:9px;font-size:12.5px;display:none;z-index:60;
+  max-width:min(620px,92vw)}
+@media (max-width:820px){
+  #wsbody{flex-direction:column}
+  #side{width:100%;border-left:0;border-top:1px solid var(--line);
+    max-height:46vh}
+  #views{display:none}
+}
+</style>
+<script type="module" src="app.js"></script>
+</body>
+</html>
