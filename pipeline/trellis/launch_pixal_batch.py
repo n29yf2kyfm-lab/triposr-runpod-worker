@@ -26,7 +26,7 @@ import urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SB = "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object"
-PRE = "car-meshes/pixal_batch"
+PRE = os.environ.get("PIXAL_PRE", "car-meshes/pixal_batch")
 IMAGE = ("alamk123/ai-mechanic@sha256:"
          "5c5b87edd06cb105d914b9d4c9341411736520ff13045a8d281ce6209709a2bf")
 
@@ -99,6 +99,10 @@ def attempt(url, sb_key, n, total):
                            f"curl -sSL '{url}?cb='$(date +%s) | bash; "
                            "sleep infinity"],
         "env": {"SB_KEY": sb_key,
+                # the pod must resolve the SAME prefix the launcher used, or
+                # it fetches a manifest that is not there and reports the
+                # failure to a log nobody is watching (the 2026-08-19 bug)
+                "PIXAL_PRE": PRE,
                 "HF_TOKEN": os.environ.get("HF_TOKEN", ""),
                 "HUGGING_FACE_HUB_TOKEN": os.environ.get("HF_TOKEN", ""),
                 "HF_HOME": "/workspace/hf"},

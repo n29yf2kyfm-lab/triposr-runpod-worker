@@ -36,7 +36,7 @@ SB="https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object"
 # booted correctly, failed FETCH_MANIFEST, and reported to a log nobody was
 # watching — which read as four "dead hosts" in a row and cost four healthy
 # pods before the old log was checked.
-PRE="car-meshes/pixal_batch"
+PRE="${PIXAL_PRE:-car-meshes/pixal_batch}"
 
 report() { ( set +x
   curl -s -X POST -H "apikey: ${SB_KEY}" -H "Authorization: Bearer ${SB_KEY}" \
