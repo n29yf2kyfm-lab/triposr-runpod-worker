@@ -2628,3 +2628,60 @@ normals_fix → studio worker renders + red control. Durable facts:
     is not a failed rotation.
 - Evidence: car-meshes/staging/yaris/ (yaris_hybrid.glb + corrected yaris_hybrid2,
   YARIS_PC_SHEET.jpg, transfer_report.json); parts at partcrafter_run/results_yaris_pc.tgz.
+
+## premium.py — the one-command premium pass, built and proven overnight (2026-08-19)
+
+Owner order ("make a tool or blender which make it from this to premium... make me my
+tool which don't fail"), executed under the production brief. `pipeline/machine/premium.py`
+runs labelled-GLB -> premium-pass car in ~6 min CPU: baseline lock (sha256) -> wheel_stage
+-> glass_presplit (NEW) -> glass_stage -> aperture_clean -> interior_kit -> materials_pass
+-> blender_finish -> normals_fix -> stage7_validate -> qc_turntables -> gltf-transform
+mobile -> qc_manifest. Honest refusals, resumable (--from), per-stage sha256+logs; the
+final status line comes from the gate table and on the Yaris reads NOT PRODUCTION-READY —
+the tool reports truth, it does not manufacture a pass. Proven end-to-end TWICE on the
+Yaris (fresh run + --from resume after fixes). Evidence: car-meshes/staging/yaris/
+(yaris_premium.glb 15.8MB, yaris_mobile_premium.glb 0.84MB draco, premium_run1_evidence.tgz,
+YARIS_PREMIUM_SHEET.jpg). Result: real component wheels (tyre/rim/hub/disc/caliper x4 at
+measured axles, red calipers), 6 named desnaked glass panes, parametric interior, clearcoat
+PBR; red control holds (body red, glazing dark glass, tyres dark). Gates 8 PASS / 4 FAIL
+(component inventory 12/34, tracks deviate by flank guard, 248-vert tyre intersection) /
+5 OPEN / 1 NOT TESTED.
+
+Traps paid for tonight, each now a fence in code:
+- **wheel_stage on a fused generated car was blind after its own strip**: the blob wheels
+  are the ONLY axle evidence (body underbody = one continuous ground smear). Stripped
+  wheel-labelled geometry is now kept as detection evidence (never output).
+- **Corner-origin mesh (z in [0,W]) placed the wheels at the car's left edge** and the
+  arch detector saw one side — every downstream stage assumes z straddles 0. z-centring
+  guard added; the machine's canon frame is length-on-X, y-up, Z-CENTRED, grounded.
+- **Spec tracks poke through a perspective-baked body** (flank 0.776 vs real 0.8475):
+  flank guard narrows track so the tyre face sits inside the body's own arch-zone flank,
+  recorded as a spec deviation. The validator then honestly FAILs track-vs-spec — correct
+  both ways.
+- **glass_stage refuses a label-blob glass node by design** ("it separates, it does not
+  segment"): glass_presplit.py is the new bridge — normal+position pane classes, ambiguous
+  faces to nearest pane so they cannot bridge two panes, robust STRAIGHT-beltline fit per
+  side (iteratively drops sag bins below the line — a self-calibrated floor that follows
+  the sag is no floor), roof-curl eviction. 467 components -> 6 named panes.
+- **aperture_clean OOM (RC=137) was a 13GB broadcast** (456k faces x 1778 loop pts):
+  rim_distance now chunked. NOTE this container OOM-kills single processes well below
+  free RAM — suspect a cgroup cap; chunk any faces-x-loop broadcast.
+- **Reassigning an existing TextureVisuals onto a mesh with a different vertex count
+  silently drops the material binding on export** (stale uv length) — evicted roof faces
+  rendered default-white and took no paint. Always wrap the MATERIAL in a fresh
+  TextureVisuals.
+- **stage7_validate measured tracks as 0.0 on a correct file**: blender_finish BAKES
+  instance transforms, so node-transform reads are dead after it. Wheel centres/axes now
+  measured from transformed vertices (disc axis = min-variance PCA).
+- **The white roof in the studio was Fresnel, not a material bug, the SECOND time**: after
+  the binding fix, matID showed roof=body, pixel measure [145,127,127] neutral at grazing
+  angle under the overhead softbox, and NO pane within 60mm of the roof. The Clio lesson
+  again: measure pixels + check the file before "fixing" a highlight.
+- interior_kit x-positions are calibrated on a 4.284m centred car — premium.py scales by
+  measured length and shifts to x-mid; body node found by name/material/largest.
+
+REMAINING to the premium bar on generated cars (honest OPENs): front/rear component kits
+(bonnet/bumpers/lamp solids/grille — the fascia melt is the dominant defect), doors
+separate, surfacing panel quality, windscreen pane forward reach on the perspective-baked
+mesh, ragged aperture silhouettes at arch lips. These are brief phases 5-8 — construction,
+not cleanup.
