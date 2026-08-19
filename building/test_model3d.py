@@ -1545,9 +1545,100 @@ check("35d nothing floats on the ground floor where the door now is",
               for w in _nfw for o in w["openings"]),
       str([w["openings"] for w in _nfw]))
 
+# --- 36. monopitch: one plane, twice the rise, one gutter -----------------
+# The LIDAR over a real Birmingham semi pair showed ONE ridge sitting over
+# the party wall, so each house has a single slope. Modelled as a gable
+# that becomes two slopes, half the rise and twice the guttering, and the
+# tile order is measured off the wrong shape.
+_mono = M.roof_over(0.0, 0.0, 5.12, 9.88, pitch_deg=29.3, kind="monopitch",
+                    overhang=0.3, ridge_along="y", high_side="min")
+_gab = M.roof_over(0.0, 0.0, 5.12, 9.88, pitch_deg=29.3, kind="gabled",
+                   overhang=0.3, ridge_along="y")
+check("36a a monopitch rises about twice a gable of the same span",
+      abs(_mono["rise_m"] / _gab["rise_m"] - 2.0) < 0.06,
+      f"{_mono['rise_m']} vs {_gab['rise_m']}")
+# The rafter bears on the plates at x=0 and x=5.12 and projects 0.3 past
+# the low one, so the covered width is 5.42 and the CLIMBED span is 5.12.
+check("36b and the rise is the whole structural span times tan(pitch)",
+      abs(_mono["rise_m"] - 5.12 * math.tan(math.radians(29.3))) < 5e-3,
+      str(_mono["rise_m"]))
+check("36c water falls one way, so there is one gutter not two",
+      abs(_mono["eaves_m"] - _gab["eaves_m"] / 2.0) < 1e-6,
+      f"{_mono['eaves_m']} vs {_gab['eaves_m']}")
+check("36d no overhang past the high edge — the neighbour's roof is there",
+      abs(_mono["footprint_m"]["x"][0]) < 1e-9
+      and abs(_mono["footprint_m"]["x"][1] - 5.42) < 1e-9,
+      str(_mono["footprint_m"]))
+check("36e a monopitch has no hips and no valleys",
+      _mono["hip_m"] == 0.0 and _mono["valley_m"] == 0.0, str(_mono))
+check("36f the verge rakes, so it is longer than the span on plan",
+      _mono["verge_m"] > 2 * 5.42, str(_mono["verge_m"]))
+_span_y = _mono["footprint_m"]["y"][1] - _mono["footprint_m"]["y"][0]
+check("36g the top edge is reported as its own line, not sold as ridge",
+      abs(_mono["high_edge_m"] - _span_y) < 1e-2, str(_mono["high_edge_m"]))
+# The top edge sits ON the high wall, not in the middle of the plan.
+check("36h high_side='min' puts the top edge at the low-x wall",
+      all(abs(p[0]) < 1e-9 for p in _mono["ridge"]), str(_mono["ridge"]))
+_mx = M.roof_over(0.0, 0.0, 5.12, 9.88, pitch_deg=29.3, kind="monopitch",
+                  overhang=0.3, ridge_along="y", high_side="max")
+check("36i and high_side='max' puts it at the other one",
+      all(abs(p[0] - _mx["footprint_m"]["x"][1]) < 1e-9
+          for p in _mx["ridge"]), str(_mx["ridge"]))
+# Sloped area is still 1/cos(pitch) — the covering does not care which
+# shape the planes make.
+check("36j the covering is still plan area over cos(pitch)",
+      abs(_mono["sloped_area_m2"]
+          - _mono["plan_area_m2"] / math.cos(math.radians(29.3))) < 1e-2,
+      str(_mono))
+# A monopitch split into ranges is a sawtooth factory roof.
+try:
+    M.roof_over(0.0, 0.0, 14.0, 9.0, pitch_deg=30.0, kind="monopitch",
+                overhang=0.3, ridge_along="y")
+    check("36k a monopitch too wide to span is refused", False, "no error")
+except M.ModelError as _e:
+    check("36k a monopitch too wide to span is refused, saying why",
+          "sawtooth" in str(_e), str(_e))
+try:
+    M.roof_over(0.0, 0.0, 5.0, 9.0, pitch_deg=30.0, kind="monopitch",
+                overhang=0.3)
+    check("36l a monopitch without ridge_along is refused", False, "no error")
+except M.ModelError as _e:
+    check("36l a monopitch without ridge_along is refused",
+          "ridge_along" in str(_e), str(_e))
+# It has to survive the mesh, not just the arithmetic: the far slope
+# collapses onto the top edge, and a degenerate face there would show as a
+# hole in the roof.
+_mm = M.build([room("Front", 0.0, 0.0, 5.12, 5.0),
+               room("Back", 0.0, 5.0, 5.12, 4.88)], storeys=2,
+              storey_height=2.65,
+              roof={"pitch_deg": 29.3, "kind": "monopitch", "overhang": 0.3,
+                    "ridge_along": "y", "high_side": "min"},
+              party_edges=[["x", 0.0]])
+check("36m a monopitch model builds and reports its ridge height",
+      _mm["totals"]["ridge_height_m"] > _mm["totals"]["eaves_height_m"] + 2.5,
+      str(_mm["totals"]))
+_v, _f, _g = [], [], []
+M._roof_faces(_mm["roof"], _v, _f, _g)
+check("36n the roof mesh has no degenerate faces",
+      all(len({tuple(_v[i - 1]) for i in face}) == len(face) for face in _f),
+      str(_f))
+check("36o and it closes the high end with a vertical face",
+      any(len(face) == 4 and len({round(_v[i - 1][0], 6) for i in face}) == 1
+          for face in _f), str(_f))
+# The validator has to let it through, or the field is documented and dead.
+_vmono = validation.parse_job({"mode": "model", "plan": {
+    "rooms": [{"name": "R", "x": 0, "y": 0, "width": 5.0, "depth": 8.0}],
+    "storeys": 2,
+    "roof": {"pitch_deg": 29.3, "kind": "monopitch", "ridge_along": "y",
+             "high_side": "max"}}})
+check("36p the validator passes monopitch and its high side through",
+      _vmono["plan"]["roof"]["kind"] == "monopitch"
+      and _vmono["plan"]["roof"]["high_side"] == "max",
+      str(_vmono["plan"]["roof"]))
+
+
 print()
 for f in FAILED:
     print(f"FAIL  {f}")
 print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")
 sys.exit(1 if FAILED else 0)
-

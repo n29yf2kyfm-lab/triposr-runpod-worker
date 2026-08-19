@@ -138,8 +138,40 @@ def _external(model):
     return net, openings_a, n_open, perim
 
 
+def _high_edge_is_party(model):
+    """Does a party wall stand under a monopitch's top edge?
+
+    If it does, the upstand there is a party wall carried up — blockwork,
+    no facing leaf, no ties to the outside — and billing it as external
+    brickwork puts a second house's worth of brick on the order.
+    """
+    rf = model.get("roof") or {}
+    ridge = rf.get("ridge") or []
+    if rf.get("kind") != "monopitch" or len(ridge) != 2:
+        return False
+    axis = 0 if not rf.get("along_x") else 1     # the coordinate held fixed
+    line = ridge[0][axis]
+    for w in model["walls"]:
+        if not w.get("party"):
+            continue
+        if (abs(w["start"][axis] - line) < 0.35
+                and abs(w["end"][axis] - line) < 0.35):
+            return True
+    return False
+
+
 def masonry(model):
     net, _, n_open, perim = _external(model)
+    # THE GABLE IS PART OF THE WALL. _external measures storey by storey
+    # and stops at the wall plate; the panel between the plate and the
+    # roof planes is masonry too, and it was never in the bill.
+    rf = model.get("roof") or {}
+    above = float(rf.get("gable_area_m2") or 0.0)
+    upstand = float(rf.get("upstand_area_m2") or 0.0)
+    party_top = _high_edge_is_party(model)
+    if party_top:
+        upstand = 0.0
+    net += above + upstand
     bricks = net * BRICKS_PER_M2
     blocks = net * BLOCKS_PER_M2
     mortar = (bricks / 1000.0) * MORTAR_M3_PER_1000_BRICKS \
@@ -150,7 +182,12 @@ def masonry(model):
     return [
         _line("Facing bricks", bricks, "no",
               f"{BRICKS_PER_M2:.0f}/m2 stretcher bond x {net:.1f} m2 net "
-              "external wall", "bricks"),
+              f"external wall"
+              + (f", including {above + upstand:.1f} m2 above the wall "
+                 f"plate under the {rf.get('kind')} roof"
+                 + (" (the upstand at the top edge is a party wall, so it "
+                    "carries no facing leaf)" if party_top else "")
+                 if above + upstand or party_top else ""), "bricks"),
         _line("100mm blocks (inner leaf)", blocks, "no",
               f"{BLOCKS_PER_M2}/m2 x {net:.1f} m2", "blocks"),
         _line("Mortar", mortar, "m3",
@@ -175,6 +212,10 @@ def roof(model, covering="concrete_interlocking"):
     area = float(q.get("sloped_area_m2") or rf.get("sloped_area_m2") or 0.0)
     ridge = float(rf.get("ridge_m") or 0.0)
     eaves = float(rf.get("eaves_m") or 0.0)
+    # roof_over has measured the verge — raking, at 1/cos(pitch) — since
+    # the day it learnt gables, and nothing ever billed it. A gable with
+    # no dry-verge on the order is a roof that cannot be finished.
+    verge = float(rf.get("verge_m") or 0.0)
     spec = ROOF_COVERINGS[covering]
     wkey = "slate" if covering == "natural_slate" else "tiles"
     return [
@@ -189,6 +230,9 @@ def roof(model, covering="concrete_interlocking"):
         _line("Ridge tiles", ridge / RIDGE_UNIT_M if ridge else 0.0, "no",
               f"{ridge:.1f} m ridge / {RIDGE_UNIT_M} m unit", "tiles"),
         _line("Gutter + fittings", eaves, "m", f"eaves length {eaves:.1f} m"),
+        _line("Dry verge / barge", verge, "m",
+              f"raking verge {verge:.1f} m at {rf.get('pitch_deg')} deg "
+              f"(measured on the slope, not on plan)"),
     ]
 
 

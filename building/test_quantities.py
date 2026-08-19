@@ -180,5 +180,113 @@ class TestBrickSanityAnchor(unittest.TestCase):
         self.assertLess(bricks["quantity"], 10000)
 
 
+class TestTheWallAboveTheWallPlate(unittest.TestCase):
+    """A gable is masonry, and the take-off stopped at the wall head.
+
+    _external measures length x storey height x storeys. The panel
+    between the wall plate and the roof planes is outside that loop, so
+    every gable end on every job was missing from the brick order.
+    """
+
+    def _bricks(self, model):
+        return next(L for L in Q.bill(model)["groups"]["masonry"]
+                    if L["item"] == "Facing bricks")["quantity"]
+
+    def test_a_gable_end_is_in_the_brick_order(self):
+        rooms = [M.Room("Room", 0.0, 0.0, 6.0, 8.0, kind="room")]
+        gabled = M.build(rooms, storeys=2, storey_height=2.7,
+                         roof={"pitch_deg": 35.0, "kind": "gabled",
+                               "overhang": 0.3, "ridge_along": "y",
+                               "max_span_m": 12.0})
+        hipped = M.build(rooms, storeys=2, storey_height=2.7,
+                         roof={"pitch_deg": 35.0, "kind": "hipped",
+                               "overhang": 0.3, "max_span_m": 12.0})
+        # A hip comes down to the plate all round: no panel above it.
+        self.assertEqual(hipped["roof"]["gable_area_m2"], 0.0)
+        self.assertGreater(gabled["roof"]["gable_area_m2"], 0.0)
+        # Two triangles, base = structural span, height = rise. Checked
+        # by hand rather than against the implementation.
+        span = 6.0                       # plate to plate across the ridge
+        rise = gabled["roof"]["rise_m"]
+        self.assertAlmostEqual(gabled["roof"]["gable_area_m2"],
+                               span * rise, places=1)
+        # ...and that area is in the bill, at the brick rate.
+        self.assertAlmostEqual(
+            self._bricks(gabled) - self._bricks(hipped),
+            span * rise * Q.BRICKS_PER_M2 * (1 + Q.WASTE["bricks"]),
+            delta=span * rise * Q.BRICKS_PER_M2 * 0.02)
+
+    def test_a_monopitch_rakes_on_two_sides(self):
+        rooms = [M.Room("Room", 0.0, 0.0, 5.0, 8.0, kind="room")]
+        m = M.build(rooms, storeys=2, storey_height=2.7,
+                    roof={"pitch_deg": 30.0, "kind": "monopitch",
+                          "overhang": 0.3, "ridge_along": "y",
+                          "high_side": "min", "max_span_m": 12.0})
+        rf = m["roof"]
+        self.assertAlmostEqual(rf["gable_area_m2"], 5.0 * rf["rise_m"],
+                               places=1)
+        # The rectangle standing at the top edge is reported apart from
+        # the raking panels, because what it is depends on what it abuts.
+        self.assertAlmostEqual(rf["upstand_area_m2"],
+                               rf["high_edge_m"] * rf["rise_m"], delta=0.1)
+
+    def test_a_party_wall_upstand_carries_no_facing_leaf(self):
+        """Half of a semi: the top edge sits on the party wall, so the
+        upstand there is blockwork, not a second house's brickwork."""
+        rooms = [M.Room("Room", 0.0, 0.0, 5.12, 9.88, kind="room")]
+        roof = {"pitch_deg": 29.3, "kind": "monopitch", "overhang": 0.3,
+                "ridge_along": "y", "high_side": "min", "max_span_m": 12.0}
+        semi = M.build(rooms, storeys=2, storey_height=2.65, roof=roof,
+                       party_edges=[["x", 0.0]])
+        detached = M.build(rooms, storeys=2, storey_height=2.65, roof=roof)
+        self.assertTrue(Q._high_edge_is_party(semi))
+        self.assertFalse(Q._high_edge_is_party(detached))
+        # Differencing the two brick counts would not isolate this: a
+        # party wall takes no windows, so the detached flank also loses
+        # opening area the semi never had. Check each model against its
+        # OWN measured wall area instead.
+        for m, with_upstand in ((semi, False), (detached, True)):
+            rf = m["roof"]
+            expect = Q._external(m)[0] + rf["gable_area_m2"]
+            if with_upstand:
+                expect += rf["upstand_area_m2"]
+            self.assertAlmostEqual(
+                self._bricks(m),
+                expect * Q.BRICKS_PER_M2 * (1 + Q.WASTE["bricks"]),
+                delta=1.0)
+        # ...and the upstand is a real quantity, not a rounding artefact.
+        self.assertGreater(semi["roof"]["upstand_area_m2"], 20.0)
+
+
+class TestVergeIsOnTheOrder(unittest.TestCase):
+    """roof_over has measured verge since it learnt gables. Nothing ever
+    billed it, so a gabled roof arrived with no dry-verge on the order."""
+
+    def test_a_gabled_roof_carries_verge_and_a_hipped_one_does_not(self):
+        rooms = [M.Room("Room", 0.0, 0.0, 6.0, 8.0, kind="room")]
+        gabled = M.build(rooms, storeys=2, storey_height=2.7,
+                         roof={"pitch_deg": 35.0, "kind": "gabled",
+                               "overhang": 0.3, "ridge_along": "y",
+                               "max_span_m": 12.0})
+        hipped = M.build(rooms, storeys=2, storey_height=2.7,
+                         roof={"pitch_deg": 35.0, "kind": "hipped",
+                               "overhang": 0.3, "max_span_m": 12.0})
+
+        def verge(m):
+            return next(L for L in Q.bill(m)["groups"]["roof"]
+                        if L["item"] == "Dry verge / barge")["quantity"]
+
+        self.assertGreater(verge(gabled), 0.0)
+        self.assertEqual(verge(hipped), 0.0)
+        # It RAKES: longer than the same edge measured flat on plan.
+        import math
+        flat = 2 * (gabled["roof"]["footprint_m"]["x"][1]
+                    - gabled["roof"]["footprint_m"]["x"][0])
+        self.assertGreater(gabled["roof"]["verge_m"], flat)
+        self.assertAlmostEqual(gabled["roof"]["verge_m"],
+                               flat / math.cos(math.radians(35.0)),
+                               places=1)
+
+
 if __name__ == "__main__":
     unittest.main()

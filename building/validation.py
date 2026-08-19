@@ -438,7 +438,8 @@ def _plan(value):
         out["roof"] = {
             "pitch_deg": _pitch,
             "kind": _one_of(roof.get("kind"), "plan.roof.kind",
-                            ("hipped", "gabled"), default="hipped"),
+                            ("hipped", "gabled", "monopitch"),
+                            default="hipped"),
             "overhang_m": _float(roof.get("overhang_m"),
                                  "plan.roof.overhang_m", None, 0.0, 2.0),
             # Both exist because a real section sheet needed them, and both
@@ -452,6 +453,12 @@ def _plan(value):
                                    default=None),
             "max_span_m": _float(roof.get("max_span_m"),
                                  "plan.roof.max_span_m", None, 2.0, 30.0),
+            # Only a monopitch has a high side. Passing it on a gable is
+            # harmless (roof_over ignores it), so it is validated for shape
+            # rather than refused for context the validator cannot see.
+            "high_side": _one_of(roof.get("high_side"),
+                                 "plan.roof.high_side", ("min", "max"),
+                                 default=None),
         }
     return out
 

@@ -513,7 +513,7 @@ MAX_ROOF_SPAN_M = 9.0
 
 def roof_over(x0, y0, x1, y1, pitch_deg=DEFAULT_PITCH_DEG, kind="hipped",
               overhang=DEFAULT_EAVES_OVERHANG_M, base_z=0.0,
-              max_span=MAX_ROOF_SPAN_M, ridge_along=None):
+              max_span=MAX_ROOF_SPAN_M, ridge_along=None, high_side="min"):
     """A pitched roof over a rectangular footprint.
 
     THE NUMBER THAT MATTERS IS THE SLOPED AREA, not the plan area, and the
@@ -525,6 +525,18 @@ def roof_over(x0, y0, x1, y1, pitch_deg=DEFAULT_PITCH_DEG, kind="hipped",
     Hipped and gabled are both here because they carry different quantities
     — a hip needs hip tiles and cut tiles down both ends, a gable needs
     verge and no hips at all — and getting that wrong is a real bill.
+
+    MONOPITCH is the third form, and it is not a variation on the other
+    two: it is ONE plane climbing the whole span, so the rise is twice a
+    gable's over the same width, the top edge lands on a wall instead of
+    in the middle of the plan, and there is guttering down one side only.
+    Two things in ordinary UK work are monopitch — a lean-to rear
+    extension, and half of a pair whose single ridge sits over the party
+    wall. Modelling either as a gable invents a second slope, halves the
+    ridge height, and doubles the guttering. `high_side` ("min" or "max")
+    says which end of the span the top edge sits at; no overhang is taken
+    there, because a monopitch's high edge either abuts a wall or meets
+    the neighbour's slope, and in neither case does it project.
 
     A footprint too deep for one span becomes several parallel RANGES with
     valley gutters between them. The sloped area is unchanged by that —
@@ -538,11 +550,34 @@ def roof_over(x0, y0, x1, y1, pitch_deg=DEFAULT_PITCH_DEG, kind="hipped",
             f"–{MAX_PITCH_DEG:.0f} degree range UK tiled roofs are built in. "
             f"Below that a tile will not shed water; above it every tile "
             f"needs mechanically fixing. Check the elevation.")
-    if kind not in ("hipped", "gabled"):
-        raise ModelError("roof kind must be 'hipped' or 'gabled'")
+    if kind not in ("hipped", "gabled", "monopitch"):
+        raise ModelError(
+            "roof kind must be 'hipped', 'gabled' or 'monopitch'")
+    if high_side not in ("min", "max"):
+        raise ModelError("high_side must be 'min' or 'max'")
 
-    x0, x1 = x0 - overhang, x1 + overhang
-    y0, y1 = y0 - overhang, y1 + overhang
+    mono = kind == "monopitch"
+    if mono and ridge_along is None:
+        raise ModelError(
+            "a monopitch needs ridge_along: which way the top edge runs "
+            "decides which way the water falls, and there is no sensible "
+            "guess to make from a rectangle")
+
+    # The high edge of a monopitch does not overhang — see the docstring.
+    ohx0 = ohx1 = ohy0 = ohy1 = overhang
+    if mono:
+        if ridge_along == "y":                  # span across x
+            if high_side == "min":
+                ohx0 = 0.0
+            else:
+                ohx1 = 0.0
+        else:                                   # span across y
+            if high_side == "min":
+                ohy0 = 0.0
+            else:
+                ohy1 = 0.0
+    x0, x1 = x0 - ohx0, x1 + ohx1
+    y0, y1 = y0 - ohy0, y1 + ohy1
     width, depth = x1 - x0, y1 - y0
     if width <= 0 or depth <= 0:
         raise ModelError("a roof needs a positive footprint")
@@ -564,6 +599,17 @@ def roof_over(x0, y0, x1, y1, pitch_deg=DEFAULT_PITCH_DEG, kind="hipped",
     total_span = depth if along_x else width
     run = width if along_x else depth          # length of a ridge, gable end
     n_ranges = max(1, int(math.ceil(total_span / max_span - 1e-9)))
+    # A GABLE SPLIT INTO RANGES IS A DOUBLE-PILE ROOF; A MONOPITCH SPLIT
+    # INTO RANGES IS A SAWTOOTH FACTORY ROOF. The second is not something
+    # to produce by accident from a domestic footprint, so it is refused
+    # rather than silently built.
+    if mono and n_ranges > 1:
+        raise ModelError(
+            f"a monopitch cannot span {total_span:.1f}m in one plane "
+            f"(limit {max_span:.1f}m) and splitting it into ranges would "
+            f"make a sawtooth roof, not a house. Reduce the span, raise "
+            f"max_span_m if the rafter really is that long, or use a "
+            f"gabled roof.")
     span = total_span / n_ranges
     # A RAFTER BEARS ON THE WALL PLATE; THE OVERHANG PROJECTS OUT AND DOWN
     # PAST IT. Taking the rise off the overhung span raised the ridge by
@@ -571,8 +617,12 @@ def roof_over(x0, y0, x1, y1, pitch_deg=DEFAULT_PITCH_DEG, kind="hipped",
     # planning condition is written against. The rise is measured across the
     # structural span; the eaves TIP then sits below the plate by the same
     # geometry, which keeps every plane at the stated pitch.
-    struct_span = max(1e-6, span - 2.0 * overhang / n_ranges)
-    rise = (struct_span / 2.0) * math.tan(theta)
+    # A monopitch overhangs on ONE side of its span, not two, so only one
+    # overhang comes off the structural span — and the whole of that span
+    # is climbed, which is why the rise is not halved.
+    struct_span = max(1e-6, span - (1.0 if mono else 2.0) * overhang / n_ranges)
+    rise = struct_span * math.tan(theta) if mono \
+        else (struct_span / 2.0) * math.tan(theta)
     ridge_z = base_z + rise
     eaves_tip_z = base_z - overhang * math.tan(theta)
 
@@ -582,12 +632,17 @@ def roof_over(x0, y0, x1, y1, pitch_deg=DEFAULT_PITCH_DEG, kind="hipped",
     for i in range(n_ranges):
         lo = lo0 + i * span
         hi = lo + span
-        mid = (lo + hi) / 2.0
+        # The top edge: mid-band for a ridged roof, at one edge of the band
+        # for a monopitch. Putting it on the edge is all the mesh builder
+        # needs — the far slope collapses to the vertical face that closes
+        # the high end, which is exactly what stands there.
+        mid = lo if (mono and high_side == "min") else \
+            hi if mono else (lo + hi) / 2.0
         if kind == "hipped":
             inset = span / 2.0
             ends = (x0 + inset, x1 - inset) if along_x else (y0 + inset,
                                                              y1 - inset)
-        else:                               # gabled — ridge runs wall to wall
+        else:                    # gabled/monopitch — top runs wall to wall
             ends = (x0, x1) if along_x else (y0, y1)
         if along_x:
             band = {"y": [round(lo, 3), round(hi, 3)],
@@ -639,20 +694,56 @@ def roof_over(x0, y0, x1, y1, pitch_deg=DEFAULT_PITCH_DEG, kind="hipped",
         # A GABLE HAS EAVES ON TWO SIDES ONLY. The other two carry verge —
         # no gutter, no fascia, no soffit. Reporting the whole perimeter as
         # eaves counted the verge twice, once on each line of the quote, and
-        # over-measured guttering by 82%.
-        "eaves_m": round(2 * run if kind == "gabled"
+        # over-measured guttering by 82%. A MONOPITCH has eaves on ONE side:
+        # water falls one way, so there is one gutter, and quoting two is
+        # the same error in the other direction.
+        "eaves_m": round(run if mono
+                         else 2 * run if kind == "gabled"
                          else 2 * (width + depth), 2),
         # ...and a verge is a RAKING edge. Measuring it flat on plan
         # under-ordered dry-verge and barge by the same 1/cos(pitch) this
         # module lectures about three paragraphs above.
         "verge_m": (round(2 * total_span / math.cos(theta), 2)
-                    if kind == "gabled" else 0.0),
+                    if kind in ("gabled", "monopitch") else 0.0),
+        # The top edge of a monopitch exists, but WHAT IT NEEDS DEPENDS ON
+        # WHAT IT MEETS: ridge tiles where it meets the other half of a
+        # pair, a cover flashing and tray where it abuts a wall. The length
+        # is stated; the reader decides which line it buys.
+        "high_edge_m": round(run, 2) if mono else 0.0,
+        # THE WALL DOES NOT STOP AT THE WALL PLATE. Under a gable or a
+        # rake there is a panel of masonry between the plate and the roof
+        # planes, and it is real brickwork with real ties in it. The
+        # take-off measured walls storey by storey and stopped at the
+        # head, so every gable end on every job came back missing — on
+        # this house 14.7 m2 of facing brick, about 880 bricks, silently
+        # absent from the order.
+        #   gabled     two triangles per range: struct_span x rise
+        #   monopitch  two raking triangles: struct_span x rise
+        #   hipped     none — the roof comes down to the plate all round
+        "gable_area_m2": round(
+            0.0 if kind == "hipped"
+            else n_ranges * struct_span * rise if kind == "gabled"
+            else struct_span * rise, 2),
+        # A monopitch also has a RECTANGLE standing at its top edge, run
+        # wide and rise tall. Whether that is brickwork, a party wall or
+        # the flank of the existing house depends on what it abuts, so it
+        # is reported apart from the raking panels rather than added in.
+        "upstand_area_m2": round(run * rise, 2) if mono else 0.0,
         "eaves_tip_z_m": round(eaves_tip_z, 3),
         "plan_area_m2": round(plan_area, 2),
         "sloped_area_m2": round(sloped_area, 2),
         "uplift_pct": round((sloped_area / plan_area - 1) * 100, 1),
         "overhang_m": round(overhang, 3),
         "along_x": along_x,
+        "high_side": high_side if mono else None,
+        "mono_note": (
+            f"Monopitch: one plane climbing the full {struct_span:.2f}m "
+            f"span, so the top edge stands {rise:.2f}m above the wall head "
+            f"— twice what a gable of the same width would rise. Gutter to "
+            f"the {'far' if high_side == 'min' else 'near'} side only "
+            f"({run:.1f}m); the {run:.1f}m top edge takes ridge tiles "
+            f"against another slope, or flashing against a wall."
+        ) if mono else None,
         "note": (f"Sloped area is {sloped_area:.1f} m2 against a "
                  f"{plan_area:.1f} m2 footprint — {(sloped_area/plan_area-1)*100:.0f}% "
                  f"more material than the plan area suggests. Ordering off "
@@ -949,7 +1040,8 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
             # being roofed in one impossible span. When the section shows
             # one clear span — as a 9.1m trussed roof on a real sheet did —
             # the caller states it and the drawing wins over the heuristic.
-            max_span=_given("max_span_m", MAX_ROOF_SPAN_M))
+            max_span=_given("max_span_m", MAX_ROOF_SPAN_M),
+            high_side=_given("high_side", "min"))
 
     # A BLOCK THAT STOPS SHORT OF THE MAIN ROOF NEEDS ITS OWN TOP.
     # The main roof spans the whole plan at eaves level, so a single-storey
