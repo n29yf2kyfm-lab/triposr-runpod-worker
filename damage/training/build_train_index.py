@@ -115,7 +115,11 @@ IMAGE_EXTS = (".jpg", ".jpeg", ".png", ".webp", ".bmp")
 
 # Every op here has an exact box transform (or leaves boxes untouched entirely).
 # See the module docstring for why rotation is not in this table.
-BOX_SAFE_OPS = ("hflip", "crop", "photometric", "blur", "sharpen")
+# lowlight/harshsun/wet are box-safe for the same reason photometric is: they
+# change pixel VALUES and never pixel POSITIONS, so every box stays exactly
+# where it was. That is why they can be added here while rotation still cannot.
+BOX_SAFE_OPS = ("hflip", "crop", "photometric", "blur", "sharpen",
+                "lowlight", "harshsun", "wet")
 
 # The recipe cycle. Repeat k of an image takes RECIPES[(k - 1) % len(RECIPES)],
 # so an image collects distinct recipes before it ever collects a duplicate one,
@@ -133,6 +137,17 @@ RECIPES = (
     ["crop", "blur"],
     ["hflip", "sharpen"],
     ["hflip", "crop", "blur"],
+    # WEATHER AND LIGHT. Added because the corpus is overwhelmingly daylight:
+    # photometric() spans brightness 0.72-1.32, which is overcast to bright,
+    # and a scan taken at dusk, in direct noon sun, or in rain falls outside
+    # everything the model has ever seen. Each is paired with a crop so the
+    # weather is not always seen on a full frame.
+    ["lowlight"],
+    ["harshsun"],
+    ["wet"],
+    ["crop", "lowlight"],
+    ["hflip", "harshsun"],
+    ["crop", "wet"],
 )
 
 # Above this, a class is not being balanced, it is being cloned. Reported rather

@@ -16,7 +16,7 @@ which ops moved anything.
 
 Order matters and is fixed:
 
-    geometry (hflip, crop)  ->  photometric  ->  blur/sharpen  ->  wm  ->  sn
+    geometry (hflip, crop) -> photometric -> blur/sharpen -> weather -> wm -> sn
 
 Geometry first because only geometry moves boxes, and doing it first means the
 box arithmetic is over before any appearance op runs. The watermark goes on
@@ -125,6 +125,100 @@ def photometric(img, rng):
     return img
 
 
+# --- WEATHER AND LIGHT ------------------------------------------------------
+#
+# photometric() alone does not cover the conditions a car is actually
+# photographed in. Its ranges are brightness 0.72-1.32 and contrast 0.72-1.35:
+# a mild overcast-to-bright-day band. A scan taken at dusk in a car park, or in
+# direct noon sun that blows the highlights off a bonnet, or in rain, sits
+# outside everything the model has ever seen — and those are exactly the
+# conditions a damage scan gets used in.
+#
+# All three are PHOTOMETRIC ONLY. Nothing here moves a pixel, so every box
+# stays valid and these can join BOX_SAFE_OPS without the box-refitting problem
+# that got rotation excluded.
+
+
+def lowlight(img, rng):
+    """Dusk to night: gamma down, colour desaturates, sensor noise comes up.
+
+    Not simply "darker". A dark photograph from a phone has THREE things going
+    on and only doing the first is what makes synthetic night data useless:
+    the gamma curve compresses the shadows, the sensor's colour response falls
+    off so everything drifts toward grey, and the ISO climbs so noise becomes
+    visible. A model trained on merely-dimmed images still fails at night
+    because it never learned to see through the grain.
+    """
+    import numpy as np
+    a = np.asarray(img.convert("RGB")).astype("float32") / 255.0
+    gamma = rng.uniform(1.5, 2.6)
+    a = a ** gamma
+    grey = a.mean(axis=2, keepdims=True)
+    a = grey + (a - grey) * rng.uniform(0.45, 0.85)
+    sigma = rng.uniform(0.015, 0.055)
+    a = a + np.random.default_rng(rng.randrange(1 << 30)).normal(
+        0.0, sigma, a.shape)
+    return Image.fromarray(
+        np.clip(a * 255.0, 0, 255).astype("uint8"), "RGB")
+
+
+def harshsun(img, rng):
+    """Direct sun: highlights clip, shadows crush, contrast goes up.
+
+    The failure mode this trains against is specific and is the same one that
+    defeated the severity grader: a blown specular highlight on a panel looks
+    like a bright defect. Clipping is applied as a soft knee rather than a hard
+    ceiling, because a real sensor rolls off before it saturates and a hard
+    clip produces a flat white patch with an edge the model can learn to
+    recognise as synthetic.
+    """
+    import numpy as np
+    a = np.asarray(img.convert("RGB")).astype("float32") / 255.0
+    a = a * rng.uniform(1.15, 1.55)
+    knee = rng.uniform(0.72, 0.88)
+    hi = a > knee
+    a[hi] = knee + (1.0 - knee) * np.tanh((a[hi] - knee) / (1.0 - knee))
+    a = (a - 0.5) * rng.uniform(1.05, 1.35) + 0.5
+    return Image.fromarray(
+        np.clip(a * 255.0, 0, 255).astype("uint8"), "RGB")
+
+
+def wet(img, rng):
+    """Rain and wet paint: lifted blacks, lower contrast, bright droplets.
+
+    Wet paint is not just a filter. Water darkens and saturates the surface
+    while scattering a veil of light back at the lens, so blacks lift and
+    contrast falls — and then individual droplets sit on top as small bright
+    specular points. Those droplets are the whole reason this exists: a droplet
+    is a small high-contrast blob on a panel, which is precisely what a dent or
+    a paint chip looks like to a detector that has never seen rain.
+
+    The droplets are drawn WITHOUT reference to the boxes, deliberately. Real
+    rain does not avoid damage, and a negative that politely stays clear of the
+    positives would teach the model that droplets only ever appear on clean
+    paint.
+    """
+    import numpy as np
+    a = np.asarray(img.convert("RGB")).astype("float32") / 255.0
+    veil = rng.uniform(0.06, 0.16)
+    a = a * (1.0 - veil) + veil * rng.uniform(0.45, 0.75)
+    a = (a - 0.5) * rng.uniform(0.72, 0.92) + 0.5
+
+    H, W = a.shape[:2]
+    r2 = np.random.default_rng(rng.randrange(1 << 30))
+    n = int(r2.integers(40, 220))
+    ys = r2.integers(0, H, n)
+    xs = r2.integers(0, W, n)
+    rad = r2.integers(1, max(2, min(H, W) // 160 + 2), n)
+    for y, x, rr in zip(ys, xs, rad):
+        y0, y1 = max(0, y - rr), min(H, y + rr + 1)
+        x0, x1 = max(0, x - rr), min(W, x + rr + 1)
+        a[y0:y1, x0:x1] = np.clip(
+            a[y0:y1, x0:x1] + float(r2.uniform(0.10, 0.30)), 0.0, 1.0)
+    return Image.fromarray(
+        np.clip(a * 255.0, 0, 255).astype("uint8"), "RGB")
+
+
 def blur(img, rng):
     return img.filter(ImageFilter.GaussianBlur(rng.uniform(0.4, 1.6)))
 
@@ -165,6 +259,15 @@ def apply_row(img, boxes, row, with_indices=False):
         img = blur(img, rng)
     if "sharpen" in recipe:
         img = sharpen(img, rng)
+    # Weather goes LAST among the photometric ops, because it models the
+    # capture condition rather than the processing: a blurred night photo is a
+    # night photo that was blurred, not a blurred photo taken at night.
+    if "lowlight" in recipe:
+        img = lowlight(img, rng)
+    if "harshsun" in recipe:
+        img = harshsun(img, rng)
+    if "wet" in recipe:
+        img = wet(img, rng)
 
     # Independent of class and of recipe — see build_train_index.mark_flags.
     if row.get("wm"):
@@ -281,6 +384,56 @@ def _selftest():
           np.abs(a - b).mean() > 0.5)
 
     # 8. determinism
+    # --- weather ops: correct direction, box-safe, deterministic ---
+    import numpy as _np
+    base = Image.fromarray(
+        _np.random.default_rng(0).integers(60, 200, (120, 160, 3))
+        .astype("uint8"))
+    b = _np.asarray(base).astype(float)
+    for name, fn, want in (("lowlight", lowlight, "darker"),
+                           ("harshsun", harshsun, "brighter"),
+                           ("wet", wet, "flatter")):
+        out = fn(base, random.Random(3))
+        o = _np.asarray(out).astype(float)
+        check(f"{name} keeps the frame size", out.size == base.size)
+        check(f"{name} stays in range", o.min() >= 0 and o.max() <= 255)
+        if want == "darker":
+            check("lowlight darkens the image", o.mean() < b.mean() - 15,
+                  f"{b.mean():.0f} -> {o.mean():.0f}")
+        elif want == "brighter":
+            check("harshsun brightens and adds contrast",
+                  o.mean() > b.mean() + 15 and o.std() > b.std(),
+                  f"mean {o.mean():.0f} std {o.std():.0f}")
+        else:
+            check("wet lowers contrast", o.std() < b.std(),
+                  f"{b.std():.0f} -> {o.std():.0f}")
+        again = fn(base, random.Random(3))
+        check(f"{name} is deterministic from its seed",
+              _np.array_equal(_np.asarray(out), _np.asarray(again)))
+        differs = fn(base, random.Random(4))
+        check(f"{name} varies with the seed",
+              not _np.array_equal(_np.asarray(out), _np.asarray(differs)))
+
+    # THE property that lets weather be box-safe: boxes must not move.
+    wbox = [[0.2, 0.2, 0.3, 0.3], [0.6, 0.55, 0.2, 0.25]]
+    for name in ("lowlight", "harshsun", "wet"):
+        row = {"recipe": [name], "wm": False, "sn": False, "seed": 5}
+        _im, out_boxes = apply_row(base, wbox, row)
+        check(f"{name} leaves every box exactly where it was",
+              out_boxes == wbox, f"{out_boxes}")
+        check(f"{name} does not resize the frame", _im.size == base.size)
+
+    # lowlight must add grain, not merely dim — a dimmed image is not a night
+    # image, and the difference is what the model has to see through.
+    dim = Image.fromarray((b * 0.35).astype("uint8"))
+    night = lowlight(base, random.Random(9))
+    hp = lambda arr: float(_np.abs(_np.diff(arr.mean(axis=2), axis=1)).mean())
+    check("lowlight adds sensor grain, not just dimming",
+          hp(_np.asarray(night).astype(float)) >
+          hp(_np.asarray(dim).astype(float)),
+          f"night {hp(_np.asarray(night).astype(float)):.2f} vs "
+          f"dim {hp(_np.asarray(dim).astype(float)):.2f}")
+
     p = {"recipe": ["hflip", "crop", "photometric"], "wm": True, "sn": True,
          "seed": 777}
     r1 = apply_row(*marked(), p)

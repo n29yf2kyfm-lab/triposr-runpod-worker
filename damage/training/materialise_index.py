@@ -88,6 +88,28 @@ def _one(sample):
             norm = [[b[1], b[2], b[3], b[4]] for b in rec["boxes"]]
             ids = [b[0] for b in rec["boxes"]]
 
+            # NEGATIVES: a crop of undamaged car, emitted with ZERO boxes.
+            # The corpus has 0 images without damage, so the detector has never
+            # been shown a panel and told "nothing here" — which is why dirt,
+            # shadows and water drops read as damage. mine_negatives picks the
+            # windows; this renders them.
+            if sample.get("neg"):
+                nx, ny, nw, nh = sample["neg_box"]
+                W0, H0 = im.size
+                box = (int(nx * W0), int(ny * H0),
+                       int((nx + nw) * W0), int((ny + nh) * H0))
+                if box[2] - box[0] < 8 or box[3] - box[1] < 8:
+                    return None
+                out_im = aug.apply_row(im.crop(box), [], dict(sample))[0]
+                name = (f"{sample['sha'][:20]}_n{sample.get('neg_id', 0)}"
+                        f".jpg")
+                dest = os.path.join(_CTX["out"], sample["split"], name)
+                out_im.save(dest, "JPEG", quality=90)
+                # Returning an empty box list is the whole point, so this path
+                # must bypass the "no boxes -> delete" rule below.
+                return (sample["split"], name, out_im.size[0], out_im.size[1],
+                        [])
+
             row = dict(sample)
             if sample["split"] != "train":
                 # belt and braces: the index already says so
