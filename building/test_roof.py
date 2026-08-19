@@ -79,6 +79,33 @@ except ValueError as ex:
 bb = osgb.bbox_around(500000, 200000, 60)
 check("1h bbox spans 2x radius", bb == (499940, 199940, 500060, 200060), str(bb))
 
+# GOING BACK THE OTHER WAY. A DSM arrives on the National Grid, and every
+# cell has to become a lat/lon before imagery can be draped on it or it
+# can be handed to anything geographic. Solved by iterating the FORWARD
+# projection — the one checked against the OS worked example above — so
+# the inverse inherits that check instead of introducing a second set of
+# coefficients to get wrong.
+for _nm, _la, _lo in [("Caister", 52.658, 1.718),
+                      ("Trafalgar Square", 51.5078, -0.1280),
+                      ("Alum Rock", 52.4855909, -1.8474998),
+                      ("Edinburgh", 55.9533, -3.1883),
+                      ("Penzance", 50.1186, -5.5373)]:
+    _e, _n = osgb.latlon_to_easting_northing(_la, _lo)
+    _bla, _blo = osgb.easting_northing_to_latlon(_e, _n)
+    _err_mm = math.hypot((_bla - _la) * 111320,
+                         (_blo - _lo) * 111320 * math.cos(math.radians(_la))) * 1000
+    check(f"1l {_nm} round-trips through the grid to under a millimetre",
+          _err_mm < 1.0, f"{_err_mm:.3f} mm")
+
+# A point that is not on the grid at all must not come back a plausible
+# lat/lon — a silent near-miss puts a building metres from where it is.
+try:
+    osgb.easting_northing_to_latlon(-9e6, -9e6)
+    check("1m an off-grid reference is refused, not approximated", False)
+except ValueError as _ex:
+    check("1m an off-grid reference is refused, not approximated",
+          "Great Britain" in str(_ex), str(_ex)[:80])
+
 # THE REAL HELMERT ERROR, MEASURED, NOT ASSUMED. osgb.py's header claims
 # ~5m and roof.py's clip-site note claims typically 1-3.5m against the
 # OSTN-registered raster. The OS guide's own control pair pins both: the

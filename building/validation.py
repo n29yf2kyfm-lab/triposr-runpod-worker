@@ -386,13 +386,34 @@ def _plan(value):
                              '[axis, coordinate] pairs, e.g. [["x", 0.0]]')
         out_party = []
         for i, edge in enumerate(party):
-            if (not isinstance(edge, (list, tuple)) or len(edge) != 2
+            if (not isinstance(edge, (list, tuple))
+                    or len(edge) not in (2, 3)
                     or edge[0] not in ("x", "y")):
                 raise InputError(
-                    f'plan.party_walls[{i}] must be ["x"|"y", metres]')
-            out_party.append([edge[0],
-                              _float(edge[1], f"plan.party_walls[{i}]",
-                                     0.0, -1000.0, 1000.0)])
+                    f'plan.party_walls[{i}] must be ["x"|"y", metres], '
+                    f'optionally with a [from, to] span along the other '
+                    f'axis: ["x", 0.0, [0.0, 9.88]]')
+            pair = [edge[0], _float(edge[1], f"plan.party_walls[{i}]",
+                                    0.0, -1000.0, 1000.0)]
+            # The span bounds a party wall that does NOT run the whole
+            # line — the case a rear extension creates the moment it
+            # passes the neighbour's back wall.
+            if len(edge) == 3:
+                span = edge[2]
+                if (not isinstance(span, (list, tuple)) or len(span) != 2):
+                    raise InputError(
+                        f'plan.party_walls[{i}] span must be [from, to] '
+                        f'in metres along the other axis')
+                lo = _float(span[0], f"plan.party_walls[{i}].from",
+                            0.0, -1000.0, 1000.0)
+                hi = _float(span[1], f"plan.party_walls[{i}].to",
+                            0.0, -1000.0, 1000.0)
+                if hi <= lo:
+                    raise InputError(
+                        f'plan.party_walls[{i}] span runs {lo} to {hi} — '
+                        f'the second figure must be the larger')
+                pair.append([lo, hi])
+            out_party.append(pair)
         out["party_walls"] = out_party
 
     roof = value.get("roof")

@@ -102,21 +102,38 @@ def _external(model):
     net = openings_a = perim = 0.0
     n_open = 0
     for w in model["walls"]:
-        if not w.get("external"):
-            continue
+        # A WALL CAN BE INTERNAL LOW DOWN AND BRICKWORK HIGHER UP. Over a
+        # single-storey rear extension the first-floor wall behind it
+        # faces open sky, and the plan probe cannot see that: it finds a
+        # room on both sides in PLAN and calls the whole wall internal.
+        # model3d exports shared_storeys for exactly this, and the GLB
+        # mesh and heatloss both already read it — the take-off did not,
+        # so a 3 m rear extension came back 63 bricks instead of a
+        # thousand, silently.
+        shared = w.get("shared_storeys")
+        levels = list(_levels_of(w, storeys))
         # storeys=None on a wall means "stands on every storey above its
         # base" — model3d's convention. Reading it as 1 halved the brick
         # order on every plain two-storey job.
-        n_st = len(_levels_of(w, storeys))
+        faces = [lv for lv in levels
+                 if w.get("external") or (shared is not None and lv >= shared)]
+        if not faces:
+            continue
+        n_st = len(faces)
         gross = float(w["length_m"]) * float(w["height_m"]) * n_st
         wall_open = 0.0
         for o in w.get("openings", []):
-            reps = n_st if o.get("level") is None else 1
+            if o.get("level") is None:
+                reps = n_st
+            elif int(o["level"]) in faces:
+                reps = 1
+            else:
+                continue            # an opening on the plastered storeys
             wall_open += o["width"] * o["height"] * reps
             n_open += reps
         net += max(0.0, gross - wall_open)
         openings_a += wall_open
-        if int(w.get("base_level") or 0) == 0:
+        if 0 in faces:
             perim += float(w["length_m"])
     return net, openings_a, n_open, perim
 

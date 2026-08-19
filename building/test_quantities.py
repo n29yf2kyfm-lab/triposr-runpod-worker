@@ -62,6 +62,94 @@ class TestExternalDefaultStoreys(unittest.TestCase):
         self.assertEqual(perim, 0.0)
 
 
+class TestBrickworkOverAnExtension(unittest.TestCase):
+    """A wall can be plastered downstairs and brick upstairs.
+
+    Over a single-storey rear extension, the first-floor wall behind it
+    faces open sky. The plan probe cannot see that — it finds a room on
+    both sides in PLAN — so model3d exports shared_storeys and the mesh
+    and heat loss read it. The take-off did not, and a real 3 m rear
+    extension on this project's own 94 Parkfield Road model came back
+    63 bricks instead of about a thousand.
+    """
+
+    def _house_with_rear_extension(self):
+        rooms = [
+            M.Room("Hall", 0.0, 0.0, 1.92, 7.0, kind="circulation",
+                   storeys=1),
+            M.Room("Living room", 1.92, 0.0, 3.2, 4.0, kind="room",
+                   storeys=1),
+            M.Room("Dining room", 1.92, 4.0, 3.2, 3.0, kind="room",
+                   storeys=1),
+            # runs 3 m PAST the first floor, which stops at y = 9.88
+            M.Room("Kitchen/diner", 0.0, 7.0, 5.12, 5.88, kind="kitchen",
+                   storeys=1),
+            M.Room("Landing", 0.0, 0.0, 1.92, 7.0, kind="circulation",
+                   storeys=1, base_level=1),
+            M.Room("Bedroom 1", 1.92, 0.0, 3.2, 4.0, kind="room",
+                   storeys=1, base_level=1),
+            M.Room("Bedroom 2", 1.92, 4.0, 3.2, 3.0, kind="room",
+                   storeys=1, base_level=1),
+            M.Room("Bathroom", 0.0, 7.0, 5.12, 2.88, kind="wet",
+                   storeys=1, base_level=1),
+        ]
+        return M.build(rooms, storeys=2, storey_height=2.65, roof=ROOF)
+
+    def test_the_wall_above_the_extension_is_counted_as_brickwork(self):
+        m = self._house_with_rear_extension()
+        wall = next(w for w in m["walls"]
+                    if abs(w["start"][1] - 9.88) < 1e-6
+                    and abs(w["end"][1] - 9.88) < 1e-6)
+        # Precondition: the plan probe calls it internal. Only
+        # shared_storeys records that it stands open above the extension.
+        self.assertFalse(wall["external"])
+        self.assertEqual(wall["shared_storeys"], 1)
+        self.assertEqual(wall["base_level"], 1)
+
+        net, _, _, _ = Q._external(m)
+        # What the OLD rule gave: external-flagged walls only.
+        old = 0.0
+        storeys = m["storeys"]
+        for w in m["walls"]:
+            if not w.get("external"):
+                continue
+            n = len(Q._levels_of(w, storeys))
+            gross = w["length_m"] * w["height_m"] * n
+            op = sum(o["width"] * o["height"]
+                     * (n if o.get("level") is None else 1)
+                     for o in w.get("openings", []))
+            old += max(0.0, gross - op)
+        # The difference IS that wall: 5.12 x 2.4 less its openings.
+        opens = sum(o["width"] * o["height"] for o in wall["openings"])
+        expect = 5.12 * 2.4 - opens
+        self.assertGreater(expect, 8.0)          # a real wall, not a sliver
+        self.assertAlmostEqual(net - old, expect, delta=0.05)
+
+    def test_it_is_worth_hundreds_of_bricks(self):
+        m = self._house_with_rear_extension()
+        wall = next(w for w in m["walls"]
+                    if abs(w["start"][1] - 9.88) < 1e-6
+                    and abs(w["end"][1] - 9.88) < 1e-6)
+        opens = sum(o["width"] * o["height"] for o in wall["openings"])
+        bricks_for_it = (5.12 * 2.4 - opens) * Q.BRICKS_PER_M2
+        self.assertGreater(bricks_for_it, 500,
+                           "the wall this fix adds should be worth "
+                           "hundreds of bricks, or the test proves little")
+
+    def test_the_ground_floor_half_stays_out_of_the_brick_order(self):
+        """Below the extension's ceiling that same line is a partition
+        with kitchen on both sides. It must NOT be brickwork: the fix
+        counts the levels at or above shared_storeys, not the wall."""
+        m = self._house_with_rear_extension()
+        wall = next(w for w in m["walls"]
+                    if abs(w["start"][1] - 9.88) < 1e-6
+                    and abs(w["end"][1] - 9.88) < 1e-6)
+        # it stands on ONE level (the first floor) and that is the only
+        # level counted — the ground floor line is a different wall
+        self.assertEqual(len(list(Q._levels_of(wall, m["storeys"]))), 1)
+        self.assertEqual(list(Q._levels_of(wall, m["storeys"])), [1])
+
+
 class TestBillNotes(unittest.TestCase):
     def test_the_bill_does_not_claim_a_pricing_path_that_does_not_exist(self):
         """The shipped note said 'takeoff.py prices this bill', but

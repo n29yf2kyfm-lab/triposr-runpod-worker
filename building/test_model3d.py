@@ -1311,6 +1311,95 @@ _ext = M.build([M.Room("house", 0, 0, 6, 8, 2.6, kind="existing"),
 check("31j but a single-storey block with sky over it still gets its cap",
       len(_ext["caps"]) == 1, str(_ext["caps"]))
 
+# PARTLY covered is the case a real extension makes. Knocking the rear
+# wall out gives ONE long kitchen running past the first floor: bathroom
+# over the old half, sky over the new. Tested all-or-nothing that room
+# came back "covered" and got NO cap, so the main pitched roof was
+# stretched over a single-storey extension — 22 m2 of phantom tiling in
+# the take-off and a two-storey roof over a 2.3m room in the render.
+_part = M.build([
+    M.Room("Hall", 0.0, 0.0, 1.9, 7.0, 2.3, kind="circulation", storeys=1),
+    M.Room("Living", 1.9, 0.0, 3.2, 7.0, 2.3, kind="room", storeys=1),
+    M.Room("Kitchen/diner", 0.0, 7.0, 5.1, 5.9, 2.3, kind="kitchen",
+           storeys=1),
+    M.Room("Landing", 0.0, 0.0, 1.9, 7.0, 2.4, kind="circulation",
+           storeys=1, base_level=1),
+    M.Room("Bed 1", 1.9, 0.0, 3.2, 7.0, 2.4, kind="room",
+           storeys=1, base_level=1),
+    M.Room("Bathroom", 0.0, 7.0, 5.1, 2.9, 2.4, kind="wet",
+           storeys=1, base_level=1),
+], storeys=2, storey_height=2.65,
+    roof={"pitch_deg": 35.0, "kind": "gabled", "overhang": 0.3,
+          "max_span_m": 12.0})
+_caps = _part["caps"]
+check("31k a partly covered room is capped over the UNCOVERED part",
+      len(_caps) == 1, str(_caps))
+check("31l and the cap is the 3m that sticks out, not the whole room",
+      _caps and abs((_caps[0]["y"][1] - _caps[0]["y"][0]) - 3.0) < 0.05,
+      str(_caps[0]["y"]) if _caps else "no cap")
+check("31m the cap sits at the extension's own ceiling, not the eaves",
+      _caps and abs(_caps[0]["z_m"] - 2.3) < 0.05,
+      str(_caps[0]["z_m"]) if _caps else "-")
+# ...and the pitched roof stops at the two-storey block rather than
+# spanning the extension it does not sit on.
+check("31n the main roof spans the TOP storey, not the whole plan",
+      abs(_part["roof"]["footprint_m"]["y"][1] - (9.9 + 0.3)) < 0.05,
+      str(_part["roof"]["footprint_m"]["y"]))
+check("31o so the extension is not tiled twice",
+      _part["roof"]["footprint_m"]["y"][1] < 12.9 - 0.3,
+      str(_part["roof"]["footprint_m"]["y"]))
+
+# A PARTY EDGE CAN BE A SEGMENT. Bare, it shares the whole line — right
+# for the original pair, wrong the moment a rear extension runs past next
+# door: its flank sits on the same x, faces the neighbour's GARDEN, and
+# was marked party, taking its brickwork out of the order and refusing it
+# a window.
+_pe = [M.Room("Hall", 0.0, 0.0, 1.9, 7.0, 2.3, kind="circulation",
+              storeys=1),
+       M.Room("Living", 1.9, 0.0, 3.2, 7.0, 2.3, kind="room", storeys=1),
+       M.Room("Kitchen", 0.0, 7.0, 5.1, 5.9, 2.3, kind="kitchen",
+              storeys=1)]
+_whole = M.build([r for r in _pe], storeys=1, storey_height=2.65,
+                 party_edges=[["x", 0.0]])
+_bounded = M.build([r for r in _pe], storeys=1, storey_height=2.65,
+                   party_edges=[["x", 0.0, [0.0, 7.0]]])
+def _party_len(m):
+    return round(sum(w["length_m"] for w in m["walls"] if w.get("party")), 2)
+check("31p an unbounded party edge shares the whole flank",
+      _party_len(_whole) > 12.0, str(_party_len(_whole)))
+# Here the whole flank merges into ONE wall running 0 to 12.9, so the
+# span cuts across it. A wall is all party or none, and either choice is
+# wrong by the length of the other part — so it says so instead.
+check("31q a span that cuts a wall in half is refused, not guessed",
+      _party_len(_bounded) == 0.0
+      and any("crosses that boundary" in w for w in _bounded["warnings"]),
+      str(_bounded["warnings"][-1])[:120])
+
+# Where the rooms DO split the wall at the right place — which is what a
+# real two-storey house with a single-storey rear extension gives — the
+# span applies cleanly and the extension flank stays brickwork.
+_pe2 = [M.Room("Hall", 0.0, 0.0, 1.9, 7.0, 2.3, kind="circulation",
+               storeys=1),
+        M.Room("Living", 1.9, 0.0, 3.2, 7.0, 2.3, kind="room", storeys=1),
+        M.Room("Kitchen", 0.0, 7.0, 5.1, 5.9, 2.3, kind="kitchen",
+               storeys=1),
+        M.Room("Landing", 0.0, 0.0, 1.9, 7.0, 2.4, kind="circulation",
+               storeys=1, base_level=1),
+        M.Room("Bed", 1.9, 0.0, 3.2, 7.0, 2.4, kind="room",
+               storeys=1, base_level=1),
+        M.Room("Bath", 0.0, 7.0, 5.1, 2.9, 2.4, kind="wet",
+               storeys=1, base_level=1)]
+_split = M.build(_pe2, storeys=2, storey_height=2.65,
+                 party_edges=[["x", 0.0, [0.0, 9.9]]])
+_flank = [w for w in _split["walls"]
+          if abs(w["start"][0]) < 1e-6 and abs(w["end"][0]) < 1e-6]
+check("31r the shared part is party", any(w.get("party") for w in _flank),
+      str([(w["start"][1], w["end"][1], w.get("party")) for w in _flank]))
+check("31s and the extension flank past it is NOT",
+      any(not w.get("party") and min(w["start"][1], w["end"][1]) > 9.0
+          for w in _flank),
+      str([(w["start"][1], w["end"][1], w.get("party")) for w in _flank]))
+
 # --- 32. the GLB is what the customer actually looks at ------------------
 _mesh = M._glb_mesh(_two)
 
@@ -1461,3 +1550,4 @@ for f in FAILED:
     print(f"FAIL  {f}")
 print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")
 sys.exit(1 if FAILED else 0)
+

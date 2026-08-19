@@ -778,12 +778,45 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
     # external — which put rule windows through next door's living room and
     # would cost the whole line as heat-loss brickwork. The caller states
     # which boundary lines are shared: [["x", 0.0], ["y", 8.5]].
-    for axis, coord in (party_edges or []):
+    # A PARTY EDGE MAY BE A SEGMENT, NOT AN INFINITE LINE. Give it a
+    # bare coordinate and the whole line is shared — which is right for
+    # the original pair and WRONG the moment a rear extension runs past
+    # next door: its flank sits on the same x, faces the neighbour's
+    # garden, and was being marked party. That took 6.9 m2 of brickwork
+    # out of the order, refused it a window, and told heatloss the wall
+    # was adiabatic. An optional [from, to] along the other axis bounds
+    # it: ["x", 0.0, [0.0, 9.88]].
+    party_notes = []
+    for edge in (party_edges or []):
+        axis, coord = edge[0], edge[1]
+        span = edge[2] if len(edge) > 2 else None
         for wall in walls:
             (ax, ay), (bx, by) = wall.start, wall.end
             on = (abs(ax - coord) < 1e-6 and abs(bx - coord) < 1e-6) \
                 if axis == "x" else \
                 (abs(ay - coord) < 1e-6 and abs(by - coord) < 1e-6)
+            if on and span is not None:
+                lo, hi = min(span), max(span)
+                w0, w1 = (min(ay, by), max(ay, by)) if axis == "x" \
+                    else (min(ax, bx), max(ax, bx))
+                if w0 >= lo - 1e-6 and w1 <= hi + 1e-6:
+                    pass                          # wholly shared
+                elif w1 <= lo + 1e-6 or w0 >= hi - 1e-6:
+                    on = False                    # wholly beyond it
+                else:
+                    # STRADDLES the boundary. The wall is one object, so
+                    # it is either all party or none — and either choice
+                    # is wrong by the length of the other part. Say so
+                    # rather than pick one silently.
+                    on = False
+                    party_notes.append(
+                        f"Party wall on {axis}={coord} was given as shared "
+                        f"from {lo} to {hi}, but the wall there runs {w0:.2f} "
+                        f"to {w1:.2f} and crosses that boundary. It has been "
+                        f"left as ordinary external wall: split the rooms at "
+                        f"{hi} so the shared part is its own wall, or the "
+                        f"take-off and the heat loss will both be wrong along "
+                        f"it.")
             if on and wall.external:
                 wall.party = True
 
@@ -819,6 +852,22 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
     xs = [c[0] for r in rooms for c in r.corners()]
     ys = [c[1] for r in rooms for c in r.corners()]
     x0, x1, y0, y1 = min(xs), max(xs), min(ys), max(ys)
+
+    # THE MAIN ROOF SPANS THE TOP STOREY, NOT THE WHOLE PLAN. It bears on
+    # the topmost walls, so a single-storey rear extension is not under
+    # it — that block gets its own flat cap. Taken off the whole extent,
+    # a 3 m extension stretched the pitched roof out over it: 22 m2 of
+    # tiling nobody lays, and a roof two storeys tall over a 2.3 m room.
+    _top = [r for r in rooms
+            if (storeys if r.storeys is None else r.base_level + r.storeys)
+            >= storeys]
+    if _top:
+        _txs = [c[0] for r in _top for c in r.corners()]
+        _tys = [c[1] for r in _top for c in r.corners()]
+        rx0, rx1 = min(_txs), max(_txs)
+        ry0, ry1 = min(_tys), max(_tys)
+    else:                                   # nothing reaches the top
+        rx0, rx1, ry0, ry1 = x0, x1, y0, y1
 
     # A dwelling has a front door, and the first render of a real house
     # type came back without one: the auto-openings put windows on external
@@ -885,7 +934,7 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
             v = roof.get(key)
             return default if v is None else v
         roof_model = roof_over(
-            x0, y0, x1, y1,
+            rx0, ry0, rx1, ry1,
             pitch_deg=_given("pitch_deg", DEFAULT_PITCH_DEG),
             kind=_given("kind", "hipped"),
             # ACCEPT THE KEY PEOPLE WRITE. The spec says "overhang" and
@@ -908,8 +957,9 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
     # to 2.4m and the sky above them. First render of one showed straight
     # down into it. Flat is right for the overwhelming majority of
     # single-storey rear extensions in this country.
-    def _covered_above(r, level):
-        """Is another room built directly on top of this block?"""
+    def _covers_above(r, level):
+        """The rooms built directly on top of this block at `level`."""
+        out = []
         for o in rooms:
             if o is r:
                 continue
@@ -919,8 +969,43 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
             ox = min(r.x + r.width, o.x + o.width) - max(r.x, o.x)
             oy = min(r.y + r.depth, o.y + o.depth) - max(r.y, o.y)
             if ox > 0.05 and oy > 0.05:
-                return True
-        return False
+                out.append(o)
+        return out
+
+    def _uncovered(r, covers):
+        """r's plan rectangle less the ones built on it, as rectangles.
+
+        PARTLY covered is the case that matters. A rear extension makes
+        the kitchen one long room running out past the first floor: the
+        old half has a bathroom over it, the new half has sky. Tested
+        all-or-nothing, that room came back "covered" and got NO cap, so
+        the main pitched roof was stretched over a single-storey
+        extension — 22 m2 of phantom tiling in the take-off and a roof
+        two storeys tall over a 2.3 m room in the render.
+        """
+        pieces = [(r.x, r.y, r.x + r.width, r.y + r.depth)]
+        for o in covers:
+            ox0, oy0 = o.x, o.y
+            ox1, oy1 = o.x + o.width, o.y + o.depth
+            nxt = []
+            for (x0, y0, x1, y1) in pieces:
+                if ox1 <= x0 + 1e-9 or ox0 >= x1 - 1e-9 \
+                        or oy1 <= y0 + 1e-9 or oy0 >= y1 - 1e-9:
+                    nxt.append((x0, y0, x1, y1))       # no overlap
+                    continue
+                if oy0 > y0 + 1e-9:                    # strip in front
+                    nxt.append((x0, y0, x1, min(oy0, y1)))
+                if oy1 < y1 - 1e-9:                    # strip behind
+                    nxt.append((x0, max(oy1, y0), x1, y1))
+                mid0, mid1 = max(y0, oy0), min(y1, oy1)
+                if mid1 > mid0 + 1e-9:
+                    if ox0 > x0 + 1e-9:                # strip left
+                        nxt.append((x0, mid0, min(ox0, x1), mid1))
+                    if ox1 < x1 - 1e-9:                # strip right
+                        nxt.append((max(ox1, x0), mid0, x1, mid1))
+            pieces = nxt
+        return [p for p in pieces
+                if (p[2] - p[0]) > 0.4 and (p[3] - p[1]) > 0.4]
 
     caps = []
     for r in rooms:
@@ -931,12 +1016,12 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
         # capping on that test alone tiled a flat roof over the lounge with
         # a bedroom standing on it — a roof plane inside the building, in
         # the take-off and in the IFC. Only cap what nothing is built on.
-        if _covered_above(r, r.base_level + r.storeys):
-            continue
+        covers = _covers_above(r, r.base_level + r.storeys)
         cap_z = per_storey * (r.base_level + r.storeys - 1) + r.height
-        caps.append({"x": [round(r.x, 3), round(r.x + r.width, 3)],
-                     "y": [round(r.y, 3), round(r.y + r.depth, 3)],
-                     "z_m": round(cap_z, 3), "kind": "flat"})
+        for (x0, y0, x1, y1) in _uncovered(r, covers):
+            caps.append({"x": [round(x0, 3), round(x1, 3)],
+                         "y": [round(y0, 3), round(y1, 3)],
+                         "z_m": round(cap_z, 3), "kind": "flat"})
 
     top = roof_model["ridge_z_m"] if roof_model else eaves_z
 
@@ -1018,6 +1103,8 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
             "return is not in this model.",
         ],
     }
+    for note in party_notes:
+        result["warnings"].append(note)
     if storeys > 1 and single_plate:
         result["warnings"].append(
             f"Only one floor plate was supplied, repeated for all {storeys} "
