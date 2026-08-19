@@ -2578,3 +2578,39 @@ Ops lessons from the same run, all paid for:
     a 60GB containerDisk ask can 500 with "machine does not have the
     resources" — 40GB matched instantly. GPU ids come from GraphQL
     gpuTypes, not REST (no /v1/gputypes endpoint).
+
+## Yaris hybrid pipeline (2026-08-19): PartCrafter→polish→studio on the Hi3DGen mesh
+
+Owner-ordered: run the Hi3DGen Yaris through the recorded hybrid route. It ran END TO
+END in ~40 min for ~$0.10 GPU: PartCrafter-16 on the same front cutout (pod 6 min,
+$0.08 — and this time the in-pod self-delete DID fire; pod was 404 before the external
+kill, unlike the pc41 run) → hybrid_transfer onto the dims-normalised mesh →
+normals_fix → studio worker renders + red control. Durable facts:
+
+- **Clean-input→clean-parts generalises.** 16 parts, NO mega-part (largest 32.1%),
+  canopy/wheels/underbody separate — on a Hi3DGen render-quality cutout, same as V41.
+- **Cross-GENERATOR label transfer works but fits worse: alignment NN 0.0568** vs
+  0.020 for the same-image Hunyuan pair. The gap is the Hi3DGen perspective taper vs
+  PartCrafter's own proportions. Labels still landed: glass 16.1% of faces (high side),
+  0.00% below beltline, refusal guard passed.
+- **hybrid_transfer output has NO normal accessors** (0/5 primitives) — it exports via
+  trimesh submesh, the exact v7 crumpled-foil class. normals_fix is mandatory after it,
+  same as after every machine stage. Verified 5/5 after.
+- **All material gates pass on the Yaris too**: glass_probe clear/PROVEN on the file,
+  worker recolour ['carpaint'] cov 0.77, red control holds (body red, glazing dark,
+  tyre dark). Grey unpainted arch surrounds = wheel-label spill up to 0.82 of height —
+  cosmetic, visible in sheet. Material layer: solved on a THIRD geometry source.
+- **THE POSE MISREAD, do not repeat:** the worker renders READ as "car rolled on its
+  side" and it was upright all along. An arch-less slug body (fused shallow wheels, no
+  wheel openings) plus soft panels has no visual up cues, and I nearly launched a
+  worker-side pose investigation. The 5-minute settle: import the GLB in local Blender
+  and print world extents + wheel-material Z range (upright = wheels at bottom), then
+  ONE local known-camera render. Numbers first, eye second, worker never guilty until
+  both agree. Related trap: trimesh Scene.apply_transform stores a ROOT NODE transform
+  — geometry.vertices still shows pre-transform coords; that is not a failed rotation.
+- **Verdict unchanged:** geometry remains the blocker — no arches, taper, slug
+  silhouette. This pipeline cannot add wheel openings back. The route to a shippable
+  generated Yaris is multiview conditioning (fal.ai Hunyuan 3.1 Pro, owner key) or
+  machine component rebuild on a better base mesh.
+- Evidence: car-meshes/staging/yaris/ (yaris_hybrid.glb, YARIS_PC_SHEET.jpg,
+  transfer_report.json); parts at partcrafter_run/results_yaris_pc.tgz.
