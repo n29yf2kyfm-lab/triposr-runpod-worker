@@ -1575,7 +1575,8 @@ check("36f the verge rakes, so it is longer than the span on plan",
       _mono["verge_m"] > 2 * 5.42, str(_mono["verge_m"]))
 _span_y = _mono["footprint_m"]["y"][1] - _mono["footprint_m"]["y"][0]
 check("36g the top edge is reported as its own line, not sold as ridge",
-      abs(_mono["high_edge_m"] - _span_y) < 1e-2, str(_mono["high_edge_m"]))
+      abs(_mono["high_edge_m"] - _span_y) < 1e-2 and _mono["ridge_m"] == 0.0,
+      f"high_edge {_mono['high_edge_m']} ridge_m {_mono['ridge_m']}")
 # The top edge sits ON the high wall, not in the middle of the plan.
 check("36h high_side='min' puts the top edge at the low-x wall",
       all(abs(p[0]) < 1e-9 for p in _mono["ridge"]), str(_mono["ridge"]))
@@ -1636,6 +1637,46 @@ check("36p the validator passes monopitch and its high side through",
       and _vmono["plan"]["roof"]["high_side"] == "max",
       str(_vmono["plan"]["roof"]))
 
+
+# --- 37. the extent survives the caps ------------------------------------
+# The cap loop iterated with the SAME four names that hold the building
+# bounds, so any house with a single-storey extension — the exact case
+# caps exist for — shipped extent_m equal to the last cap rectangle.
+# extent_m feeds georeferencing, the STL base plate and pipe routing.
+_ce = M.build([room("Lounge", 0.0, 0.0, 8.0, 8.0),
+               room("Ext", 2.0, 8.0, 4.0, 3.0, storeys=1)], storeys=2,
+              storey_height=2.7,
+              roof={"pitch_deg": 35.0, "kind": "gabled", "overhang": 0.3,
+                    "ridge_along": "y", "max_span_m": 12.0})
+check("37a a capped model still reports the whole building's extent",
+      _ce["extent_m"]["x"] == [0.0, 8.0]
+      and _ce["extent_m"]["y"] == [0.0, 11.0], str(_ce["extent_m"]))
+check("37b and the cap itself is still there, where the extension is",
+      any(c["y"] == [8.0, 11.0] for c in _ce.get("caps", [])),
+      str(_ce.get("caps")))
+
+# --- 38. the monopitch mesh stops at the wall head on the high side ------
+# The high edge has no overhang, so its corners sit at eaves_z, not the
+# dropped eaves tip — 168mm below the plate at 29.3 deg, inside the
+# party wall of a semi or the host wall of a lean-to.
+_hm = M.build([room("R", 0.0, 0.0, 5.12, 9.88)], storeys=2,
+              storey_height=2.65,
+              roof={"pitch_deg": 29.3, "kind": "monopitch", "overhang": 0.3,
+                    "ridge_along": "y", "high_side": "min",
+                    "max_span_m": 12.0})
+_v38, _f38, _g38 = [], [], []
+M._roof_faces(_hm["roof"], _v38, _f38, _g38)
+_high = [p for p in _v38 if abs(p[0] - 0.0) < 1e-6]
+check("38a every high-edge vertex is at the wall head or the top edge",
+      _high and all(abs(p[1] - _hm["roof"]["eaves_z_m"]) < 1e-6
+                    or abs(p[1] - _hm["roof"]["ridge_z_m"]) < 1e-6
+                    for p in _high),
+      str(sorted({round(p[1], 3) for p in _high})))
+_low = [p for p in _v38 if abs(p[0] - 5.42) < 1e-6]
+check("38b while the low eaves still drops past the plate as real eaves do",
+      _low and all(abs(p[1] - _hm["roof"]["eaves_tip_z_m"]) < 1e-6
+                   for p in _low),
+      str(sorted({round(p[1], 3) for p in _low})))
 
 print()
 for f in FAILED:

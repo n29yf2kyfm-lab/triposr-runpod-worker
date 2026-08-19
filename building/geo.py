@@ -407,12 +407,32 @@ def static_map(model, anchor, path, zoom=19, span=1, red_line_margin_m=6.0,
 JPEG_QUALITY = 78
 
 
-def _fetch_tiles(anchor, zooms, span, timeout):
-    """{"z/x/y": jpeg-bytes} around the anchor, plus what went missing."""
+def _fetch_tiles(anchor, zooms, span, timeout, max_seconds=120.0):
+    """{"z/x/y": jpeg-bytes} around the anchor, plus what went missing.
+
+    Bounded twice over, because this runs inside jobs: a span/zoom combo
+    that would embed thousands of tiles is refused up front (the page has
+    to load on a phone), and a blackholed network — every request waiting
+    out its full timeout — stops costing time at max_seconds instead of
+    tiles x timeout, which at the defaults was eighteen minutes of
+    silence in the middle of an export stage.
+    """
     import io
+    import time
     import requests
     from PIL import Image
 
+    zooms = sorted({int(z) for z in zooms})
+    if not zooms or zooms[0] < 3 or zooms[-1] > 22:
+        raise ValueError(f"zooms {zooms} — slippy-map zooms run 3-22")
+    span = int(span)
+    n_tiles = len(zooms) * (2 * span + 1) ** 2
+    if span < 0 or n_tiles > 300:
+        raise ValueError(
+            f"span={span} over {len(zooms)} zooms is {n_tiles} tiles — "
+            f"an embedded map has to load on a phone, so the cap is 300. "
+            f"Fewer zoom levels or a smaller span.")
+    deadline = time.monotonic() + max_seconds
     tiles, missing = {}, []
     for z in zooms:
         cx, cy = _tile_xy(anchor.lat, anchor.lon, z)
@@ -420,6 +440,9 @@ def _fetch_tiles(anchor, zooms, span, timeout):
         for i in range(2 * span + 1):
             for j in range(2 * span + 1):
                 x, y = x0 + i, y0 + j
+                if time.monotonic() > deadline:
+                    missing.append(f"{z}/{x}/{y} (time budget)")
+                    continue
                 try:
                     r = requests.get(IMAGERY_XYZ.format(z=z, x=x, y=y),
                                      timeout=timeout)
@@ -467,8 +490,17 @@ def interactive_map(model, anchor, path, zooms=(17, 18, 19), span=1,
         "anchor_source": anchor.source,
         "bearing_deg": anchor.bearing_deg,
     }
-    html = _VIEWER_HTML % {"title": payload["name"].replace("<", ""),
-                           "data": _json.dumps(payload)}
+    # THE NAME AND THE ANCHOR SOURCE ARE JOB INPUT, and this JSON lands
+    # inside an inline <script>. json.dumps escapes quotes but NOT '<',
+    # so a name containing '</script>' would end the script element right
+    # there — the HTML parser does not care that it is inside a string —
+    # truncating the viewer and executing whatever the name says next.
+    # < is the same character to JSON and nothing to the HTML parser.
+    data_js = (_json.dumps(payload).replace("<", "\\u003c")
+               .replace(">", "\\u003e").replace("&", "\\u0026"))
+    title = (payload["name"].replace("&", "&amp;").replace("<", "&lt;")
+             .replace(">", "&gt;"))
+    html = _VIEWER_HTML % {"title": title, "data": data_js}
     with open(path, "w") as fh:
         fh.write(html)
     size = os.path.getsize(path)
@@ -479,8 +511,12 @@ def interactive_map(model, anchor, path, zooms=(17, 18, 19), span=1,
         "zooms": sorted(zooms),
         "bytes": size,
         "offline": True,
-        "note": ("some imagery tiles are missing and will show as dark "
-                 "squares" if missing else ""),
+        # Accurate to what the viewer actually draws: a tile missing at
+        # one zoom is filled, blurred, from a shipped lower zoom; only an
+        # area with no shipped ancestor at all renders dark.
+        "note": ("some imagery tiles are missing — the viewer fills them "
+                 "from lower-zoom imagery (blurrier), or dark where no "
+                 "coarser tile shipped" if missing else ""),
     }
 
 
@@ -556,11 +592,16 @@ function unproj(px, py, z) {
 }
 let zoom = D.zoom, centre = D.centre.slice();
 const ZMIN = D.zooms[0] - 0.6, ZMAX = D.zooms[D.zooms.length - 1] + 2.2;
-// Metres per SCREEN pixel — the number the scale bar and the tape both
-// need, and the one a slippy map usually refuses to tell you.
+// Metres per CSS pixel — the number the scale bar and the tape both
+// need, and the one a slippy map usually refuses to tell you. In this
+// viewer one world pixel IS one CSS pixel (toScreen scales world px by
+// dpr onto a canvas whose backing store is dpr device px per CSS px),
+// so there is NO dpr division here: dividing by dpr made the scale bar
+// twice as long as its label on every retina phone — the one control a
+// site measurement gets taken against.
 function mpp() {
   return 156543.03392 * Math.cos(centre[1] * Math.PI / 180)
-         / Math.pow(2, zoom) / dpr();
+         / Math.pow(2, zoom);
 }
 function dpr() { return Math.min(2, window.devicePixelRatio || 1); }
 
@@ -695,25 +736,39 @@ function scaleBar() {
 }
 
 // --- input ------------------------------------------------------------
+// One drag, ONE pointer. During a pinch both fingers fire pointer
+// events; a drag state without a pointerId let finger B overwrite
+// finger A's position and every alternate move panned the map by the
+// distance BETWEEN the fingers — a ~40 m lurch per event at zoom 19.
+// Pan therefore only follows the pointer that started it, and only
+// while it is the sole pointer down.
 let drag = null;
+const active = new Set();
 cv.addEventListener('pointerdown', (e) => {
   cv.setPointerCapture(e.pointerId);
-  drag = {x: e.clientX, y: e.clientY, moved: 0};
-  cv.classList.add('drag');
+  active.add(e.pointerId);
+  if (active.size === 1) {
+    drag = {id: e.pointerId, x: e.clientX, y: e.clientY, moved: 0};
+    cv.classList.add('drag');
+  } else {
+    drag = null;                       // second finger: pinch, not pan
+    cv.classList.remove('drag');
+  }
 });
 cv.addEventListener('pointermove', (e) => {
-  if (!drag) return;
-  const s = dpr();
+  if (!drag || e.pointerId !== drag.id || active.size > 1) return;
   drag.moved += Math.abs(e.clientX - drag.x) + Math.abs(e.clientY - drag.y);
   const c = proj(centre[0], centre[1], zoom);
-  centre = unproj(c[0] - (e.clientX - drag.x) * s / s,
-                  c[1] - (e.clientY - drag.y) * s / s, zoom);
+  centre = unproj(c[0] - (e.clientX - drag.x),
+                  c[1] - (e.clientY - drag.y), zoom);
   drag.x = e.clientX; drag.y = e.clientY;
   draw();
 });
-cv.addEventListener('pointerup', (e) => {
-  cv.classList.remove('drag');
-  const wasTap = drag && drag.moved < 6;
+function endPointer(e) {
+  active.delete(e.pointerId);
+  if (!active.size) cv.classList.remove('drag');
+  if (!drag || e.pointerId !== drag.id) return;
+  const wasTap = drag.moved < 6;
   drag = null;
   if (wasTap && measuring) {
     const s = dpr();
@@ -721,7 +776,9 @@ cv.addEventListener('pointerup', (e) => {
     pts.push(toLonLat(e.clientX * s, e.clientY * s));
     draw();
   }
-});
+}
+cv.addEventListener('pointerup', endPointer);
+cv.addEventListener('pointercancel', endPointer);
 cv.addEventListener('wheel', (e) => {
   e.preventDefault();
   zoomAt(e.clientX, e.clientY, -e.deltaY / 450);

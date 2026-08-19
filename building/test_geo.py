@@ -348,9 +348,16 @@ class TestInteractiveMapIsActuallyOffline(unittest.TestCase):
         srcs = re.findall(r'src\s*=\s*["\']([^"\']+)', body)
         for s in srcs:
             self.assertTrue(s.startswith("data:"), f"external src: {s}")
-        # No script/style/font pulled from anywhere either.
+        # No script/style/font pulled from anywhere either — and not
+        # via <link href> or css url() fetches, the two channels the
+        # first version of this test forgot to close.
         self.assertNotIn("<script src", body)
         self.assertNotIn("@import", body)
+        self.assertNotIn("<link", body)
+        import re as _re
+        for u in _re.findall(r"url\(\s*[\"\']?([^)\"\']+)", body):
+            self.assertFalse(u.startswith(("http", "//")),
+                             f"css fetch: {u}")
         # The imagery host may appear ONLY as attribution text, never as
         # a URL the page would fetch.
         self.assertNotIn("https://server.arcgisonline.com", body)
@@ -378,7 +385,10 @@ class TestInteractiveMapIsActuallyOffline(unittest.TestCase):
         (path, info), _, _ = self._build(missing=(gone,))
         self.assertIn(gone, info["missing"])
         self.assertLess(info["tiles"], info["tiles_expected"])
-        self.assertIn("dark squares", info["note"])
+        # The note must describe what the viewer actually draws: missing
+        # tiles are filled, blurred, from a shipped lower zoom — "dark
+        # squares" was only true before the parent-tile fallback existed.
+        self.assertIn("lower-zoom", info["note"])
 
     def test_a_map_with_no_imagery_at_all_is_refused(self):
         """A blank page is worse than an error: it looks like a map that
@@ -400,6 +410,44 @@ class TestInteractiveMapIsActuallyOffline(unittest.TestCase):
         the caveat about its own position is the dangerous kind."""
         (path, _), _, anchor = self._build()
         self.assertIn(anchor.source, self._read(path))
+
+    def test_a_hostile_name_cannot_break_out_of_the_script_block(self):
+        """model['name'] is job input and lands inside an inline
+        <script>. json.dumps does not escape '</script>', and the HTML
+        parser ends the element at the first one it sees regardless of
+        JS string context — truncating the viewer and running whatever
+        the name says next. The page must contain no literal '</script>'
+        except the genuine closer, and no un-escaped '<' from the data."""
+        model = _house()
+        model["name"] = "Plot 7</script><script>alert(1)</script>"
+        anchor = geo.Anchor(*BHAM, source="x</script><b>y")
+        blob = self._tile_bytes()
+        real = geo._fetch_tiles
+        geo._fetch_tiles = lambda a, z, sp, t, **k: (
+            {f"{zz}/1/1": blob for zz in z}, [])
+        try:
+            path = os.path.join(tempfile.mkdtemp(), "m.html")
+            geo.interactive_map(model, anchor, path, zooms=(19,), span=0)
+        finally:
+            geo._fetch_tiles = real
+        body = self._read(path)
+        # Exactly the legitimate closers — none contributed by the data.
+        self.assertEqual(body.lower().count("</script>"),
+                         body.lower().count("<script>")
+                         + body.lower().count("<script "))
+        self.assertIn("\\u003c/script", body)   # the payload, escaped
+        self.assertNotIn("<script>alert", body)
+
+    def test_a_tile_order_too_big_for_a_phone_is_refused(self):
+        model = _house()
+        anchor = geo.Anchor(*BHAM)
+        with self.assertRaises(ValueError) as cm:
+            geo.interactive_map(model, anchor, "/tmp/never.html",
+                                zooms=(15, 16, 17, 18, 19), span=4)
+        self.assertIn("cap is 300", str(cm.exception))
+        with self.assertRaises(ValueError):
+            geo.interactive_map(model, anchor, "/tmp/never.html",
+                                zooms=(2,), span=1)
 
 
 if __name__ == "__main__":

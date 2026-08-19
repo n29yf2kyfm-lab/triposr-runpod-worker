@@ -688,7 +688,12 @@ def roof_over(x0, y0, x1, y1, pitch_deg=DEFAULT_PITCH_DEG, kind="hipped",
         "span_m": round(span, 3),
         "range_list": ranges,
         "ridge": [[round(v, 3) for v in p] for p in ridge],
-        "ridge_m": round(ridge_len, 2),
+        # A MONOPITCH HAS NO RIDGE. Its top edge is reported ONLY as
+        # high_edge_m below — reporting it here too meant every billing
+        # consumer sold ridge tiles for an edge that may need flashing,
+        # and any consumer reading both counted the same edge twice. The
+        # `ridge`/range_list coordinates stay: the mesh needs the line.
+        "ridge_m": 0.0 if mono else round(ridge_len, 2),
         "hip_m": round(sum(hips), 2),
         "valley_m": round(sum(valleys), 2),
         # A GABLE HAS EAVES ON TWO SIDES ONLY. The other two carry verge —
@@ -724,11 +729,15 @@ def roof_over(x0, y0, x1, y1, pitch_deg=DEFAULT_PITCH_DEG, kind="hipped",
             0.0 if kind == "hipped"
             else n_ranges * struct_span * rise if kind == "gabled"
             else struct_span * rise, 2),
-        # A monopitch also has a RECTANGLE standing at its top edge, run
-        # wide and rise tall. Whether that is brickwork, a party wall or
-        # the flank of the existing house depends on what it abuts, so it
-        # is reported apart from the raking panels rather than added in.
-        "upstand_area_m2": round(run * rise, 2) if mono else 0.0,
+        # A monopitch also has a RECTANGLE standing at its top edge, WALL
+        # length wide and rise tall — run includes the verge overhang at
+        # both raking ends, and masonry does not extend into a verge, so
+        # the overhangs come off, exactly as struct_span strips them from
+        # the raking triangles. Whether the panel is brickwork, a party
+        # wall or the flank of the existing house depends on what it
+        # abuts, so it is reported apart from the raking panels.
+        "upstand_area_m2": round(max(0.0, run - 2.0 * overhang) * rise, 2)
+                           if mono else 0.0,
         "eaves_tip_z_m": round(eaves_tip_z, 3),
         "plan_area_m2": round(plan_area, 2),
         "sloped_area_m2": round(sloped_area, 2),
@@ -881,6 +890,7 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
     for edge in (party_edges or []):
         axis, coord = edge[0], edge[1]
         span = edge[2] if len(edge) > 2 else None
+        marked = 0
         for wall in walls:
             (ax, ay), (bx, by) = wall.start, wall.end
             on = (abs(ax - coord) < 1e-6 and abs(bx - coord) < 1e-6) \
@@ -910,6 +920,26 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
                         f"it.")
             if on and wall.external:
                 wall.party = True
+                marked += 1
+        if not marked:
+            # A party edge that touched NOTHING is a mistake in the job —
+            # a span measured from the wrong end, an axis swapped, a
+            # coordinate off by the wall thickness. Marking no wall and
+            # saying nothing left the flank fully bricked, windowed and
+            # heat-lossed as if the neighbour did not exist.
+            party_notes.append(
+                f"Party wall stated on {axis}={coord}"
+                + (f" over {min(span)}-{max(span)}" if span else "")
+                + " matched no external wall, so nothing was marked as "
+                  "shared. Check the coordinate against the plan (walls "
+                  "run "
+                + ", ".join(sorted({f"{w.start[0] if axis == 'x' else w.start[1]:g}"
+                                    for w in walls
+                                    if (abs(w.start[0] - w.end[0]) < 1e-6
+                                        if axis == "x" else
+                                        abs(w.start[1] - w.end[1]) < 1e-6)}))
+                + f" on {axis}) — the take-off, the openings and the heat "
+                  f"loss all currently treat that side as open air.")
 
     if wall_openings:
         for wall in walls:
@@ -1110,9 +1140,16 @@ def build(rooms, schedule=None, wall_openings=True, storeys=1,
         # the take-off and in the IFC. Only cap what nothing is built on.
         covers = _covers_above(r, r.base_level + r.storeys)
         cap_z = per_storey * (r.base_level + r.storeys - 1) + r.height
-        for (x0, y0, x1, y1) in _uncovered(r, covers):
-            caps.append({"x": [round(x0, 3), round(x1, 3)],
-                         "y": [round(y0, 3), round(y1, 3)],
+        # cx0..cy1, NOT x0..y1: those four names hold the whole-plan
+        # bounds that extent_m is built from below, and rebinding them
+        # here left extent_m equal to the LAST cap rectangle — on every
+        # two-storey house with a single-storey extension, the exact case
+        # this loop exists for. extent_m feeds georeferencing, the STL
+        # base plate and the pipe-run take-off, so that was a 10 m error
+        # travelling in silence.
+        for (cx0, cy0, cx1, cy1) in _uncovered(r, covers):
+            caps.append({"x": [round(cx0, 3), round(cx1, 3)],
+                         "y": [round(cy0, 3), round(cy1, 3)],
                          "z_m": round(cap_z, 3), "kind": "flat"})
 
     top = roof_model["ridge_z_m"] if roof_model else eaves_z
@@ -1369,6 +1406,19 @@ def _roof_faces(roof, verts, faces, groups):
     ez = roof.get("eaves_tip_z_m", roof["eaves_z_m"])
     rz = roof["ridge_z_m"]
     along_x = roof["along_x"]
+    # A MONOPITCH'S HIGH EDGE HAS NO OVERHANG, so its corners sit at the
+    # wall head, not the dropped eaves tip. Leaving them at the tip hung
+    # the vertical closing face 0.3*tan(pitch) below the plate — inside
+    # the party wall of a semi, or into the host wall of a lean-to.
+    mono = roof.get("kind") == "monopitch"
+    ridge_line = roof["ridge"][0]
+
+    def _ez(x, y):
+        if mono and abs((x if not along_x else y)
+                        - (ridge_line[0] if not along_x else ridge_line[1])
+                        ) < 1e-6:
+            return roof["eaves_z_m"]
+        return ez
 
     def V(x, y, z):
         verts.append((x, z, -y))          # OBJ Y-up, plan Y into -Z
@@ -1381,8 +1431,8 @@ def _roof_faces(roof, verts, faces, groups):
         by0, by1 = band["band_m"]["y"]
         (r0x, r0y), (r1x, r1y) = band["ridge"]
 
-        a, b = V(bx0, by0, ez), V(bx1, by0, ez)
-        c, d = V(bx1, by1, ez), V(bx0, by1, ez)
+        a, b = V(bx0, by0, _ez(bx0, by0)), V(bx1, by0, _ez(bx1, by0))
+        c, d = V(bx1, by1, _ez(bx1, by1)), V(bx0, by1, _ez(bx0, by1))
         r0, r1 = V(r0x, r0y, rz), V(r1x, r1y, rz)
 
         if along_x:
@@ -2309,30 +2359,40 @@ def _glb_mesh(model):
 
     roof = model.get("roof")
     if roof:
-        ez = roof.get("eaves_tip_z_m", roof["eaves_z_m"])
+        tip = roof.get("eaves_tip_z_m", roof["eaves_z_m"])
         rz = roof["ridge_z_m"]
+        # Same rule as _roof_faces: a monopitch's high edge has no
+        # overhang, so corners on the top-edge line sit at the wall head.
+        mono_g = roof.get("kind") == "monopitch"
+        rl = roof["ridge"][0]
+
+        def _gz(x, y):
+            if mono_g and abs((x if not roof["along_x"] else y)
+                              - (rl[0] if not roof["along_x"] else rl[1])
+                              ) < 1e-6:
+                return roof["eaves_z_m"]
+            return tip
+
         for band in roof.get("range_list") or []:
             bx = band["band_m"]["x"]
             by = band["band_m"]["y"]
             (rax, ray), (rbx, rby) = band["ridge"]
+            corner = {}
+            for px in bx:
+                for py in by:
+                    corner[(px, py)] = (px, py, _gz(px, py))
+            A, B = corner[(bx[0], by[0])], corner[(bx[1], by[0])]
+            C, D = corner[(bx[1], by[1])], corner[(bx[0], by[1])]
             if roof["along_x"]:
-                emit("tile", [(bx[0], by[0], ez), (bx[1], by[0], ez),
-                              (rbx, rby, rz), (rax, ray, rz)])
-                emit("tile", [(bx[1], by[1], ez), (bx[0], by[1], ez),
-                              (rax, ray, rz), (rbx, rby, rz)])
-                emit("tile", [(bx[0], by[0], ez), (rax, ray, rz),
-                              (rax, ray, rz), (bx[0], by[1], ez)])
-                emit("tile", [(bx[1], by[1], ez), (rbx, rby, rz),
-                              (rbx, rby, rz), (bx[1], by[0], ez)])
+                emit("tile", [A, B, (rbx, rby, rz), (rax, ray, rz)])
+                emit("tile", [C, D, (rax, ray, rz), (rbx, rby, rz)])
+                emit("tile", [A, (rax, ray, rz), (rax, ray, rz), D])
+                emit("tile", [C, (rbx, rby, rz), (rbx, rby, rz), B])
             else:
-                emit("tile", [(bx[0], by[0], ez), (bx[0], by[1], ez),
-                              (rbx, rby, rz), (rax, ray, rz)])
-                emit("tile", [(bx[1], by[1], ez), (bx[1], by[0], ez),
-                              (rax, ray, rz), (rbx, rby, rz)])
-                emit("tile", [(bx[0], by[0], ez), (rax, ray, rz),
-                              (rax, ray, rz), (bx[1], by[0], ez)])
-                emit("tile", [(bx[1], by[1], ez), (rbx, rby, rz),
-                              (rbx, rby, rz), (bx[0], by[1], ez)])
+                emit("tile", [A, D, (rbx, rby, rz), (rax, ray, rz)])
+                emit("tile", [C, B, (rax, ray, rz), (rbx, rby, rz)])
+                emit("tile", [A, (rax, ray, rz), (rax, ray, rz), B])
+                emit("tile", [C, (rbx, rby, rz), (rbx, rby, rz), D])
     return out
 
 

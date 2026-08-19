@@ -495,7 +495,14 @@ def roof_from_solar(payload, span_m):
     aspects = [p["aspect_deg"] for p in pitched
                if p["aspect_deg"] is not None]
     form = "hipped"
-    if len(pitched) <= 2:
+    if len(pitched) == 1:
+        # ONE pitched plane is a monopitch, and it was being called a
+        # gable — which invents a second slope, HALVES the rise, and put
+        # the modelled ridge 1.4m below the LIDAR's on the first real
+        # single-slope house this ran against. The whole span climbs.
+        form = "monopitch"
+        rise = span_m * math.tan(math.radians(pitch))
+    elif len(pitched) <= 2:
         form = "gabled"
         if len(aspects) == 2:
             spread = abs((aspects[0] - aspects[1] + 180) % 360 - 180)
@@ -1113,7 +1120,10 @@ def run(spec, prog, output_dir):
     height_source = f"assumed {ASSUMED_STOREY_HEIGHT_M}m floor to floor"
     if heights and roof_info:
         span = min(width, depth)
-        rise = (span / 2.0) * math.tan(
+        # A monopitch climbs the WHOLE span — halving its rise here would
+        # push the derived eaves up and oversize every storey below it.
+        rise = (span if roof_info.get("form") == "monopitch"
+                else span / 2.0) * math.tan(
             math.radians(roof_info["pitch_deg"]))
         eaves_agl = heights["ridge_agl_m"] - rise
         candidate = eaves_agl / max(storeys, 1)
@@ -1340,6 +1350,34 @@ def run(spec, prog, output_dir):
         roof_spec = {"pitch_deg": roof_info["pitch_deg"],
                      "kind": roof_info.get("form") or "hipped",
                      "ridge_along": ridge_local}
+        if roof_spec["kind"] == "monopitch":
+            # WHICH END IS HIGH comes from the measured aspect: the roof
+            # faces downslope, so the high side is the end the aspect
+            # points away from. Both candidate high sides predict a
+            # compass bearing for the downslope; the one nearer the
+            # measured aspect wins. The local frame's +y bearing is the
+            # same figure the site anchor uses (front + 180), so the two
+            # cannot drift apart.
+            aspect = roof_info.get("aspect_deg")
+            if ridge_local is None or aspect is None:
+                # roof_over refuses a monopitch without an axis, and an
+                # unmeasured aspect would make high_side a coin toss —
+                # neither is worth failing the job over. A gable is the
+                # honest fallback, and the provenance says so.
+                roof_spec["kind"] = "gabled"
+                roof_info["form_source"] += (
+                    " — single slope DOWNGRADED to gabled: "
+                    + ("ridge axis unresolved"
+                       if ridge_local is None else "aspect unmeasured"))
+            else:
+                y_b = (bearing_of(angle) + 180.0) % 360.0
+                x_b = (y_b + 90.0) % 360.0
+                down = {("y", "min"): x_b, ("y", "max"): (x_b + 180) % 360,
+                        ("x", "min"): y_b, ("x", "max"): (y_b + 180) % 360}
+                roof_spec["high_side"] = min(
+                    ("min", "max"),
+                    key=lambda hs: abs((down[(ridge_local, hs)] - aspect
+                                        + 180) % 360 - 180))
 
     model = model3d.build(rooms, storeys=storeys,
                           storey_height=storey_h,
@@ -1520,6 +1558,13 @@ def run(spec, prog, output_dir):
             artifacts.append((pj, f"site/{scan}.site.geolibre.json", None))
         except ImportError:
             pass                     # geolibre is optional; GeoJSON is not
+        except Exception as e:
+            # An optional extra must not take the offline map below down
+            # with it: catching only ImportError here let a KeyError from
+            # write_project fly to the outer handler and skip everything
+            # after it — the exact artifact that works with no signal.
+            print(f"geolibre project skipped: {type(e).__name__}: {e}",
+                  file=sys.stderr)
 
         # THE MAP THAT WORKS DOWN A HOLE. GeoJSON needs software to read
         # it and the geolibre project needs a website; neither is any use
@@ -1527,10 +1572,15 @@ def run(spec, prog, output_dir):
         # with the imagery baked in — pan, zoom, layers, scale bar, tape
         # measure — that opens on a phone with the network off.
         try:
+            prog.note("offline map: fetching imagery tiles")
             imap = os.path.join(output_dir, f"{scan}.site.html")
+            # timeout=8 per tile: a job stage is not a browser. On a
+            # blackholed network the default 40 s per tile stalled the
+            # export ~18 minutes; 8 s x 27 tiles is bounded at ~3.6 min
+            # worst case, and _fetch_tiles' own budget cuts that shorter.
             _, minfo = geomod.interactive_map(
                 model, anchor, imap, zooms=(17, 18, 19), span=1,
-                red_line_margin_m=6.0, rooms=True)
+                red_line_margin_m=6.0, rooms=True, timeout=8)
             artifacts.append((imap, f"site/{scan}.site.html", None))
             prog.note(f"offline map: {minfo['tiles']}/"
                       f"{minfo['tiles_expected']} tiles, "

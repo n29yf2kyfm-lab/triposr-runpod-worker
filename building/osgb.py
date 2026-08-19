@@ -204,9 +204,13 @@ def easting_northing_to_latlon(easting, northing, tol_m=1e-4, max_iter=12):
     """
     # The National Grid covers 0-700 km east, 0-1300 km north. Outside
     # that the transverse Mercator still SOLVES; the answer just is not a
-    # place in Great Britain.
-    if not (-1000.0 <= easting <= 800000.0
-            and -1000.0 <= northing <= 1400000.0):
+    # place in Great Britain. The envelope here is the one the error
+    # message states, plus a kilometre of slack for rounding at the
+    # edges — an earlier 100 km band quietly accepted E 750000, a point
+    # in the open North Sea, from exactly the kind of transposed digit
+    # this check exists to catch.
+    if not (-1000.0 <= easting <= 701000.0
+            and -1000.0 <= northing <= 1301000.0):
         raise ValueError(
             f"E {easting:.1f} N {northing:.1f} is not on the National Grid "
             f"of Great Britain (0-700000 east, 0-1300000 north)")

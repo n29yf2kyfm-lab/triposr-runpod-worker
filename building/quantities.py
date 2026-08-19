@@ -102,6 +102,17 @@ def _external(model):
     net = openings_a = perim = 0.0
     n_open = 0
     for w in model["walls"]:
+        # A PARTY WALL IS NOT FACING BRICKWORK. It exports external=True
+        # (it is an envelope plane), but nobody lays facing brick or
+        # cavity ties against the neighbour's house — it is blockwork,
+        # measured by _party_area and billed as its own line. Counting it
+        # here charged every semi ~3,000 phantom facing bricks on the
+        # flank, while the roof code above the same wall was carefully
+        # zeroing its upstand for exactly that reason.
+        if w.get("party"):
+            if 0 in _levels_of(w, storeys):
+                perim += float(w["length_m"])     # it still needs DPC
+            continue
         # A WALL CAN BE INTERNAL LOW DOWN AND BRICKWORK HIGHER UP. Over a
         # single-storey rear extension the first-floor wall behind it
         # faces open sky, and the plan probe cannot see that: it finds a
@@ -138,58 +149,131 @@ def _external(model):
     return net, openings_a, n_open, perim
 
 
-def _high_edge_is_party(model):
-    """Does a party wall stand under a monopitch's top edge?
+def _party_area(model):
+    """Storey-height party wall area, for the party blockwork line."""
+    storeys = int(model.get("storeys") or 1)
+    return sum(float(w["length_m"]) * float(w["height_m"])
+               * len(_levels_of(w, storeys))
+               for w in model["walls"] if w.get("party"))
 
-    If it does, the upstand there is a party wall carried up — blockwork,
-    no facing leaf, no ties to the outside — and billing it as external
-    brickwork puts a second house's worth of brick on the order.
+
+def _party_overlap(model, axis, line, lo, hi):
+    """Metres of party wall lying on the line axis=line between lo..hi.
+
+    Fractional on purpose: a neighbour half the depth of the plot shares
+    half the flank, and the un-shared half is real facing brickwork. The
+    binary version of this check zeroed the WHOLE monopitch upstand the
+    moment any party wall touched its line.
     """
-    rf = model.get("roof") or {}
-    ridge = rf.get("ridge") or []
-    if rf.get("kind") != "monopitch" or len(ridge) != 2:
-        return False
-    axis = 0 if not rf.get("along_x") else 1     # the coordinate held fixed
-    line = ridge[0][axis]
+    total = 0.0
+    other = 1 - axis
     for w in model["walls"]:
         if not w.get("party"):
             continue
-        if (abs(w["start"][axis] - line) < 0.35
+        if not (abs(w["start"][axis] - line) < 0.35
                 and abs(w["end"][axis] - line) < 0.35):
-            return True
-    return False
+            continue
+        w0 = min(w["start"][other], w["end"][other])
+        w1 = max(w["start"][other], w["end"][other])
+        total += max(0.0, min(hi, w1) - max(lo, w0))
+    return total
+
+
+def _roof_masonry(model):
+    """(brick_m2, party_m2) of masonry between the wall plate and the
+    roof planes — the gable triangles and the monopitch upstand.
+
+    Which pile each panel lands in depends on what stands under it: a
+    gable end over a party wall (every mid-terrace, and a semi ridged to
+    the party line) is the party wall carried up, not facing brick.
+    """
+    rf = model.get("roof") or {}
+    kind = rf.get("kind")
+    above = float(rf.get("gable_area_m2") or 0.0)
+    upstand = float(rf.get("upstand_area_m2") or 0.0)
+    if not (above or upstand):
+        return 0.0, 0.0
+    fp = rf.get("footprint_m") or {}
+    over = float(rf.get("overhang_m") or 0.0)
+    along_x = rf.get("along_x")
+    brick, party = 0.0, 0.0
+
+    # The raking panels stand on the two walls at the ends of the ridge
+    # axis. The wall-plate lines sit one overhang inside the roof
+    # footprint (roof_over expanded it); a monopitch's high side was not
+    # expanded, but its raking ends were, so the same inset holds.
+    end_axis = 0 if along_x else 1               # x for ridge-along-x
+    lo_l, hi_l = fp.get("xy"[1 - end_axis], [0.0, 0.0])
+    lines = [fp["xy"[end_axis]][0] + over, fp["xy"[end_axis]][1] - over]
+    per_end = above / 2.0
+    for line in lines:
+        shared = _party_overlap(model, end_axis, line,
+                                lo_l + over, hi_l - over)
+        if shared > 0.0:
+            party += per_end                     # the wall carried up
+        else:
+            brick += per_end
+
+    if kind == "monopitch" and upstand:
+        # The upstand runs along the HIGH edge — the ridge line's fixed
+        # coordinate — and splits by how much of it the neighbour shares.
+        ridge = rf.get("ridge") or [[0.0, 0.0], [0.0, 0.0]]
+        axis = 1 if along_x else 0
+        line = ridge[0][axis]
+        # The ridge line spans the COVERING, verge overhang included; the
+        # upstand is masonry, which stops at the wall ends — and so does
+        # the neighbour. Windowing on the covering length left ~6% of a
+        # fully-shared party upstand billed as facing brick.
+        w0 = min(ridge[0][1 - axis], ridge[1][1 - axis]) + over
+        w1 = max(ridge[0][1 - axis], ridge[1][1 - axis]) - over
+        length = max(1e-9, w1 - w0)
+        frac = min(1.0, _party_overlap(model, axis, line, w0, w1) / length)
+        party += upstand * frac
+        brick += upstand * (1.0 - frac)
+    return brick, party
 
 
 def masonry(model):
     net, _, n_open, perim = _external(model)
     # THE GABLE IS PART OF THE WALL. _external measures storey by storey
     # and stops at the wall plate; the panel between the plate and the
-    # roof planes is masonry too, and it was never in the bill.
+    # roof planes is masonry too, and it was never in the bill. It splits
+    # by what stands under it: facing brickwork on an external wall, the
+    # party wall carried up where the neighbour is.
     rf = model.get("roof") or {}
-    above = float(rf.get("gable_area_m2") or 0.0)
-    upstand = float(rf.get("upstand_area_m2") or 0.0)
-    party_top = _high_edge_is_party(model)
-    if party_top:
-        upstand = 0.0
-    net += above + upstand
+    brick_above, party_above = _roof_masonry(model)
+    net += brick_above
+    # THE PARTY WALL IS ITS OWN LINE. Blockwork both leaves, no facing
+    # brick, no ties to the outside — priced and ordered differently from
+    # the envelope, which is why hiding it inside the brick number was
+    # wrong in both directions at once.
+    party_m2 = _party_area(model) + party_above
+    party_blocks = party_m2 * BLOCKS_PER_M2 * 2.0
     bricks = net * BRICKS_PER_M2
     blocks = net * BLOCKS_PER_M2
     mortar = (bricks / 1000.0) * MORTAR_M3_PER_1000_BRICKS \
-        + net * MORTAR_M3_PER_M2_BLOCK
+        + (net + party_m2 * 2.0) * MORTAR_M3_PER_M2_BLOCK
     cement_bags = mortar * CEMENT_KG_PER_M3 / 25.0
     sand_t = mortar * SAND_KG_PER_M3 / 1000.0
     ties = net * WALL_TIES_PER_M2 * TIE_EDGE_UPLIFT
-    return [
+    out = [
         _line("Facing bricks", bricks, "no",
               f"{BRICKS_PER_M2:.0f}/m2 stretcher bond x {net:.1f} m2 net "
               f"external wall"
-              + (f", including {above + upstand:.1f} m2 above the wall "
+              + (f", including {brick_above:.1f} m2 above the wall "
                  f"plate under the {rf.get('kind')} roof"
-                 + (" (the upstand at the top edge is a party wall, so it "
-                    "carries no facing leaf)" if party_top else "")
-                 if above + upstand or party_top else ""), "bricks"),
+                 if brick_above else ""), "bricks"),
         _line("100mm blocks (inner leaf)", blocks, "no",
               f"{BLOCKS_PER_M2}/m2 x {net:.1f} m2", "blocks"),
+    ]
+    if party_m2:
+        out.append(_line(
+            "100mm blocks (party wall, both leaves)", party_blocks, "no",
+            f"{party_m2:.1f} m2 party wall x 2 leaves x {BLOCKS_PER_M2}/m2"
+            + (f", including {party_above:.1f} m2 carried up past the "
+               f"wall plate" if party_above else "")
+            + " — no facing leaf, no external cavity ties", "blocks"))
+    out += [
         _line("Mortar", mortar, "m3",
               f"{MORTAR_M3_PER_1000_BRICKS} m3/1000 bricks + "
               f"{MORTAR_M3_PER_M2_BLOCK} m3/m2 blockwork"),
@@ -201,9 +285,11 @@ def masonry(model):
               f"{WALL_TIES_PER_M2}/m2 x {net:.1f} m2 x "
               f"{TIE_EDGE_UPLIFT} edge uplift"),
         _line("DPC 100mm roll", perim, "m",
-              f"ground-floor external perimeter {perim:.1f} m"),
+              f"ground-floor external perimeter {perim:.1f} m, party "
+              f"wall included — it stands on a footing too"),
         _line("Lintels", n_open, "no", "one per external opening"),
     ]
+    return out
 
 
 def roof(model, covering="concrete_interlocking"):
@@ -229,6 +315,17 @@ def roof(model, covering="concrete_interlocking"):
               f"{area:.1f} m2 x {MEMBRANE_LAP} laps"),
         _line("Ridge tiles", ridge / RIDGE_UNIT_M if ridge else 0.0, "no",
               f"{ridge:.1f} m ridge / {RIDGE_UNIT_M} m unit", "tiles"),
+        # A MONOPITCH'S TOP EDGE IS NOT A RIDGE. What it buys depends on
+        # what it meets — ridge tiles where it meets the other half of a
+        # pair, cover flashing and a tray where it abuts a wall — and
+        # converting it silently to ridge tiles ordered ~25 units a
+        # lean-to cannot fit anywhere. Billed in metres; the survey of
+        # what the edge abuts decides the product.
+        _line("Monopitch top edge (ridge OR flashing)",
+              float(rf.get("high_edge_m") or 0.0), "m",
+              "ridge tiles if it meets the neighbouring slope, code 4 "
+              "lead flashing + cavity tray if it abuts a wall — decide "
+              "on site, not in this bill"),
         _line("Gutter + fittings", eaves, "m", f"eaves length {eaves:.1f} m"),
         _line("Dry verge / barge", verge, "m",
               f"raking verge {verge:.1f} m at {rf.get('pitch_deg')} deg "

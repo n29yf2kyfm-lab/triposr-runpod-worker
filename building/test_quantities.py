@@ -226,36 +226,110 @@ class TestTheWallAboveTheWallPlate(unittest.TestCase):
         self.assertAlmostEqual(rf["gable_area_m2"], 5.0 * rf["rise_m"],
                                places=1)
         # The rectangle standing at the top edge is reported apart from
-        # the raking panels, because what it is depends on what it abuts.
+        # the raking panels — and it is WALL length x rise, not covering
+        # length: masonry does not extend into the verge overhang, so the
+        # 0.3 m at each raking end comes off.
         self.assertAlmostEqual(rf["upstand_area_m2"],
-                               rf["high_edge_m"] * rf["rise_m"], delta=0.1)
+                               (rf["high_edge_m"] - 0.6) * rf["rise_m"],
+                               delta=0.1)
+        self.assertAlmostEqual(rf["upstand_area_m2"], 8.0 * rf["rise_m"],
+                               delta=0.1)
 
-    def test_a_party_wall_upstand_carries_no_facing_leaf(self):
-        """Half of a semi: the top edge sits on the party wall, so the
-        upstand there is blockwork, not a second house's brickwork."""
+    def test_a_party_wall_is_blockwork_start_to_ridge(self):
+        """Half of a semi: the flank the neighbour shares carries no
+        facing brick ANYWHERE — not on the storeys, not carried up past
+        the wall plate — and appears instead as its own two-leaf
+        blockwork line. All expectations are computed by hand from the
+        drawing, not from the implementation."""
+        import math
         rooms = [M.Room("Room", 0.0, 0.0, 5.12, 9.88, kind="room")]
         roof = {"pitch_deg": 29.3, "kind": "monopitch", "overhang": 0.3,
                 "ridge_along": "y", "high_side": "min", "max_span_m": 12.0}
         semi = M.build(rooms, storeys=2, storey_height=2.65, roof=roof,
                        party_edges=[["x", 0.0]])
-        detached = M.build(rooms, storeys=2, storey_height=2.65, roof=roof)
-        self.assertTrue(Q._high_edge_is_party(semi))
-        self.assertFalse(Q._high_edge_is_party(detached))
-        # Differencing the two brick counts would not isolate this: a
-        # party wall takes no windows, so the detached flank also loses
-        # opening area the semi never had. Check each model against its
-        # OWN measured wall area instead.
-        for m, with_upstand in ((semi, False), (detached, True)):
-            rf = m["roof"]
-            expect = Q._external(m)[0] + rf["gable_area_m2"]
-            if with_upstand:
-                expect += rf["upstand_area_m2"]
-            self.assertAlmostEqual(
-                self._bricks(m),
-                expect * Q.BRICKS_PER_M2 * (1 + Q.WASTE["bricks"]),
-                delta=1.0)
-        # ...and the upstand is a real quantity, not a rounding artefact.
-        self.assertGreater(semi["roof"]["upstand_area_m2"], 20.0)
+        det = M.build(rooms, storeys=2, storey_height=2.65, roof=roof)
+        rise = 5.12 * math.tan(math.radians(29.3))
+        wall_h = 2.4                    # the exported per-storey plane
+
+        lines = {L["item"]: L for L in Q.bill(semi)["groups"]["masonry"]}
+        # By hand: party m2 = flank 9.88 x 2.4 x 2 storeys, plus the
+        # 9.88 x rise upstand carried up under the high edge.
+        party_m2 = 9.88 * wall_h * 2 + 9.88 * rise
+        party = lines["100mm blocks (party wall, both leaves)"]
+        self.assertAlmostEqual(
+            party["quantity"],
+            party_m2 * 2 * Q.BLOCKS_PER_M2 * (1 + Q.WASTE["blocks"]),
+            delta=party_m2 * 0.02)
+        # The facing-brick line must contain NONE of that area. Compute
+        # the brick area by hand: front + back + far flank storey walls
+        # less their openings, plus the two raking triangles.
+        net_semi = Q._external(semi)[0]
+        raking = 5.12 * rise            # semi["roof"]["gable_area_m2"]
+        self.assertAlmostEqual(
+            lines["Facing bricks"]["quantity"],
+            (net_semi + raking) * Q.BRICKS_PER_M2 * (1 + Q.WASTE["bricks"]),
+            delta=5.0)
+        # And the same house detached carries MORE brick (the flank and
+        # the upstand return to the envelope) and no party line at all.
+        dlines = {L["item"]: L for L in Q.bill(det)["groups"]["masonry"]}
+        self.assertNotIn("100mm blocks (party wall, both leaves)", dlines)
+        self.assertGreater(dlines["Facing bricks"]["quantity"],
+                           lines["Facing bricks"]["quantity"] + 2000)
+
+    def test_a_gable_end_over_a_party_wall_is_not_facing_brick(self):
+        """A mid-terrace ridged parallel to the street: BOTH gable ends
+        stand on party walls, so the triangles are the party wall carried
+        up — 1,000 phantom bricks each if billed as envelope."""
+        rooms = [M.Room("Room", 0.0, 0.0, 4.5, 7.0, kind="room")]
+        roof = {"pitch_deg": 35.0, "kind": "gabled", "overhang": 0.3,
+                "ridge_along": "x", "max_span_m": 12.0}
+        mid = M.build(rooms, storeys=2, storey_height=2.6, roof=roof,
+                      party_edges=[["x", 0.0], ["x", 4.5]])
+        brick, party = Q._roof_masonry(mid)
+        self.assertEqual(brick, 0.0)
+        self.assertAlmostEqual(party, mid["roof"]["gable_area_m2"],
+                               places=6)
+        # An end-terrace shares ONE flank: one triangle each way.
+        end = M.build(rooms, storeys=2, storey_height=2.6, roof=roof,
+                      party_edges=[["x", 0.0]])
+        brick, party = Q._roof_masonry(end)
+        self.assertAlmostEqual(brick, end["roof"]["gable_area_m2"] / 2,
+                               places=6)
+        self.assertAlmostEqual(party, end["roof"]["gable_area_m2"] / 2,
+                               places=6)
+
+    def test_a_partial_neighbour_shares_a_partial_upstand(self):
+        """The neighbour's block stops 6 m down a 9.88 m flank: only that
+        fraction of the upstand is party — the rest is real facing brick
+        the binary version of this rule was deleting."""
+        rooms = [M.Room("Front", 0.0, 0.0, 5.12, 6.0, kind="room"),
+                 M.Room("Back", 0.0, 6.0, 5.12, 3.88, kind="room",
+                        storeys=2)]
+        roof = {"pitch_deg": 29.3, "kind": "monopitch", "overhang": 0.3,
+                "ridge_along": "y", "high_side": "min", "max_span_m": 12.0}
+        m = M.build(rooms, storeys=2, storey_height=2.65, roof=roof,
+                    party_edges=[["x", 0.0, [0.0, 6.0]]])
+        brick, party = Q._roof_masonry(m)
+        up = m["roof"]["upstand_area_m2"]
+        raking = m["roof"]["gable_area_m2"]
+        share = 6.0 / 9.88
+        self.assertAlmostEqual(party, up * share, delta=0.05)
+        self.assertAlmostEqual(brick, raking + up * (1 - share), delta=0.05)
+
+    def test_a_monopitch_top_edge_is_metres_not_ridge_tiles(self):
+        """ridge_m is zero for a monopitch, so no ridge tiles are
+        conjured; the edge appears in metres for the site to decide."""
+        rooms = [M.Room("Room", 0.0, 0.0, 5.0, 8.0, kind="room")]
+        m = M.build(rooms, storeys=2, storey_height=2.7,
+                    roof={"pitch_deg": 30.0, "kind": "monopitch",
+                          "overhang": 0.3, "ridge_along": "y",
+                          "high_side": "min", "max_span_m": 12.0})
+        r = {L["item"]: L for L in Q.bill(m)["groups"]["roof"]}
+        self.assertEqual(r["Ridge tiles"]["quantity"], 0.0)
+        edge = r["Monopitch top edge (ridge OR flashing)"]
+        self.assertAlmostEqual(edge["quantity"], 8.6, delta=0.1)
+        self.assertEqual(edge["unit"], "m")
+        self.assertIn("flashing", edge["basis"])
 
 
 class TestVergeIsOnTheOrder(unittest.TestCase):
