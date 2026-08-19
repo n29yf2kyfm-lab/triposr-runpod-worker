@@ -186,6 +186,137 @@ def measure():
     raise ValueError(f"cannot measure a {geom['type']}")
 
 
+# -- projects: the editable twin ---------------------------------------
+# In-process for now. A real deployment puts these in PostGIS with the
+# owner and permissions on them; the Project object is already the unit
+# that would be persisted, so that is a storage change, not a redesign.
+_projects = {}
+
+
+def _project(pid):
+    pj = _projects.get(pid)
+    if pj is None:
+        raise ValueError(f"no project {pid!r} — it may have expired")
+    return pj
+
+
+def _state(pj, include=("plan", "massing")):
+    from . import design as design_mod
+    bld = pj.current()
+    out = {"available": True, "project_id": pj.id,
+           "building": bld.as_dict(), "history": pj.history()}
+    if "plan" in include:
+        out["plan"] = design_mod.floor_plan(bld)
+    if "massing" in include:
+        out["massing"] = design_mod.massing(bld)
+    return out
+
+
+@app.post("/api/project")
+def create_project():
+    """Start a twin from a real selected building."""
+    from . import commands as cmd_mod
+    from . import model as model_mod
+    body = request.get_json(silent=True) or {}
+    lat, lon = body.get("lat"), body.get("lon")
+    if lat is None or lon is None:
+        raise ValueError("lat and lon are required")
+    sel = property_mod.select_building(float(lat), float(lon), _registry)
+    if not sel:
+        return _out(sel)
+    addr = _registry.reverse(float(lat), float(lon))
+    lidar = _registry.elevation(float(lat), float(lon), country="GB")
+    bld = model_mod.from_footprint(
+        sel.value,
+        lidar=(lidar.value if lidar else None),
+        address=(addr.value.get("label") if addr else None))
+    pj = cmd_mod.Project(bld)
+    _projects[pj.id] = pj
+    return jsonify(_state(pj))
+
+
+@app.get("/api/project/<pid>")
+def get_project(pid):
+    return jsonify(_state(_project(pid)))
+
+
+@app.post("/api/project/<pid>/command")
+def project_command(pid):
+    """Apply ONE validated edit. Refusals carry a reason, not a stack."""
+    from . import commands as cmd_mod
+    pj = _project(pid)
+    body = request.get_json(silent=True) or {}
+    try:
+        if body.get("text"):
+            cmd = cmd_mod.parse_instruction(body["text"], pj.current())
+        else:
+            kind = body.get("kind")
+            if not kind:
+                raise ValueError("send {kind, ...} or {text}")
+            cmd = cmd_mod.make(kind, **{k: v for k, v in body.items()
+                                        if k != "kind"})  # kind is positional
+        pj.apply(cmd)
+    except cmd_mod.CommandError as e:
+        return Response(json.dumps({"available": False,
+                                    "status": "REFUSED", "reason": str(e)}),
+                        status=422, mimetype="application/json")
+    return jsonify(dict(_state(pj), applied=cmd.as_dict()))
+
+
+@app.post("/api/project/<pid>/undo")
+def project_undo(pid):
+    from . import commands as cmd_mod
+    try:
+        _project(pid).undo()
+    except cmd_mod.CommandError as e:
+        return Response(json.dumps({"available": False, "status": "REFUSED",
+                                    "reason": str(e)}), status=422,
+                        mimetype="application/json")
+    return jsonify(_state(_project(pid)))
+
+
+@app.post("/api/project/<pid>/redo")
+def project_redo(pid):
+    from . import commands as cmd_mod
+    try:
+        _project(pid).redo()
+    except cmd_mod.CommandError as e:
+        return Response(json.dumps({"available": False, "status": "REFUSED",
+                                    "reason": str(e)}), status=422,
+                        mimetype="application/json")
+    return jsonify(_state(_project(pid)))
+
+
+@app.post("/api/project/<pid>/restore")
+def project_restore(pid):
+    from . import commands as cmd_mod
+    body = request.get_json(silent=True) or {}
+    try:
+        _project(pid).restore(int(body.get("version", 0)))
+    except (cmd_mod.CommandError, TypeError) as e:
+        return Response(json.dumps({"available": False, "status": "REFUSED",
+                                    "reason": str(e)}), status=422,
+                        mimetype="application/json")
+    return jsonify(_state(_project(pid)))
+
+
+@app.get("/api/project/<pid>/assess")
+def project_assess(pid):
+    """Regulations gate + bill of quantities, from the real engine."""
+    from . import design as design_mod
+    return jsonify(design_mod.assess(_project(pid).current()))
+
+
+@app.get("/api/project/<pid>/baseline")
+def project_baseline(pid):
+    """The building AS FOUND — the left-hand side of before/after."""
+    from . import design as design_mod
+    base = _project(pid).baseline()
+    return jsonify({"available": True, "building": base.as_dict(),
+                    "massing": design_mod.massing(base),
+                    "plan": design_mod.floor_plan(base)})
+
+
 # -- imagery -----------------------------------------------------------
 @app.get("/api/imagery")
 def imagery_sources():

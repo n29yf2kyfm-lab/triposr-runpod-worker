@@ -9,6 +9,7 @@
  */
 import { MapEngine, GeoJSONLayer, RasterLayer, TileLayer, scaleBar,
          bboxOf } from './engine.js';
+import { openTwin, initTwinUI } from './twin.js';
 
 const $ = (id) => document.getElementById(id);
 const map = new MapEngine($('map'), { centre: [-1.8476, 52.4856], zoom: 3 });
@@ -319,6 +320,13 @@ async function selectProperty(lon, lat) {
     html += `</div>`;
   }
 
+  if (b.available) {
+    html += `<div class="sect"><button id="openTwinBtn" style="width:100%;
+      background:var(--accent);color:#111;border:0;border-radius:9px;
+      padding:10px;font:600 13px inherit;cursor:pointer">
+      Open digital twin &amp; design</button></div>`;
+  }
+
   html += `<div class="sect"><h3>Parcel</h3>`;
   html += body.parcel.available ? kv('Available', 'yes') : na(body.parcel);
   html += `</div>`;
@@ -338,6 +346,8 @@ async function selectProperty(lon, lat) {
     `</div></details></div>`;
 
   el.innerHTML = html;
+  const btn = document.getElementById('openTwinBtn');
+  if (btn) btn.onclick = () => openTwin(body.query.lat, body.query.lon);
 }
 
 async function fetchElevation(lat, lon) {
@@ -376,6 +386,7 @@ map.on('move', () => {
 });
 
 buildImageryPicker();
+initTwinUI();
 map.emit('move', map.viewState());
 
 /* Expose for the test harness — assertions run against the real engine

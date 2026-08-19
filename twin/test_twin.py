@@ -568,6 +568,270 @@ class TestAPI(unittest.TestCase):
         self.assertIn("connect-src 'self'", csp)
 
 
+# ------------------------------------------------- model & commands
+class TestModel(unittest.TestCase):
+    def _feature(self, w=6.0, d=10.0, rot_deg=20.0, **props):
+        """A rectangle of known size, rotated, as a GeoJSON feature."""
+        f = geodesy.LocalFrame(52.4856, -1.8476)
+        a = math.radians(rot_deg)
+        ring = []
+        for x, y in [(0, 0), (w, 0), (w, d), (0, d), (0, 0)]:
+            ex = x * math.cos(a) - y * math.sin(a)
+            ny = x * math.sin(a) + y * math.cos(a)
+            ring.append(list(f.to_lonlat(ex, ny)))
+        return {"type": "Feature", "id": "way/1",
+                "geometry": {"type": "Polygon", "coordinates": [ring]},
+                "properties": dict({"osm_id": "way/1"}, **props)}
+
+    def test_the_fitted_rectangle_recovers_the_true_size_and_angle(self):
+        """An axis-aligned bbox on a rotated house is 25% too big; the
+        minimum-area rectangle must recover what is actually there."""
+        from twin import model
+        bld = model.from_footprint(self._feature(6.0, 10.0, 20.0))
+        blk = bld.blocks[0]
+        self.assertAlmostEqual(blk.width, 6.0, delta=0.05)
+        self.assertAlmostEqual(blk.depth, 10.0, delta=0.05)
+        self.assertAlmostEqual(blk.area(), 60.0, delta=0.6)
+
+    def test_the_local_frame_round_trips_through_lon_lat(self):
+        from twin import model
+        bld = model.from_footprint(self._feature())
+        for x, y in [(0, 0), (3, 7), (-2.5, 12.0)]:
+            lon, lat = bld.to_lonlat(x, y)
+            bx, by = bld.from_lonlat(lon, lat)
+            self.assertAlmostEqual(bx, x, delta=1e-3)
+            self.assertAlmostEqual(by, y, delta=1e-3)
+
+    def test_storeys_come_from_the_osm_tag_when_there_is_one(self):
+        from twin import model
+        bld = model.from_footprint(self._feature(levels="3"))
+        self.assertEqual(bld.blocks[0].storeys, 3)
+        self.assertEqual(bld.blocks[0].classification, "verified")
+
+    def test_storeys_are_derived_from_lidar_when_there_is_no_tag(self):
+        from twin import model
+        bld = model.from_footprint(self._feature(),
+                                   lidar={"height_above_ground_m": 5.4})
+        self.assertEqual(bld.blocks[0].storeys, 2)
+        self.assertEqual(bld.blocks[0].classification, "derived")
+        self.assertIn("LIDAR", bld.blocks[0].note)
+
+    def test_with_neither_tag_nor_lidar_the_guess_is_flagged_loudly(self):
+        """The one thing this must never do is default quietly to two."""
+        from twin import model
+        bld = model.from_footprint(self._feature())
+        self.assertEqual(bld.blocks[0].classification, "estimated")
+        self.assertIn("must be corrected", bld.blocks[0].note)
+        self.assertTrue(any("corrected" in n for n in bld.notes))
+
+    def test_a_non_rectangular_building_says_so(self):
+        from twin import model
+        f = geodesy.LocalFrame(52.4856, -1.8476)
+        # An L-plan: the fitted rectangle is much bigger than the truth.
+        pts = [(0, 0), (10, 0), (10, 4), (4, 4), (4, 12), (0, 12), (0, 0)]
+        ring = [list(f.to_lonlat(x, y)) for x, y in pts]
+        feat = {"type": "Feature", "id": "way/2", "properties": {},
+                "geometry": {"type": "Polygon", "coordinates": [ring]}}
+        bld = model.from_footprint(feat, lidar={"height_above_ground_m": 5.4})
+        self.assertTrue(any("not rectangular" in n for n in bld.notes),
+                        bld.notes)
+
+
+class TestCommands(unittest.TestCase):
+    def _project(self, storeys=2):
+        from twin import commands, model
+        f = geodesy.LocalFrame(52.4856, -1.8476)
+        ring = [list(f.to_lonlat(x, y)) for x, y in
+                [(0, 0), (6, 0), (6, 10), (0, 10), (0, 0)]]
+        feat = {"type": "Feature", "id": "way/1",
+                "properties": {"levels": str(storeys)},
+                "geometry": {"type": "Polygon", "coordinates": [ring]}}
+        return commands.Project(model.from_footprint(feat)), commands
+
+    def test_an_extension_adds_exactly_depth_times_wall_length(self):
+        pj, C = self._project()
+        before = pj.current().footprint()
+        pj.apply(C.make("extend", block_id="existing", edge="rear",
+                        depth_m=4.0, storeys=1))
+        grew = pj.current().footprint() - before
+        w = pj.current().block("existing").width
+        self.assertAlmostEqual(grew, 4.0 * w, delta=0.02)
+        self.assertEqual(len(pj.current().blocks), 2)
+
+    def test_an_extension_lands_on_the_side_it_was_asked_for(self):
+        pj, C = self._project()
+        base = pj.current().block("existing")
+        for edge, test in (("rear", lambda b: b.y >= base.y + base.depth - 1e-6),
+                           ("front", lambda b: b.y < base.y),
+                           ("left", lambda b: b.x < base.x),
+                           ("right", lambda b: b.x >= base.x + base.width - 1e-6)):
+            p2, _ = self._project()
+            p2.apply(C.make("extend", block_id="existing", edge=edge,
+                            depth_m=3.0, storeys=1))
+            new = [b for b in p2.current().blocks if b.id != "existing"][0]
+            self.assertTrue(test(new), f"{edge}: {new.x},{new.y}")
+
+    def test_impossible_edits_are_refused_and_change_nothing(self):
+        pj, C = self._project()
+        before = pj.current().as_dict()
+        for kw, phrase in (
+                (dict(depth_m=-2), "positive depth"),
+                (dict(depth_m=4, storeys=9), "at most one storey above"),
+                (dict(depth_m=4, width_m=99), "at most"),
+                (dict(depth_m=99), "second house")):
+            with self.assertRaises(C.CommandError) as cm:
+                pj.apply(C.make("extend", block_id="existing", edge="rear",
+                                **kw))
+            self.assertIn(phrase, str(cm.exception))
+        self.assertEqual(pj.current().as_dict(), before,
+                         "a refused command must leave the model untouched")
+
+    def test_undo_and_redo_return_the_model_exactly(self):
+        pj, C = self._project()
+        start = pj.current().measurements()
+        pj.apply(C.make("extend", block_id="existing", edge="rear",
+                        depth_m=4.0, storeys=1))
+        grown = pj.current().measurements()
+        pj.undo()
+        self.assertEqual(pj.current().measurements(), start)
+        pj.redo()
+        self.assertEqual(pj.current().measurements(), grown)
+
+    def test_history_replays_rather_than_inverting(self):
+        """Three edits, rewind to version 1, and the model must be what
+        one command produced — not an inverse-operation approximation."""
+        pj, C = self._project()
+        pj.apply(C.make("extend", block_id="existing", edge="rear",
+                        depth_m=3.0, storeys=1))
+        after_one = pj.current().measurements()
+        pj.apply(C.make("set_storeys", block_id="existing", storeys=3))
+        pj.apply(C.make("set_roof", block_id="existing", kind="hipped",
+                        pitch_deg=40))
+        pj.restore(1)
+        self.assertEqual(pj.current().measurements(), after_one)
+        self.assertTrue(pj.history()["can_redo"])
+
+    def test_the_existing_building_cannot_be_deleted(self):
+        pj, C = self._project()
+        with self.assertRaises(C.CommandError) as cm:
+            pj.apply(C.make("remove_block", block_id="existing"))
+        self.assertIn("twin of a real house", str(cm.exception))
+
+    def test_moving_a_wall_marks_the_block_as_user_edited(self):
+        pj, C = self._project()
+        self.assertNotEqual(pj.current().block("existing").classification,
+                            "user")
+        pj.apply(C.make("move_wall", block_id="existing", edge="rear",
+                        by_m=2.0))
+        b = pj.current().block("existing")
+        self.assertEqual(b.classification, "user")
+        self.assertAlmostEqual(b.depth, 12.0, delta=0.01)
+
+    def test_a_wall_cannot_be_dragged_through_itself(self):
+        pj, C = self._project()
+        with self.assertRaises(C.CommandError) as cm:
+            pj.apply(C.make("move_wall", block_id="existing", edge="rear",
+                            by_m=-20.0))
+        self.assertIn("nothing smaller", str(cm.exception))
+
+    def test_plain_english_becomes_a_validated_command(self):
+        pj, C = self._project()
+        bld = pj.current()
+        cmd = C.parse_instruction("add a 4 m rear extension", bld)
+        self.assertEqual(cmd.kind, "extend")
+        self.assertEqual(cmd.params["depth_m"], 4.0)
+        self.assertEqual(cmd.params["edge"], "rear")
+        two = C.parse_instruction("build a two storey side extension of 3 m",
+                                  bld)
+        self.assertEqual(two.params["storeys"], 2)
+        roof = C.parse_instruction("change the roof to a hip roof at 35 degrees",
+                                   bld)
+        self.assertEqual(roof.params["kind"], "hipped")
+        self.assertEqual(roof.params["pitch_deg"], 35.0)
+
+    def test_an_instruction_it_cannot_parse_is_refused_not_guessed(self):
+        pj, C = self._project()
+        with self.assertRaises(C.CommandError) as cm:
+            C.parse_instruction("make it nicer", pj.current())
+        self.assertIn("did not understand", str(cm.exception))
+        self.assertIn("4 m rear extension", str(cm.exception))
+
+    def test_an_extension_without_a_depth_asks_for_one(self):
+        pj, C = self._project()
+        with self.assertRaises(C.CommandError) as cm:
+            C.parse_instruction("add a rear extension", pj.current())
+        self.assertIn("how deep", str(cm.exception))
+
+
+class TestDesignBridge(unittest.TestCase):
+    def _bld(self, storeys=2):
+        from twin import model
+        f = geodesy.LocalFrame(52.4856, -1.8476)
+        ring = [list(f.to_lonlat(x, y)) for x, y in
+                [(0, 0), (6, 0), (6, 10), (0, 10), (0, 0)]]
+        return model.from_footprint({
+            "type": "Feature", "id": "way/1",
+            "properties": {"levels": str(storeys)},
+            "geometry": {"type": "Polygon", "coordinates": [ring]}})
+
+    def test_the_plan_and_the_3d_read_the_same_blocks(self):
+        """The mandatory requirement: one geometry, two views. Their
+        areas must agree exactly, not approximately."""
+        from twin import commands, design
+        bld = self._bld()
+        pj = commands.Project(bld)
+        pj.apply(commands.make("extend", block_id="existing", edge="rear",
+                               depth_m=4.0, storeys=1))
+        cur = pj.current()
+        plan = design.floor_plan(cur)
+        mass = design.massing(cur)
+        self.assertEqual(plan["levels"][0]["area_m2"],
+                         round(cur.footprint(), 2))
+        self.assertEqual(len(mass["solids"]), len(cur.blocks))
+        for s in mass["solids"]:
+            blk = cur.block(s["id"])
+            self.assertEqual(s["ring"], blk.ring())
+
+    def test_upper_floors_only_carry_the_blocks_that_reach_them(self):
+        from twin import commands, design
+        pj = commands.Project(self._bld(storeys=2))
+        pj.apply(commands.make("extend", block_id="existing", edge="rear",
+                               depth_m=4.0, storeys=1))
+        plan = design.floor_plan(pj.current())
+        self.assertEqual(len(plan["levels"]), 2)
+        self.assertEqual(len(plan["levels"][0]["blocks"]), 2)
+        self.assertEqual(len(plan["levels"][1]["blocks"]), 1,
+                         "a single-storey extension has no first floor")
+
+    def test_the_wall_between_two_blocks_is_internal(self):
+        from twin import commands, design
+        pj = commands.Project(self._bld(storeys=1))
+        pj.apply(commands.make("extend", block_id="existing", edge="rear",
+                               depth_m=4.0, storeys=1))
+        walls = design.floor_plan(pj.current())["levels"][0]["walls"]
+        shared = [w for w in walls if not w["external"]]
+        self.assertTrue(shared, "the abutting walls must not both be external")
+
+    def test_the_real_engine_runs_and_returns_a_bill(self):
+        from twin import commands, design
+        pj = commands.Project(self._bld())
+        pj.apply(commands.make("extend", block_id="existing", edge="rear",
+                               depth_m=4.0, storeys=1))
+        a = design.assess(pj.current())
+        self.assertTrue(a["available"])
+        self.assertIn("compliance", a)
+        bricks = [L for L in a["quantities"]["groups"]["masonry"]
+                  if "Facing bricks" in L["item"]]
+        self.assertTrue(bricks and bricks[0]["quantity"] > 500)
+        self.assertGreater(a["totals"]["floor_area_m2"], 0)
+
+    def test_a_massing_refusal_is_labelled_as_such_not_as_illegal(self):
+        from twin import commands, design
+        a = design.assess(commands.Project(self._bld()).current())
+        self.assertEqual(a["compliance"]["stage"], "massing")
+        self.assertIn("not about the extension", a["compliance"]["note"])
+
+
 # --------------------------------------------------------------- imagery
 class TestImagery(unittest.TestCase):
     def setUp(self):

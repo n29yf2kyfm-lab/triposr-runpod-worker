@@ -84,7 +84,7 @@ function check(name, cond, detail = '') {
   // --- footprints ------------------------------------------------------
   await page.waitForFunction(
     () => window.__twin.buildings.data &&
-          window.__twin.buildings.data.features.length > 0,
+          window.__twin.buildings.data.features.length > 0, null,
     { timeout: 45000 });
   const feats = await page.evaluate(
     () => window.__twin.buildings.data.features.length);
@@ -153,7 +153,7 @@ function check(name, cond, detail = '') {
                       sel.centre);
   await page.waitForFunction(
     () => document.getElementById('prop').style.display === 'block' &&
-          document.getElementById('prop').innerText.length > 80,
+          document.getElementById('prop').innerText.length > 80, null,
     { timeout: 40000 });
   const panel = await page.innerText('#prop');
   check('the panel reports a measured footprint area',
