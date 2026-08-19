@@ -112,17 +112,23 @@ def main():
 
     files = {
         "baseline": P("BASELINE_LOCKED.glb"),
+        "dims": P("s0_canon.glb"),
         "wheels": P("s1_wheels.glb"),
         "presplit": P("s2_presplit.glb"),
         "glass": P("s3_glass.glb"),
         "aperture": P("s4_aperture.glb"),
-        "interior": P("s5_interior.glb"),
-        "materials": P("s6_materials.glb"),
-        "finish": P("s7_finish.glb"),
+        "rear_lamps": P("s5_rearlamps.glb"),
+        "rear_sep": P("s6_rearsep.glb"),
+        "front": P("s7_frontkit.glb"),
+        "front_sep": P("s8_frontsep.glb"),
+        "interior": P("s9_interior.glb"),
+        "materials": P("s10_materials.glb"),
+        "finish": P("s11_finish.glb"),
         "normals": P("MASTER_PREMIUM.glb"),
         "mobile": P("MOBILE_PREMIUM.glb"),
     }
-    order = ["baseline", "wheels", "presplit", "glass", "aperture",
+    order = ["baseline", "dims", "wheels", "presplit", "glass", "aperture",
+             "rear_lamps", "rear_sep", "front", "front_sep",
              "interior", "materials", "finish", "normals", "validate",
              "diag", "mobile", "manifest"]
     start = order.index(a.frm) if a.frm else 0
@@ -138,9 +144,19 @@ def main():
                    [f"locked from {inp}"])
             continue
 
+        if stage == "dims":
+            rc, dt, tail = run_logged(
+                ["python3", "canon_dims.py", files["baseline"],
+                 files["dims"], "--spec", spec], log)
+            if rc or not os.path.exists(files["dims"]):
+                fail(stage, tail[-1] if tail else f"rc={rc}")
+            qc = files["dims"].replace(".glb", "_canon_qc.json")
+            record(stage, files["dims"], rc, dt, tail, [qc])
+            continue
+
         if stage == "wheels":
             rc, dt, tail = run_logged(
-                ["python3", "wheel_stage.py", files["baseline"], spec,
+                ["python3", "wheel_stage.py", files["dims"], spec,
                  files["wheels"], P("qc/wheel_qc.json")], log)
             if rc or not os.path.exists(files["wheels"]):
                 fail(stage, tail[-1] if tail else f"rc={rc}")
@@ -178,13 +194,61 @@ def main():
             record(stage, files["aperture"], rc, dt, tail)
             continue
 
+        if stage == "rear_lamps":
+            kit = P("qc/rear_lamps.npz")
+            rc, dt, tail = run_logged(
+                ["python3", "rear_lamps4.py", files["aperture"], kit], log)
+            if rc or not os.path.exists(kit):
+                fail(stage, tail[-1] if tail else f"rc={rc}")
+            rc2, dt2, tail2 = run_logged(
+                ["python3", "swap_rear.py", files["aperture"], kit,
+                 files["rear_lamps"]], P("logs/rear_lamps_swap.log"))
+            if rc2 or not os.path.exists(files["rear_lamps"]):
+                fail(stage, tail2[-1] if tail2 else f"swap rc={rc2}")
+            record(stage, files["rear_lamps"], rc2, dt + dt2, tail + tail2[-3:],
+                   [kit])
+            continue
+
+        if stage == "rear_sep":
+            rc, dt, tail = run_logged(
+                ["python3", "rear_separate.py", files["rear_lamps"],
+                 files["rear_sep"]], log)
+            if rc or not os.path.exists(files["rear_sep"]):
+                fail(stage, tail[-1] if tail else f"rc={rc}")
+            record(stage, files["rear_sep"], rc, dt, tail)
+            continue
+
+        if stage == "front":
+            kit = P("qc/front_kit.npz")
+            rc, dt, tail = run_logged(
+                ["python3", "front_kit.py", files["rear_sep"], kit], log)
+            if rc or not os.path.exists(kit):
+                fail(stage, tail[-1] if tail else f"rc={rc}")
+            rc2, dt2, tail2 = run_logged(
+                ["python3", "add_parts.py", files["rear_sep"], kit,
+                 files["front"]], P("logs/front_add.log"))
+            if rc2 or not os.path.exists(files["front"]):
+                fail(stage, tail2[-1] if tail2 else f"add rc={rc2}")
+            record(stage, files["front"], rc2, dt + dt2, tail + tail2[-3:],
+                   [kit])
+            continue
+
+        if stage == "front_sep":
+            rc, dt, tail = run_logged(
+                ["python3", "front_separate.py", files["front"],
+                 files["front_sep"], "--spec", spec], log)
+            if rc or not os.path.exists(files["front_sep"]):
+                fail(stage, tail[-1] if tail else f"rc={rc}")
+            record(stage, files["front_sep"], rc, dt, tail)
+            continue
+
         if stage == "interior":
             kit = P("qc/interior_kit.npz")
             rc, dt, tail = run_logged(
-                ["python3", "interior_kit.py", files["aperture"], kit], log)
+                ["python3", "interior_kit.py", files["front_sep"], kit], log)
             if rc or not os.path.exists(kit):
                 fail(stage, tail[-1] if tail else f"rc={rc}")
-            rc2 = apply_interior(files["aperture"], kit, files["interior"], log)
+            rc2 = apply_interior(files["front_sep"], kit, files["interior"], log)
             if rc2 or not os.path.exists(files["interior"]):
                 fail(stage, "interior applier failed — see log")
             record(stage, files["interior"], 0, dt, tail, [kit])
@@ -211,8 +275,17 @@ def main():
             continue
 
         if stage == "normals":
+            # carve touch-up FIRST: blender_finish's body Laplacian creeps
+            # a few hundred verts back into the tyre swept volumes
+            # (measured 248 on the Yaris) — re-carve on the finished file
+            # so the tyre_body_intersection gate measures the truth at zero
+            carved = P("s12_carved.glb")
+            n_cut = carve_touchup(files["finish"], P("qc/wheel_qc.json"),
+                                  carved, log)
+            if n_cut is None:
+                fail(stage, "carve touch-up failed — see log")
             rc, dt, tail = run_logged(
-                ["python3", "normals_fix.py", files["finish"],
+                ["python3", "normals_fix.py", carved,
                  files["normals"]], log)
             ok = any("NORMAL present on all primitives" in t for t in tail)
             if rc or not ok:
@@ -280,6 +353,52 @@ def main():
             continue
 
     print(f"done. manifest: {manifest_path}")
+
+
+def carve_touchup(car_glb, wheel_qc, out_glb, log_path):
+    """Delete body-family faces whose every vertex sits inside a tyre swept
+    volume. Runs on the FINISHED file because blender_finish's Laplacian
+    moves skin verts a few mm — enough to re-enter the wheel_stage carve
+    (248 verts measured). All-verts-inside is deliberate: a face straddling
+    the arch lip is structure and stays. Returns faces cut, or None."""
+    import numpy as np
+    import trimesh
+    with open(log_path, "a") as lf:
+        try:
+            qc = json.load(open(wheel_qc))
+            wheels = qc["wheels"]
+            R = max(w["diameter"] for w in wheels.values()) / 2
+            Wd = max(w["width"] for w in wheels.values())
+            centres = [np.array(w["centre"]) for w in wheels.values()]
+            sc = trimesh.load(car_glb, force="scene")
+            skip = ("TYRE", "RIM_", "HUB_", "BRAKE_", "ARCH_LINER", "Glass_",
+                    "Int_", "Head_Lens", "Tail_Lens", "Tail_Housing",
+                    "Number_Plate", "Front_Plate", "Grille_", "interior",
+                    "lamp", "Rear_Diffuser")
+            total = 0
+            for name, g in sc.geometry.items():
+                if any(k in name for k in skip):
+                    continue
+                v = g.vertices
+                inside_v = np.zeros(len(v), bool)
+                for c in centres:
+                    r = np.linalg.norm(v[:, :2] - c[:2], axis=1)
+                    inside_v |= (r < R * 0.995) & \
+                                (np.abs(v[:, 2] - c[2]) < Wd / 2)
+                if not inside_v.any():
+                    continue
+                kill = inside_v[g.faces].all(1)
+                if kill.any():
+                    g.update_faces(~kill)
+                    g.remove_unreferenced_vertices()
+                    total += int(kill.sum())
+                    lf.write(f"carve_touchup: {name} cut {int(kill.sum())}\n")
+            sc.export(out_glb, include_normals=True)
+            lf.write(f"carve_touchup: total {total} faces cut\n")
+            return total
+        except Exception as e:
+            lf.write(f"carve_touchup FAILED: {e}\n")
+            return None
 
 
 def apply_interior(car_glb, kit_npz, out_glb, log_path):

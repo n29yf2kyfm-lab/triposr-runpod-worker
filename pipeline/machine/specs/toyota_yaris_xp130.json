@@ -14,7 +14,7 @@
   },
   "tyre": {"spec": "175/65R15", "source": "published standard XP130 fitment"},
   "labels": {
-    "body": "body",
+    "input_body": "body",
     "glass": "glass",
     "wheel_strip_prefixes": ["wheel", "Wheel_Dark", "WHEEL_", "LINER_", "Arch_Cavity",
                              "lib_tyre", "lib_rim", "lib_hub", "lib_disc", "lib_cal"]

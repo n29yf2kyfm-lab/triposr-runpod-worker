@@ -117,6 +117,8 @@ def beltline_fit(mask, tag):
         r = by - (coef[0] + coef[1] * bx)
         mad = max(float(np.median(np.abs(r[keep] - np.median(r[keep])))), 0.004)
         nk = ~(r < -2.0 * mad)
+        if nk.sum() < 4:
+            break          # audit fix: a fit on <4 bins is noise, keep last
         if (nk == keep).all():
             break
         keep = nk
@@ -168,6 +170,11 @@ def _fresh_visual(src):
     binding and the evicted roof faces rendered default-white and took no
     paint (measured on the Yaris premium red control)."""
     mat = getattr(src.visual, "material", None)
+    if mat is None:
+        # audit fix: TextureVisuals(material=None) exports the default
+        # white material silently — the exact defect this helper prevents
+        raise SystemExit("REFUSED: source geometry carries no material — "
+                         "a fresh visual would export default-white")
     return trimesh.visual.TextureVisuals(material=mat)
 
 
