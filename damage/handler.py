@@ -190,9 +190,50 @@ def _paint_thickness(spec, findings, prog):
                           "panels_measured": len(readings)}
 
 
+def _paint_mismatch(spec, findings, prog):
+    """Measure colour between adjacent panels, in each photo separately.
+
+    Skipped silently when DAMAGE_PANEL_MODEL is unset, because without a panel
+    detector there are no panels to compare and a guess would be worse than an
+    omission. Like _paint_thickness it can never fail the job: an inspection
+    with a valid score and price must not be lost to a colour measurement.
+
+    Returns (merged_findings, block). The block reports what was COMPARED and
+    not only what failed — "eleven adjacent pairs across four photographs, one
+    disagreed" is the result, and the one alone cannot be judged.
+    """
+    if not os.environ.get("DAMAGE_PANEL_MODEL"):
+        return findings, None
+    refs = _prepare_images(spec)
+    if not refs:
+        return findings, None
+    try:
+        import analyze
+        import panels as panels_mod
+        from PIL import Image
+        hints = spec.get("panel_hints") or []
+        imgs = []
+        for ref in refs:
+            imgs.append(Image.open(_overlay_source(ref)).convert("RGB"))
+        prog.stage("comparing_panels", images=len(imgs))
+        mm, block = panels_mod.mismatch_findings(imgs, hints)
+        if not mm:
+            return findings, block
+        # Through the same door as every other finding. Hand-built dicts that
+        # skip normalisation are how a finding reaches the report with a bbox
+        # the renderer silently drops, or a severity outside 1-10.
+        market = (spec["vehicle"] or {}).get("market") \
+            or (spec["vehicle"] or {}).get("region")
+        mm = analyze.normalize_findings(mm, spec["vehicle"], market)
+        return findings + mm, block
+    except Exception as e:
+        return findings, {"error": f"{type(e).__name__}: {e}"}
+
+
 def _inspect(spec, prog, vision_fn=None):
     findings, images, meta = _get_findings(spec, prog, vision_fn)
     findings, paint = _paint_thickness(spec, findings, prog)
+    findings, mismatch = _paint_mismatch(spec, findings, prog)
 
     prog.stage("scoring", findings=len(findings))
     roll = sev_mod.summarize(findings)
@@ -226,6 +267,8 @@ def _inspect(spec, prog, vision_fn=None):
         report["overlays"] = overlays
     if paint:
         report["paint_thickness"] = paint
+    if mismatch:
+        report["paint_mismatch"] = mismatch
     return report
 
 
