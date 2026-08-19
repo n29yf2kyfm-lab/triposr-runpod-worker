@@ -35,7 +35,12 @@ TYRE, RIM = 5, 6
 lab2 = label.copy()
 widx = np.where(label == WHEEL)[0]
 wc = cent[widx]
-x_mid = wc[:, 0].mean(); z_mid = 0.0                 # length split, side split
+# side split at the WHEEL CLOUD's own midplane, not a hardcoded z=0: a mesh
+# that does not straddle the origin put all four wheels in one quadrant and
+# the tyre/rim split silently degraded to "all tyre" (the z-centring guard
+# class, wheel_stage 2026-08-19). Falls back to 0.0 only if already centred.
+z_mid = float((wc[:, 2].min() + wc[:, 2].max()) / 2) if len(wc) else 0.0
+x_mid = wc[:, 0].mean()                              # length split, side split
 for fx in (wc[:, 0] < x_mid, wc[:, 0] >= x_mid):
     for fz in (wc[:, 2] < z_mid, wc[:, 2] >= z_mid):
         sel = fx & fz
@@ -89,7 +94,7 @@ for key, (name, mat) in mats.items():
     sub.visual = trimesh.visual.TextureVisuals(material=mat)
     out.add_geometry(sub, node_name=name, geom_name=name)
 
-out.export(OUT)
+out.export(OUT, include_normals=True)   # submesh exports drop NORMALs (v7 lesson)
 import os
 share = {n: round(100 * float((lab2 == k).mean()), 2) for k, n in
          ((BODY, "carpaint"), (GLASS, "glass"), (TYRE, "tyre"), (RIM, "rim"),
