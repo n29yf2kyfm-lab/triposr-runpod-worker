@@ -312,6 +312,54 @@ def project_assess(pid):
         calibrate_per_m2=float(per_m2) if per_m2 else None))
 
 
+@app.get("/api/project/<pid>/sheets")
+def project_sheets_manifest(pid):
+    """What the drawing set would contain, before anybody downloads it."""
+    from . import design as design_mod
+    from . import sheets as sheets_mod
+    pj = _project(pid)
+    paper = request.args.get("paper", "A3")
+    scale = request.args.get("scale")
+    try:
+        built = sheets_mod.sheet_set(
+            pj.current(), paper=paper,
+            scale=int(scale) if scale else None,
+            date=time.strftime("%Y-%m-%d"),
+            assessment=design_mod.assess(pj.current()))
+    except sheets_mod.SheetError as e:
+        return Response(json.dumps({"available": False, "reason": str(e)}),
+                        status=422, mimetype="application/json")
+    return jsonify({"available": True, "paper": paper,
+                    "manifest": built["manifest"],
+                    "problems": built["problems"]})
+
+
+@app.get("/api/project/<pid>/sheets.pdf")
+def project_sheets_pdf(pid):
+    """The drawing set itself: one true-scale PDF, ready to issue."""
+    from . import design as design_mod
+    from . import sheets as sheets_mod
+    pj = _project(pid)
+    scale = request.args.get("scale")
+    try:
+        out = sheets_mod.drawing_set(
+            pj.current(), paper=request.args.get("paper", "A3"),
+            scale=int(scale) if scale else None,
+            date=time.strftime("%Y-%m-%d"),
+            status=request.args.get("status") or None,
+            assessment=design_mod.assess(pj.current()))
+    except sheets_mod.SheetError as e:
+        return Response(json.dumps({"available": False, "reason": str(e)}),
+                        status=422, mimetype="application/json")
+    return Response(out["pdf"], mimetype="application/pdf", headers={
+        "Content-Disposition": 'inline; filename="drawing-set.pdf"',
+        # So the client can show what could NOT be drawn without parsing
+        # the PDF to find out.
+        "X-Sheet-Manifest": json.dumps(out["manifest"]),
+        "X-Sheet-Problems": json.dumps(out["problems"]),
+    })
+
+
 @app.get("/api/rates")
 def rates():
     """The rate card, its regions, VAT bases and what they mean."""

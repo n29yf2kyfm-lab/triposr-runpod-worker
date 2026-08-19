@@ -358,6 +358,35 @@ export function initTwinUI() {
                    label: `knock ${a.name} through to ${mate.name}` });
     $('roomPanel').style.display = 'none';
   };
+  /* The drawing set. The manifest is fetched first so the sheet list and
+   * anything that could NOT be drawn are on screen before a PDF opens in
+   * another tab — a set with a missing elevation should say so here, not
+   * be discovered by counting pages. */
+  $('sheetsBtn').onclick = async () => {
+    if (!project) return;
+    const q = `paper=${encodeURIComponent($('paper').value)}` +
+      ($('sheetScale').value ? `&scale=${$('sheetScale').value}` : '');
+    status('Drawing the set…', 0);
+    const { body } = await api(
+      `/api/project/${project.project_id}/sheets?${q}`);
+    if (!body.available) {
+      status(`Cannot draw this set — ${body.reason}`, 9000);
+      $('sheetList').textContent = body.reason || '';
+      return;
+    }
+    status('');
+    $('sheetList').innerHTML =
+      body.manifest.map((m) =>
+        `<div>${m.number} · ${m.title}` +
+        `${m.scale ? ` · 1:${m.scale} @ ${m.paper}` : ''}</div>`).join('') +
+      (body.problems.length
+        ? `<div style="color:#e2a33a;margin-top:6px">Not drawn: ` +
+          body.problems.join('; ') + `</div>`
+        : '');
+    window.open(`/api/project/${project.project_id}/sheets.pdf?${q}`,
+                '_blank');
+  };
+
   $('beforeAfter').onchange = (e) => {
     showBaseline = e.target.checked;
     render._framed = true;

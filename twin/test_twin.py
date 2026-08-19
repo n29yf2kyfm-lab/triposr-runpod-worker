@@ -1073,6 +1073,323 @@ class TestRooms(unittest.TestCase):
         self.assertEqual((now.x, now.y, now.width, now.depth), where)
 
 
+# ---------------------------------------------------------- drawing sheets
+class TestSheets(unittest.TestCase):
+    """A drawing is a document with a scale you can put a rule against.
+
+    These tests MEASURE the sheets rather than eyeballing them: the
+    primitives are millimetres of paper, so "is this really 1:100" is
+    arithmetic, not an opinion.
+    """
+
+    def _bld(self, storeys=2, extend=True, rooms=True):
+        from twin import commands, model, provenance
+        f = geodesy.LocalFrame(52.4856, -1.8476)
+        ring = [list(f.to_lonlat(x, y)) for x, y in
+                [(0, 0), (6, 0), (6, 10), (0, 10), (0, 0)]]
+        prov = provenance.Provenance(
+            source_provider="overpass", source_dataset="openstreetmap",
+            source_identifier="way/121198175", licence="odbl-1.0",
+            observation_date="2025-11-02").as_dict()
+        bld = model.from_footprint({
+            "type": "Feature", "id": "way/1",
+            "properties": {"levels": str(storeys), "provenance": prov},
+            "geometry": {"type": "Polygon", "coordinates": [ring]}})
+        bld.address = "94 Parkfield Road, Birmingham B8 3AY"
+        pj = commands.Project(bld)
+        if extend:
+            pj.apply(commands.make("extend", block_id="existing",
+                                   edge="rear", depth_m=4.0, storeys=1))
+        if rooms:
+            pj.apply(commands.make("auto_layout"))
+        return pj.current()
+
+    @staticmethod
+    def _texts(sh):
+        return [i["s"] for i in sh.items if i["op"] == "text"]
+
+    @staticmethod
+    def _geometry(sh, bld):
+        """The polys drawn in a block's classification ink — the
+        building itself, not the frame, the title block or the rooms."""
+        from twin import sheets
+        inks = {sheets.CLASS_INK[b.classification] for b in bld.blocks}
+        return [i for i in sh.items
+                if i["op"] == "poly" and tuple(i["ink"]) in inks]
+
+    def test_a_metre_on_the_model_is_ten_millimetres_at_1_100(self):
+        """The whole claim of the module, measured off the primitives."""
+        from twin import sheets
+        bld = self._bld()
+        sh = sheets.plan_sheet(bld, 0, scale=100)
+        self.assertEqual(sh.scale, 100)
+        blk = bld.block("existing")
+        # The block outline is drawn in its classification's ink; its
+        # width on paper must be the real width divided by the scale.
+        widths = [max(p[0] for p in i["pts"]) - min(p[0] for p in i["pts"])
+                  for i in self._geometry(sh, bld)]
+        self.assertTrue(
+            any(abs(w - blk.width * 1000.0 / 100.0) < 0.01 for w in widths),
+            f"no 6 m wall came out 60 mm long: {sorted(widths)}")
+
+    def test_the_same_building_at_1_50_is_exactly_twice_the_size(self):
+        from twin import sheets
+        bld = self._bld(storeys=1, extend=False)
+
+        def span(scale):
+            sh = sheets.plan_sheet(bld, 0, paper="A2", scale=scale)
+            xs = [p[0] for i in self._geometry(sh, bld) for p in i["pts"]]
+            return max(xs) - min(xs)
+        self.assertAlmostEqual(span(50), span(100) * 2, delta=0.05)
+
+    def test_the_scale_bar_is_the_length_it_says_it_is(self):
+        """The only check a person has on a printer set to 'fit to page'."""
+        from twin import sheets
+        sh = sheets.Sheet(paper="A3")
+        mm = sh.scale_bar(20.0, 20.0, 100, metres=5.0)
+        self.assertAlmostEqual(mm, 50.0, places=6)
+        xs = [p[0] for i in sh.items if i["op"] == "poly" for p in i["pts"]]
+        self.assertAlmostEqual(max(xs) - min(xs), 50.0, places=6)
+
+    def test_a_non_standard_scale_is_refused_not_quietly_used(self):
+        from twin import sheets
+        with self.assertRaises(sheets.SheetError) as cm:
+            sheets.pick_scale(6, 10, 300, 250, prefer=87)
+        self.assertIn("standard scale", str(cm.exception))
+
+    def test_a_requested_scale_that_does_not_fit_is_refused(self):
+        """Falling back silently is how one set ends up at two scales."""
+        from twin import sheets
+        self.assertIsNone(sheets.pick_scale(30, 30, 300, 250, prefer=50))
+
+    def test_every_sheet_in_a_set_is_at_the_same_scale(self):
+        from twin import sheets
+        built = sheets.sheet_set(self._bld(), paper="A3")
+        scales = {s.scale for s in built["sheets"] if s.scale}
+        self.assertEqual(len(scales), 1, f"mixed scales in one set: {scales}")
+
+    def test_a_building_too_big_for_the_paper_is_refused_not_shrunk(self):
+        from twin import sheets, model, geodesy as g
+        f = g.LocalFrame(52.4856, -1.8476)
+        ring = [list(f.to_lonlat(x, y)) for x, y in
+                [(0, 0), (200, 0), (200, 300), (0, 300), (0, 0)]]
+        big = model.from_footprint({
+            "type": "Feature", "id": "way/2", "properties": {},
+            "geometry": {"type": "Polygon", "coordinates": [ring]}})
+        with self.assertRaises(sheets.SheetError) as cm:
+            sheets.plan_sheet(big, 0, paper="A4")
+        self.assertIn("will not fit", str(cm.exception))
+
+    def test_a_missing_address_prints_as_missing_not_as_blank(self):
+        from twin import sheets
+        bld = self._bld()
+        bld.address = None
+        sh = sheets.plan_sheet(bld, 0)
+        self.assertIn(sheets.NOT_AVAILABLE, self._texts(sh))
+
+    def test_the_sheet_carries_the_attribution_the_licence_requires(self):
+        """An ODbL footprint on a sheet issued to a council is exactly
+        the redistribution the licence attaches a condition to."""
+        from twin import sheets
+        sh = sheets.plan_sheet(self._bld(), 0)
+        credit = " ".join(self._texts(sh))
+        self.assertIn("OpenStreetMap", credit)
+        self.assertIn("way/121198175", credit)
+
+    def test_an_unknown_licence_is_flagged_not_credited_by_guesswork(self):
+        from twin import sheets
+        bld = self._bld()
+        bld.source = dict(bld.source, licence="something-made-up")
+        credit = " ".join(self._texts(sheets.plan_sheet(bld, 0)))
+        self.assertIn("IS NOT IN THE REGISTRY", credit)
+        self.assertNotIn("OpenStreetMap", credit)
+
+    def test_a_model_with_no_provenance_says_so_rather_than_inventing_one(self):
+        from twin import sheets
+        bld = self._bld()
+        bld.source = None
+        sh = sheets.plan_sheet(bld, 0)
+        self.assertIn("Geometry source not recorded",
+                      " ".join(self._texts(sh)))
+
+    def test_every_sheet_says_it_is_preliminary_until_told_otherwise(self):
+        from twin import sheets
+        for sh in sheets.sheet_set(self._bld())["sheets"]:
+            self.assertIn("PRELIMINARY — NOT FOR CONSTRUCTION",
+                          " ".join(self._texts(sh)), sh.title)
+
+    def test_dimensions_are_figured_in_millimetres(self):
+        from twin import sheets
+        sh = sheets.plan_sheet(self._bld(), 0, scale=100)
+        t = self._texts(sh)
+        self.assertIn("14000", t, "the 14 m overall depth is not figured")
+        self.assertIn("6000", t)
+        self.assertNotIn("14,000", t,
+                         "a separator reads as a decimal point on a "
+                         "photocopy")
+
+    def test_the_section_is_cut_across_the_span_not_along_it(self):
+        from twin import sheets
+        cut = sheets.section_line(self._bld())
+        # The house is 6 wide and 10 deep, so the span is x: the cut must
+        # run across x, at a constant y.
+        self.assertEqual(cut["axis"], "x")
+        self.assertTrue(0 < cut["at"] < 10)
+
+    def test_a_second_section_is_cut_when_the_first_misses_the_new_work(self):
+        """A set whose only section does not cut the extension is a set
+        that has not been checked."""
+        from twin import sheets
+        cuts = sheets.section_lines(self._bld())
+        self.assertEqual(len(cuts), 2)
+        self.assertEqual([c["label"] for c in cuts], ["A-A", "B-B"])
+        crossed = sheets._crossed(self._bld(), cuts[1]["axis"],
+                                  cuts[1]["at"])
+        self.assertEqual(len(crossed), 2,
+                         "B-B still does not pick up the extension")
+
+    def test_one_section_only_when_one_cut_catches_everything(self):
+        from twin import sheets
+        self.assertEqual(len(sheets.section_lines(self._bld(extend=False))), 1)
+
+    def test_the_section_reports_real_storey_and_ridge_heights(self):
+        from twin import sheets
+        bld = self._bld()
+        sh = sheets.section_sheet(bld)
+        t = self._texts(sh)
+        self.assertIn("+2650", t)
+        self.assertIn("+5300", t)
+        self.assertIn(f"+{round(bld.ridge_m() * 1000):.0f}", t,
+                      f"ridge is {bld.ridge_m():.3f} m; markers were {t}")
+
+    def test_the_roof_height_is_computed_not_assumed(self):
+        from twin import sheets
+        bld = self._bld()
+        b = bld.block("existing")
+        top = (b.base_level + b.storeys) * b.storey_height
+        # A 30 degree gable on a 6 m span peaks at 3 m of run.
+        mid = sheets.roof_z(b, b.x + b.width / 2, b.y + b.depth / 2)
+        eave = sheets.roof_z(b, b.x, b.y + b.depth / 2)
+        self.assertAlmostEqual(eave, top, places=6)
+        self.assertAlmostEqual(mid, top + 3.0 * math.tan(math.radians(30)),
+                               places=6)
+
+    def test_a_rear_extension_is_not_drawn_on_the_front_elevation(self):
+        """It stands behind the house. Drawing it on the front says a
+        mass exists in front of the building that does not."""
+        from twin import sheets
+        sh = sheets.elevation_sheet(self._bld(), "front")
+        user_ink = sheets.CLASS_INK["user"]
+        drawn = [i for i in sh.items
+                 if i["op"] in ("line", "poly")
+                 and tuple(i["ink"]) == user_ink]
+        self.assertFalse(drawn, "the rear extension is on the front elevation")
+        self.assertIn("Not visible on this elevation",
+                      " ".join(self._texts(sh)))
+
+    def test_the_rear_elevation_shows_the_extension_and_clips_the_house(self):
+        from twin import sheets
+        bld = self._bld()
+        sh = sheets.elevation_sheet(bld, "rear")
+        user_ink = sheets.CLASS_INK["user"]
+        self.assertTrue([i for i in sh.items
+                         if i["op"] in ("line", "poly")
+                         and tuple(i["ink"]) == user_ink],
+                        "the extension is missing from the rear elevation")
+        # Nothing of the house may be drawn below the extension's roof:
+        # its walls are behind that.
+        ext = [b for b in bld.blocks if b.id != "existing"][0]
+        hides_to = max(sheets.roof_z(ext, ext.x + ext.width / 2, v)
+                       for v in (ext.y, ext.y + ext.depth))
+        floor = min(p[1] for i in sh.items if i["op"] == "poly"
+                    for p in i["pts"])
+        house_ink = sheets.CLASS_INK[bld.block("existing").classification]
+        lowest = min((min(i["a"][1], i["b"][1]) if i["op"] == "line"
+                      else min(p[1] for p in i["pts"]))
+                     for i in sh.items if i["op"] in ("line", "poly")
+                     and tuple(i["ink"]) == house_ink)
+        # in paper mm above the drawing's own ground line
+        self.assertGreater(lowest - floor, hides_to * 1000.0 / sh.scale * 0.8,
+                           "the house is drawn through the extension")
+
+    def test_the_schedules_count_what_is_actually_in_the_model(self):
+        from twin import sheets
+        bld = self._bld()
+        sh = sheets.schedule_sheet(bld)
+        t = " ".join(self._texts(sh))
+        for r in bld.rooms_on(0):
+            self.assertIn(r.name, t)
+        self.assertIn(f"{sum(r.area() for r in bld.rooms):.2f}", t,
+                      "the room schedule does not total")
+
+    def test_an_empty_schedule_says_so_instead_of_printing_nothing(self):
+        from twin import sheets
+        sh = sheets.schedule_sheet(self._bld(rooms=False))
+        t = " ".join(self._texts(sh))
+        self.assertIn("no rooms drawn", t)
+        self.assertIn("no windows or doors placed yet", t)
+
+    def test_the_set_covers_plans_sections_elevations_and_schedules(self):
+        from twin import sheets
+        m = sheets.sheet_set(self._bld())["manifest"]
+        kinds = {n["number"][:2] for n in m}
+        self.assertEqual(kinds, {"PL", "SE", "EL", "SC"})
+        self.assertEqual(len([n for n in m if n["number"].startswith("EL")]),
+                         4, "an elevation is missing")
+
+    def test_the_pdf_is_a_real_pdf_with_one_page_per_sheet(self):
+        from twin import sheets
+        built = sheets.sheet_set(self._bld())
+        pdf = sheets.render_pdf(built["sheets"])
+        self.assertTrue(pdf.startswith(b"%PDF-1."))
+        self.assertTrue(pdf.rstrip().endswith(b"%%EOF"))
+        self.assertIn(b"/Type /Pages", pdf)
+        self.assertIn(("/Count %d" % len(built["sheets"])).encode(), pdf)
+        self.assertIn(b"startxref", pdf)
+
+    def test_the_page_is_the_paper_size_it_claims(self):
+        from twin import sheets
+        pdf = sheets.render_pdf([sheets.plan_sheet(self._bld(), 0,
+                                                   paper="A3")])
+        # A3 landscape: 420 x 297 mm in points, to two decimals.
+        self.assertIn(b"/MediaBox [0 0 1190.551 841.890]", pdf)
+
+    def test_an_em_dash_survives_the_encoding(self):
+        """It came out as "?" until WinAnsi's high bytes were mapped, and
+        a title block reading "Floor plan ? level 0" is not issuable."""
+        from twin import sheets
+        pdf = sheets.render_pdf([sheets.plan_sheet(self._bld(), 0)],
+                                compress=False)
+        self.assertIn(rb"\227", pdf)
+        self.assertNotIn(b"Floor plan ? level", pdf)
+
+    def test_text_width_is_measured_against_the_font_not_the_cap_height(self):
+        from twin import sheets
+        # 3.5 mm capitals in Helvetica: ten zeros are about 26 mm, not 17.5.
+        w = sheets.text_width("0000000000", sheets.TEXT_L)
+        self.assertGreater(w, 22.0)
+        self.assertLess(w, 28.0)
+
+    def test_nothing_is_drawn_outside_the_paper(self):
+        from twin import sheets
+        for sh in sheets.sheet_set(self._bld())["sheets"]:
+            pts = [p for i in sh.items if i["op"] == "poly" for p in i["pts"]]
+            pts += [i["a"] for i in sh.items if i["op"] == "line"]
+            pts += [i["b"] for i in sh.items if i["op"] == "line"]
+            for x, y in pts:
+                self.assertTrue(-1.0 <= x <= sh.w + 1.0
+                                and -1.0 <= y <= sh.h + 1.0,
+                                f"{sh.title}: ({x}, {y}) is off {sh.paper}")
+
+    def test_a_drawing_set_reports_what_it_could_not_draw(self):
+        from twin import sheets
+        out = sheets.drawing_set(self._bld())
+        self.assertEqual(out["problems"], [])
+        self.assertTrue(out["pdf"])
+        self.assertEqual(len(out["manifest"]),
+                         len(sheets.sheet_set(self._bld())["sheets"]))
+
+
 # --------------------------------------------------------------- imagery
 class TestImagery(unittest.TestCase):
     def setUp(self):

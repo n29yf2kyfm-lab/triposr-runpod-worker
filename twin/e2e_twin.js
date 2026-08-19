@@ -357,6 +357,50 @@ const check = (name, cond, detail = '') =>
     .catch(() => check('undo and redo bring the same rooms back, same ids',
                        false, 'ids changed on replay'));
 
+  /* --- the drawing set: a real PDF, at a real scale ------------------- */
+  await page.selectOption('#paper', 'A3');
+  await page.selectOption('#sheetScale', '');
+  const sheetSet = await page.evaluate(async () => {
+    const id = window.__twinUI.project.project_id;
+    const m = await (await fetch(`/api/project/${id}/sheets?paper=A3`)).json();
+    const r = await fetch(`/api/project/${id}/sheets.pdf?paper=A3`);
+    const buf = new Uint8Array(await r.arrayBuffer());
+    const head = String.fromCharCode(...buf.slice(0, 8));
+    const tail = String.fromCharCode(...buf.slice(-8));
+    return { manifest: m.manifest, problems: m.problems, type:
+             r.headers.get('content-type'), bytes: buf.length, head, tail };
+  });
+  check('the drawing set is a real PDF served as one',
+        /^%PDF-1\./.test(sheetSet.head) && /%%EOF/.test(sheetSet.tail) &&
+        /application\/pdf/.test(sheetSet.type || ''),
+        `${sheetSet.type} ${sheetSet.bytes} bytes`);
+  const kinds = new Set((sheetSet.manifest || []).map((m) => m.number.slice(0, 2)));
+  check('and it holds plans, sections, elevations and schedules',
+        ['PL', 'SE', 'EL', 'SC'].every((k) => kinds.has(k)),
+        (sheetSet.manifest || []).map((m) => m.number).join(' '));
+  check('every drawn sheet is at the same standard scale',
+        new Set((sheetSet.manifest || []).filter((m) => m.scale)
+          .map((m) => m.scale)).size === 1,
+        JSON.stringify((sheetSet.manifest || []).map((m) => m.scale)));
+  check('nothing in the set failed to draw silently',
+        Array.isArray(sheetSet.problems) && sheetSet.problems.length === 0,
+        JSON.stringify(sheetSet.problems));
+
+  await page.click('#sheetsBtn');
+  await page.waitForFunction(
+    () => /PL-01/.test(document.getElementById('sheetList').innerText), null,
+    { timeout: 30000 });
+  check('the sheet list is shown before the PDF opens', true);
+
+  const tooBig = await page.evaluate(async () => {
+    const id = window.__twinUI.project.project_id;
+    const r = await fetch(`/api/project/${id}/sheets.pdf?paper=A4&scale=20`);
+    return { status: r.status, body: await r.text() };
+  });
+  check('a scale that will not fit is refused with a reason, not shrunk',
+        tooBig.status === 422 && /not fit|standard scale/.test(tooBig.body),
+        tooBig.body.slice(0, 90));
+
   check('no page errors', errors.length === 0, errors.slice(0, 2).join(' | '));
   await browser.close();
 
