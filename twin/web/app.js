@@ -7,11 +7,17 @@
  * AVAILABLE with the reason the provider gave, and the provenance chain
  * is one disclosure click away on every single number.
  */
-import { MapEngine, GeoJSONLayer, scaleBar, bboxOf } from './engine.js';
+import { MapEngine, GeoJSONLayer, RasterLayer, TileLayer, scaleBar,
+         bboxOf } from './engine.js';
 
 const $ = (id) => document.getElementById(id);
 const map = new MapEngine($('map'), { centre: [-1.8476, 52.4856], zoom: 3 });
 
+/* Imagery sits UNDER the vectors. Two kinds: a surface render we make
+ * ourselves from LIDAR (no licence to breach, no key), and keyed
+ * commercial tiles proxied by our server when a key is configured. */
+const surface = map.addLayer(new RasterLayer('surface', { zIndex: 1 }));
+let tiles = null;
 const buildings = map.addLayer(new GeoJSONLayer('buildings', { zIndex: 10 }));
 /* The selected building keeps ITS OWN classification. Styling the
  * selection layer as 'user' painted a verified OSM footprint in the
@@ -71,6 +77,7 @@ async function search() {
       const z = hit.accuracy_m <= 10 ? 19 : hit.accuracy_m <= 150 ? 18 : 15;
       map.setView([hit.lon, hit.lat], z);
       loadBuildings(true);
+      loadImagery(true);
     };
     box.appendChild(div);
   }
@@ -132,6 +139,71 @@ function attribution(prov) {
     lines.add('© OpenStreetMap contributors (ODbL)');
   }
   $('attrib').textContent = [...lines].join('\n');
+}
+
+/* --- imagery --------------------------------------------------------- */
+let imagerySource = 'lidar-hillshade';
+let surfaceKey = null;
+
+async function loadImagery(force) {
+  if (imagerySource === 'none') { surface.clear(); map.render(); return; }
+  if (tiles) { tiles.visible = false; }
+  if (imagerySource !== 'lidar-hillshade') {
+    surface.clear();
+    if (!tiles) {
+      tiles = map.addLayer(new TileLayer('tiles', { zIndex: 2 }));
+    }
+    tiles.urlTemplate = `/api/tiles/${imagerySource}/{z}/{x}/{y}`;
+    tiles.visible = true;
+    map.render();
+    return;
+  }
+  // The LIDAR render covers a box, so it is refetched when the view
+  // leaves what was rendered — not on every pan.
+  if (map.zoom < 16) { surface.clear(); map.render(); return; }
+  const [w, s, e, n] = map.bounds();
+  const key = [w, s, e, n].map((v) => v.toFixed(4)).join(',');
+  if (!force && key === surfaceKey) return;
+  if (surface.bounds && !force) {
+    const b = surface.bounds;
+    if (w >= b[0] && s >= b[1] && e <= b[2] && n <= b[3]) return;  // covered
+  }
+  surfaceKey = key;
+  status('Rendering LIDAR surface…', 0);
+  const { body } = await api(
+    `/api/surface?west=${w}&south=${s}&east=${e}&north=${n}`);
+  if (!body.available) {
+    surface.clear(); map.render();
+    status(`Surface unavailable — ${body.reason}`, 6000);
+    return;
+  }
+  status('');
+  surface.set(body.image, body.bounds, () => map.render());
+  attributionLine(body.attribution);
+}
+
+function attributionLine(line) {
+  const lines = new Set(($('attrib').textContent || '')
+    .split('\n').filter(Boolean));
+  if (line) lines.add(line);
+  $('attrib').textContent = [...lines].join('\n');
+}
+
+async function buildImageryPicker() {
+  const { body } = await api('/api/imagery?country=GB');
+  const sel = $('imagery');
+  sel.innerHTML = '<option value="none">No imagery</option>';
+  for (const s of body.sources) {
+    const o = document.createElement('option');
+    o.value = s.key;
+    o.textContent = `${s.name} — ${s.resolution_m} m/px` +
+      (s.usable ? '' : '  (unavailable)');
+    o.disabled = !s.usable;
+    o.title = s.usable ? s.note : s.blocked_because.join('; ');
+    sel.appendChild(o);
+  }
+  sel.value = imagerySource;
+  sel.onchange = () => { imagerySource = sel.value; loadImagery(true); };
 }
 
 /* --- property panel -------------------------------------------------- */
@@ -295,16 +367,19 @@ map.on('click', ({ lon, lat, hit }) => {
 let moveTimer = null;
 map.on('move', () => {
   clearTimeout(moveTimer);
-  moveTimer = setTimeout(() => loadBuildings(false), 320);
+  moveTimer = setTimeout(() => { loadBuildings(false); loadImagery(false); },
+                         320);
   const sb = scaleBar(map.metresPerPixel());
   $('scaleTxt').textContent =
     `${sb.label} · ${map.metresPerPixel().toFixed(3)} m/px · z${map.zoom.toFixed(1)}`;
   $('bar').style.width = sb.px + 'px';
 });
 
+buildImageryPicker();
 map.emit('move', map.viewState());
 
 /* Expose for the test harness — assertions run against the real engine
  * state, not against a screenshot. */
-window.__twin = { map, buildings, selection, loadBuildings, selectProperty,
-                  scaleBar };
+window.__twin = { map, buildings, selection, surface, loadBuildings,
+                  loadImagery, selectProperty, scaleBar,
+                  setImagery: (k) => { imagerySource = k; return loadImagery(true); } };

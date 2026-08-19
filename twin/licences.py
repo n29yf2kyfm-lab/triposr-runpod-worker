@@ -73,6 +73,56 @@ LICENCES = {
               "not a CDN for products. Heavy or commercial use requires "
               "your own tile server (the data itself is ODbL and free to "
               "render yourself, which is the compliant route)."),
+    # Public-domain and keyed commercial terms — added when the imagery
+    # layer needed real sources rather than a borrowed tile endpoint.
+    "us-public-domain": Licence(
+        key="us-public-domain", name="US Government work (public domain)",
+        url="https://www.usgs.gov/information-policies-and-instructions/"
+            "copyrights-and-credits",
+        commercial=True, attribution="USGS The National Map",
+        share_alike=False, redistribute=True, cache=True,
+        notes="Works of the US federal government carry no copyright. "
+              "USGS asks for credit as a courtesy; we give it."),
+    "cc-by-nc-sa-4.0": Licence(
+        key="cc-by-nc-sa-4.0", name="Creative Commons BY-NC-SA 4.0",
+        url="https://creativecommons.org/licenses/by-nc-sa/4.0/",
+        commercial=False,
+        attribution="Sentinel-2 cloudless by EOX IT Services GmbH",
+        share_alike=True, redistribute=True, cache=True,
+        notes="NON-COMMERCIAL. Fine to look at while developing; refused "
+              "for a paid product, which is why the check gates it."),
+    "esri-keyed": Licence(
+        key="esri-keyed", name="Esri ArcGIS Location Platform (keyed)",
+        url="https://www.esri.com/en-us/legal/terms/full-master-agreement",
+        commercial=True, attribution="Esri, Maxar, Earthstar Geographics",
+        share_alike=False, redistribute=False, cache=False,
+        notes="THE LICENSED DOOR to the same World Imagery the free tile "
+              "endpoint serves without granting rights. A free ArcGIS "
+              "Location Platform account issues a key that permits "
+              "commercial display. Caching and re-export are still not "
+              "granted, so tiles are streamed, never baked into an "
+              "exported file."),
+    "mapbox-keyed": Licence(
+        key="mapbox-keyed", name="Mapbox Terms of Service (keyed)",
+        url="https://www.mapbox.com/legal/tos",
+        commercial=True, attribution="© Mapbox © Maxar",
+        share_alike=False, redistribute=False, cache=False,
+        notes="Commercial display permitted under an account; offline "
+              "caching and redistribution are not."),
+    "maptiler-keyed": Licence(
+        key="maptiler-keyed", name="MapTiler Terms (keyed)",
+        url="https://www.maptiler.com/terms/",
+        commercial=True, attribution="© MapTiler © Planet",
+        share_alike=False, redistribute=False, cache=False,
+        notes="Commercial display permitted under an account."),
+    "os-keyed": Licence(
+        key="os-keyed", name="OS Data Hub (keyed)",
+        url="https://osdatahub.os.uk/legal/apiTermsConditions",
+        commercial=True,
+        attribution="© Crown copyright and database rights Ordnance Survey",
+        share_alike=False, redistribute=False, cache=False,
+        notes="OS OpenData tier is free; Premium is paid. Attribution is "
+              "mandatory and specified by OS."),
     "nominatim-policy": Licence(
         key="nominatim-policy", name="Nominatim usage policy (OSM data ODbL)",
         url="https://operations.osmfoundation.org/policies/nominatim/",

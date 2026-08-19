@@ -35,3 +35,28 @@ commercial use — see STAGE 0.
     python3 -m unittest twin.test_twin          # 48 offline
     TWIN_LIVE=1 python3 -m unittest twin.test_twin.TestLive   # 6 live
     node twin/e2e.js                            # 19 browser E2E
+
+## Imagery
+
+Free worldwide house-scale *photographic* imagery does not exist — every
+provider that has it pays for it. So:
+
+1. **We render our own** for England from Environment Agency LIDAR (OGL,
+   no key, 1 m). Not a photo: a shaded surface model where every pixel
+   has a height behind it. Roof planes, ridges, hips, dormers and garden
+   levels read directly.
+2. **Open photographic sources** where a country publishes them — USGS
+   (US, public domain, sub-metre).
+3. **Your own key** for the commercial providers, all of which have free
+   developer tiers permitting commercial use:
+
+   | env var | provider | resolution |
+   |---|---|---|
+   | `ARCGIS_API_KEY` | Esri World Imagery | 0.3 m |
+   | `MAPBOX_TOKEN` | Mapbox Satellite | 0.3 m |
+   | `MAPTILER_KEY` | MapTiler Satellite | 0.5 m |
+   | `OS_DATA_HUB_KEY` | Ordnance Survey (GB) | 0.25 m |
+
+Keys live on the server and are never sent to a browser; tiles are
+proxied through `/api/tiles/<source>/{z}/{x}/{y}`. Sources whose licence
+forbids the use are disabled in the picker with the reason shown.

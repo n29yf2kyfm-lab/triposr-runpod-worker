@@ -245,6 +245,94 @@ export const CLASS_STYLE = {
                strokeSelected: '#b9ffd6', width: 1.6, widthSelected: 3 },
 };
 
+/* A georeferenced image drawn under the vectors — the LIDAR surface
+ * render. Placed by its OWN bounds, not the requested ones, because a
+ * National Grid rectangle is not a lon/lat rectangle and assuming they
+ * match slides the whole picture off the houses. */
+export class RasterLayer extends Layer {
+  constructor(id, opts = {}) {
+    super(id, opts);
+    this.image = null;
+    this.bounds = null;      // [W,S,E,N]
+    this.opacity = opts.opacity == null ? 1 : opts.opacity;
+  }
+
+  set(src, bounds, onload) {
+    const im = new Image();
+    im.onload = () => { this.image = im; this.bounds = bounds; onload && onload(); };
+    im.src = src;
+  }
+
+  clear() { this.image = null; this.bounds = null; }
+
+  draw(map, ctx) {
+    if (!this.image || !this.bounds) return;
+    const [w, s, e, n] = this.bounds;
+    if (!map.bboxVisible(this.bounds)) return;
+    const tl = map.toScreen(w, n), br = map.toScreen(e, s);
+    ctx.save();
+    ctx.globalAlpha = this.opacity;
+    ctx.imageSmoothingEnabled = true;
+    ctx.drawImage(this.image, tl[0], tl[1], br[0] - tl[0], br[1] - tl[1]);
+    ctx.restore();
+  }
+}
+
+/* A standard XYZ tile layer, for keyed commercial imagery proxied by our
+ * own server. Tiles are fetched only for what is on screen, and a tile
+ * that fails is simply not drawn — never replaced with a placeholder
+ * that could be mistaken for ground truth. */
+export class TileLayer extends Layer {
+  constructor(id, opts = {}) {
+    super(id, opts);
+    this.urlTemplate = opts.url || '';
+    this.maxZoom = opts.maxZoom || 19;
+    this.tiles = new Map();
+    this.opacity = opts.opacity == null ? 1 : opts.opacity;
+  }
+
+  _tile(z, x, y, map) {
+    const k = `${z}/${x}/${y}`;
+    let t = this.tiles.get(k);
+    if (t) return t;
+    if (this.tiles.size > 400) {          // bounded cache
+      for (const old of [...this.tiles.keys()].slice(0, 200)) {
+        this.tiles.delete(old);
+      }
+    }
+    const im = new Image();
+    t = { img: im, ok: false };
+    im.onload = () => { t.ok = true; map.render(); };
+    im.onerror = () => { t.ok = false; };
+    im.src = this.urlTemplate.replace('{z}', z).replace('{x}', x)
+      .replace('{y}', y);
+    this.tiles.set(k, t);
+    return t;
+  }
+
+  draw(map, ctx) {
+    const s = map.pixelRatio;
+    const tz = Math.max(0, Math.min(this.maxZoom, Math.round(map.zoom)));
+    const scale = Math.pow(2, map.zoom - tz) * s, tp = TILE * scale;
+    const c = lonLatToWorld(map.centre[0], map.centre[1], tz);
+    const ox = map.canvas.width / 2 - c[0] * scale;
+    const oy = map.canvas.height / 2 - c[1] * scale;
+    const i0 = Math.floor(-ox / tp), i1 = Math.ceil((map.canvas.width - ox) / tp);
+    const j0 = Math.floor(-oy / tp), j1 = Math.ceil((map.canvas.height - oy) / tp);
+    const n = Math.pow(2, tz);
+    ctx.save();
+    ctx.globalAlpha = this.opacity;
+    for (let i = i0; i <= i1; i++) {
+      for (let j = j0; j <= j1; j++) {
+        if (j < 0 || j >= n) continue;
+        const t = this._tile(tz, ((i % n) + n) % n, j, map);
+        if (t.ok) ctx.drawImage(t.img, ox + i * tp, oy + j * tp, tp + 1, tp + 1);
+      }
+    }
+    ctx.restore();
+  }
+}
+
 /* --- the map -------------------------------------------------------- */
 export class MapEngine {
   constructor(canvas, opts = {}) {

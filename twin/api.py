@@ -14,12 +14,14 @@ world.
 """
 from __future__ import annotations
 
+import base64
 import json
 import os
 import time
 
 from flask import Flask, Response, jsonify, request, send_from_directory
 
+from . import cache as cache_mod
 from . import geodesy, licences, property as property_mod
 from .provenance import Missing
 from .providers import registry as registry_mod
@@ -28,6 +30,7 @@ WEB = os.path.join(os.path.dirname(os.path.abspath(__file__)), "web")
 
 app = Flask(__name__, static_folder=None)
 _registry = registry_mod.default()
+_cache = cache_mod.default()
 
 
 def _out(result):
@@ -181,6 +184,88 @@ def measure():
         return jsonify({"available": True, "length_m": round(d, 2),
                         "method": "haversine on WGS84"})
     raise ValueError(f"cannot measure a {geom['type']}")
+
+
+# -- imagery -----------------------------------------------------------
+@app.get("/api/imagery")
+def imagery_sources():
+    """What can legitimately be shown here, and what each is blocked on."""
+    from .providers import imagery as img
+    return jsonify({"available": True,
+                    "sources": img.for_country(request.args.get("country")),
+                    "note": "Sources needing a key are unlocked by putting "
+                            "one in the named environment variable on the "
+                            "SERVER. Keys never reach the browser."})
+
+
+@app.get("/api/surface")
+def surface():
+    """A shaded-relief PNG of the LIDAR surface over a lon/lat box.
+
+    Rendered by us from Open Government Licence data, so there is no
+    tile licence to breach and no key to hold. Returns the image plus
+    the bounds it ACTUALLY covers, which is not the requested box —
+    the National Grid and lon/lat are different rectangles.
+    """
+    from .providers import imagery as img
+    w = _float("west", lo=-180, hi=180)
+    s_ = _float("south", lo=-90, hi=90)
+    e = _float("east", lo=-180, hi=180)
+    n = _float("north", lo=-90, hi=90)
+    if not (w < e and s_ < n):
+        raise ValueError("bbox must be west<east and south<north")
+    key = ("surface", round(w, 5), round(s_, 5), round(e, 5), round(n, 5))
+    ck = cache_mod.Cache.key(*key)
+    hit = _cache.get(ck)
+    if hit is None:
+        png, info = img.render_lidar_surface(w, s_, e, n)
+        if png is None:
+            return _out({"available": False, "status": "DATA NOT AVAILABLE",
+                         "reason": info, "asked": ["uk-gov-open"]})
+        hit = {"png": base64.b64encode(png).decode(), "info": info}
+        _cache.put(ck, "uk-gov-open", "ogl-3.0", hit, ttl=180 * 86400)
+    return jsonify({"available": True,
+                    "image": "data:image/png;base64," + hit["png"],
+                    **hit["info"]})
+
+
+@app.get("/api/tiles/<source>/<int:z>/<int:x>/<int:y>")
+def tiles(source, z, x, y):
+    """Proxy a keyed XYZ source. THE KEY STAYS HERE.
+
+    The browser asks this server for a tile; this server adds the key.
+    A key in a front-end URL is a key on a pastebin within a week, and
+    it is also how a licensed source becomes an unlicensed one when
+    somebody copies the URL out of devtools.
+    """
+    from .providers import imagery as img
+    try:
+        src = img.get(source)
+    except ValueError as e:
+        raise ValueError(str(e))
+    ok, why = src.usable()
+    if not ok:
+        return Response(json.dumps({"available": False,
+                                    "status": "DATA NOT AVAILABLE",
+                                    "reason": "; ".join(why)}),
+                        status=403, mimetype="application/json")
+    if not (0 <= z <= src.max_zoom and 0 <= x < 2 ** z and 0 <= y < 2 ** z):
+        raise ValueError(f"tile {z}/{x}/{y} is outside this source")
+    import requests as _rq
+    try:
+        r = _rq.get(img.tile_url(src, z, x, y), timeout=20,
+                    headers={"User-Agent": "triposr-twin/0.1"})
+    except Exception as ex:
+        return Response(b"", status=502)
+    if r.status_code != 200:
+        return Response(b"", status=r.status_code)
+    resp = Response(r.content,
+                    mimetype=r.headers.get("Content-Type", "image/jpeg"))
+    # Streamed, not stored: these licences permit display, not caching.
+    resp.headers["Cache-Control"] = ("no-store" if not
+                                     licences.get(src.licence).cache
+                                     else "public, max-age=86400")
+    return resp
 
 
 # -- tiles: a licence gate, not a proxy --------------------------------

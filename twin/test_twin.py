@@ -568,6 +568,79 @@ class TestAPI(unittest.TestCase):
         self.assertIn("connect-src 'self'", csp)
 
 
+# --------------------------------------------------------------- imagery
+class TestImagery(unittest.TestCase):
+    def setUp(self):
+        from twin.providers import imagery
+        self.img = imagery
+
+    def test_the_unlicensed_esri_endpoint_is_not_among_the_sources(self):
+        """The Stage 0 finding must not creep back in through imagery."""
+        for s in self.img.SOURCES.values():
+            self.assertNotIn("server.arcgisonline.com", s.url or "")
+
+    def test_a_non_commercial_source_is_refused_for_a_paid_product(self):
+        s2 = self.img.get("s2cloudless")
+        ok, why = s2.usable(commercial=True)
+        self.assertFalse(ok)
+        self.assertTrue(any("commercial" in w for w in why))
+        # ...and allowed when the use genuinely is non-commercial.
+        self.assertTrue(s2.usable(commercial=False)[0])
+
+    def test_a_keyed_source_is_unavailable_until_a_key_is_configured(self):
+        esri = self.img.get("esri-keyed")
+        os.environ.pop("ARCGIS_API_KEY", None)
+        ok, why = esri.usable()
+        self.assertFalse(ok)
+        self.assertIn("ARCGIS_API_KEY", why[0])
+        os.environ["ARCGIS_API_KEY"] = "test-key-not-real"
+        try:
+            self.assertTrue(esri.usable()[0])
+            url = self.img.tile_url(esri, 18, 1, 2)
+            self.assertIn("test-key-not-real", url)
+        finally:
+            os.environ.pop("ARCGIS_API_KEY", None)
+
+    def test_the_lidar_render_needs_no_key_and_is_commercially_usable(self):
+        hs = self.img.get("lidar-hillshade")
+        ok, why = hs.usable(commercial=True)
+        self.assertTrue(ok, why)
+        self.assertFalse(hs.needs_key)
+        self.assertEqual(hs.licence, "ogl-3.0")
+
+    def test_sources_are_ranked_usable_first_then_finest(self):
+        os.environ.pop("ARCGIS_API_KEY", None)
+        rows = self.img.for_country("GB")
+        self.assertTrue(rows[0]["usable"])
+        self.assertEqual(rows[0]["key"], "lidar-hillshade")
+        firsts = [r["usable"] for r in rows]
+        self.assertEqual(firsts, sorted(firsts, reverse=True),
+                         "unusable sources must not be offered first")
+
+    def test_resolution_is_stated_so_a_10m_source_cannot_pose_as_aerial(self):
+        self.assertGreaterEqual(self.img.get("s2cloudless").resolution_m, 10)
+        self.assertIn("not a house", self.img.get("s2cloudless").note)
+
+    def test_hillshade_lights_from_the_north_west(self):
+        """Light from below inverts perceived relief and every roof reads
+        as a valley — the classic shaded-relief mistake."""
+        import numpy as np
+        # A ridge running north-south: west face should be lit, east dark.
+        g = np.zeros((9, 9))
+        for i in range(9):
+            g[:, i] = 4.0 - abs(i - 4) * 1.0
+        sh = self.img._hillshade(g, 1.0)
+        west = sh[4, 2]
+        east = sh[4, 6]
+        self.assertGreater(west, east,
+                           "the north-west-facing slope must be brighter")
+
+    def test_a_render_far_outside_england_is_refused_not_faked(self):
+        png, why = self.img.render_lidar_surface(2.29, 48.85, 2.30, 48.86)
+        self.assertIsNone(png)
+        self.assertTrue(isinstance(why, str) and why)
+
+
 # ------------------------------------------------------------------ live
 @unittest.skipUnless(LIVE, "set TWIN_LIVE=1 to hit real endpoints")
 class TestLive(unittest.TestCase):
@@ -624,6 +697,21 @@ class TestLive(unittest.TestCase):
         self.assertTrue(r.available, r)
         self.assertAlmostEqual(r.value["ground_m_aod"], 118.88, delta=0.6)
         self.assertAlmostEqual(r.value["surface_m_aod"], 127.00, delta=0.6)
+
+    def test_the_lidar_surface_renders_a_real_png_of_real_houses(self):
+        from twin.providers import imagery
+        png, info = imagery.render_lidar_surface(-1.8500, 52.4845,
+                                                 -1.8452, 52.4868)
+        self.assertIsNotNone(png, info)
+        self.assertTrue(png.startswith(b"\x89PNG"))
+        self.assertEqual(info["cell_m"], 1.0)
+        # The bounds it covers are its OWN, and must overlap the request.
+        w, s, e, n = info["bounds"]
+        self.assertLess(w, e)
+        self.assertLess(s, n)
+        self.assertAlmostEqual(w, -1.8500, delta=0.002)
+        # Real terrain has real relief: a flat answer means a dead fetch.
+        self.assertGreater(info["max_m_aod"] - info["min_m_aod"], 3.0)
 
     def test_nonsense_is_missing_worldwide(self):
         self.assertFalse(self.r.geocode("qqqqzzzz nowhere at all 12345"))
