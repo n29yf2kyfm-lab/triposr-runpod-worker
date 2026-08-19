@@ -17,16 +17,45 @@ convention at ship time.
 The transform is applied to vertices per geometry IN the scene, so
 materials, UVs and textures pass through untouched.
 
-Run: python3 canon.py <in.glb> <out.glb> [--flip-up]
+DIMENSIONS: pass --spec to scale the canonicalised car onto published
+figures. This is not cosmetic — measured 2026-08-19 on two different cars
+from two unrelated photographs, Pixal comes out systematically TOO TALL:
+    Yaris  H/L 0.420 vs 0.389 real  (+8%)
+    Golf   H/L 0.381 vs ~0.341 real (+12%)
+A bias that reproduces across cars and inputs is a property of the
+generator, not of the photograph (square-padding the input moved crease
+density 159.1 -> 162.2 and left H/L identical, which is what ruled the
+input framing out). So it cannot be fixed by better sourcing, and it CAN be
+corrected deterministically once per car from its published length/width/
+height. Without --spec the stage only measures and reports, as before.
+
+Run: python3 canon.py <in.glb> <out.glb> [--flip-up] [--spec specs/car.json]
 """
+import os
 import sys
 import numpy as np
 import trimesh
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from carspec import CarSpec
+
 INP, OUT = sys.argv[1], sys.argv[2]
 FLIP = "--flip-up" in sys.argv
+SPEC = None
+for _i, _a in enumerate(sys.argv):
+    if _a == "--spec":
+        SPEC = sys.argv[_i + 1]
+spec = CarSpec.empty() if SPEC is None else CarSpec.load(SPEC)
 
 sc = trimesh.load(INP, force="scene")
+# bake node transforms before measuring: geometry.values() alone drops them,
+# and the OBB would then be computed in a different frame from the vertices
+# the transform is applied to (the instance-collapse class, 2026-08-19).
+for _node in sc.graph.nodes_geometry:
+    _T, _gn = sc.graph[_node]
+    if _T is not None and not np.allclose(_T, np.eye(4)):
+        sc.geometry[_gn].apply_transform(_T)
+        sc.graph.update(frame_to=_node, matrix=np.eye(4), geometry=_gn)
 m = trimesh.util.concatenate([g for g in sc.geometry.values()])
 T, ext = trimesh.bounds.oriented_bounds(m)      # T: world -> obb frame
 order = np.argsort(ext)[::-1]                   # longest, middle, shortest
@@ -72,9 +101,55 @@ M = C @ M
 
 for gm in sc.geometry.values():
     gm.vertices = trimesh.transform_points(gm.vertices, M)
-sc.export(OUT)
+
 m2 = trimesh.util.concatenate([g for g in sc.geometry.values()])
 e = m2.extents
 print(f"canonical extents L={e[0]:.3f} H={e[1]:.3f} W={e[2]:.3f} "
       f"(expect L>W>H; H/L={e[1]/e[0]:.3f})")
+
+# ---- optional: scale onto published dimensions -------------------------
+tgt = {k: spec.dim(k)[0] for k in ("length_m", "height_m", "width_m")}
+if any(tgt.values()):
+    if not all(tgt.values()):
+        raise SystemExit(f"REFUSED: spec must give length_m, height_m AND "
+                         f"width_m to scale proportions; got {tgt}")
+    # TWO SEPARATE THINGS, and only the second is suspicious:
+    #   1. UNIT/SIZE: a generated mesh is normalised (measured L=0.973 here)
+    #      while the spec is in metres, so the uniform factor is ~4x. That is
+    #      a conversion and may be any magnitude.
+    #   2. PROPORTION: after the uniform fit, the residual per-axis stretch is
+    #      the generator's shape bias (the ~10% height error). THAT is what a
+    #      sane range must bound — a large residual means a units or axis
+    #      mix-up, not a bias worth correcting.
+    uniform = tgt["length_m"] / e[0]
+    resid = np.array([1.0,
+                      tgt["height_m"] / (e[1] * uniform),
+                      tgt["width_m"] / (e[2] * uniform)])
+    if not np.all((resid > 0.65) & (resid < 1.35)):
+        raise SystemExit(f"REFUSED: residual proportion correction "
+                         f"{np.round(resid,3)} outside +-35% after the uniform "
+                         f"fit (x{uniform:.3f}) — check the spec units and the "
+                         "axis order")
+    s = uniform * resid
+    print(f"uniform fit x{uniform:.3f}; residual proportion correction "
+          f"H x{resid[1]:.3f} W x{resid[2]:.3f}")
+    for gm in sc.geometry.values():
+        v = gm.vertices.copy()
+        v *= s                       # about the canonical origin: x/z are
+        gm.vertices = v              # centred and y sits on the ground
+    m3 = trimesh.util.concatenate([g for g in sc.geometry.values()])
+    e3 = m3.extents
+    print(f"scaled to spec: x{s[0]:.3f} y{s[1]:.3f} z{s[2]:.3f}  -> "
+          f"L={e3[0]:.3f} H={e3[1]:.3f} W={e3[2]:.3f} (H/L={e3[1]/e3[0]:.3f})")
+    for k, got, want in (("length", e3[0], tgt["length_m"]),
+                         ("height", e3[1], tgt["height_m"]),
+                         ("width",  e3[2], tgt["width_m"])):
+        if abs(got / want - 1) > 0.01:
+            raise SystemExit(f"REFUSED: post-scale {k} {got:.4f} vs spec "
+                             f"{want} — verification failed")
+    print("verified: all three dimensions within 1% of spec")
+else:
+    print("no spec dimensions supplied — proportions REPORTED, not corrected")
+
+sc.export(OUT, include_normals=True)   # submesh/scene exports drop NORMALs
 print("wrote", OUT)
