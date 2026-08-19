@@ -1042,7 +1042,8 @@ class TestRooms(unittest.TestCase):
         pj, C = self._project(extend=False)
         pj.apply(C.make("auto_layout", block_id="existing", level=0))
         pj.apply(C.make("add_room", block_id="existing", name="Utility",
-                        room_kind="store", width_m=2.0, depth_m=2.0))
+                        room_kind="store", width_m=2.0, depth_m=2.0,
+                        level=1))
         before = [r.as_dict() for r in pj.current().rooms]
         pj.undo()
         pj.redo()
@@ -1071,6 +1072,385 @@ class TestRooms(unittest.TestCase):
         now = pj.current().room(room.id)
         self.assertEqual(now.name, "Front hall")
         self.assertEqual((now.x, now.y, now.width, now.depth), where)
+
+
+# ------------------------------------------------- review regressions
+class TestReviewFindings(unittest.TestCase):
+    """Each test here reproduces a bug an adversarial review confirmed,
+    exactly as reported, and holds the fix in place."""
+
+    def _project(self, w=6, d=10, storeys=2):
+        from twin import commands, model
+        f = geodesy.LocalFrame(52.4856, -1.8476)
+        ring = [list(f.to_lonlat(x, y)) for x, y in
+                [(0, 0), (w, 0), (w, d), (0, d), (0, 0)]]
+        bld = model.from_footprint({
+            "type": "Feature", "id": "way/1",
+            "properties": {"levels": str(storeys)},
+            "geometry": {"type": "Polygon", "coordinates": [ring]}})
+        return commands.Project(bld), commands
+
+    def _merged(self):
+        """House + rear extension, laid out, kitchen knocked through."""
+        pj, C = self._project()
+        pj.apply(C.make("extend", block_id="existing", edge="rear",
+                        depth_m=4.0, storeys=1))
+        pj.apply(C.parse_instruction("lay out the rooms", pj.current()))
+        ks = [r for r in pj.current().rooms_on(0) if r.kind == "kitchen"]
+        pj.apply(C.make("merge_rooms", room_id=ks[0].id, other_id=ks[1].id))
+        return pj, C
+
+    def test_removing_a_block_under_a_knocked_through_room_is_refused(self):
+        """The merged kitchen spans the old wall; deleting the extension
+        by anchor id left it hanging 4 m in the open air."""
+        pj, C = self._merged()
+        ext = [b.id for b in pj.current().blocks if b.id != "existing"][0]
+        with self.assertRaises(C.CommandError) as cm:
+            pj.apply(C.make("remove_block", block_id=ext))
+        self.assertIn("spans the wall", str(cm.exception))
+        # And in both merge orders: the refusal is about geometry, so
+        # which room was clicked first cannot change the outcome.
+        pj2, C2 = self._project()
+        pj2.apply(C2.make("extend", block_id="existing", edge="rear",
+                          depth_m=4.0, storeys=1))
+        pj2.apply(C2.parse_instruction("lay out the rooms", pj2.current()))
+        ks = [r for r in pj2.current().rooms_on(0) if r.kind == "kitchen"]
+        pj2.apply(C2.make("merge_rooms", room_id=ks[1].id,
+                          other_id=ks[0].id))
+        ext2 = [b.id for b in pj2.current().blocks if b.id != "existing"][0]
+        with self.assertRaises(C2.CommandError):
+            pj2.apply(C2.make("remove_block", block_id=ext2))
+
+    def test_a_partition_of_a_merged_room_is_internal_from_both_sides(self):
+        """Pairing went by block_id, so the merged room's genuinely
+        internal walls were invisible: one side dragged alone into an
+        overlap, the other side was refused as 'outside'."""
+        pj, C = self._merged()
+        cur = pj.current()
+        merged = [r for r in cur.rooms_on(0) if r.kind == "kitchen"][0]
+        dining = [r for r in cur.rooms_on(0) if r.name == "Dining room"][0]
+        hall = [r for r in cur.rooms_on(0) if r.kind == "circulation"][0]
+        area_before = sum(r.area() for r in cur.rooms_on(0))
+        # Drag the shared wall from the merged room's side: no refusal,
+        # and BOTH rooms behind it (hall and dining, which tile that
+        # wall between them) move with it.
+        pj.apply(C.make("move_partition", room_id=merged.id,
+                        edge="front", by_m=-0.3))
+        cur = pj.current()
+        merged, dining, hall = (cur.room(merged.id), cur.room(dining.id),
+                                cur.room(hall.id))
+        self.assertAlmostEqual(dining.y + dining.depth, merged.y, places=3)
+        self.assertAlmostEqual(hall.y + hall.depth, merged.y, places=3)
+        self.assertAlmostEqual(sum(r.area() for r in cur.rooms_on(0)),
+                               area_before, places=2)
+
+    def test_overlapping_rooms_cannot_swallow_the_block_fallback(self):
+        """Coverage summed per-room, so two stacked rooms in one corner
+        counted twice and 62% of the floor plate vanished silently."""
+        from twin import model
+        pj, C = self._project(storeys=1)
+        pj.apply(C.make("add_room", block_id="existing", name="A",
+                        width_m=5.0, depth_m=4.5))
+        # A deliberate overlap, forced past the command validation the
+        # way a bug or an old saved model would arrive.
+        bld = pj.current()
+        bld.rooms.append(model.Room(
+            id="rm-forced", block_id="existing", level=0, name="B",
+            kind="room", x=bld.rooms[0].x, y=bld.rooms[0].y,
+            width=5.0, depth=4.5))
+        rooms, _M = model.to_engine_rooms(bld)
+        self.assertTrue([r for r in rooms if r.name.endswith(" L0")],
+                        "the mostly-bare block lost its fallback lump")
+
+    def test_adding_a_room_on_top_of_another_is_refused(self):
+        pj, C = self._project(storeys=1)
+        pj.apply(C.make("add_room", block_id="existing", name="A",
+                        width_m=4.0, depth_m=4.0))
+        with self.assertRaises(C.CommandError) as cm:
+            pj.apply(C.make("add_room", block_id="existing", name="B",
+                            width_m=3.0, depth_m=3.0))
+        self.assertIn("overlap", str(cm.exception))
+
+    def test_an_edited_house_still_gets_its_extension_laid_out_as_one(self):
+        """The extension test keyed off classification, which MoveWall
+        rewrites on the first survey correction — after which a 4 m
+        extension was minced into a little house of inner rooms."""
+        pj, C = self._project()
+        pj.apply(C.make("move_wall", block_id="existing", edge="rear",
+                        by_m=0.5))
+        pj.apply(C.make("extend", block_id="existing", edge="rear",
+                        depth_m=4.0, storeys=1))
+        pj.apply(C.parse_instruction("lay out the rooms", pj.current()))
+        ext = [b for b in pj.current().blocks if b.id != "existing"][0]
+        ext_rooms = [r for r in pj.current().rooms
+                     if r.block_id == ext.id]
+        self.assertEqual(len(ext_rooms), 1,
+                         [r.name for r in ext_rooms])
+
+    def test_auto_layout_never_mints_a_room_the_editor_would_refuse(self):
+        """min/max in the wrong order produced a zero-depth bathroom and
+        a 0.7 m kitchen — sizes AddRoom itself refuses as cupboards."""
+        from twin import model
+        for w, d in ((2.5, 3.0), (3.0, 3.2), (5.0, 4.6), (2.4, 4.5),
+                     (6.0, 5.0), (4.0, 14.9)):
+            pj, C = self._project(w=w, d=d, storeys=2)
+            pj.apply(C.parse_instruction("lay out the rooms", pj.current()))
+            for r in pj.current().rooms:
+                self.assertGreaterEqual(
+                    r.width, model.MIN_ROOM_M - 1e-9,
+                    f"{w}x{d}: {r.name} is {r.width} wide")
+                self.assertGreaterEqual(
+                    r.depth, model.MIN_ROOM_M - 1e-9,
+                    f"{w}x{d}: {r.name} is {r.depth} deep")
+
+    def test_layout_bands_tile_exactly_at_awkward_depths(self):
+        """Rounding depths separately left 1 mm gaps at band joints, so
+        the partition pairing missed its neighbour and a drag sailed
+        half a metre into the kitchen."""
+        pj, C = self._project(w=5, d=5.675, storeys=1)
+        pj.apply(C.make("auto_layout", block_id="existing", level=0))
+        cur = pj.current()
+        dining = [r for r in cur.rooms_on(0) if r.name == "Dining room"][0]
+        kitchen = [r for r in cur.rooms_on(0) if r.kind == "kitchen"][0]
+        self.assertAlmostEqual(dining.y + dining.depth, kitchen.y,
+                               places=9)
+        area_before = sum(r.area() for r in cur.rooms_on(0))
+        pj.apply(C.make("move_partition", room_id=kitchen.id, edge="front",
+                        by_m=-0.5))
+        cur = pj.current()
+        self.assertAlmostEqual(cur.room(dining.id).y
+                               + cur.room(dining.id).depth,
+                               cur.room(kitchen.id).y, places=9)
+        self.assertAlmostEqual(sum(r.area() for r in cur.rooms_on(0)),
+                               area_before, places=2,
+                               msg="the drag opened a void or an overlap")
+
+    def test_a_wall_wider_than_the_room_dragging_it_is_refused(self):
+        """The neighbour moves bodily, so a kitchen wider than the dining
+        room dragging it swung its far end past the hall and opened a
+        500 mm void — the very fault the pairing exists to prevent, one
+        room further along."""
+        pj, C = self._project(w=5, d=5.675, storeys=1)
+        pj.apply(C.make("auto_layout", block_id="existing", level=0))
+        cur = pj.current()
+        dining = [r for r in cur.rooms_on(0) if r.name == "Dining room"][0]
+        before = [(r.id, r.x, r.y, r.width, r.depth)
+                  for r in cur.rooms_on(0)]
+        with self.assertRaises(C.CommandError) as cm:
+            pj.apply(C.make("move_partition", room_id=dining.id,
+                            edge="rear", by_m=0.5))
+        self.assertIn("runs past the end of that wall", str(cm.exception))
+        self.assertIn("Kitchen", str(cm.exception))
+        self.assertEqual([(r.id, r.x, r.y, r.width, r.depth)
+                          for r in pj.current().rooms_on(0)], before,
+                         "a refused drag left the model changed")
+
+    def test_moving_a_wall_carries_the_rooms_on_it(self):
+        """MoveWall resized only the block, leaving the kitchen 2 m
+        outside a shrunk house — while the refusal text elsewhere
+        promised 'the rooms follow'."""
+        from twin import model
+        pj, C = self._project()
+        pj.apply(C.make("auto_layout", block_id="existing", level=0))
+        kitchen = [r for r in pj.current().rooms_on(0)
+                   if r.kind == "kitchen"][0]
+        depth_before = kitchen.depth
+        pj.apply(C.make("move_wall", block_id="existing", edge="rear",
+                        by_m=1.0))
+        cur = pj.current()
+        kitchen = cur.room(kitchen.id)
+        blk = cur.block("existing")
+        self.assertAlmostEqual(kitchen.depth, depth_before + 1.0, places=3)
+        self.assertAlmostEqual(kitchen.y + kitchen.depth,
+                               blk.y + blk.depth, places=3)
+        for r in cur.rooms_on(0):
+            self.assertTrue(model.room_inside_building(cur, r),
+                            f"{r.name} was left outside the building")
+
+    def test_pulling_a_wall_through_a_room_is_refused(self):
+        pj, C = self._project()
+        pj.apply(C.make("auto_layout", block_id="existing", level=0))
+        with self.assertRaises(C.CommandError) as cm:
+            pj.apply(C.make("move_wall", block_id="existing", edge="rear",
+                            by_m=-4.0))
+        self.assertIn("too small", str(cm.exception))
+
+    def test_room_edges_on_the_envelope_are_not_partitions(self):
+        """They were, and the picker preferred them, so after a layout
+        every envelope drag became a refused move_partition."""
+        from twin import design
+        pj, C = self._project()
+        pj.apply(C.make("extend", block_id="existing", edge="rear",
+                        depth_m=4.0, storeys=1))
+        pj.apply(C.parse_instruction("lay out the rooms", pj.current()))
+        L = design.floor_plan(pj.current())["levels"][0]
+        ext_walls = [w for w in L["walls"] if w["external"]]
+
+        def on_external(pts):
+            for t in (0.0, 0.5, 1.0):
+                px = pts[0][0] + (pts[1][0] - pts[0][0]) * t
+                py = pts[0][1] + (pts[1][1] - pts[0][1]) * t
+                if not any(
+                        min((px - (ax + (bx - ax) * u)) ** 2 +
+                            (py - (ay + (by - ay) * u)) ** 2
+                            for u in (0, 0.25, 0.5, 0.75, 1)) < 1e-4
+                        for (ax, ay), (bx, by) in
+                        (w["points"] for w in ext_walls)):
+                    return False
+            return True
+
+        for part in L["partitions"]:
+            self.assertFalse(
+                on_external(part["points"]),
+                f"partition {part['id']} lies on the outside wall")
+        # The block-to-block joint stays: that wall really is internal.
+        joint = [p for p in L["partitions"]
+                 if abs(p["points"][0][1] - 10.0) < 1e-6
+                 and abs(p["points"][1][1] - 10.0) < 1e-6]
+        self.assertTrue(joint, "the knock-through wall lost its partition")
+
+    def test_malformed_command_bodies_get_a_422_not_a_500(self):
+        """The endpoint's docstring promises refusals carry a reason;
+        eight malformed bodies were verified to 500 with a stack."""
+        from twin import api as A, commands as C
+        pj, _ = self._project()
+        A._projects[pj.id] = pj
+        client = A.app.test_client()
+        for body in (
+                {"kind": "set_storeys", "block_id": "existing"},
+                {"kind": "move_wall", "block_id": "existing", "by_m": 1},
+                {"kind": "move_wall", "block_id": "existing",
+                 "edge": "rear", "by_m": None},
+                {"kind": "set_roof"},
+                {"kind": "merge_rooms"},
+                {"kind": "remove_block"},
+                {"kind": "extend", "block_id": "existing",
+                 "edge": "rear", "depth_m": [4]},
+                {"text": 123}):
+            r = client.post(f"/api/project/{pj.id}/command", json=body)
+            self.assertEqual(r.status_code, 422, body)
+            self.assertIn("reason", r.get_json(), body)
+
+    def test_project_responses_are_never_cached(self):
+        """A cached sheets.pdf is a superseded drawing set re-shown
+        after an edit with nothing on it saying so."""
+        from twin import api as A
+        pj, _ = self._project()
+        A._projects[pj.id] = pj
+        client = A.app.test_client()
+        r = client.get(f"/api/project/{pj.id}")
+        self.assertEqual(r.headers.get("Cache-Control"), "no-store")
+
+    def test_the_lean_to_slopes_the_way_the_model_says_it_does(self):
+        """sheets.roof_z guessed orientation from the longer plan side;
+        a 2.5 x 4 m rear extension sloped across its width on paper and
+        across its depth in 3D — two answers from one model."""
+        import math as m
+        from twin import sheets
+        pj, C = self._project()
+        pj.apply(C.make("extend", block_id="existing", edge="rear",
+                        depth_m=4.0, width_m=2.5, storeys=1))
+        ext = [b for b in pj.current().blocks if b.id != "existing"][0]
+        top = (ext.base_level + ext.storeys) * ext.storey_height
+        rise = ext.depth * m.tan(m.radians(ext.roof["pitch_deg"]))
+        mid_x = ext.x + ext.width / 2
+        self.assertAlmostEqual(sheets.roof_z(ext, mid_x, ext.y),
+                               top + rise, places=6,
+                               msg="high edge is not at the house wall")
+        self.assertAlmostEqual(sheets.roof_z(ext, mid_x,
+                                             ext.y + ext.depth),
+                               top, places=6,
+                               msg="low edge is not at the rear")
+        # And the schedule's ridge height agrees with the drawing.
+        self.assertAlmostEqual(pj.current().ridge_m(),
+                               max(pj.current().ridge_m(), top + rise),
+                               places=6)
+
+    def test_a_tall_block_behind_a_hipped_roof_shows_above_the_eaves(self):
+        """Occlusion used a full-width rectangle to the front block's
+        highest point, so a 6 m tower behind a hipped roof was declared
+        invisible while demonstrably breaking the skyline."""
+        from twin import commands, model, sheets
+        f = geodesy.LocalFrame(52.4856, -1.8476)
+        ring = [list(f.to_lonlat(x, y)) for x, y in
+                [(0, 0), (10, 0), (10, 5), (0, 5), (0, 0)]]
+        bld = model.from_footprint({
+            "type": "Feature", "id": "way/9", "properties": {"levels": "2"},
+            "geometry": {"type": "Polygon", "coordinates": [ring]}})
+        bld.blocks[0].roof = {"kind": "hipped", "pitch_deg": 30.0,
+                              "ridge_along": "x"}
+        bld.blocks.append(model.Block(
+            id="tower", name="Rear tower", x=0.0, y=5.0,
+            width=10.0, depth=3.0, storeys=2, storey_height=3.0,
+            classification="user", roof={"kind": "flat"}))
+        sh = sheets.elevation_sheet(bld, "front")
+        texts = " ".join(i["s"] for i in sh.items if i["op"] == "text")
+        self.assertNotIn("Rear tower", texts,
+                         "the visible tower was reported hidden")
+        user_ink = sheets.CLASS_INK["user"]
+        drawn = [i for i in sh.items if i["op"] in ("line", "poly")
+                 and tuple(i["ink"]) == user_ink]
+        self.assertTrue(drawn, "the tower is not drawn at all")
+
+    def test_a_window_behind_the_extension_is_not_on_the_elevation(self):
+        pj, C = self._project()
+        pj.apply(C.make("extend", block_id="existing", edge="rear",
+                        depth_m=3.0, storeys=1))
+        pj.apply(C.make("add_opening", block_id="existing", edge="rear",
+                        kind="window", along_m=2.0, width_m=1.2,
+                        height_m=1.1, sill_m=0.9))
+        from twin import sheets
+        sh = sheets.elevation_sheet(pj.current(), "rear")
+        window_ink = (0.1, 0.35, 0.7)
+        drawn = [i for i in sh.items if i["op"] == "poly"
+                 and tuple(i["ink"]) == window_ink]
+        self.assertFalse(drawn, "a hidden window is drawn floating "
+                                "inside the extension")
+
+    def test_dimension_ticks_cross_the_line_they_terminate(self):
+        """The tick arithmetic rotated the wrong way and drew collinear
+        whiskers ON the dimension line — no terminators anywhere."""
+        from twin import sheets
+        out = sheets.dim_line((0, 0), (4, 0), 7.0,
+                              lambda u, z: (u, z), side=-1)
+        ticks = [i for i in out if i["op"] == "line"
+                 and abs(i["w"] - 0.35) < 1e-9]
+        self.assertEqual(len(ticks), 2)
+        for t in ticks:
+            dx = abs(t["b"][0] - t["a"][0])
+            dy = abs(t["b"][1] - t["a"][1])
+            self.assertGreater(dy, 0.5,
+                               "tick has no component across the line")
+            self.assertAlmostEqual(dx, dy, places=6)  # 45 degrees
+
+    def test_a_hip_cut_off_centre_bends_where_the_hip_does(self):
+        """Break points came from the silhouette, which only matches the
+        cut when the cut bisects the block."""
+        import math as m
+        from twin import sheets
+
+        class Blk:
+            x, y, width, depth = 0.0, 0.0, 8.0, 4.0
+            base_level, storeys, storey_height = 0, 1, 2.65
+            roof = {"kind": "hipped", "pitch_deg": 45.0}
+        us = sheets._section_us(Blk, "x", 1.0)   # cut 1 m from the eave
+        self.assertIn(1.0, us)
+        self.assertIn(7.0, us)
+        z = sheets._profile_z(Blk, 1.0, "x", 1.0)
+        self.assertAlmostEqual(z, 2.65 + 1.0 * m.tan(m.radians(45)),
+                               places=6)
+
+    def test_a_bifold_is_scheduled_as_a_door_family_not_a_window(self):
+        pj, C = self._project()
+        pj.apply(C.make("add_opening", block_id="existing", edge="rear",
+                        kind="bifold", along_m=1.0, width_m=3.0,
+                        height_m=2.1, sill_m=0.0))
+        from twin import sheets
+        sh = sheets.schedule_sheet(pj.current())
+        texts = [i["s"] for i in sh.items if i["op"] == "text"]
+        self.assertTrue(any(t.startswith("B0") for t in texts),
+                        "bifold not referenced as B..")
+        self.assertFalse(any(t.startswith("W0") for t in texts))
 
 
 # ---------------------------------------------------------- drawing sheets

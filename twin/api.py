@@ -83,6 +83,12 @@ def _headers(resp):
         "connect-src 'self'")
     resp.headers["X-Content-Type-Options"] = "nosniff"
     resp.headers["Referrer-Policy"] = "no-referrer"
+    # Project state is LIVE state. A cached /sheets.pdf is a superseded
+    # drawing set re-shown after an edit with nothing on it saying so —
+    # and a stale drawing is the one artefact this project must never
+    # serve. The tile proxy sets its own longer-lived policy after this.
+    if request.path.startswith("/api/project/"):
+        resp.headers["Cache-Control"] = "no-store"
     return resp
 
 
@@ -260,6 +266,23 @@ def project_command(pid):
         return Response(json.dumps({"available": False,
                                     "status": "REFUSED", "reason": str(e)}),
                         status=422, mimetype="application/json")
+    except KeyError as e:
+        # A command body missing a required field is a malformed REQUEST,
+        # not a server fault: without this, {"kind":"set_storeys"} with no
+        # storeys was a 500 and a stack trace — on the endpoint whose
+        # docstring promises refusals carry a reason.
+        return Response(json.dumps({
+            "available": False, "status": "REFUSED",
+            "reason": f"the {body.get('kind', 'command')} command needs a "
+                      f"value for {e.args[0]!r}"}),
+            status=422, mimetype="application/json")
+    except (TypeError, AttributeError):
+        return Response(json.dumps({
+            "available": False, "status": "REFUSED",
+            "reason": f"a field in that {body.get('kind', 'command')} "
+                      f"command has the wrong type — numbers must be "
+                      f"numbers and text must be text"}),
+            status=422, mimetype="application/json")
     return jsonify(dict(_state(pj), applied=cmd.as_dict()))
 
 

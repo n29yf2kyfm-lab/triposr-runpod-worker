@@ -31,7 +31,8 @@ from typing import List, Optional
 
 from .model import (Block, Building, MIN_ROOM_AREA_M2, MIN_ROOM_M,
                     MIN_WALL_M, Opening, ROOM_KINDS, Room, CLASS_USER,
-                    auto_layout, rect_ring)
+                    auto_layout, rect_ring, room_block_overlap,
+                    room_inside_building)
 
 
 class CommandError(ValueError):
@@ -114,7 +115,7 @@ class Extend(Command):
             x, y, w, d = blk.x - depth, blk.y + offset, depth, width
 
         new = Block(
-            id=p.get("id") or f"ext-{uuid.uuid4().hex[:6]}",
+            id=p["id"],
             name=p.get("name") or f"{edge.title()} extension",
             x=round(x, 3), y=round(y, 3),
             width=round(w, 3), depth=round(d, 3),
@@ -144,6 +145,29 @@ class MoveWall(Command):
             raise CommandError(f"no block {p['block_id']!r}")
         edge = p["edge"]
         by = float(p["by_m"])          # positive = outward
+        if edge not in ("front", "rear", "left", "right"):
+            raise CommandError("edge must be front, rear, left or right")
+
+        # THE ROOMS ON THAT WALL MOVE WITH IT. Rooms are absolute
+        # rectangles; resizing only the block left the kitchen hanging
+        # 2 m outside a shrunk house — while MovePartition's refusal
+        # message promised "move the block's wall instead, and the rooms
+        # follow". A room whose edge lies ON the old wall line stretches
+        # with it; a room the wall would be dragged THROUGH refuses the
+        # drag instead of being quietly crushed.
+        wall = {"rear": blk.y + blk.depth, "front": blk.y,
+                "right": blk.x + blk.width, "left": blk.x}[edge]
+        followers = []
+        for r in bld.rooms:
+            if not any(b.base_level <= r.level < b.base_level + b.storeys
+                       and room_block_overlap(r, b) > 1e-9
+                       for b in (blk,)):
+                continue
+            r_edge = {"rear": r.y + r.depth, "front": r.y,
+                      "right": r.x + r.width, "left": r.x}[edge]
+            if abs(r_edge - wall) < 1e-6:
+                followers.append(r)
+
         if edge == "rear":
             blk.depth += by
         elif edge == "front":
@@ -151,16 +175,48 @@ class MoveWall(Command):
             blk.depth += by
         elif edge == "right":
             blk.width += by
-        elif edge == "left":
+        else:
             blk.x -= by
             blk.width += by
-        else:
-            raise CommandError("edge must be front, rear, left or right")
         if blk.width < MIN_WALL_M or blk.depth < MIN_WALL_M:
             raise CommandError(
                 f"that would leave the block {blk.width:.2f} x "
                 f"{blk.depth:.2f} m — nothing smaller than "
                 f"{MIN_WALL_M} m is a room")
+
+        for r in followers:
+            if edge == "rear":
+                r.depth += by
+            elif edge == "front":
+                r.y -= by
+                r.depth += by
+            elif edge == "right":
+                r.width += by
+            else:
+                r.x -= by
+                r.width += by
+            if (r.width < MIN_ROOM_M - 1e-9 or r.depth < MIN_ROOM_M - 1e-9
+                    or r.area() < MIN_ROOM_AREA_M2 - 1e-9):
+                raise CommandError(
+                    f"that would leave {r.name} at {r.width:.2f} x "
+                    f"{r.depth:.2f} m — too small to be a room. Move or "
+                    f"remove it first")
+            r.x, r.y = round(r.x, 3), round(r.y, 3)
+            r.width, r.depth = round(r.width, 3), round(r.depth, 3)
+
+        # An inward drag past a room that does NOT touch the wall would
+        # cut through it. Refuse rather than leave a room in the air.
+        if by < 0:
+            for r in bld.rooms:
+                if r in followers:
+                    continue
+                if (blk.base_level <= r.level
+                        < blk.base_level + blk.storeys
+                        and not room_inside_building(bld, r)):
+                    raise CommandError(
+                        f"pulling that wall in would cut through "
+                        f"{r.name} — move or remove the room first")
+
         blk.x, blk.y = round(blk.x, 3), round(blk.y, 3)
         blk.width, blk.depth = round(blk.width, 3), round(blk.depth, 3)
         if blk.classification != CLASS_USER:
@@ -310,16 +366,30 @@ class AddRoom(Command):
                 f"across — that is a cupboard, not a room")
         x = float(p.get("x", blk.x))
         y = float(p.get("y", blk.y))
-        if not (blk.x - 1e-6 <= x and blk.y - 1e-6 <= y
-                and x + w <= blk.x + blk.width + 1e-6
-                and y + d <= blk.y + blk.depth + 1e-6):
-            raise CommandError(
-                "the room does not fit inside the block it belongs to")
-        bld.rooms.append(Room(
+        room = Room(
             id=p["id"], block_id=blk.id, level=int(p.get("level", 0)),
             name=p.get("name") or kind.title(), kind=kind,
             x=round(x, 3), y=round(y, 3),
-            width=round(w, 3), depth=round(d, 3)))
+            width=round(w, 3), depth=round(d, 3))
+        if not room_inside_building(bld, room):
+            raise CommandError(
+                "the room does not fit inside the building on that level")
+        # NO OVERLAPS. Every consumer — the coverage test, the engine,
+        # the plan — assumes rooms tile without stacking; two rooms on
+        # the same floor plate would double-count the take-off and let
+        # the whole-block fallback vanish silently.
+        for other in bld.rooms:
+            if other.level != room.level:
+                continue
+            ox = (min(other.x + other.width, room.x + room.width)
+                  - max(other.x, room.x))
+            oy = (min(other.y + other.depth, room.y + room.depth)
+                  - max(other.y, room.y))
+            if ox > 1e-6 and oy > 1e-6:
+                raise CommandError(
+                    f"that would lie on top of {other.name} — rooms "
+                    f"cannot overlap; move or resize {other.name} first")
+        bld.rooms.append(room)
         return bld
 
 
@@ -340,7 +410,6 @@ class MovePartition(Command):
         if room is None:
             raise CommandError(f"no room {p['room_id']!r}")
         edge, by = p["edge"], float(p["by_m"])
-        blk = bld.block(room.block_id)
 
         def bounds(r):
             return r.x, r.y, r.x + r.width, r.y + r.depth
@@ -348,12 +417,14 @@ class MovePartition(Command):
         x0, y0, x1, y1 = bounds(room)
         line = {"front": y0, "rear": y1, "left": x0, "right": x1}[edge]
         axis = 1 if edge in ("front", "rear") else 0
-        # Whoever shares that line, on the same level, in the same block.
+        # Whoever shares that line, on the same level. GEOMETRY, not
+        # block_id: a knocked-through room spans two blocks while
+        # carrying one block's id, and filtering by id made its genuinely
+        # internal walls invisible — the neighbour moved alone and the
+        # plan opened the exact overlap this pairing exists to prevent.
         touching = []
         for other in bld.rooms:
             if other is room or other.level != room.level:
-                continue
-            if other.block_id != room.block_id:
                 continue
             ox0, oy0, ox1, oy1 = bounds(other)
             far = {"front": oy1, "rear": oy0, "left": ox1, "right": ox0}[edge]
@@ -363,6 +434,38 @@ class MovePartition(Command):
                 b0, b1 = (ox0, ox1) if axis == 1 else (oy0, oy1)
                 if min(a1, b1) - max(a0, b0) > 1e-6:
                     touching.append(other)
+
+        # A WALL IS DRAGGED WHOLE OR NOT AT ALL. The rooms behind it move
+        # bodily, so a neighbour WIDER than the room being dragged swings
+        # its far end past a third room: drag a 3.35 m dining room into a
+        # 5 m kitchen and the kitchen's front wall leaves the hall behind
+        # it, opening exactly the void this pairing exists to close. The
+        # far side must tile the moving room's wall exactly, or the drag
+        # is refused and names the room to drag instead.
+        if touching:
+            wall_a0, wall_a1 = (x0, x1) if axis == 1 else (y0, y1)
+            spans = []
+            for o in touching:
+                ox0, oy0, ox1, oy1 = bounds(o)
+                spans.append(((ox0, ox1) if axis == 1 else (oy0, oy1), o))
+            over = [o for (b0, b1), o in spans
+                    if b0 < wall_a0 - 1e-6 or b1 > wall_a1 + 1e-6]
+            if over:
+                raise CommandError(
+                    f"{over[0].name} runs past the end of that wall, so "
+                    f"moving it would leave a gap beside {room.name} — "
+                    f"drag {over[0].name}'s own wall instead and this "
+                    f"room follows")
+            reach = wall_a0
+            for b0, b1 in sorted(s for s, _ in spans):
+                if b0 > reach + 1e-6:
+                    break
+                reach = max(reach, b1)
+            if reach < wall_a1 - 1e-6:
+                raise CommandError(
+                    f"only part of that wall of {room.name} has a room "
+                    f"behind it — the rest is the outside of the "
+                    f"building, so the wall cannot move as one")
 
         def resize(r, e, amount):
             if e == "rear":
@@ -390,11 +493,13 @@ class MovePartition(Command):
             raise CommandError(
                 f"that would leave {bad[0].name} at {bad[0].width:.2f} x "
                 f"{bad[0].depth:.2f} m — too small to be a room")
-        if not touching and blk is not None:
-            # An external wall of the block: the room may not leave it.
-            if (room.x < blk.x - 1e-6 or room.y < blk.y - 1e-6
-                    or room.x + room.width > blk.x + blk.width + 1e-6
-                    or room.y + room.depth > blk.y + blk.depth + 1e-6):
+        if not touching:
+            # No neighbour on that line, so it can only be the outside —
+            # and the room may not leave the BUILDING. Not "its block":
+            # a knocked-through room legitimately crosses its anchor
+            # block's boundary, and testing against the anchor refused
+            # a genuinely internal wall of the merged space.
+            if not room_inside_building(bld, room):
                 resize(room, edge, -by)
                 raise CommandError(
                     "that wall is the outside of the building — move the "
@@ -494,12 +599,33 @@ class RemoveBlock(Command):
             raise CommandError(
                 "the existing building cannot be deleted — this is a twin "
                 "of a real house, not a blank canvas")
-        n = len(bld.blocks)
-        bld.blocks = [b for b in bld.blocks if b.id != bid]
-        if len(bld.blocks) == n:
+        gone = next((b for b in bld.blocks if b.id == bid), None)
+        if gone is None:
             raise CommandError(f"no block {bid!r} to remove")
+        # ROOMS GO BY GEOMETRY, NOT BY ANCHOR ID. A knocked-through room
+        # spans two blocks under one block_id: deleting by id either
+        # left it hanging 4 m in the open air (anchored to the block
+        # that stays) or deleted the half that stands inside the house
+        # (anchored to the block that goes). A room fully inside the
+        # removed block goes with it; a room that STRADDLES the boundary
+        # is the user's decision, so the command refuses and says which.
+        for r in bld.rooms:
+            if not (gone.base_level <= r.level
+                    < gone.base_level + gone.storeys):
+                continue
+            inside = room_block_overlap(r, gone)
+            if 1e-9 < inside < r.area() - 1e-9:
+                raise CommandError(
+                    f"{r.name} spans the wall between {gone.name} and the "
+                    f"rest of the building — remove or shrink that room "
+                    f"first, then remove the block")
+        bld.blocks = [b for b in bld.blocks if b.id != bid]
         bld.openings = [o for o in bld.openings if o.block_id != bid]
-        bld.rooms = [r for r in bld.rooms if r.block_id != bid]
+        bld.rooms = [
+            r for r in bld.rooms
+            if not (gone.base_level <= r.level
+                    < gone.base_level + gone.storeys
+                    and room_block_overlap(r, gone) >= r.area() - 1e-9)]
         return bld
 
 

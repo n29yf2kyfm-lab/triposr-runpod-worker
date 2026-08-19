@@ -124,7 +124,14 @@ async function historyAction(what) {
   if (!project) return;
   const { body, status: code } = await post(
     `/api/project/${project.project_id}/${what}`);
-  if (code === 422) { status(body.reason, 3000); return; }
+  /* ANY error body must never become `project`. A 400 for an expired
+   * project id used to be stored as the state, and the next render()
+   * died reading .building off an error object — workspace dead, no
+   * message. Same guard applyCommand always had. */
+  if (code === 422 || !body.available) {
+    status(body.reason || 'that is not possible right now', 5000);
+    return;
+  }
   project = body;
   render();
   refreshAssessment();
@@ -140,6 +147,28 @@ function render() {
   drawLevels();
   drawHistory();
   drawSummary();
+  syncRoomPanel();
+}
+
+/* The room panel must describe the room AS IT NOW IS. Selection used to
+ * survive merges, drags and level switches with its captured geometry,
+ * so "Knock through" matched against a rectangle that no longer existed
+ * and the panel showed stale areas. Re-resolve by id on every render:
+ * gone or off-level means deselected, present means refreshed. */
+function syncRoomPanel() {
+  if (!selectedRoom || !plan) return;
+  const L = (project.plan.levels || [])[plan.level];
+  const live = L && (L.rooms || []).find((r) => r.id === selectedRoom.id);
+  if (!live) {
+    selectedRoom = null;
+    $('roomPanel').style.display = 'none';
+    return;
+  }
+  selectedRoom = live;
+  $('roomName').value = live.name;
+  $('roomKind').value = live.kind;
+  $('roomArea').textContent =
+    `${live.area_m2} m² · ${live.width.toFixed(2)} × ${live.depth.toFixed(2)} m`;
 }
 
 function drawSummary() {
@@ -164,7 +193,9 @@ function drawLevels() {
     const b = document.createElement('button');
     b.textContent = i === 0 ? 'Ground' : `Floor ${i}`;
     b.className = plan && plan.level === i ? 'on' : '';
-    b.onclick = () => { plan.level = i; plan.fit(); drawLevels(); };
+    b.onclick = () => {
+      plan.level = i; plan.fit(); drawLevels(); syncRoomPanel();
+    };
     box.appendChild(b);
   }
 }
@@ -377,11 +408,12 @@ export function initTwinUI() {
     status('');
     $('sheetList').innerHTML =
       body.manifest.map((m) =>
-        `<div>${m.number} · ${m.title}` +
-        `${m.scale ? ` · 1:${m.scale} @ ${m.paper}` : ''}</div>`).join('') +
+        `<div>${esc(m.number)} · ${esc(m.title)}` +
+        `${m.scale ? ` · 1:${esc(m.scale)} @ ${esc(m.paper)}` : ''}</div>`)
+        .join('') +
       (body.problems.length
         ? `<div style="color:#e2a33a;margin-top:6px">Not drawn: ` +
-          body.problems.join('; ') + `</div>`
+          esc(body.problems.join('; ')) + `</div>`
         : '');
     window.open(`/api/project/${project.project_id}/sheets.pdf?${q}`,
                 '_blank');

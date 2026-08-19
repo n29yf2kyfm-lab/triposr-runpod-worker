@@ -42,11 +42,59 @@ export class PlanView {
     this.draw();
   }
 
+  /* KEEP THE USER'S VIEW, BUT NEVER STRAND THE BUILDING OFF-SCREEN.
+   *
+   * This runs after every command, refused ones included. Re-fitting
+   * each time threw away the zoom the user had just set up to nudge a
+   * partition. Fitting only once is worse: add a 4 m extension and the
+   * new wall lands outside the view with no way back — the flagship
+   * gesture, unreachable.
+   *
+   * So: fit when the MODEL's extent changes and the result would not
+   * be fully visible. A pan or zoom leaves the extent alone, so the
+   * view is kept; an edit inside the current view keeps it too; an
+   * edit that grows the building past the edge brings it back. */
   set(data, bearing) {
     this.data = data;
     if (bearing != null) this.bearing = bearing;
     if (this.level >= (data.levels || []).length) this.level = 0;
-    this.fit();
+    const b = this.bounds();
+    const grew = !this._lastBounds || !b || b.some(
+      (v, i) => Math.abs(v - this._lastBounds[i]) > 1e-6);
+    this._lastBounds = b;
+    if (!this._everFit || (grew && !this.allVisible(b))) {
+      this._everFit = true;
+      this.fit();
+    } else {
+      this.draw();
+    }
+  }
+
+  /** Plan extent of the current level: [x0, y0, x1, y1], or null. */
+  bounds() {
+    const L = this.levelData();
+    if (!L || !L.blocks.length) return null;
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    for (const b of L.blocks) {
+      for (const [x, y] of b.ring) {
+        x0 = Math.min(x0, x); x1 = Math.max(x1, x);
+        y0 = Math.min(y0, y); y1 = Math.max(y1, y);
+      }
+    }
+    return [x0, y0, x1, y1];
+  }
+
+  /** Does that extent sit inside the canvas, with room for dimensions? */
+  allVisible(b) {
+    if (!b) return true;
+    const pad = 14;                       // device px of breathing space
+    const w = this.canvas.width, h = this.canvas.height;
+    for (const [x, y] of [[b[0], b[1]], [b[2], b[1]],
+                          [b[2], b[3]], [b[0], b[3]]]) {
+      const [px, py] = this.toPx(x, y);
+      if (px < pad || py < pad || px > w - pad || py > h - pad) return false;
+    }
+    return true;
   }
 
   levelData() {
@@ -336,14 +384,18 @@ export class PlanView {
       if (hit) {
         cv.setPointerCapture(e.pointerId);
         this.selected = hit;
-        drag = { id: e.pointerId, start: [px, py], wall: hit, moved: 0 };
+        drag = { id: e.pointerId, start: [px, py], wall: hit, moved: 0,
+                 client: [e.clientX, e.clientY] };
         this.draw();
         this.onPick && this.onPick(hit);
       } else {
         // No wall under the pointer. That is not nothing: the inside of
         // a room is where a person clicks to select it, and only a
         // pointer that then MOVES is a pan. Keep where it went down so
-        // the release can tell the two apart.
+        // the release can tell the two apart. Capture here too — a pan
+        // released off-canvas otherwise never ends, and the plan then
+        // chases a hovering cursor with no button held.
+        cv.setPointerCapture(e.pointerId);
         drag = { id: e.pointerId, pan: [e.clientX, e.clientY],
                  start: [px, py], moved: 0 };
       }
@@ -369,7 +421,13 @@ export class PlanView {
                   left: [-1, 0], right: [1, 0] }[w.edge] || [0, 1];
       const by = (px - drag.start[0]) * n[0] + (py - drag.start[1]) * n[1];
       drag.by = Math.round(by * 10) / 10;
-      drag.moved = Math.abs(by);
+      // Total travel, not just the normal component: a 2 m slide ALONG
+      // a partition used to read as moved=0 and popped the room panel
+      // on release as if it had been a tap. Tracked from client
+      // coordinates because movementX is unreliable on touch browsers.
+      drag.moved += Math.abs(e.clientX - drag.client[0]) +
+                    Math.abs(e.clientY - drag.client[1]);
+      drag.client = [e.clientX, e.clientY];
       this.ghost = { wall: w, by: drag.by };
       this.draw();
       this._ghost();
@@ -377,8 +435,7 @@ export class PlanView {
     const end = (e) => {
       if (!drag || e.pointerId !== drag.id) return;
       const d = drag; drag = null; this.ghost = null;
-      const tapped = d.start && (d.wall ? Math.abs(d.by || 0) < 0.1
-                                        : (d.moved || 0) < 5);
+      const tapped = d.start && (d.moved || 0) < 5;
       if (d.wall && d.by && Math.abs(d.by) >= 0.1 && this.onDrag) {
         this.onDrag(d.wall, d.by);
       } else if (tapped && this.onRoom) {

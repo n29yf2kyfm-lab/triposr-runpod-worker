@@ -134,8 +134,8 @@ def assess(bld, *, region=None, vat="standard", calibrate_per_m2=None):
     except Exception:
         pass
 
-    import quantities as Q
     try:
+        import quantities as Q
         bill = Q.bill(model)
         out["quantities"] = {
             "groups": {k: [{"item": L["item"], "quantity": L["quantity"],
@@ -217,20 +217,52 @@ def floor_plan(bld):
                                    (pts[1][1] - pts[0][1]) ** 2) ** 0.5, 2)})
         ops = [o.as_dict() for o in bld.openings if o.level == lvl]
         rooms = [r.as_dict() for r in bld.rooms_on(lvl)]
+
+        # A PARTITION IS AN INTERNAL WALL. A room edge lying on the
+        # building's outside is the inside face of the envelope, not a
+        # partition — and because rooms tile their block, emitting those
+        # edges made every envelope wall unreachable on the plan: the
+        # picker preferred the coincident "partition", whose drag the
+        # server then refused. An edge is dropped when it sits on an
+        # EXTERNAL wall; edges on the internal joint between two blocks
+        # stay, because the wall there really is internal.
+        ext_walls = [w for w in walls if w["external"]]
+
+        def _on_envelope(pts):
+            for t in (0.0, 0.5, 1.0):
+                px = pts[0][0] + (pts[1][0] - pts[0][0]) * t
+                py = pts[0][1] + (pts[1][1] - pts[0][1]) * t
+                on_any = False
+                for wl in ext_walls:
+                    (ax, ay), (bx, by) = wl["points"]
+                    vx, vy = bx - ax, by - ay
+                    L2 = vx * vx + vy * vy or 1.0
+                    s = max(0.0, min(1.0, ((px - ax) * vx +
+                                           (py - ay) * vy) / L2))
+                    if ((px - (ax + vx * s)) ** 2 +
+                            (py - (ay + vy * s)) ** 2) < 1e-6:
+                        on_any = True
+                        break
+                if not on_any:
+                    return False
+            return True
+
         # Partitions: the internal walls implied by the room rectangles.
         parts = []
         for r in bld.rooms_on(lvl):
-            for eid, ename, pts, _n in (
+            for eid, ename, pts in (
                     (f"{r.id}:front", "front",
-                     [[r.x, r.y], [r.x + r.width, r.y]], None),
+                     [[r.x, r.y], [r.x + r.width, r.y]]),
                     (f"{r.id}:right", "right",
                      [[r.x + r.width, r.y],
-                      [r.x + r.width, r.y + r.depth]], None),
+                      [r.x + r.width, r.y + r.depth]]),
                     (f"{r.id}:rear", "rear",
                      [[r.x + r.width, r.y + r.depth],
-                      [r.x, r.y + r.depth]], None),
+                      [r.x, r.y + r.depth]]),
                     (f"{r.id}:left", "left",
-                     [[r.x, r.y + r.depth], [r.x, r.y]], None)):
+                     [[r.x, r.y + r.depth], [r.x, r.y]])):
+                if _on_envelope(pts):
+                    continue
                 parts.append({"id": eid, "room": r.id, "edge": ename,
                               "points": pts,
                               "length_m": round(

@@ -136,20 +136,29 @@ def roof_z(blk, x, y):
     dx = min(x - x0, x1 - x)
     dy = min(y - y0, y1 - y)
     if kind == "hipped":
+        # The straight skeleton of a rectangle: orientation-free.
         return top + max(0.0, min(dx, dy)) * t
+    # THE MODEL SAYS WHICH WAY THE ROOF RUNS, AND THE MODEL WINS.
+    # Extend sets ridge_along on every extension it makes and the 3D
+    # honours it; the first version of this function guessed from the
+    # longer plan side instead, so a lean-to on a narrow, deep rear
+    # extension was drawn climbing sideways along the frontage — the 3D
+    # and the paper disagreeing about the same "one authoritative
+    # model". Absent from the spec, the ridge follows the longer side.
+    ra = spec.get("ridge_along")
+    if ra not in ("x", "y"):
+        ra = "y" if blk.depth >= blk.width else "x"
     if kind == "monopitch":
-        # Climbs across the SPAN, which is the shorter side; the high
-        # side is recorded by the roof spec, defaulting to the low
-        # coordinate as model3d does.
+        # The slope runs ACROSS the ridge direction; high_side "min"
+        # puts the high edge at the low coordinate, as render3d does.
         high = spec.get("high_side", "min")
-        if blk.width <= blk.depth:
-            run = (x1 - x) if high == "min" else (x - x0)
-        else:
+        if ra == "x":
             run = (y1 - y) if high == "min" else (y - y0)
+        else:
+            run = (x1 - x) if high == "min" else (x - x0)
         return top + max(0.0, run) * t
-    # gabled: the ridge runs along the LONGER side, so the slope is
-    # across the shorter one.
-    return top + (dx if blk.width <= blk.depth else dy) * t
+    # gabled: slope across the ridge, vertical gable ends along it.
+    return top + (dy if ra == "x" else dx) * t
 
 
 def _principal(bld):
@@ -196,15 +205,17 @@ def section_lines(bld):
     missed = [b for b in bld.blocks if b not in _crossed(bld, axis, at)]
     if missed:
         other = "y" if axis == "x" else "x"
-        # Cut where the most of what was missed is picked up, preferring
-        # a line that also stays inside the main building so the two
-        # sections read against each other.
-        best, best_score = None, -1
+        # Cut where the most of what A-A MISSED is picked up — counting
+        # all crossed blocks let a candidate that crossed none of the
+        # missed ones win on bulk — preferring a line that also passes
+        # through the main building so the two sections read together.
+        best, best_score = None, (-1, -1)
         for b in missed + [p]:
             cand = ((b.x + b.width / 2.0) if other == "y"
                     else (b.y + b.depth / 2.0))
             got = _crossed(bld, other, cand)
-            score = len(got) + (1 if p in got else 0)
+            score = (len([m for m in missed if m in got]),
+                     1 if p in got else 0)
             if score > best_score:
                 best, best_score = cand, score
         cuts.append({"axis": other, "at": round(best, 3), "label": "B-B",
@@ -379,7 +390,8 @@ class Sheet:
         y -= 10.0
         self.add(poly([(x, y), (x + W, y), (x + W, y + 8.0), (x, y + 8.0)],
                       close=True, fill=(0.93, 0.85, 0.20), w=0.2))
-        self.add(text((x + W / 2, y + 2.8), _fit(self.status, W - 3, TEXT_S),
+        self.add(text((x + W / 2, y + 2.8),
+                      _fit(self.status, W - 3, TEXT_S, bold=True),
                       size=TEXT_S, bold=True, anchor="middle"))
 
         # Classification key.
@@ -399,10 +411,15 @@ class Sheet:
         notes = [f"Printed true to scale at {self.paper}. Check the scale "
                  f"bar before measuring; work to figured dimensions where "
                  f"given."] + list(self.notes)
+        floor = self.MARGIN + 4.0
         for i, n in enumerate(notes):
             if i:
                 y -= 2.0
             for chunk in _wrap(n, W - 4.5, TEXT_S):
+                if y < floor:
+                    self.add(text((x + 2.0, y), "…", size=TEXT_S,
+                                  ink=(0.3, 0.3, 0.3)))
+                    return
                 self.add(text((x + 2.0, y), chunk, size=TEXT_S,
                               ink=(0.3, 0.3, 0.3)))
                 y -= 3.4
@@ -460,10 +477,12 @@ class Sheet:
 _W = {**{c: 556 for c in "abcdeghknopqsuy"}, **{c: 500 for c in "0123456789"},
       **{c: 222 for c in "il'|"}, **{c: 278 for c in " !,.:;"},
       **{c: 333 for c in "()[]{}/\\ft-"}, **{c: 611 for c in "ABDEHKNPRSTVXY"},
-      **{c: 722 for c in "CGOQU"}, **{c: 778 for c in "MW"},
-      **{c: 667 for c in "FJLZ"}, **{c: 556 for c in "vxz"},
-      **{c: 833 for c in "m"}, **{c: 500 for c in "rj"},
-      **{c: 584 for c in "+=<>~"}, **{c: 1000 for c in "—"}}
+      **{c: 722 for c in "CGOQUw"}, **{c: 833 for c in "Mm"},
+      **{c: 944 for c in "W"}, **{c: 278 for c in "I·"},
+      **{c: 667 for c in "FJLZ"}, **{c: 556 for c in "vxz£"},
+      **{c: 500 for c in "rj"}, **{c: 333 for c in "²"},
+      **{c: 584 for c in "+=<>~×"}, **{c: 400 for c in "°"},
+      **{c: 1000 for c in "—…"}}
 
 
 #: Cap height -> font size. ISO 3098 lettering is quoted as the height
@@ -481,20 +500,20 @@ def text_width(s, size, bold=False):
             * size * FONT_K * (BOLD_K if bold else 1.0))
 
 
-def _fit(s, width_mm, size):
+def _fit(s, width_mm, size, bold=False):
     s = str(s)
-    if text_width(s, size) <= width_mm:
+    if text_width(s, size, bold) <= width_mm:
         return s
-    while s and text_width(s + "…", size) > width_mm:
+    while s and text_width(s + "…", size, bold) > width_mm:
         s = s[:-1]
     return s + "…"
 
 
-def _wrap(s, width_mm, size):
+def _wrap(s, width_mm, size, bold=False):
     out, cur = [], ""
     for word in str(s).split():
         trial = (cur + " " + word).strip()
-        if cur and text_width(trial, size) > width_mm:
+        if cur and text_width(trial, size, bold) > width_mm:
             out.append(cur)
             cur = word
         else:
@@ -567,18 +586,26 @@ def dim_line(a, b, offset, to_paper, *, side=1, size=TEXT_S, label=None):
         line((bx, by), p1, w=0.15, grey=0.45),
         line(p0, p1, w=0.2, grey=0.15),
     ]
-    for p, s in ((p0, 1), (p1, -1)):
-        tx, ty = dx / L * 1.2 * s, dy / L * 1.2 * s
-        out.append(line((p[0] - tx - ny * 0.12, p[1] - ty + nx * 0.12),
-                        (p[0] + tx, p[1] + ty), w=0.35, grey=0.15))
+    # Oblique ticks, drawn at 45 degrees ACROSS the line — the previous
+    # arithmetic rotated the offset vector the wrong way and produced
+    # collinear whiskers lying ON the dimension line: no terminator at
+    # all where the witness lines land, on every dimension of every
+    # sheet.
+    ux, uy = dx / L, dy / L
+    mag = abs(offset) or 1.0
+    hx, hy = nx / mag, ny / mag              # unit, towards the offset
+    tk = 1.2 / math.sqrt(2.0)
+    for p in (p0, p1):
+        out.append(line((p[0] - (ux + hx) * tk, p[1] - (uy + hy) * tk),
+                        (p[0] + (ux + hx) * tk, p[1] + (uy + hy) * tk),
+                        w=0.35, grey=0.15))
     s = label if label is not None else mm_text(metres)
     mx, my = (p0[0] + p1[0]) / 2.0, (p0[1] + p1[1]) / 2.0
     rot = math.degrees(math.atan2(dy, dx))
     if rot > 90 or rot <= -90:
         rot += 180
     off = 1.1
-    out.append(text((mx - ny / abs(offset or 1) * off,
-                     my + nx / abs(offset or 1) * off),
+    out.append(text((mx + hx * off, my + hy * off),
                     s, size=size, anchor="middle", rot=rot))
     return out
 
@@ -773,7 +800,7 @@ def section_sheet(bld, paper="A3", scale=None, date=None, number=None,
              for b in crossed)
     zmax = max(_profile_z(b, u, axis, at) or 0.0
                for b in crossed
-               for u in _profile_us(b, axis))
+               for u in _section_us(b, axis, at))
     pad = 26.0
     s = pick_scale(u1 - u0, zmax + 1.0, (x1 - x0) - pad, (y1 - y0) - pad,
                    prefer=scale)
@@ -810,8 +837,9 @@ def section_sheet(bld, paper="A3", scale=None, date=None, number=None,
             heights.add(round(z, 3))
             sh.add(line(to_paper(bu0, z), to_paper(bu1, z), w=0.4,
                         grey=0.25))
-        # The roof, sampled at its own break points — exact, not smoothed.
-        prof = [(u, _profile_z(b, u, axis, at)) for u in _profile_us(b, axis)]
+        # The roof, at the CUT's own break points — exact, not smoothed.
+        prof = [(u, _profile_z(b, u, axis, at))
+                for u in _section_us(b, axis, at)]
         prof = [(u, z) for u, z in prof if z is not None]
         if prof:
             sh.add(poly([to_paper(u, z) for u, z in prof], w=0.6, ink=ink))
@@ -856,12 +884,12 @@ def section_sheet(bld, paper="A3", scale=None, date=None, number=None,
 
 
 def _profile_us(b, axis):
-    """The positions along the section where the roof profile bends.
+    """Where the roof SILHOUETTE (max over the far axis) bends.
 
-    Sampling a roof is guessing. These are the exact break points of the
-    straight-skeleton surfaces this model builds — the eaves, the
-    mid-span ridge, and the diagonals where a hip turns — so the drawn
-    profile is the real one, not a polyline that nearly is.
+    For the elevations: a hip's silhouette rises for half the far span
+    then runs level, so the bends are at half_v from each end; a gable
+    or monopitch bends at most at mid-span. Exact for the silhouette —
+    a section through a specific cut line needs _section_us instead.
     """
     u0 = b.x if axis == "x" else b.y
     u1 = u0 + (b.width if axis == "x" else b.depth)
@@ -870,6 +898,27 @@ def _profile_us(b, axis):
     us = {u0, u1, (u0 + u1) / 2.0}
     half_v = (v1 - v0) / 2.0
     for u in (u0 + half_v, u1 - half_v):
+        if u0 <= u <= u1:
+            us.add(u)
+    return sorted(us)
+
+
+def _section_us(b, axis, at):
+    """Where the roof profile bends ALONG A SPECIFIC CUT.
+
+    A hip cut 1 m from its eave goes level 1 m in from each end — not at
+    half the far span, which is only where it bends when the cut happens
+    to bisect the block. The first version used the silhouette's break
+    points for sections too, and drew the roof up to 5 mm low between
+    them on a sheet whose docstring promises "exact, not smoothed".
+    """
+    u0 = b.x if axis == "x" else b.y
+    u1 = u0 + (b.width if axis == "x" else b.depth)
+    v0 = b.y if axis == "x" else b.x
+    v1 = v0 + (b.depth if axis == "x" else b.width)
+    dv = min(at - v0, v1 - at)
+    us = {u0, u1, (u0 + u1) / 2.0}
+    for u in (u0 + dv, u1 - dv):
         if u0 <= u <= u1:
             us.add(u)
     return sorted(us)
@@ -958,17 +1007,55 @@ def elevation_sheet(bld, facing="front", paper="A3", scale=None, date=None,
     # taller. Anything wholly hidden is REPORTED on the sheet rather than
     # silently dropped, so nobody thinks the extension was forgotten.
     near_first = sorted(bld.blocks, key=lambda b: _depth_key(b, facing))
-    skyline = []                      # (u0, u1, height) of what is drawn
+    #: what is already drawn in front: (u0, u1, base_z, silhouette prof)
+    skyline = []
     hidden = []
 
-    def hidden_to(u):
-        """How high the blocks in front already stand at this position."""
-        return max([h for a, b_, h in skyline
-                    if a - 1e-9 <= u <= b_ + 1e-9], default=0.0)
+    def _sil(prof, u):
+        for (ua, za), (ub, zb) in zip(prof, prof[1:]):
+            if ua - 1e-9 <= u <= ub + 1e-9:
+                if ub - ua < 1e-12:
+                    return max(za, zb)
+                return za + (zb - za) * (u - ua) / (ub - ua)
+        return None
 
     def seen(u, z):
-        """Is (u, z) above everything already drawn in front of it?"""
-        return z > hidden_to(u) + 1e-9
+        """Is (u, z) clear of everything already drawn in front of it?
+
+        Cover is the REAL front silhouette between the block's base and
+        its roof line at that very position — not a full-width rectangle
+        to its highest point, which was how a 6 m tower behind a hipped
+        roof got declared invisible while demonstrably breaking the
+        skyline near both hip ends.
+        """
+        for a, b_, base, prof in skyline:
+            if a - 1e-9 <= u <= b_ + 1e-9:
+                top_here = _sil(prof, u)
+                if (top_here is not None
+                        and base - 1e-9 <= z <= top_here - 1e-9):
+                    return False
+        return True
+
+    def visible_z_runs(u, z_lo, z_hi):
+        """The stretches of a vertical edge not behind anything."""
+        runs = [(z_lo, z_hi)]
+        for a, b_, base, prof in skyline:
+            if not (a - 1e-9 <= u <= b_ + 1e-9):
+                continue
+            top_here = _sil(prof, u)
+            if top_here is None:
+                continue
+            nxt = []
+            for lo, hi in runs:
+                if top_here <= lo + 1e-9 or base >= hi - 1e-9:
+                    nxt.append((lo, hi))
+                    continue
+                if lo < base - 1e-9:
+                    nxt.append((lo, min(hi, base)))
+                if hi > top_here + 1e-9:
+                    nxt.append((max(lo, top_here), hi))
+            runs = nxt
+        return [(lo, hi) for lo, hi in runs if hi - lo > 1e-6]
 
     for b in near_first:
         bu0 = b.x if horiz == "x" else b.y
@@ -992,9 +1079,11 @@ def elevation_sheet(bld, facing="front", paper="A3", scale=None, date=None,
         if not prof:
             prof = [(bu0, top), (bu1, top)]
 
-        if not any(seen(u, z) for u, z in prof) and not seen(bu0, top):
+        if (not any(seen(u, z) for u, z in prof)
+                and not any(seen(u, base) for u in (bu0, bu1))
+                and not seen((bu0 + bu1) / 2.0, base)):
             hidden.append(b.name)
-            skyline.append((bu0, bu1, max(z for _u, z in prof)))
+            skyline.append((bu0, bu1, base, prof))
             continue
 
         # Every edge is CLIPPED to what stands clear of the blocks in
@@ -1007,18 +1096,16 @@ def elevation_sheet(bld, facing="front", paper="A3", scale=None, date=None,
         for u in (bu0, bu1):
             zt = max((z for uu, z in prof if abs(uu - u) < 1e-6),
                      default=top)
-            z_lo = max(base, hidden_to(u))
-            if zt > z_lo + 1e-6:
-                sh.add(line(P(u, z_lo), P(u, zt), w=0.5, ink=ink))
+            for lo, hi in visible_z_runs(u, base, zt):
+                sh.add(line(P(u, lo), P(u, hi), w=0.5, ink=ink))
         # The eaves line and the ground line of this block, where seen.
         us = _elevation_us(b, horiz)
         for seg in _visible_runs([(u, top) for u in us], seen):
             sh.add(poly([P(u, z) for u, z in seg], w=0.35,
                         ink=(0.55, 0.55, 0.55)))
-        for seg in _visible_runs([(u, base) for u in us],
-                                 lambda u, z: z >= hidden_to(u) - 1e-9):
+        for seg in _visible_runs([(u, base) for u in us], seen):
             sh.add(poly([P(u, z) for u, z in seg], w=0.5, ink=ink))
-        skyline.append((bu0, bu1, max(z for _u, z in prof)))
+        skyline.append((bu0, bu1, base, prof))
 
     if hidden:
         sh.notes.append("Not visible on this elevation, behind the "
@@ -1037,10 +1124,17 @@ def elevation_sheet(bld, facing="front", paper="A3", scale=None, date=None,
                   else ay + (by - ay) / L * o.along_m)
         along1 = along0 + o.width * (1 if (bx - ax) + (by - ay) >= 0 else -1)
         zb = o.level * b.storey_height + o.sill
-        sh.add(poly([P(min(along0, along1), zb),
-                     P(max(along0, along1), zb),
-                     P(max(along0, along1), zb + o.height),
-                     P(min(along0, along1), zb + o.height)],
+        ua, ub = min(along0, along1), max(along0, along1)
+        # A WINDOW BEHIND THE EXTENSION IS NOT ON THIS ELEVATION. The
+        # blocks got hidden-line treatment; leaving their openings out
+        # of it drew a window floating inside the extension that stands
+        # in front of it. Same test, same skyline.
+        if not any(seen(u, z)
+                   for u in (ua, (ua + ub) / 2.0, ub)
+                   for z in (zb, zb + o.height / 2.0, zb + o.height)):
+            continue
+        sh.add(poly([P(ua, zb), P(ub, zb),
+                     P(ub, zb + o.height), P(ua, zb + o.height)],
                     close=True, w=0.35, fill=(0.86, 0.92, 0.97),
                     ink=(0.1, 0.35, 0.7)))
 
@@ -1067,6 +1161,7 @@ def schedule_sheet(bld, paper="A3", date=None, number="SC-01", status=None,
                status=status or "PRELIMINARY — NOT FOR CONSTRUCTION")
     x0, y0, x1, y1 = sh.area()
     y = y1 - 6.0
+    dropped = [0]
 
     def head(s):
         nonlocal y
@@ -1078,6 +1173,13 @@ def schedule_sheet(bld, paper="A3", date=None, number="SC-01", status=None,
 
     def row(cells, widths, bold=False, ink=(0, 0, 0), rule=True):
         nonlocal y
+        # A row that would walk off the paper is COUNTED, not clipped in
+        # silence: the schedule is the sheet a supplier prices off, and
+        # rows lost past the bottom edge with no marker are rows nobody
+        # prices. The count prints at the foot of the sheet.
+        if y - 4.6 < y0 + 8.0:
+            dropped[0] += 1
+            return
         y -= 4.6
         cx = x0
         for cell, w in zip(cells, widths):
@@ -1117,7 +1219,9 @@ def schedule_sheet(bld, paper="A3", date=None, number="SC-01", status=None,
                                  key=lambda o: (o.level, o.edge, o.along_m)),
                           1):
         b = bld.block(o.block_id)
-        row([f"{'WD'[o.kind == 'door']}{i:02d}", o.kind,
+        ref = {"window": "W", "door": "D", "bifold": "B",
+               "rooflight": "R"}.get(o.kind, "O")
+        row([f"{ref}{i:02d}", o.kind,
              (b.name if b else o.block_id), f"{o.edge} · L{o.level}",
              f"{round(o.width * 1000)} × {round(o.height * 1000)}",
              f"{round(o.sill * 1000)}"], ow,
@@ -1156,6 +1260,11 @@ def schedule_sheet(bld, paper="A3", date=None, number="SC-01", status=None,
             row([f"…and {len(findings) - 14} more — see the full report",
                  ""], aw, ink=(0.45, 0.45, 0.45))
 
+    if dropped[0]:
+        sh.add(text((x0, y0 + 2.0),
+                    f"{dropped[0]} more row(s) did not fit on this sheet "
+                    f"— the model holds the full schedule",
+                    size=TEXT_M, bold=True, ink=(0.7, 0.15, 0.1)))
     sh.frame()
     return sh
 

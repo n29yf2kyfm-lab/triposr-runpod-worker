@@ -357,6 +357,78 @@ const check = (name, cond, detail = '') =>
     .catch(() => check('undo and redo bring the same rooms back, same ids',
                        false, 'ids changed on replay'));
 
+  /* After a layout, the OUTSIDE wall must still be draggable. Room
+   * edges lying on the envelope used to be emitted as partitions, and
+   * the picker preferred them, so every envelope drag became a
+   * move_partition the server refused. */
+  const envelope = await page.evaluate(() => {
+    const p = window.__twinUI.plan;
+    const L = p.levelData();
+    const w = L.walls.find((x) => x.edge === 'rear' && x.external);
+    const [a, b] = w.points;
+    const mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+    const hit = p.pick(mid[0], mid[1]);
+    return { picked: hit ? { room: hit.room || null, block: hit.block || null,
+                             external: hit.external === true } : null,
+             mid, wall: w.id };
+  });
+  check('the outside wall is still what the plan picks after a layout',
+        envelope.picked && !envelope.picked.room && !!envelope.picked.block,
+        JSON.stringify(envelope.picked));
+
+  const envDrag = await page.evaluate(async (mid) => {
+    const p = window.__twinUI.plan;
+    /* Record what the canvas actually decides, so a failure here says
+     * WHY — picked nothing, read it as a tap, or the command refused. */
+    window.__dragLog = [];
+    const od = p.onDrag;
+    p.onDrag = (w, by) => { window.__dragLog.push(['drag', w.id, by]);
+                            return od(w, by); };
+    const orm = p.onRoom;
+    p.onRoom = (r) => { window.__dragLog.push(['room', r.id]);
+                        return orm(r); };
+    const before = window.__twinUI.project.building.measurements.footprint_m2;
+    const b = p.canvas.getBoundingClientRect();
+    const s0 = p.toPx(mid[0], mid[1]);
+    const s1 = p.toPx(mid[0], mid[1] + 1.0);
+    const pt = (s) => ({ x: b.left + s[0] / p.pixelRatio,
+                         y: b.top + s[1] / p.pixelRatio });
+    return { before, from: pt(s0), to: pt(s1) };
+  }, envelope.mid);
+  await page.mouse.move(envDrag.from.x, envDrag.from.y);
+  await page.mouse.down();
+  await page.mouse.move(envDrag.to.x, envDrag.to.y, { steps: 8 });
+  await page.mouse.up();
+  await page.waitForFunction(
+    (b) => window.__twinUI.project.building.measurements.footprint_m2 > b + 0.5,
+    envDrag.before, { timeout: 30000 }).catch(() => {});
+  const envAfter = await page.evaluate(
+    () => window.__twinUI.project.building.measurements.footprint_m2);
+  const dragLog = await page.evaluate(() => window.__dragLog);
+  check('dragging it grows the building instead of being refused',
+        envAfter > envDrag.before + 0.5,
+        `${envDrag.before} -> ${envAfter} · canvas saw ` +
+        `${JSON.stringify(dragLog)} · status ` +
+        (await page.evaluate(
+          () => document.getElementById('tstatus').textContent)));
+
+  const roomsFollow = await page.evaluate((blockId) => {
+    const L = window.__twinUI.plan.levelData();
+    const blk = L.blocks.find((b) => b.id === blockId);
+    const rear = Math.max(...blk.ring.map((p) => p[1]));
+    const touching = (L.rooms || []).filter(
+      (r) => Math.abs(r.y + r.depth - rear) < 0.02);
+    return { block: blockId, rear, touching: touching.length,
+             roomArea: L.room_area_m2, area: L.area_m2 };
+  }, envelope.picked.block);
+  check('and the rooms on that wall came with it',
+        roomsFollow.touching > 0 &&
+        Math.abs(roomsFollow.roomArea - roomsFollow.area) < 0.2,
+        JSON.stringify(roomsFollow));
+
+  await page.click('#undo');
+  await page.waitForTimeout(700);
+
   /* --- the drawing set: a real PDF, at a real scale ------------------- */
   await page.selectOption('#paper', 'A3');
   await page.selectOption('#sheetScale', '');

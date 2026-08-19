@@ -297,14 +297,21 @@ class Building:
         for b in self.blocks:
             base = (b.base_level + b.storeys) * b.storey_height
             r = b.roof or {}
-            if r.get("kind") in ("gabled", "hipped"):
-                span = min(b.width, b.depth)
-                top = max(top, base + (span / 2) *
-                          math.tan(math.radians(r.get("pitch_deg", 30))))
+            t = math.tan(math.radians(r.get("pitch_deg", 30)))
+            # The slope runs ACROSS the ridge the spec names, exactly as
+            # the 3D draws it; min(w, d) was a third convention that
+            # understated the schedule's ridge height whenever the roof
+            # climbed the longer side.
+            ra = r.get("ridge_along")
+            if ra not in ("x", "y"):
+                ra = "y" if b.depth >= b.width else "x"
+            span = b.depth if ra == "x" else b.width
+            if r.get("kind") == "gabled":
+                top = max(top, base + (span / 2) * t)
+            elif r.get("kind") == "hipped":
+                top = max(top, base + (min(b.width, b.depth) / 2) * t)
             elif r.get("kind") == "monopitch":
-                span = min(b.width, b.depth)
-                top = max(top, base + span *
-                          math.tan(math.radians(r.get("pitch_deg", 30))))
+                top = max(top, base + span * t)
             else:
                 top = max(top, base)
         return top
@@ -423,8 +430,12 @@ def from_footprint(feature, *, lidar=None, address=None, storey_height=None):
                 x=0.0, y=0.0, width=round(w, 3), depth=round(d, 3),
                 storeys=storeys, storey_height=sh,
                 classification=storeys_class or CLASS_ESTIMATED,
+                # The estimated ridge follows the LONGER plan side, the
+                # way a UK roof almost always does — hardcoding "y" put
+                # the ridge across the frontage of any house wider than
+                # it is deep.
                 roof={"kind": "gabled", "pitch_deg": 30.0, "overhang": 0.3,
-                      "ridge_along": "y",
+                      "ridge_along": "y" if d >= w else "x",
                       "classification": CLASS_ESTIMATED},
                 note=note)
 
@@ -452,6 +463,59 @@ def from_footprint(feature, *, lidar=None, address=None, storey_height=None):
     if storeys_class == CLASS_ESTIMATED:
         bld.notes.append(note)
     return bld
+
+
+# ------------------------------------------------- room geometry
+def rect_union_area(rects):
+    """Union area of axis-aligned rectangles, exactly.
+
+    The obvious sum double-counts wherever two rectangles overlap, and
+    the coverage test built on the sum was provably wrong: two stacked
+    rooms in one corner summed to 75% of a block that was 62% bare, so
+    the whole-block fallback was suppressed and most of the floor plate
+    vanished from the engine. Coordinate compression is a dozen lines
+    and exact, so there is no reason to approximate.
+    """
+    rects = [(x0, y0, x1, y1) for x0, y0, x1, y1 in rects
+             if x1 - x0 > 1e-12 and y1 - y0 > 1e-12]
+    if not rects:
+        return 0.0
+    xs = sorted({v for r in rects for v in (r[0], r[2])})
+    ys = sorted({v for r in rects for v in (r[1], r[3])})
+    area = 0.0
+    for i in range(len(xs) - 1):
+        cx = (xs[i] + xs[i + 1]) / 2.0
+        for j in range(len(ys) - 1):
+            cy = (ys[j] + ys[j + 1]) / 2.0
+            if any(r[0] <= cx <= r[2] and r[1] <= cy <= r[3]
+                   for r in rects):
+                area += (xs[i + 1] - xs[i]) * (ys[j + 1] - ys[j])
+    return area
+
+
+def room_block_overlap(room, blk):
+    """Plan-area overlap between a room and a block, in m²."""
+    ox = min(blk.x + blk.width, room.x + room.width) - max(blk.x, room.x)
+    oy = min(blk.y + blk.depth, room.y + room.depth) - max(blk.y, room.y)
+    return max(0.0, ox) * max(0.0, oy)
+
+
+def room_inside_building(bld, room, tol=1e-6):
+    """Is the room's whole rectangle inside SOME block on its level?
+
+    This is the containment test everything must use instead of "inside
+    the block named by room.block_id": the moment a knock-through makes
+    one room across two blocks, the anchor block stops being the
+    container, and every check still using it either refuses a genuinely
+    internal wall or lets a room hang in the open air.
+    """
+    inside = rect_union_area([
+        (max(b.x, room.x), max(b.y, room.y),
+         min(b.x + b.width, room.x + room.width),
+         min(b.y + b.depth, room.y + room.depth))
+        for b in bld.blocks
+        if b.base_level <= room.level < b.base_level + b.storeys])
+    return inside >= room.area() - tol
 
 
 # --------------------------------------------- bridge to building/
@@ -483,14 +547,15 @@ def to_engine_rooms(bld):
     # room", or the extension gets a phantom room laid over the real one
     # and the gate reports an island that cannot be entered.
     rooms = []
-    emitted = set()
     for r in bld.rooms:
-        key = (r.level, id(r))
-        if key in emitted:
-            continue
-        emitted.add(key)
+        # Ceiling height from the room's OWN block where it still means
+        # something, else any block on the level — a room spanning two
+        # blocks of different heights is inherently ambiguous, but a
+        # room inside its own block must use that block's.
         h = None
-        for b in bld.blocks:
+        own = bld.block(r.block_id)
+        candidates = ([own] if own is not None else []) + bld.blocks
+        for b in candidates:
             if b.base_level <= r.level < b.base_level + b.storeys:
                 h = round(b.storey_height - 0.35, 2)
                 break
@@ -501,18 +566,15 @@ def to_engine_rooms(bld):
             height=h or (DEFAULT_STOREY_H - 0.35)))
 
     def _covered(blk, level):
-        """Fraction of a block's plan already occupied by rooms."""
+        """Fraction of a block's plan occupied by the UNION of rooms."""
         area = blk.width * blk.depth
         if area <= 0:
             return 1.0
-        hit = 0.0
-        for r in bld.rooms:
-            if r.level != level:
-                continue
-            ox = min(blk.x + blk.width, r.x + r.width) - max(blk.x, r.x)
-            oy = min(blk.y + blk.depth, r.y + r.depth) - max(blk.y, r.y)
-            if ox > 0 and oy > 0:
-                hit += ox * oy
+        hit = rect_union_area([
+            (max(blk.x, r.x), max(blk.y, r.y),
+             min(blk.x + blk.width, r.x + r.width),
+             min(blk.y + blk.depth, r.y + r.depth))
+            for r in bld.rooms if r.level == level])
         return hit / area
 
     for b in bld.blocks:
@@ -561,9 +623,15 @@ def auto_layout(bld, block_id, level=0, id_seed=None, id_start=0):
     # gate correctly refuses as inner rooms. What actually gets built is
     # one open space, so that is what is laid out — and it is the user's
     # to change.
-    is_extension = any(
-        o is not blk and o.classification != CLASS_USER
-        for o in bld.blocks) and blk.classification == CLASS_USER
+    #
+    # DETECTED BY SIZE, NOT BY CLASSIFICATION. The first version asked
+    # "is some other block survey-classified" — but MoveWall marks the
+    # house as user-edited the moment its wall is corrected, after which
+    # a 4 m extension got the full hall-and-rooms treatment and the gate
+    # refused the layout's own inner rooms. A block half the size of a
+    # neighbour it stands against is the annexe whatever the labels say.
+    is_extension = any(o is not blk and o.area() >= 2.0 * blk.area()
+                       for o in bld.blocks)
 
     seed = id_seed or uuid.uuid4().hex[:6]
 
@@ -574,29 +642,56 @@ def auto_layout(bld, block_id, level=0, id_seed=None, id_start=0):
             name=name, kind=kind, x=round(blk.x + x, 3),
             y=round(blk.y + y, 3), width=round(rw, 3), depth=round(rd, 3)))
 
-    # A hall wide enough to be one, but never more than a third of the
-    # frontage — on a narrow terrace that is what actually gets built.
-    hall_w = max(0.9, min(1.95, w * 0.33))
-    if is_extension or w < 2.4 or d < 3.0:
-        # Too small to subdivide sensibly, or an extension: one room.
+    def one_room():
+        out.clear()
         R("Kitchen/diner" if is_extension else "Room",
           "kitchen" if is_extension else "room", 0, 0, w, d)
         return out
 
+    # A hall wide enough to be one, but never more than a third of the
+    # frontage — on a narrow terrace that is what actually gets built.
+    # The subdivision needs room for every band it makes: a kitchen of
+    # at least ~2 m and a front zone of 2.5 m, so anything shallower
+    # than 4.5 m stays one space rather than being minced.
+    hall_w = max(0.9, min(1.95, w * 0.33))
+    if is_extension or w < 2.4 or d < 4.5:
+        return one_room()
+
+    # BAND EDGES ARE ROUNDED COORDINATES, DEPTHS ARE THEIR DIFFERENCES.
+    # Rounding each band's depth separately meant Dining's rear edge
+    # (round(a)+round(b)) and Kitchen's front edge (round(a+b)) could
+    # disagree by a millimetre — outside the partition-pairing tolerance,
+    # so a dragged wall sailed through its neighbour. Rounding the CUT
+    # LINES once and deriving depths from consecutive cuts makes the
+    # bands tile exactly, always.
     if level == blk.base_level:
-        kitchen_d = min(max(3.0, d * 0.34), d - 2.5)
+        kitchen_d = max(2.0, min(max(3.0, d * 0.34), d - 2.5))
         front_d = d - kitchen_d
-        R("Hall", "circulation", 0, 0, hall_w, front_d)
-        R("Living room", "room", hall_w, 0, w - hall_w, front_d * 0.58)
-        R("Dining room", "room", hall_w, front_d * 0.58,
-          w - hall_w, front_d * 0.42)
-        R("Kitchen", "kitchen", 0, front_d, w, kitchen_d)
+        y_split = round(front_d * 0.58, 3)
+        y_kitchen = round(front_d, 3)
+        R("Hall", "circulation", 0, 0, hall_w, y_kitchen)
+        R("Living room", "room", hall_w, 0, w - hall_w, y_split)
+        R("Dining room", "room", hall_w, y_split,
+          w - hall_w, y_kitchen - y_split)
+        R("Kitchen", "kitchen", 0, y_kitchen, w, d - y_kitchen)
     else:
-        bath_d = min(max(1.9, d * 0.2), d - 3.0)
+        bath_d = max(1.5, min(max(1.9, d * 0.2), d - 3.0))
         rest_d = d - bath_d
-        R("Landing", "circulation", 0, 0, hall_w, rest_d)
-        R("Bedroom 1", "room", hall_w, 0, w - hall_w, rest_d * 0.55)
-        R("Bedroom 2", "room", hall_w, rest_d * 0.55,
-          w - hall_w, rest_d * 0.45)
-        R("Bathroom", "wet", 0, rest_d, w, bath_d)
+        y_split = round(rest_d * 0.55, 3)
+        y_bath = round(rest_d, 3)
+        R("Landing", "circulation", 0, 0, hall_w, y_bath)
+        R("Bedroom 1", "room", hall_w, 0, w - hall_w, y_split)
+        R("Bedroom 2", "room", hall_w, y_split,
+          w - hall_w, y_bath - y_split)
+        R("Bathroom", "wet", 0, y_bath, w, d - y_bath)
+
+    # THE LAYOUT MUST OBEY ITS OWN RULES. AddRoom and MovePartition
+    # refuse anything under MIN_ROOM_M; a starting layout that mints a
+    # 0.7 m kitchen or a zero-depth bathroom hands the user a plan the
+    # editor itself would have refused. If the arithmetic cannot fit
+    # legal rooms into this block, one open room is the honest layout.
+    for r in out:
+        if (r.width < MIN_ROOM_M - 1e-9 or r.depth < MIN_ROOM_M - 1e-9
+                or r.area() < MIN_ROOM_AREA_M2 - 1e-9):
+            return one_room()
     return out
