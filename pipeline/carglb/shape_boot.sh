@@ -30,6 +30,25 @@ report() { put shape_log.txt "$LOG"; }
 stage() { echo "=== STAGE:$1 ==="; report; }
 die()   { echo "=== FAIL:$1 ==="; report; sleep infinity; }
 
+# ---- SELF-DESTRUCT ------------------------------------------------------
+# Every terminal path in this script ends in `sleep infinity` — die() does, and
+# so does the tail. That is correct for log retrieval and CATASTROPHIC when the
+# launcher dies: this container rolled back mid-run on 2026-08-20 and an idle
+# pod billed 4.7h at 0% GPU ($3.30). The launcher's DELETE is not a guarantee
+# because the launcher is the thing that disappears. So the POD kills itself.
+# Requires RUNPOD_API_KEY in the pod env (self-inflicted key exposure on our
+# own pod, same trade already accepted for SB_KEY above).
+if [ -n "${RUNPOD_API_KEY:-}" ] && [ -n "${RUNPOD_POD_ID:-}" ]; then
+  ( sleep "${CARGLB_MAX_S:-5400}"
+    echo "=== SELF_DESTRUCT after ${CARGLB_MAX_S:-5400}s ===" >> "$LOG"
+    put shape_log.txt "$LOG"
+    curl -s -X DELETE -H "Authorization: Bearer ${RUNPOD_API_KEY}" \
+         "https://rest.runpod.io/v1/pods/${RUNPOD_POD_ID}" ) &
+  echo "watchdog armed: pod ${RUNPOD_POD_ID} self-destructs in ${CARGLB_MAX_S:-5400}s"
+else
+  echo "WARNING: no watchdog (RUNPOD_API_KEY/RUNPOD_POD_ID absent) — pod will bill until deleted"
+fi
+
 stage boot
 nvidia-smi || die NO_GPU
 apt-get update -qq && apt-get install -y -qq --no-install-recommends libopengl0 libegl1 libgl1 xvfb libxrender1 libxext6 2>&1 | tail -1
@@ -52,9 +71,15 @@ stage photos
 curl -fsSL "$SB/public/$PRE/f34.png" -o /workspace/f34.png || die PHOTO
 
 stage shape
+# CARGLB_PARTS_ONLY=1 — run PartCrafter alone. The two generators are
+# independent; a PartCrafter-only benchmark should not pay ~10 min of GPU for a
+# Hi3DGen shape it will never open.
+if [ "${CARGLB_PARTS_ONLY:-0}" = "1" ]; then
+  echo "SHAPE_SKIPPED (CARGLB_PARTS_ONLY=1)"
+  : > /workspace/results/shape.glb
 # idempotent resume: if a previous run already uploaded the shape, skip the
 # whole Hi3DGen pass (a PartCrafter failure should not re-bill the shape)
-if curl -fsSL "$SB/public/$PRE/shape.glb" -o /workspace/results/shape.glb 2>/dev/null && [ -s /workspace/results/shape.glb ]; then
+elif curl -fsSL "$SB/public/$PRE/shape.glb" -o /workspace/results/shape.glb 2>/dev/null && [ -s /workspace/results/shape.glb ]; then
   echo "SHAPE_RESUMED from bucket"
 else
 cd /workspace/hi3
@@ -123,7 +148,7 @@ put_c nparts.txt /workspace/results/nparts.txt
 report
 
 stage verify
-[ -s /workspace/results/shape.glb ] || die MISSING_SHAPE
+[ "${CARGLB_PARTS_ONLY:-0}" = "1" ] || [ -s /workspace/results/shape.glb ] || die MISSING_SHAPE
 [ -s /workspace/results/pc/job/object.glb ] || die MISSING_PARTS
 echo "=== SHAPE_ALL_OK ==="
 report

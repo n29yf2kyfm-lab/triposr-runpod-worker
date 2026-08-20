@@ -144,6 +144,16 @@ def run_shape_pod(folder, manifest, out_dir, timeout_s=5400):
     if urllib.request.urlopen(url, timeout=30).status != 200:
         raise SystemExit("bootstrap preflight failed")
 
+    parts_only = os.environ.get("CARGLB_PARTS_ONLY", "0")
+    env = {"SB_KEY": sb_key, "HF_TOKEN": os.environ.get("HF_TOKEN", ""),
+           "HUGGING_FACE_HUB_TOKEN": os.environ.get("HF_TOKEN", ""),
+           "HF_HOME": "/workspace/hf", "CARGLB_JOB": job,
+           "CARGLB_PARTS_ONLY": parts_only,
+           "CARGLB_MAX_S": str(int(timeout_s + 900)),
+           # arms the bootstrap's self-destruct: the launcher's own DELETE is
+           # not a guarantee when the launcher is what dies (container rollback
+           # 2026-08-20 -> 4.7h idle pod, $3.30).
+           "RUNPOD_API_KEY": key}
     body = {
         "name": f"carglb-{job}"[:60],
         "imageName": "runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04",
@@ -156,19 +166,38 @@ def run_shape_pod(folder, manifest, out_dir, timeout_s=5400):
                            f"export CARGLB_JOB={job}; "
                            f"curl -sSL '{url}?cb='$(date +%s) | bash; "
                            "sleep infinity"],
-        "env": {"SB_KEY": sb_key, "HF_TOKEN": os.environ.get("HF_TOKEN", ""),
-                "HUGGING_FACE_HUB_TOKEN": os.environ.get("HF_TOKEN", ""),
-                "HF_HOME": "/workspace/hf", "CARGLB_JOB": job},
+        "env": env,
     }
-    req = urllib.request.Request(
-        "https://rest.runpod.io/v1/pods", data=json.dumps(body).encode(),
-        headers={"Authorization": f"Bearer {key}",
-                 "Content-Type": "application/json"})
-    pod = json.load(urllib.request.urlopen(req, timeout=60))
-    pod_id = pod.get("id")
-    if not pod_id:
-        raise SystemExit(f"pod launch failed: {pod}")
-    print(f"shape pod {pod_id} launched; waiting on artefacts")
+    # CAPACITY HUNT. A single POST is not a launch strategy: on 2026-08-20 the
+    # A6000/A100 pools returned "no instances currently available" for the best
+    # part of an hour. gpuTypePriority=availability only reorders THIS request's
+    # id list — it cannot wait. Retry on a slow cadence until the budget is out.
+    hunt_deadline = time.time() + float(os.environ.get("CARGLB_HUNT_S", 2400))
+    pod_id, attempt = None, 0
+    while not pod_id:
+        attempt += 1
+        req = urllib.request.Request(
+            "https://rest.runpod.io/v1/pods", data=json.dumps(body).encode(),
+            headers={"Authorization": f"Bearer {key}",
+                     "Content-Type": "application/json"})
+        try:
+            pod = json.load(urllib.request.urlopen(req, timeout=60))
+        except Exception as e:                                   # noqa: BLE001
+            detail = ""
+            if hasattr(e, "read"):
+                detail = e.read().decode("utf-8", "replace")[:200]
+            pod = {"err": f"{e} {detail}"}
+        pod_id = pod.get("id")
+        if pod_id:
+            break
+        print(f"  hunt attempt {attempt}: no capacity — {str(pod)[:160]}",
+              flush=True)
+        if time.time() > hunt_deadline:
+            raise SystemExit("NO_CAPACITY within hunt budget")
+        time.sleep(90)
+    print(f"shape pod {pod_id} launched (attempt {attempt}, "
+          f"cost {pod.get('costPerHr')}/hr, parts_only={parts_only}); "
+          f"waiting on artefacts", flush=True)
 
     log_url = f"{SB}/public/{pre}/shape_log.txt"
     t0, last = time.time(), ""
