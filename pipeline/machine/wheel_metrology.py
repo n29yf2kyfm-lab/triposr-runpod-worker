@@ -762,7 +762,7 @@ def _fit_all(V, fr, cfg, seeds=None):
 
 
 def measure(path, spec=None, nose="auto", cfg=None, bootstrap=True,
-            canonicalise=True):
+            canonicalise=True, ground_mode="auto"):
     """Measure Gate 6 in the CAR's own frame.
 
     Two passes. The first fits the wheels where they lie and hands the four
@@ -800,17 +800,28 @@ def measure(path, spec=None, nose="auto", cfg=None, bootstrap=True,
                               side=(1 if c[ti] > 0 else -1)))
         wheels = _fit_all(V, fr, cfg, seeds=seeds)
     return _finish(path, meshes, V, fr, wheels, cfg, spec, bootstrap, pose,
-                   prep, canonicalise)
+                   prep, canonicalise, ground_mode)
 
 
 def _finish(path, meshes, V, fr, wheels, cfg, spec, bootstrap, pose, prep,
-            canonicalise):
+            canonicalise, ground_mode="auto"):
     li, ti, ui = fr["li"], fr["ti"], fr["ui"]
     # After canonicalisation the ground plane IS the axis origin by
     # construction. Before it, the lowest vertex is the only ground evidence
     # available and is used as such, with the assumption stated in the output.
-    ground = 0.0 if canonicalise else (
-        0.0 if abs(fr["ground"]) < 5e-3 else fr["ground"])
+    if ground_mode == "zero":
+        ground = 0.0
+    elif ground_mode not in (None, "auto"):
+        ground = float(ground_mode)
+    else:
+        # AUTO is a fallback, and a poor one: it takes the lowest vertex in
+        # the scene, which on this Golf is a piece of underbody 9.5 mm BELOW
+        # the tyres. A car's ground plane is defined by its contact patches,
+        # not by whatever hangs lowest, so any file whose stance has already
+        # been solved should be measured with --ground zero. Reported either
+        # way in `ground_plane_source`.
+        ground = 0.0 if canonicalise else (
+            0.0 if abs(fr["ground"]) < 5e-3 else fr["ground"])
 
     # ---- corner labels
     for w in wheels:
@@ -880,7 +891,11 @@ def _finish(path, meshes, V, fr, wheels, cfg, spec, bootstrap, pose, prep,
                             else "raw scene frame"),
                n_wheels=len(rows), wheels=rows, ground_plane=float(ground),
                axes=dict(length=li, lateral=ti, up=ui),
-               pose=pose, pose_effect=prep)
+               pose=pose, pose_effect=prep,
+               ground_plane_source=("y=0 by construction (pose applied)"
+                                    if canonicalise or ground_mode == "zero"
+                                    else "lowest vertex in the scene "
+                                         "(AUTO fallback — see _finish)"))
     _derive(out, fr, spec)
     out["_meshes"] = meshes          # car-frame vertices for the second pass
     return out
@@ -1341,6 +1356,11 @@ def main():
     ap.add_argument("--json", default=None)
     ap.add_argument("--nose", choices=["+", "-", "auto"], default="auto")
     ap.add_argument("--no-bootstrap", action="store_true")
+    ap.add_argument("--ground", default="auto",
+                    help="'auto' | 'zero' | a value in metres. Use 'zero' on "
+                         "any file whose stance has been solved: AUTO picks "
+                         "the lowest vertex in the scene, which is underbody, "
+                         "not road.")
     ap.add_argument("--frame", choices=["car", "raw"], default="car",
                     help="'car' (default) measures after the pose solve, which "
                          "is the frame the criteria are defined in. 'raw' "
@@ -1350,7 +1370,7 @@ def main():
     a = ap.parse_args()
     spec = load_spec(a.spec)
     m = measure(a.glb, spec=spec, nose=a.nose, bootstrap=not a.no_bootstrap,
-                canonicalise=(a.frame == "car"))
+                canonicalise=(a.frame == "car"), ground_mode=a.ground)
     m = fender_and_arch(m)
     m["gate6"] = grade(m, spec)
     m.pop("_meshes", None)

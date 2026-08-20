@@ -959,9 +959,24 @@ def glass_seed(scene, lmesh, offsets, frame, report):
 
 
 def name_glass_panes(lmesh, frame, glass_mask, report, min_area):
-    """Split the glazing into named panes by CONNECTED COMPONENT and name each
-    by where it sits. Fragments under min_area are merged into the nearest
-    named pane rather than shipped as debris."""
+    """Split the glazing into named panes — but only as far as the geometry
+    can actually prove.
+
+    THE SEPARABILITY TEST, and it is the whole point of this function. Naming a
+    component "Glass_Door_FL" asserts that the file contains a front door
+    window as its own surface. On this shell that assertion is FALSE: the side
+    glazing is a set of OVERLAPPING shards, one of which spans x -1.202 to
+    0.876 — from behind the rear door to the windscreen pillar — while another
+    spans -0.179 to 0.837 across the same window. Their centroids differ, so a
+    centroid rule happily called one of them a front door glass and another (a
+    windscreen fragment at x 0.86-1.17) a door glass too. Both were fiction.
+
+    So each side's components are tested for DISJOINTNESS along the length
+    axis. Only when they genuinely tile the DLO front-to-back are they named
+    per door; when they overlap, the side ships as ONE honest `Glass_Side_L/R`
+    node and the per-door rows are reported NOT ACHIEVABLE with the measured
+    overlap. Fragments below min_area are merged into the nearest named pane
+    rather than shipped as debris either way."""
     idx = np.where(glass_mask)[0]
     if not len(idx):
         return {}
@@ -971,25 +986,56 @@ def name_glass_panes(lmesh, frame, glass_mask, report, min_area):
     A, C = sub.area_faces, sub.triangles_center
     big = [c for c in comps if A[c].sum() >= min_area]
     small = [c for c in comps if A[c].sum() < min_area]
-    named, info = {}, []
+    named, info, sides = {}, [], {"L": [], "R": []}
     for c in big:
         cc, w = C[c], A[c] / A[c].sum()
         mx = float((cc[:, 0] * w).sum())
         mz = float((cc[:, 2] * w).sum())
         zspan = float(cc[:, 2].max() - cc[:, 2].min())
-        side = "L" if mz > 0 else "R"
+        row = dict(area=round(float(A[c].sum()), 4), mid_len=round(mx, 4),
+                   mid_wid=round(mz, 4), wid_span=round(zspan, 4),
+                   x_range=[round(float(cc[:, 0].min()), 4),
+                            round(float(cc[:, 0].max()), 4)])
         if zspan > 0.55 * frame.width:
             nm = "Glass_Windscreen" if mx > 0 else "Glass_Rear"
-        elif mx > 0.06 * frame.length:
-            nm = "Glass_Door_F" + side
-        elif mx > -0.22 * frame.length:
-            nm = "Glass_Door_R" + side
+            named.setdefault(nm, []).append(c)
+            row["pane"] = nm
+            info.append(row)
         else:
-            nm = "Glass_Quarter_" + side
-        named.setdefault(nm, []).append(c)
-        info.append(dict(pane=nm, area=round(float(A[c].sum()), 4),
-                         mid_len=round(mx, 4), mid_wid=round(mz, 4),
-                         wid_span=round(zspan, 4)))
+            sides["L" if mz > 0 else "R"].append((c, row))
+
+    split_ev = {}
+    for side, items in sides.items():
+        if not items:
+            continue
+        items.sort(key=lambda t: -t[1]["mid_len"])          # front to back
+        # pairwise overlap along the length axis, as a fraction of the
+        # SHORTER interval: 0 means the panes tile, 1 means one sits on top
+        # of the other.
+        worst = 0.0
+        for i in range(len(items)):
+            for j in range(i + 1, len(items)):
+                a0, a1 = items[i][1]["x_range"]
+                b0, b1 = items[j][1]["x_range"]
+                ov = max(0.0, min(a1, b1) - max(a0, b0))
+                worst = max(worst, ov / max(min(a1 - a0, b1 - b0), 1e-9))
+        disjoint = worst < 0.15 and len(items) <= 3
+        order = ["Glass_Door_F" + side, "Glass_Door_R" + side,
+                 "Glass_Quarter_" + side]
+        for k, (c, row) in enumerate(items):
+            nm = (order[min(k, 2)] if disjoint else "Glass_Side_" + side)
+            named.setdefault(nm, []).append(c)
+            row["pane"] = nm
+            info.append(row)
+        split_ev[side] = dict(
+            components=len(items), max_pairwise_x_overlap=round(worst, 3),
+            separable=bool(disjoint),
+            verdict=("named per door: the components tile the DLO front to back"
+                     if disjoint else
+                     "NOT separable: the components overlap along the length "
+                     "axis, so they are shards of one continuous band and a "
+                     "per-door name would assert geometry this file does not "
+                     "contain"))
     if small and named:
         anchors, keys = [], []
         for nm, cs in named.items():
@@ -1002,7 +1048,8 @@ def name_glass_panes(lmesh, frame, glass_mask, report, min_area):
             named[keys[j]].append(c)
     out = {nm: idx[np.concatenate(cs)] for nm, cs in named.items()}
     report["glass_panes"] = dict(components=len(comps), named=len(out),
-                                 merged_fragments=len(small), detail=info)
+                                 merged_fragments=len(small),
+                                 side_separability=split_ev, detail=info)
     return out
 
 
@@ -1614,9 +1661,25 @@ def gate7_table(report):
     possible outcome of this gate."""
     nodes = report.get("nodes", {})
     rows = {}
+    # a side whose glazing was MEASURED to be one continuous band cannot carry
+    # per-door pane rows, and saying "absent" would blame the detector for a
+    # property of the file.
+    fused = dict(NOT_ACHIEVABLE)
+    for side, ev in (report.get("glass_panes", {})
+                     .get("side_separability", {}).items()):
+        if ev.get("separable"):
+            continue
+        for want in ("Glass_Door_F", "Glass_Door_R"):
+            fused[want + side] = (
+                "the %s side glazing is ONE continuous band: its %d components "
+                "overlap along the length axis by %.0f%% of the shorter one, so "
+                "they are shards of one surface, not door panes. Shipped whole "
+                "as Glass_Side_%s." % (side, ev["components"],
+                                       100 * ev["max_pairwise_x_overlap"], side))
+        fused["Glass_Quarter_" + side] = fused["Glass_Door_F" + side]
     for want in NODE_SPEC:
-        if want in NOT_ACHIEVABLE:
-            rows[want] = dict(status="NOT ACHIEVABLE", reason=NOT_ACHIEVABLE[want])
+        if want in fused:
+            rows[want] = dict(status="NOT ACHIEVABLE", reason=fused[want])
             continue
         hit = sorted(n for n in nodes if n == want or n.startswith(want + "_"))
         if hit:

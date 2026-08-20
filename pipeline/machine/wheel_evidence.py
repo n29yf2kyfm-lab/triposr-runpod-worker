@@ -406,7 +406,7 @@ def annotate(outd, metro):
 def wheels_glb(car, metro, out):
     """Export ONLY the geometry the metrology's cylinders own, as one GLB.
 
-    Uses `wheel_ground_op.isolate`, i.e. the SAME containment test the repair
+    Uses `wheel_ground_op.isolate_faces`, i.e. the SAME cut the repair
     operator uses to decide what it may move — so this render is a picture of
     exactly what was (or would be) transformed, not a lookalike.
     """
@@ -431,7 +431,10 @@ def wheels_glb(car, metro, out):
     for r in m["wheels"]:
         w = dict(centre=r["centre"], axis=r["axis"], radius_m=r["radius_m"],
                  width_m=r["width_m"])
-        picked, _ = OP.isolate(meshes, w, cfg)
+        # FACE-level, because that is what the repair moves on a fused car —
+        # component isolation returns 11k faces for a rear wheel here and the
+        # render would show a quarter of a wheel and call it the wheel.
+        picked, _ = OP.isolate_faces(meshes, w, cfg)
         n = 0
         for name, keep in picked.items():
             V, F = meshes[name]
