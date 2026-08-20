@@ -112,6 +112,32 @@ stage warmup
 ls demo_files 2>/dev/null | head -5 || echo "(no demo_files in this checkout)"
 echo "warmup folded into the first car"
 
+stage weights
+# ...BUT THE WEIGHTS DOWNLOAD DOES NEED ITS OWN STAGE. run.py pulls a ~4GB
+# safetensors lazily inside from_pretrained, so on the 2026-08-20 run the
+# first car died on a mid-transfer TCP drop:
+#   ChunkedEncodingError: IncompleteRead(439687615 bytes read,
+#                         3584602277 more expected)
+# The model was never at fault and the car was lost anyway. Pull the weights
+# HERE, with retries; hf_hub_download resumes from its cache, so a broken
+# connection costs seconds instead of a car.
+python3 - <<'PY' || die WEIGHTS
+import os, time
+from huggingface_hub import hf_hub_download
+repo = os.environ.get("SF3D_MODEL", "stabilityai/stable-fast-3d")
+for fn in ("config.yaml", "model.safetensors"):
+    for attempt in range(1, 6):
+        try:
+            p = hf_hub_download(repo, fn, token=os.environ.get("HF_TOKEN"))
+            print("have", fn, os.path.getsize(p), "bytes")
+            break
+        except Exception as e:
+            print(f"attempt {attempt} for {fn} failed: {type(e).__name__}: {e}")
+            if attempt == 5:
+                raise
+            time.sleep(5 * attempt)
+PY
+
 DONE=0; FAILED=0
 for TAG in $(python3 -c "import json;print(' '.join(json.load(open('batch.json'))))"); do
   stage "car_${TAG}_fetch"
@@ -120,10 +146,16 @@ for TAG in $(python3 -c "import json;print(' '.join(json.load(open('batch.json')
 
   stage "car_${TAG}_infer"
   rm -rf "/workspace/o_${TAG}"
-  if ! python3 run.py "/workspace/in_${TAG}.png" \
+  # `cmd | tail` makes $? the status of TAIL, so a crashed run.py read as
+  # SUCCESS on the 2026-08-20 run — only the no-GLB trap below caught it.
+  # PIPESTATUS reads the real exit code while still trimming the output.
+  python3 run.py "/workspace/in_${TAG}.png" \
         --output-dir "/workspace/o_${TAG}" \
-        --texture-resolution 2048 2>&1 | tail -25; then
-    echo "INFER FAILED $TAG"; FAILED=$((FAILED+1)); report "log.txt"; continue
+        --texture-resolution 2048 2>&1 | tail -25
+  RC=${PIPESTATUS[0]}
+  if [ "$RC" != "0" ]; then
+    echo "INFER FAILED $TAG (rc=$RC)"; FAILED=$((FAILED+1))
+    report "log.txt"; continue
   fi
   GLB=$(find "/workspace/o_${TAG}" -name '*.glb' | head -1)
   if [ -z "$GLB" ]; then
