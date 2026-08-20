@@ -244,6 +244,24 @@ def normal_mat():
     return m
 
 
+def vcol_mat():
+    """The mesh's own colour attribute, unlit. Used to render surface_map.py's
+    sigma heat map through the SAME cameras as clay and zebra, so a hot region
+    can be laid directly beside the reflection break it is meant to explain.
+    Emission, not a lit shader: a lit ID pass shades the colour by geometry and
+    two different values land on the same tone."""
+    m = bpy.data.materials.new("ca_vcol")
+    m.use_nodes = True
+    nt = m.node_tree
+    nt.nodes.clear()
+    c = nt.nodes.new("ShaderNodeVertexColor")
+    e = nt.nodes.new("ShaderNodeEmission")
+    o = nt.nodes.new("ShaderNodeOutputMaterial")
+    nt.links.new(c.outputs["Color"], e.inputs["Color"])
+    nt.links.new(e.outputs[0], o.inputs["Surface"])
+    return m
+
+
 def strip_world(bands, hard, strength, floor):
     """Long horizontal strip lights, built from the ray direction's component
     along the CAR's up axis.
@@ -345,6 +363,7 @@ PASS_CFG = {
     "clay":    (clay_mat,   dict(bands=4.0,  hard=False, strength=0.62, floor=0.05)),
     "zebra":   (chrome_mat, dict(bands=9.0,  hard=True,  strength=1.30, floor=0.01)),
     "normals": (normal_mat, None),
+    "map":     (vcol_mat,   None),
 }
 
 
