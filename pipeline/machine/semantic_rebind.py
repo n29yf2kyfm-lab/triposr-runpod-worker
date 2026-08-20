@@ -701,6 +701,52 @@ def classify(lmesh, frame, wheels, glass_mask, direct, thru, ao, col, cold,
     # ---- 5. cabin: only reachable THROUGH glazing --------------------------
     lab[(lab < 0) & thru] = idx["Interior_Plastic"]
 
+    # ---- 5b. THE CABIN IS A VOLUME, NOT A RAY SAMPLE. Anything still
+    #          undecided that lies INSIDE the envelope of what the cast could
+    #          see through the glazing is cabin structure too.
+    #
+    # Why this exists, and it is a render finding rather than a theory: without
+    # it, cabin slivers the ray grid happened to miss fall through to the
+    # nearest-decided inheritance at step 8, and their nearest decided face is
+    # the BODY SKIN a few millimetres outside them — so they came out
+    # `carpaint` and rendered as RED DOTS INSIDE THE CABIN, plainly visible
+    # through the side glass in the production view. A denser grid cannot fix
+    # this class: a sliver can always fall between rays, and a volume test
+    # cannot miss it. Measured on this Golf: 3.6 m^2 recovered.
+    #
+    # The envelope is the convex hull of the through-glass faces. It is
+    # bounded by the INTERIOR surfaces, so it lies strictly inside the shell
+    # and cannot swallow the outer skin; the 2 mm inset makes that explicit
+    # rather than assumed.
+    if thru.any():
+        pts = C[thru]
+        if len(pts) > 40000:
+            pts = pts[np.random.default_rng(0).choice(len(pts), 40000,
+                                                      replace=False)]
+        try:
+            from scipy.spatial import ConvexHull
+            eq = ConvexHull(pts).equations
+            cand = np.where((lab < 0) & (~direct))[0]
+            # CHUNKED. A candidates x hull-facets broadcast is exactly the
+            # shape that OOM-killed this stage on the first run (RC=137 at
+            # ~430k candidates x 3k facets); this container kills a process
+            # well below its free memory, so the broadcast is bounded here
+            # rather than trusted to fit.
+            keep = np.zeros(len(cand), bool)
+            for s in range(0, len(cand), 20000):
+                blk = cand[s:s + 20000]
+                keep[s:s + 20000] = (C[blk] @ eq[:, :3].T + eq[:, 3]
+                                     <= -0.002).all(1)
+            ins = cand[keep]
+            lab[ins] = idx["Interior_Plastic"]
+            ev["cabin_volume"] = dict(
+                hull_points=int(len(pts)), faces_absorbed=int(len(ins)),
+                area_absorbed=round(float(A[ins].sum()), 4),
+                rule="undecided, not directly visible, and inside the convex "
+                     "hull of the through-glass surfaces (2 mm inset)")
+        except Exception as exc:                     # degenerate hull
+            ev["cabin_volume"] = dict(status="NOT APPLIED", reason=str(exc))
+
     # ---- 6. exterior skin in DIRECT sight, split by cavity ----------------
     if ao is not None:
         cav = (lab < 0) & direct & (ao < args.ao_cavity)
