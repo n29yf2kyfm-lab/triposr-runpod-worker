@@ -306,92 +306,111 @@ def hidden_face_mask(path, target="interior", n_az=32, elevations=(-25, -10, 5, 
 
 
 def apply_face_cull(src, dst, target_material, keep_mask):
-    """Rewrite the GLB keeping only `keep_mask` faces of the mesh whose material
-    is `target_material`. Vertices are compacted. Every other bufferView -- images
-    above all -- is copied byte-for-byte with its SHARING intact."""
+    """Rewrite the GLB keeping only `keep_mask` faces of the primitive whose
+    material is `target_material`. Vertices are compacted.
+
+    FULL GEOMETRY REBUILD -- and it has to be. The obvious implementation ("drop
+    the target's bufferViews, append new ones") SILENTLY INFLATES the file,
+    measured at +7.9 MB on the Golf master, because bufferView 2 there is one
+    11.82 MB block holding the index accessors of ALL SIX meshes. The interior's
+    share of it cannot be dropped without breaking the other five, so its dead
+    bytes stay in the file while the new compacted copy is appended alongside.
+
+    So every accessor is re-emitted into its own tight bufferView instead. That
+    leaves no dead space, and because accessor INDICES are preserved, nothing
+    referencing them needs renumbering. Image bufferViews are copied byte-for-byte
+    with their SHARING intact -- un-sharing them is the +37 MB trap in the module
+    docstring.
+    """
     js, bin_ = glb_read(src)
 
-    tgt_prim = None
-    for mi, m in enumerate(js["meshes"]):
-        for pi, p in enumerate(m["primitives"]):
-            if js["materials"][p["material"]].get("name") == target_material:
-                tgt_prim = (mi, pi, p)
-    if tgt_prim is None:
+    prim = None
+    for m in js["meshes"]:
+        for p in m["primitives"]:
+            if "material" in p and js["materials"][p["material"]].get("name") == target_material:
+                if prim is not None:
+                    raise ValueError(
+                        "material %r is on more than one primitive; cull target must be "
+                        "unambiguous" % target_material)
+                prim = p
+    if prim is None:
         raise KeyError("no primitive with material %r" % target_material)
-    mi, pi, prim = tgt_prim
+
+    for a in js["accessors"]:
+        if "sparse" in a:
+            raise NotImplementedError("sparse accessors are not handled")
 
     idx = read_accessor(js, bin_, prim["indices"]).reshape(-1, 3)
+    if keep_mask.shape[0] != idx.shape[0]:
+        raise ValueError("keep_mask has %d entries, primitive has %d faces"
+                         % (keep_mask.shape[0], idx.shape[0]))
     kept = idx[keep_mask]
     used = np.unique(kept)
     remap = np.full(int(used.max()) + 1, -1, dtype=np.int64)
     remap[used] = np.arange(used.size)
-    new_idx = remap[kept].astype(np.uint32).ravel()
+    new_idx = remap[kept].ravel()
 
-    new_attr = {}
+    # Read every accessor, then substitute the culled ones.
+    data = {i: read_accessor(js, bin_, i) for i in range(len(js["accessors"]))}
+    data[prim["indices"]] = new_idx
     for name, ai in prim["attributes"].items():
-        arr = read_accessor(js, bin_, ai)
-        new_attr[name] = np.ascontiguousarray(arr[used])
-
-    # Rebuild the buffer: copy every bufferView except the target primitive's,
-    # then append the new compacted arrays.
-    old_bvs = js["bufferViews"]
-    drop = {prim["indices"]}
-    drop |= set(prim["attributes"].values())
-    drop_bv = {js["accessors"][a]["bufferView"] for a in drop}
-    # Never drop a bufferView an image or another accessor still needs.
-    still_needed = {im["bufferView"] for im in js.get("images", []) if "bufferView" in im}
-    for k, a in enumerate(js["accessors"]):
-        if k not in drop and "bufferView" in a:
-            still_needed.add(a["bufferView"])
-    drop_bv -= still_needed
+        data[ai] = np.ascontiguousarray(data[ai][used])
 
     out = bytearray()
-    bv_map = {}
     new_bvs = []
-    for i, bv in enumerate(old_bvs):
-        if i in drop_bv:
-            continue
-        off = len(out)
-        out += bin_[bv.get("byteOffset", 0): bv.get("byteOffset", 0) + bv["byteLength"]]
-        out += b"\x00" * ((4 - len(out) % 4) % 4)
-        nb = {"buffer": 0, "byteOffset": off, "byteLength": bv["byteLength"]}
-        for k in ("byteStride", "target"):
-            if k in bv:
-                nb[k] = bv[k]
-        bv_map[i] = len(new_bvs)
-        new_bvs.append(nb)
 
-    def append(arr, comp_type, atype, target_hint):
-        raw = arr.tobytes()
+    def emit(raw, extra=None):
+        while len(out) % 4:
+            out.append(0)
         off = len(out)
         out.extend(raw)
-        out.extend(b"\x00" * ((4 - len(out) % 4) % 4))
-        bvi = len(new_bvs)
-        new_bvs.append({"buffer": 0, "byteOffset": off,
-                        "byteLength": len(raw), "target": target_hint})
-        a = {"bufferView": bvi, "componentType": comp_type,
-             "count": int(arr.shape[0]) if arr.ndim > 1 else int(arr.size),
-             "type": atype}
-        if atype == "VEC3" and arr.ndim > 1:
-            a["min"] = [float(x) for x in arr.min(axis=0)]
-            a["max"] = [float(x) for x in arr.max(axis=0)]
-        js["accessors"].append(a)
-        return len(js["accessors"]) - 1
+        bv = {"buffer": 0, "byteOffset": off, "byteLength": len(raw)}
+        if extra:
+            bv.update(extra)
+        new_bvs.append(bv)
+        return len(new_bvs) - 1
 
-    for i, a in enumerate(js["accessors"]):
-        if "bufferView" in a:
-            if a["bufferView"] in bv_map:
-                a["bufferView"] = bv_map[a["bufferView"]]
-            elif i not in drop:
-                raise RuntimeError("accessor %d lost its bufferView" % i)
+    # 1) images first, preserving sharing (old bv index -> new bv index)
+    img_map = {}
+    for im in js.get("images", []):
+        if "bufferView" not in im:
+            continue
+        old = im["bufferView"]
+        if old not in img_map:
+            bv = js["bufferViews"][old]
+            o = bv.get("byteOffset", 0)
+            img_map[old] = emit(bin_[o:o + bv["byteLength"]])
+        im["bufferView"] = img_map[old]
+
+    # 2) one tight bufferView per accessor, indices preserved
+    NP2COMP = {np.dtype("int8"): 5120, np.dtype("uint8"): 5121,
+               np.dtype("int16"): 5122, np.dtype("uint16"): 5123,
+               np.dtype("uint32"): 5125, np.dtype("float32"): 5126}
+    index_accessors = set()
+    for m in js["meshes"]:
+        for p in m["primitives"]:
+            if "indices" in p:
+                index_accessors.add(p["indices"])
+
+    for i, acc in enumerate(js["accessors"]):
+        arr = data[i]
+        if i in index_accessors:
+            # narrowest legal index type -- uint16 halves the index payload
+            mx = int(arr.max()) if arr.size else 0
+            arr = arr.astype(np.uint16 if mx < 65536 else np.uint32)
+        elif arr.dtype != np.dtype(np.float32) and acc["componentType"] == 5126:
+            arr = arr.astype(np.float32)
+        arr = np.ascontiguousarray(arr)
+        acc["componentType"] = NP2COMP[arr.dtype]
+        acc["count"] = int(arr.shape[0]) if arr.ndim > 1 else int(arr.size)
+        acc["bufferView"] = emit(arr.tobytes(),
+                                 {"target": 34963 if i in index_accessors else 34962})
+        acc.pop("byteOffset", None)
+        if acc["type"] == "VEC3" and arr.ndim > 1 and arr.size:
+            acc["min"] = [float(x) for x in arr.min(axis=0)]
+            acc["max"] = [float(x) for x in arr.max(axis=0)]
+
     js["bufferViews"] = new_bvs
-
-    ATYPE = {1: "SCALAR", 2: "VEC2", 3: "VEC3", 4: "VEC4"}
-    prim["indices"] = append(new_idx, 5125, "SCALAR", 34963)
-    for name, arr in new_attr.items():
-        n = arr.shape[1] if arr.ndim > 1 else 1
-        prim["attributes"][name] = append(arr.astype(np.float32), 5126, ATYPE[n], 34962)
-
     js["buffers"] = [{"byteLength": len(out)}]
     glb_write(dst, js, bytes(out))
     return {"kept_faces": int(keep_mask.sum()), "kept_verts": int(used.size)}
@@ -544,19 +563,23 @@ def export(master, out, budget_mb=8.0, texture_px=2048, simplify_error=0.001,
     gt(["webp", cur, nxt, "--quality", "85"], "webp", verbose)
     cur = nxt; step("06 texture webp", cur)
 
-    # 6 -- geometry compression LAST
+    # 6a -- LAST chance to re-share image bufferViews. This MUST come BEFORE
+    # compression: `dedup` (like `copy`) round-trips through the SDK and DECODES
+    # EXT_meshopt_compression / KHR_draco_mesh_compression on the way in.
+    # Running it after compression silently threw the compression away and took
+    # 5.06 MB back up to 11.87 MB -- measured, not theorised.
+    nxt = os.path.join(workdir, "s7_dedup2.glb")
+    gt(["dedup", cur, nxt], "dedup(pre-compress)", verbose)
+    cur = nxt; step("07 dedup(pre-compress)", cur)
+
+    # 6b -- geometry compression LAST. Nothing may follow it.
     if compress and compress != "none":
-        nxt = os.path.join(workdir, "s7_%s.glb" % compress)
+        nxt = os.path.join(workdir, "s8_%s.glb" % compress)
         if compress == "draco":
             gt(["draco", cur, nxt], "draco", verbose)
         else:
             gt(["meshopt", cur, nxt, "--level", "high"], "meshopt", verbose)
-        cur = nxt; step("07 %s" % compress, cur)
-
-    # dedup again -- compression rewrites buffers and can un-share images
-    nxt = os.path.join(workdir, "s8_final.glb")
-    gt(["dedup", cur, nxt], "dedup(final)", verbose)
-    cur = nxt; step("08 dedup(final)", cur)
+        cur = nxt; step("08 %s" % compress, cur)
 
     shutil.copy(cur, out)
     rep["export"] = describe(out)
@@ -566,11 +589,15 @@ def export(master, out, budget_mb=8.0, texture_px=2048, simplify_error=0.001,
         print("\nSILHOUETTE GATE (alpha IoU, %d canonical views @ %dpx)"
               % (len(CANONICAL_VIEWS), res))
     before, cov_b, ref_bounds = silhouette_masks(master, res=res)
-    # decompress for ray-casting if needed: trimesh cannot read meshopt/draco
+    # trimesh cannot read EXT_meshopt_compression / KHR_draco_mesh_compression,
+    # and handed a compressed file it reads the quantised integers as positions
+    # and builds a garbage mesh that fills the frame -- which showed up as an
+    # IoU of 0.16 against a perfectly good export. `copy` is the decode path.
     probe = out
-    if rep["export"]["extensionsUsed"]:
+    ext = rep["export"]["extensionsUsed"]
+    if any(e in ext for e in ("EXT_meshopt_compression", "KHR_draco_mesh_compression")):
         probe = os.path.join(workdir, "s9_probe.glb")
-        gt(["dedup", out, probe], "decode-for-probe", False)
+        gt(["copy", out, probe], "decode-for-probe", False)
     after, cov_a, _ = silhouette_masks(probe, res=res, ref_bounds=ref_bounds)
     rows = silhouette_iou(before, after)
     rep["silhouette"] = rows
