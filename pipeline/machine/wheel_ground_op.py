@@ -541,7 +541,8 @@ def run(args):
             for r in mm["wheels"]:
                 if args.cut == "face":
                     picked, audit = isolate_faces(meshes, r, cfg)
-                    meshes, split = split_shared(meshes, picked, appended)
+                    meshes, split = split_shared(meshes, picked, appended,
+                                                 normals)
                     audit = [dict(action="vertices split along the cut",
                                   per_mesh=split)]
                 else:
@@ -692,7 +693,17 @@ def run(args):
         g.faces = F
         N = normals.get(node)
         if N is not None and len(N) == len(V):
+            # Telemetry, not decoration: a zero-length normal is a glTF
+            # validator error, and knowing whether the operator WROTE one or
+            # whether the exporter recomputed it afterwards is the difference
+            # between two completely different bugs.
+            report.setdefault("normals_written", {})[node] = dict(
+                count=int(len(N)),
+                zero_length=int((np.linalg.norm(N, axis=1) < 0.5).sum()))
             g.vertex_normals = N
+        else:
+            report.setdefault("normals_not_written", {})[node] = dict(
+                have=(None if N is None else int(len(N))), need=int(len(V)))
         sc.graph.update(frame_to=node, matrix=np.eye(4))
     if not args.dry_run:
         sc.export(args.out)
