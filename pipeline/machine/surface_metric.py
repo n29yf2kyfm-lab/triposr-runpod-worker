@@ -386,8 +386,11 @@ def measure(path, region="all", radii=(0.025, 0.080), geom=None,
         out["sigma"][f"{int(R*1000)}mm"] = slope_error(
             m, R, mask=panel, max_faces=max_faces)
     if verbose:
-        s = "  ".join(f"s{k}={v.get('rms', float('nan')):.3f}deg"
-                      for k, v in out["sigma"].items())
+        s = "  ".join(
+            "s%s=%.3fdeg C=%s" % (k, v.get("rms", float("nan")),
+                                  ("%.3f" % v["coherence"]) if v.get("coherence")
+                                  is not None else "--")
+            for k, v in out["sigma"].items())
         print(f"    region={region} panel={out['panel_faces']} "
               f"({out['panel_frac']*100:.0f}% of region)  {s}  "
               f"crease={out['crease_len_m']:.2f}m  "
