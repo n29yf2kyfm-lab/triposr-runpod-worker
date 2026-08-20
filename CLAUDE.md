@@ -2556,6 +2556,82 @@ Rules of the tool, learned the same evening:
   * Scope: FRESH candidates only. The 64 scrapped live cars stay scrapped
     (owner ruling 2026-08-11) unless the owner explicitly reopens them.
 
+## GATE 6 (wheels/tyres/grounding): a measuring instrument that measured itself (2026-08-20)
+
+`pipeline/machine/` wheel_metrology (measure) + wheel_ground_op (repair) +
+wheel_evidence (render) + wheel_angle_calib (calibrate). The Golf test bed went
+from two tyres 190-196 mm IN THE AIR and hub asymmetry of 76/114 mm to all four
+tyres on the ground within 0.7 mm and hub symmetry 0.03-2.1 mm. What matters for
+next time is not that number, it is that FOUR of the instrument's own numbers
+were fiction, and every one of them had been reported for weeks:
+
+* **A gate that is EMPTY BY CONSTRUCTION reports PASS forever.** "No arch
+  intersection" asked for points that were simultaneously inside and outside the
+  wheel cylinder (`not_wheel & rad < 0.97R` where not_wheel excluded `rad<1.02R`).
+  Always zero, on every car, never once fired. Same class as the WRONG_CLASS
+  regex ending in a literal backslash-b. **Write the test that makes a gate FIRE
+  before you trust a zero.**
+* **A threshold measured against your own exclusion boundary is not a
+  measurement.** Arch clearance returned exactly 0.0200 x R on 8 of 8 wheels —
+  it was reading back the 1.02R cylinder margin, because the fit's 4.5 mm rms
+  scatters tread vertices outside it and they then count as "body". The tell was
+  the constant ratio; look for it.
+* **AN ESTIMATOR THAT SELECTS ITS SAMPLE ABOUT AN ASSUMED AXIS WILL REPORT THAT
+  ASSUMPTION BACK.** The tread band was chosen as "within 3% of R of the assumed
+  axis", so a wheel rotated by a known 2.000 deg re-measured as 0.69 — **response
+  slope 0.35**. Every toe and camber this project ever reported was ~3x too small
+  and biased toward zero, and the repair that rotated by the reported error
+  under-corrected by the same factor. Iterating the selection about the evolving
+  axis restores slope 0.947. **Calibrate by INJECTING a known angle into the real
+  car and re-running the whole CLI path** (wheel_angle_calib.py) — a unit test on
+  the fitter would have passed, because the fitter was never the problem.
+* **The ground plane was the lowest vertex in the scene** — underbody 9.5 mm
+  below the tyres — so every "tyre bottom at ground" verdict was measured against
+  a piece of splitter. A car's ground plane is its contact patches.
+
+**TWO PRECISIONS, AND ONLY ONE MEETS A 0.1 deg TOLERANCE.** Repeatability of a
+CHANGE under one fixed band definition: +-0.065 deg (9-point injection ladder,
+rms 0.062). Absolute accuracy across eight equally defensible band definitions:
++-0.18 to +-0.86 deg, because a generated tyre is not round to better than 4.5 mm
+rms. So toe/camber verdicts on melt wheels are honestly NOT MEASURABLE at +-0.1,
+and a tool that certifies them is reading its seed axis. A certifiable pass needs
+CONSTRUCTED wheels (wheel_stage.py) where the axis is exact by construction.
+
+**Repair traps, all paid for on this car:**
+  * **Component-level isolation silently HALF-MOVES a fused wheel.** The rear
+    tyres are welded into one 423,288-face `interior` shell; component ownership
+    claimed 3% of the RR tread band, moved it, and left the rest standing. The
+    metrology then fits the MIXTURE and reports plausible numbers for a broken
+    car. Cut at FACE level and duplicate the shared vertices (never pull them —
+    that is the recorded panel-denting failure), and refuse below a measured
+    tread-owned fraction.
+  * **Scale in the units you verify in.** Scale factors came from the scene-wide
+    width and were checked on the moved geometry — two populations 10 mm apart,
+    so "identical width" could never land. Isolate first, measure that set, scale
+    it, verify it: spread went 41.6 mm -> 0.79 mm.
+  * **Scale about the wheel's own mid-plane but still map centre->target.**
+    Moving pivot and destination together walked all four tyres 14 mm proud of
+    the fenders while the plan believed they were 7.5 mm inside.
+  * **The operator converges, then oscillates.** Two passes was best (FAIL 8->6);
+    a third improved angles and pushed hub-lateral and fender back out, and each
+    pass re-cuts with a cylinder sized from the last width, so the width creeps
+    (+10% per pass). Iterate twice, then stop and report.
+
+**Published track can be UNREACHABLE on a generated body, and that is not a wheel
+fault.** Mk8 track is 1549/1520 mm; this body measures 1610/1660 mm across the
+arches (published width 1789), so spec track stands the tyres 30-85 mm PROUD of
+the fenders. `--track-mode fender|spec|measured` makes the conflict a stated
+choice instead of a silent one.
+
+**Evidence rules that held:** orthographic only (a perspective camera makes a
+symmetric car photograph asymmetric), front/rear AT HUB HEIGHT, ground grid as
+real GEOMETRY so occlusion is honest, and every overlay projected through the
+camera's own matrix and verified in-frame by landing each drawn hub cross on a
+marker sphere the renderer placed at the same point. Lock the camera height
+across a before/after pair (EV_HUB_H) — the baseline's hubs sat 100 mm higher and
+the pair would not have been comparable. Exposure verified numerically: 0.22
+world -> sRGB 130 in all six frames.
+
 ## THE PRODUCTION BRIEF — standing spec for the machine (owner-relayed, 2026-08-18)
 
 The reviewer's full production brief is now THE spec for pipeline/machine/. It
