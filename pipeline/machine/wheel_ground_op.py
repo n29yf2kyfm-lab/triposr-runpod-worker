@@ -170,14 +170,19 @@ def isolate_faces(meshes, wheel, cfg):
     return picked, []
 
 
-def split_shared(meshes, picked):
+def split_shared(meshes, picked, appended=None, normals=None):
     """Duplicate every vertex a moving face shares with a stationary one.
 
-    Returns the updated meshes and the number of vertices split per mesh. The
-    moving faces are re-indexed onto the copies, so afterwards the moving set
-    can be transformed with no effect whatsoever on anything staying put.
+    Returns the updated meshes and the number of vertices split per mesh, and
+    records in `appended` the SOURCE INDEX of every vertex it added. That
+    record is not bookkeeping — every per-vertex attribute the mesh carries
+    (normals, UVs) has to be extended along the same indices when the result
+    is written, or the copies are attributeless: measured on the first build
+    of this operator, 1,859 vertices came back with ZERO-LENGTH normals and
+    the glTF validator went from 30 errors to 1,980.
     """
     counts = {}
+    appended = {} if appended is None else appended
     for name, keep in picked.items():
         V, F = meshes[name]
         moving = np.zeros(len(V), bool)
@@ -188,6 +193,10 @@ def split_shared(meshes, picked):
         if not len(shared):
             counts[name] = 0
             continue
+        appended[name] = np.concatenate(
+            [appended.get(name, np.zeros(0, np.int64)), shared])
+        if normals is not None and normals.get(name) is not None:
+            normals[name] = np.vstack([normals[name], normals[name][shared]])
         remap = np.arange(len(V))
         newV = np.vstack([V, V[shared]])
         remap = np.concatenate([remap, shared])          # copy -> original
@@ -461,6 +470,7 @@ def run(args):
     # world-space vertex arrays, keyed by NODE, exactly as the metrology sees
     meshes = {}
     node_geom = {}
+    normals = {}
     for node in sc.graph.nodes_geometry:
         T, gname = sc.graph[node]
         g = sc.geometry[gname]
@@ -472,6 +482,15 @@ def run(args):
                 f"baked into the vertices so the output is in world space")
         meshes[node] = (V, np.asarray(g.faces))
         node_geom[node] = gname
+        # Capture the AUTHORED normals now. Assigning faces later invalidates
+        # trimesh's cache and it recomputes them for the WHOLE mesh, which
+        # silently replaces authored shading everywhere — the crumpled-foil
+        # class of defect this project has already paid for twice. They are
+        # kept, transformed with the geometry, and written back.
+        try:
+            normals[node] = np.asarray(g.vertex_normals, float).copy()
+        except Exception:
+            normals[node] = None
 
     # ---------------- stage: pose
     m0 = WM.measure(args.glb, spec=spec, nose=args.nose, canonicalise=False,
@@ -506,10 +525,11 @@ def run(args):
             # (see `isolated_metrics`). Cutting is side-effect free apart from
             # the vertex splits, which only duplicate vertices.
             iso, picks = {}, {}
+            appended = report.setdefault("_appended", {})
             for r in mm["wheels"]:
                 if args.cut == "face":
                     picked, audit = isolate_faces(meshes, r, cfg)
-                    meshes, split = split_shared(meshes, picked)
+                    meshes, split = split_shared(meshes, picked, appended)
                     audit = [dict(action="vertices split along the cut",
                                   per_mesh=split)]
                 else:
@@ -574,8 +594,24 @@ def run(args):
                         perp = q - np.outer(ax, a)
                         ax = mid + p["scale_axial"] * (ax - mid)
                         q = np.outer(ax, a) + p["scale_radial"] * perp
-                        V[vm] = q @ rot_between(a, axis_t).T + hub_t
+                        Rm = rot_between(a, axis_t)
+                        V[vm] = q @ Rm.T + hub_t
                         meshes[name] = (V, F)
+                        # NORMALS ARE NOT POSITIONS. The wheel transform is a
+                        # NON-UNIFORM scale (radial != axial), so normals go
+                        # through the inverse transpose — for this map that is
+                        # a rotation plus the RECIPROCAL scales — and must be
+                        # renormalised. Carrying them through unchanged tilts
+                        # every shaded normal on a scaled wheel.
+                        N = normals.get(name)
+                        if N is not None and len(N) == len(V):
+                            nn = N[vm]
+                            nax = nn @ a
+                            nperp = nn - np.outer(nax, a)
+                            nn = (np.outer(nax / p["scale_axial"], a) +
+                                  nperp / p["scale_radial"]) @ Rm.T
+                            ln = np.linalg.norm(nn, axis=1, keepdims=True)
+                            N[vm] = nn / np.where(ln > 1e-12, ln, 1.0)
                         nfaces += int(keep.sum())
                     # SELF-CHECK ON THE GEOMETRY THIS OPERATOR ACTUALLY MOVED.
                     # The scene-wide metrology re-fits from scratch and, on a
@@ -615,9 +651,36 @@ def run(args):
                 report["wheels"] = dict(applied=True, moved=moved)
 
     # ---------------- write
+    # THE FACES HAVE TO GO BACK TOO. The face cut RE-INDEXES the moving faces
+    # onto duplicated vertices; writing only `vertices` leaves the file with
+    # the original indices, so the copies are orphans (zero normals) and the
+    # seam faces still reference the vertices that did NOT move — i.e. the
+    # geometry is stretched across the cut instead of separated by it, which
+    # is the exact panel-denting failure the split exists to avoid. Measured
+    # before this fix: 1,859 zero-length normals and 4 primitives short of
+    # their texcoords.
+    appended = report.pop("_appended", {})
     for node, (V, F) in meshes.items():
         g = sc.geometry[node_geom[node]]
+        src = appended.get(node)
+        n_old = len(g.vertices)
+        if src is not None and len(src) and len(V) > n_old:
+            src = np.asarray(src, np.int64)
+            vis = getattr(g, "visual", None)
+            uv = getattr(vis, "uv", None) if vis is not None else None
+            if uv is not None and len(uv) == n_old:
+                import trimesh as _tm
+                # A fresh TextureVisuals, never a mutated one: reassigning an
+                # existing visual onto a different vertex count silently drops
+                # the material binding (CLAUDE.md, premium.py).
+                g.visual = _tm.visual.TextureVisuals(
+                    uv=np.vstack([np.asarray(uv), np.asarray(uv)[src]]),
+                    material=vis.material)
         g.vertices = V
+        g.faces = F
+        N = normals.get(node)
+        if N is not None and len(N) == len(V):
+            g.vertex_normals = N
         sc.graph.update(frame_to=node, matrix=np.eye(4))
     if not args.dry_run:
         sc.export(args.out)
