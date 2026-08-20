@@ -107,7 +107,28 @@ def _arg(flag, default=None):
     return argv[argv.index(flag) + 1] if flag in argv else default
 
 
-SOCK = _arg("--sock", "/tmp/blender_live.sock")
+SOCK = os.path.abspath(_arg("--sock", "/tmp/blender_live.sock"))
+
+
+def short_sock(path):
+    """AF_UNIX sun_path is capped at 108 BYTES — a limit that has nothing to do
+    with the filesystem's own path limit, so a perfectly legal path bind()s with
+    `OSError: AF_UNIX path too long`. Cost: the first start attempt of this
+    harness, whose scratchpad path was 118 bytes.
+
+    Long paths are therefore BOUND at a hashed /tmp address while the .ready,
+    .jsonl and .snaps files stay beside the path the caller asked for, so logs
+    remain where they are expected. blender_cmd.short_sock MUST match this, and
+    the .ready file records the real bind address so the client never has to
+    guess.
+    """
+    if len(path.encode()) <= 100:
+        return path
+    import hashlib
+    return "/tmp/bl-" + hashlib.sha1(path.encode()).hexdigest()[:16] + ".sock"
+
+
+BIND = short_sock(SOCK)
 LOG = _arg("--log", SOCK + ".jsonl")
 READY = SOCK + ".ready"
 SNAPDIR = _arg("--snapdir", SOCK + ".snaps")
@@ -409,6 +430,18 @@ def op_calibrate(a):
     sampling noise, no dependence on the scene. Under Standard, v=0.22 lands at
     sRGB 129.2; under AgX the same card lands far lower. This is the executable
     form of the lesson that cost a false white-tyre verdict.
+
+    TWO MISTAKES PAID FOR HERE, both of which made the guard lie:
+      * the first version parked the camera at (0,0,3) pointing down, WITH THE
+        CAR STILL IN THE SCENE, so it averaged the car and the world background
+        together with the card and read 90.4 instead of 129.1 — a calibration
+        shot that contains the subject measures the subject. The card is now
+        parked 1000 units away, far outside the 25 deg frame of anything else.
+      * it averaged the whole frame, so the world background diluted the
+        reading. film_transparent leaves the background at alpha 0, so the
+        foreground-only statistic measures the CARD and nothing else, and
+        `coverage` is reported so a card that missed the frame is visible
+        rather than silently averaged away.
     """
     v = float(a.get("value", 0.22))
     sc = bpy.context.scene
@@ -418,10 +451,11 @@ def op_calibrate(a):
     mesh = bpy.data.meshes.new("_CAL")
     obj = bpy.data.objects.new("_CAL", mesh)
     bm = bmesh.new()
-    bmesh.ops.create_grid(bm, x_segments=1, y_segments=1, size=1.0)
+    bmesh.ops.create_grid(bm, x_segments=1, y_segments=1, size=4.0)
     bm.to_mesh(mesh)
     bm.free()
     sc.collection.objects.link(obj)
+    obj.location = (1000.0, 0.0, 0.0)       # away from the car, not on top of it
     mat = bpy.data.materials.new("_CALMAT")
     mat.use_nodes = True
     nt = mat.node_tree
@@ -433,12 +467,11 @@ def op_calibrate(a):
     mesh.materials.append(mat)
     cam = bpy.data.objects[RIG["cam"]]
     keep_loc, keep_rot = tuple(cam.location), tuple(cam.rotation_euler)
-    cam.location = (0, 0, 3)                 # card fills frame, dead-on
+    cam.location = (1000.0, 0.0, 3.0)        # dead-on, 3 units off the card
     cam.rotation_euler = (0, 0, 0)
     cam.data.lens = 80
     out = a.get("out", os.path.join(SNAPDIR, "_calibrate.png"))
     os.makedirs(os.path.dirname(os.path.abspath(out)), exist_ok=True)
-    sc.render.film_transparent = False
     sc.render.filepath = out
     try:
         bpy.ops.render.render(write_still=True)
@@ -448,16 +481,17 @@ def op_calibrate(a):
         bpy.data.meshes.remove(mesh)
         bpy.data.materials.remove(mat)
         cam.location, cam.rotation_euler = keep_loc, keep_rot
-        sc.render.film_transparent = True
         sc.render.engine = keep_engine
         sc.render.resolution_x, sc.render.resolution_y = keep_res
     expect = round((1.055 * v ** (1 / 2.4) - 0.055) * 255, 1)
-    got = st["mean_srgb_all"]
+    got = st["mean_srgb"]
     tol = float(a.get("tol", 3.0))
     return {"value": v, "expected_srgb": expect, "measured_srgb": got,
-            "delta": round(got - expect, 2), "tolerance": tol,
+            "delta": round(got - expect, 2) if got is not None else None,
+            "tolerance": tol, "card_coverage": st["coverage"],
             "view_transform": sc.view_settings.view_transform,
-            "standard_confirmed": abs(got - expect) <= tol, "out": out}
+            "standard_confirmed": got is not None and abs(got - expect) <= tol,
+            "out": out}
 
 
 # --- repair operators -------------------------------------------------------
@@ -511,15 +545,20 @@ REPAIRS = {"translate": _rep_translate, "recalc_normals": _rep_recalc_normals}
 
 
 def op_apply(a):
-    op = a.get("op")
-    if op not in REPAIRS:
-        raise KeyError(f"unknown repair op {op!r}; have {sorted(REPAIRS)}")
+    # the field is `repair`, NOT `op`: `op` is the request's own reserved key,
+    # so `apply --op translate` clobbers the request name. It cost one confusing
+    # client-side TypeError to find; the name is reserved here so it cannot
+    # recur silently.
+    name = a.get("repair") or a.get("operator")
+    if name not in REPAIRS:
+        raise KeyError(f"unknown repair {name!r}; pass repair=<name>, "
+                       f"have {sorted(REPAIRS)}")
     sel = _sel_objects()
     if not sel:
         raise RuntimeError("nothing selected and no meshes in the scene")
     t = time.time()
-    r = REPAIRS[op](sel, a)
-    r["op"] = op
+    r = REPAIRS[name](sel, a)
+    r["repair"] = name
     r["apply_s"] = round(time.time() - t, 2)
     return r
 
@@ -530,7 +569,8 @@ def op_measure(a):
     world bbox — both move when geometry moves."""
     tot = np.zeros(3, dtype=np.float64)
     n = 0
-    for o in _sel_objects():
+    sel = _sel_objects()
+    for o in sel:
         cnt = len(o.data.vertices)
         if not cnt:
             continue
@@ -538,8 +578,11 @@ def op_measure(a):
         o.data.vertices.foreach_get("co", buf)
         tot += buf.reshape(-1, 3).sum(axis=0)
         n += cnt
-    bb = _world_bbox()
-    return {"verts": n,
+    # bbox is scoped to the SELECTION too. Reporting a selection's vertex mean
+    # beside the whole scene's bbox reads as one measurement and is two, which
+    # is how a restore that only half-worked would look like a pass.
+    bb = _world_bbox(sel)
+    return {"verts": n, "objects": len(sel),
             "mean_co": [round(float(x), 6) for x in (tot / max(n, 1))],
             "bbox_min": [round(v, 6) for v in bb[0]] if bb else None,
             "bbox_max": [round(v, 6) for v in bb[1]] if bb else None}
@@ -779,20 +822,20 @@ def dispatch(req):
 
 
 def serve():
-    if os.path.exists(SOCK):
-        os.unlink(SOCK)                     # stale socket from a killed session
+    if os.path.exists(BIND):
+        os.unlink(BIND)                     # stale socket from a killed session
     os.makedirs(SNAPDIR, exist_ok=True)
     srv = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-    srv.bind(SOCK)
+    srv.bind(BIND)
     srv.listen(8)
     srv.settimeout(IDLE_TIMEOUT)
     # the ready file is written AFTER listen(), so a client that sees it can
     # always connect — polling for the socket file alone races the bind.
     with open(READY, "w") as fh:
-        json.dump({"pid": os.getpid(), "sock": SOCK, "log": LOG,
+        json.dump({"pid": os.getpid(), "sock": SOCK, "bind": BIND, "log": LOG,
                    "snapdir": SNAPDIR, "started": time.time()}, fh)
-    print(f"BLENDER_LIVE_READY sock={SOCK} pid={os.getpid()} log={LOG}",
-          flush=True)
+    print(f"BLENDER_LIVE_READY sock={SOCK} bind={BIND} pid={os.getpid()} "
+          f"log={LOG}", flush=True)
     try:
         while True:
             try:
@@ -841,7 +884,7 @@ def serve():
         print("BLENDER_LIVE_QUIT", flush=True)
     finally:
         srv.close()
-        for p in (SOCK, READY):
+        for p in (BIND, READY):
             try:
                 os.unlink(p)
             except OSError:

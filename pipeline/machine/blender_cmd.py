@@ -12,7 +12,7 @@ does — so the client can die, be killed, or be a different agent each time.
   python3 blender_cmd.py info   --sock /tmp/golf.sock
   python3 blender_cmd.py select --sock /tmp/golf.sock --regex 'glass|window'
   python3 blender_cmd.py snapshot --sock /tmp/golf.sock --name pre --mode blend
-  python3 blender_cmd.py apply  --sock /tmp/golf.sock --op translate --dz 0.01
+  python3 blender_cmd.py apply  --sock /tmp/golf.sock --repair translate --dz 0.01
   python3 blender_cmd.py render --sock /tmp/golf.sock --out /tmp/a.png --az 45
   python3 blender_cmd.py undo   --sock /tmp/golf.sock
   python3 blender_cmd.py stop   --sock /tmp/golf.sock
@@ -43,23 +43,51 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 SERVER = os.path.join(HERE, "blender_live.py")
 
 
+def short_sock(path):
+    """MUST MATCH blender_live.short_sock — see its docstring. AF_UNIX sun_path
+    is capped at 108 bytes, so long session paths are bound at a hashed /tmp
+    address. This is only the FALLBACK: once the session is up, `.ready` records
+    the real bind address and _bind_path prefers it, so the two halves cannot
+    drift apart in practice."""
+    if len(path.encode()) <= 100:
+        return path
+    import hashlib
+    return "/tmp/bl-" + hashlib.sha1(path.encode()).hexdigest()[:16] + ".sock"
+
+
+def _bind_path(sock):
+    try:
+        with open(sock + ".ready") as fh:
+            return json.load(fh).get("bind") or short_sock(sock)
+    except (OSError, ValueError):
+        return short_sock(sock)
+
+
 class Session:
     """one live Blender session, addressed by its socket path"""
 
     def __init__(self, sock=DEFAULT_SOCK, timeout=1800):
-        self.sock = sock
+        self.sock = os.path.abspath(sock)
         self.timeout = timeout
 
-    def cmd(self, op, **kw):
+    def cmd(self, _op, **kw):
+        # `op` is the request's reserved key. Taking it positionally as `_op`
+        # keeps `cmd("apply", repair="translate")` working, and the explicit
+        # guard turns what was a baffling `got multiple values for argument
+        # 'op'` TypeError into a sentence that says what to do instead.
+        if "op" in kw:
+            raise ValueError(
+                "'op' is the request's own field — a nested op cannot be sent. "
+                "For a repair use repair=<name> (e.g. apply repair=translate).")
         req = dict(kw)
-        req["op"] = op
+        req["op"] = _op
         c = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
         # a render can legitimately take minutes on CPU CYCLES; the timeout is
         # generous on purpose. It exists so a wedged session is detectable, not
         # to bound normal work.
         c.settimeout(self.timeout)
         try:
-            c.connect(self.sock)
+            c.connect(_bind_path(self.sock))
             c.sendall((json.dumps(req) + "\n").encode())
             buf = b""
             while b"\n" not in buf:
@@ -89,12 +117,14 @@ def start(sock, glb=None, log=None, blender=None, extra=(), wait=180):
     listen(), but the process could still die on the preload. We poll with a
     real ping, which is the only proof the session is usable.
     """
+    sock = os.path.abspath(sock)
     ready, stdout_log = sock + ".ready", (log or sock) + ".out"
     s = Session(sock, timeout=30)
     if s.alive():
         raise SystemExit(f"REFUSED: a live session already owns {sock}. "
                          "Use it, or `stop` it first.")
-    for p in (sock, ready):
+    os.makedirs(os.path.dirname(sock) or "/", exist_ok=True)
+    for p in (_bind_path(sock), ready):
         if os.path.exists(p):
             os.unlink(p)                    # stale files from a killed session
     cmd = [blender or os.environ.get("BLENDER", "blender"), "-b",
@@ -205,12 +235,13 @@ def main(argv):
             print(json.dumps({"status": "ok", "note": "no session on " + sock}))
             return 0
         snapdir = s.cmd("snapshots")["result"]["dir"]
+        bind = _bind_path(sock)             # resolve BEFORE quit removes .ready
         try:
             s.cmd("quit")
         except (OSError, ConnectionError):
             pass                            # the session closes the socket as
         for _ in range(40):                 # it goes; that is not an error
-            if not os.path.exists(sock):
+            if not os.path.exists(bind):
                 break
             time.sleep(0.25)
         if kw.get("clean"):
@@ -223,6 +254,10 @@ def main(argv):
     s = Session(sock, timeout=float(kw.pop("timeout", 1800)))
     try:
         r = s.cmd(op, **kw)
+    except ValueError as e:                 # reserved-field misuse, said plainly
+        print(json.dumps({"status": "error", "error": "BadArgument",
+                          "message": str(e)}))
+        return 2
     except (FileNotFoundError, ConnectionRefusedError):
         print(json.dumps({"status": "error", "error": "NoSession",
                           "message": f"nothing listening on {sock}; "
