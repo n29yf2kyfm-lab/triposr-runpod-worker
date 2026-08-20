@@ -861,7 +861,7 @@ def _components(V, F, snap=1e-5):
     return lab[inv[F[:, 0]]], lab[inv]
 
 
-def _wheel_owned(meshes, wheels, cyl_r=1.03, cyl_w=0.80, contain=0.95,
+def _wheel_owned(meshes, wheels, cyl_r=1.03, cyl_w=0.80, contain=0.85,
                  min_faces=3):
     """Vertex mask per mesh: does this vertex belong to ANY wheel?
 
@@ -892,6 +892,15 @@ def _wheel_owned(meshes, wheels, cyl_r=1.03, cyl_w=0.80, contain=0.95,
     the same test `wheel_ground_op.isolate` uses to decide what it may move.
     So the clearance is measured against exactly the geometry that will NOT
     move, and the intersection test is answerable.
+
+    WHY `contain` IS 0.85 AND WHY THAT NUMBER IS NOT A GUESS. Measured on
+    this Golf across all four wheels: of the 259 components with any face
+    inside a wheel cylinder, EVERY ONE scores either >= 0.90 or <= 0.15,
+    except a single 5-face speck at 0.40. The population is bimodal with an
+    empty gap three quarters of a decade wide, so any threshold inside that
+    gap gives the same answer and the choice cannot be tuned to flatter a
+    result. The repair operator keeps its own stricter 0.95, deliberately:
+    measuring wrongly costs a wrong number, MOVING wrongly tears a car.
     """
     owned = {}
     for name, (V, F) in meshes.items():
@@ -991,20 +1000,44 @@ def fender_and_arch(m, cfg=None):
         # brakes. Measured on this Golf, the near-axis region holds 6-11k such
         # vertices per rear wheel; the carcass band is what the criterion
         # "no arch intersection / no penetrating wheels" is actually about.
-        inside = (brad > 0.70 * R) & (brad < 0.97 * R) & \
+        inside = (brad > 0.80 * R) & (brad < 0.97 * R) & \
             (np.abs(blat) < 0.48 * Wd)
         r["arch_intersect_points"] = int(inside.sum())
         r["arch_intersect_depth_m"] = float(R - brad[inside].min()) \
             if inside.sum() else 0.0
+        # WHICH mesh is intruding matters to whoever has to act on a FAIL:
+        # a fender panel in the tyre is a body defect, a fragment of a fused
+        # 423k-face interior shell is a labelling artefact of THIS car. The
+        # verdict stays FAIL either way; the attribution is what makes it
+        # actionable instead of merely alarming.
+        att, i0 = {}, 0
+        for nm, (Vm, _F) in meshes.items():
+            k = int(len(Vm) - own.get(nm, np.zeros(len(Vm), bool)).sum())
+            if k:
+                n_here = int(inside[i0:i0 + k].sum())
+                if n_here:
+                    att[nm] = n_here
+                i0 += k
+        r["arch_intersect_by_mesh"] = att
         # ---- how much radial room is left before the tread would touch the
         # body. The repair operator needs this BEFORE it grows a tyre: a
         # radius correction that closes this gap turns a floating wheel into
         # an intersecting one, which is worse.
-        near = (brad < 1.60 * R) & (np.abs(blat) < 0.48 * Wd) & \
-            ((BODY[:, ui] - c[ui]) > 0.20 * R)         # the arch, not the road
+        # Measured in the UPPER arc only (the arch, not the road) and only
+        # OUTSIDE 1.05R. That floor is not arbitrary: the cylinder fit's rms
+        # is ~4.5 mm here, so tread vertices scatter to ~1.02R, and any of
+        # them the component test failed to claim would otherwise BE the
+        # answer. 1.05R is ~3 sigma of that scatter. The consequence is
+        # stated rather than hidden: a genuine arch closer than 0.05R is
+        # reported as "at the floor", not as a number.
+        floor = 1.05
+        near = (brad > floor * R) & (brad < 1.60 * R) & \
+            (np.abs(blat) < 0.48 * Wd) & \
+            ((BODY[:, ui] - c[ui]) > 0.20 * R)
         r["arch_min_clearance_m"] = float(brad[near].min() - R) \
             if near.sum() > 20 else None
         r["arch_clearance_points"] = int(near.sum())
+        r["arch_clearance_floor_m"] = float((floor - 1.0) * R)
         # ---- contact patch, from the tyre carcass only
         r["contact_patch"] = _contact(ALL[carcass], c, a, R, Wd,
                                       m["ground_plane"], li, ti, ui)
