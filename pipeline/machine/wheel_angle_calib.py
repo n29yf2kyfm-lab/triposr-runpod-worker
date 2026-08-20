@@ -61,10 +61,22 @@ def run(glb, corner, which, spec, ladder=LADDER, tmpdir=None):
     # are exact rigid rotations of the wheel about its own hub, so the true
     # change in the wheel's axis IS the injected angle, by construction.
     rot_idx = li if which == "camber" else ui
+    # SIGN. A rotation about the vehicle's up axis STEERS a wheel, and steering
+    # both wheels the same way is toe-in on one flank and toe-out on the other
+    # — so the injected angle has to be flipped on the negative-lateral side
+    # for "injected toe" to mean the same thing as the metrology's toe, which
+    # is signed positive-is-toe-in on BOTH flanks. Measured without this: the
+    # RR calibration came back with a response slope of -1.02, magnitude
+    # right, sign inverted, which reads like a broken estimator and is not.
+    # Camber needs no such flip: the metrology already signs it by the
+    # outboard axis tilting up, which is the same rotation on both sides.
+    sgn = 1.0
+    if which == "toe":
+        sgn = 1.0 if row["hub_lat"] > 0 else -1.0
     tmpdir = tmpdir or os.path.dirname(os.path.abspath(glb))
     out = []
     for deg in ladder:
-        M = _rot(rot_idx, math.radians(deg))
+        M = _rot(rot_idx, sgn * math.radians(deg))
         sc = trimesh.load(glb, force="scene", process=False)
         n_moved = 0
         for node in sc.graph.nodes_geometry:

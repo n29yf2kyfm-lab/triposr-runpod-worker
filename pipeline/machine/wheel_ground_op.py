@@ -510,6 +510,13 @@ def run(args):
             M = np.array(m0["pose"]["matrix"]); t = np.array(m0["pose"]["translation"])
             for n, (V, F) in meshes.items():
                 meshes[n] = (V @ M.T + t, F)
+                # A rigid rotation carries the normals too. Leaving them
+                # behind tilts every shaded normal on the car by the pose
+                # angle — 4.15 deg on this Golf — while the geometry moves,
+                # which is a lighting defect with no visible geometric cause.
+                # M is orthogonal, so the inverse transpose IS M.
+                if normals.get(n) is not None:
+                    normals[n] = normals[n] @ M.T
             report["pose"] = dict(applied=True, **{
                 k: m0["pose"][k] for k in
                 ("yaw_deg", "pitch_deg", "roll_deg", "lat_offset_m",
