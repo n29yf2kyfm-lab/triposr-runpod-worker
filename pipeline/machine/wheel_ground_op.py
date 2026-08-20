@@ -466,7 +466,12 @@ def run(args):
                   config={k: v for k, v in cfg.items()})
 
     import trimesh
-    sc = trimesh.load(args.glb, force="scene")
+    # process=False: trimesh's default processing merges vertices and
+    # RECOMPUTES vertex normals, which zeroes the normal of every vertex whose
+    # incident faces are degenerate — 571 of them on this car — and discards
+    # the authored ones. The component test below welds by position itself, so
+    # it needs no help from the loader.
+    sc = trimesh.load(args.glb, force="scene", process=False)
     # world-space vertex arrays, keyed by NODE, exactly as the metrology sees
     meshes = {}
     node_geom = {}
