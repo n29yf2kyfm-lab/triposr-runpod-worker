@@ -429,11 +429,17 @@ def silhouette_masks(path, res=1024, fov_deg=30.0, views=CANONICAL_VIEWS,
     would move the camera with the mesh and make the IoU meaningless.
     """
     scene = trimesh.load(path, process=False)
-    names = list(scene.geometry.keys())
-    parts, offs, tot = [], {}, 0
-    for n in names:
-        g = scene.geometry[n]
-        offs[n] = (tot, tot + len(g.faces)); tot += len(g.faces); parts.append(g)
+    # NODE TRANSFORMS MUST BE APPLIED. scene.geometry[n] is the RAW mesh in its
+    # own local space; `quantize`/`dequantize` leave a scale+translate on the
+    # node, so concatenating raw geometry rendered the car at half linear scale
+    # and scored IoU 0.07 against an export that was actually correct.
+    names, parts, offs, tot = [], [], {}, 0
+    for node in scene.graph.nodes_geometry:
+        tf, gname = scene.graph[node]
+        g = scene.geometry[gname].copy()
+        g.apply_transform(tf)
+        names.append(gname)
+        offs[gname] = (tot, tot + len(g.faces)); tot += len(g.faces); parts.append(g)
     combined = trimesh.util.concatenate(parts)
     inter = trimesh.ray.ray_pyembree.RayMeshIntersector(combined)
 
@@ -467,6 +473,41 @@ def silhouette_masks(path, res=1024, fov_deg=30.0, views=CANONICAL_VIEWS,
             cov[n] = int(sel.sum())
         coverage[name] = cov
     return masks, coverage, scene.bounds
+
+
+def decode_for_probe(path, workdir, ext=None):
+    """Return a path trimesh can ray-cast honestly.
+
+    TWO decode steps are needed, and missing either one produces a mesh that
+    LOOKS like catastrophic failure while the export is fine:
+
+      * EXT_meshopt_compression / KHR_draco_mesh_compression -- trimesh cannot
+        read these at all. Fed a compressed file it built a mesh that filled the
+        entire frame, scoring IoU 0.16 against a perfectly good 5.06 MB export.
+      * KHR_mesh_quantization -- `copy` decodes the compression but LEAVES the
+        quantization, and trimesh then reads the raw int16s as metres: bounds
+        came out +/-70162 instead of +/-2.14. `dequantize` is required as well.
+
+    This is the same family as CLAUDE.md's note that Draco GLBs render blank in
+    a local model-viewer harness -- a decode gap reads as a broken asset.
+    """
+    if ext is None:
+        ext = describe(path)["extensionsUsed"]
+    need_decode = any(e in ext for e in
+                      ("EXT_meshopt_compression", "KHR_draco_mesh_compression"))
+    need_dequant = "KHR_mesh_quantization" in ext
+    if not (need_decode or need_dequant):
+        return path
+    cur = path
+    if need_decode:
+        nxt = os.path.join(workdir, "probe_decoded.glb")
+        gt(["copy", cur, nxt], None, False)
+        cur = nxt
+    if need_dequant:
+        nxt = os.path.join(workdir, "probe_dequant.glb")
+        gt(["dequantize", cur, nxt], None, False)
+        cur = nxt
+    return cur
 
 
 def silhouette_iou(before_masks, after_masks):
@@ -593,11 +634,7 @@ def export(master, out, budget_mb=8.0, texture_px=2048, simplify_error=0.001,
     # and handed a compressed file it reads the quantised integers as positions
     # and builds a garbage mesh that fills the frame -- which showed up as an
     # IoU of 0.16 against a perfectly good export. `copy` is the decode path.
-    probe = out
-    ext = rep["export"]["extensionsUsed"]
-    if any(e in ext for e in ("EXT_meshopt_compression", "KHR_draco_mesh_compression")):
-        probe = os.path.join(workdir, "s9_probe.glb")
-        gt(["copy", out, probe], "decode-for-probe", False)
+    probe = decode_for_probe(out, workdir, rep["export"]["extensionsUsed"])
     after, cov_a, _ = silhouette_masks(probe, res=res, ref_bounds=ref_bounds)
     rows = silhouette_iou(before, after)
     rep["silhouette"] = rows

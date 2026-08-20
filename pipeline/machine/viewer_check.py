@@ -50,20 +50,31 @@ PAGE = """<!doctype html>
   html,body{margin:0;height:100%%;background:#202024;}
   model-viewer{width:900px;height:600px;--poster-color:transparent;background:#202024;}
 </style>
-<script type="module" src="/model-viewer.min.js"></script>
 </head><body>
-<model-viewer id="mv" src="/%s"
+<model-viewer id="mv"
   camera-controls disable-pan interaction-prompt="none"
   shadow-intensity="0" exposure="1"
   environment-image="neutral"></model-viewer>
 <script>
-window.__err=[]; window.__console=[];
+window.__err=[];
 window.addEventListener('error',e=>window.__err.push(String(e.message)));
 window.addEventListener('unhandledrejection',e=>window.__err.push('unhandledrejection: '+e.reason));
-const mv=document.getElementById('mv');
 window.__loaded=false; window.__failed=null;
+const mv=document.getElementById('mv');
 mv.addEventListener('load',()=>{window.__loaded=true;});
 mv.addEventListener('error',e=>{window.__failed=JSON.stringify(e.detail||'error');});
+</script>
+<script type="module">
+import '/model-viewer.min.js';
+await customElements.whenDefined('model-viewer');
+const MV = customElements.get('model-viewer');
+// model-viewer does NOT bundle these decoders. Left at their defaults it fetches
+// them from unpkg/gstatic, which fails offline and produces
+// "THREE.GLTFLoader: setMeshoptDecoder must be called before loading compressed
+// files" -- a load failure that looks like a corrupt asset. Point them local.
+MV.meshoptDecoderLocation = '/meshopt_decoder.js';
+MV.dracoDecoderLocation = '/draco/';
+document.getElementById('mv').src = '/%s';
 </script>
 </body></html>
 """
@@ -93,6 +104,28 @@ def find_model_viewer():
 class Quiet(http.server.SimpleHTTPRequestHandler):
     def log_message(self, *a):
         pass
+
+
+def find_chromium():
+    """Locate an already-installed Chromium.
+
+    The Python playwright package here is 1.62.0 and expects browser build 1234,
+    but /opt/pw-browsers ships 1194. Rather than run `playwright install` (which
+    this environment forbids), point launch() at the binary that IS present.
+    """
+    import glob
+    roots = [os.environ.get("PLAYWRIGHT_BROWSERS_PATH") or "/opt/pw-browsers"]
+    pats = ["chromium-*/chrome-linux/chrome",
+            "chromium_headless_shell-*/chrome-headless-shell-linux64/chrome-headless-shell",
+            "chromium-*/chrome-linux64/chrome"]
+    found = []
+    for r in roots:
+        for p in pats:
+            found += sorted(glob.glob(os.path.join(r, p)))
+    for f in found:                      # prefer full chrome (WebGL support)
+        if f.endswith("/chrome"):
+            return f
+    return found[0] if found else None
 
 
 def serve(directory):
@@ -128,8 +161,13 @@ def check(glb, out_dir="/tmp/viewer_check", timeout_ms=180000,
               "renderer": "chromium headless + SwiftShader (SOFTWARE, desktop) "
                           "-- NOT a device measurement"}
     try:
+        exe = find_chromium()
+        if not exe:
+            return {"status": "NOT_TESTED",
+                    "reason": "no Chromium found under PLAYWRIGHT_BROWSERS_PATH"}
+        result["chromium"] = exe
         with sync_playwright() as pw:
-            browser = pw.chromium.launch(headless=True, args=[
+            browser = pw.chromium.launch(headless=True, executable_path=exe, args=[
                 "--use-gl=angle", "--use-angle=swiftshader",
                 "--enable-unsafe-swiftshader", "--no-sandbox",
                 "--disable-dev-shm-usage",
