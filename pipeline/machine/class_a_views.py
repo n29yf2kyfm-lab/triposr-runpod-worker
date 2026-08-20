@@ -186,7 +186,7 @@ else:
         dist = (span * 0.5) / math.tan(math.atan(sensor * 0.5 / lens))
         cams[name] = dict(loc=list(t + d * dist), target=list(t),
                           lens=lens, span=round(span, 3), az=az, el=el)
-    spec = dict(cams=cams, up=[0, 0, 1], bbox=[lo, hi],
+    spec = dict(cams=cams, up=[0, 0, 1], bbox=[lo, hi], i_len=i_len,
                 source=os.path.basename(GLB), lens=lens, sensor=sensor)
     sp = SPEC_IN or os.path.join(OUTD, "_camera_spec.json")
     with open(sp, "w") as fh:
@@ -197,20 +197,36 @@ ez = mathutils.Vector(spec["up"])
 
 # ---------------------------------------------------------------- materials
 def clay_mat():
-    """Matte neutral grey. No texture, no colour, no gloss — nothing for a
-    shading trick to hide behind. 0.55 base is mid-grey in linear terms, which
-    under Standard view transform lands around sRGB 200 in the lit areas and
-    leaves plenty of headroom before clipping."""
+    """Neutral grey studio clay: matte in COLOUR, with a controlled SHEEN.
+
+    A perfectly Lambertian surface integrates the whole hemisphere and so
+    AVERAGES A SMALL WAVE AWAY. That is physics, not a rig fault, and the first
+    version of this pass proved it: the Golf's front door rendered as a
+    featureless white field at mean sRGB 193 while the zebra pass of the SAME
+    door, through the SAME camera, was a shattered marble. A fully Lambertian
+    clay cannot be the inspection surface this gate asks for.
+
+    Real studio clay is not Lambertian either -- it carries a low specular
+    sheen, and that sheen is what makes strip lights legible on it. So the base
+    colour stays flat neutral grey with no texture and no map (nothing for a
+    shading trick to hide behind) and roughness is 0.34: matte to the eye, and
+    still able to resolve the strips. That is a long way from the 0.03 of the
+    zebra chrome and a long way from the glossy paint the owner ruled out.
+
+    Base 0.34 rather than 0.55 because with the strips carrying most of the
+    light a lighter base clips, and a clipped clay pass has thrown away exactly
+    the gradient the gate is about. Verified numerically on every render.
+    """
     m = bpy.data.materials.new("ca_clay")
     m.use_nodes = True
     b = m.node_tree.nodes["Principled BSDF"]
-    b.inputs["Base Color"].default_value = (0.55, 0.55, 0.56, 1)
+    b.inputs["Base Color"].default_value = (0.34, 0.34, 0.35, 1)
     b.inputs["Metallic"].default_value = 0.0
-    b.inputs["Roughness"].default_value = 0.62
+    b.inputs["Roughness"].default_value = 0.34
     if "Specular IOR Level" in b.inputs:
-        b.inputs["Specular IOR Level"].default_value = 0.35
+        b.inputs["Specular IOR Level"].default_value = 0.5
     elif "Specular" in b.inputs:
-        b.inputs["Specular"].default_value = 0.35
+        b.inputs["Specular"].default_value = 0.5
     return m
 
 
@@ -242,6 +258,77 @@ def normal_mat():
     nt.links.new(vt.outputs[0], e.inputs["Color"])
     nt.links.new(e.outputs[0], o.inputs["Surface"])
     return m
+
+
+def strip_lights(bbox, i_len, n=7, strength=17.0, width=0.16, radius_k=0.62,
+                 span_k=1.7):
+    """Long emissive tubes running along the car, at FINITE distance.
+
+    THIS IS NOT INTERCHANGEABLE WITH AN ENVIRONMENT MAP, and finding that out
+    cost two rebuilds of the clay pass. A world-based strip pattern is
+    infinitely far away, so the reflected direction it is sampled by depends
+    only on the surface NORMAL. A near-planar vertical door has almost constant
+    normal, so it samples one narrow band of elevation and renders as a
+    FEATURELESS FIELD — measured, mean sRGB 176 with no structure, on a door
+    whose zebra pass through the same camera was a shattered marble.
+
+    A real strip light is a finite tube a couple of metres away, so the
+    reflection angle changes with POSITION as well as normal, and the band
+    sweeps ACROSS the panel. That sweep is the whole diagnostic: on a Class-A
+    panel its edges are straight and evenly spaced, and a wave bends them. It
+    is also what the owner literally asked for — "long strip lights".
+
+    Tubes run parallel to the car's length and are spaced around it on an arc,
+    so every panel from rocker to roof gets a sweep.
+    """
+    lo, hi = bbox
+    ctr = mathutils.Vector([(lo[i] + hi[i]) / 2 for i in range(3)])
+    L = hi[i_len] - lo[i_len]
+    i_wid = 1 - i_len
+    W = max(hi[i_wid] - lo[i_wid], hi[2] - lo[2])
+    R = (L * radius_k + W * 0.5)
+    made = []
+    for k in range(n):
+        # -100 deg .. +100 deg about the length axis: below the beltline on
+        # both sides, over the top, and never exactly at the camera azimuth
+        phi = math.radians(-100.0 + 200.0 * k / max(n - 1, 1))
+        d = mathutils.Vector((0, 0, 0))
+        d[i_wid] = math.sin(phi)
+        d[2] = math.cos(phi)
+        loc = ctr + d * R
+        m = bpy.data.meshes.new(f"ca_strip{k}")
+        hl, hw = L * span_k * 0.5, width * 0.5
+        vs = []
+        for sx, sy in ((-1, -1), (1, -1), (1, 1), (-1, 1)):
+            v = [0.0, 0.0, 0.0]
+            v[i_len] = sx * hl
+            # the tube's short axis lies in the plane perpendicular to its
+            # own radius, so it always presents its face to the car
+            t = mathutils.Vector((0, 0, 0))
+            t[i_wid] = math.cos(phi)
+            t[2] = -math.sin(phi)
+            vs.append((loc[0] + v[0] + t.x * sy * hw,
+                       loc[1] + v[1] + t.y * sy * hw,
+                       loc[2] + v[2] + t.z * sy * hw))
+        m.from_pydata(vs, [], [[0, 1, 2, 3]])
+        m.update()
+        o = bpy.data.objects.new(f"ca_strip{k}", m)
+        bpy.context.scene.collection.objects.link(o)
+        mat = bpy.data.materials.new(f"ca_strip_m{k}")
+        mat.use_nodes = True
+        nt = mat.node_tree
+        nt.nodes.clear()
+        e = nt.nodes.new("ShaderNodeEmission")
+        e.inputs["Color"].default_value = (1, 1, 1, 1)
+        e.inputs["Strength"].default_value = strength
+        out = nt.nodes.new("ShaderNodeOutputMaterial")
+        nt.links.new(e.outputs[0], out.inputs["Surface"])
+        o.data.materials.append(mat)
+        # the tubes light the car and reflect in it, but must not appear as
+        # objects in the frame behind it
+        o.visible_camera = False
+        made.append(o)
+    return made
 
 
 def vcol_mat():
@@ -360,7 +447,11 @@ PASS_CFG = {
     # numerically below rather than by eye: AgX once clipped a tyre to pure
     # white on this project and produced a false verdict, and a clay pass that
     # clips has thrown away exactly the gradient the gate is about.
-    "clay":    (clay_mat,   dict(bands=4.0,  hard=False, strength=0.62, floor=0.05)),
+    # clay is lit by REAL STRIP LIGHTS (finite distance) rather than a strip
+    # environment -- see strip_lights() for why an environment cannot work on a
+    # near-planar panel. `None` here means "no strip world"; the lights are
+    # created separately and a dim ambient fills the shadows.
+    "clay":    (clay_mat,   None),
     "zebra":   (chrome_mat, dict(bands=9.0,  hard=True,  strength=1.30, floor=0.01)),
     "normals": (normal_mat, None),
     "map":     (vcol_mat,   None),
@@ -396,6 +487,7 @@ def exposure_check(path):
         print(f"    exposure check failed: {exc}")
         return None, None, 0.0
 
+strips = []
 names = [v[0] for v in VIEWS]
 want = names if VIEWSEL == "all" else [v for v in VIEWSEL.split(",")]
 log = {}
@@ -405,10 +497,20 @@ for pname in PASSES:
         continue
     matf, wargs = PASS_CFG[pname]
     set_material(matf())
-    sc.world = strip_world(**wargs) if wargs else bpy.data.worlds.new("ca_black")
+    for o in list(strips):
+        bpy.data.objects.remove(o, do_unlink=True)
+    strips = []
+    sc.world = strip_world(**wargs) if wargs else bpy.data.worlds.new("ca_dark")
     if wargs is None:
         sc.world.use_nodes = True
-        sc.world.node_tree.nodes["Background"].inputs[1].default_value = 0.0
+        # `map` and `normals` are unlit emission passes and want a black world;
+        # clay wants a little ambient so the shadow side is not crushed, which
+        # would hide a defect just as surely as clipping the highlight does.
+        amb = 0.10 if pname == "clay" else 0.0
+        sc.world.node_tree.nodes["Background"].inputs[1].default_value = amb
+        if pname == "clay":
+            strips = strip_lights(spec["bbox"], spec.get("i_len", 0))
+            print(f"  {len(strips)} strip lights")
     d = os.path.join(OUTD, pname)
     os.makedirs(d, exist_ok=True)
     for vn in want:
