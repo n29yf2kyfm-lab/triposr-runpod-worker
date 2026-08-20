@@ -46,6 +46,7 @@ MV_CANDIDATES = [
 
 PAGE = """<!doctype html>
 <html><head><meta charset="utf-8">
+<link rel="icon" href="data:,">
 <style>
   html,body{margin:0;height:100%%;background:#202024;}
   model-viewer{width:900px;height:600px;--poster-color:transparent;background:#202024;}
@@ -106,6 +107,58 @@ class Quiet(http.server.SimpleHTTPRequestHandler):
         pass
 
 
+# The UMD/CJS build, NOT the .mjs. model-viewer fetches this URL and evaluates it
+# as a CLASSIC script, so an ES module produces "Unexpected token 'export'".
+# meshopt_decoder.cjs falls through its AMD/CommonJS branches in a browser and
+# assigns self.MeshoptDecoder, which is what model-viewer reads.
+MESHOPT_CANDIDATES = [
+    "/tmp/moz/package/meshopt_decoder.cjs",
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "vendor", "meshopt_decoder.js"),
+]
+DRACO_DIRS = [
+    "/tmp/thr/package/examples/jsm/libs/draco/gltf",
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "vendor", "draco"),
+]
+
+
+def vendor_decoders(web):
+    """Copy the meshopt + draco decoders next to the page.
+
+    model-viewer does NOT bundle either one. At their default locations it
+    fetches them from unpkg / gstatic, which fails with no outbound network and
+    surfaces as 'THREE.GLTFLoader: setMeshoptDecoder must be called before
+    loading compressed files' -- a load failure that reads like a corrupt asset.
+    CLAUDE.md already records the Draco half of this trap; meshopt behaves the
+    same way.
+    """
+    got = {"meshopt": None, "draco": None}
+    for c in MESHOPT_CANDIDATES:
+        if os.path.exists(c):
+            shutil.copy(c, os.path.join(web, "meshopt_decoder.js"))
+            got["meshopt"] = c
+            break
+    for d in DRACO_DIRS:
+        if os.path.isdir(d):
+            dst = os.path.join(web, "draco")
+            os.makedirs(dst, exist_ok=True)
+            for f in os.listdir(d):
+                shutil.copy(os.path.join(d, f), os.path.join(dst, f))
+            got["draco"] = d
+            break
+    return got
+
+
+# Console messages that are a property of THIS HARNESS, not of the asset. Each
+# needs a justification, the same discipline gltf_validate.py applies to
+# validator warnings -- an unexplained message is a failure, not noise.
+BENIGN_CONSOLE = {
+    "rAF timed out in updateSource":
+        "model-viewer's own watchdog. SwiftShader software rasterisation makes "
+        "the first frames slow enough to trip it; irrelevant on GPU hardware and "
+        "unrelated to the asset.",
+}
+
+
 def find_chromium():
     """Locate an already-installed Chromium.
 
@@ -152,11 +205,14 @@ def check(glb, out_dir="/tmp/viewer_check", timeout_ms=180000,
     name = os.path.basename(glb)
     shutil.copy(glb, os.path.join(web, name))
     shutil.copy(mv, os.path.join(web, "model-viewer.min.js"))
+    vendored = vendor_decoders(web)
+    result_decoders = vendored
     with open(os.path.join(web, "index.html"), "w") as fh:
         fh.write(PAGE % name)
 
     httpd, port = serve(web)
     result = {"status": "UNKNOWN", "file": os.path.abspath(glb),
+              "decoders": result_decoders,
               "sizeBytes": os.path.getsize(glb),
               "renderer": "chromium headless + SwiftShader (SOFTWARE, desktop) "
                           "-- NOT a device measurement"}
@@ -247,8 +303,8 @@ def check(glb, out_dir="/tmp/viewer_check", timeout_ms=180000,
         result["render_probe_error"] = str(e)
 
     d, c, t = result.get("dims"), result.get("centre"), result.get("target")
-    if d and c and t:
-        scale = max(d["x"], d["y"], d["z"])
+    scale = max(d["x"], d["y"], d["z"]) if d else 0.0
+    if d and c and t and scale > 0:
         off = max(abs(c["x"] - t["x"]), abs(c["y"] - t["y"]), abs(c["z"] - t["z"]))
         result["orbit_centre_offset"] = round(off, 4)
         result["orbit_centre_offset_rel"] = round(off / scale, 4)
@@ -265,8 +321,13 @@ def check(glb, out_dir="/tmp/viewer_check", timeout_ms=180000,
             fails.append("car not on the ground: bbox min Y = %.4f (%.2f%% of size)"
                          % (min_y, 100 * min_y / scale))
 
-    bad = [m for m in result.get("console", [])
-           if m["type"] in ("error", "warning", "pageerror")]
+    bad, benign = [], []
+    for m in result.get("console", []):
+        if m["type"] not in ("error", "warning", "pageerror"):
+            continue
+        why = next((j for pat, j in BENIGN_CONSOLE.items() if pat in m["text"]), None)
+        (benign if why else bad).append(dict(m, justification=why))
+    result["console_benign"] = benign
     result["console_bad"] = bad
     checks["clean_console"] = len(bad) == 0
     if bad:
@@ -297,6 +358,9 @@ def check(glb, out_dir="/tmp/viewer_check", timeout_ms=180000,
         print()
         for k, v in checks.items():
             print("  [%s] %s" % ({True: "PASS", False: "FAIL", None: "SKIP"}[v], k))
+        for m in result.get("console_benign", []):
+            print("  [note] benign console %s: %s" % (m["type"], m["text"][:90]))
+            print("         justified: %s" % m["justification"][:150])
         for f in fails:
             print("  - %s" % f)
         print("VERDICT: %s" % result["status"])

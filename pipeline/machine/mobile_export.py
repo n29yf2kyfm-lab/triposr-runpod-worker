@@ -123,6 +123,15 @@ GLTF_TRANSFORM = shutil.which("gltf-transform") or "/opt/node22/bin/gltf-transfo
 OPAQUE_MATERIALS = ("carpaint", "Rim_Alloy", "Tyre_Rubber", "Lamp_Lens", "interior")
 TRANSPARENT_HINT = ("glass", "window", "windscreen", "glazing")
 
+# Deduplicate IMAGES and ACCESSORS (that is the whole point of the stage) but
+# never MATERIALS or MESHES. Measured on the Golf master: `Rim_Alloy` and
+# `carpaint` are byte-identical materials once their images dedup to one, so a
+# default `dedup` MERGED THEM -- the rims ended up bound to `carpaint`. A respray
+# of the body would then paint the wheels, and `paintMaterialNames` bookkeeping
+# breaks because Rim_Alloy no longer exists. Material identity is load-bearing in
+# this project; file size is not worth it.
+DEDUP_FLAGS = ["--materials", "false", "--meshes", "false"]
+
 CANONICAL_VIEWS = [
     ("front", 180.0, 12.0), ("front34", 215.0, 12.0),
     ("side", 270.0, 12.0), ("rear34", 315.0, 12.0),
@@ -542,7 +551,8 @@ def gt(args, label=None, verbose=True):
 def export(master, out, budget_mb=8.0, texture_px=2048, simplify_error=0.001,
            simplify_ratio=0.6, compress="meshopt", cull_target="interior",
            dilate=2, min_iou=0.990, min_mean_iou=0.995, res=1024,
-           workdir=None, keep_intermediates=False, verbose=True):
+           workdir=None, keep_intermediates=False, allow_material_loss=False,
+           verbose=True):
     """Run the full pipeline. Returns a report dict. Raises on gate failure."""
     workdir = workdir or os.path.join(os.path.dirname(os.path.abspath(out)), "_mobile_tmp")
     os.makedirs(workdir, exist_ok=True)
@@ -570,7 +580,7 @@ def export(master, out, budget_mb=8.0, texture_px=2048, simplify_error=0.001,
 
     # 1 -- dedup/prune FIRST (the +37 MB guard)
     nxt = os.path.join(workdir, "s1_dedup.glb")
-    gt(["dedup", cur, nxt], "dedup", verbose)
+    gt(["dedup", cur, nxt] + DEDUP_FLAGS, "dedup", verbose)
     cur = nxt; step("01 dedup+prune", cur)
 
     # 2 -- cull hidden interior
@@ -610,7 +620,7 @@ def export(master, out, budget_mb=8.0, texture_px=2048, simplify_error=0.001,
     # Running it after compression silently threw the compression away and took
     # 5.06 MB back up to 11.87 MB -- measured, not theorised.
     nxt = os.path.join(workdir, "s7_dedup2.glb")
-    gt(["dedup", cur, nxt], "dedup(pre-compress)", verbose)
+    gt(["dedup", cur, nxt] + DEDUP_FLAGS, "dedup(pre-compress)", verbose)
     cur = nxt; step("07 dedup(pre-compress)", cur)
 
     # 6b -- geometry compression LAST. Nothing may follow it.
@@ -649,6 +659,18 @@ def export(master, out, budget_mb=8.0, texture_px=2048, simplify_error=0.001,
 
     rep["material_coverage"] = {"before": cov_b, "after": cov_a}
 
+    # ---- material identity gate -----------------------------------------
+    # Respray edits materials BY NAME (colour_variants.py / respray_gltf.py), so
+    # a lost material name is a silent shipping defect, not a cosmetic detail.
+    m_before = [m.get("name") for m in glb_read(master)[0].get("materials", [])]
+    m_after = [m.get("name") for m in glb_read(out)[0].get("materials", [])]
+    lost = [n for n in m_before if n not in m_after]
+    rep["materials"] = {"before": m_before, "after": m_after, "lost": lost}
+    if verbose:
+        print("\nMATERIAL IDENTITY: %d -> %d  %s"
+              % (len(m_before), len(m_after),
+                 "LOST: %s" % lost if lost else "all names preserved"))
+
     ok = rep["iou_min"] >= min_iou and rep["iou_mean"] >= min_mean_iou
     size_mb = rep["export"]["sizeBytes"] / 1e6
     rep["size_mb"] = round(size_mb, 3)
@@ -661,6 +683,11 @@ def export(master, out, budget_mb=8.0, texture_px=2048, simplify_error=0.001,
             "SILHOUETTE GATE FAILED: min IoU %.5f (need %.3f), mean %.5f (need %.3f). "
             "Refusing to ship this reduction." % (rep["iou_min"], min_iou,
                                                   rep["iou_mean"], min_mean_iou))
+    if lost and not allow_material_loss:
+        raise RuntimeError(
+            "MATERIAL IDENTITY GATE FAILED: lost %s. Respray edits materials by "
+            "NAME, so this would silently break colour variants. Pass "
+            "--allow-material-loss only if that is genuinely intended." % lost)
     return rep
 
 
@@ -681,6 +708,8 @@ def main():
     ap.add_argument("--res", type=int, default=1024)
     ap.add_argument("--json", help="write the report here")
     ap.add_argument("--keep-intermediates", action="store_true")
+    ap.add_argument("--allow-material-loss", action="store_true",
+                    help="permit material names to disappear (breaks respray-by-name)")
     a = ap.parse_args()
 
     try:
@@ -688,7 +717,8 @@ def main():
                      simplify_error=a.simplify_error, simplify_ratio=a.simplify_ratio,
                      compress=a.compress, cull_target=a.cull_target or None,
                      dilate=a.dilate, min_iou=a.min_iou, min_mean_iou=a.min_mean_iou,
-                     res=a.res, keep_intermediates=a.keep_intermediates)
+                     res=a.res, keep_intermediates=a.keep_intermediates,
+                     allow_material_loss=a.allow_material_loss)
     except RuntimeError as e:
         print("\nFAIL: %s" % e, file=sys.stderr)
         return 1
