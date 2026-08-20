@@ -586,6 +586,117 @@ def fit_cylinder(Q, c0, a0, R0):
                           float(np.percentile(lat, 99.5))))
 
 
+# Legitimate ways to draw the same tread band. None is more correct than the
+# others; they differ only in how thick the band is and how hard the lateral
+# percentiles are trimmed. See `selection_ensemble`.
+SEL_VARIANTS = (
+    dict(),
+    dict(band_rel=0.024), dict(band_rel=0.036), dict(band_rel=0.042),
+    dict(width_pct=0.5), dict(width_pct=2.0),
+    dict(band_rel=0.024, width_pct=2.0), dict(band_rel=0.036, width_pct=0.5),
+)
+
+
+def selection_ensemble(V, fr, w, cfg):
+    """Toe and camber over a family of equally defensible tread bands.
+
+    WHY THIS IS THE UNCERTAINTY THAT MATTERS, AND THE BOOTSTRAP IS NOT
+    -----------------------------------------------------------------
+    `bootstrap_axis` resamples points WITHIN one band, so it measures how well
+    that band's own points pin the axis: on this Golf it returns 0.17-0.22
+    deg. That number is real and it is not the whole story. A controlled
+    injection settled it: rotating one wheel's geometry by a known +2.000 deg
+    and re-fitting THE SAME point set moves the answer by +2.000 deg (the
+    estimator is exact), but re-running the full detector on the rotated file
+    moves it by only +0.133 deg, because the re-selected band is a 10%
+    different set of points and this tread is not round enough for the two
+    subsets to agree.
+
+    So the honest instrument error is dominated by WHICH points get called
+    tread, not by noise within them. This function measures that directly by
+    re-drawing the band eight ways and reporting the spread. The verdict
+    machinery then combines the two in quadrature — and on a mesh like this
+    one it lands far above the owner's 0.1 deg tolerance, which is the
+    answer: the tolerance is not resolvable on this geometry, and saying so
+    is worth more than a confident number that a re-run would contradict.
+    """
+    li, ti, ui = fr["li"], fr["ti"], fr["ui"]
+    upv = np.zeros(3); upv[ui] = 1.0
+    fwd = np.zeros(3); fwd[li] = float(fr["nose"]) if fr["nose"] else 1.0
+    outw = np.zeros(3); outw[ti] = 1.0 if w["centre"][ti] > 0 else -1.0
+    toes, cams, ns = [], [], []
+    for var in SEL_VARIANTS:
+        c2 = dict(cfg, **var)
+        band = slab_tread(V, fr, w["circle"], c2)
+        if band is None or band["n"] < 200:
+            continue
+        c0 = np.zeros(3)
+        c0[li], c0[ui] = w["circle"]["l"], w["circle"]["u"]
+        c0[ti] = w["circle"]["side"] * (band["t_lo"] + band["t_hi"]) / 2
+        a0 = np.zeros(3); a0[ti] = 1.0
+        near = np.linalg.norm(V - c0, axis=1) < 1.35 * w["circle"]["R"]
+        f = iterate_axis(V[near], c0.copy(), a0.copy(), w["circle"]["R"],
+                         band["width"], band_rel=c2["band_rel"],
+                         lat_frac=0.55) or \
+            fit_cylinder(band["points"], c0, a0, w["circle"]["R"])
+        a = f["axis"] * (1.0 if float(f["axis"] @ outw) > 0 else -1.0)
+        toes.append(math.degrees(math.asin(np.clip(float(a @ fwd), -1, 1))))
+        cams.append(-math.degrees(math.asin(np.clip(float(a @ upv), -1, 1))))
+        ns.append(band["n"])
+    if not toes:
+        return None
+    return dict(toe_mean=float(np.mean(toes)), toe_sd=float(np.std(toes, ddof=1))
+                if len(toes) > 1 else float("nan"),
+                camber_mean=float(np.mean(cams)),
+                camber_sd=float(np.std(cams, ddof=1)) if len(cams) > 1
+                else float("nan"),
+                n_variants=len(toes), band_sizes=[int(x) for x in ns],
+                toe_range=[float(min(toes)), float(max(toes))],
+                camber_range=[float(min(cams)), float(max(cams))])
+
+
+def iterate_axis(Vr, c, a, R, W, band_rel=0.030, lat_frac=0.55, iters=8,
+                 min_pts=300):
+    """Re-select the tread about the CURRENT axis, refit, repeat.
+
+    THE BIAS THIS REMOVES, MEASURED
+    -------------------------------
+    A tread band chosen as "points whose distance from the axis is within
+    3% of R" is chosen ABOUT AN ASSUMED AXIS, and that assumption survives
+    into the answer. Tilt a wheel by a known 2.000 deg and the band, still
+    drawn about the old axis, keeps preferentially those points that still
+    fit the old axis: measured on this Golf's front-left wheel, the fitted
+    angle moved by only 0.69 deg — a 35% response. The estimator was
+    attenuating every angle toward its own seed, which on this car is the
+    pure lateral direction, i.e. toward zero toe and zero camber. Reported
+    angles were therefore ~3x too small, and a repair that rotated by the
+    reported error under-corrected by the same factor (observed: front camber
+    "zeroed" from +0.87 to +0.96 deg).
+
+    Iterating the selection about the evolving axis restores a 90% response
+    on the same injection test, and the residual 10% is what the ensemble in
+    `selection_ensemble` then measures rather than hides.
+    """
+    fit = None
+    for _ in range(iters):
+        d = Vr - c
+        lat = d @ a
+        rad = np.linalg.norm(d - np.outer(lat, a), axis=1)
+        sel = (np.abs(rad - R) < band_rel * R) & (np.abs(lat) < lat_frac * W)
+        if sel.sum() < min_pts:
+            break
+        prev = a.copy()
+        fit = fit_cylinder(Vr[sel], c, a, R)
+        c, a, R = np.asarray(fit["centre"]), np.asarray(fit["axis"]), fit["R"]
+        if math.degrees(math.acos(min(1.0, abs(float(prev @ a))))) < 0.005:
+            break
+    if fit is None:
+        return None
+    fit = dict(fit)
+    fit.update(centre=c, axis=a, R=float(R))
+    return fit
+
+
 def bootstrap_axis(Q, fit, cfg):
     """Standard error of the fitted axis direction, in degrees.
 
@@ -636,7 +747,15 @@ def _fit_all(V, fr, cfg, seeds=None):
         c0[li], c0[ui] = f["l"], f["u"]
         c0[ti] = f["side"] * (band["t_lo"] + band["t_hi"]) / 2
         a0 = np.zeros(3); a0[ti] = 1.0
-        cyl = fit_cylinder(band["points"], c0, a0, f["R"])
+        # The axis comes from an ITERATED re-selection, not a single fit —
+        # a one-shot fit is biased toward its own seed axis (see
+        # `iterate_axis`). The region handed to it is everything within 1.35R
+        # of the seed hub on that flank, so the iteration is free to move the
+        # band as the axis moves.
+        near = np.linalg.norm(V - c0, axis=1) < 1.35 * f["R"]
+        cyl = iterate_axis(V[near], c0.copy(), a0.copy(), f["R"],
+                           band["width"], band_rel=cfg["band_rel"]) or \
+            fit_cylinder(band["points"], c0, a0, f["R"])
         cyl.update(circle=f, band=band, side=f["side"])
         wheels.append(cyl)
     return wheels
@@ -726,6 +845,14 @@ def _finish(path, meshes, V, fr, wheels, cfg, spec, bootstrap, pose, prep,
         camber = -math.degrees(math.asin(np.clip(float(a @ upv), -1, 1)))
         se = bootstrap_axis(w["band"]["points"], w, cfg) if bootstrap \
             else float("nan")
+        ens = selection_ensemble(V, fr, w, cfg)
+        # The two error terms are independent: one is noise within a band, the
+        # other is the choice of band. Quadrature, and the total is what every
+        # angular verdict is tested against.
+        sd_toe = ens["toe_sd"] if ens else float("nan")
+        sd_cam = ens["camber_sd"] if ens else float("nan")
+        se_toe = float(np.hypot(se, sd_toe)) if np.isfinite(se) else sd_toe
+        se_cam = float(np.hypot(se, sd_cam)) if np.isfinite(se) else sd_cam
         rows.append(dict(
             corner=w["corner"], side=w["side_s"], axle=w.get("axle"),
             centre=[float(x) for x in c],
@@ -739,6 +866,8 @@ def _finish(path, meshes, V, fr, wheels, cfg, spec, bootstrap, pose, prep,
             bottom_m=float(c[ui] - R - ground),
             toe_deg=float(toe), camber_deg=float(camber),
             axis_se_deg=float(se),
+            toe_se_deg=se_toe, camber_se_deg=se_cam,
+            selection_ensemble=ens,
             tread_lat_lo=float(w["band"]["t_lo"]),
             tread_lat_hi=float(w["band"]["t_hi"]),
         ))
@@ -1149,14 +1278,15 @@ def grade(m, spec=None):
 
     for r in rows:
         cn = r["corner"]
-        se = r["axis_se_deg"]
         for key, tol in (("toe", TOL["toe_deg"]), ("camber", TOL["camber_deg"])):
             val = r[f"{key}_deg"]
-            g[f"{key}_{cn}"] = _angle_verdict(val, se, tol,
-                                              "axis of revolution from a "
-                                              "least-squares cylinder fit to "
-                                              "the tread band, in the car "
-                                              "frame")
+            se = r.get(f"{key}_se_deg", r["axis_se_deg"])
+            g[f"{key}_{cn}"] = _angle_verdict(
+                val, se, tol,
+                "axis of revolution from a least-squares cylinder fit to the "
+                "tread band, in the car frame; uncertainty is the bootstrap SE "
+                "within one band and the spread across eight equally valid "
+                "band selections, in quadrature")
         g[f"ground_{cn}"] = _v(
             abs(r["bottom_m"]) <= TOL["ground_m"], round(r["bottom_m"], 5),
             f"+-{TOL['ground_m']}",

@@ -482,8 +482,22 @@ def orbit_dirs(n_az=24, el0=-8, el1=55, n_el=5):
     return np.array(out)
 
 
-def _cast(mesh, dirs, cen, rad, grid):
+def _cast(mesh, dirs, cen, rad, grid, front_only=True):
+    """First-hit coverage from `dirs`.
+
+    BACK-FACE HITS ARE REFUSED. A ray that slips through a gap in this shell's
+    glazing (4,101 loose components, so there are gaps) hits the FAR SIDE'S
+    INNER SKIN and would book it as "directly visible" — which is how red
+    paint came to render inside the rear door window in the production view.
+    A surface seen from behind is not exterior, and the test for that is
+    exact: a front-facing hit has n.d < 0 against the ray direction.
+
+    The shell also carries inverted normals in places (7% of its faces sit in
+    a near-coincident opposite-facing pair). Those simply drop out of the
+    visible set and inherit from the coincident twin that is right there, so
+    the rule cannot strip a real panel."""
     seen = np.zeros(len(mesh.faces), bool)
+    N = mesh.face_normals
     for d in dirs:
         d = d / np.linalg.norm(d)
         up = np.array([0., 0., 1.]) if abs(d[2]) < 0.9 else np.array([1., 0., 0.])
@@ -494,7 +508,10 @@ def _cast(mesh, dirs, cen, rad, grid):
         u, v = np.meshgrid(us, us)
         org = cen + (-d) * rad * 1.6 + u.reshape(-1, 1) * ex + v.reshape(-1, 1) * ey
         tri = mesh.ray.intersects_first(org, np.tile(d, (len(org), 1)))
-        seen[tri[tri >= 0]] = True
+        tri = tri[tri >= 0]
+        if front_only and len(tri):
+            tri = tri[N[tri] @ d < 0]
+        seen[tri] = True
     return seen
 
 
@@ -718,34 +735,12 @@ def classify(lmesh, frame, wheels, glass_mask, direct, thru, ao, col, cold,
     # bounded by the INTERIOR surfaces, so it lies strictly inside the shell
     # and cannot swallow the outer skin; the 2 mm inset makes that explicit
     # rather than assumed.
-    if thru.any():
-        pts = C[thru]
-        if len(pts) > 40000:
-            pts = pts[np.random.default_rng(0).choice(len(pts), 40000,
-                                                      replace=False)]
-        try:
-            from scipy.spatial import ConvexHull
-            eq = ConvexHull(pts).equations
-            cand = np.where((lab < 0) & (~direct))[0]
-            # CHUNKED. A candidates x hull-facets broadcast is exactly the
-            # shape that OOM-killed this stage on the first run (RC=137 at
-            # ~430k candidates x 3k facets); this container kills a process
-            # well below its free memory, so the broadcast is bounded here
-            # rather than trusted to fit.
-            keep = np.zeros(len(cand), bool)
-            for s in range(0, len(cand), 20000):
-                blk = cand[s:s + 20000]
-                keep[s:s + 20000] = (C[blk] @ eq[:, :3].T + eq[:, 3]
-                                     <= -0.002).all(1)
-            ins = cand[keep]
-            lab[ins] = idx["Interior_Plastic"]
-            ev["cabin_volume"] = dict(
-                hull_points=int(len(pts)), faces_absorbed=int(len(ins)),
-                area_absorbed=round(float(A[ins].sum()), 4),
-                rule="undecided, not directly visible, and inside the convex "
-                     "hull of the through-glass surfaces (2 mm inset)")
-        except Exception as exc:                     # degenerate hull
-            ev["cabin_volume"] = dict(status="NOT APPLIED", reason=str(exc))
+    in_cabin = cabin_envelope(C, thru, ev)
+    if in_cabin is not None:
+        ins = np.where((lab < 0) & (~direct) & in_cabin)[0]
+        lab[ins] = idx["Interior_Plastic"]
+        ev["cabin_volume"]["undecided_absorbed"] = dict(
+            faces=int(len(ins)), area=round(float(A[ins].sum()), 4))
 
     # ---- 6. exterior skin in DIRECT sight, split by cavity ----------------
     if ao is not None:
@@ -758,6 +753,17 @@ def classify(lmesh, frame, wheels, glass_mask, direct, thru, ao, col, cold,
         ev["trim_clusters"] = cev
         lab[cav] = idx["Trim_Black"]
     lab[(lab < 0) & direct] = idx["carpaint"]
+
+    # ---- 6b. MEASURED AND REJECTED: "an exterior face cannot lie inside the
+    # cabin envelope". It can. The envelope is a CONVEX hull and a car is not
+    # convex — the facet spanning the dash top and the header rail passes
+    # straight through the windscreen, so the scuttle and part of the bonnet
+    # sit inside it. Re-labelling paint found in there moved 6.864 m^2, ALL OF
+    # IT DIRECTLY VISIBLE, which would have re-created the exact defect this
+    # operator exists to remove (visible exterior bound to `interior`) by a
+    # new route. The rule's own report line convicted it before it was ever
+    # rendered. Do not re-add it; the leak it aimed at is closed in `_cast`
+    # by refusing back-face hits instead.
 
     # ---- 7. lamps ---------------------------------------------------------
     lamp_report = detect_lamps(lmesh, frame, lab, idx, direct, col, cold, args)
@@ -776,6 +782,40 @@ def classify(lmesh, frame, wheels, glass_mask, direct, thru, ao, col, cold,
     report["classification"] = ev
     report["lamps"] = lamp_report
     return lab, per_wheel, wheel_any
+
+
+def cabin_envelope(C, thru, ev, inset=0.002, chunk=20000):
+    """A boolean per face: is this face INSIDE the cabin?
+
+    The envelope is the convex hull of the surfaces the visibility cast could
+    only reach THROUGH the glazing — i.e. of interior surfaces. It is bounded
+    by those surfaces, so it lies strictly inside the shell and cannot contain
+    the outer skin; the inset states that rather than assuming it.
+
+    CHUNKED on purpose: a faces x hull-facets broadcast is exactly the shape
+    that OOM-killed this stage on its first run (RC=137 at 430k x 3k), and
+    this container kills a process well below its free memory."""
+    if not thru.any():
+        ev["cabin_volume"] = dict(status="NOT APPLIED",
+                                  reason="no through-glass faces to bound a "
+                                         "cabin with")
+        return None
+    pts = C[thru]
+    if len(pts) > 40000:
+        pts = pts[np.random.default_rng(0).choice(len(pts), 40000, replace=False)]
+    try:
+        from scipy.spatial import ConvexHull
+        eq = ConvexHull(pts).equations
+    except Exception as exc:                                # degenerate hull
+        ev["cabin_volume"] = dict(status="NOT APPLIED", reason=str(exc))
+        return None
+    out = np.zeros(len(C), bool)
+    for s in range(0, len(C), chunk):
+        out[s:s + chunk] = (C[s:s + chunk] @ eq[:, :3].T + eq[:, 3]
+                            <= -inset).all(1)
+    ev["cabin_volume"] = dict(hull_points=int(len(pts)), facets=int(len(eq)),
+                              inset_m=inset, faces_inside=int(out.sum()))
+    return out
 
 
 def detect_lamps(lmesh, frame, lab, idx, direct, col, cold, args):

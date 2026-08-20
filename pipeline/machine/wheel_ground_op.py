@@ -264,6 +264,8 @@ def rot_between(a, b):
 
 def run(args):
     cfg = dict(DEFAULTS)
+    if getattr(args, "contain", None) is not None:
+        cfg["contain_frac"] = float(args.contain)
     spec = WM.load_spec(args.spec)
     stages = [s.strip() for s in args.stages.split(",") if s.strip()]
     report = dict(input=os.path.abspath(args.glb), stages=stages,
@@ -409,6 +411,17 @@ def main():
                     choices=["measured", "spec"])
     ap.add_argument("--toe", type=float, default=0.0, help="target, degrees")
     ap.add_argument("--camber", type=float, default=0.0)
+    ap.add_argument("--contain", type=float, default=DEFAULTS["contain_frac"],
+                    help="fraction of a component's faces that must lie inside "
+                         "the fitted cylinder before the component moves with "
+                         "the wheel. The default 0.95 is deliberately strict, "
+                         "but it is not universal: on the Gate-6 Golf a "
+                         "genuine 4,714-face rim component scores 0.918 and "
+                         "would be LEFT BEHIND while the rest of its wheel "
+                         "moved. Lower it only against a measured containment "
+                         "histogram — this car's is bimodal with an empty gap "
+                         "from 0.15 to 0.90, so 0.85 is safe here and a value "
+                         "inside a populated region never is.")
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--report", default=None)
