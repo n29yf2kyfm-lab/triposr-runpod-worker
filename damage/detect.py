@@ -649,8 +649,15 @@ def detector_backend():
 
                 dets = _tiled(img, run, model_size=size)
             else:
+                # input_size MUST be passed here too. The tiled branch above
+                # threads the resolved size through and this one did not, so it
+                # fell back to onnx_detect's own 640 default and a fixed-shape
+                # 560 export rejected the tensor outright:
+                #   Got invalid dimensions for input: Got 640 Expected 560
+                # Tiling is on by default, which is the only reason this was
+                # not the first thing anyone hit -- DAMAGE_TILED=0 crashed.
                 dets = onnx_detect(path, session=state["session"],
-                                   labels=labels)
+                                   labels=labels, input_size=size)
             if do_grade:
                 _attach_grades(img, dets)
             per_image.append((dets, img.size, None))
