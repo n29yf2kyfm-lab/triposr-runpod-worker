@@ -171,9 +171,19 @@ def build(root, out, dry_run, limit):
         if not dry_run:
             dst = os.path.join(out, "images", name)
             if not os.path.exists(dst):
-                # COPIED, NOT RESIZED. See the module docstring: downscaling
-                # here would undo the only reason this dataset was fetched.
-                shutil.copy2(src, dst)
+                # NOT RESIZED. See the module docstring: downscaling here would
+                # undo the only reason this dataset was fetched.
+                #
+                # HARDLINKED where the filesystem allows it. These bytes are
+                # immutable — nothing in the pipeline ever writes back to a
+                # corpus image — so a second copy buys nothing and costs 2.1GB
+                # on a disk that is already at 96%. os.link fails across
+                # filesystems and on some overlay mounts, so a real copy stays
+                # as the fallback rather than the ingest failing.
+                try:
+                    os.link(src, dst)
+                except OSError:
+                    shutil.copy2(src, dst)
 
     print(f"\nusable images {len(images):,}   boxes {len(anns):,}")
     if missing:

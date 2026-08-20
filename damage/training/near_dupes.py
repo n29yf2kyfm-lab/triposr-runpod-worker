@@ -190,21 +190,45 @@ def main():
     if not args.coco:
         ap.error("--coco is required")
 
-    with open(os.path.join(args.coco, "_annotations.coco.json")) as f:
-        d = json.load(f)
-    imgs = d["images"]
+    # EVERY source beneath --coco, not just the top-level one. This module
+    # reads one annotation file originally, and when CarDD arrived as
+    # merged640/cardd/ it hashed 167,157 images — the corpus exactly, with the
+    # 2,816 new ones invisible. A source that escapes the leak check is worse
+    # than one that was never added: it splits at random against a corpus it
+    # may well be a re-export of, and the leak lands in the validation score.
+    # build_train_index already pools by walking for _annotations.coco.json,
+    # so this matches it and any future source is covered by default.
+    sources = []
+    for dirpath, _dirnames, filenames in os.walk(args.coco):
+        if "_annotations.coco.json" in filenames:
+            sources.append(dirpath)
+    if not sources:
+        ap.error(f"no _annotations.coco.json beneath {args.coco}")
+
+    # file_name is the sha of the original bytes, so it is unique corpus-wide
+    # and a name seen twice is the SAME image reachable through two sources —
+    # hash it once. ids are per-source and collide, so they are discarded in
+    # favour of a global index; the output has always been keyed on file_name.
+    seen, paths = {}, []
+    for sdir in sorted(sources):
+        with open(os.path.join(sdir, "_annotations.coco.json")) as f:
+            d = json.load(f)
+        idir = os.path.join(sdir, "images")
+        n_new = 0
+        for i in d["images"]:
+            fn = i["file_name"]
+            if fn in seen:
+                continue
+            seen[fn] = len(paths)
+            paths.append((len(paths), os.path.join(idir, fn)))
+            n_new += 1
+        print(f"  {os.path.relpath(sdir, args.coco):20s} "
+              f"{len(d['images']):7,} images, {n_new:7,} new")
+    by_id = {v: k for k, v in seen.items()}
     if args.sample:
-        imgs = imgs[:args.sample]
-    idir = os.path.join(args.coco, "images")
+        paths = paths[:args.sample]
 
     from multiprocessing import Pool
-    paths = [(i["id"], os.path.join(idir, i["file_name"])) for i in imgs]
-
-    def _one(t):
-        try:
-            return (t[0], dhash(t[1]))
-        except Exception:
-            return None
 
     print(f"hashing {len(paths):,} images with {args.workers} workers ...")
     with Pool(args.workers) as pool:
@@ -222,7 +246,6 @@ def main():
         print(f"largest groups        : {[len(g) for g in big]}")
 
     if args.out:
-        by_id = {i["id"]: i["file_name"] for i in imgs}
         with open(args.out, "w") as f:
             json.dump({"groups": [[by_id.get(i, i) for i in g]
                                   for g in groups],

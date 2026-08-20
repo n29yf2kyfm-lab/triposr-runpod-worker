@@ -49,18 +49,41 @@ BOX_WIDTH = 4
 # Hues are grouped by family, so a reader learns the scheme once: cool blues for
 # paint and surface, warm oranges and reds for structure, violets for glass,
 # and distinct outliers for the rest.
+# THE TWO PALETTES MUST NOT SHARE A COLOUR, and four of these did: crack was
+# byte-identical to the severity band "severe", dent to "major", lamp_damage to
+# "moderate" and tire_damage to "cosmetic". A reader who has learned "orange
+# means major" from the report gauge then reads an orange box on a
+# class-coloured overlay as a severity, which is exactly the ambiguity the two
+# separate tables exist to prevent. Every colour here now clears every severity
+# band by at least 24 dE, and no two class colours are within 20 dE of each
+# other; test 22k pins the first of those.
+#
+# The warm classes are DEEPER than they were, and that is forced rather than
+# chosen: the severity ramp runs green -> lime -> amber -> orange -> red and so
+# occupies the entire warm arc at L 0.51-0.72. A warm class colour cannot clear
+# it by hue, only by sitting below it.
 CLASS_COLOURS = {
     # paint / surface — cool blues
-    "scratch": "#58a6ff", "scuff": "#79c0ff", "paint_chip": "#a5d6ff",
-    "paint_fade": "#1f6feb", "paint_mismatch": "#388bfd",
+    "scratch": "#4fa2ff", "scuff": "#5dace7", "paint_chip": "#a5d6fe",
+    "paint_fade": "#0c70ee", "paint_mismatch": "#6e7cdc",
     # structural — warm
-    "dent": "#f0883e", "deformation": "#db6d28", "crack": "#f85149",
-    "misalignment": "#ffa657",
+    "dent": "#f46203", "deformation": "#ba4500", "crack": "#ae2b2f",
+    "misalignment": "#fab577",
     # glass — violet
-    "shattered_glass": "#bc8cff", "chip_glass": "#d2a8ff",
+    "shattered_glass": "#c383fb", "chip_glass": "#d0a6fd",
+    # prior repair — deliberately NOT in the blue paint family.
+    #
+    # These two were missing entirely and fell through to the grey used for
+    # "other", so the two findings a buyer most wants to see — this panel has
+    # been resprayed, this one is filled — were drawn in the colour that means
+    # "unclassified". They are also not damage: they are history, and a reader
+    # must not mistake one for the other, so they get a family of their own
+    # (teal-greens, distinct from both the cool paint blues and the warm
+    # structural hues) rather than a shade of an existing one.
+    "prior_refinish": "#2dd4a7", "body_filler": "#109b75",
     # distinct outliers
-    "rust": "#bb8009", "missing_part": "#ff7b72", "lamp_damage": "#e3b341",
-    "tire_damage": "#3fb950", "hail": "#39c5cf", "other": "#8b949e",
+    "rust": "#a5722f", "missing_part": "#f7727b", "lamp_damage": "#9d9632",
+    "tire_damage": "#00cc32", "hail": "#39c5cf", "other": "#8b949e",
 }
 DEFAULT_CLASS_COLOUR = "#8b949e"
 

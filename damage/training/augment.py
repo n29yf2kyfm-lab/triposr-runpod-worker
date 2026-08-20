@@ -61,6 +61,11 @@ MIN_BOX_KEEP = 0.35
 
 CROP_SCALE = (0.62, 0.95)      # side length as a fraction of the original
 
+# Target frame share for a damage-centred zoom, and the window sizes it may
+# use. See zoom() for why these numbers and not others.
+ZOOM_TARGET = (0.03, 0.12)
+ZOOM_SCALE = (0.22, 0.92)
+
 
 def _clip01(v):
     return 0.0 if v < 0.0 else (1.0 if v > 1.0 else v)
@@ -115,6 +120,107 @@ def crop(img, boxes, rng):
                                                           Image.BILINEAR)
         return out, kept, kept_idx
     return img, boxes, _keep_all(boxes)
+
+
+def zoom(img, boxes, rng):
+    """Crop CENTRED ON A DAMAGE BOX, sized to bring it to a target frame share.
+
+    WHY THIS EXISTS, IN ONE MEASUREMENT
+    -----------------------------------
+    Scratch recall sat at 0.302 while every other class climbed, and the cause
+    is scale: a scratch occupies a median 1.14% of the frame in this corpus
+    against 5.42% in CarDD, whose scratches the detector finds far more easily.
+    CarDD was folded in to fix that and it cannot: it contributes 2,560 of
+    214,726 scratch boxes, 1.2%, and moved the pooled median from 1.14% to
+    1.18%. The right medicine at a dose that does nothing.
+
+    The existing random crop cannot supply the scale either. CROP_SCALE bottoms
+    out at 0.62 of the side, which is 2.6x in area, taking a 1.14% scratch to a
+    measured median 1.54% and a maximum of 2.98%. It never reaches 5%, and it
+    cannot be simply widened: an aggressive crop placed at random slices boxes
+    apart, which is why its floor is where it is.
+
+    Centring the window on a box removes that constraint. The box survives
+    because it is in the middle, so the window may be far smaller, and the
+    scale becomes something to CHOOSE rather than something to hope for:
+    solving target = area / s^2 for the window side s puts the box at the
+    share asked for.
+
+    WHAT THIS IS NOT
+    ----------------
+    It is not a substitute for high-resolution data, and believing that would
+    be the mistake this whole line of work exists to avoid. Zooming a 640px
+    image magnifies the pixels it has; the scratch arrives at the right SIZE
+    carrying no more detail than before, slightly softened by the upsample.
+    CarDD's advantage was that its detail survived capture. So this fixes the
+    scale mismatch and leaves the detail gap open, and a 1000px source zoomed
+    is still worth more than a 640px source zoomed.
+
+    Boxes other than the chosen one are kept when they survive the window, on
+    the same MIN_BOX_KEEP rule as crop(), so a zoom onto one scratch does not
+    silently unlabel the dent beside it.
+    """
+    W, H = img.size
+    if not boxes:
+        return img, boxes, _keep_all(boxes)
+
+    bi = rng.randrange(len(boxes))
+    bx, by, bw, bh = boxes[bi]
+    area = max(1e-9, bw * bh)
+    target = rng.uniform(*ZOOM_TARGET)
+    # Frame share scales as 1/s^2, so this is the side that lands the box on
+    # `target`. Already-large boxes give s > 1 and are clamped, which is the
+    # correct no-op: a box at 20% of frame does not need magnifying.
+    s = (area / target) ** 0.5
+    # Clamp only the LOWER bound. Clamping the upper bound too would force a
+    # crop on a box that is already at or above the target: a 36%-of-frame
+    # dent asks for s = 2.19, which pinned to 0.92 magnified it further to
+    # 42%, the exact opposite of the intent. A box that needs no magnifying is
+    # left alone instead.
+    if s >= ZOOM_SCALE[1]:
+        return img, boxes, _keep_all(boxes)
+    s = max(ZOOM_SCALE[0], s)
+    # The window must still contain the box, or the thing being zoomed to is
+    # cropped by its own zoom.
+    s = max(s, bw * 1.02, bh * 1.02)
+    if s >= 1.0:
+        return img, boxes, _keep_all(boxes)
+
+    cw, ch = max(8, int(round(W * s))), max(8, int(round(H * s)))
+    # Centre on the box, then jitter so the damage is not always dead centre —
+    # a detector trained on perfectly centred damage learns the centre.
+    cx, cy = bx + bw / 2.0, by + bh / 2.0
+    jitter = (s - max(bw, bh)) * 0.25
+    cx += rng.uniform(-jitter, jitter)
+    cy += rng.uniform(-jitter, jitter)
+    fx0 = min(max(0.0, cx - s / 2.0), 1.0 - s)
+    fy0 = min(max(0.0, cy - s / 2.0), 1.0 - s)
+    x0, y0 = int(round(fx0 * W)), int(round(fy0 * H))
+    x0 = max(0, min(x0, W - cw))
+    y0 = max(0, min(y0, H - ch))
+    fx0, fy0 = x0 / W, y0 / H
+    fw, fh = cw / W, ch / H
+
+    kept, kept_idx = [], []
+    for j, (x, y, w, h) in enumerate(boxes):
+        nx0 = _clip01((x - fx0) / fw)
+        ny0 = _clip01((y - fy0) / fh)
+        nx1 = _clip01((x + w - fx0) / fw)
+        ny1 = _clip01((y + h - fy0) / fh)
+        nw, nh = nx1 - nx0, ny1 - ny0
+        if nw <= 0 or nh <= 0:
+            continue
+        before = w * h
+        after = (nw * fw) * (nh * fh)
+        if before > 0 and after / before < MIN_BOX_KEEP:
+            continue
+        kept.append([nx0, ny0, nw, nh])
+        kept_idx.append(j)
+
+    if not kept:
+        return img, boxes, _keep_all(boxes)
+    out = img.crop((x0, y0, x0 + cw, y0 + ch)).resize((W, H), Image.BILINEAR)
+    return out, kept, kept_idx
 
 
 def photometric(img, rng):
@@ -253,6 +359,12 @@ def apply_row(img, boxes, row, with_indices=False):
     if "crop" in recipe:
         img, boxes, kidx = crop(img, boxes, rng)
         keep = [keep[i] for i in kidx]
+    # zoom is a crop too, and the two are mutually exclusive in the recipes:
+    # cropping then zooming compounds the upsample for no extra scale that
+    # zoom could not have reached on its own.
+    if "zoom" in recipe:
+        img, boxes, kidx = zoom(img, boxes, rng)
+        keep = [keep[i] for i in kidx]
     if "photometric" in recipe:
         img = photometric(img, rng)
     if "blur" in recipe:
@@ -262,12 +374,24 @@ def apply_row(img, boxes, row, with_indices=False):
     # Weather goes LAST among the photometric ops, because it models the
     # capture condition rather than the processing: a blurred night photo is a
     # night photo that was blurred, not a blurred photo taken at night.
+    #
+    # WITHIN the weather ops, SURFACE comes before ILLUMINATION. Wet is a
+    # property of the panel; lowlight and harshsun are properties of the light
+    # falling on it. Running wet last inverted that and it was measurable: wet
+    # drove clip_hi to 0.000, BELOW the 0.016 of the untouched corpus, because
+    # its veil and contrast reduction landed on top of the sun instead of
+    # underneath it and flattened the very highlights it exists to create. A
+    # droplet catching direct sun is a small blown specular point — which is
+    # exactly what a detector mistakes for a chip or a scratch, and the whole
+    # reason to synthesise rain at all. In this order the sun clips the
+    # droplets, and a wet panel at dusk is a wet panel that is then dark
+    # rather than a dark panel someone poured light on.
+    if "wet" in recipe:
+        img = wet(img, rng)
     if "lowlight" in recipe:
         img = lowlight(img, rng)
     if "harshsun" in recipe:
         img = harshsun(img, rng)
-    if "wet" in recipe:
-        img = wet(img, rng)
 
     # Independent of class and of recipe — see build_train_index.mark_flags.
     if row.get("wm"):
@@ -463,6 +587,59 @@ def _selftest():
                 slivers += 1
     check("no degenerate sliver boxes survive a crop", slivers == 0,
           f"{slivers} slivers")
+
+    # 11. zoom — the op added to fix scratch scale. Its whole value is that it
+    #     ENLARGES a small box reliably, so that is asserted numerically
+    #     rather than by "it ran".
+    im = Image.new("RGB", (640, 640), (60, 60, 60))
+    small = [[0.42, 0.47, 0.16, 0.0713]]           # 1.14% of frame, the median
+    shares, kept_all = [], 0
+    for s in range(400):
+        _o, nb, _k = zoom(im, [list(small[0])], random.Random(s))
+        if nb:
+            kept_all += 1
+            shares.append(nb[0][2] * nb[0][3])
+    shares.sort()
+    med = shares[len(shares) // 2]
+    check("zoom never loses the box it centred on", kept_all == 400,
+          f"{kept_all}/400")
+    check(f"zoom lifts a 1.14% box to a median {med * 100:.1f}% of frame",
+          med > 0.028, f"{med * 100:.2f}%")
+    check("zoom reaches the scale a random crop cannot (>2.98%)",
+          shares[-1] > 0.0298, f"max {shares[-1] * 100:.2f}%")
+    check("zoom stays inside the requested target band",
+          shares[-1] <= ZOOM_TARGET[1] * 1.35, f"max {shares[-1] * 100:.2f}%")
+
+    # A box that is ALREADY large must not be magnified further — the window
+    # would be smaller than the damage.
+    big = [[0.20, 0.20, 0.60, 0.60]]               # 36% of frame
+    _o, nb, _k = zoom(im, [list(big[0])], random.Random(1))
+    check("zoom leaves an already-large box alone",
+          nb and abs(nb[0][2] * nb[0][3] - 0.36) < 1e-6, str(nb))
+
+    # Every box must stay inside the unit square, and a neighbouring box that
+    # survives the window must not be silently dropped or corrupted.
+    pair = [[0.45, 0.45, 0.06, 0.06], [0.50, 0.50, 0.06, 0.06]]
+    bad = 0
+    for s in range(200):
+        _o, nb, kidx = zoom(im, [list(b) for b in pair], random.Random(s))
+        if len(kidx) != len(nb):
+            bad += 1
+        for bb in nb:
+            if not (0 <= bb[0] <= 1 and 0 <= bb[1] <= 1
+                    and bb[2] > 0 and bb[3] > 0
+                    and bb[0] + bb[2] <= 1.0001 and bb[1] + bb[3] <= 1.0001):
+                bad += 1
+    check("zoom keeps every surviving box valid and index-aligned", bad == 0,
+          f"{bad} bad")
+
+    check("zoom is deterministic from its seed",
+          zoom(im, [list(small[0])], random.Random(9))[1]
+          == zoom(im, [list(small[0])], random.Random(9))[1])
+    check("zoom on an image with no boxes is a no-op",
+          zoom(im, [], random.Random(0))[1] == [])
+    check("zoom is declared box-safe in the index builder",
+          "zoom" in B.BOX_SAFE_OPS)
 
     print(f"\n{ok} passed, {fail} failed")
     return 1 if fail else 0

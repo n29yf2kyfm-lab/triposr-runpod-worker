@@ -118,12 +118,14 @@ IMAGE_EXTS = (".jpg", ".jpeg", ".png", ".webp", ".bmp")
 # lowlight/harshsun/wet are box-safe for the same reason photometric is: they
 # change pixel VALUES and never pixel POSITIONS, so every box stays exactly
 # where it was. That is why they can be added here while rotation still cannot.
-BOX_SAFE_OPS = ("hflip", "crop", "photometric", "blur", "sharpen",
+BOX_SAFE_OPS = ("hflip", "crop", "zoom", "photometric", "blur", "sharpen",
                 "lowlight", "harshsun", "wet")
 
-# The recipe cycle. Repeat k of an image takes RECIPES[(k - 1) % len(RECIPES)],
-# so an image collects distinct recipes before it ever collects a duplicate one,
-# and the per-sample `seed` re-rolls the loader's random parameters even then.
+# The recipe table. Repeat k of an image takes the k-th entry of that IMAGE'S
+# OWN shuffled ordering of this table (see recipe_for), so an image collects
+# distinct recipes before it ever collects a duplicate one, while every recipe
+# stays reachable at every repeat depth. Order here is therefore presentational
+# only — it no longer decides which recipes get used.
 RECIPES = (
     ["hflip"],
     ["crop"],
@@ -148,6 +150,30 @@ RECIPES = (
     ["crop", "lowlight"],
     ["hflip", "harshsun"],
     ["crop", "wet"],
+    # WET WEATHER IN HARD LIGHT, which no recipe reached and which measurement
+    # says is the case that matters most. Measured over 600 corpus images, wet
+    # alone produces clip_hi 0.000 against the corpus's own 0.016: on its own
+    # it is a flat, desaturated, veiled frame and nothing in it ever blows out.
+    # But a rain droplet sitting on a panel in direct sun IS a blown specular
+    # point a couple of pixels across — the single most scratch-like and
+    # chip-like artefact real wet weather produces, and the reason a scan in a
+    # wet car park returns false damage. Sun and rain existed as separate
+    # recipes and never met, so that case was in none of the training data.
+    ["wet", "harshsun"],
+    # And its opposite, the wet night shot: a lit forecourt after rain, where
+    # the same droplets are dim, low-contrast smears instead.
+    ["crop", "wet", "lowlight"],
+    # DAMAGE-CENTRED ZOOM. The scale problem behind scratch recall is not
+    # fixed by CarDD -- it supplies 1.2% of the scratch boxes and moved the
+    # pooled median frame share from 1.14% to 1.18%. zoom() reaches the scale
+    # directly by centring the window on a box; see its docstring for the
+    # measurement and for what it does NOT fix (detail, as opposed to size).
+    # Four slots, because scratches are the largest class and the thing being
+    # corrected, so the cycle should meet a zoom often.
+    ["zoom"],
+    ["hflip", "zoom"],
+    ["zoom", "photometric"],
+    ["hflip", "zoom", "harshsun"],
 )
 
 # Above this, a class is not being balanced, it is being cloned. Reported rather
@@ -663,6 +689,51 @@ def sample_seed(sha, rep):
     return (int(sha[:8], 16) ^ ((rep + 1) * 2654435761)) & 0xFFFFFFFF
 
 
+def recipe_for(sha, rep):
+    """The recipe for repeat `rep` of image `sha`, from a PER-IMAGE ordering.
+
+    WHY NOT A GLOBAL CYCLE
+    ----------------------
+    This was RECIPES[(rep - 1) % len(RECIPES)] — one order shared by every
+    image — and that quietly made most of the table unreachable. A recipe at
+    position i is only ever used by an image repeated more than i times, and
+    the classes that get repeated are the RARE ones. Measured on the rebuilt
+    index, with weather at positions 12-17 and zoom at 20-23:
+
+        hflip        22.7% of train samples
+        crop         18.1%
+        photometric  13.3%
+        lowlight      0.2%
+        harshsun      0.1%
+        wet           0.0%
+        zoom          0.0%
+
+    scratch_scuff has an effective multiplier of 1.35, so a scratch image is
+    used once or twice and never reaches position 12, let alone 20. Every
+    augmentation added to fix scratches — the weather ops, and zoom, which
+    exists for nothing else — could not reach a single scratch. The ops were
+    correct, the tests passed, and the data never contained them.
+
+    A per-image permutation fixes it without giving anything up. Each image
+    gets its own seeded ordering of the table, so:
+
+      * an image still collects DISTINCT recipes before it repeats one, which
+        is the property the cycle existed for, and
+      * across the corpus every recipe is equally likely at every repeat
+        depth, so an image used twice can draw zoom just as an image used
+        twelve times can.
+
+    Seeded from the sha alone, so it is deterministic, and independent of the
+    class — see _bernoulli for why that independence matters.
+    """
+    n = len(RECIPES)
+    if rep <= 0:
+        return []
+    order = list(range(n))
+    random.Random((int(sha[:8], 16) ^ 0x9E3779B9) & 0xFFFFFFFF).shuffle(order)
+    return list(RECIPES[order[(rep - 1) % n]])
+
+
 def _bernoulli(sha, rep, salt, rate):
     """Deterministic coin drawn from image content only — never from class.
 
@@ -705,7 +776,7 @@ def build_samples(images, reps):
         for rec in train:
             if reps.get(rec["sha"], 1) <= rep:
                 continue
-            recipe = [] if rep == 0 else list(RECIPES[(rep - 1) % len(RECIPES)])
+            recipe = recipe_for(rec["sha"], rep)
             wm, sn = mark_flags(rec["sha"], rep, "train")
             out.append({"split": "train", "sha": rec["sha"],
                         "file": rec["file"], "rep": rep, "recipe": recipe,

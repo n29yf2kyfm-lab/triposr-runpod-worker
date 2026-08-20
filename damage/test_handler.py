@@ -1248,6 +1248,111 @@ check("21i a full-frame box maps to the full frame, not a scaled one",
       str(_full[0]["box"]) if _full else "none")
 
 
+# ---- 22 the shipped model's classes must survive the whole path -----------
+#
+# THIS IS THE TEST THAT WAS MISSING. Five of the six classes the detector emits
+# had no entry in DAMAGE_CLASS_MAP, and an unmapped label is not drawn grey or
+# logged — detections_to_findings does `if not dtype: continue` and deletes it.
+# So a model trained for weeks reported only dents, and 255 passing tests said
+# nothing, because every one of them fed a label that happened to be mapped.
+# The suite now asserts the contract end to end: what the model emits, through
+# the map, to a finding, to a colour.
+import overlay as OVL                                          # noqa: E402
+
+_fed = [{"label": n, "score": 0.9, "box": [10, 10, 100, 100]}
+        for n in DET.DETECTOR_CLASSES]
+_got = DET.detections_to_findings(_fed, (640, 480), min_confidence=0.1)
+check("22a every class the detector emits survives as a finding",
+      len(_got) == len(DET.DETECTOR_CLASSES),
+      f"{len(_got)} of {len(DET.DETECTOR_CLASSES)} survived")
+check("22b each maps to a real taxonomy type",
+      all(f["damage_type"] in TAX.DAMAGE_TYPES for f in _got),
+      str([f["damage_type"] for f in _got]))
+check("22c the six map to six distinct types",
+      len({f["damage_type"] for f in _got}) == len(DET.DETECTOR_CLASSES),
+      str(sorted({f["damage_type"] for f in _got})))
+
+# Every taxonomy type needs a colour, or a real finding is drawn in the shade
+# that means "unclassified" — which is how prior_refinish and body_filler, the
+# two "has this been repaired" answers, were rendered.
+_uncoloured = [t for t in TAX.DAMAGE_TYPES if t not in OVL.CLASS_COLOURS]
+check("22d every taxonomy damage type has its own class colour",
+      not _uncoloured, str(_uncoloured))
+
+# 1-based ids from a list is the off-by-one that silently renames every class.
+_dictlab = {1: "crack_glass", 2: "dent", 3: "lamp_wheel"}
+check("22e a dict of labels is read by id, not by position",
+      [DET._label_for(_dictlab, i) for i in (1, 2, 3)]
+      == ["crack_glass", "dent", "lamp_wheel"])
+check("22f json string keys resolve the same as int keys",
+      DET._label_for({"1": "crack_glass"}, 1) == "crack_glass")
+check("22g a list is still read by position for 0-based exporters",
+      DET._label_for(["dent", "rust"], 0) == "dent")
+check("22h an id past the end of a list degrades to its number",
+      DET._label_for(["dent"], 7) == "7")
+check("22i no labels at all degrades to the number", DET._label_for(None, 3)
+      == "3")
+
+# A bare class number must NOT quietly become a finding: that is what an
+# unresolved label looks like, and it has to die visibly rather than be
+# mistaken for damage.
+check("22j a bare class number is not a damage type",
+      DET.detections_to_findings(
+          [{"label": "3", "score": 0.9, "box": [1, 1, 9, 9]}],
+          (100, 100), min_confidence=0.1) == [])
+
+# The two palettes must not share colours. The overlay docstring promises they
+# are separate tables that "can never disagree"; four class colours were byte
+# -identical to severity band colours, so an orange box was both "dent" and
+# "major" depending on which legend the reader remembered.
+_sevhex = {c.lower() for _lo, _hi, _n, c in TAX.SEVERITY_BANDS}
+_shared = sorted(k for k, v in OVL.CLASS_COLOURS.items()
+                 if v.lower() in _sevhex)
+check("22k no class colour is identical to a severity colour", not _shared,
+      str(_shared))
+
+
+# Identity is the crude version of the real property, which is PERCEPTUAL
+# distance — two colours a hex apart are just as ambiguous as two the same. So
+# the invariant is pinned in Lab, where distance means what the eye does.
+def _lab(h):
+    h = h.lstrip("#")
+    r, g, b = [int(h[i:i + 2], 16) / 255.0 for i in (0, 2, 4)]
+
+    def lin(c):
+        return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
+    r, g, b = lin(r), lin(g), lin(b)
+    x = (r * 0.4124 + g * 0.3576 + b * 0.1805) / 0.95047
+    y = (r * 0.2126 + g * 0.7152 + b * 0.0722)
+    z = (r * 0.0193 + g * 0.1192 + b * 0.9505) / 1.08883
+
+    def f(t):
+        return t ** (1 / 3.0) if t > 0.008856 else (7.787 * t + 16 / 116.0)
+    fx, fy, fz = f(x), f(y), f(z)
+    return (116 * fy - 16, 500 * (fx - fy), 200 * (fy - fz))
+
+
+def _de(a, b):
+    la, lb = _lab(a), _lab(b)
+    return sum((la[i] - lb[i]) ** 2 for i in range(3)) ** 0.5
+
+
+_sevcols = [c for _lo, _hi, _n, c in TAX.SEVERITY_BANDS]
+_near_sev = sorted(
+    (round(_de(v, s), 1), k) for k, v in OVL.CLASS_COLOURS.items()
+    for s in _sevcols if _de(v, s) < 20.0)
+check("22l every class colour is perceptually clear of the severity ramp",
+      not _near_sev, str(_near_sev[:4]))
+
+_ck = sorted(OVL.CLASS_COLOURS)
+_tight = sorted((round(_de(OVL.CLASS_COLOURS[a], OVL.CLASS_COLOURS[b]), 1),
+                 a, b)
+                for i, a in enumerate(_ck) for b in _ck[i + 1:]
+                if _de(OVL.CLASS_COLOURS[a], OVL.CLASS_COLOURS[b]) < 18.0)
+check("22m no two class colours are perceptually confusable", not _tight,
+      str(_tight[:4]))
+
+
 # ---- report ---------------------------------------------------------------
 print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")
 for f in FAILED:

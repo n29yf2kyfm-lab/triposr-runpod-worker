@@ -57,7 +57,42 @@ DAMAGE_CLASS_MAP = {
     "missing_part": "missing_part", "part_missing": "missing_part",
     "misalignment": "misalignment", "gap": "misalignment",
     "deformation": "deformation", "deformed": "deformation",
+
+    # THE SIX CLASSES THE SHIPPED DETECTOR ACTUALLY EMITS.
+    #
+    # These were absent, and absent is not "falls back to grey" — an unmapped
+    # label hits `if not dtype: continue` in detections_to_findings and the
+    # detection is DISCARDED. Five of the six trained classes were therefore
+    # deleted between the model and the report, silently, with dent surviving
+    # only because its name happens to collide with a taxonomy type.
+    #
+    # Each of these is a merge of several taxonomy types (that is why the
+    # training index has six classes and the taxonomy has nineteen), so the
+    # mapping picks the type that carries the class's dominant member and the
+    # loss is stated rather than hidden:
+    #
+    #   scratch_scuff  scratch + scuff + light paint damage -> scratch
+    #   crack_glass    body cracks + glass cracks + shatter -> crack
+    #   lamp_wheel     broken lamps + wheel/tyre damage     -> lamp_damage
+    #   rust_paint     corrosion + paint failure            -> rust
+    #   structural     deformation + misalignment + missing -> deformation
+    #
+    # A finding therefore names a narrower type than the model can justify
+    # (a lamp_wheel box reported as lamp_damage may be a kerbed alloy). The
+    # honest fix is a detector whose classes match the taxonomy; until then
+    # this is the mapping, and _selftest below asserts it stays complete.
+    "scratch_scuff": "scratch",
+    "crack_glass": "crack",
+    "lamp_wheel": "lamp_damage",
+    "rust_paint": "rust",
+    "structural": "deformation",
 }
+
+# The class names the shipped 6-class model emits, in the id order its
+# classes.json uses. Kept here so the completeness check has something to
+# assert against without importing the training package.
+DETECTOR_CLASSES = ("crack_glass", "dent", "lamp_wheel", "rust_paint",
+                    "scratch_scuff", "structural")
 
 # Floor severity per damage type, before the size term. A shattered windshield
 # is never "minor" however small the box; a scratch is never "severe" however
@@ -360,8 +395,7 @@ def parse_detections(outputs, orig_size, model_size, labels=None,
     for box, score, cid in zip(boxes, scores, class_ids):
         if float(score) < floor:
             continue
-        label = (labels[int(cid)] if labels and int(cid) < len(labels)
-                 else str(cid))
+        label = _label_for(labels, int(cid))
         dets.append({
             "label": label,
             "score": float(score),
@@ -369,6 +403,75 @@ def parse_detections(outputs, orig_size, model_size, labels=None,
                     float(box[2]) * sx, float(box[3]) * sy],
         })
     return dets
+
+
+def _label_for(labels, cid):
+    """Name for a class id, from either an id->name map or a positional list.
+
+    TWO CONVENTIONS COLLIDE HERE and confusing them mislabels every detection
+    instead of failing. RF-DETR reserves class 0 as a placeholder and emits
+    1-BASED ids, which is why its classes.json is keyed {"1": "crack_glass",
+    ...}. The older exporters emit 0-based ids and are configured with a plain
+    list. Indexing a 6-item list with a 1-based id shifts every class by one —
+    a crack reported as a dent — and silently drops the last class, which is
+    exactly what happened before this function existed.
+
+    So a dict is read BY ID and a list BY POSITION, and the two are never
+    treated as interchangeable. Prefer the dict: it carries the ids explicitly
+    and cannot be misread.
+    """
+    if not labels:
+        return str(cid)
+    if isinstance(labels, dict):
+        # classes.json round-trips through JSON, so keys may be str or int.
+        v = labels.get(cid, labels.get(str(cid)))
+        return str(v) if v is not None else str(cid)
+    return labels[cid] if 0 <= cid < len(labels) else str(cid)
+
+
+def _input_size(session):
+    """Square input side the graph declares, or None if it is dynamic.
+
+    Returns None rather than guessing when the dimension is a symbol: a
+    dynamic-axis model genuinely accepts a range and the caller's default is
+    then the right answer.
+    """
+    try:
+        shape = session.get_inputs()[0].shape
+    except Exception:
+        return None
+    if not shape or len(shape) != 4:
+        return None
+    h, w = shape[2], shape[3]
+    if isinstance(h, int) and isinstance(w, int) and h == w and h > 0:
+        return int(h)
+    return None
+
+
+def _labels_beside_model(model_path):
+    """id -> name from a classes.json sitting next to the ONNX, or None.
+
+    The training pipeline writes classes.json with the index the model was
+    actually trained on, so the artefact can describe itself. Reading it is
+    what stops the class names being a deployment detail someone has to
+    remember to set — and forgetting produced not a warning but an empty
+    report, because an unresolved name becomes "3", which maps to nothing and
+    is dropped.
+    """
+    if not model_path:
+        return None
+    d = os.path.dirname(os.path.abspath(model_path))
+    for cand in (os.path.splitext(model_path)[0] + ".classes.json",
+                 os.path.join(d, "classes.json")):
+        try:
+            with open(cand) as f:
+                doc = json.load(f)
+        except Exception:
+            continue
+        m = doc.get("index_to_name") if isinstance(doc, dict) else None
+        if isinstance(m, dict) and m:
+            return {int(k): str(v) for k, v in m.items()}
+    return None
 
 
 def _is_rfdetr(outputs):
@@ -498,8 +601,30 @@ def detector_backend():
         if "session" not in state:
             state["session"] = onnxruntime.InferenceSession(
                 model_path, providers=["CPUExecutionProvider"])
-        labels = _labels_from_env()
-        size = int(os.environ.get("DAMAGE_DETECTOR_SIZE", "640"))
+        # THE MODEL DESCRIBES ITSELF FIRST, the environment only overrides.
+        # This used to read the environment alone, and with the variable unset
+        # — the default — every class id resolved to its own number, matched
+        # nothing in DAMAGE_CLASS_MAP and was dropped: a scan that found
+        # damage reported none, with no error anywhere. Config that is
+        # mandatory but silent when missing is not config, it is a trap.
+        labels = _labels_from_env() or _labels_beside_model(model_path)
+        if not labels:
+            raise RuntimeError(
+                "detector class names could not be resolved: no classes.json "
+                f"beside {model_path} and DAMAGE_DETECTOR_LABELS is unset. "
+                "Without names every detection is discarded and the scan "
+                "reports no damage, so this fails instead of returning an "
+                "empty report.")
+        # The input resolution likewise comes from the model when it declares
+        # one. The shipped export is fixed at 560 while this defaulted to 640,
+        # so the default was not merely suboptimal — a fixed-shape input
+        # rejects a 640 tensor outright. Reading the graph removes a second
+        # deployment detail that had to be remembered and could only be got
+        # wrong.
+        size = _input_size(state["session"]) or 640
+        env_size = os.environ.get("DAMAGE_DETECTOR_SIZE")
+        if env_size:
+            size = int(env_size)
         # TILING IS ON BY DEFAULT and DAMAGE_TILED=0 turns it off. The default
         # is the way round it is because the whole reason this backend exists
         # is fine damage: at 728 a 3px scratch in a 4032px photo is half a
