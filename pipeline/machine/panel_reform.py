@@ -275,7 +275,7 @@ def mls_project(V, N, radius, degree=2, iters=3, normal_agree=0.60,
         determined[sl] = good
         h = np.where(good, h, 0.0)
         moved_h[sl] = h
-        out[sl] = P0 + h[:, None] * n0
+        out[sl] = P0 + h[:, None] * npca
     if verbose:
         print(f"    MLS r={radius*1000:.0f}mm deg{degree} iters{iters}: "
               f"{determined.sum()}/{n} determined, "

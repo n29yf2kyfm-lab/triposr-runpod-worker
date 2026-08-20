@@ -829,7 +829,7 @@ def _derive(out, fr, spec):
     return out
 
 
-def fender_and_arch(path, m, cfg=None):
+def fender_and_arch(m, cfg=None):
     """Second pass: fender lip position and arch intersection, per wheel.
 
     Kept separate because it needs the SKIN meshes distinguished from the
@@ -838,7 +838,7 @@ def fender_and_arch(path, m, cfg=None):
     half of the arch; a percentile is used so one stray vertex cannot move it.
     """
     cfg = dict(DEFAULTS, **(cfg or {}))
-    meshes, _ = load_points(path)
+    meshes = m["_meshes"]                 # already in the frame `measure` used
     li, ti, ui = m["axes"]["length"], m["axes"]["lateral"], m["axes"]["up"]
     ALL = np.vstack([v for v, _ in meshes.values()])
     for r in m["wheels"]:
@@ -1021,7 +1021,7 @@ def main():
     a = ap.parse_args()
     spec = load_spec(a.spec)
     m = measure(a.glb, spec=spec, nose=a.nose, bootstrap=not a.no_bootstrap)
-    m = fender_and_arch(a.glb, m)
+    m = fender_and_arch(m)
     m["gate6"] = grade(m, spec)
     m.pop("_meshes", None)
     txt = json.dumps(m, indent=1, default=float)

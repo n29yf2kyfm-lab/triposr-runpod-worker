@@ -1231,27 +1231,34 @@ NOT_ACHIEVABLE = {
 
 
 def gate7_table(report):
-    have = set()
-    for n in report.get("nodes", {}):
-        have.add(n.split("_Tyre")[0].split("_Rim")[0].split("_Disc")[0]
-                 if n.startswith("Wheel_") else n)
-        have.add(n)
+    """The owner's node list, answered honestly. Three outcomes only:
+    PRESENT (with its provenance and whether it can actually animate),
+    NOT ACHIEVABLE (with the reason), or ABSENT (the detector found no
+    geometry that met its evidence bar). No row is ever satisfied by an empty
+    node — a hierarchy that looks compliant and animates nothing is the worst
+    possible outcome of this gate."""
+    nodes = report.get("nodes", {})
     rows = {}
     for want in NODE_SPEC:
         if want in NOT_ACHIEVABLE:
-            rows[want] = dict(status="NOT ACHIEVABLE",
-                              reason=NOT_ACHIEVABLE[want])
+            rows[want] = dict(status="NOT ACHIEVABLE", reason=NOT_ACHIEVABLE[want])
             continue
-        hit = [n for n in report.get("nodes", {})
-               if n == want or n.startswith(want + "_") or n.startswith(want)]
+        hit = sorted(n for n in nodes if n == want or n.startswith(want + "_"))
         if hit:
-            prov = report["nodes"][hit[0]]["provenance"]
-            rows[want] = dict(status="PRESENT", provenance=prov, nodes=hit,
-                              animatable=bool(report["nodes"][hit[0]]["pivot"]))
+            provs = sorted({nodes[n]["provenance"] for n in hit})
+            anim = any(nodes[n].get("pivot_world") for n in hit)
+            rows[want] = dict(status="PRESENT", provenance="+".join(provs),
+                              nodes=hit, animatable=bool(anim),
+                              faces=int(sum(nodes[n]["faces"] for n in hit)),
+                              area=round(sum(nodes[n]["area"] for n in hit), 4))
         else:
             rows[want] = dict(status="ABSENT",
                               reason="no geometry met the detector's evidence "
-                                     "bar; no empty node created")
+                                     "bar; no empty node was created")
+    extra = [n for n in nodes
+             if not any(n == w or n.startswith(w + "_") for w in NODE_SPEC)]
+    if extra:
+        rows["_additional_nodes"] = sorted(extra)
     return rows
 
 
