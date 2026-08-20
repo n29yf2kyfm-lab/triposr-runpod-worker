@@ -1289,6 +1289,9 @@ def finish(report, args, t0):
     if "gate7" in report:
         print("\nGATE 7 node table")
         for k, v in report["gate7"].items():
+            if not isinstance(v, dict):
+                print("  %-20s %s" % (k, ", ".join(v)))
+                continue
             print("  %-20s %s %s" % (k, v["status"],
                                      v.get("reason", "") or
                                      ("provenance=%s animatable=%s"
