@@ -91,6 +91,8 @@ import time
 
 import numpy as np
 import trimesh
+from scipy.sparse import coo_matrix
+from scipy.sparse.csgraph import connected_components
 from scipy.spatial import cKDTree
 from trimesh.visual.material import PBRMaterial
 
@@ -582,6 +584,43 @@ def srgb_to_linear(c):
     return np.where(c <= 0.04045, c / 12.92, ((c + 0.055) / 1.055) ** 2.4)
 
 
+def coherent(lmesh, mask, gap, min_area):
+    """Keep only SPATIALLY COHERENT patches of `mask`, by proximity clustering
+    of face centres.
+
+    A per-face threshold on any noisy measure speckles the whole car: at
+    ao<0.55 the roof and the flanks each contributed ~0.09 m^2 of isolated
+    faces, which rendered as black confetti across the paint. Real trim is a
+    connected patch — a grille aperture, an intake, a diffuser — so a cluster
+    that cannot reach `min_area` is measurement noise and is dropped.
+    Clustering is by PROXIMITY, not by mesh topology: this shell is split into
+    12,258 connected bodies, so face adjacency proves nothing here."""
+    idx = np.where(mask)[0]
+    ev = dict(candidates=int(len(idx)), gap_m=gap, min_cluster_area=min_area)
+    if len(idx) < 3:
+        ev["kept"] = 0
+        return np.zeros(len(mask), bool), ev
+    C = lmesh.triangles_center[idx]
+    A = lmesh.area_faces[idx]
+    pairs = np.array(list(cKDTree(C).query_pairs(gap)), dtype=np.int64)
+    if not len(pairs):
+        ev["kept"] = 0
+        return np.zeros(len(mask), bool), ev
+    g = coo_matrix((np.ones(len(pairs)), (pairs[:, 0], pairs[:, 1])),
+                   shape=(len(idx), len(idx)))
+    ncomp, lab = connected_components(g, directed=False)
+    area = np.zeros(ncomp)
+    np.add.at(area, lab, A)
+    keep = np.isin(lab, np.where(area >= min_area)[0])
+    out = np.zeros(len(mask), bool)
+    out[idx[keep]] = True
+    ev.update(clusters=int(ncomp), kept_clusters=int((area >= min_area).sum()),
+              kept_faces=int(keep.sum()),
+              kept_area=round(float(A[keep].sum()), 4),
+              dropped_area=round(float(A[~keep].sum()), 4))
+    return out, ev
+
+
 # ===========================================================================
 # stage 5 — classification
 # ===========================================================================
@@ -660,6 +699,9 @@ def classify(lmesh, frame, wheels, glass_mask, direct, thru, ao, col, cold,
         # a cavity high on the body is a shut line or a window surround, not a
         # grille, so trim is only claimed below --trim-max-frac of the height.
         cav &= up < args.trim_max_frac * frame.height
+        cav, cev = coherent(lmesh, cav, args.trim_cluster_gap,
+                            args.trim_min_cluster)
+        ev["trim_clusters"] = cev
         lab[cav] = idx["Trim_Black"]
     lab[(lab < 0) & direct] = idx["carpaint"]
 
@@ -913,34 +955,55 @@ def build_scene(lmesh, frame, lab, per_wheel, panes, wheels, args, report):
 
 
 def detect_mirrors(lmesh, frame, lab, idx, claimed, args, report):
-    """A door mirror is body geometry standing OUTBOARD of the widest point of
-    the door skin, in the belt-to-shoulder band. A mesh with no such lobe gets
-    no mirror node."""
+    """A door mirror is body geometry standing outboard of the DOOR SKIN AT
+    THE SAME LENGTH STATION.
+
+    The reference has to be per-station, not a single number for the side: a
+    global 98th-percentile half-width is set by the shoulder line, which on
+    this car measured 0.868 m on the left against 0.814 on the right, and that
+    alone made the left mirror invisible to a global test while the right one
+    was found. Comparing each 60 mm slice of the mirror band against the door
+    band at the SAME slice removes the shoulder from the comparison entirely.
+    A shell with no such lobe gets no mirror node."""
     C, A = lmesh.triangles_center, lmesh.area_faces
     up = C[:, 1]
     body = (lab == idx["carpaint"]) & ~claimed
+    step = 0.06
+    xs = np.arange(-frame.length / 2, frame.length / 2 + step, step)
     out, info = {}, []
     for side, sgn in (("L", +1), ("R", -1)):
         same = np.sign(C[:, 2]) == sgn
         band = body & same & (up > 0.60 * frame.height) & (up < 0.90 * frame.height)
-        door = body & same & (up > 0.40 * frame.height) & (up < 0.60 * frame.height)
+        door = body & same & (up > 0.35 * frame.height) & (up < 0.60 * frame.height)
         if band.sum() < 200 or door.sum() < 200:
             info.append(dict(side=side, status="absent",
                              reason="no band/door geometry to compare"))
             continue
-        wref = float(np.percentile(np.abs(C[door, 2]), 98))
-        cand = band & (np.abs(C[:, 2]) > wref + args.mirror_proud)
-        if A[cand].sum() < args.mirror_min_area:
-            info.append(dict(side=side, status="absent",
-                             area=round(float(A[cand].sum()), 5),
-                             door_half_width=round(wref, 4),
-                             reason="no lobe standing %.0f mm proud of the door"
+        cand = np.zeros(len(C), bool)
+        prof = []
+        for x0 in xs:
+            sl = (C[:, 0] >= x0) & (C[:, 0] < x0 + step)
+            dsl = door & sl
+            if dsl.sum() < 30:
+                continue
+            wref = float(np.percentile(np.abs(C[dsl, 2]), 95))
+            cand |= band & sl & (np.abs(C[:, 2]) > wref + args.mirror_proud)
+            prof.append((round(float(x0), 3), round(wref, 4)))
+        cand, cev = coherent(lmesh, cand, args.trim_cluster_gap,
+                             args.mirror_min_area)
+        if not cand.any():
+            info.append(dict(side=side, status="absent", cluster=cev,
+                             reason="no coherent lobe standing %.0f mm proud "
+                                    "of the door at its own length station"
                                     % (args.mirror_proud * 1000)))
             continue
         out["Mirror_" + side] = cand
+        cx = C[cand]
         info.append(dict(side=side, status="found",
                          area=round(float(A[cand].sum()), 4),
-                         door_half_width=round(wref, 4)))
+                         length_station=[round(float(cx[:, 0].min()), 3),
+                                         round(float(cx[:, 0].max()), 3)],
+                         cluster=cev))
     report["mirrors"] = info
     return out
 
@@ -973,9 +1036,20 @@ def paint_colour_from_texture(scene):
 def export(wmesh, frame, parts, out_path, paint_rgb, report):
     """Write the hierarchy. Geometry goes out in the CALLER'S ORIGINAL WORLD
     FRAME (only pivots are converted back from local), so re-running this
-    operator can never rotate or re-ground a car."""
+    operator can never rotate or re-ground a car.
+
+    PIVOTS ARE NORMALISED AND THEN ASSERTED. trimesh does carry the pivot
+    through `Scene.add_geometry(..., transform=T)`, but it writes it as a
+    column-major `matrix` and NOT as `translation` — which is easy to misread
+    as "the transform was dropped and the wheels are stacked at the origin"
+    (it was misread that way here, and the render disproved it). patch_gltf
+    converts the pure-translation matrix to an explicit `translation` after
+    checking its linear part is identity, and roundtrip_check reloads the
+    written file and proves the world bounding box still matches. A pivot that
+    does not survive export is not a pivot.
+    """
     sc = trimesh.Scene()
-    used = {}
+    used, pivots = {}, {}
     for node, faces, cls, pivot_local, prov in parts:
         sub = wmesh.submesh([faces], append=True, repair=False)
         spec = dict(MATERIALS[cls])
@@ -988,33 +1062,37 @@ def export(wmesh, frame, parts, out_path, paint_rgb, report):
         if spec.get("alpha_mode"):
             pbr.alphaMode = spec["alpha_mode"]
         sub.visual = trimesh.visual.TextureVisuals(material=pbr)
-        T = np.eye(4)
+        gname = node.replace("/", "_")
+        pw = None
         if pivot_local is not None:
             pw = frame.to_world(np.asarray(pivot_local, float))
             sub.vertices = sub.vertices - pw
-            T[:3, 3] = pw
-        gname = node.replace("/", "_")
-        sc.add_geometry(sub, geom_name=gname, node_name=gname, transform=T)
+            pivots[gname] = [float(v) for v in pw]
+        sc.add_geometry(sub, geom_name=gname, node_name=gname)
         used[gname] = dict(material=cls, faces=int(len(faces)),
                            area=round(float(wmesh.area_faces[faces].sum()), 5),
                            provenance=prov,
-                           pivot_world=None if pivot_local is None else
-                           [round(float(v), 4) for v in
-                            frame.to_world(np.asarray(pivot_local, float))],
-                           spin_axis_world=None if pivot_local is None else
+                           pivot_world=None if pw is None else
+                           [round(float(v), 4) for v in pw],
+                           spin_axis_world=None if pw is None else
                            [round(float(v), 4) for v in frame.M[2]])
     sc.export(out_path)
     report["nodes"] = used
-    patch_extensions(out_path)
+    patch_gltf(out_path, pivots)
+    report["roundtrip"] = roundtrip_check(out_path, wmesh, used, pivots)
     return out_path
 
 
-def patch_extensions(path):
-    """trimesh cannot write KHR_materials_clearcoat / _transmission / _ior, so
-    they go in by editing the JSON chunk — the respray_gltf pattern, geometry
-    untouched. alphaMode and doubleSided are re-asserted here too: a BLEND flag
-    that does not survive export is a SCRAP under the owner's glazing ruling,
-    so it is written where the file, not the exporter, decides."""
+def patch_gltf(path, pivots):
+    """Edit the JSON chunk in place — the respray_gltf pattern, geometry
+    untouched. Two things go in here because trimesh will not write them:
+      * KHR_materials_clearcoat / _transmission / _ior, plus alphaMode and
+        doubleSided re-asserted from the material spec. A BLEND flag that does
+        not survive export is a SCRAP under the owner's glazing ruling, so the
+        file, not the exporter, decides it.
+      * node PIVOTS normalised from trimesh's column-major `matrix` to an
+        explicit `translation` (see export()'s docstring). A node carrying
+        BOTH matrix and TRS is invalid glTF, so the matrix is removed."""
     with open(path, "rb") as f:
         magic, ver, total = struct.unpack("<III", f.read(12))
         jlen, jtype = struct.unpack("<II", f.read(8))
@@ -1033,6 +1111,29 @@ def patch_extensions(path):
             used.add(k)
     if used:
         j["extensionsUsed"] = sorted(used)
+    missing = set(pivots)
+    for n in j.get("nodes", []):
+        nm = n.get("name")
+        if nm not in pivots:
+            # a non-pivot node must not carry a stray transform either
+            if n.get("matrix") and np.allclose(np.array(n["matrix"]).reshape(4, 4),
+                                               np.eye(4), atol=1e-9):
+                n.pop("matrix")
+            continue
+        want = pivots[nm]
+        if "matrix" in n:
+            M = np.array(n.pop("matrix"), float).reshape(4, 4).T   # column-major
+            if not np.allclose(M[:3, :3], np.eye(3), atol=1e-6):
+                raise SystemExit("REFUSED: node %s carries a rotation this "
+                                 "operator never authored" % nm)
+            if not np.allclose(M[:3, 3], want, atol=1e-6):
+                raise SystemExit("REFUSED: node %s pivot %s disagrees with the "
+                                 "exporter's %s" % (nm, want, list(M[:3, 3])))
+        n["translation"] = [float(v) for v in want]
+        missing.discard(nm)
+    if missing:
+        raise SystemExit("REFUSED: no glTF node named %s to carry its pivot"
+                         % sorted(missing))
     jout = json.dumps(j, separators=(",", ":")).encode()
     jout += b" " * (-len(jout) % 4)
     total = 12 + 8 + len(jout) + len(rest)
@@ -1041,6 +1142,43 @@ def patch_extensions(path):
         f.write(struct.pack("<II", len(jout), jtype))
         f.write(jout)
         f.write(rest)
+
+
+def roundtrip_check(path, wmesh, used, pivots):
+    """Reload the written file from scratch and PROVE it still describes the
+    same car: same face count, same world bounding box once node transforms
+    are applied, every node present, every pivot present. This is the
+    executable form of "a fix that does not survive export is not a fix"."""
+    sc = trimesh.load(path, force="scene", process=False)
+    faces = sum(len(g.faces) for g in sc.geometry.values())
+    pts = []
+    for node in sc.graph.nodes_geometry:
+        T, gn = sc.graph[node]
+        v = np.asarray(sc.geometry[gn].vertices)
+        pts.append((v @ T[:3, :3].T + T[:3, 3]))
+    pts = np.vstack(pts)
+    lo0, hi0 = wmesh.vertices.min(0), wmesh.vertices.max(0)
+    lo1, hi1 = pts.min(0), pts.max(0)
+    dbox = float(max(np.abs(lo1 - lo0).max(), np.abs(hi1 - hi0).max()))
+    with open(path, "rb") as f:
+        f.seek(12)
+        jl, _ = struct.unpack("<II", f.read(8))
+        j = json.loads(f.read(jl))
+    names = {n.get("name") for n in j.get("nodes", [])}
+    pv = {n["name"]: n.get("translation") for n in j.get("nodes", [])
+          if n.get("name") in pivots}
+    bad_pivot = {k: pv.get(k) for k in pivots
+                 if pv.get(k) is None
+                 or max(abs(a - b) for a, b in zip(pv[k], pivots[k])) > 1e-6}
+    ok = (faces == len(wmesh.faces) and dbox < 1e-4
+          and not (set(used) - names) and not bad_pivot)
+    return dict(status="PASS" if ok else "FAIL",
+                faces_in=int(len(wmesh.faces)), faces_out=int(faces),
+                bbox_max_delta_m=round(dbox, 8),
+                nodes_missing=sorted(set(used) - names),
+                pivots_written=len(pivots), pivots_bad=bad_pivot,
+                materials=sorted({m.get("name") for m in j.get("materials", [])}),
+                extensions=j.get("extensionsUsed", []))
 
 
 # ===========================================================================
@@ -1075,7 +1213,12 @@ def main():
     ap.add_argument("--ao-rays", type=int, default=24)
     ap.add_argument("--ao-reach", type=float, default=0.028,
                     help="cavity reach as a FRACTION of car height")
-    ap.add_argument("--ao-cavity", type=float, default=0.55,
+    ap.add_argument("--trim-cluster-gap", type=float, default=0.010,
+                    help="proximity (m) that joins two faces into one patch")
+    ap.add_argument("--trim-min-cluster", type=float, default=0.015,
+                    help="a cavity patch smaller than this (m^2) is measurement "
+                         "noise, not trim")
+    ap.add_argument("--ao-cavity", type=float, default=0.75,
                     help="below this openness a visible exterior face is trim")
     ap.add_argument("--trim-max-frac", type=float, default=0.62,
                     help="a cavity above this fraction of the height is a shut "
@@ -1092,7 +1235,7 @@ def main():
     ap.add_argument("--lamp-end-frac", type=float, default=0.16)
     ap.add_argument("--lamp-min-area", type=float, default=0.010)
     ap.add_argument("--mirror-proud", type=float, default=0.030)
-    ap.add_argument("--mirror-min-area", type=float, default=0.004)
+    ap.add_argument("--mirror-min-area", type=float, default=0.006)
     ap.add_argument("--pane-min-area", type=float, default=0.020)
     ap.add_argument("--no-cut-bumpers", dest="cut_bumpers", action="store_false")
     args = ap.parse_args()

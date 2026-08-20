@@ -891,6 +891,15 @@ def fender_and_arch(m, cfg=None):
         r["arch_intersect_points"] = int(inside.sum())
         r["arch_intersect_depth_m"] = float(R - rad[inside].min()) \
             if inside.sum() else 0.0
+        # ---- how much radial room is left before the tread would touch the
+        # body. The repair operator needs this BEFORE it grows a tyre: a
+        # radius correction that closes this gap turns a floating wheel into
+        # an intersecting one, which is worse.
+        near = not_wheel & (rad < 1.60 * R) & (np.abs(lat) < 0.48 * Wd) & \
+            ((ALL[:, ui] - c[ui]) > 0.20 * R)          # the arch, not the road
+        r["arch_min_clearance_m"] = float(rad[near].min() - R) \
+            if near.sum() > 20 else None
+        r["arch_clearance_points"] = int(near.sum())
         # ---- contact patch, from the tyre carcass only
         r["contact_patch"] = _contact(ALL[carcass], c, a, R, Wd,
                                       m["ground_plane"], li, ti, ui)
