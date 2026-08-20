@@ -1430,6 +1430,105 @@ the first generated car to pass EVERY material gate. Durable facts, all measured
   3/4") is for length-on-X cars only — a length-Z car shows different views at
   the same az; match tiles against a catalogue control, not the note.
 
+## The "golf" files in car-meshes ARE A TOYOTA YARIS (2026-08-20)
+
+Costly naming trap, found only because a properly-exposed studio render showed a
+**Toyota badge and a German plate** on a mesh everything calls a Golf:
+
+  car-meshes/pixal_test/golf.png        -> silver Yaris XP130 5-dr, plate K.YC 400
+  car-meshes/pixal_test/pixal_golf.glb  -> that Yaris (918,715 faces)
+  car-meshes/golf_improved/golf_polished.glb / golf_engraved.glb -> that Yaris
+                                           (918,715 faces — same mesh, provenance
+                                            confirmed by the face count in
+                                            pixal_test/crease.txt)
+
+**The only real Golf image in the bucket is `car-meshes/pixal_batch/in_golf.png`**
+(red Mk8, 1600^2 RGBA cutout). `bench-pe12/f34.png` is a THIRD car — a white
+3-door Yaris, plate PE12 — so "the Yaris run" and "the golf_improved mesh" are
+not the same vehicle either.
+
+I asserted "Golf mesh VERIFIED" earlier in the same session off a flat-colour
+label render whose carpaint label is RED, which made a silver Yaris look like the
+red Golf reference. **A silhouette in label colours is not an identification.**
+Identify a car from a textured/shaded render, a badge, or the source photo.
+
+Related, and a real bug: the seg chain canonicalised this Yaris with
+`canon --spec vw_golf_mk8`. golf_polished.glb measures **4.282 m** long — Golf Mk8
+length. A Yaris XP130 is 3.89 m. The mesh has been stretched ~10% to another car's
+spec, so any proportion judgement on it is against the wrong target.
+
+## PartCrafter vs the 2D-seg chain for GLAZING labels — measured (2026-08-20)
+
+Bake-off on ONE car, both routes from the SAME input photo (the silver Yaris
+above). Two RunPod pods, $0.28 total, both verified terminated. Artefacts under
+`car-meshes/staging/carglb/bench-golf-pc/` and `.../bench-yaris-same/`.
+
+**ANSWER: take glazing labels from the 2D-seg chain. PartCrafter loses on
+correctness, not on smoothness.**
+
+| same input | PartCrafter | 2D-seg |
+|---|---|---|
+| glazing components holding 90% of area | **1** (91.3% in one) | **9** |
+| glazing on the REAR view (% of silhouette) | **0.05%** | 16.10% |
+| glazing height band (5th-95th pct of car height) | 0.50-0.91 | 0.64-0.92 |
+| glazing below 45% car height (door spill) | 1.9% | 0.0% |
+| glass_probe verdict | clear / proven | clear / proven |
+
+* **PartCrafter does not label the REAR SCREEN. Reproduced on 2 of 2 cars**
+  (Yaris 0.05% vs 16.10%; Golf 2.60% vs 16.38% of the rear-view silhouette).
+  Under the 2026-08-11 owner ruling an opaque rear screen is a **hard scrap**, so
+  this alone disqualifies the route as a glazing source.
+* **PartCrafter's canopy is ONE fused surface** — no pillars. 91-98% of the
+  glazing area is a single connected component, versus 9 real panes from the 2D
+  chain. On the Golf it also painted a **butterfly of ROOF** as glass.
+* **It is CAR-DEPENDENT, not a fixed capability.** Same settings (num_parts=16,
+  seed 0), three cars: the Golf gave a clean canopy + clean wheels; the silver
+  Yaris gave a canopy but no rear screen; the **PE12 Yaris gave NO canopy at
+  all** — glazing smeared across roof, bonnet and flanks. Do not plan around
+  "PartCrafter separates the greenhouse"; it sometimes does.
+* **Wheels are a draw, so they are not a reason to switch.** Both cut cleanly at
+  the arch with no spill. PartCrafter's disc is punctured by real spoke gaps
+  (compactness 2.81 vs 1.34); the 2D chain's is a solid disc with the arch
+  correctly labelled interior.
+* **The architectural argument is stronger than any of the numbers:**
+  PartCrafter's labels live on PARTCRAFTER'S OWN melt mesh. Using them on the
+  production mesh needs a cross-mesh transfer, and hybrid_transfer's ragged
+  boundaries are already recorded above as the reason that route was abandoned.
+  The 2D-seg chain labels the production mesh directly — no transfer at all.
+
+**THREE MEASUREMENT TRAPS, all of which gave the WRONG answer first:**
+1. **Raggedness metrics FAVOUR PartCrafter and are misleading.** Over a
+   12-azimuth orbit PartCrafter scored better on every one — mask components
+   4.2 vs 44.0, speckle 0.01% vs 0.83%, perimeter/sqrt(area) 12.4 vs 15.4. It
+   wins because its label is a smooth BLOB that swallows the pillars and drops
+   the rear screen, while the 2D chain's is anatomically right but speckled.
+   **Smoothness is not correctness.** Report per-view, never orbit-averaged: the
+   average hid a 21.96%-vs-16.52% front OVER-cover cancelling a 2.60%-vs-16.38%
+   rear MISS.
+2. **`glass_probe` cannot separate the routes.** 4/4 assemblies came back
+   `clear / proven`. It reads the material table, and both routes write a
+   correctly transparent glazing material — it cannot see that one of them
+   covers the wrong faces. Do not use it to choose a segmentation route.
+3. **A point-sampled renderer cannot measure label boundaries.** Where two
+   labels' shells are coincident it produces random z-fighting speckle, which
+   reads as raggedness when the label is fine. Use
+   `pipeline/carglb/bl_label_render.py` (flat emission, AA off, 1 Cycles
+   sample) — deterministic, one label colour per pixel.
+
+Also: counting components needs a **coordinate-quantised weld**. trimesh's
+`merge_vertices` keeps split vertices when normals differ, and a GLB stores 3
+unique verts per face, so the naive count read **190k "components"** for a
+surface that is actually one piece. `pipeline/carglb/label_bench.py` does it
+right and carries these thresholds.
+
+And the duplication check that says whether a label set is a partition at all:
+sweep eps, do not pick one. At a loose 1% of car length, glass sitting 4 cm in
+front of an interior shell scores 47% and reads as duplication. At 0.1% a true
+partition collapses to 0.7% while PartCrafter's RAW 16 parts stay at 3.5-5.5% —
+they overlap heavily (two Golf parts were 68% coincident with each other at that
+eps). `partcrafter_materials.py`'s debris cull does resolve this: the ASSEMBLED
+output is a clean partition (0.8%).
+
 ## PartCrafter TESTED on a real car (2026-08-12): parts yes, glazing NO
 
 Ran PartCrafter end to end on a RunPod A5000 against a clean 3/4 render of
