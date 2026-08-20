@@ -99,11 +99,18 @@ curl -fsSL "$SB/public/$PRE/crease_density.py" -o /workspace/crease_density.py \
   || echo "MEASURE UNAVAILABLE: measure locally instead"
 
 stage warmup
-# First call downloads the weights and JITs; do it ONCE on the repo's own
-# example so a weights or API failure is not billed per car.
-python3 run.py demo_files/examples/fish.png --output-dir /workspace/warm \
-  2>&1 | tail -20 || die WARMUP
-ls -la /workspace/warm/* || die WARMUP_NO_OUTPUT
+# NO SEPARATE WARMUP — and this is a paid lesson, not a style choice.
+# v1 warmed up on the README's `demo_files/examples/fish.png`. That path does
+# not exist in the checkout: FileNotFoundError, then my own assertion killed
+# the run. 18 minutes and ~$0.15 spent without the model ever executing. A
+# precondition built on a filename nobody verified is the "safety check that
+# is itself wrong" trap — it costs exactly what no check would have cost.
+# The FIRST CAR is the warmup now: the launcher stages it, so it is guaranteed
+# to exist; it exercises the identical code path; and the weights download is
+# paid once either way. A real model failure still surfaces on car one, and
+# the per-car "RC=0 but no GLB" trap still catches a silent no-output run.
+ls demo_files 2>/dev/null | head -5 || echo "(no demo_files in this checkout)"
+echo "warmup folded into the first car"
 
 DONE=0; FAILED=0
 for TAG in $(python3 -c "import json;print(' '.join(json.load(open('batch.json'))))"); do
