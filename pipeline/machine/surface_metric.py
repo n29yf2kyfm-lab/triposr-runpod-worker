@@ -239,7 +239,26 @@ def crease_length(m, crease_deg=CREASE_DEG):
 
 
 def slope_error(m, radius, mask=None, max_faces=250000, seed=0):
-    """sigma_theta(radius) over the masked faces. Returns a dict of stats."""
+    """sigma_theta(radius) over the masked faces. Returns a dict of stats.
+
+    Also returns COHERENCE, which is the half of the answer magnitude alone
+    cannot give. Calibration proved this the hard way: measured at a fixed
+    25 mm radius the generated Golf scores 3.75 deg and six audited catalogue
+    cars score 5.2 to 18.7 deg, i.e. the generated car looks BETTER than every
+    real one. That is not wrong, it is the wrong question — a real car's normal
+    field deviates from a local quadric because it is full of deliberate
+    hard-surface detail (fillets, swages, trim steps), and those deviations are
+    ORGANISED: neighbouring faces lean the same way along the feature. Melt
+    deviates by less and the deviation is INCOHERENT — adjacent faces lean
+    opposite ways, which is exactly what puts a break in a reflection line.
+
+    So coherence C is the cosine similarity of the residual slope vectors of
+    adjacent panel faces, weighted by their magnitudes:
+        C = sum w_ij (r_i.r_j) / sum w_ij |r_i||r_j|
+    +1 = every neighbour leans the same way (a feature), 0 = uncorrelated
+    noise, negative = alternating ripple. It is dimensionless, so unlike
+    sigma_theta it does not scale with tessellation.
+    """
     C = m.vertices[m.faces].mean(axis=1)
     N = m.face_normals
     A = m.area_faces
@@ -253,6 +272,7 @@ def slope_error(m, radius, mask=None, max_faces=250000, seed=0):
     tree = cKDTree(C)
     k = min(MAX_NBRS, len(C))
     theta = np.full(len(idx), np.nan)
+    resid = np.zeros((len(idx), 3))               # world-space residual slope
 
     # CHUNKED. The batched (M,k,6) design matrix is 2.5 GB at M=243k, k=220 and
     # the first run of this file was OOM-KILLED with rc=0 and no traceback —
@@ -304,14 +324,38 @@ def slope_error(m, radius, mask=None, max_faces=250000, seed=0):
             out = np.full(len(ii), np.nan)
             out[good] = th
             theta[sl] = out
+            rv = np.zeros((len(ii), 3))
+            rv[good] = (coef[:, 3, None] * ex[good] + coef[:, 4, None] * ey[good])
+            resid[sl] = rv
 
-    v = theta[np.isfinite(theta)]
-    aw = A[idx][np.isfinite(theta)]
+    fin = np.isfinite(theta)
+    v = theta[fin]
+    aw = A[idx][fin]
     if len(v) == 0:
         return dict(n=0)
     rms = float(np.sqrt((aw * v * v).sum() / aw.sum()))
+
+    # ---- coherence over adjacent panel faces
+    pos = np.full(len(C), -1, dtype=np.int64)
+    pos[idx[fin]] = np.arange(fin.sum())
+    adj = m.face_adjacency
+    a0, a1 = pos[adj[:, 0]], pos[adj[:, 1]]
+    both = (a0 >= 0) & (a1 >= 0)
+    coh = float("nan")
+    if both.sum() > 32:
+        R0, R1 = resid[fin][a0[both]], resid[fin][a1[both]]
+        m0 = np.linalg.norm(R0, axis=1)
+        m1 = np.linalg.norm(R1, axis=1)
+        live = (m0 > 1e-9) & (m1 > 1e-9)
+        if live.sum() > 32:
+            num = float((R0[live] * R1[live]).sum())
+            den = float((m0[live] * m1[live]).sum())
+            coh = num / den if den > 0 else float("nan")
+
     return dict(n=int(len(v)),
                 rms=round(rms, 4),
+                coherence=(None if not np.isfinite(coh) else round(coh, 4)),
+                coh_pairs=int(both.sum()),
                 median=round(float(np.median(v)), 4),
                 p90=round(float(np.percentile(v, 90)), 4),
                 p99=round(float(np.percentile(v, 99)), 4),

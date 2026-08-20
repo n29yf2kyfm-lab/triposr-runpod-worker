@@ -440,11 +440,10 @@ def measure(path, spec=None, nose="auto", cfg=None, bootstrap=True):
         c = w["centre"]
         w["side"] = "+" if c[ti] > 0 else "-"
     if len(wheels) == 4:
-        order = sorted(wheels, key=lambda w: w["centre"][li])
-        # the two with the smallest length coord are one axle
-        axle_lo = order[:2]
-        for w in wheels:
-            w["axle"] = "lo" if w in axle_lo else "hi"
+        order = sorted(range(4), key=lambda i: wheels[i]["centre"][li])
+        lo_idx = set(order[:2])          # the two smallest length coords
+        for i, w in enumerate(wheels):
+            w["axle"] = "lo" if i in lo_idx else "hi"
     for w in wheels:
         if fr["nose"] == 0:
             w["corner"] = ("A" if w.get("axle") == "lo" else "C") + w["side"]
