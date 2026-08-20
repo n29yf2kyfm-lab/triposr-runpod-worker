@@ -44,7 +44,7 @@ FINAL_CLASSES = {
         "roboflow": ["Dent"],
         "drive": ["dent_major", "dent_medium", "dent_minor", "dent_severe"],
         "canonical": "dent",
-        "colour": "#f0883e",
+        "colour": "#f46203",
         "structural": True,
     },
     "scratch_scuff": {
@@ -57,7 +57,7 @@ FINAL_CLASSES = {
                   "scratch_light", "scratch_medium", "scratch_deep",
                   "scratch_severe"],
         "canonical": "scratch",
-        "colour": "#58a6ff",
+        "colour": "#4fa2ff",
         "structural": False,
     },
     "crack_glass": {
@@ -65,7 +65,7 @@ FINAL_CLASSES = {
         "drive": ["crack_glass", "crack_windscreen", "crack_hairline",
                   "crack_structural"],
         "canonical": "crack",
-        "colour": "#f85149",
+        "colour": "#ae2b2f",
         "structural": True,
     },
     "rust_paint": {
@@ -80,7 +80,7 @@ FINAL_CLASSES = {
                   "paint_depth_normal", "paint_depth_thick",
                   "paint_depth_primer"],
         "canonical": "rust",
-        "colour": "#bb8009",
+        "colour": "#a5722f",
         "structural": True,
     },
     "lamp_wheel": {
@@ -88,7 +88,7 @@ FINAL_CLASSES = {
         "drive": ["light_broken", "light_crack", "light_fade", "light_frosted",
                   "light_water", "alloy_buckle"],
         "canonical": "lamp_damage",
-        "colour": "#e3b341",
+        "colour": "#9d9632",
         "structural": True,
     },
     "structural": {
@@ -102,7 +102,7 @@ FINAL_CLASSES = {
         "drive": ["structural_broken", "structural_bumper", "panel_gap",
                   "panel_mismatch"],
         "canonical": "deformation",
-        "colour": "#db6d28",
+        "colour": "#ba4500",
         "structural": True,
     },
 }
@@ -138,7 +138,32 @@ def resolve(name):
 
 
 def colour(final_class):
-    return FINAL_CLASSES.get(final_class, {}).get("colour", "#8b949e")
+    """Hex for a training class, resolved from the SHIPPING palette.
+
+    The hex literals in FINAL_CLASSES above are a cache of overlay's table, and
+    a cache with no invalidation is a second source of truth. It drifted the
+    first time overlay's palette changed: four class colours were byte-
+    identical to severity band colours and had to move, and the demonstration
+    sheet went on printing the old hexes from here, describing a palette the
+    renderer no longer used.
+
+    So the real table is asked first, through the canonical taxonomy id that
+    already links the two, and the literals are only the fallback for a
+    training host that has no damage package on its path. _selftest checks the
+    two agree, so a genuine divergence is a test failure rather than a picture
+    that quietly lies.
+    """
+    local = FINAL_CLASSES.get(final_class, {}).get("colour", "#8b949e")
+    try:
+        import os
+        import sys
+        d = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        if d not in sys.path:
+            sys.path.insert(0, d)
+        from overlay import CLASS_COLOURS, DEFAULT_CLASS_COLOUR
+    except Exception:
+        return local
+    return CLASS_COLOURS.get(canonical(final_class), DEFAULT_CLASS_COLOUR)
 
 
 def canonical(final_class):
@@ -212,16 +237,16 @@ if __name__ == "__main__":
 # separate.
 TRAIN_GROUPS = {
     "surface":     {"members": ("scratch_scuff", "rust_paint"),
-                    "colour": "#58a6ff", "canonical": "scratch",
+                    "colour": "#4fa2ff", "canonical": "scratch",
                     "structural": False},
     "dent":        {"members": ("dent",),
-                    "colour": "#f0883e", "canonical": "dent",
+                    "colour": "#f46203", "canonical": "dent",
                     "structural": True},
     "structural":  {"members": ("structural",),
-                    "colour": "#db6d28", "canonical": "deformation",
+                    "colour": "#ba4500", "canonical": "deformation",
                     "structural": True},
     "broken_part": {"members": ("crack_glass", "lamp_wheel"),
-                    "colour": "#f85149", "canonical": "crack",
+                    "colour": "#ae2b2f", "canonical": "crack",
                     "structural": True},
 }
 
@@ -269,13 +294,13 @@ def _check_groups():
 # 0.16 AP class is not carrying that distinction reliably either.
 TRAIN_GROUPS_V2 = {
     "surface":     {"members": ("scratch_scuff", "rust_paint"),
-                    "colour": "#58a6ff", "canonical": "scratch",
+                    "colour": "#4fa2ff", "canonical": "scratch",
                     "structural": False},
     "deformation": {"members": ("dent", "structural"),
-                    "colour": "#f0883e", "canonical": "dent",
+                    "colour": "#f46203", "canonical": "dent",
                     "structural": True},
     "broken_part": {"members": ("crack_glass", "lamp_wheel"),
-                    "colour": "#f85149", "canonical": "crack",
+                    "colour": "#ae2b2f", "canonical": "crack",
                     "structural": True},
 }
 

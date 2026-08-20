@@ -1352,6 +1352,26 @@ _tight = sorted((round(_de(OVL.CLASS_COLOURS[a], OVL.CLASS_COLOURS[b]), 1),
 check("22m no two class colours are perceptually confusable", not _tight,
       str(_tight[:4]))
 
+# class_map.py caches the palette as hex literals for training hosts that have
+# no damage package on their path. A cache with no invalidation is a second
+# source of truth, and it drifted the moment overlay's palette moved — the
+# demonstration sheet went on printing the retired hexes. The two must agree.
+sys.path.insert(0, os.path.join(HERE, "training"))
+import class_map as _CM                                        # noqa: E402
+
+_drift = sorted(
+    (c, _CM.FINAL_CLASSES[c]["colour"], OVL.CLASS_COLOURS.get(
+        _CM.FINAL_CLASSES[c]["canonical"]))
+    for c in _CM.FINAL_CLASSES
+    if _CM.FINAL_CLASSES[c]["colour"]
+    != OVL.CLASS_COLOURS.get(_CM.FINAL_CLASSES[c]["canonical"]))
+check("22n the training palette cache matches the shipping palette",
+      not _drift, str(_drift))
+check("22o every training class resolves to a real taxonomy type",
+      all(_CM.FINAL_CLASSES[c]["canonical"] in TAX.DAMAGE_TYPES
+          for c in _CM.FINAL_CLASSES),
+      str([_CM.FINAL_CLASSES[c]["canonical"] for c in _CM.FINAL_CLASSES]))
+
 
 # ---- report ---------------------------------------------------------------
 print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")
