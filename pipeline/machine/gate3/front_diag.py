@@ -121,6 +121,8 @@ PALETTE = {
     "Intake_L": (0.60, 0.00, 0.85), "Intake_R": (0.85, 0.00, 0.60),
     "Front_Plate": (1.00, 1.00, 1.00), "Plate_Recess": (0.45, 0.30, 0.10),
     "Front_Badge": (1.00, 0.95, 0.20),
+    "Grille_Well": (0.00, 0.35, 0.55), "Intake_Well": (0.35, 0.00, 0.60),
+    "Head_DRL_R": (1.00, 1.00, 1.00), "Head_DRL_L": (0.80, 0.90, 1.00),
     "Head_Housing_R": (0.55, 0.20, 0.00), "Head_Housing_L": (0.75, 0.45, 0.15),
     "Head_Inner_R": (1.00, 0.30, 0.55), "Head_Inner_L": (1.00, 0.60, 0.75),
     "Grille_Frame": (0.00, 0.85, 0.85), "Grille_Back": (0.00, 0.30, 0.45),
