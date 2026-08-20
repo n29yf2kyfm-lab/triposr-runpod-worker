@@ -2617,6 +2617,29 @@ CONSTRUCTED wheels (wheel_stage.py) where the axis is exact by construction.
     pass re-cuts with a cylinder sized from the last width, so the width creeps
     (+10% per pass). Iterate twice, then stop and report.
 
+**A GEOMETRY OPERATOR THAT ONLY WRITES POSITIONS SHIPS A BROKEN FILE — run the
+glTF validator on the OUTPUT and DIFF IT AGAINST THE INPUT, every time.** This
+one went 30 errors -> 1,980 and none of it was visible in a render:
+  * the re-indexed FACES were never written back, so the duplicated vertices
+    were orphans (1,859 zero-length normals) and the seam faces still pointed
+    at vertices that had not moved — the geometry was stretched across the cut
+    instead of separated by it, i.e. the panel-denting failure the split exists
+    to prevent, reintroduced by one missing assignment;
+  * NORMALS ARE NOT POSITIONS. A wheel is scaled radially and axially by
+    different factors, so its normals need the inverse transpose (rotation plus
+    RECIPROCAL scales) and a renormalise; a rigid pose needs the same rotation
+    applied to them. Leaving them behind tilts every shaded normal by the pose
+    angle with no visible geometric cause — the crumpled-foil class again;
+  * `trimesh.load(...)` WITHOUT `process=False` recomputes vertex normals and
+    zeroes every vertex whose incident faces are degenerate (571 here), and
+    assigning `.faces` invalidates the cache so it recomputes for the WHOLE
+    mesh and discards authored shading. Capture authored normals at load,
+    transform them with their geometry, extend them for any duplicated
+    vertices, write them back explicitly.
+Counting zero-length normals stage by stage (input 30 -> after pose 601 ->
+after two wheel passes 601) located the culprit in one command; the renders
+looked fine at every step.
+
 **Published track can be UNREACHABLE on a generated body, and that is not a wheel
 fault.** Mk8 track is 1549/1520 mm; this body measures 1610/1660 mm across the
 arches (published width 1789), so spec track stands the tyres 30-85 mm PROUD of
