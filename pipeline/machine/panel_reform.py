@@ -161,6 +161,7 @@ def crease_length(mesh, deg):
 
 # ------------------------------------------------------------------ the MLS
 def mls_project(V, N, radius, degree=2, iters=3, normal_agree=0.60,
+                frame_agree=0.70, flat_max=0.02, band_frac=0.35,
                 chunk_bytes=4e7, verbose=True):
     """Return the MLS-projected positions of V.
 
@@ -174,7 +175,12 @@ def mls_project(V, N, radius, degree=2, iters=3, normal_agree=0.60,
     nothing else could be blamed:
 
         vertex-normal frames   crease(35deg)  102.0 m -> 1188.3 m
-        PCA frames             crease(35deg)  102.0 m ->    36.5 m
+        PCA frames             crease(35deg)  102.0 m ->  849.4 m
+
+    (PCA frames are a 28% improvement and still nowhere near acceptable on
+    their own; the gates below are what close the rest of the gap. Both
+    numbers are measured — an earlier draft of this docstring carried "36.5 m"
+    for the PCA row, which was never measured and was wrong by 23x.)
 
     A projection along each vertex's own normal moves neighbouring vertices in
     WILDLY DIFFERENT DIRECTIONS precisely where the normal field is worst —
@@ -199,7 +205,9 @@ def mls_project(V, N, radius, degree=2, iters=3, normal_agree=0.60,
     tree = cKDTree(V)
     k = min(MAX_NBRS, n)
     ncol = {1: 3, 2: 6, 3: 10}[degree]
+    band = band_frac * radius
     out = V.copy()
+    nframe_bad = 0
     moved_h = np.zeros(n)
     determined = np.zeros(n, dtype=bool)
     CH = max(1, int(chunk_bytes / (k * 8 * (ncol + 6))))
@@ -224,12 +232,35 @@ def mls_project(V, N, radius, degree=2, iters=3, normal_agree=0.60,
         evals, evecs = np.linalg.eigh(cov)          # ascending
         npca = evecs[:, :, 0]
         # sign: agree with the vertex normal, which is reliable for a SIGN even
-        # when it is useless for a direction
-        npca *= np.sign(np.einsum("mj,mj->m", npca, n0))[:, None]
+        # when it is useless for a direction. np.sign(0) is 0 and would ZERO
+        # the frame normal, producing a garbage basis and a garbage fit, so the
+        # sign is taken with a hard tie-break rather than np.sign.
+        dotn = np.einsum("mj,mj->m", npca, n0)
+        npca = np.where((dotn < 0)[:, None], -npca, npca)
         # a neighbourhood too flat to define a plane (a degenerate sliver) keeps
         # the vertex normal rather than a random eigenvector
         degen = evals[:, 2] < 1e-18
         npca[degen] = n0[degen]
+
+        # ---- FRAME VALIDITY. Two ways a reference plane can be a lie, both of
+        # which put the vertex somewhere invented rather than somewhere better:
+        #  * the neighbourhood spans a FOLD, so its plane bisects two surfaces
+        #    and agrees with neither. Caught by the frame disagreeing with the
+        #    vertex normal.
+        #  * the neighbourhood is not plane-like at all (a tube, a sliver, a
+        #    cloud of fragments). Caught by the PCA's flatness ratio.
+        # A vertex failing either gate is NOT MOVED. Refusing to repair what
+        # cannot be measured is the whole difference between this and a filter.
+        flat = evals[:, 0] / (evals.sum(1) + 1e-30)
+        frame_ok = (np.abs(dotn) > frame_agree) & (flat < flat_max) & ~degen
+
+        # ---- BAND SUPPORT. A generated body is layered: shells sit parallel
+        # to each other a few mm apart, close enough to share a 90 mm sphere
+        # and with normals that AGREE, so a spherical support averages two
+        # surfaces into one and tears both. Restricting the support to a slab
+        # about the reference plane keeps the fit on one layer.
+        zb = np.einsum("mkj,mj->mk", D, npca)
+        ok &= np.abs(zb) <= band
 
         tmp = np.tile(np.array([1.0, 0.0, 0.0]), (len(P0), 1))
         tmp[np.abs(npca[:, 0]) > 0.9] = np.array([0.0, 1.0, 0.0])
@@ -272,13 +303,16 @@ def mls_project(V, N, radius, degree=2, iters=3, normal_agree=0.60,
             w = wker * np.exp(-(res / (3.0 * scale)) ** 2)
 
         h = coef[:, 0]                               # fitted height at x=y=0
+        good = good & frame_ok
+        nframe_bad += int((~frame_ok).sum())
         determined[sl] = good
         h = np.where(good, h, 0.0)
         moved_h[sl] = h
         out[sl] = P0 + h[:, None] * npca
     if verbose:
-        print(f"    MLS r={radius*1000:.0f}mm deg{degree} iters{iters}: "
-              f"{determined.sum()}/{n} determined, "
+        print(f"    MLS r={radius*1000:.0f}mm deg{degree} iters{iters} "
+              f"band{band*1000:.0f}mm: {determined.sum()}/{n} determined "
+              f"({nframe_bad} frame-rejected), "
               f"|h| mean {np.abs(moved_h[determined]).mean()*1000:.2f}mm "
               f"p99 {np.percentile(np.abs(moved_h[determined]),99)*1000:.2f}mm "
               f"max {np.abs(moved_h[determined]).max()*1000:.2f}mm "
