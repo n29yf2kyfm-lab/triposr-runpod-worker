@@ -1073,9 +1073,16 @@ def main():
     ap.add_argument("--json", default=None)
     ap.add_argument("--nose", choices=["+", "-", "auto"], default="auto")
     ap.add_argument("--no-bootstrap", action="store_true")
+    ap.add_argument("--frame", choices=["car", "raw"], default="car",
+                    help="'car' (default) measures after the pose solve, which "
+                         "is the frame the criteria are defined in. 'raw' "
+                         "measures in the file's own frame — use it when the "
+                         "numbers must line up with the FILE, e.g. for an "
+                         "evidence render of the unrepaired car.")
     a = ap.parse_args()
     spec = load_spec(a.spec)
-    m = measure(a.glb, spec=spec, nose=a.nose, bootstrap=not a.no_bootstrap)
+    m = measure(a.glb, spec=spec, nose=a.nose, bootstrap=not a.no_bootstrap,
+                canonicalise=(a.frame == "car"))
     m = fender_and_arch(m)
     m["gate6"] = grade(m, spec)
     m.pop("_meshes", None)
