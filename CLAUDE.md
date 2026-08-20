@@ -2963,3 +2963,57 @@ other way round.
 render on a textured generated car** — its studio paint + HDRI on top of an already-
 baked texture reads as crumpled chrome foil. The local render is the honest preview of
 what the viewer gets. Judge a textured generated car from the file, not the rig.
+
+## `pixal_test/golf.png` AND `pixal_golf.glb` ARE A YARIS. Look, don't trust the name (2026-08-20)
+
+Spent an hour presenting a car to the owner as "the Pixal Golf, crease 184.9, the best
+generated car this project has produced". It is a **silver Toyota Yaris XP130** on a German
+plate (K-YC 400). The file is simply misnamed in the bucket, and I read the name instead of
+the picture — the exact failure this file's NO GUESSING section exists to prevent.
+
+It got worse before it was caught: the mesh was then canonicalised with
+`canon --spec vw_golf_mk8`, which **stretched a Yaris ~10% to Golf length** (4.282 m) and
+reported "verified: all three dimensions within 1% of spec" — verified against the wrong
+car. A spec correction is only as honest as the identification behind it, and `canon.py`
+cannot tell you that you handed it the wrong car.
+
+  * the REAL Golf input is `car-meshes/pixal_batch/in_golf.png` (red Mk8) — VERIFIED by eye
+  * every Golf source in the bucket is a RENDER, not a photograph
+    (`in_golf.png`, `staging/hybrid/GOLF_real_blue.png`, `GOLF_f34.png`, `GOLF_side.png`)
+  * `in_golf.png` also CLIPS the nose at the right edge (7 rows) — re-pad before use, a
+    clipped silhouette is geometry the generator has to invent
+
+**Rule: render the mesh and LOOK before naming the car in anything the owner reads, and
+before applying a per-vehicle spec.** A flat-colour label render is not enough either — the
+agent that caught this first misread the same mesh as a Golf because carpaint renders red;
+it took a properly exposed shaded render to show the Toyota badge.
+
+## PartCrafter vs the 2D-seg chain: settled, keep the 2D chain (2026-08-20)
+
+Head-to-head on the same car, both routes end to end. PartCrafter loses on CORRECTNESS,
+not smoothness:
+
+  * **it does not label the rear screen** — 0.05% of the rear silhouette against the seg
+    chain's 16.10%, reproduced on 2 of 2 cars. Under the 2026-08-11 opaque-glazing ruling
+    that is a hard scrap on its own.
+  * **its canopy is one fused surface with no pillars** — 1 component holding 91.3% of
+    glazing area, where the seg chain finds 9 real panes. On the Golf it also painted a
+    butterfly of ROOF as glass.
+  * **it is car-dependent, not a capability.** Same settings (num_parts=16, seed 0):
+    Golf -> clean canopy and clean wheels; silver Yaris -> canopy but no rear screen;
+    PE12 Yaris -> **no canopy at all**, glazing smeared over roof, bonnet and flanks. The
+    "16 parts separates the greenhouse" claim recorded 2026-08-12 does NOT hold generally.
+  * wheels are a DRAW — both cut cleanly at the arch. Not a reason to switch.
+  * architecturally its labels live on its own melt mesh, so using them needs the
+    cross-mesh transfer whose ragged boundaries are already the recorded blocker.
+
+**The trap that nearly produced the opposite answer: raggedness metrics FAVOUR PartCrafter.**
+Over a 12-azimuth orbit it beat the 2D chain on every one (mask components 4.2 vs 44.0,
+speckle 0.01% vs 0.83%) — because a smooth blob that swallows the pillars and drops the rear
+screen scores beautifully on smoothness. Orbit-AVERAGING also hid the defect: a front
+over-cover cancelled the rear miss. **Report per-view, never orbit-averaged.**
+`glass_probe` cannot separate the two either — 4/4 assemblies came back clear/proven,
+because it reads the material table and cannot see that a label covers the wrong faces.
+
+Open, and the highest-value follow-up: both inputs were front 3/4, so the rear was never
+observed. Whether the rear-screen miss is a viewpoint artefact is UNTESTED.
