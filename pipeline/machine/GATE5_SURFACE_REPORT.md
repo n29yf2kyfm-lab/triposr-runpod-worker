@@ -218,6 +218,7 @@ single-sheet faces, the surface *away from* those three problems is close to the
 * `glb/golf_g5_repaired.glb.part_00..02` + `MANIFEST.txt` (sha256 above; reassemble with `cat`)
 * `sheets/G5_CLAY_BEFORE_AFTER.jpg` — 8 panels, matte clay + 7 long strip lights
 * `sheets/G5_ZEBRA_BEFORE_AFTER.jpg` — 8 panels, chrome + hard strips
+* `sheets/G5_NORMALS_BEFORE_AFTER.jpg` — 8 panels, world-space normal, unlit
 * `sheets/G5_CLAY_FLAT_BEFORE_AFTER.jpg` — **flat-shaded, the geometry claim with shading removed**
 * `evidence/` — calib.json, score_sweep.json, score_final.json, zones_before/after.json,
   symmetry.json, hygiene.json, validate.log, bodysel.npz
