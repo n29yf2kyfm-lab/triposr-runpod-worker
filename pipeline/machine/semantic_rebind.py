@@ -349,6 +349,53 @@ class Wheel:
                     tread_faces=int(self.tread_faces))
 
 
+def refine_axle(C, N, A, side_mask, px, py, R, step, iters=3):
+    """Sub-grid axle from a robust circle fit to the TREAD.
+
+    WHY: the Hough accumulator is a `step` grid — 10 mm — so its peak is only
+    ever the axle to +/-5 mm however clean the wheel is. That quantisation is
+    measurable at the far end of the tool: pivot_check spins the exported
+    wheels and reads the peak-to-peak height of their lowest point, and on
+    this Golf the REAR wheels wobbled 31.6 and 35.6 mm against a tread that is
+    only 23-24 mm out of round — i.e. the pivot, not the tyre, was moving them.
+    A pivot is either on the axle or it is not, and 5 mm of grid is not "on".
+
+    The fit is a weighted algebraic (Kasa) circle solved on tread faces only,
+    trimmed twice on residual. Arch faces sit at nearly the tyre's own radius
+    and would drag the centre, so they are excluded the way classify() does
+    it — by CONVEXITY: a tyre's normal points away from its axle, an arch's
+    points back toward it."""
+    ev = dict(before=[round(float(px), 5), round(float(py), 5)],
+              radius_before=round(float(R), 5), grid_step_m=step)
+    cx, cy, RR = float(px), float(py), float(R)
+    for it in range(iters):
+        rv = C[:, :2] - np.array([cx, cy])
+        d = np.linalg.norm(rv, axis=1)
+        rad = (N[:, :2] * (rv / np.maximum(d, 1e-9)[:, None])).sum(1)
+        sel = (side_mask & (np.abs(d - RR) < (0.06 if it else 0.09) * RR)
+               & (rad > 0.30) & (np.abs(N[:, 2]) < 0.45))
+        if sel.sum() < 200:
+            ev["status"] = "NOT REFINED"
+            ev["reason"] = "only %d tread faces survived the convexity and " \
+                           "band test" % int(sel.sum())
+            return cx, cy, RR, ev
+        P, w = C[sel][:, :2], A[sel]
+        # Kasa: minimise |P|^2 - 2x0.Px - 2y0.Py + (x0^2+y0^2-R^2)
+        M = np.column_stack([2 * P[:, 0], 2 * P[:, 1], np.ones(len(P))])
+        b = (P ** 2).sum(1)
+        W = np.sqrt(w)[:, None]
+        sol, *_ = np.linalg.lstsq(M * W, b * W[:, 0], rcond=None)
+        cx, cy = float(sol[0]), float(sol[1])
+        RR = float(math.sqrt(max(sol[2] + cx * cx + cy * cy, 1e-9)))
+    ev.update(status="REFINED", after=[round(cx, 5), round(cy, 5)],
+              radius_after=round(RR, 5), tread_faces=int(sel.sum()),
+              moved_mm=round(float(np.hypot(cx - px, cy - py)) * 1000, 2),
+              residual_rms_mm=round(float(np.sqrt(np.average(
+                  (np.linalg.norm(P - [cx, cy], axis=1) - RR) ** 2,
+                  weights=w))) * 1000, 2))
+    return cx, cy, RR, ev
+
+
 def detect_wheels(lmesh, frame, spec_tyre=None, report=None):
     """Hough vote for each axle, from TREAD faces only.
 
@@ -446,6 +493,9 @@ def detect_wheels(lmesh, frame, spec_tyre=None, report=None):
             z_a, z_b = float(np.percentile(zc, 2.0)), float(np.percentile(zc, 98.0))
             z_lo, z_hi = sgn * z_a, sgn * z_b
             tread = ((np.sign(C[:, 2]) == sgn) & (np.abs(d - R) < 0.07 * R))
+            px, py, R, fit_ev = refine_axle(C, N, A, m, px, py, R, step)
+            d = np.linalg.norm(C[:, :2] - np.array([px, py]), axis=1)
+            tread = ((np.sign(C[:, 2]) == sgn) & (np.abs(d - R) < 0.07 * R))
             if spec_tyre:
                 rim_r = R * (spec_tyre["rim_r_m"] / spec_tyre["radius_m"])
                 rim_src = "spec %s -> rim/tyre radius ratio %.3f" % (
@@ -459,6 +509,7 @@ def detect_wheels(lmesh, frame, spec_tyre=None, report=None):
                                 int(tread.sum())))
             row = dict(side=side, corner=end + side, rim_radius_source=rim_src,
                        radius_first_pass=round(R0, 4), radius_used=round(R, 4),
+                       axle_refit=fit_ev,
                        bottom_band_z=[round(z_lo, 4), round(z_hi, 4)],
                        tyre_width_m=round(abs(z_hi - z_lo), 4))
             if clamped:

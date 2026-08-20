@@ -19,13 +19,16 @@ WHAT IT MEASURES, per node, over a sweep of angles about the node's own axis:
   roundness_mm     spread (p2..p98) of the tread radius about the axis. Large
                    spread means the part is not a solid of revolution, so a
                    wobble reading has to be interpreted with that in mind.
-  clearance_mm     nearest distance from the rotating node to the STATIC parts
-                   of the car, at every angle. `at_rest` is the same number at
-                   0 deg. A drop from at_rest to min means the part eats into
-                   the body as it turns; an unchanged value means it does not.
-  penetration      the count of rotated vertices that end up closer to a static
-                   surface than the resting clearance minus a tolerance — the
-                   blunt "does it intersect the body" answer.
+  new_contact      THE INTERSECTION TEST, and it is a DIFFERENCE, not an
+                   absolute. A wheel carved out of a continuous shell already
+                   TOUCHES the arch at its cut boundary, so "nearest distance
+                   to the rest of the car" is 0.0 mm at rest and stays 0.0 mm
+                   however it turns — a number that can never fail and is
+                   therefore no test at all (the first version of this file
+                   reported exactly that, and it was worthless). What matters
+                   is a vertex that was CLEAR of the body at rest (>= 5 mm) and
+                   is inside it after turning (< 1 mm): that, and only that, is
+                   the part eating into the car.
 
 THE AXIS IS NOT ASSUMED. It is fitted from the node's own geometry: the
 direction of MINIMUM variance of the vertex cloud about the pivot is the axle
@@ -74,7 +77,16 @@ def main():
     ap.add_argument("--sample", type=int, default=60000,
                     help="vertices sampled per node for the clearance query")
     ap.add_argument("--tol-mm", type=float, default=1.0)
+    ap.add_argument("--axis", default="fit",
+                    help="'fit' (min-variance of the part) or 'x,y,z' to test "
+                         "the axle the exporter actually shipped. The two can "
+                         "disagree on a part carved out of a shell, and the "
+                         "shipped one is what a viewer will spin.")
     a = ap.parse_args()
+    forced = None
+    if a.axis != "fit":
+        forced = np.array([float(v) for v in a.axis.split(",")])
+        forced /= np.linalg.norm(forced)
 
     sc = trimesh.load(a.glb, force="scene", process=False)
     piv = {}
@@ -102,6 +114,9 @@ def main():
         Vs = [node_world(sc, n)[0] for n in nodes]
         V = np.vstack(Vs)
         axis, sv = fit_axis(V - pv)
+        axis_src = "fitted (min-variance)"
+        if forced is not None:
+            axis, axis_src = forced, "supplied: " + a.axis
         # every other geometry in the scene is the STATIC reference
         static = []
         for other in sc.graph.nodes_geometry:
@@ -115,36 +130,44 @@ def main():
         Vq = V if len(V) <= a.sample else V[rng.choice(len(V), a.sample,
                                                        replace=False)]
         r = np.linalg.norm(np.cross(Vq - pv, axis), axis=1)
-        lows, clears = [], []
+        R = float(np.percentile(r, 98))
+        # roundness is measured on the TREAD ONLY — the outer 4% radial band.
+        # Taken over the whole part it just reports that a wheel has a rim face
+        # at every radius from 0 to R, which says nothing about its circularity.
+        tread = r > 0.94 * R
+        d0, _ = tree.query(Vq, workers=-1)
+        was_clear = d0 >= 0.005
+        lows, newc = [], 0
         for k in range(a.steps):
             ang = 2 * np.pi * k / a.steps
             P = (Vq - pv) @ rot(axis, ang).T + pv
             lows.append(float(P[:, 1].min()))
-            d, _ = tree.query(P, workers=-1)
-            clears.append(float(d.min()))
-        rest = clears[0]
-        pen = 0
-        P0 = (Vq - pv) @ rot(axis, 2 * np.pi / a.steps).T + pv
-        d1, _ = tree.query(P0, workers=-1)
-        pen = int((d1 < rest - a.tol_mm / 1000.0).sum())
+            if k:
+                d, _ = tree.query(P, workers=-1)
+                newc = max(newc, int((was_clear &
+                                      (d < a.tol_mm / 1000.0)).sum()))
+        # the tread's own out-of-roundness bounds how much a correctly placed
+        # pivot can make the lowest point move, so it is reported alongside.
+        rr = r[tread]
+        oor = float(np.percentile(rr, 98) - np.percentile(rr, 2)) * 1000
         rows.append(dict(
             group=sorted(nodes), pivot_world=[round(float(v), 5) for v in pv],
-            fitted_axis=[round(float(v), 4) for v in axis],
+            axis=[round(float(v), 4) for v in axis], axis_source=axis_src,
             singular_values=[round(float(v), 3) for v in sv],
-            tread_radius_m=round(float(np.percentile(r, 98)), 4),
-            roundness_mm=round(float(np.percentile(r, 98) -
-                                     np.percentile(r, 60)) * 1000, 2),
+            tread_radius_m=round(R, 4),
+            tread_out_of_roundness_mm=round(oor, 2),
             lowest_point_m=round(float(np.mean(lows)), 5),
             wobble_mm=round((max(lows) - min(lows)) * 1000, 3),
-            clearance_at_rest_mm=round(rest * 1000, 2),
-            clearance_min_mm=round(min(clears) * 1000, 2),
-            clearance_loss_mm=round((rest - min(clears)) * 1000, 2),
-            penetrating_vertices_one_step=pen))
+            wobble_vs_roundness=round((max(lows) - min(lows)) * 1000 /
+                                      max(oor, 1e-6), 2),
+            new_contact_vertices=newc,
+            new_contact_rule="was >= 5 mm clear of the static car at rest and "
+                             "< %.0f mm from it after turning" % a.tol_mm))
     out["groups"] = rows
     worst = max(r["wobble_mm"] for r in rows)
-    loss = max(r["clearance_loss_mm"] for r in rows)
+    loss = max(r["new_contact_vertices"] for r in rows)
     out["summary"] = dict(
-        max_wobble_mm=worst, max_clearance_loss_mm=loss,
+        max_wobble_mm=worst, max_new_contact_vertices=loss,
         reading="wobble is the peak-to-peak height of the lowest point over a "
                 "full turn; on a pivot placed exactly on the axle of a round "
                 "part it is bounded by the part's own out-of-roundness")
