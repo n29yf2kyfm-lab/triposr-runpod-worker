@@ -1,0 +1,48 @@
+{
+  "_README": [
+    "Documented justifications for Khronos glTF-Validator messages, as the",
+    "Class-A spec requires. Used by:",
+    "    python3 pipeline/machine/gltf_validate.py car.glb --strict --allow pipeline/machine/gltf_warnings_allow.json",
+    "Under --strict a WARNING with no non-empty justification here FAILS the",
+    "gate. ERRORS are never waivable -- the spec allows zero and there is no",
+    "override. INFO and HINT codes never fail, but the ones we actually observe",
+    "are documented below so a future reader knows they were looked at rather",
+    "than ignored.",
+    "",
+    "STATUS as of 2026-08-20: the Golf Mk8 mobile export produces ZERO warnings",
+    "and ZERO errors, so nothing here is currently being relied on to pass."
+  ],
+
+  "_INFO_AND_HINT_CODES_OBSERVED": {
+    "UNSUPPORTED_EXTENSION": {
+      "severity": "INFO",
+      "seen_on": "both mobile builds",
+      "justification": "The validator has no schema for EXT_meshopt_compression or KHR_draco_mesh_compression, so it declines to check them. This is a statement about the validator's coverage, not a defect in the asset. Both extensions are declared in extensionsRequired and both were separately proven to load: viewer_check.py renders each build in real <model-viewer>/three.js with the matching decoder."
+    },
+    "UNUSED_OBJECT": {
+      "severity": "INFO",
+      "seen_on": "Draco build only, 6 occurrences on /bufferViews/2..7",
+      "justification": "FALSE ALARM, verified by direct inspection. Those bufferViews are referenced from primitives[].extensions.KHR_draco_mesh_compression.bufferView, and because the validator does not support that extension (see UNSUPPORTED_EXTENSION above) it cannot see the reference. A reference walk counting Draco extension bufferViews finds 0.000 MB unused in the 4.029 MB file -- every one of the 8 bufferViews is live. Do NOT 'fix' this by pruning."
+    },
+    "BUFFER_VIEW_TARGET_MISSING": {
+      "severity": "HINT",
+      "seen_on": "master only, 20 occurrences",
+      "justification": "bufferView.target is an optional hint that lets a loader bind a buffer without inspecting its accessors. Absent on the master; mobile_export sets it explicitly (34962 ARRAY_BUFFER / 34963 ELEMENT_ARRAY_BUFFER) when it rebuilds geometry, so the exports do not carry it."
+    },
+    "ACCESSOR_INDEX_TRIANGLE_DEGENERATE": {
+      "severity": "INFO",
+      "seen_on": "master only, 17 degenerate triangles of 660,134 in the interior mesh",
+      "justification": "Zero-area triangles. Harmless to render (they rasterise to nothing) but they are a symptom of the same mesh hygiene problem as the master's zero-length normals. Removed downstream by weld/simplify; the exports report none."
+    }
+  },
+
+  "_ERRORS_ON_THE_MASTER_NOT_WAIVED": {
+    "ACCESSOR_VECTOR3_NON_UNIT": {
+      "severity": "ERROR",
+      "count": 30,
+      "seen_on": "scratchpad/realgolf/golf_final.glb (the 65 MB master)",
+      "status": "NOT WAIVED -- this is a real defect in the master and is reported, not excused.",
+      "detail": "30 NORMAL vectors of length 0 in mesh 0 (carpaint). A zero normal makes lighting undefined for those vertices. The master therefore FAILS the spec's zero-error requirement as it stands. Both mobile exports report 0 errors because weld/simplify/quantize drop or renormalise the offending vertices -- but that is the export path incidentally cleaning up after the master, not the master being correct. Fixing it belongs with whoever owns the Golf geometry."
+    }
+  }
+}
