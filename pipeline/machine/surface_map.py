@@ -243,7 +243,18 @@ def main():
                              f"{base.fingerprint}")
         V = car.rewelded_like(base)
         mesh = trimesh.Trimesh(vertices=V, faces=base.Fw, process=False)
-        print(f"  scored in the frame of {os.path.basename(a.baseline)}")
+        # THE FEATURE MASK COMES FROM THE BASELINE TOO, not from this file.
+        # A repair changes dihedral angles, so a variant that recomputes its own
+        # feature mask CHANGES ITS OWN SCOREBOARD: softening an edge below the
+        # 25 deg threshold promotes it from "excluded feature" to "scored
+        # panel". Measured on this Golf, that alone moved the scored set from
+        # 142,371 to 152,784 faces -- 10,413 newly included faces, every one of
+        # them a former feature and therefore among the worst on the car -- and
+        # made a real improvement read as no change at all. Same trap as
+        # surface_score.py exists to avoid.
+        feat_src = base.mesh
+        print(f"  scored in the frame of {os.path.basename(a.baseline)} "
+              f"(faces AND feature mask both from the baseline)")
     else:
         if str(sel.get("fingerprint")) != car.fingerprint:
             raise SystemExit(f"REFUSED: selection fingerprint "
@@ -252,7 +263,8 @@ def main():
                              f"<master.glb> so it is scored on the master's "
                              f"faces.")
         mesh = car.mesh
-    feat = sm.feature_mask(mesh)
+        feat_src = mesh
+    feat = sm.feature_mask(feat_src)
     mask = panel & ~feat
     print(f"{a.glb}: mapping sigma_theta at {a.radius*1000:.0f}mm over "
           f"{int(mask.sum())} faces")
