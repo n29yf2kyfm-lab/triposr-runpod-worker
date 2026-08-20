@@ -74,7 +74,7 @@ of `rear_diag2.py`'s camera formula, not assumed.
 | 3 | Hatch, bumper and lamps structurally separate named components; no crack or hole in the body | **PASS** | **22 named meshes** (was 6). Max distance from any post-split paint vertex to a source `carpaint` vertex = **0.000 micron** — the split is a face RE-GROUPING, so a crack is impossible by construction. |
 | 4 | Rear lamp band is the correct WIDTH, ratio stated | **PASS on width / FAIL on left-right symmetry** | Total lens coverage **0.641** of the car's own rear-face width (1.4487 m), centre gap **0.370**. The source's painted band measures **0.638 / 0.362** by the identical method — so the rebuilt band matches the manufacturer's own landmark and is **not too wide**. **But R = 0.266 and L = 0.375: the two lamps differ by 41%.** See §2. |
 | 5 | Rear screen reads as real glass (probe on the FILE + production-style tile) | **PASS** | `Rear_Glass` is its own node, 11,019 faces, own material, `alphaMode BLEND`, baseColorFactor alpha **0.353** (factor transparency, no name trick needed). `pipeline/ingest/glass_probe.py` run verbatim on the file: **verdict clear / certainty proven**, `flat_shell` False, `alpha_shell` False. Production-style tile (transmission forced onto glass-named materials exactly as `render/handler.py` does) shows the screen as dark transmissive glass with the cabin behind it. |
-| 6 | Lamps hold their own colour through a body respray | **PASS** | Name-targeted respray of the material `carpaint` → blue. Lens mean RGB **[199.4, 81.8, 87.9] (red body) → [197.2, 83.1, 92.4] (blue body)** — unmoved, max channel delta 4.5/255. Hatch **[238.2, 91.7, 94.2] → [109.1, 143.4, 244.4]**; bumper [213.7, 86.8, 89.5] → [97.2, 130.4, 233.6]. |
+| 6 | Lamps hold their own colour through a body respray | **PASS** | Name-targeted respray of the material `carpaint` → blue. Lens mean RGB **[158.2, 64.4, 69.2] (red body) → [156.4, 65.3, 72.7] (blue body)** — unmoved, **max channel delta 3.5/255**. Hatch **[207.5, 72.0, 74.0] → [85.5, 112.7, 206.4]** (R−B flips +133.4 → −120.9); bumper [183.7, 68.5, 70.6] → [76.3, 102.7, 191.4]. Both tiles verified unclipped first — see §4.6. |
 | 7 | NORMAL accessors on every primitive (read from the WRITTEN file) + `gltf-transform validate` 0 errors | **PASS** | NORMAL present on **22/22** meshes, asserted by re-parsing the exported GLB. `gltf-transform validate rear_v3.glb`: **0 errors, 0 warnings** (HINTs only: `BUFFER_VIEW_TARGET_MISSING`). The source `car.glb` **fails** this — it carries `ACCESSOR_VECTOR3_NON_UNIT` errors on mesh 0. Fixed here: 596 zero-length vertex normals repaired, 23 degenerate faces dropped, UVs and the baked texture preserved. |
 
 Component inventory delivered: `Rear_Hatch`, `Rear_Quarter_L`, `Rear_Quarter_R`,
@@ -188,6 +188,14 @@ Recorded because withdrawing a finding is worth more than defending it.
    parameterisation for an inboard tail-face unit. Measured along +x at matched
    (y,z) the same unit is **0% buried at +28 mm median**. Each unit is now
    measured in the parameterisation it was built in.
+6. **My first production tiles were CLIPPED on 42.58% of car pixels** (70.5% of
+   the body's red channel), which is the AgX/white-tyre trap: a clipped render
+   is not evidence. Re-exposed and re-measured like-for-like — whole-car
+   clipping is now **0.82%** (production) and **0.07%** (blue control), the clay
+   is **0.00%** clipped at mean luminance 129.8. The criterion-6 numbers in the
+   table are the re-exposed ones. The original verdict survived because the
+   LENS pixels were only 0.6% clipped either way, but I should have checked
+   before writing the first numbers down, not after.
 5. A **p95** per-cell surface estimator was pulled short by the melt's dense
    interior points and seated the lens up to 150 mm inside the body. Caught by
    verifying the built lens against an independently measured surface profile

@@ -1,10 +1,17 @@
 #!/usr/bin/env python3
 """render_views.py — local Blender render of a GLB at named azimuths.
 
-AZIMUTH CONVENTION (verified by reading rear_diag2.py's camera formula and
-the glTF Y-up -> Blender Z-up import): for a length-on-X, y-up car,
-  az 90  = FRONT end-on (camera at +X)   az 270 = REAR end-on (camera at -X)
-  az 0/180 = side views                  az 215 = rear 3/4, az 305 = rear 3/4 other side
+AZIMUTH CONVENTION (read out of rear_diag2.py's camera formula plus the glTF
+Y-up -> Blender Z-up import, then CONFIRMED by render). The azimuth selects a
+camera POSITION, not a car end -- which end you see depends on the file:
+
+  az 90 puts the camera at glTF +X;  az 270 puts it at glTF -X
+  az 0/180 = side views;  az 35/125/215/305 = the four three-quarters
+
+  CLAUDE.md's "215 = rear 3/4" holds only for a NOSE-AT-+X car. On the g4 test
+  bed the tail is at +X, so there az 090 = straight rear and az 035 / az 125
+  are the rear 3/4s, while az 215 is a FRONT 3/4. ALWAYS confirm which end you
+  are looking at with one render before trusting a mapping.
 
 Modes:
   shaded  — as authored (materials kept), bright studio-ish
@@ -113,11 +120,14 @@ else:
 scn.render.resolution_x=1400; scn.render.resolution_y=900
 w=bpy.data.worlds.new("w"); w.use_nodes=True
 bg=w.node_tree.nodes["Background"]
-bg.inputs[0].default_value=(0.86,0.86,0.88,1)
-bg.inputs[1].default_value=(0.0 if MODE=="matid" else 1.2)
+bg.inputs[0].default_value=(0.86,0.86,0.88,1) if MODE!="clay" else (0.30,0.30,0.32,1)
+# EXPOSURE: the first production pass clipped 70.5% of the body's red channel.
+# A clipped render is not evidence (the AgX white-tyre lesson) -- dialled back
+# and verified numerically below.
+bg.inputs[1].default_value=(0.0 if MODE=="matid" else 0.75)
 scn.world=w
 if MODE!="matid":
-    for ang,en in ((35,4.0),(200,2.0)):
+    for ang,en in ((35,2.1),(200,1.05)):
         s=bpy.data.objects.new("s%d"%ang, bpy.data.lights.new("s%d"%ang,"SUN"))
         scn.collection.objects.link(s); s.data.energy=en
         s.rotation_euler=(math.radians(52),0,math.radians(ang))
