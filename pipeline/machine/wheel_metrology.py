@@ -76,20 +76,31 @@ except Exception:                               # pragma: no cover
 # ------------------------------------------------------------------ tunables
 DEFAULTS = dict(
     # Fraction of the angular bins around the axle a radius band must occupy
-    # before it can be called the tread. 0.85 passes a real tyre (which is
-    # 1.00 minus sampling gaps) and rejects an arch lip (~0.5 at best).
-    min_coverage=0.85,
+    # before it can be called the tread. A real tyre scores 1.00 here; the
+    # wrong local optima this detector must reject score 0.76-0.85, which is
+    # why the bar sits at 0.88 and not lower.
+    min_coverage=0.88,
     n_theta=72,                 # angular bins for the coverage test
     band_rel=0.030,             # tread band half-width, as a fraction of R
+    # --- vote
+    r_lo=0.18, r_hi=0.45, r_step=0.006,     # plausible car-tyre radius range
+    r_seed=0.31,                # multi-start radius seed (refit immediately)
+    vote_step=0.04, vote_pts=9000,
+    out_slab_m=0.28,            # depth of the OUTBOARD slab the wheel lives in
+    axle_min_sep_m=1.00,        # two axles are never closer than this
+    # --- refine
+    refine_iters=14, refine_band0=0.12, refine_band1=0.012,
+    refine_decay=0.82, trim_pct=78,
+    multistart_l=(-0.06, 0.0, 0.06), multistart_u=(-0.04, 0.0, 0.04),
+    # --- slab scan
+    slab_min_pts=200, width_pct=1.0,
+    # --- uncertainty
+    boot_n=48,                  # bootstrap resamples for angle uncertainty
+    boot_frac=0.60,
+    # names are used for NOTHING except splitting skin from wheel in the
+    # fender pass, and even there only as a hint that is checked.
     seed_names=("tyre", "tire", "rim", "wheel", "rubber", "alloy",
                 "hub", "disc", "caliper"),
-    # A seed cluster is only disc-like if its extents in the length/up plane
-    # agree with each other and dominate its lateral extent. The front bumper
-    # grille that shares the tyre material fails this by a factor of ten.
-    disc_ratio_max=1.60,        # max(ext_len, ext_up) / min(ext_len, ext_up)
-    disc_lat_max=1.05,          # ext_lat / min(ext_len, ext_up)
-    boot_n=64,                  # bootstrap resamples for angle uncertainty
-    boot_frac=0.60,
 )
 
 # Acceptance thresholds — the owner's Gate-6 numbers. Data, not logic.
@@ -181,138 +192,348 @@ def resolve_frame(meshes, nose="auto", spec=None):
                 evidence=ev)
 
 
-# ------------------------------------------------------------------ seeding
-def _clusters_1d(x, gap):
-    """Split sorted-able 1-D values into runs separated by more than `gap`."""
-    o = np.argsort(x)
-    xs = x[o]
-    cuts = np.where(np.diff(xs) > gap)[0]
-    groups, start = [], 0
-    for c in list(cuts) + [len(xs) - 1]:
-        groups.append(o[start:c + 1])
-        start = c + 1
-    return groups
+# ------------------------------------------------------------------ detector
+# The detector is deliberately NAME-FREE. It runs in three steps, each of
+# which is checked before the next is trusted:
+#
+#   1. VOTE      a coarse scan for axle candidates, scored by "is there a
+#                radius band here that wraps 360 degrees AND has emptiness
+#                just outside it". A door panel scores zero on the second
+#                half of that test even though it aces the first; that pair
+#                is what separates a tyre from any flat dense sheet.
+#   2. REFINE    a robust circle fit that sees ONLY the arc BELOW the axle.
+#                Nothing but the tyre lives under the hub outboard of the
+#                sill, so the fender, the arch lip and the liner cannot bias
+#                the centre. Multi-start, because the loose basin around a
+#                wheel has more than one local optimum and the wrong ones are
+#                measurably worse (coverage 0.83 against 1.00).
+#   3. SLAB      a scan across lateral slabs asking which of them still carry
+#                a 360-degree band at the fitted radius. That run of slabs IS
+#                the tyre, and its extent IS the section width. This is the
+#                step that makes the wrong Rim_Alloy/Tyre_Rubber binding
+#                irrelevant: the tread is found by where it is, not by what
+#                it is called.
 
 
-def seed_corners(meshes, fr, cfg):
-    """Four wheel seeds as (length, up, lateral) centres.
-
-    Strategy A (names): union the meshes whose name looks wheel-ish, split by
-    lateral sign, then cluster along the length axis and keep clusters that
-    pass the disc-likeness test. Strategy B (no names): a radius-band
-    symmetry vote over a coarse grid of candidate axles.
-    """
-    li, ti, ui = fr["li"], fr["ti"], fr["ui"]
-    V = np.vstack([v for v, _ in meshes.values()])
-    H = fr["hi"][ui] - fr["lo"][ui]
-
-    named = [v for n, (v, _) in meshes.items()
-             if any(k in n.lower() for k in cfg["seed_names"])]
-    seeds, how = [], "names+disc-likeness"
-    if named:
-        P = np.vstack(named)
-        P = P[P[:, ui] < fr["lo"][ui] + 0.60 * H]
-        for sgn in (+1, -1):
-            S = P[np.sign(P[:, ti] - 0.0) == sgn]
-            if len(S) < 200:
-                continue
-            for idx in _clusters_1d(S[:, li], gap=0.15):
-                if len(idx) < 200:
-                    continue
-                C = S[idx]
-                e = C.max(0) - C.min(0)
-                a, b = e[li], e[ui]
-                lo_, hi_ = min(a, b), max(a, b)
-                if lo_ < 1e-6:
-                    continue
-                if hi_ / lo_ > cfg["disc_ratio_max"]:
-                    continue
-                if e[ti] / lo_ > cfg["disc_lat_max"]:
-                    continue
-                seeds.append(dict(l=float(C[:, li].mean()),
-                                  u=float((C[:, ui].min() + C[:, ui].max()) / 2),
-                                  t=float(np.median(C[:, ti])),
-                                  r0=float(hi_ / 2), n=int(len(C))))
-    if len(seeds) < 4:
-        seeds, how = vote_corners(V, fr, cfg), "radius-band symmetry vote"
-    # keep the four strongest, one per (length-cluster x lateral-sign)
-    seeds.sort(key=lambda s: -s["n"])
-    keep = []
-    for s in seeds:
-        if all(abs(s["l"] - k["l"]) > 0.40 or np.sign(s["t"]) != np.sign(k["t"])
-               for k in keep):
-            keep.append(s)
-        if len(keep) == 4:
-            break
-    return keep, how
+def _circfit(x, y):
+    """Algebraic (Kasa) circle fit — the initialiser for the robust loop."""
+    A = np.column_stack([x, y, np.ones(len(x))])
+    b = x ** 2 + y ** 2
+    c, *_ = np.linalg.lstsq(A, b, rcond=None)
+    cx, cy = c[0] / 2, c[1] / 2
+    return float(cx), float(cy), float(np.sqrt(max(c[2] + cx ** 2 + cy ** 2, 1e-9)))
 
 
-def vote_corners(V, fr, cfg):
-    """Name-free fallback: score candidate axles by tread-band angular coverage."""
+def _coverage(theta, nth):
+    if len(theta) == 0:
+        return 0.0
+    b = ((theta + np.pi) / (2 * np.pi) * nth).astype(int) % nth
+    return len(np.unique(b)) / nth
+
+
+def vote_axles(V, fr, cfg):
+    """Coarse, name-free axle candidates. Returns up to 2 per lateral side."""
     li, ti, ui = fr["li"], fr["ti"], fr["ui"]
     H = fr["hi"][ui] - fr["lo"][ui]
-    L = fr["hi"][li] - fr["lo"][li]
+    g0 = fr["lo"][ui]
+    halfw = max(abs(fr["lo"][ti]), fr["hi"][ti])
+    rlo, rhi, dr = cfg["r_lo"], cfg["r_hi"], cfg["r_step"]
+    nth = cfg["n_theta"]
+    nb = int((rhi - rlo) / dr) + 6
+    rng = np.random.default_rng(0)
     out = []
     for sgn in (+1, -1):
         S = V[(np.sign(V[:, ti]) == sgn) &
-              (np.abs(V[:, ti]) > 0.45 * max(abs(fr["lo"][ti]), fr["hi"][ti])) &
-              (V[:, ui] < fr["lo"][ui] + 0.60 * H)]
-        if len(S) < 500:
+              (np.abs(V[:, ti]) > halfw - cfg["out_slab_m"]) &
+              (V[:, ui] < g0 + 0.60 * H)]
+        if len(S) < 800:
             continue
-        best = []
-        ls = np.arange(fr["lo"][li] + 0.10 * L, fr["hi"][li] - 0.10 * L, 0.03)
-        us = np.arange(fr["lo"][ui] + 0.10 * H, fr["lo"][ui] + 0.45 * H, 0.03)
-        for lc in ls:
-            for uc in us:
-                dl, du = S[:, li] - lc, S[:, ui] - uc
+        if len(S) > cfg["vote_pts"]:
+            S = S[rng.choice(len(S), cfg["vote_pts"], replace=False)]
+        res = []
+        for lc in np.arange(fr["lo"][li] + 0.25, fr["hi"][li] - 0.25, cfg["vote_step"]):
+            dl = S[:, li] - lc
+            for uc in np.arange(g0 + 0.12, g0 + 0.52, cfg["vote_step"]):
+                du = S[:, ui] - uc
                 r = np.hypot(dl, du)
-                near = r < 0.45 * H
-                if near.sum() < 200:
+                m = (r >= rlo) & (r < rhi + 4 * dr)
+                if m.sum() < 200:
                     continue
-                R, cov, _ = tread_radius(r[near],
-                                         np.arctan2(du[near], dl[near]), cfg)
-                if R is None:
-                    continue
-                best.append((cov * near.sum(), lc, uc, R, int(near.sum())))
-        best.sort(reverse=True)
+                ri = np.clip(((r[m] - rlo) / dr).astype(int), 0, nb - 1)
+                tb = ((np.arctan2(du[m], dl[m]) + np.pi) / (2 * np.pi) *
+                      nth).astype(int) % nth
+                acc = np.zeros((nb, nth), bool)
+                acc[ri, tb] = True
+                cov = acc.sum(1) / nth
+                for k in range(2, nb - 5):
+                    ci = cov[k - 1:k + 1].mean()
+                    co = cov[k + 2:k + 5].mean()
+                    res.append((ci - co, ci, co, float(lc), float(uc),
+                                float(rlo + k * dr)))
+        res.sort(reverse=True)
         picked = []
-        for sc_, lc, uc, R, n in best:
-            if all(abs(lc - p[1]) > 0.60 for p in picked):
-                picked.append((sc_, lc, uc, R, n))
+        for sc_, ci, co, lc, uc, R in res:
+            if all(abs(lc - p["l"]) > cfg["axle_min_sep_m"] for p in picked):
+                picked.append(dict(l=lc, u=uc, r0=R, side=sgn, score=float(sc_),
+                                   cov_in=float(ci), cov_out=float(co)))
             if len(picked) == 2:
                 break
-        for sc_, lc, uc, R, n in picked:
-            out.append(dict(l=float(lc), u=float(uc),
-                            t=float(np.median(S[:, ti])), r0=float(R), n=n))
+        out += picked
     return out
 
 
-# ------------------------------------------------------------- tread finding
-def tread_radius(r, th, cfg):
-    """Largest radius band that wraps the axle. Returns (R, coverage, mask).
+def refine_circle(V, fr, seed, cfg):
+    """Robust circle fit on the BELOW-AXLE arc only. Returns None if it fails."""
+    li, ti, ui = fr["li"], fr["ti"], fr["ui"]
+    sgn = seed["side"]
+    Vs = V[np.sign(V[:, ti]) == sgn]
+    lat = np.abs(Vs[:, ti])
+    lc, uc, R = seed["l"], seed["u"], seed["r0"]
+    tout = np.nan
+    for it in range(cfg["refine_iters"]):
+        d = np.hypot(Vs[:, li] - lc, Vs[:, ui] - uc)
+        inb = d < 1.25 * R
+        if inb.sum() < 200:
+            return None
+        tout = float(np.percentile(lat[inb], 99.8))
+        band = max(cfg["refine_band0"] * R * (cfg["refine_decay"] ** it),
+                   cfg["refine_band1"] * R)
+        m = (np.abs(d - R) <= band) & (lat >= tout - cfg["out_slab_m"]) & \
+            (Vs[:, ui] < uc + 0.08 * R)          # BELOW the axle only
+        if m.sum() < 120:
+            break
+        P = Vs[m]
+        cx, cy, Rn = lc, uc, R
+        for _ in range(3):
+            cx, cy, Rn = _circfit(P[:, li], P[:, ui])
+            res = np.abs(np.hypot(P[:, li] - cx, P[:, ui] - cy) - Rn)
+            keep = res <= np.percentile(res, cfg["trim_pct"])
+            if keep.sum() < 80:
+                break
+            P = P[keep]
+        lc, uc, R = cx, cy, Rn
+        if not (cfg["r_lo"] * 0.8 < R < cfg["r_hi"] * 1.2):
+            return None
+    d = np.hypot(Vs[:, li] - lc, Vs[:, ui] - uc)
+    th = np.arctan2(Vs[:, ui] - uc, Vs[:, li] - lc)
+    m = (np.abs(d - R) <= cfg["band_rel"] * R) & (lat >= tout - cfg["out_slab_m"])
+    cov = _coverage(th[m], cfg["n_theta"])
+    rms = float(np.sqrt(np.mean((d[m] - R) ** 2))) if m.sum() else float("nan")
+    return dict(l=float(lc), u=float(uc), R=float(R), side=sgn,
+                coverage=float(cov), n=int(m.sum()), rms=rms, t_out=tout)
 
-    Walks candidate radii downward from the outside. The first band whose
-    angular coverage clears `min_coverage` is the tyre tread: nothing else in
-    a wheel well goes all the way round.
+
+def find_wheels(V, fr, cfg):
+    """Vote -> multi-start refine -> keep the best fit per corner."""
+    li, ti, ui = fr["li"], fr["ti"], fr["ui"]
+    cands = vote_axles(V, fr, cfg)
+    fits = []
+    for c in cands:
+        best = None
+        for dl in cfg["multistart_l"]:
+            for du in cfg["multistart_u"]:
+                s = dict(c, l=c["l"] + dl, u=c["u"] + du, r0=cfg["r_seed"])
+                f = refine_circle(V, fr, s, cfg)
+                if f is None or f["coverage"] < cfg["min_coverage"]:
+                    continue
+                key = (round(f["coverage"], 2), f["n"], -f["rms"])
+                if best is None or key > best[0]:
+                    best = (key, f)
+        if best:
+            fits.append(best[1])
+    # de-duplicate: two seeds on the same side may converge to one wheel
+    keep = []
+    for f in sorted(fits, key=lambda f: (-round(f["coverage"], 2), -f["n"])):
+        if all(not (abs(f["l"] - k["l"]) < cfg["axle_min_sep_m"] and
+                    f["side"] == k["side"]) for k in keep):
+            keep.append(f)
+    return keep
+
+
+def slab_tread(V, fr, fit, cfg):
+    """The tyre's lateral band, and the tread point set the axis is fitted to.
+
+    THE WIDTH IS MEASURED ON THE ARC BELOW THE AXLE, AND ONLY THERE. That is
+    the one part of a wheel well where no body panel can reach: the fender,
+    the arch lip, the liner and the sill are all at or above hub height, so a
+    lateral histogram taken under the hub is the tyre and nothing else. The
+    measured histograms are flat-topped blocks with sharp edges — a 1st/99th
+    percentile pair reads the section width straight off them.
+
+    An earlier version instead asked each 10 mm lateral slab to prove its own
+    360-degree coverage. That was WRONG in a way worth recording: a slab that
+    thin holds too few tread vertices to fill 72 angular bins, so genuine tyre
+    slabs failed the test and the band was truncated to 10-40 mm. It reported
+    wheel widths of 0.010 m and, because the hub's lateral position is taken
+    from the band's mid-plane, it also moved three of the four hubs. A test
+    that silently shrinks its own sample is worse than no test.
     """
-    if len(r) < 100:
-        return None, 0.0, None
-    nth = cfg["n_theta"]
-    tb = ((th + np.pi) / (2 * np.pi) * nth).astype(int) % nth
-    hi = float(np.percentile(r, 99.9))
-    lo = 0.35 * hi
-    best = (None, 0.0, None)
-    for R in np.arange(hi, lo, -0.002):
-        half = cfg["band_rel"] * R
-        m = np.abs(r - R) <= half
-        if m.sum() < 60:
+    li, ti, ui = fr["li"], fr["ti"], fr["ui"]
+    Vs = V[np.sign(V[:, ti]) == fit["side"]]
+    d = np.hypot(Vs[:, li] - fit["l"], Vs[:, ui] - fit["u"])
+    lat = np.abs(Vs[:, ti])
+    near = d < 1.35 * fit["R"]
+    if near.sum() < 300:
+        return None
+    tout = float(np.percentile(lat[near], 99.8))
+    band = (np.abs(d - fit["R"]) <= cfg["band_rel"] * fit["R"]) & \
+           (lat >= tout - cfg["out_slab_m"])
+    low = band & (Vs[:, ui] < fit["u"] - 0.15 * fit["R"])     # below the axle
+    if low.sum() < cfg["slab_min_pts"]:
+        return None
+    p = cfg["width_pct"]
+    t_lo, t_hi = np.percentile(lat[low], [p, 100 - p])
+    # Once the band is known from the safe arc, take the FULL 360 degrees of
+    # tread inside it: the axis fit wants the whole circumference, and body
+    # skin cannot be inside a band that was measured where body skin is not.
+    m = band & (lat >= t_lo) & (lat <= t_hi)
+    return dict(t_lo=float(t_lo), t_hi=float(t_hi), width=float(t_hi - t_lo),
+                points=Vs[m], n=int(m.sum()), t_out=tout,
+                n_lower_arc=int(low.sum()),
+                width_method="1st-99th percentile of |lateral| over the tread "
+                             "band on the arc below the axle")
+
+
+# --------------------------------------------------------------------- pose
+# WHY THIS EXISTS. Toe is the angle between a wheel's axis and the CAR's
+# lateral axis. Camber is the angle between that axis and the CAR's ground
+# plane. Neither is defined against the scene's axes, and on this car the two
+# frames are measurably different: the body's lateral centreline drifts from
+# +0.044 m at the nose to -0.077 m at the tail (a residual YAW of ~1.8 deg),
+# and the two axles' hub heights differ by ~0.20 m over a 2.47 m wheelbase (a
+# residual PITCH of ~4.5 deg). Measuring toe against the scene axis would
+# have charged the whole yaw to the wheels — as toe-in on one flank and
+# toe-out on the other — and reported four alignment faults that are really
+# one placement fault.
+#
+# A yaw also inflates the axis-aligned bounding box, which matters beyond
+# this gate: an AABB is only the car's dimensions when the car is square to
+# the axes. See `pose_report` for the de-posed extents.
+
+
+def _sym_plane(V, fr, frac=0.85, nslab=40):
+    """Yaw and lateral offset of the car's symmetry plane.
+
+    Estimated from the lateral MIDPOINT of the silhouette in each length
+    slab: for a car square to the axes that midpoint is constant, and a yaw
+    makes it a straight line with slope -tan(yaw). Robust because it uses the
+    outermost points of each slab (the widest part of the body), not a
+    centroid, so interior clutter and one-sided melt cannot drag it.
+    """
+    li, ti, ui = fr["li"], fr["ti"], fr["ui"]
+    lo, hi = fr["lo"][li], fr["hi"][li]
+    half = (hi - lo) / 2
+    mid = (lo + hi) / 2
+    edges = np.linspace(mid - frac * half, mid + frac * half, nslab + 1)
+    xs, cs, ws = [], [], []
+    for i in range(nslab):
+        m = (V[:, li] >= edges[i]) & (V[:, li] < edges[i + 1]) & \
+            (V[:, ui] > fr["lo"][ui] + 0.12 * (fr["hi"][ui] - fr["lo"][ui])) & \
+            (V[:, ui] < fr["lo"][ui] + 0.65 * (fr["hi"][ui] - fr["lo"][ui]))
+        if m.sum() < 200:
             continue
-        cov = len(np.unique(tb[m])) / nth
-        if cov >= cfg["min_coverage"]:
-            return float(R), float(cov), m
-        if cov > best[1]:
-            best = (float(R), float(cov), m)
-    return best
+        S = V[m][:, ti]
+        xs.append((edges[i] + edges[i + 1]) / 2)
+        cs.append((np.percentile(S, 99.8) + np.percentile(S, 0.2)) / 2)
+        ws.append(m.sum())
+    if len(xs) < 8:
+        return dict(yaw_deg=0.0, lat_offset_m=0.0, n_slabs=len(xs),
+                    note="too few usable slabs; yaw not corrected")
+    x = np.array(xs); c = np.array(cs); w = np.sqrt(np.array(ws, float))
+    for _ in range(3):                       # trimmed, so a bumper cannot bend it
+        A = np.column_stack([x, np.ones(len(x))]) * w[:, None]
+        sol, *_ = np.linalg.lstsq(A, c * w, rcond=None)
+        res = np.abs(c - (sol[0] * x + sol[1]))
+        keep = res <= max(np.percentile(res, 80), 1e-6)
+        if keep.sum() < 6:
+            break
+        x, c, w = x[keep], c[keep], w[keep]
+    slope, intercept = float(sol[0]), float(sol[1])
+    return dict(yaw_deg=float(math.degrees(math.atan(slope))),
+                lat_offset_m=intercept, slope=slope, n_slabs=int(len(x)),
+                rms_m=float(np.sqrt(np.mean((c - (slope * x + intercept)) ** 2))),
+                method="lateral midpoint of the silhouette per length slab, "
+                       "trimmed weighted least squares")
+
+
+def _rot(axis_idx, ang):
+    c, s = math.cos(ang), math.sin(ang)
+    M = np.eye(3)
+    a, b = [i for i in range(3) if i != axis_idx]
+    M[a, a] = c; M[a, b] = -s; M[b, a] = s; M[b, b] = c
+    return M
+
+
+def solve_pose(V, fr, wheels):
+    """The rigid transform that squares the car to the axes and grounds it.
+
+    Three stages, each solved from the evidence that actually determines it:
+      YAW + lateral offset   from the body's symmetry plane
+      PITCH + ROLL + height  from the four tyre CONTACT points, least squares
+    The pitch/roll fit is over-determined (4 contacts, 3 freedoms) ON PURPOSE:
+    its residuals are the part of the grounding error that no rigid transform
+    can remove, which is precisely the part that needs the wheels themselves
+    changed. Reported as `contact_residual_m`.
+    """
+    from scipy.optimize import least_squares
+    li, ti, ui = fr["li"], fr["ti"], fr["ui"]
+    sym = _sym_plane(V, fr)
+    yaw = math.radians(sym["yaw_deg"])
+    Myaw = _rot(ui, -yaw if ui == 1 else yaw)
+    # verify the sign empirically rather than reasoning about handedness
+    def resid_yaw(M, off):
+        W = (V - off) @ M.T
+        s = _sym_plane(W, dict(fr, lo=list(W.min(0)), hi=list(W.max(0))))
+        return abs(s["yaw_deg"])
+    off = np.zeros(3); off[ti] = sym["lat_offset_m"]
+    best = None
+    for sgn in (+1, -1):
+        M = _rot(ui, sgn * yaw)
+        r = resid_yaw(M, off)
+        if best is None or r < best[0]:
+            best = (r, sgn, M)
+    yaw_res, yaw_sgn, Myaw = best
+
+    hubs = np.array([w["centre"] for w in wheels])
+    radii = np.array([w["R"] for w in wheels])
+    hubs_y = (hubs - off) @ Myaw.T
+
+    def res(p):
+        M = _rot(li, p[1]) @ _rot(ti, p[0])
+        H = hubs_y @ M.T
+        return H[:, ui] + p[2] - radii - fr["ground"] * 0
+
+    s = least_squares(res, [0.0, 0.0, 0.0])
+    pitch, roll, dz = float(s.x[0]), float(s.x[1]), float(s.x[2])
+    M = _rot(li, roll) @ _rot(ti, pitch) @ Myaw
+    t = -off @ M.T
+    t[ui] += dz
+    return dict(
+        yaw_deg=float(math.degrees(yaw_sgn * yaw)),
+        yaw_residual_deg=float(yaw_res),
+        lat_offset_m=float(sym["lat_offset_m"]),
+        pitch_deg=float(math.degrees(pitch)), roll_deg=float(math.degrees(roll)),
+        vertical_offset_m=dz,
+        contact_residual_m=[float(x) for x in s.fun],
+        contact_residual_rms_m=float(np.sqrt(np.mean(s.fun ** 2))),
+        matrix=[[float(x) for x in row] for row in M],
+        translation=[float(x) for x in t],
+        symmetry=sym,
+        note="apply as  p' = M @ p + t  to EVERY vertex in the scene")
+
+
+def pose_report(V, fr, pose):
+    """Bounding box before and after de-posing.
+
+    A yawed or pitched car reports an axis-aligned bounding box LARGER than
+    itself in every axis it is rotated about, so 'the AABB matches published
+    dimensions' is only a dimension check when the pose is square first.
+    """
+    M = np.array(pose["matrix"]); t = np.array(pose["translation"])
+    W = V @ M.T + t
+    return dict(aabb_before=[float(x) for x in (V.max(0) - V.min(0))],
+                aabb_after=[float(x) for x in (W.max(0) - W.min(0))],
+                min_after=[float(x) for x in W.min(0)])
 
 
 # --------------------------------------------------------------- cylinder fit
@@ -326,60 +547,54 @@ def _axis_from_angles(base, a, b):
     return v / np.linalg.norm(v)
 
 
-def fit_cylinder(P, c0, a0, R0, iters=4, cfg=DEFAULTS):
-    """Least-squares axis+radius of the tread band, re-selecting the band
-    each iteration so the fit is not anchored to the seed.
+def fit_cylinder(Q, c0, a0, R0):
+    """Least-squares axis + centre + radius of an already-isolated tread band.
 
-    Returns dict(centre, axis, R, band_mask, rms, n).
+    `Q` must be the tread point set from `slab_tread`. Deliberately does NOT
+    re-select its own points: the selection is the part that can go wrong, so
+    it is done once, in the open, by a step that can be inspected.
+
+    Five free parameters — two axis angles, two centre offsets in the plane
+    perpendicular to the axis, and the radius. The centre's position ALONG
+    the axis is not observable from a cylinder, so it is not fitted; the
+    lateral hub position comes from the tread band's own mid-plane.
     """
     from scipy.optimize import least_squares
     c, a, R = np.asarray(c0, float), np.asarray(a0, float), float(R0)
     a = a / np.linalg.norm(a)
-    mask = None
-    for _ in range(iters):
-        d = P - c
-        proj = d - np.outer(d @ a, a)
-        r = np.linalg.norm(proj, axis=1)
-        # angle within the plane perpendicular to the axis
-        tmp = np.array([1.0, 0, 0]) if abs(a[0]) < 0.9 else np.array([0, 1.0, 0])
-        e1 = np.cross(a, tmp); e1 /= np.linalg.norm(e1)
-        e2 = np.cross(a, e1)
-        th = np.arctan2(proj @ e2, proj @ e1)
-        Rn, cov, m = tread_radius(r, th, cfg)
-        if Rn is None:
-            break
-        R, mask = Rn, m
-        Q = P[m]
+    tmp = np.array([1.0, 0, 0]) if abs(a[0]) < 0.9 else np.array([0, 1.0, 0])
+    e1 = np.cross(a, tmp); e1 /= np.linalg.norm(e1)
+    e2 = np.cross(a, e1)
 
-        def res(p):
-            ax = _axis_from_angles(a, p[0], p[1])
-            cc = c + p[2] * e1 + p[3] * e2
-            dd = Q - cc
-            rr = np.linalg.norm(dd - np.outer(dd @ ax, ax), axis=1)
-            return rr - p[4]
+    def res(p):
+        ax = _axis_from_angles(a, p[0], p[1])
+        cc = c + p[2] * e1 + p[3] * e2
+        dd = Q - cc
+        rr = np.linalg.norm(dd - np.outer(dd @ ax, ax), axis=1)
+        return rr - p[4]
 
-        s = least_squares(res, [0.0, 0.0, 0.0, 0.0, R], method="lm",
-                          max_nfev=4000)
-        a = _axis_from_angles(a, s.x[0], s.x[1])
-        c = c + s.x[2] * e1 + s.x[3] * e2
-        R = float(s.x[4])
-        rms = float(np.sqrt(np.mean(s.fun ** 2)))
-    if mask is None:
-        return None
-    d = P - c
-    lat = d @ a
-    return dict(centre=c, axis=a, R=R, mask=mask, rms=rms,
-                n=int(mask.sum()), lat=lat, coverage=cov)
+    s = least_squares(res, [0.0, 0.0, 0.0, 0.0, R], method="lm", max_nfev=6000)
+    ax = _axis_from_angles(a, s.x[0], s.x[1])
+    cc = c + s.x[2] * e1 + s.x[3] * e2
+    d = Q - cc
+    lat = d @ ax
+    # put the reported centre on the tread band's mid-plane
+    cc = cc + ax * float(np.median(lat))
+    return dict(centre=cc, axis=ax, R=float(s.x[4]),
+                rms=float(np.sqrt(np.mean(s.fun ** 2))), n=int(len(Q)),
+                lat_span=(float(np.percentile(lat, 0.5)),
+                          float(np.percentile(lat, 99.5))))
 
 
-def bootstrap_axis(P, fit, cfg):
+def bootstrap_axis(Q, fit, cfg):
     """Standard error of the fitted axis direction, in degrees.
 
     The tolerance being tested (0.1 deg) is tighter than most generated
-    wheels are round, so the instrument has to state its own precision.
+    wheels are round, so the instrument has to state its own precision. When
+    this comes back larger than the tolerance, the number is not evidence and
+    `grade()` downgrades the criterion to NOT MEASURABLE rather than guessing.
     """
     from scipy.optimize import least_squares
-    Q = P[fit["mask"]]
     a0, c0 = fit["axis"], fit["centre"]
     tmp = np.array([1.0, 0, 0]) if abs(a0[0]) < 0.9 else np.array([0, 1.0, 0])
     e1 = np.cross(a0, tmp); e1 /= np.linalg.norm(e1)
@@ -398,7 +613,7 @@ def bootstrap_axis(P, fit, cfg):
             return rr - p[4]
 
         s = least_squares(res, [0.0, 0.0, 0.0, 0.0, fit["R"]], method="lm",
-                          max_nfev=800)
+                          max_nfev=1200)
         axes.append(_axis_from_angles(a0, s.x[0], s.x[1]))
     A = np.array(axes)
     A *= np.sign(A @ a0)[:, None]
@@ -408,114 +623,168 @@ def bootstrap_axis(P, fit, cfg):
 
 
 # ---------------------------------------------------------------- the measure
-def measure(path, spec=None, nose="auto", cfg=None, bootstrap=True):
+def _fit_all(V, fr, cfg, seeds=None):
+    li, ti, ui = fr["li"], fr["ti"], fr["ui"]
+    fits = find_wheels(V, fr, cfg) if seeds is None else \
+        [f for f in (refine_circle(V, fr, s, cfg) for s in seeds) if f]
+    wheels = []
+    for f in fits:
+        band = slab_tread(V, fr, f, cfg)
+        if band is None or band["n"] < 200:
+            continue
+        c0 = np.zeros(3)
+        c0[li], c0[ui] = f["l"], f["u"]
+        c0[ti] = f["side"] * (band["t_lo"] + band["t_hi"]) / 2
+        a0 = np.zeros(3); a0[ti] = 1.0
+        cyl = fit_cylinder(band["points"], c0, a0, f["R"])
+        cyl.update(circle=f, band=band, side=f["side"])
+        wheels.append(cyl)
+    return wheels
+
+
+def measure(path, spec=None, nose="auto", cfg=None, bootstrap=True,
+            canonicalise=True):
+    """Measure Gate 6 in the CAR's own frame.
+
+    Two passes. The first fits the wheels where they lie and hands the four
+    hub centres to `solve_pose`, which recovers the rigid transform that
+    squares the car to the axes and stands it on the ground. The second pass
+    re-fits everything AFTER that transform, so toe, camber, hub symmetry and
+    track are all expressed against the car, not against whatever pose the
+    file happens to have been saved in. `canonicalise=False` reports the raw
+    scene frame instead, which is only useful for showing what the pose cost.
+    """
     cfg = dict(DEFAULTS, **(cfg or {}))
-    meshes, sc = load_points(path)
+    if spec:
+        r = _spec_tyre_radius(spec)
+        if r:                       # search around the stated tyre
+            cfg["r_lo"], cfg["r_hi"] = 0.75 * r, 1.30 * r
+            cfg["r_seed"] = r
+    meshes, _ = load_points(path)
     fr = resolve_frame(meshes, nose=nose, spec=spec)
     li, ti, ui = fr["li"], fr["ti"], fr["ui"]
     V = np.vstack([v for v, _ in meshes.values()])
 
-    seeds, how = seed_corners(meshes, fr, cfg)
-    wheels = []
-    for s in seeds:
-        c0 = np.zeros(3)
-        c0[li], c0[ui], c0[ti] = s["l"], s["u"], s["t"]
-        a0 = np.zeros(3); a0[ti] = 1.0
-        # Draw from EVERY mesh inside a generous cylinder — the fit must not
-        # inherit the material binding it was seeded from.
-        rad = np.hypot(V[:, li] - c0[li], V[:, ui] - c0[ui])
-        box = (rad < 1.55 * s["r0"]) & (np.abs(V[:, ti] - c0[ti]) < 1.10 * s["r0"])
-        P = V[box]
-        if len(P) < 300:
-            continue
-        f = fit_cylinder(P, c0, a0, s["r0"], cfg=cfg)
-        if f is None:
-            continue
-        f["seed"] = s
-        f["points"] = P
-        wheels.append(f)
+    wheels = _fit_all(V, fr, cfg)
+    pose = solve_pose(V, fr, wheels) if len(wheels) == 4 else None
+    prep = pose_report(V, fr, pose) if pose else None
+    if pose and canonicalise:
+        M = np.array(pose["matrix"]); t = np.array(pose["translation"])
+        V = V @ M.T + t
+        meshes = {n: (v @ M.T + t, f) for n, (v, f) in meshes.items()}
+        fr = resolve_frame(meshes, nose=("+" if fr["nose"] > 0 else "-"),
+                           spec=spec)
+        seeds = []
+        for w in wheels:
+            c = M @ w["centre"] + t
+            seeds.append(dict(l=float(c[li]), u=float(c[ui]), r0=w["R"],
+                              side=(1 if c[ti] > 0 else -1)))
+        wheels = _fit_all(V, fr, cfg, seeds=seeds)
+    return _finish(path, meshes, V, fr, wheels, cfg, spec, bootstrap, pose,
+                   prep, canonicalise)
+
+
+def _finish(path, meshes, V, fr, wheels, cfg, spec, bootstrap, pose, prep,
+            canonicalise):
+    li, ti, ui = fr["li"], fr["ti"], fr["ui"]
+    # After canonicalisation the ground plane IS the axis origin by
+    # construction. Before it, the lowest vertex is the only ground evidence
+    # available and is used as such, with the assumption stated in the output.
+    ground = 0.0 if canonicalise else (
+        0.0 if abs(fr["ground"]) < 5e-3 else fr["ground"])
 
     # ---- corner labels
     for w in wheels:
-        c = w["centre"]
-        w["side"] = "+" if c[ti] > 0 else "-"
+        w["side_s"] = "+" if w["centre"][ti] > 0 else "-"
     if len(wheels) == 4:
         order = sorted(range(4), key=lambda i: wheels[i]["centre"][li])
-        lo_idx = set(order[:2])          # the two smallest length coords
+        lo_idx = set(order[:2])
         for i, w in enumerate(wheels):
             w["axle"] = "lo" if i in lo_idx else "hi"
     for w in wheels:
-        if fr["nose"] == 0:
-            w["corner"] = ("A" if w.get("axle") == "lo" else "C") + w["side"]
+        if fr["nose"] == 0 or len(wheels) != 4:
+            w["corner"] = (w.get("axle", "?")[0].upper() + w["side_s"])
         else:
-            front = (w.get("axle") == "lo") == (fr["nose"] < 0)
-            # +lateral is the car's LEFT when looking along the nose direction
+            front = (w["axle"] == "lo") == (fr["nose"] < 0)
             left = (w["centre"][ti] > 0) == (fr["nose"] < 0)
             w["corner"] = ("F" if front else "R") + ("L" if left else "R")
 
-    # ---- per-wheel numbers
-    up = np.zeros(3); up[ui] = 1.0
-    lenv = np.zeros(3); lenv[li] = 1.0
-    latv = np.zeros(3); latv[ti] = 1.0
-    ground = 0.0 if abs(fr["ground"]) < 5e-3 else fr["ground"]
+    # ---- unit vectors of the car frame
+    upv = np.zeros(3); upv[ui] = 1.0
+    fwd = np.zeros(3); fwd[li] = float(fr["nose"]) if fr["nose"] else 1.0
 
     rows = []
     for w in wheels:
-        a = w["axis"] * (1 if w["axis"][ti] > 0 else -1)
-        c = w["centre"]
-        tread = w["points"][w["mask"]]
-        lat = (tread - c) @ a
-        # tyre width = full lateral span of the tread band, trimmed
-        wlo, whi = np.percentile(lat, [0.5, 99.5])
-        width = float(whi - wlo)
-        # outer sidewall: widest |lateral| anywhere on the tyre carcass
-        d = w["points"] - c
-        rr = np.linalg.norm(d - np.outer(d @ a, a), axis=1)
-        car = w["points"][(rr > 0.62 * w["R"]) & (rr < 1.02 * w["R"])]
-        out_lat = float(np.percentile(np.abs(car[:, ti]), 99.0))
-
-        # toe: axis rotated about UP, measured against the pure lateral axis
-        toe = math.degrees(math.atan2(a[li], abs(a[ti])))
-        # camber: NEGATIVE camber leans the wheel top inboard. Sign is taken
-        # relative to the car's outboard direction for this corner.
-        outw = 1.0 if c[ti] > 0 else -1.0
-        camber = math.degrees(math.asin(np.clip(a[ui] * outw *
-                                                (1 if a[ti] * outw > 0 else -1),
-                                                -1, 1)))
-        se = bootstrap_axis(w["points"], w, cfg) if bootstrap else float("nan")
-
+        c, R = w["centre"], w["R"]
+        outw = np.zeros(3); outw[ti] = 1.0 if c[ti] > 0 else -1.0
+        a = w["axis"] * (1.0 if float(w["axis"] @ outw) > 0 else -1.0)  # outboard
+        # toe-IN is positive: rotating the wheel's leading edge toward the
+        # centreline swings the OUTBOARD axis toward the nose, so a . fwd > 0.
+        toe = math.degrees(math.asin(np.clip(float(a @ fwd), -1, 1)))
+        # negative camber leans the wheel TOP inboard, which tilts the
+        # outboard axis UP, so a . up > 0 <=> negative camber.
+        camber = -math.degrees(math.asin(np.clip(float(a @ upv), -1, 1)))
+        se = bootstrap_axis(w["band"]["points"], w, cfg) if bootstrap \
+            else float("nan")
         rows.append(dict(
-            corner=w["corner"], side=w["side"], axle=w.get("axle"),
+            corner=w["corner"], side=w["side_s"], axle=w.get("axle"),
             centre=[float(x) for x in c],
             hub_length=float(c[li]), hub_up=float(c[ui]), hub_lat=float(c[ti]),
             axis=[float(x) for x in a],
-            radius_m=float(w["R"]), width_m=width,
-            tread_points=int(w["n"]), tread_coverage=float(w["coverage"]),
+            radius_m=float(R), width_m=float(w["band"]["width"]),
+            tread_points=int(w["n"]),
+            tread_coverage=float(w["circle"]["coverage"]),
             fit_rms_m=float(w["rms"]),
-            bottom_m=float(c[ui] - w["R"] - ground),
+            circle_rms_m=float(w["circle"]["rms"]),
+            bottom_m=float(c[ui] - R - ground),
             toe_deg=float(toe), camber_deg=float(camber),
             axis_se_deg=float(se),
-            outer_sidewall_lat=out_lat,
+            tread_lat_lo=float(w["band"]["t_lo"]),
+            tread_lat_hi=float(w["band"]["t_hi"]),
         ))
-    rows.sort(key=lambda r: (r["corner"]))
+    rows.sort(key=lambda r: r["corner"])
 
-    out = dict(file=os.path.abspath(path), frame=fr, seed_method=how,
-               n_wheels=len(rows), wheels=rows,
-               ground_plane=float(ground),
-               axes=dict(length=li, lateral=ti, up=ui))
-    _derive(out, V, fr, spec, cfg)
+    out = dict(file=os.path.abspath(path), frame=fr,
+               seed_method="name-free radius-band vote + below-axle robust "
+                           "circle refine + below-axle lateral tread band",
+               measured_in=("car frame (pose corrected)" if canonicalise
+                            else "raw scene frame"),
+               n_wheels=len(rows), wheels=rows, ground_plane=float(ground),
+               axes=dict(length=li, lateral=ti, up=ui),
+               pose=pose, pose_effect=prep)
+    _derive(out, fr, spec)
+    out["_meshes"] = meshes          # car-frame vertices for the second pass
     return out
 
 
-def _derive(out, V, fr, spec, cfg):
-    """Axle-level and body-relative numbers."""
-    li, ti, ui = fr["li"], fr["ti"], fr["ui"]
+def _spec_tyre_radius(spec):
+    """Rolling radius from a tyre spec string like '225/45R17'."""
+    import re
+    s = ((spec or {}).get("tyre") or {}).get("spec") or ""
+    m = re.match(r"\s*(\d{3})\s*/\s*(\d{2})\s*R\s*(\d{2})", s)
+    if not m:
+        return None
+    w, ar, rim = float(m.group(1)), float(m.group(2)), float(m.group(3))
+    return (rim * 25.4 / 2 + ar / 100.0 * w) / 1000.0
+
+
+def _spec_tyre_width(spec):
+    import re
+    s = ((spec or {}).get("tyre") or {}).get("spec") or ""
+    m = re.match(r"\s*(\d{3})\s*/", s)
+    return float(m.group(1)) / 1000.0 if m else None
+
+
+def _derive(out, fr, spec):
+    """Axle-level numbers. Each axle is derived ONLY from its own two wheels —
+    the owner asked for front and rear track measured independently, so no
+    quantity here is ever averaged across axles."""
     rows = out["wheels"]
     by = {r["corner"]: r for r in rows}
     out["axles"] = {}
-    for pre in ("F", "R", "A", "C"):
+    for pre in ("F", "R", "L", "H"):
         L, Rt = by.get(pre + "L"), by.get(pre + "R")
-        if pre in ("A", "C"):
+        if pre in ("L", "H"):
             L, Rt = by.get(pre + "+"), by.get(pre + "-")
         if not (L and Rt):
             continue
@@ -534,23 +803,29 @@ def _derive(out, V, fr, spec, cfg):
                              width_m=float(max(ww) - min(ww)),
                              radius_mean_m=float(np.mean(rr)),
                              width_mean_m=float(np.mean(ww)))
-        fl = [r for r in rows if r["corner"][0] in "FA"]
-        rl = [r for r in rows if r["corner"][0] in "RC"]
+        fl = [r for r in rows if r["axle"] == ("lo" if fr["nose"] < 0 else "hi")]
+        rl = [r for r in rows if r not in fl]
         if fl and rl:
-            out["wheelbase_m"] = float(abs(np.mean([r["hub_length"] for r in fl])
-                                           - np.mean([r["hub_length"] for r in rl])))
-            # rigid pitch implied by the hub line
-            dl = np.mean([r["hub_length"] for r in fl]) - \
-                np.mean([r["hub_length"] for r in rl])
-            du = np.mean([r["hub_up"] for r in fl]) - \
-                np.mean([r["hub_up"] for r in rl])
-            out["hub_line_pitch_deg"] = float(math.degrees(math.atan2(du, dl)))
-
-    # ---- fender relationship + arch intersection, per wheel
-    body = None
-    for name, (v, _) in out.get("_meshes", {}).items():        # pragma: no cover
-        pass
-    out["fender"] = {}
+            lf = float(np.mean([r["hub_length"] for r in fl]))
+            lr = float(np.mean([r["hub_length"] for r in rl]))
+            out["wheelbase_m"] = abs(lf - lr)
+            # Rigid pitch implied by the hub line, and by the CONTACT line.
+            # They differ when the two axles carry different radii, which is
+            # exactly the case this car turns out to be, so both are reported.
+            uf = float(np.mean([r["hub_up"] for r in fl]))
+            ur = float(np.mean([r["hub_up"] for r in rl]))
+            bf = float(np.mean([r["bottom_m"] for r in fl]))
+            br = float(np.mean([r["bottom_m"] for r in rl]))
+            out["hub_line_pitch_deg"] = float(
+                math.degrees(math.atan2(uf - ur, lf - lr)))
+            out["contact_line_pitch_deg"] = float(
+                math.degrees(math.atan2(bf - br, lf - lr)))
+            out["float_front_m"], out["float_rear_m"] = bf, br
+        if spec:
+            r = _spec_tyre_radius(spec)
+            w = _spec_tyre_width(spec)
+            out["spec_tyre"] = dict(spec=((spec.get("tyre") or {}).get("spec")),
+                                    radius_m=r, section_width_m=w)
     return out
 
 
@@ -565,51 +840,56 @@ def fender_and_arch(path, m, cfg=None):
     cfg = dict(DEFAULTS, **(cfg or {}))
     meshes, _ = load_points(path)
     li, ti, ui = m["axes"]["length"], m["axes"]["lateral"], m["axes"]["up"]
-    skin = {n: v for n, (v, _) in meshes.items()
-            if not any(k in n.lower() for k in cfg["seed_names"])}
-    if not skin:
-        return m
-    S = np.vstack(list(skin.values()))
+    ALL = np.vstack([v for v, _ in meshes.values()])
     for r in m["wheels"]:
         c = np.array(r["centre"]); a = np.array(r["axis"]); R = r["radius_m"]
-        d = S - c
-        rad = np.linalg.norm(d - np.outer(d @ a, a), axis=1)
+        Wd = r["width_m"]
+        d = ALL - c
         lat = d @ a
-        outw = 1.0 if r["hub_lat"] > 0 else -1.0
-        up_half = (S[:, ui] - c[ui]) > -0.15 * R
-        lip = (rad > 1.00 * R) & (rad < 1.30 * R) & up_half & \
-              (np.abs(lat) < 1.20 * r["width_m"])
-        if lip.sum() > 30:
-            lip_lat = float(np.percentile(np.abs(S[lip][:, ti]), 98.0))
-        else:
-            lip_lat = float("nan")
+        rad = np.linalg.norm(d - np.outer(lat, a), axis=1)
+        # ---- the TYRE carcass, defined geometrically: sidewall + tread, i.e.
+        # the annulus outboard of the rim well, inside the wheel's own lateral
+        # band. This is what the mission means by "the tyre is the annulus
+        # outside the rim radius about the wheel axis"; nothing here consults
+        # a material name, because on this car the names are wrong.
+        carcass = (rad > 0.62 * R) & (rad < 1.02 * R) & \
+                  (np.abs(lat) < 0.62 * Wd)
+        r["outer_sidewall_lat"] = float(
+            np.percentile(np.abs(ALL[carcass][:, ti]), 99.0)) \
+            if carcass.sum() > 50 else float("nan")
+        r["carcass_points"] = int(carcass.sum())
+        # ---- the FENDER LIP: body skin in the annulus just outside the tyre,
+        # in the upper part of the arch. Everything that is not inside the
+        # wheel cylinder is treated as skin, so a mis-bound material cannot
+        # move the lip either.
+        not_wheel = ~((rad < 1.02 * R) & (np.abs(lat) < 0.70 * Wd))
+        up_half = (ALL[:, ui] - c[ui]) > -0.10 * R
+        lip = not_wheel & (rad > 1.00 * R) & (rad < 1.35 * R) & up_half & \
+              (np.abs(lat) < 1.20 * Wd)
+        lip_lat = float(np.percentile(np.abs(ALL[lip][:, ti]), 98.0)) \
+            if lip.sum() > 30 else float("nan")
         r["fender_lip_lat"] = lip_lat
-        # positive = tyre proud of the fender, negative = tucked inside
+        # positive = tyre proud of the fender, negative = tucked inside it
         r["sidewall_vs_fender_m"] = float(r["outer_sidewall_lat"] - lip_lat)
         r["fender_lip_points"] = int(lip.sum())
-        # arch intersection: skin inside the tyre swept volume
-        inside = (rad < 0.985 * R) & (np.abs(lat) < 0.48 * r["width_m"])
+        # ---- arch intersection: any non-wheel geometry inside the swept volume
+        inside = not_wheel & (rad < 0.97 * R) & (np.abs(lat) < 0.48 * Wd)
         r["arch_intersect_points"] = int(inside.sum())
-        if inside.sum():
-            r["arch_intersect_depth_m"] = float(R - rad[inside].min())
-        else:
-            r["arch_intersect_depth_m"] = 0.0
-        # contact patch: tyre geometry within 2 mm of the ground plane
-        W = np.vstack([v for n, (v, _) in meshes.items()
-                       if any(k in n.lower() for k in cfg["seed_names"])]) \
-            if any(any(k in n.lower() for k in cfg["seed_names"]) for n in meshes) \
-            else None
-        r["contact_patch"] = _contact(W if W is not None else S, c, a, R,
-                                      r["width_m"], m["ground_plane"], li, ti, ui)
+        r["arch_intersect_depth_m"] = float(R - rad[inside].min()) \
+            if inside.sum() else 0.0
+        # ---- contact patch, from the tyre carcass only
+        r["contact_patch"] = _contact(ALL[carcass], c, a, R, Wd,
+                                      m["ground_plane"], li, ti, ui)
     return m
 
 
 def _contact(P, c, a, R, W, ground, li, ti, ui):
+    if len(P) == 0:
+        return dict(points=0, note="no tyre carcass points")
     d = P - c
     rad = np.linalg.norm(d - np.outer(d @ a, a), axis=1)
     lat = d @ a
-    near = (rad > 0.90 * R) & (np.abs(lat) < 0.60 * W) & \
-           (P[:, ui] < ground + 0.004)
+    near = (rad > 0.90 * R) & (P[:, ui] < ground + 0.004)
     if near.sum() < 3:
         return dict(points=int(near.sum()), note="no geometry within 4 mm of ground")
     Q = P[near]
