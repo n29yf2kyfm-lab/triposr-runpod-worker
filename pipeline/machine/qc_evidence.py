@@ -122,11 +122,26 @@ GLASS_TOK = ("glass", "window", "windscreen", "windshield", "screen", "glazing",
 # never be read as a position cue. Same for the interior rear-view mirror,
 # which contains "rear" and sits at the FRONT of the cabin.
 GLASS_NOT = ("mirror", "rearview", "rear_view", "icon", "button", "instrument",
-             "dash", "aircondition")
+             "dash", "aircondition",
+             # LAMP LENSES ARE NOT GLAZING. Measured on a catalogue Avensis:
+             # `glass_only` came back with 70 objects visible because the lamp
+             # lenses are named `orangeglass` and `redglass` and the substring
+             # "glass" matched them. That is the same lamp-lens-votes-on-
+             # glazing trap CLAUDE.md records costing a real glazing verdict.
+             "orangeglass", "redglass", "amberglass", "lampglass",
+             "headlight", "headlamp", "taillight", "taillamp", "indicator")
+# `backlight` is NOT excluded above, and that is deliberate. It means the REAR
+# WINDSCREEN as often as it means a tail lamp, and this is an isolation VIEW,
+# not a verdict: including an ambiguous item that a reviewer can see and
+# discount is strictly safer than silently dropping a real rear screen.
 BODY_TOK = ("carpaint", "paint", "body", "shell", "lack")
 INTERIOR_TOK = ("interior", "cabin", "seat", "dash", "trim", "cockpit")
 LAMP_TOK = ("lamp", "headlight", "headlamp", "taillight", "taillamp",
-            "tail_light", "head_light", "lens", "light")
+            "tail_light", "head_light", "lens", "light",
+            # Catalogue cars name their lamp lenses by COLOUR, not by function.
+            # Without these the Avensis produced no lamp at all and the explode
+            # correctly but uselessly reported SKIPPED.
+            "orangeglass", "redglass", "amberglass")
 WHEEL_TOK = ("tyre", "tire", "rubber", "rim", "alloy", "wheel", "hub",
              "brake", "disc", "disk", "caliper", "spoke")
 
@@ -1108,6 +1123,20 @@ def run_worker(plan_path):
         if pname in ("glass_only", "interior_only", "body_hidden"):
             n = visible_count(pname)
             meta["objects_visible"] = n
+            # RECORD THE SELECTION, not just its size. An isolation pass is a
+            # name match, and a name match is exactly the thing that has gone
+            # wrong repeatedly here (lamp lenses called `redglass`, a
+            # windscreen called `Widnwos`). A reviewer who can see WHICH
+            # materials were counted can audit the view; one who is given only
+            # a count cannot.
+            sel = set()
+            for o in carparts:
+                if o.hide_render:
+                    continue
+                for s in o.material_slots:
+                    if s.material:
+                        sel.add(s.material.name)
+            meta["selected_materials"] = sorted(sel)[:40]
             if n == 0:
                 # An isolation pass with nothing in it is EVIDENCE (there is no
                 # glass / no interior), not an error — but it must be labelled,
