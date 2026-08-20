@@ -47,15 +47,25 @@ def preflight(corpus, index):
         d = json.load(f)
     n_img, n_ann = len(d["images"]), len(d["annotations"])
 
+    # CHECK THE PATHS THE INDEX ACTUALLY RECORDS, not a sha against one
+    # directory. The corpus stopped being a single images/ folder when CarDD
+    # arrived as merged640/cardd/, and the index records its files as
+    # "cardd/images/x.jpg". Testing sha-in-listdir("images") declared all 2,816
+    # of them missing while the real question -- does rec["file"] resolve? --
+    # was never asked. materialise_index joins rec["file"] onto the corpus
+    # root, so that join is the thing to verify.
+    missing, checked = 0, 0
+    for ln in open(os.path.join(index, "images.jsonl")):
+        rec = json.loads(ln)
+        checked += 1
+        if not os.path.exists(os.path.join(corpus, rec["file"])):
+            missing += 1
     shas = set()
     for ln in open(os.path.join(index, "images.jsonl")):
         shas.add(json.loads(ln)["sha"])
-
-    idir = os.path.join(corpus, "images")
-    on_disk = set(os.listdir(idir)) if os.path.isdir(idir) else set()
-    missing = sum(1 for s in shas if s[:20] + ".jpg" not in on_disk)
     if missing:
-        problems.append(f"{missing:,} indexed images are not on disk")
+        problems.append(f"{missing:,} of {checked:,} indexed images do not "
+                        f"resolve under {corpus}")
 
     with open(os.path.join(index, "classes.json")) as f:
         classes = json.load(f)
@@ -71,7 +81,8 @@ def preflight(corpus, index):
         if not splits.get(need):
             problems.append(f"index has no {need} samples")
 
-    print(f"corpus   {n_img:,} images, {n_ann:,} boxes, {len(on_disk):,} files")
+    print(f"corpus   {n_img:,} images, {n_ann:,} boxes, "
+          f"{checked - missing:,}/{checked:,} index paths resolve")
     print(f"index    {len(shas):,} originals, classes {names}")
     print(f"samples  " + ", ".join(f"{k} {v:,}" for k, v in
                                    sorted(splits.items())))
@@ -135,6 +146,29 @@ def upload_shards(api, repo, img_dir, shard_mb, scratch):
         shards.append(cur)
 
     print(f"\n{len(names):,} images -> {len(shards)} shards of ~{shard_mb}MB")
+
+    # THE RESUME CHECK IS BY NAME, SO THE PLAN MUST NOT HAVE MOVED.
+    # Membership is decided by packing sorted filenames into shard_mb buckets,
+    # so changing shard_mb re-cuts every boundary while the NAMES stay
+    # images_0000..N. Skipping "already uploaded" names then skips shards whose
+    # contents are no longer what was uploaded, and the union of old-and-new
+    # can omit images entirely -- a corpus quietly missing files, discovered on
+    # a paid pod. Running this at 400MB against a repo sharded at 500MB
+    # produced exactly that: 34 planned, 27 skipped by name, 7 uploaded, and no
+    # guarantee the 167,157 images were still covered.
+    #
+    # A differing count is the visible symptom, so it stops here.
+    prior = {f for f in existing if f.startswith("shards/images_")}
+    if prior and len(prior) != len(shards):
+        raise SystemExit(
+            f"refusing to resume: the repo holds {len(prior)} images_*.tar "
+            f"shards but this plan plans {len(shards)}. Shard membership is "
+            f"decided by --shard-mb, so a different value re-cuts every "
+            f"boundary while the names stay the same, and resuming by name "
+            f"would skip shards whose contents have changed. Re-run with the "
+            f"--shard-mb the repo was built at, or delete shards/images_*.tar "
+            f"and re-upload the whole family.")
+
     for i, members in enumerate(shards):
         remote = f"shards/images_{i:04d}.tar"
         if remote in existing:
@@ -152,6 +186,85 @@ def upload_shards(api, repo, img_dir, shard_mb, scratch):
             repo_id=repo, repo_type="dataset"), remote)
         os.remove(local)          # under 4GB free: never hold two shards
     print(f"\nall {len(shards)} shards uploaded")
+
+
+def upload_extra_sources(api, repo, corpus, shard_mb, scratch):
+    """Shard every source BENEATH the corpus root that is not top-level images/.
+
+    THE TWO SHARD FAMILIES, AND WHY THERE ARE TWO
+    ---------------------------------------------
+    The original 27 `images_NNNN.tar` shards hold BARE filenames, and train.sh
+    extracts them into merged640/images/. That is 14GB already uploaded and
+    re-cutting it to change the arcnames would cost hours of transfer to
+    achieve nothing.
+
+    A second source cannot join that family. CarDD lives at merged640/cardd/
+    and the index records "cardd/images/x.jpg", so its files have to land at
+    that path and a bare arcname cannot express it. So extra sources go up as
+    `src_NNNN.tar` whose members are paths RELATIVE TO THE CORPUS ROOT, and
+    train.sh extracts that family into merged640/ rather than merged640/images/.
+
+    The rule is one line on each side and it generalises: any future source
+    dropped under the corpus root ships correctly with no further changes.
+    """
+    import tarfile
+    os.makedirs(scratch, exist_ok=True)
+    existing = {f for f in api.list_repo_files(repo, repo_type="dataset")
+                if f.startswith("shards/")}
+
+    # Every image under a source directory other than the top-level images/.
+    # Found by walking for annotation files, the same way build_train_index
+    # discovers sources, so the two cannot disagree about what a source is.
+    files = []
+    for dirpath, _dirnames, filenames in os.walk(corpus):
+        if "_annotations.coco.json" not in filenames:
+            continue
+        rel = os.path.relpath(dirpath, corpus)
+        if rel == ".":
+            continue                      # the images_* family already has it
+        idir = os.path.join(dirpath, "images")
+        if not os.path.isdir(idir):
+            continue
+        for fn in sorted(os.listdir(idir)):
+            files.append((os.path.join(rel, "images", fn).replace(os.sep, "/"),
+                          os.path.join(idir, fn)))
+    files.sort()
+    if not files:
+        print("\nno extra sources beneath the corpus root")
+        return
+
+    budget = shard_mb * 1024 * 1024
+    shards, cur, cur_bytes = [], [], 0
+    for arc, path in files:
+        sz = os.path.getsize(path)
+        if cur and cur_bytes + sz > budget:
+            shards.append(cur)
+            cur, cur_bytes = [], 0
+        cur.append((arc, path))
+        cur_bytes += sz
+    if cur:
+        shards.append(cur)
+
+    srcs = sorted({a.split("/")[0] for a, _p in files})
+    print(f"\nextra sources {srcs}: {len(files):,} images -> "
+          f"{len(shards)} shards of ~{shard_mb}MB")
+    for i, members in enumerate(shards):
+        remote = f"shards/src_{i:04d}.tar"
+        if remote in existing:
+            print(f"  [{i+1}/{len(shards)}] {remote} already uploaded")
+            continue
+        local = os.path.join(scratch, os.path.basename(remote))
+        with tarfile.open(local, "w") as tf:
+            for arc, path in members:
+                tf.add(path, arcname=arc)
+        mb = os.path.getsize(local) / 1e6
+        print(f"  [{i+1}/{len(shards)}] {remote}  {len(members):,} images  "
+              f"{mb:.0f}MB", flush=True)
+        retry_call(lambda: api.upload_file(
+            path_or_fileobj=local, path_in_repo=remote,
+            repo_id=repo, repo_type="dataset"), remote)
+        os.remove(local)
+    print(f"all {len(shards)} extra-source shards uploaded")
 
 
 def main():
@@ -199,6 +312,7 @@ def main():
 
     upload_shards(api, a.repo, os.path.join(a.corpus, "images"),
                   a.shard_mb, a.scratch)
+    upload_extra_sources(api, a.repo, a.corpus, a.shard_mb, a.scratch)
     print(f"\ndone: https://huggingface.co/datasets/{a.repo}")
     print(f"set CORPUS_REPO={a.repo} for train.sh")
 

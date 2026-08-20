@@ -602,19 +602,30 @@ else:
     raise SystemExit("corpus fetch failed after 6 attempts")
 print("corpus at", p)
 
-img_dir = "/workspace/corpus/merged640/images"
+root_dir = "/workspace/corpus/merged640"
+img_dir = os.path.join(root_dir, "images")
 os.makedirs(img_dir, exist_ok=True)
 shards = sorted(f for f in os.listdir("/workspace/corpus/shards")
                 if f.endswith(".tar"))
+# TWO SHARD FAMILIES, DISTINGUISHED BY NAME. See publish_corpus.
+#   images_NNNN.tar  bare filenames  -> merged640/images/
+#   src_NNNN.tar     root-relative   -> merged640/   (e.g. cardd/images/x.jpg)
+# The corpus stopped being one flat folder when CarDD arrived, and the index
+# records "cardd/images/x.jpg". Extracting that family flat would put the file
+# where nothing looks for it, and materialise_index would fail image by image
+# after the whole download had been paid for.
 def untar(name):
+    dest = img_dir if name.startswith("images_") else root_dir
     with tarfile.open(os.path.join("/workspace/corpus/shards", name)) as tf:
-        tf.extractall(img_dir)
+        tf.extractall(dest)
     return name
 with cf.ThreadPoolExecutor(8) as ex:
     for n in ex.map(untar, shards):
         print("extracted", n, flush=True)
 n = len(os.listdir(img_dir))
-print(f"{n} images extracted from {len(shards)} shards")
+extra = sum(len(fs) for _d, _sd, fs in os.walk(root_dir)) - n
+print(f"{n} images extracted from {len(shards)} shards "
+      f"({extra} more under extra sources)")
 # The materialise step would otherwise fail image by image, long after the
 # download is paid for.
 assert n > 100000, f"only {n} images extracted"
