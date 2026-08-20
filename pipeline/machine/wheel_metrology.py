@@ -794,7 +794,14 @@ def _derive(out, fr, spec):
             hub_long_asym_m=float(abs(L["hub_length"] - Rt["hub_length"])),
             hub_up_asym_m=float(abs(L["hub_up"] - Rt["hub_up"])),
             radius_diff_m=float(abs(L["radius_m"] - Rt["radius_m"])),
-            total_toe_deg=float(L["toe_deg"] - Rt["toe_deg"]),
+            width_diff_m=float(abs(L["width_m"] - Rt["width_m"])),
+            # Per-wheel toe is signed so that POSITIVE IS TOE-IN on both
+            # flanks, so the axle's total toe is their SUM and the axle's own
+            # yaw relative to the body ("thrust", or a steered axle) is half
+            # their difference. Subtracting them, as an earlier version did,
+            # silently reported a 2.45-degree rear toe-in as -0.007.
+            total_toe_deg=float(L["toe_deg"] + Rt["toe_deg"]),
+            axle_yaw_deg=float((L["toe_deg"] - Rt["toe_deg"]) / 2.0),
         )
     if len(rows) == 4:
         rr = [r["radius_m"] for r in rows]
@@ -858,14 +865,21 @@ def fender_and_arch(m, cfg=None):
             np.percentile(np.abs(ALL[carcass][:, ti]), 99.0)) \
             if carcass.sum() > 50 else float("nan")
         r["carcass_points"] = int(carcass.sum())
-        # ---- the FENDER LIP: body skin in the annulus just outside the tyre,
-        # in the upper part of the arch. Everything that is not inside the
-        # wheel cylinder is treated as skin, so a mis-bound material cannot
-        # move the lip either.
+        # ---- the FENDER: the body skin DIRECTLY ABOVE the tyre.
+        # Three candidate definitions were measured against each other on
+        # this car (see the module docstring's method note). Two of them
+        # sampled an ANNULUS around the axle and both came back ASYMMETRIC on
+        # a body that is symmetric once the yaw is removed — 0.812 against
+        # 0.762 across the front axle — because an annulus reaches past the
+        # arch lip onto the sill and the bumper, and how far it reaches
+        # depends on local geometry that differs corner to corner. The crown
+        # window below reads 0.8005/0.8072 front and 0.8315/0.8316 rear: the
+        # left/right agreement on a symmetric body is the evidence that it is
+        # measuring the fender and not something else. It is also the surface
+        # the criterion is actually about — the metal the sidewall must clear.
         not_wheel = ~((rad < 1.02 * R) & (np.abs(lat) < 0.70 * Wd))
-        up_half = (ALL[:, ui] - c[ui]) > -0.10 * R
-        lip = not_wheel & (rad > 1.00 * R) & (rad < 1.35 * R) & up_half & \
-              (np.abs(lat) < 1.20 * Wd)
+        lip = not_wheel & (np.abs(ALL[:, li] - c[li]) < 0.25 * R) & \
+            (ALL[:, ui] > c[ui] + R) & (ALL[:, ui] < c[ui] + 1.5 * R)
         lip_lat = float(np.percentile(np.abs(ALL[lip][:, ti]), 98.0)) \
             if lip.sum() > 30 else float("nan")
         r["fender_lip_lat"] = lip_lat
@@ -904,6 +918,45 @@ def _contact(P, c, a, R, W, ground, li, ti, ui):
 def _v(ok, measured, thr, method, note=""):
     return dict(verdict=("PASS" if ok else "FAIL"), measured=measured,
                 threshold=thr, method=method, note=note)
+
+
+
+def _angle_verdict(val, se, tol, method, k=2.0):
+    """Three-way verdict that respects the instrument's own precision.
+
+    A bootstrap SE of 0.17 deg cannot certify a 0.10 deg tolerance — but it
+    can still REFUTE it. A wheel measured at 1.23 deg with SE 0.15 is seven
+    standard errors outside a 0.1 deg band, and calling that "not measurable"
+    would hide a real fault behind the instrument. So:
+
+        |val| - k*se >  tol   ->  FAIL           (confidently out)
+        |val| + k*se <= tol   ->  PASS           (confidently in)
+        otherwise             ->  NOT MEASURABLE (the tolerance is inside the
+                                                  instrument's noise band)
+
+    k = 2 standard errors, i.e. roughly 95%.
+    """
+    if not np.isfinite(se):
+        return dict(verdict="NOT MEASURABLE", measured=round(val, 4),
+                    threshold=f"+-{tol}", method=method,
+                    note="no uncertainty estimate available "
+                         "(bootstrap disabled)")
+    lo, hi = abs(val) - k * se, abs(val) + k * se
+    note = f"|value| = {abs(val):.3f} deg, axis SE {se:.3f} deg, " \
+           f"{k:.0f}-SE interval [{max(lo, 0):.3f}, {hi:.3f}] deg"
+    if lo > tol:
+        return dict(verdict="FAIL", measured=round(val, 4),
+                    threshold=f"+-{tol}", method=method,
+                    note=note + " — the whole interval is outside tolerance")
+    if hi <= tol:
+        return dict(verdict="PASS", measured=round(val, 4),
+                    threshold=f"+-{tol}", method=method,
+                    note=note + " — the whole interval is inside tolerance")
+    return dict(verdict="NOT MEASURABLE", measured=round(val, 4),
+                threshold=f"+-{tol}", method=method,
+                note=note + " — the tolerance falls inside the instrument's "
+                            "noise band; this mesh is not round enough to "
+                            "settle it either way")
 
 
 def grade(m, spec=None):
@@ -952,18 +1005,11 @@ def grade(m, spec=None):
         se = r["axis_se_deg"]
         for key, tol in (("toe", TOL["toe_deg"]), ("camber", TOL["camber_deg"])):
             val = r[f"{key}_deg"]
-            if not np.isfinite(se) or se > tol:
-                g[f"{key}_{cn}"] = dict(
-                    verdict="NOT MEASURABLE", measured=round(val, 4),
-                    threshold=f"+-{tol}",
-                    method="axis of revolution from a least-squares cylinder fit to the tread band",
-                    note=f"bootstrap SE of the fitted axis is {se:.3f} deg, "
-                         f"which is larger than the {tol} deg tolerance: the "
-                         f"mesh is not round enough to defend a number this tight")
-            else:
-                g[f"{key}_{cn}"] = _v(abs(val) <= tol, round(val, 4), f"+-{tol}",
-                                      "cylinder-fit axis of revolution",
-                                      f"axis SE {se:.3f} deg")
+            g[f"{key}_{cn}"] = _angle_verdict(val, se, tol,
+                                              "axis of revolution from a "
+                                              "least-squares cylinder fit to "
+                                              "the tread band, in the car "
+                                              "frame")
         g[f"ground_{cn}"] = _v(
             abs(r["bottom_m"]) <= TOL["ground_m"], round(r["bottom_m"], 5),
             f"+-{TOL['ground_m']}",
