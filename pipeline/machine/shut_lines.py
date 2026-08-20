@@ -70,6 +70,7 @@ THRESH = int(os.environ.get("LINE_THRESH", "18"))
 TOL_FRAC = float(os.environ.get("SEG_DEPTH_TOL_FRAC", "0.0025"))
 THIN = os.environ.get("LINE_THIN", "1") == "1"
 SHARP = os.environ.get("LINE_SHARP", "1") == "1"
+MIN_LEN = int(os.environ.get("LINE_MIN_LEN", "40"))
 PAINT_HINT = os.environ.get("LINE_PAINT_MAT", "carpaint")
 
 sc = trimesh.load(INP, force="scene")
@@ -134,12 +135,28 @@ def line_image(vname, R):
     # the SILHOUETTE is a dark edge against the background and is not a gap
     edge = cv2.dilate((~alpha).astype(np.uint8), kd).astype(bool)
     lines &= ~edge
+    # LENGTH FILTER — and this one is why the first sharp pass FAILED. Thinning
+    # plus full-depth displacement turned every speck of texture mottle into its
+    # own little groove, and the finished door read as scratched paint. Crease
+    # density went 35.9 -> 126.7 and looked like a triumph; it was measuring
+    # NOISE, which is the exact failure mode that metric is documented to have
+    # ("a noisy scan scores high for the wrong reason").
+    # A shut line is a LONG CONNECTED STRUCTURE. Baked-lighting mottle is a
+    # scatter of small blobs. Keep components whose bounding box spans at least
+    # MIN_LEN pixels — that separates them cleanly and costs nothing.
+    n, lab, stats, _ = cv2.connectedComponentsWithStats(
+        lines.astype(np.uint8), connectivity=8)
+    keep = np.zeros(n, bool)
+    for i in range(1, n):
+        w = stats[i, cv2.CC_STAT_WIDTH]
+        h = stats[i, cv2.CC_STAT_HEIGHT]
+        keep[i] = max(w, h) >= MIN_LEN
+    lines = keep[lab]
     # SKELETONISE. Black-hat returns a BAND several pixels wide around a gap,
-    # and a band displaced with soft shoulders becomes a shallow DISH, not a
-    # line — measured: at 1.2mm the door shut was invisible and at 4.0mm it was
-    # still soft, because the depth was spread across the band's whole width.
-    # A shut line has to be NARROW to read. Thinning to a single-pixel spine
-    # concentrates the full depth where the gap actually is.
+    # and a band displaced with soft shoulders becomes a shallow DISH — measured
+    # at 1.2mm (invisible) and 4.0mm (still soft) because the depth was spread
+    # across the band's whole width. Thinning to a single-pixel spine puts the
+    # full depth where the gap actually is.
     if THIN:
         lines = skeletonize(lines)
     return lines
