@@ -55,6 +55,7 @@ import sys
 
 import cv2
 import numpy as np
+from skimage.morphology import skeletonize
 import trimesh
 from PIL import Image
 
@@ -67,6 +68,8 @@ MIN_SCORE = float(os.environ.get("LINE_MIN_SCORE", "0.35"))
 KERNEL = int(os.environ.get("LINE_BH_KERNEL", "7"))
 THRESH = int(os.environ.get("LINE_THRESH", "18"))
 TOL_FRAC = float(os.environ.get("SEG_DEPTH_TOL_FRAC", "0.0025"))
+THIN = os.environ.get("LINE_THIN", "1") == "1"
+SHARP = os.environ.get("LINE_SHARP", "1") == "1"
 PAINT_HINT = os.environ.get("LINE_PAINT_MAT", "carpaint")
 
 sc = trimesh.load(INP, force="scene")
@@ -131,6 +134,14 @@ def line_image(vname, R):
     # the SILHOUETTE is a dark edge against the background and is not a gap
     edge = cv2.dilate((~alpha).astype(np.uint8), kd).astype(bool)
     lines &= ~edge
+    # SKELETONISE. Black-hat returns a BAND several pixels wide around a gap,
+    # and a band displaced with soft shoulders becomes a shallow DISH, not a
+    # line — measured: at 1.2mm the door shut was invisible and at 4.0mm it was
+    # still soft, because the depth was spread across the band's whole width.
+    # A shut line has to be NARROW to read. Thinning to a single-pixel spine
+    # concentrates the full depth where the gap actually is.
+    if THIN:
+        lines = skeletonize(lines)
     return lines
 
 
@@ -171,14 +182,23 @@ if sel.sum() == 0:
     raise SystemExit("REFUSED: nothing scored — engraving nothing would ship a "
                      "file identical to its input while claiming a fix")
 
-# per-VERTEX weight from face scores, so the groove has soft shoulders rather
-# than a one-triangle cliff that reads as faceting
+# PER-VERTEX WEIGHT. v1 averaged the face scores into the vertices to give the
+# groove "soft shoulders" and avoid a one-triangle cliff. That was the wrong
+# instinct and it is what made the first two passes fail: averaging spreads the
+# displacement over the band's full width, so the result is a shallow dish that
+# the shading cannot catch. A real shut line is a narrow, deep, HARD-EDGED
+# feature — the cliff is the point.
 vw = np.zeros(len(V), np.float32)
-cnt = np.zeros(len(V), np.float32)
-np.add.at(vw, Ffaces.ravel(), np.repeat(norm, 3))
-np.add.at(cnt, Ffaces.ravel(), 1.0)
-vw[cnt > 0] /= cnt[cnt > 0]
-vw[vw < MIN_SCORE] = 0.0
+if SHARP:
+    # a vertex belonging to ANY scoring face goes to full depth
+    hitf = np.where(sel)[0]
+    vw[Ffaces[hitf].ravel()] = 1.0
+else:
+    cnt = np.zeros(len(V), np.float32)
+    np.add.at(vw, Ffaces.ravel(), np.repeat(norm, 3))
+    np.add.at(cnt, Ffaces.ravel(), 1.0)
+    vw[cnt > 0] /= cnt[cnt > 0]
+    vw[vw < MIN_SCORE] = 0.0
 
 gm.fix_normals()
 vn = gm.vertex_normals
