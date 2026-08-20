@@ -218,9 +218,32 @@ def main():
     bad = ln[:, 0] < 1e-9
     nrm = nrm / ln.clip(1e-12)
     if bad.any():
-        nrm[bad] = np.asarray(wm.vertex_normals)[inv2[bad]]
+        # ORPHAN VERTICES: referenced by no surviving face, so nothing
+        # accumulated into them. Filling these from the WELDED vertex normal
+        # does not work and silently makes things worse -- a welded vertex with
+        # no faces has a zero normal too, so the zero is copied straight back.
+        # That regression took this file from the master's 30 zero-length
+        # normals to 797 while printing "996 filled" and looking successful.
+        # A zero-length normal is a hard glTF validator error even on a vertex
+        # nothing draws, so the value must be a real unit vector: take the
+        # nearest REFERENCED vertex's normal, which is already unit.
+        good = ~bad
+        if good.any():
+            from scipy.spatial import cKDTree
+            _, kk = cKDTree(Vc[good]).query(Vc[bad], k=1, workers=-1)
+            nrm[bad] = nrm[good][kk]
+        else:
+            nrm[bad] = np.array([0.0, 1.0, 0.0])
+    ln2 = np.linalg.norm(nrm, axis=1)
+    still = int((np.abs(ln2 - 1.0) > 1e-4).sum())
+    if still:
+        raise SystemExit(f"REFUSED: {still} normals are still not unit length "
+                         f"-- shipping these is the validator error this file "
+                         f"exists to remove")
+    rep["orphan_normals_filled"] = int(bad.sum())
     print(f"  normals: {ngrp} smoothing groups at {a.smooth_deg:.0f}deg, "
-          f"{int(bad.sum())} filled from the welded normal")
+          f"{int(bad.sum())} orphan vertices filled from the nearest "
+          f"referenced vertex; all {len(nrm)} normals verified unit")
     for gn, (s, n) in offs.items():
         g = sc.geometry[gn]
         Ti = np.linalg.inv(car.slices[gn][3])
