@@ -648,6 +648,13 @@ def op_snapshot(a):
                "bytes": int(sum(b.nbytes for b in data.values()))}
     else:
         raise ValueError(f"mode must be 'blend' or 'verts', got {mode!r}")
+    # session bookkeeping travels WITH the snapshot. It lives in STATE, not in
+    # the .blend, so without this a restore rolls the scene back while `ping`
+    # and `info` keep reporting the last-loaded path — measured after restoring
+    # a 592k-vert car over a 471k-vert one. A harness that misreports which car
+    # it is holding is worse than one that cannot restore at all.
+    rec["glb"] = STATE["glb"]
+    rec["selection"] = list(STATE["selection"])
     SNAPS.append(rec)
     dropped = _evict_if_needed()
     return {"name": name, "mode": mode, "snapshot_s": round(time.time() - t, 2),
@@ -695,7 +702,10 @@ def op_restore(a):
             raise RuntimeError("no snapshots to restore")
         rec = SNAPS[-1]
     r = _restore(rec)
-    r.update({"name": rec["name"], "mode": rec["mode"]})
+    STATE["glb"] = rec.get("glb")
+    STATE["selection"] = list(rec.get("selection", []))
+    r.update({"name": rec["name"], "mode": rec["mode"], "glb": STATE["glb"],
+              "selection": STATE["selection"]})
     if a.get("pop"):
         SNAPS.remove(rec)
         if rec["mode"] == "blend":

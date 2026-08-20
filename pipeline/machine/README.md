@@ -31,6 +31,48 @@ This directory is the owner's own 3D machine: every stage proven in the
   the standard ceiling; watch `runtime.uptimeInSeconds` + GPU util, never
   `desiredStatus`.
 
+## Live repair harness (`blender_live.py` + `blender_cmd.py`)
+
+Every other stage above is one cold `blender -b` per operation. The live
+harness keeps ONE scene resident behind a unix socket and takes JSON
+commands, so an iterative repair — nudge, render, judge, nudge again —
+does not pay boot+import per nudge.
+
+```sh
+B=pipeline/machine/blender_cmd.py
+python3 $B start  --sock /tmp/golf.sock --glb car.glb   # ~3.0 s, paid once
+python3 $B calibrate --sock /tmp/golf.sock              # PROVE Standard, not AgX
+python3 $B select --sock /tmp/golf.sock --regex glass
+python3 $B snapshot --sock /tmp/golf.sock --name pre --mode verts
+python3 $B apply  --sock /tmp/golf.sock --repair translate --dz 0.01
+python3 $B render --sock /tmp/golf.sock --out /tmp/a.png --az 45
+python3 $B undo   --sock /tmp/golf.sock                 # revert if it looked wrong
+python3 $B stop   --sock /tmp/golf.sock --clean
+python3 $B replay /tmp/golf.sock.jsonl --glb car.glb    # the session, as a batch
+```
+
+Measured on `golf_final.glb` (65 MB, 592,715 verts / 983,512 faces):
+
+| | cold `blender -b` | live session |
+|---|---|---|
+| one 700px/16spp view | 8.24–9.18 s | 4.31–4.51 s |
+| info / select / measure | 8.2 s | 3–5 ms server-side |
+| glTF import | 3.18 s every time | 3.18 s once |
+
+* **Blender's own undo does NOT work in `-b`** — `ed.undo` raises
+  `poll() failed, context is incorrect` and the mutation survives. Use
+  `snapshot`/`restore`/`undo`: `mode=blend` is full fidelity
+  (0.13 s / 0.6 s, 158 MB, capped at 4 and refuses under 2 GB free),
+  `mode=verts` is geometry-only (0.01 s / 0.02 s, 7 MB) and REPORTS what
+  it could not restore instead of silently restoring nothing.
+* `calibrate` renders a 0.22 emission card and asserts sRGB 129.1 ±3 —
+  the executable form of the AgX trap that once produced a false
+  white-tyre verdict. Run it before trusting any render from a session.
+* Judge geometry with `measure`, not `object.bound_box`: bound_box is
+  cached and does not move when a `foreach_set` moves the mesh.
+* The repair argument is `repair`, not `op` — `op` is the request's own
+  reserved field.
+
 ## Rules the machine inherits
 
 * The render is the arbiter — no metric or gate overrules the blue/red
