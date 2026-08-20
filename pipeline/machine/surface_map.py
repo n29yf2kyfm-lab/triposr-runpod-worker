@@ -219,16 +219,39 @@ def main():
     ap.add_argument("--npy", default=None)
     ap.add_argument("--layer-report", action="store_true")
     ap.add_argument("--zones", action="store_true")
+    ap.add_argument("--baseline", default=None,
+                    help="master glb; score this variant in ITS weld frame")
     ap.add_argument("--json", default=None)
     a = ap.parse_args()
 
     car = bs.Car(a.glb)
     sel = np.load(a.select, allow_pickle=True)
     panel = sel["panel"]
-    if str(sel.get("fingerprint")) != car.fingerprint:
-        raise SystemExit(f"REFUSED: selection fingerprint "
-                         f"{sel.get('fingerprint')} != {car.fingerprint}")
-    mesh = car.mesh
+    if a.baseline:
+        # A REPAIRED file welds in a DIFFERENT ORDER from its own baseline --
+        # the weld is np.unique over a quantised coordinate key, so moving a
+        # vertex moves its slot -- and its fingerprint therefore never matches
+        # the selection built on the master. That is the fingerprint guard
+        # doing its job, not a false alarm: the mask really is invalid against
+        # this file's own weld. The fix is to score the variant IN THE
+        # BASELINE'S FRAME, exactly as surface_score.py does, so the mask, the
+        # face indices and the map all refer to the same faces on both sides.
+        base = bs.Car(a.baseline)
+        if str(sel.get("fingerprint")) != base.fingerprint:
+            raise SystemExit(f"REFUSED: selection fingerprint "
+                             f"{sel.get('fingerprint')} != baseline "
+                             f"{base.fingerprint}")
+        V = car.rewelded_like(base)
+        mesh = trimesh.Trimesh(vertices=V, faces=base.Fw, process=False)
+        print(f"  scored in the frame of {os.path.basename(a.baseline)}")
+    else:
+        if str(sel.get("fingerprint")) != car.fingerprint:
+            raise SystemExit(f"REFUSED: selection fingerprint "
+                             f"{sel.get('fingerprint')} != {car.fingerprint}. "
+                             f"If this is a REPAIRED file, pass --baseline "
+                             f"<master.glb> so it is scored on the master's "
+                             f"faces.")
+        mesh = car.mesh
     feat = sm.feature_mask(mesh)
     mask = panel & ~feat
     print(f"{a.glb}: mapping sigma_theta at {a.radius*1000:.0f}mm over "
