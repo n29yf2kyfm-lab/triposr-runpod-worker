@@ -74,10 +74,18 @@ emits three provenance classes and the report states which is which:
     absent— reported as NOT ACHIEVABLE (doors, bonnet, hatch as opening
             parts). No empty node is ever created to make a checklist pass.
 
+THE BAKED ATLAS IS DELIBERATELY NOT CARRIED OVER. The input's paint texture
+has the capture's own LIGHTING baked into it, which the production brief bans
+from base colour, and it covers only part of the car (see the colour-prior
+measurement above), so keeping it would light half a car and leave the rest
+flat. Its one useful signal — the body's own colour — is measured out of it
+and written as a factor. The cost is honest and is stated in the report:
+badge, grille texels and plate lettering do not survive as texture.
+
 Run:
     python3 semantic_rebind.py --glb in.glb --out out.glb \
         [--spec pipeline/machine/specs/vw_golf_mk8.json] \
-        [--report out.json] [--keep-paint-texture] [--no-cut-bumpers]
+        [--report out.json] [--no-cut-bumpers]
 
     python3 semantic_rebind.py --glb in.glb --measure-only --report r.json
 """
@@ -1033,6 +1041,66 @@ def paint_colour_from_texture(scene):
     return None, dict(source="no textured donor — paint colour left at default")
 
 
+def welded_normals(wmesh, crease_deg=50.0):
+    """Vertex normals for the WHOLE car, welded across the fragment soup and
+    computed ONCE so every part slices out of the same field.
+
+    Two defects this closes, both already paid for in this project:
+      * a trimesh submesh export carries NO vertex normals at all (measured
+        here: 0 NORMAL accessors on 31 primitives), so every triangle shades
+        flat and the studio clearcoat renders the car as crumpled foil. Three
+        eye audits blamed "generator surfacing" for that shading bug (v7).
+      * welding PER GEOMETRY, the way normals_fix.py does it, puts a hard
+        shading edge wherever this operator splits ONE continuous painted skin
+        into two nodes — the bumper cut would draw a crease across the paint
+        that no geometry justifies. The labels are labels; the surface is one
+        surface, so the normal field is computed before the split.
+
+    A crease is still kept where the mesh itself carries one: a vertex whose
+    own faces disagree with the welded average by more than `crease_deg` keeps
+    its own normal, so an engraved shut line does not get rounded away."""
+    V, F = np.asarray(wmesh.vertices), np.asarray(wmesh.faces)
+    fn, fa = wmesh.face_normals, wmesh.area_faces
+    loc = np.zeros((len(V), 3))
+    for k in range(3):
+        np.add.at(loc, F[:, k], fn * fa[:, None])
+    scale = float(np.ptp(V, axis=0).max()) or 1.0
+    key = np.round(V / (1e-6 * scale)).astype(np.int64)
+    _, inv = np.unique(key, axis=0, return_inverse=True)
+    acc = np.zeros((int(inv.max()) + 1, 3))
+    for k in range(3):
+        np.add.at(acc, inv[F[:, k]], fn * fa[:, None])
+    grp = acc[inv]
+
+    def unit(a, fallback):
+        n = np.linalg.norm(a, axis=1, keepdims=True)
+        return np.where(n > 1e-12, a / np.clip(n, 1e-12, None), fallback)
+
+    loc = unit(loc, np.array([0.0, 1.0, 0.0]))
+    grp = unit(grp, loc)
+    keep_own = (loc * grp).sum(1) < math.cos(math.radians(crease_deg))
+    out = np.where(keep_own[:, None], loc, grp)
+    return out, dict(vertices=int(len(V)),
+                     welded_positions=int(inv.max()) + 1,
+                     seam_duplicates=int(len(V) - (inv.max() + 1)),
+                     crease_deg=crease_deg,
+                     vertices_kept_own_normal=int(keep_own.sum()))
+
+
+def sub_with_normals(wmesh, faces, vnorm):
+    """`wmesh.submesh([faces])` with the pre-computed normals carried across.
+    Reproduces trimesh's own reindexing (np.unique over the used vertices) so
+    the geometry is identical to the submesh path it replaces."""
+    F = np.asarray(wmesh.faces)[faces]
+    vids = np.unique(F)
+    remap = np.zeros(len(wmesh.vertices), np.int64)
+    remap[vids] = np.arange(len(vids))
+    sub = trimesh.Trimesh(vertices=np.asarray(wmesh.vertices)[vids],
+                          faces=remap[F], process=False)
+    sub.vertex_normals = vnorm[vids]
+    return sub
+
+
 def export(wmesh, frame, parts, out_path, paint_rgb, report):
     """Write the hierarchy. Geometry goes out in the CALLER'S ORIGINAL WORLD
     FRAME (only pivots are converted back from local), so re-running this
@@ -1050,8 +1118,10 @@ def export(wmesh, frame, parts, out_path, paint_rgb, report):
     """
     sc = trimesh.Scene()
     used, pivots = {}, {}
+    vnorm, nev = welded_normals(wmesh)
+    report["vertex_normals"] = nev
     for node, faces, cls, pivot_local, prov in parts:
-        sub = wmesh.submesh([faces], append=True, repair=False)
+        sub = sub_with_normals(wmesh, faces, vnorm)
         spec = dict(MATERIALS[cls])
         base = spec["base"] if spec["base"] is not None else (paint_rgb or
                                                               [0.35, 0.02, 0.02])
@@ -1066,7 +1136,13 @@ def export(wmesh, frame, parts, out_path, paint_rgb, report):
         pw = None
         if pivot_local is not None:
             pw = frame.to_world(np.asarray(pivot_local, float))
+            # NORMALS ARE RE-ASSERTED AFTER THE PIVOT SHIFT. Writing to
+            # `mesh.vertices` invalidates trimesh's cache, and vertex_normals
+            # live in that cache — set before the shift they are silently
+            # dropped and the exporter falls back to none at all.
+            keep = np.array(sub.vertex_normals, copy=True)
             sub.vertices = sub.vertices - pw
+            sub.vertex_normals = keep
             pivots[gname] = [float(v) for v in pw]
         sc.add_geometry(sub, geom_name=gname, node_name=gname)
         used[gname] = dict(material=cls, faces=int(len(faces)),
@@ -1076,7 +1152,7 @@ def export(wmesh, frame, parts, out_path, paint_rgb, report):
                            [round(float(v), 4) for v in pw],
                            spin_axis_world=None if pw is None else
                            [round(float(v), 4) for v in frame.M[2]])
-    sc.export(out_path)
+    sc.export(out_path, include_normals=True)
     report["nodes"] = used
     patch_gltf(out_path, pivots)
     report["roundtrip"] = roundtrip_check(out_path, wmesh, used, pivots)
@@ -1170,12 +1246,22 @@ def roundtrip_check(path, wmesh, used, pivots):
     bad_pivot = {k: pv.get(k) for k in pivots
                  if pv.get(k) is None
                  or max(abs(a - b) for a, b in zip(pv[k], pivots[k])) > 1e-6}
+    # NORMAL ACCESSORS. A trimesh submesh export drops them silently, which
+    # renders as crumpled foil under a clearcoat and has been misread as a
+    # generator defect three times in this project. It is checked here on the
+    # WRITTEN FILE, not on the scene that was handed to the exporter.
+    prims = [p for m in j.get("meshes", []) for p in m.get("primitives", [])]
+    no_normal = sorted({m.get("name") for m in j.get("meshes", [])
+                        for p in m.get("primitives", [])
+                        if "NORMAL" not in p.get("attributes", {})})
     ok = (faces == len(wmesh.faces) and dbox < 1e-4
-          and not (set(used) - names) and not bad_pivot)
+          and not (set(used) - names) and not bad_pivot and not no_normal)
     return dict(status="PASS" if ok else "FAIL",
                 faces_in=int(len(wmesh.faces)), faces_out=int(faces),
                 bbox_max_delta_m=round(dbox, 8),
                 nodes_missing=sorted(set(used) - names),
+                primitives=len(prims),
+                primitives_without_normals=no_normal,
                 pivots_written=len(pivots), pivots_bad=bad_pivot,
                 materials=sorted({m.get("name") for m in j.get("materials", [])}),
                 extensions=j.get("extensionsUsed", []))
