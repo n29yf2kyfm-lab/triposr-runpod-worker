@@ -139,6 +139,64 @@ def layer_report(mesh, radius, mask, theta):
     return spread
 
 
+def zone_report(mesh, mask, theta, feat):
+    """Split the panel into FIELD and APERTURE-TRANSITION, and score each.
+
+    The heat map on the Golf Mk8 master showed the error is not spread over the
+    panels: the hottest 5% of faces carry 70% of the squared-slope energy, and
+    they lie in bands along shut lines, window surrounds, arch lips and bumper
+    edges, while the door skin, bonnet centre and roof centre are cool. Two of
+    the gate's acceptance criteria map onto exactly that split —
+
+        "no broad dents or scan noise"                 -> the FIELD
+        "clean edge flow around apertures and gaps"    -> the TRANSITION
+
+    — so reporting one blended number for the body hides which of the two is
+    failing, and would let a real improvement in one be cancelled by the other.
+
+    Distance is measured in FACE RINGS from the nearest feature edge rather than
+    in millimetres, because what matters is how many rows of triangles the
+    transition occupies: on a real car a shut line is crisp within a ring or
+    two, and on this one it ramps over many.
+    """
+    import scipy.sparse as sp
+    from scipy.sparse.csgraph import dijkstra
+    adj = mesh.face_adjacency
+    n = len(mesh.faces)
+    g = sp.coo_matrix((np.ones(len(adj)), (adj[:, 0], adj[:, 1])), shape=(n, n))
+    g = (g + g.T).tocsr()
+    seeds = np.where(feat)[0]
+    if len(seeds) == 0:
+        print("  no feature faces; zone split not meaningful")
+        return None
+    # multi-source BFS via dijkstra on the unit-weight face graph, from a
+    # subsample of seeds (the full set is every feature face and the distance
+    # to the nearest is unchanged by thinning a dense band)
+    rng = np.random.default_rng(0)
+    ss = seeds if len(seeds) < 4000 else rng.choice(seeds, 4000, replace=False)
+    d = dijkstra(g, directed=False, indices=ss, unweighted=True, min_only=True)
+    A = mesh.area_faces
+    fin = mask & np.isfinite(theta)
+    print("\n=== ZONE SPLIT: field vs aperture transition ===")
+    print(f"  {'rings from a feature':<24s} {'faces':>8s} {'area m2':>9s} "
+          f"{'sigma':>8s} {'share of energy':>16s}")
+    tot_e = (A[fin] * theta[fin] ** 2).sum()
+    bands = [(0, 2), (3, 5), (6, 10), (11, 10 ** 6)]
+    out = {}
+    for lo, hi in bands:
+        sel = fin & (d >= lo) & (d <= hi)
+        if sel.sum() == 0:
+            continue
+        s = float(np.sqrt((A[sel] * theta[sel] ** 2).sum() / A[sel].sum()))
+        e = float((A[sel] * theta[sel] ** 2).sum() / max(tot_e, 1e-30))
+        lbl = f"{lo}-{hi}" if hi < 10 ** 5 else f"{lo}+"
+        print(f"  {lbl:<24s} {int(sel.sum()):8d} {A[sel].sum():9.2f} "
+              f"{s:8.3f} {e*100:15.1f}%")
+        out[lbl] = dict(faces=int(sel.sum()), area_m2=round(A[sel].sum(), 3),
+                        sigma=round(s, 4), energy_share=round(e, 4))
+    return out
+
+
 def ramp(t, hot):
     """blue -> cyan -> green -> yellow -> red, linear in 0..hot."""
     x = np.clip(np.nan_to_num(t, nan=0.0) / max(hot, 1e-9), 0, 1)
@@ -160,6 +218,8 @@ def main():
     ap.add_argument("--out", default=None)
     ap.add_argument("--npy", default=None)
     ap.add_argument("--layer-report", action="store_true")
+    ap.add_argument("--zones", action="store_true")
+    ap.add_argument("--json", default=None)
     a = ap.parse_args()
 
     car = bs.Car(a.glb)
@@ -190,8 +250,18 @@ def main():
         print(f"    hottest {frac*100:4.0f}% of faces carry "
               f"{cum[max(n-1,0)]*100:5.1f}% of the squared-slope energy")
 
+    zones = None
+    if a.zones:
+        zones = zone_report(mesh, mask, th, feat)
     if a.layer_report:
         layer_report(mesh, a.radius, mask, th)
+    if a.json:
+        import json as _j
+        with open(a.json, "w") as fh:
+            _j.dump(dict(file=os.path.basename(a.glb), radius=a.radius,
+                         rms=float(np.sqrt((A[fin]*th[fin]**2).sum()/A[fin].sum())),
+                         n=int(fin.sum()), zones=zones), fh, indent=1)
+        print("  wrote", a.json)
 
     if a.npy:
         np.save(a.npy, th)
