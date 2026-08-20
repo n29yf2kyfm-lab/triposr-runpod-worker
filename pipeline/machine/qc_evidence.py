@@ -906,35 +906,53 @@ def run_worker(plan_path):
         """Long horizontal strip lights — the Class-A surface-continuity check.
 
         Hard-edged emissive bands in ELEVATION reflect off a mirror body as
-        continuous lines. A G1 break kinks a line, a G2 break puts a visible
-        corner in it, and a panel wave makes it wobble. This is the check that
-        catches what a beauty render's soft studio lighting smooths away.
+        continuous lines. A G1 break kinks a line, a G2 break puts a corner in
+        it, and a panel wave makes it wobble. This is the check that catches
+        what a beauty render's soft studio lighting smooths away.
+
+        BAND COUNT IS THE WHOLE GAME, AND IT IS SET DIRECTLY HERE RATHER THAN
+        THROUGH A WAVE TEXTURE. Two attempts with ShaderNodeTexWave both
+        failed, in opposite directions, because its Scale is not a band count:
+        Scale 5 rendered the Golf's flank as a fine scribble and Scale 14
+        rendered it very nearly WHITE. A background-only render measured why —
+        Scale 14 puts roughly 150 stripes around the sphere, and a near-flat
+        car panel sweeps so little reflected angle that it lands inside a
+        single stripe. So the pattern is built from the ray direction's up
+        component instead: `bands` is the number of light strips per hemisphere
+        and nothing else, which is a number that can be reasoned about and
+        tuned. QC_ZEBRA_BANDS overrides it for a car that needs finer or
+        coarser strips.
         """
+        bands = float(os.environ.get("QC_ZEBRA_BANDS", "9"))
         w = bpy.data.worlds.new("qc_zebra")
         w.use_nodes = True
         nt = w.node_tree
         nt.nodes.clear()
         tc = nt.nodes.new("ShaderNodeTexCoord")
-        wave = nt.nodes.new("ShaderNodeTexWave")
-        wave.wave_type = "BANDS"
-        wave.bands_direction = "Z"
-        wave.wave_profile = "SAW"
-        # 14 bands over the environment sphere. 5 was tried first and gives so
-        # few stripes across the reflected elevation range that a panel wave
-        # has nothing to bend; Class-A rigs use tens of strips, not a handful.
-        wave.inputs["Scale"].default_value = 14.0
-        wave.inputs["Distortion"].default_value = 0.0
+        # Project the incoming ray direction onto the car's UP axis, so the
+        # strips are horizontal ABOUT THE CAR. A catalogue car is not Z-up, and
+        # strips built on world Z would run diagonally across it.
+        dot = nt.nodes.new("ShaderNodeVectorMath")
+        dot.operation = "DOT_PRODUCT"
+        dot.inputs[1].default_value = (ez.x, ez.y, ez.z)
+        mul = nt.nodes.new("ShaderNodeMath")
+        mul.operation = "MULTIPLY"
+        mul.inputs[1].default_value = bands
+        frac = nt.nodes.new("ShaderNodeMath")
+        frac.operation = "FRACT"
         ramp = nt.nodes.new("ShaderNodeValToRGB")
         ramp.color_ramp.interpolation = "CONSTANT"   # hard stripe edges
         ramp.color_ramp.elements[0].position = 0.0
-        ramp.color_ramp.elements[0].color = (0.015, 0.015, 0.02, 1)
+        ramp.color_ramp.elements[0].color = (0.01, 0.01, 0.013, 1)
         ramp.color_ramp.elements[1].position = 0.5
         ramp.color_ramp.elements[1].color = (1, 1, 1, 1)
         bg = nt.nodes.new("ShaderNodeBackground")
-        bg.inputs["Strength"].default_value = 3.0
+        bg.inputs["Strength"].default_value = 2.2
         out = nt.nodes.new("ShaderNodeOutputWorld")
-        nt.links.new(tc.outputs["Generated"], wave.inputs["Vector"])
-        nt.links.new(wave.outputs["Fac"], ramp.inputs["Fac"])
+        nt.links.new(tc.outputs["Generated"], dot.inputs[0])
+        nt.links.new(dot.outputs["Value"], mul.inputs[0])
+        nt.links.new(mul.outputs[0], frac.inputs[0])
+        nt.links.new(frac.outputs[0], ramp.inputs["Fac"])
         nt.links.new(ramp.outputs["Color"], bg.inputs["Color"])
         nt.links.new(bg.outputs[0], out.inputs["Surface"])
         return w
