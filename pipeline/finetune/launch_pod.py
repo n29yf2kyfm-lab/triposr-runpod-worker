@@ -20,6 +20,18 @@ import argparse, json, os, subprocess, sys, time, urllib.request
 
 BUCKET = "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/finetune"
 VOLUME = "yiv4apiad7"          # alam3d-data (EU-RO-1)
+# ATTACHING THE VOLUME PINS THE JOB TO ONE REGION, AND THAT COSTS RUNS.
+# A network volume lives in a single datacentre, so `networkVolumeId` silently
+# restricts the capacity hunt to EU-RO-1. Measured 2026-08-20: an Alam-3D
+# inference run cycled A6000 and A100 80GB for 45 minutes against
+# "no instances currently available" and never got a pod, while other regions
+# had stock. TRAINING genuinely needs the volume — the dataset is on it and is
+# far too large to pull per run. INFERENCE DOES NOT: stage_c_eval_pod.sh
+# already falls back to downloading the checkpoint from HuggingFace when
+# $CKPT_DIR is absent, so the volume buys nothing but a smaller pool.
+# Default: attach for training tiers, skip for the inference tier. --volume /
+# --no-volume overrides either way.
+VOLUME_TIERS = {"80gb"}        # tiers whose work actually lives on the volume
 IMAGE = "alamk123/ai-mechanic:trellis2-latest"
 # WHAT THE CONTAINER CAN ACTUALLY RUN — measured, not asserted.
 # On an H100, alamk123/ai-mechanic:trellis2-latest dies at the first F.conv2d
@@ -127,7 +139,14 @@ def main():
     ap.add_argument("--hours", type=float, default=6, help="poll budget before teardown")
     ap.add_argument("--hunt-hours", type=float, default=2, help="capacity-hunt budget")
     ap.add_argument("--keep", action="store_true", help="do NOT delete the pod on terminal state")
+    ap.add_argument("--volume", dest="volume", action="store_true", default=None,
+                    help="force-attach the network volume (pins the job to its region)")
+    ap.add_argument("--no-volume", dest="volume", action="store_false",
+                    help="never attach it — widens the capacity hunt to every region")
     a = ap.parse_args()
+    use_volume = (a.tier in VOLUME_TIERS) if a.volume is None else a.volume
+    print(f"network volume: {'ATTACH ' + VOLUME + ' (region-pinned)' if use_volume else 'SKIPPED (hunting all regions)'}",
+          flush=True)
 
     key = os.environ.get("RUNPOD_API_KEY")
     if not key:
@@ -188,12 +207,20 @@ def main():
     deadline = time.time() + a.hunt_hours * 3600
     while time.time() < deadline and not pod:
         for gpus in TIERS[a.tier]:
-            d = api(key, "pods", "POST", {
+            body = {
                 "name": a.name, "imageName": IMAGE, "cloudType": "SECURE",
                 "gpuTypeIds": gpus, "gpuCount": a.gpus, "containerDiskInGb": 60,
-                "networkVolumeId": VOLUME, "volumeMountPath": "/workspace",
                 "ports": ["8000/http"], "env": env,
-                "dockerStartCmd": ["bash", "-c", boot]})
+                "dockerStartCmd": ["bash", "-c", boot]}
+            if use_volume:
+                body["networkVolumeId"] = VOLUME
+                body["volumeMountPath"] = "/workspace"
+            else:
+                # /workspace is where every bootstrap writes. Without the volume
+                # it must still exist, so give the container disk room for the
+                # 5.2GB checkpoint plus the model cache.
+                body["containerDiskInGb"] = 120
+            d = api(key, "pods", "POST", body)
             if d.get("id"):
                 pod = d["id"]
                 # gpus[0] is what we ASKED FIRST for, not what we got — printing
