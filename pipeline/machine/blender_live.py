@@ -156,18 +156,30 @@ def _meshes():
 
 
 def _world_bbox(objs=None):
-    """world-space bbox over mesh objects; None if there is no geometry"""
-    lo = [1e30] * 3
-    hi = [-1e30] * 3
+    """world-space bbox over mesh objects, from ACTUAL vertex data.
+
+    NOT from `object.bound_box`. That value is CACHED and does not refresh after
+    a foreach_set mutation — measured here on the Golf: translating the glass
+    +0.05 in z moved the vertex mean by exactly 0.05 while bound_box did not
+    move at all. A repair judged on a stale bbox reads as a no-op, which is the
+    "guard that says all clear" failure this project keeps paying for. Reading
+    the coordinates costs ~20 ms on 592k verts and cannot go stale.
+    """
+    lo = np.full(3, np.inf)
+    hi = np.full(3, -np.inf)
     for o in (objs if objs is not None else _meshes()):
-        for c in o.bound_box:
-            w = o.matrix_world @ mathutils.Vector(c)
-            for i in range(3):
-                lo[i] = min(lo[i], w[i])
-                hi[i] = max(hi[i], w[i])
-    if lo[0] > hi[0]:
+        n = len(o.data.vertices)
+        if not n:
+            continue
+        buf = np.empty(n * 3, dtype=np.float32)
+        o.data.vertices.foreach_get("co", buf)
+        m = np.array(o.matrix_world, dtype=np.float64)
+        p = buf.reshape(-1, 3).astype(np.float64) @ m[:3, :3].T + m[:3, 3]
+        lo = np.minimum(lo, p.min(axis=0))
+        hi = np.maximum(hi, p.max(axis=0))
+    if not np.isfinite(lo).all():
         return None
-    return lo, hi
+    return [float(x) for x in lo], [float(x) for x in hi]
 
 
 def _counts():
@@ -853,13 +865,23 @@ def serve():
                     buf += chunk
                 if not buf.strip():
                     continue
+                quitting = False
                 try:
                     req = json.loads(buf.split(b"\n", 1)[0].decode())
                 except Exception as e:      # noqa: BLE001
                     reply = {"status": "error", "error": "BadJSON",
                              "message": str(e)}
                 else:
-                    reply = dispatch(req)
+                    try:
+                        reply = dispatch(req)
+                    except _Quit:
+                        # ACK the quit before going down. Closing the socket
+                        # silently made the client raise on an empty read, which
+                        # is indistinguishable from the session having crashed —
+                        # exactly the ambiguity this harness must not create.
+                        quitting = True
+                        reply = {"status": "ok", "op": "quit",
+                                 "result": {"stopping": True}}
                 try:
                     conn.sendall((json.dumps(reply) + "\n").encode())
                 except OSError as e:
@@ -868,6 +890,8 @@ def serve():
                     # point of doing the work before answering.
                     print(f"BLENDER_LIVE_REPLY_UNDELIVERED seq={STATE['seq']} "
                           f"{type(e).__name__}", flush=True)
+                if quitting:
+                    raise _Quit()
             except socket.timeout:
                 print("BLENDER_LIVE_CLIENT_TIMEOUT", flush=True)
             except _Quit:

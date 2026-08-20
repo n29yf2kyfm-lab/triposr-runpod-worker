@@ -99,7 +99,7 @@ class Session:
             c.close()
         if not buf.strip():
             raise ConnectionError(
-                f"no reply from {self.sock} (op={op}) — the session may have "
+                f"no reply from {self.sock} (op={_op}) — the session may have "
                 "died; check its stdout log")
         return json.loads(buf.split(b"\n", 1)[0].decode())
 
@@ -178,8 +178,13 @@ def replay(logpath, sock, glb=None, skip=("quit",), dry=False):
         r = s.cmd(e["op"], **e.get("args", {}))
         st = r.get("status")
         bad += st != "ok"
-        print(f"  {e['seq']:>3} {e['op']:<10} {st:<5} {r.get('ms', 0):>6} ms"
-              + ("  " + r.get("message", "") if st != "ok" else ""))
+        # print a digest of the RESULT, not just the status: a replay that
+        # returns "ok" for every step while producing different numbers has
+        # reproduced nothing, and status alone cannot tell you which happened.
+        digest = (r.get("message", "") if st != "ok"
+                  else json.dumps(r.get("result", {}))[:110])
+        print(f"  {e['seq']:>3} {e['op']:<10} {st:<5} {r.get('ms', 0):>6} ms  "
+              f"{digest}")
     return 1 if bad else 0
 
 
