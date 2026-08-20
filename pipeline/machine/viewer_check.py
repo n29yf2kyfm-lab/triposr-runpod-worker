@@ -372,14 +372,140 @@ def check(glb, out_dir="/tmp/viewer_check", timeout_ms=180000,
     return result
 
 
+
+
+COMPARE_PAGE = """<!doctype html><html><head><meta charset="utf-8">
+<link rel="icon" href="data:,">
+<style>html,body{margin:0;background:#202024}model-viewer{width:900px;height:600px;background:#202024}</style>
+</head><body>
+<model-viewer id="mv" camera-controls disable-pan interaction-prompt="none"
+  shadow-intensity="0" exposure="1" environment-image="neutral"
+  min-camera-orbit="auto auto 0m" max-camera-orbit="auto auto 1000m"></model-viewer>
+<script>window.__loaded=false;const mv=document.getElementById('mv');
+mv.addEventListener('load',()=>{window.__loaded=true;});</script>
+<script type="module">
+import '/model-viewer.min.js';
+await customElements.whenDefined('model-viewer');
+const MV=customElements.get('model-viewer');
+MV.meshoptDecoderLocation='/meshopt_decoder.js'; MV.dracoDecoderLocation='/draco/';
+window.__setSrc=(s)=>{window.__loaded=false;document.getElementById('mv').src=s;};
+</script></body></html>"""
+
+COMPARE_VIEWS = [("front", "180deg"), ("front34", "215deg"), ("side", "270deg"),
+                 ("rear34", "315deg"), ("rear", "0deg"), ("rear34_L", "45deg"),
+                 ("side_L", "90deg"), ("front34_L", "135deg")]
+
+
+def appearance_delta(master, export, out_dir, orbit_alt="78deg", orbit_r="9m",
+                     target="0m 0.75m 0m", min_psnr=30.0, verbose=True):
+    """Pixel-level appearance delta, master vs export, SAME engine SAME cameras.
+
+    WHY THIS EXISTS -- the silhouette IoU gate in mobile_export.py is NOT
+    sufficient on its own, and it is important not to oversell it. MEASURED on
+    the Golf: a brutal simplify that deleted 96% of all triangles (985,227 ->
+    39,446) still scored min IoU 0.991. A car's outline is smooth and
+    low-frequency, so alpha coverage barely moves even when surface detail is
+    destroyed.
+
+    So IoU is the right detector for GROSS failures -- wrong scale, a missing
+    part, a bad decode (it caught all three probe bugs at 0.07-0.16) -- and it is
+    blind to surfacing and to texture, which is where the bytes actually went
+    (4096 PNG -> 2048 WebP). This renders both files through real model-viewer
+    from identical cameras and compares pixels, which sees both.
+
+    Still a DESKTOP SOFTWARE render, and still says nothing about device
+    performance.
+    """
+    import numpy as np
+    from PIL import Image
+    from playwright.sync_api import sync_playwright
+
+    mv = find_model_viewer()
+    if not mv:
+        return {"status": "NOT_TESTED", "reason": "model-viewer bundle unavailable"}
+    os.makedirs(out_dir, exist_ok=True)
+    web = os.path.join(out_dir, "web"); os.makedirs(web, exist_ok=True)
+    shutil.copy(master, os.path.join(web, "a.glb"))
+    shutil.copy(export, os.path.join(web, "b.glb"))
+    shutil.copy(mv, os.path.join(web, "model-viewer.min.js"))
+    vendor_decoders(web)
+    with open(os.path.join(web, "index.html"), "w") as fh:
+        fh.write(COMPARE_PAGE)
+
+    httpd, port = serve(web)
+    shots = {}
+    try:
+        exe = find_chromium()
+        if not exe:
+            return {"status": "NOT_TESTED", "reason": "no Chromium found"}
+        with sync_playwright() as pw:
+            b = pw.chromium.launch(headless=True, executable_path=exe, args=[
+                "--use-gl=angle", "--use-angle=swiftshader",
+                "--enable-unsafe-swiftshader", "--no-sandbox", "--disable-dev-shm-usage"])
+            p = b.new_page(viewport={"width": 960, "height": 640})
+            p.goto("http://127.0.0.1:%d/index.html" % port)
+            p.wait_for_function("()=>typeof window.__setSrc==='function'", timeout=60000)
+            for tag, src in (("master", "/a.glb"), ("export", "/b.glb")):
+                p.evaluate("s=>window.__setSrc(s)", src)
+                p.wait_for_function("()=>window.__loaded===true", timeout=300000)
+                p.wait_for_timeout(1500)
+                for name, az in COMPARE_VIEWS:
+                    p.evaluate("""([az,alt,r,t])=>{const mv=document.getElementById('mv');
+                        mv.cameraOrbit=az+' '+alt+' '+r; mv.cameraTarget=t;
+                        mv.fieldOfView='30deg'; mv.jumpCameraToGoal();}""",
+                        [az, orbit_alt, orbit_r, target])
+                    p.wait_for_timeout(700)
+                    fp = os.path.join(out_dir, "%s_%s.png" % (tag, name))
+                    p.locator("#mv").screenshot(path=fp)
+                    shots[(tag, name)] = fp
+            b.close()
+    finally:
+        httpd.shutdown()
+
+    rows = []
+    for name, _ in COMPARE_VIEWS:
+        A = np.asarray(Image.open(shots[("master", name)]).convert("RGB")).astype(np.float64)
+        B = np.asarray(Image.open(shots[("export", name)]).convert("RGB")).astype(np.float64)
+        d = np.abs(A - B)
+        mse = float((d ** 2).mean())
+        psnr = 10 * np.log10(255.0 ** 2 / mse) if mse > 0 else float("inf")
+        rows.append({"view": name, "psnr_db": round(psnr, 2),
+                     "mean_abs": round(float(d.mean()), 3),
+                     "p99_abs": round(float(np.percentile(d, 99)), 1)})
+    ps = [r["psnr_db"] for r in rows]
+    res = {"status": "PASS" if min(ps) >= min_psnr else "FAIL",
+           "views": rows, "psnr_min": min(ps), "psnr_mean": round(sum(ps) / len(ps), 2),
+           "min_psnr_threshold": min_psnr,
+           "renderer": "chromium headless + SwiftShader (SOFTWARE, desktop) "
+                       "-- NOT a device measurement"}
+    if verbose:
+        print("APPEARANCE DELTA  master vs export, identical cameras")
+        print("  %-10s %8s %9s %8s" % ("view", "PSNR_dB", "meanAbs", "p99Abs"))
+        for r in rows:
+            print("  %-10s %8.2f %9.3f %8.1f"
+                  % (r["view"], r["psnr_db"], r["mean_abs"], r["p99_abs"]))
+        print("  min %.2f dB  mean %.2f dB  (threshold %.1f) -> %s"
+              % (res["psnr_min"], res["psnr_mean"], min_psnr, res["status"]))
+    return res
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("glb")
+    ap.add_argument("--compare", help="master GLB: also report pixel appearance delta")
+    ap.add_argument("--min-psnr", type=float, default=30.0)
     ap.add_argument("--out-dir", default="/tmp/viewer_check")
     ap.add_argument("--json")
     ap.add_argument("--timeout-ms", type=int, default=180000)
     a = ap.parse_args()
     r = check(a.glb, out_dir=a.out_dir, timeout_ms=a.timeout_ms)
+    if a.compare:
+        print()
+        r["appearance"] = appearance_delta(a.compare, a.glb,
+                                           os.path.join(a.out_dir, "compare"),
+                                           min_psnr=a.min_psnr)
+        if r["appearance"].get("status") == "FAIL":
+            r["status"] = "FAIL"
     if a.json:
         with open(a.json, "w") as fh:
             json.dump(r, fh, indent=2, default=str)
