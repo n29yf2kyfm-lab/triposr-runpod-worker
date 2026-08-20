@@ -485,12 +485,21 @@ def orbit_dirs(n_az=24, el0=-8, el1=55, n_el=5):
 def _cast(mesh, dirs, cen, rad, grid, front_only=True):
     """First-hit coverage from `dirs`.
 
-    BACK-FACE HITS ARE REFUSED. A ray that slips through a gap in this shell's
-    glazing (4,101 loose components, so there are gaps) hits the FAR SIDE'S
-    INNER SKIN and would book it as "directly visible" — which is how red
-    paint came to render inside the rear door window in the production view.
-    A surface seen from behind is not exterior, and the test for that is
-    exact: a front-facing hit has n.d < 0 against the ray direction.
+    BACK-FACE HITS ARE REFUSED: a surface seen from behind is not exterior,
+    and the test is exact — a front-facing hit has n.d < 0 against the ray.
+    Measured on the Golf it removes 0.08 m^2 from the visible set (26.396 ->
+    26.317) and leaves the paint area unmoved (21.393 -> 21.358).
+
+    STATED PLAINLY BECAUSE THE PROJECT RULE DEMANDS IT: this rule was added to
+    explain red blotches rendering inside the rear door window, and IT DID NOT
+    FIX THEM — the pixel count in that band was identical before and after.
+    Component bisection then settled it in one render: with the glazing and
+    the interior deleted, the blotches are still there, floating in an empty
+    aperture. They are body-shell fragments spanning the window opening in the
+    INPUT mesh, so they are correctly classed as exterior paint and the defect
+    belongs to the aperture/geometry stage, not to this operator. The rule is
+    kept because refusing back-face hits is right on its own terms, not
+    because it repaired anything.
 
     The shell also carries inverted normals in places (7% of its faces sit in
     a near-coincident opposite-facing pair). Those simply drop out of the
@@ -762,8 +771,8 @@ def classify(lmesh, frame, wheels, glass_mask, direct, thru, ao, col, cold,
     # IT DIRECTLY VISIBLE, which would have re-created the exact defect this
     # operator exists to remove (visible exterior bound to `interior`) by a
     # new route. The rule's own report line convicted it before it was ever
-    # rendered. Do not re-add it; the leak it aimed at is closed in `_cast`
-    # by refusing back-face hits instead.
+    # rendered. Do not re-add it. What the blotches actually are was settled by
+    # bisection, not by argument — see `_cast`.
 
     # ---- 7. lamps ---------------------------------------------------------
     lamp_report = detect_lamps(lmesh, frame, lab, idx, direct, col, cold, args)
