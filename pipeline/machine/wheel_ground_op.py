@@ -87,23 +87,11 @@ DEFAULTS = dict(
 
 
 # --------------------------------------------------------------- components
-def _components(V, F, snap=1e-5):
-    """Per-face component label, welding vertices that coincide in space.
-
-    glTF splits vertices by normal and UV, so raw index adjacency reports a
-    single wheel as dozens of shells. Welding on rounded position first is
-    what makes "is this component contained in the wheel?" a meaningful
-    question at all.
-    """
-    from scipy.sparse import coo_matrix
-    from scipy.sparse.csgraph import connected_components
-    key = np.round(V / snap).astype(np.int64)
-    _, inv = np.unique(key, axis=0, return_inverse=True)
-    n = int(inv.max()) + 1
-    e = inv[np.vstack([F[:, [0, 1]], F[:, [1, 2]], F[:, [2, 0]]])]
-    M = coo_matrix((np.ones(len(e), np.int8), (e[:, 0], e[:, 1])), shape=(n, n))
-    _, lab = connected_components(M, directed=False)
-    return lab[F[:, 0]], lab[inv]
+# Component labelling now lives in the METROLOGY, because the measurement
+# needs the same notion of "what does this wheel own" that the repair does —
+# the arch clearance this operator reads is measured against the complement of
+# exactly this set. One implementation, one definition, no drift.
+_components = WM._components
 
 
 def isolate(meshes, wheel, cfg):

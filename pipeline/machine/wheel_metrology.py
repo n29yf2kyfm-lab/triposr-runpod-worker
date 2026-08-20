@@ -836,6 +836,91 @@ def _derive(out, fr, spec):
     return out
 
 
+def _components(V, F, snap=1e-5):
+    """Per-face component label, welding vertices that coincide in space.
+
+    glTF splits vertices by normal and UV, so raw index adjacency reports one
+    wheel as dozens of shells. Welding on rounded position first is what makes
+    "does this component belong to the wheel?" a meaningful question. Lives
+    here rather than in the repair operator because the MEASUREMENT needs it
+    too: see `_wheel_owned` below.
+    """
+    from scipy.sparse import coo_matrix
+    from scipy.sparse.csgraph import connected_components
+    key = np.round(V / snap).astype(np.int64)
+    _, inv = np.unique(key, axis=0, return_inverse=True)
+    n = int(inv.max()) + 1
+    e = inv[np.vstack([F[:, [0, 1]], F[:, [1, 2]], F[:, [2, 0]]])]
+    M = coo_matrix((np.ones(len(e), np.int8), (e[:, 0], e[:, 1])), shape=(n, n))
+    _, lab = connected_components(M, directed=False)
+    # `lab` is indexed by WELDED vertex, so an original face index has to be
+    # mapped through `inv` first. Indexing it directly with F[:, 0] — as the
+    # first version of this function did — reads garbage whenever welding
+    # actually merges anything, and raises IndexError as soon as the original
+    # vertex count exceeds the welded one, which is every real glTF.
+    return lab[inv[F[:, 0]]], lab[inv]
+
+
+def _wheel_owned(meshes, wheels, cyl_r=1.03, cyl_w=0.80, contain=0.95,
+                 min_faces=3):
+    """Vertex mask per mesh: does this vertex belong to ANY wheel?
+
+    WHY THIS EXISTS — TWO BUGS IT FIXES, BOTH MEASURED
+    --------------------------------------------------
+    The first version of `fender_and_arch` defined "not the wheel" as
+    `~((rad < 1.02R) & (|lat| < 0.70W))`, i.e. by the fitted cylinder alone,
+    and then asked two questions of the survivors:
+
+      arch INTERSECTION  = not_wheel & (rad < 0.97R) & (|lat| < 0.48W)
+          This set is EMPTY BY CONSTRUCTION. Any point with rad < 0.97R and
+          |lat| < 0.48W satisfies both halves of the excluded term, so it is
+          never "not_wheel". The criterion "no body geometry inside the tyre's
+          swept volume" therefore reported 0 for every wheel of every car and
+          had never once been tested. (CLAUDE.md: a gate nobody tested is a
+          gate that does not exist.)
+
+      arch CLEARANCE     = min radius of not_wheel points, minus R
+          Its answer was the TYRE'S OWN OUTER SKIN. The fit's rms is ~4.5 mm,
+          so tread vertices sit outside 1.02R, become "not_wheel", and set the
+          minimum. Measured on this Golf: 8 of 8 wheels returned exactly
+          0.0200 x R (0.02 = 1.02 - 1.00). It was reading back its own
+          exclusion boundary, and the repair operator used that number to
+          decide whether a radius correction would hit the body.
+
+    Ownership by CONNECTED COMPONENT has neither failure: a component joins a
+    wheel when `contain` of its faces lie inside the fitted cylinder, which is
+    the same test `wheel_ground_op.isolate` uses to decide what it may move.
+    So the clearance is measured against exactly the geometry that will NOT
+    move, and the intersection test is answerable.
+    """
+    owned = {}
+    for name, (V, F) in meshes.items():
+        flab, vlab = _components(V, F)
+        cen = V[F].mean(axis=1)
+        keep = np.zeros(len(F), bool)
+        for w in wheels:
+            c = np.asarray(w["centre"]); a = np.asarray(w["axis"])
+            R, W = w["radius_m"], w["width_m"]
+            d = cen - c
+            lat = d @ a
+            rad = np.linalg.norm(d - np.outer(lat, a), axis=1)
+            inside = (rad < cyl_r * R) & (np.abs(lat) < cyl_w * W)
+            if not inside.any():
+                continue
+            for comp in np.unique(flab[inside]):
+                sub = flab == comp
+                n = int(sub.sum())
+                if n < min_faces:
+                    continue
+                if int((sub & inside).sum()) / n >= contain:
+                    keep |= sub
+        vm = np.zeros(len(V), bool)
+        if keep.any():
+            vm[F[keep].ravel()] = True
+        owned[name] = vm
+    return owned
+
+
 def fender_and_arch(m, cfg=None):
     """Second pass: fender lip position and arch intersection, per wheel.
 
@@ -848,6 +933,14 @@ def fender_and_arch(m, cfg=None):
     meshes = m["_meshes"]                 # already in the frame `measure` used
     li, ti, ui = m["axes"]["length"], m["axes"]["lateral"], m["axes"]["up"]
     ALL = np.vstack([v for v, _ in meshes.values()])
+    # Everything a wheel owns, by connected component — see `_wheel_owned`.
+    # BODY is the complement, and it is the only thing an arch test may see.
+    own = _wheel_owned(meshes, m["wheels"]) if m["wheels"] else {}
+    OWNED = np.concatenate([own[n] for n in meshes]) if own else \
+        np.zeros(len(ALL), bool)
+    BODY = ALL[~OWNED]
+    m["wheel_owned_vertices"] = int(OWNED.sum())
+    m["body_vertices"] = int(len(BODY))
     for r in m["wheels"]:
         c = np.array(r["centre"]); a = np.array(r["axis"]); R = r["radius_m"]
         Wd = r["width_m"]
@@ -877,27 +970,39 @@ def fender_and_arch(m, cfg=None):
         # left/right agreement on a symmetric body is the evidence that it is
         # measuring the fender and not something else. It is also the surface
         # the criterion is actually about — the metal the sidewall must clear.
-        not_wheel = ~((rad < 1.02 * R) & (np.abs(lat) < 0.70 * Wd))
-        lip = not_wheel & (np.abs(ALL[:, li] - c[li]) < 0.25 * R) & \
-            (ALL[:, ui] > c[ui] + R) & (ALL[:, ui] < c[ui] + 1.5 * R)
-        lip_lat = float(np.percentile(np.abs(ALL[lip][:, ti]), 98.0)) \
+        db = BODY - c
+        blat = db @ a
+        brad = np.linalg.norm(db - np.outer(blat, a), axis=1)
+        lip = (np.abs(BODY[:, li] - c[li]) < 0.25 * R) & \
+            (BODY[:, ui] > c[ui] + R) & (BODY[:, ui] < c[ui] + 1.5 * R)
+        lip_lat = float(np.percentile(np.abs(BODY[lip][:, ti]), 98.0)) \
             if lip.sum() > 30 else float("nan")
         r["fender_lip_lat"] = lip_lat
         # positive = tyre proud of the fender, negative = tucked inside it
         r["sidewall_vs_fender_m"] = float(r["outer_sidewall_lat"] - lip_lat)
         r["fender_lip_points"] = int(lip.sum())
-        # ---- arch intersection: any non-wheel geometry inside the swept volume
-        inside = not_wheel & (rad < 0.97 * R) & (np.abs(lat) < 0.48 * Wd)
+        # ---- arch intersection: BODY geometry inside the TYRE.
+        # "Body" means every vertex no wheel component owns, so this can
+        # actually return a non-zero answer (the previous formulation could
+        # not — see `_wheel_owned`). The band is the CARCASS, r in
+        # [0.70R, 0.97R], not the whole swept disc: a brake disc, a hub
+        # carrier and an inner wheel-house all legitimately live near the
+        # axis, and counting them would report a fault on every car with
+        # brakes. Measured on this Golf, the near-axis region holds 6-11k such
+        # vertices per rear wheel; the carcass band is what the criterion
+        # "no arch intersection / no penetrating wheels" is actually about.
+        inside = (brad > 0.70 * R) & (brad < 0.97 * R) & \
+            (np.abs(blat) < 0.48 * Wd)
         r["arch_intersect_points"] = int(inside.sum())
-        r["arch_intersect_depth_m"] = float(R - rad[inside].min()) \
+        r["arch_intersect_depth_m"] = float(R - brad[inside].min()) \
             if inside.sum() else 0.0
         # ---- how much radial room is left before the tread would touch the
         # body. The repair operator needs this BEFORE it grows a tyre: a
         # radius correction that closes this gap turns a floating wheel into
         # an intersecting one, which is worse.
-        near = not_wheel & (rad < 1.60 * R) & (np.abs(lat) < 0.48 * Wd) & \
-            ((ALL[:, ui] - c[ui]) > 0.20 * R)          # the arch, not the road
-        r["arch_min_clearance_m"] = float(rad[near].min() - R) \
+        near = (brad < 1.60 * R) & (np.abs(blat) < 0.48 * Wd) & \
+            ((BODY[:, ui] - c[ui]) > 0.20 * R)         # the arch, not the road
+        r["arch_min_clearance_m"] = float(brad[near].min() - R) \
             if near.sum() > 20 else None
         r["arch_clearance_points"] = int(near.sum())
         # ---- contact patch, from the tyre carcass only

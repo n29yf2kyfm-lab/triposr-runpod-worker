@@ -66,7 +66,32 @@ worse, and the evidence protocol in the report compares LIKE FOR LIKE (both
 sides of the before/after carrying the same normals treatment) so that no part
 of the geometry claim can be resting on it.
 
+--joint: THE ONLY CORRECT SCOPE ON THIS CAR, and the default from 2026-08-20.
+Measured on the Golf Mk8 master before any repair was attempted:
+
+  * the six meshes are ONE SURFACE cut into label submeshes, with 25,369
+    carpaint vertices EXACTLY coincident with interior vertices (and every
+    mesh sharing vertices with `interior`). Repairing one geometry in
+    isolation moves one copy of a shared vertex and not the other, which OPENS
+    A CRACK at every one of those 25,369 places. The per-geometry path below is
+    therefore not merely partial, it is destructive, and it is kept only for
+    single-mesh inputs.
+  * the material names do not delimit the body: `interior` is bound to the
+    front bumper and the sills, and holds 107,936 of the 244,723 exterior
+    body-panel faces — 9.18 m2 of 20.54 m2, 45% of the body. Two of the panels
+    this gate names ("rocker/sill deformation", "rear bumper swelling") live
+    entirely in it. So --joint takes its target from body_surface.py's
+    GEOMETRIC exterior selection, never from a material name.
+
+In --joint the whole car is welded once, the fairing solves over that single
+surface, and the result is scattered back to every duplicate — so seams are
+sealed by construction rather than by a repair step. Everything that is not
+exterior body panel (the cabin, the inner skin, glass, tyres, rims, lamps) is
+held by a large data weight rather than excluded, because a HOLD arrives at its
+value smoothly and a MASK leaves a step exactly at the boundary.
+
 Run:
+  python3 panel_reform.py <in.glb> <out.glb> --joint --select sel.npz --lam 200
   python3 panel_reform.py <in.glb> <out.glb>
         [--passes 0.090:14,0.035:6]   # radius_m:cap_mm, applied in order
         [--degree 2] [--iters 3] [--feature-deg 35] [--feature-rings 2]
@@ -488,10 +513,144 @@ def face_health(mesh):
                 aspect_max=round(float((hi / lo).max()), 2))
 
 
+def joint_run(a):
+    """Whole-car welded fairing over the geometric exterior-panel selection."""
+    import body_surface as bs
+    t0 = time.time()
+    car = bs.Car(a.inp)
+    print(f"{a.inp}: JOINT mode — {len(car.names)} geometries, "
+          f"{len(car.V_all)} verts -> {len(car.Vw)} welded, {len(car.Fw)} faces")
+
+    if a.select and os.path.exists(a.select):
+        d = np.load(a.select, allow_pickle=True)
+        panel_f = d["panel"]
+        if len(panel_f) != len(car.Fw):
+            raise SystemExit(
+                f"REFUSED: selection has {len(panel_f)} faces, this weld has "
+                f"{len(car.Fw)}. The selection was built from a different file "
+                f"or a different weld tolerance — a mismatched mask would "
+                f"repair arbitrary faces.")
+        fp = str(d["fingerprint"]) if "fingerprint" in d else None
+        if fp != car.fingerprint:
+            raise SystemExit(
+                f"REFUSED: selection fingerprint {fp} != this weld's "
+                f"{car.fingerprint}. Same face COUNT, different faces — the "
+                f"mask would land on arbitrary geometry and still report a "
+                f"plausible number. Re-run body_surface.py.")
+        print(f"  selection {a.select}: {panel_f.sum()} exterior panel faces")
+    else:
+        op = bs.openness(car.mesh, dirs=a.dirs)
+        npm, _ = bs.nonpanel_face_mask(car)
+        panel_f = (op > a.open_thresh) & ~npm
+        print(f"  selection computed inline: {panel_f.sum()} panel faces")
+
+    mesh = car.mesh
+    nv = len(car.Vw)
+    # A vertex is repairable only if EVERY face it touches is exterior panel.
+    # Using "any" instead would let the fairing pull the last row of vertices
+    # along a glass or wheel boundary, which is where a visible step would
+    # show. `all` keeps the free region strictly inside the panel set and lets
+    # the weight ramp handle the join.
+    touch = np.zeros(nv, dtype=np.int32)
+    ptouch = np.zeros(nv, dtype=np.int32)
+    np.add.at(touch, car.Fw.ravel(), 1)
+    np.add.at(ptouch, car.Fw[panel_f].ravel(), 1)
+    free = (ptouch > 0) & (ptouch == touch)
+    print(f"  repairable vertices: {free.sum()} of {nv} "
+          f"({free.mean()*100:.1f}%)")
+
+    gw, nfeat = feature_weight(mesh, a.feature_deg, a.feature_rings)
+    cl0 = crease_length(mesh, a.feature_deg)
+    h0 = face_health(mesh)
+    print(f"  feature verts {nfeat} ({nfeat/nv*100:.1f}%), crease {cl0:.2f}m")
+
+    # Data weights. Three tiers, and every one of them is a HOLD rather than a
+    # constraint so the solution is continuous across each boundary:
+    #   free panel      1.0                    -- fair me
+    #   panel feature   1 + feature_hold       -- keep my shut line
+    #   everything else hold_outside           -- do not repair me, but do not
+    #                                             put a step where you stop
+    dw = np.full(nv, float(a.hold_outside))
+    dw[free] = 1.0 + a.feature_hold * (1.0 - gw[free])
+    N0 = np.asarray(mesh.vertex_normals).copy()
+    Vw, fair_stats = fair(car.Vw, car.Fw, a.lam, dw,
+                          normal_only=a.normal_only, N=N0)
+
+    mesh.vertices = Vw
+    mesh._cache.clear()
+    cl1 = crease_length(mesh, a.feature_deg)
+    h1 = face_health(mesh)
+    tot = np.linalg.norm(Vw - car.Vw, axis=1)
+    mv = tot[free]
+    print(f"  displacement on repaired verts: mean {mv.mean()*1000:.2f}mm "
+          f"p99 {np.percentile(mv,99)*1000:.2f}mm max {mv.max()*1000:.2f}mm")
+    print(f"  displacement on HELD verts:     mean {tot[~free].mean()*1000:.3f}mm "
+          f"max {tot[~free].max()*1000:.3f}mm")
+    print(f"  crease {cl0:.2f}m -> {cl1:.2f}m "
+          f"({(cl1-cl0)/max(cl0,1e-9)*100:+.1f}%)")
+    print(f"  face health {h0} -> {h1}")
+
+    nrm = None
+    if a.normals == "smooth":
+        acc, ui, ngrp = smooth_normals(mesh, a.smooth_deg, None, nv)
+        corner_v = car.F_all[car.keep].ravel()
+        nrm = np.zeros((len(car.V_all), 3))
+        np.add.at(nrm, corner_v, acc[ui])
+        ln = np.linalg.norm(nrm, axis=1, keepdims=True)
+        bad = ln[:, 0] < 1e-9
+        nrm = nrm / ln.clip(1e-12)
+        if bad.any():
+            # A vertex referenced by no surviving face has no defined normal.
+            # Falling back to the welded vertex normal is honest; leaving a
+            # zero there is exactly the 30 zero-length-NORMAL validator errors
+            # this master already carries.
+            nrm[bad] = np.asarray(mesh.vertex_normals)[car.inv[bad]]
+            print(f"    {int(bad.sum())} vertices had no face support; "
+                  f"filled from the welded normal")
+        print(f"  normals: {ngrp} smoothing groups at {a.smooth_deg:.0f}deg")
+
+    car.write(Vw, a.out, normals=nrm)
+    rep = dict(input=os.path.basename(a.inp), mode="joint", lam=a.lam,
+               feature_hold=a.feature_hold, hold_outside=a.hold_outside,
+               feature_deg=a.feature_deg, feature_rings=a.feature_rings,
+               normals=a.normals, normal_only=bool(a.normal_only),
+               geoms=car.names,
+               welded_verts=int(nv), faces=int(len(car.Fw)),
+               panel_faces=int(panel_f.sum()), free_verts=int(free.sum()),
+               feature_verts=int(nfeat),
+               crease_m_before=round(cl0, 3), crease_m_after=round(cl1, 3),
+               crease_pct=round((cl1 - cl0) / max(cl0, 1e-9) * 100, 2),
+               disp_free_mm=dict(
+                   mean=round(float(mv.mean()) * 1000, 3),
+                   p99=round(float(np.percentile(mv, 99)) * 1000, 3),
+                   max=round(float(mv.max()) * 1000, 3)),
+               disp_held_mm=dict(
+                   mean=round(float(tot[~free].mean()) * 1000, 4),
+                   max=round(float(tot[~free].max()) * 1000, 4)),
+               faces_before=h0, faces_after=h1, fair=fair_stats,
+               seconds=round(time.time() - t0, 1))
+    rep["output_bytes"] = os.path.getsize(a.out)
+    print(f"wrote {a.out} ({rep['output_bytes']} bytes) in {rep['seconds']}s")
+    if a.report:
+        with open(a.report, "w") as fh:
+            json.dump(rep, fh, indent=1)
+        print("report ->", a.report)
+    return rep
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("inp")
     ap.add_argument("out")
+    ap.add_argument("--joint", action="store_true",
+                    help="weld ALL geometries and fair the exterior panel set "
+                         "(required on a car whose meshes share vertices)")
+    ap.add_argument("--select", default=None,
+                    help="body_surface.py npz naming the exterior panel faces")
+    ap.add_argument("--dirs", type=int, default=32)
+    ap.add_argument("--open-thresh", type=float, default=0.10)
+    ap.add_argument("--hold-outside", type=float, default=1e4,
+                    help="data weight on everything that is not exterior panel")
     ap.add_argument("--method", choices=["fair", "mls"], default="fair")
     ap.add_argument("--lam", type=float, default=200.0,
                     help="fairing strength; the ONLY quality knob for --method fair")
@@ -515,6 +674,11 @@ def main():
     ap.add_argument("--smooth-deg", type=float, default=35.0)
     ap.add_argument("--report", default=None)
     a = ap.parse_args()
+
+    if a.joint:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        joint_run(a)
+        return
 
     sc = trimesh.load(a.inp, force="scene")
     targets = pick_body(sc, a.geom)
