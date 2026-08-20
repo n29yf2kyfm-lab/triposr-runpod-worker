@@ -1460,13 +1460,18 @@ def main():
     sym = {}
     base_pass = "clay" if "clay" in measured else (
         "beauty" if "beauty" in measured else None)
-    if base_pass and labelled:
-        for lft, rgt in (("left", "right"), ("front_left", "front_right"),
-                         ("rear_left", "rear_right")):
-            if lft in measured[base_pass] and rgt in measured[base_pass]:
-                ml = measured[base_pass][lft]["mean_srgb"]
-                mr = measured[base_pass][rgt]["mean_srgb"]
-                sym["%s_vs_%s" % (lft, rgt)] = {
+    # Paired by AZIMUTH INDEX, not by label. Mirror symmetry of the rig is a
+    # property of the lights and has nothing to do with which end is the nose,
+    # so gating it on successful nose detection (as this first did) threw the
+    # check away on exactly the meshes whose labelling could not be trusted.
+    if base_pass:
+        for i, j in ((2, 6), (1, 7), (3, 5)):        # 90/270, 45/315, 135/225
+            li, rj = view_names[i], view_names[j]
+            if li in measured[base_pass] and rj in measured[base_pass]:
+                ml = measured[base_pass][li]["mean_srgb"]
+                mr = measured[base_pass][rj]["mean_srgb"]
+                sym["%s_vs_%s" % (li, rj)] = {
+                    "azimuths": [VIEW_AZ[i], VIEW_AZ[j]],
                     "mean_srgb": [ml, mr],
                     "abs_diff": round(abs(ml - mr), 3),
                     "rel_diff": round(abs(ml - mr) / max(ml, mr, 1e-6), 5)}
@@ -1517,14 +1522,21 @@ def main():
         os.makedirs(sdir, exist_ok=True)
         stamp = ("%dx%d  %d spp  CYCLES/Standard  lens %.0fmm  fit=%s"
                  % (res_x, res_y, a.samples, a.lens, a.fit))
+        # Tiles are labelled with the ANALYTIC camera fill, which is a property
+        # of the camera and therefore identical across passes. Labelling each
+        # tile with its OWN pass's alpha was measurably wrong: the beauty pass
+        # carries a shadow-catching ground plane and its shadow lands in the
+        # alpha channel, so the same camera read "front fill 55%" on beauty and
+        # "front fill 35%" on clay. The camera did not move; the shadow did.
+        camfill = dict(zip(view_names, [float(f) for f in fills]))
         for pname, frames in log["frames"].items():
             tiles = []
             for vn in (view_names if not pname.endswith("_ortho") else ORTHO):
                 if vn not in frames:
                     continue
-                mm = measured[pname][vn]
-                tiles.append(("%s   fill %.0f%%" % (vn, 100 * mm["fill_max_dim"]),
-                              frames[vn]))
+                lab = vn if vn not in camfill else \
+                    "%s   cam-fill %.0f%%" % (vn, 100 * camfill[vn])
+                tiles.append((lab, frames[vn]))
             if not tiles:
                 continue
             out = os.path.join(sdir, "sheet_%s.png" % pname)
