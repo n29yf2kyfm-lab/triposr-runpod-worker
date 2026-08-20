@@ -195,7 +195,12 @@ def render(car, metro, outd):
                    np.array(o.matrix_world.translation) for o in car_objs])
     lo, hi = V.min(0), V.max(0)
     ctr = (lo + hi) / 2
-    hub_h = float(sum(r["hub_up"] for r in m["wheels"]) / len(m["wheels"]))
+    # Camera height defaults to the car's own mean hub height, but a
+    # BEFORE/AFTER pair has to be shot from one camera or the comparison is
+    # not a comparison — on this Golf the baseline's hubs sit 100 mm higher
+    # than the repaired car's, which alone would move the whole car in frame.
+    hub_h = float(os.environ.get("EV_HUB_H", "") or
+                  sum(r["hub_up"] for r in m["wheels"]) / len(m["wheels"]))
     nose_x = min(r["hub_length"] for r in m["wheels"]) if nose < 0 else \
         max(r["hub_length"] for r in m["wheels"])
     D = 8.0
