@@ -595,9 +595,15 @@ def check_calibration(path):
 # ---------------------------------------------------------------------------
 #  Contact sheets
 # ---------------------------------------------------------------------------
-def contact_sheet(tiles, out_path, title, cols=4, tile_w=520, sub=None):
+def contact_sheet(tiles, out_path, title, cols=4, tile_w=520, sub=None,
+                  legend=None):
     """Grid sheet, every tile LABELLED. An unlabelled tile is how a rear got
     reported as a front; the label is the point of the sheet, not decoration.
+
+    `legend` draws the material-ID swatches ON the sheet. A colour key that
+    lives only in a JSON file beside the image is a key nobody reads while
+    looking at the image, and the whole claim of a matid pass ("this colour is
+    that material") is unverifiable without it.
     """
     from PIL import Image, ImageDraw, ImageFont
     def font(sz):
@@ -611,14 +617,25 @@ def contact_sheet(tiles, out_path, title, cols=4, tile_w=520, sub=None):
     probe = Image.open(tiles[0][1])
     tile_h = int(tile_w * probe.height / probe.width)
     lab_h, head_h, pad = 26, 62, 6
+    leg_h = 30 if legend else 0
     rows = (len(tiles) + cols - 1) // cols
     W = cols * (tile_w + pad) + pad
-    H = head_h + rows * (tile_h + lab_h + pad) + pad
+    H = head_h + leg_h + rows * (tile_h + lab_h + pad) + pad
     sheet = Image.new("RGB", (W, H), (26, 26, 28))
     d = ImageDraw.Draw(sheet)
     d.text((pad + 4, 10), title, font=font(24), fill=(255, 255, 255))
     if sub:
         d.text((pad + 4, 40), sub, font=font(14), fill=(168, 168, 176))
+    if legend:
+        fl = font(14)
+        x = pad + 4
+        for name, col in sorted(legend.items()):
+            rgb = tuple(int(255 * (c ** (1 / 2.2))) for c in col[:3])
+            d.rectangle([x, head_h + 6, x + 18, head_h + 22], fill=rgb,
+                        outline=(90, 90, 96))
+            d.text((x + 24, head_h + 7), name, font=fl, fill=(226, 226, 232))
+            x += 34 + int(d.textlength(name, font=fl))
+        head_h += leg_h
     f = font(15)
     for i, (label, path) in enumerate(tiles):
         r, c = divmod(i, cols)
@@ -749,12 +766,27 @@ def run_worker(plan_path):
             return False
         return any(any(t in l for t in toks) for l in ls)
 
+    # Objects a pass CREATES (the backlight plane, the exploded wheel parts).
+    # The first version tracked only the imported meshes, so the backlight
+    # pass's emissive plane survived into the exploded views and the whole
+    # turntable — a magenta wall stood behind the car in every one of them and
+    # nothing reported it. A pass must clean up what it made.
+    pass_objects = []
+    orig_loc = [o.location.copy() for o in carparts]
+
     def restore():
-        for o, sl, hd in zip(carparts, orig_slots, orig_hide):
+        for ob in pass_objects:
+            try:
+                bpy.data.objects.remove(ob, do_unlink=True)
+            except Exception:                                   # noqa: BLE001
+                pass
+        pass_objects.clear()
+        for o, sl, hd, lc in zip(carparts, orig_slots, orig_hide, orig_loc):
             o.data.materials.clear()
             for m in sl:
                 o.data.materials.append(m)
             o.hide_render = hd
+            o.location = lc.copy()
         sc.view_layers[0].material_override = None
         sc.world = world
         ground.hide_render = True
@@ -793,7 +825,7 @@ def run_worker(plan_path):
         nt.nodes.clear()
         wf = nt.nodes.new("ShaderNodeWireframe")
         wf.use_pixel_size = True
-        wf.inputs[0].default_value = 1.1
+        wf.inputs[0].default_value = 0.8
         base = nt.nodes.new("ShaderNodeBsdfDiffuse")
         base.inputs["Color"].default_value = (0.72, 0.72, 0.74, 1)
         line = nt.nodes.new("ShaderNodeEmission")
@@ -807,13 +839,25 @@ def run_worker(plan_path):
         return m
 
     def normals_mat():
-        """World-space normal as colour, with BACKFACES tinted magenta.
+        """World-space normal as colour, with BACKFACES flagged.
 
         Two signals in one pass. The hue shows the normal direction, so a
-        flipped patch lands on the opposite hue; but Cycles flips the shading
-        normal to face the viewer, which can hide exactly the case you are
-        hunting. The Backfacing output is not fooled by that, so a face whose
-        winding is reversed reads magenta whatever its shading normal does.
+        flipped patch lands on the opposite hue; but Cycles flips the SHADING
+        normal to face the viewer, which hides exactly the case you are
+        hunting. The Backfacing output is not fooled by that, so a reversed
+        winding still reads whatever its shading normal does.
+
+        THE FLAG COLOUR IS PURE BLACK, AND THAT IS NOT A STYLE CHOICE. The
+        first version flagged backfaces MAGENTA (1.0, 0.0, 0.85) and the first
+        real render came back magenta over the whole car, which read as "every
+        face is flipped". It was not: the car's left flank has outward normal
+        -Y, the encoding n*0.5+0.5 sends that to (0.5, 0, 0.5), and at a
+        glance purple and magenta are the same colour. A flag that collides
+        with a legitimate value is not a flag.
+        Black cannot collide. A UNIT normal maps to a colour on the sphere
+        (2r-1)^2 + (2g-1)^2 + (2b-1)^2 = 1, and (0,0,0) would require the
+        normal (-1,-1,-1), whose length is sqrt(3). The encoding cannot
+        produce it, so black in this pass is ALWAYS a backface.
         """
         m = bpy.data.materials.new("qc_normals")
         m.use_nodes = True
@@ -824,16 +868,20 @@ def run_worker(plan_path):
         mad.operation = "MULTIPLY_ADD"
         mad.inputs[1].default_value = (0.5, 0.5, 0.5)
         mad.inputs[2].default_value = (0.5, 0.5, 0.5)
-        mixc = nt.nodes.new("ShaderNodeMixRGB")
-        mixc.blend_type = "MIX"
-        mixc.inputs[2].default_value = (1.0, 0.0, 0.85, 1)
-        em = nt.nodes.new("ShaderNodeEmission")
+        front = nt.nodes.new("ShaderNodeEmission")
+        back = nt.nodes.new("ShaderNodeEmission")
+        back.inputs["Color"].default_value = (0, 0, 0, 1)
+        # MixSHADER, not MixRGB: its socket order (Fac, Shader, Shader) is
+        # stable across Blender versions, where the RGB mix node was rebuilt
+        # in 3.4 and its socket indices moved.
+        mix = nt.nodes.new("ShaderNodeMixShader")
         out = nt.nodes.new("ShaderNodeOutputMaterial")
         nt.links.new(geo.outputs["Normal"], mad.inputs[0])
-        nt.links.new(mad.outputs[0], mixc.inputs[1])
-        nt.links.new(geo.outputs["Backfacing"], mixc.inputs[0])
-        nt.links.new(mixc.outputs[0], em.inputs["Color"])
-        nt.links.new(em.outputs[0], out.inputs["Surface"])
+        nt.links.new(mad.outputs[0], front.inputs["Color"])
+        nt.links.new(geo.outputs["Backfacing"], mix.inputs[0])
+        nt.links.new(front.outputs[0], mix.inputs[1])
+        nt.links.new(back.outputs[0], mix.inputs[2])
+        nt.links.new(mix.outputs[0], out.inputs["Surface"])
         return m
 
     def flat_emissive(name, rgb):
@@ -871,7 +919,10 @@ def run_worker(plan_path):
         wave.wave_type = "BANDS"
         wave.bands_direction = "Z"
         wave.wave_profile = "SAW"
-        wave.inputs["Scale"].default_value = 5.0
+        # 14 bands over the environment sphere. 5 was tried first and gives so
+        # few stripes across the reflected elevation range that a panel wave
+        # has nothing to bend; Class-A rigs use tens of strips, not a handful.
+        wave.inputs["Scale"].default_value = 14.0
         wave.inputs["Distortion"].default_value = 0.0
         ramp = nt.nodes.new("ShaderNodeValToRGB")
         ramp.color_ramp.interpolation = "CONSTANT"   # hard stripe edges
@@ -923,7 +974,9 @@ def run_worker(plan_path):
         return centre + d * (math.cos(a) * ex + math.sin(a) * ey) \
             + plan["cam_height"] * ez
 
-    log = {"frames": {}, "cameras": {}, "legend": {}, "notes": []}
+    log = {"frames": {}, "cameras": {}, "legend": {}, "notes": [],
+           "face_count": int(sum(len(o.data.polygons) for o in meshes)),
+           "object_count": len(meshes)}
 
     def shoot(path):
         sc.render.filepath = path
@@ -1023,6 +1076,7 @@ def run_worker(plan_path):
             pl.location = centre - ex * (span * 1.4)
             pl.rotation_euler = ex.to_track_quat("Z", "Y").to_euler()
             pl.data.materials.append(flat_emissive("qc_bl", (1.0, 0.0, 0.85)))
+            pass_objects.append(pl)
             meta["backlight_plane"] = True
         return meta
 
@@ -1173,6 +1227,7 @@ def run_worker(plan_path):
                     and abs(rel.dot(ey)) > 0.42 * halfw
                     and (p.dot(ez) - base) < 0.52 * H)
 
+        named = info["selector"] == "names"
         cands = []
         for o in wheel_objs:
             for _i, c in face_centroids(o):
@@ -1198,11 +1253,20 @@ def run_worker(plan_path):
         info["wheel_centre"] = [round(v, 5) for v in wc]
         info["wheel_radius"] = round(rad, 5)
 
+        # A TIGHTER SPHERE, AND ONLY WHEEL-NAMED GEOMETRY. The first version
+        # cropped every object inside 1.35x the radius and then DELETED those
+        # faces from the originals. On golf_final.glb that pulled `carpaint`,
+        # `interior` and `Lamp_Lens` into the "wheel" and tore visible holes in
+        # the front wing and the door — the same arch-liner spill wheel_swap.py
+        # records paying for. When the wheel is NAMED, only named geometry is
+        # eligible, and the originals are HIDDEN rather than cut, so the pass
+        # is non-destructive and `restore()` can undo it.
         def inside(p):
-            return (p - wc).length < rad * 1.35
+            return (p - wc).length < rad * (1.05 if named else 1.35)
 
+        eligible = wheel_objs if named else list(carparts)
         made = []
-        for o in list(carparts):
+        for o in eligible:
             has = any(inside(c) for _i, c in face_centroids(o))
             if not has:
                 continue
@@ -1229,7 +1293,17 @@ def run_worker(plan_path):
                         bpy.data.objects.remove(dup, do_unlink=True)
                         continue
                 made.append((mname, dup))
-            delete_faces(o, inside)                  # remove the original wheel
+                pass_objects.append(dup)
+            if named:
+                # Hide the whole wheel object: the view reads as "car with its
+                # wheels off, one wheel exploded beside it", and nothing is cut.
+                o.hide_render = True
+            else:
+                # Geometric fallback only: there is no object that is purely
+                # wheel, so the faces must come out. Destructive, hence the
+                # explode passes run last and this one runs after the lamps.
+                delete_faces(o, inside)
+                info["destructive"] = True
         if not made:
             info["result"] = "SKIPPED — wheel region isolated no parts"
             return info, []
@@ -1293,8 +1367,12 @@ def run_worker(plan_path):
         info["result"] = "ok"
         return info, moved
 
-    for ename, fn in (("exploded_wheel", explode_wheel),
-                      ("exploded_lamps", explode_lamps)):
+    # LAMPS FIRST. It only MOVES objects, so it cannot damage what follows;
+    # the wheel pass can be destructive in its fallback mode. Running the wheel
+    # first meant the lamp view inherited the holes the wheel crop had torn in
+    # the body, and the two sheets came out nearly identical.
+    for ename, fn in (("exploded_lamps", explode_lamps),
+                      ("exploded_wheel", explode_wheel)):
         if ename not in plan["explode"]:
             continue
         info, _ = fn()
@@ -1542,7 +1620,8 @@ def main():
             out = os.path.join(sdir, "sheet_%s.png" % pname)
             contact_sheet(tiles, out,
                           "%s — %s" % (os.path.basename(a.glb), pname),
-                          cols=4 if len(tiles) > 3 else len(tiles), sub=stamp)
+                          cols=4 if len(tiles) > 3 else len(tiles), sub=stamp,
+                          legend=(log.get("legend") if pname == "matid" else None))
             sheets[pname] = out
 
     manifest = {
@@ -1600,6 +1679,10 @@ def main():
         "passes": {p: {"frames": len(log["frames"].get(p, {})),
                        "meta": log.get("pass_meta", {}).get(p, {})}
                    for p in plan["passes"]},
+        "geometry": {"faces": log.get("face_count"),
+                     "objects": log.get("object_count"),
+                     "faces_per_pixel": round(
+                         (log.get("face_count") or 0) / float(res_x * res_y), 3)},
         "material_id_legend": log.get("legend", {}),
         "explode": log.get("explode", {}),
         "turntable": tt,
@@ -1620,6 +1703,19 @@ def main():
         manifest["notes"].append(
             "CALIBRATION FAILED — do not trust any brightness or clipping "
             "judgement from this pack.")
+    fpp = manifest["geometry"]["faces_per_pixel"]
+    if "wire" in plan["passes"] and fpp > 0.25:
+        # Measured on golf_final.glb: 983,512 faces at 760x570 is 2.27 faces
+        # per pixel, and the wireframe pass renders as a solid black mass. It
+        # is not broken and thinner lines do not fix it — there is more
+        # topology than there are pixels. Say so, or a reviewer reads a
+        # saturated pass as a defect.
+        manifest["notes"].append(
+            "WIREFRAME SATURATED: %d faces over %dx%d is %.2f faces per pixel, "
+            "so the wire pass reads as a solid mass. That is EVIDENCE OF "
+            "DENSITY, not of topology — judge topology from the ortho tiles or "
+            "re-run --passes wire at a much higher --res on one view."
+            % (manifest["geometry"]["faces"], res_x, res_y, fpp))
 
     mpath = os.path.join(a.outdir, "qc_manifest.json")
     with open(mpath, "w") as fh:
