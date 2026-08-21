@@ -3529,3 +3529,45 @@ with a perfect exterior*. Combined with the noise result, the uncomfortable coro
 that **the only way an exterior-only mesh clears such a gate is by being rough.** When
 setting a crease-retention gate, measure the baseline's exterior share first, or gate the
 render instead.
+
+## CREASE DENSITY CANNOT SEPARATE NOISE FROM DETAIL — now a hard control (2026-08-21)
+
+CLAUDE.md has warned since 2026-08-15 that *"the metric counts sharp geometry, not GOOD
+geometry"* and that Hi3DGen *"scores 92.4 largely because it is NOISY"*. That was an inference.
+It is now a measured control, and it is worse than the warning implied.
+
+**A gaussian-noise SPHERE at amplitude 0.010 reproduces the Kia Sportage's entire crease profile
+to within ~25% at every dihedral floor:**
+
+| dihedral floor | noise sphere | Sportage (catalogue-grade) |
+|---|---|---|
+| 25 deg | 199.4 | 271.5 |
+| 45 deg | 100.1 | 121.2 |
+| 60 deg | 54.1 | 64.2 |
+| 90 deg | 12.3 | 16.4 |
+
+There is no shut line, no slat and no lamp recess anywhere in that sphere. **Raising the dihedral
+floor does not rescue it** — the profiles track each other all the way up.
+
+**The operational consequence: a LOW crease score is informative; a HIGH one is close to
+uninformative.** The metric can EXCLUDE, it cannot CONFIRM. Any gate whose pass condition is a high
+crease number can be satisfied by roughness alone — which is exactly how a fine-tune once scored
+"43 -> 132, a 3x gain" on a mesh that was a melted blob. **The render is the arbiter and it is doing
+almost all of the work.** Report crease as evidence beside a render, never as a verdict, and when
+the two disagree say plainly that the render wins.
+
+**SECOND, AND IT BREAKS NAIVE RETENTION GATES: only 36-44% of a catalogue car's crease length lies
+on its EXTERIOR shell.** So a model that outputs exterior-only geometry (Direct3D-S2 runs
+`remove_interior=True`; check every generator for this) scores **~103 against a 216.6 threshold for
+a PERFECT exterior**. It fails an 80%-retention gate while being flawless. Combined with the finding
+above, **the only way an exterior-only mesh clears such a gate is by being ROUGH.**
+Do not move a pre-registered gate to fix this. Report the exterior/interior split of input and
+output, and state the ceiling alongside the pass/fail — a failure on quality and a failure on the
+ceiling are completely different answers, and only one of them closes a strategic question.
+
+**Related, and it cost a whole run:** a bare `python3 -c "import <torch_extension>"` preflight is
+broken by construction. `udf_ext` failed with `ImportError: libc10.so: cannot open shared object
+file` at minute 39 of a $0.85 pod; the extension was FINE — `libc10.so` only reaches the loader path
+once `torch` is imported, and the library's own call site imports torch first. Use
+`import torch, <ext>`. Same class as the P3-SAM preflight that aborted a healthy run: **a safety
+check that is itself wrong costs exactly as much as no safety check.**
