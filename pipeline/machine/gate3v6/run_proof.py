@@ -148,20 +148,25 @@ def proof_views(ly, groups, boxes_lo, boxes_hi, lamp_centre):
     # 11 front assembly exploded — the body shell stays as CONTEXT, the bulk
     #    inner/glass/wheel shells are hidden so every front component reads.
     bulk = sorted(set(groups["interior"]) | set(groups["glass"]) | set(groups["wheels"]))
-    V.append(dict(id="p11_front_exploded", az=305, elev=12.0, cam="ortho",
-                  occ=0.84, res=RES_MAIN, pass_="explode_id",
-                  samples=SAMPLES_FLAT, ground=False, hide=bulk,
+    # az 330 (nearly side-on), body shell HIDDEN, 0.30 m per layer: at az 305
+    # with the shell present the layers overlapped and half the components were
+    # occluded by the nose, which defeats the whole point of the view.
+    V.append(dict(id="p11_front_exploded", az=330, elev=14.0, cam="ortho",
+                  occ=0.92, res=RES_MAIN, pass_="explode_id",
+                  samples=SAMPLES_FLAT, ground=False,
+                  hide=sorted(set(bulk) | set(groups["base"])),
                   fit_objects=frontkit, aim="fit",
-                  explode=dict(axis_blender=[-1, 0, 0], spacing=0.34,
+                  explode=dict(axis_blender=[-1, 0, 0], spacing=0.30,
                                ranks=planner.explode_ranks(BOXES, frontkit))))
     # 12 headlamp exploded — components only, no shell, so nothing can hide a
     #    part that is not actually there
-    V.append(dict(id="p12_headlamp_exploded", az=305, elev=10.0, cam="ortho",
-                  occ=0.88, res=RES_MAIN,
+    # ONLY the lamp nodes. Hiding just the shell was not enough - the intact
+    # grille and bumper still buried one side's lamp parts.
+    V.append(dict(id="p12_headlamp_exploded", az=330, elev=12.0, cam="ortho",
+                  occ=0.86, res=RES_MAIN,
                   pass_="explode_id", samples=SAMPLES_FLAT, ground=False,
-                  hide=sorted(set(bulk) | set(groups["base"])),
-                  fit_objects=lamps, aim="fit",
-                  explode=dict(axis_blender=[-1, 0, 0], spacing=0.30,
+                  only=lamps, fit_objects=lamps, aim="fit",
+                  explode=dict(axis_blender=[-1, 0, 0], spacing=0.34,
                                ranks=planner.explode_ranks(BOXES, lamps))))
     # 13 old-geometry-removed: same front camera, new components HIDDEN
     V.append(dict(id="p13_kit_hidden_front", pass_="matte", samples=SAMPLES_LIT,
