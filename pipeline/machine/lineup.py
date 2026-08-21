@@ -138,7 +138,15 @@ cd.lens = 78          # long enough that the far car is not perspective-shrunk
 cam = bpy.data.objects.new("C", cd)
 sc.collection.objects.link(cam)
 sc.camera = cam
-r = span * 1.42
+# The camera must stand PERPENDICULAR to the row and far enough back that the
+# end cars are not cut off. The first attempt used span*1.42 with span = the
+# longest axis, which by then was the ROW length, and shot it obliquely at
+# az 215 — the middle car filled the frame and both ends were cropped.
+# Radius is now driven by the row's own width and the lens's horizontal field,
+# with headroom, so it cannot be wrong by construction as cars are added.
+row_w = hi[1] - lo[1]
+hfov = 2 * math.atan(0.5 * 36.0 / cd.lens)          # 36mm sensor
+r = max(span * 1.2, (row_w * 0.62) / math.tan(hfov / 2))
 cam.location = (ctr[0] + r * math.cos(AZ) * math.cos(EL),
                 ctr[1] + r * math.sin(AZ) * math.cos(EL),
                 (hi[2] - lo[2]) * 0.55 + r * math.sin(EL))
