@@ -84,8 +84,16 @@ export type VehicleAsset = {
   oemPaintCode?: string | null;
   oemPaintName?: string | null;
   colourVariants?: Record<string, string>;
+  /**
+   * Mobile-weight counterparts of `colourVariants`, keyed by the SAME colour
+   * keys. A key present here is served to a phone; a key missing here falls
+   * back to the desktop variant of the same colour. Absent/empty = phones keep
+   * getting the desktop variant (the pre-2026-08-21 behaviour).
+   */
+  mobileColourVariants?: Record<string, string> | null;
   customization?: Customization | null;
   desktopGlbUrl: string;
+  /** Distinct mobile-weight base GLB. Equal to desktopGlbUrl means NO mobile asset. */
   mobileGlbUrl?: string | null;
   fallbackGlbUrl?: string | null;
   posterUrl?: string | null;

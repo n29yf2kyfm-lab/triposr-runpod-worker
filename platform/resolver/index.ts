@@ -28,12 +28,57 @@
 // Deploy: supabase functions deploy resolve-vehicle
 // Response keeps the old keys (match/confidence/vehicle/asset) so the current
 // app keeps working, and adds `resolution` with the v2 truth.
+//
+// ---------------------------------------------------------------------------
+// MOBILE SERVING (added 2026-08-21, DEFAULT OFF — see RESOLVER_MOBILE_SERVING)
+//
+// Audit finding: this resolver handed `desktopGlbUrl` to EVERY device.
+// `mobileGlbUrl` was passed through as a separate field for the client to
+// choose and the resolver never chose it, so every phone downloaded a desktop
+// model. Measured on the live catalogue (1,044 resolver-eligible entries,
+// 2026-08-21): median 11.0 MB, p90 34.4 MB, max 47.9 MB, 66.7% over 5 MB.
+// It could not have worked client-side either: 1,042 of those 1,044 entries
+// have `mobileGlbUrl` byte-identical to `desktopGlbUrl`, so there was nothing
+// distinct to choose.
+//
+// The selection lives here rather than in the client because the resolver is
+// the only place that sees the asset record, and because the client cannot be
+// changed in lockstep with the catalogue.
+//
+// TWO SAFETY PROPERTIES, both unit-tested in tests/resolver/mobile-serving.test.ts:
+//   1. With RESOLVER_MOBILE_SERVING unset (the default "off") the response is
+//      byte-identical to the previous behaviour for every entry. The device is
+//      still CLASSIFIED and REPORTED, so the mobile/desktop split can be
+//      measured in production before anything about serving changes.
+//   2. With it "on", a mobile asset is preferred ONLY when one exists and
+//      DIFFERS from the desktop URL. No mobile asset -> the desktop URL, exactly
+//      as today. A mobile path that 404s is worse than a heavy download.
 
 const DATA_BASE =
   "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-renders/resolver";
 const CACHE_MS = 10 * 60 * 1000;
+
+// Deno globals, declared and guarded so the pure helpers and `handler` below
+// can be exercised by vitest under Node without a Deno runtime. `Deno.serve`
+// is only invoked when the runtime actually provides it, so importing this
+// module from a test is inert.
+declare const Deno:
+  | {
+      env: { get(k: string): string | undefined };
+      serve(h: (req: Request) => Response | Promise<Response>): unknown;
+    }
+  | undefined;
+
+const envVar = (k: string): string | undefined =>
+  typeof Deno !== "undefined" ? Deno.env.get(k) : undefined;
+
 // see OPERATIONAL THRESHOLD note above — 75 once metadata enrichment lands
-const MIN_SCORE = Number(Deno.env.get("RESOLVER_MIN_SCORE") ?? 40);
+const MIN_SCORE = Number(envVar("RESOLVER_MIN_SCORE") ?? 40);
+
+// Kill switch AND enable switch. Default "off" so the function can be deployed
+// inert and turned on (and straight back off) with an env var, with no code
+// change and no redeploy.
+const MOBILE_SERVING = (envVar("RESOLVER_MOBILE_SERVING") ?? "off").trim().toLowerCase() === "on";
 
 type Aliases = {
   make: Record<string, string>;
@@ -44,6 +89,9 @@ type Aliases = {
 };
 
 let cache: { at: number; catalogue: any[]; aliases: Aliases } | null = null;
+
+/** Drops the 10-minute cold-start cache. Used by the tests to isolate cases. */
+export function resetDataCache(): void { cache = null; }
 
 async function loadData(): Promise<{ catalogue: any[]; aliases: Aliases }> {
   if (cache && Date.now() - cache.at < CACHE_MS) return cache;
@@ -161,19 +209,140 @@ function scoreAsset(a: any, v: any, al: Aliases) {
   return { a, score: Math.max(0, Math.min(100, score)), matched };
 }
 
+// ---- device class ----------------------------------------------------------
+export type DeviceClass = "mobile" | "desktop";
+export type DeviceSource = "explicit" | "client-hint" | "user-agent" | "default";
+
+// Deliberately narrow, and the asymmetry is deliberate too: a MISSED phone
+// costs today's behaviour (a desktop file on a phone), while a misread desktop
+// costs a smaller file on a big screen. Neither breaks, so this errs toward
+// not firing.
+//
+// `Mobile Safari` is the token Android Chrome and iOS Safari both carry;
+// desktop Chrome and desktop Safari carry `Safari` WITHOUT `Mobile`, which is
+// why the space matters and why the desktop UAs are in the test list.
+//
+// KNOWN AND ACCEPTED MISS: iPadOS Safari reports itself as `Macintosh` and
+// sends no client hints, so an iPad is classed desktop. That is the safe
+// direction (it gets exactly what it gets today) and a large screen anyway.
+const MOBILE_UA =
+  /Android|iPhone|iPod|iPad|Mobile Safari|webOS|BlackBerry|IEMobile|Opera Mini|Windows Phone|Silk\//i;
+
+/**
+ * Decide the device class. Precedence is explicit > client hint > user agent,
+ * so a client that knows (it can measure its own viewport) always wins over a
+ * string we are guessing from.
+ */
+export function classifyDevice(input: {
+  explicit?: string | null;
+  clientHintMobile?: string | null; // Sec-CH-UA-Mobile: "?1" | "?0"
+  userAgent?: string | null;
+}): { device: DeviceClass; source: DeviceSource } {
+  const e = (input.explicit ?? "").trim().toLowerCase();
+  if (e === "mobile" || e === "phone") return { device: "mobile", source: "explicit" };
+  if (e === "desktop") return { device: "desktop", source: "explicit" };
+  // "auto", "", or anything unrecognised deliberately falls through.
+
+  const ch = (input.clientHintMobile ?? "").trim();
+  if (ch === "?1") return { device: "mobile", source: "client-hint" };
+  if (ch === "?0") return { device: "desktop", source: "client-hint" };
+
+  const ua = input.userAgent ?? "";
+  if (ua) return { device: MOBILE_UA.test(ua) ? "mobile" : "desktop", source: "user-agent" };
+
+  return { device: "desktop", source: "default" };
+}
+
+// ---- GLB selection ---------------------------------------------------------
+/**
+ * A mobile asset only counts when it EXISTS and DIFFERS from the desktop URL.
+ * 1,042 of 1,044 approved entries carry mobileGlbUrl == desktopGlbUrl, and
+ * treating those as "a mobile asset" would make every response claim a mobile
+ * serve that never happened — the rollout could then not be verified at all.
+ */
+function distinctMobileUrl(candidate: unknown, desktopUrl: string): string | null {
+  if (typeof candidate !== "string") return null;
+  const m = candidate.trim();
+  if (!m || m === desktopUrl) return null;
+  return m;
+}
+
+export type GlbSelection = {
+  glbUrl: string;
+  desktopGlbUrl: string;
+  mobileGlbUrl: string | null; // null = no DISTINCT mobile asset exists
+  glbVariant: "mobile" | "desktop";
+};
+
+/**
+ * COLOUR IS CHOSEN FIRST AND IS NEVER TRADED FOR WEIGHT.
+ *
+ * The variant path exists so a customer sees their own DVLA colour; handing a
+ * phone the base grey car because no light variant was baked would be a
+ * visible regression, not an optimisation. So a missing mobile variant falls
+ * back to the DESKTOP variant of the SAME colour — never to a mobile car of
+ * the wrong colour. Weight is the only thing this function ever changes.
+ */
+export function selectGlb(
+  a: any,
+  variantKey: string | undefined,
+  device: DeviceClass,
+): GlbSelection {
+  const variants: Record<string, string> = a.colourVariants ?? {};
+  const mobileVariants: Record<string, string> = a.mobileColourVariants ?? {};
+
+  const desktopUrl: string = variantKey ? variants[variantKey] : a.desktopGlbUrl;
+  const mobileUrl = variantKey
+    ? distinctMobileUrl(mobileVariants[variantKey], desktopUrl)
+    : distinctMobileUrl(a.mobileGlbUrl, desktopUrl);
+
+  const useMobile = device === "mobile" && mobileUrl !== null;
+  return {
+    glbUrl: useMobile ? (mobileUrl as string) : desktopUrl,
+    desktopGlbUrl: desktopUrl,
+    mobileGlbUrl: mobileUrl,
+    glbVariant: useMobile ? "mobile" : "desktop",
+  };
+}
+
+// ---- HTTP ------------------------------------------------------------------
+// `x-device` is listed so a browser preflight can carry it; the same value is
+// also accepted in the JSON body and as ?device=, neither of which needs CORS.
+const CORS: Record<string, string> = {
+  "access-control-allow-origin": "*",
+  "access-control-allow-methods": "POST, OPTIONS",
+  "access-control-allow-headers": "authorization, x-client-info, apikey, content-type, x-device",
+  "access-control-max-age": "86400",
+};
+
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), {
     status,
-    headers: { "content-type": "application/json", "access-control-allow-origin": "*" },
+    headers: { "content-type": "application/json", ...CORS },
   });
 
-Deno.serve(async (req) => {
-  if (req.method === "OPTIONS") return json({}, 204);
+export async function handler(req: Request): Promise<Response> {
+  // 204 is a NULL-BODY status: `new Response("{}", { status: 204 })` throws a
+  // TypeError in every WHATWG fetch implementation, so the old `json({}, 204)`
+  // could only ever have produced a 500 on the CORS preflight. Reproduced
+  // locally on the same implementation; see the test.
+  if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: CORS });
+
   let d: any = {};
   try { d = await req.json(); } catch { /* empty body */ }
   if (!d.make || !d.model) {
     return json({ error: "Provide make + model (the app decodes these from the reg)." }, 400);
   }
+
+  // Device class. Explicit beats hints; a client that measures its own viewport
+  // is a better witness than any string we sniff.
+  let qsDevice: string | null = null;
+  try { qsDevice = new URL(req.url).searchParams.get("device"); } catch { /* non-absolute URL */ }
+  const { device, source: deviceSource } = classifyDevice({
+    explicit: d.device ?? qsDevice ?? req.headers.get("x-device"),
+    clientHintMobile: req.headers.get("sec-ch-ua-mobile"),
+    userAgent: req.headers.get("user-agent"),
+  });
 
   const { catalogue, aliases } = await loadData();
   const make = normaliseMake(d.make, aliases);
@@ -214,7 +383,11 @@ Deno.serve(async (req) => {
   const fam = clean(d.colour ?? "");
   const variants: Record<string, string> = a.colourVariants ?? {};
   const variantKey = Object.keys(variants).find((k) => fam && clean(k).includes(fam));
-  const glbUrl = variantKey ? variants[variantKey] : a.desktopGlbUrl;
+
+  // With MOBILE_SERVING off this is pinned to "desktop", which makes the
+  // selection provably identical to the pre-2026-08-21 behaviour.
+  const chosen = selectGlb(a, variantKey, MOBILE_SERVING ? device : "desktop");
+  const glbUrl = chosen.glbUrl;
 
   return json({
     // legacy keys, so the current app keeps working unchanged
@@ -228,7 +401,20 @@ Deno.serve(async (req) => {
     },
     asset: {
       tier: a.qualityGrade, glbUrl,
-      mobileGlbUrl: a.mobileGlbUrl ?? null,
+      // Additive: the desktop-weight URL for the SAME colour as glbUrl, so a
+      // client that wants the heavy file on a big screen never has to
+      // reconstruct it from colourVariants.
+      desktopGlbUrl: chosen.desktopGlbUrl,
+      // OFF: the raw catalogue field, exactly as before.
+      // ON: the mobile-weight URL for the chosen colour, falling back to the
+      // desktop one so this key is never null while glbUrl is a string — a
+      // client that reads mobileGlbUrl unconditionally on a phone cannot be
+      // handed a null by this change.
+      mobileGlbUrl: MOBILE_SERVING
+        ? (chosen.mobileGlbUrl ?? chosen.desktopGlbUrl)
+        : (a.mobileGlbUrl ?? null),
+      // "mobile" only when a DISTINCT mobile asset was actually served.
+      glbVariant: chosen.glbVariant,
       manifestUrl: a.turntableUrl ?? null,
       colourVariants: variants,
     },
@@ -237,6 +423,11 @@ Deno.serve(async (req) => {
       type, score: best.score, assetId: a.assetId,
       matched: best.matched, disclosure,
       accuracyGrade: a.accuracyGrade, provenance: a.provenance,
+      // Reported even while MOBILE_SERVING is off, so the mobile/desktop split
+      // is measurable in production BEFORE any serving behaviour changes.
+      device, deviceSource, mobileServing: MOBILE_SERVING,
     },
   });
-});
+}
+
+if (typeof Deno !== "undefined") Deno.serve(handler);

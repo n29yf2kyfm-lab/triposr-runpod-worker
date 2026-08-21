@@ -58,6 +58,11 @@
     "oemPaintCode": { "type": ["string", "null"] },
     "oemPaintName": { "type": ["string", "null"] },
     "colourVariants": { "type": "object", "additionalProperties": { "type": "string", "format": "uri" } },
+    "mobileColourVariants": {
+      "type": ["object", "null"],
+      "description": "Mobile-weight counterparts of colourVariants, keyed by the SAME colour keys. The resolver serves colour first and weight second: a key present here is used for a phone, a key missing here falls back to the desktop variant of the same colour (never to a mobile car of a different colour). Absent or empty means no mobile variants exist and phones keep getting the desktop variant, which is the pre-2026-08-21 behaviour.",
+      "additionalProperties": { "type": "string", "format": "uri" }
+    },
     "customization": {
       "type": ["object", "null"],
       "description": "Swappable-component sets for an interactive configurator. Populated by our own assembly pipeline (wheel_replace / clear_glass / recolour); every component is a self-generated GLB or texture we own. configuratorReady gates whether the app should offer live customization for this asset.",

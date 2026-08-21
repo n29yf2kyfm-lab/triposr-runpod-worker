@@ -131,7 +131,25 @@ def read_accessor(js, bin_, idx):
     if stride == sz * n:
         arr = np.frombuffer(bin_, dtype=dt, count=a["count"] * n, offset=off)
     else:
-        raw = np.frombuffer(bin_, dtype=np.uint8, count=a["count"] * stride, offset=off)
+        # INTERLEAVED. The LAST element occupies only `sz*n` bytes, not a whole
+        # stride, so asking for `count*stride` from a non-zero accessor
+        # byteOffset overruns the bufferView by exactly that offset. Harmless in
+        # the middle of a buffer (the extra bytes are sliced away), FATAL on the
+        # last bufferView in the file: numpy raises "buffer is smaller than
+        # requested size" and the whole geometry census is lost.
+        #   Measured 2026-08-21 on the live catalogue's largest asset,
+        #   jeep-grand-cherokee-jpw1-v1 after `gltf-transform copy`: bufferView
+        #   at 40,726,928 + 179,712 B ends exactly at the buffer end, and
+        #   accessors 538/539 sit at accessor byteOffset 12 and 24. 2 of 540
+        #   accessors were unreadable and `geometryDecoded` came back False, so
+        #   `fidelity.geometry_retention` degraded to NOT_TESTED on a healthy
+        #   file. Request only what the data actually spans and zero-pad the
+        #   trailing partial stride, which the [:, :sz*n] slice discards anyway.
+        need = (a["count"] - 1) * stride + sz * n
+        raw = np.frombuffer(bin_, dtype=np.uint8, count=need, offset=off)
+        full = a["count"] * stride
+        if need < full:
+            raw = np.concatenate([raw, np.zeros(full - need, np.uint8)])
         arr = raw.reshape(a["count"], stride)[:, :sz * n].copy().view(dt).ravel()
     return arr.reshape(a["count"], n) if n > 1 else arr
 
