@@ -3294,3 +3294,32 @@ on 4.5.12 it prints `EYEBALL_DENOISE: ON (OpenImageDenoise)`; on the stripped 4.
 denoiser at all), falls back, and still completes all 7 views. `EYEBALL_DENOISE=0` forces off.
 A silent fallback would look identical to a successful upgrade in the output frames, which is exactly
 why it prints. **Grep the other rigs for `use_denoising` before trusting that they benefit.**
+
+## supervise.py — read what agents LEAVE, never ask them to report (2026-08-21)
+
+`pipeline/machine/supervise.py`. One command: every agent workspace with its file count,
+minutes since its last write, its newest artefact, the tail of its CHECKPOINT.md, live local
+processes, pods with **uptime and GPU%**, balance, git HEAD and free disk.
+
+**The design is the finding.** The obvious supervisor asks each agent to report every N minutes.
+That design has already failed twice here — *"background processes in this container do not survive
+session idle"* (the night watch died at its first tick and a pod billed unwatched for 7h10m), and
+*"six subagents were spawned overnight; ZERO returned reports."* **An agent cannot be compelled to
+report on a cadence**; a message reaches it at its next tool round. But an agent that is working
+WRITES. So infer state from the filesystem, which needs no cooperation and has no daemon to die.
+
+**It caught a live error on its FIRST run.** I had just told the owner three model tests were
+running. All were dead — sharptest 75 min stale, `direct3d` never created a directory at all,
+oemdata 261 min stale — with 0 pods and 0 local processes. **Absence of a completion notification is
+not evidence of life**, and I had been treating it as such all day.
+
+**Two bugs in the tool itself, both found by running it rather than reading it:**
+1. It printed `balance ?` because credentials were not in its environment. Tools must **load
+   `/root/.alam3d_env` themselves** — `wave_render.py:load_env` exists for the same reason.
+2. Even with credentials it still printed `?`: **RunPod's GraphQL endpoint 403s python-urllib's
+   default User-Agent** (Cloudflare) while returning 200 to curl. Set a `User-Agent` header. This
+   matters more than it looks — the balance is the one field that must never silently fail, because
+   **billing exhaustion looks EXACTLY like GPU capacity starvation.**
+
+**STALE is a flag for a human, never a verdict** — an agent may be mid-thought or waiting on a pod.
+Same rule as every other candidate finder in this project.
