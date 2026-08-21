@@ -529,7 +529,8 @@ def check_symmetry(car, pairs=LR_PAIRS, centred=CENTRED):
 
 
 # -------------------------------------------------------- 5. hidden fascia
-def check_hidden_fascia(car, zone_m=0.65, pitch=0.006, win=(0.002, 0.250)):
+def check_hidden_fascia(car, zone_m=0.65, pitch=0.006, win=(0.002, 0.250), v0=None,
+                        tol=1e-4):
     """See the hypothesis block at the top of this file.
 
     Fires rays along +X (nose is at -X) over the front of the car and records
@@ -537,6 +538,19 @@ def check_hidden_fascia(car, zone_m=0.65, pitch=0.006, win=(0.002, 0.250)):
     lies behind that within the depth window.
     """
     V, F, own = car.concat()
+    # PROVENANCE, not naming. A node called `Bumper_Front` that is actually the
+    # original melt cut out and renamed would be counted as a "constructed
+    # component" by any name-based rule, and melt hidden behind it would then
+    # be invisible to this probe. So when V0 is supplied, every face is tagged
+    # by whether that exact triangle exists in the original file, and the
+    # nesting test is run on BOTH classifications.
+    orig_face = None
+    if v0 is not None:
+        C0 = np.vstack([v0.nodes[n]["V"][v0.nodes[n]["F"]].mean(1)
+                        for n in v0.names if len(v0.nodes[n]["F"])])
+        cF = V[F].mean(1)
+        dd, _ = cKDTree(C0).query(cF, k=1, distance_upper_bound=tol)
+        orig_face = np.isfinite(dd)
     mesh = trimesh.Trimesh(vertices=V, faces=F, process=False)
     inter = trimesh.ray.ray_pyembree.RayMeshIntersector(mesh)
     lo, hi = car.bounds()
@@ -558,17 +572,36 @@ def check_hidden_fascia(car, zone_m=0.65, pitch=0.006, win=(0.002, 0.250)):
     starts = np.searchsorted(iray, np.arange(N), side="left")
     ends = np.searchsorted(iray, np.arange(N), side="right")
 
+    first_face = np.full(N, -1, np.int64)
+    nested_orig = np.zeros(N, bool)     # ORIGINAL face behind a NEW first hit
+    nested_orig_depth = np.full(N, np.nan)
+    new_first = np.zeros(N, bool)
     first_owner = np.full(N, -1, np.int32)
     nested = np.zeros(N, bool)          # shell surface right behind a component
     nested_depth = np.full(N, np.nan)
     nested_owner = np.full(N, -1, np.int32)
     comp_first = np.zeros(N, bool)
     n_hits = ends - starts
+    face_sorted = itri[order]
     for k in range(N):
         s, e = starts[k], ends[k]
         if s == e:
             continue
         first_owner[k] = owner[s]
+        first_face[k] = face_sorted[s]
+        if orig_face is not None and not orig_face[face_sorted[s]]:
+            new_first[k] = True
+            d0 = depth[s]
+            for t in range(s + 1, e):
+                dd2 = depth[t] - d0
+                if dd2 < win[0]:
+                    continue
+                if dd2 > win[1]:
+                    break
+                if orig_face[face_sorted[t]]:
+                    nested_orig[k] = True
+                    nested_orig_depth[k] = dd2
+                    break
         if owner[s] in built_idx:
             comp_first[k] = True
             d0 = depth[s]
@@ -656,6 +689,23 @@ def check_hidden_fascia(car, zone_m=0.65, pitch=0.006, win=(0.002, 0.250)):
         if c:
             shell_first[n] = c
     res["shell_first_hit_rays"] = shell_first
+
+    if orig_face is not None:
+        ndo = nested_orig_depth[nested_orig] * MM
+        res["by_provenance"] = {
+            "note": ("classified by whether each triangle exists in V0, so a "
+                     "renamed piece of the original melt cannot pass as new"),
+            "faces_in_file": int(len(F)),
+            "faces_matching_V0": int(orig_face.sum()),
+            "rays_new_surface_first": int(new_first.sum()),
+            "rays_with_ORIGINAL_behind_a_NEW_surface": int(nested_orig.sum()),
+            "pct": round(100.0 * nested_orig.sum() / max(1, new_first.sum()), 2),
+            "shallow_under_60mm": int((ndo < 60).sum()) if nested_orig.any() else 0,
+            "shallow_pct": (round(100.0 * (ndo < 60).sum() / max(1, new_first.sum()), 2)
+                            if nested_orig.any() else 0.0),
+            "depth_bands_mm": ({f"{a}-{b}mm": int(((ndo >= a) & (ndo < b)).sum())
+                                for a, b in bands} if nested_orig.any() else {}),
+        }
     return res
 
 
@@ -794,9 +844,9 @@ def measure(path, v0path=None, label=None, skip=()):
     if "symmetry" not in skip:
         R["symmetry"] = check_symmetry(car)
     if "fascia" not in skip:
-        R["hidden_fascia"] = check_hidden_fascia(car)
+        v0car = Car(v0path) if v0path else None
+        R["hidden_fascia"] = check_hidden_fascia(car, v0=v0car)
         if v0path:
-            v0car = Car(v0path)
             R["v0_residue"] = v0_residue(car, v0car)
             R["origin_audit"] = origin_audit(car, v0car)
     R["seconds"] = round(time.time() - t0, 1)

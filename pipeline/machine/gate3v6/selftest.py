@@ -249,6 +249,41 @@ def run_selftest():
         "control_ok": (res["melt_hidden_behind_part"]["nested_pct"] > 90
                        and res["melt_deleted"]["nested_pct"] == 0)}
 
+    # ---- 11b the RENAMED-MELT attack against the fascia probe -------------
+    # The hidden plane is put in a node called Splitter_Front, so a NAME-based
+    # rule sees two "constructed components" and reports nothing behind
+    # anything. The provenance path, which tags each triangle by whether it
+    # exists in V0, must still catch it.
+    scA = trimesh.Scene()
+    pv2, pf2 = _plane(-2.10, 0.60, 0.90, -0.30, 0.30, n=10)
+    mA = trimesh.Trimesh(pv2, pf2, process=False)
+    _ = mA.vertex_normals
+    scA.add_geometry(mA, node_name="Bumper_Front", geom_name="Bumper_Front")
+    hv2, hf2 = _plane(-2.08, 0.60, 0.90, -0.30, 0.30, n=10)
+    mH = trimesh.Trimesh(hv2, hf2, process=False)
+    _ = mH.vertex_normals
+    scA.add_geometry(mH, node_name="Splitter_Front", geom_name="Splitter_Front")
+    pA = os.path.join(tmp, "renamed.glb")
+    scA.export(pA)
+    scV = trimesh.Scene()
+    mV = trimesh.Trimesh(hv2, hf2, process=False)
+    _ = mV.vertex_normals
+    scV.add_geometry(mV, node_name="carpaint", geom_name="carpaint")
+    pV = os.path.join(tmp, "renamed_v0.glb")
+    scV.export(pV)
+    fr = V.check_hidden_fascia(V.Car(pA), v0=V.Car(pV))
+    R["fascia_probe_vs_renamed_melt"] = {
+        "name_based_nested_pct": fr["nested_pct_of_component_rays"],
+        "provenance_based_pct": fr["by_provenance"]["pct"],
+        "provenance_shallow_pct": fr["by_provenance"]["shallow_pct"],
+        "faces_matching_V0": fr["by_provenance"]["faces_matching_V0"],
+        "injection": ("the original surface hidden 20 mm behind a new part AND "
+                      "renamed to Splitter_Front, so no name-based rule can see it"),
+        "control_ok": bool(fr["nested_pct_of_component_rays"] == 0
+                           and fr["by_provenance"]["pct"] > 90)}
+    for q in (pA, pV):
+        os.remove(q)
+
     # --------------------------------------------------- 12 v0 residue test
     sc0 = trimesh.Scene()
     fv, ff = _plane(-2.10, 0.60, 0.90, -0.30, 0.30, n=12)
