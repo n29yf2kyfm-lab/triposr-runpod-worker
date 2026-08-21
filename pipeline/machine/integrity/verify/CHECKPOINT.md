@@ -104,3 +104,36 @@ Direct defect-visibility test (dark-pit count inside the eroded silhouette): mea
 generic edge ratio cannot separate "conceals a defect" from "has less colour contrast",
 and the brief's own palette (mid-grey body on dark-grey interior) guarantees less contrast
 than saturated red. Both numbers reported; neither hidden.
+
+## UPDATE 20:07 — STAGE 9 ON THE FINAL EXPORT
+`car_integrity_repaired.glb` sha `c5ec452b…`, 20,136,932 B — hash-verified against the
+bucket MANIFEST *and* the Stages 1-6 handoff. Source re-verified unmodified.
+
+File-level: validator **0/0/0/0**; all three ledgers balance with **L2 delta = 0**
+(declared 895,037 = imported 895,037); unreferenced positions **0**; declared bbox ==
+referenced bbox; four tyres at 0.000 with world z-min unchanged at -0.004587; zero
+mirrored determinants; 82/82 nodes reachable; KHR clearcoat/ior/transmission retained.
+
+**61 of 83 objects are untouched** in both triangle count and area. The repair is narrow:
+12 wheel nodes rebuilt, 9 objects shed their duplicate/degenerate triangles, `Glass_Rear`
+removed. Total surface area +0.244%.
+
+Two handoff numbers restated (neither is an error):
+- `declared_triangles 786,089` is the UNIQUE-MESH count; **drawn** is 895,037. The 108,948
+  gap is exactly the 3 extra instances of each shared wheel mesh. Verified: 786,089 +
+  108,948 = 895,037. Vertices likewise 559,370 unique vs 627,959 drawn.
+- `Glass_Rear` = 25 components per the handoff; welding coincident positions I count
+  **7**. Weld-tolerance dependent. Conclusion unchanged: fragmented debris (largest
+  fragment 97.5 cm², six slivers totalling 21 cm²) beside `Glass_Backlight`'s single
+  clean 3,877 cm² pane, which survives byte-identical. 0.36% of glazing area.
+
+## RENDER STATUS — honest record
+BEFORE sheets COMPLETED: neutral(v1), neutral2(v2 glass), original, faceorient, cullon,
+matid, wire. BEFORE `normal` was in progress and BEFORE clay/ortho/iso/C4-controls were
+NOT RUN — I stopped that chain (by PID) to give the AFTER chain the whole CPU, because
+the verdict rests on the AFTER sheets. Those BEFORE sheets are marked NOT TESTED, not
+assumed.
+AFTER chain running: neutral, faceorient, original, cullon, matid, wire, normal, clay,
+ortho, iso wheels/glass/interior, per-view fit.
+STILL OWED: C4 render controls (proving the cull sheet and faceorient sheet can fire),
+AFTER viewer probe, wheel A/B zoom, final verdict table.

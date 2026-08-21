@@ -28,7 +28,7 @@ DESIGN NOTES THAT ARE LOAD-BEARING
     geometric and cannot be altered by transparency.  Occupancy and the
     populated-tile test are both computed from that mask, in code.
 """
-import bpy, sys, os, json, math, argparse
+import bpy, sys, os, json, math, argparse, re
 from mathutils import Vector, Matrix
 
 # ------------------------------------------------------------------ arguments
@@ -66,25 +66,59 @@ NOTGLASS = ('lamp', 'surr', 'frame', 'trim', 'mirror', 'rearview', 'icon',
 LAMPY = ('lamp', 'drl', 'headlight', 'taillight', 'indicator', 'reflector')
 INTY = ('cabin', 'interior', 'seat', 'dash', 'console', 'headliner', 'floor',
         'doorcard', 'tunnel', 'bench', 'parcelshelf', 'bootfloor', 'binnacle')
+# Explicit BODY vocabulary.  Without it `Body_Shell` -- one object of 20.4 m2 --
+# fell through name and slot 0 ('carpaint' matched nothing) into slot 2
+# ('Interior_Plastic') and was painted as cabin trim.
+BODYY = ('carpaint', 'paint', 'body', 'shell', 'bumper', 'hatch', 'panel',
+         'valance', 'plate', 'chrome', 'badge', 'grille', 'intake', 'shut',
+         'liner', 'underbody', 'skirt', 'sill', 'wing', 'bonnet', 'roof')
+
+
+def _w(word, text):
+    """Whole-word-ish match.  A plain `'rim' in name` substring test classes every
+    object carrying a `Trim_Black` or `Cabin_Trim` material as a RIM, because
+    'trim' contains 'rim'.  That mislabelled 31 objects and 27 m2 of surface on
+    this car before it was caught by looking at the material-ID sheet."""
+    return re.search(r'(?<![a-z])' + word + r'(?![a-z])', text) is not None
+
+
+def _cls_from(text):
+    n = (text or '').lower()
+    if any(_w(k, n) for k in TYREY) and not _w('arch', n):
+        return 'tyre'
+    if any(_w(k, n) for k in LAMPY):
+        return 'lamp'
+    if any(_w(k, n) for k in GLASSY) and not any(_w(k, n) for k in NOTGLASS):
+        return 'glass'
+    if any(_w(k, n) for k in RIMY):
+        return 'rim'
+    if any(_w(k, n) for k in INTY):
+        return 'interior'
+    if any(_w(k, n) for k in BODYY):
+        return 'body'
+    return None
 
 
 def cls_of(o):
-    ns = [o.name.lower()] + [(m.name.lower() if m else '') for m in o.data.materials]
-    for n in ns:
-        if any(k in n for k in TYREY) and 'arch' not in n:
-            return 'tyre'
-    for n in ns:
-        if any(k in n for k in LAMPY):
-            return 'lamp'
-    for n in ns:
-        if any(k in n for k in GLASSY) and not any(k in n for k in NOTGLASS):
-            return 'glass'
-    for n in ns:
-        if any(k in n for k in RIMY):
-            return 'rim'
-    for n in ns:
-        if any(k in n for k in INTY):
-            return 'interior'
+    """NAME first, then the FIRST material slot -- never "any material matches".
+
+    `Body_Shell` is one object of 20.4 m2 whose four slots are
+    carpaint / Arch_Liner / Interior_Plastic / Underbody.  An any-slot test made
+    the entire body shell 'interior' and gave it the dark interior grey instead
+    of the body grey the Stage 7 brief specifies.  Slot 0 is the dominant
+    material on every multi-slot object in this file."""
+    c = _cls_from(o.name)
+    if c:
+        return c
+    mats = [m.name for m in o.data.materials if m]
+    if mats:
+        c = _cls_from(mats[0])
+        if c:
+            return c
+    for m in mats[1:]:
+        c = _cls_from(m)
+        if c:
+            return c
     return 'body'
 
 
