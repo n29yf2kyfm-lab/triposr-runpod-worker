@@ -241,7 +241,7 @@ window.__setSrc=(s)=>{window.__loaded=false;window.__failed=null;mv.src=s;};
 window.__cam=(o,t,f)=>{mv.cameraOrbit=o;mv.cameraTarget=t;mv.fieldOfView=f;
   mv.jumpCameraToGoal();};
 window.__mats=()=>mv.model.materials.map(m=>m.name);
-// snapshot every material so an ID pass can be undone exactly
+// snapshot every material so an isolation pass can be undone exactly
 window.__save=()=>{window.__orig=mv.model.materials.map(m=>({
   bc:Array.from(m.pbrMetallicRoughness.baseColorFactor),
   mt:m.pbrMetallicRoughness.metallicFactor,
@@ -252,31 +252,35 @@ window.__restore=()=>{mv.model.materials.forEach((m,i)=>{const o=window.__orig[i
   m.pbrMetallicRoughness.setMetallicFactor(o.mt);
   m.pbrMetallicRoughness.setRoughnessFactor(o.rg);
   m.setEmissiveFactor(o.em);});};
-// flat unlit ID pass: black base, no metal, full rough, emissive = the id colour
-window.__idpass=(cols)=>{mv.model.materials.forEach((m,i)=>{
+// ISOLATION pass k: everything matte black, material k emissive WHITE.
+// One material per screenshot -- see the docstring for why a single
+// many-colours-at-once ID pass does not work through a tone mapper.
+//
+// Split into INIT + INCREMENTAL on purpose. Touching all 11 materials for every
+// pass made each screenshot take ~60 s (three.js re-uploads and recompiles on a
+// material change, and SwiftShader then redraws 985k triangles). __isoInit runs
+// the expensive whole-table reset ONCE; each subsequent pass touches exactly the
+// two materials that differ.
+window.__isoPrev=-1;
+window.__isoInit=()=>{mv.model.materials.forEach(m=>{
   m.pbrMetallicRoughness.setBaseColorFactor([0,0,0,1]);
   m.pbrMetallicRoughness.setMetallicFactor(0);
   m.pbrMetallicRoughness.setRoughnessFactor(1);
-  m.setEmissiveFactor(cols[i]);});};
+  m.setEmissiveFactor([0,0,0]);}); window.__isoPrev=-1;};
+window.__isolate=(k)=>{const ms=mv.model.materials;
+  if(window.__isoPrev>=0) ms[window.__isoPrev].setEmissiveFactor([0,0,0]);
+  ms[k].setEmissiveFactor([1,1,1]); window.__isoPrev=k;};
 window.__paint=(name,rgba)=>{let n=0;mv.model.materials.forEach(m=>{
   if(m.name===name){m.pbrMetallicRoughness.setBaseColorFactor(rgba);n++;}});return n;};
 window.__ready=true;
 </script></body></html>"""
 
-# Deliberately saturated, well separated, and none of them a colour the car
-# already wears -- CLAUDE.md's magenta argument, generalised.
-def _id_colours(n):
-    base = [(1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 1, 0), (1, 0, 1), (0, 1, 1),
-            (1, 0.5, 0), (0.5, 0, 1), (0, 1, 0.5), (1, 1, 1), (0.5, 0.5, 0),
-            (0, 0.5, 1), (0.5, 1, 0), (1, 0, 0.5), (0.5, 0.25, 0)]
-    return [list(base[i % len(base)]) for i in range(n)]
-
 
 def respray_control(path, out_dir, cams, new_rgba=(0.05, 0.12, 0.75, 1.0),
                     paint_material=PAINT_MAT, leak_tol=0.03, move_min=0.15,
-                    verbose=True):
+                    bright_lum=90.0, min_mask_coverage=0.90, verbose=True):
     """Paint `carpaint` blue in the live viewer and attribute every changed
-    pixel to a material via a flat emissive ID pass.
+    pixel to a material via PER-MATERIAL ISOLATION passes.
 
     PASS requires BOTH halves:
       * the paint MOVED   -- >= move_min of the paint material's own pixels changed
@@ -284,6 +288,30 @@ def respray_control(path, out_dir, cams, new_rgba=(0.05, 0.12, 0.75, 1.0),
     A respray that raises no error and moves nothing ships eight identical files
     (CLAUDE.md, corolla-cross at dist=0.004); a respray that moves everything is
     the toyota-auris cov=1.000 retirement. Both directions are gated.
+
+    WHY ISOLATION PASSES AND NOT ONE MULTI-COLOUR ID PASS -- a bug this gate
+    made and had to correct mid-run
+    ----------------------------------------------------------------------
+    The first implementation set every material's emissive to a distinct
+    saturated ID colour in ONE pass and matched pixels back by nearest colour.
+    It ran, produced a confident FAIL ("PAINT LEAK onto `Underbody`: 13.9%"),
+    and was WRONG: only ONE material of eleven matched at all, because
+    <model-viewer> tone-maps the frame, so an emissive [1,0,1] does NOT land on
+    sRGB (255,0,255) and every saturated key missed. The one match was white,
+    which survived the mapping closest. A gate reporting a specific failure off
+    a mask that covered 882 pixels of the car is exactly the "safety check that
+    is itself wrong" failure this project has paid for before, so the leak claim
+    was WITHDRAWN and the instrument rebuilt.
+
+    Isolation is immune to it: in pass k every material is matte black and only
+    material k is emissive WHITE, so the mask is "is this pixel bright", which
+    no monotonic tone curve can break.
+
+    AND THE INSTRUMENT CHECKS ITSELF. The union of the per-material masks must
+    cover at least `min_mask_coverage` of the car's silhouette. If it does not,
+    the masks are not a partition of the car and the result is NOT_TESTED --
+    never PASS, never a named FAIL. That self-check is what the first version
+    lacked, and it is what would have caught it in one run.
     """
     from PIL import Image
     from playwright.sync_api import sync_playwright
@@ -313,6 +341,15 @@ def respray_control(path, out_dir, cams, new_rgba=(0.05, 0.12, 0.75, 1.0),
                 "--use-gl=angle", "--use-angle=swiftshader",
                 "--enable-unsafe-swiftshader", "--no-sandbox", "--disable-dev-shm-usage"])
             p = b.new_page(viewport={"width": 820, "height": 620})
+            # 180 s, not playwright's 30 s default. A whole-material-table
+            # update makes three.js re-upload and recompile, and SwiftShader then
+            # needs tens of seconds to redraw ~1M triangles -- measured, both
+            # locator.screenshot() and page.screenshot() raised
+            # "Timeout 30000ms exceeded" on exactly that frame. The timeout was
+            # the real limit; the locator form ALSO waits for element STABILITY,
+            # which a continuously re-rendering <model-viewer> never reaches, so
+            # both the clip form and this timeout are needed.
+            p.set_default_timeout(180000)
             p.goto("http://127.0.0.1:%d/index.html" % port)
             p.wait_for_function("()=>window.__ready===true", timeout=60000)
             p.evaluate("s=>window.__setSrc(s)", "/c.glb")
@@ -326,40 +363,59 @@ def respray_control(path, out_dir, cams, new_rgba=(0.05, 0.12, 0.75, 1.0),
             p.wait_for_timeout(600)
             names = p.evaluate("()=>window.__mats()")
             p.evaluate("()=>window.__save()")
+            # clipped PAGE screenshot, never locator.screenshot() -- see
+            # fidelity.appearance() for the measured reason.
+            box = p.locator("#mv").bounding_box()
+            clip = {"x": box["x"], "y": box["y"],
+                    "width": box["width"], "height": box["height"]}
 
             shots["before"] = os.path.join(out_dir, "respray_before.png")
-            p.locator("#mv").screenshot(path=shots["before"])
+            p.screenshot(path=shots["before"], clip=clip)
 
-            cols = _id_colours(len(names))
-            p.evaluate("c=>window.__idpass(c)", cols)
-            p.wait_for_timeout(500)
-            shots["idpass"] = os.path.join(out_dir, "respray_idpass.png")
-            p.locator("#mv").screenshot(path=shots["idpass"])
+            p.evaluate("()=>window.__isoInit()")
+            p.wait_for_timeout(800)
+            for k, nm in enumerate(names):
+                p.evaluate("k=>window.__isolate(k)", k)
+                p.wait_for_timeout(350)
+                fp = os.path.join(out_dir, "iso_%02d_%s.png"
+                                  % (k, re.sub(r"[^A-Za-z0-9_.-]", "_", nm or "?")))
+                p.screenshot(path=fp, clip=clip)
+                shots["iso_%d" % k] = fp
             p.evaluate("()=>window.__restore()")
-            p.wait_for_timeout(400)
+            p.wait_for_timeout(500)
 
             n = p.evaluate("a=>window.__paint(a[0],a[1])",
                            [paint_material, list(new_rgba)])
-            p.wait_for_timeout(600)
+            p.wait_for_timeout(700)
             shots["after"] = os.path.join(out_dir, "respray_after.png")
-            p.locator("#mv").screenshot(path=shots["after"])
+            p.screenshot(path=shots["after"], clip=clip)
             b.close()
     finally:
         httpd.shutdown()
 
     A = np.asarray(Image.open(shots["before"]).convert("RGB")).astype(np.int16)
     B = np.asarray(Image.open(shots["after"]).convert("RGB")).astype(np.int16)
-    I = np.asarray(Image.open(shots["idpass"]).convert("RGB")).astype(np.float64)
     changed = np.abs(A - B).max(axis=2) > 16
+    bg = np.array([0x20, 0x20, 0x24])
+    car = (np.abs(A - bg).sum(axis=2) > 24) | (np.abs(B - bg).sum(axis=2) > 24)
 
-    rows, fails = [], []
+    masks, rows = [], []
     for i, nm in enumerate(names):
-        c = np.array(cols[i]) * 255.0
-        mask = np.linalg.norm(I - c, axis=2) < 40
+        I = np.asarray(Image.open(shots["iso_%d" % i]).convert("RGB")).astype(np.float64)
+        lum = 0.2126 * I[:, :, 0] + 0.7152 * I[:, :, 1] + 0.0722 * I[:, :, 2]
+        masks.append(lum > bright_lum)
+    union = np.zeros_like(car)
+    for m in masks:
+        union |= m
+    coverage = float((union & car).sum()) / float(car.sum()) if car.sum() else 0.0
+
+    fails = []
+    for i, nm in enumerate(names):
+        mask = masks[i] & car
         px = int(mask.sum())
         frac = float(changed[mask].mean()) if px else 0.0
         protected = nm != paint_material
-        rows.append({"material": nm, "idPixels": px,
+        rows.append({"material": nm, "maskPixels": px,
                      "changedFraction": round(frac, 4), "protected": protected})
         if not protected and px and frac < move_min:
             fails.append("paint did NOT move: only %.1f%% of `%s` pixels changed"
@@ -370,20 +426,35 @@ def respray_control(path, out_dir, cams, new_rgba=(0.05, 0.12, 0.75, 1.0),
     if paint_material not in names:
         fails.append("no material named %r -- respray-by-name cannot work"
                      % paint_material)
+
+    # SELF-CHECK. If the isolation masks do not cover the car, they are not a
+    # partition of it and no verdict drawn from them is worth anything.
+    if coverage < min_mask_coverage:
+        return {"status": "NOT_TESTED", "paintMaterial": paint_material,
+                "reason": "isolation masks cover only %.1f%% of the car silhouette "
+                          "(need %.0f%%); the instrument is not measuring the car, "
+                          "so no leak verdict is reported"
+                          % (100 * coverage, 100 * min_mask_coverage),
+                "maskCoverage": round(coverage, 4), "materials": rows,
+                "shots": shots, "camera": cam}
+
     res = {"status": "PASS" if not fails else "FAIL",
            "paintMaterial": paint_material, "primitivesRepainted": n,
            "moveMin": move_min, "leakTolerance": leak_tol,
+           "maskCoverage": round(coverage, 4), "brightLum": bright_lum,
            "materials": rows, "failures": fails, "shots": shots,
            "camera": cam}
     if verbose:
         print("RESPRAY CONTROL (%s -> blue, live model-viewer material API)  %s"
               % (paint_material, res["status"]))
-        for r in sorted(rows, key=lambda r: -r["idPixels"]):
-            if r["idPixels"] < 200:
+        print("  isolation masks cover %.1f%% of the car silhouette (need %.0f%%)"
+              % (100 * res["maskCoverage"], 100 * min_mask_coverage))
+        for r in sorted(rows, key=lambda r: -r["maskPixels"]):
+            if r["maskPixels"] < 200:
                 continue
-            print("  %-20s %-10s idpx %7d  changed %6.1f%%"
+            print("  %-20s %-10s mask %7d px  changed %6.1f%%"
                   % (r["material"], "PROTECTED" if r["protected"] else "PAINT",
-                     r["idPixels"], 100 * r["changedFraction"]))
+                     r["maskPixels"], 100 * r["changedFraction"]))
         for f in fails:
             print("  FAIL: %s" % f)
     return res

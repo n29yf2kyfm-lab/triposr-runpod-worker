@@ -318,8 +318,26 @@ def appearance(master, candidate, out_dir, cams=None, min_psnr=35.0,
                 "--use-gl=angle", "--use-angle=swiftshader",
                 "--enable-unsafe-swiftshader", "--no-sandbox", "--disable-dev-shm-usage"])
             p = b.new_page(viewport={"width": 820, "height": 620})
+            # 180 s, not playwright's 30 s default. A whole-material-table
+            # update makes three.js re-upload and recompile, and SwiftShader then
+            # needs tens of seconds to redraw ~1M triangles -- measured, both
+            # locator.screenshot() and page.screenshot() raised
+            # "Timeout 30000ms exceeded" on exactly that frame. The timeout was
+            # the real limit; the locator form ALSO waits for element STABILITY,
+            # which a continuously re-rendering <model-viewer> never reaches, so
+            # both the clip form and this timeout are needed.
+            p.set_default_timeout(180000)
             p.goto("http://127.0.0.1:%d/index.html" % port)
             p.wait_for_function("()=>window.__ready===true", timeout=60000)
+            # page.screenshot(clip=...) NOT locator.screenshot(): the locator
+            # form waits for the element to be STABLE, and <model-viewer> under
+            # SwiftShader re-renders continuously while it settles, so it never
+            # becomes stable -- measured, it retried for 30 s per frame and then
+            # raised "Locator.screenshot: Timeout 29992ms exceeded ... waiting
+            # for element to be stable". Clipping the page has no such wait.
+            box = p.locator("#mv").bounding_box()
+            clip = {"x": box["x"], "y": box["y"],
+                    "width": box["width"], "height": box["height"]}
             todo = [("cand", "/b.glb")] if have_master else \
                    [("master", "/a.glb"), ("cand", "/b.glb")]
             for tag, src in todo:
@@ -335,7 +353,7 @@ def appearance(master, candidate, out_dir, cams=None, min_psnr=35.0,
                                [cam["orbit"], cam["target"], cam["fov"]])
                     p.wait_for_timeout(600)
                     fp = os.path.join(out_dir, "%s_%s.png" % (tag, cam["view"]))
-                    p.locator("#mv").screenshot(path=fp)
+                    p.screenshot(path=fp, clip=clip)
                     if tag == "master" and cache_dir:
                         shutil.copy(fp, os.path.join(cache_dir, "master_%s.png" % cam["view"]))
                     shots[(tag, cam["view"])] = fp
