@@ -146,15 +146,60 @@ CATALOGUE_URL = f"{SB}/storage/v1/object/public/car-renders/catalogue.v2.json"
 # "a retro check that reimplements them drifts from the wave check, and then the
 # two disagree about the same car."
 GLASSY = GP.GLASSY
-TYRE_MAT = re.compile(r"(?<![a-z0-9])(tyre|tire|rubber|pneu|neumatico|reifen)(?![a-z0-9])", re.I)
+
+# ---------------------------------------------------------------------------
+# CORRECTED 2026-08-21. These three were written with word-boundary lookarounds
+# on BOTH sides. Measured against 60 random live catalogue cars, the tyre form
+# MISSED a tyre material in **10 of them** -- and the dominant miss is the plain
+# English PLURAL, because the trailing `(?![a-z0-9])` refuses the `s`:
+#     Tires · tires · Pneus · M_2022_Mercedes_AMG_GLS63_Tires · tirea0
+#     XJ220MI_Thick_Tire1 · advantyre.001 · Meshestire0021Mtl
+# On those cars G2 printed "no tyre-NAMED material in this car -- G2 has nothing
+# to check", which reads as a fact about the CAR and was a fact about the REGEX.
+# `glass_probe.GLASSY` is a plain substring match and never had the problem,
+# which is exactly why glazing area was being measured on cars whose tyre area
+# was not. The two classes were simply inconsistent.
+#
+# The relaxation is the direction that manufactures FALSE POSITIVES, so it is
+# fenced by `pipeline/machine/test_compress_regex.py`, which asserts BOTH
+# directions against 3,082 distinct real catalogue material names plus every
+# trap this project has recorded. RUN IT AFTER ANY EDIT TO THESE THREE LINES.
+#
+# A generic right-hand guard does NOT work and the first attempt at one was
+# wrong: `tire(?!s?[a-z])` still refuses `tires`, because `s?` backtracks to
+# empty and `[a-z]` then matches the `s` itself. The guards below are therefore
+# an EXPLICIT list of the English continuations that actually exist
+# (`tired`/`tireless`/`tiresome`, `discovery`, `trim`, `primer`), which is
+# checkable against the corpus in a way a clever generic rule is not.
+# ---------------------------------------------------------------------------
+TYRE_MAT = re.compile(
+    r"(?:(?<!en)(?<!at)(?<!re)(?<!sa)tire(?!d|less|some)"
+    r"|tyre"
+    r"|rubber"
+    r"|pneu(?!matic)"
+    r"|neumatico|reifen)", re.I)
+
 # `light` must NOT be followed by a colour word: the 2026 Clio's BODY material is
-# `M_0132_LightGray` and a naive /light/ ate it. Recorded in CLAUDE.md.
+# `M_0132_LightGray` and a naive /light/ ate it. That guard is KEPT and widened
+# to allow a separator, because the real names are `LightGray`, `light_blue` and
+# `M_0132_LightGray` alike. The left guards are `flight`/`highlight`/`slight`,
+# which are the only English words in 3,082 real names that end in `light`.
 LAMP_MAT = re.compile(
-    r"(?<![a-z0-9])(lamp|lens|headlight|headlamp|taillight|taillamp|"
-    r"light(?!\s*(gray|grey|blue|green|red|brown|beige|silver|white))|"
-    r"phare|feux|faro|scheinwerfer)(?![a-z0-9])", re.I)
-RIM_MAT = re.compile(r"(?<![a-z0-9])(rim|alloy|wheel|jante|felge|rines|llanta|"
-                     r"jantes|disc|brake|caliper)(?![a-z0-9])", re.I)
+    r"(?:lamp"
+    r"|lens"
+    r"|(?:head|tail|rear|fog|stop|brake|reverse|indicator|turn)[\W_]*light"
+    r"|(?<!f)(?<!high)(?<!s)light"
+    r"(?![\W_]*(?:gray|grey|blue|green|red|brown|beige|silver|white))(?!ing)"
+    r"|phare|feux|faro|scheinwerfer)", re.I)
+
+# `rim` needs a LEFT boundary and nothing else: `rims?` on its own matched
+# `chrome_trim` (and would have matched `primer`), which is a false LEAK on a
+# gated class. `disc` needs `(?!over)` or every Land Rover Discovery material
+# books as a brake disc.
+RIM_MAT = re.compile(
+    r"(?:(?<![a-z])rim"
+    r"|alloy|wheel|jante|felge|rines|llanta"
+    r"|disc(?!over)|brake|caliper)", re.I)
 PAINT_HINT = GP.BODYISH
 
 DEFAULT_MIN_PSNR = 35.0
@@ -321,8 +366,24 @@ def g0_size(mm_master, mm_cand, bytes_in, bytes_out):
                         mm_cand["payload"]["uniqueImageBufferViews"],
                         mm_master.get("imageViewSharing"),
                         mm_cand.get("imageViewSharing")))
+    # ADVISORY, never a gate. Measured 2026-08-21: `audi-a2-v1` compresses
+    # 0.149 -> 0.148 MB (x1.003) and passes G0 correctly -- it DID shrink. The
+    # small end of this catalogue is already Draco-compressed and
+    # texture-dominated, so there is nothing left for geometry compression to
+    # take. That is a fact about the asset, not a defect in the candidate, so it
+    # must not fail a gate; it is flagged here so the manifest's consumer can
+    # skip re-serving a file that saves nothing.
+    notes = []
+    if not grew and bytes_out > 0.95 * bytes_in:
+        notes.append("MARGINAL: only %.1f%% saved. This asset is already "
+                     "texture-dominated (geometry is %s%% of the master's "
+                     "payload); geometry compression has little left to take. "
+                     "Not a failure -- a fact about the asset."
+                     % (100.0 * (bytes_in - bytes_out) / bytes_in,
+                        mm_master["payload"]["geometryPct"]))
     return {"status": "FAIL" if fails else "PASS",
             "bytesIn": bytes_in, "bytesOut": bytes_out,
+            "marginal": bool(notes), "notes": notes,
             "ratio": round(bytes_in / bytes_out, 3) if bytes_out else None,
             "savedBytes": bytes_in - bytes_out,
             "imageBytesIn": img_in, "imageBytesOut": img_out,
@@ -1011,7 +1072,16 @@ def nc_gut_glass(src, dst, keep_every=40):
             tri = arr.reshape(-1, 3)
             keep = np.zeros(len(tri), bool)
             keep[::keep_every] = True
-            tri[~keep] = tri[0]                # degenerate: zero area, valid index
+            # CORRECTED 2026-08-21. This line was `tri[~keep] = tri[0]`, with the
+            # comment "degenerate: zero area, valid index". It is NEITHER: it
+            # copies TRIANGLE 0, which has full area, so the gutted file kept
+            # N x area(tri0) of glazing and the control reported the glass area
+            # falling only to 65.18% while describing itself as having gutted
+            # the glazing. It still FIRED, so nothing looked wrong -- a control
+            # firing for the wrong reason is the least visible kind of broken
+            # instrument. All three indices must point at ONE vertex for the
+            # triangle to have zero area.
+            tri[~keep] = tri[0, 0]
             bins[off:off + acc["count"] * sz] = tri.reshape(-1).astype(dt).tobytes()
             n += 1
     if not n:
@@ -1426,6 +1496,51 @@ def run_controls(master, work, args):
 # selection
 # ==========================================================================
 
+def controls_entry(a):
+    """`--controls <assetId|path.glb>`: resolve a master, run the harness, and
+    persist the result. Exits non-zero if any control DID NOT FIRE -- a run
+    whose instruments cannot be shown to work has measured nothing, so that
+    must be an error status and not a line of prose in a log.
+    """
+    work = os.path.join(a.work_dir, "_controls")
+    shutil.rmtree(work, ignore_errors=True)
+    os.makedirs(work, exist_ok=True)
+    src = a.controls
+    if os.path.exists(src):
+        master = os.path.join(work, "master.glb")
+        shutil.copy(src, master)
+        origin = os.path.abspath(src)
+    else:
+        cat = load_catalogue(a.catalogue_cache)
+        e = next((x for x in cat if x.get("assetId") == src), None)
+        if not e or not e.get("desktopGlbUrl"):
+            raise SystemExit("no local file and no approved catalogue entry "
+                             "named %r" % src)
+        master = os.path.join(work, "master.glb")
+        download(e["desktopGlbUrl"], master)
+        origin = e["desktopGlbUrl"]
+        if a.paint_names is None:
+            a.paint_names = e.get("paintMaterialNames")
+    print("controls master: %s (%.3f MB, sha %s)"
+          % (origin, os.path.getsize(master) / 1e6, sha256(master)[:12]), flush=True)
+    out = run_controls(master, work, a)
+    out["masterOrigin"] = origin
+    out["masterSha256"] = sha256(master)
+    p = os.path.join(a.out_dir, "CONTROLS.json")
+    json.dump(out, open(p, "w"), indent=1)
+    if not a.dry_run:
+        try:
+            sb_put("%s/CONTROLS.json" % PREFIX, json.dumps(out, indent=1).encode(),
+                   "application/json")
+            print("controls uploaded to %s/%s/CONTROLS.json" % (BUCKET, PREFIX))
+        except Exception as ex:                                  # noqa: BLE001
+            print("controls upload FAILED: %s" % ex)
+    print("wrote %s -> %s" % (p, out["status"]))
+    if out["status"] != "OK":
+        raise SystemExit(2)
+    return out
+
+
 def load_catalogue(cache):
     if os.path.exists(cache) and os.path.getsize(cache) > 1000:
         return json.load(open(cache))
@@ -1514,6 +1629,20 @@ def main():
     ap.add_argument("--skip-psnr", action="store_true")
     ap.add_argument("--manifest", action="store_true",
                     help="rebuild MANIFEST.json from the bucket receipts and exit")
+    # --- the control harness ------------------------------------------------
+    # WIRED 2026-08-21. It was NOT wired before: `run_controls()` existed, the
+    # module docstring advertised `--controls`, argparse had no such flag and
+    # nothing called the function -- so the six negative controls had never once
+    # been run. That is precisely the failure class this project keeps paying
+    # for (a WRONG_CLASS regex ending in a literal \b; a wheel gate empty by
+    # construction). `--paint-names` was read by run_controls and likewise had
+    # no flag, so the function could not have run even if it had been called.
+    ap.add_argument("--controls", metavar="ASSET_ID_OR_GLB",
+                    help="build a broken asset per gate from this master and "
+                         "REQUIRE each gate to fail; then exit. Takes a local "
+                         ".glb path or a catalogue assetId.")
+    ap.add_argument("--paint-names", nargs="*", default=None,
+                    help="override the paint material names for --controls")
     a = ap.parse_args()
 
     os.makedirs(a.out_dir, exist_ok=True)
@@ -1521,6 +1650,9 @@ def main():
 
     if a.manifest:
         return build_manifest(a)
+
+    if a.controls:
+        return controls_entry(a)
 
     cat = load_catalogue(a.catalogue_cache)
     rows = select(cat, a)
