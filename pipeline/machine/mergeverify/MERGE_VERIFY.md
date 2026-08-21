@@ -154,6 +154,21 @@ relabelling and the v7 front kit can both be carried onto the grounded base by
 applying that single matrix; they do not need re-deriving. The wheels must come from
 `car_merged`, never from `car_rebound`.
 
+### 3.5b Two MANIFEST claims verified rather than quoted
+
+* **Glass gate — "label reassignment only. No vertex moved, no face was deleted."**
+  **TRUE.** Faces 985,227 → 985,227 (delta 0). Max face-centroid displacement
+  **0.0135 µm**, against a float32 ULP at this scale of **0.238 µm** — 100.0000% of
+  faces coincide at a 0.1 µm tolerance. It is re-export rounding, not movement.
+  *Caveat the merge must respect:* the referenced vertex count rises 702,178 →
+  704,918 (+2,740), because a node repartition splits shared vertices at the new node
+  boundaries. The two files share a **surface**, not a vertex array.
+  *(My first pass used a 1 nm tolerance and reported "point sets differ" — a wrong
+  tolerance, not a wrong file. Recorded because it is the same class as measuring
+  against your own exclusion boundary.)*
+* **Cabin gate — Body_Shell −3,544 and Interior −149,302 faces.** **BOTH EXACT**:
+  190,385 → 186,841 and 331,014 → 181,712.
+
 ### 3.6 The cabin's 28 components are provably constructed, not relabelled
 
 Same geometric-provenance test as §3.2, run on `car_cabin.glb`: **all 28 `Cabin_*`

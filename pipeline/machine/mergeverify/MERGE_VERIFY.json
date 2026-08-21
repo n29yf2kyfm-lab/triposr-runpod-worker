@@ -690,5 +690,27 @@
    "shared_mesh_violations": 0,
    "bonus_finding": "all 28 Cabin_* nodes score 0% face-centroid coincidence with car_rebound -- they are provably CONSTRUCTED geometry, not relabelled melt. Independent confirmation the cabin gate built components rather than renaming the Interior shell."
   }
- }
+ },
+ "manifest_claims_verified_not_quoted": {
+  "glass gate: 'label reassignment only. No vertex moved, no face was deleted.'": {
+   "faces": "985,227 -> 985,227, delta 0  VERIFIED",
+   "max_face_centroid_displacement_um": 0.0135,
+   "float32_ULP_at_2m_um": 0.2384,
+   "coincidence_at_0.1um": "100.0000%",
+   "verdict": "TRUE - the displacement is inside one float32 ULP, i.e. re-export rounding, not movement",
+   "caveat_for_the_merge": "referenced VERTEX count rises 702,178 -> 704,918 (+2,740) because a node repartition splits shared vertices at the new node boundaries. The two files share a SURFACE, not a vertex ARRAY."
+  },
+  "cabin gate: Body_Shell -3,544 and Interior -149,302 faces": {
+   "measured": "Body_Shell 190,385 -> 186,841 (delta 3,544); Interior 331,014 -> 181,712 (delta 149,302)",
+   "verdict": "BOTH EXACT"
+  }
+ },
+ "my_own_errors_corrected_in_writing": [
+  "speck denominator counted dark pixels among PAINTED pixels only, which excludes the specks by construction (roof read 0.476% on a visibly speckled roof)",
+  "speck zone was a rectangular band in which 62.9% of 'dark' pixels were the glazing, and the band names were reversed (tail lamps sit at image-left)",
+  "speck panel mask was seeded from the BEFORE file's paint mask and was empty by construction, scoring 0.000% before and after",
+  "matID mask compared LINEAR palette values against sRGB-encoded pixels and silently dropped 8 of 10 materials",
+  "glass-gate vertex test used a 1 nm tolerance against float32 data whose ULP at this scale is 238 nm, and returned a wrong 'point sets differ'",
+  "used pgrep -f once to inspect a background job (CLAUDE.md forbids it as a wait condition); it was a read, not a wait, but it should not have been used at all"
+ ]
 }
