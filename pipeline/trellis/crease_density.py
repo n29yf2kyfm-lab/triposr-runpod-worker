@@ -24,6 +24,26 @@ geometry, not GOOD geometry. A noisy scan scores high for the wrong reason
 (which is exactly what it shows for Hi3DGen). Read it alongside the render,
 never instead of it — same rule as every other numeric gate here.
 
+HOW BADLY? MEASURED 2026-08-21, so this stops being a warning to be remembered
+and becomes a number to reckon with. Same 25/150 band, synthetic controls:
+
+    smooth icosphere (20k faces)         crease/diag =   0.0
+    + gaussian vertex noise amp 0.001    crease/diag =   0.0
+    + gaussian vertex noise amp 0.003    crease/diag =   7.1
+    + gaussian vertex noise amp 0.010    crease/diag = 201.3
+    cube — twelve GENUINE sharp creases  crease/diag =   6.9
+
+PURE NOISE ON A SPHERE SCORES 201.3 — about 29x a cube's twelve real edges, and
+in the same range as a real catalogue car (the Sportage NQ5 measures 270.7). So a
+HIGH crease density is NOT evidence of panel features; it is equally consistent
+with a surface that is merely rough and has none. This is the documented
+43 -> 132 "3x gain" on a melted blob, quantified.
+
+PRACTICAL READING: a LOW score is informative (nothing sharp is there). A HIGH
+score is nearly uninformative on its own. The render decides. Density also
+depends on tessellation, so treat these as order-of-magnitude controls, not a
+conversion table.
+
 Usage:
   crease_density.py a.glb b.glb ...
 """
