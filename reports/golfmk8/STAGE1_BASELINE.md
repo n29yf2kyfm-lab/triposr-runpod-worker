@@ -97,7 +97,15 @@ Every one of the 8 fixed-camera views was examined at full resolution.
    and quarters; worst on the RIGHT side (view 7).
 4. **Front lower bumper / splitter melted** (views 1, 2, 8).
 5. **Rear lower bumper / valance torn with holes** (views 4, 5, 6).
-6. **Roof spike artefact** near the rear roof, visible in 6 of 8 views.
+6. ~~**Roof spike artefact** near the rear roof, visible in 6 of 8 views.~~
+   **RETRACTED 2026-08-21 after zooming. It is the SHARK-FIN ROOF AERIAL.**
+   Measured: the tip narrows to a 103 x 31 mm footprint at x=+1.25, y=+0.057 --
+   rear roof, on the centreline, which is where that aerial belongs. At 5x it
+   shows the correct dark grey swept fin profile in both the rear and right-side
+   crops. It reads as a spike ONLY at thumbnail scale. Evidence:
+   `repair/SPIKE_ZOOM.png`. No action taken; deleting it would have removed a
+   real component. This is the documented "zoom before writing anything down"
+   failure, made again.
 7. **Wheel-arch liners** read as flat grey patches with ragged edges.
 8. **Lamp internals blank** — head and tail lenses have no internal structure.
 9. **No rear number-plate recess** on the hatch (view 5).
@@ -110,3 +118,62 @@ Every one of the 8 fixed-camera views was examined at full resolution.
 
 `car-meshes/staging/golfmk8/stage1/` — `BASELINE_8VIEW.png`,
 `validator_baseline.json`, `baseline_scan.json`.
+
+---
+
+# REPAIR LEDGER
+
+## R1 — ground and level
+
+- **defect** front tyres airborne; car pitched nose-up
+- **evidence** `stage1/baseline_scan.json`, per-half z measurement
+- **root cause** whole-scene pitch. front tyre z_min +193.8 mm vs rear +11.5 mm
+  over a 2.414 m wheelbase = **+4.318 deg nose-up**. Whole-model z_min reads
+  +0.3 mm (the interior), which is why a bbox grounding test passes it.
+- **action** rigid rotate about Y to level the axle contact points, then drop
+- **objects changed** all root nodes (transform only; no geometry touched)
+- **before/after** `repair/R1_BEFORE_AFTER.png`
+- **verification** front **-0.00 mm**, rear **+0.00 mm**, residual pitch
+  **0.0000 deg**; rigidity by total triangle area 63.607986 -> 63.607986 m2
+  (**0.005 ppm**); glTF Validator **30 errors -> 0**
+- **result** **PASS**
+- **remaining uncertainty** the round-trip duplicated shared texture bufferViews
+  (see R2). Ride height is now level but has NOT been checked against a Golf Mk8
+  reference (BLOCKED).
+- **my own error** the first rigidity test compared axis-aligned bbox extents and
+  reported FAIL at 9.2/12.2 mm. An AABB is not rotation-invariant; the test was
+  wrong, not the repair. Replaced with total surface area.
+
+## R2 — texture dedupe and downsize
+
+- **defect** 65.1 MB file, 57.4% textures, 4096x4096, over every perf gate; plus
+  R1's regression to 102.3 MB
+- **root cause** two unique textures referenced by four image entries; R1's
+  exporter split the two SHARED bufferViews into four copies
+- **action** collapse by SHA-256 of payload, repoint textures, downsize to 2048,
+  re-encode by ROLE (colour->JPEG, data->PNG), drop alpha only where every
+  referencing material is `alphaMode: OPAQUE`
+- **verification** 102.3 -> **34.2 MB**; textures 74.70 -> **6.55 MB** (19.2% of
+  file); images 4 -> 2; validator **0/0/0/0**; metallicRoughness **bit-exact**
+  (PSNR inf, max abs err 0); baseColor PSNR **33.18 dB** at q90
+  (q95 = 34.41 dB / +0.45 MB, q98 = 35.04 dB / +1.09 MB -- measured, q90 kept)
+- **result** **PASS**
+- **remaining uncertainty** still 34.2 MB against a 20 MB gate. The remaining
+  27.6 MB is GEOMETRY, not textures.
+
+## R3 — floating debris
+
+- **defect claimed** "roof spike artefact" in 6 of 8 views
+- **result** **NO ACTION — TARGET MISIDENTIFIED.** It is the shark-fin roof
+  aerial. See the retraction in the Stage 1 defect list.
+- **two failed detectors, both recorded so they are not rebuilt.** A
+  disconnected-outlier test flagged window-frame fragments as protruding
+  700-990 mm, because the height envelope has no samples over a window aperture
+  so anything there reads as protruding by the full roof height. A
+  local-height-residual test then flagged 27,387 vertices across the whole car,
+  because a car is not a height field -- for one (x,y) there is a roof, a sill
+  and a floor. Both would have deleted real geometry.
+- **what settled it** the direct question: the highest vertices narrow to a
+  103 x 31 mm footprint at x=+1.25, y=+0.057, then a 5x crop.
+- **genuinely found, deferred to the shell stage** the rear roof / backlight
+  junction is torn, and there is a small hole in the roof skin.
