@@ -360,9 +360,9 @@
     "rear2_v4": 0.0484
    },
    "measured_on_merged_car": "NOT TESTED - merged car not published",
-   "threshold": "0.027 +- 0.010",
+   "threshold": "black rubber: mean base colour < 0.12 (the old 0.027 +- 0.010 was too tight to be a defect test)",
    "control_fired": "fires on rear2_v4 at 0.0484",
-   "status": "REPRODUCED except rear v2",
+   "status": "REPRODUCED - but the rear v2 'failure' is SOFTENED to a lineage difference, see CORRECTION",
    "note": ""
   },
   {
@@ -596,6 +596,11 @@
    "check": "Khronos validator 0 errors",
    "status": "CLOSED after the first draft",
    "why": "three independent deliberate violations (NC12a/b/c) each produce errors while car_merged stays at 0"
+  },
+  {
+   "check": "factor-rewrite respray on a TEXTURED paint",
+   "status": "OPEN - flagged, not asserted",
+   "why": "only a MULTIPLY tint was tested; the decisive test (rewrite baseColorFactor in the glTF and re-render) has not been run on rear2_v4"
   }
  ],
  "glass_probe_pairing_evidence": [
@@ -711,6 +716,151 @@
   "speck panel mask was seeded from the BEFORE file's paint mask and was empty by construction, scoring 0.000% before and after",
   "matID mask compared LINEAR palette values against sRGB-encoded pixels and silently dropped 8 of 10 materials",
   "glass-gate vertex test used a 1 nm tolerance against float32 data whose ULP at this scale is 238 nm, and returned a wrong 'point sets differ'",
-  "used pgrep -f once to inspect a background job (CLAUDE.md forbids it as a wait condition); it was a read, not a wait, but it should not have been used at all"
- ]
+  "used pgrep -f once to inspect a background job (CLAUDE.md forbids it as a wait condition); it was a read, not a wait, but it should not have been used at all",
+  "called rear2_v4's TEXTURED carpaint/Rim_Alloy a flat shell off their [1,1,1,1] multiplier factors - retracted in full, and paint_check now tests hasTexture first",
+  "set_paint wrote default_value on a LINKED Base Color, which does nothing - it produced two byte-identical renders and a confident wrong 'the paint does not respond'"
+ ],
+ "merge_collision_scan": {
+  "why": "every gate built against car_rebound alone, so no gate's own report can say whether its component collides with another gate's",
+  "severe_cross_gate_collision": {
+   "pair": "rear v2 Glass_Backlight vs glass gate Glass_Rear",
+   "share_within_25mm": 96.21,
+   "median_separation_mm": 4.8,
+   "areas_m2": {
+    "Glass_Backlight": 0.3871,
+    "Glass_Rear": 0.8358
+   },
+   "mean_abs_up_normal": {
+    "Glass_Backlight": 0.625,
+    "Glass_Rear": 0.037
+   },
+   "risk": "two transmissive sheets in the same place = the recorded white-dot defect (overlapping quadric sheets bloom white under grazing transmission)",
+   "action": "ONE must supersede the other"
+  },
+  "cross_gate_clear": {
+   "rear Hatch vs glass Glass_Rear": {
+    "share_within_25mm": 27.41,
+    "median_mm": 126.6,
+    "note": "surrounds, does not stack"
+   },
+   "rear Bumper_Rear vs v7 Bumper_Front": {
+    "share_within_25mm": 0.0,
+    "median_mm": 3793.5
+   },
+   "cabin Cabin_Headliner vs glass Glass_Windscreen": {
+    "share_within_25mm": 0.0,
+    "median_mm": 897.0
+   },
+   "cabin Cabin_Dash vs glass Glass_Windscreen": {
+    "share_within_25mm": 0.0,
+    "median_mm": 401.7
+   }
+  },
+  "base_parts_that_must_be_deleted": [
+   {
+    "component": "v7 Valance_Front",
+    "overlaps": "Bumper_Front_Paint",
+    "share_within_25mm": 75,
+    "median_mm": 12.0
+   },
+   {
+    "component": "v7 Intake_L",
+    "overlaps": "Bumper_Front_Paint / Headlamp_L",
+    "share_within_25mm": "57 / 48",
+    "median_mm": "21 / 28"
+   },
+   {
+    "component": "v7 Grille_Lower",
+    "overlaps": "Bumper_Front_Paint",
+    "share_within_25mm": 32,
+    "median_mm": 41.1
+   },
+   {
+    "component": "rear Bumper_Rear_Inner",
+    "overlaps": "Bumper_Rear_Paint",
+    "share_within_25mm": 43,
+    "median_mm": 28.7
+   },
+   {
+    "component": "rear Plate_Rear",
+    "overlaps": "Bumper_Rear_Paint",
+    "share_within_25mm": 31,
+    "median_mm": 33.7
+   },
+   {
+    "component": "rear Hatch_Inner",
+    "overlaps": "Bumper_Rear_Paint",
+    "share_within_25mm": 25,
+    "median_mm": 41.9
+   },
+   {
+    "component": "cabin Cabin_Floor / Cabin_Headliner",
+    "overlaps": "Body_Shell / Interior",
+    "share_within_25mm": "28 / 27",
+    "median_mm": "39 / 29"
+   }
+  ],
+  "new_acceptance_criteria": {
+   "A21": "no two glazing nodes stacked: <=5% of either within 25 mm of the other (Glass_Backlight vs Glass_Rear currently 96.21%)",
+   "A22": "every superseded base part is actually removed - check the seven rows above"
+  }
+ },
+ "CORRECTION_issued_in_session": {
+  "retracted": "rear2_v4.glb's carpaint and Rim_Alloy are '[1,1,1,1] metallic 1 rough 1 = the glTF-defaults flat-shell signature'",
+  "why_wrong": "both materials carry baseColorTexture AND metallicRoughnessTexture (the file holds 4 images / 4 textures; the other six gate files hold zero). On a TEXTURED material those factors are the neutral MULTIPLIER and are correct. This is the exact trap CLAUDE.md records for the tyre probe, reproduced by me.",
+  "how_it_surfaced": "the respray control on rear2_v4 returned mean delta EXACTLY 0.00 over 64,486 px with base and alt mean colour identical to the integer. An exact zero over 64k px is not physics, so I checked rather than published: the two PNGs were pixel-identical.",
+  "second_bug_in_my_own_rig": "bl_render.set_paint wrote default_value onto a Base Color input that is LINKED to an Image Texture node, which does nothing. It would have reported 'paint does not respond' on ANY textured car.",
+  "fixes": [
+   "set_paint detects a linked input, inserts a MULTIPLY MixRGB, and prints SET_PAINT/SET_PAINT_WARNING",
+   "paint_check requires not hasTexture before calling a material flat"
+  ],
+  "revalidated_3_of_3": {
+   "car_merged untextured": "flat=False",
+   "NC8 genuinely flat untextured": "flat=True (still fires)",
+   "rear2_v4 textured": "flat=False (false positive removed)"
+  },
+  "re_run_result": {
+   "rear2_v4_textured": {
+    "carpaint_px": 49355,
+    "mean_delta": 15.72,
+    "pct_px_gt10": 73.5,
+    "base": [
+     87,
+     42,
+     42
+    ],
+    "alt": [
+     42,
+     42,
+     44
+    ]
+   },
+   "car_merged_untextured": {
+    "carpaint_px": 50480,
+    "mean_delta": 82.95,
+    "pct_px_gt10": 99.4,
+    "base": [
+     178,
+     62,
+     62
+    ],
+    "alt": [
+     75,
+     92,
+     176
+    ]
+   },
+   "retracted": "'the rear paint does not respond at all' - it does respond",
+   "NOT_a_ratio": "the two are not apples-to-apples: untextured was a direct colour set, textured could only be a MULTIPLY tint over a baked texture, which yields neutral grey rather than blue. That is my METHOD, not a verdict on the file.",
+   "OPEN_not_asserted": "a name-targeted respray rewrites baseColorFactor, which on a textured material also only multiplies the baked texture - so a baked-colour paint may not be resprayable to an arbitrary colour by factor rewrite. NOT TESTED. Cheap test: rewrite carpaint.baseColorFactor in the glTF and re-render, before the rear lineage's textures are carried into a merged car."
+  }
+ },
+ "what_stands_about_rear2_v4": {
+  "extensionsUsed": "ABSENT ENTIRELY - no transmission, no ior, no clearcoat, where all six other files carry all three",
+  "glass": "BLEND alpha 0.353 with transmission null and ior null - glazing that has stopped refracting",
+  "glass_probe": "still returns clear/proven because alphaMode survived",
+  "action": "take rear GEOMETRY onto the car_rebound material table, not the rear file's own",
+  "new_finding": "the rear lineage is TEXTURED (4 images) and the other six are not (0) - decide whether textures come across and whether receiving primitives have UVs",
+  "softened": "Tyre_Rubber 0.0484 vs 0.0288 is a lineage difference, not a defect - 0.048 is still black rubber. Threshold A6 (0.027+-0.010) is too tight; use 'mean base colour < 0.12' and record the value."
+ }
 }

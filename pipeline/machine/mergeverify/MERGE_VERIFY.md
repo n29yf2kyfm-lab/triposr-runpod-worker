@@ -66,26 +66,93 @@ Threshold column is what I fixed **before** the merged car existed.
 
 These are the parts worth the owner's attention. Each is a measurement, not an opinion.
 
-### 3.1 `rear2_v4.glb` FAILS the four must-not-break material properties, on its own file
+### 3.1 CORRECTED — I got this partly WRONG, and the correction matters more than the finding
 
-Read from the file's own JSON chunk — never through `trimesh`, which drops KHR
-extensions on any round-trip:
+**What I published earlier in this session and now retract:** that `rear2_v4.glb`'s
+`carpaint` and `Rim_Alloy` are *"[1,1,1,1] metallic 1 rough 1 — the glTF-defaults
+flat-shell signature"*. **That is wrong.** Both materials carry a `baseColorTexture`
+**and** a `metallicRoughnessTexture` — the file holds **4 images / 4 textures**, where
+the other six gate files hold **zero**. On a *textured* material a `[1,1,1,1]` factor
+with metallic 1 / roughness 1 is the **neutral multiplier**, and is exactly correct.
 
-| property | six other gate files | `rear2_v4.glb` |
+This is precisely the trap CLAUDE.md already records for the tyre probe — *"the factor
+on a textured material is a MULTIPLIER and is [1,1,1] on nearly all of them, so treating
+a failed read as opaque white invents a tyre failure"* — reproduced by me, on a
+different material, in a report warning about instrument error.
+
+**How it surfaced, because the mechanism is the useful part.** I ran the respray
+control on `rear2_v4` to turn a table read into measured behaviour. It returned a mean
+delta of **exactly 0.00 across 64,486 pixels**, with base and alt mean colour identical
+to the integer. An exact zero over 64k pixels is not physics, so I checked instead of
+publishing: the two PNGs were **pixel-identical**, differing only in PNG metadata.
+
+The cause was a **second bug, this one in my own rig**: `set_paint` wrote
+`default_value` onto the Principled BSDF's `Base Color` — an input that on a textured
+material is **LINKED** to an Image Texture node. Writing a default on a linked input
+does nothing. So my respray silently no-opped and would have reported "the paint does
+not respond" on **any** textured car. Both bugs are fixed:
+
+* `bl_render.set_paint` now detects a linked input, inserts a MULTIPLY `MixRGB` to tint
+  the texture, and **prints what it did** — `SET_PAINT_WARNING` if nothing matched. A
+  repaint that silently no-ops is worse than one that fails.
+* `matcheck.paint_check` now requires `not hasTexture` before calling a material flat.
+
+**Re-validated in both directions, 3/3 — a fix that removes a false positive must not
+remove the true one:**
+
+| file | textured | flat-paint flag |
 |---|---|---|
-| `extensionsUsed` | clearcoat + ior + transmission | **ABSENT ENTIRELY** |
-| glazing | BLEND α 0.161, **transmission 0.92, IOR 1.45** | BLEND α 0.353, **transmission `null`, IOR `null`** |
-| `carpaint` | [0.776, 0.012, 0.012], metallic 0, rough 0.24, clearcoat 1.0 | **[1,1,1,1], metallic 1.0, rough 1.0, no clearcoat** |
-| `Rim_Alloy` | [0.420, 0.431, 0.451], metallic 0.85 | **[1,1,1,1], metallic 1.0, rough 1.0** |
-| `Tyre_Rubber` | 0.0288 | **0.0484** |
+| `car_merged.glb` (good, untextured) | no | **False** ✅ |
+| NC8 (genuinely flat, untextured) | no | **True** ✅ still fires |
+| `rear2_v4.glb` (textured) | **yes** | **False** ✅ false positive gone |
 
-`carpaint` at `[1,1,1,1] metallic=1 roughness=1` is precisely the glTF-defaults
-signature CLAUDE.md records as the flat-shell trap. **`glass_probe` still returns
-`clear / proven` on this file** — it reads `alphaMode`, which survived.
+### 3.1c The re-run, and what it does and does not prove
 
-The rear gate's **geometry** win is real and I reproduced it. Its **material table is
-not shippable**. The merge must take the rear geometry onto the `car_rebound` material
-table, and the merged file must be re-checked for all five rows above.
+With `set_paint` fixed (it now reports `tinted: 7` on the textured rear and `set: 5` on
+the untextured base), the rear file's paint **does** respond:
+
+| file | carpaint px | mean \|Δ\| | % px moved >10 | base → alt |
+|---|---|---|---|---|
+| `rear2_v4.glb` (textured) | 49,355 | **15.72** | 73.5% | [87,42,42] → [42,42,44] |
+| `car_merged.glb` (untextured) | 50,480 | **82.95** | 99.4% | [178,62,62] → [75,92,176] |
+
+**So "the rear paint does not respond at all" was my bug, and it is retracted.**
+
+**But the two numbers are NOT apples-to-apples and I will not present them as a ratio.**
+On the untextured file I set the colour directly; on the textured file I could only
+apply a MULTIPLY tint over a baked texture. Multiplying a dark-red baked texture by blue
+yields **neutral dark grey, not blue** — which is what the table shows, and that is a
+property of *my method*, not a verdict on the file.
+
+**What this does raise, honestly, as an OPEN question rather than a finding:** a
+name-targeted respray (what `colour_variants` and the viewer actually do) rewrites
+`baseColorFactor`, which on a textured material also only *multiplies* the baked
+texture. So a baked-colour paint may not be resprayable to an arbitrary colour by factor
+rewrite at all. CLAUDE.md already points the same way — *"the flat-paint build stays the
+respray base (photo bake embeds the capture colour)"*. **I have not tested a factor
+rewrite on this file, so I am flagging it, not asserting it.** The test is cheap and
+should be run before the rear lineage's textures are carried into a merged car:
+rewrite `carpaint.baseColorFactor` in the glTF and re-render.
+
+### 3.1b What DOES stand about `rear2_v4.glb` — and it is the part that matters
+
+**`extensionsUsed` is absent entirely.** No `KHR_materials_transmission`, no
+`KHR_materials_ior`, no `KHR_materials_clearcoat`, where all six other gate files carry
+all three. Concretely, its `glass` is `BLEND` at alpha 0.353 with **`transmission: null`
+and `ior: null`** — glazing that has stopped refracting. That is the trimesh-round-trip
+signature CLAUDE.md names, and `glass_probe` still returns **clear / proven** on it
+because `alphaMode` survived. **This is a real defect and the merge must take the rear
+geometry onto the `car_rebound` material table, not the rear file's own.**
+
+**And a genuine new finding I had missed: the rear lineage is TEXTURED and the other six
+are not** (4 images vs 0). Any merge that carries rear geometry across must decide
+whether the textures come with it and whether the receiving primitives have UVs.
+
+**Softened:** `Tyre_Rubber` at 0.0484 against the other files' 0.0288. Both materials
+are untextured so the comparison is valid — but 0.048 is still plainly black rubber, so
+this is a *difference between lineages*, not a defect. My acceptance threshold A6
+(0.027 ± 0.010) is too tight to be a defect test and should read "black rubber, i.e.
+mean base colour < 0.12" with the exact value recorded.
 
 ### 3.2 `rear2_v4.glb` is a different lineage from every other gate
 
@@ -184,6 +251,66 @@ their tyres are still at FL **183.178 mm** / FR **189.636 mm** in the air. Only
 `car_merged`, `car_deskin` and `car_cabin` carry the grounded pose. The merge has to
 transport the glass relabelling and the v7 front kit onto the grounded base — the
 grounding win is the one most easily lost in a merge, and it is the cheapest to check.
+
+---
+
+## 3.8 MERGE COLLISION SCAN — the thing no gate's own report can contain
+
+Every gate built against `car_rebound` alone, so **no gate could see whether its new
+component occupies the same space as another gate's**. I scanned all of them: for each
+contributed component, what share of its faces sit within 25 mm of a surface the merged
+car would also inherit from a different source.
+
+### One severe cross-gate collision
+
+| pair | share within 25 mm | median separation |
+|---|---|---|
+| **rear v2 `Glass_Backlight` vs glass gate `Glass_Rear`** | **96.21%** | **4.8 mm** |
+| rear v2 `Hatch` vs glass `Glass_Rear` | 27.41% | 126.6 mm |
+| rear v2 `Bumper_Rear` vs v7 `Bumper_Front` | 0.00% | 3793.5 mm |
+| cabin `Cabin_Headliner` / `Cabin_Dash` vs glass `Glass_Windscreen` | 0.00% | 897 / 402 mm |
+
+The rear gate built a **constructed 0.3871 m² raked backlight** (mean \|n_up\| 0.625);
+the glass gate's `Glass_Rear` is **0.8358 m² of near-vertical glazing** (mean \|n_up\|
+0.037). **96.2% of the constructed backlight sits within 25 mm of it, median 4.8 mm** —
+two transmissive sheets in the same place. That is exactly the defect CLAUDE.md records
+from the white-dot saga: *overlapping stencils gave one physical window four stacked
+quadric sheets, and grazing transmission through intersecting sheets blooms white.*
+**One of the two must supersede the other; taking both reproduces a defect that already
+cost six wrong theories and several production rounds.**
+
+`Hatch` vs `Glass_Rear` at a 126.6 mm median is the hatch *surrounding* the screen, not
+stacking on it — proximity without coincidence. Everything else is comfortably clear.
+
+### Base parts each gate supersedes — delete them, or they stack
+
+These overlaps are *expected and correct* provided the base part is removed. They are
+listed because the merge silently keeping a base part is how the collision happens.
+
+| gate component | overlaps base surface | share within 25 mm | median |
+|---|---|---|---|
+| v7 `Valance_Front` | `Bumper_Front_Paint` | **75%** | 12.0 mm |
+| v7 `Intake_L` | `Bumper_Front_Paint` / `Headlamp_L` | 57% / 48% | 21 / 28 mm |
+| v7 `Grille_Lower` | `Bumper_Front_Paint` | 32% | 41.1 mm |
+| rear `Bumper_Rear_Inner` | `Bumper_Rear_Paint` | **43%** | 28.7 mm |
+| rear `Plate_Rear` | `Bumper_Rear_Paint` | 31% | 33.7 mm |
+| rear `Hatch_Inner` | `Bumper_Rear_Paint` | 25% | 41.9 mm |
+| cabin `Cabin_Floor` / `Cabin_Headliner` | `Body_Shell` / `Interior` | 28% / 27% | 39 / 29 mm |
+
+Two more readings worth carrying: rear `Tail_Lens_RO` sits **65% within 25 mm of
+`Interior`, median 13.9 mm** — the melt shell is right behind the constructed lamp,
+which is the same hidden-melt residue measured in row 9. And glass `Glass_Side_R` sits
+**59% within 25 mm of `Interior`**, consistent with the through-glass finding that the
+base side glazing has body and interior directly behind it rather than an aperture.
+
+### Added to the acceptance list
+
+* **A21 — no two transmissive surfaces stacked.** For every pair of glazing nodes in
+  the merged car, no more than 5% of either may sit within 25 mm of the other.
+  `Glass_Backlight` vs `Glass_Rear` currently scores **96.21%** and must be resolved
+  by supersession before the merged car is judged on anything else.
+* **A22 — every superseded base part is actually gone.** Check the seven rows above:
+  each gate component should have **no** base counterpart left underneath it.
 
 ---
 
@@ -428,9 +555,39 @@ existed.
 ## 7. Bottom line
 
 **0 of the 6 gates have been verified on a merged car, because no merged car exists
-yet.** On their own files: **13 checks reproduced exactly**, **1 reproduced in
-direction and magnitude but not in absolute units** (waviness), **1 reproduced with a
-stated placement sensitivity** (hidden melt), **2 pending**, and **one gate's
-deliverable fails the must-not-break material set on its own file** (rear v2 —
-§3.1). Eight of nine completed checks have a negative control that fired with the
-injected magnitude returned at slope 1.000.
+yet.** On their own files: **13 checks reproduced exactly**, 1 reproduced in direction
+and magnitude but not in absolute units (waviness), 1 reproduced with a stated
+placement sensitivity (hidden melt), and **16 negative controls fire**, 15 of them
+returning the injected magnitude at slope 1.000.
+
+**The single most important line in this report is a correction of my own headline
+finding.** I published that `rear2_v4.glb`'s paint was a flat shell off its
+`[1,1,1,1]` factors. It is a **textured** material and those factors are the correct
+neutral multiplier — the exact trap CLAUDE.md already documents for the tyre probe.
+I found it only because the respray control returned a physically impossible **exact
+0.00 over 64,486 pixels** and I checked instead of publishing; the root cause was a
+**second bug in my own rig** that would have mis-reported every textured car. Both are
+fixed and re-validated 3/3 in both directions. What survives about that file — and it
+is the part that matters for the merge — is that **`extensionsUsed` is absent
+entirely**, so its glazing has no transmission and no IOR while `glass_probe` still
+calls it clear/proven.
+
+**Three things the merge must act on, none of which appear in any gate's own report:**
+
+1. **A cross-gate collision.** The rear gate's constructed `Glass_Backlight` sits
+   **96.21% within 25 mm** (median **4.8 mm**) of the glass gate's `Glass_Rear` — two
+   transmissive sheets in the same place, which is the recorded white-dot defect. One
+   must supersede the other.
+2. **`rebound → merged` is ONE rigid transform** for body+glazing+bumpers (4.7301°,
+   max residual **0.1225 µm**), so the glass relabelling and v7 front kit can be
+   *transported*, not re-derived — but the two files share a **surface, not a vertex
+   array** (+2,740 referenced verts from the repartition), and the wheels must come
+   from `car_merged`.
+3. **Seven base parts are superseded and must actually be deleted**, or they stack
+   under the new components (v7 `Valance_Front` sits 75% within 25 mm of the base
+   `Bumper_Front_Paint`, median 12 mm).
+
+**Eight of my own errors are recorded in this report rather than dropped.** Three of
+them — the empty-by-construction speck mask, the linked-input repaint, and the textured
+flat-shell call — are the same class as the failures this harness exists to catch, and
+two of the three were caught only by looking at a picture or at an impossible number.

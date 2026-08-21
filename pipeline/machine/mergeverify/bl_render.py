@@ -127,14 +127,42 @@ def flatten_to_emission(objs, colour_of):
 
 
 def set_paint(objs, name, rgb):
+    """Repaint the named material.
+
+    BUG PAID FOR 2026-08-21: writing `default_value` on an input that is LINKED to a
+    texture node does NOTHING -- the link wins. On a textured car that produced two
+    byte-identical renders and a confident, WRONG 'the paint does not respond'. So a
+    linked Base Color is now driven by inserting a MixRGB that tints the texture, and
+    the function REPORTS what it did. A repaint that silently no-ops is worse than one
+    that fails."""
+    done = {'set': 0, 'tinted': 0, 'missed': 0}
     for o in objs:
         for slot in o.material_slots:
-            if slot.material and slot.material.name.split('.')[0] == name:
-                m = slot.material
-                m.use_nodes = True
-                b = m.node_tree.nodes.get('Principled BSDF')
-                if b:
-                    b.inputs['Base Color'].default_value = (rgb[0], rgb[1], rgb[2], 1)
+            if not (slot.material and slot.material.name.split('.')[0] == name):
+                continue
+            m = slot.material
+            m.use_nodes = True
+            nt = m.node_tree
+            b = nt.nodes.get('Principled BSDF')
+            if b is None:
+                done['missed'] += 1
+                continue
+            inp = b.inputs['Base Color']
+            if not inp.is_linked:
+                inp.default_value = (rgb[0], rgb[1], rgb[2], 1)
+                done['set'] += 1
+            else:
+                src = inp.links[0].from_socket
+                mix = nt.nodes.new('ShaderNodeMixRGB')
+                mix.blend_type = 'MULTIPLY'
+                mix.inputs['Fac'].default_value = 1.0
+                nt.links.new(src, mix.inputs['Color1'])
+                mix.inputs['Color2'].default_value = (rgb[0], rgb[1], rgb[2], 1)
+                nt.links.new(mix.outputs['Color'], inp)
+                done['tinted'] += 1
+    print('SET_PAINT', name, done)
+    if done['set'] == 0 and done['tinted'] == 0:
+        print('SET_PAINT_WARNING no material matched', name)
 
 
 def render(path):

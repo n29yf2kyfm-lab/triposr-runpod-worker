@@ -98,7 +98,16 @@ def paint_check(g):
             out[n] = dict(baseColorFactor=d['baseColorFactor'], metallic=d['metallic'],
                           roughness=d['roughness'], clearcoat=d['clearcoat'],
                           # the recorded flat-shell trap: glTF DEFAULTS metallic=1 rough=1
+                          hasTexture=d['hasTexture'],
+                          # CORRECTED 2026-08-21. The flat-shell signature is
+                          # [1,1,1,1]/metallic 1/rough 1 on an UNTEXTURED material.
+                          # On a TEXTURED one those factors are the neutral MULTIPLIER
+                          # and are correct -- CLAUDE.md records exactly this trap for
+                          # the tyre probe ("the factor on a textured material is a
+                          # MULTIPLIER and is [1,1,1] on nearly all of them"). Calling
+                          # a textured car flat invents a defect.
                           looks_like_gltf_defaults=bool(
-                              d['metallic'] == 1.0 and d['roughness'] == 1.0
+                              (not d['hasTexture'])
+                              and d['metallic'] == 1.0 and d['roughness'] == 1.0
                               and list(d['baseColorFactor']) == [1, 1, 1, 1]))
     return out
