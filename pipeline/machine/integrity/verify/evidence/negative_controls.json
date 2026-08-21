@@ -1,0 +1,227 @@
+{
+ "source_sha256": "400d994a9fd034cc55d64cf340ec70eedb0d5fa93c188e739da03a787b21084f",
+ "controls_run": 7,
+ "controls_where_every_check_fired": 7,
+ "results": [
+  {
+   "control": "C1_dupfaces",
+   "defect": "Body_Shell: last 250 triangles replaced by copies of its first 250",
+   "injected": {
+    "duplicate_index_triples_added": 250,
+    "expected_blender_triangle_drop": 250,
+    "expected_declared_triangle_change": 0
+   },
+   "checks": [
+    {
+     "check": "L2 duplicate-index-triple counter",
+     "FIRED": true,
+     "measured": 250,
+     "injected": 250,
+     "note": ""
+    },
+    {
+     "check": "Blender import triangle drop",
+     "FIRED": true,
+     "measured": 250,
+     "injected": 250,
+     "note": ""
+    },
+    {
+     "check": "declared triangle count unchanged",
+     "FIRED": true,
+     "measured": 0,
+     "injected": 0,
+     "note": "the file still DECLARES the same total; only the import differs"
+    },
+    {
+     "check": "L2 ledger still balances",
+     "FIRED": true,
+     "measured": true,
+     "injected": true,
+     "note": "balance must survive: the extra loss is fully accounted for"
+    }
+   ],
+   "all_fired": true
+  },
+  {
+   "control": "C2_sink5mm",
+   "defect": "every scene root translated -5 mm on glTF Y (height)",
+   "injected": {
+    "sink_m": 0.005,
+    "expected_tyre_zmin_m": -0.005
+   },
+   "checks": [
+    {
+     "check": "per-tyre world z-min (grounding)",
+     "FIRED": true,
+     "measured": -0.005,
+     "injected": -0.005,
+     "note": ""
+    },
+    {
+     "check": "whole-model bbox z-min (the WEAK test)",
+     "FIRED": true,
+     "measured": -0.009587,
+     "injected": -0.009587,
+     "note": "kept only to show it moves too; the tyre test is the witness"
+    }
+   ],
+   "all_fired": true
+  },
+  {
+   "control": "C3_glasscut",
+   "defect": "every glazing node scaled to 16% linear about its centroid (7 nodes)",
+   "injected": {
+    "linear_scale": 0.16,
+    "expected_area_fraction_of_baseline": 0.0256,
+    "nodes": [
+     "Glass_Windscreen",
+     "Glass_Side_R",
+     "Glass_Side_L",
+     "Glass_Rear",
+     "Glass_Quarter_L",
+     "Body_Glass_Reverted",
+     "Glass_Backlight"
+    ]
+   },
+   "checks": [
+    {
+     "check": "glass surface AREA (m2)",
+     "FIRED": true,
+     "measured": 0.084184,
+     "injected": 0.084184,
+     "note": ""
+    },
+    {
+     "check": "glass area as fraction of baseline",
+     "FIRED": true,
+     "measured": 0.0256,
+     "injected": 0.0256,
+     "note": ""
+    },
+    {
+     "check": "glass material still NAMED and transparent -> a name-only probe would still say clear",
+     "FIRED": true,
+     "measured": [
+      "glass"
+     ],
+     "injected": "unchanged",
+     "note": "this is why glass_probe must be PAIRED with an area"
+    }
+   ],
+   "all_fired": true
+  },
+  {
+   "control": "C4_flipwinding",
+   "defect": "Bumper_Front_Paint primitive 0: winding reversed on every triangle",
+   "injected": {
+    "triangles_flipped": 23299
+   },
+   "checks": [
+    {
+     "check": "winding reversal is INVISIBLE to counts",
+     "FIRED": true,
+     "measured": 888807,
+     "injected": 888807,
+     "note": "detected by the face-orientation and cull-ON renders, not by counts"
+    }
+   ],
+   "all_fired": true
+  },
+  {
+   "control": "C5_wheelmismatch",
+   "defect": "Wheel_FL_* group scaled 1.05 about its centroid (3 nodes)",
+   "injected": {
+    "linear_scale": 1.05,
+    "expected_area_ratio": 1.1025,
+    "expected_radius_delta_pct": 5.0,
+    "nodes": [
+     "Wheel_FL_Tyre",
+     "Wheel_FL_Rim",
+     "Wheel_FL_Disc"
+    ]
+   },
+   "checks": [
+    {
+     "check": "per-corner wheel surface-area ratio vs baseline",
+     "FIRED": true,
+     "measured": {
+      "Tyre": 1.1025,
+      "Rim": 1.1025,
+      "Disc": 1.10251
+     },
+     "injected": 1.1025,
+     "note": ""
+    },
+    {
+     "check": "left/right tyre area parity ratio",
+     "FIRED": true,
+     "measured": 1.03939,
+     "injected": 1.03939,
+     "note": ""
+    }
+   ],
+   "all_fired": true
+  },
+  {
+   "control": "C6_hole3000",
+   "defect": "Body_Shell: 3000 consecutive triangles collapsed to degenerate",
+   "injected": {
+    "triangles_removed": 3000,
+    "expected_degenerate_count_delta": 3000,
+    "expected_blender_triangle_drop": 3000
+   },
+   "checks": [
+    {
+     "check": "file-level degenerate-triangle counter",
+     "FIRED": true,
+     "measured": 3000,
+     "injected": 3000,
+     "note": ""
+    },
+    {
+     "check": "Blender import triangle drop",
+     "FIRED": true,
+     "measured": 3000,
+     "injected": 3000,
+     "note": ""
+    },
+    {
+     "check": "L2 ledger still balances",
+     "FIRED": true,
+     "measured": true,
+     "injected": true,
+     "note": ""
+    }
+   ],
+   "all_fired": true
+  },
+  {
+   "control": "C7_mirrored",
+   "defect": "Wheel_FR_Rim node given a negative Z scale (mirrored determinant)",
+   "injected": {
+    "mirrored_nodes": 1,
+    "expected_determinant_sign": -1
+   },
+   "checks": [
+    {
+     "check": "file-level negative-determinant node list",
+     "FIRED": true,
+     "measured": 1,
+     "injected": 1,
+     "note": ""
+    },
+    {
+     "check": "Blender negative-determinant object list",
+     "FIRED": true,
+     "measured": [
+      "Wheel_FR_Rim"
+     ],
+     "injected": 1,
+     "note": ""
+    }
+   ],
+   "all_fired": true
+  }
+ ]
+}

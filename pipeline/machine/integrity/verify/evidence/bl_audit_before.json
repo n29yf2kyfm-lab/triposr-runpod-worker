@@ -1,0 +1,2509 @@
+{
+ "label": "SOURCE",
+ "source": "GOLF_ALL_GATES_SOURCE.glb",
+ "blender": "4.5.12 LTS",
+ "objects_total": 83,
+ "mesh_objects": 83,
+ "materials": 22,
+ "images": 0,
+ "cameras": 0,
+ "lights": 0,
+ "triangles": 887879,
+ "vertices": 602815,
+ "world_bbox_min": [
+  -2.147268,
+  -0.890078,
+  -0.004587
+ ],
+ "world_bbox_max": [
+  2.086358,
+  0.899753,
+  1.447658
+ ],
+ "world_bbox_size": [
+  4.233626,
+  1.789831,
+  1.452245
+ ],
+ "negative_det_objects": [],
+ "hidden_at_render": [],
+ "by_class": {
+  "tyre": {
+   "tris": 44842,
+   "area_m2": 3.92762,
+   "zmin": -0.0,
+   "n": 4,
+   "names": [
+    "Wheel_RR_Tyre",
+    "Wheel_RL_Tyre",
+    "Wheel_FR_Tyre",
+    "Wheel_FL_Tyre"
+   ]
+  },
+  "rim": {
+   "tris": 284510,
+   "area_m2": 27.298455,
+   "zmin": -0.004587,
+   "n": 35,
+   "names": [
+    "Wheel_RR_Rim",
+    "Wheel_RR_Disc",
+    "Wheel_RL_Rim",
+    "Wheel_RL_Disc",
+    "Wheel_FR_Rim",
+    "Wheel_FR_Disc",
+    "Wheel_FL_Rim",
+    "Wheel_FL_Disc",
+    "Underbody",
+    "Bumper_Rear_Trim",
+    "Bumper_Rear_Paint",
+    "Arch_Liner",
+    "Grille_Upper",
+    "Headlamp_R_Housing",
+    "Headlamp_R_Internal",
+    "Headlamp_L_Housing",
+    "Headlamp_L_Internal",
+    "Badge",
+    "Badge_Mount",
+    "Grille_Lower",
+    "Plate_Carrier",
+    "Intake_R",
+    "Intake_L",
+    "Intake_R_Blades",
+    "Intake_L_Blades",
+    "Cabin_Dash",
+    "Cabin_Binnacle",
+    "Cabin_Wheel",
+    "Cabin_Hub",
+    "Cabin_Spokes",
+    "Cabin_Column",
+    "Cabin_Console",
+    "Cabin_ParcelShelf",
+    "Cabin_DoorCard_R",
+    "Cabin_DoorCard_L"
+   ]
+  },
+  "other": {
+   "tris": 506749,
+   "area_m2": 57.214305,
+   "zmin": 0.048529,
+   "n": 37,
+   "names": [
+    "TailLamp_R",
+    "TailLamp_L",
+    "Mirror_R",
+    "Mirror_L",
+    "Interior",
+    "Bumper_Front_Paint",
+    "Body_Shell",
+    "Valance_Front",
+    "Bumper_Front",
+    "Headlamp_R_Lens",
+    "Headlamp_L_Lens",
+    "DRL_Blade",
+    "Plate",
+    "TowEye_Cover",
+    "Hatch",
+    "Hatch_Inner",
+    "Bumper_Rear",
+    "Bumper_Rear_Inner",
+    "Plate_Rear",
+    "Cabin_Floor",
+    "Cabin_Tunnel",
+    "Cabin_SeatFD_Cush",
+    "Cabin_SeatFD_Back",
+    "Cabin_SeatFD_BolB",
+    "Cabin_SeatFD_BolA",
+    "Cabin_SeatFD_Head",
+    "Cabin_SeatFP_Cush",
+    "Cabin_SeatFP_Back",
+    "Cabin_SeatFP_BolB",
+    "Cabin_SeatFP_BolA",
+    "Cabin_SeatFP_Head",
+    "Cabin_BenchCush",
+    "Cabin_BenchBack",
+    "Cabin_BenchHead_R",
+    "Cabin_BenchHead_L",
+    "Cabin_BootFloor",
+    "Cabin_Headliner"
+   ]
+  },
+  "glass": {
+   "tris": 51778,
+   "area_m2": 3.288338,
+   "zmin": 0.800973,
+   "n": 7,
+   "names": [
+    "Glass_Windscreen",
+    "Glass_Side_R",
+    "Glass_Side_L",
+    "Glass_Rear",
+    "Glass_Quarter_L",
+    "Body_Glass_Reverted",
+    "Glass_Backlight"
+   ]
+  }
+ },
+ "tyre_ground": {
+  "n_tyre_objects": 4,
+  "per_tyre_world_zmin_m": {
+   "Wheel_RR_Tyre": -0.0,
+   "Wheel_RL_Tyre": -0.0,
+   "Wheel_FR_Tyre": 0.0,
+   "Wheel_FL_Tyre": -0.0
+  },
+  "max_tyre_zmin_m": -0.0,
+  "min_tyre_zmin_m": -0.0,
+  "note": "grounding is judged from the WORST tyre (max of per-tyre z-min), not from the whole-model bbox minimum."
+ },
+ "objects": [
+  {
+   "name": "Wheel_RR_Tyre",
+   "tris": 12589,
+   "verts": 7257,
+   "area_m2": 1.05505,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Tyre_Rubber"
+   ],
+   "class": "tyre",
+   "wmin": [
+    0.866164,
+    -0.784806,
+    -0.0
+   ],
+   "wmax": [
+    1.50084,
+    -0.557011,
+    0.63046
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Wheel_RR_Rim",
+   "tris": 20830,
+   "verts": 14176,
+   "area_m2": 0.757622,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Rim_Alloy"
+   ],
+   "class": "rim",
+   "wmin": [
+    0.972912,
+    -0.779829,
+    0.095388
+   ],
+   "wmax": [
+    1.408188,
+    -0.562822,
+    0.529222
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Wheel_RR_Disc",
+   "tris": 1546,
+   "verts": 874,
+   "area_m2": 0.141084,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Brake_Disc"
+   ],
+   "class": "rim",
+   "wmin": [
+    1.044084,
+    -0.664354,
+    0.174769
+   ],
+   "wmax": [
+    1.33217,
+    -0.564522,
+    0.457978
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Wheel_RL_Tyre",
+   "tris": 13813,
+   "verts": 8477,
+   "area_m2": 1.030486,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Tyre_Rubber"
+   ],
+   "class": "tyre",
+   "wmin": [
+    0.861177,
+    0.582723,
+    -0.0
+   ],
+   "wmax": [
+    1.502738,
+    0.810265,
+    0.64047
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Wheel_RL_Rim",
+   "tris": 18447,
+   "verts": 12257,
+   "area_m2": 0.750257,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Rim_Alloy"
+   ],
+   "class": "rim",
+   "wmin": [
+    0.968362,
+    0.585198,
+    0.096282
+   ],
+   "wmax": [
+    1.404147,
+    0.806388,
+    0.532616
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Wheel_RL_Disc",
+   "tris": 1658,
+   "verts": 953,
+   "area_m2": 0.174475,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Brake_Disc"
+   ],
+   "class": "rim",
+   "wmin": [
+    1.008417,
+    0.703895,
+    0.173667
+   ],
+   "wmax": [
+    1.33301,
+    0.803584,
+    0.500203
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Wheel_FR_Tyre",
+   "tris": 9176,
+   "verts": 5276,
+   "area_m2": 0.948179,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Tyre_Rubber"
+   ],
+   "class": "tyre",
+   "wmin": [
+    -1.60331,
+    -0.799958,
+    0.0
+   ],
+   "wmax": [
+    -0.979782,
+    -0.568026,
+    0.63097
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Wheel_FR_Rim",
+   "tris": 24528,
+   "verts": 15511,
+   "area_m2": 0.940092,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Rim_Alloy"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.517729,
+    -0.794364,
+    0.096128
+   ],
+   "wmax": [
+    -1.066498,
+    -0.570426,
+    0.539443
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Wheel_FR_Disc",
+   "tris": 2612,
+   "verts": 1480,
+   "area_m2": 0.143227,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Brake_Disc"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.427145,
+    -0.66876,
+    0.164558
+   ],
+   "wmax": [
+    -1.145129,
+    -0.581476,
+    0.456849
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Wheel_FL_Tyre",
+   "tris": 9264,
+   "verts": 5893,
+   "area_m2": 0.893905,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Tyre_Rubber"
+   ],
+   "class": "tyre",
+   "wmin": [
+    -1.608898,
+    0.559091,
+    -0.0
+   ],
+   "wmax": [
+    -0.978074,
+    0.846107,
+    0.652394
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Wheel_FL_Rim",
+   "tris": 20211,
+   "verts": 12844,
+   "area_m2": 0.853446,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Rim_Alloy"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.516024,
+    0.568628,
+    0.085257
+   ],
+   "wmax": [
+    -1.069771,
+    0.839966,
+    0.547737
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Wheel_FL_Disc",
+   "tris": 3245,
+   "verts": 1785,
+   "area_m2": 0.186618,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Brake_Disc"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.435627,
+    0.703183,
+    0.16291
+   ],
+   "wmax": [
+    -1.14866,
+    0.815001,
+    0.456716
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Underbody",
+   "tris": 28470,
+   "verts": 21692,
+   "area_m2": 1.111236,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Underbody",
+    "Interior_Plastic",
+    "Trim_Black",
+    "carpaint"
+   ],
+   "class": "rim",
+   "wmin": [
+    -2.094697,
+    -0.801592,
+    0.151528
+   ],
+   "wmax": [
+    1.984367,
+    0.802232,
+    0.392378
+   ],
+   "hide_render": false,
+   "prim_slots": 4
+  },
+  {
+   "name": "TailLamp_R",
+   "tris": 1144,
+   "verts": 1049,
+   "area_m2": 0.09395,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Lamp_Lens_Rear"
+   ],
+   "class": "other",
+   "wmin": [
+    1.375865,
+    -0.745492,
+    0.632177
+   ],
+   "wmax": [
+    1.984982,
+    -0.100452,
+    1.159577
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "TailLamp_L",
+   "tris": 1153,
+   "verts": 1141,
+   "area_m2": 0.072531,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Lamp_Lens_Rear"
+   ],
+   "class": "other",
+   "wmin": [
+    1.530303,
+    -0.102456,
+    0.811755
+   ],
+   "wmax": [
+    1.975823,
+    0.742691,
+    1.162668
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Mirror_R",
+   "tris": 561,
+   "verts": 452,
+   "area_m2": 0.033982,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "carpaint",
+    "Interior_Plastic"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.815947,
+    -0.890078,
+    0.825743
+   ],
+   "wmax": [
+    -0.649278,
+    -0.803997,
+    0.952513
+   ],
+   "hide_render": false,
+   "prim_slots": 2
+  },
+  {
+   "name": "Mirror_L",
+   "tris": 1462,
+   "verts": 979,
+   "area_m2": 0.075519,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "carpaint",
+    "Interior_Plastic"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.852018,
+    0.779912,
+    0.819058
+   ],
+   "wmax": [
+    -0.658179,
+    0.899753,
+    0.975404
+   ],
+   "hide_render": false,
+   "prim_slots": 2
+  },
+  {
+   "name": "Interior",
+   "tris": 164858,
+   "verts": 110207,
+   "area_m2": 7.894782,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Interior_Plastic",
+    "Arch_Liner",
+    "Underbody",
+    "carpaint"
+   ],
+   "class": "other",
+   "wmin": [
+    -2.066328,
+    -0.877568,
+    0.161447
+   ],
+   "wmax": [
+    1.97016,
+    0.868795,
+    1.394132
+   ],
+   "hide_render": false,
+   "prim_slots": 4
+  },
+  {
+   "name": "Glass_Windscreen",
+   "tris": 8780,
+   "verts": 6536,
+   "area_m2": 0.989441,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "glass"
+   ],
+   "class": "glass",
+   "wmin": [
+    -1.211312,
+    -0.625689,
+    0.800973
+   ],
+   "wmax": [
+    -0.401078,
+    0.666802,
+    1.253765
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Glass_Side_R",
+   "tris": 8668,
+   "verts": 5424,
+   "area_m2": 0.767032,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "glass"
+   ],
+   "class": "glass",
+   "wmin": [
+    -0.729271,
+    -0.669026,
+    0.853526
+   ],
+   "wmax": [
+    1.152456,
+    -0.513595,
+    1.277132
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Glass_Side_L",
+   "tris": 9465,
+   "verts": 5888,
+   "area_m2": 0.790286,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "glass"
+   ],
+   "class": "glass",
+   "wmin": [
+    -0.693712,
+    0.466696,
+    0.868764
+   ],
+   "wmax": [
+    0.758198,
+    0.703957,
+    1.301037
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Glass_Rear",
+   "tris": 187,
+   "verts": 193,
+   "area_m2": 0.011892,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "glass"
+   ],
+   "class": "glass",
+   "wmin": [
+    1.566902,
+    -0.070165,
+    0.932355
+   ],
+   "wmax": [
+    1.919783,
+    0.638599,
+    1.337074
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Glass_Quarter_L",
+   "tris": 362,
+   "verts": 259,
+   "area_m2": 0.012963,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "glass"
+   ],
+   "class": "glass",
+   "wmin": [
+    0.949117,
+    0.510769,
+    1.046958
+   ],
+   "wmax": [
+    1.147345,
+    0.664332,
+    1.295165
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Bumper_Rear_Trim",
+   "tris": 2377,
+   "verts": 2062,
+   "area_m2": 0.11714,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Trim_Black",
+    "Underbody",
+    "carpaint"
+   ],
+   "class": "rim",
+   "wmin": [
+    1.569777,
+    -0.518452,
+    0.185332
+   ],
+   "wmax": [
+    1.814765,
+    0.566761,
+    0.265848
+   ],
+   "hide_render": false,
+   "prim_slots": 3
+  },
+  {
+   "name": "Bumper_Rear_Paint",
+   "tris": 33483,
+   "verts": 25233,
+   "area_m2": 2.392622,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "carpaint",
+    "Arch_Liner",
+    "Interior_Plastic",
+    "Trim_Black",
+    "Underbody"
+   ],
+   "class": "rim",
+   "wmin": [
+    1.39104,
+    -0.834876,
+    0.151528
+   ],
+   "wmax": [
+    2.02311,
+    0.819278,
+    0.949789
+   ],
+   "hide_render": false,
+   "prim_slots": 5
+  },
+  {
+   "name": "Bumper_Front_Paint",
+   "tris": 25053,
+   "verts": 18699,
+   "area_m2": 2.237529,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "carpaint",
+    "Arch_Liner",
+    "Interior_Plastic",
+    "Underbody"
+   ],
+   "class": "other",
+   "wmin": [
+    -2.119087,
+    -0.78332,
+    0.148544
+   ],
+   "wmax": [
+    -1.559251,
+    0.759136,
+    0.699472
+   ],
+   "hide_render": false,
+   "prim_slots": 4
+  },
+  {
+   "name": "Body_Shell",
+   "tris": 177954,
+   "verts": 145178,
+   "area_m2": 20.431283,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "carpaint",
+    "Arch_Liner",
+    "Interior_Plastic",
+    "Underbody"
+   ],
+   "class": "other",
+   "wmin": [
+    -1.925318,
+    -0.877874,
+    0.048529
+   ],
+   "wmax": [
+    1.918313,
+    0.854117,
+    1.447658
+   ],
+   "hide_render": false,
+   "prim_slots": 4
+  },
+  {
+   "name": "Body_Glass_Reverted",
+   "tris": 10108,
+   "verts": 8864,
+   "area_m2": 0.329027,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "carpaint",
+    "Interior_Plastic"
+   ],
+   "class": "glass",
+   "wmin": [
+    -1.231032,
+    -0.671438,
+    0.815489
+   ],
+   "wmax": [
+    1.884277,
+    0.7004,
+    1.338049
+   ],
+   "hide_render": false,
+   "prim_slots": 2
+  },
+  {
+   "name": "Arch_Liner",
+   "tris": 99395,
+   "verts": 71938,
+   "area_m2": 6.585496,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Arch_Liner",
+    "Interior_Plastic",
+    "Trim_Black",
+    "carpaint"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.776956,
+    -0.835346,
+    -0.004587
+   ],
+   "wmax": [
+    1.652947,
+    0.824241,
+    0.790371
+   ],
+   "hide_render": false,
+   "prim_slots": 4
+  },
+  {
+   "name": "Valance_Front",
+   "tris": 2396,
+   "verts": 1200,
+   "area_m2": 0.721382,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "carpaint"
+   ],
+   "class": "other",
+   "wmin": [
+    -2.147268,
+    -0.744572,
+    0.16944
+   ],
+   "wmax": [
+    -1.766775,
+    0.748473,
+    0.32463
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Bumper_Front",
+   "tris": 6024,
+   "verts": 3032,
+   "area_m2": 0.80711,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "carpaint"
+   ],
+   "class": "other",
+   "wmin": [
+    -2.103621,
+    -0.750354,
+    0.297963
+   ],
+   "wmax": [
+    -1.772397,
+    0.759681,
+    0.709037
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Grille_Upper",
+   "tris": 2796,
+   "verts": 1400,
+   "area_m2": 0.19637,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Trim_Black"
+   ],
+   "class": "rim",
+   "wmin": [
+    -2.025814,
+    -0.317756,
+    0.56846
+   ],
+   "wmax": [
+    -1.898019,
+    0.378726,
+    0.642355
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Headlamp_R_Lens",
+   "tris": 1436,
+   "verts": 720,
+   "area_m2": 0.041521,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Lamp_Lens"
+   ],
+   "class": "other",
+   "wmin": [
+    -1.980899,
+    -0.599055,
+    0.570593
+   ],
+   "wmax": [
+    -1.856221,
+    -0.312484,
+    0.684338
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Headlamp_R_Housing",
+   "tris": 1556,
+   "verts": 780,
+   "area_m2": 0.092645,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Trim_Black"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.977585,
+    -0.605399,
+    0.56736
+   ],
+   "wmax": [
+    -1.790154,
+    -0.316028,
+    0.704658
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Headlamp_R_Internal",
+   "tris": 1404,
+   "verts": 708,
+   "area_m2": 0.02093,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Chrome_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.958871,
+    -0.575457,
+    0.578328
+   ],
+   "wmax": [
+    -1.825406,
+    -0.36489,
+    0.67641
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Headlamp_L_Lens",
+   "tris": 1436,
+   "verts": 720,
+   "area_m2": 0.041521,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Lamp_Lens"
+   ],
+   "class": "other",
+   "wmin": [
+    -1.950364,
+    0.373017,
+    0.581378
+   ],
+   "wmax": [
+    -1.808069,
+    0.649755,
+    0.697033
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Headlamp_L_Housing",
+   "tris": 1556,
+   "verts": 780,
+   "area_m2": 0.092645,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Trim_Black"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.947235,
+    0.373493,
+    0.578145
+   ],
+   "wmax": [
+    -1.743811,
+    0.653081,
+    0.717389
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Headlamp_L_Internal",
+   "tris": 1404,
+   "verts": 708,
+   "area_m2": 0.02093,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Chrome_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.927658,
+    0.423961,
+    0.589318
+   ],
+   "wmax": [
+    -1.778363,
+    0.62426,
+    0.688625
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "DRL_Blade",
+   "tris": 1596,
+   "verts": 800,
+   "area_m2": 0.043511,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "DRL_Blade"
+   ],
+   "class": "other",
+   "wmin": [
+    -1.985509,
+    -0.602144,
+    0.60413
+   ],
+   "wmax": [
+    -1.819853,
+    0.653142,
+    0.695438
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Badge",
+   "tris": 1536,
+   "verts": 770,
+   "area_m2": 0.041487,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Chrome_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -2.071571,
+    -0.026735,
+    0.522345
+   ],
+   "wmax": [
+    -1.922731,
+    0.09262,
+    0.651894
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Badge_Mount",
+   "tris": 640,
+   "verts": 322,
+   "area_m2": 0.018129,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Trim_Black"
+   ],
+   "class": "rim",
+   "wmin": [
+    -2.018139,
+    -0.0054,
+    0.548801
+   ],
+   "wmax": [
+    -1.928002,
+    0.06912,
+    0.628922
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Grille_Lower",
+   "tris": 8416,
+   "verts": 4224,
+   "area_m2": 0.587428,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Trim_Black"
+   ],
+   "class": "rim",
+   "wmin": [
+    -2.109291,
+    -0.419863,
+    0.294104
+   ],
+   "wmax": [
+    -1.947877,
+    0.490574,
+    0.449154
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Plate_Carrier",
+   "tris": 1196,
+   "verts": 600,
+   "area_m2": 0.168766,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Trim_Black"
+   ],
+   "class": "rim",
+   "wmin": [
+    -2.124273,
+    -0.231773,
+    0.384101
+   ],
+   "wmax": [
+    -2.033445,
+    0.305059,
+    0.519155
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Plate",
+   "tris": 436,
+   "verts": 220,
+   "area_m2": 0.132984,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Plate_Face"
+   ],
+   "class": "other",
+   "wmin": [
+    -2.109915,
+    -0.224579,
+    0.392197
+   ],
+   "wmax": [
+    -2.03718,
+    0.29743,
+    0.511816
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Intake_R",
+   "tris": 788,
+   "verts": 396,
+   "area_m2": 0.083793,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Trim_Black"
+   ],
+   "class": "rim",
+   "wmin": [
+    -2.036914,
+    -0.635426,
+    0.298402
+   ],
+   "wmax": [
+    -1.867887,
+    -0.459517,
+    0.448333
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Intake_L",
+   "tris": 788,
+   "verts": 396,
+   "area_m2": 0.083793,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Trim_Black"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.997843,
+    0.528361,
+    0.308835
+   ],
+   "wmax": [
+    -1.816675,
+    0.695154,
+    0.462349
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Intake_R_Blades",
+   "tris": 324,
+   "verts": 168,
+   "area_m2": 0.017316,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Chrome_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -2.006126,
+    -0.62735,
+    0.337558
+   ],
+   "wmax": [
+    -1.893953,
+    -0.472791,
+    0.421821
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Intake_L_Blades",
+   "tris": 324,
+   "verts": 168,
+   "area_m2": 0.017317,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Chrome_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.966107,
+    0.539766,
+    0.348749
+   ],
+   "wmax": [
+    -1.842095,
+    0.686807,
+    0.435668
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "TowEye_Cover",
+   "tris": 640,
+   "verts": 322,
+   "area_m2": 0.007668,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "carpaint"
+   ],
+   "class": "other",
+   "wmin": [
+    -2.074461,
+    0.342963,
+    0.432545
+   ],
+   "wmax": [
+    -2.040443,
+    0.402638,
+    0.494377
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Hatch",
+   "tris": 20928,
+   "verts": 10917,
+   "area_m2": 0.706351,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "carpaint"
+   ],
+   "class": "other",
+   "wmin": [
+    1.508496,
+    -0.658964,
+    0.597395
+   ],
+   "wmax": [
+    2.048454,
+    0.62941,
+    1.321913
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Hatch_Inner",
+   "tris": 22740,
+   "verts": 11823,
+   "area_m2": 0.92357,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Shut_Line_Dark"
+   ],
+   "class": "other",
+   "wmin": [
+    1.463652,
+    -0.659853,
+    0.580017
+   ],
+   "wmax": [
+    2.068189,
+    0.637866,
+    1.328811
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Bumper_Rear",
+   "tris": 33000,
+   "verts": 16796,
+   "area_m2": 0.772612,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "carpaint"
+   ],
+   "class": "other",
+   "wmin": [
+    1.462699,
+    -0.821788,
+    0.238211
+   ],
+   "wmax": [
+    2.086358,
+    0.804423,
+    0.607858
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Bumper_Rear_Inner",
+   "tris": 34180,
+   "verts": 17386,
+   "area_m2": 0.982907,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Shut_Line_Dark"
+   ],
+   "class": "other",
+   "wmin": [
+    1.451669,
+    -0.821788,
+    0.221731
+   ],
+   "wmax": [
+    2.070272,
+    0.804423,
+    0.6238
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Plate_Rear",
+   "tris": 512,
+   "verts": 297,
+   "area_m2": 0.053097,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Rear_Plate"
+   ],
+   "class": "other",
+   "wmin": [
+    2.065488,
+    -0.290198,
+    0.425216
+   ],
+   "wmax": [
+    2.084282,
+    0.229161,
+    0.532279
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Glass_Backlight",
+   "tris": 14208,
+   "verts": 7301,
+   "area_m2": 0.387697,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "glass"
+   ],
+   "class": "glass",
+   "wmin": [
+    1.565885,
+    -0.58018,
+    1.024093
+   ],
+   "wmax": [
+    1.91393,
+    0.568819,
+    1.293563
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_Floor",
+   "tris": 860,
+   "verts": 432,
+   "area_m2": 5.7258,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Carpet"
+   ],
+   "class": "other",
+   "wmin": [
+    -1.091634,
+    -0.614102,
+    0.112459
+   ],
+   "wmax": [
+    1.494566,
+    0.567533,
+    0.336001
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_Tunnel",
+   "tris": 396,
+   "verts": 200,
+   "area_m2": 1.186855,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Carpet"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.927808,
+    -0.162933,
+    0.152424
+   ],
+   "wmax": [
+    0.971862,
+    0.12933,
+    0.410656
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_Dash",
+   "tris": 572,
+   "verts": 288,
+   "area_m2": 1.295208,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.231171,
+    -0.613041,
+    0.475694
+   ],
+   "wmax": [
+    -0.906606,
+    0.657117,
+    0.775128
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_Binnacle",
+   "tris": 396,
+   "verts": 200,
+   "area_m2": 0.208202,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.023263,
+    0.194061,
+    0.697641
+   ],
+   "wmax": [
+    -0.844265,
+    0.558126,
+    0.843648
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_Wheel",
+   "tris": 960,
+   "verts": 480,
+   "area_m2": 0.138917,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Rim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.065177,
+    0.176178,
+    0.456875
+   ],
+   "wmax": [
+    -0.853702,
+    0.58084,
+    0.818696
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_Hub",
+   "tris": 112,
+   "verts": 58,
+   "area_m2": 0.044165,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.011554,
+    0.315527,
+    0.570851
+   ],
+   "wmax": [
+    -0.907326,
+    0.441491,
+    0.70472
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_Spokes",
+   "tris": 1188,
+   "verts": 600,
+   "area_m2": 0.039939,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Rim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.028848,
+    0.221604,
+    0.512684
+   ],
+   "wmax": [
+    -0.884629,
+    0.468136,
+    0.764316
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_Column",
+   "tris": 80,
+   "verts": 42,
+   "area_m2": 0.053063,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -0.96809,
+    0.334204,
+    0.610963
+   ],
+   "wmax": [
+    -0.757927,
+    0.414099,
+    0.768666
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_Console",
+   "tris": 396,
+   "verts": 200,
+   "area_m2": 0.885008,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.027744,
+    -0.12654,
+    0.155513
+   ],
+   "wmax": [
+    -0.152731,
+    0.140539,
+    0.480165
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_SeatFD_Cush",
+   "tris": 396,
+   "verts": 200,
+   "area_m2": 0.627646,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Fabric"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.959267,
+    0.112949,
+    0.329737
+   ],
+   "wmax": [
+    -0.444914,
+    0.628695,
+    0.475906
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_SeatFD_Back",
+   "tris": 396,
+   "verts": 200,
+   "area_m2": 0.7452,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Fabric"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.509981,
+    0.111038,
+    0.403698
+   ],
+   "wmax": [
+    -0.278864,
+    0.599972,
+    1.002014
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_SeatFD_BolB",
+   "tris": 396,
+   "verts": 200,
+   "area_m2": 0.253715,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Bolster"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.533309,
+    0.527425,
+    0.428527
+   ],
+   "wmax": [
+    -0.277942,
+    0.614709,
+    0.988595
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_SeatFD_BolA",
+   "tris": 396,
+   "verts": 200,
+   "area_m2": 0.253715,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Bolster"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.550279,
+    0.097784,
+    0.423996
+   ],
+   "wmax": [
+    -0.294913,
+    0.185068,
+    0.984063
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_SeatFD_Head",
+   "tris": 396,
+   "verts": 200,
+   "area_m2": 0.124744,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Bolster"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.309001,
+    0.227596,
+    0.964837
+   ],
+   "wmax": [
+    -0.18565,
+    0.464414,
+    1.140582
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_SeatFP_Cush",
+   "tris": 396,
+   "verts": 200,
+   "area_m2": 0.627646,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Fabric"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.987683,
+    -0.60645,
+    0.32215
+   ],
+   "wmax": [
+    -0.47333,
+    -0.090704,
+    0.468319
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_SeatFP_Back",
+   "tris": 396,
+   "verts": 200,
+   "area_m2": 0.7452,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Fabric"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.538397,
+    -0.608361,
+    0.39611
+   ],
+   "wmax": [
+    -0.30728,
+    -0.119427,
+    0.994427
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_SeatFP_BolB",
+   "tris": 396,
+   "verts": 200,
+   "area_m2": 0.253715,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Bolster"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.561724,
+    -0.191974,
+    0.42094
+   ],
+   "wmax": [
+    -0.306358,
+    -0.10469,
+    0.981007
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_SeatFP_BolA",
+   "tris": 396,
+   "verts": 200,
+   "area_m2": 0.253715,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Bolster"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.578695,
+    -0.621615,
+    0.416408
+   ],
+   "wmax": [
+    -0.323328,
+    -0.534332,
+    0.976476
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_SeatFP_Head",
+   "tris": 396,
+   "verts": 200,
+   "area_m2": 0.124744,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Bolster"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.337416,
+    -0.491803,
+    0.957249
+   ],
+   "wmax": [
+    -0.214065,
+    -0.254985,
+    1.132994
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_BenchCush",
+   "tris": 396,
+   "verts": 200,
+   "area_m2": 1.44089,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Fabric"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.162774,
+    -0.630046,
+    0.413987
+   ],
+   "wmax": [
+    0.379565,
+    0.585154,
+    0.57252
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_BenchBack",
+   "tris": 396,
+   "verts": 200,
+   "area_m2": 1.723449,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Fabric"
+   ],
+   "class": "other",
+   "wmin": [
+    0.336967,
+    -0.655006,
+    0.491864
+   ],
+   "wmax": [
+    0.631236,
+    0.574311,
+    1.075224
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_BenchHead_R",
+   "tris": 396,
+   "verts": 200,
+   "area_m2": 0.107792,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Bolster"
+   ],
+   "class": "other",
+   "wmin": [
+    0.605946,
+    0.181053,
+    1.017127
+   ],
+   "wmax": [
+    0.727069,
+    0.407837,
+    1.174035
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_BenchHead_L",
+   "tris": 396,
+   "verts": 200,
+   "area_m2": 0.107792,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Bolster"
+   ],
+   "class": "other",
+   "wmin": [
+    0.578714,
+    -0.508371,
+    1.009856
+   ],
+   "wmax": [
+    0.699837,
+    -0.281588,
+    1.166763
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_ParcelShelf",
+   "tris": 476,
+   "verts": 240,
+   "area_m2": 1.853747,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    0.59808,
+    -0.663732,
+    0.984607
+   ],
+   "wmax": [
+    1.379517,
+    0.55094,
+    1.11961
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_BootFloor",
+   "tris": 572,
+   "verts": 288,
+   "area_m2": 3.420564,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Carpet"
+   ],
+   "class": "other",
+   "wmin": [
+    0.574245,
+    -0.760271,
+    0.436431
+   ],
+   "wmax": [
+    1.843771,
+    0.628248,
+    0.567566
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_DoorCard_R",
+   "tris": 400,
+   "verts": 260,
+   "area_m2": 3.618247,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.068671,
+    0.340853,
+    0.158517
+   ],
+   "wmax": [
+    1.194015,
+    0.780319,
+    0.99074
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_DoorCard_L",
+   "tris": 400,
+   "verts": 260,
+   "area_m2": 3.567095,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.111941,
+    -0.781524,
+    0.151643
+   ],
+   "wmax": [
+    1.155346,
+    -0.284954,
+    0.977658
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  },
+  {
+   "name": "Cabin_Headliner",
+   "tris": 1868,
+   "verts": 936,
+   "area_m2": 3.417313,
+   "det": 1.0,
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Cabin_Liner"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.488593,
+    -0.513156,
+    1.127173
+   ],
+   "wmax": [
+    1.418431,
+    0.425011,
+    1.362443
+   ],
+   "hide_render": false,
+   "prim_slots": 1
+  }
+ ]
+}
