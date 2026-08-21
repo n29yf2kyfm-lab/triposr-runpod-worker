@@ -330,7 +330,7 @@
    },
    "measured_on_merged_car": "NOT TESTED - merged car not published",
    "threshold": "0 errors",
-   "control_fired": "NOT PROVEN - no deliberate-error file was built",
+   "control_fired": "NC12a float indices (2 err), NC12b accessor too long (1 err), NC12c bad material index (1 err); good file stays 0",
    "status": "REPRODUCED",
    "note": ""
   },
@@ -561,14 +561,28 @@
    "injected": "contiguous 150 mm disc cut out of the roof (708 faces, 0.37% of Body_Shell)",
    "response": "receded 4, lost 0; exactly 3 of 15 directions fired, all el +18 (roof-viewing)",
    "fired": true
+  },
+  {
+   "id": "NC12a",
+   "injected": "indices accessor declared componentType FLOAT",
+   "response": "2 errors: MESH_PRIMITIVE_INDICES_ACCESSOR_INVALID_FORMAT, ACCESSOR_MAX_MISMATCH",
+   "fired": true
+  },
+  {
+   "id": "NC12b",
+   "injected": "accessor count multiplied 97x beyond its bufferView",
+   "response": "1 error: ACCESSOR_TOO_LONG",
+   "fired": true
+  },
+  {
+   "id": "NC12c",
+   "injected": "primitive references material index 999",
+   "response": "1 error: UNRESOLVED_REFERENCE",
+   "fired": true
   }
  ],
  "findings": [],
  "not_proven_to_fail": [
-  {
-   "check": "Khronos validator 0 errors",
-   "why": "no file with a deliberate validator error was built. Evidence it is reading the geometry: it reports 90-174 BUFFER_VIEW_TARGET_MISSING hints and 2 ACCESSOR_INDEX_TRIANGLE_DEGENERATE infos per file, so it is not returning a canned zero. That is evidence, not proof."
-  },
   {
    "check": "hole test LOST class",
    "why": "NC7 (scattered) and NC9 (contiguous 150 mm roof disc) both fired only via RECEDED. The LOST class fires on a synthetic icosphere (72 of 144 rays) but never on the car, because the cabin stops every ray. That IS the finding, not a gap."
@@ -577,6 +591,11 @@
    "check": "hierarchy inventory",
    "status": "CLOSED after the first draft",
    "why": "NC10 (empty-but-named node) and NC11 (two names on one mesh) both fire; both pass a naive name check at 20/20"
+  },
+  {
+   "check": "Khronos validator 0 errors",
+   "status": "CLOSED after the first draft",
+   "why": "three independent deliberate violations (NC12a/b/c) each produce errors while car_merged stays at 0"
   }
  ],
  "glass_probe_pairing_evidence": [

@@ -308,15 +308,19 @@ reliably detected at this density — run 64×64 (≈ 48 mm spacing) if small ho
 This is a property of the sampling, not of the car, and it is why the number to watch
 is "did any direction fire at all", not the magnitude.
 
-**Checks I could NOT prove can fail — say so rather than imply coverage** (one of the three was closed after the first draft and is struck through):
+**Checks I could NOT prove can fail — say so rather than imply coverage** (two of the three were closed after the first draft and are struck through; one genuine item remains):
 
-1. **Khronos validator = 0 errors.** All seven files pass. I did **not** build a file
-   with a deliberate validator error, so I have not demonstrated in this session that
-   my invocation of the validator would report one. The invocation is the official
-   `gltf-validator` module (`gltf-transform validate` has no JSON output format), and
-   it does report 90–174 `BUFFER_VIEW_TARGET_MISSING` hints and 2
-   `ACCESSOR_INDEX_TRIANGLE_DEGENERATE` infos per file — so it is demonstrably reading
-   the geometry and not returning a canned zero. That is evidence, not proof.
+1. ~~**Khronos validator = 0 errors.**~~ **CLOSED — this gap is now tested.** Three
+   independent deliberate spec violations were injected into `car_merged.glb`, so the
+   result does not hinge on one code path:
+   | control | injected | validator |
+   |---|---|---|
+   | — | (unmodified `car_merged.glb`) | **0 errors** |
+   | NC12a | indices accessor declared `componentType` FLOAT | **2 errors** — `MESH_PRIMITIVE_INDICES_ACCESSOR_INVALID_FORMAT`, `ACCESSOR_MAX_MISMATCH` |
+   | NC12b | accessor `count` ×97 beyond its bufferView | **1 error** — `ACCESSOR_TOO_LONG` |
+   | NC12c | primitive references material index 999 | **1 error** — `UNRESOLVED_REFERENCE` |
+   The "0 errors" on all seven gate files is therefore a measured pass, not an
+   untested zero.
 2. **Hole test.** Self-test with NC7 was still running at the time of writing. The
    underlying ray caster **is** proven: `raycast.selftest()` returns exactly 2 hits on
    every one of 144 rays through a closed icosphere, and punching a cap makes exactly
