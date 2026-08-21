@@ -131,11 +131,31 @@ def caption_bar(im, title, sub="", h=None, bg=(18, 18, 18), fg=(245, 245, 245)):
     2026-08-16: an uncaptioned tile cost a whole review round)."""
     W = im.width
     h = h or max(46, int(W * 0.030))
-    strip = Image.new("RGB", (W, h + (int(h * 0.72) if sub else 0)), bg)
-    d = ImageDraw.Draw(strip)
-    d.text((int(h * 0.32), int(h * 0.22)), title, font=font(int(h * 0.52)), fill=fg)
+    pad = int(h * 0.32)
+    lines = []
     if sub:
-        d.text((int(h * 0.32), h + int(h * 0.06)), sub,
+        # WRAP, never clip: the first V5 sheet lost the tail of its azimuth
+        # legend off the right edge of a 6460 px image. A caption that runs off
+        # the page is information the reader does not get.
+        fs = font(int(h * 0.40), mono=True, bold=False)
+        probe = ImageDraw.Draw(Image.new("RGB", (8, 8)))
+        avail = W - 2 * pad
+        cur = ""
+        for w in sub.split(" "):
+            t = (cur + " " + w).strip()
+            if probe.textlength(t, font=fs) <= avail or not cur:
+                cur = t
+            else:
+                lines.append(cur)
+                cur = w
+        if cur:
+            lines.append(cur)
+    lh = int(h * 0.50)
+    strip = Image.new("RGB", (W, h + (int(h * 0.16) + lh * len(lines) if lines else 0)), bg)
+    d = ImageDraw.Draw(strip)
+    d.text((pad, int(h * 0.22)), title, font=font(int(h * 0.52)), fill=fg)
+    for i, ln in enumerate(lines):
+        d.text((pad, h + int(h * 0.02) + i * lh), ln,
                font=font(int(h * 0.40), mono=True, bold=False), fill=(186, 186, 186))
     out = Image.new("RGB", (W, im.height + strip.height), bg)
     out.paste(strip, (0, 0))

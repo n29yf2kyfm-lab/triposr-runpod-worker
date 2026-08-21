@@ -73,7 +73,7 @@ def main():
     ap.add_argument("--ref-dir", default=None)
     a = ap.parse_args()
 
-    png = os.path.join(a.outroot, "png")
+    png = os.path.join(a.outroot, "png", a.tag)
     out = os.path.join(a.outroot, "sheets")
     os.makedirs(out, exist_ok=True)
 
@@ -302,7 +302,7 @@ def main():
         for vid, lab in (("p14_section_plan", "PLAN SECTION at headlamp mid-height "
                           "(camera looking straight down; image-right = car tail)"),
                          ("p14_section_transverse", "TRANSVERSE SECTION at headlamp "
-                          "mid-width (camera on the car's left)")):
+                          "mid-width, cut on the +Z lamp cluster (camera at +Z)")):
             v = V(vid)
             if not v:
                 continue
@@ -316,7 +316,7 @@ def main():
         if secs:
             C.side_by_side(secs, os.path.join(out, "14_intersection_clearance.jpg"),
                            "14  INTERSECTION / CLEARANCE SECTIONS — %s" % a.tag,
-                           "Near-plane section cuts through one headlamp cluster, flat "
+                           "Near-plane section cuts through the +Z headlamp cluster, flat "
                            "material-ID colours, scale bar on each panel. Inner shell "
                            "hidden so the lens / housing / body relationship reads.")
             for t, _ in secs:

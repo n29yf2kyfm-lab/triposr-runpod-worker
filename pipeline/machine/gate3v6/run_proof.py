@@ -168,7 +168,11 @@ def proof_views(ly, groups, boxes_lo, boxes_hi, lamp_centre):
     #    gaps away and cannot show whether a lens intersects its housing.
     #    The big inner shell is hidden so the lens/housing/body relationship
     #    reads; matID colours + a scale bar make the gaps measurable.
-    lamp_L = sorted(planner.headlamp_sets(BOXES, lamps)[0]) or lamps
+    # One cluster only, and drop anything that straddles the centreline (a
+    # legacy whole-width lamp material would stretch the fit off the cluster).
+    _side = planner.headlamp_sets(BOXES, lamps)[0] or lamps
+    lamp_L = sorted(n for n in _side
+                    if not (BOXES[n]["lo"][2] < 0.0 < BOXES[n]["hi"][2])) or lamps
     hide_sec = sorted(set(groups["interior"]) | set(groups["wheels"]))
     V.append(dict(id="p14_section_plan", az=270, elev=90.0, cam="ortho",
                   res=RES_MAIN, pass_="matid", samples=SAMPLES_FLAT,
@@ -206,7 +210,11 @@ def main():
                     choices=["all", "sheet", "proof", "baseline", "compose"])
     a = ap.parse_args()
 
-    png = os.path.join(a.outroot, "png")
+    # PER-TAG png directory. Two runs (V5 source, V6 rebuild) use the same view
+    # ids, so a shared directory would silently overwrite the first run's frames
+    # while its metadata still pointed at them - the stale-frame class this
+    # project has already been burned by.
+    png = os.path.join(a.outroot, "png", a.tag)
     sheets = os.path.join(a.outroot, "sheets")
     logs = os.path.join(a.outroot, "logs")
     for d in (png, sheets, logs):

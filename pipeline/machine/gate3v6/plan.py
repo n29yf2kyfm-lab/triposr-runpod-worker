@@ -21,7 +21,11 @@ import trimesh
 BODYISH = re.compile(r"carpaint|body|shell|paint|panel|bonnet|bumper|fender|wing|"
                      r"door|quarter|hatch|tailgate|sill|roof", re.I)
 GLASSY = re.compile(r"glass|window|windscreen|windshield|screen|glazing|pane", re.I)
-WHEELY = re.compile(r"tyre|tire|rubber|rim|alloy|wheel|hub|disc|caliper|brake", re.I)
+# NOTE the word-boundaried "rim": a bare `rim` also matches "t-RIM", which put
+# Grille_Upper_Trim in the WHEELS group. Same substring trap as the `light` ->
+# "LightGray" and `int` -> "carpaint" bugs already recorded in CLAUDE.md.
+WHEELY = re.compile(r"tyre|tire|rubber|(?:^|[_\-. ])rim(?:$|[_\-. ])|alloy|"
+                    r"wheel|hub|\bdisc|caliper|brake", re.I)
 INSIDE = re.compile(r"interior|cabin|seat|dash|console|occluder|floor", re.I)
 LAMPY = re.compile(r"lamp|\bhead|drl|lens|housing|reflector|bezel|light", re.I)
 FRONTKIT = re.compile(r"head|drl|grille|grill|intake|badge|plate|lens|housing|"
@@ -65,7 +69,10 @@ def classify(boxes):
     groups = {"base": [], "frontkit": [], "glass": [], "wheels": [], "interior": [],
               "lamps": [], "other": []}
     for name, b in boxes.items():
-        is_small = b["faces"] < big * 0.06
+        # 0.20, not 0.06: a rebuilt front BUMPER is a real component and is
+        # legitimately ~13% of the biggest shell. At 0.06 it fell through to
+        # "base" and never appeared in the exploded component proof.
+        is_small = b["faces"] < big * 0.20
         in_front = b["hi"][0] <= front_cut + 0.06 * L
         if GLASSY.search(name):
             groups["glass"].append(name)
@@ -77,7 +84,7 @@ def classify(boxes):
             groups["frontkit"].append(name)
             if LAMPY.search(name):
                 groups["lamps"].append(name)
-        elif BODYISH.search(name) or b["faces"] >= big * 0.06:
+        elif BODYISH.search(name) or b["faces"] >= big * 0.20:
             groups["base"].append(name)
         else:
             groups["other"].append(name)
@@ -89,17 +96,23 @@ def explode_ranks(boxes, names, axis_gltf="-x"):
     """Layered explode ranks. Semantic layers first (wells/housings sit deepest,
     lenses/plates outermost); if the names are unfamiliar, fall back to ordering
     by how far forward the part's own front face sits. Never fails."""
+    # Order matters and is most-specific-first: "Plate_Carrier" is a CARRIER
+    # (deep) even though it contains "plate", and "Grille_Upper_Trim" is TRIM
+    # (outermost) even though it contains "grille".
     layer = []
     for n in names:
         s = n.lower()
-        if re.search(r"well|recess|housing|backstop|frame|surround", s):
+        if re.search(r"carrier|mount|housing|well|recess|frame|surround|backstop", s):
             r = 1
-        elif re.search(r"inner|reflector|bezel|shroud", s):
+        elif re.search(r"inner|internal|reflector|projector|bezel|shroud|module", s):
             r = 2
-        elif re.search(r"drl|slat|bar|mesh|grid|louvre", s):
+        elif re.search(r"drl|slat|blade|louvre|mesh|grid", s):
             r = 3
         elif re.search(r"lens|badge|emblem|plate|cover|glass|trim", s):
             r = 4
+        elif re.search(r"grille|grill|intake|vent|duct|bumper|splitter|bonnet|"
+                       r"valance|apron|skirt", s):
+            r = 1
         else:
             r = 0
         layer.append((n, r))
