@@ -1,63 +1,58 @@
 # CHECKPOINT — merge operator (Gate 6 stance -> Gate 7+8 rebound base)
 
-## STATE: deliverable BUILT, GATED and BUCKET-BACKED. Verification in progress.
+## STATE: COMPLETE. Deliverable bucket-backed, all acceptance checks pass.
 
-**Deliverable** `car-meshes/staging/merge/glb/` — 2 parts + MANIFEST.txt,
-`car_merged.glb`, 28,703,236 bytes,
-sha256 `09897d2037a4566bd447f1fc80fb07b4d818c757e756760bfdbcb1723ae25e8d`.
-Round-tripped from the bucket and compared byte-for-byte: identical.
+**Deliverable** `car-meshes/staging/merge/glb/` — `car_merged.glb`,
+28,703,236 bytes, sha256
+`09897d2037a4566bd447f1fc80fb07b4d818c757e756760bfdbcb1723ae25e8d`,
+stored as 2 parts + MANIFEST.txt. Re-downloaded from the bucket and compared
+byte-for-byte with the local file: identical. Prefix listed and verified.
+Full report: `car-meshes/staging/merge/MERGE_REPORT.md` (also in-repo at
+`pipeline/machine/merge/MERGE_REPORT.md`).
 
-## Inputs
-* BASE  `staging/gate78/car_rebound.glb` sha `5380761c…c88e0` (matches brief)
-* DONOR `staging/gate6/car_gate6_repaired_TEXTURES-REDUCED.glb` + Gate 6's
-  op_pose.json / op_wheels*.json / TRANSFORM_TABLE / ACCEPTANCE (records only —
-  no geometry taken from the donor; see route decision).
+## Headline
+tyre bottoms **FL +0.000000 · FR -0.000000 · RL -0.000000 · RR -0.000000 mm**
+(tol +-0.5 mm; before: +183.2 / +189.6 / +0.3 / +14.7 mm).
+All four Gate 7+8 properties survived: glass_probe clear/proven · tyres black ·
+respray control holds (carpaint moves 175-215 sRGB, tyres 1.1-1.4, glass
+5.7-21.4, rims 5.6-7.9, tail lamps 0.1-0.2) · Khronos 0 errors 0 warnings.
+Material table diff EMPTY, binding diff EMPTY, 30/30 primitives carry NORMAL.
 
-## CORRECTION TO THE BRIEF (measured, first thing done)
-The brief states the base's tyre bottoms are y = RL −0.3067 · RR −0.3067 ·
-FL −0.3233 · FR −0.3241 and the contact plane is ~324 mm below y=0. Those are
-the wheel meshes' **node-local** accessor minima. The wheel nodes carry real
-translations, and composed to world the bottoms are
-**FL +0.1832 · FR +0.1896 · RL +0.0003 · RR +0.0147** — i.e. the front tyres are
-183/190 mm IN THE AIR, which is Gate 6's own recorded baseline, not 324 mm under
-the floor. local_min + nodeT reproduces the brief's four numbers exactly.
-The base's world AABB is 4.282490 × 1.455398 × 1.788713 = Gate 6's recorded
-`aabb_before` to six decimals, so the base sits in Gate 6's input frame.
+## CORRECTION TO THE BRIEF
+The brief's tyre-bottom figures (-0.3067 / -0.3233 / -0.3241) are the wheel
+meshes' **node-local** minima; the wheel nodes carry real translations. In world
+space the front tyres were 183/190 mm IN THE AIR, i.e. Gate 6's own baseline,
+not 324 mm below the floor. local+nodeT reproduces the brief's numbers exactly.
 
-## Route chosen: (B) re-apply Gate 6's OPERATIONS to the base's own geometry
-Route A (transplanting Gate 6's wheel geometry) rejected: Gate 6's wheels were
-cut from a fused shell and carry four-material mixtures against the base's clean
-three-node-per-corner scheme; its shippable file is texture-reduced; and it does
-not generalise to the v7 front-rebuild output.
+## Route: (B) re-apply Gate 6's operations to the base's own geometry
+Not (A) transplant — Gate 6's wheels are four-material mixtures cut from a fused
+shell, its file is texture-reduced, and (A) does not generalise to the v7 output.
+
+## What was deliberately NOT carried across, with evidence
+Wheel AXIS SQUARING, width equalisation, and Gate 6's literal track numbers.
+`merge_calib.py` injection ladders: toe response slope FL +0.770, FR **-0.735**,
+RL +0.967, RR **-0.400** — on two of four corners the probe reports an injected
+rotation as a rotation the OTHER WAY. Four independent axis estimators disagree
+by up to 11.15 deg. The squaring build was made and measured: it left residual
+toe +1.287/+0.636/+0.057/**-1.132** deg, RR overshooting and changing sign.
+Available behind `--square-axes` / `--equalise-width` / `--track-mode gate6`.
 
 ## Tools (pipeline/machine/merge/, branch claude/lovable-connection-ki7jch)
-* `glb_io.py`      glTF-level read/write — POSITION+NORMAL accessors only, so
-                   the material table is preserved BY CONSTRUCTION
-* `wheel_probe.py` geometric wheel identification + cylinder metrology
-* `merge_op.py`    THE OPERATOR: pose (rigid) + per-wheel scale/place/ground
-* `merge_views.py` matched-camera orthographic evidence renders
-* `sb_chunk.py`    chunked bucket upload + paged listing + verified round trip
+glb_io.py · wheel_probe.py · merge_op.py · verify_merge.py · merge_calib.py ·
+merge_views.py · control_numbers.py · sb_chunk.py · selftest.py
 
-## Results so far
-* tyre bottoms after merge: **FL +0.00000 · FR −0.00000 · RL −0.00000 ·
-  RR −0.00000 mm** (measured from the written file, not the plan)
-* glass_probe **clear / proven** (unchanged from base), flat_shell false,
-  alpha_shell false
-* Khronos validator 2.0.0-dev.3.10: **0 errors, 0 warnings**, 2 infos, 90 hints
-  — identical to the base's own recorded report
-* NORMAL accessor on 30/30 primitives, 0 zero-length normals
-* material table diff EMPTY, binding table diff EMPTY (enforced by the operator,
-  which refuses to write if either is non-empty)
-* radius spread 16.1 mm -> 0.99 mm; all node transforms baked to identity
+## Reuse on the Gate 3 v7 front-rebuild output
+```
+python3 pipeline/machine/merge/merge_op.py V7.glb OUT.glb \
+    --pose-mode record --pose-json op_pose.json --report R.json
+python3 pipeline/machine/merge/verify_merge.py V7.glb OUT.glb \
+    --merge-report R.json --controls
+```
+`selftest.py` proves this rather than asserting it: on a v7-SHAPED input (fascia
+nodes renamed, grille rebound to a new 12th material) the wheel plan is
+identical to the reference run, worst delta 0.000e+00; renamed nodes and the new
+material survive; all four ground; and the three refusal paths all fire.
 
-## Open at this checkpoint
-red/blue respray control render, matched before/after sheet, injection-ladder
-calibration report, rigidity proof file, final report.
-
-## Decision recorded: wheel AXES ARE NOT ROTATED
-Four independent estimators of the same wheel axis (tread-cylinder fit, brake-disc
-PCA, brake-disc area-weighted face normals, rim PCA) disagree by **1.2–10.9°** on
-this melt geometry, a contact-patch estimator is incoherent across thresholds, and
-the closed-loop response of a full squaring correction measured **0.26–1.57** (on
-RR it overshot and flipped the sign of the toe). Grounding, radius equalisation and
-hub symmetry are measurable and were applied; squaring is behind `--square-axes`.
+## Verification status
+verify_merge.py: ALL_OK true, CONTROLS_OK true (6/6 negative controls fire).
+selftest.py: SELFTEST_OK true.
