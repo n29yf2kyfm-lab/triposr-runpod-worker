@@ -11,6 +11,25 @@
 # open-source surfacing question is closed. If it comes back sharp, the
 # ceiling was always the conditioning.
 #
+# RESULT, 2026-08-21, Kia Sportage NQ5 (catalogue-best, crease/diag 503.7):
+#   reconstruction took 16.5 s on an A40 and returned 10,591,974 faces.
+#   SHAPE HELD:  symmetric chamfer 0.1477% of the bbox diagonal (~7.8 mm),
+#                extents within 0.05% on all three axes, grille honeycomb cells
+#                still individually countable, alloy spokes intact.
+#   FEATURES DID NOT: crease/diag 503.7 -> 393.4 (78.1%, MISSING the
+#                pre-registered 80% gate); the KIA bonnet badge erased; the door
+#                shut line reduced to a broken dashed line; window surrounds,
+#                roof rails and bumper slats TORN into gashes; new surface
+#                speckle added. crease_locate.py proves the apparent "99.4%
+#                retention at 60 deg" is eroded features plus new noise
+#                cancelling in a total, not preservation.
+#   WHY: 1024^3 over a 4.5 m car is ~4.4 mm per voxel and a shut line is 2-4 mm.
+#        The features that die are exactly those at or below ONE VOXEL.
+#   SO: the representation is a real, binding constraint. Even a PERFECT
+#        conditioning signal — the target mesh itself — does not survive it.
+#        Better conditioning cannot buy catalogue-grade panel crispness at this
+#        resolution. This is the cheap negative the experiment was run for.
+#
 # NO `set -x` ANYWHERE IN THIS FILE, DELIBERATELY. On 2026-08-18 xtrace in a
 # bootstrap echoed the Authorization header into a PUBLIC bucket log and
 # SB_KEY had to be rotated. Every stage prints its own marker instead.
