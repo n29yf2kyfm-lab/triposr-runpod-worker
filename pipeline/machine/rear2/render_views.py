@@ -47,6 +47,18 @@ def emission(mat, col):
 
 # ---- explicit diagnostic palette (owner-specified rear colours) ----
 PAL = {
+ # REAR GATE v2 components. Added because the hash fallback gave `Bumper_Rear`
+ # and `Rear_Upper_Legacy_Melt` near-identical greens on the first matID, which
+ # is exactly the confusion a diagnostic render exists to remove. Owner's
+ # specified rear colours: L lamp MAGENTA, R lamp ORANGE, hatch CYAN, bumper
+ # YELLOW, rear glass DARK BLUE, body grey.
+ "hatch_inner":(0.20,0.20,0.24), "hatch":(0.0,0.85,1.0),
+ "bumper_rear_inner":(0.30,0.26,0.10), "bumper_rear":(1.0,0.92,0.0),
+ "glass_backlight":(0.03,0.05,0.45),
+ "plate_rear":(1.0,1.0,1.0),
+ "rear_upper_legacy_melt":(0.62,0.36,0.36),      # UNREBUILT melt: dull red-brown
+ "rear_bumper_legacy_melt":(0.62,0.36,0.36),
+ "rear_quarter":(0.55,0.55,0.56),
  "tail_lens_lo":(1.0,0.0,0.85), "tail_lens_ro":(1.0,0.45,0.0),   # L MAGENTA R ORANGE
  "tail_lens_lh":(1.0,0.0,0.85), "tail_lens_rh":(1.0,0.45,0.0),
  "tail_housing":(0.10,0.10,0.12),

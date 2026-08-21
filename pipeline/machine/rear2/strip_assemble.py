@@ -65,15 +65,35 @@ class Cover:
                 R = np.roll(M, sh, axis=ax); m = np.isfinite(R)
                 a2[m] += R[m]; c2[m] += 1
             M = np.where(bad & (c2 > 0), a2 / np.maximum(c2, 1), M)
+        # THE RASTER MUST BE SOLID, and the first version was not. Cells are
+        # 6 mm while the panel grid's nodes are 7-9 mm apart, so marking only
+        # the cells that contain a node left a DOTTED mask -- and a face landing
+        # in one of the gaps was never tested and never cut. Measured cost: 172
+        # legacy-melt faces survived INSIDE the panel footprint and stood up to
+        # 48 mm PROUD of the rebuilt skin, visible as dark shards on the lower
+        # tailgate at 3x. Closing + hole-filling makes the interior solid
+        # WITHOUT pushing the outline outward, which a plain dilation would.
+        from scipy import ndimage
+        st = np.ones((3, 3), bool)
+        ok = ndimage.binary_closing(ok, structure=st, iterations=2)
+        ok = ndimage.binary_fill_holes(ok)
+        self.ok_core = ok.copy()
         for _ in range(dilate):
             ok = ok | np.roll(ok, 1, 0) | np.roll(ok, -1, 0) | np.roll(ok, 1, 1) | np.roll(ok, -1, 1)
-        self.M = np.where(np.isfinite(M), M, 0.0); self.ok = ok
+        # A wider mask for the PROUD test only. Anything standing through the
+        # panel is wrong wherever it is, and removing it cannot open a hole in
+        # the panel's own area -- while widening the BACK window would widen the
+        # visible seam. So the two windows get different footprints on purpose.
+        okf = ok.copy()
+        for _ in range(4):
+            okf = okf | np.roll(okf, 1, 0) | np.roll(okf, -1, 0) | np.roll(okf, 1, 1) | np.roll(okf, -1, 1)
+        self.M = np.where(np.isfinite(M), M, 0.0); self.ok = ok; self.ok_front = okf
 
     def query(self, y, q):
         iy = ((y - self.y0) / self.dy).astype(int); iq = ((q - self.q0) / self.dq).astype(int)
         good = (iy >= 0) & (iy < self.M.shape[0]) & (iq >= 0) & (iq < self.M.shape[1])
         iy = np.clip(iy, 0, self.M.shape[0] - 1); iq = np.clip(iq, 0, self.M.shape[1] - 1)
-        return self.M[iy, iq], self.ok[iy, iq] & good
+        return self.M[iy, iq], self.ok[iy, iq] & good, self.ok_front[iy, iq] & good
 
 
 HC = Cover(HVo[..., 1].ravel(), HVo[..., 2].ravel(), HVo[..., 0].ravel(), 0.006, 0.006)
@@ -86,13 +106,15 @@ BC = Cover(BVo[..., 1].ravel(), bth, brr, 0.006, 0.7)
 def in_strip(p):
     """True for face centres inside EITHER panel's footprint + depth window."""
     hit = np.zeros(len(p), bool)
-    xs, ok = HC.query(p[:, 1], p[:, 2])
-    hit |= ok & (p[:, 0] > xs - DEPTH_BACK) & (p[:, 0] < xs + DEPTH_FRONT)
+    xs, ok, okf = HC.query(p[:, 1], p[:, 2])
+    hit |= ok & (p[:, 0] > xs - DEPTH_BACK) & (p[:, 0] <= xs + 0.0015)
+    hit |= okf & (p[:, 0] > xs + 0.0015) & (p[:, 0] < xs + DEPTH_FRONT)
     _f = P_bmp.frame(p[:, 1]); xc, zc = _f[2], _f[3]
     th = np.degrees(np.arctan2(p[:, 2] - zc, p[:, 0] - xc))
     rr = np.hypot(p[:, 0] - xc, p[:, 2] - zc)
-    rs, ok2 = BC.query(p[:, 1], th)
-    hit |= ok2 & (rr > rs - DEPTH_BACK) & (rr < rs + DEPTH_FRONT)
+    rs, ok2, okf2 = BC.query(p[:, 1], th)
+    hit |= ok2 & (rr > rs - DEPTH_BACK) & (rr <= rs + 0.0015)
+    hit |= okf2 & (rr > rs + 0.0015) & (rr < rs + DEPTH_FRONT)
     return hit
 
 
