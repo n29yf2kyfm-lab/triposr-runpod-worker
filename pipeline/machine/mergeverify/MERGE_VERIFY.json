@@ -659,5 +659,17 @@
    }
   },
   "consequence": "the glass relabelling (which moves no vertex) and the v7 front kit can be carried onto the grounded base by this single matrix; the wheels must come from car_merged"
+ },
+ "runner_dry_runs": {
+  "car_glass_v4.glb": {
+   "hierarchy": "gate78 26/26, glass 1/1, cabin 0/28, v7 0/20, rear 0/14",
+   "note": "correct for a single-gate file"
+  },
+  "car_cabin.glb": {
+   "hierarchy": "gate78 26/26, cabin 28/28, glass 0/1, v7 0/20, rear 0/14",
+   "runtime_s": 3.2,
+   "shared_mesh_violations": 0,
+   "bonus_finding": "all 28 Cabin_* nodes score 0% face-centroid coincidence with car_rebound -- they are provably CONSTRUCTED geometry, not relabelled melt. Independent confirmation the cabin gate built components rather than renaming the Interior shell."
+  }
  }
 }

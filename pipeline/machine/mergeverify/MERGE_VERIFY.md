@@ -154,7 +154,15 @@ relabelling and the v7 front kit can both be carried onto the grounded base by
 applying that single matrix; they do not need re-deriving. The wheels must come from
 `car_merged`, never from `car_rebound`.
 
-### 3.6 Two gates do not carry the merge's grounding fix
+### 3.6 The cabin's 28 components are provably constructed, not relabelled
+
+Same geometric-provenance test as §3.2, run on `car_cabin.glb`: **all 28 `Cabin_*`
+nodes score 0.000% face-centroid coincidence with `car_rebound.glb`.** So the cabin
+gate built new geometry rather than renaming parts of the `Interior` melt shell —
+which is the failure the provenance test exists to catch, and it did not happen here.
+(`Interior` itself drops 331,014 → 181,712 faces, consistent with its own report.)
+
+### 3.7 Two gates do not carry the merge's grounding fix
 
 `car_glass_v4.glb` and `GOLF_V7_FRONT_GATE.glb` are built on `car_rebound.glb`, so
 their tyres are still at FL **183.178 mm** / FR **189.636 mm** in the air. Only
