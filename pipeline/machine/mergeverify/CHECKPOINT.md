@@ -22,11 +22,31 @@ nodetrees, rigid_transform, LIGHT_CALIB, ROOF_BEFORE_AFTER.png, orient render)
 1 with ±2 pp placement sensitivity (hidden melt) · 1 pending (contiguous-hole control) ·
 1 gate deliverable FAILS the material set on its own file (rear v2).
 
-## THE FOUR FINDINGS THE MERGE MUST ACT ON
-1. **rear2_v4.glb material table is not shippable** — `extensionsUsed` ABSENT,
-   `carpaint` = [1,1,1,1] metallic 1 rough 1 (glTF-defaults flat-shell signature),
-   `Rim_Alloy` the same, `Tyre_Rubber` 0.0484 not 0.0288. Geometry win is real.
-   `glass_probe` still says clear/proven on it.
+## CORRECTION ISSUED IN SESSION — read this first
+I published that rear2_v4's carpaint/Rim_Alloy are "[1,1,1,1] metallic 1 rough 1 =
+flat-shell". **RETRACTED.** Both are TEXTURED (baseColorTexture + metallicRoughnessTexture;
+4 images in that file, 0 in the other six), so those factors are the neutral MULTIPLIER
+and are correct — the exact tyre-probe trap CLAUDE.md records, reproduced by me.
+Found because the respray control returned mean |Δ| EXACTLY 0.00 over 64,486 px, which
+is impossible, so I checked rather than published: the PNGs were pixel-identical. Root
+cause was a SECOND bug, mine: `set_paint` wrote `default_value` on a Base Color input
+LINKED to a texture, which does nothing, and would mis-report EVERY textured car.
+Both fixed, re-validated 3/3 (NC8 genuinely-flat still fires; rear no longer does; good
+file clean). Re-run: rear paint DOES respond (15.72, 73.5% px) — but that is a MULTIPLY
+tint vs a direct set, so it is not a ratio against car_merged's 82.95.
+OPEN, flagged not asserted: a factor-rewrite respray on a BAKED texture may only tint.
+Untested. Cheap test before carrying the rear textures into a merge.
+
+## THE FINDINGS THE MERGE MUST ACT ON
+1. **rear2_v4's `extensionsUsed` is ABSENT** — glazing at BLEND 0.353 with
+   transmission `null` and ior `null`, while `glass_probe` says clear/proven. This is
+   the real defect; take rear GEOMETRY onto the car_rebound material table.
+   Also: the rear lineage is TEXTURED and the other six are not.
+1b. **MERGE COLLISION**: rear `Glass_Backlight` sits **96.21% within 25 mm** (median
+   **4.8 mm**) of glass `Glass_Rear` — two transmissive sheets in one place = the
+   recorded white-dot defect. ONE must supersede the other. Plus seven base parts that
+   must actually be deleted or they stack (v7 `Valance_Front` 75% within 25 mm of
+   `Bumper_Front_Paint`). New criteria A21/A22.
 2. **rebound → merged is ONE RIGID TRANSFORM** for body+glazing+bumpers: 4.7301° about
    [0.1105,−0.4826,0.8689], t = [−0.47,−101.61,+11.87] mm, max residual **0.1225 µm**.
    Wheels are not part of it (8.0–8.7 mm; FL/RL ~177.5° re-seats). So glass relabelling
