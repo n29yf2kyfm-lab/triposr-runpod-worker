@@ -9,7 +9,7 @@ caption line.
 import sys
 from PIL import Image, ImageDraw, ImageFont
 TILES = [
-    ("evidence/BASE_shaded35.png",   "BEFORE  rear_v3 (Gate 4 out)  az035  melt hatch+bumper"),
+    ("evidence/BASE_shaded35_az035.png",   "BEFORE  rear_v3 (Gate 4 out)  az035  melt hatch+bumper"),
     ("evidence/V4_shaded_az035.png", "AFTER  rear2_v4  az035  rebuilt hatch + bumper"),
     ("evidence/base_shaded_az090.png","BEFORE  az090 STRAIGHT REAR  ragged screen, wavy panels"),
     ("evidence/V4_shaded_az090.png", "AFTER  az090  clean panels, constructed screen aperture"),
