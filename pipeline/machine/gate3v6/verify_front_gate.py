@@ -334,6 +334,33 @@ def pair_intersection(VA, FA, VB, FB, eps=1e-6, cap=40_000_000):
     return intersect_count(VA, FA, VB, FB, eps=eps, max_pairs=cap)
 
 
+class _PQ:
+    """Per-part mesh + proximity query + surface samples, built ONCE.
+
+    The first version rebuilt a proximity tree for every pair, which is O(F) per
+    build and dominated the clearance stage on a 27-component file. Nothing
+    about the numbers changes -- only how many times the same tree is built.
+    """
+
+    def __init__(self, V, F, n=4000, seed=0):
+        self.m = trimesh.Trimesh(vertices=V, faces=F, process=False)
+        self.pq = trimesh.proximity.ProximityQuery(self.m)
+        self.n = min(n, 20000)
+        self.pts, _ = trimesh.sample.sample_surface(self.m, self.n, seed=seed)
+        self.watertight = bool(self.m.is_watertight)
+
+
+def gap_between(A, B):
+    """Minimum surface-to-surface distance in mm; negative = interpenetration."""
+    dAB = B.pq.signed_distance(A.pts)
+    dBA = A.pq.signed_distance(B.pts)
+    gapA = -dAB if B.watertight else np.abs(dAB)
+    gapB = -dBA if A.watertight else np.abs(dBA)
+    return {"gap_mm": round(float(min(gapA.min(), gapB.min())) * MM, 3),
+            "samples_per_side": int(A.n),
+            "A_watertight": A.watertight, "B_watertight": B.watertight}
+
+
 def surface_gap_mm(VA, FA, VB, FB, n=4000, seed=0):
     """Minimum surface-to-surface distance, in mm, by dense surface sampling.
 
@@ -360,6 +387,7 @@ def surface_gap_mm(VA, FA, VB, FB, n=4000, seed=0):
 def check_clearance(car, parts=None, max_pairs_report=400):
     parts = parts if parts is not None else car.built
     out = {"pairs": {}, "intersecting": [], "note": ""}
+    pqc = {}
     # only pairs whose AABBs are within 60 mm of each other are worth measuring
     box = {p: (car.nodes[p]["V"].min(0), car.nodes[p]["V"].max(0)) for p in parts
            if len(car.nodes[p]["F"])}
@@ -378,7 +406,10 @@ def check_clearance(car, parts=None, max_pairs_report=400):
                 continue
             A, B = car.nodes[a], car.nodes[b]
             ix = pair_intersection(A["V"], A["F"], B["V"], B["F"])
-            gap = surface_gap_mm(A["V"], A["F"], B["V"], B["F"])
+            for nm, d in ((a, A), (b, B)):
+                if nm not in pqc:
+                    pqc[nm] = _PQ(d["V"], d["F"])
+            gap = gap_between(pqc[a], pqc[b])
             rec = {"aabb_separation_mm": round(float(sep) * MM, 3), **ix}
             if gap:
                 rec.update(gap)

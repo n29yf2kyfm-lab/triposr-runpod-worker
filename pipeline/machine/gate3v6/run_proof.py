@@ -143,7 +143,7 @@ def proof_views(ly, groups, boxes_lo, boxes_hi, lamp_centre):
     #    inner/glass/wheel shells are hidden so every front component reads.
     bulk = sorted(set(groups["interior"]) | set(groups["glass"]) | set(groups["wheels"]))
     V.append(dict(id="p11_front_exploded", az=305, elev=12.0, cam="ortho",
-                  occ=0.90, res=RES_MAIN, pass_="explode_id",
+                  occ=0.84, res=RES_MAIN, pass_="explode_id",
                   samples=SAMPLES_FLAT, ground=False, hide=bulk,
                   fit_objects=frontkit, aim="fit",
                   explode=dict(axis_blender=[-1, 0, 0], spacing=0.34,
@@ -163,18 +163,23 @@ def proof_views(ly, groups, boxes_lo, boxes_hi, lamp_centre):
     V.append(dict(id="p13_kit_hidden_34", az=305, elev=6.0, cam="ortho",
                   target_y_gltf=ly, occ=0.80, res=RES_MAIN, pass_="matte",
                   samples=SAMPLES_LIT, ground=True, hide=frontkit))
-    # 14 intersection clearance - two near-plane section cuts, flat matID colours
+    # 14 intersection clearance - two near-plane SECTION cuts zoomed on ONE
+    #    headlamp cluster. Zoomed on purpose: a whole-nose section averages the
+    #    gaps away and cannot show whether a lens intersects its housing.
+    #    The big inner shell is hidden so the lens/housing/body relationship
+    #    reads; matID colours + a scale bar make the gaps measurable.
+    lamp_L = sorted(planner.headlamp_sets(BOXES, lamps)[0]) or lamps
+    hide_sec = sorted(set(groups["interior"]) | set(groups["wheels"]))
     V.append(dict(id="p14_section_plan", az=270, elev=90.0, cam="ortho",
                   res=RES_MAIN, pass_="matid", samples=SAMPLES_FLAT,
-                  ground=False, target_x_gltf=lamp_centre[0],
-                  target_y_gltf=lamp_centre[1], occ=0.86,
-                  fit_objects=frontkit,
+                  ground=False, occ=0.74, hide=hide_sec,
+                  fit_objects=lamp_L, aim="fit",
+                  target_y_gltf=lamp_centre[1],
                   section_point_gltf=[lamp_centre[0], lamp_centre[1], lamp_centre[2]]))
     V.append(dict(id="p14_section_transverse", az=0, elev=0.0, cam="ortho",
                   res=RES_MAIN, pass_="matid", samples=SAMPLES_FLAT,
-                  ground=False, target_x_gltf=lamp_centre[0],
-                  target_y_gltf=lamp_centre[1], occ=0.80,
-                  fit_objects=frontkit,
+                  ground=False, occ=0.74, hide=hide_sec,
+                  fit_objects=lamp_L, aim="fit",
                   section_point_gltf=[lamp_centre[0], lamp_centre[1],
                                       abs(lamp_centre[2])]))
     # 15 before/after uses p01 + p02 matched against the baseline render
@@ -227,9 +232,13 @@ def main():
 
     # ---------------- job A: canonical 8-view sheet (per-tile fit) ---------
     if a.only in ("all", "sheet"):
+        # The sheet aims at the car's MID-HEIGHT (identical for all eight tiles);
+        # only proof item 1 is pinned to headlamp height, per the spec.
+        mid_y = float((lo[1] + hi[1]) / 2.0)
+        state["sheet_target_y_gltf"] = mid_y
         jobA = {"glb": a.glb, "outdir": png, "name": "%s_sheet" % a.tag,
                 "done_marker": os.path.join(png, "_DONE_%s_sheet" % a.tag),
-                "views": sheet_views(ly)}
+                "views": sheet_views(mid_y)}
         print("[A] 8-view sheet, per-tile fit ...")
         run_blender(jobA, os.path.join(a.outroot, "job_%s_sheet.json" % a.tag),
                     jobA["done_marker"], os.path.join(logs, "%s_sheet.log" % a.tag))
@@ -238,7 +247,7 @@ def main():
         S = max(v["ortho_scale"] for v in m["views"].values())
         jobA2 = {"glb": a.glb, "outdir": png, "name": "%s_sheetC" % a.tag,
                  "done_marker": os.path.join(png, "_DONE_%s_sheetC" % a.tag),
-                 "views": sheet_views(ly, ortho_scale=S, suffix="_c")}
+                 "views": sheet_views(mid_y, ortho_scale=S, suffix="_c")}
         print("[A2] 8-view sheet, CONSTANT scale S=%.4f ..." % S)
         run_blender(jobA2, os.path.join(a.outroot, "job_%s_sheetC.json" % a.tag),
                     jobA2["done_marker"], os.path.join(logs, "%s_sheetC.log" % a.tag))

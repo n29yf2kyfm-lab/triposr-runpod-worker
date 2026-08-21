@@ -23,7 +23,7 @@ BODYISH = re.compile(r"carpaint|body|shell|paint|panel|bonnet|bumper|fender|wing
 GLASSY = re.compile(r"glass|window|windscreen|windshield|screen|glazing|pane", re.I)
 WHEELY = re.compile(r"tyre|tire|rubber|rim|alloy|wheel|hub|disc|caliper|brake", re.I)
 INSIDE = re.compile(r"interior|cabin|seat|dash|console|occluder|floor", re.I)
-LAMPY = re.compile(r"lamp|head_?l|drl|lens|housing|light", re.I)
+LAMPY = re.compile(r"lamp|\bhead|drl|lens|housing|reflector|bezel|light", re.I)
 FRONTKIT = re.compile(r"head|drl|grille|grill|intake|badge|plate|lens|housing|"
                       r"lamp|emblem|mesh|vent|splitter", re.I)
 
