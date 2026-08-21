@@ -359,6 +359,8 @@ def summary_line(p):
     if "respray" in C:
         bits.append(f"respray cp={C['respray']['carpaint_delta']} "
                     f"frozen<={C['respray']['frozen_max_delta']}")
+    if "components" in C:
+        bits.append(f"parts={C['components']['present']}/{C['components']['expected']}")
     return ("PASS  " if p["all_pass"] else "FAIL  ") + " | ".join(bits) \
         + ("" if p["all_pass"] else f"   FAILED: {p['failed']}")
 

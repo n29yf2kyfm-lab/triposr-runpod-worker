@@ -144,7 +144,9 @@ def measure_lamp_clearance(before, after, work):
     PV = np.vstack([W(n) for n in panels])
     tree = cKDTree(PV)
     out = {"panels": panels}
-    for lam in [n for n in sc.graph.nodes_geometry if n.startswith("TailLamp")]:
+    lamps = [n for n in sc.graph.nodes_geometry
+             if n.startswith(("TailLamp", "Tail_Lens", "Tail_Housing"))]
+    for lam in lamps:
         L = W(lam)
         d, i = tree.query(L, k=1, workers=2)
         # signed: outboard (larger x than the nearest panel vertex) = proud
@@ -207,6 +209,21 @@ def run(ctx, inp):
           os.path.join(w, "finish.json")], w, lg, check=False)
     if not os.path.exists(out):
         raise SystemExit("rear stage: finish.py produced no output")
+    # Gate 4's four constructed tail-lamp units, transplanted, and the melt
+    # lamps they replace deleted in the same operation.  See lamp_transplant.py
+    # for why this is a transplant where the PANELS were a replay.
+    import lamp_transplant
+    donor = os.environ.get("REAR2_LAMP_DONOR")
+    if donor and os.path.exists(donor):
+        withlamps = os.path.join(w, "rear_lamps.glb")
+        lr = lamp_transplant.run(out, donor, withlamps,
+                                 os.path.join(w, "lamp_transplant.json"))
+        os.replace(withlamps, out)
+        print("  rear: transplanted", len(lr["added"]), "lamp units, dropped",
+              list(lr["dropped"]), "| materials added", lr["materials_added"])
+    else:
+        print("  rear: NO LAMP DONOR -- the four constructed units are NOT "
+              "present and the melt TailLamp_L/R stand in for them")
     lc = measure_lamp_clearance(car, out, w)
     print("  rear: melt tail-lamp clearance vs the rebuilt skin:",
           json.dumps({k: v for k, v in lc.items() if k.startswith("TailLamp")}))

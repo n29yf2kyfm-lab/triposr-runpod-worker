@@ -320,13 +320,64 @@ def stage_finish(ctx, inp):
 
 
 def stage_mobile(ctx, inp):
-    """Draco mobile export.  `--join false` keeps the component node names."""
+    """Draco mobile export of the PUBLISHED desktop car.
+
+    TWO FLAGS THAT ARE NOT OPTIONAL, and both were found by measuring the output
+    rather than by reading the docs:
+
+      --palette false   `gltf-transform optimize` runs a PALETTE pass by default
+                        which collapsed this car's 22 NAMED materials into five
+                        `PaletteMaterial00N`.  The mobile car then has no
+                        material called `carpaint`, no `glass` and no
+                        `Tyre_Rubber` -- so `colour_variants`, `respray_gltf`,
+                        the render worker's recolour and `glass_probe` all
+                        target names that no longer exist.  CLAUDE.md's "paint
+                        must be NAMED carpaint" rule, broken by the optimiser.
+      --join false      keeps the component node names.
+
+    AND THE INPUT IS ASSERTED.  The first mobile shipped to the bucket was built
+    from an earlier intermediate and still carried the 9,890-face melt
+    `Glass_Rear` that the desktop had reduced to 187 faces -- i.e. it shipped
+    the glazing-stack defect the desktop had been fixed for.  The stage now
+    refuses unless its input IS the finished car.
+    """
     w = ctx.sw("mobile")
     lg = ctx.log("mobile")
+    full = ctx.p("work", "GOLF_ALL_GATES.glb")
+    if os.path.abspath(inp) != os.path.abspath(full):
+        raise SystemExit(f"REFUSED: the mobile export must be built from the "
+                         f"finished car {full}, not from {inp}")
     out = ctx.p("work", "GOLF_ALL_GATES_mobile.glb")
+    if os.path.exists(out):
+        os.remove(out)
     run(["gltf-transform", "optimize", inp, out, "--compress", "draco",
-         "--texture-compress", "false", "--join", "false", "--simplify", "false"],
-        log=lg)
+         "--texture-compress", "false", "--join", "false", "--simplify", "false",
+         "--palette", "false"], log=lg)
+    # verify the NAMES survived, on the written file, by decompressing it
+    unc = os.path.join(w, "mobile_uncompressed.glb")
+    run(["gltf-transform", "copy", out, unc], log=lg)
+    mm = glbmeas.measure(unc)
+    need = ["carpaint", "glass", "Tyre_Rubber"]
+    miss = [n for n in need if n not in mm["materials"]]
+    if miss:
+        raise SystemExit(f"REFUSED: the mobile export lost the material names "
+                         f"{miss}; a car whose paint is not called `carpaint` "
+                         f"cannot be resprayed by anything in this repo")
+    fm = glbmeas.measure(full)
+    d = {"desktop_sha": fm["sha256"], "mobile_sha": glbmeas.sha256(out),
+         "desktop_bytes": fm["bytes"], "mobile_bytes": os.path.getsize(out),
+         "ratio": round(fm["bytes"] / os.path.getsize(out), 2),
+         "materials": mm["materials"], "extensionsUsed": mm["extensionsUsed"],
+         "glass_area_by_node": mm["glass_area_by_node"],
+         "glass_projected_m2": mm["glass_projected_m2"]["max"],
+         "desktop_glass_projected_m2": fm["glass_projected_m2"]["max"],
+         "tyre_baseColor": mm["tyre_baseColor"]}
+    json.dump(d, open(os.path.join(w, "mobile_check.json"), "w"), indent=1)
+    os.remove(unc)
+    print(f"  mobile: {d['mobile_bytes']:,} B ({d['ratio']}x), "
+          f"{len(mm['materials'])} named materials kept, "
+          f"projected glazing {d['glass_projected_m2']:.4f} vs desktop "
+          f"{d['desktop_glass_projected_m2']:.4f}")
     return out
 
 
@@ -355,6 +406,36 @@ STAGES = {
 # Stages whose output is not a full car and must not be gated as one.
 NO_GATE = {"mobile", "sheet"}
 
+# THE COMPONENT MANIFEST.  A stage gate that only checks the PROPERTIES of
+# whatever happens to be present passes a car with parts missing -- measured:
+# the rear stage reported PASS with 8 of its 14 components absent, because every
+# property it checked was true of the 6 that arrived.  This is the "check that
+# cannot fail" class, so each stage now declares what it must ADD, by NAME, and
+# the gate asserts count and names on the written file.
+EXPECTED = {
+    "glass": ["Glass_Windscreen", "Glass_Rear", "Glass_Side_L", "Glass_Side_R"],
+    "front": ["Grille_Upper", "Grille_Lower", "Badge", "Badge_Mount", "Plate",
+              "Plate_Carrier", "Valance_Front", "Bumper_Front", "DRL_Blade",
+              "TowEye_Cover", "Intake_L", "Intake_R", "Intake_L_Blades",
+              "Intake_R_Blades", "Headlamp_L_Lens", "Headlamp_R_Lens",
+              "Headlamp_L_Housing", "Headlamp_R_Housing",
+              "Headlamp_L_Internal", "Headlamp_R_Internal"],
+    "rear": ["Hatch", "Hatch_Inner", "Bumper_Rear", "Bumper_Rear_Inner",
+             "Plate_Rear", "Glass_Backlight",
+             "Tail_Lens_LO", "Tail_Lens_LH", "Tail_Lens_RO", "Tail_Lens_RH",
+             "Tail_Housing_LO", "Tail_Housing_LH", "Tail_Housing_RO",
+             "Tail_Housing_RH"],
+    "cabin": ["Cabin_Floor", "Cabin_Dash", "Cabin_Wheel", "Cabin_Headliner",
+              "Cabin_ParcelShelf", "Cabin_BootFloor", "Cabin_Console",
+              "Cabin_DoorCard_L", "Cabin_DoorCard_R", "Cabin_BenchCush",
+              "Cabin_BenchBack", "Cabin_SeatFD_Cush", "Cabin_SeatFP_Cush"],
+}
+# components that must NOT survive: the melt each add-stage supersedes.
+FORBIDDEN = {
+    "front": ["Headlamp_L", "Headlamp_R", "Bumper_Front_Trim"],
+    "rear": ["TailLamp_L", "TailLamp_R"],
+}
+
 
 # ----------------------------------------------------------------- the driver
 def gate_stage(ctx, name, out, res, samples):
@@ -370,6 +451,19 @@ def gate_stage(ctx, name, out, res, samples):
         cam["shots"] = RR.shots([(305, 12, "f34"), (125, 12, "r34")])
     p = gates.panel(out, w, ref=ctx.ref, ref_prev=ctx.prev, cam=cam, do_respray=True,
                     res=res, samples=samples, tag=name)
+    # component manifest, asserted on the WRITTEN file by NAME and COUNT
+    want = EXPECTED.get(name, [])
+    forbid = FORBIDDEN.get(name, [])
+    if want or forbid:
+        got = set(p["measure"]["per_node"])
+        absent = [n for n in want if n not in got]
+        lingering = [n for n in forbid if n in got]
+        p["checks"]["components"] = {
+            "pass": bool(not absent and not lingering),
+            "expected": len(want), "present": len(want) - len(absent),
+            "absent": absent, "superseded_but_still_present": lingering}
+        p["all_pass"] = all(v["pass"] for v in p["checks"].values())
+        p["failed"] = sorted(k for k, v in p["checks"].items() if not v["pass"])
     return p
 
 
