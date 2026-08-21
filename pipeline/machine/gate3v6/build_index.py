@@ -452,6 +452,31 @@ def main():
                              "exposure": None if not v else v.get("exposure"),
                              "measured": None if not v else v.get("measured")})
 
+    lines.append("\n## Limitations, and what is NOT TESTED\n")
+    lines.append("\n- **No orthographic reference photograph of this vehicle exists.** "
+                 "`ref/REFERENCES.json` records the search and its outcome. Item 09 is "
+                 "therefore a like-for-like *three-quarter* comparison at the reference's "
+                 "own focal length, governing feature structure and proportion ratios "
+                 "only. **Any acceptance criterion that requires a projected-landmark "
+                 "error against an orthographic reference is NOT TESTED** — it is not "
+                 "estimated, and it must not be reported as passed.\n")
+    lines.append("- **These are renders, not verdicts.** Where a frame suggests a defect "
+                 "it is a *candidate* for the verifier. Nothing in this pack asserts that "
+                 "anything is fixed.\n")
+    lines.append("- **'Identical scale' and '75–85 % occupancy on every tile' are mutually "
+                 "exclusive** for a vehicle whose side view is ~2.4× the width of its front "
+                 "view. Both sheets are supplied rather than picking one and calling it "
+                 "the answer: the primary sheet holds the occupancy band, the companion "
+                 "holds one scale. Measured numbers for both are above.\n")
+    lines.append("- **Section clearances are visual, not metrological.** The section panels "
+                 "carry a scale bar so a gap can be read off, but a distance measured off "
+                 "a raster is not a mesh-space measurement.\n")
+    lines.append("- Cycles renders are stochastic; every lit frame carries sampling noise "
+                 "at the stated sample count. The symmetry map suppresses it explicitly "
+                 "(blur radius and noise floor are printed on that image); other passes "
+                 "do not, so fine mottling in a matte frame may be noise rather than "
+                 "surface. The **normal diagnostic (item 06) is the shading-independent "
+                 "read** and is the one to trust for surface texture.\n")
     with open(os.path.join(a.outroot, "PROOF_INDEX.md"), "w") as f:
         f.write("".join(lines))
     with open(os.path.join(a.outroot, "index.json"), "w") as f:
