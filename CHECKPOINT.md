@@ -9,7 +9,7 @@ each upload confirmed by LISTING the prefix and comparing byte counts:
 
 | object | bytes | sha256 |
 |---|---|---|
-| `GOLF_V7_FRONT_GATE.glb` (part_00 + part_01) | 28,397,680 | `f68fab1c62e2e17adaa2e5bf469add494f87118792f4d545407403c07a6f2876` |
+| `GOLF_V7_FRONT_GATE.glb` (part_00 + part_01) | 28,397,676 | `3f681443004b2b243e66ac14e69437081e4512dcc4a2801ecac30ee0d99f0dd0` |
 | `GOLF_V7_STRIPPED.glb` (part_00 + part_01) | 27,504,368 | in its MANIFEST |
 
 Reassemble: `cat GOLF_V7_FRONT_GATE.glb.part_* > GOLF_V7_FRONT_GATE.glb`
@@ -45,6 +45,7 @@ fascia (bumper lowest edge + bonnet leading edge), never to the ground.
 * strip: 3 melt nodes deleted whole + 57,696 faces cut; 985,227 → 911,368
 * coverage: holes **0.1 cm2** of a 5,926 cm2 footprint; new parts frontmost 97.0%
 * symmetry: worst L/R deviation **5.9e-05 mm** (v6: 29.7 mm)
+* evidence pack (54 objects) at `car-meshes/staging/gate3_v7/evidence/`
 * provenance: **0.0** of any component's faces are original geometry
 * self-intersections: 1,714 total, **200 within one shell** (v6: 10,258)
 * winding inconsistent: none · not watertight: none · degenerate faces: 0
@@ -62,3 +63,6 @@ fascia (bumper lowest edge + bonnet leading edge), never to the ground.
 4. my own z=0.000 centreline was withdrawn: the car is bowed 140 mm nose-to-tail
 5. trimesh drops every KHR material extension on ANY glTF round-trip — found by
    reading the written file, not by glass_probe, which still passed
+6. gate3v6/rig.py's `beauty` pass is NOT material-preserving (it assigns the same
+   neutral clay as `matte`), so no rig pass could judge whether the lamps read;
+   `native_render.py` was written for that and it settles it — they do
