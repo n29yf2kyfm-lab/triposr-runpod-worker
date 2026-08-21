@@ -82,9 +82,19 @@ ENV = {
     "REAR2_ZONE_XMIN": "1.35",
     # spared whole: front kit, wheels, glazing, cabin -- and the melt tail lamps,
     # see the docstring.
+    # `Glass_Rear` IS NOT KEPT, and that was a real bug in the first run of this
+    # replay.  Sparing every `Glass_*` node left the MELT rear screen standing
+    # inside the rebuilt tailgate: the constructed `Glass_Backlight` came out
+    # 96.8% within 25 mm of it at a median of 6.0 mm — two transmissive sheets
+    # in the same place, which is the recorded WHITE-DOT DEFECT that cost six
+    # wrong theories the last time it appeared.  Gate 4's own file does not keep
+    # its `Rear_Glass` either; the strip cuts it in the panel footprint like any
+    # other surface, and the constructed pane then fills the constructed
+    # aperture.  The front and side panes ARE kept: the bumper footprint sweeps
+    # to +-88 deg and could otherwise reach them.
     "REAR2_KEEP": ",".join([
         "Wheel_", "TailLamp_", "Headlamp_", "Mirror_",
-        "Glass_", "Cabin_",
+        "Glass_Windscreen", "Glass_Side", "Glass_Quarter", "Cabin_",
         "Grille", "DRL", "Intake_", "Badge", "TowEye", "Plate_Carrier",
         "Plate", "Splitter", "Valance", "Lamp_", "Chrome_", "Bumper_Front",
     ]),

@@ -413,7 +413,7 @@ def main():
                 if not p["all_pass"]:
                     raise SystemExit(f"STAGE {name} fails the CURRENT gate panel: "
                                      f"{p['failed']}")
-            if inp.endswith(".glb"):
+            if inp.endswith(".glb") and name not in NO_GATE:
                 ctx.prev = glbmeas.measure(inp)
             if name == "base":
                 ctx.ref = glbmeas.measure(inp)
@@ -465,7 +465,12 @@ def main():
         json.dump(rec, open(rec_p, "w"), indent=1, default=str)
         board.append((name, rec.get("gate_summary", "-"), False))
         inp = out
-        if out.endswith(".glb"):
+        # NO_GATE stages do not produce a car this pipeline can measure -- the
+        # mobile export is Draco-compressed and glbmeas correctly REFUSES it
+        # (trimesh in this container has no Draco decoder and would return
+        # zeros).  Carrying `prev` past them would also be wrong: the next
+        # stage's reference is the last full car, not a compressed derivative.
+        if out.endswith(".glb") and name not in NO_GATE:
             ctx.prev = glbmeas.measure(out)
 
     print("\n" + "=" * 78)

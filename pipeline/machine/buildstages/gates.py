@@ -54,7 +54,7 @@ import glbmeas                                                   # noqa: E402
 import render as R                                               # noqa: E402
 
 TYRE_BLACK_MAX = 0.06        # baseColorFactor ceiling for "reads as rubber"
-GLASS_RETAIN_MIN = 0.97      # of the base's total glazing area
+GLASS_RETAIN_MIN = 0.90      # of the base's PROJECTED glazing opening
 GLASS_REGION_MIN = 0.45      # of the base's area in ANY one region (calibrated below)
 FROZEN_MATS = ("Tyre_Rubber", "glass", "Rim_Alloy", "Brake_Disc",
                "Lamp_Lens", "Lamp_Lens_Rear")
@@ -222,8 +222,13 @@ def panel(path, workdir, ref=None, cam=None, do_respray=True, res=700, samples=2
     # ---- G1 glazing verdict AND area retention (the pair, never one alone)
     verdict_ok = (gp.get("verdict") == "clear" and gp.get("certainty") == "proven"
                   and not gp.get("flat_shell") and not gp.get("alpha_shell"))
-    area = m["glass_area_m2"]
-    ref_area = ref["glass_area_m2"] if ref else None
+    # GATE ON THE PROJECTED OPENING, not on surface area.  See glbmeas: the
+    # melt rear screen has 2.73x more surface than the opening it fills, so a
+    # surface-area floor reads a crumple being REPLACED by a clean pane as
+    # losing half the rear window.  Surface area is still reported, and its
+    # ratio to the projection ("crumple ratio") is a useful number in itself.
+    area = m["glass_projected_m2"]["max"]
+    ref_area = ref["glass_projected_m2"]["max"] if ref else None
     retain = (area / ref_area) if ref_area else None
     C["glazing_verdict"] = {"pass": bool(verdict_ok),
                             "verdict": gp.get("verdict"),
@@ -231,9 +236,13 @@ def panel(path, workdir, ref=None, cam=None, do_respray=True, res=700, samples=2
                             "flat_shell": gp.get("flat_shell"),
                             "alpha_shell": gp.get("alpha_shell")}
     C["glass_area"] = {"pass": bool(retain is None or retain >= GLASS_RETAIN_MIN),
-                       "area_m2": round(area, 6),
-                       "ref_area_m2": round(ref_area, 6) if ref_area else None,
+                       "basis": "projected opening (max of 3 axis projections)",
+                       "projected_m2": round(area, 6),
+                       "ref_projected_m2": round(ref_area, 6) if ref_area else None,
                        "retained": round(retain, 5) if retain else None,
+                       "surface_area_m2": round(m["glass_area_m2"], 6),
+                       "crumple_ratio": m["glass_crumple_ratio"],
+                       "projections": m["glass_projected_m2"],
                        "by_node": m["glass_area_by_node"]}
 
     # ---- G1b GLAZING RETENTION BY SPATIAL REGION.
@@ -252,12 +261,12 @@ def panel(path, workdir, ref=None, cam=None, do_respray=True, res=700, samples=2
     # The injected defects sit at 0.00 (windscreen rebound to `carpaint`, the
     # region empties) and ~0.03 (glazing geometry cut to a fortieth).  0.45 sits
     # 29% below the tightest legitimate value and 15x above the loudest defect.
-    refr = (ref or {}).get("glass_area_by_region") or {}
-    gotr = m.get("glass_area_by_region") or {}
+    refr = (ref or {}).get("glass_projected_by_region") or {}
+    gotr = m.get("glass_projected_by_region") or {}
     emptied, shrunk = [], {}
     for k, v in refr.items():
-        if v < 0.02:
-            continue                       # a 200 cm2 sliver is not a region
+        if v < 0.005:
+            continue                       # a 50 cm2 projected sliver is not a region
         got = gotr.get(k, 0.0)
         if got < GLASS_REGION_MIN * v:
             if got < 0.05 * v:
@@ -336,9 +345,10 @@ def panel(path, workdir, ref=None, cam=None, do_respray=True, res=700, samples=2
 def summary_line(p):
     C = p["checks"]
     bits = [f"glaz={C['glazing_verdict']['verdict']}/{C['glazing_verdict']['certainty']}",
-            f"glass={C['glass_area']['area_m2']:.4f}m2"
+            f"glassproj={C['glass_area']['projected_m2']:.4f}m2"
             + (f" ({100*C['glass_area']['retained']:.1f}%)"
-               if C['glass_area']['retained'] else ""),
+               if C['glass_area']['retained'] else "")
+            + f" crumple={C['glass_area']['crumple_ratio']}",
             "ext=" + ("+".join(e.replace("KHR_materials_", "")
                                for e in C['glass_material_written']['extensions'])
                       or "NONE"),

@@ -293,6 +293,78 @@ def measure(path, glazing=GLAZING_MATS, ref_box=None):
                         key = f"x{b}{'P' if k else 'M'}"
                         reg[key] = reg.get(key, 0.0) + float(a[m2].sum())
     rep["glass_area_by_region"] = {k: round(v, 9) for k, v in sorted(reg.items())}
+
+    # ---- PROJECTED glazing coverage. SURFACE AREA IS THE WRONG INSTRUMENT for
+    # "how much window is there", and this car proves it: the melt rear screen
+    # carries 0.8358 m2 of SURFACE over an opening whose projection is
+    # 0.3058 m2 -- a ratio of 2.73, i.e. the sheet is crumpled and/or doubled.
+    # The constructed pane that replaces it covers 0.2861 m2 of the SAME opening
+    # (93.6% of it) with 0.3877 m2 of surface, ratio 1.35.  Judged on surface
+    # area that reads as losing half the rear window; judged on the opening it
+    # is the same window with the crumple removed.
+    #
+    # The measure: sample each glazing triangle at its vertices, edge midpoints
+    # and centroid, quantise to 5 mm cells on each of the three axis planes and
+    # count occupied cells.  Per region the MAXIMUM of the three is taken, which
+    # is the projection closest to the pane's own normal for any pane within
+    # ~30 deg of an axis plane -- and it is used only as a RATIO of the same
+    # quantity before and after, so the approximation cancels.
+    CELL = 0.005
+
+    def _proj(vv, ff):
+        if len(ff) == 0:
+            return [0.0, 0.0, 0.0]
+        t = vv[ff]
+        pts = np.concatenate([t.mean(1), (t[:, 0] + t[:, 1]) / 2,
+                              (t[:, 1] + t[:, 2]) / 2, (t[:, 2] + t[:, 0]) / 2,
+                              t[:, 0], t[:, 1], t[:, 2]])
+        out = []
+        for ax in ([1, 2], [0, 1], [0, 2]):
+            q = np.round(pts[:, ax] / CELL).astype(np.int64)
+            out.append(float(len(np.unique(q, axis=0)) * CELL * CELL))
+        return out
+
+    allv, allf, roff = [], [], 0
+    regpts = {}
+    for ni, name, W, mi in g.graph():
+        for p in j["meshes"][mi].get("primitives", []):
+            if (g.material_name(p) or "") not in gl:
+                continue
+            V = g.accessor(p["attributes"]["POSITION"]).astype(np.float64)
+            V = V @ W[:3, :3].T + W[:3, 3]
+            F = g.accessor(p["indices"]).astype(np.int64).reshape(-1, 3)
+            allv.append(V)
+            allf.append(F + roff)
+            roff += len(V)
+            c = V[F].mean(1)
+            xf = (c[:, 0] - rlo[0]) / max(rhi[0] - rlo[0], 1e-9)
+            xb = np.clip((xf * 5).astype(int), 0, 4)
+            sd = (c[:, 2] > 0).astype(int)
+            for b in range(5):
+                for k in (0, 1):
+                    m2 = (xb == b) & (sd == k)
+                    if m2.any():
+                        key = f"x{b}{'P' if k else 'M'}"
+                        regpts.setdefault(key, []).append((V, F[m2]))
+    if allv:
+        AV = np.vstack(allv)
+        AF = np.vstack(allf)
+        pr = _proj(AV, AF)
+        rep["glass_projected_m2"] = {"yz": round(pr[0], 6), "xy": round(pr[1], 6),
+                                     "xz": round(pr[2], 6), "max": round(max(pr), 6)}
+        rep["glass_crumple_ratio"] = round(rep["glass_area_m2"] / max(max(pr), 1e-9), 3)
+    else:
+        rep["glass_projected_m2"] = {"yz": 0.0, "xy": 0.0, "xz": 0.0, "max": 0.0}
+        rep["glass_crumple_ratio"] = None
+    rep["glass_projected_by_region"] = {}
+    for k, lst in sorted(regpts.items()):
+        vv = np.vstack([a for a, b in lst])
+        off2 = 0
+        fs = []
+        for a, b in lst:
+            fs.append(b + off2)
+            off2 += len(a)
+        rep["glass_projected_by_region"][k] = round(max(_proj(vv, np.vstack(fs))), 6)
     rep["region_ref_box"] = [[round(float(x), 6) for x in rlo],
                              [round(float(x), 6) for x in rhi]]
 
