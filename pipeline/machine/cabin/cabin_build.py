@@ -112,13 +112,38 @@ _swx, _swz = HP_F[0] - 0.300, RIGHT * SEAT_Z
 # is a narrow basal strip on the driver's side — so a local disc sample either
 # found nothing or walked out far enough to swallow the pane's BASE and read
 # 100 mm too low. Plane fit over all 1,491 verts: rms 11.9 mm.
+#
+# ADAPTATION 2026-08-21 (six-gate merge).  THAT NARROW BASAL STRIP WAS THE
+# DEFECT THE GLASS GATE FIXES, and the plane was only ever a workaround for it.
+# Measured on both files at the steering wheel's own station (x -0.92, z -0.36,
+# a 120 mm disc): the unrepaired pane has **0 vertices** there, and 0 at every
+# station along the wheel's x range; the repaired pane has 417-461.  So the
+# local sample is now available and is better evidence than a plane.
+#
+# It also has to be, because the plane no longer fits: over the FLAT 75 mm cowl
+# strip the unrepaired "windscreen" was, a plane scores 11.6 mm rms; over the
+# real raked screen the glass gate restores (0.1622 -> 0.9894 m2, genuinely
+# doubly curved) the same fit scores 33.1 mm and tripped this assertion.  That
+# is the model being wrong, not the car — so the assertion now guards the
+# FALLBACK path only, and the local sample is preferred wherever the pane
+# actually carries geometry.
 _A = np.c_[_WS[:, 0], _WS[:, 2], np.ones(len(_WS))]
 _CO, _, _, _ = np.linalg.lstsq(_A, _WS[:, 1], rcond=None)
 _RMS = float(np.sqrt((((_A @ _CO) - _WS[:, 1]) ** 2).mean()))
-assert _RMS < 0.03, f"windscreen is not planar enough to fit ({_RMS:.4f} m)"
+_WS_R = 0.12                      # local sample radius, m
+_WS_NMIN = 60                     # verts needed before a local sample is trusted
 
 
 def _screen_y(x, z):
+    m = (np.abs(_WS[:, 0] - x) < _WS_R) & (np.abs(_WS[:, 2] - z) < _WS_R)
+    if int(m.sum()) >= _WS_NMIN:
+        # p20 of y = the pane's UNDERSIDE locally, which is what a cabin part
+        # has to clear.  A mean would sit inside the glass.
+        return float(np.percentile(_WS[m, 1], 20))
+    assert _RMS < 0.03, (
+        f"windscreen pane has only {int(m.sum())} verts within {_WS_R*1000:.0f} mm "
+        f"of (x={x:.3f}, z={z:.3f}) so the local sample is unusable, AND the "
+        f"plane fallback is not planar enough to fit ({_RMS:.4f} m)")
     return float(_CO[0] * x + _CO[1] * z + _CO[2])
 
 

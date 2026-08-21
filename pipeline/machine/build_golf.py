@@ -241,10 +241,31 @@ def stage_cabin(ctx, inp):
     kit = os.path.join(w, "cabin_kit.npz")
     raw = os.path.join(w, "cabin_raw.glb")
     out = ctx.p("work", "cabin.glb")
-    env = {"CABIN_CAR": car, "CABIN_SURF": surf}
+    env = {"CABIN_CAR": car, "CABIN_SURF": surf,
+           "CABIN_CFG": os.path.join(w, "rig_cfg.json")}
+    # aperture_open rasterises through cabin_rig's FROZEN cameras.  Those are a
+    # pure function of the car's bounding box, so they are reproduced here
+    # rather than by a Blender round-trip -- and they must be reproduced, not
+    # reused: the cabin gate's own rig_cfg was frozen on the GROUNDED car and
+    # this pipeline poses last, so its cameras would look at the wrong place.
+    import cabin_rigcfg
+    cfg = cabin_rigcfg.write(car, env["CABIN_CFG"])
+    print(f"  cabin: froze {len(cfg['cameras'])} cameras, diag {cfg['_diag']:.4f}")
     run([sys.executable, os.path.join(C, "body_surf.py")], cwd=w, env=env, log=lg)
-    run([sys.executable, os.path.join(C, "aperture_open.py"), "--controls"],
-        cwd=w, env=env, log=lg)
+    # TWICE, deliberately: `--controls` runs the five negative controls (the
+    # main component must be spared, a welded in-aperture patch spared, a FREE
+    # in-aperture patch selected, a free bonnet patch spared, a free patch
+    # outside the glazing spared) and RETURNS before writing anything.  The
+    # second run writes body_keep.npy / interior_keep.npy.  This is exactly the
+    # pair the cabin gate itself ran; skipping the first would ship a selection
+    # nothing had tested.
+    _, ctrl = run([sys.executable, os.path.join(C, "aperture_open.py"), "--controls"],
+                  cwd=w, env=env, log=lg)
+    if "ALL CONTROLS PASS" not in ctrl:
+        raise SystemExit("cabin stage REFUSED: aperture_open's negative controls "
+                         "did not all pass on this car:\n" + ctrl[-2000:])
+    open(os.path.join(w, "aperture_controls.txt"), "w").write(ctrl)
+    run([sys.executable, os.path.join(C, "aperture_open.py")], cwd=w, env=env, log=lg)
     run([sys.executable, os.path.join(C, "cabin_build.py"), kit], cwd=w, env=env, log=lg)
     run([sys.executable, os.path.join(C, "assemble.py"), car, kit, raw],
         cwd=w, env=env, log=lg)
