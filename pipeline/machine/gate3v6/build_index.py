@@ -46,6 +46,31 @@ def camline(v):
     return s
 
 
+def lin2srgb(a):
+    a = np.asarray(a, dtype=float)
+    return np.where(a <= 0.0031308, a * 12.92,
+                    1.055 * np.power(np.clip(a, 0, None), 1 / 2.4) - 0.055)
+
+
+def matid_pixel_shares(png_path, colours):
+    """Per-node share of the visible silhouette, counted off the flat material-ID
+    frame. Turns 'that looks like a lot of interior' into a number.
+
+    The ID colours are set as LINEAR emission and the frame is written through
+    the Standard transform, so they must be converted to sRGB before matching -
+    matching the raw linear values finds zero pixels."""
+    im = np.asarray(Image.open(png_path).convert("RGB")).astype(np.int16)
+    rows = []
+    for name, c in colours.items():
+        ref = np.rint(255 * lin2srgb(c[:3])).astype(np.int16)
+        n = int((np.abs(im - ref[None, None, :]).max(2) <= 2).sum())
+        if n:
+            rows.append((n, name))
+    rows.sort(reverse=True)
+    car = sum(n for n, _ in rows) or 1
+    return [(name, n, 100.0 * n / car) for n, name in rows], car, im.shape[0] * im.shape[1]
+
+
 def expline(v):
     e = v.get("exposure", {}) or {}
     m = v.get("measured", {}) or {}
@@ -210,10 +235,23 @@ def main():
                     camline(v) + "  |  flat emission, AA OFF (filter 0.01), 1 sample, "
                     "one colour per node  |  %d nodes visible" % v["n_visible_objects"]),
                     os.path.join(out, "08_matid_front.jpg"))
+        shares, carpx, frampx = ([], 0, 0)
+        if idc:
+            try:
+                shares, carpx, frampx = matid_pixel_shares(src("p08_matid_front"), idc)
+            except Exception as e:
+                print("matid share measurement failed:", e)
+        note = ""
+        if shares:
+            note = ("visible-surface share, measured off this frame (%d matched px = "
+                    "%.1f%% of the frame): " % (carpx, 100.0 * carpx / frampx)
+                    + ", ".join("%s %.2f%%" % (n, p) for n, _c, p in shares if p >= 0.15))
         items.append((8, "Material-ID front", "08_matid_front.jpg", v,
-                      "Which node owns which pixel. Deterministic flat label render - "
-                      "point-sampled renderers produce z-fighting speckle where two shells "
-                      "are coincident, which reads as raggedness when the label is fine.", ""))
+                      "Which node owns which pixel, with a colour key. Deterministic flat "
+                      "label render - a point-sampled renderer produces z-fighting speckle "
+                      "where two shells are coincident, which reads as raggedness when the "
+                      "label is fine. The per-node share below says which components "
+                      "actually present surface to a straight-ahead viewer.", note))
         # 9 reference overlay
         v = V("p09_ref_match_34")
         refs = []
