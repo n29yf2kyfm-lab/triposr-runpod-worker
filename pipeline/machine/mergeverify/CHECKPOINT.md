@@ -35,22 +35,34 @@ nodetrees, rigid_transform, LIGHT_CALIB, ROOF_BEFORE_AFTER.png, orient render)
    (each on its own end's axle centre; spread ~105 mm). Unstated anywhere.
 4. **glass and v7 do NOT carry the grounding fix** (tyres still 183/189 mm up).
 
-## CONTROLS THAT FIRED (12) — nc/
+## CONTROLS THAT FIRED (16) — nc/
 NC1 +5.000 mm → 5.0000 · NC2 glazing→2.5% → 0.9894→0.0238 m² · NC3 KHR stripped →
 detected · NC4 normals → 30/30 · NC5 windscreen→carpaint → respray Δ 5.5→40 ·
 NC6 +3.000 mm → 3.000030 · NC7 8% body deleted → receded 17, **lost 0** ·
-NC8 flat paint → detected · NC10 empty-but-named node → caught (name check says 20/20) ·
-NC11 two names on one mesh → caught (name check says 20/20) · 2 natural controls.
+NC8 flat paint → detected · NC9 contiguous 150 mm roof hole → receded 4, lost 0, fires
+on exactly the 3 roof-viewing directions · NC10 empty-but-named node → caught (a name
+check says 20/20) · NC11 two names on one mesh → caught (name check says 20/20) ·
+NC12a/b/c deliberate validator errors → 2/1/1 errors while the good file stays 0 ·
+2 natural controls.
 
-## STILL NOT PROVEN TO FAIL (say so, do not imply coverage)
-1. Khronos validator "0 errors" — no deliberate-error file was built.
-2. Hole test's LOST class on the real car — it fires on a synthetic sphere but not on
-   the car, because the cabin stops every ray. That IS the finding.
+## STILL NOT PROVEN TO FAIL — ONE ITEM, and it is a finding not a gap
+The hole test's LOST class never fires on this car: NC7 (8% scattered) and NC9
+(contiguous 150 mm roof disc) both gave lost=0. It fires on a synthetic icosphere
+(72/144 rays). The cabin stops every ray — so a hole test asking only "did the ray hit
+something" can never fire here. Ray spacing is ~97 mm at 32x32; use 64x64 for holes
+below ~150 mm.
 
-## IN FLIGHT
-`run_hole_contig.py` — contiguous 150 mm roof hole (708 faces, 0.37% of Body_Shell),
-15 directions. Waits on `meta/HOLE_CONTIG_DONE`. NEVER `pgrep -f` (it matches the
-wrapper); wait on the artefact.
+## ALSO VERIFIED RATHER THAN QUOTED
+glass gate "no vertex moved, no face deleted" TRUE (985,227 faces unchanged; max
+centroid move 0.0135 um vs a 0.238 um float32 ULP) — but referenced verts rise +2,740
+because a repartition splits vertices at node boundaries: the files share a SURFACE,
+not a vertex array. Cabin gate's −3,544 / −149,302 face deltas: both exact.
+Cabin's 28 components are 0% coincident with car_rebound = provably constructed.
+
+## SIX OF MY OWN ERRORS ARE RECORDED IN THE REPORT
+wrong speck denominator · glazing-contaminated zone + reversed band names ·
+empty-by-construction panel mask · linear-vs-sRGB matID mask · a 1 nm tolerance on
+float32 data · one use of `pgrep -f` (a read, not a wait — still should not have been used).
 
 ## NEXT WHEN THE MERGED CAR LANDS
 `SRC_GLB=src/car_rebound.glb python3 verify_merged.py <merged.glb> meta/merged`
