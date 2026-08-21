@@ -1,0 +1,83 @@
+{
+ "input": "car_rebound.glb",
+ "output": "car_deskin_rebound.glb",
+ "amax": 0.002,
+ "frac": 0.9,
+ "faces_total": 985227,
+ "faces_rebound": 63701,
+ "area_rebound": 3.600209,
+ "moves": {
+  "carpaint->Interior_Plastic": {
+   "faces": 18485,
+   "area": 1.310102
+  },
+  "Interior_Plastic->carpaint": {
+   "faces": 20458,
+   "area": 1.009473
+  },
+  "Interior_Plastic->Trim_Black": {
+   "faces": 194,
+   "area": 0.003921
+  },
+  "Interior_Plastic->Underbody": {
+   "faces": 167,
+   "area": 0.002261
+  },
+  "Arch_Liner->carpaint": {
+   "faces": 7278,
+   "area": 0.464014
+  },
+  "Arch_Liner->Interior_Plastic": {
+   "faces": 28,
+   "area": 0.000278
+  },
+  "Arch_Liner->Trim_Black": {
+   "faces": 2,
+   "area": 2.9e-05
+  },
+  "Underbody->carpaint": {
+   "faces": 5272,
+   "area": 0.128183
+  },
+  "Underbody->Trim_Black": {
+   "faces": 354,
+   "area": 0.006051
+  },
+  "Underbody->Interior_Plastic": {
+   "faces": 246,
+   "area": 0.00349
+  },
+  "carpaint->Arch_Liner": {
+   "faces": 4742,
+   "area": 0.468955
+  },
+  "carpaint->Trim_Black": {
+   "faces": 2437,
+   "area": 0.042036
+  },
+  "carpaint->Underbody": {
+   "faces": 2577,
+   "area": 0.12841
+  },
+  "Trim_Black->carpaint": {
+   "faces": 1132,
+   "area": 0.027033
+  },
+  "Trim_Black->Interior_Plastic": {
+   "faces": 254,
+   "area": 0.004423
+  },
+  "Trim_Black->Underbody": {
+   "faces": 75,
+   "area": 0.001551
+  }
+ },
+ "frozen_materials": [
+  "Brake_Disc",
+  "Lamp_Lens",
+  "Lamp_Lens_Rear",
+  "Rim_Alloy",
+  "Tyre_Rubber",
+  "glass"
+ ]
+}
