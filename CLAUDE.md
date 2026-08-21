@@ -3671,3 +3671,55 @@ measured pass rate (60.1% of bytes at this recipe, 4.19x on those) that is **8,7
 sequential** ≈ 26.5 h for the bases, ~9.6 days for all **9,100 objects (129 GB)** including the 8,056
 variants. Parallelism is the lever but **validate it first** — the PSNR settle waits are time-based,
 so concurrent browsers could perturb the very number the gate turns on.
+
+## glass_probe BLIND SPOT #3: a windscreen in 71 PIECES with 108 HOLES passes (2026-08-21)
+
+Found by LOOKING, after the owner instructed "don't hallucinate verify and don't move
+on til each stage complete and eye ball each fix". No instrument in this pipeline caught
+it, and two instruments actively passed it.
+
+Isolate the glazing nodes, give them ONE flat EMISSION material so shading cannot hide
+anything, and render. The Golf's glazing is not six panes — it is perforated fragment
+soup. Measured with `pipeline/machine/integrity/glass_topo.py` (coordinate-weld at 1e-5
+FIRST, or the recorded split-vertex trap reads one sheet as thousands of pieces):
+
+  node                  faces  components  boundary_loops  holes
+  Glass_Backlight       14208           1               1      0    <- the ONLY clean pane
+  Body_Glass_Reverted   10108         714             492      0    <- carpaint, 714 pieces
+  Glass_Side_L           9465          30              72     42
+  Glass_Windscreen       8780          71             179    108
+  Glass_Side_R           8668           8              71     63
+
+**AND IT PASSES BOTH GATES.** Glass area 2.9594 m2 = 3.226% of the car, inside the
+1.0-13.0% catalogue band; `glass_probe` returns **clear / proven**. This is a THIRD
+blind spot, distinct from the two already recorded the same day (it passed a windscreen
+aperture filled with `carpaint`; it passed glazing cut to 2.5% of its area). The common
+root is unchanged and now proven three ways: **the probe reads the material TABLE. Area
+and material are each necessary and neither is sufficient. PANE INTEGRITY — components,
+boundary loops, holes — is a separate measurement and nothing in this pipeline had one.**
+
+`holes = boundary_loops - components`. A clean pane is exactly one component with exactly
+one boundary loop. Pair this with every glass_probe verdict, the way glass AREA retention
+was already paired with it.
+
+## Blender traps paid for on the integrity gate (2026-08-21)
+
+* **`ob.matrix_world = numpy_array.tolist()` STORES THE TRANSPOSE** (4.5.12 here). It
+  silently doubled a donor wheel's -3.43 deg camber to -6.98 and drove all four wheels
+  42 mm through the floor with nothing raised and no error. Assign through a setter that
+  asserts its own readback.
+* **`material.use_backface_culling` DOES NOTHING IN CYCLES.** All four cells of a control
+  measured 0.44696 with the flag set; a Geometry->Backfacing + Transparent mix gives
+  0.00033 for the culled cell. Any "nothing disappears under culling" check built on that
+  flag is unfalsifiable. Same for a face-orientation pass: Cycles has no overlay, build it
+  from Backfacing (`pipeline/machine/integrity/faceorient.py`).
+* **An SVD axis fit is WRONG on a torn arc.** For a 120-degree arc the arc-depth direction
+  has lower variance than the axis — 88 deg error; and a torn arc's CENTROID sits 0.13 m
+  off-centre, which returned toe = -73 deg and a "width" that was actually the diameter.
+  Use a direct cylinder fit and self-test it on synthetic torn arcs before believing it.
+* **Blender's BMesh refuses a second face on a vertex triple that already carries one.**
+  A file/import triangle delta is therefore EXPECTED, not lost geometry. The predicate that
+  reproduces it is EXTRAS BEYOND THE FIRST, per primitive: on this car 924 duplicates + 4
+  index-degenerate = 928 exactly. Counting every member of each duplicate group instead
+  gives 1847 and overshoots. The Khronos validator flags only ONE of the 928, so coincident
+  faces ship and z-fight without a single warning.
