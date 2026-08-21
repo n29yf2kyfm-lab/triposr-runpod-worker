@@ -169,6 +169,44 @@ def quadric_dist(P, c, R, coef):
     return Q[:, 2] - A @ coef, Q[:, 0], Q[:, 1]
 
 
+
+def beltline_fit(C, area, mask, side_sign, nbins=26, pct=2.0):
+    """Robust STRAIGHT beltline y = m*x + c fitted to the LOWER EDGE of one side's
+    glazing, rather than a single world-Y constant.
+
+    MEASURED 2026-08-21, and this is why it exists: a fixed `--belt-y 0.995` was
+    calibrated on car_rebound.glb, which sits nose-UP by ~4.1 deg.  Run unchanged on the
+    grounded, de-pitched car_merged.glb the same constant evicted 12,196 glazing faces as
+    "below the beltline" against 1,537 on the original -- 0.988 m2 of eviction against
+    0.378 -- i.e. it cut through real door glass.  A beltline is a LINE on a pitched car,
+    not a height.  Fitting it per side makes the rule pose-independent.
+    """
+    m = mask & (np.sign(C[:, 2]) == side_sign)
+    if m.sum() < 200:
+        return None
+    x, y = C[m][:, 0], C[m][:, 1]
+    lo, hi = np.percentile(x, 2), np.percentile(x, 98)
+    edges = np.linspace(lo, hi, nbins + 1)
+    bx, by = [], []
+    for i in range(nbins):
+        k = (x >= edges[i]) & (x < edges[i + 1])
+        if k.sum() < 12:
+            continue
+        bx.append(0.5 * (edges[i] + edges[i + 1])); by.append(np.percentile(y[k], pct))
+    if len(bx) < 6:
+        return None
+    bx, by = np.array(bx), np.array(by)
+    for _ in range(3):                       # drop sag bins: a floor that follows the sag
+        A = np.c_[bx, np.ones(len(bx))]      # is no floor (glass_presplit pattern)
+        coef, *_ = np.linalg.lstsq(A, by, rcond=None)
+        r = by - A @ coef
+        keep = r > -1.2 * max(np.std(r), 1e-6)
+        if keep.sum() < 5:
+            break
+        bx, by = bx[keep], by[keep]
+    return coef
+
+
 # ------------------------------------------------------------------------------- main
 def main():
     ap = argparse.ArgumentParser()
@@ -180,6 +218,8 @@ def main():
     ap.add_argument("--header-x", type=float, default=-0.34)
     ap.add_argument("--apillar-x", type=float, default=-0.62)
     ap.add_argument("--belt-y", type=float, default=0.995)
+    ap.add_argument("--belt-margin", type=float, default=0.012)
+    ap.add_argument("--max-evict-frac", type=float, default=0.25)
     ap.add_argument("--cpillar-x", type=float, default=0.86)
     ap.add_argument("--screen-cos", type=float, default=0.86)
     ap.add_argument("--screen-band", type=float, default=0.045)
@@ -202,8 +242,9 @@ def main():
     rep = {"input": a.inp, "faces": int(len(F)),
            "glazing_area_in": float(area[is_glass].sum()),
            "constants": {k: getattr(a, k) for k in
-                         ("cowl_x", "header_x", "belt_y", "cpillar_x", "screen_cos",
-                          "screen_band", "debris")}}
+                         ("cowl_x", "header_x", "apillar_x", "belt_y", "belt_margin",
+                          "cpillar_x", "screen_cos", "screen_band", "debris",
+                          "max_evict_frac")}}
     print(f"faces {len(F)}  glazing area in {area[is_glass].sum():.4f} m2")
 
     eA, eB = quantised_adjacency(V, F)
@@ -270,7 +311,27 @@ def main():
     midband = (C[:, 0] > a.header_x) & (C[:, 0] < a.cpillar_x + 0.28)
     roofish = g & midband & (np.abs(nu[:, 1]) > 0.72)
     # (b) below the beltline
-    below = g & (C[:, 1] < a.belt_y)
+    # The beltline is a DLO concept and is applied to the FLANK band ONLY.
+    # CORRECTION 2026-08-21: my first version applied the fitted line to ALL glazing and
+    # took 33% off the REAR SCREEN (0.757 -> 0.504 m2), because a hatchback's tailgate
+    # glass legitimately runs below the side beltline (it starts at y 0.892 here against
+    # a fitted side belt of ~1.02).  Scope, not threshold, was the bug.
+    dlo = g & (np.abs(C[:, 2]) > 0.40) & (C[:, 0] > a.apillar_x - 0.05) & \
+        (C[:, 0] < a.cpillar_x + 0.20)
+    below = np.zeros(len(F), dtype=bool)
+    belt_info = {}
+    for sgn, nm in ((-1, "L"), (1, "R")):
+        coef = beltline_fit(C, area, dlo, sgn)
+        sm = dlo & (np.sign(C[:, 2]) == sgn)
+        if coef is None:
+            below |= sm & (C[:, 1] < a.belt_y)
+            belt_info[nm] = "fallback constant %.3f" % a.belt_y
+            continue
+        yb = coef[0] * C[:, 0] + coef[1] - a.belt_margin
+        below |= sm & (C[:, 1] < yb)
+        belt_info[nm] = {"slope": round(float(coef[0]), 5), "intercept": round(float(coef[1]), 5),
+                         "margin": a.belt_margin}
+    print("   beltline fit:", json.dumps(belt_info))
     # (c) over the C-pillar: glazing on the pillar between the door band and the quarter
     cpil = g & (C[:, 0] > a.cpillar_x) & (C[:, 0] < a.cpillar_x + 0.14) & (np.abs(C[:, 2]) > 0.40)
     # (d) COWL / SCUTTLE and A-PILLAR.  Measured on the input: the node called
@@ -286,6 +347,19 @@ def main():
     cowl = g & (C[:, 0] < a.apillar_x) & ~onscreen
     evict = roofish | below | cpil | cowl
     evict &= ~stamp
+    # EVICTION GUARD.  The negative controls above protect the STAMP against
+    # over-selection and NOTHING protected the EVICTION against it -- a one-sided gate,
+    # the exact failure class CLAUDE.md records.  Found by running this tool on a
+    # differently-posed copy of the same car, where a stale beltline constant quietly
+    # evicted 31.1% of the glazing.
+    ev_frac = float(area[evict].sum() / max(area[is_glass].sum(), 1e-9))
+    rep["op2_evict_frac"] = round(ev_frac, 4)
+    rep["op2_evict_guard_pass"] = bool(ev_frac <= a.max_evict_frac)
+    if ev_frac > a.max_evict_frac:
+        print(f"   !! EVICTION GUARD FAILED: {100*ev_frac:.1f}% of glazing area would be "
+              f"evicted (limit {100*a.max_evict_frac:.0f}%). Landmarks do not fit this "
+              f"body -- REFUSING the eviction rather than shipping a stripped car.")
+        evict[:] = False
     rep["op2_spill"] = {
         "roof_cantrail_faces": int(roofish.sum()), "roof_cantrail_area": float(area[roofish].sum()),
         "below_belt_faces": int(below.sum()), "below_belt_area": float(area[below].sum()),
