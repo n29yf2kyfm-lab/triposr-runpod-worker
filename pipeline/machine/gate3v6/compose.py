@@ -363,6 +363,8 @@ def side_by_side(items, out, title, sub="", tile=(1400, 1120)):
     sheet = Image.new("RGB", (W, H), (26, 26, 26))
     for i, c in enumerate(cells):
         sheet.paste(c, (gap + i * (tile[0] + gap), gap))
+    if not (title or sub):
+        return save_jpeg(sheet, out)      # inner row of a stacked figure
     return save_jpeg(caption_bar(sheet, title, sub, h=max(54, int(W * 0.016))), out)
 
 

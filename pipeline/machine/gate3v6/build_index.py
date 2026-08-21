@@ -96,7 +96,7 @@ def main():
             "CANONICAL 8-VIEW SHEET — %s" % a.tag,
             "identical lens (orthographic), identical camera height and elevation, "
             "identical lighting and ground; per-tile ortho scale so every tile "
-            "lands in the 75-85%% occupancy band.  " + AZ_NOTE)
+            "lands in the 75-85% occupancy band.  " + AZ_NOTE)
         print("8-view sheet ->", p)
     if mSC:
         order = [(vid + "_c", lab) for vid, lab in SHEET_LABELS]
@@ -107,7 +107,7 @@ def main():
                 "8-VIEW SHEET, CONSTANT SCALE — %s" % a.tag,
                 "COMPANION SHEET. One ortho scale for all eight tiles, so sizes are "
                 "directly comparable across views. A single scale CANNOT put both the "
-                "4.28 m side view and the 1.79 m front view in 75-85%% — that is why "
+                "4.28 m side view and the 1.79 m front view in 75-85% — that is why "
                 "the primary sheet fits per tile.  " + AZ_NOTE,
                 occ_band=(0.0, 1.0))
             print("const-scale sheet ->", p2)
@@ -384,9 +384,9 @@ def main():
                      "%.1f deg, camera height (target glTF y = %.4f), light rig, ground "
                      "plane, world grey %.2f, Standard view transform\n"
                      % (v0["elev"], v0.get("target_y_gltf") or 0, v0.get("world_grey", .22)))
-        lines.append("- per-tile ortho scale so each tile lands in the 75-85%% band\n")
+        lines.append("- per-tile ortho scale so each tile lands in the 75-85% band\n")
         lines.append("\n| # | view | az | populated | occupancy (bbox) | silhouette fill | "
-                     "clipped (car) | ortho scale m | exposure |\n"
+                     "clipped (frame) | ortho scale m | exposure |\n"
                      "|---|---|---|---|---|---|---|---|---|\n")
         for i, r in enumerate(sheet_report, 1):
             lines.append("| %d | %s | %03d | %s | **%.1f%%** | %.1f%% | %.3f%% | %.4f | "
