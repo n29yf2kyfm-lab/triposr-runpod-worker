@@ -331,11 +331,16 @@ def build(F, B=None, val=None, st=None, vw=None, valbase=None, imp=None):
                      "imports, dimensions match, components present", "-",
                      "NOT TESTED"))
     if vw:
+        # viewer_check writes `status`, not `verdict` -- reading the wrong key
+        # printed "?" and scored a PASS as a FAIL. A false FAIL is as bad as a
+        # false PASS and this one was caught by reading the row, not the JSON.
+        vstat = vw.get("status") or vw.get("verdict") or "?"
+        checks = {k: v for k, v in (vw.get("checks") or {}).items()}
         R.append(row("Headless <model-viewer> load (Chromium + SwiftShader)",
-                     "V5: PASS", vw.get("verdict", "?"),
+                     "V5: PASS", f"{vstat}" + (f" {checks}" if checks else ""),
                      "loads, renders, centred, on the ground, clean console",
                      "verify/renders/viewer_FINAL/",
-                     "PASS" if vw.get("verdict") == "PASS" else "FAIL",
+                     "PASS" if vstat == "PASS" else "FAIL",
                      "software desktop render -- says nothing about device FPS"))
     else:
         R.append(row("Headless <model-viewer> load", "V5: PASS", "not run",
