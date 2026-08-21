@@ -3116,3 +3116,47 @@ because it reads the material table and cannot see that a label covers the wrong
 
 Open, and the highest-value follow-up: both inputs were front 3/4, so the rear was never
 observed. Whether the rear-screen miss is a viewpoint artefact is UNTESTED.
+
+## Upload the ARTEFACT, not just the evidence about it (2026-08-21, rollback #6)
+
+The sixth rollback of the session destroyed `GOLF_V6_FRONT_GATE.glb` — the Gate 3 v6
+front-fascia rebuild. Everything *describing* it survived and none of it can bring it
+back: the independent verifier's 25-row table, its 19 negative controls, the certified
+sha `593c5795…`, all 15 proof renders at 2048px, the 8-view sheet, and the builder's
+own `strip.py` / `rebuild6.py` / `plan6.py` / `front_gate_build.json`. The bucket held
+**the code and the reports and not the 68 MB file they were about**; `staging/gate3_v6/glb/`
+and `.../work/` were both empty.
+
+**The cause was an asymmetry in MY briefing, not agent error.** Three of the four Gate 3
+agents were told explicitly to chunk anything over ~50 MB with a MANIFEST and were given
+`staging/gate5_surface/glb/` as the pattern to copy. The BUILDER — the only one holding a
+large primary artefact — was told to upload "as things validate" without that instruction.
+Gates 4 and 5 chunked and both survived intact. The pattern works; it simply was not
+required of the one agent that needed it.
+
+**Rules, and they are cheap:**
+1. **A gate is not complete while its primary deliverable exists only on local disk.**
+   Evidence is not the deliverable. A verifier certifying a sha proves nothing once the
+   file behind that sha is gone.
+2. **Chunk-and-upload the artefact FIRST, before writing the report about it.** The report
+   is small and re-derivable; the GLB is neither.
+3. **State the ~50 MB cap in every brief that produces a mesh.** Supabase rejects larger
+   objects on BOTH the plain and the resumable endpoint (measured on Gate 6, whose 63 MB
+   file 413'd and had to ship as a texture-reduced 29 MB copy — geometry verified
+   bit-identical, max‖Δv‖ = 0.0).
+4. **Verify by LISTING the prefix, not by trusting the upload status.** A 200 on the small
+   files reads identically to a complete backup.
+
+**What actually survives a rollback, measured across six of them:** origin, and the bucket.
+Nothing else. `/root/.alam3d_env` survived this one with all four variables intact and mode
+600 — but check every variable BY NAME, because rollback #2 silently dropped
+`SKETCHFAB_TOKENS` and left a file that looked healthy.
+
+**Also lost, and worth noting for scope:** the V0 source `car.glb` (985,227 faces, the
+baseline every one of the six gates measured against) was local-only and is NOT in the
+bucket in full form. The nearest survivors are DERIVATIVES, not it — Gate 6's grounded and
+wheel-corrected `car_gate6_repaired_TEXTURES-REDUCED.glb` and Gate 7+8's material-rebound
+`car_rebound.glb`. Owner ruling 2026-08-21: do NOT regenerate V0 through Pixal to
+reconstruct it — rebuild the front on `car_rebound.glb`, which is a better base than v6
+ever had, and record Gate 3 v6 itself as **BLOCKED — DELIVERABLE LOST**, with its
+measurements retained as evidence of what was achieved rather than as a passing verdict.
