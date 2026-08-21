@@ -72,6 +72,18 @@ def node_world_vertices(g, bin_, want_names):
         for p in g["meshes"][n["mesh"]]["primitives"]:
             v = np.array(read_accessor(g, bin_, p["attributes"]["POSITION"]),
                          dtype=np.float64)
+            # KEEP ONLY POSITIONS A TRIANGLE ACTUALLY REFERENCES.
+            # 1,297,156 of this file's 1,899,971 declared positions (68.3%) are
+            # referenced by no triangle in their own primitive. They are not
+            # drawn by any viewer, and including them poisons every geometric
+            # statistic -- a p95 tread radius computed over dead points is not
+            # a radius of anything. Blender's importer keeps exactly the
+            # referenced 602,815, which is why the Blender-side scan was clean
+            # and this file-side reader was not.
+            if "indices" in p:
+                ref = np.unique(np.array(
+                    [t[0] for t in read_accessor(g, bin_, p["indices"])]))
+                v = v[ref]
             chunks.append(v)
         V = np.vstack(chunks)
         # Transform IN glTF SPACE, then convert axes ONCE at the very end.
@@ -87,54 +99,126 @@ def node_world_vertices(g, bin_, want_names):
     return out
 
 
-def fit_axis(P, band_lo=0.97, band_hi=1.03, iters=12, seed=None):
-    """Iteratively fit a wheel axis to tread points.
+def _basis(a):
+    """Two unit vectors spanning the plane perpendicular to `a`."""
+    t = np.array([1.0, 0.0, 0.0])
+    if abs(a @ t) > 0.9:
+        t = np.array([0.0, 0.0, 1.0])
+    e1 = np.cross(a, t)
+    e1 /= np.linalg.norm(e1)
+    e2 = np.cross(a, e1)
+    return e1, e2 / np.linalg.norm(e2)
+
+
+def _circle_fit(u, v):
+    """Kasa algebraic circle fit. Returns (u0, v0, R).
+
+    THE CENTRE MUST COME FROM A CIRCLE FIT, NOT A CENTROID. A tyre on this car
+    is a TORN, PARTIAL annulus, and the centroid of a partial arc lies inside
+    the circle, not at its centre. Using the band mean walked the assumed centre
+    0.13 m off in one iteration and the axis fit then returned toe = -73 deg and
+    a "width" of 0.64 m (which is the DIAMETER) on a wheel 0.29 m wide. The
+    centroid was reading back the shape of the tear.
+    """
+    A = np.column_stack([u, v, np.ones_like(u)])
+    b = u ** 2 + v ** 2
+    sol, *_ = np.linalg.lstsq(A, b, rcond=None)
+    u0, v0 = sol[0] / 2.0, sol[1] / 2.0
+    R = math.sqrt(max(0.0, sol[2] + u0 ** 2 + v0 ** 2))
+    return u0, v0, R
+
+
+def fit_axis(P, band_lo=0.97, band_hi=1.03, iters=25, seed=None, tol=1e-7):
+    """Iteratively fit a wheel axis, centre and radius to tyre points.
 
     THE ITERATION IS THE WHOLE POINT: the tread band is re-selected about the
     axis found on the previous pass, so the answer stops being a restatement of
-    the seed. Selecting once about an assumed axis is what produced slope 0.35.
+    the seed. Selecting once about an assumed axis is what produced a response
+    slope of 0.35 in an earlier wheel gate here -- every angle three times too
+    small and biased toward zero. Calibration is in cmd_calibrate.
     """
-    c = P.mean(axis=0)
     a = np.array(seed if seed is not None else [0.0, 1.0, 0.0], dtype=float)
     a /= np.linalg.norm(a)
+    c = P.mean(axis=0)
     hist = []
+
+    def residual(axis, pts):
+        """rms of |radius - best-fit radius| for `pts` about `axis`. The TRUE
+        wheel axis is the one that makes the tread most nearly circular."""
+        e1, e2 = _basis(axis)
+        d = pts - pts.mean(axis=0)
+        u, v = d @ e1, d @ e2
+        u0, v0, R = _circle_fit(u, v)
+        r = np.hypot(u - u0, v - v0)
+        return float(np.sqrt(((r - R) ** 2).mean())), (u0, v0, R, e1, e2)
+
+    # DIRECT CYLINDER FIT, not an SVD of the band.
+    # The smallest-variance direction of a tread band is the axis only while
+    # the band is a wide arc. Measured on the synthetic controls: for a 120 deg
+    # torn arc the arc-DEPTH direction has variance 0.0022 against the axis's
+    # 0.0040, so SVD picks the wrong one and returns an 88 deg axis error --
+    # and this car's left-hand tyres ARE torn arcs. Instead, search the axis
+    # over two small angles about the seed and take the axis that minimises
+    # tread-circularity residual, re-selecting the band each outer pass.
     for _ in range(iters):
+        e1, e2 = _basis(a)
         d = P - c
-        axial = d @ a
-        radial = d - np.outer(axial, a)
-        r = np.linalg.norm(radial, axis=1)
+        u, v = d @ e1, d @ e2
+        r = np.hypot(u, v)
         R = np.percentile(r, 95)
         m = (r >= band_lo * R) & (r <= band_hi * R)
         if m.sum() < 50:
             break
         B = P[m]
-        Bc = B.mean(axis=0)
-        # smallest-variance direction of the tread annulus IS its axis:
-        # the band spans ~2R across the wheel plane and only the tyre width
-        # along the axis, and R > half-width holds for every road wheel.
-        u, s, vt = np.linalg.svd(B - Bc, full_matrices=False)
-        a_new = vt[2] / np.linalg.norm(vt[2])
-        if a_new @ a < 0:
-            a_new = -a_new
-        # centre: mean of the band, projected to remove axial bias
-        c_new = Bc
-        hist.append(float(math.degrees(math.acos(
-            max(-1.0, min(1.0, abs(a_new @ a)))))))
+        best = a
+        span, step_deg = 6.0, 1.0
+        for _lvl in range(5):
+            cand, bestres = None, None
+            g = np.arange(-span, span + 1e-9, step_deg)
+            for d1 in g:
+                for d2 in g:
+                    ax = best + math.radians(d1) * e1 + math.radians(d2) * e2
+                    ax = ax / np.linalg.norm(ax)
+                    res, _ = residual(ax, B)
+                    if bestres is None or res < bestres:
+                        bestres, cand = res, ax
+            best = cand
+            span, step_deg = step_deg, step_deg / 5.0
+        a_new = best if best @ a >= 0 else -best
+        _, (u0, v0, Rc, e1b, e2b) = residual(a_new, B)
+        Bm = B.mean(axis=0)
+        c_new = Bm + u0 * e1b + v0 * e2b
+        step = float(math.degrees(math.acos(
+            max(-1.0, min(1.0, abs(float(a_new @ a)))))))
+        shift = float(np.linalg.norm(c_new - c))
+        hist.append(step)
         a, c = a_new, c_new
-        if hist[-1] < 1e-6:
+        if step < 1e-4 and shift < 1e-6:
             break
+
+    e1, e2 = _basis(a)
     d = P - c
     axial = d @ a
-    radial = d - np.outer(axial, a)
-    r = np.linalg.norm(radial, axis=1)
-    R = float(np.percentile(r, 95))
-    m = (r >= band_lo * R) & (r <= band_hi * R)
+    r = np.hypot(d @ e1, d @ e2)
+    Rsel = float(np.percentile(r, 95))
+    m = (r >= band_lo * Rsel) & (r <= band_hi * Rsel)
+    # RADIUS COMES FROM THE CIRCLE FIT, NOT FROM p95.
+    # p95 of a noisy radius is biased HIGH by ~1.645*sigma; on a tyre with the
+    # 4.5 mm rms out-of-roundness this project measures, that is +7.4 mm -- and
+    # the synthetic control reproduced exactly +7.44 mm. p95 is fine for
+    # SELECTING the tread band and wrong for REPORTING the radius.
+    if m.any():
+        u0, v0, Rfit = _circle_fit((d @ e1)[m], (d @ e2)[m])
+    else:
+        Rfit = Rsel
+    R = float(Rfit)
     return {
-        "axis": a, "centre": c, "radius_p95": R,
-        "width": float(axial.max() - axial.min()),
+        "axis": a, "centre": c, "radius_p95": R, "radius_select_p95": Rsel,
+        "width": float(axial[m].max() - axial[m].min()) if m.any() else 0.0,
         "tread_points": int(m.sum()),
-        "roundness_rms_mm": float(np.std(r[m]) * 1000.0),
+        "roundness_rms_mm": float(np.std(r[m]) * 1000.0) if m.any() else None,
         "converge_deg": hist[-1] if hist else None,
+        "iterations": len(hist),
     }
 
 
@@ -266,9 +350,76 @@ def cmd_calibrate(path, out, corner="FR"):
     return res
 
 
+def cmd_selftest(out):
+    """Synthetic wheels with KNOWN truth. The fitter must recover the axis,
+    centre and radius of each -- INCLUDING a torn partial arc, because that is
+    the case that broke it: the band CENTROID of a partial arc sits inside the
+    circle, walked the assumed centre 0.13 m off in one iteration, and produced
+    toe = -73 deg on a real wheel."""
+    rng = np.random.default_rng(7)
+    rows, ok = [], True
+
+    def make(axis, centre, R, W, arc_deg, n=6000, noise=0.0):
+        a = np.array(axis, float)
+        a /= np.linalg.norm(a)
+        e1, e2 = _basis(a)
+        th = rng.uniform(-math.radians(arc_deg) / 2,
+                         math.radians(arc_deg) / 2, n)
+        ax = rng.uniform(-W / 2, W / 2, n)
+        rr = R + rng.normal(0, noise, n)
+        return (np.array(centre)
+                + (rr * np.cos(th))[:, None] * e1
+                + (rr * np.sin(th))[:, None] * e2
+                + ax[:, None] * a)
+
+    cases = [
+        ("full_annulus", [0, 1, 0], [-1.3, -0.68, 0.32], 0.32, 0.22, 360, 0.0),
+        ("torn_180deg", [0, 1, 0], [1.2, 0.70, 0.31], 0.31, 0.22, 180, 0.0),
+        ("torn_120deg", [0, 1, 0], [1.2, 0.70, 0.31], 0.31, 0.22, 120, 0.0),
+        ("toed_2deg", [math.sin(math.radians(2)), math.cos(math.radians(2)), 0],
+         [-1.3, -0.68, 0.32], 0.32, 0.22, 360, 0.0),
+        ("cambered_2deg", [0, math.cos(math.radians(2)),
+                           math.sin(math.radians(2))],
+         [-1.3, -0.68, 0.32], 0.32, 0.22, 360, 0.0),
+        ("noisy_4p5mm", [0, 1, 0], [-1.3, -0.68, 0.32], 0.32, 0.22, 360, 0.0045),
+    ]
+    for name, ax, c, R, W, arc, nz in cases:
+        P = make(ax, c, R, W, arc, noise=nz)
+        f = fit_axis(P)
+        at = np.array(ax, float)
+        at /= np.linalg.norm(at)
+        fa = f["axis"] * (1 if f["axis"] @ at > 0 else -1)
+        ang = math.degrees(math.acos(max(-1, min(1, float(fa @ at)))))
+        cerr = float(np.linalg.norm(f["centre"] - np.array(c))) * 1000
+        rerr = (f["radius_p95"] - R) * 1000
+        # The noisy case is the NOISE FLOOR, not a correctness case: a tyre
+        # that is 4.5 mm rms out of round cannot pin its own axis to 0.1 deg,
+        # and saying so is the correct answer rather than certifying it.
+        noise_case = name.startswith("noisy")
+        lim_ang = 0.40 if noise_case else 0.05
+        lim_rad = 3.0 if noise_case else 2.0
+        good = ang < lim_ang and cerr < 3.0 and abs(rerr) < lim_rad
+        ok &= good
+        rows.append({"case": name, "role": ("NOISE FLOOR" if noise_case
+                                            else "correctness"),
+                     "axis_err_deg": round(ang, 4),
+                     "centre_err_mm": round(cerr, 3),
+                     "radius_err_mm": round(rerr, 3),
+                     "width_fit": round(f["width"], 4), "width_true": W,
+                     "iters": f["iterations"], "PASS": good})
+        print(f"{'PASS' if good else 'FAIL':4} {name:16} axis_err={ang:.4f}deg "
+              f"centre_err={cerr:.2f}mm radius_err={rerr:+.2f}mm "
+              f"W={f['width']:.3f}/{W}")
+    json.dump({"cases": rows, "ALL_PASS": bool(ok)}, open(out, "w"), indent=1)
+    print("METROLOGY_SELFTEST", "ALL_PASS" if ok else "FAILURES")
+    return ok
+
+
 if __name__ == "__main__":
     mode = sys.argv[1].upper()
-    if mode == "MEASURE":
+    if mode == "SELFTEST":
+        cmd_selftest(sys.argv[2])
+    elif mode == "MEASURE":
         cmd_measure(sys.argv[2], sys.argv[3])
     elif mode == "CALIBRATE":
         cn = sys.argv[sys.argv.index("--corner") + 1] \
