@@ -175,3 +175,33 @@ are never production stages and must never be used as ones.
   both blind to Draco/meshopt; trimesh returns an all-zero vertex array and
   prints a "placeholder zeros" line that is easy to miss. `copy` decodes,
   and `dequantize` is *additionally* required after meshopt.
+
+---
+
+## Measured on the first subject (`car_rebound.glb`, Golf Mk8 test bed)
+
+Kept here as the calibration this tool's thresholds were set against, and as the
+answer to "how far can a car like this be decimated": **barely at all.**
+
+| ratio | triangles | MB (draco) | PSNR min | IoU min |
+|---|---|---|---|---|
+| 1.00 | 985,204 | 3.654 | **39.81** | 0.99762 |
+| 0.95 | 935,906 | 3.543 | 35.96 | 0.99571 |
+| 0.90 | 886,412 | 3.434 | 34.10 | 0.97594 |
+| 0.80 | 788,049 | 3.206 | 33.87 | 0.97433 |
+| 0.65 | 639,508 | 2.839 | 33.21 | 0.98985 |
+| 0.50 | 492,018 | 2.446 | 29.92 | 0.96576 |
+| 0.30 | 294,133 | 1.792 | 24.57 | 0.97683 |
+| 0.20 | 196,193 | 1.286 | 21.73 | 0.94617 |
+| NC1 | 76,029 | — | 15.45 | 0.87926 |
+
+**The first 5% of triangles costs 3.85 dB.** The loss is not the silhouette — it
+is the clearcoat specular highlight breaking up across large smooth panels
+(64% of large-delta pixels land on painted body against a 31% base rate). A car
+whose look is a mirror finish on big panels is far more decimation-sensitive
+than its triangle count suggests.
+
+**And this table settles the IoU argument in our own data rather than by
+citation: the column is NOT MONOTONIC IN DAMAGE.** Ratio 0.30 scores min IoU
+**0.97683** — *higher* than ratio 0.90's 0.97594 — at two thirds fewer triangles
+and 9.5 dB worse appearance. An IoU gate would prefer the worse file. Use PSNR.
