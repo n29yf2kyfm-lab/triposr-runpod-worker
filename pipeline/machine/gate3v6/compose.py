@@ -228,7 +228,10 @@ def sheet8(order, meta, pngdir, out, title, sub="",
                "silhouette_px_frac": silpx,
                "occ_x": occx, "occ_y": occy, "occ_max": occm,
                "clipped_frac_frame": meas.get("clipped_frac_frame"),
-               "clipped_frac_car": meas.get("clipped_frac_nonbg"),
+               # background-difference mask: with a ground plane in frame this
+               # covers car AND floor, so it is an UPPER BOUND on car clipping,
+               # not a car-only figure. Named so nobody reads it as car-only.
+               "clipped_frac_nonbg": meas.get("clipped_frac_nonbg"),
                "populated": (silpx is not None and silpx >= populated_floor),
                "occ_in_band": (occm is not None and occ_band[0] <= occm <= occ_band[1])}
         report.append(rec)
@@ -238,11 +241,13 @@ def sheet8(order, meta, pngdir, out, title, sub="",
                 "the exact defect the previous sheet shipped; refusing to write."
                 % (vid, label, silpx, populated_floor))
         im = Image.open(p).convert("RGB")
-        cap = ("%s   az %03d  elev %02d\nocc %.1f%%  fill %.1f%%  clip %.2f%%  %s %.3f"
+        cap = ("%s   az %03d  elev %02d\nocc %.1f%%  fill %.1f%%  clip(frame) %.3f%%  "
+               "%s %.4f  exp %+.2f st"
                % (label, v["az"], v["elev"], 100 * occm, 100 * silpx,
-                  100 * (meas.get("clipped_frac_nonbg") or 0.0),
+                  100 * (meas.get("clipped_frac_frame") or 0.0),
                   "ortho" if v["cam_type"] == "ORTHO" else "lens",
-                  v["ortho_scale"] if v["cam_type"] == "ORTHO" else v["lens_mm"]))
+                  v["ortho_scale"] if v["cam_type"] == "ORTHO" else v["lens_mm"],
+                  exp.get("exposure_stops") or 0.0))
         tiles.append((im, cap))
 
     tw, th = tiles[0][0].size
@@ -276,29 +281,38 @@ def symmetry_overlay(png, out, title, sub=""):
     """Mirror the centred front render about the image centre column and map the
     absolute difference. Requires the render's optical axis to pass through the
     mesh mirror plane (rig option no_shift_x)."""
+    from PIL import ImageFilter
     im = Image.open(png).convert("RGB")
+    # A raw per-pixel mirror difference on a Monte-Carlo render measures the
+    # SAMPLING NOISE, not the geometry: mirrored noise never matches itself.
+    # Blur first (radius ~0.12% of width) so what survives is structural.
+    r = max(1.5, im.width * 0.0012)
+    sm = np.asarray(im.filter(ImageFilter.GaussianBlur(r))).astype(np.float64)
     a = np.asarray(im).astype(np.float64)
     W = a.shape[1]
     if W % 2:
-        a = a[:, :W - 1]
-    b = a[:, ::-1]
-    diff = np.abs(a - b).mean(2)
+        a, sm = a[:, :W - 1], sm[:, :W - 1]
+    diff = np.abs(sm - sm[:, ::-1]).mean(2)
     base = a.mean(2)
     # keep the render legible underneath, paint the asymmetry in red on top
     rgb = np.dstack([base, base, base]) * 0.55 + 90.0
-    amp = np.clip(diff / 42.0, 0, 1)
+    NOISE_FLOOR = 6.0            # sRGB levels; below this it is sampling noise
+    amp = np.clip((diff - NOISE_FLOOR) / 36.0, 0, 1)
     rgb[..., 0] = rgb[..., 0] * (1 - amp) + 235 * amp
     rgb[..., 1] = rgb[..., 1] * (1 - amp) + 28 * amp
     rgb[..., 2] = rgb[..., 2] * (1 - amp) + 28 * amp
     o = Image.fromarray(np.clip(rgb, 0, 255).astype(np.uint8))
     d = ImageDraw.Draw(o)
     d.line([(o.width // 2, 0), (o.width // 2, o.height)], fill=(40, 190, 250), width=3)
-    stats = {"mean_abs_diff_srgb": float(diff.mean()),
+    stats = {"blur_radius_px": round(r, 2), "noise_floor_srgb": NOISE_FLOOR,
+             "mean_abs_diff_srgb": float(diff.mean()),
              "p99_abs_diff_srgb": float(np.percentile(diff, 99)),
-             "frac_px_over_12": float((diff > 12).mean())}
-    sub2 = (sub + "  |  mean|d|=%.2f  p99|d|=%.2f  px>12: %.2f%%  (cyan = mirror plane)"
-            % (stats["mean_abs_diff_srgb"], stats["p99_abs_diff_srgb"],
-               100 * stats["frac_px_over_12"]))
+             "frac_px_over_12": float((diff > 12).mean()),
+             "frac_px_over_24": float((diff > 24).mean())}
+    sub2 = (sub + "  |  blur %.1f px, noise floor %.0f  |  mean|d|=%.2f  p99|d|=%.2f  "
+            "px>12: %.2f%%  px>24: %.2f%%  (cyan = mirror plane, red = asymmetry)"
+            % (r, NOISE_FLOOR, stats["mean_abs_diff_srgb"], stats["p99_abs_diff_srgb"],
+               100 * stats["frac_px_over_12"], 100 * stats["frac_px_over_24"]))
     return save_jpeg(caption_bar(o, title, sub2), out), stats
 
 

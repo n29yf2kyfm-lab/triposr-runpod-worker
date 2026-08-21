@@ -274,6 +274,11 @@ def run(job):
                  "proj_bbox_occ_y": round(v1 - v0, 5),
                  "labels": labels,
                  "section": vmeta_section,
+                 "explode": None if not exp else
+                 {"axis_blender": exp.get("axis_blender"),
+                  "spacing_m": exp.get("spacing"),
+                  "n_ranked": len(exp.get("ranks", {})),
+                  "ranks": exp.get("ranks")},
                  "hidden": sorted(hide) if hide else [],
                  "n_visible_objects": len(vis)}
 

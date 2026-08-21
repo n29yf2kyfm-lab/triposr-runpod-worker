@@ -56,11 +56,12 @@ def expline(v):
     parts.append("bg sRGB %s (world %.2f -> %s expected)"
                  % (m.get("bg_corner_srgb"), v.get("world_grey", 0.22),
                     v.get("expected_bg_srgb")))
-    cf = m.get("clipped_frac_frame")
-    cc = m.get("clipped_frac_car", m.get("clipped_frac_nonbg"))
-    parts.append("clipped: frame %.4f%%" % (100 * (cf or 0.0)))
-    if cc is not None:
-        parts.append("car %.4f%%" % (100 * cc))
+    parts.append("clipped: frame %.4f%%" % (100 * (m.get("clipped_frac_frame") or 0.0)))
+    if m.get("clipped_frac_car") is not None:
+        parts.append("car (alpha) %.4f%%" % (100 * m["clipped_frac_car"]))
+    elif m.get("clipped_frac_nonbg") is not None:
+        parts.append("non-background %.4f%% (upper bound: includes the ground plane)"
+                     % (100 * m["clipped_frac_nonbg"]))
     return "  |  ".join(parts)
 
 
@@ -266,11 +267,12 @@ def main():
             idc = (mP.get("id_colours") or {}).get(vid, {})
             tmp = os.path.join(out, "_tmp_%d.jpg" % n)
             C.save_jpeg(C.flatten(src(vid)), tmp)
+            ex = v.get("explode") or {}
             f, cnt = C.label_exploded(
                 tmp, v, os.path.join(out, "%02d_%s.jpg" % (n, vid[4:])),
                 "%02d  %s — %s" % (n, title, a.tag),
-                camline(v) + "  |  explode -X, %.2f m per layer"
-                % v.get("explode_spacing", 0.34) if False else camline(v))
+                camline(v) + "  |  explode along -X (out through the nose), "
+                "%.2f m per assembly layer" % (ex.get("spacing_m") or 0.0))
             os.remove(tmp)
             items.append((n, title.title(), "%02d_%s.jpg" % (n, vid[4:]), v, what,
                           "%d components separated and labelled" % cnt))
@@ -391,7 +393,7 @@ def main():
                          "%+.2f st |\n"
                          % (i, r["label"], r["az"], "YES" if r["populated"] else "NO",
                             100 * (r["occ_max"] or 0), 100 * (r["silhouette_px_frac"] or 0),
-                            100 * (r["clipped_frac_car"] or 0), r["ortho_scale"],
+                            100 * (r["clipped_frac_frame"] or 0), r["ortho_scale"],
                             r["exposure_stops"] or 0))
         npop = sum(1 for r in sheet_report if r["populated"])
         nband = sum(1 for r in sheet_report if r["occ_in_band"])
