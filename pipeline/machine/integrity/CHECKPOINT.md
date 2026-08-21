@@ -65,8 +65,21 @@ was therefore a check that could never fire -- WITHDRAWN and re-rendered.
 Also fixed in the same instrument: the control's own lit/dark threshold was guessed at
 0.5 while a lit frame measures 0.447, so the control reported "culling is broken" on a
 working culler. Threshold now calibrated against the measured lit reference.
-- [ ] Stage 3 — body geometry
-- [~] Stage 4 — glazing MEASURED (evidence/glass_audit_before.json)
+- [~] Stage 3 — INSPECTED + partially repaired.
+    Inspected in neutral CLAY (albedo off) with a PROVEN culling pair, plus matID.
+    REPAIRED: inverted normals on CLOSED components (4,280 faces flipped across
+      6 objects). Measured ON THE EXPORTED FILE, not the scene: inverted faces
+      2,418 -> 154 (93.6% down). Interior 2,380 -> 136. Arch_Liner 6 -> 18,
+      a small REGRESSION from export re-welding — stated, not hidden.
+      The in-scene number said 0; THE FILE SAYS 154. The file governs.
+    REPAIRED: loose vertices 1 -> 0 (R3 itself was a NO-OP; the vertex was
+      already dropped by the Stage-2 export. Reported NOT EFFECTIVE.)
+    NOT REPAIRED, deliberately: 320,830 boundary edges / 40,398 open components.
+      These are the body's own torn edges (rear quarters, lamp band, bumper lip,
+      visible in renders/rear_before/). An area-tuned purge has already eaten
+      real window surround and holed a shell in this project. Reported as an
+      open defect for component reconstruction.
+- [~] Stage 4 — glazing MEASURED (NOT fully repaired) (evidence/glass_audit_before.json)
     total surface 91.7446 m2 | glass 2.9594 m2 = 3.226% (catalogue band 1.0-13.0%, p10 2.62)
     Windscreen 0.98944 | Side_L 0.79029 | Side_R 0.76708 | Backlight 0.38770
     Quarter_L 0.01296 | Glass_Rear 0.01189
@@ -84,8 +97,30 @@ working culler. Threshold now calibrated against the measured lit reference.
       band (z 0.815-1.338, full car length). Named as a deliberate glass->body
       revert. Plausibly pillars/surrounds; FLAGGED for the eye, not asserted.
     * PER-DOOR separation: Side_L is ONE node (30 components) spanning both doors.
-- [ ] Stage 5 — interior containment
-- [ ] Stage 6 — rear quarter
+- [x] Stage 5 — MEASURED.
+    INVENTORY COMPLETE, 23/23 required nodes present and named: dashboard,
+    steering wheel (rim+spokes+hub+column), front seats, rear bench, 4 headrests,
+    centre console+tunnel, door cards L/R, floor+boot floor+headliner+parcel shelf.
+    Nothing was created to pad this list.
+    CONTAINMENT FAILURE FOUND: interior geometry PENETRATES GLAZING in 6 places —
+      Cabin_ParcelShelf/Glass_Side_R 152 face pairs, Cabin_BenchBack/Glass_Side_R 133,
+      Cabin_SeatFP_BolA/Glass_Side_R 129, Cabin_Headliner/Glass_Windscreen 50,
+      Cabin_SeatFD_BolB/Glass_Side_L 23, Glass_Quarter_L/Interior 13.
+      IDENTIFIED, NOT REPAIRED (moving interior parts is component construction).
+    Arch_Liner is the only thing below z=0 (-4.587 mm); all four tyres at 0.000.
+    Interior/body-shell contact (2,568 pairs) is a fitted cabin touching its shell,
+      not a defect on its own.
+- [x] Stage 6 — ARTIFACT IDENTIFIED BY OBJECT INSPECTION, and REMOVED.
+    The artifact on/through the rear window is the node **Glass_Rear**:
+      187 triangles in 25 DISCONNECTED components, 0.011892 m2 total,
+      mean 4.757 cm2 per fragment, ZERO intersecting face pairs with
+      Glass_Backlight (which is 1 clean component of 14,208 tris).
+      Isolate render renders/rear_glass_iso/ shows one cluster floating in
+      MID-AIR below the pane and another above its top edge.
+    It is floating debris, not a pane, not a reflection card, not material
+      corruption, and not a mispositioned node. REMOVED (mesh_objects 83 -> 82).
+    Rear-quarter/C-pillar/hatch/bumper ragged fringes: INSPECTED, NOT repaired
+      (see Stage 3 — deleting torn edges holes the shell).
 
 ## OPEN FINDINGS HANDED OVER BY STAGE 0 — BOTH RESOLVED
 1. TRIANGLE DELTA 928 = 4 index-degenerate + 924 DUPLICATE VERTEX-TRIPLES.
