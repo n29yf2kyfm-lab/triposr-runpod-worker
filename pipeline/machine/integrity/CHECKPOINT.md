@@ -7,7 +7,30 @@ Bucket prefix: car-meshes/staging/integrity/
 ## STATUS
 - [x] Stage 0 (coordinator) — validator 0 err / 0 warn / 1 info / 273 hints. 83 nodes, 107 prims, 22 mats.
 - [x] Stage 1 — DONE. evidence/integrity_before.json (83 objects, 12 s). 10/10 negative controls fire.
-- [ ] Stage 2 — wheel inconsistency
+- [~] Stage 2 — DIAGNOSED. Repair pending.
+
+### STAGE 2 ROOT CAUSE (measured + rendered, not inferred)
+The four wheels are FOUR DIFFERENT MESHES of two different qualities:
+  RIGHT side (-Y): Wheel_FR_*, Wheel_RR_*  -> clean 10-SPOKE ALLOYS
+  LEFT  side (+Y): Wheel_FL_*, Wheel_RL_*  -> TORN MELT, no spokes, large ragged holes
+Renders: renders/corner_{FL,FR,RL,RR}/, renders/wheels_before/.
+RULED OUT, each with a measurement:
+  * negative scale / mirroring - 0 objects, 0 mirrored determinants (Stage 0 + Stage 1)
+  * inverted normals          - rims report 0 inverted components
+  * backface culling          - cullON vs cullOFF moves mean sRGB by <0.1; nothing vanishes
+  * missing materials         - all four rims carry Rim_Alloy, 0 empty material slots
+  * intersecting tyre/rim     - present but not the mechanism; the faces are ABSENT under cullOFF
+CONFIRMED CAUSE: defective SOURCE GEOMETRY on the left pair. Not a transform, not a
+material, not a render artefact.
+
+### INSTRUMENT DEFECT FOUND AND WITHDRAWN
+`material.use_backface_culling` DOES NOTHING IN CYCLES. test_culling.py: all four
+cells 0.44696 with the flag; the shader Geometry->Backfacing + Transparent mix gives
+0.00033 for the culled cell. My FIRST wheels cull-pair was rendered off that flag and
+was therefore a check that could never fire -- WITHDRAWN and re-rendered.
+Also fixed in the same instrument: the control's own lit/dark threshold was guessed at
+0.5 while a lit frame measures 0.447, so the control reported "culling is broken" on a
+working culler. Threshold now calibrated against the measured lit reference.
 - [ ] Stage 3 — body geometry
 - [ ] Stage 4 — glass / apertures
 - [ ] Stage 5 — interior containment
