@@ -138,7 +138,15 @@ if [ "$TA" != "$TORCH_PIN" ]; then
   pip install -q torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cu124 2>&1 | tail -3
 fi
 python3 -c "import torch;assert torch.cuda.is_available();print('cuda ok',torch.__version__)" || die TORCH_CLOBBERED
-python3 -c "import udf_ext; print('udf_ext ok')" || die UDF_EXT
+# IMPORT TORCH FIRST. udf_ext is a torch CUDA extension and links against libc10.so,
+# which is only on the loader path once torch has been imported. Checking it bare gives
+# "ImportError: libc10.so: cannot open shared object file" on a PERFECTLY GOOD BUILD —
+# which is exactly what killed run 1 at 39 minutes, with every real dependency in place.
+# The library's own call site (direct3d_s2/utils/mesh.py) imports torch first; a
+# preflight that does not mirror the real import order is testing something else.
+# This is the documented "a safety check that is itself wrong costs exactly as much as
+# no safety check" failure, reproduced. Mirror the real import order.
+python3 -c "import torch, udf_ext; print('udf_ext ok')" || die UDF_EXT
 
 stage import_check
 # Import the REAL module the way the real script does, before spending on weights.
@@ -220,6 +228,19 @@ for tag in tags:
         mesh.export(op)
         print(f'DONE {tag} {dt:.1f}s verts={len(mesh.vertices)} faces={len(mesh.faces)} '
               f'-> {op} {os.path.getsize(op)}', flush=True)
+        # UPLOAD THE MOMENT IT EXISTS, not in a later stage. Run 1's meshes would have
+        # been uploaded only by `collect`, so a fuse firing during a second inference
+        # would have destroyed the first car's result too. Upload as it lands.
+        import subprocess as _sp
+        sb = os.environ.get('SB_HOST', 'https://tfkvthprsntexrcuqpyd.supabase.co') \
+             + '/storage/v1/object/' + os.environ.get('D3D_PRE', 'car-meshes/staging/direct3d')
+        k = os.environ.get('SB_KEY', '')
+        rc = _sp.run(['curl', '-s', '-o', '/dev/null', '-w', '%{http_code}',
+                      '-X', 'POST', '-H', f'apikey: {k}', '-H', f'Authorization: Bearer {k}',
+                      '-H', 'x-upsert: true', '-H', 'Content-Type: application/octet-stream',
+                      '--data-binary', f'@{op}', f'{sb}/out_{tag}.glb'],
+                     capture_output=True, text=True)
+        print(f'IMMEDIATE_UPLOAD {tag} -> HTTP {rc.stdout}', flush=True)
     except Exception:
         traceback.print_exc()
         print(f'INFER_FAILED {tag}', flush=True)
