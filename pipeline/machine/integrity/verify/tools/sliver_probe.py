@@ -1,23 +1,4 @@
 #!/usr/bin/env python3
-# ============================== SUPERSEDED ==================================
-# This file is kept ONLY as a record of two refuted hypotheses.  Its printed
-# verdict ("PARTIAL / NOT EXPLAINED - real geometry may be missing") is
-# WITHDRAWN and must not be quoted.
-#
-#   sliver_probe.py  tested "three corner POSITIONS not all distinct".
-#                    REFUTED: holds for 0 of 18 objects; 4 of 928.
-#   sliver_probe2.py tested duplicate POSITION triples, counted PER MESH.
-#                    WRONG TWICE OVER: glTF indices are LOCAL to a primitive's
-#                    own POSITION accessor, so a per-mesh count is invalid; and
-#                    Blender does not weld by position at all (ledger L1 proves
-#                    it: Blender's vertex count equals the index-REFERENCED
-#                    position count exactly).  It returned 1005 against a true
-#                    924 and was superseded before being reported.
-#
-# THE CORRECT PREDICATE, and the live one, is in delta_account.py: extras
-# beyond the first, counted PER PRIMITIVE, on sorted INDEX triples.
-#   924 duplicate index triples + 4 index-degenerate = 928 = the exact delta.
-# ============================================================================
 """
 Explain the file-vs-Blender triangle delta, per object, from first principles.
 

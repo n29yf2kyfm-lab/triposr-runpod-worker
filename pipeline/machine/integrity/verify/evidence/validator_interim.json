@@ -1,0 +1,44 @@
+{
+  "uri": "car_wheels_fixed.glb",
+  "mimeType": "model/gltf-binary",
+  "validatorVersion": "2.0.0-dev.3.10",
+  "validatedAt": "2026-08-21T19:49:32.694Z",
+  "issues": {
+    "numErrors": 0,
+    "numWarnings": 0,
+    "numInfos": 0,
+    "numHints": 0,
+    "messages": [],
+    "truncated": false
+  },
+  "info": {
+    "version": "2.0",
+    "generator": "Khronos glTF Blender I/O v4.5.51",
+    "extensionsUsed": [
+      "KHR_materials_clearcoat",
+      "KHR_materials_transmission",
+      "KHR_materials_ior"
+    ],
+    "resources": [
+      {
+        "pointer": "/buffers/0",
+        "mimeType": "application/gltf-buffer",
+        "storage": "glb",
+        "byteLength": 20016908
+      }
+    ],
+    "animationCount": 0,
+    "materialCount": 22,
+    "hasMorphTargets": false,
+    "hasSkins": false,
+    "hasTextures": false,
+    "hasDefaultScene": true,
+    "drawCallCount": 98,
+    "totalVertexCount": 557307,
+    "totalTriangleCount": 786276,
+    "maxUVs": 0,
+    "maxInfluences": 0,
+    "maxAttributes": 2
+  },
+  "validatorPackageVersion": "2.0.0-dev.3.10"
+}

@@ -1,0 +1,50 @@
+{
+ "dir": "renders/before_faceorient",
+ "views": {
+  "CAM_FRONT": {
+   "backfacing_px": 956,
+   "frontfacing_px": 121407,
+   "back_over_front": 0.00787
+  },
+  "CAM_FRONT_LEFT_34": {
+   "backfacing_px": 1985,
+   "frontfacing_px": 196843,
+   "back_over_front": 0.01008
+  },
+  "CAM_FRONT_RIGHT_34": {
+   "backfacing_px": 5677,
+   "frontfacing_px": 186840,
+   "back_over_front": 0.03038
+  },
+  "CAM_LEFT": {
+   "backfacing_px": 1915,
+   "frontfacing_px": 218121,
+   "back_over_front": 0.00878
+  },
+  "CAM_REAR": {
+   "backfacing_px": 2539,
+   "frontfacing_px": 115307,
+   "back_over_front": 0.02202
+  },
+  "CAM_REAR_LEFT_34": {
+   "backfacing_px": 2331,
+   "frontfacing_px": 194079,
+   "back_over_front": 0.01201
+  },
+  "CAM_REAR_RIGHT_34": {
+   "backfacing_px": 8170,
+   "frontfacing_px": 184252,
+   "back_over_front": 0.04434
+  },
+  "CAM_RIGHT": {
+   "backfacing_px": 8144,
+   "frontfacing_px": 203571,
+   "back_over_front": 0.04001
+  }
+ },
+ "total_back_over_front": 0.02233,
+ "mean_left_side_views": 0.01029,
+ "mean_right_side_views": 0.03824,
+ "left_right_asymmetry_ratio": 3.7166,
+ "NOTE": "backfacing pixels mean the camera is seeing the reverse of a surface: either inverted winding, or the inside of the part through a gap.  Which of the two it is needs the cull-ON sheet."
+}

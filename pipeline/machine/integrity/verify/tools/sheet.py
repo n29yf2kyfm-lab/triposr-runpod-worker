@@ -57,10 +57,22 @@ for i, n in enumerate(names):
     dr.text((x + 8, y + TH + 4), n, font=F, fill=(255, 235, 160))
     m = rep.get(n, {})
     if m:
-        s = ('fill %.3f   silh %.4f   clip %.6f   bg %.1f'
-             % (m.get('frame_fill_max_dim', 0), m.get('silhouette_pixel_fraction', 0),
-                m.get('clipped_fraction_ge_254', 0), m.get('background_srgb8_top_band', 0)))
-        col = (150, 230, 150) if m.get('POPULATED') else (255, 90, 90)
+        # Only print the mask-derived numbers when a mask was actually rendered.
+        # The first version printed "fill 0.000  silh 0.0000" on every tile of a
+        # --nomask sheet, i.e. a caption stating the tile was empty underneath a
+        # tile that plainly was not. A wrong number on an evidence sheet is worse
+        # than no number.
+        if 'silhouette_pixel_fraction' in m:
+            s = ('fill %.3f   silh %.4f   clip %.6f   bg %.1f'
+                 % (m.get('frame_fill_max_dim', 0), m['silhouette_pixel_fraction'],
+                    m.get('clipped_fraction_ge_254', 0),
+                    m.get('background_srgb8_top_band', 0)))
+            col = (150, 230, 150) if m.get('POPULATED') else (255, 90, 90)
+        else:
+            s = ('mask not rendered   clip %.6f   bg %.1f'
+                 % (m.get('clipped_fraction_ge_254', 0),
+                    m.get('background_srgb8_top_band', 0)))
+            col = (185, 185, 195)
         dr.text((x + 8, y + TH + 25), s, font=Fs, fill=col)
 sheet.save(OUT, quality=92)
 print('wrote %s  %dx%d  %d tiles' % (OUT, W, H, len(names)))

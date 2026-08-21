@@ -1,0 +1,125 @@
+{
+ "A_neutral_dir": "renders/before_neutral",
+ "B_original_dir": "renders/before_original",
+ "views": 8,
+ "min_silhouette_IoU": 1.0,
+ "GEOMETRY_UNCHANGED_BY_MATERIALS": true,
+ "min_edge_ratio_whole_frame": 0.813,
+ "min_worst_local_tile_ratio": 0.0583,
+ "NEUTRAL_SET_CONCEALS_NOTHING": false,
+ "threshold_note": "whole-frame edge ratio >= 0.80 and worst local tile >= 0.50. A ratio ABOVE 1.0 means the neutral set reveals MORE, which is the intended direction.",
+ "rows": [
+  {
+   "view": "CAM_FRONT",
+   "silhouette_IoU_neutral_vs_original": 1.0,
+   "edge_energy_neutral": 4.6638,
+   "edge_energy_original": 5.2618,
+   "edge_ratio_neutral_over_original": 0.8864,
+   "worst_local_tile_ratio": 0.4133,
+   "worst_tile_rowcol": [
+    3,
+    8
+   ],
+   "mean_srgb8_neutral": 73.49,
+   "mean_srgb8_original": 65.36
+  },
+  {
+   "view": "CAM_FRONT_LEFT_34",
+   "silhouette_IoU_neutral_vs_original": 1.0,
+   "edge_energy_neutral": 3.9581,
+   "edge_energy_original": 4.8683,
+   "edge_ratio_neutral_over_original": 0.813,
+   "worst_local_tile_ratio": 0.0632,
+   "worst_tile_rowcol": [
+    3,
+    7
+   ],
+   "mean_srgb8_neutral": 69.94,
+   "mean_srgb8_original": 66.61
+  },
+  {
+   "view": "CAM_FRONT_RIGHT_34",
+   "silhouette_IoU_neutral_vs_original": 1.0,
+   "edge_energy_neutral": 3.7838,
+   "edge_energy_original": 4.6306,
+   "edge_ratio_neutral_over_original": 0.8171,
+   "worst_local_tile_ratio": 0.0583,
+   "worst_tile_rowcol": [
+    3,
+    8
+   ],
+   "mean_srgb8_neutral": 62.92,
+   "mean_srgb8_original": 59.34
+  },
+  {
+   "view": "CAM_LEFT",
+   "silhouette_IoU_neutral_vs_original": 1.0,
+   "edge_energy_neutral": 3.4168,
+   "edge_energy_original": 4.0688,
+   "edge_ratio_neutral_over_original": 0.8397,
+   "worst_local_tile_ratio": 0.0767,
+   "worst_tile_rowcol": [
+    3,
+    8
+   ],
+   "mean_srgb8_neutral": 69.26,
+   "mean_srgb8_original": 64.4
+  },
+  {
+   "view": "CAM_REAR",
+   "silhouette_IoU_neutral_vs_original": 1.0,
+   "edge_energy_neutral": 3.4444,
+   "edge_energy_original": 4.0289,
+   "edge_ratio_neutral_over_original": 0.8549,
+   "worst_local_tile_ratio": 0.5404,
+   "worst_tile_rowcol": [
+    4,
+    8
+   ],
+   "mean_srgb8_neutral": 83.93,
+   "mean_srgb8_original": 63.71
+  },
+  {
+   "view": "CAM_REAR_LEFT_34",
+   "silhouette_IoU_neutral_vs_original": 1.0,
+   "edge_energy_neutral": 3.34,
+   "edge_energy_original": 3.7706,
+   "edge_ratio_neutral_over_original": 0.8858,
+   "worst_local_tile_ratio": 0.0847,
+   "worst_tile_rowcol": [
+    3,
+    9
+   ],
+   "mean_srgb8_neutral": 74.48,
+   "mean_srgb8_original": 65.66
+  },
+  {
+   "view": "CAM_REAR_RIGHT_34",
+   "silhouette_IoU_neutral_vs_original": 1.0,
+   "edge_energy_neutral": 3.1721,
+   "edge_energy_original": 3.6525,
+   "edge_ratio_neutral_over_original": 0.8685,
+   "worst_local_tile_ratio": 0.3638,
+   "worst_tile_rowcol": [
+    4,
+    6
+   ],
+   "mean_srgb8_neutral": 67.62,
+   "mean_srgb8_original": 59.94
+  },
+  {
+   "view": "CAM_RIGHT",
+   "silhouette_IoU_neutral_vs_original": 1.0,
+   "edge_energy_neutral": 3.1731,
+   "edge_energy_original": 3.778,
+   "edge_ratio_neutral_over_original": 0.8399,
+   "worst_local_tile_ratio": 0.0964,
+   "worst_tile_rowcol": [
+    3,
+    7
+   ],
+   "mean_srgb8_neutral": 59.15,
+   "mean_srgb8_original": 55.89
+  }
+ ]
+}

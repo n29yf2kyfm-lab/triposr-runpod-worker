@@ -1,0 +1,864 @@
+{
+ "file": "GOLF_ALL_GATES_SOURCE.glb",
+ "objects": 83,
+ "objects_with_negative_signed_volume": [
+  "Wheel_RL_Disc",
+  "Wheel_FR_Disc",
+  "Underbody",
+  "Interior",
+  "Glass_Rear",
+  "Bumper_Rear_Trim",
+  "Bumper_Rear_Paint",
+  "Bumper_Front_Paint",
+  "Arch_Liner",
+  "Hatch_Inner",
+  "Bumper_Rear_Inner",
+  "Cabin_DoorCard_R",
+  "Cabin_DoorCard_L"
+ ],
+ "n_negative_signed_volume": 13,
+ "objects_with_majority_inward_area": [
+  "Underbody",
+  "Interior",
+  "Glass_Rear",
+  "Glass_Quarter_L",
+  "Arch_Liner",
+  "Hatch_Inner",
+  "Bumper_Rear_Inner",
+  "Cabin_DoorCard_R"
+ ],
+ "total_inward_facing_area_m2": 32.637867,
+ "total_area_m2": 71.464614,
+ "rows": [
+  {
+   "node": 22,
+   "name": "Glass_Quarter_L",
+   "triangles": 362,
+   "signed_volume_m3": 1.0841e-05,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.13812,
+   "outward_area_fraction": 0.08823,
+   "inward_area_m2": 0.01182
+  },
+  {
+   "node": 21,
+   "name": "Glass_Rear",
+   "triangles": 187,
+   "signed_volume_m3": -0.005987197,
+   "winding_by_volume": "INVERTED",
+   "outward_face_fraction": 0.13904,
+   "outward_area_fraction": 0.10401,
+   "inward_area_m2": 0.010655
+  },
+  {
+   "node": 52,
+   "name": "Bumper_Rear_Inner",
+   "triangles": 34180,
+   "signed_volume_m3": -0.406481881,
+   "winding_by_volume": "INVERTED",
+   "outward_face_fraction": 0.06208,
+   "outward_area_fraction": 0.16329,
+   "inward_area_m2": 0.822408
+  },
+  {
+   "node": 17,
+   "name": "Interior",
+   "triangles": 165537,
+   "signed_volume_m3": -1.319369958,
+   "winding_by_volume": "INVERTED",
+   "outward_face_fraction": 0.33308,
+   "outward_area_fraction": 0.25702,
+   "inward_area_m2": 5.87589
+  },
+  {
+   "node": 50,
+   "name": "Hatch_Inner",
+   "triangles": 22740,
+   "signed_volume_m3": -0.41720172,
+   "winding_by_volume": "INVERTED",
+   "outward_face_fraction": 0.29771,
+   "outward_area_fraction": 0.29682,
+   "inward_area_m2": 0.649436
+  },
+  {
+   "node": 28,
+   "name": "Arch_Liner",
+   "triangles": 99470,
+   "signed_volume_m3": -0.286263943,
+   "winding_by_volume": "INVERTED",
+   "outward_face_fraction": 0.39701,
+   "outward_area_fraction": 0.35558,
+   "inward_area_m2": 4.244296
+  },
+  {
+   "node": 12,
+   "name": "Underbody",
+   "triangles": 28526,
+   "signed_volume_m3": -0.044300549,
+   "winding_by_volume": "INVERTED",
+   "outward_face_fraction": 0.38309,
+   "outward_area_fraction": 0.41906,
+   "inward_area_m2": 0.645853
+  },
+  {
+   "node": 80,
+   "name": "Cabin_DoorCard_R",
+   "triangles": 400,
+   "signed_volume_m3": -0.012914885,
+   "winding_by_volume": "INVERTED",
+   "outward_face_fraction": 0.495,
+   "outward_area_fraction": 0.49366,
+   "inward_area_m2": 1.832081
+  },
+  {
+   "node": 81,
+   "name": "Cabin_DoorCard_L",
+   "triangles": 400,
+   "signed_volume_m3": -0.012914858,
+   "winding_by_volume": "INVERTED",
+   "outward_face_fraction": 0.5,
+   "outward_area_fraction": 0.5,
+   "inward_area_m2": 1.783548
+  },
+  {
+   "node": 27,
+   "name": "Body_Glass_Reverted",
+   "triangles": 10118,
+   "signed_volume_m3": 0.050029652,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.58421,
+   "outward_area_fraction": 0.51623,
+   "inward_area_m2": 0.159201
+  },
+  {
+   "node": 20,
+   "name": "Glass_Side_L",
+   "triangles": 9468,
+   "signed_volume_m3": 0.023157547,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.52609,
+   "outward_area_fraction": 0.5176,
+   "inward_area_m2": 0.381241
+  },
+  {
+   "node": 82,
+   "name": "Cabin_Headliner",
+   "triangles": 1868,
+   "signed_volume_m3": 0.035725392,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.54711,
+   "outward_area_fraction": 0.5199,
+   "inward_area_m2": 1.640644
+  },
+  {
+   "node": 30,
+   "name": "Bumper_Front",
+   "triangles": 6024,
+   "signed_volume_m3": 0.0038072,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.51992,
+   "outward_area_fraction": 0.53011,
+   "inward_area_m2": 0.379255
+  },
+  {
+   "node": 38,
+   "name": "DRL_Blade",
+   "triangles": 1596,
+   "signed_volume_m3": 6.1544e-05,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.53822,
+   "outward_area_fraction": 0.53112,
+   "inward_area_m2": 0.020401
+  },
+  {
+   "node": 59,
+   "name": "Cabin_Wheel",
+   "triangles": 960,
+   "signed_volume_m3": 0.001306274,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.5,
+   "outward_area_fraction": 0.53316,
+   "inward_area_m2": 0.064853
+  },
+  {
+   "node": 29,
+   "name": "Valance_Front",
+   "triangles": 2396,
+   "signed_volume_m3": 0.003038104,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.55676,
+   "outward_area_fraction": 0.53547,
+   "inward_area_m2": 0.335106
+  },
+  {
+   "node": 43,
+   "name": "Plate",
+   "triangles": 436,
+   "signed_volume_m3": 0.00023088,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.63303,
+   "outward_area_fraction": 0.54085,
+   "inward_area_m2": 0.06106
+  },
+  {
+   "node": 23,
+   "name": "Bumper_Rear_Trim",
+   "triangles": 2378,
+   "signed_volume_m3": -0.004036945,
+   "winding_by_volume": "INVERTED",
+   "outward_face_fraction": 0.54079,
+   "outward_area_fraction": 0.54632,
+   "inward_area_m2": 0.053147
+  },
+  {
+   "node": 24,
+   "name": "Bumper_Rear_Paint",
+   "triangles": 33485,
+   "signed_volume_m3": -0.000195957,
+   "winding_by_volume": "INVERTED",
+   "outward_face_fraction": 0.52824,
+   "outward_area_fraction": 0.54679,
+   "inward_area_m2": 1.084371
+  },
+  {
+   "node": 19,
+   "name": "Glass_Side_R",
+   "triangles": 8673,
+   "signed_volume_m3": 0.013772862,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.54537,
+   "outward_area_fraction": 0.54907,
+   "inward_area_m2": 0.345897
+  },
+  {
+   "node": 8,
+   "name": "Wheel_FR_Disc",
+   "triangles": 2616,
+   "signed_volume_m3": -0.004659842,
+   "winding_by_volume": "INVERTED",
+   "outward_face_fraction": 0.58601,
+   "outward_area_fraction": 0.56092,
+   "inward_area_m2": 0.062897
+  },
+  {
+   "node": 44,
+   "name": "Intake_R",
+   "triangles": 788,
+   "signed_volume_m3": 0.000292291,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.60279,
+   "outward_area_fraction": 0.56967,
+   "inward_area_m2": 0.036059
+  },
+  {
+   "node": 45,
+   "name": "Intake_L",
+   "triangles": 788,
+   "signed_volume_m3": 0.000292291,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.60279,
+   "outward_area_fraction": 0.56967,
+   "inward_area_m2": 0.036059
+  },
+  {
+   "node": 41,
+   "name": "Grille_Lower",
+   "triangles": 8416,
+   "signed_volume_m3": 0.001908791,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.56523,
+   "outward_area_fraction": 0.57601,
+   "inward_area_m2": 0.249065
+  },
+  {
+   "node": 18,
+   "name": "Glass_Windscreen",
+   "triangles": 8781,
+   "signed_volume_m3": 0.259347031,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.52955,
+   "outward_area_fraction": 0.5784,
+   "inward_area_m2": 0.417149
+  },
+  {
+   "node": 48,
+   "name": "TowEye_Cover",
+   "triangles": 640,
+   "signed_volume_m3": 1.6895e-05,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.56875,
+   "outward_area_fraction": 0.58182,
+   "inward_area_m2": 0.003207
+  },
+  {
+   "node": 25,
+   "name": "Bumper_Front_Paint",
+   "triangles": 25064,
+   "signed_volume_m3": -0.034001607,
+   "winding_by_volume": "INVERTED",
+   "outward_face_fraction": 0.59264,
+   "outward_area_fraction": 0.5925,
+   "inward_area_m2": 0.911834
+  },
+  {
+   "node": 5,
+   "name": "Wheel_RL_Disc",
+   "triangles": 1658,
+   "signed_volume_m3": -0.004202687,
+   "winding_by_volume": "INVERTED",
+   "outward_face_fraction": 0.61098,
+   "outward_area_fraction": 0.60531,
+   "inward_area_m2": 0.068864
+  },
+  {
+   "node": 16,
+   "name": "Mirror_L",
+   "triangles": 1462,
+   "signed_volume_m3": 0.000199671,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.52804,
+   "outward_area_fraction": 0.60979,
+   "inward_area_m2": 0.029468
+  },
+  {
+   "node": 46,
+   "name": "Intake_R_Blades",
+   "triangles": 324,
+   "signed_volume_m3": 3.0555e-05,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.63889,
+   "outward_area_fraction": 0.622,
+   "inward_area_m2": 0.006546
+  },
+  {
+   "node": 47,
+   "name": "Intake_L_Blades",
+   "triangles": 324,
+   "signed_volume_m3": 3.0555e-05,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.63889,
+   "outward_area_fraction": 0.622,
+   "inward_area_m2": 0.006546
+  },
+  {
+   "node": 31,
+   "name": "Grille_Upper",
+   "triangles": 2796,
+   "signed_volume_m3": 0.000477461,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.65165,
+   "outward_area_fraction": 0.62304,
+   "inward_area_m2": 0.074023
+  },
+  {
+   "node": 11,
+   "name": "Wheel_FL_Disc",
+   "triangles": 3247,
+   "signed_volume_m3": 0.001508149,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.61595,
+   "outward_area_fraction": 0.63503,
+   "inward_area_m2": 0.068112
+  },
+  {
+   "node": 26,
+   "name": "Body_Shell",
+   "triangles": 177954,
+   "signed_volume_m3": 1.603511924,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.66058,
+   "outward_area_fraction": 0.64246,
+   "inward_area_m2": 7.304965
+  },
+  {
+   "node": 34,
+   "name": "Headlamp_R_Internal",
+   "triangles": 1404,
+   "signed_volume_m3": 9.3424e-05,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.66097,
+   "outward_area_fraction": 0.65691,
+   "inward_area_m2": 0.007181
+  },
+  {
+   "node": 37,
+   "name": "Headlamp_L_Internal",
+   "triangles": 1404,
+   "signed_volume_m3": 9.3424e-05,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.66097,
+   "outward_area_fraction": 0.65691,
+   "inward_area_m2": 0.007181
+  },
+  {
+   "node": 2,
+   "name": "Wheel_RR_Disc",
+   "triangles": 1546,
+   "signed_volume_m3": 0.000802823,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.663,
+   "outward_area_fraction": 0.66535,
+   "inward_area_m2": 0.047214
+  },
+  {
+   "node": 42,
+   "name": "Plate_Carrier",
+   "triangles": 1196,
+   "signed_volume_m3": 0.000801,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.69231,
+   "outward_area_fraction": 0.66809,
+   "inward_area_m2": 0.056015
+  },
+  {
+   "node": 6,
+   "name": "Wheel_FR_Tyre",
+   "triangles": 9176,
+   "signed_volume_m3": 0.035418499,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.67066,
+   "outward_area_fraction": 0.67783,
+   "inward_area_m2": 0.305479
+  },
+  {
+   "node": 9,
+   "name": "Wheel_FL_Tyre",
+   "triangles": 9264,
+   "signed_volume_m3": 0.036496235,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.67465,
+   "outward_area_fraction": 0.68585,
+   "inward_area_m2": 0.280819
+  },
+  {
+   "node": 10,
+   "name": "Wheel_FL_Rim",
+   "triangles": 20217,
+   "signed_volume_m3": 0.027740015,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.68764,
+   "outward_area_fraction": 0.68778,
+   "inward_area_m2": 0.266475
+  },
+  {
+   "node": 1,
+   "name": "Wheel_RR_Rim",
+   "triangles": 20842,
+   "signed_volume_m3": 0.011575579,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.70977,
+   "outward_area_fraction": 0.68875,
+   "inward_area_m2": 0.235827
+  },
+  {
+   "node": 0,
+   "name": "Wheel_RR_Tyre",
+   "triangles": 12591,
+   "signed_volume_m3": 0.06884972,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.6754,
+   "outward_area_fraction": 0.69019,
+   "inward_area_m2": 0.326865
+  },
+  {
+   "node": 7,
+   "name": "Wheel_FR_Rim",
+   "triangles": 24543,
+   "signed_volume_m3": 0.035340616,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.7187,
+   "outward_area_fraction": 0.69554,
+   "inward_area_m2": 0.286247
+  },
+  {
+   "node": 4,
+   "name": "Wheel_RL_Rim",
+   "triangles": 18458,
+   "signed_volume_m3": 0.023581739,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.70186,
+   "outward_area_fraction": 0.69772,
+   "inward_area_m2": 0.22681
+  },
+  {
+   "node": 3,
+   "name": "Wheel_RL_Tyre",
+   "triangles": 13842,
+   "signed_volume_m3": 0.027211449,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.66132,
+   "outward_area_fraction": 0.70531,
+   "inward_area_m2": 0.303793
+  },
+  {
+   "node": 32,
+   "name": "Headlamp_R_Lens",
+   "triangles": 1436,
+   "signed_volume_m3": 0.000176554,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.66643,
+   "outward_area_fraction": 0.7251,
+   "inward_area_m2": 0.011414
+  },
+  {
+   "node": 35,
+   "name": "Headlamp_L_Lens",
+   "triangles": 1436,
+   "signed_volume_m3": 0.000176554,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.66643,
+   "outward_area_fraction": 0.7251,
+   "inward_area_m2": 0.011414
+  },
+  {
+   "node": 78,
+   "name": "Cabin_ParcelShelf",
+   "triangles": 476,
+   "signed_volume_m3": 0.021889346,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.81513,
+   "outward_area_fraction": 0.78999,
+   "inward_area_m2": 0.389297
+  },
+  {
+   "node": 15,
+   "name": "Mirror_R",
+   "triangles": 561,
+   "signed_volume_m3": 0.002850138,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.79323,
+   "outward_area_fraction": 0.82937,
+   "inward_area_m2": 0.005798
+  },
+  {
+   "node": 49,
+   "name": "Hatch",
+   "triangles": 20928,
+   "signed_volume_m3": 0.427249491,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.80662,
+   "outward_area_fraction": 0.84216,
+   "inward_area_m2": 0.111494
+  },
+  {
+   "node": 39,
+   "name": "Badge",
+   "triangles": 1536,
+   "signed_volume_m3": 0.00022063,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.89062,
+   "outward_area_fraction": 0.85019,
+   "inward_area_m2": 0.006215
+  },
+  {
+   "node": 14,
+   "name": "TailLamp_L",
+   "triangles": 1153,
+   "signed_volume_m3": 0.033468511,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.83608,
+   "outward_area_fraction": 0.89574,
+   "inward_area_m2": 0.007562
+  },
+  {
+   "node": 13,
+   "name": "TailLamp_R",
+   "triangles": 1144,
+   "signed_volume_m3": 0.042589516,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.86801,
+   "outward_area_fraction": 0.90662,
+   "inward_area_m2": 0.008773
+  },
+  {
+   "node": 33,
+   "name": "Headlamp_R_Housing",
+   "triangles": 1556,
+   "signed_volume_m3": 0.001173119,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.88046,
+   "outward_area_fraction": 0.91066,
+   "inward_area_m2": 0.008277
+  },
+  {
+   "node": 36,
+   "name": "Headlamp_L_Housing",
+   "triangles": 1556,
+   "signed_volume_m3": 0.001173119,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.88046,
+   "outward_area_fraction": 0.91066,
+   "inward_area_m2": 0.008277
+  },
+  {
+   "node": 54,
+   "name": "Glass_Backlight",
+   "triangles": 14208,
+   "signed_volume_m3": 0.258016346,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.88774,
+   "outward_area_fraction": 0.9162,
+   "inward_area_m2": 0.032487
+  },
+  {
+   "node": 61,
+   "name": "Cabin_Spokes",
+   "triangles": 1188,
+   "signed_volume_m3": 0.00023532,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.91414,
+   "outward_area_fraction": 0.97079,
+   "inward_area_m2": 0.001167
+  },
+  {
+   "node": 51,
+   "name": "Bumper_Rear",
+   "triangles": 33000,
+   "signed_volume_m3": 0.420550749,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 0.99176,
+   "outward_area_fraction": 0.98728,
+   "inward_area_m2": 0.009829
+  },
+  {
+   "node": 40,
+   "name": "Badge_Mount",
+   "triangles": 640,
+   "signed_volume_m3": 0.000109977,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 1.0,
+   "outward_area_fraction": 1.0,
+   "inward_area_m2": 0.0
+  },
+  {
+   "node": 53,
+   "name": "Plate_Rear",
+   "triangles": 512,
+   "signed_volume_m3": 0.036420798,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 1.0,
+   "outward_area_fraction": 1.0,
+   "inward_area_m2": 0.0
+  },
+  {
+   "node": 55,
+   "name": "Cabin_Floor",
+   "triangles": 860,
+   "signed_volume_m3": 0.082620005,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 1.0,
+   "outward_area_fraction": 1.0,
+   "inward_area_m2": 0.0
+  },
+  {
+   "node": 56,
+   "name": "Cabin_Tunnel",
+   "triangles": 396,
+   "signed_volume_m3": 0.04898765,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 1.0,
+   "outward_area_fraction": 1.0,
+   "inward_area_m2": 0.0
+  },
+  {
+   "node": 57,
+   "name": "Cabin_Dash",
+   "triangles": 572,
+   "signed_volume_m3": 0.081395581,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 1.0,
+   "outward_area_fraction": 1.0,
+   "inward_area_m2": 0.0
+  },
+  {
+   "node": 58,
+   "name": "Cabin_Binnacle",
+   "triangles": 396,
+   "signed_volume_m3": 0.006744366,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 1.0,
+   "outward_area_fraction": 1.0,
+   "inward_area_m2": 0.0
+  },
+  {
+   "node": 60,
+   "name": "Cabin_Hub",
+   "triangles": 112,
+   "signed_volume_m3": 0.00062271,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 1.0,
+   "outward_area_fraction": 1.0,
+   "inward_area_m2": 0.0
+  },
+  {
+   "node": 62,
+   "name": "Cabin_Column",
+   "triangles": 80,
+   "signed_volume_m3": 0.000800972,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 1.0,
+   "outward_area_fraction": 1.0,
+   "inward_area_m2": 0.0
+  },
+  {
+   "node": 63,
+   "name": "Cabin_Console",
+   "triangles": 396,
+   "signed_volume_m3": 0.051945928,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 1.0,
+   "outward_area_fraction": 1.0,
+   "inward_area_m2": 0.0
+  },
+  {
+   "node": 64,
+   "name": "Cabin_SeatFD_Cush",
+   "triangles": 396,
+   "signed_volume_m3": 0.026037912,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 1.0,
+   "outward_area_fraction": 1.0,
+   "inward_area_m2": 0.0
+  },
+  {
+   "node": 65,
+   "name": "Cabin_SeatFD_Back",
+   "triangles": 396,
+   "signed_volume_m3": 0.035336696,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 1.0,
+   "outward_area_fraction": 1.0,
+   "inward_area_m2": 0.0
+  },
+  {
+   "node": 66,
+   "name": "Cabin_SeatFD_BolB",
+   "triangles": 396,
+   "signed_volume_m3": 0.006464385,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 1.0,
+   "outward_area_fraction": 1.0,
+   "inward_area_m2": 0.0
+  },
+  {
+   "node": 67,
+   "name": "Cabin_SeatFD_BolA",
+   "triangles": 396,
+   "signed_volume_m3": 0.006464387,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 1.0,
+   "outward_area_fraction": 1.0,
+   "inward_area_m2": 0.0
+  },
+  {
+   "node": 68,
+   "name": "Cabin_SeatFD_Head",
+   "triangles": 396,
+   "signed_volume_m3": 0.003452256,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 1.0,
+   "outward_area_fraction": 1.0,
+   "inward_area_m2": 0.0
+  },
+  {
+   "node": 69,
+   "name": "Cabin_SeatFP_Cush",
+   "triangles": 396,
+   "signed_volume_m3": 0.026037909,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 1.0,
+   "outward_area_fraction": 1.0,
+   "inward_area_m2": 0.0
+  },
+  {
+   "node": 70,
+   "name": "Cabin_SeatFP_Back",
+   "triangles": 396,
+   "signed_volume_m3": 0.035336698,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 1.0,
+   "outward_area_fraction": 1.0,
+   "inward_area_m2": 0.0
+  },
+  {
+   "node": 71,
+   "name": "Cabin_SeatFP_BolB",
+   "triangles": 396,
+   "signed_volume_m3": 0.006464387,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 1.0,
+   "outward_area_fraction": 1.0,
+   "inward_area_m2": 0.0
+  },
+  {
+   "node": 72,
+   "name": "Cabin_SeatFP_BolA",
+   "triangles": 396,
+   "signed_volume_m3": 0.006464384,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 1.0,
+   "outward_area_fraction": 1.0,
+   "inward_area_m2": 0.0
+  },
+  {
+   "node": 73,
+   "name": "Cabin_SeatFP_Head",
+   "triangles": 396,
+   "signed_volume_m3": 0.003452256,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 1.0,
+   "outward_area_fraction": 1.0,
+   "inward_area_m2": 0.0
+  },
+  {
+   "node": 74,
+   "name": "Cabin_BenchCush",
+   "triangles": 396,
+   "signed_volume_m3": 0.067071444,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 1.0,
+   "outward_area_fraction": 1.0,
+   "inward_area_m2": 0.0
+  },
+  {
+   "node": 75,
+   "name": "Cabin_BenchBack",
+   "triangles": 396,
+   "signed_volume_m3": 0.092708245,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 1.0,
+   "outward_area_fraction": 1.0,
+   "inward_area_m2": 0.0
+  },
+  {
+   "node": 76,
+   "name": "Cabin_BenchHead_R",
+   "triangles": 396,
+   "signed_volume_m3": 0.002784254,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 1.0,
+   "outward_area_fraction": 1.0,
+   "inward_area_m2": 0.0
+  },
+  {
+   "node": 77,
+   "name": "Cabin_BenchHead_L",
+   "triangles": 396,
+   "signed_volume_m3": 0.002784254,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 1.0,
+   "outward_area_fraction": 1.0,
+   "inward_area_m2": 0.0
+  },
+  {
+   "node": 79,
+   "name": "Cabin_BootFloor",
+   "triangles": 572,
+   "signed_volume_m3": 0.049005234,
+   "winding_by_volume": "outward",
+   "outward_face_fraction": 1.0,
+   "outward_area_fraction": 1.0,
+   "inward_area_m2": 0.0
+  }
+ ]
+}

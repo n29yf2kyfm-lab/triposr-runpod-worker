@@ -234,7 +234,15 @@ UP = Vector((0, 0, 1))
 # ------------------------------------------------------------------ materials
 NEUTRAL = {
     'body':     dict(base=(0.350, 0.350, 0.355, 1), metal=0.0, rough=0.62, trans=0.0),
-    'glass':    dict(base=(0.560, 0.630, 0.680, 1), metal=0.0, rough=0.05, trans=0.88),
+    # Blue-grey but only just.  The first attempt used base 0.56/0.63/0.68 at
+    # transmission 0.88, and conceal_diff caught it: the shipped red render
+    # resolved seats, headrests and the B-pillar through the glazing while the
+    # neutral one went milky (worst local tile ratio 0.058).  With transmission
+    # the base colour is the TRANSMISSION tint and this car stacks several glass
+    # surfaces, so a 0.6-luminance tint compounds to opacity over a few
+    # interfaces.  A diagnostic set must reveal at least as much as the shipped
+    # one; that is the whole point of Stage 7.
+    'glass':    dict(base=(0.880, 0.915, 0.940, 1), metal=0.0, rough=0.02, trans=0.98),
     'tyre':     dict(base=(0.045, 0.045, 0.048, 1), metal=0.0, rough=0.90, trans=0.0),
     'rim':      dict(base=(0.560, 0.560, 0.570, 1), metal=1.0, rough=0.34, trans=0.0),
     'interior': dict(base=(0.170, 0.170, 0.175, 1), metal=0.0, rough=0.72, trans=0.0),
@@ -431,9 +439,11 @@ try:
     sc.cycles.denoiser = 'OPENIMAGEDENOISE'
 except Exception:
     pass
-sc.cycles.max_bounces = 8
-sc.cycles.transmission_bounces = 8
-sc.cycles.transparent_max_bounces = 8
+# stacked glazing needs the depth: this car carries Glass_* panes AND a
+# separate Body_Glass_Reverted shell, so a ray can cross many interfaces.
+sc.cycles.max_bounces = 24
+sc.cycles.transmission_bounces = 32
+sc.cycles.transparent_max_bounces = 32
 sc.cycles.use_fast_gi = False
 sc.render.resolution_x = RESX
 sc.render.resolution_y = RESY

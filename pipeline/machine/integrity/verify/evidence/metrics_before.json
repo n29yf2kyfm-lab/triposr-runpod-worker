@@ -1,0 +1,566 @@
+{
+ "file": "GOLF_ALL_GATES_SOURCE.glb",
+ "sha256": "400d994a9fd034cc55d64cf340ec70eedb0d5fa93c188e739da03a787b21084f",
+ "bytes": 25684968,
+ "triangles_declared": 888807,
+ "triangles_imported": 887879,
+ "GLAZING": {
+  "probe_verdict": "clear",
+  "PAIRED_glass_surface_area_m2": 3.288447,
+  "glass_share_of_total_surface": 0.035843,
+  "glass_nodes": [
+   "Glass_Backlight",
+   "Body_Glass_Reverted",
+   "Glass_Quarter_L",
+   "Glass_Rear",
+   "Glass_Side_L",
+   "Glass_Side_R",
+   "Glass_Windscreen"
+  ],
+  "glass_named_materials": [
+   "glass"
+  ],
+  "glass_materials_detail": [
+   {
+    "name": "glass",
+    "alphaMode": "BLEND",
+    "baseColorAlpha": 0.1607843137254902,
+    "extensions": [
+     "KHR_materials_ior",
+     "KHR_materials_transmission"
+    ],
+    "area_m2": 2.959364
+   }
+  ],
+  "any_transparent_material_in_file": true,
+  "NOTE": "the probe verdict is NOT sufficient on its own; read it together with the area.  A file can score \"clear\" on glazing cut to 2.5%."
+ },
+ "WHEEL_PARITY": {
+  "pairs": [
+   {
+    "pair": "FTyre",
+    "left_node": "Wheel_FL_Tyre",
+    "right_node": "Wheel_FR_Tyre",
+    "tris_L": 9264,
+    "tris_R": 9176,
+    "tri_delta": 88,
+    "tri_ratio": 1.00959,
+    "area_L_m2": 0.893905,
+    "area_R_m2": 0.948179,
+    "area_ratio": 0.94276,
+    "area_pct_diff": -5.724,
+    "vertical_span_L_m": 0.652394,
+    "vertical_span_R_m": 0.63097,
+    "span_pct_diff": 3.395
+   },
+   {
+    "pair": "FRim",
+    "left_node": "Wheel_FL_Rim",
+    "right_node": "Wheel_FR_Rim",
+    "tris_L": 20217,
+    "tris_R": 24543,
+    "tri_delta": -4326,
+    "tri_ratio": 0.82374,
+    "area_L_m2": 0.853471,
+    "area_R_m2": 0.940169,
+    "area_ratio": 0.90778,
+    "area_pct_diff": -9.222,
+    "vertical_span_L_m": 0.46248,
+    "vertical_span_R_m": 0.443315,
+    "span_pct_diff": 4.323
+   },
+   {
+    "pair": "FDisc",
+    "left_node": "Wheel_FL_Disc",
+    "right_node": "Wheel_FR_Disc",
+    "tris_L": 3247,
+    "tris_R": 2620,
+    "tri_delta": 627,
+    "tri_ratio": 1.23931,
+    "area_L_m2": 0.186625,
+    "area_R_m2": 0.143248,
+    "area_ratio": 1.30281,
+    "area_pct_diff": 30.281,
+    "vertical_span_L_m": 0.293806,
+    "vertical_span_R_m": 0.292291,
+    "span_pct_diff": 0.518
+   },
+   {
+    "pair": "RTyre",
+    "left_node": "Wheel_RL_Tyre",
+    "right_node": "Wheel_RR_Tyre",
+    "tris_L": 13842,
+    "tris_R": 12591,
+    "tri_delta": 1251,
+    "tri_ratio": 1.09936,
+    "area_L_m2": 1.03088,
+    "area_R_m2": 1.055061,
+    "area_ratio": 0.97708,
+    "area_pct_diff": -2.292,
+    "vertical_span_L_m": 0.64047,
+    "vertical_span_R_m": 0.63046,
+    "span_pct_diff": 1.588
+   },
+   {
+    "pair": "RRim",
+    "left_node": "Wheel_RL_Rim",
+    "right_node": "Wheel_RR_Rim",
+    "tris_L": 18458,
+    "tris_R": 20842,
+    "tri_delta": -2384,
+    "tri_ratio": 0.88562,
+    "area_L_m2": 0.750332,
+    "area_R_m2": 0.757684,
+    "area_ratio": 0.9903,
+    "area_pct_diff": -0.97,
+    "vertical_span_L_m": 0.436334,
+    "vertical_span_R_m": 0.433834,
+    "span_pct_diff": 0.576
+   },
+   {
+    "pair": "RDisc",
+    "left_node": "Wheel_RL_Disc",
+    "right_node": "Wheel_RR_Disc",
+    "tris_L": 1658,
+    "tris_R": 1546,
+    "tri_delta": 112,
+    "tri_ratio": 1.07245,
+    "area_L_m2": 0.174475,
+    "area_R_m2": 0.141084,
+    "area_ratio": 1.23667,
+    "area_pct_diff": 23.667,
+    "vertical_span_L_m": 0.326536,
+    "vertical_span_R_m": 0.283209,
+    "span_pct_diff": 15.299
+   }
+  ],
+  "worst_left_right_area_pct_diff": 30.281,
+  "PARITY_IS_BY_CONSTRUCTION_SHARED_MESH": false,
+  "left_right_share_same_mesh_index": {
+   "FTyre": false,
+   "FRim": false,
+   "FDisc": false,
+   "RTyre": false,
+   "RRim": false,
+   "RDisc": false
+  },
+  "EVIDENCE_STATUS": "independently measured -- L and R are distinct meshes",
+  "IDENTICAL_ACROSS_SIDES": false,
+  "NOTE": "determinant sign is reported separately; equal determinants only rule out MIRRORING, they do not make the two sides identical.",
+  "negative_determinant_nodes": []
+ },
+ "GROUND_CONTACT": {
+  "per_tyre_world_zmin_m": {
+   "Wheel_RR_Tyre": -0.0,
+   "Wheel_RL_Tyre": -0.0,
+   "Wheel_FR_Tyre": 0.0,
+   "Wheel_FL_Tyre": -0.0
+  },
+  "worst_tyre_zmin_m": -0.0,
+  "best_tyre_zmin_m": -0.0,
+  "whole_model_zmin_m": -0.004587,
+  "lowest_object": "Arch_Liner",
+  "ALL_FOUR_TYRES_ON_GROUND_1mm": true,
+  "NOTE": "measured from the TYRE nodes, not the whole-model bbox: viewer_check.py passed a car whose front tyres were 183 mm up because it read the whole-model minimum."
+ },
+ "PAYLOAD": {
+  "declared_positions": 1899971,
+  "referenced_positions": 602815,
+  "unreferenced_positions": 1297156,
+  "unreferenced_fraction": 0.682724,
+  "file_bytes": 25684968,
+  "bbox_declared_vs_referenced_max_abs_diff_m": 0.029327,
+  "bbox_declared": [
+   [
+    -2.176595,
+    -0.004587,
+    -0.899753
+   ],
+   [
+    2.086358,
+    1.447658,
+    0.890078
+   ]
+  ],
+  "bbox_referenced_only": [
+   [
+    -2.147268,
+    -0.004587,
+    -0.899753
+   ],
+   [
+    2.086358,
+    1.447658,
+    0.890078
+   ]
+  ],
+  "WHICH_ONE_THE_VIEWER_SEES": "referenced_only"
+ },
+ "STRUCTURE": {
+  "nodes": 83,
+  "meshes": 83,
+  "primitives": 107,
+  "materials": 22,
+  "textures": 0,
+  "cameras_in_file": 0,
+  "camera_names": [],
+  "extensionsUsed": [
+   "KHR_materials_clearcoat",
+   "KHR_materials_ior",
+   "KHR_materials_transmission"
+  ],
+  "extensionsRequired": [],
+  "orphan_nodes_not_in_scene": [],
+  "meshes_unreferenced": [],
+  "meshes_shared_by_multiple_nodes": {},
+  "nodes_without_mesh": [],
+  "nan_vertex_components": 0,
+  "degenerate_triangles": 4,
+  "hidden_at_render": [],
+  "MATERIAL_TABLE_AS_WRITTEN": [
+   {
+    "name": "Tyre_Rubber",
+    "alphaMode": "OPAQUE",
+    "doubleSided": true,
+    "extensions": [],
+    "baseColorFactor": [
+     0.027450980392156862,
+     0.027450980392156862,
+     0.03137254901960784,
+     1.0
+    ],
+    "area_m2": 3.928026
+   },
+   {
+    "name": "Rim_Alloy",
+    "alphaMode": "OPAQUE",
+    "doubleSided": true,
+    "extensions": [],
+    "baseColorFactor": [
+     0.4196078431372549,
+     0.43137254901960786,
+     0.45098039215686275,
+     1.0
+    ],
+    "area_m2": 3.301657
+   },
+   {
+    "name": "Brake_Disc",
+    "alphaMode": "OPAQUE",
+    "doubleSided": true,
+    "extensions": [],
+    "baseColorFactor": [
+     0.10980392156862745,
+     0.10980392156862745,
+     0.12156862745098039,
+     1.0
+    ],
+    "area_m2": 0.645432
+   },
+   {
+    "name": "Underbody",
+    "alphaMode": "OPAQUE",
+    "doubleSided": true,
+    "extensions": [],
+    "baseColorFactor": [
+     0.011764705882352941,
+     0.011764705882352941,
+     0.011764705882352941,
+     1.0
+    ],
+    "area_m2": 1.110147
+   },
+   {
+    "name": "Lamp_Lens_Rear",
+    "alphaMode": "OPAQUE",
+    "doubleSided": true,
+    "extensions": [
+     "KHR_materials_clearcoat"
+    ],
+    "baseColorFactor": [
+     0.1568627450980392,
+     0.011764705882352941,
+     0.01568627450980392,
+     1.0
+    ],
+    "area_m2": 0.166481
+   },
+   {
+    "name": "carpaint",
+    "alphaMode": "OPAQUE",
+    "doubleSided": true,
+    "extensions": [
+     "KHR_materials_clearcoat"
+    ],
+    "baseColorFactor": [
+     0.7764705882352941,
+     0.011764705882352941,
+     0.011764705882352941,
+     1.0
+    ],
+    "area_m2": 28.351027
+   },
+   {
+    "name": "Interior_Plastic",
+    "alphaMode": "OPAQUE",
+    "doubleSided": true,
+    "extensions": [],
+    "baseColorFactor": [
+     0.03137254901960784,
+     0.03137254901960784,
+     0.03137254901960784,
+     1.0
+    ],
+    "area_m2": 8.065311
+   },
+   {
+    "name": "glass",
+    "alphaMode": "BLEND",
+    "doubleSided": false,
+    "extensions": [
+     "KHR_materials_ior",
+     "KHR_materials_transmission"
+    ],
+    "baseColorFactor": [
+     0.050980392156862744,
+     0.058823529411764705,
+     0.06274509803921569,
+     0.1607843137254902
+    ],
+    "area_m2": 2.959364
+   },
+   {
+    "name": "Trim_Black",
+    "alphaMode": "OPAQUE",
+    "doubleSided": true,
+    "extensions": [],
+    "baseColorFactor": [
+     0.0196078431372549,
+     0.0196078431372549,
+     0.023529411764705882,
+     1.0
+    ],
+    "area_m2": 1.439849
+   },
+   {
+    "name": "Arch_Liner",
+    "alphaMode": "OPAQUE",
+    "doubleSided": true,
+    "extensions": [],
+    "baseColorFactor": [
+     0.011764705882352941,
+     0.011764705882352941,
+     0.01568627450980392,
+     1.0
+    ],
+    "area_m2": 6.596175
+   },
+   {
+    "name": "Lamp_Lens",
+    "alphaMode": "OPAQUE",
+    "doubleSided": true,
+    "extensions": [
+     "KHR_materials_clearcoat"
+    ],
+    "baseColorFactor": [
+     0.03529411764705882,
+     0.03529411764705882,
+     0.0392156862745098,
+     1.0
+    ],
+    "area_m2": 0.083043
+   },
+   {
+    "name": "Chrome_Trim",
+    "alphaMode": "OPAQUE",
+    "doubleSided": false,
+    "extensions": [],
+    "baseColorFactor": [
+     0.6196078431372549,
+     0.6392156862745098,
+     0.6705882352941176,
+     1.0
+    ],
+    "area_m2": 0.11798
+   },
+   {
+    "name": "DRL_Blade",
+    "alphaMode": "OPAQUE",
+    "doubleSided": false,
+    "extensions": [],
+    "baseColorFactor": [
+     0.8,
+     0.8196078431372549,
+     0.8509803921568627,
+     1.0
+    ],
+    "area_m2": 0.043511
+   },
+   {
+    "name": "Plate_Face",
+    "alphaMode": "OPAQUE",
+    "doubleSided": false,
+    "extensions": [],
+    "baseColorFactor": [
+     0.8784313725490196,
+     0.8784313725490196,
+     0.8509803921568627,
+     1.0
+    ],
+    "area_m2": 0.132984
+   },
+   {
+    "name": "Shut_Line_Dark",
+    "alphaMode": "OPAQUE",
+    "doubleSided": false,
+    "extensions": [],
+    "baseColorFactor": [
+     0.03137254901960784,
+     0.03137254901960784,
+     0.03529411764705882,
+     1.0
+    ],
+    "area_m2": 1.906477
+   },
+   {
+    "name": "Rear_Plate",
+    "alphaMode": "OPAQUE",
+    "doubleSided": false,
+    "extensions": [],
+    "baseColorFactor": [
+     0.8784313725490196,
+     0.8784313725490196,
+     0.8509803921568627,
+     1.0
+    ],
+    "area_m2": 0.053097
+   },
+   {
+    "name": "Cabin_Trim",
+    "alphaMode": "OPAQUE",
+    "doubleSided": false,
+    "extensions": [],
+    "baseColorFactor": [
+     0.10196078431372549,
+     0.10196078431372549,
+     0.11372549019607843,
+     1.0
+    ],
+    "area_m2": 11.524735
+   },
+   {
+    "name": "Cabin_Fabric",
+    "alphaMode": "OPAQUE",
+    "doubleSided": false,
+    "extensions": [],
+    "baseColorFactor": [
+     0.1568627450980392,
+     0.1568627450980392,
+     0.17254901960784313,
+     1.0
+    ],
+    "area_m2": 5.910029
+   },
+   {
+    "name": "Cabin_Bolster",
+    "alphaMode": "OPAQUE",
+    "doubleSided": false,
+    "extensions": [],
+    "baseColorFactor": [
+     0.12156862745098039,
+     0.12156862745098039,
+     0.13725490196078433,
+     1.0
+    ],
+    "area_m2": 1.479931
+   },
+   {
+    "name": "Cabin_Rim",
+    "alphaMode": "OPAQUE",
+    "doubleSided": false,
+    "extensions": [],
+    "baseColorFactor": [
+     0.06666666666666667,
+     0.06666666666666667,
+     0.07450980392156863,
+     1.0
+    ],
+    "area_m2": 0.178857
+   },
+   {
+    "name": "Cabin_Liner",
+    "alphaMode": "OPAQUE",
+    "doubleSided": false,
+    "extensions": [],
+    "baseColorFactor": [
+     0.19607843137254902,
+     0.19607843137254902,
+     0.20392156862745098,
+     1.0
+    ],
+    "area_m2": 3.417313
+   },
+   {
+    "name": "Cabin_Carpet",
+    "alphaMode": "OPAQUE",
+    "doubleSided": false,
+    "extensions": [],
+    "baseColorFactor": [
+     0.08235294117647059,
+     0.08235294117647059,
+     0.09019607843137255,
+     1.0
+    ],
+    "area_m2": 10.333219
+   }
+  ]
+ },
+ "LEDGERS": {
+  "L1_vertices": {
+   "file_position_entries": 1899971,
+   "index_referenced": 602815,
+   "unreferenced": 1297156,
+   "blender_vertices": 602815,
+   "BALANCES": true,
+   "per_object_all_balance": true
+  },
+  "L2_triangles": {
+   "file_triangles": 888807,
+   "blender_triangles": 887879,
+   "delta": 928,
+   "index_degenerate": 4,
+   "duplicate_index_triples": 924,
+   "sum": 928,
+   "BALANCES": true,
+   "per_object_all_balance": true,
+   "duplicate_POSITION_triples_for_contrast": 1005,
+   "contrast_note": "position-triple duplicates OVER-count; Blender does not weld by position, as ledger L1 proves."
+  },
+  "L3_bbox": {
+   "file_referenced_world_bbox_min_in_blender_axes": [
+    -2.147268,
+    -0.890078,
+    -0.004587
+   ],
+   "blender_world_bbox_min": [
+    -2.147268,
+    -0.890078,
+    -0.004587
+   ],
+   "file_referenced_world_bbox_max_in_blender_axes": [
+    2.086358,
+    0.899753,
+    1.447658
+   ],
+   "blender_world_bbox_max": [
+    2.086358,
+    0.899753,
+    1.447658
+   ],
+   "max_abs_err_m": 4e-07,
+   "objects_with_bbox_residue_over_0.1mm": [],
+   "BALANCES": true
+  },
+  "ALL_THREE_BALANCE": true
+ }
+}

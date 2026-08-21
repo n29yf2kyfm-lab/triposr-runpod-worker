@@ -105,9 +105,33 @@ for ax in ('F', 'R'):
             })
 worst = max((abs(p['area_pct_diff']) for p in pairs if p['area_pct_diff'] is not None),
             default=None)
+# Is L/R parity MEASURED, or guaranteed by construction?  If the two sides
+# reference the SAME mesh index, every count and area below is trivially equal
+# and proves nothing on its own -- the brief warns explicitly that a name-only
+# hierarchy check reports 20/20 on two nodes sharing one mesh.  When that is the
+# case the parity number is a structural guarantee and the load-bearing evidence
+# becomes the placement transforms plus the rendered left/right comparison.
+shared = F.get('meshes_shared_by_multiple_nodes', {})
+node_mesh = {n['name']: n['mesh'] for n in F['nodes_table']}
+wheel_shared = {}
+for ax in ('F', 'R'):
+    for p_ in PARTS:
+        a, b = 'Wheel_%sL_%s' % (ax, p_), 'Wheel_%sR_%s' % (ax, p_)
+        if a in node_mesh and b in node_mesh:
+            wheel_shared['%s%s' % (ax, p_)] = (node_mesh[a] == node_mesh[b])
+by_construction = bool(wheel_shared) and all(wheel_shared.values())
+
 WHEELS = {
     'pairs': pairs,
     'worst_left_right_area_pct_diff': worst,
+    'PARITY_IS_BY_CONSTRUCTION_SHARED_MESH': by_construction,
+    'left_right_share_same_mesh_index': wheel_shared,
+    'EVIDENCE_STATUS': ('structural guarantee -- L and R are the SAME mesh, so '
+                        'equal counts/areas are tautological.  The verdict rests '
+                        'on the placement transforms (must be a rotation, det>0, '
+                        'not a mirror) and on the rendered L/R comparison.'
+                        if by_construction else
+                        'independently measured -- L and R are distinct meshes'),
     'IDENTICAL_ACROSS_SIDES': bool(worst is not None and worst < 1.0),
     'NOTE': 'determinant sign is reported separately; equal determinants only '
             'rule out MIRRORING, they do not make the two sides identical.',

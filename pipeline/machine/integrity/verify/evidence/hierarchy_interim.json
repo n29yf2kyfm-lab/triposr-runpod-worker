@@ -1,0 +1,4085 @@
+{
+ "file": "car_wheels_fixed.glb",
+ "nodes": 83,
+ "scene_roots": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
+  31,
+  32,
+  33,
+  34,
+  35,
+  36,
+  37,
+  38,
+  39,
+  40,
+  41,
+  42,
+  43,
+  44,
+  45,
+  46,
+  47,
+  48,
+  49,
+  50,
+  51,
+  52,
+  53,
+  54,
+  55,
+  56,
+  57,
+  58,
+  59,
+  60,
+  61,
+  62,
+  63,
+  64,
+  65,
+  66,
+  67,
+  68,
+  69,
+  70,
+  71,
+  72,
+  73,
+  74,
+  75,
+  76,
+  77,
+  78,
+  79,
+  80,
+  81,
+  82
+ ],
+ "max_depth": 0,
+ "all_nodes_reachable_from_scene": true,
+ "nodes_declaring_matrix": [],
+ "nodes_with_identity_TRS": 71,
+ "nodes_with_non_unit_scale": [],
+ "nodes_with_non_uniform_scale": [],
+ "MIRRORED_NODES": [],
+ "n_mirrored": 0,
+ "determinant_min": 1,
+ "determinant_max": 1.000000082,
+ "rows": [
+  {
+   "node": 0,
+   "name": "Underbody",
+   "depth": 0,
+   "parent": null,
+   "mesh": 0,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 1,
+   "name": "TailLamp_R",
+   "depth": 0,
+   "parent": null,
+   "mesh": 1,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 2,
+   "name": "TailLamp_L",
+   "depth": 0,
+   "parent": null,
+   "mesh": 2,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 3,
+   "name": "Mirror_R",
+   "depth": 0,
+   "parent": null,
+   "mesh": 3,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 4,
+   "name": "Mirror_L",
+   "depth": 0,
+   "parent": null,
+   "mesh": 4,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 5,
+   "name": "Interior",
+   "depth": 0,
+   "parent": null,
+   "mesh": 5,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 6,
+   "name": "Glass_Windscreen",
+   "depth": 0,
+   "parent": null,
+   "mesh": 6,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 7,
+   "name": "Glass_Side_R",
+   "depth": 0,
+   "parent": null,
+   "mesh": 7,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 8,
+   "name": "Glass_Side_L",
+   "depth": 0,
+   "parent": null,
+   "mesh": 8,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 9,
+   "name": "Glass_Rear",
+   "depth": 0,
+   "parent": null,
+   "mesh": 9,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 10,
+   "name": "Glass_Quarter_L",
+   "depth": 0,
+   "parent": null,
+   "mesh": 10,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 11,
+   "name": "Bumper_Rear_Trim",
+   "depth": 0,
+   "parent": null,
+   "mesh": 11,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 12,
+   "name": "Bumper_Rear_Paint",
+   "depth": 0,
+   "parent": null,
+   "mesh": 12,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 13,
+   "name": "Bumper_Front_Paint",
+   "depth": 0,
+   "parent": null,
+   "mesh": 13,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 14,
+   "name": "Body_Shell",
+   "depth": 0,
+   "parent": null,
+   "mesh": 14,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 15,
+   "name": "Body_Glass_Reverted",
+   "depth": 0,
+   "parent": null,
+   "mesh": 15,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 16,
+   "name": "Arch_Liner",
+   "depth": 0,
+   "parent": null,
+   "mesh": 16,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 17,
+   "name": "Valance_Front",
+   "depth": 0,
+   "parent": null,
+   "mesh": 17,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 18,
+   "name": "Bumper_Front",
+   "depth": 0,
+   "parent": null,
+   "mesh": 18,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 19,
+   "name": "Grille_Upper",
+   "depth": 0,
+   "parent": null,
+   "mesh": 19,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 20,
+   "name": "Headlamp_R_Lens",
+   "depth": 0,
+   "parent": null,
+   "mesh": 20,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 21,
+   "name": "Headlamp_R_Housing",
+   "depth": 0,
+   "parent": null,
+   "mesh": 21,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 22,
+   "name": "Headlamp_R_Internal",
+   "depth": 0,
+   "parent": null,
+   "mesh": 22,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 23,
+   "name": "Headlamp_L_Lens",
+   "depth": 0,
+   "parent": null,
+   "mesh": 23,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 24,
+   "name": "Headlamp_L_Housing",
+   "depth": 0,
+   "parent": null,
+   "mesh": 24,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 25,
+   "name": "Headlamp_L_Internal",
+   "depth": 0,
+   "parent": null,
+   "mesh": 25,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 26,
+   "name": "DRL_Blade",
+   "depth": 0,
+   "parent": null,
+   "mesh": 26,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 27,
+   "name": "Badge",
+   "depth": 0,
+   "parent": null,
+   "mesh": 27,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 28,
+   "name": "Badge_Mount",
+   "depth": 0,
+   "parent": null,
+   "mesh": 28,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 29,
+   "name": "Grille_Lower",
+   "depth": 0,
+   "parent": null,
+   "mesh": 29,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 30,
+   "name": "Plate_Carrier",
+   "depth": 0,
+   "parent": null,
+   "mesh": 30,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 31,
+   "name": "Plate",
+   "depth": 0,
+   "parent": null,
+   "mesh": 31,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 32,
+   "name": "Intake_R",
+   "depth": 0,
+   "parent": null,
+   "mesh": 32,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 33,
+   "name": "Intake_L",
+   "depth": 0,
+   "parent": null,
+   "mesh": 33,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 34,
+   "name": "Intake_R_Blades",
+   "depth": 0,
+   "parent": null,
+   "mesh": 34,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 35,
+   "name": "Intake_L_Blades",
+   "depth": 0,
+   "parent": null,
+   "mesh": 35,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 36,
+   "name": "TowEye_Cover",
+   "depth": 0,
+   "parent": null,
+   "mesh": 36,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 37,
+   "name": "Hatch",
+   "depth": 0,
+   "parent": null,
+   "mesh": 37,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 38,
+   "name": "Hatch_Inner",
+   "depth": 0,
+   "parent": null,
+   "mesh": 38,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 39,
+   "name": "Bumper_Rear",
+   "depth": 0,
+   "parent": null,
+   "mesh": 39,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 40,
+   "name": "Bumper_Rear_Inner",
+   "depth": 0,
+   "parent": null,
+   "mesh": 40,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 41,
+   "name": "Plate_Rear",
+   "depth": 0,
+   "parent": null,
+   "mesh": 41,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 42,
+   "name": "Glass_Backlight",
+   "depth": 0,
+   "parent": null,
+   "mesh": 42,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 43,
+   "name": "Cabin_Floor",
+   "depth": 0,
+   "parent": null,
+   "mesh": 43,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 44,
+   "name": "Cabin_Tunnel",
+   "depth": 0,
+   "parent": null,
+   "mesh": 44,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 45,
+   "name": "Cabin_Dash",
+   "depth": 0,
+   "parent": null,
+   "mesh": 45,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 46,
+   "name": "Cabin_Binnacle",
+   "depth": 0,
+   "parent": null,
+   "mesh": 46,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 47,
+   "name": "Cabin_Wheel",
+   "depth": 0,
+   "parent": null,
+   "mesh": 47,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 48,
+   "name": "Cabin_Hub",
+   "depth": 0,
+   "parent": null,
+   "mesh": 48,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 49,
+   "name": "Cabin_Spokes",
+   "depth": 0,
+   "parent": null,
+   "mesh": 49,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 50,
+   "name": "Cabin_Column",
+   "depth": 0,
+   "parent": null,
+   "mesh": 50,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 51,
+   "name": "Cabin_Console",
+   "depth": 0,
+   "parent": null,
+   "mesh": 51,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 52,
+   "name": "Cabin_SeatFD_Cush",
+   "depth": 0,
+   "parent": null,
+   "mesh": 52,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 53,
+   "name": "Cabin_SeatFD_Back",
+   "depth": 0,
+   "parent": null,
+   "mesh": 53,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 54,
+   "name": "Cabin_SeatFD_BolB",
+   "depth": 0,
+   "parent": null,
+   "mesh": 54,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 55,
+   "name": "Cabin_SeatFD_BolA",
+   "depth": 0,
+   "parent": null,
+   "mesh": 55,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 56,
+   "name": "Cabin_SeatFD_Head",
+   "depth": 0,
+   "parent": null,
+   "mesh": 56,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 57,
+   "name": "Cabin_SeatFP_Cush",
+   "depth": 0,
+   "parent": null,
+   "mesh": 57,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 58,
+   "name": "Cabin_SeatFP_Back",
+   "depth": 0,
+   "parent": null,
+   "mesh": 58,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 59,
+   "name": "Cabin_SeatFP_BolB",
+   "depth": 0,
+   "parent": null,
+   "mesh": 59,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 60,
+   "name": "Cabin_SeatFP_BolA",
+   "depth": 0,
+   "parent": null,
+   "mesh": 60,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 61,
+   "name": "Cabin_SeatFP_Head",
+   "depth": 0,
+   "parent": null,
+   "mesh": 61,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 62,
+   "name": "Cabin_BenchCush",
+   "depth": 0,
+   "parent": null,
+   "mesh": 62,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 63,
+   "name": "Cabin_BenchBack",
+   "depth": 0,
+   "parent": null,
+   "mesh": 63,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 64,
+   "name": "Cabin_BenchHead_R",
+   "depth": 0,
+   "parent": null,
+   "mesh": 64,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 65,
+   "name": "Cabin_BenchHead_L",
+   "depth": 0,
+   "parent": null,
+   "mesh": 65,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 66,
+   "name": "Cabin_ParcelShelf",
+   "depth": 0,
+   "parent": null,
+   "mesh": 66,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 67,
+   "name": "Cabin_BootFloor",
+   "depth": 0,
+   "parent": null,
+   "mesh": 67,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 68,
+   "name": "Cabin_DoorCard_R",
+   "depth": 0,
+   "parent": null,
+   "mesh": 68,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 69,
+   "name": "Cabin_DoorCard_L",
+   "depth": 0,
+   "parent": null,
+   "mesh": 69,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 70,
+   "name": "Cabin_Headliner",
+   "depth": 0,
+   "parent": null,
+   "mesh": 70,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    0,
+    0,
+    0
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": true,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "world_det3": 1,
+   "mirrored": false
+  },
+  {
+   "node": 71,
+   "name": "Wheel_FL_Tyre",
+   "depth": 0,
+   "parent": null,
+   "mesh": 71,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    -2.57818365,
+    -0.04095145,
+    -0.02570926
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    -0.99954611,
+    -0.02994385,
+    0.00331045
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": false,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    -0.99997812,
+    0.00019826,
+    -0.00661789,
+    -2.57818365,
+    -0.00019826,
+    0.99820673,
+    0.05986052,
+    -0.04095145,
+    0.00661789,
+    0.05986052,
+    -0.99818485,
+    -0.02570926,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "world_det3": 1.000000082,
+   "mirrored": false
+  },
+  {
+   "node": 72,
+   "name": "Wheel_FL_Rim",
+   "depth": 0,
+   "parent": null,
+   "mesh": 72,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    -2.57818365,
+    -0.04095145,
+    -0.02570926
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    -0.99954611,
+    -0.02994385,
+    0.00331045
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": false,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    -0.99997812,
+    0.00019826,
+    -0.00661789,
+    -2.57818365,
+    -0.00019826,
+    0.99820673,
+    0.05986052,
+    -0.04095145,
+    0.00661789,
+    0.05986052,
+    -0.99818485,
+    -0.02570926,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "world_det3": 1.000000082,
+   "mirrored": false
+  },
+  {
+   "node": 73,
+   "name": "Wheel_FL_Disc",
+   "depth": 0,
+   "parent": null,
+   "mesh": 73,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    -2.57818365,
+    -0.04095145,
+    -0.02570926
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    -0.99954611,
+    -0.02994385,
+    0.00331045
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": false,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    -0.99997812,
+    0.00019826,
+    -0.00661789,
+    -2.57818365,
+    -0.00019826,
+    0.99820673,
+    0.05986052,
+    -0.04095145,
+    0.00661789,
+    0.05986052,
+    -0.99818485,
+    -0.02570926,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "world_det3": 1.000000082,
+   "mirrored": false
+  },
+  {
+   "node": 74,
+   "name": "Wheel_FR_Tyre",
+   "depth": 0,
+   "parent": null,
+   "mesh": 71,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    -0.00524684,
+    -0.04095145,
+    0.02570926
+   ],
+   "rotation_quat_xyzw": [
+    -0.02994385,
+    0.00331048,
+    0,
+    0.99954611
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": false,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    0.99997808,
+    -0.00019826,
+    0.00661796,
+    -0.00524684,
+    -0.00019826,
+    0.99820673,
+    0.05986052,
+    -0.04095145,
+    -0.00661796,
+    -0.05986052,
+    0.99818481,
+    0.02570926,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "world_det3": 1.0,
+   "mirrored": false
+  },
+  {
+   "node": 75,
+   "name": "Wheel_FR_Rim",
+   "depth": 0,
+   "parent": null,
+   "mesh": 72,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    -0.00524684,
+    -0.04095145,
+    0.02570926
+   ],
+   "rotation_quat_xyzw": [
+    -0.02994385,
+    0.00331048,
+    0,
+    0.99954611
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": false,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    0.99997808,
+    -0.00019826,
+    0.00661796,
+    -0.00524684,
+    -0.00019826,
+    0.99820673,
+    0.05986052,
+    -0.04095145,
+    -0.00661796,
+    -0.05986052,
+    0.99818481,
+    0.02570926,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "world_det3": 1.0,
+   "mirrored": false
+  },
+  {
+   "node": 76,
+   "name": "Wheel_FR_Disc",
+   "depth": 0,
+   "parent": null,
+   "mesh": 73,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    -0.00524684,
+    -0.04095145,
+    0.02570926
+   ],
+   "rotation_quat_xyzw": [
+    -0.02994385,
+    0.00331048,
+    0,
+    0.99954611
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": false,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    0.99997808,
+    -0.00019826,
+    0.00661796,
+    -0.00524684,
+    -0.00019826,
+    0.99820673,
+    0.05986052,
+    -0.04095145,
+    -0.00661796,
+    -0.05986052,
+    0.99818481,
+    0.02570926,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "world_det3": 1.0,
+   "mirrored": false
+  },
+  {
+   "node": 77,
+   "name": "Wheel_RL_Tyre",
+   "depth": 0,
+   "parent": null,
+   "mesh": 71,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    -0.09663925,
+    -0.04095145,
+    -0.01231024
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    -0.99954611,
+    -0.02994385,
+    0.00331045
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": false,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    -0.99997812,
+    0.00019826,
+    -0.00661789,
+    -0.09663925,
+    -0.00019826,
+    0.99820673,
+    0.05986052,
+    -0.04095145,
+    0.00661789,
+    0.05986052,
+    -0.99818485,
+    -0.01231024,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "world_det3": 1.000000082,
+   "mirrored": false
+  },
+  {
+   "node": 78,
+   "name": "Wheel_RL_Rim",
+   "depth": 0,
+   "parent": null,
+   "mesh": 72,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    -0.09663925,
+    -0.04095145,
+    -0.01231024
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    -0.99954611,
+    -0.02994385,
+    0.00331045
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": false,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    -0.99997812,
+    0.00019826,
+    -0.00661789,
+    -0.09663925,
+    -0.00019826,
+    0.99820673,
+    0.05986052,
+    -0.04095145,
+    0.00661789,
+    0.05986052,
+    -0.99818485,
+    -0.01231024,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "world_det3": 1.000000082,
+   "mirrored": false
+  },
+  {
+   "node": 79,
+   "name": "Wheel_RL_Disc",
+   "depth": 0,
+   "parent": null,
+   "mesh": 73,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    -0.09663925,
+    -0.04095145,
+    -0.01231024
+   ],
+   "rotation_quat_xyzw": [
+    0,
+    -0.99954611,
+    -0.02994385,
+    0.00331045
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": false,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    -0.99997812,
+    0.00019826,
+    -0.00661789,
+    -0.09663925,
+    -0.00019826,
+    0.99820673,
+    0.05986052,
+    -0.04095145,
+    0.00661789,
+    0.05986052,
+    -0.99818485,
+    -0.01231024,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "world_det3": 1.000000082,
+   "mirrored": false
+  },
+  {
+   "node": 80,
+   "name": "Wheel_RR_Tyre",
+   "depth": 0,
+   "parent": null,
+   "mesh": 71,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    2.47629762,
+    -0.04095145,
+    0.01231024
+   ],
+   "rotation_quat_xyzw": [
+    -0.02994385,
+    0.00331048,
+    0,
+    0.99954611
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": false,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    0.99997808,
+    -0.00019826,
+    0.00661796,
+    2.47629762,
+    -0.00019826,
+    0.99820673,
+    0.05986052,
+    -0.04095145,
+    -0.00661796,
+    -0.05986052,
+    0.99818481,
+    0.01231024,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "world_det3": 1.0,
+   "mirrored": false
+  },
+  {
+   "node": 81,
+   "name": "Wheel_RR_Rim",
+   "depth": 0,
+   "parent": null,
+   "mesh": 72,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    2.47629762,
+    -0.04095145,
+    0.01231024
+   ],
+   "rotation_quat_xyzw": [
+    -0.02994385,
+    0.00331048,
+    0,
+    0.99954611
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": false,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    0.99997808,
+    -0.00019826,
+    0.00661796,
+    2.47629762,
+    -0.00019826,
+    0.99820673,
+    0.05986052,
+    -0.04095145,
+    -0.00661796,
+    -0.05986052,
+    0.99818481,
+    0.01231024,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "world_det3": 1.0,
+   "mirrored": false
+  },
+  {
+   "node": 82,
+   "name": "Wheel_RR_Disc",
+   "depth": 0,
+   "parent": null,
+   "mesh": 73,
+   "camera": null,
+   "declares_matrix": false,
+   "translation": [
+    2.47629762,
+    -0.04095145,
+    0.01231024
+   ],
+   "rotation_quat_xyzw": [
+    -0.02994385,
+    0.00331048,
+    0,
+    0.99954611
+   ],
+   "scale": [
+    1,
+    1,
+    1
+   ],
+   "is_identity_TRS": false,
+   "scale_is_unit": true,
+   "scale_is_uniform": true,
+   "world_matrix_row_major": [
+    0.99997808,
+    -0.00019826,
+    0.00661796,
+    2.47629762,
+    -0.00019826,
+    0.99820673,
+    0.05986052,
+    -0.04095145,
+    -0.00661796,
+    -0.05986052,
+    0.99818481,
+    0.01231024,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "world_det3": 1.0,
+   "mirrored": false
+  }
+ ]
+}
