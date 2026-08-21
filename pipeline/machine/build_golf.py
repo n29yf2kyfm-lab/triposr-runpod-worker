@@ -331,9 +331,18 @@ def stage_mobile(ctx, inp):
 
 
 def stage_sheet(ctx, inp):
-    """Eight views, so the owner can look at the thing rather than the numbers."""
+    """Eight views, so the owner can look at the thing rather than the numbers.
+
+    Renders the FULL car, not `inp`: the stage before this one is the Draco
+    mobile export, and a sheet of the compressed derivative is not a sheet of
+    the deliverable.  (glbmeas refused it outright, which is the behaviour I
+    want from a measuring tool that has no Draco decoder.)
+    """
     import evidence
-    return evidence.run(ctx, inp)
+    full = ctx.p("work", "GOLF_ALL_GATES.glb")
+    if not os.path.exists(full):
+        raise SystemExit("sheet stage: the finished car is missing")
+    return evidence.run(ctx, full)
 
 
 STAGES = {
