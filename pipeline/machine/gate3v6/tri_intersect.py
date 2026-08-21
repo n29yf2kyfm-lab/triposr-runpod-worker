@@ -106,41 +106,72 @@ def tri_tri_pairs(VA, FA, VB, FB, pairs, eps=1e-6):
 
 
 def broadphase(VA, FA, VB, FB, share_verts=False, max_pairs=40_000_000):
-    """AABB overlap candidate pairs via a uniform spatial hash.
+    """TRUE AABB-overlap candidate pairs, via a bulk-loaded 3-D R-tree.
+
+    The first version of this used bounding SPHERES from a KD-tree, with the
+    query radius padded by the largest triangle in the other mesh. On a real
+    component pair that produced 16.8 million candidates and blew the cap --
+    a sphere padded by the global maximum radius is enormously looser than the
+    per-triangle box it is standing in for. Boxes are both tighter and cheaper,
+    so this is a correctness fix as well as a memory one.
 
     Returns an (M,2) int array of candidate (faceA, faceB) pairs.
     """
-    from scipy.spatial import cKDTree
-    TA = VA[FA]
-    TB = VB[FB]
-    ca, cb = TA.mean(1), TB.mean(1)
-    ra = np.linalg.norm(TA - ca[:, None], axis=2).max(1)
-    rb = np.linalg.norm(TB - cb[:, None], axis=2).max(1)
-    if len(ca) == 0 or len(cb) == 0:
+    import rtree
+    if len(FA) == 0 or len(FB) == 0:
         return np.zeros((0, 2), int)
-    tb = cKDTree(cb)
-    R = ra + rb.max()
-    pairs = []
-    # query per unique radius band to keep the radius tight
-    order = np.argsort(ra)
-    step = max(1, len(order) // 8)
-    for s in range(0, len(order), step):
-        sub = order[s:s + step]
-        rad = float(ra[sub].max() + rb.max())
-        res = tb.query_ball_point(ca[sub], rad)
-        for k, lst in zip(sub, res):
-            if lst:
-                pairs.append(np.stack([np.full(len(lst), k), np.asarray(lst)], 1))
-    if not pairs:
+    swap = len(FA) > len(FB)
+    if swap:
+        VA, FA, VB, FB = VB, FB, VA, FA
+    TA, TB = VA[FA], VB[FB]
+    loA, hiA = TA.min(1), TA.max(1)
+    loB, hiB = TB.min(1), TB.max(1)
+    prop = rtree.index.Property()
+    prop.dimension = 3
+    idx = rtree.index.Index(
+        ((i, (loB[i, 0], loB[i, 1], loB[i, 2], hiB[i, 0], hiB[i, 1], hiB[i, 2]), None)
+         for i in range(len(FB))), properties=prop)   # interleaved=True order:
+        # (xmin, ymin, zmin, xmax, ymax, zmax). Passing interleaved=False with
+        # THIS order raises "minimums more than maximums" -- it did, first run.
+    out_a, out_b, total = [], [], 0
+    for i in range(len(FA)):
+        hits = idx.intersection((loA[i, 0], loA[i, 1], loA[i, 2],
+                                 hiA[i, 0], hiA[i, 1], hiA[i, 2]))
+        h = np.fromiter(hits, np.int64)
+        if h.size:
+            out_a.append(np.full(h.size, i, np.int64))
+            out_b.append(h)
+            total += h.size
+            if total > max_pairs:
+                raise MemoryError(f"broadphase exceeded {max_pairs} candidate pairs")
+    if not out_a:
         return np.zeros((0, 2), int)
-    P = np.concatenate(pairs)
-    if len(P) > max_pairs:
-        raise MemoryError(f"broadphase produced {len(P)} pairs (cap {max_pairs})")
-    # tighten with a true per-pair sphere test
-    d = np.linalg.norm(ca[P[:, 0]] - cb[P[:, 1]], axis=1)
-    P = P[d <= ra[P[:, 0]] + rb[P[:, 1]]]
+    P = np.stack([np.concatenate(out_a), np.concatenate(out_b)], 1)
+    if swap:
+        P = P[:, ::-1].copy()
+        FA, FB = FB, FA
     if share_verts:
         fa, fb = FA[P[:, 0]], FB[P[:, 1]]
         shares = (fa[:, :, None] == fb[:, None, :]).any(axis=(1, 2))
         P = P[~shares]
     return P
+
+
+def intersect_count(VA, FA, VB, FB, share_verts=False, eps=1e-6,
+                    max_pairs=40_000_000, chunk=1_000_000):
+    """Candidate pairs + exact tri-tri hits, evaluated in bounded chunks so a
+    deeply overlapping pair cannot exhaust memory."""
+    try:
+        P = broadphase(VA, FA, VB, FB, share_verts=share_verts, max_pairs=max_pairs)
+    except MemoryError as e:
+        return {"candidate_pairs": -1, "intersecting_pairs": -1,
+                "coplanar_pairs": -1, "error": str(e)}
+    if share_verts:
+        P = P[P[:, 0] < P[:, 1]]
+    hits = cop = 0
+    for s in range(0, len(P), chunk):
+        h, c = tri_tri_pairs(VA, FA, VB, FB, P[s:s + chunk], eps=eps)
+        hits += int(h.sum())
+        cop += int(c.sum())
+    return {"candidate_pairs": int(len(P)), "intersecting_pairs": hits,
+            "coplanar_pairs": cop}

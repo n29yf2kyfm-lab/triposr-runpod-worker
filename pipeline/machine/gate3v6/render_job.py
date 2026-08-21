@@ -127,7 +127,7 @@ def run(job):
 
         # ---- render settings + world ------------------------------------
         wg = view.get("world_grey", 0.22)
-        transparent = (pss == "mask")
+        transparent = (pss in ("mask", "zebra"))
         render_settings(res_x, res_y, samples, flat=flat, world_grey=wg,
                         transparent=transparent)
 
@@ -135,7 +135,9 @@ def run(job):
         if flat:
             clear_lights()
         elif pss == "zebra":
-            strip_lights(centre, diag, n_strips=view.get("n_strips", 22))
+            clear_lights()
+            rig.set_stripe_world(n_stripes=view.get("n_stripes", 26))
+            bpy.context.scene.cycles.glossy_bounces = 3
         else:
             studio_lights(centre, diag, bright=view.get("bright", 1.0))
 
@@ -177,14 +179,44 @@ def run(job):
             if view.get("no_shift_y"):
                 cam.data.shift_y = 0.0
         else:
-            cam = make_camera("CAM_%s" % vid, az, elev, tgt, radius,
-                              lens=view.get("lens", 85.0))
+            lens = view.get("lens", 85.0)
+            sensor = view.get("sensor_width", 36.0)
+            cam = make_camera("CAM_%s" % vid, az, elev, tgt, radius, lens=lens)
+            cam.data.sensor_width = sensor
+            if view.get("ortho_scale") is None:
+                # perspective fit: pull the camera in/out until the projected
+                # silhouette bbox hits the target occupancy (1-D solve, 8 iters)
+                fp = scene_points(vis, stride=stride)
+                target = view.get("occ", 0.80)
+                for _ in range(8):
+                    u0, v0, u1, v1 = project_extent(cam, fp, res_x, res_y)
+                    ar = res_x / float(res_y)
+                    cur = max(u1 - u0, (v1 - v0) / (1.0 if ar >= 1 else 1.0))
+                    cur = max(u1 - u0, v1 - v0)
+                    if abs(cur - target) < 0.004:
+                        break
+                    radius *= (cur / target) ** 0.9
+                    cam.location = rig.cam_position(az, elev, tgt, radius)
+                    d = Vector(tgt) - cam.location
+                    cam.rotation_euler = d.to_track_quat("-Z", "Y").to_euler()
+                    bpy.context.view_layer.update()
+                u0, v0, u1, v1 = project_extent(cam, fp, res_x, res_y)
+                cam.data.shift_x += 0.5 - (u0 + u1) / 2.0
+                cam.data.shift_y += (0.5 - (v0 + v1) / 2.0) / (res_x / float(res_y))
+                bpy.context.view_layer.update()
 
-        # optional section cut (near-plane slice)
-        sec = view.get("section_gltf_z")
-        if sec is not None:
-            yb = -float(sec)
-            cam.data.clip_start = max(0.001, (yb - cam.location[1]))
+        # optional SECTION cut: a near-plane slice through a named glTF point.
+        # The cut plane is always perpendicular to the view axis, so the camera
+        # orientation chooses plan (elev 90) vs transverse (az 0) section.
+        sp = view.get("section_point_gltf")
+        if sp is not None:
+            P = Vector(gltf_to_blender_pt(sp))
+            fwd = (Vector(tgt) - Vector(cam.location)).normalized()
+            cam.data.clip_start = max(0.0005, float((P - Vector(cam.location)).dot(fwd)))
+            vmeta_section = {"section_point_gltf": list(sp),
+                             "clip_start": float(cam.data.clip_start)}
+        else:
+            vmeta_section = None
 
         bpy.context.view_layer.update()
 
@@ -216,6 +248,8 @@ def run(job):
                  "proj_bbox_occ_x": round(u1 - u0, 5),
                  "proj_bbox_occ_y": round(v1 - v0, 5),
                  "labels": labels,
+                 "section": vmeta_section,
+                 "hidden": sorted(hide) if hide else [],
                  "n_visible_objects": len(vis)}
 
         # ---- exposure: MEASURED, never assumed --------------------------
@@ -223,12 +257,18 @@ def run(job):
         # For lit passes a small alpha probe sets the stops so the brightest car
         # surface lands just under clipping; the same probe yields the exact
         # silhouette coverage used for the populated / occupancy assertions.
-        if not flat:
+        if not flat and view.get("auto_exposure", True):
             probe = rig.auto_exposure(os.path.join(outdir, "_probe_%s.png" % vid),
                                       res_x, res_y,
                                       target_lin=view.get("target_peak_linear", 0.85),
                                       probe_px=view.get("probe_px", 384))
             vmeta["exposure"] = probe
+        elif not flat:
+            # zebra: the bright bands ARE a light source; pulling them to 0.85
+            # would flatten the very contrast the pass exists to show.
+            bpy.context.scene.view_settings.exposure = view.get("exposure_stops", 0.0)
+            vmeta["exposure"] = {"exposure_stops": view.get("exposure_stops", 0.0),
+                                 "note": "auto-exposure disabled for this pass"}
         else:
             bpy.context.scene.view_settings.exposure = 0.0
             vmeta["exposure"] = {"exposure_stops": 0.0, "note": "flat pass, no tone mapping needed"}

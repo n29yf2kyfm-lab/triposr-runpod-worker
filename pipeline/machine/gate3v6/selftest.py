@@ -255,8 +255,53 @@ def run_selftest():
         "half_deleted_pct": cut["retained_pct_total"],
         "injection": "half the original front faces deleted",
         "control_ok": same["retained_pct_total"] > 99.5 and cut["retained_pct_total"] < 60}
-    for p in (p0, p1):
-        os.remove(p)
+    _keep_p0 = p0
+
+    # ------------------------------- 12b relocation + origin audit --------
+    # The rename-not-remove attack: the same original faces, moved into a node
+    # called Bumper_Front. A per-LABEL residue test would score that as
+    # deletion. The global match must still see 100% retained, flag them all as
+    # relocated, and the origin audit must call the node INHERITED_ORIGINAL.
+    sc4 = trimesh.Scene()
+    mv = trimesh.Trimesh(fv, np.asarray(ff), process=False)
+    _ = mv.vertex_normals
+    sc4.add_geometry(mv, node_name="Bumper_Front", geom_name="Bumper_Front")
+    p4 = os.path.join(tmp, "reloc.glb")
+    sc4.export(p4)
+    v0c = V.Car(p0) if os.path.exists(p0) else None
+    sc0b = trimesh.Scene()
+    m0b = trimesh.Trimesh(fv, np.asarray(ff), process=False)
+    _ = m0b.vertex_normals
+    sc0b.add_geometry(m0b, node_name="carpaint", geom_name="carpaint")
+    p0b = os.path.join(tmp, "v0b.glb")
+    sc0b.export(p0b)
+    car_r, car_0 = V.Car(p4), V.Car(p0b)
+    rel = V.v0_residue(car_r, car_0)
+    oa_inherit = V.origin_audit(car_r, car_0)["Bumper_Front"]
+    cb = trimesh.creation.box(extents=(0.05, 0.05, 0.05))
+    cb.apply_translation((-2.10, 0.75, 0.0))
+    _ = cb.vertex_normals
+    sc5 = trimesh.Scene()
+    sc5.add_geometry(cb, node_name="Badge", geom_name="Badge")
+    p5 = os.path.join(tmp, "new.glb")
+    sc5.export(p5)
+    oa_new = V.origin_audit(V.Car(p5), car_0)["Badge"]
+    R["relocation_and_origin"] = {
+        "relocated_retained_pct": rel["retained_pct_total"],
+        "relocated_count": rel["relocated_total"],
+        "survivors_by_node": rel["survivors_by_holding_node"],
+        "inherited_node_verdict": oa_inherit["verdict"],
+        "inherited_node_pct_original": oa_inherit["pct_original_geometry"],
+        "new_node_verdict": oa_new["verdict"],
+        "new_node_pct_original": oa_new["pct_original_geometry"],
+        "injection": ("the original faces moved verbatim into a node named "
+                      "Bumper_Front, and separately a genuinely new cube"),
+        "control_ok": bool(rel["retained_pct_total"] > 99.5
+                           and rel["relocated_total"] == rel["retained_total"]
+                           and oa_inherit["verdict"] == "INHERITED_ORIGINAL"
+                           and oa_new["verdict"] == "CONSTRUCTED")}
+    for q in (p4, p5, p0b):
+        os.remove(q)
 
     # ----------------------------------------------------- 13 hierarchy
     sc2 = trimesh.Scene()
@@ -292,6 +337,9 @@ def run_selftest():
                            and not nonorm["present"]["Badge"]["has_NORMAL"]
                            and not nonorm["pass"])}
     os.remove(p2)
+    for q in (p0, p1):
+        if os.path.exists(q):
+            os.remove(q)
     try:
         os.rmdir(tmp)
     except OSError:

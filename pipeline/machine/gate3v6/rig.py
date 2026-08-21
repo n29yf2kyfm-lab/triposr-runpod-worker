@@ -248,6 +248,46 @@ def set_world(grey):
     nt.links.new(bg.outputs[0], out.inputs["Surface"])
 
 
+def set_stripe_world(n_stripes=26, dark=0.10, bright=1.00):
+    """ZEBRA / reflection-line environment: evenly spaced horizontal light bands
+    over the whole sky, so any surface curvature shows as a bend in a line and a
+    surface WAVE shows as a kink.
+
+    Rendered with film_transparent so the striped sky never becomes the picture's
+    background - compose.py flattens the alpha onto neutral grey. The owner's
+    spec forbids hiding faults behind dark backgrounds; a striped backdrop would
+    read as one.
+    """
+    w = bpy.data.worlds.get("W") or bpy.data.worlds.new("W")
+    bpy.context.scene.world = w
+    w.use_nodes = True
+    nt = w.node_tree
+    for n in list(nt.nodes):
+        nt.nodes.remove(n)
+    out = nt.nodes.new("ShaderNodeOutputWorld")
+    tc = nt.nodes.new("ShaderNodeTexCoord")
+    sep = nt.nodes.new("ShaderNodeSeparateXYZ")
+    asin = nt.nodes.new("ShaderNodeMath"); asin.operation = "ARCSINE"
+    mul = nt.nodes.new("ShaderNodeMath"); mul.operation = "MULTIPLY"
+    mul.inputs[1].default_value = float(n_stripes)
+    sine = nt.nodes.new("ShaderNodeMath"); sine.operation = "SINE"
+    step = nt.nodes.new("ShaderNodeMath"); step.operation = "GREATER_THAN"
+    step.inputs[1].default_value = 0.0
+    mix = nt.nodes.new("ShaderNodeMixRGB")
+    mix.inputs["Color1"].default_value = (dark, dark, dark, 1.0)
+    mix.inputs["Color2"].default_value = (bright, bright, bright, 1.0)
+    bg = nt.nodes.new("ShaderNodeBackground")
+    bg.inputs["Strength"].default_value = 1.0
+    nt.links.new(tc.outputs["Generated"], sep.inputs[0])
+    nt.links.new(sep.outputs["Z"], asin.inputs[0])
+    nt.links.new(asin.outputs[0], mul.inputs[0])
+    nt.links.new(mul.outputs[0], sine.inputs[0])
+    nt.links.new(sine.outputs[0], step.inputs[0])
+    nt.links.new(step.outputs[0], mix.inputs["Fac"])
+    nt.links.new(mix.outputs[0], bg.inputs["Color"])
+    nt.links.new(bg.outputs[0], out.inputs["Surface"])
+
+
 def add_area(name, loc, rot, size, power, colour=(1, 1, 1)):
     d = bpy.data.lights.new(name, type="AREA")
     d.shape = "RECTANGLE"
@@ -570,11 +610,22 @@ def measure_render(path, bg_srgb=None):
     """Post-hoc measurement of a written frame: clipped fraction and, when a
     background grey is given, the silhouette bbox occupancy. Never a claim -
     always read back off the actual file."""
-    im = np.rint(read_png_rgba(path)[..., :3] * 255.0).astype(np.int32)
+    raw = read_png_rgba(path)
+    im = np.rint(raw[..., :3] * 255.0).astype(np.int32)
     out = {"res": [im.shape[1], im.shape[0]]}
     mx = im.max(2)
     out["clipped_frac_frame"] = float((mx >= 255).mean())
     out["bg_corner_srgb"] = [int(x) for x in im[2, 2]]
+    a = raw[..., 3]
+    if a.min() < 0.99:                      # RGBA render: alpha IS the silhouette
+        cov = a > 0.5
+        out["silhouette_px_frac"] = float(cov.mean())
+        if cov.any():
+            ys, xs = np.nonzero(cov)
+            out["silhouette_occ_x"] = float((xs.max() - xs.min() + 1) / cov.shape[1])
+            out["silhouette_occ_y"] = float((ys.max() - ys.min() + 1) / cov.shape[0])
+            out["silhouette_occ_max"] = max(out["silhouette_occ_x"], out["silhouette_occ_y"])
+            out["clipped_frac_car"] = float((mx[cov] >= 255).mean())
     if bg_srgb is not None:
         d = np.abs(im - np.array(bg_srgb)[None, None, :]).sum(2) > 18
         ys, xs = np.nonzero(d)

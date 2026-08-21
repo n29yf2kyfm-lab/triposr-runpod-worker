@@ -68,7 +68,7 @@ import trimesh
 from scipy.spatial import cKDTree
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from tri_intersect import broadphase, tri_tri_pairs   # noqa: E402
+from tri_intersect import broadphase, tri_tri_pairs, intersect_count  # noqa: E402
 
 # The six labels that make up the ORIGINAL generated shell. Anything else in
 # the node list is a constructed component.
@@ -318,23 +318,12 @@ def check_hygiene(car, which=None):
 
 
 # --------------------------------------------------- 3. intersections/gaps
-def self_intersections(V, F, eps=1e-6, cap=8_000_000):
-    P = broadphase(V, F, V, F, share_verts=True, max_pairs=cap)
-    P = P[P[:, 0] < P[:, 1]]
-    if len(P) == 0:
-        return {"candidate_pairs": 0, "intersecting_pairs": 0, "coplanar_pairs": 0}
-    hit, cop = tri_tri_pairs(V, F, V, F, P, eps=eps)
-    return {"candidate_pairs": int(len(P)), "intersecting_pairs": int(hit.sum()),
-            "coplanar_pairs": int(cop.sum())}
+def self_intersections(V, F, eps=1e-6, cap=40_000_000):
+    return intersect_count(V, F, V, F, share_verts=True, eps=eps, max_pairs=cap)
 
 
-def pair_intersection(VA, FA, VB, FB, eps=1e-6, cap=8_000_000):
-    P = broadphase(VA, FA, VB, FB, max_pairs=cap)
-    if len(P) == 0:
-        return {"candidate_pairs": 0, "intersecting_pairs": 0, "coplanar_pairs": 0}
-    hit, cop = tri_tri_pairs(VA, FA, VB, FB, P, eps=eps)
-    return {"candidate_pairs": int(len(P)), "intersecting_pairs": int(hit.sum()),
-            "coplanar_pairs": int(cop.sum())}
+def pair_intersection(VA, FA, VB, FB, eps=1e-6, cap=40_000_000):
+    return intersect_count(VA, FA, VB, FB, eps=eps, max_pairs=cap)
 
 
 def surface_gap_mm(VA, FA, VB, FB, n=4000, seed=0):
@@ -663,43 +652,105 @@ def check_hidden_fascia(car, zone_m=0.65, pitch=0.006, win=(0.002, 0.250)):
 
 
 def v0_residue(car, v0, zone=0.65, tol=1e-4):
-    """Fraction of the ORIGINAL front-zone triangles still present.
+    """Fraction of the ORIGINAL front-zone triangles still present ANYWHERE in
+    the file, and which node holds each survivor.
 
-    Matched by triangle CENTROID to `tol` metres.  A face test, not a vertex
-    test: v5 kept every original vertex and dropped only faces, so a vertex
-    test reads 100% on a file that did delete geometry.
+    Matched by triangle CENTROID to `tol` metres.
+
+    TWO TRAPS THIS IS BUILT AROUND, both of which would give a wrong answer in
+    the DANGEROUS direction (reporting deletion that did not happen):
+      * A VERTEX test proves nothing here -- v5 kept every original vertex and
+        deleted only faces, so vertex retention reads 100% on both.
+      * A PER-LABEL test would be defeated by simply MOVING the old melt into a
+        node called `Bumper_Front`. The melt would be renamed, not removed, and
+        a same-label comparison would score it as deleted. So the match is
+        against the union of EVERY face in the target file, and the owning node
+        of each survivor is reported. `relocated` counts survivors that changed
+        node -- that number is the rename-not-remove signature.
     """
     lo, _ = v0.bounds()
     XMIN = float(lo[0])
-    out = {"zone_x_max": XMIN + zone, "tol_mm": tol * MM, "per_label": {}}
-    tot0 = tot1 = 0
-    for n in v0.shell:
-        if n not in car.nodes:
-            out["per_label"][n] = "ABSENT_IN_TARGET"
+    C1, own1, names1 = [], [], car.names
+    for i, n in enumerate(names1):
+        d = car.nodes[n]
+        if len(d["F"]) == 0:
             continue
+        c = d["V"][d["F"]].mean(1)
+        m = c[:, 0] < XMIN + zone
+        C1.append(c[m])
+        own1.append(np.full(int(m.sum()), i, np.int32))
+    if C1:
+        C1 = np.vstack(C1)
+        own1 = np.concatenate(own1)
+        tree = cKDTree(C1)
+    else:
+        C1, own1, tree = np.zeros((0, 3)), np.zeros(0, np.int32), None
+
+    out = {"zone_x_max": XMIN + zone, "tol_mm": tol * MM,
+           "target_front_faces_total": int(len(C1)), "per_label": {}}
+    tot0 = tot1 = reloc = 0
+    holders = {}
+    for n in v0.shell:
         V0, F0 = v0.nodes[n]["V"], v0.nodes[n]["F"]
-        V1, F1 = car.nodes[n]["V"], car.nodes[n]["F"]
         c0 = V0[F0].mean(1)
-        c1 = V1[F1].mean(1)
         m0 = c0[:, 0] < XMIN + zone
-        m1 = c1[:, 0] < XMIN + zone
         if m0.sum() == 0:
             continue
-        if m1.sum() == 0:
-            kept = 0
+        if tree is None:
+            kept, hits = 0, np.zeros(0, np.int32)
         else:
-            d, _ = cKDTree(c1[m1]).query(c0[m0], k=1,
-                                         distance_upper_bound=tol)
-            kept = int(np.isfinite(d).sum())
-        out["per_label"][n] = {"v0_front_faces": int(m0.sum()),
-                               "target_front_faces": int(m1.sum()),
-                               "retained": kept,
-                               "retained_pct": round(100.0 * kept / m0.sum(), 2)}
+            d, idx = tree.query(c0[m0], k=1, distance_upper_bound=tol)
+            ok = np.isfinite(d)
+            kept = int(ok.sum())
+            hits = own1[idx[ok]]
+        per_node = {}
+        for a, b in zip(*np.unique(hits, return_counts=True)):
+            per_node[names1[int(a)]] = int(b)
+            holders[names1[int(a)]] = holders.get(names1[int(a)], 0) + int(b)
+        moved = kept - per_node.get(n, 0)
+        reloc += moved
+        out["per_label"][n] = {"v0_front_faces": int(m0.sum()), "retained": kept,
+                               "retained_pct": round(100.0 * kept / m0.sum(), 2),
+                               "now_owned_by": dict(sorted(per_node.items(),
+                                                           key=lambda kv: -kv[1])),
+                               "relocated_to_other_node": int(moved)}
         tot0 += int(m0.sum())
         tot1 += kept
     out["v0_front_faces_total"] = tot0
     out["retained_total"] = tot1
     out["retained_pct_total"] = round(100.0 * tot1 / max(1, tot0), 2)
+    out["relocated_total"] = reloc
+    out["survivors_by_holding_node"] = dict(sorted(holders.items(), key=lambda kv: -kv[1]))
+    return out
+
+
+def origin_audit(car, v0, tol=1e-4):
+    """Per NODE of the target: what share of its faces are ORIGINAL V0 faces?
+
+    This is the decisive test for "is this part constructed, or is it the old
+    melt under a new name".  A genuinely rebuilt component scores ~0%.  A node
+    that is simply the original geometry relabelled scores ~100%.
+    """
+    C0 = []
+    for n in v0.names:
+        d = v0.nodes[n]
+        if len(d["F"]):
+            C0.append(d["V"][d["F"]].mean(1))
+    C0 = np.vstack(C0)
+    tree = cKDTree(C0)
+    out = {}
+    for n in car.names:
+        d = car.nodes[n]
+        if len(d["F"]) == 0:
+            out[n] = {"faces": 0}
+            continue
+        c = d["V"][d["F"]].mean(1)
+        dd, _ = tree.query(c, k=1, distance_upper_bound=tol)
+        share = float(np.isfinite(dd).mean())
+        out[n] = {"faces": int(len(c)), "faces_matching_V0": int(np.isfinite(dd).sum()),
+                  "pct_original_geometry": round(100.0 * share, 2),
+                  "verdict": ("INHERITED_ORIGINAL" if share > 0.9 else
+                              "MIXED" if share > 0.02 else "CONSTRUCTED")}
     return out
 
 
@@ -737,7 +788,9 @@ def measure(path, v0path=None, label=None, skip=()):
     if "fascia" not in skip:
         R["hidden_fascia"] = check_hidden_fascia(car)
         if v0path:
-            R["v0_residue"] = v0_residue(car, Car(v0path))
+            v0car = Car(v0path)
+            R["v0_residue"] = v0_residue(car, v0car)
+            R["origin_audit"] = origin_audit(car, v0car)
     R["seconds"] = round(time.time() - t0, 1)
     return R
 
