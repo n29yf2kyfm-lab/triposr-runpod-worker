@@ -406,11 +406,17 @@ def main():
                      "difference cannot be trusted once a ground plane is in frame).*\n")
         if const_report:
             lines.append("\n### Companion: constant-scale sheet\n")
+            occs = [r["occ_max"] or 0 for r in const_report]
             lines.append("`sheets/SHEET_8VIEW_CONSTSCALE_%s.jpg` — one ortho scale "
                          "(%.4f m) across all eight tiles, so sizes are directly "
-                         "comparable. **A single scale cannot satisfy 75-85%% on both "
-                         "the 4.28 m side view and the 1.79 m front view**; measured "
-                         "occupancies are:\n\n" % const_report[0]["ortho_scale"])
+                         "comparable between views. **A single scale cannot satisfy "
+                         "75-85%% on every tile**: measured, occupancy runs from "
+                         "%.1f%% to %.1f%% across the eight views, because the side "
+                         "view is about 2.4x the projected width of the front view. "
+                         "That is why the primary sheet fits per tile; both sheets are "
+                         "supplied rather than choosing one and calling it the answer.\n\n"
+                         % (a.tag, const_report[0]["ortho_scale"],
+                            100 * min(occs), 100 * max(occs)))
             lines.append("| view | az | occupancy | fill |\n|---|---|---|---|\n")
             for r in const_report:
                 lines.append("| %s | %03d | %.1f%% | %.1f%% |\n"
