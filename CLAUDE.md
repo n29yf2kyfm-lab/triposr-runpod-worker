@@ -3245,3 +3245,31 @@ cameras as the fidelity metric; keep IoU only as a gross-failure channel.
 silhouette (64% of large deltas on painted body against a 31% base rate). Culling never-visible interior
 faces is genuinely free (98,480 faces, 10% of the car, no line of sight from any of 224 cameras) but does not
 rescue fidelity — cull30 scored 24.54 dB against dec30's 24.57.
+
+## Blender 4.0.2 was a STRIPPED binary — upgrade it, it is free (2026-08-21)
+
+The container's `/usr/bin/blender` is 4.0.2 with **no OpenImageDenoise on disk at all** and
+`cycles.compute_device_type` enumerating empty. This file has carried "this build has no OIDN, so
+`use_denoising=True` raises RuntimeError and the render dies AFTER 'Blender quit' prints" for weeks
+and treated it as a fact of life. **It was a two-year-old stripped binary, and the fix is a free
+download.** `pipeline/machine/install_blender.sh` installs 4.5.12 LTS to `/opt`, ALONGSIDE the system
+binary so nothing mid-flight breaks, and asserts a denoised CYCLES render completes before declaring
+success. Re-run it after a rollback — it is idempotent and takes about a minute.
+
+Measured the same day on the merged Golf through `eyeball_views.py`:
+**4.0.2 at 52 samples with no denoiser is visibly grainier than 4.5.12 at 16 samples denoised** — a
+3.25x sample reduction AND a better image. Every render this project has ever produced was made
+without a denoiser.
+
+**The bigger reason is the EXTENSIONS PLATFORM, which starts at 4.2 LTS.** The free GPL Class-A
+add-ons needed to hand-build car bodies — **Surface Mesh** (curve-network panel surfacing, Coons
+patches), **Surface Diagnostics** (zebra / isoangle / draft / sections), **Surface Psycho** (NURBS
+with continuity control and STEP I/O), Hardflow, PolyQuilt, PDT — **cannot install on 4.0.2 at all.**
+The free tier was blocked by our own binary, not by the ecosystem.
+
+**EEVEE still does not run** — no EGL in this container, and on 4.5 it dies without even raising a
+Python exception. **CYCLES on CPU remains the only working engine.** What changed is that Cycles now
+has its denoiser. Keep using **Standard** view transform, never AgX.
+
+Point tooling at `$BLENDER_BIN` rather than hardcoding `/usr/bin/blender`, so a container that has
+run the installer picks up the good one and a fresh one still works.
