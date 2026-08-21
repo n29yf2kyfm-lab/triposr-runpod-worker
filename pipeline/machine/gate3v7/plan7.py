@@ -80,6 +80,7 @@ import numpy as np
 from scipy import ndimage
 
 TEX, SURVEY, OUT = sys.argv[1:4]
+CARGLB = sys.argv[4] if len(sys.argv) > 4 else None
 
 d = np.load(TEX, allow_pickle=True)
 D, ys, zs, OWN, nodes = d["D"], d["ys"], d["zs"], d["OWN"], list(d["nodes"])
@@ -87,8 +88,86 @@ RES, XNOSE = float(d["RES"]), float(d["XMIN"])
 sv = json.load(open(SURVEY))
 SIL = np.isfinite(D)
 
-ZC = 0.0265                     # decision 1, see docstring: FRONT-LOCAL centreline
 SPEC_FACE_MM = 554.0
+
+
+def front_local_centreline(glb):
+    """Reflection fit on the FRONT THIRD of real bodywork only.
+
+    Excludes the melted fascia (x > nose+0.40) so the melt cannot vote, and
+    excludes the wheels entirely -- Gate 6 measured 76/114 mm of hub asymmetry
+    on this car, which makes them the worst available witness.  Returns the
+    minimiser of the mean capped nearest-neighbour distance between the cloud
+    and its own mirror image.
+    """
+    import trimesh
+    from scipy.spatial import cKDTree
+    sc = trimesh.load(glb, force="scene", process=False)
+    V = []
+    for n in ("Body_Shell", "Glass_Windscreen"):
+        if n in sc.graph.nodes_geometry:
+            T, g = sc.graph[n]
+            V.append(trimesh.transform_points(
+                np.asarray(sc.geometry[g].vertices, float), T))
+    V = np.vstack(V)
+    x0 = V[:, 0].min()
+    V = V[(V[:, 0] > x0 + 0.40) & (V[:, 0] < x0 + 1.55)]
+    # Exclude the lower third: sills and lower panels carry most of the body's
+    # asymmetry and drag the fit. This window is the one validated by hand
+    # against the front tyres (+0.0257) and front rims (+0.0290).
+    V = V[V[:, 1] > V[:, 1].min() + 0.50]
+    sub = V[::3]
+    tree = cKDTree(sub)
+
+    def cost(zc):
+        m = sub.copy()
+        m[:, 2] = 2 * zc - m[:, 2]
+        d, _ = tree.query(m, k=1)
+        return float(np.mean(np.minimum(d, 0.04)))
+
+    grid = np.arange(-0.06, 0.0601, 0.001)
+    c = [cost(z) for z in grid]
+    b = float(grid[int(np.argmin(c))])
+    fine = np.arange(b - 0.001, b + 0.00101, 0.00025)
+    cf = [cost(z) for z in fine]
+    bb = float(fine[int(np.argmin(cf))])
+
+    # THE REFLECTION FIT ALONE IS NOT STABLE ENOUGH TO QUOTE.  Its cost surface
+    # is shallow (the minimum beats z=0 by only ~20%), and changing the search
+    # grid or the sample window moves it by ~12 mm.  So it is one vote of four,
+    # and the CENTRELINE IS THE MEDIAN of independent front-local estimators:
+    # this fit, the front tyre pair, the front rim pair, and Body_Shell's own
+    # z-midpoint at the nose station.  The spread between them is reported, and
+    # it IS the uncertainty -- there is no single centreline on a car whose
+    # midline sweeps 140 mm from nose to tail.
+    est = {"reflection_fit": bb}
+    for a, bnode, tag in (("Wheel_FL_Tyre", "Wheel_FR_Tyre", "front_tyres"),
+                          ("Wheel_FL_Rim", "Wheel_FR_Rim", "front_rims")):
+        if a in sc.graph.nodes_geometry and bnode in sc.graph.nodes_geometry:
+            m = []
+            for nn in (a, bnode):
+                T, g = sc.graph[nn]
+                m.append(trimesh.transform_points(
+                    np.asarray(sc.geometry[g].vertices, float), T)[:, 2].mean())
+            est[tag] = float(np.mean(m))
+    T, g = sc.graph["Body_Shell"]
+    BS = trimesh.transform_points(np.asarray(sc.geometry[g].vertices, float), T)
+    nx = BS[:, 0].min()
+    sel = (BS[:, 0] < nx + 0.50) & (BS[:, 1] > BS[:, 1].min() + 0.45)
+    if sel.sum() > 500:
+        est["nose_station_midpoint"] = float(
+            0.5 * (BS[sel, 2].min() + BS[sel, 2].max()))
+    vals = np.array(list(est.values()))
+    return (float(np.median(vals)), min(cf), cost(0.0), int(len(sub)),
+            {k: round(v, 5) for k, v in est.items()},
+            round(float(vals.max() - vals.min()) * 1000, 1))
+
+
+if CARGLB:
+    ZC, ZCOST, ZCOST0, ZN_PTS, ZEST, ZSPREAD = front_local_centreline(CARGLB)
+    ZC = round(ZC, 4)
+else:                            # legacy path: the value fitted for car_rebound
+    ZC, ZCOST, ZCOST0, ZN_PTS, ZEST, ZSPREAD = 0.0265, None, None, None, {}, None
 
 
 def profile(zt, half=0.030, smooth=11):
@@ -115,6 +194,30 @@ for thr in (1.0, 1.3, 1.6):
     datum_by_thr[thr] = (float(np.nanmedian(v)), float(np.nanstd(v)))
 Y_DATUM = round(datum_by_thr[1.3][0], 4)
 
+# GUARD.  The datum detector scans a FIXED height window with FIXED tangent
+# thresholds, both calibrated on this car's pose.  On a differently-posed copy
+# of the same mesh (the grounded `car_merged.glb`, rotated 4.7 deg) the scan ran
+# off the top of its window and returned 1.0180 for ALL THREE thresholds -- a
+# zero-width band, and a "front face" of 656 mm against the real car's 554.  It
+# produced a number, and the number was fiction.  A gate that cannot fail is not
+# a gate, so the two tells are asserted: the threshold band must have real width,
+# and the resulting face height must be a plausible fraction of the published
+# one.  If either fires, the detector needs recalibrating for that pose -- it
+# must NOT be worked around by widening the window until a number appears.
+_band = abs(datum_by_thr[1.6][0] - datum_by_thr[1.0][0])
+_TOPW = 1.02
+DATUM_TRUSTED = True
+DATUM_FAULTS = []
+if _band < 1e-6:
+    DATUM_TRUSTED = False
+    DATUM_FAULTS.append(
+        f"zero-width threshold band: all thresholds returned y={Y_DATUM}")
+if Y_DATUM > _TOPW - 0.005:
+    DATUM_TRUSTED = False
+    DATUM_FAULTS.append(
+        f"datum {Y_DATUM} is at the top of the search window ({_TOPW}) -- the "
+        f"scan did not find a bonnet edge inside it")
+
 # ---------------------------------------------------- bumper lowest edge
 lows = []
 for zt in [-0.30, -0.10, 0.0, 0.10, 0.30, 0.50]:
@@ -127,6 +230,11 @@ Y_LOW = round(float(np.median(lows)), 4)
 
 H = Y_DATUM - Y_LOW
 SCALE = H / (SPEC_FACE_MM / 1000.0)
+if not (0.60 <= SCALE <= 1.05):
+    DATUM_TRUSTED = False
+    DATUM_FAULTS.append(
+        f"front-face height {H*1000:.0f} mm gives scale {SCALE:.3f} against the "
+        f"published {SPEC_FACE_MM:.0f} mm; outside the plausible 0.60-1.05 band")
 
 # ------------------------------------------------------------ the stack
 # mm below datum on the REAL car -> fraction of front-face height -> mesh y
@@ -182,10 +290,16 @@ P = {
    "bumper_low_per_column_y": [round(float(x), 4) for x in lows],
    "centreline_choice": {
        "value": ZC,
-       "basis": "FRONT-LOCAL centreline. The car is bowed; there is no single "
-                "centreline. Front-third NN symmetry fit +0.0265 (cost 19.97 mm "
-                "vs 25.13 mm at z=0); front tyres +0.0257; front rims +0.0290. "
-                "Agreement 3.3 mm.",
+       "basis": "FRONT-LOCAL centreline, fitted on THIS file by reflection of "
+                "the front third of real bodywork (melt and wheels excluded).",
+       "fit_cost_mm": None if ZCOST is None else round(ZCOST * 1000, 3),
+       "fit_cost_at_z0_mm": None if ZCOST0 is None else round(ZCOST0 * 1000, 3),
+       "fit_points": ZN_PTS,
+       "estimators": ZEST,
+       "estimator_spread_mm": ZSPREAD,
+       "method": "MEDIAN of independent front-local estimators; the reflection "
+                 "fit alone moves ~12 mm with the search grid, so it is one "
+                 "vote, not the answer.",
        "rear_third_fit": -0.068,
        "body_midline_sweep_mm": 140,
        "withdrawn": "An earlier z=0.000 choice in this same file was WRONG and "
@@ -226,7 +340,13 @@ P = {
               "note": "car's RIGHT only = NEGATIVE z. The one proven asymmetry."},
  },
 }
+P["frame"]["datum_trusted"] = DATUM_TRUSTED
+P["evidence"]["datum_faults"] = DATUM_FAULTS
 json.dump(P, open(OUT, "w"), indent=1)
+if not DATUM_TRUSTED:
+    print("DATUM_UNTRUSTED -- do not build on this plan:")
+    for f_ in DATUM_FAULTS:
+        print("   *", f_)
 
 print(f"CENTRELINE z {ZC:+.4f} (stated, +-10mm)")
 print(f"DATUM y {Y_DATUM:.4f}  band {datum_by_thr[1.0][0]:.4f}..{datum_by_thr[1.6][0]:.4f}")
