@@ -1264,22 +1264,98 @@ def gate_asset(asset_id, master_path, cand_path, work, paint_recorded,
         r["paintRoute"] = route
         r["paintResolution"] = how
         g["G3_respray"] = r
+
+    # ---- WHERE DID THE FAILURE COME FROM? --------------------------------
+    # IMPLEMENTED 2026-08-21. The module docstring has promised this since the
+    # file was written ("A live asset whose master already fails a gate is
+    # reported blocked-by-master") and verdict() never did it, so every
+    # pre-existing defect in a LIVE asset was being reported as though the
+    # compression had caused it. Measured on the first three assets of the
+    # first sample run, all three failures were pre-existing:
+    #   audi-a2-v1   G2  tyre `Pneus` luminance 0.2151 -- byte-identical in
+    #                    master and candidate, tyre area ratio 1.000
+    #   vw-amarok    G3  paint inferred as `METAL_BLACK` (BODYISH matches the
+    #                    whole word `black`), which owns ZERO pixels, so the
+    #                    respray moved nothing. The real body is in the
+    #                    unclassified 72% -- the "material NAMED carpaint is
+    #                    routinely NOT the body" problem, in the fallback.
+    # Re-running the failing gate against the MASTER is the only way to tell a
+    # compression defect from an inherited one, and the difference decides
+    # whether the report says "we broke 3" or "3 were already like that".
+    # Only failing gates are re-checked, so a clean asset pays nothing.
+    for key, recheck in (
+            ("G1_glazing",
+             lambda: g1_glazing(glass_probe_local(master_path),
+                                glass_probe_local(master_path),
+                                per_m, per_m, min_area)),
+            ("G2_tyres",
+             lambda: g2_tyres(master_path, master_path, per_m, per_m, min_area)),
+            ("G4_file",
+             lambda: g4_file(master_path, master_path, mm_m, mm_m,
+                             os.path.join(work, "master_recheck"))),
+            ("G3_respray",
+             lambda: respray_control(master_path,
+                                     os.path.join(work, "respray_master"),
+                                     next((c for c in cams if c["view"] == "az215"),
+                                          cams[0]),
+                                     (g.get("G3_respray") or {}).get("paintMaterials"))),
+    ):
+        blk = g.get(key)
+        if not blk or blk.get("status") != "FAIL":
+            continue
+        os.makedirs(os.path.join(work, "master_recheck"), exist_ok=True)
+        try:
+            mr = recheck()
+        except Exception as e:                                   # noqa: BLE001
+            blk["masterRecheck"] = {"status": "ERROR", "error": str(e)}
+            continue
+        blk["masterRecheck"] = {"status": mr.get("status"),
+                                "failures": mr.get("failures")}
+        if mr.get("status") == "FAIL":
+            blk["blockedByMaster"] = True
+            blk["provenance"] = ("PRE-EXISTING in the live master: the same gate "
+                                 "fails on the uncompressed file, so the "
+                                 "compression did not cause this. Still not "
+                                 "shipped.")
+        else:
+            blk["blockedByMaster"] = False
+            blk["provenance"] = ("CAUSED BY THE COMPRESSION: the master passes "
+                                 "this same gate.")
     return g, mm_m, mm_c
 
 
 def verdict(gates):
-    """PASS only if all five gates pass. Anything else is NOT SHIPPED."""
+    """PASS only if all five gates pass. Anything else is NOT SHIPPED.
+
+    Three distinct not-shipped verdicts, because they mean different things and
+    collapsing them produces a WRONG report rather than a terse one:
+      REJECT            a gate failed and the MASTER passes it -- the
+                        compression broke the asset.
+      BLOCKED-BY-MASTER a gate failed and the master fails it identically --
+                        the live asset was already like that. Still not
+                        shipped; the compression is not what is wrong.
+      BLOCKED           a gate could not be run at all (NOT_TESTED). Never
+                        counted as either a pass or a compression failure.
+    """
     order = ["G0_size", "G1_glazing", "G2_tyres", "G3_respray", "G4_file", "G5_psnr"]
     st = {k: gates.get(k, {}).get("status", "MISSING") for k in order}
     if all(v == "PASS" for v in st.values()):
         return "PASS", st, []
-    reasons = []
+    reasons, ours, inherited = [], [], []
     for k in order:
         if st[k] == "FAIL":
-            reasons += ["%s: %s" % (k, f) for f in (gates[k].get("failures") or ["FAIL"])]
+            blocked = bool(gates[k].get("blockedByMaster"))
+            (inherited if blocked else ours).append(k)
+            tag = "[pre-existing in master] " if blocked else "[caused by compression] "
+            reasons += ["%s: %s%s" % (k, tag, f)
+                        for f in (gates[k].get("failures") or ["FAIL"])]
         elif st[k] in ("NOT_TESTED", "MISSING"):
             reasons.append("%s: %s (%s)" % (k, st[k], gates.get(k, {}).get("reason", "")))
-    return ("REJECT" if any(v == "FAIL" for v in st.values()) else "BLOCKED"), st, reasons
+    if ours:
+        return "REJECT", st, reasons
+    if inherited:
+        return "BLOCKED-BY-MASTER", st, reasons
+    return "BLOCKED", st, reasons
 
 
 def process_one(entry, args, work_root, already):
@@ -1727,15 +1803,34 @@ def summarise(results):
     bad = [r for r in results if r.get("status") not in ("PASS", "SKIP-already-receipted")]
     bin_ = sum(r.get("masterBytes") or 0 for r in results if r.get("masterBytes"))
     bout = sum(r.get("candidateBytes") or 0 for r in results if r.get("candidateBytes"))
+    okin = sum(r.get("masterBytes") or 0 for r in ok)
+    okout = sum(r.get("candidateBytes") or 0 for r in ok)
     print("\n%s\nAGGREGATE over %d processed" % ("=" * 78, len(results)))
-    print("  in  %10.3f MB\n  out %10.3f MB\n  ratio %.2fx   saved %.3f MB (%.1f%%)"
+    print("  ALL PROCESSED   in %10.3f MB  out %10.3f MB  ratio %.2fx  saved %.3f MB (%.1f%%)"
           % (bin_ / 1e6, bout / 1e6, (bin_ / bout) if bout else 0,
              (bin_ - bout) / 1e6, 100.0 * (bin_ - bout) / bin_ if bin_ else 0))
-    print("  PASS %d   not shipped %d" % (len(ok), len(bad)))
+    print("  SHIPPABLE ONLY  in %10.3f MB  out %10.3f MB  ratio %.2fx  saved %.3f MB (%.1f%%)"
+          % (okin / 1e6, okout / 1e6, (okin / okout) if okout else 0,
+             (okin - okout) / 1e6, 100.0 * (okin - okout) / okin if okin else 0))
+    # These three are NOT the same thing and must never be added together.
+    by = {}
     for r in bad:
-        print("    %-42s %-8s %s" % (r.get("receiptId", "?")[:42], r.get("status"),
-                                     "; ".join((r.get("rejectReasons") or
-                                                [r.get("error", "")]))[:170]))
+        by.setdefault(r.get("status", "?"), []).append(r)
+    print("  PASS %d   not shipped %d  (%s)"
+          % (len(ok), len(bad),
+             ", ".join("%s %d" % (k, len(v)) for k, v in sorted(by.items())) or "-"))
+    marg = [r for r in ok
+            if ((r.get("gates", {}).get("G0_size") or {}).get("marginal"))]
+    if marg:
+        print("  of the PASSes, %d are MARGINAL (<5%% saved -- already "
+              "texture-dominated): %s"
+              % (len(marg), ", ".join(r["receiptId"] for r in marg)[:150]))
+    for st in sorted(by):
+        print("  -- %s" % st)
+        for r in by[st]:
+            print("    %-42s %s" % (r.get("receiptId", "?")[:42],
+                                    "; ".join((r.get("rejectReasons") or
+                                               [r.get("error", "")]))[:170]))
 
 
 def build_manifest(a):
