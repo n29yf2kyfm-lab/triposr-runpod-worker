@@ -18,13 +18,21 @@ import plan as planner                                            # noqa: E402
 import compose as C                                               # noqa: E402
 
 BLENDER = "/usr/bin/blender"
-RES_MAIN = [2560, 2048]
-RES_WIRE = [3072, 2458]
-RES_TILE = [1600, 1280]
-SAMPLES_LIT = 96
-SAMPLES_CLAY = 80
+# G3V6_RES_SCALE / G3V6_SAMP_SCALE let the whole package be dry-run at a
+# fraction of the cost before the expensive pass. A dry run at 0.15/0.1 proves
+# every view spec actually renders what it claims in about two minutes.
+_RS = float(os.environ.get("G3V6_RES_SCALE", "1"))
+_SS = float(os.environ.get("G3V6_SAMP_SCALE", "1"))
+_r = lambda wh: [max(64, int(round(wh[0] * _RS / 2) * 2)),
+                 max(64, int(round(wh[1] * _RS / 2) * 2))]
+_s = lambda n: max(1, int(round(n * _SS)))
+RES_MAIN = _r([2560, 2048])
+RES_WIRE = _r([3072, 2458])
+RES_TILE = _r([1600, 1280])
+SAMPLES_LIT = _s(96)
+SAMPLES_CLAY = _s(80)
 SAMPLES_FLAT = 1
-SAMPLES_ZEBRA = 128
+SAMPLES_ZEBRA = _s(128)
 
 
 def sh(cmd, log_path):

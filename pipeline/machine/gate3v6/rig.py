@@ -180,7 +180,7 @@ def make_wire_mat(name, wire_px=1.0, base=(0.86, 0.86, 0.86), wire=(0.02, 0.02, 
     wf = nt.nodes.new("ShaderNodeWireframe")
     wf.use_pixel_size = True
     wf.inputs["Size"].default_value = wire_px
-    nt.links.new(wf.outputs["Fact"], mix.inputs["Fac"])
+    nt.links.new(wf.outputs["Fac"], mix.inputs["Fac"])
     nt.links.new(base_sh.outputs[0], mix.inputs[1])
     nt.links.new(wire_sh.outputs[0], mix.inputs[2])
     nt.links.new(mix.outputs[0], out.inputs["Surface"])

@@ -285,11 +285,19 @@ def hygiene_one(V, F, T=None, area_eps=1e-10):
         r["watertight"] = bool(m.is_watertight)
         r["volume_cm3"] = float(abs(m.volume) * 1e6)
         r["volume_sign_negative"] = bool(m.is_watertight and m.volume < 0)
+        # is_volume == watertight AND winding consistent AND positive volume.
+        # This is the rigorous inversion test for a CLOSED part: a whole part
+        # flipped inside-out stays winding-CONSISTENT and only shows up here.
+        r["is_volume"] = bool(m.is_volume)
     except Exception as e:                                   # pragma: no cover
         r["winding_error"] = str(e)
 
-    # outward-normal test for closed parts: fraction of faces whose geometric
-    # normal points back toward the part centroid
+    # Informational only, NOT a gate: fraction of faces whose normal points
+    # back toward the part centroid. On the V5 lens solids this read 44.89%
+    # and those parts are not inverted -- a concave/bowl-shaped closed solid
+    # legitimately has many faces pointing "inward" of its own centroid. The
+    # centroid test is only sound for convex shapes, so the inversion verdict
+    # is taken from is_volume / volume sign instead.
     if r.get("watertight"):
         Tv = V[F]
         n = np.cross(Tv[:, 1] - Tv[:, 0], Tv[:, 2] - Tv[:, 0])

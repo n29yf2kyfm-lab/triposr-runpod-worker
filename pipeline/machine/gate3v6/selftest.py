@@ -74,6 +74,20 @@ def run_selftest():
         "injection": "winding of one cube face reversed",
         "control_ok": bool(clean["winding_consistent"] and not bad["winding_consistent"])}
 
+    # ---- 3b whole-part inversion (winding stays CONSISTENT) --------------
+    # Flipping EVERY face of a closed part leaves the winding self-consistent,
+    # so the winding test cannot see it. is_volume / volume sign can.
+    Fi = Fc[:, ::-1].copy()
+    inv = V.hygiene_one(Vc, Fi)
+    R["whole_part_inverted"] = {
+        "clean_is_volume": clean.get("is_volume"),
+        "inverted_is_volume": inv.get("is_volume"),
+        "inverted_winding_consistent": inv["winding_consistent"],
+        "inverted_volume_sign_negative": inv.get("volume_sign_negative"),
+        "injection": "every face of a closed cube reversed",
+        "control_ok": bool(clean.get("is_volume") and not inv.get("is_volume")
+                           and inv["winding_consistent"])}
+
     # ------------------------------------------------------- 4 non-manifold
     Vn = np.vstack([Vc, [[0.2, 0.0, 0.0]]])
     Fn = np.vstack([Fc, [[Fc[0][0], Fc[0][1], len(Vc)]]])   # 3rd face on an edge
