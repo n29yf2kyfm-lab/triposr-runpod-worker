@@ -1372,6 +1372,33 @@ check("22o every training class resolves to a real taxonomy type",
           for c in _CM.FINAL_CLASSES),
       str([_CM.FINAL_CLASSES[c]["canonical"] for c in _CM.FINAL_CLASSES]))
 
+# EVERY vocabulary the trainer can emit, not just the one in production.
+# 22a only pinned the six-class set, so --merge-groups and --groups-v2 models
+# still had most of their classes deleted by the same `if not dtype: continue`
+# — the original bug, left armed for the next run that used a supported flag.
+for _vocab, _names in sorted(DET.TRAINING_VOCABULARIES.items()):
+    _lost = [n for n in _names if not DET.DAMAGE_CLASS_MAP.get(n)]
+    check(f"22p {_vocab}: every class survives the class map", not _lost,
+          str(_lost))
+
+# The env override is a documented escape hatch, so its two forms must both
+# resolve correctly. A bare comma list is POSITIONAL, and following the old
+# error message's advice with a 1-based model shifted every class by one.
+_env_ids = DET._label_for({1: "crack_glass", 2: "dent"}, 1)
+check("22q explicit id=name form is read by id", _env_ids == "crack_glass")
+os.environ["DAMAGE_DETECTOR_LABELS"] = "1=crack_glass,2=dent,3=lamp_wheel"
+_parsed = DET._labels_from_env()
+check("22r an id=name env var parses to a mapping",
+      isinstance(_parsed, dict) and _parsed[1] == "crack_glass", str(_parsed))
+check("22s ids from the env var resolve without shifting",
+      [DET._label_for(_parsed, i) for i in (1, 2, 3)]
+      == ["crack_glass", "dent", "lamp_wheel"])
+os.environ["DAMAGE_DETECTOR_LABELS"] = "dent,rust_paint"
+_plain = DET._labels_from_env()
+check("22t a bare comma list still parses positionally",
+      _plain == ["dent", "rust_paint"], str(_plain))
+os.environ.pop("DAMAGE_DETECTOR_LABELS", None)
+
 
 # ---- report ---------------------------------------------------------------
 print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")

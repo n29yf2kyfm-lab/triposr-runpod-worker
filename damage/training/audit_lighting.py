@@ -49,6 +49,7 @@ the offending metric can be named rather than "the data is biased".
 """
 import argparse
 import collections
+import hashlib
 import json
 import math
 import os
@@ -128,18 +129,6 @@ def cohens_d(a_mean, a_sd, b_mean, b_sd, na, nb):
     sp2 = ((na - 1) * a_sd ** 2 + (nb - 1) * b_sd ** 2) / (na + nb - 2)
     sp = math.sqrt(max(1e-12, sp2))
     return (a_mean - b_mean) / sp
-
-
-def owning_class(boxes, idx_to_name):
-    """The class this image is counted under: its RAREST present class.
-
-    Matches build_train_index's `owning_class`, so the lighting table is
-    grouped exactly the way the training sampler groups the corpus. Grouping
-    them differently would produce a table that describes a split that is not
-    the one being trained.
-    """
-    present = {idx_to_name.get(int(b[0]), str(b[0])) for b in boxes}
-    return sorted(present)[0] if present else "none"
 
 
 def run(index_dir, corpus, sample, out_json, seed):
@@ -322,9 +311,15 @@ def run_augmented(index_dir, corpus, sample, seed):
             with Image.open(path) as im:
                 im = im.convert("RGB")
                 for name, fn in ops:
-                    # Each op gets its own seeded rng, so re-running this
-                    # reproduces the table exactly.
-                    r = random.Random(hash((rec["sha"], name)) & 0xFFFFFFFF)
+                    # Seeded from the sha TEXT, not from hash(): Python
+                    # randomises str hashing per process, so hash((sha, name))
+                    # gave a different seed on every run while the comment
+                    # here claimed the table reproduced exactly. Two runs of
+                    # this audit were not comparable, which is the one thing
+                    # an audit has to be.
+                    r = random.Random(
+                        int(hashlib.sha256(
+                            (rec["sha"] + name).encode()).hexdigest()[:8], 16))
                     out = im if fn is None else fn(im, r)
                     m = measure(out)
                     bands[name][band_of(m["luma"])] += 1

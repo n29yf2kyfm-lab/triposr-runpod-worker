@@ -629,6 +629,22 @@ print(f"{n} images extracted from {len(shards)} shards "
 # The materialise step would otherwise fail image by image, long after the
 # download is paid for.
 assert n > 100000, f"only {n} images extracted"
+# ASSERT THE EXTRA SOURCES TOO. `extra` was printed and never checked, so a
+# repo with no src_*.tar passed this gate and materialise_index then dropped
+# every CarDD sample into its silent `dropped` counter -- the download paid
+# for, the data absent, and nothing said so. The index knows how many it
+# expects, so compare against it rather than against a magic number.
+import json as _json
+# An index path that does NOT start with "images/" belongs to an extra source
+# (e.g. "cardd/images/x.jpg"), so this counts exactly what src_*.tar must have
+# delivered.
+_want = sum(1 for _ln in open("/workspace/corpus/idx/images.jsonl")
+            if not _json.loads(_ln)["file"].startswith("images/"))
+if _want:
+    assert extra >= _want, (
+        f"index expects {_want} images from extra sources but only {extra} "
+        f"were extracted -- src_*.tar shards are missing from the corpus repo")
+    print(f"extra sources OK: {extra} files for {_want} indexed images")
 # Reclaim the tars: the pod holds corpus + extracted images + materialised
 # samples at once, and the tars are dead weight once unpacked.
 for s in shards:

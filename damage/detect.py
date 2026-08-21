@@ -86,6 +86,29 @@ DAMAGE_CLASS_MAP = {
     "lamp_wheel": "lamp_damage",
     "rust_paint": "rust",
     "structural": "deformation",
+
+    # AND THE GROUPED VOCABULARIES, which are the same bug again.
+    # build_train_index supports --merge-groups and --groups-v2, which train
+    # against `surface` / `broken_part` / `deformation` instead of the six
+    # above. Those names were not here either, so a groups-v2 model would have
+    # had two of its three classes deleted by the same `if not dtype: continue`
+    # — including surface, which is scratches and rust together. Fixing only
+    # the vocabulary that happens to be in production leaves the trap armed
+    # for the next run that uses a supported flag.
+    #   surface      scratches + rust + paint failure  -> scratch
+    #   broken_part  glass + lamps + wheels            -> crack
+    #   deformation  dents + structural                -> deformation
+    "surface": "scratch",
+    "broken_part": "crack",
+}
+
+# Every class vocabulary the training pipeline can emit. Anything here must
+# resolve through DAMAGE_CLASS_MAP or its detections are silently dropped.
+TRAINING_VOCABULARIES = {
+    "six-class": ("crack_glass", "dent", "lamp_wheel", "rust_paint",
+                  "scratch_scuff", "structural"),
+    "merge-groups": ("surface", "dent", "structural", "broken_part"),
+    "groups-v2": ("surface", "deformation", "broken_part"),
 }
 
 # The class names the shipped 6-class model emits, in the id order its
@@ -607,14 +630,29 @@ def detector_backend():
         # nothing in DAMAGE_CLASS_MAP and was dropped: a scan that found
         # damage reported none, with no error anywhere. Config that is
         # mandatory but silent when missing is not config, it is a trap.
-        labels = _labels_from_env() or _labels_beside_model(model_path)
+        # THE MODEL WINS OVER THE ENVIRONMENT, not the other way round.
+        #
+        # This read the env var FIRST, and that turned the error message below
+        # into a trap: it tells the operator to set DAMAGE_DETECTOR_LABELS,
+        # and a plain comma list is read BY POSITION while RF-DETR emits
+        # 1-based ids. Following the instruction therefore shifted every class
+        # by one and silently dropped the sixth — re-entering, through the
+        # escape hatch, the exact off-by-one _label_for exists to prevent.
+        # The model's own classes.json carries explicit ids and cannot be
+        # misread, so it is authoritative and the override is the fallback.
+        labels = _labels_beside_model(model_path) or _labels_from_env()
         if not labels:
             raise RuntimeError(
                 "detector class names could not be resolved: no classes.json "
-                f"beside {model_path} and DAMAGE_DETECTOR_LABELS is unset. "
+                f"beside {model_path}, and DAMAGE_DETECTOR_LABELS is unset. "
                 "Without names every detection is discarded and the scan "
                 "reports no damage, so this fails instead of returning an "
-                "empty report.")
+                "empty report. FIX: copy the training run's classes.json to "
+                f"{os.path.splitext(model_path or 'model')[0]}.classes.json. "
+                "Only if that is impossible, set DAMAGE_DETECTOR_LABELS — and "
+                "write it as explicit ids, '1=crack_glass,2=dent,...', "
+                "because a bare comma list is read by POSITION and this "
+                "model's ids start at 1.")
         # The input resolution likewise comes from the model when it declares
         # one. The shipped export is fixed at 560 while this defaulted to 640,
         # so the default was not merely suboptimal — a fixed-shape input
@@ -694,9 +732,31 @@ def _attach_grades(img, dets):
 
 
 def _labels_from_env():
-    """Class-index -> name, from DAMAGE_DETECTOR_LABELS (comma separated)."""
+    """Class names from DAMAGE_DETECTOR_LABELS. Two accepted forms.
+
+        1=crack_glass,2=dent,...   explicit ids -> dict, read BY ID
+        crack_glass,dent,...       positional   -> list, read BY POSITION
+
+    The explicit form exists because the positional one is a foot-gun for any
+    1-based exporter: RF-DETR reserves class 0, so a plain list silently shifts
+    every class by one and loses the last. Both are supported because the older
+    0-based exporters are configured with a plain list and still work, but
+    anything written today should use ids.
+    """
     raw = os.environ.get("DAMAGE_DETECTOR_LABELS", "")
-    return [s.strip() for s in raw.split(",") if s.strip()] or None
+    parts = [s.strip() for s in raw.split(",") if s.strip()]
+    if not parts:
+        return None
+    if all("=" in p for p in parts):
+        out = {}
+        for p in parts:
+            k, _, v = p.partition("=")
+            try:
+                out[int(k.strip())] = v.strip()
+            except ValueError:
+                return parts          # not really id=name; treat as positional
+        return out or None
+    return parts
 
 
 def _local_path(ref):

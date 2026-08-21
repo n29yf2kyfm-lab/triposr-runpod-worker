@@ -66,25 +66,27 @@ def iou_xywh(a, b):
     return inter / (aw * ah + bw * bh - inter)
 
 
-def clean_image(anns, W, H):
-    """(kept, n_micro, n_dup) for one image's annotations.
+def clean_image_detailed(anns, W, H):
+    """(kept, micro_removed, dup_removed) with the removals themselves.
 
-    Duplicates are resolved by keeping the LARGER box: a smaller near-copy is
-    usually a partial re-draw of the same damage, and the fuller extent is the
-    better target.
+    The caller needs to know WHICH class each removal came from, and the
+    earlier version reconstructed that by slicing `removed[:m]` / `removed[m:]`
+    on the assumption that micro removals precede duplicate ones in annotation
+    order. They interleave, so the per-class report attributed removals to the
+    wrong classes. Returning the two lists is both simpler and correct.
     """
     frame = float(W * H) or 1.0
-    survivors, micro = [], 0
+    survivors, micro = [], []
     for a in anns:
         x, y, w, h = a["bbox"]
         if w <= 0 or h <= 0 or (w * h) / frame < MICRO:
-            micro += 1
+            micro.append(a)
             continue
         survivors.append(a)
 
     # Largest first, so the box that survives a duplicate pair is the larger.
     survivors.sort(key=lambda a: -(a["bbox"][2] * a["bbox"][3]))
-    kept, dup = [], 0
+    kept, dup = [], []
     for a in survivors:
         clash = False
         for b in kept:
@@ -93,11 +95,14 @@ def clean_image(anns, W, H):
             if iou_xywh(a["bbox"], b["bbox"]) > DUP_IOU:
                 clash = True
                 break
-        if clash:
-            dup += 1
-        else:
-            kept.append(a)
+        (dup if clash else kept).append(a)
     return kept, micro, dup
+
+
+def clean_image(anns, W, H):
+    """(kept, n_micro, n_dup) — counts only. See clean_image_detailed."""
+    kept, micro, dup = clean_image_detailed(anns, W, H)
+    return kept, len(micro), len(dup)
 
 
 def clean_source(path, dry_run):
@@ -114,16 +119,11 @@ def clean_source(path, dry_run):
     out, micro, dup = [], collections.Counter(), collections.Counter()
     for iid, anns in by_img.items():
         W, H = size.get(iid, (640, 640))
-        kept, m, d = clean_image(anns, W, H)
+        kept, m_rm, d_rm = clean_image_detailed(anns, W, H)
         out.extend(kept)
-        if m or d:
-            for a in anns:
-                pass
-        # attribute the removals by class for the report
-        removed = [a for a in anns if a not in kept]
-        for a in removed[:m]:
+        for a in m_rm:
             micro[cats.get(a["category_id"], "?")] += 1
-        for a in removed[m:]:
+        for a in d_rm:
             dup[cats.get(a["category_id"], "?")] += 1
 
     before, after = len(doc["annotations"]), len(out)

@@ -248,6 +248,22 @@ def upload_extra_sources(api, repo, corpus, shard_mb, scratch):
     srcs = sorted({a.split("/")[0] for a, _p in files})
     print(f"\nextra sources {srcs}: {len(files):,} images -> "
           f"{len(shards)} shards of ~{shard_mb}MB")
+
+    # THE SAME RESUME GUARD AS THE images_* FAMILY, which this originally
+    # lacked. Membership here is decided by packing sorted (source, filename)
+    # pairs into shard_mb buckets, so adding a SECOND extra source re-cuts
+    # every boundary while the names stay src_0000..N — and resuming by name
+    # then skips shards whose contents have changed, publishing a corpus
+    # quietly missing images. Guarding one family and not the other was worse
+    # than guarding neither, because it looked handled.
+    prior = {f for f in existing if f.startswith("shards/src_")}
+    if prior and len(prior) != len(shards):
+        raise SystemExit(
+            f"refusing to resume: the repo holds {len(prior)} src_*.tar "
+            f"shards but this plan plans {len(shards)}. The extra-source set "
+            f"or --shard-mb has changed, so the names no longer describe the "
+            f"same contents. Delete shards/src_*.tar and re-upload the family.")
+
     for i, members in enumerate(shards):
         remote = f"shards/src_{i:04d}.tar"
         if remote in existing:
