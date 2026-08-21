@@ -152,8 +152,12 @@ class GLB:
             "name", f"mat{prim['material']}")
 
 
-def measure(path, glazing=GLAZING_MATS):
-    """The full measurement panel for one GLB.  Pure read, no writes."""
+def measure(path, glazing=GLAZING_MATS, ref_box=None):
+    """The full measurement panel for one GLB.  Pure read, no writes.
+
+    `ref_box` = (min, max) of the REFERENCE car, so `glass_area_by_region` is
+    binned in the same physical boxes at every stage and the numbers compare.
+    """
     g = GLB(path)
     j = g.g
     mats = [m.get("name", f"mat{i}") for i, m in enumerate(j.get("materials", []))]
@@ -255,6 +259,42 @@ def measure(path, glazing=GLAZING_MATS):
                                                   tri[:, 2] - tri[:, 0]), axis=1)
                 rep["glass_area_by_node"][name] = round(
                     rep["glass_area_by_node"].get(name, 0.0) + float(a.sum()), 9)
+
+    # ---- glazing area by SPATIAL REGION.
+    # The per-NODE figure cannot tell a deliberate re-partition from a loss: the
+    # glass gate carves `Glass_Quarter_L` out of `Glass_Side_L` and takes that
+    # node 1.2728 -> 0.7903 m2 while removing nothing from the car.  A region is
+    # invariant to renaming — glazing that is merely re-labelled stays in the
+    # same box; glazing that is rebound to `carpaint` or cut away leaves it.
+    # Five bands along the car's length x two sides, binned against the
+    # REFERENCE car's bounding box so the boxes are physically the same at every
+    # stage.
+    rb = ref_box or (lo, hi)
+    rlo, rhi = np.asarray(rb[0], float), np.asarray(rb[1], float)
+    reg = {}
+    for ni, name, W, mi in g.graph():
+        for p in j["meshes"][mi].get("primitives", []):
+            if (g.material_name(p) or "") not in gl:
+                continue
+            V = g.accessor(p["attributes"]["POSITION"]).astype(np.float64)
+            V = V @ W[:3, :3].T + W[:3, 3]
+            F = g.accessor(p["indices"]).astype(np.int64).reshape(-1, 3)
+            tri = V[F]
+            c = tri.mean(1)
+            a = 0.5 * np.linalg.norm(np.cross(tri[:, 1] - tri[:, 0],
+                                              tri[:, 2] - tri[:, 0]), axis=1)
+            xf = (c[:, 0] - rlo[0]) / max(rhi[0] - rlo[0], 1e-9)
+            xb = np.clip((xf * 5).astype(int), 0, 4)
+            sd = (c[:, 2] > 0).astype(int)
+            for b in range(5):
+                for k in (0, 1):
+                    m2 = (xb == b) & (sd == k)
+                    if m2.any():
+                        key = f"x{b}{'P' if k else 'M'}"
+                        reg[key] = reg.get(key, 0.0) + float(a[m2].sum())
+    rep["glass_area_by_region"] = {k: round(v, 9) for k, v in sorted(reg.items())}
+    rep["region_ref_box"] = [[round(float(x), 6) for x in rlo],
+                             [round(float(x), 6) for x in rhi]]
 
     # material factual table — what a respray and the glazing ruling can see
     tbl = {}

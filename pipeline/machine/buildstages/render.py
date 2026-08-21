@@ -43,25 +43,38 @@ def emission(mat, col):
 # A HASH palette is NOT usable for masking.  Measured on this car: md5 gave
 # `glass` (0.20,0.45,0.75) and `Lamp_Lens` (0.20,0.51,0.80) -- 0.07 apart in a
 # unit cube, so a nearest-colour mask would confuse the glazing with the
-# headlamps and the respray control would report on the wrong pixels.  Colours
-# are taken from a fixed maximally-separated ladder, indexed by the material's
-# position in the SORTED name list, and the minimum pairwise separation is
-# printed so the caller can assert it rather than hope.
-LADDER=[(1,0,0),(0,1,0),(0,0,1),(1,1,0),(1,0,1),(0,1,1),
-        (1,0.5,0),(0.5,0,1),(0,1,0.5),(1,0,0.5),(0.5,1,0),(0,0.5,1),
-        (0.6,0.3,0.1),(0.1,0.6,0.3),(0.3,0.1,0.6),(1,1,1),
-        (0.5,0.5,0),(0,0.5,0.5),(0.5,0,0.5),(1,0.75,0.75),
-        (0.75,1,0.75),(0.75,0.75,1),(0.35,0.35,0.35),(0.9,0.55,0.2)]
+# headlamps and the respray control would report on the wrong pixels.
+#
+# A hand-written ladder does not scale either: it ran out at 0.2449 separation
+# once the rear kit and the cabin brought the material count past 20.  So the
+# palette is a 4x4x4 lattice on {0,1/3,2/3,1} -- 64 colours whose minimum
+# spacing is 1/3 by construction -- FARTHEST-POINT ORDERED, so the first N of
+# them are the N most separated.  Indexed by the material's position in the
+# SORTED name list, which makes it deterministic and identical across the
+# before/after pair of a matched render.  The achieved minimum separation is
+# printed so the caller asserts it rather than hoping.
+def _lattice():
+    L=[0.0,1/3,2/3,1.0]
+    pts=[(r,g,b) for r in L for g in L for b in L]
+    # drop pure black: it is the background colour of the matid pass
+    pts=[p for p in pts if sum(p)>0.01]
+    out=[max(pts,key=lambda p:sum(p))]
+    rest=[p for p in pts if p not in out]
+    while rest:
+        nxt=max(rest,key=lambda p:min(sum((p[k]-q[k])**2 for k in range(3)) for q in out))
+        out.append(nxt); rest.remove(nxt)
+    return out
+LADDER=_lattice()
 def matcol(i):
-    return LADDER[i % len(LADDER)]
+    if i >= len(LADDER):
+        raise SystemExit("MATID REFUSED: material index %d exceeds the %d-colour "
+                         "lattice" % (i, len(LADDER)))
+    return LADDER[i]
 
 ovr=None
 palette={}
 if MODE=="matid":
     order=sorted({m.name.split(".")[0] for m in bpy.data.materials})
-    if len(order) > len(LADDER):
-        raise SystemExit("MATID REFUSED: %d materials exceed the %d-colour ladder; "
-                         "a wrapped ladder cannot be masked" % (len(order), len(LADDER)))
     for m in list(bpy.data.materials):
         nm=m.name.split(".")[0]
         palette[nm]=matcol(order.index(nm))

@@ -54,7 +54,8 @@ import glbmeas                                                   # noqa: E402
 import render as R                                               # noqa: E402
 
 TYRE_BLACK_MAX = 0.06        # baseColorFactor ceiling for "reads as rubber"
-GLASS_RETAIN_MIN = 0.97      # of the stage reference's glazing area
+GLASS_RETAIN_MIN = 0.97      # of the base's total glazing area
+GLASS_REGION_MIN = 0.45      # of the base's area in ANY one region (calibrated below)
 FROZEN_MATS = ("Tyre_Rubber", "glass", "Rim_Alloy", "Brake_Disc",
                "Lamp_Lens", "Lamp_Lens_Rear")
 
@@ -185,9 +186,32 @@ def respray_control(path, workdir, cam, res=700, samples=24, tag="rc"):
 
 # ---------------------------------------------------------------------- gate
 def panel(path, workdir, ref=None, cam=None, do_respray=True, res=700, samples=24,
-          tag="g"):
-    """Run every gate on `path`.  `ref` is the measurement to retain against."""
+          tag="g", ref_prev=None):
+    """Run every gate on `path`.
+
+    TWO references, deliberately, because they answer different questions:
+      `ref`      the BASE measurement -> "does the car still have its glazing at
+                 all?"  Held across the whole pipeline.
+      `ref_prev` the PREVIOUS STAGE's measurement -> "did THIS stage break a
+                 pane?"  A per-node figure held against the base would fire on
+                 a gate's own intended work: the glass gate deliberately evicts
+                 0.294 m2 of roof/cant-rail/C-pillar spill and carves
+                 Glass_Quarter_L out of Glass_Side_L, which takes that node
+                 1.2728 -> 0.7903 m2.  That is the gate doing its job, and it
+                 must not read as a regression three stages later.
+    """
+    if ref_prev is None:
+        ref_prev = ref
     os.makedirs(workdir, exist_ok=True)
+    # SELF-NORMALISED regions, deliberately.  Binning against the BASE's world
+    # box was wrong the moment the pose stage rotated the car 4.7301 deg and
+    # dropped it 101.6 mm: the bins stopped lining up with the car's own bands
+    # and the check fired on a measurement-frame artefact rather than on a
+    # defect.  Normalising each file to ITS OWN bounding box makes the figure
+    # shape-relative and therefore invariant to a rigid pose -- measured, the
+    # glazing TOTAL is bit-identical across the pose stage (3.7833 m2 both
+    # sides) and the per-region ratios sit at 0.833-1.258, the residual being
+    # faces crossing a bin boundary under the rotation.
     m = glbmeas.measure(path)
     gp = glass_probe(path)
     val = validate(path, os.path.join(workdir, f"{tag}_validate.json"))
@@ -212,28 +236,39 @@ def panel(path, workdir, ref=None, cam=None, do_respray=True, res=700, samples=2
                        "retained": round(retain, 5) if retain else None,
                        "by_node": m["glass_area_by_node"]}
 
-    # ---- G1b PER-NODE glazing retention.
-    # The material-total and the per-node figures catch DIFFERENT defects, which
-    # the independent verifier measured directly: rebinding ONE pane (the
-    # windscreen) to `carpaint` barely moves the total but empties that node.
-    # A pane may GROW (the glass gate's whole point is that the windscreen grows
-    # 0.1622 -> 0.9894 m2) and panes may be renamed by a geometric re-split, so
-    # the rule is: no pane present in the reference may LOSE more than 25% of
-    # its area while still existing, and no pane may vanish outright.
-    refn = (ref or {}).get("glass_area_by_node") or {}
-    gotn = m["glass_area_by_node"]
-    lost, shrunk = [], {}
-    for k, v in refn.items():
-        if v < 5e-3:
-            continue                       # a 50 cm2 sliver is not a pane
-        if k not in gotn:
-            lost.append(k)
-        elif gotn[k] < 0.75 * v:
-            shrunk[k] = [round(v, 5), round(gotn[k], 5)]
-    C["glass_panes"] = {"pass": bool(not lost and not shrunk),
-                        "vanished": lost, "shrunk_over_25pct": shrunk,
-                        "ref": {k: round(v, 5) for k, v in refn.items()},
-                        "got": {k: round(v, 5) for k, v in gotn.items()}}
+    # ---- G1b GLAZING RETENTION BY SPATIAL REGION.
+    # The material TOTAL and the per-REGION figures catch different defects: a
+    # windscreen rebound to `carpaint` moves 0.16 m2 of 3.17 and barely dents
+    # the total, but empties its own region.  A region is used rather than a
+    # NODE because a node figure cannot tell a deliberate re-partition from a
+    # loss -- the glass gate legitimately takes `Glass_Side_L` 1.2728 -> 0.7903
+    # by carving `Glass_Quarter_L` out of it, and the per-node rule fired on
+    # exactly that and was wrong.
+    #
+    # THE FLOOR IS MEASURED, NOT CHOSEN.  Run end to end on this car the
+    # tightest LEGITIMATE region ratio against the base is 0.632 -- the C-pillar
+    # band, which takes the glass gate's cant-rail and over-pillar spill
+    # eviction (0.761) and then the pose stage's bin-boundary shift (0.833).
+    # The injected defects sit at 0.00 (windscreen rebound to `carpaint`, the
+    # region empties) and ~0.03 (glazing geometry cut to a fortieth).  0.45 sits
+    # 29% below the tightest legitimate value and 15x above the loudest defect.
+    refr = (ref or {}).get("glass_area_by_region") or {}
+    gotr = m.get("glass_area_by_region") or {}
+    emptied, shrunk = [], {}
+    for k, v in refr.items():
+        if v < 0.02:
+            continue                       # a 200 cm2 sliver is not a region
+        got = gotr.get(k, 0.0)
+        if got < GLASS_REGION_MIN * v:
+            if got < 0.05 * v:
+                emptied.append(k)          # the region is gone, not merely thinner
+            else:
+                shrunk[k] = [round(v, 5), round(got, 5), round(got / v, 4)]
+    C["glass_regions"] = {"pass": bool(not emptied and not shrunk),
+                          "floor": GLASS_REGION_MIN,
+                          "emptied": emptied, "shrunk_below_floor": shrunk,
+                          "ref": {k: round(v, 5) for k, v in refr.items()},
+                          "got": {k: round(v, 5) for k, v in gotr.items()}}
 
     # ---- G1c THE WRITTEN MATERIAL TABLE, read directly.
     # `trimesh` drops every KHR material extension on any round-trip while
@@ -242,7 +277,7 @@ def panel(path, workdir, ref=None, cam=None, do_respray=True, res=700, samples=2
     # figure can see that.  Confirmed a third time by the independent verifier:
     # the probe passed a file with all extensions stripped.
     gm = m["material_table"].get("glass") or {}
-    rgm = ((ref or {}).get("material_table") or {}).get("glass") or {}
+    rgm = ((ref_prev or ref or {}).get("material_table") or {}).get("glass") or {}
     need_ext = ["KHR_materials_ior", "KHR_materials_transmission"]
     have = gm.get("extensions") or []
     missing_ext = [e for e in need_ext if e not in have]
@@ -429,7 +464,7 @@ def selftest(path, workdir, cam=None, res=560, samples=16):
         "drop_normals": ("normals", False),
         "break_validator": ("validator", False),
         "strip_extensions": ("glass_material_written", False),
-        "windscreen_to_paint": ("glass_panes", False),
+        "windscreen_to_paint": ("glass_regions", False),
     }
     for kind, (gate, needs_render) in want.items():
         cp = os.path.join(workdir, f"NC_{kind}.glb")

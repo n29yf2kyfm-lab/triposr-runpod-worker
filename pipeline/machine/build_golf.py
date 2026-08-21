@@ -149,6 +149,7 @@ class Ctx:
         for d in ("in", "work", "ev", "logs", "receipts", "stage"):
             os.makedirs(os.path.join(self.root, d), exist_ok=True)
         self.ref = None                    # the base measurement, for retention
+        self.prev = None                   # the previous stage's measurement
 
     def p(self, *a):
         return os.path.join(self.root, *a)
@@ -354,9 +355,11 @@ def gate_stage(ctx, name, out, res, samples):
     w = ctx.p("ev", name)
     cam = None
     if ctx.ref is not None:
+        # ONE camera for the whole pipeline, locked to the BASE's bbox, so every
+        # stage's respray control is a matched pair with every other stage's.
         cam = RR.camera_for(ctx.ref, dist_mul=1.45)
         cam["shots"] = RR.shots([(305, 12, "f34"), (125, 12, "r34")])
-    p = gates.panel(out, w, ref=ctx.ref, cam=cam, do_respray=True,
+    p = gates.panel(out, w, ref=ctx.ref, ref_prev=ctx.prev, cam=cam, do_respray=True,
                     res=res, samples=samples, tag=name)
     return p
 
@@ -373,6 +376,8 @@ def main():
                     help="prove every gate can FAIL, then exit")
     ap.add_argument("--no-gate", action="store_true",
                     help="run the stages without the gate panel (debug only)")
+    ap.add_argument("--regate", action="store_true",
+                    help="re-run the gate panel on stages whose build is cached")
     ap.add_argument("--res", type=int, default=700)
     ap.add_argument("--samples", type=int, default=24)
     a = ap.parse_args()
@@ -399,6 +404,17 @@ def main():
         if fresh:
             print(f"[{name}] SKIP (receipt fresh)  -> {os.path.basename(rec['out'])}")
             inp = rec["out"]
+            if a.regate and name not in NO_GATE and ctx.ref is not None:
+                p = gate_stage(ctx, name, inp, a.res, a.samples)
+                rec["gate"] = p
+                rec["gate_summary"] = gates.summary_line(p)
+                json.dump(rec, open(rec_p, "w"), indent=1, default=str)
+                print(f"[{name}] REGATE {rec['gate_summary']}")
+                if not p["all_pass"]:
+                    raise SystemExit(f"STAGE {name} fails the CURRENT gate panel: "
+                                     f"{p['failed']}")
+            if inp.endswith(".glb"):
+                ctx.prev = glbmeas.measure(inp)
             if name == "base":
                 ctx.ref = glbmeas.measure(inp)
                 if a.selftest:
@@ -449,6 +465,8 @@ def main():
         json.dump(rec, open(rec_p, "w"), indent=1, default=str)
         board.append((name, rec.get("gate_summary", "-"), False))
         inp = out
+        if out.endswith(".glb"):
+            ctx.prev = glbmeas.measure(out)
 
     print("\n" + "=" * 78)
     for n, s, sk in board:
