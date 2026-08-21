@@ -81,6 +81,14 @@ GLTF_TRANSFORM = shutil.which("gltf-transform") or "/opt/node22/bin/gltf-transfo
 ORBIT_AZ = [0, 45, 90, 135, 180, 215, 270, 315]
 ORBIT_EL_DEG = 78.0        # model-viewer phi: 90deg = horizon, smaller = above
 
+# Minimum share of the frame the MASTER's silhouette must occupy before any
+# PSNR from that view is believed. Calibrated, not guessed: on the two control
+# cars a healthy full-car view covers 29-44% of the frame and the smallest
+# close-up covers 6.5%, while a blank frame covers 0.00-0.87% (the 0.87% is a
+# 5-pixel status strip along the top edge, not the car). 2% sits an order of
+# magnitude below the real floor and an order above the artefact.
+MIN_SILHOUETTE_FRAC = 0.02
+
 # Close-up zones. Each entry: (label, node-name regex, radius as a multiple of
 # THAT ONE NODE's bbox diagonal). Chosen for what decimation destroys first and
 # what the owner rulings are about -- rubber, glazing, lamp lenses.
@@ -103,8 +111,26 @@ PAGE = """<!doctype html><html><head><meta charset="utf-8">
 model-viewer{width:768px;height:576px;background:#202024}</style></head><body>
 <model-viewer id="mv" disable-pan disable-zoom interaction-prompt="none"
   shadow-intensity="0" exposure="1" environment-image="neutral"
-  min-camera-orbit="auto auto 0m" max-camera-orbit="auto auto 1000m"
   min-field-of-view="1deg" max-field-of-view="120deg"></model-viewer>
+<!-- REMOVED 2026-08-21: min-camera-orbit="auto auto 0m"
+                         max-camera-orbit="auto auto 1000m"
+     These two attributes rendered SMALL models as a COMPLETELY BLANK FRAME,
+     and the fidelity gate then scored blank-against-blank and reported PASS.
+     Measured on nissan-gt-r-2013-nw1-v1, whose world extents are
+     0.020 x 0.014 x 0.047 units: with the attributes present every explicit
+     camera produced 0 car pixels (uniq=1, the background colour exactly) and
+     G5 returned "PASS, psnrMin 46.24 dB" over ELEVEN EMPTY IMAGES. With them
+     removed the same camera renders 180,263 px.
+     The large control is untouched, which is what makes this a pure fix rather
+     than a trade: porsche-911-2013-pw2-v1 (7.8 x 5.1 x 18.0 units) renders
+     196,052 px at az215 and 171,558 px at az000 BOTH WITH AND WITHOUT the
+     attributes, with an identical radius readback of 21.25322.
+     Mechanism (inferred, high confidence): model-viewer derives the camera's
+     far plane from the maximum orbit radius. Pinning it to 1000 m on a 0.05 m
+     model is a far/near ratio around 1e6, which exhausts depth precision; on a
+     4-18 m car the ratio is ~1e3 and it survives. That is exactly the observed
+     size dependence. -->
+
 <script>window.__loaded=false;window.__failed=null;
 const mv=document.getElementById('mv');
 mv.addEventListener('load',()=>{window.__loaded=true;});
@@ -392,8 +418,45 @@ def appearance(master, candidate, out_dir, cams=None, min_psnr=35.0,
     io = [r["iou"] for r in rows]
     full = [r for r in rows if r["zone"] == "full"]
     cu = [r for r in rows if r["zone"] == "closeup"]
+
+    # ---- THE INSTRUMENT CHECKS ITSELF ------------------------------------
+    # ADDED 2026-08-21, and this is the check that was missing when the
+    # min/max-camera-orbit bug above blanked every frame on a small model:
+    # PSNR was 46.24 dB and the gate said PASS over ELEVEN EMPTY IMAGES,
+    # because blank-against-blank has almost no error. A high PSNR is
+    # therefore NOT evidence that anything was rendered.
+    #
+    # IoU was the only channel that showed anything wrong (0.00000), and IoU
+    # is deliberately relegated to a gross-failure channel because it is
+    # non-monotonic in damage -- so nothing was entitled to act on it. A car
+    # that does not appear in its own reference frame must be NOT_TESTED:
+    # never PASS (it has measured nothing) and never FAIL (the candidate is
+    # not what is broken). Same rule the respray gate already applies to its
+    # own class masks.
+    blank = []
+    A0 = np.asarray(Image.open(shots[("master", cams[0]["view"])]).convert("RGB"))
+    frame_px = float(A0.shape[0] * A0.shape[1])
+    for r in rows:
+        if r["coverageMaster"] / frame_px < MIN_SILHOUETTE_FRAC:
+            blank.append(r["view"])
+    if blank:
+        return {"status": "NOT_TESTED",
+                "reason": "THE MASTER DID NOT RENDER in %d of %d views (%s): its "
+                          "silhouette covers under %.2f%% of the frame, so these "
+                          "frames are empty and PSNR is measuring background "
+                          "against background. psnrMin would have read %.2f dB "
+                          "and PASSED. Check the model's world scale and the "
+                          "camera attributes before believing any fidelity number."
+                          % (len(blank), len(rows), ", ".join(blank[:6]),
+                             100 * MIN_SILHOUETTE_FRAC, min(ps)),
+                "blankViews": blank, "psnrMinIfBelieved": min(ps),
+                "iouMin": min(io), "views": rows, "cameras": cams,
+                "outDir": os.path.abspath(out_dir)}
+
     res = {"status": "PASS" if min(ps) >= min_psnr else "FAIL",
            "minPsnrThreshold": min_psnr,
+           "silhouetteFracMin": round(min(r["coverageMaster"] for r in rows)
+                                      / frame_px, 5),
            "psnrMin": min(ps), "psnrMean": round(float(np.mean(ps)), 2),
            "psnrMinFullCar": min([r["psnrDb"] for r in full], default=None),
            "psnrMinCloseup": min([r["psnrDb"] for r in cu], default=None),

@@ -660,17 +660,38 @@ def catalogue_cameras(mm_master, orbit_az=None):
             continue
         lo2, hi2 = node_box
         cc = (lo2 + hi2) / 2.0
-        # Band the radius to 35-55% of the CAR's diagonal. Unclamped, a component
-        # that is one mesh spanning the car reproduces the full-car view, and a
-        # small component puts the camera INSIDE the body (the machine's lamp
-        # camera rendered the cabin floor that way).
-        rr = float(np.clip(float(np.linalg.norm(hi2 - lo2)) * 2.5,
-                           0.35 * diag, 0.55 * diag))
+        # A CLOSE-UP IS A NARROWER FOV, NOT A NEARER CAMERA.
+        #
+        # This used to pull the camera in to `clip(size*2.5, 0.35*diag,
+        # 0.55*diag)`. The FLOOR of that band, 0.35 x diag, is SMALLER than the
+        # model's own bounding-sphere radius of 0.5 x diag -- so on any car
+        # whose component is small the camera ends up INSIDE the bodywork. That
+        # is the failure CLAUDE.md already records for the machine's lamp
+        # camera ("a small component puts the camera INSIDE the body"), and the
+        # clamp that was supposed to prevent it had its floor set below the
+        # thing it was protecting against.
+        #
+        # Measured cost, and this is why it matters rather than being untidy:
+        # rendering nissan-gt-r-2013-nw1-v1 against a `gltf-transform copy` of
+        # ITSELF -- byte-different, geometrically IDENTICAL -- the eight orbit
+        # views scored 46.8-64.1 dB while the three close-ups scored 19.31 /
+        # 20.62 / 20.39 dB. The difference image is a clean outline of the whole
+        # car: the two loads framed the car in DIFFERENT PLACES. That is a
+        # registration shift worth ~44 dB, and G5's verdict was being set by it.
+        # A gate cannot have a 44 dB noise floor and a 35 dB threshold.
+        #
+        # Holding the camera at the full-car radius and narrowing the field of
+        # view instead keeps it outside the body by construction, keeps the
+        # framing stable, and still zooms.
+        span = float(np.linalg.norm(hi2 - lo2))
+        rr = diag * 1.05
+        half = np.degrees(np.arctan2(max(span * 0.75, 1e-9), rr))
+        fov = float(np.clip(2.0 * half, 6.0, 30.0))
         az = 250 if cc[2] < 0 else 290
         cams.append({"view": label, "zone": "closeup",
-                     "orbit": "%ddeg 85deg %.4fm" % (az, rr),
-                     "target": "%.4fm %.4fm %.4fm" % (cc[0], cc[1], cc[2]),
-                     "fov": "30deg"})
+                     "orbit": "%ddeg 85deg %.6fm" % (az, rr),
+                     "target": "%.6fm %.6fm %.6fm" % (cc[0], cc[1], cc[2]),
+                     "fov": "%.2fdeg" % fov})
     return cams
 
 
@@ -700,8 +721,13 @@ RESPRAY_PAGE = """<!doctype html><html><head><meta charset="utf-8">
 model-viewer{width:768px;height:576px;background:#202024}</style></head><body>
 <model-viewer id="mv" disable-pan disable-zoom interaction-prompt="none"
   shadow-intensity="0" exposure="1" environment-image="neutral"
-  min-camera-orbit="auto auto 0m" max-camera-orbit="auto auto 1000m"
   min-field-of-view="1deg" max-field-of-view="120deg"></model-viewer>
+<!-- min/max-camera-orbit REMOVED 2026-08-21 for the same reason as in
+     fidelity.PAGE: pinning the max orbit radius to 1000 m renders any model
+     around 0.05 units as a completely blank frame (measured on
+     nissan-gt-r-2013-nw1-v1: 0 car pixels with, 180,263 without), while
+     leaving a 4-18 unit car bit-identical. Here it would have made the
+     respray control measure a respray of nothing. -->
 <script>window.__loaded=false;window.__failed=null;
 const mv=document.getElementById('mv');
 mv.addEventListener('load',()=>{window.__loaded=true;});

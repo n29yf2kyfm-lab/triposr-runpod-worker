@@ -92,9 +92,49 @@ stage deps
 # TORCH GUARD, documented trap: anything that MOVES torch breaks every
 # extension compiled against it. Install with the version pinned out of the
 # resolver's reach, then ASSERT.
+# SPLIT, because one bad package takes the whole `pip install` line with it.
+# Attempt 1 put open3d on the same line as trimesh/omegaconf/safetensors and
+# open3d aborted the command, so NONE of them installed and the failure
+# surfaced two lines later as "No module named 'open3d'" — a misleading name
+# for a resolver error.
 pip install -q --no-cache-dir "numpy<2" trimesh==4.5.3 omegaconf==2.3.0 \
-    safetensors easydict jaxtyping open3d==0.18.0 2>&1 | tail -5 || die PIP_BASE
-python3 -c "import open3d,trimesh,numpy;print('o3d',open3d.__version__,'tm',trimesh.__version__,'np',numpy.__version__)" || die O3D_IMPORT
+    safetensors easydict jaxtyping 2>&1 | tail -5 || die PIP_SMALL
+python3 -c "import trimesh,numpy,omegaconf,safetensors,easydict,jaxtyping;print('base ok tm',trimesh.__version__,'np',numpy.__version__)" || die BASE_IMPORT
+
+# open3d 0.18 pulls dash -> flask -> blinker, and this image carries a
+# DISTUTILS-installed blinker 1.4 from apt that pip refuses to uninstall:
+#   "error: uninstall-distutils-installed-package ... Cannot uninstall
+#    blinker 1.4 ... would lead to only a partial uninstall"
+# `--ignore-installed` makes pip write fresh copies into site-packages instead
+# of trying to remove the apt one. Measured: this is the exact and only reason
+# attempt 1 died.
+pip install -q --no-cache-dir --ignore-installed "numpy<2" open3d==0.18.0 2>&1 | tail -8
+python3 -c "import open3d;print('o3d',open3d.__version__)" >/tmp/o3d.txt 2>&1
+O3DRC=$?; cat /tmp/o3d.txt
+if [ "$O3DRC" != "0" ]; then
+  echo "open3d import failed — retrying without its dependency tree"
+  pip install -q --no-cache-dir --no-deps --ignore-installed open3d==0.18.0 2>&1 | tail -5
+  python3 -c "import numpy;assert numpy.__version__[0]=='1',numpy.__version__;print('numpy pinned',numpy.__version__)" || die NUMPY2
+  python3 -c "import open3d;print('o3d(no-deps)',open3d.__version__)" || die O3D_IMPORT
+fi
+# Prove the THREE open3d entry points TripoSF's preprocessing actually calls,
+# not merely that the package imports. A gate nobody tested is a gate that does
+# not exist.
+python3 - <<'PY' || die O3D_API
+import numpy as np, open3d as o3d
+m = o3d.geometry.TriangleMesh(
+    o3d.utility.Vector3dVector(np.array([[-.3,-.3,-.3],[.3,-.3,-.3],[0,.3,.2]])),
+    o3d.utility.Vector3iVector(np.array([[0,1,2]])))
+g = o3d.geometry.VoxelGrid.create_from_triangle_mesh_within_bounds(
+    m, voxel_size=1/64., min_bound=[-.5]*3, max_bound=[.5]*3)
+p = o3d.geometry.VoxelGrid.create_from_point_cloud_within_bounds(
+    o3d.geometry.PointCloud(o3d.utility.Vector3dVector(np.random.rand(64,3)-.5)),
+    voxel_size=1/64., min_bound=[-.5]*3, max_bound=[.5]*3)
+m.compute_triangle_normals()
+print("o3d API ok: mesh voxels", len(g.get_voxels()),
+      "point voxels", len(p.get_voxels()),
+      "tri normals", np.asarray(m.triangle_normals).shape)
+PY
 
 # torch-scatter must match the torch BUILD STRING exactly; derive it rather
 # than assuming +cu121 (the image is a cuda12.4.1 build).
