@@ -65,8 +65,14 @@ never once fired. Every run of this gate builds:
   NC2  a car with the GLAZING GEOMETRY GUTTED and the material table untouched.
        glass_probe MUST still pass it (proving the probe's blind spot) and
        geometry_retention MUST fail it (proving the blind spot is covered).
-  NC3  a car with the tyre primitives RE-BOUND to `carpaint`. The respray
-       control MUST show paint leaking onto the rubber.
+  NC3  a car with the tyre primitives RE-BOUND to `carpaint` -- the
+       paint-over-rubber mechanism the owner's 2026-08-09 tyre ruling is about.
+       The GATE STACK must catch it, and the report names which check did.
+       Note WHICH one, because it is not the obvious one: the per-material
+       pixel-change test CANNOT see this, since after the rebind there is no
+       tyre geometry left whose pixels could change. It is caught by the
+       PHANTOM-MATERIAL check (`Tyre_Rubber` still in the table, renders on
+       nothing) and by geometry_retention (Tyre_Rubber area -> 0).
 
 If a negative control does not fail, the gate reports BLOCKED, not PASS -- a
 run whose instruments cannot be shown to fire has measured nothing.
@@ -240,14 +246,21 @@ const mv=document.getElementById('mv');
 window.__setSrc=(s)=>{window.__loaded=false;window.__failed=null;mv.src=s;};
 window.__cam=(o,t,f)=>{mv.cameraOrbit=o;mv.cameraTarget=t;mv.fieldOfView=f;
   mv.jumpCameraToGoal();};
-window.__mats=()=>mv.model.materials.map(m=>m.name);
-// snapshot every material so an isolation pass can be undone exactly
-window.__save=()=>{window.__orig=mv.model.materials.map(m=>({
-  bc:Array.from(m.pbrMetallicRoughness.baseColorFactor),
-  mt:m.pbrMetallicRoughness.metallicFactor,
-  rg:m.pbrMetallicRoughness.roughnessFactor,
-  em:Array.from(m.emissiveFactor)}));};
+// isLoaded is load-bearing EVIDENCE, not defensive coding. <model-viewer>
+// refuses to load a material no primitive references -- "Material X has not
+// been loaded" -- so an UNLOADED material is exactly the phantom signature:
+// present in the glTF material table, bound to nothing on screen. Every
+// accessor below therefore skips unloaded materials instead of throwing, and
+// the loaded flag is reported back to Python.
+window.__mats=()=>mv.model.materials.map(m=>({name:m.name,loaded:!!m.isLoaded}));
+window.__save=()=>{window.__orig=mv.model.materials.map(m=>{
+  if(!m.isLoaded) return null;
+  return {bc:Array.from(m.pbrMetallicRoughness.baseColorFactor),
+          mt:m.pbrMetallicRoughness.metallicFactor,
+          rg:m.pbrMetallicRoughness.roughnessFactor,
+          em:Array.from(m.emissiveFactor)};});};
 window.__restore=()=>{mv.model.materials.forEach((m,i)=>{const o=window.__orig[i];
+  if(!o||!m.isLoaded) return;
   m.pbrMetallicRoughness.setBaseColorFactor(o.bc);
   m.pbrMetallicRoughness.setMetallicFactor(o.mt);
   m.pbrMetallicRoughness.setRoughnessFactor(o.rg);
@@ -263,15 +276,19 @@ window.__restore=()=>{mv.model.materials.forEach((m,i)=>{const o=window.__orig[i
 // two materials that differ.
 window.__isoPrev=-1;
 window.__isoInit=()=>{mv.model.materials.forEach(m=>{
+  if(!m.isLoaded) return;
   m.pbrMetallicRoughness.setBaseColorFactor([0,0,0,1]);
   m.pbrMetallicRoughness.setMetallicFactor(0);
   m.pbrMetallicRoughness.setRoughnessFactor(1);
   m.setEmissiveFactor([0,0,0]);}); window.__isoPrev=-1;};
 window.__isolate=(k)=>{const ms=mv.model.materials;
-  if(window.__isoPrev>=0) ms[window.__isoPrev].setEmissiveFactor([0,0,0]);
-  ms[k].setEmissiveFactor([1,1,1]); window.__isoPrev=k;};
+  if(window.__isoPrev>=0&&ms[window.__isoPrev].isLoaded)
+    ms[window.__isoPrev].setEmissiveFactor([0,0,0]);
+  if(ms[k].isLoaded) ms[k].setEmissiveFactor([1,1,1]);
+  window.__isoPrev=k;};
 window.__paint=(name,rgba)=>{let n=0;mv.model.materials.forEach(m=>{
-  if(m.name===name){m.pbrMetallicRoughness.setBaseColorFactor(rgba);n++;}});return n;};
+  if(m.name===name&&m.isLoaded){m.pbrMetallicRoughness.setBaseColorFactor(rgba);n++;}});
+  return n;};
 window.__ready=true;
 </script></body></html>"""
 
@@ -305,9 +322,15 @@ def _settle(page, clip, tmpdir, max_wait_s=60.0, tol=1.0):
     return {"seconds": round(_t.time() - t0, 1), "converged": False}
 
 
+CRITICAL_VISIBLE = ("glass", "Tyre_Rubber", "Rim_Alloy",
+                    "Lamp_Lens", "Lamp_Lens_Rear")
+
+
 def respray_control(path, out_dir, cams, new_rgba=(0.05, 0.12, 0.75, 1.0),
                     paint_material=PAINT_MAT, leak_tol=0.03, move_min=0.15,
-                    bright_lum=90.0, min_mask_coverage=0.90, verbose=True):
+                    min_mask_coverage=0.90, min_sample_px=1000, phantom_px=100,
+                    paint_share_max=0.90, critical_visible=CRITICAL_VISIBLE,
+                    verbose=True):
     """Paint `carpaint` blue in the live viewer and attribute every changed
     pixel to a material via PER-MATERIAL ISOLATION passes.
 
@@ -390,7 +413,9 @@ def respray_control(path, out_dir, cams, new_rgba=(0.05, 0.12, 0.75, 1.0),
             p.evaluate("a=>window.__cam(a[0],a[1],a[2])",
                        [cam["orbit"], cam["target"], cam["fov"]])
             p.wait_for_timeout(600)
-            names = p.evaluate("()=>window.__mats()")
+            matinfo = p.evaluate("()=>window.__mats()")
+            names = [m["name"] for m in matinfo]
+            loaded = [bool(m["loaded"]) for m in matinfo]
             p.evaluate("()=>window.__save()")
             # clipped PAGE screenshot, never locator.screenshot() -- see
             # fidelity.appearance() for the measured reason.
@@ -437,41 +462,112 @@ def respray_control(path, out_dir, cams, new_rgba=(0.05, 0.12, 0.75, 1.0),
     bg = np.array([0x20, 0x20, 0x24])
     car = (np.abs(A - bg).sum(axis=2) > 24) | (np.abs(B - bg).sum(axis=2) > 24)
 
-    masks, rows = [], []
-    for i, nm in enumerate(names):
+    # ---- masks: ARGMAX, not a brightness THRESHOLD ------------------------
+    # A threshold was the second wrong instrument. Measured on this car: at
+    # lum>90 the eleven masks summed to 438,081 pixels over a 199,992-pixel car
+    # -- they overlap 2.2x, because model-viewer's material API does not expose
+    # KHR_materials_clearcoat, so a "matte black" material still throws a bright
+    # specular highlight from the neutral IBL and every frame lights up in the
+    # same places. Assigning each pixel to the BRIGHTEST isolation frame is
+    # immune to that: a full white emissive always beats a highlight on black.
+    lums = []
+    for i in range(len(names)):
         I = np.asarray(Image.open(shots["iso_%d" % i]).convert("RGB")).astype(np.float64)
-        lum = 0.2126 * I[:, :, 0] + 0.7152 * I[:, :, 1] + 0.0722 * I[:, :, 2]
-        masks.append(lum > bright_lum)
-    union = np.zeros_like(car)
-    for m in masks:
-        union |= m
-    coverage = float((union & car).sum()) / float(car.sum()) if car.sum() else 0.0
+        lums.append(0.2126 * I[:, :, 0] + 0.7152 * I[:, :, 1] + 0.0722 * I[:, :, 2])
+    L = np.stack(lums)
+    best = L.argmax(axis=0)
+    top = L.max(axis=0)
+    second = np.sort(L, axis=0)[-2] if len(names) > 1 else np.zeros_like(top)
+    part = (top > 25) & ((top - second) > 12) & car
+    coverage = float(part.sum()) / float(car.sum()) if car.sum() else 0.0
 
-    fails = []
+    def erode1(m):
+        e = m.copy()
+        e[1:, :] &= m[:-1, :]; e[:-1, :] &= m[1:, :]
+        e[:, 1:] &= m[:, :-1]; e[:, :-1] &= m[:, 1:]
+        return e
+
+    # GLAZING IS EXEMPT FROM THE PIXEL LEAK TEST, and that is not a loophole.
+    # Glass here carries KHR_materials_transmission 0.92, so the body is VISIBLE
+    # THROUGH IT: repainting the body necessarily changes glazing pixels, and it
+    # measured 29.1% change on a car with no leak at all. Pixels with glazing in
+    # front are excluded from every other material's sample for the same reason.
+    # Glazing is gated by G1 (glass_probe + geometry retention), which is the
+    # stronger test for it anyway.
+    import glass_probe as GP
+    glassy = [i for i, nm in enumerate(names) if GP.GLASSY.search(nm or "")]
+    glass_front = np.zeros_like(car)
+    for i in glassy:
+        glass_front |= (lums[i] > 60)
+
+    rows, fails, advisory = [], [], []
     for i, nm in enumerate(names):
-        mask = masks[i] & car
-        px = int(mask.sum())
-        frac = float(changed[mask].mean()) if px else 0.0
+        raw = part & (best == i)
+        m = erode1(raw)
+        is_glass = i in glassy
+        sample = m if is_glass else (m & ~glass_front)
+        px, spx = int(raw.sum()), int(sample.sum())
+        frac = float(changed[sample].mean()) if spx else None
         protected = nm != paint_material
-        rows.append({"material": nm, "maskPixels": px,
-                     "changedFraction": round(frac, 4), "protected": protected})
-        if not protected and px and frac < move_min:
-            fails.append("paint did NOT move: only %.1f%% of `%s` pixels changed"
-                         % (100 * frac, nm))
-        if protected and px > 200 and frac > leak_tol:
+        row = {"material": nm, "loadedInViewer": loaded[i],
+               "maskPixels": px, "samplePixels": spx,
+               "maskShareOfCar": round(px / float(car.sum()), 4) if car.sum() else 0,
+               "changedFraction": round(frac, 4) if frac is not None else None,
+               "protected": protected, "glazing": is_glass,
+               "gated": bool(protected and not is_glass and spx >= min_sample_px)}
+        rows.append(row)
+        if not protected:
+            if frac is None or frac < move_min:
+                fails.append("paint did NOT move: `%s` changed on %s of its own pixels"
+                             % (nm, "no" if frac is None else "%.1f%%" % (100 * frac)))
+            if row["maskShareOfCar"] > paint_share_max:
+                fails.append("`%s` covers %.1f%% of the car (ceiling %.0f%%) -- one "
+                             "material over the whole model is the toyota-auris "
+                             "cov=1.000 retirement signature"
+                             % (nm, 100 * row["maskShareOfCar"], 100 * paint_share_max))
+        elif is_glass:
+            advisory.append("`%s` changed %.1f%% -- EXPECTED, it is transmissive and "
+                            "the repainted body is visible through it; gated by G1"
+                            % (nm, 100 * frac) if frac is not None else nm)
+        elif spx < min_sample_px:
+            advisory.append("`%s` sample only %d px after erosion and glazing "
+                            "exclusion -- reported, not gated (changed %s)"
+                            % (nm, spx, "n/a" if frac is None
+                               else "%.1f%%" % (100 * frac)))
+        elif frac > leak_tol:
             fails.append("PAINT LEAK onto `%s`: %.1f%% of its pixels changed "
                          "(tolerance %.1f%%)" % (nm, 100 * frac, 100 * leak_tol))
+
+    # PHANTOM-MATERIAL CHECK. A material that is in the table but renders on
+    # (almost) nothing is the signature of its geometry having been absorbed --
+    # e.g. tyre primitives re-bound to carpaint leave `Tyre_Rubber` sitting in
+    # the table, black and innocent-looking, with no pixels. The per-material
+    # pixel-change test CANNOT see that (there is nothing left to change), so it
+    # is checked separately, and only for materials that must be visible at a
+    # three-quarter view.
+    for i, nm in enumerate(names):
+        if nm not in critical_visible:
+            continue
+        if not loaded[i]:
+            fails.append("`%s` is in the material table but <model-viewer> reports it "
+                         "NOT LOADED -- no primitive references it, so its geometry "
+                         "has been absorbed by another material" % nm)
+        elif int((part & (best == i)).sum()) < phantom_px:
+            fails.append("`%s` is in the material table but renders on <%d pixels -- "
+                         "its geometry appears to have been absorbed by another "
+                         "material" % (nm, phantom_px))
+
     if paint_material not in names:
         fails.append("no material named %r -- respray-by-name cannot work"
                      % paint_material)
 
-    # SELF-CHECK. If the isolation masks do not cover the car, they are not a
-    # partition of it and no verdict drawn from them is worth anything.
+    # SELF-CHECK. If the masks do not partition the car, no verdict drawn from
+    # them is worth anything -- report NOT_TESTED, never a named failure.
     if coverage < min_mask_coverage:
         return {"status": "NOT_TESTED", "paintMaterial": paint_material,
-                "reason": "isolation masks cover only %.1f%% of the car silhouette "
-                          "(need %.0f%%); the instrument is not measuring the car, "
-                          "so no leak verdict is reported"
+                "reason": "isolation masks partition only %.1f%% of the car "
+                          "silhouette (need %.0f%%); the instrument is not "
+                          "measuring the car, so no leak verdict is reported"
                           % (100 * coverage, 100 * min_mask_coverage),
                 "maskCoverage": round(coverage, 4), "materials": rows,
                 "shots": shots, "camera": cam}
@@ -479,20 +575,28 @@ def respray_control(path, out_dir, cams, new_rgba=(0.05, 0.12, 0.75, 1.0),
     res = {"status": "PASS" if not fails else "FAIL",
            "paintMaterial": paint_material, "primitivesRepainted": n,
            "moveMin": move_min, "leakTolerance": leak_tol,
-           "maskCoverage": round(coverage, 4), "brightLum": bright_lum,
-           "materials": rows, "failures": fails, "shots": shots,
-           "camera": cam}
+           "maskCoverage": round(coverage, 4), "minSamplePx": min_sample_px,
+           "materials": rows, "failures": fails, "advisory": advisory,
+           "shots": shots, "camera": cam}
     if verbose:
         print("RESPRAY CONTROL (%s -> blue, live model-viewer material API)  %s"
               % (paint_material, res["status"]))
-        print("  isolation masks cover %.1f%% of the car silhouette (need %.0f%%)"
-              % (100 * res["maskCoverage"], 100 * min_mask_coverage))
+        print("  masks partition %.1f%% of the car silhouette (need %.0f%%); "
+              "argmax over %d isolation frames"
+              % (100 * coverage, 100 * min_mask_coverage, len(names)))
         for r in sorted(rows, key=lambda r: -r["maskPixels"]):
-            if r["maskPixels"] < 200:
+            if r["maskPixels"] < 100:
                 continue
-            print("  %-20s %-10s mask %7d px  changed %6.1f%%"
-                  % (r["material"], "PROTECTED" if r["protected"] else "PAINT",
-                     r["maskPixels"], 100 * r["changedFraction"]))
+            print("  %-20s %-9s %-6s mask %7d  sample %7d  changed %s"
+                  % (r["material"],
+                     "PAINT" if not r["protected"] else
+                     ("GLAZING" if r["glazing"] else "PROTECTED"),
+                     "gated" if r["gated"] else "advis.",
+                     r["maskPixels"], r["samplePixels"],
+                     "  n/a" if r["changedFraction"] is None
+                     else "%5.1f%%" % (100 * r["changedFraction"])))
+        for a in advisory:
+            print("  [note] %s" % a)
         for f in fails:
             print("  FAIL: %s" % f)
     return res
