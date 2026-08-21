@@ -26,9 +26,13 @@ TWO DEFECTS:
 2. MEDIUM - 8 of the rear gate's 14 components absent (all Tail_Lens_*/Tail_Housing_*,
    and their materials). Falls back to base TailLamp_L/R. rear.json reports PASS.
 
-A17 holes: lost 9 of 15,360. 5 cluster at the rear-right arch/bumper junction
-(x 1.547, z +0.821, previously Bumper_Rear_Paint/Arch_Liner); 2 are cabin see-through
-(expected). The rear-right gap is NOT visually confirmed -- flagged, not asserted.
+A17 holes: lost 9 of 15,360, ALL NINE located (an earlier draft covered only 7):
+  5 at the rear-right arch/bumper junction (x 1.547, z +0.821; was Bumper_Rear_Paint/Arch_Liner)
+  2 cabin see-through (was Interior) -- EXPECTED, a closed shell became discrete furniture
+  1 front lower valance on the centreline (-2.118, 0.18, 0.05; was Bumper_Front_Paint)
+  1 top-right of the rear screen (1.588, 1.256, 0.472; was Glass_Rear)
+The last one QUALIFIES the 'rear glazing tightening is not a loss' call: mostly correct,
+but one ray-sized uncovered spot. NONE of the four locations is visually confirmed.
 
 ## DELIVERABLES (bucket + git)
 `MERGE_VERIFY.md` (17-row table, 12 controls, acceptance list A1–A20) ·

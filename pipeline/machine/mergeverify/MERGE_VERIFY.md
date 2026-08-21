@@ -689,20 +689,29 @@ the rear gate's lamp rebuild is simply not in the car.
 
 `advanced 216` and `receded 44` are expected — four gates of new components sit proud
 of the base, and the rear screen surface moved back to the constructed backlight.
-`lost 9` (0.059%) is the number that matters, and I located every one:
+`lost 9` (0.059%) is the number that matters. **All nine are now located** — an
+earlier draft of this report accounted for only seven and is corrected here:
 
-* **5 rays cluster at essentially ONE point** — x ≈ 1.547, y 0.26–0.38, z ≈ **+0.821**:
-  the **rear-right arch / bumper junction**. All five previously hit
-  `Bumper_Rear_Paint` or `Arch_Liner`, which the merge stripped (62,204 → 33,485 and
-  the arch liner locally) and which the new `Bumper_Rear` does not cover at that spot.
-  At my measured ray spacing of ~97 mm, 5 clustered rays implies a gap of roughly
-  100–200 mm.
-* **2 rays are cabin see-through** — `[-0.748, 0.901, 0.704]` and `[0.115, 1.275, 0.528]`,
-  both previously stopped by the `Interior` melt shell. Replacing a closed shell with
-  discrete cabin furniture legitimately lets a ray enter one window and leave by
-  another. **Expected, not a defect.**
+| # rays | location (m) | previously stopped by | reading |
+|---|---|---|---|
+| **5** | x 1.546–1.550, y 0.265–0.381, **z +0.821** | `Bumper_Rear_Paint` ×3, `Arch_Liner` ×2 | **rear-right arch / bumper junction** — the merge stripped `Bumper_Rear_Paint` 62,204 → 33,485 and the new `Bumper_Rear` does not cover this spot |
+| **2** | `[-0.748, 0.901, 0.704]`, `[0.115, 1.275, 0.528]` | `Interior` | **cabin see-through** — a closed melt shell became discrete furniture, so a ray can enter one window and leave by another. **Expected, not a defect.** |
+| **1** | `[-2.118, 0.18, 0.05]` | `Bumper_Front_Paint` | **front lower valance, on the centreline** — the v7 strip took `Bumper_Front_Paint` 58,448 → 25,064 and left a ray-sized gap at the nose bottom |
+| **1** | `[1.588, 1.256, 0.472]` | `Glass_Rear` | **top-right of the rear screen** — the constructed backlight does not reach where the deleted `Glass_Rear` used to |
 
-**HONEST LIMIT: I did not visually confirm the rear-right gap.** Two render angles at
+**That last row qualifies a conclusion I drew earlier in this report.** I wrote that the
+rear-glazing reduction (0.8358 → 0.3996 m²) is "a correct tightening, not a loss",
+on the strength of the render showing a properly glazed rear screen. That remains true
+for the bulk of the screen — but there is **at least one ray-sized spot at its upper
+right that the constructed backlight does not cover** and that the old glazing did.
+The tightening is therefore *mostly* correct with a small uncovered corner, not
+uniformly correct. Stated as a correction rather than quietly folded in.
+
+At ~97 mm ray spacing, the 5-ray rear-right cluster implies a gap of roughly
+100–200 mm; the two single rays imply spots at or below ~100 mm and could each be a
+single missing triangle patch.
+
+**HONEST LIMIT: I did not visually confirm any of these four locations.** Two render angles at
 el −8 and −14 showed the underbody rather than the arch lip and were inconclusive. So
 this is reported as a *located, quantified loss of first-surface coverage* for the
 builder to check, **not** as a confirmed through-hole. The measurement is sound — the
@@ -721,9 +730,10 @@ constructed tail-lamp units did not, and the rear receipt reports PASS anyway.**
 
 **Two defects, one of them serious.** The published **mobile asset is a different car
 from the published desktop asset** — built from a pre-fix intermediate, it still scores
-**96.18%** on the glazing-stacking collision the desktop was fixed to **0.00%**. And a
-localised loss of coverage at the rear-right arch/bumper junction (5 of 15,360 rays),
-located but not yet visually confirmed.
+**96.18%** on the glazing-stacking collision the desktop was fixed to **0.00%**. And **nine lost rays in four
+places** — a 5-ray cluster at the rear-right arch/bumper junction, one at the front
+lower valance, one at the top-right of the rear screen, and two that are expected
+cabin see-through. Located and quantified; **none visually confirmed**.
 
 **Everything else passes:** validator 0/0 on both files, NORMALs 107/107, respray
 control clean on four cameras with tail lamps holding red, no stacking, no empty nodes,

@@ -719,7 +719,8 @@
   "used pgrep -f once to inspect a background job (CLAUDE.md forbids it as a wait condition); it was a read, not a wait, but it should not have been used at all",
   "called rear2_v4's TEXTURED carpaint/Rim_Alloy a flat shell off their [1,1,1,1] multiplier factors - retracted in full, and paint_check now tests hasTexture first",
   "set_paint wrote default_value on a LINKED Base Color, which does nothing - it produced two byte-identical renders and a confident wrong 'the paint does not respond'",
-  "reported the merged car's v7 symmetry as 50.45 mm by mirroring about a z=const plane after the merge rotates the car 4.73 deg about a TILTED axis; fitting the plane gives 1.59e-04 mm. verify_merged.py now fits the plane."
+  "reported the merged car's v7 symmetry as 50.45 mm by mirroring about a z=const plane after the merge rotates the car 4.73 deg about a TILTED axis; fitting the plane gives 1.59e-04 mm. verify_merged.py now fits the plane.",
+  "published a hole-test account covering only 7 of the 9 lost rays; the missing two are at the front lower valance and the rear screen's upper right, and the latter qualifies my 'correct tightening, not a loss' conclusion on the rear glazing"
  ],
  "merge_collision_scan": {
   "why": "every gate built against car_rebound alone, so no gate's own report can say whether its component collides with another gate's",
@@ -1048,24 +1049,79 @@
    "located": {
     "rear_right_arch_bumper_junction": {
      "rays": 5,
-     "point_m": [
-      1.547,
-      0.3,
-      0.821
+     "points_m": [
+      [
+       1.547,
+       0.381,
+       0.821
+      ],
+      [
+       1.55,
+       0.284,
+       0.821
+      ],
+      [
+       1.547,
+       0.368,
+       0.821
+      ],
+      [
+       1.548,
+       0.265,
+       0.821
+      ],
+      [
+       1.546,
+       0.361,
+       0.821
+      ]
      ],
      "previously_hit": [
-      "Bumper_Rear_Paint",
-      "Arch_Liner"
+      "Bumper_Rear_Paint x3",
+      "Arch_Liner x2"
      ],
      "implied_gap_mm": "100-200 at ~97 mm ray spacing"
     },
     "cabin_see_through": {
      "rays": 2,
+     "points_m": [
+      [
+       -0.748,
+       0.901,
+       0.704
+      ],
+      [
+       0.115,
+       1.275,
+       0.528
+      ]
+     ],
      "previously_hit": "Interior melt shell",
      "verdict": "EXPECTED - a closed shell became discrete furniture"
+    },
+    "front_lower_valance_centreline": {
+     "rays": 1,
+     "point_m": [
+      -2.118,
+      0.18,
+      0.05
+     ],
+     "previously_hit": "Bumper_Front_Paint",
+     "note": "the v7 strip took Bumper_Front_Paint 58,448 -> 25,064"
+    },
+    "rear_screen_upper_right": {
+     "rays": 1,
+     "point_m": [
+      1.588,
+      1.256,
+      0.472
+     ],
+     "previously_hit": "Glass_Rear",
+     "note": "the constructed backlight does not reach where the deleted Glass_Rear used to"
     }
    },
-   "HONEST_LIMIT": "the rear-right gap is NOT visually confirmed; two render angles showed the underbody rather than the arch lip. Reported as a located quantified loss for the builder to check, not a confirmed through-hole."
+   "HONEST_LIMIT": "none of the four locations is visually confirmed; the render angles tried showed the underbody rather than the arch lip.",
+   "CORRECTION": "an earlier draft accounted for only 7 of the 9 lost rays. All nine are now located. The 9th (previously stopped by Glass_Rear) QUALIFIES my earlier conclusion that the rear-glazing reduction is 'a correct tightening, not a loss': it is mostly correct, but there is at least one ray-sized uncovered spot at the rear screen's upper right."
   }
  },
  "merged_car_defects": [
