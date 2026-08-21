@@ -1,68 +1,35 @@
-# CHECKPOINT — GATE 3 v7, front fascia rebuild (Golf Mk8 test bed)
+# CHECKPOINT — REAR GATE v2 (rear surfaces) — in flight
 
-**State: verification complete; deliverable uploaded and verified in the bucket.**
+Agent: REAR GATE v2. Branch `claude/lovable-connection-ki7jch`.
+Scratchpad: `/tmp/.../scratchpad/rear2`. Tools: `pipeline/machine/rear2/`.
+Bucket: `car-meshes/staging/rear_v2/`.
 
-## The deliverable is NOT local-only (Rule Zero after rollback #6)
+## INPUT CHOSEN
+`car-meshes/staging/gate4_rear/glb/rear_v3.glb.part_*` (65,349,280 B,
+sha256 734542a2e302d25376780d2a89195d441a3d5f05e4366dda657c640660447862 — matches
+Gate 4's manifest). Chosen because acceptance criterion 4 requires Gate 4's four
+lamp solids intact, and they exist ONLY in this file; `car_rebound` / `car_merged`
+carry the ORIGINAL MELT under the names TailLamp_L/R.
+Risk accepted: rear_v3 has Gate 4's material table (carpaint textured, metallic 1.0)
+rather than Gate 7+8's rebind, and it is NOT grounded/de-pitched.
 
-`car-meshes/staging/gate3_v7/glb/`, chunked to <=22 MB parts with a MANIFEST,
-each upload confirmed by LISTING the prefix and comparing byte counts:
+## VERIFIED CORRECTIONS TO THE BRIEF
+* `rear_v3.glb` node transforms are ALL EXACTLY IDENTITY — max |world-local| =
+  0.000000000 over every vertex, 22/22 nodes. Local==world on this file, so the
+  transform trap does not apply here (it does apply to car_rebound/car_merged).
+* Tyre contact heights on rear_v3, world: RL +11.5 mm, FL +193.8, FR +204.4 —
+  front up, rear down, nose UP. The brief's "tyres y -0.3067/-0.3241" is wrong
+  for this file too. Grounding is another gate's scope; recorded only.
+* az 090 = straight rear CONFIRMED by render (tailgate, screen, tail lamps).
 
-| object | bytes | sha256 |
-|---|---|---|
-| `GOLF_V7_FRONT_GATE.glb` (part_00 + part_01) | 28,397,676 | `3f681443004b2b243e66ac14e69437081e4512dcc4a2801ecac30ee0d99f0dd0` |
-| `GOLF_V7_STRIPPED.glb` (part_00 + part_01) | 27,504,368 | in its MANIFEST |
+## STATE
+* v1 built, assembled, chunked and UPLOADED to `staging/rear_v2/glb/`
+  (rear2_v1.glb.part_000..003 + MANIFEST, 68,018,280 B, listing verified, bytes match).
+* glass_probe on v1: clear / proven, flat_shell False, alpha_shell False.
+* Provenance test PASSED with its negative control: rebuilt panels 0.00% coincident
+  with source vertices; renamed melt (`Rear_Upper_Legacy_Melt`) 100.00%.
+* v2 pending: sliver-row fix in the aperture grid.
 
-Reassemble: `cat GOLF_V7_FRONT_GATE.glb.part_* > GOLF_V7_FRONT_GATE.glb`
-
-## Base used, and why
-
-`car_rebound.glb` (sha `5380761c…`, 28,703,944 B) — the base named in the brief.
-
-A grounded alternative exists (`staging/merge/glb/car_merged.glb`, sha
-`09897d20…`, all four tyres at 0.000 mm) and was downloaded, sha-verified and
-evaluated. **Not adopted.** It is not a rigid re-pose of `car_rebound` (mean
-20.1 mm / max 652 mm residual after a best-fit rigid transform; body rotated
-4.7 deg), and this chain's datum detector is pose-calibrated: on that pose it
-ran off the top of its search window and returned an identical y for all three
-tangent thresholds, i.e. a zero-width band and a 656 mm "front face" against the
-real car's 554. A guard now makes that failure loud (`plan7.py`,
-`DATUM_UNTRUSTED`) and is negative-controlled: it fires on the merged pose and
-stays silent on `car_rebound`. Adopting the grounded car needs the detector
-recalibrated for its pose first — it must NOT be worked around by widening the
-window until a number appears.
-
-**The grounding correction changes nothing here**: this fascia is anchored to the
-fascia (bumper lowest edge + bonnet leading edge), never to the ground.
-
-## Tools (all in git, `pipeline/machine/gate3v7/`)
-
-`survey.py` → `front_tex.py` → `plan7.py` → `strip.py` → `rebuild7.py` →
-`finish.py`, with `coverage.py`, `verify7.py`, `tex_view.py`, `shoot.py`,
-`geo7.py`, `upload_chunked.sh`. Re-runnable end to end from the base GLB.
-
-## Headline measurements
-
-* strip: 3 melt nodes deleted whole + 57,696 faces cut; 985,227 → 911,368
-* coverage: holes **0.1 cm2** of a 5,926 cm2 footprint; new parts frontmost 97.0%
-* symmetry: worst L/R deviation **5.9e-05 mm** (v6: 29.7 mm)
-* evidence pack (54 objects) at `car-meshes/staging/gate3_v7/evidence/`
-* provenance: **0.0** of any component's faces are original geometry
-* self-intersections: 1,714 total, **200 within one shell** (v6: 10,258)
-* winding inconsistent: none · not watertight: none · degenerate faces: 0
-* centreline: badge/plate/grille/blade all 0.0000 mm
-* validator E0 W0 · glass_probe clear/proven · respray red→blue reaches the new
-  bumper and moves nothing else
-
-## Corrections issued (see the final report)
-
-1. base y extent is **1.4554 m**, not the 1.7798 m in the brief
-2. tyre minima are FL +183.2 / FR +189.6 / RL +0.3 / RR +14.7 mm — front axle in
-   the air, not a 324 mm offset (coordinator has since confirmed)
-3. the v6 builder scripts named in the brief are **not** in git; what survived is
-   the gate3v6 render/verify rigs plus an older `pipeline/machine/gate3/`
-4. my own z=0.000 centreline was withdrawn: the car is bowed 140 mm nose-to-tail
-5. trimesh drops every KHR material extension on ANY glTF round-trip — found by
-   reading the written file, not by glass_probe, which still passed
-6. gate3v6/rig.py's `beauty` pass is NOT material-preserving (it assigns the same
-   neutral clay as `matte`), so no rig pass could judge whether the lamps read;
-   `native_render.py` was written for that and it settles it — they do
+## OPEN
+* gltf-transform validate on the 68 MB file not yet completed (slow, CPU contended).
+* Render batch 1 in flight (cavity proof, shaded/matid/clay, blue respray control).
