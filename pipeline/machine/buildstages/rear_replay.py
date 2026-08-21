@@ -139,13 +139,37 @@ def measure_lamp_clearance(before, after, work):
         d, i = tree.query(L, k=1, workers=2)
         # signed: outboard (larger x than the nearest panel vertex) = proud
         proud = L[:, 0] - PV[i][:, 0]
+        # CORRECTION 2026-08-21, made after the first run reported "37-38% of
+        # lamp vertices buried, minimum -111/-140 mm" and I nearly wrote that
+        # down as a defect.  It was MY OWN PROXY that was wrong.  `TailLamp_L`
+        # spans z -0.827..+0.004 while the rebuilt `Hatch` spans -0.721..+0.569,
+        # so 106 mm of each lamp lies on the QUARTER PANELS, which this gate
+        # does not rebuild.  Comparing those vertices against "the nearest
+        # rebuilt-panel vertex" measures the distance to a panel that is not
+        # there: 97.7% of the L lamp's supposedly-buried vertices are at
+        # |z| > 0.60, i.e. outside the tailgate entirely.  The clearance figure
+        # is only meaningful where the panel actually covers the lamp, so it is
+        # restricted to vertices whose nearest panel vertex is within LAT_TOL
+        # laterally, and the out-of-footprint share is reported separately
+        # rather than counted as burial.
+        LAT_TOL = 0.015
+        lat = np.linalg.norm(L[:, 1:] - PV[i][:, 1:], axis=1)
+        cov = lat < LAT_TOL
+        pc = proud[cov]
         out[lam] = {
             "verts": int(len(L)),
-            "buried_pct": round(float(100 * (proud < -0.002).mean()), 3),
-            "min_proud_mm": round(float(proud.min() * 1000), 3),
-            "median_proud_mm": round(float(np.median(proud) * 1000), 3),
-            "max_proud_mm": round(float(proud.max() * 1000), 3),
-            "median_dist_mm": round(float(np.median(d) * 1000), 3),
+            "in_panel_footprint_pct": round(float(100 * cov.mean()), 2),
+            "outside_footprint_note": "on the quarters, which this gate does not rebuild",
+            "buried_pct_in_footprint": (round(float(100 * (pc < -0.002).mean()), 3)
+                                        if cov.sum() else None),
+            "min_proud_mm_in_footprint": (round(float(pc.min() * 1000), 3)
+                                          if cov.sum() else None),
+            "median_proud_mm_in_footprint": (round(float(np.median(pc) * 1000), 3)
+                                             if cov.sum() else None),
+            "max_proud_mm_in_footprint": (round(float(pc.max() * 1000), 3)
+                                          if cov.sum() else None),
+            "median_dist_mm_all": round(float(np.median(d) * 1000), 3),
+            "raw_all_verts_buried_pct_PROXY": round(float(100 * (proud < -0.002).mean()), 3),
         }
     json.dump(out, open(os.path.join(work, "lamp_clearance.json"), "w"), indent=1)
     return out

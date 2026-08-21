@@ -212,6 +212,50 @@ def panel(path, workdir, ref=None, cam=None, do_respray=True, res=700, samples=2
                        "retained": round(retain, 5) if retain else None,
                        "by_node": m["glass_area_by_node"]}
 
+    # ---- G1b PER-NODE glazing retention.
+    # The material-total and the per-node figures catch DIFFERENT defects, which
+    # the independent verifier measured directly: rebinding ONE pane (the
+    # windscreen) to `carpaint` barely moves the total but empties that node.
+    # A pane may GROW (the glass gate's whole point is that the windscreen grows
+    # 0.1622 -> 0.9894 m2) and panes may be renamed by a geometric re-split, so
+    # the rule is: no pane present in the reference may LOSE more than 25% of
+    # its area while still existing, and no pane may vanish outright.
+    refn = (ref or {}).get("glass_area_by_node") or {}
+    gotn = m["glass_area_by_node"]
+    lost, shrunk = [], {}
+    for k, v in refn.items():
+        if v < 5e-3:
+            continue                       # a 50 cm2 sliver is not a pane
+        if k not in gotn:
+            lost.append(k)
+        elif gotn[k] < 0.75 * v:
+            shrunk[k] = [round(v, 5), round(gotn[k], 5)]
+    C["glass_panes"] = {"pass": bool(not lost and not shrunk),
+                        "vanished": lost, "shrunk_over_25pct": shrunk,
+                        "ref": {k: round(v, 5) for k, v in refn.items()},
+                        "got": {k: round(v, 5) for k, v in gotn.items()}}
+
+    # ---- G1c THE WRITTEN MATERIAL TABLE, read directly.
+    # `trimesh` drops every KHR material extension on any round-trip while
+    # `alphaMode` survives, so glass_probe still returns clear/proven on glazing
+    # that has stopped refracting entirely.  Neither the verdict nor any area
+    # figure can see that.  Confirmed a third time by the independent verifier:
+    # the probe passed a file with all extensions stripped.
+    gm = m["material_table"].get("glass") or {}
+    rgm = ((ref or {}).get("material_table") or {}).get("glass") or {}
+    need_ext = ["KHR_materials_ior", "KHR_materials_transmission"]
+    have = gm.get("extensions") or []
+    missing_ext = [e for e in need_ext if e not in have]
+    alpha = (gm.get("baseColorFactor") or [None] * 4)[3]
+    ralpha = (rgm.get("baseColorFactor") or [None] * 4)[3]
+    C["glass_material_written"] = {
+        "pass": bool(not missing_ext and gm.get("alphaMode") == "BLEND"
+                     and (ralpha is None or (alpha is not None
+                                             and abs(alpha - ralpha) < 1e-6))),
+        "extensions": have, "missing": missing_ext,
+        "alphaMode": gm.get("alphaMode"), "alpha": alpha, "ref_alpha": ralpha,
+        "baseColorFactor": gm.get("baseColorFactor")}
+
     # ---- G2 tyres black AND still bound to the tyre nodes
     bc = m["tyre_baseColor"]
     tyre_nodes = sorted(m["per_material"].get("Tyre_Rubber", {}).get("nodes", []))
@@ -260,6 +304,9 @@ def summary_line(p):
             f"glass={C['glass_area']['area_m2']:.4f}m2"
             + (f" ({100*C['glass_area']['retained']:.1f}%)"
                if C['glass_area']['retained'] else ""),
+            "ext=" + ("+".join(e.replace("KHR_materials_", "")
+                               for e in C['glass_material_written']['extensions'])
+                      or "NONE"),
             f"tyre={C['tyres_black']['baseColor'][0] if C['tyres_black']['baseColor'] else '?'}",
             f"val={C['validator']['errors']}err",
             f"N={C['normals']['primitives']-C['normals']['missing_NORMAL']}"
@@ -322,6 +369,27 @@ def make_control(path, out, kind):
                 for p in me["primitives"]:
                     p["attributes"].pop("NORMAL", None)
         _rw(path, out, fn)
+    elif kind == "strip_extensions":
+        # the verifier's NC5: remove every KHR material extension.  glass_probe
+        # returns clear/proven regardless — only a direct read of the written
+        # table sees it.  This is what a trimesh round-trip does by itself.
+        def fn(js, bin_):
+            for m in js["materials"]:
+                m.pop("extensions", None)
+            js.pop("extensionsUsed", None)
+        _rw(path, out, fn)
+    elif kind == "windscreen_to_paint":
+        # rebind the WINDSCREEN pane to `carpaint`.  The glazing-material TOTAL
+        # barely notices (the windscreen is 0.16 m2 of 3.17 on the base); the
+        # PER-NODE figure empties.
+        def fn(js, bin_):
+            cp = [i for i, m in enumerate(js["materials"])
+                  if m.get("name") == "carpaint"][0]
+            for n in js["nodes"]:
+                if n.get("name") == "Glass_Windscreen" and "mesh" in n:
+                    for p in js["meshes"][n["mesh"]]["primitives"]:
+                        p["material"] = cp
+        _rw(path, out, fn)
     elif kind == "break_validator":
         # ACCESSOR_MIN_MISMATCH / ACCESSOR_MAX_MISMATCH are spec ERRORS and are
         # completely invisible in a render.  Chosen over inflating an index
@@ -360,6 +428,8 @@ def selftest(path, workdir, cam=None, res=560, samples=16):
         "tyre_bound_to_paint": (("tyres_black", "respray"), True),
         "drop_normals": ("normals", False),
         "break_validator": ("validator", False),
+        "strip_extensions": ("glass_material_written", False),
+        "windscreen_to_paint": ("glass_panes", False),
     }
     for kind, (gate, needs_render) in want.items():
         cp = os.path.join(workdir, f"NC_{kind}.glb")
@@ -371,8 +441,9 @@ def selftest(path, workdir, cam=None, res=560, samples=16):
             fired = all(x in p["failed"] for x in want_g)
             row = {"gate": list(want_g), "fired": bool(fired), "failed": p["failed"],
                    "summary": summary_line(p)}
-            if kind == "glass_cut":
-                # the whole point: the probe must STILL pass while area fails
+            if kind in ("glass_cut", "strip_extensions", "windscreen_to_paint"):
+                # the whole point: the probe must STILL pass while the paired
+                # figure fails.  Three separate defects, one blind probe.
                 row["probe_still_clear"] = bool(
                     p["checks"]["glazing_verdict"]["pass"])
         except SystemExit as e:
