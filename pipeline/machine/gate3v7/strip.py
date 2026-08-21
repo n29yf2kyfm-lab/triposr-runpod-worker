@@ -198,7 +198,13 @@ for node in sc.graph.nodes_geometry:
     else:
         out.graph.update(frame_to=node, matrix=T, geometry=gname)
 sc = out
-sc.export(OUT)
+# `Scene.export` does NOT write NORMAL accessors unless asked, and this project
+# has the trap on record ("trimesh submesh exports drop NORMAL accessors --
+# re-read the WRITTEN file and assert NORMAL on every primitive").  Measured
+# here: without include_normals every primitive in the written file lacks
+# NORMAL and a viewer falls back to flat shading.
+open(OUT, "wb").write(
+    trimesh.exchange.gltf.export_glb(sc, include_normals=True))
 R["out_bytes"] = os.path.getsize(OUT)
 json.dump(R, open(REP, "w"), indent=1)
 print(f"STRIP_DONE {OUT} ({R['out_bytes']} bytes)")

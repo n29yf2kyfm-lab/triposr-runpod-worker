@@ -571,7 +571,8 @@ for node, m, matname in PARTS:
     mat = PBRMaterial(name=matname, doubleSided=False, **MATS[matname])
     m.visual = trimesh.visual.TextureVisuals(material=mat)
     sc.add_geometry(m, node_name=node, geom_name=node)
-sc.export(OUT)
+open(OUT, "wb").write(
+    trimesh.exchange.gltf.export_glb(sc, include_normals=True))
 R["out_bytes"] = os.path.getsize(OUT)
 R["parts_total_faces"] = int(sum(len(m.faces) for _, m, _ in PARTS))
 json.dump(R, open(REP, "w"), indent=1)
