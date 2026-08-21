@@ -177,3 +177,29 @@ Every one of the 8 fixed-camera views was examined at full resolution.
   103 x 31 mm footprint at x=+1.25, y=+0.057, then a 5x crop.
 - **genuinely found, deferred to the shell stage** the rear roof / backlight
   junction is torn, and there is a small hole in the roof skin.
+
+## R4 — glazing rebuild
+
+- **defect** torn glazing, worst visible defect in all 8 baseline views
+- **evidence** `repair/R4_GLASS_BEFORE_AFTER.png`, `repair/r4_report.json`
+- **root cause** every window shares ONE object called `glass`: 278 components,
+  31,610 cm2, with pinholes, detached shards and unstitched inner skins.
+- **action** classify components into windows SEMANTICALLY (dominant normal axis
+  + position), fit one surface per window, emit fresh grid geometry, solidify.
+- **verification** 4 named panes, each **1 component / 0 boundary edges**;
+  footprint ratios 0.987-1.020; debris 258 components / 334.8 cm2 (1.06%)
+  removed; validator **0/0/0/0**.
+- **result** **PASS on integrity, INCOMPLETE on shape** -- see uncertainty.
+- **remaining uncertainty, stated plainly.** The panes are watertight but their
+  OUTLINES are the source's outlines. `Glass_Windscreen` emits 3,228 cm2 where a
+  Golf windscreen is roughly 11,000-14,000 cm2, because the source's windscreen
+  glass is largely ABSENT: its fragments span y -0.11..+0.58 plus a full-width
+  cowl strip, so most of the right-hand side has no glass to fit. A surface fit
+  cannot invent geometry that is not there. Closing this needs aperture-driven
+  outlines (attempted on a previous car and defeated by fragment-soup body
+  geometry) or a reference set -- and the reference set is BLOCKED.
+- **my own error, corrected mid-repair** the first pass fitted each pane from its
+  LARGEST member and built the windscreen out of the 1,414.7 cm2 cowl strip,
+  emitting a 1,347 cm2 "windscreen". Fitting the whole semantic class instead
+  took it to 3,228 cm2. Fitting the union is safe here only because the
+  classifier guarantees every member is the same physical window.
