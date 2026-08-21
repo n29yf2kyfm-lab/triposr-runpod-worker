@@ -1,0 +1,16 @@
+artefact   : car_cabin.glb
+bytes      : 24550728
+sha256     : 796c7d47290adbc606343fc40634265bf4f8ec25d1faa1b932b2e288a61b62d6
+parts      : 2  (part size 21 MiB)
+
+part order (concatenate in this order):
+  car_cabin.glb.part000  22020096 bytes  sha256 eb8e742370a9f72087b48ab8302036f1bb78c7658ae874c6476db86eb2056841
+  car_cabin.glb.part001  2530632 bytes  sha256 73e38d76d3108ccd2a22d6a3c9228757f0a464c660c38570f8cbd41dec91fd06
+
+reassemble:
+  cat car_cabin.glb.part000 car_cabin.glb.part001  > car_cabin.glb
+  sha256sum car_cabin.glb   # must print 796c7d47290adbc606343fc40634265bf4f8ec25d1faa1b932b2e288a61b62d6
+
+download each part (BOTH headers are required):
+  curl -s -H "apikey: $SB_KEY" -H "Authorization: Bearer $SB_KEY" \
+    -o PART "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/car-meshes/staging/cabin/glb/PART"
