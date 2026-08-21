@@ -45,42 +45,38 @@ def world_mesh(sc, name):
     return m
 
 
-def cabin_axis(sc):
-    """A point per x-slice on the cabin's own axis, used as the 'inside' reference.
+def cabin_centre(sc, y_lo=None):
+    """A single point inside the cabin, used as the 'inside' reference for outwardness.
 
-    Uses the INTERIOR node when present (it is the cabin volume by construction);
-    falls back to the whole-scene centroid.  Returns f(x) -> (y, z).
+    Uses the INTERIOR node's vertices above the glazing's lower edge when present (that
+    is the cabin volume by construction); falls back to the glazing centroid.
     """
+    gl = [n for n in GLASS_NODES if n in sc.geometry]
+    gv = np.vstack([world_mesh(sc, n).vertices for n in gl]) if gl else None
+    if y_lo is None and gv is not None:
+        y_lo = float(np.percentile(gv[:, 1], 5))
     if "Interior" in sc.geometry:
         v = world_mesh(sc, "Interior").vertices
-    else:
-        v = np.vstack([world_mesh(sc, n).vertices for n in sc.geometry])
-    xs = v[:, 0]
-    lo, hi = xs.min(), xs.max()
-    bins = np.linspace(lo, hi, 41)
-    idx = np.clip(np.digitize(xs, bins) - 1, 0, len(bins) - 2)
-    cent = np.zeros((len(bins) - 1, 2))
-    for i in range(len(bins) - 1):
-        s = v[idx == i]
-        cent[i] = s[:, 1:].mean(0) if len(s) else np.nan
-    good = ~np.isnan(cent[:, 0])
-    mids = 0.5 * (bins[:-1] + bins[1:])
-
-    def f(x):
-        xx = np.atleast_1d(x)
-        y = np.interp(xx, mids[good], cent[good, 0])
-        z = np.interp(xx, mids[good], cent[good, 1])
-        return np.c_[y, z]
-
-    return f
+        v = v[v[:, 1] > y_lo]
+        if len(v) > 100:
+            return np.median(v, axis=0)
+    return np.median(gv, axis=0)
 
 
 def outwardness(mesh, axis_fn):
-    """Per-face signed cosine between the face normal and the outward radial
-    direction from the cabin axis.  +1 = faces away from the car, -1 = faces into it."""
+    """Per-face signed cosine between the face normal and the outward direction from a
+    single point INSIDE the cabin.  +ve = faces away from the car, -ve = into it.
+
+    CORRECTION 2026-08-21: v1 used a radial with the X component ZEROED (distance from
+    the cabin's length axis).  That is fine for side glazing and MEANINGLESS for the
+    windscreen and rear screen, whose outward direction is mostly +/-X: it scored the
+    windscreen 0.39 outward / 0.02 inward with 59% of its area "edge-on", and the rear
+    screen 0.48/0.51, i.e. no signal at all.  A full 3-D radial from the cabin centre
+    classifies all four panes.  This measure ORGANISES skins; the ray test decides
+    winding.
+    """
     c = mesh.triangles_center
-    ax = axis_fn(c[:, 0])
-    r = np.c_[np.zeros(len(c)), c[:, 1] - ax[:, 0], c[:, 2] - ax[:, 1]]
+    r = c - axis_fn
     n = np.linalg.norm(r, axis=1)
     keep = n > 1e-9
     r[keep] /= n[keep, None]
@@ -89,11 +85,18 @@ def outwardness(mesh, axis_fn):
 
 def ray_winding(scene_mesh, glass_masks, n_dirs=24, res=200, seed=0):
     """THE decisive winding test: shoot rays at the car from outside and ask, at the
-    first GLAZING face each ray hits, whether that face points back at the camera.
+    FIRST FACE OF THE WHOLE CAR each ray hits, whether that face points back at the
+    camera.  Returns per-node (front_hits, back_hits).
 
-    Returns per-node (front_hits, back_hits).  A correctly wound outer skin returns
-    front hits; a fully inverted pane returns back hits and is invisible in any
-    client that honours doubleSided:false.
+    CORRECTION 2026-08-21 (my own v1 was confounded and its selftest could not fail):
+    v1 took the first GLAZING hit, not the first hit on the car.  A ray entering from
+    the rear passes through the rear screen, crosses the cabin and strikes the
+    windscreen's BACK face -- a legitimate back hit that is not a defect at all.  That
+    put every node near back_frac 0.5 and made the injected-inversion control move only
+    0.46 -> 0.54, i.e. the control could not separate a good pane from an inverted one.
+    Counting only what the CAMERA ACTUALLY SEES (first surface along the ray) is the
+    operation a rasteriser performs, and a back-facing first hit is exactly the pixel a
+    client honouring doubleSided:false drops.
     """
     rng = np.random.default_rng(seed)
     b = scene_mesh.bounds
@@ -129,21 +132,17 @@ def ray_winding(scene_mesh, glass_masks, n_dirs=24, res=200, seed=0):
             continue
         t = ((loc - org[ray_i]) * dd[ray_i]).sum(1)
         order = np.lexsort((t, ray_i))
-        ray_i, tri, t = ray_i[order], tri[order], t[order]
+        ray_i, tri = ray_i[order], tri[order]
+        # FIRST hit on the car per ray -- what the camera sees
+        _, uidx = np.unique(ray_i, return_index=True)
+        first_tri = tri[uidx]
+        dot = scene_mesh.face_normals[first_tri] @ d
         for name, mask in glass_masks.items():
-            isg = mask[tri]
+            isg = mask[first_tri]
             if not isg.any():
                 continue
-            # first GLAZING hit per ray along this direction
-            first = np.ones(ray_i.max() + 1, dtype=np.int64) * -1
-            sel = np.where(isg)[0]
-            # rows are already sorted by (ray, t); take the first per ray
-            _, uidx = np.unique(ray_i[sel], return_index=True)
-            hits = tri[sel[uidx]]
-            fn = scene_mesh.face_normals[hits]
-            dot = fn @ d
-            out[name][0] += int((dot < 0).sum())      # front-facing toward the camera
-            out[name][1] += int((dot > 0).sum())      # back-facing: culled by the client
+            out[name][0] += int((dot[isg] < 0).sum())   # front-facing: drawn
+            out[name][1] += int((dot[isg] > 0).sum())   # back-facing: culled by the client
     return out
 
 
@@ -158,8 +157,8 @@ def skin_analysis(node_mesh, axis_fn, min_area_frac=0.005):
             continue
         ow = outwardness(c, axis_fn)
         a = c.area_faces
-        outf = float(a[ow > 0.2].sum() / a.sum())
-        innf = float(a[ow < -0.2].sum() / a.sum())
+        outf = float(a[ow > 0].sum() / a.sum())
+        innf = float(a[ow < 0].sum() / a.sum())
         rows.append({
             "faces": int(len(c.faces)), "area": float(c.area),
             "area_frac": float(c.area / total),
@@ -211,7 +210,8 @@ def main():
     a = ap.parse_args()
 
     sc = trimesh.load(a.glb, force="scene", process=False)
-    axis_fn = cabin_axis(sc)
+    axis_fn = cabin_centre(sc)
+    print("cabin centre reference:", np.round(axis_fn, 4).tolist())
     names = [n for n in GLASS_NODES if n in sc.geometry]
     rep = {"file": a.glb, "nodes": {}}
 
@@ -268,9 +268,14 @@ def main():
         w2 = ray_winding(big2, masks, n_dirs=a.rays, res=a.res)
         base = rep["winding"][inv]["back_frac"]
         flip = (w2[inv][1] / max(1, sum(w2[inv]))) if sum(w2[inv]) else None
-        rep["selftest"] = {"node": inv, "back_frac_normal": base, "back_frac_inverted": round(flip, 4)}
-        ok = base is not None and flip is not None and abs(flip - (1 - base)) < 0.25
+        rep["selftest"] = {"node": inv, "back_frac_normal": base,
+                           "back_frac_inverted": round(flip, 4) if flip is not None else None}
+        # STRICT, and it CAN fail: an injected full inversion must send back_frac from
+        # near 0 to near 1.  The v1 criterion (|flip-(1-base)|<0.25) was satisfied by
+        # ANY value when base sat near 0.5 -- a gate that is empty by construction.
+        ok = (base is not None and flip is not None and base < 0.15 and flip > 0.85)
         rep["selftest"]["passes"] = bool(ok)
+        rep["selftest"]["criterion"] = "back_frac_normal < 0.15 AND back_frac_inverted > 0.85"
         print(f"SELFTEST invert({inv}): back_frac {base} -> {flip}  {'PASS' if ok else 'FAIL'}")
 
     print(json.dumps({k: v for k, v in rep.items() if k != "nodes"}, indent=2))

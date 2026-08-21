@@ -344,23 +344,35 @@ def lamp_grid(scale_h=1.0, inset=0.0):
     return Yl, Zl
 
 
-Yl, Zl = lamp_grid()
-Dl = skin(Yl, Zl)
-# REPAIR 4a: the lens is set 3 mm BEHIND the surrounding bumper skin. Built
-# flush it was geometrically invisible -- in a clay pass a flush panel of the
-# same material has no outline at all, and the audit rubric fails a lamp with no
-# defined edge. 3 mm of rebate gives the aperture a real shadow line that does
-# not depend on the material being dark.
-LENS_RECESS = 0.003
-Dl = Dl + LENS_RECESS
-# REPAIR 2, lamp side: one extra column above the shut line, tucked rearward.
-Yl = np.hstack([Yl, (BE(Zl[:, 0]) + 0.004)[:, None]])
-Zl = np.hstack([Zl, Zl[:, -1:]])
-Dl = np.hstack([Dl, Dl[:, -1:] + 0.012])
-lens = grid_solid(XN, Yl, Zl, Dl, Dl + 0.014)
-Yh, Zh = lamp_grid(0.90, 0.006)
+# REPAIR 6 -- THE LAMP NEEDS A PANEL GAP, NOT A DEEPER REBATE.
+# In the first build the lens outline was exactly coincident with the aperture
+# in the surrounding bumper panels: the two surfaces BUTTED, so there was no
+# gap anywhere and, in a clay pass where lens and bumper are the same material,
+# the lamp had no outline at all and read as flat bumper. A 3 mm rebate did not
+# fix it. That is not a rendering problem -- it is geometrically wrong against
+# the real car, which carries a consistent panel gap all round the lamp.
+# So: the HOUSING fills the aperture at full size and sits 10 mm back; the LENS
+# is inset LAMP_GAP all round and sits 5 mm back. What shows between them is a
+# real slot with a dark part behind it, which is what a shut line is.
+LAMP_GAP = 0.0035
+Yh, Zh = lamp_grid()
 Dh = skin(Yh, Zh)
-hous = grid_solid(XN, Yh, Zh, Dh + 0.014, Dh + 0.078)
+Yh = np.hstack([Yh, (BE(Zh[:, 0]) + 0.004)[:, None]])
+Zh = np.hstack([Zh, Zh[:, -1:]])
+Dh = np.hstack([Dh, Dh[:, -1:] + 0.012])
+hous = grid_solid(XN, Yh, Zh, Dh + 0.010, Dh + 0.075)
+
+Yl, Zl = lamp_grid()
+# inset the outline: pull the top down, the bottom up and both ends inboard
+ytop_l = Yl[:, -1] - LAMP_GAP
+ybot_l = Yl[:, 0] + LAMP_GAP
+Yl = np.stack([np.linspace(ybot_l[k], ytop_l[k], NV) for k in range(NU)])
+zc_l = Zl[:, 0]
+zc_l = ZC + np.sign(zc_l - ZC) * (np.abs(zc_l - ZC) - LAMP_GAP * np.where(
+    (np.arange(NU) == 0) | (np.arange(NU) == NU - 1), 1.0, 0.0))
+Zl = np.repeat(zc_l[:, None], NV, 1)
+Dl = skin(Yl, Zl) + 0.005
+lens = grid_solid(XN, Yl, Zl, Dl, Dl + 0.014)
 # internals: round projector outboard, rectangular element inboard (spec 4.x)
 # Internals: the reference shows TWO large rounded elements side by side in the
 # outer half of the lamp, plus a narrower inner section. Built as two discs and
@@ -385,6 +397,8 @@ R["checks"]["headlamp"] = {
     "outer_tip_mm_from_centre": LAMP_ZO * 1000,
     "length_mm": round((LAMP_ZO - LAMP_ZI) * 1000, 1),
     "top_edge": "follows the car's own measured bonnet shut line, 8 mm below it",
+    "panel_gap_mm": 3.5,
+    "lens_behind_housing_mm": 5.0,
     "height_inner_mm": round(float(HH[0]) * 1000, 1),
     "height_max_mm": round(float(HH.max()) * 1000, 1),
     "height_max_at_u": float(uu[int(np.argmax(HH))]),
