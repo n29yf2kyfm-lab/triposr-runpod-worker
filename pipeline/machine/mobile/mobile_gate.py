@@ -276,6 +276,35 @@ window.__ready=true;
 </script></body></html>"""
 
 
+
+def _settle(page, clip, tmpdir, max_wait_s=60.0, tol=1.0):
+    """Block until two consecutive frames are the same, or give up.
+
+    A fixed wait_for_timeout() is not a settle check. Under SwiftShader a
+    material-table change takes tens of seconds to redraw ~1M triangles, and a
+    screenshot taken during that window shows a HALF-UPDATED car -- which is how
+    this gate once reported ten simultaneous paint leaks that did not exist.
+    Returns the seconds waited and whether it actually converged, so a caller can
+    refuse rather than silently measure a transient frame.
+    """
+    import time as _t
+    from PIL import Image
+    a = os.path.join(tmpdir, "_settle_a.png")
+    b_ = os.path.join(tmpdir, "_settle_b.png")
+    t0 = _t.time()
+    page.wait_for_timeout(400)
+    page.screenshot(path=a, clip=clip)
+    while _t.time() - t0 < max_wait_s:
+        page.wait_for_timeout(700)
+        page.screenshot(path=b_, clip=clip)
+        A = np.asarray(Image.open(a).convert("RGB")).astype(np.float64)
+        B = np.asarray(Image.open(b_).convert("RGB")).astype(np.float64)
+        if float(np.abs(A - B).mean()) <= tol:
+            return {"seconds": round(_t.time() - t0, 1), "converged": True}
+        os.replace(b_, a)
+    return {"seconds": round(_t.time() - t0, 1), "converged": False}
+
+
 def respray_control(path, out_dir, cams, new_rgba=(0.05, 0.12, 0.75, 1.0),
                     paint_material=PAINT_MAT, leak_tol=0.03, move_min=0.15,
                     bright_lum=90.0, min_mask_coverage=0.90, verbose=True):
@@ -369,26 +398,35 @@ def respray_control(path, out_dir, cams, new_rgba=(0.05, 0.12, 0.75, 1.0),
             clip = {"x": box["x"], "y": box["y"],
                     "width": box["width"], "height": box["height"]}
 
+            # ORDER MATTERS, and getting it wrong produced a second wrong
+            # verdict. The first ordering ran the isolation passes BETWEEN the
+            # before and after frames and then called __restore(); restoring the
+            # whole material table forces a re-upload that takes ~20 s under
+            # SwiftShader, so the "after" frame was captured on a car that was
+            # still half-black from the isolation pass. Every protected material
+            # then read 53-80% "changed" and the gate reported ten simultaneous
+            # paint leaks on a car with none. Now NOTHING is restored before a
+            # measured frame: before -> paint -> after, and the isolation passes
+            # come last, where a slow settle costs nothing.
             shots["before"] = os.path.join(out_dir, "respray_before.png")
+            _settle(p, clip, out_dir)
             p.screenshot(path=shots["before"], clip=clip)
 
+            n = p.evaluate("a=>window.__paint(a[0],a[1])",
+                           [paint_material, list(new_rgba)])
+            _settle(p, clip, out_dir)
+            shots["after"] = os.path.join(out_dir, "respray_after.png")
+            p.screenshot(path=shots["after"], clip=clip)
+
             p.evaluate("()=>window.__isoInit()")
-            p.wait_for_timeout(800)
+            _settle(p, clip, out_dir)
             for k, nm in enumerate(names):
                 p.evaluate("k=>window.__isolate(k)", k)
-                p.wait_for_timeout(350)
+                p.wait_for_timeout(400)
                 fp = os.path.join(out_dir, "iso_%02d_%s.png"
                                   % (k, re.sub(r"[^A-Za-z0-9_.-]", "_", nm or "?")))
                 p.screenshot(path=fp, clip=clip)
                 shots["iso_%d" % k] = fp
-            p.evaluate("()=>window.__restore()")
-            p.wait_for_timeout(500)
-
-            n = p.evaluate("a=>window.__paint(a[0],a[1])",
-                           [paint_material, list(new_rgba)])
-            p.wait_for_timeout(700)
-            shots["after"] = os.path.join(out_dir, "respray_after.png")
-            p.screenshot(path=shots["after"], clip=clip)
             b.close()
     finally:
         httpd.shutdown()
