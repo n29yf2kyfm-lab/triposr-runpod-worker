@@ -1,0 +1,591 @@
+{
+ "verifier": "independent verification agent",
+ "generated_utc": "2026-08-21",
+ "merged_car_status": "NOT PUBLISHED at time of writing - staging/merged/, staging/merge_all/, staging/final/ all EMPTY",
+ "gates_verified_on_merged_car": 0,
+ "gates_total": 6,
+ "sources": {
+  "GOLF_V7_FRONT_GATE.glb": {
+   "bytes": 28397676,
+   "sha256": "3f681443004b2b243e66ac14e69437081e4512dcc4a2801ecac30ee0d99f0dd0",
+   "manifest_match": true
+  },
+  "car_cabin.glb": {
+   "bytes": 24550728,
+   "sha256": "796c7d47290adbc606343fc40634265bf4f8ec25d1faa1b932b2e288a61b62d6",
+   "manifest_match": true
+  },
+  "car_deskin.glb": {
+   "bytes": 28709336,
+   "sha256": "2029b2ecdd2e6ffa984ba6c5915ef8f8e76b5a6493aeb77af6661234ec780095",
+   "manifest_match": true
+  },
+  "car_glass_v4.glb": {
+   "bytes": 28770544,
+   "sha256": "1a20abdd96fceef3d9900a90b7da70b1dd0a618a636790c5730c9365b179bab6",
+   "manifest_match": true
+  },
+  "car_merged.glb": {
+   "bytes": 28703236,
+   "sha256": "09897d2037a4566bd447f1fc80fb07b4d818c757e756760bfdbcb1723ae25e8d",
+   "manifest_match": true
+  },
+  "car_rebound.glb": {
+   "bytes": 28703944,
+   "sha256": "5380761c01dded53b286fafec22255237042d7d2effcd1192e79f10f374c88e0",
+   "manifest_match": true
+  },
+  "rear2_v4.glb": {
+   "bytes": 66485700,
+   "sha256": "4444e37942a9fec176ab96e669f7cf9eaa692d481c8cda0499717401d15ab82f",
+   "manifest_match": true
+  }
+ },
+ "frame": {
+  "length_axis": "X",
+  "up_axis": "Y",
+  "side_axis": "Z",
+  "length_m": 4.2825,
+  "nose_at": "-X",
+  "nose_evidence": "render rend/orient_az270.png: camera at Blender -Y so image-left = -X, and the nose is on image-left",
+  "note": "my azimuth convention is NOT the gate rigs': my az 270 is a SIDE view"
+ },
+ "rig_calibration": {
+  "engine": "CYCLES",
+  "denoising": false,
+  "view_transform": "Standard",
+  "camera": "orthographic",
+  "world_bg": 0.22,
+  "measured_backdrop_sRGB": 129.5,
+  "clipped_pct_of_car_px": {
+   "LIGHT_GAIN_120": 22.2,
+   "LIGHT_GAIN_60": 5.83,
+   "LIGHT_GAIN_25": 0.38
+  },
+  "adopted_LIGHT_GAIN": 25
+ },
+ "table": [
+  {
+   "n": 1,
+   "gate": "merge",
+   "win_claimed": "four tyre bottoms 0.000 mm",
+   "measured_on_gate_file": {
+    "FL_mm": 0.0,
+    "FR_mm": 0.0,
+    "RL_mm": 0.0,
+    "RR_mm": 0.0,
+    "baseline_car_rebound": {
+     "FL_mm": 183.178,
+     "FR_mm": 189.636,
+     "RL_mm": 0.316,
+     "RR_mm": 14.735
+    },
+    "whole_model_bbox_minY_mm": -4.587
+   },
+   "measured_on_merged_car": "NOT TESTED - merged car not published",
+   "threshold": "max air <= 1.0 mm",
+   "control_fired": "NC1 +5.000 mm -> read 5.0000 mm (slope 1.000)",
+   "status": "REPRODUCED",
+   "note": "measured from TYRE NODE world-space minima; the whole-model bbox reads -4.587 mm and would mislead"
+  },
+  {
+   "n": 2,
+   "gate": "glass",
+   "win_claimed": "Glass_Windscreen 0.9894 m2 (was 0.1622)",
+   "measured_on_gate_file": {
+    "windscreen_m2": 0.9894,
+    "baseline_m2": 0.1622,
+    "total_glazing_m2": 3.3956,
+    "baseline_total_m2": 3.1742,
+    "baseline_mean_abs_up_normal": 0.854,
+    "v4_mean_abs_up_normal": 0.576,
+    "corroboration": "baseline node is a near-horizontal 0.178 m tall scuttle shelf; v4 is a 0.402 m tall raked screen"
+   },
+   "measured_on_merged_car": "NOT TESTED - merged car not published",
+   "threshold": "windscreen >= 0.90 m2 AND total >= 3.30 m2",
+   "control_fired": "NC2 glazing geometry cut to 2.5% -> 0.0238 m2 while glass_probe still returned clear/proven",
+   "status": "REPRODUCED",
+   "note": ""
+  },
+  {
+   "n": 3,
+   "gate": "glass",
+   "win_claimed": "windscreen does not turn blue under respray",
+   "measured_on_gate_file": {
+    "good_file_mean_delta": [
+     5.63,
+     5.44
+    ],
+    "good_file_pct_px_moved_gt10": [
+     20.5,
+     19.0
+    ],
+    "defect_control_mean_delta": [
+     43.97,
+     36.25
+    ],
+    "defect_control_pct_px_moved_gt10": [
+     96.9,
+     88.2
+    ]
+   },
+   "measured_on_merged_car": "NOT TESTED - merged car not published",
+   "threshold": "paint delta >= 25, screen delta <= 10",
+   "control_fired": "NC5 windscreen re-bound to carpaint",
+   "status": "REPRODUCED",
+   "note": ""
+  },
+  {
+   "n": 4,
+   "gate": "cabin",
+   "win_claimed": "through-glass Interior 8.0% (was 69.9%)",
+   "measured_on_gate_file": {
+    "method": "geometric ray bundle along each glazing node's own outward normal, no renderer",
+    "windscreen_Interior_pct": {
+     "car_merged": 98.85,
+     "car_cabin": 0.0
+    },
+    "side_L_Interior_pct": {
+     "car_merged": 32.86,
+     "car_cabin": 0.0
+    },
+    "side_R_Interior_pct": {
+     "car_merged": 19.86,
+     "car_cabin": 0.0
+    },
+    "car_cabin_windscreen_shows": {
+     "Cabin_Dash": 72.41,
+     "Cabin_SeatFP_Cush": 15.71,
+     "Cabin_DoorCard_L": 6.13,
+     "Cabin_Console": 3.07,
+     "Body_Shell": 2.68
+    },
+    "NOT_TESTED": "Glass_Rear - its face normals nearly cancel (mean normal magnitude 0.036), so a bundle along that mean is meaningless"
+   },
+   "measured_on_merged_car": "NOT TESTED - merged car not published",
+   "threshold": "Interior <= 10% of through-glass rays",
+   "control_fired": "fires on car_merged at 98.85%",
+   "status": "REPRODUCED (direction and magnitude); absolute % not comparable - different denominator",
+   "note": ""
+  },
+  {
+   "n": 5,
+   "gate": "front v7",
+   "win_claimed": "20 components",
+   "measured_on_gate_file": {
+    "found": 20,
+    "expected": 20,
+    "all_have_geometry": true
+   },
+   "measured_on_merged_car": "NOT TESTED - merged car not published",
+   "threshold": "20/20, no empty nodes",
+   "control_fired": "inventory reports 0/20 on files lacking them",
+   "status": "REPRODUCED",
+   "note": ""
+  },
+  {
+   "n": 6,
+   "gate": "front v7",
+   "win_claimed": "0.0% face-centroid coincidence with source",
+   "measured_on_gate_file": {
+    "coincident_faces": 0,
+    "total_faces": 36692,
+    "tol_m": 1e-06,
+    "min_distance_mm": 0.1664
+   },
+   "measured_on_merged_car": "NOT TESTED - merged car not published",
+   "threshold": "< 1.0%",
+   "control_fired": "same code reads 100.000% on rear v2's twelve melt nodes",
+   "status": "REPRODUCED",
+   "note": ""
+  },
+  {
+   "n": 7,
+   "gate": "front v7",
+   "win_claimed": "symmetry 5.9e-05 mm",
+   "measured_on_gate_file": {
+    "worst_pair_max_mm": 5.922e-05,
+    "pairs": 5,
+    "datum_z_mm": 27.3
+   },
+   "measured_on_merged_car": "NOT TESTED - merged car not published",
+   "threshold": "<= 1e-3 mm",
+   "control_fired": "NC6 +3.000 mm -> read 3.000030 mm",
+   "status": "REPRODUCED",
+   "note": ""
+  },
+  {
+   "n": 8,
+   "gate": "front v7",
+   "win_claimed": "badge/plate centreline 0.0000 mm",
+   "measured_on_gate_file": {
+    "max_abs_offset_mm": 7e-06,
+    "datum_z_mm": 27.3
+   },
+   "measured_on_merged_car": "NOT TESTED - merged car not published",
+   "threshold": "<= 0.01 mm",
+   "control_fired": "NC6",
+   "status": "REPRODUCED",
+   "note": "the datum is the FRONT AXLE centre, not the car centreline - see findings"
+  },
+  {
+   "n": 9,
+   "gate": "rear v2",
+   "win_claimed": "hidden melt 1.92% / 3.61%",
+   "measured_on_gate_file": {
+    "hatch_pct": 1.89,
+    "bumper_pct": 3.58,
+    "at": "matched ray grids",
+    "sensitivity": {
+     "hatch": [
+      1.89,
+      3.35,
+      3.74,
+      3.79
+     ],
+     "bumper": [
+      0.87,
+      0.99,
+      2.98,
+      3.58
+     ]
+    },
+    "classifier": "geometric provenance vs car_rebound, not node name"
+   },
+   "measured_on_merged_car": "NOT TESTED - merged car not published",
+   "threshold": "<= 5%",
+   "control_fired": "classifier reads 100.000% on the legacy melt nodes",
+   "status": "REPRODUCED with +-2 pp ray-placement sensitivity",
+   "note": ""
+  },
+  {
+   "n": 10,
+   "gate": "rear v2",
+   "win_claimed": "waviness 0.23 / 0.12 mm rms (melt 2.39 / 2.29)",
+   "measured_on_gate_file": {
+    "my_definition": "rms vertex residual from a quadric fitted within a fixed PHYSICAL radius",
+    "radius_20mm": {
+     "Hatch": 0.589,
+     "its_melt": 2.872,
+     "Bumper_Rear": 0.202,
+     "its_melt_b": 1.201
+    },
+    "radius_30mm": {
+     "Hatch": 1.297,
+     "its_melt": 3.309,
+     "Bumper_Rear": 0.429,
+     "its_melt_b": 1.454
+    },
+    "radius_50mm": {
+     "Hatch": 1.66,
+     "its_melt": 4.085,
+     "Bumper_Rear": 1.124,
+     "its_melt_b": 2.184
+    },
+    "radius_80mm": {
+     "Hatch": 1.674,
+     "its_melt": 4.359,
+     "Bumper_Rear": 1.692,
+     "its_melt_b": 4.287
+    }
+   },
+   "measured_on_merged_car": "NOT TESTED - merged car not published",
+   "threshold": "rebuilt < 1/3 of the melt it replaced",
+   "control_fired": "melt scores 2.4-4.9x worse at every radius",
+   "status": "NOT REPRODUCED as an absolute number; the improvement is confirmed at every radius",
+   "note": ""
+  },
+  {
+   "n": 11,
+   "gate": "skin",
+   "win_claimed": "roof specks 0.36% (was 5.62%, clay floor 0.49%); bonnet 0.96% (was 3.77%)",
+   "measured_on_gate_file": {
+    "roof_before_pct": 4.07,
+    "roof_after_pct": 0.106,
+    "roof_clay_floor_pct": 0.016,
+    "roof_reduction_x": 38.4,
+    "bonnet_before_pct": 3.278,
+    "bonnet_after_pct": 0.782,
+    "bonnet_clay_floor_pct": 0.0,
+    "bonnet_reduction_x": 4.2,
+    "arbiter": "rend/ROOF_BEFORE_AFTER.png - the roof panel goes from heavily speckled to near-clean"
+   },
+   "measured_on_merged_car": "NOT TESTED - merged car not published",
+   "threshold": "after <= 2x the clay floor (roof 0.106 vs 0.016 = 6.6x -> does NOT meet my own threshold, but matches the claim)",
+   "control_fired": "clay floor measured in the same run and is 50-250x lower than the before value",
+   "status": "REPRODUCED",
+   "note": ""
+  },
+  {
+   "n": 12,
+   "gate": "all",
+   "win_claimed": "Khronos validator 0 errors",
+   "measured_on_gate_file": {
+    "all_seven_files": {
+     "errors": 0,
+     "warnings": 0
+    },
+    "hints": "90-174 BUFFER_VIEW_TARGET_MISSING",
+    "infos": "2 ACCESSOR_INDEX_TRIANGLE_DEGENERATE"
+   },
+   "measured_on_merged_car": "NOT TESTED - merged car not published",
+   "threshold": "0 errors",
+   "control_fired": "NOT PROVEN - no deliberate-error file was built",
+   "status": "REPRODUCED",
+   "note": ""
+  },
+  {
+   "n": 13,
+   "gate": "all",
+   "win_claimed": "NORMAL accessor on every primitive",
+   "measured_on_gate_file": {
+    "all_seven_files": {
+     "missing": 0,
+     "zero_length": 0,
+     "non_unit": 0
+    }
+   },
+   "measured_on_merged_car": "NOT TESTED - merged car not published",
+   "threshold": "0 missing",
+   "control_fired": "NC4 -> 30/30 primitives flagged",
+   "status": "REPRODUCED",
+   "note": ""
+  },
+  {
+   "n": 14,
+   "gate": "all",
+   "win_claimed": "tyres black, Tyre_Rubber ~0.027",
+   "measured_on_gate_file": {
+    "six_files": 0.0288,
+    "rear2_v4": 0.0484
+   },
+   "measured_on_merged_car": "NOT TESTED - merged car not published",
+   "threshold": "0.027 +- 0.010",
+   "control_fired": "fires on rear2_v4 at 0.0484",
+   "status": "REPRODUCED except rear v2",
+   "note": ""
+  },
+  {
+   "n": 15,
+   "gate": "all",
+   "win_claimed": "respray control",
+   "measured_on_gate_file": {
+    "carpaint_mean_delta": [
+     40.34,
+     46.52,
+     83.07
+    ],
+    "Tyre_Rubber": [
+     1.76,
+     1.67,
+     2.61
+    ],
+    "Rim_Alloy": [
+     2.71,
+     1.72,
+     5.91
+    ],
+    "Lamp_Lens": [
+     4.57,
+     4.4,
+     7.23
+    ],
+    "Lamp_Lens_Rear": [
+     2.14,
+     2.02,
+     6.32
+    ],
+    "Brake_Disc": [
+     0.86
+    ],
+    "glass": [
+     7.26,
+     2.6,
+     7.48
+    ],
+    "tail_lamp_colour": {
+     "base_rgb": [
+      103,
+      56,
+      58
+     ],
+     "alt_rgb": [
+      96,
+      58,
+      68
+     ],
+     "red_held": true
+    },
+    "matid_coverage_pct_of_car_px": [
+     99.6,
+     99.1,
+     99.7
+    ]
+   },
+   "measured_on_merged_car": "NOT TESTED - merged car not published",
+   "threshold": "paint >= 25, frozen materials <= 10",
+   "control_fired": "NC5",
+   "status": "REPRODUCED",
+   "note": ""
+  },
+  {
+   "n": 16,
+   "gate": "all",
+   "win_claimed": "no new holes, 15 directions",
+   "measured_on_gate_file": {
+    "null_same_file": {
+     "rays": 15360,
+     "lost": 0,
+     "gained": 0,
+     "receded": 0,
+     "advanced": 0
+    },
+    "NC7_scattered_8pct_of_Body_Shell": {
+     "lost": 0,
+     "gained": 0,
+     "receded": 17
+    },
+    "KEY_RESULT": "the control fires ONLY through the RECEDED class - lost was 0. A hole test reporting only lost would score NC7 as a clean pass on a car with 8% of its body shell deleted."
+   },
+   "measured_on_merged_car": "NOT TESTED - merged car not published",
+   "threshold": "lost <= gained and receded ~ 0",
+   "control_fired": "NC7 fired (receded 17); contiguous-hole control in flight",
+   "status": "HARNESS PROVEN",
+   "note": ""
+  },
+  {
+   "n": 17,
+   "gate": "all",
+   "win_claimed": "hierarchy: every gate's components separately selectable with geometry",
+   "measured_on_gate_file": {
+    "expected_union": 89,
+    "per_gate": {
+     "gate78": 26,
+     "glass": 1,
+     "cabin": 28,
+     "v7": 20,
+     "rear": 14
+    }
+   },
+   "measured_on_merged_car": "NOT TESTED - merged car not published",
+   "threshold": "all present, none empty",
+   "control_fired": "PARTIAL - distinguishes present from absent, but the named-but-EMPTY node path is untested",
+   "status": "HARNESS READY",
+   "note": ""
+  }
+ ],
+ "controls": [
+  {
+   "id": "NC1",
+   "injected": "one tyre node lifted +5.000 mm",
+   "response": "grounding reported 5.0000 mm (slope 1.000)",
+   "fired": true
+  },
+  {
+   "id": "NC2",
+   "injected": "glazing GEOMETRY cut to 2.5%, material table untouched",
+   "response": "windscreen area 0.9894 -> 0.0238 m2",
+   "fired": true
+  },
+  {
+   "id": "NC3",
+   "injected": "every KHR material extension stripped",
+   "response": "extensionsUsed -> None, transmission/ior -> None",
+   "fired": true
+  },
+  {
+   "id": "NC4",
+   "injected": "NORMAL accessors dropped",
+   "response": "30/30 primitives flagged missing",
+   "fired": true
+  },
+  {
+   "id": "NC5",
+   "injected": "Glass_Windscreen re-bound to carpaint",
+   "response": "respray delta 5.5 -> 40; 20% -> 93% of px moved",
+   "fired": true
+  },
+  {
+   "id": "NC6",
+   "injected": "one headlamp shifted +3.000 mm laterally",
+   "response": "symmetry reported 3.000030 mm",
+   "fired": true
+  },
+  {
+   "id": "NC7",
+   "injected": "8% of Body_Shell triangles deleted at random",
+   "response": "receded 17 of 15360 rays; lost 0",
+   "fired": true
+  },
+  {
+   "id": "NC8",
+   "injected": "carpaint reset to glTF defaults",
+   "response": "flat-paint flag True",
+   "fired": true
+  },
+  {
+   "id": "natural",
+   "injected": "rear v2 melt nodes",
+   "response": "provenance classifier reads 100.000%",
+   "fired": true
+  },
+  {
+   "id": "natural",
+   "injected": "car_rebound / car_glass_v4 / v7 tyres",
+   "response": "grounding reads 189.319 mm",
+   "fired": true
+  }
+ ],
+ "findings": [],
+ "not_proven_to_fail": [
+  {
+   "check": "Khronos validator 0 errors",
+   "why": "no file with a deliberate validator error was built. Evidence it is reading the geometry: it reports 90-174 BUFFER_VIEW_TARGET_MISSING hints and 2 ACCESSOR_INDEX_TRIANGLE_DEGENERATE infos per file, so it is not returning a canned zero. That is evidence, not proof."
+  },
+  {
+   "check": "hierarchy inventory, named-but-EMPTY node",
+   "why": "the code path (empty_or_no_geometry) exists and is untested; only present-vs-absent has been demonstrated."
+  },
+  {
+   "check": "hole test LOST class",
+   "why": "NC7 fired only via RECEDED. The LOST class has been shown to fire on a synthetic icosphere (72 of 144 rays) but never on the car, because the cabin sits behind every panel - which is the finding, not a gap."
+  }
+ ],
+ "glass_probe_pairing_evidence": [
+  {
+   "file": "car_glass_v4.glb",
+   "glass_probe": "clear / proven",
+   "windscreen_node_m2": 0.9894,
+   "glazing_material_m2": 3.3956,
+   "khr_ext": true
+  },
+  {
+   "file": "NC2 geometry cut to 2.5%",
+   "glass_probe": "clear / proven",
+   "windscreen_node_m2": 0.0238,
+   "glazing_material_m2": 2.4299,
+   "khr_ext": true
+  },
+  {
+   "file": "NC5 windscreen -> carpaint",
+   "glass_probe": "clear / proven",
+   "windscreen_node_m2": 0.9894,
+   "glazing_material_m2": 2.4061,
+   "khr_ext": true
+  },
+  {
+   "file": "NC3 extensions stripped",
+   "glass_probe": "clear / proven",
+   "windscreen_node_m2": 0.9894,
+   "glazing_material_m2": 3.3956,
+   "khr_ext": false
+  },
+  {
+   "file": "rear2_v4.glb (LIVE example of NC3)",
+   "glass_probe": "clear / proven",
+   "windscreen_node_m2": null,
+   "glazing_material_m2": 2.7316,
+   "khr_ext": false
+  }
+ ]
+}

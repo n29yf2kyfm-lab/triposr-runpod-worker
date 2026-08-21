@@ -1,0 +1,7 @@
+Rig calibration, measured not assumed (car_rebound.glb, az 0 el 8, res 600, 24 samples)
+  view_transform = Standard (never AgX), exposure 0, gamma 1, CYCLES, use_denoising = False
+  world background 0.22 -> measured backdrop sRGB 129.5   (CLAUDE.md target: near 130)  PASS
+  clipped fraction of CAR pixels (any channel >= 254):
+      LIGHT_GAIN 120 -> 22.20 %      (would repeat the AgX white-tyre class of error)
+      LIGHT_GAIN  60 ->  5.83 %
+      LIGHT_GAIN  25 ->  0.38 %   <-- adopted
