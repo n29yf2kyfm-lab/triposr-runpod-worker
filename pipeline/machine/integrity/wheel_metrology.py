@@ -335,16 +335,33 @@ def cmd_calibrate(path, out, corner="FR"):
         y = np.array(meas) - meas[ladder.index(0.0)]
         slope, icept = np.polyfit(x, y, 1)
         resid = y - (slope * x + icept)
+        # SIGN IS A CONVENTION, MAGNITUDE IS THE INSTRUMENT.
+        # A rotation about +Z moves this estimator's reported toe NEGATIVE for
+        # both sides (and camber's sign differs by side, as camber conventionally
+        # does), so a slope of -1 is a faithful instrument with an opposite
+        # label, NOT a blind one. What would indicate blindness is |slope| well
+        # below 1 -- the 0.35 that this project's previous wheel gate scored.
+        # Both are reported so neither can be mistaken for the other.
+        near = np.abs(x) <= 1.0
+        sl_near, ic_near = np.polyfit(x[near], y[near], 1)
+        rs_near = y[near] - (sl_near * x[near] + ic_near)
+        mag = abs(float(slope))
         res["axes"][kind] = {
+            "sign_convention": "rotation about +axis reports NEGATIVE here",
             "measured_delta_deg": [round(float(v), 4) for v in y],
             "response_slope": round(float(slope), 4),
+            "response_slope_magnitude": round(mag, 4),
             "intercept_deg": round(float(icept), 5),
             "residual_rms_deg": round(float(np.sqrt((resid ** 2).mean())), 5),
-            "VERDICT": ("FAITHFUL" if 0.90 <= slope <= 1.10 else
-                        "BLIND — estimator understates by "
-                        f"{1/slope:.2f}x" if slope > 0 else "BROKEN"),
+            "linear_range_slope_magnitude": round(abs(float(sl_near)), 4),
+            "linear_range_residual_rms_deg": round(
+                float(np.sqrt((rs_near ** 2).mean())), 5),
+            "VERDICT": ("FAITHFUL" if 0.90 <= mag <= 1.10 else
+                        f"DEGRADED — understates by {1/mag:.2f}x over the full "
+                        f"ladder" if mag > 0.05 else "BLIND"),
         }
-        print(f"{kind:7} slope={slope:.4f} rms={np.sqrt((resid**2).mean()):.5f} "
+        print(f"{kind:7} slope={slope:+.4f} |slope|={mag:.4f} rms={np.sqrt((resid**2).mean()):.5f} "
+              f"| linear-range |slope|={abs(sl_near):.4f} rms={np.sqrt((rs_near**2).mean()):.5f} "
               f"-> {res['axes'][kind]['VERDICT']}")
     json.dump(res, open(out, "w"), indent=1)
     return res
