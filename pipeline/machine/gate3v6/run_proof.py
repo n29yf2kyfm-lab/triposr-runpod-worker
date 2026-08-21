@@ -29,10 +29,10 @@ _s = lambda n: max(1, int(round(n * _SS)))
 RES_MAIN = _r([2560, 2048])
 RES_WIRE = _r([3072, 2458])
 RES_TILE = _r([1600, 1280])
-SAMPLES_LIT = _s(96)
-SAMPLES_CLAY = _s(80)
+SAMPLES_LIT = _s(48)
+SAMPLES_CLAY = _s(48)
 SAMPLES_FLAT = 1
-SAMPLES_ZEBRA = _s(128)
+SAMPLES_ZEBRA = _s(96)
 
 
 def sh(cmd, log_path):
@@ -83,7 +83,7 @@ def sheet_views(ly, occ=0.80, ortho_scale=None, suffix=""):
     for vid, az, _lab in SHEET_ORDER:
         v = {"id": vid + suffix, "az": az, "elev": SHEET_ELEV, "pass": "matte",
              "cam": "ortho", "res": RES_TILE, "samples": SAMPLES_LIT,
-             "target_y_gltf": ly, "ground": True, "ground_grey": 0.30,
+             "target_y_gltf": ly, "ground": True, "ground_grey": 0.45,
              "world_grey": 0.22, "probe_px": 448}
         if ortho_scale is None:
             v["occ"] = occ
@@ -109,10 +109,10 @@ def proof_views(ly, groups, boxes_lo, boxes_hi, lamp_centre):
     # 2/3 front three-quarters (az 305 / 215 per the verified mapping)
     V.append(dict(id="p02_front_left_34", az=305, elev=6.0, cam="ortho",
                   target_y_gltf=ly, occ=0.80, res=RES_MAIN, pass_="matte",
-                  samples=SAMPLES_LIT, ground=True, ground_grey=0.30))
+                  samples=SAMPLES_LIT, ground=True, ground_grey=0.45))
     V.append(dict(id="p03_front_right_34", az=215, elev=6.0, cam="ortho",
                   target_y_gltf=ly, occ=0.80, res=RES_MAIN, pass_="matte",
-                  samples=SAMPLES_LIT, ground=True, ground_grey=0.30))
+                  samples=SAMPLES_LIT, ground=True, ground_grey=0.45))
     # 4 neutral clay front
     V.append(dict(id="p04_clay_front", pass_="clay", samples=SAMPLES_CLAY,
                   ground=False, **front))
@@ -275,7 +275,7 @@ def main():
                        "samples": SAMPLES_LIT if src["pass"] != "matid" else SAMPLES_FLAT,
                        "target_y_gltf": src["target_y_gltf"],
                        "ortho_scale": src["ortho_scale"], "shift": src["shift"],
-                       "ground": vid == "p02_front_left_34", "ground_grey": 0.30})
+                       "ground": vid == "p02_front_left_34", "ground_grey": 0.45})
         jobC = {"glb": a.baseline, "outdir": png, "name": "%s_base" % a.baseline_tag,
                 "done_marker": os.path.join(png, "_DONE_%s_base" % a.baseline_tag),
                 "views": vs}

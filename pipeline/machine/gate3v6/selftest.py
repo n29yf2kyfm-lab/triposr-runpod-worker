@@ -352,6 +352,43 @@ def run_selftest():
     for q in (p4, p5, p0b):
         os.remove(q)
 
+    # ---- 12c resampled-original detector ---------------------------------
+    # A part that is the old melt RE-TESSELLATED scores 0% on origin_audit
+    # (centroids moved) and must still be caught by the shape test.
+    scR = trimesh.Scene()
+    fv3, ff3 = _plane(-2.10, 0.60, 0.90, -0.30, 0.30, n=8)
+    mv0 = trimesh.Trimesh(fv3, np.asarray(ff3), process=False)
+    _ = mv0.vertex_normals
+    scR.add_geometry(mv0, node_name="carpaint", geom_name="carpaint")
+    pR0 = os.path.join(tmp, "shp_v0.glb")
+    scR.export(pR0)
+    # same surface, different tessellation -> centroids move, shape does not
+    fv4, ff4 = _plane(-2.10, 0.60, 0.90, -0.30, 0.30, n=13)
+    scS = trimesh.Scene()
+    mres = trimesh.Trimesh(fv4, np.asarray(ff4), process=False)
+    _ = mres.vertex_normals
+    scS.add_geometry(mres, node_name="Bumper_Front", geom_name="Bumper_Front")
+    far = trimesh.creation.box(extents=(0.05, 0.05, 0.05))
+    far.apply_translation((-2.35, 0.75, 0.0))
+    _ = far.vertex_normals
+    scS.add_geometry(far, node_name="Badge", geom_name="Badge")
+    pR1 = os.path.join(tmp, "shp_t.glb")
+    scS.export(pR1)
+    cR, c0 = V.Car(pR1), V.Car(pR0)
+    oa2 = V.origin_audit(cR, c0)
+    sh = V.shape_origin_audit(cR, c0)
+    R["resampled_original"] = {
+        "centroid_audit_says": {k: oa2[k]["verdict"] for k in ("Bumper_Front", "Badge")},
+        "shape_audit_resampled": sh["parts"]["Bumper_Front"],
+        "shape_audit_new_part": sh["parts"]["Badge"],
+        "injection": ("the original surface re-tessellated (n=8 -> n=13) and "
+                      "renamed Bumper_Front, plus a genuinely new box 250 mm away"),
+        "control_ok": bool(oa2["Bumper_Front"]["verdict"] == "CONSTRUCTED"
+                           and sh["parts"]["Bumper_Front"]["verdict"] == "RESAMPLED_ORIGINAL"
+                           and sh["parts"]["Badge"]["verdict"] == "DISTINCT_SURFACE")}
+    for q in (pR0, pR1):
+        os.remove(q)
+
     # ----------------------------------------------------- 13 hierarchy
     sc2 = trimesh.Scene()
     bx = trimesh.creation.box(extents=(0.1, 0.1, 0.1))

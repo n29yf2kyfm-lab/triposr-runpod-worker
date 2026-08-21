@@ -322,7 +322,7 @@ def studio_lights(centre, diag, bright=1.0):
                  (diag * 1.1, diag * 0.8), P * 1.15)
     # low bounce so the underbody / lower fascia is not lost to shadow
     add_area("bounce_low", (cx, cy, cz - diag * 0.55), (math.radians(180), 0, 0),
-             (diag * 2.0, diag * 2.0), P * 0.35)
+             (diag * 2.0, diag * 2.0), P * 0.50)
 
 
 def strip_lights(centre, diag, n_strips=22, arc_deg=150.0, up_deg=62.0):

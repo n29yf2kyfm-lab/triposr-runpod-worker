@@ -869,6 +869,62 @@ def origin_audit(car, v0, tol=1e-4):
     return out
 
 
+def shape_origin_audit(car, v0, zone=0.65, n=3000, seed=0):
+    """How far does each constructed part's SURFACE sit from the original one?
+
+    `origin_audit` matches triangle centroids and therefore only detects
+    VERBATIM reuse. A part that is the old melt RE-TESSELLATED would score 0%
+    original there and still be the old broken surface. This measures shape
+    instead: sample each part's surface and take the distance to the V0
+    front-zone surface.
+
+      ~0 mm everywhere  -> the part IS the original surface, resampled
+      large / mixed     -> a different surface
+
+    HONEST LIMIT, stated rather than hidden: a genuinely rebuilt part that
+    deliberately hugs the original silhouette will also read small. This
+    number narrows the question, it does not close it on its own -- which is
+    why it sits alongside the ray probe and the residue count rather than
+    replacing them.
+    """
+    lo, _ = v0.bounds()
+    XMIN = float(lo[0])
+    Vs, Fs, off = [], [], 0
+    for nm in v0.names:
+        d = v0.nodes[nm]
+        if len(d["F"]) == 0:
+            continue
+        c = d["V"][d["F"]].mean(1)
+        keep = c[:, 0] < XMIN + zone
+        if not keep.any():
+            continue
+        Vs.append(d["V"])
+        Fs.append(d["F"][keep] + off)
+        off += len(d["V"])
+    if not Vs:
+        return {}
+    ref = trimesh.Trimesh(vertices=np.vstack(Vs), faces=np.vstack(Fs), process=False)
+    pq = trimesh.proximity.ProximityQuery(ref)
+    out = {"reference_faces": int(len(ref.faces)), "parts": {}}
+    rng = np.random.default_rng(seed)
+    for nm in car.built:
+        d = car.nodes[nm]
+        if len(d["F"]) == 0:
+            continue
+        m = trimesh.Trimesh(vertices=d["V"], faces=d["F"], process=False)
+        pts, _ = trimesh.sample.sample_surface(m, min(n, 20000),
+                                               seed=int(rng.integers(1 << 30)))
+        dd = np.abs(pq.on_surface(pts)[1]) * MM
+        out["parts"][nm] = {
+            "median_mm": round(float(np.median(dd)), 3),
+            "p95_mm": round(float(np.percentile(dd, 95)), 3),
+            "pct_within_1mm": round(float(100.0 * (dd < 1.0).mean()), 2),
+            "samples": int(len(dd)),
+            "verdict": ("RESAMPLED_ORIGINAL" if float((dd < 1.0).mean()) > 0.9
+                        else "DISTINCT_SURFACE")}
+    return out
+
+
 # ------------------------------------------------------------------- driver
 def measure(path, v0path=None, label=None, skip=()):
     t0 = time.time()
@@ -906,6 +962,7 @@ def measure(path, v0path=None, label=None, skip=()):
         if v0path:
             R["v0_residue"] = v0_residue(car, v0car)
             R["origin_audit"] = origin_audit(car, v0car)
+            R["shape_origin_audit"] = shape_origin_audit(car, v0car)
     R["seconds"] = round(time.time() - t0, 1)
     return R
 
