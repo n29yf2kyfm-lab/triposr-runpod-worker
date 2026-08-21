@@ -203,3 +203,48 @@ Every one of the 8 fixed-camera views was examined at full resolution.
   emitting a 1,347 cm2 "windscreen". Fitting the whole semantic class instead
   took it to 3,228 cm2. Fitting the union is safe here only because the
   classifier guarantees every member is the same physical window.
+
+## R5 — decimate to the triangle budget
+
+- **defect** 1,056,016 triangles against a 250,000 gate; 40.0 MB against 20 MB
+- **root cause** 62% of the mesh is INTERIOR (658,473 tris) seen only through glass
+- **action** allocate the budget by visibility, not uniformly: interior -> 60,000
+  (ratio 0.0911), body shell -> 120,000, rims/tyres/lamps kept whole. Glass panes
+  EXCLUDED from decimation and re-emitted at half raster instead, because a
+  collapse decimator punches holes in a closed thin shell.
+- **verification**
+  * **248,115 triangles**, **16.46 MB**, validator **0/0/0/0**, 9 draw calls
+  * panes still **0 boundary edges** before AND after
+  * dimensions moved at most **0.60 mm** (4.2733 -> 4.2734 x 1.7887 x 1.4682 m)
+  * glass pane areas within **1%** of the full-raster emission
+  * matched-camera render vs pre-decimation: only **4.86% / 4.99% of the frame
+    changed at all**, mean 9.8 / 11.2 levels; only **0.086% / 0.129%** of pixels
+    differ by more than 64 levels
+  * a difference heat map shows the large changes concentrated on ALREADY-TORN
+    geometry -- the shattered A-pillar surround, ragged greenhouse edges, the
+    tail-lamp region. Clean panels are near-black. Decimation spent its losses
+    on noise, not on surface.
+- **result** **PASS**
+- **my own error** the first quality figure was PSNR over a "car only" mask built
+  by excluding grey pixels. It reported 69.4% of the frame as car, because the
+  studio backdrop and floor are not exactly neutral grey -- so identical
+  floor pixels inflated the score. Replaced with the measure that does not need a
+  mask: how many pixels changed, by how much.
+- **remaining uncertainty** PSNR is measured against the PRE-DECIMATION render,
+  which proves decimation cost little. It does NOT prove the asset is good --
+  the shell defects it preserved are still there.
+
+# GATE STATUS after R1-R5
+
+| gate | baseline | now | |
+|---|---|---|---|
+| GLB <= 20 MB | 65.1 MB | **16.46 MB** | PASS |
+| triangles <= 250,000 | 985,227 | **248,115** | PASS |
+| textures <= 2048 | 4096 | **2048** | PASS |
+| validator errors | **30** | **0** | PASS |
+| tyres grounded | +193.8 mm front | **0.00 mm** | PASS |
+| glazing watertight | 278 components | **4 panes, 0 boundary edges** | PASS |
+| mobile FPS on a named device | - | - | **BLOCKED, no device** |
+| proportions vs reference | - | - | **BLOCKED, no references** |
+| shell free of tears | - | - | **FAIL, not attempted** |
+| semantic hierarchy | 6 material groups | 6 + 4 panes | **FAIL** |
