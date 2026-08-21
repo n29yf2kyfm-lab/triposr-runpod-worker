@@ -53,9 +53,19 @@ def expline(v):
     p = e.get("probe_p99.8_linear")
     if p:
         parts.append("probe p99.8 %.3f -> %.3f linear" % (p, e.get("predicted_peak_linear") or 0))
-    parts.append("bg sRGB %s (world %.2f -> %s expected)"
-                 % (m.get("bg_corner_srgb"), v.get("world_grey", 0.22),
-                    v.get("expected_bg_srgb")))
+    # The expected background must include the exposure trim: view exposure
+    # scales the WORLD too, so a 0.22 world at -0.08 stops lands at sRGB 126,
+    # not 129. Without this the index reads as a mismatch when it is correct.
+    wg = v.get("world_grey", 0.22) * (2.0 ** (e.get("exposure_stops") or 0.0))
+    b = (255.0 * (1.055 * wg ** (1 / 2.4) - 0.055)) if wg > 0.0031308 else 255.0 * 12.92 * wg
+    if v.get("pass") == "zebra":
+        # Rendered with film_transparent so the striped sky lights and reflects
+        # but never becomes the backdrop; compose.flatten() lays it on grey 129.
+        parts.append("background: film transparent, composited to neutral sRGB 129")
+    else:
+        parts.append("bg sRGB %s (world %.2f at %+.2f stops -> %d expected)"
+                     % (m.get("bg_corner_srgb"), v.get("world_grey", 0.22),
+                        e.get("exposure_stops") or 0.0, int(round(b))))
     parts.append("clipped: frame %.4f%%" % (100 * (m.get("clipped_frac_frame") or 0.0)))
     if m.get("clipped_frac_car") is not None:
         parts.append("car (alpha) %.4f%%" % (100 * m["clipped_frac_car"]))
@@ -219,12 +229,27 @@ def main():
                          "RENDER  az 305 front-left 3/4, perspective 50 mm "
                          "(matched to the reference EXIF)")]
         if refs:
+            # Crop the render to its own silhouette (+6% margin) so the vehicle
+            # occupies a comparable share of both panels. Letterboxing a 2.09:1
+            # photo next to a 1.25:1 render made the render look half the size
+            # and the comparison useless.
+            u0, v0, u1, v1 = v["proj_extent_ndc"]
+            rim = Image.open(refs[1][0]).convert("RGB")
+            W, H = rim.size
+            mx, my = 0.06 * (u1 - u0), 0.06 * (v1 - v0)
+            box = (max(0, int((u0 - mx) * W)), max(0, int((1 - v1 - my) * H)),
+                   min(W, int((u1 + mx) * W)), min(H, int((1 - v0 + my) * H)))
+            crop = os.path.join(out, "_tmp_ref_render.jpg")
+            C.save_jpeg(rim.crop(box), crop)
+            refs[1] = (crop, refs[1][1])
             C.side_by_side(refs, os.path.join(out, "09_reference_overlay.jpg"),
                            "09  REFERENCE OVERLAY — %s" % a.tag,
                            "LIMIT, quoted from ref/REFERENCES.json: no orthographic front "
                            "reference exists for this vehicle, so this pair governs FEATURE "
                            "STRUCTURE and PROPORTION RATIOS only. Any criterion needing an "
-                           "orthographic reference overlay is NOT TESTED, never estimated.")
+                           "orthographic reference overlay is NOT TESTED, never estimated.",
+                           tile=(1600, 900))
+            os.remove(crop)               # never leave intermediates in sheets/
         else:
             C.save_jpeg(C.caption_bar(C.flatten(src("p09_ref_match_34")),
                         "09  REFERENCE-MATCHED VIEW (reference not supplied) — %s" % a.tag,

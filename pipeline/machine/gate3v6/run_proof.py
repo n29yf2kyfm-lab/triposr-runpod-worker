@@ -126,8 +126,14 @@ def proof_views(ly, groups, boxes_lo, boxes_hi, lamp_centre):
     V.append(dict(id="p06_normals_front", pass_="normals", samples=SAMPLES_FLAT,
                   ground=False, **front))
     # 7 zebra / reflection lines
+    # auto_exposure STAYS ON here. It was disabled at first on the theory that
+    # pulling the bright bands down would flatten the contrast the pass exists to
+    # show - that was wrong: exposure is a linear scale, so it moves both bands
+    # together and the stripe CONTRAST RATIO is unchanged. Measured: with it off
+    # the bands clipped 6.02% of car pixels, which hides surface inside the blown
+    # bands, and the owner's spec forbids exactly that.
     V.append(dict(id="p07_zebra_front", pass_="zebra", samples=SAMPLES_ZEBRA,
-                  ground=False, auto_exposure=False, n_stripes=26, **front))
+                  ground=False, n_stripes=26, **front))
     # 8 material-ID front (flat emission, AA off, 1 sample)
     V.append(dict(id="p08_matid_front", pass_="matid", samples=SAMPLES_FLAT,
                   ground=False, **front))

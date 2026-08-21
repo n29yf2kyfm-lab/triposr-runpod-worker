@@ -578,13 +578,30 @@ def auto_exposure(tmp_path, res_x, res_y, target_lin=0.85, pct=99.8,
     if os.path.exists(tmp_path):
         os.remove(tmp_path)
     scn.render.filepath = tmp_path
-    bpy.ops.render.render(write_still=True)
+
+    # The probe reads back an 8-BIT PNG, so it cannot see above 1.0: on a
+    # specular pass (zebra) the first reading came back a saturated 1.0000 and
+    # the correction it implied was far too small. Re-probe at successively
+    # lower exposure until the reading is genuinely below clipping, then add the
+    # offset back. Found 2026-08-21 with 6.02% of car pixels still clipped.
+    offset, im = 0.0, None
+    for _ in range(6):
+        scn.view_settings.exposure = offset
+        if os.path.exists(tmp_path):
+            os.remove(tmp_path)
+        bpy.ops.render.render(write_still=True)
+        im = read_png_rgba(tmp_path)
+        sel0 = im[..., 3] > 0.90
+        if sel0.sum() < 40:
+            break
+        if float(np.percentile(im[..., :3][sel0].max(axis=-1), pct)) < 0.985:
+            break
+        offset -= 1.5
     if ground is not None:
         ground.hide_render = gh
     stops, meas = 0.0, None
     sil = {}
     try:
-        im = read_png_rgba(tmp_path)
         a = im[..., 3]
         sel = a > 0.90
         # SILHOUETTE METRICS off the same alpha probe: this is the authority for
@@ -601,7 +618,8 @@ def auto_exposure(tmp_path, res_x, res_y, target_lin=0.85, pct=99.8,
         if sel.sum() >= 40:
             lin = srgb_to_linear(im[..., :3])
             lum = 0.2126 * lin[..., 0] + 0.7152 * lin[..., 1] + 0.0722 * lin[..., 2]
-            meas = float(np.percentile(lum[sel], pct))
+            # undo the probe offset so `meas` is the peak AT EXPOSURE 0
+            meas = float(np.percentile(lum[sel], pct)) / (2.0 ** offset)
             if meas > 1e-6:
                 stops = float(np.clip(math.log2(target_lin / meas), lo, hi))
     except Exception as e:                                    # pragma: no cover
@@ -614,12 +632,14 @@ def auto_exposure(tmp_path, res_x, res_y, target_lin=0.85, pct=99.8,
      _, scn.render.filepath, scn.cycles.use_adaptive_sampling) = keep
     scn.view_settings.exposure = stops
     pred = None if meas is None else meas * (2.0 ** stops)
-    log("auto_exposure: p%.1f=%s -> %+.2f stops -> predicted %s  sil_px=%.4f occ=%.3f"
-        % (pct, "n/a" if meas is None else "%.4f" % meas, stops,
+    log("auto_exposure: p%.1f=%s (probe offset %+.1f) -> %+.2f stops -> predicted %s  "
+        "sil_px=%.4f occ=%.3f"
+        % (pct, "n/a" if meas is None else "%.4f" % meas, offset, stops,
            "n/a" if pred is None else "%.4f" % pred,
            sil.get("silhouette_px_frac", -1), sil.get("silhouette_occ_max", -1)))
     r = {"exposure_stops": stops, "probe_p%.1f_linear" % pct: meas,
-         "predicted_peak_linear": pred, "target_linear": target_lin}
+         "predicted_peak_linear": pred, "target_linear": target_lin,
+         "probe_offset_stops": offset}
     r.update(sil)
     return r
 

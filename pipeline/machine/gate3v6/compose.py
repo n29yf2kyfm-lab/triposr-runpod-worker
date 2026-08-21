@@ -353,9 +353,23 @@ def side_by_side(items, out, title, sub="", tile=(1400, 1120)):
         c = _fit(im, tile)
         d = ImageDraw.Draw(c)
         f = font(int(tile[1] * 0.030))
-        bb = d.textbbox((0, 0), cap, font=f)
-        d.rectangle([0, 0, bb[2] + 22, bb[3] + 18], fill=(15, 15, 15))
-        d.text((11, 6), cap, font=f, fill=(245, 245, 245))
+        # WRAP the per-panel caption. Unwrapped, item 13's middle panel read
+        # "...what the shell carries underneat" - the caption ran off the tile.
+        rows, cur = [], ""
+        for w in cap.split(" "):
+            t = (cur + " " + w).strip()
+            if d.textlength(t, font=f) <= tile[0] - 30 or not cur:
+                cur = t
+            else:
+                rows.append(cur)
+                cur = w
+        if cur:
+            rows.append(cur)
+        lh = int(tile[1] * 0.036)
+        wide = max(d.textlength(r, font=f) for r in rows)
+        d.rectangle([0, 0, wide + 22, 12 + lh * len(rows)], fill=(15, 15, 15))
+        for i, r in enumerate(rows):
+            d.text((11, 6 + i * lh), r, font=f, fill=(245, 245, 245))
         cells.append(c)
     gap = 10
     W = len(cells) * tile[0] + (len(cells) + 1) * gap
