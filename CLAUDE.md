@@ -3421,3 +3421,95 @@ material extension" trap this file already records applies to over half the
 library, and a control car without any cannot prove that gate fires. Pick a
 control master that can BUILD every control; a control that cannot be built is
 not a control that passed.
+
+## Direct3D-S2: verified, deployable, NOT MEASURED — the run ran out of host, not budget (2026-08-21)
+
+Leg C of the three-model sharpness experiment. **No mesh was produced**, so nothing here
+is a verdict on Direct3D-S2's quality. What IS established is the deployment recipe and
+two facts about the crease metric that change how all three legs should be read.
+
+**The model is real, open, and pullable by this account** — checked, not recalled:
+`github.com/DreamTechAI/Direct3D-S2` (NeurIPS 2025, MIT), weights
+`hf wushuang98/Direct3D-S2` subfolder `direct3d-s2-v-1-1`, **gated=False**, HTTP 206
+ranged read with `HF_TOKEN` on `model_sparse_1024.ckpt` (1.09GB),
+`model_refiner_1024.ckpt` (269MB), `model_dense.ckpt` (1.51GB). Native 1024^3 via
+Spatial Sparse Attention; the 1024 path is dense -> sparse512 -> `mesh2index` -> sparse1024.
+
+**Dependency map, established by READING THE CODE before renting a GPU.** Every one of
+these would otherwise have been discovered one rented pod at a time:
+  * **flash_attn is MANDATORY AND UNCONDITIONAL** — `from flash_attn import
+    flash_attn_varlen_func` at module scope in the SSA module, plus a bare
+    `import flash_attn` in `window_attention.py`, neither in a try/except.
+    `ATTN_BACKEND=xformers` does NOT save you. Prebuilt wheel only
+    (`flash_attn-2.7.4.post1+cu12torch2.5cxx11abiFALSE-cp311`), never a source build.
+  * **vox2seq is NOT needed** despite appearing in `serialized_attn`: that import is
+    lazy AND the VAE defaults to `attn_mode="swin"`, which takes the *windowed* branch.
+    Do not go and build the TRELLIS extension for this.
+  * **udf_ext IS needed** (`third_party/voxelize`, a CUDA extension) — `mesh2index` sits
+    on the 1024 path. Needs nvcc; pin `TORCH_CUDA_ARCH_LIST` to the one card.
+  * **torchsparse is the backend the CHECKPOINTS were trained with.** `conv_spconv.py`
+    exists, but it binds weights as spconv MODULE parameters where the torchsparse path
+    passes a functional weight, so `SPARSE_BACKEND=spconv` risks a silent key/layout
+    mismatch. Build torchsparse — and it needs `libsparsehash-dev`, which is named only
+    in their Dockerfile, not in any install instruction.
+  * **BiRefNet is never constructed for an RGBA input** — `pipeline.preprocess()` checks
+    `image.mode` first. An RGBA cutout bypasses background removal with zero patching.
+    This is the *opposite* of Pixal3D, which built RMBG eagerly in three places.
+  * torch: the runpod 2.4.x images ship triton 3.0; the repo wants torch 2.5.1 + triton
+    3.1.0. Pin `torch==2.5.1 --index-url .../cu124` to MATCH the image's CUDA 12.4
+    toolkit so both CUDA extensions compile against the same runtime.
+
+**WHY IT PRODUCED NOTHING: the host, not the model.** Every Direct3D-S2 gate that was
+reached PASSED (weights 206, clone, apt, torch pin asserted with cuda available,
+flash-attn wheel imported). The pod then spent **16 min on the torch pip install and 18+
+min compiling torchsparse** — two independent large downloads at ~2.6 MB/s. Against a
+50-minute in-pod fuse that left no room for ~3GB of weights, 1.2GB of DINOv2 and one
+1024^3 inference. **Budget an 80-90 minute ceiling for a first Direct3D-S2 run, or bake
+the deps into an image.** A second pod was NOT rented: it repeats the same 35-40 min
+build, and a fuse long enough to reach inference would have taken the run to ~$1.54
+against a stated $0.60-1.00.
+
+**MY OWN BOOTSTRAP'S FLAW, and it is inherited from `sf3d_boot.sh`:** `report` uploads
+the log only at STAGE BOUNDARIES, so a 16-minute stage is indistinguishable from a hung
+one. I briefly called a healthy build a stall on that basis (and separately GUESSED the
+wall clock instead of reading it, which made a 8-minute stage look like 22 — `date -u`
+settled it). Long stages need an in-stage heartbeat.
+
+## CREASE DENSITY CANNOT SEPARATE NOISE FROM DETAIL — AT ANY DIHEDRAL FLOOR (2026-08-21)
+
+This file has warned since 2026-08-15 that the metric "counts sharp geometry, not GOOD
+geometry" after a fine-tune scored 43 -> 132 on a melted blob. The warning was prose and
+it did not stop the number being persuasive. Now measured, with `crease_density.py`'s own
+band and `crease2.py`'s multi-threshold bands:
+
+    control                    >=25d   >=45d   >=60d   >=90d
+    smooth icosphere             0.0     0.0     0.0     0.0
+    gaussian noise amp 0.003     7.8     0.0     0.0     0.0
+    gaussian noise amp 0.010   199.4   100.1    54.1    12.3
+    gaussian noise amp 0.030   445.3   375.9   324.4   216.0
+    Kia Sportage NQ5 (real)    271.5   121.2    64.2    16.4
+    cube, 12 GENUINE creases     6.9 (at >=25d)
+
+**A noise sphere at amp 0.010 reproduces the real car's ENTIRE four-band profile to
+within ~25%, with no shut line, no slat and no lamp recess in it at all.** Raising the
+dihedral floor does not rescue the metric: `crease2.py`'s premise that a real feature
+"stays above 60 degrees however finely it is sampled" is correct, but the converse —
+that only real features live up there — is false. Noise fills the deep bands too; it
+just needs more amplitude.
+
+**So: a LOW crease score is informative (nothing angular is there). A HIGH one is close
+to uninformative.** Treat crease retention as a necessary-not-sufficient screen and let
+the render carry the verdict — which every gate here already says in words, and now has
+a number behind it. Recorded in `crease_density.py`'s docstring as well, because prose
+memory in this file demonstrably does not fire when a 3x gain is on the screen.
+
+**AND A CREASE-RETENTION GATE HAS A HARD CEILING FOR AN EXTERIOR-ONLY MESH.** Measured on
+the Sportage baseline with a convex-hull proximity mask, only **36-44% of its crease
+length lies on the exterior shell** — the rest is interior (seats, dash, wheel, door
+cards, visible through the glazing) and deep recess. Any pipeline that emits an exterior
+shell (Direct3D-S2 runs `remove_interior=True`; most reconstruction routes are the same)
+therefore tops out near **0.38 x 270.7 ~= 103** against a gate asking for 216.6, *even
+with a perfect exterior*. Combined with the noise result, the uncomfortable corollary is
+that **the only way an exterior-only mesh clears such a gate is by being rough.** When
+setting a crease-retention gate, measure the baseline's exterior share first, or gate the
+render instead.
