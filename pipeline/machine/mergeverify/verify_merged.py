@@ -134,32 +134,61 @@ def main():
     R['glass_node_normals'] = {k: M.node_normal_stats(g, k)
                                for k in R['glass_node_area_m2']}
 
-    # v7 symmetry + centreline, about the datum derived FROM THE KIT, not assumed
+    # v7 symmetry + centreline, about a mirror plane FITTED to the car.
+    #
+    # BUG PAID FOR 2026-08-21: this used to mirror about a z = const plane. After the
+    # merge applies a 4.73 deg rigid rotation about a TILTED axis, a plane that was
+    # z = const is no longer z = const -- and the z-const test reported the v7 kit's
+    # symmetry as 50.45 mm when the kit is in fact symmetric to 1.6e-04 mm about its
+    # own plane. The plane is now FITTED (normal direction + offset, 3 parameters),
+    # so the test measures the car and not my frame assumption.
     from scipy.spatial import cKDTree
-    kit = [n for n in V7_CENTRELINE if n in R['hierarchy']['all_nodes']]
-    if kit:
-        mids = []
-        for nm in kit:
-            V = M.node_world_verts(g, nm)
-            mids.append((V[:, 2].min() + V[:, 2].max()) / 2)
-        datum = float(np.median(mids))
-        R['v7_datum_z_mm'] = datum * 1000
+    from scipy.optimize import minimize
+    pairs = [(a, b) for a, b in V7_SYM_PAIRS
+             if M.node_world_verts(g, a) is not None
+             and M.node_world_verts(g, b) is not None]
+    if pairs:
+        L = [M.node_world_verts(g, a) for a, _ in pairs]
+        Rv = [M.node_world_verts(g, b) for _, b in pairs]
+        trees = [cKDTree(r) for r in Rv]
+
+        def _n(p):
+            th, ph, off = p
+            n = np.array([np.sin(th) * np.cos(ph), np.sin(th) * np.sin(ph), np.cos(th)])
+            return n, n * off
+
+        def _cost(p):
+            n, p0 = _n(p)
+            tot = cnt = 0.0
+            for Lv, tr in zip(L, trees):
+                Mv = Lv - 2 * ((Lv - p0) @ n)[:, None] * n[None, :]
+                d, _ = tr.query(Mv, k=1)
+                tot += float((d ** 2).sum()); cnt += len(d)
+            return np.sqrt(tot / cnt)
+        best = None
+        for ph0 in (np.pi / 2 - 0.05, np.pi / 2, np.pi / 2 + 0.05):
+            for o0 in (-0.05, 0.0, 0.03):
+                r = minimize(_cost, [np.pi / 2, ph0, o0], method='Nelder-Mead',
+                             options=dict(xatol=1e-9, fatol=1e-12, maxiter=4000))
+                if best is None or r.fun < best.fun:
+                    best = r
+        n, p0 = _n(best.x)
+        R['v7_mirror_plane'] = dict(normal=n.tolist(), offset_mm=float(best.x[2] * 1000),
+                                    fit_rms_mm=float(best.fun * 1000),
+                                    tilt_from_Z_deg=float(np.degrees(np.arccos(abs(n[2])))))
         sym = {}
-        for a, b in V7_SYM_PAIRS:
-            A, B = M.node_world_verts(g, a), M.node_world_verts(g, b)
-            if A is None or B is None:
-                sym[f'{a}|{b}'] = None
-                continue
-            Am = A.copy(); Am[:, 2] = 2 * datum - Am[:, 2]
-            d, _ = cKDTree(B).query(Am, k=1)
-            sym[f'{a}|{b}'] = dict(max_mm=float(d.max() * 1000),
-                                   mean_mm=float(d.mean() * 1000))
+        for (a, b), Lv, tr in zip(pairs, L, trees):
+            Mv = Lv - 2 * ((Lv - p0) @ n)[:, None] * n[None, :]
+            d, _ = tr.query(Mv, k=1)
+            sym[f'{a}|{b}'] = dict(max_mm=float(d.max() * 1000), mean_mm=float(d.mean() * 1000))
         R['v7_symmetry'] = sym
         R['v7_centreline_offset_mm'] = {}
-        for nm in kit:
+        for nm in V7_CENTRELINE:
             V = M.node_world_verts(g, nm)
-            R['v7_centreline_offset_mm'][nm] = float(
-                ((V[:, 2].min() + V[:, 2].max()) / 2 - datum) * 1000)
+            if V is None:
+                continue
+            sd = (V - p0) @ n
+            R['v7_centreline_offset_mm'][nm] = float(((sd.min() + sd.max()) / 2) * 1000)
 
     # rear panel waviness, like-for-like, at the radius sweep used on the source
     R['waviness'] = {}

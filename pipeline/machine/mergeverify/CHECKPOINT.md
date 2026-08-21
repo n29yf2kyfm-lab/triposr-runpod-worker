@@ -5,11 +5,30 @@ Tools + report committed at `pipeline/machine/mergeverify/` (commits 51d6f9f, be
 bd73f7c — all pushed). Evidence bucket-backed at `car-meshes/staging/mergeverify/`
 (verified by LISTING the prefix and by a byte-identical round-trip of MERGE_VERIFY.json).
 
-## STATE
-Harness **built, calibrated and control-proven** on the six source cars.
-**The merged car has NOT been published** — `staging/merged/`, `merge_all/`, `final/`,
-`mergebuild/`, `golf_merged/` all EMPTY as of the last poll. Every "measured on the
-merged car" cell is honestly NOT TESTED.
+## STATE: MERGED CAR VERIFIED. 5 of 6 gates' wins survived.
+`staging/final/glb/GOLF_ALL_GATES.glb` sha `400d994a…` byte-exact vs MANIFEST.
+83 nodes, 888,807 faces, 107 primitives. Inventory 81/89.
+
+PASS: grounding 0.000x4 · windscreen 0.9894 m2 · glass_probe clear/proven PAIRED with
+2.9594 m2 · KHR clearcoat+ior+transmission · carpaint correct · tyre 0.0288 · respray
+4 cameras (paint 38.7-85.1, frozen <=6.4, tail lamps hold red) · validator 0/0 on BOTH
+desktop and mobile · NORMALs 107/107 · no empty nodes · no shared meshes · v7 20/20,
+0.0% reuse, symmetry 1.59e-04 mm about its FITTED plane · cabin 28/28 · A21 collision
+96.21% -> 0.00% · A22 no stacking · specks roof 4.070 -> 0.287% (2.6x its own clay
+floor vs the skin gate's 6.5x).
+
+TWO DEFECTS:
+1. HIGH - the published DESKTOP and MOBILE are DIFFERENT CARS. mobile receipt in_sha
+   c3404a28 != published 400d994a. Mobile Glass_Rear = 9,890 faces / 0.8358 m2 (the
+   ORIGINAL glass-gate geometry) vs desktop 187 / 0.0119. A21 on the mobile: 96.18%
+   within 25 mm, median 4.8 mm -- it carries the white-dot stacking defect in full.
+   FIX: rebuild the mobile from the PUBLISHED desktop file.
+2. MEDIUM - 8 of the rear gate's 14 components absent (all Tail_Lens_*/Tail_Housing_*,
+   and their materials). Falls back to base TailLamp_L/R. rear.json reports PASS.
+
+A17 holes: lost 9 of 15,360. 5 cluster at the rear-right arch/bumper junction
+(x 1.547, z +0.821, previously Bumper_Rear_Paint/Arch_Liner); 2 are cabin see-through
+(expected). The rear-right gap is NOT visually confirmed -- flagged, not asserted.
 
 ## DELIVERABLES (bucket + git)
 `MERGE_VERIFY.md` (17-row table, 12 controls, acceptance list A1–A20) ·

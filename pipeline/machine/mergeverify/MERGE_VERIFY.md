@@ -4,12 +4,38 @@
 written; every artefact below came from `car-meshes/` and was sha256-verified against
 its own MANIFEST before a single number was taken.
 
-**Status at time of writing: the merged car has NOT been published.**
-`car-meshes/staging/merged/`, `.../merge_all/` and `.../final/` are all EMPTY. So the
-"Measured on the merged car" column below is **NOT TESTED** throughout, and that is a
-statement of fact, not a verdict. Everything else — the definition of each win, the
-baseline on each gate's own file, and the negative control that proves each check can
-fail — is complete and is the substance of this report.
+**THE MERGED CAR ARRIVED AND HAS BEEN VERIFIED.**
+`car-meshes/staging/final/glb/GOLF_ALL_GATES.glb`, 25,684,968 bytes,
+sha256 `400d994a9fd034cc55d64cf340ec70eedb0d5fa93c188e739da03a787b21084f` —
+**byte-exact against its own MANIFEST.** 83 nodes, 888,807 faces, 107 primitives.
+See **§0** for the verdict and **§9** for the two defects found on it.
+
+---
+
+## 0. VERDICT ON THE MERGED CAR — 5 of 6 gates' wins survived intact
+
+| gate | win | on the merged car | status |
+|---|---|---|---|
+| **merge** | four tyre bottoms 0.000 mm | **0.000 / 0.000 / 0.000 / 0.000 mm** | ✅ **SURVIVED** |
+| **skin** | roof/bonnet specks | see §9.3 | ✅ **SURVIVED** |
+| **glass** | windscreen 0.9894 m² | **0.9894 m²**, and it does not take paint under respray | ✅ **SURVIVED** |
+| **cabin** | `Interior` out of the glazing | 28/28 components, seats/dash visible through the glass | ✅ **SURVIVED** |
+| **front v7** | 20 components, 0.0% reuse, symmetry 5.9e-05 mm | **20/20**, **0.0%**, **1.59e-04 mm** about its own fitted plane | ✅ **SURVIVED** |
+| **rear v2** | 14 components, waviness, hidden melt | **6 of 14** — the **8 constructed tail-lamp units are ABSENT** | ⚠️ **PARTIAL** |
+
+**Also passing:** Khronos validator **0 errors / 0 warnings** on both the desktop and
+the mobile file · NORMAL present, unit-length on **all 107 primitives** ·
+`extensionsUsed` carries clearcoat + IOR + transmission · `carpaint` correct
+(metallic 0, rough 0.24, clearcoat 1.0) · `Tyre_Rubber` 0.0288 · respray control
+**passes on all four cameras** (paint 38.7–85.1; tyres 1.33–2.90, rims 1.70–5.52,
+lamps ≤6.4, discs ≤0.84; **tail lamps hold red in all four**) · **A21 collision
+RESOLVED** (96.21% → **0.00%**) · **A22 no stacking** · provenance: 54 nodes at
+**0.0%** coincidence with the source = genuinely constructed.
+
+**Two defects found, both in §9.** One is a **serving-path divergence** that would ship
+a broken car to mobile users.
+
+---
 
 ---
 
@@ -552,42 +578,158 @@ existed.
 
 ---
 
+---
+
+## 9. THE MERGED CAR — full findings
+
+`GOLF_ALL_GATES.glb` · 25,684,968 B · sha `400d994a…` (byte-exact vs MANIFEST) ·
+83 nodes · 888,807 faces · 107 primitives · published with a Draco mobile at
+`staging/final/mobile/`.
+
+### 9.1 DEFECT 1 — the published DESKTOP and MOBILE assets are DIFFERENT CARS
+
+The mobile receipt's `in_sha` is `c3404a28…`; the published desktop file is
+`400d994a…`. They are not the same build, and the geometry proves what that costs:
+
+| node | desktop | mobile |
+|---|---|---|
+| `Glass_Rear` | **187 faces / 0.0119 m²** | **9,890 faces / 0.8358 m²** |
+| `Body_Shell` | 177,954 | 177,440 |
+| `Interior` | 165,537 | 163,592 |
+| `Wheel_FR_Disc` | 2,620 | 2,616 |
+| total glazing | **2.9594 m²** | **3.7833 m²** |
+
+The mobile's `Glass_Rear` **is** the original glass-gate geometry (9,890 faces; radial
+signature matches to 0.042 mm). So the mobile still carries the stacked rear glazing
+the desktop was fixed for — I re-ran the A21 collision check on it:
+
+| asset | backlight within 25 mm of rear screen | median |
+|---|---|---|
+| **desktop (published)** | **0.00%** | 218.8 mm |
+| **mobile (published)** | **96.18%** | **4.8 mm** |
+
+96.18% against the pre-fix 96.21%. **The mobile asset reproduces the white-dot
+stacking defect in full.** This is the silent serving-path divergence CLAUDE.md
+already records — two artefacts published to the same folder 13 seconds apart that
+disagree. Rebuild the mobile from the published desktop file and re-verify.
+
+### 9.2 DEFECT 2 — 8 of the rear gate's 14 components did not arrive, and the receipt says PASS
+
+Present and **vertex-identical** to the rear file: `Hatch` (10,917), `Hatch_Inner`
+(11,823), `Bumper_Rear` (16,796), `Bumper_Rear_Inner` (17,386), `Plate_Rear` (297),
+`Glass_Backlight` (7,301).
+
+**Absent: all eight constructed tail-lamp units** — `Tail_Lens_LO/RO/LH/RH` and
+`Tail_Housing_LO/RO/LH/RH`. Their materials are gone too (`Tail_Lens_Red`,
+`Tail_Housing` are not in the merged material list). The car falls back to the base
+`TailLamp_L`/`TailLamp_R` (1,153 / 1,144 faces). The rear receipt's own material
+census records `Lamp_Lens_Rear → TailLamp_L, TailLamp_R` — the correct state — and
+still reports **`VERDICT: PASS`**. The shortfall is recorded but not flagged.
+
+This matters beyond component count: CLAUDE.md notes the constructed lamps were the
+thing that **held their red through a respray** as component behaviour. The base
+lamps do still hold red here (measured, all four views), so nothing is broken — but
+the rear gate's lamp rebuild is simply not in the car.
+
+### 9.3 What I checked and found GOOD
+
+* **A1 grounding — the win most easily lost in a merge.** All four tyres at
+  **0.000 mm**. (The whole-model bbox reads −4.587 mm and would have misled.)
+* **A2/A3 glazing paired with area.** `Glass_Windscreen` **0.9894 m²** — the glass
+  gate's win carried across exactly. `glass` carries `transmission 0.92` + `IOR 1.45`;
+  `glass_probe` clear/proven **and** 2.9594 m² of glazing behind it.
+* **The rear-glazing reduction is a correct tightening, not a loss.** Total glazing
+  fell 3.3956 → 2.9594 m² because the old 0.8358 m² `Glass_Rear` was replaced by the
+  constructed 0.3877 m² backlight. I checked for an unglazed aperture and the render
+  settles it: **the rear screen is properly glazed** (`evidence/MERGED_REAR.png`).
+  My A2 total-area floor of 3.30 m² was set before the collision fix existed and is
+  **wrong for this car** — the windscreen-specific ≥0.90 m² is the load-bearing half.
+* **A7 respray, four locked cameras.** carpaint **38.7 / 46.9 / 82.8 / 85.1**;
+  Tyre_Rubber 1.33–2.90, Rim_Alloy 1.70–5.52, Lamp_Lens 3.4, Lamp_Lens_Rear
+  1.98–6.36, Brake_Disc 0.40–0.84 — every frozen material far under the ≤10 bar.
+  **Tail lamps hold red in all four views.** `SET_PAINT set: 15, tinted: 0`, so this
+  is a direct colour set and is apples-to-apples.
+* **A8 validator 0 errors / 0 warnings** on the desktop **and** the mobile.
+* **A9** NORMAL present and unit-length on **107/107** primitives.
+* **A10 hierarchy** 83 nodes, **no empty nodes**, **no two names sharing one mesh**.
+* **A11/A12 v7 symmetry — and a correction to my own first reading.** My runner
+  initially reported **50.45 mm** and that was **my artefact**: it mirrored about a
+  z = const plane, but the merge applies a 4.73° rotation about a *tilted* axis, so
+  the kit's plane is no longer z = const. Fitting the plane (3 parameters, nothing
+  assumed) gives a normal **2.34° off +Z** and a worst pair residual of
+  **1.59e-04 mm**, with all seven centreline parts within **1e-5 mm**. The v7 kit is
+  vertex-identical to its source (720/720, 4224/4224 …) — transported, not rebuilt.
+  `verify_merged.py` now fits the plane so it cannot repeat the error.
+* **A13 provenance** — 54 nodes at **0.0%** face-centroid coincidence with
+  `car_rebound`: the front, rear and cabin components are genuinely constructed.
+* **A21 collision RESOLVED** on the desktop: 96.21% → **0.00%**.
+* **A22 no stacking.** Every new component is clear of the surviving base parts
+  (worst `Intake_L` 37.7% within 25 mm, median 41 mm — adjacency, not coincidence;
+  pre-merge those pairs sat at 57–75% and 12–21 mm). The base parts were stripped:
+  `Bumper_Front_Trim`, `Headlamp_L`, `Headlamp_R` **deleted**;
+  `Bumper_Front_Paint` 58,448 → 25,064; `Interior` 331,014 → 165,537.
+* **A16 specks.** Roof **4.070% (pre-skin) → 0.106% (skin output) → 0.287% (merged)**
+  against a merged clay floor of 0.111% — **2.6× its own floor, where the skin gate's
+  own output sat at 6.5×**. The win is retained. The bonnet zone is **not** comparable
+  like-for-like: the v7 front kit now occupies it, and the clay floor there moved
+  0.000% → 1.719%, which is the zone content changing rather than the surface
+  degrading.
+* **Visual, matched camera, same rig** (`evidence/MERGE_BEFORE_AFTER.png`): flanks and
+  sills markedly cleaner, a real grille/headlamp/intake at the nose, and seats,
+  headrests and a steering wheel visible through the glazing where the base showed a
+  grey melt blob.
+
+### 9.4 A17 holes — one localised loss, located but NOT visually confirmed
+
+15 directions, 15,360 rays, merged car vs `car_merged`:
+
+| | rays | lost | gained | receded | advanced |
+|---|---|---|---|---|---|
+| merged vs `car_merged` | 15,360 | **9** | 7 | 44 | 216 |
+
+`advanced 216` and `receded 44` are expected — four gates of new components sit proud
+of the base, and the rear screen surface moved back to the constructed backlight.
+`lost 9` (0.059%) is the number that matters, and I located every one:
+
+* **5 rays cluster at essentially ONE point** — x ≈ 1.547, y 0.26–0.38, z ≈ **+0.821**:
+  the **rear-right arch / bumper junction**. All five previously hit
+  `Bumper_Rear_Paint` or `Arch_Liner`, which the merge stripped (62,204 → 33,485 and
+  the arch liner locally) and which the new `Bumper_Rear` does not cover at that spot.
+  At my measured ray spacing of ~97 mm, 5 clustered rays implies a gap of roughly
+  100–200 mm.
+* **2 rays are cabin see-through** — `[-0.748, 0.901, 0.704]` and `[0.115, 1.275, 0.528]`,
+  both previously stopped by the `Interior` melt shell. Replacing a closed shell with
+  discrete cabin furniture legitimately lets a ray enter one window and leave by
+  another. **Expected, not a defect.**
+
+**HONEST LIMIT: I did not visually confirm the rear-right gap.** Two render angles at
+el −8 and −14 showed the underbody rather than the arch lip and were inconclusive. So
+this is reported as a *located, quantified loss of first-surface coverage* for the
+builder to check, **not** as a confirmed through-hole. The measurement is sound — the
+null on this instrument is 0/0/0/0 over 15,360 rays — but the eye has not yet agreed
+with it, and on this project the eye is the arbiter.
+
+---
+
 ## 7. Bottom line
 
-**0 of the 6 gates have been verified on a merged car, because no merged car exists
-yet.** On their own files: **13 checks reproduced exactly**, 1 reproduced in direction
-and magnitude but not in absolute units (waviness), 1 reproduced with a stated
-placement sensitivity (hidden melt), and **16 negative controls fire**, 15 of them
-returning the injected magnitude at slope 1.000.
+**5 of the 6 gates' wins survived the merge intact.** Grounding (0.000 mm × 4), the
+glass gate's windscreen (0.9894 m²), the cabin (28/28, `Interior` out of the glazing),
+the v7 front kit (20/20, 0.0% reuse, 1.59e-04 mm symmetry) and the skin gate's specks
+all carried across. **Rear v2 is PARTIAL: 6 of its 14 components arrived; the eight
+constructed tail-lamp units did not, and the rear receipt reports PASS anyway.**
 
-**The single most important line in this report is a correction of my own headline
-finding.** I published that `rear2_v4.glb`'s paint was a flat shell off its
-`[1,1,1,1]` factors. It is a **textured** material and those factors are the correct
-neutral multiplier — the exact trap CLAUDE.md already documents for the tyre probe.
-I found it only because the respray control returned a physically impossible **exact
-0.00 over 64,486 pixels** and I checked instead of publishing; the root cause was a
-**second bug in my own rig** that would have mis-reported every textured car. Both are
-fixed and re-validated 3/3 in both directions. What survives about that file — and it
-is the part that matters for the merge — is that **`extensionsUsed` is absent
-entirely**, so its glazing has no transmission and no IOR while `glass_probe` still
-calls it clear/proven.
+**Two defects, one of them serious.** The published **mobile asset is a different car
+from the published desktop asset** — built from a pre-fix intermediate, it still scores
+**96.18%** on the glazing-stacking collision the desktop was fixed to **0.00%**. And a
+localised loss of coverage at the rear-right arch/bumper junction (5 of 15,360 rays),
+located but not yet visually confirmed.
 
-**Three things the merge must act on, none of which appear in any gate's own report:**
+**Everything else passes:** validator 0/0 on both files, NORMALs 107/107, respray
+control clean on four cameras with tail lamps holding red, no stacking, no empty nodes,
+no two names on one mesh, 54 nodes of genuinely constructed geometry.
 
-1. **A cross-gate collision.** The rear gate's constructed `Glass_Backlight` sits
-   **96.21% within 25 mm** (median **4.8 mm**) of the glass gate's `Glass_Rear` — two
-   transmissive sheets in the same place, which is the recorded white-dot defect. One
-   must supersede the other.
-2. **`rebound → merged` is ONE rigid transform** for body+glazing+bumpers (4.7301°,
-   max residual **0.1225 µm**), so the glass relabelling and v7 front kit can be
-   *transported*, not re-derived — but the two files share a **surface, not a vertex
-   array** (+2,740 referenced verts from the repartition), and the wheels must come
-   from `car_merged`.
-3. **Seven base parts are superseded and must actually be deleted**, or they stack
-   under the new components (v7 `Valance_Front` sits 75% within 25 mm of the base
-   `Bumper_Front_Paint`, median 12 mm).
-
-**Eight of my own errors are recorded in this report rather than dropped.** Three of
-them — the empty-by-construction speck mask, the linked-input repaint, and the textured
-flat-shell call — are the same class as the failures this harness exists to catch, and
-two of the three were caught only by looking at a picture or at an impossible number.
+**Nine of my own errors are recorded in this report rather than dropped** — including
+the v7 symmetry reading of 50.45 mm that was my own frame assumption and is actually
+1.59e-04 mm, and the retracted flat-shell call on a textured material. Three of the
+nine were caught only by looking at a picture or at an impossible number.

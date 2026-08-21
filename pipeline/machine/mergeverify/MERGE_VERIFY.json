@@ -1,8 +1,8 @@
 {
  "verifier": "independent verification agent",
  "generated_utc": "2026-08-21",
- "merged_car_status": "NOT PUBLISHED at time of writing - staging/merged/, staging/merge_all/, staging/final/ all EMPTY",
- "gates_verified_on_merged_car": 0,
+ "merged_car_status": "VERIFIED. staging/final/glb/GOLF_ALL_GATES.glb, 25,684,968 B, sha256 400d994a9fd034cc55d64cf340ec70eedb0d5fa93c188e739da03a787b21084f, byte-exact vs MANIFEST. 83 nodes, 888,807 faces, 107 primitives.",
+ "gates_verified_on_merged_car": 5,
  "gates_total": 6,
  "sources": {
   "GOLF_V7_FRONT_GATE.glb": {
@@ -718,7 +718,8 @@
   "glass-gate vertex test used a 1 nm tolerance against float32 data whose ULP at this scale is 238 nm, and returned a wrong 'point sets differ'",
   "used pgrep -f once to inspect a background job (CLAUDE.md forbids it as a wait condition); it was a read, not a wait, but it should not have been used at all",
   "called rear2_v4's TEXTURED carpaint/Rim_Alloy a flat shell off their [1,1,1,1] multiplier factors - retracted in full, and paint_check now tests hasTexture first",
-  "set_paint wrote default_value on a LINKED Base Color, which does nothing - it produced two byte-identical renders and a confident wrong 'the paint does not respond'"
+  "set_paint wrote default_value on a LINKED Base Color, which does nothing - it produced two byte-identical renders and a confident wrong 'the paint does not respond'",
+  "reported the merged car's v7 symmetry as 50.45 mm by mirroring about a z=const plane after the merge rotates the car 4.73 deg about a TILTED axis; fitting the plane gives 1.59e-04 mm. verify_merged.py now fits the plane."
  ],
  "merge_collision_scan": {
   "why": "every gate built against car_rebound alone, so no gate's own report can say whether its component collides with another gate's",
@@ -862,5 +863,278 @@
   "action": "take rear GEOMETRY onto the car_rebound material table, not the rear file's own",
   "new_finding": "the rear lineage is TEXTURED (4 images) and the other six are not (0) - decide whether textures come across and whether receiving primitives have UVs",
   "softened": "Tyre_Rubber 0.0484 vs 0.0288 is a lineage difference, not a defect - 0.048 is still black rubber. Threshold A6 (0.027+-0.010) is too tight; use 'mean base colour < 0.12' and record the value."
- }
+ },
+ "merged_car": {
+  "verdict": "5 of 6 gates' wins survived intact; rear v2 is PARTIAL (6 of 14 components)",
+  "inventory": {
+   "gate78": "26/26",
+   "glass": "1/1",
+   "cabin": "28/28",
+   "v7": "20/20",
+   "rear": "6/14",
+   "total": "81/89",
+   "empty_nodes": 0,
+   "nodes_sharing_one_mesh": 0,
+   "nodes": 83,
+   "faces": 888807,
+   "primitives": 107
+  },
+  "A1_grounding_mm": {
+   "FL": 0.0,
+   "FR": 0.0,
+   "RL": 0.0,
+   "RR": 0.0,
+   "whole_bbox_minY_mm": -4.587,
+   "status": "PASS"
+  },
+  "A2_glazing": {
+   "windscreen_m2": 0.9894,
+   "total_m2": 2.9594,
+   "status": "windscreen PASS; total below my 3.30 floor, but that floor was set before the collision fix and is WRONG for this car - the reduction is a correct tightening, confirmed by render"
+  },
+  "A3_glazing_pair": {
+   "glass_probe": "clear / proven",
+   "area_m2": 2.9594,
+   "status": "PASS"
+  },
+  "A4_extensions": [
+   "KHR_materials_clearcoat",
+   "KHR_materials_ior",
+   "KHR_materials_transmission"
+  ],
+  "A5_paint": {
+   "baseColorFactor": [
+    0.776,
+    0.0118,
+    0.0118
+   ],
+   "metallic": 0.0,
+   "roughness": 0.24,
+   "clearcoat": 1.0,
+   "hasTexture": false,
+   "status": "PASS"
+  },
+  "A6_tyre": {
+   "mean_baseColor": 0.0288,
+   "status": "PASS"
+  },
+  "A7_respray": {
+   "carpaint": [
+    38.73,
+    46.95,
+    82.84,
+    85.07
+   ],
+   "Tyre_Rubber": [
+    1.33,
+    1.49,
+    1.68,
+    2.9
+   ],
+   "Rim_Alloy": [
+    1.7,
+    2.67,
+    3.31,
+    5.52
+   ],
+   "Lamp_Lens": [
+    3.4
+   ],
+   "Lamp_Lens_Rear": [
+    1.98,
+    2.2,
+    5.75,
+    6.36
+   ],
+   "Brake_Disc": [
+    0.4,
+    0.84
+   ],
+   "tail_lamps_hold_red": "all 4 views",
+   "set_paint": "set 15, tinted 0 (direct set, apples-to-apples)",
+   "status": "PASS"
+  },
+  "A8_validator": {
+   "desktop": {
+    "errors": 0,
+    "warnings": 0
+   },
+   "mobile": {
+    "errors": 0,
+    "warnings": 0
+   },
+   "status": "PASS"
+  },
+  "A9_normals": {
+   "primitives": 107,
+   "missing": 0,
+   "zero_length": 0,
+   "non_unit": 0,
+   "status": "PASS"
+  },
+  "A10_hierarchy": {
+   "nodes": 83,
+   "empty": 0,
+   "shared_mesh": 0,
+   "status": "PASS"
+  },
+  "A11_symmetry": {
+   "worst_pair_mm": 0.0001592,
+   "plane_fitted_normal_tilt_from_Z_deg": 2.3411,
+   "MY_OWN_ERROR": "my runner first reported 50.45 mm by mirroring about a z=const plane; the merge rotates the car 4.73 deg about a tilted axis so that plane is no longer z=const. Fitting the plane gives 1.59e-04 mm. verify_merged.py now fits the plane.",
+   "kit_vertex_identical_to_source": true,
+   "status": "PASS"
+  },
+  "A12_centreline_mm": {
+   "max_abs": 1e-05,
+   "status": "PASS"
+  },
+  "A13_provenance": {
+   "nodes_at_0pct_coincidence": 54,
+   "source_melt_nodes": 0,
+   "status": "PASS"
+  },
+  "A16_specks": {
+   "roof": {
+    "pre_skin": 4.07,
+    "skin_output": 0.106,
+    "merged": 0.287,
+    "merged_clay_floor": 0.111,
+    "ratio_to_own_clay_floor": {
+     "skin_output": 6.5,
+     "merged": 2.6
+    },
+    "status": "PASS - win retained"
+   },
+   "bonnet": {
+    "skin_output": 0.786,
+    "merged": 3.652,
+    "merged_clay_floor": 1.719,
+    "note": "NOT comparable like-for-like - the v7 front kit now occupies this zone and its clay floor moved 0.000 -> 1.719"
+   }
+  },
+  "A21_collision": {
+   "desktop": {
+    "share_within_25mm": 0.0,
+    "median_mm": 218.8,
+    "status": "RESOLVED"
+   },
+   "mobile": {
+    "share_within_25mm": 96.18,
+    "median_mm": 4.8,
+    "status": "NOT RESOLVED - see DEFECT 1"
+   }
+  },
+  "A22_supersession": {
+   "worst": "Intake_L 37.7% within 25 mm, median 41 mm (adjacency, not coincidence; pre-merge 57-75% at 12-21 mm)",
+   "deleted": [
+    "Bumper_Front_Trim",
+    "Headlamp_L",
+    "Headlamp_R"
+   ],
+   "reduced": {
+    "Bumper_Front_Paint": "58448 -> 25064",
+    "Interior": "331014 -> 165537",
+    "Bumper_Rear_Paint": "62204 -> 33485"
+   },
+   "status": "PASS"
+  },
+  "A17_holes": {
+   "rays": 15360,
+   "lost": 9,
+   "gained": 7,
+   "receded": 44,
+   "advanced": 216,
+   "located": {
+    "rear_right_arch_bumper_junction": {
+     "rays": 5,
+     "point_m": [
+      1.547,
+      0.3,
+      0.821
+     ],
+     "previously_hit": [
+      "Bumper_Rear_Paint",
+      "Arch_Liner"
+     ],
+     "implied_gap_mm": "100-200 at ~97 mm ray spacing"
+    },
+    "cabin_see_through": {
+     "rays": 2,
+     "previously_hit": "Interior melt shell",
+     "verdict": "EXPECTED - a closed shell became discrete furniture"
+    }
+   },
+   "HONEST_LIMIT": "the rear-right gap is NOT visually confirmed; two render angles showed the underbody rather than the arch lip. Reported as a located quantified loss for the builder to check, not a confirmed through-hole."
+  }
+ },
+ "merged_car_defects": [
+  {
+   "id": "DEFECT 1",
+   "severity": "HIGH - would ship a broken car to mobile users",
+   "title": "the published DESKTOP and MOBILE assets are different cars",
+   "evidence": {
+    "mobile_receipt_in_sha": "c3404a28...",
+    "published_desktop_sha": "400d994a...",
+    "Glass_Rear_faces": {
+     "desktop": 187,
+     "mobile": 9890
+    },
+    "Glass_Rear_area_m2": {
+     "desktop": 0.0119,
+     "mobile": 0.8358
+    },
+    "total_glazing_m2": {
+     "desktop": 2.9594,
+     "mobile": 3.7833
+    },
+    "other_differing_nodes": {
+     "Body_Shell": "177954 vs 177440",
+     "Interior": "165537 vs 163592",
+     "Wheel_FR_Disc": "2620 vs 2616"
+    },
+    "A21_on_mobile": {
+     "share_within_25mm": 96.18,
+     "median_mm": 4.8,
+     "pre_fix_value": 96.21
+    },
+    "identity": "the mobile's Glass_Rear IS the original glass-gate geometry - 9,890 faces, radial signature matches to 0.042 mm"
+   },
+   "meaning": "the mobile asset still carries the stacked rear glazing the desktop was fixed for, i.e. the white-dot defect in full",
+   "fix": "rebuild the mobile from the PUBLISHED desktop file and re-verify"
+  },
+  {
+   "id": "DEFECT 2",
+   "severity": "MEDIUM",
+   "title": "8 of the rear gate's 14 components did not arrive, and the rear receipt reports PASS",
+   "evidence": {
+    "present_and_vertex_identical": [
+     "Hatch 10917",
+     "Hatch_Inner 11823",
+     "Bumper_Rear 16796",
+     "Bumper_Rear_Inner 17386",
+     "Plate_Rear 297",
+     "Glass_Backlight 7301"
+    ],
+    "absent": [
+     "Tail_Lens_LO",
+     "Tail_Lens_RO",
+     "Tail_Lens_LH",
+     "Tail_Lens_RH",
+     "Tail_Housing_LO",
+     "Tail_Housing_RO",
+     "Tail_Housing_LH",
+     "Tail_Housing_RH"
+    ],
+    "materials_absent": [
+     "Tail_Lens_Red",
+     "Tail_Housing"
+    ],
+    "fallback": "base TailLamp_L (1153) / TailLamp_R (1144)",
+    "receipt": "rear.json records Lamp_Lens_Rear -> TailLamp_L, TailLamp_R and still reports VERDICT: PASS"
+   },
+   "meaning": "the rear gate's lamp rebuild is simply not in the car. The base lamps do still hold red under respray, so nothing is broken - but the win is absent",
+   "fix": "port the 8 units, or record the omission as a stated deviation"
+  }
+ ]
 }
