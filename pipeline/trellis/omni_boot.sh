@@ -104,6 +104,29 @@ from hy3dshape.postprocessors import FloaterRemover, DegenerateFaceRemover
 print('omni imports ok')
 " 2>&1 | tail -20 || die OMNI_IMPORT
 
+stage preflight_all
+# LEG A cost three pod cycles to my own install list. Every module the later
+# stages need is proven HERE, before 13 GB of weights are pulled.
+python3 - <<'PFA' || die PREFLIGHT_IMPORTS
+import importlib, sys
+need = ["torch", "numpy", "trimesh", "einops", "omegaconf", "skimage", "scipy",
+        "cv2", "pymeshlab", "transformers", "diffusers", "timm", "torchdiffeq",
+        "peft", "pytorch_lightning", "torch_cluster", "huggingface_hub", "yaml",
+        "PIL", "tqdm"]
+miss = []
+for m in need:
+    try:
+        importlib.import_module(m)
+    except Exception as e:
+        miss.append("%s: %s: %s" % (m, type(e).__name__, e))
+print("preflight imports:", len(need) - len(miss), "/", len(need), "ok")
+if miss:
+    print("MISSING:")
+    for x in miss:
+        print("  ", x)
+    sys.exit(1)
+PFA
+
 stage weights
 python3 - <<'PY' || die WEIGHTS
 import os, time
@@ -113,9 +136,7 @@ for a in range(1, 4):
         p = snapshot_download("tencent/Hunyuan3D-Omni",
                               token=os.environ.get("HF_TOKEN"),
                               local_dir="/workspace/omni_ckpt",
-                              allow_patterns=["*.json", "vae/*", "model/pytorch_model.bin",
-                                              "cond_encoder/*", "scheduler/*",
-                                              "image_processor/*"])
+                              ignore_patterns=["assets/*", "*_ema.bin"])
         print("weights at", p)
         break
     except Exception as e:
@@ -128,32 +149,36 @@ du -sh /workspace/omni_ckpt
 
 stage build_control
 cd /workspace/omni
-# BOTH plausible axis orders, same image, same seed. The convention is then
-# READ OFF the outputs instead of assumed.
-python3 - <<'PY' || die BUILD_CONTROL
-import json, os, shutil
-os.makedirs("/workspace/omni/demos/car", exist_ok=True)
+# Overwrite the demo's OWN data.json and drop the images beside it, rather than
+# sed-ing a path inside inference.py. A global sed once rewrote the substring
+# inside a FILENAME and produced a URL that 400'd, and the failure was silent.
+python3 - <<'BC' || die BUILD_CONTROL
+import json, shutil, os
+d = "/workspace/omni/demos/bbox"
+os.makedirs(d, exist_ok=True)
 L, W, H = 4.284, 1.789, 1.456          # VW Golf Mk8 published, metres
 m = max(L, W, H)
 lhw = [round(L/m, 6), round(H/m, 6), round(W/m, 6)]   # length, height, width
 lwh = [round(L/m, 6), round(W/m, 6), round(H/m, 6)]   # length, width, height
-for tag in ("lhw", "lwh"):
-    shutil.copy("/workspace/omni_in.png", f"/workspace/omni/demos/car/{tag}.png")
-data = {"image": ["./demos/car/lhw.png", "./demos/car/lwh.png"],
+for tag in ("golfLHW", "golfLWH"):
+    shutil.copy("/workspace/omni_in.png", f"{d}/{tag}.png")
+data = {"image": [f"./demos/bbox/golfLHW.png", f"./demos/bbox/golfLWH.png"],
         "bbox": [lhw, lwh]}
-json.dump(data, open("/workspace/omni/demos/car/data.json", "w"), indent=1)
+json.dump(data, open(f"{d}/data.json", "w"), indent=1)
 print(json.dumps(data))
-PY
+BC
+cat /workspace/omni/demos/bbox/data.json
 
 stage infer
 cd /workspace/omni
-sed -i "s#'./demos/bbox/data.json'#'./demos/car/data.json'#g; s#\"./demos/bbox/data.json\"#\"./demos/car/data.json\"#g" inference.py
-grep -n "demos/car/data.json\|demos/bbox/data.json" inference.py | head
-python3 inference.py --control_type bbox 2>&1 | tail -50
+# from_pretrained takes a LOCAL PATH when it exists (pipeline_generation_sit_omni.py:52),
+# so the weights already on disk are used instead of being downloaded twice.
+python3 inference.py --control_type bbox --repo_id /workspace/omni_ckpt \
+        --save_dir /workspace/omni_out 2>&1 | tail -60
 RC=${PIPESTATUS[0]}
 echo "INFERENCE RC=$RC"
 [ "$RC" = "0" ] || die INFER_RC_$RC
-find /workspace/omni -name '*.glb' -newermt '-40 minutes' | tee /workspace/globs.txt
+find /workspace/omni_out -name '*.glb' | tee /workspace/globs.txt
 [ -s /workspace/globs.txt ] || die NO_GLB_PRODUCED
 
 stage measure_upload
