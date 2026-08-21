@@ -3323,3 +3323,101 @@ not evidence of life**, and I had been treating it as such all day.
 
 **STALE is a flag for a human, never a verdict** — an agent may be mid-thought or waiting on a pod.
 Same rule as every other candidate finder in this project.
+
+## THE PSNR GATE WAS PASSING BLANK IMAGES — and a quarter of the catalogue is tiny (2026-08-21)
+
+Found by wiring `compress_catalogue.py`'s negative-control harness, which had
+been **written, committed, and never once run**: `run_controls()` was dead code
+(the docstring advertised `--controls`, argparse had no such flag, and the
+function read an `args.paint_names` that nothing defined). Four checks were
+broken behind it. This is the fifth and sixth time this project has found a
+gate that could never fire; the pattern is now unmistakable — **a check that
+has never been observed to fail has not been tested, however carefully it was
+written.**
+
+**G5 returned "PASS, psnrMin 46.24 dB" over ELEVEN COMPLETELY EMPTY FRAMES.**
+`fidelity.PAGE` carried `min-camera-orbit="auto auto 0m"` and
+`max-camera-orbit="auto auto 1000m"`. On a small-scale model every explicit
+camera renders nothing at all, and blank-against-blank has almost no error, so
+a high PSNR is **not** evidence that anything was rendered.
+  * measured on `nissan-gt-r-2013-nw1-v1` (world extents 0.020 x 0.014 x 0.047
+    units): **0 car pixels** with those attributes, **180,263** without.
+  * the large control is BIT-IDENTICAL both ways — `porsche-911-2013-pw2-v1`
+    (7.8 x 5.1 x 18.0) renders 196,052 px at az215 and 171,558 px at az000 with
+    and without, radius readback 21.25322 both — so removing them is a pure
+    fix, not a trade. Always carry a control that must NOT move.
+  * mechanism (inferred, high confidence): model-viewer derives the camera FAR
+    plane from the max orbit radius. 1000 m on a 0.05 m model is a far/near
+    ratio around 1e6 and depth precision collapses; on a 4-18 m car it is ~1e3
+    and survives. That is exactly the observed size dependence.
+
+**SCALE CENSUS — 250 random approved assets, world bounds computed from the
+glTF header alone (accessor min/max through the node transforms, no BIN
+download): 25.2% have a world diagonal under 1 unit, clustered hard at ~0.05.**
+Median 5.38, p90 524, max 11,083. **The catalogue spans five orders of
+magnitude of authored scale**, so ANY tool with an absolute distance, radius or
+tolerance in it is wrong for a quarter of the library. Check for this before
+trusting a geometric threshold anywhere in the pipeline.
+
+**IoU 0.00000 was the only channel that showed anything wrong, and IoU is
+deliberately relegated to a gross-failure channel** (it is non-monotonic in
+damage), so nothing was entitled to act on it. The fix is a guard that makes
+the instrument check itself: `fidelity.MIN_SILHOUETTE_FRAC` (2%) — a view whose
+MASTER silhouette covers less than that returns **NOT_TESTED**, never PASS (it
+measured nothing) and never FAIL (the candidate is not what is broken).
+Calibrated, not guessed: healthy full-car views cover 29-44% of the frame, the
+smallest close-up 6.5%, blank frames 0.00-0.87% — and that 0.87% is a 5-pixel
+loading strip, not the car.
+
+**A CLOSE-UP IS A NARROWER FOV, NOT A NEARER CAMERA.** The close-up radius was
+clamped to `[0.35, 0.55] x diag` while the model's own bounding-sphere radius is
+`0.5 x diag` — the floor sat BELOW the thing it was protecting against, so the
+camera ended up inside the bodywork. CLAUDE.md already recorded this failure for
+the machine's lamp camera and the clamp written to prevent it reproduced it.
+Cost, measured against `gltf-transform copy` of the SAME file (byte-different,
+geometry identical): orbit views 46.8-64.1 dB, close-ups **19.31 / 20.62 /
+20.39 dB**, and the difference image is a clean OUTLINE OF THE WHOLE CAR — the
+two loads framed it in different places. A registration shift worth ~44 dB was
+setting the verdict of a gate whose threshold is 35 dB.
+
+**RENDER A DISCARDED WARM-UP FRAME.** The first screenshot after a load catches
+model-viewer's progress strip — exactly 768 x 5 = 3,840 px. It landed in the
+master's az000 frame and not the candidate's and cost ~15 dB on that view.
+
+**THE MEASUREMENT THAT SHOULD BE ROUTINE: run the instrument against an
+IDENTICAL file first and call the result its NOISE FLOOR.** `gltf-transform
+copy` gives a byte-different, geometrically identical GLB for free. This gate's
+floor went **19.31 -> 46.15 -> 50.28 dB min** across the three fixes above.
+A 35 dB threshold under a 19 dB noise floor is not a gate, it is a coin toss,
+and nothing in the numbers said so — every individual PSNR looked plausible.
+
+**Also fixed in the same pass, same class:**
+  * `TYRE_MAT`'s trailing `(?![a-z0-9])` refuses the PLURAL, so `Tires`,
+    `tires`, `Pneus`, `M_2022_..._Tires` and `Meshestire0021Mtl` were all
+    invisible. **Measured: 10 of 60 random live cars had a tyre material the
+    regex could not see**, and G2 then printed "no tyre-NAMED material in this
+    car" — which reads as a fact about the CAR and was a fact about the REGEX.
+    Re-measured over 191 cars / 3,082 distinct real material names, cars with a
+    detectable tyre material went **106 -> 133**. `glass_probe.GLASSY` is a
+    plain substring and never had the problem, which is exactly why glazing
+    area was being measured on the same cars whose tyre area was not — **when
+    two sibling classifiers disagree about the same car, one of them is wrong.**
+    Fenced by `pipeline/machine/test_compress_regex.py`, 95 two-directional
+    assertions incl. every trap in this file.
+  * `rims?` matched `chrome_trim` and `primer`; `disc` matched every Land Rover
+    **Disc**overy material — false positives on a GATED class, i.e. invented
+    paint leaks.
+  * a negative control that fired FOR THE WRONG REASON: `nc_gut_glass` did
+    `tri[~keep] = tri[0]` under the comment "degenerate: zero area", which
+    copies TRIANGLE 0 and has FULL area. Glass fell only to 65.18% while the
+    control described itself as having gutted the glazing. Correct form is
+    `tri[0, 0]` — all three indices on one vertex — which gives 2.63%.
+    **A control that fires for the wrong reason is the least visible kind of
+    broken instrument**: everything downstream reads as working.
+
+**53.2% of 220 random catalogue cars carry per-material KHR extensions**
+(clearcoat / specular / transmission), so the "trimesh silently drops every KHR
+material extension" trap this file already records applies to over half the
+library, and a control car without any cannot prove that gate fires. Pick a
+control master that can BUILD every control; a control that cannot be built is
+not a control that passed.
