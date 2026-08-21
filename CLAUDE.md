@@ -3422,7 +3422,7 @@ library, and a control car without any cannot prove that gate fires. Pick a
 control master that can BUILD every control; a control that cannot be built is
 not a control that passed.
 
-## Direct3D-S2: verified, deployable, NOT MEASURED — the run ran out of host, not budget (2026-08-21)
+## Direct3D-S2: verified, deployable, NOT MEASURED — killed by MY OWN PREFLIGHT (2026-08-21)
 
 Leg C of the three-model sharpness experiment. **No mesh was produced**, so nothing here
 is a verdict on Direct3D-S2's quality. What IS established is the deployment recipe and
@@ -3459,15 +3459,31 @@ these would otherwise have been discovered one rented pod at a time:
     3.1.0. Pin `torch==2.5.1 --index-url .../cu124` to MATCH the image's CUDA 12.4
     toolkit so both CUDA extensions compile against the same runtime.
 
-**WHY IT PRODUCED NOTHING: the host, not the model.** Every Direct3D-S2 gate that was
-reached PASSED (weights 206, clone, apt, torch pin asserted with cuda available,
-flash-attn wheel imported). The pod then spent **16 min on the torch pip install and 18+
-min compiling torchsparse** — two independent large downloads at ~2.6 MB/s. Against a
-50-minute in-pod fuse that left no room for ~3GB of weights, 1.2GB of DINOv2 and one
-1024^3 inference. **Budget an 80-90 minute ceiling for a first Direct3D-S2 run, or bake
-the deps into an image.** A second pod was NOT rented: it repeats the same 35-40 min
-build, and a fuse long enough to reach inference would have taken the run to ~$1.54
-against a stated $0.60-1.00.
+**WHY IT PRODUCED NOTHING: MY PREFLIGHT, not the model and not the host.** Every real
+dependency was in place — weights 206, apt, clone, torch pinned AND asserted
+(2.5.1+cu124, cuda available, triton 3.1.0), flash-attn prebuilt wheel imported,
+torchsparse built, requirements installed (which is what BUILDS third_party/voxelize).
+Then, at 39 minutes:
+
+    python3 -c "import udf_ext"
+    ImportError: libc10.so: cannot open shared object file
+
+**`udf_ext` is a torch CUDA extension: it links `libc10.so`, which only reaches the
+loader path once `torch` has been imported.** The library's own call site,
+`direct3d_s2/utils/mesh.py`, imports torch first. The extension was FINE. The check was
+testing something the program never does, and it killed a healthy run.
+This file ALREADY RECORDS THIS EXACT FAILURE from the P3-SAM work — an import preflight
+that omitted the `sys.path.append('..')` the real script performs — together with the
+line "a safety check that is itself wrong costs exactly as much as no safety check". It
+happened again anyway, which is the same "prose memory does not fire at use-time" lesson
+the council audit recorded. **Mirror the real import order, or do not preflight.**
+Fixed in `d3ds2_boot.sh` (3a34639): `import torch, udf_ext`.
+
+Separately, and still true: **budget an 80-90 minute ceiling for a first Direct3D-S2 run**,
+not 50. This host ran two independent large downloads at ~2.6 MB/s (torch's 2.5GB took
+16 min; torchsparse took 19 min to build), so even without the bug the 50-minute fuse
+would have been marginal. Better still, bake the deps into an image.
+A second pod was NOT rented: $0.8133 was already spent against a stated $0.60-1.00.
 
 **MY OWN BOOTSTRAP'S FLAW, and it is inherited from `sf3d_boot.sh`:** `report` uploads
 the log only at STAGE BOUNDARIES, so a 16-minute stage is indistinguishable from a hung
