@@ -251,7 +251,13 @@ def build_cameras(master_metrics, orbit_az=None, closeups=True):
         # mesh, diag 2.5 m), so an unclamped node-diagonal radius reproduces the
         # full-car view under a close-up label -- which is worse than no close-up
         # because it looks like coverage. Cap at 55% of the car's own diagonal.
-        rr = min(float(np.linalg.norm(hi2 - lo2)) * mult, 0.55 * diag)
+        # ...and it must not be so close that the camera sits INSIDE the body.
+        # The lamp zone at an unclamped 1.07 m put the camera inside the nose and
+        # rendered the cabin floor -- again, caught only by looking. Band the
+        # radius to 35-55% of the car's diagonal: always outside, always about
+        # twice as close as the full-car view.
+        rr = float(np.clip(float(np.linalg.norm(hi2 - lo2)) * mult,
+                           0.35 * diag, 0.55 * diag))
         # aim from the side the component faces (sign of its own z offset)
         az = 250 if cc[2] < 0 else 290
         cams.append({"view": label, "zone": "closeup",
@@ -262,7 +268,15 @@ def build_cameras(master_metrics, orbit_az=None, closeups=True):
 
 
 def appearance(master, candidate, out_dir, cams=None, min_psnr=35.0,
-               keep_pngs=True, verbose=True):
+               keep_pngs=True, verbose=True, master_cache=None):
+    """master_cache: a directory to hold the MASTER's renders across calls.
+
+    The master here is an uncompressed 28.7 MB GLB and takes ~2 minutes to load
+    under SwiftShader; re-rendering it once per ladder rung is the dominant cost
+    of a whole gate run and produces byte-identical PNGs every time. Cached by
+    (master sha-less mtime+size, camera signature) so a changed master or a
+    changed camera set can never silently reuse stale reference frames.
+    """
     from PIL import Image
     from playwright.sync_api import sync_playwright
 
@@ -277,8 +291,19 @@ def appearance(master, candidate, out_dir, cams=None, min_psnr=35.0,
         mm["_decodedPath"] = decode(master, wk)
         cams = build_cameras(mm)
 
+    cache_dir = None
+    if master_cache:
+        st = os.stat(master)
+        sig = "%s_%d_%d_%s" % (os.path.basename(master), st.st_size, int(st.st_mtime),
+                               abs(hash(json.dumps(cams, sort_keys=True))) % (10 ** 8))
+        cache_dir = os.path.join(master_cache, sig)
+        os.makedirs(cache_dir, exist_ok=True)
+    have_master = bool(cache_dir) and all(
+        os.path.exists(os.path.join(cache_dir, "master_%s.png" % c["view"])) for c in cams)
+
     web = os.path.join(out_dir, "web"); os.makedirs(web, exist_ok=True)
-    shutil.copy(master, os.path.join(web, "a.glb"))
+    if not have_master:
+        shutil.copy(master, os.path.join(web, "a.glb"))
     shutil.copy(candidate, os.path.join(web, "b.glb"))
     shutil.copy(mv, os.path.join(web, "model-viewer.min.js"))
     VC.vendor_decoders(web)
@@ -295,10 +320,12 @@ def appearance(master, candidate, out_dir, cams=None, min_psnr=35.0,
             p = b.new_page(viewport={"width": 820, "height": 620})
             p.goto("http://127.0.0.1:%d/index.html" % port)
             p.wait_for_function("()=>window.__ready===true", timeout=60000)
-            for tag, src in (("master", "/a.glb"), ("cand", "/b.glb")):
+            todo = [("cand", "/b.glb")] if have_master else \
+                   [("master", "/a.glb"), ("cand", "/b.glb")]
+            for tag, src in todo:
                 p.evaluate("s=>window.__setSrc(s)", src)
                 p.wait_for_function("()=>window.__loaded===true||window.__failed!==null",
-                                    timeout=300000)
+                                    timeout=600000)
                 if p.evaluate("window.__failed"):
                     raise RuntimeError("%s failed to load: %s"
                                        % (tag, p.evaluate("window.__failed")))
@@ -309,10 +336,16 @@ def appearance(master, candidate, out_dir, cams=None, min_psnr=35.0,
                     p.wait_for_timeout(600)
                     fp = os.path.join(out_dir, "%s_%s.png" % (tag, cam["view"]))
                     p.locator("#mv").screenshot(path=fp)
+                    if tag == "master" and cache_dir:
+                        shutil.copy(fp, os.path.join(cache_dir, "master_%s.png" % cam["view"]))
                     shots[(tag, cam["view"])] = fp
             b.close()
     finally:
         httpd.shutdown()
+    if have_master:
+        for cam in cams:
+            shots[("master", cam["view"])] = os.path.join(
+                cache_dir, "master_%s.png" % cam["view"])
 
     bg = np.array([0x20, 0x20, 0x24])
     rows = []
@@ -332,8 +365,11 @@ def appearance(master, candidate, out_dir, cams=None, min_psnr=35.0,
                      "p99Abs": round(float(np.percentile(d, 99)), 1),
                      "coverageMaster": int(ma.sum()), "coverageCand": int(mb.sum())})
     if not keep_pngs:
-        for f in shots.values():
-            os.remove(f)
+        for k, f in shots.items():
+            if cache_dir and k[0] == "master":
+                continue            # never delete the shared master cache
+            if os.path.exists(f):
+                os.remove(f)
     ps = [r["psnrDb"] for r in rows]
     io = [r["iou"] for r in rows]
     full = [r for r in rows if r["zone"] == "full"]
