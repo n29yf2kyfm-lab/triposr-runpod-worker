@@ -835,13 +835,37 @@ def classes_document(global_box_counts, images):
     }
 
 
-def write_outputs(out_dir, samples, images, classes_doc, plan):
+def write_outputs(out_dir, samples, images, classes_doc, plan,
+                  negatives=None):
     os.makedirs(out_dir, exist_ok=True)
     # Taken FROM classes_doc, not recomputed from class_map. Under
     # --merge-groups the vocabulary is the group set, and a second independent
     # derivation here is exactly how images.jsonl ends up numbering classes
     # differently from the labels.txt the model is trained against.
     idx = classes_doc["name_to_index"]
+
+    # MINED NEGATIVES ARE MERGED HERE, OR THEY NEVER REACH TRAINING.
+    #
+    # mine_negatives writes negatives.jsonl and materialise_index knows how to
+    # render a row carrying `neg`, but nothing ever joined the two: index.jsonl
+    # held ZERO neg rows in every index built so far, so the 26,680 mined hard
+    # negatives were never seen by any model. The run named "v9d-neg-weather"
+    # contained no negatives at all. A file written and never read is the same
+    # as work not done, and it looked done.
+    n_neg = 0
+    if negatives:
+        train_shas = {s["sha"] for s in samples if s["split"] == "train"}
+        with open(negatives) as nf:
+            for ln in nf:
+                r = json.loads(ln)
+                # A negative crop of an image that is not in THIS index's train
+                # split would leak an eval image into training, so the sha must
+                # be one this build already put in train.
+                if r.get("sha") in train_shas:
+                    samples.append(r)
+                    n_neg += 1
+        print(f"negatives     merged {n_neg:,} of the file's rows "
+              f"({100.0 * n_neg / max(1, len(samples)):.1f}% of train)")
 
     with open(os.path.join(out_dir, "index.jsonl"), "w") as f:
         for s in samples:
@@ -971,7 +995,7 @@ def load_train_only(path):
 def build(root, out_dir, target_per_class=None, max_repeat=15, seed=1337,
           unit="boxes", unhealthy=UNHEALTHY_MULTIPLIER, sha_cache=None,
           report_only=False, verbose=True, train_only=None,
-          merge_groups=False, dupe_groups=None):
+          merge_groups=False, dupe_groups=None, negatives=None):
     """Do the whole thing. Returns (plan, samples, images)."""
     global GROUPED
     # "v2" merges structural into dent as one deformation class; True keeps the
@@ -1040,7 +1064,8 @@ def build(root, out_dir, target_per_class=None, max_repeat=15, seed=1337,
 
     if not report_only:
         write_outputs(out_dir, samples, images,
-                      classes_document(global_box_counts, images), plan)
+                      classes_document(global_box_counts, images), plan,
+                      negatives=negatives)
     return plan, samples, images
 
 
@@ -1354,6 +1379,13 @@ def main():
                     help="near_dupes.json — force every near-duplicate group "
                          "into a single split, so augmented siblings of one "
                          "photograph cannot straddle train and valid")
+    ap.add_argument("--negatives",
+                    help="negatives.jsonl from mine_negatives — MERGED into "
+                         "index.jsonl. Without this the mined negatives are "
+                         "written to a file nothing reads, which is what "
+                         "happened in every index before now: zero neg rows "
+                         "reached training, including the run named "
+                         "'v9d-neg-weather'.")
     ap.add_argument("--groups-v2", action="store_true",
                     help="three classes: surface, deformation (dent+"
                          "structural), broken_part. Merges the scarce "
@@ -1397,7 +1429,7 @@ def main():
         args.seed, args.unit, args.unhealthy_multiplier, args.sha_cache,
         report_only=args.report_only, train_only=pin,
         merge_groups=("v2" if args.groups_v2 else args.merge_groups),
-        dupe_groups=args.dupe_groups)
+        dupe_groups=args.dupe_groups, negatives=args.negatives)
     print(format_report(plan))
     if args.report_only:
         print("\n--report-only: nothing was written.")
