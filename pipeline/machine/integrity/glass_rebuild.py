@@ -56,6 +56,7 @@ MIN_CM2 = float(os.environ.get("GR_MIN_CM2", "5"))
 RASTER = int(os.environ.get("GR_RASTER", "220"))
 THICK = float(os.environ.get("GR_THICK_MM", "4")) / 1000.0
 DOT = float(os.environ.get("GR_DOT", "0.85"))
+AREA_TOL = float(os.environ.get("GR_AREA_TOL", "0.25"))   # emitted vs source skin
 
 # Body_Glass_Reverted is glazing-NAMED but carries carpaint on 714 fragments.
 # That is a body-coloured-glazing question, not a pane-integrity one, and
@@ -99,14 +100,26 @@ def components(obj):
                         seen.add(nf.index)
                         st.append(nf)
         area = sum(x.calc_area() for x in fs)
-        pts = np.array([[v.co[0], v.co[1], v.co[2]] for x in fs for v in x.verts])
+        # keep TRIANGLES, not just points: the footprint must come from scan
+        # conversion. Stamping points and dilating to close the gaps between
+        # them is what inflated the windscreen 9,894 -> 18,622 cm2.
+        tris = []
+        for x in fs:
+            vs = [v.co for v in x.verts]
+            for t in range(1, len(vs) - 1):          # fan-triangulate any n-gon
+                tris.append([[vs[0][i] for i in range(3)],
+                             [vs[t][i] for i in range(3)],
+                             [vs[t + 1][i] for i in range(3)]])
+        tris = np.array(tris, dtype=float)
+        pts = tris.reshape(-1, 3)
         n = mathutils.Vector((0, 0, 0))
         for x in fs:
             n += x.normal * x.calc_area()
         if n.length < 1e-12:
             continue
         n.normalize()
-        out.append({"area": area, "pts": pts, "n": np.array([n[0], n[1], n[2]]),
+        out.append({"area": area, "pts": pts, "tris": tris,
+                    "n": np.array([n[0], n[1], n[2]]),
                     "lo": pts.min(0), "hi": pts.max(0), "src": obj.name})
     bm.free()
     return out
@@ -159,30 +172,54 @@ def build_pane(cs, name):
     nu = max(8, int(round((umax - umin) / step)) + 1)
     nv = max(8, int(round((vmax - vmin) / step)) + 1)
 
-    # rasterise the footprint by stamping every source vertex, then dilating by
-    # one cell — the point cloud is dense relative to the grid, so this fills
-    # the sheet without needing per-triangle scan conversion
-    iu = np.clip(((U - umin) / (umax - umin) * (nu - 1)).round().astype(int), 0, nu - 1)
-    iv = np.clip(((V - vmin) / (vmax - vmin) * (nv - 1)).round().astype(int), 0, nv - 1)
+    # EXACT TRIANGLE SCAN CONVERSION. Every source triangle is projected to
+    # (u,v) and its covered cells marked by barycentric test. This is the whole
+    # difference from the failed first attempt: a stamped point cloud has gaps
+    # between samples that must be dilated shut, and the dilation grows the
+    # OUTLINE too. Scan conversion fills the interior without touching the edge,
+    # so the emitted pane cannot be larger than the glass it was fitted to.
     grid = np.zeros((nu, nv), bool)
-    grid[iu, iv] = True
-    grid = ndimage.binary_dilation(grid, np.ones((3, 3), bool))
-    grid = ndimage.binary_closing(grid, np.ones((7, 7), bool))
+    T = np.vstack([c["tris"] for c in cs]) - ctr
+    tu = (T @ u - umin) / (umax - umin) * (nu - 1)
+    tv = (T @ v - vmin) / (vmax - vmin) * (nv - 1)
+    for k in range(tu.shape[0]):
+        a0, a1, a2 = tu[k]
+        b0, b1, b2 = tv[k]
+        lo_a = max(0, int(np.floor(min(a0, a1, a2))))
+        hi_a = min(nu - 1, int(np.ceil(max(a0, a1, a2))))
+        lo_b = max(0, int(np.floor(min(b0, b1, b2))))
+        hi_b = min(nv - 1, int(np.ceil(max(b0, b1, b2))))
+        if lo_a > hi_a or lo_b > hi_b:
+            continue
+        den = (b1 - b2) * (a0 - a2) + (a2 - a1) * (b0 - b2)
+        gu, gv = np.meshgrid(np.arange(lo_a, hi_a + 1),
+                             np.arange(lo_b, hi_b + 1), indexing="ij")
+        if abs(den) < 1e-12:
+            grid[gu, gv] = True          # degenerate sliver: mark its bbox cells
+            continue
+        w0 = ((b1 - b2) * (gu - a2) + (a2 - a1) * (gv - b2)) / den
+        w1 = ((b2 - b0) * (gu - a2) + (a0 - a2) * (gv - b2)) / den
+        w2 = 1.0 - w0 - w1
+        m = (w0 >= -0.5 / max(nu, nv)) & (w1 >= -0.5 / max(nu, nv)) & (w2 >= -0.5 / max(nu, nv))
+        if m.any():
+            grid[gu[m], gv[m]] = True
+    cells_raw = int(grid.sum())
+    # close only pinhole-scale gaps left by tessellation, never a real aperture
+    grid = ndimage.binary_closing(grid, np.ones((3, 3), bool))
     # THE HOLE KILL: every enclosed void becomes solid, so the emitted pane
     # cannot inherit a single perforation from the blob it was fitted to
-    holes_before = int((~grid).sum())
     grid = ndimage.binary_fill_holes(grid)
-    filled_cells = int((~np.zeros_like(grid)).sum() and (grid).sum())
     # keep only the largest island: a detached fleck must not become a pane
-    lab, n = ndimage.label(grid)
-    if n > 1:
-        sizes = ndimage.sum(grid, lab, range(1, n + 1))
+    lab, nlab = ndimage.label(grid)
+    if nlab > 1:
+        sizes = ndimage.sum(grid, lab, range(1, nlab + 1))
         grid = lab == (int(np.argmax(sizes)) + 1)
     # smooth the outline, then re-fill (thresholding can reopen a pinhole)
-    sm = ndimage.gaussian_filter(grid.astype(float), 1.6) > 0.5
+    sm = ndimage.gaussian_filter(grid.astype(float), 1.2) > 0.5
     sm = ndimage.binary_fill_holes(sm)
     if not sm.any():
         return None
+    cells_final = int(sm.sum())
 
     # vertices where all four incident cells are inside -> quad, so the mesh is
     # regular and its boundary is a single loop
@@ -219,6 +256,19 @@ def build_pane(cs, name):
     me = bpy.data.meshes.new(name)
     me.from_pydata([list(map(float, x)) for x in vs], [], faces)
     me.validate()
+    # THE GUARD. Compare the emitted single-sided sheet against the SOURCE OUTER
+    # SKIN before anything is kept. Run 1 shipped a windscreen at 188% of its
+    # source and completed rc=0; a number that wrong must refuse, not warn.
+    sheet = sum(p.area for p in me.polygons)
+    ref = cs[0]["area"]
+    ratio = sheet / ref if ref > 1e-12 else 0.0
+    if not (1.0 - AREA_TOL) <= ratio <= (1.0 + AREA_TOL):
+        bpy.data.meshes.remove(me)
+        print(f"GR_REFUSE {name}: emitted {sheet*1e4:.1f} cm2 vs source outer skin "
+              f"{ref*1e4:.1f} cm2 = {ratio:.3f}x, outside {1-AREA_TOL:.2f}-{1+AREA_TOL:.2f}")
+        return {"name": name, "REFUSED": True, "ratio": round(ratio, 3),
+                "emitted_cm2": round(sheet * 1e4, 1), "source_cm2": round(ref * 1e4, 1),
+                "fit_rms_mm": round(resid * 1000, 2)}
     ob = bpy.data.objects.new(name, me)
     sc.collection.objects.link(ob)
     if glass_mat:
@@ -239,33 +289,28 @@ def build_pane(cs, name):
     bm.free()
     area = sum(p.area for p in me.polygons)
     return {"name": name, "faces": len(me.polygons), "verts": len(me.vertices),
-            "area_cm2": round(area * 1e4, 1), "fit_rms_mm": round(resid * 1000, 2),
+            "sheet_cm2": round(sheet * 1e4, 1), "source_cm2": round(ref * 1e4, 1),
+            "area_ratio": round(ratio, 3), "solid_area_cm2": round(area * 1e4, 1),
+            "fit_rms_mm": round(resid * 1000, 2),
             "boundary_edges_after_solidify": bnd,
-            "grid": [nu, nv], "skins_merged": len(cs),
+            "grid": [nu, nv], "cells_scanconv": cells_raw, "cells_final": cells_final,
             "source_nodes": sorted({c["src"] for c in cs})}
 
 
-order = sorted(windows.values(), key=lambda cs: -sum(c["area"] for c in cs))
+# windows are now one-per-node, so the SOURCE NODE NAME is the correct name.
+# Deriving it from geometry instead produced Glass_Backlight_2_2_2_2_2 — a
+# generated name is only worth having when there is nothing authoritative.
+order = sorted(windows.items(), key=lambda kv: -sum(c["area"] for c in kv[1]))
 built = []
-for k, cs in enumerate(order):
-    lo = np.min([c["lo"] for c in cs], axis=0)
-    hi = np.max([c["hi"] for c in cs], axis=0)
-    nm = np.abs(np.mean([c["n"] for c in cs], axis=0))
-    # name from geometry, never from the node it came from
-    if nm[1] > 0.6:
-        side = "L" if (lo[1] + hi[1]) / 2 > 0 else "R"
-        name = f"Glass_Side_{side}"
-    elif (lo[0] + hi[0]) / 2 > 0:
-        name = "Glass_Backlight"
-    else:
-        name = "Glass_Windscreen"
-    while any(b["name"] == name for b in built):
-        name += "_2"
-    r = build_pane(cs, name)
+for name, cs in order:
+    r = build_pane([cs[0]], name)
     if r:
         built.append(r)
-        print(f"GR_PANE {r['name']:<20} skins={r['skins_merged']:>2} "
-              f"area={r['area_cm2']:>8.1f}cm2 fit_rms={r['fit_rms_mm']:>6.2f}mm "
+        if r.get("REFUSED"):
+            continue
+        print(f"GR_PANE {r['name']:<20} "
+              f"sheet={r['sheet_cm2']:>8.1f}cm2 src={r['source_cm2']:>8.1f}cm2 "
+              f"ratio={r['area_ratio']:.3f} fit_rms={r['fit_rms_mm']:>6.2f}mm "
               f"faces={r['faces']:>6d} bnd_edges={r['boundary_edges_after_solidify']}")
 
 for o in glazing:
