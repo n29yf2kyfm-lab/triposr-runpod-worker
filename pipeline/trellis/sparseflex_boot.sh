@@ -271,25 +271,65 @@ export ATTN_BACKEND=flash_attn
 export SPARSE_BACKEND=spconv
 export SPCONV_ALGO=native
 
+stage preflight_all
+# ATTEMPT 3 reached the weights stage after 12 paid minutes and died on a module
+# that had never been installed. Every module and file operation the REMAINING
+# stages depend on is now proven HERE, in one cheap check, before another paid
+# minute is spent. This is the project's own "prove the gate fires" rule turned
+# on my own script's dependencies — three of four failures so far have been my
+# install list, not the model.
+python3 - <<'PFA' || die PREFLIGHT_IMPORTS
+import importlib, sys
+need = ["torch", "numpy", "trimesh", "open3d", "omegaconf", "safetensors",
+        "easydict", "jaxtyping", "torch_scatter", "spconv.pytorch", "xformers.ops"]
+miss = []
+for m in need:
+    try:
+        importlib.import_module(m)
+    except Exception as e:
+        miss.append("%s: %s: %s" % (m, type(e).__name__, e))
+print("preflight imports:", len(need) - len(miss), "/", len(need), "ok")
+if miss:
+    print("MISSING:")
+    for x in miss:
+        print("  ", x)
+    sys.exit(1)
+PFA
+python3 - <<'PFB' || die PREFLIGHT_IO
+import trimesh, os
+m = trimesh.creation.box((1, 2, 3))
+m.export("/tmp/pf.obj")
+trimesh.Scene({"t": m}).export("/tmp/pf.glb")
+import open3d as o3d
+r = o3d.io.read_triangle_mesh("/tmp/pf.obj")
+assert len(r.triangles) > 0, "open3d could not read a trimesh-written obj"
+print("preflight io ok: obj", os.path.getsize("/tmp/pf.obj"),
+      "glb", os.path.getsize("/tmp/pf.glb"), "o3d tris", len(r.triangles))
+PFB
+
 stage weights
 mkdir -p /workspace/TripoSF/ckpts
-python3 - <<'PY' || die WEIGHTS
-import os, time, shutil
-from huggingface_hub import hf_hub_download
-for a in range(1, 6):
-    try:
-        p = hf_hub_download("VAST-AI/TripoSF",
-                            "vae/pretrained_TripoSFVAE_256i1024o.safetensors",
-                            token=os.environ.get("HF_TOKEN"))
-        shutil.copy(p, "/workspace/TripoSF/ckpts/pretrained_TripoSFVAE_256i1024o.safetensors")
-        print("weights ok", os.path.getsize(p), "bytes")
-        break
-    except Exception as e:
-        print(f"attempt {a}: {type(e).__name__}: {e}")
-        if a == 5:
-            raise
-        time.sleep(5 * a)
-PY
+CKPT=/workspace/TripoSF/ckpts/pretrained_TripoSFVAE_256i1024o.safetensors
+# ATTEMPT 3 DIED HERE ON `No module named huggingface_hub`. The right fix is
+# not to install it — it is to STOP NEEDING IT. The weights are ONE public file
+# at a known URL that the launcher already preflights to HTTP 206, so curl with
+# resume is strictly simpler and has one less thing that can be absent.
+# The byte count is ASSERTED: a truncated download would otherwise surface much
+# later as a confusing safetensors parse error rather than as a failed fetch.
+WURL="https://huggingface.co/VAST-AI/TripoSF/resolve/main/vae/pretrained_TripoSFVAE_256i1024o.safetensors"
+WANT=715361228
+for a in 1 2 3 4 5; do
+  curl -sSL -C - -H "Authorization: Bearer ${HF_TOKEN}" "$WURL" -o "$CKPT" && break
+  echo "weights attempt $a failed; retrying"; sleep $((5*a))
+done
+GOT=$(stat -c%s "$CKPT" 2>/dev/null || echo 0)
+echo "weights bytes=$GOT want=$WANT"
+[ "$GOT" = "$WANT" ] || die WEIGHTS_SIZE_${GOT}
+python3 -c "
+from safetensors.torch import load_file
+sd = load_file('$CKPT')
+print('safetensors ok:', len(sd), 'tensors')
+" || die WEIGHTS_UNREADABLE
 ls -l /workspace/TripoSF/ckpts
 
 stage import_check

@@ -142,9 +142,35 @@ const MV=customElements.get('model-viewer');
 MV.meshoptDecoderLocation='/meshopt_decoder.js'; MV.dracoDecoderLocation='/draco/';
 window.__setSrc=(s)=>{window.__loaded=false;window.__failed=null;
   document.getElementById('mv').src=s;};
+// THE ORBIT BOUNDS MUST BE SCALE-RELATIVE, AND THEY MUST BE SET PER MODEL.
+// Two opposite failures were paid for here, and only a model-relative bound
+// avoids both:
+//   * an ABSOLUTE bound (`max-camera-orbit="auto auto 1000m"`) blanks any
+//     small model outright -- 1000 m against a 0.05 m car is a far/near ratio
+//     near 1e6 and depth precision collapses. 25.2% of this catalogue is that
+//     small.
+//   * leaving it at `auto` clamps the radius we ASK FOR against whatever
+//     bounding box model-viewer had at the time. On the FIRST model loaded
+//     into the page the clamp bites and the frame comes out zoomed in and
+//     cropped, while the SECOND model -- same dimensions -- frames correctly.
+//     Measured on audi-a2-v1 (extents 149 x 132 x 307): the master rendered at
+//     217,666-276,141 px and the candidate at 64,922-102,800 px, a consistent
+//     0.30-0.37 area ratio in EVERY view, for two files whose decoded bounds
+//     are identical to six figures. G5 scored that 10.51 dB and called the
+//     compression broken. Nothing was wrong with either file.
+// Deriving the bounds from getDimensions() each time makes them correct at
+// any authored scale, which this catalogue spans five orders of magnitude of.
 window.__cam=(orbit,target,fov)=>{const mv=document.getElementById('mv');
+  const d=mv.getDimensions();
+  const diag=Math.sqrt(d.x*d.x+d.y*d.y+d.z*d.z);
+  mv.minCameraOrbit='auto auto '+(diag*0.01)+'m';
+  mv.maxCameraOrbit='auto auto '+(diag*50)+'m';
   mv.cameraOrbit=orbit; mv.cameraTarget=target; mv.fieldOfView=fov;
   mv.jumpCameraToGoal();};
+// Read back what model-viewer ACTUALLY applied, so a clamp can never again be
+// invisible. appearance() asserts the applied radius matches the requested one.
+window.__orbit=()=>{const o=document.getElementById('mv').getCameraOrbit();
+  return {theta:o.theta,phi:o.phi,radius:o.radius};};
 window.__ready=true;
 </script></body></html>"""
 
@@ -338,6 +364,7 @@ def appearance(master, candidate, out_dir, cams=None, min_psnr=35.0,
 
     httpd, port = _serve(web)
     shots = {}
+    applied = {}
     try:
         with sync_playwright() as pw:
             b = pw.chromium.launch(headless=True, executable_path=exe, args=[
@@ -390,6 +417,11 @@ def appearance(master, candidate, out_dir, cams=None, min_psnr=35.0,
                     p.evaluate("a=>window.__cam(a[0],a[1],a[2])",
                                [cam["orbit"], cam["target"], cam["fov"]])
                     p.wait_for_timeout(600)
+                    # What model-viewer ACTUALLY applied. A silently clamped
+                    # radius renders a different-sized car and reads as
+                    # compression damage; recording it turns an invisible
+                    # framing bug into a stated number.
+                    applied[(tag, cam["view"])] = p.evaluate("()=>window.__orbit()")
                     fp = os.path.join(out_dir, "%s_%s.png" % (tag, cam["view"]))
                     p.screenshot(path=fp, clip=clip)
                     if tag == "master" and cache_dir:
@@ -465,6 +497,30 @@ def appearance(master, candidate, out_dir, cams=None, min_psnr=35.0,
                 "iouMin": min(io), "views": rows, "cameras": cams,
                 "outDir": os.path.abspath(out_dir)}
 
+    # ---- THE TWO SIDES MUST HAVE BEEN SHOT FROM THE SAME PLACE -----------
+    # model-viewer clamps cameraOrbit against its own bounds, so a camera we
+    # asked for is not necessarily a camera we got, and a clamp that bites on
+    # one load and not the other renders two different-sized cars. That is not
+    # a fidelity difference and must never be scored as one.
+    mism = []
+    for c in cams:
+        a = applied.get(("master", c["view"])) or {}
+        b_ = applied.get(("cand", c["view"])) or {}
+        ra, rb = a.get("radius"), b_.get("radius")
+        if ra and rb and abs(ra - rb) > 0.005 * max(ra, rb):
+            mism.append("%s: master r=%.6f vs candidate r=%.6f" % (c["view"], ra, rb))
+    if mism:
+        return {"status": "NOT_TESTED",
+                "reason": "THE CAMERA WAS CLAMPED DIFFERENTLY for the two files "
+                          "in %d of %d views (%s). model-viewer bounds the orbit "
+                          "radius against its own framing, so the two sides were "
+                          "shot from different distances and the comparison is "
+                          "meaningless. psnrMin would have read %.2f dB."
+                          % (len(mism), len(cams), "; ".join(mism[:4]), min(ps)),
+                "cameraMismatch": mism, "psnrMinIfBelieved": min(ps),
+                "views": rows, "cameras": cams,
+                "outDir": os.path.abspath(out_dir)}
+
     res = {"status": "PASS" if min(ps) >= min_psnr else "FAIL",
            "minPsnrThreshold": min_psnr,
            "silhouetteFracMin": round(min(r["coverageMaster"] for r in rows)
@@ -474,6 +530,8 @@ def appearance(master, candidate, out_dir, cams=None, min_psnr=35.0,
            "psnrMinCloseup": min([r["psnrDb"] for r in cu], default=None),
            "iouMin": min(io), "iouMean": round(float(np.mean(io)), 5),
            "views": rows, "cameras": cams, "outDir": os.path.abspath(out_dir),
+           "appliedRadii": {"%s|%s" % k: round(v.get("radius", 0), 6)
+                            for k, v in applied.items()},
            "renderer": "chromium headless + SwiftShader (SOFTWARE, desktop) -- "
                        "identical engine and cameras both sides; NOT a device result"}
     if verbose:
