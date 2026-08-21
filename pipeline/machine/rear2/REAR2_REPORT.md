@@ -314,3 +314,24 @@ clipped**, so nothing in them is hidden in a blown highlight. The matID figure i
 defect and must not be read as one: a label pass is flat emission in saturated palette
 colours, several of which are 255 in a channel by definition. (The v3 matID read 8.2%
 purely because its palette was hash-generated and unsaturated; the model did not change.)
+
+## 10. THE PANELS ARE CLOSED PRESSINGS — proved by topology, not by claim
+
+Each rebuilt panel is split into two NODES by material (`Hatch` is the Class-A outer skin
+on `carpaint`; `Hatch_Inner` is the inner skin, the perimeter return, the aperture return
+and the hemmed flange, on `Shut_Line_Dark`). That split is anatomically what a real
+tailgate is — an outer skin and an inner panel — and it is what lets a body respray reach
+the skin and not the shut line. Welded back together at their shared boundary:
+
+| panel | verts | faces | watertight | boundary edges | Euler characteristic |
+|---|---|---|---|---|---|
+| `Hatch` + `Hatch_Inner` | 21,834 | 43,668 | **True** | **0** | **0** |
+| `Bumper_Rear` + `Bumper_Rear_Inner` | 33,592 | 67,180 | **True** | **0** | **2** |
+
+The Euler numbers are an independent check on the topology nobody had to trust me for:
+**chi = 0 is a genus-1 surface — a closed panel with exactly ONE hole**, which is the
+backlight aperture, and **chi = 2 is a closed sphere-topology solid**, which is a bumper
+with no aperture at all. Both are what they should be, and a stray hole or an unclosed
+return would have shown up in either number.
+
+All eight of Gate 4's lamp components remain individually watertight in the shipped file.
