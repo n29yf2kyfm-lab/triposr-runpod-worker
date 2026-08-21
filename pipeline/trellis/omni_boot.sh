@@ -109,6 +109,13 @@ stage preflight_all
 # stages need is proven HERE, before 13 GB of weights are pulled.
 python3 - <<'PFA' || die PREFLIGHT_IMPORTS
 import importlib, sys
+# "torch" MUST STAY FIRST AND THIS LIST MUST STAY ORDERED. A bare
+# `python3 -c "import <a_torch_extension>"` fails with
+# `ImportError: libc10.so: cannot open shared object file` on a PERFECTLY GOOD
+# install — libc10.so only reaches the loader path once torch itself has been
+# imported, and the extension's real call site always imports torch first. That
+# exact preflight killed the Direct3D-S2 leg at 39 paid minutes on 2026-08-21.
+# Importing torch first makes the check match how the code actually runs.
 need = ["torch", "numpy", "trimesh", "einops", "omegaconf", "skimage", "scipy",
         "cv2", "pymeshlab", "transformers", "diffusers", "timm", "torchdiffeq",
         "peft", "pytorch_lightning", "torch_cluster", "huggingface_hub", "yaml",
