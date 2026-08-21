@@ -509,7 +509,7 @@ def rebind_material(src, dst, from_mat, to_mat):
 
 def gate_one(master, cand, out_dir, cams, budget=None, min_psnr=35.0,
              min_area_ratio=0.85, do_load=True, load_tiers=None, load_repeats=3,
-             do_respray=True, verbose=True):
+             do_respray=True, verbose=True, master_cache=None):
     os.makedirs(out_dir, exist_ok=True)
     r = {"file": os.path.abspath(cand), "sha256": sha256(cand)}
     r["metrics"] = MM.measure(cand)
@@ -522,7 +522,8 @@ def gate_one(master, cand, out_dir, cams, budget=None, min_psnr=35.0,
         master, cand, workdir=os.path.join(out_dir, "_geom"),
         min_area_ratio=min_area_ratio)
     r["appearance"] = FID.appearance(master, cand, os.path.join(out_dir, "appearance"),
-                                     cams=cams, min_psnr=min_psnr, verbose=verbose)
+                                     cams=cams, min_psnr=min_psnr, verbose=verbose,
+                                     master_cache=master_cache)
     if do_respray:
         r["respray"] = respray_control(cand, os.path.join(out_dir, "respray"),
                                        cams, verbose=verbose)
@@ -592,6 +593,7 @@ def main():
 
     os.makedirs(a.out_dir, exist_ok=True)
     work = os.path.join(a.out_dir, "work"); os.makedirs(work, exist_ok=True)
+    mcache = os.path.join(a.out_dir, "_master_frames"); os.makedirs(mcache, exist_ok=True)
     budget = json.load(open(a.budget_json)) if a.budget_json else None
 
     print("=" * 78)
@@ -623,7 +625,8 @@ def main():
                      budget=budget, min_psnr=a.min_psnr,
                      min_area_ratio=a.min_area_ratio,
                      do_load=not a.skip_load, load_tiers=a.load_tiers.split(","),
-                     load_repeats=a.load_repeats, do_respray=not a.skip_respray)
+                     load_repeats=a.load_repeats, do_respray=not a.skip_respray,
+                     master_cache=mcache)
         r["build"] = build
         report["candidates"][name] = r
         print("  VERDICT %s%s" % (r["status"],
@@ -645,7 +648,7 @@ def main():
         g1 = FID.geometry_retention(a.master, nc1, os.path.join(work, "nc1g"),
                                     min_area_ratio=a.min_area_ratio)
         a1 = FID.appearance(a.master, nc1, os.path.join(a.out_dir, "NC1_appearance"),
-                            cams=cams, min_psnr=a.min_psnr)
+                            cams=cams, min_psnr=a.min_psnr, master_cache=mcache)
         report["controls"]["NC1_overdecimated"] = {
             "file": nc1, "triangles": MM.measure(nc1)["triangles"],
             "appearance": a1, "geometryRetention": g1,
