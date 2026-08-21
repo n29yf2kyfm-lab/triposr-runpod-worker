@@ -374,6 +374,18 @@ def appearance(master, candidate, out_dir, cams=None, min_psnr=35.0,
                     raise RuntimeError("%s failed to load: %s"
                                        % (tag, p.evaluate("window.__failed")))
                 p.wait_for_timeout(1200)
+                # WARM-UP FRAME, DISCARDED. The first screenshot after a load
+                # catches model-viewer's progress strip along the top edge --
+                # measured as exactly 768 x 5 = 3,840 pixels, and it landed in
+                # the master's az000 frame but not the candidate's, costing
+                # ~15 dB on that view alone (46.15 dB against 60-66 dB for
+                # every other orbit view). It is a load artefact, not a
+                # difference between the two files, so it must not reach a
+                # measured frame.
+                p.evaluate("a=>window.__cam(a[0],a[1],a[2])",
+                           [cams[0]["orbit"], cams[0]["target"], cams[0]["fov"]])
+                p.wait_for_timeout(1200)
+                p.screenshot(path=os.path.join(out_dir, "_warmup.png"), clip=clip)
                 for cam in cams:
                     p.evaluate("a=>window.__cam(a[0],a[1],a[2])",
                                [cam["orbit"], cam["target"], cam["fov"]])

@@ -140,6 +140,22 @@ def main():
     put(os.path.join(HERE, "crease2.py"), "crease2.py", sb)
     preflight(sb, hf)
 
+    # RESET THE LOG BEFORE THE POD EXISTS. Attempt 2 launched a healthy pod and
+    # killed it inside one second, because {RUN}_log.txt still held attempt 1's
+    # "=== FAIL:O3D_IMPORT ===" and the watcher read a PREVIOUS run's terminal
+    # marker as this run's. This is the recorded run-id-namespacing trap
+    # ("a previous run's heartbeat masquerades as progress"), reproduced.
+    # Two guards, because one was not enough: the log is overwritten with a
+    # unique sentinel here, AND no stage line is believed until the log carries
+    # "fuse armed", which only THIS pod's bootstrap can print.
+    nonce = f"LAUNCH-{int(time.time())}"
+    import tempfile
+    with tempfile.NamedTemporaryFile("w", suffix=".txt", delete=False) as fh:
+        fh.write(f"=== STAGE:launching {nonce} ===\n")
+        sentinel = fh.name
+    put(sentinel, f"{RUN}_log.txt", sb, "text/plain")
+    os.unlink(sentinel)
+
     boot_cmd = (
         f"curl -sS -H 'apikey: $SB_KEY' -H 'Authorization: Bearer $SB_KEY' "
         f"'{SB}/{PRE}/sparseflex_boot.sh?cb='$(date +%s) -o /tmp/boot.sh "
@@ -187,8 +203,13 @@ def main():
                 st = {"desired": f"query-failed:{type(e).__name__}"}
             try:
                 log = get_text(f"{RUN}_log.txt", sb)
-                lines = [l for l in log.splitlines() if l.startswith("=== ")]
-                cur = lines[-1] if lines else ""
+                # Only THIS pod's bootstrap prints "fuse armed". Until that
+                # appears, whatever is in the object belongs to someone else.
+                if "fuse armed" not in log:
+                    cur = ""
+                else:
+                    lines = [l for l in log.splitlines() if l.startswith("=== ")]
+                    cur = lines[-1] if lines else ""
             except Exception:
                 cur = last
             if cur != last:
