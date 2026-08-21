@@ -50,7 +50,7 @@ def row(req, base, final, thr, ev, status, risk=""):
             "remaining_risk": risk}
 
 
-def build(F, B=None, val=None, st=None, vw=None, valbase=None):
+def build(F, B=None, val=None, st=None, vw=None, valbase=None, imp=None):
     R = []
     built = F.get("built_components", [])
     hyg = F.get("hygiene", {})
@@ -255,6 +255,21 @@ def build(F, B=None, val=None, st=None, vw=None, valbase=None):
         "PASS" if not inherited else "FAIL",
         "MIXED nodes are partly re-used original geometry -- read the percentage"))
 
+    # ---- resampled-original shape test
+    sh = F.get("shape_origin_audit", {}).get("parts", {})
+    resamp = {k: v["pct_within_1mm"] for k, v in sh.items()
+              if v.get("verdict") == "RESAMPLED_ORIGINAL"}
+    R.append(row("HIDDEN ORIGINAL FASCIA -- shape audit: is any 'new' part the "
+                 "old melt RE-TESSELLATED? (centroid matching cannot see that)",
+                 "n/a", f"{len(resamp)} of {len(sh)} parts read as resampled "
+                 f"original: {resamp or 'none'}",
+                 "0 parts sitting within 1 mm of the original surface everywhere",
+                 "verify_front_gate.json:shape_origin_audit",
+                 "PASS" if not resamp else "FAIL",
+                 "a rebuilt part that deliberately hugs the original silhouette "
+                 "also reads small -- this narrows the question, it does not "
+                 "close it alone"))
+
     # ---- validator
     if val:
         ne = val.get("counts", {}).get("errors")
@@ -270,12 +285,34 @@ def build(F, B=None, val=None, st=None, vw=None, valbase=None):
                      "not run", "0 errors", "-", "NOT TESTED"))
 
     # ---- fresh import / viewer
-    R.append(row("Fresh-import test in a brand-new Blender process "
-                 "(materials, orientation, scale, component placement)",
-                 "V5 imported clean", F.get("_fresh_import", "not run"),
-                 "imports, dimensions match, components present",
-                 "verify/renders/FINAL_*_import.json",
-                 F.get("_fresh_import_status", "NOT TESTED")))
+    if imp:
+        objs = imp.get("objects", {})
+        dims = imp.get("dimensions_m", {})
+        want = set(F.get("built_components", []))
+        got = {o.split(".")[0] for o in objs}
+        miss = sorted(want - got)
+        bb = F.get("bbox_m", {})
+        dim_ok = (abs(dims.get("length_x", 0) - bb.get("L_x", -1)) < 1e-3
+                  and abs(dims.get("height_z", 0) - bb.get("H_y", -1)) < 1e-3
+                  and abs(dims.get("width_y", 0) - bb.get("W_z", -1)) < 1e-3)
+        negs = [o for o, v in objs.items() if v.get("negative_scale")]
+        R.append(row("Fresh-import test in a brand-new Blender process "
+                     "(materials, orientation, scale, component placement)",
+                     "V5 imported clean: 24 objects, 4.282 x 1.789 x 1.455 m",
+                     f"{len(objs)} mesh objects, {len(imp.get('materials', {}))} "
+                     f"materials, dims {dims}, ground min z "
+                     f"{imp.get('ground_min_z_mm')} mm, missing components "
+                     f"{miss or 'none'}, negative scales {negs or 'none'}",
+                     "every component imports, dimensions match the source file, "
+                     "no negative scales",
+                     "verify/renders/*_import.json + *_front.png",
+                     "PASS" if (not miss and dim_ok and not negs) else "FAIL",
+                     "" if dim_ok else "imported dimensions differ from the file"))
+    else:
+        R.append(row("Fresh-import test in a brand-new Blender process",
+                     "V5 imported clean", "not run",
+                     "imports, dimensions match, components present", "-",
+                     "NOT TESTED"))
     if vw:
         R.append(row("Headless <model-viewer> load (Chromium + SwiftShader)",
                      "V5: PASS", vw.get("verdict", "?"),
@@ -308,13 +345,14 @@ def main():
     ap.add_argument("--validator-base")
     ap.add_argument("--selftest")
     ap.add_argument("--viewer")
+    ap.add_argument("--import-json", dest="import_json")
     ap.add_argument("--out", required=True)
     ap.add_argument("--md")
     a = ap.parse_args()
     ld = lambda p: json.load(open(p)) if p else None      # noqa: E731
     F = ld(a.final)
     rows = build(F, ld(a.baseline), ld(a.validator), ld(a.selftest),
-                 ld(a.viewer), ld(a.validator_base))
+                 ld(a.viewer), ld(a.validator_base), ld(a.import_json))
     json.dump({"rows": rows, "file": F.get("file"), "sha256": F.get("sha256")},
               open(a.out, "w"), indent=1)
     hdr = ["Requirement", "Baseline", "Final measured", "Threshold", "Evidence",
