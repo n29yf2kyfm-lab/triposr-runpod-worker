@@ -393,11 +393,60 @@ def respray_control(path, out_dir, cams, new_rgba=(0.05, 0.12, 0.75, 1.0),
 # variant + negative-control builders
 # ==========================================================================
 
+def cull_hidden(src, dst, target_material, dilate=2, verbose=True):
+    """Delete only the faces of `target_material` with NO line of sight from ANY
+    camera. Reuses mobile_export's EXACT per-face ray test, which is the right
+    implementation and already carries its own hard-won caveats.
+
+    Why this rung exists at all: on `car_rebound.glb` the `Interior` shell is
+    331,014 triangles -- 33.6% of the whole car -- and its bbox spans the entire
+    body, so it is an inner shell of the car, not cabin furniture. A UNIFORM
+    decimation ratio spends a third of its error budget on geometry nobody can
+    see, while taking that same error out of the paint and the wheels that
+    everybody can.
+
+    It is NOT free budget. Measured in mobile_export.py: 15.24% of car pixels
+    show interior through the glazing (22.26% from the rear), which is exactly
+    the through-glass read the owner's glazing ruling protects. So the cull is
+    line-of-sight EXACT, treats glass as transparent so through-glass sightlines
+    count as visible, and dilates the keep-set over face adjacency.
+    """
+    sys.path.insert(0, MACHINE)
+    import mobile_export as ME
+    # TWO DIFFERENT NAME SPACES, and they do not agree on this car.
+    # `hidden_face_mask` looks the target up in `scene.geometry`, which trimesh
+    # keys by MESH name; `apply_face_cull` looks it up by MATERIAL name. Here the
+    # mesh is `Interior` and the material is `Interior_Plastic`, so passing one
+    # name to both raises. Resolve the mesh name from the material binding.
+    js, _ = MM.glb_read(src)
+    mats = js.get("materials", [])
+    mesh_names = [m.get("name") for m in js["meshes"]
+                  for p in m["primitives"]
+                  if "material" in p
+                  and mats[p["material"]].get("name") == target_material]
+    if len(set(mesh_names)) != 1:
+        raise ValueError("material %r maps to %d distinct meshes (%s); the cull "
+                         "target must be unambiguous"
+                         % (target_material, len(set(mesh_names)), sorted(set(mesh_names))))
+    geom_name = mesh_names[0]
+    keep, stats = ME.hidden_face_mask(src, target=geom_name, dilate=dilate,
+                                      verbose=verbose)
+    ME.apply_face_cull(src, dst, target_material, keep)
+    stats["meshName"] = geom_name
+    stats["materialName"] = target_material
+    return stats
+
+
 def build_variant(master, out, recipe, workdir):
-    """recipe: dict with optional weld/simplifyRatio/simplifyError/compress."""
+    """recipe: dict with optional cullHidden/weld/simplifyRatio/simplifyError/compress."""
     os.makedirs(workdir, exist_ok=True)
     cur = master
     t0 = time.time()
+    if recipe.get("cullHidden"):
+        nxt = os.path.join(workdir, "cull.glb")
+        recipe = dict(recipe)
+        recipe["cullStats"] = cull_hidden(cur, nxt, recipe["cullHidden"])
+        cur = nxt
     if recipe.get("weld", True) and (recipe.get("simplifyRatio") is not None):
         nxt = os.path.join(workdir, "w.glb")
         if not os.path.exists(nxt):
@@ -567,6 +616,12 @@ LADDER = {
     "dec30":   {"simplifyRatio": 0.30, "compress": "draco"},
     "dec20":   {"simplifyRatio": 0.20, "compress": "draco"},
     "dec12":   {"simplifyRatio": 0.12, "compress": "draco"},
+    # TARGETED rungs: spend the error budget only on geometry somebody can see.
+    "cull":    {"cullHidden": "Interior_Plastic", "compress": "draco"},
+    "cull50":  {"cullHidden": "Interior_Plastic", "simplifyRatio": 0.50,
+                "compress": "draco"},
+    "cull30":  {"cullHidden": "Interior_Plastic", "simplifyRatio": 0.30,
+                "compress": "draco"},
 }
 DEFAULT_LADDER = ["draco", "dec50", "dec30", "dec20"]
 
