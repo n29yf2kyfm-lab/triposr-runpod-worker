@@ -109,20 +109,12 @@ def r_boundary(ob):
 def r_nonmanifold(ob):
     def f(bm):
         bm.verts.ensure_lookup_table()
-        bm.faces.ensure_lookup_table()
-        v = bm.faces[0].verts[:3]
-        bm.faces.new(v)          # third face on an existing edge pair
+        bm.edges.ensure_lookup_table()
+        e = next(e for e in bm.edges if len(e.link_faces) == 2)
+        nv = bm.verts.new((3.0, 3.0, 3.0))
+        bm.faces.new((e.verts[0], e.verts[1], nv))
     edit(ob, f)
-    return "duplicated a face -> edges with 3 link_faces"
-
-
-def r_dupface(ob):
-    def f(bm):
-        bm.faces.ensure_lookup_table()
-        vs = list(bm.faces[0].verts)
-        bm.faces.new(list(reversed(vs)))   # same vertex SET, opposite winding
-    edit(ob, f)
-    return "added a face on the same 3 verts, reversed winding"
+    return "3rd face fanned off an existing 2-face edge -> that edge has 3 link_faces"
 
 
 def r_zero_area(ob):
@@ -171,6 +163,42 @@ def r_selfisect(ob):
     return "added a triangle piercing the cube, sharing no vertex"
 
 
+def control_dupface():
+    """duplicate_faces needs from_pydata: bmesh REFUSES a second face on a
+    vertex triple that already carries one ("face already exists"), which is
+    the very reason Blender's glTF importer drops the 924 duplicate triples in
+    this car. So this predicate CANNOT fire on any imported GLB — the file-level
+    counter in gltf_facts.duplicate_vertex_triples is the authority there. It is
+    still proven to fire here, on a mesh built without bmesh."""
+    bpy.ops.wm.read_factory_settings(use_empty=True)
+    verts = [(0, 0, 0), (1, 0, 0), (0, 1, 0), (0, 0, 1)]
+    faces = [(0, 1, 2), (0, 1, 3), (0, 2, 3), (1, 2, 3)]
+    me = bpy.data.meshes.new("clean")
+    me.from_pydata(verts, [], faces)
+    ob = bpy.data.objects.new("clean", me)
+    bpy.context.collection.objects.link(ob)
+    base = S.mesh_stats(ob, 10 ** 9)["duplicate_faces"]
+
+    me2 = bpy.data.meshes.new("rigged")
+    me2.from_pydata(verts, [], faces + [(2, 1, 0)])   # same triple, reversed
+    ob2 = bpy.data.objects.new("rigged", me2)
+    bpy.context.collection.objects.link(ob2)
+    after = S.mesh_stats(ob2, 10 ** 9)["duplicate_faces"]
+
+    okk = base == 0 and after - base >= 1
+    RESULTS.append({"control": "duplicate_face", "predicate": "duplicate_faces",
+                    "rig": "from_pydata tetra + a 5th face on triple (0,1,2) reversed",
+                    "clean": base, "rigged": after, "delta": after - base,
+                    "expect_delta_at_least": 1, "clean_is_zero": base == 0,
+                    "fired": after - base >= 1, "PASS": okk,
+                    "caveat": ("cannot fire on an IMPORTED GLB — bmesh refuses "
+                               "duplicate triples, so the importer drops them; "
+                               "use gltf_facts.duplicate_vertex_triples on the file")})
+    print(f"{'PASS' if okk else 'FAIL':4} {'duplicate_face':28} "
+          f"{'duplicate_faces':28} clean={base} rigged={after} delta={after-base}")
+    return okk
+
+
 def main():
     out = argv()[0]
     ok = True
@@ -178,7 +206,7 @@ def main():
     ok &= control("loose_edge", "loose_edges", r_loose_edge, 1)
     ok &= control("open_boundary", "boundary_edges", r_boundary, 3)
     ok &= control("nonmanifold_edge", "nonmanifold_edges", r_nonmanifold, 1)
-    ok &= control("duplicate_face", "duplicate_faces", r_dupface, 1)
+    ok &= control_dupface()
     ok &= control("zero_area_face", "zero_area_faces", r_zero_area, 1)
     ok &= control("degenerate_tri", "degenerate_triangles", r_degenerate, 1)
     ok &= control("inconsistent_winding", "inconsistent_winding_edges",
@@ -190,7 +218,7 @@ def main():
     ob = fresh()
     clean = S.mesh_stats(ob, 10 ** 9)
     must_be_zero = ["loose_vertices", "loose_edges", "boundary_edges",
-                    "nonmanifold_edges", "duplicate_faces", "zero_area_faces",
+                    "nonmanifold_edges", "zero_area_faces",
                     "degenerate_triangles", "inconsistent_winding_edges",
                     "inverted_components", "self_intersections"]
     clean_ok = all(clean[k] == 0 for k in must_be_zero)

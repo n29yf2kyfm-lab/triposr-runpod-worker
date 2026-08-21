@@ -119,7 +119,10 @@ def main(path, outpath):
     prim_rows = []
     tri_file = 0
     tri_nondegen = 0
+    dup_total = 0
     degen_by_prim = {}
+    dup_by_prim = {}
+    dup_by_mesh = {}
 
     for mi, mesh in enumerate(g["meshes"]):
         for pi, p in enumerate(mesh["primitives"]):
@@ -129,18 +132,37 @@ def main(path, outpath):
                 idx = [v[0] for v in read_accessor(g, bin_, p["indices"])]
                 ntri = len(idx) // 3
                 dg = 0
+                # DUPLICATE VERTEX-TRIPLE = a second face on a triple that
+                # already carries one. BMesh refuses to create it, so Blender's
+                # importer silently DROPS it and the count can never be seen
+                # from the imported scene -- it has to be measured HERE.
+                # These ship to the viewer and z-fight; the Khronos validator
+                # does not flag them (it flagged 1 of the 928 on this car).
+                seen = set()
+                dup = 0
                 for t in range(ntri):
                     a, b, c = idx[3 * t], idx[3 * t + 1], idx[3 * t + 2]
                     if a == b or b == c or a == c:
                         dg += 1
+                        continue
+                    k = tuple(sorted((a, b, c)))
+                    if k in seen:
+                        dup += 1
+                    else:
+                        seen.add(k)
                 tri = ntri
             else:
                 tri = pos["count"] // 3
                 dg = 0
+                dup = 0
             tri_file += tri
             tri_nondegen += tri - dg
+            dup_total += dup
             if dg:
                 degen_by_prim[f"meshes/{mi}/primitives/{pi}"] = dg
+            if dup:
+                dup_by_prim[f"meshes/{mi}/primitives/{pi}"] = dup
+            dup_by_mesh[mesh.get("name")] = dup_by_mesh.get(mesh.get("name"), 0) + dup
             prim_rows.append({
                 "mesh": mi, "mesh_name": mesh.get("name"), "prim": pi,
                 "mode": mode, "material": p.get("material"),
@@ -148,6 +170,7 @@ def main(path, outpath):
                                   if p.get("material") is not None
                                   and p["material"] < len(mats) else None),
                 "triangles": tri, "degenerate_by_index": dg,
+                "duplicate_vertex_triples": dup,
                 "vertices": pos["count"],
                 "has_NORMAL": "NORMAL" in p["attributes"],
                 "has_TEXCOORD_0": "TEXCOORD_0" in p["attributes"],
@@ -188,6 +211,11 @@ def main(path, outpath):
         "triangles_nondegenerate_by_index": tri_nondegen,
         "degenerate_by_index_total": tri_file - tri_nondegen,
         "degenerate_by_primitive": degen_by_prim,
+        "duplicate_vertex_triples_total": dup_total,
+        "duplicate_vertex_triples_by_primitive": dup_by_prim,
+        "duplicate_vertex_triples_by_mesh": {k: v for k, v in sorted(
+            dup_by_mesh.items(), key=lambda kv: -kv[1]) if v},
+        "importable_triangles": tri_nondegen - dup_total,
         "primitive_modes": sorted({r["mode"] for r in prim_rows}),
         "primitives": prim_rows,
         "nodes": node_rows,
@@ -196,6 +224,8 @@ def main(path, outpath):
     print("triangles declared      :", tri_file)
     print("degenerate BY INDEX     :", tri_file - tri_nondegen)
     print("non-degenerate          :", tri_nondegen)
+    print("duplicate vertex-triples:", dup_total)
+    print("importable (file - degen - dup):", tri_nondegen - dup_total)
     print("primitive modes present :", out["primitive_modes"])
     print("degenerate per primitive:", degen_by_prim)
 
