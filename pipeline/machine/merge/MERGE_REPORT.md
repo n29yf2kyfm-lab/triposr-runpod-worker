@@ -246,6 +246,22 @@ disagreeing with geometry, missing NORMAL) each stop the operator.
 
 ---
 
+## 10. Render rig, verified numerically
+
+Orthographic, Standard view transform (never AgX), Cycles, denoising off (this
+container has no OIDN), ground drawn as real geometry at y=0 so a floating or
+sunken tyre cannot be hidden. The BEFORE and AFTER frames use **byte-identical
+camera parameters** — `ev_base/cameras.json` == `ev_merged/cameras.json`,
+compared as data, because Gate 6 lost a before/after pair to a camera that moved
+between the two.
+
+Exposure checked as a number, not by eye: the flat 0.22 world lands at **129.5
+sRGB** in the background of the side and front frames (target ~130), with
+**0.43–0.59%** of pixels clipped. The hero frame's corner sample reads 171.9
+because that corner is the ground plane, not sky.
+
+---
+
 ## Files
 
 `car-meshes/staging/merge/`
