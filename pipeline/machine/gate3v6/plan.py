@@ -99,19 +99,27 @@ def explode_ranks(boxes, names, axis_gltf="-x"):
     # Order matters and is most-specific-first: "Plate_Carrier" is a CARRIER
     # (deep) even though it contains "plate", and "Grille_Upper_Trim" is TRIM
     # (outermost) even though it contains "grille".
+    # SIX layers, outermost last. Six rather than four because a front end nests:
+    # bumper contains grille contains slat. With the wells and the bumper on one
+    # rank they stayed a single congested clump in the exploded view and the
+    # assembly order could not be read.
     layer = []
     for n in names:
         s = n.lower()
-        if re.search(r"carrier|mount|housing|well|recess|frame|surround|backstop", s):
-            r = 1
-        elif re.search(r"inner|internal|reflector|projector|bezel|shroud|module", s):
-            r = 2
+        if re.search(r"carrier|mount|bracket|recess|well", s):
+            r = 3                       # before the "plate"/"badge" test: Plate_CARRIER,
+                                        # Plate_RECESS, Grille_WELL
+        elif re.search(r"lens|badge|emblem|trim|cover|plate|glass", s):
+            r = 6
         elif re.search(r"drl|slat|blade|louvre|mesh|grid", s):
-            r = 3
-        elif re.search(r"lens|badge|emblem|plate|cover|glass|trim", s):
+            r = 5
+        elif re.search(r"inner|internal|reflector|projector|bezel|shroud|module", s):
             r = 4
-        elif re.search(r"grille|grill|intake|vent|duct|bumper|splitter|bonnet|"
-                       r"valance|apron|skirt", s):
+        elif re.search(r"housing|well|recess|frame|surround|backstop", s):
+            r = 3
+        elif re.search(r"grille|grill|intake|vent|duct", s):
+            r = 2
+        elif re.search(r"bumper|splitter|apron|valance|skirt|bonnet|fender|wing", s):
             r = 1
         else:
             r = 0
