@@ -3619,3 +3619,55 @@ so published dimensions ARE a usable generation control, but ±5.6% misses the p
 **58.3** against the input's 503.7: it controls proportion, not surfacing. The perspective taper is
 absent (0.860/0.854/0.860 vs Hi3DGen's 0.878/0.858/**0.653**), and a wrong-box internal control
 shows **the bbox is not what removes it** — that is a property of the model.
+
+## COMPRESSION: 3.82x on a real sample, and EIGHT defects — every one in the INSTRUMENT (2026-08-21)
+
+`pipeline/machine/compress_catalogue.py`, run on 20 assets spanning **0.149 → 47.935 MB** (including
+the catalogue's largest) plus 2 colour variants. **13 shipped all five gates: 166.6 → 42.4 MB, 3.93x.**
+Across all 20 processed: 275.7 → 72.2 MB, **3.82x**. Artefacts in `car-meshes/staging/compressed/`.
+**Nothing published, no URL changed, live catalogue verified identical (1,405 entries, 0 diffs).**
+
+**The tool had been written and NEVER RUN.** Running it found eight bugs and **not one of them was in
+an asset**. The two that matter most:
+
+* **`run_controls()` WAS DEAD CODE.** `--controls` was documented, there was no argparse flag, and
+  nothing called it. **The negative controls had never once fired.** Fifth instance this session of a
+  check that could not fail.
+* **G5 PASSED ELEVEN BLANK IMAGES at 46.24 dB.** `max-camera-orbit="auto auto 1000m"` blanks small
+  models, and **25.2% of the catalogue is that small** — world diagonal spans **0.038 to 11,083
+  units, five orders of magnitude**. A fidelity gate comparing two blank frames scores beautifully.
+
+**THE MEASUREMENT TO MAKE ROUTINE: run the gate against a `gltf-transform copy` of the master** —
+byte-different, geometrically identical — and call that its NOISE FLOOR. Across the fixes it went
+**19.31 → 46.15 → 50.28 → 99.0 dB**. A 35 dB threshold sitting under a 19 dB floor is a coin toss,
+and **no individual number ever looked wrong.** Do this for any new metric before trusting a
+threshold on it.
+
+Also found: `TYRE_MAT` refused plurals (`Tires`, `Pneus`), so G2 was blind on 10 of 60 live cars while
+printing "no tyre-NAMED material in this car" — a claim about the car that was a fact about the regex
+(106 → 133 of 191 cars now measurable); `rims?` ate `chrome_trim`/`primer` and `disc` ate every Land
+Rover **Disc**overy; close-up cameras sat INSIDE the car (radius floor 0.35x diag below the bounding
+radius 0.5x diag); and a renderer crash condemned a whole asset instead of degrading to NOT_TESTED.
+
+**`gltf-transform draco` WELDS UNCONDITIONALLY — it is not appearance-neutral on seam-heavy models.**
+The Lamborghini Urus rejected at **11.96 dB with a ratio of 1.027**: a barely-changed file cannot lose
+12 dB, so it was chased. Not quantisation — PSNR is IDENTICAL at texcoord 12/14/16 and normal 10/12,
+even where the file grew; materials, textures, samplers and images are byte-identical. The weld runs
+**123,279 → 120,986 vertices at every setting including maximum precision**, triangles unchanged. On a
+glossy black car that moves mean pixel **27.5 → 51.3** and visibly changes the render. Noise floor on
+that same car: 99.0 dB. **More bits will not fix it** — such cars need a different recipe.
+
+**Judge PSNR PER ZONE, not whole-car.** `vw-polo-gti` scored a whole-car mean of **41.75 dB and would
+have passed**; only the per-zone minimum (a tyre close-up at 31.85) caught it.
+
+**Report BLOCKED-BY-MASTER separately from REJECT.** 3 of the 7 non-shipping assets fail the gate on
+their UNCOMPRESSED live master too — e.g. `audi-a2-v1` tyre `Pneus` luminance 0.2151, byte-identical
+both sides. The compression broke nothing there; collapsing those into "reject" would blame the wrong
+stage and hide a live-catalogue defect.
+
+**Full-catalogue projection, measured not assumed:** 1,044 base assets = **14,606.8 MB**. At the
+measured pass rate (60.1% of bytes at this recipe, 4.19x on those) that is **8,778 → 2,094 MB, saving
+6.7 GB now**, with 5,828 MB needing a master fix or a different recipe first. Runtime **91.5 s/asset
+sequential** ≈ 26.5 h for the bases, ~9.6 days for all **9,100 objects (129 GB)** including the 8,056
+variants. Parallelism is the lever but **validate it first** — the PSNR settle waits are time-based,
+so concurrent browsers could perturb the very number the gate turns on.
