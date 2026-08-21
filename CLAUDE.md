@@ -3571,3 +3571,51 @@ file` at minute 39 of a $0.85 pod; the extension was FINE — `libc10.so` only r
 once `torch` is imported, and the library's own call site imports torch first. Use
 `import torch, <ext>`. Same class as the P3-SAM preflight that aborted a healthy run: **a safety
 check that is itself wrong costs exactly as much as no safety check.**
+
+## THE OPEN-SOURCE SURFACING QUESTION IS CLOSED AT 1024³ — measured, $0.32 (2026-08-21)
+
+The cheapest decisive experiment in the programme, and it answers a question every previous
+measurement conflated: **"the model cannot imagine sharp panels" versus "the representation cannot
+hold them."** Nobody had separated them.
+
+**Method.** Hand `VAST-AI/TripoSF` (SparseFlex) — a 1024³ sparse-voxel **mesh-in / mesh-out
+reconstruction VAE, not a generator** — the sharpest car in the catalogue (Kia Sportage NQ5,
+identity verified by eye from a shaded render first) and measure what comes back. This is a
+**PERFECT conditioning signal**: the target mesh itself. If sharpness dies here, no improvement to
+conditioning can rescue it.
+
+**Result: FAIL. Crease retention 78.1% (500.1 → 390.6) against a pre-registered 80%.**
+Shape held — symmetric chamfer **0.1477% of bbox diagonal (~7.8 mm)**, extents within 0.05% on all
+three axes, grille honeycomb cells still individually countable, alloy spokes intact.
+**Feature scale did not** — KIA badge gone, shut lines broken into ragged dashes, window surrounds
+and roof rails torn into gashes, new surface speckle. **1024³ over a 4.5 m car is ~4.4 mm/voxel and
+a shut line is 2–4 mm: what died is exactly what sits at or below one voxel.**
+
+**STRATEGIC ANSWER: better conditioning cannot buy catalogue-grade panel crispness on a
+1024³-class open model.** Even the target mesh itself does not survive the round trip.
+**Limits, stated: n=1 car, one model, one resolution.** It says nothing about a 1536³ tier, and
+TripoSF is clearly better than the 512³ class — the honeycomb grille survived, which nothing in the
+earlier generator record did.
+
+**A NEAR-MISS WORTH MORE THAN THE VERDICT.** At the 60° dihedral floor the recon showed **99.4%
+"retention"** and would have been reported as a PASS. A probe written BEFORE the run — designed to
+prove the rival theory — showed the recon carries **6.0× as many deep-crease edges, each a sixth as
+long, with the median one ~3 cm from the nearest real crease**. Eroded features plus added noise,
+cancelling in a total. This is the noise-sphere control from the other side, and together they mean:
+**never report a crease total without locating the creases.**
+
+**Baseline correction that would otherwise have been a false benchmark:** the catalogue's recorded
+Sportage **270.7 is a GLB-TOPOLOGY number** — 468 primitives hide every panel seam from
+`face_adjacency`. The **welded** OBJ the VAE actually consumes measures **500.1**. Quoting a
+GLB-topology figure against a welded reconstruction compares two different things. Check the
+topology basis before comparing any two crease numbers, including the Pixal3D 271.6 in this file.
+
+**LEG B — Hunyuan3D-Omni bbox conditioning: real authority, but soft, and not a sharpness fix.**
+Undocumented axis convention now measured: bbox slot *i* → mesh axis *i*, normalised max = 1, with
+x = length, y = height, z = width (the repo docstring says six numbers; the code and demo use three
+— read the code). Given the Golf Mk8's true ratios it returned height **−1.1%**, width **+5.6%** —
+so published dimensions ARE a usable generation control, but ±5.6% misses the production brief's
+±1%, and an implausible box was partly resisted and blended back toward the image prior. Crease
+**58.3** against the input's 503.7: it controls proportion, not surfacing. The perspective taper is
+absent (0.860/0.854/0.860 vs Hi3DGen's 0.878/0.858/**0.653**), and a wrong-box internal control
+shows **the bbox is not what removes it** — that is a property of the model.
