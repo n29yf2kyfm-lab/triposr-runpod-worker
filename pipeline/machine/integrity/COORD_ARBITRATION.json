@@ -1,0 +1,126 @@
+{
+  "a_duplicate_faces": {
+    "extras_beyond_first": 924,
+    "all_members_of_duplicate_groups": 1847,
+    "index_degenerate": 4,
+    "extras_plus_degenerate": 928,
+    "observed_delta": 928,
+    "verdict": "extras+degenerate reproduces the observed delta exactly",
+    "note": "counting every member of a duplicate group instead of the extras gives 1847+4=1851, which overshoots \u2014 a group of 2 loses 1 face, not 2"
+  },
+  "b_unreferenced_positions": {
+    "positions_declared_total": 1899971,
+    "unreferenced_per_primitive": 1297156,
+    "verifier_reported": 1297156
+  },
+  "rows": [
+    {
+      "mesh": 17,
+      "name": "Interior",
+      "extras": 679,
+      "group_members": 1357,
+      "degenerate": 0,
+      "positions": 433848,
+      "unreferenced": 323641
+    },
+    {
+      "mesh": 28,
+      "name": "Arch_Liner",
+      "extras": 75,
+      "group_members": 150,
+      "degenerate": 0,
+      "positions": 282344,
+      "unreferenced": 210406
+    },
+    {
+      "mesh": 12,
+      "name": "Underbody",
+      "extras": 56,
+      "group_members": 112,
+      "degenerate": 0,
+      "positions": 84732,
+      "unreferenced": 63040
+    },
+    {
+      "mesh": 3,
+      "name": "Wheel_RL_Tyre",
+      "extras": 29,
+      "group_members": 58,
+      "degenerate": 0,
+      "positions": 8477,
+      "unreferenced": 0
+    },
+    {
+      "mesh": 7,
+      "name": "Wheel_FR_Rim",
+      "extras": 15,
+      "group_members": 30,
+      "degenerate": 0,
+      "positions": 15511,
+      "unreferenced": 0
+    },
+    {
+      "mesh": 1,
+      "name": "Wheel_RR_Rim",
+      "extras": 12,
+      "group_members": 24,
+      "degenerate": 0,
+      "positions": 14176,
+      "unreferenced": 0
+    },
+    {
+      "mesh": 4,
+      "name": "Wheel_RL_Rim",
+      "extras": 11,
+      "group_members": 22,
+      "degenerate": 0,
+      "positions": 12257,
+      "unreferenced": 0
+    },
+    {
+      "mesh": 25,
+      "name": "Bumper_Front_Paint",
+      "extras": 11,
+      "group_members": 22,
+      "degenerate": 0,
+      "positions": 181720,
+      "unreferenced": 163021
+    },
+    {
+      "mesh": 27,
+      "name": "Body_Glass_Reverted",
+      "extras": 10,
+      "group_members": 20,
+      "degenerate": 0,
+      "positions": 17728,
+      "unreferenced": 8864
+    },
+    {
+      "mesh": 10,
+      "name": "Wheel_FL_Rim",
+      "extras": 6,
+      "group_members": 12,
+      "degenerate": 0,
+      "positions": 12844,
+      "unreferenced": 0
+    },
+    {
+      "mesh": 19,
+      "name": "Glass_Side_R",
+      "extras": 5,
+      "group_members": 10,
+      "degenerate": 0,
+      "positions": 5424,
+      "unreferenced": 0
+    },
+    {
+      "mesh": 8,
+      "name": "Wheel_FR_Disc",
+      "extras": 4,
+      "group_members": 8,
+      "degenerate": 4,
+      "positions": 1480,
+      "unreferenced": 0
+    }
+  ]
+}
