@@ -88,3 +88,4 @@ print("TOTAL bytes in bucket:", sum(v for k, v in got.items() if k.startswith(ba
 print("UPLOAD_VERIFIED" if ok else "UPLOAD_INCOMPLETE")
 sys.exit(0 if ok else 1)
 PY
+python3 "$TMP/check.py" "$FILE" "$BASE" "$CHUNK" "$TMP/listing.json"
