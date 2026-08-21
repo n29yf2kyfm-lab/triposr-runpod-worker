@@ -44,6 +44,25 @@ score is nearly uninformative on its own. The render decides. Density also
 depends on tessellation, so treat these as order-of-magnitude controls, not a
 conversion table.
 
+AND RAISING THE DIHEDRAL FLOOR DOES NOT RESCUE IT. crease2.py bands at 25/45/60/90
+degrees on the reasoning that a real shut line stays above 60 degrees however finely
+it is sampled. That reasoning is sound; the CONVERSE — that only real features live
+in the deep bands — is false, measured:
+
+  control                    >=25d   >=45d   >=60d   >=90d
+  smooth icosphere             0.0     0.0     0.0     0.0
+  gaussian noise amp 0.003     7.8     0.0     0.0     0.0
+  gaussian noise amp 0.010   199.4   100.1    54.1    12.3
+  gaussian noise amp 0.030   445.3   375.9   324.4   216.0
+  Kia Sportage NQ5 (real)    271.5   121.2    64.2    16.4
+
+A noise sphere at amp 0.010 reproduces the real car's ENTIRE four-band profile to
+within ~25%, while containing no shut line, no slat and no lamp recess at all. Noise
+populates the deep bands too; it only needs a larger amplitude. So no crease statistic
+at any threshold separates "detailed" from "rough" — it separates "something angular
+is present" from "nothing is". Use it as a necessary-not-sufficient screen and let the
+render carry the verdict.
+
 Usage:
   crease_density.py a.glb b.glb ...
 """
