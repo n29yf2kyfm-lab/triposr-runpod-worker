@@ -3160,3 +3160,36 @@ wheel-corrected `car_gate6_repaired_TEXTURES-REDUCED.glb` and Gate 7+8's materia
 reconstruct it — rebuild the front on `car_rebound.glb`, which is a better base than v6
 ever had, and record Gate 3 v6 itself as **BLOCKED — DELIVERABLE LOST**, with its
 measurements retained as evidence of what was achieved rather than as a passing verdict.
+
+## `glass_probe` PASSES A CAR WITH A BODY-COLOURED WINDSCREEN (2026-08-21, Golf glass gate)
+
+`glass_probe` reads the material **TABLE**. It cannot see **which faces carry which material**. So a car
+whose glazing material is properly transparent — BLEND, `KHR_materials_transmission`, sane IOR — scores
+**clear / proven** even when the actual windscreen APERTURE is filled with `carpaint`.
+
+Found on the Golf Mk8 working car, which had passed Gate 7+8's glazing check cleanly:
+`Glass_Windscreen` held **0.1622 m²**, of which **87.4% was a single 2,183-face component 75 mm tall with
+mean normal (-0.25, 0.97, 0.03)** — the SCUTTLE PANEL, not a screen. At the centreline the body climbed a
+raked screen surface from y 1.05 to y 1.25 and **nothing above y 1.15 was glazing at all**. After repair:
+**0.1622 → 0.9894 m²**.
+
+**Proved by respray control, not by inference** — the decisive test, and it is cheap: render a blue respray
+at one locked camera. **The input's windscreen turns blue with the body; a correct car's does not.** In the
+18,071 changed pixels, blue-painted share fell 40.06% → 12.97% and luma 109.6 → 60.5, while a bonnet control
+moved ≤0.1/255 and a tyre control was bit-identical.
+
+**Why this matters beyond one car.** Under the owner's confirmed 2026-08-11 ruling a body-coloured windscreen
+is a SCRAP, and `glass_probe` is the instrument that ruling is enforced with — 119 live cars were scrapped on
+its verdict. This blind spot is the OPPOSITE error: it passes cars it should fail. **The exposure across the
+catalogue is UNMEASURED, not zero.** Nothing has been re-audited for it.
+
+**The cheap screen for it, if a sweep is ever run:** compare each glazing node's AREA against the aperture it
+is supposed to fill, and check the node's mean normal is consistent with a screen rather than a near-horizontal
+scuttle or shelf. A windscreen at 0.16 m² on a hatchback is absurd on its face; the number was simply never
+looked at, because the probe returned "proven" and nobody asked "proven over how much surface?".
+
+**Related trap, same gate: `trimesh` silently drops every KHR material extension on ANY glTF round-trip** —
+transmission, IOR and clearcoat all vanish, while `alphaMode` survives. So `glass_probe` STILL PASSES a car
+whose glazing has stopped refracting entirely. Reading the written material table is the only thing that
+catches it. Confirmed independently by the Gate 3 v7 agent the same day; `restore_material_ext.py` and
+`finish.py` both exist to repair it. **Run one of them after every trimesh round-trip in this repo.**
