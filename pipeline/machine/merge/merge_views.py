@@ -42,6 +42,7 @@ def parse():
              views=os.environ.get("MV_VIEWS", "top,front,side,hero"),
              res=int(os.environ.get("MV_RES", "1400")),
              samples=int(os.environ.get("MV_SAMPLES", "32")))
+    a["matid"] = "--matid" in ARGS
     i = 2
     while i < len(ARGS):
         if ARGS[i] == "--paint":
@@ -72,6 +73,30 @@ def main():
     bpy.ops.wm.read_factory_settings(use_empty=True)
     bpy.ops.import_scene.gltf(filepath=a["car"])
 
+    if a["matid"]:
+        # Flat unique emission per material, no lights, no world: one label
+        # colour per pixel, deterministic. A point-sampled shaded render cannot
+        # be used to build material masks (CLAUDE.md, label_bench).
+        import colorsys
+        names = sorted(m.name for m in bpy.data.materials)
+        for i, nm in enumerate(names):
+            m = bpy.data.materials[nm]
+            h = (i * 0.6180339887) % 1.0
+            r, g, b = colorsys.hsv_to_rgb(h, 0.95, 1.0)
+            m.use_nodes = True
+            nt = m.node_tree
+            for n in list(nt.nodes):
+                nt.nodes.remove(n)
+            em = nt.nodes.new("ShaderNodeEmission")
+            em.inputs[0].default_value = (r, g, b, 1)
+            op = nt.nodes.new("ShaderNodeOutputMaterial")
+            nt.links.new(em.outputs[0], op.inputs[0])
+            m.blend_method = "OPAQUE"
+        json.dump({nm: [round(c, 6) for c in colorsys.hsv_to_rgb(
+            (i * 0.6180339887) % 1.0, 0.95, 1.0)]
+            for i, nm in enumerate(names)},
+            open(os.path.join(a["out"], "matid_colors.json"), "w"), indent=1)
+
     if a["paint"]:
         r, g, b = a["paint"]
         for m in bpy.data.materials:
@@ -83,8 +108,17 @@ def main():
     sc = bpy.context.scene
     sc.render.engine = "CYCLES"
     sc.cycles.device = "CPU"
-    sc.cycles.samples = a["samples"]
+    sc.cycles.samples = 1 if a["matid"] else a["samples"]
     sc.cycles.use_denoising = False       # no OIDN in this container
+    if os.environ.get("MV_NOGI") == "1":
+        # Direct light only. The respray control needs to separate "this
+        # material took the paint" from "this material is near-black and is
+        # lit by bounce off a body that just changed colour". With diffuse
+        # bounces off, a dark trim stops following the body hue; a genuinely
+        # painted surface does not.
+        sc.cycles.diffuse_bounces = 0
+        sc.cycles.glossy_bounces = 0
+        sc.cycles.max_bounces = 1
     sc.render.resolution_x = sc.render.resolution_y = a["res"]
     sc.render.film_transparent = False
     sc.view_settings.view_transform = "Standard"
@@ -94,11 +128,14 @@ def main():
     world = bpy.data.worlds.new("w")
     sc.world = world
     world.use_nodes = True
-    world.node_tree.nodes["Background"].inputs[0].default_value = (.22, .22, .22, 1)
+    bgv = (0, 0, 0, 1) if a["matid"] else (.22, .22, .22, 1)
+    world.node_tree.nodes["Background"].inputs[0].default_value = bgv
     world.node_tree.nodes["Background"].inputs[1].default_value = 1.0
 
     # three keys, deliberately soft and symmetric so neither flank is favoured
-    for pos, e in (((4, -6, 5), 900), ((-5, -5, 4), 700), ((0, 7, 4), 500)):
+    sc.render.filter_size = 0.01 if a["matid"] else 1.5
+    for pos, e in (() if a["matid"] else
+                   (((4, -6, 5), 900), ((-5, -5, 4), 700), ((0, 7, 4), 500))):
         lt = bpy.data.lights.new("k", "AREA")
         lt.energy = e
         lt.size = 5.0
@@ -109,7 +146,10 @@ def main():
                              ).to_track_quat("-Z", "Y").to_euler()
 
     # ground plane at y=0 (glTF) -> z=0 (Blender)
-    bpy.ops.mesh.primitive_plane_add(size=14, location=(0, 0, -0.0005))
+    if a["matid"]:
+        bpy.ops.mesh.primitive_plane_add(size=0.001, location=(0, 0, -50))
+    else:
+        bpy.ops.mesh.primitive_plane_add(size=14, location=(0, 0, -0.0005))
     gm = bpy.data.materials.new("ground")
     gm.use_nodes = True
     gm.node_tree.nodes["Principled BSDF"].inputs["Base Color"].default_value = (.30, .30, .32, 1)

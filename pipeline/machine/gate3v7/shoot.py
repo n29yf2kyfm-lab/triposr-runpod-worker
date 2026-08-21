@@ -61,9 +61,13 @@ if not ok or missing:
 meta = json.load(open(os.path.join(outdir, "_meta_%s.json" % name)))
 for vid, m in meta["views"].items():
     ms = m.get("measured", {})
+    ex = m.get("exposure", {}) or {}
+    bg = ms.get("bg_corner_srgb", ["?"])
     print(f"  {vid:26s} {m['pass']:8s} az{m['az']:>4} "
-          f"occ {m.get('proj_bbox_occ_x',0):.3f}x{m.get('proj_bbox_occ_y',0):.3f} "
-          f"clip {ms.get('clipped_frac', float('nan')):.5f} "
-          f"bg {ms.get('bg_srgb_measured','?')} exp {m['view_transform']} "
-          f"{m['seconds']}s")
+          f"occ {ms.get('occ_x', 0):.3f}x{ms.get('occ_y', 0):.3f} "
+          f"clip_frame {ms.get('clipped_frac_frame', float('nan')):.6f} "
+          f"clip_car {ms.get('clipped_frac_nonbg', float('nan')):.6f} "
+          f"bg {bg[0]}/exp{m.get('expected_bg_srgb','?')} "
+          f"stops {ex.get('exposure_stops', 0.0):+.3f} "
+          f"{m['view_transform']} {m['seconds']}s")
 print("SHOOT_OK", name)
