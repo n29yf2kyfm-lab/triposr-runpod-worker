@@ -49,8 +49,9 @@ rep = {"GAP": GAP, "FLANGE": FLANGE, "T_HATCH": T_HATCH, "T_BUMPER": T_BUMPER,
        "AP_U": AP_U, "AP_Y0": AP_Y0, "AP_Y1": AP_Y1}
 
 _sc = trimesh.load(GLB, force="scene", process=False)
+from rear_zone import EXCLUDE as _EXCL          # ADAPTATION: see rear_zone.py
 _P = np.vstack([g.triangles_center for n, g in _sc.geometry.items()
-                if not n.startswith(("Tail_Lens", "Tail_Housing", "Rear_Plate"))])
+                if not n.startswith(_EXCL)])
 _ye = np.arange(0.20, 0.60, 0.01)
 _lo, _hi = [], []
 for _y in _ye:

@@ -28,14 +28,21 @@ from patchlib import Patch
 INP, OUT = sys.argv[1], sys.argv[2]
 STRIPPED_ONLY = sys.argv[3] if len(sys.argv) > 3 else None
 
+import os
 DEPTH_BACK = 0.060
 DEPTH_FRONT = 0.150
-KEEP = ("Tail_Lens", "Tail_Housing", "Lamp_Lens",     # constructed / front lamps
-        "Tyre_Rubber", "Rim_Alloy")                   # wheels are another gate's scope
+# ADAPTATION 2026-08-21 (six-gate merge): env overrides, Gate-4 values as
+# defaults.  See rear_zone.py for why.
+KEEP = tuple(x for x in os.environ.get(
+    "REAR2_KEEP",
+    "Tail_Lens,Tail_Housing,Lamp_Lens,Tyre_Rubber,Rim_Alloy").split(",") if x)
 # measured: without the wheel exclusion the bumper footprint, which sweeps to
 # theta ~ +-88 deg to reach both flank tangents, clipped 211 rear-tyre sidewall
 # faces. Small, but it is a hole in a component this gate must not touch.
-DROP_NODES = ("Rear_Plate", "Rear_Plate_Recess")      # replaced by the new build
+DROP_NODES = tuple(x for x in os.environ.get(
+    "REAR2_DROP", "Rear_Plate,Rear_Plate_Recess").split(",") if x)
+PAINT_NODE = os.environ.get("REAR2_PAINT_NODE", "carpaint")
+GLASS_NODE = os.environ.get("REAR2_GLASS_NODE", "Rear_Glass")
 
 d = np.load("build/panels.npz")
 NV, NU = int(d["NV"]), int(d["NU"])
@@ -166,7 +173,9 @@ sc = trimesh.load(INP, force="scene", process=False)
 G = dict(sc.geometry)
 rep = {"DEPTH_BACK": DEPTH_BACK, "DEPTH_FRONT": DEPTH_FRONT, "stripped": {}}
 out = trimesh.Scene()
-RENAME = {"Rear_Hatch": "Rear_Upper_Legacy_Melt", "Rear_Bumper": "Rear_Bumper_Legacy_Melt"}
+RENAME = json.loads(os.environ.get("REAR2_RENAME", json.dumps(
+    {"Rear_Hatch": "Rear_Upper_Legacy_Melt",
+     "Rear_Bumper": "Rear_Bumper_Legacy_Melt"})))
 total_removed = 0
 for name, g in G.items():
     if name in DROP_NODES:
@@ -199,9 +208,16 @@ if STRIPPED_ONLY:
 if OUT != "/dev/null":
     from trimesh.visual.material import PBRMaterial
     from trimesh.visual import TextureVisuals
-    uvp = np.load("build/uv_paint.npy")
-    paint_mat = G["carpaint"].visual.material
-    glass_mat = G["Rear_Glass"].visual.material
+    # ADAPTATION 2026-08-21 (six-gate merge).  `build/uv_paint.npy` is a single
+    # (1,2) UV picking one texel of Gate 4's TEXTURED carpaint, tiled over each
+    # new painted panel so it takes the body colour from the texture.  The Gate
+    # 7+8 rebound lineage's `carpaint` carries NO texture at all (0 images in
+    # the file), so there is no texel to pick and a fabricated UV would be
+    # meaningless.  Absent file -> uv=None, which is what an untextured PBR
+    # material wants.  The paint material itself is unchanged either way.
+    uvp = np.load("build/uv_paint.npy") if os.path.exists("build/uv_paint.npy") else None
+    paint_mat = G[PAINT_NODE].visual.material
+    glass_mat = G[GLASS_NODE].visual.material
     dark = PBRMaterial(name="Shut_Line_Dark", baseColorFactor=[0.030, 0.030, 0.034, 1.0],
                        metallicFactor=0.0, roughnessFactor=0.85)
     plate_mat = PBRMaterial(name="Rear_Plate", baseColorFactor=[0.878, 0.878, 0.851, 1.0],
@@ -214,7 +230,8 @@ if OUT != "/dev/null":
         # WRAP THE MATERIAL IN A FRESH TextureVisuals: reassigning an existing
         # TextureVisuals onto a mesh with a different vertex count silently
         # drops the binding on export (premium.py's recorded trap).
-        uv = np.tile(uvp, (len(m.vertices), 1)) if textured else None
+        uv = (np.tile(uvp, (len(m.vertices), 1))
+              if (textured and uvp is not None) else None)
         m.visual = TextureVisuals(uv=uv, material=mat)
         out.add_geometry(m, geom_name=nm, node_name=nm)
         return int(len(m.faces))
@@ -235,7 +252,8 @@ if OUT != "/dev/null":
     # RE-READ THE WRITTEN FILE and assert. Not the scene in memory: the export
     # is the step that has silently dropped normals on this programme before.
     import subprocess
-    chk = subprocess.run([sys.executable, __file__.rsplit("/", 1)[0] + "/glb_assert.py", OUT],
+    chk = subprocess.run([sys.executable, __file__.rsplit("/", 1)[0] + "/glb_assert.py",
+                          OUT, INP],          # ADAPTATION: diff against the INPUT
                          capture_output=True, text=True)
     print(chk.stdout.strip() or chk.stderr.strip()[-800:])
     if "GLB_ASSERT_OK" not in chk.stdout:

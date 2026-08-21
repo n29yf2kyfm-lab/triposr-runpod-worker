@@ -51,13 +51,48 @@ Y_SILL = 0.965
 # the coordinate system, not the car. hatch_surr also stops at y=1.325, short
 # of the roof turn where the +z D-pillar plunges forward 370 mm in 0.09 of
 # height and no low-order surface can follow it honestly.
+import os
+# ADAPTATION 2026-08-21 (six-gate merge).  `src` names the node whose lateral
+# extent per height IS the panel's OUTLINE (its shut line).  On Gate 4's
+# rear_v3.glb the tailgate and rear bumper are already separated components, so
+# the outline is simply read off them.  On the Gate 7+8 rebound lineage they are
+# not: the tailgate lives inside `Body_Shell` and the rebound `Bumper_Rear_*`
+# nodes reach up to y 0.903, well past the real bumper shut line at 0.560.
+#
+# So `src` accepts the sentinel "__zone__", which reconstructs the outline
+# GEOMETRICALLY: every non-excluded rear-zone point clipped to the patch's own
+# z-domain and to x > REAR2_ZONE_XMIN.  VALIDATED against Gate 4's separated
+# `Rear_Hatch` on the same car in the same frame: the reconstruction agrees to
+# 0.1-15.5 mm through the whole hatch_low band (median ~4 mm) and to 3-36 mm
+# over most of hatch_surr, against a melt component whose own boundary is
+# ragged by ~100 mm.  The two outliers (the backlight sill at y 0.98 and the
+# roof turn above y 1.26) are rejected by smooth_curve's robust IRLS fit.
+_SRC_B = tuple(x for x in os.environ.get("REAR2_SRC_BUMPER", "Rear_Bumper").split(",") if x)
+_SRC_H = tuple(x for x in os.environ.get("REAR2_SRC_HATCH", "Rear_Hatch").split(",") if x)
+ZONE_XMIN = float(os.environ.get("REAR2_ZONE_XMIN", "1.35"))
 PATCH = {
- "bumper":     dict(ylo=0.230, yhi=0.560, src=("Rear_Bumper",),  mode="radial",   du=9, dv=4, dy=0.012),
- "hatch_low":  dict(ylo=0.560, yhi=Y_SILL, src=("Rear_Hatch",),  mode="cartphys", du=6, dv=5, dy=0.012,
+ "bumper":     dict(ylo=0.230, yhi=0.560, src=_SRC_B,  mode="radial",   du=9, dv=4, dy=0.012),
+ "hatch_low":  dict(ylo=0.560, yhi=Y_SILL, src=_SRC_H,  mode="cartphys", du=6, dv=5, dy=0.012,
                     zdom=(-0.53, 0.53)),
- "hatch_surr": dict(ylo=Y_SILL, yhi=1.325, src=("Rear_Hatch",),  mode="cartphys", du=6, dv=5, dy=0.012,
+ "hatch_surr": dict(ylo=Y_SILL, yhi=1.325, src=_SRC_H,  mode="cartphys", du=6, dv=5, dy=0.012,
                     zdom=(-0.73, 0.60)),
 }
+
+
+def src_points(cfg):
+    """The point set whose per-height lateral extent defines this panel's outline."""
+    if tuple(cfg["src"]) == ("__zone__",):
+        z0, z1 = cfg.get("zdom", (-1e9, 1e9))
+        m = (P[:, 2] >= z0) & (P[:, 2] <= z1) & (P[:, 0] > ZONE_XMIN)
+        if m.sum() < 5000:
+            raise SystemExit(f"REFUSED: __zone__ outline for this patch found only "
+                             f"{m.sum()} points; it cannot define a shut line")
+        return P[m]
+    missing = [x for x in cfg["src"] if x not in G]
+    if missing:
+        raise SystemExit(f"REFUSED: outline source node(s) {missing} absent from "
+                         f"{GLB}; nodes present: {sorted(G)}")
+    return np.vstack([G[s].triangles_center for s in cfg["src"]])
 
 
 def outer_x(P, y, dy, z_edges, min_pts=3, spike_mm=12.0):
@@ -124,7 +159,7 @@ for name, cfg in PATCH.items():
     C = section_centre(P, ys)
     cx, c_cx = smooth_curve(ys, C[:, 0]); cz, c_cz = smooth_curve(ys, C[:, 1])
     C = np.stack([cx, cz], 1)
-    src = np.vstack([G[s].triangles_center for s in cfg["src"]])
+    src = src_points(cfg)
     lo, hi, c_lo, c_hi = outline(src, ys, cfg["dy"], C, cfg["mode"])
     U, V, R = [], [], []
     for j, y in enumerate(ys):

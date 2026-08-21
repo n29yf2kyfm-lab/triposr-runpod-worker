@@ -35,12 +35,25 @@ Y_HATCH_BOT = Y_BUMPER_TOP
 Z_HATCH_EDGE = 0.5275
 
 
-def load_points(sc, exclude_prefix=("Tail_Lens", "Tail_Housing", "Rear_Plate")):
+import os
+
+# ADAPTATION 2026-08-21 (six-gate merge).  The node NAMES below are Gate 4's;
+# the same operations are replayed on the Gate 7+8 rebound lineage, whose nodes
+# are named differently.  Every override is an ENV VAR with the Gate-4 value as
+# its default, so re-running this gate on rear_v3.glb is byte-for-byte the
+# behaviour it always had, and nothing here changes what the code DOES.
+EXCLUDE = tuple(x for x in os.environ.get(
+    "REAR2_EXCLUDE", "Tail_Lens,Tail_Housing,Rear_Plate").split(",") if x)
+
+
+def load_points(sc, exclude_prefix=None):
     """face centres + owner index, excluding CONSTRUCTED parts.
 
     The Gate-4 lamp and plate solids sit ON the surface; including them would
     make the measured profile ride the lens crest instead of the panel.
     """
+    if exclude_prefix is None:
+        exclude_prefix = EXCLUDE
     G = dict(sc.geometry)
     names = [n for n in G if not n.startswith(exclude_prefix)]
     pts = [G[n].triangles_center for n in names]
