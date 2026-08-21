@@ -130,13 +130,23 @@ def run(job):
         transparent = (pss in ("mask", "zebra"))
         render_settings(res_x, res_y, samples, flat=flat, world_grey=wg,
                         transparent=transparent)
+        if view.get("filter_size") is not None:
+            # matID/label passes want AA OFF (a point-sampled label render gives
+            # random z-fighting speckle where two shells are coincident, which
+            # reads as raggedness when the label is fine). The WIREFRAME pass is
+            # the opposite: without AA a 1px wire aliases into noise.
+            bpy.context.scene.render.filter_size = float(view["filter_size"])
+        if view.get("adaptive") is not None:
+            bpy.context.scene.cycles.use_adaptive_sampling = bool(view["adaptive"])
 
         # ---- lights + ground -------------------------------------------
         if flat:
             clear_lights()
         elif pss == "zebra":
             clear_lights()
-            rig.set_stripe_world(n_stripes=view.get("n_stripes", 26))
+            rig.set_stripe_world(n_stripes=view.get("n_stripes", 26),
+                                 dark=view.get("stripe_dark", 0.035),
+                                 bright=view.get("stripe_bright", 1.7))
             bpy.context.scene.cycles.glossy_bounces = 3
         else:
             studio_lights(centre, diag, bright=view.get("bright", 1.0))
@@ -148,9 +158,25 @@ def run(job):
         # ---- camera ------------------------------------------------------
         az = view["az"]
         elev = view.get("elev", 0.0)
+
+        # ---- fit point set FIRST, then aim the camera at it ---------------
+        # Aiming at the scene centre and correcting with a whole-frame lens
+        # shift put the exploded views on empty background. The camera is now
+        # pointed at the thing being framed; shift only trims the residual.
+        fitset = view.get("fit_objects")
+        if fitset:
+            fp = scene_points([o for o in vis if o.name.split(".")[0] in set(fitset)])
+            if len(fp) == 0:
+                fp = scene_points(vis, stride=stride)
+        else:
+            fp = scene_points(vis, stride=stride)
+        fc = (fp.min(0) + fp.max(0)) / 2.0
+
         ty = view.get("target_y_gltf")
-        tgt = (float(centre[0]), float(centre[1]),
-               float(ty) if ty is not None else float(centre[2]))
+        aim = view.get("aim", "fit" if fitset else "scene")
+        base = fc if aim == "fit" else centre
+        tgt = (float(base[0]), float(base[1]),
+               float(ty) if ty is not None else float(base[2]))
         if view.get("target_x_gltf") is not None:
             tgt = (float(view["target_x_gltf"]), tgt[1], tgt[2])
         if view.get("target_z_gltf") is not None:
@@ -159,17 +185,12 @@ def run(job):
 
         if view.get("cam", "ortho") == "ortho":
             cam = make_camera("CAM_%s" % vid, az, elev, tgt, radius, ortho_scale=10.0)
-            fitset = view.get("fit_objects")
             if view.get("ortho_scale"):
                 cam.data.ortho_scale = float(view["ortho_scale"])
-                if view.get("shift"):
-                    cam.data.shift_x, cam.data.shift_y = view["shift"]
+                sh = view.get("shift")
+                if sh:
+                    cam.data.shift_x, cam.data.shift_y = sh
             else:
-                if fitset:
-                    fp = scene_points([o for o in vis
-                                       if o.name.split(".")[0] in set(fitset)])
-                else:
-                    fp = scene_points(vis, stride=stride)
                 fit_ortho(cam, fp, res_x, res_y, view.get("occ", 0.80))
             # For the symmetry overlay the optical axis must pass EXACTLY through
             # the mirror plane (glTF z=0), otherwise a mirrored image is compared
@@ -185,13 +206,11 @@ def run(job):
             cam.data.sensor_width = sensor
             if view.get("ortho_scale") is None:
                 # perspective fit: pull the camera in/out until the projected
-                # silhouette bbox hits the target occupancy (1-D solve, 8 iters)
-                fp = scene_points(vis, stride=stride)
+                # silhouette bbox hits the target occupancy (1-D solve)
                 target = view.get("occ", 0.80)
-                for _ in range(8):
+                ar = res_x / float(res_y)
+                for _ in range(10):
                     u0, v0, u1, v1 = project_extent(cam, fp, res_x, res_y)
-                    ar = res_x / float(res_y)
-                    cur = max(u1 - u0, (v1 - v0) / (1.0 if ar >= 1 else 1.0))
                     cur = max(u1 - u0, v1 - v0)
                     if abs(cur - target) < 0.004:
                         break
@@ -200,9 +219,15 @@ def run(job):
                     d = Vector(tgt) - cam.location
                     cam.rotation_euler = d.to_track_quat("-Z", "Y").to_euler()
                     bpy.context.view_layer.update()
-                u0, v0, u1, v1 = project_extent(cam, fp, res_x, res_y)
-                cam.data.shift_x += 0.5 - (u0 + u1) / 2.0
-                cam.data.shift_y += (0.5 - (v0 + v1) / 2.0) / (res_x / float(res_y))
+                for _ in range(3):
+                    u0, v0, u1, v1 = project_extent(cam, fp, res_x, res_y)
+                    Wm, Hm, U = rig._frame_dims(cam.data, ar)
+                    du = (u0 + u1) / 2.0 - 0.5
+                    dv = (v0 + v1) / 2.0 - 0.5
+                    if max(abs(du), abs(dv)) < 1e-4:
+                        break
+                    cam.data.shift_x += du * (Wm / U)
+                    cam.data.shift_y += dv * (Hm / U)
                 bpy.context.view_layer.update()
 
         # optional SECTION cut: a near-plane slice through a named glTF point.

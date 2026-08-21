@@ -116,10 +116,12 @@ def proof_views(ly, groups, boxes_lo, boxes_hi, lamp_centre):
     # 4 neutral clay front
     V.append(dict(id="p04_clay_front", pass_="clay", samples=SAMPLES_CLAY,
                   ground=False, **front))
-    # 5 wireframe front (higher res: 1 px wires on a dense mesh)
+    # 5 wireframe front (higher res: sub-pixel wires on a dense mesh, WITH AA -
+    # a 1 px wire without anti-aliasing reads as noise, not as topology)
     w = dict(front); w["res"] = RES_WIRE
-    V.append(dict(id="p05_wireframe_front", pass_="wire", wire_px=0.85,
-                  samples=SAMPLES_FLAT, ground=False, **w))
+    V.append(dict(id="p05_wireframe_front", pass_="wire", wire_px=0.75,
+                  samples=_s(24), filter_size=1.3, adaptive=True,
+                  ground=False, **w))
     # 6 normal diagnostic
     V.append(dict(id="p06_normals_front", pass_="normals", samples=SAMPLES_FLAT,
                   ground=False, **front))
@@ -137,18 +139,22 @@ def proof_views(ly, groups, boxes_lo, boxes_hi, lamp_centre):
                   ground_grey=0.30, radius_mult=2.2))
     # 10 symmetry overlay source = the canonical front (no_shift_x already set)
     #    (composed in post from p01; no extra render)
-    # 11 front assembly exploded
+    # 11 front assembly exploded — the body shell stays as CONTEXT, the bulk
+    #    inner/glass/wheel shells are hidden so every front component reads.
+    bulk = sorted(set(groups["interior"]) | set(groups["glass"]) | set(groups["wheels"]))
     V.append(dict(id="p11_front_exploded", az=305, elev=12.0, cam="ortho",
-                  target_y_gltf=ly, occ=0.86, res=RES_MAIN, pass_="explode_id",
-                  samples=SAMPLES_FLAT, ground=False,
-                  fit_objects=frontkit,
+                  occ=0.90, res=RES_MAIN, pass_="explode_id",
+                  samples=SAMPLES_FLAT, ground=False, hide=bulk,
+                  fit_objects=frontkit, aim="fit",
                   explode=dict(axis_blender=[-1, 0, 0], spacing=0.34,
                                ranks=planner.explode_ranks(BOXES, frontkit))))
-    # 12 headlamp exploded
+    # 12 headlamp exploded — components only, no shell, so nothing can hide a
+    #    part that is not actually there
     V.append(dict(id="p12_headlamp_exploded", az=305, elev=10.0, cam="ortho",
-                  target_y_gltf=lamp_centre[1], occ=0.88, res=RES_MAIN,
+                  occ=0.88, res=RES_MAIN,
                   pass_="explode_id", samples=SAMPLES_FLAT, ground=False,
-                  fit_objects=lamps,
+                  hide=sorted(set(bulk) | set(groups["base"])),
+                  fit_objects=lamps, aim="fit",
                   explode=dict(axis_blender=[-1, 0, 0], spacing=0.30,
                                ranks=planner.explode_ranks(BOXES, lamps))))
     # 13 old-geometry-removed: same front camera, new components HIDDEN

@@ -357,7 +357,7 @@ def surface_gap_mm(VA, FA, VB, FB, n=4000, seed=0):
             "A_watertight": bool(mA.is_watertight), "B_watertight": bool(mB.is_watertight)}
 
 
-def check_clearance(car, parts=None, max_pairs_report=200):
+def check_clearance(car, parts=None, max_pairs_report=400):
     parts = parts if parts is not None else car.built
     out = {"pairs": {}, "intersecting": [], "note": ""}
     # only pairs whose AABBs are within 60 mm of each other are worth measuring
@@ -369,7 +369,12 @@ def check_clearance(car, parts=None, max_pairs_report=200):
             a, b = keys[i], keys[j]
             (lo1, hi1), (lo2, hi2) = box[a], box[b]
             sep = np.maximum(lo1 - hi2, lo2 - hi1).max()
-            if sep > 0.06:
+            # neighbouring parts get a 60 mm window; the owner's named
+            # inventory (lamp/grille/bumper/badge/plate/splitter) gets 150 mm so
+            # the report can quote a real gap for the pairs that were asked for
+            # rather than silently omitting them as "far apart"
+            lim = 0.15 if (a in REQUIRED and b in REQUIRED) else 0.06
+            if sep > lim:
                 continue
             A, B = car.nodes[a], car.nodes[b]
             ix = pair_intersection(A["V"], A["F"], B["V"], B["F"])
@@ -557,8 +562,21 @@ def check_hidden_fascia(car, zone_m=0.65, pitch=0.006, win=(0.002, 0.250), v0=No
     XMIN = float(lo[0])
     built_idx = {i for i, n in enumerate(car.names) if n in car.built}
 
-    ys = np.arange(0.32, 1.00, pitch)
-    zs = np.arange(-0.82, 0.82, pitch)
+    # The grid must cover every constructed component, not a hard-coded window:
+    # a splitter that sits below y=0.32 or a bonnet lead above y=1.00 would
+    # otherwise be sampled partially or not at all, and a probe that does not
+    # look at a part cannot find melt behind it.
+    y0, y1, z0, z1 = 0.32, 1.00, -0.82, 0.82
+    for n in car.built:
+        d = car.nodes[n]
+        if len(d["F"]) == 0:
+            continue
+        y0 = min(y0, float(d["V"][:, 1].min()) - 0.01)
+        y1 = max(y1, float(d["V"][:, 1].max()) + 0.01)
+        z0 = min(z0, float(d["V"][:, 2].min()) - 0.01)
+        z1 = max(z1, float(d["V"][:, 2].max()) + 0.01)
+    ys = np.arange(y0, y1, pitch)
+    zs = np.arange(z0, z1, pitch)
     ZZ, YY = np.meshgrid(zs, ys)
     N = ZZ.size
     org = np.stack([np.full(N, XMIN - 0.5), YY.ravel(), ZZ.ravel()], 1)
@@ -629,7 +647,9 @@ def check_hidden_fascia(car, zone_m=0.65, pitch=0.006, win=(0.002, 0.250), v0=No
 
     res = {
         "rays": int(N), "grid_pitch_mm": pitch * MM,
-        "zone": {"x_from_nose_m": zone_m, "y": [0.32, 1.00], "z": [-0.82, 0.82]},
+        "zone": {"x_from_nose_m": zone_m,
+                 "y": [round(y0, 4), round(y1, 4)], "z": [round(z0, 4), round(z1, 4)],
+                 "note": "grid auto-expanded to cover every constructed component"},
         "depth_window_mm": [win[0] * MM, win[1] * MM],
         "rays_hitting_anything": int((n_hits > 0).sum()),
         "rays_component_first": int(comp_first.sum()),

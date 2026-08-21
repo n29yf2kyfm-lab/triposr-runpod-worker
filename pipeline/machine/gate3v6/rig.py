@@ -410,56 +410,74 @@ def make_camera(name, az, elev, target, radius, ortho_scale=None, lens=None, shi
     return o
 
 
+def _frame_dims(cd, aspect):
+    """World (or sensor) width/height of the frame, and the unit that Blender's
+    shift_x / shift_y are expressed in (always the LARGER of the two under the
+    default AUTO sensor fit)."""
+    s = cd.ortho_scale if cd.type == "ORTHO" else cd.sensor_width
+    if aspect >= 1.0:
+        Wm, Hm = s, s / aspect
+    else:
+        Wm, Hm = s * aspect, s
+    return Wm, Hm, max(Wm, Hm)
+
+
 def project_extent(cam, pts, res_x, res_y):
-    """True projected extent of a point cloud in normalised camera space.
-    Returns (u0,v0,u1,v1) in [0,1] NDC-ish (may exceed for offscreen points)."""
-    from bpy_extras.object_utils import world_to_camera_view
-    scn = bpy.context.scene
+    """Projected extent of a point cloud in frame-normalised coords, 0..1.
+
+    SHIFT-AWARE. The first version ignored cd.shift_* and the recentring step
+    then applied a correction with an INVERTED SIGN, which framed the exploded
+    views on empty background (found 2026-08-21 in the dry run). In Blender a
+    POSITIVE shift moves the frame in +x, so image content moves in -u.
+    """
     M = np.array(cam.matrix_world.inverted())
     P = pts @ M[:3, :3].T + M[:3, 3]          # camera space, -Z forward
     cd = cam.data
     aspect = res_x / float(res_y)
+    Wm, Hm, U = _frame_dims(cd, aspect)
     if cd.type == "ORTHO":
-        s = cd.ortho_scale
-        if aspect >= 1.0:
-            sx, sy = s, s / aspect
-        else:
-            sx, sy = s * aspect, s
-        u = P[:, 0] / sx + 0.5
-        v = P[:, 1] / sy + 0.5
+        x, y = P[:, 0], P[:, 1]
     else:
-        f = cd.lens
-        sw = cd.sensor_width
         z = np.clip(-P[:, 2], 1e-6, None)
-        if aspect >= 1.0:
-            sx, sy = sw, sw / aspect
-        else:
-            sx, sy = sw * aspect, sw
-        u = (P[:, 0] * f / z) / sx + 0.5
-        v = (P[:, 1] * f / z) / sy + 0.5
+        x = P[:, 0] * cd.lens / z
+        y = P[:, 1] * cd.lens / z
+    u = x / Wm + 0.5 - cd.shift_x * (U / Wm)
+    v = y / Hm + 0.5 - cd.shift_y * (U / Hm)
     return float(u.min()), float(v.min()), float(u.max()), float(v.max())
 
 
-def fit_ortho(cam, pts, res_x, res_y, target_occ):
+def fit_ortho(cam, pts, res_x, res_y, target_occ, recentre=True,
+              recentre_x=True, recentre_y=True):
     """Set ortho_scale so the projected silhouette bbox fills target_occ of the
-    frame in its LARGER normalised dimension. Analytic, exact for ortho."""
+    frame in its LARGER normalised dimension, then recentre with camera shift.
+
+    Camera shift is a LENS shift, not a camera move: it does not change the
+    camera's height, position or lens, so an 8-view sheet stays 'identical
+    lens, height, scale' while each tile is still centred.
+    """
     cd = cam.data
+    aspect = res_x / float(res_y)
+    cd.shift_x = cd.shift_y = 0.0
     cd.ortho_scale = 10.0
     u0, v0, u1, v1 = project_extent(cam, pts, res_x, res_y)
-    aspect = res_x / float(res_y)
-    if aspect >= 1.0:
-        w_m = (u1 - u0) * 10.0
-        h_m = (v1 - v0) * (10.0 / aspect)
-        need = max(w_m / 1.0, h_m / (1.0 / aspect))
-    else:
-        w_m = (u1 - u0) * (10.0 * aspect)
-        h_m = (v1 - v0) * 10.0
-        need = max(w_m / aspect, h_m)
-    cd.ortho_scale = need / target_occ
-    # recentre via camera shift so the silhouette is centred in frame
-    u0, v0, u1, v1 = project_extent(cam, pts, res_x, res_y)
-    cd.shift_x += (0.5 - (u0 + u1) / 2.0) * (1.0 if aspect >= 1 else aspect)
-    cd.shift_y += (0.5 - (v0 + v1) / 2.0) * (1.0 / aspect if aspect >= 1 else 1.0)
+    Wm, Hm, U = _frame_dims(cd, aspect)
+    w_m = (u1 - u0) * Wm
+    h_m = (v1 - v0) * Hm
+    cd.ortho_scale = max(w_m, h_m * aspect if aspect >= 1 else h_m) / target_occ
+    if aspect < 1.0:
+        cd.ortho_scale = max(w_m / aspect, h_m) / target_occ
+    if recentre:
+        for _ in range(3):
+            u0, v0, u1, v1 = project_extent(cam, pts, res_x, res_y)
+            Wm, Hm, U = _frame_dims(cd, aspect)
+            du = (u0 + u1) / 2.0 - 0.5
+            dv = (v0 + v1) / 2.0 - 0.5
+            if max(abs(du), abs(dv)) < 1e-4:
+                break
+            if recentre_x:
+                cd.shift_x += du * (Wm / U)
+            if recentre_y:
+                cd.shift_y += dv * (Hm / U)
     return cd.ortho_scale
 
 
