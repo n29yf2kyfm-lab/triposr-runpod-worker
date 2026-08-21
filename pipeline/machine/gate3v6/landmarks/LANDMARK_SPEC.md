@@ -142,9 +142,16 @@ extent must not be used as a diameter.
   Its bottom edge is level within 7 mm. **Slat count is UNRELIABLE** — the plate hides the top of
   the grille in both references, so no count is quoted.
 * **Outer intakes:** a **body-colour surround** framing a black recessed opening, containing
-  **THREE bright chrome/silver blades stacked vertically**, each thickest inboard and tapering
-  outboard. Counted independently on the near side of each reference — HIGH confidence.
+  **THREE bright chrome/silver blades stacked vertically**, each thickest outboard and tapering to
+  a point inboard. A **fourth bright line below them is NOT a blade** — it is the specular edge of
+  the intake's lower surround; do not model it as one. MEDIUM-HIGH confidence.
   This is the Style signature: **no honeycomb, no red stripe, no R-Line intake surrounds.**
+
+  *Correction log:* my first draft said "three … HIGH confidence, counted independently in both
+  references". A numeric bright-peak count of the column profiles then returned **four** groups.
+  Re-examining at 6.5× resolved the fourth as the surround edge. The count stands at three; the
+  confidence is downgraded to MEDIUM-HIGH and the trap is recorded rather than the original claim
+  defended.
 * **There is no splitter.** Below the grille the bumper continues as a plain **body-colour
   valance**, a 144 mm band from the grille's bottom edge (410) to the bumper's lowest edge (554).
   No contrasting blade, no black lip, no add-on part in either reference. Splitter *depth* is

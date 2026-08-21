@@ -315,9 +315,9 @@
   "outer_intake": {
    "what": "The outboard air intake at each end of the lower bumper. This is the feature that identifies STYLE trim.",
    "surround": "A body-colour frame around a black recessed opening - NOT an R-Line/GTI full-width honeycomb, and no red stripe.",
-   "internal_pattern": "THREE bright chrome/silver blades stacked vertically inside the black opening, each curving so that it is thickest inboard and tapers outboard. Clearly resolved in REF_PRESS; the same three blades are visible in REF_FRONT on the near side.",
+   "internal_pattern": "THREE bright chrome/silver blades stacked vertically inside the black opening, each curving so that it is thickest outboard and tapering to a point inboard. A FOURTH bright line sits below them and is NOT a blade - it is the specular edge of the intake's lower surround. Do not model it as a fourth blade.",
    "blade_count": 3,
-   "blade_count_confidence": "HIGH - counted independently in both references on the near side of each.",
+   "blade_count_confidence": "MEDIUM-HIGH. Counted by eye at 6.5x/1.7x zoom AND numerically as bright-peak groups in column profiles: REF_PRESS columns x=780 and x=800 both give 3 groups inside the opening plus 1 at the lower surround; REF_FRONT gives 3 blades by eye, of which only 2 clear the same brightness threshold. I first wrote this as HIGH and downgraded it after the numeric check showed a fourth bright line - which turned out to be the surround edge, not a blade.",
    "top_edge_vertical": {
     "mm_below_bonnet_edge": 230.0,
     "tol_mm": 20,
@@ -326,7 +326,8 @@
    "top_edge_note": "REF_PRESS only. The intake's top edge sits ABOVE the number plate's bottom edge (272 mm) and below its top edge (162 mm) - i.e. it overlaps the plate band vertically.",
    "lateral": "UNRELIABLE (same reason as headlamp_outer_corner). Structurally, the intake's outboard edge runs out to the bumper corner and its inboard edge stops well short of the plate.",
    "source": "both",
-   "confidence": "HIGH (structure, blade count) / MEDIUM (top edge) / UNRELIABLE (lateral)"
+   "confidence": "HIGH (structure, blade count) / MEDIUM (top edge) / UNRELIABLE (lateral)",
+   "blade_count_correction_log": "Original draft claimed 'THREE ... HIGH confidence, counted independently in both references'. A follow-up column-profile count found FOUR bright groups. Re-examination at 6.5x resolved the fourth as the intake's lower surround edge. Count stands at three; confidence downgraded to MEDIUM-HIGH and the trap recorded."
   },
   "splitter": {
    "what": "Front splitter / lower lip.",
