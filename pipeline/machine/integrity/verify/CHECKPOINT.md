@@ -75,3 +75,32 @@ and BOTH numbers reported.
 - `pipeline/machine/viewer_check.py` has a latent crash (KeyError 'bbox_min_y') when a
   model reports 0x0x0 dims: the printout is guarded by `if d:` but the field is only set
   when `scale > 0`. It took the run down before any console output was written.
+
+## UPDATE 19:57 — CORRECTION to my own earlier wheel diagnosis
+I wrote that the +Y wheel void was **inverted winding**. That was WRONG and I withdraw it.
+The cull-ON vs cull-OFF comparison (`ZOOM_cull_wheels.jpg`) is identical on both sides:
+if the rim face had reversed normals, culling would have deleted it. It did not change.
+The true mechanism: **the two sides carry entirely DIFFERENT wheel meshes** — a finished
+10-spoke alloy on the -Y side, a plain dished disc with a small centre motif on +Y. That
+is exactly what the geometry already said (FRim 20,217 vs 24,543 tris; FDisc area 30.28%
+apart). Mirroring was never involved (all determinants +1).
+
+## INTERIM ARTEFACT MEASURED (car_wheels_fixed.glb, sha 16069a5e…, hash-verified)
+Pulled from `car-meshes/staging/integrity/glb/`, NOT from the repair agent's work dir.
+- unreferenced positions 1,297,156 -> **0**; file 25.68 -> 20.09 MB
+- declared bbox now EQUALS referenced bbox (was 29.3 mm apart)
+- L2 ledger delta 928 -> **0** (degenerate 4->0, duplicate index triples 924->0)
+- Khronos validator 0/0/1/273 -> **0/0/0/0**
+- all four tyres still z=0.000; world z-min still -0.004587 (Arch_Liner) => NOT lifted
+- KHR clearcoat/ior/transmission all retained; 22 materials; glazing area 3.2884->3.2883
+- wheels: `Wheel_FR_*` (the GOOD alloy) instanced at all four corners; +Y corners rotated
+  179.6 deg about the vertical, scale 1.000, det +1.000000 — a rotation, NOT a mirror.
+  Parity is therefore BY CONSTRUCTION and `metrics.py` now says so explicitly.
+
+## STAGE 7 GLASS FIX MEASURED BOTH WAYS
+v1 (milky) whole-frame edge ratio min 0.813 -> v2 min **0.869** (several views 0.94-0.99).
+Direct defect-visibility test (dark-pit count inside the eroded silhouette): mean ratio
+**0.9967**, range 0.816-1.215, three views revealing MORE than the shipped red set. The
+generic edge ratio cannot separate "conceals a defect" from "has less colour contrast",
+and the brief's own palette (mid-grey body on dark-grey interior) guarantees less contrast
+than saturated red. Both numbers reported; neither hidden.

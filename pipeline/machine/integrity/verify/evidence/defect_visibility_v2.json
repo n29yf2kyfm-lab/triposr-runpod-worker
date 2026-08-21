@@ -1,0 +1,67 @@
+{
+ "neutral_dir": "renders/before_neutral2",
+ "original_dir": "renders/before_original",
+ "drop_threshold_srgb8": 14.0,
+ "views": [
+  {
+   "view": "CAM_FRONT",
+   "pits_neutral": 5446,
+   "pits_original": 6007,
+   "ratio_neutral_over_original": 0.9066,
+   "neutral_shows_at_least_as_many": true
+  },
+  {
+   "view": "CAM_FRONT_LEFT_34",
+   "pits_neutral": 7157,
+   "pits_original": 8773,
+   "ratio_neutral_over_original": 0.8158,
+   "neutral_shows_at_least_as_many": false
+  },
+  {
+   "view": "CAM_FRONT_RIGHT_34",
+   "pits_neutral": 6263,
+   "pits_original": 6932,
+   "ratio_neutral_over_original": 0.9035,
+   "neutral_shows_at_least_as_many": true
+  },
+  {
+   "view": "CAM_LEFT",
+   "pits_neutral": 7390,
+   "pits_original": 8017,
+   "ratio_neutral_over_original": 0.9218,
+   "neutral_shows_at_least_as_many": true
+  },
+  {
+   "view": "CAM_REAR",
+   "pits_neutral": 4995,
+   "pits_original": 4111,
+   "ratio_neutral_over_original": 1.215,
+   "neutral_shows_at_least_as_many": true
+  },
+  {
+   "view": "CAM_REAR_LEFT_34",
+   "pits_neutral": 6959,
+   "pits_original": 6280,
+   "ratio_neutral_over_original": 1.1081,
+   "neutral_shows_at_least_as_many": true
+  },
+  {
+   "view": "CAM_REAR_RIGHT_34",
+   "pits_neutral": 6228,
+   "pits_original": 5249,
+   "ratio_neutral_over_original": 1.1865,
+   "neutral_shows_at_least_as_many": true
+  },
+  {
+   "view": "CAM_RIGHT",
+   "pits_neutral": 5598,
+   "pits_original": 6110,
+   "ratio_neutral_over_original": 0.9162,
+   "neutral_shows_at_least_as_many": true
+  }
+ ],
+ "min_ratio": 0.8158,
+ "mean_ratio": 0.9967,
+ "NEUTRAL_SHOWS_EVERY_DEFECT_REGION": false,
+ "NOTE": "a ratio at or above 1.0 means the neutral diagnostic set reveals the pitting at least as strongly as the shipped red set."
+}

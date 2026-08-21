@@ -1,0 +1,384 @@
+{
+ "label": "BEFORE_before_cullon",
+ "glb": "GOLF_ALL_GATES_SOURCE.glb",
+ "blender": "4.5.12 LTS",
+ "engine": "CYCLES/CPU",
+ "view_transform": "Standard",
+ "look": "None",
+ "exposure": 0.0,
+ "samples": 32,
+ "resolution": [
+  1100,
+  825
+ ],
+ "backface_culling": true,
+ "materials": {
+  "mode": "neutral",
+  "materials_created": [
+   "body",
+   "glass",
+   "interior",
+   "lamp_front",
+   "lamp_rear",
+   "rim",
+   "tyre"
+  ],
+  "backface_culled_materials": 29,
+  "cull_method": "shader Transparent BSDF mixed on Geometry>Backfacing (Cycles ignores Material.use_backface_culling)"
+ },
+ "world_grey_linear": 0.22,
+ "world_grey_expected_srgb8": 129.13,
+ "orientation": {
+  "signals": [
+   {
+    "signal": "S1 front-seat rake dx/dz",
+    "value": 0.6901,
+    "nose_axis_sign": -1,
+    "n": 10,
+    "reason": "a seat reclines away from the nose, so a positive dx/dz means the nose is at -X"
+   },
+   {
+    "signal": "S2 rear-bench rake dx/dz",
+    "value": 0.873,
+    "nose_axis_sign": -1,
+    "n": 4,
+    "reason": "same rake rule on an independent seat row"
+   },
+   {
+    "signal": "S3 steering.x - cushion.x",
+    "value": -0.2182,
+    "nose_axis_sign": -1,
+    "n": 7,
+    "reason": "the steering wheel is between the driver and the nose"
+   },
+   {
+    "signal": "S4 frontrow.x - rearrow.x",
+    "value": -0.9232,
+    "nose_axis_sign": -1,
+    "n": 14,
+    "reason": "the front row is nearer the nose than the rear row"
+   }
+  ],
+  "all_signals_agree": true,
+  "nose_axis": "-X",
+  "nose_unit_vector": [
+   -1.0,
+   0.0,
+   0.0
+  ],
+  "vehicle_right_unit_vector": [
+   0.0,
+   1.0,
+   -0.0
+  ],
+  "vehicle_left_unit_vector": [
+   -0.0,
+   -1.0,
+   0.0
+  ],
+  "name_corroboration": {
+   "front_named_parts_mean_x": -1.9083,
+   "n_front_named": 12,
+   "rear_named_parts_mean_x": 1.6976,
+   "n_rear_named": 10,
+   "implies_nose_axis": "-X",
+   "agrees_with_geometry": true
+  },
+  "L_suffix_check": {
+   "objects_treated_as_L_suffixed": [
+    "Wheel_RL_Tyre",
+    "Wheel_RL_Rim",
+    "Wheel_RL_Disc",
+    "Wheel_FL_Tyre",
+    "Wheel_FL_Rim",
+    "Wheel_FL_Disc",
+    "TailLamp_L",
+    "Mirror_L",
+    "Glass_Side_L",
+    "Glass_Quarter_L",
+    "Headlamp_L_Lens",
+    "Headlamp_L_Housing",
+    "Headlamp_L_Internal",
+    "Intake_L",
+    "Intake_L_Blades",
+    "Cabin_BenchHead_L",
+    "Cabin_DoorCard_L"
+   ],
+   "their_mean_y": 0.4994,
+   "L_suffix_is_on_vehicle_LEFT": false,
+   "NOTE": "if False, the model uses a viewer-facing L/R convention (photographer's left) rather than automotive nearside/offside.  It is a NAMING fact, not a geometry defect, but any camera named from a node name would be mirrored."
+  }
+ },
+ "fit": {
+  "policy": "fixed",
+  "radius_m": 12.6804,
+  "note": "one radius for all eight; identical framing scale"
+ },
+ "vectorised_projection_max_disagreement_px_fraction": 3.5e-08,
+ "camera_verification": [
+  {
+   "camera": "CAM_FRONT",
+   "nominal_azimuth_deg": 0,
+   "measured_azimuth_deg": 0.0,
+   "azimuth_error_deg": 0.0,
+   "measured_elevation_deg": 9.0,
+   "aim_error_deg": 0.0,
+   "world_location": [
+    -12.55477,
+    0.00484,
+    2.61806
+   ],
+   "look_unit_vector": [
+    0.98769,
+    0.0,
+    -0.15643
+   ],
+   "faces_nose": 0.9877,
+   "faces_vehicle_left": 0.0,
+   "height_m": 2.61806,
+   "lens_mm": 85.0,
+   "PASS": true
+  },
+  {
+   "camera": "CAM_FRONT_LEFT_34",
+   "nominal_azimuth_deg": 45,
+   "measured_azimuth_deg": 45.0,
+   "azimuth_error_deg": 0.0,
+   "measured_elevation_deg": 9.0,
+   "aim_error_deg": 0.0,
+   "world_location": [
+    -8.88648,
+    -8.85119,
+    2.61806
+   ],
+   "look_unit_vector": [
+    0.6984,
+    0.6984,
+    -0.15643
+   ],
+   "faces_nose": 0.6984,
+   "faces_vehicle_left": 0.6984,
+   "height_m": 2.61806,
+   "lens_mm": 85.0,
+   "PASS": true
+  },
+  {
+   "camera": "CAM_LEFT",
+   "nominal_azimuth_deg": 90,
+   "measured_azimuth_deg": 90.0,
+   "azimuth_error_deg": 0.0,
+   "measured_elevation_deg": 9.0,
+   "aim_error_deg": 0.0105,
+   "world_location": [
+    -0.03046,
+    -12.51947,
+    2.61806
+   ],
+   "look_unit_vector": [
+    0.0,
+    0.98769,
+    -0.15643
+   ],
+   "faces_nose": 0.0,
+   "faces_vehicle_left": 0.9877,
+   "height_m": 2.61806,
+   "lens_mm": 85.0,
+   "PASS": true
+  },
+  {
+   "camera": "CAM_REAR_LEFT_34",
+   "nominal_azimuth_deg": 135,
+   "measured_azimuth_deg": 135.0,
+   "azimuth_error_deg": 0.0,
+   "measured_elevation_deg": 9.0,
+   "aim_error_deg": 0.0,
+   "world_location": [
+    8.82557,
+    -8.85119,
+    2.61806
+   ],
+   "look_unit_vector": [
+    -0.6984,
+    0.6984,
+    -0.15643
+   ],
+   "faces_nose": -0.6984,
+   "faces_vehicle_left": 0.6984,
+   "height_m": 2.61806,
+   "lens_mm": 85.0,
+   "PASS": true
+  },
+  {
+   "camera": "CAM_REAR",
+   "nominal_azimuth_deg": 180,
+   "measured_azimuth_deg": 180.0,
+   "azimuth_error_deg": 0.0,
+   "measured_elevation_deg": 9.0,
+   "aim_error_deg": 0.0099,
+   "world_location": [
+    12.49385,
+    0.00484,
+    2.61806
+   ],
+   "look_unit_vector": [
+    -0.98769,
+    0.0,
+    -0.15643
+   ],
+   "faces_nose": -0.9877,
+   "faces_vehicle_left": 0.0,
+   "height_m": 2.61806,
+   "lens_mm": 85.0,
+   "PASS": true
+  },
+  {
+   "camera": "CAM_REAR_RIGHT_34",
+   "nominal_azimuth_deg": 225,
+   "measured_azimuth_deg": 225.0,
+   "azimuth_error_deg": 0.0,
+   "measured_elevation_deg": 9.0,
+   "aim_error_deg": 0.0135,
+   "world_location": [
+    8.82557,
+    8.86086,
+    2.61806
+   ],
+   "look_unit_vector": [
+    -0.6984,
+    -0.6984,
+    -0.15643
+   ],
+   "faces_nose": -0.6984,
+   "faces_vehicle_left": -0.6984,
+   "height_m": 2.61806,
+   "lens_mm": 85.0,
+   "PASS": true
+  },
+  {
+   "camera": "CAM_RIGHT",
+   "nominal_azimuth_deg": 270,
+   "measured_azimuth_deg": 270.0,
+   "azimuth_error_deg": 0.0,
+   "measured_elevation_deg": 9.0,
+   "aim_error_deg": 0.0105,
+   "world_location": [
+    -0.03046,
+    12.52915,
+    2.61806
+   ],
+   "look_unit_vector": [
+    -0.0,
+    -0.98769,
+    -0.15643
+   ],
+   "faces_nose": -0.0,
+   "faces_vehicle_left": -0.9877,
+   "height_m": 2.61806,
+   "lens_mm": 85.0,
+   "PASS": true
+  },
+  {
+   "camera": "CAM_FRONT_RIGHT_34",
+   "nominal_azimuth_deg": 315,
+   "measured_azimuth_deg": 315.0,
+   "azimuth_error_deg": 0.0,
+   "measured_elevation_deg": 9.0,
+   "aim_error_deg": 0.014,
+   "world_location": [
+    -8.88648,
+    8.86086,
+    2.61806
+   ],
+   "look_unit_vector": [
+    0.6984,
+    -0.6984,
+    -0.15643
+   ],
+   "faces_nose": 0.6984,
+   "faces_vehicle_left": -0.6984,
+   "height_m": 2.61806,
+   "lens_mm": 85.0,
+   "PASS": true
+  }
+ ],
+ "cameras_failing_verification": [],
+ "model_world_bbox_min": [
+  -2.147268,
+  -0.890078,
+  -0.004587
+ ],
+ "model_world_bbox_max": [
+  2.086358,
+  0.899753,
+  1.447658
+ ],
+ "tiles": {
+  "CAM_FRONT": {
+   "mean_srgb8": 99.09,
+   "p99_srgb8": 130.0,
+   "clipped_fraction_ge_254": 0.0,
+   "black_fraction_le_1": 0.000366,
+   "background_srgb8_top_band": 129.09
+  },
+  "CAM_FRONT_LEFT_34": {
+   "mean_srgb8": 95.51,
+   "p99_srgb8": 130.0,
+   "clipped_fraction_ge_254": 0.0,
+   "black_fraction_le_1": 0.000918,
+   "background_srgb8_top_band": 129.09
+  },
+  "CAM_LEFT": {
+   "mean_srgb8": 95.43,
+   "p99_srgb8": 130.0,
+   "clipped_fraction_ge_254": 0.0,
+   "black_fraction_le_1": 0.001428,
+   "background_srgb8_top_band": 129.09
+  },
+  "CAM_REAR_LEFT_34": {
+   "mean_srgb8": 95.39,
+   "p99_srgb8": 130.0,
+   "clipped_fraction_ge_254": 0.0,
+   "black_fraction_le_1": 0.001678,
+   "background_srgb8_top_band": 129.09
+  },
+  "CAM_REAR": {
+   "mean_srgb8": 100.14,
+   "p99_srgb8": 130.0,
+   "clipped_fraction_ge_254": 0.0,
+   "black_fraction_le_1": 0.002236,
+   "background_srgb8_top_band": 129.09
+  },
+  "CAM_REAR_RIGHT_34": {
+   "mean_srgb8": 93.24,
+   "p99_srgb8": 130.0,
+   "clipped_fraction_ge_254": 0.0,
+   "black_fraction_le_1": 0.004174,
+   "background_srgb8_top_band": 129.09
+  },
+  "CAM_RIGHT": {
+   "mean_srgb8": 91.52,
+   "p99_srgb8": 130.0,
+   "clipped_fraction_ge_254": 0.0,
+   "black_fraction_le_1": 0.003214,
+   "background_srgb8_top_band": 129.1
+  },
+  "CAM_FRONT_RIGHT_34": {
+   "mean_srgb8": 91.54,
+   "p99_srgb8": 130.0,
+   "clipped_fraction_ge_254": 0.0,
+   "black_fraction_le_1": 0.001504,
+   "background_srgb8_top_band": 129.1
+  }
+ },
+ "summary": {
+  "tiles_rendered": 8,
+  "blank_tiles": [],
+  "tiles_in_75_85": [],
+  "tiles_outside_75_85": [],
+  "max_clipped_fraction": 0.0,
+  "background_srgb8_range": [
+   129.09,
+   129.1
+  ]
+ }
+}

@@ -1,0 +1,3803 @@
+{
+ "label": "AFTER",
+ "file": "car_integrity_repaired.glb",
+ "sha256": "c5ec452b1d814468bf4c1e943de676cbac724502c6b2d4ccca446a55d13fd2cb",
+ "bytes": 20136932,
+ "glb_version": 2,
+ "generator": "Khronos glTF Blender I/O v4.5.51",
+ "counts": {
+  "nodes": 82,
+  "meshes": 73,
+  "primitives": 97,
+  "materials": 22,
+  "textures": 0,
+  "images": 0,
+  "accessors": 289,
+  "bufferViews": 289,
+  "cameras": 0,
+  "animations": 0,
+  "skins": 0,
+  "scenes": 1
+ },
+ "camera_names": [],
+ "camera_nodes": [],
+ "extensionsUsed": [
+  "KHR_materials_clearcoat",
+  "KHR_materials_ior",
+  "KHR_materials_transmission"
+ ],
+ "extensionsRequired": [],
+ "triangles_from_indices": 895037,
+ "degenerate_triangles": 0,
+ "nan_vertex_components": 0,
+ "world_bbox_min": [
+  -2.147268,
+  -0.004587,
+  -0.899753
+ ],
+ "world_bbox_max": [
+  2.086358,
+  1.447658,
+  0.890078
+ ],
+ "world_bbox_size": [
+  4.233626,
+  1.452245,
+  1.789831
+ ],
+ "world_bbox_min_referenced_only": [
+  -2.147268,
+  -0.004587,
+  -0.899753
+ ],
+ "world_bbox_max_referenced_only": [
+  2.086358,
+  1.447658,
+  0.890078
+ ],
+ "world_bbox_size_referenced_only": [
+  4.233626,
+  1.452245,
+  1.789831
+ ],
+ "bbox_declared_vs_referenced_max_abs_diff_m": 0.0,
+ "WHICH_BBOX_THE_VIEWER_SEES": "referenced_only",
+ "declared_positions": 627959,
+ "referenced_positions": 627959,
+ "unreferenced_positions": 0,
+ "unreferenced_fraction": 0.0,
+ "negative_determinant_nodes": [],
+ "zero_determinant_nodes": [],
+ "orphan_nodes_not_in_scene": [],
+ "nodes_without_mesh": [],
+ "meshes_shared_by_multiple_nodes": {
+  "70": [
+   70,
+   73,
+   76,
+   79
+  ],
+  "71": [
+   71,
+   74,
+   77,
+   80
+  ],
+  "72": [
+   72,
+   75,
+   78,
+   81
+  ]
+ },
+ "meshes_unreferenced": [],
+ "class_area_m2": {
+  "rim": 17.595554,
+  "tyre": 3.792716,
+  "other": 67.303654,
+  "glass": 3.276446
+ },
+ "class_tris": {
+  "rim": 138645,
+  "tyre": 36704,
+  "other": 668097,
+  "glass": 51591
+ },
+ "materials_table": [
+  {
+   "i": 0,
+   "name": "Underbody",
+   "baseColorFactor": [
+    0.0117647061124444,
+    0.0117647061124444,
+    0.0117647061124444,
+    1
+   ],
+   "metallicFactor": 0,
+   "roughnessFactor": 0.949999988079071,
+   "alphaMode": "OPAQUE",
+   "doubleSided": true,
+   "emissiveFactor": null,
+   "extensions": [],
+   "ext_detail": {},
+   "area_m2": 1.10974,
+   "tris": 25725
+  },
+  {
+   "i": 1,
+   "name": "Interior_Plastic",
+   "baseColorFactor": [
+    0.0313725508749485,
+    0.0313725508749485,
+    0.0313725508749485,
+    1
+   ],
+   "metallicFactor": 0,
+   "roughnessFactor": 0.800000011920929,
+   "alphaMode": "OPAQUE",
+   "doubleSided": true,
+   "emissiveFactor": null,
+   "extensions": [],
+   "ext_detail": {},
+   "area_m2": 8.051489,
+   "tris": 164105
+  },
+  {
+   "i": 2,
+   "name": "Trim_Black",
+   "baseColorFactor": [
+    0.019607843831181526,
+    0.019607843831181526,
+    0.0235294122248888,
+    1
+   ],
+   "metallicFactor": 0,
+   "roughnessFactor": 0.550000011920929,
+   "alphaMode": "OPAQUE",
+   "doubleSided": true,
+   "emissiveFactor": null,
+   "extensions": [],
+   "ext_detail": {},
+   "area_m2": 1.43983,
+   "tris": 20154
+  },
+  {
+   "i": 3,
+   "name": "carpaint",
+   "baseColorFactor": [
+    0.7764706015586853,
+    0.0117647061124444,
+    0.0117647061124444,
+    1
+   ],
+   "metallicFactor": 0,
+   "roughnessFactor": 0.23999999463558197,
+   "alphaMode": "OPAQUE",
+   "doubleSided": true,
+   "emissiveFactor": null,
+   "extensions": [
+    "KHR_materials_clearcoat"
+   ],
+   "ext_detail": {
+    "KHR_materials_clearcoat": {
+     "clearcoatFactor": 1,
+     "clearcoatRoughnessFactor": 0.07999999821186066
+    }
+   },
+   "area_m2": 28.350795,
+   "tris": 317358
+  },
+  {
+   "i": 4,
+   "name": "Lamp_Lens_Rear",
+   "baseColorFactor": [
+    0.1568627506494522,
+    0.0117647061124444,
+    0.01568627543747425,
+    1
+   ],
+   "metallicFactor": 0,
+   "roughnessFactor": 0.05999999865889549,
+   "alphaMode": "OPAQUE",
+   "doubleSided": true,
+   "emissiveFactor": null,
+   "extensions": [
+    "KHR_materials_clearcoat"
+   ],
+   "ext_detail": {
+    "KHR_materials_clearcoat": {
+     "clearcoatFactor": 1
+    }
+   },
+   "area_m2": 0.166481,
+   "tris": 2297
+  },
+  {
+   "i": 5,
+   "name": "Arch_Liner",
+   "baseColorFactor": [
+    0.0117647061124444,
+    0.0117647061124444,
+    0.01568627543747425,
+    1
+   ],
+   "metallicFactor": 0,
+   "roughnessFactor": 0.949999988079071,
+   "alphaMode": "OPAQUE",
+   "doubleSided": true,
+   "emissiveFactor": null,
+   "extensions": [],
+   "ext_detail": {},
+   "area_m2": 6.59545,
+   "tris": 97103
+  },
+  {
+   "i": 6,
+   "name": "glass",
+   "baseColorFactor": [
+    0.05098039284348488,
+    0.05882352963089943,
+    0.062745101749897,
+    0.16078431904315948
+   ],
+   "metallicFactor": 0,
+   "roughnessFactor": 0.029999999329447746,
+   "alphaMode": "BLEND",
+   "doubleSided": false,
+   "emissiveFactor": null,
+   "extensions": [
+    "KHR_materials_ior",
+    "KHR_materials_transmission"
+   ],
+   "ext_detail": {
+    "KHR_materials_transmission": {
+     "transmissionFactor": 0.9200000166893005
+    },
+    "KHR_materials_ior": {
+     "ior": 1.4500000476837158
+    }
+   },
+   "area_m2": 2.947419,
+   "tris": 41483
+  },
+  {
+   "i": 7,
+   "name": "Lamp_Lens",
+   "baseColorFactor": [
+    0.03529411926865578,
+    0.03529411926865578,
+    0.03921568766236305,
+    1
+   ],
+   "metallicFactor": 0,
+   "roughnessFactor": 0.05999999865889549,
+   "alphaMode": "OPAQUE",
+   "doubleSided": true,
+   "emissiveFactor": null,
+   "extensions": [
+    "KHR_materials_clearcoat"
+   ],
+   "ext_detail": {
+    "KHR_materials_clearcoat": {
+     "clearcoatFactor": 1
+    }
+   },
+   "area_m2": 0.083043,
+   "tris": 2872
+  },
+  {
+   "i": 8,
+   "name": "Chrome_Trim",
+   "baseColorFactor": [
+    0.6196078658103943,
+    0.6392157077789307,
+    0.6705882549285889,
+    1
+   ],
+   "metallicFactor": 0.8999999761581421,
+   "roughnessFactor": 0.14000000059604645,
+   "alphaMode": "OPAQUE",
+   "doubleSided": false,
+   "emissiveFactor": null,
+   "extensions": [],
+   "ext_detail": {},
+   "area_m2": 0.11798,
+   "tris": 4992
+  },
+  {
+   "i": 9,
+   "name": "DRL_Blade",
+   "baseColorFactor": [
+    0.800000011920929,
+    0.8196078538894653,
+    0.8509804010391235,
+    1
+   ],
+   "metallicFactor": 0.3499999940395355,
+   "roughnessFactor": 0.11999999731779099,
+   "alphaMode": "OPAQUE",
+   "doubleSided": false,
+   "emissiveFactor": null,
+   "extensions": [],
+   "ext_detail": {},
+   "area_m2": 0.043511,
+   "tris": 1596
+  },
+  {
+   "i": 10,
+   "name": "Plate_Face",
+   "baseColorFactor": [
+    0.8784313797950745,
+    0.8784313797950745,
+    0.8509804010391235,
+    1
+   ],
+   "metallicFactor": 0,
+   "roughnessFactor": 0.41999998688697815,
+   "alphaMode": "OPAQUE",
+   "doubleSided": false,
+   "emissiveFactor": null,
+   "extensions": [],
+   "ext_detail": {},
+   "area_m2": 0.132984,
+   "tris": 436
+  },
+  {
+   "i": 11,
+   "name": "Shut_Line_Dark",
+   "baseColorFactor": [
+    0.0313725508749485,
+    0.0313725508749485,
+    0.03529411926865578,
+    1
+   ],
+   "metallicFactor": 0,
+   "roughnessFactor": 0.8500000238418579,
+   "alphaMode": "OPAQUE",
+   "doubleSided": false,
+   "emissiveFactor": null,
+   "extensions": [],
+   "ext_detail": {},
+   "area_m2": 1.906477,
+   "tris": 56920
+  },
+  {
+   "i": 12,
+   "name": "Rear_Plate",
+   "baseColorFactor": [
+    0.8784313797950745,
+    0.8784313797950745,
+    0.8509804010391235,
+    1
+   ],
+   "metallicFactor": 0,
+   "roughnessFactor": 0.3499999940395355,
+   "alphaMode": "OPAQUE",
+   "doubleSided": false,
+   "emissiveFactor": null,
+   "extensions": [],
+   "ext_detail": {},
+   "area_m2": 0.053097,
+   "tris": 512
+  },
+  {
+   "i": 13,
+   "name": "Cabin_Carpet",
+   "baseColorFactor": [
+    0.08235294371843338,
+    0.08235294371843338,
+    0.09019608050584793,
+    1
+   ],
+   "metallicFactor": 0,
+   "roughnessFactor": null,
+   "alphaMode": "OPAQUE",
+   "doubleSided": false,
+   "emissiveFactor": null,
+   "extensions": [],
+   "ext_detail": {},
+   "area_m2": 10.333219,
+   "tris": 1828
+  },
+  {
+   "i": 14,
+   "name": "Cabin_Trim",
+   "baseColorFactor": [
+    0.10196078568696976,
+    0.10196078568696976,
+    0.11372549086809158,
+    1
+   ],
+   "metallicFactor": 0,
+   "roughnessFactor": 0.8500000238418579,
+   "alphaMode": "OPAQUE",
+   "doubleSided": false,
+   "emissiveFactor": null,
+   "extensions": [],
+   "ext_detail": {},
+   "area_m2": 11.524735,
+   "tris": 2832
+  },
+  {
+   "i": 15,
+   "name": "Cabin_Rim",
+   "baseColorFactor": [
+    0.06666667014360428,
+    0.06666667014360428,
+    0.07450980693101883,
+    1
+   ],
+   "metallicFactor": 0,
+   "roughnessFactor": 0.550000011920929,
+   "alphaMode": "OPAQUE",
+   "doubleSided": false,
+   "emissiveFactor": null,
+   "extensions": [],
+   "ext_detail": {},
+   "area_m2": 0.178857,
+   "tris": 2148
+  },
+  {
+   "i": 16,
+   "name": "Cabin_Fabric",
+   "baseColorFactor": [
+    0.1568627506494522,
+    0.1568627506494522,
+    0.1725490242242813,
+    1
+   ],
+   "metallicFactor": 0,
+   "roughnessFactor": 0.949999988079071,
+   "alphaMode": "OPAQUE",
+   "doubleSided": false,
+   "emissiveFactor": null,
+   "extensions": [],
+   "ext_detail": {},
+   "area_m2": 5.910029,
+   "tris": 2376
+  },
+  {
+   "i": 17,
+   "name": "Cabin_Bolster",
+   "baseColorFactor": [
+    0.12156862765550613,
+    0.12156862765550613,
+    0.13725490868091583,
+    1
+   ],
+   "metallicFactor": 0,
+   "roughnessFactor": 0.949999988079071,
+   "alphaMode": "OPAQUE",
+   "doubleSided": false,
+   "emissiveFactor": null,
+   "extensions": [],
+   "ext_detail": {},
+   "area_m2": 1.479931,
+   "tris": 3168
+  },
+  {
+   "i": 18,
+   "name": "Cabin_Liner",
+   "baseColorFactor": [
+    0.19607843458652496,
+    0.19607843458652496,
+    0.20392157137393951,
+    1
+   ],
+   "metallicFactor": 0,
+   "roughnessFactor": 0.949999988079071,
+   "alphaMode": "OPAQUE",
+   "doubleSided": false,
+   "emissiveFactor": null,
+   "extensions": [],
+   "ext_detail": {},
+   "area_m2": 3.417313,
+   "tris": 1868
+  },
+  {
+   "i": 19,
+   "name": "Tyre_Rubber",
+   "baseColorFactor": [
+    0.027450980618596077,
+    0.027450980618596077,
+    0.0313725508749485,
+    1
+   ],
+   "metallicFactor": 0,
+   "roughnessFactor": 0.8999999761581421,
+   "alphaMode": "OPAQUE",
+   "doubleSided": true,
+   "emissiveFactor": null,
+   "extensions": [],
+   "ext_detail": {},
+   "area_m2": 3.792716,
+   "tris": 36704
+  },
+  {
+   "i": 20,
+   "name": "Rim_Alloy",
+   "baseColorFactor": [
+    0.41960784792900085,
+    0.4313725531101227,
+    0.45098039507865906,
+    1
+   ],
+   "metallicFactor": 0.8500000238418579,
+   "roughnessFactor": 0.3499999940395355,
+   "alphaMode": "OPAQUE",
+   "doubleSided": true,
+   "emissiveFactor": null,
+   "extensions": [],
+   "ext_detail": {},
+   "area_m2": 3.760367,
+   "tris": 98112
+  },
+  {
+   "i": 21,
+   "name": "Brake_Disc",
+   "baseColorFactor": [
+    0.10980392247438431,
+    0.10980392247438431,
+    0.12156862765550613,
+    1
+   ],
+   "metallicFactor": 0.75,
+   "roughnessFactor": 0.550000011920929,
+   "alphaMode": "OPAQUE",
+   "doubleSided": true,
+   "emissiveFactor": null,
+   "extensions": [],
+   "ext_detail": {},
+   "area_m2": 0.572907,
+   "tris": 10448
+  }
+ ],
+ "nodes_table": [
+  {
+   "node": 81,
+   "name": "Wheel_RR_Disc",
+   "mesh": 72,
+   "parent": null,
+   "det": 1.0,
+   "tris": 2612,
+   "area_m2": 0.143227,
+   "materials": [
+    21
+   ],
+   "mat_names": [
+    "Brake_Disc"
+   ],
+   "class": "rim",
+   "wmin": [
+    1.053095,
+    0.162269,
+    0.584483
+   ],
+   "wmax": [
+    1.335419,
+    0.454633,
+    0.669952
+   ],
+   "wmin_referenced": [
+    1.053095,
+    0.162269,
+    0.584483
+   ],
+   "wmax_referenced": [
+    1.335419,
+    0.454633,
+    0.669952
+   ],
+   "declared_positions": 1506,
+   "referenced_positions": 1506,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 80,
+   "name": "Wheel_RR_Rim",
+   "mesh": 71,
+   "parent": null,
+   "det": 1.0,
+   "tris": 24528,
+   "area_m2": 0.940092,
+   "materials": [
+    20
+   ],
+   "mat_names": [
+    "Rim_Alloy"
+   ],
+   "class": "rim",
+   "wmin": [
+    0.963744,
+    0.089517,
+    0.564382
+   ],
+   "wmax": [
+    1.413589,
+    0.544104,
+    0.796365
+   ],
+   "wmin_referenced": [
+    0.963744,
+    0.089517,
+    0.564382
+   ],
+   "wmax_referenced": [
+    1.413589,
+    0.544104,
+    0.796365
+   ],
+   "declared_positions": 16076,
+   "referenced_positions": 16076,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 79,
+   "name": "Wheel_RR_Tyre",
+   "mesh": 70,
+   "parent": null,
+   "det": 1.0,
+   "tris": 9176,
+   "area_m2": 0.948179,
+   "materials": [
+    19
+   ],
+   "mat_names": [
+    "Tyre_Rubber"
+   ],
+   "class": "tyre",
+   "wmin": [
+    0.877562,
+    -0.0,
+    0.562524
+   ],
+   "wmax": [
+    1.501007,
+    0.631282,
+    0.805562
+   ],
+   "wmin_referenced": [
+    0.877562,
+    -0.0,
+    0.562524
+   ],
+   "wmax_referenced": [
+    1.501007,
+    0.631282,
+    0.805562
+   ],
+   "declared_positions": 5281,
+   "referenced_positions": 5281,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 78,
+   "name": "Wheel_RL_Disc",
+   "mesh": 72,
+   "parent": null,
+   "det": 1.000000081,
+   "tris": 2612,
+   "area_m2": 0.143227,
+   "materials": [
+    21
+   ],
+   "mat_names": [
+    "Brake_Disc"
+   ],
+   "class": "rim",
+   "wmin": [
+    1.04424,
+    0.162269,
+    -0.669952
+   ],
+   "wmax": [
+    1.326563,
+    0.454633,
+    -0.584483
+   ],
+   "wmin_referenced": [
+    1.04424,
+    0.162269,
+    -0.669952
+   ],
+   "wmax_referenced": [
+    1.326563,
+    0.454633,
+    -0.584483
+   ],
+   "declared_positions": 1506,
+   "referenced_positions": 1506,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 77,
+   "name": "Wheel_RL_Rim",
+   "mesh": 71,
+   "parent": null,
+   "det": 1.000000081,
+   "tris": 24528,
+   "area_m2": 0.940092,
+   "materials": [
+    20
+   ],
+   "mat_names": [
+    "Rim_Alloy"
+   ],
+   "class": "rim",
+   "wmin": [
+    0.96607,
+    0.089517,
+    -0.796365
+   ],
+   "wmax": [
+    1.415915,
+    0.544104,
+    -0.564382
+   ],
+   "wmin_referenced": [
+    0.96607,
+    0.089517,
+    -0.796365
+   ],
+   "wmax_referenced": [
+    1.415915,
+    0.544104,
+    -0.564382
+   ],
+   "declared_positions": 16076,
+   "referenced_positions": 16076,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 76,
+   "name": "Wheel_RL_Tyre",
+   "mesh": 70,
+   "parent": null,
+   "det": 1.000000081,
+   "tris": 9176,
+   "area_m2": 0.948179,
+   "materials": [
+    19
+   ],
+   "mat_names": [
+    "Tyre_Rubber"
+   ],
+   "class": "tyre",
+   "wmin": [
+    0.878651,
+    -0.0,
+    -0.805562
+   ],
+   "wmax": [
+    1.502097,
+    0.631282,
+    -0.562524
+   ],
+   "wmin_referenced": [
+    0.878651,
+    -0.0,
+    -0.805562
+   ],
+   "wmax_referenced": [
+    1.502097,
+    0.631282,
+    -0.562524
+   ],
+   "declared_positions": 5281,
+   "referenced_positions": 5281,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 75,
+   "name": "Wheel_FR_Disc",
+   "mesh": 72,
+   "parent": null,
+   "det": 1.0,
+   "tris": 2612,
+   "area_m2": 0.143227,
+   "materials": [
+    21
+   ],
+   "mat_names": [
+    "Brake_Disc"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.428449,
+    0.162269,
+    0.597882
+   ],
+   "wmax": [
+    -1.146126,
+    0.454633,
+    0.683351
+   ],
+   "wmin_referenced": [
+    -1.428449,
+    0.162269,
+    0.597882
+   ],
+   "wmax_referenced": [
+    -1.146126,
+    0.454633,
+    0.683351
+   ],
+   "declared_positions": 1506,
+   "referenced_positions": 1506,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 74,
+   "name": "Wheel_FR_Rim",
+   "mesh": 71,
+   "parent": null,
+   "det": 1.0,
+   "tris": 24528,
+   "area_m2": 0.940092,
+   "materials": [
+    20
+   ],
+   "mat_names": [
+    "Rim_Alloy"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.517801,
+    0.089517,
+    0.577781
+   ],
+   "wmax": [
+    -1.067956,
+    0.544104,
+    0.809764
+   ],
+   "wmin_referenced": [
+    -1.517801,
+    0.089517,
+    0.577781
+   ],
+   "wmax_referenced": [
+    -1.067956,
+    0.544104,
+    0.809764
+   ],
+   "declared_positions": 16076,
+   "referenced_positions": 16076,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 73,
+   "name": "Wheel_FR_Tyre",
+   "mesh": 70,
+   "parent": null,
+   "det": 1.0,
+   "tris": 9176,
+   "area_m2": 0.948179,
+   "materials": [
+    19
+   ],
+   "mat_names": [
+    "Tyre_Rubber"
+   ],
+   "class": "tyre",
+   "wmin": [
+    -1.603983,
+    -0.0,
+    0.575923
+   ],
+   "wmax": [
+    -0.980537,
+    0.631282,
+    0.818961
+   ],
+   "wmin_referenced": [
+    -1.603983,
+    -0.0,
+    0.575923
+   ],
+   "wmax_referenced": [
+    -0.980537,
+    0.631282,
+    0.818961
+   ],
+   "declared_positions": 5281,
+   "referenced_positions": 5281,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 72,
+   "name": "Wheel_FL_Disc",
+   "mesh": 72,
+   "parent": null,
+   "det": 1.000000081,
+   "tris": 2612,
+   "area_m2": 0.143227,
+   "materials": [
+    21
+   ],
+   "mat_names": [
+    "Brake_Disc"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.437305,
+    0.162269,
+    -0.683351
+   ],
+   "wmax": [
+    -1.154981,
+    0.454633,
+    -0.597882
+   ],
+   "wmin_referenced": [
+    -1.437305,
+    0.162269,
+    -0.683351
+   ],
+   "wmax_referenced": [
+    -1.154981,
+    0.454633,
+    -0.597882
+   ],
+   "declared_positions": 1506,
+   "referenced_positions": 1506,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 71,
+   "name": "Wheel_FL_Rim",
+   "mesh": 71,
+   "parent": null,
+   "det": 1.000000081,
+   "tris": 24528,
+   "area_m2": 0.940092,
+   "materials": [
+    20
+   ],
+   "mat_names": [
+    "Rim_Alloy"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.515475,
+    0.089517,
+    -0.809764
+   ],
+   "wmax": [
+    -1.06563,
+    0.544104,
+    -0.577781
+   ],
+   "wmin_referenced": [
+    -1.515475,
+    0.089517,
+    -0.809764
+   ],
+   "wmax_referenced": [
+    -1.06563,
+    0.544104,
+    -0.577781
+   ],
+   "declared_positions": 16076,
+   "referenced_positions": 16076,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 70,
+   "name": "Wheel_FL_Tyre",
+   "mesh": 70,
+   "parent": null,
+   "det": 1.000000081,
+   "tris": 9176,
+   "area_m2": 0.948179,
+   "materials": [
+    19
+   ],
+   "mat_names": [
+    "Tyre_Rubber"
+   ],
+   "class": "tyre",
+   "wmin": [
+    -1.602893,
+    -0.0,
+    -0.818961
+   ],
+   "wmax": [
+    -0.979448,
+    0.631282,
+    -0.575923
+   ],
+   "wmin_referenced": [
+    -1.602893,
+    -0.0,
+    -0.818961
+   ],
+   "wmax_referenced": [
+    -0.979448,
+    0.631282,
+    -0.575923
+   ],
+   "declared_positions": 5281,
+   "referenced_positions": 5281,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 69,
+   "name": "Cabin_Headliner",
+   "mesh": 69,
+   "parent": null,
+   "det": 1,
+   "tris": 1868,
+   "area_m2": 3.417313,
+   "materials": [
+    18
+   ],
+   "mat_names": [
+    "Cabin_Liner"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.488593,
+    1.127173,
+    -0.425011
+   ],
+   "wmax": [
+    1.418431,
+    1.362443,
+    0.513156
+   ],
+   "wmin_referenced": [
+    -0.488593,
+    1.127173,
+    -0.425011
+   ],
+   "wmax_referenced": [
+    1.418431,
+    1.362443,
+    0.513156
+   ],
+   "declared_positions": 936,
+   "referenced_positions": 936,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 68,
+   "name": "Cabin_DoorCard_L",
+   "mesh": 68,
+   "parent": null,
+   "det": 1,
+   "tris": 400,
+   "area_m2": 3.567095,
+   "materials": [
+    14
+   ],
+   "mat_names": [
+    "Cabin_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.111941,
+    0.151643,
+    0.284954
+   ],
+   "wmax": [
+    1.155346,
+    0.977658,
+    0.781524
+   ],
+   "wmin_referenced": [
+    -1.111941,
+    0.151643,
+    0.284954
+   ],
+   "wmax_referenced": [
+    1.155346,
+    0.977658,
+    0.781524
+   ],
+   "declared_positions": 260,
+   "referenced_positions": 260,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 67,
+   "name": "Cabin_DoorCard_R",
+   "mesh": 67,
+   "parent": null,
+   "det": 1,
+   "tris": 400,
+   "area_m2": 3.618247,
+   "materials": [
+    14
+   ],
+   "mat_names": [
+    "Cabin_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.068671,
+    0.158517,
+    -0.780319
+   ],
+   "wmax": [
+    1.194015,
+    0.99074,
+    -0.340853
+   ],
+   "wmin_referenced": [
+    -1.068671,
+    0.158517,
+    -0.780319
+   ],
+   "wmax_referenced": [
+    1.194015,
+    0.99074,
+    -0.340853
+   ],
+   "declared_positions": 260,
+   "referenced_positions": 260,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 66,
+   "name": "Cabin_BootFloor",
+   "mesh": 66,
+   "parent": null,
+   "det": 1,
+   "tris": 572,
+   "area_m2": 3.420564,
+   "materials": [
+    13
+   ],
+   "mat_names": [
+    "Cabin_Carpet"
+   ],
+   "class": "other",
+   "wmin": [
+    0.574245,
+    0.436431,
+    -0.628248
+   ],
+   "wmax": [
+    1.843771,
+    0.567566,
+    0.760271
+   ],
+   "wmin_referenced": [
+    0.574245,
+    0.436431,
+    -0.628248
+   ],
+   "wmax_referenced": [
+    1.843771,
+    0.567566,
+    0.760271
+   ],
+   "declared_positions": 288,
+   "referenced_positions": 288,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 65,
+   "name": "Cabin_ParcelShelf",
+   "mesh": 65,
+   "parent": null,
+   "det": 1,
+   "tris": 476,
+   "area_m2": 1.853747,
+   "materials": [
+    14
+   ],
+   "mat_names": [
+    "Cabin_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    0.59808,
+    0.984607,
+    -0.55094
+   ],
+   "wmax": [
+    1.379517,
+    1.11961,
+    0.663732
+   ],
+   "wmin_referenced": [
+    0.59808,
+    0.984607,
+    -0.55094
+   ],
+   "wmax_referenced": [
+    1.379517,
+    1.11961,
+    0.663732
+   ],
+   "declared_positions": 240,
+   "referenced_positions": 240,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 64,
+   "name": "Cabin_BenchHead_L",
+   "mesh": 64,
+   "parent": null,
+   "det": 1,
+   "tris": 396,
+   "area_m2": 0.107792,
+   "materials": [
+    17
+   ],
+   "mat_names": [
+    "Cabin_Bolster"
+   ],
+   "class": "other",
+   "wmin": [
+    0.578714,
+    1.009856,
+    0.281588
+   ],
+   "wmax": [
+    0.699837,
+    1.166763,
+    0.508371
+   ],
+   "wmin_referenced": [
+    0.578714,
+    1.009856,
+    0.281588
+   ],
+   "wmax_referenced": [
+    0.699837,
+    1.166763,
+    0.508371
+   ],
+   "declared_positions": 200,
+   "referenced_positions": 200,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 63,
+   "name": "Cabin_BenchHead_R",
+   "mesh": 63,
+   "parent": null,
+   "det": 1,
+   "tris": 396,
+   "area_m2": 0.107792,
+   "materials": [
+    17
+   ],
+   "mat_names": [
+    "Cabin_Bolster"
+   ],
+   "class": "other",
+   "wmin": [
+    0.605946,
+    1.017127,
+    -0.407837
+   ],
+   "wmax": [
+    0.727069,
+    1.174035,
+    -0.181053
+   ],
+   "wmin_referenced": [
+    0.605946,
+    1.017127,
+    -0.407837
+   ],
+   "wmax_referenced": [
+    0.727069,
+    1.174035,
+    -0.181053
+   ],
+   "declared_positions": 200,
+   "referenced_positions": 200,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 62,
+   "name": "Cabin_BenchBack",
+   "mesh": 62,
+   "parent": null,
+   "det": 1,
+   "tris": 396,
+   "area_m2": 1.723449,
+   "materials": [
+    16
+   ],
+   "mat_names": [
+    "Cabin_Fabric"
+   ],
+   "class": "other",
+   "wmin": [
+    0.336967,
+    0.491864,
+    -0.574311
+   ],
+   "wmax": [
+    0.631236,
+    1.075224,
+    0.655006
+   ],
+   "wmin_referenced": [
+    0.336967,
+    0.491864,
+    -0.574311
+   ],
+   "wmax_referenced": [
+    0.631236,
+    1.075224,
+    0.655006
+   ],
+   "declared_positions": 200,
+   "referenced_positions": 200,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 61,
+   "name": "Cabin_BenchCush",
+   "mesh": 61,
+   "parent": null,
+   "det": 1,
+   "tris": 396,
+   "area_m2": 1.440889,
+   "materials": [
+    16
+   ],
+   "mat_names": [
+    "Cabin_Fabric"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.162774,
+    0.413987,
+    -0.585154
+   ],
+   "wmax": [
+    0.379565,
+    0.57252,
+    0.630046
+   ],
+   "wmin_referenced": [
+    -0.162774,
+    0.413987,
+    -0.585154
+   ],
+   "wmax_referenced": [
+    0.379565,
+    0.57252,
+    0.630046
+   ],
+   "declared_positions": 200,
+   "referenced_positions": 200,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 60,
+   "name": "Cabin_SeatFP_Head",
+   "mesh": 60,
+   "parent": null,
+   "det": 1,
+   "tris": 396,
+   "area_m2": 0.124744,
+   "materials": [
+    17
+   ],
+   "mat_names": [
+    "Cabin_Bolster"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.337416,
+    0.957249,
+    0.254985
+   ],
+   "wmax": [
+    -0.214065,
+    1.132994,
+    0.491803
+   ],
+   "wmin_referenced": [
+    -0.337416,
+    0.957249,
+    0.254985
+   ],
+   "wmax_referenced": [
+    -0.214065,
+    1.132994,
+    0.491803
+   ],
+   "declared_positions": 200,
+   "referenced_positions": 200,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 59,
+   "name": "Cabin_SeatFP_BolA",
+   "mesh": 59,
+   "parent": null,
+   "det": 1,
+   "tris": 396,
+   "area_m2": 0.253715,
+   "materials": [
+    17
+   ],
+   "mat_names": [
+    "Cabin_Bolster"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.578695,
+    0.416408,
+    0.534332
+   ],
+   "wmax": [
+    -0.323328,
+    0.976476,
+    0.621615
+   ],
+   "wmin_referenced": [
+    -0.578695,
+    0.416408,
+    0.534332
+   ],
+   "wmax_referenced": [
+    -0.323328,
+    0.976476,
+    0.621615
+   ],
+   "declared_positions": 200,
+   "referenced_positions": 200,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 58,
+   "name": "Cabin_SeatFP_BolB",
+   "mesh": 58,
+   "parent": null,
+   "det": 1,
+   "tris": 396,
+   "area_m2": 0.253715,
+   "materials": [
+    17
+   ],
+   "mat_names": [
+    "Cabin_Bolster"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.561724,
+    0.42094,
+    0.10469
+   ],
+   "wmax": [
+    -0.306358,
+    0.981007,
+    0.191974
+   ],
+   "wmin_referenced": [
+    -0.561724,
+    0.42094,
+    0.10469
+   ],
+   "wmax_referenced": [
+    -0.306358,
+    0.981007,
+    0.191974
+   ],
+   "declared_positions": 200,
+   "referenced_positions": 200,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 57,
+   "name": "Cabin_SeatFP_Back",
+   "mesh": 57,
+   "parent": null,
+   "det": 1,
+   "tris": 396,
+   "area_m2": 0.7452,
+   "materials": [
+    16
+   ],
+   "mat_names": [
+    "Cabin_Fabric"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.538397,
+    0.39611,
+    0.119427
+   ],
+   "wmax": [
+    -0.30728,
+    0.994427,
+    0.608361
+   ],
+   "wmin_referenced": [
+    -0.538397,
+    0.39611,
+    0.119427
+   ],
+   "wmax_referenced": [
+    -0.30728,
+    0.994427,
+    0.608361
+   ],
+   "declared_positions": 200,
+   "referenced_positions": 200,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 56,
+   "name": "Cabin_SeatFP_Cush",
+   "mesh": 56,
+   "parent": null,
+   "det": 1,
+   "tris": 396,
+   "area_m2": 0.627646,
+   "materials": [
+    16
+   ],
+   "mat_names": [
+    "Cabin_Fabric"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.987683,
+    0.32215,
+    0.090704
+   ],
+   "wmax": [
+    -0.47333,
+    0.468319,
+    0.60645
+   ],
+   "wmin_referenced": [
+    -0.987683,
+    0.32215,
+    0.090704
+   ],
+   "wmax_referenced": [
+    -0.47333,
+    0.468319,
+    0.60645
+   ],
+   "declared_positions": 200,
+   "referenced_positions": 200,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 55,
+   "name": "Cabin_SeatFD_Head",
+   "mesh": 55,
+   "parent": null,
+   "det": 1,
+   "tris": 396,
+   "area_m2": 0.124744,
+   "materials": [
+    17
+   ],
+   "mat_names": [
+    "Cabin_Bolster"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.309001,
+    0.964837,
+    -0.464414
+   ],
+   "wmax": [
+    -0.18565,
+    1.140582,
+    -0.227596
+   ],
+   "wmin_referenced": [
+    -0.309001,
+    0.964837,
+    -0.464414
+   ],
+   "wmax_referenced": [
+    -0.18565,
+    1.140582,
+    -0.227596
+   ],
+   "declared_positions": 200,
+   "referenced_positions": 200,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 54,
+   "name": "Cabin_SeatFD_BolA",
+   "mesh": 54,
+   "parent": null,
+   "det": 1,
+   "tris": 396,
+   "area_m2": 0.253715,
+   "materials": [
+    17
+   ],
+   "mat_names": [
+    "Cabin_Bolster"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.550279,
+    0.423996,
+    -0.185068
+   ],
+   "wmax": [
+    -0.294913,
+    0.984063,
+    -0.097784
+   ],
+   "wmin_referenced": [
+    -0.550279,
+    0.423996,
+    -0.185068
+   ],
+   "wmax_referenced": [
+    -0.294913,
+    0.984063,
+    -0.097784
+   ],
+   "declared_positions": 200,
+   "referenced_positions": 200,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 53,
+   "name": "Cabin_SeatFD_BolB",
+   "mesh": 53,
+   "parent": null,
+   "det": 1,
+   "tris": 396,
+   "area_m2": 0.253715,
+   "materials": [
+    17
+   ],
+   "mat_names": [
+    "Cabin_Bolster"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.533309,
+    0.428527,
+    -0.614709
+   ],
+   "wmax": [
+    -0.277942,
+    0.988595,
+    -0.527425
+   ],
+   "wmin_referenced": [
+    -0.533309,
+    0.428527,
+    -0.614709
+   ],
+   "wmax_referenced": [
+    -0.277942,
+    0.988595,
+    -0.527425
+   ],
+   "declared_positions": 200,
+   "referenced_positions": 200,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 52,
+   "name": "Cabin_SeatFD_Back",
+   "mesh": 52,
+   "parent": null,
+   "det": 1,
+   "tris": 396,
+   "area_m2": 0.7452,
+   "materials": [
+    16
+   ],
+   "mat_names": [
+    "Cabin_Fabric"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.509981,
+    0.403698,
+    -0.599972
+   ],
+   "wmax": [
+    -0.278864,
+    1.002014,
+    -0.111038
+   ],
+   "wmin_referenced": [
+    -0.509981,
+    0.403698,
+    -0.599972
+   ],
+   "wmax_referenced": [
+    -0.278864,
+    1.002014,
+    -0.111038
+   ],
+   "declared_positions": 200,
+   "referenced_positions": 200,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 51,
+   "name": "Cabin_SeatFD_Cush",
+   "mesh": 51,
+   "parent": null,
+   "det": 1,
+   "tris": 396,
+   "area_m2": 0.627646,
+   "materials": [
+    16
+   ],
+   "mat_names": [
+    "Cabin_Fabric"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.959267,
+    0.329737,
+    -0.628695
+   ],
+   "wmax": [
+    -0.444914,
+    0.475906,
+    -0.112949
+   ],
+   "wmin_referenced": [
+    -0.959267,
+    0.329737,
+    -0.628695
+   ],
+   "wmax_referenced": [
+    -0.444914,
+    0.475906,
+    -0.112949
+   ],
+   "declared_positions": 200,
+   "referenced_positions": 200,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 50,
+   "name": "Cabin_Console",
+   "mesh": 50,
+   "parent": null,
+   "det": 1,
+   "tris": 396,
+   "area_m2": 0.885008,
+   "materials": [
+    14
+   ],
+   "mat_names": [
+    "Cabin_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.027744,
+    0.155513,
+    -0.140539
+   ],
+   "wmax": [
+    -0.152731,
+    0.480165,
+    0.12654
+   ],
+   "wmin_referenced": [
+    -1.027744,
+    0.155513,
+    -0.140539
+   ],
+   "wmax_referenced": [
+    -0.152731,
+    0.480165,
+    0.12654
+   ],
+   "declared_positions": 200,
+   "referenced_positions": 200,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 49,
+   "name": "Cabin_Column",
+   "mesh": 49,
+   "parent": null,
+   "det": 1,
+   "tris": 80,
+   "area_m2": 0.053063,
+   "materials": [
+    14
+   ],
+   "mat_names": [
+    "Cabin_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -0.96809,
+    0.610963,
+    -0.414099
+   ],
+   "wmax": [
+    -0.757927,
+    0.768666,
+    -0.334204
+   ],
+   "wmin_referenced": [
+    -0.96809,
+    0.610963,
+    -0.414099
+   ],
+   "wmax_referenced": [
+    -0.757927,
+    0.768666,
+    -0.334204
+   ],
+   "declared_positions": 42,
+   "referenced_positions": 42,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 48,
+   "name": "Cabin_Spokes",
+   "mesh": 48,
+   "parent": null,
+   "det": 1,
+   "tris": 1188,
+   "area_m2": 0.039939,
+   "materials": [
+    15
+   ],
+   "mat_names": [
+    "Cabin_Rim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.028848,
+    0.512684,
+    -0.468136
+   ],
+   "wmax": [
+    -0.884629,
+    0.764316,
+    -0.221604
+   ],
+   "wmin_referenced": [
+    -1.028848,
+    0.512684,
+    -0.468136
+   ],
+   "wmax_referenced": [
+    -0.884629,
+    0.764316,
+    -0.221604
+   ],
+   "declared_positions": 600,
+   "referenced_positions": 600,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 47,
+   "name": "Cabin_Hub",
+   "mesh": 47,
+   "parent": null,
+   "det": 1,
+   "tris": 112,
+   "area_m2": 0.044165,
+   "materials": [
+    14
+   ],
+   "mat_names": [
+    "Cabin_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.011554,
+    0.570851,
+    -0.441491
+   ],
+   "wmax": [
+    -0.907326,
+    0.70472,
+    -0.315527
+   ],
+   "wmin_referenced": [
+    -1.011554,
+    0.570851,
+    -0.441491
+   ],
+   "wmax_referenced": [
+    -0.907326,
+    0.70472,
+    -0.315527
+   ],
+   "declared_positions": 58,
+   "referenced_positions": 58,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 46,
+   "name": "Cabin_Wheel",
+   "mesh": 46,
+   "parent": null,
+   "det": 1,
+   "tris": 960,
+   "area_m2": 0.138917,
+   "materials": [
+    15
+   ],
+   "mat_names": [
+    "Cabin_Rim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.065177,
+    0.456875,
+    -0.58084
+   ],
+   "wmax": [
+    -0.853702,
+    0.818696,
+    -0.176178
+   ],
+   "wmin_referenced": [
+    -1.065177,
+    0.456875,
+    -0.58084
+   ],
+   "wmax_referenced": [
+    -0.853702,
+    0.818696,
+    -0.176178
+   ],
+   "declared_positions": 480,
+   "referenced_positions": 480,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 45,
+   "name": "Cabin_Binnacle",
+   "mesh": 45,
+   "parent": null,
+   "det": 1,
+   "tris": 396,
+   "area_m2": 0.208202,
+   "materials": [
+    14
+   ],
+   "mat_names": [
+    "Cabin_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.023263,
+    0.697641,
+    -0.558126
+   ],
+   "wmax": [
+    -0.844265,
+    0.843648,
+    -0.194061
+   ],
+   "wmin_referenced": [
+    -1.023263,
+    0.697641,
+    -0.558126
+   ],
+   "wmax_referenced": [
+    -0.844265,
+    0.843648,
+    -0.194061
+   ],
+   "declared_positions": 200,
+   "referenced_positions": 200,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 44,
+   "name": "Cabin_Dash",
+   "mesh": 44,
+   "parent": null,
+   "det": 1,
+   "tris": 572,
+   "area_m2": 1.295208,
+   "materials": [
+    14
+   ],
+   "mat_names": [
+    "Cabin_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.231171,
+    0.475694,
+    -0.657117
+   ],
+   "wmax": [
+    -0.906606,
+    0.775128,
+    0.613041
+   ],
+   "wmin_referenced": [
+    -1.231171,
+    0.475694,
+    -0.657117
+   ],
+   "wmax_referenced": [
+    -0.906606,
+    0.775128,
+    0.613041
+   ],
+   "declared_positions": 288,
+   "referenced_positions": 288,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 43,
+   "name": "Cabin_Tunnel",
+   "mesh": 43,
+   "parent": null,
+   "det": 1,
+   "tris": 396,
+   "area_m2": 1.186855,
+   "materials": [
+    13
+   ],
+   "mat_names": [
+    "Cabin_Carpet"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.927808,
+    0.152424,
+    -0.12933
+   ],
+   "wmax": [
+    0.971862,
+    0.410656,
+    0.162933
+   ],
+   "wmin_referenced": [
+    -0.927808,
+    0.152424,
+    -0.12933
+   ],
+   "wmax_referenced": [
+    0.971862,
+    0.410656,
+    0.162933
+   ],
+   "declared_positions": 200,
+   "referenced_positions": 200,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 42,
+   "name": "Cabin_Floor",
+   "mesh": 42,
+   "parent": null,
+   "det": 1,
+   "tris": 860,
+   "area_m2": 5.7258,
+   "materials": [
+    13
+   ],
+   "mat_names": [
+    "Cabin_Carpet"
+   ],
+   "class": "other",
+   "wmin": [
+    -1.091634,
+    0.112459,
+    -0.567533
+   ],
+   "wmax": [
+    1.494566,
+    0.336001,
+    0.614102
+   ],
+   "wmin_referenced": [
+    -1.091634,
+    0.112459,
+    -0.567533
+   ],
+   "wmax_referenced": [
+    1.494566,
+    0.336001,
+    0.614102
+   ],
+   "declared_positions": 432,
+   "referenced_positions": 432,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 41,
+   "name": "Glass_Backlight",
+   "mesh": 41,
+   "parent": null,
+   "det": 1,
+   "tris": 14208,
+   "area_m2": 0.387697,
+   "materials": [
+    6
+   ],
+   "mat_names": [
+    "glass"
+   ],
+   "class": "glass",
+   "wmin": [
+    1.565885,
+    1.024093,
+    -0.568819
+   ],
+   "wmax": [
+    1.91393,
+    1.293563,
+    0.58018
+   ],
+   "wmin_referenced": [
+    1.565885,
+    1.024093,
+    -0.568819
+   ],
+   "wmax_referenced": [
+    1.91393,
+    1.293563,
+    0.58018
+   ],
+   "declared_positions": 7301,
+   "referenced_positions": 7301,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 40,
+   "name": "Plate_Rear",
+   "mesh": 40,
+   "parent": null,
+   "det": 1,
+   "tris": 512,
+   "area_m2": 0.053097,
+   "materials": [
+    12
+   ],
+   "mat_names": [
+    "Rear_Plate"
+   ],
+   "class": "other",
+   "wmin": [
+    2.065488,
+    0.425216,
+    -0.229161
+   ],
+   "wmax": [
+    2.084282,
+    0.532279,
+    0.290198
+   ],
+   "wmin_referenced": [
+    2.065488,
+    0.425216,
+    -0.229161
+   ],
+   "wmax_referenced": [
+    2.084282,
+    0.532279,
+    0.290198
+   ],
+   "declared_positions": 297,
+   "referenced_positions": 297,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 39,
+   "name": "Bumper_Rear_Inner",
+   "mesh": 39,
+   "parent": null,
+   "det": 1,
+   "tris": 34180,
+   "area_m2": 0.982907,
+   "materials": [
+    11
+   ],
+   "mat_names": [
+    "Shut_Line_Dark"
+   ],
+   "class": "other",
+   "wmin": [
+    1.451669,
+    0.221731,
+    -0.804423
+   ],
+   "wmax": [
+    2.070272,
+    0.6238,
+    0.821788
+   ],
+   "wmin_referenced": [
+    1.451669,
+    0.221731,
+    -0.804423
+   ],
+   "wmax_referenced": [
+    2.070272,
+    0.6238,
+    0.821788
+   ],
+   "declared_positions": 17386,
+   "referenced_positions": 17386,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 38,
+   "name": "Bumper_Rear",
+   "mesh": 38,
+   "parent": null,
+   "det": 1,
+   "tris": 33000,
+   "area_m2": 0.772612,
+   "materials": [
+    3
+   ],
+   "mat_names": [
+    "carpaint"
+   ],
+   "class": "other",
+   "wmin": [
+    1.462699,
+    0.238211,
+    -0.804423
+   ],
+   "wmax": [
+    2.086358,
+    0.607858,
+    0.821788
+   ],
+   "wmin_referenced": [
+    1.462699,
+    0.238211,
+    -0.804423
+   ],
+   "wmax_referenced": [
+    2.086358,
+    0.607858,
+    0.821788
+   ],
+   "declared_positions": 16796,
+   "referenced_positions": 16796,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 37,
+   "name": "Hatch_Inner",
+   "mesh": 37,
+   "parent": null,
+   "det": 1,
+   "tris": 22740,
+   "area_m2": 0.92357,
+   "materials": [
+    11
+   ],
+   "mat_names": [
+    "Shut_Line_Dark"
+   ],
+   "class": "other",
+   "wmin": [
+    1.463652,
+    0.580017,
+    -0.637866
+   ],
+   "wmax": [
+    2.068189,
+    1.328811,
+    0.659853
+   ],
+   "wmin_referenced": [
+    1.463652,
+    0.580017,
+    -0.637866
+   ],
+   "wmax_referenced": [
+    2.068189,
+    1.328811,
+    0.659853
+   ],
+   "declared_positions": 11835,
+   "referenced_positions": 11835,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 36,
+   "name": "Hatch",
+   "mesh": 36,
+   "parent": null,
+   "det": 1,
+   "tris": 20928,
+   "area_m2": 0.706351,
+   "materials": [
+    3
+   ],
+   "mat_names": [
+    "carpaint"
+   ],
+   "class": "other",
+   "wmin": [
+    1.508496,
+    0.597395,
+    -0.62941
+   ],
+   "wmax": [
+    2.048454,
+    1.321913,
+    0.658964
+   ],
+   "wmin_referenced": [
+    1.508496,
+    0.597395,
+    -0.62941
+   ],
+   "wmax_referenced": [
+    2.048454,
+    1.321913,
+    0.658964
+   ],
+   "declared_positions": 10917,
+   "referenced_positions": 10917,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 35,
+   "name": "TowEye_Cover",
+   "mesh": 35,
+   "parent": null,
+   "det": 1,
+   "tris": 640,
+   "area_m2": 0.007668,
+   "materials": [
+    3
+   ],
+   "mat_names": [
+    "carpaint"
+   ],
+   "class": "other",
+   "wmin": [
+    -2.074461,
+    0.432545,
+    -0.402638
+   ],
+   "wmax": [
+    -2.040443,
+    0.494377,
+    -0.342963
+   ],
+   "wmin_referenced": [
+    -2.074461,
+    0.432545,
+    -0.402638
+   ],
+   "wmax_referenced": [
+    -2.040443,
+    0.494377,
+    -0.342963
+   ],
+   "declared_positions": 322,
+   "referenced_positions": 322,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 34,
+   "name": "Intake_L_Blades",
+   "mesh": 34,
+   "parent": null,
+   "det": 1,
+   "tris": 324,
+   "area_m2": 0.017317,
+   "materials": [
+    8
+   ],
+   "mat_names": [
+    "Chrome_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.966107,
+    0.348749,
+    -0.686807
+   ],
+   "wmax": [
+    -1.842095,
+    0.435668,
+    -0.539766
+   ],
+   "wmin_referenced": [
+    -1.966107,
+    0.348749,
+    -0.686807
+   ],
+   "wmax_referenced": [
+    -1.842095,
+    0.435668,
+    -0.539766
+   ],
+   "declared_positions": 168,
+   "referenced_positions": 168,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 33,
+   "name": "Intake_R_Blades",
+   "mesh": 33,
+   "parent": null,
+   "det": 1,
+   "tris": 324,
+   "area_m2": 0.017316,
+   "materials": [
+    8
+   ],
+   "mat_names": [
+    "Chrome_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -2.006126,
+    0.337558,
+    0.472791
+   ],
+   "wmax": [
+    -1.893953,
+    0.421821,
+    0.62735
+   ],
+   "wmin_referenced": [
+    -2.006126,
+    0.337558,
+    0.472791
+   ],
+   "wmax_referenced": [
+    -1.893953,
+    0.421821,
+    0.62735
+   ],
+   "declared_positions": 168,
+   "referenced_positions": 168,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 32,
+   "name": "Intake_L",
+   "mesh": 32,
+   "parent": null,
+   "det": 1,
+   "tris": 788,
+   "area_m2": 0.083793,
+   "materials": [
+    2
+   ],
+   "mat_names": [
+    "Trim_Black"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.997843,
+    0.308835,
+    -0.695154
+   ],
+   "wmax": [
+    -1.816675,
+    0.462349,
+    -0.528361
+   ],
+   "wmin_referenced": [
+    -1.997843,
+    0.308835,
+    -0.695154
+   ],
+   "wmax_referenced": [
+    -1.816675,
+    0.462349,
+    -0.528361
+   ],
+   "declared_positions": 396,
+   "referenced_positions": 396,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 31,
+   "name": "Intake_R",
+   "mesh": 31,
+   "parent": null,
+   "det": 1,
+   "tris": 788,
+   "area_m2": 0.083793,
+   "materials": [
+    2
+   ],
+   "mat_names": [
+    "Trim_Black"
+   ],
+   "class": "rim",
+   "wmin": [
+    -2.036914,
+    0.298402,
+    0.459517
+   ],
+   "wmax": [
+    -1.867887,
+    0.448333,
+    0.635426
+   ],
+   "wmin_referenced": [
+    -2.036914,
+    0.298402,
+    0.459517
+   ],
+   "wmax_referenced": [
+    -1.867887,
+    0.448333,
+    0.635426
+   ],
+   "declared_positions": 396,
+   "referenced_positions": 396,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 30,
+   "name": "Plate",
+   "mesh": 30,
+   "parent": null,
+   "det": 1,
+   "tris": 436,
+   "area_m2": 0.132984,
+   "materials": [
+    10
+   ],
+   "mat_names": [
+    "Plate_Face"
+   ],
+   "class": "other",
+   "wmin": [
+    -2.109915,
+    0.392197,
+    -0.29743
+   ],
+   "wmax": [
+    -2.03718,
+    0.511816,
+    0.224579
+   ],
+   "wmin_referenced": [
+    -2.109915,
+    0.392197,
+    -0.29743
+   ],
+   "wmax_referenced": [
+    -2.03718,
+    0.511816,
+    0.224579
+   ],
+   "declared_positions": 220,
+   "referenced_positions": 220,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 29,
+   "name": "Plate_Carrier",
+   "mesh": 29,
+   "parent": null,
+   "det": 1,
+   "tris": 1196,
+   "area_m2": 0.168766,
+   "materials": [
+    2
+   ],
+   "mat_names": [
+    "Trim_Black"
+   ],
+   "class": "rim",
+   "wmin": [
+    -2.124273,
+    0.384101,
+    -0.305059
+   ],
+   "wmax": [
+    -2.033445,
+    0.519155,
+    0.231773
+   ],
+   "wmin_referenced": [
+    -2.124273,
+    0.384101,
+    -0.305059
+   ],
+   "wmax_referenced": [
+    -2.033445,
+    0.519155,
+    0.231773
+   ],
+   "declared_positions": 600,
+   "referenced_positions": 600,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 28,
+   "name": "Grille_Lower",
+   "mesh": 28,
+   "parent": null,
+   "det": 1,
+   "tris": 8416,
+   "area_m2": 0.587428,
+   "materials": [
+    2
+   ],
+   "mat_names": [
+    "Trim_Black"
+   ],
+   "class": "rim",
+   "wmin": [
+    -2.109291,
+    0.294104,
+    -0.490574
+   ],
+   "wmax": [
+    -1.947877,
+    0.449154,
+    0.419863
+   ],
+   "wmin_referenced": [
+    -2.109291,
+    0.294104,
+    -0.490574
+   ],
+   "wmax_referenced": [
+    -1.947877,
+    0.449154,
+    0.419863
+   ],
+   "declared_positions": 4224,
+   "referenced_positions": 4224,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 27,
+   "name": "Badge_Mount",
+   "mesh": 27,
+   "parent": null,
+   "det": 1,
+   "tris": 640,
+   "area_m2": 0.018129,
+   "materials": [
+    2
+   ],
+   "mat_names": [
+    "Trim_Black"
+   ],
+   "class": "rim",
+   "wmin": [
+    -2.018139,
+    0.548801,
+    -0.06912
+   ],
+   "wmax": [
+    -1.928002,
+    0.628922,
+    0.0054
+   ],
+   "wmin_referenced": [
+    -2.018139,
+    0.548801,
+    -0.06912
+   ],
+   "wmax_referenced": [
+    -1.928002,
+    0.628922,
+    0.0054
+   ],
+   "declared_positions": 322,
+   "referenced_positions": 322,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 26,
+   "name": "Badge",
+   "mesh": 26,
+   "parent": null,
+   "det": 1,
+   "tris": 1536,
+   "area_m2": 0.041487,
+   "materials": [
+    8
+   ],
+   "mat_names": [
+    "Chrome_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -2.071571,
+    0.522345,
+    -0.09262
+   ],
+   "wmax": [
+    -1.922731,
+    0.651894,
+    0.026735
+   ],
+   "wmin_referenced": [
+    -2.071571,
+    0.522345,
+    -0.09262
+   ],
+   "wmax_referenced": [
+    -1.922731,
+    0.651894,
+    0.026735
+   ],
+   "declared_positions": 770,
+   "referenced_positions": 770,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 25,
+   "name": "DRL_Blade",
+   "mesh": 25,
+   "parent": null,
+   "det": 1,
+   "tris": 1596,
+   "area_m2": 0.043511,
+   "materials": [
+    9
+   ],
+   "mat_names": [
+    "DRL_Blade"
+   ],
+   "class": "other",
+   "wmin": [
+    -1.985509,
+    0.60413,
+    -0.653142
+   ],
+   "wmax": [
+    -1.819853,
+    0.695438,
+    0.602144
+   ],
+   "wmin_referenced": [
+    -1.985509,
+    0.60413,
+    -0.653142
+   ],
+   "wmax_referenced": [
+    -1.819853,
+    0.695438,
+    0.602144
+   ],
+   "declared_positions": 800,
+   "referenced_positions": 800,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 24,
+   "name": "Headlamp_L_Internal",
+   "mesh": 24,
+   "parent": null,
+   "det": 1,
+   "tris": 1404,
+   "area_m2": 0.02093,
+   "materials": [
+    8
+   ],
+   "mat_names": [
+    "Chrome_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.927658,
+    0.589318,
+    -0.62426
+   ],
+   "wmax": [
+    -1.778363,
+    0.688625,
+    -0.423961
+   ],
+   "wmin_referenced": [
+    -1.927658,
+    0.589318,
+    -0.62426
+   ],
+   "wmax_referenced": [
+    -1.778363,
+    0.688625,
+    -0.423961
+   ],
+   "declared_positions": 708,
+   "referenced_positions": 708,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 23,
+   "name": "Headlamp_L_Housing",
+   "mesh": 23,
+   "parent": null,
+   "det": 1,
+   "tris": 1556,
+   "area_m2": 0.092645,
+   "materials": [
+    2
+   ],
+   "mat_names": [
+    "Trim_Black"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.947235,
+    0.578145,
+    -0.653081
+   ],
+   "wmax": [
+    -1.743811,
+    0.717389,
+    -0.373493
+   ],
+   "wmin_referenced": [
+    -1.947235,
+    0.578145,
+    -0.653081
+   ],
+   "wmax_referenced": [
+    -1.743811,
+    0.717389,
+    -0.373493
+   ],
+   "declared_positions": 780,
+   "referenced_positions": 780,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 22,
+   "name": "Headlamp_L_Lens",
+   "mesh": 22,
+   "parent": null,
+   "det": 1,
+   "tris": 1436,
+   "area_m2": 0.041521,
+   "materials": [
+    7
+   ],
+   "mat_names": [
+    "Lamp_Lens"
+   ],
+   "class": "other",
+   "wmin": [
+    -1.950364,
+    0.581378,
+    -0.649755
+   ],
+   "wmax": [
+    -1.808069,
+    0.697033,
+    -0.373017
+   ],
+   "wmin_referenced": [
+    -1.950364,
+    0.581378,
+    -0.649755
+   ],
+   "wmax_referenced": [
+    -1.808069,
+    0.697033,
+    -0.373017
+   ],
+   "declared_positions": 720,
+   "referenced_positions": 720,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 21,
+   "name": "Headlamp_R_Internal",
+   "mesh": 21,
+   "parent": null,
+   "det": 1,
+   "tris": 1404,
+   "area_m2": 0.02093,
+   "materials": [
+    8
+   ],
+   "mat_names": [
+    "Chrome_Trim"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.958871,
+    0.578328,
+    0.36489
+   ],
+   "wmax": [
+    -1.825406,
+    0.67641,
+    0.575457
+   ],
+   "wmin_referenced": [
+    -1.958871,
+    0.578328,
+    0.36489
+   ],
+   "wmax_referenced": [
+    -1.825406,
+    0.67641,
+    0.575457
+   ],
+   "declared_positions": 708,
+   "referenced_positions": 708,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 20,
+   "name": "Headlamp_R_Housing",
+   "mesh": 20,
+   "parent": null,
+   "det": 1,
+   "tris": 1556,
+   "area_m2": 0.092645,
+   "materials": [
+    2
+   ],
+   "mat_names": [
+    "Trim_Black"
+   ],
+   "class": "rim",
+   "wmin": [
+    -1.977585,
+    0.56736,
+    0.316028
+   ],
+   "wmax": [
+    -1.790154,
+    0.704658,
+    0.605399
+   ],
+   "wmin_referenced": [
+    -1.977585,
+    0.56736,
+    0.316028
+   ],
+   "wmax_referenced": [
+    -1.790154,
+    0.704658,
+    0.605399
+   ],
+   "declared_positions": 780,
+   "referenced_positions": 780,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 19,
+   "name": "Headlamp_R_Lens",
+   "mesh": 19,
+   "parent": null,
+   "det": 1,
+   "tris": 1436,
+   "area_m2": 0.041521,
+   "materials": [
+    7
+   ],
+   "mat_names": [
+    "Lamp_Lens"
+   ],
+   "class": "other",
+   "wmin": [
+    -1.980899,
+    0.570593,
+    0.312484
+   ],
+   "wmax": [
+    -1.856221,
+    0.684338,
+    0.599055
+   ],
+   "wmin_referenced": [
+    -1.980899,
+    0.570593,
+    0.312484
+   ],
+   "wmax_referenced": [
+    -1.856221,
+    0.684338,
+    0.599055
+   ],
+   "declared_positions": 720,
+   "referenced_positions": 720,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 18,
+   "name": "Grille_Upper",
+   "mesh": 18,
+   "parent": null,
+   "det": 1,
+   "tris": 2796,
+   "area_m2": 0.19637,
+   "materials": [
+    2
+   ],
+   "mat_names": [
+    "Trim_Black"
+   ],
+   "class": "rim",
+   "wmin": [
+    -2.025814,
+    0.56846,
+    -0.378726
+   ],
+   "wmax": [
+    -1.898019,
+    0.642355,
+    0.317756
+   ],
+   "wmin_referenced": [
+    -2.025814,
+    0.56846,
+    -0.378726
+   ],
+   "wmax_referenced": [
+    -1.898019,
+    0.642355,
+    0.317756
+   ],
+   "declared_positions": 1400,
+   "referenced_positions": 1400,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 17,
+   "name": "Bumper_Front",
+   "mesh": 17,
+   "parent": null,
+   "det": 1,
+   "tris": 6024,
+   "area_m2": 0.80711,
+   "materials": [
+    3
+   ],
+   "mat_names": [
+    "carpaint"
+   ],
+   "class": "other",
+   "wmin": [
+    -2.103621,
+    0.297963,
+    -0.759681
+   ],
+   "wmax": [
+    -1.772397,
+    0.709037,
+    0.750354
+   ],
+   "wmin_referenced": [
+    -2.103621,
+    0.297963,
+    -0.759681
+   ],
+   "wmax_referenced": [
+    -1.772397,
+    0.709037,
+    0.750354
+   ],
+   "declared_positions": 3032,
+   "referenced_positions": 3032,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 16,
+   "name": "Valance_Front",
+   "mesh": 16,
+   "parent": null,
+   "det": 1,
+   "tris": 2396,
+   "area_m2": 0.721382,
+   "materials": [
+    3
+   ],
+   "mat_names": [
+    "carpaint"
+   ],
+   "class": "other",
+   "wmin": [
+    -2.147268,
+    0.16944,
+    -0.748473
+   ],
+   "wmax": [
+    -1.766775,
+    0.32463,
+    0.744572
+   ],
+   "wmin_referenced": [
+    -2.147268,
+    0.16944,
+    -0.748473
+   ],
+   "wmax_referenced": [
+    -1.766775,
+    0.32463,
+    0.744572
+   ],
+   "declared_positions": 1200,
+   "referenced_positions": 1200,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 15,
+   "name": "Arch_Liner",
+   "mesh": 15,
+   "parent": null,
+   "det": 1,
+   "tris": 99395,
+   "area_m2": 6.585496,
+   "materials": [
+    1,
+    2,
+    3,
+    5
+   ],
+   "mat_names": [
+    "Arch_Liner",
+    "Interior_Plastic",
+    "Trim_Black",
+    "carpaint"
+   ],
+   "class": "other",
+   "wmin": [
+    -1.776956,
+    -0.004587,
+    -0.824241
+   ],
+   "wmax": [
+    1.652947,
+    0.790371,
+    0.835346
+   ],
+   "wmin_referenced": [
+    -1.776956,
+    -0.004587,
+    -0.824241
+   ],
+   "wmax_referenced": [
+    1.652947,
+    0.790371,
+    0.835346
+   ],
+   "declared_positions": 75361,
+   "referenced_positions": 75361,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 14,
+   "name": "Body_Glass_Reverted",
+   "mesh": 14,
+   "parent": null,
+   "det": 1,
+   "tris": 10108,
+   "area_m2": 0.329027,
+   "materials": [
+    1,
+    3
+   ],
+   "mat_names": [
+    "Interior_Plastic",
+    "carpaint"
+   ],
+   "class": "glass",
+   "wmin": [
+    -1.231032,
+    0.815489,
+    -0.7004
+   ],
+   "wmax": [
+    1.884277,
+    1.338049,
+    0.671438
+   ],
+   "wmin_referenced": [
+    -1.231032,
+    0.815489,
+    -0.7004
+   ],
+   "wmax_referenced": [
+    1.884277,
+    1.338049,
+    0.671438
+   ],
+   "declared_positions": 9193,
+   "referenced_positions": 9193,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 13,
+   "name": "Body_Shell",
+   "mesh": 13,
+   "parent": null,
+   "det": 1,
+   "tris": 177954,
+   "area_m2": 20.431283,
+   "materials": [
+    0,
+    1,
+    3,
+    5
+   ],
+   "mat_names": [
+    "Arch_Liner",
+    "Interior_Plastic",
+    "Underbody",
+    "carpaint"
+   ],
+   "class": "other",
+   "wmin": [
+    -1.925318,
+    0.048529,
+    -0.854117
+   ],
+   "wmax": [
+    1.918313,
+    1.447658,
+    0.877874
+   ],
+   "wmin_referenced": [
+    -1.925318,
+    0.048529,
+    -0.854117
+   ],
+   "wmax_referenced": [
+    1.918313,
+    1.447658,
+    0.877874
+   ],
+   "declared_positions": 151009,
+   "referenced_positions": 151009,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 12,
+   "name": "Bumper_Front_Paint",
+   "mesh": 12,
+   "parent": null,
+   "det": 1,
+   "tris": 25053,
+   "area_m2": 2.237529,
+   "materials": [
+    0,
+    1,
+    3,
+    5
+   ],
+   "mat_names": [
+    "Arch_Liner",
+    "Interior_Plastic",
+    "Underbody",
+    "carpaint"
+   ],
+   "class": "other",
+   "wmin": [
+    -2.119087,
+    0.148544,
+    -0.759136
+   ],
+   "wmax": [
+    -1.559251,
+    0.699472,
+    0.78332
+   ],
+   "wmin_referenced": [
+    -2.119087,
+    0.148544,
+    -0.759136
+   ],
+   "wmax_referenced": [
+    -1.559251,
+    0.699472,
+    0.78332
+   ],
+   "declared_positions": 20296,
+   "referenced_positions": 20296,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 11,
+   "name": "Bumper_Rear_Paint",
+   "mesh": 11,
+   "parent": null,
+   "det": 1,
+   "tris": 33483,
+   "area_m2": 2.392622,
+   "materials": [
+    0,
+    1,
+    2,
+    3,
+    5
+   ],
+   "mat_names": [
+    "Arch_Liner",
+    "Interior_Plastic",
+    "Trim_Black",
+    "Underbody",
+    "carpaint"
+   ],
+   "class": "other",
+   "wmin": [
+    1.39104,
+    0.151528,
+    -0.819278
+   ],
+   "wmax": [
+    2.02311,
+    0.949789,
+    0.834876
+   ],
+   "wmin_referenced": [
+    1.39104,
+    0.151528,
+    -0.819278
+   ],
+   "wmax_referenced": [
+    2.02311,
+    0.949789,
+    0.834876
+   ],
+   "declared_positions": 26146,
+   "referenced_positions": 26146,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 10,
+   "name": "Bumper_Rear_Trim",
+   "mesh": 10,
+   "parent": null,
+   "det": 1,
+   "tris": 2377,
+   "area_m2": 0.11714,
+   "materials": [
+    0,
+    2,
+    3
+   ],
+   "mat_names": [
+    "Trim_Black",
+    "Underbody",
+    "carpaint"
+   ],
+   "class": "rim",
+   "wmin": [
+    1.569777,
+    0.185332,
+    -0.566761
+   ],
+   "wmax": [
+    1.814765,
+    0.265848,
+    0.518452
+   ],
+   "wmin_referenced": [
+    1.569777,
+    0.185332,
+    -0.566761
+   ],
+   "wmax_referenced": [
+    1.814765,
+    0.265848,
+    0.518452
+   ],
+   "declared_positions": 2161,
+   "referenced_positions": 2161,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 9,
+   "name": "Glass_Quarter_L",
+   "mesh": 9,
+   "parent": null,
+   "det": 1,
+   "tris": 362,
+   "area_m2": 0.012963,
+   "materials": [
+    6
+   ],
+   "mat_names": [
+    "glass"
+   ],
+   "class": "glass",
+   "wmin": [
+    0.949117,
+    1.046958,
+    -0.664332
+   ],
+   "wmax": [
+    1.147345,
+    1.295165,
+    -0.510769
+   ],
+   "wmin_referenced": [
+    0.949117,
+    1.046958,
+    -0.664332
+   ],
+   "wmax_referenced": [
+    1.147345,
+    1.295165,
+    -0.510769
+   ],
+   "declared_positions": 262,
+   "referenced_positions": 262,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 8,
+   "name": "Glass_Side_L",
+   "mesh": 8,
+   "parent": null,
+   "det": 1,
+   "tris": 9465,
+   "area_m2": 0.790286,
+   "materials": [
+    6
+   ],
+   "mat_names": [
+    "glass"
+   ],
+   "class": "glass",
+   "wmin": [
+    -0.693712,
+    0.868764,
+    -0.703957
+   ],
+   "wmax": [
+    0.758198,
+    1.301037,
+    -0.466696
+   ],
+   "wmin_referenced": [
+    -0.693712,
+    0.868764,
+    -0.703957
+   ],
+   "wmax_referenced": [
+    0.758198,
+    1.301037,
+    -0.466696
+   ],
+   "declared_positions": 6038,
+   "referenced_positions": 6038,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 7,
+   "name": "Glass_Side_R",
+   "mesh": 7,
+   "parent": null,
+   "det": 1,
+   "tris": 8668,
+   "area_m2": 0.767032,
+   "materials": [
+    6
+   ],
+   "mat_names": [
+    "glass"
+   ],
+   "class": "glass",
+   "wmin": [
+    -0.729271,
+    0.853526,
+    0.513595
+   ],
+   "wmax": [
+    1.152456,
+    1.277132,
+    0.669026
+   ],
+   "wmin_referenced": [
+    -0.729271,
+    0.853526,
+    0.513595
+   ],
+   "wmax_referenced": [
+    1.152456,
+    1.277132,
+    0.669026
+   ],
+   "declared_positions": 5698,
+   "referenced_positions": 5698,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 6,
+   "name": "Glass_Windscreen",
+   "mesh": 6,
+   "parent": null,
+   "det": 1,
+   "tris": 8780,
+   "area_m2": 0.989441,
+   "materials": [
+    6
+   ],
+   "mat_names": [
+    "glass"
+   ],
+   "class": "glass",
+   "wmin": [
+    -1.211312,
+    0.800973,
+    -0.666802
+   ],
+   "wmax": [
+    -0.401078,
+    1.253765,
+    0.625689
+   ],
+   "wmin_referenced": [
+    -1.211312,
+    0.800973,
+    -0.666802
+   ],
+   "wmax_referenced": [
+    -0.401078,
+    1.253765,
+    0.625689
+   ],
+   "declared_positions": 6666,
+   "referenced_positions": 6666,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 5,
+   "name": "Interior",
+   "mesh": 5,
+   "parent": null,
+   "det": 1,
+   "tris": 164858,
+   "area_m2": 7.894782,
+   "materials": [
+    0,
+    1,
+    3,
+    5
+   ],
+   "mat_names": [
+    "Arch_Liner",
+    "Interior_Plastic",
+    "Underbody",
+    "carpaint"
+   ],
+   "class": "other",
+   "wmin": [
+    -2.066328,
+    0.161447,
+    -0.868795
+   ],
+   "wmax": [
+    1.97016,
+    1.394132,
+    0.877568
+   ],
+   "wmin_referenced": [
+    -2.066328,
+    0.161447,
+    -0.868795
+   ],
+   "wmax_referenced": [
+    1.97016,
+    1.394132,
+    0.877568
+   ],
+   "declared_positions": 116747,
+   "referenced_positions": 116747,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 4,
+   "name": "Mirror_L",
+   "mesh": 4,
+   "parent": null,
+   "det": 1,
+   "tris": 1462,
+   "area_m2": 0.075519,
+   "materials": [
+    1,
+    3
+   ],
+   "mat_names": [
+    "Interior_Plastic",
+    "carpaint"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.852018,
+    0.819058,
+    -0.899753
+   ],
+   "wmax": [
+    -0.658179,
+    0.975404,
+    -0.779912
+   ],
+   "wmin_referenced": [
+    -0.852018,
+    0.819058,
+    -0.899753
+   ],
+   "wmax_referenced": [
+    -0.658179,
+    0.975404,
+    -0.779912
+   ],
+   "declared_positions": 987,
+   "referenced_positions": 987,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 3,
+   "name": "Mirror_R",
+   "mesh": 3,
+   "parent": null,
+   "det": 1,
+   "tris": 561,
+   "area_m2": 0.033982,
+   "materials": [
+    1,
+    3
+   ],
+   "mat_names": [
+    "Interior_Plastic",
+    "carpaint"
+   ],
+   "class": "other",
+   "wmin": [
+    -0.815947,
+    0.825743,
+    0.803997
+   ],
+   "wmax": [
+    -0.649278,
+    0.952513,
+    0.890078
+   ],
+   "wmin_referenced": [
+    -0.815947,
+    0.825743,
+    0.803997
+   ],
+   "wmax_referenced": [
+    -0.649278,
+    0.952513,
+    0.890078
+   ],
+   "declared_positions": 455,
+   "referenced_positions": 455,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 2,
+   "name": "TailLamp_L",
+   "mesh": 2,
+   "parent": null,
+   "det": 1,
+   "tris": 1153,
+   "area_m2": 0.072531,
+   "materials": [
+    4
+   ],
+   "mat_names": [
+    "Lamp_Lens_Rear"
+   ],
+   "class": "other",
+   "wmin": [
+    1.530303,
+    0.811755,
+    -0.742691
+   ],
+   "wmax": [
+    1.975823,
+    1.162668,
+    0.102456
+   ],
+   "wmin_referenced": [
+    1.530303,
+    0.811755,
+    -0.742691
+   ],
+   "wmax_referenced": [
+    1.975823,
+    1.162668,
+    0.102456
+   ],
+   "declared_positions": 1178,
+   "referenced_positions": 1178,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 1,
+   "name": "TailLamp_R",
+   "mesh": 1,
+   "parent": null,
+   "det": 1,
+   "tris": 1144,
+   "area_m2": 0.09395,
+   "materials": [
+    4
+   ],
+   "mat_names": [
+    "Lamp_Lens_Rear"
+   ],
+   "class": "other",
+   "wmin": [
+    1.375865,
+    0.632177,
+    0.100452
+   ],
+   "wmax": [
+    1.984982,
+    1.159577,
+    0.745492
+   ],
+   "wmin_referenced": [
+    1.375865,
+    0.632177,
+    0.100452
+   ],
+   "wmax_referenced": [
+    1.984982,
+    1.159577,
+    0.745492
+   ],
+   "declared_positions": 1082,
+   "referenced_positions": 1082,
+   "unreferenced_positions": 0
+  },
+  {
+   "node": 0,
+   "name": "Underbody",
+   "mesh": 0,
+   "parent": null,
+   "det": 1,
+   "tris": 28470,
+   "area_m2": 1.111236,
+   "materials": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "mat_names": [
+    "Interior_Plastic",
+    "Trim_Black",
+    "Underbody",
+    "carpaint"
+   ],
+   "class": "other",
+   "wmin": [
+    -2.094697,
+    0.151528,
+    -0.802232
+   ],
+   "wmax": [
+    1.984367,
+    0.392378,
+    0.801592
+   ],
+   "wmin_referenced": [
+    -2.094697,
+    0.151528,
+    -0.802232
+   ],
+   "wmax_referenced": [
+    1.984367,
+    0.392378,
+    0.801592
+   ],
+   "declared_positions": 22978,
+   "referenced_positions": 22978,
+   "unreferenced_positions": 0
+  }
+ ]
+}
