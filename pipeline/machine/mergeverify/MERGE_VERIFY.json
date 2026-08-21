@@ -468,9 +468,9 @@
     }
    },
    "measured_on_merged_car": "NOT TESTED - merged car not published",
-   "threshold": "all present, none empty",
-   "control_fired": "PARTIAL - distinguishes present from absent, but the named-but-EMPTY node path is untested",
-   "status": "HARNESS READY",
+   "threshold": "all present, none empty, no two names on one mesh",
+   "control_fired": "NC10 empty-but-named node; NC11 two names on one mesh - a name check passes both at 20/20",
+   "status": "HARNESS PROVEN",
    "note": ""
   }
  ],
@@ -534,6 +534,18 @@
    "injected": "car_rebound / car_glass_v4 / v7 tyres",
    "response": "grounding reads 189.319 mm",
    "fired": true
+  },
+  {
+   "id": "NC10",
+   "injected": "node keeps its NAME, loses its mesh binding (Badge)",
+   "response": "a name check reports 20/20 present; my check reports empty_or_no_geometry ['Badge']",
+   "fired": true
+  },
+  {
+   "id": "NC11",
+   "injected": "two named nodes re-pointed at ONE mesh (Grille_Upper -> Grille_Lower's mesh)",
+   "response": "a name check reports 20/20 present; my check reports nodes_sharing_one_mesh [['Grille_Upper','Grille_Lower']]",
+   "fired": true
   }
  ],
  "findings": [],
@@ -543,12 +555,13 @@
    "why": "no file with a deliberate validator error was built. Evidence it is reading the geometry: it reports 90-174 BUFFER_VIEW_TARGET_MISSING hints and 2 ACCESSOR_INDEX_TRIANGLE_DEGENERATE infos per file, so it is not returning a canned zero. That is evidence, not proof."
   },
   {
-   "check": "hierarchy inventory, named-but-EMPTY node",
-   "why": "the code path (empty_or_no_geometry) exists and is untested; only present-vs-absent has been demonstrated."
-  },
-  {
    "check": "hole test LOST class",
    "why": "NC7 fired only via RECEDED. The LOST class has been shown to fire on a synthetic icosphere (72 of 144 rays) but never on the car, because the cabin sits behind every panel - which is the finding, not a gap."
+  },
+  {
+   "check": "hierarchy inventory",
+   "status": "CLOSED after the first draft",
+   "why": "NC10 (empty-but-named node) and NC11 (two names on one mesh) both fire; both pass a naive name check at 20/20"
   }
  ],
  "glass_probe_pairing_evidence": [
@@ -587,5 +600,49 @@
    "glazing_material_m2": 2.7316,
    "khr_ext": false
   }
- ]
+ ],
+ "rigid_transform_rebound_to_merged": {
+  "body_glazing_bumpers": {
+   "nodes": 18,
+   "vertices": 615395,
+   "rotation_deg": 4.7301,
+   "axis": [
+    0.1105,
+    -0.4826,
+    0.8689
+   ],
+   "translation_mm": [
+    -0.469,
+    -101.609,
+    11.872
+   ],
+   "max_residual_um": 0.1225,
+   "rms_residual_um": 0.041,
+   "det_R": 1.0,
+   "rigid": true
+  },
+  "wheels": {
+   "FL": {
+    "rotation_deg": 177.4517,
+    "max_residual_um": 8045.55,
+    "rigid": false
+   },
+   "FR": {
+    "rotation_deg": 4.7238,
+    "max_residual_um": 8216.16,
+    "rigid": false
+   },
+   "RL": {
+    "rotation_deg": 177.9009,
+    "max_residual_um": 8744.57,
+    "rigid": false
+   },
+   "RR": {
+    "rotation_deg": 4.727,
+    "max_residual_um": 8001.73,
+    "rigid": false
+   }
+  },
+  "consequence": "the glass relabelling (which moves no vertex) and the v7 front kit can be carried onto the grounded base by this single matrix; the wheels must come from car_merged"
+ }
 }

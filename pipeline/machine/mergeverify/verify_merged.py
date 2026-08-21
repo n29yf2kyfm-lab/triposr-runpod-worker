@@ -79,7 +79,15 @@ def hierarchy(g):
         rows[gate] = dict(expected=len(names), found=len(names) - len(miss),
                           missing=miss, empty_or_no_geometry=empty)
     extra = sorted(set(present) - set(sum(GATES.values(), [])))
+    # "never a name on a merged mesh": two named nodes pointing at ONE mesh look
+    # like two components to a name check and are one component in the file.
+    by_mesh = {}
+    for n in g.nodes():
+        if n.mesh is not None:
+            by_mesh.setdefault(n.mesh, []).append(n.name)
+    shared = [v for v in by_mesh.values() if len(v) > 1]
     return dict(per_gate=rows, node_count=len(present), extra_nodes=extra,
+                nodes_sharing_one_mesh=shared,
                 all_nodes={k: v.get('faces') for k, v in present.items()})
 
 

@@ -58,7 +58,7 @@ Threshold column is what I fixed **before** the merged car existed.
 | 14 | all | tyres black `Tyre_Rubber` ≈ 0.027 | 0.0288 on six of seven files | NOT TESTED | 0.027 ± 0.010 | ✅ fires on rear v2 at 0.0484 | **REPRODUCED — except rear v2 (§3.1)** |
 | 15 | all | respray control: paint moves, tyres/glass/rims/lamps do not, tail lamps hold red | carpaint 40.3–83.1; tyres 1.7–2.6; rims 1.7–5.9; lamps 2.0–7.2; **tail lamps [103,56,58] → [96,58,68], red held** | NOT TESTED | paint ≥ 25, frozen ≤ 10 | ✅ NC5 | **REPRODUCED** |
 | 16 | all | no new holes | null (same file vs itself) **0/0/0/0 over 15,360 rays**; NC7 control **lost 0, receded 17** | NOT TESTED | lost ≤ gained, receded ≈ 0 | ✅ NC7 — **but only via RECEDED; LOST was 0** | **HARNESS PROVEN (§5.1)** |
-| 17 | all | hierarchy: every gate's components are real separately-selectable nodes | union inventory built (26 + 1 + 28 + 20 + 14 = 89 expected) | NOT TESTED | all present, none empty | ✅ reports 0/20, 0/28, 0/14 on single-gate files | **HARNESS READY** |
+| 17 | all | hierarchy: every gate's components are real separately-selectable nodes | union inventory built (26 + 1 + 28 + 20 + 14 = 89 expected) | NOT TESTED | all present, none empty, no two names on one mesh | ✅ NC10 empty-but-named node; ✅ NC11 two names on one mesh — a name check passes both at 20/20 | **HARNESS PROVEN** |
 
 ---
 
@@ -133,7 +133,28 @@ body, which is the documented `rear_lamps4.py` design; the front kit is built to
 plane. Both are defensible; they are **different standards** and the merged car will
 carry both.
 
-### 3.5 Two gates do not carry the merge's grounding fix
+### 3.5 The merge IS one rigid body transform — so the other fixes can be transported
+
+Verified independently by Kabsch fit over every node the two files share, `car_rebound`
+→ `car_merged`:
+
+* **body + glazing + bumpers** (18 nodes, 615,395 vertices): **one rigid transform** —
+  **4.7301°** about `[0.1105, −0.4826, 0.8689]`, translation `[−0.47, −101.61, +11.87]`
+  mm, **max residual 0.1225 µm**, rms 0.0410 µm, `det(R) = 1.000000000`.
+  The cabin gate stated "one rigid 4.730 deg rotation, max residual 0.12 µm" — I
+  reproduce both to four significant figures from the files alone.
+* **the four wheels are NOT part of it**: each was re-seated on its own (max residual
+  8.0–8.7 mm), and FL/RL carry ~177.5° rotations, i.e. they were re-fitted rather than
+  carried.
+
+**Why this matters to the merge:** the glass gate's MANIFEST states its change is
+"label reassignment only. No vertex moved, no face was deleted" — and I confirm the
+glazing node face counts are a repartition of the same 985,227 faces. So the glass
+relabelling and the v7 front kit can both be carried onto the grounded base by
+applying that single matrix; they do not need re-deriving. The wheels must come from
+`car_merged`, never from `car_rebound`.
+
+### 3.6 Two gates do not carry the merge's grounding fix
 
 `car_glass_v4.glb` and `GOLF_V7_FRONT_GATE.glb` are built on `car_rebound.glb`, so
 their tyres are still at FL **183.178 mm** / FR **189.636 mm** in the air. Only
@@ -268,7 +289,7 @@ behind it usually lands on a neighbour. A contiguous 150 mm hole (the realistic 
 failure — a dropped panel region) is the more representative control and was still
 running at the time of writing.
 
-**Checks I could NOT prove can fail — say so rather than imply coverage:**
+**Checks I could NOT prove can fail — say so rather than imply coverage** (one of the three was closed after the first draft and is struck through):
 
 1. **Khronos validator = 0 errors.** All seven files pass. I did **not** build a file
    with a deliberate validator error, so I have not demonstrated in this session that
@@ -281,11 +302,16 @@ running at the time of writing.
    underlying ray caster **is** proven: `raycast.selftest()` returns exactly 2 hits on
    every one of 144 rays through a closed icosphere, and punching a cap makes exactly
    72 rays lose a surface; the binned accelerator agrees with brute force on every ray.
-3. **Hierarchy inventory.** It reports 0/20, 0/28 and 0/14 on files that legitimately
-   lack those components, so it distinguishes present from absent — but I have not
-   tested it against a file with a *named-but-empty* node, which is the failure mode
-   the brief actually names ("never an empty node, never a name on a merged mesh").
-   The code path exists (`empty_or_no_geometry`); it is untested.
+3. ~~**Hierarchy inventory.**~~ **CLOSED — this gap is now tested.** Two further
+   controls were built for the two failure modes the brief names:
+   * **NC10** — `Badge` keeps its name and loses its mesh binding. A name check reports
+     **20/20 present**; my check reports `empty_or_no_geometry: ['Badge']`. ✅
+   * **NC11** — `Grille_Upper` re-pointed at `Grille_Lower`'s mesh, i.e. two names on
+     one merged mesh. A name check again reports **20/20**; my check reports
+     `nodes_sharing_one_mesh: [['Grille_Upper','Grille_Lower']]`. ✅
+   Both would sail through an inventory that only asks whether the name exists, which
+   is exactly what "never an empty node, never a name on a merged mesh" is warning
+   about. `nodes_sharing_one_mesh` is now part of the runner.
 
 ### The two probe traps, confirmed end-to-end
 

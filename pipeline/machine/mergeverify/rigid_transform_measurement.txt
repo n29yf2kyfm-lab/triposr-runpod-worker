@@ -1,0 +1,16 @@
+=== A. BODY + GLAZING + BUMPERS (everything except the four wheels) ===
+  nodes=18 verts=615395  det=1.000000000
+  rotation 4.7301 deg about [ 0.1105 -0.4826  0.8689]   translation [  -0.469 -101.609   11.872] mm
+  residual max 0.1225 um   rms 0.0410 um
+  -> ONE RIGID TRANSFORM: True
+
+=== B. EACH WHEEL ASSEMBLY, fitted on its own ===
+  FL: rot 177.4517 deg about [ 0.035  0.997 -0.062]  transl [-2569.79  -179.54 -1346.4 ] mm  residual max   8045.55 um  rigid=False
+  FR: rot  4.7238 deg about [ 0.097 -0.483  0.87 ]  transl [  11.36 -102.38   17.55] mm  residual max   8216.16 um  rigid=False
+  RL: rot 177.9009 deg about [ 0.036  0.999 -0.004]  transl [ 2377.84   -82.12 -1391.95] mm  residual max   8744.57 um  rigid=False
+  RR: rot  4.7270 deg about [ 0.126 -0.476  0.87 ]  transl [  0.83 -87.56  13.2 ] mm  residual max   8001.73 um  rigid=False
+
+  CONSEQUENCE: the body transform is a single rigid matrix, so the glass
+  relabelling (which moves no vertex) and the v7 front kit can both be carried
+  onto the grounded base by applying it. The wheels are NOT part of that
+  transform and must come from car_merged, not from car_rebound.
