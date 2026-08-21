@@ -43,10 +43,11 @@ PRE = os.environ.get("ST_PRE", "car-meshes/staging/sharptest")
 RUN = os.environ.get("ST_RUN", "runA")
 IMAGE = os.environ.get(
     "ST_IMAGE", "runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04")
-OK_MARKER = "SPARSEFLEX_OK"
+BOOT = os.environ.get("ST_BOOT", "sparseflex_boot.sh")
+OK_MARKER = os.environ.get("ST_OK", "SPARSEFLEX_OK")
 # 24GB is the documented floor for 1024^3 headroom (the README asks >=12GB).
-GPUS = ["NVIDIA GeForce RTX 3090", "NVIDIA RTX A6000",
-        "NVIDIA GeForce RTX 4090", "NVIDIA A40", "NVIDIA L40"]
+GPUS = os.environ.get("ST_GPUS", "NVIDIA GeForce RTX 3090,NVIDIA RTX A6000,"
+                      "NVIDIA GeForce RTX 4090,NVIDIA A40,NVIDIA L40").split(",")
 
 
 def _hdr(key):
@@ -72,20 +73,21 @@ def get_text(remote, key, timeout=30):
 
 def preflight(key, hf):
     """Prove the two things that can make the whole run impossible, for free."""
-    req = urllib.request.Request(
+    wurl = os.environ.get(
+        "ST_WEIGHT_URL",
         "https://huggingface.co/VAST-AI/TripoSF/resolve/main/vae/"
-        "pretrained_TripoSFVAE_256i1024o.safetensors",
-        headers={"Authorization": f"Bearer {hf}", "Range": "bytes=0-1023"})
+        "pretrained_TripoSFVAE_256i1024o.safetensors")
+    req = urllib.request.Request(
+        wurl, headers={"Authorization": f"Bearer {hf}", "Range": "bytes=0-1023"})
     code = urllib.request.urlopen(req, timeout=60).status
     if code not in (200, 206):
         raise SystemExit(f"REFUSED: weights preflight HTTP {code}")
     print(f"weights preflight -> HTTP {code}")
 
     # The EXACT url and headers the pod will use, not an equivalent one.
-    req = urllib.request.Request(f"{SB}/{PRE}/sparseflex_boot.sh",
-                                 headers=_hdr(key))
+    req = urllib.request.Request(f"{SB}/{PRE}/{BOOT}", headers=_hdr(key))
     body = urllib.request.urlopen(req, timeout=60).read()
-    if b"SPARSEFLEX_OK" not in body:
+    if OK_MARKER.encode() not in body:
         raise SystemExit("REFUSED: bootstrap fetched but content is wrong")
     print(f"bootstrap preflight -> HTTP 200, {len(body)} bytes, marker present")
 
@@ -129,13 +131,13 @@ def main():
     key = os.environ["RUNPOD_API_KEY"]
     sb = os.environ["SB_KEY"]
     hf = os.environ["HF_TOKEN"]
-    sha = os.environ["ST_INPUT_SHA"]
+    sha = os.environ.get("ST_INPUT_SHA", "")
     fuse = os.environ.get("ST_FUSE_S", "2700")
     watch_s = float(os.environ.get("ST_WATCH_S", "3300"))
     boot_limit = float(os.environ.get("ST_BOOT_LIMIT_S", "900"))
 
     print("staging code to the bucket")
-    put(os.path.join(HERE, "sparseflex_boot.sh"), "sparseflex_boot.sh", sb)
+    put(os.path.join(HERE, BOOT), BOOT, sb)
     put(os.path.join(HERE, "crease_density.py"), "crease_density.py", sb)
     put(os.path.join(HERE, "crease2.py"), "crease2.py", sb)
     preflight(sb, hf)
@@ -158,10 +160,10 @@ def main():
 
     boot_cmd = (
         f"curl -sS -H 'apikey: $SB_KEY' -H 'Authorization: Bearer $SB_KEY' "
-        f"'{SB}/{PRE}/sparseflex_boot.sh?cb='$(date +%s) -o /tmp/boot.sh "
+        f"'{SB}/{PRE}/{BOOT}?cb='$(date +%s) -o /tmp/boot.sh "
         f"&& bash /tmp/boot.sh; sleep infinity")
     body = {
-        "name": f"sparseflex-{RUN}",
+        "name": f"sharptest-{RUN}",
         "imageName": IMAGE,
         "gpuTypeIds": GPUS,
         "gpuTypePriority": "availability",
