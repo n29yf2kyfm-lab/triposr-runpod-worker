@@ -545,6 +545,14 @@ def respray_control(path, out_dir, cams, new_rgba=(0.05, 0.12, 0.75, 1.0),
     # pixel-change test CANNOT see that (there is nothing left to change), so it
     # is checked separately, and only for materials that must be visible at a
     # three-quarter view.
+    # ONLY the NOT-LOADED signal fails. A low pixel count is camera-dependent and
+    # firing on it produced a FALSE failure inside this gate's own first full
+    # run: the orchestrator handed respray_control its first camera, az000, an
+    # end-on view where neither lamp is visible, and the check duly declared
+    # `Lamp_Lens` and `Lamp_Lens_Rear` "absorbed by another material" on a car
+    # where both are intact and score 1,413 px and 438 px at az215. The
+    # not-loaded signal has no such dependency -- <model-viewer> refuses to load
+    # a material NO primitive references, whatever the camera is doing.
     for i, nm in enumerate(names):
         if nm not in critical_visible:
             continue
@@ -553,9 +561,9 @@ def respray_control(path, out_dir, cams, new_rgba=(0.05, 0.12, 0.75, 1.0),
                          "NOT LOADED -- no primitive references it, so its geometry "
                          "has been absorbed by another material" % nm)
         elif int((part & (best == i)).sum()) < phantom_px:
-            fails.append("`%s` is in the material table but renders on <%d pixels -- "
-                         "its geometry appears to have been absorbed by another "
-                         "material" % (nm, phantom_px))
+            advisory.append("`%s` renders on <%d pixels at this camera -- expected "
+                            "for a component the view does not show; not gated"
+                            % (nm, phantom_px))
 
     if paint_material not in names:
         fails.append("no material named %r -- respray-by-name cannot work"
@@ -769,6 +777,27 @@ def rebind_material(src, dst, from_mat, to_mat):
 # per-candidate gate
 # ==========================================================================
 
+
+def respray_cameras(cams, prefer_az=215):
+    """Order the camera list so the respray control gets a THREE-QUARTER view.
+
+    The control needs one camera that shows paint, glazing, a wheel and a lamp at
+    once. az 0/90/180/270 are end-on or pure profile and each hides something;
+    the three-quarters are the only views where every gated material has pixels.
+    """
+    full = [c for c in cams if c.get("zone") == "full"] or list(cams)
+
+    def key(c):
+        try:
+            az = float(c["orbit"].split("deg")[0])
+        except Exception:
+            az = 0.0
+        d = abs((az - prefer_az + 180) % 360 - 180)
+        return d
+    full.sort(key=key)
+    return full + [c for c in cams if c not in full]
+
+
 def gate_one(master, cand, out_dir, cams, budget=None, min_psnr=35.0,
              min_area_ratio=0.85, do_load=True, load_tiers=None, load_repeats=3,
              do_respray=True, verbose=True, master_cache=None):
@@ -787,8 +816,11 @@ def gate_one(master, cand, out_dir, cams, budget=None, min_psnr=35.0,
                                      cams=cams, min_psnr=min_psnr, verbose=verbose,
                                      master_cache=master_cache)
     if do_respray:
+        # A three-quarter view, not cams[0]. cams[0] is az000, an END-ON view
+        # where neither lamp is visible; running the respray control there made
+        # the phantom check report two absorbed materials on an intact car.
         r["respray"] = respray_control(cand, os.path.join(out_dir, "respray"),
-                                       cams, verbose=verbose)
+                                       respray_cameras(cams), verbose=verbose)
     if do_load:
         r["load"] = LP.probe(cand, out_dir=os.path.join(out_dir, "load"),
                              tiers=load_tiers, repeats=load_repeats, verbose=verbose)
