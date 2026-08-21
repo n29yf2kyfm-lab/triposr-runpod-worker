@@ -262,7 +262,9 @@ def plan_wheels(post, cs, nose, args, report):
         side = 1.0 if m["centre"][2] > 0 else -1.0
         a_t = np.array([0.0, 0.0, side])
         s_rad = R_t / m["R"]
-        s_ax = W_t / m["width"]
+        s_ax = (W_t / m["width"]) if args.equalise_width else 1.0
+        if not args.square_axes:
+            a_t = m["axis"] * (1.0 if m["axis"][2] * side > 0 else -1.0)
         for nm, s in (("radial", s_rad), ("axial", s_ax)):
             if abs(s - 1.0) > args.max_scale:
                 raise SystemExit(
@@ -270,13 +272,14 @@ def plan_wheels(post, cs, nose, args, report):
                     f"+-{args.max_scale:.2f}; a runaway scale is what walked "
                     f"Gate 6's first attempt 14 mm proud of the fenders")
         L, NL = axisym_linear(m["axis"], s_rad, s_ax, a_t)
+        rotated = bool(args.square_axes)
         det = float(np.linalg.det(L))
         if det <= 0:
             raise SystemExit(f"REFUSED: corner {k} linear map has det {det:.4f}")
         c_t = np.array([hub_x[ax], m["centre"][1], side * hub_absz[ax]])
         plan[k] = dict(measured=m, axle=ax, side=side, s_rad=s_rad, s_ax=s_ax,
                        L=L, NL=NL, c_from=m["centre"].copy(), c_to=c_t,
-                       a_to=a_t, det=det)
+                       a_to=a_t, det=det, rotated=rotated)
     report["wheel_targets"] = dict(
         radius_m=R_t, radius_source=args.radius, radius_mean_measured=R_mean,
         radius_gate6=GATE6["radius_m"],
@@ -304,6 +307,9 @@ def ground_wheels(plan, post, cs, args, report):
         final = moved - np.array([0.0, drop, 0.0])
         pl["tyre_bottom_m"] = float(final[:, 1].min())
         pl["contact_verts"] = int((final[:, 1] < args.contact_tol_m).sum())
+        pl["contact_verts_by_tol"] = {f"{int(t * 1000)}mm":
+                                      int((final[:, 1] < t).sum())
+                                      for t in (0.0005, 0.001, 0.002, 0.005)}
         pl["tyre_nodes"] = tyre
     return plan
 
@@ -319,7 +325,9 @@ def run(args):
         stages=[s for s in args.stages.split(",") if s],
         config=dict(max_scale=args.max_scale, track_mode=args.track_mode,
                     radius=args.radius, width=args.width, hub_x=args.hub_x,
-                    pose_mode=args.pose_mode))
+                    pose_mode=args.pose_mode,
+                    square_axes=args.square_axes,
+                    equalise_width=args.equalise_width))
 
     # --- refusal: instancing. Baking a shared mesh moves every instance.
     users = {}
@@ -422,8 +430,9 @@ def run(args):
         w = report["wheels"][k]
         print(f"  {k}: bottom {w['tyre_bottom_m'] * 1000:+.4f} mm  "
               f"contact {w['contact_verts']} v  s_rad {w['s_rad']:.5f}  "
-              f"s_ax {w['s_ax']:.5f}  d_toe {w['d_toe_deg']:+.3f}  "
-              f"d_camber {w['d_camber_deg']:+.3f}")
+              f"s_ax {w['s_ax']:.5f}  rotated {w['axis_rotated']}  "
+              f"toe_meas {w['toe_measured_deg']:+.3f}  "
+              f"cam_meas {w['camber_measured_deg']:+.3f}")
     return report
 
 
@@ -436,11 +445,20 @@ def _wrep(pl):
         axis_to=[float(x) for x in pl["a_to"]],
         radius_from=m["R"], width_from=m["width"],
         s_rad=pl["s_rad"], s_ax=pl["s_ax"], det=pl["det"],
-        toe_before_deg=m["toe_deg"], camber_before_deg=m["camber_deg"],
-        d_toe_deg=-m["toe_deg"], d_camber_deg=-m["camber_deg"],
+        toe_measured_deg=m["toe_deg"], camber_measured_deg=m["camber_deg"],
+        axis_rotated=pl["rotated"],
+        d_toe_deg=(-m["toe_deg"] if pl["rotated"] else 0.0),
+        d_camber_deg=(-m["camber_deg"] if pl["rotated"] else 0.0),
+        angle_note=("axis squared" if pl["rotated"] else
+                    "axis LEFT AS FOUND - see --square-axes; the measured "
+                    "toe/camber above are reported for the record and are "
+                    "NOT MEASURABLE to better than about 1-3 deg on this "
+                    "geometry (merge_calib.py)"),
         coverage=m["coverage"], fit_rms_m=m["rms"],
         ground_drop_m=pl["ground_drop_m"], tyre_bottom_m=pl["tyre_bottom_m"],
-        contact_verts=pl["contact_verts"], tyre_nodes=pl["tyre_nodes"],
+        contact_verts=pl["contact_verts"],
+        contact_verts_by_tol=pl["contact_verts_by_tol"],
+        tyre_nodes=pl["tyre_nodes"],
         n_points=m["n"])
 
 
@@ -482,6 +500,17 @@ def main():
     ap.add_argument("--radius", default="mean", choices=("mean", "gate6"))
     ap.add_argument("--width", default="mean", choices=("mean", "gate6"))
     ap.add_argument("--hub-x", default="measured", choices=("measured", "gate6"))
+    ap.add_argument("--square-axes", action="store_true", help=(
+        "rotate each wheel's axis to pure lateral (zero toe and camber). OFF "
+        "by default: four independent estimators of the same wheel's axis on "
+        "this melt geometry disagree by 1.2-10.9 deg, and the closed-loop "
+        "response of the correction measured 0.26-1.57 -- on one corner it "
+        "overshot and flipped the sign of the toe. See merge_calib.py."))
+    ap.add_argument("--equalise-width", action="store_true", help=(
+        "axially scale each wheel to a common width. OFF by default: the "
+        "width measure is the lateral span of the tread band about the FITTED "
+        "axis, so an axis error of d inflates it by 2R sin(d) -- 18 mm at 1.7 "
+        "deg, which is the size of the 18 mm spread it would be correcting."))
     ap.add_argument("--max-scale", type=float, default=DEFAULTS["max_scale"])
     ap.add_argument("--ground-pct", type=float, default=DEFAULTS["ground_pct"])
     ap.add_argument("--contact-tol-m", type=float,
