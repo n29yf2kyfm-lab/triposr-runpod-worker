@@ -864,8 +864,19 @@ def write_outputs(out_dir, samples, images, classes_doc, plan,
                 if r.get("sha") in train_shas:
                     samples.append(r)
                     n_neg += 1
+        # Denominator is the TRAIN split, not every sample. Dividing by
+        # len(samples) mixed valid and test into a figure labelled "% of
+        # train" and understated the negatives' real share of what is trained
+        # on. plan.json is corrected below for the same reason: its
+        # n_samples.train is computed before this merge and would otherwise
+        # describe an index.jsonl that no longer exists.
+        n_train = sum(1 for s in samples if s["split"] == "train")
         print(f"negatives     merged {n_neg:,} of the file's rows "
-              f"({100.0 * n_neg / max(1, len(samples)):.1f}% of train)")
+              f"({100.0 * n_neg / max(1, n_train):.1f}% of the train split, "
+              f"which is now {n_train:,} rows)")
+        if isinstance(plan.get("n_samples"), dict):
+            plan["n_samples"]["train"] = n_train
+            plan["n_samples"]["train_negatives"] = n_neg
 
     with open(os.path.join(out_dir, "index.jsonl"), "w") as f:
         for s in samples:

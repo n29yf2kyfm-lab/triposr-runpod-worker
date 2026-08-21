@@ -43,9 +43,18 @@ def preflight(corpus, index):
     coco = os.path.join(corpus, "_annotations.coco.json")
     if not os.path.exists(coco):
         return [f"missing {coco}"]
-    with open(coco) as f:
-        d = json.load(f)
-    n_img, n_ann = len(d["images"]), len(d["annotations"])
+    # POOL EVERY SOURCE, as build_train_index and the shard upload both do.
+    # Counting only the top-level file printed a corpus size that excluded the
+    # very extra sources the resolve-check below was added for -- the summary
+    # line said 167,157 images while the index legitimately held 169,973.
+    n_img = n_ann = 0
+    for dirpath, _dn, filenames in os.walk(corpus):
+        if "_annotations.coco.json" not in filenames:
+            continue
+        with open(os.path.join(dirpath, "_annotations.coco.json")) as f:
+            d = json.load(f)
+        n_img += len(d["images"])
+        n_ann += len(d["annotations"])
 
     # CHECK THE PATHS THE INDEX ACTUALLY RECORDS, not a sha against one
     # directory. The corpus stopped being a single images/ folder when CarDD

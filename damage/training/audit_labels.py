@@ -99,7 +99,7 @@ def mean_tolerance(length):
         COCO_THRESHOLDS)
 
 
-def run(index_dir, corpus, limit):
+def run(index_dir, limit):
     with open(os.path.join(index_dir, "classes.json")) as f:
         classes = json.load(f)
     i2n = {int(k): v for k, v in classes["index_to_name"].items()}
@@ -114,10 +114,10 @@ def run(index_dir, corpus, limit):
 
     with open(os.path.join(index_dir, "images.jsonl")) as f:
         for ln in f:
+            if limit and n_img >= limit:
+                break
             rec = json.loads(ln)
             n_img += 1
-            if limit and n_img > limit:
-                break
             W, H = rec["width"], rec["height"]
             bs = rec["boxes"]
             boxes_per_image.append(len(bs))
@@ -268,13 +268,12 @@ def _selftest():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--index", default="/home/user/rf/idx8")
-    ap.add_argument("--corpus", default="/home/user/rf/merged640")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--selftest", action="store_true")
     a = ap.parse_args()
     if a.selftest:
         return _selftest()
-    return run(a.index, a.corpus, a.limit)
+    return run(a.index, a.limit)
 
 
 if __name__ == "__main__":
