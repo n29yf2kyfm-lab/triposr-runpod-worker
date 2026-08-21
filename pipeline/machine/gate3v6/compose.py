@@ -37,6 +37,95 @@ def save_jpeg(im, path, q=88):
     return path
 
 
+def flatten(src, grey=(129, 129, 129)):
+    """RGBA render -> RGB over a NEUTRAL GREY ground.
+
+    The zebra pass renders with film_transparent so the striped sky lights and
+    reflects but never becomes the picture's background - the owner's spec
+    forbids hiding faults behind a dark background, and a striped backdrop
+    reads as one."""
+    im = Image.open(src) if isinstance(src, str) else src
+    if im.mode != "RGBA":
+        return im.convert("RGB")
+    bg = Image.new("RGB", im.size, grey)
+    bg.paste(im.convert("RGB"), mask=im.split()[3])
+    return bg
+
+
+def scale_bar(im, px_per_m, out=None, target_mm=100, colour=(15, 15, 15)):
+    """Draw a physical scale bar. Turns a section render from 'looks like a gap'
+    into something the verifier can actually measure."""
+    im = im.convert("RGB")
+    d = ImageDraw.Draw(im)
+    W, H = im.size
+    for mm in (target_mm, 50, 20, 200, 500):
+        L = px_per_m * mm / 1000.0
+        if W * 0.10 <= L <= W * 0.40:
+            target_mm = mm
+            break
+    L = px_per_m * target_mm / 1000.0
+    x0, y0 = int(W * 0.045), int(H * 0.945)
+    th = max(3, int(H * 0.005))
+    d.rectangle([x0 - 8, y0 - int(H * 0.055), x0 + int(L) + 8, y0 + int(H * 0.016)],
+                fill=(248, 248, 248))
+    n = 4
+    for i in range(n):
+        d.rectangle([x0 + i * L / n, y0, x0 + (i + 1) * L / n, y0 + th],
+                    fill=colour if i % 2 == 0 else (250, 250, 250),
+                    outline=colour, width=1)
+    f = font(max(13, int(H * 0.022)))
+    d.text((x0, y0 - int(H * 0.046)), "%d mm   (%.1f px/mm)"
+           % (target_mm, px_per_m / 1000.0), font=f, fill=colour)
+    if out:
+        return save_jpeg(im, out)
+    return im
+
+
+def id_legend(im, colours, out=None, cols=3):
+    """Colour key for a material-ID / exploded render. A matID pass without a
+    legend is a pretty picture, not evidence."""
+    im = im.convert("RGB")
+    W, H = im.size
+    names = sorted(colours)
+    fs = max(14, int(W * 0.0105))
+    rows = int(math.ceil(len(names) / cols))
+    padx, pady = int(fs * 0.9), int(fs * 0.55)
+    sw = int(fs * 1.25)
+    colw = (W - padx * (cols + 1)) // cols
+    bh = pady * 2 + rows * int(fs * 1.55)
+    strip = Image.new("RGB", (W, bh), (242, 242, 242))
+    d = ImageDraw.Draw(strip)
+    f = font(fs, mono=True)
+    for i, n in enumerate(names):
+        c = tuple(int(round(255 * v)) for v in colours[n][:3])
+        r, cc = divmod(i, cols)
+        x = padx + cc * (colw + padx)
+        y = pady + r * int(fs * 1.55)
+        d.rectangle([x, y, x + sw, y + fs], fill=c, outline=(30, 30, 30), width=1)
+        d.text((x + sw + int(fs * 0.45), y - 1), n, font=f, fill=INK)
+    o = Image.new("RGB", (W, H + bh), (242, 242, 242))
+    o.paste(im, (0, 0))
+    o.paste(strip, (0, H))
+    if out:
+        return save_jpeg(o, out)
+    return o
+
+
+def stack(paths_or_ims, out, title, sub=""):
+    ims = [Image.open(p).convert("RGB") if isinstance(p, str) else p.convert("RGB")
+           for p in paths_or_ims]
+    W = max(i.width for i in ims)
+    ims = [i if i.width == W else i.resize((W, int(i.height * W / i.width)), Image.LANCZOS)
+           for i in ims]
+    H = sum(i.height for i in ims) + 8 * (len(ims) - 1)
+    o = Image.new("RGB", (W, H), (26, 26, 26))
+    y = 0
+    for i in ims:
+        o.paste(i, (0, y))
+        y += i.height + 8
+    return save_jpeg(caption_bar(o, title, sub, h=max(54, int(W * 0.016))), out)
+
+
 def caption_bar(im, title, sub="", h=None, bg=(18, 18, 18), fg=(245, 245, 245)):
     """Every delivered artefact self-describes ON THE IMAGE (council rule
     2026-08-16: an uncaptioned tile cost a whole review round)."""

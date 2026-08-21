@@ -44,6 +44,24 @@ def _agg(hyg, names):
     return out
 
 
+def _base_sym(B):
+    """Baseline worst L/R deviation -- or an honest 'n/a'.
+
+    The v5 baseline names its lamps `Head_Lens_R`, not `Headlamp_R_Lens`, so
+    the v6 pair list matches NOTHING in it and a max() over an empty set would
+    have printed a baseline of '0.00 mm' -- a perfect score for a file that was
+    never measured. That is exactly the kind of number this gate exists to stop.
+    """
+    if not B:
+        return "n/a"
+    vals = [v["shape_deviation"]["max_mm"] for v in
+            B.get("symmetry", {}).get("pairs", {}).values() if isinstance(v, dict)]
+    if not vals:
+        return ("n/a -- v5 node names differ; measured separately in "
+                "base_V5_symmetry.json: worst 97.79 mm")
+    return f"V5 worst {max(vals):.2f} mm"
+
+
 def row(req, base, final, thr, ev, status, risk=""):
     return {"requirement": req, "baseline": base, "final": final,
             "threshold": thr, "evidence": ev, "status": status,
@@ -186,8 +204,7 @@ def build(F, B=None, val=None, st=None, vw=None, valbase=None, imp=None):
         offs[k] = v["placement_offset_from_centreline_mm"]
     R.append(row("L/R front landmark symmetry: SHAPE deviation about the "
                  "best-fit pair plane",
-                 (f"V5 worst {max((v['shape_deviation']['max_mm'] for v in (B or {}).get('symmetry', {}).get('pairs', {}).values() if isinstance(v, dict)), default=0):.2f} mm")
-                 if B else "n/a",
+                 _base_sym(B),
                  f"worst {worst:.3f} mm ({worstk})" if worstk else "no L/R pairs found",
                  f"<= {SYM_TOL_MM} mm", "verify_front_gate.json:symmetry",
                  ("PASS" if worstk and worst <= SYM_TOL_MM else
