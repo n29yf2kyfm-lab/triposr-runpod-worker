@@ -1216,6 +1216,46 @@ def nc_inflate(src, dst):
 # per-asset pipeline
 # ==========================================================================
 
+def _retry_render(label, fn, attempts=3):
+    """Run a BROWSER-backed gate, retrying a renderer crash, and degrade to
+    NOT_TESTED rather than poisoning the whole asset.
+
+    Measured on porsche-911-pw2-v5 (7.17 MB) in the first full sample run:
+    `Page.screenshot: Target crashed` inside the respray control. SwiftShader is
+    a SOFTWARE rasteriser and a whole-material-table update on a large model
+    makes three.js re-upload and recompile everything; it occasionally dies.
+
+    Two things this must get right, and the old behaviour got both wrong:
+      * the exception propagated out of gate_asset and the ENTIRE asset was
+        recorded ERROR -- discarding four gate results that had already passed.
+      * a crashed renderer is "could not test", NOT "the asset is broken". It
+        must map to NOT_TESTED, which verdict() reads as BLOCKED, so a flaky
+        GPU can never be reported as a compression defect.
+    Each attempt gets its OWN output directory: a crashed run leaves partial
+    PNGs behind and reusing the directory would let a stale frame from the
+    failed attempt be measured by the successful one.
+    """
+    last = None
+    for a in range(1, attempts + 1):
+        try:
+            r = fn(a)
+            if a > 1:
+                r["retries"] = a - 1
+                r["retryNote"] = ("renderer crashed %d time(s) before this "
+                                  "result; SwiftShader is software and dies "
+                                  "occasionally on large models" % (a - 1))
+            return r
+        except Exception as e:                                   # noqa: BLE001
+            last = e
+            time.sleep(3 * a)
+    return {"status": "NOT_TESTED",
+            "reason": "the renderer crashed on all %d attempts: %s: %s. This is "
+                      "a SwiftShader failure, NOT a verdict on the asset -- it "
+                      "is reported as untested and the asset is not shipped."
+                      % (attempts, type(last).__name__, str(last)[:200]),
+            "gate": label}
+
+
 def gate_asset(asset_id, master_path, cand_path, work, paint_recorded,
                min_psnr=DEFAULT_MIN_PSNR, min_area=DEFAULT_MIN_AREA_RATIO,
                skip_respray=False, skip_psnr=False):
@@ -1245,8 +1285,10 @@ def gate_asset(asset_id, master_path, cand_path, work, paint_recorded,
     if skip_psnr:
         g["G5_psnr"] = {"status": "NOT_TESTED", "reason": "--skip-psnr"}
     else:
-        g["G5_psnr"] = g5_psnr(master_path, cand_path,
-                               os.path.join(work, "psnr"), cams, min_psnr)
+        g["G5_psnr"] = _retry_render(
+            "G5_psnr",
+            lambda a: g5_psnr(master_path, cand_path,
+                              os.path.join(work, "psnr_a%d" % a), cams, min_psnr))
 
     if skip_respray:
         g["G3_respray"] = {"status": "NOT_TESTED", "reason": "--skip-respray"}
@@ -1260,7 +1302,11 @@ def gate_asset(asset_id, master_path, cand_path, work, paint_recorded,
         # wheel simply is not visible there, which produced a false "absorbed by
         # another material" failure inside this gate's ancestor.
         cam = next((c for c in cams if c["view"] == "az215"), cams[0])
-        r = respray_control(cand_path, os.path.join(work, "respray"), cam, names)
+        r = _retry_render(
+            "G3_respray",
+            lambda a: respray_control(cand_path,
+                                      os.path.join(work, "respray_a%d" % a),
+                                      cam, names))
         r["paintRoute"] = route
         r["paintResolution"] = how
         g["G3_respray"] = r
@@ -1294,11 +1340,13 @@ def gate_asset(asset_id, master_path, cand_path, work, paint_recorded,
              lambda: g4_file(master_path, master_path, mm_m, mm_m,
                              os.path.join(work, "master_recheck"))),
             ("G3_respray",
-             lambda: respray_control(master_path,
-                                     os.path.join(work, "respray_master"),
-                                     next((c for c in cams if c["view"] == "az215"),
-                                          cams[0]),
-                                     (g.get("G3_respray") or {}).get("paintMaterials"))),
+             lambda: _retry_render(
+                 "G3_respray_master",
+                 lambda a: respray_control(
+                     master_path,
+                     os.path.join(work, "respray_master_a%d" % a),
+                     next((c for c in cams if c["view"] == "az215"), cams[0]),
+                     (g.get("G3_respray") or {}).get("paintMaterials")))),
     ):
         blk = g.get(key)
         if not blk or blk.get("status") != "FAIL":
