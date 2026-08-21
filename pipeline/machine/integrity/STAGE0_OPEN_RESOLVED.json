@@ -1,0 +1,202 @@
+{
+  "stage": "0-open-findings",
+  "resolved_by": "coordinator, independent of both stage agents",
+  "method": "GLB parsed directly from the binary (struct+numpy); no Blender, no trimesh",
+  "source_sha256": "400d994a9fd034cc55d64cf340ec70eedb0d5fa93c188e739da03a787b21084f",
+  "finding_1_triangle_delta": {
+    "status": "RESOLVED \u2014 exact, not approximate",
+    "declared_in_file": 888807,
+    "index_degenerate": 4,
+    "duplicate_vertex_triples": 924,
+    "arithmetic": "888807 - 4 - 924 = 887879",
+    "blender_reported": 887879,
+    "match": true,
+    "cause": "Blender's BMesh refuses to create a second face on a vertex triple that already carries one. The 924 are COINCIDENT faces present in the shipped file; the importer drops the duplicate, it does not lose geometry.",
+    "not_benign_because": "the Khronos validator flags only 1 of these 928 (ACCESSOR_INDEX_TRIANGLE_DEGENERATE). 924 coincident faces ship to the viewer and are a z-fighting source. This is a NEW finding, not a Stage 0 artefact.",
+    "per_mesh": [
+      {
+        "mesh": 0,
+        "name": "Wheel_RR_Tyre",
+        "duplicate_faces": 2,
+        "degenerate_faces": 0
+      },
+      {
+        "mesh": 1,
+        "name": "Wheel_RR_Rim",
+        "duplicate_faces": 12,
+        "degenerate_faces": 0
+      },
+      {
+        "mesh": 3,
+        "name": "Wheel_RL_Tyre",
+        "duplicate_faces": 29,
+        "degenerate_faces": 0
+      },
+      {
+        "mesh": 4,
+        "name": "Wheel_RL_Rim",
+        "duplicate_faces": 11,
+        "degenerate_faces": 0
+      },
+      {
+        "mesh": 7,
+        "name": "Wheel_FR_Rim",
+        "duplicate_faces": 15,
+        "degenerate_faces": 0
+      },
+      {
+        "mesh": 8,
+        "name": "Wheel_FR_Disc",
+        "duplicate_faces": 4,
+        "degenerate_faces": 4
+      },
+      {
+        "mesh": 10,
+        "name": "Wheel_FL_Rim",
+        "duplicate_faces": 6,
+        "degenerate_faces": 0
+      },
+      {
+        "mesh": 11,
+        "name": "Wheel_FL_Disc",
+        "duplicate_faces": 2,
+        "degenerate_faces": 0
+      },
+      {
+        "mesh": 12,
+        "name": "Underbody",
+        "duplicate_faces": 56,
+        "degenerate_faces": 0
+      },
+      {
+        "mesh": 17,
+        "name": "Interior",
+        "duplicate_faces": 679,
+        "degenerate_faces": 0
+      },
+      {
+        "mesh": 18,
+        "name": "Glass_Windscreen",
+        "duplicate_faces": 1,
+        "degenerate_faces": 0
+      },
+      {
+        "mesh": 19,
+        "name": "Glass_Side_R",
+        "duplicate_faces": 5,
+        "degenerate_faces": 0
+      },
+      {
+        "mesh": 20,
+        "name": "Glass_Side_L",
+        "duplicate_faces": 3,
+        "degenerate_faces": 0
+      },
+      {
+        "mesh": 23,
+        "name": "Bumper_Rear_Trim",
+        "duplicate_faces": 1,
+        "degenerate_faces": 0
+      },
+      {
+        "mesh": 24,
+        "name": "Bumper_Rear_Paint",
+        "duplicate_faces": 2,
+        "degenerate_faces": 0
+      },
+      {
+        "mesh": 25,
+        "name": "Bumper_Front_Paint",
+        "duplicate_faces": 11,
+        "degenerate_faces": 0
+      },
+      {
+        "mesh": 27,
+        "name": "Body_Glass_Reverted",
+        "duplicate_faces": 10,
+        "degenerate_faces": 0
+      },
+      {
+        "mesh": 28,
+        "name": "Arch_Liner",
+        "duplicate_faces": 75,
+        "degenerate_faces": 0
+      }
+    ]
+  },
+  "finding_2_ground": {
+    "status": "RESOLVED",
+    "owner_of_z_min": "Arch_Liner (node 28, 282,344 verts)",
+    "blender_world_z_min_m": -0.004587,
+    "all_four_tyres_z_min_m": {
+      "Wheel_FL_Tyre": -0.0,
+      "Wheel_RR_Tyre": -0.0,
+      "Wheel_RL_Tyre": -0.0,
+      "Wheel_FR_Tyre": 0.0
+    },
+    "verdict": "grounding is CORRECT \u2014 all four tyres sit on z=0. The 4.587 mm dip is the wheel-arch liner protruding below the contact plane, an interior part, not a tyre.",
+    "axis_note": "first pass read gltf column 2 and named Mirror_L; gltf is Y-up and the importer maps gltf_y -> blender_z. Corrected before recording."
+  },
+  "ranked_lowest": [
+    {
+      "blender_world_z_min_m": -0.004587,
+      "node": "Arch_Liner",
+      "node_index": 28,
+      "verts": 282344
+    },
+    {
+      "blender_world_z_min_m": -0.0,
+      "node": "Wheel_FL_Tyre",
+      "node_index": 9,
+      "verts": 5893
+    },
+    {
+      "blender_world_z_min_m": -0.0,
+      "node": "Wheel_RR_Tyre",
+      "node_index": 0,
+      "verts": 7257
+    },
+    {
+      "blender_world_z_min_m": -0.0,
+      "node": "Wheel_RL_Tyre",
+      "node_index": 3,
+      "verts": 8477
+    },
+    {
+      "blender_world_z_min_m": 0.0,
+      "node": "Wheel_FR_Tyre",
+      "node_index": 6,
+      "verts": 5276
+    },
+    {
+      "blender_world_z_min_m": 0.048529,
+      "node": "Body_Shell",
+      "node_index": 26,
+      "verts": 570808
+    },
+    {
+      "blender_world_z_min_m": 0.085257,
+      "node": "Wheel_FL_Rim",
+      "node_index": 10,
+      "verts": 12844
+    },
+    {
+      "blender_world_z_min_m": 0.095388,
+      "node": "Wheel_RR_Rim",
+      "node_index": 1,
+      "verts": 14176
+    },
+    {
+      "blender_world_z_min_m": 0.096128,
+      "node": "Wheel_FR_Rim",
+      "node_index": 7,
+      "verts": 15511
+    },
+    {
+      "blender_world_z_min_m": 0.096282,
+      "node": "Wheel_RL_Rim",
+      "node_index": 4,
+      "verts": 12257
+    }
+  ]
+}
