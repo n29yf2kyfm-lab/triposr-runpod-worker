@@ -445,12 +445,21 @@
      "gained": 0,
      "receded": 17
     },
-    "KEY_RESULT": "the control fires ONLY through the RECEDED class - lost was 0. A hole test reporting only lost would score NC7 as a clean pass on a car with 8% of its body shell deleted."
+    "KEY_RESULT": "lost is STRUCTURALLY ZERO on this car, proven on two different hole geometries (scattered and contiguous). A hole test reporting only 'lost' can never fire here.",
+    "NC9_contiguous_150mm_roof_hole": {
+     "deleted_faces": 708,
+     "pct_of_Body_Shell": 0.372,
+     "lost": 0,
+     "gained": 0,
+     "receded": 4,
+     "directions_firing": "3 of 15, ALL at el +18 (the only views that see the roof)"
+    },
+    "ray_spacing_mm": 97
    },
    "measured_on_merged_car": "NOT TESTED - merged car not published",
    "threshold": "lost <= gained and receded ~ 0",
    "control_fired": "NC7 fired (receded 17); contiguous-hole control in flight",
-   "status": "HARNESS PROVEN",
+   "status": "HARNESS PROVEN on two hole geometries",
    "note": ""
   },
   {
@@ -546,6 +555,12 @@
    "injected": "two named nodes re-pointed at ONE mesh (Grille_Upper -> Grille_Lower's mesh)",
    "response": "a name check reports 20/20 present; my check reports nodes_sharing_one_mesh [['Grille_Upper','Grille_Lower']]",
    "fired": true
+  },
+  {
+   "id": "NC9",
+   "injected": "contiguous 150 mm disc cut out of the roof (708 faces, 0.37% of Body_Shell)",
+   "response": "receded 4, lost 0; exactly 3 of 15 directions fired, all el +18 (roof-viewing)",
+   "fired": true
   }
  ],
  "findings": [],
@@ -556,7 +571,7 @@
   },
   {
    "check": "hole test LOST class",
-   "why": "NC7 fired only via RECEDED. The LOST class has been shown to fire on a synthetic icosphere (72 of 144 rays) but never on the car, because the cabin sits behind every panel - which is the finding, not a gap."
+   "why": "NC7 (scattered) and NC9 (contiguous 150 mm roof disc) both fired only via RECEDED. The LOST class fires on a synthetic icosphere (72 of 144 rays) but never on the car, because the cabin stops every ray. That IS the finding, not a gap."
   },
   {
    "check": "hierarchy inventory",

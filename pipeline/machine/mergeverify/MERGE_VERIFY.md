@@ -273,7 +273,8 @@ the production car.
 | run | rays | lost | gained | receded | advanced |
 |---|---|---|---|---|---|
 | null — `car_merged` vs itself | 15,360 | 0 | 0 | 0 | 0 |
-| NC7 — 8% of `Body_Shell` triangles deleted | 15,360 | **0** | 0 | **17** | 0 |
+| NC7 — 8% of `Body_Shell` deleted at random | 15,360 | **0** | 0 | **17** | 0 |
+| NC9 — a contiguous **150 mm disc** cut out of the roof (708 faces, 0.37%) | 15,360 | **0** | 0 | **4** | 0 |
 
 The null is perfectly clean, so any non-zero reading is real signal. But the control
 fired **only through the RECEDED class**: `lost` was **zero** even with 8% of the body
@@ -283,11 +284,21 @@ NC7 as a flawless pass on a car missing 8% of its body shell.** That is the
 `intersects_any` trap, reproduced as a measurement rather than quoted as a warning —
 and it is why `holes.py` reports the first-surface DEPTH change as well as the hit.
 
-Sensitivity caveat, stated: 17 firing rays out of 15,360 is a weak response, because
-NC7 deletes triangles at *random* — each deleted triangle is a few mm and the ray
-behind it usually lands on a neighbour. A contiguous 150 mm hole (the realistic merge
-failure — a dropped panel region) is the more representative control and was still
-running at the time of writing.
+**`lost` is structurally zero on this car, and that is now proven on two different
+hole geometries** — scattered triangle loss *and* a clean contiguous disc cut out of
+the roof. Both are seen only as a first surface that recedes.
+
+NC9 also behaves correctly in **direction**: of 15 directions, exactly **3 fired, and
+all three are the el +18 (looking-down) views** — az +22, −22 and −40 — which are the
+only ones that see the roof. A hole in the roof firing on the roof-viewing directions
+and nowhere else is what a working test looks like.
+
+**Sensitivity, stated as a number rather than assumed:** the ray bundle spans about
+3.0 m across 32 samples, so ray spacing is **≈ 97 mm** at the 32×32 grid used here. A
+150 mm hole therefore lands only ~4 firing rays. Holes much below ~150 mm are not
+reliably detected at this density — run 64×64 (≈ 48 mm spacing) if small holes matter.
+This is a property of the sampling, not of the car, and it is why the number to watch
+is "did any direction fire at all", not the magnitude.
 
 **Checks I could NOT prove can fail — say so rather than imply coverage** (one of the three was closed after the first draft and is struck through):
 
