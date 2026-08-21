@@ -1,69 +1,58 @@
 # CHECKPOINT — INDEPENDENT VERIFIER (merged Golf Mk8)
 
-Working dir: `.../scratchpad/mergeverify/` · branch `claude/lovable-connection-ki7jch`
-Tools commit to `pipeline/machine/mergeverify/`. Evidence to
-`car-meshes/staging/mergeverify/`.
+Working dir `.../scratchpad/mergeverify/` · branch `claude/lovable-connection-ki7jch`
+Tools + report committed at `pipeline/machine/mergeverify/` (commits 51d6f9f, beb0e84,
+bd73f7c — all pushed). Evidence bucket-backed at `car-meshes/staging/mergeverify/`
+(verified by LISTING the prefix and by a byte-identical round-trip of MERGE_VERIFY.json).
 
-## STATE: harness built and CALIBRATED on the six source cars. Merged car NOT YET PUBLISHED.
-`car-meshes/staging/merged/` was EMPTY at last check. Nothing has been measured on a
-merged car; every number below is a BASELINE on a gate's own file.
+## STATE
+Harness **built, calibrated and control-proven** on the six source cars.
+**The merged car has NOT been published** — `staging/merged/`, `merge_all/`, `final/`,
+`mergebuild/`, `golf_merged/` all EMPTY as of the last poll. Every "measured on the
+merged car" cell is honestly NOT TESTED.
 
-## Files fetched and sha256-VERIFIED against their MANIFESTs (7/7 byte-exact)
-gate78 car_rebound 5380761c · merge car_merged 09897d20 · skin car_deskin 2029b2ec ·
-glass car_glass_v4 1a20abdd · cabin car_cabin 796c7d47 · v7 GOLF_V7_FRONT_GATE 3f681443 ·
-rear rear2_v4 4444e379
+## DELIVERABLES (bucket + git)
+`MERGE_VERIFY.md` (17-row table, 12 controls, acceptance list A1–A20) ·
+`MERGE_VERIFY.json` · `verify_merged.py` (one-command runner) ·
+`evidence/` (hole_selftest, throughglass, specks_final, respray, provenance, waviness,
+nodetrees, rigid_transform, LIGHT_CALIB, ROOF_BEFORE_AFTER.png, orient render)
 
-## Frame, derived not assumed
-length on X (4.2825 m), up on Y, side on Z. **Nose at −X — CONFIRMED BY RENDER**
-(`rend/orient_az270.png`: nose on image-left; camera at Blender −Y ⇒ image-left = −X).
-MY az convention is NOT the gate rigs': my az 270 is a SIDE view.
+## SCORE ON THE GATES' OWN FILES
+13 of 17 checks reproduce exactly · 1 direction-only (waviness, definition differs) ·
+1 with ±2 pp placement sensitivity (hidden melt) · 1 pending (contiguous-hole control) ·
+1 gate deliverable FAILS the material set on its own file (rear v2).
 
-## Rig calibration (meta/LIGHT_CALIB.txt)
-CYCLES, use_denoising=False, Standard transform, ORTHO. world 0.22 → backdrop sRGB
-129.5. LIGHT_GAIN 25 adopted: 0.38% of car px clipped (gain 60 → 5.83%, 120 → 22.2%).
+## THE FOUR FINDINGS THE MERGE MUST ACT ON
+1. **rear2_v4.glb material table is not shippable** — `extensionsUsed` ABSENT,
+   `carpaint` = [1,1,1,1] metallic 1 rough 1 (glTF-defaults flat-shell signature),
+   `Rim_Alloy` the same, `Tyre_Rubber` 0.0484 not 0.0288. Geometry win is real.
+   `glass_probe` still says clear/proven on it.
+2. **rebound → merged is ONE RIGID TRANSFORM** for body+glazing+bumpers: 4.7301° about
+   [0.1105,−0.4826,0.8689], t = [−0.47,−101.61,+11.87] mm, max residual **0.1225 µm**.
+   Wheels are not part of it (8.0–8.7 mm; FL/RL ~177.5° re-seats). So glass relabelling
+   + v7 front kit can be TRANSPORTED, not re-derived; wheels come from car_merged.
+3. **Front and rear kits use different lateral datums** — +27.30 mm vs ≈ −70 mm
+   (each on its own end's axle centre; spread ~105 mm). Unstated anywhere.
+4. **glass and v7 do NOT carry the grounding fix** (tyres still 183/189 mm up).
 
-## REPRODUCED EXACTLY on the gate's own file
-| gate | claim | my measurement |
-|---|---|---|
-| merge | 4 tyre bottoms 0.000 mm | 0.000/0.000/0.000/0.000; base FL 183.178 FR 189.636 RL 0.316 RR 14.735 |
-| glass | Glass_Windscreen 0.9894 m² | 0.9894 (base 0.1622); glazing total 3.1742→3.3956 |
-| v7 | 20 components | 20/20 present, all real geometry |
-| v7 | 0.0% centroid coincidence | 0/36,692 faces at 1e-6 m (min d 0.17 mm) |
-| v7 | symmetry 5.9e-05 mm | 5.922e-05 mm worst pair (about the kit datum z=+27.30 mm) |
-| v7 | badge/plate centreline 0.0000 | ≤7e-6 mm from that datum |
-| rear | hidden melt hatch 1.92% | 1.89% at matched ray grid |
-| rear | hidden melt bumper 3.61% | 3.58% at matched ray grid |
-| all | validator 0 errors | 0 errors / 0 warnings on all 7 (official Khronos via node) |
+## CONTROLS THAT FIRED (12) — nc/
+NC1 +5.000 mm → 5.0000 · NC2 glazing→2.5% → 0.9894→0.0238 m² · NC3 KHR stripped →
+detected · NC4 normals → 30/30 · NC5 windscreen→carpaint → respray Δ 5.5→40 ·
+NC6 +3.000 mm → 3.000030 · NC7 8% body deleted → receded 17, **lost 0** ·
+NC8 flat paint → detected · NC10 empty-but-named node → caught (name check says 20/20) ·
+NC11 two names on one mesh → caught (name check says 20/20) · 2 natural controls.
 
-## NOT reproduced / qualified — carry these forward
-1. **rear2_v4.glb FAILS the must-not-break material set.** `extensionsUsed` ABSENT
-   (no transmission/IOR/clearcoat); `carpaint` = [1,1,1,1] metallic 1 rough 1 (glTF
-   DEFAULTS, the recorded flat-shell trap); `Rim_Alloy` the same; Tyre_Rubber 0.0484
-   not 0.0288. Its GEOMETRY win is real; its material table must NOT be merged.
-2. **rear2_v4 is a different lineage**: node names carpaint/interior/glass, 1,046,660
-   faces. Geometric provenance vs car_rebound: 12 nodes 100% coincident (melt),
-   14 nodes 0% (new-built, 61,404 faces). car_rebound IS its geometric base.
-3. **Front and rear kits use DIFFERENT lateral datums.** v7 front kit z=+27.30 mm
-   (= front-axle centre +30.28); rear v2 kit z≈−66…−82 mm (= rear-axle centre −69.06);
-   Body_Shell best mirror plane ≤−25 mm. Spread ≈105 mm.
-4. **rear tail lamps are NOT L/R symmetric** (max 82 mm about their own pair-mid)
-   where v7's front lamps are 3e-05 mm.
-5. **Waviness absolute numbers do not reproduce** (definition differs). Like-for-like
-   at 20 mm radius: Hatch 0.589 vs melt 2.872; Bumper_Rear 0.202 vs melt 1.201 — the
-   direction and ratio hold at every radius 20–80 mm.
-6. **Hidden melt is ray-placement sensitive (±2 pp).** 0.87–3.79% for the same panel.
-7. **glass fix and v7 front kit do NOT carry the merge grounding** (their tyres are
-   still 183/189 mm up). Merge must transport them.
+## STILL NOT PROVEN TO FAIL (say so, do not imply coverage)
+1. Khronos validator "0 errors" — no deliberate-error file was built.
+2. Hole test's LOST class on the real car — it fires on a synthetic sphere but not on
+   the car, because the cabin stops every ray. That IS the finding.
 
-## CONTROLS PROVEN TO FIRE (nc/)
-NC1 tyre +5.000 mm → reported 5.0000 (slope 1.000) · NC2 glazing geometry to 2.5% →
-windscreen 0.9894→0.0238 m² · NC3 KHR stripped → detected · NC4 NORMALs dropped →
-30/30 · NC6 3.000 mm shift → 3.000030 mm · NC8 flat paint → detected ·
-NC7 8% of Body_Shell deleted → hole test (running).
-**The real `glass_probe` returns clear/proven on NC2, NC3 AND NC5** — pairing with a
-glass-AREA figure is mandatory and is now built in.
+## IN FLIGHT
+`run_hole_contig.py` — contiguous 150 mm roof hole (708 faces, 0.37% of Body_Shell),
+15 directions. Waits on `meta/HOLE_CONTIG_DONE`. NEVER `pgrep -f` (it matches the
+wrapper); wait on the artefact.
 
-## NEXT
-- finish hole-test self-test, through-glass, respray control on car_merged
-- dark-speck / clay-floor measure (skin gate win)
-- when the merged car appears: run the whole table against it
+## NEXT WHEN THE MERGED CAR LANDS
+`SRC_GLB=src/car_rebound.glb python3 verify_merged.py <merged.glb> meta/merged`
+then `run_respray.py`, `run_throughglass.py`, `run_specks.py`, and a hole test against
+`src/car_merged.glb`. Fill the "merged" column; check A1–A20.

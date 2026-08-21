@@ -350,6 +350,43 @@ orthographic cameras, exposure 0, gamma 1.
 
 ---
 
+## 6b. What the merged car must satisfy — the acceptance list, fixed in advance
+
+Run `python3 verify_merged.py <merged.glb> <outdir>` (plus the respray and hole
+passes). These thresholds were set from the source files **before** the merged car
+existed.
+
+| # | must hold | threshold |
+|---|---|---|
+| A1 | four tyre nodes' world-space minima on the contact plane | max air ≤ **1.0 mm** — and measured from TYRE NODES, not the bbox |
+| A2 | `Glass_Windscreen` area | ≥ **0.90 m²** (and total glazing ≥ **3.30 m²**) |
+| A3 | glazing verdict **paired** with area | `glass_probe` clear/proven **AND** A2 — neither alone |
+| A4 | KHR extensions present in the written table | `KHR_materials_transmission` + `_ior` on glazing, `_clearcoat` on paint |
+| A5 | `carpaint` is not glTF defaults | not `[1,1,1,1] metallic 1 rough 1` |
+| A6 | `Tyre_Rubber` base colour | **0.027 ± 0.010** |
+| A7 | respray control at 3 locked cameras | carpaint Δ ≥ **25**; tyres/rims/lamps Δ ≤ **10**; tail lamps stay red-dominant |
+| A8 | Khronos validator | **0 errors** |
+| A9 | NORMAL accessors | **0 missing, 0 zero-length, 0 non-unit** on every primitive |
+| A10 | component inventory | **89** named nodes, none empty, **no two names on one mesh** |
+| A11 | v7 front kit symmetry | worst L/R pair ≤ **1e-3 mm** about the kit datum |
+| A12 | v7 centreline parts | ≤ **0.01 mm** from that datum |
+| A13 | front-kit provenance | ≤ **1.0%** face-centroid coincidence with `car_rebound` |
+| A14 | rear hidden melt | ≤ **5%** of on-panel rays, **quoted with its ray grid** |
+| A15 | rear panels smoother than the melt they replaced | rebuilt < ⅓ of the melt at 20 mm radius |
+| A16 | roof/bonnet specks | ≤ **2× the clay floor** measured in the same run |
+| A17 | no new holes vs `car_merged` | `lost` ≤ `gained` **and `receded` ≈ 0** — reporting only `lost` is not a test |
+| A18 | through-glass | `Interior` ≤ **10%** of through-glass rays |
+
+**Two things to check that no gate's own report covers:**
+* **A19 — lateral datum consistency.** The front kit sits at z = +27.30 mm and the
+  rear kit at ≈ −70 mm. Confirm the merged car's fascias land where intended and put
+  one 3/4 render in front of the owner.
+* **A20 — the grounding must survive.** `car_glass_v4` and `GOLF_V7_FRONT_GATE` do
+  **not** carry it. This is the win most easily lost in a merge and the cheapest to
+  check (A1).
+
+---
+
 ## 7. Bottom line
 
 **0 of the 6 gates have been verified on a merged car, because no merged car exists
