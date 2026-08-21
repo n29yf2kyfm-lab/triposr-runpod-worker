@@ -705,8 +705,14 @@ def check_hidden_fascia(car, zone_m=0.65, pitch=0.006, win=(0.002, 0.250), v0=No
         m = comp_first & (first_owner == i)
         if m.sum() == 0:
             continue
+        shallow_m = nested[m] & (nested_depth[m] * MM < 60)
         per[n] = {"rays_first": int(m.sum()),
-                  "shell_behind_pct": round(100.0 * nested[m].mean(), 2)}
+                  "shell_behind_pct": round(100.0 * nested[m].mean(), 2),
+                  # the number that separates a DUPLICATED SKIN from real
+                  # structure seen through an opening: only a surface within
+                  # 60 mm of the new one is a second fascia
+                  "shell_behind_under60mm_pct": round(100.0 * shallow_m.mean(), 2),
+                  "shell_behind_under60mm_rays": int(shallow_m.sum())}
     # THE INVERSE DEFECT: a constructed part hidden BEHIND surviving melt. If
     # the old fascia was left in place, some new components sit behind it and
     # are never the first surface a ray meets. Measured inside each component's
