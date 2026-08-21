@@ -3193,3 +3193,55 @@ transmission, IOR and clearcoat all vanish, while `alphaMode` survives. So `glas
 whose glazing has stopped refracting entirely. Reading the written material table is the only thing that
 catches it. Confirmed independently by the Gate 3 v7 agent the same day; `restore_material_ext.py` and
 `finish.py` both exist to repair it. **Run one of them after every trimesh round-trip in this repo.**
+
+## `glass_probe` blind spot, CONFIRMED INDEPENDENTLY the same day (2026-08-21, mobile gate)
+
+The glass gate found the probe passing a car whose windscreen aperture was `carpaint` (see the section
+above). The MOBILE gate hit the identical blind spot from the opposite direction, as a deliberate control:
+
+> **NC2 cut the glazing GEOMETRY to 2.5% of its area, left the material TABLE untouched, and
+> `glass_probe` still returned `clear / proven`.**
+
+So the probe would ship a car with **no glass in it at all**. Two independent agents, two different attacks,
+same root cause: the probe reads the material table and never asks how much SURFACE carries that material.
+
+**The fix both arrived at is the same and it is cheap: pair every `glass_probe` verdict with a GLASS-AREA
+RETENTION figure.** The mobile gate now reports "glazing clear/proven AND glass area retained 100.0%" as one
+combined check, and refuses the pair separately. Do the same anywhere the probe's verdict is load-bearing.
+`glass_probe` alone is NOT sufficient evidence that a car has glazing — it only proves that IF glazing
+material is bound, that material is transparent.
+
+## THERE IS NO MOBILE SERVING PATH (2026-08-21) — a live-product finding, not a Golf finding
+
+Measured on the live catalogue by the mobile gate, and re-verified by reading the code:
+
+- `platform/resolver/index.ts:217` — `const glbUrl = variantKey ? variants[variantKey] : a.desktopGlbUrl;`
+  The resolver hands **desktopGlbUrl to every device**. `mobileGlbUrl` is passed through at line 231 as a
+  separate field for the client to choose; the resolver never chooses it.
+- **1,042 of 1,043 approved entries have `mobileGlbUrl` IDENTICAL to `desktopGlbUrl`** — so there is no
+  distinct mobile asset to choose even if the client did.
+- **64.3% of approved assets exceed 5 MB; 29.8% exceed 20 MB.** Median 10.1 MB, p90 34.0 MB, max 47.9 MB.
+- The **8,056 colour-variant GLBs** would each need the same treatment (sampled 8/8, all within ±1% of base).
+
+For scale, Draco on the Golf gives 28.70 -> 3.65 MB at 7.85x with PSNR ~40 dB and 0 validator errors — i.e.
+the compression works and is nearly free. **The gap is that nothing in the pipeline produces or serves a
+mobile asset**, not that mobile assets are hard to make. Raise this before any claim that the product is
+mobile-ready.
+
+**And do not trust `viewer_check.py`'s `on_ground` result.** It reads the WHOLE-MODEL bbox min-Y, so the Golf
+passes at +0.3 mm while its front tyres are 183–190 mm in the air. Measure from the TYRE nodes'
+world-space minima (`mobile_metrics.tyreNodeMinY` does this).
+
+## PSNR decides a decimation, IoU does not — measured in our own data (2026-08-21)
+
+CLAUDE.md already recorded that a 96%-triangle-deletion control scored IoU 0.991. The mobile gate reproduced
+the non-monotonicity directly on this car: **ratio 0.30 scores min IoU 0.97683, HIGHER than ratio 0.90's
+0.97594** — two-thirds fewer triangles and 9.5 dB worse. IoU is not monotonic in damage. Use PSNR at matched
+cameras as the fidelity metric; keep IoU only as a gross-failure channel.
+
+**Decimation is not available on a clearcoat car.** Measured ladder on the Golf: 0.95 -> 35.96 dB,
+0.90 -> 34.10, 0.80 -> 33.87, 0.65 -> 33.21, 0.50 -> 29.92, 0.30 -> 24.57. **The first 5% of triangles costs
+3.85 dB.** The loss is the clearcoat specular highlight breaking up across large smooth panels, not the
+silhouette (64% of large deltas on painted body against a 31% base rate). Culling never-visible interior
+faces is genuinely free (98,480 faces, 10% of the car, no line of sight from any of 224 cameras) but does not
+rescue fidelity — cull30 scored 24.54 dB against dec30's 24.57.
