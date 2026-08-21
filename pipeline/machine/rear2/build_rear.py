@@ -29,7 +29,12 @@ from residual import SkinMap, smooth_residual
 GLB = sys.argv[1]; OUTD = sys.argv[2] if len(sys.argv) > 2 else "build"
 os.makedirs(OUTD, exist_ok=True)
 
-GAP = 0.0040          # panel gap, half-width each side of a seam -> ~8 mm seam
+GAP = 0.0035          # lateral panel gap, per side -> a ~7 mm seam to the quarters
+GAP_V = 0.0020        # tailgate/bumper seam, per side -> ~4 mm. Kept TIGHTER than
+                      # the lateral gap on purpose: the car's own measured profile
+                      # steps back 48 mm between y 0.550 and y 0.570, so that seam
+                      # already reads as a deep shadow and an 8 mm gap on top of it
+                      # rendered as a broad black band across the tail.
 FLANGE = 0.014        # how far the dark inner skin peeks beyond the outer edge
 T_HATCH = 0.014       # tailgate panel thickness
 T_BUMPER = 0.018
@@ -166,7 +171,7 @@ def row_u_limits(pat, y, uu_ref):
 def build_hatch():
     NU, NV_L, NV_S = 161, 46, 61
     # ---- v nodes: hatch_low rows, then the SHARED SILL ROW, then surround rows
-    yl = np.linspace(P_low.ylo + GAP, Y_SILL, NV_L)
+    yl = np.linspace(P_low.ylo + GAP_V, Y_SILL, NV_L)
     yu = np.linspace(Y_SILL, 1.300, NV_S)
     # surround v nodes must land EXACTLY on the aperture edges. SNAP the nearest
     # existing node rather than INSERTING one: inserting produced sliver rows a
@@ -252,7 +257,7 @@ def build_glass(ap, Vo, N):
 def build_bumper():
     NU, NV = 221, 76
     env_lo, env_hi = ENV_LO, ENV_HI
-    ys = np.linspace(P_bmp.ylo + GAP, P_bmp.yhi - GAP, NV)
+    ys = np.linspace(P_bmp.ylo + GAP_V, P_bmp.yhi - GAP_V, NV)
     _, _, xc0, zc0 = P_bmp.frame(0.43)
     # plate recess, centred on the BUMPER'S OWN section centre (the body is
     # sheared; centring on z=0 would sit 70 mm off this panel's own middle)

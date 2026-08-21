@@ -24,10 +24,19 @@ SHA=$(sha256sum "$F" | cut -d' ' -f1); SZ=$(stat -c%s "$F")
 } > "$WORK/MANIFEST_${BASE}.txt"
 for p in "$WORK"/*; do
   n=$(basename "$p")
-  code=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$B/$PREFIX/$n" \
-    -H "apikey: $SB_KEY" -H "Authorization: Bearer $SB_KEY" \
-    -H "Content-Type: application/octet-stream" -H "x-upsert: true" \
-    --data-binary @"$p")
+  # RETRY: a 22 MB part returned 400 once and the byte-identical retry returned
+  # 200, so a single non-200 is not evidence of a bad upload. Never treat one
+  # transient as a failed backup -- and never treat one 200 as a complete one
+  # either; the listing at the end is the actual proof.
+  code=000
+  for try in 1 2 3 4; do
+    code=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$B/$PREFIX/$n" \
+      -H "apikey: $SB_KEY" -H "Authorization: Bearer $SB_KEY" \
+      -H "Content-Type: application/octet-stream" -H "x-upsert: true" \
+      --data-binary @"$p")
+    [ "$code" = "200" ] && break
+    echo "  PUT $n -> $code (retry $try)"; sleep $((try * 3))
+  done
   echo "  PUT $n -> $code"
   [ "$code" = "200" ] || { echo "UPLOAD FAILED $n"; exit 1; }
 done
@@ -39,7 +48,10 @@ curl -s -X POST "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/list
 import sys,json
 d=json.load(sys.stdin); tot=0
 for x in sorted(d,key=lambda a:a['name']):
-    s=(x.get('metadata') or {}).get('size',0); tot+=s if 'part_' in x['name'] else 0
+    s=(x.get('metadata') or {}).get('size',0)
+    mine = x['name'].startswith('$BASE.part_')
+    tot += s if mine else 0
+    if not mine and 'part_' in x['name']: continue   # another artefact in the same prefix
     print(f\"  {x['name']:44s} {s:>12,} bytes\")
 print(f'  PART BYTES TOTAL = {tot:,}  (local file $SZ)')
 print('  MATCH' if tot==$SZ else '  *** MISMATCH ***')"

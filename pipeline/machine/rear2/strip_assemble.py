@@ -96,6 +96,50 @@ def in_strip(p):
     return hit
 
 
+def clean_mesh(m, name=""):
+    """Make one geometry glTF-clean: no zero-area faces, no unreferenced
+    vertices, unit vertex normals.
+
+    ALL THREE were introduced by the assembly and none by the source. The
+    source rear_v3 measures zeroN=0, nonunit=0, loose=0; the first assembly
+    measured 80,000 zero-length normals, because each rebuilt node carried the
+    panel's FULL vertex array (outer skin + inner skin) while its faces used
+    only one of them -- so every vertex of the other half was unreferenced and
+    got a zero normal. `gltf-transform validate` reported ERRORS and the render
+    still looked fine, which is precisely the class CLAUDE.md warns about:
+    "a geometry operator that only writes positions ships a broken file -- run
+    the validator on the OUTPUT and DIFF IT AGAINST THE INPUT, every time."
+
+    Normals are welded by position before averaging (normals_fix's rule) so
+    seams between duplicated border vertices shade continuously.
+    """
+    V = np.asarray(m.vertices, np.float64); F = np.asarray(m.faces, np.int64)
+    tri = V[F]
+    area = 0.5 * np.linalg.norm(np.cross(tri[:, 1] - tri[:, 0], tri[:, 2] - tri[:, 0]), axis=1)
+    F = F[area > 1e-12]
+    used = np.unique(F)
+    remap = np.full(len(V), -1, np.int64); remap[used] = np.arange(len(used))
+    V2 = V[used]; F2 = remap[F]
+    uv = getattr(m.visual, "uv", None)
+    uv2 = np.asarray(uv)[used] if uv is not None and len(uv) == len(V) else None
+    scale = float(np.ptp(V2, axis=0).max()) or 1.0
+    key = np.round(V2 / (1e-6 * scale)).astype(np.int64)
+    _, inv = np.unique(key, axis=0, return_inverse=True)
+    t2 = V2[F2]
+    fn = np.cross(t2[:, 1] - t2[:, 0], t2[:, 2] - t2[:, 0])
+    fa = np.linalg.norm(fn, axis=1)
+    fnn = fn / np.maximum(fa, 1e-20)[:, None]
+    acc = np.zeros((int(inv.max()) + 1, 3))
+    for k in range(3):
+        np.add.at(acc, inv[F2[:, k]], fnn * fa[:, None])
+    N = acc[inv]
+    L = np.linalg.norm(N, axis=1, keepdims=True)
+    N = np.where(L > 1e-12, N / np.clip(L, 1e-12, None), np.array([0.0, 1.0, 0.0]))
+    out = trimesh.Trimesh(vertices=V2, faces=F2, process=False)
+    out.vertex_normals = N
+    return out, uv2
+
+
 sc = trimesh.load(INP, force="scene", process=False)
 G = dict(sc.geometry)
 rep = {"DEPTH_BACK": DEPTH_BACK, "DEPTH_FRONT": DEPTH_FRONT, "stripped": {}}
@@ -116,11 +160,13 @@ for name, g in G.items():
                              "pct": round(float(kill.mean() * 100), 2)}
     total_removed += int(kill.sum())
     if (~kill).sum() == 0: continue
-    ng = g.submesh([np.flatnonzero(~kill)], append=True, repair=False)
-    ng.visual = g.visual.__class__(uv=(g.visual.uv[np.unique(g.faces[~kill])]
-                                       if getattr(g.visual, "uv", None) is not None else None),
-                                   material=g.visual.material) \
-        if hasattr(g.visual, "material") else g.visual
+    keepf = np.flatnonzero(~kill)
+    tmp = trimesh.Trimesh(vertices=g.vertices, faces=g.faces[keepf], process=False)
+    tmp.visual = g.visual
+    ng, uv2 = clean_mesh(tmp, name)
+    if hasattr(g.visual, "material"):
+        from trimesh.visual import TextureVisuals as _TV
+        ng.visual = _TV(uv=uv2, material=g.visual.material)
     nm = RENAME.get(name, name)
     out.add_geometry(ng, geom_name=nm, node_name=nm)
 rep["total_faces_removed"] = total_removed
@@ -142,13 +188,14 @@ if OUT != "/dev/null":
     def add(nm, V, F, mat, textured):
         m = trimesh.Trimesh(vertices=np.asarray(V, np.float64),
                             faces=np.asarray(F, np.int64), process=False)
+        m, _ = clean_mesh(m, nm)
         # WRAP THE MATERIAL IN A FRESH TextureVisuals: reassigning an existing
         # TextureVisuals onto a mesh with a different vertex count silently
         # drops the binding on export (premium.py's recorded trap).
         uv = np.tile(uvp, (len(m.vertices), 1)) if textured else None
         m.visual = TextureVisuals(uv=uv, material=mat)
         out.add_geometry(m, geom_name=nm, node_name=nm)
-        return int(len(F))
+        return int(len(m.faces))
 
     HGRP, BGRP = d["HGRP"], d["BGRP"]
     HF, BF = d["HF"], d["BF"]
@@ -163,6 +210,14 @@ if OUT != "/dev/null":
     rep["added"] = nf
     out.export(OUT, include_normals=True)
     print("wrote", OUT, {k: v for k, v in nf.items()})
+    # RE-READ THE WRITTEN FILE and assert. Not the scene in memory: the export
+    # is the step that has silently dropped normals on this programme before.
+    import subprocess
+    chk = subprocess.run([sys.executable, __file__.rsplit("/", 1)[0] + "/glb_assert.py", OUT],
+                         capture_output=True, text=True)
+    print(chk.stdout.strip() or chk.stderr.strip()[-800:])
+    if "GLB_ASSERT_OK" not in chk.stdout:
+        raise SystemExit("REFUSED: written file failed its own assertions")
 json.dump(rep, open("measurements/strip_report.json", "w"), indent=1)
 print(json.dumps({k: v for k, v in rep["stripped"].items() if v.get("removed", 0) > 0}, indent=1))
 print("TOTAL FACES REMOVED", total_removed)

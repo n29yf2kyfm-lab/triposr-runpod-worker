@@ -22,14 +22,25 @@ rather than Gate 7+8's rebind, and it is NOT grounded/de-pitched.
   for this file too. Grounding is another gate's scope; recorded only.
 * az 090 = straight rear CONFIRMED by render (tailgate, screen, tail lamps).
 
-## STATE
-* v1 built, assembled, chunked and UPLOADED to `staging/rear_v2/glb/`
-  (rear2_v1.glb.part_000..003 + MANIFEST, 68,018,280 B, listing verified, bytes match).
-* glass_probe on v1: clear / proven, flat_shell False, alpha_shell False.
-* Provenance test PASSED with its negative control: rebuilt panels 0.00% coincident
-  with source vertices; renamed melt (`Rear_Upper_Legacy_Melt`) 100.00%.
-* v2 pending: sliver-row fix in the aperture grid.
+## DELIVERABLE (current)
+`car-meshes/staging/rear_v2/glb/rear2_v3.glb.part_000..003` + `MANIFEST_rear2_v3.glb.txt`
+66,536,096 B. Uploaded AND verified by listing the prefix; part bytes total matches
+the local file exactly. v1's parts were deleted so the prefix is unambiguous.
+
+## MEASURED ON v3
+* 26 named meshes. glass_probe clear / PROVEN, flat_shell False, alpha_shell False.
+* glb_assert on the WRITTEN file: 26/26 NORMAL, 0 zero-length, 0 non-unit,
+  0 loose verts, 0 zero-area faces.
+* Provenance, with its negative control: every rebuilt panel 0.00% coincident with a
+  source vertex; every inherited/renamed component 100.00% at 0.000 mm.
+* Panel waviness (same estimator as the melt it replaces): hatch 0.23 mm rms,
+  bumper 0.12 mm rms, against the melt's 2.39 / 2.29 mm rms.
+* Gate 4's lamps: hatch units 0.00% buried on the rebuilt skin (min clear +4.7/+1.9 mm);
+  outer units and both quarters byte-identical to source (0.0 micron).
 
 ## OPEN
-* gltf-transform validate on the 68 MB file not yet completed (slow, CPU contended).
-* Render batch 1 in flight (cavity proof, shaded/matid/clay, blue respray control).
+* gltf-transform validate on the 66 MB file is very slow under six-agent CPU
+  contention; not yet completed.
+* Renders in flight; hole probe being re-run after its control exposed two flaws in it.
+* KNOWN RESIDUAL: rebuilt bumper's +z LOWER corner falls up to 79 mm short of the
+  source outline at y=0.26 (envelope clamp + outline theta range), leaving legacy melt.
