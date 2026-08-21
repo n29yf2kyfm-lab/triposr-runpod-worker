@@ -43,9 +43,28 @@ SERIES="$(echo "$VER" | cut -d. -f1,2)"
 DEST="/opt/blender-${VER}-linux-x64"
 URL="https://download.blender.org/release/Blender${SERIES}/blender-${VER}-linux-x64.tar.xz"
 
+# The shim lives in a function because BOTH paths through this script need it.
+# The first version returned early on "already installed" and never reached the
+# shim block at the bottom -- so a re-run on a container where /opt survived but
+# /usr/local/bin did not would silently reinstall nothing. Caught by reading the
+# script's own output after it printed "already installed" and did not mention
+# the shim.
+install_shim() {
+  cat > /usr/local/bin/blender <<'SHIM'
+#!/usr/bin/env bash
+for c in "${BLENDER_BIN:-}" /opt/blender-4.5.12-linux-x64/blender /usr/bin/blender; do
+  [ -n "$c" ] && [ -x "$c" ] && exec "$c" "$@"
+done
+echo "blender-shim: no blender binary found" >&2; exit 127
+SHIM
+  chmod +x /usr/local/bin/blender
+  echo "shim installed: $(blender --version 2>/dev/null | head -1) via $(command -v blender)"
+}
+
 if [ -x "$DEST/blender" ]; then
   echo "already installed: $($DEST/blender --version 2>/dev/null | head -1)"
   echo "BLENDER_BIN=$DEST/blender"
+  install_shim
   exit 0
 fi
 
