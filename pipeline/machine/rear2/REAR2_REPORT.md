@@ -247,3 +247,70 @@ never modified in place.
 the hatch and rear bumper surfaces — on a car whose front, flanks, roof, valance,
 glazing optics, wheels, grounding and identity are all still open, and whose body is
 crooked by 150 mm.
+
+---
+
+## 7. THE RESPRAY CONTROL, MEASURED PER COMPONENT
+
+Masks taken from the matID pass (flat emission, 1 sample, AA off), so the pixel sets are
+per-COMPONENT and not per-region; the same pixels are then sampled in the body-red and
+body-blue shaded renders, which share a camera and an exposure. Both tiles verified
+unclipped first (0.578% and 0.541% of car pixels).
+
+| component | px | body RED | body BLUE | max channel delta |
+|---|---|---|---|---|
+| `Hatch (cyan)` | 90855 | [223.2, 58.1, 60.0] | [87.3, 117.8, 208.0] | **148.0** |
+| `Bumper_Rear (yellow)` | 75114 | [208.8, 60.6, 62.4] | [82.4, 110.5, 194.4] | **131.9** |
+| `Tail_Lens_L (magenta)` | 8846 | [149.5, 62.4, 66.8] | [147.8, 63.5, 70.4] | **3.5** |
+| `Tail_Lens_R (orange)` | 6418 | [170.0, 66.9, 72.3] | [168.2, 68.0, 75.8] | **3.5** |
+| `Glass_Backlight (dk blue)` | 49335 | [61.3, 63.2, 67.6] | [59.4, 63.7, 69.6] | **1.9** |
+| `Plate_Rear (white)` | 9825 | [229.7, 228.8, 227.4] | [228.9, 229.0, 228.1] | **0.8** |
+| `Rear_Upper_Legacy_Melt` | 23935 | [226.2, 125.1, 127.0] | [124.2, 144.6, 217.7] | **102.0** |
+
+**Read it this way.** The two REBUILT PAINT panels move fully with the respray — the
+tailgate's R−B flips from **+163.2 to −120.7** — so they are genuinely bound to the
+`carpaint` material and a colour variant will paint them. **Gate 4's tail lamps hold their
+red at a maximum channel delta of 3.5/255**, the identical figure Gate 4 measured against
+its own surface, so nothing this gate did loosened them. The rebuilt glazing pane (1.9)
+and the rebuilt number plate (0.8) do not move either. This is the control that painted-on
+components can never pass.
+
+## 8. SHUT LINES AND CLEARANCES, MEASURED
+
+Closest approach between components (3-D nearest neighbour over face centres):
+
+| seam | closest approach |
+|---|---|
+| `Hatch <-> Rear_Quarter_L` | **6.68 mm** |
+| `Hatch <-> Rear_Quarter_R` | **11.82 mm** |
+| `Hatch <-> Bumper_Rear` | **8.45 mm** |
+| `Bumper_Rear <-> Rear_Quarter_L` | **12.21 mm** |
+| `Bumper_Rear <-> Rear_Quarter_R` | **11.98 mm** |
+| `Hatch <-> Rear_Upper_Legacy_Melt` | **6.01 mm** |
+| `Glass_Backlight <-> Hatch` | **2.93 mm** |
+
+No two components touch or interpenetrate. The glass-to-frame figure of 2.93 mm is the
+designed standoff (brief phase 5 asks 2-3 mm) and it lands where it was aimed.
+
+## 9. EXPOSURE — every render carries its own number
+
+Gate 4's first tiles clipped 42.58% of car pixels and a clipped render is not evidence.
+
+| render | car px % | clipped % of car | mean luminance |
+|---|---|---|---|
+| `V4_clay_az090` | 23.00 | **0.000** | 162.1 |
+| `V4_clay_az035` | 37.52 | **0.000** | 176.1 |
+| `V4_CAVITY_az090` | 24.94 | **0.000** | 92.3 |
+| `V4_shaded_az090` | 25.29 | 0.578 | 96.6 |
+| `V4_shaded_az035` | 38.14 | 4.079 | 97.6 |
+| `V4_shaded_az125` | 35.90 | 0.398 | 96.3 |
+| `V4_blue_az090` | 25.30 | 0.541 | 108.7 |
+| `V4_red_az090` | 25.31 | 0.532 | 103.6 |
+| `V4_glasson_az090` | 25.29 | 0.575 | 93.9 |
+| `V4_matid_az090` | 25.33 | 59.858 | 175.4 |
+
+The clay and cavity passes — the two that judge SURFACE and STRUCTURE — are **0.000%
+clipped**, so nothing in them is hidden in a blown highlight. The matID figure is not a
+defect and must not be read as one: a label pass is flat emission in saturated palette
+colours, several of which are 255 in a channel by definition. (The v3 matID read 8.2%
+purely because its palette was hash-generated and unsaturated; the model did not change.)
