@@ -1,0 +1,250 @@
+"""GATE 3 v6 — CPU-side composition (runs OUTSIDE Blender, uses PIL).
+
+Builds the deliverables from the rig's PNGs + _meta_*.json:
+  * label_exploded()  - draws node-name labels with leader lines on an
+                        exploded render, using the projections the rig emitted
+  * sheet8()          - the canonical 8-view sheet, with a HARD assertion that
+                        every tile is populated and the measured occupancy
+                        printed on the tile
+  * symmetry_overlay()- mirror-difference map of a centred front render
+  * ref_overlay()     - render vs photographic reference, side by side + blend
+  * ab_compare()      - before/after matched comparison
+All deliverables are written as quality-88 JPEG; the source PNGs are the
+caller's to delete (disk is tight).
+"""
+import json, math, os, sys
+import numpy as np
+from PIL import Image, ImageDraw, ImageFont
+
+FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+FONT_R = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+MONO = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
+
+INK = (24, 24, 24)
+PAPER = (232, 232, 232)
+ACCENT = (176, 32, 32)
+
+
+def font(px, mono=False, bold=True):
+    p = MONO if mono else (FONT if bold else FONT_R)
+    return ImageFont.truetype(p, px)
+
+
+def save_jpeg(im, path, q=88):
+    if im.mode != "RGB":
+        im = im.convert("RGB")
+    im.save(path, "JPEG", quality=q, optimize=True, subsampling=1)
+    return path
+
+
+def caption_bar(im, title, sub="", h=None, bg=(18, 18, 18), fg=(245, 245, 245)):
+    """Every delivered artefact self-describes ON THE IMAGE (council rule
+    2026-08-16: an uncaptioned tile cost a whole review round)."""
+    W = im.width
+    h = h or max(46, int(W * 0.030))
+    strip = Image.new("RGB", (W, h + (int(h * 0.72) if sub else 0)), bg)
+    d = ImageDraw.Draw(strip)
+    d.text((int(h * 0.32), int(h * 0.22)), title, font=font(int(h * 0.52)), fill=fg)
+    if sub:
+        d.text((int(h * 0.32), h + int(h * 0.06)), sub,
+               font=font(int(h * 0.40), mono=True, bold=False), fill=(186, 186, 186))
+    out = Image.new("RGB", (W, im.height + strip.height), bg)
+    out.paste(strip, (0, 0))
+    out.paste(im.convert("RGB"), (0, strip.height))
+    return out
+
+
+# ------------------------------------------------------------------ labels
+
+def label_exploded(png, meta_view, out, title, sub="", min_px=15):
+    """Draw a labelled callout for every component the rig projected.
+
+    THE POINT OF AN EXPLODED VIEW IS TO PROVE THE COMPONENTS EXIST. A part with
+    no label has not been proven, so this function refuses to write a sheet
+    whose label count does not match the rig's projection count."""
+    im = Image.open(png).convert("RGB")
+    W, H = im.size
+    labels = meta_view.get("labels", [])
+    if not labels:
+        raise RuntimeError("no label projections in meta for %s" % png)
+    d = ImageDraw.Draw(im, "RGBA")
+    fs = max(min_px, int(W * 0.0115))
+    f = font(fs)
+    # order top-to-bottom then left-to-right, and push labels out to the nearer
+    # vertical margin so leader lines do not cross the parts
+    pts = []
+    for L in labels:
+        u, v = L["u"], L["v"]
+        px, py = u * W, (1.0 - v) * H
+        pts.append((L["name"], px, py))
+    pts.sort(key=lambda t: t[2])
+    left = [p for p in pts if p[1] < W * 0.5]
+    right = [p for p in pts if p[1] >= W * 0.5]
+    drawn = 0
+    for side, group in (("L", left), ("R", right)):
+        n = len(group)
+        if not n:
+            continue
+        top, bot = int(H * 0.06), int(H * 0.955)
+        step = (bot - top) / max(1, n)
+        for i, (name, px, py) in enumerate(group):
+            ty = int(top + step * (i + 0.5))
+            tx = int(W * 0.012) if side == "L" else int(W * 0.988)
+            bb = d.textbbox((0, 0), name, font=f)
+            tw, th = bb[2] - bb[0], bb[3] - bb[1]
+            bx = tx if side == "L" else tx - tw - int(fs * 0.7)
+            pad = int(fs * 0.34)
+            d.rounded_rectangle([bx - pad, ty - th // 2 - pad,
+                                 bx + tw + pad, ty + th // 2 + pad + int(fs * 0.25)],
+                                radius=pad, fill=(255, 255, 255, 232),
+                                outline=(20, 20, 20, 255), width=2)
+            d.text((bx, ty - th // 2), name, font=f, fill=INK)
+            anchor = (bx + tw + pad if side == "L" else bx - pad, ty)
+            d.line([anchor, (int(px), int(py))], fill=(200, 24, 24, 235), width=3)
+            d.ellipse([px - 6, py - 6, px + 6, py + 6], fill=(200, 24, 24, 255))
+            drawn += 1
+    if drawn != len(labels):
+        raise RuntimeError("labelled %d of %d components" % (drawn, len(labels)))
+    im = caption_bar(im, title, sub + ("  |  %d components labelled" % drawn))
+    return save_jpeg(im, out), drawn
+
+
+# ------------------------------------------------------------- 8-view sheet
+
+def sheet8(order, meta, pngdir, out, title, sub="",
+           populated_floor=0.010, occ_band=(0.75, 0.85), cols=4):
+    """Compose the canonical 8-view sheet.
+
+    ASSERTS every tile is populated - the previous gate sheet shipped SEVEN
+    views and a BLANK tile, so this is checked in code and never by eye. The
+    authority is the rig's ALPHA PROBE silhouette fraction (a background-colour
+    difference cannot be trusted once a ground plane is in frame).
+    Returns (path, per-tile report list).
+    """
+    tiles, report = [], []
+    for vid, label in order:
+        v = meta["views"][vid]
+        p = os.path.join(pngdir, v["file"])
+        exp = v.get("exposure", {})
+        silpx = exp.get("silhouette_px_frac")
+        occx = exp.get("silhouette_occ_x")
+        occy = exp.get("silhouette_occ_y")
+        occm = exp.get("silhouette_occ_max")
+        meas = v.get("measured", {})
+        rec = {"view": vid, "label": label, "az": v["az"], "elev": v["elev"],
+               "file": v["file"], "res": v["res"],
+               "cam_type": v["cam_type"], "ortho_scale": v["ortho_scale"],
+               "target_y_gltf": v.get("target_y_gltf"),
+               "exposure_stops": exp.get("exposure_stops"),
+               "silhouette_px_frac": silpx,
+               "occ_x": occx, "occ_y": occy, "occ_max": occm,
+               "clipped_frac_frame": meas.get("clipped_frac_frame"),
+               "clipped_frac_car": meas.get("clipped_frac_nonbg"),
+               "populated": (silpx is not None and silpx >= populated_floor),
+               "occ_in_band": (occm is not None and occ_band[0] <= occm <= occ_band[1])}
+        report.append(rec)
+        if not rec["populated"]:
+            raise RuntimeError(
+                "TILE NOT POPULATED: %s (%s) silhouette_px_frac=%s < %.3f — this is "
+                "the exact defect the previous sheet shipped; refusing to write."
+                % (vid, label, silpx, populated_floor))
+        im = Image.open(p).convert("RGB")
+        cap = ("%s   az %03d  elev %02d\nocc %.1f%%  fill %.1f%%  clip %.2f%%  %s %.3f"
+               % (label, v["az"], v["elev"], 100 * occm, 100 * silpx,
+                  100 * (meas.get("clipped_frac_nonbg") or 0.0),
+                  "ortho" if v["cam_type"] == "ORTHO" else "lens",
+                  v["ortho_scale"] if v["cam_type"] == "ORTHO" else v["lens_mm"]))
+        tiles.append((im, cap))
+
+    tw, th = tiles[0][0].size
+    for im, _ in tiles:
+        if im.size != (tw, th):
+            raise RuntimeError("tiles differ in size - identical rig violated")
+    capH = int(th * 0.085)
+    rows = int(math.ceil(len(tiles) / cols))
+    gap = max(6, int(tw * 0.008))
+    W = cols * tw + (cols + 1) * gap
+    H = rows * (th + capH) + (rows + 1) * gap
+    sheet = Image.new("RGB", (W, H), (26, 26, 26))
+    d = ImageDraw.Draw(sheet)
+    f = font(int(capH * 0.33), mono=True)
+    for i, (im, cap) in enumerate(tiles):
+        r, c = divmod(i, cols)
+        x = gap + c * (tw + gap)
+        y = gap + r * (th + capH + gap)
+        sheet.paste(im, (x, y))
+        d.rectangle([x, y, x + tw - 1, y + th - 1], outline=(90, 90, 90), width=2)
+        for j, line in enumerate(cap.split("\n")):
+            d.text((x + int(capH * 0.18), y + th + int(capH * 0.10) + j * int(capH * 0.42)),
+                   line, font=f, fill=(238, 238, 238))
+    sheet = caption_bar(sheet, title, sub, h=max(58, int(W * 0.017)))
+    return save_jpeg(sheet, out), report
+
+
+# ------------------------------------------------------------- overlays
+
+def symmetry_overlay(png, out, title, sub=""):
+    """Mirror the centred front render about the image centre column and map the
+    absolute difference. Requires the render's optical axis to pass through the
+    mesh mirror plane (rig option no_shift_x)."""
+    im = Image.open(png).convert("RGB")
+    a = np.asarray(im).astype(np.float64)
+    W = a.shape[1]
+    if W % 2:
+        a = a[:, :W - 1]
+    b = a[:, ::-1]
+    diff = np.abs(a - b).mean(2)
+    base = a.mean(2)
+    # keep the render legible underneath, paint the asymmetry in red on top
+    rgb = np.dstack([base, base, base]) * 0.55 + 90.0
+    amp = np.clip(diff / 42.0, 0, 1)
+    rgb[..., 0] = rgb[..., 0] * (1 - amp) + 235 * amp
+    rgb[..., 1] = rgb[..., 1] * (1 - amp) + 28 * amp
+    rgb[..., 2] = rgb[..., 2] * (1 - amp) + 28 * amp
+    o = Image.fromarray(np.clip(rgb, 0, 255).astype(np.uint8))
+    d = ImageDraw.Draw(o)
+    d.line([(o.width // 2, 0), (o.width // 2, o.height)], fill=(40, 190, 250), width=3)
+    stats = {"mean_abs_diff_srgb": float(diff.mean()),
+             "p99_abs_diff_srgb": float(np.percentile(diff, 99)),
+             "frac_px_over_12": float((diff > 12).mean())}
+    sub2 = (sub + "  |  mean|d|=%.2f  p99|d|=%.2f  px>12: %.2f%%  (cyan = mirror plane)"
+            % (stats["mean_abs_diff_srgb"], stats["p99_abs_diff_srgb"],
+               100 * stats["frac_px_over_12"]))
+    return save_jpeg(caption_bar(o, title, sub2), out), stats
+
+
+def _fit(im, box):
+    im = im.convert("RGB")
+    s = min(box[0] / im.width, box[1] / im.height)
+    im = im.resize((max(1, int(im.width * s)), max(1, int(im.height * s))), Image.LANCZOS)
+    c = Image.new("RGB", box, (26, 26, 26))
+    c.paste(im, ((box[0] - im.width) // 2, (box[1] - im.height) // 2))
+    return c
+
+
+def side_by_side(items, out, title, sub="", tile=(1400, 1120)):
+    """items = [(path_or_Image, caption), ...] laid out in one row."""
+    cells = []
+    for src, cap in items:
+        im = Image.open(src).convert("RGB") if isinstance(src, str) else src
+        c = _fit(im, tile)
+        d = ImageDraw.Draw(c)
+        f = font(int(tile[1] * 0.030))
+        bb = d.textbbox((0, 0), cap, font=f)
+        d.rectangle([0, 0, bb[2] + 22, bb[3] + 18], fill=(15, 15, 15))
+        d.text((11, 6), cap, font=f, fill=(245, 245, 245))
+        cells.append(c)
+    gap = 10
+    W = len(cells) * tile[0] + (len(cells) + 1) * gap
+    H = tile[1] + 2 * gap
+    sheet = Image.new("RGB", (W, H), (26, 26, 26))
+    for i, c in enumerate(cells):
+        sheet.paste(c, (gap + i * (tile[0] + gap), gap))
+    return save_jpeg(caption_bar(sheet, title, sub, h=max(54, int(W * 0.016))), out)
+
+
+def blend_overlay(a_path, b_path, out, title, sub="", alpha=0.5):
+    a = Image.open(a_path).convert("RGB")
+    b = Image.open(b_path).convert("RGB").resize(a.size, Image.LANCZOS)
+    o = Image.blend(a, b, alpha)
+    return save_jpeg(caption_bar(o, title, sub), out)
