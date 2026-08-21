@@ -10,3 +10,8 @@ __pycache__/
 # the durable record.
 pipeline/publish/publish_jobs.jsonl
 pipeline/trellis/donor_wheel.glb
+
+# Agent working directories. Session scratch lives outside the repo at
+# /tmp/claude-0/<project>/<session>/scratchpad/ ; anything an agent drops here
+# is working state, not source, and must not be committed.
+scratchpad/
