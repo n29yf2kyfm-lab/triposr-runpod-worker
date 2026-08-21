@@ -1,0 +1,278 @@
+import json, hashlib, datetime, os
+REF='/tmp/claude-0/-home-user-triposr-runpod-worker/34795087-6986-5aae-b59f-cce8aae2f506/scratchpad/gates/g3v6/ref/'
+def sha(p):
+    return hashlib.sha256(open(p,'rb').read()).hexdigest()
+
+FH = 554.0   # front-face height, bonnet leading edge (centreline) -> bumper lowest edge
+W  = 1789.0  # published vehicle width (ASSUMPTION - see identity)
+
+def V(mm, lo, hi=None):
+    """vertical entry: mm below the bonnet-leading-edge datum, + fraction of front-face height"""
+    return {'mm_below_bonnet_edge': mm, 'tol_mm': lo if hi is None else [lo,hi],
+            'frac_front_face_height_from_bottom': round((FH-mm)/FH,4)}
+
+spec = {
+ "schema": "expertcarcheck.gate3.landmark_spec/1",
+ "generated_utc": datetime.datetime.utcnow().replace(microsecond=0).isoformat()+"Z",
+ "author_role": "GATE 3 v6 reference & landmark specialist",
+ "vehicle": {
+   "make":"Volkswagen","model":"Golf","generation":"Mk8 (VIII), pre-facelift",
+   "model_year":"2020","trim":"Style","market":"UK (RHD); EU/LHD reference also used",
+   "body":"five-door hatchback",
+   "status":"ASSUMPTION, owner-authorised. NOT verified against a VIN or a build record. Every number below inherits that assumption.",
+   "published_dims_mm":{"length":4284,"width":1789,"height":1456},
+   "published_dims_status":"ASSUMPTION (taken from the gate brief, not independently verified here)."
+ },
+ "references": [
+  {"id":"REF_FRONT","file":"REF_FRONT_golf_mk8_style_2020.jpg","sha256":sha(REF+'REF_FRONT_golf_mk8_style_2020.jpg'),
+   "px":[4946,2523],"view":"front-LEFT three-quarter (car's LEFT flank visible)",
+   "subject":"2020 VW Golf Style 1.5, UK, five-door, silver, plate BF70 ENV",
+   "source":"Wikimedia Commons, File:2020_Volkswagen_Golf_Style_1.5_Front.jpg",
+   "url":"https://commons.wikimedia.org/wiki/File:2020_Volkswagen_Golf_Style_1.5_Front.jpg",
+   "author":"Vauxford","licence":"CC BY-SA 4.0","exif":"Canon EOS 200D, 50 mm, f/5.6, ISO 100, 2020-09-02; Adobe Photoshop 21.2 (image is a CROP - principal point is NOT the image centre)",
+   "role":"PRIMARY for trim/market identity and for high-resolution structure. Metric anchor: its UK number plate.",
+   "obliquity":"yaw >= 43.6 deg (from the plate's apparent aspect 3.394 vs true 4.685). ~1.0 mm of lateral error per mm of depth behind the plate plane."},
+  {"id":"REF_PRESS","file":"VW_PRESS_DB2019AU02064.jpg","sha256":sha(REF+'VW_PRESS_DB2019AU02064.jpg'),
+   "px":[1600,1067],"view":"front-RIGHT three-quarter (car's RIGHT flank visible)",
+   "subject":"VW Golf Mk8 Style, EU/LHD, grey, press plate WOB-GO 847",
+   "source":"Volkswagen Newsroom, album 'Golf 8th Generation', DB2019AU02064",
+   "url":"https://www.volkswagen-newsroom.com/en/images/albums/golf-8th-generation-2751",
+   "licence":"Volkswagen AG press material","exif":"NONE (stripped)",
+   "role":"SECONDARY - independent cross-check, much less oblique, and the only view of the lower-grille chrome blades and the lit DRL.",
+   "obliquity":"yaw NOT SETTLED. The plate aspect and the silhouette proportion say 11-16 deg; making the far-field lateral measurements physical needs 22-28 deg. This unresolved conflict is why lateral positions far from the plate are reported UNRELIABLE."},
+ ],
+ "references_added_this_session": [],
+ "method": {
+  "metric_anchor":"The number plate, and nothing else. REF_FRONT: UK BS AU 145d standard oblong, 520 x 111 mm. REF_PRESS: German DIN 74069 single-line plate, taken as 520 x 110 mm.",
+  "plate_corner_fit":"Each of the four plate edges traced sub-pixel (steepest-intensity-change definition, IRLS straight-line fit) then intersected. Residual RMS: REF_FRONT top 0.59 / bottom 0.31 / left 0.25 / right 0.20 px; REF_PRESS top 0.83 / bottom 0.20 / left 0.01 / right 0.06 px. Pre-registered reject threshold was 1.5 px - all passed.",
+  "rectification":"A plane homography from the four plate corners maps image pixels to PLATE-PLANE millimetres. Everything is then quoted in that frame.",
+  "PRE_REGISTERED_VALIDATION":{
+    "written_before_running":"REF_FRONT's homography would be declared WRONG if the rectified plate characters missed BS AU 145d by more than: character height +/-4 mm of 79; block width +/-12 mm of 438; left-vs-right margin difference > 6 mm; block tilt > 1 deg.",
+    "result_measured":{"characters_found":7,"expected":7,
+      "char_height_mm":77.21,"char_height_target":79,"char_height_sd":0.16,
+      "char_width_mm":49.57,"char_width_target":50,
+      "block_width_mm":433.0,"block_width_target":438,
+      "left_margin_mm":43.0,"right_margin_mm":44.0,"margin_target":41,
+      "block_tilt_deg":0.061},
+    "verdict":"PASS on every criterion. Character metrics are pixels the homography never saw, so this is a genuine independent check.",
+    "residual_found":"Character PITCH rises monotonically 58.0 -> 62.75 mm across the plate (target 61.0 throughout). That is a ~+-4% lateral scale gradient across the plate's own 520 mm, most plausibly a few mm of plate bow. It is the first sign that lateral EXTRAPOLATION beyond the plate degrades."},
+  "cross_validation":"Every quantity was measured independently in both references and the two answers compared. Agreement is quoted per landmark. The two cameras sit on OPPOSITE sides of the car, so depth parallax has opposite signs - agreement is therefore meaningful, not a shared bias.",
+  "why_no_orthographic_error_number":"No orthographic straight-on front reference of this exact spec exists in the reference set, so a projected-landmark-error percentage against an orthographic overlay is NOT TESTED. It is not estimated anywhere in this file.",
+  "camera_recovery_attempts_that_FAILED":[
+    "Single-plate focal recovery (Zhang, one homography, principal point assumed at image centre): f^2 came out NEGATIVE for REF_FRONT. The plate is far too small and too thin a target. Do not retry.",
+    "LSD + RANSAC three-orthogonal-vanishing-point solve on REF_FRONT: three mutually inconsistent focal lengths (10120 / 19168 / 21441 px). The image is a Photoshop crop so the principal point is not the image centre, and the segment families mix the car with the building behind it.",
+    "Vanishing point from the car's own lateral lines: the plate edges, bar top, chrome blade and bar bottom give pairwise vanishing points ranging from x=-8830 to x=-50812 in REF_FRONT and from -24544 to +77306 in REF_PRESS. Unusable. Consequence: the projective term of each homography is noise-dominated and long-range extrapolation is not trustworthy. In REF_PRESS the implied local scale even runs the WRONG WAY across the image (it falls toward the far side by 8%), which is direct proof of that."],
+ },
+ "coordinate_system_for_the_builder": {
+   "lateral":"Distance from the vehicle centreline, quoted in mm and as a fraction of the published width 1789 mm (so 0.500 = the extreme edge of the car). Side is named explicitly (car's LEFT / car's RIGHT) as seen by the driver.",
+   "centreline_definition":"The number plate's lateral centre. Justified: the VW badge centre solves to +2 mm from it (two-view solve, +/-10 mm), and both are centred by design.",
+   "vertical":"mm measured DOWNWARD from the BONNET LEADING EDGE at the centreline (= the top edge of the upper grille bar). Also given as a fraction of the FRONT-FACE HEIGHT, measured UPWARD from the bumper's lowest edge, so 1.000 = bonnet leading edge and 0.000 = bumper lowest edge.",
+   "front_face_height_mm":FH,
+   "front_face_height_note":"Measured in REF_PRESS only (REF_FRONT's bumper lower edge is lost in shadow). +/-30 mm.",
+   "GROUND_DATUM":"NOT ESTABLISHED. Neither reference lets the ground plane be tied to the fascia: the tyre contact patch is ~870 mm behind the plate plane, where the vertical depth-parallax error is of order 100 mm. Do NOT take any 'height above ground' from this file - there is none. Anchor the fascia block to your mesh's own bonnet leading edge instead."
+ },
+ "landmarks": {}
+}
+
+L = spec['landmarks']
+
+L['bonnet_leading_edge_centre'] = {
+  "what":"The bonnet's leading shut line at the vehicle centreline = the top edge of the upper grille bar. This is the vertical datum.",
+  "vertical":V(0.0,0), "lateral_mm_from_centreline":0.0, "lateral_frac_of_width":0.0,
+  "shape":"LEVEL across the central +/-300 mm: the rectified height varies by <=4 mm (REF_FRONT) and <=6 mm (REF_PRESS) over that span. It then rises strongly outboard - see bonnet_leading_edge_corner.",
+  "method":"Steepest-intensity-change trace of the body->black boundary at 8-10 px intervals, 75 columns (REF_FRONT, quadratic residual 0.29 px) and 97 columns (REF_PRESS, 0.05 px), rectified through the plate homography.",
+  "source":"both","confidence":"HIGH"}
+
+L['bonnet_leading_edge_corner'] = {
+  "what":"Where the bonnet leading edge reaches the headlamp's outboard tip. On this car the bonnet shut line runs along the top of the headlamp out to the lamp's point, then turns back as the bonnet-to-wing shut line. The 'corner' and the 'headlamp outer tip' are effectively the same point.",
+  "vertical_mm_ABOVE_datum":[60,98],
+  "vertical_note":"ABOVE the centreline bonnet edge. REF_FRONT rectifies to 98 mm, REF_PRESS to 82 mm, and the raw un-rectified pixel readings give 54 and 59 mm. The direction is certain, the magnitude is not.",
+  "lateral":"UNRELIABLE - see headlamp_outer_corner.",
+  "source":"both","confidence":"LOW (magnitude) / HIGH (that it is well above the centreline edge)"}
+
+L['upper_grille_bar'] = {
+  "what":"The Mk8's defining feature: one slim black slot spanning lamp to lamp, with a single bright blade running its whole length, interrupted only by the badge.",
+  "projected_height_mm":67.0,"projected_height_tol_mm":3,
+  "projected_height_frac_front_face":round(67.0/FH,4),
+  "height_measured":{"REF_FRONT":66.4,"REF_PRESS":68.3},
+  "constant_height":"Yes. Measured at s=-300 / 0 / +300 mm the bar height is 69.6 / 68.3 / 68.8 (REF_PRESS) and --/66.4/65.3 (REF_FRONT). Model it as a constant-height slot, not a taper.",
+  "top_edge":"Coincident with the bonnet leading edge (datum, 0 mm).",
+  "bottom_edge":V(67.0,3),
+  "continuous_through_badge":"YES. The slot and its blade run straight through; the badge sits ON TOP of them and overlaps both the blade and the bonnet shut line above it.",
+  "meets_lamp":"The bar runs into the headlamp's inboard tip with no step - the blade inside the bar and the DRL blade inside the lamp are one continuous line. There is no separate 'lamp inner corner' in the bar's top edge.",
+  "slat_structure":"NONE visible. The slot reads as a dark recess with a fine mesh behind it; no discrete slats are resolvable in either reference. Do not model slats here.",
+  "rake":"The bar panel is raked back. Measured indirectly: the circular badge that sits on it rectifies 18% (REF_FRONT) to 25% (REF_PRESS) shorter vertically than horizontally, and the two references disagree because their camera pitches differ. A rake angle CANNOT be extracted without a camera model - treat the bar as raked but take the angle from your own mesh.",
+  "source":"both","confidence":"HIGH (height, topology) / UNRELIABLE (rake angle)"}
+
+L['drl_blade'] = {
+  "what":"The DRL / light signature and the chrome blade that continues it.",
+  "count":"ONE element per side, plus one crossbar - a single unbroken line from headlamp tip, through the lamp, across the grille, through the badge, and out to the opposite lamp tip.",
+  "vertical_centreline":V(20.0,2),
+  "position_within_bar":"30% of the bar's height down from the bar's top edge (20 of 67 mm).",
+  "parallel_to_bonnet_edge":"YES, within 3 mm. bar-top-to-blade spacing measured at s=-300/0/+300: 20.5 / 20.7 / 20.1 mm (REF_PRESS) and --/19.2/16.7 (REF_FRONT).",
+  "thickness_mm":[6,9],
+  "thickness_method":"Width of the bright band in REF_FRONT column profiles at x=500/700/1100: 10 px each = 6.3 mm at the local rectified scale. This is the specular core; the physical trim may be slightly wider, hence the 6-9 range.",
+  "runs_into_grille_bar":"YES - this is the single most important structural fact about this face. It does NOT stop at the lamp.",
+  "terminates":"At the headlamp's outboard tip (the pointed end), i.e. it runs the full width of the lamp.",
+  "illumination":"In REF_PRESS the portion INSIDE the headlamp is plainly lit (bright white). The portion crossing the grille reads as bright trim, not as a light source. Neither reference settles whether the crossbar is illuminated on this trim - build it as trim and treat an illuminated crossbar as an unverified option.",
+  "legend":"REF_PRESS's lamp carries a small etched legend at the outboard end of the blade. At 1600 px it is ILLEGIBLE. It is consistent with VW's 'IQ.LIGHT' marking but MUST NOT be relied on - if REF_PRESS is a matrix-LED car and REF_FRONT is not, their lamp internals may differ. Their overall outline and element layout do match.",
+  "source":"both","confidence":"HIGH (path, position) / MEDIUM (thickness) / LOW (illumination of the crossbar)"}
+
+L['badge'] = {
+  "what":"VW roundel, chrome outer ring.",
+  "outer_diameter_mm":149.0,"outer_diameter_tol_mm":5,
+  "diameter_frac_of_width":round(149.0/W,4),
+  "diameter_measured":{"REF_FRONT":151.1,"REF_PRESS":146.9},
+  "diameter_method":"HORIZONTAL extent only, rectified. The vertical extent must NOT be used: it rectifies to 123.7 (REF_FRONT) and 138.0 mm (REF_PRESS) because the badge panel is raked and the two cameras have different pitch. Horizontal extents are immune to that and agree to 2.8%.",
+  "centre_vertical":V(54.0,4),
+  "top":V(-11.0,8),"bottom":V(120.0,4),
+  "overlaps_bonnet_shut_line":"YES - the badge's top edge sits ABOVE the bonnet leading edge by roughly 11 mm (REF_FRONT 5.6, REF_PRESS 16.9). Model the badge as overlapping the shut line, not tucked under it.",
+  "centre_lateral_mm_from_centreline":2.0,"centre_lateral_tol_mm":10,
+  "centre_lateral_method":"Two-view solve. The badge centre rectifies to +47.0 mm in REF_FRONT and -12.4 mm in REF_PRESS; because the two cameras are on OPPOSITE sides those two errors have opposite signs, and solving them together gives lateral +2 mm and a depth of 44 +/-15 mm behind the number-plate face.",
+  "depth_behind_plate_face_mm":44,"depth_tol_mm":15,
+  "source":"both","confidence":"HIGH (diameter, vertical) / MEDIUM (lateral, depth)"}
+
+L['number_plate'] = {
+  "what":"Front registration plate. THIS IS THE METRIC ANCHOR for the whole spec.",
+  "size_mm_UK":[520,111],"size_mm_EU":[520,110],
+  "top":V(162.0,8),"bottom":V(272.0,8),"centre":V(217.0,8),
+  "top_measured":{"REF_FRONT":156.8,"REF_PRESS":167.0},
+  "vertical_spread_note":"The 10 mm spread between the two references is a genuine car-to-car difference: a UK dealer-fitted plate versus a German plate in a holder. Build to the mean and treat +/-10 mm as free.",
+  "centre_lateral_mm_from_centreline":0.0,"centre_lateral_tol_mm":10,
+  "width_frac_of_vehicle_width":round(520.0/W,4),
+  "mounting_surface":"Body-colour bumper face. The plate's TOP two-thirds sit on painted bumper; its BOTTOM edge overlaps the top of the black lower grille. There is no separate recessed plinth visible in either reference - it is a flat pad on the bumper's front face.",
+  "clearance_above":"90 mm of plain body colour between the bar's bottom edge (67) and the plate's top edge (162)... 95 mm; use 95 +/-8.",
+  "source":"both","confidence":"HIGH"}
+
+L['headlamp_inner_corner'] = {
+  "what":"The headlamp lens's inboard tip, taken where the chrome/DRL blade crosses the lamp's inboard boundary.",
+  "lateral_mm_from_centreline":470.0,"lateral_tol_mm":25,
+  "lateral_frac_of_width":round(470.0/W,4),
+  "gap_between_the_two_lamps_mm":940,"gap_tol_mm":50,
+  "lateral_method":"Two routes, both used. (a) Symmetric-pair half-span - the midpoint of the left and right instances in ONE image is that image's own parallax offset, so half the separation is parallax-free: 448.0 mm (REF_FRONT), 465.4 mm (REF_PRESS). (b) Near-side value in each image solved jointly with a depth term: 467-494 mm. Adopted 470.",
+  "vertical":V(9.0,3),
+  "vertical_note":"The lamp's top edge at its inner corner sits 9 mm below the centreline bonnet edge (REF_FRONT 9.9, REF_PRESS 7.7).",
+  "depth_behind_plate_face_mm":[70,100],
+  "source":"both","confidence":"MEDIUM"}
+
+L['headlamp_outer_corner'] = {
+  "what":"The headlamp's pointed outboard tip, where the lamp, bonnet shut line and wing meet.",
+  "lateral_mm_from_centreline":"UNRELIABLE",
+  "lateral_frac_of_width":"UNRELIABLE",
+  "lateral_bracket_frac_of_width":[0.45,0.50],
+  "why_unreliable":"REF_FRONT rectifies the tip to 1249 mm and REF_PRESS to 1076 mm from the plate centre. Both exceed the car's own half-width of 894.5 mm, so both are inflated by depth parallax. Correcting REF_FRONT with a physically consistent depth (~400 mm behind the plate face) lands it at 850-895 mm; the same correction on REF_PRESS needs a camera yaw of 22-28 deg, which its own silhouette proportion (11-16 deg) contradicts. That conflict is unresolved, so no single number is defensible.",
+  "what_IS_safe_to_say":"The headlamps run essentially to the full width of the front of the car - the tip is at or within ~50 mm of the widest point of the bumper. Build it as 'the lamp reaches the corner', and take the exact lateral from your own mesh's bumper corner.",
+  "vertical_mm_ABOVE_datum":[60,98],
+  "source":"both","confidence":"UNRELIABLE (lateral) / LOW (vertical magnitude)"}
+
+L['headlamp_outline'] = {
+  "what":"Overall lamp shape between the two corners.",
+  "upper_edge":"A single near-straight run from the outboard tip down-inboard to the inner corner, continuous with the bonnet shut line above it. It does not kink.",
+  "lower_edge":"Convex-down: it drops away from the inner corner, reaches its lowest point roughly two-thirds of the way outboard, then sweeps back up to the tip. Lowest point measured in REF_PRESS at 97 mm below the centreline bonnet edge, at a lateral position between the inner corner and the tip (nearer the tip).",
+  "lowest_point_vertical":V(97.0,15),
+  "internal_layout":"Reading OUTBOARD to INBOARD: a large round projector, then a smaller rectangular element, then the lamp narrows to its inboard tip. The DRL blade runs along the top edge over the whole length. Consistent in both references, mirrored as expected.",
+  "source":"both","confidence":"HIGH (topology) / MEDIUM (lowest-point height)"}
+
+L['lower_grille_centre'] = {
+  "what":"The main central lower intake, behind and below the number plate.",
+  "bottom_edge":V(410.0,15),
+  "bottom_edge_measured":{"REF_FRONT":400.2,"REF_PRESS":420.4},
+  "bottom_edge_shape":"Level within 7 mm across the central +/-300 mm in both references.",
+  "top_edge":"NOT MEASURABLE at the centreline - the number plate covers it in both references. It is at or above the plate's top edge (162 mm).",
+  "internal_pattern":"A dark lattice with dominant HORIZONTAL slats.",
+  "slat_pitch_mm":21,"slat_pitch_tol_mm":4,
+  "slat_pitch_method":"REF_FRONT highlight spacing 33 px at the local rectified scale 0.634 mm/px = 21 mm; REF_PRESS shows the same rhythm at ~9.5 px x 2.19 mm/px = 21 mm. A coarser ~45 mm rhythm sits on top of it (heavier bars every second slat).",
+  "slat_count":"UNRELIABLE - the plate hides the upper part of the grille in BOTH references, so the total count cannot be established. Do not quote one.",
+  "lateral_extremities":"UNRELIABLE for the same reason as the headlamp outer corner.",
+  "source":"both","confidence":"HIGH (bottom edge) / MEDIUM (pitch) / UNRELIABLE (count, width)"}
+
+L['outer_intake'] = {
+  "what":"The outboard air intake at each end of the lower bumper. This is the feature that identifies STYLE trim.",
+  "surround":"A body-colour frame around a black recessed opening - NOT an R-Line/GTI full-width honeycomb, and no red stripe.",
+  "internal_pattern":"THREE bright chrome/silver blades stacked vertically inside the black opening, each curving so that it is thickest inboard and tapers outboard. Clearly resolved in REF_PRESS; the same three blades are visible in REF_FRONT on the near side.",
+  "blade_count":3,"blade_count_confidence":"HIGH - counted independently in both references on the near side of each.",
+  "top_edge_vertical":V(230.0,20),
+  "top_edge_note":"REF_PRESS only. The intake's top edge sits ABOVE the number plate's bottom edge (272 mm) and below its top edge (162 mm) - i.e. it overlaps the plate band vertically.",
+  "lateral":"UNRELIABLE (same reason as headlamp_outer_corner). Structurally, the intake's outboard edge runs out to the bumper corner and its inboard edge stops well short of the plate.",
+  "source":"both","confidence":"HIGH (structure, blade count) / MEDIUM (top edge) / UNRELIABLE (lateral)"}
+
+L['splitter'] = {
+  "what":"Front splitter / lower lip.",
+  "finding":"THERE IS NO SEPARATE SPLITTER ON THIS TRIM. Below the lower grille the bumper continues as a plain BODY-COLOUR valance that rolls under to the bumper's lowest edge. No contrasting blade, no black lip, no add-on part in either reference.",
+  "valance_band":"From the lower grille's bottom edge (410 mm) to the bumper's lowest edge (554 mm) = a 144 mm body-colour band.",
+  "bumper_lowest_edge":V(554.0,30),
+  "bumper_lowest_edge_note":"REF_PRESS only; REF_FRONT loses it in shadow. Level within 8 mm across the central +/-300 mm.",
+  "depth":"NOT MEASURABLE from either reference.",
+  "source":"REF_PRESS","confidence":"HIGH (that no splitter exists) / MEDIUM (valance band) / NOT TESTED (depth)"}
+
+L['fender_bumper_join'] = {
+  "what":"The shut line between the front wing (fender) and the front bumper cover.",
+  "path":"It starts at the headlamp's outboard tip and runs DOWNWARD AND OUTBOARD, hugging the lamp's outer edge, then turns back along the top of the wheel arch. It is clearly visible in REF_PRESS immediately outboard of the lamp tip and in REF_FRONT on the near side.",
+  "numeric":"NOT QUOTED. Both references see this line only on their near side, and it lies in the region where lateral rectification is unreliable.",
+  "source":"both","confidence":"HIGH (topology) / NOT TESTED (coordinates)"}
+
+L['tow_eye_cover'] = {
+  "what":"A small round blanking cover on the bumper's front face.",
+  "side":"CAR'S RIGHT ONLY.",
+  "proof":"Present on the car's right in BOTH references and absent on the car's left in BOTH. REF_FRONT is a UK RHD car and REF_PRESS is an EU LHD car, so this is a fixed body-side feature and not a driver-side one.",
+  "vertical":V(207.0,20),
+  "lateral":"Approximately the same lateral offset as the headlamp inner corner (its apparent offset is 0.97x the lamp inner corner's in REF_PRESS), so roughly 455 mm from the centreline - MEDIUM/LOW.",
+  "source":"both","confidence":"HIGH (existence, side) / MEDIUM (vertical) / LOW (lateral)"}
+
+L['park_sensor'] = {
+  "what":"A small circular fitting in the upper inboard part of the outer intake.",
+  "finding":"Present in REF_PRESS, NOT visible in REF_FRONT. Treat as an OPTION (park assist), not as standard fascia geometry. Do not model it by default.",
+  "vertical_REF_PRESS":V(269.0,20),
+  "source":"REF_PRESS","confidence":"MEDIUM (existence) / LOW (that it is optional rather than simply hidden by REF_FRONT's lighting)"}
+
+spec['symmetry'] = {
+ "safe_to_mirror":[
+   "headlamp unit outline and its internal element layout",
+   "DRL blade and the grille crossbar",
+   "upper grille bar (constant-height slot)",
+   "outer intake and its three chrome blades",
+   "central lower grille lattice",
+   "lower body-colour valance and the bumper's lowest edge",
+   "number plate and badge (both centred)"],
+ "mirror_evidence":"The symmetric-pair midpoint test was run on the headlamp inner corners in BOTH references. It returns a consistent half-span (448.0 and 465.4 mm) from two cameras on opposite sides of the car, which is what a symmetric car should do. Left/right lamp graphics are visually identical in both references.",
+ "mirror_tolerance":"Symmetry is demonstrated to about +/-25 mm, not better. Nothing here proves symmetry to a few millimetres.",
+ "PROVEN_ASYMMETRIC_do_not_mirror":[
+   {"feature":"tow-eye blanking cover","side":"car's RIGHT only","evidence":"present right / absent left in both references, on both an RHD and an LHD car"}],
+ "market_difference_not_asymmetry":[
+   {"feature":"number plate","note":"UK 520x111 mm vs EU 520x110 mm. Same position, 1 mm different height."}],
+ "option_difference_not_asymmetry":[
+   {"feature":"park sensor in the outer intake","note":"REF_PRESS only"},
+   {"feature":"headlamp internal type","note":"REF_PRESS's lamp carries an illegible legend that may indicate a matrix-LED unit. Outlines match; internals may not."}]
+}
+
+spec['do_not_trust'] = [
+ "Any 'height above ground'. There is none in this file - the ground datum could not be tied to the fascia (see coordinate_system_for_the_builder.GROUND_DATUM).",
+ "Any lateral position more than ~300 mm from the plate centre except the headlamp inner corner. The two references disagree by up to 20% out there and at least one of them is physically impossible.",
+ "The headlamp outer corner's lateral position, the outer intake's lateral extremities, and the lower grille's width. All UNRELIABLE.",
+ "The badge's VERTICAL extent as a diameter. Use the horizontal extent.",
+ "Any slat count for the central lower grille. The plate hides the top of it in both references.",
+ "A rake angle for the grille-bar panel. It is raked; the angle is not recoverable without a camera model.",
+ "A projected-landmark-error percentage against an orthographic front view. NOT TESTED - no such reference exists for this spec."
+]
+
+spec['front_face_vertical_stack_summary'] = [
+ {"feature":"headlamp outer tip / bonnet leading-edge corner","mm_below_datum":-90,"tol":15,"conf":"LOW"},
+ {"feature":"badge top","mm_below_datum":-11,"tol":8,"conf":"MEDIUM"},
+ {"feature":"bonnet leading edge at centreline (DATUM)","mm_below_datum":0,"tol":0,"conf":"HIGH"},
+ {"feature":"headlamp top edge at inner corner","mm_below_datum":9,"tol":3,"conf":"HIGH"},
+ {"feature":"DRL / chrome blade centreline","mm_below_datum":20,"tol":2,"conf":"HIGH"},
+ {"feature":"badge centre","mm_below_datum":54,"tol":4,"conf":"HIGH"},
+ {"feature":"upper grille bar bottom edge","mm_below_datum":67,"tol":3,"conf":"HIGH"},
+ {"feature":"headlamp lowest point","mm_below_datum":97,"tol":15,"conf":"MEDIUM"},
+ {"feature":"badge bottom","mm_below_datum":120,"tol":4,"conf":"HIGH"},
+ {"feature":"number plate top","mm_below_datum":162,"tol":8,"conf":"HIGH"},
+ {"feature":"outer intake top edge","mm_below_datum":230,"tol":20,"conf":"MEDIUM"},
+ {"feature":"number plate bottom","mm_below_datum":272,"tol":8,"conf":"HIGH"},
+ {"feature":"central lower grille bottom edge","mm_below_datum":410,"tol":15,"conf":"HIGH"},
+ {"feature":"bumper lowest edge","mm_below_datum":554,"tol":30,"conf":"MEDIUM"},
+]
+for r in spec['front_face_vertical_stack_summary']:
+    r['frac_front_face_height_from_bottom']=round((FH-r['mm_below_datum'])/FH,4)
+
+json.dump(spec, open('LANDMARK_SPEC.json','w'), indent=1)
+print('wrote LANDMARK_SPEC.json', os.path.getsize('LANDMARK_SPEC.json'), 'bytes')
