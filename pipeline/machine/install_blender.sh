@@ -86,3 +86,24 @@ echo
 echo "  export BLENDER_BIN=$DEST/blender"
 echo
 echo "system /usr/bin/blender left untouched at $(/usr/bin/blender --version 2>/dev/null | head -1)"
+
+# --- PATH SHIM -------------------------------------------------------------
+# 28 call sites in this repo say `blender` -- subprocess calls, shell scripts,
+# and the "Run: blender -b --python ..." lines in docstrings that people paste.
+# Editing all of them is churn with a long tail of misses. /usr/local/bin
+# precedes /usr/bin on this container's PATH (verified: index 9 vs 11), so one
+# shim routes every one of them at once, with no code change.
+#
+# It falls back to /usr/bin/blender when the modern install is absent -- which
+# is exactly the state right after a container rollback, before this script has
+# been re-run -- so nothing ever hard-fails on a missing path. BLENDER_BIN
+# overrides, which is how you pin a specific build for an A/B.
+cat > /usr/local/bin/blender <<'SHIM'
+#!/usr/bin/env bash
+for c in "${BLENDER_BIN:-}" /opt/blender-4.5.12-linux-x64/blender /usr/bin/blender; do
+  [ -n "$c" ] && [ -x "$c" ] && exec "$c" "$@"
+done
+echo "blender-shim: no blender binary found" >&2; exit 127
+SHIM
+chmod +x /usr/local/bin/blender
+echo "shim installed: $(blender --version 2>/dev/null | head -1) via $(which blender)"

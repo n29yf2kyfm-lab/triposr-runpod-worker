@@ -3273,3 +3273,13 @@ has its denoiser. Keep using **Standard** view transform, never AgX.
 
 Point tooling at `$BLENDER_BIN` rather than hardcoding `/usr/bin/blender`, so a container that has
 run the installer picks up the good one and a fresh one still works.
+
+**PIPELINE NOW ROUTES THROUGH A SHIM (2026-08-21).** 28 call sites in this repo say `blender` —
+subprocess calls, shell scripts, and the `Run: blender -b --python …` lines in docstrings that get
+pasted. Editing all of them is churn with a long tail of misses, so `install_blender.sh` writes
+`/usr/local/bin/blender`, which precedes `/usr/bin` on this container's PATH (verified: index 9 vs 11).
+Every call site picks up 4.5.12 with **no code change**. It falls back to `/usr/bin/blender` when the
+modern install is absent — the state right after a rollback — so nothing hard-fails on a missing path,
+and `BLENDER_BIN` overrides it, which is how you pin a build for an A/B.
+Regression-tested through the shim on the merged Golf: `eyeball_views.py` RC=0, all 7 views, DONE
+marker present.
