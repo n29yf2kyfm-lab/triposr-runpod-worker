@@ -3283,3 +3283,14 @@ modern install is absent — the state right after a rollback — so nothing har
 and `BLENDER_BIN` overrides it, which is how you pin a build for an A/B.
 Regression-tested through the shim on the merged Golf: `eyeball_views.py` RC=0, all 7 views, DONE
 marker present.
+
+**RIGS NOW DENOISE — probe it, never assume it (2026-08-21).** `eyeball_views.py` hardcoded
+`use_denoising = False` with the comment "this build has no OIDN", so it kept rendering undenoised
+even after 4.5.12 was installed. Upgrading the binary is only half the job; **the rigs have the old
+constraint baked into their source.** The pattern to copy: wrap a REAL assignment in try/except and
+PRINT which branch ran, rather than version-checking. Both branches are verified —
+on 4.5.12 it prints `EYEBALL_DENOISE: ON (OpenImageDenoise)`; on the stripped 4.0.2 it raises
+`TypeError: enum "OPENIMAGEDENOISE" not found in ()` (an EMPTY enum — the proof the build has no
+denoiser at all), falls back, and still completes all 7 views. `EYEBALL_DENOISE=0` forces off.
+A silent fallback would look identical to a successful upgrade in the output frames, which is exactly
+why it prints. **Grep the other rigs for `use_denoising` before trusting that they benefit.**

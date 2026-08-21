@@ -17,10 +17,26 @@ Kept in the REPO, not a scratchpad: the container has rolled back repeatedly
 and taken scratchpad tooling with it. Anything worth running twice belongs in
 git.
 
-Blender here has no EGL, so EEVEE cannot initialise — CYCLES with denoising
-OFF (this build has no OIDN either) is the only combination that renders.
+Blender here has no EGL, so EEVEE cannot initialise — CYCLES on CPU is the only
+engine that renders, and that has not changed.
+
+WHAT DID CHANGE (2026-08-21): denoising is now ON when the binary supports it.
+The container's system Blender 4.0.2 is a STRIPPED build with no
+OpenImageDenoise on disk at all, so this file hardcoded `use_denoising = False`
+and every render this project ever produced was undenoised — which is why the
+sample counts here were 40-52 and the results were still grainy. 4.5.12 LTS
+(pipeline/machine/install_blender.sh) ships OIDN, and measured on the merged
+Golf through this very rig: 16 samples DENOISED is visibly cleaner than 52
+samples undenoised, i.e. a 3.25x sample cut AND a better image.
+
+It is probed, not assumed, and it falls back silently: a container that has not
+run install_blender.sh still has the 4.0.2 binary, where setting the denoiser
+raises and the render would otherwise die AFTER "Blender quit" prints, leaving
+STALE FRAMES that read as a successful run. That failure mode is why this is a
+try/except around a real assignment rather than a version check.
 
 Run: blender -b --python eyeball_views.py -- <canon.glb> <outdir>
+Env: EYEBALL_RES, EYEBALL_SAMPLES, EYEBALL_DENOISE=0 to force off
 """
 import bpy
 import math
@@ -74,8 +90,25 @@ fill.rotation_euler = (math.radians(60), 0, math.radians(210))
 
 sc.render.engine = "CYCLES"
 sc.cycles.samples = SAMPLES
-sc.cycles.use_denoising = False
-sc.view_layers[0].cycles.use_denoising = False
+# PROBE, don't assume. On the stripped 4.0.2 this assignment raises and we fall
+# back to the old undenoised path; on 4.5.12 it takes and the render is cleaner
+# at a third of the samples. Printing which branch ran matters — a silent
+# fallback would look identical to a successful upgrade in the output frames.
+DENOISE = os.environ.get("EYEBALL_DENOISE", "1") == "1"
+if DENOISE:
+    try:
+        sc.cycles.use_denoising = True
+        sc.cycles.denoiser = "OPENIMAGEDENOISE"
+        sc.view_layers[0].cycles.use_denoising = True
+        print("EYEBALL_DENOISE: ON (OpenImageDenoise)")
+    except Exception as e:
+        sc.cycles.use_denoising = False
+        sc.view_layers[0].cycles.use_denoising = False
+        print(f"EYEBALL_DENOISE: OFF — {type(e).__name__}: {e}")
+else:
+    sc.cycles.use_denoising = False
+    sc.view_layers[0].cycles.use_denoising = False
+    print("EYEBALL_DENOISE: OFF (forced by env)")
 sc.render.film_transparent = True
 sc.render.image_settings.file_format = "PNG"
 sc.render.image_settings.color_mode = "RGBA"
