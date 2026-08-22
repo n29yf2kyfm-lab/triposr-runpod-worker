@@ -69,6 +69,12 @@ LAMPY = ("headlight", "headlamp", "brakelight", "taillight", "taillamp",
          # fixer could not act on, which is worse than either being wrong alone.
          # Keep the two lists in step.
          "fog", "blinker", "turnsignal", "lamp",
+         # An Aston Martin Vantage spells its tail lens TAILL_LIGHTGLASS -- double
+         # L, underscore -- which matches neither "taillight" nor "taillamp".
+         # "lightglass" catches it and every ...LightsGlass variant, and it is
+         # SAFE for the rear windscreen: `backlight_glass` contains "light_glass",
+         # not "lightglass", so the distinction this project relies on survives.
+         "lightglass", "taill",
          # One large source pack in this catalogue abbreviates its lenses rather
          # than naming them: `ext_glass_tl` is the TAIL LAMP and `ext_glass_orng`
          # the amber indicator, sitting beside the genuine `ext_glass`,
