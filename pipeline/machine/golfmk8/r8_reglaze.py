@@ -61,8 +61,14 @@ GLASSY = ("glass", "window", "windscreen", "windshield", "screen", "glas",
 # the REAR WINDSCREEN as often as it means a tail lamp. `backlight` is kept in
 # GLASSY and deliberately NOT listed here for exactly that reason.
 LAMPY = ("headlight", "headlamp", "brakelight", "taillight", "taillamp",
-         "rearlight", "rear_light", "drl", "indicator", "reflector", "foglight",
-         "fog_light", "blinker", "turnsignal", "lamp",
+         "rearlight", "rear_light", "drl", "indicator", "reflector",
+         # bare "fog", not "foglight": a Mercedes E-Class estate names its front
+         # fog lens `glass_red_fog`, which "foglight" and "fog_light" both miss.
+         # That mismatch was invisible because the TRIAGE script matched bare
+         # "fog" while this list did not -- the detector reported a defect the
+         # fixer could not act on, which is worse than either being wrong alone.
+         # Keep the two lists in step.
+         "fog", "blinker", "turnsignal", "lamp",
          # One large source pack in this catalogue abbreviates its lenses rather
          # than naming them: `ext_glass_tl` is the TAIL LAMP and `ext_glass_orng`
          # the amber indicator, sitting beside the genuine `ext_glass`,
