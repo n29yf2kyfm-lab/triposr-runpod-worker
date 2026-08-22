@@ -248,3 +248,36 @@ Every one of the 8 fixed-camera views was examined at full resolution.
 | proportions vs reference | - | - | **BLOCKED, no references** |
 | shell free of tears | - | - | **FAIL, not attempted** |
 | semantic hierarchy | 6 material groups | 6 + 4 panes | **FAIL** |
+
+## R6 — panel surface smoothing — **REJECTED**
+
+- **defect** owner: "shit paint job". Blotchy reflections across doors/quarters.
+- **root cause** GEOMETRY, not material: the specular image of a rippled panel.
+  Scale-free dihedral angle -- smooth pressed panel ~1-3 deg; SOURCE 8.04 deg
+  (19.3% of edges over 10 deg); V1 after my R5 decimation **11.19 deg** (28.8%).
+- **action attempted** displacement-clamped Laplacian smoothing of `carpaint`.
+- **numeric result** 11.19 -> **10.04 deg**, p90 26.45 -> 19.94, >10 deg 28.8% ->
+  22.1%, max displacement exactly at the 4 mm clamp. Every gate PASSED.
+- **VISUAL RESULT: FAIL.** The rendered flank is covered in black cracks. The
+  shell has 14,643 OPEN COMPONENTS and smoothing pulls the fragments apart: gaps
+  between fragments widen while folds within them soften. Dihedral measures only
+  the second, so **the metric improved while the car was destroyed**.
+- **result** **REJECTED — not carried forward.** `GOLF_MK8_PRODUCTION_V1.glb`
+  remains the current artefact.
+- **standing lesson** any future surface metric needs a term that RISES when
+  fragments separate -- silhouette holes, gap width, or a render diff -- not only
+  one that falls when folds soften. The render is the arbiter.
+
+### Two dead ends recorded so they are not rebuilt
+- **Feature-aware pinning.** Detect sharp edges, pin them, smooth the rest. At a
+  35 deg threshold it pinned **123,514 of 131,851 vertices (93.7%)**, because the
+  noise on this body is itself above 35 deg. A sharp dihedral is not evidence of
+  a feature on a surface that is sharp everywhere. Made every clamp worse.
+- **More smoothing.** Strength sweep: 10.04 -> 13.16 -> 15.62 -> 18.29 deg as
+  iterations rise. Monotonically worse.
+
+### What this means for the owner's three faults
+All three -- **paint**, **window crease at the A-pillar**, **shot front end** --
+are the same root cause: the shell is fragment soup, not a surface. None is
+fixable by a surface operation. The shell must be REBUILT as connected geometry,
+which is the branch Stage 2 identified and has not yet been executed.

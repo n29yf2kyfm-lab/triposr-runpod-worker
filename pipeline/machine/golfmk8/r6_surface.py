@@ -1,5 +1,28 @@
 #!/usr/bin/env python3
-"""r6_surface.py — REPAIR 6: fix the paint by fixing the panel, and rebalance
+"""r6_surface.py — REPAIR 6: REJECTED. DO NOT USE. Kept as evidence.
+
+VERDICT: smoothing this body TEARS IT OPEN, and the metric this file uses does
+not see it. At the best setting found (12 iterations, 4 mm clamp) the dihedral
+angle improved 11.19 -> 10.04 deg and every numeric gate passed -- and the render
+shows the entire flank covered in black cracks, because Laplacian smoothing on a
+shell of 14,643 OPEN COMPONENTS pulls the fragments away from each other. The
+gaps between fragments widen; the folds within them get gentler; dihedral
+measures only the second one.
+
+So this is a metric that improves while the car is destroyed, and it would have
+shipped a visibly ruined asset on a green number. The render is the arbiter --
+a rule this project already holds and which this file exists to demonstrate the
+cost of forgetting. Any future surface metric must include a term that rises when
+fragments separate (silhouette holes, gap width, or a render diff), not only one
+that falls when folds soften.
+
+The correct fix for the owner's "shit paint job" is therefore NOT smoothing. It
+is the Stage 2 rebuild branch: the shell has to be rebuilt as connected geometry
+before any surface operation on it means anything.
+
+--- original intent, retained below ---
+
+REPAIR 6: fix the paint by fixing the panel, and rebalance
 the triangle budget that made it worse.
 
 THE OWNER'S "SHIT PAINT JOB" IS GEOMETRY. Blotchy reflections across the doors
