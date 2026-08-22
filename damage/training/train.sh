@@ -61,9 +61,18 @@ except Exception:
 # arrived, the weights did not, and epoch 1 was gone. On a 20-hour run
 # interrupted at hour 19 that would be the whole job.
 #
-# A checkpoint is re-uploaded only when its size changes, so a stable file
-# costs one stat and nothing else. Checkpoints are written per epoch, so this
-# adds a handful of commits against the Hub's 128/hour limit.
+# KEY ON mtime, NOT SIZE.
+#
+# Size alone silently stopped publishing. A .pth holds the same tensors every
+# epoch, so it is usually byte-identical in LENGTH while its CONTENTS change
+# completely: the guard read "same size, already sent" and skipped every
+# epoch after the first that happened to differ. v12b ran to epoch 8 with
+# epoch 7's weights on the Hub, and the "stopped at hour 19" disaster this
+# block exists to prevent was live the whole time.
+#
+# mtime changes on every write, so it tracks what size cannot. Checkpoints
+# are written per epoch, so this adds a handful of commits against the Hub's
+# 128/hour limit.
 seen = {}
 mark = "/workspace/.uploaded"
 if os.path.exists(mark):
@@ -72,7 +81,8 @@ if os.path.exists(mark):
         seen[k] = v
 for pth in sorted(glob.glob("/workspace/runs/**/*.pth", recursive=True)):
     try:
-        sz = str(os.path.getsize(pth))
+        st = os.stat(pth)
+        sz = "%d:%d" % (st.st_size, st.st_mtime_ns)
         if seen.get(pth) == sz:
             continue
         api.upload_file(path_or_fileobj=pth,
