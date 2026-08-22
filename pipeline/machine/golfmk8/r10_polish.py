@@ -67,8 +67,21 @@ REPORT = argv[3] if len(argv) > 3 else None
 
 ROUGH = float(os.environ.get("R10_ROUGH", "0.28"))
 COAT = float(os.environ.get("R10_CLEARCOAT", "1.0"))
-METAL = float(os.environ.get("R10_METALLIC", "0.55"))
+# 0.55 was the first value tried and it is WRONG for car paint: the Aston came
+# back looking like liquid mercury, a mirror rather than a painted panel. Real
+# metallic paint is a dielectric clearcoat over a base carrying a little flake,
+# so the Principled metallic input belongs near 0.15 with the coat doing the
+# gloss. Judged on the render, which is the only thing that can judge it.
+METAL = float(os.environ.get("R10_METALLIC", "0.15"))
 DO_TYRE = os.environ.get("R10_TYRE", "1") == "1"
+# Reglazing makes the CABIN visible for the first time, and some source packs
+# ship a violently saturated placeholder in there -- ford-focus-w6-v1's seats
+# are pure green, which is not a colour any car interior has ever been. This
+# desaturates an interior material only when it is BOTH strongly saturated and
+# bright, so a genuine tan or red leather (saturated but not neon) is left
+# alone. Off by default: it changes appearance, and appearance changes should
+# be asked for.
+DO_CABIN = os.environ.get("R10_CABIN", "0") == "1"
 # Share of exterior visibility at which a measurement overrules an "interior"
 # name. 0.35 sits well above what any real cabin part can reach when glazing
 # blocks the ray (the Aston's best interior scores under 1%) and well below
@@ -347,6 +360,75 @@ if DO_TYRE:
         print(f"R10_TYRE {mm.name}: {[round(c,3) for c in cur]} -> black rubber")
         rep["tyres"].append({"name": mm.name, "action": "darkened",
                              "was": [round(c, 4) for c in cur]})
+
+# --- GLOBAL-ALPHA SHELL: force the EXTERIOR opaque -------------------------
+# CLAUDE.md records this class under the Volvo/Mazda "global-alpha shell": the
+# whole car is authored at alphaMode=BLEND alpha 0.25 with
+# KHR_materials_transmission=1.0, including carpaint, tyres and chrome, so the
+# body itself is ~75% see-through and a backlight render reads a checkerboard
+# straight through the roof and bonnet. land-rover-range-rover-velar-v1 was
+# quarantined for exactly this and still carries it: `vray_CarPaint` and
+# `vray_Material_568` are both BLEND 0.25 / transmission 1.0.
+#
+# Painting the base material does not repair it -- a transmissive coat sits over
+# the paint and the car stays see-through under any rig that puts light behind
+# it. So every material that rays actually reach from outside, and that is not
+# glazing, is forced fully opaque. Glazing is exempt by name AND by having been
+# excluded from the visibility tally, which is what stops this undoing r8.
+#
+# Nothing is forced on a car that does not have the defect: a correctly authored
+# exterior is already opaque and reports zero changes.
+shell_fixed = []
+for mm in bpy.data.materials:
+    nm = (mm.name or "").lower()
+    if any(g in nm for g in GLASSY):
+        continue
+    if VIS.get(mm.name, 0) <= 0:
+        continue
+    bb = bsdf_of(mm)
+    if bb is None:
+        continue
+    a = float(bb.inputs["Alpha"].default_value)
+    t = (float(bb.inputs["Transmission Weight"].default_value)
+         if "Transmission Weight" in bb.inputs else 0.0)
+    if a >= 0.99 and t <= 0.01:
+        continue
+    bb.inputs["Alpha"].default_value = 1.0
+    if "Transmission Weight" in bb.inputs:
+        bb.inputs["Transmission Weight"].default_value = 0.0
+    try:
+        mm.blend_method = "OPAQUE"
+    except Exception:
+        pass
+    print(f"R10_SHELL {mm.name}: exterior surface was alpha={a:.3f} "
+          f"transmission={t:.3f} -- forced opaque (global-alpha shell)")
+    shell_fixed.append({"name": mm.name, "alpha": round(a, 4),
+                        "transmission": round(t, 4)})
+rep["shell_forced_opaque"] = shell_fixed
+if shell_fixed:
+    print(f"R10_SHELL_TOTAL {len(shell_fixed)} exterior materials were "
+          f"see-through and are now solid")
+
+if DO_CABIN:
+    rep["cabin"] = []
+    for mm in bpy.data.materials:
+        nm = (mm.name or "").lower()
+        if not (any(i in nm for i in INTERIOR) or affix(nm, "int")):
+            continue
+        bb = bsdf_of(mm)
+        if bb is None:
+            continue
+        c = list(bb.inputs["Base Color"].default_value)[:3]
+        mx, mn = max(c), min(c)
+        sat = (mx - mn) / mx if mx > 1e-6 else 0.0
+        if sat < 0.45 or mx < 0.25:
+            continue
+        grey = 0.045 + 0.25 * mx * 0.25
+        bb.inputs["Base Color"].default_value = (grey, grey, grey * 1.02, 1.0)
+        print(f"R10_CABIN {mm.name}: {[round(x,3) for x in c]} (saturation "
+              f"{sat:.2f}) -> neutral {grey:.3f}. A placeholder colour, not upholstery.")
+        rep["cabin"].append({"name": mm.name, "was": [round(x, 4) for x in c],
+                             "saturation": round(sat, 3)})
 
 bpy.ops.export_scene.gltf(filepath=DST, export_format="GLB", export_yup=True)
 print("R10_EXPORTED", DST)
