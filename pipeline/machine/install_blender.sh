@@ -49,6 +49,18 @@ URL="https://download.blender.org/release/Blender${SERIES}/blender-${VER}-linux-
 # /usr/local/bin did not would silently reinstall nothing. Caught by reading the
 # script's own output after it printed "already installed" and did not mention
 # the shim.
+# Python deps the golfmk8 / integrity tools import. Omitting these cost a
+# recovery cycle after rollback #11: the chain died one stage in on
+# "ModuleNotFoundError: No module named 'PIL'" with everything else healthy.
+PY_DEPS="Pillow scipy"
+install_py_deps() {
+  local bpy
+  bpy="$(ls -d /opt/blender-4.5.12-linux-x64/4.5/python/bin/python3* 2>/dev/null | head -1)"
+  [ -n "$bpy" ] || { echo "install_py_deps: no bundled python found" >&2; return 1; }
+  "$bpy" -m pip install --quiet $PY_DEPS 2>&1 | tail -1
+  "$bpy" -c "from PIL import Image; import scipy, numpy; print('py deps OK')"
+}
+
 install_shim() {
   cat > /usr/local/bin/blender <<'SHIM'
 #!/usr/bin/env bash
@@ -65,6 +77,7 @@ if [ -x "$DEST/blender" ]; then
   echo "already installed: $($DEST/blender --version 2>/dev/null | head -1)"
   echo "BLENDER_BIN=$DEST/blender"
   install_shim
+  install_py_deps
   exit 0
 fi
 
@@ -126,3 +139,6 @@ echo "blender-shim: no blender binary found" >&2; exit 127
 SHIM
 chmod +x /usr/local/bin/blender
 echo "shim installed: $(blender --version 2>/dev/null | head -1) via $(which blender)"
+
+# Fresh-install path also needs the tool dependencies, not just the binary.
+install_py_deps
