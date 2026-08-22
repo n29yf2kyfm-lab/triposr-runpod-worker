@@ -53,6 +53,17 @@ FORCE = os.environ.get("R8_FORCE", "0") == "1"
 GLASSY = ("glass", "window", "windscreen", "windshield", "screen", "glas",
           "scheibe", "fenster", "vidro", "backlight", "quarter")
 
+# LAMP LENSES ARE NOT WINDOWS, and "glass" matches both. A triage of the first
+# 122 recovered cars found 24 where this rewrote HeadLightsGlass, BrakeLightsGlass,
+# glass_headlights, REARLIGHT_GLASS_NM and the like -- a fully transmissive
+# headlamp lens is wrong, lamps want dark gloss. This is the documented lamp-lens
+# trap: the same reason `backlight` had to be handled carefully, since it means
+# the REAR WINDSCREEN as often as it means a tail lamp. `backlight` is kept in
+# GLASSY and deliberately NOT listed here for exactly that reason.
+LAMPY = ("headlight", "headlamp", "brakelight", "taillight", "taillamp",
+         "rearlight", "rear_light", "drl", "indicator", "reflector", "foglight",
+         "fog_light", "blinker", "turnsignal", "lamp")
+
 bpy.ops.wm.read_factory_settings(use_empty=True)
 sc = bpy.context.scene
 bpy.ops.import_scene.gltf(filepath=SRC)
@@ -62,6 +73,10 @@ hits = 0
 for m in bpy.data.materials:
     nm = (m.name or "").lower()
     if not any(g in nm for g in GLASSY):
+        continue
+    if any(l in nm for l in LAMPY):
+        print(f"R8_LAMP {m.name}: glass-named but it is a LAMP LENS -- left alone")
+        report["materials"].append({"name": m.name, "skipped": "lamp lens, not glazing"})
         continue
     m.use_nodes = True
     bsdf = next((n for n in m.node_tree.nodes if n.type == "BSDF_PRINCIPLED"), None)
