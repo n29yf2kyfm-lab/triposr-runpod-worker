@@ -55,6 +55,7 @@ Env: R10_ROUGH (0.28) · R10_CLEARCOAT (1.0) · R10_METALLIC (0.55)
      R10_TYRE (1) set 0 to leave tyre materials untouched
 """
 import json
+import math
 import os
 import sys
 
@@ -349,27 +350,196 @@ print(f"R10_MAT {PAINT_NAME}: base -> {[round(x,3) for x in rgb]}, "
 # dark, so a correct car is left exactly as it is -- and a WHITEWALL, which
 # CLAUDE.md records as a genuine period detail repeatedly misread as a defect,
 # keeps its light sidewall because only the material named as rubber is set.
-if DO_TYRE:
-    for mm in bpy.data.materials:
-        nm = (mm.name or "").lower()
-        if not any(t in nm for t in TYRE_WORDS):
+# --- TYRES, BY CONTACT PATCH ----------------------------------------------
+# THE ONLY PART OF A CAR THAT TOUCHES THE GROUND IS THE TREAD. That is the whole
+# idea, and it needs no name: take the faces in the bottom slice of the car,
+# check they appear at three or four corners rather than in one place (which
+# would be a splitter, a sill or an exhaust), and whatever owns them is the
+# tyre.
+#
+# WHY THE NAME RULE WAS NOT ENOUGH, AND WHY THE OLD REPORTING WAS WORSE. The
+# name rule alone found nothing on alfa-romeo-147-v1, whose ground contact is a
+# material called `wheel_rim` sitting at baseColor 0.56 -- a PALE tread on a car
+# that had already been put in front of the owner as a clean keeper. No tyre
+# word appears anywhere on it.
+#
+# And the reporting was actively misleading. The manifest counted materials
+# CHANGED, so a car whose tyres were already black recorded "0" and I read that
+# as a failure -- telling the owner that alfa-romeo-8c-v1 and audi-r8-ad1-v1 had
+# undarkened tyres when both were already correct (GT_TIRES at 0.080,
+# Tire_Material and Protecor at 0.000). Counting actions answers "what did I
+# do"; the question is "what STATE is the car in". So this records the final
+# colour of whatever occupies the contact patch, whether or not it was touched,
+# and grades that.
+#
+# WHITEWALL CAUTION. CLAUDE.md records genuine whitewalls being misread as this
+# defect repeatedly. The contact patch is the TREAD, which is black on a
+# whitewall tyre too, so testing there is the right place -- but where sidewall
+# and tread share one material, darkening it would flatten a real whitewall.
+# Such a car is printed as R10_TYRE_WHITEWALL_RISK so it can be looked at
+# rather than silently changed.
+CONTACT_BAND = float(os.environ.get("R10_CONTACT_BAND", "0.04"))
+PALE = float(os.environ.get("R10_TYRE_PALE", "0.16"))
+
+
+def split_wheel_material(name):
+    """One material covering BOTH tyre and rim: cut it by radius.
+
+    alfa-romeo-147-v1 carries a single `wheel_rim` at baseColor 0.56 over the
+    whole wheel. Darkening it removes the white-tread hard fail and takes the
+    ALLOY with it, leaving a dark blob where spokes should read -- and
+    inconsistent wheel spokes is itself a line in the audit rubric. So rather
+    than recolouring the material, its faces are separated: outside 0.72 of the
+    wheel radius becomes rubber, inside keeps the alloy.
+
+    The wheel centre is not assumed. Faces are grouped into corners by sign of
+    (x, y) about the car's centre and each corner takes its centre and radius
+    from its own faces, so a car with different front and rear wheels still
+    works. Radius is measured in the plane containing the car's LENGTH and
+    HEIGHT, because the wheel axis runs across the car.
+
+    Returns (tyre_material, faces_moved); a caller seeing too few faces moved
+    should fall back to darkening the whole material, which is still better
+    than a white tread."""
+    src = bpy.data.materials.get(name)
+    if src is None:
+        return None, 0
+    cx, cy = (lo[0] + hi[0]) / 2.0, (lo[1] + hi[1]) / 2.0
+    tyre = src.copy()
+    tyre.name = f"{name}__tread"
+    tb = bsdf_of(tyre)
+    if tb is None:
+        return None, 0
+    tb.inputs["Base Color"].default_value = (0.022, 0.022, 0.024, 1.0)
+    tb.inputs["Roughness"].default_value = 0.85
+    if "Metallic" in tb.inputs:
+        tb.inputs["Metallic"].default_value = 0.0
+    # RADIUS IS MEASURED PERPENDICULAR TO THE WHEEL AXIS. The axis runs across
+    # the car (the WIDTH axis), so the radial plane is LENGTH x HEIGHT. Getting
+    # this backwards -- measuring in width x height, which is the first thing I
+    # wrote -- produces a cut that sweeps along the car instead of around the
+    # wheel: it sliced notches out of the alloy spokes and left the tread pale,
+    # a visibly worse wheel than simply darkening the whole material.
+    moved = 0
+    for ob in bpy.data.objects:
+        if ob.type != "MESH" or not ob.data.polygons:
             continue
-        bb = bsdf_of(mm)
+        names = [m.name if m else None for m in ob.data.materials]
+        if name not in names:
+            continue
+        si = names.index(name)
+        if tyre.name in names:
+            ti = names.index(tyre.name)
+        else:
+            ob.data.materials.append(tyre)
+            ti = len(ob.data.materials) - 1
+        mw = ob.matrix_world
+        buckets = {}
+        for poly in ob.data.polygons:
+            if poly.material_index != si:
+                continue
+            c = mw @ poly.center
+            buckets.setdefault((c[0] > cx, c[1] > cy), []).append((poly, c))
+        for items in buckets.values():
+            n = len(items)
+            if n < 24:
+                continue
+            cl = sum(c[L] for _, c in items) / n
+            cz = sum(c[2] for _, c in items) / n
+            rad = [math.hypot(c[L] - cl, c[2] - cz) for _, c in items]
+            R = max(rad)
+            if R <= 0:
+                continue
+            for (poly, _), r in zip(items, rad):
+                if r >= 0.72 * R:
+                    poly.material_index = ti
+                    moved += 1
+    return tyre, moved
+
+
+def contact_materials():
+    """Materials owning faces in the bottom slice, at 3+ corners of the car."""
+    zcut = lo[2] + CONTACT_BAND * span[2]
+    cx, cy = (lo[0] + hi[0]) / 2.0, (lo[1] + hi[1]) / 2.0
+    got = {}
+    for ob in bpy.data.objects:
+        if ob.type != "MESH" or not ob.data.polygons:
+            continue
+        mw = ob.matrix_world
+        mats = list(ob.data.materials)
+        for poly in ob.data.polygons:
+            c = mw @ poly.center
+            if c[2] > zcut:
+                continue
+            mat = mats[min(poly.material_index, len(mats) - 1)] if mats else None
+            if mat is None:
+                continue
+            g = got.setdefault(mat.name, {"area": 0.0, "corners": set()})
+            g["area"] += poly.area
+            g["corners"].add((c[0] > cx, c[1] > cy))
+    return {k: v for k, v in got.items() if len(v["corners"]) >= 3}
+
+
+if DO_TYRE:
+    contact = contact_materials()
+    named = {mm.name for mm in bpy.data.materials
+             if any(t in (mm.name or "").lower() for t in TYRE_WORDS)}
+    targets = set(contact) | named
+    if not targets:
+        print("R10_TYRE_NONE no material touches the ground at 3+ corners and "
+              "none is named like rubber -- this car's tyres cannot be located")
+    for name in sorted(targets):
+        mm = bpy.data.materials.get(name)
+        bb = bsdf_of(mm) if mm else None
         if bb is None:
             continue
         cur = list(bb.inputs["Base Color"].default_value)[:3]
-        if max(cur) <= 0.08:
-            print(f"R10_TYRE_OK {mm.name}: already {max(cur):.3f} -- left alone")
-            rep["tyres"].append({"name": mm.name, "action": "left alone",
-                                 "was": [round(c, 4) for c in cur]})
-            continue
-        bb.inputs["Base Color"].default_value = (0.022, 0.022, 0.024, 1.0)
-        bb.inputs["Roughness"].default_value = 0.85
-        if "Metallic" in bb.inputs:
-            bb.inputs["Metallic"].default_value = 0.0
-        print(f"R10_TYRE {mm.name}: {[round(c,3) for c in cur]} -> black rubber")
-        rep["tyres"].append({"name": mm.name, "action": "darkened",
-                             "was": [round(c, 4) for c in cur]})
+        how = ("contact patch" if name in contact and name not in named else
+               "name" if name not in contact else "contact patch + name")
+        entry = {"name": name, "found_by": how,
+                 "was": [round(c, 4) for c in cur],
+                 "on_ground": name in contact}
+        if max(cur) <= PALE:
+            print(f"R10_TYRE_OK {name}: already {max(cur):.3f} ({how}) "
+                  f"-- correct, left alone")
+            entry["action"] = "already black"
+            entry["final"] = [round(c, 4) for c in cur]
+        else:
+            shared = (name in contact and "tire" not in name.lower()
+                      and "tyre" not in name.lower()
+                      and "rubber" not in name.lower())
+            if shared:
+                tm, mv = split_wheel_material(name)
+                if tm is not None and mv >= 24:
+                    print(f"R10_TYRE_SPLIT {name}: pale at {max(cur):.3f} and named "
+                          f"like a wheel part, so it covers tyre AND rim. Split by "
+                          f"radius -- {mv} outer faces moved to {tm.name} as rubber; "
+                          f"the alloy keeps its finish.")
+                    entry["action"] = "split by radius"
+                    entry["final"] = [0.022, 0.022, 0.024]
+                    entry["faces_moved"] = mv
+                    rep["tyres"].append(entry)
+                    continue
+                print(f"R10_TYRE_WHITEWALL_RISK {name}: pale at {max(cur):.3f}, and "
+                      f"it could not be split by radius -- darkening the whole "
+                      f"material. LOOK at this car: the alloy goes dark with it, "
+                      f"and a pale ring here could be a real whitewall.")
+            bb.inputs["Base Color"].default_value = (0.022, 0.022, 0.024, 1.0)
+            bb.inputs["Roughness"].default_value = 0.85
+            if "Metallic" in bb.inputs:
+                bb.inputs["Metallic"].default_value = 0.0
+            print(f"R10_TYRE {name}: {[round(c,3) for c in cur]} ({how}) "
+                  f"-> black rubber")
+            entry["action"] = "darkened"
+            entry["final"] = [0.022, 0.022, 0.024]
+        rep["tyres"].append(entry)
+    # THE HONEST FIELD: state, not actions. Green only when everything on the
+    # ground is dark.
+    onground = [t for t in rep["tyres"] if t["on_ground"]]
+    rep["tyre_state"] = ("no contact patch found" if not onground else
+                         "black" if all(max(t["final"]) <= PALE for t in onground)
+                         else "PALE")
+    print(f"R10_TYRE_STATE {rep['tyre_state']}")
 
 # --- GLOBAL-ALPHA SHELL: force the EXTERIOR opaque -------------------------
 # CLAUDE.md records this class under the Volvo/Mazda "global-alpha shell": the
