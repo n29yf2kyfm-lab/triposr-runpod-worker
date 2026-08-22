@@ -50,6 +50,7 @@ neither thing clearly.
 """
 import argparse
 import collections
+import glob
 import json
 import os
 import sys
@@ -105,7 +106,7 @@ def match(preds, gts, class_aware):
     return tp, len(preds) - tp, len(gts) - tp, pairs
 
 
-def run(root, model, limit, thresholds, tiled=False):
+def run(roots, model, limit, thresholds, tiled=False):
     sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     os.environ["DAMAGE_DETECTOR_MODEL"] = model
     os.environ.pop("DAMAGE_DETECTOR_LABELS", None)
@@ -116,15 +117,23 @@ def run(root, model, limit, thresholds, tiled=False):
     from PIL import Image
     import detect as DET
 
-    ann = os.path.join(root, "annotations", "coco_instances_hitl.json")
-    with open(ann) as f:
-        doc = json.load(f)
-    cats = {c["id"]: c["name"] for c in doc["categories"]}
-    imgs = {i["id"]: i for i in doc["images"]}
-    gt = collections.defaultdict(list)
-    for a in doc["annotations"]:
-        gt[a["image_id"]].append({"cls": cats[a["category_id"]],
-                                  "box": list(a["bbox"])})
+    # POOL EVERY PART. The set ships as three independent ZIPs whose image
+    # ids restart at 1 in each, so the key has to carry the part or part 2
+    # silently overwrites part 1 and two thirds of the test set vanishes into
+    # a number that still looks plausible.
+    imgs, gt = {}, collections.defaultdict(list)
+    for root in roots:
+        ann = os.path.join(root, "annotations", "coco_instances_hitl.json")
+        with open(ann) as f:
+            doc = json.load(f)
+        cats = {c["id"]: c["name"] for c in doc["categories"]}
+        for i in doc["images"]:
+            imgs[(root, i["id"])] = i
+        for a in doc["annotations"]:
+            gt[(root, a["image_id"])].append(
+                {"cls": cats[a["category_id"]], "box": list(a["bbox"])})
+        print(f"  {os.path.basename(root)[-12:]}  "
+              f"{len(doc['images']):4} images  {len(doc['annotations']):5} boxes")
 
     labels = DET._labels_beside_model(model)
     size = None
@@ -141,7 +150,7 @@ def run(root, model, limit, thresholds, tiled=False):
 
     cache = {}
     for n, iid in enumerate(ids):
-        path = os.path.join(root, imgs[iid]["file_name"])
+        path = os.path.join(iid[0], imgs[iid]["file_name"])
         if not os.path.exists(path):
             continue
         with Image.open(path) as im:
@@ -192,6 +201,25 @@ def run(root, model, limit, thresholds, tiled=False):
                 best = (f1, t, p, r)
         print(f"  best F1 {best[0]:.4f} at threshold {best[1]:.2f} "
               f"(P {best[2]:.3f} / R {best[3]:.3f})")
+
+    # IMAGE LEVEL — the question a scan actually answers. Per-damage recall
+    # and "did this car get flagged correctly at all" are wildly different
+    # numbers, and reporting only the first understates the product while
+    # reporting only the second oversells it.
+    print(f"\n{'='*66}\nPER IMAGE — on a damaged car, was damage located at "
+          f"all?\n{'='*66}")
+    print(f"{'thresh':>7} {'flags something':>16} {'>=1 correct box':>17}")
+    for t in thresholds:
+        flagged = hit = 0
+        for iid in cache:
+            pr = [x for x in cache[iid] if x["score"] >= t]
+            if pr:
+                flagged += 1
+            if any(iou(a["box"], g["box"]) >= IOU_MATCH
+                   for a in pr for g in gt[iid]):
+                hit += 1
+        n = max(1, len(cache))
+        print(f"{t:>7.2f} {100.0*flagged/n:15.1f}% {100.0*hit/n:16.1f}%")
 
     # confusion at a mid threshold, so disagreements are visible
     conf = collections.Counter()
@@ -255,9 +283,10 @@ def _selftest():
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--root", required=False,
-                    default="/home/user/ecc/"
-                            "ECC_Car_Damage_Test_Set_1000_compact_part_1_of_3")
+    ap.add_argument("--root", nargs="+", required=False,
+                    default=sorted(glob.glob(
+                        "/home/user/ecc/ECC_Car_Damage_Test_Set_*_part_*")),
+                    help="one or more part directories; all are pooled")
     ap.add_argument("--model", default="/home/user/rfdetr-base.onnx")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--tiled", action="store_true",
