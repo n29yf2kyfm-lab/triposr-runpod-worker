@@ -18,8 +18,23 @@ The probe is the gate, not the render: render/handler.py forces
 transmission=1.0 onto any material whose NAME matches glass/window/screen, so a
 studio poster shows perfect glazing on an opaque car. Only the file settles it.
 
+FOUR DEFECTS FROM THE FIRST TEST BATCH, ALL FIXED HERE:
+  * it rewrote glazing on cars that were ALREADY clear. subaru-brz was
+    quarantined for TYRES, its glazing probed clear at alpha 0.25 BLEND, and the
+    tool flattened that tint. It now REFUSES unless the caller passes
+    R8_FORCE=1 or the material is genuinely non-transmissive.
+  * the tint rewrite was too aggressive. ford-transit's glazing was [0,0,0] and
+    came back light grey -- an appearance change, not a repair. The original RGB
+    is now PRESERVED unless it is degenerate for transmissive glass, which means
+    near-black: in glTF, transmission is tinted BY baseColor, so a black base
+    with transmission 1.0 is still an opaque black pane.
+  * Draco was lost on re-export (files grew 2.08x-4.72x). The caller
+    re-compresses; this file records the size so the cost is visible.
+  * some quarantine reasons do not match the file -- a car filed as a clay shell
+    probed clear. Reason strings are not evidence; the probe is.
+
 Run: blender -b --python r8_reglaze.py -- in.glb out.glb report.json
-Env: R8_IOR (1.45) · R8_TRANSMISSION (1.0) · R8_TINT (0.86)
+Env: R8_IOR (1.45) · R8_TRANSMISSION (1.0) · R8_TINT_FLOOR (0.05) · R8_FORCE (0)
 """
 import json
 import os
@@ -31,7 +46,9 @@ argv = sys.argv[sys.argv.index("--") + 1:]
 SRC, DST, REPORT = argv[0], argv[1], argv[2]
 IOR = float(os.environ.get("R8_IOR", "1.45"))
 TRANS = float(os.environ.get("R8_TRANSMISSION", "1.0"))
-TINT = float(os.environ.get("R8_TINT", "0.86"))
+TINT_FLOOR = float(os.environ.get("R8_TINT_FLOOR", "0.05"))
+NEUTRAL = float(os.environ.get("R8_NEUTRAL_TINT", "0.72"))
+FORCE = os.environ.get("R8_FORCE", "0") == "1"
 
 GLASSY = ("glass", "window", "windscreen", "windshield", "screen", "glas",
           "scheibe", "fenster", "vidro", "backlight", "quarter")
@@ -50,6 +67,8 @@ for m in bpy.data.materials:
     bsdf = next((n for n in m.node_tree.nodes if n.type == "BSDF_PRINCIPLED"), None)
     if bsdf is None:
         continue
+    tw = bsdf.inputs["Transmission Weight"].default_value if "Transmission Weight" in bsdf.inputs else 0.0
+    already = float(tw) > 0.01 or float(bsdf.inputs["Alpha"].default_value) < 0.99
     before = {
         "base_color": [round(float(x), 4) for x in bsdf.inputs["Base Color"].default_value],
         "transmission": round(float(bsdf.inputs["Transmission Weight"].default_value), 4)
@@ -57,10 +76,24 @@ for m in bpy.data.materials:
         "alpha": round(float(bsdf.inputs["Alpha"].default_value), 4),
         "blend_method": getattr(m, "blend_method", None),
     }
-    # a real glass material: transmissive, thin tint, smooth, fully opaque ALPHA
+    if already and not FORCE:
+        print(f"R8_SKIP {m.name}: already transmissive/blended "
+              f"(transmission={float(tw):.3f}, alpha={float(bsdf.inputs['Alpha'].default_value):.3f}) "
+              f"-- not touching a pane that already works")
+        report["materials"].append({"name": m.name, "skipped": "already transparent",
+                                    "before": before})
+        continue
+    # a real glass material: transmissive, smooth, fully opaque ALPHA
     # (transmission carries the see-through, not alpha -- mixing the two is what
-    # produces the "faded" band the probe distrusts)
-    bsdf.inputs["Base Color"].default_value = (TINT, TINT, TINT, 1.0)
+    # produces the "faded" band the probe distrusts).
+    # TINT IS PRESERVED. glTF tints transmission by baseColor, so only a
+    # near-black base is degenerate -- that would still read as an opaque pane.
+    rgb = list(bsdf.inputs["Base Color"].default_value)[:3]
+    if max(rgb) < TINT_FLOOR:
+        rgb = [NEUTRAL, NEUTRAL, NEUTRAL]
+        print(f"R8_TINT {m.name}: base {before['base_color'][:3]} is degenerate "
+              f"for transmissive glass -> neutral {NEUTRAL}")
+    bsdf.inputs["Base Color"].default_value = (rgb[0], rgb[1], rgb[2], 1.0)
     if "Transmission Weight" in bsdf.inputs:
         bsdf.inputs["Transmission Weight"].default_value = TRANS
     if "IOR" in bsdf.inputs:
@@ -77,9 +110,11 @@ for m in bpy.data.materials:
     hits += 1
     report["materials"].append({"name": m.name, "before": before,
                                 "after": {"transmission": TRANS, "ior": IOR,
-                                          "base_color": TINT, "alpha": 1.0}})
+                                          "base_color": [round(c, 4) for c in rgb],
+                                          "alpha": 1.0}})
     print(f"R8_MAT {m.name}: transmission {before['transmission']} -> {TRANS}, "
-          f"alpha {before['alpha']} -> 1.0, base {before['base_color'][:3]} -> {TINT}")
+          f"alpha {before['alpha']} -> 1.0, base {[round(c,3) for c in before['base_color'][:3]]} "
+          f"-> {[round(c,3) for c in rgb]}")
 
 print(f"R8_HITS {hits} glazing-named materials rewritten")
 if hits == 0:
