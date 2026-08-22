@@ -1,0 +1,583 @@
+[
+ {
+  "assetId": "alfa-romeo-147-v1",
+  "make": "alfa-romeo",
+  "sourceTitle": "2000 Alfa Romeo 147 Twin Spark",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alfa-romeo/alfa-romeo-147-v1.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials vidros_int_windshield(a=1,OPAQUE), Vidros_farois(a=1,OPAQUE), plastico_"
+ },
+ {
+  "assetId": "alfa-romeo-8c-v1",
+  "make": "alfa-romeo",
+  "sourceTitle": "2008 Alfa Romeo 8C Competizione",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alfa-romeo/alfa-romeo-8c-v1.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials INT_GLASS(a=1,OPAQUE), DLR_NM_GLASS(a=1,OPAQUE), LOGO_GLASS(a=1,OPAQUE)"
+ },
+ {
+  "assetId": "alfa-romeo-stelvio-x-2016-2018-v1",
+  "make": "alfa-romeo",
+  "sourceTitle": "2017 Alfa Romeo Stelvio Quadrifoglio",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alfa-romeo/stelvio.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials windowglass(a=1,OPAQUE), clearglass(a=1,OPAQUE), darkglass(a=1,OPAQUE) "
+ },
+ {
+  "assetId": "alpina-b7-v1",
+  "make": "alpina",
+  "sourceTitle": "2016 Alpina B7 Bi-Turbo xDrive (G12)",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/alpina/alpina-b7-v1.glb",
+  "reason": "2026-08-11 owner audit (damage, grey windows): glass_probe verdict=opaque, certainty=inferred (72 materials, ZERO transparent anywhere in the file, nothing glazing-named). Because NO material name mat"
+ },
+ {
+  "assetId": "aston-martin-vantage-v1",
+  "make": "aston-martin",
+  "sourceTitle": "2008 Aston Martin V8 Vantage",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/aston-martin/aston-martin-vantage-v1.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials DLR_NM_GLASS(a=1,OPAQUE), EXT_GLASS(a=1,OPAQUE), INT_GLASS(a=1,OPAQUE) "
+ },
+ {
+  "assetId": "audi-a1-2021-v1",
+  "make": "audi",
+  "sourceTitle": "2021 Audi A1 S-Line",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-a1-2021-v1.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials M_2021_Audi_A1_S_Line_Windows(a=1,OPAQUE) - alphaMode OPAQUE, baseColor"
+ },
+ {
+  "assetId": "audi-q7-v1",
+  "make": "audi",
+  "sourceTitle": "Audi Q7",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-q7-v1.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials Translucent_Glass_Gray(a=1,OPAQUE), glass0__trans_1(a=1,OPAQUE), Transl"
+ },
+ {
+  "assetId": "audi-q8-v1",
+  "make": "audi",
+  "sourceTitle": "2020 Audi Q8 RS",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/q8.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials windowglass(a=1,OPAQUE), clearglass(a=1,OPAQUE), darkglass(a=1,OPAQUE) "
+ },
+ {
+  "assetId": "audi-r8-ad1-v1",
+  "make": "audi",
+  "sourceTitle": "",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-r8-ad1-v1.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe returned AMBIGUOUS, not opaque - but only because lamp lenses are the file's sole factor-transparent materials. The window pane material 'Window' is "
+ },
+ {
+  "assetId": "audi-r8-v10-2020-v1",
+  "make": "audi",
+  "sourceTitle": "2020 Audi R8 V10 Coupe",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-r8-v10-2020-v1.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials ext_window(a=1,OPAQUE), int_window(a=1,OPAQUE), ext_glass(a=1,OPAQUE), "
+ },
+ {
+  "assetId": "audi-rsq3-v1",
+  "make": "audi",
+  "sourceTitle": "Audi RSQ3 Sportback",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/rsq3.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials glass.dark(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_"
+ },
+ {
+  "assetId": "audi-sq5-sportback-2026-ad1-v1",
+  "make": "audi",
+  "sourceTitle": "",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-sq5-sportback-2026-ad1-v1.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials GlassBlack.001(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no "
+ },
+ {
+  "assetId": "audi-tt-2018-v1",
+  "make": "audi",
+  "sourceTitle": "2018 Audi TT RS",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/audi/audi-tt-2018-v1.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe returned AMBIGUOUS, not opaque - but only because lamp lenses are the file's sole factor-transparent materials. The window pane material 'Glass + Bla"
+ },
+ {
+  "assetId": "bmw-i3-v1",
+  "make": "bmw",
+  "sourceTitle": "Bmw I3",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-i3-v1.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe returned AMBIGUOUS, not opaque - but only because lamp lenses are the file's sole factor-transparent materials. The window pane material '2022_Hyunda"
+ },
+ {
+  "assetId": "bmw-m3-e92-bm1-v1",
+  "make": "bmw",
+  "sourceTitle": "",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-m3-e92-bm1-v1.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe verdict=faded, certainty=proven: sole glazing material 'Glass' is alphaMode=BLEND at baseColor alpha 0.98, i.e. 98% opaque, untextured. CLAUDE.md's P"
+ },
+ {
+  "assetId": "bmw-m8-v1",
+  "make": "bmw",
+  "sourceTitle": "2020 BMW M8 Coupe",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-m8-v1.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe returned AMBIGUOUS, not opaque - but only because lamp lenses are the file's sole factor-transparent materials. The window pane material 'bBMW_M8Rewa"
+ },
+ {
+  "assetId": "bmw-x3-v1",
+  "make": "bmw",
+  "sourceTitle": "BMW X3 M40i",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/bmw/bmw-x3-v1.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials ext_window(a=1,OPAQUE), int_window(a=1,OPAQUE), ext_glass(a=1,OPAQUE), "
+ },
+ {
+  "assetId": "byd-atto-3-w6-v1",
+  "make": "byd",
+  "sourceTitle": "Byd-atto-3",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/byd/byd-atto-3-w6-v1.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials glass(a=1,OPAQUE), in_glass(a=1,OPAQUE), emiss_glas(a=1,OPAQUE) - alpha"
+ },
+ {
+  "assetId": "citroen-berlingo-v1",
+  "make": "citroen",
+  "sourceTitle": "Citroen Berlingo",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-berlingo-v1.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials window(a=1,OPAQUE), glass(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alp"
+ },
+ {
+  "assetId": "citroen-c3-2025-w5-v1",
+  "make": "citroen",
+  "sourceTitle": "2025 Citro\u00ebn C3",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c3-2025-w5-v1.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials clear_glass.001(a=1,OPAQUE), int_glass.001(a=1,OPAQUE), glasss.001(a=1,"
+ },
+ {
+  "assetId": "citroen-c4-cactus-v1",
+  "make": "citroen",
+  "sourceTitle": "Citroen C4 Cactus 2014-2020",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/citroen/citroen-c4-cactus-v1.glb",
+  "reason": "2026-08-11 owner audit (damage, grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials glass(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no K"
+ },
+ {
+  "assetId": "cupra-born-2022-v1",
+  "make": "cupra",
+  "sourceTitle": "2022-2024 Cupra Born",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/cupra/cupra-born-2022-v1.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials Translucent_Glass_Gray(a=1,OPAQUE), glass0__trans_1(a=1,OPAQUE), Transl"
+ },
+ {
+  "assetId": "dacia-logan-2023-w5-v1",
+  "make": "dacia",
+  "sourceTitle": "dacia logan 2023",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-2023-w5-v1.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials glass(a=1,OPAQUE), r_glass(a=1,OPAQUE), r_glass_bump(a=1,OPAQUE), o_gla"
+ },
+ {
+  "assetId": "dacia-logan-v1",
+  "make": "dacia",
+  "sourceTitle": "Dacia/Renault Logan Politia - High-poly",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/dacia/dacia-logan-v1.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials logan3_glass(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KH"
+ },
+ {
+  "assetId": "fiat-124-spider-v1",
+  "make": "fiat",
+  "sourceTitle": "2016 Abarth 124",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-124-spider-v1.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials windows_ext(a=1,OPAQUE), windows_int(a=1,OPAQUE), gls_window(a=1,OPAQUE"
+ },
+ {
+  "assetId": "fiat-punto-v1",
+  "make": "fiat",
+  "sourceTitle": "1995 Fiat Punto GT",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/fiat/fiat-punto-v1.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials gt_windows(a=1,BLEND) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_m"
+ },
+ {
+  "assetId": "ford-cortina-v1",
+  "make": "ford",
+  "sourceTitle": "Ford Cortina Mk3",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-cortina-v1.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials Glass(a=1,OPAQUE) - alphaMode OPAQUE, baseColor alpha 1.0, no KHR_mater"
+ },
+ {
+  "assetId": "ford-focus-w6-v1",
+  "make": "ford",
+  "sourceTitle": "Ford Focus ST (MK3)",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-focus-w6-v1.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials window1(a=1,OPAQUE), glass1(a=1,OPAQUE), glass2(a=1,OPAQUE), black_glas"
+ },
+ {
+  "assetId": "ford-tourneo-v1",
+  "make": "ford",
+  "sourceTitle": "Ford Tourneo Connect MK1 2002\u20132013",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/ford-tourneo-v1.glb",
+  "reason": "2026-08-11 owner audit (damage): 5x poster: wheels missing/sunk below the floor plane - both visible arches show only faceted grey liner shells, one partial wheel visible sunk beneath the sill."
+ },
+ {
+  "assetId": "ford-transit-v1",
+  "make": "ford",
+  "sourceTitle": "Ford Transit Van L3H3 Trend 2021",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/ford/transit.glb",
+  "reason": "2026-08-11 owner audit (grey windows): glass_probe on shipped desktopGlbUrl: verdict=opaque, certainty=proven. Glazing materials glass_window(a=1,OPAQUE), glass_clear(a=1,OPAQUE), glass_white(a=1,OPAQ"
+ },
+ {
+  "assetId": "hyundai-ioniq-5-2022-v1",
+  "make": "hyundai",
+  "sourceTitle": "2022+ Hyundai+IONIQ+5",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-5-2022-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glass_probe ambiguous ('2022_Hyundai_IONIQ_5_Windows' is alphaMode=OPAQUE; the only transparent materials are the head/brake lamp lenses, which the probe's opaqu"
+ },
+ {
+  "assetId": "hyundai-ioniq-6-2023-v1",
+  "make": "hyundai",
+  "sourceTitle": "2023 Hyundai IONIQ 6",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-ioniq-6-2023-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaqu"
+ },
+ {
+  "assetId": "hyundai-santa-fe-2024-w12-v1",
+  "make": "hyundai",
+  "sourceTitle": "2024 Hyundai Santa Fe",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/hyundai/hyundai-santa-fe-2024-w12-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaqu"
+ },
+ {
+  "assetId": "jeep-avenger-w7-v1",
+  "make": "jeep",
+  "sourceTitle": "Jeep-avenger realease saint - martin market",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-avenger-w7-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaqu"
+ },
+ {
+  "assetId": "jeep-renegade-2016-w12-v1",
+  "make": "jeep",
+  "sourceTitle": "Jeep Renegade 2016",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/jeep/jeep-renegade-2016-w12-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glass_probe opaque/inferred (2 materials, 1 texture, nothing transparent anywhere in the file). Backlight render confirms flat dark opaque windows. Inferred-opaq"
+ },
+ {
+  "assetId": "kia-rio-v1",
+  "make": "kia",
+  "sourceTitle": "2021 Kia Rio",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-rio-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaqu"
+ },
+ {
+  "assetId": "kia-sorento-v1",
+  "make": "kia",
+  "sourceTitle": "2022 Kia Sorento",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sorento-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaqu"
+ },
+ {
+  "assetId": "kia-soul-2020-v1",
+  "make": "kia",
+  "sourceTitle": "Kia Soul EV 2020",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-soul-2020-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glass_probe ambiguous ('M_2022_Volvo_C40_Recharge_Windows' OPAQUE, only lamp lenses transparent (NB the material names are a Volvo C40 template)). Routed to the "
+ },
+ {
+  "assetId": "kia-sportage-2012-v1",
+  "make": "kia",
+  "sourceTitle": "Kia Sportage SL 2011-2014",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/kia/kia-sportage-2012-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaqu"
+ },
+ {
+  "assetId": "land-rover-discovery-v1",
+  "make": "land-rover",
+  "sourceTitle": "Land Rover Discovery 5",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-discovery-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaqu"
+ },
+ {
+  "assetId": "land-rover-range-rover-velar-2018-w7-v2",
+  "make": "land-rover",
+  "sourceTitle": "2018 Range Rover Velar First Edition",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-2018-w7-v2.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaqu"
+ },
+ {
+  "assetId": "land-rover-range-rover-velar-v1",
+  "make": "land-rover",
+  "sourceTitle": "Range Rover Velar 2020",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/land-rover/land-rover-range-rover-velar-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): GLOBAL-ALPHA SHELL. 'vray_CarPaint' is alphaMode=BLEND at alpha 0.25 WITH KHR_materials_transmission=1.0, and 'vray_Material_568' the same -- the CLAUDE.md Volvo"
+ },
+ {
+  "assetId": "lexus-ls-w6-v1",
+  "make": "Lexus",
+  "sourceTitle": "Lexus LS 500 F Sport",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ls-w6-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaqu"
+ },
+ {
+  "assetId": "lexus-ls-w7-v1",
+  "make": "lexus",
+  "sourceTitle": "LEXUS LS 500",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ls-w7-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaqu"
+ },
+ {
+  "assetId": "lexus-ux-v1",
+  "make": "lexus",
+  "sourceTitle": "2022 Lexus UX",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/lexus/lexus-ux-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows, damage): glass_probe opaque/proven ('glass_full','vdie_glass' OPAQUE); backlight render shows flat blue opaque window panels. SEPARATELY the poster at 2x shows th"
+ },
+ {
+  "assetId": "mazda-cx-5-v1",
+  "make": "mazda",
+  "sourceTitle": "Mazda CX-5",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mazda/mazda-cx-5-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glass_probe faded: sole glazing material 'Glass' is alphaMode=BLEND at baseColor alpha 0.986 (98.6% opaque) and near-black rgb 0.069 -- a solid dark panel, not g"
+ },
+ {
+  "assetId": "mercedes-benz-e-class-2018-w12-v1",
+  "make": "mercedes-benz",
+  "sourceTitle": "2018 Mercedes Benz E63 AMG S Wagon",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-e-class-2018-w12-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glass_probe faded: sole glazing 'CAR_Window' BLEND at alpha 0.993 (99.3% opaque), rgb 0,0,0. Backlight render shows no read-through."
+ },
+ {
+  "assetId": "mercedes-benz-e-class-estate-2021-w7-v1",
+  "make": "mercedes-benz",
+  "sourceTitle": "Mercedes Benz E Class Estate 2021",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mercedes-benz/mercedes-benz-e-class-estate-2021-w7-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaqu"
+ },
+ {
+  "assetId": "mitsubishi-eclipse-cross-v1",
+  "make": "mitsubishi",
+  "sourceTitle": "2022 Mitsubishi Eclipse Cross PHEV",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/mitsubishi/mitsubishi-eclipse-cross-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): magenta-backlight render of the shipped desktopGlbUrl: no checker pattern and no interior read through any window -- glazing is opaque. glass_probe verdict=opaqu"
+ },
+ {
+  "assetId": "nissan-ariya-v1",
+  "make": "nissan",
+  "sourceTitle": "2020 Nissan Ariya",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-ariya-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glass_probe ambiguous (no glazing-named material; only transparent material is a texture-alpha PaletteMaterial). Routed to the eye as CLAUDE.md requires; the mag"
+ },
+ {
+  "assetId": "nissan-qashqai-2022-w6-v1",
+  "make": "nissan",
+  "sourceTitle": "2022 Nissan Qashqai",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/nissan/nissan-qashqai-2022-w6-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glass_probe ambiguous ('M_2022_Nissan_Qashqai_Windows' OPAQUE, only lamp lenses transparent). Routed to the eye as CLAUDE.md requires; the magenta-backlight rend"
+ },
+ {
+  "assetId": "peugeot-307-w12-v1",
+  "make": "peugeot",
+  "sourceTitle": "Peugeot 307 SW",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-307-w12-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'Vitre' alpha 1 OPAQUE; 0 transparent materials of 32. No handler"
+ },
+ {
+  "assetId": "peugeot-expert-v1",
+  "make": "peugeot",
+  "sourceTitle": "2012 Peugeot Expert",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-expert-v1.glb",
+  "reason": "2026-08-11 owner audit (soft-body): 5x: hard-edged grey rectangular blocks sitting on the red bonnet, headlamps are pale blue/white noise blobs with no lens structure, front bumper is a lumpy grey mas"
+ },
+ {
+  "assetId": "peugeot-partner-2024-w5-v1",
+  "make": "peugeot",
+  "sourceTitle": "Peugeot E Partner SWB 2024",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/peugeot/peugeot-partner-2024-w5-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'glasswindow_windshieldSG' alpha 1 OPAQUE; 0 transparent material"
+ },
+ {
+  "assetId": "porsche-taycan-v1",
+  "make": "porsche",
+  "sourceTitle": "Porsche Taycan 4S Cross Turismo 2021",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/porsche/porsche-taycan-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'glass' alpha 1 OPAQUE, 'd_glass' alpha 1 OPAQUE, 'vd_glass' alph"
+ },
+ {
+  "assetId": "renault-clio-v1",
+  "make": "renault",
+  "sourceTitle": "2020 Renault Clio",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-clio-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF: probe ambiguous, but NO material name matches the render handler's regex so the poster IS admissible for glazing -- and at 5x the rear screen and both side"
+ },
+ {
+  "assetId": "renault-koleos-v1",
+  "make": "renault",
+  "sourceTitle": "Renault Koleos 2020",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-koleos-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'd_glass' alpha 1 OPAQUE, 'r_glass' alpha 1 OPAQUE, 'o_glass' alp"
+ },
+ {
+  "assetId": "renault-scenic-v1",
+  "make": "renault",
+  "sourceTitle": "Renault Scenic (Mk1)",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-scenic-v1.glb",
+  "reason": "2026-08-11 owner audit (soft-body): 5x: smeared white/grey blotches and dark artefacts across both doors and the front wing, door 'shut lines' are soft grey smears not lines, ragged sill. Baked-textur"
+ },
+ {
+  "assetId": "renault-twingo-w7-v1",
+  "make": "renault",
+  "sourceTitle": "renault-twingo-gt",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/renault/renault-twingo-w7-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'glass' alpha 1 OPAQUE; 0 transparent materials of 20. Name match"
+ },
+ {
+  "assetId": "skoda-octavia-2017-w8-v1",
+  "make": "skoda",
+  "sourceTitle": "2017 Skoda Octavia Combi",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-2017-w8-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'vitres' alpha 1 OPAQUE, 'Vitrage_rouge' alpha 1 OPAQUE; 0 transp"
+ },
+ {
+  "assetId": "skoda-octavia-w7-v1",
+  "make": "Skoda",
+  "sourceTitle": "Skoda Octavia (MK4) RS",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/skoda/skoda-octavia-w7-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'ext_glass' alpha 1 OPAQUE, 'ext_glass_0' alpha 1 OPAQUE, 'ext_gl"
+ },
+ {
+  "assetId": "subaru-levorg-w7-v1",
+  "make": "subaru",
+  "sourceTitle": "Subaru Levorg",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/subaru/subaru-levorg-w7-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'Glass_-_Heavy_Color' alpha 1 OPAQUE; 0 transparent materials of "
+ },
+ {
+  "assetId": "suzuki-s-cross-v1",
+  "make": "suzuki",
+  "sourceTitle": "Suzuki S Cross - Azul",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/suzuki/suzuki-s-cross-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'glass_bump.001' alpha 1 OPAQUE; 1 transparent materials of 12. N"
+ },
+ {
+  "assetId": "tesla-model-y-2021-w7-v2",
+  "make": "tesla",
+  "sourceTitle": "Tesla Model Y 2021",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-y-2021-w7-v2.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'glass_body' alpha 1 OPAQUE; 0 transparent materials of 21. Name "
+ },
+ {
+  "assetId": "tesla-model-y-2025-w5-v1",
+  "make": "tesla",
+  "sourceTitle": "Tesla Model Y 2025",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-model-y-2025-w5-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'd_glass' alpha 1 OPAQUE, 'glass' alpha 1 OPAQUE, 'vd_glass' alph"
+ },
+ {
+  "assetId": "tesla-roadster-w7-v1",
+  "make": "tesla",
+  "sourceTitle": "Tesla Roadster (Free)",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/tesla/tesla-roadster-w7-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'Glass' alpha 1 OPAQUE; 0 transparent materials of 15. Name match"
+ },
+ {
+  "assetId": "toyota-auris-2019-v1",
+  "make": "toyota",
+  "sourceTitle": "Toyota Auris 2019",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-auris-2019-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'd_glass' alpha 1 OPAQUE, 'glass' alpha 1 OPAQUE, 'r_glass' alpha"
+ },
+ {
+  "assetId": "toyota-yaris-cross-v1",
+  "make": "toyota",
+  "sourceTitle": "2020 Toyota Yaris Cross",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-yaris-cross-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'M_2020_Toyota_Yaris_Cross_Windows' alpha 1 OPAQUE, 'M_2020_Toyot"
+ },
+ {
+  "assetId": "toyota-yaris-w7-v1",
+  "make": "toyota",
+  "sourceTitle": "Toyota Yaris",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/toyota/toyota-yaris-w7-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'Glass_clean' alpha 1 OPAQUE, 'Glass_clean.001' alpha 1 OPAQUE; 0"
+ },
+ {
+  "assetId": "vauxhall-combo-v1",
+  "make": "vauxhall",
+  "sourceTitle": "Opel Combo E 2018",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-combo-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows, damage): glTF: euvan_glass / euvan_glass_int OPAQUE alpha 1.0, 0 transparent materials (name matches handler regex, so the poster's clear glass is manufactured). "
+ },
+ {
+  "assetId": "vauxhall-vivaro-v1",
+  "make": "vauxhall",
+  "sourceTitle": "Opel Vivaro 2020",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/vauxhall/vauxhall-vivaro-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'r_glass' alpha 1 OPAQUE, 'matte_glass' alpha 1 OPAQUE, 'glass' a"
+ },
+ {
+  "assetId": "volkswagen-golf-mk1-w7-v1",
+  "make": "volkswagen",
+  "sourceTitle": "Car volkswagen golf mk1",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-golf-mk1-w7-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'Window' alpha 1 OPAQUE, 'WindowRim' alpha 1 OPAQUE; 0 transparen"
+ },
+ {
+  "assetId": "volkswagen-polo-2001-vw2-v1",
+  "make": "volkswagen",
+  "sourceTitle": "Volkswagen Polo 3-door MK4 2001 \u2013 2009",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-polo-2001-vw2-v1.glb",
+  "reason": "2026-08-11 owner audit (damage, grey-windows): 5x rear 3/4: a black gaping void through the near-side rear quarter/tailgate with loose geometry inside. Plus glTF: 'windowglass'/'clearglass' both alpha"
+ },
+ {
+  "assetId": "volkswagen-polo-2017-w7-v1",
+  "make": "volkswagen",
+  "sourceTitle": "Volkswagen polo 2017",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-polo-2017-w7-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'polo17_glass_int' alpha 1 OPAQUE, 'polo17_glass' alpha 1 OPAQUE;"
+ },
+ {
+  "assetId": "volkswagen-touran-2011-vw1-v1",
+  "make": "volkswagen",
+  "sourceTitle": "Volkswagen Touran MK1 2011-2015",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-touran-2011-vw1-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'windowglass' alpha 1.0 OPAQUE, 'clearglass' alpha 1.0 OPAQUE; 0 "
+ },
+ {
+  "assetId": "volkswagen-transporter-v1",
+  "make": "volkswagen",
+  "sourceTitle": "VW Transporter T6",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-transporter-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'glass' alpha 1 OPAQUE, 'r_glass' alpha 1 OPAQUE, 'd_glass' alpha"
+ },
+ {
+  "assetId": "volkswagen-transporter-w8-v1",
+  "make": "volkswagen",
+  "sourceTitle": "Transporter, Bus, Kombi, Volkswagen van",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-transporter-w8-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF: whole van is 4 materials (rim / material / Roof / Bottom), all untextured flat grey 0.8, ZERO glazing-named, ZERO transparent, ZERO textures. Clay shell wi"
+ },
+ {
+  "assetId": "volkswagen-up-v1",
+  "make": "volkswagen",
+  "sourceTitle": "Volkswagen Up",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volkswagen/volkswagen-up-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'Window' alpha 1 BLEND, 'Solid_Glass' alpha 1 BLEND; 0 transparen"
+ },
+ {
+  "assetId": "volvo-c40-2022-v1",
+  "make": "volvo",
+  "sourceTitle": "2022 Volvo C40 Recharge",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-c40-2022-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF: 'M_2022_Volvo_C40_Recharge_Windows' OPAQUE alpha 1.0; only transparent materials are Head/TailightsGlass (0.487/0.506)."
+ },
+ {
+  "assetId": "volvo-v40-2013-w5-v1",
+  "make": "volvo",
+  "sourceTitle": "Volvo V40 Cross Country 2013",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v40-2013-w5-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'glass' alpha 1 OPAQUE, 'r_glass' alpha 1 OPAQUE; 0 transparent m"
+ },
+ {
+  "assetId": "volvo-v40-v1",
+  "make": "VOLVO",
+  "sourceTitle": "Volvo V40 Cross Country 2013",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/VOLVO/volvo-v40-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'glass' alpha 1 OPAQUE; 0 transparent materials of 11. Name match"
+ },
+ {
+  "assetId": "volvo-v90-v1",
+  "make": "volvo",
+  "sourceTitle": "Volvo S90",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-v90-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'M_2020_Volvo_V90_Windows' alpha 1 OPAQUE, 'M_2020_Volvo_V90_Wind"
+ },
+ {
+  "assetId": "volvo-xc40-2020-v1",
+  "make": "volvo",
+  "sourceTitle": "Volvo XC40 Recharge 2020",
+  "glb": "https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/car-meshes/finished/volvo/volvo-xc40-2020-v1.glb",
+  "reason": "2026-08-11 owner audit (grey-windows): glTF probe (validated 106/107 vs PORSCHE_GLASS.json): verdict=opaque, certainty=proven. glazing 'd_glass' alpha 1 OPAQUE, 'r_glass' alpha 1 OPAQUE, 'glass' alpha"
+ }
+]
