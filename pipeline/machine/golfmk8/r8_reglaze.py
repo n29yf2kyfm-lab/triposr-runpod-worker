@@ -101,15 +101,205 @@ bpy.ops.wm.read_factory_settings(use_empty=True)
 sc = bpy.context.scene
 bpy.ops.import_scene.gltf(filepath=SRC)
 
+
+# --- GEOMETRIC LAMP GATE ---------------------------------------------------
+# THE NAME LIST ABOVE CANNOT BE FINISHED, and four rounds of adding spellings to
+# it is the proof. Measured on two cars that had already been passed by it:
+#
+#   ford-focus-w6-v1   `glass1`            tail lamp -- no lamp word at all
+#   ford-focus-w6-v1   `detail_glass_red1` tail lamp -- "red" is not a lamp word
+#   aston-martin-...   `DLR_NM_GLASS`      daytime running lamp -- LAMPY has
+#                                          "drl", the file spells it "dlr"
+#
+# All three were made fully transmissive and shipped as clean recoveries. A
+# fifth spelling would not have helped: `glass1` contains no signal whatsoever.
+#
+# WHERE A MATERIAL SITS IS EVIDENCE; WHAT IT IS CALLED IS A CLAIM. A lamp lens
+# is a small patch at one extreme END of the car. Glazing spans the cabin.
+# Measured on the two cars above, the two populations do not overlap or come
+# near it -- end_frac is distance of the material's centre from the car's centre
+# along its length, as a fraction of the half-length, and len_ext is how much of
+# the car's length the material covers:
+#
+#   material              end_frac  len_ext   truth
+#   EXT_GLASS                 0.22     0.62   glazing
+#   INT_GLASS                 0.23     0.62   glazing
+#   window1                   0.21     0.72   glazing
+#   black_glass1              0.18     0.76   glazing
+#   ---------------------------------------- gate at 0.72 / 0.18
+#   detail_glass_red1         0.79     0.13   LAMP
+#   glass1                    0.82     0.12   LAMP
+#   HEADLIGHTGLASS            0.87     0.09   LAMP
+#   TAILL_LIGHTGLASS          0.88     0.08   LAMP
+#   DLR_NM_GLASS              0.89     0.07   LAMP
+#   REARLIGHT_GLASS_NM        0.90     0.06   LAMP
+#
+# WHY BOTH CONDITIONS, AND WHY THESE NUMBERS. end_frac alone would fail a
+# hatchback's rear windscreen, which sits well aft; len_ext alone would fail a
+# quarter light. A rear screen is aft AND deep (end_frac ~0.6, len_ext ~0.25),
+# so it clears both thresholds with room. This also settles `backlight_glass` --
+# the material CLAUDE.md records as genuinely undecidable from its name, meaning
+# rear windscreen as often as tail lamp -- on evidence rather than on a guess.
+#
+# THE FAILURE DIRECTION IS DELIBERATE. A false LAMP leaves a real window opaque,
+# so glass_probe fails the car loudly and it never ships. A false GLAZING ships
+# a transparent headlamp, which is the defect this exists to stop. When the two
+# disagree, this gate takes the safer side.
+LAMP_END_FRAC = float(os.environ.get("R8_LAMP_END", "0.72"))
+LAMP_LEN_EXT = float(os.environ.get("R8_LAMP_EXT", "0.18"))
+
+# --- GEOMETRIC BODYWORK GATE -----------------------------------------------
+# The lamp gate above catches small patches at the ENDS. It does not catch the
+# other way a glass-named material can be something else entirely: BODYWORK.
+#
+# skoda-octavia-w7-v1 ships fifteen materials called `ext_glass` .. `ext_glass_13`,
+# and `ext_glass_9` is 136,324 triangles spanning 96% of the car's length from
+# its floor to its waistline. It is the BODY SHELL. `ext_glass_11` is a sill
+# panel. Made fully transmissive and rendered against this project's dark studio
+# backdrop, both read as gaping black holes through the boot and the front
+# bumper -- which is exactly the "solid black mass" I reported to the owner as a
+# pre-existing defect. It was not pre-existing. This tool caused it, and the
+# name test could not tell a body panel from a window because both are spelt
+# `ext_glass_N` by the same source pack.
+#
+# GLAZING REACHES THE TOP OF THE CAR; BODYWORK DOES NOT. The greenhouse IS the
+# upper band of a car's silhouette, so every real pane's bbox top sits near 1.0
+# of the car's height. Measured across the three cars:
+#
+#   material            top   truth
+#   ext_glass          0.97   glazing
+#   ext_glass_8        0.94   glazing
+#   black_glass1       0.94   glazing
+#   window1            0.93   glazing
+#   ext_glass_4        0.93   glazing
+#   EXT_GLASS          0.96   glazing
+#   INT_GLASS          0.96   glazing
+#   -------------------------------- gate at 0.80
+#   INT_DASH_GLASS     0.72   instrument cluster cover
+#   glass2             0.72   small interior pane
+#   detail_glass_cle1  0.69   low trim strip
+#   ext_glass_13       0.70   trim sliver
+#   ext_glass_9        0.65   BODY SHELL
+#   ext_glass_11       0.52   SILL PANEL
+#
+# IT FAILS OPEN, ON PURPOSE. A roof aerial, a light bar or a roof box raises the
+# car's bbox top without raising the glazing, which would push a genuine pane
+# under the threshold and leave a good car opaque. CLAUDE.md already records a
+# shark-fin aerial being mistaken for debris on exactly this kind of reasoning.
+# So when the rule would reject EVERY glass-named material, it is abandoned for
+# that car and the fact is printed -- an unusable gate must not silently become
+# a scrapping gate.
+BODY_TOP_FRAC = float(os.environ.get("R8_BODY_TOP", "0.80"))
+
+
+def material_geometry():
+    """World-space bbox per material, plus the car's own axes.
+
+    Blender's glTF importer maps glTF Y-up onto Blender Z-up, so HEIGHT is
+    always Blender Z here and the length axis is whichever of X/Y is longer.
+    Deriving length from 'the longest span' unconditionally would pick the
+    height axis on a van, which is how the pose gates in this project have
+    misread cars before."""
+    lo = [1e18] * 3
+    hi = [-1e18] * 3
+    per = {}
+    for ob in bpy.data.objects:
+        if ob.type != "MESH" or not ob.data.polygons:
+            continue
+        mw = ob.matrix_world
+        mats = list(ob.data.materials)
+        corners = [mw @ v.co for v in ob.data.vertices]
+        for i in range(3):
+            lo[i] = min(lo[i], min(c[i] for c in corners))
+            hi[i] = max(hi[i], max(c[i] for c in corners))
+        for poly in ob.data.polygons:
+            if not mats:
+                continue
+            mat = mats[min(poly.material_index, len(mats) - 1)]
+            if mat is None:
+                continue
+            r = per.setdefault(mat.name, [[1e18] * 3, [-1e18] * 3])
+            for vi in poly.vertices:
+                w = mw @ ob.data.vertices[vi].co
+                for i in range(3):
+                    r[0][i] = min(r[0][i], w[i])
+                    r[1][i] = max(r[1][i], w[i])
+    span = [hi[i] - lo[i] for i in range(3)]
+    L = 0 if span[0] >= span[1] else 1          # length: longer of X/Y
+    return per, lo, hi, span, L
+
+
+GEOM, G_LO, G_HI, G_SPAN, G_L = material_geometry()
+G_MID = (G_LO[G_L] + G_HI[G_L]) / 2.0
+G_HALF = max(G_SPAN[G_L] / 2.0, 1e-9)
+print(f"R8_AXES length={'XYZ'[G_L]} span={G_SPAN[G_L]:.3f} "
+      f"height=Z span={G_SPAN[2]:.3f}")
+
+
+def lamp_by_geometry(name):
+    """(is_lamp, end_frac, len_ext) -- None when the material has no geometry."""
+    r = GEOM.get(name)
+    if r is None:
+        return None, None, None
+    centre = (r[0][G_L] + r[1][G_L]) / 2.0
+    end_frac = abs(centre - G_MID) / G_HALF
+    len_ext = (r[1][G_L] - r[0][G_L]) / max(G_SPAN[G_L], 1e-9)
+    return (end_frac >= LAMP_END_FRAC and len_ext <= LAMP_LEN_EXT), end_frac, len_ext
+
+
+def top_frac(name):
+    """How high this material's highest point sits, 0 = floor, 1 = roof."""
+    r = GEOM.get(name)
+    if r is None:
+        return None
+    return (r[1][2] - G_LO[2]) / max(G_SPAN[2], 1e-9)
+
+
+# Decide the bodywork gate ONCE, before rewriting anything, so the fail-open
+# check can see the whole car. A per-material decision could not.
+_glassy = [m.name for m in bpy.data.materials
+           if any(g in (m.name or "").lower() for g in GLASSY)
+           and not is_lamp((m.name or "").lower())
+           and not lamp_by_geometry(m.name)[0]]
+_reaches = [n for n in _glassy if (top_frac(n) or 0.0) >= BODY_TOP_FRAC]
+BODY_GATE_ON = bool(_reaches)
+if _glassy and not BODY_GATE_ON:
+    print(f"R8_BODY_GATE OFF: not one of {len(_glassy)} glazing-named materials "
+          f"reaches {BODY_TOP_FRAC:.0%} of this car's height -- the height rule "
+          f"would reject every pane, so it is abandoned for this car rather "
+          f"than scrapping it (a roof aerial or light bar does this)")
+else:
+    print(f"R8_BODY_GATE ON: {len(_reaches)}/{len(_glassy)} glazing-named "
+          f"materials reach the greenhouse")
+
 report = {"repair": "R8 reglaze", "in": SRC, "out": DST, "materials": []}
 hits = 0
 for m in bpy.data.materials:
     nm = (m.name or "").lower()
     if not any(g in nm for g in GLASSY):
         continue
-    if is_lamp(nm):
-        print(f"R8_LAMP {m.name}: glass-named but it is a LAMP LENS -- left alone")
-        report["materials"].append({"name": m.name, "skipped": "lamp lens, not glazing"})
+    geo_lamp, end_frac, len_ext = lamp_by_geometry(m.name)
+    where = ("" if end_frac is None
+             else f" [end={end_frac:.2f} ext={len_ext:.2f}]")
+    if is_lamp(nm) or geo_lamp:
+        why = "name" if is_lamp(nm) else "geometry"
+        if geo_lamp and not is_lamp(nm):
+            print(f"R8_LAMP_GEOM {m.name}: no lamp word in the name, but it sits "
+                  f"at the car's end and covers {len_ext:.0%} of its length "
+                  f"-- a LAMP LENS the name list could not see")
+        print(f"R8_LAMP {m.name}: glass-named but it is a LAMP LENS "
+              f"(by {why}){where} -- left alone")
+        report["materials"].append({"name": m.name, "skipped": "lamp lens, not glazing",
+                                    "detected_by": why, "end_frac": end_frac,
+                                    "len_ext": len_ext})
+        continue
+    tf = top_frac(m.name)
+    if BODY_GATE_ON and tf is not None and tf < BODY_TOP_FRAC:
+        print(f"R8_BODY {m.name}: glass-named but its highest point is only "
+              f"{tf:.0%} up the car -- BODYWORK OR TRIM, not glazing. Left "
+              f"alone; making it transmissive would open a hole in the car.")
+        report["materials"].append({"name": m.name, "skipped": "bodywork/trim, not glazing",
+                                    "top_frac": round(tf, 3)})
         continue
     m.use_nodes = True
     bsdf = next((n for n in m.node_tree.nodes if n.type == "BSDF_PRINCIPLED"), None)
