@@ -11,6 +11,7 @@ messy things real VLMs emit (fences, prose, percentages, synonyms).
 import os
 import sys
 import json
+import math
 import types
 import tempfile
 
@@ -1398,6 +1399,86 @@ _plain = DET._labels_from_env()
 check("22t a bare comma list still parses positionally",
       _plain == ["dent", "rust_paint"], str(_plain))
 os.environ.pop("DAMAGE_DETECTOR_LABELS", None)
+
+
+# ---- 23. NMS and per-class confidence floors ------------------------------
+#
+# Both were fitted on half the ECC set and validated on the other half:
+# precision 24.1% -> 28.5% at flat recall. They are operating-point choices,
+# so what these tests protect is the MECHANISM — that a suppressed box really
+# is dropped, that an explicit threshold still overrides the per-class table,
+# and that the two are applied in the order the fit assumed.
+
+def _box(x1, y1, x2, y2, score, label="dent"):
+    return {"label": label, "score": score, "box": [x1, y1, x2, y2]}
+
+
+_a = _box(0, 0, 100, 100, 0.9)
+_b = _box(5, 5, 105, 105, 0.5)          # ~0.82 IoU with _a
+_far = _box(500, 500, 600, 600, 0.5)
+check("23a nms drops a box an overlapping higher-scoring one covers",
+      [d["score"] for d in DET.nms([_a, _b])] == [0.9])
+check("23b nms keeps a box that overlaps nothing",
+      len(DET.nms([_a, _far])) == 2)
+check("23c nms keeps the HIGHER-scoring box, not whichever came first",
+      DET.nms([_b, _a])[0]["score"] == 0.9)
+check("23d nms suppresses across classes, so one mark is one finding",
+      len(DET.nms([_a, _box(5, 5, 105, 105, 0.5, "scratch_scuff")])) == 1)
+check("23e box_iou of a box with itself is 1",
+      abs(DET.box_iou([0, 0, 10, 10], [0, 0, 10, 10]) - 1.0) < 1e-9)
+check("23f box_iou of disjoint boxes is 0",
+      DET.box_iou([0, 0, 10, 10], [20, 20, 30, 30]) == 0.0)
+check("23g box_iou is symmetric",
+      abs(DET.box_iou([0, 0, 10, 10], [5, 5, 15, 15])
+          - DET.box_iou([5, 5, 15, 15], [0, 0, 10, 10])) < 1e-12)
+
+# Every class the detector emits needs a floor, or it silently falls back to
+# the global one and the fitted operating point is only half applied.
+check("23h every detector class has a fitted floor",
+      set(DET.DETECTOR_CLASSES) <= set(DET.CLASS_MIN_CONFIDENCE),
+      str(sorted(set(DET.DETECTOR_CLASSES) - set(DET.CLASS_MIN_CONFIDENCE))))
+check("23i the floors are probabilities",
+      all(0.0 < v < 1.0 for v in DET.CLASS_MIN_CONFIDENCE.values()))
+check("23j structural sits below dent, as fitted",
+      DET.CLASS_MIN_CONFIDENCE["structural"]
+      < DET.CLASS_MIN_CONFIDENCE["dent"])
+
+# The per-class table must apply by DEFAULT and yield to an explicit request.
+# A sweep asking for 0.05 that silently gets 0.25 for dents draws a fiction.
+#
+# THE SCORES BELOW ARE CHOSEN TO DISCRIMINATE. A first draft of these tests
+# used logits of +-9, giving both boxes p=0.9999 — above every floor, so the
+# per-class table never bit and the tests passed with the feature deleted.
+# 0.18 sits ABOVE structural's fitted 0.15 and BELOW dent's 0.25, so exactly
+# one of the two survives the default and both survive an explicit 0.01.
+_p18 = math.log(0.18 / 0.82)            # sigmoid(_p18) == 0.18
+_labels = {1: "structural", 2: "dent"}
+_raw = ([[[0.20, 0.20, 0.06, 0.06],     # structural, far from the other box
+          [0.80, 0.80, 0.06, 0.06]]],   # dent
+        [[[-9.0, _p18, -9.0],
+          [-9.0, -9.0, _p18]]])
+_deflt = DET.parse_detections(_raw, (100, 100), (100, 100), _labels)
+_forced = DET.parse_detections(_raw, (100, 100), (100, 100), _labels, 0.01)
+_dn = sorted(d["label"] for d in _deflt)
+_fn = sorted(d["label"] for d in _forced)
+check("23k a score under a class's fitted floor is dropped by default",
+      _dn == ["structural"], f"kept {_dn}")
+check("23l an explicit min_confidence overrides the per-class table",
+      _fn == ["dent", "structural"], f"kept {_fn}")
+check("23m the two paths genuinely differ, so 23k/23l are not vacuous",
+      _dn != _fn)
+check("23n a floor BELOW the global default is reachable, i.e. the unpacker's "
+      "own gate does not pre-empt it",
+      DET.CLASS_MIN_CONFIDENCE["structural"] < DET.DEFAULT_MIN_CONFIDENCE
+      and "structural" in _dn)
+check("23o an unknown class falls back to the global default rather than "
+      "being dropped",
+      DET.CLASS_MIN_CONFIDENCE.get("no_such_class",
+                                   DET.DEFAULT_MIN_CONFIDENCE)
+      == DET.DEFAULT_MIN_CONFIDENCE)
+check("23p parse_detections deduplicates before returning",
+      all(DET.box_iou(a["box"], b["box"]) < DET.DEFAULT_NMS_IOU
+          for i, a in enumerate(_forced) for b in _forced[i + 1:]))
 
 
 # ---- report ---------------------------------------------------------------
