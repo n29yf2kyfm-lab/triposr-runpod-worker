@@ -1006,7 +1006,8 @@ def load_train_only(path):
 def build(root, out_dir, target_per_class=None, max_repeat=15, seed=1337,
           unit="boxes", unhealthy=UNHEALTHY_MULTIPLIER, sha_cache=None,
           report_only=False, verbose=True, train_only=None,
-          merge_groups=False, dupe_groups=None, negatives=None):
+          merge_groups=False, dupe_groups=None, negatives=None,
+          min_boxes=0):
     """Do the whole thing. Returns (plan, samples, images)."""
     global GROUPED
     # "v2" merges structural into dent as one deformation class; True keeps the
@@ -1026,6 +1027,30 @@ def build(root, out_dir, target_per_class=None, max_repeat=15, seed=1337,
               f"— split by photograph, not by file")
     split_by_owner, global_box_counts = split_originals(images, seed,
                                                         train_only, dupe_of)
+
+    # DENSITY FILTER — TRAIN ONLY, never valid or test.
+    #
+    # The corpus labels 1 box per image at the median; the independent ECC test
+    # set labels 9. A detector taught that a damaged car carries one damage
+    # under-reports against thorough labelling, and that is the last standing
+    # explanation for a 26% per-damage recall after volume and scale were both
+    # measured and ruled out. This makes the hypothesis testable: keep only the
+    # densely-annotated train images and see whether the model predicts more.
+    #
+    # valid and test are deliberately untouched, so the internal metric stays
+    # comparable with every previous run and only the training input changes.
+    if min_boxes and min_boxes > 1:
+        before = sum(1 for r in images if r["split"] == "train")
+        for r in images:
+            if r["split"] == "train" and len(r["boxes"]) < min_boxes:
+                r["split"] = "_dropped"
+        after = sum(1 for r in images if r["split"] == "train")
+        kept_boxes = sum(len(r["boxes"]) for r in images
+                         if r["split"] == "train")
+        print(f"density filter: train {before:,} -> {after:,} images "
+              f"(>= {min_boxes} boxes), {kept_boxes:,} boxes, "
+              f"mean {kept_boxes/max(1,after):.1f} per image")
+        images = [r for r in images if r["split"] != "_dropped"]
 
     train_recs = [r for r in images if r["split"] == "train"]
     real_train = count_units(train_recs, {r["sha"]: 1 for r in train_recs}, unit)
@@ -1390,6 +1415,11 @@ def main():
                     help="near_dupes.json — force every near-duplicate group "
                          "into a single split, so augmented siblings of one "
                          "photograph cannot straddle train and valid")
+    ap.add_argument("--min-boxes", type=int, default=0,
+                    help="keep only TRAIN images carrying at least this many "
+                         "boxes. valid/test are untouched, so the metric stays "
+                         "comparable. Tests whether label DENSITY, rather than "
+                         "volume, is what limits recall.")
     ap.add_argument("--negatives",
                     help="negatives.jsonl from mine_negatives — MERGED into "
                          "index.jsonl. Without this the mined negatives are "
@@ -1440,7 +1470,8 @@ def main():
         args.seed, args.unit, args.unhealthy_multiplier, args.sha_cache,
         report_only=args.report_only, train_only=pin,
         merge_groups=("v2" if args.groups_v2 else args.merge_groups),
-        dupe_groups=args.dupe_groups, negatives=args.negatives)
+        dupe_groups=args.dupe_groups, negatives=args.negatives,
+        min_boxes=args.min_boxes)
     print(format_report(plan))
     if args.report_only:
         print("\n--report-only: nothing was written.")
