@@ -56,6 +56,26 @@ def assemble(findings, images=None, meta=None, repair=None, quality=None,
     return report
 
 
+def _overlay_block(im):
+    """One annotated photo, with an honest note when boxes could not be drawn.
+
+    The caption states how many findings are actually marked. Without it a
+    reader assumes every finding is visible on the image, and silently
+    unmarked damage is exactly the impression a report must not create.
+    """
+    drawn = im.get("drawn", 0)
+    missing = im.get("skipped_no_bbox", 0)
+    note = f'{drawn} marked'
+    if missing:
+        note += (f' · {missing} finding{"s" if missing != 1 else ""} not '
+                 f'located on this image (listed below)')
+    return ('<figure class="shot">'
+            f'<img src="{html.escape(im.get("data_uri", ""))}" '
+            f'alt="Annotated damage photo {im.get("index", 0) + 1}">'
+            f'<figcaption class="muted">Photo {im.get("index", 0) + 1} · '
+            f'{html.escape(note)}</figcaption></figure>')
+
+
 def _now():
     # Date.now()-free: the worker stamps time when it builds the report; tests
     # pass a fixed value so output is deterministic.
@@ -103,6 +123,12 @@ def render_html(report):
                      f'{html.escape(rep.get("disclaimer",""))}</div></div>')
 
     # findings
+    # annotated photos first: the colour-coded image is what a reader actually
+    # looks at, and it carries the same severity palette as the cards below
+    ov = report.get("overlays") or {}
+    for im in (ov.get("images") or []):
+        parts.append(_overlay_block(im))
+
     findings = report.get("findings") or []
     parts.append(f'<h2>Findings <span class="count">{len(findings)}</span></h2>')
     if not findings:
@@ -110,6 +136,11 @@ def render_html(report):
                      'images.</p>')
     for f in findings:
         parts.append(_finding_card(f, rep))
+
+    # paint depth gauge: what was measured, including what came back clean
+    pt = report.get("paint_thickness")
+    if pt:
+        parts.append(_paint_thickness_block(pt))
 
     # capture quality + completeness
     comp = report.get("completeness")
@@ -195,7 +226,96 @@ def _finding_card(f, rep):
     note = (f'<div class="note muted small">{html.escape(f["repair_note"])}</div>'
             if f.get("repair_note") else "")
     return (f'<div class="fc" style="border-left-color:{colour}">'
-            f'{head}{ev}{hidden}{risks}{cost}{note}</div>')
+            f'{head}{ev}{_measurement_block(f)}{hidden}{risks}{cost}{note}</div>')
+
+
+def _measurement_block(f):
+    """A measured finding renders differently from a seen one.
+
+    A paint-thickness finding is an instrument reading, not a photograph, and
+    the claim it supports ("consistent with refinishing") is weaker and more
+    legally loaded than "there is a dent here". So it gets its own block
+    carrying the careful sentence and, mandatorily, the false positives that
+    could explain the same number — the reader must never see the reading
+    without seeing what else produces it.
+    """
+    m = f.get("measurement")
+    if not m:
+        return ""
+    bits = []
+    if f.get("statement"):
+        bits.append(f'<p class="mstate">{html.escape(f["statement"])}</p>')
+    if m.get("value_um") is not None:
+        band = ""
+        if m.get("expected_max_um") is not None:
+            band = (f' · factory {m["expected_min_um"]:.0f}–'
+                    f'{m["expected_max_um"]:.0f} µm')
+        bits.append(f'<div class="mnum">{m["value_um"]:.0f} µm '
+                    f'({m.get("value_mils")} mils){html.escape(band)}</div>')
+    if m.get("caveats"):
+        items = "".join(f"<li>{html.escape(c)}</li>" for c in m["caveats"])
+        bits.append(f'<div class="lbl">What else could explain this reading'
+                    f'</div><ul>{items}</ul>')
+    src = m.get("expected_source")
+    if src:
+        bits.append(f'<div class="muted small">Reference: '
+                    f'{html.escape(str(src))} ({html.escape(str(m.get("expected_tier","")))} '
+                    f'match)</div>')
+    return f'<div class="measured">{"".join(bits)}</div>'
+
+
+def _paint_thickness_block(pt):
+    """The paint-depth-gauge section.
+
+    Panels that measured CLEAN are printed, not just the flagged ones. A
+    report that lists only what failed leaves the reader unable to tell "we
+    checked four panels and three were fine" from "we checked one panel". On
+    a measurement channel that difference is the whole value: the negative
+    result is a result, and a buyer paid for it.
+    """
+    if pt.get("error"):
+        return ('<h2>Paint depth gauge</h2><p class="muted">Readings were '
+                'supplied but could not be interpreted: '
+                + html.escape(str(pt["error"])) + '</p>')
+    n = pt.get("panels_measured", 0)
+    flagged = pt.get("flagged", 0)
+    body = [f'<h2>Paint depth gauge <span class="count">{n} panel'
+            f'{"s" if n != 1 else ""}</span></h2>']
+    if pt.get("reference_panel"):
+        ref = PANELS.get(pt["reference_panel"], (pt["reference_panel"],))[0]
+        body.append(f'<p class="muted small">Readings compared against the '
+                    f'{html.escape(ref)} of this same vehicle '
+                    f'({pt.get("reference_um")} µm), which is the '
+                    f'comparison that cancels out make, model year, colour '
+                    f'and paint type.</p>')
+    elif n:
+        body.append('<p class="muted small">No undamaged reference panel was '
+                    'available on this vehicle, so readings were compared '
+                    'against a factory reference table only — a weaker '
+                    'test.</p>')
+    if flagged:
+        body.append(f'<p>{flagged} panel{"s" if flagged != 1 else ""} read '
+                    f'above the expected factory range — listed in the '
+                    f'findings above.</p>')
+    clear = pt.get("clear") or []
+    if clear:
+        rows = []
+        for c in clear:
+            panel = PANELS.get(c.get("panel"), (c.get("panel", "panel"),))[0]
+            val = (f'{c["value_um"]:.0f} µm' if c.get("value_um") is not None
+                   else "no reading")
+            rows.append(f'<li><b>{html.escape(panel)}</b> · {html.escape(val)}'
+                        f' · {html.escape(str(c.get("class", "")))}<br>'
+                        f'<span class="muted small">'
+                        f'{html.escape(c.get("statement", ""))}</span></li>')
+        body.append(f'<ul class="ptclear">{"".join(rows)}</ul>')
+    if pt.get("table_is_placeholder"):
+        body.append('<p class="muted small">Factory reference values come '
+                    'from a small built-in table pending the full OEM '
+                    'dataset; where no entry exists for this vehicle a '
+                    'regional average is used and the confidence is reduced '
+                    'accordingly.</p>')
+    return "".join(body)
 
 
 def _completeness_block(comp):
@@ -257,9 +377,19 @@ _HEAD = """<!doctype html><html lang="en"><head><meta charset="utf-8">
     letter-spacing:.05em;color:#8b949e;margin-bottom:4px}
   .hidden ul,.risks ul{margin:0;padding-left:2px;list-style:none}
   .hidden li,.risks li{font-size:13px;margin:3px 0}
+  .measured{margin-top:8px;background:#0f141a;border:1px solid #30363d;
+    border-left:3px solid #58a6ff;border-radius:8px;padding:8px 10px}
+  .measured .mstate{margin:0 0 6px;font-size:13px;color:#c9d1d9}
+  .measured .mnum{font-weight:700;font-size:15px;margin-bottom:6px}
+  .measured .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.05em;
+    color:#8b949e;margin-bottom:4px}
+  .measured ul{margin:0 0 6px;padding-left:16px}
+  .measured li{font-size:12px;color:#8b949e;margin:2px 0}
   .cost{margin-top:8px;font-weight:600}
   .guidance{list-style:none;padding:0}.guidance li{margin:4px 0}
-  .disclaimer{margin-top:34px;color:#6e7681;font-size:12px;border-top:1px solid #21262d;
+  .ptclear{list-style:none;padding:0}.ptclear li{margin:8px 0}
+  .shot{margin:18px 0}.shot img{width:100%;border-radius:10px;display:block;border:1px solid #30363d}.shot figcaption{margin-top:6px;font-size:13px}
+.disclaimer{margin-top:34px;color:#6e7681;font-size:12px;border-top:1px solid #21262d;
     padding-top:14px}
   @media print{body{background:#fff;color:#111}
     .fc,.summary,.repair{background:#fafafa;border-color:#ddd}

@@ -1,80 +1,62 @@
-# Damage scanner — RunPod serverless worker.
+# Damage scanner — RunPod serverless worker, NO-GPU API-proxy build.
 #
-# ISOLATION: entirely separate from the vehicle (trellis2/) and building
-# workers. Different tag (alamk123/damage-scan:*), endpoint, volume and bucket.
-# Its CI triggers only on damage/**, so it cannot rebuild another product.
+# This is the DEFAULT and recommended deployment. It runs the vision stage as
+# DAMAGE_BACKEND=anthropic (a frontier Claude vision model over the Anthropic
+# API), so the container needs no GPU, no CUDA, no torch, and no model
+# download. Consequences, all of which this repo paid for the hard way:
 #
-# Lighter than the building image: this worker needs one vision model, not the
-# COLMAP/Open3D/reconstruction stack. The CUDA build lessons still apply to the
-# VLM's kernels (flash-attn), so the arch list and setuptools ordering carry
-# over from the vehicle Dockerfile where they were earned.
+#   * Image is ~150 MB, not 4.7 GB / 10.6 GB. Cold start is seconds, not the
+#     41 MINUTES a live GPU cold-start measured here (delayTime=2,474,145 ms
+#     vs executionTime=157 ms). On a scale-to-zero endpoint, image size IS
+#     cold-start latency — this removes it.
+#   * No warm worker, no network volume, no HF weight cache. The endpoint can
+#     truly scale to zero and cost nothing idle (which the GPU build could not,
+#     because workersStandby defaults to 1 and is not settable via the API).
+#   * The only runtime dependency for correctness is the Anthropic API — which
+#     is also the accurate path (a local 7B model scored a shattered-windshield
+#     car 99/100 in live testing; see analyze.py get_backend()).
+#
+# Same pattern as the Seedance worker (PR #14): API proxy, slim CPU image,
+# cheapest RunPod workers. To run the local Qwen2.5-VL fallback instead, build
+# Dockerfile.gpu and set DAMAGE_BACKEND=qwen — that variant needs a GPU.
+#
+# ISOLATION: own tag (alamk123/damage-scan:*), own CI (damage/** only). Nothing
+# here imports from trellis2/ or building/, and neither is edited.
 
-FROM nvidia/cuda:12.4.1-devel-ubuntu22.04
+FROM python:3.11-slim
 
-ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PIP_NO_CACHE_DIR=1
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    git wget curl build-essential \
-    python3.10 python3.10-dev python3-pip \
-    libgl1 libglib2.0-0 libjpeg-dev libpng-dev \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN ln -sf /usr/bin/python3.10 /usr/bin/python && \
-    ln -sf /usr/bin/pip3 /usr/bin/pip
-
-# torch first, pinned to the cu124 wheels matching the base image.
+# The whole dependency set: serverless glue + HTTP + the Anthropic client, plus
+# onnxruntime/pillow for the self-hosted CPU detector. No compiler, no system
+# packages, no CUDA — onnxruntime here is the CPU build (tens of MB), not the
+# GPU one, so the image stays small enough to cold-start in seconds.
 RUN pip install --upgrade pip && \
-    pip install torch==2.6.0 torchvision==0.21.0 \
-      --index-url https://download.pytorch.org/whl/cu124
+    pip install runpod requests anthropic onnxruntime pillow
 
-# GPU-less CI runner: nvcc can't auto-detect the target arch. Ampere (8.0/8.6),
-# Ada (8.9), Hopper (9.0); +PTX for JIT forward-compat. Same as the other
-# workers' Dockerfiles.
-ENV TORCH_CUDA_ARCH_LIST="8.0;8.6;8.9;9.0+PTX"
-ENV FORCE_CUDA=1
-ENV MAX_JOBS=4
-
-# Upgrade setuptools BEFORE any --no-build-isolation build (the "UNKNOWN"
-# empty-package trap the vehicle worker hit).
-RUN pip install --no-cache-dir --upgrade "setuptools>=64" wheel ninja packaging
-
-# The VLM stack. Qwen2.5-VL needs a recent transformers; qwen-vl-utils handles
-# its image preprocessing. accelerate provides device_map="auto".
-RUN pip install --no-cache-dir \
-      "transformers>=4.49" accelerate safetensors huggingface_hub \
-      qwen-vl-utils pillow
-
-# flash-attn speeds the VLM up materially; a build failure must not sink the
-# image — the model runs (slower) with eager attention if it's absent.
-RUN pip install --no-cache-dir --no-build-isolation flash-attn \
-    || echo "WARN: flash-attn build failed — VLM will use eager attention"
-
-# Serverless glue.
-RUN pip install --no-cache-dir runpod requests
-
-# Caches on the mounted network volume — a DIFFERENT volume from the other
-# workers, so the products cannot interfere.
-ENV HF_HOME=/runpod-volume/damage_hf_cache
-ENV TORCH_HOME=/runpod-volume/damage_torch_cache
-# DAMAGE_OUTPUT_DIR is deliberately NOT baked in: an endpoint only has
-# /runpod-volume when a volume is attached, and paths.py resolves the writable
-# location at runtime. Set it on the endpoint only when a volume really exists.
+# Default the deployed image to the FREE, no-GPU backend: a free hosted open
+# vision model (Gemma 4 31B) via OpenRouter. $0 per scan, no GPU, no weight
+# download — at the cost of a rate cap (20/min; 50/day, or 1,000/day after a
+# one-time $10 credit purchase). Needs OPENROUTER_API_KEY on the endpoint.
+#
+# Set DAMAGE_BACKEND=anthropic (+ ANTHROPIC_API_KEY) to switch this same image
+# to the most accurate frontier path — worth doing per-scan for disputes or
+# high-value claims. DAMAGE_VLM_MODEL overrides the model on either backend.
+# Keys are never baked in. Reports are kilobytes and inline in the response, so
+# no object storage or network volume is required on any backend.
+ENV DAMAGE_BACKEND=openrouter
+# DAMAGE_OUTPUT_DIR is deliberately NOT set: paths.py resolves a writable
+# location at runtime, and this worker needs no persistent volume.
 
 WORKDIR /app
 
-# Source. Everything below rebuilds on code changes; everything above is cached.
+# Source. The vision backends import their heavy deps lazily (torch only inside
+# the qwen path, anthropic only inside the anthropic path), so this slim image
+# imports and runs cleanly without torch/transformers ever installed.
 COPY paths.py delivery.py progress.py validation.py handler.py \
      taxonomy.py severity.py repair.py quality.py analyze.py fusion.py \
-     report.py compare.py preload_models.py /app/
-
-# Optional: bake the VLM weights in for fully-offline operation (pair with
-# OFFLINE=1). Adds several GB — build this variant on a pod, not a CI runner.
-ARG PRELOAD_MODELS=0
-RUN --mount=type=secret,id=hf_token \
-    if [ "$PRELOAD_MODELS" = "1" ]; then \
-      HF_TOKEN=$(cat /run/secrets/hf_token 2>/dev/null || true) \
-      python /app/preload_models.py; \
-    fi
+     report.py compare.py detect.py /app/
 
 CMD ["python", "-u", "/app/handler.py"]

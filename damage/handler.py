@@ -63,6 +63,15 @@ def _get_findings(spec, prog, vision_fn=None):
     (canonical panels, clamped severity, evidence enforced).
     """
     import analyze
+    if spec["findings"] is None and not (spec["image_urls"]
+                                         or spec["image_b64s"]):
+        # A gauge-only job: readings, no photos. There is nothing for the
+        # vision stage to look at, and loading a VLM to analyse zero images
+        # would fail the job for no reason. Validation has already guaranteed
+        # SOMETHING is present, so an empty vision result here is correct
+        # rather than a silent hole.
+        prog.stage("analysing", source="none", count=0)
+        return [], [], {"summary": "", "vehicle_observed": {}}
     if spec["findings"] is not None:
         prog.stage("analysing", source="supplied",
                    count=len(spec["findings"]))
@@ -98,8 +107,133 @@ def _prepare_images(spec):
     return refs
 
 
+def _render_overlays(spec, findings, image_refs, prog):
+    """Colour-coded annotated images, one per input photo.
+
+    Best-effort by design: a failed overlay must never fail an inspection that
+    already has a valid score and price, so each image is caught individually
+    and the reason is recorded instead of raised. Findings with no bbox cannot
+    be drawn, and that count is reported rather than hidden — an empty overlay
+    must not be able to read as "no damage found".
+    """
+    mode = spec.get("overlay")
+    if not mode or not image_refs or not findings:
+        return None
+    try:
+        import overlay as overlay_mod
+    except Exception as e:                       # Pillow absent in some builds
+        return {"rendered": 0, "error": f"{type(e).__name__}: {e}"}
+
+    prog.stage("rendering_overlays", images=len(image_refs), mode=mode)
+    out, errors = [], []
+    for i, ref in enumerate(image_refs):
+        try:
+            uri, m = overlay_mod.render_data_uri(
+                _overlay_source(ref), findings, mode=mode, image_index=i)
+            out.append({"index": i, "mode": mode, "data_uri": uri,
+                        "drawn": m["drawn"],
+                        "skipped_no_bbox": m["skipped_no_bbox"]})
+        except Exception as e:
+            errors.append({"index": i, "error": f"{type(e).__name__}: {e}"})
+    return {"rendered": len(out), "images": out,
+            "errors": errors} if (out or errors) else None
+
+
+def _overlay_source(ref):
+    """A local path for `ref`; remote URLs are fetched once to a temp file."""
+    s = str(ref)
+    if not s.startswith(("http://", "https://")):
+        return s
+    import tempfile
+    import requests
+    from analyze import FETCH_HEADERS
+    r = requests.get(s, headers=FETCH_HEADERS, timeout=30)
+    r.raise_for_status()
+    fd, path = tempfile.mkstemp(suffix=".jpg")
+    with os.fdopen(fd, "wb") as f:
+        f.write(r.content)
+    return path
+
+
+def _paint_thickness(spec, findings, prog):
+    """Fold paint-depth-gauge readings in beside the vision findings.
+
+    Runs only when the caller sent `paint_readings`, and cannot fail the job:
+    an inspection that already has a valid score and price must not be lost to
+    a malformed reading. Returns (merged_findings, block) where `block` is the
+    measured section the report renders — including the panels that came back
+    CLEAN, because "we measured the roof, the hood and both doors and three of
+    them read factory" is itself a result the buyer paid for.
+    """
+    readings = spec.get("paint_readings")
+    if not readings:
+        return findings, None
+    try:
+        import paint_thickness as pt_mod
+        prog.stage("measuring", panels=len(readings))
+        pt_findings, notes, ctx = pt_mod.readings_to_findings(
+            readings, spec["vehicle"], paint_system=spec.get("paint_system"))
+        fused = pt_mod.fuse_with_vision(findings, pt_findings)
+        return fused["findings"], {
+            "panels_measured": ctx["panels_measured"],
+            "reference_panel": ctx["reference_panel"],
+            "reference_um": ctx["reference_um"],
+            "reference_basis": ctx["reference_basis"],
+            "method_note": ctx["method_note"],
+            "table_is_placeholder": ctx["table_is_placeholder"],
+            "flagged": len(pt_findings),
+            "clear": notes,
+            "corroboration": fused["corroboration"],
+        }
+    except Exception as e:
+        return findings, {"error": f"{type(e).__name__}: {e}",
+                          "panels_measured": len(readings)}
+
+
+def _paint_mismatch(spec, findings, prog):
+    """Measure colour between adjacent panels, in each photo separately.
+
+    Skipped silently when DAMAGE_PANEL_MODEL is unset, because without a panel
+    detector there are no panels to compare and a guess would be worse than an
+    omission. Like _paint_thickness it can never fail the job: an inspection
+    with a valid score and price must not be lost to a colour measurement.
+
+    Returns (merged_findings, block). The block reports what was COMPARED and
+    not only what failed — "eleven adjacent pairs across four photographs, one
+    disagreed" is the result, and the one alone cannot be judged.
+    """
+    if not os.environ.get("DAMAGE_PANEL_MODEL"):
+        return findings, None
+    refs = _prepare_images(spec)
+    if not refs:
+        return findings, None
+    try:
+        import analyze
+        import panels as panels_mod
+        from PIL import Image
+        hints = spec.get("panel_hints") or []
+        imgs = []
+        for ref in refs:
+            imgs.append(Image.open(_overlay_source(ref)).convert("RGB"))
+        prog.stage("comparing_panels", images=len(imgs))
+        mm, block = panels_mod.mismatch_findings(imgs, hints)
+        if not mm:
+            return findings, block
+        # Through the same door as every other finding. Hand-built dicts that
+        # skip normalisation are how a finding reaches the report with a bbox
+        # the renderer silently drops, or a severity outside 1-10.
+        market = (spec["vehicle"] or {}).get("market") \
+            or (spec["vehicle"] or {}).get("region")
+        mm = analyze.normalize_findings(mm, spec["vehicle"], market)
+        return findings + mm, block
+    except Exception as e:
+        return findings, {"error": f"{type(e).__name__}: {e}"}
+
+
 def _inspect(spec, prog, vision_fn=None):
     findings, images, meta = _get_findings(spec, prog, vision_fn)
+    findings, paint = _paint_thickness(spec, findings, prog)
+    findings, mismatch = _paint_mismatch(spec, findings, prog)
 
     prog.stage("scoring", findings=len(findings))
     roll = sev_mod.summarize(findings)
@@ -117,11 +251,24 @@ def _inspect(spec, prog, vision_fn=None):
         prog.stage("mapping_3d")
         fusion = fusion_mod.fuse(findings, spec["glb_url"])
 
+    # Overlays need the source pixels. _prepare_images is idempotent (base64
+    # inputs rewrite to the same paths), so calling it again is cheap and keeps
+    # the findings path unchanged.
+    overlays = None
+    if spec["image_urls"] or spec["image_b64s"]:
+        overlays = _render_overlays(spec, findings, _prepare_images(spec), prog)
+
     prog.stage("reporting")
     report = report_mod.assemble(
         findings, images=images, meta=meta, repair=repair, quality=quality,
         completeness=completeness, fusion=fusion, vehicle=spec["vehicle"],
         scan_id=spec["scan_id"])
+    if overlays:
+        report["overlays"] = overlays
+    if paint:
+        report["paint_thickness"] = paint
+    if mismatch:
+        report["paint_mismatch"] = mismatch
     return report
 
 
@@ -228,6 +375,13 @@ def handler(job):
             return result
 
         delivered = _deliver_report(result, job_id, spec["want_html"])
+        # Overlays carry multi-hundred-KB data URIs. They were present in
+        # `result` for the artifacts (the JSON file and the HTML embed them);
+        # popping them here, AFTER delivery, means the response body carries
+        # them exactly once at the top level instead of twice — with several
+        # photos the duplicate copy alone could push a response past RunPod's
+        # payload limit.
+        overlays = result.pop("overlays", None)
         response = {
             "status": "success",
             "mode": spec["mode"],
@@ -239,6 +393,8 @@ def handler(job):
             "completeness": result.get("completeness"),
             "quality": result.get("quality"),
             "fusion": result.get("fusion"),
+            "paint_thickness": result.get("paint_thickness"),
+            "overlays": overlays,
             "summary": result.get("summary"),
             "report": result,
             "artifacts": delivered,
