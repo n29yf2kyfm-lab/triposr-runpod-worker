@@ -133,7 +133,32 @@ SEVERITY_CEILING = {
 # are small in absolute terms — 12% of a well-framed panel photo is a big hit.
 LARGE_AREA_FRAC = 0.12
 
-DEFAULT_MIN_CONFIDENCE = 0.35
+# MEASURED, not chosen. Swept on 814 independently-labelled ECC images with
+# 9,080 ground-truth boxes — data this detector never trained on and whose
+# annotators never saw our taxonomy:
+#
+#     thresh    precision   recall       F1       per-image correct
+#       0.14       0.159    0.379     0.224            95.7%
+#       0.20       0.275    0.262     0.268            90.4%
+#       0.21       0.298    0.247     0.270            89.4%   <- F1 optimum
+#       0.30       0.483    0.133     0.208            72.1%
+#       0.35 (old)     ~0.55   ~0.10    ~0.17            ~65%
+#
+# The old 0.35 sat far below the optimum and was discarding most of what the
+# model could find: recall roughly 0.10 against 0.26 here. Nothing about it was
+# measured — it predated any external test set.
+#
+# 0.20 rather than the strict F1 optimum at 0.21, and rather than the
+# recall-weighted F2 optimum at 0.14, because:
+#   - a missed damage is a disputed claim later, a false one is an assessor's
+#     time now, so the operating point should lean recall-ward of F1;
+#   - but F2's 0.14 means six false flags per true one, and a report nobody
+#     trusts is worse than a thin one. 0.20 more than doubles recall against
+#     the old default while keeping per-image location at 90%.
+#
+# This is an operating point, NOT a fix for the underlying 26%. See
+# eval_external.py for what the model actually does.
+DEFAULT_MIN_CONFIDENCE = 0.20
 
 
 def severity_from_box(damage_type, area_frac, confidence=1.0):
