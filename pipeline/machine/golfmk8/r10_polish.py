@@ -74,6 +74,12 @@ COAT = float(os.environ.get("R10_CLEARCOAT", "1.0"))
 # gloss. Judged on the render, which is the only thing that can judge it.
 METAL = float(os.environ.get("R10_METALLIC", "0.15"))
 DO_TYRE = os.environ.get("R10_TYRE", "1") == "1"
+# OFF BY DEFAULT, and it earned that. See the block below: forcing every
+# see-through exterior material opaque made the Range Rover Velar's WINDOWS into
+# solid white panels, because that car names its glazing `vray_Material_568` and
+# `vray_Material_569`, with no glass word anywhere. Turn it on only for a car
+# proven to have a see-through BODY, and look at the result.
+DO_SHELL = os.environ.get("R10_SHELL", "0") == "1"
 # Reglazing makes the CABIN visible for the first time, and some source packs
 # ship a violently saturated placeholder in there -- ford-focus-w6-v1's seats
 # are pure green, which is not a colour any car interior has ever been. This
@@ -87,6 +93,10 @@ DO_CABIN = os.environ.get("R10_CABIN", "0") == "1"
 # blocks the ray (the Aston's best interior scores under 1%) and well below
 # what a real skin reaches (52-58% on all three cars measured).
 OVERRIDE_VIS = float(os.environ.get("R10_OVERRIDE_VIS", "0.35"))
+# A material reached by fewer than this share of exterior rays is treated as
+# being inside the car. Not zero: a seat edge can catch a stray ray through a
+# door aperture without the seat being outside.
+CABIN_VIS = float(os.environ.get("R10_CABIN_VIS", "0.002"))
 
 # Linear values, not sRGB. Blender's Base Color socket is linear, and feeding it
 # sRGB numbers is how a "dark grey" arrives on screen as mid grey.
@@ -376,10 +386,27 @@ if DO_TYRE:
 # glazing, is forced fully opaque. Glazing is exempt by name AND by having been
 # excluded from the visibility tally, which is what stops this undoing r8.
 #
-# Nothing is forced on a car that does not have the defect: a correctly authored
-# exterior is already opaque and reports zero changes.
+# IT IS OFF BY DEFAULT BECAUSE IT OVER-REACHES, and the Velar is the proof. An
+# A/B at the same azimuth, same colour, same rig:
+#   R10_SHELL=0 -> side windows transparent, seats, headrests and the steering
+#                  wheel all visible through them. Correct.
+#   R10_SHELL=1 -> the same windows are solid white panels.
+# The three materials it forced were `vray_CarPaint` (alpha 0.25, transmission
+# 1.0), `vray_Material_568` (the same) and `vray_Material_569` (alpha 0.198) --
+# and 568/569 ARE THE GLAZING. The name exemption could not know that, and
+# geometry cannot separate them either: the paint and the windows both reach
+# 0.92-0.94 of the car's height, so the r8 greenhouse rule does not apply here.
+#
+# The car also does not NEED the repair. Its body renders solid gunmetal with
+# the repair off, because the opaque `vray_CarPaint_Base.001` sits behind the
+# transmissive coat. The defect the quarantine reason describes is real in the
+# FILE and invisible in the render, which is a different problem from the one
+# this block solves.
+#
+# So: use it only on a car whose BODY is demonstrably see-through in a render,
+# and check the windows afterwards. A blunt sweep is not safe here.
 shell_fixed = []
-for mm in bpy.data.materials:
+for mm in (bpy.data.materials if DO_SHELL else []):
     nm = (mm.name or "").lower()
     if any(g in nm for g in GLASSY):
         continue
@@ -410,23 +437,36 @@ if shell_fixed:
           f"see-through and are now solid")
 
 if DO_CABIN:
+    # NAMES FAILED HERE TOO. The first version matched INTERIOR name tokens and
+    # found nothing on ford-focus-w6-v1, whose green seats are called
+    # `Material.015`, `Material.016` and `Material.017`. That is the third
+    # separate rule in this pipeline defeated by a source pack's naming, so it
+    # uses the same measurement the paint finder does: a material that rays
+    # cannot reach from outside is INSIDE the car. Glazing blocks the rays, so
+    # the cabin scores zero by construction -- and a lamp lens, which is also
+    # saturated and bright, is excluded automatically because it IS visible.
     rep["cabin"] = []
     for mm in bpy.data.materials:
-        nm = (mm.name or "").lower()
-        if not (any(i in nm for i in INTERIOR) or affix(nm, "int")):
+        if mm.name == PAINT_NAME:
             continue
+        nm = (mm.name or "").lower()
+        if any(g in nm for g in GLASSY):
+            continue
+        if VIS.get(mm.name, 0) > CABIN_VIS * TOTAL_VIS:
+            continue                      # visible from outside: not cabin
         bb = bsdf_of(mm)
         if bb is None:
             continue
         c = list(bb.inputs["Base Color"].default_value)[:3]
         mx, mn = max(c), min(c)
         sat = (mx - mn) / mx if mx > 1e-6 else 0.0
-        if sat < 0.45 or mx < 0.25:
-            continue
-        grey = 0.045 + 0.25 * mx * 0.25
-        bb.inputs["Base Color"].default_value = (grey, grey, grey * 1.02, 1.0)
-        print(f"R10_CABIN {mm.name}: {[round(x,3) for x in c]} (saturation "
-              f"{sat:.2f}) -> neutral {grey:.3f}. A placeholder colour, not upholstery.")
+        if sat < 0.55 or mx < 0.35:
+            continue                      # tan and red leather are not this
+        grey = 0.05 + 0.10 * mx
+        bb.inputs["Base Color"].default_value = (grey, grey, grey * 1.03, 1.0)
+        print(f"R10_CABIN {mm.name}: {[round(x,3) for x in c]} "
+              f"(saturation {sat:.2f}, never visible from outside) -> neutral "
+              f"{grey:.3f}. A placeholder colour, not upholstery.")
         rep["cabin"].append({"name": mm.name, "was": [round(x, 4) for x in c],
                              "saturation": round(sat, 3)})
 
