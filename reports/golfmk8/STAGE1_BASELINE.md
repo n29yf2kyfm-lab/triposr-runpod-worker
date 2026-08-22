@@ -281,3 +281,41 @@ All three -- **paint**, **window crease at the A-pillar**, **shot front end** --
 are the same root cause: the shell is fragment soup, not a surface. None is
 fixable by a surface operation. The shell must be REBUILT as connected geometry,
 which is the branch Stage 2 identified and has not yet been executed.
+
+## R7 — voxel remesh — **REJECTED**
+
+- **intent** close the real gaps by resampling the shell onto an SDF.
+- **why it was worth testing** `gap_survey` proved the fragments are genuinely
+  separated -- median 6.99 mm to the nearest different-component boundary vertex,
+  only 1.64% truly coincident, 46% with no neighbour within 10 mm. Welding is
+  therefore impossible and remeshing is the only in-place operation that can
+  close real gaps.
+- **result at 10 mm / 6 mm voxels** components 4,194 -> **1,274 / 1,213**, i.e.
+  over a thousand separate closed BLOBS, not one shell. Height lost **134 mm**
+  (bbox z 1.4263 -> 1.2926 m). UVs destroyed, so the car renders **grey, not
+  red**. Surface scabbed with shell-within-shell crust. Triangles 120k ->
+  376k / 1.33M against a 250k gate.
+- **result** **REJECTED.** `GOLF_MK8_PRODUCTION_V1.glb` remains the artefact.
+- **why it cannot work** an SDF seals each fragment into its own volume. It has
+  no way to know that two fragments 7 mm apart belong to the same panel, so it
+  cannot bridge them -- it can only wrap them separately.
+
+# VERDICT ON IN-PLACE SHELL REPAIR
+
+Three independent routes have now been measured and all three fail:
+
+| route | outcome |
+|---|---|
+| displacement-clamped smoothing (R6) | metric improved, render **tore open** |
+| feature-aware smoothing | pinned **93.7%** of vertices; noise exceeds the feature threshold |
+| voxel remesh (R7) | 1,213 blobs, -134 mm height, paint destroyed |
+
+**This source shell cannot be repaired into a premium surface by any in-place
+geometric operation.** The cause is the same each time: the fragments are
+genuinely separated by ~7 mm, so every method that closes them either tears the
+surface or destroys the materials.
+
+The owner's three faults -- paint, window crease, front end -- are all this one
+defect, and none is reachable from here. The remaining routes are RE-SOURCE a
+better Golf GTE Mk8 mesh, LICENSE one, or HAND-BUILD. Further in-place repair
+attempts are not worth spending on and should not be re-attempted blind.
