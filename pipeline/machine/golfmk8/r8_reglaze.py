@@ -62,7 +62,28 @@ GLASSY = ("glass", "window", "windscreen", "windshield", "screen", "glas",
 # GLASSY and deliberately NOT listed here for exactly that reason.
 LAMPY = ("headlight", "headlamp", "brakelight", "taillight", "taillamp",
          "rearlight", "rear_light", "drl", "indicator", "reflector", "foglight",
-         "fog_light", "blinker", "turnsignal", "lamp")
+         "fog_light", "blinker", "turnsignal", "lamp",
+         # One large source pack in this catalogue abbreviates its lenses rather
+         # than naming them: `ext_glass_tl` is the TAIL LAMP and `ext_glass_orng`
+         # the amber indicator, sitting beside the genuine `ext_glass`,
+         # `ext_window` and `int_window`. No lamp word appears in either, so the
+         # readable-name list above misses both. These abbreviations are matched
+         # explicitly, as SUFFIXES, so they cannot swallow an unrelated material
+         # that merely contains the letters.
+         "_tl", "_orng", "_amber", "_ind")
+
+
+def is_lamp(nm):
+    """Lamp by readable word anywhere, or by one of the pack's abbreviations at
+    the END of the name -- a suffix test, so `_tl` cannot match `metal` or
+    `crystal`."""
+    for tok in LAMPY:
+        if tok.startswith("_"):
+            if nm.endswith(tok):
+                return True
+        elif tok in nm:
+            return True
+    return False
 
 bpy.ops.wm.read_factory_settings(use_empty=True)
 sc = bpy.context.scene
@@ -74,7 +95,7 @@ for m in bpy.data.materials:
     nm = (m.name or "").lower()
     if not any(g in nm for g in GLASSY):
         continue
-    if any(l in nm for l in LAMPY):
+    if is_lamp(nm):
         print(f"R8_LAMP {m.name}: glass-named but it is a LAMP LENS -- left alone")
         report["materials"].append({"name": m.name, "skipped": "lamp lens, not glazing"})
         continue
