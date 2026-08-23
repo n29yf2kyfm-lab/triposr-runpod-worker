@@ -20,8 +20,11 @@
 #     installed one by one, and `import torch; torch.cuda.is_available()` is
 #     ASSERTED afterwards -- a broken torch otherwise surfaces as an unrelated
 #     error deep in the pipeline.
-#   * pymeshlab needs libOpenGL.so.0 or its postprocessor dies. Installed here,
-#     and the postprocess is skipped anyway so a failure costs nothing.
+#   * pymeshlab MUST BE INSTALLED even though its postprocessor is not used.
+#     hy3dgen imports it at MODULE LOAD, so leaving it out on the theory that
+#     "we skip that step" failed the first rented pod 90 seconds in with
+#     ModuleNotFoundError. It also needs libOpenGL.so.0, installed in the apt
+#     phase, or it imports but cannot load its plugins.
 #   * ASSERT ON ARTEFACTS. A run that exits 0 having written nothing must not
 #     read as success, so a missing mesh writes FAIL_NO_MESH and that marker is
 #     what the caller checks.
@@ -63,7 +66,8 @@ echo "apt rc=$?"
 phase PIP
 python3 -m pip install -q --no-cache-dir \
   diffusers "transformers<4.50" "huggingface-hub<1.0,>=0.26.0" accelerate \
-  omegaconf einops trimesh scikit-image opencv-python-headless rembg onnxruntime
+  omegaconf einops trimesh scikit-image opencv-python-headless rembg onnxruntime \
+  pymeshlab
 echo "pip rc=$?"
 
 phase ASSERT_TORCH
@@ -82,16 +86,20 @@ ls hy3d/hy3dgen >/dev/null || { echo "FAIL_CLONE"; up "$LOG" boot.log text/plain
 phase WEIGHTS
 python3 - <<PY
 from huggingface_hub import snapshot_download
-# safetensors ONLY. from_pretrained pulls .ckpt AND .safetensors for the same
-# weights, which filled a 6.8GB disk locally for a 4GB need.
+# model.fp16.safetensors BY NAME, not *.safetensors. hunyuan3d-dit-v2-0 holds
+# SIX copies of the same weights -- model.ckpt, model.fp16.ckpt, model_fp16.ckpt,
+# model.safetensors and model.fp16.safetensors -- so a *.safetensors pattern
+# pulls 9.8GB for a 4.9GB need, and from_pretrained with no pattern at all pulls
+# nearly 25GB. That is the mistake that filled a 6.8GB disk locally.
 p = snapshot_download("${HY_MODEL:-tencent/Hunyuan3D-2}",
-    allow_patterns=["${HY_SUB:-hunyuan3d-dit-v2-0}/*.safetensors",
+    allow_patterns=["${HY_SUB:-hunyuan3d-dit-v2-0}/model.fp16.safetensors",
                     "${HY_SUB:-hunyuan3d-dit-v2-0}/config.yaml",
-                    "hunyuan3d-vae-v2-0/*.safetensors",
+                    "hunyuan3d-vae-v2-0/model.fp16.safetensors",
                     "hunyuan3d-vae-v2-0/config.yaml"],
     local_dir="/workspace/hyw")
 print("weights at", p)
 PY
+du -sh /workspace/hyw 2>/dev/null; df -h /workspace | tail -1
 
 phase PLATE
 curl -sL -o /workspace/plate.png "${PLATE_URL}"
