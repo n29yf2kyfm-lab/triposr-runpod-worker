@@ -50,6 +50,19 @@ GLB, OUTD = argv[0], argv[1]
 RES = int(os.environ.get("EYEBALL_RES", "1100"))
 SAMPLES = int(os.environ.get("EYEBALL_SAMPLES", "40"))
 
+# A MISSING FILE DOES NOT SAY SO. Blender 5.2's glTF importer answers a
+# nonexistent path with "Error: Please select a file", which reads like a
+# changed operator signature rather than a missing file -- it cost three rounds
+# of probing import_scene.gltf's parameters here before the file turned out to
+# have been wiped by a container rollback. Check first and say what is wrong.
+if not os.path.exists(GLB):
+    raise SystemExit(f"REFUSED: no such file: {GLB}")
+if os.path.getsize(GLB) < 64:
+    raise SystemExit(f"REFUSED: {GLB} is {os.path.getsize(GLB)} bytes -- truncated or empty")
+with open(GLB, "rb") as _f:
+    if _f.read(4) != b"glTF":
+        raise SystemExit(f"REFUSED: {GLB} is not a GLB (bad magic)")
+
 bpy.ops.wm.read_factory_settings(use_empty=True)
 bpy.ops.import_scene.gltf(filepath=GLB)
 sc = bpy.context.scene

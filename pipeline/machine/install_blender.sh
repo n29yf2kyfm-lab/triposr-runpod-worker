@@ -55,18 +55,30 @@ URL="https://download.blender.org/release/Blender${SERIES}/blender-${VER}-linux-
 PY_DEPS="Pillow scipy"
 install_py_deps() {
   local bpy
-  bpy="$(ls -d /opt/blender-4.5.12-linux-x64/4.5/python/bin/python3* 2>/dev/null | head -1)"
+  # DISCOVER the bundled python rather than hardcoding a version. The 4.5.12
+  # path was baked in here, so installing 5.2.0 left the deps uninstalled and
+  # said nothing about it.
+  bpy="$(ls -d /opt/blender-*/[0-9].[0-9]*/python/bin/python3* 2>/dev/null | sort -V | tail -1)"
   [ -n "$bpy" ] || { echo "install_py_deps: no bundled python found" >&2; return 1; }
+  echo "py deps into: $bpy"
   "$bpy" -m pip install --quiet $PY_DEPS 2>&1 | tail -1
   "$bpy" -c "from PIL import Image; import scipy, numpy; print('py deps OK')"
 }
 
+# THE SHIM MUST DISCOVER, NOT HARDCODE. It used to name
+# /opt/blender-4.5.12-linux-x64/blender literally, so running this script with a
+# different version installed the binary, asserted a denoised render on it, and
+# then left `blender` resolving to the container's stripped 4.0.2 -- reporting
+# "shim installed: Blender 4.0.2" as if that were success. Every tool in the
+# repo calls plain `blender`, so the upgrade silently did nothing.
+# Highest version present wins; BLENDER_BIN still overrides for an A/B.
 install_shim() {
   cat > /usr/local/bin/blender <<'SHIM'
 #!/usr/bin/env bash
-for c in "${BLENDER_BIN:-}" /opt/blender-4.5.12-linux-x64/blender /usr/bin/blender; do
-  [ -n "$c" ] && [ -x "$c" ] && exec "$c" "$@"
-done
+if [ -n "${BLENDER_BIN:-}" ] && [ -x "${BLENDER_BIN}" ]; then exec "$BLENDER_BIN" "$@"; fi
+newest="$(ls -d /opt/blender-*-linux-x64/blender 2>/dev/null | sort -V | tail -1)"
+[ -n "$newest" ] && [ -x "$newest" ] && exec "$newest" "$@"
+[ -x /usr/bin/blender ] && exec /usr/bin/blender "$@"
 echo "blender-shim: no blender binary found" >&2; exit 127
 SHIM
   chmod +x /usr/local/bin/blender
@@ -130,15 +142,7 @@ echo "system /usr/bin/blender left untouched at $(/usr/bin/blender --version 2>/
 # is exactly the state right after a container rollback, before this script has
 # been re-run -- so nothing ever hard-fails on a missing path. BLENDER_BIN
 # overrides, which is how you pin a specific build for an A/B.
-cat > /usr/local/bin/blender <<'SHIM'
-#!/usr/bin/env bash
-for c in "${BLENDER_BIN:-}" /opt/blender-4.5.12-linux-x64/blender /usr/bin/blender; do
-  [ -n "$c" ] && [ -x "$c" ] && exec "$c" "$@"
-done
-echo "blender-shim: no blender binary found" >&2; exit 127
-SHIM
-chmod +x /usr/local/bin/blender
-echo "shim installed: $(blender --version 2>/dev/null | head -1) via $(which blender)"
+install_shim
 
 # Fresh-install path also needs the tool dependencies, not just the binary.
 install_py_deps
