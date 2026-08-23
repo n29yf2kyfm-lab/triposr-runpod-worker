@@ -322,6 +322,18 @@ def bsdf_of(m):
 rep = {"in": SRC, "out": DST, "colour": COLOUR, "rgb": list(rgb),
        "paint_material": PAINT_NAME, "tyres": []}
 
+# COLOURS BEFORE PAINTING. The tyre gate below asks whether the material on the
+# contact patch is already black, and on a fused generated shell that material
+# IS the paint material -- so once the car is painted a dark colour, the gate
+# reads its own paint back and passes. Measured: a Hunyuan Golf painted gunmetal
+# reported "R10_TYRE_OK Body: already 0.092 -- correct" while the tyres were
+# gunmetal. Paint any car black and the gate passes vacuously. Snapshot first.
+PRE_PAINT = {}
+for _mm in bpy.data.materials:
+    _bb = bsdf_of(_mm)
+    if _bb is not None:
+        PRE_PAINT[_mm.name] = list(_bb.inputs["Base Color"].default_value)[:3]
+
 m = bpy.data.materials[PAINT_NAME]
 b = bsdf_of(m)
 if b is None:
@@ -398,6 +410,18 @@ def split_wheel_material(name):
     works. Radius is measured in the plane containing the car's LENGTH and
     HEIGHT, because the wheel axis runs across the car.
 
+    THE WHEEL IS LOCATED FROM THE GROUND, NOT FROM THE MATERIAL'S OWN EXTENT.
+    The first version took each corner's centre and radius from every face of
+    the material in that quadrant, which is right when the material is already
+    wheel-only and catastrophically wrong when it is not. On a fused generated
+    shell ONE material covers the entire car, so the "wheel centre" became the
+    centroid of a quarter of the bodywork and the 0.72R shell swept a dark band
+    straight across the doors -- 45,066 faces, plainly visible in the render.
+    So the corner cluster is now seeded from faces near the GROUND, which is
+    where a wheel is and where bodywork is not, and the radius is capped to the
+    height of that cluster's own top. Faces outside that sphere are never
+    touched however big the material is.
+
     Returns (tyre_material, faces_moved); a caller seeing too few faces moved
     should fall back to darkening the whole material, which is still better
     than a white tread."""
@@ -434,26 +458,46 @@ def split_wheel_material(name):
             ob.data.materials.append(tyre)
             ti = len(ob.data.materials) - 1
         mw = ob.matrix_world
-        buckets = {}
+        # SEED EACH WHEEL FROM THE GROUND. Only faces in the lowest slice can
+        # belong to a wheel; bodywork does not reach there. The cluster's own
+        # top then caps the radius, so a material that spans the whole car
+        # cannot produce a sphere bigger than the wheel it was seeded from.
+        ground_cut = lo[2] + 0.12 * max(span[2], 1e-9)
+        seeds = {}
+        allf = {}
         for poly in ob.data.polygons:
             if poly.material_index != si:
                 continue
             c = mw @ poly.center
-            buckets.setdefault((c[0] > cx, c[1] > cy), []).append((poly, c))
-        for items in buckets.values():
-            n = len(items)
-            if n < 24:
-                continue
-            cl = sum(c[L] for _, c in items) / n
-            cz = sum(c[2] for _, c in items) / n
-            rad = [math.hypot(c[L] - cl, c[2] - cz) for _, c in items]
-            R = max(rad)
-            if R <= 0:
-                continue
-            for (poly, _), r in zip(items, rad):
-                if r >= 0.72 * R:
+            key = (c[0] > cx, c[1] > cy)
+            allf.setdefault(key, []).append((poly, c))
+            if c[2] <= ground_cut:
+                seeds.setdefault(key, []).append(c)
+        for key, items in allf.items():
+            seed = seeds.get(key)
+            if not seed or len(seed) < 8:
+                continue                      # no wheel in this corner
+            cl = sum(c[L] for c in seed) / len(seed)
+            # the wheel's radius: half the height it reaches, measured from the
+            # ground up through its own seed column, capped so a stray face
+            # cannot inflate it
+            top = max(c[2] for c in seed)
+            R = max(top - lo[2], 1e-9)
+            for c in items:
+                pass
+            # grow R to the true wheel top by looking only near this corner
+            near = [c[2] for _p, c in items
+                    if abs(c[L] - cl) <= 0.9 * R * 3.0 and c[2] <= lo[2] + 0.42 * span[2]]
+            if near:
+                R = max(R, (max(near) - lo[2]) / 2.0)
+            cz = lo[2] + R
+            moved_here = 0
+            for poly, c in items:
+                d = math.hypot(c[L] - cl, c[2] - cz)
+                if 0.72 * R <= d <= 1.02 * R:
                     poly.material_index = ti
-                    moved += 1
+                    moved_here += 1
+            moved += moved_here
     return tyre, moved
 
 
@@ -493,9 +537,33 @@ if DO_TYRE:
         bb = bsdf_of(mm) if mm else None
         if bb is None:
             continue
-        cur = list(bb.inputs["Base Color"].default_value)[:3]
+        cur = PRE_PAINT.get(name, list(bb.inputs["Base Color"].default_value)[:3])
         how = ("contact patch" if name in contact and name not in named else
                "name" if name not in contact else "contact patch + name")
+        if name == PAINT_NAME:
+            # The contact patch belongs to the PAINT material: this is one
+            # material covering the whole car, as an image-to-3D shell is. It
+            # can never be "already black" -- recolouring it would repaint the
+            # car, so the tyre has to be SPLIT out of it geometrically.
+            tm, mv = split_wheel_material(name)
+            if tm is not None and mv >= 24:
+                print(f"R10_TYRE_SPLIT {name}: this material is the PAINT and it "
+                      f"also touches the ground -- one material covering the whole "
+                      f"car. Split by wheel radius: {mv} faces moved to {tm.name} "
+                      f"as rubber, paint untouched.")
+                rep["tyres"].append({"name": name, "found_by": how,
+                                     "was": [round(c, 4) for c in cur],
+                                     "on_ground": True, "action": "split by radius",
+                                     "final": [0.022, 0.022, 0.024],
+                                     "faces_moved": mv})
+                continue
+            print(f"R10_TYRE_UNSPLIT {name}: the paint material touches the ground "
+                  f"and could NOT be split by radius -- this car's tyres are body "
+                  f"colour and it is a FAIL. Not recolouring; that would repaint "
+                  f"the whole car.")
+            rep["tyres"].append({"name": name, "found_by": how, "on_ground": True,
+                                 "action": "FAILED to split", "final": list(rgb)})
+            continue
         entry = {"name": name, "found_by": how,
                  "was": [round(c, 4) for c in cur],
                  "on_ground": name in contact}
