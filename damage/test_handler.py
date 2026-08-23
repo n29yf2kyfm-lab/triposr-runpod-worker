@@ -1481,6 +1481,55 @@ check("23p parse_detections deduplicates before returning",
           for i, a in enumerate(_forced) for b in _forced[i + 1:]))
 
 
+# ---- 24. classes.json is read in both the wrapped and the bare form -------
+#
+# Requiring the "index_to_name" wrapper made a hand-written
+# {"1": "crack_glass", ...} parse fine, fail the shape check, and get skipped
+# in silence -- ids then resolve to "1"/"2", map to no damage type, and are
+# dropped, so the run reports nothing and says nothing. Deploying a checkpoint
+# involves writing this file by hand, so the obvious form has to work.
+_names = ["crack_glass", "dent", "lamp_wheel", "rust_paint", "scratch_scuff",
+          "structural"]
+_want = {i + 1: n for i, n in enumerate(_names)}
+_cjd = tempfile.mkdtemp()
+_mdl = os.path.join(_cjd, "model.onnx")
+open(_mdl, "wb").write(b"")
+
+
+def _write_classes(doc):
+    with open(os.path.splitext(_mdl)[0] + ".classes.json", "w") as f:
+        json.dump(doc, f)
+
+
+_write_classes({"index_to_name": {str(i + 1): n
+                                  for i, n in enumerate(_names)}})
+check("24a the wrapped index_to_name form still resolves",
+      DET._labels_beside_model(_mdl) == _want)
+
+_write_classes({str(i + 1): n for i, n in enumerate(_names)})
+check("24b a bare id->name mapping resolves too",
+      DET._labels_beside_model(_mdl) == _want,
+      str(DET._labels_beside_model(_mdl)))
+
+_write_classes({str(i + 1): n for i, n in enumerate(_names)})
+check("24c every name from the bare form maps to a real damage type",
+      all(DET.DAMAGE_CLASS_MAP.get(
+          DET._label_for(DET._labels_beside_model(_mdl), i))
+          for i in range(1, 7)))
+
+# A descriptor that is neither form must be REJECTED, not half-read: guessing
+# at an unknown layout is how the ids get shifted silently.
+_write_classes({"classes": [{"index": 1, "name": "crack_glass"}]})
+check("24d an unrecognised layout resolves to nothing rather than a guess",
+      DET._labels_beside_model(_mdl) is None,
+      str(DET._labels_beside_model(_mdl)))
+_write_classes({"1": "crack_glass", "notanid": "dent"})
+check("24e a mapping with a non-numeric key is not treated as id->name",
+      DET._labels_beside_model(_mdl) is None)
+check("24f a missing classes.json is still None, not an exception",
+      DET._labels_beside_model(os.path.join(_cjd, "absent.onnx")) is None)
+
+
 # ---- report ---------------------------------------------------------------
 print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")
 for f in FAILED:

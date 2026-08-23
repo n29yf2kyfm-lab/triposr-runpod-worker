@@ -751,13 +751,37 @@ fi
 
 echo "=== publish ==="
 python - <<'PY' || exit 50
-import os, glob
+import os, glob, json
 from huggingface_hub import HfApi
 api = HfApi(token=os.environ["HF_TOKEN"])
 repo, tag = os.environ["HF_REPO"], os.environ.get("RUN_TAG", "run")
 sent = 0
-for pat in ("runs/**/*.onnx", "runs/**/*.pth", "runs/**/deploy.json",
-            "prepared/labels.txt", "runs/**/results.json"):
+# SHIP classes.json BESIDE THE ONNX.
+#
+# detect.py resolves class names from a classes.json next to the model, and
+# publishing only labels.txt left every deployment to hand-write one. Getting
+# that wrong does not raise: unresolved ids become "1", "2", map to no damage
+# type, and are dropped, so the model loads, runs, and reports nothing. Write
+# it here, from the labels the run actually trained on.
+try:
+    names = [n for n in
+             open("prepared/labels.txt").read().strip().split(",") if n]
+    # index 0 is RF-DETR's reserved placeholder; real classes are 1-based.
+    idx = {str(i): n for i, n in enumerate(names) if i > 0}
+    doc = {"index_to_name": idx,
+           "name_to_index": {v: int(k) for k, v in idx.items()},
+           "reserved_index_0": names[0] if names else "_placeholder_"}
+    for onnx_path in glob.glob("runs/**/*.onnx", recursive=True):
+        side = os.path.splitext(onnx_path)[0] + ".classes.json"
+        with open(side, "w") as f:
+            json.dump(doc, f, indent=1)
+        print("wrote", side, idx)
+except Exception as e:
+    print("classes.json generation failed:", e)
+
+for pat in ("runs/**/*.onnx", "runs/**/*.classes.json", "runs/**/*.pth",
+            "runs/**/deploy.json", "prepared/labels.txt",
+            "runs/**/results.json"):
     for p in glob.glob(pat, recursive=True):
         api.upload_file(path_or_fileobj=p,
                         path_in_repo=f"detector/{tag}/{os.path.basename(p)}",

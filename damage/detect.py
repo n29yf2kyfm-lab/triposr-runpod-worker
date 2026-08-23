@@ -592,6 +592,19 @@ def _labels_beside_model(model_path):
         except Exception:
             continue
         m = doc.get("index_to_name") if isinstance(doc, dict) else None
+        # ACCEPT A BARE id -> name MAPPING TOO.
+        #
+        # Requiring the "index_to_name" wrapper meant an obvious-looking
+        # {"1": "crack_glass", ...} was read, found wanting, and SILENTLY
+        # skipped -- falling through to unresolved names, which become "1"
+        # and "2", map to no damage type, and are dropped. The report comes
+        # back empty and nothing anywhere says why. Hand-writing this file is
+        # a normal step when deploying a checkpoint, so the obvious form has
+        # to work.
+        if m is None and isinstance(doc, dict) and doc and all(
+                str(k).lstrip("-").isdigit() and isinstance(v, str)
+                for k, v in doc.items()):
+            m = doc
         if isinstance(m, dict) and m:
             return {int(k): str(v) for k, v in m.items()}
     return None
