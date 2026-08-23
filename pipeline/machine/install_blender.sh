@@ -75,9 +75,21 @@ install_py_deps() {
 install_shim() {
   cat > /usr/local/bin/blender <<'SHIM'
 #!/usr/bin/env bash
-if [ -n "${BLENDER_BIN:-}" ] && [ -x "${BLENDER_BIN}" ]; then exec "$BLENDER_BIN" "$@"; fi
+# LD_LIBRARY_PATH IS NOT OPTIONAL ON 5.x. The glTF importer's Draco bridge
+# (io_scene_gltf2/libbf_intern_draco_bridge.so) dlopens libdraco.so.9, which
+# ships in the install's own lib/ directory but is NOT on the loader path. The
+# result is a Draco-compressed GLB failing to import with
+# "OSError: libdraco.so.9: cannot open shared object file" -- and most of this
+# catalogue is Draco-compressed, so that is most cars.
+run() {
+  local bin="$1"; shift
+  local dir; dir="$(dirname "$bin")"
+  [ -d "$dir/lib" ] && export LD_LIBRARY_PATH="$dir/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+  exec "$bin" "$@"
+}
+if [ -n "${BLENDER_BIN:-}" ] && [ -x "${BLENDER_BIN}" ]; then run "$BLENDER_BIN" "$@"; fi
 newest="$(ls -d /opt/blender-*-linux-x64/blender 2>/dev/null | sort -V | tail -1)"
-[ -n "$newest" ] && [ -x "$newest" ] && exec "$newest" "$@"
+[ -n "$newest" ] && [ -x "$newest" ] && run "$newest" "$@"
 [ -x /usr/bin/blender ] && exec /usr/bin/blender "$@"
 echo "blender-shim: no blender binary found" >&2; exit 127
 SHIM
