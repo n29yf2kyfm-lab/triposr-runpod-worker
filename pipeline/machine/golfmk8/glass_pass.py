@@ -16,8 +16,15 @@ MEASURED, ON THAT MESH:
 
   version                      faces      share   result
   height 0.40, |nz| 0.58     120,260      19.0%   whole upper body transparent
-  height 0.60, |nz| 0.45      43,988       7.0%   correct: windows only
+  height 0.60, |nz| 0.45      43,988       7.0%   side glass only, SCREENS SOLID
+  + raked branch              81,792      12.9%   screens recovered, roof intact
   real-car band                    -    4 - 12%   (CLAUDE.md, measured)
+
+12.9% sits just above the band and the pass warns about it. That is expected
+rather than wrong here: Hunyuan renders the screens as broad rounded shells, so
+they carry more faces than a sharply creased screen would. The render is the
+verdict. GLASS_RAKE_MIN=0.80 trims the shallowest faces if a number inside the
+band is wanted.
 
 The v1 failure was not the thresholds alone. `is_dark` was initialised True and
 only overwritten when a base-colour texture was found; a generated mesh has no
@@ -35,13 +42,16 @@ TWO THINGS TO KNOW BEFORE TOUCHING THE NUMBERS:
     back toward 0.58 believing this line is a safety net: at 0.58 the diagonal
     worst case is 0.577, which only just clears 0.55, and above that the test
     starts silently passing everything anyway.
-  * |nz| <= 0.45 ACCEPTS ONLY FACES WITHIN ~27 DEGREES OF VERTICAL. A real
-    hatchback windscreen is raked about 25-30 degrees from HORIZONTAL, which
-    puts its |nz| near 0.87 -- far outside this filter. It does not bite on
-    Hunyuan output because that model renders the screen as part of a rounded
-    shell rather than a sharply raked plane. On a sharper mesh the windscreen
-    would be excluded and only the side glass would convert. Check the render,
-    not the count, when moving to a different generator.
+  * |nz| <= 0.45 ACCEPTS ONLY FACES WITHIN ~27 DEGREES OF VERTICAL, so it
+    EXCLUDES THE WINDSCREEN AND REAR SCREEN BY CONSTRUCTION. |nz| is
+    cos(rake from horizontal), so a screen raked 25-30 degrees sits at 0.87-0.91.
+    I first wrote here that this "does not bite on Hunyuan output because that
+    model renders the screen as part of a rounded shell" -- that was WRONG, and
+    measuring it disproved it: glass faces reached a maximum |nz| of exactly
+    0.450, pinned at the cutoff, while 36,808 upper-band faces sat at |nz|
+    0.80-0.95 with none converted, and the nose end of the car was 0.0% glazed
+    across two whole zones. Roughly half the glazing was missing.
+    FIXED by the raked branch below. Do not remove it.
 
 THE TEXTURE PATH IS THE FRAGILE ONE, and it is fragile in a way this project has
 already measured: glazing selection by albedo darkness FAILS on dark cars. On a
@@ -52,6 +62,8 @@ the body contrasts with the glazing.
 
 Run: blender -b --python glass_pass.py -- in.glb out.glb [report.json]
 Env: GLASS_ALPHA (0.25) · GLASS_HEIGHT (0.60) · GLASS_MAX_NZ (0.45)
+     GLASS_RAKED (1) · GLASS_RAKE_MIN (0.72) · GLASS_RAKE_MAX (0.94)
+     GLASS_RAKE_MAX_H (0.90)   -- set GLASS_RAKED=0 for side glass only
 """
 import json
 import os
@@ -66,6 +78,32 @@ REPORT = argv[2] if len(argv) > 2 else None
 ALPHA = float(os.environ.get("GLASS_ALPHA", "0.25"))
 HEIGHT = float(os.environ.get("GLASS_HEIGHT", "0.60"))
 MAX_NZ = float(os.environ.get("GLASS_MAX_NZ", "0.45"))
+
+# --- RAKED GLAZING: the windscreen and rear screen -------------------------
+# |nz| = cos(rake from horizontal), so a screen raked 25-30 degrees has
+# |nz| = 0.87-0.91, and MAX_NZ = 0.45 accepts only faces within 27 degrees of
+# VERTICAL. The screens are therefore excluded by construction. Measured on the
+# Hunyuan Golf: glass faces max |nz| = 0.450, pinned exactly at the cutoff,
+# while 36,808 upper-band faces sit at |nz| 0.80-0.95 and none were converted --
+# roughly half the car's glazing missing, and the nose end 0.0% glazed.
+#
+# |nz| ALONE CANNOT FIX IT: the roof and bonnet are near-horizontal too. What
+# separates them is HEIGHT. Measured, upper-band faces on that mesh:
+#
+#   |nz| band     faces   median height
+#   0.80 - 0.88  14,084       0.731
+#   0.88 - 0.93  19,068       0.846      <- screens
+#   0.93 - 0.97  10,454       0.741
+#   0.97 - 1.01  54,146       0.961      <- roof (and bonnet at p10 0.659)
+#
+# and the raked band concentrates at ONE position along the car -- zone 3 of 10
+# from the nose, 15,704 faces, median height 0.812 -- which is the windscreen.
+# So: admit raked faces below the roof line, and leave the roof and bonnet out
+# by keeping the upper |nz| bound under 0.94.
+RAKED = os.environ.get("GLASS_RAKED", "1") == "1"
+RAKE_MIN = float(os.environ.get("GLASS_RAKE_MIN", "0.72"))
+RAKE_MAX = float(os.environ.get("GLASS_RAKE_MAX", "0.94"))
+RAKE_MAX_H = float(os.environ.get("GLASS_RAKE_MAX_H", "0.90"))
 
 
 def log(m):
@@ -131,13 +169,21 @@ def detect_and_assign_glass(obj, basecolor_img=None):
     mesh = obj.data
     uv_layer = mesh.uv_layers.active.data if mesh.uv_layers.active else None
     assigned = 0
+    raked_hits = 0
     for poly in mesh.polygons:
         center = obj.matrix_world @ poly.center
         if center.z < upper_threshold:
             continue
         normal = (obj.matrix_world.to_3x3() @ poly.normal).normalized()
-        if abs(normal.z) > MAX_NZ:
+        nz = abs(normal.z)
+        height_frac = (center.z - z_min) / z_range
+        upright = nz <= MAX_NZ
+        screen = (RAKED and RAKE_MIN <= nz <= RAKE_MAX
+                  and height_frac <= RAKE_MAX_H)
+        if not (upright or screen):
             continue
+        if screen and not upright:
+            raked_hits += 1
         is_window = False
         if use_color and uv_layer is not None:
             uvs = [uv_layer[li].uv for li in poly.loop_indices]
@@ -156,12 +202,18 @@ def detect_and_assign_glass(obj, basecolor_img=None):
                 if lum < 0.28 and sat < 0.20:
                     is_window = True
         else:
-            if abs(normal.x) > 0.55 or abs(normal.y) > 0.55:
-                is_window = True
+            # A raked screen has SMALL |nx|/|ny| (a 25-degree screen is
+            # |nx| = sin 25 = 0.42), so the side-facing test would reject it.
+            # It is also provably inert for the upright branch: once
+            # |nz| <= 0.45, nx^2+ny^2 >= 0.798 and the diagonal worst case is
+            # 0.6315, above 0.55 -- measured, 0 of 43,988 rejected. So the
+            # upright branch is accepted outright and the test is kept only for
+            # the raked branch, where it would wrongly exclude.
+            is_window = True
         if is_window:
             poly.material_index = glass_idx
             assigned += 1
-    log(f"glass faces assigned: {assigned}")
+    log(f"glass faces assigned: {assigned}  (of which raked screens: {raked_hits})")
     return assigned
 
 
