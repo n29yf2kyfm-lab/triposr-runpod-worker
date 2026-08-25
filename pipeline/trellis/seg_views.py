@@ -89,9 +89,36 @@ slots = getattr(fo, "file_slots", None) or getattr(fo, "file_output_items", None
 slots[0].path = "depth_" if hasattr(slots[0], "path") else slots[0].name
 nt.links.new(rl.outputs["Depth"], fo.inputs[0])
 
-VIEWS = [(az, 18) for az in range(0, 360, 45)] + [(90, 40), (270, 40)]
+# EVERY DEFAULT VIEW LOOKS DOWN AT THE CAR (elev +18, plus two at +40), and
+# that is a measured defect, not a style choice. A surface near-parallel to
+# the view ray -- sills, rocker panels, bumper valances, wheel-arch inner lips
+# -- has a huge depth GRADIENT across a single pixel, so its face centroid
+# fails seg_project's absolute z-buffer test and the face is classed
+# "interior". seg_assemble then paints interior dark matte, and the finished
+# car renders with black blotches down the sills and across both bumpers,
+# which reads as damage. Measured on the fresh Pixal Golf: only 18.6% of
+# faces were ever "seen" from these ten views (the earlier Pixal Golf managed
+# 57%), and the material-ID render put the missing ones exactly on the
+# grazing surfaces named above.
+#
+# Loosening SEG_DEPTH_TOL_FRAC recovers them (0.0025 -> 18.6%, 0.006 -> 26.1%,
+# 0.015 -> 39.4%) and is the WRONG fix: that tolerance was tightened
+# deliberately, because a loose one lets surfaces BEHIND the glazing pass as
+# the visible surface. The right fix is to look at those surfaces face-on.
+#
+# SEG_VIEWS_SPEC is "az:el,az:el,..." and SEG_VIEW_OFFSET shifts the output
+# index, so an existing view set can be EXTENDED without re-rendering and
+# re-masking the views it already has (masks are the slow stage -- ~25 min on
+# CPU for ten views).
+_spec = os.environ.get("SEG_VIEWS_SPEC")
+if _spec:
+    VIEWS = [tuple(float(v) for v in p.split(":")) for p in _spec.split(",")]
+else:
+    VIEWS = [(az, 18) for az in range(0, 360, 45)] + [(90, 40), (270, 40)]
+OFFSET = int(os.environ.get("SEG_VIEW_OFFSET", "0"))
 cams = {}
-for i, (az, el) in enumerate(VIEWS):
+for _i, (az, el) in enumerate(VIEWS):
+    i = _i + OFFSET
     a, e = math.radians(az), math.radians(el)
     d = size * 1.9
     cam.location = (ctr.x + d * math.cos(e) * math.sin(a),

@@ -56,7 +56,9 @@ Run: python3 fit_spec.py <canon.glb> <out.glb> --spec specs/car.json
      [--max-mirror-frac 0.02]
 """
 import argparse
+import json
 import os
+import struct
 import sys
 
 import numpy as np
@@ -74,6 +76,16 @@ ap.add_argument("--max-mirror-frac", type=float, default=0.02,
                      "fraction wider than the door line -- the mesh has "
                      "protruding mirrors and the excl.-mirrors published "
                      "width is then the wrong thing to fit the Z extent to")
+ap.add_argument("--node-scale", action="store_true",
+                help="write the scale as a glTF root-node transform (JSON "
+                     "edit, BIN chunk verbatim) instead of moving vertices. "
+                     "USE THIS ON AN ASSEMBLED CAR. trimesh's load/export "
+                     "round-trip drops KHR material extensions and recomputes "
+                     "vertex normals, and normals_fix has already run by that "
+                     "point -- re-exporting through trimesh would silently "
+                     "undo the one stage this project has a standing rule "
+                     "about. The pose_fix pattern applies: touch the JSON, "
+                     "leave the binary alone.")
 a = ap.parse_args()
 
 spec = CarSpec.load(a.spec)
@@ -136,6 +148,56 @@ if not np.all((resid > 0.65) & (resid < 1.35)):
 s = uniform * resid
 print(f"uniform fit x{uniform:.3f}; residual H x{resid[1]:.3f} "
       f"W x{resid[2]:.3f}")
+
+if a.node_scale:
+    # ---- glTF JSON edit: BIN chunk verbatim, geometry and normals untouched.
+    # One new root node carrying the scale, with the previous roots as its
+    # children, so any transform they already had still composes correctly.
+    raw = open(a.inp, "rb").read()
+    if raw[:4] != b"glTF":
+        raise SystemExit("REFUSED: --node-scale needs a binary .glb")
+    jlen = struct.unpack("<I", raw[12:16])[0]
+    if raw[16:20] != b"JSON":
+        raise SystemExit("REFUSED: first chunk is not JSON")
+    g = json.loads(raw[20:20 + jlen].decode("utf-8"))
+    tail = raw[20 + jlen:]                       # every remaining chunk, as-is
+    gy = -lo[1] * s[1]                           # reground after scaling
+    scene = g.get("scenes", [{}])[g.get("scene", 0)]
+    old_roots = list(scene.get("nodes", []))
+    g.setdefault("nodes", []).append({
+        "name": "FIT_SPEC", "children": old_roots,
+        "scale": [float(s[0]), float(s[1]), float(s[2])],
+        "translation": [0.0, float(gy), 0.0]})
+    scene["nodes"] = [len(g["nodes"]) - 1]
+    jb = json.dumps(g, separators=(",", ":")).encode()
+    jb += b" " * ((4 - len(jb) % 4) % 4)          # chunks are 4-byte aligned
+    out = (b"glTF" + struct.pack("<II", 2, 12 + 8 + len(jb) + len(tail))
+           + struct.pack("<I", len(jb)) + b"JSON" + jb + tail)
+    open(a.out, "wb").write(out)
+    # VERIFY by reloading, because a JSON edit that produces a file no loader
+    # accepts is the quiet failure this whole file exists to avoid.
+    sc2 = trimesh.load(a.out, force="scene", process=False)
+    m2 = trimesh.util.concatenate(
+        [gm.copy().apply_transform(sc2.graph[nd][0])
+         for nd in sc2.graph.nodes_geometry
+         for gm in [sc2.geometry[sc2.graph[nd][1]]]])
+    e2 = m2.extents
+    print(f"node scale x{s[0]:.3f} y{s[1]:.3f} z{s[2]:.3f} -> L={e2[0]:.3f} "
+          f"H={e2[1]:.3f} W={e2[2]:.3f} (H/L={e2[1]/e2[0]:.3f})")
+    for k, got, want in (("length", e2[0], tgt["length_m"]),
+                         ("height", e2[1], tgt["height_m"]),
+                         ("width",  e2[2], tgt["width_m"])):
+        if abs(got / want - 1) > 0.01:
+            raise SystemExit(f"REFUSED: post-scale {k} {got:.4f} vs {want}")
+    nprim = sum(1 for me in g["meshes"] for p in me["primitives"])
+    nnorm = sum(1 for me in g["meshes"] for p in me["primitives"]
+                if "NORMAL" in p["attributes"])
+    if nnorm != nprim:
+        raise SystemExit(f"REFUSED: NORMAL on {nnorm}/{nprim} primitives")
+    print(f"verified: dims within 1%; NORMAL present on all {nprim} "
+          f"primitives; BIN chunk byte-identical ({len(tail)} bytes)")
+    print("wrote", a.out)
+    raise SystemExit(0)
 
 for gm in sc.geometry.values():
     gm.vertices = gm.vertices * s
