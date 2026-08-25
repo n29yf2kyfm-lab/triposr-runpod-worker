@@ -994,6 +994,19 @@ write the value into the repo; `/root/.alam3d_env`, mode 600, only.
 **And re-check the mode.** The 2026-08-01 rollback reset this file to 644.
 `chmod 600` after every restore.
 
+## task-observer is installed — invoke it at the start of task sessions (2026-08-25)
+
+`.claude/skills/task-observer/` (rebelytics "One Skill to Rule Them All", CC BY
+4.0, vendored and pinned). It watches a working session for repeating patterns
+and owner corrections and drafts skill candidates from them. Its own docs say
+description-level matching alone is not enough, so: **invoke it at the start of
+any multi-step task session**, and it logs to `skill-observations/`.
+
+Verified clean before installing — no network calls, no environment reads, no
+credential access anywhere in the bundle. The full review of all five plugins
+from the owner's video, including the two that were HELD and why, is in
+`.claude/PLUGINS.md`.
+
 ## graphify now self-repairs after a rollback — do NOT reinstall it by hand (2026-08-25)
 
 `.claude/settings.json` + `.claude/hooks/session-start.sh` are COMMITTED, so every
