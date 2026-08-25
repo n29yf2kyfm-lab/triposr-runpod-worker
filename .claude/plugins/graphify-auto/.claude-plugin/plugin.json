@@ -1,0 +1,6 @@
+{
+  "name": "graphify-auto",
+  "description": "Installs graphify and rebuilds the code graph at the start of every Claude session. Local AST only (--code-only), so no repository source is sent to any external LLM vendor.",
+  "version": "1.0.0",
+  "author": { "name": "ExpertCarCheck" }
+}
