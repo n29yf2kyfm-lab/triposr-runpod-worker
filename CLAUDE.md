@@ -722,6 +722,66 @@ harvest every hex-32 string, subtract the known-uid universe (candidate CSVs,
 catalogue `sourceReferenceId`s, mesh-bucket names), then validate each survivor
 against `GET /v3/me` — the only proof a string is a real token.
 
+## KILL TEST RUN 2026-08-25: the generated mesh CANNOT hold a shut line
+
+Stage 1 of `pipeline/machine/DECISION.md`, executed. Control is
+`car-meshes/vw/golf_sourced_v26.glb` — the sourced Golf the owner CHOSE to keep
+over the TRELLIS rebuild, i.e. a car that passed the bar. Same rig, same gates.
+
+    mesh          faces      p5    p25  MEDIAN    p95   finest  adaptivity
+    generated   998,730    3.18   7.21   14.25  32.21   6.36mm      10.1x
+    control     283,661    0.53   2.62    9.72  80.10   1.06mm     150.6x
+
+**A shut line is ~4.5 mm and a feature needs ~2 edges across it. The generated
+mesh's floor is 6.36 mm, so it cannot carry a panel gap ANYWHERE on the car.**
+The control's floor is 1.06 mm. This is analytic — no render, no opinion — and
+it means no downstream stage can produce shut lines: not labelling, not normal
+filtering, not another seed, not a bigger generation budget, and NOT detail
+transfer, which was Stage 1.3. You cannot transfer a 4.5 mm feature onto a mesh
+whose finest edge is 3.18 mm without RETOPOLOGISING first, and there is no
+retopo or LOD stage anywhere in the chain (verified by search).
+
+**MY FIRST VERSION OF THIS TEST USED THE MEDIAN AND WAS WRONG — the control
+caught it.** By the median test the accepted control "cannot represent" a shut
+line either, and it plainly has them. A real asset is **ADAPTIVELY
+triangulated**: 0.53 mm edges where the detail is, 80 mm across flat panels.
+The statistic that matters is the FINE TAIL, never the average. Adaptivity
+(p95/p5) is the single cleanest discriminator found: a marching-cubes mesh sits
+near 10x, a built asset in the hundreds.
+
+The generated car spends **3.5x MORE triangles than the control** and carries
+less detail. Dihedral spectrum, % of edge LENGTH per band:
+
+    mesh          0-5    5-15   15-30   30-60  60-120
+    generated   65.79   19.25    8.09    3.96    2.08
+    control     64.83   14.20    8.68    5.89    5.76
+
+Half the sharp-edge length (6.0% vs 11.7% above 30 deg) and MORE low-angle
+noise. **Soft-with-noise, not soft-with-detail** — which is what the owner has
+been saying in words since the first generated car.
+
+## THE POSITIVE CONTROL RE-CALIBRATED A GATE I HAD SET WRONG (2026-08-25)
+
+Nobody had ever run a known-good car through this project's own gates. Doing it
+immediately overturned a verdict:
+
+    glass_topo               components  loops  holes   loops/component
+    CONTROL (accepted)               84     94     14         1.12
+    generated                       124    313    189         2.52
+
+I had called the generated car's **124 glass components** "perforated fragment
+soup" and a hard fail. **The car the owner ACCEPTED has 84.** A real car
+legitimately has many separate panes, surrounds and objects, so raw component
+count is NOT the defect and must not be gated on. The discriminators are
+**HOLES** (14 vs 189) and **LOOPS PER COMPONENT** (1.12 vs 2.52, against an
+ideal of 1.0 — one closed outline per pane). Write the gate on the ratio.
+
+Both cars score `clear / proven` on `glass_probe`, which is the fourth
+demonstration that the material probe measures none of this.
+
+**Standing rule: a threshold with no positive control behind it is a guess.**
+Every gate in this repo should state which known-good asset calibrated it.
+
 ## Rollback #12 (2026-08-25): the newest env var is the one that dies
 
 Another rollback, mid-request. It took the repo back to `8e9fe6e`, wiped
