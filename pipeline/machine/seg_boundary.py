@@ -45,64 +45,101 @@ BAND_FRAC = 0.030         # stencil band half-thickness, fraction of region diag
 RASTER = 220              # cells across the region diagonal
 GAUSS_SIGMA = 2.2         # cells; the smoothing that straightens the outline
 
-mask = label == GLASS
-same = mask[adj[:, 0]] & mask[adj[:, 1]]
-g = sp.csr_matrix((np.ones(int(same.sum())), (adj[same, 0], adj[same, 1])),
-                  shape=(F, F))
-_, comp = sp.csgraph.connected_components(g + g.T, directed=False)
-comp = comp.copy(); comp[~mask] = -1
-sizes = Counter(comp[mask])
-regions = [cid for cid, n in sizes.items() if n >= MIN_REGION]
-print(f"glass regions >= {MIN_REGION} faces: {len(regions)} "
-      f"(of {len(sizes)} total, {int(mask.sum())} glass faces)")
+# PLANARITY GUARD, lamp only in practice: a stencil is a PLANE fit, so it is
+# only meaningful on a region that is roughly planar. Glass always is. A lamp
+# wrapping a corner is not, and forcing a plane through it would let the
+# stencil claim body faces on the far side of the wrap. A region above this
+# RMS-out-of-plane fraction is left exactly as projected — worse boundary, but
+# never a smear onto the wing. Fail open, never fail dirty.
+MAX_NONPLANAR = 0.085
 
-stamped_glass = np.zeros(F, bool)
-# which WINDOW stamped each glass face: glass_smooth fits per window, because
-# welded mesh connectivity merges the whole greenhouse into one blob (measured
-# on the gseg Golf: one 51k-face "region" spanning rear screen + both flanks)
-stamp_region = np.full(F, -1, np.int32)
-for ordinal, cid in enumerate(regions):
-    ridx = np.where(comp == cid)[0]
-    pts = cent[ridx]
-    ctr = pts.mean(0)
-    _, _, Vt = np.linalg.svd(pts - ctr, full_matrices=False)
-    b1, b2, nrm = Vt[0], Vt[1], Vt[2]
-    uv_r = (pts - ctr) @ np.stack([b1, b2], 1)
-    diag = float(np.hypot(*(uv_r.max(0) - uv_r.min(0))))
-    band = BAND_FRAC * diag
 
-    d_all = (cent - ctr) @ nrm
-    nd_all = np.abs(fnorm @ nrm)
-    uv_all = (cent - ctr) @ np.stack([b1, b2], 1)
-    lo, hi = uv_r.min(0) - 0.06 * diag, uv_r.max(0) + 0.06 * diag
-    cand = ((np.abs(d_all) < band) & (nd_all > 0.5) &
-            (uv_all[:, 0] > lo[0]) & (uv_all[:, 0] < hi[0]) &
-            (uv_all[:, 1] > lo[1]) & (uv_all[:, 1] < hi[1]) &
-            np.isin(label, (BODY, GLASS)))
+def stencil_class(cls, min_region, max_nonplanar=None, gauss=GAUSS_SIGMA,
+                  band_frac=BAND_FRAC):
+    """Straighten one class's boundary with per-region 2D stencils.
 
-    cell = diag / RASTER
-    gw = int(np.ceil((hi[0] - lo[0]) / cell)) + 1
-    gh = int(np.ceil((hi[1] - lo[1]) / cell)) + 1
-    ras = np.zeros((gh, gw), bool)
-    iu = ((uv_r[:, 0] - lo[0]) / cell).astype(int).clip(0, gw - 1)
-    iv = ((uv_r[:, 1] - lo[1]) / cell).astype(int).clip(0, gh - 1)
-    ras[iv, iu] = True
-    ras = ndimage.binary_closing(ras, iterations=3)
-    ras = ndimage.binary_fill_holes(ras)
-    sm = ndimage.gaussian_filter(ras.astype(np.float32), GAUSS_SIGMA) > 0.5
+    Generalised from the glass-only version 2026-08-25. The Yaris PRESERVE
+    slice shipped a clean glass boundary and a RAGGED LAMP one, because the
+    lamp class only ever got the zone-eviction rules below and never this
+    treatment — its edge was raw projected-vote dither, which renders as
+    jagged dark patches spilling onto the wings and bonnet lip.
 
-    ci = np.where(cand)[0]
-    cu = ((uv_all[ci, 0] - lo[0]) / cell).astype(int).clip(0, gw - 1)
-    cv = ((uv_all[ci, 1] - lo[1]) / cell).astype(int).clip(0, gh - 1)
-    inside = sm[cv, cu]
-    label[ci[inside]] = GLASS
-    stamped_glass[ci[inside]] = True
-    stamp_region[ci[inside]] = ordinal
-    out_idx = ci[~inside]           # outside this stencil: revert glass -> body,
-    flip = out_idx[(label[out_idx] == GLASS) & ~stamped_glass[out_idx]]
-    label[flip] = BODY              # unless another region already stamped it
-    print(f"  region {cid}: {len(ridx)} faces, diag {diag:.3f}, "
-          f"stamped {int(inside.sum())} in / {int((~inside).sum())} out")
+    Returns (stamped, stamp_region). Exhaustiveness is the caller's job.
+    """
+    mask = label == cls
+    if not mask.any():
+        return np.zeros(F, bool), np.full(F, -1, np.int32)
+    same = mask[adj[:, 0]] & mask[adj[:, 1]]
+    g = sp.csr_matrix((np.ones(int(same.sum())), (adj[same, 0], adj[same, 1])),
+                      shape=(F, F))
+    _, comp = sp.csgraph.connected_components(g + g.T, directed=False)
+    comp = comp.copy(); comp[~mask] = -1
+    sizes = Counter(comp[mask])
+    regions = [cid for cid, n in sizes.items() if n >= min_region]
+    print(f"{NAMES[cls]} regions >= {min_region} faces: {len(regions)} "
+          f"(of {len(sizes)} total, {int(mask.sum())} {NAMES[cls]} faces)")
+
+    stamped = np.zeros(F, bool)
+    # which WINDOW stamped each glass face: glass_smooth fits per window, because
+    # welded mesh connectivity merges the whole greenhouse into one blob (measured
+    # on the gseg Golf: one 51k-face "region" spanning rear screen + both flanks)
+    stamp_region = np.full(F, -1, np.int32)
+    for ordinal, cid in enumerate(regions):
+        ridx = np.where(comp == cid)[0]
+        pts = cent[ridx]
+        ctr = pts.mean(0)
+        _, _, Vt = np.linalg.svd(pts - ctr, full_matrices=False)
+        b1, b2, nrm = Vt[0], Vt[1], Vt[2]
+        uv_r = (pts - ctr) @ np.stack([b1, b2], 1)
+        diag = float(np.hypot(*(uv_r.max(0) - uv_r.min(0))))
+        band = band_frac * diag
+
+        if max_nonplanar is not None and diag > 0:
+            rms = float(np.sqrt((((pts - ctr) @ nrm) ** 2).mean())) / diag
+            if rms > max_nonplanar:
+                stamped[ridx] = True      # keep as-is; do NOT revert to body
+                stamp_region[ridx] = ordinal
+                print(f"  region {cid}: {len(ridx)} faces, non-planar "
+                      f"rms/diag {rms:.3f} > {max_nonplanar} — left as projected")
+                continue
+
+        d_all = (cent - ctr) @ nrm
+        nd_all = np.abs(fnorm @ nrm)
+        uv_all = (cent - ctr) @ np.stack([b1, b2], 1)
+        lo, hi = uv_r.min(0) - 0.06 * diag, uv_r.max(0) + 0.06 * diag
+        cand = ((np.abs(d_all) < band) & (nd_all > 0.5) &
+                (uv_all[:, 0] > lo[0]) & (uv_all[:, 0] < hi[0]) &
+                (uv_all[:, 1] > lo[1]) & (uv_all[:, 1] < hi[1]) &
+                np.isin(label, (BODY, cls)))
+
+        cell = diag / RASTER
+        gw = int(np.ceil((hi[0] - lo[0]) / cell)) + 1
+        gh = int(np.ceil((hi[1] - lo[1]) / cell)) + 1
+        ras = np.zeros((gh, gw), bool)
+        iu = ((uv_r[:, 0] - lo[0]) / cell).astype(int).clip(0, gw - 1)
+        iv = ((uv_r[:, 1] - lo[1]) / cell).astype(int).clip(0, gh - 1)
+        ras[iv, iu] = True
+        ras = ndimage.binary_closing(ras, iterations=3)
+        ras = ndimage.binary_fill_holes(ras)
+        sm = ndimage.gaussian_filter(ras.astype(np.float32), gauss) > 0.5
+
+        ci = np.where(cand)[0]
+        cu = ((uv_all[ci, 0] - lo[0]) / cell).astype(int).clip(0, gw - 1)
+        cv = ((uv_all[ci, 1] - lo[1]) / cell).astype(int).clip(0, gh - 1)
+        inside = sm[cv, cu]
+        label[ci[inside]] = cls
+        stamped[ci[inside]] = True
+        stamp_region[ci[inside]] = ordinal
+        out_idx = ci[~inside]           # outside this stencil: revert cls -> body,
+        flip = out_idx[(label[out_idx] == cls) & ~stamped[out_idx]]
+        label[flip] = BODY              # unless another region already stamped it
+        print(f"  region {cid}: {len(ridx)} faces, diag {diag:.3f}, "
+              f"stamped {int(inside.sum())} in / {int((~inside).sum())} out")
+    return stamped, stamp_region
+
+
+NAMES = ["body", "glass", "wheel", "lamp", "interior"]
+stamped_glass, stamp_region = stencil_class(GLASS, MIN_REGION)
 
 # glass is exhaustive: anything still glass but never stamped is a smear
 stray = (label == GLASS) & ~stamped_glass
@@ -133,6 +170,27 @@ lamp_out = (label == LAMP) & ~(((xf_ < 0.20) | (xf_ > 0.80)) & (yf_ > 0.15))
 label[lamp_out] = BODY
 print(f"lamp outside end-zones/height evicted to body: {int(lamp_out.sum())}")
 
+# LAMP STENCIL — added 2026-08-25 after the Yaris PRESERVE slice.
+# The evictions above are ZONE rules: they delete lamp label in the wrong
+# PLACE, and do nothing about its SHAPE. The slice shipped a clean stencilled
+# glass edge next to a raw projected-vote lamp edge, and at 5x the difference
+# is obvious — jagged dark patches spilling onto the wings and the bonnet lip.
+# Same treatment, same code, run after the zone rules so a bogus region (the
+# tailgate full-width band DINO invents) is gone before any plane is fitted
+# to it. Deliberately AFTER, not before: fitting a plane to that band and then
+# evicting it would waste the fit and could stamp body faces along the way.
+#
+# Smaller MIN_REGION than glass: a headlamp is a fraction of a windscreen
+# (measured on this car — 5,902 lamp faces across all four lamps, vs 42,811
+# glass). Noise below the floor is never stamped and the exhaustiveness rule
+# below sweeps it to body, so a low floor costs nothing.
+LAMP_MIN_REGION = 250
+stamped_lamp, _ = stencil_class(LAMP, LAMP_MIN_REGION,
+                                max_nonplanar=MAX_NONPLANAR)
+stray_lamp = (label == LAMP) & ~stamped_lamp
+label[stray_lamp] = BODY
+print(f"stray lamp reverted to body: {int(stray_lamp.sum())}")
+
 # absorb crumbs the restamp left behind (single scan per label)
 for target in range(5):
     tm = label == target
@@ -161,6 +219,5 @@ for target in range(5):
 stamp_region[label != GLASS] = -1
 np.save(OUT, label)
 np.save(OUT.replace(".npy", "_regions.npy"), stamp_region)
-NAMES = ["body", "glass", "wheel", "lamp", "interior"]
 share = {NAMES[i]: round(100 * float((label == i).mean()), 2) for i in range(5)}
 print("face share:", share)
