@@ -328,17 +328,46 @@ def main():
               "spec": spec.path, "identity": spec.identity()}
 
     sc = trimesh.load(inp, force="scene")
-    strip = tuple(spec.label("wheel_strip_prefixes",
-                  ["Tyre_Rubber", "Rim_Alloy", "disc_", "cal_",
-                   "WHEEL_", "Arch_Cavity", "LINER_"]))
+    # THE MACHINE'S OWN OUTPUT NAMES ARE ALWAYS STRIPPED, spec or no spec.
+    # `wheel_strip_prefixes` is a per-car list, and treating it as the COMPLETE
+    # list makes a car-agnostic stage depend on every spec remembering the
+    # pipeline's internal naming. Measured 2026-08-25 on the Yaris XP130: its
+    # spec lists "wheel"/"WHEEL_"/"lib_tyre"/"lib_rim" while the seg chain names
+    # its nodes `Tyre_Rubber` and `Rim_Alloy`, so the stage stripped ZERO nodes
+    # -- it then placed new wheels on top of the old ones and inferred the ride
+    # height from a body that still contained them, putting the wheel centre at
+    # 0.4930 against a 0.3043 tyre radius (a contact plane 189mm in the air) and
+    # refusing the car on a grounding error of its own making.
+    # These six names are what seg_assemble/premium emit, not car-specific
+    # facts, so they are unioned in rather than left to each spec.
+    CANONICAL_WHEEL_NODES = ("Tyre_Rubber", "Rim_Alloy", "WHEEL_",
+                             "Arch_Cavity", "LINER_", "disc_", "cal_")
+    strip = tuple(set(spec.label("wheel_strip_prefixes", []))
+                  | set(CANONICAL_WHEEL_NODES))
     body_label = spec.label("body", "carpaint")
     out = trimesh.Scene()
     removed = []
     stripped_pts = []
+    # A LABELLED TYRE THAT IS ALREADY ON THE GROUND IS THE BEST GROUNDING
+    # EVIDENCE THERE IS, and it is about to be thrown away. Capture its lowest
+    # point before stripping. Measured 2026-08-25 on the Pixal Yaris XP130: the
+    # input carries a real `Tyre_Rubber` node sitting at y=+0.0009, i.e. already
+    # correctly grounded, and the stage discarded it, inferred a ride height
+    # from the underside instead, and put the wheel centre at 0.4930 against a
+    # 175/65R15 radius of 0.3043 -- a contact plane 189mm IN THE AIR. The
+    # grounding guard then correctly refused the car ("interior has 10.8% of
+    # verts below the contact plane"), so a good input was rejected by an
+    # inference that its own geometry disproved.
+    tyre_ys = []
     for node in sc.graph.nodes_geometry:
         T, gn = sc.graph[node]
         if any(node.startswith(p) or gn.startswith(p) for p in strip):
             removed.append(node)
+            if "tyre" in gn.lower() or "tire" in gn.lower() \
+                    or "tyre" in node.lower() or "tire" in node.lower():
+                _v = sc.geometry[gn].vertices
+                _v = trimesh.transform_points(_v, T) if T is not None else _v
+                tyre_ys.append(float(np.asarray(_v)[:, 1].min()))
             # a fused generated car carries its ONLY axle evidence in the
             # wheel-labelled blob geometry (the body's own underbody is a
             # continuous ground smear — measured on the Yaris hybrid: one
@@ -601,7 +630,19 @@ def main():
 
     gy = det["ground_y"]
     R, W = tyre["radius_m"], tyre["width_m"]
-    if fused_mode:
+    # PREFER THE MEASURED TYRE CONTACT PLANE over any inference. Only trusted
+    # when it is plausible: within a tyre radius of the scene floor, so a
+    # mislabelled node high on the car cannot hijack the stance.
+    tyre_ground = min(tyre_ys) if tyre_ys else None
+    if tyre_ground is not None and abs(tyre_ground) <= R:
+        CY = tyre_ground + R
+        report["ride_height"] = {
+            "centre_y": round(float(CY), 5),
+            "derivation": f"MEASURED from the input's own labelled tyre "
+                          f"geometry (contact plane {tyre_ground:+.4f}) + tyre "
+                          f"R {R:.4f} — direct evidence, preferred over "
+                          f"arch-ceiling or underside inference"}
+    elif fused_mode:
         # contact-cluster ground is measured evidence (the original fused
         # tyres' own footprint) — it stays the placement authority here
         CY = gy + R
