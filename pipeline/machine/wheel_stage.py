@@ -459,6 +459,46 @@ def main():
                 f"detector self-test FAILED — detected wheelbase {det_wb:.3f} m "
                 f"is {dWB*1000:.0f}mm from the published {wb:.3f} m; the arch "
                 "detection is not trustworthy, refusing to place wheels")
+
+        # WHEELBASE ALONE IS NOT ENOUGH -- it is invariant under TRANSLATION.
+        # Attacked this gate deliberately after writing it: shifting BOTH axles
+        # 300mm, 400mm, even 600mm along the car preserves the wheelbase exactly
+        # and sails through, and so does "front axle on the bumper, rear axle on
+        # the sill" (2.620 m). The absolute axle_x test this replaced would have
+        # caught that, so gating on wheelbase alone traded a too-strict test for
+        # one too loose in exactly one direction.
+        # Closed with the PUBLISHED OVERHANGS, which are ordinary spec data and
+        # stay car-agnostic. They pin where the axle pair sits INSIDE the body:
+        # with the nose at +x, front axle = L/2 - front_overhang and rear axle =
+        # -L/2 + rear_overhang, so the axle-pair centre sits
+        # (rear_overhang - front_overhang)/2 from the body centre. Compared as a
+        # MAGNITUDE because canon.py deliberately does not resolve nose
+        # direction, so the sign is not knowable here.
+        fo = spec.dim("front_overhang_m")[0] if spec.dim("front_overhang_m") else None
+        ro = spec.dim("rear_overhang_m")[0] if spec.dim("rear_overhang_m") else None
+        if fo and ro:
+            bx = skin_pts[:, 0]
+            body_mid = float(bx.min() + bx.max()) / 2.0
+            det_off = abs((det["front_x"] + det["rear_x"]) / 2.0 - body_mid)
+            exp_off = abs((ro - fo) / 2.0)
+            tol_off = float(exp.get("axle_centre_tolerance_m", 0.08))
+            dOff = abs(det_off - exp_off)
+            st2 = "PASS" if dOff <= tol_off else "FAIL"
+            report["detector_self_test_axle_centre"] = {
+                "test": "axle-pair centre vs published overhangs",
+                "expected_offset_m": round(exp_off, 4),
+                "detected_offset_m": round(det_off, 4),
+                "delta_m": round(dOff, 4), "tolerance_m": tol_off,
+                "result": st2}
+            print(f"detector self-test (axle centre): {st2} — offset "
+                  f"{det_off:.3f} m vs expected {exp_off:.3f} m "
+                  f"(d {dOff*1000:.0f}mm, tol {tol_off*1000:.0f}mm)")
+            if st2 == "FAIL":
+                raise SystemExit(
+                    f"detector self-test FAILED — the axle pair sits "
+                    f"{dOff*1000:.0f}mm from where the published overhangs put "
+                    "it; the wheelbase is right but the wheels are in the wrong "
+                    "place along the car, refusing to place wheels")
     else:
         print("detector self-test SKIPPED — spec carries no wheelbase_m")
         report["detector_self_test"] = {"test": "wheelbase", "result": "SKIPPED"}
