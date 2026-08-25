@@ -191,6 +191,45 @@ stray_lamp = (label == LAMP) & ~stamped_lamp
 label[stray_lamp] = BODY
 print(f"stray lamp reverted to body: {int(stray_lamp.sum())}")
 
+# WHEEL HYGIENE — added 2026-08-25 from the Yaris matID render.
+# A dark ragged band sat along the bonnet lip in every front view. The label
+# map named the culprit: WHEEL label on the NOSE. seg_assemble splits wheel
+# into tyre/rim by radius, so a stray wheel face on the bonnet lip becomes
+# Tyre_Rubber and renders as a black smear on white paint. DINO's "wheel"/
+# "tire" prompts match the grille's slat pattern and the round badge; nothing
+# downstream questioned it, because WHEEL had no zone rule while LAMP did.
+#
+# Distance-from-hub, not a height cut. A height rule looks tempting (99% of
+# real wheel faces sit below yf 0.473) but the honest measurement kills it:
+# evicting above yf 0.45 also clips 2.6% off the TOPS OF THE REAL TYRES.
+# Locating the four hubs from unambiguous low faces and evicting whatever sits
+# far from all of them removes the spill without touching a tyre crown.
+# Measured here: 638 of 14,801 wheel faces evicted (4.3%), 625 of them in the
+# nose region (xf > 0.9) — i.e. the smear, and almost nothing else.
+widx = np.where(label == WHEEL)[0]
+if len(widx) > 800:
+    yf_all = (cent[:, 1] - cent[:, 1].min()) / np.ptp(cent[:, 1])
+    seed = widx[yf_all[widx] < 0.35]          # unambiguously wheel; locates hubs only
+    if len(seed) > 800:
+        sc_ = cent[seed]
+        xm = np.median(sc_[:, 0])
+        zm = (sc_[:, 2].min() + sc_[:, 2].max()) / 2
+        centres = []
+        for fx in (sc_[:, 0] < xm, sc_[:, 0] >= xm):
+            for fz in (sc_[:, 2] < zm, sc_[:, 2] >= zm):
+                s = sc_[fx & fz]
+                if len(s) > 200:
+                    centres.append(np.median(s, axis=0))
+        if len(centres) >= 2:                 # 2 is enough for a side-on car
+            centres = np.array(centres)
+            d_seed = np.linalg.norm(sc_[:, None, :] - centres[None], axis=2).min(1)
+            R = 1.25 * float(np.percentile(d_seed, 95))
+            d = np.linalg.norm(cent[widx][:, None, :] - centres[None], axis=2).min(1)
+            far = widx[d > R]
+            label[far] = BODY
+            print(f"wheel hubs {len(centres)}, R={R:.3f}; "
+                  f"stray wheel evicted to body: {len(far)}")
+
 # absorb crumbs the restamp left behind (single scan per label)
 for target in range(5):
     tm = label == target
