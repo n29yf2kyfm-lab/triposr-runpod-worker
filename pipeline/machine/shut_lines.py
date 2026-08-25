@@ -97,11 +97,13 @@ print(f"paint geometry: {paint}")
 # The parts are concatenated for scoring so a shut line running from wing to
 # door is one connected structure, then the displacement is written back to
 # each source geometry by vertex offset.
-_parts, _off, _n = [], {}, 0
+_parts, _off, _foff, _n, _fn = [], {}, {}, 0, 0
 for _nm in paint:
     _g = sc.geometry[_nm]
     _off[_nm] = (_n, len(_g.vertices))
+    _foff[_nm] = (_fn, len(_g.faces))
     _n += len(_g.vertices)
+    _fn += len(_g.faces)
     _parts.append(_g)
 V = np.vstack([g.vertices.view(np.ndarray) for g in _parts]).copy()
 _fl, _base = [], 0
@@ -227,34 +229,113 @@ if sel.sum() == 0:
 # displacement over the band's full width, so the result is a shallow dish that
 # the shading cannot catch. A real shut line is a narrow, deep, HARD-EDGED
 # feature — the cliff is the point.
-vw = np.zeros(len(V), np.float32)
-if SHARP:
-    # a vertex belonging to ANY scoring face goes to full depth
-    hitf = np.where(sel)[0]
-    vw[Ffaces[hitf].ravel()] = 1.0
-else:
-    cnt = np.zeros(len(V), np.float32)
-    np.add.at(vw, Ffaces.ravel(), np.repeat(norm, 3))
-    np.add.at(cnt, Ffaces.ravel(), 1.0)
-    vw[cnt > 0] /= cnt[cnt > 0]
-    vw[vw < MIN_SCORE] = 0.0
-
-# Vertex normals per PART (a concatenated soup has no coherent normals), then
-# write each part's slice of the displaced block back to its own geometry.
+# ---------------------------------------------------------------- engrave
+# LOCAL SUBDIVISION BEFORE DISPLACEMENT, and this is the whole reason v1 did
+# nothing visible. Measured 2026-08-25 on the premium Golf: the paint's MEDIAN
+# EDGE IS 18.58mm, so displacing a vertex 1.2mm tilts its triangle by 3.7
+# degrees where a crease needs ~30 to read. The groove was in the geometry and
+# no shading could catch it, and raising LINE_DEPTH_MM to 8mm (7x the real
+# depth) changed the render not at all -- proving depth was never the problem.
+# The selection was also CONFETTI at that density: 335 disconnected islands of
+# ~3 vertices, because a 3mm-wide line projected onto 18.6mm triangles lands on
+# scattered individual faces. The 2D filter is fine; the triangulation cannot
+# hold what it finds.
+#
+# So refine first. Each subdivision halves the edge, and the band is grown by
+# one ring so the groove has material either side of it.
+#
+# CRACK-FREE BY CONSTRUCTION. Subdividing only selected faces leaves T-junctions
+# where the refined band meets its coarse neighbours. That is harmless HERE
+# because the boundary vertices are FROZEN: a T-junction midpoint sits exactly
+# on the coarse neighbour's straight edge, and if it never moves, no gap can
+# open. Displacement is therefore restricted to vertices strictly interior to
+# the refined band.
+SUBDIV = int(os.environ.get("LINE_SUBDIV", "3"))
+TARGET_MM = float(os.environ.get("LINE_TARGET_EDGE_MM", "4.0"))
 depth_units = DEPTH_MM / 1000.0
-vn = np.zeros_like(V)
+tot_moved = 0
+
 for _nm in paint:
-    _s, _c = _off[_nm]
-    _g = sc.geometry[_nm]
-    _g.fix_normals()
-    vn[_s:_s + _c] = _g.vertex_normals
-Vnew = V - vn * (vw[:, None] * depth_units)
-for _nm in paint:
-    _s, _c = _off[_nm]
-    sc.geometry[_nm].vertices = Vnew[_s:_s + _c]
-moved = int((vw > 0).sum())
-print(f"displaced {moved} vertices inward by up to {DEPTH_MM:.2f}mm "
-      f"({100 * moved / len(V):.2f}% of paint vertices)")
+    fs, fc = _foff[_nm]
+    part_sel = sel[fs:fs + fc]
+    if not part_sel.any():
+        continue
+    g = sc.geometry[_nm]
+    pv = np.asarray(g.vertices, dtype=np.float64).copy()
+    pf = np.asarray(g.faces)
+    keep = np.where(part_sel)[0]
+
+    # grow the selection by one vertex-ring so the groove has shoulders
+    touched = np.zeros(len(pv), bool)
+    touched[pf[keep].ravel()] = True
+    band = np.where(touched[pf].any(1))[0]
+
+    # Track scored-ness GEOMETRICALLY across subdivision, not by index.
+    # trimesh's `return_index` is a dict {parent: [4 children]}, not a per-face
+    # parent array; reading it as the latter mapped parent indices onto new-face
+    # indices and made the scored set meaningless -- three renders showed no
+    # groove while the bug was here, not in the method. Centroids are immune to
+    # whatever the index convention is: a child face's centroid lies inside its
+    # parent, so a radius query against the ORIGINAL scored centroids re-derives
+    # the selection exactly, at any subdivision depth.
+    from scipy.spatial import cKDTree
+    seed_c = pv[pf[keep]].mean(1)
+    seed_r = np.linalg.norm(pv[pf[keep][:, 0]] - pv[pf[keep][:, 1]],
+                            axis=1).mean() * 0.75
+    tree = cKDTree(seed_c)
+    for _it in range(SUBDIV):
+        bl = np.asarray(sorted(band), dtype=np.int64) if isinstance(band, set) \
+            else np.asarray(band, dtype=np.int64)
+        if len(bl) == 0:
+            break
+        el = np.linalg.norm(pv[pf[bl][:, 0]] - pv[pf[bl][:, 1]], axis=1)
+        if np.median(el) * 1000.0 <= TARGET_MM:
+            break
+        pv, pf = trimesh.remesh.subdivide(pv, pf, face_index=bl)
+        cen = pv[pf].mean(1)
+        near = tree.query_ball_point(cen, seed_r)
+        band = np.array([i for i, n in enumerate(near) if n], dtype=np.int64)
+        if len(band) == 0:
+            break
+    cen = pv[pf].mean(1)
+    near = tree.query_ball_point(cen, seed_r * 0.6)
+    scored = set(int(i) for i, n in enumerate(near) if n)
+    band = set(int(i) for i, n in enumerate(tree.query_ball_point(cen, seed_r)) if n)
+
+    sc_idx = np.array(sorted(scored), dtype=np.int64)
+    if len(sc_idx) == 0:
+        continue
+    # FROZEN = every vertex used by a face outside the refined band. Those are
+    # the coarse neighbours and the T-junction seam; moving them cracks the hull.
+    inband = np.zeros(len(pf), bool)
+    inband[np.asarray(sorted(band), dtype=np.int64)] = True
+    frozen = np.zeros(len(pv), bool)
+    if (~inband).any():
+        frozen[pf[~inband].ravel()] = True
+
+    move = np.zeros(len(pv), bool)
+    move[pf[sc_idx].ravel()] = True
+    move &= ~frozen
+    if not move.any():
+        continue
+
+    g2 = trimesh.Trimesh(vertices=pv, faces=pf, process=False)
+    g2.fix_normals()
+    vn = g2.vertex_normals
+    pv = pv - vn * (move[:, None].astype(np.float64) * depth_units)
+
+    ng = trimesh.Trimesh(vertices=pv, faces=pf, process=False)
+    ng.visual = g.visual
+    sc.geometry[_nm] = ng
+    tot_moved += int(move.sum())
+    print(f"  {_nm}: {int(part_sel.sum())} scored faces -> {len(pf)} faces after "
+          f"subdiv, {int(move.sum())} verts displaced")
+
+print(f"displaced {tot_moved} vertices inward by {DEPTH_MM:.2f}mm "
+      f"(subdiv {SUBDIV}, target edge {TARGET_MM}mm)")
+if tot_moved == 0:
+    raise SystemExit("REFUSED: nothing displaced — a file identical to its "
+                     "input must not ship as a fix")
 
 sc.export(OUT, include_normals=True)
 print("wrote", OUT)
