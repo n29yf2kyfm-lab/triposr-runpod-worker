@@ -722,6 +722,79 @@ harvest every hex-32 string, subtract the known-uid universe (candidate CSVs,
 catalogue `sourceReferenceId`s, mesh-bucket names), then validate each survivor
 against `GET /v3/me` — the only proof a string is a real token.
 
+## IDENTITY, NOT MATERIALS, IS THE UNGATED FAILURE (2026-08-25, Yaris 12-plate)
+
+Asked for "a Toyota Yaris, 12 plate" (= 2012, XP130). We cannot serve one. Chasing
+that turned up a whole defect class nothing in this repo was checking.
+
+**FIRST, TWO CORRECTIONS AGAINST MY OWN REPORTING, both found by reading code and
+data rather than assuming:**
+
+1. **I audited the WRONG FILE.** `car-renders/catalogue.json` (760 entries) is the
+   LEGACY index. `platform/resolver/index.ts:99` fetches
+   **`car-renders/resolver/catalogue.v2.json` — 1,405 entries, 1,044 approved.**
+   Every catalogue number I quoted covered 54% of reality. Verified by fetching both.
+2. **"The catalogue matches on make+model only" was FALSE**, and so is the
+   conclusion I drew from it. That described the Phase-1 function, which was
+   REPLACED. The live v2 resolver hard-rejects on generation conflict,
+   year-out-of-range and body-style conflict, considers only approved assets, and
+   attaches an honesty disclosure to every response. **A 12-plate Yaris is not
+   served the wrong car — it resolves UNAVAILABLE.** An external reviewer repeated
+   my error back to me ("silent near-miss ... is literally current behaviour");
+   it was wrong when I wrote it and wrong when they echoed it. Read the resolver
+   before describing resolver behaviour.
+
+**ROOT CAUSE OF THE BAD YEARS, PROVEN IN CODE.** `platform/catalogue/enrich_spec.py`
+backfills `yearStart/yearEnd` **per NAMEPLATE**, from hand-typed tables in
+`build_index.py`, matching on the model NAME only. Line 10 of its docstring says
+"generation is deliberately NOT invented" — so it copies the years and not the
+generation:
+
+    build_index.py:79   "toyota":[("Yaris","XP210",2020,2026,"hatchback",PH), ...]
+
+The table KNOWS the generation is XP210. Every Yaris in the library — the 2001
+XP10, the GR, the Cross — inherited **2020-2026**. The window looks researched,
+is attached to the wrong physical car, and no generation field survives to
+contradict it. Corroborating distribution: **232 of 537 yearEnd values are exactly
+2026** ("now" at stamping time), `generationConfirmed` is true on **1 of 760**,
+and `accuracyGrade` is "representative" on **all** of them.
+
+**THE FABRICATED YEARS FAIL IN BOTH DIRECTIONS, WHICH IS WORSE THAN MISSING DATA.**
+Simulated against the resolver's own gates:
+
+    Yaris hatchback 2012 -> both approved Yaris REJECTED year-out-of-range -> UNAVAILABLE
+    Yaris hatchback 2003 -> same. We OWN a good 2001 Yaris and refuse to serve it.
+    Yaris hatchback 2021 -> toyota-yaris-2001-v1 scores 85 and PASSES every gate.
+
+A 2001 car is one tie-break from being served to a 2021 owner — and the sort is
+`y.score - x.score`, stable, so the winner is decided by CATALOGUE ORDER. That is
+not a gate, it is a coin flip. Today's winner is the GR Yaris, itself the wrong
+car for an ordinary 2021 Yaris.
+
+Two more amplifiers: **211 live entries have no `yearStart` at all**, so no year
+gate fires for them; and `yearEnd: null` is read as **9999**, so an honestly-omitted
+end year makes a 1967 Fiat 600 van match a 2024 Fiat 600e.
+
+**MEASURED WRONG-IDENTITY RATE: 4 of 48 live posters (8.3%)** contradict their own
+stored data — jaguar-xf-v1 (X250 stamped as X260 2015-2026), bmw-1-series-v1 (E82
+coupe stamped 2015-2026), kia-picanto-2012-v1 (2023 facelift titled and stamped
+2012), nissan-gt-r-2005-nw1-v1 (an R34 served to R35 owners). Make and model were
+right in ~46/48 — **the rot is in generation and year, not in the nameplate.**
+
+**DRIVE SIDE IS AN ENTIRE GATE DIMENSION THAT DOES NOT EXIST.** `toyota-yaris-2001-v1`
+— our best approved Yaris — is **LEFT-HAND DRIVE**. Verified, not guessed: rendered
+head-on at elevation with `glass_tint` raised to 0.55 so the cabin reads, then
+checked the steering wheel against the car's own nose. Facing the front, it sits on
+the car's left. The UK parc is RHD and third-party assets overwhelmingly are not.
+Nothing in the pipeline has ever looked.
+
+**THE SHAPE OF THE MISTAKE.** Every gate this project built — glass_probe,
+glass_topo, tyre checks, crease density, recolour audit — answers "does this car
+render well". Not one answers "is this the right car". The material gates were
+correct and remain necessary; they are simply downstream of an identity layer that
+was populated by a nameplate join and never verified. It surfaced because somebody
+rendered one car and looked at it.
+
 ## KILL TEST RUN 2026-08-25: the generated mesh CANNOT hold a shut line
 
 Stage 1 of `pipeline/machine/DECISION.md`, executed. Control is
