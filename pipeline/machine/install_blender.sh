@@ -29,10 +29,21 @@
 # idempotent and takes about a minute. That is the whole point of it being a
 # script in the repo rather than a thing someone did once by hand.
 #
-# EEVEE STILL WILL NOT RUN. There is no EGL in this container, so EEVEE/EEVEE
-# Next cannot initialise on 4.5 either -- it dies without even raising a Python
-# exception. CYCLES ON CPU IS STILL THE ONLY WORKING ENGINE. What changes is
-# that Cycles now has its denoiser.
+# EEVEE NOW RUNS -- corrected 2026-08-25. This comment used to read "EEVEE STILL
+# WILL NOT RUN. There is no EGL in this container", which was true of the
+# container AS SHIPPED and was never re-tested after 4.5.12 landed. The missing
+# piece was three apt packages, not a Blender limitation: libegl1 + libegl-mesa0
+# + libgl1-mesa-dri give a software EGL that EEVEE Next initialises against.
+# Verified BY PIXELS, which is the only way this project accepts a render claim:
+# a 160px factory-startup frame came back with 132 unique colours and std 21,
+# i.e. the default cube is actually there. EGL_BAD_MATCH warnings print during
+# context selection and are non-fatal -- Blender retries and succeeds.
+#
+# CYCLES REMAINS THE VERDICT ENGINE. Every material ruling in CLAUDE.md -- the
+# glazing tests, the white-tyre artefact, the red control -- was calibrated
+# against Cycles output. EEVEE is now available for a fast preview; it is not a
+# drop-in replacement for the eye, and swapping it in would invalidate the
+# calibration those rulings rest on.
 #
 # Usage:  bash pipeline/machine/install_blender.sh [version]
 #         export BLENDER_BIN=/opt/blender-4.5.12-linux-x64/blender
@@ -53,6 +64,62 @@ URL="https://download.blender.org/release/Blender${SERIES}/blender-${VER}-linux-
 # recovery cycle after rollback #11: the chain died one stage in on
 # "ModuleNotFoundError: No module named 'PIL'" with everything else healthy.
 PY_DEPS="Pillow scipy"
+
+# EGL / software GL. Without these EEVEE cannot get a context and dies without
+# raising a Python exception, which is how this container spent months believing
+# EEVEE was impossible on 4.5. Cheap, idempotent, and a no-op once present, so it
+# runs on BOTH paths through this script (fresh install and already-installed) --
+# the same bug the shim function was factored out to avoid.
+# Deliberately NOT pulling a driver: on a GPU host the vendor's libEGL is already
+# there and takes precedence; mesa is the software fallback for a CPU container.
+EGL_PKGS="libegl1 libegl-mesa0 libgl1-mesa-dri libgles2 libxi6 libxxf86vm1 libxfixes3 libxrender1"
+install_egl() {
+  if [ -e /usr/lib/x86_64-linux-gnu/libEGL.so.1 ]; then
+    echo "EGL present: $(ls /usr/lib/x86_64-linux-gnu/libEGL*.so.* 2>/dev/null | head -1)"
+    return 0
+  fi
+  command -v apt-get >/dev/null 2>&1 || { echo "EGL: no apt-get, skipping"; return 0; }
+  echo "installing EGL/mesa for EEVEE"
+  DEBIAN_FRONTEND=noninteractive apt-get install -y -q $EGL_PKGS >/dev/null 2>&1 \
+    || echo "EGL: apt install failed -- CYCLES still works, EEVEE will not"
+}
+
+# ASSERT BY PIXELS, NOT BY EXIT CODE. An EEVEE render that writes a uniform
+# frame exits 0 and looks exactly like success in a log; this project has been
+# burned by silent no-ops often enough that a render claim is only accepted when
+# the image varies. Non-fatal: EEVEE is a bonus, Cycles is the contract.
+assert_eevee() {
+  local bin="$1"
+  cat > /tmp/_eevee_assert.py <<'PY'
+import bpy, sys
+sc = bpy.context.scene
+for eng in ("BLENDER_EEVEE_NEXT", "BLENDER_EEVEE"):
+    try:
+        sc.render.engine = eng
+        break
+    except Exception:
+        continue
+else:
+    print("EEVEE_UNAVAILABLE"); sys.exit(0)
+sc.render.resolution_x = sc.render.resolution_y = 160
+sc.view_settings.view_transform = 'Standard'
+sc.render.filepath = '/tmp/_eevee_assert.png'
+try:
+    bpy.ops.render.render(write_still=True)
+except Exception as e:
+    print("EEVEE_RENDER_FAILED", type(e).__name__, e); sys.exit(0)
+try:
+    img = bpy.data.images.load('/tmp/_eevee_assert.png')
+    px = list(img.pixels)
+    lo, hi = min(px), max(px)
+    print(f"EEVEE_PIXELS range={lo:.3f}..{hi:.3f}")
+    print("EEVEE_ASSERT_OK" if hi - lo > 0.05 else "EEVEE_BLANK_FRAME")
+except Exception as e:
+    print("EEVEE_PIXEL_READ_FAILED", e)
+PY
+  LIBGL_ALWAYS_SOFTWARE=1 EGL_PLATFORM=surfaceless "$bin" -b --factory-startup \
+      --python /tmp/_eevee_assert.py 2>/dev/null | grep -E "EEVEE_" | tail -2
+}
 install_py_deps() {
   local bpy
   # DISCOVER the bundled python rather than hardcoding a version. The 4.5.12
@@ -102,6 +169,8 @@ if [ -x "$DEST/blender" ]; then
   echo "BLENDER_BIN=$DEST/blender"
   install_shim
   install_py_deps
+  install_egl
+  assert_eevee "$DEST/blender"
   exit 0
 fi
 
@@ -158,3 +227,5 @@ install_shim
 
 # Fresh-install path also needs the tool dependencies, not just the binary.
 install_py_deps
+install_egl
+assert_eevee "$DEST/blender"

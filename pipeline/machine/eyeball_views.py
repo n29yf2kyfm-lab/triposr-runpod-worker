@@ -17,8 +17,14 @@ Kept in the REPO, not a scratchpad: the container has rolled back repeatedly
 and taken scratchpad tooling with it. Anything worth running twice belongs in
 git.
 
-Blender here has no EGL, so EEVEE cannot initialise — CYCLES on CPU is the only
-engine that renders, and that has not changed.
+CORRECTED 2026-08-25: "no EGL, so EEVEE cannot initialise" was true of the
+container as shipped and is no longer true. install_blender.sh now installs
+libegl1 + mesa, and EEVEE Next renders here — verified by pixels, not by exit
+code (a 160px factory-startup frame came back with 132 unique colours and the
+default cube visible; EGL_BAD_MATCH warnings print and are non-fatal). CYCLES
+remains the engine THIS rig uses, because it is the verdict rig and its output
+is what every material ruling in CLAUDE.md was calibrated against. EEVEE is now
+available for a fast preview, not a swap-in for the eye.
 
 WHAT DID CHANGE (2026-08-21): denoising is now ON when the binary supports it.
 The container's system Blender 4.0.2 is a STRIPPED build with no
@@ -103,6 +109,49 @@ fill.rotation_euler = (math.radians(60), 0, math.radians(210))
 
 sc.render.engine = "CYCLES"
 sc.cycles.samples = SAMPLES
+
+# CYCLES DEVICE: GPU where one exists, CPU where one does not, decided by
+# PROBING rather than by assuming (2026-08-25). This rig was hardcoded to CPU,
+# which is correct for this container and wrong everywhere else — the RunPod
+# render worker has OPTIX and render/handler.py has always used it, so the same
+# sheet took minutes here that it takes seconds there, for no reason but a
+# constant.
+#
+# Same OPTIX -> CUDA -> CPU order as render/handler.py:_enable_gpu, and the same
+# reason for the order: OPTIX uses the RT cores and beats CUDA on this scene
+# class. Falls back silently and prints which branch ran — a silent fallback and
+# a working GPU produce identical frames, so the log line is the only evidence.
+# EYEBALL_DEVICE=CPU forces CPU for an A/B.
+def _pick_device():
+    want = os.environ.get("EYEBALL_DEVICE", "AUTO").upper()
+    if want == "CPU":
+        return "CPU"
+    try:
+        bpy.ops.preferences.addon_enable(module="cycles")
+    except Exception:
+        pass
+    try:
+        prefs = bpy.context.preferences.addons["cycles"].preferences
+    except Exception:
+        return "CPU"
+    for dt in ("OPTIX", "CUDA"):
+        try:
+            prefs.compute_device_type = dt
+            prefs.get_devices()
+            on = False
+            for d in prefs.devices:
+                d.use = (d.type == dt)
+                on = on or d.use
+            if on:
+                return dt
+        except Exception:
+            continue
+    return "CPU"
+
+
+_dev = _pick_device()
+sc.cycles.device = "GPU" if _dev in ("OPTIX", "CUDA") else "CPU"
+print(f"EYEBALL_DEVICE: {_dev} (cycles.device={sc.cycles.device})")
 # PROBE, don't assume. On the stripped 4.0.2 this assignment raises and we fall
 # back to the old undenoised path; on 4.5.12 it takes and the render is cleaner
 # at a third of the samples. Printing which branch ran matters — a silent
