@@ -140,11 +140,28 @@ function normaliseBodyStyle(raw: string | undefined, al: Aliases): string | unde
   return undefined;
 }
 
+// An asset's yearEnd of `null` means "we do not know when this generation
+// ended", NOT "it is still current". Treating it as 9999 was measured on
+// 2026-08-25 to affect 465 of the 1,044 live assets: every one of them passed
+// the year gate for any future year AND collected the +30 "year matched"
+// boost, so a 1967 Fiat 600 van scored a year match against a 2024 Fiat 600e.
+// The honest reading caps an open window at a generation's plausible length.
+// A car BEYOND the cap is not hard-rejected -- we genuinely do not know it is
+// wrong -- it simply stops earning the boost, so it can still serve as a
+// disclosed "representative" match and can never outrank a confirmed one.
+const OPEN_WINDOW_YEARS = 10;
+function yearWindow(a: any): { end: number; open: boolean } {
+  if (a.yearEnd != null) return { end: a.yearEnd, open: false };
+  return { end: (a.yearStart ?? 0) + OPEN_WINDOW_YEARS, open: true };
+}
+
 function inferGeneration(make: string, family: string, year: number | undefined, al: Aliases) {
   if (!year) return {};
   const gens = al.generation[`${make}/${family}`];
   if (!gens) return {};
   for (const [gen, info] of Object.entries(gens)) {
+    // The ALIAS table's open end is different from an asset's: this table is
+    // authored reference data, so a null end really does mean "current".
     if (year >= info.yearStart && year <= (info.yearEnd ?? 9999)) return { generation: gen };
   }
   return {};
@@ -161,6 +178,22 @@ const DISCLOSURES: Record<string, string> = {
     "AI-generated representative model. Exterior details may differ from the real vehicle.",
   unavailable: "A reliable 3D model is not currently available for this vehicle.",
 };
+
+// TIES MUST NOT BE BROKEN BY CATALOGUE ORDER. `sort` is stable in every
+// engine we run on, so an equal score previously handed the serve to whichever
+// asset happened to sit earlier in the file. Measured 2026-08-25: a 2021 Yaris
+// lookup scores 85 against BOTH the GR Yaris and a 2001 XP10 (the XP10 carries
+// a fabricated 2020-2026 window), so a twenty-year-old car was one array
+// position away from being served. Lower is better; every term is a property
+// we can defend to a customer.
+function tieBreak(a: any): number {
+  let r = 0;
+  if (!a.generationConfirmed) r += 8;                       // verified identity first
+  if (!a.posterUrl) r += 4;                                 // something a human has seen
+  if (a.provenance === "generated-from-reference") r += 2;   // sourced beats generated
+  if (a.accuracyGrade === "approximate") r += 1;
+  return r;
+}
 
 function scoreAsset(a: any, v: any, al: Aliases) {
   const matched: string[] = [];
@@ -188,9 +221,13 @@ function scoreAsset(a: any, v: any, al: Aliases) {
     if (!gen) return { a, score: 0, matched, rejected: "generation-conflict" };
   }
   const y = v.year;
+  const win = yearWindow(a);
   if (y && a.yearStart != null) {
-    const end = a.yearEnd ?? 9999;
-    if (y < a.yearStart - 1 || y > end + 1) return { a, score: 0, matched, rejected: "year-out-of-range" };
+    // Hard rejection still only fires on a CLOSED window, where we actually
+    // know the generation ended. An open window rejects below its start (that
+    // much is known) but never above it.
+    if (y < a.yearStart - 1) return { a, score: 0, matched, rejected: "year-out-of-range" };
+    if (!win.open && y > win.end + 1) return { a, score: 0, matched, rejected: "year-out-of-range" };
   }
   if (v.bodyStyle && a.bodyStyle && v.bodyStyle !== a.bodyStyle) {
     return { a, score: 0, matched, rejected: "body-style-conflict" };
@@ -198,7 +235,7 @@ function scoreAsset(a: any, v: any, al: Aliases) {
 
   let score = 40;
   if (gen === true) { score += 35; matched.push("generation"); }
-  if (y && a.yearStart != null && y >= a.yearStart && y <= (a.yearEnd ?? 9999)) {
+  if (y && a.yearStart != null && y >= a.yearStart && y <= win.end) {
     score += 30; matched.push("year");
   }
   if (v.bodyStyle && a.bodyStyle && v.bodyStyle === a.bodyStyle) { score += 15; matched.push("bodyStyle"); }
@@ -361,7 +398,7 @@ export async function handler(req: Request): Promise<Response> {
     .filter((a: any) => a.publicationStatus === "approved" && a.qualityGrade !== "rejected")
     .map((a: any) => scoreAsset(a, v, aliases))
     .filter((s: any) => !s.rejected)
-    .sort((x: any, y_: any) => y_.score - x.score);
+    .sort((x: any, y_: any) => y_.score - x.score || tieBreak(x.a) - tieBreak(y_.a));
 
   const best = candidates[0];
   if (!best || best.score < MIN_SCORE) {

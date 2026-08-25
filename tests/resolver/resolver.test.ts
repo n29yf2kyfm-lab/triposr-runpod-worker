@@ -158,3 +158,67 @@ describe("resolver policies", () => {
     expect(r.asset?.assetId).toBe(tiguanSuv.assetId);
   });
 });
+
+// ---------------------------------------------------------------------------
+// Phase 0 identity hardening (2026-08-25). Both cases are drawn from the LIVE
+// catalogue, not invented: 465 of 1,044 live assets carry yearEnd=null, and a
+// real 2021 Yaris lookup tied a 2001 XP10 with the GR Yaris at score 85.
+// ---------------------------------------------------------------------------
+describe("open year windows do not stretch to 9999", () => {
+  // A 1967 Fiat 600 van with no recorded end year. Under `yearEnd ?? 9999` it
+  // took the +30 "year matched" boost against a 2024 Fiat 600e.
+  const fiat600van = asset({
+    assetId: "fiat-600-1967-fw1-v1",
+    make: "fiat", model: "600", modelFamily: "600",
+    yearStart: 1967, yearEnd: null, bodyStyle: "van",
+  });
+
+  it("does not award a year match decades past an open window", () => {
+    const v = normaliseVehicle({ make: "Fiat", model: "600", manufactureYear: 2024 });
+    const r = resolveVehicle(v, [fiat600van], { minScore: 40 });
+    expect(r.matchedFields).not.toContain("year");
+  });
+
+  it("still awards a year match inside the open window", () => {
+    const v = normaliseVehicle({ make: "Fiat", model: "600", manufactureYear: 1971 });
+    const r = resolveVehicle(v, [fiat600van], { minScore: 40 });
+    expect(r.matchedFields).toContain("year");
+  });
+
+  it("does not hard-reject past an open window — we do not know it is wrong", () => {
+    const v = normaliseVehicle({ make: "Fiat", model: "600", manufactureYear: 2024 });
+    const r = resolveVehicle(v, [fiat600van], { minScore: 40 });
+    expect(r.resolutionType).toBe("representative");
+  });
+
+  it("still hard-rejects BELOW an open window's start", () => {
+    const v = normaliseVehicle({ make: "Fiat", model: "600", manufactureYear: 1950 });
+    const r = resolveVehicle(v, [fiat600van], { minScore: 40 });
+    expect(r.resolutionType).toBe("unavailable");
+  });
+});
+
+describe("score ties are not broken by catalogue order", () => {
+  // Both carry the same fabricated 2020-2026 window, so both score 85 for a
+  // 2021 lookup. The XP10 is a 2001 car; only the tie-break keeps it out.
+  const yarisXP10 = asset({
+    assetId: "toyota-yaris-2001-v1",
+    make: "toyota", model: "yaris", modelFamily: "yaris",
+    yearStart: 2020, yearEnd: 2026, bodyStyle: "hatchback",
+    sourceTitle: "2001 Toyota Yaris",
+  });
+  const yarisGR = asset({
+    assetId: "toyota-yaris-v1",
+    make: "toyota", model: "yaris", modelFamily: "yaris",
+    yearStart: 2020, yearEnd: 2026, bodyStyle: "hatchback",
+    generationConfirmed: true, posterUrl: "https://example.com/p.jpg",
+  } as any);
+
+  it("prefers the verified asset regardless of array order", () => {
+    const v = normaliseVehicle({ make: "Toyota", model: "Yaris", manufactureYear: 2021, bodyStyle: "hatchback" });
+    for (const order of [[yarisXP10, yarisGR], [yarisGR, yarisXP10]]) {
+      const r = resolveVehicle(v, order, { minScore: 40 });
+      expect(r.asset?.assetId, JSON.stringify(order.map((a) => a.assetId))).toBe(yarisGR.assetId);
+    }
+  });
+});

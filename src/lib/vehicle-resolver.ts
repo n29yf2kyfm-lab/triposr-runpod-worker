@@ -23,6 +23,34 @@ export const DISCLOSURES: Record<ResolutionType | "approximate-generated", strin
   unavailable: "A reliable 3D model is not currently available for this vehicle.",
 };
 
+// An asset's `yearEnd: null` means "we do not know when this generation
+// ended", NOT "still current". Reading it as 9999 was measured on 2026-08-25
+// to affect 465 of the 1,044 live assets: each passed the year gate for any
+// future year AND took the +30 "year matched" boost, so a 1967 Fiat 600 van
+// scored a year match against a 2024 Fiat 600e. Capping an open window at a
+// plausible generation length withholds the BOOST without hard-rejecting --
+// we do not actually know the car is wrong, so it may still serve as a
+// disclosed "representative" match, it just cannot outrank a confirmed one.
+const OPEN_WINDOW_YEARS = 10;
+function yearWindow(a: VehicleAsset): { end: number; open: boolean } {
+  if (a.yearEnd != null) return { end: a.yearEnd, open: false };
+  return { end: (a.yearStart ?? 0) + OPEN_WINDOW_YEARS, open: true };
+}
+
+// Ties must not be decided by CATALOGUE ORDER. `sort` is stable, so an equal
+// score previously served whichever asset sat earlier in the file. Measured
+// 2026-08-25: a 2021 Yaris lookup scores 85 against both the GR Yaris and a
+// 2001 XP10 (which carries a fabricated 2020-2026 window) -- a twenty-year-old
+// car was one array position from being served. Lower is better.
+function tieBreak(a: VehicleAsset): number {
+  let r = 0;
+  if (!(a as any).generationConfirmed) r += 8;
+  if (!(a as any).posterUrl) r += 4;
+  if (a.provenance === "generated-from-reference") r += 2;
+  if (a.accuracyGrade === "approximate") r += 1;
+  return r;
+}
+
 const UNAVAILABLE: VehicleResolution = {
   asset: null, score: 0, resolutionType: "unavailable",
   matchedFields: [], mismatchedFields: [], missingFields: [],
@@ -62,9 +90,14 @@ export function scoreAsset(asset: VehicleAsset, v: VehicleIdentity): Scored {
   if (gen === false) return { asset, score: 0, matched, mismatched: ["generation"], missing, rejected: "generation-conflict" };
 
   const y = v.manufactureYear ?? v.registrationYear;
+  const win = yearWindow(asset);
   if (y && asset.yearStart != null) {
-    const end = asset.yearEnd ?? 9999;
-    if (y < asset.yearStart - 1 || y > end + 1) {
+    // Hard rejection only where the window is CLOSED and we therefore know the
+    // generation ended. An open window still rejects below its start.
+    if (y < asset.yearStart - 1) {
+      return { asset, score: 0, matched, mismatched: ["year"], missing, rejected: "year-out-of-range" };
+    }
+    if (!win.open && y > win.end + 1) {
       return { asset, score: 0, matched, mismatched: ["year"], missing, rejected: "year-out-of-range" };
     }
   }
@@ -77,7 +110,7 @@ export function scoreAsset(asset: VehicleAsset, v: VehicleIdentity): Scored {
   if (gen === true) { score += 35; matched.push("generation"); }
   else if (gen === undefined && (v.generation || asset.generation)) missing.push("generation");
 
-  if (y && asset.yearStart != null && y >= asset.yearStart && y <= (asset.yearEnd ?? 9999)) {
+  if (y && asset.yearStart != null && y >= asset.yearStart && y <= win.end) {
     score += 30; matched.push("year");
   } else if (y && asset.yearStart == null) missing.push("year-range");
 
@@ -118,7 +151,7 @@ export function resolveVehicle(
     .filter((s: Scored) => !s.rejected);
 
   if (candidates.length === 0) return { ...UNAVAILABLE };
-  candidates.sort((a: Scored, b: Scored) => b.score - a.score);
+  candidates.sort((a: Scored, b: Scored) => b.score - a.score || tieBreak(a.asset) - tieBreak(b.asset));
   const best = candidates[0];
 
   if (best.score < minScore) return { ...UNAVAILABLE };
