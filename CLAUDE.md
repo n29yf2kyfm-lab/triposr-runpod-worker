@@ -253,6 +253,52 @@ that code path" is not evidence — this project has been burned by exactly that
 ruling ambiguous routes to the eye and is never a fail, so scoring it as a miss
 would tune the probe toward culling good cars.
 
+## Pixal3D proportions: too tall was known, TOO WIDE was not (2026-08-25, fresh Golf)
+
+Measured on the fresh Pixal3D Golf (998,730 faces, `--resolution 1536`), and the
+width error is four times the height error this project had already recorded:
+
+    canonical  L=1.005  H=0.370  W=0.559     H/L 0.368   W/L 0.556
+    Golf Mk8   L=4.284  H=1.456  W=1.789     H/L 0.340   W/L 0.418
+
+`canon.py`'s docstring documents the height bias (+8% here, +12% and +8% on two
+earlier cars from unrelated photographs) and corrects it with `--spec`. **The
++33% WIDTH bias was not recorded anywhere and I did not pass `--spec` on this
+run**, so the mesh that went into the seg stack was a third too wide. A car 33%
+too wide fails the rubric's FIRST criterion — "proportions read as the right car
+instantly" — from the nose and tail, while the side profile still looks right,
+which is exactly the shape of the owner's "the front end and back end look shit".
+
+**It is NOT wing mirrors, and that had to be measured rather than assumed.**
+Width band by band up the car: 0.529 / 0.547 / 0.550 / 0.551 / 0.554 / 0.548 /
+0.556 / 0.556 / 0.432 / 0.392 (fractions of length, floor to roof). The mirror
+level (bands 0.6–0.8) is 0.5564 against a door line of 0.5535 — **+0.4%**. The
+mirrors do not stand proud at all, so the published EXCL.-mirrors figure is the
+right thing to fit the full Z extent to. On a car where they DO stand proud,
+fitting Z to an excl.-mirrors width over-narrows the body by the overhang;
+`fit_spec.py` refuses above `--max-mirror-frac` (default 2%) rather than
+silently doing it.
+
+**What scaling CANNOT fix, from the same profile: there is no TUMBLEHOME.**
+Width is essentially constant from the floor to 80% of the car's height
+(0.529 → 0.556) where a real car's greenhouse is markedly narrower than its
+door line. The car is slab-sided. That is generator SHAPE, not scale, and it
+belongs with the melted-panel ceiling every open generator has hit.
+
+**DO NOT RE-RUN `canon.py` ON ITS OWN OUTPUT to add the `--spec` scale.** It
+decides POSE and SCALE in one pass, and re-running re-derives the oriented
+bounding box, whose axes carry a SIGN AMBIGUITY. On this car it returned X and
+Z both negated — a 180° rotation about Y, the car facing the other way — while
+printing `up-sign: FLIPPED` about a mesh that was already the right way up (the
+flip about X and the OBB's own sign choice cancelled, so the mesh was fine and
+the log line was not). Measured `max|B - A*s|` = **[4.284, 0.005, 1.789]**:
+full-range on X and Z, zero on Y. Harmless in isolation — canon.py says outright
+it does not resolve nose direction — but it silently invalidates every per-face
+label, prior and camera calibration computed in the first frame.
+Pose is decided ONCE, before the seg stack. Scale is a separate, later, purely
+diagonal operation: `pipeline/machine/fit_spec.py`, which does no OBB and no
+rotation and asserts face count and order are untouched so seg labels stay valid.
+
 ## RENDER-SIDE INVERSION: the mechanism, found at last (2026-08-11, Mazda wave)
 
 This file has carried "the worker flips some cars at render time (~8% measured on the
