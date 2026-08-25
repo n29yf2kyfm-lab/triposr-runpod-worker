@@ -22,6 +22,7 @@ printed after every call so that stops being an assumption.
 Run:
     python3 ox.py "question"
     python3 ox.py --file prompt.txt
+    python3 ox.py --image a.png --image b.png "what is wrong with these renders?"
     cat code.py | python3 ox.py --stdin --prefix "Review this:"
 Env: OX_MODEL (stealth/ox-alpha) · OX_MAX_TOKENS (20000) · OX_REASONING=1 to
      also print the model's reasoning trace
@@ -53,10 +54,29 @@ def load_key():
     sys.exit(f"REFUSED: OPENROUTER_API_KEY not in the environment or {ENV_FILE}")
 
 
-def ask(prompt, model=MODEL, max_tokens=MAX_TOKENS):
+def ask(prompt, model=MODEL, max_tokens=MAX_TOKENS, images=None):
+    """images: local PNG/JPG paths, inlined as data URIs.
+
+    ox-alpha's input modalities are text, image and video (checked against
+    OpenRouter's own model list rather than assumed), so a render can be handed
+    to it directly instead of described second-hand -- which matters here,
+    because every visual verdict in this project is supposed to come from
+    looking at the thing."""
     key = load_key()
+    if images:
+        import base64
+        import mimetypes
+        parts = [{"type": "text", "text": prompt}]
+        for path in images:
+            mime = mimetypes.guess_type(path)[0] or "image/png"
+            b64 = base64.b64encode(open(path, "rb").read()).decode()
+            parts.append({"type": "image_url",
+                          "image_url": {"url": f"data:{mime};base64,{b64}"}})
+        content = parts
+    else:
+        content = prompt
     body = {"model": model,
-            "messages": [{"role": "user", "content": prompt}],
+            "messages": [{"role": "user", "content": content}],
             "max_tokens": max_tokens}
     for attempt in range(4):
         try:
@@ -80,6 +100,11 @@ def ask(prompt, model=MODEL, max_tokens=MAX_TOKENS):
 
 def main():
     args = sys.argv[1:]
+    images = []
+    while "--image" in args:
+        i = args.index("--image")
+        images.append(args[i + 1])
+        del args[i:i + 2]
     prefix = ""
     if "--prefix" in args:
         i = args.index("--prefix")
@@ -99,7 +124,7 @@ def main():
     if not prompt.strip():
         sys.exit("REFUSED: empty prompt")
 
-    d = ask(prompt)
+    d = ask(prompt, images=images or None)
     ch = (d.get("choices") or [{}])[0]
     msg = ch.get("message") or {}
     content = msg.get("content")
