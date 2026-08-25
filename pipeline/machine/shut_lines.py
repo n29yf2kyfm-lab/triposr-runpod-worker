@@ -85,11 +85,33 @@ if not paint:
                      "material would cut grooves into glass or tyres")
 print(f"paint geometry: {paint}")
 
-gm = sc.geometry[paint[0]]
-V = gm.vertices.view(np.ndarray).copy()
-Ffaces = gm.faces.view(np.ndarray)
+# ENGRAVE EVERY PAINT GEOMETRY, NOT JUST THE FIRST.
+# This used to be `sc.geometry[paint[0]]`, written when the body was ONE mesh
+# ("552k faces on the paint alone", per the note above). premium.py now splits
+# the body across named parts -- measured 2026-08-25 on the Golf, the paint is
+# 7 geometries: Front_Wing_R, Front_Wing_L, Front_Bumper, Bonnet, carpaint,
+# Rear_Bumper, Rear_Hatch. Taking paint[0] engraved the RIGHT FRONT WING ONLY
+# (4,168 faces of the car) and reported success: 23 faces scored, 53 vertices
+# moved. Silent, and exactly the shape of "shipped a file identical to its
+# input while claiming a fix" that the refusal below exists to prevent.
+# The parts are concatenated for scoring so a shut line running from wing to
+# door is one connected structure, then the displacement is written back to
+# each source geometry by vertex offset.
+_parts, _off, _n = [], {}, 0
+for _nm in paint:
+    _g = sc.geometry[_nm]
+    _off[_nm] = (_n, len(_g.vertices))
+    _n += len(_g.vertices)
+    _parts.append(_g)
+V = np.vstack([g.vertices.view(np.ndarray) for g in _parts]).copy()
+_fl, _base = [], 0
+for g in _parts:
+    _fl.append(g.faces.view(np.ndarray) + _base)
+    _base += len(g.vertices)
+Ffaces = np.vstack(_fl)
 cent = V[Ffaces].mean(1)
 F = len(Ffaces)
+print(f"paint parts: {len(_parts)} geometries, {len(V)} verts, {F} faces")
 whole = trimesh.util.concatenate([g for g in sc.geometry.values()])
 CAR_DIAG = float(np.linalg.norm(whole.extents))
 print(f"{F} paint faces, car diagonal {CAR_DIAG:.3f}")
@@ -217,10 +239,19 @@ else:
     vw[cnt > 0] /= cnt[cnt > 0]
     vw[vw < MIN_SCORE] = 0.0
 
-gm.fix_normals()
-vn = gm.vertex_normals
+# Vertex normals per PART (a concatenated soup has no coherent normals), then
+# write each part's slice of the displaced block back to its own geometry.
 depth_units = DEPTH_MM / 1000.0
-gm.vertices = V - vn * (vw[:, None] * depth_units)
+vn = np.zeros_like(V)
+for _nm in paint:
+    _s, _c = _off[_nm]
+    _g = sc.geometry[_nm]
+    _g.fix_normals()
+    vn[_s:_s + _c] = _g.vertex_normals
+Vnew = V - vn * (vw[:, None] * depth_units)
+for _nm in paint:
+    _s, _c = _off[_nm]
+    sc.geometry[_nm].vertices = Vnew[_s:_s + _c]
 moved = int((vw > 0).sum())
 print(f"displaced {moved} vertices inward by up to {DEPTH_MM:.2f}mm "
       f"({100 * moved / len(V):.2f}% of paint vertices)")
