@@ -19,6 +19,7 @@ Run: blender -b --python blender_finish.py -- <in.glb> <out.glb>
 """
 import bpy
 import bmesh
+import os
 import sys
 import math
 
@@ -70,12 +71,33 @@ for o in [o for o in bpy.data.objects if o.type == 'MESH']:
         bm.to_mesh(o.data)
         bm.free()
     name = (o.data.materials[0].name if o.data.materials else o.name).lower()
-    if "carpaint" in name:
+    # THE LAPLACIAN SMOOTH IS OFF BY DEFAULT AND MUST STAY OFF FOR premium.py.
+    #
+    # Measured 2026-08-25 on the Pixal Golf, by bisecting this stage's own
+    # operations against renders of its input: the LAPLACIANSMOOTH alone shreds
+    # the nose. s10 (this stage's input) is clean; with the laplacian the front
+    # bumper, wings and A-pillar come back torn and speckled with holes; with it
+    # disabled the output matches the input exactly. Sharp-edge marking was
+    # tested in both states and is harmless either way -- I wrongly blamed it
+    # first, and the bisect corrected that.
+    #
+    # WHY it damages here when the docstring above says it is safe: that comment
+    # justifies it as "the bilateral already did the heavy lifting", and the
+    # bilateral is surface_clean.py -- a stage in machine.py's chain, which
+    # premium.py DOES NOT RUN. So in this chain a normalised, volume-preserving
+    # Laplacian is applied to a mesh that was never bilaterally filtered and
+    # still carries near-folded faces (dihedral p99 = 139.5 deg on this body).
+    # Smoothing across those collapses them.
+    #
+    # Left opt-in rather than deleted, because on a bilaterally-filtered mesh
+    # it is the panel-waviness fix it was written to be.
+    if "carpaint" in name and os.environ.get("FINISH_LAPLACIAN") == "1":
         lap = o.modifiers.new("lap", 'LAPLACIANSMOOTH')
-        lap.lambda_factor = 0.35
-        lap.iterations = 4
+        lap.lambda_factor = float(os.environ.get("FINISH_LAP_LAMBDA", "0.35"))
+        lap.iterations = int(os.environ.get("FINISH_LAP_ITERS", "4"))
         lap.use_volume_preserve = True
         lap.use_normalized = True
+        print(f"  laplacian ENABLED on {name} (FINISH_LAPLACIAN=1)")
     wn = o.modifiers.new("wn", 'WEIGHTED_NORMAL')
     wn.mode = 'FACE_AREA_WITH_ANGLE'
     wn.keep_sharp = True
