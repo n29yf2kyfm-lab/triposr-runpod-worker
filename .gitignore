@@ -16,3 +16,12 @@ pipeline/trellis/donor_wheel.glb
 # is working state, not source, and must not be committed.
 scratchpad/
 graphify-out/
+
+# Car assets belong in the car-meshes bucket, never in git. They land here by
+# accident when a `cd` into a scratch dir fails after a container rollback and
+# curl writes into the repo root instead -- which happened twice on 2026-08-25.
+# They are large binaries that are always re-downloadable from Supabase.
+*.glb
+*.gltf
+# ...except the small component-library meshes, which ARE source.
+!pipeline/components/*.glb
