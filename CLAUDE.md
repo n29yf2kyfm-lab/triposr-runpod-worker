@@ -722,6 +722,51 @@ harvest every hex-32 string, subtract the known-uid universe (candidate CSVs,
 catalogue `sourceReferenceId`s, mesh-bucket names), then validate each survivor
 against `GET /v3/me` — the only proof a string is a real token.
 
+## EIGHT LIBRARY REVIEWS HAPPENED. NONE OF THEM CHECKED IDENTITY (2026-08-25)
+
+The owner pushed back on the identity audit: the library has been reviewed
+several times already, so why review it again. They are right that it was
+reviewed, and the pushback was worth taking seriously — so here is the measured
+answer, mined from the `quarantineReason` fields, which are this project's real
+audit fossil record.
+
+**352 entries carry a recorded quarantine reason, across 8 dated passes**
+(2026-07-23, 07-29, 07-30, 08-02, 08-04, 08-08, 08-10, 08-11 — the last alone
+covering 208 cars). Classifying what each reason was ABOUT:
+
+    paint / material                  233
+    glazing / opaque                  209
+    flat / clay shell                 125
+    tyres                              99
+    wheels / rims                      47
+    geometry / mesh                    20
+    IDENTITY (year/generation/body)     6
+
+**Every pass was a MATERIALS pass.** And 4 of those 6 identity hits are not
+identity checks at all — they are the 2026-07-30 mesh-swap incident, where
+desktopGlbUrl files were overwritten with a different car entirely (alfa-romeo-
+brera-v1 serving a Kia Niro, audi-q5-2022-v1 serving a Fiat 500e, and so on).
+
+**Exactly ONE was a real identity ruling**, and it is the same defect as the
+Yaris saloon, caught by the owner's eye and never followed up systematically:
+
+    suzuki-swift-2022-w7-v1 — "not a UK Swift. The model is the Suzuki Dzire,
+    the booted Indian-market saloon; rear badge reads DZIRE. Filed under Swift
+    it would mis-serve a UK lookup."
+
+So an identity audit is NOT a re-review. `glass_probe`, `glass_topo`, the tyre
+checks and the flat-shell test are all blind to a 2001 car stamped 2020-2026 or
+a saloon filed as a hatchback, by construction — they measure how a car renders,
+never which car it is.
+
+**Method note for the next agent:** the transcripts are NOT a durable record.
+Only ONE session .jsonl survives on this machine; the rollbacks took the others,
+so "go back and read the last three months of sessions" is not possible here.
+CLAUDE.md and the `quarantineReason` strings are what persist. Mine the reasons
+when you need to know what has already been checked — they carry the date, the
+criterion and the evidence, and they cannot be lost to a rollback because they
+live in the published catalogue.
+
 ## IDENTITY, NOT MATERIALS, IS THE UNGATED FAILURE (2026-08-25, Yaris 12-plate)
 
 Asked for "a Toyota Yaris, 12 plate" (= 2012, XP130). We cannot serve one. Chasing
