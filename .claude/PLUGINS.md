@@ -74,8 +74,12 @@ config schema is how a hook silently does nothing.
 ## 5. OmniRoute — HELD, and this is the one to think hardest about
 
 Self-hosted with no default cloud endpoint (`http://localhost:20128/v1`), zero
-telemetry by default — better than the "1.6B free tokens" banner implies. The
-objection is what it is *for*: it fans requests out to 350 upstream providers,
+telemetry by default — better than the "1.6B free tokens" banner implies. What
+it actually does is stated plainly in the video's own companion notes: *"installs
+locally and makes Claude Code communicate with OmniRoute instead of going
+directly to Anthropic."* It replaces the endpoint.
+
+The objection is what it is *for*: it fans requests out to 350 upstream providers,
 90+ of them free tiers. **OmniRoute does not document the retention or training
 policy of any upstream provider** — its own README leaves that to the reader,
 per-provider. Pointing Claude Code at it in this repo would send prompts
@@ -93,3 +97,13 @@ Four of the five are real and two are genuinely good. But a plugin loads in
 every session next to five live credentials, so each one is read before it is
 installed — the same rule that was applied to graphify when it arrived the same
 way, and the reason graphify runs `--code-only`.
+
+## Confirmed: the list is exactly five
+
+The video's companion notes ([gist](https://gist.github.com/hudsonbrendon/818e84cd81bcc215a3ad00286b04af82))
+name the same five and no others — OmniRoute, Claude Mem, Headroom, Claude Code
+Setup, Task Observer. Later frames in the video ("IT CONNECTS TO", the orange
+mascot, the ASCII loop in a `claude-code — zsh` window) belong to the OmniRoute
+segment leading into its 251-provider grid; they do not introduce a sixth
+plugin. Checked rather than assumed: OmniRoute's own mark is a diamond, not that
+mascot, so the graphic is the video's, not a product logo.
