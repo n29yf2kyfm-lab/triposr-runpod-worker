@@ -41,7 +41,34 @@ TRELLIS = os.path.join(HERE, "..", "trellis")
 SB = "https://tfkvthprsntexrcuqpyd.supabase.co"
 
 
+# THE MACHINE'S BLENDER STAGES ARE PINNED TO 4.5.x, DELIBERATELY.
+#
+# Blender 5.2 breaks seg_views.py in FIVE separate ways, found one at a time by
+# running it:
+#   1. `scene.node_tree` removed -> `scene.compositing_node_group`, a node group
+#      that must be created and assigned
+#   2. `CompositorNodeComposite` removed -> the group's own NodeGroupOutput
+#   3. `CompositorNodeOutputFile.base_path` -> `.directory`
+#   4. `.file_slots` -> `.file_output_items`
+#   5. the file format enum no longer accepts 'OPEN_EXR', only
+#      'OPEN_EXR_MULTILAYER' -- which would ALSO break seg_project's depth
+#      reader, since it expects single-layer EXRs at a known filename
+#
+# The first four are shimmed in seg_views.py and cost nothing to keep. The fifth
+# is not a shim, it is a port of the depth path, and a silently wrong depth
+# buffer would poison every label this stage produces. This chain was proven on
+# 4.x; it stays there until someone ports and RE-VALIDATES it against a known
+# car. 5.2 remains the default for everything else via the shim.
+BLENDER = os.environ.get("MACHINE_BLENDER",
+                         "/opt/blender-4.5.12-linux-x64/blender")
+
+
 def sh(cmd, **kw):
+    if cmd and cmd[0] == "blender":
+        env = dict(os.environ)
+        if os.path.exists(BLENDER):
+            env["BLENDER_BIN"] = BLENDER
+        kw.setdefault("env", env)
     print("+", " ".join(cmd), flush=True)
     subprocess.run(cmd, check=True, **kw)
 
