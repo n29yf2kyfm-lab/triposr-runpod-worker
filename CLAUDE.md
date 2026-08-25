@@ -994,6 +994,28 @@ write the value into the repo; `/root/.alam3d_env`, mode 600, only.
 **And re-check the mode.** The 2026-08-01 rollback reset this file to 644.
 `chmod 600` after every restore.
 
+## graphify now self-repairs after a rollback — do NOT reinstall it by hand (2026-08-25)
+
+`.claude/settings.json` + `.claude/hooks/session-start.sh` are COMMITTED, so every
+new session clones them and the hook fires before the first turn: pip-installs
+`graphifyy` if absent, runs `graphify install --platform claude` so `/graphify`
+resolves, and rebuilds `graphify-out/graph.json`. 12s cold, 2s warm (incremental
+manifest cache). Async — the session opens immediately. Also packaged as a plugin
+at `.claude/plugins/graphify-auto/` for other repos.
+
+This is the pattern to copy for anything else that must survive a rollback: a
+machine-local install does not, a committed hook does. Origin has survived all
+fourteen rollbacks; `~/.claude/` has survived none.
+
+**The `--code-only --no-cluster` flags are a SECURITY constraint, not a speed
+one.** graphify's `--backend gemini|kimi|claude|openai|deepseek|ollama` modes POST
+repo source to a third-party vendor, and clustering ends in an LLM
+community-naming call that auto-detects whatever API key is in the env — this
+container holds `SB_KEY`, `RUNPOD_API_KEY` and `SKETCHFAB_TOKENS`. Never relax
+them in the hook. `graphify claude install` is also deliberately not run: it
+appends to this file and installs a PreToolUse hook. Verified by a full cold run
+that this file is untouched; only `~/.claude/CLAUDE.md` gets written.
+
 ## Ephemeral container — assume local disk will be lost (learned 2026-07-31)
 
 This container reverted to an earlier snapshot **four times in one session**,
