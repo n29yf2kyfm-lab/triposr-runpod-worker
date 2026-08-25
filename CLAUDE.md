@@ -299,6 +299,81 @@ Pose is decided ONCE, before the seg stack. Scale is a separate, later, purely
 diagonal operation: `pipeline/machine/fit_spec.py`, which does no OBB and no
 rotation and asserts face count and order are untouched so seg labels stay valid.
 
+## THE SEG VIEW SET NEVER LOOKED UP AT THE CAR (2026-08-25, fresh Golf)
+
+`seg_views.py` rendered ten views and every one of them looked DOWN: elevation
++18 at eight azimuths, plus two at +40. Nothing in the pipeline had ever
+questioned it. On the fresh Pixal Golf only **18.6% of faces were ever "seen"**
+(the earlier Pixal Golf managed 57%), everything unseen defaults to `interior`,
+and `seg_assemble` paints interior dark matte — so the finished car came back
+with **black blotching down the sills and across both bumpers** and looked
+plainly WORSE than the raw generator mesh.
+
+**The material-ID render is what found it, and it is the cheap standard move:**
+rewrite each material to a flat colour by a glTF JSON edit (BIN verbatim) and
+render. With interior = magenta the fault was unmistakable — magenta on the
+rockers, both bumpers, the arch surrounds and the lower doors. All of it outer
+surface. A beauty render only says "damaged"; the matID says which label did it.
+
+**MECHANISM: a surface near-parallel to the view ray has a huge depth GRADIENT
+across one pixel**, so its face centroid fails seg_project's absolute z-buffer
+test. Sills, rocker panels, bumper valances and arch inner lips are grazing in
+every downward view, so they were never anybody's visible surface.
+
+**A RIVAL THEORY WAS TESTED AND KILLED FIRST** (the "prove the rival" rule):
+coincident double sheets z-fighting between body and interior. Measured 3,871
+coincident faces by centroid and **none of them cross materials**. Not it.
+
+**LOOSENING `SEG_DEPTH_TOL_FRAC` RECOVERS THE FACES AND IS THE WRONG FIX.**
+Measured sweep: 0.0025 -> 18.6% seen, glass 4.16% of area; 0.006 -> 26.1%,
+4.79%; 0.015 -> 39.4%, **6.36%**. That tolerance was tightened deliberately
+because a loose one lets surfaces BEHIND the glazing pass as visible — it
+trades a bumper defect for a glazing defect, and the glass share climbing with
+it is the tell.
+
+**FIX: eight extra views at elevation −6**, which see those surfaces face-on.
+`SEG_VIEWS_SPEC="az:el,..."` and `SEG_VIEW_OFFSET` extend an existing view set
+without re-masking what it already has (masks are ~25 min on CPU for ten views).
+Result, and note WHICH numbers moved:
+
+    exterior seen   18.6% -> 25.2%      body   13.86% -> 19.31%
+    wheel            1.59% -> 2.53%     glass   3.08% ->  3.28%  (band gate PASS both)
+
+Body +39%, wheels +59%, **glass essentially flat** — the signature of recovering
+real exterior rather than loosening the test. The low views also detect far more
+wheel: 7-9 DINO boxes per view against 2-5 from the equivalent high views.
+
+**AND THE CABIN DID NOT LEAK — I read the matID wrong and the measurement
+corrected me.** The lighter patches inside the DLO looked like new body label
+behind the glass. Counted properly (body faces in the cabin height band, well
+inboard of the flanks): **23,061 (10 views) vs 23,007 (18 views)** — flat in
+absolute terms while body grew 39%, i.e. it is a PRE-EXISTING leak in both
+passes, not something the low views introduced. A render read is a candidate
+finder; the count is the verdict.
+
+**Container limit paid for while diagnosing:** a `trimesh.proximity` convex-hull
+query over 998,730 face centroids was OOM-killed at 12.7 GB RSS. Chunk it or use
+a cheaper test.
+
+## PAIR `glass_probe` WITH `glass_topo` — blind spot #3, reproduced (2026-08-25)
+
+The machine's Golf scored `clear / proven`, no flat shell, no alpha shell, and
+passed the glass AREA band at 4.33%. Its glazing is **124 components with 313
+boundary loops and 189 holes.** Perforated fragment soup that the probe cannot
+see, because the probe reads the material TABLE and never asks how much surface
+carries it, or whether that surface is one piece.
+
+This is the same root cause as the two blind spots already recorded (a windscreen
+aperture filled with `carpaint`; glazing cut to 2.5% of its area). Three
+independent attacks, one cause. **Material + area + integrity are each necessary
+and none is sufficient.** `holes = boundary_loops - components`; a clean pane is
+exactly one component with exactly one boundary loop.
+
+Expected on this route, and worth stating so nobody reads it as a regression:
+`seg_assemble` LABELS existing faces, it does not construct panes. The
+constructed-pane path (`glass_panes.py` / `assemble2.py`, machine v10+) is what
+gives one clean sheet per window.
+
 ## RENDER-SIDE INVERSION: the mechanism, found at last (2026-08-11, Mazda wave)
 
 This file has carried "the worker flips some cars at render time (~8% measured on the
