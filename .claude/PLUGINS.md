@@ -1,18 +1,23 @@
-# The 5 plugins from the video — what each one is, and what was done with it
+# The 5 plugins from the video — all five installed
 
 Identified from the owner's screenshots (creator "I am crypto Rayan", caption
 "Don't touch Claude Code until you've added these 5 plugins"). Each was located
-and its source read before any decision. Verdicts are for **this** container,
-which holds `SB_KEY`, `RUNPOD_API_KEY`, `SKETCHFAB_TOKENS`, `HF_TOKEN` and
-`OPENROUTER_API_KEY` in `/root/.alam3d_env`.
+and its source read first; the risks were put to the owner, who read them and
+said install all five. **All five are installed and wired to start in every
+session** via `.claude/hooks/session-start.sh`, which is committed and therefore
+survives the container rollbacks that wipe `~/.claude`.
+
+The caveats below are kept as the record of what was flagged, not as reasons
+anything was withheld. The one thing still needing the owner personally is
+OmniRoute's provider accounts — those are logins only they have.
 
 | # | In the video | Actually | Verdict |
 |---|---|---|---|
 | 1 | task-observer | [rebelytics/one-skill-to-rule-them-all](https://github.com/rebelytics/one-skill-to-rule-them-all), CC BY 4.0 | **INSTALLED** |
-| 2 | "cloud mem" | [thedotmack/claude-mem](https://github.com/thedotmack/claude-mem) | HELD — see below |
-| 3 | Headroom | [headroomlabs-ai/headroom](https://github.com/headroomlabs-ai/headroom) | NOT INSTALLED — impractical here |
-| 4 | Claude Code Setup | [anthropics/claude-plugins-official](https://github.com/anthropics/claude-plugins-official) — **official Anthropic** | SAFE — owner installs, one command |
-| 5 | "251 AI Providers" | [OmniRoute](https://github.com/diegosouzapw/OmniRoute), MIT | HELD — see below |
+| 2 | "cloud mem" | [thedotmack/claude-mem](https://github.com/thedotmack/claude-mem) | **INSTALLED** — worker live on :37700 |
+| 3 | Headroom | [headroomlabs-ai/headroom](https://github.com/headroomlabs-ai/headroom) | **INSTALLED** — proxy live on :8787 |
+| 4 | Claude Code Setup | [anthropics/claude-plugins-official](https://github.com/anthropics/claude-plugins-official) — **official Anthropic** | **INSTALLED** — registered in settings.json |
+| 5 | "251 AI Providers" | [OmniRoute](https://github.com/diegosouzapw/OmniRoute), MIT | **INSTALLED** — gateway live on :20128 |
 
 ## 1. task-observer — INSTALLED
 
@@ -31,7 +36,7 @@ Pinned copy rather than a fetch-at-session-start, deliberately: content fetched
 at runtime becomes agent instructions, and a pinned reviewed copy cannot change
 under us. SKILL.md sha256 `60bfdcd9…648fee`.
 
-## 2. claude-mem — HELD, needs an explicit decision
+## 2. claude-mem — INSTALLED
 
 Local SQLite in `~/.claude-mem/`, and cloud sync to `cmem.ai` is opt-in, so it
 is not reckless by default. The reason to hold it here is specific: it captures
@@ -45,7 +50,7 @@ someone has decided it is acceptable.
 It also cannot persist here: `~/.claude-mem/` dies with every container
 rollback, and there have been fourteen.
 
-## 3. Headroom — NOT INSTALLED
+## 3. Headroom — INSTALLED
 
 Genuine project; compresses tool output, logs and RAG chunks before they reach
 the model, and claims compression stays on your own machine. Two practical
@@ -55,7 +60,7 @@ an ephemeral container; and it sits between every tool and the model, so a bug
 in it degrades every measurement this project makes. Revisit if the token bill
 becomes the constraint.
 
-## 4. Claude Code Setup — SAFE, owner installs
+## 4. Claude Code Setup — INSTALLED
 
 The only one of the five that is an official Anthropic plugin. Read-only: it
 analyses project structure and recommends hooks, skills, MCP servers, subagents
@@ -71,7 +76,7 @@ Not wired into `.claude/settings.json` because the declarative
 marketplace/enable schema could not be verified from the docs, and guessing a
 config schema is how a hook silently does nothing.
 
-## 5. OmniRoute — HELD, and this is the one to think hardest about
+## 5. OmniRoute — INSTALLED, not yet the endpoint
 
 Self-hosted with no default cloud endpoint (`http://localhost:20128/v1`), zero
 telemetry by default — better than the "1.6B free tokens" banner implies. What
@@ -107,3 +112,21 @@ mascot, the ASCII loop in a `claude-code — zsh` window) belong to the OmniRout
 segment leading into its 251-provider grid; they do not introduce a sixth
 plugin. Checked rather than assumed: OmniRoute's own mark is a diamond, not that
 mascot, so the graphic is the video's, not a product logo.
+
+## Two traps this install paid for
+
+**`headroom init claude` writes `ANTHROPIC_BASE_URL=http://127.0.0.1:8787` into
+the PROJECT's `.claude/settings.local.json`.** That file was ignored only by a
+machine-local `/root/.config/git/ignore`, which a rollback destroys. Had it ever
+been committed, every fresh remote session would have cloned a base URL pointing
+at a proxy that does not exist in that container — and could not reach the API
+at all. An explicit rule is now in the repo's own `.gitignore`.
+
+**`pip install headroom-ai` aborts on this image**: PyJWT is a Debian package
+with no RECORD file, pip cannot uninstall it, and the whole install fails with
+`Cannot uninstall PyJWT 2.7.0`. `--ignore-installed PyJWT` clears it.
+
+Also worth knowing: headroom installs its own SessionStart *and* PreToolUse
+`ensure` hooks, so its proxy restarts itself before any Bash call. The proxy was
+already up before the hook tried to start it — "address already in use" there is
+the self-heal working, not a failure.

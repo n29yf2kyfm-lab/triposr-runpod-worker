@@ -25,3 +25,7 @@ graphify-out/
 *.gltf
 # ...except the small component-library meshes, which ARE source.
 !pipeline/components/*.glb
+
+# machine-local: headroom writes ANTHROPIC_BASE_URL here. Committing it would
+# point every fresh remote session at a proxy that is not running there.
+.claude/settings.local.json
