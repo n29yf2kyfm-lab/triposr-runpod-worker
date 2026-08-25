@@ -840,6 +840,71 @@ correct and remain necessary; they are simply downstream of an identity layer th
 was populated by a nameplate join and never verified. It surfaced because somebody
 rendered one car and looked at it.
 
+## shut_lines.py TESTED: the method is sound, the MESH is too coarse (2026-08-25)
+
+The owner pushed back on "generated cars cannot be premium" and was RIGHT to.
+`shut_lines.py` already existed, unwired, and its premise corrects mine: the
+lines are missing from the GEOMETRY, not from the DATA. The camera saw them and
+the texture carries them, so they can be recovered from evidence rather than
+invented. My kill test measured what the GENERATOR could resolve and I wrongly
+concluded the car could never carry a shut line. Different questions.
+
+**Run end to end on the premium Golf. It does not work on this car, and the
+reason is measured, not guessed.**
+
+Two bugs found first, one fixed:
+  * `gm = sc.geometry[paint[0]]` engraved ONLY THE FIRST paint geometry. Written
+    when the body was one mesh ("552k faces on the paint alone"); premium.py now
+    splits paint across SEVEN parts, so it did the right front wing (4,168
+    faces), moved 53 vertices, wrote a file and reported success. The refusal
+    below it ("shipped a file identical to its input while claiming a fix")
+    cannot fire because 23 scored faces is not zero. FIXED (commit e44122d):
+    concatenate the parts for scoring so a wing-to-door line stays one
+    structure, write back per part with per-part normals.
+  * it ran with NO exclusion masks because a rollback took torch. Without them
+    window surrounds and wheel spokes are the strongest black-hat responses on
+    the car and would have been engraved as panel gaps. It only escaped because
+    the single wing it processed has neither.
+
+**THE ACTUAL RESULT, whole body, masks present:**
+
+    196,821 paint faces      1,370 faces scored (0.70%)   2,494 verts displaced
+    render at 1.2mm: identical to input
+    render at 8.0mm (7x real depth): STILL identical
+
+Depth is not the problem. The selection is CONFETTI, not lines:
+
+    Front_Bumper  1233 verts -> 192 components, median size 3, largest 66
+    carpaint       819 verts -> 143 components, median size 3, largest 55
+
+335 disconnected islands of ~3 vertices. Displacing those makes dimples, not
+grooves — which is exactly why 8mm changes nothing.
+
+**Root cause, and it is the same number the kill test found:** the paint's
+MEDIAN EDGE IS 18.58mm. A 1.2mm groove over an 18.6mm edge tilts the triangle
+**3.7 degrees**; a crease needs ~30 to read. The 2D filter is fine — the
+`MIN_LEN=40px` length filter does keep long connected structures IN IMAGE
+SPACE — but projected onto an 18.6mm triangulation a 3mm-wide line lands on
+scattered individual faces. The 2D line survives; the 3D line cannot form.
+
+Note the docstring's premise was 552k paint faces. premium.py hands it 196k,
+because blender_finish welds and the body is decimated upstream.
+
+**THE FIX IS LOCAL SUBDIVISION, NOT MORE DEPTH.** Subdivide the scored faces
+before displacing so the groove has fine edges to sit in. This run defines the
+target precisely: turn 335 three-vertex islands into connected chains. Do NOT
+"fix" it by raising LINE_DEPTH_MM — that was tried at 8mm and changed nothing,
+and a 1.2mm gap cut 8mm deep is a gouge, not a shut line.
+
+**Method notes worth keeping** (the file records its own failed attempts, which
+saved re-running them): hunting lines in the UV TEXTURE does not work — the
+atlas is hundreds of islands and a usable threshold lit 2.05% of a 4096x4096
+texture, almost none of it a shut line; IMAGE space works. Averaging face
+scores into vertices for "soft shoulders" makes a shallow dish the shading
+cannot catch — the hard edge is the point. And the first sharp pass turned
+texture mottle into scratches while crease density rose 35.9 -> 126.7, "looked
+like a triumph; it was measuring NOISE".
+
 ## KILL TEST RUN 2026-08-25: the generated mesh CANNOT hold a shut line
 
 Stage 1 of `pipeline/machine/DECISION.md`, executed. Control is
