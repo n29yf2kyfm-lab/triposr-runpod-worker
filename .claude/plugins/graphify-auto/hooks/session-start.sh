@@ -45,6 +45,13 @@ have graphify || { echo "installing graphifyy"; pip install --quiet --disable-pi
 graphify install --platform claude >/dev/null 2>&1 || echo "WARN graphify skill install"
 graphify extract "$ROOT" --code-only --no-cluster || echo "WARN graphify extract"
 [ -s "${ROOT}/graphify-out/graph.json" ] && echo "OK graph.json $(stat -c %s "${ROOT}/graphify-out/graph.json") bytes" || echo "FAIL_NO_GRAPH"
+# graphify-out/memory/ is COMMITTED session knowledge (survives rollbacks via
+# origin). reflect is deterministic and local -- regenerate LESSONS.md against
+# the fresh graph so stale nodes drop out.
+if [ -d "${ROOT}/graphify-out/memory" ]; then
+  (cd "$ROOT" && graphify reflect --graph graphify-out/graph.json >/dev/null 2>&1) \
+    && echo "OK reflect $(ls "${ROOT}/graphify-out/memory" | wc -l) memories" || echo "WARN reflect failed"
+fi
 
 # -------------------------------------------------------------- claude-mem ---
 # Local SQLite in ~/.claude-mem. Installs its own plugin + hooks into

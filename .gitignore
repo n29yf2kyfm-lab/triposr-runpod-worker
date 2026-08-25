@@ -15,7 +15,12 @@ pipeline/trellis/donor_wheel.glb
 # /tmp/claude-0/<project>/<session>/scratchpad/ ; anything an agent drops here
 # is working state, not source, and must not be committed.
 scratchpad/
-graphify-out/
+# graph.json etc. are rebuilt by the session-start hook every session -- ignored.
+# memory/ and reflections/ are SESSION KNOWLEDGE: committed so they survive the
+# container rollbacks that wipe everything machine-local (owner order 2026-08-25).
+graphify-out/*
+!graphify-out/memory/
+!graphify-out/reflections/
 
 # Car assets belong in the car-meshes bucket, never in git. They land here by
 # accident when a `cd` into a scratch dir fails after a container rollback and
