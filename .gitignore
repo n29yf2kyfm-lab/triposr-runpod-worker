@@ -15,3 +15,4 @@ pipeline/trellis/donor_wheel.glb
 # /tmp/claude-0/<project>/<session>/scratchpad/ ; anything an agent drops here
 # is working state, not source, and must not be committed.
 scratchpad/
+graphify-out/
