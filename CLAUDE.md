@@ -2203,6 +2203,46 @@ correction stage (symmetrise, weighted normals, component wheels/lights, manual 
 cuts) on top of the best base mesh, or a licensed model. Do not re-litigate this by turning
 knobs; the knobs have been turned and measured.
 
+## graphify — installed 2026-08-25, owner asked for it EVERY session
+
+`pip install graphifyy` (PyPI package is `graphifyy`, the command is `graphify`),
+then `graphify install --platform claude` writes `~/.claude/skills/graphify/SKILL.md`.
+Reinstall after a container rollback like everything else in /opt and site-packages.
+
+Owner instruction: **use it every session.** On this repo that means building the
+graph once and querying it instead of grepping blind:
+
+    graphify .                 # build graphify-out/ for the repo
+    graphify query "..."       # ask the graph rather than re-reading files
+
+WHAT IT IS, having read the source before installing rather than after: a
+code/doc knowledge-graph builder from Graphify Labs (YC S26, MIT/dual licence,
+22MB, `safishamsi/graphify`). It arrived as a TikTok screenshot whose caption was
+follow-for-the-link engagement bait, which is why it was read first -- a skill
+that loads in every session sits alongside this container's Supabase service key,
+RunPod key and Sketchfab tokens.
+
+**KEEP IT CODE-ONLY.** Its `--backend gemini|kimi|claude|openai|deepseek|ollama`
+paths send source to an external LLM, selected by reading `GEMINI_API_KEY`,
+`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `MOONSHOT_API_KEY` or `DEEPSEEK_API_KEY`
+from the environment. None of those are in `~/.alam3d_env`, so it stays local by
+default -- do not add one without deciding that shipping this repo's source to
+that vendor is acceptable.
+
+## OPENROUTER_API_KEY is now in ~/.alam3d_env (2026-08-25)
+
+Added at the owner's instruction, mode 600, never in the repo. It reaches
+`stealth/ox-alpha` on OpenRouter, which has been used for second-opinion code
+review and is free on this key (`cost: 0`).
+
+Two facts worth not rediscovering:
+* ox-alpha is a REASONING model. The reply carries `message.reasoning` AND
+  `message.content`, and too small a `max_tokens` lets the reasoning consume the
+  whole budget and return `content: None` -- which looks like a broken call and
+  is not. Use `max_tokens: 20000`.
+* The key was pasted into chat in plaintext, so it is exposed in that transcript
+  and should be rotated at openrouter.ai when convenient.
+
 ## Product context (for fast re-grounding)
 
 - **Goal:** UK reg → premium, near-instant, interactive 3D car.
