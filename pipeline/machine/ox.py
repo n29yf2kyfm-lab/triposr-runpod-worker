@@ -78,7 +78,7 @@ def ask(prompt, model=MODEL, max_tokens=MAX_TOKENS, images=None):
     body = {"model": model,
             "messages": [{"role": "user", "content": content}],
             "max_tokens": max_tokens}
-    for attempt in range(4):
+    for attempt in range(6):
         try:
             req = urllib.request.Request(URL, data=json.dumps(body).encode(),
                                          method="POST")
@@ -87,13 +87,24 @@ def ask(prompt, model=MODEL, max_tokens=MAX_TOKENS, images=None):
             with urllib.request.urlopen(req, timeout=600) as r:
                 return json.loads(r.read())
         except urllib.error.HTTPError as e:
-            # 4xx is our mistake and will not fix itself by retrying
+            # 4xx is our mistake and will not fix itself by retrying -- EXCEPT
+            # 429, which is not our mistake at all. ox-alpha sits behind a
+            # SHARED upstream pool and returns
+            #   "stealth/ox-alpha is temporarily rate-limited upstream"
+            # with limit_source=upstream_provider_shared_pool. That is somebody
+            # else's traffic, it clears on its own, and the first version of
+            # this file exited on it immediately -- turning a wait into a
+            # failed review. Retry 429 and 5xx; give 429 a longer backoff
+            # because a shared pool does not clear in two seconds.
             detail = e.read().decode()[:400]
-            if e.code < 500 or attempt == 3:
+            if (e.code < 500 and e.code != 429) or attempt == 5:
                 sys.exit(f"OpenRouter HTTP {e.code}: {detail}")
-            time.sleep(2 ** attempt)
+            wait = (15 * 2 ** attempt) if e.code == 429 else (2 ** attempt)
+            print(f"HTTP {e.code}; retrying in {wait}s "
+                  f"(attempt {attempt + 1}/6)", file=sys.stderr)
+            time.sleep(wait)
         except Exception as e:
-            if attempt == 3:
+            if attempt == 5:
                 sys.exit(f"OpenRouter call failed: {type(e).__name__}: {e}")
             time.sleep(2 ** attempt)
 

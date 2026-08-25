@@ -722,6 +722,35 @@ harvest every hex-32 string, subtract the known-uid universe (candidate CSVs,
 catalogue `sourceReferenceId`s, mesh-bucket names), then validate each survivor
 against `GET /v3/me` — the only proof a string is a real token.
 
+## Rollback #12 (2026-08-25): the newest env var is the one that dies
+
+Another rollback, mid-request. It took the repo back to `8e9fe6e`, wiped
+`/tmp/mach` (the whole Golf working set — canon, 18 views, masks, labels, the
+finished GLB, every render), and reverted `/root/.alam3d_env` to its 9 August
+contents — which silently dropped **`OPENROUTER_API_KEY`**, the variable added
+earliest in this same session. That is the SECOND time a rollback has eaten
+exactly the most recently added variable (`SKETCHFAB_TOKENS`, 2026-08-01).
+**Treat "the newest credential is missing" as the DEFAULT expectation after any
+rollback, and check every variable by name, not just that the file exists.**
+
+Cost: zero. Everything had been pushed as it was made and every artefact
+uploaded to Supabase on completion, so recovery was `git reset --hard
+origin/<branch>`, re-download the sheets from `car-meshes/staging/golf_fresh/`,
+and re-harvest the key. This is the third time that discipline has paid for
+itself; it is not optional.
+
+**Recovering an OpenRouter key from the transcript:** the transcript at
+`/root/.claude/projects/-home-user-triposr-runpod-worker/<session>.jsonl` is
+append-only and survives. `sk-or-v1-` + 64 hex is an unambiguous format — unlike
+the Sketchfab case, where a token and a model uid are both 32 hex and the
+uid-subtraction search was needed. So a single grep is enough here. **Validate
+before writing it back**: `GET https://openrouter.ai/api/v1/key` with
+`Authorization: Bearer <k>` returns 200 plus the key's label and usage. Never
+write the value into the repo; `/root/.alam3d_env`, mode 600, only.
+
+**And re-check the mode.** The 2026-08-01 rollback reset this file to 644.
+`chmod 600` after every restore.
+
 ## Ephemeral container — assume local disk will be lost (learned 2026-07-31)
 
 This container reverted to an earlier snapshot **four times in one session**,
