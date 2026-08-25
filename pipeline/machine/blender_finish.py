@@ -18,6 +18,7 @@ recomputing normals never touches the texture mapping):
 Run: blender -b --python blender_finish.py -- <in.glb> <out.glb>
 """
 import bpy
+import bmesh
 import sys
 import math
 
@@ -35,8 +36,39 @@ for o in [o for o in bpy.data.objects if o.type == 'MESH']:
     bpy.ops.mesh.remove_doubles(threshold=1e-5)
     bpy.ops.object.mode_set(mode='OBJECT')
     bpy.ops.object.shade_smooth()
-    o.data.use_auto_smooth = True                  # Blender 4.0 API
-    o.data.auto_smooth_angle = math.radians(40)
+    # AUTO-SMOOTH MOVED IN BLENDER 4.1. `mesh.use_auto_smooth` and
+    # `mesh.auto_smooth_angle` were REMOVED and replaced by the
+    # `shade_auto_smooth` operator, which adds a "Smooth by Angle" modifier.
+    # This line was written against the container's old stripped 4.0.2 (its own
+    # comment said "Blender 4.0 API"); install_blender.sh now puts 4.5.12 in
+    # /opt, so the stage died with
+    #   AttributeError: 'Mesh' object has no attribute 'use_auto_smooth'
+    # AFTER the weld had already run -- and Blender still printed "Blender
+    # quit", which is exactly why premium.py refuses to trust an exit code and
+    # requires the BLENDER_FINISH_DONE marker instead.
+    # Both spellings are kept because this repo must run on whatever Blender
+    # install_blender.sh last put in /opt.
+    if hasattr(o.data, "use_auto_smooth"):         # Blender <= 4.0
+        o.data.use_auto_smooth = True
+        o.data.auto_smooth_angle = math.radians(40)
+    else:                                          # Blender >= 4.1
+        # NOT `bpy.ops.object.shade_auto_smooth()`. It returns success in
+        # background mode and adds NOTHING -- verified on 4.5.12: the operator
+        # reported FINISHED and `o.modifiers` was still empty, because the
+        # "Smooth by Angle" node group it appends lives in an asset library
+        # that headless Blender does not load. A silent no-op is worse here
+        # than a crash, since the crumpled-foil shading it is meant to prevent
+        # would ship looking like a mesh defect.
+        # Marking sharp edges by dihedral angle is the same thing done
+        # explicitly, with no asset dependency, and the WEIGHTED_NORMAL
+        # modifier added below already has keep_sharp=True to honour it.
+        bm = bmesh.new()
+        bm.from_mesh(o.data)
+        lim = math.radians(40)
+        for e in bm.edges:
+            e.smooth = not (len(e.link_faces) == 2 and e.calc_face_angle() > lim)
+        bm.to_mesh(o.data)
+        bm.free()
     name = (o.data.materials[0].name if o.data.materials else o.name).lower()
     if "carpaint" in name:
         lap = o.modifiers.new("lap", 'LAPLACIANSMOOTH')
