@@ -53,6 +53,19 @@ if [ -d "${ROOT}/graphify-out/memory" ]; then
     && echo "OK reflect $(ls "${ROOT}/graphify-out/memory" | wc -l) memories" || echo "WARN reflect failed"
 fi
 
+# ------------------------------------------------------- machine seg deps ---
+# Rollback #15 (2026-08-25) wiped torch mid-slice and cost a failed run:
+# seg_masks.py needs torch+transformers (GroundingDINO+SAM, CPU) and OpenEXR
+# for the depth reader. CPU wheel only — the CUDA wheel is 2.5GB of nothing on
+# this box. Blender is NOT reinstalled here (240MB tar, only render sessions
+# need it; install_blender.sh is one command when they do).
+python3 -c "import torch, OpenEXR, transformers" 2>/dev/null || {
+  echo "installing machine seg deps (torch-cpu/transformers/OpenEXR)"
+  pip install --quiet --index-url https://download.pytorch.org/whl/cpu torch || echo "WARN torch"
+  pip install --quiet transformers OpenEXR || echo "WARN transformers/OpenEXR"
+}
+python3 -c "import torch, OpenEXR, transformers" 2>/dev/null && echo "OK seg deps" || echo "WARN seg deps absent"
+
 # -------------------------------------------------------------- claude-mem ---
 # Local SQLite in ~/.claude-mem. Installs its own plugin + hooks into
 # ~/.claude; both die with a rollback, which is why this reinstalls them.
