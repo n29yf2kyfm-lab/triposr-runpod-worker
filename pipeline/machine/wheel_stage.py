@@ -416,20 +416,62 @@ def main():
                 f"skin + {len(spx)} verts from stripped wheel-labelled nodes")
         det = detect_fused_wheels(det_pts, report)
 
+    # ---- detector self-test --------------------------------------------
+    # THE REFUSAL GATE IS THE WHEELBASE, NOT THE ABSOLUTE AXLE POSITIONS.
+    #
+    # `spec.expect.axle_x` holds absolute x measured from ONE specific source
+    # body -- the V-chain hand-built Golf, and the spec file says so in its own
+    # note ("the SOURCE body's arch positions ... their span deliberately
+    # differs from wheelbase_m because the source body's arches ARE wrong").
+    # Refusing on it made this module car-specific, which is exactly what its
+    # docstring says it exists to avoid: wheel_master.py was replaced because
+    # it "carried the Golf's numbers as literals".
+    #
+    # Measured 2026-08-25 on the Pixal-generated Golf: detected axles
+    # 1.3429/-1.3241 => wheelbase 2.667 m against the published 2.619 m, i.e.
+    # 1.8% out and plainly correct -- yet it was refused, because those axles
+    # sit 96mm/68mm from where a DIFFERENT body's arches happened to be.
+    #
+    # What the gate is actually for is catching a detector that latched onto
+    # the wrong openings (merged runs, a door gap read as an arch). The
+    # invariant that catches that is the WHEELBASE: it is frame-independent,
+    # published per car, and wrong by a lot whenever the detection is wrong.
+    # axle_x is kept as a DIAGNOSTIC so the V-chain comparison is still
+    # recorded, but it no longer refuses.
     exp = spec.expect()
+    wb = spec.dim("wheelbase_m")[0] if spec.dim("wheelbase_m") else None
+    det_wb = abs(det["front_x"] - det["rear_x"])
+    if wb:
+        # 5% of a wheelbase is ~130mm on a Golf: comfortably inside any real
+        # arch-detection error, and far outside a mis-detection (a door gap
+        # read as an arch moves an axle by a quarter of the car).
+        tol_wb = float(exp.get("wheelbase_tolerance_frac", 0.05)) * wb
+        dWB = abs(det_wb - wb)
+        st = "PASS" if dWB <= tol_wb else "FAIL"
+        report["detector_self_test"] = {
+            "test": "wheelbase", "expected_m": wb, "detected_m": round(det_wb, 4),
+            "delta_m": round(dWB, 4), "tolerance_m": round(tol_wb, 4),
+            "result": st}
+        print(f"detector self-test (wheelbase): {st} — detected {det_wb:.3f} m "
+              f"vs spec {wb:.3f} m (d {dWB*1000:.0f}mm, tol {tol_wb*1000:.0f}mm)")
+        if st == "FAIL":
+            raise SystemExit(
+                f"detector self-test FAILED — detected wheelbase {det_wb:.3f} m "
+                f"is {dWB*1000:.0f}mm from the published {wb:.3f} m; the arch "
+                "detection is not trustworthy, refusing to place wheels")
+    else:
+        print("detector self-test SKIPPED — spec carries no wheelbase_m")
+        report["detector_self_test"] = {"test": "wheelbase", "result": "SKIPPED"}
+
     if exp.get("axle_x"):
-        tol = float(exp.get("tolerance_m", 0.06))
+        # diagnostic only -- body-specific, see the note above
         dF = abs(det["front_x"] - exp["axle_x"]["front"])
         dR = abs(det["rear_x"] - exp["axle_x"]["rear"])
-        st = "PASS" if (dF < tol and dR < tol) else "FAIL"
-        report["detector_self_test"] = {
-            "expected": exp["axle_x"], "tolerance_m": tol,
-            "delta_front_m": round(dF, 4), "delta_rear_m": round(dR, 4),
-            "result": st}
-        print(f"detector self-test vs spec.expect: {st} "
-              f"(dF {dF*1000:.0f}mm, dR {dR*1000:.0f}mm)")
-        if st == "FAIL":
-            raise SystemExit("detector self-test FAILED — refusing to place wheels")
+        report["axle_x_vs_reference_body"] = {
+            "reference": exp["axle_x"], "delta_front_m": round(dF, 4),
+            "delta_rear_m": round(dR, 4), "note": "diagnostic; does not gate"}
+        print(f"axle_x vs reference body (diagnostic only): "
+              f"dF {dF*1000:.0f}mm, dR {dR*1000:.0f}mm")
 
     tyre = spec.tyre()
     if tyre is None:

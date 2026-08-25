@@ -495,14 +495,62 @@ if "b_pillar_x" in exp and px_joint is not None:
         raise SystemExit(f"REFUSED: B-pillar self-test {got:.3f} vs expected "
                          f"{want:.3f} (tol {tol}) — detector does not reproduce "
                          "the spec's measured position")
-if "panes" in exp:
-    ok = len(panes) == int(exp["panes"])
-    QC["self_tests"]["pane_count"] = {"expected": int(exp["panes"]),
-                                      "measured": len(panes), "pass": bool(ok)}
-    if not ok:
-        QC["status"] = "REFUSED"
-        json.dump(QC, open(OUT.replace(".glb", "_glass_qc.json"), "w"), indent=1)
-        raise SystemExit(f"REFUSED: {len(panes)} panes vs expected {exp['panes']}")
+# ---- pane-count self-test -------------------------------------------------
+# THE GATE IS SYMMETRY AND A PLAUSIBLE BAND, NOT A LITERAL COUNT.
+#
+# `spec.expect.glass.panes` is a count measured from ONE body -- the V41 frame,
+# as that spec's own note records. Refusing on exact equality made this
+# car-agnostic stage body-specific, the same defect the wheel stage carried.
+# Measured 2026-08-25 on the Pixal-generated Golf: 8 panes, refused against an
+# expected 6 -- and the 8 are CORRECT. QC recorded "3 source components kept as
+# separate panes" on BOTH sides, i.e. front door + rear door + quarter light per
+# side, plus windscreen and rear screen. A 5-door hatch with quarter glass has
+# eight; the V41 body simply had no quarter lights.
+#
+# What this gate is actually for is catching a detection that produced garbage:
+# one unsplit blob, or fragment soup. Two invariants catch that and hold for
+# ANY car:
+#   * SYMMETRY -- a car is bilaterally symmetric, so the per-side pane counts
+#     must match. One side merged or shattered is a real detector failure and
+#     shows up here immediately.
+#   * a plausible BAND -- fewer than 4 panes means the glazing never split;
+#     more than 12 means it fragmented.
+# The spec's count is kept as a diagnostic, because a sibling body of the same
+# nameplate legitimately differs by quarter lights or a panoramic roof.
+# Parse the side key from the pane NAMES this stage emits, precisely. A loose
+# "does the name end in L/R" test counts `Glass_Rear_Screen` as a right-side
+# pane and refuses every car -- caught by running the gate against cases it
+# must NOT catch before shipping it.
+#   Glass_Side_FL / Glass_Side_RL / Glass_Side_L  -> last char is the side
+#   Glass_Quarter_L1                              -> char after the prefix
+#   Glass_Windscreen / Glass_Rear_Screen / Glass_Roof* -> not a side pane
+_side = {"L": 0, "R": 0}
+for _nm in panes:
+    _k = None
+    if _nm.startswith("Glass_Side_"):
+        _k = _nm[-1]
+    elif _nm.startswith("Glass_Quarter_"):
+        _k = _nm[len("Glass_Quarter_"):][:1]
+    if _k in _side:
+        _side[_k] += 1
+_sym = _side["L"] == _side["R"]
+_band = 4 <= len(panes) <= 12
+QC["self_tests"]["pane_count"] = {
+    "measured": len(panes), "per_side": _side,
+    "symmetric": bool(_sym), "in_band_4_12": bool(_band),
+    "spec_reference": int(exp["panes"]) if "panes" in exp else None,
+    "spec_note": "reference count from one body; diagnostic, does not gate",
+    "pass": bool(_sym and _band)}
+print(f"pane self-test: {len(panes)} panes, per-side L{_side['L']}/R{_side['R']}, "
+      f"symmetric={_sym}, in-band={_band}"
+      + (f", spec reference {exp['panes']}" if "panes" in exp else ""))
+if not (_sym and _band):
+    QC["status"] = "REFUSED"
+    json.dump(QC, open(OUT.replace(".glb", "_glass_qc.json"), "w"), indent=1)
+    why = ("per-side pane counts differ (L%d vs R%d) — the detection is not "
+           "bilaterally symmetric" % (_side["L"], _side["R"])) if not _sym else \
+          ("%d panes is outside the plausible 4-12 band" % len(panes))
+    raise SystemExit(f"REFUSED: {why}")
 
 # --------------------------------------------------------- desnake (measured cap)
 def boundary_loops(mesh):
