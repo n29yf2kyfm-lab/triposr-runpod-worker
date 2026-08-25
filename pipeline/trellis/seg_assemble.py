@@ -62,10 +62,29 @@ mats = {
     TYRE: ("Tyre_Rubber", PBRMaterial(name="Tyre_Rubber",
            baseColorFactor=[12, 12, 13, 255], metallicFactor=0.0,
            roughnessFactor=0.9)),
-    LAMP: ("Lamp_Lens", PBRMaterial(name="Lamp_Lens",
-           baseColorFactor=[15, 15, 17, 255], metallicFactor=0.0,
-           roughnessFactor=0.08)),
 }
+# THE LAMP KEEPS ITS TEXTURE — same rule as the rim below, same reason, and
+# measured the same way (Yaris PRESERVE slice, 2026-08-25). A flat dark
+# Lamp_Lens is right for a MELT car, where the lamps are undifferentiated
+# geometry and something has to make them read as lenses. On a generated mesh
+# whose baked albedo already carries correct headlamp internals, stamping that
+# material over them replaces real detail with a flat dark patch — the exact
+# error premium.py's kits made with a 356-face grille.
+#
+# Three renders settled it, all gate-passing: lamp overridden with a raw
+# projected boundary (ragged dark band across the nose), lamp overridden with
+# the new stencil (better, still a dark band), lamp left textured (reads as the
+# input's own lamp units, clean wings, no spill). Textured won clearly.
+#
+# Kept as its OWN NODE rather than merged into carpaint, deliberately: the
+# per-variant respray rebakes only the carpaint class, so a separate Lamp_Lens
+# node means a colour swap can never paint the headlamps.
+# LAMP_FLAT=1 restores the override for a melt car with no usable lamp texture.
+LAMP_FLAT = os.environ.get("LAMP_FLAT") == "1"
+if LAMP_FLAT:
+    mats[LAMP] = ("Lamp_Lens", PBRMaterial(name="Lamp_Lens",
+                  baseColorFactor=[15, 15, 17, 255], metallicFactor=0.0,
+                  roughnessFactor=0.08))
 # THE RIM KEEPS ITS TEXTURE. A flat Rim_Alloy colour is right for a SOURCED
 # car (the "never trust a wheel's own material table" rule — those ship
 # whole wheels as one pale material), but on a generated mesh whose texture
@@ -89,7 +108,9 @@ mats[UNSEEN] = ("interior", PBRMaterial(name="interior",
                 roughnessFactor=0.9))
 
 out = trimesh.Scene()
-_textured = [(BODY, "carpaint")] + ([] if RIM_FLAT else [(RIM, "Rim_Alloy")])
+_textured = ([(BODY, "carpaint")]
+             + ([] if RIM_FLAT else [(RIM, "Rim_Alloy")])
+             + ([] if LAMP_FLAT else [(LAMP, "Lamp_Lens")]))
 for key, name in _textured:
     idx = np.where(lab2 == key)[0]
     if not len(idx):
