@@ -180,7 +180,19 @@ run() {
   [ -d "$dir/lib" ] && export LD_LIBRARY_PATH="$dir/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
   exec "$bin" "$@"
 }
-if [ -n "${BLENDER_BIN:-}" ] && [ -x "${BLENDER_BIN}" ]; then run "$BLENDER_BIN" "$@"; fi
+# THE SHIM MUST NEVER EXEC ITSELF. Setting BLENDER_BIN=/usr/local/bin/blender is
+# a completely natural thing for a caller to do — it is the path `which blender`
+# reports — and the branch below would then exec this script again, forever.
+# Hit for real 2026-08-26: a chain runner exported BLENDER_BIN=$SHIM and
+# `blender --version` sat spinning for 87s inside a command substitution with no
+# output and no error, which reads exactly like a slow start rather than a hang.
+# Compare resolved paths, not strings, so a symlink or a relative path cannot
+# sneak past.
+_self="$(readlink -f "$0" 2>/dev/null || echo "$0")"
+if [ -n "${BLENDER_BIN:-}" ] && [ -x "${BLENDER_BIN}" ]; then
+  _want="$(readlink -f "$BLENDER_BIN" 2>/dev/null || echo "$BLENDER_BIN")"
+  if [ "$_want" != "$_self" ]; then run "$BLENDER_BIN" "$@"; fi
+fi
 newest="$(ls -d /opt/blender-*-linux-x64/blender 2>/dev/null | sort -V | tail -1)"
 [ -n "$newest" ] && [ -x "$newest" ] && run "$newest" "$@"
 [ -x /usr/bin/blender ] && exec /usr/bin/blender "$@"
