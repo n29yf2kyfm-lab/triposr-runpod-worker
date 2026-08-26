@@ -48,8 +48,25 @@ never have caught it; only checking the biggest decile against the expected
 windscreen did. Fenced by `_selftest()`, 5/5, which pins the decile ORDER at
 both nose directions plus the ambiguous-lamps refusal.
 
-## Open
+## RESOLVED SAME DAY: it is NOT a general van bug
 
-Whether Pixal3D's van shows the same thing is UNTESTED at time of writing — same
-seg chain, so it is expected, but it must be measured before anyone calls this a
-general machine bug rather than a TRELLIS-specific one.
+Measured on the Pixal3D 1536 van through the **same seg chain**: the glass mask
+covers **only the cabin side window and windscreen**. The cargo flank is not
+glazed. `view_00` glass **17,668 px on Pixal against 47,674 px on TRELLIS**, and
+3 DINO boxes against 4.
+
+So the defect tracks the INPUT MESH's surface quality, not the body style:
+
+* the TRELLIS cargo flank is a soft, bright, featureless slab — DINO reads it as
+  a window;
+* the Pixal cargo flank carries visible panel structure and character lines —
+  DINO reads it as bodywork.
+
+**Correction to the framing above:** the earlier expectation that Pixal would
+show the same thing was wrong, and it was worth measuring rather than assuming.
+The general lesson survives — a 2D window prompt can swallow a flat painted
+panel — but the trigger is a featureless surface, not a van.
+
+This also means `SEG_PAINT_REJECT` is not needed for the Pixal route and should
+stay off; it would additionally be operating near its fail-open floor on the red
+van, whose body luminance is low.
