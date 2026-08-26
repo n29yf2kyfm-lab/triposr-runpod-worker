@@ -134,6 +134,14 @@ def main(img, pre=PRE, name="van"):
             headers={"Authorization": f"Bearer {key}"})
         try:
             urllib.request.urlopen(req, timeout=60)
+        except urllib.error.HTTPError as e:
+            if e.code == 404:
+                # already gone (self-fuse or a hand kill won the race) — that
+                # is the GOAL state, not a failure. Pod 5's launcher printed
+                # "kill by hand" for a pod that was already dead.
+                print(f"pod {pod_id} already deleted (404) — nothing to kill")
+            else:
+                print(f"POD DELETE FAILED — kill {pod_id} by hand: {e}")
         except Exception as e:
             print(f"POD DELETE FAILED — kill {pod_id} by hand: {e}")
         else:

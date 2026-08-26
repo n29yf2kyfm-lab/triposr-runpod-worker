@@ -306,4 +306,9 @@ PY
 
 echo "=== STEP1X_OK ==="
 report "log.txt"
-sleep infinity
+# CORRECTION: an earlier commit claimed the fuse replaced sleep infinity "on
+# both paths" and it only covered die() — this line still slept forever, and
+# pod 5 sat alive after STEP1X_OK until deleted from outside (the launcher's
+# own 60s poll would have caught it; the fuse is the backstop for a dead
+# launcher, the recorded background-process-death class).
+fuse
