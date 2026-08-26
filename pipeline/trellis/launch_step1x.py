@@ -68,10 +68,17 @@ def main(img, pre=PRE, name="van"):
     put(tmplog, "log.txt", sb_key, pre)
     os.unlink(tmplog)
 
+    # 200 alone is NOT a preflight: the public URL is CDN-cached and has served
+    # a STALE boot script before (the Hi3DGen lesson -- the pod then executes
+    # last run's code while the log looks normal). The standard is 200 AND
+    # byte-identical to what we just uploaded.
     url = f"{SB}/public/{pre}/step1x_boot.sh"
-    if urllib.request.urlopen(url, timeout=30).status != 200:
-        raise SystemExit("bootstrap preflight failed")
-    print("bootstrap preflight OK")
+    served = urllib.request.urlopen(url, timeout=30).read()
+    local = open(os.path.join(HERE, "step1x_boot.sh"), "rb").read()
+    if served != local:
+        raise SystemExit(f"bootstrap preflight failed: served {len(served)}B != "
+                         f"local {len(local)}B -- CDN is stale, do not rent a GPU")
+    print(f"bootstrap preflight OK ({len(local)}B, byte-identical)")
 
     body = {
         "name": f"step1x3d-{name}",

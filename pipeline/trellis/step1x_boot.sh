@@ -199,6 +199,18 @@ from step1x3d_geometry.models.pipelines.pipeline import Step1X3DGeometryPipeline
 print("geometry pipeline imports OK — no pytorch3d/nvdiffrast/kaolin needed")
 PY
 
+# LABEL-KEY CONTRACT CHECK. The driver below conditions on
+# {"symmetry": "x", "geometry_type": ["sharp"]}. That contract lives in
+# label_encoder.py, and upstream's own examples get it wrong (they pass
+# edge_type, which the encoder never reads — it silently defaults to
+# "normal"). If upstream ever renames the key or the vocabulary, this run
+# must die HERE, not silently condition on nothing for a full generation.
+LE=/workspace/s1x/step1x3d_geometry/models/conditional_encoders/label_encoder.py
+grep -q '"geometry_type"' "$LE" || die LABEL_KEY_RENAMED
+grep -q '"sharp": 2'       "$LE" || die LABEL_VOCAB_CHANGED
+grep -q '"x": 1'           "$LE" || die SYMMETRY_VOCAB_CHANGED
+echo "label contract OK: geometry_type + sharp + x all present in encoder"
+
 stage fetch_image
 cd /workspace
 curl -fsSL "$SB/public/$PRE/$IN_NAME" -o input.png || die FETCH_INPUT
@@ -244,10 +256,22 @@ def run(sub, out, **kw):
           f"{time.time()-t0:.0f}s")
     del p; torch.cuda.empty_cache()
 
+# THE KEY IS geometry_type, NOT edge_type — AND THE REPO'S OWN DEMO HAS IT
+# WRONG. Found after pod 4's "sharp" run came back with HALF the base's sharp
+# share (0.0014 vs 0.0030) and a visibly mushier render. label_encoder.py
+# reads label["geometry_type"][0] (so the value must be a LIST) and falls back
+# to DEFAULT (="normal") when the key is absent — no error, no warning. The
+# repo's inference.py:42 and app.py:22 both pass "edge_type", which appears
+# NOWHERE on the inference path (only in training-log filename strings), so
+# upstream's published examples silently condition on geometry="normal".
+# Symmetry is the inconsistent sibling: plain string, "x" is valid — that half
+# of pod 4's label DID land.
+# Controlled A/B: the label run now differs from base ONLY in the label.
+# Pod 4 also moved max_facenum 200k->400k, which confounds sharp_share
+# (more faces = smaller triangles = shallower dihedrals) — reviewer-flagged.
 run("Step1X-3D-Geometry-1300m", "/workspace/step1x_base.glb")
 run("Step1X-3D-Geometry-Label-1300m", "/workspace/step1x_label.glb",
-    label={"symmetry": "x", "edge_type": "sharp"},
-    octree_resolution=384, max_facenum=400000)
+    label={"symmetry": "x", "geometry_type": ["sharp"]})
 PY
 INFER_RC=$?
 tail -40 /tmp/infer.out
@@ -259,8 +283,13 @@ echo "INFER_RC=$INFER_RC"
 
 stage measure
 ls -la /workspace/step1x_*.glb
+# Meshes get the same run-namespacing as the log: the stable key is what the
+# launcher fetches, the per-pod key is what a relaunch cannot clobber.
 for f in step1x_base step1x_label; do
-  [ -s /workspace/$f.glb ] && sb_file $f.glb /workspace/$f.glb
+  if [ -s /workspace/$f.glb ]; then
+    sb_file $f.glb /workspace/$f.glb || die UPLOAD_$f
+    sb_file ${f}_${RUN_ID}.glb /workspace/$f.glb || true
+  fi
 done
 python3 - <<'PY' 2>&1 | tail -20
 import trimesh, numpy as np, os
