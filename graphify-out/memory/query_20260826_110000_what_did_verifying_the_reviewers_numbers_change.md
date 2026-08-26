@@ -62,3 +62,35 @@ asking whether it is too generous: it surfaced a clamped zero, a mean-dragged
 average and an unattributed ratio in my own reporting. And checking the
 reviewer back caught two wrong inferences in theirs. Neither side should be
 taken at face value.
+
+## AND THEN ox KILLED THE LAST SURVIVING CLAIM
+
+ox's sharpest point: **"tyres stayed dark under respray" is NON-DISCRIMINATIVE**,
+because an INTERIOR-labelled tyre would also stay dark (interior is not sprayed
+either). Same artefact class as the glazing claim already retracted. It asked for
+a geometric label audit of the tyre annulus. Run:
+
+    FULL annulus              interior 65.05%   Tyre_Rubber  1.83%
+    LOWER annulus (below hub, tight lateral, unambiguously tyre)
+                              interior 85.13%   Tyre_Rubber  6.12%
+
+**Tightening the band made it WORSE, which is the signature of a real result
+rather than a loose-window artefact.** The tyres are overwhelmingly
+interior-labelled. They render black because `interior` baseColor is 0.102, not
+because `Tyre_Rubber` is bound to the tyre geometry.
+
+**So ZERO of the four bar items pass on this asset — not one.** Both legs of my
+tyre evidence (a baseColorFactor read from the file, and darkness under respray)
+were satisfiable without the label ever touching the tyre.
+
+**THE GENERAL LESSON, now three times over in one asset:** a material-table read
+plus a render appearance can BOTH be satisfied by a label that is not on the
+geometry. Glazing, paint coverage and tyres all failed this way here. The only
+instrument that settles it is a per-region LABEL AUDIT — which material carries
+the faces in the region the claim is about.
+
+## ox's other correction that stands
+
+**"64.5% on the roof" conflated UP-FACING with ROOF.** A raked windscreen is also
+up-facing. The defensible figure is the **29.6% roof-zone** share, which is
+independently confirmed by blue on the roof in the matID. Quote that one.
