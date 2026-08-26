@@ -51,10 +51,21 @@ SB="https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object"
 PRE="${S1X_PRE:-car-meshes/staging/step1x_van}"
 IN_NAME="${S1X_IN:-input.png}"
 
+# EVERY RUN USED TO WRITE THE SAME log.txt KEY, so a relaunch DESTROYED the
+# previous run's evidence. Not hypothetical: pod 4 overwrote pod 3's failure log
+# -- the only record of the pymeshlab crash this bootstrap was fixed for -- and
+# the sole surviving copy was on a box the owner's standing order says will not
+# survive. CLAUDE.md already carries this rule from the Hi3DGen deploy: "markers
+# must be RUN-ID-NAMESPACED or a previous run's heartbeat masquerades as
+# progress". Write BOTH: the stable key the launcher polls, and a per-pod key
+# that nothing later can clobber.
+RUN_ID="${RUNPOD_POD_ID:-$(date -u +%Y%m%dT%H%M%SZ)}"
 report() { ( set +x
-  curl -s -X POST -H "apikey: ${SB_KEY}" -H "Authorization: Bearer ${SB_KEY}" \
-       -H "x-upsert: true" -H "Content-Type: text/plain" \
-       --data-binary @"$LOG" "$SB/$PRE/$1" >/dev/null 2>&1 ) || true; }
+  for _k in "$1" "$(echo "$1" | sed "s/\.txt$//")_${RUN_ID}.txt"; do
+    curl -s -X POST -H "apikey: ${SB_KEY}" -H "Authorization: Bearer ${SB_KEY}" \
+         -H "x-upsert: true" -H "Content-Type: text/plain" \
+         --data-binary @"$LOG" "$SB/$PRE/$_k" >/dev/null 2>&1
+  done ) || true; }
 sb_file() { ( set +x
   curl -s -o /tmp/put.out -w "%{http_code}" -X POST \
        -H "apikey: ${SB_KEY}" -H "Authorization: Bearer ${SB_KEY}" \
