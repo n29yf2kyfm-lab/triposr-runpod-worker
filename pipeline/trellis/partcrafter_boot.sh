@@ -79,7 +79,17 @@ apt-get update -qq && apt-get install -y -qq xvfb libgl1 libglib2.0-0 2>&1 | tai
 pipq "torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cu124" /workspace/pip_torch.log || die TORCH_PIN
 python3 -c "import torch;assert torch.__version__.startswith('2.5.1')" || die TORCH_PIN_ASSERT
 pipq "torch-cluster -f https://data.pyg.org/whl/torch-2.5.1+cu124.html" /workspace/pip_cluster.log || echo "torch_cluster wheel unavailable (lazy)"
-pipq "huggingface_hub -r requirements.txt" /workspace/pip_reqs.log || die REQS
+# THE REQUIREMENTS FILE IS AT settings/requirements.txt, NOT requirements.txt.
+# Run 1 died here: I had the working script in front of me and retyped the path
+# wrong, and CLAUDE.md already records "settings/requirements.txt path" as one
+# of the four original PartCrafter bootstrap failures. Paid twice. Assert the
+# paths EXIST before handing them to pip, so a typo dies by name instead of as
+# a pip error 6 minutes into a rented pod.
+for f in settings/requirements.txt scripts/inference_partcrafter.py src; do
+  [ -e "$f" ] || { echo "MISSING EXPECTED PATH: $f"; ls -la; die REPO_LAYOUT_CHANGED; }
+done
+echo "repo layout verified: settings/requirements.txt, scripts/, src/"
+pipq "huggingface_hub -r settings/requirements.txt" /workspace/pip_reqs.log || die REQS
 
 stage fetch_input
 curl -fsSL "$SB/public/$PRE/$IN_NAME" -o /workspace/car.png || die FETCH_INPUT
