@@ -18,6 +18,16 @@ vertex:
   measurement band made the number WORSE, which is what separates a real result
   from a loose-window artefact.
 
+LAMPS ARE DELIBERATELY ABSENT FROM THIS FILE, and that is a measured decision
+rather than an omission. A `--lamps` flag was drafted to assign Lamp_Lens in the
+nose/tail zone by TEXTURE DARKNESS, on the theory that a lamp lens is dark. It
+does not separate: on the Pixal van2, 55% of the lamp zone reads below
+luminance 90 against a body-paint median of 123.6 — that is grille and bumper
+shadow, and the rule would have labelled 47,777 faces, i.e. the entire front
+end, as lens. The flag was removed rather than shipped inert. The correct fix is
+`lamp_boost.py` (DINO re-detection at threshold 0.16 with extra prompts), which
+recovered the Golf's headlamps from exactly this zero-boxes state.
+
 WHAT IT DELIBERATELY DOES NOT DO. It does not invent geometry, move vertices,
 or re-run segmentation. Face count and vertex positions are asserted unchanged;
 only which node a face belongs to changes.
@@ -108,10 +118,15 @@ def main():
                          "up-facing glazing — MEASURED TO DESTROY THE "
                          "WINDSCREEN on the Pixal van2, because a noisy "
                          "generated screen has near-horizontal normals and "
-                         "93.7% of that car's glazing sat in the cabin third "
-                         "with 73.2% of it up-facing. Opt in only with a "
+                         "93.7%% of that car's glazing sat in the cabin third "
+                         "with 73.2%% of it up-facing. Opt in only with a "
                          "render to back it.")
     ap.add_argument("--no-tyre", action="store_true")
+    ap.add_argument("--exterior", action="store_true",
+                    help="reclaim interior-labelled faces that are ON THE OUTER "
+                         "SHELL (bumpers, sills, valances) back to carpaint")
+    ap.add_argument("--grid", type=int, default=220,
+                    help="outer-shell grid resolution along the length")
     a = ap.parse_args()
 
     sc = trimesh.load(a.inp, process=False)
@@ -184,6 +199,65 @@ def main():
                 print(f"tyre-annulus: {int(m.sum())}/{len(f)} interior faces "
                       f"({100*frac:.2f}% of the interior node) -> Tyre_Rubber")
                 moves.append(("interior", "Tyre_Rubber", m))
+
+    if a.exterior:
+        # OUTER-SHELL RECLAIM. The recorded seg-visibility bug leaves
+        # grazing-angle EXTERIOR faces (bumper valances, sills, arch lips)
+        # labelled `interior`, which then take no paint under a respray -- the
+        # grey patches both reviewers saw in the colour control, and the magenta
+        # on exterior surfaces in the matID.
+        #
+        # TEST: is this face the OUTERMOST surface of the whole car in its own
+        # grid cell, along one of the outward directions? That is a property of
+        # the assembled car, needs no raycasting (O(n) by binning), and cannot
+        # be satisfied by a face buried inside the body.
+        #
+        # -Y IS DELIBERATELY EXCLUDED. The floor pan genuinely is interior and
+        # is never seen; reclaiming it would paint the underside body colour.
+        cat = []
+        for n2, g2 in sc.geometry.items():
+            v2, f2 = np.asarray(g2.vertices), np.asarray(g2.faces)
+            cat.append(v2[f2].mean(1))
+        allc = np.vstack(cat)
+        gi = sc.geometry["interior"]
+        vi, fi = np.asarray(gi.vertices), np.asarray(gi.faces)
+        ci = vi[fi].mean(1)
+        N = a.grid
+        keepmask = np.zeros(len(fi), bool)
+        zc = (lo[2] + hi[2]) / 2
+
+        def outermost(coord_axis, cell_axes, sign, tol_frac=0.01):
+            """Mark interior faces that are the extreme surface along
+            coord_axis within their (cell_axes) grid cell."""
+            ca, cb = cell_axes
+            def key(pts):
+                ia = np.clip(((pts[:, ca] - lo[ca]) / ext[ca] * N).astype(int), 0, N - 1)
+                ib = np.clip(((pts[:, cb] - lo[cb]) / ext[cb] * N).astype(int), 0, N - 1)
+                return ia * N + ib
+            kall, kint = key(allc), key(ci)
+            val_all = allc[:, coord_axis] * sign
+            best = np.full(N * N, -np.inf)
+            np.maximum.at(best, kall, val_all)
+            tol = ext[coord_axis] * tol_frac
+            return (ci[:, coord_axis] * sign) >= (best[kint] - tol)
+
+        for nm, cax, cells, sg in (("+Z flank", 2, (0, 1), +1),
+                                   ("-Z flank", 2, (0, 1), -1),
+                                   ("+X end",   0, (1, 2), +1),
+                                   ("-X end",   0, (1, 2), -1),
+                                   ("+Y roof",  1, (0, 2), +1)):
+            m2 = outermost(cax, cells, sg)
+            keepmask |= m2
+            print(f"  outer-shell {nm}: {int(m2.sum())} interior faces are the "
+                  f"outermost surface in their cell")
+        frac = keepmask.sum() / max(len(fi), 1)
+        if frac > 0.45:
+            print(f"exterior REFUSED: would move {100*frac:.1f}% of the interior "
+                  "node — that is not a shell, the grid is too coarse")
+        else:
+            print(f"exterior: {int(keepmask.sum())}/{len(fi)} interior faces "
+                  f"({100*frac:.1f}%) are outer shell -> carpaint")
+            moves.append(("interior", "carpaint", keepmask))
 
     if not moves:
         sys.exit("nothing to do")
