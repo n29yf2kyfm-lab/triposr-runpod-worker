@@ -147,4 +147,83 @@ n=$(ls "$TO"/references/*.md 2>/dev/null | wc -l)
 [ -s "$TO/SKILL.md" ] && [ "$n" -eq 3 ] && echo "OK task-observer (SKILL.md + $n refs)" \
   || echo "WARN task-observer bundle incomplete (SKILL.md + $n/3 refs)"
 
+
+# ------------------------------------------- TencentDB Agent Memory (TDAM) ---
+# Owner asked for this as a plugin in EVERY session (2026-08-26), having chosen
+# the full install including the ANTHROPIC_BASE_URL reroute after being shown
+# that the Claude Code integration is a traffic reroute, not a plugin.
+#
+# MUST STAY BELOW THE HEADROOM SECTION. Measured, not assumed:
+#   headroom init hook ensure  -> leaves ANTHROPIC_BASE_URL alone  (safe)
+#   headroom init claude       -> CLOBBERS it back to :8787
+# and this hook runs `headroom init claude` above. So TDAM re-asserts the base
+# URL afterwards. Within one sequential script that ordering is deterministic.
+#
+# THE TWO ARE CHAINED, NOT COMPETING. Only one thing can own ANTHROPIC_BASE_URL:
+#   Claude Code -> TDAM :8096 (memory inject) -> headroom :8787 (compress) -> API
+# so both features stay in the path. TDAM's upstream is headroom, set in
+# pipeline/memory/proxy.config.yaml.
+#
+# FAILS OPEN, DELIBERATELY. The base URL is only pointed at TDAM once a probe
+# proves the chain reaches Anthropic. If TDAM is down or mis-wired, headroom's
+# value is left untouched, so a broken memory stack can never cost the session
+# its API access -- this hook's own headroom note records that a wrong base URL
+# means "the session could not reach the API at all".
+TDAM_SRC="${TDAM_SRC:-/tmp/tdam_src}"
+if ! listening http://127.0.0.1:8420/health; then
+  if [ ! -d "$TDAM_SRC" ]; then
+    echo "installing TencentDB Agent Memory (~2GB node_modules, ~2min)"
+    git clone --depth 1 --branch feat/server_team \
+      https://github.com/TencentCloud/TencentDB-Agent-Memory.git "$TDAM_SRC" >/dev/null 2>&1 || echo "WARN tdam clone"
+    # npm FAILS here with "Cannot read properties of null (reading 'edgesOut')"
+    # -- MemoryCore is a pnpm-workspace package. And `pnpm run build` exits 1 on
+    # a broken upstream build:seed-v2 AFTER dist/ is already written, so its
+    # non-zero status is expected and ignored.
+    (cd "$TDAM_SRC/MemoryCore" && pnpm install --ignore-scripts >/dev/null 2>&1 && { pnpm run build >/dev/null 2>&1 || true; }) || echo "WARN tdam core deps"
+    (cd "$TDAM_SRC/MemoryProxy" && npm install --no-audit --no-fund >/dev/null 2>&1) || echo "WARN tdam proxy deps"
+  fi
+  if [ -d "$TDAM_SRC/MemoryCore" ] && [ -n "${OPENROUTER_API_KEY:-}" ]; then
+    (cd "$TDAM_SRC/MemoryCore" && \
+      TDAI_GATEWAY_CONFIG="$PWD/tdai-gateway.standalone.yaml" \
+      TDAI_LLM_API_KEY="$OPENROUTER_API_KEY" \
+      TDAI_LLM_BASE_URL="https://openrouter.ai/api/v1" \
+      TDAI_LLM_MODEL="stealth/ox-alpha" \
+      nohup node --import tsx src/gateway/server.ts >/tmp/tdam_core.log 2>&1 &)
+    sleep 18
+  else
+    echo "WARN tdam core not started (missing source or OPENROUTER_API_KEY)"
+  fi
+fi
+listening http://127.0.0.1:8420/health && echo "OK tdam core 8420" || echo "WARN tdam core down"
+
+if listening http://127.0.0.1:8420/health && ! listening http://127.0.0.1:8096/health; then
+  cp -f "${ROOT}/pipeline/memory/proxy.config.yaml" "$TDAM_SRC/MemoryProxy/config.yaml" 2>/dev/null
+  (cd "$TDAM_SRC/MemoryProxy" && nohup npm start >/tmp/tdam_proxy.log 2>&1 &)
+  sleep 20
+fi
+
+# PROVE THE CHAIN BEFORE CLAIMING THE BASE URL. A deliberately invalid key must
+# come back as Anthropic's OWN 401 body. A 404 with an empty body means the
+# upstream url lost its /v1 (joinUrl appends only "/messages").
+tdam_ok=0
+if listening http://127.0.0.1:8096/health; then
+  code=$(curl -s -o /tmp/tdam_probe.json -w "%{http_code}" --max-time 45 \
+    -X POST "http://127.0.0.1:8096/claude-code/default/v1/messages" \
+    -H "content-type: application/json" -H "x-api-key: sk-ant-deliberately-invalid-probe" \
+    -H "anthropic-version: 2023-06-01" \
+    -d '{"model":"claude-sonnet-5","max_tokens":16,"messages":[{"role":"user","content":"ping"}]}' 2>/dev/null)
+  [ "$code" = "401" ] && grep -q authentication_error /tmp/tdam_probe.json 2>/dev/null && tdam_ok=1
+fi
+if [ "$tdam_ok" = "1" ]; then
+  python3 - <<'TDAMPY' 2>/dev/null && echo "OK tdam 8096 — ANTHROPIC_BASE_URL -> TDAM -> headroom -> Anthropic" || echo "WARN tdam base url not set"
+import json, os
+p = os.path.join(os.environ.get("CLAUDE_PROJECT_DIR", "."), ".claude/settings.local.json")
+d = json.load(open(p))
+d.setdefault("env", {})["ANTHROPIC_BASE_URL"] = "http://127.0.0.1:8096/claude-code/default"
+json.dump(d, open(p, "w"), indent=2)
+TDAMPY
+else
+  echo "WARN tdam chain NOT proven — leaving ANTHROPIC_BASE_URL with headroom (fail-open)"
+fi
+
 echo "=== done $(date -u +%FT%TZ) ==="
