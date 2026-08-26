@@ -1,0 +1,47 @@
+# Minimal local config for a single-user box. Written by hand rather than
+# copying config.example.yaml wholesale: the example is a full operator
+# reference with ClickHouse/Redis/Kafka/COS sections we neither have nor want.
+server:
+  host: 127.0.0.1        # LOOPBACK ONLY. The example ships 0.0.0.0; this box
+  port: 8096             # holds five live credentials, so it does not listen wide.
+  forwardTimeoutMs: 600000
+
+upstream:
+  # Anthropic, so Claude Code keeps talking to the same models it always has.
+  # apiKey DELIBERATELY EMPTY: the config docs state a non-empty value REPLACES
+  # the Authorization header on every forwarded request, while empty PASSES
+  # THROUGH the client's own key. Passthrough means the proxy never holds or
+  # substitutes an Anthropic credential.
+  url: https://api.anthropic.com/v1   # MUST end in /v1 — joinUrl() appends only "/messages"
+  apiKey: ""
+  agents: {}
+
+auth:
+  enabled: false         # single local user; the kernel's tenant verify flow
+                         # (POST /v3/meta/auth/verify) is for multi-tenant hubs.
+
+tdai:
+  enabled: true
+  endpoint: "http://127.0.0.1:8420"
+  apiKey: "local"
+  serviceId: "default"
+  memory:
+    enabled: true
+    inject: true
+    writeL0: true
+
+injection:
+  # DEFAULT IS FALSE -- without this the proxy forwards traffic and injects
+  # nothing, i.e. it is a no-op that merely adds a hop. This is the feature.
+  enabled: true
+  injectors: ["tdai-memory"]   # skill/knowledge injectors need coreSkill +
+                               # the Hub, which are not deployed here.
+
+extraction:
+  enabled: true                # write conversation turns back into L0
+
+# NOTE: creditReport is left at its upstream default,
+# http://gateway.example.com:8000/UpdateMemoryPlusUsage -- a PLACEHOLDER
+# domain that does not resolve, which is why the startup connectivity check
+# logs "creditReport FAIL: fetch failed". Nothing is transmitted. Do not point
+# it at a real host without deciding that usage data may leave this box.
