@@ -1,5 +1,39 @@
 # Project memory — ExpertCarCheck / triposr-runpod-worker
 
+## OWNER STANDING ORDER 2026-08-26 — LOCAL NEVER SURVIVES. Read this first.
+
+Verbatim:
+
+> Never /rewind. Never restore a snapshot. Never git reset --hard unless I say
+> restore. If disk is over 70%, prune scratchpad and /tmp first. Upload
+> artefacts to the bucket, then delete the local copy. Push every commit. Do
+> not keep GLBs, sheets, or Blender extracts on this box.
+>
+> Keep that box empty. Origin and the bucket survive. Local never does.
+
+Non-negotiable, and it overrides convenience every time:
+
+* **`/rewind` is forbidden.** File checkpointing is switched OFF in
+  `~/.claude/settings.json` (`"fileCheckpointingEnabled": false`) so no
+  snapshots are taken and there is nothing for a rewind to restore from. Do not
+  turn it back on. Note `~/.claude` does NOT survive a rollback — after one,
+  set it again; it is the first thing to re-check alongside `~/.alam3d_env`.
+* **Never restore a snapshot.**
+* **`git reset --hard` requires the word "restore" from the owner.** It is the
+  correct repair for a rolled-back checkout — `local-only: 0` proves nothing
+  local is lost — but the owner decides when it runs, not me. Ask, then wait.
+* **Disk over 70% -> prune BEFORE doing anything else.** Not when it hits 93%
+  and a download fails; at 70%. The volume reaching 100% is what began the
+  rollback series in the first place.
+* **Upload the artefact, THEN delete the local copy.** Both halves. Uploading
+  and keeping it fills the disk; deleting without uploading loses it — that is
+  exactly how `polished_f34r.glb` was destroyed. Confirm the object is in the
+  bucket (list the prefix) before the `rm`.
+* **Push every commit immediately.** An unpushed commit is a lost commit.
+* **No GLBs, sheets, or Blender extracts left on this box.** Ever.
+
+The box is scratch. Origin and Supabase are the only storage.
+
 ## Credentials live in `~/.alam3d_env` — never in the repo (2026-07-31)
 
 All four secrets this project needs are kept in `/root/.alam3d_env` (mode 600,
