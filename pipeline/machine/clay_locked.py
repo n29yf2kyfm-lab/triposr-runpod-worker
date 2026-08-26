@@ -45,7 +45,12 @@ import os
 import subprocess
 import sys
 
-BLENDER = os.environ.get("BLENDER_BIN", "/opt/blender-4.5.12-linux-x64/blender")
+# Fall back to the SHIM, not a version literal: install_blender.sh writes
+# /usr/local/bin/blender pointing at whatever 4.5 LTS is installed (4.5.13 as of
+# the 2026-08-26 owner ruling; 5.x is not to be installed), and it falls back to
+# /usr/bin/blender itself. A hardcoded 4.5.12 path went stale the moment the
+# installer default moved.
+BLENDER = os.environ.get("BLENDER_BIN", "/usr/local/bin/blender")
 
 _SCRIPT = r'''
 import bpy, sys, math, json, os

@@ -58,9 +58,22 @@ SB = "https://tfkvthprsntexrcuqpyd.supabase.co"
 # is not a shim, it is a port of the depth path, and a silently wrong depth
 # buffer would poison every label this stage produces. This chain was proven on
 # 4.x; it stays there until someone ports and RE-VALIDATES it against a known
-# car. 5.2 remains the default for everything else via the shim.
-BLENDER = os.environ.get("MACHINE_BLENDER",
-                         "/opt/blender-4.5.12-linux-x64/blender")
+# car.
+#
+# OWNER RULING 2026-08-26: the pin is 4.5 LTS and 5.x is NOT to be installed.
+# The line here used to read "5.2 remains the default for everything else via
+# the shim", which is now false in both halves — the shim is 4.5.13 and nothing
+# on this box is 5.x. Corrected rather than left, because a stale comment about
+# which Blender runs is exactly what sends the next session hunting a
+# version-skew bug that does not exist.
+#
+# FALL BACK TO THE SHIM, NOT TO A VERSION LITERAL. This was pinned at
+# /opt/blender-4.5.12-linux-x64/blender, so bumping the installer to 4.5.13
+# left a default pointing at a directory that a rollback would not recreate.
+# /usr/local/bin/blender is written by install_blender.sh, resolves to whatever
+# 4.5 LTS is actually installed, and itself falls back to /usr/bin/blender — so
+# this cannot go stale on the next point release.
+BLENDER = os.environ.get("MACHINE_BLENDER", "/usr/local/bin/blender")
 
 
 def sh(cmd, **kw):

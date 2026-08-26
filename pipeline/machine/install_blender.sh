@@ -12,6 +12,7 @@
 # Measured on 2026-08-21 with the merged Golf through eyeball_views.py:
 #   4.0.2,  52 samples, no denoiser  -> visible grain across the paint
 #   4.5.12, 16 samples, DENOISED     -> visibly cleaner at 3.25x fewer samples
+#   (measured on 4.5.12; 4.5.13 is a point release in the same LTS series)
 #
 # The second reason is bigger than render quality. The free GPL Class-A add-ons
 # this project would need to hand-build car bodies -- Surface Mesh (curve-network
@@ -46,10 +47,17 @@
 # calibration those rulings rest on.
 #
 # Usage:  bash pipeline/machine/install_blender.sh [version]
-#         export BLENDER_BIN=/opt/blender-4.5.12-linux-x64/blender
+#         export BLENDER_BIN=/opt/blender-4.5.13-linux-x64/blender
 set -euo pipefail
 
-VER="${1:-4.5.12}"
+# 4.5 LTS ONLY, and the default is the point release we are pinned to.
+# Owner ruling 2026-08-26: bump 4.5.12 -> 4.5.13 LTS, do NOT install 5.x. The
+# whole material-verdict calibration in CLAUDE.md was made on Cycles under the
+# 4.5 LTS series, so a major-version jump would silently invalidate it; a point
+# release inside the same LTS does not. Availability of this exact tarball was
+# checked (HTTP 200) before the default was moved — the previous default is
+# still reachable by passing it as $1 if a bisect is ever needed.
+VER="${1:-4.5.13}"
 SERIES="$(echo "$VER" | cut -d. -f1,2)"
 DEST="/opt/blender-${VER}-linux-x64"
 URL="https://download.blender.org/release/Blender${SERIES}/blender-${VER}-linux-x64.tar.xz"
