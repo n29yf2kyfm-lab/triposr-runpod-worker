@@ -16,7 +16,7 @@ actually asked and answered.
 
 THE TWO HALVES REACH THEIR MODEL DIFFERENTLY, and that is not an oversight:
 
-  * ox   -- stealth/ox-alpha over OpenRouter, called here in-process via ox.py.
+  * ox   -- z-ai/glm-5.3-flash over OpenRouter, called here in-process via ox.py.
             Fully scriptable, so `--ox-only` is a complete run.
   * Fable 5 -- a Claude model, reached through the harness Agent tool, which a
             python process cannot call. So this module PREPARES Fable 5's
@@ -88,7 +88,7 @@ def fable_bundle(claim, evidence, images):
     a module that pretended otherwise would record a review nobody ran.
     """
     return (f"You are the second reviewer on a PRODUCTION CLAIM. The other "
-            f"reviewer is ox (stealth/ox-alpha). Do not defer to it.\n\n"
+            f"reviewer is ox (z-ai/glm-5.3-flash). Do not defer to it.\n\n"
             f"THE BAR:\n{BAR}\n\n"
             f"THE CLAIM:\n{claim}\n\n"
             f"MEASURED EVIDENCE:\n{json.dumps(evidence, indent=2)}\n\n"

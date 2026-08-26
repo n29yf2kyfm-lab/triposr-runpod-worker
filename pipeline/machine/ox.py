@@ -1,5 +1,16 @@
 #!/usr/bin/env python3
-"""ox.py — ask `stealth/ox-alpha` on OpenRouter, from the command line.
+"""ox.py — ask `z-ai/glm-5.3-flash` on OpenRouter, from the command line.
+
+MODEL CHANGED 2026-08-26. `stealth/ox-alpha` now returns HTTP 404: its testing
+period ended and OpenRouter's error body names the successor -- it WAS ZAI's
+GLM-5.3 Flash, published as `z-ai/glm-5.3-flash`. Same model, stable id. It is
+still a REASONING model (a two-token answer spent 28 reasoning tokens), so the
+20000 max_tokens default below still matters: too small a budget lets reasoning
+eat the whole allowance and return content=None, which looks like a broken call
+and is not.
+
+NOTE it is no longer free -- metered at ~$9e-06 for a trivial call. Cheap, but
+not zero, so it is now a cost line rather than a freebie.
 
 WHY A FILE AND NOT A ONE-LINER. This has been re-typed as a throwaway script
 three times and lost to a container rollback each time, and two of its failure
@@ -24,7 +35,7 @@ Run:
     python3 ox.py --file prompt.txt
     python3 ox.py --image a.png --image b.png "what is wrong with these renders?"
     cat code.py | python3 ox.py --stdin --prefix "Review this:"
-Env: OX_MODEL (stealth/ox-alpha) · OX_MAX_TOKENS (20000) · OX_REASONING=1 to
+Env: OX_MODEL (z-ai/glm-5.3-flash) · OX_MAX_TOKENS (20000) · OX_REASONING=1 to
      also print the model's reasoning trace
 """
 import json
@@ -36,7 +47,7 @@ import urllib.request
 
 ENV_FILE = "/root/.alam3d_env"
 URL = "https://openrouter.ai/api/v1/chat/completions"
-MODEL = os.environ.get("OX_MODEL", "stealth/ox-alpha")
+MODEL = os.environ.get("OX_MODEL", "z-ai/glm-5.3-flash")
 MAX_TOKENS = int(os.environ.get("OX_MAX_TOKENS", "20000"))
 SHOW_REASONING = os.environ.get("OX_REASONING", "0") == "1"
 
@@ -90,7 +101,7 @@ def ask(prompt, model=MODEL, max_tokens=MAX_TOKENS, images=None):
             # 4xx is our mistake and will not fix itself by retrying -- EXCEPT
             # 429, which is not our mistake at all. ox-alpha sits behind a
             # SHARED upstream pool and returns
-            #   "stealth/ox-alpha is temporarily rate-limited upstream"
+            #   "z-ai/glm-5.3-flash is temporarily rate-limited upstream"
             # with limit_source=upstream_provider_shared_pool. That is somebody
             # else's traffic, it clears on its own, and the first version of
             # this file exited on it immediately -- turning a wait into a

@@ -64,7 +64,7 @@ cd "$SRC/MemoryCore"
 TDAI_GATEWAY_CONFIG="$PWD/tdai-gateway.standalone.yaml" \
 TDAI_LLM_API_KEY="$OPENROUTER_API_KEY" \
 TDAI_LLM_BASE_URL="https://openrouter.ai/api/v1" \
-TDAI_LLM_MODEL="stealth/ox-alpha" \
+TDAI_LLM_MODEL="z-ai/glm-5.3-flash" \
   nohup node --import tsx src/gateway/server.ts > /tmp/tdam_core.log 2>&1 &
 sleep 20
 curl -fsS http://127.0.0.1:8420/health >/dev/null && echo "MemoryCore :8420 healthy"
