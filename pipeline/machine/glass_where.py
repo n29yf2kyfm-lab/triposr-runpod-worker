@@ -69,7 +69,8 @@ def analyse(path, glass_node="glass", lamp_node="Lamp_Lens"):
 
     g = geoms[glass_node]
     v, f = np.asarray(g.vertices), np.asarray(g.faces)
-    cen = v[f].mean(1)
+    tri = v[f]
+    cen = tri.mean(1)
     frac = (cen[:, ax] - lo[ax]) / ext[ax]
     w = _area_weights(v, f)
 
@@ -86,6 +87,20 @@ def analyse(path, glass_node="glass", lamp_node="Lamp_Lens"):
             why = (f"lamp centroid {nose_frac:.3f} is mid-body — head and tail "
                    "lamps both labelled, so it cannot mark the nose")
 
+    # ROOF SHARE — the one glazing-placement test that needs no body style.
+    # No production vehicle has a glass roof unless it is a panoramic roof, and
+    # a panel van certainly does not, so up-facing glazing high on the car is
+    # wrong for ANY input and needs no Tourneo-vs-panel-van judgement. Added
+    # after a reviewer caught the machine glazing the roof and cargo flank of
+    # the Pixal van2 while the rear-third gate read 3.16% and stayed silent:
+    # measured 64.52% of glazing up-facing and 29.61% in the roof zone.
+    nrm = np.cross(tri[:, 1] - tri[:, 0], tri[:, 2] - tri[:, 0])
+    nrm = nrm / (np.linalg.norm(nrm, axis=1, keepdims=True) + 1e-12)
+    yfrac = (cen[:, 1] - lo[1]) / ext[1]
+    up = np.abs(nrm[:, 1]) > 0.7
+    up_pct = float(w[up].sum() / w.sum() * 100)
+    roof_pct = float(w[yfrac > 0.85].sum() / w.sum() * 100)
+
     dec = [float(w[(frac >= i / 10) & (frac < (i + 1) / 10)].sum() / w.sum() * 100)
            for i in range(10)]
     # Report nose-first. Deciles are built low-frac -> high-frac, so the REVERSE
@@ -97,6 +112,8 @@ def analyse(path, glass_node="glass", lamp_node="Lamp_Lens"):
         dec = dec[::-1]
 
     out = {"file": path, "length_axis": ax,
+           "glass_up_facing_pct": round(up_pct, 2),
+           "glass_roof_zone_pct": round(roof_pct, 2),
            "extents": [round(float(x), 4) for x in ext],
            "glass_area": round(float(w.sum()), 5),
            "nose_end": nose_end, "nose_evidence": why,
@@ -108,6 +125,15 @@ def analyse(path, glass_node="glass", lamp_node="Lamp_Lens"):
         out["front_third_pct"] = round(sum(dec[:3]), 2)
         out["mid_third_pct"] = round(sum(dec[3:7]), 2)
         out["rear_third_pct"] = round(sum(dec[7:]), 2)
+        # BEHIND-CABIN is the number that matters on a van, and gating the rear
+        # third alone MISSED A REAL DEFECT. On the Pixal van2 the machine glazed
+        # the cargo flank and it landed in the MID third: rear was 3.16% (no
+        # flag) while mid was 27.21%, of which 100% sat above the beltline and
+        # 77.8% on one flank — a window band down a panel van's cargo side.
+        # A van's cargo box spans mid AND rear; a cabin ends around 0.35 of the
+        # length. Caught by a reviewer, not by this tool, which is why the tool
+        # now reports it.
+        out["behind_cabin_pct"] = round(sum(dec[4:]), 2)
     return out
 
 
@@ -121,6 +147,12 @@ def main():
 
     r = analyse(a.glb, a.glass_node, a.lamp_node)
     print(f"length axis {r['length_axis']}  extents {r['extents']}")
+    print(f"glass up-facing {r['glass_up_facing_pct']}%   "
+          f"in roof zone (top 15% of height) {r['glass_roof_zone_pct']}%")
+    if r["glass_up_facing_pct"] > 35 or r["glass_roof_zone_pct"] > 12:
+        print("  FLAG: the ROOF is carrying glass label. No body style has a "
+              "glass roof bar a panoramic one — this needs no van-vs-Tourneo\n"
+              "  judgement and is wrong for any input.")
     print(f"nose: {r['nose_end'] or 'UNKNOWN'}  ({r['nose_evidence']})")
     key = "deciles_nose_to_tail" if r["nose_end"] else "deciles_UNORIENTED"
     print(f"\nGLASS AREA by decile ({'nose -> tail' if r['nose_end'] else 'UNORIENTED'}):")
@@ -129,13 +161,17 @@ def main():
     if r["nose_end"]:
         print(f"\nfront {r['front_third_pct']}%   mid {r['mid_third_pct']}%   "
               f"rear {r['rear_third_pct']}%")
-        if r["rear_third_pct"] > 15:
+        print(f"behind cabin (from 0.4 of length back): {r['behind_cabin_pct']}%")
+        if r["behind_cabin_pct"] > 15:
             print("\nFLAG (candidate, NOT a verdict): a large share of the "
-                  "glazing sits in the rear third.\n"
-                  "  Correct on a Tourneo/minibus/estate or any car with a rear "
-                  "quarter-light.\n"
+                  "glazing sits BEHIND THE CABIN.\n"
+                  "  Correct on a Tourneo/minibus/estate or any car with rear "
+                  "side glass.\n"
                   "  WRONG on a panel van — check the SOURCE texture on that "
-                  "flank before accepting it.")
+                  "flank, and run a matID render before accepting it.\n"
+                  "  Gating the REAR THIRD alone missed exactly this: a glazed "
+                  "cargo flank can sit in the MID third and score 3.16% at the "
+                  "rear.")
     else:
         print("\nnose direction not established — deciles are unoriented and "
               "front/rear cannot be reported. Refusing to guess.")
