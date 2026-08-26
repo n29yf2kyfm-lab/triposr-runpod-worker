@@ -125,6 +125,36 @@ def classify(feat, car):
             and span[0] > 0.35 and span[1] > 0.45):
         return "canopy"
 
+    # WINDSCREEN — the HIGH-ROOF (van) case. The rule above encodes a PASSENGER
+    # CAR, where the greenhouse IS the top of the vehicle, so it demands
+    # hi[2] > 0.92. On a panel van the roof is a separate high panel and the
+    # glazing tops out just under it. Measured on the E-Transit Custom hybrid
+    # run: the real windscreen part sat at hi[2] = 0.92 EXACTLY and failed by a
+    # hair, so hybrid_transfer got zero canopy seeds -- and with no seeds its
+    # graph cut cannot create glass at all (d_can falls back to 9.0), so the
+    # run refused with glass 0.0%. The refusal was correct; the definition was
+    # the defect. Reviewer (Fable 5) found this in the code after I had wrongly
+    # reported the root cause as "PartCrafter gave no glazing".
+    #
+    # WHY THE EXTRA TESTS, and why not simply lower hi[2]: geometry_5 and
+    # geometry_13 on that van have NEARLY IDENTICAL bboxes to the windscreen
+    # (upper band, full width, hi[2] = 0.92) and carry 4.5% and 0.0% glazing
+    # area respectively -- pure roof/upper-flank skin. Lowering the ceiling
+    # alone paints them glass. What separates them is REACHING AN END of the
+    # car: a windscreen runs to the nose (lo[0] = 0.01) while roof panels start
+    # mid-body (0.47, 0.67). Validated against per-part region occupancy
+    # measured from the actual mesh: 7 of 8 correct, and the one miss
+    # (a 1%-area narrow fragment, span[1] = 0.32) fails in the SAFE direction
+    # this function's docstring asks for -- an opaque small window, not a
+    # transparent roof.
+    #
+    # Ordering matters: this sits AFTER the canopy test, so a passenger car
+    # whose fused greenhouse already matches above is untouched by construction.
+    if (lo[2] > 0.45 and hi[2] > 0.85 and span[1] > 0.45
+            and 0.02 < frac < 0.15
+            and (lo[0] < 0.10 or hi[0] > 0.90)):
+        return "canopy"
+
     # LAMP: small component at the extreme nose or tail, lamp height band,
     # offset to one side (a grille or bumper is central/full-width, a lamp is
     # not). Light bars that span the full width stay body — conservative.
