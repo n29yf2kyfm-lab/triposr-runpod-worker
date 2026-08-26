@@ -128,20 +128,46 @@ sc.camera = cam
 L = max(range(3), key=lambda i: ext[i])
 VIEWS = [("front", 0), ("front_left", 45), ("left", 90), ("rear_left", 135),
          ("rear", 180), ("rear_right", 225), ("right", 270), ("front_right", 315)]
-radius = diag * 1.35
 elev = math.radians(14)
+
+# PER-VIEW FRAME FIT — a fixed radius CLIPPED THE CAR on its first outing.
+# radius = 1.35 x diag framed the front/rear/corner views correctly and cut
+# the nose AND tail off both PURE SIDE views: an 85mm lens is ~24 deg
+# horizontal, and a 4.28m car side-on needs more standoff than its diagonal
+# suggests. Caught by the reviewer council (the Fable 5 half, eyeballing the
+# full-res frames) AFTER the sheet had been presented as "eight complete
+# views" — neither scriptable reviewer flagged it from the downscaled sheet.
+# So the fit is now computed per view from the projected bbox corners, and
+# REFUSES to write a frame whose corners do not fit: a proof render that
+# crops its subject is not a proof.
+corners_w = [mathutils.Vector((x, y, z))
+             for x in (lo.x, hi.x) for y in (lo.y, hi.y) for z in (lo.z, hi.z)]
+
+def fit_radius(a_rad):
+    from bpy_extras.object_utils import world_to_camera_view as w2cv
+    r = diag * 1.35
+    for _ in range(4):                       # converges in 2; 4 is margin
+        off = mathutils.Vector((math.cos(a_rad) * r * math.cos(elev),
+                                math.sin(a_rad) * r * math.cos(elev),
+                                r * math.sin(elev)))
+        if L == 1:
+            off = mathutils.Vector((off.y, off.x, off.z))
+        cam.location = ctr + off
+        cam.rotation_euler = (ctr - cam.location).to_track_quat("-Z", "Y").to_euler()
+        bpy.context.view_layer.update()
+        dev = max(max(abs(p.x - 0.5), abs(p.y - 0.5))
+                  for p in (w2cv(sc, cam, c) for c in corners_w))
+        if dev <= 0.44:                      # 6% margin inside the frame
+            return r, dev
+        r *= (dev / 0.44) * 1.02
+    return r, dev
+
 for name, az in VIEWS:
-    a = math.radians(az)
-    # orbit in the ground plane about the car's centre
-    off = mathutils.Vector((math.cos(a) * radius * math.cos(elev),
-                            math.sin(a) * radius * math.cos(elev),
-                            radius * math.sin(elev)))
-    if L == 1:                                     # length on Y -> swap so az0 faces an end
-        off = mathutils.Vector((off.y, off.x, off.z))
-    cam.location = ctr + off
-    cam.rotation_euler = (ctr - cam.location).to_track_quat("-Z", "Y").to_euler()
+    r, dev = fit_radius(math.radians(az))
+    if dev > 0.5:
+        raise SystemExit(f"REFUSED: view {name} cannot be framed (dev={dev:.3f})")
     sc.render.filepath = os.path.join(OUTD, f"{az:03d}_{name}.png")
     bpy.ops.render.render(write_still=True)
-    print(f"wrote {sc.render.filepath}")
+    print(f"wrote {sc.render.filepath}  radius={r:.2f} fit_dev={dev:.3f}")
 
 print("PROOF_VIEWS_DONE")
