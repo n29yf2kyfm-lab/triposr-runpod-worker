@@ -75,7 +75,18 @@ git clone --depth 1 https://github.com/wgsxm/PartCrafter.git || die CLONE
 cd PartCrafter
 
 stage deps
-apt-get update -qq && apt-get install -y -qq xvfb libgl1 libglib2.0-0 2>&1 | tail -2
+# X CLIENT LIBRARIES, not just xvfb. Run 2 died at inference with
+#   AttributeError: 'NoneType' object has no attribute 'XRenderFindVisualFormat'
+# which is pyglet failing to dlopen libXrender. CLAUDE.md records "pyrender
+# importing pyglet/X11 and needing xvfb-run" and I read that as "xvfb is
+# enough" -- it is not. xvfb provides a DISPLAY; it does not provide the client
+# .so files pyglet loads. scripts/inference_partcrafter.py imports
+# src.utils.render_utils -> pyrender AT MODULE SCOPE (line 17), so the import
+# must resolve even though we never render a preview.
+apt-get update -qq && apt-get install -y -qq \
+  xvfb libgl1 libglu1-mesa libglib2.0-0 \
+  libxrender1 libxext6 libsm6 libice6 libx11-6 libxi6 \
+  libxcursor1 libxinerama1 libxrandr2 2>&1 | tail -2
 pipq "torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cu124" /workspace/pip_torch.log || die TORCH_PIN
 python3 -c "import torch;assert torch.__version__.startswith('2.5.1')" || die TORCH_PIN_ASSERT
 pipq "torch-cluster -f https://data.pyg.org/whl/torch-2.5.1+cu124.html" /workspace/pip_cluster.log || echo "torch_cluster wheel unavailable (lazy)"
@@ -90,6 +101,18 @@ for f in settings/requirements.txt scripts/inference_partcrafter.py src; do
 done
 echo "repo layout verified: settings/requirements.txt, scripts/, src/"
 pipq "huggingface_hub -r settings/requirements.txt" /workspace/pip_reqs.log || die REQS
+
+# ASSERT THE EAGER IMPORT CHAIN BEFORE SPENDING INFERENCE MINUTES. Run 2 got
+# all the way to STAGE:infer and died on a missing X .so -- a deps problem
+# surfacing as an inference failure. Import exactly what the script imports at
+# module scope, under xvfb so the conditions match, and fail in deps instead.
+xvfb-run -a -s "-screen 0 1280x1024x24" python3 -c "
+import pyrender, pyglet, torch
+from src.utils.render_utils import render_views_around_mesh
+from src.pipelines.pipeline_partcrafter import PartCrafterPipeline
+from src.models.briarmbg import BriaRMBG
+print('eager import chain OK (pyrender/pyglet/X libs resolve)')
+" || die EAGER_IMPORTS
 
 stage fetch_input
 curl -fsSL "$SB/public/$PRE/$IN_NAME" -o /workspace/car.png || die FETCH_INPUT
