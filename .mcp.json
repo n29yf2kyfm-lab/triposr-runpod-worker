@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "rodin": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/DeemosTech/rodin-api-mcp.git",
+        "--with",
+        "mcp[cli]==1.9.4",
+        "rodin-api-mcp"
+      ]
+    }
+  }
+}

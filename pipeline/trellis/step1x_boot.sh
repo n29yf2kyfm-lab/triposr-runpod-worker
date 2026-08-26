@@ -75,6 +75,15 @@ git clone --depth 1 https://github.com/stepfun-ai/Step1X-3D s1x || die CLONE
 cd s1x
 
 stage deps
+# libOpenGL: pymeshlab's IO PLUGINS are Qt plugins linked against libOpenGL.so.0.
+# Without it `libio_base.so` -- the plugin that registers PLY/OBJ/STL -- refuses
+# to load, and pymeshlab then knows NO FILE FORMATS AT ALL. That is exactly how
+# pod 3 died: the model generated fine, all 50 diffusion steps ran, and the
+# pipeline's own remove_floater() blew up on `Unknown format for load: ply`
+# AFTER the expensive part. CLAUDE.md already records this from the Hunyuan3D-2
+# deployment ("pymeshlab's postprocess needs libOpenGL.so.0 (libopengl0) or
+# FloaterRemover dies"); it was paid a second time here.
+apt-get update -qq && apt-get install -y -qq libopengl0 libegl1 libglx0 2>&1 | tail -2
 # Pin torch to what the project is tested on AND what the torch_cluster wheel
 # index is built for. Doing this first so everything else compiles against it.
 pip install -q torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cu124 2>&1 | tail -3
@@ -104,6 +113,23 @@ python3 -c "import torch;assert torch.__version__.startswith('2.5.1'),torch.__ve
 # pytorch_lightning, which is imported at line 37 of the package __init__ — with
 # bs4 queued behind it. Scan the chain, do not read the top of a file.
 python3 -c "import diffusers,transformers,trimesh,rembg,pytorch_lightning,bs4,timm,skimage,pymeshlab,omegaconf,jaxtyping,typeguard,streaming,imageio,wandb;print('core deps ok')" || die CORE_DEPS
+
+# ...AND `import pymeshlab` PROVES NOTHING. It imports cleanly with every one of
+# its IO plugins dead, which is why the check above passed on the pod that then
+# crashed in post-processing. Exercise the ACTUAL call the pipeline makes --
+# trimesh -> temp .ply -> load_new_mesh -- so a missing plugin costs $0 instead
+# of a full generation. Same class as the udf_ext/P3-SAM preflight lessons in
+# CLAUDE.md, inverted: there the check was too strict, here it was too shallow.
+python3 - <<'PY' || die PYMESHLAB_IO
+import tempfile, os, trimesh, pymeshlab
+m = trimesh.creation.icosphere(subdivisions=1)
+p = os.path.join(tempfile.gettempdir(), "iotest.ply")
+m.export(p)
+ms = pymeshlab.MeshSet()
+ms.load_new_mesh(p)                       # the exact call trimesh2pymeshlab makes
+assert ms.current_mesh().vertex_number() == len(m.vertices)
+print("pymeshlab PLY io ok (%d verts)" % ms.current_mesh().vertex_number())
+PY
 
 # diso: lazy, but it IS the surface extractor -> a geometry run needs it.
 pip install -q diso 2>&1 | tail -3 || echo "diso pip failed"
