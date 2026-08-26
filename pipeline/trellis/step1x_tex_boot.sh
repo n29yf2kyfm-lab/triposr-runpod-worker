@@ -123,7 +123,7 @@ pipq "\
   pytorch-lightning==2.2.4 lightning-utilities==0.11.2 \
   bs4==0.0.2 beautifulsoup4 tqdm packaging \
   mosaicml-streaming==0.11.0 imageio==2.34.1 wandb==0.18.6 \
-  xatlas cupy-cuda12x" /workspace/pip_deps.log || die CORE_DEPS_INSTALL
+  xatlas cupy-cuda12x pygltflib" /workspace/pip_deps.log || die CORE_DEPS_INSTALL
 
 python3 - <<'PY' || die PYMESHLAB_IO
 import tempfile, os, trimesh, pymeshlab, importlib.metadata as md
@@ -236,10 +236,22 @@ print("nvdiffrast RasterizeCudaContext built ok")
 PY
 
 stage custom_rasterizer
+# custom_rasterizer IS VENDORED IN-REPO but is a SEPARATE package, and my AST
+# walk of the Step1X packages treated it as an external module -- so it never
+# walked INTO its source and missed its own deps. Scanned separately after run
+# 2 died on ModuleNotFoundError: pygltflib. Its full external set is
+# PIL / cv2 / scipy / pygltflib; only pygltflib was absent, and it is now in
+# the deps install above. Lesson: a module that LOOKS external but is vendored
+# needs its own import scan.
 cd /workspace/s1x/step1x3d_texture/custom_rasterizer
 pipq "--no-build-isolation ." /workspace/cr_build.log \
   || { sb_file "cr_build.log" /workspace/cr_build.log || true; die CUSTOM_RASTERIZER; }
-python3 -c "import torch, custom_rasterizer; print('custom_rasterizer ok')" || die CR_IMPORT
+# cd OUT before importing. Run 2's check ran from inside the source directory,
+# so python imported the LOCAL TREE, not the installed package -- the traceback
+# path proves it (.../custom_rasterizer/custom_rasterizer/__init__.py). It
+# happened to surface the same error, but the gate was testing the wrong thing.
+cd /workspace
+python3 -c "import torch, custom_rasterizer; print('custom_rasterizer ok', custom_rasterizer.__file__)" || die CR_IMPORT
 
 stage import_gate
 # ASSERT THE TEXTURE PIPELINE IMPORTS BEFORE SPENDING INFERENCE MINUTES. torch
