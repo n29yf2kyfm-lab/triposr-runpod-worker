@@ -79,8 +79,22 @@ pip install -q \
   "safetensors" "accelerate" "omegaconf==2.3.0" "einops==0.8.0" \
   "jaxtyping==0.2.28" "typeguard" "trimesh==4.3.2" "numpy==1.26.4" \
   "pillow==10.3.0" "scikit-image" "timm==0.9.16" "opencv-python-headless" \
-  "pymeshlab" "PyMCubes" "rembg==2.0.65" "onnxruntime" 2>&1 | tail -5
-python3 -c "import diffusers,transformers,trimesh,rembg;print('core deps ok')" || die CORE_DEPS
+  "pymeshlab" "PyMCubes" "rembg==2.0.65" "onnxruntime" \
+  "pytorch-lightning==2.2.4" "lightning-utilities==0.11.2" \
+  "bs4==0.0.2" "beautifulsoup4" "tqdm" "packaging" 2>&1 | tail -5
+
+# TORCH GUARD, again: pytorch-lightning is the classic dep that quietly moves
+# torch, and the torch_cluster wheel below is built for exactly 2.5.1+cu124.
+python3 -c "import torch;assert torch.__version__.startswith('2.5.1'),torch.__version__" \
+  || { echo "a dep MOVED TORCH — restoring the pin"; \
+       pip install -q torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cu124 2>&1 | tail -2; }
+
+# The FULL module-scope import set on the geometry pipeline chain, obtained by
+# walking it with ast LOCALLY rather than discovering one dep per rented pod.
+# The first attempt installed from a hand-read of the submodules and died on
+# pytorch_lightning, which is imported at line 37 of the package __init__ — with
+# bs4 queued behind it. Scan the chain, do not read the top of a file.
+python3 -c "import diffusers,transformers,trimesh,rembg,pytorch_lightning,bs4,timm,skimage,pymeshlab,omegaconf,jaxtyping,typeguard;print('core deps ok')" || die CORE_DEPS
 
 # diso: lazy, but it IS the surface extractor -> a geometry run needs it.
 pip install -q diso 2>&1 | tail -3 || echo "diso pip failed"
