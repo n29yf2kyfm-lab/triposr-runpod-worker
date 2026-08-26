@@ -542,15 +542,44 @@ for _nm in panes:
 # shattered side differ by two or more, and a blob or fragment soup is caught by
 # the 4-12 band regardless.
 _sym = abs(_side["L"] - _side["R"]) <= 1
-_band = 4 <= len(panes) <= 12
+# THE FLOOR IS NOT 4. It was, and that made this stage a CAR gate wearing a
+# car-agnostic docstring -- the same defect the comment above describes for the
+# spec's exact-equality count, one level up.
+#
+# Read the floor's own stated job: catch "the glazing never split", i.e. ONE
+# unsplit blob. A five-door hatch happens to give 8 panes, so 4 looked like a
+# safe floor on cars. A PANEL VAN gives THREE -- windscreen plus one door
+# window per flank -- and three is not a failed split, it is the correct answer
+# for that body. Refusing it was refusing the body style, not the detection.
+#
+# The general invariant that catches a blob without encoding a body style: the
+# greenhouse must have SPLIT, which means at least one side pane on EACH flank
+# plus a windscreen. A blob is a single pane with no per-side structure and
+# fails that immediately; fragment soup still fails the ceiling.
+#
+# Bodies this now admits that 4 refused, all legitimate:
+#   panel van   windscreen + 2 door windows            = 3   L1 R1
+#   pickup      windscreen + 2 doors + rear screen     = 4   L1 R1
+#   3-door car  windscreen + 2 doors + rear + quarters = 5-8
+# Bodies it still refuses:
+#   blob        1 pane, L0 R0            -> greenhouse never split
+#   soup        >12                      -> fragmentation
+#   half-merged L3 R1                    -> asymmetric detection
+_ceiling = 12
+_split = _side["L"] >= 1 and _side["R"] >= 1      # the greenhouse actually split
+_band = (len(panes) >= 2) and (len(panes) <= _ceiling) and _split
+# A fully panelled van (no side glazing at all) is a REAL body with L0/R0. It
+# cannot be told from a blob by counting, so it is not silently admitted here:
+# it fails _split, gets refused, and the operator sees the per-side counts in
+# the message. Handling it needs a glass-AREA test, not a pane count.
 QC["self_tests"]["pane_count"] = {
     "measured": len(panes), "per_side": _side,
-    "symmetric": bool(_sym), "in_band_4_12": bool(_band),
+    "symmetric": bool(_sym), "in_band": bool(_band), "greenhouse_split": bool(_split),
     "spec_reference": int(exp["panes"]) if "panes" in exp else None,
     "spec_note": "reference count from one body; diagnostic, does not gate",
     "pass": bool(_sym and _band)}
 print(f"pane self-test: {len(panes)} panes, per-side L{_side['L']}/R{_side['R']}, "
-      f"symmetric={_sym}, in-band={_band}"
+      f"symmetric={_sym}, in-band={_band}, split={_split}"
       + (f", spec reference {exp['panes']}" if "panes" in exp else ""))
 if not (_sym and _band):
     QC["status"] = "REFUSED"
@@ -558,7 +587,7 @@ if not (_sym and _band):
     why = ("per-side pane counts differ by more than one (L%d vs R%d) — the "
            "detection is not bilaterally symmetric" % (_side["L"], _side["R"])) \
         if not _sym else \
-          ("%d panes is outside the plausible 4-12 band" % len(panes))
+          ("%d panes, per-side L%d/R%d — the greenhouse did not split (need >=1 side pane per flank, 2..%d total)" % (len(panes), _side["L"], _side["R"], _ceiling))
     raise SystemExit(f"REFUSED: {why}")
 
 # --------------------------------------------------------- desnake (measured cap)
