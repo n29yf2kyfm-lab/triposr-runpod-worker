@@ -48,10 +48,54 @@ GAUSS_SIGMA = 2.2         # cells; the smoothing that straightens the outline
 # PLANARITY GUARD, lamp only in practice: a stencil is a PLANE fit, so it is
 # only meaningful on a region that is roughly planar. Glass always is. A lamp
 # wrapping a corner is not, and forcing a plane through it would let the
-# stencil claim body faces on the far side of the wrap. A region above this
-# RMS-out-of-plane fraction is left exactly as projected — worse boundary, but
-# never a smear onto the wing. Fail open, never fail dirty.
+# stencil claim body faces on the far side of the wrap.
+#
+# WHAT A GUARD-FAIL FALLS BACK TO — corrected 2026-08-26 after review. The first
+# version left a non-planar region EXACTLY AS PROJECTED, and that is the one
+# outcome the evidence had already rejected: raw-projected lamp was the WORST of
+# the three renders that decided seg_assemble's lamp rule ("ragged dark band
+# across the nose"). The guard was quietly reinstating the rejected artefact
+# through a back door. It now runs a MAJORITY FILTER over face adjacency
+# instead, which removes raggedness with no plane assumption at all — the right
+# tool for a multi-plane lamp assembly (lens + housing + bezel), where a single
+# global plane fit was never going to be meaningful.
+#
+# Note this is invisible on the DEFAULT path, because seg_assemble now keeps the
+# lamp textured and both sides of a ragged lamp boundary carry the same pixels.
+# It matters under LAMP_FLAT=1, where the boundary becomes a material edge.
 MAX_NONPLANAR = 0.085
+MAJORITY_ROUNDS = 3
+
+
+def majority_smooth(idx, rounds=MAJORITY_ROUNDS):
+    """Plane-free boundary cleanup: each face takes the majority label of its
+    edge neighbours. Removes single-face teeth and hairline spurs without
+    assuming the region is flat. Operates on the global `label` array."""
+    sel = np.zeros(F, bool)
+    sel[idx] = True
+    for _ in range(rounds):
+        a, b = adj[:, 0], adj[:, 1]
+        agree = np.zeros(F, np.int32)
+        total = np.zeros(F, np.int32)
+        same = label[a] == label[b]
+        np.add.at(agree, a[same], 1)
+        np.add.at(agree, b[same], 1)
+        np.add.at(total, a, 1)
+        np.add.at(total, b, 1)
+        # A face whose neighbours mostly disagree with it is a tooth.
+        # total >= 2, not >= 3: a tooth sitting on a mesh boundary or corner has
+        # only two edge neighbours and was silently skipped by the stricter gate
+        # — 1 of 6 planted teeth survived the synthetic test. The strict
+        # majority test (agree*2 < total) still protects a real 2-neighbour
+        # face, because it only flips when BOTH neighbours disagree.
+        lonely = sel & (total >= 2) & (agree * 2 < total)
+        if not lonely.any():
+            break
+        for f_ in np.where(lonely)[0]:
+            nb = np.concatenate([adj[adj[:, 0] == f_][:, 1], adj[adj[:, 1] == f_][:, 0]])
+            if len(nb):
+                label[f_] = Counter(label[nb]).most_common(1)[0][0]
+    return int(sel.sum())
 
 
 def stencil_class(cls, min_region, max_nonplanar=None, gauss=GAUSS_SIGMA,
@@ -99,8 +143,9 @@ def stencil_class(cls, min_region, max_nonplanar=None, gauss=GAUSS_SIGMA,
             if rms > max_nonplanar:
                 stamped[ridx] = True      # keep as-is; do NOT revert to body
                 stamp_region[ridx] = ordinal
+                majority_smooth(ridx)     # plane-free cleanup, NOT raw-projected
                 print(f"  region {cid}: {len(ridx)} faces, non-planar "
-                      f"rms/diag {rms:.3f} > {max_nonplanar} — left as projected")
+                      f"rms/diag {rms:.3f} > {max_nonplanar} — majority-smoothed")
                 continue
 
         d_all = (cent - ctr) @ nrm
@@ -206,11 +251,36 @@ print(f"stray lamp reverted to body: {int(stray_lamp.sum())}")
 # far from all of them removes the spill without touching a tyre crown.
 # Measured here: 638 of 14,801 wheel faces evicted (4.3%), 625 of them in the
 # nose region (xf > 0.9) — i.e. the smear, and almost nothing else.
+# REQUIRES ALL FOUR HUBS, and says so when it declines. Review 2026-08-26
+# killed the original `>= 2` guard: two hubs on a DIAGONAL (front-left +
+# rear-right, which is what a partial seg gives you) put every face at the other
+# two corners far from both centres, so the rule would evict two whole wheels to
+# body — a mass failure indistinguishable from the nose smear it exists to fix.
+# Four is the only count that is safe without pairing logic, and a car this
+# stage cannot resolve is better left alone than half-stripped.
+#
+# KNOWN LIMIT, recorded not fixed: `seed` is drawn from the same label set the
+# rule is cleaning, and the false wheel labels it targets (grille slats, badge)
+# sit LOW on the nose, so they pass yf < 0.35 and can bias a quadrant median and
+# inflate R. R is self-relative, so contamination erodes its own margin rather
+# than blowing up — but on a car with heavy nose contamination this rule will
+# under-evict. A contamination-free seed needs a wheel prior the seg does not
+# currently produce.
+#
+# Also NOT handled: a tailgate-mounted spare (far from all four hubs -> evicted
+# to body paint), an underfloor spare (enters seed, drags a median), and a
+# 6-wheeler's middle axle (no centre near it -> evicted). All three are out of
+# scope for a passenger-car catalogue and all three would be visible on the
+# sheet; none is silent, because the eviction count prints.
 widx = np.where(label == WHEEL)[0]
-if len(widx) > 800:
+if len(widx) <= 800:
+    print(f"wheel hygiene SKIPPED: only {len(widx)} wheel faces (<= 800)")
+else:
     yf_all = (cent[:, 1] - cent[:, 1].min()) / np.ptp(cent[:, 1])
     seed = widx[yf_all[widx] < 0.35]          # unambiguously wheel; locates hubs only
-    if len(seed) > 800:
+    if len(seed) <= 800:
+        print(f"wheel hygiene SKIPPED: only {len(seed)} low seed faces (<= 800)")
+    else:
         sc_ = cent[seed]
         xm = np.median(sc_[:, 0])
         zm = (sc_[:, 2].min() + sc_[:, 2].max()) / 2
@@ -220,15 +290,24 @@ if len(widx) > 800:
                 s = sc_[fx & fz]
                 if len(s) > 200:
                     centres.append(np.median(s, axis=0))
-        if len(centres) >= 2:                 # 2 is enough for a side-on car
+        if len(centres) != 4:
+            print(f"wheel hygiene SKIPPED: found {len(centres)} hubs, need 4 "
+                  f"(a diagonal pair would evict two whole wheels)")
+        else:
             centres = np.array(centres)
             d_seed = np.linalg.norm(sc_[:, None, :] - centres[None], axis=2).min(1)
             R = 1.25 * float(np.percentile(d_seed, 95))
             d = np.linalg.norm(cent[widx][:, None, :] - centres[None], axis=2).min(1)
             far = widx[d > R]
-            label[far] = BODY
-            print(f"wheel hubs {len(centres)}, R={R:.3f}; "
-                  f"stray wheel evicted to body: {len(far)}")
+            # A rule that evicts most of the wheels is broken, not thorough.
+            if len(far) > 0.25 * len(widx):
+                print(f"wheel hygiene REFUSED: would evict {len(far)} of "
+                      f"{len(widx)} ({100*len(far)/len(widx):.0f}%) — hubs look wrong")
+            else:
+                label[far] = BODY
+                print(f"wheel hubs 4, R={R:.3f}; "
+                      f"stray wheel evicted to body: {len(far)} "
+                      f"({100*len(far)/len(widx):.1f}%)")
 
 # absorb crumbs the restamp left behind (single scan per label)
 for target in range(5):

@@ -123,18 +123,34 @@ sc.cycles.samples = SAMPLES
 # a working GPU produce identical frames, so the log line is the only evidence.
 # EYEBALL_DEVICE=CPU forces CPU for an A/B.
 def _pick_device():
+    # EYEBALL_DEVICE=OPTIX/CUDA used to fall through to AUTO silently, so asking
+    # for a specific backend and getting a different one looked like success
+    # (review 2026-08-26). Now an explicit request is honoured or refused out
+    # loud; only AUTO probes in order.
     want = os.environ.get("EYEBALL_DEVICE", "AUTO").upper()
     if want == "CPU":
         return "CPU"
+    if want not in ("AUTO", "OPTIX", "CUDA"):
+        print(f"EYEBALL_DEVICE: '{want}' not recognised — using AUTO")
+        want = "AUTO"
+    order = ("OPTIX", "CUDA") if want == "AUTO" else (want,)
     try:
         bpy.ops.preferences.addon_enable(module="cycles")
     except Exception:
         pass
     try:
         prefs = bpy.context.preferences.addons["cycles"].preferences
-    except Exception:
+    except Exception as e:
+        # EVERY path out of here must announce a refused explicit request. The
+        # first version printed only on the loop's fall-through, so a missing
+        # cycles addon returned CPU in silence and EYEBALL_DEVICE=OPTIX looked
+        # honoured. Found by testing the function against all five inputs
+        # rather than only the happy one.
+        if want != "AUTO":
+            print(f"EYEBALL_DEVICE: {want} requested but cycles prefs "
+                  f"unavailable ({type(e).__name__}) — falling back to CPU")
         return "CPU"
-    for dt in ("OPTIX", "CUDA"):
+    for dt in order:
         try:
             prefs.compute_device_type = dt
             prefs.get_devices()
@@ -146,6 +162,8 @@ def _pick_device():
                 return dt
         except Exception:
             continue
+    if want != "AUTO":
+        print(f"EYEBALL_DEVICE: {want} requested but not available — falling back")
     return "CPU"
 
 

@@ -88,6 +88,14 @@ install_egl() {
 # frame exits 0 and looks exactly like success in a log; this project has been
 # burned by silent no-ops often enough that a render claim is only accepted when
 # the image varies. Non-fatal: EEVEE is a bonus, Cycles is the contract.
+#
+# MASK TO RGB. `img.pixels` is interleaved RGBA and alpha is 1.0 on every opaque
+# pixel, so min/max over the raw list is pinned at ..1.000 by ALPHA and a
+# uniform grey frame would pass. Caught in review 2026-08-26 and confirmed by
+# measurement: the first version reported "range=0.220..1.000" and the 1.000 was
+# the alpha channel — RGB alone is 0.220..0.737. The verdict was right and the
+# evidence for it was partly meaningless, which is exactly the failure this
+# function exists to prevent.
 assert_eevee() {
   local bin="$1"
   cat > /tmp/_eevee_assert.py <<'PY'
@@ -111,14 +119,24 @@ except Exception as e:
 try:
     img = bpy.data.images.load('/tmp/_eevee_assert.png')
     px = list(img.pixels)
-    lo, hi = min(px), max(px)
-    print(f"EEVEE_PIXELS range={lo:.3f}..{hi:.3f}")
+    n = img.channels
+    rgb = px if n < 4 else px[0::n] + px[1::n] + px[2::n]   # DROP ALPHA
+    lo, hi = min(rgb), max(rgb)
+    print(f"EEVEE_PIXELS rgb={lo:.3f}..{hi:.3f} (alpha excluded)")
     print("EEVEE_ASSERT_OK" if hi - lo > 0.05 else "EEVEE_BLANK_FRAME")
 except Exception as e:
     print("EEVEE_PIXEL_READ_FAILED", e)
 PY
-  LIBGL_ALWAYS_SOFTWARE=1 EGL_PLATFORM=surfaceless "$bin" -b --factory-startup \
-      --python /tmp/_eevee_assert.py 2>/dev/null | grep -E "EEVEE_" | tail -2
+  # LIBGL_ALWAYS_SOFTWARE only where there is no GPU. Forcing it unconditionally
+  # made the comment above ("on a GPU host the vendor's libEGL takes
+  # precedence") FALSE under this function's own environment: llvmpipe would be
+  # forced everywhere and the real driver path would never be exercised, so a
+  # GPU host could pass this assert and still fail EEVEE in production.
+  local soft=1
+  command -v nvidia-smi >/dev/null 2>&1 && nvidia-smi -L >/dev/null 2>&1 && soft=0
+  echo "EEVEE assert: software GL=${soft}"
+  LIBGL_ALWAYS_SOFTWARE=$soft EGL_PLATFORM=surfaceless "$bin" -b --factory-startup \
+      --python /tmp/_eevee_assert.py 2>&1 | grep -E "EEVEE_|EGL Error" | tail -4
 }
 install_py_deps() {
   local bpy
