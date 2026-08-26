@@ -66,13 +66,37 @@ report() { ( set +x
          -H "x-upsert: true" -H "Content-Type: text/plain" \
          --data-binary @"$LOG" "$SB/$PRE/$_k" >/dev/null 2>&1
   done ) || true; }
+# sb_file USED TO PRINT THE HTTP CODE AND CONTINUE REGARDLESS, so a 413 on an
+# oversized GLB (the recorded >25MB plain-POST trap) would leave the only
+# artefact on a doomed pod while the log read completely normal. Check for 2xx
+# and say so loudly; the caller decides whether that is fatal.
 sb_file() { ( set +x
-  curl -s -o /tmp/put.out -w "%{http_code}" -X POST \
+  _code=$(curl -s -o /tmp/put.out -w "%{http_code}" -X POST \
        -H "apikey: ${SB_KEY}" -H "Authorization: Bearer ${SB_KEY}" \
        -H "x-upsert: true" -H "Content-Type: application/octet-stream" \
-       --data-binary @"$2" "$SB/$PRE/$1" ) || true; echo " <- upload $1"; }
+       --data-binary @"$2" "$SB/$PRE/$1")
+  case "$_code" in
+    2*) echo "upload $1 OK ($_code, $(stat -c%s "$2" 2>/dev/null) bytes)" ;;
+    *)  echo "UPLOAD_FAILED $1 http=$_code body=$(head -c 200 /tmp/put.out)"; exit 1 ;;
+  esac ) ; }
 stage() { echo "=== STAGE:$1 ==="; report "log.txt"; }
-die()   { echo "=== FAIL:$1 ==="; report "log.txt"; sleep infinity; }
+
+# BILLING FUSE. Both die() and the success path used to `sleep infinity`, so a
+# pod outlived by its watcher billed until someone noticed -- the recorded
+# 7h10m / $3.15 lesson. Bound it. CLAUDE.md also records that the in-pod delete
+# DOES NOT RELIABLY WORK (the pc41 run survived its own finish()), so this is
+# defence in depth only: the real guard is checking for a 404 from OUTSIDE as
+# soon as results land, which is what the launcher does.
+FUSE_MIN="${S1X_FUSE_MIN:-45}"
+fuse() {
+  echo "=== FUSE: holding ${FUSE_MIN}m then self-terminating ==="
+  sleep $(( FUSE_MIN * 60 ))
+  ( set +x; curl -s -X DELETE -H "Authorization: Bearer ${RUNPOD_API_KEY}" \
+      "https://rest.runpod.io/v1/pods/${RUNPOD_POD_ID}" >/dev/null 2>&1 ) || true
+  echo "=== FUSE: delete requested; if this line keeps printing the in-pod key cannot delete ==="
+  sleep 600
+}
+die()   { echo "=== FAIL:$1 ==="; report "log.txt"; fuse; }
 
 stage boot
 nvidia-smi || die NO_GPU
@@ -116,7 +140,11 @@ pip install -q \
 # torch, and the torch_cluster wheel below is built for exactly 2.5.1+cu124.
 python3 -c "import torch;assert torch.__version__.startswith('2.5.1'),torch.__version__" \
   || { echo "a dep MOVED TORCH — restoring the pin"; \
-       pip install -q torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cu124 2>&1 | tail -2; }
+       pip install -q torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cu124 2>&1 | tail -2; \
+       # the restore used to be UNVERIFIED: a failed reinstall carried on into
+       # the torch_cluster wheel path, which is built for exactly 2.5.1+cu124.
+       python3 -c "import torch;assert torch.__version__.startswith('2.5.1'),torch.__version__;print('torch pin restored',torch.__version__)" \
+         || die TORCH_RESTORE_FAILED; }
 
 # The FULL module-scope import set on the geometry pipeline chain, obtained by
 # walking it with ast LOCALLY rather than discovering one dep per rented pod.
@@ -139,7 +167,18 @@ m.export(p)
 ms = pymeshlab.MeshSet()
 ms.load_new_mesh(p)                       # the exact call trimesh2pymeshlab makes
 assert ms.current_mesh().vertex_number() == len(m.vertices)
-print("pymeshlab PLY io ok (%d verts)" % ms.current_mesh().vertex_number())
+# remove_floater does not only LOAD -- it hands the mesh back out again, served
+# by the same plugin. Exercise the round trip, not just the half of it that
+# happened to fail first.
+ms.save_current_mesh(p.replace(".ply", "_rt.ply"))
+ms2 = pymeshlab.MeshSet(); ms2.load_new_mesh(p.replace(".ply", "_rt.ply"))
+assert ms2.current_mesh().vertex_number() == len(m.vertices)
+# pymeshlab is deliberately NOT pinned: nothing has established which version
+# the pod image resolves, and inventing a pin would be a guess. RECORD it
+# instead, so a future run can pin from evidence rather than from memory.
+import importlib.metadata as md
+print("pymeshlab PLY round-trip ok (%d verts), resolved version %s"
+      % (ms2.current_mesh().vertex_number(), md.version("pymeshlab")))
 PY
 
 # diso: lazy, but it IS the surface extractor -> a geometry run needs it.
@@ -182,7 +221,13 @@ export HF_HOME=/workspace/hf
 # takes symmetry and edge_type. A van is bilaterally symmetric with hard panel
 # edges, so symmetry='x' + edge_type='sharp' is the variant worth having; the
 # plain model is the control that says whether the labels did anything.
-python3 - <<'PY' 2>&1 | tail -40 || die INFER
+# `python3 - <<PY | tail -40 || die INFER` COULD NEVER FIRE. Without pipefail a
+# pipeline's status is the LAST command's, i.e. tail's, which is always 0. Pod 3
+# proves it: the pymeshlab traceback happened and NO FAIL:INFER was emitted --
+# only the [ -s ] file check downstream caught it, and that check covers the
+# base mesh alone, so a label-model crash was silent. Capture the real status.
+# Same class as the WRONG_CLASS regex and the empty-by-construction arch gate.
+python3 - > /tmp/infer.out 2>&1 <<'PY'
 import os, time, torch, trimesh
 from step1x3d_geometry.models.pipelines.pipeline import Step1X3DGeometryPipeline
 
@@ -204,7 +249,13 @@ run("Step1X-3D-Geometry-Label-1300m", "/workspace/step1x_label.glb",
     label={"symmetry": "x", "edge_type": "sharp"},
     octree_resolution=384, max_facenum=400000)
 PY
-[ -s /workspace/step1x_base.glb ] || die NO_BASE_OUTPUT
+INFER_RC=$?
+tail -40 /tmp/infer.out
+echo "INFER_RC=$INFER_RC"
+[ "$INFER_RC" -eq 0 ] || die INFER
+[ -s /workspace/step1x_base.glb ]  || die NO_BASE_OUTPUT
+# the label mesh is a SECOND generation and used to be able to fail in silence
+[ -s /workspace/step1x_label.glb ] || die NO_LABEL_OUTPUT
 
 stage measure
 ls -la /workspace/step1x_*.glb
