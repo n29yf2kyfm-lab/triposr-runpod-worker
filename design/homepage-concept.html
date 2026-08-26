@@ -1,0 +1,534 @@
+<title>SpareCarPart Homepage Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+
+<style>
+:root{
+  --amber:#FF9310;
+  --amber-lo:#FFC24A;
+  --ember:#D2450B;
+  --ink:#191410;
+  --ink-2:#4B423A;
+  --ink-3:#7A6E64;
+  --bone:#FFFAF4;
+  --surface:#FFFFFF;
+  --surface-2:#F6F0E8;
+  --rule:#E7DED2;
+  --rule-2:#D3C6B6;
+  --plate:#F7CE1B;
+  --plate-ink:#12100A;
+  --gb:#0B3B8C;
+  --verify:#0E7A52;
+  --verify-wash:#E3F2EB;
+  --on-amber:#2A1403;
+  --shadow-s:0 1px 2px rgba(25,20,16,.05),0 4px 12px -6px rgba(25,20,16,.16);
+  --shadow-m:0 2px 6px rgba(25,20,16,.06),0 22px 44px -24px rgba(25,20,16,.34);
+  --shadow-l:0 4px 10px rgba(25,20,16,.07),0 44px 80px -36px rgba(25,20,16,.44);
+  --r-s:10px; --r-m:16px; --r-l:26px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --amber:#FF9E2C; --amber-lo:#FFC978; --ember:#C9450F;
+    --ink:#F5EFE8; --ink-2:#C2B6A9; --ink-3:#93867A;
+    --bone:#131110; --surface:#1C1917; --surface-2:#252119;
+    --rule:#332D26; --rule-2:#443C33;
+    --verify:#4FC08D; --verify-wash:#122A20;
+    --shadow-s:0 1px 2px rgba(0,0,0,.5),0 4px 12px -6px rgba(0,0,0,.6);
+    --shadow-m:0 2px 6px rgba(0,0,0,.5),0 22px 44px -24px rgba(0,0,0,.8);
+    --shadow-l:0 4px 10px rgba(0,0,0,.5),0 44px 80px -36px rgba(0,0,0,.85);
+  }
+}
+:root[data-theme="dark"]{
+  --amber:#FF9E2C; --amber-lo:#FFC978; --ember:#C9450F;
+  --ink:#F5EFE8; --ink-2:#C2B6A9; --ink-3:#93867A;
+  --bone:#131110; --surface:#1C1917; --surface-2:#252119;
+  --rule:#332D26; --rule-2:#443C33;
+  --verify:#4FC08D; --verify-wash:#122A20;
+  --shadow-s:0 1px 2px rgba(0,0,0,.5),0 4px 12px -6px rgba(0,0,0,.6);
+  --shadow-m:0 2px 6px rgba(0,0,0,.5),0 22px 44px -24px rgba(0,0,0,.8);
+  --shadow-l:0 4px 10px rgba(0,0,0,.5),0 44px 80px -36px rgba(0,0,0,.85);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bone);color:var(--ink);
+  font-family:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:16.5px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+.shell{max-width:1240px;margin:0 auto;padding:0 26px}
+h1,h2,h3,.disp{font-family:"Bricolage Grotesque","Hanken Grotesk",system-ui,sans-serif;font-weight:800;letter-spacing:-.03em;line-height:1.03;text-wrap:balance;margin:0}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:6px}
+.eyebrow{
+  font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.16em;
+  color:var(--ink-3);
+}
+
+/* ============ HERO ============ */
+.hero{position:relative;isolation:isolate;overflow:hidden;
+  background:linear-gradient(152deg,#FFB43A 0%,#FF8C10 42%,#EE5F0C 74%,#CF3F09 100%);
+  color:var(--on-amber);padding-bottom:96px}
+#orbs{position:absolute;inset:0;width:100%;height:100%;z-index:-2;display:block}
+.hero::after{ /* grain + vignette, keeps the gradient from looking flat */
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(120% 90% at 18% 8%,rgba(255,255,255,.34),transparent 56%),
+             radial-gradient(90% 70% at 92% 100%,rgba(120,32,4,.36),transparent 60%);
+}
+
+nav{display:flex;align-items:center;gap:30px;padding:22px 0 8px;position:relative;z-index:3}
+.brand{display:flex;align-items:center;gap:11px;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.16rem;letter-spacing:-.03em;color:var(--on-amber)}
+.mark{width:34px;height:34px;border-radius:9px;background:var(--on-amber);position:relative;flex:none}
+.mark::before,.mark::after{content:"";position:absolute;background:var(--amber-lo);border-radius:2px}
+.mark::before{inset:9px 15px 9px 9px}
+.mark::after{inset:15px 9px 9px 15px;background:#fff}
+.nav-links{display:flex;gap:26px;margin-left:14px;font-size:.93rem;font-weight:600}
+.nav-links a{opacity:.82;transition:opacity .18s}
+.nav-links a:hover{opacity:1}
+.nav-cta{margin-left:auto;display:flex;gap:10px;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font-family:"Hanken Grotesk",sans-serif;font-weight:700;font-size:.95rem;
+  padding:13px 22px;border-radius:999px;border:0;cursor:pointer;
+  transition:transform .16s ease,box-shadow .16s ease,background .16s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-dark{background:var(--on-amber);color:#FFE9C9;box-shadow:var(--shadow-m)}
+.btn-ghost{background:rgba(42,20,3,.09);color:var(--on-amber)}
+.btn-ghost:hover{background:rgba(42,20,3,.16)}
+.btn-lg{padding:17px 30px;font-size:1.02rem}
+
+.hero-grid{display:grid;grid-template-columns:1.06fr .94fr;gap:56px;align-items:center;padding-top:60px;position:relative;z-index:2}
+.tagline{
+  display:inline-flex;align-items:center;gap:9px;font-size:.79rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.13em;background:rgba(255,248,236,.5);
+  padding:8px 15px;border-radius:999px;margin-bottom:24px;
+}
+.tagline .dot{width:6px;height:6px;border-radius:50%;background:var(--ember)}
+h1{font-size:clamp(2.9rem,6.6vw,5rem);margin-bottom:22px}
+h1 em{font-style:normal;display:block;color:#FFF6E7;text-shadow:0 2px 18px rgba(120,40,4,.28)}
+.hero p.sub{font-size:1.12rem;max-width:47ch;margin:0 0 34px;color:rgba(42,20,3,.82);line-height:1.55}
+
+/* ---- registration plate search ---- */
+.finder{background:rgba(255,250,244,.9);backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.6);border-radius:var(--r-l);
+  padding:20px;box-shadow:var(--shadow-l);max-width:560px}
+.modes{display:flex;gap:5px;margin-bottom:16px;background:rgba(42,20,3,.07);padding:4px;border-radius:999px;width:fit-content;max-width:100%;overflow-x:auto}
+.mode{
+  border:0;background:transparent;cursor:pointer;white-space:nowrap;
+  font-family:"Hanken Grotesk",sans-serif;font-weight:600;font-size:.86rem;color:rgba(42,20,3,.66);
+  padding:9px 17px;border-radius:999px;transition:background .18s,color .18s;
+}
+.mode[aria-selected="true"]{background:var(--on-amber);color:#FFE9C9}
+.plate-row{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap}
+.plate{
+  display:flex;align-items:stretch;border-radius:9px;overflow:hidden;flex:1 1 250px;
+  border:2px solid var(--plate-ink);background:var(--plate);box-shadow:inset 0 -3px 10px rgba(0,0,0,.14);
+}
+.plate .gb{
+  background:var(--gb);color:#fff;width:38px;flex:none;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:3px;font-size:.66rem;font-weight:800;letter-spacing:.04em;
+}
+.plate .stars{font-size:.5rem;line-height:1;opacity:.9}
+.plate input{
+  flex:1;border:0;background:transparent;outline:none;min-width:0;
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:800;
+  font-size:1.72rem;letter-spacing:.1em;color:var(--plate-ink);
+  padding:12px 14px;text-transform:uppercase;
+}
+.plate input::placeholder{color:rgba(18,16,10,.34)}
+.finder .go{flex:0 0 auto}
+.finder-foot{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+.chip{
+  font-size:.79rem;font-weight:600;padding:6px 13px;border-radius:999px;
+  background:rgba(42,20,3,.07);color:rgba(42,20,3,.78);display:inline-flex;align-items:center;gap:7px;
+}
+.chip svg{width:13px;height:13px;flex:none}
+
+/* ---- floating match card ---- */
+.stage{position:relative;height:100%;min-height:430px}
+.card{
+  position:absolute;background:var(--surface);color:var(--ink);
+  border-radius:var(--r-m);box-shadow:var(--shadow-l);border:1px solid var(--rule);
+}
+.card-main{inset:14px 0 auto 4%;width:min(408px,94%);padding:20px 22px;z-index:2}
+.card-head{display:flex;align-items:center;gap:12px;margin-bottom:15px}
+.thumb{width:52px;height:52px;border-radius:11px;flex:none;
+  background:linear-gradient(140deg,#3B3733,#191614);position:relative;overflow:hidden}
+.thumb::after{content:"";position:absolute;inset:11px;border-radius:50%;
+  background:radial-gradient(circle at 32% 28%,#C9C2BA,#6E6862 46%,#2E2A27);}
+.card-head h4{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:1rem;margin:0 0 2px;letter-spacing:-.01em}
+.card-head span{font-size:.83rem;color:var(--ink-3)}
+.rows{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--rule)}
+.row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--rule);font-size:.89rem}
+.row:last-child{border-bottom:0}
+.row .k{color:var(--ink-3)}
+.row .v{font-weight:600}
+.badge{display:inline-flex;align-items:center;gap:6px;background:var(--verify-wash);color:var(--verify);
+  font-size:.76rem;font-weight:700;padding:4px 11px;border-radius:999px}
+.badge svg{width:12px;height:12px}
+.price{font-family:"Bricolage Grotesque",sans-serif;font-size:1.5rem;font-weight:800;letter-spacing:-.02em}
+.card-quote{
+  bottom:8px;right:2%;width:min(280px,88%);padding:15px 17px;z-index:3;
+  display:flex;align-items:center;gap:13px;
+}
+.card-quote .av{width:38px;height:38px;border-radius:50%;flex:none;
+  background:linear-gradient(140deg,var(--amber-lo),var(--ember))}
+.card-quote p{margin:0;font-size:.85rem;line-height:1.45;color:var(--ink-2)}
+.card-quote b{color:var(--ink);font-weight:700}
+.stars-row{color:var(--amber);font-size:.8rem;letter-spacing:.08em}
+
+/* ============ TRUST STRIP ============ */
+.strip{background:var(--ink);color:var(--bone);padding:0}
+.strip .shell{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:rgba(255,250,244,.13)}
+.stat{background:var(--ink);padding:32px 26px}
+.stat .n{font-family:"Bricolage Grotesque",sans-serif;font-size:2.3rem;font-weight:800;letter-spacing:-.035em;line-height:1;
+  background:linear-gradient(96deg,var(--amber-lo),var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .l{font-size:.87rem;color:rgba(255,250,244,.62);margin-top:7px}
+
+/* ============ SECTIONS ============ */
+section.band{padding:104px 0}
+.head{max-width:62ch;margin-bottom:52px}
+.head h2{font-size:clamp(1.95rem,4.1vw,3rem);margin:14px 0 16px}
+.head p{color:var(--ink-2);font-size:1.07rem;margin:0}
+
+/* how it works */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));gap:22px}
+.step{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-m);padding:26px 24px;
+  position:relative;box-shadow:var(--shadow-s);transition:transform .2s,box-shadow .2s}
+.step:hover{transform:translateY(-4px);box-shadow:var(--shadow-m)}
+.step .idx{
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:.78rem;
+  width:30px;height:30px;border-radius:9px;display:grid;place-items:center;
+  background:var(--ink);color:var(--amber-lo);margin-bottom:18px;
+}
+.step h3{font-size:1.14rem;margin-bottom:8px}
+.step p{margin:0;font-size:.93rem;color:var(--ink-2);line-height:1.55}
+
+/* categories */
+.cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+.cat{
+  background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-m);
+  padding:24px 22px;display:flex;flex-direction:column;gap:7px;min-height:150px;
+  transition:border-color .2s,transform .2s,box-shadow .2s;position:relative;overflow:hidden;
+}
+.cat:hover{border-color:var(--amber);transform:translateY(-4px);box-shadow:var(--shadow-m)}
+.cat .ic{width:38px;height:38px;border-radius:11px;background:var(--surface-2);
+  display:grid;place-items:center;margin-bottom:8px;color:var(--ember)}
+.cat .ic svg{width:19px;height:19px}
+.cat h3{font-size:1.04rem}
+.cat p{margin:0;font-size:.87rem;color:var(--ink-3);line-height:1.5}
+.cat .arrow{margin-top:auto;font-size:.85rem;font-weight:700;color:var(--ember);opacity:0;transform:translateX(-6px);transition:.2s}
+.cat:hover .arrow{opacity:1;transform:translateX(0)}
+
+/* specialists — dark band */
+.dark-band{background:var(--ink);color:var(--bone)}
+.dark-band .head h2{color:var(--bone)}
+.dark-band .head p{color:rgba(255,250,244,.68)}
+.dark-band .eyebrow{color:var(--amber-lo)}
+.spec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.spec{
+  border:1px solid rgba(255,250,244,.16);border-radius:var(--r-m);padding:22px 20px;
+  transition:background .2s,border-color .2s;background:rgba(255,250,244,.03);
+}
+.spec:hover{background:rgba(255,250,244,.08);border-color:var(--amber)}
+.spec h3{font-size:1rem;margin-bottom:5px}
+.spec p{margin:0;font-size:.85rem;color:rgba(255,250,244,.6)}
+
+/* supplier CTA */
+.cta{
+  background:linear-gradient(140deg,#FFB43A,#F0700D 58%,#CF3F09);
+  border-radius:var(--r-l);padding:60px 52px;color:var(--on-amber);
+  display:flex;align-items:center;justify-content:space-between;gap:36px;flex-wrap:wrap;
+  box-shadow:var(--shadow-l);position:relative;overflow:hidden;
+}
+.cta::after{content:"";position:absolute;width:420px;height:420px;right:-130px;top:-190px;border-radius:50%;
+  background:radial-gradient(circle at 34% 32%,rgba(255,255,255,.5),rgba(255,255,255,0) 62%);pointer-events:none}
+.cta h2{font-size:clamp(1.7rem,3.5vw,2.5rem);max-width:17ch;position:relative}
+.cta p{margin:12px 0 0;max-width:44ch;color:rgba(42,20,3,.8);position:relative}
+
+/* footer */
+footer{background:var(--ink);color:rgba(255,250,244,.62);padding:72px 0 40px;font-size:.9rem}
+.f-grid{display:grid;grid-template-columns:1.6fr repeat(3,1fr);gap:42px;margin-bottom:52px}
+footer h4{font-family:"Hanken Grotesk",sans-serif;font-weight:700;font-size:.74rem;text-transform:uppercase;
+  letter-spacing:.14em;color:var(--bone);margin:0 0 16px}
+footer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+footer a:hover{color:var(--amber-lo)}
+footer .brand{color:var(--bone);margin-bottom:14px}
+.f-bot{border-top:1px solid rgba(255,250,244,.14);padding-top:24px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:.83rem}
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:44px;padding-top:34px}
+  .stage{min-height:400px}
+  .nav-links{display:none}
+  .f-grid{grid-template-columns:1fr 1fr;gap:32px}
+  .cta{padding:42px 30px}
+  section.band{padding:74px 0}
+}
+@media (max-width:560px){
+  .card-main{width:96%;left:2%}
+  .card-quote{width:82%;right:2%}
+  .plate input{font-size:1.4rem}
+  .f-grid{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+
+<header class="hero">
+  <canvas id="orbs" aria-hidden="true"></canvas>
+  <div class="shell">
+    <nav>
+      <a class="brand" href="#"><span class="mark" aria-hidden="true"></span>SpareCarPart</a>
+      <div class="nav-links">
+        <a href="#categories">Parts</a>
+        <a href="#categories">Vans</a>
+        <a href="#categories">EV &amp; hybrid</a>
+        <a href="#specialists">Specialists</a>
+        <a href="#suppliers">Suppliers</a>
+      </div>
+      <div class="nav-cta">
+        <button class="btn btn-ghost">Log in</button>
+        <button class="btn btn-dark">Sell with us</button>
+      </div>
+    </nav>
+
+    <div class="hero-grid">
+      <div>
+        <div class="tagline"><span class="dot"></span>New + recycled · UK wide</div>
+        <h1>The right part.<em>First time.</em></h1>
+        <p class="sub">Enter your registration and we'll match you with verified new and recycled parts from trusted UK breakers and suppliers — with warranty and fast delivery.</p>
+
+        <div class="finder">
+          <div class="modes" role="tablist" aria-label="How would you like to search?">
+            <button class="mode" role="tab" aria-selected="true">Registration</button>
+            <button class="mode" role="tab" aria-selected="false">OEM number</button>
+            <button class="mode" role="tab" aria-selected="false">Photo</button>
+            <button class="mode" role="tab" aria-selected="false">Describe it</button>
+          </div>
+          <div class="plate-row">
+            <label class="plate">
+              <span class="gb" aria-hidden="true"><span class="stars">★</span>GB</span>
+              <input type="text" placeholder="AB12 CDE" aria-label="Vehicle registration" spellcheck="false" autocomplete="off">
+            </label>
+            <button class="btn btn-dark btn-lg go">Find parts</button>
+          </div>
+          <div class="finder-foot">
+            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Warranty on every part</span>
+            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Fast UK delivery</span>
+            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Graded &amp; inspected</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage" aria-hidden="true">
+        <div class="card card-main">
+          <div class="card-head">
+            <div class="thumb"></div>
+            <div>
+              <h4>Nearside wing mirror</h4>
+              <span>Ford Transit Custom · 2019 · 2.0 TDCi</span>
+            </div>
+          </div>
+          <div class="rows">
+            <div class="row"><span class="k">Condition</span><span class="v">Grade A · recycled</span></div>
+            <div class="row"><span class="k">Supplier</span><span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Verified breaker</span></div>
+            <div class="row"><span class="k">Warranty</span><span class="v">90 days</span></div>
+            <div class="row"><span class="k">Delivery</span><span class="v">Tomorrow</span></div>
+            <div class="row"><span class="k">Price</span><span class="price">£78</span></div>
+          </div>
+        </div>
+        <div class="card card-quote">
+          <div class="av"></div>
+          <div>
+            <div class="stars-row">★★★★★</div>
+            <p><b>Matched in 20 minutes.</b> Dealer wanted £260.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="shell">
+    <div class="stat"><div class="n">1,400+</div><div class="l">Verified breakers &amp; suppliers</div></div>
+    <div class="stat"><div class="n">274</div><div class="l">Part categories covered</div></div>
+    <div class="stat"><div class="n">90 days</div><div class="l">Minimum warranty, every part</div></div>
+    <div class="stat"><div class="n">UK wide</div><div class="l">Mainland delivery network</div></div>
+  </div>
+</div>
+
+<section class="band" id="how">
+  <div class="shell">
+    <div class="head">
+      <div class="eyebrow">How it works — 15 seconds</div>
+      <h2>You give us the reg. We do the ringing round.</h2>
+      <p>No trawling forums, no calling six scrapyards to be told it's already gone. One request goes out to the network and the matches come back to you.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="idx">1</div><h3>Order the part</h3><p>Registration, OEM number, or just a photo of the thing you need. Whatever you've got in front of you.</p></div>
+      <div class="step"><div class="idx">2</div><h3>We source</h3><p>Your request goes to verified breakers and suppliers holding that part, and they come back with real availability.</p></div>
+      <div class="step"><div class="idx">3</div><h3>Warranty + grade</h3><p>Every part arrives graded and inspected, with a minimum 90-day warranty behind it.</p></div>
+      <div class="step"><div class="idx">4</div><h3>To your door</h3><p>Tracked delivery to your home or garage — most mainland orders land next day.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="categories" style="background:var(--surface-2)">
+  <div class="shell">
+    <div class="head">
+      <div class="eyebrow">Browse the catalogue</div>
+      <h2>Every part, for very nearly everything.</h2>
+      <p>Cars, vans, EVs and the awkward stuff nobody else stocks.</p>
+    </div>
+    <div class="cats">
+      <a class="cat" href="#"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M5 17a2 2 0 1 1-2-2m2 2 1.5-6.5A2 2 0 0 1 8.4 7h7.2a2 2 0 0 1 1.9 1.5L19 15m0 2a2 2 0 1 0 2-2"/></svg></div><h3>Car parts</h3><p>Engines, panels, electrics — every make on UK roads.</p><span class="arrow">Browse →</span></a>
+      <a class="cat" href="#"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="13" height="10" rx="1.5"/><path d="M15 9h3.5l2.5 3.5V16H15z"/><circle cx="6.5" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg></div><h3>Van parts</h3><p>Transit, Sprinter, Vivaro, Expert and the rest of the fleet.</p><span class="arrow">Browse →</span></a>
+      <a class="cat" href="#"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg></div><h3>EV &amp; hybrid</h3><p>High-voltage parts, safely sourced and handled.</p><span class="arrow">Browse →</span></a>
+      <a class="cat" href="#"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.4"/></svg></div><h3>Tyres &amp; wheels</h3><p>Match by size or by reg, alloys and steels both.</p><span class="arrow">Browse →</span></a>
+      <a class="cat" href="#"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 1-5.4 5.4l-5 5a2.1 2.1 0 0 0 3 3l5-5a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.1-2.1z"/></svg></div><h3>Workshop manuals</h3><p>Car and van manuals, 1982 to today.</p><span class="arrow">Browse →</span></a>
+      <a class="cat" href="#"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.4-7-10a7 7 0 1 1 14 0c0 5.6-7 10-7 10z"/><circle cx="12" cy="11" r="2.6"/></svg></div><h3>MOT garages</h3><p>DVSA-approved test centres near you.</p><span class="arrow">Find one →</span></a>
+      <a class="cat" href="#"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="m7 8 9-4M7 13h.01M11 13h.01"/></svg></div><h3>Radio codes</h3><p>Free code generator for locked head units.</p><span class="arrow">Unlock →</span></a>
+      <a class="cat" href="#"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg></div><h3>Accessories</h3><p>Mats, bars, boxes and the bits that make it yours.</p><span class="arrow">Browse →</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="band dark-band" id="specialists">
+  <div class="shell">
+    <div class="head">
+      <div class="eyebrow">Beyond the breaker yard</div>
+      <h2>When the part needs a specialist, not a shelf.</h2>
+      <p>Some jobs don't end with a box arriving. These are vetted UK specialists who'll quote on the work itself.</p>
+    </div>
+    <div class="spec-grid">
+      <a class="spec" href="#"><h3>4x4 &amp; off-road</h3><p>Transfer boxes, diffs, lift kits</p></a>
+      <a class="spec" href="#"><h3>Turbo</h3><p>Recon, rebuild, actuator setup</p></a>
+      <a class="spec" href="#"><h3>ECU remap</h3><p>Mapping, cloning, immobiliser</p></a>
+      <a class="spec" href="#"><h3>Japanese imports</h3><p>JDM parts and grey-import know-how</p></a>
+      <a class="spec" href="#"><h3>Caravan &amp; motorhome</h3><p>Habitation, chassis, damp</p></a>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="suppliers">
+  <div class="shell">
+    <div class="cta">
+      <div>
+        <h2>Breaker or supplier? Put your stock in front of the whole country.</h2>
+        <p>Join 1,400+ verified yards taking live part requests from drivers and garages across the UK. No listing fees — you only pay when you sell.</p>
+      </div>
+      <button class="btn btn-dark btn-lg">Join the network</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="shell">
+    <div class="f-grid">
+      <div>
+        <a class="brand disp" href="#" style="display:flex;align-items:center;gap:11px;font-size:1.16rem"><span class="mark" aria-hidden="true"></span>SpareCarPart</a>
+        <p style="max-width:34ch;margin:0">The right part, first time — new and recycled car parts from verified UK breakers and suppliers.</p>
+      </div>
+      <div><h4>Parts</h4><ul><li><a href="#">Car parts</a></li><li><a href="#">Van parts</a></li><li><a href="#">EV &amp; hybrid</a></li><li><a href="#">Tyres &amp; wheels</a></li><li><a href="#">OEM lookup</a></li></ul></div>
+      <div><h4>Tools</h4><ul><li><a href="#">Smart finder</a></li><li><a href="#">Car check</a></li><li><a href="#">Radio code</a></li><li><a href="#">MOT garages</a></li><li><a href="#">Workshop manuals</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#">How it works</a></li><li><a href="#">Suppliers</a></li><li><a href="#">Buying guides</a></li><li><a href="#">Reviews</a></li><li><a href="#">Complaints</a></li></ul></div>
+    </div>
+    <div class="f-bot">
+      <span>© 2026 SpareCarPart · Registered in England &amp; Wales</span>
+      <span>Privacy · Terms · Cookies</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* Tab switching on the finder */
+  var modes = document.querySelectorAll('.mode');
+  var input = document.querySelector('.plate input');
+  var plate = document.querySelector('.plate');
+  var gb    = document.querySelector('.plate .gb');
+  var conf  = {
+    'Registration':{ph:'AB12 CDE', plate:true},
+    'OEM number'  :{ph:'1K0 615 301 AA', plate:false},
+    'Photo'       :{ph:'Upload a photo of the part', plate:false},
+    'Describe it' :{ph:'e.g. nearside wing mirror', plate:false}
+  };
+  modes.forEach(function(m){
+    m.addEventListener('click',function(){
+      modes.forEach(function(x){x.setAttribute('aria-selected','false')});
+      m.setAttribute('aria-selected','true');
+      var c = conf[m.textContent.trim()];
+      if(!c) return;
+      input.placeholder = c.ph;
+      input.value = '';
+      gb.style.display = c.plate ? '' : 'none';
+      plate.style.background = c.plate ? 'var(--plate)' : 'var(--surface)';
+      plate.style.borderColor = c.plate ? 'var(--plate-ink)' : 'var(--rule-2)';
+      input.style.fontSize = c.plate ? '' : '1.05rem';
+      input.style.letterSpacing = c.plate ? '' : 'normal';
+      input.style.textTransform = c.plate ? '' : 'none';
+      input.style.fontFamily = c.plate ? '' : '"Hanken Grotesk",sans-serif';
+      input.style.color = c.plate ? '' : 'var(--ink)';
+      input.focus();
+    });
+  });
+
+  /* Uppercase the reg as it's typed */
+  input.addEventListener('input',function(){
+    if(plate.style.background==='' || plate.style.background==='var(--plate)')
+      input.value = input.value.toUpperCase();
+  });
+
+  /* Ambient glossy orbs — original artwork, drawn procedurally */
+  var cv = document.getElementById('orbs'), ctx = cv.getContext('2d');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var orbs = [
+    {x:.74,y:.34,r:.30,h:38,l:66,d:.16},
+    {x:.93,y:.62,r:.20,h:26,l:58,d:.22},
+    {x:.62,y:.72,r:.13,h:44,l:72,d:.30},
+    {x:.86,y:.14,r:.09,h:33,l:70,d:.40},
+    {x:.55,y:.16,r:.06,h:30,l:76,d:.52},
+    {x:.70,y:.92,r:.075,h:22,l:62,d:.36}
+  ];
+  function size(){
+    var d = Math.min(window.devicePixelRatio||1, 2);
+    cv.width = cv.offsetWidth*d; cv.height = cv.offsetHeight*d;
+    ctx.setTransform(d,0,0,d,0,0);
+  }
+  function draw(t){
+    var w = cv.offsetWidth, h = cv.offsetHeight, base = Math.max(w,h);
+    ctx.clearRect(0,0,w,h);
+    orbs.forEach(function(o,i){
+      var ph = reduce ? 0 : t*0.00016 + i*1.7;
+      var cx = o.x*w + Math.sin(ph)*base*0.022;
+      var cy = o.y*h + Math.cos(ph*0.82)*base*0.026;
+      var r  = o.r*base;
+      /* body: light source upper-left, matching the hero's highlight */
+      var g = ctx.createRadialGradient(cx-r*0.34, cy-r*0.40, r*0.05, cx, cy, r);
+      g.addColorStop(0,   'hsla('+(o.h+16)+',100%,'+(o.l+16)+'%,.95)');
+      g.addColorStop(0.42,'hsla('+o.h+',98%,'+o.l+'%,.80)');
+      g.addColorStop(0.82,'hsla('+(o.h-12)+',92%,'+(o.l-22)+'%,.42)');
+      g.addColorStop(1,   'hsla('+(o.h-18)+',88%,'+(o.l-30)+'%,0)');
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(cx,cy,r,0,6.2832); ctx.fill();
+      /* specular */
+      var s = ctx.createRadialGradient(cx-r*0.40, cy-r*0.46, 0, cx-r*0.40, cy-r*0.46, r*0.34);
+      s.addColorStop(0,'rgba(255,252,244,.55)');
+      s.addColorStop(1,'rgba(255,252,244,0)');
+      ctx.fillStyle = s;
+      ctx.beginPath(); ctx.arc(cx-r*0.40, cy-r*0.46, r*0.34, 0, 6.2832); ctx.fill();
+    });
+    if(!reduce) requestAnimationFrame(draw);
+  }
+  size(); requestAnimationFrame(draw);
+  var to; window.addEventListener('resize',function(){
+    clearTimeout(to); to=setTimeout(function(){ size(); if(reduce) draw(0); },140);
+  });
+})();
+</script>
