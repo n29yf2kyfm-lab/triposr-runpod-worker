@@ -226,4 +226,32 @@ else
   echo "WARN tdam chain NOT proven — leaving ANTHROPIC_BASE_URL with headroom (fail-open)"
 fi
 
+
+# ---------------------------------------------------- opencode (council #3) ---
+# The third reviewer in pipeline/machine/review_pair.py. It is a MACHINE-LOCAL
+# install in ~/.opencode and it does NOT survive a container rollback -- proven
+# 2026-08-26, when a rollback silently removed it and a council run degraded
+# from three reviewers to two with only an error string to show for it. graphify
+# and the memory stack self-repair from this hook; this now does too.
+#
+# PINNED VERSION, DELIBERATELY. The upstream installer resolves "latest" through
+# api.github.com, which is BLOCKED in this container, so an unpinned install
+# fails with "Failed to fetch version information" and looks like a network
+# fault. Pin it and the install is deterministic.
+#
+# Repo is anomalyco/opencode (201.7k stars, MIT) -- the sst rebrand, and
+# opencode.ai's own docs point at that org. Verified before first install.
+OC_VER="${OPENCODE_VERSION:-1.18.23}"
+if [ ! -x "$HOME/.opencode/bin/opencode" ]; then
+  echo "installing opencode ${OC_VER} (council reviewer #3)"
+  curl -fsSL https://opencode.ai/install -o /tmp/opencode_install.sh 2>/dev/null \
+    && bash /tmp/opencode_install.sh --version "$OC_VER" >/dev/null 2>&1 \
+    || echo "WARN opencode install failed — council will run with two reviewers"
+fi
+if [ -x "$HOME/.opencode/bin/opencode" ]; then
+  echo "OK opencode $("$HOME/.opencode/bin/opencode" --version 2>/dev/null | tail -1)"
+else
+  echo "WARN opencode absent — review_pair will report the third seat unavailable"
+fi
+
 echo "=== done $(date -u +%FT%TZ) ==="

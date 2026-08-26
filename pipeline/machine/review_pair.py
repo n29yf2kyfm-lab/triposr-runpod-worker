@@ -48,6 +48,7 @@ import argparse
 import json
 import os
 import subprocess
+import tempfile
 import sys
 import time
 
@@ -112,12 +113,25 @@ def ask_opencode(claim, evidence, images, timeout=900):
     Unlike Fable 5 this half IS scriptable, so a council run needs only the one
     manual hand-off.
     """
+    # OPENCODE IS AN AGENT, NOT A CHAT ENDPOINT, and that bit twice: given file
+    # paths and a repo to stand in, it went EXPLORING (`ls -la /tmp/gr/`) and
+    # never produced a verdict, burning its whole budget. Three fences, all of
+    # them because of that:
+    #   1. NEVER list file paths. The old prompt ended with "SHEETS: <paths>",
+    #      which is an invitation to go and read them. Images are described in
+    #      the evidence by the caller instead.
+    #   2. Say plainly it must not read or run anything.
+    #   3. Run it in a NEUTRAL EMPTY cwd, not the repo -- if there is nothing
+    #      to explore, exploring cannot eat the budget. This also keeps a
+    #      reviewer away from a tree holding five live credentials.
     prompt = (f"You are the THIRD reviewer on a PRODUCTION CLAIM. The other two are "
               f"ox (z-ai/glm-5.3-flash) and Fable 5 (Anthropic). You are a different "
               f"model family from both -- do NOT defer to either.\n\n"
+              "ANSWER FROM THE TEXT BELOW ONLY. Do not read files, do not list "
+              "directories, do not run commands -- everything you need is here, and "
+              "a review that spends its budget exploring returns nothing.\n\n"
               f"THE BAR:\n{BAR}\n\nTHE CLAIM:\n{claim}\n\n"
               f"MEASURED EVIDENCE:\n{json.dumps(evidence, indent=2)}\n\n"
-              f"SHEETS: {', '.join(images or []) or '(none)'}\n\n"
               "House rules: a number standing in for something it does not measure is "
               "the commonest failure here; a gate never observed to fail has not been "
               "tested; an average hides the tail; the render arbitrates over any "
@@ -125,19 +139,30 @@ def ask_opencode(claim, evidence, images, timeout=900):
               "Answer briefly, no praise: 1) is any number doing work it cannot? "
               "2) which bar item is least supported and what would settle it? "
               "3) anything that contradicts the claim. "
-              "Then: Verdict: PASS or FAIL, one line why.")
+              "Then a FINAL LINE of exactly: Verdict: PASS   or   Verdict: FAIL")
     oc = os.path.expanduser("~/.opencode/bin/opencode")
     if not os.path.exists(oc):
-        return None, "opencode not installed (~/.opencode/bin/opencode)"
+        return None, ("opencode not installed (~/.opencode/bin/opencode) — it is a "
+                      "MACHINE-LOCAL install and does not survive a container "
+                      "rollback; reinstall via .claude/hooks/session-start.sh")
     cmd = [oc, "run", "--pure", "--agent", "plan",
            "-m", os.environ.get("COUNCIL_MODEL",
                                 "openrouter/~deepseek/deepseek-v4-flash-latest"),
            prompt]
     try:
+        neutral = tempfile.mkdtemp(prefix="council-")      # nothing here to explore
         r = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout,
-                           cwd=os.path.dirname(HERE))
+                           cwd=neutral)
         out = (r.stdout or "").strip()
-        return (out, None) if out else (None, f"opencode returned nothing (rc={r.returncode}): {(r.stderr or '')[:300]}")
+        if not out:
+            return None, f"opencode returned nothing (rc={r.returncode}): {(r.stderr or '')[:300]}"
+        # DISTINGUISH "explored instead of judging" FROM "no output at all".
+        # Recording shell transcript as a review would put a non-review in the
+        # council record, which is worse than a missing reviewer.
+        if "verdict" not in out.lower():
+            return None, ("opencode produced output but NO VERDICT — it explored "
+                          f"instead of judging. tail: {out[-200:]}")
+        return out, None
     except subprocess.TimeoutExpired:
         return None, f"opencode timed out after {timeout}s"
     except Exception as e:
