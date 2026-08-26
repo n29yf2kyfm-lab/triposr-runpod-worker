@@ -37,6 +37,7 @@ Run:
 """
 import argparse
 import json
+import os
 import sys
 
 import numpy as np
@@ -57,6 +58,8 @@ def _area_weights(v, f):
 
 
 def analyse(path, glass_node="glass", lamp_node="Lamp_Lens"):
+    if not os.path.exists(path):
+        raise SystemExit(f"no such file: {path}")
     sc = trimesh.load(path, process=False)
     geoms = dict(sc.geometry)
     if glass_node not in geoms:
