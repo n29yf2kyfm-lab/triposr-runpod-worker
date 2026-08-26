@@ -18,12 +18,20 @@
 # module scope (line 6), so it would drag in every one of those deps before
 # reaching a geometry-only call. This bootstrap writes its own driver.
 #
-# TRAINING DEPS ARE NOT ON THE PATH, verified rather than assumed. `wandb` and
-# `streaming` ARE module-scope imports, but in utils/saving.py and
-# data/Objaverse.py, which the pipeline never reaches: utils/__init__ imports
-# only `base`, and utils.saving is pulled in solely by systems/base.py (the
-# training system). Same class of check as the P3-SAM module that reached
-# sideways into XPart.
+# THE TRAINING DEPS *ARE* ON THE PATH. This header previously claimed the
+# opposite -- "the pipeline never reaches data/Objaverse.py" -- and that was
+# WRONG, proven by a rented pod: step1x3d_geometry/__init__.py line 52 does
+# `from . import data, models, systems` UNCONDITIONALLY, so importing anything
+# in the package executes data/ and systems/ first. Two pods died on this
+# (pytorch_lightning at line 37, then streaming at line 52).
+#
+# MY AST SCAN MISSED IT for a reason worth keeping: it walked the chain FROM
+# the pipeline module, but Python executes the package __init__ BEFORE any
+# submodule, so the scan had a blind spot at precisely the entry point. Scan
+# from the PACKAGE ROOT, not from the module you intend to call.
+#
+# Owner ruling: pin the deps rather than patch the import out. mosaicml-streaming
+# provides `streaming`; imageio and wandb complete data/ and systems/.
 #
 # LAZY vs EAGER, which decides what must be installed:
 #   lazy (inside functions) -> diso, torch_cluster, sageattention, fpsample
@@ -81,7 +89,8 @@ pip install -q \
   "pillow==10.3.0" "scikit-image" "timm==0.9.16" "opencv-python-headless" \
   "pymeshlab" "PyMCubes" "rembg==2.0.65" "onnxruntime" \
   "pytorch-lightning==2.2.4" "lightning-utilities==0.11.2" \
-  "bs4==0.0.2" "beautifulsoup4" "tqdm" "packaging" 2>&1 | tail -5
+  "bs4==0.0.2" "beautifulsoup4" "tqdm" "packaging" \
+  "mosaicml-streaming==0.11.0" "imageio==2.34.1" "wandb==0.18.6" 2>&1 | tail -5
 
 # TORCH GUARD, again: pytorch-lightning is the classic dep that quietly moves
 # torch, and the torch_cluster wheel below is built for exactly 2.5.1+cu124.
@@ -94,7 +103,7 @@ python3 -c "import torch;assert torch.__version__.startswith('2.5.1'),torch.__ve
 # The first attempt installed from a hand-read of the submodules and died on
 # pytorch_lightning, which is imported at line 37 of the package __init__ — with
 # bs4 queued behind it. Scan the chain, do not read the top of a file.
-python3 -c "import diffusers,transformers,trimesh,rembg,pytorch_lightning,bs4,timm,skimage,pymeshlab,omegaconf,jaxtyping,typeguard;print('core deps ok')" || die CORE_DEPS
+python3 -c "import diffusers,transformers,trimesh,rembg,pytorch_lightning,bs4,timm,skimage,pymeshlab,omegaconf,jaxtyping,typeguard,streaming,imageio,wandb;print('core deps ok')" || die CORE_DEPS
 
 # diso: lazy, but it IS the surface extractor -> a geometry run needs it.
 pip install -q diso 2>&1 | tail -3 || echo "diso pip failed"
