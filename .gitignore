@@ -3,3 +3,6 @@ __pycache__/
 .env
 *.key
 secrets/
+
+# third-party tools cloned by tools/*/install.sh
+vendor/
