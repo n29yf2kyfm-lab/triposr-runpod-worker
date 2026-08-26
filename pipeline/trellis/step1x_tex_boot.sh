@@ -65,6 +65,25 @@ sb_file() { ( set +x
     *)  echo "UPLOAD_FAILED $1 http=$_code body=$(head -c 200 /tmp/put.out)"; exit 1 ;;
   esac ) ; }
 stage() { echo "=== STAGE:$1 ==="; report "$LOGKEY"; }
+
+# EVERY `pip install -q ... 2>&1 | tail -N` IN THIS PROJECT IS A TRAP, twice
+# over: without pipefail the pipeline's status is tail's (always 0) so a failed
+# install reads as success, AND the tail throws away the error that explains
+# it. Run 1 lost nvdiffrast's own "use --no-build-isolation" banner that way
+# and had to be diagnosed from the upstream source afterwards. pipq captures
+# the FULL log to a file, returns pip's REAL status, and prints a generous
+# tail only when it fails.
+pipq() {  # pipq "<pip args>" <logfile>
+  local _log="${2:-/workspace/pip.log}"
+  # shellcheck disable=SC2086
+  pip install $1 > "$_log" 2>&1
+  local _rc=$?
+  if [ "$_rc" -ne 0 ]; then
+    echo "PIP FAILED (rc=$_rc) for: $1"
+    tail -40 "$_log"
+  fi
+  return $_rc
+}
 FUSE_MIN="${S1X_FUSE_MIN:-75}"
 fuse() {
   echo "=== FUSE: holding ${FUSE_MIN}m then self-terminating ==="
@@ -88,23 +107,23 @@ git clone --depth 1 https://github.com/stepfun-ai/Step1X-3D s1x || die CLONE
 
 stage deps_base
 apt-get update -qq && apt-get install -y -qq libopengl0 libegl1 libglx0 2>&1 | tail -2
-pip install -q torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cu124 2>&1 | tail -3
+pipq "torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cu124" /workspace/pip_torch.log || die TORCH_INSTALL
 python3 -c "import torch;assert torch.__version__.startswith('2.5.1'),torch.__version__;assert torch.cuda.is_available()" || die TORCH_PIN
 
 # The geometry package's eager training deps are STILL required: the texture
 # pipeline imports step1x3d_geometry.models.pipelines.pipeline_utils (line 27),
 # and step1x3d_geometry/__init__.py:52 does `from . import data, models,
 # systems` unconditionally. Two earlier pods died on exactly this.
-pip install -q \
-  "diffusers==0.32.2" "transformers==4.48.0" "huggingface-hub>=0.26.2,<1.0" \
-  "safetensors" "accelerate" "omegaconf==2.3.0" "einops==0.8.0" \
-  "jaxtyping==0.2.28" "typeguard" "trimesh==4.3.2" "numpy==1.26.4" \
-  "pillow==10.3.0" "scikit-image" "timm>=1.0" "opencv-python-headless" \
-  "matplotlib" "scipy" "pymeshlab" "PyMCubes" "rembg==2.0.65" "onnxruntime" \
-  "pytorch-lightning==2.2.4" "lightning-utilities==0.11.2" \
-  "bs4==0.0.2" "beautifulsoup4" "tqdm" "packaging" \
-  "mosaicml-streaming==0.11.0" "imageio==2.34.1" "wandb==0.18.6" \
-  "xatlas" "cupy-cuda12x" 2>&1 | tail -5
+pipq "\
+  diffusers==0.32.2 transformers==4.48.0 huggingface-hub>=0.26.2,<1.0 \
+  safetensors accelerate omegaconf==2.3.0 einops==0.8.0 \
+  jaxtyping==0.2.28 typeguard trimesh==4.3.2 numpy==1.26.4 \
+  pillow==10.3.0 scikit-image timm>=1.0 opencv-python-headless \
+  matplotlib scipy pymeshlab PyMCubes rembg==2.0.65 onnxruntime \
+  pytorch-lightning==2.2.4 lightning-utilities==0.11.2 \
+  bs4==0.0.2 beautifulsoup4 tqdm packaging \
+  mosaicml-streaming==0.11.0 imageio==2.34.1 wandb==0.18.6 \
+  xatlas cupy-cuda12x" /workspace/pip_deps.log || die CORE_DEPS_INSTALL
 
 python3 - <<'PY' || die PYMESHLAB_IO
 import tempfile, os, trimesh, pymeshlab, importlib.metadata as md
@@ -120,11 +139,42 @@ PY
 stage pytorch3d
 # CACHE FIRST. A prior run's wheel makes this stage ~30 seconds instead of ~15
 # minutes, and the build is deterministic for a given (py, torch, cuda, sm).
+#
+# THE WHEEL IS CHUNKED. Run 1 built it fine and then lost it to a 413
+# "EntityTooLarge" on the plain object POST -- the >~25MB bucket ceiling this
+# project has already paid for twice (Gate 6's 63MB GLB, and the Gate 3 v6
+# deliverable that was destroyed outright). Gates 4 and 5 survived because they
+# CHUNKED WITH A MANIFEST; that is the pattern, so use it rather than
+# rediscovering the ceiling a fourth time.
+CHUNK_MB=16
 cd /workspace
+rm -f /workspace/p3d.whl
 if curl -fsSL -H "apikey: ${SB_KEY}" -H "Authorization: Bearer ${SB_KEY}" \
-     "$SB/$PRE/$WHEEL_KEY" -o /workspace/p3d.whl && [ -s /workspace/p3d.whl ]; then
-  echo "pytorch3d wheel CACHE HIT ($(stat -c%s /workspace/p3d.whl) bytes)"
-  pip install -q /workspace/p3d.whl 2>&1 | tail -3
+     "$SB/$PRE/${WHEEL_KEY}.manifest" -o /workspace/whl.manifest 2>/dev/null \
+   && [ -s /workspace/whl.manifest ]; then
+  echo "pytorch3d wheel MANIFEST found:"; cat /workspace/whl.manifest
+  NPARTS=$(grep -c '^part ' /workspace/whl.manifest)
+  WANT_SHA=$(awk '/^sha256 /{print $2}' /workspace/whl.manifest)
+  OK=1
+  for n in $(seq 0 $((NPARTS-1))); do
+    curl -fsSL -H "apikey: ${SB_KEY}" -H "Authorization: Bearer ${SB_KEY}" \
+      "$SB/$PRE/${WHEEL_KEY}.part$(printf %03d $n)" -o /workspace/whlpart.$n || { OK=0; break; }
+  done
+  if [ "$OK" = "1" ]; then
+    cat $(for n in $(seq 0 $((NPARTS-1))); do echo /workspace/whlpart.$n; done) > /workspace/p3d.whl
+    GOT_SHA=$(sha256sum /workspace/p3d.whl | cut -d' ' -f1)
+    if [ "$GOT_SHA" = "$WANT_SHA" ]; then
+      echo "wheel CACHE HIT, sha256 verified ($(stat -c%s /workspace/p3d.whl) bytes)"
+    else
+      echo "wheel sha MISMATCH want=$WANT_SHA got=$GOT_SHA — rebuilding"
+      rm -f /workspace/p3d.whl
+    fi
+  else
+    echo "a wheel part failed to download — rebuilding"; rm -f /workspace/p3d.whl
+  fi
+fi
+if [ -s /workspace/p3d.whl ]; then
+  pipq /workspace/p3d.whl /workspace/pip_p3d.log || die P3D_WHEEL_INSTALL
 else
   echo "pytorch3d wheel CACHE MISS — building from source"
   # Pin the arch list to THIS card. Derived, never guessed: building for every
@@ -134,7 +184,7 @@ else
   export TORCH_CUDA_ARCH_LIST="$ARCH"
   export MAX_JOBS=$(nproc)
   export FORCE_CUDA=1
-  pip install -q "fvcore" "iopath" 2>&1 | tail -2
+  pipq "fvcore iopath" /workspace/pip_fvcore.log || die FVCORE
   git clone --depth 1 https://github.com/facebookresearch/pytorch3d.git /workspace/p3d_src || die P3D_CLONE
   cd /workspace/p3d_src
   python3 setup.py bdist_wheel > /workspace/p3d_build.log 2>&1
@@ -144,17 +194,38 @@ else
   [ "$P3D_RC" -eq 0 ] || { sb_file "p3d_build.log" /workspace/p3d_build.log || true; die P3D_BUILD; }
   WHL=$(ls /workspace/p3d_src/dist/*.whl 2>/dev/null | head -1)
   [ -n "$WHL" ] || die P3D_NO_WHEEL
-  pip install -q "$WHL" 2>&1 | tail -3
-  # cache it before anything else can go wrong
-  sb_file "$WHEEL_KEY" "$WHL" || echo "wheel cache upload failed — not fatal"
+  pipq "$WHL" /workspace/pip_p3d.log || die P3D_WHEEL_INSTALL
+  # CACHE IT BEFORE ANYTHING ELSE CAN GO WRONG -- chunked, because a single
+  # POST of this wheel 413s. Manifest carries the part count and a sha256 so a
+  # truncated or partial cache can never be silently installed later.
+  ( cd /workspace && rm -f whlup.* \
+    && split -b $((CHUNK_MB*1024*1024)) -d -a 3 "$WHL" whlup. \
+    && N=0 && for f in whlup.*; do
+         sb_file "${WHEEL_KEY}.part$(printf %03d $N)" "$f" || exit 1
+         N=$((N+1))
+       done \
+    && { echo "sha256 $(sha256sum "$WHL" | cut -d' ' -f1)"
+         echo "bytes $(stat -c%s "$WHL")"
+         for f in whlup.*; do echo "part $f"; done; } > /workspace/whl.manifest \
+    && sb_file "${WHEEL_KEY}.manifest" /workspace/whl.manifest ) \
+    && echo "wheel cached in chunks — next run skips the build" \
+    || echo "wheel cache failed — NOT fatal, the next run just rebuilds"
   cd /workspace
 fi
 python3 -c "import torch, pytorch3d; print('pytorch3d ok', pytorch3d.__version__)" || die P3D_IMPORT
 python3 -c "import torch; from pytorch3d import _C; print('pytorch3d CUDA ext ok')" || die P3D_CUDA_EXT
 
 stage nvdiffrast
-pip install -q ninja 2>&1 | tail -1
-pip install -q git+https://github.com/NVlabs/nvdiffrast.git 2>&1 | tail -3
+pipq ninja /workspace/pip_ninja.log || die NINJA
+# --no-build-isolation IS MANDATORY, and nvdiffrast's own setup.py says so in a
+# 70-asterisk banner: it does `from torch.utils.cpp_extension import
+# BuildExtension, CUDAExtension` at module scope and exit(1)s when that fails.
+# Build isolation creates a fresh env with NO torch, so the import always
+# fails there. Run 1 died on exactly this -- and the banner naming the fix was
+# printed on the pod and thrown away by a `| tail -3`, which is why the whole
+# pip-swallowing pattern is gone from this file now.
+pipq "--no-build-isolation git+https://github.com/NVlabs/nvdiffrast.git" /workspace/pip_nvdr.log \
+  || { sb_file "pip_nvdr.log" /workspace/pip_nvdr.log || true; die NVDIFFRAST_INSTALL; }
 python3 -c "import torch, nvdiffrast.torch as dr; print('nvdiffrast imports ok')" || die NVDIFFRAST
 # nvdiffrast JIT-compiles on FIRST USE, not on import -- so an import check is
 # not evidence it works. Build the actual CUDA context the pipeline builds.
@@ -166,7 +237,8 @@ PY
 
 stage custom_rasterizer
 cd /workspace/s1x/step1x3d_texture/custom_rasterizer
-pip install -q . > /workspace/cr_build.log 2>&1 || { tail -20 /workspace/cr_build.log; die CUSTOM_RASTERIZER; }
+pipq "--no-build-isolation ." /workspace/cr_build.log \
+  || { sb_file "cr_build.log" /workspace/cr_build.log || true; die CUSTOM_RASTERIZER; }
 python3 -c "import torch, custom_rasterizer; print('custom_rasterizer ok')" || die CR_IMPORT
 
 stage import_gate
