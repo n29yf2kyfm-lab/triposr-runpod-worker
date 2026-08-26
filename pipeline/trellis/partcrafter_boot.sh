@@ -140,13 +140,44 @@ echo "found ${#GLBS[@]} glb files"
 [ "${#GLBS[@]}" -ge 2 ] || die NO_PARTS      # 1 file = a fused blob, not parts
 
 stage upload
-i=0
-for g in "${GLBS[@]}"; do
+# RUN 3 PRODUCED ALL 17 MESHES AND SHIPPED NONE OF THEM. Two mistakes, both
+# mine, both already-recorded lessons:
+#   1. the loop was sorted alphabetically, so `object.glb` -- the big COMBINED
+#      mesh -- went first, hit the >~25MB bucket ceiling with a 413, and
+#      `|| die UPLOAD_PART` aborted the whole stage before ANY of the 16 small
+#      parts was attempted. The pod was then deleted and the work was gone.
+#   2. a single upload failure was fatal to 16 independent uploads.
+# CLAUDE.md: "Upload the ARTEFACT, not just the evidence about it" and "a gate
+# is not complete while its primary deliverable exists only on local disk".
+# So: PARTS FIRST (they are what the next stage needs), failures are counted
+# rather than fatal, and anything over the ceiling is chunked with a manifest
+# -- the same pattern that rescued the pytorch3d wheel earlier today.
+CHUNK_MB=16
+sb_big() {  # sb_big <key> <file> — direct if small, chunked+manifest if not
+  local key="$1" f="$2" sz
+  sz=$(stat -c%s "$f")
+  if [ "$sz" -lt $((20*1024*1024)) ]; then sb_file "$key" "$f"; return $?; fi
+  echo "chunking $key ($sz bytes)"
+  local d; d=$(mktemp -d); ( cd "$d" && split -b $((CHUNK_MB*1024*1024)) -d -a 3 "$f" p. ) || return 1
+  local n=0
+  for c in "$d"/p.*; do sb_file "${key}.part$(printf %03d $n)" "$c" || { rm -rf "$d"; return 1; }; n=$((n+1)); done
+  { echo "sha256 $(sha256sum "$f" | cut -d' ' -f1)"; echo "bytes $sz"; echo "parts $n"; } > "$d/manifest"
+  sb_file "${key}.manifest" "$d/manifest" || { rm -rf "$d"; return 1; }
+  rm -rf "$d"; return 0
+}
+
+ok=0; failed=0
+# parts first, combined blob last — order by name with object.glb sorted to end
+for g in $(printf '%s\n' "${GLBS[@]}" | grep -v '/object\.glb$'; printf '%s\n' "${GLBS[@]}" | grep '/object\.glb$'); do
   base=$(basename "$g" .glb)
-  sb_file "parts/pc_${base}.glb" "$g" || die UPLOAD_PART
-  i=$((i+1))
+  if sb_big "parts/pc_${base}.glb" "$g"; then ok=$((ok+1)); else
+    failed=$((failed+1)); echo "WARN upload failed for $base — continuing"
+  fi
 done
-echo "uploaded $i part files under $PRE/parts/"
+echo "uploaded $ok file(s), $failed failed, under $PRE/parts/"
+# Only NOW is it safe to fail: judge on what actually landed, not on the first
+# error. 2 is the same floor the collect stage uses -- 1 file means a blob.
+[ "$ok" -ge 2 ] || die UPLOAD_TOO_FEW_PARTS
 
 stage measure
 python3 - <<'PY' 2>&1 | tail -25
