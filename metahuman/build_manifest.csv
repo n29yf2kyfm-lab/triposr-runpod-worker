@@ -1,0 +1,20 @@
+component,file,path,purpose,status,notes
+MetaHuman worker,Dockerfile,metahuman/Dockerfile,Builds the GPU image: installs PIFuHD + pose model + Python deps and bakes in the model weights,committed_pushed,Not GPU-build-tested yet
+MetaHuman worker,handler.py,metahuman/handler.py,Worker logic: photo in (image_url or image_b64) -> 3D model out (glb_b64),committed_pushed,Runs recon as subprocess; reloads model per job
+MetaHuman worker,gen_rect.py,metahuman/gen_rect.py,Helper that finds the person in the photo and writes the crop rectangle PIFuHD needs,committed_pushed,Ported from PIFuHD demo; np.int casts removed
+MetaHuman worker,README.md,metahuman/README.md,Technical details: input/output spec, deploy notes, known risks,committed_pushed,Lists likely first-build failure points
+MetaHuman worker,HANDOFF.md,metahuman/HANDOFF.md,Plain-language summary for a non-developer,committed_pushed,Overview of the whole build
+MetaHuman worker,build_manifest.csv,metahuman/build_manifest.csv,This file: machine-readable list of what was built,committed_pushed,For import into a spreadsheet
+CI,metahuman-docker-build.yml,.github/workflows/metahuman-docker-build.yml,Auto-builds and pushes the Docker image on changes to metahuman/ on main,committed_pushed,Pushes tags metahuman-v1 / metahuman-latest / metahuman-<sha>
+Model,PIFuHD,external (facebookresearch/pifuhd),Single-photo to 3D human reconstruction model,integrated,Weights download free; ECON/SIFU avoided (SMPL-X license wall)
+Model,lightweight-human-pose-estimation,external (Daniil-Osokin repo),Detects the person to crop before reconstruction,integrated,Checkpoint baked into image
+Docker image,alamk123/ai-mechanic:metahuman-latest,Docker Hub,The deployable image the RunPod endpoint should point at,pending_build,Produced by CI once code reaches main
+Input field,image_url,handler input,URL of a person photo to reconstruct,available,Either image_url or image_b64 required
+Input field,image_b64,handler input,Base64 person photo to reconstruct,available,Either image_url or image_b64 required
+Input field,resolution,handler input,Mesh resolution; default 256 (512 sharper but slower),optional,Env override PIFUHD_RESOLUTION
+Output field,glb_b64,handler output,The 3D model as base64 GLB,available,Main deliverable
+Output field,glb_path,handler output,Path to persisted GLB on the network volume,available,Null when no volume mounted
+Git branch,claude/meta-human-clone-uihgxq,repo branch,Where all the work is committed and pushed,active,No pull request opened yet
+Next step,Merge to main,action,Triggers the CI build of the image,todo,No PR opened yet
+Next step,Create RunPod endpoint,action,Point a serverless endpoint at metahuman-latest (any Ampere GPU),todo,e.g. AMPERE_48
+Next step,Run test job,action,Submit one person photo and confirm a GLB is returned,todo,Send me the error text if it fails
