@@ -1,0 +1,6 @@
+{
+  "name": "unlazy",
+  "description": "Anti-laziness completion discipline: acceptance gates written before work starts, Depth Tree decomposition, and a Stop hook that blocks a done-report while gates are unmet. Vendored from Leonxlnx/unlazy (MIT). Local only — no network, no credential reads.",
+  "version": "2.1.0",
+  "author": { "name": "Leonxlnx", "url": "https://github.com/Leonxlnx/unlazy" }
+}
