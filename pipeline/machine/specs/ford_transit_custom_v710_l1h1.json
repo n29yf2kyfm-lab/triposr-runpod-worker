@@ -1,0 +1,43 @@
+{
+  "identity": {
+    "make": "ford",
+    "model": "transit custom",
+    "generation": "V710 (second generation, 2023-on)",
+    "variant": "L1 H1 panel van",
+    "note": "GENERATION MATTERS AND WAS INITIALLY GOT WRONG. The van this file exists for is a 2024 E-Transit Custom, i.e. SECOND generation. Earlier proportion work in this session compared it against FIRST-generation figures (L 4973, W 1986, H 1925-2000) recalled from memory, which is exactly what the accuracy rule forbids. Those gen-1 numbers are real, they are simply the wrong car. Trim and model year are NOT asserted beyond what the source photo shows."
+  },
+  "dimensions": {
+    "length_m": {
+      "value": 5.050,
+      "source": "Parkers 2024-dimensions page AND Vansdirect load-sizing guide, independently, both 5050mm for L1 (L2 = 5450mm)"
+    },
+    "width_m": {
+      "value": 2.032,
+      "source": "Parkers 2024-dimensions page, 2032mm EXCLUDING mirrors. SINGLE-SOURCED - flagged deliberately. Corroborated indirectly: Parkers and Vansdirect BOTH give 2275mm including mirrors, so this implies 243mm of total mirror overhang (~121mm per side), which is physically sensible for a van, and Parkers agrees with the other sources on every figure they share."
+    },
+    "height_m": {
+      "value": 1.967,
+      "source": "Parkers 1966-1968mm for H1; Vansdirect 1968mm. Midpoint of the Parkers range taken. H2 high roof is 2464-2471mm and is NOT this vehicle."
+    },
+    "wheelbase_m": {
+      "value": 3.100,
+      "source": "Parkers 3100mm for L1 (L2 = 3500mm); Wikipedia gives the generation range as 3100-3500mm, consistent"
+    },
+    "width_incl_mirrors_m": {
+      "value": 2.275,
+      "source": "Parkers AND Vansdirect, independently. Recorded because fit_spec must NOT fit a Z extent to this figure - it is here so the mirror overhang can be reasoned about, not fitted to."
+    }
+  },
+  "tyre": {
+    "spec": "215/65R16",
+    "source": "PROVISIONAL - a common OE fitment for this class, NOT verified for this specific van. Used only as an in-mesh absolute ruler to attribute a proportion error to an axis; the attribution was separately shown to be robust to this assumption (rescaling any single axis to correct still leaves width the outlier), so a wrong tyre size shifts the absolute metres but not the conclusion."
+  },
+  "labels": {
+    "body": "carpaint",
+    "wheel_strip_prefixes": ["Tyre_Rubber", "Rim_Alloy", "Arch_Cavity"],
+    "liner_name": "ARCH_LINER"
+  },
+  "expect": {
+    "note": "No axle self-test values: this is a GENERATED body whose arches have not been aligned to spec, and pinning expected axle positions from an unaligned mesh would encode the error as ground truth."
+  }
+}
