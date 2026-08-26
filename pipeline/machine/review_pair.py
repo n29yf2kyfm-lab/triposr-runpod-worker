@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""review_pair.py — the standing reviewer pair for a PRODUCTION CLAIM.
+"""review_pair.py — the standing reviewer COUNCIL for a PRODUCTION CLAIM.
 
 OWNER RULE 2026-08-26: no production claim ships on my own say-so. Fable 5 and
 ox review it first. This is the SAME pair that wrote PRESERVE_PLAN.md — it is
@@ -23,7 +23,20 @@ THE TWO HALVES REACH THEIR MODEL DIFFERENTLY, and that is not an oversight:
             bundle and records its verdict when handed back with --fable-verdict.
             Attempting to fake it from here would produce a review nobody ran.
 
-A claim is DONE only when both verdicts are recorded and neither says FAIL.
+COUNCIL OF THREE since 2026-08-26 (owner: "use as Council with ox"). Two
+reviewers on one lab's model is one opinion counted twice, so the third runs a
+DIFFERENT family:
+
+  ox        z-ai/glm-5.3-flash   scriptable, in-process via ox.py
+  Fable 5   Anthropic            via the harness Agent tool (manual hand-off)
+  opencode  deepseek             scriptable, headless, READ-ONLY agent
+
+The value is disagreement, and it showed on its first outing: on the hybrid van
+run ox returned PASS and Fable 5 returned FAIL, and the FAIL was right -- it
+found in the code that the glass channel could not fire on a van at all, which
+ox had missed and I had reported as "unresolved".
+
+A claim is DONE only when ALL THREE verdicts are recorded and none says FAIL.
 
 Run:
   python3 review_pair.py --claim "van ships to bar" --evidence ev.json \\
@@ -77,6 +90,56 @@ def ask_ox(claim, evidence, images, timeout=900):
         return out, None
     except subprocess.TimeoutExpired:
         return None, f"ox timed out after {timeout}s"
+    except Exception as e:
+        return None, f"{type(e).__name__}: {e}"
+
+
+def ask_opencode(claim, evidence, images, timeout=900):
+    """Third reviewer: OpenCode, run headless on a DIFFERENT model family.
+
+    WHY A THIRD, AND WHY DEEPSEEK. Two reviewers running the same lab's model
+    is one opinion counted twice. ox is z-ai/glm-5.3-flash and Fable 5 is
+    Anthropic, so this one is deliberately deepseek -- the disagreement is the
+    product. It earned its place immediately: on the hybrid run ox returned
+    PASS and Fable 5 returned FAIL, and the FAIL was correct.
+
+    READ-ONLY BY CONSTRUCTION. OpenCode's default `build` agent carries
+    `permission: * allow` -- full write and bash -- which is the wrong thing to
+    point at a repo holding five live credentials. `--agent plan` is the
+    read-only agent and `--pure` disables external plugins. A reviewer that can
+    edit what it is reviewing is not a reviewer.
+
+    Unlike Fable 5 this half IS scriptable, so a council run needs only the one
+    manual hand-off.
+    """
+    prompt = (f"You are the THIRD reviewer on a PRODUCTION CLAIM. The other two are "
+              f"ox (z-ai/glm-5.3-flash) and Fable 5 (Anthropic). You are a different "
+              f"model family from both -- do NOT defer to either.\n\n"
+              f"THE BAR:\n{BAR}\n\nTHE CLAIM:\n{claim}\n\n"
+              f"MEASURED EVIDENCE:\n{json.dumps(evidence, indent=2)}\n\n"
+              f"SHEETS: {', '.join(images or []) or '(none)'}\n\n"
+              "House rules: a number standing in for something it does not measure is "
+              "the commonest failure here; a gate never observed to fail has not been "
+              "tested; an average hides the tail; the render arbitrates over any "
+              "metric; 'proven' must mean observed, not inferred.\n\n"
+              "Answer briefly, no praise: 1) is any number doing work it cannot? "
+              "2) which bar item is least supported and what would settle it? "
+              "3) anything that contradicts the claim. "
+              "Then: Verdict: PASS or FAIL, one line why.")
+    oc = os.path.expanduser("~/.opencode/bin/opencode")
+    if not os.path.exists(oc):
+        return None, "opencode not installed (~/.opencode/bin/opencode)"
+    cmd = [oc, "run", "--pure", "--agent", "plan",
+           "-m", os.environ.get("COUNCIL_MODEL",
+                                "openrouter/~deepseek/deepseek-v4-flash-latest"),
+           prompt]
+    try:
+        r = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout,
+                           cwd=os.path.dirname(HERE))
+        out = (r.stdout or "").strip()
+        return (out, None) if out else (None, f"opencode returned nothing (rc={r.returncode}): {(r.stderr or '')[:300]}")
+    except subprocess.TimeoutExpired:
+        return None, f"opencode timed out after {timeout}s"
     except Exception as e:
         return None, f"{type(e).__name__}: {e}"
 
@@ -138,6 +201,11 @@ def main():
             {"verdict_text": txt} if txt else {"error": err})
         print("ox:", "OK" if txt else f"FAILED — {err}")
         if not a.ox_only:
+            otxt, oerr = ask_opencode(a.claim, ev, a.image)
+            rec.setdefault("reviews", {})["opencode"] = (
+                {"verdict_text": otxt} if otxt else {"error": oerr})
+            print("opencode:", "OK" if otxt else f"FAILED — {oerr}")
+        if not a.ox_only:
             rec["fable5_bundle"] = fable_bundle(a.claim, ev, a.image)
             print("\n--- hand this to Fable 5 via the Agent tool, then re-run "
                   "with --fable-verdict ---")
@@ -147,12 +215,16 @@ def main():
     ox_txt = (rv.get("ox") or {}).get("verdict_text") or ""
     ox_pass = "PASS" in ox_txt.upper().split("VERDICT")[-1][:120] if ox_txt else None
     fb = (rv.get("fable5") or {}).get("verdict")
-    rec["both_reviewed"] = bool(ox_txt) and bool(fb)
+    oc_txt = (rv.get("opencode") or {}).get("verdict_text") or ""
+    oc_pass = "PASS" in oc_txt.upper().split("VERDICT")[-1][:120] if oc_txt else None
+    rec["both_reviewed"] = bool(ox_txt) and bool(fb) and bool(oc_txt)
     rec["claim_status"] = ("DONE" if (rec["both_reviewed"] and fb == "PASS"
-                                      and ox_pass is not False) else "NOT DONE")
+                                      and ox_pass is not False
+                                      and oc_pass is not False) else "NOT DONE")
     json.dump(rec, open(a.out, "w"), indent=1)
     print(f"\nwrote {a.out}  ox={'yes' if ox_txt else 'NO'} "
-          f"fable5={fb or 'NOT YET'}  -> {rec['claim_status']}")
+          f"fable5={fb or 'NOT YET'} opencode={'yes' if oc_txt else 'NO'}"
+          f"  -> {rec['claim_status']}")
 
 
 if __name__ == "__main__":
