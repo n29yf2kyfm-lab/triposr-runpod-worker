@@ -63,8 +63,26 @@ glazing is ~12.04%, not 27%. **The direction was right and the magnitude was
 not** — worth checking, because this project's rule is not to take an agent
 report at face value.
 
+## THE PANE-INTEGRITY CLAIM DIED TOO — ox killed it, and it was right
+
+I reported **1.62 loops/component, "best measured on a generated car"**. ox
+pointed out that figure was computed over the SAME CONTAMINATED LABEL SET, i.e.
+with the roof panels in it — so it is not the topology of actual glazing.
+Measured by stripping up-facing and roof-zone faces and re-running the identical
+Blender path:
+
+    labelled "glass"      52 components,  84 loops, 32 holes   -> 1.62 loops/comp
+    74.3% of that AREA is roof / up-facing
+    ACTUAL glazing       143 components,  74 loops,  0 holes   -> 3,182 faces
+
+**143 disconnected fragments averaging ~22 faces, for what should be four or
+five panes.** The real glazing is fragment soup; the flattering number came from
+large, topologically simple roof panels dragging the average down. A metric
+computed over a label set is only as good as the label set — and nothing had
+checked the label set.
+
 ## What actually survives
 
-Tyres: `baseColorFactor` 0.047 from the file, dark in the control, dark in every
-view. Pane integrity 1.62 loops/component, genuinely the best measured here
-(van1 3.84, Golf 2.52, accepted Sportage 1.12). Those two hold.
+**Tyres, and only tyres.** `baseColorFactor` 0.047 from the file, dark in the
+control, dark in every view. Every other material claim on this asset was a
+label-statistic artefact.
