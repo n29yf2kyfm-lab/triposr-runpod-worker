@@ -38,6 +38,85 @@ CLASSES = {
 }
 BOX_THR, TEXT_THR = 0.25, 0.22
 
+# --- PAINT REJECTION for the glass class (added 2026-08-26, van generality) ---
+#
+# WHY. On a Ford Transit Custom PANEL van, GroundingDINO's "car window" box
+# covers the ENTIRE solid cargo flank — verified by overlaying the saved mask on
+# the beauty render, not inferred. The box passes the 0.35-of-car-area filter
+# because that band really is under a third of the car on screen, and SAM then
+# happily segments a flat painted panel as a window. Downstream this glazed the
+# cargo box: 23.6% of the finished van's glazing area sat in its rear third
+# while the raw texture there is solid white paint. glass_probe, the area band
+# gate and glass_topo all PASSED that van (see glass_where.py).
+#
+# THE DISCRIMINATOR, measured across all 10 van views: a real window in a
+# photo-derived texture is DARK (interior behind it), painted metal is not.
+#   9 of 10 views: 79-96% of the "glass" mask sat at >=0.85x the body's own
+#                  median luminance  -> paint
+#   view_04:       0.7%, glass median 57.8 against body 124.9 -> real glazing
+# It is measured against the CAR'S OWN PAINT, not an absolute threshold, so it
+# does not assume a light car.
+#
+# IT IS DELIBERATELY BIASED TOWARDS UNDER-STRIPPING. The two failure directions
+# are not symmetric: leaving a cargo panel glazed makes a panel van look like a
+# Tourneo, but stripping a real window makes the glazing OPAQUE, which is the
+# owner's hard scrap (ruling 2026-08-11). So PAINT_FRAC is conservative, and on
+# a dark car — where glass and paint are both dark and the test cannot separate
+# them — it FAILS OPEN and changes nothing.
+PAINT_FRAC = float(os.environ.get("SEG_PAINT_FRAC", "0.85"))
+# Below this body luminance there is no contrast headroom to judge with.
+PAINT_MIN_BODY_LUM = float(os.environ.get("SEG_PAINT_MIN_BODY", "60"))
+# DEFAULT OFF, ON PURPOSE — the diagnosis is solid and the CALIBRATION is not.
+# The only car this could be calibrated against today is the TRELLIS.2 van, and
+# that van's glazing is genuinely SHREDDED: its windscreen component measures
+# median luminance 196.8 against a body median of 179.0, i.e. brighter than the
+# paint. Any threshold fitted here drops a real windscreen, which is the
+# owner's hard scrap (opaque glazing, 2026-08-11) — the failure direction this
+# rule is explicitly supposed to avoid. And the Yaris views that would serve as
+# the must-NOT-strip control were lost to a container rollback.
+#
+# "A threshold with no positive control behind it is a guess" (CLAUDE.md).
+# TO TURN IT ON, first settle both directions on a car with intact glazing:
+#   1. must strip:     a panel van's cargo flank
+#   2. must NOT strip: that same van's cabin windows AND windscreen
+#   3. must NOT strip: a hatchback's full glazing (regenerate the Yaris views)
+#   4. must fail open: a dark car, where paint and glass are both dark
+# Then set SEG_PAINT_REJECT=1 and record which car calibrated it.
+PAINT_REJECT = os.environ.get("SEG_PAINT_REJECT", "0") == "1"
+
+
+def _lum(rgb):
+    return rgb @ np.array([0.2126, 0.7152, 0.0722])
+
+
+def reject_paint(mask, img_rgb, oncar):
+    """Drop glass pixels as bright as the car's own paint. Returns (mask, note).
+
+    The body reference deliberately does NOT subtract the wheel and lamp masks.
+    CLASSES is iterated glass-first, so those files do not exist yet on a fresh
+    run but DO exist from the previous run on a re-run — the reference would
+    then differ between the two, which is exactly the kind of silent
+    run-to-run inconsistency this repo has been burned by. Wheels and lamps are
+    a few percent of on-car area and dark, so including them only pulls the
+    median DOWN, i.e. strictly toward keeping more glass. Measured both ways on
+    all 10 van views: the bright-share verdict is unchanged.
+    """
+    if not PAINT_REJECT or not mask.any():
+        return mask, "skipped"
+    lum = _lum(np.asarray(img_rgb).astype(float))
+    body = oncar & ~mask
+    if body.sum() < 500:
+        return mask, "no body reference"
+    bmed = float(np.median(lum[body]))
+    if bmed < PAINT_MIN_BODY_LUM:
+        # dark car: glazing and paint are both dark, the test cannot separate
+        # them, and guessing here would risk an opaque-glazing scrap.
+        return mask, f"fail-open (body lum {bmed:.0f} < {PAINT_MIN_BODY_LUM})"
+    keep = mask & (lum < PAINT_FRAC * bmed)
+    dropped = int(mask.sum() - keep.sum())
+    return keep, (f"body lum {bmed:.0f}, dropped {dropped} of {int(mask.sum())} "
+                  f"px ({100*dropped/max(1,mask.sum()):.0f}%) as paint")
+
 dp = AutoProcessor.from_pretrained("IDEA-Research/grounding-dino-tiny")
 dm = AutoModelForZeroShotObjectDetection.from_pretrained("IDEA-Research/grounding-dino-tiny").eval()
 sp = SamProcessor.from_pretrained("facebook/sam-vit-base")
@@ -91,6 +170,9 @@ for fn in sorted(os.listdir(VIEWS)):
                 clip = np.zeros_like(pick); clip[y0:y1, x0:x1] = True
                 mask |= pick & clip
         mask &= oncar
+        if cls == "glass":
+            mask, note = reject_paint(mask, img, oncar)
+            print(f"    glass paint-reject: {note}", flush=True)
         Image.fromarray((mask * 255).astype(np.uint8)).save(
             os.path.join(VIEWS, fn.replace(".png", f"_{cls}.png")))
         view_stats[cls] = {"boxes": len(boxes), "px": int(mask.sum())}
