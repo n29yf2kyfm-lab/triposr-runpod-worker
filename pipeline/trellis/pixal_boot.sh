@@ -31,7 +31,15 @@ mkdir -p /workspace
 exec > >(tee -a "$LOG") 2>&1
 
 SB="https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object"
-PRE="car-meshes/pixal_test"
+# PREFIX AND FILENAMES ARE PARAMETERS, not literals. Two reasons, both paid for:
+# a second run used to OVERWRITE the previous run's input and mesh in place, so
+# an earlier control could not survive a later experiment; and the literal name
+# "golf" has already cost this project an hour of presenting a Yaris as a Golf
+# (CLAUDE.md, 2026-08-20). The launcher passes these in; the defaults keep the
+# original Golf/Yaris test-bed behaviour for anything that does not.
+PRE="${PIXAL_PRE:-car-meshes/pixal_test}"
+IN_NAME="${PIXAL_IN:-golf.png}"
+OUT_NAME="${PIXAL_OUT:-pixal_golf.glb}"
 
 report() { ( set +x
   curl -s -X POST -H "apikey: ${SB_KEY}" -H "Authorization: Bearer ${SB_KEY}" \
@@ -171,7 +179,7 @@ PY
 
 stage fetch_image
 cd /workspace
-curl -fsSL "$SB/public/$PRE/golf.png" -o golf.png || die FETCH_GOLF
+curl -fsSL "$SB/public/$PRE/$IN_NAME" -o golf.png || die FETCH_INPUT
 # HARD GUARD: with rembg disabled, an image without a real alpha mask would
 # silently take the dead path. Assert the contract instead.
 python3 - <<'PY' || die INPUT_NOT_RGBA_CUTOUT
@@ -213,7 +221,7 @@ done
 
 stage measure
 ls -la /workspace/pixal_golf.glb
-sb_file pixal_golf.glb /workspace/pixal_golf.glb
+sb_file "$OUT_NAME" /workspace/pixal_golf.glb
 # crease_density is THE pre-registered number; compute it on the pod so the
 # verdict does not depend on getting the file home
 curl -fsSL "$SB/public/$PRE/crease_density.py" -o /workspace/crease_density.py || true

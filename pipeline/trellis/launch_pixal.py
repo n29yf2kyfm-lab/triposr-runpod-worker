@@ -9,8 +9,16 @@ Base image is our own trellis2-worker-4b (template i1mk2n9dap), which already
 carries the TRELLIS.2 CUDA extensions Pixal3D needs.
 
 Usage: set -a; . /root/.alam3d_env; set +a
-       python3 pipeline/trellis/launch_pixal.py path/to/golf.png
+       python3 pipeline/trellis/launch_pixal.py path/to/cutout.png \\
+           [--prefix car-meshes/pixal_van] [--name van]
+
+--prefix/--name EXIST BECAUSE THE DEFAULTS OVERWRITE. Every run used to land on
+car-meshes/pixal_test/{golf.png,pixal_golf.glb}, so a second vehicle destroyed
+the first one's input and mesh — and the literal "golf" has already cost an hour
+of presenting a Yaris as a Golf (CLAUDE.md 2026-08-20). Give a new vehicle its
+own prefix and name; the defaults preserve the original test-bed behaviour.
 """
+import argparse
 import json
 import os
 import sys
@@ -24,36 +32,38 @@ IMAGE = ("alamk123/ai-mechanic@sha256:"
          "5c5b87edd06cb105d914b9d4c9341411736520ff13045a8d281ce6209709a2bf")
 
 
-def put(local, remote, sb_key):
+def put(local, remote, sb_key, pre=PRE):
     req = urllib.request.Request(
-        f"{SB}/{PRE}/{remote}", data=open(local, "rb").read(), method="POST",
+        f"{SB}/{pre}/{remote}", data=open(local, "rb").read(), method="POST",
         headers={"apikey": sb_key, "Authorization": f"Bearer {sb_key}",
                  "x-upsert": "true",
                  "Content-Type": "application/octet-stream"})
     urllib.request.urlopen(req, timeout=180)
 
 
-def main(golf_png):
+def main(golf_png, pre=PRE, name="golf"):
     key = os.environ["RUNPOD_API_KEY"]
     sb_key = os.environ["SB_KEY"]
+    in_name, out_name = f"{name}.png", f"pixal_{name}.glb"
+    print(f"prefix {pre}  input {in_name}  output {out_name}")
 
-    put(golf_png, "golf.png", sb_key)
-    put(os.path.join(HERE, "pixal_boot.sh"), "pixal_boot.sh", sb_key)
-    put(os.path.join(HERE, "crease_density.py"), "crease_density.py", sb_key)
+    put(golf_png, in_name, sb_key, pre)
+    put(os.path.join(HERE, "pixal_boot.sh"), "pixal_boot.sh", sb_key, pre)
+    put(os.path.join(HERE, "crease_density.py"), "crease_density.py", sb_key, pre)
     import tempfile
     with tempfile.NamedTemporaryFile("w", suffix=".txt", delete=False) as tf:
         tf.write("=== STAGE:launching ===\n")
         tmplog = tf.name
-    put(tmplog, "log.txt", sb_key)
+    put(tmplog, "log.txt", sb_key, pre)
     os.unlink(tmplog)
 
-    url = f"{SB}/public/{PRE}/pixal_boot.sh"
+    url = f"{SB}/public/{pre}/pixal_boot.sh"
     if urllib.request.urlopen(url, timeout=30).status != 200:
         raise SystemExit("bootstrap preflight failed")
     print("bootstrap preflight OK")
 
     body = {
-        "name": "pixal3d-gated-test",
+        "name": f"pixal3d-{name}",
         "imageName": IMAGE,
         "gpuTypeIds": ["NVIDIA A100 80GB PCIe", "NVIDIA A100-SXM4-80GB"],
         "gpuTypePriority": "availability",
@@ -63,6 +73,9 @@ def main(golf_png):
                            f"curl -sSL '{url}?cb='$(date +%s) | bash; "
                            "sleep infinity"],
         "env": {"SB_KEY": sb_key,
+                "PIXAL_PRE": pre,
+                "PIXAL_IN": in_name,
+                "PIXAL_OUT": out_name,
                 "HF_TOKEN": os.environ.get("HF_TOKEN", ""),
                 "HUGGING_FACE_HUB_TOKEN": os.environ.get("HF_TOKEN", ""),
                 "HF_HOME": "/workspace/hf"},
@@ -77,7 +90,7 @@ def main(golf_png):
         raise SystemExit(f"pod launch failed: {pod}")
     print(f"pixal pod {pod_id} launched; monitoring bucket log")
 
-    log_url = f"{SB}/public/{PRE}/log.txt"
+    log_url = f"{SB}/public/{pre}/log.txt"
     t0, last, ok = time.time(), "", False
     try:
         while time.time() - t0 < 5400:          # 90 min hard stop
@@ -121,4 +134,10 @@ def main(golf_png):
 
 
 if __name__ == "__main__":
-    sys.exit(main(sys.argv[1]))
+    ap = argparse.ArgumentParser()
+    ap.add_argument("image", help="RGBA cutout to generate from")
+    ap.add_argument("--prefix", default=PRE, help="bucket prefix for this run")
+    ap.add_argument("--name", default="golf",
+                    help="vehicle name; input <name>.png, output pixal_<name>.glb")
+    a = ap.parse_args()
+    sys.exit(main(a.image, a.prefix, a.name))
