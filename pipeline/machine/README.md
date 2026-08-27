@@ -91,3 +91,39 @@ glass borders straightened, panel noise halved (crease metric 635→380 with
 creases surviving the render check). Remaining gap to catalogue: Pixal's
 own panel micro-structure and soft shut lines — generator-bound, not
 material- or boundary-bound.
+
+## Council audit 2026-08-27: the glass gate passed at the wrong stage
+
+Three-model council (ox / opencode / Fable 5) on the RF67 Golf. Unanimous FAIL,
+and the finding generalises beyond this car:
+
+**A GATE READING TAKEN MID-PIPE IS NOT A READING OF THE SHIPPED FILE.**
+`seg_project` printed "GLASS BAND GATE ... PASS at 5.07%" and that number was
+carried into the delivery. The shipped GLB measures **0.60%** — a FAIL against
+the same 1.0-13.0% band — because `seg_boundary`'s stencil-exhaustiveness rule
+reverts unstamped glass to body AFTER the gate printed. Both numbers are honest
+about their own stage; only the second is honest about the asset. **Re-measure
+every gate on the exported file, and quote that one.**
+
+**PERFECT INTEGRITY ON CRUMBS.** Pane integrity was first reported as
+18 components / 14 loops -> holes = **-4**, which is impossible; the loop count
+had been union-found over all glass boundary edges at once, merging loops across
+components. Counted per component the true figure is 18 components / 18 loops /
+**0 holes, ratio exactly 1.00** — the ideal. It is also meaningless: the
+component face counts are [251, 140, 8, 6, 6, 5, 4, 4, 3, 3, ...], so 16 of 18
+"panes" are crumbs of <=8 faces that each trivially have one outline. Same class
+as the noise-sphere crease result — **a metric passing for the wrong reason.**
+Pair loops/component with a MINIMUM COMPONENT SIZE before trusting it.
+
+**A BEFORE/AFTER PAIR MATCHED BY CONTENT CANNOT DEMONSTRATE A POSE FIX.** The
+delivered sheet captioned a 3/4 tile "nose flip: labels now match reality"; the
+tiles were deliberately paired by matching physical viewpoint so the texture fix
+would be comparable, which by construction shows identical orientation in both
+frames. The flip is proven only by the marker render (emissive cone at +X).
+Ship the marker frame with the claim, not a content-matched pair.
+
+**AND VERIFY THE REVIEWERS.** ox additionally reported "blue smear where the
+front plate was". Measured: plate zone 1.2% bluish pixels at mean RGB
+48.1/48.8/50.4 against an unedited bonnet control at 0.6% and 90.7/92.8/96.1 —
+the same mild cool cast from the 0.45 grey world, present car-wide. Not
+supported. Reviewers are candidate finders too.
