@@ -11,6 +11,16 @@ from io import BytesIO
 import requests, runpod, torch
 from PIL import Image
 
+# /app/Hunyuan3D-2.1 itself must be on the path, not just its subpackages:
+# under the hot-pin the handler runs from /tmp, so Python seeds sys.path with
+# /tmp rather than the repo, `torchvision_fix` silently "skipped", and the
+# texture stage then died on torchvision.transforms.functional_tensor —
+# a failure that does NOT occur with the baked handler and is therefore a
+# property of the deploy, not of the code (measured 2026-08-27).
+sys.path.insert(0, "/app/Hunyuan3D-2.1")
+# hy3dgen (the 2.0-line package) is cloned in by the start command; the 2mv
+# checkpoint's config names its classes, so without it multiview cannot load.
+sys.path.insert(0, "/tmp/h2")
 sys.path.insert(0, "/app/Hunyuan3D-2.1/hy3dshape")
 sys.path.insert(0, "/app/Hunyuan3D-2.1/hy3dpaint")
 os.chdir("/app/Hunyuan3D-2.1")
@@ -44,7 +54,12 @@ def get_mv():
     """
     global mv_pipe
     if mv_pipe is None:
-        mv_pipe = Hunyuan3DDiTFlowMatchingPipeline.from_pretrained(
+        # 2mv is a 2.0-line checkpoint: load it with the 2.0 pipeline class
+        # from hy3dgen, not the 2.1 class. Asking the 2.1 class for it fails
+        # with ModuleNotFoundError: hy3dgen, because the checkpoint config
+        # names hy3dgen classes (measured 2026-08-27).
+        from hy3dgen.shapegen import Hunyuan3DDiTFlowMatchingPipeline as MVPipe
+        mv_pipe = MVPipe.from_pretrained(
             MV_MODEL, subfolder=MV_SUBFOLDER, use_safetensors=True)
     return mv_pipe
 OUT = "/runpod-volume/outputs"
