@@ -20,6 +20,7 @@ import scipy.sparse as sp
 
 GLB, LAB, OUT = sys.argv[1], sys.argv[2], sys.argv[3]
 BODY, GLASS, WHEEL, LAMP, UNSEEN = 0, 1, 2, 3, 4
+TRIM = 7    # badge / grille / chrome: own node so a respray can never touch it
 
 sc = trimesh.load(GLB, force="scene")
 # BAKE NODE TRANSFORMS before reading geometry. geometry.values() alone is the
@@ -119,7 +120,7 @@ mats[UNSEEN] = ("interior", PBRMaterial(name="interior",
                 roughnessFactor=0.9))
 
 out = trimesh.Scene()
-_textured = ([(BODY, "carpaint")]
+_textured = ([(BODY, "carpaint"), (TRIM, "Trim_Chrome")]
              + ([] if RIM_FLAT else [(RIM, "Rim_Alloy")])
              + ([] if LAMP_FLAT else [(LAMP, "Lamp_Lens")]))
 for key, name in _textured:
@@ -142,6 +143,6 @@ out.export(OUT, include_normals=True)   # submesh exports drop NORMALs (v7 lesso
 import os
 share = {n: round(100 * float((lab2 == k).mean()), 2) for k, n in
          ((BODY, "carpaint"), (GLASS, "glass"), (TYRE, "tyre"), (RIM, "rim"),
-          (LAMP, "lamp"), (UNSEEN, "interior"))}
+          (LAMP, "lamp"), (TRIM, "trim"), (UNSEEN, "interior"))}
 print("assembled:", OUT, os.path.getsize(OUT), "bytes")
 print("share:", share)

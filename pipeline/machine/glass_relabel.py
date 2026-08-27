@@ -55,7 +55,9 @@ import trimesh
 GLB, INP, OUT = sys.argv[1], sys.argv[2], sys.argv[3]
 SELFTEST = "--selftest" in sys.argv
 LAMPS = "--lamps" in sys.argv
+TRIM_ON = "--trim" in sys.argv
 BODY, GLASS, WHEEL, LAMP, UNSEEN = 0, 1, 2, 3, 4
+TRIM = 7          # badge / grille bar / chrome — must never take a respray
 
 LUM_SEED = 45.0        # lamp texels are bright; 0.0% FP on bonnet and door
 GREEN_SEED = 6.0        # texel tint above neutral; 0.0% false positives measured
@@ -206,6 +208,44 @@ if LAMPS:
         print(f"  lamp/{zname:5s} {len(seeds)} seeds -> {len(idx)} faces "
               f"({len(keep)} relabelled to lamp)")
 
+# ---- trim: badge, grille bar, chrome. Same brightness seed as the lamps, but
+# the CENTRE band rather than the outboard one — the lamp zones deliberately
+# exclude the centreline, which is exactly where the badge and grille bar sit,
+# so they were left as carpaint and a respray painted the badge. Bar item 3
+# says identity is kept: badges and grille are identity.
+if TRIM_ON:
+    if "lum_face" not in dir():
+        try:
+            _t = np.asarray(m.visual.material.baseColorTexture.convert("RGB")).astype(float)
+            _th, _tw, _ = _t.shape
+            _uvc = np.asarray(m.visual.uv)[m.faces].mean(axis=1)
+            lum_face = _t[(_uvc[:, 1] * (_th - 1)).astype(int).clip(0, _th - 1),
+                          (_uvc[:, 0] * (_tw - 1)).astype(int).clip(0, _tw - 1)].mean(axis=1)
+        except Exception as e:
+            raise SystemExit(f"REFUSED: --trim needs the baseColor texture ({e})")
+    zc_t = np.abs(cent[:, 2] - (lo[2] + hi[2]) / 2) / max((hi[2] - lo[2]) / 2, 1e-9)
+    TRIM_ZONES = {
+        "nose_ctr": (xf > 0.86) & (yf > 0.25) & (yf < 0.55) & (zc_t < 0.32) & (fn[:, 0] > 0.25),
+        "tail_ctr": (xf < 0.14) & (yf > 0.28) & (yf < 0.62) & (zc_t < 0.32) & (fn[:, 0] < -0.25),
+    }
+    for zname, zmask in TRIM_ZONES.items():
+        seeds = np.where(zmask & (lum_face > LUM_SEED))[0]
+        if len(seeds) < MIN_SEEDS:
+            print(f"  trim/{zname:8s} NO SEEDS ({len(seeds)}) — zone left untouched")
+            continue
+        seen = set(seeds.tolist()); stack = list(seeds)
+        while stack:
+            f = stack.pop()
+            for g_ in nbr.get(f, ()):
+                if g_ in seen or not zmask[g_]:
+                    continue
+                seen.add(g_); stack.append(g_)
+        idx = np.fromiter(seen, int)
+        keep = idx[new[idx] == BODY]          # never steal from glass or lamp
+        new[keep] = TRIM
+        print(f"  trim/{zname:8s} {len(seeds)} seeds -> {len(idx)} faces "
+              f"({len(keep)} relabelled to trim)")
+
 # CLOSE HOLES INSIDE A PANE. The flood fill stops at creases, which is right at
 # the pillars and wrong at the header curve and the shadowed upper corners: a
 # handful of faces inside the aperture stay body and still take a respray
@@ -224,7 +264,7 @@ for _ in range(3):
     nt = np.zeros(len(new), np.int32)
     np.add.at(ng, a, is_glass[b]); np.add.at(ng, b, is_glass[a])
     np.add.at(nt, a, 1); np.add.at(nt, b, 1)
-    fill = zone_any & ~is_glass & (nt >= 2) & (ng * 3 >= nt * 2)   # >=2/3 glass
+    fill = zone_any & ~is_glass & (new != TRIM) & (nt >= 2) & (ng * 3 >= nt * 2)   # >=2/3 glass
     if not fill.any():
         break
     new[fill] = GLASS
