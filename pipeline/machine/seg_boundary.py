@@ -34,6 +34,18 @@ GLB, INP, OUT = sys.argv[1], sys.argv[2], sys.argv[3]
 BODY, GLASS, WHEEL, LAMP, UNSEEN = 0, 1, 2, 3, 4
 
 sc = trimesh.load(GLB, force="scene")
+# BAKE NODE TRANSFORMS. Without this the stage reads RAW geometry while every
+# transform-aware stage reads the rotated frame, so the two disagree about
+# which end of the car is the nose. On the RF67 Golf (nose flipped by a root
+# quaternion) that inverted this file's own `rear_half = xf_ < 0.5` rule and
+# the HEADLAMPS were evicted as if they were tail lamps: 611 head-zone lamp
+# faces in, 11 out, headlamp aperture left 95.2% carpaint. Identical defect
+# class to the one fixed in seg_assemble the same day.
+for _node in sc.graph.nodes_geometry:
+    _T, _gn = sc.graph[_node]
+    if _T is not None and not np.allclose(_T, np.eye(4)):
+        sc.geometry[_gn].apply_transform(_T)
+        sc.graph.update(frame_to=_node, matrix=np.eye(4), geometry=_gn)
 m = trimesh.util.concatenate([g for g in sc.geometry.values()])
 cent = m.triangles_center
 fnorm = m.face_normals
@@ -256,8 +268,21 @@ print(f"lamp outside end-zones/height evicted to body: {int(lamp_out.sum())}")
 # glass). Noise below the floor is never stamped and the exhaustiveness rule
 # below sweeps it to body, so a low floor costs nothing.
 LAMP_MIN_REGION = max(10, int(F * 250 / 918715))   # scaled; see MIN_REGION
-stamped_lamp, _ = stencil_class(LAMP, LAMP_MIN_REGION,
-                                max_nonplanar=MAX_NONPLANAR)
+# LAMP_STENCIL=0 — the same escape as GLASS_STENCIL above, for the same reason.
+# Labels from glass_relabel.py --lamps are a crease-bounded flood fill, so their
+# boundary is already a geometric edge and needs no straightening; running the
+# stencil over them destroys them exactly as it did the glass (measured on the
+# RF67 Golf: the whole lamp class collapsed into ONE 294-face region and the
+# plane fit stamped 5 in / 262 out, leaving lamp share pinned at 0.73% while
+# the headlamp aperture stayed 96.6% carpaint). A wrapping lamp assembly is
+# multi-plane by nature, which is why a single plane fit was never going to
+# hold it — the file's own planarity note says as much.
+if os.environ.get("LAMP_STENCIL", "1") == "0":
+    print("lamp stencil SKIPPED (LAMP_STENCIL=0): labels assumed crease-bounded")
+    stamped_lamp = label == LAMP
+else:
+    stamped_lamp, _ = stencil_class(LAMP, LAMP_MIN_REGION,
+                                    max_nonplanar=MAX_NONPLANAR)
 stray_lamp = (label == LAMP) & ~stamped_lamp
 label[stray_lamp] = BODY
 print(f"stray lamp reverted to body: {int(stray_lamp.sum())}")
@@ -336,6 +361,14 @@ else:
                       f"({100*len(far)/len(widx):.1f}%)")
 
 # absorb crumbs the restamp left behind (single scan per label)
+# THIRD INSTANCE OF THE ABSOLUTE-FACE-COUNT BUG, and the worst of the three:
+# 400 faces is 0.04% of the 918,715-face Pixal mesh this was calibrated on and
+# 1.0% of a 40,000-face Hunyuan mesh, so on the smaller car EVERY headlamp is a
+# "crumb" and gets dissolved into its majority neighbour (carpaint). Measured on
+# the RF67 Golf: lamp label 1,270 -> 608 faces here, silently, after the eviction
+# rules had already been cleared — which is why the headlamp aperture stayed
+# 95.2% carpaint through two upstream fixes. Scaled like MIN_REGION above.
+CRUMB_MAX = max(20, int(F * 400 / 918715))
 for target in range(5):
     tm = label == target
     if not tm.any():
@@ -346,7 +379,7 @@ for target in range(5):
     _, comp2 = sp.csgraph.connected_components(g + g.T, directed=False)
     comp2 = comp2.copy(); comp2[~tm] = -1
     sizes2 = Counter(comp2[tm])
-    small = {cid for cid, n in sizes2.items() if n < 400}
+    small = {cid for cid, n in sizes2.items() if n < CRUMB_MAX}
     if not small:
         continue
     bv = {cid: Counter() for cid in small}

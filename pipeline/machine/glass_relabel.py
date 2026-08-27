@@ -37,7 +37,15 @@ VALIDATE BOTH DIRECTIONS. --selftest asserts the recovered set covers the
 windscreen aperture AND excludes the door skin and the roof panel, and prints
 both numbers. A one-directional check would happily relabel the whole car.
 
-Run: python3 glass_relabel.py <car.glb> <labels.npy> <out_labels.npy> [--selftest]
+LAMPS TOO (--lamps). The identical defect was measured on the same car's
+headlamps: Lamp_Lens covered 0.76% of area while the headlamp aperture was
+96.6% CARPAINT, so a respray painted the headlamps. Same machinery, different
+seed cue — a lamp texel is BRIGHT rather than tinted (measured: luminance > 45
+covers 6.7% of the headlamp aperture and 0.0% of both bonnet and door skin).
+The seed is weaker than the glass hue seed, which is exactly why the crease-
+bounded grow is doing the work in both cases.
+
+Run: python3 glass_relabel.py <car.glb> <labels.npy> <out_labels.npy> [--selftest] [--lamps]
 """
 import sys
 
@@ -46,8 +54,10 @@ import trimesh
 
 GLB, INP, OUT = sys.argv[1], sys.argv[2], sys.argv[3]
 SELFTEST = "--selftest" in sys.argv
+LAMPS = "--lamps" in sys.argv
 BODY, GLASS, WHEEL, LAMP, UNSEEN = 0, 1, 2, 3, 4
 
+LUM_SEED = 45.0        # lamp texels are bright; 0.0% FP on bonnet and door
 GREEN_SEED = 6.0        # texel tint above neutral; 0.0% false positives measured
 DIHEDRAL_STOP = 26.0    # degrees; a pillar/header crease exceeds this
 MIN_SEEDS = 12          # below this a zone is noise, not a window
@@ -160,6 +170,42 @@ for zname, zmask in ZONES.items():
     report[zname] = (f"{len(seeds)} seeds -> {len(idx)} faces "
                      f"({len(keep)} relabelled to glass)")
 
+# ---- lamps: same seed-and-grow, brightness cue ---------------------------
+if LAMPS:
+    lum_face = np.full(len(m.faces), -1.0)
+    try:
+        _t = np.asarray(m.visual.material.baseColorTexture.convert("RGB")).astype(float)
+        _th, _tw, _ = _t.shape
+        _uvc = np.asarray(m.visual.uv)[m.faces].mean(axis=1)
+        lum_face = _t[(_uvc[:, 1] * (_th - 1)).astype(int).clip(0, _th - 1),
+                      (_uvc[:, 0] * (_tw - 1)).astype(int).clip(0, _tw - 1)].mean(axis=1)
+    except Exception as e:
+        raise SystemExit(f"REFUSED: --lamps needs the baseColor texture ({e})")
+    zc = np.abs(cent[:, 2] - (lo[2] + hi[2]) / 2) / max((hi[2] - lo[2]) / 2, 1e-9)
+    LAMP_ZONES = {
+        "head": (xf > 0.84) & (yf > 0.28) & (yf < 0.58) & (zc > 0.28) & (fn[:, 0] > 0.20),
+        "tail": (xf < 0.16) & (yf > 0.28) & (yf < 0.62) & (zc > 0.22) & (fn[:, 0] < -0.20),
+    }
+    for zname, zmask in LAMP_ZONES.items():
+        seeds = np.where(zmask & (lum_face > LUM_SEED))[0]
+        if len(seeds) < MIN_SEEDS:
+            print(f"  lamp/{zname:5s} NO SEEDS ({len(seeds)}) — zone left untouched")
+            continue
+        seen = set(seeds.tolist())
+        stack = list(seeds)
+        while stack:
+            f = stack.pop()
+            for g_ in nbr.get(f, ()):
+                if g_ in seen or not zmask[g_]:
+                    continue
+                seen.add(g_)
+                stack.append(g_)
+        idx = np.fromiter(seen, int)
+        keep = idx[(new[idx] == BODY) | (new[idx] == LAMP) | (new[idx] == UNSEEN)]
+        new[keep] = LAMP
+        print(f"  lamp/{zname:5s} {len(seeds)} seeds -> {len(idx)} faces "
+              f"({len(keep)} relabelled to lamp)")
+
 # CLOSE HOLES INSIDE A PANE. The flood fill stops at creases, which is right at
 # the pillars and wrong at the header curve and the shadowed upper corners: a
 # handful of faces inside the aperture stay body and still take a respray
@@ -216,6 +262,25 @@ if SELFTEST:
         bad.append(f"roof FP {r_fp:.1f}% > 2%")
     if bad:
         raise SystemExit("SELFTEST FAILED: " + "; ".join(bad))
+    if LAMPS:
+        zc2 = np.abs(cent[:, 2] - (lo[2] + hi[2]) / 2) / max((hi[2] - lo[2]) / 2, 1e-9)
+        head = (xf > 0.86) & (yf > 0.28) & (yf < 0.55) & (zc2 > 0.30) & (fn[:, 0] > 0.25)
+        bonnet = (xf > 0.62) & (xf < 0.82) & (yf > 0.45) & (yf < 0.62) & (fn[:, 1] > 0.7)
+        lcov = 100 * (new[head] == LAMP).mean() if head.sum() else 0.0
+        b_fp = 100 * ((new == LAMP) & (label != LAMP))[bonnet].mean() if bonnet.sum() else 0.0
+        d_fp2 = 100 * ((new == LAMP) & (label != LAMP))[door].mean() if door.sum() else 0.0
+        print(f"SELFTEST  headlamp-aperture covered  {lcov:.1f}% (n={int(head.sum())})")
+        print(f"SELFTEST  bonnet lamp-FP (added)     {b_fp:.1f}% (n={int(bonnet.sum())})")
+        print(f"SELFTEST  door   lamp-FP (added)     {d_fp2:.1f}% (n={int(door.sum())})")
+        lbad = []
+        if lcov < 55:
+            lbad.append(f"headlamp coverage {lcov:.1f}% < 55%")
+        if b_fp > 3:
+            lbad.append(f"bonnet lamp-FP {b_fp:.1f}% > 3%")
+        if d_fp2 > 3:
+            lbad.append(f"door lamp-FP {d_fp2:.1f}% > 3%")
+        if lbad:
+            raise SystemExit("SELFTEST FAILED (lamps): " + "; ".join(lbad))
     print("SELFTEST PASSED (both directions)")
 
 np.save(OUT, new)
