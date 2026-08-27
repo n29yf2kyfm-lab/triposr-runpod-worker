@@ -36,6 +36,18 @@ PASSES = argv[2].split(",") if len(argv) > 2 else ["clay"]
 RES = int(argv[3]) if len(argv) > 3 else 2048
 SAMPLES = int(argv[4]) if len(argv) > 4 else 40
 FILL = float(os.environ.get("QC_FILL", "0.80"))
+# Exposure knobs. The defaults were calibrated on the CLAY pass; a near-black
+# textured car swallows them ("the lighting is dark" — owner, 2026-08-27).
+# A dark car reads through its speculars and its separation from the ground,
+# so the tex-pass levers are world brightness, strip energy and floor tone.
+# CALIBRATED FOR A DARK CAR (RF67, measured): QC_WORLD=0.45 QC_LIGHT=2.4
+# QC_FLOOR=0.42 puts the car zone at mean ~70-100 with p95 ~200-233 and the
+# background at 179 — the black car reads through separation and speculars.
+# The paint itself is near-black in the baked texture; brightening past this
+# falsifies the colour rather than revealing more.
+WORLD = float(os.environ.get("QC_WORLD", "0.32"))
+LIGHT = float(os.environ.get("QC_LIGHT", "1.0"))
+FLOOR_TONE = float(os.environ.get("QC_FLOOR", "0.30"))
 
 if not os.path.exists(GLB):
     raise SystemExit(f"REFUSED: no such file: {GLB}")
@@ -76,7 +88,7 @@ world = bpy.data.worlds.new("w")
 bpy.context.scene.world = world
 world.use_nodes = True
 bg = world.node_tree.nodes["Background"]
-bg.inputs[0].default_value = (0.32, 0.32, 0.32, 1.0)
+bg.inputs[0].default_value = (WORLD, WORLD, WORLD, 1.0)
 bg.inputs[1].default_value = 1.0
 
 bpy.ops.mesh.primitive_plane_add(size=diag * 6, location=(ctr.x, ctr.y, lo.z))
@@ -84,7 +96,7 @@ floor = bpy.context.active_object
 fm = bpy.data.materials.new("floor")
 fm.use_nodes = True
 fb = fm.node_tree.nodes["Principled BSDF"]
-fb.inputs["Base Color"].default_value = (0.30, 0.30, 0.31, 1)
+fb.inputs["Base Color"].default_value = (FLOOR_TONE, FLOOR_TONE, FLOOR_TONE * 1.03, 1)
 fb.inputs["Roughness"].default_value = 0.7
 floor.data.materials.append(fm)
 
@@ -101,7 +113,7 @@ for name, (dx, dy, dz), energy in strips:
     ld.shape = "RECTANGLE"
     ld.size = diag * 1.6          # long axis
     ld.size_y = diag * 0.12       # thin strip
-    ld.energy = energy * diag * diag
+    ld.energy = energy * LIGHT * diag * diag
     lob = bpy.data.objects.new(name, ld)
     bpy.context.collection.objects.link(lob)
     off = mathutils.Vector((dx, dy, dz))
