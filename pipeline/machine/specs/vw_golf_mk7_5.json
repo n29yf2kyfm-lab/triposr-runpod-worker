@@ -1,0 +1,62 @@
+{
+  "identity": {
+    "make": "volkswagen",
+    "model": "golf",
+    "generation": "Mk7.5 (Type 5G facelift, 2017-2020)",
+    "note": "Source car is a UK 5-door hatch, plate RF67 FPX, GTE badge on grille, dark grey/blue metallic, gloss-black alloys. Generation read from the facelift front (full-width lower grille bar, LED signature) in the owner-supplied cinch studio orbit. Trim/engine NOT asserted beyond the visible badge (accuracy rule). NOT interchangeable with vw_golf_mk8.json -- that is a different car and fitting this body to it would stretch it, the mistake already paid for on the Yaris."
+  },
+  "dimensions": {
+    "length_m": {
+      "value": 4.258,
+      "source": "published VW Golf Mk7/7.5 5-door hatch dimensions"
+    },
+    "width_m": {
+      "value": 1.799,
+      "source": "published VW Golf Mk7/7.5 hatch dimensions (excl. mirrors)"
+    },
+    "height_m": {
+      "value": 1.492,
+      "source": "published VW Golf Mk7/7.5 hatch dimensions"
+    },
+    "wheelbase_m": {
+      "value": 2.637,
+      "source": "published VW Golf Mk7/7.5 hatch dimensions"
+    },
+    "glass_thickness_m": {
+      "value": 0.004,
+      "source": "typical laminated automotive glazing 3-5mm; pinned so a length-scaled default never drifts this car"
+    }
+  },
+  "unverified": {
+    "track_front_m": "not asserted -- Mk7.5 track varies by wheel/tyre package and no figure was confirmed for this car",
+    "track_rear_m": "not asserted -- see track_front_m",
+    "front_overhang_m": "not asserted -- no published split confirmed for this generation",
+    "rear_overhang_m": "not asserted -- see front_overhang_m",
+    "gte_specific_dims": "GTE ride height and kerb figures differ from the base hatch and were NOT confirmed; the figures above are the base 5-door hatch published set"
+  },
+  "tyre": {
+    "spec": "unverified",
+    "source": "wheel design is visible in the reference orbit (gloss-black multi-spoke) but the fitment size is not readable from the photographs; do not assert one"
+  },
+  "labels": {
+    "body": "carpaint",
+    "wheel_strip_prefixes": [
+      "Tyre_Rubber",
+      "Rim_Alloy",
+      "disc_",
+      "cal_",
+      "WHEEL_",
+      "Arch_Cavity",
+      "LINER_"
+    ],
+    "liner_name": "ARCH_LINER"
+  },
+  "references": {
+    "prefix": "car-meshes/staging/golf_rf67/",
+    "views": [
+      "v1_front34R", "v2_sideR", "v3_rear34R", "v4_rear",
+      "v5_rear34L", "v6_sideL", "v7_front34L", "v8_front"
+    ],
+    "note": "Owner-supplied cinch studio orbit of ONE car -- plate RF67 FPX legible in all eight. orbit_* are common-scale (equalised body height) on one flat grey; fill_* are per-view max-fill RGBA for single-image generation."
+  }
+}
