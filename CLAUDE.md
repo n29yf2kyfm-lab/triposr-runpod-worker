@@ -2705,6 +2705,45 @@ Two facts worth not rediscovering:
 * The key was pasted into chat in plaintext, so it is exposed in that transcript
   and should be rotated at openrouter.ai when convenient.
 
+## OWNER RULE 2026-08-27: RENDER FROM 8 IMAGES, NOT ONE
+
+Owner instruction, verbatim: **"New rule we use 8 imisges to render"**.
+
+This is the direct consequence of the RF67 Golf: the owner supplied a full
+360 studio orbit of ONE car (cinch listing, plate RF67 FPX, 8 usable views)
+and the pipeline fed **one** of them to the generator, because
+`hunyuan21/handler.py` accepts `image_b64 | image_url` — a single image. The
+other seven never reached the model. Every rear defect the owner then flagged
+— featureless hatch, tail lamps that do not read as lamps, missing plate
+recess — is that one decision, not a model-quality ceiling. Do not "fix" an
+invented rear downstream again; feed the rear photo in.
+
+**THE ROUTE EXISTS AND IS OPEN-WEIGHT.** `tencent/Hunyuan3D-2mv`
+(subfolder `hunyuan3d-dit-v2-mv`, also `-fast` and `-turbo`) is finetuned from
+Hunyuan3D-2 for **multiview controlled shape generation** and takes a DICT of
+named views:
+
+    pipeline(image={"front": ..., "left": ..., "back": ...}, ...)
+
+Checked on the Hub 2026-08-27: repo present, not gated, 7k downloads.
+
+**TWO THINGS TO GET RIGHT BEFORE SPENDING A GPU MINUTE:**
+1. It is a **2.0-line** model, not 2.1. Our worker runs the 2.1 stack
+   (`hunyuan3d-dit-v2-1` + `hunyuan3d-paintpbr-v2-1`), so 2mv needs the
+   `hy3dgen` pipeline, i.e. a second image or a pod run — NOT a drop-in
+   swap of MODEL in the existing handler. Verify which paint stack pairs
+   with it rather than assuming the 2.1 painter applies.
+2. The dict takes **canonical slots** (front/left/back/right), not eight
+   arbitrary angles. So "use 8 images" in practice means: choose the best
+   photo for each canonical slot, and use the remaining views for identity
+   and proportion VERIFICATION rather than throwing them away. Say which
+   photo went into which slot in the run record — a slot filled with a
+   3/4 shot is a different experiment from one filled with a true side.
+
+The owner-prepared RF67 set is already staged and slot-ready at
+`car-meshes/staging/golf_rf67/` — `orbit_rgba_*` (common scale, transparent)
+and `fill_rgba_*` (per-view max fill), with v1..v8 named by angle.
+
 ## Product context (for fast re-grounding)
 
 - **Goal:** UK reg → premium, near-instant, interactive 3D car.
