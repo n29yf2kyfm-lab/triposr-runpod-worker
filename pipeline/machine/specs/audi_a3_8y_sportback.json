@@ -1,0 +1,23 @@
+{
+  "identity": {
+    "make": "audi", "model": "a3", "generation": "8Y Sportback",
+    "note": "Source: cinch listing, plate LV25UWH, 25 plate (2025), white, S line. Identity verified by plate across the 8 studio views. Dimensions are published 8Y Sportback figures."
+  },
+  "dimensions": {
+    "length_m": {"value": 4.343, "source": "published Audi A3 Sportback 8Y"},
+    "width_m":  {"value": 1.816, "source": "published Audi A3 Sportback 8Y (excl. mirrors)"},
+    "height_m": {"value": 1.449, "source": "published Audi A3 Sportback 8Y"},
+    "wheelbase_m": {"value": 2.636, "source": "published Audi A3 Sportback 8Y"},
+    "glass_thickness_m": {"value": 0.004, "source": "typical laminated automotive glazing 3-5mm"}
+  },
+  "unverified": {
+    "track_front_m": "not asserted - varies by wheel package, not confirmed for this car",
+    "track_rear_m": "not asserted - see track_front_m",
+    "tyre_spec": "not readable from the listing photographs"
+  },
+  "labels": {"body": "carpaint",
+    "wheel_strip_prefixes": ["Tyre_Rubber","Rim_Alloy","disc_","cal_","WHEEL_","Arch_Cavity","LINER_"],
+    "liner_name": "ARCH_LINER"},
+  "references": {"prefix": "car-meshes/staging/audi_a3_lv25uwh/",
+    "note": "8 exterior views, full 360; orbit_* common-scale, fill_* per-view max fill"}
+}
