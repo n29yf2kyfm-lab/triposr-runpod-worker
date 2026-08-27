@@ -22,6 +22,7 @@ no window plane".
 
 Run: python3 seg_boundary.py <canon.glb> <labels.npy> <out_labels.npy>
 """
+import os
 import sys
 import numpy as np
 import trimesh
@@ -194,7 +195,22 @@ def stencil_class(cls, min_region, max_nonplanar=None, gauss=GAUSS_SIGMA,
 
 
 NAMES = ["body", "glass", "wheel", "lamp", "interior"]
-stamped_glass, stamp_region = stencil_class(GLASS, MIN_REGION)
+# GLASS_STENCIL=0 SKIPS THE GLASS STENCIL, KEEPING LAMP/WHEEL HYGIENE.
+# The stencil exists to straighten a boundary that DITHERS because labels come
+# from per-face projected votes. Labels from glass_relabel.py do not have that
+# defect — they are a crease-bounded flood fill, so their boundary is already a
+# geometric edge. Worse, running it destroys them: seg_boundary recomputes
+# components from the LABEL ALONE, so windscreen + both flanks + backlight merge
+# into one region (measured on the RF67 Golf: region 91, 1113 faces, diag 3.692m
+# — longer than the car is tall), and a single plane fitted through that
+# mega-region throws the windscreen out (stamped 5 in / 262 out). That is the
+# recorded mega-region failure, and per-window splitting is the standing fix.
+if os.environ.get("GLASS_STENCIL", "1") == "0":
+    print("glass stencil SKIPPED (GLASS_STENCIL=0): labels assumed crease-bounded")
+    stamped_glass = label == GLASS
+    stamp_region = np.where(label == GLASS, 0, -1).astype(np.int32)
+else:
+    stamped_glass, stamp_region = stencil_class(GLASS, MIN_REGION)
 
 # glass is exhaustive: anything still glass but never stamped is a smear
 stray = (label == GLASS) & ~stamped_glass
