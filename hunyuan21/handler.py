@@ -4,6 +4,8 @@ Mirrors trellis/handler.py I/O: {image_b64|image_url, seed?, texture?:bool}
 VRAM: ~10GB shape-only, ~29GB with texture -> run texture=True only on 48GB pool.
 """
 import base64, os, sys, time, uuid
+
+import numpy as np
 from io import BytesIO
 
 import requests, runpod, torch
@@ -23,6 +25,28 @@ from hy3dshape.rembg import BackgroundRemover
 from hy3dshape.pipelines import Hunyuan3DDiTFlowMatchingPipeline
 
 MODEL = "tencent/Hunyuan3D-2.1"
+MV_MODEL = "tencent/Hunyuan3D-2mv"          # multiview-controlled shape
+MV_SUBFOLDER = "hunyuan3d-dit-v2-mv"
+mv_pipe = None
+
+
+def get_mv():
+    """Load the multiview shape pipeline on first use.
+
+    WHY THIS EXISTS: this worker took ONE image, so on a car photographed all
+    round only the conditioned end was ever observed and the far end was
+    invented (measured on the RF67 Golf: featureless hatch, tail lamps that do
+    not read as lamps). Owner rule 2026-08-27: render from 8 images.
+    2mv is a 2.0-line checkpoint; the 2.1 pipeline CLASS is asked to load it
+    and the caller is told plainly which path ran, rather than the worker
+    silently degrading to single-view — a silent degrade here is exactly the
+    failure that produced the invented rear in the first place.
+    """
+    global mv_pipe
+    if mv_pipe is None:
+        mv_pipe = Hunyuan3DDiTFlowMatchingPipeline.from_pretrained(
+            MV_MODEL, subfolder=MV_SUBFOLDER, use_safetensors=True)
+    return mv_pipe
 OUT = "/runpod-volume/outputs"
 os.makedirs(OUT, exist_ok=True)
 
@@ -68,7 +92,11 @@ def upload(local, dest):
 def handler(job):
     inp = job.get("input", {}) or {}
     t0 = time.time()
-    if inp.get("image_b64"):
+    views_in = inp.get("views") or {}          # {"front": b64, "back": b64, ...}
+    if views_in:
+        img = Image.open(BytesIO(base64.b64decode(
+            views_in.get("front") or list(views_in.values())[0])))
+    elif inp.get("image_b64"):
         img = Image.open(BytesIO(base64.b64decode(inp["image_b64"])))
     elif inp.get("image_url"):
         img = Image.open(BytesIO(requests.get(inp["image_url"], timeout=120).content))
@@ -88,7 +116,6 @@ def handler(job):
     # pipeline's white composite then keeps a scene ghost that the model
     # reconstructs as a billboard wall (observed twice on the Golf photo).
     # Binarise alpha and force white under transparent pixels.
-    import numpy as np
     a = np.array(img)
     hard = (a[..., 3] >= 128)
     a[..., 3] = np.where(hard, 255, 0).astype(a.dtype)
@@ -97,7 +124,31 @@ def handler(job):
 
     seed = int(inp.get("seed", 0))
     torch.manual_seed(seed)
-    mesh = shape_pipe(image=img)[0]
+
+    def _prep(b64):
+        v = Image.open(BytesIO(base64.b64decode(b64)))
+        v = rembg(v.convert("RGB")) if inp.get("remove_bg", True) else v.convert("RGBA")
+        va = np.array(v)
+        vh = (va[..., 3] >= 128)
+        va[..., 3] = np.where(vh, 255, 0).astype(va.dtype)
+        va[~vh, :3] = 255
+        return Image.fromarray(va)
+
+    mv_used, mv_error, mv_views = False, None, []
+    mesh = None
+    if views_in:
+        try:
+            prepped = {k: _prep(b) for k, b in views_in.items()}
+            torch.manual_seed(seed)
+            mesh = get_mv()(image=prepped)[0]
+            mv_used, mv_views = True, sorted(prepped)
+            print("MULTIVIEW OK:", mv_views, flush=True)
+        except Exception as e:
+            mv_error = f"{type(e).__name__}: {e}"
+            print("multiview failed, falling back to single view:", e, flush=True)
+            mesh = None
+    if mesh is None:
+        mesh = shape_pipe(image=img)[0]
     uid = str(uuid.uuid4())
     raw = f"{OUT}/{uid}.glb"
     mesh.export(raw)
@@ -117,7 +168,9 @@ def handler(job):
 
     url = upload(out_path, f"hunyuan21/{os.path.basename(out_path)}")
     return {"glb_url": url, "seconds": round(time.time() - t0, 1),
-            "textured": out_path != raw, "seed": seed, "texture_error": tex_err}
+            "textured": out_path != raw, "seed": seed, "texture_error": tex_err,
+            "multiview": mv_used, "multiview_views": mv_views,
+            "multiview_error": mv_error}
 
 
 runpod.serverless.start({"handler": handler})
