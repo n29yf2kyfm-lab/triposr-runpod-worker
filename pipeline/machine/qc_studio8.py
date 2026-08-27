@@ -248,6 +248,18 @@ PASS_DEF = {
     "wire":    (wire_mat,   False, 12),
 }
 
+# IDENTICAL FRAMING ACROSS VIEWS (reviewer, 2026-08-27): per-view fill makes
+# the straight views appear much larger than the sides. QC_CONSTANT=1 (the
+# default) fits every view, then uses the LARGEST radius for all eight, so
+# apparent scale is identical; the side views set the fill and the straight
+# views sit smaller inside the same scale. QC_CONSTANT=0 restores per-view fill.
+CONSTANT = os.environ.get("QC_CONSTANT", "1") == "1"
+R_SHARED = None
+if CONSTANT:
+    fits = {az: fit_radius(math.radians(az))[0] for _, az in VIEWS}
+    R_SHARED = max(fits.values())
+    print("constant framing: shared radius %.2f" % R_SHARED)
+
 for pname in PASSES:
     if pname not in PASS_DEF:
         raise SystemExit(f"REFUSED: unknown pass {pname}")
@@ -258,12 +270,16 @@ for pname in PASSES:
     pdir = os.path.join(OUTD, pname)
     os.makedirs(pdir, exist_ok=True)
     for name, az in VIEWS:
-        r, span = fit_radius(math.radians(az))
-        if not (FILL - 0.08 <= span <= FILL + 0.08):
-            raise SystemExit(f"REFUSED: {pname}/{name} span={span:.3f} "
-                             f"(target {FILL}) — car not framed")
+        if CONSTANT:
+            r = R_SHARED
+            place(math.radians(az), r)
+        else:
+            r, span = fit_radius(math.radians(az))
+            if not (FILL - 0.08 <= span <= FILL + 0.08):
+                raise SystemExit(f"REFUSED: {pname}/{name} span={span:.3f} "
+                                 f"(target {FILL}) — car not framed")
         sc.render.filepath = os.path.join(pdir, f"{az:03d}_{name}.png")
         bpy.ops.render.render(write_still=True)
-        print(f"wrote {sc.render.filepath}  r={r:.2f} span={span:.3f}")
+        print(f"wrote {sc.render.filepath}  r={r:.2f}")
 
 print("QC_STUDIO8_DONE")
