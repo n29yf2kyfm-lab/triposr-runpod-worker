@@ -112,7 +112,14 @@ for name, (dx, dy, dz), energy in strips:
     ld = bpy.data.lights.new(name, "AREA")
     ld.shape = "RECTANGLE"
     ld.size = diag * 1.6          # long axis
-    ld.size_y = diag * 0.12       # thin strip
+    # 0.30, not 0.12: at x2.4 energy the thin strip's specular image CLIPPED
+    # on the clearcoat (reviewer: "clipped white reflections on the bonnet,
+    # roof and windscreen"). Measured first: the texture up top is dark
+    # (min-ch p95 <= 62), so the whites were RENDER speculars — the fix is a
+    # larger source at the same flux (lower radiance, softer highlight), not
+    # texture surgery. The Clio rule: measure the pixels before "fixing" a
+    # highlight.
+    ld.size_y = diag * 0.30
     ld.energy = energy * LIGHT * diag * diag
     lob = bpy.data.objects.new(name, ld)
     bpy.context.collection.objects.link(lob)

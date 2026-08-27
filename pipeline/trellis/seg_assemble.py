@@ -22,6 +22,17 @@ GLB, LAB, OUT = sys.argv[1], sys.argv[2], sys.argv[3]
 BODY, GLASS, WHEEL, LAMP, UNSEEN = 0, 1, 2, 3, 4
 
 sc = trimesh.load(GLB, force="scene")
+# BAKE NODE TRANSFORMS before reading geometry. geometry.values() alone is the
+# raw untransformed data — the input's root-node rotation (e.g. tex_zone_fix's
+# nose flip, stored as a quaternion per the pose_fix pattern) was silently
+# DROPPED here, so the assembled car reverted to tail-first and every named
+# view label downstream was wrong (caught by the reviewer's marker test,
+# 2026-08-27). Same class as canon.py's instance-collapse note.
+for _node in sc.graph.nodes_geometry:
+    _T, _gn = sc.graph[_node]
+    if _T is not None and not np.allclose(_T, np.eye(4)):
+        sc.geometry[_gn].apply_transform(_T)
+        sc.graph.update(frame_to=_node, matrix=np.eye(4), geometry=_gn)
 m = trimesh.util.concatenate([g for g in sc.geometry.values()])
 label = np.load(LAB)
 F = len(label)
