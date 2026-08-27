@@ -40,7 +40,17 @@ label = np.load(INP).copy()
 F = len(label)
 adj = m.face_adjacency
 
-MIN_REGION = 800          # faces; smaller glass regions are noise -> body
+# REGION FLOORS SCALE WITH THE MESH. The original constants (800 glass / 250
+# lamp) were calibrated on the 918,715-face Pixal Golf; run unscaled against a
+# 40,000-face Hunyuan mesh they exceeded every real window (a windscreen there
+# is ~300 faces) and seg_boundary silently reverted ALL 1,166 glass faces to
+# body — a no-glazing car, an auto-scrap, behind nine green exit codes
+# (2026-08-27, RF67 Golf). Same defect class as the recorded absolute-distance
+# thresholds that were wrong for a quarter of the catalogue: an absolute face
+# count is wrong for any mesh whose face budget differs from the calibration
+# car's. The floors are now FRACTIONS of total faces, anchored so the Pixal
+# calibration values are reproduced exactly at 918,715 faces.
+MIN_REGION = max(30, int(F * 800 / 918715))   # glass; noise -> body
 BAND_FRAC = 0.030         # stencil band half-thickness, fraction of region diag
 RASTER = 220              # cells across the region diagonal
 GAUSS_SIGMA = 2.2         # cells; the smoothing that straightens the outline
@@ -229,7 +239,7 @@ print(f"lamp outside end-zones/height evicted to body: {int(lamp_out.sum())}")
 # (measured on this car — 5,902 lamp faces across all four lamps, vs 42,811
 # glass). Noise below the floor is never stamped and the exhaustiveness rule
 # below sweeps it to body, so a low floor costs nothing.
-LAMP_MIN_REGION = 250
+LAMP_MIN_REGION = max(10, int(F * 250 / 918715))   # scaled; see MIN_REGION
 stamped_lamp, _ = stencil_class(LAMP, LAMP_MIN_REGION,
                                 max_nonplanar=MAX_NONPLANAR)
 stray_lamp = (label == LAMP) & ~stamped_lamp

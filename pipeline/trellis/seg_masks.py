@@ -8,7 +8,7 @@ all boxes batched.
 
 Run: python3 seg_masks.py <views_dir>
 """
-import os, sys, json
+import os, re, sys, json
 import numpy as np
 import torch
 import OpenEXR, Imath
@@ -36,7 +36,13 @@ CLASSES = {
     "wheel": ["wheel", "tire"],
     "lamp":  ["headlight", "tail light"],
 }
-BOX_THR, TEXT_THR = 0.25, 0.22
+# Thresholds are env-tunable: on a DARK car DINO under-fires on near-black
+# windows at 0.25 (RF67 Golf 2026-08-27: glass labels came back 0.51% of area,
+# 13 sliver components — the dark-car failure this file already documents for
+# PAINT_REJECT). The lamp_boost pattern applies: re-detect lower, let the
+# downstream zone priors and stencils police the extra boxes.
+BOX_THR = float(os.environ.get("SEG_BOX_THR", "0.25"))
+TEXT_THR = float(os.environ.get("SEG_TEXT_THR", "0.22"))
 
 # --- PAINT REJECTION for the glass class (added 2026-08-26, van generality) ---
 #
@@ -124,7 +130,11 @@ sm = SamModel.from_pretrained("facebook/sam-vit-base").eval()
 
 report = {}
 for fn in sorted(os.listdir(VIEWS)):
-    if not (fn.startswith("view_") and fn.endswith(".png")):
+    # STRICT view filename match. This stage writes its own outputs
+    # (view_NN_glass.png etc.) into the same directory, so the loose
+    # startswith/endswith filter made a RE-RUN consume its previous outputs
+    # as views and die on KeyError('view_00_glass') (2026-08-27).
+    if not re.fullmatch(r"view_\d+\.png", fn):
         continue
     img = Image.open(os.path.join(VIEWS, fn)).convert("RGB")
     W, H = img.size
