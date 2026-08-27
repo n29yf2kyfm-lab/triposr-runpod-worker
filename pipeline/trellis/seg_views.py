@@ -116,7 +116,13 @@ if _spec:
 else:
     VIEWS = [(az, 18) for az in range(0, 360, 45)] + [(90, 40), (270, 40)]
 OFFSET = int(os.environ.get("SEG_VIEW_OFFSET", "0"))
-cams = {}
+# MERGE with an existing cameras.json rather than overwrite: SEG_VIEW_OFFSET
+# exists precisely so a second run can EXTEND a view set, and an overwrite
+# silently drops the first run's camera entries — seg_masks then dies with
+# KeyError('view_00') after the masks stage has already loaded its models
+# (cost a pipe run on the RF67 Golf, 2026-08-27).
+_cams_path = os.path.join(OUT, "cameras.json")
+cams = json.load(open(_cams_path)) if os.path.exists(_cams_path) else {}
 for _i, (az, el) in enumerate(VIEWS):
     i = _i + OFFSET
     a, e = math.radians(az), math.radians(el)
