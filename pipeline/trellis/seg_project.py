@@ -158,6 +158,31 @@ for _ in range(4):
     label = new
 # absorb small islands into their surrounding label (single scan per label,
 # NOT per island -- the vx1 transfer paid 4 CPU-hours for that mistake)
+#
+# THE THRESHOLD SCALES WITH FACE COUNT. It was a bare 400, calibrated on the
+# 918,715-face Pixal mesh where it is 0.04% of the car -- genuine speckle. On a
+# 40,000-face Hunyuan mesh the SAME 400 is 1.00% of the whole car, which is
+# larger than an entire windscreen, so the absorber dissolved the glazing it
+# was supposed to be de-speckling.
+#
+# MEASURED on the fal.ai multiview Golf (2026-08-28), final labels:
+#     glass      488 faces in  26 comps; largest 203, 80, 77, 32  -> 26/26 under 400
+#     lamp     ABSENT (dissolved entirely)
+#     wheel     4786 faces in 135 comps; largest 790, 790, 773    -> survived
+# Wheels survive and glazing does not purely because wheels are bigger, which
+# is the signature of a size threshold in the wrong units. Upstream DINO was
+# NOT at fault -- it found MORE glass on this car than on the one that worked
+# (26,031 vs 24,125 px/view); the projection then threw it away.
+#
+# This is the FOURTH instance of this exact bug class in this repo, after
+# seg_boundary's MIN_REGION=800, LAMP_MIN_REGION=250 and CRUMB_MAX=400. Same
+# fix, same reference mesh, same env escape. Any new absolute face count in
+# this pipeline should be assumed wrong until it is expressed as a fraction.
+ISLAND_MIN = max(20, int(F * 400 / 918715))
+if os.environ.get("SEG_ISLAND_MIN"):
+    ISLAND_MIN = int(os.environ["SEG_ISLAND_MIN"])
+print(f"island absorber: dissolving components under {ISLAND_MIN} faces "
+      f"({100 * ISLAND_MIN / F:.3f}% of this {F}-face mesh)")
 import scipy.sparse as sp
 n = F
 for target in range(5):
@@ -169,7 +194,7 @@ for target in range(5):
     ncomp, comp = sp.csgraph.connected_components(g + g.T, directed=False)
     comp = comp.copy(); comp[~mask] = -1
     sizes = Counter(comp[mask])
-    small = {cid for cid, cnt in sizes.items() if cnt < 400}
+    small = {cid for cid, cnt in sizes.items() if cnt < ISLAND_MIN}
     if not small:
         continue
     # vectorised border vote (was a Python loop over ~1.4M adjacency pairs
