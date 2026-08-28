@@ -128,9 +128,24 @@ label[(label == WHEEL) & (yf > 0.55)] = BODY
 # up-facing there is roof; only in the end quarters can a steep up-facing
 # face legitimately be windscreen/backlight, and there the height test still
 # protects the raked screen centre.
+#
+# FORWARD-RAKE EXEMPTION (convicted by SEG_DEBUG_NPZ on the Tripo v3.1 Golf,
+# 2026-08-28). The mid-band premise fails on a fast-screened hatch: the Mk7.5
+# screen STRADDLES the 0.68 boundary, and the clause evicted 15,540 upper-
+# windscreen faces (n_up ~0.85, 74-80% of car height, spanning +-0.53m
+# laterally) which then rendered as carpaint — the owner's "flat grey opaque
+# windscreen". The discriminator is the one glass_presplit already records:
+# A RAKED SCREEN CARRIES |n_x|; A ROOF DOES NOT. Measured on the dump, the
+# two populations do not overlap at 0.25: evicted screen block |n_x|
+# p10 0.428 / p50 0.492, genuine roof block p50 0.054 / p90 0.208. With the
+# exemption 22,492 screen faces survive and 4,109 roof faces are still
+# evicted. Applied to BOTH clauses — a true roof has no forward rake.
 n_up = np.abs(m.face_normals[:, 1])
+n_fwd = np.abs(m.face_normals[:, 0])
+flat_up = n_fwd < 0.25            # up-facing WITHOUT forward rake = roof
 mid_band = (xf > 0.32) & (xf < 0.68)
-roofish = (mid_band & (n_up > 0.55)) | ((n_up > 0.85) & (yf > 0.88))
+roofish = (mid_band & (n_up > 0.55) & flat_up) | \
+          ((n_up > 0.85) & (yf > 0.88) & flat_up)
 _before = int((label == GLASS).sum())
 _evicted = (label == GLASS) & roofish
 # SEG_DEBUG_NPZ dumps what this rule actually TOOK, so a suspicion about it
