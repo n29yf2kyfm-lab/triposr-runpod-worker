@@ -2763,6 +2763,30 @@ still weak (20 seeds) because the rear was never photographed — the multiview
 slot route is the fix. Raw proportions came out 17% too wide (canon corrected
 W x0.835), the single-image perspective bake every generator shows.
 
+## LIVE-FLEET IDENTITY SAMPLE — the thrice-demanded debt, paid (2026-08-28)
+
+n=20 random approved posters, fetched and eyeballed against their own stored
+records (read-only; nothing quarantined — publish rule).
+
+**19/20 identity-correct as stored.** One near-miss teaches the method: the
+citroen-c4-2008-v1 poster LOOKS wrong (a saloon; the UK C4 is a hatch) but its
+own record honestly says bodyStyle=saloon, source "C4 Sedan LX Plus" (the
+Latin-American Pallas) — the resolver's body-style gate keeps it off UK hatch
+lookups. Check the record before calling a poster wrong.
+
+**The 1 fault is a CLASS, not a car: `nissan-gt-r-nw1-v2` is an R34 Skyline in
+a widebody tuner kit, stored with generation=None, years=None, sourceTitle
+empty.** Under the recorded yearEnd:null->9999 trap it can be served to an R35
+owner — the exact fault nissan-gt-r-2005-nw1-v1 was already quarantined for,
+and the tuner-kit rule fails it independently. Enumerating the class:
+**211 approved entries have no yearStart; 37 of those are halo/sports models;
+NINE are gt-r-nw1 siblings (v1..v9), all ungated.** Sampled serving-risk rate:
+5% (1/20, Wilson ~1-24%).
+
+Recommended to the owner (their call): quarantine nw1-v2, then triage the 37
+null-year halo entries — the year gate is the only thing separating an R32
+from an R35 at resolve time, and for these entries it does not exist.
+
 ## COUNCIL ROUND 2: three attacks on the density claim, all resolved by measurement (2026-08-28)
 
 The afternoon council (Fable 5 + GLM-5.3 + instrumented self-audit) attacked the
