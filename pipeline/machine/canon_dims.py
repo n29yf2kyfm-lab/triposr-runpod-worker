@@ -115,40 +115,93 @@ if abs(gy) > 1e-4:
 # WINDSCREEN has the larger area and the more raked (up-tilted) normals —
 # true across hatch/saloon/SUV. Flip 180deg about Y only on a confident
 # ratio; otherwise record the ambiguity and leave the frame alone.
+# THE OLD RULE FLIPPED A CORRECT CAR (2026-08-28, Tripo Golf premium v2):
+# it scored `area x (0.5 + rake)` per end cluster, and on a HATCHBACK the
+# rear screen is MORE raked than the windscreen — the opposite of what the
+# rule's own comment claimed. Recorded scores on a render-verified nose-at-+X
+# car: high_x 0.378 vs low_x 0.555 -> "flipped". Every construction stage
+# then built on the wrong end (tail-lamp solids on the bonnet, front plate on
+# the tailgate) — exactly the failure this block's comment warned about.
+#
+# Two changes, both council-shaped:
+#  * NOSE_PINNED=+x pins the frame. Inputs from our own material chain are
+#    nose-at-+X BY CONSTRUCTION (the chain flips them deliberately and the
+#    orientation is render-verified); re-deriving it from a heuristic can
+#    only add a way to be wrong. premium.py exports it for chain inputs.
+#  * The unpinned rule uses two cues that do not depend on rake:
+#      AREA — the windscreen is the larger end pane;
+#      END-GAP — the windscreen sits FAR from its end (behind a bonnet,
+#        gap ~0.15-0.3 of length) while a hatch/estate backlight nearly
+#        reaches the tail (gap ~0.02-0.1).
+#    It flips only when BOTH cues agree confidently, and REFUSES on
+#    disagreement — a refusal beats headlamps on the tailgate, and the old
+#    silent wrong flip cost a full premium run to discover.
 glass_label = spec.label("glass", "glass")
-if glass_label in geoms:
+_pin = os.environ.get("NOSE_PINNED", "").lower()
+if _pin in ("+x", "x", "posx"):
+    QC["derived"]["nose_check"] = {"action": "PINNED +x by caller "
+                                   "(chain-verified orientation)"}
+elif glass_label in geoms:
     gg = geoms[glass_label]
     fn = gg.face_normals
     fa = gg.area_faces
     fc = gg.triangles_center
     endish = np.abs(fn[:, 0]) >= 0.30
     xmid = float((allv[:, 0].max() + allv[:, 0].min()) / 2)
-    score = {}
+    xlo, xhi = float(allv[:, 0].min()), float(allv[:, 0].max())
+    L_all = xhi - xlo
+    area = {}
+    gap = {}
     for tag, m in (("high", endish & (fc[:, 0] > xmid)),
                    ("low", endish & (fc[:, 0] <= xmid))):
         if m.sum() < 50:
-            score[tag] = 0.0
+            area[tag], gap[tag] = 0.0, 0.0
             continue
-        area = float(fa[m].sum())
-        rake = float(np.average(np.abs(fn[m, 1]), weights=fa[m]))
-        score[tag] = area * (0.5 + rake)
+        area[tag] = float(fa[m].sum())
+        end = xhi if tag == "high" else xlo
+        gap[tag] = float(np.abs(end - fc[m, 0]).min()) / L_all
     QC["derived"]["nose_check"] = {
-        "score_high_x": round(score.get("high", 0.0), 4),
-        "score_low_x": round(score.get("low", 0.0), 4),
-        "rule": "windscreen = larger area x more raked end cluster"}
-    hi, lo = score.get("high", 0.0), score.get("low", 0.0)
-    if lo > 1.3 * hi and lo > 0:
+        "area_high_x": round(area.get("high", 0.0), 4),
+        "area_low_x": round(area.get("low", 0.0), 4),
+        "endgap_high_x": round(gap.get("high", 0.0), 4),
+        "endgap_low_x": round(gap.get("low", 0.0), 4),
+        "rule": "windscreen = larger end pane AND farther from its end; "
+                "flip only when both cues agree (rake is NOT a cue — a "
+                "hatch backlight out-rakes its windscreen)"}
+    cue_area = ("low" if area.get("low", 0) > 1.2 * area.get("high", 0)
+                else "high" if area.get("high", 0) > 1.2 * area.get("low", 0)
+                else "tie")
+    cue_gap = ("low" if gap.get("low", 0) > 1.2 * gap.get("high", 0)
+               else "high" if gap.get("high", 0) > 1.2 * gap.get("low", 0)
+               else "tie")
+    if cue_area == "low" and cue_gap == "low":
         R180 = trimesh.transformations.rotation_matrix(np.pi, [0, 1, 0])
         for g in geoms.values():
             g.apply_transform(R180)
         allv = np.vstack([g.vertices for g in geoms.values()])
-        ops.append("flipped 180deg about Y (windscreen was at low x)")
-        QC["derived"]["nose_check"]["action"] = "flipped"
-    elif hi >= lo:
-        QC["derived"]["nose_check"]["action"] = "nose already at +X"
-    else:
+        ops.append("flipped 180deg about Y (both cues put the windscreen at low x)")
+        QC["derived"]["nose_check"]["action"] = "flipped (both cues agree)"
+    elif cue_area == "high" and cue_gap == "high":
+        QC["derived"]["nose_check"]["action"] = "nose already at +X (both cues agree)"
+    elif "tie" in (cue_area, cue_gap) and cue_area != cue_gap:
+        # one confident cue, one tie: follow the confident one but say so
+        lead = cue_area if cue_area != "tie" else cue_gap
+        if lead == "low":
+            R180 = trimesh.transformations.rotation_matrix(np.pi, [0, 1, 0])
+            for g in geoms.values():
+                g.apply_transform(R180)
+            allv = np.vstack([g.vertices for g in geoms.values()])
+            ops.append("flipped 180deg about Y (single confident cue)")
         QC["derived"]["nose_check"]["action"] = (
-            "AMBIGUOUS (ratio under 1.3) — frame left alone, check the render")
+            f"single-cue decision ({lead}) — VERIFY THE RENDER before trusting "
+            "any front/rear construction")
+    else:
+        QC["derived"]["nose_check"]["action"] = "REFUSED"
+        raise SystemExit(
+            "REFUSED: nose direction undecidable — the two cues disagree "
+            f"(area says {cue_area}, end-gap says {cue_gap}). A wrong guess "
+            "builds headlamps on the tailgate; pin the frame with "
+            "NOSE_PINNED=+x after verifying orientation in a render.")
 QC["derived"]["frame_ops"] = ops or ["already canonical"]
 
 # ---- dims to spec -------------------------------------------------------
