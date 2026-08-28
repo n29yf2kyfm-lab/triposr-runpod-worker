@@ -110,10 +110,22 @@ spread = max(q["bot"] for q in qw.values()) - min(q["bot"] for q in qw.values())
 wbs, _ = spec.dim("wheelbase_m")
 tfs, _ = spec.dim("track_front_m")
 trs, _ = spec.dim("track_rear_m")
-gate("track_front", "PASS" if abs(tf - tfs) < 0.005 else "FAIL",
-     f"{tf:.4f} vs spec {tfs}", "±5mm")
-gate("track_rear", "PASS" if abs(tr - trs) < 0.005 else "FAIL",
-     f"{tr:.4f} vs spec {trs}", "±5mm")
+# A spec may honestly NOT ASSERT a track (accuracy rule: never fabricate — the
+# Golf Mk7.5 spec records track as unverified because no figure was confirmed
+# for the actual car). A gate against an unasserted figure is neither PASS nor
+# FAIL: report the MEASURED value with status OPEN, never crash (float - None
+# TypeError killed the whole validate stage here, 2026-08-28) and never
+# invent a target to compare against.
+if tfs is None:
+    gate("track_front", "OPEN", f"measured {tf:.4f}; spec does not assert one", "spec unasserted")
+else:
+    gate("track_front", "PASS" if abs(tf - tfs) < 0.005 else "FAIL",
+         f"{tf:.4f} vs spec {tfs}", "±5mm")
+if trs is None:
+    gate("track_rear", "OPEN", f"measured {tr:.4f}; spec does not assert one", "spec unasserted")
+else:
+    gate("track_rear", "PASS" if abs(tr - trs) < 0.005 else "FAIL",
+         f"{tr:.4f} vs spec {trs}", "±5mm")
 gate("wheelbase", "PASS" if abs(wb - wbs) < 0.01 else "FAIL",
      f"{wb:.4f} vs spec {wbs}", "±10mm")
 gate("contact_spread", "PASS" if spread < 1e-4 else "FAIL",
