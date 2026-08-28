@@ -199,12 +199,18 @@ def submesh(mask, name, colour=None):
     if colour is not None:
         mat = PBRMaterial(name=name, baseColorFactor=colour,
                           metallicFactor=0.0, roughnessFactor=0.5)
+        m.visual = trimesh.visual.TextureVisuals(material=mat)
     else:
-        mat = PBRMaterial(name=name,
-                          baseColorFactor=list(paint_mat.baseColorFactor),
-                          metallicFactor=float(paint_mat.metallicFactor),
-                          roughnessFactor=float(paint_mat.roughnessFactor))
-    m.visual = trimesh.visual.TextureVisuals(material=mat)
+        # COPY the paint material, do not rebuild it from factors — the same
+        # flat-paint assumption that killed rear_separate on the textured
+        # Tripo Golf (baseColorFactor is None on a baked carpaint, and a
+        # rebuild would drop the texture carrying the car's identity).
+        # paint_mat.copy() preserves either form; fresh TextureVisuals per
+        # the recorded vertex-count binding rule.
+        mat = paint_mat.copy()
+        mat.name = name
+        m.visual = trimesh.visual.TextureVisuals(
+            uv=getattr(m.visual, "uv", None), material=mat)
     return m
 
 
