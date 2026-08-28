@@ -2705,6 +2705,89 @@ Two facts worth not rediscovering:
 * The key was pasted into chat in plaintext, so it is exposed in that transcript
   and should be rotated at openrouter.ai when convenient.
 
+## FOUR GLASS INSTRUMENTS AGREED. THE RESPRAY RENDER OVERRULED ALL FOUR (2026-08-28)
+
+On the Audi A3 and on fal.ai's Golf, every automated glazing check passed:
+
+    glass_probe            clear / proven
+    glass AREA band        12.6% and 7.9%, inside 1.0-13.0
+    windscreen aperture    69.2% and 68.5% glass BY AREA
+    glass_relabel selftest PASSED both directions
+
+Then a `--colour blue` respray of `carpaint`, rendered at one camera, put
+**blue across most of the windscreen on both cars.** A customer picking a
+colour gets a painted-over screen.
+
+**These are not four pieces of evidence. They are four instruments measuring
+things ADJACENT to the question.** The question is "which FACES carry
+carpaint inside the glazing outline", and:
+  * glass_probe reads the material TABLE (three recorded blind spots already);
+  * the band gate reads total area, not position;
+  * the aperture number scores a GEOMETRIC PRIOR — a wedge of faces guessed to
+    be windscreen-ish from height, position and normal. A high score on it does
+    not mean the screen is glazed, because the mask is not the screen. It also
+    silently includes roof faces if `~roofish` is omitted (an ad-hoc check that
+    dropped that term read 42.8% where the real mask reads 69.2%, and was very
+    nearly reported as a regression).
+  * the selftest scores that same prior.
+
+**RULE: the only glass verdict is a respray render.** Do not quote coverage,
+band or probe numbers as evidence that a car's glazing works. Run
+`respray_gltf.respray(src, dst, ['carpaint'], '1030c0')` and LOOK, or measure
+the changed-pixel share inside the glazing silhouette (the method that settled
+the 2026-08-21 Golf glass gate: blue-painted share of changed pixels fell
+40.06% -> 12.97%).
+
+**`glass_relabel`'s hue seed is generator-specific and WILL break.** It seeds
+glass where texel greenness `G-(R+B)/2 > 6.0`, calibrated on Hunyuan-2.1
+textures whose windows bake strongly green. fal.ai's MULTIVIEW model (2.0-line)
+renders glazing pale near-white: tint p50 **0.0**, and the stage found **86**
+windscreen seeds against 294 on the 2.1 car, 8 for the rear screen, and failed
+its own selftest at 41.5% windscreen coverage. Note the cue is not even
+consistent in direction — `seg_masks`' PAINT_REJECT assumes glazing is DARKER
+than paint, which is wrong for a black car with pale glass. Any future seed
+must be relative to the car's own paint, not an absolute colour.
+
+## THE ISLAND ABSORBER ATE THE GLAZING — 4th absolute-face-count bug (2026-08-28)
+
+`seg_project.py` dissolved label islands under a bare **400 faces**. Calibrated
+on the 918,715-face Pixal mesh that is 0.04% of the car; on the 40,000-face
+Hunyuan meshes every current generator returns, the same 400 is **1.00% of the
+whole car — larger than a windscreen.**
+
+Measured on the fal.ai multiview Golf, final labels:
+
+    glass     488 faces in  26 comps; largest 203, 80, 77, 32 -> 26/26 under 400
+    lamp      ABSENT (dissolved entirely)
+    wheel    4786 faces in 135 comps; largest 790, 790, 773   -> survived
+
+**Wheels survive and glazing does not purely because wheels are bigger** —
+the signature of a size threshold in the wrong units. DINO was NOT at fault:
+it found MORE glass on this car than on the one that worked (26,031 vs 24,125
+px/view) and the projection then threw it away. Scaled to `max(20, F*400/918715)`:
+
+    glass faces 1.22% -> 4.26%    glass AREA 0.69% FAIL -> 7.34% PASS
+    lamp        0.00% -> 0.75%    exterior seen 57.6% -> 75.0%
+
+**The last line matters beyond glazing:** the absorber was dumping real
+exterior surface into `interior`, which seg_assemble paints dark matte — the
+recorded black-blotching defect. On the A3 it moved 14 points of the car back
+into correct body/wheel labels.
+
+**It did NOT fix the respray leak** (A3 windscreen aperture unchanged at 69.2%
+before and after, blue control identical) — `glass_relabel`'s flood fill had
+been silently compensating for it. A real bug, a real fix, and not the cause of
+the headline defect: keep those separate when reporting.
+
+Fourth instance after `MIN_REGION=800`, `LAMP_MIN_REGION=250`, `CRUMB_MAX=400`.
+**Assume any absolute face count in this pipeline is wrong until it is a fraction.**
+
+**And the stale-intermediate trap re-paid, inside the script written to avoid
+re-running things:** a re-run loop printed `glass_relabel`'s exit code but did
+not abort on it, so `seg_boundary` consumed a `car_g.npy` from SEVEN HOURS
+EARLIER and produced a GLB that looked like a result. Deleted. `set -e`, or
+check every rc — echoing one is not checking it.
+
 ## CREASE DENSITY: A DEGREES-vs-RADIANS COMPARISON INFLATES IT ~20x (2026-08-28)
 
 Paid for in a live comparison, and it produced a confidently-stated conclusion
