@@ -159,7 +159,11 @@ elif glass_label in geoms:
             continue
         area[tag] = float(fa[m].sum())
         end = xhi if tag == "high" else xlo
-        gap[tag] = float(np.abs(end - fc[m, 0]).min()) / L_all
+        # p10, NOT min: the min was corrupted by a handful of stray
+        # glass-labelled faces near the nose on the first live run
+        # (endgap read 0.0355 where the windscreen base sits at ~0.18L)
+        # and drove a wrong single-cue flip. One face must never flip a car.
+        gap[tag] = float(np.percentile(np.abs(end - fc[m, 0]), 10)) / L_all
     QC["derived"]["nose_check"] = {
         "area_high_x": round(area.get("high", 0.0), 4),
         "area_low_x": round(area.get("low", 0.0), 4),
@@ -183,18 +187,6 @@ elif glass_label in geoms:
         QC["derived"]["nose_check"]["action"] = "flipped (both cues agree)"
     elif cue_area == "high" and cue_gap == "high":
         QC["derived"]["nose_check"]["action"] = "nose already at +X (both cues agree)"
-    elif "tie" in (cue_area, cue_gap) and cue_area != cue_gap:
-        # one confident cue, one tie: follow the confident one but say so
-        lead = cue_area if cue_area != "tie" else cue_gap
-        if lead == "low":
-            R180 = trimesh.transformations.rotation_matrix(np.pi, [0, 1, 0])
-            for g in geoms.values():
-                g.apply_transform(R180)
-            allv = np.vstack([g.vertices for g in geoms.values()])
-            ops.append("flipped 180deg about Y (single confident cue)")
-        QC["derived"]["nose_check"]["action"] = (
-            f"single-cue decision ({lead}) — VERIFY THE RENDER before trusting "
-            "any front/rear construction")
     else:
         QC["derived"]["nose_check"]["action"] = "REFUSED"
         raise SystemExit(
