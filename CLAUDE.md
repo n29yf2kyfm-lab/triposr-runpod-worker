@@ -2705,6 +2705,109 @@ Two facts worth not rediscovering:
 * The key was pasted into chat in plaintext, so it is exposed in that transcript
   and should be rotated at openrouter.ai when convenient.
 
+## TRIPO v3.1 THROUGH THE FULL PIPELINE: the respray passes, premium DEGRADES it (2026-08-28)
+
+Owner asked for the latest Tripo model and then for it through the whole chain.
+Two model findings, one pipeline bug fixed, and one generator defect that closes
+a question this file has been circling for weeks.
+
+**THE LATEST API-REACHABLE MODELS ARE `v3.1-20260211` AND `P1-20260311`.** The
+"P2.0 - Preview" in the web UI is NOT exposed through the API -- every P2 string
+probes invalid. Free probe method, worth keeping: submit with a NULL file token;
+a VALID version returns code 2003 ("image file is empty"), an INVALID one 2017,
+a DEPRECATED one 2015. Costs nothing and needs no credits. Exact strings come
+from the docs nav (`image-to-model-p1-20260311`, `image-to-model-v3-0-v3-1`),
+not from web search, which contradicted itself on this repeatedly.
+
+    model            tris        median edge   note
+    P1-20260311      4,798       64.4 mm       quad "Smart Mesh" line -- a GAME LOD.
+                                               Renders fine ONLY because the texture
+                                               paints the detail; wheels are flat discs.
+    v3.0-20250812    990,650      8.6 mm       the previous baseline
+    v3.1-20260211  1,483,572      6.8 mm       +50% denser, p5 edge 3.65mm
+
+Measure both on the SAME basis before comparing -- p50 edge at a scale-to-4.284m
+normalisation. 30 credits each, ~60s (P1) / ~135s (v3.1).
+
+**THE SEG CHAIN ON v3.1 IS THE BEST IT HAS EVER RUN.** Skip glass_relabel on a
+dense mesh (the v3.0 finding holds); 18 views incl. the -6 low ring:
+
+    glass AREA 7.08% PASS (band 1-13, catalogue median 5.75)
+    exterior seen 83.3% | interior only 16.7% | lamps 0.85% PRESENT
+    stray glass reverted by seg_boundary: 0 faces
+    assembled share: carpaint 56.4 / interior 16.8 / rim 12.3 / tyre 7.5 / glass 6.1 / lamp 0.9
+
+**AND THE BLUE RESPRAY CONTROL PASSES ON BOTH VIEWS** -- body fully blue, every
+pane dark with the interior visible, tail lamps holding red, tyres black. Second
+generated car ever to pass it. That is the only glass verdict; the four
+instruments remain untrusted.
+
+**TANGENT IS THE THIRD ATTRIBUTE A trimesh ROUND-TRIP SILENTLY DROPS** (after
+NORMAL and every KHR material extension). stage7's validator_warnings gate
+FAILED the car on 9 x MESH_PRIMITIVE_GENERATED_TANGENT_SPACE with ZERO errors --
+Tripo ships a normal map, and without TANGENT the viewer invents a basis the
+spec calls "non-portable across implementations". No render in this container
+shows it, because Blender generates its own. Localised by measuring every
+intermediate: s11_finish 8/69 -> s12_carved 0/69 -> master 0/69; carve_touchup
+is the round-trip. NOTE `export_tangents=True` in blender_finish is NECESSARY
+BUT NOT SUFFICIENT -- proven by re-running the whole chain with only that change
+and measuring 0/69 again, i.e. committing it alone would have been another
+fix-that-never-fires. The working fix runs `gltf-transform tangents`
+(MikkTSpace -- the convention normal-map bakers target; a hand-rolled
+accumulation would disagree with the map it shades) after normals_fix, then
+REFUSES on `tangent_gap()`. Result: 9 warnings -> "No errors. No warnings."
+Gate table 9 PASS/2 FAIL -> 10 PASS/1 FAIL.
+
+**THE ONE REMAINING FAIL IS GEOMETRY, AND THE ARITHMETIC PINS IT:**
+front overhang 0.9048 + wheelbase 2.5548 + rear overhang 0.7984 = **4.2580
+EXACTLY the spec length**. Correct envelope, axles misplaced inside it -- the
+same signature as the multiview run, but WORSE (-82mm vs -47mm), which is more
+evidence for the owner's 8-image rule.
+
+**PREMIUM.py MADE THIS CAR WORSE, AND THE REASON GENERALISES.** Gate table said
+10/1 while the ortho ends show blank white constructed plates over the real
+textured ones, crude flat rear-lamp slabs over correct textured lamps, and dark
+blocks protruding at the arches. The kits (wheel_stage donors, rear_kit lens
+solids, front_kit plate/grille) exist to ADD structure a melt generator never
+produced. **v3.1 already HAS good wheels, lamps, plate and grille in geometry
+plus texture, so the kits duplicate and override features that were already
+better.** On melt geometry they are an upgrade; here they are a downgrade. The
+deliverable from this run is the SEG-CHAIN car, not MASTER_PREMIUM.
+
+**AND THE PROTRUDING BLOCKS ARE A GENERATOR DEFECT NOBODY HAD MEASURED: THE CAR
+IS LEFT-RIGHT SKEWED.** The liners are placed SYMMETRICALLY (FL/FR both 0.9012,
+RL/RR both 0.8866); the BODY is not. Measured on the RAW canon mesh and
+unchanged through the chain:
+
+    station           right    left     asymmetry
+    rear axle zone    0.8849   0.6911   193.8 mm  (24.6%)
+    mid               0.8132   0.7596    53.7 mm  ( 6.8%)
+    front axle zone   0.7212   0.8348   113.6 mm  (14.6%)
+
+**The sign FLIPS front to rear** -- the car is twisted, wide-right at the back
+and wide-left at the front, which is exactly why a DIAGONAL pair (FR, RL)
+protrudes. This is the single-image bake in a new form: this file already
+records the fore-aft TAPER (Hi3DGen 0.878/0.858/0.653), and this is a
+left-right SKEW, which is worse because canon's OBB cannot fix it (not a rigid
+transform) and fit_spec's diagonal scale cannot either. Any symmetric
+constructed component will protrude on whichever side is narrow.
+
+**Two corrections against my own reading, both caught by measuring:**
+1. I read the 3/4 renders as "detached rear wheel, body broken at the rear".
+   The ORTHO SIDE shows the body intact. A 3/4 view of a car with protruding
+   far-side parts reads as a broken body; it is not. Judge structure from ortho.
+2. I then wrote that premium had pushed the wheels proud. Measured at matched
+   stations it is the OPPOSITE -- premium -18/+43mm against the input's
+   +67/+85mm, i.e. it IMPROVED tuck. The visible blocks are the arch LINERS,
+   not the tyres.
+
+**The nose rule refused, correctly, and one render settled it.** canon_dims
+raised "nose direction undecidable -- the two cues disagree" rather than
+guessing. An end-on render showed the badge, grille, headlamps and plate at +X;
+`NOSE_PINNED=+x` and it ran. That is the hardening from this morning's wrong
+flip working as designed -- a refusal that costs one render beats a silent flip
+that invalidates every kit placement.
+
 ## THE GLASS PROBLEM WAS A STARVED-INPUT PROBLEM (2026-08-28, Tripo v3.0)
 
 The whole seg/material chain was calibrated on the 918,715-face Pixal mesh.
