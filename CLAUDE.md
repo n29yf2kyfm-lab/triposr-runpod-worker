@@ -2705,6 +2705,84 @@ Two facts worth not rediscovering:
 * The key was pasted into chat in plaintext, so it is exposed in that transcript
   and should be rotated at openrouter.ai when convenient.
 
+## THE GLASS PROBLEM WAS A STARVED-INPUT PROBLEM (2026-08-28, Tripo v3.0)
+
+The whole seg/material chain was calibrated on the 918,715-face Pixal mesh.
+Every generator this project has used since returns **exactly 40,000 faces**
+(our own Hunyuan-2.1 worker, fal.ai 2.1 at octree 256 AND 512, fal.ai
+multiview). It has therefore been running 25x below its design point all
+along, and that single fact explains a day of glass failures:
+
+  * `seg_project`'s island absorber dissolved anything under a bare 400 faces
+    — 0.04% of the Pixal mesh, **1.00% of a 40k car, larger than a
+    windscreen**. Every glass component on the fal multiview Golf was under
+    it (largest 203 faces); lamps vanished entirely.
+  * `glass_relabel` exists to RECOVER glazing when the 2D projection
+    under-detects, which is what a coarse mesh causes. Its crease-bounded
+    flood fill then walks onto roof and doors because a 40k mesh has no
+    crease at the A-pillar or beltline to stop against.
+
+**Tripo v3.0 (`api.tripo3d.ai`, `image_to_model`, v3.0-20250812, texture+pbr)
+returns 990,650 faces from the SAME single Golf photo** — back at the design
+point — and the chain behaves completely differently:
+
+    stage                       40k meshes        Tripo 990k
+    exterior faces seen         57.6-75.0%        87.7%
+    dumped into `interior`      25-42%            12.3%
+    glass AREA at seg_project   0.69-7.86%        7.46%  PASS (median 5.75)
+    island absorber threshold   20 faces          431 faces (its design value)
+
+**AND `glass_relabel` MADE IT WORSE — skip it on a dense mesh.** It failed its
+own selftest here (windscreen 31.8%, door FP 4.5%) and pushed glass 7.63% ->
+9.65%. Building straight from the projection labels (`car_r.npy` into
+seg_boundary, no relabel) gave a clean split first time — carpaint 63.5%,
+glass 7.3%, tyre 6.0%, rim 9.2%, lamp 1.7%, interior 12.3% — and **the blue
+respray control HOLDS**: side glass stays dark with the interior visible,
+where the 40k A3 through the full chain has a plainly blue windscreen.
+That is the first respray control this project has passed on generated
+geometry.
+
+**Tripo geometry, measured against the others on the same photo and rig:**
+
+    mesh                faces     finest edge (p5)   crease>=25
+    our worker / fal    40,000    10.6-16.9 mm       15.4-22.3
+    Tripo v3.0         990,650     4.3 mm            58.8
+    catalogue Sportage      -      ~1 mm            271.5
+
+4.3 mm is the first generated mesh to reach shut-line scale (2-4 mm) rather
+than sit 3-4x above it, and the render carries traceable door shut lines,
+handles, a sill blade, formed mirrors, alloy spokes and a LEGIBLE RF67 FPX
+plate. Still a fifth of a catalogue car's crease — sharper, not solved.
+
+**Cost: 30 credits per image_to_model run** (balance 40 -> 10), ~90 seconds.
+Downloads 403 python-urllib's default User-Agent — use curl with a UA, the
+same trap as RunPod's GraphQL endpoint.
+
+**LIMITS, stated:** n=1 car, one camera, one respray view. The rear screen is
+still weak (20 seeds) because the rear was never photographed — the multiview
+slot route is the fix. Raw proportions came out 17% too wide (canon corrected
+W x0.835), the single-image perspective bake every generator shows.
+
+## A GLAZING-SILHOUETTE PAINT-LEAK METRIC DOES NOT WORK EITHER (2026-08-28)
+
+Built to quantify the respray verdict: flat-colour the `glass` material
+magenta, render at matched framing (same geometry, same camera fit, so it is
+correctly registered), then measure the blue-painted share INSIDE that
+silhouette. It scored **Tripo 5.29% vs A3 7.06%** — nearly the same — on two
+cars the eye separates instantly.
+
+**Why it fails is the same reason every other glass metric here fails: the
+mask is where glass IS, not where glass SHOULD BE.** The A3's defect is
+carpaint filling the windscreen APERTURE, which lies outside the glass
+silhouette by construction, so the metric cannot see it. Sixth instrument in
+one day to measure something adjacent to the question.
+
+Two lesser traps from the same attempt, both worth avoiding: hand-picked
+normalised boxes are useless (a "side glass" box read 62.9% blue on visibly
+unpainted dark glass — I could not see where the car sat in frame), and a
+`cd` inside a compound command broke the relative path to `qc_studio8.py`,
+which fails as "Python file could not be opened" long after the cd.
+
 ## FOUR GLASS INSTRUMENTS AGREED. THE RESPRAY RENDER OVERRULED ALL FOUR (2026-08-28)
 
 On the Audi A3 and on fal.ai's Golf, every automated glazing check passed:
