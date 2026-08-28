@@ -2920,8 +2920,14 @@ expecting sharpness.
 
 **Both tiers return exactly 40,000 faces** — and so does our own worker's
 output. Three independent deployments landing on the same round number is the
-Hunyuan 2.1 PAINT stage decimating for UV unwrap (inferred, high confidence;
-the cheap check is one `texture=False` run, not yet done). On a real-size 4.3m
+Hunyuan 2.1 PAINT stage decimating for UV unwrap — **PROVEN 2026-08-28 by the
+`texture=False` run this note asked for**: our own worker, same Golf photo,
+shape-only, returned **592,188 triangles, finest edge p5 = 3.0mm** (finer than
+Tripo's 4.3mm; crease>=25 32.6 vs Tripo 58.8). 59.7s execution, ~$0.03; the
+27 minutes before it was cold boot, not compute. Mesh archived at
+car-meshes/staging/tripo_golf_20260828/hy21_shapeonly_592k.glb. So the dense
+geometry the material chain needs is ALREADY OURS — the gap is the paint
+stage's decimation target, not a new model. On a real-size 4.3m
 car that is a 10.6-16.9mm finest edge against a 2-4mm shut line, so **neither
 tier can hold one**, at either resolution.
 
