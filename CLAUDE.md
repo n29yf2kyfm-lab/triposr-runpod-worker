@@ -2763,6 +2763,37 @@ still weak (20 seeds) because the rear was never photographed — the multiview
 slot route is the fix. Raw proportions came out 17% too wide (canon corrected
 W x0.835), the single-image perspective bake every generator shows.
 
+## THE STARVED-INPUT CLAIM SURVIVED ITS FALSIFICATION TEST (2026-08-28, council-ordered)
+
+The council called C4 ("the glass problem was a starved-input problem")
+confounded — Tripo differs from Hunyuan in texture, topology and pose, not
+only density — and named the cheapest falsifier: decimate the WINNING car to
+40k and re-run the identical chain, so density is the only variable. Both
+controls were run:
+
+  * **A3 40k WITHOUT glass_relabel** -> windscreen almost fully blue. Kills
+    the "the bypass alone explains it" confound: on a coarse mesh the
+    projection genuinely under-detects and the recovery stage is REQUIRED.
+  * **Tripo decimated 990,650 -> 40,021 faces** (gltf-transform simplify;
+    same texture, pose, photo, silhouette), identical no-relabel chain:
+    the respray control FLIPS. Side windows take paint; grey interior-label
+    blotches appear on the doors and sills (final labels: glass 4.9%,
+    interior 28.5% vs the dense car's 7.3%/12.3%). The dense original PASSED
+    the same test the same day.
+
+One instructive detail: exterior-seen stayed ~87% on BOTH (87.7 dense, 87.2
+decimated) — so that particular number tracks texture/topology, not density,
+exactly as the council suspected. What density controls is WHERE the labels
+land: face granularity at the glazing boundary. A 40k car's windscreen is a
+few hundred faces, so every boundary error is a visible fraction of a pane.
+
+VERDICT: density is causal for the respray outcome, with n=1 car. The honest
+statement of record: "on this car, at 40k the chain fails the respray however
+it is configured, and at 990k it passes with the fill skipped." The dishonest
+inflation to avoid repeating: quoting pre-fix 40k numbers (57.6% exterior)
+against post-fix dense numbers — the true residual was 75->87.7 and part of
+THAT is texture, not density.
+
 ## A GLAZING-SILHOUETTE PAINT-LEAK METRIC DOES NOT WORK EITHER (2026-08-28)
 
 Built to quantify the respray verdict: flat-colour the `glass` material
