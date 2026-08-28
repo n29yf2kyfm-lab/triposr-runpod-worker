@@ -2705,6 +2705,77 @@ Two facts worth not rediscovering:
 * The key was pasted into chat in plaintext, so it is exposed in that transcript
   and should be rotated at openrouter.ai when convenient.
 
+## CREASE DENSITY: A DEGREES-vs-RADIANS COMPARISON INFLATES IT ~20x (2026-08-28)
+
+Paid for in a live comparison, and it produced a confidently-stated conclusion
+that was the exact REVERSE of the truth. The throwaway script did:
+
+    ang = np.degrees(m.face_adjacency_angles)      # degrees
+    sel = ang >= np.radians(thr)                   # ...compared to RADIANS
+
+`np.radians(25)` is 0.436, so "sharp" meant "sharper than 0.44 DEGREES" and it
+selected **51,558 of 54,794** adjacency edges instead of 3,923. Measured on the
+A3: density **447.7 wrong, 21.7 right**.
+
+**What the wrong number caused me to tell the owner:** that our generated cars
+score 455 against a catalogue car's 271, i.e. SHARPER than catalogue, and that
+the flat profile across 25/45/60/90 was "the faceting signature". Both false.
+Corrected numbers on the same three files:
+
+    fal.ai @256   crease>=25  22.3   >=45 3.5   >=60 0.9   >=90 0.1
+    fal.ai @512               15.4        1.7        0.5        0.0
+    ours (A3)                 29.6        6.3        2.0        0.5
+    Sportage (on record)     271.5      121.2       64.2       16.4
+
+So generated cars carry roughly **a tenth** of a catalogue car's sharp-edge
+length, and their profile falls off steeply — the HEALTHY shape. The "flat to
+90 degrees" reading was an artefact of selecting nearly every edge.
+
+**THE TELL, and it is free:** print how many edges the threshold selected. A
+"sharp edge" set that is 94% of all adjacency edges is not a sharp edge set.
+Any threshold metric should report its own selection count beside its value —
+this is the same class as the empty-by-construction gates recorded above, but
+inverted: the mask was not empty, it was nearly universal.
+
+`crease_density.py` compares correctly; it was the ad-hoc reimplementation that
+was wrong. **Do not re-derive this metric inline** — call the tool, or copy its
+comparison verbatim.
+
+## RAISING fal.ai's `octree_resolution` BUYS SMOOTHNESS, NOT SHARPNESS (2026-08-28)
+
+`fal-ai/hunyuan3d-v21` exposes exactly one geometry-quality knob —
+`octree_resolution`, **default 256** — plus `guidance_scale`,
+`num_inference_steps`, `textured_mesh` and `seed`. Same Golf cutout, seed 0,
+50 steps, textured, at 256 and at 512:
+
+    256 -> crease>=25 22.3, finest edge (p5) 16.9mm, 40,000 faces
+    512 -> crease>=25 15.4, finest edge (p5) 10.6mm, 40,000 faces
+
+Finer tessellation, **LESS angular detail**. The higher grid resolves smooth
+surface better and removes the coarse grid's own stair-stepping (part of what
+256 was scoring as "crease"). It does not add panel definition, which is the
+thing the owner has rejected every generated car for. Do not buy resolution
+expecting sharpness.
+
+**Both tiers return exactly 40,000 faces** — and so does our own worker's
+output. Three independent deployments landing on the same round number is the
+Hunyuan 2.1 PAINT stage decimating for UV unwrap (inferred, high confidence;
+the cheap check is one `texture=False` run, not yet done). On a real-size 4.3m
+car that is a 10.6-16.9mm finest edge against a 2-4mm shut line, so **neither
+tier can hold one**, at either resolution.
+
+**Operational note:** the 256 run completed in ~4 minutes; the 512 run sat
+IN_QUEUE for 23 minutes before starting (then finished in ~2). Budget queue
+time, and never wire a watcher that gives up while the job is still queued —
+mine timed out at 23 min and had to be re-armed.
+
+**fal.ai's material output is a fused shell**, identical in kind to our own
+worker's: ONE `PBR_Material`, `alphaMode: OPAQUE`, no glass node, **no NORMAL
+accessors** (0/1 primitives — the recorded crumpled-foil class). Its baked
+texture PAINTS green windows onto the body, which looks like glazing in a still
+and takes a respray like paint. Paying for the API does not solve the material
+problem; it is the same problem, bought.
+
 ## OWNER RULE 2026-08-27: RENDER FROM 8 IMAGES, NOT ONE
 
 Owner instruction, verbatim: **"New rule we use 8 imisges to render"**.
