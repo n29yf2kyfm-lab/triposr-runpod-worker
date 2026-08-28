@@ -35,8 +35,8 @@
     "gte_specific_dims": "GTE ride height and kerb figures differ from the base hatch and were NOT confirmed; the figures above are the base 5-door hatch published set"
   },
   "tyre": {
-    "spec": "unverified",
-    "source": "wheel design is visible in the reference orbit (gloss-black multi-spoke) but the fitment size is not readable from the photographs; do not assert one"
+    "spec": "225/45R17",
+    "source": "published VW option fitment for the Mk7.5 Golf GTE (17in 'Madrid'); the standard 205/55R16 has an outer diameter within 0.3% of it, so the wheel's OUTER geometry is insensitive to which fitment the real car wears. 17in chosen because the reference orbit shows thin-sidewall large gloss-black alloys; the rim size is a judgement from the photos, not a decoded fact."
   },
   "labels": {
     "body": "carpaint",
@@ -54,8 +54,14 @@
   "references": {
     "prefix": "car-meshes/staging/golf_rf67/",
     "views": [
-      "v1_front34R", "v2_sideR", "v3_rear34R", "v4_rear",
-      "v5_rear34L", "v6_sideL", "v7_front34L", "v8_front"
+      "v1_front34R",
+      "v2_sideR",
+      "v3_rear34R",
+      "v4_rear",
+      "v5_rear34L",
+      "v6_sideL",
+      "v7_front34L",
+      "v8_front"
     ],
     "note": "Owner-supplied cinch studio orbit of ONE car -- plate RF67 FPX legible in all eight. orbit_* are common-scale (equalised body height) on one flat grey; fill_* are per-view max-fill RGBA for single-image generation."
   }
