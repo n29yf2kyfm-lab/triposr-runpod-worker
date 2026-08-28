@@ -47,6 +47,7 @@ bounded grow is doing the work in both cases.
 
 Run: python3 glass_relabel.py <car.glb> <labels.npy> <out_labels.npy> [--selftest] [--lamps]
 """
+import os
 import sys
 
 import numpy as np
@@ -271,6 +272,48 @@ for _ in range(3):
     closed += int(fill.sum())
 print(f"  hole-closing  {closed} faces absorbed into panes")
 
+# ---- ROOF EVICTION -------------------------------------------------------
+# THE LEAK THIS EXISTS FOR, measured on the Audi A3 (2026-08-28). The finished
+# car rendered with a dark band running over the roof and down the rear quarter
+# — a panoramic roof the A3 does not have — and glass_where put a number on it:
+# 24.6% of the labelled glazing sat in the top 15% of the car's height, 42.9%
+# of it facing up. That is also the whole of the band-gate failure: glass area
+# read 13.20% against a 13.0 ceiling, and the roof share alone is ~3.3 points.
+#
+# STAGE ATTRIBUTION, measured rather than assumed (glass area / roof share):
+#     seg_project  3.81%  17.9%      seg_refine   3.84%  17.9%
+#     glass_relabel 13.23% 24.9%     seg_boundary 13.20% 24.6%
+# So the roof label is BORN upstream (~0.7% of car area) and this stage's fill
+# then trebles it (~3.3%). Both had to be caught, and only an eviction can:
+# every other step here ADDS glass and none of them can remove what arrived
+# already wrong. It runs last so nothing downstream re-adds.
+#
+# THE DISCRIMINATOR IS |n_x|, NOT HEIGHT. Height alone cannot separate a roof
+# panel from the top of a windscreen — they meet. But a roof is near-level
+# (n_y high, n_x ~0) while glazing is RAKED, and rake is exactly a longitudinal
+# normal component: a screen 30 deg off vertical has n_y 0.50 / n_x 0.87, and
+# even a extreme 60 deg screen has n_y 0.87 / n_x 0.50. Requiring |n_x| < 0.35
+# therefore cannot reach any real screen, at any rake, which is why the
+# windscreen-coverage direction of the selftest is unmoved by this pass.
+#
+# A PANORAMIC ROOF IS EVICTED TOO, deliberately. It is the rarer car and the
+# failure directions are not symmetric: a panoramic roof rendered as paint is a
+# missing option, while a solid roof rendered as glass is the "prototype in the
+# viewer" look the owner scraps cars for. GLASS_ROOF_EVICT=0 turns it off for a
+# car that genuinely has one.
+ROOF_EVICT = os.environ.get("GLASS_ROOF_EVICT", "1") == "1"
+ROOF_NY = float(os.environ.get("GLASS_ROOF_NY", "0.80"))
+ROOF_NX = float(os.environ.get("GLASS_ROOF_NX", "0.35"))
+ROOF_YF = float(os.environ.get("GLASS_ROOF_YF", "0.78"))
+roof_panel = (fn[:, 1] > ROOF_NY) & (np.abs(fn[:, 0]) < ROOF_NX) & (yf > ROOF_YF)
+if ROOF_EVICT:
+    eyes = roof_panel & (new == GLASS)
+    new[eyes] = BODY
+    print(f"  roof-eviction {int(eyes.sum())} glass faces on the roof panel "
+          f"-> body (n_y>{ROOF_NY}, |n_x|<{ROOF_NX}, yf>{ROOF_YF})")
+else:
+    print("  roof-eviction DISABLED (GLASS_ROOF_EVICT=0)")
+
 for k, v in report.items():
     print(f"  {k:11s} {v}")
 
@@ -282,24 +325,42 @@ print(f"glass area: {a_before:.2f}% -> {a_after:.2f}% of total "
 if SELFTEST:
     ws = ZONES["windscreen"]
     door = (xf > 0.30) & (xf < 0.55) & (yf > 0.25) & (yf < 0.50) & (np.abs(fn[:, 2]) > 0.7)
-    roof = roofish
     # FALSE POSITIVES ARE MEASURED AS *ADDED*, not absolute. The input labels
     # already carry some stray glass; scoring those against this stage would
     # make it "fix" something it did not break, and would hide its real error.
     added = (new == GLASS) & (label != GLASS)
     cov = 100 * (new[ws] == GLASS).mean() if ws.sum() else 0.0
     d_fp = 100 * added[door].mean() if door.sum() else 0.0
-    r_fp = 100 * added[roof].mean() if roof.sum() else 0.0
     print(f"SELFTEST  windscreen-aperture covered {cov:.1f}% (n={int(ws.sum())})")
     print(f"SELFTEST  door-skin FP (added here)   {d_fp:.1f}% (n={int(door.sum())})")
-    print(f"SELFTEST  roof-panel FP (added here)  {r_fp:.1f}% (n={int(roof.sum())})")
+    # ROOF IS SCORED ABSOLUTE, AND AGAINST THE WHOLE ROOF PANEL. Both halves of
+    # that sentence are corrections to a test that reported 0.0% on a car whose
+    # roof was visibly glazed (A3, 2026-08-28) — the sixth "gate that could not
+    # fire" in this repo, and it hid a defect the eye caught immediately:
+    #   * it scored only faces THIS STAGE added, so the ~0.7%-of-car roof glass
+    #     arriving from seg_project was invisible to it by construction. The
+    #     added-only rule is right for the door (this stage's own fill is the
+    #     only thing that reaches it) and wrong for the roof, because the roof
+    #     is now EVICTED here — a stage that removes upstream error must be
+    #     scored on the result, not on its delta.
+    #   * `roofish` is n_y>0.88 over xf 0.30-0.70 — a narrow strip of the
+    #     flattest mid-roof. The leak lived on the curved header and the rear
+    #     quarter, outside it on both counts. Scored against `roof_panel`, the
+    #     same mask the eviction uses, so the test and the fix cannot disagree.
+    # Reported as a share of GLASS AREA (what glass_where measures and what the
+    # band gate is inflated by), not as a share of roof faces.
+    _ga = float(m.area_faces[new == GLASS].sum())
+    r_fp = (100 * float(m.area_faces[roof_panel & (new == GLASS)].sum()) / _ga
+            if _ga > 0 else 0.0)
+    print(f"SELFTEST  roof share of glass AREA    {r_fp:.1f}% "
+          f"(n={int(roof_panel.sum())} roof faces)")
     bad = []
     if cov < 60:
         bad.append(f"windscreen coverage {cov:.1f}% < 60%")
     if d_fp > 2:
         bad.append(f"door-skin FP {d_fp:.1f}% > 2%")
     if r_fp > 2:
-        bad.append(f"roof FP {r_fp:.1f}% > 2%")
+        bad.append(f"roof share of glass area {r_fp:.1f}% > 2%")
     if bad:
         raise SystemExit("SELFTEST FAILED: " + "; ".join(bad))
     if LAMPS:
