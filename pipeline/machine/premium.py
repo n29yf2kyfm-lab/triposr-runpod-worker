@@ -284,13 +284,37 @@ def main():
                                   carved, log)
             if n_cut is None:
                 fail(stage, "carve touch-up failed — see log")
+            untan = P("s13_normals_untangented.glb")
             rc, dt, tail = run_logged(
-                ["python3", "normals_fix.py", carved,
-                 files["normals"]], log)
+                ["python3", "normals_fix.py", carved, untan], log)
             ok = any("NORMAL present on all primitives" in t for t in tail)
             if rc or not ok:
                 fail(stage, "normals_fix did not verify NORMAL accessors")
-            record(stage, files["normals"], rc, dt, tail)
+            # TANGENT is the THIRD shading attribute a trimesh round-trip
+            # silently drops (after NORMAL and the KHR material extensions).
+            # Measured on the Tripo v3.1 Golf 2026-08-28: blender_finish
+            # exports TANGENT on exactly the 8 primitives whose material
+            # carries a normalTexture, and carve_touchup — a trimesh
+            # round-trip — takes all 8 back to zero. The car then ships with
+            # a runtime-invented tangent basis the validator calls
+            # "non-portable across implementations", i.e. the same normal
+            # map shades differently in different viewers.
+            #
+            # MikkTSpace, not a hand-rolled accumulation: it is the
+            # convention normal-map bakers target, so tangents computed any
+            # other way disagree with the map they are shading. It is also
+            # SELECTIVE — it wrote 8 of 69 primitives and left the rest
+            # untouched, so nothing pays for tangents it does not need.
+            rc2, dt2, tail2 = run_logged(
+                ["npx", "--yes", "@gltf-transform/cli", "tangents",
+                 untan, files["normals"]], log)
+            if rc2 or not os.path.exists(files["normals"]):
+                fail(stage, "gltf-transform tangents failed — see log")
+            need_tan = tangent_gap(files["normals"])
+            if need_tan:
+                fail(stage, f"TANGENT still missing on normal-mapped "
+                            f"primitives: {need_tan[:4]}")
+            record(stage, files["normals"], rc, dt + dt2, tail + tail2)
             continue
 
         if stage == "validate":
@@ -353,6 +377,26 @@ def main():
             continue
 
     print(f"done. manifest: {manifest_path}")
+
+
+def tangent_gap(glb):
+    """Names of primitives whose material carries a normalTexture but which
+    have no TANGENT attribute — the exact set the Khronos validator raises
+    MESH_PRIMITIVE_GENERATED_TANGENT_SPACE on. Empty list means the file is
+    self-sufficient for normal mapping. Read from the glTF JSON rather than
+    through trimesh, which has no concept of TANGENT and is the thing that
+    drops it in the first place."""
+    import json
+    import struct
+    with open(glb, "rb") as fh:
+        fh.seek(12)
+        ln, _ = struct.unpack("<II", fh.read(8))
+        j = json.loads(fh.read(ln))
+    mapped = {i for i, m in enumerate(j.get("materials", []))
+              if "normalTexture" in m}
+    return [m.get("name") for m in j.get("meshes", [])
+            for p in m["primitives"]
+            if p.get("material") in mapped and "TANGENT" not in p["attributes"]]
 
 
 def carve_touchup(car_glb, wheel_qc, out_glb, log_path):

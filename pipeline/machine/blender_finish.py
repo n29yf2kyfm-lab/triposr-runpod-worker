@@ -104,6 +104,18 @@ for o in [o for o in bpy.data.objects if o.type == 'MESH']:
     o.select_set(False)
     print(f"finished {o.name}: mat={name}, verts={len(o.data.vertices)}")
 
+# export_tangents: a material carrying a normalTexture REQUIRES a TANGENT
+# attribute, and without one the Khronos validator raises
+# MESH_PRIMITIVE_GENERATED_TANGENT_SPACE on every affected primitive — the
+# runtime then invents a tangent basis that is explicitly "non-portable
+# across implementations", i.e. the same normal map shades differently in
+# different viewers. Found on the Tripo v3.1 Golf (2026-08-28), whose
+# generator ships a normal map: 9 warnings, and stage7's validator_warnings
+# gate correctly FAILED the car for it. This is the same class as the
+# missing-NORMAL crumpled-foil bug one level up — an absent shading
+# attribute that no render in THIS container would reveal, because Blender
+# generates its own. Cost is one vec4 per vertex.
 bpy.ops.export_scene.gltf(filepath=OUT, export_format='GLB',
-                          export_apply=True, export_normals=True)
+                          export_apply=True, export_normals=True,
+                          export_tangents=True)
 print("BLENDER_FINISH_DONE", OUT)
