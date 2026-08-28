@@ -330,8 +330,33 @@ if SELFTEST:
     # make it "fix" something it did not break, and would hide its real error.
     added = (new == GLASS) & (label != GLASS)
     cov = 100 * (new[ws] == GLASS).mean() if ws.sum() else 0.0
+    # AND THE SAME THING BY AREA. Coverage was count-only, which is the basis
+    # the band gate was moved OFF on 2026-08-19 ("it counted FACES ... AREA is
+    # the physical quantity", after glass faces measured 1.58x smaller than
+    # body faces on a real mesh). A count-based coverage number can therefore
+    # flatter glass without anyone being able to see it happening.
+    #
+    # ON THIS CAR THE TWO AGREE — A3, 2026-08-28: 70.4% by count, 69.2% by
+    # area — which is worth stating plainly, because it is evidence that this
+    # particular mesh does NOT have the size disparity that motivated the band
+    # gate's change. Printing both is what establishes that; assuming either
+    # way would not have.
+    #
+    # (Recorded because it nearly went the other way: an ad-hoc check of the
+    # same aperture read 42.8% glass and looked like a serious regression. That
+    # mask had omitted the `~roofish` term, so large roof faces were counted as
+    # windscreen aperture and diluted it. The zone masks are not interchangeable
+    # with hand-rolled ones — measure through ZONES, or reproduce it exactly.)
+    #
+    # REPORTED, NOT GATED. The 60% threshold was calibrated against count
+    # numbers; swapping the basis underneath it would move a gate with no
+    # positive control behind it. Set an area threshold only once a known-good
+    # car has been measured through this same mask.
+    cov_a = (100 * float(m.area_faces[ws & (new == GLASS)].sum())
+             / float(m.area_faces[ws].sum())) if ws.sum() else 0.0
     d_fp = 100 * added[door].mean() if door.sum() else 0.0
-    print(f"SELFTEST  windscreen-aperture covered {cov:.1f}% (n={int(ws.sum())})")
+    print(f"SELFTEST  windscreen-aperture covered {cov:.1f}% by count, "
+          f"{cov_a:.1f}% BY AREA (n={int(ws.sum())})")
     print(f"SELFTEST  door-skin FP (added here)   {d_fp:.1f}% (n={int(door.sum())})")
     # ROOF IS SCORED ABSOLUTE, AND AGAINST THE WHOLE ROOF PANEL. Both halves of
     # that sentence are corrections to a test that reported 0.0% on a car whose
