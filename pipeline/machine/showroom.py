@@ -57,8 +57,14 @@ SAMPLES = int(os.environ.get("SHOW_SAMPLES", "128"))
 RES_X = int(os.environ.get("SHOW_RES_X", "1600"))
 RES_Y = int(os.environ.get("SHOW_RES_Y", "1100"))
 
-VIEWS = [("front34", 38, 10), ("side", 90, 4), ("rear34", 214, 11),
-         ("front", 0, 3), ("rear", 180, 3), ("high34", 322, 26)]
+# EIGHT views, both sides. Six was one angle short of proving the car:
+# a single front three-quarter is exactly the evidence standard this repo
+# keeps failing on ("only one angle is proven"), and a one-sided set cannot
+# show a left/right defect at all — which matters here, where the headlamp
+# label is 2x better on the right than the left.
+VIEWS = [("front34_R", 38, 10), ("side_R", 90, 4), ("rear34_R", 214, 11),
+         ("rear", 180, 3), ("rear34_L", 146, 11), ("side_L", 270, 4),
+         ("front34_L", 322, 10), ("front", 0, 3)]
 if VIEW_FILTER:
     VIEWS = [v for v in VIEWS if v[0] in VIEW_FILTER]
 
