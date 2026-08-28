@@ -2705,6 +2705,116 @@ Two facts worth not rediscovering:
 * The key was pasted into chat in plaintext, so it is exposed in that transcript
   and should be rotated at openrouter.ai when convenient.
 
+## COUNCIL AUDIT 2026-08-28 (evening): THE SKEW WAS OUR OWN YAW. Three retractions.
+
+Owner-ordered council on the day's Tripo v3.1 work: an adversarial packet of 12
+claims, reviewed by GLM-5.3-flash via ox.py, a Fable 5 agent, and an
+instrumented self-audit. It overturned the session's headline finding and two
+smaller ones. Read this before trusting any slab statistic in this repo.
+
+**RETRACTION 1 — "THE GENERATED BODY IS LEFT-RIGHT SKEWED" IS WRONG.**
+Committed earlier the same day as a hard generator defect (194mm / 24.6% at the
+rear axle, 114mm at the front, "the sign FLIPS", "canon's OBB cannot fix a
+skew"). What actually happened: I sliced a YAWED car with axis-aligned slabs.
+
+    mirror residual at canon's own z=0 plane :  66.9 mm = 1.57% of length
+    mirror residual at the OPTIMAL plane     :   9.8 mm = 0.23% of length
+    optimal plane: z0 +0.0240 m, tilt_y +4.11 deg
+
+0.23% is the band this project already measured as SYMMETRIC on Hunyuan output
+(0.16% mean, 0.28% p95). Corroborated twice over: PCA long axis -3.80 deg, and
+axle lateral midpoints of OPPOSITE sign (-48mm front, +95mm rear).
+
+**THE NULL TEST IS THE PART WORTH COPYING.** A reviewer objected that "a mild
+yaw cannot produce a 194mm interior-zone flip; it would take tens of degrees".
+Settled by building a PERFECTLY SYMMETRIC car-like primitive and running the
+ORIGINAL zone measurement on it, unyawed and yawed by the measured 4.10 deg:
+
+    station      control no-yaw   control yawed 4.10   real car as reported
+    rear axle          0.1 mm            93.6 mm            193.8 mm
+    mid                0.0 mm             0.1 mm             53.7 mm
+    front axle         0.0 mm           118.1 mm            113.6 mm
+
+The zero-yaw row proves the measurement is unbiased; the yawed row reproduces
+the SIGN FLIP, the near-zero mid and the front axle almost exactly. So the
+reviewer's geometric objection is refuted AND my own first retraction was
+itself slightly overstated: yaw explains most of the signature, but the rear
+(194 vs 94) and mid (54 vs 0) exceed it, so a small genuine residual exists —
+at 0.23%, i.e. within normal. **Three positions, in order: "24.6% skewed,
+unfixable" (wrong) -> "never twisted, purely our yaw" (overstated) -> "mostly
+our 4 deg yaw plus a residual inside the symmetric band" (measured).**
+
+**WHY IT MATTERED MORE THAN A CORRECTION.** Every symmetric operation
+downstream is placed about z=0 — wheel centres, arch liners, lamp kits, plate
+plinths, interior. Under a 4 deg yaw they land skewed against the body, which
+is exactly why premium's symmetrically-placed liners protruded on a DIAGONAL
+pair (FR +130.7mm, RL +219.5mm) while the other two sat flush. I blamed the
+generator; the cause was our own pose. `pipeline/machine/deyaw.py` fits the
+mirror plane (offset + two tilts) over the WHOLE BODY — no zones, no
+percentiles, no hand-picked bands — and rotates it onto z=0 as a root-node
+transform with the BIN verbatim. It REFUSES on an already-aligned car
+(measured: gain x1.00 < 1.25, no file written).
+
+**THE SYSTEMIC DIAGNOSIS, from the external reviewer, and it is correct:**
+"the same agent both builds and judges, using self-chosen extreme-percentile
+slab statistics, and never identifies WHAT the extreme vertices are." A p99.5
+of |z| in a hand-picked x-slab does not measure the body flank until somebody
+checks that the extreme vertices are bodywork rather than mirrors, handles or
+arch liners. That single unvalidated assumption contaminated three numbers at
+once (the skew, the wheel-tuck comparison, the lamp L/R split). **Rule: any
+slab/percentile statistic must (a) print what its extreme vertices ARE, and
+(b) be run against a symmetric null before it is believed.** Both are cheap;
+neither was done.
+
+**RETRACTION 2 — "export_tangents was NECESSARY but not sufficient" is HALF
+WRONG.** Only the insufficiency is proven. `v31_materialised.glb` came from a
+blender_finish WITHOUT export_tangents, carried zero tangents, and
+`gltf-transform tangents` ALONE made it validator-clean. So the transform pass
+is sufficient on its own and the Blender flag is NOT necessary. Correct
+statement: the end-of-chain MikkTSpace recompute is what fixes it; the export
+flag is belt-and-braces. Related caveat worth keeping: a validator checks
+tangent PRESENCE, not handedness or frame consistency.
+
+**RETRACTION 3 — the P1 "median edge 64.4mm" is a misleading statistic.**
+P1-20260311 is a QUAD line, and triangulated quads are anisotropic: its area
+is 27.98 m2 against an equilateral prediction of 8.62 m2 from that median edge
+— ratio 3.25, where v3.1 sits at 1.09. P1 is not a partial mesh. The
+conclusion survives on a better number (4,798 tris over 28 m2 is ~58 cm2 per
+triangle, so no shut lines anywhere), but do not characterise a quad-derived
+mesh by median edge length. Useful by-product: the extreme vertices on the
+max-extent axis are bumper-tip centreline points on BOTH meshes, so the
+scale-to-4.284m normalisation is sound.
+
+**PROCESS FAILURE, MINE, AGAINST THE OWNER'S STANDING ORDER.** The 66MB
+tangented GLB 400'd on upload (Supabase ceiling) and I deleted the local copy
+anyway. The order is explicit: "Upload the artefact, THEN delete the local
+copy. Confirm the object is in the bucket before the rm." The prune predicate
+did not verify upload success. Recoverable here in one command, which is
+exactly why it slipped. **The right fix is COMPRESSION, not skipping the
+upload:** `gltf-transform draco` took it 66.17MB -> 23.09MB, uploaded 200 and
+verified BY LISTING THE PREFIX (23.09MB, byte-match to local).
+
+**OPEN DEBTS this council raised and that are NOT yet paid:**
+  * **Run the P1 car (4,798 tris) through the full gate suite.** A
+    guaranteed-bad sample was in hand all day and no gate ever saw it. If the
+    glass band and the lamp gate PASS it, every PASS in this session is
+    decorative. This is the cheapest end-to-end test of our own doctrine.
+  * **There is no SYMMETRY gate**, despite asymmetry being the day's headline.
+    A failure mode was observed and not gated.
+  * **The wheel-tuck (C8b) and lamp L/R (C10) numbers share the contaminated
+    slab method** and have not been re-measured.
+  * `seg_boundary` reverted 0 stray glass faces — a reverter with a perfect
+    zero-failure record and no fault injection. Corrupt 10 labels and prove it
+    fires.
+  * The glass AREA band is location-blind by construction, which is why it
+    passed a car whose upper windscreen is carpaint. The per-aperture measure
+    is the missing gate; define the aperture on the CLAY pass (geometry only,
+    material-blind) so the zone cannot be drawn to fit the answer.
+  * "Is the deliverable better than this morning?" is currently UNANSWERABLE —
+    no metric exists for the morning artifact. Six numbers computed for both
+    would settle it: glass% per aperture, tuck L/R, mirror residual, lamp
+    faces L/R, tangent count, validator warnings.
+
 ## TRIPO v3.1 THROUGH THE FULL PIPELINE: the respray passes, premium DEGRADES it (2026-08-28)
 
 Owner asked for the latest Tripo model and then for it through the whole chain.
@@ -2773,6 +2883,10 @@ produced. **v3.1 already HAS good wheels, lamps, plate and grille in geometry
 plus texture, so the kits duplicate and override features that were already
 better.** On melt geometry they are an upgrade; here they are a downgrade. The
 deliverable from this run is the SEG-CHAIN car, not MASTER_PREMIUM.
+
+**[RETRACTED 2026-08-28 by council audit — see the COUNCIL AUDIT section
+above. This was OUR OWN ~4 deg yaw sliced with axis-aligned slabs, not a
+generator skew. The numbers below are left as the record of the mistake.]**
 
 **AND THE PROTRUDING BLOCKS ARE A GENERATOR DEFECT NOBODY HAD MEASURED: THE CAR
 IS LEFT-RIGHT SKEWED.** The liners are placed SYMMETRICALLY (FL/FR both 0.9012,
