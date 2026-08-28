@@ -267,6 +267,29 @@ if CONSTANT:
     R_SHARED = max(fits.values())
     print("constant framing: shared radius %.2f" % R_SHARED)
 
+# QC_VIEWS renders a SUBSET by name ("front_left,rear_right"). Renders are the
+# bottleneck in any comparison round — eight views x several passes is ~40 min
+# on 4 cores — and most rounds only need the one view where the defect lives.
+#
+# IT IS FILTERED HERE, AFTER R_SHARED, AND THAT ORDERING IS THE WHOLE POINT.
+# The shared radius is the MAX over all eight fits, so filtering VIEWS before
+# it would recompute the max over the subset and silently reframe the car. A
+# subset render would then be un-comparable with the full pack it is supposed
+# to be checked against — and this session already threw away a before/after
+# comparison for exactly that reason ("my first comparison was INVALID because
+# framing changed between packs", 2026-08-27). Framing stays a property of the
+# car, never of which views were asked for.
+_want = os.environ.get("QC_VIEWS")
+if _want:
+    keep = [v.strip() for v in _want.split(",") if v.strip()]
+    known = {n for n, _ in VIEWS}
+    unknown = [k for k in keep if k not in known]
+    if unknown:
+        raise SystemExit(f"REFUSED: unknown view(s) {unknown}; known: {sorted(known)}")
+    VIEWS = [(n, a) for n, a in VIEWS if n in keep]
+    print("QC_VIEWS subset:", [n for n, _ in VIEWS],
+          "(framing still fitted over all 8)")
+
 for pname in PASSES:
     if pname not in PASS_DEF:
         raise SystemExit(f"REFUSED: unknown pass {pname}")
