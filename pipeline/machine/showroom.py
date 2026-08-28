@@ -71,6 +71,32 @@ if VIEW_FILTER:
 # ---------------------------------------------------------------- scene ----
 bpy.ops.wm.read_factory_settings(use_empty=True)
 bpy.ops.import_scene.gltf(filepath=INP)
+
+# HONOUR glTF SINGLE-SIDED. Cycles ignores use_backface_culling (recorded
+# lesson), so every render this rig made showed backfaces a compliant viewer
+# culls. That cut both ways on the v3.1 Golf: it painted a mirrored plate
+# "defect" that customers never see, and it HID the hollow-cabin defect
+# customers do see (far-side arch and backdrop visible through the glass).
+# A render that does not match the serving viewer is not evidence. The only
+# culling Cycles respects is a shader: mix Transparent on Backfacing, applied
+# exactly where the importer set the culling flag from doubleSided=false.
+_culled = 0
+for _m in bpy.data.materials:
+    if not _m.use_nodes or not getattr(_m, "use_backface_culling", False):
+        continue
+    _nt = _m.node_tree
+    _out = next(n for n in _nt.nodes if n.type == "OUTPUT_MATERIAL"
+                and n.inputs["Surface"].links)
+    _src = _out.inputs["Surface"].links[0].from_node
+    _geo = _nt.nodes.new("ShaderNodeNewGeometry")
+    _tr = _nt.nodes.new("ShaderNodeBsdfTransparent")
+    _mix = _nt.nodes.new("ShaderNodeMixShader")
+    _nt.links.new(_geo.outputs["Backfacing"], _mix.inputs[0])
+    _nt.links.new(_src.outputs[0], _mix.inputs[1])
+    _nt.links.new(_tr.outputs[0], _mix.inputs[2])
+    _nt.links.new(_mix.outputs[0], _out.inputs["Surface"])
+    _culled += 1
+print(f"BACKFACE CULLING honoured on {_culled} single-sided material(s)")
 CAR = [o for o in bpy.data.objects if o.type == "MESH"]
 pts = [o.matrix_world @ v.co for o in CAR for v in o.data.vertices]
 mn = [min(p[i] for p in pts) for i in range(3)]
