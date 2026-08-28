@@ -64,10 +64,22 @@ def submesh(mask, name):
         vn[bad] = [0.0, 1.0, 0.0]
         m.vertex_normals = vn
         print(f"  {name}: {bad.sum()} zero normals replaced with unit fallback")
-    m.visual = trimesh.visual.TextureVisuals(material=PBRMaterial(
-        name=name, baseColorFactor=list(paint_mat.baseColorFactor),
-        metallicFactor=float(paint_mat.metallicFactor),
-        roughnessFactor=float(paint_mat.roughnessFactor)))
+    # COPY the paint material rather than rebuilding it from factors. The
+    # rebuild assumed a FLAT paint (written on the Yaris, whose carpaint is a
+    # baseColorFactor); on a TEXTURED carpaint (Tripo Golf, 2026-08-28)
+    # baseColorFactor is None and this line died with "'NoneType' object is
+    # not iterable" — and even with a guard, rebuilding from factors would
+    # have silently dropped the baked texture that carries the car's identity
+    # (badge, plate, grille detail). paint_mat.copy() preserves whichever the
+    # source has: factors on a flat paint, texture maps on a baked one. The
+    # UVs survive update_faces/remove_unreferenced_vertices on the copy, and
+    # the material is wrapped in a FRESH TextureVisuals per the recorded rule
+    # ("reassigning an existing TextureVisuals onto a mesh with a different
+    # vertex count silently drops the material binding on export").
+    mat = paint_mat.copy()
+    mat.name = name
+    uv = getattr(m.visual, "uv", None)
+    m.visual = trimesh.visual.TextureVisuals(uv=uv, material=mat)
     return m
 
 
