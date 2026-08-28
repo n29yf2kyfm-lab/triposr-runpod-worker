@@ -85,6 +85,56 @@ gate("component_inventory", "PASS" if not missing_all else "FAIL",
 gate("doors_separate", "OPEN", "doors not separated from shell",
      "brief wants doors as parts — recorded, needs shut-line detection (stage-6 open item)")
 
+# ---- 2b GLASS GATES. The council's sharpest structural finding (2026-08-28):
+# after a day that proved four glass instruments measure things adjacent to
+# the question and crowned the respray RENDER the only verdict, this table
+# never asked about glass at all. Glass "PASS" was stamped at s3 and the file
+# then passed through aperture cutting, trimesh round-trips (recorded to strip
+# KHR extensions), a Blender weld and a normals rewrite — any of which can
+# leave opaque panes with every listed gate green.
+#
+# Two gates, honestly split:
+#  * glass_panes — what the FILE can prove: every pane material present,
+#    factor-transparent (BLEND, alpha < 1), and its mesh carrying real area.
+#    Necessary, NOT sufficient — the recorded blind spots are exactly that a
+#    transparent material can be bound to the wrong faces.
+#  * glass_respray — the actual verdict. This tool does not fabricate an
+#    automated pixel metric (one was built on 2026-08-28 and scored two cars
+#    the eye separates instantly as near-identical). It reports NOT TESTED
+#    unless GLASS_RESPRAY_VERDICT=pass|fail is exported by a human who LOOKED
+#    at the respray render pair; the value is recorded verbatim as theirs.
+PANES = ["Glass_Windscreen", "Glass_Rear_Screen", "Glass_Side_FL",
+         "Glass_Side_RL", "Glass_Side_FR", "Glass_Side_RR"]
+_pane_bad = []
+for _pn in PANES:
+    _mi = next((i for i, m2 in enumerate(j.get("materials", []))
+                if m2.get("name") == _pn), None)
+    if _mi is None:
+        _pane_bad.append(f"{_pn}: material absent"); continue
+    _m = j["materials"][_mi]
+    _bcf = (_m.get("pbrMetallicRoughness") or {}).get("baseColorFactor")
+    _trans = (_m.get("alphaMode") in ("BLEND", "MASK")
+              and _bcf is not None and _bcf[3] < 1.0) \
+        or "KHR_materials_transmission" in (_m.get("extensions") or {})
+    if not _trans:
+        _pane_bad.append(f"{_pn}: not factor-transparent "
+                         f"(alphaMode={_m.get('alphaMode')}, a={_bcf[3] if _bcf else None})")
+        continue
+    _has_prim = any(pr.get("material") == _mi and
+                    j["accessors"][pr["indices"]]["count"] >= 3
+                    for me in j["meshes"] for pr in me["primitives"]
+                    if "indices" in pr)
+    if not _has_prim:
+        _pane_bad.append(f"{_pn}: material present but NO geometry bound")
+gate("glass_panes", "PASS" if not _pane_bad else "FAIL",
+     "; ".join(_pane_bad) if _pane_bad else f"{len(PANES)}/6 panes transparent with geometry",
+     "6 panes BLEND a<1 + bound geometry (necessary, not sufficient)")
+_rv = os.environ.get("GLASS_RESPRAY_VERDICT", "").lower()
+gate("glass_respray", {"pass": "PASS", "fail": "FAIL"}.get(_rv, "NOT TESTED"),
+     f"human verdict '{_rv}'" if _rv else
+     "no human respray verdict supplied (GLASS_RESPRAY_VERDICT=pass|fail after LOOKING at the blue render)",
+     "respray render is the only glass verdict (standing rule 2026-08-28)")
+
 # ---- 3 wheel gates from the file
 sc = trimesh.load(INP, force="scene")
 qw = {}
