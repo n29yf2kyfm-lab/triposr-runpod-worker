@@ -132,7 +132,21 @@ n_up = np.abs(m.face_normals[:, 1])
 mid_band = (xf > 0.32) & (xf < 0.68)
 roofish = (mid_band & (n_up > 0.55)) | ((n_up > 0.85) & (yf > 0.88))
 _before = int((label == GLASS).sum())
-label[(label == GLASS) & roofish] = BODY
+_evicted = (label == GLASS) & roofish
+# SEG_DEBUG_NPZ dumps what this rule actually TOOK, so a suspicion about it
+# can be measured instead of argued. The rule is a physical prior with two
+# clauses and it has never been instrumented; on the Tripo v3.1 Golf the
+# upper windscreen came out as carpaint and the mid_band clause reaches to
+# xf 0.68 while that car's screen base sits at xf 0.676 — close enough that
+# only a dump settles whether the rule is the cause.
+if os.environ.get("SEG_DEBUG_NPZ"):
+    np.savez_compressed(os.environ["SEG_DEBUG_NPZ"],
+                        evicted=_evicted, roofish=roofish,
+                        glass_before=(label == GLASS),
+                        xf=xf, yf=yf, n_up=n_up,
+                        centroids=cent.astype(np.float32))
+    print(f"roof-rule debug dumped to {os.environ['SEG_DEBUG_NPZ']}")
+label[_evicted] = BODY
 print(f"roof rule: {_before - int((label == GLASS).sum())} up-facing faces "
       f"returned to body ({_before} glass before)")
 
