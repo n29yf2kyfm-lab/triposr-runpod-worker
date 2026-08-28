@@ -180,13 +180,40 @@ def _fresh_visual(src):
 
 new_glass = trimesh.util.concatenate(panes)
 new_glass.visual = _fresh_visual(g)
+# THE BODY'S OWN VISUAL IS NEVER REASSIGNED. _fresh_visual(body) here was the
+# UV killer found on the Tripo Golf (2026-08-28): it wraps ONLY the material,
+# so a TEXTURED carpaint lost its TEXCOORD_0 at this stage and every later
+# stage inherited the loss — MASTER_PREMIUM rendered a flat grey car with a
+# blank plate. The helper's stale-length concern does not apply to `body`,
+# whose uv is untouched and length-correct.
+#
+# The evicted faces cannot join the body geometry either: they come from the
+# GLASS blob, which carries no uv (flat BLEND material), and concatenating
+# uv-less geometry into a uv'd body degrades the merged visual to uv=None —
+# the second half of the same kill. They go on their OWN node with a flat
+# paint-like colour instead (the recorded Body_Glass_Reverted pattern). They
+# are curl/beltline slivers; a flat colour on them is honest, and they are
+# deliberately NOT named carpaint so a respray never paints faces whose
+# texture mapping is genuinely unknown.
+body_reverted = None
 if evict.any():
     ev = g.submesh([np.where(evict)[0]], append=True)
-    ev.visual = _fresh_visual(body)
-    new_body = trimesh.util.concatenate([body, ev])
-    new_body.visual = _fresh_visual(body)
-else:
-    new_body = body
+    _bmat = getattr(body.visual, "material", None)
+    _col = [70, 70, 74, 255]
+    _tex = getattr(_bmat, "baseColorTexture", None)
+    if _tex is not None:
+        try:
+            import numpy as _np
+            _mean = _np.asarray(_tex.convert("RGB")).reshape(-1, 3).mean(0)
+            _col = [int(v) for v in _mean] + [255]
+        except Exception:
+            pass
+    ev.visual = trimesh.visual.TextureVisuals(
+        material=trimesh.visual.material.PBRMaterial(
+            name="Body_Glass_Reverted", baseColorFactor=_col,
+            metallicFactor=0.0, roughnessFactor=0.35))
+    body_reverted = ev
+new_body = body
 
 out = trimesh.Scene()
 for node in sc.graph.nodes_geometry:
@@ -200,6 +227,11 @@ for node in sc.graph.nodes_geometry:
                          transform=T)
     else:
         out.graph.update(frame_to=node, matrix=T, geometry=gn)
+if body_reverted is not None:
+    out.add_geometry(body_reverted, geom_name="Body_Glass_Reverted",
+                     node_name="Body_Glass_Reverted")
+    print(f"Body_Glass_Reverted: {len(body_reverted.faces)} evicted faces on "
+          f"their own flat-colour node (uv-less; never merged into the body)")
 out.export(OUT, include_normals=True)
 QC["status"] = "OK"
 comps_after = len(trimesh.load(OUT, force="scene")
