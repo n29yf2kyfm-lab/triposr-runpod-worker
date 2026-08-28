@@ -221,13 +221,21 @@ if os.environ.get("GLASS_STENCIL", "1") == "0":
     print("glass stencil SKIPPED (GLASS_STENCIL=0): labels assumed crease-bounded")
     stamped_glass = label == GLASS
     stamp_region = np.where(label == GLASS, 0, -1).astype(np.int32)
+    # With the stencil off, stamped_glass IS the glass label, so the stray
+    # test below is stray = glass & ~glass — EMPTY BY CONSTRUCTION. It was
+    # printing "stray glass reverted to body: 0", which reads as "the labels
+    # needed no correction" and actually means "the check was disabled".
+    # That is this repo's recorded gate-that-cannot-fire class (caught by
+    # council fault-injection 2026-08-28: 10 corrupted labels -> 0 caught).
+    # Say so honestly instead of printing a vacuous zero.
+    print("stray glass reverted to body: n/a (stencil off — the stray test "
+          "cannot fire on this path)")
 else:
     stamped_glass, stamp_region = stencil_class(GLASS, MIN_REGION)
-
-# glass is exhaustive: anything still glass but never stamped is a smear
-stray = (label == GLASS) & ~stamped_glass
-label[stray] = BODY
-print(f"stray glass reverted to body: {int(stray.sum())}")
+    # glass is exhaustive: anything still glass but never stamped is a smear
+    stray = (label == GLASS) & ~stamped_glass
+    label[stray] = BODY
+    print(f"stray glass reverted to body: {int(stray.sum())}")
 
 # lamp hygiene, REAR ONLY: measured on the gseg Golf v2, 13,364 lamp faces
 # spanned the tailgate as a full-width band (DINO's "tail light" boxes
