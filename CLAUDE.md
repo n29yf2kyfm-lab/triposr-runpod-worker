@@ -2763,6 +2763,56 @@ still weak (20 seeds) because the rear was never photographed — the multiview
 slot route is the fix. Raw proportions came out 17% too wide (canon corrected
 W x0.835), the single-image perspective bake every generator shows.
 
+## COUNCIL ROUND 2: three attacks on the density claim, all resolved by measurement (2026-08-28)
+
+The afternoon council (Fable 5 + GLM-5.3 + instrumented self-audit) attacked the
+day's headline three more ways. Each was settled by running the measurement, not
+by arguing:
+
+1. **"Causality was established on a code path you then changed"** (the arm-
+   picker replaced the manual bypass after the density test ran). E2: the
+   decimated-40k Tripo car through the CURRENT chain — arm-picker active, it
+   chose APPLIED as the better of two bad arms — STILL fails the respray (side
+   windows blue, black label-leak patches on bonnet/doors). The dense car
+   through the same chain passes. Claim survives the code-path change.
+2. **"The detaper renorm shrank a correct track"** (1.4925/0.9617 = 1.552 ~=
+   published 1.549 — a striking arithmetic coincidence). MEASURED: the raw
+   mesh's own tyre contact track is 1.329/1.326 m — there never was a correct
+   1.552. The dims+wheels stages WIDENED effective track (1.33 -> 1.49, flank-
+   guard limited). A plausible-number coincidence, the class this file warns
+   about, caught by one 20-line measurement.
+3. **"The credit ledger does not reconcile"** — packet typo (960 written for a
+   real 980). Tripo is exactly 30 credits per generation.
+
+**Standing findings from the same round, accepted and open:**
+  * MASTER_PREMIUM (first premium.py run on a Tripo car) is NOT a deliverable:
+    all 7 body panels lost TEXCOORD_0 (identity texture unmappable — flat grey
+    body, blank plate; 21 validator errors), wheelbase +60mm is a GENERATION
+    defect (overhangs+wb sum to exactly the scaled length: axles misplaced in
+    a correct envelope), and a front component is misplaced. The tool's own
+    verdict — NOT PRODUCTION-READY — is correct. Fix = UV preservation in the
+    two separation stages + ONE clean uninterrupted re-run at HEAD (the
+    resumable chain's mixed-vintage intermediates are not a deliverable).
+  * stage7_validate has NO GLASS GATE — after a day proving the respray render
+    is the only glass verdict, the final table never asks the question. Add it.
+  * The three exact-zero PASSes (contact 0.000mm, ground 0.00mm, toe/camber
+    0.0000) verify the CONSTRUCTOR, not the car: wheels placed tangent-to-
+    ground by construction report zero by construction. Fault-inject (drop a
+    wheel 5mm) before trusting any of them. `one_physical_paint` ("1 painted
+    parts") likewise cannot fail after materials_pass rebinds everything to
+    one carpaint.
+  * The arm-picker's scorer is the windscreen-wedge prior with a door/roof
+    disqualifier — it cannot see a side-glass-only divergence (the actual
+    Tripo failure mode). Post-choice respray remains the verdict; a held-out
+    car is still owed before the picker is called validated.
+  * THIRD consecutive audit demanding the live-fleet identity sample; still
+    not run. 8.3% wrong-identity on n=48 posters is the standing estimate for
+    a customer-facing surface.
+  * Tripo ToS/commercial-use rights for generated meshes: never checked, and
+    the catalogue is a paid product. Owner decision needed before any Tripo
+    mesh ships (licence questions are the owner's call per standing order —
+    surface it once, do not gate on it).
+
 ## THE STARVED-INPUT CLAIM SURVIVED ITS FALSIFICATION TEST (2026-08-28, council-ordered)
 
 The council called C4 ("the glass problem was a starved-input problem")
