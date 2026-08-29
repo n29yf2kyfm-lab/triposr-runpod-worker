@@ -13,39 +13,57 @@ TWO REASONS THIS IS ITS OWN STAGE RATHER THAN A LINE INSIDE glass_polish.
    so the stage's own log line read as a success and half of what it
    claimed was gone. A material edit belongs AFTER the last round trip.
 
-2. THE OWNER PICKS THE PAINT BY EYE, and the two candidates are one
-   parameter apart. Presets, so a look is a named choice and not a number
-   somebody remembers:
+2. TRIPO'S BAKED PAINT IS NOT CONSISTENT BETWEEN RUNS, so the look has to
+   be a named choice rather than whatever came back. Same car, same
+   photos, one generation from a single image and one from four:
 
-     v31      metallic/roughness ABSENT -> the glTF defaults apply,
-              metallic 1.0 and roughness 1.0. Physically this treats the
-              baked albedo as a metal's F0, which is wrong on paper and
-              is exactly the state CLAUDE.md flagged as the flat-shell
-              trap. It also renders the near-black, high-contrast studio
-              car the owner chose on 2026-08-29 out of five variants.
-     premium  metallic 0, roughness 0.24, clearcoat 1.0 @ 0.08 — the
-              production brief's paint values.
+                     roughness   metallic
+       v31 (1 img)     0.150       0.603     deep glossy near-black
+       mv4 (4 img)     0.222       0.124     matte grey
 
-   The disagreement is real and it is not resolved here. The owner's eye
-   is the arbiter in this project; the brief is the default. Whichever
-   runs, the file states plainly which one it was.
+   — off a base colour that is identical to within a couple of levels.
+   The owner picked the first by eye out of five variants and then asked
+   for the multiview car to look like it, which is only reachable by
+   overriding the bake.
+
+   See PRESETS below. `asbaked` keeps whatever the generator produced;
+   `studio` pins the measured v31 numbers; `premium` is the production
+   brief. The brief and the owner's eye disagree here and that is not
+   resolved in code — the eye is this project's arbiter, and whichever
+   preset ran is printed and stored in the file.
 
 BIN chunk verbatim, no geometry touched. Refuses on a no-op and verifies
 by reading the written file back.
 
-Run: python3 paint_pbr.py <in.glb> <out.glb> [--preset v31|premium]
-                                             [--material carpaint]
-                                             [--rough R] [--clearcoat C]
+Run: python3 paint_pbr.py <in.glb> <out.glb>
+         [--preset asbaked|studio|premium] [--material carpaint]
+         [--rough R] [--clearcoat C]
 """
 import argparse
 import json
 import os
 import struct
 
+# metallic, roughness, clearcoat, drop_mr_texture
+#   None on a factor = leave the key ABSENT (the glTF default applies)
 PRESETS = {
-    # metallic, roughness, clearcoat  (None = leave the key ABSENT)
-    "v31": (None, None, None),
-    "premium": (0.0, 0.24, 0.08),
+    # whatever the generator baked, untouched
+    "asbaked": (None, None, None, False),
+    # THE OWNER-CHOSEN LOOK, and these two numbers are MEASURED, not
+    # invented. The single-image v31 Golf reads as deep glossy near-black
+    # paint and the four-image Golf reads as matte grey, off an IDENTICAL
+    # base colour (60.3/62.1/63.7 against 62.9/63.6/63.8). The whole
+    # difference is Tripo's baked metallicRoughness texture:
+    #     v31   roughness 0.150   metallic 0.603
+    #     mv4   roughness 0.222   metallic 0.124
+    # So it is a property of the GENERATION, not of this chain, and no
+    # factor can rescue it — a glTF factor MULTIPLIES the texture, so a
+    # metallicFactor of 1.0 still leaves 0.124 metal. The texture binding
+    # has to go, and the v31 averages take its place. Per-texel variation
+    # is lost; on an MR bake that variation is mostly noise.
+    "studio": (0.60, 0.15, None, True),
+    # the production brief's paint values
+    "premium": (0.0, 0.24, 0.08, True),
 }
 
 
@@ -70,20 +88,21 @@ def describe(m):
     pbr = m.get("pbrMetallicRoughness", {})
     cc = m.get("extensions", {}).get("KHR_materials_clearcoat")
     return (pbr.get("metallicFactor"), pbr.get("roughnessFactor"),
-            None if cc is None else cc.get("clearcoatRoughnessFactor"))
+            None if cc is None else cc.get("clearcoatRoughnessFactor"),
+            "metallicRoughnessTexture" in pbr)
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("inp")
     ap.add_argument("out")
-    ap.add_argument("--preset", default="v31", choices=sorted(PRESETS))
+    ap.add_argument("--preset", default="studio", choices=sorted(PRESETS))
     ap.add_argument("--material", default="carpaint")
     ap.add_argument("--rough", type=float, default=None)
     ap.add_argument("--clearcoat", type=float, default=None)
     a = ap.parse_args()
 
-    metal, rough, cc = PRESETS[a.preset]
+    metal, rough, cc, drop_mr = PRESETS[a.preset]
     if a.rough is not None:
         rough = a.rough
     if a.clearcoat is not None:
@@ -104,6 +123,8 @@ def main():
                 pbr.pop(key, None)
             else:
                 pbr[key] = val
+        if drop_mr:
+            pbr.pop("metallicRoughnessTexture", None)
         ext = m.setdefault("extensions", {})
         if cc is None:
             ext.pop("KHR_materials_clearcoat", None)
@@ -140,13 +161,11 @@ def main():
     if got != after:
         raise SystemExit(f"REFUSED: read-back disagrees: {got} != {after}")
 
-    lbl = "metallic/roughness (glTF defaults 1.0/1.0 apply)"
-    print(f"{a.material}: {before[0]} -> {got[0]}   preset={a.preset}")
-    if metal is None:
-        print(f"  {a.preset}: {lbl} — the owner-chosen studio look; "
-              f"physically it treats baked albedo as metal F0")
-    else:
-        print(f"  {a.preset}: production-brief paint, clearcoat 1.0 @ {cc}")
+    print(f"{a.material}: (metal, rough, clearcoat, has_MR_texture)")
+    print(f"  {before[0]}  ->  {got[0]}    preset={a.preset}")
+    if drop_mr:
+        print(f"  metallicRoughness TEXTURE dropped — a glTF factor "
+              f"MULTIPLIES it, so it cannot be overridden any other way")
     print(f"wrote {a.out} ({os.path.getsize(a.out)} bytes; BIN verbatim)")
 
 
