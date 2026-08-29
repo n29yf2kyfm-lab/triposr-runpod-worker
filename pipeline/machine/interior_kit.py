@@ -60,19 +60,32 @@ for z in (0.36, -0.36):
     tag = "R" if z > 0 else "L"
     box(f"Int_SeatF{tag}_C", -0.12, 0.38, yf(0.30), yf(0.40), z - 0.235, z + 0.235, [30, 30, 33])
     br = trimesh.creation.box(extents=[0.12, 0.46, 0.46])
-    br.apply_transform(trimesh.transformations.rotation_matrix(np.radians(-12), [0, 0, 1]))
+    # SIGN: +12 leans the TOP of the backrest toward -x (the tail), which is
+    # how a seat reclines. -12 tipped every seat FORWARD, and the owner spotted
+    # it through the glass before any measurement did ("interior build wrong,
+    # it's backward"). Verified after the fix by comparing the mean x of the
+    # backrest's top half against its bottom half.
+    br.apply_transform(trimesh.transformations.rotation_matrix(np.radians(12), [0, 0, 1]))
     br.apply_translation([-0.16, yf(0.55), z])
     parts.append((f"Int_SeatF{tag}_B", br, [30, 30, 33], 0.9))
     box(f"Int_SeatF{tag}_H", -0.28, -0.16, yf(0.70), yf(0.79), z - 0.11, z + 0.11, [26, 26, 29])
 # rear bench + backrest
 box("Int_BenchC", -0.95, -0.50, yf(0.30), yf(0.40), -0.60, 0.60, [30, 30, 33])
 br = trimesh.creation.box(extents=[0.12, 0.52, 1.20])
-br.apply_transform(trimesh.transformations.rotation_matrix(np.radians(-15), [0, 0, 1]))
+br.apply_transform(trimesh.transformations.rotation_matrix(np.radians(15), [0, 0, 1]))
 br.apply_translation([-1.02, yf(0.56), 0.0])
 parts.append(("Int_BenchB", br, [30, 30, 33], 0.9))
 # steering wheel — RHD (UK): right side of the car is +z (forward x cross up y)
+# trimesh's torus lies in the XY plane with its AXIS along +Z. Here +Z is
+# LATERAL, so the wheel came out edge-on to the driver — a 409x412mm disc
+# spanning length and height with only 42mm of width, mounted like a road
+# wheel. A steering wheel's disc spans LATERAL and UP; its axis points
+# fore-aft toward the driver, raked back ~24 degrees from vertical.
+# Rotating about Z alone can never fix that: it spins the torus in its own
+# plane and leaves the axis where it was. Swing the axis onto X first.
 sw = trimesh.creation.torus(major_radius=0.185, minor_radius=0.021)
-sw.apply_transform(trimesh.transformations.rotation_matrix(np.radians(90 - 24), [0, 0, 1]))
+sw.apply_transform(trimesh.transformations.rotation_matrix(np.radians(90), [0, 1, 0]))
+sw.apply_transform(trimesh.transformations.rotation_matrix(np.radians(24), [0, 0, 1]))
 sw.apply_translation([0.55, yf(0.50), 0.36])
 parts.append(("Int_Wheel", sw, [16, 16, 18], 0.6))
 
