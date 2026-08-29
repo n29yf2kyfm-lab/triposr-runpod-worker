@@ -71,24 +71,72 @@ M[:3, :3] = perm
 M = M @ T
 
 pts = trimesh.transform_points(m.vertices, M)
-y = pts[:, 1]
-lo, hi = np.percentile(y, [2, 98])
-h = hi - lo
-slab_f = pts[y < lo + 0.06 * h]                 # candidate floor slab
-slab_r = pts[y > hi - 0.06 * h]                 # candidate roof slab
 
 
-def footprint(p):
-    if len(p) < 10:
-        return 0.0
-    return float(np.ptp(p[:, 0]) * np.ptp(p[:, 2]))
+def taper(p):
+    """Midship half-width divided by roof half-width.
+
+    THE GREENHOUSE IS THE ONLY RELIABLE UP CUE ON A CAR. Every car on
+    earth is narrower at its roof than at its door line; nothing else
+    about the vertical profile is as dependable.
+
+    Replaces the FOOTPRINT SLAB test, which shipped an upside-down Yaris
+    on 2026-08-29 and was caught only by looking at the seg views. That
+    test compared the bbox footprint of the bottom 6% of height against
+    the top 6% and assumed the floor would win, "because floors are flat
+    and full-width". On a mesh with RESOLVED WHEELS the bottom 6% of
+    height is four small contact patches, not a floor pan — and if the
+    car sits even slightly nose-up in the raw pose, only ONE AXLE reaches
+    that band. Measured on the Yaris:
+
+        floor slab  x-ptp 0.1995  z-ptp 0.4731  footprint 0.0944
+        roof  slab  x-ptp 0.5033  z-ptp 0.3774  footprint 0.1900
+
+    The roof panel is one big continuous sheet and beat two tyre patches
+    on bbox area, so the test flipped a car that was already upright. It
+    had worked until now because melt generators produce a continuous
+    underbody smear; Tripo multiview does not. Note the floor slab is in
+    fact WIDER (z-ptp 0.47 vs 0.38) — the width was there all along, the
+    footprint product threw it away.
+    """
+    y = p[:, 1]
+    lo, hi = np.percentile(y, [1, 99])
+    h = hi - lo
+    top = p[(y >= lo + 0.86 * h) & (y <= lo + 1.00 * h)]
+    mid = p[(y >= lo + 0.30 * h) & (y < lo + 0.60 * h)]
+    if len(top) < 200 or len(mid) < 200:
+        return None
+    tw = float(np.percentile(np.abs(top[:, 2]), 97))
+    mw = float(np.percentile(np.abs(mid[:, 2]), 97))
+    return mw / max(tw, 1e-9)
 
 
-up_ok = footprint(slab_f) >= footprint(slab_r)  # floor should be the WIDE slab
+_flipped = pts.copy()
+_flipped[:, 1] *= -1
+t_keep, t_flip = taper(pts), taper(_flipped)
+if t_keep is None or t_flip is None:
+    raise SystemExit("REFUSED: cannot sample a greenhouse band — this does "
+                     "not look like a car, and guessing the up axis "
+                     "invalidates every stage after it")
+margin = max(t_keep, t_flip) / max(min(t_keep, t_flip), 1e-9)
+up_ok = t_keep >= t_flip
+print(f"up-sign: greenhouse taper as-is {t_keep:.3f} vs flipped {t_flip:.3f} "
+      f"(margin x{margin:.3f})")
+# A SILENT WRONG FLIP COSTS THE WHOLE CHAIN; A REFUSAL COSTS ONE RENDER.
+# Same ruling as nose_fix, which already refuses rather than guess.
+if margin < 1.05 and not FLIP and "UP_PINNED" not in os.environ:
+    raise SystemExit(
+        f"REFUSED: the two orientations are within {100*(margin-1):.1f}% of "
+        f"each other, so the up axis is undecidable from the geometry. "
+        f"Render it, look, and re-run with --flip-up or UP_PINNED=1 to "
+        f"accept the measured verdict.")
+if "UP_PINNED" in os.environ:
+    up_ok = os.environ["UP_PINNED"].lstrip("+").lower() not in ("-y", "flip", "0")
+    print(f"up-sign: PINNED by UP_PINNED={os.environ['UP_PINNED']!r}")
 if (not up_ok) ^ FLIP:
     R = trimesh.transformations.rotation_matrix(np.pi, [1, 0, 0])
     M = R @ M
-    print("up-sign: FLIPPED (floor footprint test)")
+    print("up-sign: FLIPPED")
 else:
     print("up-sign: kept")
 
