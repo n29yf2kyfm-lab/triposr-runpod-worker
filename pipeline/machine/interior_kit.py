@@ -34,6 +34,33 @@ HW = float(np.percentile(np.abs(v[:, 2]), 99.7))
 XMIN, XMAX = float(v[:, 0].min()), float(v[:, 0].max())
 print(f"frame: H {H:.3f} halfW {HW:.3f} x [{XMIN:.2f},{XMAX:.2f}]")
 
+# THE BELTLINE IS THE ONLY DIMENSION THAT DECIDES WHAT A VIEWER SEES, and
+# until now nothing measured it. Everything was placed as a fraction of car
+# HEIGHT, so on this car the whole cabin landed below the side glass: seat
+# cushions, bolsters, console, floor and rear bench were ENTIRELY under the
+# door line, the dash cleared it by 5 mm and the steering wheel by 84 mm of
+# its 370 mm. The only thing a viewer could actually see was a pair of
+# headrests, which is exactly what the render showed — a floating headrest
+# over fog. Measure the side glazing and hang the parts that must READ off
+# that instead.
+BELT, RAIL = None, None
+_gl = [g for n, g in sc.geometry.items()
+       if n == "glass" or getattr(getattr(g.visual, "material", None),
+                                  "name", "") == "glass"]
+if _gl:
+    _g = _gl[0]
+    _c, _n = _g.triangles_center, _g.face_normals
+    _side = (np.abs(_n[:, 2]) > 0.6) & (np.abs(_c[:, 2]) > 0.55 * HW)
+    if _side.sum() > 200:
+        _y = _c[_side][:, 1]
+        BELT = float(np.percentile(_y, 2))
+        RAIL = float(np.percentile(_y, 98))
+if BELT is None:                       # no glazing to measure — fall back
+    BELT, RAIL = GY + 0.64 * H, GY + 0.87 * H
+    print("NOTE: no side glazing found; beltline ESTIMATED from car height")
+print(f"beltline {BELT:.3f}  roof rail {RAIL:.3f}  "
+      f"visible band {1000*(RAIL-BELT):.0f} mm")
+
 parts = []
 
 
@@ -73,7 +100,7 @@ def rbox(name, x0, x1, y0, y1, z0, z1, col, rough=0.9, soft=10):
 box("Int_Floor", -1.15, 1.05, yf(0.19), yf(0.225), -0.62, 0.62, [20, 20, 22])
 # dashboard: full-width block with a raked top
 dash = trimesh.creation.box(extents=[0.42, 0.30, 1.30])
-dash.apply_translation([0.94, yf(0.47), 0.0])
+dash.apply_translation([0.94, BELT + 0.015 - 0.15, 0.0])   # top at the scuttle
 parts.append(("Int_Dash", dash, [24, 24, 27], 0.85))
 # centre console
 box("Int_Console", -0.10, 0.78, yf(0.225), yf(0.38), -0.11, 0.11, [27, 27, 30])
@@ -98,10 +125,10 @@ for z in (0.36, -0.36):
     # it's backward"). Verified after the fix by comparing the mean x of the
     # backrest's top half against its bottom half.
     br.apply_transform(trimesh.transformations.rotation_matrix(np.radians(12), [0, 0, 1]))
-    br.apply_translation([-0.16, yf(0.55), z])
+    br.apply_translation([-0.16, BELT + 0.12 - 0.23, z])   # top at BELT+120mm
     parts.append((f"Int_SeatF{tag}_B", br, [30, 30, 33], 0.9))
-    rbox(f"Int_SeatF{tag}_H", -0.28, -0.16, yf(0.70), yf(0.79),
-         z - 0.11, z + 0.11, [26, 26, 29], soft=12)
+    rbox(f"Int_SeatF{tag}_H", -0.30, -0.16, BELT + 0.13, BELT + 0.29,
+         z - 0.125, z + 0.125, [26, 26, 29], soft=12)
 # rear bench + backrest
 rbox("Int_BenchC", -0.95, -0.50, yf(0.30), yf(0.40), -0.60, 0.60, [30, 30, 33])
 br = trimesh.creation.box(extents=[0.12, 0.52, 1.20])
@@ -109,8 +136,18 @@ for _ in range(3):
     br = br.subdivide()
 trimesh.smoothing.filter_taubin(br, lamb=0.6, nu=-0.62, iterations=10)
 br.apply_transform(trimesh.transformations.rotation_matrix(np.radians(15), [0, 0, 1]))
-br.apply_translation([-1.02, yf(0.56), 0.0])
+br.apply_translation([-1.02, BELT + 0.10 - 0.26, 0.0])
 parts.append(("Int_BenchB", br, [30, 30, 33], 0.9))
+# REAR HEADRESTS were missing entirely. They sit squarely in the visible
+# band and are one of the most recognisable things in a cabin seen from
+# outside, so their absence cost more than their size suggests.
+for z in (0.34, -0.34):
+    rbox(f"Int_HeadR{'R' if z > 0 else 'L'}", -1.14, -1.01,
+         BELT + 0.11, BELT + 0.25, z - 0.115, z + 0.115, [26, 26, 29], soft=12)
+# PARCEL SHELF — a strong horizontal that reads through the rear quarter
+# glass and the backlight, and gives the tail some depth.
+box("Int_Shelf", -1.52, -1.05, BELT + 0.015, BELT + 0.045, -0.56, 0.56,
+    [23, 23, 26])
 # steering wheel — RHD (UK): right side of the car is +z (forward x cross up y)
 # trimesh's torus lies in the XY plane with its AXIS along +Z. Here +Z is
 # LATERAL, so the wheel came out edge-on to the driver — a 409x412mm disc
@@ -122,7 +159,7 @@ parts.append(("Int_BenchB", br, [30, 30, 33], 0.9))
 sw = trimesh.creation.torus(major_radius=0.185, minor_radius=0.021)
 sw.apply_transform(trimesh.transformations.rotation_matrix(np.radians(90), [0, 1, 0]))
 sw.apply_transform(trimesh.transformations.rotation_matrix(np.radians(24), [0, 0, 1]))
-sw.apply_translation([0.55, yf(0.50), 0.36])
+sw.apply_translation([0.55, BELT - 0.04, 0.36])   # rim top ~BELT+145mm
 parts.append(("Int_Wheel", sw, [16, 16, 18], 0.6))
 
 out = {}
