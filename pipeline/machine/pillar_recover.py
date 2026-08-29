@@ -85,6 +85,38 @@ def face_luma(m):
     return 0.2126 * c[:, 0] + 0.7152 * c[:, 1] + 0.0722 * c[:, 2]
 
 
+def half_depth_span(x, l, x0, x1, step, med, binw=0.02):
+    """Width of the dark band, read off a fine PROFILE, not off face extremes.
+
+    Taking min/max of every face below the threshold gave 382 mm on a
+    128 mm column — a handful of scattered dark faces at the window edges
+    set the answer. Bin at 20 mm, threshold at the half-depth between the
+    pane median and the band's darkest bin, then keep only the CONTIGUOUS
+    run of bins containing that darkest bin. Outliers cannot widen a run
+    they are not connected to."""
+    w0, w1 = x0 - step, x1 + step
+    edges = np.arange(w0, w1 + binw, binw)
+    prof, cent = [], []
+    for e in edges[:-1]:
+        k = (x >= e) & (x < e + binw)
+        if k.sum() >= 15:
+            prof.append(float(l[k].mean()))
+            cent.append(float(e))
+    if len(prof) < 3:
+        return float(x0), float(x1)
+    prof = np.array(prof)
+    cent = np.array(cent)
+    lo = int(prof.argmin())
+    thr = (med + prof[lo]) / 2.0
+    i = lo
+    while i > 0 and prof[i - 1] < thr:
+        i -= 1
+    j = lo
+    while j < len(prof) - 1 and prof[j + 1] < thr:
+        j += 1
+    return float(cent[i]), float(cent[j] + binw)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("mesh")
@@ -151,11 +183,29 @@ def main():
                       f"{(x1-x0)/L:.1%} of length — too wide for a pillar, "
                       f"rejected")
                 continue
-            k = idx[(x >= x0) & (x < x1)]
+            # THE COLUMN LOCATES THE PILLAR; PER-FACE LUMA DELIMITS IT.
+            # Taking the whole hit column made the pillar exactly one column
+            # wide — 128 mm on this car — which is the detector's own
+            # resolution, not a measurement, and the owner saw it straight
+            # away ("the b pillar is too wide, out of proportion"). Widen
+            # the window by a column each side, then cut at the HALF-DEPTH
+            # crossing between the pane median and the band's dark core,
+            # which is the standard way to read a feature's width off a
+            # profile. Same shape as every other rule here: the cheap test
+            # finds the candidate, a finer measurement gives the verdict.
+            fx0, fx1 = half_depth_span(x, l, x0, x1, step, med)
+            fine = (x >= fx0) & (x < fx1)
+            if fine.sum() < 40:
+                print(f"  {side}: half-depth cut left {int(fine.sum())} "
+                      f"faces — falling back to the column")
+                fine = (x >= x0) & (x < x1)
+                fx0, fx1 = x0, x1
+            k = idx[fine]
             taken[k] = True
-            found.append((side, float(x0), float(x1)))
-            print(f"  {side}: pillar x {x0:6.3f}..{x1:6.3f} "
-                  f"({1000*(x1-x0):.0f} mm) -> {len(k)} faces to body")
+            found.append((side, fx0, fx1))
+            print(f"  {side}: pillar x {fx0:6.3f}..{fx1:6.3f} "
+                  f"({1000*(fx1-fx0):.0f} mm measured, column was "
+                  f"{1000*(x1-x0):.0f} mm) -> {len(k)} faces")
 
     # SYMMETRY PROPOSES, EVIDENCE CONFIRMS. A car is symmetric, so a pillar
     # found on one flank has a twin on the other. Measured on the Golf, the
@@ -178,13 +228,21 @@ def main():
         if sel.sum() >= 500:
             x, l = c[idx, 0], lum[idx]
             med = float(np.median(l))
+            win = (x >= x0 - step) & (x < x1 + step)
             k = (x >= x0) & (x < x1)
             if k.sum() >= 40:
                 drop = med - l[k].mean()
                 if drop >= a.min_drop * 0.5:
-                    taken[idx[k]] = True
-                    print(f"  {other}: mirrored pillar x {x0:6.3f}..{x1:6.3f} "
-                          f"CONFIRMED (drop {drop:.1f}) -> {int(k.sum())} faces")
+                    fx0, fx1 = half_depth_span(x, l, x0, x1, step, med)
+                    fine = (x >= fx0) & (x < fx1)
+                    if fine.sum() < 40:
+                        fine, fx0, fx1 = k, x0, x1
+                    taken[idx[fine]] = True
+                    found.append((other, fx0, fx1))
+                    print(f"  {other}: mirrored pillar CONFIRMED (drop "
+                          f"{drop:.1f}) x {fx0:6.3f}..{fx1:6.3f} "
+                          f"({1000*(fx1-fx0):.0f} mm) -> "
+                          f"{int(fine.sum())} faces")
                 else:
                     print(f"  {other}: mirrored position shows drop "
                           f"{drop:.1f} — not confirmed, left as glass")
@@ -206,8 +264,18 @@ def main():
     np.save(a.out, out)
     print(f"wrote {a.out}")
     if a.report:
+        # the BANDS go in the report so pillar_material.py can find the
+        # pillar again on the assembled file by GEOMETRY. Face indices are
+        # useless downstream — blender_finish welds and re-indexes.
+        yy = c[taken][:, 1]
         json.dump({"recovered": int(taken.sum()), "glass_before": ng,
-                   "glass_after": int((out == GLASS).sum())},
+                   "glass_after": int((out == GLASS).sum()),
+                   "y_lo": float(np.percentile(yy, 1)),
+                   "y_hi": float(np.percentile(yy, 99)),
+                   "bands": [{"side": sd, "x0": round(p0, 4),
+                              "x1": round(p1, 4),
+                              "width_mm": round(1000 * (p1 - p0))}
+                             for sd, p0, p1 in found]},
                   open(a.report, "w"), indent=1)
     if a.dump_profile:
         json.dump(profile, open(a.dump_profile, "w"), indent=1)
