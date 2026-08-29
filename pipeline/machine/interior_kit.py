@@ -61,6 +61,27 @@ if BELT is None:                       # no glazing to measure — fall back
 print(f"beltline {BELT:.3f}  roof rail {RAIL:.3f}  "
       f"visible band {1000*(RAIL-BELT):.0f} mm")
 
+# THE SCUTTLE IS THE OTHER DIMENSION NOTHING MEASURED. The beltline fix
+# stopped the cabin sinking under the door line; x placement was still
+# hardcoded constants calibrated on one car. On the white Golf the dash
+# front edge landed at x 1.140 against a windscreen base at x 0.831 - it
+# protruded 310 mm THROUGH THE BONNET and rendered as a black slab lying on
+# the paint, which is what the owner saw. Same shape of error as the
+# beltline, one axis over: the dimension that decides placement was never
+# measured. A dashboard's front edge meets the base of the windscreen, so
+# measure that and hang the dash off it.
+SCUT = None
+if _gl:
+    _nc = _gl[0].triangles_center
+    _nose = _nc[_nc[:, 0] > 0.0]
+    if len(_nose) > 200:
+        _lo = np.percentile(_nose[:, 1], 3)
+        SCUT = float(_nose[_nose[:, 1] <= _lo][:, 0].mean())
+if SCUT is None:
+    SCUT = XMIN + 0.72 * (XMAX - XMIN)
+    print("NOTE: no glazing to find the scuttle; ESTIMATED from length")
+print(f"scuttle (windscreen base) x {SCUT:.3f}")
+
 parts = []
 
 
@@ -100,7 +121,9 @@ def rbox(name, x0, x1, y0, y1, z0, z1, col, rough=0.9, soft=10):
 box("Int_Floor", -1.15, 1.05, yf(0.19), yf(0.225), -0.62, 0.62, [20, 20, 22])
 # dashboard: full-width block with a raked top
 dash = trimesh.creation.box(extents=[0.42, 0.30, 1.30])
-dash.apply_translation([0.94, BELT + 0.015 - 0.15, 0.0])   # top at the scuttle
+# front face AT the scuttle, body extending rearward — never through the
+# bonnet. Top still at the beltline.
+dash.apply_translation([SCUT - 0.21, BELT + 0.015 - 0.15, 0.0])
 parts.append(("Int_Dash", dash, [24, 24, 27], 0.85))
 # centre console
 box("Int_Console", -0.10, 0.78, yf(0.225), yf(0.38), -0.11, 0.11, [27, 27, 30])
@@ -164,7 +187,7 @@ rbox("Int_Shelf", -1.42, -1.10, BELT + 0.010, BELT + 0.038, -0.46, 0.46,
 sw = trimesh.creation.torus(major_radius=0.185, minor_radius=0.021)
 sw.apply_transform(trimesh.transformations.rotation_matrix(np.radians(90), [0, 1, 0]))
 sw.apply_transform(trimesh.transformations.rotation_matrix(np.radians(24), [0, 0, 1]))
-sw.apply_translation([0.55, BELT - 0.04, 0.36])   # rim top ~BELT+145mm
+sw.apply_translation([SCUT - 0.50, BELT - 0.04, 0.36])  # rim top ~BELT+145mm
 parts.append(("Int_Wheel", sw, [16, 16, 18], 0.6))
 
 out = {}
