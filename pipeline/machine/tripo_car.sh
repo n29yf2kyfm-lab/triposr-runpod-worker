@@ -22,7 +22,13 @@
 #   project   seg_project               fixed roof rule (|n_x| exemption);
 #                                       glass_relabel SKIPPED — dense mesh
 #   refine    seg_refine
-#   boundary  seg_boundary              stencils off (crease-bounded labels)
+#   smooth    label_smooth              ring-3 de-fringe on the mesh GRAPH
+#                                       (-17.0% boundary vs -7.0% at ring 2)
+#   pillar    pillar_recover            B-pillar back off the glazing label,
+#                                       width measured off a 20mm profile at
+#                                       depth 0.8 (100mm, both flanks)
+#   boundary  seg_boundary              stencils off — measured a LOSS with
+#                                       them on: 4,484 edges vs 3,297
 #   assemble  seg_assemble
 #   finish    blender_finish            weld + weighted normals
 #   normals   normals_fix               NORMAL verified present
@@ -83,7 +89,7 @@ mkdir -p "$W"
 cd "$W"
 
 stage() {  # stage <name> -> 0 if it should run
-  local order="canon deyaw nose views masks lamps project refine boundary assemble finish normals tangents nmap interior polish surgical clean render"
+  local order="canon deyaw nose views masks lamps project refine smooth pillar boundary assemble finish normals tangents nmap interior polish surgical clean render"
   local seen=0
   for s in $order; do
     [ "$s" = "$FROM" ] && seen=1
@@ -151,10 +157,34 @@ if stage refine; then
     "$W/car_labels.npy" "$W/car_r.npy"
 fi
 
+if stage smooth; then
+  mark smooth
+  # de-fringe the label boundary on the mesh GRAPH, before anything splits
+  # the car into primitives. Ring 3 restricted to the boundary
+  # neighbourhood: -17.0% boundary length on the Golf against -7.0% at
+  # ring 2, with the glass class moving +0.05%.
+  python3 -u "$R/machine/label_smooth.py" "$W/s2b_nose.glb" "$W/car_r.npy" \
+    "$W/car_s.npy" --ring 3 --iters 20 --report "$W/smooth.json"
+fi
+
+if stage pillar; then
+  mark pillar
+  # AFTER the smoothing, never before: an x-range band has a straight edge
+  # by construction, so it needs no smoothing, and smoothing a WIDE wrong
+  # pillar flatters the metric (-18.7%) while shipping a worse car.
+  if python3 -u "$R/machine/pillar_recover.py" "$W/s2b_nose.glb" \
+       "$W/car_s.npy" "$W/car_p.npy" --depth 0.8 \
+       --report "$W/pillar.json" 2>&1 | tee "$W/pillar.log"; then :; fi
+  # no pillar found is a PASS, not a failure — not every car has one the
+  # texture can see, and inventing a position is the thing this refuses to do
+  [ -f "$W/car_p.npy" ] || { cp "$W/car_s.npy" "$W/car_p.npy"
+    echo "pillar: none recovered — carrying the smoothed labels forward"; }
+fi
+
 if stage boundary; then
   mark boundary
   GLASS_STENCIL=0 LAMP_STENCIL=0 python3 -u "$R/machine/seg_boundary.py" \
-    "$W/s2b_nose.glb" "$W/car_r.npy" "$W/car_b.npy"
+    "$W/s2b_nose.glb" "$W/car_p.npy" "$W/car_b.npy"
 fi
 
 if stage assemble; then
@@ -167,6 +197,15 @@ if stage finish; then
   mark finish
   blender -b --python "$R/machine/blender_finish.py" -- \
     "$W/s9_materialised.glb" "$W/s10_finished.glb"
+  # a recovered B-pillar is GLOSS BLACK, not body paint. Selects by
+  # geometry from pillar.json because blender_finish has just welded and
+  # re-indexed, so face indices from the label stage mean nothing here.
+  if [ -f "$W/pillar.json" ] && python3 -u "$R/machine/pillar_material.py" \
+       "$W/s10_finished.glb" "$W/s10_pillar.glb" "$W/pillar.json"; then
+    mv "$W/s10_pillar.glb" "$W/s10_finished.glb"
+  else
+    echo "pillar material: skipped (no bands, or nothing in them)"
+  fi
 fi
 
 if stage normals; then
@@ -237,6 +276,16 @@ fi
 if stage polish; then
   mark polish
   python3 -u "$R/machine/glass_polish.py" "$W/s14_interior.glb" "$W/s15_polish.glb"
+  # front and rear lamps share ONE textured material, and Tripo bakes the
+  # nose lamp as a blow-out (luma 158.9 neutral white against a body at
+  # 71.4). A factor multiplies the texture, so no single value helps one
+  # end without hurting the other — split first, then tint the front.
+  if python3 -u "$R/machine/lamp_split.py" "$W/s15_polish.glb" \
+       "$W/s15_lamp.glb" --tint 0.30; then
+    mv "$W/s15_lamp.glb" "$W/s15_polish.glb"
+  else
+    echo "lamp split: skipped (no Lamp_Lens, or one end empty)"
+  fi
   python3 -u "$R/machine/normals_fix.py" "$W/s15_polish.glb" "$W/s15_polish_n.glb"
   npx --yes @gltf-transform/cli tangents "$W/s15_polish_n.glb" "$W/s15_tangented.glb"
   # PAINT PBR IS SET AFTER THE LAST ROUND TRIP, NOT INSIDE glass_polish.
