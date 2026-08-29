@@ -24,16 +24,48 @@
 #   normals   normals_fix               NORMAL verified present
 #   tangents  gltf-transform tangents   MikkTSpace (3rd trimesh-drop class)
 #   nmap      normalmap_scale 0.35      wavy-bonnet fix (map, NOT the mesh)
+#                                       *** THE DELIVERABLE STOPS HERE ***
+#   render    showroom.py               8 views, glTF-compliant culling
+#
+# OPTIONAL, OFF BY DEFAULT (run with --with-surgical / --with-clean):
 #   surgical  surgical_fix              cabin occluder + smoked lamps
 #   clean     self-colour respray       door-sampled hex; factor MULTIPLIES
 #                                       the texture so badge/plate survive
-#   render    showroom.py               8 views, glTF-compliant culling
+#
+# WHY THE CHAIN STOPS AT nmap — OWNER'S CHOICE, 2026-08-29. Shown five
+# variants of the same car, the owner picked the nmap output and said "go
+# back to this". Identified by feature, not by guess: pale (untinted)
+# lamps, gloss-black textured alloys, a legible RF67 FPX plate and the blue
+# GTE grille line. NOTE the whole-frame pixel diff could NOT tell the five
+# apart (all ~55, dominated by background and crop offset) — another metric
+# measuring something adjacent to the question; the discriminating features
+# settled it.
+#
+# What the owner's choice rejects, and it is worth being precise:
+#   * surgical's SMOKED LAMPS. Darkening the lens is materially more
+#     correct than a pale baked graphic, and it still lost — dark lamps on
+#     a dark car read as "no lamps". Correctness lost to legibility.
+#   * the CLEAN RESPRAY. It removes the photo-baked mottle, which is a real
+#     defect, but dims the badge/plate/grille with it. Identity beat
+#     paint quality.
+# Both remain one flag away for a car where the trade goes the other way
+# (a pale car, or one whose baked lighting is worse than its badges).
 #
 # NOT in this chain, deliberately: premium.py construction. On a dense
 # textured generator it substitutes worse parts for better ones (blank
 # plates, silver donor rims — measured). Run it separately when a car NEEDS
 # constructed components, and strip the substitutions after.
 set -e
+WITH_SURGICAL=0; WITH_CLEAN=0
+ARGS=()
+for a in "$@"; do
+  case "$a" in
+    --with-surgical) WITH_SURGICAL=1 ;;
+    --with-clean)    WITH_CLEAN=1; WITH_SURGICAL=1 ;;   # clean consumes surgical output
+    *) ARGS+=("$a") ;;
+  esac
+done
+set -- "${ARGS[@]}"
 RAW="$1"; W="$2"; SPEC="$3"; FROM="${4:-canon}"
 R="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 mkdir -p "$W"
@@ -136,14 +168,22 @@ if stage nmap; then
     "$W/s13_nmap.glb" --scale 0.35 --materials carpaint
 fi
 
-if stage surgical; then
+# the owner's chosen deliverable is the nmap output — name it now, so a run
+# that stops here still leaves CAR_FINAL.glb rather than an unnamed stage file
+if stage nmap; then
+  cp "$W/s13_nmap.glb" "$W/CAR_FINAL.glb"
+  echo "CAR_FINAL.glb = nmap output (owner's chosen state)"
+fi
+
+if [ "$WITH_SURGICAL" = "1" ] && stage surgical; then
   mark surgical
   python3 -u "$R/machine/surgical_fix.py" "$W/s13_nmap.glb" "$W/s14_surg_raw.glb"
   python3 -u "$R/machine/normals_fix.py" "$W/s14_surg_raw.glb" "$W/s14_surg_n.glb"
   npx --yes @gltf-transform/cli tangents "$W/s14_surg_n.glb" "$W/s14_surgical.glb"
+  [ "$WITH_CLEAN" = "1" ] || cp "$W/s14_surgical.glb" "$W/CAR_FINAL.glb"
 fi
 
-if stage clean; then
+if [ "$WITH_CLEAN" = "1" ] && stage clean; then
   mark clean
   python3 - "$W" <<'PYEOF'
 import sys, numpy as np, trimesh
