@@ -146,8 +146,13 @@ for z in (0.34, -0.34):
          BELT + 0.11, BELT + 0.25, z - 0.115, z + 0.115, [26, 26, 29], soft=12)
 # PARCEL SHELF — a strong horizontal that reads through the rear quarter
 # glass and the backlight, and gives the tail some depth.
-box("Int_Shelf", -1.52, -1.05, BELT + 0.015, BELT + 0.045, -0.56, 0.56,
-    [23, 23, 26])
+# SHRUNK AND ROUNDED 2026-08-29. The first shelf was 470 x 1120 mm with
+# sharp arrises and it dominated the back glass — measured in the render it
+# came out at mean luma 142 against the tailgate's 83, i.e. the brightest
+# thing in the tail and brighter than the bodywork. A real parcel shelf is
+# dark carpet you can barely pick out through a tinted screen.
+rbox("Int_Shelf", -1.42, -1.10, BELT + 0.010, BELT + 0.038, -0.46, 0.46,
+     [12, 12, 14], soft=6)
 # steering wheel — RHD (UK): right side of the car is +z (forward x cross up y)
 # trimesh's torus lies in the XY plane with its AXIS along +Z. Here +Z is
 # LATERAL, so the wheel came out edge-on to the driver — a 409x412mm disc

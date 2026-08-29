@@ -201,11 +201,20 @@ W = sys.argv[1]
 # crinkled glass; once glass_smooth flattened the panes and the paint went
 # to the studio preset, the cabin read as pale slabs floating behind clean
 # glazing. A real cabin is much darker than its own paint.
-T = {"Int_Floor":22,"Int_Dash":36,"Int_Console":38,"Int_SeatFR_C":44,
-     "Int_SeatFR_B":41,"Int_SeatFR_H":45,"Int_SeatFL_C":44,"Int_SeatFL_B":41,
-     "Int_SeatFL_H":45,"Int_BenchC":40,"Int_BenchB":38,"Int_Wheel":26,
-     "Int_SeatFR_BolR":38,"Int_SeatFR_BolL":38,
-     "Int_SeatFL_BolR":38,"Int_SeatFL_BolL":38}
+# TONED AGAINST MEASURED RENDER BRIGHTNESS, not by eye. Through the back
+# glass the cabin was reading BRIGHTER than the car: parcel shelf mean luma
+# 142, rear headrest 124, front seat back 99 - against a tailgate panel at
+# 83 and the backdrop at 155. An interior seen through tinted glazing has to
+# sit well below the bodywork or it reads as clutter floating in the window,
+# which is what the owner saw ("clean the back glass"). Roughly a 1.8x
+# albedo cut across the cabin and 4x on the parcel shelf, which is the flat
+# surface staring straight up into the overhead softbox.
+T = {"Int_Floor":12,"Int_Dash":20,"Int_Console":21,"Int_SeatFR_C":25,
+     "Int_SeatFR_B":23,"Int_SeatFR_H":26,"Int_SeatFL_C":25,"Int_SeatFL_B":23,
+     "Int_SeatFL_H":26,"Int_BenchC":22,"Int_BenchB":21,"Int_Wheel":15,
+     "Int_SeatFR_BolR":21,"Int_SeatFR_BolL":21,
+     "Int_SeatFL_BolR":21,"Int_SeatFL_BolL":21,
+     "Int_HeadRR":26,"Int_HeadRL":26,"Int_Shelf":8}
 p = f"{W}/s14_interior.glb"
 d = open(p,"rb").read(); ln = struct.unpack("<I", d[12:16])[0]
 j = json.loads(d[20:20+ln]); rest = d[20+ln:]
@@ -217,7 +226,7 @@ for m in j.get("materials", []):
     pbr["baseColorFactor"] = [t/255, t/255, (t+3)/255, 1.0]
     pbr["roughnessFactor"] = 0.82; pbr["metallicFactor"] = 0.0
     n += 1
-if n < 10: raise SystemExit(f"REFUSED: only {n} interior materials found")
+if n < 17: raise SystemExit(f"REFUSED: only {n} interior materials found")
 js = json.dumps(j, separators=(",",":")).encode(); js += b" "*((4-len(js)%4)%4)
 open(p,"wb").write(b"glTF"+struct.pack("<II",2,12+8+len(js)+len(rest))
                    +struct.pack("<I",len(js))+b"JSON"+js+rest)
