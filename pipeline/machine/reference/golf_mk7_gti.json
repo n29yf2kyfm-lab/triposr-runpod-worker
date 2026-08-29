@@ -1,0 +1,25 @@
+{
+ "length_axis": "z",
+ "L": 4.5,
+ "W": 2.110762596130371,
+ "H": 1.4338239673525095,
+ "W_over_L": 0.469058354695638,
+ "H_over_L": 0.3186275483005577,
+ "faces": 107574,
+ "glass_area_pct": 5.325508890766733,
+ "glass_area_pct_all_skins": 9.317860651843624,
+ "paint_area_pct": 26.95267565070433,
+ "stance": {
+  "patch_spread_mm": 1.2997558567969298,
+  "above_floor_mm": 6.46918112761341,
+  "pitch_mm": 0.6665927617260344,
+  "roll_mm": 0.6331630950708955,
+  "wheelbase_over_L": 0.6186840297609173
+ },
+ "greenhouse": {
+  "belt_frac_H": 0.5088611978049303,
+  "rail_frac_H": 0.8943305770322311,
+  "dlo_band_mm": 552.6952346165974
+ },
+ "_reference": "volkswagen-golf-mk7-v1 (Volkswagen Golf GTI Mk7, live catalogue)"
+}
