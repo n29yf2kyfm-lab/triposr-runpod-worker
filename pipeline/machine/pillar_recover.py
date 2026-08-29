@@ -64,6 +64,8 @@ MIN_DROP = 12.0               # luma below the pane median
 MAX_SPREAD = 14.0             # p75-p25 within the column
 MIN_HEIGHT_FRAC = 0.55        # of the local DLO height
 MAX_WIDTH = 0.09              # fraction of car length
+MIN_BIN_OCC = 0.75            # of the DLO height bins a pillar must occupy
+MIN_SIDE_GLASS = 120          # glazing faces required BOTH fore and aft
 MIN_TAKE = 300                # faces; below this it did not find a pillar
 MAX_TAKE_FRAC = 0.22          # of the glazing
 
@@ -83,6 +85,62 @@ def face_luma(m):
     py = np.clip(((1 - fuv[:, 1]) * (H - 1)).astype(int), 0, H - 1)
     c = T[py, px]
     return 0.2126 * c[:, 0] + 0.7152 * c[:, 1] + 0.0722 * c[:, 2]
+
+
+def is_pillar(x, y, l, idx, x0, x1, ylo, yhi, lab_all, c_all, sgn, hw):
+    """Two shape tests a scuttle cannot pass, and a real pillar always does.
+
+    THE FAILURE THESE EXIST FOR. The luma rule was calibrated on a DARK
+    grey car, where a gloss-black pillar is the only thing darker and
+    flatter than the glazing. Run on a WHITE Golf it found FOUR bands per
+    car instead of two:
+
+        R  -1.275..-1.255   20 mm   C-pillar sliver
+        R   0.425.. 0.665  240 mm   THE SCUTTLE. Not a pillar.
+        L  -0.472..-0.352  120 mm   the actual B-pillar
+        L   0.442.. 0.662  220 mm   the scuttle again
+
+    pillar_material then painted 28,708 faces gloss black - a slab across
+    the bonnet. BOTH guards passed it: 5.5% of glazing against a 22% cap,
+    3.6% of the body against a 6% cap. Neither guard asked whether the
+    thing found was PILLAR-SHAPED; they only asked how big it was. On a
+    light car the darkness signal alone is worthless, because shadow,
+    window surround and scuttle shade are all darker than white paint.
+
+    1. HEIGHT CONTINUITY. A pillar runs the full DLO, beltline to roof, so
+       it has faces in essentially every height bin. The scuttle occupies
+       the bottom of the band and spans the rest only because the column
+       also caught windscreen-adjacent faces - which passes a max-minus-min
+       extent test and fails a per-bin occupancy test.
+    2. GLAZING ON BOTH SIDES. A pillar DIVIDES two windows: there is glass
+       immediately fore and aft of it at the same height. The scuttle has
+       glazing on one side and bonnet on the other. This is the test that
+       encodes what a pillar actually IS, rather than what it looks like.
+    """
+    band = (x >= x0) & (x < x1)
+    if band.sum() < 40:
+        return False, "too few faces in the band"
+
+    nb = 12
+    edges = np.linspace(ylo, yhi, nb + 1)
+    occ = sum(1 for i in range(nb)
+              if ((y[band] >= edges[i]) & (y[band] < edges[i + 1])).sum() >= 3)
+    if occ < int(MIN_BIN_OCC * nb):
+        return False, (f"spans only {occ}/{nb} height bins — a pillar runs "
+                       f"the full DLO, this does not")
+
+    gap = 0.5 * (x1 - x0) + 0.02
+    reach = 0.16
+    glass = (lab_all == GLASS) & (sgn * c_all[:, 2] > 0.30 * hw)
+    gy = c_all[:, 1]
+    inband = glass & (gy > ylo) & (gy < yhi)
+    fore = inband & (c_all[:, 0] >= x1 + gap) & (c_all[:, 0] < x1 + gap + reach)
+    aft = inband & (c_all[:, 0] <= x0 - gap) & (c_all[:, 0] > x0 - gap - reach)
+    if fore.sum() < MIN_SIDE_GLASS or aft.sum() < MIN_SIDE_GLASS:
+        return False, (f"glazing fore {int(fore.sum())} / aft {int(aft.sum())} "
+                       f"— a pillar DIVIDES two windows; this has glass on "
+                       f"one side only")
+    return True, f"{occ}/{nb} bins, glazing fore {int(fore.sum())} aft {int(aft.sum())}"
 
 
 def half_depth_span(x, l, x0, x1, step, med, binw=0.02, depth=0.5):
@@ -145,6 +203,7 @@ def main():
     lum = face_luma(m)
     c, n = m.triangles_center, m.face_normals
     L = float(c[:, 0].max() - c[:, 0].min())
+    HW = float(np.percentile(np.abs(c[:, 2]), 99.0))
     step = MAX_WIDTH * L / 3.0            # three columns per max pillar width
 
     taken = np.zeros(len(m.faces), bool)
@@ -203,14 +262,35 @@ def main():
             # which is the standard way to read a feature's width off a
             # profile. Same shape as every other rule here: the cheap test
             # finds the candidate, a finer measurement gives the verdict.
-            fx0, fx1 = half_depth_span(x, l, x0, x1, step, med,
-                                       depth=a.depth)
+            # WIDEN ON EVIDENCE, THEN REJECT. A band can fail the height
+            # test for two opposite reasons: it is the wrong thing (the
+            # scuttle, 7/12 bins however wide you cut it), or it is the
+            # right thing cut too NARROW. Measured on the two cars:
+            #   WHITE true B-pillar   11/12 bins  2630 faces
+            #   WHITE scuttle          7/12 bins  2444 faces
+            #   DARK 40 mm detection   6/12 bins   309 faces  <- too narrow
+            #   DARK same x at 120 mm 11/12 bins  1069 faces
+            # So a failing band gets a shallower cut - a wider slice of the
+            # same dark feature - before it is thrown away. A pillar
+            # recovers; the scuttle does not, at any depth.
+            ok, why, fx0, fx1 = False, "", x0, x1
+            for dep in (a.depth, 0.65, 0.5):
+                cx0, cx1 = half_depth_span(x, l, x0, x1, step, med, depth=dep)
+                if ((x >= cx0) & (x < cx1)).sum() < 40:
+                    continue
+                ok, why = is_pillar(x, y, l, idx, cx0, cx1, ylo, yhi,
+                                    lab, c, sgn, HW)
+                fx0, fx1 = cx0, cx1
+                if ok:
+                    if dep != a.depth:
+                        print(f"  {side}: widened at depth {dep} "
+                              f"({1000*(cx1-cx0):.0f} mm) — {why}")
+                    break
+            if not ok:
+                print(f"  {side}: band x {fx0:6.3f}..{fx1:6.3f} REJECTED — "
+                      f"{why}")
+                continue
             fine = (x >= fx0) & (x < fx1)
-            if fine.sum() < 40:
-                print(f"  {side}: half-depth cut left {int(fine.sum())} "
-                      f"faces — falling back to the column")
-                fine = (x >= x0) & (x < x1)
-                fx0, fx1 = x0, x1
             k = idx[fine]
             taken[k] = True
             found.append((side, fx0, fx1))
@@ -237,15 +317,26 @@ def main():
                (np.abs(n[:, 2]) > 0.45))
         idx = np.where(sel)[0]
         if sel.sum() >= 500:
-            x, l = c[idx, 0], lum[idx]
+            x, y, l = c[idx, 0], c[idx, 1], lum[idx]
             med = float(np.median(l))
             win = (x >= x0 - step) & (x < x1 + step)
             k = (x >= x0) & (x < x1)
             if k.sum() >= 40:
                 drop = med - l[k].mean()
                 if drop >= a.min_drop * 0.5:
-                    fx0, fx1 = half_depth_span(x, l, x0, x1, step, med,
-                                               depth=a.depth)
+                    # same widening ladder as the primary path, or the
+                    # mirror comes out narrower than the twin it copied
+                    fx0, fx1 = x0, x1
+                    for dep in (a.depth, 0.65, 0.5):
+                        cx0, cx1 = half_depth_span(x, l, x0, x1, step, med,
+                                                   depth=dep)
+                        if ((x >= cx0) & (x < cx1)).sum() < 40:
+                            continue
+                        okm, _ = is_pillar(x, y, l, idx, cx0, cx1, ylo, yhi,
+                                           lab, c, sgn, HW)
+                        fx0, fx1 = cx0, cx1
+                        if okm:
+                            break
                     fine = (x >= fx0) & (x < fx1)
                     if fine.sum() < 40:
                         fine, fx0, fx1 = k, x0, x1
