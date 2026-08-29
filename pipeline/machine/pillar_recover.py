@@ -107,6 +107,7 @@ def main():
 
     taken = np.zeros(len(m.faces), bool)
     profile = {}
+    found = []
     for side, sgn in (("R", 1), ("L", -1)):
         # the side glazing, seen edge-on: laterally-facing, off the centreline
         sel = ((lab == GLASS) & (sgn * c[:, 2] > 0.30) &
@@ -152,8 +153,41 @@ def main():
                 continue
             k = idx[(x >= x0) & (x < x1)]
             taken[k] = True
+            found.append((side, float(x0), float(x1)))
             print(f"  {side}: pillar x {x0:6.3f}..{x1:6.3f} "
                   f"({1000*(x1-x0):.0f} mm) -> {len(k)} faces to body")
+
+    # SYMMETRY PROPOSES, EVIDENCE CONFIRMS. A car is symmetric, so a pillar
+    # found on one flank has a twin on the other. Measured on the Golf, the
+    # right B-pillar is unmistakable (drop 13.6, spread 3.0) while the left
+    # one at the mirrored position scores drop 12.0, spread 15.0 and misses
+    # the spread test by a single luma - the left flank sits under the rig's
+    # key light and its glazing reflects more, which widens every column's
+    # spread on that side. Relaxing the threshold globally to catch it would
+    # let real glazing columns through; asking the OTHER side, at the
+    # position its twin was found, does not. The mirror only proposes a
+    # place to look - the column still has to show half the drop, or it is
+    # refused.
+    if len(found) == 1:
+        side, x0, x1 = found[0]
+        other = "L" if side == "R" else "R"
+        sgn = -1 if other == "L" else 1
+        sel = ((lab == GLASS) & (sgn * c[:, 2] > 0.30) &
+               (np.abs(n[:, 2]) > 0.45))
+        idx = np.where(sel)[0]
+        if sel.sum() >= 500:
+            x, l = c[idx, 0], lum[idx]
+            med = float(np.median(l))
+            k = (x >= x0) & (x < x1)
+            if k.sum() >= 40:
+                drop = med - l[k].mean()
+                if drop >= a.min_drop * 0.5:
+                    taken[idx[k]] = True
+                    print(f"  {other}: mirrored pillar x {x0:6.3f}..{x1:6.3f} "
+                          f"CONFIRMED (drop {drop:.1f}) -> {int(k.sum())} faces")
+                else:
+                    print(f"  {other}: mirrored position shows drop "
+                          f"{drop:.1f} — not confirmed, left as glass")
 
     ng = int((lab == GLASS).sum())
     print(f"\nglazing faces {ng}; recovered to body {int(taken.sum())} "
