@@ -24,6 +24,12 @@
 #   normals   normals_fix               NORMAL verified present
 #   tangents  gltf-transform tangents   MikkTSpace (3rd trimesh-drop class)
 #   nmap      normalmap_scale 0.35      wavy-bonnet fix (map, NOT the mesh)
+#   interior  interior_kit + apply      dash, seats, headrests, RHD wheel
+#   polish    glass_polish              paint OFF the windows (5960->0 on the
+#                                       Golf) + real paint PBR (carpaint had
+#                                       NO metallic/roughness, so the glTF
+#                                       DEFAULTS applied: metallic 1.0,
+#                                       roughness 1.0 — bare rough metal)
 #                                       *** THE DELIVERABLE STOPS HERE ***
 #   render    showroom.py               8 views, glTF-compliant culling
 #
@@ -72,7 +78,7 @@ mkdir -p "$W"
 cd "$W"
 
 stage() {  # stage <name> -> 0 if it should run
-  local order="canon deyaw views masks lamps project refine boundary assemble finish normals tangents nmap surgical clean render"
+  local order="canon deyaw views masks lamps project refine boundary assemble finish normals tangents nmap interior polish surgical clean render"
   local seen=0
   for s in $order; do
     [ "$s" = "$FROM" ] && seen=1
@@ -168,16 +174,51 @@ if stage nmap; then
     "$W/s13_nmap.glb" --scale 0.35 --materials carpaint
 fi
 
-# the owner's chosen deliverable is the nmap output — name it now, so a run
-# that stops here still leaves CAR_FINAL.glb rather than an unnamed stage file
-if stage nmap; then
-  cp "$W/s13_nmap.glb" "$W/CAR_FINAL.glb"
-  echo "CAR_FINAL.glb = nmap output (owner's chosen state)"
+if stage interior; then
+  mark interior
+  python3 -u "$R/machine/interior_kit.py" "$W/s13_nmap.glb" "$W/int_kit.npz"
+  python3 -c "
+import sys; sys.path.insert(0,'$R/machine')
+from premium import apply_interior
+apply_interior('$W/s13_nmap.glb','$W/int_kit.npz','$W/s14_interior.glb','$W/int.log')"
+  python3 - "$W" <<'PYEOF'
+import json, struct, sys
+W = sys.argv[1]
+# the kit ships near-black (20-30/255) which is invisible behind a 0.353
+# tint; these read as a real dark cabin through the glass
+T = {"Int_Floor":30,"Int_Dash":52,"Int_Console":56,"Int_SeatFR_C":64,
+     "Int_SeatFR_B":60,"Int_SeatFR_H":66,"Int_SeatFL_C":64,"Int_SeatFL_B":60,
+     "Int_SeatFL_H":66,"Int_BenchC":58,"Int_BenchB":56,"Int_Wheel":40}
+p = f"{W}/s14_interior.glb"
+d = open(p,"rb").read(); ln = struct.unpack("<I", d[12:16])[0]
+j = json.loads(d[20:20+ln]); rest = d[20+ln:]
+n = 0
+for m in j.get("materials", []):
+    t = T.get(m.get("name",""))
+    if t is None: continue
+    pbr = m.setdefault("pbrMetallicRoughness", {})
+    pbr["baseColorFactor"] = [t/255, t/255, (t+3)/255, 1.0]
+    pbr["roughnessFactor"] = 0.82; pbr["metallicFactor"] = 0.0
+    n += 1
+if n < 10: raise SystemExit(f"REFUSED: only {n} interior materials found")
+js = json.dumps(j, separators=(",",":")).encode(); js += b" "*((4-len(js)%4)%4)
+open(p,"wb").write(b"glTF"+struct.pack("<II",2,12+8+len(js)+len(rest))
+                   +struct.pack("<I",len(js))+b"JSON"+js+rest)
+print(f"interior toned: {n} materials")
+PYEOF
+fi
+
+if stage polish; then
+  mark polish
+  python3 -u "$R/machine/glass_polish.py" "$W/s14_interior.glb" "$W/s15_polish.glb"
+  python3 -u "$R/machine/normals_fix.py" "$W/s15_polish.glb" "$W/s15_polish_n.glb"
+  npx --yes @gltf-transform/cli tangents "$W/s15_polish_n.glb" "$W/CAR_FINAL.glb"
+  echo "CAR_FINAL.glb = polished output"
 fi
 
 if [ "$WITH_SURGICAL" = "1" ] && stage surgical; then
   mark surgical
-  python3 -u "$R/machine/surgical_fix.py" "$W/s13_nmap.glb" "$W/s14_surg_raw.glb"
+  python3 -u "$R/machine/surgical_fix.py" "$W/CAR_FINAL.glb" "$W/s14_surg_raw.glb"
   python3 -u "$R/machine/normals_fix.py" "$W/s14_surg_raw.glb" "$W/s14_surg_n.glb"
   npx --yes @gltf-transform/cli tangents "$W/s14_surg_n.glb" "$W/s14_surgical.glb"
   [ "$WITH_CLEAN" = "1" ] || cp "$W/s14_surgical.glb" "$W/CAR_FINAL.glb"
