@@ -12,6 +12,10 @@
 #   canon     canon.py --spec           pose + published dims (±1%)
 #   deyaw     deyaw.py                  mirror-plane yaw fix (66.9->9.8mm on
 #                                       the Golf); ALREADY-ALIGNED is a pass
+#   nose      nose_fix.py               put the NOSE at +x. MUST precede the
+#                                       views: lamp_boost picks nose views by
+#                                       index before any label exists, so a
+#                                       wrong sign boosts the tail lamps
 #   views     seg_views x18             10 standard + 8 at el -6 (sills)
 #   masks     seg_masks                 DINO+SAM, SEG_BOX_THR=0.18
 #   lamps     lamp_boost                6 nose views, thr 0.16 (L/R 0.49->0.79)
@@ -78,7 +82,7 @@ mkdir -p "$W"
 cd "$W"
 
 stage() {  # stage <name> -> 0 if it should run
-  local order="canon deyaw views masks lamps project refine boundary assemble finish normals tangents nmap interior polish surgical clean render"
+  local order="canon deyaw nose views masks lamps project refine boundary assemble finish normals tangents nmap interior polish surgical clean render"
   local seen=0
   for s in $order; do
     [ "$s" = "$FROM" ] && seen=1
@@ -109,13 +113,19 @@ if stage deyaw; then
   fi
 fi
 
+if stage nose; then
+  mark nose
+  python3 "$R/machine/nose_fix.py" "$W/s2_deyaw.glb" "$W/s2b_nose.glb" \
+    --report "$W/nose.json"
+fi
+
 if stage views; then
   mark views
   rm -rf "$W/views"; mkdir -p "$W/views"
-  blender -b --python "$R/trellis/seg_views.py" -- "$W/s2_deyaw.glb" "$W/views"
+  blender -b --python "$R/trellis/seg_views.py" -- "$W/s2b_nose.glb" "$W/views"
   SEG_VIEWS_SPEC="0:-6,45:-6,90:-6,135:-6,180:-6,225:-6,270:-6,315:-6" \
     SEG_VIEW_OFFSET=10 \
-    blender -b --python "$R/trellis/seg_views.py" -- "$W/s2_deyaw.glb" "$W/views"
+    blender -b --python "$R/trellis/seg_views.py" -- "$W/s2b_nose.glb" "$W/views"
 fi
 
 if stage masks; then
@@ -131,24 +141,24 @@ fi
 
 if stage project; then
   mark project
-  python3 -u "$R/trellis/seg_project.py" "$W/s2_deyaw.glb" "$W/views" "$W/car"
+  python3 -u "$R/trellis/seg_project.py" "$W/s2b_nose.glb" "$W/views" "$W/car"
 fi
 
 if stage refine; then
   mark refine
-  python3 -u "$R/trellis/seg_refine.py" "$W/s2_deyaw.glb" \
+  python3 -u "$R/trellis/seg_refine.py" "$W/s2b_nose.glb" \
     "$W/car_labels.npy" "$W/car_r.npy"
 fi
 
 if stage boundary; then
   mark boundary
   GLASS_STENCIL=0 LAMP_STENCIL=0 python3 -u "$R/machine/seg_boundary.py" \
-    "$W/s2_deyaw.glb" "$W/car_r.npy" "$W/car_b.npy"
+    "$W/s2b_nose.glb" "$W/car_r.npy" "$W/car_b.npy"
 fi
 
 if stage assemble; then
   mark assemble
-  python3 -u "$R/trellis/seg_assemble.py" "$W/s2_deyaw.glb" "$W/car_b.npy" \
+  python3 -u "$R/trellis/seg_assemble.py" "$W/s2b_nose.glb" "$W/car_b.npy" \
     "$W/s9_materialised.glb"
 fi
 
