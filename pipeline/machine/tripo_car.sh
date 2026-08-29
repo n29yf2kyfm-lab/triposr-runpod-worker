@@ -30,10 +30,11 @@
 #   nmap      normalmap_scale 0.35      wavy-bonnet fix (map, NOT the mesh)
 #   interior  interior_kit + apply      dash, seats, headrests, RHD wheel
 #   polish    glass_polish              paint OFF the windows (5960->0 on the
-#                                       Golf) + real paint PBR (carpaint had
-#                                       NO metallic/roughness, so the glTF
-#                                       DEFAULTS applied: metallic 1.0,
-#                                       roughness 1.0 — bare rough metal)
+#                                       Golf), then paint_pbr sets the body
+#                                       PBR AFTER the last round trip —
+#                                       PAINT_PRESET=v31 (default, the
+#                                       owner's near-black studio look) or
+#                                       =premium (brief values + clearcoat)
 #                                       *** THE DELIVERABLE STOPS HERE ***
 #   render    showroom.py               8 views, glTF-compliant culling
 #
@@ -222,8 +223,16 @@ if stage polish; then
   mark polish
   python3 -u "$R/machine/glass_polish.py" "$W/s14_interior.glb" "$W/s15_polish.glb"
   python3 -u "$R/machine/normals_fix.py" "$W/s15_polish.glb" "$W/s15_polish_n.glb"
-  npx --yes @gltf-transform/cli tangents "$W/s15_polish_n.glb" "$W/CAR_FINAL.glb"
-  echo "CAR_FINAL.glb = polished output"
+  npx --yes @gltf-transform/cli tangents "$W/s15_polish_n.glb" "$W/s15_tangented.glb"
+  # PAINT PBR IS SET AFTER THE LAST ROUND TRIP, NOT INSIDE glass_polish.
+  # normals_fix and the tangents pass both round-trip the file, and a
+  # trimesh round trip drops every KHR material extension — glass_polish's
+  # clearcoat was written and then silently eaten, while its metallic and
+  # roughness survived (those are core, not extensions), so the log read
+  # as a success with half the edit missing. Preset is the owner's, by eye.
+  python3 -u "$R/machine/paint_pbr.py" "$W/s15_tangented.glb" "$W/CAR_FINAL.glb" \
+    --preset "${PAINT_PRESET:-v31}"
+  echo "CAR_FINAL.glb = polished output, paint preset ${PAINT_PRESET:-v31}"
 fi
 
 if [ "$WITH_SURGICAL" = "1" ] && stage surgical; then
