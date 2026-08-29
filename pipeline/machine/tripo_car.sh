@@ -12,6 +12,9 @@
 #   canon     canon.py --spec           pose + published dims (±1%)
 #   deyaw     deyaw.py                  mirror-plane yaw fix (66.9->9.8mm on
 #                                       the Golf); ALREADY-ALIGNED is a pass
+#   despike   despike.py                blade artefacts off (long+thin
+#                                       clusters that collapse under
+#                                       smoothing; 72 fins on the white Golf)
 #   nose      nose_fix.py               put the NOSE at +x. MUST precede the
 #                                       views: lamp_boost picks nose views by
 #                                       index before any label exists, so a
@@ -97,7 +100,7 @@ mkdir -p "$W"
 cd "$W"
 
 stage() {  # stage <name> -> 0 if it should run
-  local order="canon deyaw nose views masks lamps project refine smooth pillar boundary glasssmooth assemble finish normals tangents nmap interior polish level surgical clean render"
+  local order="canon deyaw nose despike views masks lamps project refine smooth pillar boundary glasssmooth assemble finish normals tangents nmap interior polish level surgical clean render"
   local seen=0
   for s in $order; do
     [ "$s" = "$FROM" ] && seen=1
@@ -132,6 +135,21 @@ if stage nose; then
   mark nose
   python3 "$R/machine/nose_fix.py" "$W/s2_deyaw.glb" "$W/s2b_nose.glb" \
     --report "$W/nose.json"
+fi
+
+if stage despike; then
+  mark despike
+  # remove the generator's blade artefacts BEFORE the views, so masks and
+  # labels never see them. Render-verified 2026-08-29 on the white Golf:
+  # cowl and D-pillar fins gone, mirrors/aerial/spoiler kept. A refusal
+  # (no fins found, or nothing long-and-thin) is a PASS - carry forward.
+  if python3 -u "$R/machine/despike.py" "$W/s2b_nose.glb" \
+       "$W/s2c_despike.glb" --report "$W/despike.json"; then
+    mv "$W/s2b_nose.glb" "$W/s2b_prespike.glb"
+    cp "$W/s2c_despike.glb" "$W/s2b_nose.glb"
+  else
+    echo "despike: refused — carrying the mesh forward unchanged"
+  fi
 fi
 
 if stage views; then
