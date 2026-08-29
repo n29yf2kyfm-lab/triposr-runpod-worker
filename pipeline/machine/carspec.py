@@ -114,6 +114,27 @@ def measure(path):
     # is kept beside it because the double skin is itself worth copying.
     outer = pick(parts, GLASSY, exclude=("mirror", "surround", "inside",
                                          "interior"))
+    # GLASS / L^2 IS THE PRIMARY MEASURE, and "% of total area" is kept only
+    # as a secondary because it is DENOMINATOR-DEPENDENT and it lied badly.
+    # Against the GTI reference it reported the generated Golf as having 65%
+    # too much glazing, and I nearly eroded the glass label on that. The
+    # rival test - compare ABSOLUTE areas - says otherwise:
+    #
+    #                       GTI        generated
+    #   total surface     68.898 m2   44.363 m2
+    #   interior          37.1%       13.2%      <- the entire difference
+    #   glass absolute     3.669 m2    3.911 m2   x1.066
+    #   glass / L^2        0.1812      0.2157     x1.190
+    #   glass / total      5.33%       8.82%      x1.655   <- the bad metric
+    #
+    # The reference has a fully modelled interior and ours does not, so its
+    # total surface area is 1.55x larger and every "% of total" figure is
+    # scaled by that. The true excess is ~19% on a scale-free measure, not
+    # 65%. Acting on the percentage would have cut 40% of the glazing off a
+    # car whose glass area is within 7% of a real one.
+    d["glass_over_L2"] = float(outer.area) / (L * L) if outer is not None else None
+    d["glass_area_m2"] = float(outer.area) if outer is not None else None
+    d["total_area_m2"] = tot
     d["glass_area_pct"] = 100 * float(outer.area) / tot if outer is not None else None
     d["glass_area_pct_all_skins"] = (100 * float(glass.area) / tot
                                      if glass is not None else None)
@@ -170,8 +191,9 @@ def measure(path):
 
 FIELDS = [("W_over_L", "width / length", 0.06),
           ("H_over_L", "height / length", 0.06),
-          ("glass_area_pct", "glass % of area", 0.30),
-          ("paint_area_pct", "paint % of area", 0.40)]
+          ("glass_over_L2", "glass / length^2", 0.20),
+          ("glass_area_pct", "glass % of area *", 0.30),
+          ("paint_area_pct", "paint % of area *", 0.40)]
 NESTED = [("greenhouse", "belt_frac_H", "beltline / height", 0.10),
           ("greenhouse", "rail_frac_H", "roofline / height", 0.06),
           ("stance", "wheelbase_over_L", "wheelbase / length", 0.06)]
@@ -243,6 +265,9 @@ def main():
             tol, False, " mm")
     print(f"\n  faces {ref.get('faces')} -> {m.get('faces')} "
           f"({m.get('faces',0)/max(ref.get('faces',1),1):.1f}x the reference)")
+    print("\n  * denominator-dependent: a reference with a fully modelled "
+          "interior has a much\n    larger total area, so these read high on "
+          "a car without one. Judge glazing\n    on glass / length^2.")
     print(f"\n{bad} quantity(ies) outside tolerance")
     sys.exit(1 if bad else 0)
 
