@@ -230,9 +230,33 @@ if stage polish; then
   # clearcoat was written and then silently eaten, while its metallic and
   # roughness survived (those are core, not extensions), so the log read
   # as a success with half the edit missing. Preset is the owner's, by eye.
-  python3 -u "$R/machine/paint_pbr.py" "$W/s15_tangented.glb" "$W/CAR_FINAL.glb" \
+  python3 -u "$R/machine/paint_pbr.py" "$W/s15_tangented.glb" "$W/s15_paint.glb" \
     --preset "${PAINT_PRESET:-v31}"
-  echo "CAR_FINAL.glb = polished output, paint preset ${PAINT_PRESET:-v31}"
+  # AND THE NORMAL-MAP SCALE HAS TO BE RE-APPLIED HERE, for the same reason.
+  # The nmap stage sets normalTexture.scale 0.35 at s13 and the interior and
+  # polish stages round-trip the file through trimesh, which drops it — the
+  # key is core glTF, not an extension, and it goes anyway. Default is 1.0,
+  # so the deliverable shipped with the normal map at FULL strength: the
+  # wavy-panel look nmap exists to remove, silently back. Measured on the
+  # multiview Golf, carpaint normalTexture in CAR_FINAL carried no scale at
+  # all while the v31 car it was being compared against carried 0.35.
+  python3 -u "$R/machine/normalmap_scale.py" "$W/s15_paint.glb" "$W/CAR_FINAL.glb" \
+    --scale "${NMAP_SCALE:-0.35}"
+  python3 - "$W/CAR_FINAL.glb" <<'PYEOF'
+import json, struct, sys
+d = open(sys.argv[1], "rb").read()
+j = json.loads(d[20:20 + struct.unpack("<I", d[12:16])[0]])
+m = [x for x in j.get("materials", []) if x.get("name") == "carpaint"]
+if not m:
+    raise SystemExit("REFUSED: CAR_FINAL has no carpaint material")
+nt = m[0].get("normalTexture")
+if nt is not None and "scale" not in nt:
+    raise SystemExit("REFUSED: carpaint normalTexture lost its scale again — "
+                     "a later round trip is eating it")
+print(f"CAR_FINAL carpaint verified: {json.dumps(m[0])}")
+PYEOF
+  echo "CAR_FINAL.glb = polished output, paint preset ${PAINT_PRESET:-v31}, "\
+"nmap ${NMAP_SCALE:-0.35}"
 fi
 
 if [ "$WITH_SURGICAL" = "1" ] && stage surgical; then
