@@ -187,9 +187,26 @@ def main():
           f"({1000*d2p:+.1f} mm), roll {np.degrees(np.arctan2(d2r,tr)):+.2f} deg "
           f"({1000*d2r:+.1f} mm), spread {spread:.1f} mm")
     print(f"        lowest patch now at y {P2[:,1].min():+.5f}")
-    if spread > 2.0:
-        raise SystemExit(f"REFUSED: patches still {spread:.1f} mm apart after "
+    # THE RESIDUAL SPREAD HAS A FLOOR AND IT IS NOT ZERO. Four contact
+    # patches on a generated car are not coplanar - the tyres are not
+    # identical - so a plane fit always leaves something behind, and an
+    # absolute 2 mm ceiling refuses a correction that landed perfectly.
+    # Measured: a car that arrived at 149.7 mm spread came out at 1.7 mm and
+    # passed, while one that arrived nearly level at 15.3 mm came out at
+    # 3.7 mm and was REFUSED - the second is the better car and the guard
+    # threw it away. Judge the ANGLES, which are what levelling controls,
+    # and require the spread to have improved rather than to hit a fixed
+    # number it cannot reach.
+    ang = max(abs(np.degrees(np.arctan2(d2p, wb))),
+              abs(np.degrees(np.arctan2(d2r, tr))))
+    before_spread = 1000 * (P[:, 1].max() - P[:, 1].min())
+    if ang > 0.10:
+        raise SystemExit(f"REFUSED: {ang:.2f} deg of tilt left after "
                          f"levelling — the fit did not land")
+    if spread > before_spread * 0.75 and spread > 8.0:
+        raise SystemExit(f"REFUSED: spread {before_spread:.1f} -> "
+                         f"{spread:.1f} mm barely moved and is still large — "
+                         f"these patches may not be four wheels")
     if abs(P2[:, 1].min()) > 0.002:
         raise SystemExit(f"REFUSED: car sits {1000*P2[:,1].min():+.1f} mm off "
                          f"the floor after levelling")
