@@ -207,23 +207,69 @@ vfov = 2 * math.atan(math.tan(hfov / 2) / aspect)
 aim_z = mn[2] + sp[2] * 0.47
 
 
-def place(az, el):
-    """Distance solved PER VIEW from the car's projected extent at that
-    azimuth, so a side view (full length) pulls back and a front view
-    (width only) comes in close. A single global distance framed the
-    end-on views tiny."""
+CORNERS = [(x, y, z) for x in (mn[0], mx[0])
+           for y in (mn[1], mx[1]) for z in (mn[2], mx[2])]
+
+
+def _aim(az, el, d):
     a, e = math.radians(az), math.radians(el)
-    # horizontal extent presented to the camera at this azimuth
+    pos = mathutils.Vector((ctr[0] + d * math.cos(e) * math.cos(a),
+                            ctr[1] + d * math.cos(e) * math.sin(a),
+                            aim_z + d * math.sin(e)))
+    tgt = mathutils.Vector((ctr[0], ctr[1], aim_z))
+    fwd = (tgt - pos).normalized()
+    rot = fwd.to_track_quat('-Z', 'Y').to_euler()
+    return pos, rot, fwd
+
+
+def _overflow(pos, fwd):
+    """Worst corner overflow as a fraction of the frame half-angle.
+
+    THE END-ON VIEWS WERE CROPPED and this is why. The old solve took the
+    extent in the plane THROUGH THE CENTRE and placed the camera as if the
+    whole car sat on that plane. Head-on, that plane is the car's WIDTH
+    (1.79 m) while the bumper stands 2.13 m nearer the lens than the
+    centre — perspective then magnifies the near end far past the fitted
+    extent, so the roof and the number plate ran off the frame in both the
+    `front` and `rear` tiles. Same family as the recorded close-up camera
+    that ended up inside the bodywork: a framing rule that measures the
+    wrong plane.
+
+    Fixed by measuring what the camera actually sees — project all eight
+    bbox corners and ask whether any of them is outside."""
+    up = mathutils.Vector((0.0, 0.0, 1.0))
+    right = fwd.cross(up).normalized()
+    camup = right.cross(fwd).normalized()
+    th, tv = math.tan(hfov / 2), math.tan(vfov / 2)
+    worst = 0.0
+    for c in CORNERS:
+        v = mathutils.Vector(c) - pos
+        z = v.dot(fwd)
+        if z <= 1e-6:
+            return 99.0
+        worst = max(worst, abs(v.dot(right)) / (z * th),
+                    abs(v.dot(camup)) / (z * tv))
+    return worst
+
+
+def place(az, el):
+    """Distance solved PER VIEW so every bbox CORNER lands inside the
+    frame, not merely the centre-plane extent (see _overflow)."""
+    a, e = math.radians(az), math.radians(el)
     w = abs(sp[0] * math.sin(a)) + abs(sp[1] * math.cos(a))
-    d = MARGIN * max(0.5 * w / math.tan(hfov / 2),
-                     0.5 * sp[2] / math.tan(vfov / 2))
-    cam.location = (ctr[0] + d * math.cos(e) * math.cos(a),
-                    ctr[1] + d * math.cos(e) * math.sin(a),
-                    aim_z + d * math.sin(e))
-    look = mathutils.Vector([ctr[0] - cam.location[0],
-                             ctr[1] - cam.location[1],
-                             aim_z - cam.location[2]])
-    cam.rotation_euler = look.to_track_quat('-Z', 'Y').to_euler()
+    d = max(0.5 * w / math.tan(hfov / 2), 0.5 * sp[2] / math.tan(vfov / 2))
+    for _ in range(24):                       # converges in 3-4; 24 is slack
+        pos, rot, fwd = _aim(az, el, d)
+        s = _overflow(pos, fwd)
+        if abs(s * MARGIN - 1.0) < 0.005:
+            break
+        d *= max(0.5, min(2.0, s * MARGIN))
+    pos, rot, fwd = _aim(az, el, d)
+    if _overflow(pos, fwd) > 1.0:
+        raise SystemExit(f"REFUSED: az {az} el {el} still crops the car "
+                         f"at d={d:.2f} — framing solve did not converge")
+    cam.location = pos
+    cam.rotation_euler = rot
     return d
 
 
