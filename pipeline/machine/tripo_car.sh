@@ -32,7 +32,7 @@
 #   polish    glass_polish              paint OFF the windows (5960->0 on the
 #                                       Golf), then paint_pbr sets the body
 #                                       PBR AFTER the last round trip —
-#                                       PAINT_PRESET=v31 (default, the
+#                                       PAINT_PRESET=studio (default, the
 #                                       owner's near-black studio look) or
 #                                       =premium (brief values + clearcoat)
 #                                       *** THE DELIVERABLE STOPS HERE ***
@@ -197,9 +197,15 @@ import json, struct, sys
 W = sys.argv[1]
 # the kit ships near-black (20-30/255) which is invisible behind a 0.353
 # tint; these read as a real dark cabin through the glass
-T = {"Int_Floor":30,"Int_Dash":52,"Int_Console":56,"Int_SeatFR_C":64,
-     "Int_SeatFR_B":60,"Int_SeatFR_H":66,"Int_SeatFL_C":64,"Int_SeatFL_B":60,
-     "Int_SeatFL_H":66,"Int_BenchC":58,"Int_BenchB":56,"Int_Wheel":40}
+# TONED DOWN 2026-08-29. The first values (52-66) were calibrated against
+# crinkled glass; once glass_smooth flattened the panes and the paint went
+# to the studio preset, the cabin read as pale slabs floating behind clean
+# glazing. A real cabin is much darker than its own paint.
+T = {"Int_Floor":22,"Int_Dash":36,"Int_Console":38,"Int_SeatFR_C":44,
+     "Int_SeatFR_B":41,"Int_SeatFR_H":45,"Int_SeatFL_C":44,"Int_SeatFL_B":41,
+     "Int_SeatFL_H":45,"Int_BenchC":40,"Int_BenchB":38,"Int_Wheel":26,
+     "Int_SeatFR_BolR":38,"Int_SeatFR_BolL":38,
+     "Int_SeatFL_BolR":38,"Int_SeatFL_BolL":38}
 p = f"{W}/s14_interior.glb"
 d = open(p,"rb").read(); ln = struct.unpack("<I", d[12:16])[0]
 j = json.loads(d[20:20+ln]); rest = d[20+ln:]
@@ -231,7 +237,7 @@ if stage polish; then
   # roughness survived (those are core, not extensions), so the log read
   # as a success with half the edit missing. Preset is the owner's, by eye.
   python3 -u "$R/machine/paint_pbr.py" "$W/s15_tangented.glb" "$W/s15_paint.glb" \
-    --preset "${PAINT_PRESET:-v31}"
+    --preset "${PAINT_PRESET:-studio}"
   # AND THE NORMAL-MAP SCALE HAS TO BE RE-APPLIED HERE, for the same reason.
   # The nmap stage sets normalTexture.scale 0.35 at s13 and the interior and
   # polish stages round-trip the file through trimesh, which drops it — the
@@ -255,7 +261,7 @@ if nt is not None and "scale" not in nt:
                      "a later round trip is eating it")
 print(f"CAR_FINAL carpaint verified: {json.dumps(m[0])}")
 PYEOF
-  echo "CAR_FINAL.glb = polished output, paint preset ${PAINT_PRESET:-v31}, "\
+  echo "CAR_FINAL.glb = polished output, paint preset ${PAINT_PRESET:-studio}, "\
 "nmap ${NMAP_SCALE:-0.35}"
 fi
 
@@ -303,7 +309,7 @@ if stage render; then
   mark render
   rm -rf "$W/renders"; mkdir -p "$W/renders"
   SHOW_SAMPLES=${SHOW_SAMPLES:-54} blender -b --python "$R/machine/showroom.py" -- \
-    "$W/CAR_FINAL.glb" "$W/renders" beauty,clay,matid
+    "$W/CAR_FINAL.glb" "$W/renders" "${SHOW_MODES:-beauty,clay,matid}"
 fi
 
 echo "TRIPO_CAR_DONE $(date -u +%H:%M:%S) — deliverable: $W/CAR_FINAL.glb"

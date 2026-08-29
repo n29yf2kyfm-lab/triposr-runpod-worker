@@ -47,6 +47,28 @@ def yf(f):
     return GY + f * H
 
 
+def rbox(name, x0, x1, y0, y1, z0, z1, col, rough=0.9, soft=10):
+    """A ROUNDED box. Upholstery has no sharp arrises, and the first pass
+    built every seat as a hard-edged slab — through the glass that read as
+    packing crates rather than a cabin, which is most of why the owner said
+    the interior looked wrong even after the lean and the wheel axis were
+    fixed. Subdivide, Taubin-smooth (volume preserving, so corners round
+    without the part collapsing), then rescale back to the asked-for extents
+    because smoothing shrinks it."""
+    ext = np.array([x1 - x0, y1 - y0, z1 - z0], float)
+    b = trimesh.creation.box(extents=ext)
+    for _ in range(3):
+        b = b.subdivide()
+    trimesh.smoothing.filter_taubin(b, lamb=0.6, nu=-0.62, iterations=soft)
+    cur = b.extents.copy()
+    cur[cur < 1e-9] = 1.0
+    b.apply_scale(ext / cur)
+    b.apply_translation(np.array([(x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2])
+                        - b.bounds.mean(axis=0))
+    parts.append((name, b, col, rough))
+    return b
+
+
 # cabin floor
 box("Int_Floor", -1.15, 1.05, yf(0.19), yf(0.225), -0.62, 0.62, [20, 20, 22])
 # dashboard: full-width block with a raked top
@@ -58,8 +80,18 @@ box("Int_Console", -0.10, 0.78, yf(0.225), yf(0.38), -0.11, 0.11, [27, 27, 30])
 # front seats (cushion + backrest + headrest), both sides
 for z in (0.36, -0.36):
     tag = "R" if z > 0 else "L"
-    box(f"Int_SeatF{tag}_C", -0.12, 0.38, yf(0.30), yf(0.40), z - 0.235, z + 0.235, [30, 30, 33])
+    rbox(f"Int_SeatF{tag}_C", -0.12, 0.38, yf(0.30), yf(0.40),
+         z - 0.235, z + 0.235, [30, 30, 33])
+    # SIDE BOLSTERS. A flat cushion has no shoulder, so the seat reads as a
+    # plank end-on; two raised rails give it the shape the eye expects.
+    for sgn in (1, -1):
+        rbox(f"Int_SeatF{tag}_Bol{'R' if sgn > 0 else 'L'}",
+             -0.10, 0.34, yf(0.335), yf(0.425),
+             z + sgn * 0.185, z + sgn * 0.245, [27, 27, 30], soft=8)
     br = trimesh.creation.box(extents=[0.12, 0.46, 0.46])
+    for _ in range(3):
+        br = br.subdivide()
+    trimesh.smoothing.filter_taubin(br, lamb=0.6, nu=-0.62, iterations=10)
     # SIGN: +12 leans the TOP of the backrest toward -x (the tail), which is
     # how a seat reclines. -12 tipped every seat FORWARD, and the owner spotted
     # it through the glass before any measurement did ("interior build wrong,
@@ -68,10 +100,14 @@ for z in (0.36, -0.36):
     br.apply_transform(trimesh.transformations.rotation_matrix(np.radians(12), [0, 0, 1]))
     br.apply_translation([-0.16, yf(0.55), z])
     parts.append((f"Int_SeatF{tag}_B", br, [30, 30, 33], 0.9))
-    box(f"Int_SeatF{tag}_H", -0.28, -0.16, yf(0.70), yf(0.79), z - 0.11, z + 0.11, [26, 26, 29])
+    rbox(f"Int_SeatF{tag}_H", -0.28, -0.16, yf(0.70), yf(0.79),
+         z - 0.11, z + 0.11, [26, 26, 29], soft=12)
 # rear bench + backrest
-box("Int_BenchC", -0.95, -0.50, yf(0.30), yf(0.40), -0.60, 0.60, [30, 30, 33])
+rbox("Int_BenchC", -0.95, -0.50, yf(0.30), yf(0.40), -0.60, 0.60, [30, 30, 33])
 br = trimesh.creation.box(extents=[0.12, 0.52, 1.20])
+for _ in range(3):
+    br = br.subdivide()
+trimesh.smoothing.filter_taubin(br, lamb=0.6, nu=-0.62, iterations=10)
 br.apply_transform(trimesh.transformations.rotation_matrix(np.radians(15), [0, 0, 1]))
 br.apply_translation([-1.02, yf(0.56), 0.0])
 parts.append(("Int_BenchB", br, [30, 30, 33], 0.9))
