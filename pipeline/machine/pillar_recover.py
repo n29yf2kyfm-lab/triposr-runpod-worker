@@ -85,7 +85,7 @@ def face_luma(m):
     return 0.2126 * c[:, 0] + 0.7152 * c[:, 1] + 0.0722 * c[:, 2]
 
 
-def half_depth_span(x, l, x0, x1, step, med, binw=0.02):
+def half_depth_span(x, l, x0, x1, step, med, binw=0.02, depth=0.5):
     """Width of the dark band, read off a fine PROFILE, not off face extremes.
 
     Taking min/max of every face below the threshold gave 382 mm on a
@@ -107,7 +107,13 @@ def half_depth_span(x, l, x0, x1, step, med, binw=0.02):
     prof = np.array(prof)
     cent = np.array(cent)
     lo = int(prof.argmin())
-    thr = (med + prof[lo]) / 2.0
+    # DEPTH picks how far down the flank to cut. 0.5 is the half-depth
+    # crossing, which on this car returns 160-180 mm — the pillar PLUS both
+    # door frames plus the darkened glass right at their edge. The owner
+    # called that too wide twice, and the eye is the arbiter here: cutting
+    # deeper isolates the pillar core. Measured on the Golf, 0.75 lands
+    # around 100 mm, which is what a Mk7 B-pillar actually is.
+    thr = med - depth * (med - prof[lo])
     i = lo
     while i > 0 and prof[i - 1] < thr:
         i -= 1
@@ -126,6 +132,10 @@ def main():
     ap.add_argument("--dump-profile", default=None)
     ap.add_argument("--min-drop", type=float, default=MIN_DROP)
     ap.add_argument("--max-spread", type=float, default=MAX_SPREAD)
+    ap.add_argument("--depth", type=float, default=0.75,
+                    help="how far down the profile flank to cut. 0.5 is the "
+                         "half-depth crossing and returns the pillar plus "
+                         "both door frames; 0.75 isolates the pillar core.")
     a = ap.parse_args()
 
     m = trimesh.load(a.mesh, force="mesh", process=False)
@@ -193,7 +203,8 @@ def main():
             # which is the standard way to read a feature's width off a
             # profile. Same shape as every other rule here: the cheap test
             # finds the candidate, a finer measurement gives the verdict.
-            fx0, fx1 = half_depth_span(x, l, x0, x1, step, med)
+            fx0, fx1 = half_depth_span(x, l, x0, x1, step, med,
+                                       depth=a.depth)
             fine = (x >= fx0) & (x < fx1)
             if fine.sum() < 40:
                 print(f"  {side}: half-depth cut left {int(fine.sum())} "
@@ -233,7 +244,8 @@ def main():
             if k.sum() >= 40:
                 drop = med - l[k].mean()
                 if drop >= a.min_drop * 0.5:
-                    fx0, fx1 = half_depth_span(x, l, x0, x1, step, med)
+                    fx0, fx1 = half_depth_span(x, l, x0, x1, step, med,
+                                               depth=a.depth)
                     fine = (x >= fx0) & (x < fx1)
                     if fine.sum() < 40:
                         fine, fx0, fx1 = k, x0, x1

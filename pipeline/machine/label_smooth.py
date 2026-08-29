@@ -75,7 +75,7 @@ def main():
     ap.add_argument("out")
     ap.add_argument("--iters", type=int, default=3)
     ap.add_argument("--majority", type=float, default=0.60)
-    ap.add_argument("--ring", type=int, default=2, choices=(1, 2),
+    ap.add_argument("--ring", type=int, default=2, choices=(1, 2, 3),
                     help="neighbourhood size. RING 1 IS TOO WEAK and the "
                          "reason is arithmetic: a triangle has three "
                          "neighbours, and along a one-face-wide tooth two of "
@@ -96,7 +96,7 @@ def main():
     adj = m.face_adjacency
     print(f"{len(m.faces)} faces, {len(adj)} adjacency pairs")
     nbr = adj
-    if a.ring == 2:
+    if a.ring >= 2:
         nf_ = len(m.faces)
         import scipy.sparse as sp
         A = sp.coo_matrix(
@@ -104,10 +104,31 @@ def main():
              (np.concatenate([adj[:, 0], adj[:, 1]]),
               np.concatenate([adj[:, 1], adj[:, 0]]))),
             shape=(nf_, nf_)).tocsr()
-        A2 = ((A + A @ A) > 0).tocoo()
-        keep = A2.row < A2.col
-        nbr = np.stack([A2.row[keep], A2.col[keep]], 1)
-        print(f"  2-ring neighbourhood: {len(nbr)} pairs "
+        P = (A + A @ A) > 0
+        if a.ring >= 3:
+            # RING 3 IS BUILT ONLY NEAR THE BOUNDARY. A full 3-ring over
+            # 1.46M faces is ~27 neighbours each, ~39M pairs, and this
+            # container OOM-kills a single process well below free RAM (a
+            # recorded limit — a proximity query over ~1M centroids was
+            # killed at 12.7 GB). The filter can only ever change faces at
+            # a label boundary anyway, so restrict the wide neighbourhood
+            # to faces within a few rings of one and leave the rest at
+            # ring 2. Same answer, a fraction of the memory.
+            d0 = lab[adj[:, 0]] != lab[adj[:, 1]]
+            seed = np.zeros(nf_, bool)
+            seed[adj[d0].ravel()] = True
+            grow = seed.copy()
+            for _ in range(4):
+                grow = grow | (A @ grow.astype(np.int8) > 0)
+            keepf = np.where(grow)[0]
+            print(f"  boundary neighbourhood: {len(keepf)} faces "
+                  f"({100*len(keepf)/nf_:.1f}% of the mesh)")
+            mask = sp.diags(grow.astype(np.int8))
+            P = (P + (mask @ (P @ A) @ mask)) > 0
+        P = P.tocoo()
+        keep = P.row < P.col
+        nbr = np.stack([P.row[keep], P.col[keep]], 1)
+        print(f"  {a.ring}-ring neighbourhood: {len(nbr)} pairs "
               f"({2*len(nbr)/nf_:.1f} neighbours per face)")
     n0, L0 = boundary(m, lab, adj)
     before = {int(k): int(v) for k, v in
