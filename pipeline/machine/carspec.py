@@ -52,6 +52,7 @@ Run: python3 carspec.py extract <ref.glb> <profile.json> [--name NAME]
 """
 import argparse
 import json
+import re
 import sys
 
 import numpy as np
@@ -60,6 +61,91 @@ import trimesh
 GLASSY = ("glass", "window", "windscreen", "screen", "glazing")
 TYREY = ("tyre", "tire", "rubber", "pneu")
 PAINTY = ("paint", "carpaint", "coloured", "body")
+
+
+class CarSpec:
+    """Per-car specification file — the OTHER half of this module.
+
+    RESTORED 2026-08-29. The reference-profile tool below was written into
+    this file and SILENTLY REPLACED this class, which ten stages import
+    (canon, canon_dims, fit_spec, wheel_stage, glass_stage, glass_presplit,
+    aperture_clean, surface_stage, semantic_rebind, body_align). Every one
+    of them died at `ImportError: cannot import name 'CarSpec'` the next
+    time a car went through the chain from stage one — found by running it,
+    not by reading it, which is this repo's whole point.
+
+    The two live together deliberately: the class is the LIBRARY (published
+    dimensions, tyre fitment, label conventions, read by stage code) and the
+    `extract`/`check` CLI below is the TOOL (measures a real asset). They
+    describe the same car from opposite directions and neither is a
+    replacement for the other.
+
+    The machine is CAR-AGNOSTIC SOFTWARE. Everything that describes a
+    particular vehicle lives in a JSON spec file, never in stage code.
+    Stage code reads the spec; anything the spec does not provide is
+    MEASURED from the geometry and tagged "approximate" in the stage's QC
+    output (rule: approximate data is never presented as verified OEM data).
+
+    Spec format — every dimension is {"value": <num>, "source": <str>} so
+    the number carries its provenance; omit a key entirely when unknown.
+
+        {"identity":   {"make": ..., "model": ..., "note": ...},
+         "dimensions": {"length_m": {...}, "width_m": {...},
+                        "height_m": {...}, "wheelbase_m": {...},
+                        "track_front_m": {...}, "track_rear_m": {...}},
+         "tyre":       {"spec": "175/65R15", "source": ...},
+         "labels":     {"body": "carpaint", "wheel_strip_prefixes": [...]},
+         "expect":     {"axle_x": {...}, "tolerance_m": 0.06}}
+
+    Use: spec = CarSpec.load("specs/toyota_yaris_xp130.json")
+         spec.dim("track_front_m")   -> (value, source) or (None, None)
+         spec.tyre()                 -> dict of tyre dims + provenance
+    """
+
+    def __init__(self, data, path="<inline>"):
+        self.data = data
+        self.path = path
+
+    @classmethod
+    def load(cls, path):
+        with open(path) as f:
+            return cls(json.load(f), path)
+
+    @classmethod
+    def empty(cls, note="no spec supplied — all values measured"):
+        return cls({"identity": {"note": note}}, "<none>")
+
+    def identity(self):
+        return self.data.get("identity", {})
+
+    def dim(self, key):
+        d = self.data.get("dimensions", {}).get(key)
+        if d is None:
+            return None, None
+        return float(d["value"]), d.get("source", "spec file (source untagged)")
+
+    def label(self, key, default):
+        return self.data.get("labels", {}).get(key, default)
+
+    def expect(self):
+        return self.data.get("expect", {})
+
+    def tyre(self):
+        """Parse a tyre spec string like '175/65R15' into metric dims."""
+        t = self.data.get("tyre", {})
+        s = t.get("spec")
+        if not s:
+            return None
+        m = re.match(r"^\s*(\d{3})\s*/\s*(\d{2})\s*R?\s*(\d{2})\s*$", s)
+        if not m:
+            raise ValueError(f"unparseable tyre spec {s!r} in {self.path}")
+        w = int(m.group(1)) / 1000.0
+        aspect = int(m.group(2)) / 100.0
+        rim_d = int(m.group(3)) * 0.0254
+        return {"spec": s, "source": t.get("source", "spec file"),
+                "width_m": w, "aspect": aspect, "rim_d_m": rim_d,
+                "radius_m": rim_d / 2 + w * aspect,
+                "rim_r_m": rim_d / 2}
 
 
 def world_parts(path):
