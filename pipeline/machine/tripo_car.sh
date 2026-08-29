@@ -29,6 +29,10 @@
 #                                       depth 0.8 (100mm, both flanks)
 #   boundary  seg_boundary              stencils off — measured a LOSS with
 #                                       them on: 4,484 edges vs 3,297
+#   glasssmooth glass_smooth            flatten the panes BEFORE they become
+#                                       a primitive (rms 42->10 per-mille);
+#                                       crinkled transparent glass renders as
+#                                       mirror shards = "dirty windows"
 #   assemble  seg_assemble
 #   finish    blender_finish            weld + weighted normals
 #   normals   normals_fix               NORMAL verified present
@@ -42,6 +46,10 @@
 #                                       owner's near-black studio look) or
 #                                       =premium (brief values + clearcoat)
 #                                       *** THE DELIVERABLE STOPS HERE ***
+#   level     level_car                 all four tyre CONTACT PATCHES on the
+#                                       ground. The lowest VERTEX is a
+#                                       splitter or the interior shell, never
+#                                       the ground plane
 #   render    showroom.py               8 views, glTF-compliant culling
 #
 # OPTIONAL, OFF BY DEFAULT (run with --with-surgical / --with-clean):
@@ -89,7 +97,7 @@ mkdir -p "$W"
 cd "$W"
 
 stage() {  # stage <name> -> 0 if it should run
-  local order="canon deyaw nose views masks lamps project refine smooth pillar boundary assemble finish normals tangents nmap interior polish surgical clean render"
+  local order="canon deyaw nose views masks lamps project refine smooth pillar boundary glasssmooth assemble finish normals tangents nmap interior polish level surgical clean render"
   local seen=0
   for s in $order; do
     [ "$s" = "$FROM" ] && seen=1
@@ -187,9 +195,33 @@ if stage boundary; then
     "$W/s2b_nose.glb" "$W/car_p.npy" "$W/car_b.npy"
 fi
 
+if stage glasssmooth; then
+  mark glasssmooth
+  # FLATTEN THE GLAZING BEFORE IT BECOMES A PRIMITIVE. Generated glass
+  # carries the same surface noise as the panels, and because the material
+  # is genuinely transparent the studio rig turns every noise facet into a
+  # mirror shard - which is what "the windows look dirty" is. Measured on
+  # the previous Golf: per-pane fit rms 42.0 -> 10.5, 36.7 -> 9.2,
+  # 49.6 -> 12.4 per-mille.
+  #
+  # THIS STAGE EXISTED AND WAS NEVER CALLED. Before today the ONLY mention
+  # of glass_smooth in this driver was a COMMENT, in the interior tone
+  # block, asserting "once glass_smooth flattened the panes" - documenting
+  # a stage that does not run. It was run by hand on one car, the tone
+  # table it justified was wired in, and the stage itself was not.
+  if python3 -u "$R/machine/glass_smooth.py" "$W/s2b_nose.glb" "$W/car_b.npy" \
+       "$W/s8_glass.glb" 0.75; then
+    cp "$W/s8_glass.glb" "$W/s8_in.glb"
+  else
+    echo "glass smooth: refused — carrying the unsmoothed mesh forward"
+    cp "$W/s2b_nose.glb" "$W/s8_in.glb"
+  fi
+fi
+[ -f "$W/s8_in.glb" ] || cp "$W/s2b_nose.glb" "$W/s8_in.glb"
+
 if stage assemble; then
   mark assemble
-  python3 -u "$R/trellis/seg_assemble.py" "$W/s2b_nose.glb" "$W/car_b.npy" \
+  python3 -u "$R/trellis/seg_assemble.py" "$W/s8_in.glb" "$W/car_b.npy" \
     "$W/s9_materialised.glb"
 fi
 
@@ -321,6 +353,23 @@ print(f"CAR_FINAL carpaint verified: {json.dumps(m[0])}")
 PYEOF
   echo "CAR_FINAL.glb = polished output, paint preset ${PAINT_PRESET:-studio}, "\
 "nmap ${NMAP_SCALE:-0.35}"
+fi
+
+if stage level; then
+  mark level
+  # ALL FOUR TYRES ON THE GROUND. Nothing in this chain had ever done it:
+  # deyaw fixes YAW, nose_fix resolves the 180 AMBIGUITY, and PITCH was
+  # corrected by nothing at all. The car shipped 2026-08-29 measured 149.6
+  # mm nose-up at the front axle - 3.31 degrees - with every gate green,
+  # because every gate measures materials or labels and none asks where the
+  # car sits. Runs LAST: a rigid transform here cannot invalidate a label,
+  # a stencil band or the interior kit, all of which rotate with the body.
+  if python3 -u "$R/machine/level_car.py" "$W/CAR_FINAL.glb" \
+       "$W/CAR_LEVEL.glb" --report "$W/level.json"; then
+    mv "$W/CAR_LEVEL.glb" "$W/CAR_FINAL.glb"
+  else
+    echo "level: refused or already level — CAR_FINAL left as it was"
+  fi
 fi
 
 if [ "$WITH_SURGICAL" = "1" ] && stage surgical; then
