@@ -1,0 +1,22 @@
+{
+  "identity": {
+    "make": "mercedes-benz",
+    "model": "a-class",
+    "note": "W177 hatchback, pre-facelift (2018-2022) — the generation a UK 2019 plate carries. Source car for the generated mesh: white A180 Auto SE 1.3 petrol, Motorpoint dealer studio orbit, six views. Dims are published W177 5-door hatchback figures; trim-specific values (tyre size varies SE/Sport/AMG Line) are recorded as the SE fitment. Overhangs deliberately omitted — unverified, and this project does not fabricate vehicle metadata."
+  },
+  "dimensions": {
+    "length_m":      {"value": 4.419, "source": "published W177 hatchback"},
+    "width_m":       {"value": 1.796, "source": "published W177 hatchback, excl. mirrors"},
+    "height_m":      {"value": 1.440, "source": "published W177 hatchback"},
+    "wheelbase_m":   {"value": 2.729, "source": "published W177"},
+    "track_front_m": {"value": 1.567, "source": "published W177"},
+    "track_rear_m":  {"value": 1.547, "source": "published W177"}
+  },
+  "tyre": {"spec": "205/60R16", "source": "published A180 SE standard fitment"},
+  "labels": {
+    "input_body": "body",
+    "glass": "glass",
+    "wheel_strip_prefixes": ["wheel", "Wheel_Dark", "WHEEL_", "LINER_", "Arch_Cavity",
+                             "lib_tyre", "lib_rim", "lib_hub", "lib_disc", "lib_cal"]
+  }
+}
