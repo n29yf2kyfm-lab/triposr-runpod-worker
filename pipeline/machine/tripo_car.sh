@@ -307,15 +307,27 @@ T = {"Int_Floor":12,"Int_Dash":20,"Int_Console":21,"Int_SeatFR_C":25,
 p = f"{W}/s14_interior.glb"
 d = open(p,"rb").read(); ln = struct.unpack("<I", d[12:16])[0]
 j = json.loads(d[20:20+ln]); rest = d[20+ln:]
-n = 0
+# THE INVARIANT IS "every part the kit SHIPPED is in the glb", not a
+# constant. The old guard demanded >=17 of the 19-part roster and killed
+# the chain the first time the ceiling guard legitimately dropped four
+# unfittable rear parts on the A-Class (15 shipped, 15 present = correct).
+import numpy as np
+man = json.loads(bytes(np.load(f"{W}/int_kit.npz")["manifest"]).decode())
+want = {e["name"] for e in man}
+got = set()
 for m in j.get("materials", []):
-    t = T.get(m.get("name",""))
-    if t is None: continue
+    nm = m.get("name","")
+    t = T.get(nm)
+    if t is None or nm not in want: continue
     pbr = m.setdefault("pbrMetallicRoughness", {})
     pbr["baseColorFactor"] = [t/255, t/255, (t+3)/255, 1.0]
     pbr["roughnessFactor"] = 0.82; pbr["metallicFactor"] = 0.0
-    n += 1
-if n < 17: raise SystemExit(f"REFUSED: only {n} interior materials found")
+    got.add(nm)
+missing = want - got
+if missing:
+    raise SystemExit(f"REFUSED: kit shipped {sorted(missing)} but the glb "
+                     f"does not carry them")
+print(f"interior tones set on {len(got)}/{len(want)} shipped parts")
 js = json.dumps(j, separators=(",",":")).encode(); js += b" "*((4-len(js)%4)%4)
 open(p,"wb").write(b"glTF"+struct.pack("<II",2,12+8+len(js)+len(rest))
                    +struct.pack("<I",len(js))+b"JSON"+js+rest)
