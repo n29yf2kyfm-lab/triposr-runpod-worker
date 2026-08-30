@@ -331,7 +331,6 @@ print(f"interior tones set on {len(got)}/{len(want)} shipped parts")
 js = json.dumps(j, separators=(",",":")).encode(); js += b" "*((4-len(js)%4)%4)
 open(p,"wb").write(b"glTF"+struct.pack("<II",2,12+8+len(js)+len(rest))
                    +struct.pack("<I",len(js))+b"JSON"+js+rest)
-print(f"interior toned: {n} materials")
 PYEOF
 fi
 
