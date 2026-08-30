@@ -115,23 +115,49 @@ def measure(path, asset_id=""):
         return r
     lo, hi = v.min(axis=0), v.max(axis=0)
     ext = hi - lo
-    LA = 0 if ext[0] >= ext[2] else 2          # length axis (Y is always up)
-    WA = 2 if LA == 0 else 0
-    L, W, H = float(ext[LA]), float(ext[WA]), float(ext[1])
-    r.update(length_axis="xyz"[LA], L=L, W_over_L=W / L, H_over_L=H / L,
-             faces=int(len(allm.faces)))
+    # AXES BY EXTENT ORDER, up-sign by the greenhouse taper. The first
+    # version assumed Y is always up, and the entire mw1 Mercedes wave is
+    # authored length-on-Y (measured: extents [192, 474, 139]) — 50+ real
+    # cars read H/L 2.4 and were rejected as "not a car". A car is always
+    # length > width > height; nothing about which glTF axis carries which
+    # is trustworthy across a 1,044-asset library.
+    order = np.argsort(ext)[::-1]
+    LA, WA, UA = int(order[0]), int(order[1]), int(order[2])
+    L, W, H = float(ext[LA]), float(ext[WA]), float(ext[UA])
+    r.update(length_axis="xyz"[LA], up_axis="xyz"[UA], L=L,
+             W_over_L=W / L, H_over_L=H / L, faces=int(len(allm.faces)))
     if not (0.30 < W / L < 0.75 and 0.18 < H / L < 0.62):
         r["error"] = "proportions are not a car"
         return r
+    # up-SIGN: the roof is narrower than the door line (canon.py's test,
+    # validated on Yaris/Golf/A-Class). Score both signs, take the larger.
+    uf0 = (v[:, UA] - lo[UA]) / H
+
+    def taper(u):
+        top = v[(u > 0.86), WA]
+        mid = v[(u > 0.30) & (u < 0.60), WA]
+        if len(top) < 200 or len(mid) < 200:
+            return None
+        return (float(np.percentile(np.abs(mid - np.median(mid)), 97)) /
+                max(float(np.percentile(np.abs(top - np.median(top)), 97)),
+                    1e-9))
+
+    t_up, t_dn = taper(uf0), taper(1.0 - uf0)
+    if t_up is None or t_dn is None:
+        r["error"] = "cannot sample a greenhouse band"
+        return r
+    flip_up = t_dn > t_up
+    fy = (1.0 - uf0) if flip_up else uf0       # fraction from FLOOR
+    r["up_flipped"] = bool(flip_up)
+    r["up_margin"] = round(max(t_up, t_dn) / max(min(t_up, t_dn), 1e-9), 3)
 
     # ---- nose: the lower extreme end --------------------------------------
     lf = (v[:, LA] - lo[LA]) / L
-    end_a = float(v[lf < 0.06][:, 1].max())
-    end_b = float(v[lf > 0.94][:, 1].max())
+    end_a = float(fy[lf < 0.06].max())
+    end_b = float(fy[lf > 0.94].max())
     nose_at_min = end_a < end_b
     fz = lf if nose_at_min else 1.0 - lf       # fraction from NOSE
-    fy = (v[:, 1] - lo[1]) / H
-    r["nose_margin_H"] = round(abs(end_a - end_b) / H, 3)
+    r["nose_margin_H"] = round(abs(end_a - end_b), 3)
 
     # ---- roof profile -----------------------------------------------------
     prof = {}
@@ -149,7 +175,9 @@ def measure(path, asset_id=""):
         gfz = (gv[:, LA] - lo[LA]) / L
         if not nose_at_min:
             gfz = 1.0 - gfz
-        gfy = (gv[:, 1] - lo[1]) / H
+        gfy = (gv[:, UA] - lo[UA]) / H
+        if flip_up:
+            gfy = 1.0 - gfy
         r["glass_area_over_L2"] = round(float(g.area) / (L * L), 4)
         # UPPER-HALF FENCE: the mk7 control read beltline 0.194 H because
         # door glass extends INSIDE the door cavity — the pane below the
@@ -183,7 +211,9 @@ def measure(path, asset_id=""):
                     r["backlight_rejected"] = b
             # beltline off SIDE glass faces
             gc, gn = g.triangles_center, g.face_normals
-            gcy = (gc[:, 1] - lo[1]) / H
+            gcy = (gc[:, UA] - lo[UA]) / H
+            if flip_up:
+                gcy = 1.0 - gcy
             side = (np.abs(gn[:, WA]) > 0.6) & (gcy > 0.45)
             if side.sum() > 200:
                 sy = gcy[side]
@@ -212,8 +242,11 @@ def measure(path, asset_id=""):
     ty = [m for n, m in parts if any(t in n.lower() for t in TYREY)]
     if ty:
         t = np.vstack([np.asarray(m.vertices) for m in ty])
+        tfy = (t[:, UA] - lo[UA]) / H
+        if flip_up:
+            tfy = 1.0 - tfy
         r["tyre_radius_over_H"] = round(
-            float((np.percentile(t[:, 1], 99) - t[:, 1].min()) / 2 / H), 3)
+            float((np.percentile(tfy, 99) - tfy.min()) / 2), 3)
         # wheelbase from tyre x clusters
         txf = (t[:, LA] - lo[LA]) / L
         if not nose_at_min:
@@ -223,8 +256,7 @@ def measure(path, asset_id=""):
         if len(front) > 50 and len(rear) > 50:
             r["axle_front_frac"] = round(float(np.median(front)), 3)
             r["axle_rear_frac"] = round(float(np.median(rear)), 3)
-        floor = t[:, 1].min() - lo[1]
-        r["tyre_drop_mm_per_L"] = round(float(floor / L * 1000), 2)
+        r["tyre_drop_mm_per_L"] = round(float(tfy.min() * H / L * 1000), 2)
 
     # ---- material area shares --------------------------------------------
     shares = {}
