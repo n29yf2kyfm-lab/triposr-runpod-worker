@@ -1,0 +1,204 @@
+{
+ "_provenance": {
+  "built_from": "/tmp/lib/results.jsonl",
+  "rows_ok": 1021,
+  "rows_nose_confident": 971,
+  "nose_margin_min_H": 0.04,
+  "note": "population statistics over the approved catalogue, measured by libmeasure.py; every field carries its own N \u2014 a field with small N is weak evidence and gates should treat it so"
+ },
+ "W_over_L": {
+  "n": 1021,
+  "median": 0.446,
+  "p10": 0.4143,
+  "p90": 0.4877
+ },
+ "H_over_L": {
+  "n": 1021,
+  "median": 0.3339,
+  "p10": 0.2853,
+  "p90": 0.4179
+ },
+ "beltline_frac": {
+  "n": 829,
+  "median": 0.469,
+  "p10": 0.453,
+  "p90": 0.654
+ },
+ "rail_frac": {
+  "n": 829,
+  "median": 0.909,
+  "p10": 0.806,
+  "p90": 0.967
+ },
+ "glass_area_over_L2": {
+  "n": 884,
+  "median": 0.2276,
+  "p10": 0.1203,
+  "p90": 0.4156
+ },
+ "tyre_radius_over_H": {
+  "n": 687,
+  "median": 0.223,
+  "p10": 0.181,
+  "p90": 0.354
+ },
+ "scuttle_frac_from_nose": {
+  "n": 231,
+  "median": 0.316,
+  "p10": 0.214,
+  "p90": 0.408
+ },
+ "ws_base_frac_H": {
+  "n": 231,
+  "median": 0.626,
+  "p10": 0.456,
+  "p90": 0.673
+ },
+ "backlight_frac_from_nose": {
+  "n": 648,
+  "median": 0.956,
+  "p10": 0.924,
+  "p90": 0.978
+ },
+ "axle_front_frac": {
+  "n": 635,
+  "median": 0.2,
+  "p10": 0.175,
+  "p90": 0.2286
+ },
+ "axle_rear_frac": {
+  "n": 635,
+  "median": 0.789,
+  "p10": 0.7614,
+  "p90": 0.832
+ },
+ "roof_profile": {
+  "0.00": {
+   "n": 969,
+   "median": 0.534,
+   "p10": 0.462,
+   "p90": 0.589
+  },
+  "0.05": {
+   "n": 970,
+   "median": 0.59,
+   "p10": 0.528,
+   "p90": 0.635
+  },
+  "0.10": {
+   "n": 971,
+   "median": 0.631,
+   "p10": 0.573,
+   "p90": 0.666
+  },
+  "0.15": {
+   "n": 971,
+   "median": 0.655,
+   "p10": 0.596,
+   "p90": 0.687
+  },
+  "0.20": {
+   "n": 971,
+   "median": 0.677,
+   "p10": 0.619,
+   "p90": 0.709
+  },
+  "0.25": {
+   "n": 971,
+   "median": 0.706,
+   "p10": 0.658,
+   "p90": 0.762
+  },
+  "0.30": {
+   "n": 971,
+   "median": 0.775,
+   "p10": 0.709,
+   "p90": 0.844
+  },
+  "0.35": {
+   "n": 971,
+   "median": 0.873,
+   "p10": 0.769,
+   "p90": 0.927
+  },
+  "0.40": {
+   "n": 971,
+   "median": 0.939,
+   "p10": 0.842,
+   "p90": 0.976
+  },
+  "0.45": {
+   "n": 971,
+   "median": 0.976,
+   "p10": 0.882,
+   "p90": 0.992
+  },
+  "0.50": {
+   "n": 971,
+   "median": 0.989,
+   "p10": 0.896,
+   "p90": 0.999
+  },
+  "0.55": {
+   "n": 971,
+   "median": 0.995,
+   "p10": 0.893,
+   "p90": 1.0
+  },
+  "0.60": {
+   "n": 970,
+   "median": 0.9915,
+   "p10": 0.8938,
+   "p90": 1.0
+  },
+  "0.65": {
+   "n": 971,
+   "median": 0.984,
+   "p10": 0.887,
+   "p90": 0.998
+  },
+  "0.70": {
+   "n": 971,
+   "median": 0.969,
+   "p10": 0.865,
+   "p90": 0.995
+  },
+  "0.75": {
+   "n": 971,
+   "median": 0.935,
+   "p10": 0.83,
+   "p90": 0.996
+  },
+  "0.80": {
+   "n": 971,
+   "median": 0.894,
+   "p10": 0.781,
+   "p90": 0.999
+  },
+  "0.85": {
+   "n": 971,
+   "median": 0.85,
+   "p10": 0.745,
+   "p90": 0.972
+  },
+  "0.90": {
+   "n": 971,
+   "median": 0.801,
+   "p10": 0.704,
+   "p90": 0.944
+  },
+  "0.95": {
+   "n": 971,
+   "median": 0.736,
+   "p10": 0.638,
+   "p90": 0.863
+  }
+ },
+ "pillar_gap_width_frac": {
+  "n": 2828,
+  "median": 0.0143,
+  "p10": 0.0106,
+  "p90": 0.0354,
+  "note": "width of a side-glazing gap as a fraction of L; the population mixes B-pillars, C-pillars and label holes \u2014 use as a band, not an identity"
+ }
+}
