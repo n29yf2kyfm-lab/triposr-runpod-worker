@@ -7,14 +7,29 @@ bench, centre console, steering wheel (RHD — UK car), cabin floor. All
 positioned as fractions of the car's own measured frame, all dark matte
 with slight tonal separation so shapes read through tinted glass.
 
-Run: python3 interior_kit.py <car.glb> <out.npz>
+Run: python3 interior_kit.py <car.glb> <out.npz> [--spec specs/car.json]
+
+WITH --spec, cabin landmarks come from the spec's "cabin" section — which
+this project measures ONCE from a known-good LIBRARY asset of the same
+generation — and self-measurement is demoted to a printed cross-check.
+The rule is the owner's, stated twice now: take the measurements off the
+model that is known to be right, not off the patient.
 """
 import json
+import os
 import sys
 import numpy as np
 import trimesh
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from carspec import CarSpec
+
 CAR, OUT = sys.argv[1], sys.argv[2]
+SPEC = None
+for _i, _a in enumerate(sys.argv):
+    if _a == "--spec" and _i + 1 < len(sys.argv):
+        SPEC = CarSpec.load(sys.argv[_i + 1])
+CABIN = (SPEC.data.get("cabin") if SPEC else None) or {}
 
 sc = trimesh.load(CAR, force="scene")
 # body node by NAME first, then by MATERIAL name, then the largest mesh —
@@ -58,6 +73,12 @@ if _gl:
 if BELT is None:                       # no glazing to measure — fall back
     BELT, RAIL = GY + 0.64 * H, GY + 0.87 * H
     print("NOTE: no side glazing found; beltline ESTIMATED from car height")
+if "beltline_frac" in CABIN:
+    _sb = GY + float(CABIN["beltline_frac"]) * H
+    _sr = GY + float(CABIN.get("rail_frac", 0.92)) * H
+    print(f"beltline: spec (library-measured) {_sb:.3f} vs self-measured "
+          f"{BELT:.3f} ({1000*abs(_sb-BELT):.0f} mm apart)")
+    BELT, RAIL = _sb, _sr
 print(f"beltline {BELT:.3f}  roof rail {RAIL:.3f}  "
       f"visible band {1000*(RAIL-BELT):.0f} mm")
 
@@ -71,15 +92,34 @@ print(f"beltline {BELT:.3f}  roof rail {RAIL:.3f}  "
 # measured. A dashboard's front edge meets the base of the windscreen, so
 # measure that and hang the dash off it.
 SCUT = None
+L = XMAX - XMIN
 if _gl:
     _nc = _gl[0].triangles_center
-    _nose = _nc[_nc[:, 0] > 0.0]
+    # ABOVE-BELT CONSTRAINT (added 2026-08-30, A-Class). The old sample was
+    # "lowest 3% of nose-half glazing", which assumes every glass-labelled
+    # face at the nose is windscreen. On the A-Class the glass label carried
+    # low fragments near the nose and the mean landed at x +1.933 on a car
+    # whose real scuttle (measured from the library W177) is +0.99 — so the
+    # dash and wheel were built ON THE BONNET and rendered as black slabs.
+    # A windscreen base is never far below the beltline (library dip:
+    # 0.042 H), so only faces above BELT - 0.10 H may vote.
+    _nose = _nc[(_nc[:, 0] > 0.0) & (_nc[:, 1] > BELT - 0.10 * H)]
     if len(_nose) > 200:
         _lo = np.percentile(_nose[:, 1], 3)
         SCUT = float(_nose[_nose[:, 1] <= _lo][:, 0].mean())
 if SCUT is None:
-    SCUT = XMIN + 0.72 * (XMAX - XMIN)
+    SCUT = XMIN + 0.72 * L
     print("NOTE: no glazing to find the scuttle; ESTIMATED from length")
+if "scuttle_frac_from_nose" in CABIN:
+    _ss = XMAX - float(CABIN["scuttle_frac_from_nose"]) * L
+    print(f"scuttle: spec (library-measured) {_ss:.3f} vs self-measured "
+          f"{SCUT:.3f} ({1000*abs(_ss-SCUT):.0f} mm apart)")
+    SCUT = _ss
+elif not (XMIN + 0.55 * L <= SCUT <= XMIN + 0.82 * L):
+    # a scuttle outside 55-82% of length is not a scuttle on any hatchback
+    print(f"NOTE: self-measured scuttle {SCUT:.3f} is outside the plausible "
+          f"band — using 0.72 L")
+    SCUT = XMIN + 0.72 * L
 print(f"scuttle (windscreen base) x {SCUT:.3f}")
 
 parts = []
@@ -189,6 +229,45 @@ sw.apply_transform(trimesh.transformations.rotation_matrix(np.radians(90), [0, 1
 sw.apply_transform(trimesh.transformations.rotation_matrix(np.radians(24), [0, 0, 1]))
 sw.apply_translation([SCUT - 0.50, BELT - 0.04, 0.36])  # rim top ~BELT+145mm
 parts.append(("Int_Wheel", sw, [16, 16, 18], 0.6))
+
+# CEILING GUARD (added 2026-08-30). On the A-Class five rear parts were
+# built THROUGH the shell — headrests 220 mm out of the roof, the bench
+# backrest reading as a slab across the tailgate — because every part is
+# placed off BELT with constants calibrated on the Golf, and the A-Class
+# roofline falls away far faster behind the B-pillar (library profile:
+# 1.000 H at 60% of length -> 0.965 H at 85%). No constant survives that;
+# what survives is a fence: no part may finish above the shell that is
+# actually over it. Ceiling = max height of the body+glass shell over the
+# part's own footprint; a breaching part is LOWERED to 40 mm under it, and
+# a part that would sink uselessly below the beltline is DROPPED, printed
+# either way. A whole-model bbox test cannot do this job — the roof's
+# highest point is over the B-pillar, and a rear headrest can sit under
+# that number while standing proud of the roof that is actually above it.
+_shell = [cp] + ([_gl[0]] if _gl else [])
+_sv = np.vstack([np.asarray(s.vertices) for s in _shell])
+_kept = []
+for name, m, col, rough in parts:
+    b = m.bounds
+    pad = 0.06
+    inpr = _sv[(_sv[:, 0] > b[0][0] - pad) & (_sv[:, 0] < b[1][0] + pad) &
+               (_sv[:, 2] > b[0][2] - pad) & (_sv[:, 2] < b[1][2] + pad)]
+    if len(inpr) < 20:
+        print(f"  DROPPED {name}: no shell above its footprint — it is "
+              f"outside the car in plan view")
+        continue
+    ceiling = float(inpr[:, 1].max()) - 0.040
+    top = float(b[1][1])
+    if top > ceiling:
+        drop = top - ceiling
+        if top - drop < BELT + 0.02 and name != "Int_Floor":
+            print(f"  DROPPED {name}: lowering {1000*drop:.0f} mm to clear "
+                  f"the roof would bury it below the beltline")
+            continue
+        m.apply_translation([0.0, -drop, 0.0])
+        print(f"  LOWERED {name} by {1000*drop:.0f} mm to sit under the "
+              f"local roof")
+    _kept.append((name, m, col, rough))
+parts = _kept
 
 out = {}
 manifest = []

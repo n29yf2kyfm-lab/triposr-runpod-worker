@@ -276,7 +276,7 @@ fi
 
 if stage interior; then
   mark interior
-  python3 -u "$R/machine/interior_kit.py" "$W/s13_nmap.glb" "$W/int_kit.npz"
+  python3 -u "$R/machine/interior_kit.py" "$W/s13_nmap.glb" "$W/int_kit.npz" --spec "$SPEC"
   python3 -c "
 import sys; sys.path.insert(0,'$R/machine')
 from premium import apply_interior
