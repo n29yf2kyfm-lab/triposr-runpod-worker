@@ -70,9 +70,17 @@ if _gl:
         _y = _c[_side][:, 1]
         BELT = float(np.percentile(_y, 2))
         RAIL = float(np.percentile(_y, 98))
+PRIORS = {}
+_pp = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                   "reference", "LIBRARY_PRIORS.json")
+if os.path.exists(_pp):
+    PRIORS = json.load(open(_pp))
 if BELT is None:                       # no glazing to measure — fall back
-    BELT, RAIL = GY + 0.64 * H, GY + 0.87 * H
-    print("NOTE: no side glazing found; beltline ESTIMATED from car height")
+    _bf = (PRIORS.get("beltline_frac") or {}).get("median", 0.64)
+    _rf = (PRIORS.get("rail_frac") or {}).get("median", 0.87)
+    BELT, RAIL = GY + _bf * H, GY + _rf * H
+    print(f"NOTE: no side glazing; beltline from "
+          f"{'library population' if PRIORS else 'hardcoded fallback'}")
 if "beltline_frac" in CABIN:
     _sb = GY + float(CABIN["beltline_frac"]) * H
     _sr = GY + float(CABIN.get("rail_frac", 0.92)) * H
@@ -229,6 +237,21 @@ sw.apply_transform(trimesh.transformations.rotation_matrix(np.radians(90), [0, 1
 sw.apply_transform(trimesh.transformations.rotation_matrix(np.radians(24), [0, 0, 1]))
 sw.apply_translation([SCUT - 0.50, BELT - 0.04, 0.36])  # rim top ~BELT+145mm
 parts.append(("Int_Wheel", sw, [16, 16, 18], 0.6))
+
+# LENGTH SCALING (added 2026-08-30): every furniture x-position above is
+# an absolute metre calibrated on the 4.284 m Golf. On a longer or shorter
+# car the cabin walks out of place — the A-Class is 4.419 m and its rear
+# bench sat 3% too far forward of where the body expects it. Positions
+# scale with L; part SIZES do not (a seat is a seat). SCUT-anchored parts
+# (dash, wheel) are already placed off a measured landmark and are exempt.
+_S = (XMAX - XMIN) / 4.284
+if abs(_S - 1.0) > 0.005:
+    for _name, _m, _c, _r in parts:
+        if _name in ("Int_Dash", "Int_Wheel"):
+            continue
+        _cx = float(_m.bounds.mean(axis=0)[0])
+        _m.apply_translation([(_S - 1.0) * _cx, 0.0, 0.0])
+    print(f"furniture x-positions scaled by L/4.284 = {_S:.3f}")
 
 # CEILING GUARD (added 2026-08-30). On the A-Class five rear parts were
 # built THROUGH the shell — headrests 220 mm out of the roof, the bench

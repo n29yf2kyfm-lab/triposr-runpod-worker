@@ -100,7 +100,7 @@ mkdir -p "$W"
 cd "$W"
 
 stage() {  # stage <name> -> 0 if it should run
-  local order="canon deyaw nose despike views masks lamps project refine smooth pillar boundary glasssmooth assemble finish normals tangents nmap interior polish level surgical clean render"
+  local order="canon deyaw nose despike views masks lamps project refine smooth pillar boundary glasssmooth assemble finish normals tangents nmap interior polish level verify surgical clean render"
   local seen=0
   for s in $order; do
     [ "$s" = "$FROM" ] && seen=1
@@ -428,6 +428,19 @@ from respray_gltf import respray
 hexcol = open('$W/bodyhex.txt').read().strip()
 respray('$W/s14_surgical.glb', '$W/CAR_FINAL.glb', ['carpaint'], hexcol)
 print('clean respray at', hexcol)"
+fi
+
+if stage verify; then
+  mark verify
+  # THE REFEREE: measure the deliverable with the SAME instrument that
+  # measured the 1,044-car library, and hold it against the spec and the
+  # population priors. Reports, never blocks — every automated audit here
+  # is a candidate finder; the render plus the owner's eye is the verdict.
+  # Born of two shipped defects no per-stage gate saw: a car 150 mm in the
+  # air, and a dashboard on a bonnet. First run caught a third: the
+  # generated A-Class rear roof at station 0.90 sits at 0.822 H against
+  # the library W177's 0.975 H.
+  python3 -u "$R/machine/verify_car.py" "$W/CAR_FINAL.glb"     --spec "$SPEC" --out "$W/VERDICT.json" || true
 fi
 
 if stage render; then
