@@ -17,6 +17,47 @@ import os
 import time
 
 
+def _cudnn_probe():
+    """Disable cuDNN in THIS process if this host's cuDNN cannot initialise.
+
+    train.sh runs a GPU preflight that, on the v16 host, hit
+    CUDNN_STATUS_NOT_INITIALIZED three times, proved the GPU could still
+    convolve with cuDNN off, set torch.backends.cudnn.enabled = False -- and
+    then exited, because it is a separate python heredoc. Nothing carried
+    over. Training started here with cuDNN enabled again and would have died
+    on its first convolution, an hour of setup and materialise after launch,
+    with the preflight having correctly diagnosed the exact problem.
+
+    So the process that trains does its own probe. A tiny conv on the device;
+    if cuDNN raises, fall back to native kernels for the run. Slower, but a
+    slow run that finishes beats a fast one that never starts. The env var is
+    for forcing the fallback when a host is known to be bad.
+    """
+    import torch
+    if os.environ.get("DAMAGE_CUDNN_DISABLE") == "1":
+        torch.backends.cudnn.enabled = False
+        print("cuDNN DISABLED by DAMAGE_CUDNN_DISABLE=1")
+        return
+    if not torch.cuda.is_available():
+        return
+    try:
+        x = torch.randn(1, 3, 32, 32, device="cuda")
+        w = torch.randn(4, 3, 3, 3, device="cuda")
+        torch.nn.functional.conv2d(x, w)
+        torch.cuda.synchronize()
+        print("cuDNN probe OK")
+    except RuntimeError as e:
+        if "cuDNN" not in str(e) and "CUDNN" not in str(e):
+            raise
+        torch.backends.cudnn.enabled = False
+        print(f"cuDNN probe FAILED ({str(e)[:80]}); "
+              f"training with cuDNN disabled for this run")
+        x = torch.randn(1, 3, 32, 32, device="cuda")
+        w = torch.randn(4, 3, 3, 3, device="cuda")
+        torch.nn.functional.conv2d(x, w)          # must work now, or die here
+        torch.cuda.synchronize()
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--data", required=True, help="output of prepare_data.py")
@@ -52,6 +93,8 @@ def main():
         raise SystemExit(
             "--skip-train without --weights would export an untrained model. "
             "Pass the checkpoint to export.")
+
+    _cudnn_probe()
 
     from rfdetr import RFDETRBase, RFDETRLarge
     Model = RFDETRBase if args.model == "base" else RFDETRLarge
