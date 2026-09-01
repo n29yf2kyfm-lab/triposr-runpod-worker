@@ -42,7 +42,60 @@ CLASS_MAP = {
     "rear-windscreen-damage": "shattered_glass",
     "missing part": "missing_part", "missing_part": "missing_part",
     "broken part": "missing_part",
+
+    # ---- RECOVERED 2026-09-01 ------------------------------------------
+    # An audit of the 41 manifest datasets found 35 of 59 source class
+    # strings reaching no target and being DELETED at merge, along with any
+    # image left with no surviving box. These are the ones whose meaning is
+    # unambiguous; the junk below is left unmapped on purpose.
+    #
+    # Lookup is already .lower()'d by both callers, so only lower-case keys
+    # are needed here -- an earlier reading of this file claimed a
+    # case-sensitivity bug and was wrong.
+
+    # gross body damage -> the existing structural bucket
+    "broken": "missing_part", "broken_part": "missing_part",
+    "break": "missing_part", "deframe": "missing_part",
+    "missing": "missing_part",
+    "crush": "deformation",
+
+    # glass. "shatter" and "glass-broken" are the same event as the mapped
+    # "glass shatter"; the three Glass-*-crack strings are windscreen cracks,
+    # which belong with crack rather than with a shattered pane.
+    "shatter": "shattered_glass", "broken_glass": "shattered_glass",
+    "glass-broken": "shattered_glass",
+    "glass-large-crack": "crack", "glass-small-crack": "crack",
+    "glass-spider-crack": "crack",
+
+    "broken_headlight": "lamp_damage",
+
+    # corrosion, in the several vocabularies the sources use. "rost" is
+    # German. The three named corrosion morphologies are all rust to us.
+    "rost": "rust", "corrosion-detection": "rust",
+    "copper corrosion": "rust", "crevice corrosion": "rust",
+    "pitting corrosion": "rust", "uniform corrosion": "rust",
+
+    "flaking": "paint_chip",
+    "dent--1": "dent",
+    # uniud-g3oa7/scratch-detection: "Defect" is that project's only class
+    # and the project is a scratch dataset.
+    "defect": "scratch",
 }
+
+# DELIBERATELY NOT MAPPED, so the unmapped report stays a real signal:
+#   object, doggie, 0, 1, 2   -- junk or unlabelled placeholder classes
+#   non-corrosion             -- a NEGATIVE class; merge() deletes images with
+#                                no positive box, so it cannot be expressed here
+#   spall                     -- concrete spalling (universita-di-pisa), and
+#                                that project is off-domain anyway
+#   misalignment, dislocation, disalocation, separation
+#                             -- PANEL GAP. Real data (~7,900 images across 4
+#                                datasets) and a class we want, but adding it
+#                                is a vocabulary change from 6 classes to 7:
+#                                it shifts every class id, invalidates the
+#                                trained weights and the fitted per-class
+#                                thresholds. Kept out of this change so the
+#                                recovery can be measured on its own.
 
 # Roboflow exports carry a supercategory row with no annotations; it is not a
 # class and must not consume a model index.

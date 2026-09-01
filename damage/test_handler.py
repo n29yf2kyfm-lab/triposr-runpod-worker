@@ -1530,6 +1530,84 @@ check("24f a missing classes.json is still None, not an exception",
       DET._labels_beside_model(os.path.join(_cjd, "absent.onnx")) is None)
 
 
+# ---- 25. ingest class map: recovered strings, and the junk left out ------
+#
+# An audit of the 41 manifest datasets found 35 of 59 source class strings
+# mapping to nothing and being deleted at merge, taking with them any image
+# left boxless. 14 on-domain datasets were affected. These tests pin the
+# recovered mappings, and -- just as importantly -- pin the ones deliberately
+# NOT recovered, so the unmapped report stays a real signal instead of being
+# quietly silenced by a future catch-all.
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                "training"))
+import prepare_data as PD          # noqa: E402
+
+_recovered = {
+    "broken": "missing_part", "break": "missing_part",
+    "deframe": "missing_part", "missing": "missing_part",
+    "broken_part": "missing_part",
+    "crush": "deformation",
+    "shatter": "shattered_glass", "broken_glass": "shattered_glass",
+    "glass-broken": "shattered_glass",
+    "glass-large-crack": "crack", "glass-spider-crack": "crack",
+    "broken_headlight": "lamp_damage",
+    "rost": "rust", "copper corrosion": "rust", "pitting corrosion": "rust",
+    "corrosion-detection": "rust",
+    "flaking": "paint_chip", "dent--1": "dent", "defect": "scratch",
+}
+_wrong = {k: (PD.CLASS_MAP.get(k), v) for k, v in _recovered.items()
+          if PD.CLASS_MAP.get(k) != v}
+check("25a every recovered source string maps to its intended class",
+      not _wrong, str(_wrong))
+
+# The callers lower() before lookup, so an upper-case key here would be dead
+# weight that never matches -- and would hide a real miss behind a false sense
+# of coverage.
+_upper = [k for k in PD.CLASS_MAP if k != k.lower()]
+check("25b CLASS_MAP keys are all lower-case, matching how it is looked up",
+      not _upper, str(_upper))
+
+# Both call sites must keep lowering, or every capitalised source string in
+# the corpus silently stops importing.
+for _mod, _path in (("prepare_data", "training/prepare_data.py"),
+                    ("merge_datasets", "training/merge_datasets.py")):
+    _src = open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                             _path)).read()
+    check(f"25c {_mod} still lower-cases before the CLASS_MAP lookup",
+          ".strip().lower()" in _src)
+
+_still_out = ["misalignment", "dislocation", "disalocation", "separation",
+              "object", "doggie", "0", "1", "2", "non-corrosion", "spall"]
+_leaked = [k for k in _still_out if k in PD.CLASS_MAP]
+check("25d panel-gap and junk strings stay unmapped, so the unmapped report "
+      "keeps working",
+      not _leaked, str(_leaked))
+check("25e the negative class is not mapped to a damage type",
+      "non-corrosion" not in PD.CLASS_MAP)
+# An ingest target does NOT have to be a runtime class -- class_map.py groups
+# the ingest vocabulary down to the six the detector trains on (paint_chip,
+# for instance, is folded into rust_paint). The real requirement is that every
+# ingest target survives that grouping and lands on something drawable. An
+# earlier version of this test compared the ingest vocabulary straight against
+# the runtime one, skipped the grouping layer, and failed on a class that was
+# handled correctly all along.
+import class_map as CM             # noqa: E402
+
+_unreachable = []
+for _t in sorted(set(PD.CLASS_MAP.values())):
+    _final = CM.resolve(_t) or _t
+    _grouped = CM.group_for(_final) if _final in CM.FINAL_CLASSES else None
+    if not (DET.DAMAGE_CLASS_MAP.get(_final)
+            or _final in DET.DAMAGE_CLASS_MAP.values()
+            or _grouped):
+        _unreachable.append((_t, _final, _grouped))
+check("25f every ingest target reaches a drawable class through the grouping",
+      not _unreachable, str(_unreachable))
+check("25g IGNORE and CLASS_MAP do not overlap",
+      not (set(PD.IGNORE) & set(PD.CLASS_MAP)),
+      str(set(PD.IGNORE) & set(PD.CLASS_MAP)))
+
+
 # ---- report ---------------------------------------------------------------
 print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")
 for f in FAILED:
