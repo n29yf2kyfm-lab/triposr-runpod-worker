@@ -230,8 +230,54 @@ def _paint_mismatch(spec, findings, prog):
         return findings, {"error": f"{type(e).__name__}: {e}"}
 
 
+def _attribute_panels(spec, findings, prog):
+    """Fill each finding's panel from the PANEL DETECTOR, not just the hint.
+
+    Both models already run on an inspection with DAMAGE_PANEL_MODEL set: one
+    finds damage, the other finds panels. Nothing joined them. A finding's
+    panel came from the capture grid alone, so an upload with no hints left
+    every finding on body_other -- and fusion then stacked every 3D pin on the
+    body_other anchor at the origin. "A dent, near-side rear door" is the
+    output an assessor prices; "a dent, somewhere" is not.
+
+    Returns (findings, block). The block reports how each finding got its
+    panel, because "40 findings, 31 placed by the detector, 6 needed a side
+    nobody supplied, 3 matched no panel" is diagnosable and a bare count is
+    not.
+    """
+    if not os.environ.get("DAMAGE_PANEL_MODEL"):
+        return findings, None
+    if not findings:
+        return findings, None
+    try:
+        import panel_attribution as pa
+        import panels as panels_mod
+        from PIL import Image
+        refs = _prepare_images(spec)
+        if not refs:
+            return findings, None
+        hints_list = spec.get("panel_hints") or []
+        prog.stage("locating_panels", images=len(refs))
+        per_image, sizes, hints = {}, {}, {}
+        for i, ref in enumerate(refs):
+            with Image.open(_overlay_source(ref)) as im:
+                im = im.convert("RGB")
+                sizes[i] = im.size
+                per_image[i] = panels_mod.detect_panels(im)
+            if i < len(hints_list):
+                hints[i] = hints_list[i]
+        findings, report = pa.attribute(findings, per_image, sizes, hints)
+        report["panels_detected"] = sum(len(v) for v in per_image.values())
+        return findings, report
+    except Exception as e:
+        # Never fail an inspection over panel placement: without it the
+        # findings are still correct, they are just less precisely located.
+        return findings, {"error": f"{type(e).__name__}: {e}"}
+
+
 def _inspect(spec, prog, vision_fn=None):
     findings, images, meta = _get_findings(spec, prog, vision_fn)
+    findings, panel_attr = _attribute_panels(spec, findings, prog)
     findings, paint = _paint_thickness(spec, findings, prog)
     findings, mismatch = _paint_mismatch(spec, findings, prog)
 
@@ -269,6 +315,8 @@ def _inspect(spec, prog, vision_fn=None):
         report["paint_thickness"] = paint
     if mismatch:
         report["paint_mismatch"] = mismatch
+    if panel_attr:
+        report["panel_attribution"] = panel_attr
     return report
 
 

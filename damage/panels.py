@@ -95,6 +95,19 @@ def side_of(hint):
     if not hint:
         return None
     h = str(hint).lower()
+    # UK trade shorthand, the same substitution taxonomy.py already makes.
+    # Without it a British capture hint -- "nearside rear door" is how an
+    # assessor writes it, and this product prices in GBP -- resolved to no
+    # side, and every sided panel silently degraded to body_other. The two
+    # modules disagreeing about the same vocabulary is worse than either
+    # convention alone.
+    #
+    # Deliberately NOT extended to driver/passenger: that mapping flips with
+    # the market, analyze.py resolves it against the vehicle's market before
+    # a hint reaches here, and guessing it in this function would put damage
+    # on the wrong flank of every left-hand-drive car.
+    h = h.replace("nearside", "left").replace("offside", "right")
+    h = h.replace("n/s", "left").replace("o/s", "right")
     if "left" in h:
         return "left"
     if "right" in h:

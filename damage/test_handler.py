@@ -1608,6 +1608,81 @@ check("25g IGNORE and CLASS_MAP do not overlap",
       str(set(PD.IGNORE) & set(PD.CLASS_MAP)))
 
 
+# ---- 26. panel attribution: the damage model meets the panel model --------
+#
+# Both models already ran on every inspection; nothing joined them. A
+# finding's panel came from the capture grid alone, so an upload with no
+# hints left every finding on body_other and fusion stacked every 3D pin on
+# the origin. These tests pin the join, and the two ways it must REFUSE:
+# without a known side, and without enough overlap.
+import panel_attribution as PA          # noqa: E402
+import panels as PNL                    # noqa: E402
+import fusion as FUS                    # noqa: E402
+
+_dent = [100, 100, 140, 140]
+_door = [0, 0, 600, 600]
+check("26a containment is damage-inside-panel, not IoU",
+      PA.containment(_dent, _door) == 1.0
+      and (40 * 40) / (40 * 40 + 600 * 600 - 40 * 40) < 0.01)
+check("26b the smaller containing panel wins, being more specific",
+      PA.best_panel(_dent, [{"name": "front_door", "box": _door},
+                            {"name": "rocker_panel",
+                             "box": [80, 80, 200, 200]}])[0]["name"]
+      == "rocker_panel")
+
+_P = {0: [{"name": "back_door", "box": [50, 150, 520, 700], "score": 0.88}]}
+_S = {0: (1000, 1000)}
+_f = {"image_index": 0, "bbox": [0.20, 0.30, 0.06, 0.06], "panel": "body_other",
+      "severity": 6, "damage_type": "dent", "damage_label": "Dent"}
+
+check("26c a pin sits on the origin before attribution",
+      FUS.build_pins([dict(_f)])["pins"][0]["anchor"] == [0.0, 0.0, 0.0])
+_out, _rep = PA.attribute([dict(_f)], _P, _S, hints={0: "rear left door"})
+_pin = FUS.build_pins(_out)["pins"][0]
+check("26d after attribution it names the real panel",
+      _out[0]["panel"] == "rear_left_door", _out[0]["panel"])
+check("26e ...and the 3D pin has moved off the origin",
+      _pin["anchor"] != [0.0, 0.0, 0.0], str(_pin["anchor"]))
+check("26f the route is recorded, not silently assumed",
+      _out[0]["panel_source"] == "detector"
+      and _rep["panel_from_detector"] == 1)
+
+check("26g a capture-grid panel is never overwritten",
+      PA.attribute([dict(_f, panel="hood")], _P, _S,
+                   hints={0: "rear left door"})[0][0]["panel"] == "hood")
+_ns, _nsr = PA.attribute([dict(_f)], _P, _S, hints={})
+check("26h with no side known, a sided panel degrades rather than guessing",
+      _ns[0]["panel"] == "body_other"
+      and _nsr["panel_needs_side_unknown"] == 1, str(_nsr))
+_far, _farr = PA.attribute(
+    [dict(_f, bbox=[0.90, 0.90, 0.05, 0.05])], _P, _S, hints={0: "rear left"})
+check("26i damage outside every panel matches none",
+      _far[0]["panel"] == "body_other" and _farr["no_panel_matched"] == 1)
+
+# UK trade shorthand: this product prices in GBP and taxonomy.py already
+# translates nearside/offside. panels.side_of not doing the same silently
+# dropped every British hint to body_other.
+check("26j UK nearside/offside resolve to a side",
+      [PNL.side_of(h) for h in ("nearside rear door", "offside wing",
+                                "n/s rear", "o/s door")]
+      == ["left", "right", "left", "right"])
+check("26k driver/passenger stay unresolved, being market-dependent",
+      PNL.side_of("driver door") is None
+      and PNL.side_of("passenger side") is None)
+_uk, _ = PA.attribute([dict(_f)], _P, _S, hints={0: "nearside rear door"})
+check("26l a British hint now places the finding",
+      _uk[0]["panel"] == "rear_left_door", _uk[0]["panel"])
+
+# Every name the join can emit must have a 3D anchor, or the pin silently
+# falls back to the origin -- the exact bug this closes.
+_emit = {PNL.taxonomy_panel(n, s)
+         for n in list(PNL._SIDELESS) + list(PNL._SIDED)
+         for s in ("left", "right", None)}
+check("26m every emittable panel name has a fusion anchor",
+      not [e for e in _emit if e not in FUS.PANELS],
+      str(sorted(e for e in _emit if e not in FUS.PANELS)))
+
+
 # ---- report ---------------------------------------------------------------
 print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")
 for f in FAILED:
