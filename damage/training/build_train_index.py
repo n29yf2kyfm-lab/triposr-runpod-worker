@@ -432,7 +432,17 @@ def split_sizes(n):
     return n - n_valid - n_test, n_valid, n_test
 
 
-MAX_DUPE_GROUP = 50
+# Raised from 50 on 2026-09-01, when the grouping moved from dHash to pHash.
+#
+# The old cap existed because dHash produced 725- and 711-member groups of
+# unrelated close-ups of smooth panels -- it has almost no gradient to work
+# with on low-texture paint and collapses everything together. pHash does not
+# do that: its largest group over the same corpus is 114, and the two largest
+# were rendered and read before this cap moved. Both are genuinely ONE
+# photograph (a dented quarter panel repeated 114 times with brightness and
+# hue variants baked in by the source dataset; a blue bumper repeated 99
+# times, watermarked). Discarding them cost 233 leaked eval images.
+MAX_DUPE_GROUP = 150
 
 
 def _snap_to_groups(rows, n_tr, n_va, n_te):
