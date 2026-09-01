@@ -74,8 +74,57 @@ def _load(index_dir, want_samples=True):
     return classes, boxes, samples
 
 
+# A single sample may take this long before it is abandoned. Every sample in
+# the corpus decodes in well under a second; a worker that has spent a full
+# minute on one is not slow, it is stuck, and the pool cannot tell the
+# difference -- imap_unordered simply never receives that chunk's result.
+#
+# Added after a false alarm, deliberately: three consecutive log heartbeats
+# from the v16 pod showed the same 140,000/302,954 line and the run was read
+# as wedged, when it was merely slow for a few minutes. That reading was
+# wrong -- but the only reason it could not be settled from outside was that
+# a genuine stall and a slow patch look identical in this log. Now a stuck
+# sample prints its sha, and a dead pool exits with the count, so the next
+# time the count freezes the log itself says which it is.
+SAMPLE_TIMEOUT_S = 60
+
+# How long the parent waits for ANY result before declaring the pool dead.
+# Must exceed SAMPLE_TIMEOUT_S, or a single slow sample would be reported as a
+# dead pool. Module-level so the selftest can shrink it.
+STALL_S = 180
+
+
+class _SampleTimeout(Exception):
+    pass
+
+
+def _alarm(_signum, _frame):
+    raise _SampleTimeout()
+
+
 def _one(sample):
-    """Render one sample. Returns (split, file_name, w, h, [(cls_id, box)])."""
+    """Render one sample. Returns (split, file_name, w, h, [(cls_id, box)]).
+
+    Runs under a SIGALRM so a hung decode or augmentation costs one sample and
+    one printed line, not the whole run. Workers are forked children on Linux,
+    so the alarm is per-process and cannot interfere with the parent.
+    """
+    import signal
+    old = signal.signal(signal.SIGALRM, _alarm)
+    signal.alarm(SAMPLE_TIMEOUT_S)
+    try:
+        return _one_inner(sample)
+    except _SampleTimeout:
+        print(f"  TIMEOUT after {SAMPLE_TIMEOUT_S}s on sha "
+              f"{sample.get('sha', '?')[:20]} rep {sample.get('rep')} "
+              f"recipe {sample.get('recipe')} -- dropped", flush=True)
+        return None
+    finally:
+        signal.alarm(0)
+        signal.signal(signal.SIGALRM, old)
+
+
+def _one_inner(sample):
     from PIL import Image
     aug = _CTX["augment"]
     rec = _CTX["boxes"].get(sample["sha"])
@@ -207,8 +256,46 @@ def materialise(index_dir, corpus, out, workers=8, limit=0,
     if verbose:
         print(f"materialising {len(samples):,} samples with {workers} workers",
               flush=True)
+    # PARENT-SIDE STALL DETECTOR.
+    #
+    # The alarm above covers a worker stuck on a sample. It does not cover the
+    # other documented mode: workers that die outright, after which
+    # imap_unordered blocks forever and nothing is ever printed. So the parent
+    # pulls results on a thread and watches the clock itself. If no result has
+    # arrived for STALL_S, the stage is dead: terminate the pool and exit
+    # non-zero with the outstanding count, so train.sh's EXIT trap uploads a
+    # log that says "materialise stalled at N" now, rather than a silent one
+    # 25 minutes later.
+    import queue as _q
+    import threading as _th
+    results = _q.Queue()
+    _DONE = object()
+
+    def _pump(pool):
+        try:
+            for res in pool.imap_unordered(_one, samples, chunksize=64):
+                results.put(res)
+        except BaseException as e:            # noqa: BLE001 - reported below
+            results.put(e)
+        results.put(_DONE)
+
     with Pool(workers) as pool:
-        for res in pool.imap_unordered(_one, samples, chunksize=64):
+        _th.Thread(target=_pump, args=(pool,), daemon=True).start()
+        while True:
+            try:
+                res = results.get(timeout=STALL_S)
+            except _q.Empty:
+                pool.terminate()
+                raise SystemExit(
+                    f"materialise STALLED: no result for {STALL_S}s at "
+                    f"{done:,}/{len(samples):,} (dropped {dropped:,}). "
+                    f"Workers are hung or dead. See TIMEOUT lines above for "
+                    f"a stuck sample; none means the workers died.")
+            if res is _DONE:
+                break
+            if isinstance(res, BaseException):
+                pool.terminate()
+                raise res
             done += 1
             if res is None:
                 dropped += 1
@@ -255,6 +342,11 @@ def materialise(index_dir, corpus, out, workers=8, limit=0,
 
 
 # -------------------------------------------------------------- selftest ----
+
+def _hang_for_test(_sample):
+    """Stand-in worker for the selftest: never returns within STALL_S."""
+    time.sleep(30)
+
 
 def _selftest():
     import tempfile
@@ -420,6 +512,49 @@ def _selftest():
     check(f"single-survivor crops keep the right class "
           f"(ids seen: {sorted(set(singles))})",
           set(singles) == {1}, f"{sorted(set(singles))}")
+
+    # --- stall handling -------------------------------------------------
+    # Both modes seen on rented GPUs: a worker stuck on one sample, and a pool
+    # whose workers have died. Each must surface in seconds with a message
+    # that names the stage, not sit silent until an external watchdog fires.
+    global SAMPLE_TIMEOUT_S, STALL_S, _one_inner, _one
+    real_inner, real_one = _one_inner, _one
+    real_to, real_stall = SAMPLE_TIMEOUT_S, STALL_S
+
+    # (a) a sample that hangs is dropped by the alarm, quickly
+    SAMPLE_TIMEOUT_S = 1
+    _one_inner = lambda s: time.sleep(5) or ("train", "x", 1, 1, [])   # noqa: E731
+    t = time.time()
+    r = _one({"sha": "deadbeef" * 8, "rep": 0, "recipe": []})
+    el = time.time() - t
+    check(f"a hung sample is dropped by the per-sample alarm ({el:.1f}s)",
+          r is None and el < 3.0, f"returned {r!r} after {el:.1f}s")
+    _one_inner = real_inner
+    SAMPLE_TIMEOUT_S = real_to
+
+    # (b) a dead pool is reported by the parent, with the outstanding count.
+    # Rebind _one to a MODULE-LEVEL function: the pool pickles the callable by
+    # qualified name, so a lambda defined in here cannot be sent to a worker.
+    # Forked children hang for longer than the shrunken STALL_S, so no result
+    # ever arrives.
+    STALL_S = 2
+    _one = _hang_for_test
+    out3 = os.path.join(tmp, "out3")
+    t = time.time()
+    try:
+        materialise(idx, corpus, out3, workers=2, verbose=False)
+        stalled = None
+    except SystemExit as e:
+        stalled = str(e)
+    el = time.time() - t
+    check(f"a dead pool exits with a STALLED message in {el:.1f}s",
+          stalled is not None and "STALLED" in stalled and el < 15,
+          f"{stalled!r} after {el:.1f}s")
+    check("the STALLED message carries the outstanding count",
+          stalled is not None and "/" in stalled and "0/" in stalled,
+          f"{stalled!r}")
+    _one = real_one
+    STALL_S = real_stall
 
     shutil.rmtree(tmp, ignore_errors=True)
     print(f"\n{ok} passed, {fail} failed")
