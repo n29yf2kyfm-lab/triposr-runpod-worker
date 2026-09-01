@@ -130,3 +130,24 @@ Also worth knowing: headroom installs its own SessionStart *and* PreToolUse
 `ensure` hooks, so its proxy restarts itself before any Bash call. The proxy was
 already up before the hook tried to start it — "address already in use" there is
 the self-heal working, not a failure.
+
+## taskmaster (eyaltoledano/claude-task-master v0.43.1) — INSTALLED 2026-08-31
+
+Owner instruction from a TikTok (Brock Mesarich). Read before install, per the
+graphify rule. 46 slash commands + 3 agents (orchestrator/executor/checker) +
+stdio MCP server (`npx -y task-master-ai`). MIT WITH Commons-Clause. No npm
+install-time hooks.
+
+Two findings, both HANDLED in `.taskmaster/config.json` (committed):
+  * Sentry telemetry is ON BY DEFAULT (`anonymousTelemetry !== false`,
+    config-manager.js:744). Set to false.
+  * Provider auto-detection spans every AI vendor incl. OpenRouter — this box
+    holds OPENROUTER_API_KEY. All three model roles pinned to the
+    `claude-code` provider (drives the local claude CLI; no key leaves the
+    box). Same class of decision as graphify's --code-only.
+  * Its Supabase/`tryhamster.com` cloud sync is dormant unless `tm auth` is
+    run. Do not auth.
+
+Install is machine-local (`claude plugin install taskmaster@taskmaster`,
+user scope) — a rollback takes it; reinstall with those two commands. The
+config in-repo survives and re-applies itself.
