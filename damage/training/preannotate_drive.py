@@ -41,6 +41,7 @@ import csv
 import json
 import os
 import sys
+import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DAMAGE = os.path.dirname(HERE)
@@ -102,6 +103,9 @@ def main():
                          "they draw a missing one")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--resume", action="store_true")
+    ap.add_argument("--minutes", type=float, default=0,
+                    help="stop cleanly after this long, leaving a resumable "
+                         "partial. 0 runs to completion.")
     a = ap.parse_args()
 
     labels = None
@@ -138,6 +142,9 @@ def main():
         print(f"resuming: {len(done):,} already done")
 
     st = collections.Counter()
+    stopped_early = False
+    t0 = time.time()
+    deadline = t0 + a.minutes * 60
     mode = "a" if done else "w"
     with open(a.out + ".partial", mode) as pf:
         for n, (folder, final, path) in enumerate(jobs):
@@ -182,6 +189,19 @@ def main():
                     st["errors"] += 1
             pf.write(json.dumps(rec) + "\n")
             pf.flush()
+            # STOP BEFORE THE CONTAINER DOES. This session's container is
+            # reclaimed after a period of inactivity and a background run dies
+            # with it -- that is what killed this script at 7,208 of 22,318
+            # with no error in the log. A bounded chunk that exits cleanly
+            # inside a foreground tool call always leaves a resumable partial.
+            # Checked every 25 images, not every 200: detection runs at about
+            # 2.3/s, so a 200-image cadence overshoots the deadline by 75s and
+            # the caller's timeout kills the process before it can stop itself.
+            if a.minutes and (n + 1) % 25 == 0 and time.time() > deadline:
+                print(f"time budget reached at {n+1:,} of {len(jobs):,}; "
+                      f"re-run with --resume to continue", flush=True)
+                stopped_early = True
+                break
             # STOP BEFORE THE DISK DOES. A full volume killed this run at
             # 6,000 of 22,318 images: the write failed, then the handler's
             # own write failed, and the traceback buried the one fact that
@@ -196,10 +216,20 @@ def main():
                     print(f"STOPPING: {free_mb:.0f}MB free, below the 150MB "
                           f"floor. {n+1:,} of {len(jobs):,} done; free space "
                           f"and re-run with --resume.", flush=True)
+                    stopped_early = True
                     break
-            if (n + 1) % 200 == 0:
-                print(f"  {n+1:,}/{len(jobs):,}  kept {st['boxes_kept']:,}",
-                      flush=True)
+                rate = (n + 1 - len(done)) / max(1e-6, time.time() - t0)
+                print(f"  {n+1:,}/{len(jobs):,}  kept {st['boxes_kept']:,}  "
+                      f"{rate:.1f}/s  {(len(jobs)-n-1)/max(rate,1e-6)/60:.0f} "
+                      f"min left", flush=True)
+
+    if stopped_early:
+        # Do NOT write the final json or the chart from a partial run: a file
+        # named drive_preannot.json that holds a third of the images, with a
+        # chart summarising it, is worse than no file at all.
+        print(f"partial run: {a.out}.partial holds the work, {a.out} not "
+              f"written. Re-run with --resume.", flush=True)
+        return
 
     rows = [json.loads(l) for l in open(a.out + ".partial")]
     st["images_total"] = len(rows)
