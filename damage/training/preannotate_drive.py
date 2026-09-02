@@ -134,11 +134,24 @@ def main():
 
     done = set()
     if a.resume and os.path.exists(a.out + ".partial"):
+        # A hard kill mid-write leaves a torn last line. Skipping it here is
+        # not enough: it stays in the file and crashes the final json.loads
+        # over every row at the end of a completed run. So the partial is
+        # repaired on resume -- parseable rows are kept, the torn one is
+        # dropped, and the image it belonged to is simply redone.
+        good, torn = [], 0
         for line in open(a.out + ".partial"):
             try:
-                done.add(json.loads(line)["file"])
+                rec = json.loads(line)
             except Exception:
-                pass
+                torn += 1
+                continue
+            good.append(line if line.endswith("\n") else line + "\n")
+            done.add(rec["file"])
+        if torn:
+            with open(a.out + ".partial", "w") as fh:
+                fh.writelines(good)
+            print(f"repaired partial: dropped {torn} torn row(s)")
         print(f"resuming: {len(done):,} already done")
 
     st = collections.Counter()
