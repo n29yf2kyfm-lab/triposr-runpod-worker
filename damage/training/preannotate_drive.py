@@ -37,6 +37,7 @@ listing that may not survive.
 """
 import argparse
 import collections
+import csv
 import json
 import os
 import sys
@@ -57,6 +58,30 @@ import detect as DET                                       # noqa: E402
 # proposals and are flagged for annotation from scratch.
 SEVERITY_FOLDERS = ("minor", "medium", "major", "severe", "deep", "faint",
                     "light", "thin", "normal", "thick")
+
+
+CHROMA_FLOOR = 1.0        # a greyscale copy left behind by augmentation
+ROUGH_CEIL = 32.0         # grey static; both calibrated on 192 hand-read images
+
+
+def quality(path):
+    """-> (verdict, chroma, rough). Cheap: decodes at 1/4 scale, ~5ms."""
+    import numpy as np
+    from PIL import Image
+    try:
+        im = Image.open(path)
+        im.draft("RGB", (160, 160))
+        a = np.asarray(im.convert("RGB").resize((160, 160))).astype("float32")
+    except Exception as e:
+        return f"scrap_unreadable:{type(e).__name__}", None, None
+    chroma = float(np.mean(np.max(a, 2) - np.min(a, 2)))
+    g = a.mean(2)
+    rough = float(np.mean(np.abs(g[1:, 1:] - g[:-1, :-1])))
+    if chroma < CHROMA_FLOOR:
+        return "scrap_greyscale", chroma, rough
+    if rough > ROUGH_CEIL:
+        return "scrap_static", chroma, rough
+    return "pass", chroma, rough
 
 
 def severity_from_folder(folder):
@@ -118,11 +143,18 @@ def main():
         for n, (folder, final, path) in enumerate(jobs):
             if path in done:
                 continue
+            verdict, chroma, rough = quality(path)
             rec = {"file": path, "folder": folder, "final_class": final,
                    "severity_folder": severity_from_folder(folder),
+                   "quality": verdict, "chroma": None if chroma is None
+                   else round(chroma, 2),
+                   "rough": None if rough is None else round(rough, 2),
                    "reviewed": False, "boxes": []}
-            if final is None:
-                st["skipped_unmapped_folder"] += 1
+            if verdict != "pass":
+                st[verdict] += 1
+            elif final is None:
+                rec["quality"] = "scrap_unmapped_folder"
+                st["scrap_unmapped_folder"] += 1
             elif final not in (labels or {}).values():
                 # panel_gap: the detector has no such class, so there is
                 # nothing to propose. Recorded, not silently emptied.
@@ -158,8 +190,41 @@ def main():
     st["images_total"] = len(rows)
     st["images_with_boxes"] = sum(1 for r in rows if r["boxes"])
     json.dump({"stats": dict(st), "images": rows}, open(a.out, "w"))
+
+    # THE CHART: one row per class, so what survives per class is visible at a
+    # glance rather than buried in 22,318 json rows.
+    chart = collections.defaultdict(collections.Counter)
+    for r in rows:
+        c = chart[r["final_class"] or "(unmapped)"]
+        c["total"] += 1
+        c[r["quality"]] += 1
+        if r["quality"] == "pass":
+            c["boxes"] += len(r["boxes"])
+            if r["boxes"]:
+                c["with_boxes"] += 1
+            elif r.get("needs_annotation_from_scratch"):
+                c["needs_scratch"] += 1
+            else:
+                c["no_proposal"] += 1
+    csv_path = os.path.splitext(a.out)[0] + "_chart.csv"
+    cols = ["class", "total", "pass", "with_boxes", "boxes", "no_proposal",
+            "needs_scratch", "scrap_greyscale", "scrap_static",
+            "scrap_unreadable", "scrap_unmapped_folder"]
+    with open(csv_path, "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(cols)
+        for cls in sorted(chart, key=lambda k: -chart[k]["total"]):
+            c = chart[cls]
+            w.writerow([cls] + [c.get(k, 0) for k in cols[1:]])
+    hdr = ("class", "total", "pass", "boxed", "boxes", "scrap")
+    print("\n%-16s%7s%7s%7s%8s%7s" % hdr)
+    for cls in sorted(chart, key=lambda k: -chart[k]["total"]):
+        c = chart[cls]
+        scrap = sum(v for k, v in c.items() if k.startswith("scrap"))
+        print(f"{str(cls):16}{c['total']:7,}{c.get('pass',0):7,}"
+              f"{c.get('with_boxes',0):7,}{c.get('boxes',0):8,}{scrap:7,}")
     print(json.dumps(dict(st), indent=1, sort_keys=True))
-    print(f"wrote {a.out}")
+    print(f"wrote {a.out} and {csv_path}")
 
 
 if __name__ == "__main__":
