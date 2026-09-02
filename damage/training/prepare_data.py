@@ -87,6 +87,84 @@ CLASS_MAP = {
     # point cannot be loaded by a six-class model such as v12b or v16.
     "misalignment": "panel_gap", "dislocation": "panel_gap",
     "disalocation": "panel_gap", "separation": "panel_gap",
+
+    # ---- RECOVERED 2026-09-02: the thirteen undocumented projects ---------
+    #
+    # /home/user/rf/bulk/provenance.jsonl records 13 Roboflow projects,
+    # 104,962 images, downloaded and merged in an earlier session and absent
+    # from manifest.json. 78 of their 95 class strings mapped to nothing, so
+    # their boxes were deleted while their pixels stayed -- the images are in
+    # merged640, unlabelled, to this day.
+    #
+    # Three vocabularies are at work and each is handled on its own terms.
+
+    # 1. PANEL-SPECIFIC DAMAGE. "bonnet-dent", "fender-dent", "roof-dent" are
+    #    a dent plus the panel it is on. The panel half is thrown away here on
+    #    purpose: panel_attribution.py derives the panel from the panel
+    #    DETECTOR at inference, which works on any photo, whereas a class per
+    #    panel would need 21x the data and could not generalise to a panel a
+    #    given project never labelled.
+    "bonnet-dent": "dent", "roof-dent": "dent", "fender-dent": "dent",
+    "pillar-dent": "dent", "doorouter-dent": "dent", "boot-dent": "dent",
+    "front-bumper-dent": "dent", "rear-bumper-dent": "dent",
+    "quaterpanel-dent": "dent", "quarter-panel-dent": "dent",
+    "runningboard-dent": "dent", "running-board-dent": "dent",
+    "medium-bodypanel-dent": "dent", "major-rear-bumper-dent": "dent",
+    "damaged-hood": "dent", "damaged-trunk": "dent", "damaged-door": "dent",
+    "damaged_door": "dent", "damaged_fender": "dent",
+    "damaged-front-bumper": "dent", "damaged-rear-bumper": "dent",
+    "damaged_bumper": "dent",
+    "doorouter-scratch": "scratch", "doorouter-paint-trace": "scratch",
+
+    # 2. GLASS AND LAMPS, spelled a dozen ways across four projects.
+    "damaged-windscreen": "shattered_glass",
+    "windscreen-front-damage": "shattered_glass",
+    "windscreen-rear-damage": "shattered_glass",
+    "damaged-window": "shattered_glass",
+    "damaged-rear-window": "shattered_glass",
+    "broken_window": "shattered_glass",
+    "damaged_mirror_glass": "shattered_glass",
+    "damaged-head-light": "lamp_damage", "damaged-tail-light": "lamp_damage",
+    "headlight-damage": "lamp_damage", "taillight-damage": "lamp_damage",
+    "signlight-damage": "lamp_damage",
+    "side-indicator-damage": "lamp_damage",
+    "sidemirror-damage": "lamp_damage", "side-mirror-damage": "lamp_damage",
+    "missing_grille": "missing_part",
+
+    # 3. INDONESIAN. rfvnx-dgm7e labels in Indonesian: penyok = dent,
+    #    goresan = scratch, kerusakan = damage-to-<part>, kaca = glass,
+    #    lampu = lamp, spion = mirror, bagasi = boot, kap mesin = bonnet.
+    "penyok": "dent", "penyok_atap": "dent", "penyok_fender": "dent",
+    "penyok_pilar": "dent", "penyok_luar_pintu": "dent",
+    "penyok_kap_depan": "dent", "penyok_quarterpanel": "dent",
+    "penyok_bumper_depan": "dent", "penyok_bumper_belakang": "dent",
+    "penyok_running_board": "dent", "penyok_atau_gores": "dent",
+    "goresan": "scratch",
+    "kerusakan_kaca_depan": "shattered_glass",
+    "kerusakan_kaca_belakang": "shattered_glass",
+    "kerusakan_kaca_samping": "shattered_glass",
+    "kerusakan_windscreen": "shattered_glass",
+    "kerusakan_lampu_depan": "lamp_damage",
+    "kerusakan_lampu_belakang": "lamp_damage",
+    "kerusakan_lampu_samping": "lamp_damage",
+    "kerusakan_spion": "lamp_damage",
+    "kerusakan_pintu": "dent", "kerusakan_bagasi": "dent",
+    "kerusakan_kap_mesin": "dent",
+    "kerusakan_bumper_depan": "dent", "kerusakan_bumper_belakang": "dent",
+
+    # 4. SEVERITY-GRADED. The grade is dropped and the type kept: a
+    #    three-point severity scale that only two projects use cannot be
+    #    learned, but the underlying dent/scratch/rust can.
+    "slight_deformation": "dent", "medium_deformation": "dent",
+    "severe_deformation": "deformation",
+    "slight_scratch": "scratch", "severe_scratch": "scratch",
+    "mild-corrosion": "rust", "moderate-corrosion": "rust",
+    "severe-corrosion": "rust", "corroded-part": "rust", "iron rust": "rust",
+
+    # DELIBERATELY LEFT OUT, and why:
+    #   Car-Damage, damaged, kerusakan_umum, Damage, dent-or-scratch, other
+    #     -- generic "something is wrong here". Mapping them to any one type
+    #        teaches the detector that dents and scratches share a class.
 }
 
 # DELIBERATELY NOT MAPPED, so the unmapped report stays a real signal:

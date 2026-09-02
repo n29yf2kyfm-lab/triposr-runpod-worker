@@ -1740,6 +1740,41 @@ check("27j DETECTOR_CLASSES still describes the SHIPPED six-class model",
       and len(DET.DETECTOR_CLASSES) == 6)
 
 
+# ---- 28. the thirteen undocumented projects -------------------------------
+#
+# bulk/provenance.jsonl records 13 Roboflow projects, 104,962 images,
+# downloaded and merged in an earlier session and absent from manifest.json.
+# 78 of their 95 class strings mapped to nothing, so their boxes were deleted
+# while their pixels stayed: the images sit in merged640 unlabelled.
+check("28a panel-specific dents map to dent, discarding the panel half",
+      all(PD.CLASS_MAP.get(k) == "dent" for k in
+          ("bonnet-dent", "roof-dent", "fender-dent", "doorouter-dent",
+           "quaterpanel-dent", "running-board-dent", "boot-dent")))
+check("28b the panel half is deliberately dropped, not encoded as a class",
+      not [k for k in PD.CLASS_MAP.values() if k.endswith("-dent")])
+check("28c glass and lamp spellings converge",
+      PD.CLASS_MAP.get("damaged-windscreen") == "shattered_glass"
+      and PD.CLASS_MAP.get("windscreen-rear-damage") == "shattered_glass"
+      and PD.CLASS_MAP.get("damaged-head-light") == "lamp_damage"
+      and PD.CLASS_MAP.get("signlight-damage") == "lamp_damage")
+check("28d Indonesian labels map (penyok=dent, goresan=scratch)",
+      PD.CLASS_MAP.get("penyok") == "dent"
+      and PD.CLASS_MAP.get("goresan") == "scratch"
+      and PD.CLASS_MAP.get("kerusakan_lampu_depan") == "lamp_damage")
+check("28e severity grades collapse to their type",
+      PD.CLASS_MAP.get("slight_scratch") == "scratch"
+      and PD.CLASS_MAP.get("severe-corrosion") == "rust"
+      and PD.CLASS_MAP.get("mild-corrosion") == "rust")
+check("28f generic 'something is wrong' labels stay unmapped",
+      not [k for k in ("car-damage", "damaged", "dent-or-scratch",
+                       "kerusakan_umum", "other") if k in PD.CLASS_MAP])
+check("28g every CLASS_MAP target is still a real taxonomy type",
+      not [v for v in set(PD.CLASS_MAP.values())
+           if v not in TAX.DAMAGE_TYPES and v != "panel_gap"],
+      str([v for v in set(PD.CLASS_MAP.values())
+           if v not in TAX.DAMAGE_TYPES and v != "panel_gap"]))
+
+
 # ---- report ---------------------------------------------------------------
 print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")
 for f in FAILED:
