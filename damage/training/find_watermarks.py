@@ -53,8 +53,22 @@ def read(path):
             for s in strips:
                 if s.width < 40 or s.height < 8:
                     continue
-                s = s.resize((s.width * 2, s.height * 2))       # help small type
-                txt += " " + pytesseract.image_to_string(s, config="--psm 6")
+                # CAP THE WIDTH, do not blindly upscale, and time each call
+                # out. On the ~4.7% of this corpus that augmentation reduced
+                # to grey static, --psm 6 hunts for text lines across the
+                # whole strip and does not converge: individual calls were
+                # measured at over three minutes, load average reached 24 on
+                # a 4-core box, and a full scan projected to 2,800 hours.
+                if s.width > 1600:
+                    r = 1600 / s.width
+                    s = s.resize((1600, max(8, int(s.height * r))))
+                elif s.width < 800:
+                    s = s.resize((s.width * 2, s.height * 2))
+                try:
+                    txt += " " + pytesseract.image_to_string(
+                        s, config="--psm 6", timeout=8)
+                except Exception:
+                    pass          # a strip that will not read yields no hit
     except Exception as e:
         return {"file": path, "ok": False, "error": str(e)[:70]}
     hits = match(txt)
