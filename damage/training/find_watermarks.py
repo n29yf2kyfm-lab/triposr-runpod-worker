@@ -49,6 +49,15 @@ def read(path):
             W, H = im.size
             strips = [im.crop((0, int(H * 0.86), W, H)),        # credit line
                       im.crop((0, int(H * 0.35), W, int(H * 0.65)))]  # overlay
+            # VERTICAL EDGES TOO. Inspecting the misses showed the reason
+            # recall sat at 30%: a stock credit line is not always along the
+            # bottom. Cropping and rotation during dataset prep leaves it
+            # running up the left or right edge instead -- one confirmed miss
+            # reads "shutterstock.com - 120622779" rotated 90 degrees up the
+            # left side, which a horizontal-only scan cannot see at all.
+            for box in ((0, 0, int(W * 0.14), H),               # left edge
+                        (int(W * 0.86), 0, W, H)):              # right edge
+                strips.append(im.crop(box).rotate(90, expand=True))
             txt = ""
             for s in strips:
                 if s.width < 40 or s.height < 8:
