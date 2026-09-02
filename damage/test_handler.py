@@ -1775,6 +1775,65 @@ check("28g every CLASS_MAP target is still a real taxonomy type",
            if v not in TAX.DAMAGE_TYPES and v != "panel_gap"]))
 
 
+# ---- 29. overlay modes: several at once, and validated -----------------------
+# heat and light answer different questions about the same photograph, and a
+# report wants both. Asking for one used to mean giving up the other. The mode
+# was also passed through unvalidated, and overlay.render draws NOTHING for a
+# mode it does not recognise -- so a typo returned a clean picture with a
+# legend on it, which reads exactly like "no damage found".
+import validation as _V29
+
+check("29a a single mode still normalises to a list",
+      _V29.parse_job({"findings": [], "overlay": "heat"})["overlay"] == ["heat"])
+check("29b several modes are kept, in the caller's order",
+      _V29.parse_job({"findings": [], "overlay": ["heat", "light"]})["overlay"]
+      == ["heat", "light"])
+check("29c a comma-separated string works, for scalar-only callers",
+      _V29.parse_job({"findings": [], "overlay": "heat, light"})["overlay"] == ["heat", "light"])
+check("29d duplicates collapse rather than rendering twice",
+      _V29.parse_job({"findings": [], "overlay": ["heat", "heat"]})["overlay"] == ["heat"])
+check("29e the default is unchanged",
+      _V29.parse_job({"findings": []})["overlay"]
+      == ["both"])
+for _off in (None, "", [], False):
+    check(f"29f overlay={_off!r} still means skip overlays",
+          _V29.parse_job({"findings": [], "overlay": _off})["overlay"] is None)
+_bad = None
+try:
+    _V29.parse_job({"findings": [], "overlay": "hetamap"})
+except _V29.InputError as e:
+    _bad = str(e)
+check("29g an unknown mode is refused, not silently drawn blank",
+      _bad is not None and "hetamap" in _bad and "heat" in _bad)
+
+if _has_pil:
+    # Every requested mode reaches the output, each tagged with its own mode,
+    # and one image is decoded once rather than once per mode.
+    _decodes = {"n": 0}
+    _real_src = H._overlay_source
+
+    def _counting_src(ref):
+        _decodes["n"] += 1
+        return _real_src(ref)
+
+    H._overlay_source = _counting_src
+    try:
+        _res = H._render_overlays(
+            {"overlay": ["heat", "light", "box"]}, mixed, [_p, _p],
+            H.Progress(None, "inspect"))
+    finally:
+        H._overlay_source = _real_src
+    check("29h every requested mode is rendered for every image",
+          _res["rendered"] == 6 and _res["modes"] == ["heat", "light", "box"])
+    check("29i each rendered image is tagged with its own mode",
+          sorted({i["mode"] for i in _res["images"]})
+          == ["box", "heat", "light"])
+    check("29j the source is decoded once per image, not once per mode",
+          _decodes["n"] == 2)
+    check("29k a bare string still renders, for callers past parse_job",
+          H._render_overlays({"overlay": "heat"}, mixed, [_p],
+                             H.Progress(None, "inspect"))["rendered"] == 1)
+
 # ---- report ---------------------------------------------------------------
 print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")
 for f in FAILED:

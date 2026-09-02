@@ -46,6 +46,35 @@ def _one_of(value, name, allowed, default=None):
     return value
 
 
+OVERLAY_MODES = ("box", "heat", "light", "both")
+
+
+def _overlay_modes(value):
+    """-> list of distinct valid modes, or None to skip overlays entirely.
+
+    Accepts a single mode ("heat"), several (["heat", "light"]), or a
+    comma-separated string ("heat,light") for callers that can only send a
+    scalar. Order is preserved so the caller controls which image leads.
+    """
+    if value is None or value is False or value == "" or value == []:
+        return None
+    if isinstance(value, str):
+        value = [v for v in (p.strip() for p in value.split(",")) if v]
+    if not isinstance(value, (list, tuple)):
+        raise InputError("overlay must be a mode or a list of modes — "
+                         f"got {type(value).__name__}")
+    out = []
+    for v in value:
+        v = str(v).strip().lower()
+        if v not in OVERLAY_MODES:
+            raise InputError(
+                f"overlay must be one of {', '.join(OVERLAY_MODES)} — "
+                f"got {v!r}")
+        if v not in out:
+            out.append(v)
+    return out or None
+
+
 def _str_list(value, name, max_len):
     if value is None:
         return []
@@ -161,9 +190,22 @@ def parse_job(job_input):
         "glb_url": (str(job_input.get("glb_url") or "").strip() or None),
         "want_html": bool(job_input.get("want_html", True)),
         "want_fusion": bool(job_input.get("want_fusion", True)),
-        # Annotated images: "both" (heat wash + boxes), "box", "heat", "light",
-        # or None to skip. Only rendered for findings that carry a bbox.
-        "overlay": job_input.get("overlay", "both"),
+        # Annotated images. One mode or several: "both" (heat wash + boxes),
+        # "box", "heat", "light" — or None to skip. Only rendered for findings
+        # that carry a bbox.
+        #
+        # A LIST because heat and light answer different questions about the
+        # same photograph and a report wants both: heat washes the damage so
+        # severity reads at a glance, light dims everything that is clean so
+        # the eye goes to what is not. Asking for one used to mean giving up
+        # the other, or paying for a second inspection to get it.
+        #
+        # This was also passed through UNVALIDATED. overlay.render() applies a
+        # mode it does not recognise by drawing nothing at all, so a typo
+        # ("hetamap") returned a clean photograph with a legend on it — which
+        # reads exactly like "no damage found" and is the one thing an overlay
+        # must never be able to say by accident.
+        "overlay": _overlay_modes(job_input.get("overlay", "both")),
         # Paint-depth-gauge readings, one entry per panel measured. Optional
         # and independent of the photos: an inspector can send readings with
         # no images at all, or images with no readings. See

@@ -116,26 +116,41 @@ def _render_overlays(spec, findings, image_refs, prog):
     be drawn, and that count is reported rather than hidden — an empty overlay
     must not be able to read as "no damage found".
     """
-    mode = spec.get("overlay")
-    if not mode or not image_refs or not findings:
+    modes = spec.get("overlay")
+    if not modes or not image_refs or not findings:
         return None
+    if isinstance(modes, str):        # a caller reaching past parse_job
+        modes = [modes]
     try:
         import overlay as overlay_mod
     except Exception as e:                       # Pillow absent in some builds
         return {"rendered": 0, "error": f"{type(e).__name__}: {e}"}
 
-    prog.stage("rendering_overlays", images=len(image_refs), mode=mode)
+    prog.stage("rendering_overlays", images=len(image_refs),
+               modes=list(modes))
     out, errors = [], []
     for i, ref in enumerate(image_refs):
+        # Decode each photograph ONCE per image, not once per mode. The source
+        # may be a URL or a base64 blob, and re-resolving it for every mode
+        # turned a two-mode request into two downloads of the same picture.
         try:
-            uri, m = overlay_mod.render_data_uri(
-                _overlay_source(ref), findings, mode=mode, image_index=i)
-            out.append({"index": i, "mode": mode, "data_uri": uri,
-                        "drawn": m["drawn"],
-                        "skipped_no_bbox": m["skipped_no_bbox"]})
+            src = _overlay_source(ref)
         except Exception as e:
             errors.append({"index": i, "error": f"{type(e).__name__}: {e}"})
-    return {"rendered": len(out), "images": out,
+            continue
+        for mode in modes:
+            # Per (image, mode), so one unrenderable mode cannot cost the
+            # caller the modes that would have worked on the same photo.
+            try:
+                uri, m = overlay_mod.render_data_uri(
+                    src, findings, mode=mode, image_index=i)
+                out.append({"index": i, "mode": mode, "data_uri": uri,
+                            "drawn": m["drawn"],
+                            "skipped_no_bbox": m["skipped_no_bbox"]})
+            except Exception as e:
+                errors.append({"index": i, "mode": mode,
+                               "error": f"{type(e).__name__}: {e}"})
+    return {"rendered": len(out), "modes": list(modes), "images": out,
             "errors": errors} if (out or errors) else None
 
 
