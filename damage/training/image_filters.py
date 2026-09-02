@@ -30,9 +30,25 @@ tuned from one place and printed next to the score.
 import numpy as np
 from PIL import Image, ImageFilter
 
+
+def load(path):
+    """Open decoded to ~320 px. Every filter below works at 320 or less, and
+    libjpeg can scale during decode for a 26x saving (45 ms -> 1.7 ms) that
+    dominates the whole pass. Non-JPEG input just decodes normally."""
+    im = Image.open(path)
+    im.draft("RGB", (320, 320))
+    im.load()
+    return im
+
 FLAGS = {
     "grain":     3.0,     # curacel 3-7; gravel lots and textured floors reach 2-3
-    "edge_bar":  0.50,
+    # 0.60 is the lowest threshold with ZERO false positives across 60 images
+    # from three projects I read as carrying no credit bars. It catches only
+    # about a third of the bars on the stock scrapes, but those projects are
+    # dropped by provenance anyway; this filter exists to catch the stray
+    # stock frame inside an otherwise-good project, where a false positive
+    # (silently deleting a real photo) is the more expensive mistake.
+    "edge_bar":  0.60,
     "seam":      0.80,
     # baked_box and label_tag are recorded as scores but do not flag. Neither
     # survived validation: the box lines cannot be told from chrome trim on a
@@ -79,7 +95,7 @@ def _bar_score(strip, next_row, last_row):
 
 
 def edge_bar(im):
-    a = _grey(im, 400)
+    a = _grey(im, 320)
     H, W = a.shape
     best = 0.0
     for view in (a, a.T):                              # rows, then columns
