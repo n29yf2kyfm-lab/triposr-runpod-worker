@@ -182,6 +182,21 @@ def main():
                     st["errors"] += 1
             pf.write(json.dumps(rec) + "\n")
             pf.flush()
+            # STOP BEFORE THE DISK DOES. A full volume killed this run at
+            # 6,000 of 22,318 images: the write failed, then the handler's
+            # own write failed, and the traceback buried the one fact that
+            # mattered. Checked every 200 images -- the same cadence as the
+            # progress line, so it costs one statvfs per 200 detections --
+            # and it exits cleanly so --resume picks up from the last row
+            # rather than from a half-written one.
+            if (n + 1) % 200 == 0:
+                import shutil as _sh
+                free_mb = _sh.disk_usage("/").free / 1e6
+                if free_mb < 150:
+                    print(f"STOPPING: {free_mb:.0f}MB free, below the 150MB "
+                          f"floor. {n+1:,} of {len(jobs):,} done; free space "
+                          f"and re-run with --resume.", flush=True)
+                    break
             if (n + 1) % 200 == 0:
                 print(f"  {n+1:,}/{len(jobs):,}  kept {st['boxes_kept']:,}",
                       flush=True)
