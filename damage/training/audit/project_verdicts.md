@@ -37,3 +37,18 @@ UNSOURCED, no provenance: 37,568 -- must be filtered per image
 ## Mechanical filters validated against these sheets
 - grain score (mean |x - median3(x)| in the flattest quarter of blocks): >= 2.0 flags additive noise aug. curacel 3-7, clean projects 0.2-1.3. Does NOT catch HDR/tone-map aug (vehicle-detection-yjf3z scores ~0) -- that project is dropped by provenance.
 - still needed: edge-bar watermark (shutterstock/dreamstime/getty bottom bar), tiled watermark (alamy), baked-in prediction boxes (changs, beena), side-by-side composites (2 identical halves), perceptual-hash cross-project dedup.
+
+## The UNSOURCED pool (37,568 rows), read by class
+First-ingestion projects (manifest minus reingest): 22 projects, 33,624 declared images.
+Nine are industrial corrosion and five are concrete/pavement cracks -- but the class map
+excluded those already (they are the 31,419 "not in the seven-class corpus" scraps), so
+they are NOT in the keep set. Verified by eye: unsourced crack_glass is car glass
+throughout, unsourced rust_paint is car paint throughout.
+The remaining first-ingestion car projects include three 4,000-image copies of one
+"vehicle-damage-detection" export with identical class lists, which is where the
+unsourced dent/scratch noise-and-cutout frames come from.
+| UNSOURCED crack_glass (2,888) | ~15/20 usable | one shutterstock bar, one "Helico" logo, one press photo, one tint-film application |
+| UNSOURCED rust_paint (1,079) | ~17/20 usable | clean |
+| UNSOURCED dent (10,885) | ~10/20 usable | noise aug + pasted cutout rectangles on 5, shutterstock bars on 2, one undamaged BMW |
+Per-image provenance for these rows needs HF_TOKEN (private zips on Alamj/tier1-roboflow-yolo);
+not available in this session. They are handled per image by audit_corpus.py instead.
