@@ -59,10 +59,14 @@ def read(path):
                 # whole strip and does not converge: individual calls were
                 # measured at over three minutes, load average reached 24 on
                 # a 4-core box, and a full scan projected to 2,800 hours.
-                if s.width > 1600:
-                    r = 1600 / s.width
-                    s = s.resize((1600, max(8, int(s.height * r))))
-                elif s.width < 800:
+                # UPSCALE. Capping the width to 1600 downscaled the strips of
+                # large images, shrank the watermark type, and cut measured
+                # recall on a hand-labelled set from 43% to 15% -- tesseract
+                # still saw the text but read it as garbage ("Crparmtore
+                # turn"), so it matched nothing. The 8s timeout below is what
+                # actually fixes the stalls; the width cap only cost accuracy.
+                # Only genuinely enormous strips are held back.
+                if s.width * 2 <= 4000:
                     s = s.resize((s.width * 2, s.height * 2))
                 try:
                     txt += " " + pytesseract.image_to_string(
@@ -79,12 +83,33 @@ def read(path):
 def main():
     files = [l.strip() for l in open(sys.argv[1])]
     out = sys.argv[2]
+    # RESUME. This scan runs for hours and the container it runs in can be
+    # restarted out from under it -- which happened, 1,343 images in. Re-read
+    # whatever the output file already holds and skip those paths, so a
+    # restart costs the work in flight rather than the work completed.
+    import json as _j
+    done = set()
+    if os.path.exists(out):
+        for line in open(out):
+            try:
+                done.add(_j.loads(line)["file"])
+            except Exception:
+                pass                       # a torn final line is simply redone
+    if done:
+        files = [f for f in files if f not in done]
+        print(f"resuming: {len(done):,} already scanned, {len(files):,} to go",
+              flush=True)
     # Threads, not processes: pytesseract shells out to the tesseract
     # binary, so the GIL is released during the wait -- and nesting that
     # subprocess inside a forked ProcessPoolExecutor deadlocked outright
     # (192 images ran 25 minutes and produced nothing, against 0.4s each
     # when run serially).
-    with ThreadPoolExecutor(max_workers=6) as ex, open(out, "w") as f:
+    # TWO workers, not six. This box has four cores and each worker shells
+    # out to tesseract three times per image; at six the load average
+    # reached 37, throughput fell to 13 images/minute, and unrelated
+    # commands on the same box began timing out. Oversubscription was
+    # costing more than the parallelism gained.
+    with ThreadPoolExecutor(max_workers=2) as ex, open(out, "a") as f:
         import json
         for n, r in enumerate(ex.map(read, files, chunksize=8)):
             f.write(json.dumps(r) + "\n")
