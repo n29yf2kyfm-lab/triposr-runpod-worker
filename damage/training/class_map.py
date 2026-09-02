@@ -40,6 +40,22 @@ a box drawn in a customer report are the same colour for the same damage.
 #   canonical:the app taxonomy id (damage/taxonomy.py DAMAGE_TYPES)
 #   colour:   hex, matching damage/overlay.py CLASS_COLOURS
 FINAL_CLASSES = {
+    "panel_gap": {
+        # PANEL GAP / SHUT-LINE MISALIGNMENT. Split from structural 2026-09-02.
+        #
+        # Four ingested Roboflow projects carry this under four spellings --
+        # Misalignment, Dislocation, Disalocation (their typo) and separation
+        # -- roughly 7,900 images. Every one was dropped at merge because no
+        # CLASS_MAP entry existed, so the corpus holds ZERO panel-gap boxes
+        # today and this cannot be trained until those four are re-fetched.
+        # The 60 drive files under panel_gap are not in the corpus either.
+        "roboflow": ["Misalignment", "Dislocation", "Disalocation",
+                     "separation"],
+        "drive": ["panel_gap", "panel_mismatch"],
+        "canonical": "misalignment",
+        "colour": "#fab577",
+        "structural": True,
+    },
     "dent": {
         "roboflow": ["Dent"],
         "drive": ["dent_major", "dent_medium", "dent_minor", "dent_severe"],
@@ -99,8 +115,13 @@ FINAL_CLASSES = {
         # Merging them into dent would erase the one call the report cannot
         # afford to get wrong.
         "roboflow": [],
-        "drive": ["structural_broken", "structural_bumper", "panel_gap",
-                  "panel_mismatch"],
+        # panel_gap / panel_mismatch moved OUT to their own class on
+        # 2026-09-02. A shut line that has opened is a FITTING fault -- the
+        # panel is intact, its position is wrong -- and folding it in here
+        # taught the detector that undamaged metal in the wrong place looks
+        # like crushed metal. The repair actions differ: realign versus
+        # replace. structural was already carrying four unrelated things.
+        "drive": ["structural_broken", "structural_bumper"],
         "canonical": "deformation",
         "colour": "#ba4500",
         "structural": True,

@@ -80,6 +80,13 @@ CLASS_MAP = {
     # uniud-g3oa7/scratch-detection: "Defect" is that project's only class
     # and the project is a scratch dataset.
     "defect": "scratch",
+
+    # PANEL GAP -- the four spellings four projects use for one fault.
+    # Excluded until 2026-09-02, when the vocabulary went from six classes to
+    # seven. Adding these SHIFTS EVERY CLASS ID, so an index built after this
+    # point cannot be loaded by a six-class model such as v12b or v16.
+    "misalignment": "panel_gap", "dislocation": "panel_gap",
+    "disalocation": "panel_gap", "separation": "panel_gap",
 }
 
 # DELIBERATELY NOT MAPPED, so the unmapped report stays a real signal:
@@ -88,14 +95,9 @@ CLASS_MAP = {
 #                                no positive box, so it cannot be expressed here
 #   spall                     -- concrete spalling (universita-di-pisa), and
 #                                that project is off-domain anyway
-#   misalignment, dislocation, disalocation, separation
-#                             -- PANEL GAP. Real data (~7,900 images across 4
-#                                datasets) and a class we want, but adding it
-#                                is a vocabulary change from 6 classes to 7:
-#                                it shifts every class id, invalidates the
-#                                trained weights and the fitted per-class
-#                                thresholds. Kept out of this change so the
-#                                recovery can be measured on its own.
+#
+# The four panel-gap spellings used to be listed here as deliberately excluded.
+# They were mapped on 2026-09-02 and are now in CLASS_MAP above.
 
 # Roboflow exports carry a supercategory row with no annotations; it is not a
 # class and must not consume a model index.

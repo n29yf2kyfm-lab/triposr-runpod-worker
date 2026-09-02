@@ -1576,11 +1576,13 @@ for _mod, _path in (("prepare_data", "training/prepare_data.py"),
     check(f"25c {_mod} still lower-cases before the CLASS_MAP lookup",
           ".strip().lower()" in _src)
 
-_still_out = ["misalignment", "dislocation", "disalocation", "separation",
-              "object", "doggie", "0", "1", "2", "non-corrosion", "spall"]
+# The four panel-gap spellings were listed here as deliberately unmapped
+# until 2026-09-02, when they became their own class (see 27). What this
+# test protects is the JUNK staying out: a catch-all that swallowed these
+# would turn the unmapped report from a signal into noise.
+_still_out = ["object", "doggie", "0", "1", "2", "non-corrosion", "spall"]
 _leaked = [k for k in _still_out if k in PD.CLASS_MAP]
-check("25d panel-gap and junk strings stay unmapped, so the unmapped report "
-      "keeps working",
+check("25d junk strings stay unmapped, so the unmapped report keeps working",
       not _leaked, str(_leaked))
 check("25e the negative class is not mapped to a damage type",
       "non-corrosion" not in PD.CLASS_MAP)
@@ -1681,6 +1683,61 @@ _emit = {PNL.taxonomy_panel(n, s)
 check("26m every emittable panel name has a fusion anchor",
       not [e for e in _emit if e not in FUS.PANELS],
       str(sorted(e for e in _emit if e not in FUS.PANELS)))
+
+
+# ---- 27. panel_gap, split out of structural ------------------------------
+#
+# Four Roboflow projects label this under four spellings (Misalignment,
+# Dislocation, Disalocation, separation), ~7,900 images, all discarded at
+# merge because nothing mapped them. It was folded into structural, which
+# taught the detector that undamaged metal in the wrong place looks like
+# crushed metal -- and the repairs differ: realign versus replace.
+#
+# The corpus holds ZERO panel_gap boxes today; these tests pin the plumbing so
+# the class works the moment the four datasets are re-fetched.
+import class_map as CM2               # noqa: E402
+
+check("27a panel_gap is its own final class",
+      "panel_gap" in CM2.FINAL_CLASSES)
+check("27b all four source spellings map to it",
+      [PD.CLASS_MAP.get(k) for k in
+       ("misalignment", "dislocation", "disalocation", "separation")]
+      == ["panel_gap"] * 4)
+check("27c the drive folders moved off structural",
+      CM2.from_drive("panel_gap") == "panel_gap"
+      and CM2.from_drive("panel_mismatch") == "panel_gap")
+check("27d structural no longer claims them",
+      "panel_gap" not in CM2.FINAL_CLASSES["structural"]["drive"])
+
+# The trap this class could have fallen into: an unmapped label hits
+# `if not dtype: continue` and the detection is DELETED, silently. A first
+# draft mapped panel_gap to "gap", which is not a taxonomy type at all.
+_pg = DET.DAMAGE_CLASS_MAP.get("panel_gap")
+check("27e panel_gap resolves to a REAL taxonomy damage type",
+      _pg in TAX.DAMAGE_TYPES, f"{_pg!r}")
+check("27f a panel_gap detection survives into a finding",
+      len(DET.detections_to_findings(
+          [{"label": "panel_gap", "score": 0.9, "box": [10, 10, 100, 100]}],
+          (640, 480), min_confidence=0.1)) == 1)
+check("27g it has a distinct overlay colour",
+      CM2.FINAL_CLASSES["panel_gap"]["colour"]
+      not in [d["colour"] for k, d in CM2.FINAL_CLASSES.items()
+              if k != "panel_gap"])
+
+# The seven-class vocabulary must resolve, and must NOT have become the
+# shipped contract: class ids are positional, so a seven-class index read by
+# the six-class weights reports every class one place out.
+check("27h the seven-class vocabulary is registered",
+      "seven-class" in DET.TRAINING_VOCABULARIES
+      and "panel_gap" in DET.TRAINING_VOCABULARIES["seven-class"])
+check("27i every class in EVERY vocabulary reaches a real damage type",
+      not [(v, c) for v, cs in DET.TRAINING_VOCABULARIES.items() for c in cs
+           if DET.DAMAGE_CLASS_MAP.get(c) not in TAX.DAMAGE_TYPES],
+      str([(v, c) for v, cs in DET.TRAINING_VOCABULARIES.items() for c in cs
+           if DET.DAMAGE_CLASS_MAP.get(c) not in TAX.DAMAGE_TYPES]))
+check("27j DETECTOR_CLASSES still describes the SHIPPED six-class model",
+      "panel_gap" not in DET.DETECTOR_CLASSES
+      and len(DET.DETECTOR_CLASSES) == 6)
 
 
 # ---- report ---------------------------------------------------------------

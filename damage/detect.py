@@ -86,6 +86,7 @@ DAMAGE_CLASS_MAP = {
     "lamp_wheel": "lamp_damage",
     "rust_paint": "rust",
     "structural": "deformation",
+    "panel_gap": "misalignment",
 
     # AND THE GROUPED VOCABULARIES, which are the same bug again.
     # build_train_index supports --merge-groups and --groups-v2, which train
@@ -107,6 +108,14 @@ DAMAGE_CLASS_MAP = {
 TRAINING_VOCABULARIES = {
     "six-class": ("crack_glass", "dent", "lamp_wheel", "rust_paint",
                   "scratch_scuff", "structural"),
+    # SEVEN-CLASS adds panel_gap, split out of structural on 2026-09-02.
+    # Listed here so a model trained on it resolves, but NOT made the default:
+    # DETECTOR_CLASSES below is the contract with the CURRENTLY SHIPPED
+    # weights, which know six classes. Class ids are positional, so a
+    # seven-class index loaded by a six-class model reports every class one
+    # place out while training curves look perfectly healthy.
+    "seven-class": ("crack_glass", "dent", "lamp_wheel", "panel_gap",
+                    "rust_paint", "scratch_scuff", "structural"),
     "merge-groups": ("surface", "dent", "structural", "broken_part"),
     "groups-v2": ("surface", "deformation", "broken_part"),
 }
