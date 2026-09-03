@@ -65,3 +65,20 @@ Four independent adversarial reviews of the above. What did not survive:
 - **drive** -- never given a verdict; median grain 4.71, stock marks throughout. **DROP by provenance.**
 - **sha->project join** was last-line-wins over a many-to-one file; 2,276 drops depended on line order. Now: all sources kept, drop if any is a drop project.
 What stood: container (25/25 containers), curacel, yjf3z (for a better reason: 77% letterboxed, so edge_bar is blind to it), seam filter (19/20), and apply_clean_verdicts.py (all 174,050 boxes re-derived, 0 errors).
+
+## Rebuild result (idx19, 2026-09-03)
+Re-scored all 85,623 with the corrected filters; 92% of grain values changed.
+| | idx18 (pre-council) | idx19 |
+|---|---|---|
+| kept images | 55,881 | **48,779** |
+| boxes | 174,050 | 146,048 |
+| classes | 6 (panel_gap folded) | **7 (panel_gap restored)** |
+| held-out images with a train twin (Hamming<=6) | 700 | **0** |
+| negatives on a labelled box at IoU>0.1 | 164 (max 0.582) | **39 (max 0.204)** |
+Drops: grain 16,296 (threshold 3.0->1.5), near-duplicate 1,942 (exact 7x9 index,
+was 1,563 from a bucketing that missed 84%), edge_bar 762 (0.60->0.80), seam 191.
+datasetyolo returns at 95.2% kept, and the three projects hidden by the last-wins
+provenance join are now visible -- asandes-workspace 1,607, ai-model-vapko 132,
+and rang-04bzz confirmed as greyscale scrap that never reached the keep set.
+lamp_wheel, rust_paint and panel_gap remain over the 15x repeat ceiling: they are
+genuinely scarce, and the flags say so rather than hiding it.
