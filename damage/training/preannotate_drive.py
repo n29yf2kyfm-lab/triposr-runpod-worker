@@ -114,6 +114,11 @@ def main():
         doc = json.load(open(side))
         idx = doc.get("index_to_name") or {}
         labels = {int(k): v for k, v in idx.items()}
+    if not labels:
+        # Without labels every image fails the "detector has this class" test,
+        # gets zero boxes, and a complete-looking output is written with no
+        # error. Fail loudly instead.
+        raise SystemExit(f"no class labels: expected {side} with index_to_name")
 
     import onnxruntime
     sess = onnxruntime.InferenceSession(
@@ -149,8 +154,11 @@ def main():
             good.append(line if line.endswith("\n") else line + "\n")
             done.add(rec["file"])
         if torn:
-            with open(a.out + ".partial", "w") as fh:
+            # via a temp file: a reclaim between truncate and rewrite would
+            # otherwise destroy the very partial this exists to protect
+            with open(a.out + ".partial.tmp", "w") as fh:
                 fh.writelines(good)
+            os.replace(a.out + ".partial.tmp", a.out + ".partial")
             print(f"repaired partial: dropped {torn} torn row(s)")
         print(f"resuming: {len(done):,} already done")
 
@@ -236,6 +244,9 @@ def main():
                       f"{rate:.1f}/s  {(len(jobs)-n-1)/max(rate,1e-6)/60:.0f} "
                       f"min left", flush=True)
 
+    if a.limit:
+        # a --limit debug run must not masquerade as the finished corpus
+        stopped_early = True
     if stopped_early:
         # Do NOT write the final json or the chart from a partial run: a file
         # named drive_preannot.json that holds a third of the images, with a
@@ -245,8 +256,19 @@ def main():
         return
 
     rows = [json.loads(l) for l in open(a.out + ".partial")]
+    # Stats are derived from the rows, never from the in-memory counter: the
+    # counter only ever saw the LAST chunk, and the shipped file once said
+    # "14 boxes kept from 112 images" over a run that held 19,267 boxes on
+    # 12,253 images. Counters that cannot be re-derived (class-mismatch
+    # drops, images run) are not written at all rather than written wrong.
+    st = collections.Counter()
     st["images_total"] = len(rows)
     st["images_with_boxes"] = sum(1 for r in rows if r["boxes"])
+    st["boxes_total"] = sum(len(r["boxes"]) for r in rows)
+    st["needs_annotation_from_scratch"] = sum(1 for r in rows if r.get("needs_annotation_from_scratch"))
+    st["errors"] = sum(1 for r in rows if r.get("error"))
+    for q, n in collections.Counter(r["quality"] for r in rows).items():
+        st[f"quality_{q}"] = n
     json.dump({"stats": dict(st), "images": rows}, open(a.out, "w"))
 
     # THE CHART: one row per class, so what survives per class is visible at a

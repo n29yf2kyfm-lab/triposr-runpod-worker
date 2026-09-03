@@ -24,13 +24,30 @@ import csv, json, os, collections
 
 VERDICTS = "/home/user/rf/audit/clean_verdicts.csv"
 SRC = "/home/user/rf/corpus7"
-DST = "/home/user/rf/corpus8"
-FOLD = {"panel_gap": "structural"}
+DST = "/home/user/rf/corpus9"
+# panel_gap is NOT folded. The fold rested on "3 of 20 frames showed a gap",
+# but that sample was drawn from the 78 images whose PRIMARY class is
+# panel_gap -- 7.5% of the 1,036 images carrying the boxes, and selected on
+# the one variable that guarantees multi-panel wrecks -- and then judged the
+# whole image rather than the box. A random draw of 20 BOXES from all 1,567
+# put roughly 16 on a genuine seam, shut line or panel separation. It is a
+# real, scarce class; the index builder's 15x repeat cap handles scarcity
+# honestly, and folding 1,455 tight seam boxes into structural would have
+# taught structural to fire on shut lines.
+FOLD = {}
 
 
 def main():
-    keep = {r["image"] for r in csv.DictReader(open(VERDICTS)) if r["clean_verdict"] == "keep"}
+    verdicts = list(csv.DictReader(open(VERDICTS)))
+    unscored = sum(1 for r in verdicts if r["clean_verdict"] == "unscored")
+    if unscored:
+        raise SystemExit(f"REFUSING: {VERDICTS} has {unscored:,} unscored rows -- finish scoring first")
+    keep = {r["image"] for r in verdicts if r["clean_verdict"] == "keep"}
+    known = {r["image"] for r in verdicts}
     c = json.load(open(os.path.join(SRC, "_annotations.coco.json")))
+    unmatched = [i["file_name"] for i in c["images"] if i["file_name"] not in known]
+    if unmatched:
+        print(f"  note: {len(unmatched):,} corpus images have NO row in the verdicts file (dropped): {unmatched[:3]}")
     old_cat = {x["id"]: x["name"] for x in c["categories"]}
 
     # categories, minus anything folded away; ids are reassigned densely

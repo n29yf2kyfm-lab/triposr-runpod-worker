@@ -52,3 +52,16 @@ unsourced dent/scratch noise-and-cutout frames come from.
 | UNSOURCED dent (10,885) | ~10/20 usable | noise aug + pasted cutout rectangles on 5, shutterstock bars on 2, one undamaged BMW |
 Per-image provenance for these rows needs HF_TOKEN (private zips on Alamj/tier1-roboflow-yolo);
 not available in this session. They are handled per image by audit_corpus.py instead.
+
+## Council corrections (2026-09-03)
+Four independent adversarial reviews of the above. What did not survive:
+- **"watermarks ~15%"** -- an unweighted average over three per-class sheets in which panel_gap (0.11% of the population) supplied most of the hits. Size-weighted, the same 60 images give **7.2%**; two independent checks land at 4-7%. The OCR figure gets *worse*: only 14 of its 86 flags were direct reads, so tesseract's real recall is **under 1%**.
+- **panel_gap "3 of 20 showed a gap"** -- sampled from the 78 images whose PRIMARY class is panel_gap (7.5% of the 1,036 carrying its boxes, and selected for multi-panel wrecks), then judged by image not box. A random draw of 20 BOXES: ~16 sit on a real seam or separation. **Fold reversed.**
+- **datasetyolo DROP** -- measured flag rate 4.0%, cleaner than four kept projects; a 20-image sheet cannot reject "60% good" (P=0.95). Cost 38% of lamp_wheel. **Restored to per-image filtering.**
+- **rfvnx DROP** -- 8/20 bad is the reading four kept projects got. **Restored.** Its images are also the entire keep set of asandes-workspace and skillfactory (re-exports of one dataset); rang-04bzz (9,617 rows) is greyscale scrap that never reached the keep set.
+- **grain 3.0** -- 1:1 crops of KEPT images show the 1.5-3.0 band is noise augmentation throughout: ~12,200 augmented frames (21.8%) survived. **Now 1.5**, crack_glass exempt (crack webs score as grain).
+- **edge_bar 0.60** -- "zero false positives on 60" had an 83% chance of passing at the true FP rate. Precision ~30% in 0.60-0.70, ~100% at >= 0.80. **Now 0.80.**
+- **dedup** -- bucketing on the top 16 bits misses 84% of Hamming-6 pairs; 700 held-out images had a train twin. **Replaced with an exact 7x9-bit index**, and verify_index.py now produces the leak audit idx18 never had.
+- **drive** -- never given a verdict; median grain 4.71, stock marks throughout. **DROP by provenance.**
+- **sha->project join** was last-line-wins over a many-to-one file; 2,276 drops depended on line order. Now: all sources kept, drop if any is a drop project.
+What stood: container (25/25 containers), curacel, yjf3z (for a better reason: 77% letterboxed, so edge_bar is blind to it), seam filter (19/20), and apply_clean_verdicts.py (all 174,050 boxes re-derived, 0 errors).

@@ -41,15 +41,24 @@ def load(path):
     return im
 
 FLAGS = {
-    "grain":     3.0,     # curacel 3-7; gravel lots and textured floors reach 2-3
-    # 0.60 is the lowest threshold with ZERO false positives across 60 images
-    # from three projects I read as carrying no credit bars. It catches only
-    # about a third of the bars on the stock scrapes, but those projects are
-    # dropped by provenance anyway; this filter exists to catch the stray
-    # stock frame inside an otherwise-good project, where a false positive
-    # (silently deleting a real photo) is the more expensive mistake.
-    "edge_bar":  0.60,
-    "seam":      0.80,
+    # grain: 3.0 was first shipped, justified as "gravel and textured floors
+    # reach 2-3". A council review then looked at 1:1 crops of KEPT images by
+    # band and found the 1.5-3.0 band is noise augmentation throughout (16/16),
+    # not texture -- 3.0 cut through the middle of the augmented population and
+    # left ~12,200 augmented frames in the "clean" set. 1.5 is where the clean
+    # floor starts. crack_glass is exempt (see flags()): a shattered windscreen
+    # scores as grain because the crack web IS high-frequency, and ~15-20% of
+    # that class's grain drops were the damage signal being deleted as noise.
+    "grain":     1.5,
+    # edge_bar: 0.60 was chosen for "zero false positives on 60 clean images",
+    # which at the true FP rate (~0.3%) had an 83% chance of passing by luck --
+    # the test could not fail. Precision measured by band on the actual drops:
+    # ~30% in 0.60-0.70, ~65% in 0.70-0.80, ~100% at >= 0.80, the failures
+    # being letterbox padding seams, not credit bars. 0.80 gives up ~160 real
+    # bars to recover ~190 real photographs, which is the trade the stated
+    # policy (a false positive is the expensive mistake) actually implies.
+    "edge_bar":  0.80,
+    "seam":      0.80,     # 19/20 sampled drops are genuine composites; unchanged
     # baked_box and label_tag are recorded as scores but do not flag. Neither
     # survived validation: the box lines cannot be told from chrome trim on a
     # red car, and the label tags are ~4 px tall at corpus resolution while
@@ -73,13 +82,21 @@ def grain(im):
     res = np.abs(a - med)
     B = 16; H = W = 320 // B
     blocks = res.reshape(H, B, W, B).mean(axis=(1, 3))
-    grad = np.abs(np.gradient(a)[0]).reshape(H, B, W, B).mean(axis=(1, 3))
+    # gradient MAGNITUDE. An earlier version used np.gradient(a)[0] -- the
+    # vertical derivative only -- so "flattest" meant flat in one axis, and the
+    # chosen blocks carried 41% of average horizontal gradient. ~450 verdicts.
+    gy, gx = np.gradient(a)
+    grad = np.hypot(gx, gy).reshape(H, B, W, B).mean(axis=(1, 3))
     return float(blocks[grad <= np.quantile(grad, 0.25)].mean())
 
 
 def _bar_score(strip, next_row, last_row):
     """One candidate bar. strip: (h, W) grey rows at the edge, last_row the
-    strip's inner row, next_row the first row beyond it.
+    strip's inner row, next_row the row one PAST the first row beyond it.
+    The one-row skip on both sides of the boundary is deliberate and symmetric:
+    it is what the 0.80 threshold was calibrated against, and removing it
+    would silently halve recall (measured: 52% of true bars fall under 0.80).
+    Do not "fix" the indices without re-calibrating.
       step     the boundary is a hard step along (nearly) the whole width --
                a horizon or a floor gives a ragged partial step instead
       uniform  the strip is one colour apart from its text
@@ -173,13 +190,21 @@ def label_tag(im):
 
 
 def score_all(path):
-    """The three flagging filters. baked_box and label_tag are not run here:
-    they work on the full 640 px frame and cost more than the other three
-    together, for a score that does not flag."""
-    im = Image.open(path)
-    im.load()
+    """The three flagging filters, on the SAME draft-decoded frame the corpus
+    pass uses. An earlier version decoded at full size here, and the two paths
+    disagreed one-way: libjpeg's DCT-domain scaling preserves pixel noise that
+    a full decode plus antialiased resize smooths, so draft scores run ~14%
+    higher and the CSV was not reproducible from this function. baked_box and
+    label_tag are not run: full-frame, expensive, and they do not flag."""
+    im = load(path)
     return {"grain": grain(im), "edge_bar": edge_bar(im), "seam": seam(im)}
 
 
-def flags(scores):
-    return [k for k, t in FLAGS.items() if scores[k] >= t]
+def flags(scores, cls=None):
+    """Names of the filters that fire. crack_glass is exempt from grain: the
+    crack web of a shattered windscreen is genuine high-frequency signal and
+    scores exactly like injected noise."""
+    out = [k for k, t in FLAGS.items() if scores[k] >= t]
+    if cls == "crack_glass" and "grain" in out:
+        out.remove("grain")
+    return out

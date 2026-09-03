@@ -36,12 +36,27 @@ SCORES = "/home/user/rf/audit/scores.jsonl"
 OUT = "/home/user/rf/audit/clean_verdicts.csv"
 ROOT = {"roboflow": "/home/user/rf/merged640", "cardd": "/home/user/rf/merged640", "drive": "/home/user"}
 
+# Whole-project drops. A council review re-examined all five original entries:
+#   container-damage  -- 25/25 random frames are shipping containers. Certain.
+#   yjf3z             -- kept, but for the decisive reason the first pass
+#                        missed: 77% of it is black-letterboxed, which zeroes
+#                        edge_bar's text term, so per-image filtering is
+#                        structurally blind to this project (99% would pass).
+#   curacel           -- 70% any-flag rate, median grain 4.5. Corroborated.
+#   datasetyolo       -- REMOVED from this list. Its measured flag rate is
+#                        4.0%, cleaner than four kept projects, and the 20-image
+#                        sheet (5 bad) has P=0.95 of looking that bad from a
+#                        60%-good project. Dropping it cost 38% of lamp_wheel.
+#   rfvnx             -- REMOVED. 8/20 bad is the same reading four kept
+#                        projects got. 79% passes the per-image filters.
+#   drive             -- ADDED. 5,553 rows, median grain 4.71, uniformly noise
+#                        augmented with stock marks; it was never given a
+#                        verdict in the first pass and grain merely skimmed it.
 DROP_PROJECTS = {
     "container-damage-ke5bc/dent-detection-4qxiu":            "shipping containers, not cars",
-    "vehicle-detection-yjf3z/car-dent-scratch-detection":     "augmented export: flips, HDR, mirrored watermarks",
-    "datasetyolo/broken-car-od":                              "augmented export: flips, rotations, stock",
-    "curacel-ai/car-damage-detection-5ioys":                  "stock scrape: watermark bars on most frames",
-    "rfvnx-dgm7e/car-damage-c1f0i-epb08":                     "stock scrape with noise aug",
+    "vehicle-detection-yjf3z/car-dent-scratch-detection":     "77% letterboxed: edge_bar is blind to it; flips, HDR, watermarks",
+    "curacel-ai/car-damage-detection-5ioys":                  "stock scrape with noise aug: 70% flag rate",
+    "drive":                                                  "noise-augmented stock scrape: median grain 4.71",
 }
 # survivors of a duplicate group are chosen in this order
 CLEAN_FIRST = ["changs-workspace-hnorg/vehicle-damage-gwmh4", "project-joggx/car-damage-assessment-8mb45",
@@ -77,12 +92,22 @@ def one(job):
 
 
 def rows_with_project():
+    """reingest.jsonl has 101,365 rows for 85,717 images: 6,760 images were
+    exported by more than one Roboflow project. An earlier version kept one
+    source per image -- whichever line came LAST -- which made 2,276 drop
+    decisions depend on file order and hid three projects (~20,000 rows)
+    from the audit entirely. Now every source is kept: an image is dropped if
+    ANY of its sources is a drop project, and "project" (for reporting and
+    for which duplicate survives) is its best-ranked source."""
     src = {}
     for line in open(REINGEST):
-        d = json.loads(line); src[d["sha"][:16]] = d["source"]
+        d = json.loads(line); src.setdefault(d["sha"][:16], set()).add(d["source"])
+    rank = {p: i for i, p in enumerate(CLEAN_FIRST)}
     rows = [r for r in csv.DictReader(open(MASTER)) if r["verdict"] == "keep"]
     for r in rows:
-        r["project"] = r["dataset"] if r["dataset"] != "roboflow" else src.get(r["sha"][:16], "UNSOURCED")
+        ps = src.get(r["sha"][:16], {"UNSOURCED"}) if r["dataset"] == "roboflow" else {r["dataset"]}
+        r["projects"] = sorted(ps)
+        r["project"] = min(ps, key=lambda p: (rank.get(p, len(rank)), p))
         r["path"] = os.path.join(ROOT[r["dataset"]], r["image"])
     return rows
 
@@ -91,9 +116,19 @@ def score(a):
     rows = rows_with_project()
     done = set()
     if os.path.exists(SCORES):
+        # Repair, do not merely skip, a torn line from a hard kill: skipped, it
+        # stays in the file, the redo is appended onto the fragment, the merged
+        # line never parses, and that image is "unscored" on every later run
+        # and silently dropped from the corpus. Rewrite via a temp file so a
+        # reclaim mid-repair cannot destroy the partial either.
+        good, torn = [], 0
         for line in open(SCORES):
-            try: done.add(json.loads(line)["key"])
-            except Exception: pass          # a torn last line from a hard kill
+            try: done.add(json.loads(line)["key"]); good.append(line.rstrip("\n") + "\n")
+            except Exception: torn += 1
+        if torn:
+            with open(SCORES + ".tmp", "w") as fh: fh.writelines(good)
+            os.replace(SCORES + ".tmp", SCORES)
+            print(f"repaired {SCORES}: dropped {torn} torn row(s)")
     todo = [(r["image"], r["path"]) for r in rows if r["image"] not in done]
     print(f"{len(rows):,} keep rows, {len(done):,} already scored, {len(todo):,} to go", flush=True)
     if not todo:
@@ -109,9 +144,12 @@ def score(a):
                 rate = n / (time.time() - t0)
                 left = (len(todo) - n) / rate / 60
                 print(f"  {n:,}/{len(todo):,}  {rate:.0f}/s  {left:.0f} min of scoring left", flush=True)
-                if time.time() > deadline:
-                    print(f"time budget reached, {len(done)+n:,} of {len(rows):,} scored; re-run to continue", flush=True)
-                    pool.terminate(); break
+            # deadline every 25, not every 500: at 6-15/s a 500 cadence
+            # overshoots by up to 80 s and never fires on a short tail.
+            if n % 25 == 0 and time.time() > deadline:
+                out.flush()
+                print(f"time budget reached, {len(done)+n:,} of {len(rows):,} scored; re-run to continue", flush=True)
+                pool.terminate(); break
     print(f"wrote {SCORES}")
 
 
@@ -123,40 +161,65 @@ def finalise():
         except Exception: pass
     missing = [r for r in rows if r["image"] not in sc]
     if missing:
-        print(f"WARNING: {len(missing):,} rows unscored; run without --finalise first")
+        # REFUSE. An earlier version warned and then wrote clean_verdicts.csv
+        # anyway -- all 85,623 rows, every column filled, internally
+        # consistent -- and a truncated score file produced a 15,768-image
+        # corpus that nothing downstream could tell from the real one.
+        print(f"REFUSING to finalise: {len(missing):,} rows unscored. Run without --finalise first.")
+        return
 
     for r in rows:
         s = sc.get(r["image"])
-        if r["project"] in DROP_PROJECTS:
-            r["clean_verdict"], r["clean_reason"] = "drop_project", DROP_PROJECTS[r["project"]]
+        bad = [p for p in r["projects"] if p in DROP_PROJECTS]
+        if bad:
+            r["clean_verdict"], r["clean_reason"] = "drop_project", DROP_PROJECTS[bad[0]]
         elif s is None:
             r["clean_verdict"], r["clean_reason"] = "unscored", ""
         elif s["err"]:
             r["clean_verdict"], r["clean_reason"] = "drop_unreadable", s["err"]
         else:
-            fl = F.flags(s)
+            fl = F.flags(s, r["class"])
             r["clean_verdict"] = "drop_" + fl[0] if fl else "keep"
             r["clean_reason"] = ",".join(fl)
         for k in ("grain", "edge_bar", "seam", "phash"):
             r[k] = s[k] if s else ""
 
-    # perceptual duplicates among what is still kept. Bucket by the top 16
-    # bits then compare within buckets -- Hamming <= 6 on 64 bits almost
-    # always shares the leading bits, and it keeps this O(n) in practice.
+    # Perceptual duplicates among what is still kept, clean projects surviving.
+    #
+    # EXACT for Hamming <= 6, by pigeonhole: the hash is 63 bits (8x8 DCT
+    # minus the DC term), split into 7 bands of 9 bits; 6 differing bits can
+    # touch at most 6 bands, so any pair within 6 agrees exactly on at least
+    # one band and is compared. An earlier version bucketed on the top 16
+    # bits only, with a comment claiming close pairs "almost always share the
+    # leading bits". They do not: P(top 16 agree | Hamming 6) = C(47,6)/C(63,6)
+    # = 0.16, so it missed 84% of what it existed to find -- 1,952 images, 700
+    # of them a held-out image with a twin in train. Three reviewers found it
+    # independently. Note also that the median split leaves every hash with
+    # exactly 31 set bits, so distances are always EVEN: <= 6 means {0,2,4,6}.
     rank = {p: i for i, p in enumerate(CLEAN_FIRST)}
     kept = sorted((r for r in rows if r["clean_verdict"] == "keep"),
                   key=lambda r: rank.get(r["project"], len(rank)))
-    buckets = {}
+    bands = [{} for _ in range(7)]
     for r in kept:
-        h = int(r["phash"], 16); key = h >> 48
-        hit = next((c for c in buckets.get(key, ()) if bin(h ^ int(c["phash"], 16)).count("1") <= 6), None)
+        h = int(r["phash"], 16)
+        keys = [(h >> (9 * i)) & 0x1FF for i in range(7)]
+        seen = set(); hit = None
+        for i, k in enumerate(keys):
+            for c in bands[i].get(k, ()):
+                if id(c) in seen: continue
+                seen.add(id(c))
+                if bin(h ^ int(c["phash"], 16)).count("1") <= 6:
+                    hit = c; break
+            if hit: break
         if hit is None:
-            buckets.setdefault(key, []).append(r)
+            for i, k in enumerate(keys):
+                bands[i].setdefault(k, []).append(r)
         else:
             r["clean_verdict"] = "drop_near_duplicate"
             r["clean_reason"] = f"of {hit['image']} ({hit['project']})"
 
-    cols = ["image", "sha", "dataset", "project", "class", "split",
+    for r in rows: r["projects"] = "|".join(r["projects"])
+    cols = ["image", "sha", "dataset", "project", "projects", "class", "split",
             "grain", "edge_bar", "seam", "phash", "clean_verdict", "clean_reason"]
     with open(OUT, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
