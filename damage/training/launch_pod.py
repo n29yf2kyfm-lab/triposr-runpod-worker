@@ -128,6 +128,13 @@ def launch(args, env, gpu):
     payload = {
         "cloudType": args.cloud,
         "gpuCount": 1,
+        # PIN THE CPU. Without these the pod gets whatever the host has left,
+        # and v19-clean2 ran at 17.8 img/s against v17's 27.3 on the same GPU
+        # class with CPU at 95% -- the two runs were not on comparable hosts
+        # and there was no way to know. 8 vCPUs / 32 GB matches a 4-worker
+        # loader plus RF-DETR's CPU-side Hungarian matcher with room to spare.
+        "minVcpuCount": 8,
+        "minMemoryInGb": 32,
         "volumeInGb": 0,
         "containerDiskInGb": args.disk,
         "gpuTypeId": gpu,

@@ -24,7 +24,7 @@ import csv, json, os, collections
 
 VERDICTS = "/home/user/rf/audit/clean_verdicts.csv"
 SRC = "/home/user/rf/corpus7"
-DST = "/home/user/rf/corpus9"
+DST = "/home/user/rf/corpus10"
 # panel_gap is NOT folded. The fold rested on "3 of 20 frames showed a gap",
 # but that sample was drawn from the 78 images whose PRIMARY class is
 # panel_gap -- 7.5% of the 1,036 images carrying the boxes, and selected on
@@ -57,10 +57,17 @@ def main():
 
     images = [i for i in c["images"] if i["file_name"] in keep]
     live = {i["id"] for i in images}
-    anns, folded = [], 0
+    dims = {i["id"]: (i["width"], i["height"]) for i in images}
+    anns, folded, whole = [], 0, 0
     for a in c["annotations"]:
         if a["image_id"] not in live:
             continue
+        # A box covering >= 98% of both dimensions is an image-level label
+        # exported as a box (622 in corpus9, 496 of them crack_glass). It
+        # teaches the detector that the whole frame is the damage.
+        W, H = dims[a["image_id"]]
+        if a["bbox"][2] >= 0.98 * W and a["bbox"][3] >= 0.98 * H:
+            whole += 1; continue
         name = old_cat[a["category_id"]]
         if name in FOLD:
             name = FOLD[name]; folded += 1
@@ -86,7 +93,8 @@ def main():
               "images_dropped_by_verdict": len(c["images"]) - len(images) - len(dropped_empty),
               "images_dropped_no_box_left": len(dropped_empty),
               "boxes_in": len(c["annotations"]), "boxes_out": len(anns),
-              "boxes_folded_panel_gap": folded, "boxes_by_class": dict(by),
+              "boxes_folded_panel_gap": folded, "boxes_dropped_whole_frame": whole,
+              "boxes_by_class": dict(by),
               "classes": names}
     with open(os.path.join(DST, "build_report.json"), "w") as f:
         json.dump(report, f, indent=1)

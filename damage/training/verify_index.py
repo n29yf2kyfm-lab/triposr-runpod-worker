@@ -8,8 +8,8 @@ file" claim had no evidence behind it and was false. This is the evidence:
   sha        no image sha in more than one split
   aug        no row with a recipe or rep>0 outside train
   phash      no held-out image within Hamming <= RADIUS of any train image,
-             found with a 7-band x 9-bit index that is EXACT for radius 6 on
-             this 63-bit hash (6 differing bits cannot touch all 7 bands)
+             found with a 9-band x 7-bit index that is EXACT for radius 8 on
+             this 63-bit hash (8 differing bits cannot touch all 9 bands)
 
 Phashes come from audit/scores.jsonl (keyed by relative image path), so the
 check is independent of whatever the index builder believed about groups.
@@ -18,7 +18,9 @@ check is independent of whatever the index builder believed about groups.
 """
 import argparse, json, os, collections
 
-RADIUS = 6
+RADIUS = 8   # audit_corpus dedups at 8; checking at the dedup radius is circular,
+             # but the exhaustive check that found the leak was AT 8, so 8 is the
+             # floor. 9 bands x 7 bits is exact for radius 8 by pigeonhole.
 
 
 def main():
@@ -56,7 +58,7 @@ def main():
     # 7x9 LSH over train; probe every held-out image. An image with no phash
     # cannot be checked, so it is COUNTED and fails the audit rather than
     # silently passing as leak-free.
-    bands = [collections.defaultdict(list) for _ in range(7)]
+    bands = [collections.defaultdict(list) for _ in range(9)]
     train, held, unhashed = [], [], []
     for s, v in split.items():
         f = file_of[s]
@@ -64,13 +66,13 @@ def main():
             unhashed.append(f); continue
         (train if "train" in v else held).append((s, f, ph[f]))
     for s, f, h in train:
-        for i in range(7):
-            bands[i][(h >> (9 * i)) & 0x1FF].append((s, f, h))
+        for i in range(9):
+            bands[i][(h >> (7 * i)) & 0x7F].append((s, f, h))
     leaks = []
     for s, f, h in held:
         seen = set(); best = None
-        for i in range(7):
-            for ts, tf, th in bands[i].get((h >> (9 * i)) & 0x1FF, ()):
+        for i in range(9):
+            for ts, tf, th in bands[i].get((h >> (7 * i)) & 0x7F, ()):
                 if ts in seen: continue
                 seen.add(ts)
                 d = bin(h ^ th).count("1")
@@ -78,7 +80,7 @@ def main():
         if best: leaks.append({"held_out": f, "split": sorted(split[s])[0], "train_twin": best[1], "hamming": best[0]})
 
     by_d = collections.Counter(l["hamming"] for l in leaks)
-    report = {"index": a.idx, "radius": RADIUS, "method": "7-band x 9-bit LSH, exact for radius <= 6",
+    report = {"index": a.idx, "radius": RADIUS, "method": "9-band x 7-bit LSH, exact for radius <= 8",
               "n_train": len(train), "n_held_out": len(held), "sha_in_multiple_splits": len(sha_multi),
               "images_without_phash": len(unhashed), "negatives_outside_train": neg_outside,
               "augmented_rows_outside_train": dict(aug_outside),

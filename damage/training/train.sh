@@ -42,6 +42,14 @@ TAG="${RUN_TAG:-run}"
   set +x            # this loop must not write to the log it is uploading
   while true; do
     sleep 300
+    # A stack sample every heartbeat, so a slow run names its bottleneck
+    # (_next_data = loader-bound; linear_sum_assignment/backward = main
+    # process) instead of leaving it to be inferred from pod telemetry.
+    # Bounded to 40 lines so it cannot bloat the log; failures are swallowed.
+    pid=$(pgrep -f "train_detector.py" | head -1)
+    if [ -n "$pid" ] && command -v py-spy >/dev/null; then
+      { echo "--- py-spy $(date -u +%H:%M) pid $pid ---"; py-spy dump --pid "$pid" 2>&1 | head -40; } >> /workspace/train.log || true
+    fi
     python - <<'PY' >/dev/null 2>&1
 import os, glob
 from huggingface_hub import HfApi
@@ -299,6 +307,9 @@ date -u > "$MARKER"
 echo "=== env ==="
 nvidia-smi || echo "NO GPU VISIBLE"
 python -V; df -h /workspace | tail -1
+# Name the CPU. Two runs on the same GPU class differed 1.5x in throughput
+# and the logs could not say why, because neither recorded what CPU it had.
+echo "cpu: $(nproc) vcpu | $(grep -m1 'model name' /proc/cpuinfo | cut -d: -f2 | xargs) | mem $(free -g | awk '/Mem:/{print $2}')G"
 
 echo "=== deps ==="
 pip install -q --upgrade pip

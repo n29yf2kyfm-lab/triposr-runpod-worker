@@ -35,6 +35,7 @@ REINGEST = "/home/user/rf/reingest.jsonl"
 SCORES = "/home/user/rf/audit/scores.jsonl"
 OUT = "/home/user/rf/audit/clean_verdicts.csv"
 ROOT = {"roboflow": "/home/user/rf/merged640", "cardd": "/home/user/rf/merged640", "drive": "/home/user"}
+DEDUP_RADIUS = 8      # Hamming, on the 63-bit phash; see the dedup block for why 8
 
 # Whole-project drops. A council review re-examined all five original entries:
 #   container-damage  -- 25/25 random frames are shipping containers. Certain.
@@ -192,10 +193,16 @@ def finalise():
 
     # Perceptual duplicates among what is still kept, clean projects surviving.
     #
-    # EXACT for Hamming <= 6, by pigeonhole: the hash is 63 bits (8x8 DCT
-    # minus the DC term), split into 7 bands of 9 bits; 6 differing bits can
-    # touch at most 6 bands, so any pair within 6 agrees exactly on at least
-    # one band and is compared. An earlier version bucketed on the top 16
+    # EXACT for Hamming <= 8, by pigeonhole: the hash is 63 bits (8x8 DCT
+    # minus the DC term), split into 9 bands of 7 bits; 8 differing bits can
+    # touch at most 8 bands, so any pair within 8 agrees exactly on at least
+    # one band and is compared. Radius 8, not 6: a second council review ran
+    # the exhaustive all-pairs check on idx19 and found the split straddle
+    # rate at Hamming 8 sitting at pure chance (34.9%), with 777 held-out
+    # images having a train neighbour there -- and by eye about two thirds of
+    # those pairs are the same photograph. Deduping at 6 and then verifying
+    # at 6 was circular. (At 10 only ~20% are twins; that shell is handled by
+    # split grouping, not deletion -- see make_dupe_groups.py.) An earlier version bucketed on the top 16
     # bits only, with a comment claiming close pairs "almost always share the
     # leading bits". They do not: P(top 16 agree | Hamming 6) = C(47,6)/C(63,6)
     # = 0.16, so it missed 84% of what it existed to find -- 1,952 images, 700
@@ -205,16 +212,16 @@ def finalise():
     rank = {p: i for i, p in enumerate(CLEAN_FIRST)}
     kept = sorted((r for r in rows if r["clean_verdict"] == "keep"),
                   key=lambda r: rank.get(r["project"], len(rank)))
-    bands = [{} for _ in range(7)]
+    bands = [{} for _ in range(9)]
     for r in kept:
         h = int(r["phash"], 16)
-        keys = [(h >> (9 * i)) & 0x1FF for i in range(7)]
+        keys = [(h >> (7 * i)) & 0x7F for i in range(9)]
         seen = set(); hit = None
         for i, k in enumerate(keys):
             for c in bands[i].get(k, ()):
                 if id(c) in seen: continue
                 seen.add(id(c))
-                if bin(h ^ int(c["phash"], 16)).count("1") <= 6:
+                if bin(h ^ int(c["phash"], 16)).count("1") <= DEDUP_RADIUS:
                     hit = c; break
             if hit: break
         if hit is None:
