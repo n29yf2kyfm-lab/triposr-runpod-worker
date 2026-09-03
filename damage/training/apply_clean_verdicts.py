@@ -24,7 +24,7 @@ import csv, json, os, collections
 
 VERDICTS = "/home/user/rf/audit/clean_verdicts.csv"
 SRC = "/home/user/rf/corpus7"
-DST = "/home/user/rf/corpus10"
+DST = "/home/user/rf/corpus11"
 # panel_gap is NOT folded. The fold rested on "3 of 20 frames showed a gap",
 # but that sample was drawn from the 78 images whose PRIMARY class is
 # panel_gap -- 7.5% of the 1,036 images carrying the boxes, and selected on

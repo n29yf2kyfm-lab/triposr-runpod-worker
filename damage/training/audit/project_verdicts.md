@@ -82,3 +82,36 @@ provenance join are now visible -- asandes-workspace 1,607, ai-model-vapko 132,
 and rang-04bzz confirmed as greyscale scrap that never reached the keep set.
 lamp_wheel, rust_paint and panel_gap remain over the 15x repeat ceiling: they are
 genuinely scarce, and the flags say so rather than hiding it.
+
+## Council 2 (2026-09-03) -- what it overturned, and idx21
+Four independent reviewers re-audited the idx19 rebuild, the re-tuned filters, the
+v19 run diagnosis, and the day's code. Three of my claims did not survive:
+- "idx19 is LEAK-FREE": true only at the radius the dedup already enforced (6).
+  Exhaustive all-pairs at Hamming 8: straddle at chance (34.9%), 704 held-out
+  images with a train neighbour, ~2/3 of them the same photograph by eye.
+- "39 negatives at IoU>0.1": wrong box convention; the truth was 0 overlaps.
+- "the LR schedule must complete, so relaunch at 8 epochs": RF-DETR's default is
+  a step drop at epoch 100 -- flat LR for a 12-epoch run. v19 was left running.
+And one of the council's own earlier prescriptions failed on inspection: grain 1.5
+deletes real photographs (tarmac, gravel, engine bays, whole-car shots with no
+flat area) at 18-25% of the [1.5,2.5) band, three quarters of them from the
+best projects; the blanket crack_glass exemption kept ~550 noise windscreens.
+
+Fixes shipped in idx21:
+| | idx19 | idx21 |
+|---|---|---|
+| dedup radius (exact) | 6 (7x9 bands) | **8 (9x7 bands)** |
+| split grouping | no-op (stale groups) | **fresh groups at Hamming 10** |
+| grain rule | >=1.5, crack_glass exempt | **>=1.5 AND residual whiteness <0.10** |
+| whole-frame boxes | kept | **631 dropped** |
+| held-out with train twin @8 | 704 | **0** |
+| held-out with train neighbour @10 | 1,990 (35% straddle) | **327 (14%)** |
+| negatives on a labelled box | 0 (after correction) | 0 (10,420 crops) |
+| kept images / boxes | 48,779 / 146,048 | **48,494 / 147,529** |
+Texture gate: +3,242 rescued (validated on a 40-image 1:1 sheet: ~13/20 real
+texture, 3 blocky upscales, 2 stock photos edge_bar missed; 20/20 still-dropped
+are salt-and-pepper noise), -554 crack_glass noise. Residual: ~8% of keeps carry
+sparse noise below grain 1.5; lowering the threshold costs more real photos than
+it removes. edge_bar 0.80 confirmed (92% precision; ~160 real bars survive).
+idx21 is the live idx/ on Alamj/damage-corpus, mirrored at idx21/, with
+leak_verified.json at radius 8.

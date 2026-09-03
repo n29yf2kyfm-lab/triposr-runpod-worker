@@ -200,11 +200,48 @@ def score_all(path):
     return {"grain": grain(im), "edge_bar": edge_bar(im), "seam": seam(im)}
 
 
+WHITE_GATE = 0.10
+
+
+def whiteness(im):
+    """Lag-1 autocorrelation of the median residual inside the flattest
+    quarter of 16x16 blocks -- the same blocks grain() measures.
+
+    Injected noise is WHITE: neighbouring residuals are uncorrelated, so this
+    sits near 0. Real texture -- tarmac, gravel, tyre tread, metallic flake,
+    snow, a crack web -- is correlated, and reads above 0.1. grain alone
+    cannot tell the two apart in [1.5, 3.0): a council review that viewed 300
+    images at 1:1 found grain 1.5 deleting real photographs (tarmac, engine
+    bays, whole-car shots with no flat area) at 18-25% of that band, three
+    quarters of them from the best projects. On 121 hand-labelled images this
+    metric scored AUC 0.855 against 0.751 for grain."""
+    g = im.convert("L").resize((320, 320))
+    a = np.asarray(g, dtype=np.float32)
+    med = np.asarray(g.filter(ImageFilter.MedianFilter(3)), dtype=np.float32)
+    r = a - med
+    gy, gx = np.gradient(a)
+    grad = np.hypot(gx, gy).reshape(20, 16, 20, 16).mean(axis=(1, 3))
+    rb = r.reshape(20, 16, 20, 16).transpose(0, 2, 1, 3)[grad <= np.quantile(grad, 0.25)]
+    xx = np.concatenate([rb[:, :, :-1].ravel(), rb[:, :-1, :].ravel()])
+    yy = np.concatenate([rb[:, :, 1:].ravel(), rb[:, 1:, :].ravel()])
+    if xx.std() <= 1e-6:
+        return 0.0
+    return float(np.corrcoef(xx, yy)[0, 1])
+
+
 def flags(scores, cls=None):
-    """Names of the filters that fire. crack_glass is exempt from grain: the
-    crack web of a shattered windscreen is genuine high-frequency signal and
-    scores exactly like injected noise."""
+    """Names of the filters that fire.
+
+    grain fires only when the residual is also WHITE (whiteness < WHITE_GATE).
+    This replaces the earlier blanket crack_glass exemption, which kept
+    ~550-650 noise-augmented windscreens because it keyed on the image's
+    primary class rather than on what the pixels looked like; a crack web is
+    correlated texture and passes the gate on its own merits. A grain-flagged
+    image with no whiteness score stays flagged (conservative), so the
+    whiteness pass must run before finalising."""
     out = [k for k, t in FLAGS.items() if scores[k] >= t]
-    if cls == "crack_glass" and "grain" in out:
-        out.remove("grain")
+    if "grain" in out:
+        w = scores.get("white")
+        if w is not None and w >= WHITE_GATE:
+            out.remove("grain")
     return out

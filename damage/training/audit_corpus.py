@@ -92,6 +92,38 @@ def one(job):
         return {"key": key, "grain": -1, "edge_bar": -1, "seam": -1, "phash": "0", "err": type(e).__name__}
 
 
+def _white_one(job):
+    key, path = job
+    try:
+        return key, round(F.whiteness(F.load(path)), 4)
+    except Exception:
+        return key, None
+
+
+def whiteness_pass(a):
+    """Add a 'white' score to every grain-flagged row that lacks one, and
+    rewrite scores.jsonl atomically. Only grain-flagged rows need it: the gate
+    can only rescue an image that grain would otherwise drop."""
+    rows = {r["image"]: r for r in rows_with_project()}
+    recs = [json.loads(l) for l in open(SCORES)]
+    todo = [(d["key"], rows[d["key"]]["path"]) for d in recs
+            if d.get("white") is None and not d["err"] and d["grain"] >= F.FLAGS["grain"] and d["key"] in rows]
+    print(f"{len(recs):,} scored rows, {len(todo):,} grain-flagged rows need a whiteness score", flush=True)
+    white = {}
+    if todo:
+        with Pool(a.workers) as pool:
+            for key, w in pool.imap_unordered(_white_one, todo, chunksize=32):
+                white[key] = w
+    for d in recs:
+        if d["key"] in white:
+            d["white"] = white[d["key"]]
+    with open(SCORES + ".tmp", "w") as fh:
+        for d in recs: fh.write(json.dumps(d) + "\n")
+    os.replace(SCORES + ".tmp", SCORES)
+    have = sum(1 for d in recs if d.get("white") is not None)
+    print(f"wrote {SCORES}: {have:,} rows carry a whiteness score")
+
+
 def rows_with_project():
     """reingest.jsonl has 101,365 rows for 85,717 images: 6,760 images were
     exported by more than one Roboflow project. An earlier version kept one
@@ -190,6 +222,7 @@ def finalise():
             r["clean_reason"] = ",".join(fl)
         for k in ("grain", "edge_bar", "seam", "phash"):
             r[k] = s[k] if s else ""
+        r["white"] = "" if not s or s.get("white") is None else s["white"]
 
     # Perceptual duplicates among what is still kept, clean projects surviving.
     #
@@ -233,7 +266,7 @@ def finalise():
 
     for r in rows: r["projects"] = "|".join(r["projects"])
     cols = ["image", "sha", "dataset", "project", "projects", "class", "split",
-            "grain", "edge_bar", "seam", "phash", "clean_verdict", "clean_reason"]
+            "grain", "white", "edge_bar", "seam", "phash", "clean_verdict", "clean_reason"]
     with open(OUT, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
         w.writeheader(); w.writerows(rows)
@@ -258,6 +291,9 @@ if __name__ == "__main__":
     ap.add_argument("--workers", type=int, default=max(1, (os.cpu_count() or 2) - 1))
     ap.add_argument("--minutes", type=float, default=9.0, help="stop scoring cleanly after this long")
     ap.add_argument("--finalise", action="store_true")
+    ap.add_argument("--whiteness", action="store_true", help="score whiteness for grain-flagged rows")
     a = ap.parse_args()
     os.makedirs(os.path.dirname(SCORES), exist_ok=True)
-    finalise() if a.finalise else score(a)
+    if a.whiteness: whiteness_pass(a)
+    elif a.finalise: finalise()
+    else: score(a)
