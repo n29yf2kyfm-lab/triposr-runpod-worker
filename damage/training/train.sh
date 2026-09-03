@@ -342,7 +342,28 @@ case "${CUDA_MM:-124}" in
   *)          IDX=cu124 ;;
 esac
 echo "selected torch index: $IDX"
-pip install -q --upgrade torch torchvision --index-url "https://download.pytorch.org/whl/$IDX" || exit 13
+# EXACT PINS PER INDEX, AND A CONSTRAINTS FILE THAT HOLDS THEM.
+# v19-clean died 90 seconds in with "cannot import name is_fake_tensor": the
+# pod had a CUDA 13.0 driver, this branch chose cu128, torch 2.11+cu128 went
+# in -- and then the rfdetr line below re-installed torch 2.14 from PyPI on
+# top of it WITHOUT uninstalling, because `--ignore-installed` applies to the
+# whole pip invocation, not just to blinker. The "re-pin" that followed left a
+# 2.14 __init__.py beside a 2.11 fake_tensor.py. v17 survived the same three
+# steps only because the cu124 index happened to resolve consistently.
+# So: pin torch+torchvision to a pair proven to exist on each index (checked
+# against the index listings), write the pins as pip constraints so rfdetr's
+# resolution cannot move them, and install blinker's --ignore-installed on a
+# line of its own where it can only affect blinker.
+case "$IDX" in
+  cu128) TORCH_PIN=2.7.1 ; TV_PIN=0.22.1 ;;
+  cu126) TORCH_PIN=2.6.0 ; TV_PIN=0.21.0 ;;
+  cu124) TORCH_PIN=2.6.0 ; TV_PIN=0.21.0 ;;   # the pair v17 trained on
+  cu121) TORCH_PIN=2.5.1 ; TV_PIN=0.20.1 ;;   # 2.6 was never built for cu121
+esac
+printf 'torch==%s\ntorchvision==%s\n' "$TORCH_PIN" "$TV_PIN" > /workspace/constraints.txt
+echo "pins: torch==$TORCH_PIN torchvision==$TV_PIN ($IDX)"
+pip install -q "torch==$TORCH_PIN" "torchvision==$TV_PIN" \
+  --index-url "https://download.pytorch.org/whl/$IDX" || exit 13
 # The [train,loggers] extras are NOT optional here. Plain `pip install rfdetr`
 # gives a package that imports perfectly and then refuses to train
 # ("RF-DETR training dependencies are missing" / no module pytorch_lightning),
@@ -353,7 +374,8 @@ pip install -q --upgrade torch torchvision --index-url "https://download.pytorch
 # accurately determine which files belong to it"), so a transitive upgrade
 # request aborts the whole install. Ignoring that one package lets pip put its
 # own copy alongside instead of failing.
-pip install -q --ignore-installed blinker "rfdetr[train,loggers]" || exit 14
+pip install -q --ignore-installed blinker || exit 14
+pip install -q -c /workspace/constraints.txt "rfdetr[train,loggers]" || exit 14
 
 # REASSERT THE DRIVER-MATCHED TORCH. rfdetr's dependency resolution upgrades
 # torch to whatever PyPI serves by default — on this run 2.6.0+cu124 became
@@ -366,9 +388,16 @@ pip install -q --ignore-installed blinker "rfdetr[train,loggers]" || exit 14
 # on a Blackwell card with a newer driver minutes earlier, and failed on an
 # A6000 at driver 550. Pinning to the driver-derived index makes it
 # deterministic on both. --no-deps so nothing else shifts underneath it.
-pip install -q --force-reinstall --no-deps torch torchvision \
-  --index-url "https://download.pytorch.org/whl/$IDX" || exit 16
-python -c "import torch;print('torch after re-pin:', torch.__version__)"
+# With the constraints file above there is nothing to reassert -- but PROVE
+# it, and fail here rather than an hour later: the installed torch must be the
+# exact pinned build for this index, and torchvision must import against it.
+python - <<PY2 || exit 16
+import torch, torchvision
+v = torch.__version__
+want = "$TORCH_PIN+$IDX"
+assert v == want, f"torch is {v}, pinned {want} -- the install chain moved it"
+print("torch", v, "| torchvision", torchvision.__version__)
+PY2
 
 # PILLOW MUST BE REINSTALLED AND PROVEN TO IMPORT.
 #
