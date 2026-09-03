@@ -43,12 +43,25 @@ def main():
         if d["split"] != "train" and (d.get("recipe") or d.get("rep", 0) > 0):
             aug_outside[d["split"]] += 1
 
-    # 7x9 LSH over train; probe every held-out image
+    # Negatives are index rows too: a crop from a held-out image would be a
+    # leak, and a crop with a recipe outside train is augmentation outside train.
+    neg_path = os.path.join(a.idx, "negatives.jsonl")
+    neg_outside = 0
+    if os.path.exists(neg_path):
+        for line in open(neg_path):
+            d = json.loads(line)
+            if "train" not in split.get(d["sha"], {"train"}) or d.get("split") != "train":
+                neg_outside += 1
+
+    # 7x9 LSH over train; probe every held-out image. An image with no phash
+    # cannot be checked, so it is COUNTED and fails the audit rather than
+    # silently passing as leak-free.
     bands = [collections.defaultdict(list) for _ in range(7)]
-    train, held = [], []
+    train, held, unhashed = [], [], []
     for s, v in split.items():
         f = file_of[s]
-        if f not in ph: continue
+        if f not in ph:
+            unhashed.append(f); continue
         (train if "train" in v else held).append((s, f, ph[f]))
     for s, f, h in train:
         for i in range(7):
@@ -67,12 +80,13 @@ def main():
     by_d = collections.Counter(l["hamming"] for l in leaks)
     report = {"index": a.idx, "radius": RADIUS, "method": "7-band x 9-bit LSH, exact for radius <= 6",
               "n_train": len(train), "n_held_out": len(held), "sha_in_multiple_splits": len(sha_multi),
+              "images_without_phash": len(unhashed), "negatives_outside_train": neg_outside,
               "augmented_rows_outside_train": dict(aug_outside),
               "held_out_with_train_twin": len(leaks), "by_hamming": {str(k): v for k, v in sorted(by_d.items())},
               "examples": leaks[:20]}
     with open(os.path.join(a.idx, "leak_verified.json"), "w") as f:
         json.dump(report, f, indent=1)
-    ok = not sha_multi and not aug_outside and not leaks
+    ok = not sha_multi and not aug_outside and not leaks and not unhashed and not neg_outside
     print(json.dumps({k: v for k, v in report.items() if k != "examples"}, indent=1))
     print("LEAK-FREE" if ok else f"LEAKS: {len(leaks):,} held-out images have a train twin within Hamming {RADIUS}")
     return 0 if ok else 1

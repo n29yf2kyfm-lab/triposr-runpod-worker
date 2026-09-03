@@ -125,10 +125,16 @@ def score(a):
         for line in open(SCORES):
             try: done.add(json.loads(line)["key"]); good.append(line.rstrip("\n") + "\n")
             except Exception: torn += 1
-        if torn:
+        # A kill that lands after the closing brace but before the newline
+        # leaves a COMPLETE last line with no terminator: torn == 0, and the
+        # next append glues a new row onto it, costing two images. Rewriting
+        # from `good` (every line re-terminated) covers that case too.
+        with open(SCORES, "rb") as fh:
+            fh.seek(0, 2); unterminated = fh.tell() > 0 and (fh.seek(-1, 2) or fh.read(1) != b"\n")
+        if torn or unterminated:
             with open(SCORES + ".tmp", "w") as fh: fh.writelines(good)
             os.replace(SCORES + ".tmp", SCORES)
-            print(f"repaired {SCORES}: dropped {torn} torn row(s)")
+            print(f"repaired {SCORES}: dropped {torn} torn row(s), re-terminated last line")
     todo = [(r["image"], r["path"]) for r in rows if r["image"] not in done]
     print(f"{len(rows):,} keep rows, {len(done):,} already scored, {len(todo):,} to go", flush=True)
     if not todo:
