@@ -183,3 +183,48 @@ after this run.
 
 The honest reading: v19 saw 71% fewer distinct photographs, repeated each 3.8x,
 and lost at matched compute. Cleaning as executed removed more signal than noise.
+
+## What v12b's false positives actually are (ECC, threshold 0.20)
+
+Two thirds of the boxes v12b draws at its best operating point do not match an
+ECC box, and "false positive" turned out to cover five unrelated failures with
+five different fixes. 2,442 TP against 4,729 FP, split by how close the box came
+to any ground-truth box:
+
+| | n | share of FP |
+|---|---|---|
+| near-miss (IoU 0.1-0.5) -- right damage, wrong extent | 2,790 | 59.0% |
+| hallucination (IoU < 0.1) | 1,939 | 41.0% |
+
+I then read a seeded, class-proportional sample of 96 hallucinations at 2.5x
+context (fp_audit.py, fp_sheets.py; sheets under scratchpad/fpaudit/):
+
+| what it actually was | n/96 | share |
+|---|---|---|
+| real damage ECC did not label | 28 | 29.2% |
+| reflection / specular highlight | 24 | 25.0% |
+| trim, panel line, or an INTACT part (headlight, wheel, grille, mirror, parking sensor) | 23 | 24.0% |
+| dirt, grime, mud, spatter | 10 | 10.4% |
+| nothing legible (blur, dark, low-res) | 10 | 10.4% |
+| background, not the car | 1 | 1.0% |
+
+Single rater, and the reflection-vs-subtle-dent calls are genuinely hard; treat
++/-5 pts as noise. Two conclusions survive that margin.
+
+**Dirt is not the problem.** 10.4% of hallucinations = ~4% of all false
+positives. A grime augmentation was the obvious next build and the measurement
+does not support it.
+
+**The model fires on car furniture.** Reflections plus intact parts are 49% of
+hallucinations -- headlights, wheels, grilles, mirrors, a parking sensor. These
+are objects the corpus contains in enormous quantity and has never once labelled
+as not-damage. mine_negatives.py samples undamaged regions at random; it should
+sample these specifically. DrBimmer/car-parts-and-damage-dataset (MIT, 998
+images, 21 part polygons) is exactly the index needed to mine part-aware
+negatives.
+
+**And precision is understated.** Counting a near-miss and an unlabelled-but-real
+box as finds, ~81% of v12b's predictions at 0.20 are on real damage; only ~19%
+are genuinely spurious, against the 66% the headline FP rate implies. The ECC
+number is a fair cross-annotator score, not a measure of how often the product
+lies to a user.
