@@ -120,31 +120,66 @@ leak_verified.json at radius 8.
 
 The run hit the 20 h pod cap at 10:11 UTC on 4 Sep with rc=124, eight complete
 epochs (0-7). Its own validation curve looked healthy throughout -- eight
-consecutive EMA improvements, 0.2159 -> 0.3369, tracking ~90% of v17's per-epoch
-figures on a harder split. Then it was scored on the 814 externally-annotated
-ECC images, the one set no model here has trained on, and the shipped v12b beat
-it on every summary:
+consecutive EMA improvements, 0.2159 -> 0.3369. Then it was scored on the 814
+externally-annotated ECC images, the one set no model here has trained on, and
+it lost to models trained on the DIRTY corpus.
 
-| ECC, 814 images, 9,080 boxes | v12b (6-class, 14 epochs) | v19-clean2 (7-class, 8 epochs) |
-|---|---|---|
-| class-agnostic best F1 | **0.277** (P 0.308 / R 0.252 @0.20) | 0.236 (P 0.208 / R 0.272 @0.15) |
-| mapped-class best F1 | **0.230** (P 0.256 / R 0.209 @0.20) | 0.182 (P 0.232 / R 0.150 @0.20) |
-| >=1 correct box per image @0.30 | **71.9%** | 54.3% |
-| precision @0.50, class-agnostic | **0.781** | 0.643 |
+A first version of this section got three things wrong and a four-agent council
+overturned all of them. They are recorded here rather than quietly edited out.
 
-v19 is not a strictly worse model -- it out-recalls v12b at its own optimum
-(0.272 vs 0.252) -- but it is much less precise at every threshold, and the
-per-image number is the one a customer feels.
+**The baseline was misidentified.** `/home/user/rfdetr-base.onnx`, the "shipped"
+model every comparison used, is sha256 2638b917c263e172 = 113,223,032 bytes =
+`detector/v8-6class/rfdetr-base.onnx`. Not v12b. The real v12b (`v12-clone`,
+f6f9f4af1881ba0f) scores BETTER, so correcting the identity widens the deficit:
 
-The confound is epochs, and it is large: v12b ran to epoch 13 (EMA 0.4237), v19
-was cut off at 7 while still improving (+0.005 on its last step, flattening but
-not converged). Train-row counts are nearly equal (idx19 148,779; idx21
-150,248), so this is not a corpus-size effect. What has NOT been shown is that
-cleaning helped: the only honest reading today is that 8 epochs on clean data
-lose to 14 epochs on dirty data, and the two variables are not separated.
+| ECC, 814 images, 9,080 boxes | v8-6class (quoted as "v12b") | real v12b | v19-clean2 |
+|---|---|---|---|
+| class-agnostic best F1 | 0.277 | **0.3005** | 0.236 |
+| class-agnostic AP (threshold-free) | 0.1853 | -- | 0.1372 |
+| >=1 correct box per image @0.30 | 71.9% | **75.2%** | 54.3% |
+| precision @0.50, class-agnostic | 0.781 | 0.772 | 0.643 |
 
-Consequence for v20: a 12-epoch run on idx21 is worth doing only if it actually
-finishes 12 epochs. At the observed 139 min/epoch that is ~28 h against a 20 h
-cap, so it needs either a resume across two pods or a faster dataloader. GPU
-utilisation swung between 3% and 100% all night on 8 vCPUs with 4 workers,
-which points at input starvation rather than the GPU.
+**"The confound is epochs" was backwards.** v8 was killed by a 16 h cap after
+FIVE epochs; v19 completed EIGHT. Total rows seen: v8 246,024 x 5 = 1,230,120;
+v19 148,779 x 8 = 1,190,232 -- a 3.2% difference. Same architecture, same 560px,
+same COCO init, both cap-killed, both exported from checkpoint_best_ema.pth.
+This is a near-perfect matched-compute control, and the dirty-data model wins.
+
+**"Train-row counts are nearly equal" was the wrong pair of numbers.** It
+compared idx19 (148,779) against idx21 (150,248) -- two post-cleaning indices,
+one never trained on. The baseline's figure is 246,024 rows/epoch. idx19 carries
+those 148,779 rows on only 39,024 distinct photographs, a 3.81x repeat factor:
+not a smaller clean dataset so much as a much smaller one padded back up with
+augmentation.
+
+What the council could NOT break: the measurement itself. Reproduced to 4 dp;
+each model loads its own classes.json (no index shift from panel_gap); both
+graphs are structurally identical at 560px; the ONNX sha matches HF and its
+weight-check guard passed 20/20. v19's scores do sit lower (per-image top-1
+median 0.3877 vs 0.4355), so threshold-matched tables overstate the gap -- but
+the deficit survives every operating-point-matched test: AP, precision at
+matched recall, recall at matched precision, and equal box budget. At a matched
+2,000-box budget the per-image gap is 10.8 pp rather than 17.6.
+
+Also refuted: panel_gap is NOT the source of v19's false positives. It is 9 of
+11,883 predictions at t=0.15 (0.1%); removing every panel_gap box leaves mapped
+F1 unchanged to 4 dp.
+
+Consequence. Adding epochs is the wrong lever -- across v12's own curve
+ep7->14 precision FELL 0.822 -> 0.772, and precision is v19's weakness. Resuming
+is also not currently possible: `--weights` is not plumbed into train.sh or
+launch_pod.py, nothing fetches a checkpoint onto the pod, and the full-state
+`last.ckpt` was never published (both globs match only `*.pth`), so optimizer and
+scheduler state are gone with the pod disk.
+
+The cheap lever is configuration, not money. v19 ran at batch 8 / 4 dataloader
+workers using 12,974 MiB of the A6000's 49,140 (26%) on a pod where `nproc`
+returned 96. Measured 143.7 min/epoch (sigma 3.2). Raising batch toward 24-32,
+raising workers, and setting eval_ema_only (validation currently runs twice per
+epoch over 4,878 images at maxDets=500) plausibly lets 12 epochs finish inside
+one 20 h cap. The "CPU-starved on 8 vCPUs" diagnosis repeated in earlier notes
+was never measured; the py-spy heartbeat that would settle it landed in 9f35d87,
+after this run.
+
+The honest reading: v19 saw 71% fewer distinct photographs, repeated each 3.8x,
+and lost at matched compute. Cleaning as executed removed more signal than noise.
