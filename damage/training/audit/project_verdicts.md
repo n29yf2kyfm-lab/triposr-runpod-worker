@@ -115,3 +115,36 @@ sparse noise below grain 1.5; lowering the threshold costs more real photos than
 it removes. edge_bar 0.80 confirmed (92% precision; ~160 real bars survive).
 idx21 is the live idx/ on Alamj/damage-corpus, mirrored at idx21/, with
 leak_verified.json at radius 8.
+
+## v19-clean2, and the external number that contradicts the training curve
+
+The run hit the 20 h pod cap at 10:11 UTC on 4 Sep with rc=124, eight complete
+epochs (0-7). Its own validation curve looked healthy throughout -- eight
+consecutive EMA improvements, 0.2159 -> 0.3369, tracking ~90% of v17's per-epoch
+figures on a harder split. Then it was scored on the 814 externally-annotated
+ECC images, the one set no model here has trained on, and the shipped v12b beat
+it on every summary:
+
+| ECC, 814 images, 9,080 boxes | v12b (6-class, 14 epochs) | v19-clean2 (7-class, 8 epochs) |
+|---|---|---|
+| class-agnostic best F1 | **0.277** (P 0.308 / R 0.252 @0.20) | 0.236 (P 0.208 / R 0.272 @0.15) |
+| mapped-class best F1 | **0.230** (P 0.256 / R 0.209 @0.20) | 0.182 (P 0.232 / R 0.150 @0.20) |
+| >=1 correct box per image @0.30 | **71.9%** | 54.3% |
+| precision @0.50, class-agnostic | **0.781** | 0.643 |
+
+v19 is not a strictly worse model -- it out-recalls v12b at its own optimum
+(0.272 vs 0.252) -- but it is much less precise at every threshold, and the
+per-image number is the one a customer feels.
+
+The confound is epochs, and it is large: v12b ran to epoch 13 (EMA 0.4237), v19
+was cut off at 7 while still improving (+0.005 on its last step, flattening but
+not converged). Train-row counts are nearly equal (idx19 148,779; idx21
+150,248), so this is not a corpus-size effect. What has NOT been shown is that
+cleaning helped: the only honest reading today is that 8 epochs on clean data
+lose to 14 epochs on dirty data, and the two variables are not separated.
+
+Consequence for v20: a 12-epoch run on idx21 is worth doing only if it actually
+finishes 12 epochs. At the observed 139 min/epoch that is ~28 h against a 20 h
+cap, so it needs either a resume across two pods or a faster dataloader. GPU
+utilisation swung between 3% and 100% all night on 8 vCPUs with 4 workers,
+which points at input starvation rather than the GPU.
