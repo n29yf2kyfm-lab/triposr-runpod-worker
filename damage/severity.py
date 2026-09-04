@@ -33,6 +33,13 @@ DAMAGE_WEIGHT = {
     "shattered_glass": 1.6, "crack": 1.5, "rust": 1.5, "deformation": 1.4,
     "missing_part": 1.4, "misalignment": 1.3, "dent": 1.1, "lamp_damage": 1.2,
     "tire_damage": 1.2,
+    # Measured findings from paint_thickness.py. A prior respray costs a car
+    # VALUE while costing nothing to repair — nothing is broken — so it earns
+    # a weight, not an exemption: a car whose panels have been refinished is
+    # worth less than one whose have not, and a condition score that ignored
+    # that would be the same lie AutoScan tells with its averaging. Filler
+    # weighs like the deformation it is covering.
+    "prior_refinish": 1.2, "body_filler": 1.4,
 }
 DEFAULT_DAMAGE_WEIGHT = 1.0
 
@@ -101,7 +108,29 @@ def condition_score(findings):
     elif worst >= 7:
         score = min(score, 72)
 
+    # A structural/safety finding severe enough to raise the "get this
+    # inspected" banner (same test as summarize()) must not co-exist with an
+    # "excellent/good" headline. Without this, a sev-6 structural item whose
+    # weighted worst falls just under the ceiling above prints "A · excellent"
+    # next to a structural-concern warning — a contradiction a premium report
+    # can never ship. Cap it at the top of "fair" so the two always agree.
+    if is_structural_concern(findings):
+        score = min(score, 74)
+
     return int(max(0, min(100, round(score))))
+
+
+def is_structural_concern(findings):
+    """True when any finding is a structural/safety type at severity >= 6.
+
+    The single source of truth for the "get this inspected" gate — used by both
+    the score ceiling and summarize(), so the headline grade and the banner can
+    never disagree.
+    """
+    return any(
+        DAMAGE_TYPES.get(f.get("damage_type", "other"), (None, False))[1]
+        and clamp_severity(f.get("severity", 5)) >= 6
+        for f in findings)
 
 
 def summarize(findings):
@@ -142,8 +171,5 @@ def summarize(findings):
             "severity": clamp_severity(worst.get("severity", 5)),
         } if worst else None),
         # a structural flag the app can gate a "get this inspected" banner on
-        "structural_concern": any(
-            DAMAGE_TYPES.get(f.get("damage_type", "other"), (None, False))[1]
-            and clamp_severity(f.get("severity", 5)) >= 6
-            for f in findings),
+        "structural_concern": is_structural_concern(findings),
     }

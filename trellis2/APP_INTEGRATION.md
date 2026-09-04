@@ -20,6 +20,13 @@ Request (`POST /run` on the endpoint):
 }
 ```
 
+- **Multi-view image-to-3D** (new): send `image_urls: [...]` or
+  `image_b64s: [...]` (up to 8 photos of ONE vehicle — front/side/rear, e.g.
+  the damage-capture set). The model is conditioned on all views at once, which
+  fixes the single-image failure of hallucinating the sides it never saw.
+  `mode` comes back as `"images"`. A single-element list folds to the ordinary
+  single-image path, so nothing changes for existing `image_url`/`image_b64`
+  callers. NOTE: multi-view is unvalidated on GPU yet — verify on a pod.
 - `wheel_swap` / `panel_detail` / `polish` default ON for generated
   (text/vehicle) cars — send `false` to opt out. `wheel_swap` accepts
   `{"style": "audi"}` to force a rim style; by default the style follows

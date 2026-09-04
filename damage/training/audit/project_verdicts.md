@@ -1,0 +1,230 @@
+# Per-project verdicts (20-image sheet each, keep rows only)
+
+| project | keep rows | verdict | what I saw |
+|---|---|---|---|
+| container-damage-ke5bc/dent-detection-4qxiu | 961 | DROP | shipping containers, not cars |
+| vehicle-detection-yjf3z/car-dent-scratch-detection | 8,168 | DROP | an augmented export: vertical flips (cars upside down), heavy noise/HDR, and alamy watermarks that are MIRRORED -- which is exactly why OCR never read them |
+| changs-workspace-hnorg/vehicle-damage-gwmh4 | 5,896 | KEEP, filter | best source seen: real phone photos of Thai pickups, fingers pointing at damage. ~5/20 have detector prediction boxes baked into the pixels ("minor-scratch 0.43") -- label leakage, must be filtered |
+| haedars-workspace/car-scratch-new | 4,744 | KEEP, filter | stock-heavy: tiled alamy on ~3/20, a mechanic posing, one illustration; rust labelled scratch x2; ~11/20 genuinely usable |
+| UNSOURCED (first ingestion, zips gone) | 37,568 | per-image | mixed ~50%: dreamstime watermark, a NASCAR car labelled dent, no-damage BMW labelled dent, plus plenty of clean frames |
+| datasetyolo/broken-car-od | 3,365 | DROP | augmented export: cars upside down (#8, #9, #13), rotated frames, shutterstock 2018098433 on a vintage car in grass with no damage |
+| damage-detection-d25qu/vehicle-damage-detection-hhxfj | 3,343 | KEEP | real collision photos, mild rotation only, hand-with-tape measuring a scratch; ~17/20 usable |
+| curacel-ai/car-damage-detection-5ioys | 2,971 | DROP | the watermark motherlode: shutterstock/dreamstime bars on nearly every frame, many rotated 90 degrees, heavy noise |
+| project-joggx/car-damage-assessment-8mb45 | 2,774 | KEEP | Indian insurance-inspection photos with GPS/time stamps (Delhi, Noida, Faridabad); ~16/20 usable; second-best source after changs |
+| rfvnx-dgm7e/car-damage-c1f0i-epb08 | 2,276 | DROP | alamy/dreamstime/shutterstock on ~8/20, noise aug, one flip; shutterstock 1107699365 appears here AND in the dent sheet -- a cross-project duplicate the hash dedup missed because noise aug changed the pixels |
+
+Running total of sourced keep rows: DROP 17,741 / KEEP 12,013 / KEEP-with-filter 4,744 / unsourced 37,568.
+Pattern: every DROP is a project that exported with Roboflow augmentations (flip, rotate, noise) or scraped stock sites. Both defeat hash dedup and OCR.
+| cardamage-jrvmi/car-damage-cqreo | 1,163 | KEEP, filter | real photos, mild rotation; gettyimages on one, a "Quick Dent Removal" business logo on one; a panel_gap box sits on a crushed Mazda front (collision, not a gap); ~15/20 usable |
+| cardamage-fvhwg/car-damage-f7gsv | 1,127 | KEEP-weak, filter | whole-car press photos: crime-scene tape, a crowd at a crash, "photo by Doug Springer (NWS)", "Central European News"; several undamaged cars labelled dent; this project is where panel_gap came from; ~10/20 usable |
+| sidh-euwcy/car-scratch-dataset | 876 | KEEP, filter | real Indian scratch close-ups but noise aug on ~7/20; one side-by-side duplicate composite; one claw-scratch DECAL labelled scratch; ~13/20 usable |
+| gp2-hknp7/car-damage-detection-mwbgo | 725 | KEEP | excellent: salvage-auction whole-car photos, consistent, no watermarks, no augmentation |
+| sidh-euwcy/scratch-sjpy0 | 678 | KEEP, filter | real Indian photos, noise aug on ~4/20, one turntable stock shot and one posing mechanic with no damage; ~14/20 usable |
+| agni-4nqn3/car-damage-segmentation-bk7wi | 588 | KEEP, filter | tiled alamy x2, shutterstock side-by-side composite, a checkered DECAL labelled scratch, firefighters at a wreck; ~12/20 usable |
+| autodentify/car-damage-detection-ggmju | 453 | KEEP-weak, filter | tiny letterboxed whole-car crash photos, shutterstock bar, quikr.com classifieds watermark, an undamaged AMG GT labelled dent; ~11/20 |
+| beena-txfr0/car-damage-detection-tuzuq | 328 | KEEP | best lamp_wheel source: real headlight-damage close-ups; one man sitting on a car, one baked-in yellow box; ~17/20 |
+| haedars-workspace/scratch-segmentation-gsw1t | 170 | KEEP | real Indian photos, subtle scratches; the SAME turntable i20 stock shot as sidh/scratch-sjpy0 (cross-project dup) |
+| car-damage-ymlgz/scratch-dent-car | 139 | KEEP, filter | good dent close-ups but shutterstock/alamy/gettyimages on 3, a side-by-side composite with red circles baked in |
+| uniud-g3oa7/scratch-detection-hnk3o | 110 | KEEP | clean real Indian scratch photos, no watermarks; a few whole cars with no visible damage |
+| (4 projects with 2-9 rows) | 19 | ignore | negligible |
+
+## Totals over the 40,874 sourced keep rows
+DROP (5 projects): 17,741 = 43%
+KEEP clean (6 projects): changs 5,896 + d25qu 3,343 + joggx 2,774 + gp2 725 + beena 328 + haedars-seg 170 + uniud 110 = 13,346
+KEEP with per-image filter (8 projects): 9,768
+UNSOURCED, no provenance: 37,568 -- must be filtered per image
+
+## Mechanical filters validated against these sheets
+- grain score (mean |x - median3(x)| in the flattest quarter of blocks): >= 2.0 flags additive noise aug. curacel 3-7, clean projects 0.2-1.3. Does NOT catch HDR/tone-map aug (vehicle-detection-yjf3z scores ~0) -- that project is dropped by provenance.
+- still needed: edge-bar watermark (shutterstock/dreamstime/getty bottom bar), tiled watermark (alamy), baked-in prediction boxes (changs, beena), side-by-side composites (2 identical halves), perceptual-hash cross-project dedup.
+
+## The UNSOURCED pool (37,568 rows), read by class
+First-ingestion projects (manifest minus reingest): 22 projects, 33,624 declared images.
+Nine are industrial corrosion and five are concrete/pavement cracks -- but the class map
+excluded those already (they are the 31,419 "not in the seven-class corpus" scraps), so
+they are NOT in the keep set. Verified by eye: unsourced crack_glass is car glass
+throughout, unsourced rust_paint is car paint throughout.
+The remaining first-ingestion car projects include three 4,000-image copies of one
+"vehicle-damage-detection" export with identical class lists, which is where the
+unsourced dent/scratch noise-and-cutout frames come from.
+| UNSOURCED crack_glass (2,888) | ~15/20 usable | one shutterstock bar, one "Helico" logo, one press photo, one tint-film application |
+| UNSOURCED rust_paint (1,079) | ~17/20 usable | clean |
+| UNSOURCED dent (10,885) | ~10/20 usable | noise aug + pasted cutout rectangles on 5, shutterstock bars on 2, one undamaged BMW |
+Per-image provenance for these rows needs HF_TOKEN (private zips on Alamj/tier1-roboflow-yolo);
+not available in this session. They are handled per image by audit_corpus.py instead.
+
+## Council corrections (2026-09-03)
+Four independent adversarial reviews of the above. What did not survive:
+- **"watermarks ~15%"** -- an unweighted average over three per-class sheets in which panel_gap (0.11% of the population) supplied most of the hits. Size-weighted, the same 60 images give **7.2%**; two independent checks land at 4-7%. The OCR figure gets *worse*: only 14 of its 86 flags were direct reads, so tesseract's real recall is **under 1%**.
+- **panel_gap "3 of 20 showed a gap"** -- sampled from the 78 images whose PRIMARY class is panel_gap (7.5% of the 1,036 carrying its boxes, and selected for multi-panel wrecks), then judged by image not box. A random draw of 20 BOXES: ~16 sit on a real seam or separation. **Fold reversed.**
+- **datasetyolo DROP** -- measured flag rate 4.0%, cleaner than four kept projects; a 20-image sheet cannot reject "60% good" (P=0.95). Cost 38% of lamp_wheel. **Restored to per-image filtering.**
+- **rfvnx DROP** -- 8/20 bad is the reading four kept projects got. **Restored.** Its images are also the entire keep set of asandes-workspace and skillfactory (re-exports of one dataset); rang-04bzz (9,617 rows) is greyscale scrap that never reached the keep set.
+- **grain 3.0** -- 1:1 crops of KEPT images show the 1.5-3.0 band is noise augmentation throughout: ~12,200 augmented frames (21.8%) survived. **Now 1.5**, crack_glass exempt (crack webs score as grain).
+- **edge_bar 0.60** -- "zero false positives on 60" had an 83% chance of passing at the true FP rate. Precision ~30% in 0.60-0.70, ~100% at >= 0.80. **Now 0.80.**
+- **dedup** -- bucketing on the top 16 bits misses 84% of Hamming-6 pairs; 700 held-out images had a train twin. **Replaced with an exact 7x9-bit index**, and verify_index.py now produces the leak audit idx18 never had.
+- **drive** -- never given a verdict; median grain 4.71, stock marks throughout. **DROP by provenance.**
+- **sha->project join** was last-line-wins over a many-to-one file; 2,276 drops depended on line order. Now: all sources kept, drop if any is a drop project.
+What stood: container (25/25 containers), curacel, yjf3z (for a better reason: 77% letterboxed, so edge_bar is blind to it), seam filter (19/20), and apply_clean_verdicts.py (all 174,050 boxes re-derived, 0 errors).
+
+## Rebuild result (idx19, 2026-09-03)
+Re-scored all 85,623 with the corrected filters; 92% of grain values changed.
+| | idx18 (pre-council) | idx19 |
+|---|---|---|
+| kept images | 55,881 | **48,779** |
+| boxes | 174,050 | 146,048 |
+| classes | 6 (panel_gap folded) | **7 (panel_gap restored)** |
+| held-out images with a train twin (Hamming<=6) | 700 | **0** |
+| negatives on a labelled box at IoU>0.1 | 164 (max 0.582) | **39 (max 0.204)** |
+Drops: grain 16,296 (threshold 3.0->1.5), near-duplicate 1,942 (exact 7x9 index,
+was 1,563 from a bucketing that missed 84%), edge_bar 762 (0.60->0.80), seam 191.
+datasetyolo returns at 95.2% kept, and the three projects hidden by the last-wins
+provenance join are now visible -- asandes-workspace 1,607, ai-model-vapko 132,
+and rang-04bzz confirmed as greyscale scrap that never reached the keep set.
+lamp_wheel, rust_paint and panel_gap remain over the 15x repeat ceiling: they are
+genuinely scarce, and the flags say so rather than hiding it.
+
+## Council 2 (2026-09-03) -- what it overturned, and idx21
+Four independent reviewers re-audited the idx19 rebuild, the re-tuned filters, the
+v19 run diagnosis, and the day's code. Three of my claims did not survive:
+- "idx19 is LEAK-FREE": true only at the radius the dedup already enforced (6).
+  Exhaustive all-pairs at Hamming 8: straddle at chance (34.9%), 704 held-out
+  images with a train neighbour, ~2/3 of them the same photograph by eye.
+- "39 negatives at IoU>0.1": wrong box convention; the truth was 0 overlaps.
+- "the LR schedule must complete, so relaunch at 8 epochs": RF-DETR's default is
+  a step drop at epoch 100 -- flat LR for a 12-epoch run. v19 was left running.
+And one of the council's own earlier prescriptions failed on inspection: grain 1.5
+deletes real photographs (tarmac, gravel, engine bays, whole-car shots with no
+flat area) at 18-25% of the [1.5,2.5) band, three quarters of them from the
+best projects; the blanket crack_glass exemption kept ~550 noise windscreens.
+
+Fixes shipped in idx21:
+| | idx19 | idx21 |
+|---|---|---|
+| dedup radius (exact) | 6 (7x9 bands) | **8 (9x7 bands)** |
+| split grouping | no-op (stale groups) | **fresh groups at Hamming 10** |
+| grain rule | >=1.5, crack_glass exempt | **>=1.5 AND residual whiteness <0.10** |
+| whole-frame boxes | kept | **631 dropped** |
+| held-out with train twin @8 | 704 | **0** |
+| held-out with train neighbour @10 | 1,990 (35% straddle) | **327 (14%)** |
+| negatives on a labelled box | 0 (after correction) | 0 (10,420 crops) |
+| kept images / boxes | 48,779 / 146,048 | **48,494 / 147,529** |
+Texture gate: +3,242 rescued (validated on a 40-image 1:1 sheet: ~13/20 real
+texture, 3 blocky upscales, 2 stock photos edge_bar missed; 20/20 still-dropped
+are salt-and-pepper noise), -554 crack_glass noise. Residual: ~8% of keeps carry
+sparse noise below grain 1.5; lowering the threshold costs more real photos than
+it removes. edge_bar 0.80 confirmed (92% precision; ~160 real bars survive).
+idx21 is the live idx/ on Alamj/damage-corpus, mirrored at idx21/, with
+leak_verified.json at radius 8.
+
+## v19-clean2, and the external number that contradicts the training curve
+
+The run hit the 20 h pod cap at 10:11 UTC on 4 Sep with rc=124, eight complete
+epochs (0-7). Its own validation curve looked healthy throughout -- eight
+consecutive EMA improvements, 0.2159 -> 0.3369. Then it was scored on the 814
+externally-annotated ECC images, the one set no model here has trained on, and
+it lost to models trained on the DIRTY corpus.
+
+A first version of this section got three things wrong and a four-agent council
+overturned all of them. They are recorded here rather than quietly edited out.
+
+**The baseline was misidentified.** `/home/user/rfdetr-base.onnx`, the "shipped"
+model every comparison used, is sha256 2638b917c263e172 = 113,223,032 bytes =
+`detector/v8-6class/rfdetr-base.onnx`. Not v12b. The real v12b (`v12-clone`,
+f6f9f4af1881ba0f) scores BETTER, so correcting the identity widens the deficit:
+
+| ECC, 814 images, 9,080 boxes | v8-6class (quoted as "v12b") | real v12b | v19-clean2 |
+|---|---|---|---|
+| class-agnostic best F1 | 0.277 | **0.3005** | 0.236 |
+| class-agnostic AP (threshold-free) | 0.1853 | -- | 0.1372 |
+| >=1 correct box per image @0.30 | 71.9% | **75.2%** | 54.3% |
+| precision @0.50, class-agnostic | 0.781 | 0.772 | 0.643 |
+
+**"The confound is epochs" was backwards.** v8 was killed by a 16 h cap after
+FIVE epochs; v19 completed EIGHT. Total rows seen: v8 246,024 x 5 = 1,230,120;
+v19 148,779 x 8 = 1,190,232 -- a 3.2% difference. Same architecture, same 560px,
+same COCO init, both cap-killed, both exported from checkpoint_best_ema.pth.
+This is a near-perfect matched-compute control, and the dirty-data model wins.
+
+**"Train-row counts are nearly equal" was the wrong pair of numbers.** It
+compared idx19 (148,779) against idx21 (150,248) -- two post-cleaning indices,
+one never trained on. The baseline's figure is 246,024 rows/epoch. idx19 carries
+those 148,779 rows on only 39,024 distinct photographs, a 3.81x repeat factor:
+not a smaller clean dataset so much as a much smaller one padded back up with
+augmentation.
+
+What the council could NOT break: the measurement itself. Reproduced to 4 dp;
+each model loads its own classes.json (no index shift from panel_gap); both
+graphs are structurally identical at 560px; the ONNX sha matches HF and its
+weight-check guard passed 20/20. v19's scores do sit lower (per-image top-1
+median 0.3877 vs 0.4355), so threshold-matched tables overstate the gap -- but
+the deficit survives every operating-point-matched test: AP, precision at
+matched recall, recall at matched precision, and equal box budget. At a matched
+2,000-box budget the per-image gap is 10.8 pp rather than 17.6.
+
+Also refuted: panel_gap is NOT the source of v19's false positives. It is 9 of
+11,883 predictions at t=0.15 (0.1%); removing every panel_gap box leaves mapped
+F1 unchanged to 4 dp.
+
+Consequence. Adding epochs is the wrong lever -- across v12's own curve
+ep7->14 precision FELL 0.822 -> 0.772, and precision is v19's weakness. Resuming
+is also not currently possible: `--weights` is not plumbed into train.sh or
+launch_pod.py, nothing fetches a checkpoint onto the pod, and the full-state
+`last.ckpt` was never published (both globs match only `*.pth`), so optimizer and
+scheduler state are gone with the pod disk.
+
+The cheap lever is configuration, not money. v19 ran at batch 8 / 4 dataloader
+workers using 12,974 MiB of the A6000's 49,140 (26%) on a pod where `nproc`
+returned 96. Measured 143.7 min/epoch (sigma 3.2). Raising batch toward 24-32,
+raising workers, and setting eval_ema_only (validation currently runs twice per
+epoch over 4,878 images at maxDets=500) plausibly lets 12 epochs finish inside
+one 20 h cap. The "CPU-starved on 8 vCPUs" diagnosis repeated in earlier notes
+was never measured; the py-spy heartbeat that would settle it landed in 9f35d87,
+after this run.
+
+The honest reading: v19 saw 71% fewer distinct photographs, repeated each 3.8x,
+and lost at matched compute. Cleaning as executed removed more signal than noise.
+
+## What v12b's false positives actually are (ECC, threshold 0.20)
+
+Two thirds of the boxes v12b draws at its best operating point do not match an
+ECC box, and "false positive" turned out to cover five unrelated failures with
+five different fixes. 2,442 TP against 4,729 FP, split by how close the box came
+to any ground-truth box:
+
+| | n | share of FP |
+|---|---|---|
+| near-miss (IoU 0.1-0.5) -- right damage, wrong extent | 2,790 | 59.0% |
+| hallucination (IoU < 0.1) | 1,939 | 41.0% |
+
+I then read a seeded, class-proportional sample of 96 hallucinations at 2.5x
+context (fp_audit.py, fp_sheets.py; sheets under scratchpad/fpaudit/):
+
+| what it actually was | n/96 | share |
+|---|---|---|
+| real damage ECC did not label | 28 | 29.2% |
+| reflection / specular highlight | 24 | 25.0% |
+| trim, panel line, or an INTACT part (headlight, wheel, grille, mirror, parking sensor) | 23 | 24.0% |
+| dirt, grime, mud, spatter | 10 | 10.4% |
+| nothing legible (blur, dark, low-res) | 10 | 10.4% |
+| background, not the car | 1 | 1.0% |
+
+Single rater, and the reflection-vs-subtle-dent calls are genuinely hard; treat
++/-5 pts as noise. Two conclusions survive that margin.
+
+**Dirt is not the problem.** 10.4% of hallucinations = ~4% of all false
+positives. A grime augmentation was the obvious next build and the measurement
+does not support it.
+
+**The model fires on car furniture.** Reflections plus intact parts are 49% of
+hallucinations -- headlights, wheels, grilles, mirrors, a parking sensor. These
+are objects the corpus contains in enormous quantity and has never once labelled
+as not-damage. mine_negatives.py samples undamaged regions at random; it should
+sample these specifically. DrBimmer/car-parts-and-damage-dataset (MIT, 998
+images, 21 part polygons) is exactly the index needed to mine part-aware
+negatives.
+
+**And precision is understated.** Counting a near-miss and an unlabelled-but-real
+box as finds, ~81% of v12b's predictions at 0.20 are on real damage; only ~19%
+are genuinely spurious, against the 66% the headline FP rate implies. The ECC
+number is a fair cross-annotator score, not a measure of how often the product
+lies to a user.

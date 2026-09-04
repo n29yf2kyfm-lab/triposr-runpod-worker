@@ -114,6 +114,17 @@ DAMAGE_TYPES = {
     "paint_chip":     ("Paint chip",         False, "touch_up_or_refinish"),
     "paint_fade":     ("Paint fade / oxidation", False, "refinish"),
     "paint_mismatch": ("Paint mismatch",     False, "investigate_prior_repair"),
+    # --- measured, not seen (paint_thickness.py) --------------------------
+    # A gauge reading is a different kind of claim from a photograph, and it
+    # needed its own ids rather than being forced into paint_mismatch: a
+    # resprayed panel can match its neighbours perfectly and still read 300
+    # um, so printing "Paint mismatch" against a colour-perfect panel would
+    # be a false statement in the report. Both labels name the MEASUREMENT
+    # and its implication, never the car's history.
+    "prior_refinish": ("Coating thicker than factory", False,
+                       "verify_repair_history"),
+    "body_filler":    ("Filler suspected under paint", True,
+                       "probe_and_verify_repair"),
     "dent":           ("Dent",               True,  "pdr_or_panel"),
     "deformation":    ("Panel deformation",  True,  "panel_repair_or_replace"),
     "crack":          ("Crack",              True,  "replace_or_repair"),
@@ -244,7 +255,13 @@ def canonical_damage(name):
         (("scuff", "rub"), "scuff"),
         (("chip",), "paint_chip"),
         (("fade", "oxidation", "clear coat", "clearcoat", "sun"), "paint_fade"),
-        (("mismatch", "overspray", "respray", "colour", "color diff"),
+        # filler/respray before the mismatch row: "respray" and "repaint" are
+        # claims about the panel's history, which is what prior_refinish is
+        # for, while "mismatch"/"overspray" stay a visual colour finding.
+        (("filler", "bondo", "body putty"), "body_filler"),
+        (("respray", "repaint", "refinish", "thicker than factory",
+          "paint thickness"), "prior_refinish"),
+        (("mismatch", "overspray", "colour", "color diff"),
          "paint_mismatch"),
         (("rust", "corros", "oxidis"), "rust"),
         (("gap", "misalign", "panel fit", "uneven"), "misalignment"),

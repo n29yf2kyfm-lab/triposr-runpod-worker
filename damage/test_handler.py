@@ -11,6 +11,7 @@ messy things real VLMs emit (fences, prose, percentages, synonyms).
 import os
 import sys
 import json
+import math
 import types
 import tempfile
 
@@ -105,6 +106,17 @@ check("2f rollup reports a grade", roll["grade"] in ("A", "B", "C", "D", "F"))
 check("2g rollup flags structural concern", roll["structural_concern"] is True)
 check("2h worst finding surfaced",
       roll["worst_finding"]["damage_type"] == "shattered_glass")
+
+# a structural finding severe enough to raise the banner can NEVER co-exist with
+# an "excellent/good" headline — grade and banner must always agree.
+struct6 = [{"panel": "hood", "damage_type": "dent", "severity": 6}]
+r6 = SEV.summarize(struct6)
+check("2i structural concern forbids an excellent/good headline",
+      not (r6["structural_concern"] and r6["grade"] in ("A", "B")),
+      f'grade={r6["grade"]} concern={r6["structural_concern"]} '
+      f'score={r6["condition_score"]}')
+check("2j structural concern caps the score at 'fair' or below",
+      SEV.condition_score(struct6) <= 74, str(SEV.condition_score(struct6)))
 
 
 # ---- 3. repair estimation ------------------------------------------------
@@ -401,6 +413,1426 @@ resp4 = H.handler(job4)
 check("13a missing baseline findings -> needs_baseline, not silent over-charge",
       resp4.get("status") == "needs_baseline")
 
+
+# ---- 14. image fetch sends browser-like headers ---------------------------
+# Regression: a live job died with "403 Forbidden" fetching a Wikimedia photo
+# because _load_images sent a bare python-requests User-Agent. Many image hosts
+# reject that outright, and users paste URLs from wherever their photos live.
+check("14a fetch headers defined", isinstance(AN.FETCH_HEADERS, dict))
+check("14b sends a non-default User-Agent",
+      "Mozilla" in AN.FETCH_HEADERS.get("User-Agent", ""))
+check("14c accepts image content types",
+      "image/" in AN.FETCH_HEADERS.get("Accept", ""))
+import inspect as _inspect  # noqa: E402
+_src = _inspect.getsource(AN._load_images)
+check("14d _load_images actually passes the headers",
+      "headers=FETCH_HEADERS" in _src)
+check("14e _load_images still raises on a bad response",
+      "raise_for_status" in _src)
+
+
+# ---- 15. anthropic (frontier) vision backend --------------------------------
+# The recommended backend. Stub the SDK so no key or network is needed; prove
+# selection, message shape, and that the deterministic pipeline consumes its
+# output exactly like the local model's.
+import base64 as _b64  # noqa: E402
+
+_captured = {}
+
+
+class _FakeBlock:
+    type = "text"
+    def __init__(self, text): self.text = text
+
+
+class _FakeMsg:
+    stop_reason = "end_turn"
+    def __init__(self, text): self.content = [_FakeBlock(text)]
+
+
+class _FakeMessages:
+    def create(self, **kw):
+        _captured.update(kw)
+        # echo a minimal valid inspection so analyze() parses it
+        return _FakeMsg('{"findings": [{"panel":"windshield",'
+                        '"damage_type":"shattered glass","severity":8,'
+                        '"evidence":["spiderweb cracking"]}],'
+                        '"images": [], "summary": "one crack"}')
+
+
+class _FakeAnthropic:
+    def __init__(self, *a, **k): self.messages = _FakeMessages()
+
+
+_fake_anthropic = types.ModuleType("anthropic")
+_fake_anthropic.Anthropic = _FakeAnthropic
+sys.modules["anthropic"] = _fake_anthropic
+
+check("15a anthropic backend selected by env",
+      callable(AN._anthropic_backend()))
+
+# image blocks: URL passes through as url; local file becomes base64
+url_block = AN._anthropic_image_blocks(["https://example.com/a.jpg"])[0]
+check("15b url image -> url source", url_block["source"]["type"] == "url")
+# a real local file (this test file) -> base64 source
+local_block = AN._anthropic_image_blocks([__file__])[0]
+check("15c local image -> base64 source",
+      local_block["source"]["type"] == "base64" and local_block["source"]["data"])
+
+# end to end through analyze() with the stubbed SDK
+import os as _os  # noqa: E402
+_os.environ["DAMAGE_BACKEND"] = "anthropic"
+fn = AN.get_backend()
+findings_a, images_a, meta_a = AN.analyze(
+    ["https://example.com/car.jpg"], {"make": "BMW"}, vision_fn=fn)
+check("15d anthropic path yields a finding", len(findings_a) == 1)
+check("15e finding normalised (shattered_glass)",
+      findings_a[0]["damage_type"] == "shattered_glass")
+check("15f system prompt passed to the model",
+      "damage appraiser" in _captured.get("system", ""))
+check("15g image block sent to the model",
+      any(b.get("type") == "image" for b in _captured.get("messages", [{}])[0]
+          .get("content", [])))
+_os.environ.pop("DAMAGE_BACKEND", None)
+
+
+# ---- 16. openrouter (free, no-GPU) vision backend ---------------------------
+# The zero-marginal-cost path. Stub `requests` so no key and no network are
+# needed; prove selection, the OpenAI-shaped payload, data-URI inlining for
+# local files, that a 429 explains the free-tier caps instead of leaking a bare
+# HTTP error, and that the deterministic pipeline consumes its output unchanged.
+_or_captured = {}
+
+
+class _FakeResp:
+    def __init__(self, status=200, body=None):
+        self.status_code = status
+        self._body = body or {}
+
+    def json(self): return self._body
+
+    def raise_for_status(self):
+        if self.status_code >= 400:
+            raise RuntimeError(f"HTTP {self.status_code}")
+
+
+def _fake_post(url, headers=None, data=None, timeout=None):
+    _or_captured["url"] = url
+    _or_captured["headers"] = headers or {}
+    _or_captured["payload"] = json.loads(data)
+    if _or_captured.get("force_429"):
+        return _FakeResp(429)
+    return _FakeResp(200, {"choices": [{"message": {"content":
+        '{"findings": [{"panel":"front bumper","damage_type":"dent",'
+        '"severity":5,"evidence":["crease left of the plate"]}],'
+        '"images": [], "summary": "one dent"}'}}]})
+
+
+_fake_requests = types.ModuleType("requests")
+_fake_requests.post = _fake_post
+_fake_requests.get = lambda *a, **k: _FakeResp(200)
+_real_requests = sys.modules.get("requests")
+sys.modules["requests"] = _fake_requests
+
+_os.environ["DAMAGE_BACKEND"] = "openrouter"
+_os.environ["OPENROUTER_API_KEY"] = "test-key"
+check("16a openrouter backend selected by env", callable(AN.get_backend()))
+
+# image blocks use the OpenAI shape; local files inline as data URIs
+ob = AN._openai_image_blocks(["https://example.com/a.jpg"])[0]
+check("16b url image -> image_url block",
+      ob["type"] == "image_url" and ob["image_url"]["url"].startswith("https://"))
+ob_local = AN._openai_image_blocks([__file__])[0]
+check("16c local image -> data URI",
+      ob_local["image_url"]["url"].startswith("data:"))
+
+# end to end through analyze() with the stubbed transport
+fn_or = AN.get_backend()
+findings_o, images_o, meta_o = AN.analyze(
+    ["https://example.com/car.jpg"], {"make": "Toyota"}, vision_fn=fn_or)
+check("16d openrouter path yields a finding", len(findings_o) == 1)
+check("16e finding normalised (front_bumper/dent)",
+      findings_o[0]["panel"] == "front_bumper"
+      and findings_o[0]["damage_type"] == "dent")
+check("16f defaults to a free model tag",
+      _or_captured["payload"]["model"].endswith(":free"))
+check("16g system prompt sent as a system message",
+      _or_captured["payload"]["messages"][0]["role"] == "system"
+      and "damage appraiser" in _or_captured["payload"]["messages"][0]["content"])
+check("16h api key sent as a bearer token",
+      _or_captured["headers"].get("Authorization") == "Bearer test-key")
+
+# a 429 must explain the free-tier caps, not leak a bare HTTP error
+_or_captured["force_429"] = True
+try:
+    AN.get_backend()("p", ["https://example.com/car.jpg"])
+    _429 = ""
+except Exception as e:
+    _429 = str(e)
+check("16i 429 explains the free-tier limits",
+      "req/day" in _429 or "requests/day" in _429 or "50 req" in _429, _429[:90])
+_or_captured.pop("force_429")
+
+# a missing key must name the variable rather than fail deep in the transport
+_os.environ.pop("OPENROUTER_API_KEY")
+try:
+    AN.get_backend()("p", ["https://example.com/car.jpg"])
+    _nokey = ""
+except Exception as e:
+    _nokey = str(e)
+check("16j missing key names OPENROUTER_API_KEY",
+      "OPENROUTER_API_KEY" in _nokey, _nokey[:90])
+
+if _real_requests is not None:
+    sys.modules["requests"] = _real_requests
+else:
+    sys.modules.pop("requests", None)
+_os.environ.pop("DAMAGE_BACKEND", None)
+
+
+# ---- 17. local CPU detector backend -----------------------------------------
+# The self-hosted path. Everything tested here is pure arithmetic on detector
+# output — no weights, no onnxruntime, no network — because that is exactly the
+# half that decides what lands on a customer's invoice.
+import detect as DET  # noqa: E402
+
+SIZE = (1000, 1000)
+
+# class mapping is generous about the spellings real datasets ship
+check("17a maps dataset spellings onto the taxonomy",
+      DET.DAMAGE_CLASS_MAP["glass shatter"] == "shattered_glass"
+      and DET.DAMAGE_CLASS_MAP["lamp_broken"] == "lamp_damage"
+      and DET.DAMAGE_CLASS_MAP["flat_tire"] == "tire_damage")
+
+# severity rises with box area, and never leaves 1..10
+small = DET.severity_from_box("dent", 0.005, 0.9)
+big = DET.severity_from_box("dent", 0.30, 0.9)
+check("17b bigger box -> higher severity", small < big, f"{small} < {big}")
+check("17c severity stays in band",
+      all(1 <= DET.severity_from_box("dent", a, 0.9) <= 10
+          for a in (0.0, 0.001, 0.05, 0.5, 1.0)))
+
+# type floors and ceilings hold: glass is never trivial, a scratch never severe
+check("17d shattered glass never scores trivial",
+      DET.severity_from_box("shattered_glass", 0.0001, 0.9) >= 7)
+check("17e a scratch never scores catastrophic",
+      DET.severity_from_box("scratch", 1.0, 0.99) <= 6)
+
+# a low-confidence detection must not drive a severe headline
+check("17f low confidence lowers severity",
+      DET.severity_from_box("dent", 0.3, 0.4)
+      < DET.severity_from_box("dent", 0.3, 0.9))
+
+dets = [
+    {"label": "dent", "box": [100, 100, 300, 300], "score": 0.91},
+    {"label": "glass shatter", "box": [400, 100, 700, 400], "score": 0.88},
+    {"label": "scratch", "box": [10, 10, 40, 40], "score": 0.10},   # below floor
+    {"label": "unicorn", "box": [0, 0, 10, 10], "score": 0.99},     # unknown class
+]
+f17 = DET.detections_to_findings(dets, SIZE, panel_hint="hood")
+check("17g low-confidence and unknown classes are dropped", len(f17) == 2,
+      str(len(f17)))
+check("17h panel hint applied", all(f["panel"] == "hood" for f in f17))
+check("17i bbox emitted NORMALISED so it survives normalize_findings",
+      f17[0]["bbox"] == [0.1, 0.1, 0.2, 0.2], str(f17[0]["bbox"]))
+# the regression that made this convention explicit: pixel corners are clamped
+# to the unit square by _bbox_or_none, silently losing every box
+_rt = AN.normalize_findings(f17)
+check("17r detector boxes survive the normaliser",
+      all(x["bbox"] for x in _rt), str([x["bbox"] for x in _rt]))
+
+# evidence must be concrete — normalize_findings DROPS evidence-less findings,
+# so a detector that cannot say what it saw must not become a charge
+check("17j every detection carries concrete evidence",
+      all(f["evidence"] and "detector found" in f["evidence"][0] for f in f17))
+survived = AN.normalize_findings(f17)
+check("17k findings survive normalisation", len(survived) == 2)
+check("17l normalised onto the taxonomy",
+      {s["damage_type"] for s in survived} == {"dent", "shattered_glass"})
+
+# the JSON envelope is the drop-in trick: analyze() parses it unchanged
+env = DET.detections_to_json([(dets, SIZE, "hood")])
+parsed = AN._extract_json(env)
+check("17m emits the same envelope a VLM returns",
+      "findings" in parsed and len(parsed["findings"]) == 2)
+
+# and the whole pipeline runs off it with no branching
+fn_det = lambda prompt, refs: env  # noqa: E731
+fd, _id, _md = AN.analyze(["x.jpg"], {"make": "Toyota"}, vision_fn=fn_det)
+roll17 = SEV.summarize(fd)
+check("17n detector output scores through the real pipeline",
+      len(fd) == 2 and 0 <= roll17["condition_score"] <= 100
+      and roll17["structural_concern"] is True)
+
+# box geometry -> original-image pixels
+scaled = DET.parse_detections(
+    [[[0, 0, 320, 320]], [0.9], [0]], (1280, 640), (640, 640), labels=["dent"])
+check("17o boxes rescale to source-image pixels",
+      scaled[0]["box"] == [0.0, 0.0, 640.0, 320.0], str(scaled[0]["box"]))
+check("17p class ids resolve to labels", scaled[0]["label"] == "dent")
+
+# missing model config must name the variable, not fail deep in onnxruntime
+try:
+    DET.detector_backend()("p", ["a.jpg"])
+    _nomodel = ""
+except Exception as e:
+    _nomodel = str(e)
+check("17q missing model names DAMAGE_DETECTOR_MODEL",
+      "DAMAGE_DETECTOR_MODEL" in _nomodel, _nomodel[:80])
+
+
+# ---- 18. colour-coded overlays (box / heat / light) -------------------------
+# The visual surface. The colours MUST come from the same severity table that
+# drives the grade — an amber box beside a "severe" finding destroys trust
+# faster than a missing feature — so that agreement is pinned here.
+import overlay as OV  # noqa: E402
+
+check("18a ramp starts at the cosmetic colour and ends at severe",
+      OV.ramp_colour(0.0) == OV.hex_to_rgb(TAX.SEVERITY_BANDS[0][3])
+      and OV.ramp_colour(1.0) == OV.hex_to_rgb(TAX.SEVERITY_BANDS[-1][3]))
+check("18b ramp is continuous and clamped",
+      OV.ramp_colour(-5) == OV.ramp_colour(0.0)
+      and OV.ramp_colour(99) == OV.ramp_colour(1.0))
+check("18c box colour == the report's band colour for that severity",
+      all(OV.severity_colour(s) == OV.hex_to_rgb(TAX.severity_band(s)[1])
+          for s in range(1, 11)))
+
+# findings with no usable box are COUNTED, never silently dropped: an empty
+# overlay must not be able to read as "no damage found"
+# bboxes are NORMALISED [x, y, w, h] — the product's single convention
+mixed = [
+    {"panel": "hood", "damage_type": "dent", "severity": 8,
+     "image_index": 0, "bbox": [0.1, 0.1, 0.3, 0.4]},
+    {"panel": "roof", "damage_type": "dent", "severity": 4},           # no bbox
+    {"panel": "door", "damage_type": "dent", "severity": 4,
+     "image_index": 0, "bbox": [0.2, 0.2, 0.0, 0.0]},                  # degenerate
+    {"panel": "boot", "damage_type": "dent", "severity": 4,
+     "image_index": 1, "bbox": [0.0, 0.0, 0.5, 0.5]},                  # other image
+]
+items, skipped = OV.drawable(mixed, (200, 120), image_index=0)
+check("18d2 normalised box scales to this image's pixels",
+      [round(v) for v in items[0][1]] == [20, 12, 80, 60],
+      str([round(v) for v in items[0][1]]))
+check("18d only usable boxes on this image are drawn", len(items) == 1,
+      str(len(items)))
+check("18e unusable findings are counted, not dropped", skipped == 2, str(skipped))
+
+# class mode: categorical palette, distinct from the severity ramp
+check("18f-1 each damage type gets its own colour",
+      len({OV.class_colour(t) for t in
+           ("dent","scratch","crack","rust","shattered_glass","tire_damage")}) == 6)
+check("18f-2 finding_colour routes by mode",
+      OV.finding_colour({"damage_type":"rust","severity":9}, "class")
+      == OV.class_colour("rust")
+      and OV.finding_colour({"damage_type":"rust","severity":9}, "severity")
+      == OV.severity_colour(9))
+check("18f-3 unknown damage type falls back, never crashes",
+      OV.class_colour("no_such_type") == OV.hex_to_rgb(OV.DEFAULT_CLASS_COLOUR))
+check("18f label names panel, damage and severity",
+      OV.finding_label(mixed[0]) == "Hood / bonnet · Dent · 8",
+      OV.finding_label(mixed[0]))
+
+# rendering: exercised only if Pillow is present, so the suite stays deps-free
+try:
+    from PIL import Image as _PILImage
+    _has_pil = True
+except ImportError:
+    _has_pil = False
+
+if _has_pil:
+    import tempfile as _tf
+    _p = os.path.join(_tf.mkdtemp(), "t.jpg")
+    _PILImage.new("RGB", (200, 120), (90, 90, 90)).save(_p)
+    for _mode in ("box", "heat", "light", "both"):
+        _im, _meta = OV.render(_p, mixed, mode=_mode)
+        check(f"18g[{_mode}] renders at source size and reports coverage",
+              _im.size == (200, 120) and _meta["drawn"] == 1
+              and _meta["skipped_no_bbox"] == 2)
+    # a clean car must render unchanged rather than crash on an empty mask
+    _clean, _cmeta = OV.render(_p, [], mode="both")
+    check("18h no findings renders cleanly", _clean.size == (200, 120)
+          and _cmeta["drawn"] == 0)
+    _uri, _umeta = OV.render_data_uri(_p, mixed, mode="both")
+    check("18i data URI is inlineable jpeg",
+          _uri.startswith("data:image/jpeg;base64,") and _umeta["bytes"] > 0)
+else:
+    check("18g rendering skipped (no Pillow)", True)
+
+
+# ---- 19. paint film thickness -----------------------------------------------
+# The measured channel. This is legally the sharpest thing the product says —
+# "this panel reads like it was resprayed" is a claim about a car's HISTORY —
+# so the arithmetic, the fallbacks, the false positives and the WORDING are all
+# pinned here. Every threshold under test is cited in paint_thickness.py's
+# docstring; anything unsourced is deliberately absent rather than invented.
+import paint_thickness as PT  # noqa: E402
+
+# -- 19.1 unit conversion --------------------------------------------------
+check("19a mils<->um conversion is the real 25.4 factor",
+      PT.mils_to_um(4) == 101.6 and PT.um_to_mils(101.6) == 4.0)
+
+# -- 19.2 the lookup: tiers, fallbacks, and a confidence per tier -----------
+ex_model = PT.expected_range("BMW", "X5", 2019, "front_left_door")
+check("19b exact model row answers, with its source attached",
+      ex_model["tier"] in ("model", "model_year")
+      and ex_model["min_um"] == 120 and ex_model["max_um"] == 165
+      and "ETARI" in ex_model["source"])
+
+ex_make = PT.expected_range("BMW", "i8", 2019, "front_left_door")
+check("19c unknown model falls back to the make average",
+      ex_make["tier"] == "make" and ex_make["min_um"] == 102)
+check("19d make tier is less confident than model tier",
+      ex_make["confidence"] < ex_model["confidence"])
+
+ex_global = PT.expected_range("Hyundai", "Tucson", 2020, "hood")
+check("19e no sourced Korean figure -> global default, lowest confidence",
+      ex_global["tier"] == "global"
+      and (ex_global["min_um"], ex_global["max_um"]) == PT.GLOBAL_DEFAULT_UM
+      and ex_global["confidence"] <= 0.4)
+check("19f global tier says why it answered",
+      "no reference row" in ex_global["note"])
+
+ex_old = PT.expected_range("Toyota", "Corolla", 1998, "hood")
+check("19g pre-2007 widens the band and drops a tier",
+      ex_old["tier"] == "make_era"
+      and ex_old["max_um"] > PT.MAKE_DEFAULTS["toyota"][1])
+
+# a conflicted source row cannot ride an exact-model match to high confidence
+ex_conflict = PT.expected_range("Mercedes", "C-Class", 2018, "hood")
+check("19h conflicting sources cap the confidence of an exact match",
+      ex_conflict["confidence"] <= 0.45, str(ex_conflict["confidence"]))
+check("19i make alias normalised (mercedes -> mercedes-benz)",
+      PT.normalize_make("Mercedes") == "mercedes-benz"
+      and PT.normalize_model("C-Class") == "c class")
+
+# -- 19.3 panel class: the classic false positives --------------------------
+check("19j bumper is plastic, gets its own band, not the body band",
+      PT.expected_range("BMW", "X5", 2019, "front_bumper")["panel_class"]
+      == "plastic_bumper")
+check("19k plastic bumper band reaches the GM ADAS 330 um limit",
+      PT.expected_range("BMW", "X5", 2019, "rear_bumper")["max_um"] == 330)
+rock = PT.expected_range("BMW", "X5", 2019, "left_rocker")
+check("19l rocker gets the anti-stonechip allowance on the upper bound only",
+      rock["max_um"] == 165 + PT.ROCKER_ALLOWANCE_UM
+      and rock["min_um"] == 120)
+check("19m glass/lamps/wheels are not paintable surfaces",
+      PT.expected_range("BMW", "X5", 2019, "windshield")["panel_class"]
+      == "not_paintable")
+tri = PT.expected_range("BMW", "X5", 2019, "hood", paint_system="tri_coat")
+check("19n tri-coat widens the upper bound and labels the allowance DERIVED",
+      tri["max_um"] == 165 + 30
+      and any("derived" in a.lower() for a in tri["adjustments"]))
+
+# -- 19.4 classifying a reading --------------------------------------------
+def _verdict(panel, points, make="BMW", model="X5", year=2019, ref=None,
+             ref_panel=None, **kw):
+    r = PT.normalize_reading({"panel": panel, "points_um": points, **kw})
+    e = PT.expected_range(make, model, year, panel)
+    return r, e, PT.classify_reading(r, e, ref, ref_panel)
+
+_r, _e, v_factory = _verdict("front_left_door", [130, 138, 142, 135])
+check("19o in-band reading classifies factory",
+      v_factory["class"] == "factory")
+
+_r, _e, v_resp = _verdict("front_left_door", [305, 312, 298, 320])
+check("19p 2x-factory reading classifies refinished",
+      v_resp["class"] == "refinished" and v_resp["basis"] == "absolute")
+
+# BOTH gates must open: a small absolute excess on a thin-paint car must not
+# become an accusation
+_r, _e, v_thin = _verdict("hood", [130, 132, 128, 131],
+                          make="Volkswagen", model="Tiguan", year=2018)
+check("19q +45 um over a thin factory band is inconclusive, not an accusation",
+      v_thin["class"] == "inconclusive", v_thin["class"])
+
+_r, _e, v_fill = _verdict("left_quarter_panel", [640, 655, 620, 660])
+check("19r past the professional gauge's 500 um range -> filler_suspect",
+      v_fill["class"] == "filler_suspect")
+
+# no reading: opposite meaning on metal vs plastic — the classic false positive
+_r, _e, v_nr_metal = _verdict("front_left_door", [], no_reading=True)
+check("19s no reading on METAL is the filler signal",
+      v_nr_metal["class"] == "filler_suspect")
+_r, _e, v_nr_plastic = _verdict("front_bumper", [], no_reading=True)
+check("19t no reading on a PLASTIC bumper is the wrong-probe signal, not filler",
+      v_nr_plastic["class"] == "not_measurable"
+      and any("ultrasonic" in c for c in v_nr_plastic["caveats"]))
+
+# a bumper can never be accused of a respray on thickness alone
+_r, _e, v_bump = _verdict("front_bumper", [300, 305, 295, 310])
+check("19u a thick-but-legal bumper reading is never called a respray",
+      v_bump["class"] != "refinished", v_bump["class"])
+# every plastic-skinned panel, not just the bumpers — a painted mirror cap
+# gives a magnetic gauge nothing, and that must not read as filler
+check("19u2 no plastic panel can produce a filler accusation",
+      all(PT.classify_reading(
+              PT.normalize_reading({"panel": p, "points_um": [],
+                                    "no_reading": True}),
+              PT.expected_range("BMW", "X5", 2019, p))["class"]
+          == "not_measurable"
+          for p in ("front_bumper", "rear_bumper", "grille",
+                    "left_mirror", "right_mirror")))
+
+# -- 19.5 relative comparison beats absolute -------------------------------
+# The same 200 um reads differently depending on what the rest of the car does.
+_r, _e, v_rel_ok = _verdict("front_left_door", [200, 202, 198, 204],
+                            make="Nowhere", model="Nothing", ref=195.0,
+                            ref_panel="roof")
+check("19v within 15 um of the same car's roof is factory, whatever the table says",
+      v_rel_ok["class"] == "factory" and v_rel_ok["basis"] == "relative")
+_r, _e, v_rel_bad = _verdict("front_left_door", [200, 202, 198, 204],
+                             make="Nowhere", model="Nothing", ref=120.0,
+                             ref_panel="roof")
+check("19w 40+ um above the same car's reference is the red flag",
+      v_rel_bad["class"] == "refinished" and v_rel_bad["basis"] == "relative")
+check("19x the relative delta is reported, not just the verdict",
+      abs(v_rel_bad["delta_reference_um"] - 81.0) < 1.0,
+      str(v_rel_bad["delta_reference_um"]))
+_r, _e, v_rel_mid = _verdict("front_left_door", [150, 152, 148, 154],
+                             make="Nowhere", model="Nothing", ref=125.0,
+                             ref_panel="roof")
+check("19y a 25 um difference is a real difference but not a red flag",
+      v_rel_mid["class"] == "inconclusive")
+
+# -- 19.6 measurement quality and caveats ----------------------------------
+_r1, _e1, v_one = _verdict("front_left_door", [305])
+_r4, _e4, v_four = _verdict("front_left_door", [305, 312, 298, 320])
+check("19z one point is trusted less than four across the panel",
+      v_one["confidence"] < v_four["confidence"])
+check("19aa PPF is always raised as an alternative explanation",
+      any("protection film" in c for c in v_four["caveats"]))
+_r, _e, v_ppf = _verdict("front_left_door", [305, 312, 298, 320], has_film=True)
+check("19ab a known PPF panel is heavily discounted",
+      v_ppf["confidence"] < v_four["confidence"] - 0.2)
+
+# -- 19.7 reference selection ----------------------------------------------
+_rd = [PT.normalize_reading(x) for x in [
+    {"panel": "roof", "points_um": [120]},
+    {"panel": "hood", "points_um": [125]},
+    {"panel": "front_left_door", "points_um": [300]}]]
+check("19ac the roof is chosen as the same-car reference",
+      PT.pick_reference(_rd)[1] == "roof")
+_rd2 = [PT.normalize_reading({"panel": "front_bumper", "points_um": [200]})]
+check("19ad a plastic bumper is never used as the reference",
+      PT.pick_reference(_rd2)[0] is None)
+_rd3 = [PT.normalize_reading({"panel": "front_left_door", "points_um": [120]}),
+        PT.normalize_reading({"panel": "rear_left_door", "points_um": [300]})]
+check("19ae two panels cannot vote — no reference rather than a bad one",
+      PT.pick_reference(_rd3)[2] == "insufficient")
+
+# -- 19.8 findings drop into the EXISTING pipeline unchanged ---------------
+session = [
+    {"panel": "roof", "points_um": [118, 122, 120, 119]},
+    {"panel": "hood", "points_um": [125, 121, 128, 124]},
+    {"panel": "front_left_door", "points_um": [305, 312, 298, 320]},
+    {"panel": "front_bumper", "points_um": [], "no_reading": True},
+]
+pt_f, pt_notes, pt_ctx = PT.readings_to_findings(
+    session, {"make": "BMW", "model": "X5", "year": 2019})
+check("19af only the flagged panel becomes a finding", len(pt_f) == 1,
+      str([f["panel"] for f in pt_f]))
+check("19ag factory/unmeasurable panels travel as NOTES, never as findings",
+      len(pt_notes) == 3
+      and {n["class"] for n in pt_notes} == {"factory", "not_measurable"})
+pf = pt_f[0]
+check("19ah the finding uses the new taxonomy id",
+      pf["damage_type"] == "prior_refinish"
+      and pf["damage_type"] in TAX.DAMAGE_TYPES)
+check("19ai evidence is the measurement itself, and is concrete",
+      pf["evidence"] and "µm" in pf["evidence"][0] or "um" in pf["evidence"][0])
+check("19aj evidence cites the reference band and its source",
+      any("ETARI" in e for e in pf["evidence"]))
+check("19ak context names the reference panel and the method",
+      pt_ctx["reference_panel"] == "roof" and "same vehicle" in pt_ctx["method_note"])
+check("19al the built-in table is flagged as a placeholder",
+      pt_ctx["table_is_placeholder"] is True)
+
+# the shape must survive analyze.py's normaliser untouched — that is the proof
+# it is the same shape a VLM finding is
+_pt_rt = AN.normalize_findings(pt_f)
+check("19am measured findings survive normalize_findings", len(_pt_rt) == 1
+      and _pt_rt[0]["damage_type"] == "prior_refinish")
+
+# ...and through severity and repair with no branching
+check("19an a respray moves the condition score off 100",
+      SEV.condition_score(pt_f) < 100)
+_pt_est = REP.estimate_all(pt_f, "us")
+check("19ao a respray costs NOTHING to repair — it is a value finding",
+      _pt_est["total_low"] == 0 and _pt_est["total_high"] == 0)
+check("19ap and says so instead of printing a fake quote",
+      "no repair required" in _pt_est["lines"][0]["assumption_low"])
+
+# filler is different: it IS a structural concern and it DOES cost money
+fill_f, _, _ = PT.readings_to_findings(
+    [{"panel": "roof", "points_um": [118, 122, 120, 119]},
+     {"panel": "hood", "points_um": [121, 125, 119, 123]},
+     {"panel": "left_quarter_panel", "points_um": [640, 655, 620, 660]}],
+    {"make": "BMW", "model": "X5", "year": 2019})
+check("19aq filler_suspect maps to body_filler", len(fill_f) == 1
+      and fill_f[0]["damage_type"] == "body_filler")
+check("19ar body_filler is a structural candidate -> raises the inspect banner",
+      SEV.is_structural_concern(fill_f) is True)
+check("19as filler carries a hidden-damage inference with a probability",
+      fill_f[0]["hidden_damage"]
+      and 0 < fill_f[0]["hidden_damage"][0]["probability"] <= 1)
+check("19at filler IS priced (unlike a respray)",
+      REP.estimate_all(fill_f, "us")["total_high"] > 0)
+
+# several resprayed panels escalate — one is a scrape, three is an impact
+multi, _, _ = PT.readings_to_findings(
+    [{"panel": "roof", "points_um": [118, 122, 120, 119]},
+     {"panel": "front_left_door", "points_um": [300, 305, 310, 302]},
+     {"panel": "rear_left_door", "points_um": [295, 300, 305, 298]},
+     {"panel": "left_quarter_panel", "points_um": [290, 295, 300, 292]}],
+    {"make": "BMW", "model": "X5", "year": 2019})
+check("19au three refinished panels score worse than one",
+      len(multi) == 3
+      and multi[0]["severity"] > pf["severity"], str(multi[0]["severity"]))
+
+# -- 19.9 fusion with the vision channel -----------------------------------
+vis_confirm = [{"panel": "front_left_door", "damage_type": "paint_mismatch",
+                "damage_label": "Paint mismatch", "severity": 4,
+                "confidence": 0.7, "evidence": ["door reads bluer than the wing"]}]
+fz = PT.fuse_with_vision(vis_confirm, pt_f)
+check("19av agreement keeps BOTH findings and raises both confidences",
+      len(fz["findings"]) == 2
+      and fz["findings"][0]["confidence"] > 0.7
+      and fz["findings"][1]["confidence"] > pf["confidence"] - 1e-9)
+check("19aw agreement is recorded in the audit trail",
+      any(c["state"] == "confirms" for c in fz["corroboration"]))
+check("19ax each channel cites the other in its evidence",
+      any("Visual inspection" in e for e in fz["findings"][1]["evidence"])
+      and any("thickness" in e for e in fz["findings"][0]["evidence"]))
+
+# CONTRADICTION: the camera flagged paint work, the gauge read factory. The
+# measurement must NOT delete the observation — a blended repair reads normal.
+vis_contra = [{"panel": "rear_right_door", "damage_type": "paint_mismatch",
+               "damage_label": "Paint mismatch", "severity": 4,
+               "confidence": 0.8, "evidence": ["colour steps at the shut line"]}]
+fz2 = PT.fuse_with_vision(vis_contra, pt_f)
+check("19ay a contradicting measurement never deletes the visual finding",
+      len(fz2["findings"]) == 2)
+check("19az it lowers the visual finding's confidence instead",
+      fz2["findings"][0]["confidence"] < 0.8)
+check("19ba and states the contradiction in that finding's evidence",
+      any("within the expected factory range" in e
+          for e in fz2["findings"][0]["evidence"]))
+check("19bb the contradiction is in the audit trail",
+      any(c["state"] == "contradicts" for c in fz2["corroboration"]))
+
+# thickness-only: the invisible respray, which is the whole point of the feature
+fz3 = PT.fuse_with_vision([], pt_f)
+check("19bc a measured finding stands alone when the camera saw nothing",
+      len(fz3["findings"]) == 1
+      and fz3["corroboration"][0]["state"] == "unseen")
+
+# -- 19.10 the wording. This is the legally sensitive surface. -------------
+_r, _e, _v = _verdict("front_left_door", [305, 312, 298, 320])
+say_resp = PT.describe(_r, _e, _v)
+check("19bd respray wording never asserts the car's history",
+      "has been resprayed" not in say_resp.lower()
+      and "was repainted" not in say_resp.lower())
+check("19be respray wording reports the measurement first",
+      "305" in say_resp or "309" in say_resp or "µm" in say_resp or "um" in say_resp)
+check("19bf respray wording names the alternative explanations",
+      "protection film" in say_resp and "two-tone" in say_resp)
+check("19bg respray wording tells the reader what to do with it",
+      "history" in say_resp.lower())
+
+_r, _e, _v = _verdict("front_bumper", [], no_reading=True)
+say_plastic = PT.describe(_r, _e, _v)
+check("19bh a no-reading bumper explicitly denies the filler reading",
+      "does not indicate filler" in say_plastic)
+
+_r, _e, _v = _verdict("front_left_door", [130, 138, 142, 135])
+say_ok = PT.describe(_r, _e, _v)
+check("19bi a clean reading is not sold as proof of originality",
+      "not proof" in say_ok)
+
+_r, _e, _v = _verdict("left_quarter_panel", [640, 655, 620, 660])
+say_fill = PT.describe(_r, _e, _v)
+check("19bj filler wording sends the reader to an in-person check",
+      "in person" in say_fill)
+
+# -- 19.11 the finding renders as a MEASUREMENT, not as an observation -----
+rep19 = REP_HTML.assemble(pt_f, repair=REP.estimate_all(pt_f, "us"),
+                          vehicle={"make": "BMW", "model": "X5", "year": 2019},
+                          generated_at="2026-01-01T00:00:00Z")
+html19 = REP_HTML.render_html(rep19)
+check("19bk the report shows the reading and the factory band",
+      "µm" in html19 and "factory" in html19.lower())
+check("19bl the report always shows what else explains the reading",
+      "What else could explain" in html19)
+check("19bm the report cites the reference source",
+      "ETARI" in html19)
+
+# -- 19.12 loading the owner's dataset shape -------------------------------
+owner_rows = [
+    {"make": "Kia", "model": "Sportage", "year": 2021, "min_um": 88,
+     "max_um": 112, "avg_um": 100, "avg_mils": 3.94,
+     "oem_range_mils": "3.5-4.4", "source": "MASTER unified",
+     "confidence": 0.8},
+    {"make": "Genesis", "model": "G70", "year": 2020,
+     "expected_min_um": 95, "expected_max_um": 130,
+     "source": "oem_paint_thickness", "confidence": 0.7},
+    {"make": "Ghost", "model": "None", "source": "x"},      # unusable -> dropped
+]
+loaded = PT.load_table(owner_rows)
+check("19bn owner dataset rows load onto the schema", len(loaded) == 2)
+check("19bo rows without a usable band are dropped, never guessed",
+      all(r["make"] != "ghost" for r in loaded))
+kia = PT.expected_range("Kia", "Sportage", 2021, "hood", table=loaded)
+check("19bp the loaded table answers where the placeholder could not",
+      kia["tier"] == "model_year" and kia["max_um"] == 112
+      and kia["confidence"] > 0.7)
+check("19bq a year-scoped row does not answer for a different year",
+      PT.expected_range("Kia", "Sportage", 2005, "hood",
+                        table=loaded)["tier"] != "model_year")
+check("19br mils ranges parse when microns are absent",
+      PT._parse_mils_range("4.0 - 6.0 mils")[0] == 101.6)
+
+# -- 19.13 taxonomy edits did not break the existing vocabulary ------------
+check("19bs 'respray' now routes to the measured id, not paint_mismatch",
+      TAX.canonical_damage("respray") == "prior_refinish")
+check("19bt visual colour language still routes to paint_mismatch",
+      TAX.canonical_damage("colour mismatch between panels") == "paint_mismatch"
+      and TAX.canonical_damage("overspray on the trim") == "paint_mismatch")
+check("19bu 'bondo' routes to body_filler",
+      TAX.canonical_damage("bondo under the paint") == "body_filler")
+
+
+# ---- 20. paint thickness through the real handler ---------------------------
+# The whole point of matching analyze.py's finding shape is that NOTHING
+# downstream needs a branch. This runs gauge readings through the actual job
+# path — validate, score, price, pin in 3D, render — to prove that.
+job20 = {"id": "job-20", "input": {
+    "mode": "inspect",
+    "vehicle": {"make": "BMW", "model": "X5", "year": 2019, "market": "us"},
+    "paint_readings": [
+        {"panel": "roof", "points_um": [118, 122, 120, 119]},
+        {"panel": "hood", "points_um": [125, 121, 128, 124]},
+        {"panel": "front_left_door", "points_um": [305, 312, 298, 320]},
+        {"panel": "front_bumper", "points_um": [], "no_reading": True},
+    ],
+    "findings": [
+        {"panel": "front_left_door", "damage_type": "paint_mismatch",
+         "severity": 4, "confidence": 0.7,
+         "evidence": ["door reads a shade bluer than the front wing"]},
+    ]}}
+resp20 = H.handler(job20)
+check("20a gauge readings run through the real handler",
+      resp20.get("status") == "success", str(resp20)[:160])
+check("20b the measured finding joined the vision finding",
+      len(resp20["findings"]) == 2
+      and {f["damage_type"] for f in resp20["findings"]}
+      == {"paint_mismatch", "prior_refinish"})
+check("20c the paint block reports what was measured AND what read clean",
+      resp20["paint_thickness"]["panels_measured"] == 4
+      and resp20["paint_thickness"]["flagged"] == 1
+      and len(resp20["paint_thickness"]["clear"]) == 3)
+check("20d the reference panel is named in the output",
+      resp20["paint_thickness"]["reference_panel"] == "roof")
+check("20e corroboration between the two channels is recorded",
+      any(c["state"] == "confirms"
+          for c in resp20["paint_thickness"]["corroboration"]))
+check("20f a respray does not inflate the repair estimate",
+      resp20["repair"]["total_high"] ==
+      REP.estimate_all([f for f in resp20["findings"]
+                        if f["damage_type"] == "paint_mismatch"],
+                       "us")["total_high"])
+check("20g measured findings still get a 3D pin",
+      resp20["fusion"]["count"] == 2)
+_h20 = _b64.b64decode(
+    next(v["html_b64"] for v in resp20["artifacts"].values()
+         if "html_b64" in v)).decode()
+check("20h the rendered report has the gauge section",
+      "Paint depth gauge" in _h20)
+check("20i clean panels are printed, not only failures",
+      "Roof" in _h20 and "Hood" in _h20)
+
+# a gauge-only job — no photos at all — is a complete inspection
+job21 = {"id": "job-21", "input": {
+    "mode": "inspect",
+    "vehicle": {"make": "Toyota", "model": "Camry", "year": 2020},
+    "paint_readings": [
+        {"panel": "roof", "points_um": [105, 108, 103, 106]},
+        {"panel": "front_left_fender", "points_um": [104, 107, 102, 105]},
+        {"panel": "front_left_door", "points_um": [101, 104, 99, 103]},
+    ]}}
+resp21 = H.handler(job21)
+check("20j readings alone are a valid inspection (no photos required)",
+      resp21.get("status") == "success")
+check("20k a car that measures factory throughout still scores 100",
+      resp21["condition"]["score"] == 100
+      and resp21["paint_thickness"]["flagged"] == 0)
+
+# a malformed reading must never lose an otherwise-valid inspection
+job22 = {"id": "job-22", "input": {
+    "mode": "inspect",
+    "paint_readings": ["not a reading at all", {"panel": None}],
+    "findings": [{"panel": "hood", "damage_type": "dent", "severity": 5,
+                  "evidence": ["crease"]}]}}
+resp22 = H.handler(job22)
+check("20l a malformed reading degrades, never fails the job",
+      resp22.get("status") == "success" and len(resp22["findings"]) >= 1)
+# ...and, the sharper point: a broken payload must never become the gravest
+# claim the module can make. "The gauge would not read" is diagnostic; "the
+# field was missing" is not, and conflating them accused a car of filler on
+# the strength of a typo.
+check("20m a malformed reading is NOT read as the filler signal",
+      all(f["damage_type"] != "body_filler" for f in resp22["findings"]),
+      str([f["damage_type"] for f in resp22["findings"]]))
+_bad = PT.normalize_reading({"panel": "hood"})
+check("20n a missing value is invalid, not a no-reading",
+      _bad["valid"] is False and _bad["no_reading"] is False)
+_explicit = PT.normalize_reading({"panel": "hood", "no_reading": True})
+check("20o an EXPLICIT no-reading stays diagnostic",
+      _explicit["valid"] is True and _explicit["no_reading"] is True)
+check("20p and only the explicit one reaches filler_suspect",
+      PT.classify_reading(_explicit,
+                          PT.expected_range("BMW", "X5", 2019, "hood"))["class"]
+      == "filler_suspect"
+      and PT.classify_reading(_bad,
+                              PT.expected_range("BMW", "X5", 2019, "hood"))
+      ["class"] == "not_measurable")
+
+
+# ---- RF-DETR ONNX output contract -----------------------------------------
+# These pin the real exported model's format, verified against
+# detector/v8-6class/rfdetr-base.onnx:
+#     dets   (1, 300, 4)  normalised cx, cy, w, h
+#     labels (1, 300, 7)  raw logits
+# The generic parser assumed pixel x1,y1,x2,y2 corners plus ready-made scores
+# and was wrong in three ways at once, silently: it read centres as corners and
+# treated negative logits as confidences, so nothing ever cleared the floor and
+# nothing ever raised. Every assertion here is a way that failure could return.
+import numpy as _np                                                   # noqa: E402
+
+_L = ["_placeholder_", "crack_glass", "dent", "lamp_wheel", "rust_paint",
+      "scratch_scuff", "structural"]
+_dets = _np.zeros((1, 3, 4), dtype="float32")
+_dets[0, 0] = [0.5, 0.5, 0.2, 0.4]      # centred, 20% x 40%
+_dets[0, 1] = [0.25, 0.25, 0.1, 0.1]
+_dets[0, 2] = [0.9, 0.9, 0.05, 0.05]
+_log = _np.full((1, 3, 7), -9.0, dtype="float32")
+_log[0, 0, 2] = 3.0                      # dent, sigmoid 0.953
+_log[0, 1, 5] = 1.0                      # scratch_scuff, sigmoid 0.731
+_out = DET.parse_detections([_dets, _log], (1000, 500), (560, 560), _L, 0.3)
+
+check("21a rfdetr output shape is recognised", DET._is_rfdetr([_dets, _log]))
+check("21b a (boxes,scores,labels) triple is NOT taken for rfdetr",
+      not DET._is_rfdetr([_dets, _log, _log]))
+check("21c cxcywh becomes pixel corners on the ORIGINAL frame",
+      _out and _out[0]["box"] == [400.0, 150.0, 600.0, 350.0],
+      str(_out[0]["box"]) if _out else "none")
+check("21d logits become probabilities through a sigmoid",
+      _out and abs(_out[0]["score"] - 0.9525741) < 1e-5)
+check("21e the class index survives dropping the placeholder",
+      _out and _out[0]["label"] == "dent")
+check("21f a second class maps correctly too",
+      len(_out) > 1 and _out[1]["label"] == "scratch_scuff")
+check("21g queries below the floor are dropped", len(_out) == 2,
+      f"{len(_out)} kept")
+# The placeholder must never win a query, or a detection arrives with no class.
+_ph = _np.full((1, 1, 7), -9.0, dtype="float32")
+_ph[0, 0, 0] = 5.0
+check("21h the reserved placeholder can never be predicted",
+      DET.parse_detections([_dets[:, :1], _ph], (100, 100), (560, 560),
+                           _L, 0.3) == [])
+# A normalised box must not be scaled by the model/original ratio as well.
+_one = _np.array([[[0.5, 0.5, 1.0, 1.0]]], dtype="float32")
+_onel = _np.full((1, 1, 7), -9.0, dtype="float32")
+_onel[0, 0, 1] = 3.0
+_full = DET.parse_detections([_one, _onel], (800, 600), (560, 560), _L, 0.3)
+check("21i a full-frame box maps to the full frame, not a scaled one",
+      _full and _full[0]["box"] == [0.0, 0.0, 800.0, 600.0],
+      str(_full[0]["box"]) if _full else "none")
+
+
+# ---- 22 the shipped model's classes must survive the whole path -----------
+#
+# THIS IS THE TEST THAT WAS MISSING. Five of the six classes the detector emits
+# had no entry in DAMAGE_CLASS_MAP, and an unmapped label is not drawn grey or
+# logged — detections_to_findings does `if not dtype: continue` and deletes it.
+# So a model trained for weeks reported only dents, and 255 passing tests said
+# nothing, because every one of them fed a label that happened to be mapped.
+# The suite now asserts the contract end to end: what the model emits, through
+# the map, to a finding, to a colour.
+import overlay as OVL                                          # noqa: E402
+
+_fed = [{"label": n, "score": 0.9, "box": [10, 10, 100, 100]}
+        for n in DET.DETECTOR_CLASSES]
+_got = DET.detections_to_findings(_fed, (640, 480), min_confidence=0.1)
+check("22a every class the detector emits survives as a finding",
+      len(_got) == len(DET.DETECTOR_CLASSES),
+      f"{len(_got)} of {len(DET.DETECTOR_CLASSES)} survived")
+check("22b each maps to a real taxonomy type",
+      all(f["damage_type"] in TAX.DAMAGE_TYPES for f in _got),
+      str([f["damage_type"] for f in _got]))
+check("22c the six map to six distinct types",
+      len({f["damage_type"] for f in _got}) == len(DET.DETECTOR_CLASSES),
+      str(sorted({f["damage_type"] for f in _got})))
+
+# Every taxonomy type needs a colour, or a real finding is drawn in the shade
+# that means "unclassified" — which is how prior_refinish and body_filler, the
+# two "has this been repaired" answers, were rendered.
+_uncoloured = [t for t in TAX.DAMAGE_TYPES if t not in OVL.CLASS_COLOURS]
+check("22d every taxonomy damage type has its own class colour",
+      not _uncoloured, str(_uncoloured))
+
+# 1-based ids from a list is the off-by-one that silently renames every class.
+_dictlab = {1: "crack_glass", 2: "dent", 3: "lamp_wheel"}
+check("22e a dict of labels is read by id, not by position",
+      [DET._label_for(_dictlab, i) for i in (1, 2, 3)]
+      == ["crack_glass", "dent", "lamp_wheel"])
+check("22f json string keys resolve the same as int keys",
+      DET._label_for({"1": "crack_glass"}, 1) == "crack_glass")
+check("22g a list is still read by position for 0-based exporters",
+      DET._label_for(["dent", "rust"], 0) == "dent")
+check("22h an id past the end of a list degrades to its number",
+      DET._label_for(["dent"], 7) == "7")
+check("22i no labels at all degrades to the number", DET._label_for(None, 3)
+      == "3")
+
+# A bare class number must NOT quietly become a finding: that is what an
+# unresolved label looks like, and it has to die visibly rather than be
+# mistaken for damage.
+check("22j a bare class number is not a damage type",
+      DET.detections_to_findings(
+          [{"label": "3", "score": 0.9, "box": [1, 1, 9, 9]}],
+          (100, 100), min_confidence=0.1) == [])
+
+# The two palettes must not share colours. The overlay docstring promises they
+# are separate tables that "can never disagree"; four class colours were byte
+# -identical to severity band colours, so an orange box was both "dent" and
+# "major" depending on which legend the reader remembered.
+_sevhex = {c.lower() for _lo, _hi, _n, c in TAX.SEVERITY_BANDS}
+_shared = sorted(k for k, v in OVL.CLASS_COLOURS.items()
+                 if v.lower() in _sevhex)
+check("22k no class colour is identical to a severity colour", not _shared,
+      str(_shared))
+
+
+# Identity is the crude version of the real property, which is PERCEPTUAL
+# distance — two colours a hex apart are just as ambiguous as two the same. So
+# the invariant is pinned in Lab, where distance means what the eye does.
+def _lab(h):
+    h = h.lstrip("#")
+    r, g, b = [int(h[i:i + 2], 16) / 255.0 for i in (0, 2, 4)]
+
+    def lin(c):
+        return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
+    r, g, b = lin(r), lin(g), lin(b)
+    x = (r * 0.4124 + g * 0.3576 + b * 0.1805) / 0.95047
+    y = (r * 0.2126 + g * 0.7152 + b * 0.0722)
+    z = (r * 0.0193 + g * 0.1192 + b * 0.9505) / 1.08883
+
+    def f(t):
+        return t ** (1 / 3.0) if t > 0.008856 else (7.787 * t + 16 / 116.0)
+    fx, fy, fz = f(x), f(y), f(z)
+    return (116 * fy - 16, 500 * (fx - fy), 200 * (fy - fz))
+
+
+def _de(a, b):
+    la, lb = _lab(a), _lab(b)
+    return sum((la[i] - lb[i]) ** 2 for i in range(3)) ** 0.5
+
+
+_sevcols = [c for _lo, _hi, _n, c in TAX.SEVERITY_BANDS]
+_near_sev = sorted(
+    (round(_de(v, s), 1), k) for k, v in OVL.CLASS_COLOURS.items()
+    for s in _sevcols if _de(v, s) < 20.0)
+check("22l every class colour is perceptually clear of the severity ramp",
+      not _near_sev, str(_near_sev[:4]))
+
+_ck = sorted(OVL.CLASS_COLOURS)
+_tight = sorted((round(_de(OVL.CLASS_COLOURS[a], OVL.CLASS_COLOURS[b]), 1),
+                 a, b)
+                for i, a in enumerate(_ck) for b in _ck[i + 1:]
+                if _de(OVL.CLASS_COLOURS[a], OVL.CLASS_COLOURS[b]) < 18.0)
+check("22m no two class colours are perceptually confusable", not _tight,
+      str(_tight[:4]))
+
+# class_map.py caches the palette as hex literals for training hosts that have
+# no damage package on their path. A cache with no invalidation is a second
+# source of truth, and it drifted the moment overlay's palette moved — the
+# demonstration sheet went on printing the retired hexes. The two must agree.
+sys.path.insert(0, os.path.join(HERE, "training"))
+import class_map as _CM                                        # noqa: E402
+
+_drift = sorted(
+    (c, _CM.FINAL_CLASSES[c]["colour"], OVL.CLASS_COLOURS.get(
+        _CM.FINAL_CLASSES[c]["canonical"]))
+    for c in _CM.FINAL_CLASSES
+    if _CM.FINAL_CLASSES[c]["colour"]
+    != OVL.CLASS_COLOURS.get(_CM.FINAL_CLASSES[c]["canonical"]))
+check("22n the training palette cache matches the shipping palette",
+      not _drift, str(_drift))
+check("22o every training class resolves to a real taxonomy type",
+      all(_CM.FINAL_CLASSES[c]["canonical"] in TAX.DAMAGE_TYPES
+          for c in _CM.FINAL_CLASSES),
+      str([_CM.FINAL_CLASSES[c]["canonical"] for c in _CM.FINAL_CLASSES]))
+
+# EVERY vocabulary the trainer can emit, not just the one in production.
+# 22a only pinned the six-class set, so --merge-groups and --groups-v2 models
+# still had most of their classes deleted by the same `if not dtype: continue`
+# — the original bug, left armed for the next run that used a supported flag.
+for _vocab, _names in sorted(DET.TRAINING_VOCABULARIES.items()):
+    _lost = [n for n in _names if not DET.DAMAGE_CLASS_MAP.get(n)]
+    check(f"22p {_vocab}: every class survives the class map", not _lost,
+          str(_lost))
+
+# The env override is a documented escape hatch, so its two forms must both
+# resolve correctly. A bare comma list is POSITIONAL, and following the old
+# error message's advice with a 1-based model shifted every class by one.
+_env_ids = DET._label_for({1: "crack_glass", 2: "dent"}, 1)
+check("22q explicit id=name form is read by id", _env_ids == "crack_glass")
+os.environ["DAMAGE_DETECTOR_LABELS"] = "1=crack_glass,2=dent,3=lamp_wheel"
+_parsed = DET._labels_from_env()
+check("22r an id=name env var parses to a mapping",
+      isinstance(_parsed, dict) and _parsed[1] == "crack_glass", str(_parsed))
+check("22s ids from the env var resolve without shifting",
+      [DET._label_for(_parsed, i) for i in (1, 2, 3)]
+      == ["crack_glass", "dent", "lamp_wheel"])
+os.environ["DAMAGE_DETECTOR_LABELS"] = "dent,rust_paint"
+_plain = DET._labels_from_env()
+check("22t a bare comma list still parses positionally",
+      _plain == ["dent", "rust_paint"], str(_plain))
+os.environ.pop("DAMAGE_DETECTOR_LABELS", None)
+
+
+# ---- 23. NMS and per-class confidence floors ------------------------------
+#
+# Both were fitted on half the ECC set and validated on the other half:
+# precision 24.1% -> 28.5% at flat recall. They are operating-point choices,
+# so what these tests protect is the MECHANISM — that a suppressed box really
+# is dropped, that an explicit threshold still overrides the per-class table,
+# and that the two are applied in the order the fit assumed.
+
+def _box(x1, y1, x2, y2, score, label="dent"):
+    return {"label": label, "score": score, "box": [x1, y1, x2, y2]}
+
+
+_a = _box(0, 0, 100, 100, 0.9)
+_b = _box(5, 5, 105, 105, 0.5)          # ~0.82 IoU with _a
+_far = _box(500, 500, 600, 600, 0.5)
+check("23a nms drops a box an overlapping higher-scoring one covers",
+      [d["score"] for d in DET.nms([_a, _b])] == [0.9])
+check("23b nms keeps a box that overlaps nothing",
+      len(DET.nms([_a, _far])) == 2)
+check("23c nms keeps the HIGHER-scoring box, not whichever came first",
+      DET.nms([_b, _a])[0]["score"] == 0.9)
+check("23d nms suppresses across classes, so one mark is one finding",
+      len(DET.nms([_a, _box(5, 5, 105, 105, 0.5, "scratch_scuff")])) == 1)
+check("23e box_iou of a box with itself is 1",
+      abs(DET.box_iou([0, 0, 10, 10], [0, 0, 10, 10]) - 1.0) < 1e-9)
+check("23f box_iou of disjoint boxes is 0",
+      DET.box_iou([0, 0, 10, 10], [20, 20, 30, 30]) == 0.0)
+check("23g box_iou is symmetric",
+      abs(DET.box_iou([0, 0, 10, 10], [5, 5, 15, 15])
+          - DET.box_iou([5, 5, 15, 15], [0, 0, 10, 10])) < 1e-12)
+
+# Every class the detector emits needs a floor, or it silently falls back to
+# the global one and the fitted operating point is only half applied.
+check("23h every detector class has a fitted floor",
+      set(DET.DETECTOR_CLASSES) <= set(DET.CLASS_MIN_CONFIDENCE),
+      str(sorted(set(DET.DETECTOR_CLASSES) - set(DET.CLASS_MIN_CONFIDENCE))))
+check("23i the floors are probabilities",
+      all(0.0 < v < 1.0 for v in DET.CLASS_MIN_CONFIDENCE.values()))
+check("23j structural sits below dent, as fitted",
+      DET.CLASS_MIN_CONFIDENCE["structural"]
+      < DET.CLASS_MIN_CONFIDENCE["dent"])
+
+# The per-class table must apply by DEFAULT and yield to an explicit request.
+# A sweep asking for 0.05 that silently gets 0.25 for dents draws a fiction.
+#
+# THE SCORES BELOW ARE CHOSEN TO DISCRIMINATE. A first draft of these tests
+# used logits of +-9, giving both boxes p=0.9999 — above every floor, so the
+# per-class table never bit and the tests passed with the feature deleted.
+# 0.18 sits ABOVE structural's fitted 0.15 and BELOW dent's 0.25, so exactly
+# one of the two survives the default and both survive an explicit 0.01.
+_p18 = math.log(0.18 / 0.82)            # sigmoid(_p18) == 0.18
+_labels = {1: "structural", 2: "dent"}
+_raw = ([[[0.20, 0.20, 0.06, 0.06],     # structural, far from the other box
+          [0.80, 0.80, 0.06, 0.06]]],   # dent
+        [[[-9.0, _p18, -9.0],
+          [-9.0, -9.0, _p18]]])
+_deflt = DET.parse_detections(_raw, (100, 100), (100, 100), _labels)
+_forced = DET.parse_detections(_raw, (100, 100), (100, 100), _labels, 0.01)
+_dn = sorted(d["label"] for d in _deflt)
+_fn = sorted(d["label"] for d in _forced)
+check("23k a score under a class's fitted floor is dropped by default",
+      _dn == ["structural"], f"kept {_dn}")
+check("23l an explicit min_confidence overrides the per-class table",
+      _fn == ["dent", "structural"], f"kept {_fn}")
+check("23m the two paths genuinely differ, so 23k/23l are not vacuous",
+      _dn != _fn)
+check("23n a floor BELOW the global default is reachable, i.e. the unpacker's "
+      "own gate does not pre-empt it",
+      DET.CLASS_MIN_CONFIDENCE["structural"] < DET.DEFAULT_MIN_CONFIDENCE
+      and "structural" in _dn)
+check("23o an unknown class falls back to the global default rather than "
+      "being dropped",
+      DET.CLASS_MIN_CONFIDENCE.get("no_such_class",
+                                   DET.DEFAULT_MIN_CONFIDENCE)
+      == DET.DEFAULT_MIN_CONFIDENCE)
+check("23p parse_detections deduplicates before returning",
+      all(DET.box_iou(a["box"], b["box"]) < DET.DEFAULT_NMS_IOU
+          for i, a in enumerate(_forced) for b in _forced[i + 1:]))
+
+
+# ---- 24. classes.json is read in both the wrapped and the bare form -------
+#
+# Requiring the "index_to_name" wrapper made a hand-written
+# {"1": "crack_glass", ...} parse fine, fail the shape check, and get skipped
+# in silence -- ids then resolve to "1"/"2", map to no damage type, and are
+# dropped, so the run reports nothing and says nothing. Deploying a checkpoint
+# involves writing this file by hand, so the obvious form has to work.
+_names = ["crack_glass", "dent", "lamp_wheel", "rust_paint", "scratch_scuff",
+          "structural"]
+_want = {i + 1: n for i, n in enumerate(_names)}
+_cjd = tempfile.mkdtemp()
+_mdl = os.path.join(_cjd, "model.onnx")
+open(_mdl, "wb").write(b"")
+
+
+def _write_classes(doc):
+    with open(os.path.splitext(_mdl)[0] + ".classes.json", "w") as f:
+        json.dump(doc, f)
+
+
+_write_classes({"index_to_name": {str(i + 1): n
+                                  for i, n in enumerate(_names)}})
+check("24a the wrapped index_to_name form still resolves",
+      DET._labels_beside_model(_mdl) == _want)
+
+_write_classes({str(i + 1): n for i, n in enumerate(_names)})
+check("24b a bare id->name mapping resolves too",
+      DET._labels_beside_model(_mdl) == _want,
+      str(DET._labels_beside_model(_mdl)))
+
+_write_classes({str(i + 1): n for i, n in enumerate(_names)})
+check("24c every name from the bare form maps to a real damage type",
+      all(DET.DAMAGE_CLASS_MAP.get(
+          DET._label_for(DET._labels_beside_model(_mdl), i))
+          for i in range(1, 7)))
+
+# A descriptor that is neither form must be REJECTED, not half-read: guessing
+# at an unknown layout is how the ids get shifted silently.
+_write_classes({"classes": [{"index": 1, "name": "crack_glass"}]})
+check("24d an unrecognised layout resolves to nothing rather than a guess",
+      DET._labels_beside_model(_mdl) is None,
+      str(DET._labels_beside_model(_mdl)))
+_write_classes({"1": "crack_glass", "notanid": "dent"})
+check("24e a mapping with a non-numeric key is not treated as id->name",
+      DET._labels_beside_model(_mdl) is None)
+check("24f a missing classes.json is still None, not an exception",
+      DET._labels_beside_model(os.path.join(_cjd, "absent.onnx")) is None)
+
+
+# ---- 25. ingest class map: recovered strings, and the junk left out ------
+#
+# An audit of the 41 manifest datasets found 35 of 59 source class strings
+# mapping to nothing and being deleted at merge, taking with them any image
+# left boxless. 14 on-domain datasets were affected. These tests pin the
+# recovered mappings, and -- just as importantly -- pin the ones deliberately
+# NOT recovered, so the unmapped report stays a real signal instead of being
+# quietly silenced by a future catch-all.
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                "training"))
+import prepare_data as PD          # noqa: E402
+
+_recovered = {
+    "broken": "missing_part", "break": "missing_part",
+    "deframe": "missing_part", "missing": "missing_part",
+    "broken_part": "missing_part",
+    "crush": "deformation",
+    "shatter": "shattered_glass", "broken_glass": "shattered_glass",
+    "glass-broken": "shattered_glass",
+    "glass-large-crack": "crack", "glass-spider-crack": "crack",
+    "broken_headlight": "lamp_damage",
+    "rost": "rust", "copper corrosion": "rust", "pitting corrosion": "rust",
+    "corrosion-detection": "rust",
+    "flaking": "paint_chip", "dent--1": "dent", "defect": "scratch",
+}
+_wrong = {k: (PD.CLASS_MAP.get(k), v) for k, v in _recovered.items()
+          if PD.CLASS_MAP.get(k) != v}
+check("25a every recovered source string maps to its intended class",
+      not _wrong, str(_wrong))
+
+# The callers lower() before lookup, so an upper-case key here would be dead
+# weight that never matches -- and would hide a real miss behind a false sense
+# of coverage.
+_upper = [k for k in PD.CLASS_MAP if k != k.lower()]
+check("25b CLASS_MAP keys are all lower-case, matching how it is looked up",
+      not _upper, str(_upper))
+
+# Both call sites must keep lowering, or every capitalised source string in
+# the corpus silently stops importing.
+for _mod, _path in (("prepare_data", "training/prepare_data.py"),
+                    ("merge_datasets", "training/merge_datasets.py")):
+    _src = open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                             _path)).read()
+    check(f"25c {_mod} still lower-cases before the CLASS_MAP lookup",
+          ".strip().lower()" in _src)
+
+# The four panel-gap spellings were listed here as deliberately unmapped
+# until 2026-09-02, when they became their own class (see 27). What this
+# test protects is the JUNK staying out: a catch-all that swallowed these
+# would turn the unmapped report from a signal into noise.
+_still_out = ["object", "doggie", "0", "1", "2", "non-corrosion", "spall"]
+_leaked = [k for k in _still_out if k in PD.CLASS_MAP]
+check("25d junk strings stay unmapped, so the unmapped report keeps working",
+      not _leaked, str(_leaked))
+check("25e the negative class is not mapped to a damage type",
+      "non-corrosion" not in PD.CLASS_MAP)
+# An ingest target does NOT have to be a runtime class -- class_map.py groups
+# the ingest vocabulary down to the six the detector trains on (paint_chip,
+# for instance, is folded into rust_paint). The real requirement is that every
+# ingest target survives that grouping and lands on something drawable. An
+# earlier version of this test compared the ingest vocabulary straight against
+# the runtime one, skipped the grouping layer, and failed on a class that was
+# handled correctly all along.
+import class_map as CM             # noqa: E402
+
+_unreachable = []
+for _t in sorted(set(PD.CLASS_MAP.values())):
+    _final = CM.resolve(_t) or _t
+    _grouped = CM.group_for(_final) if _final in CM.FINAL_CLASSES else None
+    if not (DET.DAMAGE_CLASS_MAP.get(_final)
+            or _final in DET.DAMAGE_CLASS_MAP.values()
+            or _grouped):
+        _unreachable.append((_t, _final, _grouped))
+check("25f every ingest target reaches a drawable class through the grouping",
+      not _unreachable, str(_unreachable))
+check("25g IGNORE and CLASS_MAP do not overlap",
+      not (set(PD.IGNORE) & set(PD.CLASS_MAP)),
+      str(set(PD.IGNORE) & set(PD.CLASS_MAP)))
+
+
+# ---- 26. panel attribution: the damage model meets the panel model --------
+#
+# Both models already ran on every inspection; nothing joined them. A
+# finding's panel came from the capture grid alone, so an upload with no
+# hints left every finding on body_other and fusion stacked every 3D pin on
+# the origin. These tests pin the join, and the two ways it must REFUSE:
+# without a known side, and without enough overlap.
+import panel_attribution as PA          # noqa: E402
+import panels as PNL                    # noqa: E402
+import fusion as FUS                    # noqa: E402
+
+_dent = [100, 100, 140, 140]
+_door = [0, 0, 600, 600]
+check("26a containment is damage-inside-panel, not IoU",
+      PA.containment(_dent, _door) == 1.0
+      and (40 * 40) / (40 * 40 + 600 * 600 - 40 * 40) < 0.01)
+check("26b the smaller containing panel wins, being more specific",
+      PA.best_panel(_dent, [{"name": "front_door", "box": _door},
+                            {"name": "rocker_panel",
+                             "box": [80, 80, 200, 200]}])[0]["name"]
+      == "rocker_panel")
+
+_P = {0: [{"name": "back_door", "box": [50, 150, 520, 700], "score": 0.88}]}
+_S = {0: (1000, 1000)}
+_f = {"image_index": 0, "bbox": [0.20, 0.30, 0.06, 0.06], "panel": "body_other",
+      "severity": 6, "damage_type": "dent", "damage_label": "Dent"}
+
+check("26c a pin sits on the origin before attribution",
+      FUS.build_pins([dict(_f)])["pins"][0]["anchor"] == [0.0, 0.0, 0.0])
+_out, _rep = PA.attribute([dict(_f)], _P, _S, hints={0: "rear left door"})
+_pin = FUS.build_pins(_out)["pins"][0]
+check("26d after attribution it names the real panel",
+      _out[0]["panel"] == "rear_left_door", _out[0]["panel"])
+check("26e ...and the 3D pin has moved off the origin",
+      _pin["anchor"] != [0.0, 0.0, 0.0], str(_pin["anchor"]))
+check("26f the route is recorded, not silently assumed",
+      _out[0]["panel_source"] == "detector"
+      and _rep["panel_from_detector"] == 1)
+
+check("26g a capture-grid panel is never overwritten",
+      PA.attribute([dict(_f, panel="hood")], _P, _S,
+                   hints={0: "rear left door"})[0][0]["panel"] == "hood")
+_ns, _nsr = PA.attribute([dict(_f)], _P, _S, hints={})
+check("26h with no side known, a sided panel degrades rather than guessing",
+      _ns[0]["panel"] == "body_other"
+      and _nsr["panel_needs_side_unknown"] == 1, str(_nsr))
+_far, _farr = PA.attribute(
+    [dict(_f, bbox=[0.90, 0.90, 0.05, 0.05])], _P, _S, hints={0: "rear left"})
+check("26i damage outside every panel matches none",
+      _far[0]["panel"] == "body_other" and _farr["no_panel_matched"] == 1)
+
+# UK trade shorthand: this product prices in GBP and taxonomy.py already
+# translates nearside/offside. panels.side_of not doing the same silently
+# dropped every British hint to body_other.
+check("26j UK nearside/offside resolve to a side",
+      [PNL.side_of(h) for h in ("nearside rear door", "offside wing",
+                                "n/s rear", "o/s door")]
+      == ["left", "right", "left", "right"])
+check("26k driver/passenger stay unresolved, being market-dependent",
+      PNL.side_of("driver door") is None
+      and PNL.side_of("passenger side") is None)
+_uk, _ = PA.attribute([dict(_f)], _P, _S, hints={0: "nearside rear door"})
+check("26l a British hint now places the finding",
+      _uk[0]["panel"] == "rear_left_door", _uk[0]["panel"])
+
+# Every name the join can emit must have a 3D anchor, or the pin silently
+# falls back to the origin -- the exact bug this closes.
+_emit = {PNL.taxonomy_panel(n, s)
+         for n in list(PNL._SIDELESS) + list(PNL._SIDED)
+         for s in ("left", "right", None)}
+check("26m every emittable panel name has a fusion anchor",
+      not [e for e in _emit if e not in FUS.PANELS],
+      str(sorted(e for e in _emit if e not in FUS.PANELS)))
+
+
+# ---- 27. panel_gap, split out of structural ------------------------------
+#
+# Four Roboflow projects label this under four spellings (Misalignment,
+# Dislocation, Disalocation, separation), ~7,900 images, all discarded at
+# merge because nothing mapped them. It was folded into structural, which
+# taught the detector that undamaged metal in the wrong place looks like
+# crushed metal -- and the repairs differ: realign versus replace.
+#
+# The corpus holds ZERO panel_gap boxes today; these tests pin the plumbing so
+# the class works the moment the four datasets are re-fetched.
+import class_map as CM2               # noqa: E402
+
+check("27a panel_gap is its own final class",
+      "panel_gap" in CM2.FINAL_CLASSES)
+check("27b all four source spellings map to it",
+      [PD.CLASS_MAP.get(k) for k in
+       ("misalignment", "dislocation", "disalocation", "separation")]
+      == ["panel_gap"] * 4)
+check("27c the drive folders moved off structural",
+      CM2.from_drive("panel_gap") == "panel_gap"
+      and CM2.from_drive("panel_mismatch") == "panel_gap")
+check("27d structural no longer claims them",
+      "panel_gap" not in CM2.FINAL_CLASSES["structural"]["drive"])
+
+# The trap this class could have fallen into: an unmapped label hits
+# `if not dtype: continue` and the detection is DELETED, silently. A first
+# draft mapped panel_gap to "gap", which is not a taxonomy type at all.
+_pg = DET.DAMAGE_CLASS_MAP.get("panel_gap")
+check("27e panel_gap resolves to a REAL taxonomy damage type",
+      _pg in TAX.DAMAGE_TYPES, f"{_pg!r}")
+check("27f a panel_gap detection survives into a finding",
+      len(DET.detections_to_findings(
+          [{"label": "panel_gap", "score": 0.9, "box": [10, 10, 100, 100]}],
+          (640, 480), min_confidence=0.1)) == 1)
+check("27g it has a distinct overlay colour",
+      CM2.FINAL_CLASSES["panel_gap"]["colour"]
+      not in [d["colour"] for k, d in CM2.FINAL_CLASSES.items()
+              if k != "panel_gap"])
+
+# The seven-class vocabulary must resolve, and must NOT have become the
+# shipped contract: class ids are positional, so a seven-class index read by
+# the six-class weights reports every class one place out.
+check("27h the seven-class vocabulary is registered",
+      "seven-class" in DET.TRAINING_VOCABULARIES
+      and "panel_gap" in DET.TRAINING_VOCABULARIES["seven-class"])
+check("27i every class in EVERY vocabulary reaches a real damage type",
+      not [(v, c) for v, cs in DET.TRAINING_VOCABULARIES.items() for c in cs
+           if DET.DAMAGE_CLASS_MAP.get(c) not in TAX.DAMAGE_TYPES],
+      str([(v, c) for v, cs in DET.TRAINING_VOCABULARIES.items() for c in cs
+           if DET.DAMAGE_CLASS_MAP.get(c) not in TAX.DAMAGE_TYPES]))
+check("27j DETECTOR_CLASSES still describes the SHIPPED six-class model",
+      "panel_gap" not in DET.DETECTOR_CLASSES
+      and len(DET.DETECTOR_CLASSES) == 6)
+
+
+# ---- 28. the thirteen undocumented projects -------------------------------
+#
+# bulk/provenance.jsonl records 13 Roboflow projects, 104,962 images,
+# downloaded and merged in an earlier session and absent from manifest.json.
+# 78 of their 95 class strings mapped to nothing, so their boxes were deleted
+# while their pixels stayed: the images sit in merged640 unlabelled.
+check("28a panel-specific dents map to dent, discarding the panel half",
+      all(PD.CLASS_MAP.get(k) == "dent" for k in
+          ("bonnet-dent", "roof-dent", "fender-dent", "doorouter-dent",
+           "quaterpanel-dent", "running-board-dent", "boot-dent")))
+check("28b the panel half is deliberately dropped, not encoded as a class",
+      not [k for k in PD.CLASS_MAP.values() if k.endswith("-dent")])
+check("28c glass and lamp spellings converge",
+      PD.CLASS_MAP.get("damaged-windscreen") == "shattered_glass"
+      and PD.CLASS_MAP.get("windscreen-rear-damage") == "shattered_glass"
+      and PD.CLASS_MAP.get("damaged-head-light") == "lamp_damage"
+      and PD.CLASS_MAP.get("signlight-damage") == "lamp_damage")
+check("28d Indonesian labels map (penyok=dent, goresan=scratch)",
+      PD.CLASS_MAP.get("penyok") == "dent"
+      and PD.CLASS_MAP.get("goresan") == "scratch"
+      and PD.CLASS_MAP.get("kerusakan_lampu_depan") == "lamp_damage")
+check("28e severity grades collapse to their type",
+      PD.CLASS_MAP.get("slight_scratch") == "scratch"
+      and PD.CLASS_MAP.get("severe-corrosion") == "rust"
+      and PD.CLASS_MAP.get("mild-corrosion") == "rust")
+check("28f generic 'something is wrong' labels stay unmapped",
+      not [k for k in ("car-damage", "damaged", "dent-or-scratch",
+                       "kerusakan_umum", "other") if k in PD.CLASS_MAP])
+check("28g every CLASS_MAP target is still a real taxonomy type",
+      not [v for v in set(PD.CLASS_MAP.values())
+           if v not in TAX.DAMAGE_TYPES and v != "panel_gap"],
+      str([v for v in set(PD.CLASS_MAP.values())
+           if v not in TAX.DAMAGE_TYPES and v != "panel_gap"]))
+
+
+# ---- 29. overlay modes: several at once, and validated -----------------------
+# heat and light answer different questions about the same photograph, and a
+# report wants both. Asking for one used to mean giving up the other. The mode
+# was also passed through unvalidated, and overlay.render draws NOTHING for a
+# mode it does not recognise -- so a typo returned a clean picture with a
+# legend on it, which reads exactly like "no damage found".
+import validation as _V29
+
+check("29a a single mode still normalises to a list",
+      _V29.parse_job({"findings": [], "overlay": "heat"})["overlay"] == ["heat"])
+check("29b several modes are kept, in the caller's order",
+      _V29.parse_job({"findings": [], "overlay": ["heat", "light"]})["overlay"]
+      == ["heat", "light"])
+check("29c a comma-separated string works, for scalar-only callers",
+      _V29.parse_job({"findings": [], "overlay": "heat, light"})["overlay"] == ["heat", "light"])
+check("29d duplicates collapse rather than rendering twice",
+      _V29.parse_job({"findings": [], "overlay": ["heat", "heat"]})["overlay"] == ["heat"])
+check("29e the default is unchanged",
+      _V29.parse_job({"findings": []})["overlay"]
+      == ["both"])
+for _off in (None, "", [], False):
+    check(f"29f overlay={_off!r} still means skip overlays",
+          _V29.parse_job({"findings": [], "overlay": _off})["overlay"] is None)
+_bad = None
+try:
+    _V29.parse_job({"findings": [], "overlay": "hetamap"})
+except _V29.InputError as e:
+    _bad = str(e)
+check("29g an unknown mode is refused, not silently drawn blank",
+      _bad is not None and "hetamap" in _bad and "heat" in _bad)
+
+if _has_pil:
+    # Every requested mode reaches the output, each tagged with its own mode,
+    # and one image is decoded once rather than once per mode.
+    _decodes = {"n": 0}
+    _real_src = H._overlay_source
+
+    def _counting_src(ref):
+        _decodes["n"] += 1
+        return _real_src(ref)
+
+    H._overlay_source = _counting_src
+    try:
+        _res = H._render_overlays(
+            {"overlay": ["heat", "light", "box"]}, mixed, [_p, _p],
+            H.Progress(None, "inspect"))
+    finally:
+        H._overlay_source = _real_src
+    check("29h every requested mode is rendered for every image",
+          _res["rendered"] == 6 and _res["modes"] == ["heat", "light", "box"])
+    check("29i each rendered image is tagged with its own mode",
+          sorted({i["mode"] for i in _res["images"]})
+          == ["box", "heat", "light"])
+    check("29j the source is decoded once per image, not once per mode",
+          _decodes["n"] == 2)
+    check("29k a bare string still renders, for callers past parse_job",
+          H._render_overlays({"overlay": "heat"}, mixed, [_p],
+                             H.Progress(None, "inspect"))["rendered"] == 1)
 
 # ---- report ---------------------------------------------------------------
 print(f"\n{len(PASSED)} passed, {len(FAILED)} failed")

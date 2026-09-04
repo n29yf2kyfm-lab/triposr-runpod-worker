@@ -336,7 +336,16 @@ def run_pipeline(pipeline, img, seed, pipeline_type=None):
     """Run generation. Signature verified against the vendored pipeline:
     run(image, num_samples=1, seed=42, ..., pipeline_type=None) ->
     List[MeshWithVoxel]. pipeline_type: '512' | '1024' | '1024_cascade' |
-    '1536_cascade' (default from the model's pipeline.json)."""
+    '1536_cascade' (default from the model's pipeline.json).
+
+    A list of images routes to run_multi_image() — one object conditioned on
+    several views (front/side/rear), which is what a damage-capture set gives
+    us. A single Image takes the original run() path, unchanged."""
+    if isinstance(img, (list, tuple)):
+        if pipeline_type:
+            return pipeline.run_multi_image(
+                list(img), seed=seed, pipeline_type=pipeline_type)[0]
+        return pipeline.run_multi_image(list(img), seed=seed)[0]
     if pipeline_type:
         return pipeline.run(img, seed=seed, pipeline_type=pipeline_type)[0]
     return pipeline.run(img, seed=seed)[0]
@@ -356,6 +365,18 @@ def handler(job):
     vehicle = job_input.get("vehicle")
     image_url = job_input.get("image_url", "")
     image_b64 = job_input.get("image_b64", "")
+    # Multi-view (image-to-3D from several photos of ONE vehicle — e.g. the
+    # front/side/rear set a damage capture already produces). Lists; a single
+    # entry collapses to the ordinary single-image path so nothing changes for
+    # existing callers. Capped so a caller can't stack hundreds of views into
+    # one conditioning tensor and OOM the box.
+    image_urls = job_input.get("image_urls") or []
+    image_b64s = job_input.get("image_b64s") or []
+    if not isinstance(image_urls, list) or not isinstance(image_b64s, list):
+        return {"error": "image_urls and image_b64s must be lists of strings"}
+    MAX_VIEWS = 8
+    if len(image_urls) + len(image_b64s) > MAX_VIEWS:
+        return {"error": f"too many views: cap is {MAX_VIEWS} images per model"}
     if vehicle is not None and not isinstance(vehicle, dict):
         return {"error": "vehicle must be an object, e.g. "
                          '{"make": "BMW", "model": "X5", "year": 2020}'}
@@ -389,17 +410,43 @@ def handler(job):
     if pipeline_type not in (None, "512", "1024", "1024_cascade", "1536_cascade"):
         return {"error": "pipeline_type must be one of 512, 1024, 1024_cascade, 1536_cascade"}
 
-    if not prompt and not image_url and not image_b64:
+    if not prompt and not image_url and not image_b64 \
+            and not image_urls and not image_b64s:
         return {
             "error": "Provide prompt or vehicle spec (text-to-3D via built-in "
-                     "text-to-image), or image_url / image_b64 (image-to-3D)."
+                     "text-to-image), or image_url / image_b64 (single image), "
+                     "or image_urls / image_b64s (multi-view image-to-3D)."
         }
 
     try:
         generated_image_b64 = None
 
-        # --- Stage 1: get the input image (supplied, or generated from text) ---
-        if image_b64:
+        # --- Stage 1: get the input image(s) (supplied, or generated) ---
+        # Multi-view first: several photos of one vehicle -> one model
+        # conditioned on all of them. A lone entry with no single-image input
+        # folds into the ordinary single-image path, so existing single-image
+        # callers are entirely unaffected.
+        multi_imgs = []
+        for b in image_b64s:
+            multi_imgs.append(
+                Image.open(BytesIO(base64.b64decode(b))).convert("RGB"))
+        for u in image_urls:
+            multi_imgs.append(fetch_image(u))
+
+        if len(multi_imgs) > 1 or (multi_imgs and (image_b64 or image_url)):
+            # fold in a single image_b64/image_url too, if both forms were sent
+            if image_b64:
+                multi_imgs.insert(
+                    0, Image.open(BytesIO(base64.b64decode(image_b64)))
+                    .convert("RGB"))
+            elif image_url:
+                multi_imgs.insert(0, fetch_image(image_url))
+            img = multi_imgs
+            mode = "images"
+        elif len(multi_imgs) == 1:
+            img = multi_imgs[0]
+            mode = "image"
+        elif image_b64:
             img_data = base64.b64decode(image_b64)
             img = Image.open(BytesIO(img_data)).convert("RGB")
             mode = "image"

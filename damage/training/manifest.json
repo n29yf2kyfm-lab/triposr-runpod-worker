@@ -1,0 +1,494 @@
+[
+ {
+  "path": "changs-workspace-hnorg/vehicle-damage-gwmh4",
+  "version": "2",
+  "images": 10931,
+  "license": "CC BY 4.0",
+  "frac": 0.84,
+  "classes": [
+   "broken",
+   "damage",
+   "dents",
+   "scratch"
+  ]
+ },
+ {
+  "path": "ai-model-vapko/vehicle-damage-detection-9tpqp",
+  "version": "2",
+  "images": 7889,
+  "license": "CC BY 4.0",
+  "frac": 1.0,
+  "classes": [
+   "Crack",
+   "Dent",
+   "Flat Tire",
+   "Lamp Broken",
+   "Paint Damage",
+   "Rust_Corrision"
+  ]
+ },
+ {
+  "path": "haedars-workspace/car-scratch-new",
+  "version": "1",
+  "images": 5093,
+  "license": "CC BY 4.0",
+  "frac": 1.0,
+  "classes": [
+   "scratch"
+  ]
+ },
+ {
+  "path": "sidh-euwcy/scratch-sjpy0",
+  "version": "586",
+  "images": 4573,
+  "license": "CC BY 4.0",
+  "frac": 1.0,
+  "classes": [
+   "scratch"
+  ]
+ },
+ {
+  "path": "car-damages-djnvi/car-damage-l7wgd",
+  "version": "1",
+  "images": 4000,
+  "license": "CC BY 4.0",
+  "frac": 1.0,
+  "classes": [
+   "crack",
+   "dent",
+   "glass shatter",
+   "lamp broken",
+   "scratch",
+   "tire flat"
+  ]
+ },
+ {
+  "path": "asandes-workspace/vehicle-damage-detection-vbsvf",
+  "version": "1",
+  "images": 4000,
+  "license": "CC BY 4.0",
+  "frac": 1.0,
+  "classes": [
+   "crack",
+   "dent",
+   "glass shatter",
+   "lamp broken",
+   "scratch",
+   "tire flat"
+  ]
+ },
+ {
+  "path": "sidh-euwcy/car-scratch-dataset",
+  "version": "2",
+  "images": 3888,
+  "license": "CC BY 4.0",
+  "frac": 1.0,
+  "classes": [
+   "scratch"
+  ]
+ },
+ {
+  "path": "project-joggx/car-damage-assessment-8mb45",
+  "version": "10",
+  "images": 3772,
+  "license": "CC BY 4.0",
+  "frac": 0.82,
+  "classes": [
+   "Broken",
+   "Dent",
+   "Scratch"
+  ]
+ },
+ {
+  "path": "mounika-kphok/vehicle-damage-detection-vizlk",
+  "version": "1",
+  "images": 3710,
+  "license": "CC BY 4.0",
+  "frac": 1.0,
+  "classes": [
+   "crack",
+   "dent",
+   "glass shatter",
+   "lamp broken",
+   "scratch",
+   "tire flat"
+  ]
+ },
+ {
+  "path": "agni-4nqn3/car-damage-segmentation-bk7wi",
+  "version": "3",
+  "images": 2629,
+  "license": "CC BY 4.0",
+  "frac": 0.65,
+  "classes": [
+   "Crack",
+   "Crush",
+   "Dent",
+   "Misalignment",
+   "Missing",
+   "Scratch"
+  ]
+ },
+ {
+  "path": "corrosion-l4cqs/corrosion-detection-npdhd",
+  "version": "7",
+  "images": 2625,
+  "license": "MIT",
+  "frac": 1.0,
+  "classes": [
+   "corrosion"
+  ]
+ },
+ {
+  "path": "crack-7rsjb/crack-detection-ol3yi",
+  "version": "1",
+  "images": 2394,
+  "license": "CC BY 4.0",
+  "frac": 1.0,
+  "classes": [
+   "crack"
+  ]
+ },
+ {
+  "path": "cardamage-jrvmi/car-damage-cqreo",
+  "version": "3",
+  "images": 2374,
+  "license": "CC BY 4.0",
+  "frac": 0.61,
+  "classes": [
+   "Dent",
+   "Dislocation",
+   "Scratch",
+   "Shatter"
+  ]
+ },
+ {
+  "path": "gp2-hknp7/car-damage-detection-mwbgo",
+  "version": "1",
+  "images": 2276,
+  "license": "CC BY 4.0",
+  "frac": 1.0,
+  "classes": [
+   "Broken part",
+   "Dent",
+   "Scratch"
+  ]
+ },
+ {
+  "path": "datasetyolo/broken-car-od",
+  "version": "1",
+  "images": 2069,
+  "license": "CC BY 4.0",
+  "frac": 0.51,
+  "classes": [
+   "broken_glass",
+   "broken_headlight",
+   "dent",
+   "scratch"
+  ]
+ },
+ {
+  "path": "rang-04bzz/car-damage-jvbbn",
+  "version": "1",
+  "images": 2025,
+  "license": "CC BY 4.0",
+  "frac": 0.76,
+  "classes": [
+   "break",
+   "crush",
+   "scratch",
+   "separation"
+  ]
+ },
+ {
+  "path": "bezzo-robotics/crack-detection-5vnde",
+  "version": "1",
+  "images": 1801,
+  "license": "CC BY 4.0",
+  "frac": 1.0,
+  "classes": [
+   "crack"
+  ]
+ },
+ {
+  "path": "universita-di-pisa/crack-detection-woksx",
+  "version": "2",
+  "images": 1470,
+  "license": "CC BY 4.0",
+  "frac": 0.99,
+  "classes": [
+   "Crack",
+   "crack",
+   "spall"
+  ]
+ },
+ {
+  "path": "car-detect-ks0v1/car-dent-v2",
+  "version": "1",
+  "images": 1414,
+  "license": "CC BY 4.0",
+  "frac": 0.99,
+  "classes": [
+   "dents",
+   "object"
+  ]
+ },
+ {
+  "path": "container-damage-ke5bc/dent-detection-4qxiu",
+  "version": "1",
+  "images": 1351,
+  "license": "CC BY 4.0",
+  "frac": 0.98,
+  "classes": [
+   "Dent",
+   "deframe"
+  ]
+ },
+ {
+  "path": "autodentify/car-damage-detection-ggmju",
+  "version": "2",
+  "images": 1281,
+  "license": "CC BY 4.0",
+  "frac": 0.61,
+  "classes": [
+   "broken_part",
+   "crack",
+   "dent",
+   "doggie",
+   "flat_tire",
+   "paint_damage"
+  ]
+ },
+ {
+  "path": "car-damage-ymlgz/scratch-dent-car",
+  "version": "3",
+  "images": 1259,
+  "license": "CC BY 4.0",
+  "frac": 1.0,
+  "classes": [
+   "dent",
+   "scratch"
+  ]
+ },
+ {
+  "path": "project-kmnth/car-scratch-xgxzs",
+  "version": "2",
+  "images": 1221,
+  "license": "CC BY 4.0",
+  "frac": 1.0,
+  "classes": [
+   "Scratch"
+  ]
+ },
+ {
+  "path": "godson-alsjh/corrosion-detection-wqgmc",
+  "version": "1",
+  "images": 1202,
+  "license": "CC BY 4.0",
+  "frac": 0.88,
+  "classes": [
+   "Crevice Corrosion",
+   "Pitting Corrosion",
+   "Uniform Corrosion",
+   "corrosion"
+  ]
+ },
+ {
+  "path": "labeler-projects/rust-and-corrosion",
+  "version": "1",
+  "images": 1185,
+  "license": "CC BY 4.0",
+  "frac": 0.86,
+  "classes": [
+   "0",
+   "1",
+   "2",
+   "Rost",
+   "Rust",
+   "copper corrosion"
+  ]
+ },
+ {
+  "path": "oumaima-6jfwk/rust-dhyib",
+  "version": "3",
+  "images": 1080,
+  "license": "CC BY 4.0",
+  "frac": 1.0,
+  "classes": [
+   "Rust",
+   "corrosion"
+  ]
+ },
+ {
+  "path": "1-jzvjp/crack-detection-mpuog",
+  "version": "2",
+  "images": 1000,
+  "license": "CC BY 4.0",
+  "frac": 1.0,
+  "classes": [
+   "crack"
+  ]
+ },
+ {
+  "path": "chetan-uonol/dent-as7fc",
+  "version": "1",
+  "images": 950,
+  "license": "CC BY 4.0",
+  "frac": 1.0,
+  "classes": [
+   "Dent",
+   "Scratch"
+  ]
+ },
+ {
+  "path": "kailash-2hakv/dent-6jenq",
+  "version": "2",
+  "images": 936,
+  "license": "CC BY 4.0",
+  "frac": 0.91,
+  "classes": [
+   "Damage",
+   "Dent",
+   "Scratch"
+  ]
+ },
+ {
+  "path": "cardamage-fvhwg/car-damage-f7gsv",
+  "version": "3",
+  "images": 908,
+  "license": "CC BY 4.0",
+  "frac": 0.54,
+  "classes": [
+   "Dent",
+   "Disalocation",
+   "Glass-Broken",
+   "Glass-large-crack",
+   "Glass-small-crack",
+   "Glass-spider-crack"
+  ]
+ },
+ {
+  "path": "psm-lzkq8/corrosion-rsbnq",
+  "version": "1",
+  "images": 877,
+  "license": "CC BY 4.0",
+  "frac": 1.0,
+  "classes": [
+   "Corrosion"
+  ]
+ },
+ {
+  "path": "raja-nidft/car-damage-hyplq",
+  "version": "1",
+  "images": 814,
+  "license": "CC BY 4.0",
+  "frac": 0.96,
+  "classes": [
+   "Broken part",
+   "Corrosion",
+   "Cracked",
+   "Dent",
+   "Flaking",
+   "Missing part"
+  ]
+ },
+ {
+  "path": "yilmaz/corrosion-jmvmm",
+  "version": "5",
+  "images": 812,
+  "license": "CC BY 4.0",
+  "frac": 1.0,
+  "classes": [
+   "corrosion"
+  ]
+ },
+ {
+  "path": "uniud-g3oa7/scratch-detection-hnk3o",
+  "version": "14",
+  "images": 809,
+  "license": "MIT",
+  "frac": 0.99,
+  "classes": [
+   "Defect",
+   "scratch"
+  ]
+ },
+ {
+  "path": "vipin-ivkzq/dent-5q817",
+  "version": "1",
+  "images": 793,
+  "license": "CC BY 4.0",
+  "frac": 1.0,
+  "classes": [
+   "Dent",
+   "Scratch"
+  ]
+ },
+ {
+  "path": "car-damage-ymlgz/car-damage-segmentation-v07lz",
+  "version": "2",
+  "images": 750,
+  "license": "CC BY 4.0",
+  "frac": 1.0,
+  "classes": [
+   "dent",
+   "scratch"
+  ]
+ },
+ {
+  "path": "vipin-kumar-9fbyf/dent--1",
+  "version": "1",
+  "images": 750,
+  "license": "CC BY 4.0",
+  "frac": 0.88,
+  "classes": [
+   "Damage",
+   "Dent--1",
+   "Scratch"
+  ]
+ },
+ {
+  "path": "scaledge-ztihl/corrosion-detection-obirw",
+  "version": "1",
+  "images": 717,
+  "license": "CC BY 4.0",
+  "frac": 1.0,
+  "classes": [
+   "Corrosion",
+   "Corrosion-detection",
+   "non-corrosion"
+  ]
+ },
+ {
+  "path": "vipin-kumar-9fbyf/dent-ufeww",
+  "version": "1",
+  "images": 678,
+  "license": "CC BY 4.0",
+  "frac": 0.89,
+  "classes": [
+   "Damage",
+   "Dent",
+   "Scratch"
+  ]
+ },
+ {
+  "path": "cvprojects-eafft/crack-detection-91tmj",
+  "version": "2",
+  "images": 630,
+  "license": "CC BY 4.0",
+  "frac": 1.0,
+  "classes": [
+   "crack"
+  ]
+ },
+ {
+  "path": "kushal-mujral-im3gh/corrosion-dataset-0vvlx",
+  "version": "1",
+  "images": 600,
+  "license": "CC BY 4.0",
+  "frac": 1.0,
+  "classes": [
+   "Corrosion"
+  ]
+ }
+]

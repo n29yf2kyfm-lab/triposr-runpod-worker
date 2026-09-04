@@ -1,0 +1,113 @@
+{
+ "iou": 0.5,
+ "images": 700,
+ "classes": {
+  "1": "crack_glass",
+  "2": "dent",
+  "3": "lamp_wheel",
+  "4": "rust_paint",
+  "5": "scratch_scuff",
+  "6": "structural"
+ },
+ "rows": [
+  {
+   "threshold": 0.05,
+   "precision": 0.0209,
+   "recall": 0.7604,
+   "f1": 0.0408,
+   "tp": 1149,
+   "fp": 53716,
+   "fn": 362
+  },
+  {
+   "threshold": 0.1,
+   "precision": 0.0679,
+   "recall": 0.6552,
+   "f1": 0.123,
+   "tp": 990,
+   "fp": 13597,
+   "fn": 521
+  },
+  {
+   "threshold": 0.15,
+   "precision": 0.1509,
+   "recall": 0.5652,
+   "f1": 0.2382,
+   "tp": 854,
+   "fp": 4804,
+   "fn": 657
+  },
+  {
+   "threshold": 0.2,
+   "precision": 0.2502,
+   "recall": 0.4904,
+   "f1": 0.3313,
+   "tp": 741,
+   "fp": 2221,
+   "fn": 770
+  },
+  {
+   "threshold": 0.25,
+   "precision": 0.3664,
+   "recall": 0.4282,
+   "f1": 0.3949,
+   "tp": 647,
+   "fp": 1119,
+   "fn": 864
+  },
+  {
+   "threshold": 0.3,
+   "precision": 0.4708,
+   "recall": 0.368,
+   "f1": 0.4131,
+   "tp": 556,
+   "fp": 625,
+   "fn": 955
+  },
+  {
+   "threshold": 0.35,
+   "precision": 0.5739,
+   "recall": 0.3316,
+   "f1": 0.4203,
+   "tp": 501,
+   "fp": 372,
+   "fn": 1010
+  },
+  {
+   "threshold": 0.4,
+   "precision": 0.6523,
+   "recall": 0.2905,
+   "f1": 0.402,
+   "tp": 439,
+   "fp": 234,
+   "fn": 1072
+  },
+  {
+   "threshold": 0.5,
+   "precision": 0.765,
+   "recall": 0.2283,
+   "f1": 0.3517,
+   "tp": 345,
+   "fp": 106,
+   "fn": 1166
+  },
+  {
+   "threshold": 0.6,
+   "precision": 0.8399,
+   "recall": 0.184,
+   "f1": 0.3018,
+   "tp": 278,
+   "fp": 53,
+   "fn": 1233
+  },
+  {
+   "threshold": 0.7,
+   "precision": 0.9196,
+   "recall": 0.1363,
+   "f1": 0.2375,
+   "tp": 206,
+   "fp": 18,
+   "fn": 1305
+  }
+ ]
+}
