@@ -32,6 +32,7 @@ import base64
 import io
 import json
 import os
+import time
 import urllib.error
 import urllib.request
 from dataclasses import dataclass, field
@@ -52,7 +53,12 @@ MODELS = (
     "gemini-2.5-flash-image",
 )
 
-TIMEOUT_S = 300
+# One call may take this long; the whole chain may take BUDGET_S. Three
+# models at 300 s each was a fifteen-minute ceiling behind a button that
+# says "up to a minute or two" — a hung socket must not hold a builder's
+# browser for a quarter of an hour.
+TIMEOUT_S = 90
+BUDGET_S = 150
 
 CAPTION = ("ARTIST'S IMPRESSION — generated, not a photograph. "
            "Geometry is measured; materials, windows and setting are invented.")
@@ -92,10 +98,10 @@ def usable() -> tuple:
 
 # ---------------------------------------------------------------- prompt
 
-def _era(address: str) -> str:
-    """No date is known, so say so rather than inventing a period."""
-    return ("Match the prevailing style of the street it stands on: an "
-            "ordinary British suburban house, not an architect's showpiece")
+# No build date is known, so the prompt says so rather than inventing a
+# period.
+ERA = ("Match the prevailing style of the street it stands on: an "
+       "ordinary British suburban house, not an architect's showpiece")
 
 
 def brief(facts: dict) -> str:
@@ -132,7 +138,7 @@ def brief(facts: dict) -> str:
         "- Do NOT add, remove, widen or heighten any volume. No new "
         "wings, dormers, porches, conservatories or extensions.\n\n"
         "MATERIALS AND SETTING — invent these, plausibly:\n"
-        f"- {_era(facts.get('address', ''))}, in {place}.\n"
+        f"- {ERA}, in {place}.\n"
         "- Facing brick or render as suits the street, a tiled pitched "
         "roof, white domestic windows in a sensible rhythm, a front door, "
         "gutters, downpipes and a chimney if the ridge allows one.\n"
@@ -145,7 +151,8 @@ def brief(facts: dict) -> str:
 
 # ------------------------------------------------------------- the call
 
-def _post(model: str, prompt: str, massing_png: bytes, key: str) -> bytes:
+def _post(model: str, prompt: str, massing_png: bytes, key: str,
+          timeout: float = TIMEOUT_S) -> bytes:
     body = {"contents": [{"parts": [
         {"text": prompt},
         {"inline_data": {"mime_type": "image/png",
@@ -156,18 +163,30 @@ def _post(model: str, prompt: str, massing_png: bytes, key: str) -> bytes:
         data=json.dumps(body).encode(),
         headers={"Content-Type": "application/json", "x-goog-api-key": key})
     try:
-        with urllib.request.urlopen(req, timeout=TIMEOUT_S) as r:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
             payload = json.load(r)
     except urllib.error.HTTPError as e:
         raise NotAvailable(_http_reason(model, e))
+    # "failed to reach" is the phrase api._out keys the 502 on, so a dead
+    # upstream is reported as one rather than as an empty answer.
     except (urllib.error.URLError, TimeoutError, OSError) as e:
-        raise NotAvailable(f"{model}: could not reach the Gemini API ({e})")
+        raise NotAvailable(f"{model}: lookup failed to reach the Gemini "
+                           f"API ({e})")
+    except ValueError as e:
+        # A non-JSON body (a proxy's HTML error page, say) is the
+        # upstream's fault, not a bad request from our own client.
+        raise NotAvailable(f"{model}: the reply was not JSON ({e})")
 
     for cand in payload.get("candidates", []):
         for part in cand.get("content", {}).get("parts", []):
             data = (part.get("inlineData") or part.get("inline_data") or {})
             if data.get("data"):
-                return base64.b64decode(data["data"])
+                try:
+                    return base64.b64decode(data["data"])
+                except ValueError as e:
+                    raise NotAvailable(
+                        f"{model}: the image in the reply was not "
+                        f"valid base64 ({e})")
         fin = cand.get("finishReason")
         if fin and fin not in ("STOP", "MAX_TOKENS"):
             raise NotAvailable(
@@ -217,8 +236,15 @@ def stamp(png: bytes, text: str = CAPTION) -> bytes:
     try:
         from PIL import Image, ImageDraw, ImageFont
     except ImportError:
-        return png                      # better a picture than nothing
-    im = Image.open(io.BytesIO(png)).convert("RGB")
+        # NOT "better a picture than nothing": an uncaptioned picture is
+        # the one output this module exists to prevent.
+        raise NotAvailable("Pillow is not installed, so the disclaimer "
+                           "cannot be burned into the image — refusing to "
+                           "return an uncaptioned impression")
+    try:
+        im = Image.open(io.BytesIO(png)).convert("RGB")
+    except Exception as e:
+        raise NotAvailable(f"the reply was not a readable image ({e})")
     w, h = im.size
     pad = 10
 
@@ -305,9 +331,16 @@ def impression(massing_png: bytes, facts: dict) -> Impression:
     key = os.environ[KEY_ENV]
     text = brief(facts)
     refusals = []
+    deadline = time.monotonic() + BUDGET_S
     for model in MODELS:
+        left = deadline - time.monotonic()
+        if left < 5:
+            refusals.append(f"{model}: not tried, the {BUDGET_S} s budget "
+                            f"was spent on the models before it")
+            continue
         try:
-            raw = _post(model, text, massing_png, key)
+            raw = _post(model, text, massing_png, key,
+                        timeout=min(TIMEOUT_S, left))
         except NotAvailable as e:
             refusals.append(str(e))
             continue

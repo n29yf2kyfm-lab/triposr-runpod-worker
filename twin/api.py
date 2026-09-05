@@ -50,9 +50,14 @@ def _load_env(path=None):
         if not line or line.startswith("#") or "=" not in line:
             continue
         k, v = line.split("=", 1)
-        k = k.strip()
+        k, v = k.strip(), v.strip()
+        # KEY="abc" and KEY='abc' are the usual .env spellings; the quotes
+        # are syntax, not part of the secret, and a key sent with them
+        # attached is simply refused upstream.
+        if len(v) >= 2 and v[0] == v[-1] and v[0] in "\"'":
+            v = v[1:-1]
         if k and k not in os.environ:
-            os.environ[k] = v.strip()
+            os.environ[k] = v
             n += 1
     return n
 
@@ -547,8 +552,18 @@ def project_impression(pid):
     body = request.get_json(silent=True) or {}
 
     data_url = body.get("massing_png") or ""
+    if not isinstance(data_url, str):
+        data_url = ""
     if "," in data_url:
         data_url = data_url.split(",", 1)[1]
+    # 12 MB of PNG is already far more than a canvas grab; past that it
+    # is either a mistake or somebody using the endpoint as an upload.
+    # Measured on the base64 text so an oversize body is refused before
+    # the whole thing is decoded.
+    if len(data_url) * 3 // 4 > 12 * 1024 * 1024:
+        return _out({"available": False, "status": "REFUSED",
+                     "reason": "that render is too large to send",
+                     "asked": []})
     try:
         png = base64.b64decode(data_url, validate=True)
     except Exception:
@@ -559,11 +574,6 @@ def project_impression(pid):
                                "impression is drawn FROM the model, not "
                                "from the address",
                      "asked": []})
-    # 12 MB of PNG is already far more than a canvas grab; past that it
-    # is either a mistake or somebody using the endpoint as an upload.
-    if len(png) > 12 * 1024 * 1024:
-        return _out({"available": False, "status": "REFUSED",
-                     "reason": "that render is too large to send"})
 
     big = max(bld.blocks, key=lambda b: b.area()) if bld.blocks else None
     roof = (big.roof or {}) if big else {}
@@ -600,14 +610,18 @@ def project_impression(pid):
 def _place_from(address: str) -> str:
     """The town out of a Nominatim label, for the prompt's sense of place.
 
-    Nominatim puts the country last and the house number first; the
-    middle is the useful part. Guessing wrong only costs a slightly
-    generic picture, so this stays cheap and never raises.
+    Nominatim puts the country last, the postcode just before it and the
+    house number first. None of those says what the street looks like,
+    so anything carrying a digit is dropped along with the country, and
+    the last three of what is left — town, county, nation — is the
+    place. Guessing wrong only costs a slightly generic picture, so this
+    stays cheap and never raises.
     """
     parts = [p.strip() for p in (address or "").split(",") if p.strip()]
-    if len(parts) >= 4:
-        return ", ".join(parts[-4:-1])
-    return ", ".join(parts[1:]) or "England"
+    named = [p for p in parts if not any(ch.isdigit() for ch in p)]
+    if len(named) >= 2:
+        named = named[:-1]                        # the country
+    return ", ".join(named[-3:]) or "England"
 
 
 @app.get("/api/rates")

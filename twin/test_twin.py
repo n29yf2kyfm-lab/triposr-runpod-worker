@@ -2304,6 +2304,135 @@ class TestImpression(unittest.TestCase):
         from twin import api as api_mod
         self.assertEqual(0, api_mod._load_env("/no/such/file/at/all"))
 
+    # -- what the review found -------------------------------------------
+
+    def test_quoted_env_values_lose_their_quotes(self):
+        """KEY="abc" is the usual .env spelling; a key sent with the
+        quotes attached is refused upstream with no hint why."""
+        from twin import api as api_mod
+        import tempfile
+        with tempfile.NamedTemporaryFile("w", suffix=".env",
+                                         delete=False) as fh:
+            fh.write('TWIN_TEST_Q1="abc"\nTWIN_TEST_Q2=\'xyz\'\n'
+                     'TWIN_TEST_Q3="unterminated\n')
+            path = fh.name
+        try:
+            api_mod._load_env(path)
+            self.assertEqual("abc", os.environ["TWIN_TEST_Q1"])
+            self.assertEqual("xyz", os.environ["TWIN_TEST_Q2"])
+            self.assertEqual('"unterminated', os.environ["TWIN_TEST_Q3"])
+        finally:
+            for k in ("TWIN_TEST_Q1", "TWIN_TEST_Q2", "TWIN_TEST_Q3"):
+                os.environ.pop(k, None)
+            os.unlink(path)
+
+    def test_the_place_is_the_town_not_the_postcode(self):
+        from twin import api as api_mod
+        place = api_mod._place_from(
+            "90, Streetly Lane, Sutton Coldfield, Four Oaks, Birmingham, "
+            "West Midlands, England, B74 4TB, United Kingdom")
+        self.assertEqual("Birmingham, West Midlands, England", place)
+        self.assertEqual("England", api_mod._place_from(""))
+        self.assertEqual("England", api_mod._place_from("12"))
+
+    def test_a_non_string_render_is_a_refusal_not_a_500(self):
+        from twin import api as api_mod
+        c = api_mod.app.test_client()
+        r = c.post("/api/project", json={"lat": 52.589059, "lon": -1.857172})
+        if not r.get_json().get("available"):
+            self.skipTest("no building data offline")
+        pid = r.get_json()["project_id"]
+        for bad in (5, None, ["x"], {"a": 1}):
+            r = c.post(f"/api/project/{pid}/impression",
+                       json={"massing_png": bad})
+            self.assertEqual(200, r.status_code, bad)
+            self.assertFalse(r.get_json()["available"])
+            self.assertIn("massing render", r.get_json()["reason"])
+
+    def test_an_oversize_render_is_refused_before_it_is_decoded(self):
+        from twin import api as api_mod
+        c = api_mod.app.test_client()
+        r = c.post("/api/project", json={"lat": 52.589059, "lon": -1.857172})
+        if not r.get_json().get("available"):
+            self.skipTest("no building data offline")
+        pid = r.get_json()["project_id"]
+        called = []
+        orig = api_mod.base64.b64decode
+        api_mod.base64.b64decode = lambda *a, **k: called.append(1) or orig(*a, **k)
+        try:
+            r = c.post(f"/api/project/{pid}/impression",
+                       json={"massing_png": "A" * (17 * 1024 * 1024)})
+        finally:
+            api_mod.base64.b64decode = orig
+        self.assertEqual("REFUSED", r.get_json()["status"])
+        self.assertEqual([], called, "decoded the payload it refused")
+
+    def test_a_dead_upstream_is_a_502_not_an_empty_answer(self):
+        """api._out keys the 502 on the phrase 'failed to reach'. A dead
+        Gemini used to say 'could not reach' and came back 200, so
+        monitoring could not tell a dead provider from an empty field."""
+        from twin import api as api_mod
+        import urllib.error
+        def boom(*a, **k):
+            raise urllib.error.URLError("name resolution failed")
+        orig = self.v.urllib.request.urlopen
+        self.v.urllib.request.urlopen = boom
+        os.environ["GEMINI_API_KEY"] = "test"
+        try:
+            with self.assertRaises(self.v.NotAvailable) as cm:
+                self.v.impression(b"png", {})
+        finally:
+            self.v.urllib.request.urlopen = orig
+        self.assertIn("failed to reach", str(cm.exception))
+        r = api_mod._out({"available": False, "reason": str(cm.exception)})
+        self.assertEqual(502, r.status_code)
+
+    def test_a_non_json_reply_falls_through_to_the_next_model(self):
+        """A proxy's HTML error page on model one must not abort the
+        chain as a 400 'bad request' blamed on our own client."""
+        seen = []
+        def post(model, *a, **k):
+            seen.append(model)
+            if len(seen) == 1:
+                raise self.v.NotAvailable(f"{model}: the reply was not JSON")
+            raise self.v.NotAvailable(f"{model}: no")
+        orig = self.v._post
+        self.v._post = post
+        os.environ["GEMINI_API_KEY"] = "test"
+        try:
+            with self.assertRaises(self.v.NotAvailable):
+                self.v.impression(b"png", {})
+        finally:
+            self.v._post = orig
+        self.assertEqual(list(self.v.MODELS), seen)
+
+    def test_the_chain_stops_when_the_time_budget_is_spent(self):
+        """Three models at 300 s each was a fifteen-minute ceiling on a
+        button that promised a minute."""
+        clock = [0.0]
+        orig_mono, orig_post = self.v.time.monotonic, self.v._post
+        seen = []
+        def post(model, *a, timeout=None, **k):
+            seen.append((model, timeout))
+            clock[0] += self.v.BUDGET_S          # this one hung
+            raise self.v.NotAvailable(f"{model}: timed out")
+        self.v.time.monotonic = lambda: clock[0]
+        self.v._post = post
+        os.environ["GEMINI_API_KEY"] = "test"
+        try:
+            with self.assertRaises(self.v.NotAvailable) as cm:
+                self.v.impression(b"png", {})
+        finally:
+            self.v.time.monotonic, self.v._post = orig_mono, orig_post
+        self.assertEqual(1, len(seen), "kept calling after the budget")
+        self.assertLessEqual(seen[0][1], self.v.TIMEOUT_S)
+        self.assertIn("not tried", str(cm.exception))
+        self.assertLessEqual(3 * self.v.TIMEOUT_S, 300)
+
+    def test_stamp_refuses_bytes_that_are_not_an_image(self):
+        with self.assertRaises(self.v.NotAvailable):
+            self.v.stamp(b"this is not a png")
+
 
 # ------------------------------------------------------------------ live
 @unittest.skipUnless(LIVE, "set TWIN_LIVE=1 to hit real endpoints")

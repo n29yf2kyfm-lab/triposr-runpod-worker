@@ -489,13 +489,20 @@ export function initTwinUI() {
       return;
     }
     $('imprBtn').disabled = true;
-    note.textContent = 'Rendering — this takes up to a minute…';
+    note.textContent = 'Rendering — usually under a minute, never more than three…';
     status('Rendering the impression…', 0);
-    const { body } = await api(
-      `/api/project/${project.project_id}/impression`,
-      { method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ massing_png: png }) });
-    $('imprBtn').disabled = false;
+    let body;
+    try {
+      ({ body } = await post(`/api/project/${project.project_id}/impression`,
+                             { massing_png: png }));
+    } catch (e) {
+      // fetch itself threw (server down, connection dropped): say so
+      // rather than leaving the panel stuck on "Rendering".
+      body = { available: false, reason: 'the server could not be reached: '
+                                        + e.message };
+    } finally {
+      $('imprBtn').disabled = false;
+    }
     if (!body.available) {
       status('No impression — ' + (body.reason || ''), 12000);
       note.innerHTML = `<span style="color:#e2a33a">DATA NOT AVAILABLE</span> — `
