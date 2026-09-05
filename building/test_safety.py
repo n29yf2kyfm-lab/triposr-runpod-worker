@@ -182,6 +182,30 @@ check("6f no programme means it cannot be assessed",
 check("6g it states the thresholds anyway",
       "30" in unknown.message and "500" in unknown.message)
 
+# THE 500-PERSON-DAY LIMB CANNOT BE RULED OUT from duration and peak
+# workforce alone: 200 days x up to 15 workers is up to 3,000 person-days,
+# six times the threshold, yet the first limb (over 30 days AND over 20
+# workers) is not met. A definite PASS here was an all-clear on a legal
+# duty from data that cannot support it.
+maybe = find(S.check_cdm(duration_days=200, max_workers=15), "cdm_notify")
+check("6m a long job with a mid-size crew is not a definite PASS",
+      maybe.verdict == S.UNKNOWN, maybe.verdict)
+check("6n and it asks for the person-days from the programme",
+      "person-day" in maybe.message and "F10" in maybe.message,
+      maybe.message)
+# With the programme's person-days supplied and under the limit, the PASS
+# is earned: 200 days but only 400 person-days.
+sure = find(S.check_cdm(duration_days=200, max_workers=15,
+                        person_days=400), "cdm_notify")
+check("6o supplied person-days under 500 earn the PASS",
+      sure.verdict == S.PASS, sure.verdict)
+# Hand-worked boundary: 25 days x 20 workers bounds person-days at exactly
+# 500, and reg 6 says MORE than 500 — so the bound rules the limb out and
+# the PASS stands.
+edge = find(S.check_cdm(duration_days=25, max_workers=20), "cdm_notify")
+check("6p a bound of exactly 500 person-days is still not notifiable",
+      edge.verdict == S.PASS, edge.verdict)
+
 multi = find(S.check_cdm(contractor_count=3), "cdm_roles")
 check("6h more than one contractor needs PD and PC",
       multi.verdict == S.REQUIRED and "Principal Designer" in multi.message)

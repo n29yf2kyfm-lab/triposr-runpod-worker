@@ -108,13 +108,37 @@ def handler(job):
         with open(persisted_path, "rb") as f:
             glb_b64 = base64.b64encode(f.read()).decode("utf-8")
 
-        return {
+        # The pipeline computed 3D gaussians to texture that mesh and then
+        # threw them away. Exporting them is nearly free and gives every job
+        # a photographic splat alongside its GLB. Best-effort by design: a
+        # failed splat export must never cost the GLB that just worked.
+        splat_report = None
+        try:
+            here = os.path.dirname(os.path.abspath(__file__))
+            for cand in (os.path.join(here, "..", "building"),
+                         os.path.join(here, "building")):
+                if os.path.isdir(cand):
+                    sys.path.insert(0, cand)
+                    break
+            import splat as splat_export
+            splat_path = os.path.join(OUTPUT_DIR, f"{job_id}.splat.ply")
+            splat_report = splat_export.export_from_pipeline(
+                outputs, splat_path)
+        except Exception as splat_err:
+            print(f"splat export skipped: {type(splat_err).__name__}: "
+                  f"{splat_err}")
+
+        result = {
             "status": "success",
             "glb_b64": glb_b64,
             "glb_path": persisted_path,
             "mode": mode,
             "message": "GLB generated successfully",
         }
+        if splat_report:
+            result["splat_path"] = splat_report["path"]
+            result["splat_gaussians"] = splat_report["gaussians"]
+        return result
 
     except Exception as e:
         import traceback

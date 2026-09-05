@@ -92,5 +92,9 @@ ENV TRANSFORMERS_CACHE=/runpod-volume/hf_cache
 ENV TORCH_HOME=/runpod-volume/torch_cache
 
 COPY handler.py /app/handler.py
+# Staged by the workflow from building/splat.py (stdlib-only,
+# licence-clean). The handler's import is wrapped, so a build made
+# without the staging step still runs — it just skips the splat.
+COPY buildin[g] /app/building
 
 CMD ["python", "-u", "/app/handler.py"]

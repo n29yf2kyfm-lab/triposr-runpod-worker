@@ -270,8 +270,8 @@ def fetch_capture(spec, work_dir):
         for i, url in enumerate(spec["image_urls"]):
             dest = os.path.join(work_dir, f"i{i:06d}.jpg")
             try:
-                validation.check_fetchable_url(url, f"image_urls[{i}]")
-                r = requests.get(url, timeout=60)
+                r = validation.fetch_checked(url, f"image_urls[{i}]",
+                                             timeout=60)
                 r.raise_for_status()
                 with open(dest, "wb") as f:
                     f.write(r.content)
@@ -291,8 +291,8 @@ def fetch_capture(spec, work_dir):
         if local_ok and os.path.exists(spec["video_url"]):
             shutil.copy(spec["video_url"], video)
         else:
-            validation.check_fetchable_url(spec["video_url"], "video_url")
-            r = _requests().get(spec["video_url"], timeout=600, stream=True)
+            r = validation.fetch_checked(spec["video_url"], "video_url",
+                                         timeout=600, stream=True)
             r.raise_for_status()
             with open(video, "wb") as f:
                 for chunk in r.iter_content(1 << 20):
@@ -310,6 +310,53 @@ def model_available():
         return True
     except ImportError:
         return False
+
+
+def weights_available():
+    """(ok, reason) — whether the CHECKPOINT can actually be loaded.
+
+    model_available() only proves the pip package imports. The weights are a
+    separate thing entirely, fetched from Hugging Face at first use, and the
+    difference is not academic — it is a live misconfiguration:
+
+      * the Dockerfile bakes weights in only under PRELOAD_MODELS=1, and CI
+        passes no build args, so the shipped image contains NONE
+      * HF_HOME points at /runpod-volume/building_hf_cache, and the endpoint
+        has no network volume attached, so that path does not exist
+      * the endpoint sets OFFLINE=1, which forbids downloading them
+
+    Each on its own is survivable. Together they mean from_pretrained fails
+    on a cache miss — AFTER the worker has accepted the job, fetched the
+    video and extracted the frames. The builder has filmed a room, waited,
+    and lost the capture to a configuration error.
+
+    So this is checked FIRST, before anything is fetched, and the message
+    says which of the three to change.
+    """
+    if not model_available():
+        return False, ("the mapanything package is not installed in this "
+                       "image — check the build log for a failed install")
+
+    offline = (os.environ.get("HF_HUB_OFFLINE") == "1"
+               or os.environ.get("OFFLINE") == "1")
+    if not offline:
+        return True, "weights will be fetched on first use"
+
+    try:
+        from huggingface_hub import snapshot_download
+        snapshot_download(MODEL_ID, local_files_only=True)
+        return True, "weights are already in the local cache"
+    except Exception:
+        return False, (
+            f"OFFLINE=1 is set on this endpoint, but the {MODEL_ID} weights "
+            f"are not in the model cache at "
+            f"{os.environ.get('HF_HOME', 'the default HF_HOME')}, so they "
+            f"cannot be downloaded either. Fix ONE of these: unset OFFLINE "
+            f"so the weights download on the first cold start; attach a "
+            f"network volume holding the cache; or rebuild the image with "
+            f"--build-arg PRELOAD_MODELS=1 to bake them in. Roof, price, "
+            f"supply, valuation, planning and drawing modes are unaffected "
+            f"— none of them needs this model.")
 
 
 # WHICH CHECKPOINT, and why it is not the obvious one.
@@ -461,6 +508,15 @@ def run(spec, prog, output_dir):
     scan = spec.get("scan_id") or "scan"
     work = os.path.join(output_dir, f"work_{scan}")
     os.makedirs(output_dir, exist_ok=True)
+
+    # PRE-FLIGHT, before a single byte is fetched. A capture is a room
+    # somebody filmed once, at first fix, that cannot be filmed again after
+    # the plasterer has been. Discovering a configuration fault AFTER
+    # downloading their video and burning GPU minutes wastes the one thing
+    # this product cannot re-acquire. Failing in milliseconds does not.
+    ok, reason = weights_available()
+    if not ok:
+        raise ReconstructError(reason)
 
     prog.stage("fetching")
     frames = fetch_capture(spec, work)

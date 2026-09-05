@@ -9,6 +9,7 @@ Run: python building/test_valuation.py
 """
 import os
 import sys
+import types
 from datetime import date
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -130,10 +131,31 @@ check("3k and confidence drops to low", r_noindex["confidence"] == "low")
 
 # Recency must be scored against the DATE THE VALUATION IS FOR, not the real
 # clock. Reading date.today() here made every backtest quietly wrong about
-# how fresh its own comparables were.
-_hist = V.value_from_comparables(COMPS, 92.0, "S", INDEX, date(2025, 8, 1))
-check("3l a historical valuation scores recency against its own date",
-      _hist["confidence"] in ("good", "fair", "low"), _hist["confidence"])
+# how fresh its own comparables were. Pinned by BEHAVIOUR, not source text:
+# the same eight comparables valued at two different dates must score
+# differently. (The old 3l asserted confidence in ('good','fair','low') —
+# every value _confidence can return, so it could never fail.)
+#
+# Hand-worked: eight tight S-type comps sold 2024-2025, spread ~4% after
+# indexing. Valued at 2025-08-01 all eight are under 2 years old, so
+# 8 kept + spread <= 0.25 + 3+ recent -> "good". Valued at 2028-06-01 the
+# same sales are 3-4 years old — still inside the 5-year comparable window,
+# but ZERO are recent — so "good" is out of reach and the answer is "fair".
+# A _confidence that read the real clock would call both runs the same.
+_recency_comps = [sale(240_000, 2024, area=88.0), sale(245_000, 2024, area=89.0),
+                  sale(250_000, 2024, area=90.0), sale(252_000, 2024, area=91.0),
+                  sale(255_000, 2025, area=92.0), sale(258_000, 2025, area=93.0),
+                  sale(262_000, 2025, area=94.0), sale(268_000, 2025, area=96.0)]
+_ext_index = {date(y, m, 1): 100.0 + (y - 2020) * 5.0
+              for y in range(2019, 2030) for m in (1, 4, 7, 10)}
+_fresh = V.value_from_comparables(_recency_comps, 92.0, "S", _ext_index,
+                                  date(2025, 8, 1))
+_stale = V.value_from_comparables(_recency_comps, 92.0, "S", _ext_index,
+                                  date(2028, 6, 1))
+check("3l fresh comparables score good against their own date",
+      _fresh["confidence"] == "good", _fresh["confidence"])
+check("3l2 the same comparables gone stale score lower",
+      _stale["confidence"] == "fair", _stale["confidence"])
 import inspect  # noqa: E402
 check("3m _confidence takes today rather than reading the clock",
       "today=None" in inspect.signature(V._confidence).__str__()
@@ -267,8 +289,34 @@ u = V.extension_uplift(250_000, 90.0, 40.0, 2800.0, street_ceiling=280_000)
 check("7f ceiling applied", u["ceiling_applied"])
 check("7g value is capped near the ceiling", u["new_value"] <= 308_001,
       str(u["new_value"]))
-check("7h the unrecoverable amount is named",
-      "not recoverable" in u["ceiling_note"], u.get("ceiling_note", ""))
+# The note used to attribute the WHOLE haircut to the street ceiling. Here
+# the ceiling costs £9,200 and the marginal factor £44,800, and a builder
+# reads this note out to a customer — so the two are now separated by name.
+check("7h the amount the CEILING costs is named",
+      "ceiling costs" in u["ceiling_note"], u.get("ceiling_note", ""))
+check("7h2 and it is not blamed for the marginal factor's share",
+      "marginal factor above, not the ceiling" in u["ceiling_note"],
+      u.get("ceiling_note", ""))
+_by_ceiling = (u["naive_uplift"] * u["marginal_factor"]) - u["uplift"]
+check("7h3 and the figure is the ceiling's actual share",
+      f"£{_by_ceiling:,.0f}" in u["ceiling_note"],
+      f"expected £{_by_ceiling:,.0f} in: {u['ceiling_note']}")
+
+# at_ceiling used to be computed INSIDE the cap branch, so a house already
+# above the street ceiling got the full uplift and no flag whenever the
+# extension was small enough not to trip the 10% tolerance — the smaller,
+# commoner job, and the one where "build it for the space" is the advice.
+_small = V.extension_uplift(305_000, 90.0, 5.0, 2800.0, street_ceiling=300_000)
+check("7h4 a house already at the ceiling is flagged on a SMALL extension",
+      _small.get("at_ceiling") is True,
+      f"ceiling_applied={_small['ceiling_applied']} "
+      f"at_ceiling={_small.get('at_ceiling')}")
+check("7h5 and told there is no headroom at any size",
+      "build it for the space" in (_small.get("ceiling_note") or ""),
+      str(_small.get("ceiling_note")))
+_below = V.extension_uplift(200_000, 90.0, 5.0, 2800.0, street_ceiling=300_000)
+check("7h6 but a house well below the ceiling is not flagged",
+      "at_ceiling" not in _below, str(_below.get("at_ceiling")))
 
 # A build that does NOT pay for itself must say so plainly.
 u = V.extension_uplift(250_000, 90.0, 20.0, 2800.0, build_cost=60_000)
@@ -541,7 +589,221 @@ check("8e category B is excluded from the ceiling too",
                        * 5, INDEX, TODAY) is None)
 
 
+# ---- 12. the EPC join, which used to be dead code ------------------------
+# Price Paid carries no floor area, so price per square metre needs the EPC
+# register joined on address. The constant EPC_API was defined and referenced
+# nowhere else, nothing ever built the floor_areas map parse_ppd_item
+# accepts, and so the per-m2 method — the headline claim of this module, and
+# the only thing a measured scan can improve on — was unreachable from run().
+# Every valuation silently took the fallback and said nothing about it.
+
+# PAON candidates. The join is postcode + primary addressable object name,
+# because neither register publishes a UPRN in its open form.
+check("12a a house number is read from an EPC address line",
+      "12" in V._epc_paons("12 Acacia Avenue"))
+check("12b including a letter suffix", "12A" in V._epc_paons("12A High St"))
+check("12c a flat number is not mistaken for the house number",
+      "12" in V._epc_paons("Flat 3, 12 Acacia Avenue"),
+      str(V._epc_paons("Flat 3, 12 Acacia Avenue")))
+check("12d a named house joins on its whole name",
+      "The Old Rectory" in V._epc_paons("The Old Rectory"))
+check("12e nothing in, nothing out", V._epc_paons("") == [])
+
+
+class _FakeEPC:
+    """The register, without the network."""
+
+    def __init__(self, certificates, areas):
+        self.certificates = certificates
+        self.areas = areas
+        self.detail_calls = 0
+
+    def get(self, url, headers=None, timeout=None, params=None):
+        params = params or {}
+        if "search" in url:
+            return _FakeResponse({"data": self.certificates})
+        self.detail_calls += 1
+        number = params.get("certificate_number")
+        return _FakeResponse({"data": {"total_floor_area":
+                                       self.areas.get(number)}})
+
+
+class _FakeResponse:
+    def __init__(self, payload):
+        self._payload = payload
+
+    def raise_for_status(self):
+        pass
+
+    def json(self):
+        return self._payload
+
+
+def _with_fake_epc(fake, key="test-token"):
+    module = types.ModuleType("requests")
+    module.get = fake.get
+    sys.modules["requests"] = module
+    os.environ[V.EPC_KEY_ENV] = key
+
+
+def _clear_fake_epc():
+    sys.modules.pop("requests", None)
+    os.environ.pop(V.EPC_KEY_ENV, None)
+
+
+_CERTS = [
+    {"certificateNumber": "C1", "addressLine1": "59 Ermington Crescent",
+     "postcode": "B36 8AR", "registrationDate": "2024-01-01"},
+    {"certificateNumber": "C2", "addressLine1": "97 Ermington Crescent",
+     "postcode": "B36 8AR", "registrationDate": "2023-01-01"},
+]
+_AREAS = {"C1": 61.0, "C2": 86.0}
+
+_fake = _FakeEPC(_CERTS, _AREAS)
+_with_fake_epc(_fake)
+try:
+    _areas, _note = V.fetch_floor_areas("B36 8AR")
+    check("12f floor areas come back keyed for the Price Paid join",
+          _areas.get(V._address_key("B36 8AR", "59")) == 61.0, str(_areas))
+    check("12g and the note says how many were read",
+          "2 floor areas" in _note, _note)
+finally:
+    _clear_fake_epc()
+
+# Only the addresses actually needed are fetched. A postcode search returns
+# a summary with no floor area, so each certificate costs its own request;
+# filtering to the comparable set turns 40 requests into 8.
+_fake = _FakeEPC(_CERTS, _AREAS)
+_with_fake_epc(_fake)
+try:
+    V.fetch_floor_areas("B36 8AR",
+                        wanted={V._address_key("B36 8AR", "59")})
+    check("12h only the wanted addresses cost a request",
+          _fake.detail_calls == 1, f"{_fake.detail_calls} detail calls")
+finally:
+    _clear_fake_epc()
+
+# Two certificates behind one house number are two flats, not one house.
+# Picking either would attach a wrong floor area to a real sale.
+_split = [
+    {"certificateNumber": "F1", "addressLine1": "Flat 1, 8 Mill Court",
+     "postcode": "B36 8AR", "registrationDate": "2024-01-01"},
+    {"certificateNumber": "F2", "addressLine1": "Flat 2, 8 Mill Court",
+     "postcode": "B36 8AR", "registrationDate": "2024-01-01"},
+]
+_fake = _FakeEPC(_split, {"F1": 48.0, "F2": 91.0})
+_with_fake_epc(_fake)
+try:
+    _areas, _note = V.fetch_floor_areas("B36 8AR")
+    check("12i two conflicting certificates for one number are both dropped",
+          V._address_key("B36 8AR", "8") not in _areas, str(_areas))
+    check("12j and the note says why", "disagreed" in _note, _note)
+finally:
+    _clear_fake_epc()
+
+# No key is the normal case for a fresh deployment, and it must degrade with
+# an explanation rather than pretend.
+_clear_fake_epc()
+_areas, _note = V.fetch_floor_areas("B36 8AR")
+check("12k with no key configured, no areas and a clear reason",
+      _areas == {} and V.EPC_KEY_ENV in _note, _note)
+
+# The join onto real Sale objects.
+_sales = [V.Sale(price=240_000, sold_on=date(2025, 11, 14), property_type="S",
+                 postcode="B36 8AR", address="59 ERMINGTON CRESCENT"),
+          V.Sale(price=230_000, sold_on=date(2025, 5, 28), property_type="S",
+                 postcode="B36 8AR", address="97 ERMINGTON CRESCENT")]
+_fake = _FakeEPC(_CERTS, _AREAS)
+_with_fake_epc(_fake)
+try:
+    _joined, _note = V.attach_floor_areas(_sales, "B36 8AR")
+    check("12l sales come back carrying a floor area",
+          [s.floor_area_m2 for s in _joined] == [61.0, 86.0],
+          str([s.floor_area_m2 for s in _joined]))
+    check("12m which makes price per m2 available",
+          abs(_joined[0].price_per_m2 - 240_000 / 61.0) < 1,
+          str(_joined[0].price_per_m2))
+    check("12n and the note says how many matched",
+          "2 of 2 sales matched" in _note, _note)
+finally:
+    _clear_fake_epc()
+
+# index_price used to raise TypeError, not ValuationError, when asked to
+# index to a date before the series began. Callers catch ValuationError
+# specifically so they can drop one comparable and carry on; a TypeError
+# escapes all of them and kills the whole valuation on one bad row.
+try:
+    V.index_price(200_000, date(2022, 1, 1), INDEX, date(2000, 1, 1))
+    check("12o indexing to a date before the series is a clean refusal",
+          False, "no error at all")
+except V.ValuationError:
+    check("12o indexing to a date before the series is a clean refusal", True)
+except TypeError as e:
+    check("12o indexing to a date before the series is a clean refusal",
+          False, f"TypeError escaped: {e}")
+
+# range_low went NEGATIVE whenever the surviving spread exceeded 200% of the
+# median. A negative pound figure is not a wide valuation, it is a broken
+# one — and the docstring called it the honest output.
+_splitmarket = [sale(100_000, 2025, area=90.0), sale(105_000, 2025, area=90.0),
+                sale(110_000, 2025, area=90.0),
+                sale(900_000, 2025, area=90.0), sale(950_000, 2025, area=90.0),
+                sale(1_000_000, 2025, area=90.0)]
+try:
+    _r = V.value_from_comparables(_splitmarket, 90.0, "S", INDEX, TODAY)
+    check("12p a valuation never reports a negative lower bound",
+          _r["range_low"] > 0,
+          f"range_low={_r['range_low']} on spread {_r['spread_pct']}%")
+except V.ValuationError as e:
+    check("12p a valuation never reports a negative lower bound", True)
+    check("12q and says the bound would have been at or below zero",
+          "zero" in str(e), str(e))
+
+
 # ==========================================================================
+# ---- region slugs ----------------------------------------------------------
+# The caller should not have to know UKHPI's naming scheme. The postcode's
+# own admin_district is the local authority; these pin the slug spelling,
+# because a wrong slug is a silent "no index" rather than an error.
+check("r1 a plain name", V.region_slug("Birmingham") == "birmingham")
+check("r2 spaces hyphenate",
+      V.region_slug("City of Westminster") == "city-of-westminster")
+check("r3 apostrophes drop, not hyphenate",
+      V.region_slug("King's Lynn and West Norfolk")
+      == "kings-lynn-and-west-norfolk",
+      V.region_slug("King's Lynn and West Norfolk"))
+check("r4 nothing in, None out", V.region_slug("") is None)
+
+# r5 used to read `in (None,) or True` — a tautology that passed for ANY
+# return value, so a derive_region that invented a region slug for garbage
+# input would have sailed through. Fake the geocoder both ways instead:
+# a dead lookup must give None (falling back to the explicit-region path),
+# and a live one must give the district's slug — never a guess.
+_real_roof = sys.modules.get("roof")
+_fake_roof = types.ModuleType("roof")
+
+
+def _dead_lookup(_postcode):
+    raise RuntimeError("postcode lookup unavailable")
+
+
+_fake_roof._geocode_uk_full = _dead_lookup
+sys.modules["roof"] = _fake_roof
+try:
+    check("r5 a dead lookup gives None, not a fabricated region",
+          V.derive_region("not even a postcode") is None,
+          str(V.derive_region("not even a postcode")))
+    _fake_roof._geocode_uk_full = \
+        lambda pc: {"admin_district": "Birmingham"}
+    check("r6 a live lookup gives the district's slug",
+          V.derive_region("B36 8AR") == "birmingham",
+          str(V.derive_region("B36 8AR")))
+finally:
+    if _real_roof is not None:
+        sys.modules["roof"] = _real_roof
+    else:
+        sys.modules.pop("roof", None)
+
 print()
 for f in FAILED:
     print(f"FAIL  {f}")

@@ -36,13 +36,22 @@ SDK_PROGRESS = os.environ.get("BUILDING_SDK_PROGRESS", "0") == "1"
 
 # Ordered stages per mode, so the client can render a real progress bar
 # instead of an indeterminate spinner.
+# Each plan must list the stages the module ACTUALLY emits, in order.
+#
+# Four of these listed stages that no module ever reaches — reconstruct's
+# "meshing", structure's "fitting_planes", services' "connecting" and
+# "building_ifc". The effect is the opposite of the one intended two lines
+# above: a client rendering a real progress bar sees it jump 1 -> 2 -> 4 and
+# finish at 5 of 5 having skipped a step, which reads as a stalled job.
+# Aspirational stages belong in PLAN.md, not in a progress plan.
 STAGE_PLANS = {
     "reconstruct": ["fetching", "poses", "densifying", "scaling",
-                    "meshing", "exporting"],
-    "structure":   ["fetching", "segmenting", "fitting_planes",
-                    "building_ifc", "exporting"],
-    "services":    ["fetching", "extracting_runs", "connecting",
-                    "classifying", "building_ifc", "exporting"],
+                    "exporting"],
+    "structure":   ["fetching", "segmenting", "building_ifc", "exporting"],
+    "services":    ["fetching", "extracting_runs", "classifying",
+                    "exporting"],
+    "planning":    ["fetching", "screening", "exporting"],
+    "model":       ["reading", "building", "exporting"],
     "register":    ["fetching", "coarse_align", "icp", "scoring",
                     "exporting"],
     "roof":        ["fetching", "clipping_footprint", "fitting_planes",
@@ -56,6 +65,11 @@ STAGE_PLANS = {
     "condition":   ["fetching", "detecting", "locating_3d", "grading",
                     "costing", "exporting"],
     "design":      ["fetching", "massing", "compliance_check", "exporting"],
+    "render":      ["aerial", "rendering", "delivering"],
+    "scan":        ["fetching", "verifying", "orienting", "delivering"],
+    "propose":     ["locating", "footprint", "orientation",
+                    "clearances", "roof", "designing", "checking",
+                    "exporting", "rendering", "photoreal"],
 }
 
 

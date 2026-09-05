@@ -178,3 +178,62 @@ def bbox_around(easting, northing, radius_m=60.0):
     """
     return (easting - radius_m, northing - radius_m,
             easting + radius_m, northing + radius_m)
+
+
+def easting_northing_to_latlon(easting, northing, tol_m=1e-4, max_iter=12):
+    """National Grid metres -> WGS84 lat/lon (degrees). The inverse.
+
+    Everything upstream converts ONE way — an address becomes a grid
+    reference, and a grid reference picks a LIDAR tile. Going back the
+    other way is what a height field needs: a DSM arrives on the grid,
+    and to drape imagery on it or hand it to anything geographic, each
+    cell has to become a lat/lon.
+
+    Solved by iteration on the forward projection rather than by writing
+    the series out backwards. The forward transform is the one that has
+    been checked against the OS worked example, so inverting it
+    numerically inherits that check instead of introducing a second set
+    of coefficients to get wrong. It converges in a handful of steps at
+    UK latitudes; a metre of easting is ~1.5e-5 degrees of longitude, so
+    the default tolerance is a tenth of a millimetre.
+
+    Raises ValueError off the grid or if it does not converge — a silent
+    near-miss here would put a building metres from where it stands, and
+    the projection is happy to return a mathematically valid answer for a
+    coordinate nowhere near Britain.
+    """
+    # The National Grid covers 0-700 km east, 0-1300 km north. Outside
+    # that the transverse Mercator still SOLVES; the answer just is not a
+    # place in Great Britain. The envelope here is the one the error
+    # message states, plus a kilometre of slack for rounding at the
+    # edges — an earlier 100 km band quietly accepted E 750000, a point
+    # in the open North Sea, from exactly the kind of transposed digit
+    # this check exists to catch.
+    if not (-1000.0 <= easting <= 701000.0
+            and -1000.0 <= northing <= 1301000.0):
+        raise ValueError(
+            f"E {easting:.1f} N {northing:.1f} is not on the National Grid "
+            f"of Great Britain (0-700000 east, 0-1300000 north)")
+    # Seed from a spherical approximation about the true origin.
+    lat = 49.0 + (northing + 100000.0) / 111320.0
+    lon = -2.0 + (easting - 400000.0) / (111320.0 * math.cos(math.radians(53.0)))
+    for _ in range(max_iter):
+        e_try, n_try = latlon_to_easting_northing(lat, lon)
+        de, dn = easting - e_try, northing - n_try
+        if abs(de) < tol_m and abs(dn) < tol_m:
+            return lat, lon
+        # Local scale: how far a small step in degrees moves us on the grid.
+        step = 1e-6
+        e_dlat, n_dlat = latlon_to_easting_northing(lat + step, lon)
+        e_dlon, n_dlon = latlon_to_easting_northing(lat, lon + step)
+        j11, j21 = (e_dlat - e_try) / step, (n_dlat - n_try) / step
+        j12, j22 = (e_dlon - e_try) / step, (n_dlon - n_try) / step
+        det = j11 * j22 - j12 * j21
+        if abs(det) < 1e-12:
+            break
+        lat += (de * j22 - dn * j12) / det
+        lon += (dn * j11 - de * j21) / det
+    raise ValueError(
+        f"grid reference E {easting:.1f} N {northing:.1f} did not invert to "
+        f"a lat/lon within {tol_m} m after {max_iter} steps — check it is "
+        f"inside Great Britain")
