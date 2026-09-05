@@ -397,7 +397,12 @@ def from_footprint(feature, *, lidar=None, address=None, storey_height=None):
     if w > d:
         w, d = d, w
         ang += math.pi / 2
-    bearing = (90.0 - math.degrees(ang)) % 360.0
+    # BEARING IS THE COMPASS BEARING OF LOCAL +Y, WHICH IS DEPTH.
+    # `ang` is the angle of the WIDTH axis, so taking 90 - ang gave the
+    # bearing of the wrong side and rotated every model 90 degrees off
+    # the real building. Depth runs along (-sin ang, cos ang) in
+    # east/north, whose compass bearing is -ang.
+    bearing = (-math.degrees(ang)) % 360.0
 
     props = feature.get("properties", {}) or {}
     storeys, storeys_class, note = None, None, ""
@@ -440,9 +445,16 @@ def from_footprint(feature, *, lidar=None, address=None, storey_height=None):
                 note=note)
 
     # Anchor at the rectangle corner so local (0,0) is a real place.
+    #
+    # The block sits at x in [0, w], y in [0, d], so its centre is at
+    # (w/2, d/2) in the building frame and the anchor is the rectangle
+    # centre MINUS that offset rotated into east/north. to_lonlat uses
+    # [[cos b, sin b], [-sin b, cos b]], so both depth terms subtract;
+    # adding them put the origin on the opposite corner and slid the
+    # whole model off the building it was fitted to.
     b = math.radians(bearing)
-    corner_e = cx - (w / 2) * math.cos(b) + (d / 2) * math.sin(b)
-    corner_n = cy + (w / 2) * math.sin(b) + (d / 2) * math.cos(b)
+    corner_e = cx - (w / 2) * math.cos(b) - (d / 2) * math.sin(b)
+    corner_n = cy + (w / 2) * math.sin(b) - (d / 2) * math.cos(b)
     alon, alat = f.to_lonlat(corner_e, corner_n)
 
     bld = Building(id=uuid.uuid4().hex[:12], anchor_lat=alat, anchor_lon=alon,

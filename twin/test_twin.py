@@ -1453,6 +1453,82 @@ class TestReviewFindings(unittest.TestCase):
         self.assertFalse(any(t.startswith("W0") for t in texts))
 
 
+# ------------------------------------------------ the model sits on the house
+class TestFootprintFit(unittest.TestCase):
+    """The fitted rectangle must land ON the building it was fitted to.
+
+    Every test in this suite passed while the model was rotated 90
+    degrees and slid 12 m off the real house, because they all checked
+    SIZES — area, GIA, heights — and w*d is unchanged by a rotation.
+    Nothing checked POSITION. These do.
+    """
+
+    @staticmethod
+    def _feature(cx_lon, cy_lat, w, d, bearing_deg):
+        """A rectangular footprint of known size at a known angle."""
+        f = geodesy.LocalFrame(cy_lat, cx_lon)
+        b = math.radians(bearing_deg)
+        ring = []
+        for u, v in ((-w / 2, -d / 2), (w / 2, -d / 2),
+                     (w / 2, d / 2), (-w / 2, d / 2), (-w / 2, -d / 2)):
+            # +y of the rectangle points along `bearing_deg`
+            e = u * math.cos(b) + v * math.sin(b)
+            n = -u * math.sin(b) + v * math.cos(b)
+            ring.append(list(f.to_lonlat(e, n)))
+        return {"type": "Feature", "id": "way/test",
+                "properties": {"levels": "2"},
+                "geometry": {"type": "Polygon", "coordinates": [ring]}}
+
+    def _fit_error(self, bearing_deg, w=8.0, d=13.0):
+        from twin import model
+        bld = model.from_footprint(
+            self._feature(-1.8476, 52.4856, w, d, bearing_deg))
+        blk = bld.blocks[0]
+        xs = [p[0] for p in bld.traced_ring]
+        ys = [p[1] for p in bld.traced_ring]
+        # The real outline should fill the fitted rectangle exactly.
+        return max(abs(min(xs) - blk.x), abs(min(ys) - blk.y),
+                   abs(max(xs) - (blk.x + blk.width)),
+                   abs(max(ys) - (blk.y + blk.depth)))
+
+    def test_the_rectangle_lands_on_the_footprint_at_every_angle(self):
+        for bearing in (0, 17, 20.4, 45, 90, 133, 180, 271, 359):
+            with self.subTest(bearing=bearing):
+                self.assertLess(
+                    self._fit_error(bearing), 0.05,
+                    f"at {bearing} deg the fitted rectangle is off the "
+                    f"building it was fitted to")
+
+    def test_the_recorded_bearing_is_the_bearing_of_the_depth_axis(self):
+        """+y is depth. Taking the width axis instead turned every model
+        90 degrees, which silently wrongs the north arrow, the Part O
+        facade orientations and the shadow study."""
+        from twin import model
+        for want in (0.0, 20.4, 75.0, 200.0):
+            bld = model.from_footprint(
+                self._feature(-1.8476, 52.4856, 8.0, 13.0, want))
+            got = bld.bearing_deg % 180.0        # a rectangle is 180-symmetric
+            self.assertAlmostEqual(
+                got, want % 180.0, delta=0.6,
+                msg=f"recorded {bld.bearing_deg:.1f} for a building at {want}")
+
+    def test_the_model_geolocates_back_onto_the_real_polygon(self):
+        """Convert the block's own corners to lon/lat: they must overlap
+        the footprint we started from, not sit beside it."""
+        from twin import model
+        feat = self._feature(-1.8476, 52.4856, 9.0, 14.0, 20.4)
+        bld = model.from_footprint(feat)
+        real = feat["geometry"]["coordinates"][0]
+        blk = [bld.to_lonlat(x, y) for x, y in bld.blocks[0].ring()]
+        for i, name in ((0, "lon"), (1, "lat")):
+            r0, r1 = min(p[i] for p in real), max(p[i] for p in real)
+            b0, b1 = min(p[i] for p in blk), max(p[i] for p in blk)
+            overlap = min(r1, b1) - max(r0, b0)
+            self.assertGreater(
+                overlap, (r1 - r0) * 0.9,
+                f"the block barely overlaps the real footprint in {name}")
+
+
 # ------------------------------------------------------- ground imagery
 class TestGround(unittest.TestCase):
     """Imagery draped under the 3D model. The maths that places it is
