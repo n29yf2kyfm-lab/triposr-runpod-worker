@@ -28,6 +28,37 @@ from .providers import registry as registry_mod
 
 WEB = os.path.join(os.path.dirname(os.path.abspath(__file__)), "web")
 
+
+def _load_env(path=None):
+    """Read keys from a file OUTSIDE the repository.
+
+    Keys are not in git and never will be. They live in one file with
+    mode 600 whose path can be overridden, so a deployment can point at
+    a secrets mount instead. Anything already set in the real
+    environment WINS — a container's injected secret must not be
+    silently overwritten by a stale developer file.
+    """
+    path = path or os.environ.get("TWIN_ENV_FILE", "/root/.banana/env")
+    try:
+        with open(path) as fh:
+            lines = fh.readlines()
+    except OSError:
+        return 0
+    n = 0
+    for line in lines:
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        k, v = line.split("=", 1)
+        k = k.strip()
+        if k and k not in os.environ:
+            os.environ[k] = v.strip()
+            n += 1
+    return n
+
+
+_load_env()
+
 app = Flask(__name__, static_folder=None)
 _registry = registry_mod.default()
 _cache = cache_mod.default()
@@ -491,6 +522,92 @@ def project_ground(pid):
         "method": info.get("method"),
         "asked": tried,
     })
+
+
+@app.post("/api/project/<pid>/impression")
+def project_impression(pid):
+    """A photoreal impression of THIS building, from the massing render.
+
+    The browser sends the canvas it is already showing, so the picture
+    that comes back is the same building at the same camera — which is
+    the only reason it can be trusted to be the same house at all.
+
+    The FACTS come from the server, not from the body. The client may
+    say which view it grabbed; it may not tell the server how big the
+    house is, because that is measured and the whole point of the
+    constraint in the prompt is that it is not up for negotiation.
+
+    On failure this returns DATA NOT AVAILABLE with the reason, in the
+    same shape as every other unavailable layer. It never returns a
+    stand-in image.
+    """
+    from .providers import visual
+    pj = _project(pid)
+    bld = pj.current()
+    body = request.get_json(silent=True) or {}
+
+    data_url = body.get("massing_png") or ""
+    if "," in data_url:
+        data_url = data_url.split(",", 1)[1]
+    try:
+        png = base64.b64decode(data_url, validate=True)
+    except Exception:
+        png = b""
+    if not png:
+        return _out({"available": False, "status": "DATA NOT AVAILABLE",
+                     "reason": "the massing render did not arrive — the "
+                               "impression is drawn FROM the model, not "
+                               "from the address",
+                     "asked": []})
+    # 12 MB of PNG is already far more than a canvas grab; past that it
+    # is either a mistake or somebody using the endpoint as an upload.
+    if len(png) > 12 * 1024 * 1024:
+        return _out({"available": False, "status": "REFUSED",
+                     "reason": "that render is too large to send"})
+
+    big = max(bld.blocks, key=lambda b: b.area()) if bld.blocks else None
+    roof = (big.roof or {}) if big else {}
+    facts = {
+        "width_m": big.width if big else None,
+        "depth_m": big.depth if big else None,
+        "storeys": big.storeys if big else None,
+        "eaves_m": bld.eaves_m(),
+        "ridge_m": bld.ridge_m(),
+        "roof_kind": roof.get("kind"),
+        "address": bld.address or "",
+        "place": _place_from(bld.address or ""),
+    }
+    try:
+        imp = visual.impression(png, facts)
+    except visual.NotAvailable as e:
+        return _out({"available": False, "status": "DATA NOT AVAILABLE",
+                     "reason": str(e), "asked": list(visual.MODELS),
+                     "note": "The impression is a selling picture, not a "
+                             "survey. Nothing downstream depends on it, "
+                             "so the rest of the model is unaffected."})
+    return jsonify({
+        "available": True,
+        "image": "data:image/png;base64," + base64.b64encode(imp.png).decode(),
+        "model": imp.model,
+        "classification": imp.classification,
+        "licence": imp.licence,
+        "attribution": imp.attribution,
+        "caption": imp.caption,
+        "asked": list(imp.notes),
+    })
+
+
+def _place_from(address: str) -> str:
+    """The town out of a Nominatim label, for the prompt's sense of place.
+
+    Nominatim puts the country last and the house number first; the
+    middle is the useful part. Guessing wrong only costs a slightly
+    generic picture, so this stays cheap and never raises.
+    """
+    parts = [p.strip() for p in (address or "").split(",") if p.strip()]
+    if len(parts) >= 4:
+        return ", ".join(parts[-4:-1])
+    return ", ".join(parts[1:]) or "England"
 
 
 @app.get("/api/rates")

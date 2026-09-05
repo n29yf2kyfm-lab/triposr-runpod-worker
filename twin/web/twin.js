@@ -466,6 +466,50 @@ export function initTwinUI() {
                 '_blank');
   };
 
+  /* PHOTOREAL IMPRESSION.
+   *
+   * The canvas the user is looking at is what gets sent, so the picture
+   * that comes back is the same house at the same camera rather than a
+   * generic pretty render of a different building. The 3D tab has to be
+   * live for that: an unrendered canvas reads back transparent, and a
+   * blank frame would come back as a beautiful house that is not this
+   * one — the exact failure this whole product exists to avoid. */
+  $('imprBtn').onclick = async () => {
+    if (!project) return;
+    const note = $('imprNote');
+    const tab = document.querySelector('#tabs button[data-tab="3d"]');
+    if (tab && !tab.classList.contains('on')) tab.click();
+    if (!viewer) { note.textContent = 'The 3D view is not running.'; return; }
+    viewer.render();
+    let png = '';
+    try {
+      png = viewer.canvas.toDataURL('image/png');
+    } catch (e) {
+      note.textContent = 'The 3D canvas could not be read back: ' + e.message;
+      return;
+    }
+    $('imprBtn').disabled = true;
+    note.textContent = 'Rendering — this takes up to a minute…';
+    status('Rendering the impression…', 0);
+    const { body } = await api(
+      `/api/project/${project.project_id}/impression`,
+      { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ massing_png: png }) });
+    $('imprBtn').disabled = false;
+    if (!body.available) {
+      status('No impression — ' + (body.reason || ''), 12000);
+      note.innerHTML = `<span style="color:#e2a33a">DATA NOT AVAILABLE</span> — `
+        + esc(body.reason || 'the image service refused');
+      $('imprWrap').hidden = true;
+      return;
+    }
+    status('');
+    $('imprImg').src = body.image;
+    $('imprWrap').hidden = false;
+    note.innerHTML = `<span style="color:#e2a33a">${esc(body.caption)}</span>`
+      + `<br>${esc(body.attribution)} · ${esc(body.model)}`;
+  };
+
   $('beforeAfter').onchange = (e) => {
     showBaseline = e.target.checked;
     render._framed = true;

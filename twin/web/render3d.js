@@ -232,7 +232,13 @@ class MeshBuilder {
 export class Viewer3D {
   constructor(canvas) {
     this.canvas = canvas;
-    const gl = canvas.getContext('webgl', { antialias: true, alpha: false });
+    /* preserveDrawingBuffer so the canvas can be READ BACK. Without it
+     * the buffer is thrown away at composite and toDataURL returns a
+     * blank frame — silently, with no error — which for the impression
+     * would mean sending an empty image and getting back a beautiful
+     * photo of a house that is not this one. */
+    const gl = canvas.getContext('webgl',
+      { antialias: true, alpha: false, preserveDrawingBuffer: true });
     if (!gl) throw new Error('WebGL is not available in this browser');
     this.gl = gl;
     const p = gl.createProgram();

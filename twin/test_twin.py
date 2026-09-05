@@ -12,6 +12,7 @@ number reach a builder. Geodesic area against a hand-computed figure,
 the selection rule refusing the neighbour, and Missing never being
 mistakable for a value.
 """
+import io
 import json
 import math
 import os
@@ -2160,6 +2161,148 @@ class TestEstimate(unittest.TestCase):
         self.assertAlmostEqual(
             t["net"], built + p["professional_fees"]["total"], delta=0.5)
         self.assertAlmostEqual(t["gross"], t["net"] + t["vat"], delta=0.5)
+
+
+class TestImpression(unittest.TestCase):
+    """The picture is the one output nobody reads the caption on.
+
+    So these tests are about the caption and the refusals, not about
+    whether the brick looks nice. A generated image that loses its
+    disclaimer becomes a photograph of a house that does not exist.
+    """
+
+    def setUp(self):
+        from twin.providers import visual
+        self.v = visual
+        self._key = os.environ.pop("GEMINI_API_KEY", None)
+
+    def tearDown(self):
+        if self._key is not None:
+            os.environ["GEMINI_API_KEY"] = self._key
+        else:
+            os.environ.pop("GEMINI_API_KEY", None)
+
+    def test_with_no_key_it_says_which_key_and_does_not_pretend(self):
+        ok, why = self.v.usable()
+        self.assertFalse(ok)
+        self.assertIn("GEMINI_API_KEY", why)
+
+    def test_it_refuses_rather_than_returning_a_stand_in_image(self):
+        with self.assertRaises(self.v.NotAvailable):
+            self.v.impression(b"\x89PNG fake", {})
+
+    def test_an_empty_render_is_refused_before_any_call_is_made(self):
+        os.environ["GEMINI_API_KEY"] = "test-key-not-used"
+        with self.assertRaises(self.v.NotAvailable) as cm:
+            self.v.impression(b"", {"width_m": 8.0})
+        self.assertIn("massing render", str(cm.exception))
+
+    def test_the_licence_is_registered_and_permits_the_use(self):
+        # An unregistered licence key raises; that is the whole point of
+        # the registry, and a provider that skipped it would be the one
+        # source in the app whose terms were never stated.
+        lic = licences.get("google-gemini-api")
+        self.assertTrue(lic.commercial)
+        self.assertEqual([], licences.check("google-gemini-api",
+                                            licences.USE_RENDER,
+                                            licences.USE_COMMERCIAL,
+                                            raises=False))
+
+    def test_the_prompt_carries_the_measured_numbers_as_constraints(self):
+        text = self.v.brief({"width_m": 9.91, "depth_m": 13.37, "storeys": 2,
+                             "eaves_m": 5.3, "ridge_m": 8.16,
+                             "roof_kind": "gabled", "place": "Birmingham"})
+        self.assertIn("9.91", text)
+        self.assertIn("13.37", text)
+        self.assertIn("2 storeys", text)
+        self.assertIn("8.16", text)
+        self.assertIn("gabled", text)
+        # and it must forbid the model redrawing the volume
+        self.assertIn("Do NOT add", text)
+
+    def test_a_zero_quota_is_reported_as_billing_not_as_try_again(self):
+        """`limit: 0` will never clear by waiting, and telling a user to
+        retry a permanent refusal wastes their afternoon."""
+        class E:
+            code = 429
+            def read(self):
+                return json.dumps({"error": {"message":
+                    "Quota exceeded ... limit: 0, model: x"}}).encode()
+        why = self.v._http_reason("gemini-3-pro-image", E())
+        self.assertIn("billing", why.lower())
+        self.assertNotIn("try again", why.lower())
+
+    def test_the_disclaimer_is_burned_into_the_pixels(self):
+        """Not into the HTML beside them. The pixels are what gets
+        screenshotted into a message to a client."""
+        try:
+            from PIL import Image
+        except ImportError:
+            self.skipTest("Pillow not installed")
+        buf = io.BytesIO()
+        Image.new("RGB", (200, 120), (90, 110, 130)).save(buf, format="PNG")
+        out = self.v.stamp(buf.getvalue())
+        grew = Image.open(io.BytesIO(out))
+        self.assertEqual(200, grew.size[0])
+        self.assertGreater(grew.size[1], 120)
+        # the band is really drawn on, not just empty space
+        band = grew.crop((0, 120, 200, grew.size[1]))
+        self.assertGreater(len(band.getcolors(maxcolors=100000) or []), 1)
+
+    def test_the_disclaimer_fits_the_width_instead_of_running_off_it(self):
+        """Half a disclaimer is worse than none: the half that survives
+        a crop reads 'ARTIST'S IMPRESSION - generated, not a photo...'."""
+        try:
+            from PIL import Image, ImageDraw, ImageFont
+        except ImportError:
+            self.skipTest("Pillow not installed")
+        for width in (200, 420, 640, 1400):
+            buf = io.BytesIO()
+            Image.new("RGB", (width, 300), (90, 110, 130)).save(buf, "PNG")
+            out = Image.open(io.BytesIO(self.v.stamp(buf.getvalue())))
+            band = out.crop((0, 300, width, out.size[1]))
+            # find the rightmost column carrying caption ink
+            px = band.load()
+            last = 0
+            for x in range(width):
+                for y in range(band.size[1]):
+                    if px[x, y] != (14, 14, 16):
+                        last = x
+                        break
+            self.assertLess(last, width - 2,
+                            f"caption reaches the edge at width {width}")
+
+    def test_the_place_is_taken_from_the_address_not_invented(self):
+        from twin import api as api_mod
+        place = api_mod._place_from(
+            "90, Streetly Lane, Sutton Coldfield, Four Oaks, Birmingham, "
+            "West Midlands, England, B74 4TB, United Kingdom")
+        self.assertIn("England", place)
+        self.assertNotIn("United Kingdom", place)
+        self.assertNotIn("90", place)
+
+    def test_an_env_file_never_overwrites_a_real_environment_secret(self):
+        from twin import api as api_mod
+        import tempfile
+        os.environ["TWIN_TEST_TOKEN"] = "from-the-container"
+        try:
+            with tempfile.NamedTemporaryFile("w", suffix=".env",
+                                             delete=False) as fh:
+                fh.write("# a comment\nTWIN_TEST_TOKEN=from-the-file\n"
+                         "TWIN_TEST_NEW=fresh\nnot a pair\n")
+                path = fh.name
+            api_mod._load_env(path)
+            self.assertEqual("from-the-container",
+                             os.environ["TWIN_TEST_TOKEN"])
+            self.assertEqual("fresh", os.environ["TWIN_TEST_NEW"])
+        finally:
+            os.environ.pop("TWIN_TEST_TOKEN", None)
+            os.environ.pop("TWIN_TEST_NEW", None)
+            os.unlink(path)
+
+    def test_a_missing_env_file_is_not_an_error(self):
+        from twin import api as api_mod
+        self.assertEqual(0, api_mod._load_env("/no/such/file/at/all"))
 
 
 # ------------------------------------------------------------------ live

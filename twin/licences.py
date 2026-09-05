@@ -132,6 +132,19 @@ LICENCES = {
               "1 req/s, needs a real User-Agent, and forbids heavy use — "
               "production must self-host Nominatim or buy a geocoder. "
               "Results may be cached; that is explicitly encouraged."),
+    "google-gemini-api": Licence(
+        key="google-gemini-api", name="Google Gemini API terms",
+        url="https://ai.google.dev/gemini-api/terms",
+        commercial=True, attribution="Image generated with Google Gemini",
+        share_alike=False, redistribute=True, cache=True,
+        notes="PAID API, own key. Google does not claim ownership of "
+              "generated output and permits commercial use, and output "
+              "carries SynthID watermarking. The restriction that matters "
+              "here is not Google's: an impression is NOT a survey and "
+              "must never be presented as a photograph of the property, "
+              "so every image leaves providers/visual.py with the "
+              "disclaimer burned into the pixels. Free-tier keys have no "
+              "image quota at all — billing must be on."),
     "overpass-policy": Licence(
         key="overpass-policy", name="Overpass API instance policy (data ODbL)",
         url="https://dev.overpass-api.de/",
