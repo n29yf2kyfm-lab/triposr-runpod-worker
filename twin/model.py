@@ -261,7 +261,7 @@ class Building:
             elif ex.classification == CLASS_VERIFIED:
                 src = "from the OpenStreetMap building:levels tag"
             elif ex.classification == CLASS_DERIVED:
-                src = "read from LIDAR height, roof included"
+                src = "read from LIDAR ridge height with a roof allowed for"
             elif ex.classification == CLASS_USER:
                 src = "set by you, not yet confirmed"
             else:
@@ -492,11 +492,19 @@ def from_footprint(feature, *, lidar=None, address=None, storey_height=None):
     if storeys is None and lidar and lidar.get("height_above_ground_m"):
         h = float(lidar["height_above_ground_m"])
         if h > 1.5:
-            storeys = max(1, int(round(h / sh)))
+            # THE LIDAR HEIGHT IS TO THE RIDGE, NOT THE EAVES. Dividing
+            # the whole height by a storey rounded a 6.9 m semi — two
+            # storeys and a roof — up to three. Take a pitched roof's
+            # rise off first: half the shorter plan side at 30 degrees,
+            # which is what the estimated roof below is drawn at, so
+            # the reading and the model agree with each other.
+            rise = (min(w, d) / 2.0) * math.tan(math.radians(30.0))
+            walls = max(sh, h - rise)
+            storeys = max(1, int(round(walls / sh)))
             storeys_class = CLASS_DERIVED
-            note = (f"storeys derived from a LIDAR height of {h:.1f} m "
-                    f"at {sh:.2f} m per storey — the roof is included in "
-                    f"that height, so this is a reading, not a survey")
+            note = (f"storeys derived from a LIDAR height of {h:.1f} m: "
+                    f"about {rise:.1f} m of roof taken off, then "
+                    f"{sh:.2f} m per storey — a reading, not a survey")
     if storeys is None:
         storeys = 1
         storeys_class = CLASS_ESTIMATED

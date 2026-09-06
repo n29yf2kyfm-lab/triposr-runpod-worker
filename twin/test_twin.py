@@ -610,12 +610,19 @@ class TestModel(unittest.TestCase):
         self.assertEqual(bld.blocks[0].classification, "verified")
 
     def test_storeys_are_derived_from_lidar_when_there_is_no_tag(self):
+        """The LIDAR height is to the RIDGE. 7.8 m is a two-storey house
+        with a roof on it; 5.4 m is a bungalow with a roof on it — this
+        test once called 5.4 m two storeys, which was the old arithmetic
+        dividing the whole height by a storey, roof and all."""
         from twin import model
         bld = model.from_footprint(self._feature(),
-                                   lidar={"height_above_ground_m": 5.4})
+                                   lidar={"height_above_ground_m": 7.8})
         self.assertEqual(bld.blocks[0].storeys, 2)
         self.assertEqual(bld.blocks[0].classification, "derived")
         self.assertIn("LIDAR", bld.blocks[0].note)
+        low = model.from_footprint(self._feature(),
+                                   lidar={"height_above_ground_m": 5.4})
+        self.assertEqual(low.blocks[0].storeys, 1)
 
     def test_with_neither_tag_nor_lidar_the_guess_is_flagged_loudly(self):
         """The one thing this must never do is default quietly to two."""
@@ -2577,6 +2584,33 @@ class TestTrust(unittest.TestCase):
                    json={"kind": "confirm_footprint"})
         self.assertEqual("CONFIRMED",
                          r.get_json()["building"]["measurements"]["trust"]["status"])
+
+
+class TestStoreysFromLidar(unittest.TestCase):
+    """The LIDAR height is to the ridge. A 6.9 m semi is two storeys and
+    a roof, and was being read as three."""
+
+    def _feat(self, w_deg=0.00011, d_deg=0.00012):
+        return {"type": "Feature", "properties": {},
+                "geometry": {"type": "Polygon", "coordinates": [[
+                    [-2.0535, 52.5060], [-2.0535 + w_deg, 52.5060],
+                    [-2.0535 + w_deg, 52.5060 + d_deg],
+                    [-2.0535, 52.5060 + d_deg], [-2.0535, 52.5060]]]}}
+
+    def test_a_six_point_nine_metre_house_is_two_storeys(self):
+        from twin import model as M
+        bld = M.from_footprint(self._feat(),
+                               lidar={"height_above_ground_m": 6.9})
+        self.assertEqual(2, bld.existing().storeys)
+        self.assertEqual(CLASS_DERIVED, bld.existing().classification)
+        self.assertIn("roof taken off", bld.existing().note)
+
+    def test_a_bungalow_stays_one_storey_and_a_tall_house_reads_three(self):
+        from twin import model as M
+        one = M.from_footprint(self._feat(), lidar={"height_above_ground_m": 4.6})
+        three = M.from_footprint(self._feat(), lidar={"height_above_ground_m": 10.2})
+        self.assertEqual(1, one.existing().storeys)
+        self.assertEqual(3, three.existing().storeys)
 
 
 class TestFidelity(unittest.TestCase):
