@@ -149,10 +149,66 @@ const check = (name, cond, detail = '') =>
         Math.abs(sun.noon.altitude_deg - 61) < 4,
         sun.noon.altitude_deg.toFixed(1));
 
+  /* THE GATE. Nothing is priced until a person has vouched for the
+   * storey count and the fitted outline. Before: the panel must say so
+   * and offer the two questions with the current value in them. After
+   * clicking yes to both: CONFIRMED, and the price appears. */
+  await page.waitForFunction(
+    () => /PROVISIONAL/.test(document.getElementById('trust').innerText),
+    null, { timeout: 30000 });
+  const trustBefore = await page.innerText('#trust');
+  check('a fresh twin is PROVISIONAL and asks about storeys and the outline',
+        /storey/.test(trustBefore) && /rectangle|outline/.test(trustBefore),
+        trustBefore.replace(/\s+/g, ' ').slice(0, 140));
+  await page.waitForFunction(
+    () => /PROVISIONAL — not priced/.test(
+      document.getElementById('assess').innerText), null, { timeout: 90000 });
+  const heldText = await page.innerText('#assess');
+  check('and the price and take-off are withheld, not shown with a warning',
+        !/£[\d,]+/.test(heldText) && !/Facing bricks/.test(heldText),
+        heldText.replace(/\s+/g, ' ').slice(0, 100));
+  const shots = await page.evaluate(() => {
+    const s = window.__twinUI.viewer.capture();
+    // the mask must be binary: only black and white pixels
+    const c = document.createElement('canvas');
+    const img = new Image();
+    return new Promise((res) => {
+      img.onload = () => {
+        c.width = img.width; c.height = img.height;
+        const g = c.getContext('2d'); g.drawImage(img, 0, 0);
+        const d = g.getImageData(0, 0, c.width, c.height).data;
+        let white = 0, black = 0, other = 0;
+        for (let i = 0; i < d.length; i += 4 * 7) {
+          if (d[i] > 240) white++; else if (d[i] < 15) black++; else other++;
+        }
+        res({ distinct: new Set([s.colour, s.depth, s.mask]).size,
+              white, black, other, len: s.depth.length });
+      };
+      img.src = s.mask;
+    });
+  });
+  check('the viewer captures colour, depth and mask as three different images',
+        shots.distinct === 3 && shots.len > 5000, JSON.stringify(shots));
+  check('and the mask is binary with the building in white',
+        shots.white > 50 && shots.black > 50 && shots.other < (shots.white + shots.black) * 0.02,
+        JSON.stringify(shots));
+  await page.click('#trust button[data-confirm="storeys"]');
+  await page.waitForFunction(
+    () => !/Is the existing house/.test(document.getElementById('trust').innerText),
+    null, { timeout: 30000 });
+  await page.click('#trust button[data-confirm="footprint"]');
+  await page.waitForFunction(
+    () => /CONFIRMED/.test(document.getElementById('trust').innerText),
+    null, { timeout: 30000 });
+  check('saying yes to both goes through the command path and confirms',
+        /confirmed/.test(await page.innerText('#hist')),
+        (await page.innerText('#hist')).replace(/\s+/g, ' ').slice(0, 100));
+
   // Regulations + quantities came from the real engine (Stage 2).
   await page.waitForFunction(
-    () => document.getElementById('assess').innerText.includes('m²'), null,
-    { timeout: 90000 });
+    () => document.getElementById('assess').innerText.includes('m²') &&
+          !/PROVISIONAL — not priced/.test(document.getElementById('assess').innerText),
+    null, { timeout: 90000 });
   const assess = await page.innerText('#assess');
   check('the regulations gate reports a verdict',
         /MASSING|PASSES|REFUSED/.test(assess), assess.slice(0, 80));
@@ -217,15 +273,17 @@ const check = (name, cond, detail = '') =>
   await page.uncheck('#beforeAfter');
   await page.waitForTimeout(400);
 
-  // Undo takes it back, exactly.
-  await page.click('#undo');
-  await page.waitForFunction(
-    (a) => window.__twinUI.project.building.measurements.footprint_m2 < a,
-    dragged.afterArea, { timeout: 30000 });
-  await page.click('#undo');
-  await page.waitForTimeout(800);
+  // Undo takes it back, exactly — all the way: the two confirmations
+  // are commands too, so they unwind with everything else.
+  for (let i = 0; i < 8 && !(await page.isDisabled('#undo')); i++) {
+    await page.click('#undo');
+    await page.waitForTimeout(500);
+  }
   const undone = await page.evaluate(
     () => window.__twinUI.project.building.measurements);
+  check('undoing everything un-confirms too — a confirmation is a command',
+        undone.trust && undone.trust.status === 'PROVISIONAL',
+        JSON.stringify(undone.trust && undone.trust.status));
   check('undo returns the model to exactly as found',
         Math.abs(undone.footprint_m2 - before.footprint_m2) < 0.01,
         `${undone.footprint_m2} vs ${before.footprint_m2}`);

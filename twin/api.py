@@ -551,23 +551,31 @@ def project_impression(pid):
     bld = pj.current()
     body = request.get_json(silent=True) or {}
 
-    data_url = body.get("massing_png") or ""
-    if not isinstance(data_url, str):
-        data_url = ""
-    if "," in data_url:
-        data_url = data_url.split(",", 1)[1]
-    # 12 MB of PNG is already far more than a canvas grab; past that it
-    # is either a mistake or somebody using the endpoint as an upload.
-    # Measured on the base64 text so an oversize body is refused before
-    # the whole thing is decoded.
-    if len(data_url) * 3 // 4 > 12 * 1024 * 1024:
+    def _png(name):
+        data_url = body.get(name) or ""
+        if not isinstance(data_url, str):
+            return b""
+        if "," in data_url:
+            data_url = data_url.split(",", 1)[1]
+        # 12 MB of PNG is already far more than a canvas grab; past that
+        # it is either a mistake or somebody using the endpoint as an
+        # upload. Measured on the base64 text so an oversize body is
+        # refused before the whole thing is decoded.
+        if len(data_url) * 3 // 4 > 12 * 1024 * 1024:
+            raise _TooBig()
+        try:
+            return base64.b64decode(data_url, validate=True)
+        except Exception:
+            return b""
+
+    try:
+        png = _png("massing_png")
+        depth = _png("depth_png")
+        mask = _png("mask_png")
+    except _TooBig:
         return _out({"available": False, "status": "REFUSED",
                      "reason": "that render is too large to send",
                      "asked": []})
-    try:
-        png = base64.b64decode(data_url, validate=True)
-    except Exception:
-        png = b""
     if not png:
         return _out({"available": False, "status": "DATA NOT AVAILABLE",
                      "reason": "the massing render did not arrive — the "
@@ -588,10 +596,12 @@ def project_impression(pid):
         "place": _place_from(bld.address or ""),
     }
     try:
-        imp = visual.impression(png, facts)
+        imp = visual.impression(png, facts, depth_png=depth or None,
+                                mask_png=mask or None)
     except visual.NotAvailable as e:
         return _out({"available": False, "status": "DATA NOT AVAILABLE",
-                     "reason": str(e), "asked": list(visual.MODELS),
+                     "reason": str(e),
+                     "asked": ["depth-controlnet"] + list(visual.MODELS),
                      "note": "The impression is a selling picture, not a "
                              "survey. Nothing downstream depends on it, "
                              "so the rest of the model is unaffected."})
@@ -599,12 +609,19 @@ def project_impression(pid):
         "available": True,
         "image": "data:image/png;base64," + base64.b64encode(imp.png).decode(),
         "model": imp.model,
+        "backend": imp.backend,
         "classification": imp.classification,
         "licence": imp.licence,
         "attribution": imp.attribution,
         "caption": imp.caption,
+        "fidelity": imp.fidelity,
+        "geometry_locked": imp.backend == "depth",
         "asked": list(imp.notes),
     })
+
+
+class _TooBig(Exception):
+    pass
 
 
 def _place_from(address: str) -> str:

@@ -145,6 +145,19 @@ LICENCES = {
               "so every image leaves providers/visual.py with the "
               "disclaimer burned into the pixels. Free-tier keys have no "
               "image quota at all — billing must be on."),
+    "runpod-own-worker": Licence(
+        key="runpod-own-worker",
+        name="Own worker on RunPod: SDXL (CreativeML Open RAIL++-M) + "
+             "ControlNet-depth (Apache-2.0)",
+        url="https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/"
+            "blob/main/LICENSE.md",
+        commercial=True, attribution="Image generated with SDXL + "
+                                     "ControlNet-depth on our own worker",
+        share_alike=False, redistribute=True, cache=True,
+        notes="Weights run on our own endpoint under the Open RAIL++-M "
+              "use restrictions (no unlawful or deceptive use). The output "
+              "is an impression, never a survey, and leaves with the "
+              "disclaimer burned into the pixels like every other."),
     "overpass-policy": Licence(
         key="overpass-policy", name="Overpass API instance policy (data ODbL)",
         url="https://dev.overpass-api.de/",

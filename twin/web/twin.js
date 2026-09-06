@@ -216,7 +216,68 @@ function syncRoomPanel() {
     `${live.area_m2} m² · ${live.width.toFixed(2)} × ${live.depth.toFixed(2)} m`;
 }
 
+/* THE CONFIRMATION BAR. Two facts drive every number and neither is
+ * measured: the storey count and the fitted rectangle. Until a person
+ * who has seen the house says yes to both, the price and the take-off
+ * are withheld server-side; this is where they say yes — with the value
+ * in front of them and where it came from, so it is a decision and not
+ * a click. Confirming goes through the same command path as every edit,
+ * so it is in the history and undo takes it back. */
+function drawTrust() {
+  const t = (project.building.measurements || {}).trust;
+  const box = $('trust');
+  if (!t) { box.innerHTML = ''; return; }
+  if (t.confirmed) {
+    box.innerHTML = `<div class="verdict v-ok" style="margin-bottom:6px">` +
+      `CONFIRMED — storeys and outline vouched for</div>`;
+    return;
+  }
+  let html = `<div class="verdict v-massing" style="margin-bottom:6px">` +
+    `PROVISIONAL — confirm before pricing</div>`;
+  for (const a of t.asks || []) {
+    if (a.what === 'storeys') {
+      html += `<div class="ask"><div>${esc(a.question)}</div>` +
+        `<div class="dim small">${esc(a.source)}</div>` +
+        `<div class="row" style="margin-top:4px">` +
+        `<button class="primary" data-confirm="storeys" data-n="${a.current}">` +
+        `Yes, ${a.current}</button>` +
+        `<select id="storeysPick">` +
+        [1, 2, 3, 4].map((n) => `<option value="${n}"${n === a.current ? ' selected' : ''}>${n}</option>`).join('') +
+        `</select><button data-confirm="storeys-pick">Set &amp; confirm</button>` +
+        `</div></div>`;
+    } else if (a.what === 'footprint') {
+      const c = a.current || {};
+      html += `<div class="ask"><div>${esc(a.question)}</div>` +
+        `<div class="dim small">${esc(a.source)}` +
+        (a.mismatch_pct != null
+          ? ` · ${a.mismatch_pct}% off the surveyed outline (${a.traced_area_m2} m²)` : '') +
+        `</div><div class="row" style="margin-top:4px">` +
+        `<button class="primary" data-confirm="footprint">Yes, it matches</button>` +
+        `<span class="dim small">or drag the walls on the plan until it does</span>` +
+        `</div></div>`;
+    }
+  }
+  box.innerHTML = html;
+  for (const b of box.querySelectorAll('button[data-confirm]')) {
+    b.onclick = () => {
+      const what = b.dataset.confirm;
+      if (what === 'storeys') {
+        applyCommand({ kind: 'confirm_storeys', storeys: Number(b.dataset.n),
+                       label: `confirmed ${b.dataset.n} storeys` });
+      } else if (what === 'storeys-pick') {
+        const n = Number($('storeysPick').value);
+        applyCommand({ kind: 'confirm_storeys', storeys: n,
+                       label: `confirmed ${n} storeys` });
+      } else {
+        applyCommand({ kind: 'confirm_footprint',
+                       label: 'confirmed the outline' });
+      }
+    };
+  }
+}
+
 function drawSummary() {
+  drawTrust();
   const m = project.building.measurements;
   const rows = [
     ['Footprint', `${m.footprint_m2} m²`],
@@ -304,6 +365,13 @@ async function refreshAssessment() {
     t.ridge_height_m ?? '—'} m</span></div>`;
 
   const q = body.quantities;
+  if ((q && q.status === 'PROVISIONAL') ||
+      (body.estimate && body.estimate.status === 'PROVISIONAL')) {
+    const held = q && q.status === 'PROVISIONAL' ? q : body.estimate;
+    html += `<div class="na">PROVISIONAL — not priced<small>${esc(held.reason)}` +
+      (held.asks || []).map((a) => `<br>· ${esc(a)}`).join('') +
+      `<br>Answer above, under Measurements.</small></div>`;
+  }
   if (q && q.groups) {
     html += '<details open><summary>Bill of quantities</summary>';
     for (const [trade, lines] of Object.entries(q.groups)) {
@@ -480,21 +548,24 @@ export function initTwinUI() {
     const tab = document.querySelector('#tabs button[data-tab="3d"]');
     if (tab && !tab.classList.contains('on')) tab.click();
     if (!viewer) { note.textContent = 'The 3D view is not running.'; return; }
-    viewer.render();
-    let png = '';
+    // Colour for the eye, depth to steer the image model, mask to
+    // score the result against. One camera, one vertex buffer.
+    let shots;
     try {
-      png = viewer.canvas.toDataURL('image/png');
+      shots = viewer.capture();
     } catch (e) {
       note.textContent = 'The 3D canvas could not be read back: ' + e.message;
       return;
     }
+    const png = shots.colour;
     $('imprBtn').disabled = true;
     note.textContent = 'Rendering — usually under a minute, never more than three…';
     status('Rendering the impression…', 0);
     let body;
     try {
       ({ body } = await post(`/api/project/${project.project_id}/impression`,
-                             { massing_png: png }));
+                             { massing_png: png, depth_png: shots.depth,
+                               mask_png: shots.mask }));
     } catch (e) {
       // fetch itself threw (server down, connection dropped): say so
       // rather than leaving the panel stuck on "Rendering".
@@ -513,8 +584,16 @@ export function initTwinUI() {
     status('');
     $('imprImg').src = body.image;
     $('imprWrap').hidden = false;
+    const f = body.fidelity || {};
     note.innerHTML = `<span style="color:#e2a33a">${esc(body.caption)}</span>`
-      + `<br>${esc(body.attribution)} · ${esc(body.model)}`;
+      + `<br>${esc(body.attribution)} · ${esc(body.model)}`
+      + `<br>${body.geometry_locked
+          ? 'Geometry locked by the depth map.'
+          : 'Free-form model, asked to keep the geometry.'}`
+      + (f.recall != null
+          ? ` Kept ${Math.round(f.recall * 100)}% of the model's edges ` +
+            `(needs ${Math.round(f.threshold * 100)}%).`
+          : ' Fidelity not scored: no mask was sent.');
   };
 
   $('beforeAfter').onchange = (e) => {

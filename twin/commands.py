@@ -147,6 +147,13 @@ class MoveWall(Command):
         by = float(p["by_m"])          # positive = outward
         if edge not in ("front", "rear", "left", "right"):
             raise CommandError("edge must be front, rear, left or right")
+        # MOVING A WALL OF THE SURVEYED BLOCK CHANGES THE OUTLINE, so a
+        # confirmation given for the old outline no longer holds. Set it
+        # here, before the geometry: if the drag is refused further down
+        # the whole trial copy is discarded, so nothing leaks.
+        if blk is bld.existing():
+            bld.confirmed = dict(bld.confirmed or {})
+            bld.confirmed["footprint"] = False
 
         # THE ROOMS ON THAT WALL MOVE WITH IT. Rooms are absolute
         # rectangles; resizing only the block left the kitchen hanging
@@ -238,6 +245,58 @@ class SetStoreys(Command):
             raise CommandError("storeys must be between 1 and 6")
         blk.storeys = n
         blk.classification = CLASS_USER
+        # Setting the storeys of the SURVEYED block is a person stating a
+        # fact about the house they can see; that is a confirmation.
+        if blk is bld.existing():
+            bld.confirmed = dict(bld.confirmed or {})
+            bld.confirmed["storeys"] = True
+        return bld
+
+
+class ConfirmStoreys(Command):
+    """Someone who has seen the house says how many storeys it has.
+
+    The number is required, not defaulted: "confirm" with no number
+    would let a person rubber-stamp a guess without reading it, which
+    is the exact failure the gate exists to stop.
+    """
+    kind = "confirm_storeys"
+
+    def apply(self, bld):
+        ex = bld.existing()
+        if ex is None:
+            raise CommandError("there is no surveyed building to confirm")
+        try:
+            n = int(self.params["storeys"])
+        except (KeyError, TypeError, ValueError):
+            raise CommandError(
+                "say how many storeys the house has — confirming without "
+                "a number is not a confirmation")
+        if not 1 <= n <= 6:
+            raise CommandError("storeys must be between 1 and 6")
+        if n != ex.storeys:
+            ex.storeys = n
+            ex.classification = CLASS_USER
+            ex.note = f"storeys confirmed as {n} by the user"
+        bld.confirmed = dict(bld.confirmed or {})
+        bld.confirmed["storeys"] = True
+        return bld
+
+
+class ConfirmFootprint(Command):
+    """Someone who has seen the house says the fitted rectangle matches.
+
+    If it does not, the answer is not to confirm but to drag the walls
+    until it does — and MoveWall un-confirms as it goes, so the last
+    thing that happens is always a person looking at the final shape.
+    """
+    kind = "confirm_footprint"
+
+    def apply(self, bld):
+        if bld.existing() is None:
+            raise CommandError("there is no surveyed building to confirm")
+        bld.confirmed = dict(bld.confirmed or {})
+        bld.confirmed["footprint"] = True
         return bld
 
 
@@ -632,7 +691,8 @@ class RemoveBlock(Command):
 REGISTRY = {c.kind: c for c in (Extend, MoveWall, SetStoreys, SetRoof,
                                 AddOpening, RemoveBlock, AutoLayout,
                                 AddRoom, MovePartition, SetRoom,
-                                RemoveRoom, MergeRooms)}
+                                RemoveRoom, MergeRooms,
+                                ConfirmStoreys, ConfirmFootprint)}
 
 
 def make(command_kind, **params):

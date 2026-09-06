@@ -1307,6 +1307,15 @@ def sheet_set(bld, paper="A3", date=None, scale=None, status=None,
     building gets built with a wall nobody looked at.
     """
     sheets, problems = [], []
+    # THE TITLE BLOCK SAYS WHETHER A PERSON HAS VOUCHED FOR THE MODEL.
+    # Every sheet is preliminary; a sheet drawn from an unconfirmed
+    # storey count and an unconfirmed outline is one step less than
+    # that, and the paper has to say so — a drawing outlives the screen
+    # it was made on.
+    if status is None:
+        status = ("PRELIMINARY — NOT FOR CONSTRUCTION"
+                  if bld.trust()["confirmed"] else
+                  "PROVISIONAL — UNCONFIRMED")
     if scale is None:
         scale = common_scale(bld, paper=paper, elevations=elevations)
         if scale is None:

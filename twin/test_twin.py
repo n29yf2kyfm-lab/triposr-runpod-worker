@@ -818,6 +818,11 @@ class TestDesignBridge(unittest.TestCase):
         pj = commands.Project(self._bld())
         pj.apply(commands.make("extend", block_id="existing", edge="rear",
                                depth_m=4.0, storeys=1))
+        # The bill is withheld until a person has vouched for the storeys
+        # and the outline; this test is about the engine, so vouch.
+        pj.apply(commands.make("confirm_storeys",
+                               storeys=pj.current().existing().storeys))
+        pj.apply(commands.make("confirm_footprint"))
         a = design.assess(pj.current())
         self.assertTrue(a["available"])
         self.assertIn("compliance", a)
@@ -1772,11 +1777,22 @@ class TestSheets(unittest.TestCase):
         self.assertIn("Geometry source not recorded",
                       " ".join(self._texts(sh)))
 
-    def test_every_sheet_says_it_is_preliminary_until_told_otherwise(self):
-        from twin import sheets
+    def test_every_sheet_says_it_is_provisional_until_someone_vouches(self):
+        """A fresh twin has an unconfirmed storey count and outline, and
+        the paper says so in full — not shortened to an ellipsis, which
+        is how 'PROVISIONAL — STOREYS AND OUTLINE …' once printed."""
+        from twin import sheets, commands as C
         for sh in sheets.sheet_set(self._bld())["sheets"]:
-            self.assertIn("PRELIMINARY — NOT FOR CONSTRUCTION",
+            self.assertIn("PROVISIONAL — UNCONFIRMED",
                           " ".join(self._texts(sh)), sh.title)
+        pj = C.Project(self._bld())
+        pj.apply(C.make("confirm_storeys",
+                        storeys=pj.current().existing().storeys))
+        pj.apply(C.make("confirm_footprint"))
+        for sh in sheets.sheet_set(pj.current())["sheets"]:
+            text = " ".join(self._texts(sh))
+            self.assertIn("PRELIMINARY — NOT FOR CONSTRUCTION", text, sh.title)
+            self.assertNotIn("PROVISIONAL", text)
 
     def test_dimensions_are_figured_in_millimetres(self):
         from twin import sheets
@@ -2432,6 +2448,302 @@ class TestImpression(unittest.TestCase):
     def test_stamp_refuses_bytes_that_are_not_an_image(self):
         with self.assertRaises(self.v.NotAvailable):
             self.v.stamp(b"this is not a png")
+
+
+class TestTrust(unittest.TestCase):
+    """No number is trusted until a person has vouched for the two facts
+    it hangs off: the storey count and the fitted rectangle."""
+
+    def _bld(self):
+        from twin import model as M
+        feat = {"type": "Feature", "properties": {"levels": "2"},
+                "geometry": {"type": "Polygon", "coordinates": [[
+                    [-1.8572, 52.5890], [-1.8570, 52.5890],
+                    [-1.8570, 52.5891], [-1.8572, 52.5891],
+                    [-1.8572, 52.5890]]]}}
+        return M.from_footprint(feat)
+
+    def test_a_fresh_twin_is_provisional_and_asks_two_questions(self):
+        t = self._bld().trust()
+        self.assertFalse(t["confirmed"])
+        self.assertEqual("PROVISIONAL", t["status"])
+        self.assertEqual(["storeys", "footprint"],
+                         [a["what"] for a in t["asks"]])
+        s = t["asks"][0]
+        self.assertEqual(2, s["current"])
+        self.assertIn("OpenStreetMap", s["source"])
+        self.assertIn("2 storeys", s["question"])
+        f = t["asks"][1]
+        self.assertIn("width_m", f["current"])
+        self.assertIsNotNone(f["mismatch_pct"])
+
+    def test_the_price_and_take_off_are_withheld_until_confirmed(self):
+        from twin import design, commands as C
+        bld = self._bld()
+        out = design.assess(bld)
+        self.assertEqual("PROVISIONAL", out["estimate"]["status"])
+        self.assertEqual("PROVISIONAL", out["quantities"]["status"])
+        self.assertFalse(out["estimate"]["available"])
+        self.assertEqual(2, len(out["estimate"]["asks"]))
+        # areas stay: they are what the person confirms against
+        self.assertIsNotNone(out["totals"]["floor_area_m2"])
+        pj = C.Project(bld)
+        pj.apply(C.make("confirm_storeys", storeys=2))
+        pj.apply(C.make("confirm_footprint"))
+        out = design.assess(pj.current())
+        self.assertTrue(out["trust"]["confirmed"])
+        self.assertNotEqual("PROVISIONAL", out["estimate"].get("status"))
+        self.assertIn("groups", out["quantities"])
+
+    def test_confirming_without_a_number_is_refused(self):
+        from twin import commands as C
+        pj = C.Project(self._bld())
+        with self.assertRaises(C.CommandError):
+            pj.apply(C.make("confirm_storeys"))
+        self.assertFalse(pj.current().trust()["storeys"])
+
+    def test_confirming_a_different_number_changes_the_model(self):
+        from twin import commands as C
+        pj = C.Project(self._bld())
+        pj.apply(C.make("confirm_storeys", storeys=3))
+        ex = pj.current().existing()
+        self.assertEqual(3, ex.storeys)
+        from twin.provenance import CLASS_USER
+        self.assertEqual(CLASS_USER, ex.classification)
+        self.assertTrue(pj.current().trust()["storeys"])
+
+    def test_moving_a_wall_of_the_surveyed_block_unconfirms_the_outline(self):
+        from twin import commands as C
+        pj = C.Project(self._bld())
+        pj.apply(C.make("confirm_footprint"))
+        self.assertTrue(pj.current().trust()["footprint"])
+        pj.apply(C.make("move_wall", block_id="existing", edge="rear", by_m=1.0))
+        self.assertFalse(pj.current().trust()["footprint"])
+        # an extension is a NEW block; the surveyed outline is untouched
+        pj.apply(C.make("confirm_footprint"))
+        pj.apply(C.make("extend", edge="rear", depth_m=3.0, storeys=1))
+        self.assertTrue(pj.current().trust()["footprint"])
+
+    def test_a_refused_drag_does_not_unconfirm(self):
+        from twin import commands as C
+        pj = C.Project(self._bld())
+        pj.apply(C.make("confirm_footprint"))
+        with self.assertRaises(C.CommandError):
+            pj.apply(C.make("move_wall", block_id="existing", edge="rear",
+                            by_m=-500.0))
+        self.assertTrue(pj.current().trust()["footprint"])
+
+    def test_undo_takes_a_confirmation_back(self):
+        from twin import commands as C
+        pj = C.Project(self._bld())
+        pj.apply(C.make("confirm_storeys", storeys=2))
+        self.assertTrue(pj.current().trust()["storeys"])
+        pj.undo()
+        self.assertFalse(pj.current().trust()["storeys"])
+
+    def test_set_storeys_on_the_surveyed_block_counts_as_confirming(self):
+        from twin import commands as C
+        pj = C.Project(self._bld())
+        pj.apply(C.make("set_storeys", block_id="existing", storeys=2))
+        self.assertTrue(pj.current().trust()["storeys"])
+
+    def test_the_drawings_say_provisional_until_confirmed(self):
+        from twin import sheets, commands as C
+        bld = self._bld()
+        built = sheets.sheet_set(bld, paper="A2")
+        self.assertTrue(all("PROVISIONAL" in s.status for s in built["sheets"]),
+                        [s.status for s in built["sheets"]])
+        pj = C.Project(bld)
+        pj.apply(C.make("confirm_storeys", storeys=2))
+        pj.apply(C.make("confirm_footprint"))
+        built = sheets.sheet_set(pj.current(), paper="A2")
+        self.assertTrue(all("PRELIMINARY" in s.status and "PROVISIONAL"
+                            not in s.status for s in built["sheets"]))
+
+    def test_trust_travels_in_the_api_state(self):
+        from twin import api as api_mod
+        c = api_mod.app.test_client()
+        r = c.post("/api/project", json={"lat": 52.589059, "lon": -1.857172})
+        if not r.get_json().get("available"):
+            self.skipTest("no building data offline")
+        d = r.get_json()
+        self.assertEqual("PROVISIONAL",
+                         d["building"]["measurements"]["trust"]["status"])
+        pid = d["project_id"]
+        r = c.post(f"/api/project/{pid}/command",
+                   json={"kind": "confirm_storeys", "storeys": 2})
+        self.assertEqual(200, r.status_code)
+        r = c.post(f"/api/project/{pid}/command",
+                   json={"kind": "confirm_footprint"})
+        self.assertEqual("CONFIRMED",
+                         r.get_json()["building"]["measurements"]["trust"]["status"])
+
+
+class TestFidelity(unittest.TestCase):
+    """The picture must keep the geometry it was given, and the check
+    must be able to tell when it did not."""
+
+    def _scene(self, dx=0, dy=0, extra=False):
+        from PIL import Image, ImageDraw
+        im = Image.new("L", (400, 300), 40)
+        dr = ImageDraw.Draw(im)
+        # a house: wall box + gable, shifted by (dx, dy)
+        dr.rectangle((100 + dx, 140 + dy, 300 + dx, 260 + dy), fill=160, outline=230)
+        dr.polygon([(100 + dx, 140 + dy), (200 + dx, 70 + dy), (300 + dx, 140 + dy)],
+                   fill=120, outline=230)
+        if extra:                          # windows and a door: allowed
+            for x in (130, 190, 250):
+                dr.rectangle((x, 170, x + 30, 200), fill=60, outline=200)
+            dr.rectangle((185, 215, 215, 260), fill=70, outline=200)
+        buf = io.BytesIO(); im.save(buf, "PNG"); return buf.getvalue()
+
+    def _mask(self):
+        from PIL import Image, ImageDraw
+        im = Image.new("L", (400, 300), 0)
+        dr = ImageDraw.Draw(im)
+        dr.rectangle((100, 140, 300, 260), fill=255)
+        dr.polygon([(100, 140), (200, 70), (300, 140)], fill=255)
+        buf = io.BytesIO(); im.save(buf, "PNG"); return buf.getvalue()
+
+    def test_the_same_geometry_with_windows_added_passes(self):
+        from twin import fidelity
+        rep = fidelity.edge_recall(self._scene(), self._scene(extra=True),
+                                   self._mask())
+        self.assertTrue(rep["passed"], rep)
+        self.assertGreater(rep["recall"], 0.95)
+
+    def test_a_moved_house_is_refused(self):
+        from twin import fidelity
+        rep = fidelity.edge_recall(self._scene(), self._scene(dx=25, dy=10),
+                                   self._mask())
+        self.assertFalse(rep["passed"], rep)
+        self.assertIn("moved", rep["reason"])
+
+    def test_a_blank_picture_is_refused(self):
+        from twin import fidelity
+        from PIL import Image
+        buf = io.BytesIO(); Image.new("L", (400, 300), 128).save(buf, "PNG")
+        rep = fidelity.edge_recall(self._scene(), buf.getvalue(), self._mask())
+        self.assertFalse(rep["passed"])
+
+    def test_a_blank_reference_is_refused_not_passed(self):
+        from twin import fidelity
+        from PIL import Image
+        buf = io.BytesIO(); Image.new("L", (400, 300), 128).save(buf, "PNG")
+        rep = fidelity.edge_recall(buf.getvalue(), self._scene(), self._mask())
+        self.assertFalse(rep["passed"])
+        self.assertIn("blank", rep["reason"])
+
+    def test_candidate_size_does_not_matter(self):
+        from twin import fidelity
+        from PIL import Image
+        big = Image.open(io.BytesIO(self._scene(extra=True))).resize((1200, 900))
+        buf = io.BytesIO(); big.save(buf, "PNG")
+        rep = fidelity.edge_recall(self._scene(), buf.getvalue(), self._mask())
+        self.assertTrue(rep["passed"], rep)
+
+
+class TestVisualBackends(unittest.TestCase):
+    """The geometry-locked path comes first, the vehicle project is never
+    touched, and a drifted picture is refused whoever made it."""
+
+    def setUp(self):
+        from twin.providers import visual
+        self.v = visual
+        self._env = {k: os.environ.pop(k, None) for k in
+                     ("GEMINI_API_KEY", "RUNPOD_API_KEY",
+                      "RUNPOD_DEPTH_ENDPOINT_ID")}
+        self._post, self._rp = visual._post, visual._runpod_depth
+
+    def tearDown(self):
+        for k, v in self._env.items():
+            if v is None:
+                os.environ.pop(k, None)
+            else:
+                os.environ[k] = v
+        self.v._post, self.v._runpod_depth = self._post, self._rp
+
+    def _scene(self, extra=False):
+        return TestFidelity._scene(self, extra=extra)
+
+    def test_the_vehicle_endpoints_are_refused_by_name(self):
+        os.environ["RUNPOD_API_KEY"] = "k"
+        for ep in ("nd0fagqlr5z2ur", "ng8oiz4p2l0xa0"):
+            os.environ["RUNPOD_DEPTH_ENDPOINT_ID"] = ep
+            ok, why = self.v.depth_backend_configured()
+            self.assertFalse(ok)
+            self.assertIn("vehicle", why)
+
+    def test_the_depth_backend_is_tried_before_gemini(self):
+        os.environ.update({"RUNPOD_API_KEY": "k",
+                           "RUNPOD_DEPTH_ENDPOINT_ID": "abc123",
+                           "GEMINI_API_KEY": "g"})
+        order = []
+        good = self._scene(extra=True)
+        self.v._runpod_depth = lambda *a, **k: (order.append("depth") or (good, "sdxl"))
+        self.v._post = lambda *a, **k: order.append("gemini") or good
+        imp = self.v.impression(self._scene(), {}, depth_png=b"d",
+                                mask_png=TestFidelity._mask(self))
+        self.assertEqual(["depth"], order)
+        self.assertEqual("depth", imp.backend)
+        self.assertEqual("runpod-own-worker", imp.licence)
+        self.assertTrue(imp.fidelity["passed"])
+
+    def test_a_drifted_picture_is_refused_whoever_made_it(self):
+        os.environ.update({"RUNPOD_API_KEY": "k",
+                           "RUNPOD_DEPTH_ENDPOINT_ID": "abc123",
+                           "GEMINI_API_KEY": "g"})
+        moved = TestFidelity._scene(self, dx=30)
+        self.v._runpod_depth = lambda *a, **k: (moved, "sdxl")
+        self.v._post = lambda *a, **k: moved
+        with self.assertRaises(self.v.NotAvailable) as cm:
+            self.v.impression(self._scene(), {}, depth_png=b"d",
+                              mask_png=TestFidelity._mask(self))
+        self.assertIn("kept only", str(cm.exception))
+
+    def test_gemini_is_given_the_depth_map_too(self):
+        os.environ["GEMINI_API_KEY"] = "g"
+        seen = {}
+        def post(model, prompt, png, key, timeout=None, depth_png=None):
+            seen["depth"] = depth_png
+            return self._scene(extra=True)
+        self.v._post = post
+        self.v.impression(self._scene(), {}, depth_png=b"DEPTH",
+                          mask_png=TestFidelity._mask(self))
+        self.assertEqual(b"DEPTH", seen["depth"])
+
+    def test_without_a_mask_the_picture_is_still_returned_but_unscored(self):
+        os.environ["GEMINI_API_KEY"] = "g"
+        self.v._post = lambda *a, **k: self._scene(extra=True)
+        imp = self.v.impression(self._scene(), {})
+        self.assertIsNotNone(imp.png)
+        # scored against the whole reference, since no mask limited it
+        self.assertIsNotNone(imp.fidelity)
+
+    def test_the_worker_refuses_to_render_without_a_depth_map(self):
+        from twin.visual_worker import handler
+        out = handler.handler({"input": {"prompt": "a house"}})
+        self.assertIn("error", out)
+        self.assertIn("depth", out["error"])
+
+    def test_the_worker_pipeline_call_is_shaped_right(self):
+        from twin.visual_worker import handler
+        import base64 as b64
+        calls = {}
+        class FakePipe:
+            def __call__(self, **kw):
+                calls.update(kw)
+                from PIL import Image
+                class R: images = [Image.new("RGB", kw["control_image"].size, (1, 2, 3))]
+                return R()
+        depth = b64.b64encode(self._scene()).decode()
+        out = handler.render({"depth_png_b64": depth, "prompt": "brick house",
+                              "control_strength": 0.7}, pipe=FakePipe())
+        self.assertIn("image_png_b64", out)
+        self.assertEqual(0.7, calls["controlnet_conditioning_scale"])
+        self.assertEqual("brick house", calls["prompt"])
+        w, h = calls["control_image"].size
+        self.assertEqual(0, w % 64); self.assertEqual(0, h % 64)
 
 
 # ------------------------------------------------------------------ live

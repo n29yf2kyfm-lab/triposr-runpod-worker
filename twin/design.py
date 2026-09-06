@@ -181,6 +181,23 @@ def assess(bld, *, region=None, vat="standard", calibrate_per_m2=None):
     out["warnings"] = model.get("warnings", [])[:8]
     out["classification"] = CLASS_DERIVED
     out["provenance"] = prov.as_dict()
+
+    # THE GATE. Every quantity above is a multiple of two facts nobody
+    # has measured: the storey count and the fitted rectangle. Until a
+    # person who has seen the house confirms both, the take-off and the
+    # price are WITHHELD — not shown greyed, not shown with a warning,
+    # withheld — because a number on screen gets read out on the phone.
+    # The regs verdict stays: it is about the design's rules, and it
+    # carries its own note. The areas stay: they are what the person is
+    # being asked to confirm against.
+    trust = bld.trust()
+    out["trust"] = trust
+    if not trust["confirmed"]:
+        held = {"available": False, "status": "PROVISIONAL",
+                "reason": trust["reason"],
+                "asks": [a["question"] for a in trust["asks"]]}
+        out["quantities"] = dict(held)
+        out["estimate"] = dict(held)
     return out
 
 

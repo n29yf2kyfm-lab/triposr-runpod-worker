@@ -233,6 +233,78 @@ class Building:
     address: Optional[str] = None
     ground_m_aod: Optional[float] = None
     notes: List[str] = field(default_factory=list)
+    # WHAT A PERSON HAS VOUCHED FOR. Two facts drive every quantity in
+    # this model and neither is truly measured: the storey count (an OSM
+    # tag, a LIDAR reading, or a guess) and the fitted rectangle (a best
+    # fit to a traced outline that may not be rectangular). Until someone
+    # who has seen the house confirms both, no number that depends on
+    # them is trusted — the price and the take-off are withheld, and the
+    # drawings say PROVISIONAL in the title block.
+    confirmed: dict = field(default_factory=lambda: {"storeys": False,
+                                                     "footprint": False})
+
+    # -- trust -------------------------------------------------------
+    def trust(self):
+        """Is this model confirmed enough to quote from?
+
+        Returns what is confirmed, what is not, and for each unconfirmed
+        fact the exact question to put to the person — with the value
+        the model is currently using and where it came from, so they
+        can say yes or correct it rather than guess what is being asked.
+        """
+        ex = self.existing()
+        c = self.confirmed or {}
+        asks = []
+        if not c.get("storeys"):
+            if ex is None:
+                src = "there is no surveyed block to confirm"
+            elif ex.classification == CLASS_VERIFIED:
+                src = "from the OpenStreetMap building:levels tag"
+            elif ex.classification == CLASS_DERIVED:
+                src = "read from LIDAR height, roof included"
+            elif ex.classification == CLASS_USER:
+                src = "set by you, not yet confirmed"
+            else:
+                src = "ASSUMED — nothing published and no LIDAR height"
+            asks.append({"what": "storeys",
+                         "current": ex.storeys if ex else None,
+                         "source": src,
+                         "question": (f"Is the existing house "
+                                      f"{ex.storeys} storey"
+                                      f"{'s' if ex and ex.storeys != 1 else ''}?"
+                                      if ex else "How many storeys?")})
+        if not c.get("footprint"):
+            traced = (polygon_area_m(self.traced_ring)
+                      if self.traced_ring else None)
+            rect = ex.area() if ex else None
+            off = (abs(traced - rect) / rect * 100
+                   if traced and rect else None)
+            asks.append({"what": "footprint",
+                         "current": ({"width_m": ex.width, "depth_m": ex.depth,
+                                      "area_m2": round(rect, 2)}
+                                     if ex else None),
+                         "traced_area_m2": (round(traced, 2)
+                                            if traced else None),
+                         "mismatch_pct": (round(off, 1)
+                                          if off is not None else None),
+                         "source": ("minimum-area rectangle fitted to the "
+                                    "surveyed outline"),
+                         "question": (f"Does a {ex.width:.2f} m by "
+                                      f"{ex.depth:.2f} m rectangle match the "
+                                      f"house?" if ex else
+                                      "Does the outline match the house?")})
+        ok = not asks
+        return {
+            "confirmed": ok,
+            "storeys": bool(c.get("storeys")),
+            "footprint": bool(c.get("footprint")),
+            "status": "CONFIRMED" if ok else "PROVISIONAL",
+            "reason": ("" if ok else
+                       "storeys and the fitted outline have not been "
+                       "confirmed by someone who has seen the house — "
+                       "areas are shown, but nothing is priced from them"),
+            "asks": asks,
+        }
 
     # -- frames ------------------------------------------------------
     def frame(self):
@@ -330,6 +402,7 @@ class Building:
                         "storeys": b.storeys,
                         "classification": b.classification}
                        for b in self.blocks],
+            "trust": self.trust(),
         }
 
     def geojson(self):
@@ -371,6 +444,7 @@ class Building:
             "measurements": self.measurements(),
             "geojson": self.geojson(),
             "notes": self.notes,
+            "confirmed": dict(self.confirmed or {}),
         }
 
 

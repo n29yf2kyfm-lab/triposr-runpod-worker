@@ -24,15 +24,19 @@ attribute vec3 aColor;
 attribute vec3 aUV;          /* s, t, and 1.0 where the vertex is mapped */
 uniform mat4 uMVP;
 uniform mat4 uModel;
+uniform mat4 uView;
 varying vec3 vNormal;
 varying vec3 vColor;
 varying vec3 vWorld;
 varying vec3 vUV;
+varying float vViewZ;        /* distance along the camera axis, metres */
 void main() {
   vNormal = mat3(uModel) * aNormal;
   vColor = aColor;
   vUV = aUV;
-  vWorld = (uModel * vec4(aPos, 1.0)).xyz;
+  vec4 world = uModel * vec4(aPos, 1.0);
+  vWorld = world.xyz;
+  vViewZ = -(uView * world).z;
   gl_Position = uMVP * vec4(aPos, 1.0);
 }`;
 
@@ -42,10 +46,30 @@ varying vec3 vNormal;
 varying vec3 vColor;
 varying vec3 vWorld;
 varying vec3 vUV;
+varying float vViewZ;
 uniform vec3 uSun;
 uniform float uOpacity;
 uniform sampler2D uGround;
+uniform int uMode;           /* 0 lit, 1 depth, 2 building mask */
+uniform float uNear;
+uniform float uFar;
 void main() {
+  /* THE TWO PASSES THAT TIE A PICTURE TO THE SURVEY. Depth is what a
+     depth-conditioned image model is steered by (white near, black
+     far, the convention ControlNet-depth expects); the mask is what
+     the fidelity check scores against, so the ground never counts.
+     Both come from the same vertices as the lit view, so they cannot
+     disagree with it. */
+  if (uMode == 1) {
+    float t = clamp((vViewZ - uNear) / (uFar - uNear), 0.0, 1.0);
+    gl_FragColor = vec4(vec3(1.0 - t), 1.0);
+    return;
+  }
+  if (uMode == 2) {
+    float b = vUV.z < 0.5 ? 1.0 : 0.0;   /* 0 = building; 1 image; 2 env */
+    gl_FragColor = vec4(vec3(b), 1.0);
+    return;
+  }
   vec3 n = normalize(vNormal);
   float d = max(dot(n, normalize(uSun)), 0.0);
   /* Sky fill from above, warm sun, and a touch of ambient so a north
@@ -128,20 +152,25 @@ class MeshBuilder {
    * drawn from the ground image instead of its own colour. The third
    * component is the flag the shader branches on, so an untextured
    * mesh needs no second draw call and no second program. */
-  tri(a, b, c, colour, uvs) {
+  /* `flag` is the third UV component for untextured geometry: 0 for the
+   * building itself, 2 for the environment (ground plane, traced
+   * outline). The mask pass keys on it, so what counts as "the house"
+   * in a fidelity check is decided here, at the vertex, not guessed
+   * later from colours. */
+  tri(a, b, c, colour, uvs, flag = 0) {
     const n = norm(cross(sub(b, a), sub(c, a)));
     [a, b, c].forEach((p, i) => {
       this.pos.push(p[0], p[1], p[2]);
       this.nrm.push(n[0], n[1], n[2]);
       this.col.push(colour[0], colour[1], colour[2]);
       if (uvs) this.uv.push(uvs[i][0], uvs[i][1], 1);
-      else this.uv.push(0, 0, 0);
+      else this.uv.push(0, 0, flag);
     });
   }
 
-  quad(a, b, c, d, colour, uvs) {
-    this.tri(a, b, c, colour, uvs && [uvs[0], uvs[1], uvs[2]]);
-    this.tri(a, c, d, colour, uvs && [uvs[0], uvs[2], uvs[3]]);
+  quad(a, b, c, d, colour, uvs, flag = 0) {
+    this.tri(a, b, c, colour, uvs && [uvs[0], uvs[1], uvs[2]], flag);
+    this.tri(a, c, d, colour, uvs && [uvs[0], uvs[2], uvs[3]], flag);
   }
 
   /* A block: walls from base to eaves, plus its roof. Plan coordinates
@@ -209,7 +238,8 @@ class MeshBuilder {
 
   ground(x0, y0, x1, y1, colour) {
     const P = (x, y, z) => [x, z, -y];
-    this.quad(P(x0, y0, 0), P(x1, y0, 0), P(x1, y1, 0), P(x0, y1, 0), colour);
+    this.quad(P(x0, y0, 0), P(x1, y0, 0), P(x1, y1, 0), P(x0, y1, 0), colour,
+              null, 2);
   }
 
   /* The imagery, draped where it actually belongs. The corners arrive
@@ -259,7 +289,12 @@ export class Viewer3D {
       uSun: gl.getUniformLocation(p, 'uSun'),
       uOpacity: gl.getUniformLocation(p, 'uOpacity'),
       uGround: gl.getUniformLocation(p, 'uGround'),
+      uView: gl.getUniformLocation(p, 'uView'),
+      uMode: gl.getUniformLocation(p, 'uMode'),
+      uNear: gl.getUniformLocation(p, 'uNear'),
+      uFar: gl.getUniformLocation(p, 'uFar'),
     };
+    this.mode = 0;              // 0 lit, 1 depth, 2 mask — see capture()
     this.buf = { pos: gl.createBuffer(), nrm: gl.createBuffer(),
                  col: gl.createBuffer(), uv: gl.createBuffer() };
     this.groundTex = null;      // GL texture, once imagery has arrived
@@ -314,7 +349,8 @@ export class Viewer3D {
       const P = (x, y, z) => [x, z, -y];
       for (let i = 1; i < r.length - 1; i++) {
         mb.tri(P(r[0][0], r[0][1], 0.02), P(r[i][0], r[i][1], 0.02),
-               P(r[i + 1][0], r[i + 1][1], 0.02), [0.42, 0.40, 0.30]);
+               P(r[i + 1][0], r[i + 1][1], 0.02), [0.42, 0.40, 0.30],
+               null, 2);
       }
     }
     for (const s of solids) {
@@ -425,7 +461,9 @@ export class Viewer3D {
     const gl = this.gl;
     const w = this.canvas.width, h = this.canvas.height;
     gl.viewport(0, 0, w, h);
-    gl.clearColor(0.055, 0.067, 0.086, 1);
+    // Depth and mask passes clear to black: "far" and "not building".
+    if (this.mode) gl.clearColor(0, 0, 0, 1);
+    else gl.clearColor(0.055, 0.067, 0.086, 1);
     gl.enable(gl.DEPTH_TEST);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     if (!this.vertices) return;
@@ -440,8 +478,18 @@ export class Viewer3D {
     gl.useProgram(this.prog);
     gl.uniformMatrix4fv(this.loc.uMVP, false, M4.mul(proj, view));
     gl.uniformMatrix4fv(this.loc.uModel, false, model);
+    gl.uniformMatrix4fv(this.loc.uView, false, view);
     gl.uniform3fv(this.loc.uSun, new Float32Array(this.sun));
     gl.uniform1f(this.loc.uOpacity, 1.0);
+    gl.uniform1i(this.loc.uMode, this.mode | 0);
+    // Depth range is centred on the MODEL, sized by its extent, so the
+    // house spans most of the grey scale — the near corner white, the
+    // far eaves dark — instead of sitting in one mid tone with the
+    // ground taking the range. A depth-conditioned image model reads
+    // geometry from that contrast; a flat grey house gives it nothing.
+    const ext = Math.max(this.extent || 10, 4);
+    gl.uniform1f(this.loc.uNear, Math.max(0.1, this.dist - ext * 1.1));
+    gl.uniform1f(this.loc.uFar, this.dist + ext * 1.6);
     const attach = (buf, loc, size) => {
       gl.bindBuffer(gl.ARRAY_BUFFER, buf);
       gl.enableVertexAttribArray(loc);
@@ -457,6 +505,26 @@ export class Viewer3D {
       gl.uniform1i(this.loc.uGround, 0);
     }
     gl.drawArrays(gl.TRIANGLES, 0, this.vertices);
+  }
+
+  /* The three images an impression is made from — and checked against.
+   * colour: what the user sees; depth: what steers the image model;
+   * mask: where the building is, for the fidelity score. All three from
+   * one camera and one vertex buffer, so they agree by construction. */
+  capture() {
+    const out = {};
+    const was = this.mode;
+    try {
+      for (const [name, mode] of [['colour', 0], ['depth', 1], ['mask', 2]]) {
+        this.mode = mode;
+        this.render();
+        out[name] = this.canvas.toDataURL('image/png');
+      }
+    } finally {
+      this.mode = was;
+      this.render();
+    }
+    return out;
   }
 
   /* Sun direction for a real date, time and latitude — Stage 3 groundwork
