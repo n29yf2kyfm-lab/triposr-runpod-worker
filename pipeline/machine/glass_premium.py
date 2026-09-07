@@ -146,12 +146,30 @@ def main():
         print(f"left alone (lamps/indicators keep their colour): {lamps}")
     if painted:
         print(f"clearcoat added to: {painted}")
-    # verify the written file rather than trusting intent
+    # verify the written file rather than trusting intent.
+    #
+    # COUNT EQUALITY IS THE WRONG TEST, and it failed on a good car
+    # (volkswagen-golf-2021-w12-v1, 2026-09-07): `red_glas` is a TAIL LAMP
+    # that already shipped KHR_materials_transmission 1.0. This tool
+    # correctly leaves lamps alone, so the written file legitimately holds
+    # MORE transmission materials than this run touched, and the old
+    # `len(got) == len(touched)` aborted after writing a perfectly good
+    # file. Verify the materials THIS RUN CLAIMS, at the values it claims —
+    # a check that fires on something it never promised is not a check.
     j2, _ = read(a.out)
-    got = [m.get("name") for m in j2.get("materials", [])
-           if "KHR_materials_transmission" in (m.get("extensions") or {})]
-    assert len(got) == len(touched), "transmission missing from the written file"
-    print(f"verified in {a.out}: transmission present on {got}")
+    by_name = {m.get("name"): m for m in j2.get("materials", [])}
+    for nm, _b in touched:
+        ex = (by_name.get(nm) or {}).get("extensions") or {}
+        tr = ex.get("KHR_materials_transmission", {}).get("transmissionFactor")
+        assert tr == a.tint, (
+            f"{nm}: transmission {tr!r} in the written file, expected {a.tint}")
+        assert "KHR_materials_ior" in ex, f"{nm}: IOR missing from the written file"
+    untouched = [n for n, m in by_name.items()
+                 if "KHR_materials_transmission" in (m.get("extensions") or {})
+                 and n not in {t[0] for t in touched}]
+    print(f"verified in {a.out}: transmission+IOR on {[t[0] for t in touched]}"
+          + (f"; pre-existing transmission left alone on {untouched}"
+             if untouched else ""))
 
 
 if __name__ == "__main__":
