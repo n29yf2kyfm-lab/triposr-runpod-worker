@@ -106,6 +106,25 @@ sp = [mx[i] - mn[i] for i in range(3)]
 L = max(sp[0], sp[1])
 print(f"CAR extents {sp[0]:.3f} x {sp[1]:.3f} x {sp[2]:.3f}")
 
+# EVERY VIEW NAME HERE ASSUMES LENGTH ON X WITH THE NOSE AT +X. A catalogue
+# car authored length-on-Y silently produces a correctly-framed set with
+# every tile MISLABELLED — measured 2026-09-07 on volkswagen-golf-2021-w12-v1,
+# where `side_R` rendered a straight REAR and `front34_R` a rear three-quarter.
+# CLAUDE.md already warns that the azimuth note holds for length-on-X cars
+# only; nothing enforced it, so the trap was live.
+#
+# The length AXIS is measurable and is checked here. NOSE DIRECTION IS NOT —
+# resolving it is the job canon_dims/nose_fix REFUSE to guess at — so the
+# offset is an operator input, not an inference. Set SHOW_AZ_OFFSET to the
+# azimuth the nose points along (length-on-Y with the nose at -Y is 270).
+AZ_OFFSET = float(os.environ.get("SHOW_AZ_OFFSET", "0"))
+if sp[1] > sp[0] and AZ_OFFSET == 0:
+    print("WARNING: this car is LONGER ON Y than on X, and SHOW_AZ_OFFSET is "
+          "0. The framing will be correct and EVERY VIEW NAME WILL BE WRONG "
+          "(a length-on-Y car with its nose at -Y needs SHOW_AZ_OFFSET=270). "
+          "Render one view, look at it, then set the offset.")
+print(f"AZ_OFFSET {AZ_OFFSET:g} deg")
+
 sc = bpy.context.scene
 sc.render.engine = "CYCLES"
 sc.cycles.samples = SAMPLES
@@ -212,7 +231,7 @@ CORNERS = [(x, y, z) for x in (mn[0], mx[0])
 
 
 def _aim(az, el, d):
-    a, e = math.radians(az), math.radians(el)
+    a, e = math.radians(az + AZ_OFFSET), math.radians(el)
     pos = mathutils.Vector((ctr[0] + d * math.cos(e) * math.cos(a),
                             ctr[1] + d * math.cos(e) * math.sin(a),
                             aim_z + d * math.sin(e)))
