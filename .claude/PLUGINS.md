@@ -164,3 +164,34 @@ Both directories are committed, so a container rollback keeps the skills. Only t
 Skills: /speckit-constitution, /speckit-specify, /speckit-clarify, /speckit-plan, /speckit-tasks,
 /speckit-analyze, /speckit-checklist, /speckit-implement, /speckit-converge, /speckit-taskstoissues.
 Nothing runs on its own; each is a slash command the owner invokes. No telemetry, no network calls at rest.
+
+## TencentDB Agent Memory — HELD, cannot run on this box (reviewed 2026-09-07)
+
+Owner asked for it from a TikTok clip (Felix Rau, "Tencent DB Agent Memory just open-sourced a local AI memory system").
+Repo: https://github.com/TencentCloud/TencentDB-Agent-Memory (v2.x, Apache-style, ~82 MB shallow clone).
+
+WHAT IT IS: not a plugin. Four Node services — memory-core :8420, knowledge (wiki/code-graph) :8424, panel UI :8125,
+proxy :8096 — normally booted as three Docker containers by `deploy/global-images/start-all.sh`. The Claude Code
+integration is a PROXY: `ANTHROPIC_BASE_URL` is re-pointed at it, it authenticates with its own `sk-mem-…` user key,
+injects team memory / skills / wiki into `body.system` on every request, forwards to an upstream LLM with an API key
+YOU configure (`PROXY_UPSTREAM_API_KEY`), and archives conversations into its SQLite. It also needs a second LLM key
+for the memory group (`MEMORY_LLM_API_KEY`) — it is NOT zero-dependency in this form.
+
+WHY IT IS HELD HERE:
+  * docker daemon is DOWN in this container (client present, `docker info` fails) — the supported install path cannot run.
+  * a remote Claude Code session's Anthropic endpoint is set by the harness; the proxy can only wrap a LOCAL `claude` CLI.
+  * both LLM keys it needs are gone from this box (2026-09-07 rollback took the env file).
+Running the four services natively under node 22 is possible in principle but pointless here: nothing in this session could
+route through them.
+
+SECURITY READ (source, not README): ClickHouse and Langfuse logging are config-gated and off unless enabled;
+`credit-reporter.ts` only fires for the hosted TokenHub variant; `memory.tencentyun.com` appears only as SDK examples.
+No default phone-home found. The proxy by design sees every prompt and holds the upstream API key — acceptable on a
+personal machine, never on a box that also holds SB_KEY / RUNPOD_API_KEY.
+
+TO USE IT (on the owner's own Mac/PC with Docker Desktop):
+    git clone https://github.com/TencentCloud/TencentDB-Agent-Memory.git
+    cd TencentDB-Agent-Memory/deploy/global-images && ./start-all.sh      # interactive; asks for the two LLM keys
+    # then in ~/.claude/settings.json "env": ANTHROPIC_BASE_URL=http://127.0.0.1:8096/claude-code/default,
+    #      ANTHROPIC_AUTH_TOKEN=<business user sk-mem key from the panel at :8125>
+Use a business user key, not the admin key. The memory it builds lives only on that machine.
