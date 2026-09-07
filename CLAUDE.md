@@ -4824,3 +4824,35 @@ was already paired with it.
   index-degenerate = 928 exactly. Counting every member of each duplicate group instead
   gives 1847 and overshoots. The Khronos validator flags only ONE of the 928, so coincident
   faces ship and z-fight without a single warning.
+
+## fal.ai returns status COMPLETED for a job that NEVER RAN (2026-09-07)
+
+Submitted the 2026 Tiguan cutouts to `fal-ai/hunyuan3d/v2/multi-view`. The
+queue reported:
+
+    {"status":"COMPLETED", "metrics":{"inference_time":0.387}}
+
+and fetching the result returned **HTTP 422** with
+`{"loc":["body","left_image_url"],"msg":"Field required"}`. The job failed
+INPUT VALIDATION and was still marked COMPLETED. A watcher that breaks on
+`status == "COMPLETED"` — which is the obvious way to write one, and is how
+mine was written — reports success on a job that produced nothing.
+
+**THE FREE TELL IS `inference_time`.** A real Hunyuan car run is tens of
+seconds; 0.387 s is a schema rejection. Gate on BOTH: `status == COMPLETED`
+**and** a plausible `inference_time`, and always fetch the result before
+declaring success. Same family as the recorded RunPod trap where
+`desiredStatus` reads RUNNING straight through a restart loop — a status
+field that reports the QUEUE's view, not the WORK's.
+
+And the requirement that broke it was already written in this file
+("fal-ai/hunyuan3d/v2/multi-view (front/back/left required)"). It was read
+after the failure, not before. Prose memory in this file does not fire at
+use-time — that is the third time that sentence has had to be written.
+
+**Slot discipline, restated because it is the expensive half:** with only a
+front-3/4 and a rear-3/4 of one car (both showing the LEFT flank), there is
+no true left profile, and putting a 3/4 into the `left` slot to satisfy a
+required field would bake a wrong view into the geometry. Two non-canonical
+views are a SINGLE-IMAGE input, not a multiview one. Refuse the slot rather
+than fill it.
