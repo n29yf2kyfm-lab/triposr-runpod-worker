@@ -1,0 +1,27 @@
+{
+  "identity": {
+    "make": "volkswagen",
+    "model": "tiguan",
+    "generation": "Mk3 (AD2/CD1)",
+    "note": "Third-generation Tiguan, on sale from 2024 — the generation a 2026 plate carries. NOT the Mk2 AD1 (2016-2023) and NOT the China-market Tiguan L, which is 4.735 m and is the only recent Tiguan currently in the catalogue. Source photographs for the generated mesh: a 1.5 eTSI ACT R-Line in Persimmon Red, photographed 2026-02-14 at a MOLL dealership, Wikimedia Commons, front-left and rear-left three-quarter — ONE car, two views. Trim-specific values are recorded as the R-Line fitment. Overhangs, tracks and cabin landmarks deliberately omitted: unverified, and this project does not fabricate vehicle metadata."
+  },
+  "dimensions": {
+    "length_m":    {"value": 4.539, "source": "published Mk3 Tiguan"},
+    "width_m":     {"value": 1.859, "source": "published Mk3 Tiguan, excl. mirrors"},
+    "height_m":    {"value": 1.639, "source": "published Mk3 Tiguan"},
+    "wheelbase_m": {"value": 2.681, "source": "published Mk3 Tiguan"}
+  },
+  "tyre": {"spec": "235/45R20", "source": "R-Line 20-inch fitment as photographed"},
+  "labels": {
+    "input_body": "body",
+    "glass": "glass",
+    "wheel_strip_prefixes": ["wheel", "Wheel_Dark", "WHEEL_", "LINER_", "Arch_Cavity",
+                             "lib_tyre", "lib_rim", "lib_hub", "lib_disc", "lib_cal"]
+  },
+  "provenance": {
+    "front_view": "File:VW Tiguan 1.5 eTSI ACT R-Line (III) – f 14022026.jpg",
+    "rear_view": "File:VW Tiguan 1.5 eTSI ACT R-Line (III) – h 14022026.jpg",
+    "host": "Wikimedia Commons",
+    "limitation": "Both photographs show the LEFT flank. There is no right-side, no true side and no straight front or rear view, so the right flank is unobserved and the recorded perspective bake applies to any mesh built from them."
+  }
+}
