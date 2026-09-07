@@ -44,7 +44,11 @@ GLAZING = ("vitre", "glass", "window", "windscreen", "windshield",
 # a name that contains a glazing word but is a LAMP, a mirror or a screen
 NOT_GLAZING = ("phare", "lamp", "light", "head", "tail", "fog", "indicator",
                "orange", "red", "amber", "blink", "mirror", "rearview",
-               "touch", "dash", "instrument", "surr")
+               "touch", "dash", "instrument", "surr",
+               # window SURROUNDS carry the glazing word too. Measured
+               # 2026-09-07 on subaru-outback-2022-w7-v1: `WindowsTrims`
+               # (black, 0.012) was turned into glass alongside `Windows`.
+               "trim", "frame", "seal", "rubber", "gasket", "chrome")
 PAINTY = ("carpaint", "paint", "carroserie", "carrosserie", "body", "lack")
 
 
