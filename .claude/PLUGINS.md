@@ -151,3 +151,16 @@ Two findings, both HANDLED in `.taskmaster/config.json` (committed):
 Install is machine-local (`claude plugin install taskmaster@taskmaster`,
 user scope) — a rollback takes it; reinstall with those two commands. The
 config in-repo survives and re-applies itself.
+
+## Spec Kit (GitHub spec-driven development) — installed 2026-09-07
+
+Owner asked for it from a TikTok clip (Brock Mesarich, "Spec Kit is GitHub's free fix for AI building the wrong thing").
+Not a marketplace plugin: it is a CLI that drops skills into `.claude/skills/speckit-*` and templates into `.specify/`.
+Both directories are committed, so a container rollback keeps the skills. Only the CLI itself needs reinstalling:
+
+    uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
+    specify init --here --force --non-interactive --integration claude   # only if .specify/ is missing
+
+Skills: /speckit-constitution, /speckit-specify, /speckit-clarify, /speckit-plan, /speckit-tasks,
+/speckit-analyze, /speckit-checklist, /speckit-implement, /speckit-converge, /speckit-taskstoissues.
+Nothing runs on its own; each is a slash command the owner invokes. No telemetry, no network calls at rest.
