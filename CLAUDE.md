@@ -4856,3 +4856,60 @@ no true left profile, and putting a 3/4 into the `left` slot to satisfy a
 required field would bake a wrong view into the geometry. Two non-canonical
 views are a SINGLE-IMAGE input, not a multiview one. Refuse the slot rather
 than fill it.
+
+## HIGGSFIELD / MESHY BREAKS THE 40,000-FACE CEILING — 2026-09-08, 30 credits
+
+Owner pointed at the Higgsfield tool. Its `multi_image_to_3d` model (provider
+**Meshy**) is the first generator in this project's history to clear the two
+blockers this file has recorded for months, on the 2026 Tiguan R-Line built
+from two Wikimedia photographs (front-left and rear-left 3/4 of ONE car).
+
+    generator                    tris      crease/diag   views taken
+    every previous route       40,000      15-33         1
+    Tripo v3.1              1,483,572      58.8          1
+    Higgsfield / Meshy        308,772      41.1          2
+
+**IT ACCEPTS NON-CANONICAL VIEWS.** `fal-ai/hunyuan3d/v2/multi-view` demands
+front/back/**left** and rejected the same pair with HTTP 422 — there is no true
+left profile in the set. Meshy takes 1-4 images "of the same subject from
+different angles" with NO canonical slots, so BOTH photographs conditioned the
+mesh. The fal single-image fallback invented the rear entirely (no lamp
+signature, no lettering, no diffuser); the Meshy car has a real one, because it
+saw one. **For a two-photo car this is the route.**
+
+**`target_polycount` goes to 300,000** and `should_remesh:false` returns the raw
+mesh. The recorded starved-input finding — the material chain fails at 40k and
+passes at ~1M — finally has an affordable input.
+
+**THE CLAY PASS SPLITS THE VERDICT, AND IT IS THE ONLY REASON THE NUMBERS MAKE
+SENSE.** Crease density 41.1 is HUNYUAN-LEVEL (43.0) while the beauty render
+looks far better than Hunyuan ever did. That contradiction is resolved by
+rendering clay (`showroom.py ... clay`), and the answer is BOTH:
+
+  * REAL GEOMETRY, visible in clay: wheel spokes with through-holes, door
+    handles as raised solids, roof rails with a gap beneath, window apertures
+    with a true DLO edge, formed mirrors, arch cladding step, headlamp recess.
+    Nothing in the earlier melt record had these.
+  * PAINTED, i.e. in the NORMAL MAP: the crisp door shut lines. They are faint
+    to absent in clay and sharp in the beauty render. Panel surfaces are also
+    soft and slightly wavy in clay.
+
+**Do NOT report this as "shut lines solved".** It is shut lines DRAWN, not cut.
+For a drag-to-spin web viewer a normal map is legitimate and survives relighting
+and rotation — what it cannot do is break the SILHOUETTE at a panel edge. State
+which one is meant every time.
+
+This is also the cleanest demonstration yet of the recorded crease rule working
+in the direction the rule claims: a LOW score correctly said "the geometry is
+soft", and the eye correctly said "the car looks good". They were measuring
+different things and the clay render is what separates them. **Render clay
+before crediting a generator with detail.**
+
+Still unsolved and unchanged: ONE fused material, no glass node, no separate
+rubber — the structural blocker, exactly as with every other generator. The
+material chain (seg -> glass -> respray control) has not been run on it.
+
+Cost 30 credits of a 596 balance on the owner's max plan. **There is NO free 3D
+tier**: `models_explore(type:'3d', unlim:true)` returns an empty list and
+`unlim.available:false`. The Higgsfield CLI/plugin is free; the generations are
+not.
