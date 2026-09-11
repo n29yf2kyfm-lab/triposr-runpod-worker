@@ -2240,8 +2240,44 @@ class TestImpression(unittest.TestCase):
         self.assertIn("2 storeys", text)
         self.assertIn("8.16", text)
         self.assertIn("gabled", text)
-        # and it must forbid the model redrawing the volume
-        self.assertIn("Do NOT add", text)
+        # and it must forbid the model redrawing the volume — checked by
+        # intent, not by the exact wording, so the prompt can be reworded
+        # without the test failing for no reason.
+        low = text.lower()
+        self.assertIn("add nothing to this building", low)
+        self.assertIn("nothing overlapping its outline", low)
+        self.assertIn("do not change it", low)
+
+    def test_the_prompt_never_names_a_viewpoint_of_its_own(self):
+        """A prompt that says "keep the camera identical" and then
+        "eye level" three lines later argues with itself. The model
+        obeys the later line, re-frames the shot, and the fidelity
+        check refuses the result — a whole paid generation wasted.
+        Measured against a real run: 58% recall with the contradiction,
+        92% with it removed. The camera comes from the image."""
+        text = self.v.brief({"width_m": 7.67, "depth_m": 12.86,
+                             "storeys": 2, "eaves_m": 5.3, "ridge_m": 7.52,
+                             "roof_kind": "gabled", "place": "Sandwell"})
+        short = self.v.short_brief({"storeys": 2, "place": "Sandwell"})
+        for phrase in ("eye level", "eye-level", "street level",
+                       "aerial view", "from above", "worm's eye",
+                       "bird's eye", "low angle", "high angle"):
+            self.assertNotIn(phrase, text.lower(), f"{phrase!r} in brief()")
+            self.assertNotIn(phrase, short.lower(), f"{phrase!r} in short_brief()")
+        self.assertNotIn("eye", self.v._LIGHT.lower())
+        # and it must still forbid moving the camera at all
+        self.assertIn("do not move", text.lower())
+
+    def test_the_prompt_asks_for_a_street_not_an_empty_field(self):
+        """Forbidding neighbouring buildings outright — meant to stop
+        invented wings — put the house alone in a mown field, which
+        reads as CGI however good the brickwork is. Context is allowed
+        as long as it stays outside the outline."""
+        text = self.v.brief({"storeys": 2, "place": "Sandwell"})
+        self.assertIn("suburban street", text.lower())
+        self.assertIn("outside this building's outline", text.lower())
+        self.assertIn("empty field", text.lower())
+        self.assertIn("suburban street", self.v.short_brief({}).lower())
 
     def test_a_zero_quota_is_reported_as_billing_not_as_try_again(self):
         """`limit: 0` will never clear by waiting, and telling a user to

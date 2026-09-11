@@ -160,41 +160,67 @@ def brief(facts: dict) -> str:
     if ridge:
         dims.append(f"ridge {ridge:.2f} m")
 
+    # NEVER NAME A VIEWPOINT HERE. The massing is drawn from an orbiting
+    # camera that is usually well above eye height, and an earlier
+    # version of this prompt asked for the camera to be kept identical
+    # and then said "eye level" three lines later. The model obeyed the
+    # later line, re-framed the shot, and the fidelity check refused the
+    # result at 58% — a whole generation wasted on a prompt that argued
+    # with itself. The camera comes from the image; the words describe
+    # light and materials only. `_LIGHT` is kept free of viewpoint for
+    # the same reason and a test asserts it.
     return (
         "The attached image is a MASSING MODEL of a real house, built "
-        "from survey data. Re-render the same building as a "
-        "photorealistic architectural visualisation.\n\n"
-        "HARD CONSTRAINTS — the geometry is measured. Do not change it:\n"
+        "from survey data. Repaint it IN PLACE as a photorealistic "
+        "architectural photograph. This is a RETEXTURE of the image, not "
+        "a new photograph of a similar house.\n\n"
+        "CAMERA — the single most important constraint:\n"
+        "- Do NOT move, rotate, raise, lower, zoom, re-frame or re-crop "
+        "the camera. Keep whatever viewpoint the image already has.\n"
+        "- The building must occupy EXACTLY the same pixels, at the same "
+        "size and position in frame. Laid over the original at half "
+        "opacity, every corner, the ridge, the eaves and the base of "
+        "every wall would line up.\n\n"
+        "GEOMETRY — measured survey data. Do not change it:\n"
         f"- {'; '.join(dims) if dims else 'keep every dimension as shown'}.\n"
         f"- The roof is {roof}. Keep the ridge line, the pitch and the "
-        "eaves exactly where they are in the image.\n"
-        "- Keep the camera position, the angle and the outline identical, "
-        "so the result can be laid over the model.\n"
-        "- Do NOT add, remove, widen or heighten any volume. No new "
-        "wings, dormers, porches, conservatories or extensions.\n\n"
+        "eaves exactly where they are.\n"
+        "- Add NOTHING to this building: no wings, dormers, porches, "
+        "conservatories, garages or extensions attached to it, and "
+        "nothing overlapping its outline.\n\n"
         "MATERIALS AND SETTING — invent these, plausibly:\n"
         f"- {ERA}, in {place}.\n"
         "- Facing brick or render as suits the street, a tiled pitched "
         "roof, white domestic windows in a sensible rhythm, a front door, "
         "gutters, downpipes and a chimney if the ridge allows one.\n"
         "- Mown lawn, a drive, low boundary planting.\n"
-        "- Bright overcast British daylight, soft shadows, eye level.\n"
+        "- An ordinary suburban street beyond the plot: neighbouring "
+        "houses on adjacent plots, a pavement and a road. Those "
+        "neighbours sit clearly OUTSIDE this building's outline and "
+        "never touch or overlap it. Do not strand the house in an "
+        "empty field.\n"
+        f"- {_LIGHT}\n"
         "- Photographic. No people, no cars, no signage, no text, no "
         "watermark, no border."
     )
 
 
+# Light and finish only. No viewpoint words — see the note in brief().
+_LIGHT = ("Bright overcast British daylight, soft shadows, sharp and "
+          "realistic, architectural photography.")
+
+
 def short_brief(facts: dict) -> str:
     """For the diffusion backend, which wants a description, not an
-    instruction — the geometry arrives as the depth map."""
+    instruction — the geometry and the camera arrive as the depth map,
+    so naming a viewpoint here could only contradict them."""
     st = facts.get("storeys")
     place = facts.get("place") or "England"
     return (f"photograph of a {st or ''} storey detached house in {place}, "
             f"red-brown facing brick, plain tiled {facts.get('roof_kind') or 'pitched'} "
             f"roof, white upvc windows, front door, gutters and downpipes, "
-            f"mown lawn and a block-paved drive, bright overcast daylight, "
-            f"soft shadows, eye level, architectural photography, sharp, "
-            f"realistic").replace("  ", " ")
+            f"mown lawn and a block-paved drive, suburban street with "
+            f"neighbouring houses beyond the plot, {_LIGHT}").replace("  ", " ")
 
 
 # ------------------------------------------------------------- gemini
