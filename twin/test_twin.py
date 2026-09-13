@@ -2649,6 +2649,109 @@ class TestStoreysFromLidar(unittest.TestCase):
         self.assertEqual(3, three.existing().storeys)
 
 
+class TestBlenderRenderer(unittest.TestCase):
+    """The local render path. These test the GEOMETRY and the SUN, which
+    are pure functions — Blender itself is not needed and is not on most
+    machines, so the render call is exercised only where it exists."""
+
+    def setUp(self):
+        from twin import blender
+        self.b = blender
+
+    def _solid(self, **kw):
+        s = {"ring": [[0, 0], [8, 0], [8, 12], [0, 12], [0, 0]],
+             "base_m": 0.0, "eaves_m": 5.3,
+             "roof": {"kind": "gabled", "pitch_deg": 30.0,
+                      "ridge_along": "y"}}
+        s.update(kw)
+        return s
+
+    def test_the_ridge_lands_where_the_schedule_says_it_does(self):
+        """The renderer and Building.ridge_m must agree, or the picture
+        shows a different house from the drawings."""
+        from twin import model as M
+        mesh = self.b.solid_mesh(self._solid())
+        # ridge_along "y" means the slope climbs across the WIDTH (8 m)
+        expected = 5.3 + (8.0 / 2.0) * math.tan(math.radians(30.0))
+        self.assertAlmostEqual(expected, mesh["top"], places=6)
+        blk = M.Block(id="b", name="b", x=0, y=0, width=8.0, depth=12.0,
+                      storeys=2, storey_height=2.65,
+                      roof={"kind": "gabled", "pitch_deg": 30.0,
+                            "ridge_along": "y"})
+        bld = M.Building(id="x", anchor_lat=52.5, anchor_lon=-2.0,
+                         bearing_deg=0.0, blocks=[blk])
+        self.assertAlmostEqual(bld.ridge_m(), mesh["top"], places=6)
+
+    def test_a_flat_roof_stops_at_the_eaves(self):
+        mesh = self.b.solid_mesh(self._solid(roof={"kind": "flat"}))
+        self.assertAlmostEqual(5.3, mesh["top"], places=6)
+        self.assertTrue(all(v[2] <= 5.3 + 1e-9 for v in mesh["verts"]))
+
+    def test_every_face_indexes_a_real_vertex(self):
+        """A face pointing past the end of the vertex list is a mesh
+        Blender imports as garbage rather than refusing."""
+        for roof in ({"kind": "gabled", "pitch_deg": 30, "ridge_along": "y"},
+                     {"kind": "gabled", "pitch_deg": 35, "ridge_along": "x"},
+                     {"kind": "hipped", "pitch_deg": 30, "ridge_along": "y"},
+                     {"kind": "monopitch", "pitch_deg": 12,
+                      "ridge_along": "x", "high_side": "max"},
+                     {"kind": "flat"}):
+            mesh = self.b.solid_mesh(self._solid(roof=roof))
+            n = len(mesh["verts"])
+            for kind, idx in mesh["faces"]:
+                self.assertIn(kind, ("wall", "roof"))
+                self.assertGreaterEqual(len(idx), 3)
+                for i in idx:
+                    self.assertTrue(0 <= i < n, f"{roof} face {idx} of {n}")
+
+    def test_the_closing_point_of_the_ring_is_not_duplicated(self):
+        mesh = self.b.solid_mesh(self._solid())
+        walls = [f for k, f in mesh["faces"] if k == "wall"]
+        # four sides, plus two gable triangles
+        self.assertEqual(4, len([w for w in walls if len(w) == 4]))
+
+    def test_the_sun_agrees_with_the_viewer_at_midsummer_noon(self):
+        """Same NOAA algorithm as render3d.js setSun, so a shadow in the
+        render falls where the shadow on screen falls. The e2e suite
+        pins the browser side at about 61 degrees for Birmingham."""
+        import datetime
+        s = self.b.sun_vector(52.48, -1.89,
+                              datetime.datetime(2026, 6, 21, 12, 0))
+        self.assertTrue(s["above_horizon"])
+        self.assertAlmostEqual(61.0, s["altitude_deg"], delta=1.5)
+        self.assertAlmostEqual(180.0, s["azimuth_deg"], delta=8.0)
+
+    def test_the_sun_is_below_the_horizon_at_midnight(self):
+        import datetime
+        s = self.b.sun_vector(52.48, -1.89,
+                              datetime.datetime(2026, 12, 21, 0, 30))
+        self.assertFalse(s["above_horizon"])
+
+    def test_no_geometry_is_refused_rather_than_rendered_empty(self):
+        with self.assertRaises(self.b.NotAvailable):
+            self.b.scene({"solids": []})
+
+    def test_a_missing_blender_says_so_and_says_what_to_do(self):
+        old = os.environ.get("BLENDER_BIN")
+        self.b.BLENDER = "definitely-not-a-real-binary-xyz"
+        try:
+            ok, why = self.b.usable()
+        finally:
+            self.b.BLENDER = old or "blender"
+        self.assertFalse(ok)
+        self.assertIn("blender.org", why)
+        self.assertIn("no key", why)
+
+    def test_the_caption_claims_measurement_not_impression(self):
+        """This path renders the measured geometry directly, so it must
+        NOT borrow the impression's disclaimer — and must still be
+        honest that the materials are made up."""
+        cap = self.b.CAPTION
+        self.assertIn("MEASURED GEOMETRY", cap)
+        self.assertIn("indicative", cap)
+        self.assertNotIn("ARTIST", cap.upper())
+
+
 class TestFidelity(unittest.TestCase):
     """The picture must keep the geometry it was given, and the check
     must be able to tell when it did not."""
