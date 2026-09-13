@@ -218,6 +218,18 @@ for line in q["materials"] + q["labour"]:
 
 
 # ==========================================================================
+# ---- the rate is rounded for DISPLAY, not before multiplying -------------
+# Materials priced per metre or per square metre routinely land on fractions
+# of a penny, and rounding the rate first looks tidy and is wrong at
+# quantity: 500m at a true £0.855 billed £425.00 instead of £427.50.
+_line = T.Line("x", "Membrane", 500.0, "m", 0.855, "rate_card")
+check("R1 the line total uses the full-precision rate",
+      _line.total == 427.50, str(_line.total))
+check("R2 while the rate still displays in pence", _line.rate == 0.85)
+check("R3 and rounding first would have been wrong",
+      round(500.0 * round(0.855, 2), 2) == 425.00)
+
+
 print()
 for f in FAILED:
     print(f"FAIL  {f}")

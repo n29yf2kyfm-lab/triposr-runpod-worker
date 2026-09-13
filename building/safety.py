@@ -332,6 +332,20 @@ def check_cdm(duration_days=None, max_workers=None, person_days=None,
     if person_days is not None and person_days > CDM_NOTIFY_PERSON_DAYS:
         notifiable = True
 
+    # THE 500-PERSON-DAY LIMB IS INDEPENDENT, and duration and peak
+    # workforce alone cannot rule it out — 200 days with up to 15 on site
+    # can pass the first limb and still run far past 500 person-days. This
+    # used to report a definite PASS from exactly those inputs: a confident
+    # all-clear on a legal duty (an F10 is required by law when reg 6
+    # applies) from data that cannot support it. When person_days is not
+    # supplied, duration x peak workforce bounds it from above; only when
+    # that bound stays at or under the threshold is "not notifiable" an
+    # earned verdict rather than a guess.
+    person_day_bound = person_days
+    if person_day_bound is None and duration_days is not None \
+            and max_workers is not None:
+        person_day_bound = duration_days * max_workers
+
     if notifiable is None:
         findings.append(Finding(
             "cdm_notify", "CDM notification", UNKNOWN, None,
@@ -345,6 +359,19 @@ def check_cdm(duration_days=None, max_workers=None, person_days=None,
             "cdm_notify", "Project is notifiable to HSE", REQUIRED, MAJOR,
             f"This project exceeds the CDM thresholds, so form F10 must be "
             f"sent to HSE before construction begins.",
+            "CDM 2015, regulation 6"))
+    elif (person_day_bound is not None
+          and person_day_bound > CDM_NOTIFY_PERSON_DAYS):
+        findings.append(Finding(
+            "cdm_notify", "CDM notification not ruled out", UNKNOWN, None,
+            f"Below the {CDM_NOTIFY_DAYS}-day-and-{CDM_NOTIFY_WORKERS}-"
+            f"worker limb, but {duration_days} working days with up to "
+            f"{max_workers} workers could reach "
+            f"{int(person_day_bound)} person-days — the independent "
+            f"{CDM_NOTIFY_PERSON_DAYS} person-day limb cannot be assessed "
+            f"from duration and peak workforce alone. Supply person_days "
+            f"from the programme; above {CDM_NOTIFY_PERSON_DAYS}, form F10 "
+            f"must be sent to HSE before construction begins.",
             "CDM 2015, regulation 6"))
     else:
         findings.append(Finding(

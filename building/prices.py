@@ -71,9 +71,18 @@ REFRESH_INTERVAL_DAYS = 7
 CATALOGUE = {
     "roof_covering": {
         "unit": "each",
-        ECONOMY:  {"spec": "Concrete interlocking tile", "life_years": 40},
-        STANDARD: {"spec": "Concrete plain tile", "life_years": 60},
-        PREMIUM:  {"spec": "Natural slate", "life_years": 100},
+        # covers_per_m2 is what makes the three tiers comparable at all.
+        # They are different tile types laying 10.5, 60 and 20 to the
+        # square metre (docs/ESTIMATING_RATES.md gauges), so a per-tile
+        # price comparison inverts reality: a plain tile at £0.55 looks
+        # cheaper than an interlocking one at £1.20, but a square metre
+        # of plain tile costs nearly three times as much.
+        ECONOMY:  {"spec": "Concrete interlocking tile", "life_years": 40,
+                   "covers_per_m2": 10.5},
+        STANDARD: {"spec": "Concrete plain tile", "life_years": 60,
+                   "covers_per_m2": 60.0},
+        PREMIUM:  {"spec": "Natural slate", "life_years": 100,
+                   "covers_per_m2": 20.0},
         "index_series": "roofing_tiles_slate",
     },
     "battens": {
@@ -130,6 +139,42 @@ CATALOGUE = {
         "index_series": "other_materials",
     },
 }
+
+# What a unit of each product could plausibly cost, ex-VAT, in the
+# catalogue's own unit. NOT an estimate — the estimate comes from
+# observations. This is an order-of-magnitude sanity band, and it exists
+# because of a real import.
+#
+# The government's own DBT building-materials tables were fed through the
+# importer as a price list. They are an INDEX (2015 = 100), not pounds, and
+# 29 of 30 lines were correctly refused as unmatched — but "Precast
+# concrete: blocks, bricks, tiles and flagstones" matched `bricks` and its
+# index value of 173.1 was filed as £173.10 PER BRICK, with no note at all.
+# A facing brick is well under a pound. Nothing in the module could catch a
+# 200x error, because nothing in the module knew what a brick costs.
+#
+# Bands are deliberately wide — wider than any real price spread — because
+# the job is to catch a unit mix-up, an index mistaken for money, or pence
+# read as pounds, not to second-guess a merchant.
+PLAUSIBLE_PRICE = {
+    "roof_covering":     (0.15, 12.00),    # per tile: concrete to handmade clay
+    "battens":           (0.20, 5.00),     # per m
+    "membrane":          (0.30, 12.00),    # per m2
+    "plasterboard":      (1.00, 25.00),    # per m2
+    "insulation":        (1.00, 60.00),    # per m2: mineral wool to PIR
+    "structural_timber": (0.80, 40.00),    # per m: batten to glulam
+    "bricks":            (0.15, 8.00),     # each: common to handmade
+    "guttering":         (1.50, 60.00),    # per m: uPVC to cast iron
+}
+
+
+def plausible_price(product, price):
+    """Whether a unit price could be real for this product. None if unknown."""
+    band = PLAUSIBLE_PRICE.get(product)
+    if band is None or price is None:
+        return None
+    return band[0] <= price <= band[1]
+
 
 # DBT Construction Material Price Indices, published monthly on the first
 # Wednesday, free and official, with commodity series running back decades.
@@ -284,13 +329,23 @@ def estimate(observations, product, tier, today=None):
 
 
 def _confidence(relevant, spread, today):
+    """How much the estimate can be relied on: source, freshness AND spread.
+
+    Every tier tests the spread. The "good" tier used not to, so a price set
+    whose members disagreed by 20,000x — £1, £5 and £1,000 for the same
+    product — came back labelled "good" purely because one of them was an
+    invoice from last month. Freshness says nothing about whether the
+    observations describe the same thing, and disagreement that wide almost
+    always means a mis-filed line rather than a real market.
+    """
     own = [o for o in relevant if o.source == INVOICE]
     freshest = min(o.age_days(today) for o in relevant)
     if own and freshest <= 60 and spread <= 0.15:
         return "high"
-    if (own or any(o.source == QUOTE for o in relevant)) and freshest <= 120:
+    if ((own or any(o.source == QUOTE for o in relevant))
+            and freshest <= 120 and spread <= 0.60):
         return "good"
-    if freshest <= 240:
+    if freshest <= 240 and spread <= 1.50:
         return "fair"
     return "low"
 
@@ -310,16 +365,35 @@ def compare_tiers(observations, product, today=None):
 
     priced = {t: v["price"] for t, v in out["tiers"].items() if v["price"]}
     if len(priced) >= 2:
-        cheapest = min(priced.values())
-        for tier, p in priced.items():
+        # Tiers of a per-each product are not always the same object. The
+        # roof coverings are different tile types laying 10.5, 60 and 20
+        # to the square metre, so comparing their per-tile prices showed
+        # plain tile as "cheapest" and interlocking at +118% when, per
+        # square metre of roof, the truth was the reverse — inverted by up
+        # to 6x. Where every priced tier declares its coverage, every
+        # comparison figure is computed on the installed square metre.
+        cover = {t: CATALOGUE[product][t].get("covers_per_m2")
+                 for t in priced}
+        per_m2 = all(cover.values())
+        basis = ({t: p * cover[t] for t, p in priced.items()} if per_m2
+                 else dict(priced))
+        if per_m2:
+            for tier, cost in basis.items():
+                out["tiers"][tier]["price_per_m2"] = round(cost, 2)
+            out["comparison_basis"] = (
+                "per m2 installed, using each tier's own coverage rate — "
+                "the tiers lay different counts to the square metre, so "
+                "per-unit prices are not comparable")
+        cheapest = min(basis.values())
+        for tier, cost in basis.items():
             out["tiers"][tier]["vs_cheapest_pct"] = round(
-                (p / cheapest - 1) * 100, 1)
-        # Whole-life comparison, where a life expectancy exists. A premium
-        # covering at twice the price and three times the life is cheaper
-        # per year, and that is the argument a customer actually responds to.
+                (cost / cheapest - 1) * 100, 1)
+        # Whole-life comparison, where a life expectancy exists — on the
+        # same common basis, so a long life cannot launder a unit mix-up.
         for tier, v in out["tiers"].items():
-            if v.get("price") and v.get("life_years"):
-                v["cost_per_year"] = round(v["price"] / v["life_years"], 3)
+            if tier in basis and v.get("life_years"):
+                v["cost_per_year"] = round(
+                    basis[tier] / v["life_years"], 3)
     return out
 
 

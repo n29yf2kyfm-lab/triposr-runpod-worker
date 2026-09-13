@@ -1,0 +1,6 @@
+runpod>=1.7
+diffusers>=0.30
+transformers>=4.44
+accelerate>=0.33
+safetensors>=0.4
+pillow>=10
