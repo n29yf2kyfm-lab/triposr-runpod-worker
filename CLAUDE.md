@@ -4913,3 +4913,65 @@ Cost 30 credits of a 596 balance on the owner's max plan. **There is NO free 3D
 tier**: `models_explore(type:'3d', unlim:true)` returns an empty list and
 `unlim.available:false`. The Higgsfield CLI/plugin is free; the generations are
 not.
+
+## UNION ALPHA CONNECTED, AND CALIBRATED THE SAME HOUR (2026-09-17)
+
+`stealth/union-alpha` on OpenRouter, owner-requested. It needs no new code —
+`OX_MODEL=stealth/union-alpha python3 pipeline/machine/ox.py …` — and the
+`OPENROUTER_API_KEY` it needs is back in `/root/.alam3d_env` (mode 600, value
+never in the repo; the key carries a $50 cap).
+
+**VERIFIED, not taken from the announcement:** OpenRouter's own model list
+returns 444 models and exactly one match — context 262,144, max completion
+131,072, `input_modalities ['text','image']`, tool calling supported, and
+`pricing.prompt` AND `pricing.completion` both 0. Every call so far reports
+`cost=0`, so free is measured rather than assumed. No `reasoning` field comes
+back, so it behaves like a plain chat model — but KEEP the 20000 max_tokens
+default anyway: a stealth slot's successor may not.
+
+**FREE DOES NOT MEAN KEYLESS.** A no-auth POST returns 401 "No cookie auth
+credentials found" and an empty bearer returns 401 "Missing Authentication
+header". Zero-cost tokens, mandatory key.
+
+**IT IS A CANDIDATE FINDER, NOT AN ARBITER — measured on its first real use.**
+Handed one Golf hero render cold, no hints, and asked to identify the car, call
+the drive side and name defects. Scored against the glTF, which is ground truth:
+
+  * IDENTIFICATION — CORRECT, and specific: "Volkswagen Golf GTI, Mk8" off the
+    GTI grille badge, the honeycomb grille, the five-dot LED fogs, red calipers
+    and the twisted five-spoke wheels.
+  * DRIVE SIDE — CORRECT, and this is the valuable one: it called LEFT-HAND
+    DRIVE from a wheel silhouette through the windscreen, independently
+    matching the geometric measurement (steering wheel centroid at X +0.350,
+    i.e. the car's left). This file already records drive side as "an entire
+    gate dimension that does not exist" — a vision model reading it off a
+    render for free is the cheapest screen yet found for it.
+  * "REAR DOOR GLASS RENDERS FROSTED/MILKY, INCONSISTENT WITH THE CLEARER
+    FRONT GLASS — looks like a glass-material error" — **FALSE.** Every
+    glazing node in the car (Ext/Int door glass front AND rear, windscreen,
+    backlight) is bound to the SAME material `glass`: BLEND, roughness 0.0,
+    transmission 1.0, baseColor [0,0,0,0.25]. Identical values front and rear.
+    There is no material difference to find, so the milkiness is the RENDERER.
+    This is precisely the recorded 2026-08-10 failure class — 39 live cars
+    quarantined on sheet evidence and all 39 restored after checking the
+    shipped asset — reproduced by a new instrument on day one.
+  * "THE INTERIOR IS BARELY MODELED (PLACEHOLDER SHAPES AT BEST)" — **FALSE,
+    and badly.** The interior is **278,841 triangles across 83 meshes, 51.3%
+    of the whole car** — seats 89,355, cabin trim 82,152, eight airbags
+    66,807, door cards 24,265, steering wheel 16,262. It is the single largest
+    thing in the model. What it actually saw was the cabin dimmed behind glass
+    at alpha 0.25.
+  * C-pillar/roof "pale streak" — untested; a candidate, nothing more.
+
+**So: 2 of 3 claimed defects did not survive the file, while both factual
+identifications were right.** That is a good instrument pointed at the wrong
+question, and it lands exactly where this file already puts every render-based
+check: use it to FIND candidates and to answer IDENTITY questions, never to
+issue a material verdict. The glTF decides materials. Every time.
+
+**Privacy, stated once because the owner should decide knowingly:** OpenRouter's
+own page warns a stealth model is "developed and operated by a third-party model
+provider" and that "prompts and completions may be retained by the provider".
+The operator is undisclosed by design. Renders of cars are low-risk; catalogue
+data, credentials and repo source are not, and the `--code-only` constraint on
+graphify exists for the same reason.
