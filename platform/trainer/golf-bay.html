@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Strip Bay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;700&display=swap">
+<style>
+/* ── tokens ───────────────────────────────────────────────────────────
+   Dark-first: a workshop bay under lamps. Light is redefined twice so
+   all three viewer states resolve (explicit dark, explicit light, and
+   the un-stamped system default). */
+:root{
+  --bay:#0E1116; --panel:#151A21; --panel2:#1C232C; --panel3:#232C37;
+  --line:#28313C; --ink:#E7ECF2; --ink2:#97A3B2; --ink3:#64717F;
+  --pri:#3B82F6; --pri2:#60A5FA;
+  --warn:#F59E0B; --danger:#EF4444; --good:#34D399;
+  --floor:0x0E1116; --r:10px;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bay:#EDEEF1; --panel:#FFFFFF; --panel2:#F5F6F8; --panel3:#EAECEF;
+    --line:#D7DBE0; --ink:#14181D; --ink2:#586472; --ink3:#87919E;
+    --pri:#1D5FD0; --pri2:#1748A8;
+    --warn:#96620A; --danger:#C22B2B; --good:#0F7A55;
+  }
+}
+:root[data-theme="light"]{
+  --bay:#EDEEF1; --panel:#FFFFFF; --panel2:#F5F6F8; --panel3:#EAECEF;
+  --line:#D7DBE0; --ink:#14181D; --ink2:#586472; --ink3:#87919E;
+  --pri:#1D5FD0; --pri2:#1748A8;
+  --warn:#96620A; --danger:#C22B2B; --good:#0F7A55;
+}
+
+*{box-sizing:border-box}
+/* An explicit `display` on an element BEATS the UA stylesheet's
+   [hidden]{display:none}, because #loading{display:grid} is the stronger
+   selector. Without this line the loading overlay never disappears and the
+   whole app sits behind it forever — found in a real browser, invisible in
+   the source. Anything toggled with .hidden needs this guard. */
+[hidden]{display:none !important}
+html,body{height:100%}
+body{
+  margin:0; background:var(--bay); color:var(--ink);
+  font-family:Archivo,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:15px; line-height:1.5; overflow:hidden; -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{margin:0; font-weight:700; letter-spacing:-.02em; text-wrap:balance}
+.mono{font-family:"Roboto Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums}
+.eyebrow{font-size:10.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--ink3)}
+button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
+:focus-visible{outline:2px solid var(--pri); outline-offset:2px; border-radius:4px}
+
+#shell{display:grid; grid-template-rows:auto 1fr; height:100dvh}
+header{display:flex; align-items:center; gap:13px; padding:10px 16px;
+  border-bottom:1px solid var(--line); background:var(--panel)}
+.mark{width:26px;height:26px;border-radius:7px;flex:none;display:grid;place-items:center;
+  background:var(--pri);color:#fff;font-weight:800;font-size:13px;letter-spacing:-.04em}
+.brand b{font-size:16.5px;font-weight:800;letter-spacing:-.03em}
+.brand .sub{font-size:11px;color:var(--ink3);white-space:nowrap}
+.brand{display:flex;align-items:baseline;gap:9px}
+nav#tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1}
+nav#tabs::-webkit-scrollbar{display:none}
+.tab{padding:7px 12px;border-radius:7px;white-space:nowrap;font-size:13px;font-weight:600;color:var(--ink2)}
+.tab:hover{background:var(--panel2);color:var(--ink)}
+.tab[aria-selected="true"]{background:var(--pri);color:#fff}
+.iconbtn{width:32px;height:32px;border-radius:7px;display:grid;place-items:center;
+  border:1px solid var(--line);color:var(--ink2);font-size:14px}
+.iconbtn:hover{color:var(--ink);border-color:var(--ink3)}
+
+#work{display:grid;grid-template-columns:1fr 348px;min-height:0}
+#stage{position:relative;min-width:0;background:
+  radial-gradient(120% 90% at 50% 6%, color-mix(in srgb,var(--panel2) 65%,transparent), transparent 68%), var(--bay)}
+#stage canvas{display:block;width:100%;height:100%}
+#bench-stage{position:absolute;inset:0;overflow:auto;padding:16px}
+aside{border-left:1px solid var(--line);background:var(--panel);overflow-y:auto;
+  overscroll-behavior:contain;padding:16px;display:flex;flex-direction:column;gap:13px}
+@media (max-width:900px){
+  body{font-size:14px}
+  #work{grid-template-columns:1fr;grid-template-rows:minmax(230px,42dvh) 1fr}
+  aside{border-left:0;border-top:1px solid var(--line);padding:14px 16px 34px}
+  .brand .sub{display:none}
+}
+
+.card{border:1px solid var(--line);border-radius:var(--r);background:var(--panel2);padding:12px}
+.card h3{font-size:14px;margin-bottom:5px}
+.card p{margin:0;font-size:13px;color:var(--ink2);line-height:1.55}
+.row{display:flex;gap:6px;flex-wrap:wrap}
+.btn{padding:8px 11px;border-radius:8px;border:1px solid var(--line);background:var(--panel2);
+  font-size:12.5px;font-weight:600;color:var(--ink)}
+.btn:hover{border-color:var(--ink3)}
+.btn.on{background:var(--pri);border-color:var(--pri);color:#fff}
+.btn.wide{flex:1 1 auto;text-align:center}
+.btn.primary{background:var(--pri);border-color:var(--pri);color:#fff}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn:disabled{opacity:.42;cursor:not-allowed}
+.btn.ghost{background:transparent}
+dl.spec{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:8px 0 0;font-size:12.5px}
+dl.spec dt{color:var(--ink3)}
+dl.spec dd{margin:0;text-align:right;font-family:"Roboto Mono",monospace;font-variant-numeric:tabular-nums}
+.hint{font-size:12px;color:var(--ink3);line-height:1.5}
+.note{border-left:3px solid var(--warn);padding:8px 10px;border-radius:0 7px 7px 0;
+  background:color-mix(in srgb,var(--warn) 11%,transparent);font-size:12.5px;line-height:1.55}
+.note.bad{border-color:var(--danger);background:color-mix(in srgb,var(--danger) 11%,transparent)}
+.note.good{border-color:var(--good);background:color-mix(in srgb,var(--good) 12%,transparent)}
+.note.info{border-color:var(--pri);background:color-mix(in srgb,var(--pri) 11%,transparent)}
+.switchrow{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:7px 0;border-bottom:1px solid var(--line);font-size:12.5px}
+.switchrow:last-child{border-bottom:0}
+input[type=range]{width:100%;accent-color:var(--pri)}
+
+/* provenance marker — every part says whether it is real or constructed */
+.prov{display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:999px;
+  font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase}
+.prov.real{background:color-mix(in srgb,var(--good) 18%,transparent);color:var(--good)}
+.prov.built{background:color-mix(in srgb,var(--pri) 18%,transparent);color:var(--pri2)}
+.badge{display:inline-block;padding:2px 7px;border-radius:999px;font-size:10.5px;
+  font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.badge.tool{background:color-mix(in srgb,var(--pri) 18%,transparent);color:var(--pri2)}
+.badge.torque{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}
+
+/* training manual */
+.manual{border:1px solid var(--line);border-radius:var(--r);background:var(--panel);overflow:hidden}
+.manual > summary{padding:11px 12px;cursor:pointer;font-size:13px;font-weight:700;
+  display:flex;align-items:center;justify-content:space-between;background:var(--panel3)}
+.manual > summary::-webkit-details-marker{display:none}
+.manual > summary::after{content:"＋";color:var(--ink3);font-weight:400}
+.manual[open] > summary::after{content:"−"}
+.manual .body{padding:12px}
+ol.man{list-style:none;margin:0;padding:0;counter-reset:m;display:flex;flex-direction:column;gap:10px}
+/* Each ELEMENT child of a grid container is its own grid item, so a bare
+   <b> plus a trailing text node made three items in a two-column grid and
+   the prose wrapped one word per line. The item text is wrapped in a single
+   <span> in man() so there is exactly one item beside ::before. */
+ol.man li{counter-increment:m;display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:12.5px;
+  color:var(--ink2);line-height:1.55}
+ol.man li > span{min-width:0}
+ol.man li::before{content:counter(m,decimal-leading-zero);font-family:"Roboto Mono",monospace;
+  font-size:10.5px;font-weight:700;color:var(--pri2);padding-top:2px}
+ol.man li b{color:var(--ink);font-weight:700}
+
+ol.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:3px}
+ol.steps li{display:grid;grid-template-columns:24px 1fr;gap:9px;align-items:start;
+  padding:7px 8px;border-radius:8px;font-size:12.5px;color:var(--ink3);cursor:pointer}
+ol.steps li .n{width:22px;height:22px;border-radius:6px;display:grid;place-items:center;
+  border:1px solid var(--line);font-size:11px;font-weight:700;font-family:"Roboto Mono",monospace}
+ol.steps li.done{color:var(--ink2)}
+ol.steps li.done .n{background:var(--good);border-color:var(--good);color:#06281C}
+ol.steps li.now{background:var(--panel3);color:var(--ink);font-weight:600}
+ol.steps li.now .n{background:var(--pri);border-color:var(--pri);color:#fff}
+.choice{display:block;width:100%;text-align:left;padding:9px 11px;border-radius:8px;
+  border:1px solid var(--line);background:var(--panel);font-size:12.5px;margin-bottom:6px}
+.choice:hover{border-color:var(--ink3)}
+.choice.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 13%,transparent)}
+.choice.wrong{border-color:var(--danger);background:color-mix(in srgb,var(--danger) 13%,transparent)}
+
+#hud{position:absolute;left:12px;top:12px;display:flex;gap:6px;flex-wrap:wrap;
+  max-width:calc(100% - 24px);pointer-events:none}
+#hud > *{pointer-events:auto}
+.chip{padding:6px 10px;border-radius:7px;font-size:11.5px;font-weight:600;color:var(--ink2);
+  background:color-mix(in srgb,var(--panel) 88%,transparent);border:1px solid var(--line);
+  backdrop-filter:blur(8px)}
+.chip.on{background:var(--pri);border-color:var(--pri);color:#fff}
+#caption{position:absolute;left:12px;bottom:12px;font-size:11px;color:var(--ink3);
+  background:color-mix(in srgb,var(--panel) 80%,transparent);border:1px solid var(--line);
+  padding:5px 9px;border-radius:7px;backdrop-filter:blur(8px);max-width:calc(100% - 24px)}
+#readout{position:absolute;right:12px;bottom:12px;padding:8px 11px;border-radius:8px;
+  background:color-mix(in srgb,var(--panel) 90%,transparent);border:1px solid var(--line);
+  backdrop-filter:blur(8px);font-size:11.5px;color:var(--ink2);max-width:58%}
+#loading{position:absolute;inset:0;display:grid;place-items:center;text-align:center;
+  padding:24px;background:var(--bay);z-index:5}
+#loading .bar{width:min(260px,70vw);height:3px;border-radius:2px;background:var(--line);
+  overflow:hidden;margin:12px auto 0}
+#loading .bar i{display:block;height:100%;width:0%;background:var(--pri);transition:width .25s}
+
+#circuit{width:100%;height:auto;max-width:760px;margin:0 auto;display:block}
+#circuit text{font-family:"Roboto Mono",monospace;font-size:11px;fill:var(--ink2)}
+#circuit .wire{stroke:var(--ink3);stroke-width:2.2;fill:none;stroke-linecap:round}
+#circuit .wire.live{stroke:var(--danger);stroke-width:2.8}
+#circuit .wire.dead{stroke:var(--line)}
+#circuit .box{fill:var(--panel2);stroke:var(--line);stroke-width:1.5}
+#circuit .tp{fill:var(--panel);stroke:var(--ink3);stroke-width:1.6;cursor:pointer}
+#circuit .tp:hover{stroke:var(--ink);fill:var(--panel3)}
+#circuit .tp.red{fill:var(--danger);stroke:var(--danger)}
+#circuit .tp.black{fill:var(--ink);stroke:var(--ink)}
+.meter{border:1px solid var(--line);border-radius:var(--r);background:var(--panel2);padding:12px}
+.meter .screen{background:#08120D;border:1px solid var(--line);border-radius:7px;padding:12px 14px;
+  font-family:"Roboto Mono",monospace;color:#5BE08A;text-align:right;font-size:25px;font-weight:700;
+  text-shadow:0 0 12px rgba(91,224,138,.3)}
+.meter .screen small{display:block;font-size:10px;color:#3E8F5C;letter-spacing:.1em;text-align:left;text-shadow:none}
+.probe{display:flex;align-items:center;gap:8px;font-size:12.5px;padding:5px 0}
+.probe .dot{width:11px;height:11px;border-radius:50%;flex:none}
+.probe .dot.r{background:var(--danger)} .probe .dot.b{background:var(--ink)}
+.probe .val{margin-left:auto;font-family:"Roboto Mono",monospace;color:var(--ink3)}
+</style>
+</head>
+<body>
+<div id="shell">
+  <header>
+    <div class="mark">SB</div>
+    <div class="brand"><b>Strip Bay</b><span class="sub">Golf Mk8 GTI · teardown trainer</span></div>
+    <nav id="tabs" role="tablist"></nav>
+    <button class="iconbtn" id="themeBtn" title="Light / dark" aria-label="Toggle light and dark">◐</button>
+  </header>
+  <div id="work">
+    <div id="stage">
+      <canvas id="c"></canvas>
+      <div id="bench-stage" hidden></div>
+      <div id="hud"></div>
+      <div id="caption" hidden></div>
+      <div id="readout" hidden></div>
+      <div id="loading"><div>
+        <div class="eyebrow">Loading the car</div>
+        <div class="mono" id="loadPct" style="font-size:28px;font-weight:700;margin-top:4px">0%</div>
+        <div class="bar"><i id="loadBar"></i></div>
+        <div class="hint" style="margin-top:10px;max-width:300px">
+          8.4 MB · 543,082 triangles · 163 separately named parts</div>
+      </div></div>
+    </div>
+    <aside id="panel"></aside>
+  </div>
+</div>
+
+<!-- three.js r169 is served from alongside this page, not from a CDN. Six
+     files, 1.5 MB, and the import graph is closed — every import inside them
+     resolves to "three" or a sibling file. Nothing here reaches the network
+     except golf.glb, so the app cannot be broken by a CDN or a blocked fetch. -->
+<script type="importmap">
+{"imports":{
+  "three":"./lib/three.module.js",
+  "three/addons/":"./lib/addons/"
+}}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+
+/* ═════════════════════════════════════════════════════════════════════
+   MEASURED FACTS — read off this exact GLB (node tree walked, accessors
+   decoded). Frame: +X is the car's LEFT, +Y up, +Z the nose, ground Y=0.
+   ═══════════════════════════════════════════════════════════════════ */
+const CAR = {length:4.295, width:2.094, height:1.489,
+  axleY:0.315, axleZf:1.3157, axleZr:-1.3157, trackX:0.764,
+  rimR:0.2510, tyreR:0.3288, discR:0.1708, discInner:0.1027,
+  discThick:0.0309, boltR:0.056, hubX:0.858};
+const HINGE = {
+  door_fl:{x: 0.772,y:0,z: 0.870}, door_fr:{x:-0.772,y:0,z: 0.870},
+  door_rl:{x: 0.754,y:0,z:-0.209}, door_rr:{x:-0.754,y:0,z:-0.209},
+  tailgate:{x:0,y:1.394,z:-1.472}};
+const RULES = [
+  [/^Ext_Door_FL_|^Int_Door_FL_|^Ext_Door_Limiter_FL/,'door_fl'],
+  [/^Ext_Door_FR_|^Int_Door_FR_|^Ext_Door_Limiter_FR/,'door_fr'],
+  [/^Ext_Door_RL_|^Int_Door_RL_|^Ext_Door_Limiter_RL/,'door_rl'],
+  [/^Ext_Door_RR_|^Int_Door_RR_|^Ext_Door_Limiter_RR/,'door_rr'],
+  [/^Ext_Trunk_Lid|^Int_Trunk_Lid/,'tailgate'],
+  [/^Rim_FL|^Tire_FL/,'wheel_fl'],[/^Rim_FR|^Tire_FR/,'wheel_fr'],
+  [/^Rim_RL|^Tire_RL/,'wheel_rl'],[/^Rim_RR|^Tire_RR/,'wheel_rr'],
+  [/^Ext_Brake_FL_Rotor/,'rotor_fl'],[/^Ext_Brake_FR_Rotor/,'rotor_fr'],
+  [/^Ext_Brake_FL_Caliper/,'caliper_fl'],[/^Ext_Brake_FR/,'caliper_fr'],
+  [/^Ext_Brake_Rear/,'brakes_rear'],
+  [/^Int_Airbag/,'airbags'],[/^Int_Seats|^seat_/,'seats'],[/^Int_SW/,'steering'],
+  [/^Ext_Sunroof/,'sunroof'],[/^Ext_Lights/,'lamps_front'],[/^Ext_Taillight/,'lamps_rear'],
+  [/^Ext_Window|^Int_Window|^Int_Body_Window|^Ext_Body_Window|^Int_Glass_Clear/,'glazing'],
+  [/^Int_/,'cabin'],[/./,'body']];
+
+const PART = {
+  body:{l:'Body shell',g:'Body',n:'One welded unit. Bonnet, wings, roof and <b>both bumpers</b> are part of this single mesh — they are not separate panels in this file, so they cannot be taken off here.'},
+  door_fl:{l:'Door — front left',g:'Body',n:'Outer skin, inner frame, door card, speaker, glass and check strap, all moving together. Hinged at the A-pillar. The <b>Inside a door</b> bay opens this one up.'},
+  door_fr:{l:'Door — front right',g:'Body',n:'Same assembly mirrored. The steering wheel on this car is on the LEFT, so this is the passenger door.'},
+  door_rl:{l:'Door — rear left',g:'Body',n:'Shorter skin, hinged at the B-pillar. The check strap is what stops it swinging into the car next to you.'},
+  door_rr:{l:'Door — rear right',g:'Body',n:'Rear doors carry their own card, fabric insert and two speakers.'},
+  tailgate:{l:'Tailgate',g:'Body',n:'Hinged at the roof. The gooseneck hinge arms are modelled — they are what swings down into the load space as the lid rises.'},
+  wheel_fl:{l:'Wheel — front left',g:'Chassis',n:'19-inch rim, tyre as its own mesh. Five bolts on a 112 mm circle. Measured rim radius 251 mm, tyre 329 mm.'},
+  wheel_fr:{l:'Wheel — front right',g:'Chassis',n:'Front wheels steer and take most of the braking, so front pads wear two to three times faster than the rears.'},
+  wheel_rl:{l:'Wheel — rear left',g:'Chassis',n:'Rear wheel and tyre.'},
+  wheel_rr:{l:'Wheel — rear right',g:'Chassis',n:'Rear wheel and tyre.'},
+  rotor_fl:{l:'Brake disc — FL',g:'Chassis',n:'Vented front disc, 342 mm across and 31 mm thick as modelled. Discs wear too — measure the thickness, never just look at it.'},
+  rotor_fr:{l:'Brake disc — FR',g:'Chassis',n:'Replace discs in axle pairs, never one side on its own.'},
+  caliper_fl:{l:'Brake caliper — FL',g:'Chassis',n:'Sliding caliper, ahead of the axle on this model. Holds the pads and the piston that squeezes them.'},
+  caliper_fr:{l:'Brake caliper — FR',g:'Chassis',n:'Never let a caliper hang on its flexible hose — support it or you wreck the hose lining.'},
+  brakes_rear:{l:'Rear brakes',g:'Chassis',n:'Rear discs and calipers are modelled as one left-and-right mesh, so this pair cannot be split individually. The brake job uses a front corner.'},
+  seats:{l:'Seats',g:'Interior',n:'Front buckets and rear bench across 14 meshes — main body, bolsters, piping, stitching, headrests. 89,355 triangles.'},
+  steering:{l:'Steering wheel',g:'Interior',n:'On the LEFT of the cabin. This asset is left-hand drive; a UK car has it on the right.'},
+  cabin:{l:'Cabin trim',g:'Interior',n:'Dash, door cards, carpets, headlining, pillars, sun visors, parcel shelf, cup-holder. 33 meshes.'},
+  airbags:{l:'Airbags (SRS)',g:'Safety',n:'<b>Eight separate airbags</b>: driver, passenger, four seat-side bags and two full-length curtains. 66,807 triangles. SRS wiring is never disturbed with the battery connected — follow the disarming procedure and the stated wait. Yellow connectors are a useful hint rather than a reliable way to identify every airbag circuit, and igniter circuits are never probed with an ordinary meter.'},
+  glazing:{l:'Glass',g:'Body',n:'Windscreen, backlight, sunroof and door glass. One shared material, transmission 1.0 — the panes refract rather than just fading.'},
+  lamps_front:{l:'Headlamps',g:'Electrical',n:'Lens, reflector, DRL bar and main-beam emitter are separate meshes, so the lit elements can be shown alone.'},
+  lamps_rear:{l:'Tail lamps',g:'Electrical',n:'Red lens, clear lens, reflector squares and glow element, plus the pair carried on the tailgate.'},
+  sunroof:{l:'Sunroof',g:'Body',n:'Tinted glass pane over an <b>opaque metallic panel</b> — that panel is why the roof reads flat grey in a studio render, not a glass fault.'}
+};
+
+/* ═════════════════════════════════════════════════════════════════════
+   RENDERER — one canvas, one camera. sceneCar holds the real Golf;
+   sceneRig holds the constructed assemblies on a plinth.
+   ═══════════════════════════════════════════════════════════════════ */
+const canvas = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+const pmrem = new THREE.PMREMGenerator(renderer);
+const envRT = pmrem.fromScene(new RoomEnvironment(), 0.04);
+
+const sceneCar = new THREE.Scene(), sceneRig = new THREE.Scene();
+sceneCar.environment = envRT.texture; sceneRig.environment = envRT.texture;
+const camera = new THREE.PerspectiveCamera(38,1,0.02,200);
+camera.position.set(5.2,2.3,6.4);
+const controls = new OrbitControls(camera, canvas);
+controls.enableDamping = true; controls.dampingFactor = .07;
+controls.target.set(0,.72,0); controls.minDistance = .35; controls.maxDistance = 24;
+controls.maxPolarAngle = Math.PI*.495;
+for (const s of [sceneCar, sceneRig]){
+  const k = new THREE.DirectionalLight(0xffffff,2.1); k.position.set(4,7,5);
+  const f = new THREE.DirectionalLight(0xbfd4ff,.75); f.position.set(-6,3,-4);
+  s.add(k,f,new THREE.AmbientLight(0xffffff,.28));
+}
+const floorMat = new THREE.MeshStandardMaterial({color:0x11151b,roughness:.95});
+const floor = new THREE.Mesh(new THREE.CircleGeometry(9,72), floorMat);
+floor.rotation.x = -Math.PI/2; floor.position.y = -.002; sceneCar.add(floor);
+const grid = new THREE.GridHelper(18,36,0x2c3541,0x1f2732);
+grid.material.transparent = true; grid.material.opacity = .55; grid.position.y = .001;
+sceneCar.add(grid);
+/* plinth for the constructed assemblies — their own demos sit on one */
+const plinth = new THREE.Mesh(new THREE.BoxGeometry(2.4,.05,1.8),
+  new THREE.MeshStandardMaterial({color:0x2a3a52,roughness:.55,metalness:.1}));
+plinth.position.y = -.026; sceneRig.add(plinth);
+
+function resize(){
+  const r = canvas.parentElement.getBoundingClientRect();
+  if (!r.width || !r.height) return;
+  renderer.setSize(r.width,r.height,false);
+  camera.aspect = r.width/r.height; camera.updateProjectionMatrix();
+}
+new ResizeObserver(resize).observe(canvas.parentElement);
+
+/* ── tweens ─────────────────────────────────────────────────────── */
+const anim = [];
+const ease = k => k<.5 ? 4*k*k*k : 1-Math.pow(-2*k+2,3)/2;
+function tween(o,p,to,ms=560,done){
+  const from=o[p], t0=performance.now();
+  anim.push({tick(n){const k=Math.min(1,(n-t0)/ms); o[p]=from+(to-from)*ease(k);
+    if(k>=1){done?.();return true} return false}});
+}
+function tweenV(v,to,ms=560,done){
+  const from=v.clone(), t0=performance.now();
+  anim.push({tick(n){const k=Math.min(1,(n-t0)/ms); v.lerpVectors(from,to,ease(k));
+    if(k>=1){done?.();return true} return false}});
+}
+function flyTo(t,p,ms=900){ tweenV(controls.target,t,ms); tweenV(camera.position,p,ms); }
+
+/* ═════════════════════════════════════════════════════════════════════
+   THE REAL CAR
+   ═══════════════════════════════════════════════════════════════════ */
+const carRoot = new THREE.Group(); sceneCar.add(carRoot);
+const parts = {}; let carReady=false, loadFailed=false;
+const loader = new GLTFLoader(); loader.setMeshoptDecoder(MeshoptDecoder);
+/* Published as .glb.wasm, not .glb. Artifact hosting serves a fixed set of
+   extensions and .glb is not one of them, under any content type — while
+   .wasm is served and is binary-safe. GLTFLoader fetches an ArrayBuffer and
+   identifies the file by its "glTF" magic bytes, so the extension and the
+   MIME type are irrelevant to parsing. Same file, byte for byte. */
+loader.load('golf.glb.wasm', g => buildCar(g.scene),
+  /* A server that sends no Content-Length gives e.total = 0. Reporting the
+     bytes actually received beats a progress bar frozen at 0%, which reads
+     as a hang when the download is fine. */
+  e => { const el=document.getElementById('loadPct');
+    if (e.total){ const p=Math.round(e.loaded/e.total*100);
+      el.textContent=p+'%'; document.getElementById('loadBar').style.width=p+'%'; }
+    else el.textContent=(e.loaded/1048576).toFixed(1)+' MB'; },
+  () => { loadFailed = true;
+    document.getElementById('loading').innerHTML =
+      `<div style="max-width:380px"><div class="eyebrow" style="color:var(--danger)">Car asset not loaded</div>
+       <p style="color:var(--ink2);font-size:13px;margin-top:8px"><code class="mono">golf.glb</code> did not
+       load, so the bays that use the real car are unavailable. <b>Inside a door</b>, <b>Starter</b>,
+       <b>Engine</b> and <b>Bench</b> are built in code and still work — pick one above.</p></div>`; });
+
+/* NAME-SPACE MISMATCH, and it silently collapsed the whole car into one part.
+   The GLB names every node "G:Ext_Door_FL_…". three.js runs node names through
+   PropertyBinding.sanitizeNodeName, which DELETES reserved characters rather
+   than substituting them — so the colon vanishes and the mesh arrives called
+   "GExt_Door_FL_…". A test for a leading "G:" never fires, every rule misses,
+   and the catch-all [/./,'body'] swallows all 163 meshes. partIds read 1
+   instead of 24, so every door/wheel/brake action hit `if(!p) return` and did
+   nothing at all — with no error anywhere. Match against the raw name AND both
+   de-prefixed forms, rules in priority order. */
+const classify = n => {
+  const cands = [n];
+  if (n.startsWith('G:')) cands.push(n.slice(2));
+  if (/^G[A-Z]/.test(n)) cands.push(n.slice(1));
+  for (const [re,id] of RULES) for (const c of cands) if (re.test(c)) return id;
+  return 'body';
+};
+function buildCar(root){
+  carRoot.add(root); carRoot.updateMatrixWorld(true);
+  const by = {};
+  root.traverse(o => {
+    if (!o.isMesh) return;
+    /* clone the material per mesh. The GLB shares one `Atlas` and one
+       `CarPaint` across dozens of parts, so without this a highlight or
+       an x-ray on the body would silently change every door too. */
+    if (o.material) o.material = o.material.clone();
+    o.userData.partId = classify(o.name || o.parent?.name || '');
+    (by[o.userData.partId] ||= []).push(o);
+    if (o.material) o.userData.m0 = {transparent:o.material.transparent,
+      opacity:o.material.opacity, depthWrite:o.material.depthWrite};
+  });
+  for (const id in by){
+    const meshes = by[id], box = new THREE.Box3();
+    for (const m of meshes) box.expandByObject(m);
+    const c = box.getCenter(new THREE.Vector3());
+    const pv = HINGE[id] ? new THREE.Vector3(HINGE[id].x,HINGE[id].y,HINGE[id].z) : c;
+    const g = new THREE.Group(); g.position.copy(pv); carRoot.add(g);
+    for (const m of meshes) g.attach(m);
+    let dir = c.clone().sub(new THREE.Vector3(0,.7,0));
+    dir = dir.lengthSq() < 1e-8 ? new THREE.Vector3(0,1,0) : dir.normalize();
+    const tris = meshes.reduce((s,m)=>s+(m.geometry.index?m.geometry.index.count
+      :m.geometry.attributes.position.count)/3,0);
+    parts[id] = {meshes,group:g,home:pv.clone(),centre:c,box,dir,tris:Math.round(tris)};
+  }
+  /* A single bucket means classification failed. It is not a cosmetic
+     problem — nothing can be taken apart — so say so rather than render a
+     car that quietly refuses to come apart. */
+  const nParts = Object.keys(parts).length;
+  if (nParts < 10){
+    console.error(`Strip Bay: only ${nParts} part group(s) from ${root.children.length}`+
+      ` nodes — part classification failed, nothing will come apart.`);
+    document.getElementById('caption').textContent =
+      `WARNING: ${nParts} part group(s) recognised — teardown disabled`;
+  }
+  buildDoorRig();
+  carReady = true; window.__carReady = true;   /* a harness can wait on the truth */
+  buildPads(); setMode(MODE);
+}
+
+/* ── constructed brake pads ──────────────────────────────────────────
+   The GLB has a disc and a caliper and NO PADS. These are built from the
+   measured disc and caliper geometry, and flagged as constructed. */
+const padGroup = new THREE.Group(); const padSide = {};
+function padGeo(){
+  const rI = CAR.discInner+.004, rO = CAR.discR-.004, a = THREE.MathUtils.degToRad(58);
+  const s = new THREE.Shape();
+  /* arc centred on shape-angle 180°, because rotateY(+90°) maps shape −X
+     onto world +Z — and +Z from the axle is where the caliper sits. */
+  s.absarc(0,0,rO, Math.PI-a/2, Math.PI+a/2, false);
+  s.absarc(0,0,rI, Math.PI+a/2, Math.PI-a/2, true);
+  const g = new THREE.ExtrudeGeometry(s,{depth:1,bevelEnabled:false});
+  g.rotateY(Math.PI/2);            /* extrude axis → world +X (the axle) */
+  return g;
+}
+function buildPads(){
+  if (!parts.rotor_fl) return;
+  const ax = new THREE.Vector3(CAR.trackX,CAR.axleY,CAR.axleZf);
+  const fric = new THREE.MeshStandardMaterial({color:0x3A3D42,roughness:.9,metalness:.05});
+  const back = new THREE.MeshStandardMaterial({color:0x8A8F98,roughness:.42,metalness:.85});
+  for (const side of ['outer','inner']){
+    const sgn = side==='outer' ? 1 : -1, grp = new THREE.Group();
+    const f = new THREE.Mesh(padGeo(), fric.clone());
+    const b = new THREE.Mesh(padGeo(), back);
+    grp.add(f,b); grp.position.copy(ax); padGroup.add(grp);
+    padSide[side] = {grp,f,b,sgn};
+  }
+  padGroup.visible = false; carRoot.add(padGroup); setPadWear(12);
+}
+function setPadWear(mm){
+  const gap = CAR.discThick/2 + .0006, t = mm/1000, bt = .005;
+  for (const side in padSide){
+    const {f,b,sgn} = padSide[side];
+    f.scale.x = t; b.scale.x = bt;
+    /* geometry runs 0→+1 in x before scaling, so a −X pad is offset by
+       its own thickness to keep its face against the disc */
+    f.position.x = sgn>0 ? gap : -(gap+t);
+    b.position.x = sgn>0 ? gap+t : -(gap+t+bt);
+    f.material.color.setHex(mm<4 ? 0x5A2222 : 0x3A3D42);
+  }
+}
+
+/* ── car actions ────────────────────────────────────────────────── */
+const S = {doors:{}, tailgate:0, xray:false, explode:0, wheelOff:{}, iso:null};
+const DOOR_OPEN = THREE.MathUtils.degToRad(64);
+function setDoor(id,open){
+  const p=parts[id]; if(!p) return;
+  S.doors[id]=open?1:0;
+  tween(p.group.rotation,'y', open ? (id.endsWith('l')?-1:1)*DOOR_OPEN : 0, 640);
+}
+function setTailgate(open){
+  const p=parts.tailgate; if(!p) return; S.tailgate=open?1:0;
+  tween(p.group.rotation,'x', open?THREE.MathUtils.degToRad(62):0, 780);
+}
+function setXray(on){
+  S.xray=on;
+  for (const id of ['body','cabin','seats','glazing','door_fl','door_fr','door_rl','door_rr']){
+    const p=parts[id]; if(!p) continue;
+    for (const m of p.meshes){
+      const mat=m.material; if(!mat) continue;
+      if (on){ mat.transparent=true; mat.opacity=(id==='body')?.09:.28; mat.depthWrite=false; }
+      else { const b=m.userData.m0; mat.transparent=b.transparent; mat.opacity=b.opacity; mat.depthWrite=b.depthWrite; }
+      mat.needsUpdate=true;
+    }
+  }
+}
+function setExplode(k){
+  S.explode=k;
+  for (const id in parts){
+    const p=parts[id];
+    if (id==='body'){ tweenV(p.group.position,p.home.clone(),420); continue; }
+    const d = HINGE[id]
+      ? (id==='tailgate' ? new THREE.Vector3(0,.32,-1) : new THREE.Vector3(Math.sign(HINGE[id].x),0,0))
+      : p.dir;
+    tweenV(p.group.position, p.home.clone().add(d.clone().multiplyScalar(k*.95)), 420);
+  }
+}
+function setWheelOff(id,off){
+  const p=parts[id]; if(!p) return; S.wheelOff[id]=off;
+  tweenV(p.group.position, p.home.clone().add(
+    new THREE.Vector3(Math.sign(p.centre.x)*(off?.85:0), off?.06:0, 0)), 640);
+}
+function iso(ids){
+  S.iso=ids;
+  for (const id in parts) parts[id].group.visible = !ids || ids.includes(id);
+  padGroup.visible = !!(ids && ids.includes('pads'));
+}
+/* hover + click */
+const ray=new THREE.Raycaster(), ptr=new THREE.Vector2(); let hi=null, selected=null;
+function hl(id){
+  if (hi===id) return;
+  parts[hi]?.meshes.forEach(m=>m.material?.emissive?.setHex(0x000000));
+  hi=id;
+  parts[id]?.meshes.forEach(m=>m.material?.emissive?.setHex(0x0A2038));
+}
+canvas.addEventListener('pointermove', e => {
+  if (MODE==='doorOff' && carReady){
+    const r=canvas.getBoundingClientRect();
+    ptr.set((e.clientX-r.left)/r.width*2-1, -((e.clientY-r.top)/r.height*2-1));
+    ray.setFromCamera(ptr,camera);
+    const h=ray.intersectObjects([doorRig, ...(parts.door_fl?[parts.door_fl.group]:[])],true)
+      .find(x=>x.object.visible);
+    let o=h&&h.object, fx=null;
+    while(o&&!fx){ fx=o.userData?.fix; o=o.parent; }
+    if(!fx && h && /Limiter/i.test(h.object.name||'')) fx='strap';
+    canvas.style.cursor = fx ? 'pointer' : 'grab';
+    return;
+  }
+  if (MODE!=='strip' || !carReady) return;
+  const r=canvas.getBoundingClientRect();
+  ptr.set((e.clientX-r.left)/r.width*2-1, -((e.clientY-r.top)/r.height*2-1));
+  ray.setFromCamera(ptr,camera);
+  const h=ray.intersectObjects(carRoot.children,true).find(x=>x.object.isMesh&&x.object.visible);
+  hl(h?h.object.userData.partId:null); canvas.style.cursor=h?'pointer':'grab';
+});
+canvas.addEventListener('click', ()=>{ if(MODE==='strip'&&hi){ selected=hi; drawPanel(); } });
+/* the fasteners are clickable objects in the scene — that is the difference
+   between "press a button and the door opens" and doing the job */
+canvas.addEventListener('pointerdown', e => {
+  if (MODE!=='doorOff' || !carReady) return;
+  const r=canvas.getBoundingClientRect();
+  ptr.set((e.clientX-r.left)/r.width*2-1, -((e.clientY-r.top)/r.height*2-1));
+  ray.setFromCamera(ptr,camera);
+  const h=ray.intersectObjects([doorRig, ...(parts.door_fl?[parts.door_fl.group]:[])],true)
+    .find(x=>x.object.visible);
+  if (!h) return;
+  let o=h.object, fix=null;
+  while(o && !fix){ fix=o.userData?.fix; o=o.parent; }
+  /* the check strap is REAL geometry — clicking the actual part releases it */
+  if (!fix && /Limiter/i.test(h.object.name||'')) fix='strap';
+  if (fix) doorAct(fix);
+});
+
+/* ═════════════════════════════════════════════════════════════════════
+   CONSTRUCTED: INSIDE A DOOR
+   Built in code, because the GLB has door skins and cards but nothing
+   between them. Laid out in the X–Y plane, thickness on Z, viewed from
+   inside the car looking outward — the view you get with the card off.
+   ═══════════════════════════════════════════════════════════════════ */
+const doorAsm = new THREE.Group(); sceneRig.add(doorAsm);
+const DOOR = {win:0, card:true, latch:0};
+const dParts = {};
+function buildDoor(){
+  const M = (c,o={}) => new THREE.MeshStandardMaterial({color:c,roughness:.55,metalness:.35,...o});
+  const steel=M(0x8b93a0,{metalness:.9,roughness:.35}), paint=M(0xC01B2B,{metalness:.25,roughness:.3}),
+        plastic=M(0x22262c,{metalness:.05,roughness:.8}), glassM=new THREE.MeshStandardMaterial(
+          {color:0x9fc6e8,transparent:true,opacity:.28,roughness:.05,metalness:0});
+  const add=(m,x,y,z,g)=>{const o=new THREE.Mesh(g,m);o.position.set(x,y,z);doorAsm.add(o);return o};
+
+  /* outer skin — the painted panel you see from the street */
+  dParts.skin = add(paint,0,.52,-.055, new THREE.BoxGeometry(1.22,1.00,.012));
+  /* inner frame: four rails around an aperture */
+  const fr=new THREE.BoxGeometry(1.22,.09,.055);
+  add(steel,0,.055,0,fr); add(steel,0,1.00,0,fr.clone());
+  const fv=new THREE.BoxGeometry(.09,1.00,.055);
+  add(steel,-.565,.52,0,fv); add(steel,.565,.52,0,fv.clone());
+  /* side-impact beam */
+  dParts.beam = add(steel,0,.42,-.03, new THREE.CylinderGeometry(.028,.028,1.12,16));
+  dParts.beam.rotation.z = Math.PI/2 - .16;
+  /* window glass — slides in Y */
+  dParts.glass = add(glassM,0,1.34,-.022, new THREE.BoxGeometry(1.02,.50,.006));
+  /* regulator: two rails, a carrier, a drum and its motor */
+  const rail=new THREE.BoxGeometry(.022,.80,.022);
+  add(steel,-.30,.50,0,rail); add(steel,.30,.50,0,rail.clone());
+  dParts.carrier = add(steel,0,.86,0, new THREE.BoxGeometry(.66,.05,.03));
+  dParts.drum = add(steel,.30,.20,.02, new THREE.CylinderGeometry(.055,.055,.035,20));
+  dParts.drum.rotation.x = Math.PI/2;
+  dParts.motor = add(plastic,.30,.20,.075, new THREE.CylinderGeometry(.045,.045,.09,18));
+  dParts.motor.rotation.x = Math.PI/2;
+  /* latch + striker */
+  dParts.latch = add(steel,-.53,.42,.01, new THREE.BoxGeometry(.10,.13,.07));
+  dParts.pawl  = add(M(0xb04a2a,{metalness:.7}),-.585,.42,.01, new THREE.BoxGeometry(.05,.05,.045));
+  add(steel,-.66,.42,.01, new THREE.CylinderGeometry(.013,.013,.09,12)).rotation.z=Math.PI/2;
+  /* lock rod up to the sill button, and the actuator */
+  dParts.rod = add(steel,-.50,.78,.01, new THREE.CylinderGeometry(.005,.005,.60,8));
+  dParts.actuator = add(plastic,-.40,.26,.02, new THREE.BoxGeometry(.11,.08,.06));
+  /* speaker + wiring loom */
+  dParts.speaker = add(plastic,.24,.20,-.01, new THREE.CylinderGeometry(.085,.085,.055,24));
+  dParts.speaker.rotation.x = Math.PI/2;
+  const loom = new THREE.CatmullRomCurve3([new THREE.Vector3(.58,.14,.03),
+    new THREE.Vector3(.30,.30,.045), new THREE.Vector3(-.05,.28,.045),
+    new THREE.Vector3(-.40,.34,.04), new THREE.Vector3(-.56,.60,.03)]);
+  dParts.loom = add(M(0x171a1f,{metalness:.1,roughness:.9}),0,0,0,
+    new THREE.TubeGeometry(loom,40,.011,10,false));
+  /* vapour barrier, then the trim card over the lot */
+  dParts.barrier = add(new THREE.MeshStandardMaterial({color:0x3a3f46,transparent:true,
+    opacity:.34,roughness:.9,side:THREE.DoubleSide}),0,.52,.045, new THREE.PlaneGeometry(1.14,.94));
+  dParts.card = add(plastic,0,.52,.085, new THREE.BoxGeometry(1.16,.96,.028));
+  dParts.armrest = add(plastic,-.06,.34,.135, new THREE.BoxGeometry(.52,.12,.10));
+  dParts.pull = add(M(0x9aa3b0,{metalness:.8,roughness:.3}),-.40,.62,.12,
+    new THREE.BoxGeometry(.13,.045,.05));
+  doorAsm.visible = false;
+}
+function doorTick(){
+  const w = DOOR.win;                             /* 0 shut … 1 fully down */
+  dParts.glass.position.y = 1.34 - w*.60;
+  dParts.carrier.position.y = .86 - w*.60;
+  dParts.drum.rotation.z = -w*8.2;
+  for (const k of ['card','armrest','pull']) dParts[k].visible = DOOR.card;
+  dParts.barrier.visible = DOOR.card;
+  dParts.pawl.rotation.z = DOOR.latch * 1.05;
+  dParts.skin.material.opacity = DOOR.card ? 1 : .13;
+  dParts.skin.material.transparent = !DOOR.card;
+}
+
+/* ═════════════════════════════════════════════════════════════════════
+   CONSTRUCTED: STARTER MOTOR
+   ═══════════════════════════════════════════════════════════════════ */
+const starterAsm = new THREE.Group(); sceneRig.add(starterAsm);
+const ST = {key:0, spin:0, throwPos:0, ring:0};
+const sParts = {};
+function buildStarter(){
+  const M=(c,o={})=>new THREE.MeshStandardMaterial({color:c,roughness:.45,metalness:.7,...o});
+  const cast=M(0x6e767f,{roughness:.62,metalness:.5}), cu=M(0xb87333,{metalness:.9,roughness:.3}),
+        steel=M(0x98a1ad,{metalness:.92,roughness:.28}), dark=M(0x1d2127,{metalness:.2,roughness:.8});
+  const add=(m,g,x,y,z)=>{const o=new THREE.Mesh(g,m);o.position.set(x,y,z);starterAsm.add(o);return o};
+  /* body, cut away so the armature shows */
+  const body = add(cast,new THREE.CylinderGeometry(.075,.075,.26,28,1,false,0,Math.PI*1.35),0,.30,0);
+  body.rotation.z = Math.PI/2; sParts.body = body;
+  sParts.arm = add(steel,new THREE.CylinderGeometry(.052,.052,.23,24),0,.30,0);
+  sParts.arm.rotation.z = Math.PI/2;
+  /* A winding runs ALONG the armature, not out of it. The first version
+     rotated each bar 90 deg about Z first, which turned its long axis
+     radial — ten copper spikes sticking through the housing. The box is
+     already long on X (the axle), so it only needs positioning at radius
+     and rolling about X. Found by looking at the render. */
+  for (let i=0;i<10;i++){
+    const a0=i/10*Math.PI*2;
+    const w = add(cu,new THREE.BoxGeometry(.205,.013,.013),0,.30,0);
+    w.rotation.x=a0;
+    w.position.set(0,.30+Math.cos(a0)*.056, Math.sin(a0)*.056);
+    (sParts.wind ||= []).push({m:w,a:a0});
+  }
+  sParts.comm = add(cu,new THREE.CylinderGeometry(.040,.040,.032,22),-.145,.30,0);
+  sParts.comm.rotation.z = Math.PI/2;
+  add(dark,new THREE.BoxGeometry(.022,.030,.022),-.145,.348,0);
+  add(dark,new THREE.BoxGeometry(.022,.030,.022),-.145,.252,0);
+  /* solenoid, plunger, fork */
+  add(cast,new THREE.CylinderGeometry(.040,.040,.135,22),.02,.415,0).rotation.z=Math.PI/2;
+  sParts.plunger = add(steel,new THREE.CylinderGeometry(.020,.020,.10,14),.05,.415,0);
+  sParts.plunger.rotation.z = Math.PI/2;
+  sParts.fork = add(steel,new THREE.BoxGeometry(.016,.15,.05),.105,.36,0);
+  /* drive: shaft + pinion with real teeth */
+  sParts.shaft = add(steel,new THREE.CylinderGeometry(.020,.020,.20,14),.19,.30,0);
+  sParts.shaft.rotation.z = Math.PI/2;
+  sParts.pinion = new THREE.Group(); sParts.pinion.position.set(.255,.30,0); starterAsm.add(sParts.pinion);
+  sParts.pinion.add(new THREE.Mesh(new THREE.CylinderGeometry(.034,.034,.042,20), steel));
+  sParts.pinion.children[0].rotation.z = Math.PI/2;
+  for (let i=0;i<9;i++){
+    const t=new THREE.Mesh(new THREE.BoxGeometry(.042,.016,.013), steel);
+    const a=i/9*Math.PI*2; t.position.set(0,Math.cos(a)*.038,Math.sin(a)*.038); t.rotation.x=a;
+    sParts.pinion.add(t);
+  }
+  /* flywheel ring gear — the thing it has to engage */
+  sParts.ring = new THREE.Group(); sParts.ring.position.set(.40,.30,0); starterAsm.add(sParts.ring);
+  const rg=new THREE.Mesh(new THREE.TorusGeometry(.20,.022,12,64), cast);
+  rg.rotation.y = Math.PI/2; sParts.ring.add(rg);
+  for (let i=0;i<44;i++){
+    const t=new THREE.Mesh(new THREE.BoxGeometry(.040,.017,.014), cast);
+    const a=i/44*Math.PI*2; t.position.set(0,Math.cos(a)*.178,Math.sin(a)*.178); t.rotation.x=a;
+    sParts.ring.add(t);
+  }
+  starterAsm.visible = false;
+}
+function starterTick(dt){
+  const engaged = ST.key>.5;
+  ST.throwPos += ((engaged?1:0) - ST.throwPos) * Math.min(1, dt*7);
+  const shove = ST.throwPos*.055;
+  sParts.plunger.position.x = .05 - ST.throwPos*.035;
+  sParts.fork.rotation.z = -ST.throwPos*.30;
+  sParts.pinion.position.x = .255 + shove;
+  const meshed = ST.throwPos > .82;
+  ST.spin += ((engaged?1:0) - ST.spin) * Math.min(1, dt*(engaged?3.2:5));
+  const w = ST.spin*34;
+  sParts.arm.rotation.x += w*dt; sParts.comm.rotation.x = sParts.arm.rotation.x;
+  sParts.pinion.rotation.x += w*dt;
+  for (const {m,a} of (sParts.wind||[])){
+    const r = sParts.arm.rotation.x + a;
+    m.position.set(0,.30+Math.cos(r)*.056, Math.sin(r)*.056); m.rotation.x = r;
+  }
+  if (meshed) ST.ring += w*dt*(9/44);            /* 9 teeth driving 44 */
+  sParts.ring.rotation.x = ST.ring;
+}
+
+/* ═════════════════════════════════════════════════════════════════════
+   CONSTRUCTED: FOUR-STROKE ENGINE
+   ═══════════════════════════════════════════════════════════════════ */
+const engAsm = new THREE.Group(); sceneRig.add(engAsm);
+const ENG = {angle:0, rpm:900, running:true, cutaway:true, focus:null};
+const eP = {pistons:[],rods:[],throws:[],valves:[],flames:[],bores:[]};
+const CR=.215, RL=.60, BORE=.33, PITCH=.50;
+const FIRING=[0,540,180,360];                    /* cyl 1,2,3,4 → 1-3-4-2 */
+function buildEngine(){
+  const steel=new THREE.MeshStandardMaterial({color:0x99a1ad,metalness:.9,roughness:.32});
+  const alu=new THREE.MeshStandardMaterial({color:0xb7bec7,metalness:.72,roughness:.42});
+  const gl=new THREE.MeshStandardMaterial({color:0x6d7c8c,metalness:.1,roughness:.16,
+    transparent:true,opacity:.17,side:THREE.DoubleSide});
+  const sh=new THREE.Mesh(new THREE.CylinderGeometry(.085,.085,PITCH*4.2,24),steel);
+  sh.rotation.z=Math.PI/2; sh.position.y=.30; engAsm.add(sh);
+  eP.crank=new THREE.Group(); eP.crank.position.y=.30; engAsm.add(eP.crank);
+  for (let i=0;i<4;i++){
+    const x=(i-1.5)*PITCH;
+    const bore=new THREE.Mesh(new THREE.CylinderGeometry(BORE/2,BORE/2,.70,32,1,true),gl);
+    bore.position.set(x,.95,0); engAsm.add(bore); eP.bores.push(bore);
+    const p=new THREE.Mesh(new THREE.CylinderGeometry(BORE/2-.012,BORE/2-.012,.21,28),alu);
+    p.position.x=x; engAsm.add(p); eP.pistons.push(p);
+    const rod=new THREE.Mesh(new THREE.BoxGeometry(.048,RL,.085),steel);
+    rod.position.x=x; engAsm.add(rod); eP.rods.push(rod);
+    const th=new THREE.Group();
+    const pin=new THREE.Mesh(new THREE.CylinderGeometry(.050,.050,.15,18),steel);
+    pin.rotation.z=Math.PI/2; pin.position.y=CR;
+    const web=new THREE.Mesh(new THREE.BoxGeometry(.055,CR+.15,.19),steel); web.position.y=CR/2;
+    th.add(pin,web); th.position.x=x;
+    if (i===1||i===2) th.rotation.x=Math.PI;      /* cyl 2 & 3 throws at 180° */
+    eP.crank.add(th); eP.throws.push(th);
+    const vs=[];
+    for (const [k,dz] of [[0,-.082],[1,.082]]){
+      const v=new THREE.Group();
+      const st=new THREE.Mesh(new THREE.CylinderGeometry(.015,.015,.20,12),steel); st.position.y=.10;
+      const hd=new THREE.Mesh(new THREE.CylinderGeometry(.072,.060,.028,20),
+        new THREE.MeshStandardMaterial({color:k?0xc4643a:0x5f96d6,metalness:.82,roughness:.32}));
+      v.add(st,hd); v.position.set(x,1.30,dz); engAsm.add(v); vs.push(v);
+    }
+    eP.valves.push(vs);
+    const fl=new THREE.PointLight(0xFF6A1E,0,1.3,2); fl.position.set(x,1.22,0);
+    engAsm.add(fl); eP.flames.push(fl);
+  }
+  eP.head=new THREE.Mesh(new THREE.BoxGeometry(PITCH*4.2,.10,.60),
+    new THREE.MeshStandardMaterial({color:0x767d87,metalness:.7,roughness:.5,
+      transparent:true,opacity:.42}));
+  eP.head.position.y=1.30; engAsm.add(eP.head);
+  engAsm.visible=false;
+}
+const pistonY = d => { const t=THREE.MathUtils.degToRad(d);
+  return CR*Math.cos(t)+Math.sqrt(RL*RL-(CR*Math.sin(t))**2); };
+const STROKE = a => a<180?['Power','var(--warn)']:a<360?['Exhaust','var(--ink2)']
+                    :a<540?['Intake','var(--pri2)']:['Compression','var(--danger)'];
+const lift = (a,ex) => { const [o,c]=ex?[145,375]:[345,575];
+  const w=((a-o)%720+720)%720, sp=c-o; return w>sp?0:Math.sin(Math.PI*w/sp); };
+function engineTick(dt){
+  if (ENG.running) ENG.angle=(ENG.angle+ENG.rpm*6*dt)%720;
+  const base=ENG.angle;
+  eP.crank.rotation.x=THREE.MathUtils.degToRad(base);
+  for (let i=0;i<4;i++){
+    const a=(base+FIRING[i])%720, t=THREE.MathUtils.degToRad(a);
+    const y=pistonY(a), pinY=CR*Math.cos(t), pinZ=CR*Math.sin(t);
+    eP.pistons[i].position.y=.30+y+.055;
+    const topY=.30+y, pY=.30+pinY, pZ=pinZ;
+    eP.rods[i].position.set(eP.rods[i].position.x,(pY+topY)/2,pZ/2);
+    eP.rods[i].rotation.x=Math.atan2(-pZ,topY-pY);
+    for (const [k,v] of eP.valves[i].entries()) v.position.y=1.30-lift(a,k)*.062;
+    eP.flames[i].intensity=(a<26?(1-a/26):0)*5.2;
+    const on = ENG.focus===null || ENG.focus===i;
+    eP.pistons[i].visible=eP.rods[i].visible=on;
+    eP.bores[i].visible=on&&ENG.cutaway;
+    eP.valves[i].forEach(v=>v.visible=on);
+  }
+  eP.head.visible=ENG.cutaway;
+}
+buildDoor(); buildStarter(); buildEngine();
+
+/* ═════════════════════════════════════════════════════════════════════
+   TAKE THE DOOR OFF — a physical job, not a button
+
+   The four hinge bolts, the loom boot and the door prop are CONSTRUCTED and
+   placed on measured geometry: the door skin's leading edge rakes back with
+   the A-pillar, so the lower hinge sits at z +0.845 and the upper at +0.745.
+   The CHECK STRAP is real — Ext_Door_Limiter_FL, measured at
+   (0.781, 0.624, 0.686) — so the trainee releases the actual part.
+
+   Nothing here is a cosmetic animation. Every fastener has a prerequisite,
+   and trying it early is REFUSED with the reason, on the Union-Alpha
+   "simulator hard stop" principle: a trainer that lets you do the dangerous
+   thing and then plays a nice animation has taught you the wrong lesson.
+   ═══════════════════════════════════════════════════════════════════ */
+const FIX = {
+  bolt_ul:{label:'Upper hinge bolt — top',    p:[ .832,1.085, .745]},
+  bolt_ll:{label:'Upper hinge bolt — bottom', p:[ .832,1.015, .745]},
+  bolt_bl:{label:'Lower hinge bolt — top',    p:[ .838, .555, .845]},
+  bolt_bb:{label:'Lower hinge bolt — bottom', p:[ .838, .485, .845]}};
+const DO = {looked:false, isolated:false, supported:false, loom:false,
+            strap:false, marked:false, out:{}, off:false, tool:null,
+            stops:0, log:[]};
+const doorRig = new THREE.Group();
+const dRig = {bolts:{}, marks:[], hinges:[]};
+function buildDoorRig(){
+  const steel=new THREE.MeshStandardMaterial({color:0x7d858f,metalness:.9,roughness:.32});
+  const done =new THREE.MeshStandardMaterial({color:0x34D399,metalness:.5,roughness:.4});
+  const rub  =new THREE.MeshStandardMaterial({color:0x1b1e23,metalness:.1,roughness:.9});
+  for (const [k,f] of Object.entries(FIX)){
+    const g=new THREE.Group(); g.position.set(...f.p);
+    const head=new THREE.Mesh(new THREE.CylinderGeometry(.017,.017,.014,6),steel);
+    head.rotation.z=Math.PI/2;
+    const shank=new THREE.Mesh(new THREE.CylinderGeometry(.008,.008,.05,10),steel);
+    shank.rotation.z=Math.PI/2; shank.position.x=-.03;
+    g.add(head,shank); g.userData={fix:k}; doorRig.add(g);
+    dRig.bolts[k]={g,head,shank,steel,done};
+  }
+  /* hinge brackets, so the bolts are clearly going into something */
+  for (const [y,z] of [[1.05,.745],[.52,.845]]){
+    const h=new THREE.Mesh(new THREE.BoxGeometry(.055,.13,.045),steel);
+    h.position.set(.808,y,z); doorRig.add(h); dRig.hinges.push(h);
+  }
+  /* the loom boot at the hinge pillar */
+  dRig.boot=new THREE.Mesh(new THREE.CylinderGeometry(.028,.028,.075,14),rub);
+  dRig.boot.rotation.z=Math.PI/2.4; dRig.boot.position.set(.775,.82,.80);
+  dRig.boot.userData={fix:'loom'}; doorRig.add(dRig.boot);
+  /* the prop that has to be under the door before a hinge bolt comes out */
+  dRig.prop=new THREE.Group();
+  const post=new THREE.Mesh(new THREE.CylinderGeometry(.035,.035,.26,12),
+    new THREE.MeshStandardMaterial({color:0xF59E0B,metalness:.4,roughness:.5}));
+  post.position.y=.13;
+  const pad=new THREE.Mesh(new THREE.BoxGeometry(.28,.03,.34),rub); pad.position.y=.27;
+  const base=new THREE.Mesh(new THREE.CylinderGeometry(.11,.11,.03,16),
+    new THREE.MeshStandardMaterial({color:0x444a53,metalness:.6,roughness:.5}));
+  dRig.prop.add(post,pad,base); dRig.prop.scale.setScalar(1.25); dRig.prop.position.set(.92,.0,.30);
+  dRig.prop.visible=false; doorRig.add(dRig.prop);
+  doorRig.visible=false; carRoot.add(doorRig);
+}
+/* the gate for every action, and the reason it refuses */
+function doorGate(act){
+  if (act==='loom'){
+    if (!DO.looked) return 'Look the procedure up first. You do not know yet what this door carries — on many cars the door loom includes airbag circuits, and finding that out afterwards is too late.';
+    if (!DO.isolated) return 'Battery still connected. The door loom can carry SRS circuits, and disturbing a live airbag circuit is how they deploy in your hands. Isolate it and wait the stated time.';
+  }
+  if (act && act.startsWith('bolt')){
+    if (!DO.looked) return 'Look the procedure up first, so you use the tool the data specifies rather than the one that nearly fits. That is how hinge bolts get rounded off.';
+    if (DO.tool===null) return 'No tool selected. Pick the one the procedure calls for.';
+    if (DO.tool!==0) return 'STOP — wrong tool. A near-enough socket or an adjustable spanner rounds the head off a hinge bolt, and a rounded hinge bolt turns a 40-minute door removal into a drilling and extracting job. Use what the data specifies.';
+    if (!DO.loom) return 'STOP — the loom is still plugged in. Take the hinge bolts out now and the door drops away on its wiring: stretched conductors, a torn boot, and on a car with door SRS a damaged airbag circuit.';
+    if (!DO.strap) return 'STOP — the check strap is still attached. With the hinges out the whole weight of the door hangs on the strap. It bends, or it pulls its mount out of the pillar, and now you have a body repair as well.';
+    if (!DO.supported) return 'STOP — nothing is under the door. It is around 25–30 kg with the glass and trim in it. Take the last bolt out with nothing supporting it and it falls: on the sill, on the paint, or on you.';
+  }
+  if (act==='lift'){
+    const left=Object.keys(FIX).filter(k=>!DO.out[k]);
+    if (left.length) return `${left.length} hinge bolt${left.length>1?'s':''} still in. It is not coming off, and levering at it bends the hinge.`;
+  }
+  return null;
+}
+function doorAct(act){
+  const stop=doorGate(act);
+  if (stop){ DO.stops++; DO.log.unshift({bad:true,t:stop}); drawPanel(); return; }
+  if (act==='look'){ DO.looked=true; DO.log.unshift({t:'Procedure read. Fastener list and tool for this job are now known.'}); }
+  if (act==='isolate'){ DO.isolated=true; DO.log.unshift({t:'Battery isolated, wait observed.'}); }
+  if (act==='support'){ DO.supported=true; dRig.prop.visible=true;
+    DO.log.unshift({t:'Door supported. The prop carries the weight, not the last bolt.'}); }
+  if (act==='loom'){ DO.loom=true; tweenV(dRig.boot.position,
+      new THREE.Vector3(.60,.80,.86),500);
+    DO.log.unshift({t:'Loom disconnected at the hinge pillar and pulled clear.'}); }
+  if (act==='strap'){ DO.strap=true;
+    const p=parts.door_fl; DO.log.unshift({t:'Check strap released at the pillar end.'}); }
+  if (act==='mark'){ DO.marked=true;
+    for (const h of dRig.hinges){
+      const m=new THREE.Mesh(new THREE.BoxGeometry(.004,.10,.05),
+        new THREE.MeshStandardMaterial({color:0xE7ECF2,emissive:0x333333,roughness:.6}));
+      m.position.set(h.position.x+.030,h.position.y,h.position.z); doorRig.add(m); dRig.marks.push(m);
+    }
+    DO.log.unshift({t:'Hinge positions marked. Without this the door goes back misaligned and you chase the shut line for an hour.'}); }
+  if (act && act.startsWith('bolt')){
+    DO.out[act]=true; const b=dRig.bolts[act];
+    b.head.material=b.done; b.shank.material=b.done;
+    tweenV(b.g.position,new THREE.Vector3(FIX[act].p[0]+.16,FIX[act].p[1]-.05,FIX[act].p[2]+.05),480);
+    DO.log.unshift({t:`${FIX[act].label} out.`}); }
+  if (act==='lift'){ DO.off=true;
+    const p=parts.door_fl;
+    if (p){ tween(p.group.rotation,'y',-0.30,900);
+      tweenV(p.group.position,p.home.clone().add(new THREE.Vector3(.55,-.05,.22)),900); }
+    DO.log.unshift({t:DO.marked
+      ? 'Door off, and the hinges are marked — it will go back where it came from.'
+      : 'Door off. You did NOT mark the hinges, so refitting is now trial and error on the shut line.'}); }
+  if (act==='reset'){
+    Object.assign(DO,{looked:false,isolated:false,supported:false,loom:false,strap:false,
+      marked:false,out:{},off:false,tool:null,stops:0,log:[]});
+    dRig.prop.visible=false;
+    dRig.boot.position.set(.775,.82,.80);
+    for (const k in dRig.bolts){ const b=dRig.bolts[k];
+      b.head.material=b.steel; b.shank.material=b.steel; b.g.position.set(...FIX[k].p); }
+    for (const m of dRig.marks) doorRig.remove(m); dRig.marks.length=0;
+    const p=parts.door_fl; if(p){ p.group.rotation.y=0; p.group.position.copy(p.home); }
+  }
+  drawHud(); drawPanel();
+}
+
+/* ═════════════════════════════════════════════════════════════════════
+   BENCH — starting & lighting circuit, real arithmetic
+   ═══════════════════════════════════════════════════════════════════ */
+const FAULTS = {
+  none:{l:'No fault (healthy)',h:'Everything works. Learn what good reads like before you hunt a fault.'},
+  fuse_lamp:{l:'Blown lamp fuse F2',h:'Lamps dead, everything else normal.'},
+  earth:{l:'Corroded earth E1',h:'Resistance in the return path. A volt-drop test finds it; a continuity beep often will not.'},
+  battery:{l:'Flat battery',h:'Almost normal at rest, collapses the moment it is loaded.'},
+  relay_coil:{l:'Open relay coil',h:'No click, no crank. Lights fine.'},
+  feed:{l:'Open feed to relay 30',h:'Relay clicks, starter does nothing.'}};
+const BEN = {fault:'none', ign:0, clutch:false, lamps:false, mode:'V', red:'B+', black:'GND', found:null};
+function solve(){
+  const f=BEN.fault;
+  const Voc = f==='battery'?10.6:12.62, Rint = f==='battery'?.38:.012;
+  /* 2.6 ohm dropped 8.23 V of a 12.6 V battery and still reported the
+     lamps as lit. A badly corroded earth strap is a few tenths of an ohm;
+     that gives a ~2.5 V drop, which is unmistakably a fail against the
+     0.2 V rule the manual teaches, and still lets the lamps glow dimly. */
+  const Re = f==='earth'?.35:.004;
+  const fuseOK=f!=='fuse_lamp', coilOK=f!=='relay_coil', feedOK=f!=='feed';
+  const cranking = BEN.ign===3 && BEN.clutch && coilOK;
+  const lampsOn = BEN.lamps && BEN.ign>=2;
+  let Vb=Voc;
+  for (let k=0;k<3;k++){
+    const Il=(lampsOn&&fuseOK)?Vb/(1.37+.004+Re):0;
+    const Is=(cranking&&feedOK)?Vb/(.028+.003+Re):0;
+    const Ic=cranking?Vb/(86+Re):0;
+    Vb=Math.max(0,Voc-(Il+Is+Ic)*Rint);
+  }
+  const Il=(lampsOn&&fuseOK)?Vb/(1.37+.004+Re):0;
+  const Is=(cranking&&feedOK)?Vb/(.028+.003+Re):0;
+  const Ve=(Il+Is)*Re;
+  const N={GND:0,'B-':0,E1:Ve,E2:Ve,SE:Ve,LME:Ve,'B+':Vb,F1o:Vb};
+  N.K30 = feedOK?Vb:0;
+  /* contacts open → 87 sits at earth through the starter winding, not floating */
+  N.K87 = (cranking&&feedOK) ? Vb-Is*.003 : Ve;
+  N.SB = N.K87;
+  N.K85 = (BEN.ign===3&&BEN.clutch)?Vb:0;
+  N.K86 = coilOK?Ve:((BEN.ign===3&&BEN.clutch)?Vb:Ve);
+  N.F2i = BEN.ign>=2?Vb:0;
+  N.F2o = (BEN.ign>=2&&fuseOK)?Vb:0;
+  N.LMP = (lampsOn&&fuseOK)?Vb-Il*.004:0;
+  N.IGN = BEN.ign>=1?Vb:0;
+  return {N,Vb,Il,Is,Ve,Re,lampsLit:Il>1,dim:Il>1&&Il<8,cranking:Is>20,fuseOK,coilOK,feedOK};
+}
+function meterRead(){
+  const r=solve();
+  if (BEN.mode==='V') return {v:(r.N[BEN.red]-r.N[BEN.black]).toFixed(2),u:'V'};
+  if (BEN.mode==='A'){
+    const lamp=['F2o','LMP','LME'].includes(BEN.red), st=['K87','SB','SE'].includes(BEN.red);
+    return {v:(lamp?r.Il:st?r.Is:0).toFixed(1),u:'A'};
+  }
+  if (BEN.ign!==0) return {v:'---',u:'Ω'};
+  const s=new Set([BEN.red,BEN.black]);
+  if (s.has('E1')&&s.has('GND')) return {v:r.Re.toFixed(2),u:'Ω'};
+  if (s.has('K85')&&s.has('K86')) return {v:r.coilOK?'86.0':'OL',u:'Ω'};
+  if (s.has('F2i')&&s.has('F2o')) return {v:r.fuseOK?'0.02':'OL',u:'Ω'};
+  if (s.has('LMP')&&s.has('LME')) return {v:'1.37',u:'Ω'};
+  return {v:'OL',u:'Ω'};
+}
+const TP=[['B+','Battery +',62,52],['B-','Battery −',62,152],['F2i','F2 in',182,40],
+  ['F2o','F2 out',252,40],['LMP','Lamp feed',352,40],['LME','Lamp earth',352,118],
+  ['K30','Relay 30',182,206],['K87','Relay 87',268,206],['K85','Relay 85',182,268],
+  ['K86','Relay 86',268,268],['SB','Starter B+',372,206],['SE','Starter earth',372,272],
+  ['E1','Earth E1',212,330],['GND','Battery post −',62,330],['IGN','Ignition out',122,96]];
+function drawCircuit(){
+  const r=solve(), live=v=>isFinite(v)&&v>1;
+  const w=(d,cls)=>`<path class="wire ${cls}" d="${d}"/>`;
+  document.getElementById('bench-stage').innerHTML=`
+  <svg id="circuit" viewBox="0 0 440 372" role="img" aria-label="Starting and lighting circuit">
+    <rect x="34" y="34" width="56" height="136" rx="6" class="box"/>
+    <text x="62" y="112" text-anchor="middle" font-weight="700" fill="var(--ink)">${r.Vb.toFixed(2)}V</text>
+    <text x="62" y="26" text-anchor="middle">BATTERY</text>
+    ${w('M62 52 H122 V40 H182', live(r.N.F2i)?'live':'dead')}
+    ${w('M252 40 H352', live(r.N.F2o)?'live':'dead')}
+    ${w('M352 58 V100', r.lampsLit?'live':'dead')}
+    ${w('M352 130 V330 H62','dead')}
+    <rect x="196" y="28" width="42" height="24" rx="4" class="box"/>
+    <text x="217" y="20" text-anchor="middle">F2 15A</text>
+    <text x="217" y="45" text-anchor="middle" fill="${r.fuseOK?'var(--good)':'var(--danger)'}">${r.fuseOK?'OK':'BLOWN'}</text>
+    <circle cx="352" cy="114" r="15" fill="${r.lampsLit?'var(--warn)':'var(--panel2)'}" stroke="var(--line)"/>
+    <text x="378" y="118">HEADLAMPS</text>
+    ${w('M62 52 V206 H182', live(r.N.K30)?'live':'dead')}
+    <rect x="196" y="192" width="58" height="92" rx="5" class="box"/>
+    <text x="225" y="184" text-anchor="middle">K1 RELAY</text>
+    ${w('M268 206 H372', r.cranking?'live':'dead')}
+    <rect x="386" y="192" width="40" height="88" rx="5" class="box"/>
+    <text x="406" y="184" text-anchor="middle">START</text>
+    <text x="406" y="242" text-anchor="middle" font-weight="700"
+      fill="${r.cranking?'var(--good)':'var(--ink3)'}">${r.cranking?'CRANK':'—'}</text>
+    ${w('M372 272 V330 H212','dead')}
+    ${w('M62 96 H122', live(r.N.IGN)?'live':'dead')}
+    ${w('M122 96 V268 H182', live(r.N.K85)?'live':'dead')}
+    ${w('M268 268 V330','dead')}
+    <text x="122" y="88" text-anchor="middle">IGN ${['0 OFF','1 ACC','2 ON','3 START'][BEN.ign]}</text>
+    ${w('M62 330 H212','dead')}
+    <text x="212" y="348" text-anchor="middle">E1 ENGINE EARTH${r.Re>.1?` · ${r.Re.toFixed(2)}Ω`:''}</text>
+    ${TP.map(([id,l,x,y])=>`<circle class="tp ${BEN.red===id?'red':BEN.black===id?'black':''}"
+      data-tp="${id}" cx="${x}" cy="${y}" r="7"><title>${l}</title></circle>`).join('')}
+  </svg>`;
+  document.getElementById('bench-stage').querySelectorAll('[data-tp]').forEach(c=>{
+    const set=e=>{ if(e.shiftKey||e.altKey||e.type==='contextmenu'){e.preventDefault();BEN.black=c.dataset.tp}
+      else BEN.red=c.dataset.tp; drawCircuit(); drawPanel(); };
+    c.addEventListener('click',set); c.addEventListener('contextmenu',set);
+  });
+}
+
+/* ═════════════════════════════════════════════════════════════════════
+   BRAKE JOB
+   ═══════════════════════════════════════════════════════════════════ */
+const JOB=[
+ {t:'Slacken the bolts on the ground',tool:'Wheel-bolt socket + breaker bar',
+  d:'Crack each wheel bolt about a quarter turn <b>before</b> you lift. A wheel in the air just spins.',
+  a:()=>{iso(null);setXray(false);flyTo(new THREE.Vector3(.8,.4,1.3),new THREE.Vector3(3.9,1.4,3.4))},
+  q:{ask:'Why slacken before lifting?',o:['The bolts are tighter cold','The wheel cannot turn while the tyre is loaded','It stops the disc warping'],ok:1,
+     why:'The tyre’s grip on the ground is what stops the hub rotating. Off the ground you are fighting the handbrake or nothing at all.'}},
+ {t:'Raise and support',tool:'Trolley jack + axle stand',
+  d:'Jack at the sill jacking point, then put an axle stand under it. <b>Never work under a car on a jack alone.</b>',
+  a:()=>{iso(null);flyTo(new THREE.Vector3(.8,.35,1.3),new THREE.Vector3(3.2,1.1,3.0))},
+  q:{ask:'It is a five-minute job and the jack is solid. Stand or no stand?',o:['Stand — every time','No stand, it is quick'],ok:0,
+     why:'Jacks fail, seals leak, and cars shift as you pull on a breaker bar. The stand is not optional.'}},
+ {t:'Wheel off',tool:'Wheel-bolt socket',
+  d:'All five bolts out. Check the socket size on the car before you start — a modern Golf is commonly 17 mm, and a locking bolt needs its own adapter. The wheel sits on the hub spigot rather than on the bolts, so a stuck wheel needs a knock, not more force on the bolts.',
+  a:()=>{iso(null);setWheelOff('wheel_fl',true);flyTo(new THREE.Vector3(.78,.32,1.32),new THREE.Vector3(2.7,.9,2.7))}},
+ {t:'Look before you touch',tool:'Eyes',
+  d:'Pad thickness, disc lip, disc face, hose condition, any fluid weeping. Decide the whole job now, not halfway through it.',
+  a:()=>{iso(['rotor_fl','caliper_fl','pads','body']);setPadWear(3.2);
+    flyTo(new THREE.Vector3(.78,.32,1.32),new THREE.Vector3(1.75,.62,2.0))},
+  q:{ask:'The friction material measures 3 mm. What now?',o:['Fine, plenty left','Replace — most pads are scrap at 3 mm','Only replace it if it squeals'],ok:1,
+     why:'A new pad is roughly 12 mm of friction on a 5 mm backing plate. At 3 mm you are close to metal on disc, which ruins the disc too.'}},
+ {t:'Push the piston back',tool:'Piston tool or G-clamp',
+  d:'New pads are thicker, so the piston has to go home. Open the bleed nipple as you push, so old fluid leaves through the nipple and <b>not</b> back up into the ABS unit.',
+  a:()=>{iso(['rotor_fl','caliper_fl','pads','body'])},
+  q:{ask:'Why push the fluid out of the nipple instead of back up the line?',o:['It is quicker','Old dirty fluid is kept out of the ABS unit','It stops air getting in'],ok:1,
+     why:'Forcing old, contaminated fluid back up through the modulator risks the ABS unit, and there is nothing to gain by doing it — the nipple is right there. Rear brakes with an electric parking brake must also be put into service mode with a scan tool first and retracted the way the manufacturer specifies, never forced.'}},
+ {t:'Guide bolts out, caliper off',tool:'13 mm socket',
+  d:'Undo the two guide-pin bolts and lift the caliper clear. <b>Support it — never hang it on the flexible hose.</b>',
+  a:()=>{iso(['rotor_fl','caliper_fl','pads','body']);const p=parts.caliper_fl;
+    if(p) tweenV(p.group.position,p.home.clone().add(new THREE.Vector3(.14,.18,0)),700)}},
+ {t:'Old pads out, new pads in',tool:'Hands + brake cleaner',
+  d:'Clean the carrier where the pads sit and check the guide pins slide freely, then re-grease them with rubber-safe grease. A seized pin is one well-known reason for one pad wearing far faster than its partner — but a sticking piston does it too, so check the pads actually move freely before blaming the pins.',
+  a:()=>{iso(['rotor_fl','caliper_fl','pads','body']);setPadWear(3.2);setTimeout(()=>setPadWear(12),700)},
+  q:{ask:'Where does the copper or ceramic grease go?',o:['On the friction face, to stop squeal','On the backing plate and the slide points only','Nowhere near a brake'],ok:1,
+     why:'Grease on the friction face destroys braking and must never reach the disc. It belongs only where the instructions for that particular caliper allow it, typically the slide points — some pad backs and shims are meant to stay dry, so check rather than coat everything.'}},
+ {t:'Measure the disc',tool:'Micrometer',
+  d:'The minimum thickness is stamped on the disc hub. Measure at several points with a micrometer — a vernier on the worn edge reads the lip and lies to you.',
+  a:()=>{iso(['rotor_fl','pads','body']);flyTo(new THREE.Vector3(.78,.32,1.32),new THREE.Vector3(1.4,.55,1.85))},
+  q:{ask:'The disc reads under its stamped minimum. What now?',o:['Fit the new pads anyway','Replace both discs on that axle','Skim it and carry on'],ok:1,
+     why:'Under minimum it cannot take the heat and can crack. Replace in axle pairs so both sides brake the same.'}},
+ {t:'Caliper back on',tool:'13 mm socket · torque wrench',
+  d:'Refit over the new pads and torque the guide bolts. Use the wrench — it is a small fastener into aluminium and it strips easily.',
+  a:()=>{iso(['rotor_fl','caliper_fl','pads','body']);setPadWear(12);
+    const p=parts.caliper_fl; if(p) tweenV(p.group.position,p.home.clone(),700)},
+  torque:'Guide bolts ≈ 30 Nm — a typical VW figure. Confirm it against the data for the exact car.'},
+ {t:'Wheel on, torque in a star',tool:'Wheel-bolt socket · torque wrench',
+  d:'Start every bolt by hand so you cannot cross-thread one. Nip them up in a star, lower the car, then torque in a star.',
+  a:()=>{iso(null);setWheelOff('wheel_fl',false);flyTo(new THREE.Vector3(.8,.4,1.3),new THREE.Vector3(3.2,1.2,3.1))},
+  torque:'Wheel bolts ≈ 120 Nm — a typical VW figure. Confirm it against the data for the exact car.',
+  q:{ask:'Why a star pattern?',o:['Tradition','It pulls the wheel down square on the hub','It is faster'],ok:1,
+     why:'Going round the circle can pull the wheel off-square as it seats. A star pattern draws it down evenly — together with clean mating faces, the right bolts and the correct final torque, which matter just as much.'}},
+ {t:'Pump the pedal BEFORE you move',tool:'Your right foot',
+  d:'The piston is wound right back, so the first press only takes up the gap. Pump until the pedal is firm.',
+  a:()=>{iso(null);flyTo(new THREE.Vector3(0,.75,0),new THREE.Vector3(4.6,2.0,5.4))},
+  q:{ask:'You drive off without pumping. What happens at the first junction?',o:['Nothing, it self-adjusts','The pedal goes to the floor and the car does not stop','The ABS light comes on'],ok:1,
+     why:'This is the mistake that causes real accidents after a pad change. Pump the pedal in the bay, every single time.'}},
+ {t:'Bed them in',tool:'A quiet, clear road',
+  d:'New pads need heat cycling to lay an even film on the disc. Several moderate stops from about 50 to 20 km/h, then let them cool. No long hard stop, and do not sit on the brake at a standstill while they are hot.',
+  a:()=>{iso(null);flyTo(new THREE.Vector3(0,.75,0),new THREE.Vector3(5.0,1.8,5.0))}}];
+const BJ={i:0,ans:{},score:0,asked:0};
+
+/* ═════════════════════════════════════════════════════════════════════
+   UI
+   ═══════════════════════════════════════════════════════════════════ */
+const MODES=[['strip','Strip'],['doorOff','Door off'],['door','Inside a door'],
+             ['starter','Starter'],['engine','Engine'],['brakes','Brake job'],['bench','Bench']];
+let MODE='strip';
+const tabsEl=document.getElementById('tabs');
+tabsEl.innerHTML=MODES.map(([id,l])=>
+  `<button class="tab" role="tab" data-m="${id}" aria-selected="${id===MODE}">${l}</button>`).join('');
+tabsEl.addEventListener('click',e=>{const b=e.target.closest('[data-m]'); if(b) setMode(b.dataset.m)});
+
+const CAP={
+  door:'Constructed door cutaway · not geometry from the car file',
+  doorOff:'Real door and check strap · hinge bolts, loom boot and prop constructed',
+  starter:'Constructed starter motor · motion slowed for clarity',
+  engine:'Constructed four-stroke cutaway · not the Golf’s own engine',
+  strip:'Real geometry from volkswagen-golf-2021-w12-v1',
+  brakes:'Real disc and caliper · pads are constructed'};
+function setMode(m){
+  MODE=m;
+  tabsEl.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.m===m));
+  const bench=m==='bench', needCar=(m==='strip'||m==='brakes'||m==='doorOff');
+  document.getElementById('bench-stage').hidden=!bench;
+  canvas.style.visibility=bench?'hidden':'visible';
+  document.getElementById('loading').hidden=!(needCar && !carReady);
+  document.getElementById('readout').hidden=(m!=='engine'&&m!=='starter');
+  const cap=document.getElementById('caption');
+  cap.hidden=!CAP[m]; if(CAP[m]) cap.textContent=CAP[m];
+  doorAsm.visible=(m==='door'); starterAsm.visible=(m==='starter'); engAsm.visible=(m==='engine');
+  doorRig.visible=(m==='doorOff');
+  plinth.visible=(m==='door'||m==='starter'||m==='engine');
+  if (m==='strip'&&carReady){iso(null);setPadWear(12);
+    flyTo(new THREE.Vector3(0,.72,0),new THREE.Vector3(5.2,2.3,6.4))}
+  if (m==='brakes'&&carReady){setXray(false);setExplode(0);BJ.i=0;JOB[0].a?.()}
+  if (m==='doorOff'&&carReady){ setXray(false); setExplode(0);
+    iso(['body','door_fl','cabin','seats','steering','glazing','wheel_fl','wheel_rl']);
+    setDoor('door_fl',true);
+    flyTo(new THREE.Vector3(.78,.82,.70),new THREE.Vector3(2.30,1.34,2.15)); }
+  if (m==='door') flyTo(new THREE.Vector3(0,.68,0),new THREE.Vector3(.75,1.05,2.45));
+  if (m==='starter') flyTo(new THREE.Vector3(.20,.31,0),new THREE.Vector3(.72,.72,1.15));
+  if (m==='engine') flyTo(new THREE.Vector3(0,.80,0),new THREE.Vector3(1.75,1.35,2.35));
+  if (bench) drawCircuit();
+  drawHud(); drawPanel();
+}
+function drawHud(){
+  const h=document.getElementById('hud');
+  const b=(a,l,on)=>`<button class="chip ${on?'on':''}" data-a="${a}">${l}</button>`;
+  h.innerHTML = MODE==='strip'
+    ? b('xray','X-ray body',S.xray)+b('explode','Exploded',S.explode)+b('alldoors','All doors')+b('reset','Reset')
+    : MODE==='engine'
+    ? b('erun',ENG.running?'Running':'Paused',ENG.running)+b('ecut','Cutaway',ENG.cutaway)+b('estep','Step 45°')
+    : MODE==='doorOff'
+    ? b('doReset','Start again')+`<span class="chip">${Object.keys(DO.out).length}/4 bolts out${DO.stops?` · ${DO.stops} stop${DO.stops>1?'s':''}`:''}</span>`
+    : MODE==='door'
+    ? b('dcard',DOOR.card?'Card on':'Card off',DOOR.card)+b('dlatch','Pull the handle')
+    : MODE==='starter'
+    ? b('skey',ST.key?'Key at START':'Key off',!!ST.key)
+    : '';
+  h.querySelectorAll('[data-a]').forEach(x=>x.addEventListener('click',()=>act(x.dataset.a)));
+}
+function act(a){
+  if(a==='xray') setXray(!S.xray);
+  if(a==='explode') setExplode(S.explode?0:1);
+  if(a==='alldoors'){const o=!S.doors.door_fl;
+    ['door_fl','door_fr','door_rl','door_rr'].forEach(id=>setDoor(id,o)); setTailgate(o);}
+  if(a==='reset'){setXray(false);setExplode(0);
+    ['door_fl','door_fr','door_rl','door_rr'].forEach(id=>setDoor(id,false)); setTailgate(false);
+    Object.keys(S.wheelOff).forEach(id=>setWheelOff(id,false)); iso(null); selected=null;
+    flyTo(new THREE.Vector3(0,.72,0),new THREE.Vector3(5.2,2.3,6.4));}
+  if(a==='erun') ENG.running=!ENG.running;
+  if(a==='ecut') ENG.cutaway=!ENG.cutaway;
+  if(a==='estep'){ENG.running=false; ENG.angle=(ENG.angle+45)%720;}
+  if(a==='dcard') DOOR.card=!DOOR.card;
+  if(a==='dlatch'){DOOR.latch=1; setTimeout(()=>{DOOR.latch=0;},700);}
+  if(a==='skey') ST.key=ST.key?0:1;
+  if(a==='doReset') doorAct('reset');
+  drawHud(); drawPanel();
+}
+const panel=document.getElementById('panel');
+function drawPanel(){
+  panel.innerHTML=({strip:pStrip,doorOff:pDoorOff,door:pDoor,starter:pStarter,
+                    engine:pEngine,brakes:pBrakes,bench:pBench}[MODE])();
+  panel.querySelectorAll('[data-x]').forEach(el=>
+    el.addEventListener(el.tagName==='INPUT'?'input':'click',()=>handle(el.dataset.x,el)));
+}
+const STANDING = `This bay teaches how the thing <i>works</i>. Fastener sizes,
+  torques, service modes, lifting points and wear limits are model- and
+  variant-specific: the workshop data for the actual car in front of you
+  governs, and it overrides anything written here.`;
+const man = (title, items, open) => `
+  <details class="manual" ${open?'open':''}>
+    <summary>${title}</summary>
+    <div class="body"><ol class="man">${items.map(i=>`<li><span>${i}</span></li>`).join('')}</ol>
+      <div class="note info" style="margin-top:11px">${STANDING}</div></div>
+  </details>`;
+
+function pStrip(){
+  const p=selected&&PART[selected], pt=selected&&parts[selected];
+  const d=pt?pt.box.getSize(new THREE.Vector3()):null;
+  return `
+  <div><div class="eyebrow">Bay 1 · Strip</div>
+    <h2 style="font-size:19px;margin-top:2px">Take it apart</h2>
+    <p style="font-size:13px;color:var(--ink2);margin-top:6px">Click anything on the car to identify it.
+    Doors, wheels, the tailgate and the front brakes come off individually because they are
+    separate meshes in the file — none of it is faked.</p></div>
+  <div class="card">
+    <div class="eyebrow">Open up</div>
+    <div class="row" style="margin-top:8px">
+      ${['fl','fr','rl','rr'].map(x=>`<button class="btn ${S.doors['door_'+x]?'on':''}" data-x="door:${x}">${x.toUpperCase()} door</button>`).join('')}
+      <button class="btn ${S.tailgate?'on':''}" data-x="tail">Tailgate</button></div>
+    <div class="eyebrow" style="margin-top:12px">Wheels off</div>
+    <div class="row" style="margin-top:8px">
+      ${['fl','fr','rl','rr'].map(x=>`<button class="btn ${S.wheelOff['wheel_'+x]?'on':''}" data-x="wheel:${x}">${x.toUpperCase()}</button>`).join('')}</div>
+  </div>
+  ${p?`<div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+      <div class="eyebrow">${p.g}</div><span class="prov real">real geometry</span></div>
+    <h3 style="margin-top:4px">${p.l}</h3>
+    <p style="margin-top:6px">${p.n}</p>
+    <dl class="spec"><dt>meshes</dt><dd>${pt.meshes.length}</dd>
+      <dt>triangles</dt><dd>${pt.tris.toLocaleString()}</dd>
+      ${d?`<dt>L×W×H</dt><dd>${d.z.toFixed(2)} × ${d.x.toFixed(2)} × ${d.y.toFixed(2)} m</dd>`:''}</dl>
+  </div>`:`<div class="card"><p>Nothing selected. Hover the car — parts light up as you pass over them.</p></div>`}
+  ${man('Training manual — what is and is not here',[
+    '<b>163 named meshes, 543,082 triangles.</b> The interior alone is 278,841 of them — 51.3% of the whole car. It is the biggest thing in the model, not an afterthought.',
+    '<b>Eight separate airbags.</b> Driver, passenger, four seat-side and two full-length curtains. Turn on X-ray to see them inside the shell. On a real car the SRS system is disarmed and left for at least the manufacturer’s stated wait before anything yellow-plugged is touched.',
+    '<b>The bumper does not come off here, and that is not a bug.</b> Bonnet, wings, roof and both bumpers are welded into one body mesh in this file. Stripping them needs an asset that was built in separate panels.',
+    '<b>There is no engine, starter, battery, suspension or exhaust in this car file at all.</b> Those bays are built from scratch in code and say so on screen — the same way your clutch demo is captioned a concept model.',
+    '<b>This car is left-hand drive.</b> Steering wheel measured at 350 mm to the car’s left of centre. A UK car is right-hand drive — not a mirror image, since the rest of the car is not simply flipped, but the driving controls are on the other side. Worth saying out loud when you teach UK trainees on a left-hand-drive model.'
+  ], true)}`;
+}
+function pDoorOff(){
+  const step=(k,label,ok,act,hint)=>`
+    <button class="choice ${ok?'right':''}" data-x="do:${act}" ${ok?'disabled':''}>
+      <b>${k}</b> ${label}${ok?' ✓':''}
+      ${hint?`<div class="hint" style="margin-top:3px">${hint}</div>`:''}</button>`;
+  const bolts=Object.keys(FIX), outN=bolts.filter(k=>DO.out[k]).length;
+  return `
+  <div><div class="eyebrow">Bay 2 · Take the door off</div>
+    <h2 style="font-size:19px;margin-top:2px">Front left door</h2>
+    <p style="font-size:13px;color:var(--ink2);margin-top:6px">Do the job. Click the
+    fasteners <b>on the car</b> — the bolt heads, the loom boot at the pillar, and the
+    check strap itself. Take something out in the wrong order and it will stop you and
+    tell you what you just broke.</p></div>
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+      <div class="eyebrow">Provenance</div><span class="prov real">door + check strap real</span></div>
+    <p style="margin-top:7px">The door, its card, glass, speaker and the <b>check
+    strap</b> are real geometry from the car file. The four hinge bolts, the loom boot
+    and the door prop are constructed and placed on the measured hinge line.</p>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Preparation</div>
+    <div style="margin-top:8px">
+    ${step('01','Look up the procedure',DO.looked,'look','Which fasteners, which tool, and what this door carries. Everything else is locked until you do.')}
+    ${step('02','Isolate the battery and wait',DO.isolated,'isolate','Before anything electrical in the door is disturbed.')}
+    ${step('03','Support the door',DO.supported,'support','25–30 kg with glass and trim in it.')}
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Tool</div>
+    <div class="row" style="margin-top:8px">
+      ${['The tool the data specifies','Nearest size that fits','Adjustable spanner'].map((t,i)=>
+        `<button class="btn ${DO.tool===i?'on':''}" data-x="dotool:${i}">${t}</button>`).join('')}
+    </div>
+    ${DO.tool===1||DO.tool===2?`<div class="note bad" style="margin-top:8px">That is how a hinge
+      bolt gets rounded off, and a rounded hinge bolt turns a 40-minute job into a drilling job.
+      Pick the specified tool.</div>`:''}
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Free the door</div>
+    <div style="margin-top:8px">
+    ${step('04','Disconnect the loom at the pillar',DO.loom,'loom','Click the rubber boot on the car.')}
+    ${step('05','Release the check strap',DO.strap,'strap','Click the strap itself — it is real geometry.')}
+    ${step('06','Mark the hinge positions',DO.marked,'mark','Skip it and you will chase the shut line on refit.')}
+    </div>
+    <div class="eyebrow" style="margin-top:11px">Hinge bolts — ${outN}/4 out</div>
+    <div class="row" style="margin-top:7px">
+      ${bolts.map(k=>`<button class="btn ${DO.out[k]?'on':''}" data-x="do:${k}"
+        ${DO.out[k]?'disabled':''}>${FIX[k].label.replace('hinge bolt — ','')}</button>`).join('')}
+    </div>
+    <button class="btn wide primary" data-x="do:lift" style="margin-top:10px"
+      ${DO.off?'disabled':''}>${DO.off?'Door is off ✓':'Lift the door away'}</button>
+  </div>
+
+  ${DO.log.length?`<div class="card"><div class="eyebrow">What happened</div>
+    <div style="margin-top:8px;display:flex;flex-direction:column;gap:7px">
+      ${DO.log.slice(0,6).map(l=>`<div class="note ${l.bad?'bad':'good'}"
+        style="margin:0">${l.t}</div>`).join('')}</div></div>`:''}
+
+  ${man('Training manual — taking a door off',[
+    '<b>The order is the job.</b> Loom out, strap off, marks on, then bolts — and support under it before the first bolt moves. Every one of those has to happen before the thing after it, and the reason is always the same: something has to hold the weight, and nothing must be under tension when it lets go.',
+    '<b>Why the loom comes first.</b> It runs through a rubber boot at the hinge pillar and flexes every time the door opens, so it is already the most fatigued wiring on the car. Pull a door away on its loom and you stretch conductors inside intact-looking insulation — a fault that appears weeks later and is almost impossible to find.',
+    '<b>Why the door SRS matters.</b> On cars with side airbags the door or pillar loom carries igniter circuits. Isolate the battery, observe the stated wait, and never probe an igniter circuit with an ordinary meter.',
+    '<b>Why the check strap comes before the hinges.</b> It is designed to stop the door swinging too far, not to hold it up. With the hinges out it takes the whole weight and bends, or tears its mount out of the pillar.',
+    '<b>Why you mark the hinges.</b> Hinge bolts sit in slotted or floating mounts so the door can be aligned. Undo them without a mark and you have thrown away the factory alignment — then you are setting shut lines, gaps and the striker by trial and error with a heavy panel in your hands.',
+    '<b>Weight.</b> A front door with glass, motor, card and speaker is around 25–30 kg and all of it hangs off two hinges. It is a two-person lift or a door stand, every time.',
+    '<b>On refit.</b> Bolts in finger-tight, door to the marks, check the shut line and the striker engagement before final torque, then reconnect and test the window, lock, mirror and any door lamp before the card goes anywhere near it.'
+  ], true)}`;
+}
+function pDoor(){
+  return `
+  <div><div class="eyebrow">Bay 2 · Inside a door</div>
+    <h2 style="font-size:19px;margin-top:2px">Take the card off</h2>
+    <p style="font-size:13px;color:var(--ink2);margin-top:6px">Viewed from inside the car looking
+    out — the view you get once the trim card is off. Wind the window and watch the regulator
+    carry the glass.</p></div>
+  <div class="card">
+    <span class="prov built">constructed</span>
+    <p style="margin-top:8px">The car file has door skins, frames and trim cards but <b>nothing in
+    between</b> — no regulator, latch, beam or loom. This cutaway is built in code to real door
+    proportions so the mechanism can be taught.</p>
+  </div>
+  <div class="card">
+    <div class="switchrow"><span>Window</span><span class="mono">${Math.round(DOOR.win*100)}% down</span></div>
+    <input type="range" min="0" max="100" value="${Math.round(DOOR.win*100)}" data-x="win">
+    <div class="row" style="margin-top:9px">
+      <button class="btn wide ${DOOR.card?'on':''}" data-x="dcard">${DOOR.card?'Trim card on':'Trim card off'}</button>
+      <button class="btn wide" data-x="dlatch">Pull the handle</button></div>
+  </div>
+  ${man('Training manual — the door, part by part',[
+    '<b>Outer skin.</b> Thin painted steel, carrying far less load than the frame behind it — which is why a car-park dent often leaves the door shutting perfectly. Whether that dent is <i>only</i> cosmetic depends on where it is and what sits behind it, so look before you call it.',
+    '<b>Side-impact beam.</b> The diagonal tube. High-strength steel bridging the hinge pillar to the latch, so a side impact loads the car’s structure instead of folding the door into the occupant. Never heat it, never drill it, never straighten it — replace the door.',
+    '<b>Window regulator.</b> Rails, a carrier that holds the bottom edge of the glass, and a cable drum turned by the motor. A cable jumping the drum and a cracked plastic carrier are both common and both cheaper to find than a motor, so test the motor rather than assuming it. A window that drops crooked into the door points at the carrier or the cable rather than the motor — check the glass clamps, the rails and the drive before condemning anything.',
+    '<b>Latch and striker.</b> The latch is in the door; the striker is the loop on the B-pillar. Inside it a <b>claw</b> closes round the striker and a <b>pawl</b> holds that claw shut. Pull the handle and the pawl releases the claw, and only then does the claw let the striker go — two stages, not one. Door not closing? A dry or dirty latch and a moved striker are the usual suspects and both are quick to check, so rule them out before taking the card off for the handle.',
+    '<b>Lock actuator and rods.</b> Central locking drives the same latch mechanism. A door that locks from the key but not the button, or vice versa, is telling you which half of the path is broken.',
+    '<b>Vapour barrier.</b> The translucent sheet, and it matters more than it looks. The inside of a door is deliberately wet — rain runs down the glass and out through drains in the bottom. The barrier keeps that water off the trim card. Leave it torn or unsealed and the customer gets damp carpets and a smell, and blames you.',
+    '<b>Wiring loom.</b> Window, lock, speaker, mirror, courtesy lamp and sometimes airbag sensing, all through one rubber boot at the hinge. That boot is where looms chafe and break, because it flexes every single time the door opens.',
+    '<b>Refitting order matters.</b> Barrier sealed, loom routed clear of the regulator, window tested through its full travel <b>before</b> the card goes on. Skip that and you take the card off twice.'
+  ], true)}`;
+}
+function pStarter(){
+  return `
+  <div><div class="eyebrow">Bay 3 · Starter motor</div>
+    <h2 style="font-size:19px;margin-top:2px">How it throws the pinion</h2>
+    <p style="font-size:13px;color:var(--ink2);margin-top:6px">Turn the key and watch the solenoid
+    pull, the fork push the pinion into the flywheel ring gear, and the motor spin. Then watch it
+    withdraw.</p></div>
+  <div class="card"><span class="prov built">constructed</span>
+    <p style="margin-top:8px">No starter exists in the car file. Built in code, with the housing cut
+    away so the armature, windings, commutator and brushes are visible.</p></div>
+  <div class="card">
+    <div class="row">
+      <button class="btn wide ${ST.key?'on':''}" data-x="skey">${ST.key?'Key at START':'Key off'}</button></div>
+    <dl class="spec" style="margin-top:10px">
+      <dt>pinion</dt><dd>9 teeth</dd><dt>ring gear</dt><dd>44 teeth</dd>
+      <dt>reduction</dt><dd>4.9 : 1</dd>
+      <dt>pinion engaged</dt><dd>${ST.throwPos>.82?'yes':'no'}</dd></dl>
+  </div>
+  ${man('Training manual — starting system',[
+    '<b>Two jobs, one unit.</b> The solenoid does the mechanical work of throwing the pinion into mesh, <i>and</i> closes the heavy contacts that feed the motor. That order matters — mesh first, then power, or you grind the teeth.',
+    '<b>Why the gearing — it is torque, not power.</b> A small motor spins fast but pulls little turning force, and a cold engine needs a great deal of it. The little pinion driving a big ring gear trades speed for torque, roughly five to one on the ratio shown here, which is how a starter turns an engine over at a couple of hundred rpm.',
+    '<b>Why it draws so much.</b> A starter pulls 150–300 A. That is why it has its own cable straight off the battery and does not go through a normal fuse, and why a bad earth strap shows up as a slow crank long before anything else complains.',
+    '<b>Diagnosing it properly.</b> A click and no crank means the solenoid pulled but the motor did not turn: suspect brushes, the heavy contacts, or a flat battery under load. No click at all usually means the solenoid never pulled — but that could be a missing trigger signal <i>or</i> a dead solenoid, supply or earth, so measure rather than assume. Start with the trigger: key, immobiliser, and on a manual the <b>clutch switch</b>. On the Bench bay the clutch interlock is wired in, and a perfect starter will do nothing with the pedal up.',
+    '<b>The measurement that settles it.</b> Volt-drop while cranking. Battery on load should hold around 10 V or better; more than about 0.5 V lost across a cable or an earth is a bad joint turning your starting current into heat.',
+    '<b>Never crank for more than about ten seconds.</b> Then leave it a good half minute. A starter is not built for continuous duty and will cook its windings.'
+  ], true)}`;
+}
+function pEngine(){
+  const a=ENG.angle, cyl=[0,1,2,3].map(i=>(a+FIRING[i])%720);
+  return `
+  <div><div class="eyebrow">Bay 4 · Four-stroke</div>
+    <h2 style="font-size:19px;margin-top:2px">How it actually turns</h2>
+    <p style="font-size:13px;color:var(--ink2);margin-top:6px">Crank, rods, pistons, valves and cam
+    driven by the real slider-crank geometry — the mechanism, not a looping animation.</p></div>
+  <div class="card"><span class="prov built">constructed</span>
+    <p style="margin-top:8px">A teaching schematic. The car file contains no engine of any kind.</p></div>
+  <div class="card">
+    <div class="switchrow"><span>Engine speed</span><span class="mono">${Math.round(ENG.rpm)} rpm</span></div>
+    <input type="range" min="180" max="6500" step="20" value="${ENG.rpm}" data-x="rpm">
+    <div class="row" style="margin-top:8px">
+      <button class="btn wide ${ENG.running?'on':''}" data-x="erun">${ENG.running?'Pause':'Run'}</button>
+      <button class="btn wide" data-x="estep">Step 45°</button></div>
+    <div class="row" style="margin-top:7px">
+      <button class="btn ${ENG.focus===null?'on':''}" data-x="focus:-1">All four</button>
+      ${[0,1,2,3].map(i=>`<button class="btn ${ENG.focus===i?'on':''}" data-x="focus:${i}">Cyl ${i+1}</button>`).join('')}</div>
+  </div>
+  <div class="card"><div class="eyebrow" id="crankLbl">Crank ${Math.round(a)}° of 720°</div>
+    <dl class="spec" style="margin-top:8px">${cyl.map((c,i)=>{const [n,col]=STROKE(c);
+      return `<dt>Cylinder ${i+1}</dt><dd id="cyl${i}" style="color:${col}">${n}</dd>`}).join('')}</dl></div>
+  ${man('Training manual — the four strokes',[
+    '<b>Intake.</b> Inlet valve open, piston travelling down, <b>air</b> drawn in. This engine injects its fuel straight into the cylinder at high pressure rather than mixing it on the way in, so the intake stroke draws air and the mixture is made in the cylinder.',
+    '<b>Compression.</b> Both valves shut, piston up, the charge squeezed into a fraction of its volume. That raises its pressure and temperature so it burns fast and completely, which is where the efficiency comes from — a controlled quick burn, not a violent one. Detonation is the failure, not the aim.',
+    '<b>Power.</b> Spark near the top, the gas expands and drives the piston down. It is the only stroke in <i>this</i> cylinder that pays — the other three are carried by the flywheel’s stored energy and, on a four-cylinder, by whichever other cylinder happens to be firing.',
+    '<b>Exhaust.</b> Exhaust valve open, piston up, burnt gas pushed out.',
+    '<b>Two turns per cycle, so the cam runs at half crank speed.</b> This engine drives its cams by <b>chain</b>, not a belt. Get the timing wrong and a valve can still be open when a piston arrives — which is why cam timing is set to the marks and checked, never eyeballed.',
+    '<b>Firing order 1-3-4-2.</b> Pistons 1 and 4 rise and fall together, and so do 2 and 3 — but each pair sits 360° apart in the cycle, so when one is firing its twin is drawing in. That is what spreads the power pulses evenly and stops the engine shaking itself apart.',
+    '<b>Valve overlap.</b> Near the top of the exhaust stroke both valves are briefly open at once. Watch for it. The outgoing exhaust gas helps pull the next charge in, and it is why an engine breathes better at some speeds than others.'
+  ], true)}`;
+}
+function pBrakes(){
+  const s=JOB[BJ.i], ans=BJ.ans[BJ.i];
+  return `
+  <div><div class="eyebrow">Bay 5 · Front brake job</div>
+    <h2 style="font-size:19px;margin-top:2px">Step ${BJ.i+1} of ${JOB.length}</h2></div>
+  <div class="card"><h3>${s.t}</h3><p style="margin-top:6px">${s.d}</p>
+    <div class="row" style="margin-top:10px"><span class="badge tool">${s.tool}</span>
+      ${s.torque?'<span class="badge torque">torque</span>':''}</div>
+    ${s.torque?`<p class="hint" style="margin-top:8px">${s.torque}</p>`:''}</div>
+  ${s.q?`<div class="card"><div class="eyebrow">Check</div>
+    <h3 style="margin:4px 0 9px;font-size:13.5px;font-weight:600">${s.q.ask}</h3>
+    ${s.q.o.map((t,i)=>{const c=ans===undefined?'':(i===s.q.ok?'right':(ans===i?'wrong':''));
+      return `<button class="choice ${c}" data-x="ans:${i}" ${ans!==undefined?'disabled':''}>${t}</button>`}).join('')}
+    ${ans!==undefined?`<div class="note ${ans===s.q.ok?'good':'bad'}" style="margin-top:8px">${s.q.why}</div>`:''}</div>`:''}
+  <div class="row">
+    <button class="btn wide ghost" data-x="prev" ${BJ.i?'':'disabled'}>← Back</button>
+    <button class="btn wide primary" data-x="next" ${BJ.i<JOB.length-1?'':'disabled'}>Next step →</button></div>
+  <ol class="steps">${JOB.map((j,i)=>`<li class="${i<BJ.i?'done':i===BJ.i?'now':''}" data-x="goto:${i}">
+    <span class="n">${i+1}</span><span>${j.t}</span></li>`).join('')}</ol>
+  <div class="hint">Score ${BJ.score}/${BJ.asked} on the checks.
+    Disc and caliper are real geometry; the <b>pads are constructed</b> — this model has none.</div>
+  ${man('Training manual — before you start a brake job',[
+    '<b>Establish which axle and which brake you are working on first.</b> Front and rear differ, and a rear with an electric parking brake has to go into service mode with a scan tool <i>before</i> anything is retracted. Getting that order wrong can damage the actuator. This procedure walks a FRONT corner.',
+    '<b>Supporting the car.</b> Use the approved lifting and support points, chock the wheels, work on firm level ground, and think about the handover before you lift: if the jack is sitting on the point the stand needs, you need the correct adapter or a second point rather than an improvised one.',
+    '<b>Retracting the piston.</b> If you open the bleed nipple to push fluid out, have a hose and a container on it, keep an eye on the reservoir level, close the nipple before you release the tool, and check for leaks and a firm pedal afterwards. It is a method, not a shortcut past the manufacturer’s procedure.',
+    '<b>Judging a disc.</b> Minimum thickness is one rejection criterion, not the only one. Cracks, heavy corrosion, deep scoring, a heat-blued face and excessive run-out all condemn a disc on their own. Measure with a micrometer at several points, and confirm the minimum figure from the data rather than from memory.',
+    '<b>Fasteners.</b> Confirm the sizes and torques from the data for that car. Some caliper and carrier bolts are single-use and must be replaced, not re-torqued — that is written in the procedure, never visible on the part.',
+    '<b>Before it leaves.</b> Pedal pumped firm, fluid level correct, no leaks, brakes tested at low speed, and the electric parking brake taken back out of service mode if you put it in. Then bed the pads in the way the pad manufacturer specifies.'
+  ])}`;
+}
+function pBench(){
+  const r=solve(), m=meterRead(), lbl=id=>(TP.find(t=>t[0]===id)||[,'—'])[1];
+  return `
+  <div><div class="eyebrow">Bay 6 · Electrical bench</div>
+    <h2 style="font-size:19px;margin-top:2px">Find the fault</h2>
+    <p style="font-size:13px;color:var(--ink2);margin-top:6px">Click a test point for the
+    <b style="color:var(--danger)">red</b> probe; shift-click or right-click for
+    <b>black</b>. Every reading is computed from the circuit, so a bad earth really does
+    show up as a volt drop.</p></div>
+  <div class="meter">
+    <div class="screen"><small>${BEN.mode==='V'?'DC VOLTS':BEN.mode==='A'?'CURRENT (CLAMP)':'RESISTANCE'}</small>${m.v} ${m.u}</div>
+    <div class="row" style="margin-top:9px">
+      ${['V','Ω','A'].map(x=>`<button class="btn wide ${BEN.mode===x?'on':''}" data-x="mode:${x}">${x}</button>`).join('')}</div>
+    <div class="probe"><span class="dot r"></span> red<span class="val">${lbl(BEN.red)}</span></div>
+    <div class="probe"><span class="dot b"></span> black<span class="val">${lbl(BEN.black)}</span></div>
+    ${BEN.mode==='Ω'&&BEN.ign!==0?`<div class="note bad" style="margin-top:8px">Resistance on a live
+      circuit reads nonsense and can damage the meter. Ignition to <b>0 OFF</b> first.</div>`:''}
+  </div>
+  <div class="card"><div class="eyebrow">Driver inputs</div>
+    <div class="switchrow"><span>Ignition</span><div class="row">
+      ${[0,1,2,3].map(i=>`<button class="btn ${BEN.ign===i?'on':''}" data-x="ign:${i}">${i}</button>`).join('')}</div></div>
+    <div class="switchrow"><span>Clutch pedal</span>
+      <button class="btn ${BEN.clutch?'on':''}" data-x="clutch">${BEN.clutch?'Pressed':'Up'}</button></div>
+    <div class="switchrow"><span>Headlamps</span>
+      <button class="btn ${BEN.lamps?'on':''}" data-x="lamps">${BEN.lamps?'On':'Off'}</button></div>
+  </div>
+  <div class="card"><div class="eyebrow">Symptoms now</div>
+    <dl class="spec" style="margin-top:6px">
+      <dt>Battery terminal</dt><dd>${r.Vb.toFixed(2)} V</dd>
+      <dt>Lamp current</dt><dd>${r.Il.toFixed(1)} A</dd>
+      <dt>Starter current</dt><dd>${r.Is.toFixed(0)} A</dd>
+      <dt>Earth volt drop</dt><dd style="color:${r.Ve>.5?'var(--danger)':'var(--ink)'}">${r.Ve.toFixed(2)} V</dd>
+      <dt>Cranking</dt><dd>${r.cranking?'yes':'no'}</dd>
+      <dt>Lamps</dt><dd>${r.lampsLit?(r.dim?'lit but DIM':'lit'):'dark'}</dd></dl></div>
+  <div class="card"><div class="eyebrow">Fault box</div>
+    <div class="row" style="margin-top:8px">${Object.entries(FAULTS).map(([k,v])=>
+      `<button class="btn ${BEN.fault===k?'on':''}" data-x="fault:${k}">${v.l}</button>`).join('')}</div>
+    <button class="btn wide primary" data-x="random" style="margin-top:9px">Hide a random fault →</button>
+    ${BEN.found==='hidden'
+      ? `<div class="row" style="margin-top:9px">${Object.entries(FAULTS).map(([k,v])=>
+          `<button class="btn" data-x="guess:${k}">${v.l}</button>`).join('')}</div>
+         <p class="hint" style="margin-top:7px">Diagnose it with the meter, then name it.</p>`
+      : BEN.found
+        ? `<div class="note ${BEN.found===BEN.fault?'good':'bad'}" style="margin-top:9px">
+             ${BEN.found===BEN.fault?'Correct.':`Not quite — it was <b>${FAULTS[BEN.fault].l}</b>.`}
+             ${FAULTS[BEN.fault].h}</div>`
+        : `<p class="hint" style="margin-top:8px">${FAULTS[BEN.fault].h}</p>`}
+  </div>
+  ${man('Training manual — jump starting, in order',[
+    'Red to the <b>flat</b> battery positive.',
+    'Red to the <b>good</b> battery positive.',
+    'Black to the <b>good</b> battery negative.',
+    'Black to an <b>approved earth point on the flat car</b>, well away from its battery — a designated point, not whichever bracket happens to be bare.',
+    '<b>Why that order.</b> The last connection you make is the one that sparks. A charging battery gives off hydrogen, so that spark belongs on a bracket at the far end of the engine bay — never on the flat battery’s own negative post. Disconnect in the exact reverse order.',
+    '<b>A good earth drops under about 0.2 V with load on it.</b> More than that and current is being turned into heat in a bad joint. Measure it on this bench with the corroded-earth fault selected and watch what it does to the crank.'
+  ])}`;
+}
+function handle(x,el){
+  const [k,v]=x.split(':');
+  if(k==='do'){ doorAct(v); return; }
+  if(k==='dotool'){ DO.tool=+v; drawPanel(); return; }
+  if(k==='door') setDoor('door_'+v,!S.doors['door_'+v]);
+  if(k==='tail') setTailgate(!S.tailgate);
+  if(k==='wheel') setWheelOff('wheel_'+v,!S.wheelOff['wheel_'+v]);
+  if(k==='next'){BJ.i=Math.min(JOB.length-1,BJ.i+1); JOB[BJ.i].a?.();}
+  if(k==='prev'){BJ.i=Math.max(0,BJ.i-1); JOB[BJ.i].a?.();}
+  if(k==='goto'){BJ.i=+v; JOB[BJ.i].a?.();}
+  if(k==='ans'&&BJ.ans[BJ.i]===undefined){
+    BJ.ans[BJ.i]=+v; BJ.asked++; if(+v===JOB[BJ.i].q.ok) BJ.score++;}
+  if(k==='rpm') ENG.rpm=+el.value;
+  if(k==='win') DOOR.win=+el.value/100;
+  if(k==='focus') ENG.focus=(+v<0?null:+v);
+  if(k==='mode') BEN.mode=v;
+  if(k==='ign'){BEN.ign=+v;
+    if(+v===3) setTimeout(()=>{if(BEN.ign===3){BEN.ign=2;drawCircuit();drawPanel();}},2600);}
+  if(k==='clutch') BEN.clutch=!BEN.clutch;
+  if(k==='lamps') BEN.lamps=!BEN.lamps;
+  if(k==='fault'){BEN.fault=v; BEN.found=null;}
+  if(k==='random'){const ks=Object.keys(FAULTS);
+    BEN.fault=ks[1+Math.floor(Math.random()*(ks.length-1))];
+    BEN.found='hidden'; BEN.ign=0; BEN.lamps=false; BEN.clutch=false;}
+  if(k==='guess') BEN.found=v;
+  if(k==='dcard'||k==='dlatch'||k==='skey'||k==='erun'||k==='ecut'||k==='estep'){act(k); return;}
+  if(MODE==='bench') drawCircuit();
+  drawHud(); drawPanel();
+}
+
+/* theme */
+document.getElementById('themeBtn').addEventListener('click',()=>{
+  const cur=document.documentElement.getAttribute('data-theme');
+  const sysDark=matchMedia('(prefers-color-scheme: dark)').matches;
+  document.documentElement.setAttribute('data-theme',
+    cur ? (cur==='dark'?'light':'dark') : (sysDark?'light':'dark'));
+  applyBg(); if(MODE==='bench') drawCircuit();
+});
+function applyBg(){
+  const t=document.documentElement.getAttribute('data-theme');
+  const lightNow = t==='light' || (!t && !matchMedia('(prefers-color-scheme: dark)').matches);
+  floorMat.color.setHex(lightNow?0xdcdee2:0x11151b);
+  plinth.material.color.setHex(lightNow?0xc3cfe0:0x2a3a52);
+  renderer.setClearColor(new THREE.Color(getComputedStyle(document.body).backgroundColor),0);
+}
+applyBg();
+
+/* loop */
+let last=performance.now();
+const readout=document.getElementById('readout');
+function frame(now){
+  requestAnimationFrame(frame);
+  const dt=Math.min(.05,(now-last)/1000); last=now;
+  for(let i=anim.length-1;i>=0;i--) if(anim[i].tick(now)) anim.splice(i,1);
+  controls.update();
+  if (MODE==='bench') return;
+  if (MODE==='engine'){
+    engineTick(dt);
+    const [n]=STROKE(ENG.angle%720);
+    /* the panel is only re-rendered on interaction, so without this the
+       card read "Crank 0°, cyl 1 Power" while the live readout said
+       "450°, cyl 1 Intake" — two contradictory numbers on one screen */
+    const cl=document.getElementById('crankLbl');
+    if (cl){ cl.textContent=`Crank ${Math.round(ENG.angle)}° of 720°`;
+      for(let i=0;i<4;i++){ const el=document.getElementById('cyl'+i); if(!el) continue;
+        const [sn,sc]=STROKE((ENG.angle+FIRING[i])%720); el.textContent=sn; el.style.color=sc; } }
+    readout.innerHTML=`<span class="mono" style="color:var(--ink);font-weight:700">${Math.round(ENG.angle)}°</span>
+      · cyl 1 <b style="color:var(--ink)">${n}</b> · cam ${Math.round(ENG.angle/2)}° · ${Math.round(ENG.rpm)} rpm`;
+    renderer.render(sceneRig,camera);
+  } else if (MODE==='starter'){
+    starterTick(dt);
+    readout.innerHTML=`pinion <b style="color:var(--ink)">${ST.throwPos>.82?'meshed':'clear'}</b>
+      · armature ${Math.round(ST.spin*325)} rpm · ring ${Math.round(ST.spin*325*9/44)} rpm`;
+    renderer.render(sceneRig,camera);
+  } else if (MODE==='door'){
+    doorTick(); renderer.render(sceneRig,camera);
+  } else {
+    renderer.render(sceneCar,camera);
+  }
+}
+/* a read-only probe so a harness can assert on STATE, not on pixels */
+window.__door = () => ({looked:DO.looked,isolated:DO.isolated,supported:DO.supported,
+  loom:DO.loom,strap:DO.strap,marked:DO.marked,bolts:Object.keys(DO.out).length,
+  off:DO.off,tool:DO.tool,stops:DO.stops,last:(DO.log[0]||{}).t?.slice(0,74),
+  doorRotY:parts.door_fl?+parts.door_fl.group.rotation.y.toFixed(3):null,
+  doorPos:parts.door_fl?[+parts.door_fl.group.position.x.toFixed(3),
+    +parts.door_fl.group.position.y.toFixed(3),+parts.door_fl.group.position.z.toFixed(3)]:null,
+  anims:anim.length,
+  propVisible:dRig.prop?dRig.prop.visible:null});
+window.__meshNames = () => { const o=[]; carRoot.traverse(m=>{ if(m.isMesh && o.length<8)
+    o.push({name:m.name, cls:m.userData.partId}); }); return o; };
+window.__dbg = () => ({
+  doors:{...S.doors}, wheels:{...S.wheelOff}, xray:S.xray, explode:S.explode, mode:MODE,
+  rotFL: parts.door_fl ? +parts.door_fl.group.rotation.y.toFixed(4) : null,
+  rotTail: parts.tailgate ? +parts.tailgate.group.rotation.x.toFixed(4) : null,
+  posWheelFL: parts.wheel_fl ? +parts.wheel_fl.group.position.x.toFixed(4) : null,
+  partIds: Object.keys(parts).length, anims: anim.length});
+resize(); requestAnimationFrame(frame);
+setMode('strip');
+</script>
+</body>
+</html>
