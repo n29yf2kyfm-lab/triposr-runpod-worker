@@ -444,7 +444,7 @@ def main():
             if m.any():
                 hits.append(dict(node=node_i, name=nm, mesh=mesh_i, prim=pi,
                                  tri=tri, mask=m, area=area[m].sum(),
-                                 cen=c[m], vw=vw, mat=prim.get("material")))
+                                 cen=c[m], vw=vw, mat=prim.get("material"), M=M))
 
     if not hits:
         raise SystemExit(f"REFUSED: no faces selected for '{a.panel}'. The "
@@ -510,10 +510,31 @@ def main():
             p["material"] = h["mat"]
         panel_prims.append(p)
 
+    # THE NODE MUST CARRY THE SAME WORLD TRANSFORM AS THE SHELL IT WAS CUT
+    # FROM. The panel's POSITION accessor is shared byte-for-byte with the
+    # shell's — it is in the shell's LOCAL space, not world space. This car
+    # hangs the whole body under a "Sketchfab_model" node carrying a
+    # scale-100 + axis-rotation matrix; a panel node added as a bare scene
+    # root (no matrix) would render unscaled and unrotated, nowhere near the
+    # car. First cut of this tool did exactly that and it went unnoticed
+    # because the verification block below checked face counts and shared
+    # attributes only, never world placement. Stamp the accumulated ancestor
+    # matrix (M, already computed while scanning the shell) directly onto
+    # the new node, so it is correct wherever it sits in the graph.
+    Ms = [h["M"] for h in hits]
+    if not all(np.allclose(Ms[0], M) for M in Ms[1:]):
+        raise SystemExit(
+            "REFUSED: panel faces come from shell nodes under DIFFERENT "
+            "ancestor transforms — one node's matrix cannot place them all "
+            "correctly. This tool assumes a single-shell-node panel.")
+    M0 = Ms[0]
+
     g.j["meshes"].append({"name": spec["label"], "primitives": panel_prims})
     hinge = spec["hinge"]
-    g.j["nodes"].append({"name": spec["label"],
-                         "mesh": len(g.j["meshes"]) - 1})
+    node = {"name": spec["label"], "mesh": len(g.j["meshes"]) - 1}
+    if not np.allclose(M0, np.eye(4)):
+        node["matrix"] = M0.T.flatten().tolist()   # row-major -> glTF column-major
+    g.j["nodes"].append(node)
     g.j["scenes"][g.j.get("scene", 0)]["nodes"].append(len(g.j["nodes"]) - 1)
     write(a.out, g.j, g.bin)
 
@@ -539,6 +560,32 @@ def main():
     for p, h in zip(pmesh["primitives"], hits):
         orig = g.j["meshes"][h["mesh"]]["primitives"][h["prim"]]["attributes"]
         assert p["attributes"] == orig, "panel does not share the vertex accessors"
+
+    # WORLD-PLACEMENT CHECK. Face counts and shared accessors prove the cut
+    # kept the right triangles; they say nothing about where the new node
+    # actually lands once the scene graph is walked, which is exactly what
+    # the bare-scene-root bug got wrong. Decode the panel's own POSITION
+    # accessor through ITS node's accumulated matrix in the WRITTEN file and
+    # compare the centroid against the world-space centroid measured during
+    # the original scan (cen, already in world space via the shell's M).
+    panel_node_i, panel_M = next(
+        (i, M) for i, nm, mesh_i, M in g2.leaves() if nm == spec["label"])
+    # The POSITION accessor is shared with the WHOLE shell, not just the
+    # panel — only the INDEX accessor picks out the panel's own triangles.
+    # Averaging the raw POSITION accessor would average every shell vertex
+    # and prove nothing; average face centroids of the panel's own indices
+    # instead, the same quantity `cen` was built from during the scan.
+    pv = g2.acc(pmesh["primitives"][0]["attributes"]["POSITION"]).astype(float)
+    pv_world = (np.c_[pv, np.ones(len(pv))] @ panel_M.T)[:, :3]
+    pidx = g2.acc(pmesh["primitives"][0]["indices"]).astype(np.int64).ravel()
+    ptri = pidx.reshape(-1, 3)
+    got_centroid = pv_world[ptri].mean(axis=1).mean(axis=0)
+    want_centroid = cen.mean(axis=0)
+    drift = float(np.linalg.norm(got_centroid - want_centroid))
+    assert drift < 0.05, (
+        f"panel node lands {drift:.3f} m from where the faces were measured "
+        f"(got {got_centroid}, want {want_centroid}) — the node's transform "
+        f"does not match its ancestor chain in the source file.")
     print(f"verified in {a.out}: {spec['label']} carries {got:,} faces, "
           f"shell {total_faces:,} -> {shell_after:,}, vertex accessors shared")
     print(f"  hinge for the app: y={hinge['y']} z={hinge['z']} axis=X "
