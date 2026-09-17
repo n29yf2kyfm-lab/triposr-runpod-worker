@@ -4975,3 +4975,60 @@ provider" and that "prompts and completions may be retained by the provider".
 The operator is undisclosed by design. Renders of cars are low-risk; catalogue
 data, credentials and repo source are not, and the `--code-only` constraint on
 graphify exists for the same reason.
+
+## THREE-WAY RENDER AUDIT BENCHMARK: Fable 5.1 wins, and the REASON is the lesson (2026-09-17)
+
+Owner asked to test Union Alpha against ox and Fable. All three reached through
+ONE endpoint (OpenRouter), ONE code path (`ox.py --image`), identical prompt,
+identical image — the Golf hero render `front34_R.png`. The answer key was
+derived from the glTF and COMMITTED (614a49c) before any model was asked, so it
+could not be retro-fitted. Scoring: +1 per correct factual read, **−1 per false
+defect claim**, because a false material verdict is this project's expensive
+failure — 39 live cars were once quarantined on exactly that and all 39
+restored.
+
+| claim | union-alpha | glm-5.3-flash | fable-5.1 | ground truth |
+|---|---|---|---|---|
+| Golf Mk8 GTI | ✓ | ✓ | ✓ | correct |
+| left-hand drive | ✓ flat | ✓ hedged | ✓ hedged | correct (SW centroid X +0.350) |
+| plate is placeholder "Golf" | — | saw text, didn't flag | **✓ flagged** | TRUE, real product defect |
+| "rear glass MATERIAL error" | **✗ diagnosed** | — | observed only | FALSE |
+| "interior placeholder / low-poly" | **✗** | **✗** | — | FALSE |
+| Mk8 GTI lower-bumper lamps | — | **✗** "real GTI has a single fog lamp", then invented "duplicated geometry" from it | ✓ "five-LED clusters" | the 5-dot array is correct |
+| bonnet reflection band | — | ✓ candidate, visible | — | visible; specular-vs-defect open |
+
+    SCORE   union-alpha 0   ·   glm-5.3-flash 0   ·   fable-5.1 +3
+    COST    $0.000000       ·   $0.000968        ·   $0.08997
+
+**WHY FABLE WON, and this is the transferable part: it separated what it SAW
+from what it CONCLUDED.** Union Alpha wrote "looks like a glass-material error"
+— a diagnosis, and false. Fable wrote "render as flat opaque light grey …
+unlike the front windows" — an observation, and TRUE of the pixels. Chasing
+Fable's observation found the real cause in one query; chasing Union Alpha's
+diagnosis would have sent a human hunting a glass bug that does not exist.
+**Prompt any vision model to report observations and withhold causes** — the
+cause is the file's job.
+
+**WHAT THE CHASE ACTUALLY FOUND (a fourth white-roof episode).** The flat grey
+roof is not glass at all. `Ext_Sunroof_Glass_Windows_Tinted` carries the same
+`glass` material as every other pane (BLEND, transmission 1.0, baseColor
+[0,0,0,0.25]); sitting under it is `Ext_Sunroof_Material_Atlas` — **OPAQUE,
+metallic 0.754, roughness 0.358, textured**, 956 tris spanning the roof
+aperture. A metallic panel under an overhead softbox. That is the same class as
+the Clio roof ("the white was a blown highlight — measure the pixels") and
+premium.py's white roof ("Fresnel, not a material bug, the SECOND time").
+NOT yet proven to be the bright pixels — that needs the matID pass, which is
+the standing cheap move and was not run here.
+
+**Calibration notes worth keeping.** Union Alpha stated LHD flat and was right;
+the two paid models hedged and were also right — hedging through alpha-0.25
+glass is good calibration, not weakness. GLM-flash is the only one that got a
+fact about the REAL car wrong and then built a defect on top of it, which is
+the worst shape of error: cheap, confident and compounding. Union Alpha and
+GLM both mistook a dim cabin behind dark glass for an unmodelled interior; only
+Fable left it alone.
+
+**Standing recommendation:** Union Alpha for free bulk triage and identity
+reads. Fable 5.1 when a verdict will be acted on — at $0.09 a render it is
+cheaper than one wasted human audit, and it was the only one that invented
+nothing. Never let any of them issue a material verdict; the glTF decides.
