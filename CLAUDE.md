@@ -5032,3 +5032,90 @@ Fable left it alone.
 reads. Fable 5.1 when a verdict will be acted on — at $0.09 a render it is
 cheaper than one wasted human audit, and it was the only one that invented
 nothing. Never let any of them issue a material verdict; the glTF decides.
+
+## UNION ALPHA IS GOOD AT TEXT AND BAD AT RENDERS — same model, opposite results (2026-09-17)
+
+Second and third real uses, both on the mechanics trainer, and they land on
+the opposite side of the render benchmark above.
+
+**IT FOUND FOUR HARD FACTUAL ERRORS IN MY OWN TEACHING CONTENT.** Given the
+app's training text with an explicit instruction to separate observation from
+diagnosis and to write "unsure" rather than guess:
+
+  * "get it wrong by a tooth on the BELT" — the EA888 in a Mk8 GTI is
+    CHAIN driven. Wrong engine entirely, in a Golf-specific app.
+  * "air and fuel drawn in" on the intake stroke — this engine is DIRECT
+    injection. Port-injection language on a DI car.
+  * "the pawl rotates off the striker" — wrong mechanism. A rotary latch has
+    a CLAW that captures the striker and a PAWL that holds the claw. Two
+    stages; I had merged them.
+  * "19 mm socket" for the wheel bolts — it said 17 mm. **I did not take the
+    number on trust**: removed my assertion and told the trainee to check,
+    noting 17 mm is common on a modern Golf and a locking bolt needs its
+    adapter. Correct handling of a claim from an unverified source.
+
+Plus **eleven** cases of me stating a DIAGNOSIS as a certainty — "a crooked
+window is a carrier, not a motor", "nine times out of ten the latch", "a
+seized pin is why one pad wears twice as fast", "no click means the trigger
+never arrived". All rewritten as "points to X, so check before condemning".
+That is this project's own rule, broken by me, caught by the model.
+
+**IT INVENTED NOTHING in either text task**, against 2 of 3 fabricated defect
+claims on the render task. The difference is the PROMPT: told to observe, to
+withhold causes, and to say "unsure", it complied and its unsure list was
+well calibrated — it declined to vouch for the airbag count, the door
+internals and the starter current figures for this exact variant, all of
+which it genuinely could not know.
+
+**AS A SPEC WRITER IT IS BETTER THAN AS A REVIEWER.** Asked for an engine-
+removal sequence and five scope/meter diagnosis scenarios it produced
+directly implementable material, and two ideas better than mine:
+  * **"Simulator hard stops"** — steps that BLOCK rather than animate. No
+    refrigerant vented by cracking a union; no mount released without
+    confirmed support; no person under a suspended assembly; never
+    disconnect the battery with the engine running. That distinction is what
+    separates a simulator from a cartoon.
+  * **A scoring trap set against itself**: on the alternator scenario,
+    "ripple alone does not uniquely prove a diode; stator faults can
+    resemble it." It wrote its own over-claim warning, unprompted.
+  * It REFUSED to state the Mk8 GTI's removal direction — "unsure, verify
+    against data. Do not hard-code 'down with subframe' from vehicle class
+    alone." Correct, and it makes the better module: teach the DECISION.
+
+**Standing rule, refined:** Union Alpha for text — content review, procedure
+drafting, identity reads — with the observe-don't-diagnose instruction in the
+prompt every time. Never for a material verdict off a render. Cost still $0.
+
+## three.js DELETES the colon in a node name — it collapsed a whole car (2026-09-17)
+
+Found by probe, after the render told me nothing. The teardown app classifies
+parts by node-name prefix; every node in the Golf GLB is named
+`G:Ext_Door_FL_…`. `GLTFLoader` runs names through
+`PropertyBinding.sanitizeNodeName`, which **strips** reserved characters
+rather than substituting them, so the mesh arrives called `GExt_Door_FL_…`.
+A test for a leading `G:` never fires, every rule misses, and the catch-all
+`[/./,'body']` swallowed all 163 meshes.
+
+**The failure was completely silent.** No error, no warning, a perfect-looking
+render of the car — and `if(!p) return` on every action, so no door, wheel,
+tailgate or brake would move. Screenshots showed a flawless Golf. The
+measured tell was `partIds: 1` where 23 was expected.
+
+Two lessons, both already in this file in other clothes:
+  * **A pixel diff could not find this and a state probe found it in one
+    run.** The "after actions" screenshot was BYTE-IDENTICAL to the baseline
+    — which I nearly read as "the actions do nothing visible" when it meant
+    "the actions do nothing". Assert on STATE, not on the picture.
+  * **My own harness hid it twice**: the action sequence ENDED with a reset,
+    so the final frame legitimately matched the first, and the clicks used
+    `?.click()` so a missing button was a silent no-op. Empty-by-construction,
+    again.
+Now: match the raw name AND both de-prefixed forms, and `console.error` plus
+an on-screen warning when fewer than 10 part groups are recognised — a
+regression that disables the whole app must not be silent.
+
+**Also paid for in the same build:** `#loading{display:grid}` BEATS the UA
+stylesheet's `[hidden]{display:none}`, so the loading overlay could never be
+dismissed and the app sat behind it forever, on every device. One line
+(`[hidden]{display:none !important}`) fixes it. The code read correctly; only
+a real browser showed it.
