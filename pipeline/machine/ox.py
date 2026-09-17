@@ -30,13 +30,31 @@ modes look exactly like a broken model rather than a caller mistake.
 Free on the current key (a test call returned `cost: 0`), but the usage line is
 printed after every call so that stops being an assumption.
 
+UNION ALPHA (added 2026-09-17, owner request "connect to union alpha").
+`stealth/union-alpha` is the current stealth slot -- the same kind of listing
+ox-alpha occupied before it was unmasked as GLM-5.3 Flash. VERIFIED against
+OpenRouter's own model list rather than the marketing post: 444 models
+returned, exactly one match, `context_length` 262144 and BOTH `pricing.prompt`
+and `pricing.completion` at 0. So it is genuinely free and genuinely 262K, and
+it needs no code change at all:
+
+    OX_MODEL=stealth/union-alpha python3 ox.py "question"
+
+Two cautions carried over from ox-alpha, because a stealth slot behaves the
+same way every time:
+  * ASSUME IT IS A REASONING MODEL until measured otherwise -- keep the 20000
+    max_tokens default, or a content=None reply will read as a broken model.
+  * A STEALTH ID IS TEMPORARY. ox-alpha went 404 the day its testing window
+    closed, and OpenRouter names the successor in the error body. When
+    union-alpha 404s, read the body; do not assume the key broke.
+
 Run:
     python3 ox.py "question"
     python3 ox.py --file prompt.txt
     python3 ox.py --image a.png --image b.png "what is wrong with these renders?"
     cat code.py | python3 ox.py --stdin --prefix "Review this:"
-Env: OX_MODEL (z-ai/glm-5.3-flash) · OX_MAX_TOKENS (20000) · OX_REASONING=1 to
-     also print the model's reasoning trace
+Env: OX_MODEL (z-ai/glm-5.3-flash; stealth/union-alpha for the free 262K slot)
+     OX_MAX_TOKENS (20000) · OX_REASONING=1 to print the reasoning trace
 """
 import json
 import os
