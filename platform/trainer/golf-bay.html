@@ -53,17 +53,38 @@ h1,h2,h3{margin:0; font-weight:700; letter-spacing:-.02em; text-wrap:balance}
 button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 :focus-visible{outline:2px solid var(--pri); outline-offset:2px; border-radius:4px}
 
-#shell{display:grid; grid-template-rows:auto 1fr; height:100dvh}
-header{display:flex; align-items:center; gap:13px; padding:10px 16px;
+/* max-height as well as height: inside an artifact iframe the frame can be
+   shorter than the dvh the page computes, and without the cap the grid's
+   1fr row overflows and the whole app reads as "does not fit on the page". */
+#shell{display:grid; grid-template-rows:auto 1fr; height:100dvh; max-height:100dvh;
+  min-height:0; overflow:hidden}
+header{display:flex; align-items:center; gap:13px; padding:10px 16px; flex-wrap:wrap;
   border-bottom:1px solid var(--line); background:var(--panel)}
 .mark{width:26px;height:26px;border-radius:7px;flex:none;display:grid;place-items:center;
   background:var(--pri);color:#fff;font-weight:800;font-size:13px;letter-spacing:-.04em}
 .brand b{font-size:16.5px;font-weight:800;letter-spacing:-.03em}
 .brand .sub{font-size:11px;color:var(--ink3);white-space:nowrap}
 .brand{display:flex;align-items:baseline;gap:9px}
-nav#tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1}
+/* EIGHT bays now. In one header row on a narrow screen the last tabs are
+   pushed off the edge, and with the scrollbar hidden there is nothing to
+   say they are there — the trainee simply cannot reach Bonnet off or Bench.
+   So: the strip still scrolls (with momentum on iOS), it carries a fade at
+   whichever edge has more to show, and under 760px it takes a full-width
+   row of its own instead of competing with the brand and the theme button. */
+nav#tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1 1 auto;
+  min-width:0;-webkit-overflow-scrolling:touch;
+  mask-image:linear-gradient(to right,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%);
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%);
+  padding-inline:2px}
 nav#tabs::-webkit-scrollbar{display:none}
-.tab{padding:7px 12px;border-radius:7px;white-space:nowrap;font-size:13px;font-weight:600;color:var(--ink2)}
+@media (max-width:760px){
+  header{gap:8px 10px;padding:9px 12px}
+  nav#tabs{flex:1 0 100%;order:3;margin-top:1px}
+  .brand{flex:1 1 auto;min-width:0}
+  .brand b{font-size:15px}
+}
+.tab{padding:7px 12px;border-radius:7px;white-space:nowrap;font-size:13px;font-weight:600;color:var(--ink2);
+  flex:none}
 .tab:hover{background:var(--panel2);color:var(--ink)}
 .tab[aria-selected="true"]{background:var(--pri);color:#fff}
 .iconbtn{width:32px;height:32px;border-radius:7px;display:grid;place-items:center;
@@ -216,7 +237,7 @@ ol.steps li.now .n{background:var(--pri);border-color:var(--pri);color:#fff}
         <div class="mono" id="loadPct" style="font-size:28px;font-weight:700;margin-top:4px">0%</div>
         <div class="bar"><i id="loadBar"></i></div>
         <div class="hint" style="margin-top:10px;max-width:300px">
-          8.4 MB · 543,082 triangles · 163 separately named parts</div>
+          6.6 MB · 543,082 triangles · 164 separately named parts</div>
       </div></div>
     </div>
     <aside id="panel"></aside>
