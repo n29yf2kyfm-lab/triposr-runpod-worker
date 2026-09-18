@@ -107,6 +107,11 @@ nav#tabs::-webkit-scrollbar{display:none}
 /* Fixed dark studio backdrop — deliberately NOT themed, see applyBg(). */
 #stage{position:relative;min-width:0;background:
   radial-gradient(115% 80% at 50% 0%, #1b2430 0%, #11161e 45%, #080a0e 100%)}
+/* Vignette. The floor lights evenly to the frame edge, which reads flat;
+   pulling the corners down puts the eye on the car. Pointer-events none so
+   it can never intercept a click on a fastener or a probe point. */
+#stage::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:radial-gradient(118% 95% at 50% 42%, transparent 46%, rgba(2,4,7,.30) 78%, rgba(2,4,7,.62) 100%)}
 #stage canvas{display:block;width:100%;height:100%}
 #bench-stage{position:absolute;inset:0;overflow:auto;padding:16px}
 aside{border-left:1px solid var(--line);background:var(--panel);overflow-y:auto;
@@ -193,17 +198,19 @@ ol.steps li.now .n{background:var(--pri);border-color:var(--pri);color:#fff}
 .choice.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 13%,transparent)}
 .choice.wrong{border-color:var(--danger);background:color-mix(in srgb,var(--danger) 13%,transparent)}
 
+/* z-index 3 keeps the overlays ABOVE the stage vignette (::after, z-index 2),
+   or the corner darkening dims the controls sitting in that corner. */
 #hud{position:absolute;left:12px;top:12px;display:flex;gap:6px;flex-wrap:wrap;
-  max-width:calc(100% - 24px);pointer-events:none}
+  max-width:calc(100% - 24px);pointer-events:none;z-index:3}
 #hud > *{pointer-events:auto}
 .chip{padding:6px 10px;border-radius:7px;font-size:11.5px;font-weight:600;color:var(--ink2);
   background:color-mix(in srgb,var(--panel) 88%,transparent);border:1px solid var(--line);
   backdrop-filter:blur(8px)}
 .chip.on{background:var(--pri);border-color:var(--pri);color:#fff}
-#caption{position:absolute;left:12px;bottom:12px;font-size:11px;color:var(--ink3);
+#caption{position:absolute;left:12px;bottom:12px;z-index:3;font-size:11px;color:var(--ink3);
   background:color-mix(in srgb,var(--panel) 80%,transparent);border:1px solid var(--line);
   padding:5px 9px;border-radius:7px;backdrop-filter:blur(8px);max-width:calc(100% - 24px)}
-#readout{position:absolute;right:12px;bottom:12px;padding:8px 11px;border-radius:8px;
+#readout{position:absolute;right:12px;bottom:12px;z-index:3;padding:8px 11px;border-radius:8px;
   background:color-mix(in srgb,var(--panel) 90%,transparent);border:1px solid var(--line);
   backdrop-filter:blur(8px);font-size:11.5px;color:var(--ink2);max-width:58%}
 #loading{position:absolute;inset:0;display:grid;place-items:center;text-align:center;
