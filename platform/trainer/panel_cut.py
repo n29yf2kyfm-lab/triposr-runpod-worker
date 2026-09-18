@@ -547,7 +547,12 @@ def main():
 
     if asm:
         # ── ASSEMBLY GATE: compactness, not single-patch topology ────────
-        size = cen.max(axis=0) - cen.min(axis=0)
+        # MEASURED FROM VERTICES, not face centroids. A centroid spread
+        # under-reports the real extent — a long sliver of surrounding
+        # bodywork can reach far past the centre of its own triangle, so a
+        # centroid bbox would pass a selection that visibly grabs the door.
+        vsel = np.vstack([h["vw"][h["tri"][h["mask"]].ravel()] for h in hits])
+        size = vsel.max(axis=0) - vsel.min(axis=0)
         cap = np.array(spec["bbox_max"], dtype=float)
         print(f"  bbox    {size[0]:.3f} x {size[1]:.3f} x {size[2]:.3f} m "
               f"(cap {cap[0]} x {cap[1]} x {cap[2]})")
@@ -575,6 +580,36 @@ def main():
     if a.report_only:
         print("report-only: nothing written")
         return
+
+    # REFUSE WHAT AN INDEX-ONLY CUT CANNOT CARRY. The new primitive keeps
+    # attributes, indices, mode and material — so a source primitive with
+    # morph targets or a geometry extension would lose them silently. Draco
+    # is the dangerous one: rewriting plain `indices` while the primitive
+    # still declares its compression extension leaves a loader reading the
+    # ORIGINAL uncut geometry out of the compressed buffer, and the file
+    # looks fine until you notice nothing was cut. Refuse rather than ship
+    # that. (This asset is uncompressed at cut time — compression is applied
+    # afterwards — so the guard is a fence, not a fix for a live bug.)
+    for h in hits:
+        pr = g.j["meshes"][h["mesh"]]["primitives"][h["prim"]]
+        if pr.get("targets"):
+            raise SystemExit(
+                f"REFUSED: '{h['name']}' primitive {h['prim']} has morph "
+                f"targets, which an index-only cut cannot carry.")
+        bad_ext = set(pr.get("extensions", {})) & {
+            "KHR_draco_mesh_compression", "EXT_meshopt_compression"}
+        if bad_ext:
+            raise SystemExit(
+                f"REFUSED: '{h['name']}' primitive {h['prim']} is compressed "
+                f"({', '.join(sorted(bad_ext))}). Decompress first "
+                f"(gltf-transform copy), cut, then re-compress — rewriting "
+                f"indices under a compression extension silently leaves the "
+                f"original geometry in place.")
+        if pr.get("mode", 4) != 4:
+            raise SystemExit(
+                f"REFUSED: '{h['name']}' primitive {h['prim']} is mode "
+                f"{pr.get('mode')}, not triangles. The face array assumes "
+                f"triangles.")
 
     # ── the cut: index-only, vertex data shared and untouched ────────────
     panel_prims = []

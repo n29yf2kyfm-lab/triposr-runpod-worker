@@ -1430,16 +1430,25 @@ function buildBayEngine(){
      backwards (passing the length as the depth) makes a 0.9 m thick slab
      instead of a panel, so the rotation is an explicit flag here rather
      than something inferred from the proportions. */
-  const shellM=M(0x2e343b,{roughness:.82,metalness:.22});
+  /* THE INNER WINGS AND SLAM PANEL ARE BODY-COLOURED, because on a real
+     car they are: they are pressings welded to the shell and painted with
+     it. Grey ones were a large part of why the bay read as a grey lump —
+     every surface in it sat at one value. Putting the car's own red inside
+     the bay is the single biggest colour change available, and it is the
+     correct one. The bulkhead and floor stay near-black, which is also
+     true of a real car (insulation and underseal). */
+  const paintM=M(0x8E1822,{roughness:.36,metalness:.10});  /* in shadow, so
+     darker than the exterior's clearcoated red */
+  const darkM =M(0x14171c,{roughness:.88,metalness:.12});
   const bayShell=[
-    [ .90,.34,.045,  .60,.640,1.52, true ],   /* inner wing, left  */
-    [ .90,.34,.045, -.60,.640,1.52, true ],   /* inner wing, right */
-    [1.22,.40,.045,   0, .660,1.14, false],   /* bulkhead / scuttle */
-    [1.22,.26,.045,   0, .560,1.98, false],   /* slam panel */
-    [1.22,.045,.86,   0, .335,1.55, false],   /* bay floor */
+    [ .90,.34,.045,  .60,.640,1.52, true , paintM],  /* inner wing, left  */
+    [ .90,.34,.045, -.60,.640,1.52, true , paintM],  /* inner wing, right */
+    [1.22,.40,.045,   0, .660,1.14, false, darkM ],  /* bulkhead / scuttle */
+    [1.22,.26,.045,   0, .560,1.98, false, paintM],  /* slam panel */
+    [1.22,.045,.86,   0, .335,1.55, false, darkM ],  /* bay floor */
   ];
-  for (const [w,h,d,x,y,z,rot] of bayShell){
-    const o=add(shellM,roundedBox(w,h,d,.02),x,y,z);
+  for (const [w,h,d,x,y,z,rot,mat] of bayShell){
+    const o=add(mat,roundedBox(w,h,d,.02),x,y,z);
     if (rot) o.rotation.y=Math.PI/2;
   }
   /* a strut brace across the top of the two towers */
@@ -1617,6 +1626,18 @@ function buildBayEngine(){
      direction and reads as pasted on top of the car rather than down
      inside it — no occlusion in the corners, no shadow under the loom. */
   bayAsm.traverse(o=>{ if(o.isMesh){ o.castShadow=true; o.receiveShadow=true; } });
+  /* AND THE BAY IS A CAVITY, so it should not gather as much of the studio
+     as the bodywork does. At the body's envMapIntensity of 1.45 every
+     casting in here picked up the overhead softbox and the whole bay
+     flattened to one mid-grey — measured at luma 56-69 across parts that
+     should read as black plastic, dark alloy and painted steel. Dropping
+     the environment contribution is what lets the base colours separate. */
+  const seen=new Set();
+  bayAsm.traverse(o=>{
+    if (!o.isMesh || !o.material || seen.has(o.material)) return;
+    seen.add(o.material);
+    if (o.material.envMapIntensity !== undefined) o.material.envMapIntensity = 0.45;
+  });
   bayAsm.visible=false; carRoot.add(bayAsm);
 }
 
@@ -1855,77 +1876,152 @@ function diagPhys(){
      numbers. Caught by testing each fault against its own claim. */
   const I = st==='crank' ? voc/(rStart+rint+rEarth)
           : st==='run'   ? 34 : st==='ign' ? 9 : 0;
-  const vbat  = Math.max(5.5, voc - I*rint);
   const drop  = I*rEarth;                     /* across the earth strap */
-  const feed  = vbat - drop;                  /* what the starter really sees */
-  const spins = st==='crank' && feed > 9.2;
-  /* will it actually run? a no-spark / no-fuel fault cranks and never fires */
-  const runnable = !bad('ckp') && !bad('fuse') && (bad('battery') ? false : true);
-  const running = st==='run';
-  const altOut = !running ? vbat
-    : bad('alt_brush') ? vbat
+
+  /* WILL IT RUN, and is it running? These were conflated: `running` was
+     just `state==='run'`, so selecting Running with a dead crank sensor
+     produced a running engine AND alternator output — the no-start fault
+     could be bypassed with a button. `running` now requires `runnable`. */
+  const runnable = !bad('ckp') && !bad('fuse') && !bad('battery');
+  const running  = st==='run' && runnable;
+
+  /* ONE BUS VOLTAGE. Previously the battery posts were always computed as
+     a DISCHARGING battery, so a healthy charging system read 12.35V at the
+     battery and 14.42V at the alternator — with a note calling the 12.35
+     "charging voltage". They are the same heavy cable: when the alternator
+     is charging it holds the WHOLE bus up, and the battery posts sit a
+     cable drop BELOW the output stud, not two volts below. */
+  const altOut = !running ? null
+    : bad('alt_brush') ? null                 /* no field, no output */
     : bad('diode')     ? 13.38 : 14.42;
-  const ripple = !running ? 0 : bad('alt_brush') ? 0 : bad('diode') ? 2.61 : 0.27;
-  return {vbat,drop,feed,I,spins,runnable,running,altOut,ripple,
-          bad,st,lamp: running && altOut < 13.2};
+  const charging = altOut !== null;
+  const bus = charging ? altOut - 0.12        /* 0.12V along the B+ cable */
+            : Math.max(5.5, voc - I*rint);
+  const vbat = bus;                           /* battery posts sit on the bus */
+  const feed = vbat - drop;                   /* what the starter really sees */
+  const spins = st==='crank' && feed > 9.2;
+  const ripple = !charging ? 0 : bad('diode') ? 2.61 : 0.27;
+
+  /* NODE POTENTIALS, all referenced to the battery NEGATIVE post = 0.
+     The meter now returns Vred - Vblack from these, which fixes three
+     things at once: battery-negative and the engine BLOCK are no longer
+     treated as the same reference (they differ by the strap drop, which is
+     the entire earth-fault lesson), unsupported pairings stop returning an
+     invented 0.99*vbat, and probe polarity is preserved instead of being
+     symmetric. */
+  const live = st!=='off';
+  const N = {
+    bat_neg: 0,
+    block:   drop,                            /* the block floats ABOVE -ve */
+    bat_pos: vbat,
+    alt_b:   charging ? altOut : vbat,        /* B+ is on the bus either way */
+    fuse:    bad('fuse') ? 0 : (live ? vbat : 0),
+    relay:   live ? vbat : 0,
+    coil1:   live ? vbat : 0,
+    /* a sensor's SIGNAL pin, not a supply: the crank sensor is an AC
+       generator and reads near zero on a DC range, which is why a meter
+       is the wrong instrument for it */
+    ckp:     drop,
+    ect:     live ? (DIAG.disconnected.ect ? vbat*0.38 : vbat*0.36) : 0,
+  };
+  const ac = {                                /* AC present at each node */
+    alt_b: ripple,
+    bat_pos: ripple*0.62,                     /* battery impedance damps it */
+    ckp: (st==='crank' && !bad('ckp')) ? 1.8 : 0,
+  };
+  return {vbat,drop,feed,I,spins,runnable,running,charging,altOut,ripple,
+          bus,N,ac,rEarth,live,bad,st,lamp: st==='run' && !charging};
 }
-/* what the meter says between the two probes, on the selected range */
+/* WHAT THE METER SAYS, from the node potentials — Vred minus Vblack.
+   The previous version pattern-matched on PAIRS of test points, which is
+   how it ended up treating battery-negative and the engine block as the
+   same reference while the model put three volts between them, ignoring
+   probe polarity, and inventing 0.99*vbat for anything it did not
+   recognise. A node model cannot do any of those by construction. */
 function diagRead(){
-  const m=diagPhys(), r=DIAG.red, b=DIAG.black, pair=new Set([r,b]);
-  const has=(x,y)=>pair.has(x)&&pair.has(y);
-  const dis=k=>DIAG.disconnected[k];
+  const m=diagPhys(), r=DIAG.red, b=DIAG.black;
+  const pair=new Set([r,b]), has=(x,y)=>pair.has(x)&&pair.has(y);
+
   if (DIAG.mode==='ohm'){
-    if (m.st!=='off') return {v:'---',u:'Ω',n:'Resistance with the circuit live is meaningless — and it can damage the meter. Key off first.'};
+    if (m.live) return {v:'---',u:'Ω',
+      n:'Resistance with the circuit live is meaningless, and it can damage the meter. Key off first.'};
+    if (r===b) return {v:'0.00',u:'Ω',n:'Both probes on the same point — that is a reading of your own leads.'};
     if (has('fuse','bat_pos')) return {v:m.bad('fuse')?'OL':'0.01',u:'Ω',
       n:m.bad('fuse')?'Open circuit. That fuse has blown — and something made it blow.':'Fuse is intact.'};
-    if (has('ect','block')) return {v:dis('ect')?'2430':'---',u:'Ω',
-      n:dis('ect')?'About 2.4 kΩ — a plausible cold reading for this class of sensor. Check it against the table for the actual car.':'Unplug the sensor before you measure it, or you are reading the ECU pull-up as well.'};
-    if (has('coil1','block')) return {v:dis('coil1')?'0.6':'---',u:'Ω',
-      n:dis('coil1')?'Primary winding, under an ohm. A shorted or open primary reads far from this.':'Disconnect it first.'};
-    if (has('bat_neg','block')) return {v:(m.bad('earth')?'0.04':'0.00'),u:'Ω',
-      n:'A static resistance check across an earth strap is a WEAK test — a corroded joint can read near zero and still drop volts under load. Measure the volt drop while cranking instead.'};
+    if (has('ect','block')) return {v:DIAG.disconnected.ect?'2430':'---',u:'Ω',
+      n:DIAG.disconnected.ect?'About 2.4 kΩ — a plausible cold reading for this class of sensor. Check it against the table for the actual car.':'Unplug the sensor before you measure it, or you are reading the ECU pull-up as well.'};
+    if (has('coil1','block')) return {v:DIAG.disconnected.coil1?'0.6':'---',u:'Ω',
+      n:DIAG.disconnected.coil1?'Primary winding, under an ohm. A shorted or open primary reads far from this.':'Disconnect it first.'};
+    if (has('bat_neg','block')) return {v:m.rEarth.toFixed(3),u:'Ω',
+      n:'Derived from the same strap resistance the volt-drop uses, so the two readings agree. But note a static resistance check across an earth is a WEAK test — a corroded joint can read near zero and still drop volts under load. Measure the drop while cranking.'};
     return {v:'OL',u:'Ω',n:'No path between those two points on the resistance range.'};
   }
+
   if (DIAG.mode==='Vac'){
-    if (has('alt_b','bat_neg')||has('alt_b','block'))
-      return {v:m.ripple.toFixed(2),u:'V AC',
-        n:m.running
-          ? (m.ripple>1.5 ? 'That is far too much AC on a DC line. A rectifier diode is open — the classic ripple signature.'
-             : m.ripple>0 ? 'A few tenths of a volt of ripple is normal.'
-             : 'No output at all, so nothing to ripple.')
-          : 'Start the engine to look for ripple.'};
-    return {v:'0.00',u:'V AC',n:'No AC here. AC on a DC system is what you hunt at the alternator output.'};
+    const va=(m.ac[r]||0)-(m.ac[b]||0);
+    if (r===b) return {v:'0.00',u:'V AC',n:'Both probes on the same point.'};
+    if (has('ckp','block')||has('ckp','bat_neg')) return {v:Math.abs(va).toFixed(2),u:'V AC',
+      n:m.bad('ckp')?'Nothing from the crank sensor while cranking. A meter averages a pattern though — put the scope on it before condemning the sensor.'
+        :(m.st==='crank'?'The sensor is producing AC, which is what an inductive crank sensor does. Judge the SHAPE on the scope, not this number.'
+                        :'Crank it to see anything here.')};
+    if (Math.abs(va)<0.01) return {v:'0.00',u:'V AC',
+      n:'No AC between those points. AC on a DC system is what you hunt at the alternator output.'};
+    return {v:Math.abs(va).toFixed(2),u:'V AC',
+      n:Math.abs(va)>1.5?'Far too much AC on a DC line. A rectifier diode is open — the classic ripple signature. Note it reads highest at the alternator output stud and is damped by the battery.'
+        :'A few tenths of a volt of ripple is normal for a healthy rectifier.'};
   }
-  /* DC volts */
-  if (has('bat_pos','bat_neg')) return {v:m.vbat.toFixed(2),u:'V',
-    n: m.st==='crank'
-      ? (m.vbat<10 ? 'Under 10 V while cranking. A healthy battery holds up much better than this — this one has high internal resistance.'
-                   : 'Holding up under crank.')
-      : m.st==='run' ? 'Battery terminals with the engine running — this is charging voltage, not battery voltage.'
-      : m.vbat<12.3 ? 'Low for a rested battery. Charge and retest before condemning anything.' : 'Normal rested battery voltage.'};
-  if (has('bat_neg','block')) return {v:m.drop.toFixed(2),u:'V',
-    n: m.st==='crank'
-      ? (m.drop>0.2 ? 'VOLT DROP across the engine earth while cranking. Anything much over 0.2 V is turning current into heat in a bad joint instead of torque at the starter.'
+
+  /* DC volts: a genuine difference of potentials, sign and all */
+  if (r===b) return {v:'0.00',u:'V',
+    n:'Both probes on the same point. Voltage is a DIFFERENCE between two places — there is nothing to measure here.'};
+  if (m.N[r]===undefined || m.N[b]===undefined) return {v:'--.--',u:'V',
+    n:'That point is not modelled in this bay. Pick two points that form the circuit you are testing.'};
+  const v = m.N[r]-m.N[b];
+  const sign = v<0
+    ? ' The reading is NEGATIVE because the probes are the wrong way round for this measurement — red should be on the more positive point.'
+    : '';
+  let n;
+  if (has('bat_pos','bat_neg')){
+    n = m.charging
+      ? 'Engine running and charging, so this is CHARGING voltage — the alternator is holding the whole bus up, battery included.'
+      : m.st==='crank'
+        ? (m.vbat<9.5 ? 'Below about 9.5 V while cranking. A healthy battery holds up better than this — high internal resistance.'
+                      : 'Holding up under crank. Around 9.6 V or more with the starter loaded is healthy.')
+        : m.st==='run' ? 'Running but NOT charging — this is just battery voltage with the engine turning.'
+        : m.vbat<12.3 ? 'Low for a rested battery. Charge it and retest before condemning anything.'
+        : 'Normal rested battery voltage.';
+  } else if (has('bat_neg','block')){
+    n = m.st==='crank'
+      ? (m.drop>0.2 ? 'VOLT DROP across the engine earth while cranking. Anything much over 0.2 V is being turned into heat in a bad joint instead of torque at the starter.'
                     : 'Under 0.2 V across the earth while cranking — that earth is good.')
-      : 'Volt drop only means anything WITH CURRENT FLOWING. Crank it and measure again.'};
-  if (has('alt_b','bat_neg')||has('alt_b','block')) return {v:m.altOut.toFixed(2),u:'V',
-    n: m.running
-      ? (m.altOut<13.0 ? 'Engine running and the output is the same as the battery. It is not charging at all — no field, no output.'
-         : m.altOut<14.0 ? 'Charging, but low. Something is costing you output — check AC ripple on this same stud.'
-         : 'Charging normally, about 14.4 V.')
-      : 'B+ sits at battery voltage with the engine stopped — that tells you nothing yet. Run it.'};
-  if (has('fuse','bat_neg')||has('fuse','block')) return {v:(m.bad('fuse')?0:m.vbat).toFixed(2),u:'V',
-    n:m.bad('fuse')?'Nothing out of the fuse. Either the fuse is open or its feed is.':'Feed present at the fuse output.'};
-  if (has('ckp','bat_neg')||has('ckp','block')) return {v:(m.st==='crank'&&!m.bad('ckp')?'1.8':'0.00'),u:'V AC~',
-    n:m.bad('ckp')?'No signal from the crank sensor while cranking. Put the scope on it to be sure — a meter averages a pattern and can lie either way.'
-      :(m.st==='crank'?'A signal is present. Judge the SHAPE on the scope, not this number.':'Crank it to see anything here.')};
-  if (has('relay','bat_neg')||has('relay','block')) return {v:(m.st==='off'?'0.00':m.vbat.toFixed(2)),u:'V',
-    n:'Relay coil feed. A relay that clicks proves the coil, never the contacts.'};
-  if (has('coil1','bat_neg')||has('coil1','block')) return {v:(m.st==='off'?'0.00':m.vbat.toFixed(2)),u:'V',
-    n:'Coil supply. The switched side needs a scope, not a meter.'};
-  if (r===b) return {v:'0.00',u:'V',n:'Both probes on the same point. Voltage is a DIFFERENCE between two places.'};
-  return {v:(m.st==='off'?'0.00':(m.vbat*0.99).toFixed(2)),u:'V',
-    n:'Not a pairing with a specific meaning in this model — pick two points that form the circuit you are testing.'};
+      : 'Volt drop only means anything WITH CURRENT FLOWING. Crank it and measure again.';
+  } else if (has('bat_pos','block')){
+    n = m.st==='crank'
+      ? `This is what the starter actually sees: ${m.vbat.toFixed(2)} V at the battery minus ${m.drop.toFixed(2)} V lost in the earth. `+
+        (m.drop>0.2 ? 'The gap between this and the battery reading IS the fault.'
+                    : 'Almost all of the battery voltage is reaching it, which is what you want.')
+      : 'Positive post to the block. Under load the difference between this and the battery posts is what the earth is costing you.';
+  } else if (has('alt_b','bat_neg')||has('alt_b','block')||has('alt_b','bat_pos')){
+    n = m.st!=='run' ? 'B+ sits on the battery bus with the engine stopped — that tells you nothing yet. Run it.'
+      : !m.charging ? 'Engine running and the output stud is at battery voltage. It is not charging at all — no field, no output, however fast it turns.'
+      : has('alt_b','bat_pos') ? 'The small difference across the charge cable. A big difference here means a bad B+ cable or connection.'
+      : (m.altOut<14.0 ? 'Charging, but low. Something is costing you output — check AC ripple on this same stud.'
+                       : 'Charging normally, about 14.4 V.');
+  } else if (has('fuse','bat_neg')||has('fuse','block')){
+    n = m.bad('fuse') ? 'Nothing out of the fuse. Either the fuse is open or its feed is.'
+      : m.live ? 'Feed present at the fuse output.' : 'Key off, so no feed — switch the ignition on.';
+  } else if (has('relay','bat_neg')||has('relay','block')){
+    n = 'Relay coil feed. A relay that clicks proves the coil, never the contacts.';
+  } else if (has('coil1','bat_neg')||has('coil1','block')){
+    n = 'Coil supply. The switched side needs a scope, not a meter.';
+  } else if (pair.has('ckp')){
+    n = 'A crank sensor is an AC generator, so it reads near nothing on a DC range whether it is working or not. Switch to V AC, or better, the scope.';
+  } else if (pair.has('ect')){
+    n = 'Coolant sensor signal voltage. It falls as the engine warms — compare it against the table for the actual car rather than a remembered number.';
+  } else {
+    n = 'Both points are modelled, but this pairing is not a test with a standard meaning. Pick two points that form the circuit you are testing.';
+  }
+  return {v:v.toFixed(2),u:'V',n:n+sign};
 }
 const diagRig = new THREE.Group();
 const dgM = {};
@@ -2291,20 +2387,40 @@ const CAP={
   brakes:'Real disc and caliper · pads are constructed'};
 /* Put back whatever another bay left open or detached. `keep` is the mode
    being entered, so the bay that owns a panel does not fight its own setup. */
+/* Put back whatever another bay left open, detached or removed.
+   `keep` is the mode being ENTERED. Two rules learned from a review:
+
+   1. A BAY THAT WILL SET A PANEL ITSELF MUST NOT BE RESTORED HERE FIRST.
+      The Diagnose bay opens the bonnet by direct assignment, but this
+      function had already queued a 420ms tween closing it — so the bonnet
+      opened and then shut itself over the probe points. Bays that own a
+      panel are listed against it rather than tested one at a time.
+   2. EVERY REMOVABLE REAL PART NEEDS A LINE HERE. The mirror was missing,
+      so taking it off and switching bays left it floating beside the car
+      in Strip and in Diagnose. Hiding the fastener rig does not hide the
+      part the job moved. */
+const PANEL_OWNERS = {
+  panel_bonnet: ['bonnetOff','diag'],   /* diag opens the bonnet too */
+  mirror_fl:    ['dparts'],
+  door_fl:      ['doorOff','dparts','strip'],
+};
 function restoreJobPanels(keep){
-  const pb=parts.panel_bonnet;
-  if (pb && keep!=='bonnetOff'){
-    tween(pb.group.rotation,'x',0,420);
-    tweenV(pb.group.position,pb.home.clone(),420);
+  const owns = id => (PANEL_OWNERS[id]||[]).includes(keep);
+  if (!owns('panel_bonnet')){
+    const pb=parts.panel_bonnet;
+    if (pb){ tween(pb.group.rotation,'x',0,420);
+      tweenV(pb.group.position,pb.home.clone(),420); }
   }
-  if (keep!=='doorOff'){
+  if (!owns('mirror_fl')){
+    const pm=parts.mirror_fl;
+    if (pm && pm.group.position.distanceToSquared(pm.home)>1e-9)
+      tweenV(pm.group.position,pm.home.clone(),420);
+  }
+  if (!owns('door_fl')){
     const pd=parts.door_fl;
-    if (pd && (DO.off || pd.group.position.distanceToSquared(pd.home)>1e-6)){
+    if (pd && (DO.off || pd.group.position.distanceToSquared(pd.home)>1e-6))
       tweenV(pd.group.position,pd.home.clone(),420);
-    }
-    /* strip owns the door toggles, so only force it shut when arriving
-       somewhere that is not about doors at all */
-    if (keep!=='strip') setDoor('door_fl',false);
+    setDoor('door_fl',false);
   }
 }
 function setMode(m){
@@ -2370,6 +2486,10 @@ function setMode(m){
     /* door OPEN: every fastener in both jobs is inside the door or on its
        shut face, and none of it is reachable through a closed door */
     setDoor('door_fl',true);
+    /* come back to a finished mirror job with the mirror still OFF */
+    const pm=parts.mirror_fl;
+    if (pm) pm.group.position.copy(DP.m.off
+      ? pm.home.clone().add(new THREE.Vector3(.34,.06,.10)) : pm.home);
     /* Both cameras sat close enough to fill the frame with door skin. The
        mirror is viewed from front-outboard so the mount and the mirror are
        both in shot; the latch lives in the shut face, which points REARWARD,
@@ -3348,7 +3468,10 @@ window.__setDpJob = j => { DP.job=j; setMode('dparts'); };
 window.__diag = () => { const m=diagPhys(), rd=diagRead();
   return {fault:DIAG.fault, state:DIAG.state, mode:DIAG.mode,
     red:DIAG.red, black:DIAG.black, reading:rd.v+' '+rd.u,
-    vbat:+m.vbat.toFixed(2), drop:+m.drop.toFixed(2), altOut:+m.altOut.toFixed(2),
+    vbat:+m.vbat.toFixed(2), drop:+m.drop.toFixed(2),
+    /* altOut is NULL when nothing is being generated — that is the model
+       saying "no output", not a number to format */
+    altOut:m.altOut===null?null:+m.altOut.toFixed(2), charging:m.charging,
     ripple:+m.ripple.toFixed(2), spins:m.spins, runnable:m.runnable,
     replaced:[...DIAG.replaced], dis:Object.keys(DIAG.disconnected),
     cleared:DIAG.cleared, verdict:DIAG.verdict, points:Object.keys(DTP).length,
