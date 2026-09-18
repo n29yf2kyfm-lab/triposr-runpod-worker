@@ -300,7 +300,7 @@ const RULES = [
   [/^Int_/,'cabin'],[/./,'body']];
 
 const PART = {
-  body:{l:'Body shell',g:'Body',n:'Wings, roof and <b>both bumpers</b> are still part of this single welded mesh — they are not separate panels in this file, so they cannot be taken off here. The <b>bonnet</b> used to be part of this shell too; it has been cut out along its real shut line (a crease-bounded region grow, verified as one closed panel) and is now its own part — see <b>Bonnet off</b>.'},
+  body:{l:'Body shell',g:'Body',n:'Wings, roof and <b>both bumpers</b> are still part of this single welded mesh — they are not separate panels in this file, so they cannot be taken off here. The <b>bonnet</b> used to be part of this shell too; it has been cut out along its real shut line (a crease-bounded region grow, verified as one connected hole-free surface patch) and is now its own part — see <b>Bonnet off</b>.'},
   panel_bonnet:{l:'Bonnet',g:'Body',n:'Cut out of the body shell along its own shut line — the POSITION, NORMAL and TEXCOORD data are shared byte-for-byte with the shell it came from, so nothing was remodelled or moved. Hinged at the scuttle, just ahead of the windscreen. The <b>Bonnet off</b> bay takes it off with real hinge bolts and gas struts.'},
   door_fl:{l:'Door — front left',g:'Body',n:'Outer skin, inner frame, door card, speaker, glass and check strap, all moving together. Hinged at the A-pillar. The <b>Inside a door</b> bay opens this one up.'},
   door_fr:{l:'Door — front right',g:'Body',n:'Same assembly mirrored. The steering wheel on this car is on the LEFT, so this is the passenger door.'},
@@ -980,13 +980,22 @@ function doorAct(act){
 
    panel_bonnet is not faked geometry: platform/trainer/panel_cut.py cut it
    out of the one-piece body shell along a crease-bounded region grow,
-   verified topologically as a single closed panel (1 component, 1 boundary
-   loop, 0 holes) before it was ever written, and its POSITION/NORMAL/
+   verified as ONE CONNECTED, HOLE-FREE SURFACE PATCH (1 component, 1
+   boundary loop) before it was ever written, and its POSITION/NORMAL/
    TEXCOORD accessors are shared byte-for-byte with the shell — nothing was
-   remodelled. The hinge bolts and gas struts ARE constructed (there is
-   nothing between the bonnet and the shell in the source file to hinge it
-   on), placed on the measured hinge line the tool printed: y=0.975 z=1.115,
-   axis X.
+   remodelled. Note that is a surface patch with a single outer perimeter,
+   NOT a watertight closed solid, and it does not assert the panel is
+   structurally complete. The hinge bolts and gas struts ARE constructed
+   (there is nothing between the bonnet and the shell in the source file to
+   hinge it on), placed on the measured hinge line the tool printed:
+   y=0.975 z=1.115, axis X.
+
+   THE BAY STARTS WITH THE BONNET OPEN, and that is a correctness fix, not
+   a presentation one. With it shut, the hinge bolts and strut clips sit
+   inside the bodywork: invisible, and nothing on screen tells the trainee
+   where to click. On a real car this job begins at an open, propped
+   bonnet. So 'lift' is a TRANSLATION off the hinges — opening and removing
+   are different operations and conflating them taught the wrong thing.
 
    Same hard-stop discipline as the door: every fastener has a
    prerequisite, and doing it early is REFUSED with the reason. The
@@ -994,12 +1003,16 @@ function doorAct(act){
    gas struts, not a check strap, and releasing one with nothing supporting
    the bonnet lets the far side drop without warning.
    ═══════════════════════════════════════════════════════════════════ */
+/* Placed to be VISIBLE AND TAPPABLE with the bonnet open — the hinge line
+   at the scuttle, the struts in the gap under the raised panel. Heads are
+   deliberately oversized for a phone screen: a 16 mm bolt head at this
+   camera distance is a couple of pixels and untappable. */
 const BFIX = {
-  bolt_hl:{label:'Hinge bolt — left',  p:[-.75, .975, 1.135]},
-  bolt_hr:{label:'Hinge bolt — right', p:[ .75, .975, 1.135]}};
+  bolt_hl:{label:'Hinge bolt — left',  p:[-.74, 1.00, 1.16]},
+  bolt_hr:{label:'Hinge bolt — right', p:[ .74, 1.00, 1.16]}};
 const BSTRUT = {
-  strut_l:{label:'Gas strut — left',  a:[-.70, .82, 1.05], b:[-.66, .93, 1.55]},
-  strut_r:{label:'Gas strut — right', a:[ .70, .82, 1.05], b:[ .66, .93, 1.55]}};
+  strut_l:{label:'Gas strut — left',  a:[-.64, .76, 1.18], b:[-.72, 1.10, 1.46]},
+  strut_r:{label:'Gas strut — right', a:[ .64, .76, 1.18], b:[ .72, 1.10, 1.46]}};
 const BONNET_OPEN = THREE.MathUtils.degToRad(52);
 const BO = {looked:false, supported:false, marked:false, strut:{}, out:{},
             off:false, stops:0, log:[]};
@@ -1010,25 +1023,25 @@ function buildBonnetRig(){
   const done =new THREE.MeshStandardMaterial({color:0x34D399,metalness:.5,roughness:.4});
   for (const [k,f] of Object.entries(BFIX)){
     const g=new THREE.Group(); g.position.set(...f.p);
-    const head=new THREE.Mesh(new THREE.CylinderGeometry(.016,.016,.013,6),steel);
-    const shank=new THREE.Mesh(new THREE.CylinderGeometry(.007,.007,.045,10),steel);
-    shank.position.y=-.026;
+    const head=new THREE.Mesh(new THREE.CylinderGeometry(.026,.026,.022,6),steel);
+    const shank=new THREE.Mesh(new THREE.CylinderGeometry(.011,.011,.055,10),steel);
+    shank.position.y=-.034;
     g.add(head,shank); g.userData={fix:k}; bonnetRig.add(g);
     bRig.bolts[k]={g,head,shank,steel,done};
   }
   /* hinge brackets, so the bolts are visibly going into something */
-  for (const x of [-.75,.75]){
-    const h=new THREE.Mesh(new THREE.BoxGeometry(.06,.05,.14),steel);
-    h.position.set(x,.955,1.14); bonnetRig.add(h); bRig.hinges.push(h);
+  for (const x of [-.74,.74]){
+    const h=new THREE.Mesh(new THREE.BoxGeometry(.075,.06,.17),steel);
+    h.position.set(x,.965,1.16); bonnetRig.add(h); bRig.hinges.push(h);
   }
   for (const [k,f] of Object.entries(BSTRUT)){
     const a=new THREE.Vector3(...f.a), b=new THREE.Vector3(...f.b);
     const mid=a.clone().lerp(b,.5), len=a.distanceTo(b);
-    const rod=new THREE.Mesh(new THREE.CylinderGeometry(.009,.009,len,10),steel);
+    const rod=new THREE.Mesh(new THREE.CylinderGeometry(.014,.014,len,10),steel);
     rod.position.copy(mid);
     rod.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),
       b.clone().sub(a).normalize());
-    const clip=new THREE.Mesh(new THREE.TorusGeometry(.014,.004,6,10),
+    const clip=new THREE.Mesh(new THREE.TorusGeometry(.026,.008,8,14),
       new THREE.MeshStandardMaterial({color:0xF59E0B,metalness:.3,roughness:.5}));
     clip.position.copy(a); clip.userData={fix:k}; rod.userData={fix:k};
     const g=new THREE.Group(); g.add(rod,clip); bonnetRig.add(g);
@@ -1088,9 +1101,10 @@ function bonnetAct(act){
     tweenV(b.g.position,new THREE.Vector3(BFIX[act].p[0],BFIX[act].p[1]+.18,BFIX[act].p[2]),480);
     BO.log.unshift({t:`${BFIX[act].label} out.`}); }
   if (act==='lift'){ BO.off=true;
+    /* the bonnet is already open — removing it is lifting the panel UP and
+       FORWARD off its hinge pins, not rotating it further */
     const p=parts.panel_bonnet;
-    if (p){ tween(p.group.rotation,'x',-BONNET_OPEN,900,()=>{
-      tweenV(p.group.position,p.home.clone().add(new THREE.Vector3(0,.45,.55)),700); }); }
+    if (p){ tweenV(p.group.position,p.home.clone().add(new THREE.Vector3(0,.34,1.00)),900); }
     BO.log.unshift({t:BO.marked
       ? 'Bonnet off, and the hinges are marked — it will line back up on refit.'
       : 'Bonnet off. You did NOT mark the hinges, so refitting is now trial and error on the shut line.'}); }
@@ -1102,7 +1116,9 @@ function bonnetAct(act){
     for (const k in bRig.bolts){ const b=bRig.bolts[k];
       b.head.material=b.steel; b.shank.material=b.steel; b.g.position.set(...BFIX[k].p); }
     for (const m of bRig.marks) bonnetRig.remove(m); bRig.marks.length=0;
-    const p=parts.panel_bonnet; if(p){ p.group.rotation.x=0; p.group.position.copy(p.home); }
+    /* back to the bay's START state, which is OPEN — not shut */
+    const p=parts.panel_bonnet;
+    if(p){ p.group.rotation.x=-BONNET_OPEN; p.group.position.copy(p.home); }
   }
   drawHud(); drawPanel();
 }
@@ -1319,7 +1335,11 @@ function setMode(m){
     flyTo(new THREE.Vector3(.78,.82,.70),new THREE.Vector3(2.30,1.34,2.15)); }
   if (m==='bonnetOff'&&carReady){ setXray(false); setExplode(0);
     iso(['body','panel_bonnet','cabin','seats','steering','glazing','wheel_fl','wheel_fr','lamps_front']);
-    flyTo(new THREE.Vector3(0,.85,1.55),new THREE.Vector3(1.55,1.55,3.35)); }
+    /* open it: a shut bonnet hides every fastener this bay is about */
+    const pb=parts.panel_bonnet;
+    if (pb && !BO.off){ pb.group.position.copy(pb.home);
+      tween(pb.group.rotation,'x',-BONNET_OPEN,700); }
+    flyTo(new THREE.Vector3(0,1.00,1.25),new THREE.Vector3(1.45,1.72,2.95)); }
   if (m==='door') flyTo(new THREE.Vector3(0,.68,0),new THREE.Vector3(.75,1.05,2.45));
   if (m==='starter') flyTo(new THREE.Vector3(.20,.31,0),new THREE.Vector3(.72,.72,1.15));
   if (m==='engine') flyTo(new THREE.Vector3(0,.80,0),new THREE.Vector3(1.75,1.35,2.35));
@@ -1499,18 +1519,23 @@ function pBonnetOff(){
   return `
   <div><div class="eyebrow">Bay 3 · Take the bonnet off</div>
     <h2 style="font-size:19px;margin-top:2px">Bonnet</h2>
-    <p style="font-size:13px;color:var(--ink2);margin-top:6px">Do the job. Click the
-    fasteners <b>on the car</b> — the strut clips and the hinge bolts. Take something out
-    in the wrong order and it will stop you and tell you what you just broke.</p></div>
+    <p style="font-size:13px;color:var(--ink2);margin-top:6px">The bonnet starts
+    <b>open</b>, because that is where this job starts — you cannot reach a hinge bolt
+    or a strut clip through a shut bonnet. Click the fasteners <b>on the car</b>: the
+    orange strut clips low in the engine bay, and the bolt heads on the hinges at the
+    scuttle. Out of order and it will stop you and tell you what you just broke.</p></div>
 
   <div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
       <div class="eyebrow">Provenance</div><span class="prov real">panel cut from the real shell</span></div>
     <p style="margin-top:7px">The <b>bonnet itself</b> is not built-from-scratch geometry —
     it was cut out of the real body shell along its own shut line (a crease-bounded region
-    grow, verified as a single closed panel with 0 holes before anything was written), and
-    shares its surface data byte-for-byte with the shell it came from. The hinge bolts, gas
-    struts and support prop are constructed and placed on the measured hinge line.</p>
+    grow, verified as one connected hole-free surface patch before anything was written —
+    a patch with a single outer perimeter, not a watertight solid), and shares its surface
+    data byte-for-byte with the shell it came from. The hinge bolts, gas struts and support
+    prop are constructed and placed on the measured hinge line; their <b>number and layout
+    are typical of this class of car and are not verified against this car's data</b> —
+    the workshop data for the vehicle in front of you governs.</p>
   </div>
 
   <div class="card">
