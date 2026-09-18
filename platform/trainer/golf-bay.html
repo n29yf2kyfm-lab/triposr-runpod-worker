@@ -475,6 +475,13 @@ function flyTo(t,p,ms=900){ tweenV(controls.target,t,ms); tweenV(camera.position
    THE REAL CAR
    ═══════════════════════════════════════════════════════════════════ */
 const carRoot = new THREE.Group(); sceneCar.add(carRoot);
+/* AN INSPECTION LAMP. The studio rig lights a car from above, which is
+   correct for a body shot and useless once you are looking sideways into a
+   wheel arch — the starter came out as a dark shape against a dark bay.
+   A mechanic solves that with a lamp, so the starter bay gets one: a warm
+   point light hung just outboard of the starter, off in every other bay. */
+const bayLamp = new THREE.PointLight(0xfff0dc, 0, 1.9, 2);
+bayLamp.position.set(-.82,.64,1.76); sceneCar.add(bayLamp);
 const parts = {}; let carReady=false, loadFailed=false;
 const loader = new GLTFLoader(); loader.setMeshoptDecoder(MeshoptDecoder);
 /* Published as .glb.wasm, not .glb. Artifact hosting serves a fixed set of
@@ -625,17 +632,28 @@ function setTailgate(open){
   const p=parts.tailgate; if(!p) return; S.tailgate=open?1:0;
   tween(p.group.rotation,'x', open?THREE.MathUtils.degToRad(62):0, 780);
 }
-function setXray(on){
+/* `extra` widens the ghost for a bay that needs to see through something the
+   strip view never does — the starter bay has to see through the near-side
+   FRONT WHEEL, which is directly outboard of the starter and opaque. Every
+   car mesh captured its original transparency at load (userData.m0), so any
+   part id can be ghosted and put back exactly. */
+function setXray(on, extra){
   S.xray=on;
-  for (const id of ['body','panel_bonnet','mirror_fl','cabin','seats','glazing','door_fl','door_fr','door_rl','door_rr']){
+  for (const id of ['body','panel_bonnet','mirror_fl','cabin','seats','glazing','door_fl','door_fr','door_rl','door_rr',
+                    ...(S.xrayExtra||[]), ...(on&&extra?extra:[])]){
     const p=parts[id]; if(!p) continue;
+    const isExtra = on && extra && extra.includes(id);
     for (const m of p.meshes){
       const mat=m.material; if(!mat) continue;
-      if (on){ mat.transparent=true; mat.opacity=(id==='body')?.09:.28; mat.depthWrite=false; }
+      if (on){ mat.transparent=true;
+        mat.opacity=(id==='body'||isExtra)?.09:.28; mat.depthWrite=false; }
       else { const b=m.userData.m0; mat.transparent=b.transparent; mat.opacity=b.opacity; mat.depthWrite=b.depthWrite; }
       mat.needsUpdate=true;
     }
   }
+  /* remember the widened set so the NEXT setXray(false) puts it back too —
+     without this a ghosted wheel stays ghosted in every later bay */
+  S.xrayExtra = on ? (extra||[]) : [];
 }
 function setExplode(k){
   S.explode=k;
@@ -1460,10 +1478,18 @@ function buildBayEngine(){
     [1.22,.26,.045,   0, .560,1.98, false, paintM],  /* slam panel */
     [1.22,.045,.86,   0, .335,1.55, false, darkM ],  /* bay floor */
   ];
-  for (const [w,h,d,x,y,z,rot,mat] of bayShell){
+  /* the RIGHT inner wing is kept a handle, because the starter lives
+     directly behind it. Nothing outside the car can see a starter on a
+     transverse engine — the wing is in the way from the side, the engine
+     from above, the bumper from the front — so the starter bay ghosts
+     this one panel rather than pretending the view exists. */
+  bayShell.forEach(([w,h,d,x,y,z,rot,mat],i)=>{
     const o=add(mat,roundedBox(w,h,d,.02),x,y,z);
     if (rot) o.rotation.y=Math.PI/2;
-  }
+    /* its own material instance: paintM is shared with the left wing and
+       the slam panel, and ghosting a shared material ghosts all three */
+    if (i===1){ o.material=mat.clone(); bP.wingR=o; }
+  });
   /* a strut brace across the top of the two towers */
   add(alu,roundedBox(1.05,.045,.075,.016),0,.735,1.42);
 
@@ -1545,29 +1571,69 @@ function buildBayEngine(){
      running back to the battery. The constructed cutaway on the plinth
      shows how one WORKS; this is the one you actually have to get off a
      car, and the two are different skills. */
-  bP.starter=new THREE.Group(); bP.starter.position.set(-.34,.445,1.60);
+  /* a bellhousing FACE for it to bolt to, so the nose goes into something */
+  add(cast,roundedBox(.075,.30,.32,.020),-.345,.480,1.585);
+  /* The starter sat at x -0.34 with its mounting flange at -0.21 — INSIDE
+     the engine block, which spans x ±0.31. Both flange bolts were therefore
+     buried in the block from every camera that could see the starter at all
+     (measured with window.__project from nine positions: bolts hidden in
+     all nine). Moved outboard of the block so the flange stands clear. */
+  bP.starter=new THREE.Group(); bP.starter.position.set(-.50,.445,1.60);
   bayAsm.add(bP.starter);
-  const sBody=new THREE.Mesh(new THREE.CylinderGeometry(.056,.056,.185,20),
-    M(0x5a6068,{roughness:.6,metalness:.55}));
+  /* A BARE CYLINDER DOES NOT READ AS A STARTER. What makes one recognisable
+     at a glance is the three-piece construction — a dark magnet can between
+     two cast alloy end housings, tie bolts down its length, and the solenoid
+     sitting on top with a copper stud out of its end. Built that way here. */
+  const canM=M(0x555c66,{roughness:.46,metalness:.66});   /* magnet can */
+  const sBody=new THREE.Mesh(new THREE.CylinderGeometry(.056,.056,.150,22),canM);
   sBody.rotation.z=Math.PI/2; bP.starter.add(sBody);
-  const sSol=new THREE.Mesh(new THREE.CylinderGeometry(.032,.032,.105,16),
-    M(0x4e545c,{roughness:.62,metalness:.5}));
-  sSol.rotation.z=Math.PI/2; sSol.position.set(.01,.062,0); bP.starter.add(sSol);
-  const sNose=new THREE.Mesh(new THREE.CylinderGeometry(.040,.046,.055,16),alu);
-  sNose.rotation.z=Math.PI/2; sNose.position.x=.115; bP.starter.add(sNose);
+  /* commutator-end cap and drive-end housing, both cast alloy */
+  const sCap=new THREE.Mesh(new THREE.CylinderGeometry(.052,.044,.034,20),alu);
+  sCap.rotation.z=Math.PI/2; sCap.position.x=-.090; bP.starter.add(sCap);
+  const sDrive=new THREE.Mesh(new THREE.CylinderGeometry(.058,.050,.062,20),alu);
+  sDrive.rotation.z=Math.PI/2; sDrive.position.x=.104; bP.starter.add(sDrive);
+  /* two tie bolts running the length of the can — the give-away detail */
+  for (const a of [Math.PI*.28, -Math.PI*.28]){
+    const tb=new THREE.Mesh(new THREE.CylinderGeometry(.0055,.0055,.205,8),
+      M(0x767c85,{roughness:.45,metalness:.85}));
+    tb.rotation.z=Math.PI/2;
+    tb.position.set(.005,Math.sin(a)*.052,Math.cos(a)*.052);
+    bP.starter.add(tb);
+  }
+  /* The mounting flange, with EARS that stand proud of the can — which is
+     how one is cast, and also what makes the bolts clickable. The ears run
+     FORE AND AFT, not up and down: vertical ears were tried and the upper
+     one sits directly under the solenoid, which blocked it from every side
+     view. Fore-and-aft ears clear both the can and the solenoid. */
+  const sFl=new THREE.Mesh(roundedBox(.022,.100,.255,.012),alu);
+  sFl.position.set(.128,.004,0); bP.starter.add(sFl);
+  /* solenoid on top: barrel, its own end cap, and the plunger housing */
+  const sSol=new THREE.Mesh(new THREE.CylinderGeometry(.032,.032,.098,18),
+    M(0x3a4048,{roughness:.55,metalness:.6}));
+  sSol.rotation.z=Math.PI/2; sSol.position.set(.012,.064,0); bP.starter.add(sSol);
+  const sSolCap=new THREE.Mesh(new THREE.CylinderGeometry(.030,.026,.020,16),
+    M(0x1c2026,{roughness:.8,metalness:.15}));
+  sSolCap.rotation.z=Math.PI/2; sSolCap.position.set(-.046,.064,0); bP.starter.add(sSolCap);
+  /* pinion nose poking into the bellhousing */
+  const sNose=new THREE.Mesh(new THREE.CylinderGeometry(.026,.030,.050,16),
+    M(0x6d737c,{roughness:.42,metalness:.88}));
+  sNose.rotation.z=Math.PI/2; sNose.position.x=.160; bP.starter.add(sNose);
   /* the B+ stud and its heavy cable — LIVE AT ALL TIMES, straight off the
      battery with no fuse in it, which is the whole point of the job */
-  bP.starterStud=new THREE.Mesh(new THREE.CylinderGeometry(.011,.011,.024,10),cu);
-  bP.starterStud.rotation.z=Math.PI/2; bP.starterStud.position.set(-.02,.098,.022);
+  bP.starterStud=new THREE.Mesh(new THREE.CylinderGeometry(.011,.011,.026,10),cu);
+  bP.starterStud.rotation.z=Math.PI/2; bP.starterStud.position.set(-.062,.064,0);
   bP.starter.add(bP.starterStud);
-  hose([[-.36,.545,1.62],[-.42,.60,1.48],[-.40,.66,1.32],[-.31,.72,1.25]],.014,
+  /* the cable leaves the stud where the stud actually is (world -0.562,
+     0.509, 1.60) and climbs to the battery positive at (-0.27, 0.722, 1.23) */
+  hose([[-.562,.509,1.60],[-.575,.60,1.46],[-.50,.69,1.31],[-.29,.730,1.24]],.014,
     M(0x8e1f26,{roughness:.85,metalness:.06}));
   /* the small trigger wire to the solenoid, which is what the key switches */
-  hose([[-.33,.520,1.60],[-.30,.60,1.52],[-.28,.70,1.42]],.006,
+  hose([[-.535,.500,1.60],[-.52,.58,1.48],[-.48,.69,1.39]],.006,
     M(0x2a2f36,{roughness:.85,metalness:.05}));
-  for (const z of [-.05,.05])   /* the two flange bolts */
+  /* the two flange bolts, through the ears, fore and aft of the shaft */
+  for (const z of [-.104,.104])
     add(M(0x8d949d,{metalness:.85,roughness:.4}),
-      new THREE.CylinderGeometry(.013,.013,.020,6),-.42,.445,1.60+z)
+      new THREE.CylinderGeometry(.013,.013,.020,6),-.365,.445,1.60+z)
       .rotation.z=Math.PI/2;
 
   /* DETAIL PASS: the small hardware that makes a bay read as assembled
@@ -1884,9 +1950,14 @@ buildAlternator();     /* after its own declarations — see the note above */
    one worth gating: it is SRS work, and the order is a safety procedure
    rather than a convenience.
    ═══════════════════════════════════════════════════════════════════ */
+/* Both bolts go through the mounting ears at the DRIVE end, fore and aft of
+   the shaft (world x -0.365). They previously sat against the magnet can
+   two-thirds of the way down the body — nowhere a starter is ever bolted —
+   and every later position that put them up-and-down was measurably hidden
+   behind the can or the solenoid. */
 const SFIX = {
-  bolt_u:{label:'Flange bolt — upper', p:[-.42,.445,1.55]},
-  bolt_l:{label:'Flange bolt — lower', p:[-.42,.445,1.65]}};
+  bolt_u:{label:'Flange bolt — front', p:[-.365,.445,1.704]},
+  bolt_l:{label:'Flange bolt — rear',  p:[-.365,.445,1.496]}};
 const ST2 = {looked:false, isolated:false, supported:false, bplus:false,
              trigger:false, out:{}, off:false, stops:0, log:[]};
 const IN = {looked:false, isolated:false, waited:false, centred:false,
@@ -1905,15 +1976,18 @@ function buildStarterJobRig(){
   }
   sRig2.stud=new THREE.Mesh(new THREE.SphereGeometry(.020,12,10),
     new THREE.MeshStandardMaterial({color:0xb87333,metalness:.9,roughness:.3}));
-  sRig2.stud.position.set(-.36,.543,1.622); sRig2.stud.userData={sj:'bplus'};
+  /* ON the stud, not near it: the clickable target used to float 40mm off
+     the solenoid, so the thing you clicked and the thing you were told you
+     had undone were in different places */
+  sRig2.stud.position.set(-.562,.509,1.600); sRig2.stud.userData={sj:'bplus'};
   stRig.add(sRig2.stud);
   sRig2.trig=new THREE.Mesh(new THREE.BoxGeometry(.018,.022,.014),
     new THREE.MeshStandardMaterial({color:0x2b3a52,metalness:.2,roughness:.7}));
-  sRig2.trig.position.set(-.330,.520,1.600); sRig2.trig.userData={sj:'trigger'};
+  sRig2.trig.position.set(-.535,.500,1.600); sRig2.trig.userData={sj:'trigger'};
   stRig.add(sRig2.trig);
   sRig2.jack=new THREE.Mesh(new THREE.BoxGeometry(.13,.035,.13),
     new THREE.MeshStandardMaterial({color:0xF59E0B,metalness:.35,roughness:.5}));
-  sRig2.jack.position.set(-.34,.360,1.60); sRig2.jack.visible=false; stRig.add(sRig2.jack);
+  sRig2.jack.position.set(-.50,.355,1.60); sRig2.jack.visible=false; stRig.add(sRig2.jack);
   stRig.traverse(o=>{ if(o.isMesh){o.castShadow=true;o.receiveShadow=true;} });
   stRig.visible=false; carRoot.add(stRig);
 }
@@ -1945,23 +2019,23 @@ function starterJobAct(act){
   if (act==='bplus'){ ST2.bplus=true; sRig2.stud.material.color.setHex(0x34D399);
     ST2.log.unshift({t:'B+ nut off and the cable pulled clear of the block and insulated.'}); }
   if (act==='trigger'){ ST2.trigger=true; tweenV(sRig2.trig.position,
-      new THREE.Vector3(-.30,.560,1.56),380);
+      new THREE.Vector3(-.60,.560,1.53),380);
     ST2.log.unshift({t:'Solenoid trigger wire off.'}); }
   if (act && act.startsWith('bolt')){ ST2.out[act]=true;
     const b=sRig2.bolts[act]; b.b.material=b.done;
     tweenV(b.g.position,new THREE.Vector3(SFIX[act].p[0]-.10,SFIX[act].p[1],SFIX[act].p[2]),420);
     ST2.log.unshift({t:`${SFIX[act].label} out.`}); }
   if (act==='lift'){ ST2.off=true;
-    if (bP.starter) tweenV(bP.starter.position,new THREE.Vector3(-.62,.330,1.60),800);
+    if (bP.starter) tweenV(bP.starter.position,new THREE.Vector3(-.80,.345,1.60),800);
     ST2.log.unshift({t:'Starter off. On refit: bolts to torque, B+ nut tight and its boot back over the stud, trigger wire on, battery LAST.'}); }
   if (act==='reset'){
     Object.assign(ST2,{looked:false,isolated:false,supported:false,bplus:false,
       trigger:false,out:{},off:false,stops:0,log:[]});
     sRig2.jack.visible=false; sRig2.stud.material.color.setHex(0xb87333);
-    sRig2.trig.position.set(-.330,.520,1.600);
+    sRig2.trig.position.set(-.535,.500,1.600);
     for (const k in sRig2.bolts){ const b=sRig2.bolts[k];
       b.b.material=b.steel; b.g.position.set(...SFIX[k].p); }
-    if (bP.starter) bP.starter.position.set(-.34,.445,1.60);
+    if (bP.starter) bP.starter.position.set(-.50,.445,1.60);
   }
   drawHud(); drawPanel();
 }
@@ -2668,12 +2742,22 @@ function setMode(m){
   stRig.visible=(m==='starterOff');
   if (m==='starterOff'){ bayAsm.visible=true; BAY.cover=false;
     if (bP.cover) bP.cover.visible=false; }
+  bayLamp.intensity = (m==='starterOff') ? 1.5 : 0;
+  /* the near-side inner wing comes OUT in the starter bay. Ghosting it was
+     not enough — measured, the upper flange bolt was still 0.35 m behind a
+     translucent wing and unreadable — and since this bay hides the whole
+     body shell anyway, leaving one red pressing floating in front of the
+     engine was the odd thing. Restored in every other bay. */
+  if (bP.wingR) bP.wingR.visible = (m!=='starterOff');
   plinth.visible=(m==='door'||m==='starter'||m==='engine'||m==='alt');
   /* CROSS-BAY BLEED. Each job MOVES real geometry, and leaving the bay used
      to leave it moved: open the bonnet in Bay 3, tap Door off, and the door
      job renders with the bonnet still standing up. The panel a bay owns is
      restored by every OTHER bay on entry. */
   if (carReady) restoreJobPanels(m);
+  /* a wheel taken off for access is a moved panel too — the brake bay owns
+     the front left, and every other bay puts it back */
+  if (carReady && m!=='brakes' && S.wheelOff.wheel_fl) setWheelOff('wheel_fl',false);
   if (m==='strip'&&carReady){iso(null);setPadWear(12);
     flyTo(new THREE.Vector3(0,.72,0),new THREE.Vector3(5.2,2.3,6.4))}
   if (m==='brakes'&&carReady){setXray(false);setExplode(0);BJ.i=0;JOB[0].a?.()}
@@ -2722,14 +2806,34 @@ function setMode(m){
     const mir=DP.job==='mirror';
     flyTo(mir ? new THREE.Vector3(.84,1.00,.50) : new THREE.Vector3(.74,.72,-.26),
           mir ? new THREE.Vector3(2.60,1.62,1.95) : new THREE.Vector3(2.45,1.38,-1.55)); }
-  if (m==='starterOff'&&carReady){ setXray(false); setExplode(0); iso(null);
+  if (m==='starterOff'&&carReady){ setExplode(0);
+    /* THE BODYWORK COMES OFF THE PICTURE ENTIRELY. Ghosting it was tried
+       three ways — whole car, front end only, plus the near wheel and the
+       near inner wing — and every one of them put four translucent layers
+       between the eye and a dark grey motor, so the starter was dead centre
+       of frame and still unreadable. The bay is the engine and gearbox with
+       the starter bolted to them; the fact that it is buried in a car is
+       something the panel says in words, not something worth rendering as
+       mud. */
+    iso([]);
     ['door_fl','door_fr','door_rl','door_rr'].forEach(id=>setDoor(id,false));
     const pb=parts.panel_bonnet;
     if (pb){ pb.group.position.copy(pb.home); pb.group.rotation.x=-BONNET_OPEN; }
-    /* low and from the gearbox side: a starter is not something you see
-       standing over the car, and pretending otherwise teaches the wrong
-       idea of how awkward the job is */
-    flyTo(new THREE.Vector3(-.34,.47,1.60),new THREE.Vector3(-1.35,.92,2.65)); }
+    /* THE STARTER CANNOT BE SEEN FROM OUTSIDE A BUILT-UP CAR, and the first
+       version of this camera proved it: it was aimed at the starter and the
+       starter projected 4,326 px across a 652 px frame, six frames off the
+       right-hand edge, with a headlight lens in the way. Measured, not
+       eyeballed — window.__project reports where a world point lands and
+       what is in front of it.
+       Taking the near wheel physically OFF was tried too and is worse: the
+       removal tween slides it OUTBOARD, straight between the camera and the
+       car, so the frame filled with tyre. */
+    setXray(false);
+    /* chosen by measurement, not by eye: of the seventeen camera positions
+       tried, this is one where the starter, the B+ stud, the trigger
+       terminal and both flange bolts all project inside the frame with
+       nothing in front of them */
+    flyTo(new THREE.Vector3(-.47,.48,1.60),new THREE.Vector3(-1.10,1.05,2.15)); }
   if (m==='interior'&&carReady){ setXray(false); setExplode(0);
     iso(['body','cabin','seats','steering','airbags','glazing','door_fl','door_fr']);
     setDoor('door_fl',true);
@@ -3871,6 +3975,59 @@ window.__groups = () => Object.fromEntries(Object.entries(parts).map(([k,v])=>
       groupChildren:v.group.children.length}]));
 window.__meshNames = () => { const o=[]; carRoot.traverse(m=>{ if(m.isMesh && o.length<8)
     o.push({name:m.name, cls:m.userData.partId}); }); return o; };
+/* camera probe — a bay camera is only "correct" if the thing it is meant to
+   show is actually in the frame, and the only way to know that is to put the
+   camera somewhere and LOOK. Snaps instantly so a sweep needs no waiting. */
+window.__fly = (t,p) => { controls.target.set(...t); camera.position.set(...p);
+  controls.update(); };
+/* where does a world point actually LAND in the frame, and is anything in
+   front of it? Projecting through the camera's own matrix is the only
+   honest answer — reading a screenshot by eye is how a bay camera pointed
+   at the bumper got signed off as pointing at the starter. */
+window.__project = w => {
+  camera.updateMatrixWorld(true); camera.updateProjectionMatrix();
+  const v=new THREE.Vector3(...w).project(camera);
+  const r=renderer.domElement.getBoundingClientRect();
+  const hit=(()=>{ const dir=new THREE.Vector3(...w).sub(camera.position);
+    const d=dir.length(); ray.set(camera.position, dir.normalize());
+    /* a GHOSTED surface is not an obstruction — the whole point of x-ray is
+       that you see through it, so anything under ~35% opaque does not count */
+    /* visibility must be tested up the whole chain — iso() hides a part by
+       hiding its GROUP, and the raycaster in this build still reports the
+       meshes underneath, which made an isolated bay look obstructed by
+       bodywork that is not being drawn */
+    const shown=o=>{ for(let n=o;n;n=n.parent) if(n.visible===false) return false;
+      return true; };
+    const hs=ray.intersectObjects([carRoot],true)
+      .filter(h=>shown(h.object) && h.distance<d-0.02 && h.object.type!=='GridHelper'
+        && !(h.object.material && h.object.material.transparent
+             && h.object.material.opacity<.35));
+    return hs.length?{n:hs.length,first:(hs[0].object.name||hs[0].object.userData.partId||'?'),
+                      at:+hs[0].distance.toFixed(3),want:+d.toFixed(3),
+                      pt:hs[0].point.toArray().map(v=>+v.toFixed(3)),
+                      par:(hs[0].object.parent&&hs[0].object.parent.name)||''}:null; })();
+  return {x:+((v.x*.5+.5)*r.width).toFixed(0), y:+((-v.y*.5+.5)*r.height).toFixed(0),
+          w:+r.width.toFixed(0), h:+r.height.toFixed(0), infront:v.z<1,
+          cam:camera.position.toArray().map(n=>+n.toFixed(2)),
+          tgt:controls.target.toArray().map(n=>+n.toFixed(2)), blocked:hit};
+};
+window.__setXray = on => { setXray(on); drawHud(); };
+window.__lamp = v => { bayLamp.intensity=v; return bayLamp.intensity; };
+/* the starter bay hides the body, pulls an inner wing out and lights a lamp
+   — three things that have to be PUT BACK by every other bay */
+window.__bayState = () => ({mode:MODE, lamp:bayLamp.intensity,
+  bodyVisible: parts.body ? parts.body.group.visible : null,
+  wingR: bP.wingR ? bP.wingR.visible : null, xray:S.xray});
+window.__geom = () => { const B=new THREE.Box3(), o={};
+  const box=g=>{ B.makeEmpty(); B.expandByObject(g);
+    return {min:B.min.toArray().map(v=>+v.toFixed(3)),
+            max:B.max.toArray().map(v=>+v.toFixed(3))}; };
+  for (const id of ['body','panel_bonnet','door_fl','glazing','wheel_fl','wheel_rl',
+                    'steering','seats'])
+    if (parts[id]) o[id]=box(parts[id].group);
+  o.bay = box(bayAsm);
+  o.starter = bP.starter ? bP.starter.position.toArray().map(v=>+v.toFixed(3)) : null;
+  return o; };
 window.__dbg = () => ({
   doors:{...S.doors}, wheels:{...S.wheelOff}, xray:S.xray, explode:S.explode, mode:MODE,
   rotFL: parts.door_fl ? +parts.door_fl.group.rotation.y.toFixed(4) : null,
