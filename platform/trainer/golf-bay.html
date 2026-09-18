@@ -1339,7 +1339,7 @@ function setMode(m){
     const pb=parts.panel_bonnet;
     if (pb && !BO.off){ pb.group.position.copy(pb.home);
       tween(pb.group.rotation,'x',-BONNET_OPEN,700); }
-    flyTo(new THREE.Vector3(0,1.00,1.25),new THREE.Vector3(1.45,1.72,2.95)); }
+    flyTo(new THREE.Vector3(0,.92,1.00),new THREE.Vector3(2.35,2.05,4.15)); }
   if (m==='door') flyTo(new THREE.Vector3(0,.68,0),new THREE.Vector3(.75,1.05,2.45));
   if (m==='starter') flyTo(new THREE.Vector3(.20,.31,0),new THREE.Vector3(.72,.72,1.15));
   if (m==='engine') flyTo(new THREE.Vector3(0,.80,0),new THREE.Vector3(1.75,1.35,2.35));
