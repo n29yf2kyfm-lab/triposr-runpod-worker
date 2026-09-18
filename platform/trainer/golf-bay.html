@@ -3489,6 +3489,10 @@ window.__bay = () => ({visible:bayAsm.visible, on:BAY.engine,
   meshes:bayAsm.children.length,
   altInBay:!!bP.alt, bonnetRotX:parts.panel_bonnet
     ?+parts.panel_bonnet.group.rotation.x.toFixed(3):null});
+window.__groups = () => Object.fromEntries(Object.entries(parts).map(([k,v])=>
+  [k,{meshes:v.meshes.length, tris:v.tris,
+      names:v.meshes.slice(0,2).map(m=>(m.name||'').slice(0,34)),
+      groupChildren:v.group.children.length}]));
 window.__meshNames = () => { const o=[]; carRoot.traverse(m=>{ if(m.isMesh && o.length<8)
     o.push({name:m.name, cls:m.userData.partId}); }); return o; };
 window.__dbg = () => ({
