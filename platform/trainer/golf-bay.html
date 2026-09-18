@@ -566,6 +566,7 @@ function buildCar(root){
   if (!parts.panel_bonnet) console.error('Strip Bay: panel_bonnet not found — '+
     'the cut panel did not classify. Bonnet off bay will have nothing to act on.');
   buildBonnetRig(); buildBayEngine(); buildDiagRig(); buildDoorPartsRig();
+  buildStarterJobRig();
   carReady = true; window.__carReady = true;   /* a harness can wait on the truth */
   buildPads(); setMode(MODE);
 }
@@ -688,14 +689,26 @@ canvas.addEventListener('pointermove', e => {
     canvas.style.cursor = fx ? 'pointer' : 'grab';
     return;
   }
-  if (MODE!=='strip' || !carReady) return;
+  if ((MODE!=='strip'&&MODE!=='interior') || !carReady) return;
   const r=canvas.getBoundingClientRect();
   ptr.set((e.clientX-r.left)/r.width*2-1, -((e.clientY-r.top)/r.height*2-1));
   ray.setFromCamera(ptr,camera);
   const h=ray.intersectObjects(carRoot.children,true).find(x=>x.object.isMesh&&x.object.visible);
   hl(h?h.object.userData.partId:null); canvas.style.cursor=h?'pointer':'grab';
 });
-canvas.addEventListener('click', ()=>{ if(MODE==='strip'&&hi){ selected=hi; drawPanel(); } });
+canvas.addEventListener('click', ()=>{ if((MODE==='strip'||MODE==='interior')&&hi){
+  selected=hi; drawPanel(); } });
+canvas.addEventListener('pointerdown', e => {
+  if (MODE!=='starterOff' || !carReady) return;
+  const r=canvas.getBoundingClientRect();
+  ptr.set((e.clientX-r.left)/r.width*2-1, -((e.clientY-r.top)/r.height*2-1));
+  ray.setFromCamera(ptr,camera);
+  const h=ray.intersectObjects([stRig],true).find(x=>x.object.visible);
+  if (!h) return;
+  let o=h.object, sj=null;
+  while(o && !sj){ sj=o.userData?.sj; o=o.parent; }
+  if (sj) starterJobAct(sj);
+});
 /* the fasteners are clickable objects in the scene — that is the difference
    between "press a button and the door opens" and doing the job */
 canvas.addEventListener('pointerdown', e => {
@@ -1527,6 +1540,69 @@ function buildBayEngine(){
   add(M(0x3d6cc0,{roughness:.5,metalness:.15}),
     new THREE.CylinderGeometry(.034,.034,.022,16),.56,.760,1.72);
 
+  /* THE STARTER MOTOR, ON THE ENGINE WHERE IT LIVES — bolted to the
+     bellhousing flange, low down on the gearbox side, with its B+ cable
+     running back to the battery. The constructed cutaway on the plinth
+     shows how one WORKS; this is the one you actually have to get off a
+     car, and the two are different skills. */
+  bP.starter=new THREE.Group(); bP.starter.position.set(-.34,.445,1.60);
+  bayAsm.add(bP.starter);
+  const sBody=new THREE.Mesh(new THREE.CylinderGeometry(.056,.056,.185,20),
+    M(0x5a6068,{roughness:.6,metalness:.55}));
+  sBody.rotation.z=Math.PI/2; bP.starter.add(sBody);
+  const sSol=new THREE.Mesh(new THREE.CylinderGeometry(.032,.032,.105,16),
+    M(0x4e545c,{roughness:.62,metalness:.5}));
+  sSol.rotation.z=Math.PI/2; sSol.position.set(.01,.062,0); bP.starter.add(sSol);
+  const sNose=new THREE.Mesh(new THREE.CylinderGeometry(.040,.046,.055,16),alu);
+  sNose.rotation.z=Math.PI/2; sNose.position.x=.115; bP.starter.add(sNose);
+  /* the B+ stud and its heavy cable — LIVE AT ALL TIMES, straight off the
+     battery with no fuse in it, which is the whole point of the job */
+  bP.starterStud=new THREE.Mesh(new THREE.CylinderGeometry(.011,.011,.024,10),cu);
+  bP.starterStud.rotation.z=Math.PI/2; bP.starterStud.position.set(-.02,.098,.022);
+  bP.starter.add(bP.starterStud);
+  hose([[-.36,.545,1.62],[-.42,.60,1.48],[-.40,.66,1.32],[-.31,.72,1.25]],.014,
+    M(0x8e1f26,{roughness:.85,metalness:.06}));
+  /* the small trigger wire to the solenoid, which is what the key switches */
+  hose([[-.33,.520,1.60],[-.30,.60,1.52],[-.28,.70,1.42]],.006,
+    M(0x2a2f36,{roughness:.85,metalness:.05}));
+  for (const z of [-.05,.05])   /* the two flange bolts */
+    add(M(0x8d949d,{metalness:.85,roughness:.4}),
+      new THREE.CylinderGeometry(.013,.013,.020,6),-.42,.445,1.60+z)
+      .rotation.z=Math.PI/2;
+
+  /* DETAIL PASS: the small hardware that makes a bay read as assembled
+     rather than modelled — hose clamps at every joint, bolt heads on the
+     castings, a ribbed heat shield over the turbo, an oil filter housing
+     and connector blocks on the loom. Individually trivial, collectively
+     most of the difference. */
+  const clampM=M(0x9aa2ab,{metalness:.8,roughness:.38});
+  const clamp=(x,y,z,r,rx=0,ry=0)=>{
+    const o=add(clampM,new THREE.TorusGeometry(r,.0055,6,14),x,y,z);
+    o.rotation.x=rx; o.rotation.y=ry; return o;
+  };
+  clamp(.245,.600,1.45,.030,Math.PI/2);    /* top coolant hose, engine end */
+  clamp(.415,.560,1.86,.030,Math.PI/2);    /* top hose, rad end */
+  clamp(-.245,.500,1.49,.028,Math.PI/2);   /* bottom hose */
+  clamp(-.395,.442,1.88,.028,Math.PI/2);
+  clamp(-.205,.775,1.79,.052,0,Math.PI/2); /* intake duct, airbox end */
+  clamp(.015,.775,1.45,.052,0,Math.PI/2);  /* intake duct, throttle end */
+  const boltM=M(0x7c848d,{metalness:.85,roughness:.42});
+  for (const [x,y,z] of [[-.26,.862,1.40],[.26,.862,1.40],[-.26,.862,1.63],
+                         [.26,.862,1.63],[0,.862,1.66],[0,.862,1.38],
+                         [-.28,.60,1.35],[.28,.60,1.35]])
+    add(boltM,new THREE.CylinderGeometry(.009,.009,.012,6),x,y,z);
+  /* heat shield over the turbo: thin, ribbed, and the brightest thing low
+     in the bay, which is exactly how it reads on a real car */
+  const shieldM=M(0xa8b0b8,{metalness:.9,roughness:.3});
+  add(shieldM,roundedBox(.20,.012,.17,.008),-.05,.545,1.66);
+  for (let i=0;i<5;i++)
+    add(shieldM,roundedBox(.015,.010,.155,.004),-.13+i*.04,.556,1.66);
+  bP.oilFilter=add(M(0x2b3a52,{roughness:.55,metalness:.35}),
+    new THREE.CylinderGeometry(.042,.042,.095,16),.22,.455,1.42);
+  /* connector blocks on the loom */
+  for (const [x,y,z] of [[-.16,.893,1.33],[.06,.893,1.33],[.24,.868,1.35]])
+    add(M(0x23282f,{roughness:.8,metalness:.06}),roundedBox(.030,.026,.020,.005),x,y,z);
+
   /* THE MOULDED ENGINE COVER — on a modern GTI this is most of what you
      see with the bonnet up, and without it the bay looked like a stripped
      engine on a stand. It is its own group so it can be REMOVED, which is
@@ -1786,6 +1862,148 @@ function alternatorTick(dt){
   });
 }
 buildAlternator();     /* after its own declarations — see the note above */
+
+/* ═════════════════════════════════════════════════════════════════════
+   STARTER OFF, AND INSIDE THE CAR — two more jobs ON the vehicle
+
+   THE STARTER CUTAWAY ON THE PLINTH SHOWS HOW ONE WORKS. It does not
+   teach you to get one off a car, and those are different skills — the
+   owner's point exactly. So the starter now also exists bolted to the
+   bellhousing in the engine bay, and comes off with its own procedure.
+
+   The job is worth teaching for one reason above all others: THE B+ CABLE
+   AT A STARTER IS LIVE AT ALL TIMES. It runs straight from the battery
+   positive with no fuse anywhere in it, because it has to carry hundreds
+   of amps. Undo that nut with the battery connected, let the spanner
+   touch the block, and you have put a dead short across the battery
+   through the tool in your hand.
+
+   THE INTERIOR IS REAL GEOMETRY and always was — 278,841 triangles, 51.3%
+   of the whole car, the single biggest thing in the model. It had no bay
+   of its own, so none of it was reachable. The steering wheel job is the
+   one worth gating: it is SRS work, and the order is a safety procedure
+   rather than a convenience.
+   ═══════════════════════════════════════════════════════════════════ */
+const SFIX = {
+  bolt_u:{label:'Flange bolt — upper', p:[-.42,.445,1.55]},
+  bolt_l:{label:'Flange bolt — lower', p:[-.42,.445,1.65]}};
+const ST2 = {looked:false, isolated:false, supported:false, bplus:false,
+             trigger:false, out:{}, off:false, stops:0, log:[]};
+const IN = {looked:false, isolated:false, waited:false, centred:false,
+            airbag:false, bolt:false, marked:false, off:false, stops:0, log:[]};
+const stRig = new THREE.Group();
+const sRig2 = {bolts:{}};
+function buildStarterJobRig(){
+  const steel=new THREE.MeshStandardMaterial({color:0x7d858f,metalness:.9,roughness:.32});
+  const done =new THREE.MeshStandardMaterial({color:0x34D399,metalness:.5,roughness:.4});
+  for (const [k,f] of Object.entries(SFIX)){
+    const g=new THREE.Group(); g.position.set(...f.p);
+    const b=new THREE.Mesh(new THREE.CylinderGeometry(.015,.015,.022,6),steel);
+    b.rotation.z=Math.PI/2;
+    g.add(b); g.userData={sj:k}; stRig.add(g);
+    sRig2.bolts[k]={g,b,steel,done};
+  }
+  sRig2.stud=new THREE.Mesh(new THREE.SphereGeometry(.020,12,10),
+    new THREE.MeshStandardMaterial({color:0xb87333,metalness:.9,roughness:.3}));
+  sRig2.stud.position.set(-.36,.543,1.622); sRig2.stud.userData={sj:'bplus'};
+  stRig.add(sRig2.stud);
+  sRig2.trig=new THREE.Mesh(new THREE.BoxGeometry(.018,.022,.014),
+    new THREE.MeshStandardMaterial({color:0x2b3a52,metalness:.2,roughness:.7}));
+  sRig2.trig.position.set(-.330,.520,1.600); sRig2.trig.userData={sj:'trigger'};
+  stRig.add(sRig2.trig);
+  sRig2.jack=new THREE.Mesh(new THREE.BoxGeometry(.13,.035,.13),
+    new THREE.MeshStandardMaterial({color:0xF59E0B,metalness:.35,roughness:.5}));
+  sRig2.jack.position.set(-.34,.360,1.60); sRig2.jack.visible=false; stRig.add(sRig2.jack);
+  stRig.traverse(o=>{ if(o.isMesh){o.castShadow=true;o.receiveShadow=true;} });
+  stRig.visible=false; carRoot.add(stRig);
+}
+function starterJobGate(act){
+  if (act==='bplus'){
+    if (!ST2.looked) return 'Look the procedure up first. You need to know what that heavy cable is before you put a spanner on it.';
+    if (!ST2.isolated) return 'STOP — THE BATTERY IS STILL CONNECTED. The starter B+ cable runs straight from the battery positive with NO FUSE in it, because it has to carry hundreds of amps. Undo that nut now, let the spanner touch the block, and you have put a dead short across the battery through the tool in your hand: the spanner glows, the cable melts, and the battery can vent. This is the step that burns people.';
+  }
+  if (act && act.startsWith('bolt')){
+    if (!ST2.looked) return 'Look the procedure up first.';
+    if (!ST2.isolated) return 'Battery still connected, and the B+ cable is still on. Isolate it.';
+    if (!ST2.bplus) return 'STOP — the B+ cable is still attached. Take the bolts out now and a few kilos of starter drops and hangs on a live main cable.';
+    if (!ST2.trigger) return 'STOP — the solenoid trigger wire is still connected. It is small and it will simply tear out of its terminal.';
+    if (!ST2.supported) return 'STOP — nothing is supporting it. A starter is heavier than it looks and it is above your face. Support it before the last bolt.';
+  }
+  if (act==='lift'){
+    const left=Object.keys(SFIX).filter(k=>!ST2.out[k]);
+    if (left.length) return `${left.length} flange bolt${left.length>1?'s':''} still in. Levering at it will crack the alloy nose.`;
+  }
+  return null;
+}
+function starterJobAct(act){
+  const stop=starterJobGate(act);
+  if (stop){ ST2.stops++; ST2.log.unshift({bad:true,t:stop}); drawHud(); drawPanel(); return; }
+  if (act==='look'){ ST2.looked=true; ST2.log.unshift({t:'Procedure read. The B+ cable is unfused and live at all times.'}); }
+  if (act==='isolate'){ ST2.isolated=true; ST2.log.unshift({t:'Battery disconnected at the negative post first, and the lead secured so it cannot spring back.'}); }
+  if (act==='support'){ ST2.supported=true; sRig2.jack.visible=true;
+    ST2.log.unshift({t:'Starter supported. It is around 3–5 kg and it comes out above you.'}); }
+  if (act==='bplus'){ ST2.bplus=true; sRig2.stud.material.color.setHex(0x34D399);
+    ST2.log.unshift({t:'B+ nut off and the cable pulled clear of the block and insulated.'}); }
+  if (act==='trigger'){ ST2.trigger=true; tweenV(sRig2.trig.position,
+      new THREE.Vector3(-.30,.560,1.56),380);
+    ST2.log.unshift({t:'Solenoid trigger wire off.'}); }
+  if (act && act.startsWith('bolt')){ ST2.out[act]=true;
+    const b=sRig2.bolts[act]; b.b.material=b.done;
+    tweenV(b.g.position,new THREE.Vector3(SFIX[act].p[0]-.10,SFIX[act].p[1],SFIX[act].p[2]),420);
+    ST2.log.unshift({t:`${SFIX[act].label} out.`}); }
+  if (act==='lift'){ ST2.off=true;
+    if (bP.starter) tweenV(bP.starter.position,new THREE.Vector3(-.62,.330,1.60),800);
+    ST2.log.unshift({t:'Starter off. On refit: bolts to torque, B+ nut tight and its boot back over the stud, trigger wire on, battery LAST.'}); }
+  if (act==='reset'){
+    Object.assign(ST2,{looked:false,isolated:false,supported:false,bplus:false,
+      trigger:false,out:{},off:false,stops:0,log:[]});
+    sRig2.jack.visible=false; sRig2.stud.material.color.setHex(0xb87333);
+    sRig2.trig.position.set(-.330,.520,1.600);
+    for (const k in sRig2.bolts){ const b=sRig2.bolts[k];
+      b.b.material=b.steel; b.g.position.set(...SFIX[k].p); }
+    if (bP.starter) bP.starter.position.set(-.34,.445,1.60);
+  }
+  drawHud(); drawPanel();
+}
+function interiorGate(act){
+  if (act==='airbag'){
+    if (!IN.looked) return 'Look the procedure up first. This is SRS work — the order is a safety procedure, not a convenience.';
+    if (!IN.isolated) return 'STOP — the battery is still connected. You are about to handle a pyrotechnic device wired to a live system. Disconnect it and wait.';
+    if (!IN.waited) return 'STOP — you have not waited. The SRS module holds a reserve charge so the airbag still works briefly after the battery is disconnected. Observe the manufacturer’s stated wait before touching anything yellow-plugged.';
+  }
+  if (act==='bolt'){
+    if (!IN.airbag) return 'The wheel bolt is behind the airbag module.';
+  }
+  if (act==='lift'){
+    if (!IN.bolt) return 'The centre bolt is still in.';
+    if (!IN.centred) return 'STOP — the steering is not centred and locked. Pull the wheel off with the clock spring free to rotate and it can wind past its travel: the ribbon inside tears, and you lose the horn, the wheel controls and the driver airbag circuit. Centre it, lock it, and keep it locked.';
+  }
+  if (act==='probe') return 'STOP — never put an ordinary meter across an airbag igniter circuit. The meter’s own test current can be enough to fire it. Igniter circuits are tested with the manufacturer’s equipment, or not at all.';
+  return null;
+}
+function interiorAct(act){
+  const stop=interiorGate(act);
+  if (stop){ IN.stops++; IN.log.unshift({bad:true,t:stop}); drawHud(); drawPanel(); return; }
+  if (act==='look'){ IN.looked=true; IN.log.unshift({t:'Procedure read. SRS disarming sequence and wait time noted.'}); }
+  if (act==='isolate'){ IN.isolated=true; IN.log.unshift({t:'Battery disconnected, negative first.'}); }
+  if (act==='wait'){ IN.waited=true; IN.log.unshift({t:'Stated wait observed before touching the SRS circuit.'}); }
+  if (act==='centre'){ IN.centred=true; IN.log.unshift({t:'Wheels straight, steering centred and the column locked so the clock spring cannot rotate.'}); }
+  if (act==='airbag'){ IN.airbag=true; IN.log.unshift({t:'Driver airbag module released and lifted away — carried face UP and away from the body, and set down face up, never face down.'}); }
+  if (act==='bolt'){ IN.bolt=true; IN.log.unshift({t:'Centre bolt out. Many are single-use — check whether this one is replaced.'}); }
+  if (act==='mark'){ IN.marked=true; IN.log.unshift({t:'Wheel and column marked against each other.'}); }
+  if (act==='lift'){ IN.off=true;
+    const p=parts.steering;
+    if (p) tweenV(p.group.position,p.home.clone().add(new THREE.Vector3(0,.04,.40)),800);
+    IN.log.unshift({t:IN.marked
+      ? 'Wheel off, and it is marked — it will go back straight.'
+      : 'Wheel off. You did NOT mark it, so it can go back a spline out and the car will drive with the wheel crooked.'}); }
+  if (act==='reset'){
+    Object.assign(IN,{looked:false,isolated:false,waited:false,centred:false,
+      airbag:false,bolt:false,marked:false,off:false,stops:0,log:[]});
+    const p=parts.steering; if(p) p.group.position.copy(p.home);
+  }
+  drawHud(); drawPanel();
+}
 
 /* ═════════════════════════════════════════════════════════════════════
    DIAGNOSE — test real points on the car and find the fault yourself
@@ -2366,7 +2584,8 @@ const BJ={i:0,ans:{},score:0,asked:0};
    ═══════════════════════════════════════════════════════════════════ */
 const MODES=[['strip','Strip'],['doorOff','Door off'],['bonnetOff','Bonnet off'],
              ['door','Inside a door'],['starter','Starter'],['alt','Alternator'],
-             ['dparts','Mirror & lock'],['engine','Engine'],['brakes','Brake job'],
+             ['dparts','Mirror & lock'],['starterOff','Starter off'],
+             ['interior','Interior'],['engine','Engine'],['brakes','Brake job'],
              ['diag','Diagnose'],['bench','Bench']];
 let MODE='strip';
 const tabsEl=document.getElementById('tabs');
@@ -2380,6 +2599,8 @@ const CAP={
   bonnetOff:'Real bonnet, cut from the body shell · hinge bolts, gas struts, prop AND the whole engine bay are constructed — the car file contains no engine at all',
   alt:'Constructed alternator cutaway · claw-pole machine, motion slowed · arithmetic is a simplified model',
   dparts:'Mirror is REAL geometry cut from the door \u00b7 nuts, connector, trim, latch, cables and card are constructed \u00b7 procedures typical of class, not verified for this car',
+  starterOff:'Starter, cables and bolts constructed on the constructed engine \u00b7 access and fastener count typical of class, not verified for this car',
+  interior:'Cabin, seats, dash and steering wheel are REAL geometry from the car file \u00b7 the SRS procedure is typical of class, not verified for this car',
   diag:'Probe points on the constructed engine bay · the physical model is simplified and typical, not this car\u2019s data',
   starter:'Constructed starter motor · motion slowed for clarity',
   engine:'Constructed four-stroke cutaway · not the Golf’s own engine',
@@ -2426,7 +2647,7 @@ function restoreJobPanels(keep){
 function setMode(m){
   MODE=m;
   tabsEl.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.m===m));
-  const bench=m==='bench', needCar=(m==='strip'||m==='brakes'||m==='doorOff'||m==='bonnetOff'||m==='diag'||m==='dparts');
+  const bench=m==='bench', needCar=(m==='strip'||m==='brakes'||m==='doorOff'||m==='bonnetOff'||m==='diag'||m==='dparts'||m==='starterOff'||m==='interior');
   document.getElementById('bench-stage').hidden=!bench;
   canvas.style.visibility=bench?'hidden':'visible';
   document.getElementById('loading').hidden=!(needCar && !carReady);
@@ -2444,6 +2665,9 @@ function setMode(m){
   if (bP.cover) bP.cover.visible=BAY.cover;
   diagRig.visible=(m==='diag');
   dpRig.visible=(m==='dparts');
+  stRig.visible=(m==='starterOff');
+  if (m==='starterOff'){ bayAsm.visible=true; BAY.cover=false;
+    if (bP.cover) bP.cover.visible=false; }
   plinth.visible=(m==='door'||m==='starter'||m==='engine'||m==='alt');
   /* CROSS-BAY BLEED. Each job MOVES real geometry, and leaving the bay used
      to leave it moved: open the bonnet in Bay 3, tap Door off, and the door
@@ -2498,6 +2722,18 @@ function setMode(m){
     const mir=DP.job==='mirror';
     flyTo(mir ? new THREE.Vector3(.84,1.00,.50) : new THREE.Vector3(.74,.72,-.26),
           mir ? new THREE.Vector3(2.60,1.62,1.95) : new THREE.Vector3(2.45,1.38,-1.55)); }
+  if (m==='starterOff'&&carReady){ setXray(false); setExplode(0); iso(null);
+    ['door_fl','door_fr','door_rl','door_rr'].forEach(id=>setDoor(id,false));
+    const pb=parts.panel_bonnet;
+    if (pb){ pb.group.position.copy(pb.home); pb.group.rotation.x=-BONNET_OPEN; }
+    /* low and from the gearbox side: a starter is not something you see
+       standing over the car, and pretending otherwise teaches the wrong
+       idea of how awkward the job is */
+    flyTo(new THREE.Vector3(-.34,.47,1.60),new THREE.Vector3(-1.35,.92,2.65)); }
+  if (m==='interior'&&carReady){ setXray(false); setExplode(0);
+    iso(['body','cabin','seats','steering','airbags','glazing','door_fl','door_fr']);
+    setDoor('door_fl',true);
+    flyTo(new THREE.Vector3(.36,.92,.30),new THREE.Vector3(1.55,1.30,-1.15)); }
   if (m==='door') flyTo(new THREE.Vector3(0,.68,0),new THREE.Vector3(.75,1.05,2.45));
   if (m==='starter') flyTo(new THREE.Vector3(.20,.31,0),new THREE.Vector3(.72,.72,1.15));
   if (m==='alt') flyTo(new THREE.Vector3(0,.30,0),new THREE.Vector3(.52,.60,.78));
@@ -2521,6 +2757,14 @@ function drawHud(){
     : MODE==='alt'
     ? b('afield',ALT.field?'Field ON':'Field OFF',ALT.field)
       +b('adiode',ALT.diode?'Diodes OK':'Diode FAILED',!ALT.diode)
+    : MODE==='starterOff'
+    ? b('sjReset','Start again')
+      +`<span class="chip">${Object.keys(ST2.out).length}/2 bolts out${
+        ST2.stops?` \u00b7 ${ST2.stops} stop${ST2.stops>1?'s':''}`:''}</span>`
+    : MODE==='interior'
+    ? b('inReset','Start again')+b('xray','X-ray body',S.xray)
+      +`<span class="chip">${IN.off?'wheel off':'wheel on'}${
+        IN.stops?` \u00b7 ${IN.stops} stop${IN.stops>1?'s':''}`:''}</span>`
     : MODE==='dparts'
     ? b('dpReset','Start again')
       +`<span class="chip">${DP.job==='mirror'?'Mirror':'Door lock'} \u00b7 ${
@@ -2562,13 +2806,15 @@ function act(a){
   if(a==='adiode') ALT.diode=!ALT.diode;
   if(a==='dgnew'){ diagNew(); paintDiagRig(); }
   if(a==='dpReset') dpAct('reset');
+  if(a==='sjReset') starterJobAct('reset');
+  if(a==='inReset') interiorAct('reset');
   drawHud(); drawPanel();
 }
 const panel=document.getElementById('panel');
 function drawPanel(){
   panel.innerHTML=({strip:pStrip,doorOff:pDoorOff,bonnetOff:pBonnetOff,door:pDoor,starter:pStarter,
                     alt:pAlt,engine:pEngine,brakes:pBrakes,diag:pDiag,dparts:pDparts,
-                    bench:pBench}[MODE])();
+                    starterOff:pStarterOff,interior:pInterior,bench:pBench}[MODE])();
   panel.querySelectorAll('[data-x]').forEach(el=>
     el.addEventListener(el.tagName==='INPUT'?'input':'click',()=>handle(el.dataset.x,el)));
 }
@@ -2689,6 +2935,123 @@ function pDoorOff(){
     '<b>Why you mark the hinges.</b> Hinge bolts sit in slotted or floating mounts so the door can be aligned. Undo them without a mark and you have thrown away the factory alignment — then you are setting shut lines, gaps and the striker by trial and error with a heavy panel in your hands.',
     '<b>Weight.</b> A front door with glass, motor, card and speaker is around 25–30 kg and all of it hangs off two hinges. It is a two-person lift or a door stand, every time.',
     '<b>On refit.</b> Bolts in finger-tight, door to the marks, check the shut line and the striker engagement before final torque, then reconnect and test the window, lock, mirror and any door lamp before the card goes anywhere near it.'
+  ], true)}`;
+}
+function pStarterOff(){
+  const step=(k,label,ok,act,hint)=>`
+    <button class="choice ${ok?'right':''}" data-x="sj:${act}" ${ok?'disabled':''}>
+      <b>${k}</b> ${label}${ok?' ✓':''}
+      ${hint?`<div class="hint" style="margin-top:3px">${hint}</div>`:''}</button>`;
+  const outN=Object.keys(SFIX).filter(k=>ST2.out[k]).length;
+  return `
+  <div><div class="eyebrow">Bay 9 · Starter off the engine</div>
+    <h2 style="font-size:19px;margin-top:2px">Starter motor</h2>
+    <p style="font-size:13px;color:var(--ink2);margin-top:6px">The <b>Starter</b> bay
+    shows you how one works on a bench. This is the other half: getting one off a car,
+    where the thing that matters is not the mechanism but <b>that cable</b>.</p></div>
+
+  <div class="card">
+    <div class="note bad" style="margin:0">
+      <b>The B+ cable at a starter is live at all times.</b> It comes straight off the
+      battery positive with no fuse anywhere in it, because it has to carry hundreds of
+      amps to crank. There is no ignition switch between it and the battery. Everything
+      in this job follows from that.</div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+      <div class="eyebrow">Provenance</div><span class="prov built">constructed</span></div>
+    <p style="margin-top:7px">The starter, its solenoid, the B+ stud and cable, the
+    trigger wire and the flange bolts are built in code and bolted to the constructed
+    bellhousing. <b>Fastener count and access are typical of the class, not verified
+    against this car's data.</b></p>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Do the job</div>
+    <div style="margin-top:8px">
+    ${step('01','Look up the procedure',ST2.looked,'look','Where it sits, what holds it, and what that heavy cable is.')}
+    ${step('02','Disconnect the battery',ST2.isolated,'isolate','Negative post first, and secure the lead so it cannot spring back onto the terminal.')}
+    ${step('03','Support the starter',ST2.supported,'support','3–5 kg, and it comes out above you.')}
+    ${step('04','B+ cable off the stud',ST2.bplus,'bplus','Click the copper stud on the starter.')}
+    ${step('05','Solenoid trigger wire off',ST2.trigger,'trigger','The small spade terminal — click it on the car.')}
+    </div>
+    <div class="eyebrow" style="margin-top:11px">Flange bolts — ${outN}/2 out</div>
+    <div class="row" style="margin-top:7px">
+      ${Object.keys(SFIX).map(k=>`<button class="btn ${ST2.out[k]?'on':''}" data-x="sj:${k}"
+        ${ST2.out[k]?'disabled':''}>${SFIX[k].label.replace('Flange bolt — ','')}</button>`).join('')}
+    </div>
+    <button class="btn wide primary" data-x="sj:lift" style="margin-top:10px"
+      ${ST2.off?'disabled':''}>${ST2.off?'Starter is off ✓':'Withdraw the starter'}</button>
+  </div>
+
+  ${ST2.log.length?`<div class="card"><div class="eyebrow">What happened</div>
+    <div style="margin-top:8px;display:flex;flex-direction:column;gap:7px">
+      ${ST2.log.slice(0,6).map(l=>`<div class="note ${l.bad?'bad':'good'}" style="margin:0">${l.t}</div>`).join('')}
+    </div></div>`:''}
+
+  ${man('Training manual — starter off',[
+    '<b>Unfused, unswitched, and thick.</b> The B+ cable is sized to pass hundreds of amps, so nothing in the circuit will blow to save you. A spanner bridging that stud to the block is a dead short across the battery through the tool in your hand — it welds itself on, glows, and the battery can vent. Disconnect the battery. Every time, not just when it feels awkward.',
+    '<b>Negative first, and secure the lead.</b> Taking the negative off first means that when your spanner touches bodywork on the positive, nothing happens. A disconnected lead that springs back onto its post while you are working is the same fault with extra steps.',
+    '<b>Cables before bolts, always.</b> Two bolts and a few kilos: take them out with the cables on and the starter swings on a live main cable, which strains the terminal it is bolted to and can chafe the insulation against the block.',
+    '<b>It is heavier than it looks, and it is above you.</b> Support it before the last bolt rather than catching it.',
+    '<b>What actually fails, and how to tell.</b> A click with no crank is usually the solenoid throwing the pinion but the main contacts not passing current — or a volt drop upstream. No click at all is a missing trigger signal, or a dead solenoid, or a bad earth. Measure the volt drop on the feed WHILE cranking before condemning the motor; a starter is an expensive way to fix a corroded earth.',
+    '<b>On refit.</b> Bolts to torque, B+ nut tight with its insulating boot back over the stud, trigger wire on, and the battery connected LAST. Then crank it before anything else goes back.'
+  ], true)}`;
+}
+function pInterior(){
+  const step=(k,label,ok,act,hint)=>`
+    <button class="choice ${ok?'right':''}" data-x="in:${act}" ${ok?'disabled':''}>
+      <b>${k}</b> ${label}${ok?' ✓':''}
+      ${hint?`<div class="hint" style="margin-top:3px">${hint}</div>`:''}</button>`;
+  const p=selected&&PART[selected], pt=selected&&parts[selected];
+  return `
+  <div><div class="eyebrow">Bay 10 · Inside the car</div>
+    <h2 style="font-size:19px;margin-top:2px">Interior</h2>
+    <p style="font-size:13px;color:var(--ink2);margin-top:6px">The cabin is
+    <b>278,841 triangles — 51.3% of the whole car</b>, the biggest thing in the model.
+    Click anything to identify it. The steering wheel comes off, and that job is SRS
+    work: the order is a safety procedure, not a convenience.</p></div>
+
+  ${p?`<div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+      <div class="eyebrow">${p.g}</div><span class="prov real">real geometry</span></div>
+    <h3 style="margin-top:4px">${p.l}</h3>
+    <p style="margin-top:6px">${p.n}</p>
+    ${pt?`<dl class="spec"><dt>meshes</dt><dd>${pt.meshes.length}</dd>
+      <dt>triangles</dt><dd>${pt.tris.toLocaleString()}</dd></dl>`:''}
+  </div>`:`<div class="card"><p>Nothing selected — click a seat, the dash, a door card or
+    the wheel. Turn on X-ray to see the eight airbags inside the shell.</p></div>`}
+
+  <div class="card">
+    <div class="eyebrow">Take the steering wheel off</div>
+    <div style="margin-top:8px">
+    ${step('01','Look up the procedure',IN.looked,'look','SRS disarming sequence, wait time, and whether the centre bolt is single-use.')}
+    ${step('02','Disconnect the battery',IN.isolated,'isolate','Negative first.')}
+    ${step('03','Wait the stated time',IN.waited,'wait','The SRS module holds a reserve charge. The bag still works for a while after the battery comes off.')}
+    ${step('04','Centre and lock the steering',IN.centred,'centre','Wheels straight. The clock spring must not rotate while the wheel is off.')}
+    ${step('05','Release the airbag module',IN.airbag,'airbag','Carry it face UP, away from your body, and set it down face up.')}
+    ${step('06','Mark the wheel to the column',IN.marked,'mark','A spline out is a crooked wheel on a straight road.')}
+    ${step('07','Centre bolt out',IN.bolt,'bolt','')}
+    </div>
+    <button class="btn wide primary" data-x="in:lift" style="margin-top:10px"
+      ${IN.off?'disabled':''}>${IN.off?'Wheel is off ✓':'Pull the wheel off'}</button>
+    <button class="btn wide" data-x="in:probe" style="margin-top:6px">Meter across the airbag connector</button>
+  </div>
+
+  ${IN.log.length?`<div class="card"><div class="eyebrow">What happened</div>
+    <div style="margin-top:8px;display:flex;flex-direction:column;gap:7px">
+      ${IN.log.slice(0,6).map(l=>`<div class="note ${l.bad?'bad':'good'}" style="margin:0">${l.t}</div>`).join('')}
+    </div></div>`:''}
+
+  ${man('Training manual — SRS and the cabin',[
+    '<b>An airbag is a pyrotechnic device, not a trim part.</b> It contains a propellant charge designed to inflate a bag in about 30 milliseconds. Treat every module as live until the system is disarmed and the stated wait has passed.',
+    '<b>The wait is not superstition.</b> The SRS control module holds a reserve capacitor charge precisely so the bag still deploys in a crash that destroys the battery or its cabling. That same reserve is what deploys it into your face on the bench. Disconnect, then wait the time the data states.',
+    '<b>Never put an ordinary meter across an igniter circuit.</b> A multimeter passes its own test current through what it measures, and that can be enough to fire the igniter. Igniter circuits are tested with the manufacturer’s equipment or not at all.',
+    '<b>Carry it face up, set it down face up.</b> If a module does fire, an inflating bag facing the bench launches the module; facing up, it inflates into the air. Never sit one face-down on a seat or the floor.',
+    '<b>Lock the clock spring.</b> It is a coiled ribbon cable that lets the wheel turn while staying connected to the horn, the controls and the driver airbag. With the wheel off it can rotate past its travel and tear — and you lose all of those at once, including an SRS circuit, which is then a fault code and a new part.',
+    '<b>Mark the wheel to the column.</b> Splines let it go back in more than one position. One spline out is a wheel that sits crooked on a straight road, and it is not an alignment fault however long you chase it.',
+    '<b>Eight airbags in this car.</b> Driver, passenger, four seat-side and two full-length curtains — 66,807 triangles of them. Turn on X-ray in the Strip bay and they are visible inside the shell. Yellow connectors are a useful hint for SRS wiring rather than a reliable way to identify every circuit.'
   ], true)}`;
 }
 function pDparts(){
@@ -3323,6 +3686,8 @@ function handle(x,el){
   if(k==='dotool'){ DO.tool=+v; drawPanel(); return; }
   if(k==='bo'){ bonnetAct(v); return; }
   if(k==='dp'){ dpAct(v); return; }
+  if(k==='sj'){ starterJobAct(v); return; }
+  if(k==='in'){ interiorAct(v); return; }
   if(k==='dpjob'){ DP.job=v; setMode('dparts'); return; }
   if(k==='door') setDoor('door_'+v,!S.doors['door_'+v]);
   if(k==='tail') setTailgate(!S.tailgate);
@@ -3465,6 +3830,17 @@ window.__dparts = () => ({job:DP.job,
     +pRig.latch.position.z.toFixed(3)],
   rigVisible:dpRig.visible, anims:anim.length});
 window.__setDpJob = j => { DP.job=j; setMode('dparts'); };
+window.__starterJob = () => ({...ST2, out:Object.keys(ST2.out).length,
+  log:ST2.log.length, last:(ST2.log[0]||{}).t?.slice(0,90),
+  starterPos:bP.starter?[+bP.starter.position.x.toFixed(3),
+    +bP.starter.position.y.toFixed(3),+bP.starter.position.z.toFixed(3)]:null,
+  rigVisible:stRig.visible, anims:anim.length});
+window.__interior = () => ({...IN, log:IN.log.length,
+  last:(IN.log[0]||{}).t?.slice(0,90),
+  wheelPos:parts.steering?[+parts.steering.group.position.x.toFixed(3),
+    +parts.steering.group.position.y.toFixed(3),
+    +parts.steering.group.position.z.toFixed(3)]:null,
+  anims:anim.length});
 window.__diag = () => { const m=diagPhys(), rd=diagRead();
   return {fault:DIAG.fault, state:DIAG.state, mode:DIAG.mode,
     red:DIAG.red, black:DIAG.black, reading:rd.v+' '+rd.u,
