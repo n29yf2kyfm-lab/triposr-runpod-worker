@@ -35,6 +35,16 @@
 }
 
 *{box-sizing:border-box}
+/* GRID/FLEX BLOWOUT GUARD. A grid or flex item defaults to min-width:auto,
+   so any child with a wide min-content contribution makes the track wider
+   than the viewport — the page then lays out wider than the screen and the
+   panel text is CLIPPED at the right edge rather than wrapping. That is
+   what "it don't fit on page" looked like on a 390px phone: the media
+   query had fired and the panel had moved below the stage, and the text
+   was still cut off mid-word. Every container in the chain needs an
+   explicit minimum of zero. Measured with scrollWidth vs innerWidth, not
+   judged by eye. */
+html,body{max-width:100%;overflow-x:hidden}
 /* An explicit `display` on an element BEATS the UA stylesheet's
    [hidden]{display:none}, because #loading{display:grid} is the stronger
    selector. Without this line the loading overlay never disappears and the
@@ -56,10 +66,11 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 /* max-height as well as height: inside an artifact iframe the frame can be
    shorter than the dvh the page computes, and without the cap the grid's
    1fr row overflows and the whole app reads as "does not fit on the page". */
-#shell{display:grid; grid-template-rows:auto 1fr; height:100dvh; max-height:100dvh;
-  min-height:0; overflow:hidden}
+#shell{display:grid; grid-template-rows:auto 1fr; grid-template-columns:minmax(0,1fr);
+  height:100dvh; max-height:100dvh; min-height:0; overflow:hidden}
+#shell > *{min-width:0}
 header{display:flex; align-items:center; gap:13px; padding:10px 16px; flex-wrap:wrap;
-  border-bottom:1px solid var(--line); background:var(--panel)}
+  min-width:0; border-bottom:1px solid var(--line); background:var(--panel)}
 .mark{width:26px;height:26px;border-radius:7px;flex:none;display:grid;place-items:center;
   background:var(--pri);color:#fff;font-weight:800;font-size:13px;letter-spacing:-.04em}
 .brand b{font-size:16.5px;font-weight:800;letter-spacing:-.03em}
@@ -91,23 +102,27 @@ nav#tabs::-webkit-scrollbar{display:none}
   border:1px solid var(--line);color:var(--ink2);font-size:14px}
 .iconbtn:hover{color:var(--ink);border-color:var(--ink3)}
 
-#work{display:grid;grid-template-columns:1fr 348px;min-height:0}
+#work{display:grid;grid-template-columns:minmax(0,1fr) 348px;min-height:0;min-width:0}
+#work > *{min-width:0}
 #stage{position:relative;min-width:0;background:
   radial-gradient(120% 90% at 50% 6%, color-mix(in srgb,var(--panel2) 65%,transparent), transparent 68%), var(--bay)}
 #stage canvas{display:block;width:100%;height:100%}
 #bench-stage{position:absolute;inset:0;overflow:auto;padding:16px}
 aside{border-left:1px solid var(--line);background:var(--panel);overflow-y:auto;
+  overflow-x:hidden;min-width:0;
   overscroll-behavior:contain;padding:16px;display:flex;flex-direction:column;gap:13px}
+aside > *{min-width:0;max-width:100%}
 @media (max-width:900px){
   body{font-size:14px}
-  #work{grid-template-columns:1fr;grid-template-rows:minmax(230px,42dvh) 1fr}
+  #work{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(230px,42dvh) 1fr}
   aside{border-left:0;border-top:1px solid var(--line);padding:14px 16px 34px}
   .brand .sub{display:none}
 }
 
-.card{border:1px solid var(--line);border-radius:var(--r);background:var(--panel2);padding:12px}
+.card{border:1px solid var(--line);border-radius:var(--r);background:var(--panel2);padding:12px;
+  min-width:0;max-width:100%}
 .card h3{font-size:14px;margin-bottom:5px}
-.card p{margin:0;font-size:13px;color:var(--ink2);line-height:1.55}
+.card p{margin:0;font-size:13px;color:var(--ink2);line-height:1.55;overflow-wrap:anywhere}
 .row{display:flex;gap:6px;flex-wrap:wrap}
 .btn{padding:8px 11px;border-radius:8px;border:1px solid var(--line);background:var(--panel2);
   font-size:12.5px;font-weight:600;color:var(--ink)}
@@ -466,7 +481,7 @@ function buildCar(root){
   buildDoorRig();
   if (!parts.panel_bonnet) console.error('Strip Bay: panel_bonnet not found — '+
     'the cut panel did not classify. Bonnet off bay will have nothing to act on.');
-  buildBonnetRig();
+  buildBonnetRig(); buildBayEngine();
   carReady = true; window.__carReady = true;   /* a harness can wait on the truth */
   buildPads(); setMode(MODE);
 }
@@ -583,9 +598,9 @@ canvas.addEventListener('pointermove', e => {
     const r=canvas.getBoundingClientRect();
     ptr.set((e.clientX-r.left)/r.width*2-1, -((e.clientY-r.top)/r.height*2-1));
     ray.setFromCamera(ptr,camera);
-    const h=ray.intersectObjects([bonnetRig],true).find(x=>x.object.visible);
+    const h=ray.intersectObjects([bonnetRig,bayAsm],true).find(x=>x.object.visible);
     let o=h&&h.object, fx=null;
-    while(o&&!fx){ fx=o.userData?.fix; o=o.parent; }
+    while(o&&!fx){ fx=o.userData?.fix||o.userData?.bay; o=o.parent; }
     canvas.style.cursor = fx ? 'pointer' : 'grab';
     return;
   }
@@ -618,11 +633,14 @@ canvas.addEventListener('pointerdown', e => {
   const r=canvas.getBoundingClientRect();
   ptr.set((e.clientX-r.left)/r.width*2-1, -((e.clientY-r.top)/r.height*2-1));
   ray.setFromCamera(ptr,camera);
-  const h=ray.intersectObjects([bonnetRig],true).find(x=>x.object.visible);
+  const h=ray.intersectObjects([bonnetRig,bayAsm],true).find(x=>x.object.visible);
   if (!h) return;
-  let o=h.object, fix=null;
-  while(o && !fix){ fix=o.userData?.fix; o=o.parent; }
+  let o=h.object, fix=null, bay=null;
+  while(o && !fix && !bay){ fix=o.userData?.fix; bay=o.userData?.bay; o=o.parent; }
   if (fix) bonnetAct(fix);
+  /* the alternator in the bay is a way INTO its own bay — a trainee who
+     wants to know what that thing is should be able to ask by tapping it */
+  else if (bay) setMode(bay);
 });
 
 /* ═════════════════════════════════════════════════════════════════════
@@ -851,7 +869,7 @@ function engineTick(dt){
   }
   eP.head.visible=ENG.cutaway;
 }
-buildDoor(); buildStarter(); buildEngine();
+buildDoor(); buildStarter(); buildEngine(); buildAlternator();
 
 /* ═════════════════════════════════════════════════════════════════════
    TAKE THE DOOR OFF — a physical job, not a button
@@ -973,6 +991,209 @@ function doorAct(act){
     const p=parts.door_fl; if(p){ p.group.rotation.y=0; p.group.position.copy(p.home); }
   }
   drawHud(); drawPanel();
+}
+
+/* ═════════════════════════════════════════════════════════════════════
+   CONSTRUCTED: WHAT IS UNDER THE BONNET
+
+   There is NO ENGINE IN THE CAR FILE — no engine, no battery, no airbox,
+   no ancillaries of any kind. Open the real bonnet and you look into a
+   hollow shell, which is exactly what the owner saw and reported as "no
+   engine in car". So the bay is built in code and placed inside the real
+   body, positioned against the measured bonnet cavity (panel_cut reported
+   the bonnet spanning Z 1.017-2.085, Y 0.700-0.982).
+
+   It is CONSTRUCTED, it says so on screen, and it is a transverse
+   four-cylinder layout of the right general shape — NOT a measured model
+   of this car's EA888. Its purpose is to give the belt-driven ancillaries
+   somewhere true to sit: you cannot teach where an alternator lives by
+   pointing into an empty void.
+   ═══════════════════════════════════════════════════════════════════ */
+const bayAsm = new THREE.Group();
+const BAY = {engine:true};
+const bP = {};
+function buildBayEngine(){
+  const M=(c,o={})=>new THREE.MeshStandardMaterial({color:c,roughness:.5,metalness:.55,...o});
+  const cast=M(0x767e88,{roughness:.66,metalness:.45}),
+        plastic=M(0x21262d,{roughness:.82,metalness:.06}),
+        alu=M(0x9aa3af,{metalness:.9,roughness:.3}),
+        cu=M(0xb87333,{metalness:.9,roughness:.32}),
+        rubber=M(0x15181c,{roughness:.95,metalness:.03}),
+        red=M(0xB3202B,{roughness:.5,metalness:.2}),
+        translucent=new THREE.MeshStandardMaterial({color:0xcfd6de,transparent:true,
+          opacity:.42,roughness:.25,metalness:0});
+  const add=(m,g,x,y,z,grp)=>{const o=new THREE.Mesh(g,m);o.position.set(x,y,z);
+    (grp||bayAsm).add(o);return o};
+
+  /* block + sump, transverse: long axis on X, which is the car's width */
+  add(cast,new THREE.BoxGeometry(.62,.28,.34),0,.54,1.52);
+  add(cast,new THREE.BoxGeometry(.50,.14,.28),0,.37,1.52);
+  /* head + cam cover */
+  add(cast,new THREE.BoxGeometry(.60,.10,.30),0,.73,1.52);
+  add(plastic,new THREE.BoxGeometry(.58,.09,.26),0,.82,1.51);
+  /* intake manifold and its runners, on the bulkhead side */
+  add(plastic,new THREE.BoxGeometry(.46,.13,.13),0,.74,1.32);
+  for (let i=0;i<4;i++){
+    const r=add(plastic,new THREE.CylinderGeometry(.031,.031,.17,12),-.21+i*.14,.76,1.41);
+    r.rotation.x=Math.PI/2.3;
+  }
+  /* airbox + intake pipe */
+  add(plastic,new THREE.BoxGeometry(.30,.16,.24),-.36,.72,1.82);
+  const pipe=add(rubber,new THREE.CylinderGeometry(.045,.045,.30,14),-.17,.76,1.74);
+  pipe.rotation.z=Math.PI/2.6; pipe.rotation.y=-.5;
+  /* crank pulley and the belt run — the alternator is DRIVEN from here */
+  bP.crankPulley=add(alu,new THREE.CylinderGeometry(.085,.085,.035,24),.34,.45,1.62);
+  bP.crankPulley.rotation.z=Math.PI/2;
+  /* ALTERNATOR, in its real place: driven off the crank, low on the
+     ancillary side of the block. Clicking it opens the Alternator bay. */
+  bP.alt=new THREE.Group(); bP.alt.position.set(.34,.70,1.72); bayAsm.add(bP.alt);
+  const acase=new THREE.Mesh(new THREE.CylinderGeometry(.072,.072,.135,22),alu);
+  acase.rotation.z=Math.PI/2; bP.alt.add(acase);
+  const afan=new THREE.Mesh(new THREE.CylinderGeometry(.052,.052,.012,18),cu);
+  afan.rotation.z=Math.PI/2; afan.position.x=-.078; bP.alt.add(afan);
+  bP.altPulley=new THREE.Mesh(new THREE.CylinderGeometry(.031,.031,.028,20),alu);
+  bP.altPulley.rotation.z=Math.PI/2; bP.altPulley.position.x=.082; bP.alt.add(bP.altPulley);
+  bP.alt.userData={bay:'alt'};
+  acase.userData={bay:'alt'}; afan.userData={bay:'alt'}; bP.altPulley.userData={bay:'alt'};
+  /* the belt itself, as a flat loop round both pulleys */
+  const belt=new THREE.Mesh(new THREE.TorusGeometry(.135,.010,8,40),rubber);
+  belt.position.set(.345,.575,1.67); belt.rotation.y=Math.PI/2; belt.scale.set(1,.92,1);
+  bayAsm.add(belt);
+  /* battery, coolant bottle, strut tops — the furniture that makes the bay
+     read as a bay rather than a floating engine */
+  add(plastic,new THREE.BoxGeometry(.26,.21,.19),-.36,.60,1.28);
+  add(red,new THREE.CylinderGeometry(.013,.013,.022,10),-.27,.715,1.23);
+  add(plastic,new THREE.CylinderGeometry(.013,.013,.022,10),-.45,.715,1.23);
+  add(translucent,new THREE.CylinderGeometry(.070,.070,.20,18),.44,.62,1.30);
+  for (const x of [-.52,.52]) add(cast,new THREE.CylinderGeometry(.085,.085,.10,18),x,.68,1.42);
+  bayAsm.visible=false; carRoot.add(bayAsm);
+}
+
+/* ═════════════════════════════════════════════════════════════════════
+   CONSTRUCTED: HOW AN ALTERNATOR WORKS
+
+   Owner asked to "show how alternator work". A starter turns electricity
+   into rotation for a few seconds; an alternator does the opposite for the
+   whole life of the engine, and the part trainees get wrong is that it
+   generates AC and has to rectify it, and that the FIELD is what controls
+   output — not the speed.
+
+   Nothing here is measured off this car: it is the standard claw-pole
+   machine — rotor field winding fed through slip rings and brushes, three
+   stator phases, six diodes, a regulator. The arithmetic below is a
+   deliberately simple model and says so.
+   ═══════════════════════════════════════════════════════════════════ */
+const altAsm = new THREE.Group(); sceneRig.add(altAsm);
+const ALT = {rpm:900, field:true, load:1, diode:true, angle:0, cut:false};
+const aP = {phases:[], diodes:[], fingers:[]};
+const ALT_RATIO = 2.6;            /* pulley ratio, crank -> alternator */
+function altSolve(){
+  const arpm = ALT.rpm*ALT_RATIO;
+  const spin = arpm > 1100;                 /* cut-in: below it, no output */
+  /* capability rises with speed and saturates; a failed diode costs a third */
+  const cap = (spin ? Math.min(1,(arpm-1100)/4400) : 0) * (ALT.diode?140:92);
+  const demand = [18,42,78,124][ALT.load];  /* ignition / lamps / blower+heat / everything */
+  const charging = ALT.field && spin;
+  const V = !charging ? Math.max(11.4, 12.62 - demand*.009)
+          : (demand<=cap ? 14.40 : Math.max(12.1, 14.40-(demand-cap)*.031));
+  const ripple = !charging ? 0 : (ALT.diode ? .28 : 2.60);
+  const lamp = !charging || V < 13.0;       /* battery warning lamp */
+  return {arpm,spin,cap,demand,charging,V,ripple,lamp};
+}
+function buildAlternator(){
+  const M=(c,o={})=>new THREE.MeshStandardMaterial({color:c,roughness:.45,metalness:.7,...o});
+  const alu=M(0x9aa3af,{metalness:.9,roughness:.3}), cu=M(0xb87333,{metalness:.9,roughness:.3}),
+        steel=M(0x8d95a1,{metalness:.92,roughness:.3}), dark=M(0x1d2127,{metalness:.2,roughness:.8}),
+        board=M(0x1F3A2C,{metalness:.1,roughness:.7});
+  const add=(m,g,x,y,z,grp)=>{const o=new THREE.Mesh(g,m);o.position.set(x,y,z);
+    (grp||altAsm).add(o);return o};
+
+  /* housing, cut away like the starter so the inside is the point */
+  const h=add(alu,new THREE.CylinderGeometry(.115,.115,.20,30,1,false,0,Math.PI*1.3),0,.30,0);
+  h.rotation.z=Math.PI/2;
+
+  /* STATOR — three phase windings in a ring. This is where the current is
+     actually made; the rotor only carries the magnetic field. */
+  const st=add(steel,new THREE.TorusGeometry(.098,.022,10,40),0,.30,0);
+  st.rotation.y=Math.PI/2;
+  for (let p=0;p<3;p++){
+    const g=new THREE.Group(); g.position.set(0,.30,0); altAsm.add(g);
+    for (let k=0;k<6;k++){
+      const a=(p/3+k/18)*Math.PI*2;
+      const c=new THREE.Mesh(new THREE.BoxGeometry(.13,.020,.016),cu.clone());
+      c.position.set(0,Math.cos(a)*.098,Math.sin(a)*.098); c.rotation.x=a;
+      g.add(c);
+    }
+    aP.phases.push(g);
+  }
+
+  /* ROTOR — shaft, field winding, and the claw poles that alternate N/S */
+  aP.rotor=new THREE.Group(); aP.rotor.position.set(0,.30,0); altAsm.add(aP.rotor);
+  const sh=new THREE.Mesh(new THREE.CylinderGeometry(.016,.016,.34,14),steel);
+  sh.rotation.z=Math.PI/2; aP.rotor.add(sh);
+  const fw=new THREE.Mesh(new THREE.CylinderGeometry(.052,.052,.07,20),cu);
+  fw.rotation.z=Math.PI/2; aP.rotor.add(fw); aP.field=fw;
+  for (let i=0;i<12;i++){
+    const a=i/12*Math.PI*2, side=(i%2)?-1:1;
+    const f=new THREE.Mesh(new THREE.BoxGeometry(.055,.030,.022),steel);
+    f.position.set(side*.036,Math.cos(a)*.070,Math.sin(a)*.070); f.rotation.x=a;
+    aP.rotor.add(f); aP.fingers.push(f);
+  }
+  /* slip rings + brushes: the only sliding contact in the machine, and the
+     usual reason a working alternator stops charging */
+  aP.slip=new THREE.Mesh(new THREE.CylinderGeometry(.030,.030,.030,18),cu);
+  aP.slip.rotation.z=Math.PI/2; aP.slip.position.x=-.125; aP.rotor.add(aP.slip);
+  for (const s of [1,-1]) add(dark,new THREE.BoxGeometry(.016,.028,.016),-.125,.30+s*.046,0);
+
+  /* PULLEY + belt stub — driven from the crank, ~2.6 times crank speed */
+  aP.pulley=new THREE.Group(); aP.pulley.position.set(.195,.30,0); altAsm.add(aP.pulley);
+  const pul=new THREE.Mesh(new THREE.CylinderGeometry(.050,.050,.030,22),alu);
+  pul.rotation.z=Math.PI/2; aP.pulley.add(pul);
+  for (let i=0;i<8;i++){
+    const a=i/8*Math.PI*2;
+    const rib=new THREE.Mesh(new THREE.BoxGeometry(.031,.010,.008),dark);
+    rib.position.set(0,Math.cos(a)*.050,Math.sin(a)*.050); rib.rotation.x=a;
+    aP.pulley.add(rib);
+  }
+  const bl=add(dark,new THREE.BoxGeometry(.012,.24,.026),.195,.30,0);
+  bl.position.y=.30; bl.scale.y=1.6; bl.visible=true; aP.belt=bl;
+
+  /* RECTIFIER — six diodes on a heatsink. Three phases in, DC out. */
+  const plate=add(board,new THREE.BoxGeometry(.030,.16,.13),-.175,.30,0);
+  for (let i=0;i<6;i++){
+    const d=new THREE.Mesh(new THREE.CylinderGeometry(.011,.011,.018,12),dark.clone());
+    d.rotation.z=Math.PI/2;
+    d.position.set(-.175,.30+(i<3?.042:-.042),-.040+(i%3)*.040);
+    altAsm.add(d); aP.diodes.push(d);
+  }
+  /* REGULATOR — the thing that actually decides the output voltage */
+  add(dark,new THREE.BoxGeometry(.034,.060,.070),-.205,.235,0);
+  /* output stud */
+  add(cu,new THREE.CylinderGeometry(.009,.009,.035,10),-.205,.372,.045).rotation.z=Math.PI/2;
+  altAsm.visible=false;
+}
+function alternatorTick(dt){
+  const r=altSolve();
+  /* rotor speed: the pulley and rotor are one shaft, so both turn together */
+  const w = r.arpm/60*Math.PI*2*.06;          /* slowed for clarity */
+  ALT.angle += w*dt;
+  aP.rotor.rotation.x = ALT.angle;
+  aP.pulley.rotation.x = ALT.angle;
+  /* the field winding only glows when there IS field current */
+  aP.field.material.emissive?.setHex(ALT.field ? 0x3a1a06 : 0x000000);
+  /* each stator phase peaks 120 degrees apart — that is the whole reason
+     the output needs six diodes and not two */
+  for (let p=0;p<3;p++){
+    const e = r.charging ? Math.max(0,Math.sin(ALT.angle*6 + p*Math.PI*2/3)) : 0;
+    for (const c of aP.phases[p].children)
+      c.material.emissive?.setRGB(e*.55,e*.22,e*.03);
+  }
+  aP.diodes.forEach((d,i)=>{
+    const dead = !ALT.diode && i===2;         /* the failed one stays dark */
+    const e = (r.charging && !dead)
+      ? Math.max(0,Math.sin(ALT.angle*6 + (i%3)*Math.PI*2/3 + (i<3?0:Math.PI)))*.5 : 0;
+    d.material.emissive?.setRGB(e*.2,e*.5,e*.25);
+  });
 }
 
 /* ═════════════════════════════════════════════════════════════════════
@@ -1297,8 +1518,8 @@ const BJ={i:0,ans:{},score:0,asked:0};
    UI
    ═══════════════════════════════════════════════════════════════════ */
 const MODES=[['strip','Strip'],['doorOff','Door off'],['bonnetOff','Bonnet off'],
-             ['door','Inside a door'],
-             ['starter','Starter'],['engine','Engine'],['brakes','Brake job'],['bench','Bench']];
+             ['door','Inside a door'],['starter','Starter'],['alt','Alternator'],
+             ['engine','Engine'],['brakes','Brake job'],['bench','Bench']];
 let MODE='strip';
 const tabsEl=document.getElementById('tabs');
 tabsEl.innerHTML=MODES.map(([id,l])=>
@@ -1308,11 +1529,30 @@ tabsEl.addEventListener('click',e=>{const b=e.target.closest('[data-m]'); if(b) 
 const CAP={
   door:'Constructed door cutaway · not geometry from the car file',
   doorOff:'Real door and check strap · hinge bolts, loom boot and prop constructed',
-  bonnetOff:'Real bonnet, cut from the body shell along its own shut line · hinge bolts, gas struts and support prop constructed',
+  bonnetOff:'Real bonnet, cut from the body shell · hinge bolts, gas struts, prop AND the whole engine bay are constructed — the car file contains no engine at all',
+  alt:'Constructed alternator cutaway · claw-pole machine, motion slowed · arithmetic is a simplified model',
   starter:'Constructed starter motor · motion slowed for clarity',
   engine:'Constructed four-stroke cutaway · not the Golf’s own engine',
   strip:'Real geometry from volkswagen-golf-2021-w12-v1',
   brakes:'Real disc and caliper · pads are constructed'};
+/* Put back whatever another bay left open or detached. `keep` is the mode
+   being entered, so the bay that owns a panel does not fight its own setup. */
+function restoreJobPanels(keep){
+  const pb=parts.panel_bonnet;
+  if (pb && keep!=='bonnetOff'){
+    tween(pb.group.rotation,'x',0,420);
+    tweenV(pb.group.position,pb.home.clone(),420);
+  }
+  if (keep!=='doorOff'){
+    const pd=parts.door_fl;
+    if (pd && (DO.off || pd.group.position.distanceToSquared(pd.home)>1e-6)){
+      tweenV(pd.group.position,pd.home.clone(),420);
+    }
+    /* strip owns the door toggles, so only force it shut when arriving
+       somewhere that is not about doors at all */
+    if (keep!=='strip') setDoor('door_fl',false);
+  }
+}
 function setMode(m){
   MODE=m;
   tabsEl.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.m===m));
@@ -1320,12 +1560,19 @@ function setMode(m){
   document.getElementById('bench-stage').hidden=!bench;
   canvas.style.visibility=bench?'hidden':'visible';
   document.getElementById('loading').hidden=!(needCar && !carReady);
-  document.getElementById('readout').hidden=(m!=='engine'&&m!=='starter');
+  document.getElementById('readout').hidden=(m!=='engine'&&m!=='starter'&&m!=='alt');
   const cap=document.getElementById('caption');
   cap.hidden=!CAP[m]; if(CAP[m]) cap.textContent=CAP[m];
   doorAsm.visible=(m==='door'); starterAsm.visible=(m==='starter'); engAsm.visible=(m==='engine');
+  altAsm.visible=(m==='alt');
   doorRig.visible=(m==='doorOff'); bonnetRig.visible=(m==='bonnetOff');
-  plinth.visible=(m==='door'||m==='starter'||m==='engine');
+  bayAsm.visible=(m==='bonnetOff' && BAY.engine);
+  plinth.visible=(m==='door'||m==='starter'||m==='engine'||m==='alt');
+  /* CROSS-BAY BLEED. Each job MOVES real geometry, and leaving the bay used
+     to leave it moved: open the bonnet in Bay 3, tap Door off, and the door
+     job renders with the bonnet still standing up. The panel a bay owns is
+     restored by every OTHER bay on entry. */
+  if (carReady) restoreJobPanels(m);
   if (m==='strip'&&carReady){iso(null);setPadWear(12);
     flyTo(new THREE.Vector3(0,.72,0),new THREE.Vector3(5.2,2.3,6.4))}
   if (m==='brakes'&&carReady){setXray(false);setExplode(0);BJ.i=0;JOB[0].a?.()}
@@ -1340,13 +1587,20 @@ function setMode(m){
        broken model, not as a focused view. */
     iso(null);
     ['door_fl','door_fr','door_rl','door_rr'].forEach(id=>setDoor(id,false));
-    /* open it: a shut bonnet hides every fastener this bay is about */
+    /* open it: a shut bonnet hides every fastener this bay is about. If the
+       job was already finished, come back to it OFF rather than shut —
+       otherwise the panel contradicts its own step list. */
     const pb=parts.panel_bonnet;
-    if (pb && !BO.off){ pb.group.position.copy(pb.home);
-      tween(pb.group.rotation,'x',-BONNET_OPEN,700); }
+    if (pb){
+      pb.group.rotation.x=-BONNET_OPEN;
+      pb.group.position.copy(BO.off
+        ? pb.home.clone().add(new THREE.Vector3(0,.34,1.00))
+        : pb.home);
+    }
     flyTo(new THREE.Vector3(0,.88,1.05),new THREE.Vector3(1.95,1.70,3.45)); }
   if (m==='door') flyTo(new THREE.Vector3(0,.68,0),new THREE.Vector3(.75,1.05,2.45));
   if (m==='starter') flyTo(new THREE.Vector3(.20,.31,0),new THREE.Vector3(.72,.72,1.15));
+  if (m==='alt') flyTo(new THREE.Vector3(0,.30,0),new THREE.Vector3(.52,.60,.78));
   if (m==='engine') flyTo(new THREE.Vector3(0,.80,0),new THREE.Vector3(1.75,1.35,2.35));
   if (bench) drawCircuit();
   drawHud(); drawPanel();
@@ -1361,7 +1615,11 @@ function drawHud(){
     : MODE==='doorOff'
     ? b('doReset','Start again')+`<span class="chip">${Object.keys(DO.out).length}/4 bolts out${DO.stops?` · ${DO.stops} stop${DO.stops>1?'s':''}`:''}</span>`
     : MODE==='bonnetOff'
-    ? b('boReset','Start again')+`<span class="chip">${Object.keys(BO.out).length}/2 bolts out${BO.stops?` · ${BO.stops} stop${BO.stops>1?'s':''}`:''}</span>`
+    ? b('boReset','Start again')+b('bengine',BAY.engine?'Engine bay on':'Engine bay off',BAY.engine)
+      +`<span class="chip">${Object.keys(BO.out).length}/2 bolts out${BO.stops?` · ${BO.stops} stop${BO.stops>1?'s':''}`:''}</span>`
+    : MODE==='alt'
+    ? b('afield',ALT.field?'Field ON':'Field OFF',ALT.field)
+      +b('adiode',ALT.diode?'Diodes OK':'Diode FAILED',!ALT.diode)
     : MODE==='door'
     ? b('dcard',DOOR.card?'Card on':'Card off',DOOR.card)+b('dlatch','Pull the handle')
     : MODE==='starter'
@@ -1386,12 +1644,15 @@ function act(a){
   if(a==='skey') ST.key=ST.key?0:1;
   if(a==='doReset') doorAct('reset');
   if(a==='boReset') bonnetAct('reset');
+  if(a==='bengine'){BAY.engine=!BAY.engine; bayAsm.visible=(MODE==='bonnetOff'&&BAY.engine);}
+  if(a==='afield') ALT.field=!ALT.field;
+  if(a==='adiode') ALT.diode=!ALT.diode;
   drawHud(); drawPanel();
 }
 const panel=document.getElementById('panel');
 function drawPanel(){
   panel.innerHTML=({strip:pStrip,doorOff:pDoorOff,bonnetOff:pBonnetOff,door:pDoor,starter:pStarter,
-                    engine:pEngine,brakes:pBrakes,bench:pBench}[MODE])();
+                    alt:pAlt,engine:pEngine,brakes:pBrakes,bench:pBench}[MODE])();
   panel.querySelectorAll('[data-x]').forEach(el=>
     el.addEventListener(el.tagName==='INPUT'?'input':'click',()=>handle(el.dataset.x,el)));
 }
@@ -1512,6 +1773,100 @@ function pDoorOff(){
     '<b>Why you mark the hinges.</b> Hinge bolts sit in slotted or floating mounts so the door can be aligned. Undo them without a mark and you have thrown away the factory alignment — then you are setting shut lines, gaps and the striker by trial and error with a heavy panel in your hands.',
     '<b>Weight.</b> A front door with glass, motor, card and speaker is around 25–30 kg and all of it hangs off two hinges. It is a two-person lift or a door stand, every time.',
     '<b>On refit.</b> Bolts in finger-tight, door to the marks, check the shut line and the striker engagement before final torque, then reconnect and test the window, lock, mirror and any door lamp before the card goes anywhere near it.'
+  ], true)}`;
+}
+function pAlt(){
+  const r=altSolve();
+  const LOAD=['Ignition only','+ headlamps','+ blower and heated screen','Everything on'];
+  /* three phases 120 deg apart, and the rectified envelope over the top of
+     them — the picture that makes six diodes make sense */
+  const W=300,H=86,mid=H*.62,amp=26;
+  const ph=p=>{let d='';
+    for(let x=0;x<=W;x+=4){ const a=x/W*Math.PI*4+p*Math.PI*2/3;
+      const y=mid-Math.sin(a)*amp; d+=(x?'L':'M')+x+' '+y.toFixed(1); }
+    return d;};
+  const rect=()=>{let d='';
+    for(let x=0;x<=W;x+=3){ const a=x/W*Math.PI*4;
+      let v=0; for(let p=0;p<3;p++){
+        if(!ALT.diode&&p===2) continue;      /* the open diode loses a hump */
+        v=Math.max(v,Math.abs(Math.sin(a+p*Math.PI*2/3))); }
+      const y=mid-amp*.30-v*amp*.62; d+=(x?'L':'M')+x+' '+y.toFixed(1); }
+    return d;};
+  return `
+  <div><div class="eyebrow">Bay 6 · Charging</div>
+    <h2 style="font-size:19px;margin-top:2px">How an alternator works</h2>
+    <p style="font-size:13px;color:var(--ink2);margin-top:6px">A starter turns
+    electricity into rotation for a few seconds. An alternator does the opposite
+    for the life of the engine — and it makes <b>AC</b>, which is why it needs six
+    diodes before it can charge anything.</p></div>
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+      <div class="eyebrow">Output</div>
+      <span class="prov built">constructed</span></div>
+    <div class="mono" id="altV" style="font-size:30px;font-weight:700;margin-top:4px;
+      color:${r.lamp?'var(--danger)':'var(--good)'}">${r.V.toFixed(2)} V</div>
+    <div class="note ${r.lamp?'bad':'good'}" style="margin-top:8px">
+      ${r.charging
+        ? (r.demand<=r.cap
+          ? 'Charging. Output is regulated to about 14.4 V and the battery is being replaced faster than it is drained.'
+          : `Spinning, but the load is beating it: ${Math.round(r.demand)} A wanted, ${Math.round(r.cap)} A available at this speed. The shortfall comes out of the battery and the voltage sags.`)
+        : (!ALT.field
+          ? 'NO FIELD. The rotor is spinning and generating nothing — no field current means no magnetism, and no magnetism means no output however fast it turns. Warning lamp on.'
+          : 'Below cut-in speed. The rotor is turning too slowly to make useful voltage — at idle with everything on, this is why the lights dim.')}
+    </div>
+    <dl class="spec">
+      <dt>engine</dt><dd>${ALT.rpm} rpm</dd>
+      <dt>alternator</dt><dd>${Math.round(r.arpm)} rpm (${ALT_RATIO}:1)</dd>
+      <dt>load demand</dt><dd>${Math.round(r.demand)} A</dd>
+      <dt>available</dt><dd>${Math.round(r.cap)} A</dd>
+      <dt>ripple</dt><dd>${r.ripple.toFixed(2)} V pk-pk</dd>
+      <dt>warning lamp</dt><dd style="color:${r.lamp?'var(--danger)':'var(--good)'}">${r.lamp?'ON':'off'}</dd>
+    </dl>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Three phases in, DC out</div>
+    <svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;margin-top:8px" role="img"
+      aria-label="Three-phase AC from the stator and the rectified DC above it">
+      <line x1="0" y1="${mid}" x2="${W}" y2="${mid}" stroke="var(--line)" stroke-width="1"/>
+      ${[0,1,2].map(p=>`<path d="${ph(p)}" fill="none" stroke="${
+        !ALT.diode&&p===2?'var(--danger)':'var(--ink3)'}" stroke-width="1.4" opacity="${
+        r.charging?.9:.25}"/>`).join('')}
+      <path d="${rect()}" fill="none" stroke="var(--good)" stroke-width="2.4"
+        opacity="${r.charging?1:.2}"/>
+      <text x="2" y="12" font-size="9" fill="var(--good)">rectified DC${
+        !ALT.diode?' — one hump missing':''}</text>
+    </svg>
+    <p class="hint" style="margin-top:6px">Each stator phase peaks 120° after the last.
+    Six diodes fold every half-cycle of all three into one steady DC line, so the ripple
+    is small and constant. Lose one diode and a hump goes missing — the red trace — and
+    the ripple you can measure on the battery jumps.</p>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Drive it</div>
+    <div class="switchrow" style="border-bottom:0">
+      <span>Engine speed</span><span class="mono">${ALT.rpm} rpm</span></div>
+    <input type="range" min="650" max="4500" step="50" value="${ALT.rpm}" data-x="arpm">
+    <div class="eyebrow" style="margin-top:10px">Electrical load</div>
+    <div class="row" style="margin-top:7px">
+      ${LOAD.map((l,i)=>`<button class="btn ${ALT.load===i?'on':''}" data-x="aload:${i}">${l}</button>`).join('')}
+    </div>
+    <div class="row" style="margin-top:10px">
+      <button class="btn wide ${ALT.field?'on':''}" data-x="afield">${ALT.field?'Field ON':'Field OFF'}</button>
+      <button class="btn wide ${!ALT.diode?'on':''}" data-x="adiode">${ALT.diode?'Diodes OK':'Diode FAILED'}</button>
+    </div>
+  </div>
+
+  ${man('Training manual — the charging system',[
+    '<b>It generates AC and rectifies it.</b> The stator has three separate windings; the spinning rotor sweeps a magnetic field past them and induces alternating current in each, 120° apart. Six diodes — a positive and a negative for each phase — fold all of that into DC. That is why it is called an alternator and not a dynamo.',
+    '<b>The FIELD controls the output, not the speed.</b> The rotor is an electromagnet fed a small current through two slip rings and brushes. The regulator varies that field current to hold the output near 14.4 V whatever the engine is doing. Switch the field off and a perfectly good alternator spinning at 4,000 rpm makes nothing — try it with the Field button.',
+    '<b>Why the lights dim at idle.</b> Output capability rises with speed. At idle the alternator may not make enough for headlamps, blower and heated screen at once, so the shortfall comes out of the battery and system voltage sags. Raise the revs on the slider with everything switched on and watch it recover.',
+    '<b>Charging voltage is not battery voltage.</b> A healthy system reads roughly 13.8–14.6 V at the battery with the engine running, and about 12.6 V with it off. A reading that stays at 12.6 V running means it is not charging; a reading much above 15 V points at the regulator. Confirm the exact figures against the data for the car in front of you.',
+    '<b>Ripple is the diagnostic that finds a failed diode.</b> One open diode loses a third of the humps, so output capability drops and AC ripple on the DC line climbs. A charging system can still read a plausible voltage at idle with a failed diode and fail under load — measure ripple, or measure output current against its rating, rather than trusting one voltage reading.',
+    '<b>Brushes and slip rings are the wear item.</b> They are the only sliding electrical contact in the machine. Worn brushes interrupt field current, so the symptom is intermittent charging that often comes back when you tap the casing — which is a diagnosis, not a repair.',
+    '<b>Never disconnect the battery to "test" the charging system on a running engine.</b> The battery is what damps the system; removing it can spike the voltage into every electronic module on the car. Test with a meter across the battery, and follow the manufacturer\'s procedure.'
   ], true)}`;
 }
 function pBonnetOff(){
@@ -1776,6 +2131,9 @@ function handle(x,el){
   if(k==='ans'&&BJ.ans[BJ.i]===undefined){
     BJ.ans[BJ.i]=+v; BJ.asked++; if(+v===JOB[BJ.i].q.ok) BJ.score++;}
   if(k==='rpm') ENG.rpm=+el.value;
+  if(k==='arpm') ALT.rpm=+el.value;
+  if(k==='aload') ALT.load=+v;
+  if(k==='afield'||k==='adiode'){act(k); return;}
   if(k==='win') DOOR.win=+el.value/100;
   if(k==='focus') ENG.focus=(+v<0?null:+v);
   if(k==='mode') BEN.mode=v;
@@ -1837,6 +2195,17 @@ function frame(now){
     readout.innerHTML=`pinion <b style="color:var(--ink)">${ST.throwPos>.82?'meshed':'clear'}</b>
       · armature ${Math.round(ST.spin*325)} rpm · ring ${Math.round(ST.spin*325*9/44)} rpm`;
     renderer.render(sceneRig,camera);
+  } else if (MODE==='alt'){
+    alternatorTick(dt);
+    const r=altSolve();
+    readout.innerHTML=`<span class="mono" style="color:${r.lamp?'var(--danger)':'var(--good)'};
+      font-weight:700">${r.V.toFixed(2)} V</span> · ${Math.round(r.arpm)} alt rpm ·
+      ${r.charging?`${Math.round(Math.min(r.demand,r.cap))} A out of ${Math.round(r.cap)} A available`
+        :'NOT CHARGING — running off the battery'}`;
+    const vl=document.getElementById('altV');
+    if (vl){ vl.textContent=r.V.toFixed(2)+' V';
+      vl.style.color=r.lamp?'var(--danger)':'var(--good)'; }
+    renderer.render(sceneRig,camera);
   } else if (MODE==='door'){
     doorTick(); renderer.render(sceneRig,camera);
   } else {
@@ -1860,6 +2229,17 @@ window.__bonnet = () => ({looked:BO.looked,supported:BO.supported,marked:BO.mark
     +parts.panel_bonnet.group.position.y.toFixed(3),+parts.panel_bonnet.group.position.z.toFixed(3)]:null,
   anims:anim.length,
   propVisible:bRig.prop?bRig.prop.visible:null});
+window.__alt = () => { const r=altSolve();
+  return {rpm:ALT.rpm,field:ALT.field,diode:ALT.diode,load:ALT.load,
+    altRpm:Math.round(r.arpm),charging:r.charging,V:+r.V.toFixed(2),
+    demand:Math.round(r.demand),cap:Math.round(r.cap),
+    ripple:+r.ripple.toFixed(2),lamp:r.lamp,visible:altAsm.visible}; };
+/* a harness must be able to drive it without clicking a range input */
+window.__setAlt = o => { Object.assign(ALT,o); drawHud(); drawPanel(); };
+window.__bay = () => ({visible:bayAsm.visible, on:BAY.engine,
+  meshes:bayAsm.children.length,
+  altInBay:!!bP.alt, bonnetRotX:parts.panel_bonnet
+    ?+parts.panel_bonnet.group.rotation.x.toFixed(3):null});
 window.__meshNames = () => { const o=[]; carRoot.traverse(m=>{ if(m.isMesh && o.length<8)
     o.push({name:m.name, cls:m.userData.partId}); }); return o; };
 window.__dbg = () => ({
