@@ -163,6 +163,21 @@ input[type=range]{width:100%;accent-color:var(--pri)}
 .badge.tool{background:color-mix(in srgb,var(--pri) 18%,transparent);color:var(--pri2)}
 .badge.torque{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}
 
+/* workshop figures — the value and WHERE IT CAME FROM, side by side, so a
+   looked-up figure and a class assumption can never read the same */
+.specrow{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;
+  align-items:center;padding:6px 0;border-bottom:1px solid var(--line)}
+.specrow:last-of-type{border-bottom:0}
+.specname{font-size:12.5px;min-width:0}
+.specval{font-size:12.5px;font-weight:700;font-variant-numeric:tabular-nums;
+  white-space:nowrap}
+.specval.muted{color:var(--ink2);font-weight:600}
+.specsrc{padding:2px 7px;border-radius:999px;font-size:9.5px;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+.specsrc.ok{background:color-mix(in srgb,var(--good) 18%,transparent);color:var(--good)}
+.specsrc.warn{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}
+.specsrc.none{background:color-mix(in srgb,var(--ink2) 16%,transparent);color:var(--ink2)}
+
 /* training manual */
 .manual{border:1px solid var(--line);border-radius:var(--r);background:var(--panel);overflow:hidden}
 .manual > summary{padding:11px 12px;cursor:pointer;font-size:13px;font-weight:700;
@@ -2921,6 +2936,116 @@ function drawCircuit(){
 /* ═════════════════════════════════════════════════════════════════════
    BRAKE JOB
    ═══════════════════════════════════════════════════════════════════ */
+/* ═════════════════════════════════════════════════════════════════════
+   WORKSHOP FIGURES — ONE TABLE, AND EVERY NUMBER CARRIES ITS SOURCE
+
+   The owner has Autodata manuals and wants the trainer's figures taken
+   from them. This is where they land. Until then the honest position has
+   to be visible to the trainee rather than buried in a sentence: a figure
+   is either WORKSHOP DATA for this car, or it is TYPICAL OF THE CLASS and
+   must be looked up, or it is NOT ESTABLISHED and this trainer does not
+   have it. Those are three different things and a trainee acting on the
+   second as if it were the first is how a fastener gets stripped.
+
+   NOTHING IS INVENTED HERE. A row with v:null renders as "not
+   established", which is a true statement about this trainer; making up a
+   plausible torque would be the one failure this project cannot afford,
+   because a plausible wrong number is indistinguishable from a right one
+   until something breaks. The parts database that supplied the part
+   numbers above holds NO torque figures at all — it is a parts catalogue,
+   not a repair manual — so every row below is still open.
+
+   When the manuals are readable, a row becomes {v:'…', src:'manual',
+   ref:'…'} and the badge, the wording and the caveat all follow from it.
+   ═══════════════════════════════════════════════════════════════════ */
+const SPEC = {
+  brake_guide:  {label:'Front caliper guide bolt', v:'≈ 30 Nm',  src:'class'},
+  wheel_bolt:   {label:'Road wheel bolt',          v:'≈ 120 Nm', src:'class'},
+  starter_bolt: {label:'Starter flange bolt',      v:null, src:'none'},
+  starter_bplus:{label:'Starter B+ terminal nut',  v:null, src:'none'},
+  bonnet_hinge: {label:'Bonnet hinge bolt',        v:null, src:'none'},
+  sw_bolt:      {label:'Steering wheel centre bolt', v:null, src:'none',
+                 note:'Often a single-use bolt with an angle stage after the initial torque. Both the reuse rule and the angle have to come from the data.'},
+  alt_pulley:   {label:'Alternator pulley nut',    v:null, src:'none'},
+  srs_wait:     {label:'SRS stand-down time after isolating', v:null, src:'none',
+                 note:'A manufacturer figure, not a rule of thumb. Nothing yellow gets touched before it has passed.'}
+};
+const SPEC_BADGE = {
+  manual:['ok',  'workshop data'],
+  class :['warn','typical of class'],
+  none  :['none','not established']
+};
+/* one row of the workshop-data card */
+const specRow = id => { const s=SPEC[id]; if(!s) return '';
+  const [cls,lab]=SPEC_BADGE[s.src];
+  return `<div class="specrow"><span class="specname">${s.label}</span>
+    <span class="specval ${s.v?'':'muted'}">${s.v||'—'}</span>
+    <span class="specsrc ${cls}">${lab}</span></div>
+    ${s.note?`<div class="hint" style="margin:-2px 0 6px">${s.note}</div>`:''}`;
+};
+const specCard = (ids,title='Workshop data') => `
+  <div class="card">
+    <div class="eyebrow">${title}</div>
+    <div style="margin-top:7px">${ids.map(specRow).join('')}</div>
+    <p class="hint" style="margin-top:8px">A figure marked <b>typical of class</b> is a
+    starting point for a conversation with the data, not a number to set a wrench to.
+    One marked <b>not established</b> means this trainer does not have it — look it up
+    before you touch that fastener.</p>
+  </div>`;
+
+/* ═════════════════════════════════════════════════════════════════════
+   PART NUMBERS — FROM OUR OWN PARTS DATABASE, WITH THE GENERATION KEPT
+
+   These come out of the Spare Parts Hub parts table (66,506 rows, 373 of
+   them VW Golf). They are real numbers with real year ranges, and the year
+   range is the whole point: VW's prefix tells you the generation, and the
+   car in this trainer is a Mk8. A 5H0 part is a Mk8 part. A 5G0 or 5Q0
+   part is a Mk7. A 1K0 or 5K0 part is older still.
+
+   HANDING A TRAINEE A MK7 NUMBER FOR A MK8 CAR IS THE SAME MISTAKE AS
+   SERVING THE WRONG CAR FROM A CATALOGUE — it looks like data, it reads as
+   authoritative, and it is wrong. So every row carries its years and says
+   which generation it belongs to, and the ones that are not this car are
+   labelled as near misses rather than quietly presented as the answer.
+
+   Two rows in that table were deliberately LEFT OUT: a "Front Grille" and
+   a "Caliper Front Right" stamped 2020-2026 under numbers 1K0000065B and
+   1K0000026E. 1K0 is a Mk5 prefix, the digits that follow match no VW
+   pattern, and both rows have no brand and a "curated" source. They look
+   generated rather than catalogued, and a made-up part number is worse
+   than no part number.
+   ═══════════════════════════════════════════════════════════════════ */
+const PARTS = {
+  bonnet:    {n:'5H0 823 031', d:'Bonnet',                   y:'2019–2026', gen:'mk8'},
+  wing_l:    {n:'5H0 953 051', d:'Front wing, left',         y:'2019–2026', gen:'mk8'},
+  wing_r:    {n:'5H0 953 052', d:'Front wing, right',        y:'2019–2026', gen:'mk8'},
+  bumper_f:  {n:'5H0 807 221', d:'Front bumper cover',       y:'2019–2026', gen:'mk8'},
+  pads_f:    {n:'5G0 698 151 B', d:'Front brake pad set, GTI', y:'2013–2020', gen:'mk7'},
+  disc_f:    {n:'5Q0 615 301 H', d:'Front discs, vented 312 mm', y:'2012–2022', gen:'mk7'},
+  lock_fr:   {n:'5K0 837 016 F', d:'Front door lock mechanism, right', y:'2008–2013', gen:'old'},
+  mirror_l:  {n:'1K1 857 507 C', d:'Door mirror, left',      y:'2003–2014', gen:'old'}
+};
+const GEN_BADGE = {
+  mk8:['ok',  'this generation'],
+  mk7:['warn','Mk7 — not this car'],
+  old:['none','earlier Golf']
+};
+const partsCard = (ids,note='') => `
+  <div class="card">
+    <div class="eyebrow">Part numbers</div>
+    <div style="margin-top:7px">${ids.map(id=>{ const p=PARTS[id]; if(!p) return '';
+      const [cls,lab]=GEN_BADGE[p.gen];
+      return `<div class="specrow"><span class="specname">${p.d}
+        <span class="hint" style="display:block">${p.y}</span></span>
+        <span class="specval mono">${p.n}</span>
+        <span class="specsrc ${cls}">${lab}</span></div>`}).join('')}</div>
+    ${note?`<p class="hint" style="margin-top:8px">${note}</p>`:''}
+    <p class="hint" style="margin-top:8px">From our own parts data, not from the
+    manufacturer's system. <b>The prefix carries the generation</b> — 5H0 is Mk8,
+    5G0 and 5Q0 are Mk7, 1K0 and 5K0 are older. Check any number against the VIN
+    before you order; a part that fits the shape can still be the wrong one.</p>
+  </div>`;
+
 const JOB=[
  {t:'Slacken the bolts on the ground',tool:'Wheel-bolt socket + breaker bar',
   d:'Crack each wheel bolt about a quarter turn <b>before</b> you lift. A wheel in the air just spins.',
@@ -2964,11 +3089,13 @@ const JOB=[
   d:'Refit over the new pads and torque the guide bolts. Use the wrench — it is a small fastener into aluminium and it strips easily.',
   a:()=>{iso(['rotor_fl','caliper_fl','pads','body']);setPadWear(12);
     const p=parts.caliper_fl; if(p) tweenV(p.group.position,p.home.clone(),700)},
-  torque:'Guide bolts ≈ 30 Nm — a typical VW figure. Confirm it against the data for the exact car.'},
+  spec:['brake_guide'], parts:['pads_f','disc_f'],
+  torque:'Torque the guide bolts to the figure for this car — see the workshop data below.'},
  {t:'Wheel on, torque in a star',tool:'Wheel-bolt socket · torque wrench',
   d:'Start every bolt by hand so you cannot cross-thread one. Nip them up in a star, lower the car, then torque in a star.',
   a:()=>{iso(null);setWheelOff('wheel_fl',false);flyTo(new THREE.Vector3(.8,.4,1.3),new THREE.Vector3(3.2,1.2,3.1))},
-  torque:'Wheel bolts ≈ 120 Nm — a typical VW figure. Confirm it against the data for the exact car.',
+  spec:['wheel_bolt'],
+  torque:'Torque the wheel bolts to the figure for this car — see the workshop data below.',
   q:{ask:'Why a star pattern?',o:['Tradition','It pulls the wheel down square on the hub','It is faster'],ok:1,
      why:'Going round the circle can pull the wheel off-square as it seats. A star pattern draws it down evenly — together with clean mating faces, the right bolts and the correct final torque, which matter just as much.'}},
  {t:'Pump the pedal BEFORE you move',tool:'Your right foot',
@@ -3401,6 +3528,7 @@ function pStarterOff(){
     bellhousing. <b>Fastener count and access are typical of the class, not verified
     against this car's data.</b></p>
   </div>
+  ${specCard(['starter_bolt','starter_bplus'])}
 
   <div class="card">
     <div class="eyebrow">Do the job</div>
@@ -3479,6 +3607,7 @@ function pInterior(){
       ${IN.log.slice(0,6).map(l=>`<div class="note ${l.bad?'bad':'good'}" style="margin:0">${l.t}</div>`).join('')}
     </div></div>`:''}
 
+  ${specCard(['sw_bolt','srs_wait'])}
   ${man('Training manual — SRS and the cabin',[
     '<b>An airbag is a pyrotechnic device, not a trim part.</b> It contains a propellant charge designed to inflate a bag in about 30 milliseconds. Treat every module as live until the system is disarmed and the stated wait has passed.',
     '<b>The wait is not superstition.</b> The SRS control module holds a reserve capacitor charge precisely so the bag still deploys in a crash that destroys the battery or its cabling. That same reserve is what deploys it into your face on the bench. Disconnect, then wait the time the data states.',
@@ -4037,6 +4166,8 @@ function pBrakes(){
     <div class="row" style="margin-top:10px"><span class="badge tool">${s.tool}</span>
       ${s.torque?'<span class="badge torque">torque</span>':''}</div>
     ${s.torque?`<p class="hint" style="margin-top:8px">${s.torque}</p>`:''}</div>
+  ${s.spec?specCard(s.spec):''}
+  ${s.parts?partsCard(s.parts,'The newest front pad set our parts data holds for a Golf GTI is a <b>Mk7</b> part. It is listed here as the nearest match, not as the answer for the car in front of you.'):''}
   ${s.q?`<div class="card"><div class="eyebrow">Check</div>
     <h3 style="margin:4px 0 9px;font-size:13.5px;font-weight:600">${s.q.ask}</h3>
     ${s.q.o.map((t,i)=>{const c=ans===undefined?'':(i===s.q.ok?'right':(ans===i?'wrong':''));

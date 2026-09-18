@@ -1,0 +1,815 @@
+<title>Strip Bay Workshop Manual</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#f2efe9; --paper2:#fbf9f5; --card:#ffffff;
+  --ink:#15181c; --ink2:#4d535b; --ink3:#7b8189;
+  --rule:#cbc4b8; --rule2:#e3ded4;
+  --safety:#bd1729; --safety-bg:#f7e2e3;
+  --caution:#8a6000; --caution-bg:#f7e9c4;
+  --data:#1b4a72; --data-bg:#e2ecf5;
+  --good:#1d6640; --good-bg:#dceee3;
+  --shadow:0 1px 2px rgba(20,24,28,.08);
+  --maxw:1120px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#14171a; --paper2:#1a1e22; --card:#1e2227;
+    --ink:#e9e5dd; --ink2:#b2aea6; --ink3:#89857e;
+    --rule:#3a3f45; --rule2:#2b3036;
+    --safety:#f08a93; --safety-bg:#3a1b1f;
+    --caution:#e8bd58; --caution-bg:#382d12;
+    --data:#8fc0e6; --data-bg:#152836;
+    --good:#7fce9f; --good-bg:#15301f;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#14171a; --paper2:#1a1e22; --card:#1e2227;
+  --ink:#e9e5dd; --ink2:#b2aea6; --ink3:#89857e;
+  --rule:#3a3f45; --rule2:#2b3036;
+  --safety:#f08a93; --safety-bg:#3a1b1f;
+  --caution:#e8bd58; --caution-bg:#382d12;
+  --data:#8fc0e6; --data-bg:#152836;
+  --good:#7fce9f; --good-bg:#15301f;
+  --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:15.5px; line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding-inline:18px; padding-block:0}
+
+/* ─ masthead ─ */
+.mast{border-bottom:3px solid var(--ink); padding-block:30px 16px; margin-bottom:26px}
+.mast .kicker{
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11px; font-weight:500;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--ink3);
+}
+.mast h1{
+  font-family:Oswald,"Arial Narrow",sans-serif; font-weight:600;
+  font-size:clamp(34px,7.2vw,60px); line-height:1.02; margin:8px 0 0;
+  letter-spacing:-.005em; text-wrap:balance; text-transform:uppercase;
+}
+.mast .sub{
+  font-size:16px; color:var(--ink2); margin-top:10px; max-width:62ch;
+}
+.mastmeta{
+  display:flex; flex-wrap:wrap; gap:8px 22px; margin-top:16px;
+  font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--ink3);
+}
+.mastmeta b{color:var(--ink2); font-weight:500}
+
+/* ─ the confidence key: the spine of this document ─ */
+.key{
+  background:var(--card); border:1px solid var(--rule); border-radius:3px;
+  padding:16px 18px; margin-bottom:30px; box-shadow:var(--shadow);
+}
+.key h2{font-family:Oswald,sans-serif; font-weight:500; text-transform:uppercase;
+  letter-spacing:.06em; font-size:14px; margin:0 0 4px}
+.key p{margin:6px 0 0; font-size:14px; color:var(--ink2)}
+.keyrows{display:grid; gap:9px; margin-top:13px}
+.keyrow{display:grid; grid-template-columns:auto minmax(0,1fr); gap:11px; align-items:start}
+
+.tag{
+  display:inline-block; padding:2px 8px; border-radius:2px; white-space:nowrap;
+  font-family:"IBM Plex Mono",monospace; font-size:10px; font-weight:600;
+  letter-spacing:.07em; text-transform:uppercase;
+}
+.tag.ok{background:var(--good-bg); color:var(--good)}
+.tag.warn{background:var(--caution-bg); color:var(--caution)}
+.tag.none{background:var(--rule2); color:var(--ink3)}
+.tag.gen{background:var(--data-bg); color:var(--data)}
+
+/* ─ sections ─ */
+section{margin-bottom:44px; scroll-margin-top:20px}
+.shead{
+  display:grid; grid-template-columns:auto minmax(0,1fr); gap:16px;
+  align-items:baseline; border-bottom:2px solid var(--ink);
+  padding-bottom:7px; margin-bottom:18px;
+}
+.snum{
+  font-family:Oswald,sans-serif; font-weight:600; font-size:30px; line-height:1;
+  color:var(--safety);
+}
+.shead h2{
+  font-family:Oswald,sans-serif; font-weight:500; font-size:clamp(21px,3.6vw,27px);
+  margin:0; text-transform:uppercase; letter-spacing:.01em; text-wrap:balance;
+}
+h3{
+  font-family:Oswald,sans-serif; font-weight:500; font-size:17px; margin:26px 0 8px;
+  letter-spacing:.02em; text-wrap:balance;
+}
+h3 .on{
+  font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink3);
+  font-weight:500; margin-right:9px;
+}
+p{margin:0 0 12px; max-width:66ch}
+.lede{font-size:16.5px; color:var(--ink2); max-width:64ch}
+strong,b{font-weight:600}
+em{font-style:italic}
+
+/* ─ numbered procedure steps ─ */
+ol.steps{list-style:none; counter-reset:s; padding:0; margin:14px 0 0;
+  display:grid; gap:2px}
+ol.steps>li{
+  counter-increment:s; display:grid; grid-template-columns:38px minmax(0,1fr);
+  gap:12px; padding:11px 0; border-top:1px solid var(--rule2);
+}
+ol.steps>li:last-child{border-bottom:1px solid var(--rule2)}
+ol.steps>li::before{
+  content:counter(s,decimal-leading-zero);
+  font-family:"IBM Plex Mono",monospace; font-size:12.5px; font-weight:600;
+  color:var(--ink3); padding-top:2px;
+}
+ol.steps>li>div>p{margin:0 0 7px}
+ol.steps>li>div>p:last-child{margin-bottom:0}
+
+/* ─ notices ─ */
+.notice{
+  border-left:4px solid var(--rule); background:var(--paper2);
+  padding:12px 15px; margin:15px 0; border-radius:0 3px 3px 0;
+}
+.notice p{margin:0; max-width:64ch}
+.notice p+p{margin-top:8px}
+.notice .lab{
+  display:block; font-family:Oswald,sans-serif; font-size:12px; font-weight:600;
+  letter-spacing:.11em; text-transform:uppercase; margin-bottom:4px;
+}
+.notice.danger{border-left-color:var(--safety); background:var(--safety-bg)}
+.notice.danger .lab{color:var(--safety)}
+.notice.care{border-left-color:var(--caution); background:var(--caution-bg)}
+.notice.care .lab{color:var(--caution)}
+.notice.note .lab{color:var(--ink3)}
+
+/* ─ figures ─ */
+figure{margin:20px 0; background:var(--card); border:1px solid var(--rule);
+  border-radius:3px; overflow:hidden; box-shadow:var(--shadow)}
+figure img{display:block; width:100%; height:auto; max-width:100%}
+figcaption{
+  padding:9px 14px; font-size:13.2px; color:var(--ink2);
+  border-top:1px solid var(--rule2); background:var(--paper2);
+}
+figcaption b{
+  font-family:"IBM Plex Mono",monospace; font-size:11.5px; font-weight:600;
+  color:var(--ink); letter-spacing:.03em; margin-right:7px;
+}
+.figpair{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.figpair figure{margin:0}
+
+/* ─ data tables ─ */
+.tablewrap{overflow-x:auto; margin:16px 0; border:1px solid var(--rule);
+  border-radius:3px; background:var(--card); box-shadow:var(--shadow)}
+table{border-collapse:collapse; width:100%; min-width:460px; font-size:14px}
+caption{
+  text-align:left; padding:11px 14px 9px; font-family:Oswald,sans-serif;
+  font-size:13px; font-weight:500; letter-spacing:.07em; text-transform:uppercase;
+  border-bottom:1px solid var(--rule2); color:var(--ink);
+}
+th,td{padding:9px 14px; text-align:left; border-bottom:1px solid var(--rule2);
+  vertical-align:top}
+thead th{
+  font-family:"IBM Plex Mono",monospace; font-size:10.5px; font-weight:600;
+  letter-spacing:.09em; text-transform:uppercase; color:var(--ink3);
+  border-bottom:1px solid var(--rule);
+}
+tbody tr:last-child td{border-bottom:0}
+td.num,td.pn{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums;
+  white-space:nowrap; font-weight:500}
+td.muted{color:var(--ink3)}
+
+/* ─ contents ─ */
+nav.toc{
+  background:var(--card); border:1px solid var(--rule); border-radius:3px;
+  padding:16px 18px; margin-bottom:34px; box-shadow:var(--shadow);
+}
+nav.toc h2{font-family:Oswald,sans-serif; font-weight:500; text-transform:uppercase;
+  letter-spacing:.06em; font-size:14px; margin:0 0 10px}
+nav.toc ol{list-style:none; padding:0; margin:0;
+  display:grid; gap:1px; grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+nav.toc li{border-top:1px solid var(--rule2)}
+nav.toc a{
+  display:grid; grid-template-columns:32px minmax(0,1fr); gap:8px;
+  padding:7px 0; color:var(--ink); text-decoration:none; font-size:14px;
+}
+nav.toc a:hover{color:var(--safety)}
+nav.toc a span{font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--ink3)}
+a{color:var(--data)}
+a:focus-visible,nav.toc a:focus-visible{outline:2px solid var(--safety); outline-offset:2px}
+
+footer{border-top:2px solid var(--ink); padding-block:20px 40px; margin-top:20px;
+  font-size:13.5px; color:var(--ink2)}
+footer p{max-width:70ch}
+
+@media (max-width:620px){
+  .shead{grid-template-columns:auto minmax(0,1fr); gap:11px}
+  .snum{font-size:23px}
+  ol.steps>li{grid-template-columns:28px minmax(0,1fr); gap:9px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <div class="kicker">Strip Bay · Teardown and diagnosis trainer</div>
+  <h1>Golf Mk8 GTI<br>Workshop Manual</h1>
+  <p class="sub">Companion to the interactive trainer. Eight jobs, written as procedures,
+  with every illustration rendered from the same vehicle model the trainer uses.</p>
+  <div class="mastmeta">
+    <span><b>Vehicle</b> Volkswagen Golf Mk8 GTI, five-door</span>
+    <span><b>Layout</b> Transverse four, front-wheel drive</span>
+    <span><b>Steering</b> Left-hand drive — verified from the model</span>
+    <span><b>Issue</b> 1 · September 2026</span>
+  </div>
+</header>
+
+<div class="key">
+  <h2>How to read the figures in this manual</h2>
+  <p>A number in a workshop manual is only worth what its source is worth. Every figure
+  here is labelled, and the three labels mean three genuinely different things.</p>
+  <div class="keyrows">
+    <div class="keyrow"><span class="tag ok">Workshop data</span>
+      <span>Taken from the data for this vehicle. Set a wrench to it.</span></div>
+    <div class="keyrow"><span class="tag warn">Typical of class</span>
+      <span>A figure that is normal for cars of this type. It tells you roughly what to
+      expect and whether something has been overtightened by a mile — it is not the
+      figure for your car, and it is not a substitute for looking it up.</span></div>
+    <div class="keyrow"><span class="tag none">Not established</span>
+      <span>This manual does not have it. Nothing is guessed to fill the gap, because a
+      plausible wrong torque is indistinguishable from a right one until something
+      strips or comes loose.</span></div>
+  </div>
+  <p style="margin-top:12px"><b>Part numbers</b> carry the generation instead, because
+  VW's prefix tells you which car a part belongs to: <span class="tag gen">5H0 = Mk8</span>
+  is this car, 5G0 and 5Q0 are Mk7, 1K0 and 5K0 are older still.</p>
+</div>
+
+<nav class="toc" aria-label="Contents">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#s0"><span>00</span>Before you start</a></li>
+    <li><a href="#s1"><span>01</span>The vehicle</a></li>
+    <li><a href="#s2"><span>02</span>Under the bonnet</a></li>
+    <li><a href="#s3"><span>03</span>Starter motor — removal</a></li>
+    <li><a href="#s4"><span>04</span>Charging system</a></li>
+    <li><a href="#s5"><span>05</span>Front brakes — pads and discs</a></li>
+    <li><a href="#s6"><span>06</span>Door mirror and door lock</a></li>
+    <li><a href="#s7"><span>07</span>Steering wheel and SRS</a></li>
+    <li><a href="#s8"><span>08</span>How the engine turns</a></li>
+    <li><a href="#s9"><span>09</span>Part numbers</a></li>
+    <li><a href="#s10"><span>10</span>Figures still to be established</a></li>
+  </ol>
+</nav>
+
+<!-- ───────────────────────────────── 0 ─ -->
+<section id="s0">
+  <div class="shead"><span class="snum">00</span><h2>Before you start</h2></div>
+  <p class="lede">Three things on this car will hurt you or cost you money if they are
+  taken in the wrong order. They are not general advice; each one is the reason a
+  specific job in this manual is written the way it is.</p>
+
+  <div class="notice danger">
+    <span class="lab">The starter feed is live at all times</span>
+    <p>The heavy cable on the starter runs directly from the battery positive terminal.
+    There is <b>no fuse anywhere in it</b> and no ignition switch between it and the
+    battery, because it has to carry hundreds of amps to crank the engine. Slacken that
+    nut with the battery connected, let the spanner touch the block on the way out, and
+    you have put a dead short across the battery through the tool in your hand. The
+    spanner welds itself in place and glows, the cable insulation melts, and the battery
+    can vent. Disconnect the battery first, every time, on a job that goes anywhere near
+    it.</p>
+  </div>
+
+  <div class="notice danger">
+    <span class="lab">An airbag is a pyrotechnic device</span>
+    <p>A driver's airbag module contains a propellant charge designed to inflate a bag in
+    around thirty milliseconds. The control module also holds a reserve capacitor charge
+    <b>on purpose</b>, so that the bag still fires in a crash that has already destroyed
+    the battery and its cabling. That same reserve is what fires it on the bench after
+    you have disconnected the battery. Isolate, then wait the time the data states, then
+    work.</p>
+    <p><b>Never put an ordinary multimeter across an igniter circuit.</b> A meter passes
+    its own test current through whatever it measures, and that current can be enough to
+    fire the igniter. Those circuits are tested with the manufacturer's equipment or they
+    are not tested.</p>
+  </div>
+
+  <div class="notice care">
+    <span class="lab">Brakes are the one system with no second chance</span>
+    <p>Everything else on this car can be left half-finished overnight. Brakes cannot.
+    Work on axle pairs, torque the fasteners rather than guessing them, and pump the
+    pedal firm before the car moves — the piston has been wound right back, and the first
+    press only takes up the gap.</p>
+  </div>
+</section>
+
+<!-- ───────────────────────────────── 1 ─ -->
+<section id="s1">
+  <div class="shead"><span class="snum">01</span><h2>The vehicle</h2></div>
+  <p>The car this manual is written around is a five-door Golf Mk8 GTI. Everything you
+  see in the illustrations is that vehicle's own model — the bodywork, the glass, the
+  wheels, the brakes and the whole cabin are real geometry from the file, not drawings
+  made to look like it.</p>
+
+  <figure>
+    <img src="figs/fig_01_car.jpg" alt="Three-quarter front view of a red five-door Volkswagen Golf Mk8 GTI on a studio floor" loading="lazy">
+    <figcaption><b>Fig 1.1</b> The vehicle, front three-quarter. Honeycomb grille, the
+    five-element lower lamp clusters and the red brake calipers are the GTI identifiers.</figcaption>
+  </figure>
+
+  <div class="notice note">
+    <span class="lab">Drive side</span>
+    <p>This particular car is <b>left-hand drive</b>. It matters more than it sounds: on a
+    transverse installation, which side a component sits on and which way you reach it
+    both flip. Check the drive side of the vehicle in front of you before you take an
+    access note from any manual, this one included.</p>
+  </div>
+
+  <h3><span class="on">1.1</span>What is real and what is constructed</h3>
+  <p>The vehicle's own file contains no engine, no battery and no ancillaries of any
+  kind — open the real bonnet on the model and you look into an empty shell. So the
+  engine bay in these illustrations is <b>built</b>: a transverse four of the right
+  general shape and layout, with the components placed where they live on a car of this
+  class. It is there so that a component has somewhere true to sit, and it is honest
+  about being a teaching model rather than a measured copy of this car's EA888.</p>
+  <p>Where a figure shows constructed geometry, the text says so. Where it shows the real
+  vehicle — the bodywork, the discs and calipers, the mirror, the cabin — the text says
+  that too.</p>
+</section>
+
+<!-- ───────────────────────────────── 2 ─ -->
+<section id="s2">
+  <div class="shead"><span class="snum">02</span><h2>Under the bonnet</h2></div>
+  <p>A modern GTI shows you a moulded plastic cover and very little else. The cover is
+  the first thing off on almost any job in this section.</p>
+
+  <div class="figpair">
+    <figure>
+      <img src="figs/fig_02_bay_cover.jpg" alt="Engine bay with the moulded plastic engine cover fitted" loading="lazy">
+      <figcaption><b>Fig 2.1</b> As you find it. The cover hides the coil pack, the cam
+      cover and the coolant sensor.</figcaption>
+    </figure>
+    <figure>
+      <img src="figs/fig_03_bay_open.jpg" alt="Engine bay with the cover removed, showing the fuel rail, injectors and camshaft cover" loading="lazy">
+      <figcaption><b>Fig 2.2</b> Cover off. The fuel rail runs across the cam cover with
+      the four injectors dropping into it.</figcaption>
+    </figure>
+  </div>
+
+  <h3><span class="on">2.1</span>Reading the bay</h3>
+  <p>Work across it in the order your eye naturally goes. The <b>fuel rail</b> sits on
+  top of the cam cover: a steel tube with four injectors below it and pale hard lines
+  looping between them to the high-pressure pump at one end. This engine injects
+  directly into the cylinder, which is why the lines are steel rather than rubber and
+  why nobody cracks one of those unions casually.</p>
+  <p>Behind the engine is the <b>bulkhead heat shield</b> — a corrugated aluminium sheet,
+  usually the brightest thing in the bay. In front of it, the <b>inlet manifold</b> in
+  pale grey-beige plastic, with the throttle body on its end. Low on the gearbox side
+  sits the starter; high on the other side, the alternator on the accessory belt.</p>
+
+  <figure>
+    <img src="figs/fig_04_battery.jpg" alt="Engine bay from above with the bonnet raised, white marker spheres on the diagnostic test points" loading="lazy">
+    <figcaption><b>Fig 2.3</b> The bay set up for diagnosis. The white markers are the
+    points a meter goes on — battery posts, the engine earth, the alternator output stud,
+    the fuse and the crank sensor. Everything you can reach from above is here; the
+    starter is not, and that is the point of Section 03.</figcaption>
+  </figure>
+
+  <div class="notice care">
+    <span class="lab">Disconnection order</span>
+    <p>Negative post off first and secured so it cannot spring back onto the terminal;
+    positive last. On refitting, the reverse: positive first, negative last. Taking the
+    positive off first means that the moment your spanner touches any earthed metal —
+    which on a car is nearly everything — it is carrying the full battery across it.</p>
+  </div>
+</section>
+
+<!-- ───────────────────────────────── 3 ─ -->
+<section id="s3">
+  <div class="shead"><span class="snum">03</span><h2>Starter motor — removal</h2></div>
+  <p class="lede">A bench cutaway shows you how a starter works. Getting one off a car is
+  a different skill, and on this job the thing that matters is not the mechanism — it is
+  that cable.</p>
+
+  <figure>
+    <img src="figs/fig_05_starter.jpg" alt="Starter motor bolted to the bellhousing, seen from above with the bodywork hidden" loading="lazy">
+    <figcaption><b>Fig 3.1</b> The starter in place on the bellhousing, bodywork hidden
+    for clarity. In the car it is behind the near-side inner wing and above the driveshaft;
+    you will be looking at it from underneath, not from here.</figcaption>
+  </figure>
+
+  <h3><span class="on">3.1</span>Access</h3>
+  <p>Nothing about a starter on a transverse engine is comfortable. It sits at the joint
+  between engine and gearbox, the bodywork is in the way from the side, the engine is in
+  the way from above, and the bumper is in the way from the front. Expect to work from
+  below with the car raised and supported, and expect the awkwardness to be the job
+  rather than a sign you are in the wrong place.</p>
+
+  <div class="figpair">
+    <figure>
+      <img src="figs/fig_06_starter_terminals.jpg" alt="Close view of the starter solenoid showing the copper B+ stud and the small trigger spade terminal" loading="lazy">
+      <figcaption><b>Fig 3.2</b> The two electrical connections: the copper <b>B+ stud</b>
+      on the end of the solenoid carrying the main feed, and the small <b>trigger</b>
+      spade beside it.</figcaption>
+    </figure>
+    <figure>
+      <img src="figs/fig_07_starter_bolts.jpg" alt="The starter's mounting ears and the two flange bolts that hold it to the bellhousing" loading="lazy">
+      <figcaption><b>Fig 3.3</b> The mounting ears and the two flange bolts. They stand
+      proud of the motor body, which is the only reason you can get a socket on them.</figcaption>
+    </figure>
+  </div>
+
+  <h3><span class="on">3.2</span>Procedure</h3>
+  <ol class="steps">
+    <li><div><p><b>Look the job up.</b> Where it sits, what holds it, and what that heavy
+    cable is. The rest of this procedure assumes you know the answer to the third one.</p></div></li>
+    <li><div><p><b>Disconnect the battery.</b> Negative post first, and secure the lead so
+    it cannot spring back. This is not a precaution you can take later in the job —
+    everything after this step is unsafe without it.</p></div></li>
+    <li><div><p><b>Support the starter.</b> It is roughly three to five kilos, and on this
+    layout it comes out above your face. Support it before it is loose, not after.</p></div></li>
+    <li><div><p><b>B+ cable off the stud.</b> Slacken the nut, lift the cable clear of the
+    block and insulate the end. Fold a rag over it or slip the boot back on — with the
+    battery reconnected later, a loose live cable end resting on the block is the same
+    short by a slower route.</p></div></li>
+    <li><div><p><b>Trigger wire off.</b> The small spade terminal. It is thin, it has done
+    twenty years of heat cycles, and it will tear out of its crimp if you pull it by the
+    wire rather than the connector body.</p></div></li>
+    <li><div><p><b>Flange bolts out.</b> Both bolts, with the motor supported. Take the
+    upper one out first if you can reach it, so the weight stays on the lower bolt rather
+    than on the cable you have just disconnected.</p></div></li>
+    <li><div><p><b>Withdraw the starter.</b> It comes out along its own axis — the pinion
+    nose has to clear the bellhousing before the body will drop.</p></div></li>
+  </ol>
+
+  <div class="notice danger">
+    <span class="lab">Order is the whole job</span>
+    <p>The commonest way to get hurt here is to take the bolts out before the cables.
+    A few kilos of starter then drops and hangs on a live main cable — which is both a
+    short and a dropped component, at head height, on your face.</p>
+  </div>
+
+  <h3><span class="on">3.3</span>Refitting</h3>
+  <p>Bolts to torque. B+ nut tight with its insulating boot back over the stud. Trigger
+  wire on. <b>Battery last.</b> If the engine now cranks but the starter whirs without
+  turning it, the pinion is not engaging and the motor is out again — that is a drive
+  fault, not a fitting error, but it is far easier to find before everything else goes
+  back on.</p>
+
+  <div class="tablewrap">
+    <table>
+      <caption>Section 03 — figures</caption>
+      <thead><tr><th>Fastener</th><th>Figure</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Starter flange bolt</td><td class="num muted">—</td><td><span class="tag none">Not established</span></td></tr>
+        <tr><td>Starter B+ terminal nut</td><td class="num muted">—</td><td><span class="tag none">Not established</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ───────────────────────────────── 4 ─ -->
+<section id="s4">
+  <div class="shead"><span class="snum">04</span><h2>Charging system</h2></div>
+  <p class="lede">The alternator is the only part of the car that pays its own way while
+  the engine runs. Everything electrical is running off it, and the battery is a buffer,
+  not a supply.</p>
+
+  <div class="figpair">
+    <figure>
+      <img src="figs/fig_08_alternator.jpg" alt="Alternator mounted in the engine bay on the accessory belt" loading="lazy">
+      <figcaption><b>Fig 4.1</b> The alternator on the belt. Cast alloy clamshells with
+      cooling slots, the windings visible through them, and the regulator pack on the
+      back carrying the output stud.</figcaption>
+    </figure>
+    <figure>
+      <img src="figs/fig_09_alt_cutaway.jpg" alt="Cutaway alternator showing rotor, stator windings and slip rings" loading="lazy">
+      <figcaption><b>Fig 4.2</b> Constructed cutaway. Rotor and field winding inside,
+      three stator phases around the outside, slip rings and brushes at the left-hand end.</figcaption>
+    </figure>
+  </div>
+
+  <h3><span class="on">4.1</span>How it makes DC</h3>
+  <p>The rotor carries a field winding, fed through two slip rings and a pair of carbon
+  brushes. Spin it and its magnetic field sweeps past three stator windings spaced a
+  third of a turn apart, so each one produces an alternating voltage peaking 120° after
+  the last. Six diodes then fold every half-cycle of all three into a single DC line.</p>
+  <p>Two things follow from that, and they are the whole of alternator diagnosis. First,
+  <b>the rotor makes no current</b> — it only carries the magnetism, so worn brushes or an
+  open field winding gives you a machine that spins happily and generates nothing.
+  Second, because six diodes are each filling in part of the waveform, <b>losing one
+  leaves a gap</b>: the DC line still looks roughly right on a meter, but the AC ripple
+  riding on it jumps, and it reaches the battery.</p>
+
+  <h3><span class="on">4.2</span>Testing at the battery</h3>
+  <ol class="steps">
+    <li><div><p><b>Engine off, meter on DC volts across the battery posts.</b> A rested,
+    healthy battery sits a little over 12 volts. Well under that and you are diagnosing a
+    battery, not a charging system.</p></div></li>
+    <li><div><p><b>Start the engine and read the same two points.</b> Charging, it should
+    rise clearly above the rested figure. If it does not move, the alternator is not
+    contributing.</p></div></li>
+    <li><div><p><b>Read the alternator's own output stud to earth.</b> Same as the battery
+    means the machine is making nothing. Higher than the battery by more than a few tenths
+    means the output is being made but not arriving — that is a cable or a connection,
+    not the alternator.</p></div></li>
+    <li><div><p><b>Switch to AC volts and read the output stud.</b> This is the diode test.
+    A healthy machine shows very little AC. A failed diode shows a clear AC component,
+    and you will see a damped version of it at the battery too.</p></div></li>
+  </ol>
+
+  <div class="notice note">
+    <span class="lab">Why the customer says "the battery is nearly new"</span>
+    <p>They are usually right, and it is not the point. An alternator that has stopped
+    charging leaves the car running off the battery until it is flat, so the symptom a
+    driver reports — dim lights at night, a warning lamp, a flat battery in the morning —
+    is a battery symptom produced by a charging fault. Test the charging system before
+    anyone buys a second battery.</p>
+  </div>
+</section>
+
+<!-- ───────────────────────────────── 5 ─ -->
+<section id="s5">
+  <div class="shead"><span class="snum">05</span><h2>Front brakes — pads and discs</h2></div>
+  <p>The discs, calipers and hubs in these figures are the vehicle's own geometry.</p>
+
+  <div class="figpair">
+    <figure>
+      <img src="figs/fig_10_hub.jpg" alt="Front hub with the road wheel removed, disc and caliper in place" loading="lazy">
+      <figcaption><b>Fig 5.1</b> Wheel off. Disc, caliper and carrier as you find them.</figcaption>
+    </figure>
+    <figure>
+      <img src="figs/fig_11_caliper.jpg" alt="Front caliper viewed close up on the disc" loading="lazy">
+      <figcaption><b>Fig 5.2</b> The caliper on its guide bolts. It swings up and off the
+      carrier; the flexible hose stays connected.</figcaption>
+    </figure>
+  </div>
+
+  <h3><span class="on">5.1</span>Procedure</h3>
+  <ol class="steps">
+    <li><div><p><b>Slacken the wheel bolts while the car is on the ground.</b> A wheel that
+    is already in the air turns when you push on the bar.</p></div></li>
+    <li><div><p><b>Raise and support.</b> Axle stands under the manufacturer's lifting
+    points. A trolley jack is for lifting, never for holding.</p></div></li>
+    <li><div><p><b>Wheel off, then look before you touch anything.</b> Hose condition,
+    disc face, the inboard pad you cannot see with the wheel on, and any sign the caliper
+    has been dragging on one side.</p></div></li>
+    <li><div><p><b>Caliper off and supported.</b> Hang it from the spring with a hook or a
+    tie — <b>never leave it hanging on the flexible hose.</b> The hose is a pressure part;
+    stretching it under the weight of a caliper damages it from the inside where you
+    cannot see the damage.</p></div></li>
+    <li><div><p><b>Wind or press the piston back.</b> A rear caliper with an integral
+    handbrake usually has to be wound rather than pressed, and forcing that one damages
+    the mechanism. Watch the brake fluid level while you do it — the fluid has to go
+    somewhere and it goes up the reservoir.</p></div></li>
+    <li><div><p><b>Fit the new pads.</b> Grease only where the instructions for that
+    caliper allow it, typically the slide points. <b>Grease on the friction face destroys
+    braking</b> and must never reach the disc; some pad backs and shims are meant to stay
+    dry.</p></div></li>
+    <li><div><p><b>Measure the disc.</b> The minimum thickness is stamped on the hub.
+    Measure with a micrometer at several points — a vernier reads the worn edge lip and
+    lies to you. Under minimum, replace in axle pairs.</p></div></li>
+    <li><div><p><b>Caliper back on and torqued.</b> These are small fasteners threading
+    into aluminium and they strip easily. Use the torque wrench, not your wrist.</p></div></li>
+    <li><div><p><b>Wheel on, torque in a star.</b> Start every bolt by hand so you cannot
+    cross-thread one. Nip up in a star, lower the car, then torque in a star. Going round
+    the circle can pull the wheel off-square as it seats.</p></div></li>
+    <li><div><p><b>Pump the pedal firm before the car moves.</b> The piston is wound right
+    back and the first press only takes up the gap.</p></div></li>
+  </ol>
+
+  <figure>
+    <img src="figs/fig_12_pads_disc.jpg" alt="Brake pads and disc isolated for inspection" loading="lazy">
+    <figcaption><b>Fig 5.3</b> Pads and disc. The front pads on this car do two to three
+    times the work of the rears — front wheels steer and take most of the braking, which
+    is why the wear rate is so lopsided.</figcaption>
+  </figure>
+
+  <div class="tablewrap">
+    <table>
+      <caption>Section 05 — figures</caption>
+      <thead><tr><th>Fastener</th><th>Figure</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Front caliper guide bolt</td><td class="num">≈ 30 Nm</td><td><span class="tag warn">Typical of class</span></td></tr>
+        <tr><td>Road wheel bolt</td><td class="num">≈ 120 Nm</td><td><span class="tag warn">Typical of class</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ───────────────────────────────── 6 ─ -->
+<section id="s6">
+  <div class="shead"><span class="snum">06</span><h2>Door mirror and door lock</h2></div>
+  <p>Both jobs are worth doing for the same reason: the fasteners are not where a
+  first guess puts them.</p>
+
+  <div class="figpair">
+    <figure>
+      <img src="figs/fig_13_mirror.jpg" alt="Front door mirror seen from outside the car" loading="lazy">
+      <figcaption><b>Fig 6.1</b> The mirror. Four separate shells — painted cap, housing,
+      indicator lens and the chrome insert — and it is real geometry cut from the door.</figcaption>
+    </figure>
+    <figure>
+      <img src="figs/fig_14_lock.jpg" alt="Door lock area in the shut face of the front door" loading="lazy">
+      <figcaption><b>Fig 6.2</b> The lock lives in the <b>shut face</b> of the door, which
+      points rearward — so this view is from behind the open door, not from the side.</figcaption>
+    </figure>
+  </div>
+
+  <h3><span class="on">6.1</span>Mirror</h3>
+  <p>The mount nuts and the electrical connector are <b>inside the door</b>, behind the
+  triangular trim at the front of the glass — not behind the mirror glass. Prising at the
+  mirror glass to find fixings that are not there is how the glass and its heater element
+  get broken, and on a car with power folding there is a motor behind it as well.</p>
+
+  <h3><span class="on">6.2</span>Lock</h3>
+  <p>The latch comes out through an access aperture in the door shell, which means the
+  door card and the moisture barrier come off first. Release the interior handle cable and
+  the exterior handle rod <b>at the latch end</b>, leaving the retainers intact, and
+  unplug the central-locking connector before the latch screws come out.</p>
+  <div class="notice care">
+    <span class="lab">Reseal the barrier</span>
+    <p>The moisture barrier behind the door card is doing a job. Left unsealed or torn, water
+    runs into the door and finds the speaker, the loom and the carpet. The job is not
+    finished until the barrier is back and sealed, and until the door opens from inside
+    and outside, locks and unlocks.</p>
+  </div>
+</section>
+
+<!-- ───────────────────────────────── 7 ─ -->
+<section id="s7">
+  <div class="shead"><span class="snum">07</span><h2>Steering wheel and SRS</h2></div>
+  <p>The cabin in this figure is the vehicle's own — seats, dash, door cards, wheel and
+  eight airbags, all real geometry.</p>
+
+  <figure>
+    <img src="figs/fig_15_steering.jpg" alt="Cabin interior seen through the open driver's door, showing the steering wheel and dashboard" loading="lazy">
+    <figcaption><b>Fig 7.1</b> The driver's side. The wheel carries the driver's airbag
+    module and the clock spring sits behind it on the column.</figcaption>
+  </figure>
+
+  <h3><span class="on">7.1</span>Procedure</h3>
+  <ol class="steps">
+    <li><div><p><b>Look up the procedure</b>, including the stand-down time for this
+    vehicle. This is SRS work and the order is a safety procedure, not a convenience.</p></div></li>
+    <li><div><p><b>Isolate the battery and wait the stated time.</b> See Section 00 for
+    why the wait exists.</p></div></li>
+    <li><div><p><b>Centre the steering and lock it.</b> The clock spring is a coiled ribbon
+    cable that keeps the horn, the wheel controls and an SRS circuit connected while the
+    wheel turns. With the wheel off it can rotate past its travel and tear, and you lose
+    all of those at once — a fault code and a new part.</p></div></li>
+    <li><div><p><b>Release and remove the airbag module.</b> Carry it face up and set it
+    down face up. If a module does fire, one lying face-down launches itself off the
+    bench; face-up, it inflates into the air.</p></div></li>
+    <li><div><p><b>Mark the wheel to the column</b> before the centre bolt comes out.
+    Splines let it go back in more than one position, and one spline out is a wheel that
+    sits crooked on a straight road. That is not an alignment fault and you will not find
+    it by chasing the alignment.</p></div></li>
+    <li><div><p><b>Centre bolt out, wheel off.</b></p></div></li>
+  </ol>
+
+  <div class="notice danger">
+    <span class="lab">The meter stays in your pocket</span>
+    <p>Yellow connectors are a useful hint that you are near SRS wiring, not a reliable
+    way to identify every circuit. Whatever the colour: no ordinary multimeter across an
+    igniter circuit, ever.</p>
+  </div>
+
+  <div class="tablewrap">
+    <table>
+      <caption>Section 07 — figures</caption>
+      <thead><tr><th>Item</th><th>Figure</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Steering wheel centre bolt<br><span style="color:var(--ink3);font-size:13px">Often single-use, and often with an angle stage after the initial torque — both the reuse rule and the angle have to come from the data.</span></td><td class="num muted">—</td><td><span class="tag none">Not established</span></td></tr>
+        <tr><td>SRS stand-down time after isolating</td><td class="num muted">—</td><td><span class="tag none">Not established</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ───────────────────────────────── 8 ─ -->
+<section id="s8">
+  <div class="shead"><span class="snum">08</span><h2>How the engine turns</h2></div>
+  <p>Constructed cutaway, built to the real slider-crank geometry — the pistons and valves
+  in the trainer are driven by the mechanism rather than by a looping animation.</p>
+
+  <figure>
+    <img src="figs/fig_16_fourstroke.jpg" alt="Cutaway four-cylinder engine showing crankshaft, connecting rods, pistons, valves and twin camshafts" loading="lazy">
+    <figcaption><b>Fig 8.1</b> Crankshaft with counterweights and flywheel, I-beam rods,
+    pistons in their bores, valves with their springs, and the two camshafts above.</figcaption>
+  </figure>
+
+  <h3><span class="on">8.1</span>The four strokes</h3>
+  <p><b>Intake.</b> Inlet valve open, piston travelling down, <b>air</b> drawn in. This
+  engine injects its fuel straight into the cylinder at high pressure rather than mixing
+  it on the way in, so the intake stroke draws air and the mixture is made in the
+  cylinder.</p>
+  <p><b>Compression.</b> Both valves shut, piston up, the charge squeezed into a fraction
+  of its volume. That raises pressure and temperature so it burns fast and completely,
+  which is where the efficiency comes from — a controlled quick burn, not a violent one.
+  Detonation is the failure, not the aim.</p>
+  <p><b>Power.</b> Spark near the top, the gas expands and drives the piston down. It is
+  the only stroke in <em>this</em> cylinder that pays; the other three are carried by the
+  flywheel's stored energy and by whichever other cylinder is firing.</p>
+  <p><b>Exhaust.</b> Exhaust valve open, piston up, burnt gas pushed out.</p>
+
+  <h3><span class="on">8.2</span>Three consequences worth knowing</h3>
+  <p><b>Two crank turns per cycle, so the cams run at half crank speed.</b> Get the cam
+  timing wrong and a valve can still be open when a piston arrives. Timing is set to the
+  marks and checked — never eyeballed.</p>
+  <p><b>Firing order 1-3-4-2.</b> Pistons 1 and 4 rise and fall together, as do 2 and 3,
+  but each pair sits 360° apart in the cycle — so when one is firing, its twin is drawing
+  in. That is what spreads the power pulses evenly and stops the engine shaking itself
+  apart.</p>
+  <p><b>Valve overlap.</b> Near the top of the exhaust stroke both valves are briefly open
+  at once. The outgoing exhaust helps pull the next charge in, which is a large part of
+  why an engine breathes better at some speeds than others.</p>
+</section>
+
+<!-- ───────────────────────────────── 9 ─ -->
+<section id="s9">
+  <div class="shead"><span class="snum">09</span><h2>Part numbers</h2></div>
+  <p>From our own parts data rather than the manufacturer's system. The <b>prefix carries
+  the generation</b>, and it is the first thing to check: a part that fits the shape can
+  still be for a different car.</p>
+
+  <div class="tablewrap">
+    <table>
+      <caption>Body panels — Mk8</caption>
+      <thead><tr><th>Part</th><th>Number</th><th>Years</th><th>Fits</th></tr></thead>
+      <tbody>
+        <tr><td>Bonnet</td><td class="pn">5H0 823 031</td><td class="num">2019–2026</td><td><span class="tag gen">This generation</span></td></tr>
+        <tr><td>Front wing, left</td><td class="pn">5H0 953 051</td><td class="num">2019–2026</td><td><span class="tag gen">This generation</span></td></tr>
+        <tr><td>Front wing, right</td><td class="pn">5H0 953 052</td><td class="num">2019–2026</td><td><span class="tag gen">This generation</span></td></tr>
+        <tr><td>Front bumper cover</td><td class="pn">5H0 807 221</td><td class="num">2019–2026</td><td><span class="tag gen">This generation</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tablewrap">
+    <table>
+      <caption>Nearest matches only — not this generation</caption>
+      <thead><tr><th>Part</th><th>Number</th><th>Years</th><th>Fits</th></tr></thead>
+      <tbody>
+        <tr><td>Front brake pad set, GTI</td><td class="pn">5G0 698 151 B</td><td class="num">2013–2020</td><td><span class="tag warn">Mk7</span></td></tr>
+        <tr><td>Front discs, vented 312 mm</td><td class="pn">5Q0 615 301 H</td><td class="num">2012–2022</td><td><span class="tag warn">Mk7</span></td></tr>
+        <tr><td>Front door lock mechanism, right</td><td class="pn">5K0 837 016 F</td><td class="num">2008–2013</td><td><span class="tag none">Earlier Golf</span></td></tr>
+        <tr><td>Door mirror, left</td><td class="pn">1K1 857 507 C</td><td class="num">2003–2014</td><td><span class="tag none">Earlier Golf</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="notice note">
+    <span class="lab">Why the brake parts are not Mk8 numbers</span>
+    <p>The newest front pad set our parts data holds for a Golf GTI is a Mk7 part. It is
+    printed here as the nearest match so you can see what the family looks like — it is
+    not the answer for the car in front of you, and the table says so rather than quietly
+    letting it pass as the answer. Check any number against the VIN before ordering.</p>
+  </div>
+</section>
+
+<!-- ───────────────────────────────── 10 ─ -->
+<section id="s10">
+  <div class="shead"><span class="snum">10</span><h2>Figures still to be established</h2></div>
+  <p>This is the honest list. Every row is a number a trainee could act on, that this
+  manual does not have, and that has deliberately not been filled with a plausible guess.</p>
+
+  <div class="tablewrap">
+    <table>
+      <caption>Open items</caption>
+      <thead><tr><th>Item</th><th>Section</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Starter flange bolt torque</td><td class="num">03</td><td><span class="tag none">Not established</span></td></tr>
+        <tr><td>Starter B+ terminal nut torque</td><td class="num">03</td><td><span class="tag none">Not established</span></td></tr>
+        <tr><td>Alternator pulley nut torque</td><td class="num">04</td><td><span class="tag none">Not established</span></td></tr>
+        <tr><td>Bonnet hinge bolt torque</td><td class="num">02</td><td><span class="tag none">Not established</span></td></tr>
+        <tr><td>Steering wheel centre bolt torque and angle</td><td class="num">07</td><td><span class="tag none">Not established</span></td></tr>
+        <tr><td>SRS stand-down time</td><td class="num">07</td><td><span class="tag none">Not established</span></td></tr>
+        <tr><td>Front caliper guide bolt torque</td><td class="num">05</td><td><span class="tag warn">Typical of class only</span></td></tr>
+        <tr><td>Road wheel bolt torque</td><td class="num">05</td><td><span class="tag warn">Typical of class only</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>The parts database behind Section 09 holds <b>no torque figures at all</b> — it is a
+  parts catalogue, not a repair manual. Filling this table needs the vehicle data, and
+  when it arrives each row becomes a figure with <span class="tag ok">Workshop data</span>
+  against it.</p>
+</section>
+
+<footer>
+  <p><b>Strip Bay Workshop Manual</b>, Issue 1. Companion to the Strip Bay interactive
+  trainer. Illustrations rendered from the trainer's own vehicle model; the engine bay,
+  starter, alternator cutaway and four-stroke cutaway are constructed teaching geometry
+  and are described as such in the text.</p>
+  <p style="margin-top:10px">Procedures here describe the general method and the order
+  that keeps you safe. <b>The workshop data for the vehicle in front of you governs</b> —
+  every time, including where this manual and that data disagree.</p>
+</footer>
+
+</div>
