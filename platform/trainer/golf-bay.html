@@ -104,8 +104,9 @@ nav#tabs::-webkit-scrollbar{display:none}
 
 #work{display:grid;grid-template-columns:minmax(0,1fr) 348px;min-height:0;min-width:0}
 #work > *{min-width:0}
+/* Fixed dark studio backdrop — deliberately NOT themed, see applyBg(). */
 #stage{position:relative;min-width:0;background:
-  radial-gradient(120% 90% at 50% 6%, color-mix(in srgb,var(--panel2) 65%,transparent), transparent 68%), var(--bay)}
+  radial-gradient(115% 80% at 50% 0%, #1b2430 0%, #11161e 45%, #080a0e 100%)}
 #stage canvas{display:block;width:100%;height:100%}
 #bench-stage{position:absolute;inset:0;overflow:auto;padding:16px}
 aside{border-left:1px solid var(--line);background:var(--panel);overflow-y:auto;
@@ -349,8 +350,44 @@ const canvas = document.getElementById('c');
 const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
 renderer.setPixelRatio(Math.min(devicePixelRatio,2));
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.08;
+/* CONTACT SHADOWS. Without them the car floats on the floor and everything
+   reads flat — the single biggest reason the owner said "the car look
+   faded". Soft PCF, one shadow-casting key light, tight ortho frustum so
+   the limited map resolution is spent on the car and not on empty floor. */
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 const pmrem = new THREE.PMREMGenerator(renderer);
-const envRT = pmrem.fromScene(new RoomEnvironment(), 0.04);
+
+/* ── STUDIO ENVIRONMENT ───────────────────────────────────────────────
+   RoomEnvironment is a neutral grey box: it lights everything evenly from
+   everywhere, which is exactly what makes car paint look like matte
+   plastic. What gives a car render its look is BRIGHT SOURCES ON A DARK
+   ROOM — long specular streaks along the flanks and a hard edge on the
+   shoulder line. So the environment is built here: a dark shell with one
+   big overhead softbox, two tall side strips down each flank, and a dim
+   warm bounce low down. Same trick a photographer uses on a real car. */
+function studioEnv(){
+  const s = new THREE.Scene();
+  s.background = new THREE.Color(0x05070a);
+  const lamp = (w,h,d,x,y,z,c,i)=>{
+    const m = new THREE.Mesh(new THREE.BoxGeometry(w,h,d),
+      new THREE.MeshBasicMaterial({color:c}));
+    m.material.color.multiplyScalar(i); m.position.set(x,y,z); s.add(m);
+  };
+  /* the room: dark, so reflections have somewhere black to fall */
+  const shell = new THREE.Mesh(new THREE.BoxGeometry(32,18,32),
+    new THREE.MeshBasicMaterial({color:0x0b0f14, side:THREE.BackSide}));
+  s.add(shell);
+  lamp(16,.4,10,  0, 8.6,  0, 0xffffff, 5.4);   /* overhead softbox */
+  lamp(.4,5.5,20, 11, 4.2,  0, 0xfff3e2, 3.4);  /* right flank strip */
+  lamp(.4,5.5,20,-11, 4.2,  0, 0xe8f1ff, 2.9);  /* left flank strip */
+  lamp(9,.4,.4,   0, 1.1,  12, 0xffffff, 1.5);  /* front kicker */
+  lamp(9,.4,.4,   0, 1.1, -12, 0xdfe8f5, 1.1);  /* rear rim light */
+  lamp(20,.4,20,  0,-3.0,  0, 0x2a2f38, 1.0);   /* dim floor bounce */
+  return s;
+}
+const envRT = pmrem.fromScene(studioEnv(), 0.035);
 
 const sceneCar = new THREE.Scene(), sceneRig = new THREE.Scene();
 sceneCar.environment = envRT.texture; sceneRig.environment = envRT.texture;
@@ -360,16 +397,33 @@ const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true; controls.dampingFactor = .07;
 controls.target.set(0,.72,0); controls.minDistance = .35; controls.maxDistance = 24;
 controls.maxPolarAngle = Math.PI*.495;
+/* Lighting now sits UNDER the environment rather than replacing it: a hard
+   key for the shadow and the shoulder highlight, a cool low fill so the
+   dark side is not black, and almost no ambient — ambient light is what
+   flattens a render. */
 for (const s of [sceneCar, sceneRig]){
-  const k = new THREE.DirectionalLight(0xffffff,2.1); k.position.set(4,7,5);
-  const f = new THREE.DirectionalLight(0xbfd4ff,.75); f.position.set(-6,3,-4);
-  s.add(k,f,new THREE.AmbientLight(0xffffff,.28));
+  const k = new THREE.DirectionalLight(0xffffff, 2.3); k.position.set(4.5,7.5,5.5);
+  k.castShadow = true;
+  k.shadow.mapSize.set(2048,2048);
+  const d = 4.2;                          /* tight around a 4.3m car */
+  Object.assign(k.shadow.camera,{left:-d,right:d,top:d,bottom:-d,near:.5,far:26});
+  k.shadow.bias = -0.0012; k.shadow.normalBias = 0.02;
+  const f = new THREE.DirectionalLight(0xbfd4ff,.42); f.position.set(-6,2.4,-4);
+  const r = new THREE.DirectionalLight(0xffe9cf,.55); r.position.set(-2,1.6,-7);
+  s.add(k,f,r,new THREE.AmbientLight(0xffffff,.10));
 }
-const floorMat = new THREE.MeshStandardMaterial({color:0x11151b,roughness:.95});
-const floor = new THREE.Mesh(new THREE.CircleGeometry(9,72), floorMat);
-floor.rotation.x = -Math.PI/2; floor.position.y = -.002; sceneCar.add(floor);
+/* A dark, slightly glossy floor. Matte near-black read as a flat void; a
+   little reflectivity puts the car's own colour back under it, which is
+   what makes a studio shot feel like a studio. */
+const floorMat = new THREE.MeshStandardMaterial({color:0x0a0d12,roughness:.42,metalness:.30});
+const floor = new THREE.Mesh(new THREE.CircleGeometry(11,80), floorMat);
+floor.rotation.x = -Math.PI/2; floor.position.y = -.002; floor.receiveShadow = true;
+sceneCar.add(floor);
+const rigFloor = new THREE.Mesh(new THREE.CircleGeometry(4,64), floorMat);
+rigFloor.rotation.x = -Math.PI/2; rigFloor.position.y = -.06; rigFloor.receiveShadow = true;
+sceneRig.add(rigFloor);
 const grid = new THREE.GridHelper(18,36,0x2c3541,0x1f2732);
-grid.material.transparent = true; grid.material.opacity = .55; grid.position.y = .001;
+grid.material.transparent = true; grid.material.opacity = .30; grid.position.y = .001;
 sceneCar.add(grid);
 /* plinth for the constructed assemblies — their own demos sit on one */
 const plinth = new THREE.Mesh(new THREE.BoxGeometry(2.4,.05,1.8),
@@ -451,6 +505,18 @@ function buildCar(root){
        an x-ray on the body would silently change every door too. */
     if (o.material) o.material = o.material.clone();
     o.userData.partId = classify(o.name || o.parent?.name || '');
+    /* shadows, and a little more environment in the paint. The GLB's own
+       material values are untouched apart from envMapIntensity, which is a
+       RENDER setting rather than an asset property — it controls how much
+       of the studio the surface reflects, and at 1.0 against a dark studio
+       the body read flat. Glass is left alone so it keeps refracting.
+       NOTE partId must be classified BEFORE this runs, or the glazing test
+       reads undefined and the windows get boosted too. */
+    o.castShadow = true; o.receiveShadow = true;
+    if (o.material && o.material.envMapIntensity !== undefined
+        && o.userData.partId !== 'glazing'){
+      o.material.envMapIntensity = 1.45;
+    }
     (by[o.userData.partId] ||= []).push(o);
     if (o.material) o.userData.m0 = {transparent:o.material.transparent,
       opacity:o.material.opacity, depthWrite:o.material.depthWrite};
@@ -481,7 +547,7 @@ function buildCar(root){
   buildDoorRig();
   if (!parts.panel_bonnet) console.error('Strip Bay: panel_bonnet not found — '+
     'the cut panel did not classify. Bonnet off bay will have nothing to act on.');
-  buildBonnetRig(); buildBayEngine();
+  buildBonnetRig(); buildBayEngine(); buildDiagRig();
   carReady = true; window.__carReady = true;   /* a harness can wait on the truth */
   buildPads(); setMode(MODE);
 }
@@ -627,6 +693,25 @@ canvas.addEventListener('pointerdown', e => {
   /* the check strap is REAL geometry — clicking the actual part releases it */
   if (!fix && /Limiter/i.test(h.object.name||'')) fix='strap';
   if (fix) doorAct(fix);
+});
+/* Diagnose bay: tap a probe point ON THE CAR. The panel's lists do the same
+   thing for a phone, but the whole point of this bay is that the points are
+   on the components, not on a schematic. */
+canvas.addEventListener('pointerdown', e => {
+  if (MODE!=='diag' || !carReady) return;
+  const r=canvas.getBoundingClientRect();
+  ptr.set((e.clientX-r.left)/r.width*2-1, -((e.clientY-r.top)/r.height*2-1));
+  ray.setFromCamera(ptr,camera);
+  const h=ray.intersectObjects([diagRig,bayAsm],true).find(x=>x.object.visible);
+  if (!h) return;
+  let o=h.object, tp=null;
+  while(o && !tp){ tp=o.userData?.tp; o=o.parent; }
+  if (!tp) return;
+  /* shift/right-click places the BLACK probe; a plain tap places the red,
+     and tapping the point the red is already on moves the black there —
+     so it works with one finger and no modifier */
+  if (e.shiftKey || e.button===2 || DIAG.red===tp) DIAG.black=tp; else DIAG.red=tp;
+  paintDiagRig(); drawPanel();
 });
 canvas.addEventListener('pointerdown', e => {
   if (MODE!=='bonnetOff' || !carReady) return;
@@ -1031,22 +1116,79 @@ function buildBayEngine(){
   const add=(m,g,x,y,z,grp)=>{const o=new THREE.Mesh(g,m);o.position.set(x,y,z);
     (grp||bayAsm).add(o);return o};
 
-  /* block + sump, transverse: long axis on X, which is the car's width */
-  add(cast,new THREE.BoxGeometry(.62,.28,.34),0,.54,1.52);
-  add(cast,new THREE.BoxGeometry(.50,.14,.28),0,.37,1.52);
-  /* head + cam cover */
-  add(cast,new THREE.BoxGeometry(.60,.10,.30),0,.73,1.52);
-  add(plastic,new THREE.BoxGeometry(.58,.09,.26),0,.82,1.51);
-  /* intake manifold and its runners, on the bulkhead side */
-  add(plastic,new THREE.BoxGeometry(.46,.13,.13),0,.74,1.32);
+  /* A corrugated hose along a curve. Straight cylinders were most of why
+     the bay read as "boxes in a hole" — a real bay is mostly curved rubber
+     and loom, and one tube along a spline does more for realism than any
+     amount of extra boxes. */
+  const hose=(pts,r0,mat,seg=28)=>{
+    const c=new THREE.CatmullRomCurve3(pts.map(p=>new THREE.Vector3(...p)));
+    return add(mat,new THREE.TubeGeometry(c,seg,r0,12,false),0,0,0);
+  };
+  const ribbed=(pts,r0,mat,n=9)=>{           /* hose + rings = convoluted duct */
+    const c=new THREE.CatmullRomCurve3(pts.map(p=>new THREE.Vector3(...p)));
+    add(mat,new THREE.TubeGeometry(c,30,r0,12,false),0,0,0);
+    for (let i=1;i<n;i++){
+      const t=i/n, p=c.getPointAt(t), tan=c.getTangentAt(t);
+      const ring=new THREE.Mesh(new THREE.TorusGeometry(r0*1.16,r0*.20,6,14),mat);
+      ring.position.copy(p);
+      ring.quaternion.setFromUnitVectors(new THREE.Vector3(0,0,1),tan);
+      bayAsm.add(ring);
+    }
+  };
+
+  /* block + sump, transverse: long axis on X, which is the car's width.
+     Chamfered with a second, slightly smaller box on top so the silhouette
+     is not one hard slab. */
+  add(cast,new THREE.BoxGeometry(.62,.26,.34),0,.53,1.52);
+  add(cast,new THREE.BoxGeometry(.56,.05,.30),0,.665,1.52);
+  add(cast,new THREE.BoxGeometry(.50,.13,.28),0,.375,1.52);
+  /* head, then a RIBBED cam cover: ten cast ribs across it, an oil cap and
+     a dipstick. This is the part you actually look at with the bonnet up. */
+  add(cast,new THREE.BoxGeometry(.60,.085,.30),0,.735,1.52);
+  add(M(0x2b3038,{roughness:.55,metalness:.25}),new THREE.BoxGeometry(.58,.075,.27),0,.815,1.515);
+  for (let i=0;i<10;i++)
+    add(M(0x32383f,{roughness:.5,metalness:.3}),
+      new THREE.BoxGeometry(.030,.022,.245),-.245+i*.054,.858,1.515);
+  bP.oilCap=add(M(0xE0B33A,{roughness:.45,metalness:.35}),
+    new THREE.CylinderGeometry(.033,.033,.026,18),-.20,.872,1.44);
+  add(M(0xE0B33A,{roughness:.5,metalness:.3}),
+    new THREE.TorusGeometry(.017,.006,8,16),.13,.845,1.40).rotation.x=Math.PI/2;
+  add(alu,new THREE.CylinderGeometry(.005,.005,.13,8),.13,.79,1.40);
+  /* intake manifold: a plenum with four CURVED runners sweeping into the
+     head, not four straight pins */
+  add(M(0x2a2f36,{roughness:.7,metalness:.1}),new THREE.BoxGeometry(.44,.115,.125),0,.755,1.315);
   for (let i=0;i<4;i++){
-    const r=add(plastic,new THREE.CylinderGeometry(.031,.031,.17,12),-.21+i*.14,.76,1.41);
-    r.rotation.x=Math.PI/2.3;
+    const x=-.21+i*.14;
+    hose([[x,.755,1.375],[x,.80,1.43],[x,.775,1.475]],.030,
+      M(0x2a2f36,{roughness:.7,metalness:.1}),14);
   }
-  /* airbox + intake pipe */
-  add(plastic,new THREE.BoxGeometry(.30,.16,.24),-.36,.72,1.82);
-  const pipe=add(rubber,new THREE.CylinderGeometry(.045,.045,.30,14),-.17,.76,1.74);
-  pipe.rotation.z=Math.PI/2.6; pipe.rotation.y=-.5;
+  /* airbox with a lid seam and a CONVOLUTED intake duct into the throttle */
+  add(M(0x23282f,{roughness:.8,metalness:.06}),new THREE.BoxGeometry(.30,.11,.24),-.36,.695,1.82);
+  add(M(0x2c323a,{roughness:.7,metalness:.08}),new THREE.BoxGeometry(.305,.045,.245),-.36,.772,1.82);
+  ribbed([[-.22,.775,1.80],[-.12,.80,1.70],[-.04,.79,1.56],[.02,.775,1.44]],.048,
+    M(0x191d22,{roughness:.9,metalness:.03}),8);
+  /* turbo + its oily plumbing, low on the exhaust side — this is a GTI */
+  bP.turbo=add(M(0x5c636c,{roughness:.62,metalness:.6}),
+    new THREE.SphereGeometry(.072,18,14),-.05,.455,1.66);
+  add(M(0x5c636c,{roughness:.62,metalness:.6}),
+    new THREE.TorusGeometry(.055,.028,10,20),-.05,.455,1.72).rotation.y=Math.PI/2;
+  ribbed([[.02,.45,1.70],[.18,.50,1.78],[.30,.58,1.80]],.036,
+    M(0x8d949d,{roughness:.45,metalness:.7}),6);
+  /* coolant hoses to the radiator, and the rad itself at the nose */
+  hose([[.24,.60,1.44],[.38,.60,1.60],[.42,.55,1.88]],.026,
+    M(0x14171b,{roughness:.9,metalness:.04}));
+  hose([[-.24,.50,1.48],[-.38,.46,1.68],[-.40,.44,1.90]],.024,
+    M(0x14171b,{roughness:.9,metalness:.04}));
+  add(M(0x30363d,{roughness:.6,metalness:.5}),new THREE.BoxGeometry(.80,.24,.035),0,.50,1.98);
+  for (let i=0;i<16;i++)
+    add(M(0x3a4148,{roughness:.55,metalness:.6}),
+      new THREE.BoxGeometry(.010,.225,.050),-.375+i*.050,.50,1.985);
+  /* engine loom: a fat black trunk with branches, the thing that actually
+     dominates the top of a modern bay */
+  hose([[-.30,.885,1.30],[-.10,.90,1.34],[.14,.89,1.32],[.30,.86,1.36]],.019,
+    M(0x0f1215,{roughness:.92,metalness:.03}));
+  hose([[.30,.86,1.36],[.34,.82,1.50],[.33,.78,1.66]],.013,
+    M(0x0f1215,{roughness:.92,metalness:.03}));
   /* crank pulley and the belt run — the alternator is DRIVEN from here */
   bP.crankPulley=add(alu,new THREE.CylinderGeometry(.085,.085,.035,24),.34,.45,1.62);
   bP.crankPulley.rotation.z=Math.PI/2;
@@ -1065,13 +1207,66 @@ function buildBayEngine(){
   const belt=new THREE.Mesh(new THREE.TorusGeometry(.135,.010,8,40),rubber);
   belt.position.set(.345,.575,1.67); belt.rotation.y=Math.PI/2; belt.scale.set(1,.92,1);
   bayAsm.add(belt);
-  /* battery, coolant bottle, strut tops — the furniture that makes the bay
-     read as a bay rather than a floating engine */
-  add(plastic,new THREE.BoxGeometry(.26,.21,.19),-.36,.60,1.28);
-  add(red,new THREE.CylinderGeometry(.013,.013,.022,10),-.27,.715,1.23);
-  add(plastic,new THREE.CylinderGeometry(.013,.013,.022,10),-.45,.715,1.23);
-  add(translucent,new THREE.CylinderGeometry(.070,.070,.20,18),.44,.62,1.30);
-  for (const x of [-.52,.52]) add(cast,new THREE.CylinderGeometry(.085,.085,.10,18),x,.68,1.42);
+  /* BATTERY with a proper case, vent strip, two posts and their CLAMPS —
+     the clamp is what a trainee puts a spanner on, so it has to be there */
+  add(M(0x181c21,{roughness:.85,metalness:.05}),new THREE.BoxGeometry(.26,.19,.19),-.36,.595,1.28);
+  add(M(0x22272e,{roughness:.7,metalness:.08}),new THREE.BoxGeometry(.265,.022,.195),-.36,.70,1.28);
+  add(M(0x2c323a,{roughness:.6,metalness:.1}),new THREE.BoxGeometry(.19,.014,.035),-.36,.716,1.28);
+  bP.batPos=add(red,new THREE.CylinderGeometry(.016,.016,.030,12),-.27,.722,1.23);
+  bP.batNeg=add(M(0x14171b,{roughness:.8,metalness:.1}),
+    new THREE.CylinderGeometry(.016,.016,.030,12),-.45,.722,1.23);
+  for (const [x,c] of [[-.27,0xB3202B],[-.45,0x1b1f24]]){
+    add(M(c,{roughness:.45,metalness:.55}),new THREE.TorusGeometry(.022,.008,8,16),x,.730,1.23)
+      .rotation.x=Math.PI/2;
+  }
+  /* battery leads away to the fuse box and the block earth */
+  hose([[-.27,.735,1.23],[-.40,.775,1.30],[-.50,.772,1.40]],.013,
+    M(0x8e1f26,{roughness:.85,metalness:.05}));
+  hose([[-.45,.735,1.23],[-.40,.60,1.28],[-.32,.48,1.32]],.012,
+    M(0x11141a,{roughness:.9,metalness:.05}));
+  /* coolant bottle with a cap, and the strut tops */
+  add(translucent,new THREE.CylinderGeometry(.070,.070,.19,20),.44,.615,1.30);
+  add(M(0x1c2026,{roughness:.7,metalness:.1}),
+    new THREE.CylinderGeometry(.036,.036,.026,16),.44,.722,1.30);
+  for (const x of [-.52,.52]){
+    add(cast,new THREE.CylinderGeometry(.085,.085,.09,20),x,.675,1.42);
+    add(M(0x8d949d,{roughness:.4,metalness:.8}),
+      new THREE.TorusGeometry(.062,.010,8,20),x,.722,1.42).rotation.x=Math.PI/2;
+    for (let i=0;i<3;i++){    /* strut-top nuts */
+      const a=i/3*Math.PI*2;
+      add(alu,new THREE.CylinderGeometry(.011,.011,.014,6),
+        x+Math.cos(a)*.062,.726,1.42+Math.sin(a)*.062);
+    }
+  }
+
+  /* ── the parts a diagnosis actually touches ──────────────────────────
+     Each one carries userData.tp, which is what the Diagnose bay probes.
+     They are placed where the real thing lives on a transverse four:
+     earth strap block-to-body, fuse box beside the battery, coolant
+     sensor in the head, crank sensor low on the block, coils on the cam
+     cover. Constructed, like the rest of the bay. */
+  const braid=M(0x3d434b,{roughness:.85,metalness:.4});
+  bP.earth=add(braid,new THREE.BoxGeometry(.19,.014,.030),-.30,.455,1.33);
+  bP.earth.rotation.z=.30;
+  add(plastic,new THREE.BoxGeometry(.15,.11,.13),-.53,.70,1.44);      /* fuse box */
+  bP.fuse=add(M(0xC9902A,{roughness:.6,metalness:.2}),
+    new THREE.BoxGeometry(.030,.034,.014),-.53,.762,1.44);
+  bP.relay=add(plastic,new THREE.BoxGeometry(.040,.042,.040),-.47,.762,1.40);
+  bP.ect=add(M(0xB08A3E,{metalness:.85,roughness:.35}),
+    new THREE.CylinderGeometry(.016,.016,.055,12),.26,.72,1.40);
+  bP.ect.rotation.x=Math.PI/2.2;
+  bP.ckp=add(plastic,new THREE.BoxGeometry(.045,.040,.055),-.16,.415,1.38);
+  bP.coil=new THREE.Group(); bayAsm.add(bP.coil);
+  for (let i=0;i<4;i++){
+    const c=new THREE.Mesh(new THREE.BoxGeometry(.045,.075,.045),plastic);
+    c.position.set(-.21+i*.14,.90,1.51); bP.coil.add(c);
+  }
+  bP.coil.children[0].userData={tp:'coil1'};
+  bP.batPos.userData={tp:'bat_pos'};  bP.batNeg.userData={tp:'bat_neg'};
+  bP.earth.userData={tp:'earth'};     bP.fuse.userData={tp:'fuse'};
+  bP.relay.userData={tp:'relay'};     bP.ect.userData={tp:'ect'};
+  bP.ckp.userData={tp:'ckp'};
+  bP.alt.userData={bay:'alt', tp:'alt_b'};
   bayAsm.visible=false; carRoot.add(bayAsm);
 }
 
@@ -1219,6 +1414,187 @@ function alternatorTick(dt){
   });
 }
 buildAlternator();     /* after its own declarations — see the note above */
+
+/* ═════════════════════════════════════════════════════════════════════
+   DIAGNOSE — test real points on the car and find the fault yourself
+
+   Modelled on what Electude's engine-management simulator actually does,
+   because the owner asked for it by name: you get a WORK ORDER with the
+   customer's words and no fault name, you put meter probes on component
+   pins, you read a scan tool, you decide, you replace ONE part, and you
+   verify. It scores efficiency (parts replaced) and tidiness (connectors
+   back on, codes cleared) — which is also the answer to the review that
+   said a stop counter is not an assessment.
+
+   THE ARITHMETIC IS A MODEL AND SAYS SO. One battery internal
+   resistance, one earth resistance, one load current per state. It is
+   built so the readings stay CONSISTENT with each other: a corroded
+   earth shows up as a volt drop across the strap AND a low voltage at
+   the starter AND a slow crank, because they are all computed from the
+   same resistance. Numbers are typical, not this car's data.
+   ═══════════════════════════════════════════════════════════════════ */
+const DTP = {
+  bat_pos:{l:'Battery positive post',   p:[-.27,.735,1.23]},
+  bat_neg:{l:'Battery negative post',   p:[-.45,.735,1.23]},
+  block  :{l:'Engine block (earth)',    p:[ .02,.700,1.52]},
+  earth  :{l:'Engine earth strap',      p:[-.30,.462,1.33]},
+  fuse   :{l:'Main fuse — output side', p:[-.53,.782,1.44]},
+  relay  :{l:'Relay — coil terminals',  p:[-.47,.786,1.40]},
+  alt_b  :{l:'Alternator B+ stud',      p:[ .30,.782,1.72]},
+  ect    :{l:'Coolant sensor connector',p:[ .26,.740,1.40]},
+  ckp    :{l:'Crank sensor connector',  p:[-.16,.440,1.38]},
+  coil1  :{l:'Ignition coil 1',         p:[-.21,.945,1.51]}};
+
+const DCASES = [
+ {id:'alt_brush', part:'alternator',
+  order:'"The battery light comes on while I am driving and the headlights go dim at night. The battery is nearly new."',
+  dtc:['P0562 — System voltage low'],
+  why:'Worn brushes / open field winding. The rotor spins but carries no magnetism, so the machine generates nothing however fast it turns. Everything runs off the battery until it is flat.',
+  tell:'Engine running and the alternator B+ stud reads the SAME as the battery — about 12.4 V, not 14.4 V. No output, and no AC ripple either, because nothing is being rectified.'},
+ {id:'diode', part:'alternator',
+  order:'"It charges, but the battery keeps going flat and the lights flicker at idle with the heater on."',
+  dtc:[],
+  why:'One open rectifier diode. Two thirds of the output survives, so the voltage looks plausible until the load goes up — and the AC ripple on the DC line jumps.',
+  tell:'Running voltage a little low (about 13.4 V) and AC on the B+ stud around 2.6 V where it should be a few tenths. Output capability falls by roughly a third, so it fails under load and passes at idle with nothing switched on.'},
+ {id:'earth', part:'earth strap',
+  order:'"It turns over slowly and the dash lights go dim when I crank it. Sometimes it will not start at all."',
+  dtc:[],
+  why:'Corroded engine earth strap. The return path has resistance, so every amp the starter draws is turned into heat in that joint instead of torque at the flywheel.',
+  tell:'Volt drop from battery negative post to the engine block while cranking — a good earth is under about 0.2 V, this reads volts. Battery voltage itself holds up better than the starter feed does, which is the giveaway that the fault is in the RETURN, not the battery.'},
+ {id:'battery', part:'battery',
+  order:'"It clicks once and will not turn over in the morning. Jump start it and it runs fine all day."',
+  dtc:[],
+  why:'Battery failed — high internal resistance. It reads almost normal at rest and collapses the moment the starter loads it.',
+  tell:'Rest voltage a little low (about 12.1 V) and it COLLAPSES under crank, well below 10 V, while the earth strap drop stays small. Voltage that falls apart under load with good connections is a battery.'},
+ {id:'ckp', part:'crank sensor',
+  order:'"It cranks and cranks and will not fire. It cut out while I was driving and has not started since."',
+  dtc:['P0335 — Crankshaft position sensor circuit'],
+  why:'Crank sensor failed. No position signal means the ECU does not know where the engine is, so it will not inject or spark at all.',
+  tell:'Cranks at normal speed with healthy battery voltage and a stored crank-sensor code — and the scope on the sensor connector shows a FLAT LINE while cranking where there should be a pattern.'},
+ {id:'fuse', part:'fuse',
+  order:'"Everything was fine, then it just stopped. It turns over but will not start."',
+  dtc:['P0230 — Fuel pump primary circuit'],
+  why:'Blown main fuse in the pump feed. Note that a fuse does not blow for no reason — find the reason before you fit another one.',
+  tell:'Zero volts on the output side of the fuse with the ignition on, and the fuse reads open circuit on the resistance range with the key off.'}];
+
+const DIAG = {caseIdx:0, fault:'alt_brush', state:'ign', mode:'Vdc',
+  red:'bat_pos', black:'bat_neg', dtcRead:false, cleared:false,
+  replaced:[], disconnected:{}, verdict:null, solved:false, scope:false, log:[]};
+function diagNew(i){
+  const c = DCASES[(i===undefined) ? Math.floor(Math.random()*DCASES.length) : i];
+  Object.assign(DIAG,{caseIdx:DCASES.indexOf(c), fault:c.id, state:'ign', mode:'Vdc',
+    red:'bat_pos', black:'bat_neg', dtcRead:false, cleared:false, replaced:[],
+    disconnected:{}, verdict:null, solved:false, scope:false, log:[]});
+}
+/* one physical model, so every reading agrees with every other reading */
+function diagPhys(){
+  const fixed = k => DIAG.replaced.includes(DCASES.find(c=>c.id===k)?.part);
+  const bad = k => DIAG.fault===k && !fixed(k);
+  const st = DIAG.state;
+  const voc   = bad('battery') ? 12.09 : 12.62;
+  const rint  = bad('battery') ? 0.018 : 0.008;
+  const rEarth= bad('earth')   ? 0.012 : 0.0004;
+  const rStart= 0.028;                        /* starter winding */
+  /* SOLVE the cranking current from the circuit — do not assume it.
+     Hard-coding it broke the physics in a way that inverted the whole
+     lesson: a corroded earth RAISES total resistance, so LESS current
+     flows, so the battery sags LESS while the volts appear across the
+     bad joint. With a fixed current the battery looked worse than a
+     healthy car's and the teaching note was contradicted by its own
+     numbers. Caught by testing each fault against its own claim. */
+  const I = st==='crank' ? voc/(rStart+rint+rEarth)
+          : st==='run'   ? 34 : st==='ign' ? 9 : 0;
+  const vbat  = Math.max(5.5, voc - I*rint);
+  const drop  = I*rEarth;                     /* across the earth strap */
+  const feed  = vbat - drop;                  /* what the starter really sees */
+  const spins = st==='crank' && feed > 9.2;
+  /* will it actually run? a no-spark / no-fuel fault cranks and never fires */
+  const runnable = !bad('ckp') && !bad('fuse') && (bad('battery') ? false : true);
+  const running = st==='run';
+  const altOut = !running ? vbat
+    : bad('alt_brush') ? vbat
+    : bad('diode')     ? 13.38 : 14.42;
+  const ripple = !running ? 0 : bad('alt_brush') ? 0 : bad('diode') ? 2.61 : 0.27;
+  return {vbat,drop,feed,I,spins,runnable,running,altOut,ripple,
+          bad,st,lamp: running && altOut < 13.2};
+}
+/* what the meter says between the two probes, on the selected range */
+function diagRead(){
+  const m=diagPhys(), r=DIAG.red, b=DIAG.black, pair=new Set([r,b]);
+  const has=(x,y)=>pair.has(x)&&pair.has(y);
+  const dis=k=>DIAG.disconnected[k];
+  if (DIAG.mode==='ohm'){
+    if (m.st!=='off') return {v:'---',u:'Ω',n:'Resistance with the circuit live is meaningless — and it can damage the meter. Key off first.'};
+    if (has('fuse','bat_pos')) return {v:m.bad('fuse')?'OL':'0.01',u:'Ω',
+      n:m.bad('fuse')?'Open circuit. That fuse has blown — and something made it blow.':'Fuse is intact.'};
+    if (has('ect','block')) return {v:dis('ect')?'2430':'---',u:'Ω',
+      n:dis('ect')?'About 2.4 kΩ — a plausible cold reading for this class of sensor. Check it against the table for the actual car.':'Unplug the sensor before you measure it, or you are reading the ECU pull-up as well.'};
+    if (has('coil1','block')) return {v:dis('coil1')?'0.6':'---',u:'Ω',
+      n:dis('coil1')?'Primary winding, under an ohm. A shorted or open primary reads far from this.':'Disconnect it first.'};
+    if (has('bat_neg','block')) return {v:(m.bad('earth')?'0.04':'0.00'),u:'Ω',
+      n:'A static resistance check across an earth strap is a WEAK test — a corroded joint can read near zero and still drop volts under load. Measure the volt drop while cranking instead.'};
+    return {v:'OL',u:'Ω',n:'No path between those two points on the resistance range.'};
+  }
+  if (DIAG.mode==='Vac'){
+    if (has('alt_b','bat_neg')||has('alt_b','block'))
+      return {v:m.ripple.toFixed(2),u:'V AC',
+        n:m.running
+          ? (m.ripple>1.5 ? 'That is far too much AC on a DC line. A rectifier diode is open — the classic ripple signature.'
+             : m.ripple>0 ? 'A few tenths of a volt of ripple is normal.'
+             : 'No output at all, so nothing to ripple.')
+          : 'Start the engine to look for ripple.'};
+    return {v:'0.00',u:'V AC',n:'No AC here. AC on a DC system is what you hunt at the alternator output.'};
+  }
+  /* DC volts */
+  if (has('bat_pos','bat_neg')) return {v:m.vbat.toFixed(2),u:'V',
+    n: m.st==='crank'
+      ? (m.vbat<10 ? 'Under 10 V while cranking. A healthy battery holds up much better than this — this one has high internal resistance.'
+                   : 'Holding up under crank.')
+      : m.st==='run' ? 'Battery terminals with the engine running — this is charging voltage, not battery voltage.'
+      : m.vbat<12.3 ? 'Low for a rested battery. Charge and retest before condemning anything.' : 'Normal rested battery voltage.'};
+  if (has('bat_neg','block')) return {v:m.drop.toFixed(2),u:'V',
+    n: m.st==='crank'
+      ? (m.drop>0.2 ? 'VOLT DROP across the engine earth while cranking. Anything much over 0.2 V is turning current into heat in a bad joint instead of torque at the starter.'
+                    : 'Under 0.2 V across the earth while cranking — that earth is good.')
+      : 'Volt drop only means anything WITH CURRENT FLOWING. Crank it and measure again.'};
+  if (has('alt_b','bat_neg')||has('alt_b','block')) return {v:m.altOut.toFixed(2),u:'V',
+    n: m.running
+      ? (m.altOut<13.0 ? 'Engine running and the output is the same as the battery. It is not charging at all — no field, no output.'
+         : m.altOut<14.0 ? 'Charging, but low. Something is costing you output — check AC ripple on this same stud.'
+         : 'Charging normally, about 14.4 V.')
+      : 'B+ sits at battery voltage with the engine stopped — that tells you nothing yet. Run it.'};
+  if (has('fuse','bat_neg')||has('fuse','block')) return {v:(m.bad('fuse')?0:m.vbat).toFixed(2),u:'V',
+    n:m.bad('fuse')?'Nothing out of the fuse. Either the fuse is open or its feed is.':'Feed present at the fuse output.'};
+  if (has('ckp','bat_neg')||has('ckp','block')) return {v:(m.st==='crank'&&!m.bad('ckp')?'1.8':'0.00'),u:'V AC~',
+    n:m.bad('ckp')?'No signal from the crank sensor while cranking. Put the scope on it to be sure — a meter averages a pattern and can lie either way.'
+      :(m.st==='crank'?'A signal is present. Judge the SHAPE on the scope, not this number.':'Crank it to see anything here.')};
+  if (has('relay','bat_neg')||has('relay','block')) return {v:(m.st==='off'?'0.00':m.vbat.toFixed(2)),u:'V',
+    n:'Relay coil feed. A relay that clicks proves the coil, never the contacts.'};
+  if (has('coil1','bat_neg')||has('coil1','block')) return {v:(m.st==='off'?'0.00':m.vbat.toFixed(2)),u:'V',
+    n:'Coil supply. The switched side needs a scope, not a meter.'};
+  if (r===b) return {v:'0.00',u:'V',n:'Both probes on the same point. Voltage is a DIFFERENCE between two places.'};
+  return {v:(m.st==='off'?'0.00':(m.vbat*0.99).toFixed(2)),u:'V',
+    n:'Not a pairing with a specific meaning in this model — pick two points that form the circuit you are testing.'};
+}
+const diagRig = new THREE.Group();
+const dgM = {};
+function buildDiagRig(){
+  const off=new THREE.MeshStandardMaterial({color:0xE7ECF2,emissive:0x1b2430,
+    metalness:.2,roughness:.5});
+  for (const [k,t] of Object.entries(DTP)){
+    const s=new THREE.Mesh(new THREE.SphereGeometry(.022,14,12),off.clone());
+    s.position.set(...t.p); s.userData={tp:k}; diagRig.add(s);
+    dgM[k]=s;
+  }
+  diagRig.visible=false; carRoot.add(diagRig);
+}
+function paintDiagRig(){
+  for (const k in dgM){
+    const m=dgM[k].material;
+    m.color.setHex(DIAG.red===k?0xEF4444:DIAG.black===k?0x11161c:0xE7ECF2);
+    m.emissive.setHex(DIAG.red===k?0x3a0b0b:DIAG.black===k?0x000000:0x1b2430);
+  }
+}
 
 /* ═════════════════════════════════════════════════════════════════════
    TAKE THE BONNET OFF — real panel, real shut line, real hinge line.
@@ -1543,7 +1919,7 @@ const BJ={i:0,ans:{},score:0,asked:0};
    ═══════════════════════════════════════════════════════════════════ */
 const MODES=[['strip','Strip'],['doorOff','Door off'],['bonnetOff','Bonnet off'],
              ['door','Inside a door'],['starter','Starter'],['alt','Alternator'],
-             ['engine','Engine'],['brakes','Brake job'],['bench','Bench']];
+             ['engine','Engine'],['brakes','Brake job'],['diag','Diagnose'],['bench','Bench']];
 let MODE='strip';
 const tabsEl=document.getElementById('tabs');
 tabsEl.innerHTML=MODES.map(([id,l])=>
@@ -1555,6 +1931,7 @@ const CAP={
   doorOff:'Real door and check strap · hinge bolts, loom boot and prop constructed',
   bonnetOff:'Real bonnet, cut from the body shell · hinge bolts, gas struts, prop AND the whole engine bay are constructed — the car file contains no engine at all',
   alt:'Constructed alternator cutaway · claw-pole machine, motion slowed · arithmetic is a simplified model',
+  diag:'Probe points on the constructed engine bay · the physical model is simplified and typical, not this car\u2019s data',
   starter:'Constructed starter motor · motion slowed for clarity',
   engine:'Constructed four-stroke cutaway · not the Golf’s own engine',
   strip:'Real geometry from volkswagen-golf-2021-w12-v1',
@@ -1580,7 +1957,7 @@ function restoreJobPanels(keep){
 function setMode(m){
   MODE=m;
   tabsEl.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.m===m));
-  const bench=m==='bench', needCar=(m==='strip'||m==='brakes'||m==='doorOff'||m==='bonnetOff');
+  const bench=m==='bench', needCar=(m==='strip'||m==='brakes'||m==='doorOff'||m==='bonnetOff'||m==='diag');
   document.getElementById('bench-stage').hidden=!bench;
   canvas.style.visibility=bench?'hidden':'visible';
   document.getElementById('loading').hidden=!(needCar && !carReady);
@@ -1590,7 +1967,8 @@ function setMode(m){
   doorAsm.visible=(m==='door'); starterAsm.visible=(m==='starter'); engAsm.visible=(m==='engine');
   altAsm.visible=(m==='alt');
   doorRig.visible=(m==='doorOff'); bonnetRig.visible=(m==='bonnetOff');
-  bayAsm.visible=(m==='bonnetOff' && BAY.engine);
+  bayAsm.visible=((m==='bonnetOff' && BAY.engine) || m==='diag');
+  diagRig.visible=(m==='diag');
   plinth.visible=(m==='door'||m==='starter'||m==='engine'||m==='alt');
   /* CROSS-BAY BLEED. Each job MOVES real geometry, and leaving the bay used
      to leave it moved: open the bonnet in Bay 3, tap Door off, and the door
@@ -1622,6 +2000,13 @@ function setMode(m){
         : pb.home);
     }
     flyTo(new THREE.Vector3(0,.88,1.05),new THREE.Vector3(1.95,1.70,3.45)); }
+  if (m==='diag'&&carReady){ setXray(false); setExplode(0); iso(null);
+    ['door_fl','door_fr','door_rl','door_rr'].forEach(id=>setDoor(id,false));
+    /* bonnet up, because you cannot probe a component through a shut bonnet */
+    const pb=parts.panel_bonnet;
+    if (pb){ pb.group.position.copy(pb.home); pb.group.rotation.x=-BONNET_OPEN; }
+    paintDiagRig();
+    flyTo(new THREE.Vector3(-.05,.72,1.45),new THREE.Vector3(1.05,1.45,2.70)); }
   if (m==='door') flyTo(new THREE.Vector3(0,.68,0),new THREE.Vector3(.75,1.05,2.45));
   if (m==='starter') flyTo(new THREE.Vector3(.20,.31,0),new THREE.Vector3(.72,.72,1.15));
   if (m==='alt') flyTo(new THREE.Vector3(0,.30,0),new THREE.Vector3(.52,.60,.78));
@@ -1644,6 +2029,11 @@ function drawHud(){
     : MODE==='alt'
     ? b('afield',ALT.field?'Field ON':'Field OFF',ALT.field)
       +b('adiode',ALT.diode?'Diodes OK':'Diode FAILED',!ALT.diode)
+    : MODE==='diag'
+    ? b('dgnew','New work order')
+      +`<span class="chip">${['Key off','Ignition on','Cranking','Running']
+        [['off','ign','crank','run'].indexOf(DIAG.state)]} · tap a point to probe${
+        DIAG.replaced.length?` · ${DIAG.replaced.length} part${DIAG.replaced.length>1?'s':''} replaced`:''}</span>`
     : MODE==='door'
     ? b('dcard',DOOR.card?'Card on':'Card off',DOOR.card)+b('dlatch','Pull the handle')
     : MODE==='starter'
@@ -1671,12 +2061,13 @@ function act(a){
   if(a==='bengine'){BAY.engine=!BAY.engine; bayAsm.visible=(MODE==='bonnetOff'&&BAY.engine);}
   if(a==='afield') ALT.field=!ALT.field;
   if(a==='adiode') ALT.diode=!ALT.diode;
+  if(a==='dgnew'){ diagNew(); paintDiagRig(); }
   drawHud(); drawPanel();
 }
 const panel=document.getElementById('panel');
 function drawPanel(){
   panel.innerHTML=({strip:pStrip,doorOff:pDoorOff,bonnetOff:pBonnetOff,door:pDoor,starter:pStarter,
-                    alt:pAlt,engine:pEngine,brakes:pBrakes,bench:pBench}[MODE])();
+                    alt:pAlt,engine:pEngine,brakes:pBrakes,diag:pDiag,bench:pBench}[MODE])();
   panel.querySelectorAll('[data-x]').forEach(el=>
     el.addEventListener(el.tagName==='INPUT'?'input':'click',()=>handle(el.dataset.x,el)));
 }
@@ -1797,6 +2188,167 @@ function pDoorOff(){
     '<b>Why you mark the hinges.</b> Hinge bolts sit in slotted or floating mounts so the door can be aligned. Undo them without a mark and you have thrown away the factory alignment — then you are setting shut lines, gaps and the striker by trial and error with a heavy panel in your hands.',
     '<b>Weight.</b> A front door with glass, motor, card and speaker is around 25–30 kg and all of it hangs off two hinges. It is a two-person lift or a door stand, every time.',
     '<b>On refit.</b> Bolts in finger-tight, door to the marks, check the shut line and the striker engagement before final torque, then reconnect and test the window, lock, mirror and any door lamp before the card goes anywhere near it.'
+  ], true)}`;
+}
+function pDiag(){
+  const c=DCASES[DIAG.caseIdx], m=diagPhys(), rd=diagRead();
+  const STATES=[['off','Key off'],['ign','Ignition on'],['crank','Cranking'],['run','Running']];
+  const PARTS=['battery','earth strap','alternator','crank sensor','fuse','coolant sensor','ignition coil'];
+  /* the scope, for the one fault a meter cannot settle */
+  const W=300,H=70,mid=H/2;
+  const trace=()=>{
+    if (DIAG.state!=='crank') return `M0 ${mid} L${W} ${mid}`;
+    if (m.bad('ckp')) return `M0 ${mid} L${W} ${mid}`;
+    let d='';
+    for(let x=0;x<=W;x+=2){
+      const t=x/W*8, tooth=Math.sin(t*Math.PI*2);
+      const gap=(t%4)>3.6 ? 0 : 1;               /* the missing-tooth reference */
+      d+=(x?'L':'M')+x+' '+(mid-tooth*22*gap).toFixed(1);
+    }
+    return d;};
+  const graded = DIAG.verdict!==null;
+  return `
+  <div><div class="eyebrow">Bay 7 · Diagnose</div>
+    <h2 style="font-size:19px;margin-top:2px">Find the fault</h2>
+    <p style="font-size:13px;color:var(--ink2);margin-top:6px">You get the customer's
+    words and nothing else. Put the probes on real points <b>in the engine bay</b>,
+    change the engine state, read what the meter says, and decide. Replacing a good
+    part costs you.</p></div>
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+      <div class="eyebrow">Work order</div><span class="prov built">constructed model</span></div>
+    <p style="margin-top:7px;font-style:italic;color:var(--ink)">${c.order}</p>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Engine state</div>
+    <div class="row" style="margin-top:8px">
+      ${STATES.map(([k,l])=>`<button class="btn ${DIAG.state===k?'on':''}" data-x="dgstate:${k}">${l}</button>`).join('')}
+    </div>
+    ${DIAG.state==='crank'
+      ? `<div class="note ${m.spins?'good':'bad'}" style="margin-top:8px">${m.spins
+          ? 'Cranking at normal speed.'
+          : 'Cranking SLOWLY — it is labouring, and the dash lights dim with it.'}</div>`
+      : DIAG.state==='run'
+        ? `<div class="note ${m.runnable?'good':'bad'}" style="margin-top:8px">${m.runnable
+            ? (m.lamp?'Running — with the battery warning lamp lit.':'Running normally.')
+            : 'It will NOT run. It cranks and never fires, so anything you measure here is with it stopped.'}</div>`
+        : ''}
+  </div>
+
+  <div class="meter">
+    <div class="screen"><small>${DIAG.mode==='ohm'?'RESISTANCE':DIAG.mode==='Vac'?'VOLTS AC':'VOLTS DC'}</small>
+      ${rd.v} <span style="font-size:14px">${rd.u}</span></div>
+    <div class="row" style="margin-top:9px">
+      ${[['Vdc','V DC'],['Vac','V AC'],['ohm','Ω']].map(([k,l])=>
+        `<button class="btn ${DIAG.mode===k?'on':''}" data-x="dgmode:${k}">${l}</button>`).join('')}
+    </div>
+    <div class="probe"><span class="dot" style="background:var(--danger)"></span>
+      <b>RED</b> <span style="color:var(--ink2)">${DTP[DIAG.red].l}</span></div>
+    <div class="probe"><span class="dot" style="background:var(--ink)"></span>
+      <b>BLACK</b> <span style="color:var(--ink2)">${DTP[DIAG.black].l}</span></div>
+    <div class="note info" style="margin-top:8px">${rd.n}</div>
+    <div class="eyebrow" style="margin-top:11px">Move the red probe</div>
+    <div class="row" style="margin-top:6px">${Object.entries(DTP).map(([k,t])=>
+      `<button class="btn ${DIAG.red===k?'on':''}" data-x="dgred:${k}">${t.l.split(' —')[0]}</button>`).join('')}</div>
+    <div class="eyebrow" style="margin-top:9px">Move the black probe</div>
+    <div class="row" style="margin-top:6px">${Object.entries(DTP).map(([k,t])=>
+      `<button class="btn ${DIAG.black===k?'on':''}" data-x="dgblack:${k}">${t.l.split(' —')[0]}</button>`).join('')}</div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Scope — crank sensor</div>
+    <svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;margin-top:7px" role="img"
+      aria-label="Crank sensor pattern while cranking">
+      <line x1="0" y1="${mid}" x2="${W}" y2="${mid}" stroke="var(--line)"/>
+      <path d="${trace()}" fill="none" stroke="var(--good)" stroke-width="2"/>
+    </svg>
+    <p class="hint">${DIAG.state!=='crank'
+      ? 'Nothing to see until it is turning. Set the state to Cranking.'
+      : m.bad('ckp') ? 'FLAT. Cranking, and no pattern at all from the sensor.'
+      : 'A pattern with a gap in it — the missing-tooth reference the ECU counts from.'}</p>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Scan tool</div>
+    <div class="row" style="margin-top:8px">
+      <button class="btn wide" data-x="dgdtc">Read fault codes</button>
+      <button class="btn wide" data-x="dgclear" ${DIAG.dtcRead?'':'disabled'}>Clear codes</button>
+    </div>
+    ${DIAG.dtcRead ? (()=>{ const codes = DIAG.cleared ? [] :
+        (m.bad(c.id) ? c.dtc : []);
+      return codes.length
+        ? `<div class="note bad" style="margin-top:8px">${codes.join('<br>')}
+           <div class="hint" style="margin-top:5px">A code names a CIRCUIT, not a part. It tells you where to measure.</div></div>`
+        : `<div class="note ${DIAG.cleared?'info':'good'}" style="margin-top:8px">${DIAG.cleared
+            ? 'Codes cleared.' : 'No stored fault codes. Plenty of faults store nothing at all — most charging and cranking faults among them.'}</div>`;})()
+      : '<p class="hint" style="margin-top:7px">Not read yet.</p>'}
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Unplug a connector${Object.keys(DIAG.disconnected).length?' · '+Object.keys(DIAG.disconnected).length+' off':''}</div>
+    <div class="row" style="margin-top:7px">
+      ${['ect','coil1','ckp'].map(k=>`<button class="btn ${DIAG.disconnected[k]?'on':''}"
+        data-x="dgdis:${k}">${DIAG.disconnected[k]?'Reconnect ':'Unplug '}${DTP[k].l.split(' ')[0]}</button>`).join('')}
+    </div>
+    <p class="hint" style="margin-top:6px">A component has to come off the circuit before you can measure it on its own — and it has to go back on before the job is finished.</p>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Replace a part${DIAG.replaced.length?' · '+DIAG.replaced.length+' replaced':''}</div>
+    <div class="row" style="margin-top:7px">
+      ${PARTS.map(p=>`<button class="btn ${DIAG.replaced.includes(p)?'on':''}"
+        data-x="dgpart:${p}" ${DIAG.replaced.includes(p)?'disabled':''}>${p}</button>`).join('')}
+    </div>
+    <button class="btn wide primary" data-x="dgsubmit" style="margin-top:10px"
+      ${graded?'disabled':''}>Sign the job off</button>
+  </div>
+
+  ${graded?(()=>{
+    const right = DIAG.replaced.includes(c.part);
+    const extra = DIAG.replaced.filter(p=>p!==c.part).length;
+    const tidy  = Object.keys(DIAG.disconnected).length===0;
+    const cleared = DIAG.cleared;
+    let score = 0;
+    if (right) score += 55;
+    score -= extra*15;
+    if (tidy) score += 15;
+    if (cleared) score += 10;
+    if (right && !extra) score += 20;        /* found it without shotgunning */
+    score = Math.max(0,Math.min(100,score));
+    return `<div class="card">
+      <div class="eyebrow">Result</div>
+      <div class="mono" style="font-size:28px;font-weight:700;margin-top:3px;
+        color:${score>=70?'var(--good)':score>=40?'var(--warn)':'var(--danger)'}">${score}/100</div>
+      <div class="note ${right?'good':'bad'}" style="margin-top:8px">
+        ${right?'Correct part replaced — the fault is cured.'
+               :`Not cured. The fault was the <b>${c.part}</b>.`}</div>
+      <p style="margin-top:8px"><b>What it was.</b> ${c.why}</p>
+      <p style="margin-top:6px"><b>The reading that proves it.</b> ${c.tell}</p>
+      <dl class="spec">
+        <dt>correct part</dt><dd>${right?'yes':'no'}</dd>
+        <dt>good parts replaced</dt><dd style="color:${extra?'var(--danger)':'var(--good)'}">${extra}</dd>
+        <dt>connectors back on</dt><dd style="color:${tidy?'var(--good)':'var(--danger)'}">${tidy?'yes':'no'}</dd>
+        <dt>codes cleared</dt><dd style="color:${cleared?'var(--good)':'var(--warn)'}">${cleared?'yes':'no'}</dd>
+      </dl>
+      <button class="btn wide primary" data-x="dgnew" style="margin-top:10px">Next work order →</button>
+    </div>`;})():''}
+
+  ${DIAG.log.length?`<div class="card"><div class="eyebrow">What you did</div>
+    <div style="margin-top:8px;display:flex;flex-direction:column;gap:7px">
+      ${DIAG.log.slice(0,7).map(l=>`<div class="note ${l.bad?'bad':'good'}" style="margin:0">${l.t}</div>`).join('')}
+    </div></div>`:''}
+
+  ${man('Training manual — how to test instead of guess',[
+    '<b>Voltage is a difference, current is a flow, resistance is measured dead.</b> Every wrong reading in this bay comes from forgetting one of those: probes on the same point read zero, a resistance check on a live circuit reads nonsense, and a volt drop with no current flowing reads nothing at all.',
+    '<b>A VOLT DROP is the test that finds bad joints, and it only works under load.</b> Put the meter across the joint — not across the battery — while the circuit is working hard. Under about 0.2 V across an earth or a main feed is healthy; volts across it means current is being turned into heat there. A resistance check on the same joint can read near zero and still be the fault.',
+    '<b>Voltage that collapses under load with good connections is a battery.</b> Voltage that holds at the battery but not at the load is the connections between them. That single distinction separates the two most common no-crank faults.',
+    '<b>A fault code names a circuit, not a part.</b> P0335 does not mean "fit a crank sensor" — it means the ECU did not see a usable signal on that circuit, which could be the sensor, the wiring, the connector, or the trigger wheel. The code tells you where to measure.',
+    '<b>Plenty of real faults store no code at all.</b> Charging faults, slow cranking, bad earths and most mechanical complaints leave the scan tool completely clean. A clear scan tool is not a healthy car.',
+    '<b>Ripple is how you catch a failing rectifier.</b> An alternator can show a plausible voltage at idle with an open diode and still fail to keep up under load. Measure AC volts on the output stud: a few tenths is normal, volts is not.',
+    '<b>Never fit a fuse without asking why the last one blew.</b> A fuse is a deliberate weak point that has already done its job once. Replacing it without finding the overload is how you get a fire instead of a fuse.',
+    '<b>Finish the job.</b> Reconnect everything you unplugged, clear the codes you caused, and prove the fix by putting the car back in the state the customer complained about. Tidiness and efficiency are marked here for the same reason they are marked in a workshop assessment.'
   ], true)}`;
 }
 function pAlt(){
@@ -2158,6 +2710,24 @@ function handle(x,el){
   if(k==='arpm') ALT.rpm=+el.value;
   if(k==='aload') ALT.load=+v;
   if(k==='afield'||k==='adiode'){act(k); return;}
+  if(k==='dgstate') DIAG.state=v;
+  if(k==='dgmode') DIAG.mode=v;
+  if(k==='dgred'){ DIAG.red=v; paintDiagRig(); }
+  if(k==='dgblack'){ DIAG.black=v; paintDiagRig(); }
+  if(k==='dgdis'){ if(DIAG.disconnected[v]) delete DIAG.disconnected[v];
+    else DIAG.disconnected[v]=true; }
+  if(k==='dgdtc'){ DIAG.dtcRead=true;
+    DIAG.log.unshift({t:'Fault codes read.'}); }
+  if(k==='dgclear'){ DIAG.cleared=true; DIAG.log.unshift({t:'Fault codes cleared.'}); }
+  if(k==='dgpart'){
+    if(!DIAG.replaced.includes(v)){ DIAG.replaced.push(v);
+      const right = v===DCASES[DIAG.caseIdx].part;
+      DIAG.log.unshift({bad:!right,
+        t:right?`Replaced the ${v}. The complaint is gone.`
+               :`Replaced the ${v} — and the complaint is unchanged. That part was not the fault, and the customer pays for it.`}); } }
+  if(k==='dgsubmit'){ DIAG.verdict='done';
+    DIAG.log.unshift({t:'Job signed off.'}); }
+  if(k==='dgnew'){ diagNew(); paintDiagRig(); }
   if(k==='win') DOOR.win=+el.value/100;
   if(k==='focus') ENG.focus=(+v<0?null:+v);
   if(k==='mode') BEN.mode=v;
@@ -2183,12 +2753,15 @@ document.getElementById('themeBtn').addEventListener('click',()=>{
     cur ? (cur==='dark'?'light':'dark') : (sysDark?'light':'dark'));
   applyBg(); if(MODE==='bench') drawCircuit();
 });
+/* THE STAGE IS ALWAYS A DARK STUDIO, whatever the UI theme is doing.
+   Light theme used to set a pale floor under a pale backdrop, so the car
+   had nothing to reflect and no tonal range to sit in — reported as "the
+   car look faded". A photographer does not shoot a red car in a white
+   room, and every car configurator keeps a dark stage behind a light UI. */
 function applyBg(){
-  const t=document.documentElement.getAttribute('data-theme');
-  const lightNow = t==='light' || (!t && !matchMedia('(prefers-color-scheme: dark)').matches);
-  floorMat.color.setHex(lightNow?0xdcdee2:0x11151b);
-  plinth.material.color.setHex(lightNow?0xc3cfe0:0x2a3a52);
-  renderer.setClearColor(new THREE.Color(getComputedStyle(document.body).backgroundColor),0);
+  floorMat.color.setHex(0x0a0d12);
+  plinth.material.color.setHex(0x171d26);
+  renderer.setClearColor(new THREE.Color(0x0a0d12), 0);
 }
 applyBg();
 
@@ -2253,6 +2826,15 @@ window.__bonnet = () => ({looked:BO.looked,supported:BO.supported,marked:BO.mark
     +parts.panel_bonnet.group.position.y.toFixed(3),+parts.panel_bonnet.group.position.z.toFixed(3)]:null,
   anims:anim.length,
   propVisible:bRig.prop?bRig.prop.visible:null});
+window.__diag = () => { const m=diagPhys(), rd=diagRead();
+  return {fault:DIAG.fault, state:DIAG.state, mode:DIAG.mode,
+    red:DIAG.red, black:DIAG.black, reading:rd.v+' '+rd.u,
+    vbat:+m.vbat.toFixed(2), drop:+m.drop.toFixed(2), altOut:+m.altOut.toFixed(2),
+    ripple:+m.ripple.toFixed(2), spins:m.spins, runnable:m.runnable,
+    replaced:[...DIAG.replaced], dis:Object.keys(DIAG.disconnected),
+    cleared:DIAG.cleared, verdict:DIAG.verdict, points:Object.keys(DTP).length,
+    rigVisible:diagRig.visible}; };
+window.__setDiag = o => { Object.assign(DIAG,o); paintDiagRig(); drawHud(); drawPanel(); };
 window.__alt = () => { const r=altSolve();
   return {rpm:ALT.rpm,field:ALT.field,diode:ALT.diode,load:ALT.load,
     altRpm:Math.round(r.arpm),charging:r.charging,V:+r.V.toFixed(2),
