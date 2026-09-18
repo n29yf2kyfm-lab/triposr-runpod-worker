@@ -373,6 +373,54 @@ def bonnet_envelope(c, nrm):
             (nrm[:, 1] > 0.18))
 
 
+def mirror_mask(c, nrm):
+    """The door mirror assembly, as a SPATIAL CLUSTER — not a panel.
+
+    MEASURED, not guessed. Vertices of the four FL-door primitives were
+    profiled by outboard distance. The car's half width is ~1.047, the door
+    skin's outer bulge reaches x 0.88, and above x 0.92 the only geometry
+    left is one tight cluster:
+
+        primitive                       verts at x>0.92   Y            Z
+        Ext_Door_FL_Car_Paint                 186     0.971-1.064  0.524-0.700
+        Ext_Door_FL_Material_Atlas            562     0.927-1.063  0.516-0.696
+        Ext_Door_FL_Clear_Glass            82 of 91   (indicator repeater)
+        Ext_Door_FL_Chrome_Stripes         21 of 24   (housing trim)
+
+    The last two primitives are ENTIRELY inside that cluster, which is a
+    strong independent confirmation that the cluster is the mirror and not
+    an arbitrary box: a whole separate lens material and a whole separate
+    chrome material live nowhere else on the door.
+    """
+    return ((c[:, 0] > 0.90) &
+            (c[:, 1] > 0.90) & (c[:, 1] < 1.10) &
+            (c[:, 2] > 0.46) & (c[:, 2] < 0.76))
+
+
+ASSEMBLIES = {
+    # AN ASSEMBLY IS NOT A PANEL, AND IT NEEDS A DIFFERENT CORRECTNESS
+    # ARGUMENT. The bonnet gate demands ONE component with ONE boundary
+    # loop, because a panel is a single closed surface patch and anything
+    # else means the fill leaked. A mirror is a cap, a housing, a lens and
+    # a chrome insert — four shells, several loops, by construction. So it
+    # is gated on what IS true of an assembly instead: it must sit wholly
+    # inside a measured envelope, be SPATIALLY COMPACT (a runaway selection
+    # shows up immediately as an oversized bounding box), and stay under a
+    # face-count ceiling. Relaxing the panel gate to fit would have thrown
+    # away the protection the bonnet actually needs.
+    "mirror_fl": dict(
+        fn=mirror_mask,
+        env=None,                     # the predicate IS the envelope here
+        label="Asm_Mirror_FL",
+        source=("Ext_Door_FL",),      # cut from the door, not the shell
+        bbox_max=(0.20, 0.22, 0.34),  # a door mirror is ~15 x 10 x 25 cm
+        face_max=1800,
+        max_share=0.30,
+        # where it bolts to the door frame, for the app's removal job
+        mount=dict(x=0.905, y=1.005, z=0.585)),
+}
+
+
 PANELS = {
     "bonnet": dict(
         fn=bonnet_mask,
@@ -395,7 +443,13 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("inp")
     ap.add_argument("out", nargs="?")
-    ap.add_argument("--panel", required=True, choices=sorted(PANELS))
+    ap.add_argument("--panel", choices=sorted(PANELS))
+    ap.add_argument("--assembly", choices=sorted(ASSEMBLIES),
+                    help="cut an ASSEMBLY (mirror, lamp unit) rather than a "
+                         "panel. Different gate: an assembly is several "
+                         "shells by construction, so it is checked for "
+                         "compactness inside a measured envelope instead of "
+                         "for being one closed surface patch.")
     ap.add_argument("--report-only", action="store_true")
     ap.add_argument("--why", action="store_true",
                     help="classify every frontier edge as crease-blocked or "
@@ -405,14 +459,19 @@ def main():
     a = ap.parse_args()
     if not a.report_only and not a.out:
         raise SystemExit("REFUSED: give an output path, or --report-only")
+    if bool(a.panel) == bool(a.assembly):
+        raise SystemExit("REFUSED: give exactly one of --panel or --assembly")
 
-    spec = PANELS[a.panel]
+    asm = bool(a.assembly)
+    spec = ASSEMBLIES[a.assembly] if asm else PANELS[a.panel]
+    name = a.assembly if asm else a.panel
+    src = spec.get("source", SHELL)
     g = Gltf(a.inp)
 
-    # Gather the shell primitives and find the panel faces in each.
+    # Gather the source primitives and find the selected faces in each.
     hits, total_faces = [], 0
     for node_i, nm, mesh_i, M in g.leaves():
-        if not nm.startswith(SHELL):
+        if not nm.startswith(src):
             continue
         mesh = g.j["meshes"][mesh_i]
         for pi, prim in enumerate(mesh.get("primitives", [])):
@@ -444,35 +503,34 @@ def main():
             if m.any():
                 hits.append(dict(node=node_i, name=nm, mesh=mesh_i, prim=pi,
                                  tri=tri, mask=m, area=area[m].sum(),
-                                 cen=c[m], vw=vw, mat=prim.get("material"), M=M))
+                                 cen=c[m], vw=vw, mat=prim.get("material"), M=M,
+                                 # snapshot: a wholly consumed primitive is
+                                 # DELETED below, so the verify pass cannot
+                                 # go back and read it off the mesh
+                                 attrs=dict(prim["attributes"])))
 
     if not hits:
-        raise SystemExit(f"REFUSED: no faces selected for '{a.panel}'. The "
-                         f"region predicate found nothing — measure the shell "
-                         f"before changing the constants.")
+        raise SystemExit(f"REFUSED: no faces selected for '{name}'. The "
+                         f"region predicate found nothing — measure the "
+                         f"source mesh before changing the constants.")
 
     sel = sum(int(h["mask"].sum()) for h in hits)
     area = sum(h["area"] for h in hits)
     cen = np.vstack([h["cen"] for h in hits])
     share = sel / max(total_faces, 1)
-    print(f"panel '{a.panel}': {sel:,} of {total_faces:,} shell faces "
-          f"({share*100:.2f}%), area {area:.4f} m2")
+    print(f"{'assembly' if asm else 'panel'} '{name}': {sel:,} of "
+          f"{total_faces:,} source faces ({share*100:.2f}%), area {area:.4f} m2")
     print(f"  extent  X {cen[:,0].min():+.3f}..{cen[:,0].max():+.3f}  "
           f"Y {cen[:,1].min():+.3f}..{cen[:,1].max():+.3f}  "
           f"Z {cen[:,2].min():+.3f}..{cen[:,2].max():+.3f}")
     print(f"  across {len(hits)} primitive(s)")
 
-    lo, hi = spec["area_m2"]
-    if not (lo <= area <= hi):
-        raise SystemExit(f"REFUSED: area {area:.3f} m2 outside the plausible "
-                         f"{lo}-{hi} m2 for a {a.panel}. Either the predicate "
-                         f"is wrong or this is not the car it was measured on.")
     if share > spec["max_share"]:
-        raise SystemExit(f"REFUSED: selection is {share*100:.1f}% of the shell, "
+        raise SystemExit(f"REFUSED: selection is {share*100:.1f}% of the source, "
                          f"over the {spec['max_share']*100:.0f}% ceiling. A "
                          f"runaway region would take half the car off with it.")
 
-    # topology gate — the one that can actually catch a leak
+    # weld once; both gates below want welded topology
     wtri = []
     for h in hits:
         v = h["vw"]
@@ -486,29 +544,100 @@ def main():
     comps, loops, bnd = panel_topology(np.vstack(parts))
     print(f"  topology: {comps} component(s), {loops} boundary loop(s), "
           f"{bnd} boundary edges -> holes {loops - comps}")
-    if comps != 1 or loops != 1:
-        raise SystemExit(
-            f"REFUSED: a panel must be ONE component with ONE boundary loop; "
-            f"got {comps} component(s) and {loops} loop(s). More than one "
-            f"component is a fragmented selection; more than one loop is a "
-            f"hole or a fill that leaked around the end of a crease.")
+
+    if asm:
+        # ── ASSEMBLY GATE: compactness, not single-patch topology ────────
+        size = cen.max(axis=0) - cen.min(axis=0)
+        cap = np.array(spec["bbox_max"], dtype=float)
+        print(f"  bbox    {size[0]:.3f} x {size[1]:.3f} x {size[2]:.3f} m "
+              f"(cap {cap[0]} x {cap[1]} x {cap[2]})")
+        if (size > cap).any():
+            over = ", ".join(f"{ax}={size[i]:.3f}>{cap[i]}"
+                             for i, ax in enumerate("XYZ") if size[i] > cap[i])
+            raise SystemExit(
+                f"REFUSED: the selection is not compact — {over}. An assembly "
+                f"that spills outside its own bounding box has grabbed "
+                f"surrounding bodywork, and unlike a panel there is no crease "
+                f"to stop it. Tighten the envelope.")
+        if sel > spec["face_max"]:
+            raise SystemExit(
+                f"REFUSED: {sel:,} faces, over the {spec['face_max']:,} ceiling "
+                f"for this assembly. That is door skin, not a mirror.")
+        print(f"  assembly gate PASS: compact, {comps} shell(s) as expected")
+    else:
+        # ── PANEL GATE: one closed surface patch, nothing else ───────────
+        if comps != 1 or loops != 1:
+            raise SystemExit(
+                f"REFUSED: a panel must be ONE component with ONE boundary loop; "
+                f"got {comps} component(s) and {loops} loop(s). More than one "
+                f"component is a fragmented selection; more than one loop is a "
+                f"hole or a fill that leaked around the end of a crease.")
     if a.report_only:
         print("report-only: nothing written")
         return
 
     # ── the cut: index-only, vertex data shared and untouched ────────────
     panel_prims = []
+    consumed = []                 # (mesh, prim) taken in full
     for h in hits:
         keep = h["tri"][~h["mask"]].ravel()
         take = h["tri"][h["mask"]].ravel()
-        src = g.j["meshes"][h["mesh"]]["primitives"][h["prim"]]
-        src["indices"] = g.append_indices(keep)          # shell minus panel
-        p = dict(attributes=dict(src["attributes"]),      # SAME accessors
+        # NOT `src` — that name already holds the source-mesh prefix, and
+        # shadowing it here broke the verify pass further down with a
+        # TypeError on a dict. Caught immediately because the verify block
+        # runs on every cut.
+        srcprim = g.j["meshes"][h["mesh"]]["primitives"][h["prim"]]
+        p = dict(attributes=dict(srcprim["attributes"]),   # SAME accessors
                  indices=g.append_indices(take),
-                 mode=src.get("mode", 4))
+                 mode=srcprim.get("mode", 4))
         if h["mat"] is not None:
             p["material"] = h["mat"]
         panel_prims.append(p)
+        if keep.size:
+            srcprim["indices"] = g.append_indices(keep)   # source minus part
+        else:
+            # A WHOLLY CONSUMED PRIMITIVE. An assembly can take every face
+            # of a primitive — the mirror's indicator lens and chrome insert
+            # exist nowhere else on the door — and writing a zero-count
+            # index accessor for the remainder is INVALID glTF. The official
+            # validator caught it as VALUE_NOT_IN_RANGE on
+            # /accessors/N/count, and gltf-transform's meshopt pass died on
+            # an assertion downstream of it. A panel never hits this, which
+            # is exactly why it needed the validator to find it rather than
+            # a test I would have thought to write.
+            consumed.append((h["mesh"], h["prim"]))
+    # drop consumed primitives, highest index first so the lower ones do not
+    # shift under us; then unhook any mesh left with no primitives at all,
+    # because "meshes MUST have at least one primitive".
+    for mesh_i, prim_i in sorted(consumed, reverse=True):
+        del g.j["meshes"][mesh_i]["primitives"][prim_i]
+    # A mesh emptied of primitives is ALSO invalid ("meshes MUST have at
+    # least one primitive" — the validator says EMPTY_ENTITY, and
+    # gltf-transform's quantize then dies on "Missing POSITION attribute").
+    # So drop those meshes outright and REMAP every mesh index that shifts.
+    # Meshes are referenced only from nodes, so remapping node.mesh is the
+    # whole job — done before the part's own mesh is appended so it lands on
+    # a correct index.
+    dead = {mi for mi, _ in consumed
+            if not g.j["meshes"][mi].get("primitives")}
+    if dead:
+        remap, new_meshes = {}, []
+        for i, mesh in enumerate(g.j["meshes"]):
+            if i in dead:
+                continue
+            remap[i] = len(new_meshes)
+            new_meshes.append(mesh)
+        g.j["meshes"] = new_meshes
+        for nd in g.j["nodes"]:
+            if "mesh" in nd:
+                if nd["mesh"] in remap:
+                    nd["mesh"] = remap[nd["mesh"]]
+                else:
+                    del nd["mesh"]          # its mesh is gone; node stays
+    if consumed:
+        print(f"  {len(consumed)} primitive(s) taken in FULL -> source "
+              f"primitive removed; {len(dead)} emptied mesh(es) deleted and "
+              f"node mesh indices remapped")
 
     # THE NODE MUST CARRY THE SAME WORLD TRANSFORM AS THE SHELL IT WAS CUT
     # FROM. The panel's POSITION accessor is shared byte-for-byte with the
@@ -530,7 +659,6 @@ def main():
     M0 = Ms[0]
 
     g.j["meshes"].append({"name": spec["label"], "primitives": panel_prims})
-    hinge = spec["hinge"]
     node = {"name": spec["label"], "mesh": len(g.j["meshes"]) - 1}
     if not np.allclose(M0, np.eye(4)):
         node["matrix"] = M0.T.flatten().tolist()   # row-major -> glTF column-major
@@ -550,7 +678,7 @@ def main():
     # accessors must be the same objects — that is the no-geometry-touched proof
     shell_after = 0
     for node_i, nm, mesh_i, M in g2.leaves():
-        if not nm.startswith(SHELL):
+        if not nm.startswith(src) or nm == spec["label"]:
             continue
         for prim in g2.j["meshes"][mesh_i].get("primitives", []):
             if prim.get("indices") is not None:
@@ -558,8 +686,8 @@ def main():
     assert shell_after == total_faces - sel, (
         f"shell has {shell_after} faces, expected {total_faces - sel}")
     for p, h in zip(pmesh["primitives"], hits):
-        orig = g.j["meshes"][h["mesh"]]["primitives"][h["prim"]]["attributes"]
-        assert p["attributes"] == orig, "panel does not share the vertex accessors"
+        assert p["attributes"] == h["attrs"], \
+            "the cut part does not share the source vertex accessors"
 
     # WORLD-PLACEMENT CHECK. Face counts and shared accessors prove the cut
     # kept the right triangles; they say nothing about where the new node
@@ -587,9 +715,14 @@ def main():
         f"(got {got_centroid}, want {want_centroid}) — the node's transform "
         f"does not match its ancestor chain in the source file.")
     print(f"verified in {a.out}: {spec['label']} carries {got:,} faces, "
-          f"shell {total_faces:,} -> {shell_after:,}, vertex accessors shared")
-    print(f"  hinge for the app: y={hinge['y']} z={hinge['z']} axis=X "
-          f"open={spec['open_deg']} deg")
+          f"source {total_faces:,} -> {shell_after:,}, vertex accessors shared")
+    if spec.get("hinge"):
+        h = spec["hinge"]
+        print(f"  hinge for the app: y={h['y']} z={h['z']} axis=X "
+              f"open={spec.get('open_deg')} deg")
+    if spec.get("mount"):
+        mt = spec["mount"]
+        print(f"  mount for the app: x={mt['x']} y={mt['y']} z={mt['z']}")
 
 
 if __name__ == "__main__":

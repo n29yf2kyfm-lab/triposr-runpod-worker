@@ -307,6 +307,7 @@ const RULES = [
      convention every sourced mesh uses — must be matched before the
      catch-all, or it silently falls into 'body' again. */
   [/^Panel_Bonnet/,'panel_bonnet'],
+  [/^Asm_Mirror_FL/,'mirror_fl'],
   [/^Ext_Door_FL_|^Int_Door_FL_|^Ext_Door_Limiter_FL/,'door_fl'],
   [/^Ext_Door_FR_|^Int_Door_FR_|^Ext_Door_Limiter_FR/,'door_fr'],
   [/^Ext_Door_RL_|^Int_Door_RL_|^Ext_Door_Limiter_RL/,'door_rl'],
@@ -325,6 +326,7 @@ const RULES = [
 const PART = {
   body:{l:'Body shell',g:'Body',n:'Wings, roof and <b>both bumpers</b> are still part of this single welded mesh — they are not separate panels in this file, so they cannot be taken off here. The <b>bonnet</b> used to be part of this shell too; it has been cut out along its real shut line (a crease-bounded region grow, verified as one connected hole-free surface patch) and is now its own part — see <b>Bonnet off</b>.'},
   panel_bonnet:{l:'Bonnet',g:'Body',n:'Cut out of the body shell along its own shut line — the POSITION, NORMAL and TEXCOORD data are shared byte-for-byte with the shell it came from, so nothing was remodelled or moved. Hinged at the scuttle, just ahead of the windscreen. The <b>Bonnet off</b> bay takes it off with real hinge bolts and gas struts.'},
+  mirror_fl:{l:'Door mirror — front left',g:'Body',n:'Cut out of the DOOR meshes as a spatial cluster, not a panel — a mirror is four shells (painted cap, housing, indicator lens, chrome insert) and the tool gates it on compactness inside a measured envelope instead of on being one closed surface. Measured bounding box 147 x 140 x 195 mm. Two of those four materials exist nowhere else on the door, which is what confirms the cluster is the mirror.'},
   door_fl:{l:'Door — front left',g:'Body',n:'Outer skin, inner frame, door card, speaker, glass and check strap, all moving together. Hinged at the A-pillar. The <b>Inside a door</b> bay opens this one up.'},
   door_fr:{l:'Door — front right',g:'Body',n:'Same assembly mirrored. The steering wheel on this car is on the LEFT, so this is the passenger door.'},
   door_rl:{l:'Door — rear left',g:'Body',n:'Shorter skin, hinged at the B-pillar. The check strap is what stops it swinging into the car next to you.'},
@@ -563,7 +565,7 @@ function buildCar(root){
   buildDoorRig();
   if (!parts.panel_bonnet) console.error('Strip Bay: panel_bonnet not found — '+
     'the cut panel did not classify. Bonnet off bay will have nothing to act on.');
-  buildBonnetRig(); buildBayEngine(); buildDiagRig();
+  buildBonnetRig(); buildBayEngine(); buildDiagRig(); buildDoorPartsRig();
   carReady = true; window.__carReady = true;   /* a harness can wait on the truth */
   buildPads(); setMode(MODE);
 }
@@ -624,7 +626,7 @@ function setTailgate(open){
 }
 function setXray(on){
   S.xray=on;
-  for (const id of ['body','panel_bonnet','cabin','seats','glazing','door_fl','door_fr','door_rl','door_rr']){
+  for (const id of ['body','panel_bonnet','mirror_fl','cabin','seats','glazing','door_fl','door_fr','door_rl','door_rr']){
     const p=parts[id]; if(!p) continue;
     for (const m of p.meshes){
       const mat=m.material; if(!mat) continue;
@@ -713,6 +715,29 @@ canvas.addEventListener('pointerdown', e => {
 /* Diagnose bay: tap a probe point ON THE CAR. The panel's lists do the same
    thing for a phone, but the whole point of this bay is that the points are
    on the components, not on a schematic. */
+canvas.addEventListener('pointerdown', e => {
+  if (MODE!=='dparts' || !carReady) return;
+  const r=canvas.getBoundingClientRect();
+  ptr.set((e.clientX-r.left)/r.width*2-1, -((e.clientY-r.top)/r.height*2-1));
+  ray.setFromCamera(ptr,camera);
+  const h=ray.intersectObjects([dpRig],true).find(x=>x.object.visible);
+  if (!h) return;
+  let o=h.object, dp=null;
+  while(o && !dp){ dp=o.userData?.dp; o=o.parent; }
+  /* the latch body itself is not a fastener — clicking it withdraws the
+     unit, which the gate refuses until everything is free */
+  if (dp==='latch') dpAct('lift'); else if (dp) dpAct(dp);
+});
+canvas.addEventListener('pointermove', e => {
+  if (MODE!=='dparts' || !carReady) return;
+  const r=canvas.getBoundingClientRect();
+  ptr.set((e.clientX-r.left)/r.width*2-1, -((e.clientY-r.top)/r.height*2-1));
+  ray.setFromCamera(ptr,camera);
+  const h=ray.intersectObjects([dpRig],true).find(x=>x.object.visible);
+  let o=h&&h.object, dp=null;
+  while(o&&!dp){ dp=o.userData?.dp; o=o.parent; }
+  canvas.style.cursor = dp ? 'pointer' : 'grab';
+});
 canvas.addEventListener('pointerdown', e => {
   if (MODE!=='diag' || !carReady) return;
   const r=canvas.getBoundingClientRect();
@@ -1097,6 +1122,221 @@ function doorAct(act){
       b.head.material=b.steel; b.shank.material=b.steel; b.g.position.set(...FIX[k].p); }
     for (const m of dRig.marks) doorRig.remove(m); dRig.marks.length=0;
     const p=parts.door_fl; if(p){ p.group.rotation.y=0; p.group.position.copy(p.home); }
+  }
+  drawHud(); drawPanel();
+}
+
+/* ═════════════════════════════════════════════════════════════════════
+   MIRROR OFF, AND THE DOOR LOCK OUT — two jobs, one bay
+
+   THE MIRROR IS REAL GEOMETRY. It was fused into the door meshes, so
+   panel_cut.py cut it out as an ASSEMBLY: 1,050 faces across four
+   primitives (painted cap, housing atlas, indicator lens, chrome insert),
+   bounding box 147 x 140 x 195 mm, vertex data shared byte-for-byte with
+   the door. Two of those four materials appear nowhere else on the door,
+   which is the independent confirmation that the cluster really is the
+   mirror rather than a box drawn around the right place.
+
+   THE LOCK IS NOT IN THE FILE AT ALL — a latch lives inside the door
+   shut face and no sourced exterior model includes one. It is
+   constructed, and says so.
+
+   BOTH PROCEDURES ARE TYPICAL-OF-CLASS, NOT VERIFIED FOR THIS CAR, and
+   the panel says that where it matters. Asked for a Mk8-specific spec,
+   the reviewer model declined to give one without repair data and was
+   right to. What IS transferable is the ORDER and the reasons for it,
+   which is what these jobs teach.
+   ═══════════════════════════════════════════════════════════════════ */
+const MFIX = {
+  nut_a:{label:'Mount nut — upper',  p:[ .800,1.048, .600]},
+  nut_b:{label:'Mount nut — lower',  p:[ .800, .966, .600]},
+  nut_c:{label:'Mount nut — rear',   p:[ .800,1.006, .528]}};
+const LFIX = {
+  scr_a:{label:'Shut-face screw — top',    p:[ .762, .757,-.318]},
+  scr_b:{label:'Shut-face screw — middle', p:[ .762, .688,-.318]},
+  scr_c:{label:'Shut-face screw — bottom', p:[ .762, .619,-.318]}};
+const DP = {job:'mirror',
+  /* mirror job */
+  m:{looked:false, isolated:false, trim:false, conn:false, glass:false,
+     out:{}, off:false, stops:0, log:[]},
+  /* lock job */
+  l:{looked:false, isolated:false, secured:false, card:false, barrier:false,
+     conn:false, cable_in:false, cable_out:false, out:{}, off:false,
+     stops:0, log:[]}};
+const dpRig = new THREE.Group();
+const pRig = {mNuts:{}, lScrews:{}, };
+function buildDoorPartsRig(){
+  const steel=new THREE.MeshStandardMaterial({color:0x7d858f,metalness:.9,roughness:.32});
+  const done =new THREE.MeshStandardMaterial({color:0x34D399,metalness:.5,roughness:.4});
+  const dark =new THREE.MeshStandardMaterial({color:0x1b1f25,metalness:.15,roughness:.85});
+  const plug =new THREE.MeshStandardMaterial({color:0x2b3a52,metalness:.2,roughness:.7});
+  const trimM=new THREE.MeshStandardMaterial({color:0x22262c,metalness:.05,roughness:.9});
+
+  /* ── mirror side: three mount nuts, the multi-pin connector and the
+     triangular interior trim that hides both ───────────────────────── */
+  for (const [k,f] of Object.entries(MFIX)){
+    const g=new THREE.Group(); g.position.set(...f.p);
+    const nut=new THREE.Mesh(new THREE.CylinderGeometry(.016,.016,.014,6),steel);
+    nut.rotation.z=Math.PI/2;
+    g.add(nut); g.userData={dp:k}; dpRig.add(g);
+    pRig.mNuts[k]={g,nut,steel,done};
+  }
+  pRig.mConn=new THREE.Mesh(new THREE.BoxGeometry(.022,.034,.030),plug);
+  pRig.mConn.position.set(.792,.930,.560); pRig.mConn.userData={dp:'conn'};
+  dpRig.add(pRig.mConn);
+  pRig.mTrim=new THREE.Mesh(new THREE.BoxGeometry(.014,.115,.115),trimM);
+  pRig.mTrim.position.set(.772,1.000,.575); pRig.mTrim.userData={dp:'trim'};
+  dpRig.add(pRig.mTrim);
+
+  /* ── lock side: the latch unit in the shut face, its three screws, two
+     cables and the central-locking connector ──────────────────────── */
+  pRig.latch=new THREE.Group(); pRig.latch.position.set(.768,.688,-.300);
+  const body=new THREE.Mesh(new THREE.BoxGeometry(.055,.115,.075),dark);
+  const claw=new THREE.Mesh(new THREE.TorusGeometry(.021,.007,8,16,Math.PI*1.4),steel);
+  claw.position.set(-.010,.012,-.042); claw.rotation.y=Math.PI/2;
+  const pawl=new THREE.Mesh(new THREE.BoxGeometry(.030,.012,.026),steel);
+  pawl.position.set(.004,-.026,-.030);
+  const motor=new THREE.Mesh(new THREE.CylinderGeometry(.017,.017,.038,14),steel);
+  motor.rotation.z=Math.PI/2; motor.position.set(.006,.042,.024);
+  pRig.latch.add(body,claw,pawl,motor);
+  pRig.latch.userData={dp:'latch'}; dpRig.add(pRig.latch);
+  for (const [k,f] of Object.entries(LFIX)){
+    const g=new THREE.Group(); g.position.set(...f.p);
+    const scr=new THREE.Mesh(new THREE.CylinderGeometry(.011,.011,.016,6),steel);
+    scr.rotation.z=Math.PI/2;
+    g.add(scr); g.userData={dp:k}; dpRig.add(g);
+    pRig.lScrews[k]={g,scr,steel,done};
+  }
+  const cable=(a,b,mat)=>{
+    const c=new THREE.CatmullRomCurve3(a.map(p=>new THREE.Vector3(...p)));
+    const m=new THREE.Mesh(new THREE.TubeGeometry(c,20,.007,8,false),mat);
+    m.userData={dp:b}; dpRig.add(m); return m;
+  };
+  pRig.cIn =cable([[.768,.730,-.280],[.756,.760,-.130],[.760,.745,.010]],'cable_in',
+    new THREE.MeshStandardMaterial({color:0x2a2f36,roughness:.8,metalness:.1}));
+  pRig.cOut=cable([[.768,.650,-.268],[.780,.690,-.150],[.800,.700,-.040]],'cable_out',
+    new THREE.MeshStandardMaterial({color:0x3a3026,roughness:.8,metalness:.1}));
+  pRig.lConn=new THREE.Mesh(new THREE.BoxGeometry(.020,.030,.026),plug);
+  pRig.lConn.position.set(.762,.610,-.262); pRig.lConn.userData={dp:'lconn'};
+  dpRig.add(pRig.lConn);
+  /* the window clamp: proof the glass is supported before the card is off */
+  pRig.clamp=new THREE.Mesh(new THREE.BoxGeometry(.05,.035,.09),
+    new THREE.MeshStandardMaterial({color:0xF59E0B,metalness:.35,roughness:.5}));
+  pRig.clamp.position.set(.760,1.150,.150); pRig.clamp.visible=false; dpRig.add(pRig.clamp);
+  /* the door card, as one plate that comes away */
+  pRig.card=new THREE.Mesh(new THREE.BoxGeometry(.016,.44,.92),trimM);
+  pRig.card.position.set(.735,.660,.230); pRig.card.userData={dp:'card'};
+  dpRig.add(pRig.card);
+
+  dpRig.traverse(o=>{ if(o.isMesh){o.castShadow=true;o.receiveShadow=true;} });
+  dpRig.visible=false; carRoot.add(dpRig);
+}
+function mirrorGate(act){
+  const m=DP.m;
+  if (act==='conn'){
+    if (!m.looked) return 'Look the procedure up first. A powered mirror can carry a heater, a folding motor, an indicator repeater and on some cars a camera or blind-spot module — you need to know what is in this one before you unplug it.';
+    if (!m.isolated) return 'Ignition still on. Unplugging a live mirror module can damage it, and on cars with a blind-spot module in the housing it can set a fault you then have to clear.';
+    if (!m.trim) return 'You cannot reach the connector yet — the interior trim at the mirror mount is still on.';
+  }
+  if (act && act.startsWith('nut')){
+    if (!m.looked) return 'Look the procedure up first.';
+    if (!m.trim) return 'The mount nuts are behind the interior trim. Prising at the mirror from outside to get at them is how housings crack.';
+    if (!m.conn) return 'STOP — the connector is still plugged in. Take the nuts out now and the mirror hangs on its loom: stretched conductors and a torn grommet where the loom passes through the door frame.';
+    const left=Object.keys(MFIX).filter(k=>!m.out[k]);
+    if (left.length===1 && !m.out[act]) return null;   /* last one, allowed */
+  }
+  if (act==='glass') return 'STOP — do not lever the mirror GLASS out to reach the mount nuts. The nuts are inside the door, not behind the glass. On a heated mirror you crack the glass and tear the heater tails off with it, and that is a new mirror for a fastener you could already reach.';
+  if (act==='lift'){
+    const left=Object.keys(MFIX).filter(k=>!m.out[k]);
+    if (left.length) return `${left.length} mount nut${left.length>1?'s':''} still in. Pulling on it now bends the foot or cracks the housing.`;
+  }
+  return null;
+}
+function lockGate(act){
+  const l=DP.l;
+  if (act==='card'){
+    if (!l.looked) return 'Look the procedure up first — you need to know what this door carries before the card comes off.';
+    if (!l.isolated) return 'Isolate the battery and wait. The door loom carries central locking and the lock microswitches, and on cars with side airbags it carries SRS circuits too.';
+    if (!l.secured) return 'STOP — the glass is not supported. With the card off, an unsupported door glass can drop inside the door and break, and a broken door glass in the bottom of a door is a long day.';
+  }
+  if (act==='barrier' && !l.card) return 'The vapour barrier is behind the card.';
+  if (act==='lconn'||act==='cable_in'||act==='cable_out'){
+    if (!l.barrier) return 'You cannot reach into the door yet — the vapour barrier is still sealed. Peel it back carefully and keep it intact; it is what stops water getting into the car, and a torn one means a wet carpet later.';
+  }
+  if (act && act.startsWith('scr')){
+    if (!l.looked) return 'Look the procedure up first.';
+    if (!l.barrier) return 'Get access first.';
+    if (!l.conn) return 'STOP — the electrical connector is still on the latch.';
+    if (!l.cable_in || !l.cable_out){
+      const n=[!l.cable_in&&'interior handle',!l.cable_out&&'exterior handle'].filter(Boolean);
+      return `STOP — the ${n.join(' and ')} cable${n.length>1?'s are':' is'} still attached at the latch. Take the screws out now and the latch comes loose on its cables: stretch a Bowden cable and the door will not open from the inside afterwards, which you only discover once everything is back together.`;
+    }
+  }
+  if (act==='shut') return 'STOP — do not shut the door with the latch out or part-fitted. There is nothing to catch the striker, and a door that has swung shut on a missing latch can be very awkward to get open again without damaging trim or paint.';
+  if (act==='lift'){
+    const left=Object.keys(LFIX).filter(k=>!l.out[k]);
+    if (left.length) return `${left.length} shut-face screw${left.length>1?'s':''} still in.`;
+  }
+  return null;
+}
+function dpAct(act){
+  const mir = DP.job==='mirror';
+  const st = mir ? DP.m : DP.l;
+  const stop = mir ? mirrorGate(act) : lockGate(act);
+  if (stop){ st.stops++; st.log.unshift({bad:true,t:stop}); drawHud(); drawPanel(); return; }
+  if (act==='look'){ st.looked=true; st.log.unshift({t:'Procedure read.'}); }
+  if (act==='isolate'){ st.isolated=true; st.log.unshift({t:'Battery isolated, wait observed.'}); }
+  if (mir){
+    if (act==='trim'){ DP.m.trim=true; pRig.mTrim.visible=false;
+      DP.m.log.unshift({t:'Interior trim off at the mirror mount. Nuts and connector now reachable.'}); }
+    if (act==='conn'){ DP.m.conn=true; tweenV(pRig.mConn.position,
+        new THREE.Vector3(.700,.905,.520),420);
+      DP.m.log.unshift({t:'Mirror connector released and pushed back through the grommet.'}); }
+    if (act && act.startsWith('nut')){ DP.m.out[act]=true;
+      const b=pRig.mNuts[act]; b.nut.material=b.done;
+      tweenV(b.g.position,new THREE.Vector3(MFIX[act].p[0]-.10,MFIX[act].p[1],MFIX[act].p[2]),420);
+      DP.m.log.unshift({t:`${MFIX[act].label} out.`}); }
+    if (act==='lift'){ DP.m.off=true;
+      const p=parts.mirror_fl;
+      if (p) tweenV(p.group.position,p.home.clone().add(new THREE.Vector3(.34,.06,.10)),800);
+      DP.m.log.unshift({t:'Mirror off, gasket kept. Before the trim goes back on: plug it in and test fold, heat and the indicator repeater.'}); }
+    if (act==='reset'){ Object.assign(DP.m,{looked:false,isolated:false,trim:false,
+        conn:false,glass:false,out:{},off:false,stops:0,log:[]});
+      pRig.mTrim.visible=true; pRig.mConn.position.set(.792,.930,.560);
+      for (const k in pRig.mNuts){ const b=pRig.mNuts[k];
+        b.nut.material=b.steel; b.g.position.set(...MFIX[k].p); }
+      const p=parts.mirror_fl; if(p) p.group.position.copy(p.home); }
+  } else {
+    if (act==='secure'){ DP.l.secured=true; pRig.clamp.visible=true;
+      DP.l.log.unshift({t:'Door glass clamped at the top of the frame — it cannot drop into the door now.'}); }
+    if (act==='card'){ DP.l.card=true; tweenV(pRig.card.position,
+        new THREE.Vector3(1.10,.640,.230),600);
+      DP.l.log.unshift({t:'Door card off.'}); }
+    if (act==='barrier'){ DP.l.barrier=true;
+      DP.l.log.unshift({t:'Vapour barrier peeled back INTACT and kept for resealing.'}); }
+    if (act==='lconn'){ DP.l.conn=true; tweenV(pRig.lConn.position,
+        new THREE.Vector3(.660,.590,-.240),420);
+      DP.l.log.unshift({t:'Central-locking connector unplugged at the latch.'}); }
+    if (act==='cable_in'){ DP.l.cable_in=true; pRig.cIn.material.color.setHex(0x34D399);
+      DP.l.log.unshift({t:'Interior handle cable released at the latch end, retainer intact.'}); }
+    if (act==='cable_out'){ DP.l.cable_out=true; pRig.cOut.material.color.setHex(0x34D399);
+      DP.l.log.unshift({t:'Exterior handle rod released at the latch end.'}); }
+    if (act && act.startsWith('scr')){ DP.l.out[act]=true;
+      const b=pRig.lScrews[act]; b.scr.material=b.done;
+      tweenV(b.g.position,new THREE.Vector3(LFIX[act].p[0],LFIX[act].p[1],LFIX[act].p[2]-.10),420);
+      DP.l.log.unshift({t:`${LFIX[act].label} out.`}); }
+    if (act==='lift'){ DP.l.off=true;
+      tweenV(pRig.latch.position,new THREE.Vector3(.900,.640,-.170),800);
+      DP.l.log.unshift({t:'Latch withdrawn through the access aperture. It is not finished until it opens from inside AND outside, locks and unlocks, and the barrier is resealed.'}); }
+    if (act==='reset'){ Object.assign(DP.l,{looked:false,isolated:false,secured:false,
+        card:false,barrier:false,conn:false,cable_in:false,cable_out:false,
+        out:{},off:false,stops:0,log:[]});
+      pRig.clamp.visible=false; pRig.card.position.set(.735,.660,.230);
+      pRig.lConn.position.set(.762,.610,-.262);
+      pRig.cIn.material.color.setHex(0x2a2f36); pRig.cOut.material.color.setHex(0x3a3026);
+      for (const k in pRig.lScrews){ const b=pRig.lScrews[k];
+        b.scr.material=b.steel; b.g.position.set(...LFIX[k].p); }
+      pRig.latch.position.set(.768,.688,-.300); }
   }
   drawHud(); drawPanel();
 }
@@ -1946,7 +2186,8 @@ const BJ={i:0,ans:{},score:0,asked:0};
    ═══════════════════════════════════════════════════════════════════ */
 const MODES=[['strip','Strip'],['doorOff','Door off'],['bonnetOff','Bonnet off'],
              ['door','Inside a door'],['starter','Starter'],['alt','Alternator'],
-             ['engine','Engine'],['brakes','Brake job'],['diag','Diagnose'],['bench','Bench']];
+             ['dparts','Mirror & lock'],['engine','Engine'],['brakes','Brake job'],
+             ['diag','Diagnose'],['bench','Bench']];
 let MODE='strip';
 const tabsEl=document.getElementById('tabs');
 tabsEl.innerHTML=MODES.map(([id,l])=>
@@ -1958,6 +2199,7 @@ const CAP={
   doorOff:'Real door and check strap · hinge bolts, loom boot and prop constructed',
   bonnetOff:'Real bonnet, cut from the body shell · hinge bolts, gas struts, prop AND the whole engine bay are constructed — the car file contains no engine at all',
   alt:'Constructed alternator cutaway · claw-pole machine, motion slowed · arithmetic is a simplified model',
+  dparts:'Mirror is REAL geometry cut from the door \u00b7 nuts, connector, trim, latch, cables and card are constructed \u00b7 procedures typical of class, not verified for this car',
   diag:'Probe points on the constructed engine bay · the physical model is simplified and typical, not this car\u2019s data',
   starter:'Constructed starter motor · motion slowed for clarity',
   engine:'Constructed four-stroke cutaway · not the Golf’s own engine',
@@ -1984,7 +2226,7 @@ function restoreJobPanels(keep){
 function setMode(m){
   MODE=m;
   tabsEl.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.m===m));
-  const bench=m==='bench', needCar=(m==='strip'||m==='brakes'||m==='doorOff'||m==='bonnetOff'||m==='diag');
+  const bench=m==='bench', needCar=(m==='strip'||m==='brakes'||m==='doorOff'||m==='bonnetOff'||m==='diag'||m==='dparts');
   document.getElementById('bench-stage').hidden=!bench;
   canvas.style.visibility=bench?'hidden':'visible';
   document.getElementById('loading').hidden=!(needCar && !carReady);
@@ -1996,6 +2238,7 @@ function setMode(m){
   doorRig.visible=(m==='doorOff'); bonnetRig.visible=(m==='bonnetOff');
   bayAsm.visible=((m==='bonnetOff' && BAY.engine) || m==='diag');
   diagRig.visible=(m==='diag');
+  dpRig.visible=(m==='dparts');
   plinth.visible=(m==='door'||m==='starter'||m==='engine'||m==='alt');
   /* CROSS-BAY BLEED. Each job MOVES real geometry, and leaving the bay used
      to leave it moved: open the bonnet in Bay 3, tap Door off, and the door
@@ -2034,6 +2277,13 @@ function setMode(m){
     if (pb){ pb.group.position.copy(pb.home); pb.group.rotation.x=-BONNET_OPEN; }
     paintDiagRig();
     flyTo(new THREE.Vector3(-.05,.72,1.45),new THREE.Vector3(1.05,1.45,2.70)); }
+  if (m==='dparts'&&carReady){ setXray(false); setExplode(0); iso(null);
+    /* door OPEN: every fastener in both jobs is inside the door or on its
+       shut face, and none of it is reachable through a closed door */
+    setDoor('door_fl',true);
+    const mir=DP.job==='mirror';
+    flyTo(mir ? new THREE.Vector3(.86,1.00,.56) : new THREE.Vector3(.80,.70,-.22),
+          mir ? new THREE.Vector3(2.05,1.42,1.60) : new THREE.Vector3(2.10,1.25,-.95)); }
   if (m==='door') flyTo(new THREE.Vector3(0,.68,0),new THREE.Vector3(.75,1.05,2.45));
   if (m==='starter') flyTo(new THREE.Vector3(.20,.31,0),new THREE.Vector3(.72,.72,1.15));
   if (m==='alt') flyTo(new THREE.Vector3(0,.30,0),new THREE.Vector3(.52,.60,.78));
@@ -2056,6 +2306,12 @@ function drawHud(){
     : MODE==='alt'
     ? b('afield',ALT.field?'Field ON':'Field OFF',ALT.field)
       +b('adiode',ALT.diode?'Diodes OK':'Diode FAILED',!ALT.diode)
+    : MODE==='dparts'
+    ? b('dpReset','Start again')
+      +`<span class="chip">${DP.job==='mirror'?'Mirror':'Door lock'} \u00b7 ${
+        Object.keys((DP.job==='mirror'?DP.m:DP.l).out).length}/3 out${
+        (DP.job==='mirror'?DP.m:DP.l).stops?` \u00b7 ${(DP.job==='mirror'?DP.m:DP.l).stops} stop${
+        (DP.job==='mirror'?DP.m:DP.l).stops>1?'s':''}`:''}</span>`
     : MODE==='diag'
     ? b('dgnew','New work order')
       +`<span class="chip">${['Key off','Ignition on','Cranking','Running']
@@ -2089,12 +2345,14 @@ function act(a){
   if(a==='afield') ALT.field=!ALT.field;
   if(a==='adiode') ALT.diode=!ALT.diode;
   if(a==='dgnew'){ diagNew(); paintDiagRig(); }
+  if(a==='dpReset') dpAct('reset');
   drawHud(); drawPanel();
 }
 const panel=document.getElementById('panel');
 function drawPanel(){
   panel.innerHTML=({strip:pStrip,doorOff:pDoorOff,bonnetOff:pBonnetOff,door:pDoor,starter:pStarter,
-                    alt:pAlt,engine:pEngine,brakes:pBrakes,diag:pDiag,bench:pBench}[MODE])();
+                    alt:pAlt,engine:pEngine,brakes:pBrakes,diag:pDiag,dparts:pDparts,
+                    bench:pBench}[MODE])();
   panel.querySelectorAll('[data-x]').forEach(el=>
     el.addEventListener(el.tagName==='INPUT'?'input':'click',()=>handle(el.dataset.x,el)));
 }
@@ -2215,6 +2473,129 @@ function pDoorOff(){
     '<b>Why you mark the hinges.</b> Hinge bolts sit in slotted or floating mounts so the door can be aligned. Undo them without a mark and you have thrown away the factory alignment — then you are setting shut lines, gaps and the striker by trial and error with a heavy panel in your hands.',
     '<b>Weight.</b> A front door with glass, motor, card and speaker is around 25–30 kg and all of it hangs off two hinges. It is a two-person lift or a door stand, every time.',
     '<b>On refit.</b> Bolts in finger-tight, door to the marks, check the shut line and the striker engagement before final torque, then reconnect and test the window, lock, mirror and any door lamp before the card goes anywhere near it.'
+  ], true)}`;
+}
+function pDparts(){
+  const mir=DP.job==='mirror', st=mir?DP.m:DP.l;
+  const step=(k,label,ok,act,hint)=>`
+    <button class="choice ${ok?'right':''}" data-x="dp:${act}" ${ok?'disabled':''}>
+      <b>${k}</b> ${label}${ok?' ✓':''}
+      ${hint?`<div class="hint" style="margin-top:3px">${hint}</div>`:''}</button>`;
+  const fix = mir?MFIX:LFIX, outN=Object.keys(fix).filter(k=>st.out[k]).length;
+  const head=`
+  <div><div class="eyebrow">Bay 8 · Door components</div>
+    <div class="row" style="margin-top:6px">
+      <button class="btn ${mir?'on':''}" data-x="dpjob:mirror">Mirror off</button>
+      <button class="btn ${!mir?'on':''}" data-x="dpjob:lock">Door lock out</button></div></div>`;
+
+  if (mir) return `${head}
+  <div><h2 style="font-size:19px;margin-top:2px">Door mirror</h2>
+    <p style="font-size:13px;color:var(--ink2);margin-top:6px">Click the fasteners
+    <b>on the car</b>. The mount nuts and the connector are <b>inside</b> the door,
+    behind the triangular trim — not behind the mirror glass, which is the mistake
+    this job exists to stop.</p></div>
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+      <div class="eyebrow">Provenance</div><span class="prov real">mirror is real geometry</span></div>
+    <p style="margin-top:7px">The mirror was <b>fused into the door meshes</b> and has been
+    cut out as an assembly — 1,050 faces across four primitives (painted cap, housing,
+    indicator lens, chrome insert), measured bounding box 147 × 140 × 195 mm, surface data
+    shared byte-for-byte with the door. The nuts, connector and trim panel are constructed.
+    The <b>layout is typical of a powered, heated, folding mirror and is not verified
+    against this car's data</b>.</p>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Do the job</div>
+    <div style="margin-top:8px">
+    ${step('01','Look up the procedure',DP.m.looked,'look','What this mirror carries: heater, fold motor, indicator repeater, and on some cars a camera or blind-spot module.')}
+    ${step('02','Isolate the battery and wait',DP.m.isolated,'isolate','Before unplugging a powered mirror module.')}
+    ${step('03','Interior trim off at the mount',DP.m.trim,'trim','Click the triangular trim inside the door. The nuts and the plug are behind it.')}
+    ${step('04','Release the connector',DP.m.conn,'conn','Push it back through the grommet so the mirror is not hanging on its loom.')}
+    </div>
+    <div class="eyebrow" style="margin-top:11px">Mount nuts — ${outN}/3 out</div>
+    <div class="row" style="margin-top:7px">
+      ${Object.keys(MFIX).map(k=>`<button class="btn ${DP.m.out[k]?'on':''}" data-x="dp:${k}"
+        ${DP.m.out[k]?'disabled':''}>${MFIX[k].label.replace('Mount nut — ','')}</button>`).join('')}
+    </div>
+    <button class="btn wide primary" data-x="dp:lift" style="margin-top:10px"
+      ${DP.m.off?'disabled':''}>${DP.m.off?'Mirror is off ✓':'Take the mirror off'}</button>
+    <button class="btn wide" data-x="dp:glass" style="margin-top:6px">Lever the glass out to reach the nuts</button>
+  </div>
+
+  ${st.log.length?`<div class="card"><div class="eyebrow">What happened</div>
+    <div style="margin-top:8px;display:flex;flex-direction:column;gap:7px">
+      ${st.log.slice(0,6).map(l=>`<div class="note ${l.bad?'bad':'good'}" style="margin:0">${l.t}</div>`).join('')}
+    </div></div>`:''}
+
+  ${man('Training manual — mirror off',[
+    '<b>The fasteners are inside, the temptation is outside.</b> Mount nuts sit on the door frame behind interior trim. Nothing about the job needs the glass out, and the glass is the most fragile and most expensive-to-replace part of the assembly.',
+    '<b>Connector before fasteners, always.</b> A mirror released while still plugged in swings on its loom through the frame grommet. You stretch conductors inside insulation that still looks perfect, and you tear the grommet that keeps water out of the door.',
+    '<b>The glass is a separate part from the housing.</b> Clipped to a carrier with heater tails soldered or clipped to the back. It comes off for a glass replacement — not to reach a nut.',
+    '<b>Keep the gasket.</b> The foot seals against the door frame. A missing or folded gasket is wind noise at speed and water in the door, and both come back as a comeback rather than as an obvious fault.',
+    '<b>Test before the trim goes back on.</b> Fold, heat, indicator repeater, and any camera or blind-spot function. Refitting the trim first and then finding a dead heater means doing the access half of the job twice.',
+    '<b>On a car with a camera or blind-spot module in the housing,</b> expect a calibration or an adaptation requirement after replacement. Whether this car needs one is a data question, not a guess.'
+  ], true)}`;
+
+  return `${head}
+  <div><h2 style="font-size:19px;margin-top:2px">Door lock / latch unit</h2>
+    <p style="font-size:13px;color:var(--ink2);margin-top:6px">The latch is in the door
+    shut face, held by three screws, and joined to <b>both</b> handles by cables as well
+    as to the car by a connector. Free all four of those before the screws, or the unit
+    comes loose hanging on them.</p></div>
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+      <div class="eyebrow">Provenance</div><span class="prov built">constructed</span></div>
+    <p style="margin-top:7px">There is <b>no latch in the car file</b> — a lock lives inside
+    the door shut face and no sourced exterior model carries one. The latch, its claw and
+    pawl, the cables, the connector, the card and the glass clamp are all built in code and
+    placed on the door's own measured shut face. The <b>procedure is typical of class and is
+    not verified against this car's data</b>.</p>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Get access</div>
+    <div style="margin-top:8px">
+    ${step('01','Look up the procedure',DP.l.looked,'look','Which fasteners, and what this door carries — central locking, microswitches, and on some cars SRS.')}
+    ${step('02','Isolate the battery and wait',DP.l.isolated,'isolate','')}
+    ${step('03','Support the door glass',DP.l.secured,'secure','Clamp it at the top of the frame. With the card off it can drop into the door and break.')}
+    ${step('04','Door card off',DP.l.card,'card','')}
+    ${step('05','Peel the vapour barrier back — intact',DP.l.barrier,'barrier','It is what keeps water out of the cabin. Tear it and you get a wet carpet weeks later.')}
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Free the latch</div>
+    <div style="margin-top:8px">
+    ${step('06','Unplug the connector',DP.l.conn,'lconn','Central locking and the lock microswitches.')}
+    ${step('07','Release the interior handle cable',DP.l.cable_in,'cable_in','At the LATCH end. The retainers are directional and they snap if forced.')}
+    ${step('08','Release the exterior handle rod',DP.l.cable_out,'cable_out','')}
+    </div>
+    <div class="eyebrow" style="margin-top:11px">Shut-face screws — ${outN}/3 out</div>
+    <div class="row" style="margin-top:7px">
+      ${Object.keys(LFIX).map(k=>`<button class="btn ${DP.l.out[k]?'on':''}" data-x="dp:${k}"
+        ${DP.l.out[k]?'disabled':''}>${LFIX[k].label.replace('Shut-face screw — ','')}</button>`).join('')}
+    </div>
+    <button class="btn wide primary" data-x="dp:lift" style="margin-top:10px"
+      ${DP.l.off?'disabled':''}>${DP.l.off?'Latch is out ✓':'Withdraw the latch'}</button>
+    <button class="btn wide" data-x="dp:shut" style="margin-top:6px">Shut the door to check it</button>
+  </div>
+
+  ${st.log.length?`<div class="card"><div class="eyebrow">What happened</div>
+    <div style="margin-top:8px;display:flex;flex-direction:column;gap:7px">
+      ${st.log.slice(0,6).map(l=>`<div class="note ${l.bad?'bad':'good'}" style="margin:0">${l.t}</div>`).join('')}
+    </div></div>`:''}
+
+  ${man('Training manual — door lock out',[
+    '<b>A latch is held by three screws and joined to four other things.</b> Two handle cables, one electrical connector, and on some cars a lock-barrel link. The screws are the easy part; the order is the job.',
+    '<b>Support the glass before the card comes off.</b> With the card off and the regulator unpowered, door glass can drop inside the door. A broken pane in the bottom of a door turns a one-hour job into a glass, a regulator and a day.',
+    '<b>Cables at the LATCH end, and never forced.</b> Bowden retainers are directional plastic clips. Forced, they snap; stretched, the cable no longer pulls the claw far enough and the door will not open from the inside — which you discover only after everything is back together.',
+    '<b>The vapour barrier is a real part, not packaging.</b> It keeps water that runs down inside the door from reaching the carpet. Peel it back carefully, keep it whole, and reseal it properly.',
+    '<b>Never shut the door with the latch out or part-fitted.</b> There is nothing to catch the striker. A door that has swung shut against a missing latch can be genuinely hard to open again without damaging trim or paint.',
+    '<b>Claw and pawl, not "the lock".</b> In a rotary latch the CLAW captures the striker and the PAWL holds the claw. The handle releases the pawl, which lets the claw rotate off the striker. Getting that order right is what lets you diagnose a door that opens from outside but not inside.',
+    '<b>Finished means proven, from both sides.</b> Opens from inside, opens from outside, locks and unlocks with central locking, shuts properly with the window up AND down, and the barrier resealed. Then the card goes back on.'
   ], true)}`;
 }
 function pDiag(){
@@ -2725,6 +3106,8 @@ function handle(x,el){
   if(k==='do'){ doorAct(v); return; }
   if(k==='dotool'){ DO.tool=+v; drawPanel(); return; }
   if(k==='bo'){ bonnetAct(v); return; }
+  if(k==='dp'){ dpAct(v); return; }
+  if(k==='dpjob'){ DP.job=v; setMode('dparts'); return; }
   if(k==='door') setDoor('door_'+v,!S.doors['door_'+v]);
   if(k==='tail') setTailgate(!S.tailgate);
   if(k==='wheel') setWheelOff('wheel_'+v,!S.wheelOff['wheel_'+v]);
@@ -2853,6 +3236,19 @@ window.__bonnet = () => ({looked:BO.looked,supported:BO.supported,marked:BO.mark
     +parts.panel_bonnet.group.position.y.toFixed(3),+parts.panel_bonnet.group.position.z.toFixed(3)]:null,
   anims:anim.length,
   propVisible:bRig.prop?bRig.prop.visible:null});
+window.__dparts = () => ({job:DP.job,
+  mirror:{...DP.m, out:Object.keys(DP.m.out).length, log:DP.m.log.length,
+    last:(DP.m.log[0]||{}).t?.slice(0,90)},
+  lock:{...DP.l, out:Object.keys(DP.l.out).length, log:DP.l.log.length,
+    last:(DP.l.log[0]||{}).t?.slice(0,90)},
+  mirrorPart:!!parts.mirror_fl,
+  mirrorPos:parts.mirror_fl?[+parts.mirror_fl.group.position.x.toFixed(3),
+    +parts.mirror_fl.group.position.y.toFixed(3),
+    +parts.mirror_fl.group.position.z.toFixed(3)]:null,
+  latchPos:[+pRig.latch.position.x.toFixed(3),+pRig.latch.position.y.toFixed(3),
+    +pRig.latch.position.z.toFixed(3)],
+  rigVisible:dpRig.visible, anims:anim.length});
+window.__setDpJob = j => { DP.job=j; setMode('dparts'); };
 window.__diag = () => { const m=diagPhys(), rd=diagRead();
   return {fault:DIAG.fault, state:DIAG.state, mode:DIAG.mode,
     red:DIAG.red, black:DIAG.black, reading:rd.v+' '+rd.u,
