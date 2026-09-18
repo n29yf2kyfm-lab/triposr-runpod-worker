@@ -1,0 +1,9 @@
+# Core ABI/build constraints; not a complete transitive lock.
+torch==2.4.0+cu121
+torchvision==0.19.0+cu121
+xformers==0.0.27.post2
+nvdiffrast==0.4.0
+pip==25.1.1
+setuptools==75.8.0
+wheel==0.45.1
+urllib3>=2.2,<3
