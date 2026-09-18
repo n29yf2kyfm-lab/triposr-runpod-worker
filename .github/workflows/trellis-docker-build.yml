@@ -1,55 +1,73 @@
-name: Build and Push TRELLIS Docker Image
-
+name: Test and Build TRELLIS Candidate
 on:
+  pull_request:
+    paths: ['trellis/**', '.github/workflows/trellis-docker-build.yml']
   push:
-    branches: [ main ]
-    paths:
-      - 'trellis/**'
-      - '.github/workflows/trellis-docker-build.yml'
+    branches: [main]
+    paths: ['trellis/**', '.github/workflows/trellis-docker-build.yml']
   workflow_dispatch: {}
-
+permissions:
+  contents: read
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  tests:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      # This image (nvidia/cuda:12.1.0-devel base + torch CUDA wheels + compiled
-      # extensions) does not fit in the ~14GB free on a stock ubuntu-latest runner.
-      # Strip GitHub's preinstalled SDKs we don't need before the build even starts.
-      - name: Free disk space
-        uses: jlumbroso/free-disk-space@main
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          tool-cache: true
-          android: true
-          dotnet: true
-          haskell: true
-          large-packages: true
-          swap-storage: true
-          docker-images: false
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
+          python-version: '3.10'
+      - name: Syntax and input-safety smoke tests
+        run: |
+          python -m pip install 'Pillow>=10,<13' 'urllib3>=2.2,<3'
+          python -m compileall -q trellis
+          python - <<'PY'
+          import sys
+          sys.path.insert(0, 'trellis')
+          from input_safety import validate_job, InputError
+          assert validate_job({'input':{'prompt':'car','seed':1}})[1] == 'text'
+          for bad in (None, [], {}, {'input':None}, {'input':{}}, {'input':{'prompt':'car','image_b64':'abc'}}):
+              try:
+                  validate_job(bad)
+              except InputError:
+                  pass
+              else:
+                  raise AssertionError(f'accepted invalid input: {bad!r}')
+          print('TRELLIS input/syntax smoke tests passed')
+          PY
+  build:
+    needs: tests
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Free disk space
+        run: sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Build and Push
+      - name: Build and push candidate only
+        id: image
         uses: docker/build-push-action@v5
         with:
           context: trellis
           push: true
-          # A SHA-based tag alongside :trellis-latest so RunPod is forced to
-          # pull fresh content instead of reusing a cached image for a tag
-          # name it's already seen -- observed stale-worker behavior even
-          # after full endpoint drains pointed at this.
-          tags: |
-            alamk123/ai-mechanic:trellis-v1
-            alamk123/ai-mechanic:trellis-latest
-            alamk123/ai-mechanic:trellis-${{ github.sha }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          build-args: BUILD_REVISION=${{ github.sha }}
+          tags: alamk123/ai-mechanic:trellis-${{ github.sha }}
+          cache-from: type=gha,scope=trellis
+          cache-to: type=gha,mode=max,scope=trellis
+      - name: Record candidate digest
+        env:
+          IMAGE_DIGEST: ${{ steps.image.outputs.digest }}
+        run: |
+          printf 'alamk123/ai-mechanic@%s\n' "$IMAGE_DIGEST" > trellis-candidate.txt
+          printf 'Source revision: %s\n' "$GITHUB_SHA" >> trellis-candidate.txt
+          printf 'GPU acceptance: NOT RUN by this workflow\n' >> trellis-candidate.txt
+          cat trellis-candidate.txt >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: trellis-candidate-${{ github.sha }}
+          path: trellis-candidate.txt
