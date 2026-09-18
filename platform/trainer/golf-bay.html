@@ -960,45 +960,178 @@ const ENG = {angle:0, rpm:900, running:true, cutaway:true, focus:null};
 const eP = {pistons:[],rods:[],throws:[],valves:[],flames:[],bores:[]};
 const CR=.215, RL=.60, BORE=.33, PITCH=.50;
 const FIRING=[0,540,180,360];                    /* cyl 1,2,3,4 → 1-3-4-2 */
+/* Cam timing: lift() opens the intake over 345°-575° and the exhaust over
+   145°-375°, so peak lift is the middle of each window. A lobe built
+   pointing DOWN at zero rotation and turned by (crank − peak)/2 therefore
+   points at its valve exactly when that valve is fully open — the cam is
+   driven by the same numbers the valve motion already uses, not animated
+   separately, which is the only way the two can never disagree. */
+const CAM_PEAK = ex => ex ? (145+375)/2 : (345+575)/2;
 function buildEngine(){
-  const steel=new THREE.MeshStandardMaterial({color:0x99a1ad,metalness:.9,roughness:.32});
-  const alu=new THREE.MeshStandardMaterial({color:0xb7bec7,metalness:.72,roughness:.42});
+  /* THE PARTS WERE PRIMITIVES AND LOOKED LIKE PRIMITIVES — plain cylinders
+     for pistons, flat bars for rods, a smooth tube with tabs for a crank,
+     sticks for valves and no camshaft at all despite the panel saying the
+     cam was driven by the mechanism. The kinematics were right and the
+     shapes were not, so the bay taught the right motion and looked like a
+     school diagram. Every part below is now built the way it would be
+     recognised in a workshop; NOT ONE LINE OF THE MOTION CHANGED — the
+     tick still writes the same positions and rotations to the same
+     objects, which are now groups instead of single meshes. */
+  const steel=new THREE.MeshStandardMaterial({color:0x8b939f,metalness:.92,roughness:.28});
+  const dark =new THREE.MeshStandardMaterial({color:0x4a515b,metalness:.85,roughness:.38});
+  const alu  =new THREE.MeshStandardMaterial({color:0xc2c8d0,metalness:.62,roughness:.40});
   const gl=new THREE.MeshStandardMaterial({color:0x6d7c8c,metalness:.1,roughness:.16,
     transparent:true,opacity:.17,side:THREE.DoubleSide});
-  const sh=new THREE.Mesh(new THREE.CylinderGeometry(.085,.085,PITCH*4.2,24),steel);
-  sh.rotation.z=Math.PI/2; sh.position.y=.30; engAsm.add(sh);
+  const XC=g=>{g.rotation.z=Math.PI/2;return g};     /* lay a cylinder on X */
+
+  /* ── CRANKSHAFT ── main journals with a web between each pair, rather
+     than one smooth bar. The journals are what the block's main bearings
+     hold; the webs are what carry the throws. */
+  for (let j=0;j<5;j++){
+    const mj=new THREE.Mesh(new THREE.CylinderGeometry(.078,.078,.13,24),steel);
+    XC(mj); mj.position.set((j-2)*PITCH,.30,0); engAsm.add(mj);
+  }
+  const snout=new THREE.Mesh(new THREE.CylinderGeometry(.052,.052,.20,20),steel);
+  XC(snout); snout.position.set(-PITCH*2.2,.30,0); engAsm.add(snout);
   eP.crank=new THREE.Group(); eP.crank.position.y=.30; engAsm.add(eP.crank);
+  /* flywheel on the gearbox end, with a starter ring gear round it */
+  const fw=new THREE.Mesh(new THREE.CylinderGeometry(.30,.30,.045,36),dark);
+  XC(fw); fw.position.x=PITCH*2.2; eP.crank.add(fw);
+  const rg=new THREE.Mesh(new THREE.CylinderGeometry(.325,.325,.036,44),steel);
+  XC(rg); rg.position.x=PITCH*2.2; eP.crank.add(rg);
+  for (let t=0;t<44;t++){
+    const th2=t/44*Math.PI*2;
+    const tooth=new THREE.Mesh(new THREE.BoxGeometry(.030,.026,.016),steel);
+    tooth.position.set(PITCH*2.2,Math.cos(th2)*.335,Math.sin(th2)*.335);
+    tooth.rotation.x=-th2; eP.crank.add(tooth);
+  }
+
   for (let i=0;i<4;i++){
     const x=(i-1.5)*PITCH;
     const bore=new THREE.Mesh(new THREE.CylinderGeometry(BORE/2,BORE/2,.70,32,1,true),gl);
     bore.position.set(x,.95,0); engAsm.add(bore); eP.bores.push(bore);
-    const p=new THREE.Mesh(new THREE.CylinderGeometry(BORE/2-.012,BORE/2-.012,.21,28),alu);
-    p.position.x=x; engAsm.add(p); eP.pistons.push(p);
-    const rod=new THREE.Mesh(new THREE.BoxGeometry(.048,RL,.085),steel);
-    rod.position.x=x; engAsm.add(rod); eP.rods.push(rod);
+
+    /* ── PISTON ── crown, three ring grooves, skirt, gudgeon pin. The rings
+       are the detail that makes a cylinder read as a piston. */
+    const p=new THREE.Group(); p.position.x=x; engAsm.add(p); eP.pistons.push(p);
+    const pr=BORE/2-.012;
+    const crown=new THREE.Mesh(new THREE.CylinderGeometry(pr,pr,.075,28),alu);
+    crown.position.y=.068; p.add(crown);
+    const dish=new THREE.Mesh(new THREE.CylinderGeometry(pr*.66,pr*.78,.016,24),
+      new THREE.MeshStandardMaterial({color:0x9aa1aa,metalness:.5,roughness:.55}));
+    dish.position.y=.100; p.add(dish);
+    for (const ry of [.036,.014,-.008]){
+      const ring=new THREE.Mesh(new THREE.CylinderGeometry(pr+.004,pr+.004,.013,28),dark);
+      ring.position.y=ry; p.add(ring);
+    }
+    const skirt=new THREE.Mesh(new THREE.CylinderGeometry(pr-.004,pr-.006,.11,28),alu);
+    skirt.position.y=-.072; p.add(skirt);
+    const gp=new THREE.Mesh(new THREE.CylinderGeometry(.028,.028,pr*1.9,16),steel);
+    XC(gp); gp.position.y=-.040; p.add(gp);
+
+    /* ── CON ROD ── an I-beam with a big end, a small end and cap bolts.
+       Built symmetric about its own origin with the SMALL end at +Y,
+       because the tick places it at the midpoint and rotates it so +Y
+       points at the gudgeon pin. */
+    const rod=new THREE.Group(); rod.position.x=x; engAsm.add(rod); eP.rods.push(rod);
+    const web1=new THREE.Mesh(new THREE.BoxGeometry(.026,RL-.15,.056),steel); rod.add(web1);
+    for (const dz of [-.028,.028]){
+      const fl2=new THREE.Mesh(new THREE.BoxGeometry(.052,RL-.15,.014),steel);
+      fl2.position.z=dz; rod.add(fl2);
+    }
+    const small=new THREE.Mesh(new THREE.TorusGeometry(.034,.017,10,20),steel);
+    small.rotation.y=Math.PI/2; small.position.y=RL/2-.034; rod.add(small);
+    const big=new THREE.Mesh(new THREE.TorusGeometry(.066,.026,12,26),steel);
+    big.rotation.y=Math.PI/2; big.position.y=-RL/2+.066; rod.add(big);
+    const cap=new THREE.Mesh(new THREE.BoxGeometry(.050,.030,.175),dark);
+    cap.position.y=-RL/2+.008; rod.add(cap);
+    for (const dz of [-.072,.072]){
+      const bolt=new THREE.Mesh(new THREE.CylinderGeometry(.013,.013,.062,6),dark);
+      bolt.position.set(0,-RL/2+.046,dz); rod.add(bolt);
+    }
+
+    /* ── CRANK THROW ── crankpin, two webs, and the counterweight opposite
+       it. A crank without counterweights reads as a bent rod. */
     const th=new THREE.Group();
-    const pin=new THREE.Mesh(new THREE.CylinderGeometry(.050,.050,.15,18),steel);
-    pin.rotation.z=Math.PI/2; pin.position.y=CR;
-    const web=new THREE.Mesh(new THREE.BoxGeometry(.055,CR+.15,.19),steel); web.position.y=CR/2;
-    th.add(pin,web); th.position.x=x;
+    const pin=new THREE.Mesh(new THREE.CylinderGeometry(.052,.052,.175,20),steel);
+    XC(pin); pin.position.y=CR; th.add(pin);
+    for (const dx of [-.098,.098]){
+      const web=new THREE.Mesh(new THREE.BoxGeometry(.044,CR+.05,.165),steel);
+      web.position.set(dx,CR/2,0); th.add(web);
+      const cw=new THREE.Mesh(new THREE.CylinderGeometry(.175,.175,.044,22,1,false,
+        Math.PI*0.62,Math.PI*0.76),dark);
+      XC(cw); cw.position.x=dx; th.add(cw);
+    }
+    th.position.x=x;
     if (i===1||i===2) th.rotation.x=Math.PI;      /* cyl 2 & 3 throws at 180° */
     eP.crank.add(th); eP.throws.push(th);
+
+    /* ── VALVES ── head, stem, spring and retainer, colour-coded intake
+       blue / exhaust orange as before. */
     const vs=[];
     for (const [k,dz] of [[0,-.082],[1,.082]]){
       const v=new THREE.Group();
-      const st=new THREE.Mesh(new THREE.CylinderGeometry(.015,.015,.20,12),steel); st.position.y=.10;
-      const hd=new THREE.Mesh(new THREE.CylinderGeometry(.072,.060,.028,20),
-        new THREE.MeshStandardMaterial({color:k?0xc4643a:0x5f96d6,metalness:.82,roughness:.32}));
-      v.add(st,hd); v.position.set(x,1.30,dz); engAsm.add(v); vs.push(v);
+      const st=new THREE.Mesh(new THREE.CylinderGeometry(.013,.013,.30,14),steel);
+      st.position.y=.15; v.add(st);
+      const hd=new THREE.Mesh(new THREE.CylinderGeometry(.074,.040,.034,22),
+        new THREE.MeshStandardMaterial({color:k?0xc4643a:0x5f96d6,metalness:.82,roughness:.30}));
+      hd.position.y=.006; v.add(hd);
+      for (let c=0;c<7;c++){                       /* valve spring */
+        const coil=new THREE.Mesh(new THREE.TorusGeometry(.040,.0075,8,18),dark);
+        coil.rotation.x=Math.PI/2; coil.position.y=.088+c*.024; v.add(coil);
+      }
+      const ret=new THREE.Mesh(new THREE.CylinderGeometry(.046,.038,.016,16),steel);
+      ret.position.y=.268; v.add(ret);
+      v.position.set(x,1.30,dz); engAsm.add(v); vs.push(v);
     }
     eP.valves.push(vs);
     const fl=new THREE.PointLight(0xFF6A1E,0,1.3,2); fl.position.set(x,1.22,0);
     engAsm.add(fl); eP.flames.push(fl);
   }
-  eP.head=new THREE.Mesh(new THREE.BoxGeometry(PITCH*4.2,.10,.60),
+
+  /* ── CAMSHAFTS ── two of them, one per valve row, each carrying a lobe
+     per cylinder. The panel has always said the cam is driven by the
+     mechanism; until now there was no cam on screen to drive. */
+  eP.cams=[];
+  for (const [k,dz] of [[0,-.082],[1,.082]]){
+    const shaft=new THREE.Mesh(new THREE.CylinderGeometry(.038,.038,PITCH*4.4,20),steel);
+    /* the shaft sits one base-circle radius above the valve's closed
+         retainer face (1.576 + 0.105), so the lobe is in contact at zero
+         lift instead of hovering over it */
+      XC(shaft); shaft.position.set(0,1.681,dz); engAsm.add(shaft);
+    const row=[];
+    for (let i=0;i<4;i++){
+      const lobe=new THREE.Group(); lobe.position.set((i-1.5)*PITCH,1.681,dz);
+      const base=new THREE.Mesh(new THREE.CylinderGeometry(.105,.105,.052,26),dark);
+      XC(base); lobe.add(base);
+      /* THE LOBE IS SIZED FROM THE VALVE MOTION, not drawn by eye. A
+         two-circle lobe lifts by (d + r - R) at the nose and returns to
+         the base circle when d·cos(phi) + r = R. The valve is open for
+         230 degrees of crank, i.e. 115 of cam, so phi = 57.5 at closing;
+         with the peak lift of 0.062 that fixes d = 0.134 and r = 0.033
+         for a base circle of 0.105. The first attempt was drawn by eye and
+         stood 0.013 proud while the valve dropped 0.062 — the lobe let go
+         of the valve it is supposed to be pushing. Residual error against
+         the sine the tick actually uses is under 2 mm at quarter lift. */
+      const nose=new THREE.Mesh(new THREE.CylinderGeometry(.033,.033,.052,18),dark);
+      XC(nose); nose.position.y=-.134; lobe.add(nose);
+      const ramp=new THREE.Mesh(new THREE.BoxGeometry(.052,.150,.070),dark);
+      ramp.position.y=-.068; lobe.add(ramp);
+      engAsm.add(lobe); row.push(lobe);
+    }
+    eP.cams.push(row);
+  }
+
+  /* THE HEAD IS A CASTING, not a plate. A 100 mm slab under the valves
+     left the springs and the camshafts hanging in mid air; a cutaway head
+     that encloses the valvetrain is what the rest of it sits inside, and
+     it is the shape a trainee recognises. Deck face at 1.29, just above
+     the valve heads, up past the cam line at 1.681. */
+  eP.head=new THREE.Mesh(new THREE.BoxGeometry(PITCH*4.4,.46,.62),
     new THREE.MeshStandardMaterial({color:0x767d87,metalness:.7,roughness:.5,
-      transparent:true,opacity:.42}));
-  eP.head.position.y=1.30; engAsm.add(eP.head);
+      transparent:true,opacity:.15,side:THREE.DoubleSide}));
+  eP.head.position.y=1.52; engAsm.add(eP.head);
+  engAsm.traverse(o=>{ if(o.isMesh){o.castShadow=true;o.receiveShadow=true;} });
   engAsm.visible=false;
 }
 const pistonY = d => { const t=THREE.MathUtils.degToRad(d);
@@ -1018,12 +1151,21 @@ function engineTick(dt){
     const topY=.30+y, pY=.30+pinY, pZ=pinZ;
     eP.rods[i].position.set(eP.rods[i].position.x,(pY+topY)/2,pZ/2);
     eP.rods[i].rotation.x=Math.atan2(-pZ,topY-pY);
-    for (const [k,v] of eP.valves[i].entries()) v.position.y=1.30-lift(a,k)*.062;
+    for (const [k,v] of eP.valves[i].entries()){
+      v.position.y=1.30-lift(a,k)*.062;
+      /* the lobe turns at half crank speed and is built pointing down, so
+         subtracting its own peak angle puts the nose on the valve exactly
+         when lift() says that valve is fully open. Same numbers, one
+         source — a separately animated cam could drift out of step. */
+      if (eP.cams) eP.cams[k][i].rotation.x=
+        THREE.MathUtils.degToRad(((a-CAM_PEAK(k))/2+360)%360);
+    }
     eP.flames[i].intensity=(a<26?(1-a/26):0)*5.2;
     const on = ENG.focus===null || ENG.focus===i;
     eP.pistons[i].visible=eP.rods[i].visible=on;
     eP.bores[i].visible=on&&ENG.cutaway;
     eP.valves[i].forEach(v=>v.visible=on);
+    if (eP.cams) eP.cams.forEach(row=>row[i].visible=on);
   }
   eP.head.visible=ENG.cutaway;
 }
@@ -2841,7 +2983,10 @@ function setMode(m){
   if (m==='door') flyTo(new THREE.Vector3(0,.68,0),new THREE.Vector3(.75,1.05,2.45));
   if (m==='starter') flyTo(new THREE.Vector3(.20,.31,0),new THREE.Vector3(.72,.72,1.15));
   if (m==='alt') flyTo(new THREE.Vector3(0,.30,0),new THREE.Vector3(.52,.60,.78));
-  if (m==='engine') flyTo(new THREE.Vector3(0,.80,0),new THREE.Vector3(1.75,1.35,2.35));
+  /* the assembly grew a flywheel, a ring gear and two camshafts, so the
+     old framing cropped the cam line off the top and the flywheel off the
+     right — measured extents are now x +/-1.1, y 0 to 1.75 */
+  if (m==='engine') flyTo(new THREE.Vector3(0,.88,0),new THREE.Vector3(2.30,1.80,3.40));
   if (bench) drawCircuit();
   drawHud(); drawPanel();
 }
@@ -4015,6 +4160,15 @@ window.__setXray = on => { setXray(on); drawHud(); };
 window.__lamp = v => { bayLamp.intensity=v; return bayLamp.intensity; };
 /* the starter bay hides the body, pulls an inner wing out and lights a lamp
    — three things that have to be PUT BACK by every other bay */
+/* the cam is new geometry driven off the valve timing, so a harness has to
+   be able to check the two agree at every angle rather than at the one
+   angle a screenshot happens to catch */
+window.__eng = () => ({angle:+ENG.angle.toFixed(1),
+  pistonY: eP.pistons.map(p=>+p.position.y.toFixed(4)),
+  valveY:  eP.valves.map(vs=>vs.map(v=>+v.position.y.toFixed(4))),
+  camRot:  eP.cams ? eP.cams.map(row=>row.map(l=>+l.rotation.x.toFixed(4))) : null,
+  parts:   engAsm.children.length});
+window.__setEng = o => { Object.assign(ENG,o); engineTick(0); };
 window.__bayState = () => ({mode:MODE, lamp:bayLamp.intensity,
   bodyVisible: parts.body ? parts.body.group.visible : null,
   wingR: bP.wingR ? bP.wingR.visible : null, xray:S.xray});
