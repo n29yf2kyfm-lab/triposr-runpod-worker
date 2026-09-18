@@ -408,14 +408,23 @@ for (const s of [sceneCar, sceneRig]){
   const d = 4.2;                          /* tight around a 4.3m car */
   Object.assign(k.shadow.camera,{left:-d,right:d,top:d,bottom:-d,near:.5,far:26});
   k.shadow.bias = -0.0012; k.shadow.normalBias = 0.02;
-  const f = new THREE.DirectionalLight(0xbfd4ff,.42); f.position.set(-6,2.4,-4);
-  const r = new THREE.DirectionalLight(0xffe9cf,.55); r.position.set(-2,1.6,-7);
+  /* The fill and rim lights sat LOW (y 2.4 and 1.6), so they grazed the
+     floor and lit it to luma 155 on one side against 69 on the other —
+     measured, not eyeballed. Raised so they hit the car's flanks and
+     shoulders instead of skimming the ground. */
+  const f = new THREE.DirectionalLight(0xbfd4ff,.42); f.position.set(-6,4.6,-4);
+  const r = new THREE.DirectionalLight(0xffe9cf,.50); r.position.set(-2,3.8,-7);
   s.add(k,f,r,new THREE.AmbientLight(0xffffff,.10));
 }
 /* A dark, slightly glossy floor. Matte near-black read as a flat void; a
    little reflectivity puts the car's own colour back under it, which is
    what makes a studio shot feel like a studio. */
-const floorMat = new THREE.MeshStandardMaterial({color:0x0a0d12,roughness:.42,metalness:.30});
+/* Reflective enough to catch the car's colour, NOT enough to mirror the
+   overhead softbox — at metalness .30 / roughness .42 the floor came back
+   as a white sweep across half the frame and swallowed the contact shadow
+   it exists to show. envMapIntensity is the real lever here. */
+const floorMat = new THREE.MeshStandardMaterial({color:0x06080b,roughness:.82,metalness:.02});
+floorMat.envMapIntensity = 0.05;
 const floor = new THREE.Mesh(new THREE.CircleGeometry(11,80), floorMat);
 floor.rotation.x = -Math.PI/2; floor.position.y = -.002; floor.receiveShadow = true;
 sceneCar.add(floor);
@@ -857,6 +866,7 @@ function buildStarter(){
     const a=i/44*Math.PI*2; t.position.set(0,Math.cos(a)*.178,Math.sin(a)*.178); t.rotation.x=a;
     sParts.ring.add(t);
   }
+  starterAsm.traverse(o=>{ if(o.isMesh){o.castShadow=true;o.receiveShadow=true;} });
   starterAsm.visible = false;
 }
 function starterTick(dt){
@@ -1104,10 +1114,15 @@ const bayAsm = new THREE.Group();
 const BAY = {engine:true};
 const bP = {};
 function buildBayEngine(){
+  /* A real engine bay is DARK: black plastic covers, black rubber, dull
+     alloy. First pass used mid-grey casting at high metalness and the
+     whole engine came back bright silver, like a plastic model kit — the
+     owner's "engine don't look realistic". Everything is darker and
+     rougher, and only the genuinely machined parts stay bright. */
   const M=(c,o={})=>new THREE.MeshStandardMaterial({color:c,roughness:.5,metalness:.55,...o});
-  const cast=M(0x767e88,{roughness:.66,metalness:.45}),
-        plastic=M(0x21262d,{roughness:.82,metalness:.06}),
-        alu=M(0x9aa3af,{metalness:.9,roughness:.3}),
+  const cast=M(0x4b5158,{roughness:.78,metalness:.32}),
+        plastic=M(0x1a1e24,{roughness:.86,metalness:.05}),
+        alu=M(0x767d86,{metalness:.82,roughness:.42}),
         cu=M(0xb87333,{metalness:.9,roughness:.32}),
         rubber=M(0x15181c,{roughness:.95,metalness:.03}),
         red=M(0xB3202B,{roughness:.5,metalness:.2}),
@@ -1267,6 +1282,10 @@ function buildBayEngine(){
   bP.relay.userData={tp:'relay'};     bP.ect.userData={tp:'ect'};
   bP.ckp.userData={tp:'ckp'};
   bP.alt.userData={bay:'alt', tp:'alt_b'};
+  /* Shadows SEAT it. Without them the bay is lit identically from every
+     direction and reads as pasted on top of the car rather than down
+     inside it — no occlusion in the corners, no shadow under the loom. */
+  bayAsm.traverse(o=>{ if(o.isMesh){ o.castShadow=true; o.receiveShadow=true; } });
   bayAsm.visible=false; carRoot.add(bayAsm);
 }
 
@@ -1388,6 +1407,7 @@ function buildAlternator(){
   add(dark,new THREE.BoxGeometry(.034,.060,.070),-.205,.235,0);
   /* output stud */
   add(cu,new THREE.CylinderGeometry(.009,.009,.035,10),-.205,.372,.045).rotation.z=Math.PI/2;
+  altAsm.traverse(o=>{ if(o.isMesh){o.castShadow=true;o.receiveShadow=true;} });
   altAsm.visible=false;
 }
 function alternatorTick(dt){
