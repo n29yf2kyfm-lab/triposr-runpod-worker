@@ -2281,9 +2281,14 @@ function setMode(m){
     /* door OPEN: every fastener in both jobs is inside the door or on its
        shut face, and none of it is reachable through a closed door */
     setDoor('door_fl',true);
+    /* Both cameras sat close enough to fill the frame with door skin. The
+       mirror is viewed from front-outboard so the mount and the mirror are
+       both in shot; the latch lives in the shut face, which points REARWARD,
+       so that one is viewed from behind-outboard or you are looking at the
+       back of the door. */
     const mir=DP.job==='mirror';
-    flyTo(mir ? new THREE.Vector3(.86,1.00,.56) : new THREE.Vector3(.80,.70,-.22),
-          mir ? new THREE.Vector3(2.05,1.42,1.60) : new THREE.Vector3(2.10,1.25,-.95)); }
+    flyTo(mir ? new THREE.Vector3(.84,1.00,.50) : new THREE.Vector3(.74,.72,-.26),
+          mir ? new THREE.Vector3(2.60,1.62,1.95) : new THREE.Vector3(2.45,1.38,-1.55)); }
   if (m==='door') flyTo(new THREE.Vector3(0,.68,0),new THREE.Vector3(.75,1.05,2.45));
   if (m==='starter') flyTo(new THREE.Vector3(.20,.31,0),new THREE.Vector3(.72,.72,1.15));
   if (m==='alt') flyTo(new THREE.Vector3(0,.30,0),new THREE.Vector3(.52,.60,.78));
