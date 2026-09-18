@@ -1925,75 +1925,54 @@ function buildBayEngine(){
   bP.crankPulley.rotation.z=Math.PI/2;
   /* ALTERNATOR, in its real place: driven off the crank, low on the
      ancillary side of the block. Clicking it opens the Alternator bay. */
-  /* ── THE ALTERNATOR, FROM THE OWNER'S PHOTOGRAPH ───────────────────────
-     It was a plain grey cylinder with a copper disc on one end. A real one
-     is unmistakable and none of what makes it so was here: two PALE CAST
-     CLAMSHELLS bolted together with a bronze stator pack showing at the
-     seam, deep COOLING SLOTS all round both housings WITH THE COPPER
-     WINDINGS VISIBLE THROUGH THEM, the regulator and brush pack bolted on
-     the back with its connector, and a ribbed pulley.
-     There is no boolean cut available here, so the slots are made the same
-     way the flywheel's teeth are: MODEL THE METAL BETWEEN THEM. Ten fins
-     per housing at the case radius, with a copper ring sitting just inside,
-     and the gaps between the fins are the slots — with real windings
-     behind them rather than a dark stripe painted on a drum. */
-  bP.alt=new THREE.Group(); bP.alt.position.set(.34,.70,1.72); bayAsm.add(bP.alt);
+  /* ── THE ALTERNATOR — A GENERATED MESH OF THE OWNER'S OWN PHOTOGRAPH ──
+     This was built by hand out of primitives: two rings of fins with a
+     copper cylinder behind them to fake the cooling slots. It was a fair
+     likeness and it was still obviously code. The owner asked whether the
+     parts could be AI-generated instead, and for this one the answer is
+     plainly yes: their photograph of a real VW alternator went through
+     image-to-3D and came back as 30,511 triangles with a full PBR set —
+     cast housings, the slots as real openings, the windings behind them,
+     the regulator cover and the mounting foot.
+
+     WHAT WAS MEASURED BEFORE TRUSTING IT, because a generated part arrives
+     in whatever frame the generator felt like:
+       * SHAFT AXIS — rendered down each principal axis in turn; the +X
+         view is the circular one, so the shaft lies on X, which is the
+         axis this bay already uses. The mounting foot renders at the
+         bottom of that view, so the mesh's +Y is up. No rotation needed,
+         which was luck rather than judgement and was checked rather than
+         assumed.
+       * SCALE — the mesh arrives normalised to a ~1.9 unit cube. Scaled so
+         the case diameter is 145 mm.
+       * WEIGHT — 15.2 MB as generated, against 6.5 MB for the whole car.
+         Resized to 1024, WebP, meshopt: 1.14 MB, and the compressed render
+         differs from the original by a mean of 3/255 per channel (PSNR
+         31.2 dB). I first read that as the compression having washed the
+         materials out; the pixel diff says it did not, and the two renders
+         I was comparing were minutes apart.
+
+     THE PULLEY IS STILL CONSTRUCTED. The photograph does not show that end
+     of the machine, so the generator did not invent one — correct
+     behaviour, and the six-groove pulley built here is kept and mated to
+     the shaft end. The generated body's regulator cover faces +X, so the
+     pulley goes on -X and the whole assembly is positioned to put that
+     pulley in the belt plane. */
+  bP.alt=new THREE.Group(); bP.alt.position.set(.43,.70,1.72); bayAsm.add(bP.alt);
   const altTag=o=>{ o.userData={bay:'alt'}; return o; };
-  const castAl=M(0xb9bfc4,{roughness:.62,metalness:.45});   /* sand-cast alloy:
-     pale and matt, not the polished 0.9-metalness grey it had — a real
-     alternator body is the LIGHTEST thing on that side of the engine */
-  const windM=M(0xa8641f,{roughness:.55,metalness:.7});
-  const AR=.070;
-  /* the windings, seen through the slots */
-  for (const hx of [-.040,.040]){
-    /* the windings sit RIGHT BEHIND the slot openings — at r .055 they were
-       7 mm back inside the case, in shadow, so the slots read as plain dark
-       gaps instead of showing copper the way the photograph does */
-    const w=new THREE.Mesh(new THREE.CylinderGeometry(.062,.062,.052,24),windM);
-    w.rotation.z=Math.PI/2; w.position.x=hx; altTag(w); bP.alt.add(w);
-  }
-  /* the cast housings, built as fins so the gaps are genuine openings */
-  for (const hx of [-.040,.040]){
-    /* 12 fins 22 mm wide on a 37 mm pitch leaves a real 15 mm slot between
-       each pair. At 30 mm wide the gaps closed to 10 mm and the case read as
-       a cog rather than a vented housing. */
-    for (let i=0;i<12;i++){
-      const a=i/12*Math.PI*2;
-      const fin=new THREE.Mesh(new THREE.BoxGeometry(.056,.022,.016),castAl);
-      fin.position.set(hx,Math.cos(a)*AR,Math.sin(a)*AR); fin.rotation.x=-a;
-      altTag(fin); bP.alt.add(fin);
-    }
-    /* the rims either side of the slots, which is what the fins bolt to */
-    for (const rx of [hx-.030,hx+.030]){
-      const rim=new THREE.Mesh(new THREE.CylinderGeometry(AR+.006,AR+.006,.016,26),castAl);
-      rim.rotation.z=Math.PI/2; rim.position.x=rx; altTag(rim); bP.alt.add(rim);
-    }
-  }
-  /* the stator pack showing as a bronze band at the joint between them */
-  const band=new THREE.Mesh(new THREE.CylinderGeometry(AR+.004,AR+.004,.016,26),
-    M(0x9c6b30,{roughness:.6,metalness:.65}));
-  band.rotation.z=Math.PI/2; altTag(band); bP.alt.add(band);
-  /* through-bolts running the length of the case */
-  for (const a of [Math.PI*.25,Math.PI*.75,Math.PI*1.25,Math.PI*1.75]){
-    const tb=new THREE.Mesh(new THREE.CylinderGeometry(.005,.005,.150,8),
-      M(0x7e858d,{roughness:.4,metalness:.85}));
-    tb.rotation.z=Math.PI/2;
-    tb.position.set(0,Math.cos(a)*(AR+.004),Math.sin(a)*(AR+.004));
-    altTag(tb); bP.alt.add(tb);
-  }
-  /* REGULATOR AND BRUSH PACK on the back, with its connector and the B+
-     stud under its cover — the parts a charging fault actually turns on */
-  const reg=new THREE.Mesh(roundedBox(.030,.085,.075,.010),
-    M(0x53585f,{roughness:.72,metalness:.25}));
-  reg.position.set(-.090,-.010,0); altTag(reg); bP.alt.add(reg);
-  const rconn=new THREE.Mesh(roundedBox(.024,.026,.022,.005),
-    M(0x1d2228,{roughness:.85,metalness:.06}));
-  rconn.position.set(-.096,.030,.038); altTag(rconn); bP.alt.add(rconn);
-  bP.altStud=altTag(new THREE.Mesh(new THREE.CylinderGeometry(.008,.008,.020,10),cu));
-  bP.altStud.rotation.z=Math.PI/2; bP.altStud.position.set(-.104,-.030,-.026);
-  bP.alt.add(bP.altStud);
-  /* ribbed drive pulley — six grooves, the give-away that it runs a poly-V */
-  bP.altPulley=new THREE.Group(); bP.altPulley.position.x=.082; bP.alt.add(bP.altPulley);
+  const ALT_S=.0766;                     /* 1.893 units -> 145 mm diameter */
+  loader.load('alt.glb.wasm', g=>{
+    const m=g.scene; m.scale.setScalar(ALT_S);
+    m.traverse(o=>{ if(o.isMesh){ o.castShadow=true; o.receiveShadow=true;
+      altTag(o); } });
+    altTag(m); bP.alt.add(m);
+  }, undefined, e=>{
+    /* a missing part must not take the bay down with it — the bay still
+       teaches the charging job with the pulley and the belt alone */
+    console.warn('alternator mesh unavailable:', e && e.message);
+  });
+  /* ribbed drive pulley — six grooves, on the shaft end, in the belt plane */
+  bP.altPulley=new THREE.Group(); bP.altPulley.position.x=-.085; bP.alt.add(bP.altPulley);
   for (let i=0;i<6;i++){
     const d=new THREE.Mesh(new THREE.CylinderGeometry(.031,.031,.004,20),
       M(0x8d949d,{roughness:.42,metalness:.8}));
@@ -2001,11 +1980,6 @@ function buildBayEngine(){
     altTag(d); bP.altPulley.add(d);
   }
   altTag(bP.altPulley);
-  /* mounting ear and its bolt, low on the case */
-  const ear=new THREE.Mesh(roundedBox(.070,.028,.026,.008),castAl);
-  ear.position.set(.010,-.078,0); altTag(ear); bP.alt.add(ear);
-  altTag(add(M(0x8d949d,{metalness:.85,roughness:.4}),
-    new THREE.CylinderGeometry(.011,.011,.034,6),.010,-.078,.030,bP.alt)).rotation.x=Math.PI/2;
   bP.alt.userData={bay:'alt'};
 
   /* ── CRANK PULLEY / DAMPER ──────────────────────────────────────────
