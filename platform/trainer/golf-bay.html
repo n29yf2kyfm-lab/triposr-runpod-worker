@@ -2996,8 +2996,11 @@ const specCard = (ids,title='Workshop data') => `
 /* ═════════════════════════════════════════════════════════════════════
    PART NUMBERS — FROM OUR OWN PARTS DATABASE, WITH THE GENERATION KEPT
 
-   These come out of the Spare Parts Hub parts table (66,506 rows, 373 of
-   them VW Golf). They are real numbers with real year ranges, and the year
+   These come out of the Spare Parts Hub parts table (66,506 rows, 952 of
+   them VW Golf — the first count taken was 373, because the filter matched
+   the make as "Volkswagen" only and 583 Golf rows spell it "Vw" or "VW".
+   Missing 61% of the data that way also hid three Mk8 parts: both
+   headlights and the radiator). They are real numbers with real year ranges, and the year
    range is the whole point: VW's prefix tells you the generation, and the
    car in this trainer is a Mk8. A 5H0 part is a Mk8 part. A 5G0 or 5Q0
    part is a Mk7. A 1K0 or 5K0 part is older still.
