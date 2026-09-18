@@ -1358,7 +1358,7 @@ function dpAct(act){
    pointing into an empty void.
    ═══════════════════════════════════════════════════════════════════ */
 const bayAsm = new THREE.Group();
-const BAY = {engine:true};
+const BAY = {engine:true, cover:true};
 const bP = {};
 function buildBayEngine(){
   /* A real engine bay is DARK: black plastic covers, black rubber, dull
@@ -1377,6 +1377,25 @@ function buildBayEngine(){
           opacity:.42,roughness:.25,metalness:0});
   const add=(m,g,x,y,z,grp)=>{const o=new THREE.Mesh(g,m);o.position.set(x,y,z);
     (grp||bayAsm).add(o);return o};
+
+  /* ROUNDED BOXES. Hard-edged BoxGeometry is why the bay kept reading as
+     cardboard however the materials were tuned: nothing on a car has a
+     0 mm radius edge, and a sharp cuboid catches the studio light as a
+     flat plate with a bright rim. An extruded rounded rectangle with a
+     bevel gives every casting a highlight that curves, which is most of
+     the difference between "box" and "part". */
+  const roundedBox=(w,h,d,r=.012)=>{
+    const s=new THREE.Shape();
+    const x=w/2-r, y=h/2-r;
+    s.moveTo(-x,-h/2); s.lineTo(x,-h/2); s.quadraticCurveTo(w/2,-h/2,w/2,-y);
+    s.lineTo(w/2,y); s.quadraticCurveTo(w/2,h/2,x,h/2);
+    s.lineTo(-x,h/2); s.quadraticCurveTo(-w/2,h/2,-w/2,y);
+    s.lineTo(-w/2,-y); s.quadraticCurveTo(-w/2,-h/2,-x,-h/2);
+    const g=new THREE.ExtrudeGeometry(s,{depth:d-r*1.2,bevelEnabled:true,
+      bevelThickness:r*.6,bevelSize:r*.6,bevelSegments:2,curveSegments:4});
+    g.translate(0,0,-(d-r*1.2)/2); g.computeVertexNormals();
+    return g;
+  };
 
   /* A corrugated hose along a curve. Straight cylinders were most of why
      the bay read as "boxes in a hole" — a real bay is mostly curved rubber
@@ -1398,19 +1417,45 @@ function buildBayEngine(){
     }
   };
 
-  /* block + sump, transverse: long axis on X, which is the car's width.
-     Chamfered with a second, slightly smaller box on top so the silhouette
-     is not one hard slab. */
-  add(cast,new THREE.BoxGeometry(.62,.26,.34),0,.53,1.52);
-  add(cast,new THREE.BoxGeometry(.56,.05,.30),0,.665,1.52);
-  add(cast,new THREE.BoxGeometry(.50,.13,.28),0,.375,1.52);
+  /* ── THE BAY ITSELF ──────────────────────────────────────────────────
+     The car file is a hollow exterior shell: open the bonnet and you look
+     into a black void with the inside of the far bodywork floating in it,
+     which is why the engine read as parts pasted over a hole rather than
+     an engine IN a bay. A real bay is a box — two inner wings, a bulkhead
+     behind, a slam panel in front, a floor below — and components bolt to
+     those surfaces. Building that box is the single biggest change here. */
+  /* roundedBox builds its rectangle in XY and extrudes along Z, so a wall
+     that must be THIN ON X is authored long-on-X and then rotated 90° about
+     Y — which maps local X onto Z and the thin depth onto X. Getting that
+     backwards (passing the length as the depth) makes a 0.9 m thick slab
+     instead of a panel, so the rotation is an explicit flag here rather
+     than something inferred from the proportions. */
+  const shellM=M(0x2e343b,{roughness:.82,metalness:.22});
+  const bayShell=[
+    [ .90,.34,.045,  .60,.640,1.52, true ],   /* inner wing, left  */
+    [ .90,.34,.045, -.60,.640,1.52, true ],   /* inner wing, right */
+    [1.22,.40,.045,   0, .660,1.14, false],   /* bulkhead / scuttle */
+    [1.22,.26,.045,   0, .560,1.98, false],   /* slam panel */
+    [1.22,.045,.86,   0, .335,1.55, false],   /* bay floor */
+  ];
+  for (const [w,h,d,x,y,z,rot] of bayShell){
+    const o=add(shellM,roundedBox(w,h,d,.02),x,y,z);
+    if (rot) o.rotation.y=Math.PI/2;
+  }
+  /* a strut brace across the top of the two towers */
+  add(alu,roundedBox(1.05,.045,.075,.016),0,.735,1.42);
+
+  /* block + sump, transverse: long axis on X, which is the car's width */
+  add(cast,roundedBox(.62,.26,.34,.020),0,.53,1.52);
+  add(cast,roundedBox(.56,.05,.30,.014),0,.665,1.52);
+  add(cast,roundedBox(.50,.13,.28,.018),0,.375,1.52);
   /* head, then a RIBBED cam cover: ten cast ribs across it, an oil cap and
      a dipstick. This is the part you actually look at with the bonnet up. */
-  add(cast,new THREE.BoxGeometry(.60,.085,.30),0,.735,1.52);
-  add(M(0x2b3038,{roughness:.55,metalness:.25}),new THREE.BoxGeometry(.58,.075,.27),0,.815,1.515);
+  add(cast,roundedBox(.60,.085,.30,.014),0,.735,1.52);
+  add(M(0x2b3038,{roughness:.55,metalness:.25}),roundedBox(.58,.075,.27,.012),0,.815,1.515);
   for (let i=0;i<10;i++)
     add(M(0x32383f,{roughness:.5,metalness:.3}),
-      new THREE.BoxGeometry(.030,.022,.245),-.245+i*.054,.858,1.515);
+      roundedBox(.030,.022,.245,.006),-.245+i*.054,.858,1.515);
   bP.oilCap=add(M(0xE0B33A,{roughness:.45,metalness:.35}),
     new THREE.CylinderGeometry(.033,.033,.026,18),-.20,.872,1.44);
   add(M(0xE0B33A,{roughness:.5,metalness:.3}),
@@ -1451,6 +1496,45 @@ function buildBayEngine(){
     M(0x0f1215,{roughness:.92,metalness:.03}));
   hose([[.30,.86,1.36],[.34,.82,1.50],[.33,.78,1.66]],.013,
     M(0x0f1215,{roughness:.92,metalness:.03}));
+
+  /* BRAKE MASTER CYLINDER AND ITS RESERVOIR on the bulkhead, and the ABS
+     block beside it. On a real bay these sit right where you look first and
+     their absence was conspicuous. */
+  add(alu,new THREE.CylinderGeometry(.038,.038,.14,18),-.30,.615,1.19)
+    .rotation.x=Math.PI/2;
+  add(translucent,roundedBox(.115,.10,.16,.024),-.30,.705,1.24);
+  add(M(0x1d2228,{roughness:.6,metalness:.15}),
+    new THREE.CylinderGeometry(.026,.026,.022,14),-.30,.762,1.24);
+  bP.abs=add(M(0x3c434b,{roughness:.55,metalness:.55}),
+    roundedBox(.10,.09,.085,.012),-.44,.520,1.22);
+  for (let i=0;i<5;i++)           /* brake pipes fanning out of the ABS unit */
+    hose([[-.44,.560,1.22],[-.40+i*.03,.60,1.26],[-.34+i*.05,.56,1.34]],.005,alu,10);
+
+  /* FUSE BOX with a lid that reads as a lid, and the washer bottle neck */
+  add(M(0x1b1f25,{roughness:.85,metalness:.05}),roundedBox(.17,.095,.14,.016),-.53,.695,1.44);
+  add(M(0x262b32,{roughness:.7,metalness:.08}),roundedBox(.175,.022,.145,.008),-.53,.752,1.44);
+  add(M(0x2b3138,{roughness:.8,metalness:.06}),
+    new THREE.CylinderGeometry(.030,.030,.10,14),.56,.700,1.72);
+  add(M(0x3d6cc0,{roughness:.5,metalness:.15}),
+    new THREE.CylinderGeometry(.034,.034,.022,16),.56,.760,1.72);
+
+  /* THE MOULDED ENGINE COVER — on a modern GTI this is most of what you
+     see with the bonnet up, and without it the bay looked like a stripped
+     engine on a stand. It is its own group so it can be REMOVED, which is
+     both realistic and necessary: the coils, the cam cover and the coolant
+     sensor all live underneath it and the Diagnose bay needs them. */
+  bP.cover=new THREE.Group(); bayAsm.add(bP.cover);
+  const coverM=M(0x15181d,{roughness:.62,metalness:.08});
+  const cv=(g,x,y,z)=>{const o=new THREE.Mesh(g,coverM);o.position.set(x,y,z);
+    bP.cover.add(o);return o};
+  cv(roundedBox(.60,.075,.40,.035),0,.880,1.50);
+  cv(roundedBox(.52,.045,.34,.030),0,.925,1.50);
+  for (let i=0;i<7;i++)            /* moulded-in cooling slots */
+    cv(roundedBox(.035,.020,.22,.008),-.21+i*.07,.948,1.50);
+  const badge=new THREE.Mesh(roundedBox(.10,.012,.045,.006),
+    M(0xC01B2B,{roughness:.35,metalness:.45}));
+  badge.position.set(.16,.952,1.34); bP.cover.add(badge);
+  bP.cover.userData={bay:null};
   /* crank pulley and the belt run — the alternator is DRIVEN from here */
   bP.crankPulley=add(alu,new THREE.CylinderGeometry(.085,.085,.035,24),.34,.45,1.62);
   bP.crankPulley.rotation.z=Math.PI/2;
@@ -2237,6 +2321,11 @@ function setMode(m){
   altAsm.visible=(m==='alt');
   doorRig.visible=(m==='doorOff'); bonnetRig.visible=(m==='bonnetOff');
   bayAsm.visible=((m==='bonnetOff' && BAY.engine) || m==='diag');
+  /* the cover hides the coils, the cam cover and the coolant sensor, so the
+     Diagnose bay starts with it OFF — which is also what you would have
+     done to the real car before putting a probe anywhere near them */
+  if (m==='diag') BAY.cover=false;
+  if (bP.cover) bP.cover.visible=BAY.cover;
   diagRig.visible=(m==='diag');
   dpRig.visible=(m==='dparts');
   plinth.visible=(m==='door'||m==='starter'||m==='engine'||m==='alt');
@@ -2307,6 +2396,7 @@ function drawHud(){
     ? b('doReset','Start again')+`<span class="chip">${Object.keys(DO.out).length}/4 bolts out${DO.stops?` · ${DO.stops} stop${DO.stops>1?'s':''}`:''}</span>`
     : MODE==='bonnetOff'
     ? b('boReset','Start again')+b('bengine',BAY.engine?'Engine bay on':'Engine bay off',BAY.engine)
+      +b('bcover',BAY.cover?'Cover on':'Cover off',BAY.cover)
       +`<span class="chip">${Object.keys(BO.out).length}/2 bolts out${BO.stops?` · ${BO.stops} stop${BO.stops>1?'s':''}`:''}</span>`
     : MODE==='alt'
     ? b('afield',ALT.field?'Field ON':'Field OFF',ALT.field)
@@ -2318,7 +2408,7 @@ function drawHud(){
         (DP.job==='mirror'?DP.m:DP.l).stops?` \u00b7 ${(DP.job==='mirror'?DP.m:DP.l).stops} stop${
         (DP.job==='mirror'?DP.m:DP.l).stops>1?'s':''}`:''}</span>`
     : MODE==='diag'
-    ? b('dgnew','New work order')
+    ? b('dgnew','New work order')+b('bcover',BAY.cover?'Cover on':'Cover off',BAY.cover)
       +`<span class="chip">${['Key off','Ignition on','Cranking','Running']
         [['off','ign','crank','run'].indexOf(DIAG.state)]} · tap a point to probe${
         DIAG.replaced.length?` · ${DIAG.replaced.length} part${DIAG.replaced.length>1?'s':''} replaced`:''}</span>`
@@ -2347,6 +2437,7 @@ function act(a){
   if(a==='doReset') doorAct('reset');
   if(a==='boReset') bonnetAct('reset');
   if(a==='bengine'){BAY.engine=!BAY.engine; bayAsm.visible=(MODE==='bonnetOff'&&BAY.engine);}
+  if(a==='bcover'){BAY.cover=!BAY.cover; if(bP.cover) bP.cover.visible=BAY.cover;}
   if(a==='afield') ALT.field=!ALT.field;
   if(a==='adiode') ALT.diode=!ALT.diode;
   if(a==='dgnew'){ diagNew(); paintDiagRig(); }
@@ -3271,6 +3362,7 @@ window.__alt = () => { const r=altSolve();
 /* a harness must be able to drive it without clicking a range input */
 window.__setAlt = o => { Object.assign(ALT,o); drawHud(); drawPanel(); };
 window.__bay = () => ({visible:bayAsm.visible, on:BAY.engine,
+  cover:BAY.cover, coverVisible:bP.cover?bP.cover.visible:null,
   meshes:bayAsm.children.length,
   altInBay:!!bP.alt, bonnetRotX:parts.panel_bonnet
     ?+parts.panel_bonnet.group.rotation.x.toFixed(3):null});
