@@ -5119,3 +5119,52 @@ stylesheet's `[hidden]{display:none}`, so the loading overlay could never be
 dismissed and the app sat behind it forever, on every device. One line
 (`[hidden]{display:none !important}`) fixes it. The code read correctly; only
 a real browser showed it.
+
+## SkillSpector INSTALLED, and its static stage is NOISY — read the evidence (2026-09-18)
+
+Owner asked for NVIDIA's SkillSpector and for the installed skills to be
+checked. It is real (github.com/NVIDIA/SkillSpector, Apache 2.0, active — the
+clone landed on a commit from the same day), it installs, and it runs.
+
+**Install note:** it needs Python >=3.12 and this container has 3.11, so a
+plain `pip install` refuses. `uv tool install --python 3.12 ./SkillSpector`
+fetches a managed CPython and works. The semantic stage wants an LLM key and
+dies without one; `--no-llm` runs the 71 static patterns, which is the part
+worth having. Reports come back with `analysis_completeness: partial` then —
+that is expected, not a failure.
+
+**READ THE REPORT'S `issues` KEY, NOT `findings`.** My first parse looked for
+`findings`, got nothing, and I nearly reported all four skills clean. The
+schema is `risk_assessment` + `issues`. Same empty-by-construction failure this
+file documents elsewhere, this time in my own one-line parser.
+
+**WHAT IT SAID:** unlazy 100/CRITICAL, graphify 88/CRITICAL, graphify-auto
+75/HIGH — all three `DO_NOT_INSTALL` — and task-observer 38/MEDIUM `CAUTION`.
+
+**WHAT THE EVIDENCE ACTUALLY WAS.** Five worst findings opened and read at the
+cited line. ALL FIVE ARE FALSE POSITIVES:
+  * unlazy "Agent Snooping" -> a HELP STRING listing where the hook installs
+    itself (`.claude/settings.json`). A hook installer naming its install
+    target.
+  * unlazy "Memory Poisoning" -> the stop-hook DELETING ITS OWN session entry
+    from its own hook-state.json. Routine cleanup.
+  * unlazy "Data Exfiltration" -> a DIRECTORY TREE IN DOCUMENTATION listing the
+    files the pipeline writes. It matched the word "session" in a diagram.
+  * graphify "Anti-Refusal" -> the line is *"Never run HTML viz on a graph with
+    more than 5,000 nodes WITHOUT WARNING THE USER."* It flagged an instruction
+    to warn the user as an instruction to suppress warnings. Exactly backwards.
+  * graphify "Tool Misuse" -> `rm -f` on its own temp files inside its own
+    output directory.
+
+**So do not uninstall anything on that scan.** The tool is still worth keeping
+as a pre-install screen for skills from strangers — but its output is a
+CANDIDATE LIST, and the rule this project already applies to every other
+detector applies here too: open the cited line before acting. A score of
+100/CRITICAL on a skill whose three HIGH findings are a help string, a cleanup
+delete and a docs tree is a measurement of the scanner, not of the skill.
+
+**Does it contradict the earlier "verified clean" note on graphify and
+task-observer?** No, and the distinction is worth keeping: that review checked
+for network calls, environment reads and credential access. SkillSpector checks
+71 behavioural patterns, including whether a skill tells an agent to act
+autonomously — which every useful skill does. Both readings stand.
