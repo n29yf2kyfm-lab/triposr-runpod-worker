@@ -1334,12 +1334,17 @@ function setMode(m){
     setDoor('door_fl',true);
     flyTo(new THREE.Vector3(.78,.82,.70),new THREE.Vector3(2.30,1.34,2.15)); }
   if (m==='bonnetOff'&&carReady){ setXray(false); setExplode(0);
-    iso(['body','panel_bonnet','cabin','seats','steering','glazing','wheel_fl','wheel_fr','lamps_front']);
+    /* No isolation. The door bay hides the far side of the car because the
+       job is INSIDE a door shut; a bonnet job is done on a whole car, and
+       isolating here just deleted the doors on screen — which reads as a
+       broken model, not as a focused view. */
+    iso(null);
+    ['door_fl','door_fr','door_rl','door_rr'].forEach(id=>setDoor(id,false));
     /* open it: a shut bonnet hides every fastener this bay is about */
     const pb=parts.panel_bonnet;
     if (pb && !BO.off){ pb.group.position.copy(pb.home);
       tween(pb.group.rotation,'x',-BONNET_OPEN,700); }
-    flyTo(new THREE.Vector3(0,.92,1.00),new THREE.Vector3(2.35,2.05,4.15)); }
+    flyTo(new THREE.Vector3(0,.88,1.05),new THREE.Vector3(1.95,1.70,3.45)); }
   if (m==='door') flyTo(new THREE.Vector3(0,.68,0),new THREE.Vector3(.75,1.05,2.45));
   if (m==='starter') flyTo(new THREE.Vector3(.20,.31,0),new THREE.Vector3(.72,.72,1.15));
   if (m==='engine') flyTo(new THREE.Vector3(0,.80,0),new THREE.Vector3(1.75,1.35,2.35));
