@@ -1643,22 +1643,72 @@ function buildBayEngine(){
      a dipstick. This is the part you actually look at with the bonnet up. */
   add(cast,roundedBox(.60,.085,.30,.014),0,.735,1.52);
   add(M(0x2b3038,{roughness:.55,metalness:.25}),roundedBox(.58,.075,.27,.012),0,.815,1.515);
-  for (let i=0;i<10;i++)
-    add(M(0x32383f,{roughness:.5,metalness:.3}),
-      roundedBox(.030,.022,.245,.006),-.245+i*.054,.858,1.515);
+  /* Ten tall ribs across the whole cover read as a computer keyboard. A
+     real cam cover is mostly a smooth moulding with a raised centre
+     section and a few shallow stiffening ribs down one side of it. */
+  add(M(0x30363d,{roughness:.5,metalness:.28}),
+    roundedBox(.50,.028,.175,.020),0,.862,1.515);
+  for (let i=0;i<6;i++)
+    add(M(0x353c44,{roughness:.5,metalness:.3}),
+      roundedBox(.022,.010,.150,.005),-.135+i*.054,.878,1.515);
   bP.oilCap=add(M(0xE0B33A,{roughness:.45,metalness:.35}),
     new THREE.CylinderGeometry(.033,.033,.026,18),-.20,.872,1.44);
   add(M(0xE0B33A,{roughness:.5,metalness:.3}),
     new THREE.TorusGeometry(.017,.006,8,16),.13,.845,1.40).rotation.x=Math.PI/2;
   add(alu,new THREE.CylinderGeometry(.005,.005,.13,8),.13,.79,1.40);
-  /* intake manifold: a plenum with four CURVED runners sweeping into the
-     head, not four straight pins */
-  add(M(0x2a2f36,{roughness:.7,metalness:.1}),new THREE.BoxGeometry(.44,.115,.125),0,.755,1.315);
+  /* ── DIRECT-INJECTION FUEL RAIL ──────────────────────────────────────
+     The owner sent photographs of a real VW bay, and the thing that is
+     unmistakable in every one of them — and was missing here entirely —
+     is the fuel side sitting on top of the cam cover: a rail across the
+     head, four injectors dropping into it, PALE HARD LINES (steel, not
+     rubber) looping between them, and the high-pressure pump driven off
+     the cam at one end. It is also the right thing to model, because the
+     bay's own four-stroke panel says this engine injects straight into
+     the cylinder. Nothing else on an engine looks like this, which is why
+     its absence read as "not a real engine".
+     LIVE AT PRESSURE, and that is not decoration: a direct-injection rail
+     holds fuel at a very high pressure that does not fall when the engine
+     stops, which is why nobody cracks one of these unions casually. */
+  const hardline=M(0xb9bec4,{roughness:.34,metalness:.85});
+  const railM=M(0x8f959c,{roughness:.42,metalness:.78});
+  add(railM,new THREE.CylinderGeometry(.021,.021,.50,16),0,.905,1.455)
+    .rotation.z=Math.PI/2;
   for (let i=0;i<4;i++){
     const x=-.21+i*.14;
-    hose([[x,.755,1.375],[x,.80,1.43],[x,.775,1.475]],.030,
-      M(0x2a2f36,{roughness:.7,metalness:.1}),14);
+    /* injector: body, electrical connector on top, and its line to the rail */
+    add(M(0x2b3138,{roughness:.6,metalness:.25}),
+      new THREE.CylinderGeometry(.020,.016,.075,14),x,.862,1.455);
+    add(M(0x1d2228,{roughness:.8,metalness:.08}),
+      roundedBox(.030,.024,.026,.006),x,.918,1.418);
+    hose([[x,.905,1.455],[x+.028,.930,1.437],[x+.010,.918,1.418]],.0075,hardline,10);
   }
+  /* the high-pressure pump on the cam housing, and its feed to the rail */
+  add(alu,new THREE.CylinderGeometry(.040,.040,.070,18),.295,.885,1.455);
+  add(M(0x2b3138,{roughness:.6,metalness:.3}),
+    new THREE.CylinderGeometry(.046,.046,.020,18),.295,.926,1.455);
+  hose([[.268,.900,1.455],[.180,.930,1.470],[.060,.925,1.462],[0,.905,1.455]],.010,hardline,14);
+  /* a second hard line running forward off the rail, the long loop that
+     shows up as a bright arc across the top of the head in the photographs */
+  hose([[-.235,.905,1.455],[-.30,.935,1.405],[-.30,.930,1.330],[-.24,.900,1.300]],
+    .009,hardline,16);
+
+  /* intake manifold: a plenum with four CURVED runners sweeping into the
+     head, not four straight pins. THE PLASTIC IS PALE, not near-black —
+     VW's inlet mouldings are a light grey-beige and in the reference
+     photographs they are one of only two light things on the whole engine.
+     Everything here being the same dark slate is most of why the bay read
+     as a single grey lump whatever the shapes were. */
+  const inletM=M(0xa39a8b,{roughness:.72,metalness:.06});
+  add(inletM,roundedBox(.44,.115,.125,.020),0,.755,1.315);
+  for (let i=0;i<4;i++){
+    const x=-.21+i*.14;
+    hose([[x,.755,1.375],[x,.80,1.43],[x,.775,1.475]],.030,inletM,14);
+  }
+  /* the throttle body on the end of the plenum, and its connector */
+  add(M(0x7f8890,{roughness:.5,metalness:.55}),
+    new THREE.CylinderGeometry(.044,.044,.055,18),-.245,.755,1.315).rotation.z=Math.PI/2;
+  add(M(0x1d2228,{roughness:.8,metalness:.08}),
+    roundedBox(.026,.030,.022,.005),-.245,.800,1.315);
   /* airbox with a lid seam and a CONVOLUTED intake duct into the throttle */
   add(M(0x23282f,{roughness:.8,metalness:.06}),new THREE.BoxGeometry(.30,.11,.24),-.36,.695,1.82);
   add(M(0x2c323a,{roughness:.7,metalness:.08}),new THREE.BoxGeometry(.305,.045,.245),-.36,.772,1.82);
@@ -1671,6 +1721,18 @@ function buildBayEngine(){
     new THREE.TorusGeometry(.055,.028,10,20),-.05,.455,1.72).rotation.y=Math.PI/2;
   ribbed([[.02,.45,1.70],[.18,.50,1.78],[.30,.58,1.80]],.036,
     M(0x8d949d,{roughness:.45,metalness:.7}),6);
+  /* PIPES ACROSS THE TOP OF THE HEAD. In the owner's reference photographs
+     nothing on the engine is uncluttered — hard lines, a breather and a
+     vacuum pipe all cross the cam cover, held down by little clips. A bare
+     cover with one rail on it is the tidiest engine ever built, and that
+     tidiness is a large part of what reads as "not a real engine". */
+  hose([[-.30,.885,1.395],[-.10,.898,1.378],[.12,.893,1.392],[.32,.880,1.410]],
+    .011,hardline,16);
+  hose([[.30,.860,1.560],[.08,.882,1.575],[-.16,.876,1.560],[-.31,.855,1.535]],
+    .015,M(0x16191e,{roughness:.93,metalness:.03}),16);
+  for (const [cx,cz] of [[-.18,1.392],[.16,1.390],[.02,1.570],[-.22,1.556]])
+    add(M(0x2a2f36,{roughness:.8,metalness:.08}),
+      roundedBox(.024,.018,.026,.005),cx,.905,cz);
   /* coolant hoses to the radiator, and the rad itself at the nose */
   hose([[.24,.60,1.44],[.38,.60,1.60],[.42,.55,1.88]],.026,
     M(0x14171b,{roughness:.9,metalness:.04}));
@@ -1807,6 +1869,21 @@ function buildBayEngine(){
     add(shieldM,roundedBox(.015,.010,.155,.004),-.13+i*.04,.556,1.66);
   bP.oilFilter=add(M(0x2b3a52,{roughness:.55,metalness:.35}),
     new THREE.CylinderGeometry(.042,.042,.095,16),.22,.455,1.42);
+  /* ── THE BULKHEAD HEAT SHIELD ──────────────────────────────────────
+     A big sheet of corrugated aluminium standing across the back of the
+     bay. It is the brightest thing in the owner's reference photographs
+     and it is what gives a real bay its depth: a light surface BEHIND the
+     dark engine, so the engine reads as an object in a space rather than
+     as a grey lump on a grey wall. */
+  /* NOT a mirror: at metalness .88 the shield reflects an environment that
+     is nearly black down in the bay, so the "brightest thing in the bay"
+     rendered as a dark grille. Brushed aluminium — light base colour, low
+     metalness, matt — is what actually reads bright under this rig. */
+  const foil=M(0xcdd4da,{metalness:.25,roughness:.55});
+  add(foil,new THREE.BoxGeometry(.86,.28,.010),.02,.700,1.175);
+  for (let i=0;i<26;i++)         /* the corrugations, running vertically */
+    add(foil,new THREE.BoxGeometry(.012,.268,.016),-.40+i*.033,.700,1.183);
+  add(foil,new THREE.BoxGeometry(.88,.022,.030),.02,.845,1.180);   /* top edge roll */
   /* connector blocks on the loom */
   for (const [x,y,z] of [[-.16,.893,1.33],[.06,.893,1.33],[.24,.868,1.35]])
     add(M(0x23282f,{roughness:.8,metalness:.06}),roundedBox(.030,.026,.020,.005),x,y,z);
@@ -1863,10 +1940,23 @@ function buildBayEngine(){
     M(0x8e1f26,{roughness:.85,metalness:.05}));
   hose([[-.45,.735,1.23],[-.40,.60,1.28],[-.32,.48,1.32]],.012,
     M(0x11141a,{roughness:.9,metalness:.05}));
-  /* coolant bottle with a cap, and the strut tops */
-  add(translucent,new THREE.CylinderGeometry(.070,.070,.19,20),.44,.615,1.30);
-  add(M(0x1c2026,{roughness:.7,metalness:.1}),
-    new THREE.CylinderGeometry(.036,.036,.026,16),.44,.722,1.30);
+  /* COOLANT EXPANSION BOTTLE — a big white translucent moulding with a
+     BLUE cap, sitting proud of everything round it. In the owner's
+     reference photographs it is the first thing your eye lands on; here
+     it was a small grey cylinder with a near-black cap, which is neither
+     the size nor the colour. Level marks and the sender plug too, because
+     those are what a trainee is actually sent to look at. */
+  add(translucent,roundedBox(.185,.215,.165,.035),.44,.630,1.30);
+  bP.coolCap=add(M(0x2E7CD6,{roughness:.42,metalness:.12}),
+    new THREE.CylinderGeometry(.052,.052,.038,20),.44,.752,1.30);
+  for (let i=0;i<5;i++)            /* cap grip ribs */
+    add(M(0x2E7CD6,{roughness:.42,metalness:.12}),
+      new THREE.BoxGeometry(.012,.040,.104),.44-.032+i*.016,.752,1.30);
+  for (const [dy,w] of [[.020,.055],[-.020,.038]])   /* MAX and MIN marks */
+    add(M(0xe8ecef,{roughness:.6,metalness:.05}),
+      new THREE.BoxGeometry(w,.008,.006),.36,.630+dy,1.384);
+  add(M(0x2b3138,{roughness:.7,metalness:.15}),     /* level-sender plug */
+    new THREE.CylinderGeometry(.020,.020,.030,12),.44,.520,1.30);
   for (const x of [-.52,.52]){
     add(cast,new THREE.CylinderGeometry(.085,.085,.09,20),x,.675,1.42);
     add(M(0x8d949d,{roughness:.4,metalness:.8}),
