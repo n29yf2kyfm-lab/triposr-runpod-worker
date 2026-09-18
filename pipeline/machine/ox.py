@@ -66,6 +66,41 @@ import urllib.request
 ENV_FILE = "/root/.alam3d_env"
 URL = "https://openrouter.ai/api/v1/chat/completions"
 MODEL = os.environ.get("OX_MODEL", "z-ai/glm-5.3-flash")
+
+# ── FREE CHAIN ──────────────────────────────────────────────────────────
+# The owner asked for a free-LLM router to cut spend. The tool doing the
+# rounds (freellmapi) wants keys for 34 providers behind a gateway, and its
+# own README says personal experimentation only. It is also forked so widely
+# that a web search returns nine byte-identical repos under nine usernames,
+# which is the supply-chain problem rather than a solution to it.
+#
+# None of that is needed. THE KEY WE ALREADY HOLD REACHES 25 GENUINELY FREE
+# MODELS -- measured against OpenRouter's own model list, prompt AND
+# completion both 0, of 446 total. The one good idea in the router is
+# failover, and that is the twenty lines below.
+#
+# Measured on this key: nvidia/nemotron-3-ultra-550b-a55b:free answered a
+# real technical question correctly at cost=0. A council review that cost
+# $0.14 on unbiased/pareto costs nothing here.
+#
+# NOT EVERY ":free" MODEL IS REACHABLE. thinkingmachines/inkling:free returns
+# HTTP 403 "only available on agentic harnesses" -- so the chain must skip a
+# model that refuses rather than treating the refusal as the answer. That is
+# what FREE_CHAIN plus the 403/429/5xx skip below is for.
+#
+#     OX_FREE=1 python3 ox.py "question"      # walk the free chain
+#
+# This does NOT reduce Claude Code's own usage -- that runs on Anthropic's
+# API and no third-party gateway can route it. It reduces what THIS REPO
+# spends on its own calls, which is the council reviews and the eye audits.
+FREE_CHAIN = [
+    "nvidia/nemotron-3-ultra-550b-a55b:free",   # 550B, 1M ctx, verified cost 0
+    "deepseek/deepseek-v4-flash-0731:free",     # 1M ctx
+    "nvidia/nemotron-3.5-lightning:free",       # 1M ctx, fast
+    "qwen/qwen3.8-27b:free",                    # 262K, vision
+    "google/gemma-4-31b-it:free",               # 262K, vision
+]
+USE_FREE = os.environ.get("OX_FREE", "0") == "1"
 MAX_TOKENS = int(os.environ.get("OX_MAX_TOKENS", "20000"))
 SHOW_REASONING = os.environ.get("OX_REASONING", "0") == "1"
 
@@ -138,6 +173,27 @@ def ask(prompt, model=MODEL, max_tokens=MAX_TOKENS, images=None):
             time.sleep(2 ** attempt)
 
 
+def ask_free(prompt, max_tokens=MAX_TOKENS, images=None):
+    """Walk FREE_CHAIN until one model answers, and say which one did.
+
+    A free endpoint can refuse for reasons that are nothing to do with the
+    prompt: OpenRouter gates some free models to agentic harnesses (HTTP 403),
+    and a shared free pool rate-limits (429). ask() correctly EXITS on a 403,
+    because for a single named model that is a real failure. Here it is not --
+    it just means try the next one. So this catches the exit and moves on, and
+    only gives up when the whole chain has refused.
+    """
+    last = None
+    for m in FREE_CHAIN:
+        print(f"[free] trying {m}", file=sys.stderr)
+        try:
+            return ask(prompt, model=m, max_tokens=max_tokens, images=images)
+        except SystemExit as e:
+            last = str(e)
+            print(f"[free] {m} unavailable: {last[:120]}", file=sys.stderr)
+    sys.exit(f"every model in FREE_CHAIN refused. last: {last}")
+
+
 def main():
     args = sys.argv[1:]
     images = []
@@ -164,7 +220,10 @@ def main():
     if not prompt.strip():
         sys.exit("REFUSED: empty prompt")
 
-    d = ask(prompt, images=images or None)
+    if USE_FREE:
+        d = ask_free(prompt, images=images or None)
+    else:
+        d = ask(prompt, images=images or None)
     ch = (d.get("choices") or [{}])[0]
     msg = ch.get("message") or {}
     content = msg.get("content")

@@ -5168,3 +5168,39 @@ task-observer?** No, and the distinction is worth keeping: that review checked
 for network calls, environment reads and credential access. SkillSpector checks
 71 behavioural patterns, including whether a skill tells an agent to act
 autonomously — which every useful skill does. Both readings stand.
+
+## THE FREE-LLM ANSWER WAS ALREADY ON THE KEY WE HOLD (2026-09-18)
+
+Owner asked to install `freellmapi` — one endpoint over 34 free providers — to
+cut spend. Checked before installing, and did not install it.
+
+**What it is:** a key manager and router. You still need an account and a key
+with each of the 34 providers; it stores them encrypted and fails over between
+them. The "7.4 billion tokens a month" is the sum of those providers' free
+tiers, not something it grants. Its own README says personal experimentation
+only. And a web search for it returns NINE byte-identical repos under nine
+different usernames — picking one is the supply-chain problem, not a solution
+to it.
+
+**What was already true, and measured:** `OPENROUTER_API_KEY` reaches **25
+genuinely free models** — prompt AND completion both 0, out of 446 on the
+list. `nvidia/nemotron-3-ultra-550b-a55b:free` is a 550B model with a 1M
+context and it answered a real technical question correctly at **cost=0**.
+A council review that cost $0.14 on unbiased/pareto now costs nothing.
+
+So `ox.py` gained `OX_FREE=1` and a `FREE_CHAIN` with failover — the one good
+idea in the router, in twenty lines, against a key we already have and with no
+new accounts, no gateway and no third-party holding our prompts.
+
+**NOT EVERY `:free` MODEL IS REACHABLE, and this is why the chain exists.**
+`thinkingmachines/inkling:free` returns **HTTP 403 "only available on agentic
+harnesses"**. `ask()` correctly EXITS on a 403 — for a single named model that
+is a real failure — so `ask_free` catches the exit and moves on instead.
+Fault-injected by putting the gated model first in the chain: it 403s, the
+chain skips it, the next model answers at cost 0. The failover has been
+OBSERVED to fire, which is the standard this file holds every other guard to.
+
+**IT DOES NOT REDUCE CLAUDE CODE'S OWN USAGE.** That runs on Anthropic's API
+and no third-party gateway can route it. What it reduces is what THIS REPO
+spends on its own calls — the council reviews and the eye audits. Say that
+plainly rather than letting "free API" imply the session itself got cheaper.
