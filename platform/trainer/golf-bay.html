@@ -4472,7 +4472,13 @@ window.__bay = () => ({visible:bayAsm.visible, on:BAY.engine,
 window.__groups = () => Object.fromEntries(Object.entries(parts).map(([k,v])=>
   [k,{meshes:v.meshes.length, tris:v.tris,
       names:v.meshes.slice(0,2).map(m=>(m.name||'').slice(0,34)),
-      groupChildren:v.group.children.length}]));
+      groupChildren:v.group.children.length,
+      /* measured centre and size, so a harness can FRAME a part instead of
+         guessing a camera at it. The manual's mirror and starter-bolt plates
+         were both framed by eye and both missed what their captions promised;
+         a figure script can now ask where the thing is. */
+      c:v.centre.toArray().map(n=>+n.toFixed(4)),
+      size:v.box.getSize(new THREE.Vector3()).toArray().map(n=>+n.toFixed(4))}]));
 window.__meshNames = () => { const o=[]; carRoot.traverse(m=>{ if(m.isMesh && o.length<8)
     o.push({name:m.name, cls:m.userData.partId}); }); return o; };
 /* camera probe — a bay camera is only "correct" if the thing it is meant to

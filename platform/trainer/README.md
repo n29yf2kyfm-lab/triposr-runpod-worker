@@ -1,7 +1,13 @@
 # Strip Bay — mechanics teardown trainer
 
-`golf-bay.html` is the whole app: one file, seven bays, no build step.
+`golf-bay.html` is the whole app: one file, thirteen modes, no build step.
 Published 2026-09-17 as a private artifact.
+
+The modes, as the tab strip orders them: Strip · Door off · Bonnet off ·
+Inside a door · Starter · Alternator · Mirror & lock · Starter off ·
+Interior · Engine · Brake job · Diagnose · Bench. (This line read "seven
+bays" until 2026-09-19 and had been wrong for some time — count them from
+`MODES` rather than trusting prose.)
 
 ## What is REAL and what is CONSTRUCTED
 
@@ -18,7 +24,19 @@ lamps, glazing, sunroof.
 CONSTRUCTED in code, and captioned as such:
 door internals (regulator, latch, beam, loom, barrier), starter motor,
 four-stroke engine, brake pads, the four door hinge bolts, the loom boot,
-the door prop, the bench circuit.
+the door prop, the bench circuit, and the alternator's drive pulley and
+drive-end housing.
+
+GENERATED, and a third category on purpose — neither real car geometry nor
+hand-built primitives: the **alternator body** (`alt.glb.wasm`, 148,304
+triangles) is image-to-3D from the owner's own photograph of a VW
+alternator. It is the only generated asset in the app. What that buys over
+the primitives it replaced is real cooling slots with the windings visible
+through them, the split line, the belt band and the mounting lug. What it
+costs is that the photograph's background came with it — the crank pulley,
+a bracket, a clip and some engine hardware, all fused into one solid — and
+those are removed by a position cut, not by anything clever. Provenance and
+the cull are documented at the call site in `golf-bay.html`.
 
 ABSENT from the car file entirely — checked across all 163 meshes, zero
 matches: bumper (welded into the body mesh with bonnet, wings and roof),

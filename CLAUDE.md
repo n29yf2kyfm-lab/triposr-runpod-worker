@@ -5307,3 +5307,47 @@ validator on the output and DIFF IT AGAINST THE INPUT) was applied: the
 generated source raises it too, and so does the Meshy part that had been
 shipping in the app for a day. Reported as a new defect it would have been
 wrong. `gltf-transform tangents` before meshopt clears it for +230 KB.
+
+## A CAMERA SWEEP MEASURES THE GRID IT WAS GIVEN (2026-09-19, Strip Bay figures)
+
+Closing the manual's caption debt turned up two ways an occlusion probe lies,
+both found by running it rather than reading it.
+
+**`__project`'s `blocked` SELF-HITS on a bulk part's centroid.** The mirror
+plate sweep scored **0 of 27 clear** and the blocker was `Asm_Mirror_FL_1` —
+the mirror's own shell. The probe raycasts to the point and ignores hits
+within 20 mm of it, which is right for a 30 mm fastener and wrong for a
+170 mm assembly whose centroid sits ~53 mm inside its own skin. A "clear 0"
+on a bulk part is the instrument, not the scene. Probe a point ON the surface,
+or widen the tolerance to the part's own half-size, or skip the occlusion test
+and keep only the in-frame test. The fall-through camera (nearest candidate,
+framed on `__groups`' measured centre) produced the best mirror plate the
+manual has had — cap, housing and the sail panel all resolvable.
+
+**A sweep whose grid cannot contain the answer reports zero and looks
+authoritative.** The starter-bolt sweep scored 0 of 27 at dx −0.30…−0.46 m.
+The clearance condition is arithmetic: the bolts sit 104 mm off the starter
+axis, the motor body has a 58 mm radius and 242 mm of it lies between camera
+and bolt plane, so a ray aimed at the midpoint stays outside the body only if
+0.104·(1−t) > 0.058 over t ∈ [0, 0.242/D] — i.e. **D > 0.548 m**. Every camera
+in the first grid was inside that. Widening to −0.60…−1.00 m scored 0 of 36
+as well, and the render at the best of them is the commutator end cap filling
+the frame. **Derive the bound before choosing the grid, and when a sweep
+returns zero, check whether the answer was reachable at all.**
+
+**The verdict was a MODELLING defect, recorded not fixed.** `sFl` (the ear
+plate, local x .128 → world −0.372) sits inside the bellhousing face plate
+(x −0.3825…−0.3075) it is supposed to bolt against, and the bolt heads at
+x −0.365 are recessed inside the ear. So the caption's "they stand proud of
+the motor body" was never true of this model. Fixing it means moving the ear
+plate outboard of the face and the `SFIX` bolt positions with it — a change to
+the job rig, its tween targets and its log text, which is more than a figure
+pass. The caption now says the bolts are on the far face and no camera shows
+them with the motor fitted, which is true of the model AND of the car.
+
+**And check the claim against the FILE when it is about construction.** Fig
+6.1 claims the mirror is "four separate shells — painted cap, housing,
+indicator lens and the chrome insert". Parsing the GLB's JSON chunk:
+`Asm_Mirror_FL`, 4 primitives, materials `CarPaint` / `Atlas` / `light_glass` /
+`phong13`. Exactly right, and settled offline for nothing — where reading it
+off the render would have been a guess about a dark band under a painted cap.
