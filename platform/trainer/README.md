@@ -98,7 +98,10 @@ invisible in the source and invisible in a screenshot:
 * `verify.mjs` — loads every bay in real Chromium, screenshots each, records
   panel size / manual count / HUD count, and collects console + page errors.
 * `probe.mjs` — asserts on STATE, not pixels. `partIds` is the one that
-  matters: 23 is healthy, 1 means classification failed.
+  matters: **25 is healthy** (measured 2026-09-19 against the shipped GLB;
+  this line said 23 and was stale — the bonnet and the mirror became their
+  own groups when `panel_cut.py` cut them out). 1 means classification
+  failed and nothing will come apart.
 * `doorprobe.mjs` — walks the door job in the WRONG order and asserts each
   hard stop fires, then does it right and checks the door actually leaves.
 

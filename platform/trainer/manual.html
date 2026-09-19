@@ -1,3 +1,13 @@
+<meta charset="utf-8">
+<!-- WITHOUT THIS THE PAGE IS UNREADABLE ON A PHONE, and it is easy to miss
+     because the artifact host injects a viewport meta of its own — so the
+     published copy was always fine while the file itself was not. Served
+     anywhere else (GitHub Pages, python -m http.server) a page with no
+     viewport meta lays out at the 980px fallback width and is then zoomed
+     out to fit: measured here at innerWidth 980 on a 390px screen. The
+     host's copy is identical to this one, so having both changes nothing
+     there. -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Strip Bay Workshop Manual</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
