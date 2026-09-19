@@ -1931,38 +1931,72 @@ function buildBayEngine(){
      likeness and it was still obviously code. The owner asked whether the
      parts could be AI-generated instead, and for this one the answer is
      plainly yes: their photograph of a real VW alternator went through
-     image-to-3D and came back as 30,511 triangles with a full PBR set —
-     cast housings, the slots as real openings, the windings behind them,
-     the regulator cover and the mounting foot.
+     image-to-3D and came back with cast housings, the slots as real
+     openings, the windings visible behind them, the split line, the belt
+     band, the mounting lug and the tensioner ear.
 
-     WHAT WAS MEASURED BEFORE TRUSTING IT, because a generated part arrives
-     in whatever frame the generator felt like:
-       * SHAFT AXIS — rendered down each principal axis in turn; the +X
-         view is the circular one, so the shaft lies on X, which is the
-         axis this bay already uses. The mounting foot renders at the
-         bottom of that view, so the mesh's +Y is up. No rotation needed,
-         which was luck rather than judgement and was checked rather than
-         assumed.
-       * SCALE — the mesh arrives normalised to a ~1.9 unit cube. Scaled so
-         the case diameter is 145 mm.
-       * WEIGHT — 15.2 MB as generated, against 6.5 MB for the whole car.
-         Resized to 1024, WebP, meshopt: 1.14 MB, and the compressed render
-         differs from the original by a mean of 3/255 per channel (PSNR
-         31.2 dB). I first read that as the compression having washed the
-         materials out; the pixel diff says it did not, and the two renders
-         I was comparing were minutes apart.
+     RE-GENERATED on a cheaper model (Tripo H3.1, 9 credits) after the
+     first pass used Meshy at 30. The cheaper one is also the better one —
+     it resolves the copper windings through the slots, which the 30-credit
+     mesh did not. Cost table in the session record; nothing about "cheaper"
+     implied worse and it was measured rather than assumed.
 
-     THE PULLEY IS STILL CONSTRUCTED. The photograph does not show that end
-     of the machine, so the generator did not invent one — correct
-     behaviour, and the six-groove pulley built here is kept and mated to
-     the shaft end. The generated body's regulator cover faces +X, so the
-     pulley goes on -X and the whole assembly is positioned to put that
-     pulley in the belt plane. */
+     WHAT HAD TO BE FIXED, because a generated part arrives in whatever
+     frame the generator felt like and carries whatever was in the photo:
+       * BACKGROUND OBJECTS. The photo is of an alternator IN A CAR, so the
+         generator also modelled the crank pulley at the frame's left edge,
+         a bracket above it, a blue clip below and a cluster of engine
+         hardware to the right — all FUSED into one solid, so connected
+         components could not separate them (470 components, largest 1.6%;
+         voxel clustering gave the same two blobs at every pitch). They are
+         cut on position instead: the drum occupies gltf z in [-0.30,+0.22]
+         and y <= 0.44, and the cut is what the banded-colour render was
+         built to place. 468,283 of 1,456,978 faces removed.
+       * SHAFT AXIS — the cut through constant z leaves a round opening, so
+         the shaft lies on Z. This bay works on X, hence the -90 deg turn
+         about Y, which puts that opening on -X where the pulley goes.
+       * NORMALS. The trimesh round-trip that first made the cut DROPPED the
+         NORMAL accessor — the recorded crumpled-foil class — and the fins
+         came back creased. Read off `gltf-transform inspect` I wrongly
+         concluded the source had no normals either; its attributes column
+         is width-truncated and had silently hidden them. The glTF JSON
+         settled it: the source has them, my cut lost them. The cut is now
+         done in Blender so the authored normals survive, and every stage of
+         the compression chain is checked for the accessor afterwards.
+       * SCALE — case diameter 145 mm, matching the part this replaced.
+       * WEIGHT — 42.8 MB as generated. Simplify 0.15, resize 1024, WebP,
+         MikkTSpace tangents, meshopt: 1.49 MB at 148,304 triangles.
+       * TANGENTS — the glTF validator's GENERATED_TANGENT_SPACE warning
+         fires on any material with a normal map and no TANGENT attribute,
+         and it fired on the generated source, on this asset AND on the
+         Meshy part already shipping. Cleared here rather than reported as
+         new, which is what diffing the validator against the input instead
+         of reading the output alone is for.
+
+     THE PULLEY IS STILL CONSTRUCTED, and now it has to be MET rather than
+     assumed. The photograph does not show that end of the machine, and the
+     cut removed what little of the front housing was fused to the crank
+     pulley, so at 145 mm diameter this body is 106 mm long where the old
+     one was 145 mm. Left alone that would have hung the pulley in space
+     18 mm off the end of the car's own alternator. The pulley stays put —
+     it is in the belt plane and the belt is drawn to it — and the BODY is
+     shifted along the shaft to close on it, keeping the same 12.5 mm of
+     pulley proud of the case that the previous part had. */
   bP.alt=new THREE.Group(); bP.alt.position.set(.43,.70,1.72); bayAsm.add(bP.alt);
   const altTag=o=>{ o.userData={bay:'alt'}; return o; };
-  const ALT_S=.0766;                     /* 1.893 units -> 145 mm diameter */
+  const ALT_S=.19985;                    /* 0.7256 units -> 145 mm diameter */
+  const ALT_FACE=-.0725;                 /* where the case's -X end must land */
   loader.load('alt.glb.wasm', g=>{
-    const m=g.scene; m.scale.setScalar(ALT_S);
+    const m=g.scene;
+    m.rotation.y=-Math.PI/2;             /* shaft Z -> X, opening to -X */
+    m.scale.setScalar(ALT_S);
+    /* centre on the group, then slide along the shaft until the case end
+       meets the pulley. Measured from the loaded mesh rather than pasted in
+       as constants, so a re-export cannot silently move the part. */
+    m.updateMatrixWorld(true);
+    const bb=new THREE.Box3().setFromObject(m), c=bb.getCenter(new THREE.Vector3());
+    m.position.sub(c);                   /* case centre now on the group origin */
+    m.position.x += ALT_FACE + (bb.max.x-bb.min.x)/2;   /* -X face onto ALT_FACE */
     m.traverse(o=>{ if(o.isMesh){ o.castShadow=true; o.receiveShadow=true;
       altTag(o); } });
     altTag(m); bP.alt.add(m);
@@ -1971,6 +2005,24 @@ function buildBayEngine(){
        teaches the charging job with the pulley and the belt alone */
     console.warn('alternator mesh unavailable:', e && e.message);
   });
+  /* DRIVE-END HOUSING — a construction, and it is doing two jobs.
+     The photo's alternator was fused to the crank pulley beside it, so the
+     position cut that removed the crank pulley also took the front of the
+     case with it. That leaves the shell OPEN at the shaft end: at 2x zoom on
+     an end-on camera you see the raw cut ring and the hollow behind it. The
+     cut boundary is not a clean circle to cap (the mesh carries 59,143
+     boundary edges — it is fragment soup, so there is no single loop to fill),
+     and the brief's rule is that a section which cannot be repaired
+     economically gets REPLACED with clean reconstructed geometry rather than
+     hidden. A real alternator has a cast drive-end housing with a bearing
+     boss right here, so that is what is built: it plugs the opening by being
+     the part that belongs there. */
+  const altDE=new THREE.Mesh(new THREE.CylinderGeometry(.050,.046,.016,28),alu);
+  altDE.rotation.z=Math.PI/2; altDE.position.x=-.0685;   /* just inboard of the cut */
+  altTag(altDE); bP.alt.add(altDE);
+  const altBoss=new THREE.Mesh(new THREE.CylinderGeometry(.020,.022,.026,20),alu);
+  altBoss.rotation.z=Math.PI/2; altBoss.position.x=-.078; /* bearing boss to the pulley */
+  altTag(altBoss); bP.alt.add(altBoss);
   /* ribbed drive pulley — six grooves, on the shaft end, in the belt plane */
   bP.altPulley=new THREE.Group(); bP.altPulley.position.x=-.085; bP.alt.add(bP.altPulley);
   for (let i=0;i<6;i++){
@@ -4406,7 +4458,16 @@ window.__setAlt = o => { Object.assign(ALT,o); drawHud(); drawPanel(); };
 window.__bay = () => ({visible:bayAsm.visible, on:BAY.engine,
   cover:BAY.cover, coverVisible:bP.cover?bP.cover.visible:null,
   meshes:bayAsm.children.length,
-  altInBay:!!bP.alt, bonnetRotX:parts.panel_bonnet
+  /* altInBay USED to be `!!bP.alt`, which is true the moment the group is
+     constructed and therefore stayed true whether or not the generated GLB
+     ever arrived — a check that could not fail. It now counts the triangles
+     actually under the group, so a 404, a parse failure or an empty file
+     all read as 0. */
+  altTris:(()=>{ let t=0; if(bP.alt) bP.alt.traverse(o=>{
+    if(o.isMesh&&o.geometry) t+=(o.geometry.index?o.geometry.index.count
+      :(o.geometry.attributes.position?o.geometry.attributes.position.count:0))/3; });
+    return Math.round(t); })(),
+  bonnetRotX:parts.panel_bonnet
     ?+parts.panel_bonnet.group.rotation.x.toFixed(3):null});
 window.__groups = () => Object.fromEntries(Object.entries(parts).map(([k,v])=>
   [k,{meshes:v.meshes.length, tris:v.tris,

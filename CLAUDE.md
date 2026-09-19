@@ -5204,3 +5204,106 @@ OBSERVED to fire, which is the standard this file holds every other guard to.
 and no third-party gateway can route it. What it reduces is what THIS REPO
 spends on its own calls — the council reviews and the eye audits. Say that
 plainly rather than letting "free API" imply the session itself got cheaper.
+
+## A CHEAPER 3D MODEL WAS ALSO THE BETTER ONE — Higgsfield, measured (2026-09-19)
+
+Owner: "use higsfeild but look for cheaper model". `generate_3d` takes
+`get_cost:true`, which returns the price WITHOUT submitting, so the whole
+table below cost nothing. Same alternator reference photo on every row:
+
+    sam_3_3d (Meta)                1 credit    30x cheaper
+    tripo_h3_1_image_to_3d         9           3.3x
+    hunyuan3d_v3_image_to_3d      11           2.7x
+    image_to_3d (Meshy)           30           what we had been paying
+    meshy_v7_image_to_3d          38           dearer
+
+**Tripo H3.1 at 9 credits BEATS Meshy at 30** on the same photo and rig:
+1,456,978 tris against ~30,500, and it resolves the copper windings THROUGH
+the cooling slots, which the 30-credit mesh does not. Cheaper did not mean
+worse, and that had to be rendered to know.
+
+**sam_3_3d at 1 credit is real but INCOMPLETE** — it lifted the housing
+barrel only: no pulley, no mounting ears, no rear cover. Fine for a
+single-blob part (filter, MAF, battery, coil pack); not for anything whose
+mounting hardware matters. It also **FAILS SILENTLY at defaults**: the first
+job returned `status: failed` with no error text. It is detection-based and
+needs `prompt` naming the object plus a lowered `detection_threshold` (0.15
+worked). The failed job was auto-REFUNDED, so a retry is free — but the
+status field alone does not say why.
+
+**PROVENANCE, because the raw mesh is NOT bucket-backed this session.**
+`SB_KEY` is absent from `/root/.alam3d_env` (only `FAL_KEY` and
+`OPENROUTER_API_KEY` survive there), so the 42.8 MB generated source could
+not be uploaded and only the 1.49 MB shipped derivative is in git. It is
+re-derivable: Higgsfield `generate_3d`, model `tripo_h3_1_image_to_3d`, job
+`aaaa1d4f-c8fd-4e1a-b882-ac2e4daafa76`, from media
+`a3a7bdbf-aa35-4e3e-9708-706b48f090fe` (the owner's own alternator
+photograph), 9 credits. Re-run that rather than treating the part as lost.
+
+**Check the balance against `transactions`, not against memory.** Balance
+read 633 earlier and 95.74 after two small jobs, which looks like the jobs
+did it. They did not: six Seedance video runs at 76 credits each (456) plus
+a 500-credit grant sat in between. Reconstruct spend from the ledger before
+attributing a drop to your own work.
+
+## A GENERATED PART CARRIES THE WHOLE PHOTOGRAPH — and it is FUSED (2026-09-19)
+
+The owner's alternator photo is of an alternator IN A CAR, so Tripo also
+modelled the crank pulley at the frame's left edge, a bracket above it, a
+blue clip below and a cluster of engine hardware to the right. Expected. The
+part that is NOT obvious is that **they arrive as ONE SOLID**:
+
+  * connected components: 470, largest **1.61%** — fragment soup, the same
+    class already recorded for Pixal meshes. Useless for part isolation.
+  * voxel clustering: **the same 2 blobs at diag/220, /300 and /400.** The
+    background is genuinely welded to the part; no connectivity method at
+    any resolution separates it.
+
+**So cut on POSITION, and map the axes with a banded-colour render before
+choosing the numbers.** Eight flat-coloured bands along one axis, rendered
+down each principal axis, says unambiguously which end of the mesh is which
+end of the picture — here render-left was +Z and render-right −Z, which is
+not guessable. The drum then cuts out as `z in [-0.30,+0.22], y <= 0.44`:
+468,283 of 1,456,978 faces removed, every background object gone in one rule.
+
+**Cutting through the shaft leaves the part SHORT, and the thing it mates to
+must be re-met rather than left alone.** The cut removed the front housing
+that was fused to the crank pulley, so at 145 mm diameter the body came out
+106 mm long where the old part was 145 mm. The constructed pulley has to stay
+in the belt plane, so the BODY is shifted along the shaft to close on it.
+Left unexamined it would have hung the pulley 18 mm off the end of the car.
+
+## `gltf-transform inspect` HIDES ATTRIBUTES — read the glTF JSON (2026-09-19)
+
+The decimated alternator came back with creased fins, and the attributes
+column of `gltf-transform inspect` showed `POSITION, TEXCOORD_0` on the
+SOURCE file too. I concluded from that that Tripo ships no normals and that
+the creasing was inherent. **Both wrong. That column is width-truncated and
+had silently dropped `NORMAL` from the display.** Parsing the GLB's JSON
+chunk directly:
+
+    tripo_alt.glb   NORMAL on 1/1 prims      <- source HAS them
+    cut_D.glb       NORMAL on 0/1 prims      <- MY trimesh cut lost them
+
+So it was the recorded crumpled-foil class again — a trimesh `update_faces`
+round-trip drops `NORMAL`, exactly as this file already warns — and at
+1.46M faces flat shading LOOKS smooth, so the defect only surfaced after
+decimation to 148k. Two rules, both cheap:
+  * **Never read attribute presence off the inspect table.** Parse the JSON
+    chunk (12-byte header, then a length-prefixed JSON chunk) and count
+    prims carrying the attribute. Six lines of Python.
+  * Do the face cull in **Blender**, not trimesh, when the source has
+    authored normals — import, delete faces by centroid bounds, export with
+    `export_normals=True`. Blender 4.5 has no `SMOOTH_BY_ANGLE` modifier
+    enum; `EDGE_SPLIT` at the crease angle plus `shade_smooth()` is the
+    equivalent that survives export.
+  * Verify the accessor after EVERY stage of a compression chain, not just
+    at the end.
+
+**And the same read applies to the VALIDATOR.** `alt_final` raised one
+`MESH_PRIMITIVE_GENERATED_TANGENT_SPACE` — a material with a normal map and
+no TANGENT. Before reporting it, the rule this repo already carries (run the
+validator on the output and DIFF IT AGAINST THE INPUT) was applied: the
+generated source raises it too, and so does the Meshy part that had been
+shipping in the app for a day. Reported as a new defect it would have been
+wrong. `gltf-transform tangents` before meshopt clears it for +230 KB.
