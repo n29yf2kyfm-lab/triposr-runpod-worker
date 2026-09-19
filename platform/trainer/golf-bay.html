@@ -66,7 +66,13 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
 /* max-height as well as height: inside an artifact iframe the frame can be
    shorter than the dvh the page computes, and without the cap the grid's
    1fr row overflows and the whole app reads as "does not fit on the page". */
-#shell{display:grid; grid-template-rows:auto 1fr; grid-template-columns:minmax(0,1fr);
+/* `1fr` is `minmax(auto,1fr)`, and that `auto` minimum is the row's
+   MIN-CONTENT — so a short frame does not shrink the row, the content holds
+   it open and #shell's overflow:hidden quietly crops the bottom off. Measured
+   at 1280x500: header 69 + work 466 = 535 in a 500px frame, 35px clipped.
+   `minmax(0,1fr)` is the same blowout guard this file already applies on the
+   column axis; the row axis needed it too. */
+#shell{display:grid; grid-template-rows:auto minmax(0,1fr); grid-template-columns:minmax(0,1fr);
   height:100dvh; max-height:100dvh; min-height:0; overflow:hidden}
 #shell > *{min-width:0}
 header{display:flex; align-items:center; gap:13px; padding:10px 16px; flex-wrap:wrap;
@@ -102,7 +108,19 @@ nav#tabs::-webkit-scrollbar{display:none}
   border:1px solid var(--line);color:var(--ink2);font-size:14px}
 .iconbtn:hover{color:var(--ink);border-color:var(--ink3)}
 
-#work{display:grid;grid-template-columns:minmax(0,1fr) 348px;min-height:0;min-width:0}
+/* THE ROW HAS TO BE EXPLICIT, or the canvas decides how tall the app is.
+   With no grid-template-rows the single implicit row is `auto`, so it sizes
+   to content — and the content is a WebGL canvas whose CSS `height:100%`
+   cannot resolve against an auto parent and falls back to its own attribute
+   height divided by the device pixel ratio. Measured at 1280x500: a canvas
+   carrying 932 device px reported 466 CSS px and held the row there, 35px
+   past the bottom of the frame, silently cropped by #shell's overflow.
+   1280x900 read correct only because the canvas happened to match the frame
+   — a right answer for the wrong reason, which is the shape of bug this
+   file keeps finding. An explicit minmax(0,1fr) makes the row fill its
+   parent, and then height:100% has something definite to resolve against. */
+#work{display:grid;grid-template-columns:minmax(0,1fr) 348px;
+  grid-template-rows:minmax(0,1fr);min-height:0;min-width:0}
 #work > *{min-width:0}
 /* Fixed dark studio backdrop — deliberately NOT themed, see applyBg(). */
 #stage{position:relative;min-width:0;background:
@@ -118,11 +136,52 @@ aside{border-left:1px solid var(--line);background:var(--panel);overflow-y:auto;
   overflow-x:hidden;min-width:0;
   overscroll-behavior:contain;padding:16px;display:flex;flex-direction:column;gap:13px}
 aside > *{min-width:0;max-width:100%}
+/* THE 230px FLOOR UNDER THE STAGE STARVED THE PANEL, and on a short frame it
+   starved it to nothing. An artifact is shown inside a frame that is far
+   shorter than the phone it is on, and `minmax(230px,42dvh)` does not shrink
+   past 230 — so every pixel the frame loses comes out of the panel, which is
+   where all the controls and all the teaching are. Measured, 390px wide, as
+   the frame height falls:
+
+     frame   header  stage  panel   panel content on screen
+      844      94     354    396          79%
+      600      94     252    255          51%
+      480      94     230    157          31%
+      380      94     230     57          11%   <- heading only, no controls
+
+   At 380 the panel showed "BAY 1 · STRIP / Take it apart" and nothing else.
+   The fix is to let the stage shrink with everything else (minmax(0,...)) and
+   to give the panel its own floor, so the two share the squeeze instead of
+   one of them taking all of it. */
 @media (max-width:900px){
   body{font-size:14px}
-  #work{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(230px,42dvh) 1fr}
+  #work{grid-template-columns:minmax(0,1fr);
+        grid-template-rows:minmax(0,42dvh) minmax(0,1fr)}
   aside{border-left:0;border-top:1px solid var(--line);padding:14px 16px 34px}
   .brand .sub{display:none}
+}
+/* A SHORT FRAME IS A DIFFERENT PROBLEM FROM A NARROW ONE, so it gets its own
+   query keyed on height. The header is a fixed 94px whatever the frame does —
+   a quarter of a 380px frame spent on a logo and a tab strip — so it gets
+   tightened here, and the stage gives up more of its share. */
+@media (max-height:560px){
+  header{padding:6px 12px;gap:6px 9px}
+  .mark{width:22px;height:22px;font-size:11px;border-radius:6px}
+  .brand b{font-size:14px}
+  .tab{padding:5px 10px;font-size:12px}
+  .iconbtn{width:28px;height:28px}
+  #hud{left:8px;top:8px;gap:4px}
+  .chip{padding:4px 8px;font-size:10.5px}
+  #caption{left:8px;bottom:8px;font-size:10px;padding:4px 7px}
+}
+/* The row change belongs ONLY to the stacked layout. A wide-but-short window
+   — a resized desktop — still has #work in two columns, and giving a
+   two-column grid explicit rows leaves the stage and the panel sized to the
+   first row with dead space under both. Height and width are separate
+   questions and this rule needs the answer to both. */
+@media (max-width:900px) and (max-height:560px){
+  #work{grid-template-rows:minmax(0,34dvh) minmax(0,1fr)}
+  aside{padding:11px 14px 22px;gap:10px}
 }
 
 .card{border:1px solid var(--line);border-radius:var(--r);background:var(--panel2);padding:12px;
@@ -3205,6 +3264,15 @@ function restoreJobPanels(keep){
 function setMode(m){
   MODE=m;
   tabsEl.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.m===m));
+  /* THIRTEEN BAYS IN A STRIP THAT IS 390px WIDE — measured, 828px of it is off
+     the right-hand edge on a phone, and the only affordance is a mask fade.
+     A bay can also be entered without touching the strip at all (tapping the
+     alternator in the engine bay jumps to its bay), and then the tab marked
+     current is one the trainee cannot see. Scroll it into view. */
+  const sel=tabsEl.querySelector('.tab[aria-selected="true"]');
+  if (sel && sel.scrollIntoView) try{
+    sel.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
+  }catch(e){ sel.scrollIntoView(false); }
   const bench=m==='bench', needCar=(m==='strip'||m==='brakes'||m==='doorOff'||m==='bonnetOff'||m==='diag'||m==='dparts'||m==='starterOff'||m==='interior');
   document.getElementById('bench-stage').hidden=!bench;
   canvas.style.visibility=bench?'hidden':'visible';

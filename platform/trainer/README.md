@@ -51,8 +51,20 @@ curl -sO https://tfkvthprsntexrcuqpyd.supabase.co/storage/v1/object/public/\
 car-meshes/finished/volkswagen/volkswagen-golf-2021-w12-v1.glb
 python3 ../../pipeline/machine/scale_normalise.py \
     volkswagen-golf-2021-w12-v1.glb golf_m.glb     # 43 mm -> 4.295 m
-npx -y @gltf-transform/cli meshopt golf_m.glb golf.glb.wasm --level medium
+npx -y @gltf-transform/cli meshopt golf_m.glb golf_c.glb --level medium
+mv golf_c.glb golf.glb.wasm                        # rename AFTER, see below
 ```
+
+**Write the `.glb` first and rename it.** `gltf-transform` picks its container
+format from the OUTPUT EXTENSION, so writing straight to `golf.glb.wasm` gives
+an unpacked glTF — a 506 KB JSON beside a 5.98 MB `.bin` and 40-odd loose PNGs
+— while still reporting `25.38 MB → 8.42 MB` as though it had packed one file.
+The app then loads the JSON, finds no `glTF` magic and no geometry. Paid for
+here on 2026-09-19 by following this file's own earlier instruction.
+
+Note this rebuild gives the RAW car. The bonnet and the door mirror are cut out
+of the body shell by `panel_cut.py`, and without that step the app logs
+`panel_bonnet not found` and the Bonnet off bay has nothing to act on.
 
 25.38 MB -> 8.42 MB, all 328 node names and all 543,082 triangles preserved
 (verified). `scale_normalise` first: the source carries a spurious FBX
