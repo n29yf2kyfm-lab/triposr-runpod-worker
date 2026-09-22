@@ -201,6 +201,15 @@ def classify3(n, prefix=''):
     base = n
     if prefix and base.lower().startswith(prefix.lower()):
         base = base[len(prefix):]
+    # cut the material token, spelled as a SECOND copy of the car prefix:
+    # `xc90_hood_xc90_black_0` is the part `hood` in the material `black`.
+    # Without this the name reduces to `hood_xc90_black` and every ANCHORED
+    # rule misses — it cost the bonnet on the first real run, while doors
+    # and wheels matched only because their rules are unanchored.
+    if prefix:
+        i = base.lower().find('_' + prefix.lower())
+        if i > 0:
+            base = base[:i]
     for _ in range(3):                       # suffixes stack: `.001_x_black`
         nb = _C3_STRIP.sub('', base)
         if nb == base:

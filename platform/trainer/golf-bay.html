@@ -318,7 +318,7 @@ ol.steps li.now .n{background:var(--pri);border-color:var(--pri);color:#fff}
 <div id="shell">
   <header>
     <div class="mark">SB</div>
-    <div class="brand"><b>Strip Bay</b><span class="sub">Golf Mk8 GTI · teardown trainer</span></div>
+    <div class="brand"><b>Strip Bay</b><span class="sub" id="brandSub">teardown trainer</span></div>
     <nav id="tabs" role="tablist"></nav>
     <button class="iconbtn" id="themeBtn" title="Light / dark" aria-label="Toggle light and dark">◐</button>
   </header>
@@ -367,7 +367,7 @@ const CAR = {length:4.295, width:2.094, height:1.489,
   axleY:0.315, axleZf:1.3157, axleZr:-1.3157, trackX:0.764,
   rimR:0.2510, tyreR:0.3288, discR:0.1708, discInner:0.1027,
   discThick:0.0309, boltR:0.056, hubX:0.858};
-const HINGE = {
+const HINGE_GOLF = {
   door_fl:{x: 0.772,y:0,z: 0.870}, door_fr:{x:-0.772,y:0,z: 0.870},
   door_rl:{x: 0.754,y:0,z:-0.209}, door_rr:{x:-0.754,y:0,z:-0.209},
   tailgate:{x:0,y:1.394,z:-1.472},
@@ -376,6 +376,129 @@ const HINGE = {
      that made the cut. x=0 is irrelevant to an X-axis rotation, same as
      the doors' unused y. */
   panel_bonnet:{x:0,y:0.975,z:1.115}};
+
+/* ═════════════════════════════════════════════════════════════════════
+   A SECOND VEHICLE, AND WHY IT NEEDED THREE THINGS RATHER THAN A URL
+
+   The Golf works here because ONE uploader happened to name its meshes
+   `G:Ext_Door_FL_…`. An audit of all 1,044 approved catalogue cars found
+   exactly one more file like it, so "point the loader at another GLB" was
+   never going to work. Three things are car-specific and all three are
+   now derived rather than assumed:
+
+     1. THE NAMING. `volvo-xc90-v1` calls its parts `xc90_door_FL`,
+        `xc90_hood`, `xc90_tailgate`, `xc90_seat_FL`. Different convention,
+        same parts. `classifyFor` picks the ruleset per car.
+     2. THE HINGES. HINGE_GOLF above is a table of numbers measured off
+        the Golf and meaningless anywhere else. The XC90's come from
+        `car_rig.py`, which reads them out of the file: a door hinges on
+        its own FORWARD vertical edge, a bonnet on its REAR transverse
+        edge, a tailgate on its TOP edge.
+     3. THE WHEELS, which are the interesting one. This family INSTANCES
+        one wheel four times — `wheel_x`, `.001`, `.002`, `.003` — so no
+        NAME says which corner is which. They are split by POSITION in
+        buildCar. A trainer that says "front left" while moving whichever
+        wheel happened to be first teaches the wrong thing.
+
+   Both cars share an axis convention (length Z, up Y, width X, nose +Z),
+   MEASURED not assumed — car_rig.py derives `up` from the fact that
+   glazing sits above wheels, which is a fact about cars rather than a
+   glTF convention. A car that did not share it would need a remap here,
+   and this comment is where that would go.
+   ═══════════════════════════════════════════════════════════════════ */
+const FLEET = {
+  golf: {
+    name:'VW Golf Mk8 GTI', short:'Golf',
+    url:'golf.glb.wasm', conv:1, hinge:HINGE_GOLF,
+    note:'Real geometry from volkswagen-golf-2021-w12-v1'
+  },
+  xc90: {
+    name:'Volvo XC90', short:'XC90',
+    /* SHIPPED LOCALLY, like the Golf, though the bucket does send
+       access-control-allow-origin:* and a remote fetch would work in a
+       normal browser. Two reasons it is a copy instead: the app's stated
+       property is that it makes no request off its own origin, and the
+       headless browser used to test it cannot reach the bucket at all —
+       a remote URL hung the harness for six minutes with no output. 2.1 MB
+       against the Golf's 6.5. */
+    url:'xc90.glb.wasm',
+    conv:3,
+    /* printed by car_rig.py from the file itself — see that tool's
+       docstring for what a bounding-box hinge can and cannot tell you */
+    hinge:{
+      door_fl:{x: 0.7762,y:0.9305,z: 0.8594}, door_fr:{x:-0.7790,y:0.9305,z: 0.8596},
+      door_rl:{x: 0.7771,y:0.9443,z:-0.2268}, door_rr:{x:-0.7797,y:0.9443,z:-0.2266},
+      panel_bonnet:{x:0,y:1.1344,z:0.8953},
+      tailgate:{x:0,y:1.6310,z:-2.1988}},
+    note:'Real geometry from volvo-xc90-v1 · hinges and wheel corners '
+        +'DERIVED from the file, not hand-measured'
+  }
+};
+/* ?car=xc90 — the Golf stays the default because it is the tested one and
+   every bay after Strip is built around its constructed assemblies. */
+const CAR_ID = (new URLSearchParams(location.search).get('car')||'golf')
+               .toLowerCase() in FLEET
+  ? (new URLSearchParams(location.search).get('car')||'golf').toLowerCase()
+  : 'golf';
+const VEHICLE = FLEET[CAR_ID];
+const HINGE = VEHICLE.hinge;
+
+/* Convention 3 — the driving-sim mod family. Anchored after the car's own
+   prefix is stripped, so `door_FL` cannot be matched by `Front_Door_Handle`
+   and `Body` cannot be swept up by a loose /door/. */
+const RULES3 = [
+  [/^hood$|^bonnet$/,'panel_bonnet'],
+  [/^mirror_L(_base)?$/,'mirror_fl'],
+  /* door glass travels WITH its door, exactly as it does under
+     convention 1 where the door rule precedes the glazing rule */
+  [/^door_?glass_FL|^door_FL/,'door_fl'], [/^door_?glass_FR|^door_FR/,'door_fr'],
+  [/^door_?glass_RL|^door_RL/,'door_rl'], [/^door_?glass_RR|^door_RR/,'door_rr'],
+  [/^tailgate|^trunk|^hatch/,'tailgate'],
+  [/^windshield|^windscreen|^sideglass|^rearglass|^backglass/,'glazing'],
+  [/^seat_[FR][LR]?|^seats?$/,'seats'],
+  [/^steeringwheel$|^steering_wheel/,'steering'],
+  [/^interior|^gauge|^speedo|^tacho|^needle_|^pedal_|^shifter|^ceiling|^shelf|^signalstalk|^dash|^console|^carpet/,'cabin'],
+  [/^headlight|^headlamp/,'lamps_front'],
+  [/^taillight|^taillamp|^rearlight/,'lamps_rear'],
+  [/^engine|^engbay|^intake|^turbo|^intercooler|^airbox|^podfilter|^radiator|^radfan|^radsupport|^fueltank|^strut_bar|^exhaust/,'engine'],
+  [/^transmission|^transfercase|^driveshaft|^halfshaft|^diff_|^gearbox/,'driveline'],
+  [/^lowerarm|^upperarm|^wishbone|^spring_|^shock_|^strut_front|^swaybar|^subframe|^tierod|^trailingarm|^rearbeam|^hub_[FR]|^tubs_|^tray_/,'suspension'],
+  [/^wheel|^tire|^tyre|^rim/,'wheels_unsided'],   /* split by POSITION later */
+  [/./,'body']];
+/* this family suffixes every mesh with its material and an instance index,
+   and the suffixes STACK: `door_FL.001_xc90_black_0` */
+const C3_STRIP = /(?:[._]\d+)+$|_(?:vivace|etk\w*|bastion|gmk\d|usdm|jdm)\w*$/i;
+let C3_PREFIX = '';
+function classify3(n){
+  let b = n;
+  if (C3_PREFIX && b.toLowerCase().startsWith(C3_PREFIX)) b = b.slice(C3_PREFIX.length);
+  /* CUT THE MATERIAL TOKEN, which this family spells as a SECOND copy of
+     the car prefix: `xc90_hood_xc90_black_0` is the part `hood` in the
+     material `black`. Without this the name reduces to `hood_xc90_black`
+     and every ANCHORED rule silently misses — measured, and it cost the
+     bonnet: doors, tailgate and wheels all matched because their rules
+     happen to be unanchored, so the car came apart everywhere except the
+     one panel whose rule ended in `$`. */
+  if (C3_PREFIX){
+    const i = b.toLowerCase().indexOf('_' + C3_PREFIX);
+    if (i > 0) b = b.slice(0, i);
+  }
+  for (let i=0;i<3;i++){ const nb=b.replace(C3_STRIP,''); if(nb===b) break; b=nb; }
+  b = b.replace(/^[_.\s]+|[_.\s]+$/g,'');
+  for (const [re,id] of RULES3) if (re.test(b)) return id;
+  return 'body';
+}
+/* every mesh in this family is prefixed with the car's own short name —
+   `xc90_`, `w177_`, `pab_v55_`. DERIVED as the commonest leading token so
+   the next car needs no edit here. */
+function c3Prefix(names){
+  const heads={};
+  for (const n of names){ const m=/^([a-z0-9]{2,12}_)/i.exec(n);
+    if (m) heads[m[1].toLowerCase()]=(heads[m[1].toLowerCase()]||0)+1; }
+  let top='', best=0;
+  for (const k in heads) if (heads[k]>best){ best=heads[k]; top=k; }
+  return best >= Math.max(6, names.length*0.25) ? top : '';
+}
 const RULES = [
   /* panel_cut.py's own node, appended outside the "G:"-prefixed naming
      convention every sourced mesh uses — must be matched before the
@@ -563,7 +686,7 @@ const loader = new GLTFLoader(); loader.setMeshoptDecoder(MeshoptDecoder);
    .wasm is served and is binary-safe. GLTFLoader fetches an ArrayBuffer and
    identifies the file by its "glTF" magic bytes, so the extension and the
    MIME type are irrelevant to parsing. Same file, byte for byte. */
-loader.load('golf.glb.wasm', g => buildCar(g.scene),
+loader.load(VEHICLE.url, g => buildCar(g.scene),
   /* A server that sends no Content-Length gives e.total = 0. Reporting the
      bytes actually received beats a progress bar frozen at 0%, which reads
      as a hang when the download is fine. */
@@ -588,6 +711,7 @@ loader.load('golf.glb.wasm', g => buildCar(g.scene),
    nothing at all — with no error anywhere. Match against the raw name AND both
    de-prefixed forms, rules in priority order. */
 const classify = n => {
+  if (VEHICLE.conv === 3) return classify3(n);
   const cands = [n];
   if (n.startsWith('G:')) cands.push(n.slice(2));
   if (/^G[A-Z]/.test(n)) cands.push(n.slice(1));
@@ -597,6 +721,15 @@ const classify = n => {
 function buildCar(root){
   carRoot.add(root); carRoot.updateMatrixWorld(true);
   const by = {};
+  /* THE PART NAME IS ON THE PARENT in convention 3. This family splits one
+     part into one mesh PER MATERIAL — `xc90_door_FL` holds
+     `xc90_door_FL_xc90_black_0`, `…_chrome_0`, `…_glass_0` — so the prefix
+     has to be derived from the PARENT names or it latches onto the material
+     tokens instead. */
+  if (VEHICLE.conv === 3){
+    const nm=[]; root.traverse(o=>{ if(o.name) nm.push(o.name); });
+    C3_PREFIX = c3Prefix(nm);
+  }
   root.traverse(o => {
     if (!o.isMesh) return;
     /* clone the material per mesh. The GLB shares one `Atlas` and one
@@ -620,6 +753,30 @@ function buildCar(root){
     if (o.material) o.userData.m0 = {transparent:o.material.transparent,
       opacity:o.material.opacity, depthWrite:o.material.depthWrite};
   });
+  /* ── THE WHEELS CANNOT BE NAMED INTO CORNERS, SO PLACE THEM ──
+     `wheels_unsided` is every mesh that classified as a wheel or a tyre
+     on a car that instances one wheel four times. Splitting them by their
+     own world position is the only honest route: the four corners are a
+     fact about where the geometry SITS, and the names carry nothing.
+     Each mesh is measured on its own so a tyre and its rim land together
+     by virtue of being in the same place. */
+  if (by.wheels_unsided){
+    const car = new THREE.Box3(); for (const m of by.wheels_unsided) car.expandByObject(m);
+    const all = new THREE.Box3().setFromObject(carRoot);
+    const midX = (all.min.x+all.max.x)/2, midZ = (all.min.z+all.max.z)/2;
+    let placed = 0;
+    for (const m of by.wheels_unsided){
+      const c = new THREE.Box3().setFromObject(m).getCenter(new THREE.Vector3());
+      /* NOSE IS +Z on both cars in the fleet, so front is z > mid. This is
+         the one place a car with the opposite convention would need a sign,
+         and car_rig.py prints the nose direction for exactly that reason. */
+      const id = 'wheel_' + (c.z > midZ ? 'f' : 'r') + (c.x > midX ? 'l' : 'r');
+      (by[id] ||= []).push(m); m.userData.partId = id; placed++;
+    }
+    delete by.wheels_unsided;
+    console.info(`[fleet] ${placed} wheel meshes placed into `
+      + ['fl','fr','rl','rr'].filter(k=>by['wheel_'+k]).length + ' corners by position');
+  }
   for (const id in by){
     const meshes = by[id], box = new THREE.Box3();
     for (const m of meshes) box.expandByObject(m);
@@ -3717,6 +3874,13 @@ tabsEl.innerHTML=MODES.map(([id,l])=>
   `<button class="tab" role="tab" data-m="${id}" aria-selected="${id===MODE}">${l}</button>`).join('');
 tabsEl.addEventListener('click',e=>{const b=e.target.closest('[data-m]'); if(b) setMode(b.dataset.m)});
 
+/* THE LABEL FOLLOWS THE CAR. A silver Yaris was once presented to the
+   owner as "the Golf" for an hour because a filename said so, and the
+   rule that came out of it is that nothing names a car except the car.
+   Both the header and the Strip caption read from VEHICLE. */
+{ const sub=document.getElementById('brandSub');
+  if (sub) sub.textContent = VEHICLE.name + ' \u00b7 teardown trainer';
+  document.title = 'Strip Bay \u2014 ' + VEHICLE.name; }
 const CAP={
   door:'Constructed door cutaway · not geometry from the car file',
   doorOff:'Real door and check strap · hinge bolts, loom boot and prop constructed',
@@ -3728,7 +3892,7 @@ const CAP={
   diag:'Probe points on the constructed engine bay · the physical model is simplified and typical, not this car\u2019s data',
   starter:'Constructed starter motor · motion slowed for clarity',
   engine:'Constructed four-stroke cutaway · not the Golf’s own engine',
-  strip:'Real geometry from volkswagen-golf-2021-w12-v1',
+  strip:VEHICLE.note,
   clutch:'Constructed single-plate clutch · sound is SYNTHESISED, not a recording of this car · motion slowed',
   cool:'Constructed cooling system · sound is SYNTHESISED, not a recording of this car · temperatures typical of class',
   brakes:'Real disc and caliper · pads are constructed'};
@@ -4074,11 +4238,28 @@ function pStrip(){
       ${d?`<dt>L×W×H</dt><dd>${d.z.toFixed(2)} × ${d.x.toFixed(2)} × ${d.y.toFixed(2)} m</dd>`:''}</dl>
   </div>`:`<div class="card"><p>Nothing selected. Hover the car — parts light up as you pass over them.</p></div>`}
   ${man('Training manual — what is and is not here',[
-    '<b>163 named meshes, 543,082 triangles.</b> The interior alone is 278,841 of them — 51.3% of the whole car. It is the biggest thing in the model, not an afterthought.',
+    /* MEASURED FROM THE LOADED CAR, not quoted. These were the Golf's own
+       numbers written into prose, so every figure was wrong the moment a
+       second vehicle loaded. */
+    (()=>{ let m=0,t=0,it=0;
+      for (const k in parts){ m+=parts[k].meshes.length; t+=parts[k].tris;
+        if (k==='cabin'||k==='seats'||k==='airbags'||k==='steering') it+=parts[k].tris; }
+      return `<b>${m} named meshes, ${t.toLocaleString()} triangles.</b> `
+        + (it? `The interior alone is ${it.toLocaleString()} of them — `
+             + `${(it/t*100).toFixed(1)}% of the whole car. It is the biggest `
+             + `thing in the model, not an afterthought.` : '');})(),
+    ...(CAR_ID!=='golf' ? [] : [
     '<b>Eight separate airbags.</b> Driver, passenger, four seat-side and two full-length curtains. Turn on X-ray to see them inside the shell. On a real car the SRS system is disarmed and left for at least the manufacturer’s stated wait before anything yellow-plugged is touched.',
     '<b>The bumper does not come off here, and that is not a bug.</b> Wings, roof and both bumpers are welded into one body mesh in this file — stripping them needs an asset built in separate panels. The <b>bonnet</b> is the exception: it has been cut out of that same shell along its own shut line and comes off in the <b>Bonnet off</b> bay, hinge bolts and gas struts included.',
     '<b>There is no engine, starter, battery, suspension or exhaust in this car file at all.</b> Those bays are built from scratch in code and say so on screen — the same way your clutch demo is captioned a concept model.',
     '<b>This car is left-hand drive.</b> Steering wheel measured at 350 mm to the car’s left of centre. A UK car is right-hand drive — not a mirror image, since the rest of the car is not simply flipped, but the driving controls are on the other side. Worth saying out loud when you teach UK trainees on a left-hand-drive model.'
+    ]),
+    ...(CAR_ID==='golf' ? [] : [
+      `<b>This is ${VEHICLE.name}, loaded as a second vehicle.</b> Its parts were not named the way the Golf's are, so the app reads a different naming convention for it, and its hinge lines were DERIVED from the file rather than hand-measured — a door swings on its own forward edge, the bonnet on its rear edge, the tailgate on its top edge.`,
+      `<b>The four wheels are placed, not named.</b> This file instances one wheel four times, so nothing in the data says which corner is which. They are assigned by where they sit. That is worth knowing before you trust "front left" on any car from this family.`,
+      `<b>It carries an engine, a driveline and a suspension</b> — engine block, intake, turbo, intercooler, radiator, gearbox, driveshafts, arms and springs are real geometry here, where the Golf has none of it and the app builds those bays from scratch. The constructed bays still run on their own models, not on this car.`,
+      `<b>What is missing:</b> no brake discs or calipers are modelled, so the Brake job cannot run on it, and the Golf-specific bays (door internals, starter, mirror and lock) are built around the Golf's own geometry.`
+    ])
   ], true)}`;
 }
 function pDoorOff(){
@@ -5357,6 +5538,28 @@ window.__cool = () => { const r=coolSolve(); return {
   beadsMoving:oP.flow.some(b=>b.m.visible) }; };
 window.__sound = () => ({ctx:!!SND.ctx, on:SND.on,
   voices:Object.keys(SND.v), files:0});   /* files:0 — nothing is sampled */
+/* FLEET PROBES. A teardown action that silently does nothing renders
+   identically to one that works — this app shipped exactly that once, with
+   every action hitting `if(!p) return` behind a flawless picture. These let
+   a harness read a part's live transform and drive an action, so "the door
+   opened" can be asserted as MOVEMENT rather than believed from a
+   screenshot. */
+window.__part = id => { const p=parts[id]; if(!p) return null;
+  return {pos:[+p.group.position.x.toFixed(4),+p.group.position.y.toFixed(4),
+               +p.group.position.z.toFixed(4)],
+          rot:[+p.group.rotation.x.toFixed(4),+p.group.rotation.y.toFixed(4),
+               +p.group.rotation.z.toFixed(4)],
+          meshes:p.meshes.length, visible:p.group.visible}; };
+window.__act = (what,arg) => {
+  if (what==='door')   setDoor('door_'+arg, !S.doors['door_'+arg]);
+  if (what==='tail')   setTailgate(!S.tailgate);
+  if (what==='wheel')  setWheelOff('wheel_'+arg, !S.wheelOff['wheel_'+arg]);
+  if (what==='iso')    iso(arg);
+  if (what==='bonnet'){ const p=parts.panel_bonnet;
+    if (p) tween(p.group.rotation,'x', p.group.rotation.x < -0.1 ? 0 : -BONNET_OPEN, 620); }
+  return true; };
+window.__vehicle = () => ({id:CAR_ID, name:VEHICLE.name, conv:VEHICLE.conv,
+  url:VEHICLE.url, prefix:C3_PREFIX, hinges:Object.keys(VEHICLE.hinge)});
 window.__groups = () => Object.fromEntries(Object.entries(parts).map(([k,v])=>
   [k,{meshes:v.meshes.length, tris:v.tris,
       names:v.meshes.slice(0,2).map(m=>(m.name||'').slice(0,34)),
