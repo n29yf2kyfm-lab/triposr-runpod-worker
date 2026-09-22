@@ -1,0 +1,604 @@
+{
+ "wrongVehicle": [
+  {
+   "box": [
+    213.8008,
+    471.9662,
+    116.6203
+   ],
+   "meshes": 158,
+   "crossMake": true,
+   "crossModel": true,
+   "assets": [
+    {
+     "assetId": "hyundai-i30-2010-v1",
+     "make": "hyundai",
+     "model": "i30",
+     "title": "Hyundai i30 2010",
+     "sourceRef": "28a62ae0e7af4b408c82daa57c990b8f"
+    },
+    {
+     "assetId": "volkswagen-arteon-v1",
+     "make": "volkswagen",
+     "model": "arteon",
+     "title": "2021 Volkswagen Arteon Shooting Brake Hybrid",
+     "sourceRef": "3334da6aaa8b41ebb878100c836fb414"
+    }
+   ]
+  },
+  {
+   "box": [
+    6.9372,
+    5.8663,
+    16.0919
+   ],
+   "meshes": 135,
+   "crossMake": true,
+   "crossModel": true,
+   "assets": [
+    {
+     "assetId": "nissan-micra-k10-v1",
+     "make": "nissan",
+     "model": "micra",
+     "title": "Nissan Micra (K10) 1982",
+     "sourceRef": "a646c835325a4a0faf27fced42d10e2b"
+    },
+    {
+     "assetId": "bmw-m3-e46-v1",
+     "make": "bmw",
+     "model": "M3 E46",
+     "title": "BMW M3 E46",
+     "sourceRef": "f1b00ff37d504629b10031da32bc7497"
+    }
+   ]
+  },
+  {
+   "box": [
+    2.0719,
+    2.1449,
+    6.6812
+   ],
+   "meshes": 122,
+   "crossMake": true,
+   "crossModel": true,
+   "assets": [
+    {
+     "assetId": "bmw-5-series-e60-v1",
+     "make": "bmw",
+     "model": "5 Series E60",
+     "title": "2007 - 2010 BMW 5series E60",
+     "sourceRef": "fb051ba83016478f9c107eb68789fd73"
+    },
+    {
+     "assetId": "audi-a4-v1",
+     "make": "audi",
+     "model": "a4",
+     "title": "Audi A4 (B5)",
+     "sourceRef": "b5861ddefcb8478b858b3150aa44cd7f"
+    }
+   ]
+  },
+  {
+   "box": [
+    1.9867,
+    4.2219,
+    4.2726
+   ],
+   "meshes": 113,
+   "crossMake": true,
+   "crossModel": true,
+   "assets": [
+    {
+     "assetId": "skoda-octavia-estate-v1",
+     "make": "skoda",
+     "model": "Octavia Estate",
+     "title": "2020 Skoda Octavia Estate",
+     "sourceRef": "f8bb8c0c29d14a1a83740f477915486c"
+    },
+    {
+     "assetId": "peugeot-307-2008-v1",
+     "make": "peugeot",
+     "model": "307",
+     "title": "2008 Peugeot 307",
+     "sourceRef": "eb357098ec05483986262ad8eb8ab0cc"
+    }
+   ]
+  },
+  {
+   "box": [
+    1.9024,
+    4.9031,
+    4.9619
+   ],
+   "meshes": 102,
+   "crossMake": true,
+   "crossModel": true,
+   "assets": [
+    {
+     "assetId": "audi-a1-quattro-v1",
+     "make": "audi",
+     "model": "A1 Quattro",
+     "title": "Audi A1 Quattro (A1II)",
+     "sourceRef": "c0ca74fba3b24326b898bfc556909b57"
+    },
+    {
+     "assetId": "citroen-c4-2008-v1",
+     "make": "citroen",
+     "model": "c4",
+     "title": "2008 Citroen C4 Sedan LX Plus",
+     "sourceRef": "c659f20cd77f48909cf5c38218840f35"
+    }
+   ]
+  },
+  {
+   "box": [
+    4671.8839,
+    2054.0541,
+    1427.5212
+   ],
+   "meshes": 68,
+   "crossMake": true,
+   "crossModel": true,
+   "assets": [
+    {
+     "assetId": "audi-q3-2023-v1",
+     "make": "audi",
+     "model": "q3",
+     "title": "2023 Audi Q3 40 TFSI",
+     "sourceRef": "97dccbc18cfb4f1e973fc75e278c6f66"
+    },
+    {
+     "assetId": "bmw-i4-v1",
+     "make": "bmw",
+     "model": "i4",
+     "title": "bmw-i4",
+     "sourceRef": "0d54aa8e565246959473fbaad51421a8"
+    }
+   ]
+  },
+  {
+   "box": [
+    4455.6282,
+    1558.4164,
+    2031.1637
+   ],
+   "meshes": 62,
+   "crossMake": true,
+   "crossModel": true,
+   "assets": [
+    {
+     "assetId": "alfa-romeo-milano-2023-v1",
+     "make": "alfa-romeo",
+     "model": "milano",
+     "title": "2023 Alfa Romeo Milano",
+     "sourceRef": "e9d204f9ecf640338b4cc007a4f31f9a"
+    },
+    {
+     "assetId": "cupra-formentor-2022-v1",
+     "make": "cupra",
+     "model": "formentor",
+     "title": "2022-2024 Cupra Formentor",
+     "sourceRef": "c34bbdbb1e4e4d30a4cb5dda559c9906"
+    }
+   ]
+  },
+  {
+   "box": [
+    2883.5863,
+    5915.8826,
+    2175.9869
+   ],
+   "meshes": 59,
+   "crossMake": true,
+   "crossModel": true,
+   "assets": [
+    {
+     "assetId": "fiat-500-classic-v1",
+     "make": "fiat",
+     "model": "500 Classic",
+     "title": "Fiat 500 | Personal Work",
+     "sourceRef": "148e5d74c60345aa81f26a119819ef4b"
+    },
+    {
+     "assetId": "mini-countryman-v1",
+     "make": "mini",
+     "model": "Countryman JCW",
+     "title": "Mini Countryman JCW",
+     "sourceRef": "245e61c347da4912aa5d99a690a821b3"
+    }
+   ]
+  },
+  {
+   "box": [
+    1.9831,
+    1.7924,
+    4.184
+   ],
+   "meshes": 43,
+   "crossMake": true,
+   "crossModel": true,
+   "assets": [
+    {
+     "assetId": "ford-ranger-2023-v1",
+     "make": "ford",
+     "model": "ranger",
+     "title": "Ford Ranger Next-Gen 2023 Sport",
+     "sourceRef": "e93ac097ee9a46a4a9decca9aceed03c"
+    },
+    {
+     "assetId": "suzuki-vitara-2024-v1",
+     "make": "suzuki",
+     "model": "vitara",
+     "title": "2024 Suzuki Vitara Hybrid 1.4 EU",
+     "sourceRef": "459e512648044e9d9652e9ee47153e6f"
+    }
+   ]
+  },
+  {
+   "box": [
+    2097.9114,
+    4626.7249,
+    1727.3639
+   ],
+   "meshes": 39,
+   "crossMake": true,
+   "crossModel": true,
+   "assets": [
+    {
+     "assetId": "honda-jazz-2018-v1",
+     "make": "honda",
+     "model": "jazz",
+     "title": "2018 Honda Fit / Jazz",
+     "sourceRef": "2b1f535f185e4a6abf6b0a3222487704"
+    },
+    {
+     "assetId": "toyota-rav4-2010-v1",
+     "make": "toyota",
+     "model": "rav4",
+     "title": "2010 Rav4 Limited Edition",
+     "sourceRef": "450e36f0992c4ae09bd6c8d509a51a77"
+    }
+   ]
+  },
+  {
+   "box": [
+    30.3624,
+    36.186,
+    20.9468
+   ],
+   "meshes": 34,
+   "crossMake": true,
+   "crossModel": true,
+   "assets": [
+    {
+     "assetId": "audi-a6-c8-v1",
+     "make": "audi",
+     "model": "a6",
+     "title": "Audi A6 55 TFSI Quattro (C8)",
+     "sourceRef": "04925f2cea0c4090a58d13d88e3f16d9"
+    },
+    {
+     "assetId": "fiat-500-2016-v1",
+     "make": "fiat",
+     "model": "500",
+     "title": "Fiat 500 (2016)",
+     "sourceRef": "c2fd07f3ec3e4294aed96fdce666fe3e"
+    }
+   ]
+  },
+  {
+   "box": [
+    20.1507,
+    15.5643,
+    43.8708
+   ],
+   "meshes": 8,
+   "crossMake": true,
+   "crossModel": true,
+   "assets": [
+    {
+     "assetId": "cupra-leon-2025-v1",
+     "make": "cupra",
+     "model": "leon",
+     "title": "2025 Cupra Leon Sportstourer",
+     "sourceRef": "81ec833ce95044a29bd10ead9cd3577f"
+    },
+    {
+     "assetId": "mercedes-benz-gla-2020-v1",
+     "make": "mercedes-benz",
+     "model": "gla",
+     "title": "Mercedes-Benz GLA-Class 2020",
+     "sourceRef": "ab7b5df3ba634f38a14effde3d542466"
+    }
+   ]
+  },
+  {
+   "box": [
+    5225.5007,
+    3711.2924,
+    11715.9092
+   ],
+   "meshes": 258,
+   "crossMake": false,
+   "crossModel": true,
+   "assets": [
+    {
+     "assetId": "bmw-3-series-touring-bm1-v1",
+     "make": "bmw",
+     "model": "3 series touring",
+     "title": "",
+     "sourceRef": "93fce305fc644254a20f01fda89abe97"
+    },
+    {
+     "assetId": "bmw-3-series-2014-w12-v1",
+     "make": "bmw",
+     "model": "3 Series",
+     "title": "2014 BMW 3 Series (F31)",
+     "sourceRef": "71746440f98d48ca9ea41ceeaa3504c7"
+    }
+   ]
+  },
+  {
+   "box": [
+    1.7462,
+    4.5165,
+    4.5707
+   ],
+   "meshes": 187,
+   "crossMake": false,
+   "crossModel": true,
+   "assets": [
+    {
+     "assetId": "bmw-8-series-v1",
+     "make": "bmw",
+     "model": "8-series",
+     "title": "BMW 8- Series G15 Coupe M850i",
+     "sourceRef": "955d150b5102440581aab19a76488687"
+    },
+    {
+     "assetId": "bmw-x7-v1",
+     "make": "bmw",
+     "model": "x7",
+     "title": "BMW X7 M60i",
+     "sourceRef": "5664218111d345c6b79c64ae48c6dd8b"
+    }
+   ]
+  },
+  {
+   "box": [
+    4162.3562,
+    2340.4025,
+    1287.108
+   ],
+   "meshes": 42,
+   "crossMake": false,
+   "crossModel": true,
+   "assets": [
+    {
+     "assetId": "bmw-z4-2008-v1",
+     "make": "bmw",
+     "model": "Z4 Coupe (2008)",
+     "title": "2008 BMW Z4 M Coupe",
+     "sourceRef": "ef09f220332d42d5af970c47a514f209"
+    },
+    {
+     "assetId": "bmw-m3-f80-2013-v1",
+     "make": "bmw",
+     "model": "m3",
+     "title": "BMW M3 Sedan 2013",
+     "sourceRef": "3be9ac82a47e4639b7d0698e1697feb9"
+    }
+   ]
+  }
+ ],
+ "duplicateEntry": [
+  {
+   "box": [
+    211.3241,
+    146.3072,
+    475.9033
+   ],
+   "meshes": 59,
+   "crossMake": true,
+   "crossModel": false,
+   "assets": [
+    {
+     "assetId": "byd-seal-v1",
+     "make": "BYD",
+     "model": "Seal",
+     "title": "2024 BYD Seal",
+     "sourceRef": null
+    },
+    {
+     "assetId": "byd-seal-2024-w12-v1",
+     "make": "byd",
+     "model": "Seal",
+     "title": "2024 BYD Seal",
+     "sourceRef": "2e82d2aaaa3d47debf39b1160d3fe376"
+    }
+   ]
+  },
+  {
+   "box": [
+    177.7111,
+    104.0565,
+    393.7255
+   ],
+   "meshes": 53,
+   "crossMake": true,
+   "crossModel": false,
+   "assets": [
+    {
+     "assetId": "mg-mg4-v1",
+     "make": "MG",
+     "model": "MG4",
+     "title": "2025 MG MG4 (GLB)(mgmotor.com.mx)",
+     "sourceRef": null
+    },
+    {
+     "assetId": "mg-mg4-2025-m1-v1",
+     "make": "mg",
+     "model": "MG4",
+     "title": "",
+     "sourceRef": "ee2e3b0e1a7b481cb2c08e6fc6d2ed9e"
+    }
+   ]
+  },
+  {
+   "box": [
+    121.8375,
+    44.5569,
+    54.4887
+   ],
+   "meshes": 2358,
+   "crossMake": false,
+   "crossModel": false,
+   "assets": [
+    {
+     "assetId": "land-rover-range-rover-sport-2023-law1-v2",
+     "make": "land-rover",
+     "model": "range rover sport",
+     "title": "",
+     "sourceRef": "b68c443c8dae42359fb26a9282a3d572"
+    },
+    {
+     "assetId": "land-rover-range-rover-sport-2023-rr1-v1",
+     "make": "land-rover",
+     "model": "range rover sport",
+     "title": "2023_sport",
+     "sourceRef": "rr_2023_sport"
+    }
+   ]
+  },
+  {
+   "box": [
+    3.0975,
+    5.5663,
+    1.6414
+   ],
+   "meshes": 176,
+   "crossMake": false,
+   "crossModel": false,
+   "assets": [
+    {
+     "assetId": "tesla-model-3-2018-w5-v1",
+     "make": "tesla",
+     "model": "Model 3",
+     "title": "Tesla 2018 Model 3",
+     "sourceRef": "5ef9b845aaf44203b6d04e2c677e444f"
+    },
+    {
+     "assetId": "tesla-model-3-2023-w5-v1",
+     "make": "tesla",
+     "model": "Model 3",
+     "title": "2023 Tesla Model 3 Performance",
+     "sourceRef": "6bd2ab6e23a545858d5c98c995528067"
+    }
+   ]
+  },
+  {
+   "box": [
+    2.2349,
+    1.5367,
+    4.9252
+   ],
+   "meshes": 103,
+   "crossMake": false,
+   "crossModel": true,
+   "assets": [
+    {
+     "assetId": "jaguar-xj220-1992-ib1-v1",
+     "make": "jaguar",
+     "model": "xj220",
+     "title": "",
+     "sourceRef": "48ee8889ff5c4a5c"
+    },
+    {
+     "assetId": "jaguar-xj220-1992-jgw1-v1",
+     "make": "jaguar",
+     "model": "XJ220",
+     "title": "",
+     "sourceRef": "7dd7bc17b4564f6eb03542ad6cab6dda"
+    }
+   ]
+  },
+  {
+   "box": [
+    442.9605,
+    209.6544,
+    138.762
+   ],
+   "meshes": 46,
+   "crossMake": false,
+   "crossModel": false,
+   "assets": [
+    {
+     "assetId": "peugeot-3008-w12-v1",
+     "make": "peugeot",
+     "model": "3008",
+     "title": "Peugeot 3008",
+     "sourceRef": "4f7c7318a29d4e16a6047c2d58bba28d"
+    },
+    {
+     "assetId": "peugeot-3008-pw1-v1",
+     "make": "peugeot",
+     "model": "3008",
+     "title": "",
+     "sourceRef": "3e5e14fdb1f94f25a5b572caf518f55d"
+    }
+   ]
+  },
+  {
+   "box": [
+    1.9962,
+    1.6373,
+    3.9921
+   ],
+   "meshes": 39,
+   "crossMake": false,
+   "crossModel": true,
+   "assets": [
+    {
+     "assetId": "toyota-yaris-v1",
+     "make": "toyota",
+     "model": "GR Yaris",
+     "title": "Toyota GR Yaris",
+     "sourceRef": null
+    },
+    {
+     "assetId": "toyota-gr-yaris-2021-tw2-v1",
+     "make": "toyota",
+     "model": "gr-yaris",
+     "title": "",
+     "sourceRef": "98e6611ad034451982b6a9908c63fc47"
+    }
+   ]
+  },
+  {
+   "box": [
+    1.3397,
+    0.9611,
+    3.0037
+   ],
+   "meshes": 27,
+   "crossMake": false,
+   "crossModel": true,
+   "assets": [
+    {
+     "assetId": "land-rover-range-rover-sport-2018-w5-v1",
+     "make": "land-rover",
+     "model": "Range Rover Sport",
+     "title": "Range Rover Sport 2018",
+     "sourceRef": "d1fe581b3baf4af89275e9aa9a1392e2"
+    },
+    {
+     "assetId": "land-rover-range-rover-sport-2018-rr1-v1",
+     "make": "land-rover",
+     "model": "range rover sport",
+     "title": "2018_sport",
+     "sourceRef": "rr_2018_sport"
+    }
+   ]
+  }
+ ]
+}
