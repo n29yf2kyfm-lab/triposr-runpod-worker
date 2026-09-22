@@ -1,0 +1,218 @@
+{
+ "_README": "Typical powertrain and suspension LAYOUT per model, used to CONSTRUCT the engine bay and chassis in Strip Bay. A representative choice for the model line, not any one car's build sheet: the exact engine depends on trim and year and must be checked against the car. engine: I3 I4 I6 V6 V8 V12, EV1 (one motor), EV2 (two motors). mount: trans | long. drive: FWD RWD AWD. front: strut | wishbone. rear: beam | multilink | leaf. Evidence noted where the file itself settled a choice.",
+ "audi-a6-c8-ad1-v1": {
+  "engine": "V6",
+  "mount": "long",
+  "drive": "AWD",
+  "front": "wishbone",
+  "rear": "multilink",
+  "turbo": true,
+  "say": "longitudinal V6 with quattro all-wheel drive"
+ },
+ "peugeot-508-w12-v1": {
+  "engine": "I4",
+  "mount": "trans",
+  "drive": "FWD",
+  "front": "strut",
+  "rear": "multilink",
+  "turbo": true,
+  "say": "transverse turbo four, front-wheel drive"
+ },
+ "audi-a6-c7-ad1-v1": {
+  "engine": "V6",
+  "mount": "long",
+  "drive": "AWD",
+  "front": "wishbone",
+  "rear": "multilink",
+  "turbo": false,
+  "say": "longitudinal V6 with quattro all-wheel drive"
+ },
+ "bmw-m235i-bm2-v1": {
+  "engine": "I4",
+  "mount": "trans",
+  "drive": "AWD",
+  "front": "strut",
+  "rear": "multilink",
+  "turbo": true,
+  "say": "transverse turbo four with all-wheel drive (the four-door M235i; the file has four doors, which rules out the older six-cylinder coupe)"
+ },
+ "peugeot-308-pw1-v1": {
+  "engine": "I3",
+  "mount": "trans",
+  "drive": "FWD",
+  "front": "strut",
+  "rear": "beam",
+  "turbo": true,
+  "say": "transverse turbo three, front-wheel drive"
+ },
+ "bmw-m6-v1": {
+  "engine": "V8",
+  "mount": "long",
+  "drive": "RWD",
+  "front": "wishbone",
+  "rear": "multilink",
+  "turbo": true,
+  "say": "longitudinal twin-turbo V8, rear-wheel drive"
+ },
+ "renault-captur-v1": {
+  "engine": "I4",
+  "mount": "trans",
+  "drive": "FWD",
+  "front": "strut",
+  "rear": "beam",
+  "turbo": true,
+  "say": "transverse turbo four, front-wheel drive"
+ },
+ "fiat-tipo-fw1-v1": {
+  "engine": "I4",
+  "mount": "trans",
+  "drive": "FWD",
+  "front": "strut",
+  "rear": "beam",
+  "turbo": false,
+  "say": "transverse four, front-wheel drive"
+ },
+ "rolls-royce-ghost-v1": {
+  "engine": "V12",
+  "mount": "long",
+  "drive": "RWD",
+  "front": "wishbone",
+  "rear": "multilink",
+  "turbo": true,
+  "spring": 8421504,
+  "say": "longitudinal twin-turbo V12 (air suspension on the real car; shown as coil units)"
+ },
+ "peugeot-407-w9-v1": {
+  "engine": "I4",
+  "mount": "trans",
+  "drive": "FWD",
+  "front": "wishbone",
+  "rear": "multilink",
+  "turbo": false,
+  "say": "transverse four, front-wheel drive"
+ },
+ "peugeot-e-2008-w12-v1": {
+  "engine": "EV1",
+  "mount": "trans",
+  "drive": "FWD",
+  "front": "strut",
+  "rear": "beam",
+  "say": "one electric motor driving the front wheels, battery under the floor"
+ },
+ "mercedes-benz-cls-mw1-v2": {
+  "engine": "V8",
+  "mount": "long",
+  "drive": "RWD",
+  "front": "wishbone",
+  "rear": "multilink",
+  "turbo": false,
+  "say": "longitudinal V8, rear-wheel drive (the file's parts are prefixed CLS500)"
+ },
+ "porsche-panamera-pw2-v1": {
+  "engine": "V6",
+  "mount": "long",
+  "drive": "AWD",
+  "front": "wishbone",
+  "rear": "multilink",
+  "turbo": true,
+  "say": "longitudinal twin-turbo V6 with all-wheel drive"
+ },
+ "mazda-mazda-3-mzw1-v1": {
+  "engine": "I4",
+  "mount": "trans",
+  "drive": "FWD",
+  "front": "strut",
+  "rear": "beam",
+  "turbo": false,
+  "say": "transverse four, front-wheel drive"
+ },
+ "tesla-model-3-2023-w5-v1": {
+  "engine": "EV2",
+  "mount": "trans",
+  "drive": "AWD",
+  "front": "wishbone",
+  "rear": "multilink",
+  "say": "two electric motors, one per axle, battery under the floor (Performance)"
+ },
+ "skoda-superb-2009-w5-v1": {
+  "engine": "I4",
+  "mount": "trans",
+  "drive": "FWD",
+  "front": "strut",
+  "rear": "multilink",
+  "turbo": true,
+  "say": "transverse turbo four, front-wheel drive"
+ },
+ "suzuki-sx4-v1": {
+  "engine": "I4",
+  "mount": "trans",
+  "drive": "FWD",
+  "front": "strut",
+  "rear": "beam",
+  "turbo": false,
+  "say": "transverse four, front-wheel drive"
+ },
+ "volkswagen-amarok-2017-v1": {
+  "engine": "V6",
+  "mount": "long",
+  "drive": "AWD",
+  "front": "wishbone",
+  "rear": "leaf",
+  "turbo": true,
+  "say": "longitudinal V6 diesel, four-wheel drive, leaf-sprung live rear axle"
+ },
+ "nissan-micra-w6-v1": {
+  "engine": "I4",
+  "mount": "trans",
+  "drive": "FWD",
+  "front": "strut",
+  "rear": "beam",
+  "turbo": false,
+  "say": "transverse four, front-wheel drive"
+ },
+ "toyota-gr-supra-v1": {
+  "engine": "I6",
+  "mount": "long",
+  "drive": "RWD",
+  "front": "strut",
+  "rear": "multilink",
+  "turbo": true,
+  "say": "longitudinal turbo straight-six, rear-wheel drive"
+ },
+ "mercedes-benz-e-class-w213-undated-v1": {
+  "engine": "V8",
+  "mount": "long",
+  "drive": "AWD",
+  "front": "wishbone",
+  "rear": "multilink",
+  "turbo": true,
+  "say": "longitudinal twin-turbo V8 with all-wheel drive (E 63 S)"
+ },
+ "bmw-x7-v1": {
+  "engine": "I6",
+  "mount": "long",
+  "drive": "AWD",
+  "front": "wishbone",
+  "rear": "multilink",
+  "turbo": true,
+  "say": "longitudinal turbo straight-six with all-wheel drive"
+ },
+ "bmw-8-series-v1": {
+  "engine": "I6",
+  "mount": "long",
+  "drive": "AWD",
+  "front": "wishbone",
+  "rear": "multilink",
+  "turbo": true,
+  "say": "longitudinal turbo straight-six with all-wheel drive"
+ },
+ "volvo-v60-2020-v1": {
+  "engine": "I4",
+  "mount": "trans",
+  "drive": "FWD",
+  "front": "wishbone",
+  "rear": "multilink",
+  "turbo": true,
+  "say": "transverse turbo four, front-wheel drive"
+ }
+}

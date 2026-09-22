@@ -13,6 +13,7 @@ file does not have.
 import json, sys, re
 
 html, repdir, acc = sys.argv[1:4]
+PT = json.load(open(__file__.rsplit('/', 1)[0] + '/powertrain.json'))
 entries = []
 for line in open(acc):
     line = line.strip()
@@ -35,15 +36,28 @@ for line in open(acc):
         man.append('<b>Lifted out of the paint:</b> ' + ', '.join(
             {'panel_bonnet': 'the bonnet', 'tailgate': 'the boot lid'}[k] + f' ({v:,} faces)'
             for k, v in r['lifted'].items()) + ' sat as loose pieces inside the body mesh and were taken out whole.')
-    man.append('<b>There is modelled engine geometry under the bonnet.</b>' if 'engine' in p
-               else '<b>No engine in this file.</b> Open the bonnet and the bay is empty.')
+    pt = PT.get(aid)
+    if pt and 'engine' in p:
+        # the FILE has an engine: keep it, and only the chassis is built
+        man.append("<b>The engine under the bonnet is the file's own geometry.</b> The suspension is "
+                   "CONSTRUCTED — the file has none — sized to this car's measured wheels and track; "
+                   "typical of the model, not verified for this car.")
+    elif pt:
+        man.append(f"<b>The engine and suspension are CONSTRUCTED</b> — the file has none. They are built to a "
+                   f"{pt['say']}, and sized to this car's own measured wheels, track, wheelbase and bonnet. "
+                   f"That is a representative layout for the model, not this car's build sheet; the exact engine "
+                   f"depends on the trim.")
+    else:
+        man.append('<b>No engine in this file.</b> Open the bonnet and the bay is empty.')
     d = r['frame'].get('drive')
     if d: man.append(f"<b>{'Left' if d == 'LHD' else 'Right'}-hand drive</b>, measured from where the steering wheel sits.")
     man.append('The engine, starter, brake and door-internals bays are built around the Golf and do not run on this car.')
     entries.append((key, {
         'name': name, 'short': name.split(' ')[-1], 'url': f'{aid}.glb.wasm', 'conv': 4,
-        'hinge': r['hinge'], **({'paint': False} if nopaint else {}),
-        'note': f"Real geometry from {aid} · converted by sb_convert.py · hinges DERIVED from the file",
+        'hinge': r['hinge'], **({'paint': False} if nopaint else {}), **({'pt': pt} if pt else {}),
+        'note': f"Real geometry from {aid} · hinges DERIVED from the file"
+                + ((" · suspension CONSTRUCTED" if 'engine' in p else
+                    " · engine and suspension CONSTRUCTED to the model's typical layout") if pt else ""),
         'manual': man}))
 
 block = 'const FLEET_GEN = {\n' + ',\n'.join(

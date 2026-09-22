@@ -215,6 +215,27 @@ for side, lst in DOOR.items():
         for o in os_: put(f"door_{'fr'[k]}{side}", o)
 nd = sum(1 for k in parts if k.startswith('door_'))
 if nd < 2: refuse(f'only {nd} door part(s) found')
+# A WHEEL MUST BE WHEEL-SHAPED. On the Rolls-Royce Ghost, parts NAMED for
+# the wheel but reaching 1.3-1.6 m (hub carriers, arch pieces) were put in
+# the front wheel groups: the measured front track came out 0.91 m on a car
+# 2 m wide, and anything sized from it — the constructed suspension — would
+# have been built in the wrong place. Round-ish and narrower than tall is a
+# wheel; small wheel-named bits only join a wheel they sit INSIDE.
+def shape_ok(o):
+    b0, b1 = bbox(wv(o)); h, l, w = b1.y - b0.y, b1.z - b0.z, b1.x - b0.x
+    return .35 < h < 1.0 and .75 < l / max(h, 1e-6) < 1.3 and w < .65 * h
+prim = [o for o in wheels if shape_ok(o)]
+boxes = [bbox(wv(o)) for o in prim]
+rest = []
+for o in wheels:
+    if o in prim: continue
+    b0, b1 = bbox(wv(o)); c = (b0 + b1) / 2
+    inside = any(all(pb0[i] - .03 <= c[i] <= pb1[i] + .03 for i in range(3)) and (b1 - b0).length < (pb1 - pb0).length
+                 for pb0, pb1 in boxes)
+    (prim if inside else rest).append(o)
+rep['wheel_rejects'] = [o['sb_chain'][:50] for o in rest][:8]
+for o in rest: K[o] = 'body'
+wheels = prim
 for o in wheels:
     c = centre([o]); put('wheel_' + ('f' if c.z > mid.z else 'r') + ('l' if c.x > 0 else 'r'), o)
 if sorted(k for k in parts if k.startswith('wheel_')) != ['wheel_fl', 'wheel_fr', 'wheel_rl', 'wheel_rr']:
@@ -235,6 +256,51 @@ for pid in [k for k in parts if k.startswith('door_')]:
             (parts[pid] if inside else keep).append(o)
         if other in parts: parts[other] = keep
 
+# ── 4b. TYRES MUST READ AS BLACK RUBBER ──────────────────────────────
+# Owner ruling 2026-08-09. On sim-mod cars the tyre is often modelled in the
+# RIM's material — the Renault Captur's whole wheel is `wheel_rim`, grey
+# metal at 0.56 — so the tyre renders pale however the scene is lit. Split
+# by RADIUS, the same method this repo already uses on donor wheels: a face
+# whose centre lies beyond 80% of the wheel's radius from its axle is tyre.
+# Only faces carrying a LIGHT, UNTEXTURED material are touched, so a tyre
+# that is already black rubber, or a textured tread, is left exactly alone.
+rubber = bpy.data.materials.new('SB_tyre_rubber')
+rubber.use_nodes = True
+bsdf = rubber.node_tree.nodes.get('Principled BSDF')
+bsdf.inputs['Base Color'].default_value = (0.022, 0.022, 0.024, 1)
+bsdf.inputs['Roughness'].default_value = 0.88
+bsdf.inputs['Metallic'].default_value = 0.0
+def light_untextured(m):
+    if m is None or not m.use_nodes: return False
+    b = m.node_tree.nodes.get('Principled BSDF')
+    if b is None or b.inputs['Base Color'].is_linked: return False
+    c = b.inputs['Base Color'].default_value
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2] > 0.18
+done_data, split = set(), 0
+wboxes = {k: bbox([v for o in parts[k] for v in wv(o)]) for k in parts if k.startswith('wheel_')}
+for k, (b0, b1) in wboxes.items():
+    cy, cz, R = (b0.y + b1.y) / 2, (b0.z + b1.z) / 2, (b1.y - b0.y) / 2
+    for o in parts[k]:
+        if o.data.name in done_data: continue
+        if not any(light_untextured(s_.material) for s_ in o.material_slots): continue
+        mw = o.matrix_world; hits = []
+        for p in o.data.polygons:
+            if p.material_index >= len(o.material_slots): continue
+            if not light_untextured(o.material_slots[p.material_index].material): continue
+            # PER TRIANGLE, NOT PER CENTROID: a sidewall triangle runs from
+            # the bead to the tread, so its centre can sit inside any single
+            # radius line — the first version left those grey and drew a
+            # silver sawtooth round the Captur's rim. A face is tyre if it
+            # REACHES the tread band and none of its corners come in to the rim.
+            rr = [((q.y - cy) ** 2 + (q.z - cz) ** 2) ** .5
+                  for q in (G(mw @ o.data.vertices[vi].co) for vi in p.vertices)]
+            if max(rr) > 0.85 * R and min(rr) > 0.60 * R: hits.append(p.index)
+        if not hits: continue
+        o.data.materials.append(rubber); ri = len(o.data.materials) - 1
+        for i in hits: o.data.polygons[i].material_index = ri
+        done_data.add(o.data.name); split += len(hits)
+rep['tyre_faces_to_rubber'] = split
+
 # ── 5. PAINT: the material covering most of the bonnet (or the doors) ─
 def mat_area(os_):
     A = {}
@@ -250,9 +316,15 @@ paint = max(A, key=A.get) if A else None
 if paint:
     rep['paint'] = {'material': paint.name, 'from': 'bonnet' if parts.get('panel_bonnet') else 'doors',
                     'share': round(A[paint] / sum(A.values()), 3)}
-    if 'paint' not in paint.name.lower():
-        paint.name = paint.name + '_paint'     # the app finds paint by this word
-        rep['paint']['renamed'] = paint.name
+    # SIBLINGS ARE THE SAME PAINT. The Nissan Micra's bonnet is `primary.001`
+    # and its body `primary`: renaming only the bonnet's copy meant a respray
+    # reached the bonnet and nothing else. Blender's `.NNN` suffix is an
+    # import artefact, not a different material.
+    base = re.sub(r'\.\d+$', '', paint.name)
+    sib = [m for m in bpy.data.materials if re.sub(r'\.\d+$', '', m.name) == base]
+    for m in sib:
+        if 'paint' not in m.name.lower(): m.name = m.name + '_paint'   # the app finds paint by this word
+    rep['paint']['renamed'] = [m.name for m in sib]
 
 # ── 6. BONNET / BOOT from the paint mesh if no part carries them ──────
 def islands(o):

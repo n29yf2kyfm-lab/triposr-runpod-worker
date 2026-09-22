@@ -465,6 +465,7 @@ const FLEET = {
        ground 0), lifted the bonnet and boot lid out of the paint mesh where
        they sat as loose islands, and named every node SB_<partId>__<n>. */
     url:'a6.glb.wasm', conv:4,
+    pt:{"engine": "V6", "mount": "long", "drive": "AWD", "front": "wishbone", "rear": "multilink", "turbo": true, "say": "longitudinal V6 with quattro all-wheel drive"},
     /* printed by rig_canon.py from the parts themselves. Cross-check: the
        door x of 0.914 agrees with the game rig's own door-bone position,
        0.911, which is where the game swings the door. */
@@ -474,11 +475,11 @@ const FLEET = {
       panel_bonnet:{x:0,y:0.9855,z:1.0769},
       tailgate:{x:0,y:1.1104,z:-1.7191}},
     note:'Real geometry from audi-a6-c8-ad1-v1 · bonnet and boot lid lifted from the paint '
-        +'mesh · hinges DERIVED from the file',
+        +'mesh · engine and suspension CONSTRUCTED to the model\'s typical layout',
     manual:[
       `<b>This is a game-vehicle model, rebuilt for the bay.</b> In the original file every part is driven by a bone, the way a driving game moves it. That was converted offline into one plain part per bone, so nothing was remodelled — the doors, the glass in them, the handles and the door lamps are exactly the file's own pieces.`,
       `<b>The bonnet and the boot lid were loose pieces inside the paint.</b> They had no bone of their own but were not welded to the body either, so they were lifted out whole — 654 and 1,004 faces — rather than cut along a guessed line. The Tailgate button opens the boot lid on this car.`,
-      `<b>There is no engine in this file.</b> Open the bonnet and the bay is empty. The engine, starter and alternator bays are built in code around the Golf and do not run on this car.`,
+      `<b>The engine and suspension are CONSTRUCTED</b> — the file has none. They are built to a longitudinal V6 with quattro all-wheel drive, typical of the A6, and sized to this car's own measured wheels, track, wheelbase and bonnet. The exact engine depends on the trim. The engine, starter and alternator TRAINING bays are built around the Golf and do not run on this car.`,
       `<b>The brake calipers are modelled</b> — take a wheel off and the red caliper is behind it (the game rig calls these "hubs"). There is no separate disc, though, so the Brake job stays Golf-only. The seats are part of the cabin mesh here rather than parts of their own.`,
       `<b>Left-hand drive</b>, like the Golf — the steering wheel is on the car's left. A UK A6 has it on the right.`]
   }
@@ -786,6 +787,308 @@ const classify = n => {
   for (const [re,id] of RULES) for (const c of cands) if (re.test(c)) return id;
   return 'body';
 };
+/* ═════════════════════════════════════════════════════════════════════
+   POWERTRAIN + SUSPENSION — CONSTRUCTED, sized to the car it sits in
+
+   None of the converted cars carries an engine or suspension in its file.
+   These are BUILT here, from two inputs and nothing else:
+     1. the model's typical LAYOUT, from the fleet entry (`pt`): cylinder
+        count and arrangement, which way the engine sits, which wheels are
+        driven, and the front / rear suspension type. That is a
+        REPRESENTATIVE choice for the model, not this car's build sheet —
+        the exact engine depends on the trim, and the caption says so.
+     2. the car's own MEASURED geometry: wheel centres, tyre radius and
+        width, track, wheelbase, and the underside of the bonnet. Nothing
+        is placed at a hand-typed coordinate, so the same code fits a Micra
+        and a Rolls-Royce.
+   Frame: +X is the car's LEFT, +Y up, +Z the nose, ground at Y=0.
+   ═══════════════════════════════════════════════════════════════════ */
+const ptAsm = new THREE.Group(); ptAsm.name = 'constructed_powertrain';
+function carMeasure(){
+  const W = {};
+  for (const k of ['fl','fr','rl','rr']){
+    const p = parts['wheel_'+k]; if (!p) return null;
+    const s = p.box.getSize(new THREE.Vector3());
+    W[k] = {c:p.box.getCenter(new THREE.Vector3()), r:s.y/2, w:Math.min(s.x,.36)};
+  }
+  const body = new THREE.Box3();
+  for (const id of ['body','panel_bonnet','tailgate']) if (parts[id]) body.union(parts[id].box);
+  const r  = (W.fl.r+W.fr.r+W.rl.r+W.rr.r)/4, tw = (W.fl.w+W.fr.w)/2;
+  const zf = (W.fl.c.z+W.fr.c.z)/2, zr = (W.rl.c.z+W.rr.c.z)/2;
+  const tf = Math.abs(W.fl.c.x-W.fr.c.x), tr = Math.abs(W.rl.c.x-W.rr.c.x);
+  const bon = parts.panel_bonnet ? parts.panel_bonnet.box : null;
+  /* the engine must fit UNDER the bonnet: its lowest skin near the axle
+     is the ceiling. No bonnet part -> a conservative ceiling off the wheel */
+  const bayTop = bon ? Math.max(r*1.9, bon.min.y - .03) : r*2 + .18;
+  return {W, r, tw, zf, zr, tf, tr, body, bayTop,
+          inner: tf/2 - tw/2 - .07,               /* half-width between the tyres */
+          nose: body.max.z, tail: body.min.z, cy: r};
+}
+function buildPowertrain(pt){
+  const m = carMeasure(); if (!m) return null;
+  const V = (x,y,z) => new THREE.Vector3(x,y,z);
+  const M = (c,o={}) => new THREE.MeshStandardMaterial({color:c,roughness:.5,metalness:.55,...o});
+  const cast=M(0x4b5158,{roughness:.78,metalness:.32}), plastic=M(0x1a1e24,{roughness:.86,metalness:.05}),
+        alu=M(0x80878f,{metalness:.8,roughness:.4}), steel=M(0x5a6068,{metalness:.85,roughness:.45}),
+        rubber=M(0x15181c,{roughness:.95,metalness:.03}), exh=M(0x6e5a4a,{metalness:.7,roughness:.55}),
+        spring=M(pt.spring||0xb3202b,{roughness:.45,metalness:.3}), cu=M(0xb87333,{metalness:.9,roughness:.32}),
+        orange=M(0xe06a10,{roughness:.6,metalness:.1}), coolant=new THREE.MeshStandardMaterial(
+          {color:0xd8e8f0,transparent:true,opacity:.5,roughness:.25,metalness:0});
+  const grpE = new THREE.Group(), grpS = new THREE.Group();   /* engine / suspension */
+  const add=(mat,g,x,y,z,grp=grpE)=>{const o=new THREE.Mesh(g,mat);o.position.set(x,y,z);
+    o.castShadow=true; grp.add(o); return o};
+  const rbox=(w,h,d,r=.015)=>{ r=Math.min(r,w/3,h/3,d/3);
+    const s=new THREE.Shape(), x=w/2-r, y=h/2-r;
+    s.moveTo(-x,-h/2); s.lineTo(x,-h/2); s.quadraticCurveTo(w/2,-h/2,w/2,-y);
+    s.lineTo(w/2,y); s.quadraticCurveTo(w/2,h/2,x,h/2); s.lineTo(-x,h/2);
+    s.quadraticCurveTo(-w/2,h/2,-w/2,y); s.lineTo(-w/2,-y); s.quadraticCurveTo(-w/2,-h/2,-x,-h/2);
+    const g=new THREE.ExtrudeGeometry(s,{depth:Math.max(.001,d-r*1.2),bevelEnabled:true,
+      bevelThickness:r*.6,bevelSize:r*.6,bevelSegments:2,curveSegments:3});
+    g.translate(0,0,-(d-r*1.2)/2); g.computeVertexNormals(); return g; };
+  /* a rod between two points — every arm, link, shaft and pipe */
+  const rod=(a,b,rad,mat,grp=grpE)=>{ const d=b.clone().sub(a), L=d.length(); if(L<1e-4) return null;
+    const o=new THREE.Mesh(new THREE.CylinderGeometry(rad,rad,L,10),mat);
+    o.position.copy(a).addScaledVector(d,.5);
+    o.quaternion.setFromUnitVectors(V(0,1,0),d.normalize()); o.castShadow=true; grp.add(o); return o; };
+  const tube=(pts,rad,mat,grp=grpE)=>{ const c=new THREE.CatmullRomCurve3(pts);
+    const o=new THREE.Mesh(new THREE.TubeGeometry(c,Math.max(12,pts.length*8),rad,10,false),mat);
+    o.castShadow=true; grp.add(o); return o; };
+  /* a coil spring between two points: a helix swept as a tube */
+  const coil=(a,b,R,turns,wire,mat,grp=grpS)=>{ const d=b.clone().sub(a), L=d.length();
+    const q=new THREE.Quaternion().setFromUnitVectors(V(0,1,0),d.clone().normalize()), pts=[];
+    for(let i=0;i<=turns*14;i++){ const t=i/(turns*14), an=t*turns*Math.PI*2;
+      pts.push(V(Math.cos(an)*R,t*L,Math.sin(an)*R).applyQuaternion(q).add(a)); }
+    return tube(pts,wire,mat,grp); };
+  const disc=(R,t,mat,axis='x')=>{ const g=new THREE.CylinderGeometry(R,R,t,24);
+    if(axis==='x') g.rotateZ(Math.PI/2); if(axis==='z') g.rotateX(Math.PI/2); return new THREE.Mesh(g,mat); };
+
+  const {W,r,tw,zf,zr,inner,bayTop,nose,tail} = m;
+  const eng = pt.engine;                  /* 'I3' 'I4' 'I6' 'V6' 'V8' 'V12' 'EV1' 'EV2' */
+  const EV  = eng.startsWith('EV');
+  const nCyl= EV ? 0 : +eng.slice(1);
+  const vee = eng.startsWith('V');
+  const long= pt.mount==='long';
+  const yLow= r*.62;                      /* sump bottom: above the lower arms */
+  const avail = Math.max(.30, bayTop - yLow);
+
+  /* ── ENGINE ──────────────────────────────────────────────────────── */
+  let E = null;                           /* the engine's outline, for what hangs off it */
+  if (!EV && !parts.engine){
+    const bore=.092, pitch=bore*1.12;
+    const rowL = (vee ? nCyl/2 : nCyl)*pitch + .10;          /* along the crank */
+    const H0 = vee ? .62 : .66, s = Math.min(1, avail/H0);   /* shrink to fit the bay */
+    const blockH=.30*s, headH=.12*s, camH=.07*s;
+    const bankW = .26*s;
+    /* crank axis: along X if transverse, along Z if longitudinal */
+    const ax = long ? V(0,0,1) : V(1,0,0);
+    const len = rowL*s;
+    const cz = long ? zf - len*.35 : zf + .10;               /* transverse sits over the axle */
+    const cx = long ? 0 : -Math.min(.12, inner*.25);          /* gearbox takes the other side */
+    const yB = yLow + .06*s;
+    E = {cx,cz,len,ax,yTop:yB+blockH+headH+camH,long};
+    const onAx = (w,h,d)=> long ? rbox(d,h,w,.02) : rbox(w,h,d,.02);   /* w is along the crank */
+    add(cast, onAx(len*.92,.07*s,bankW*.95), cx, yLow+.035*s, cz);              /* sump */
+    const banks = vee ? [-1,1] : [0];
+    const tilt = vee ? (nCyl===12 ? .52 : .40) : (long ? 0 : -.18);           /* V angle / slant */
+    const perBank = vee ? nCyl/2 : nCyl;
+    const blockW = vee ? bankW*1.35 : bankW;
+    add(cast, onAx(len, blockH, blockW), cx, yB+blockH/2, cz);                   /* block */
+    for (const b of banks){
+      const g = new THREE.Group(); g.position.set(cx, yB+blockH, cz);
+      const ang = b ? b*tilt : tilt;
+      if (long) g.rotation.z = -ang; else g.rotation.x = ang;
+      const off = vee ? b*bankW*.42 : 0;
+      const put=(mat,geo,y)=>{ const o=new THREE.Mesh(geo,mat);
+        if(long) o.position.set(off,y,0); else o.position.set(0,y,off); o.castShadow=true; g.add(o); return o; };
+      put(alu, onAx(len*.96, headH, bankW*.92), headH/2);                          /* head */
+      put(plastic, onAx(len*.94, camH, bankW*.78), headH+camH/2);                  /* cam cover */
+      for (let i=0;i<perBank;i++){                                                 /* coil packs */
+        const t = (i+.5)/perBank - .5, along = t*len*.84;
+        const cp = new THREE.Mesh(rbox(.05,.05*s+.02,.04,.008), rubber);
+        if (long) cp.position.set(off, headH+camH+.02, along); else cp.position.set(along, headH+camH+.02, off);
+        g.add(cp);
+      }
+      grpE.add(g);
+    }
+    /* intake plenum + runners on the side away from the exhaust */
+    const inSide = long ? 0 : 1;          /* transverse: intake faces the cabin (-Z side is +1 here) */
+    const plen = long ? rbox(.16*s, .10*s, len*.8, .03) : rbox(len*.8, .10*s, .16*s, .03);
+    const plY = yB+blockH+headH*.9;
+    if (vee) add(alu, plen, cx, plY+camH*1.6, cz);                              /* V: plenum in the valley */
+    else add(alu, plen, long? cx+.23*s : cx, plY, long? cz : cz-.22*s);
+    /* exhaust manifold primaries -> downpipe, and a turbo when there is one */
+    const exSides = vee ? [-1,1] : [long? -1 : 1];
+    const exPts=[];
+    for (const b of exSides){
+      const ex0 = long ? V(cx - b*(blockW*.65), yB+blockH*.9, cz)
+                       : V(cx, yB+blockH*.9, cz + b*.20*s);
+      for (let i=0;i<perBank;i++){
+        const t=(i+.5)/perBank-.5, along=t*len*.8;
+        const port = long ? V(ex0.x, ex0.y+.03, cz+along) : V(cx+along, ex0.y+.03, ex0.z);
+        const col = long ? V(ex0.x - b*.05, ex0.y-.10, cz+len*.1) : V(cx+len*.2, ex0.y-.10, ex0.z+.05);
+        tube([port, port.clone().lerp(col,.5).add(V(0,-.02,0)), col], .018, exh);
+      }
+      exPts.push(long ? V(ex0.x - b*.05, ex0.y-.10, cz+len*.1) : V(cx+len*.2, ex0.y-.10, ex0.z+.05));
+    }
+    if (pt.turbo){
+      const tp = exPts[0].clone().add(long ? V(0,.05,.10) : V(.05,.05,.04));
+      const snail = new THREE.Mesh(new THREE.TorusGeometry(.055,.035,10,20), cast);
+      snail.position.copy(tp); snail.rotation.y = Math.PI/2; grpE.add(snail);
+      const comp = new THREE.Mesh(new THREE.TorusGeometry(.05,.03,10,20), alu);
+      comp.position.copy(tp).add(long ? V(0,0,.07) : V(.07,0,0)); comp.rotation.y = long?0:Math.PI/2; grpE.add(comp);
+      /* intercooler low in the nose, piped from the compressor */
+      add(alu, rbox(inner*1.5, .16, .05, .01), 0, r*.72, nose-.30);
+      tube([comp.position.clone(), V(comp.position.x, r*.9, nose-.42), V(inner*.6, r*.75, nose-.33)], .03, rubber);
+    }
+    /* accessory drive at one end of the crank: pulleys and a belt */
+    const endPt = long ? V(cx, yB+blockH*.5, cz+len/2+.03) : V(cx - len/2 - .03, yB+blockH*.5, cz);
+    for (const [dy,dz,R] of [[0,0,.075],[.16*s,.06,.045],[.10*s,-.10,.05]]){
+      const p = disc(R,.03,alu, long?'z':'x');
+      p.position.copy(endPt).add(long ? V(dz,dy,0) : V(0,dy,dz)); grpE.add(p);
+    }
+    add(plastic, rbox(.20,.16,.26,.02), inner*.62, bayTop-.20, cz-.02);          /* air box */
+    tube([V(inner*.62, bayTop-.20, cz+.12), V(inner*.40, bayTop-.14, cz+.24),
+          V(cx*.5, yB+blockH+headH, cz+(long? len*.45 : .22))], .038, rubber);
+  }
+  /* ── ELECTRIC DRIVE: motor + inverter per driven axle, pack underfloor ─ */
+  if (EV){
+    const axles = eng==='EV2' ? [zf, zr] : (pt.drive==='RWD' ? [zr] : [zf]);
+    for (const z of axles){
+      const mot = disc(.14, .34, alu, 'x'); mot.position.set(-.06, r, z + (z===zf? .06 : -.06)); grpE.add(mot);
+      add(cast, rbox(.22,.24,.24,.03), .18, r, mot.position.z);                    /* reduction gear */
+      add(plastic, rbox(.34,.10,.24,.02), -.02, r+.18, mot.position.z);           /* inverter */
+      tube([V(-.02,r+.23,mot.position.z-.05), V(0,r*.55,mot.position.z-(z===zf?.35:-.35)*.5)], .022, orange);
+    }
+    add(steel, rbox(inner*1.9, .13, Math.abs(zf-zr)-.50, .02), 0, r*.38, (zf+zr)/2); /* battery pack */
+    add(coolant, rbox(.12,.14,.10,.02), inner*.6, bayTop-.18, zf+.25);            /* coolant bottle */
+  }
+  /* ── COOLING: radiator and fan behind the grille ─────────────────── */
+  if (!parts.engine){
+    const rw=Math.min(inner*1.7,.75), rz=nose-.36;
+    add(alu, rbox(rw,.40,.035,.008), 0, r*1.05, rz);
+    const fan = disc(.17,.05,plastic,'z'); fan.position.set(0, r*1.05, rz-.05); grpE.add(fan);
+    if (!EV) add(coolant, rbox(.12,.14,.10,.02), inner*.72, bayTop-.20, zf+.30);
+    add(plastic, rbox(.24,.19,.17,.02), -inner*.72, bayTop-.24, zf-.05);           /* 12 V battery */
+  }
+  /* ── GEARBOX, SHAFTS, DIFFERENTIALS ─────────────────────────────── */
+  const hub = k => W[k].c.clone().add(V((k[1]==='l'?-1:1)*(W[k].w/2+.02),0,0));
+  const cvShaft=(a,b)=>{ rod(a,b,.016,steel);
+    for (const p of [a,b]){ const bt=new THREE.Mesh(new THREE.SphereGeometry(.035,10,8),rubber);
+      bt.position.copy(p.clone().lerp(p===a?b:a,.07)); bt.scale.set(1.3,1,1); grpE.add(bt); } };
+  const frontDriven = pt.drive!=='RWD', rearDriven = pt.drive!=='FWD';
+  let diffF=null, diffR=null;
+  if (E && !E.long){                                   /* transaxle on the far side */
+    const gx = E.cx + E.len/2 + .10;
+    add(alu, rbox(.26,.26,.30,.04), gx, r+.02, E.cz-.03);
+    diffF = V(gx-.05, r, zf);
+  }
+  if (E && E.long){                                    /* gearbox behind the engine, into the tunnel */
+    const gz0 = E.cz - E.len/2, gz1 = gz0 - .62;
+    const gb = new THREE.Mesh(new THREE.CylinderGeometry(.13,.09,.62,14), alu);
+    gb.rotation.x = Math.PI/2; gb.position.set(0, r*.95, (gz0+gz1)/2); grpE.add(gb);
+    if (frontDriven) { diffF = V(.14, r, zf); rod(V(.10,r*.9,gz0), diffF, .025, steel); add(cast, rbox(.2,.16,.18,.03), diffF.x, diffF.y, diffF.z); }
+    if (rearDriven) rod(V(0,r*.9,gz1), V(0,r*.95,zr+.18), .032, steel);           /* propshaft */
+  }
+  if (EV && frontDriven) diffF = V(.18, r, zf);
+  if (EV && rearDriven)  diffR = V(.18, r, zr);
+  if (!EV && rearDriven){
+    diffR = V(0, r, zr);
+    const dr = new THREE.Mesh(new THREE.SphereGeometry(.12,16,12), cast); dr.scale.set(1,.85,1);
+    dr.position.copy(diffR); grpE.add(dr);
+    if (E && !E.long) rod(V(E.cx+E.len/2, r*.9, zf-.15), V(0,r*.95,zr+.14), .03, steel);   /* AWD: PTU to rear */
+  }
+  if (frontDriven && diffF){ cvShaft(diffF.clone().setX(diffF.x+.10), hub('fl')); cvShaft(diffF.clone().setX(diffF.x-.10), hub('fr')); }
+  if (rearDriven && diffR && pt.rear!=='leaf'){ cvShaft(diffR.clone().setX(.10), hub('rl')); cvShaft(diffR.clone().setX(-.10), hub('rr')); }
+
+  /* ── EXHAUST: manifold to tail, under the floor ─────────────────── */
+  if (E){
+    const y0=r*.42, side=-.28;
+    const pts=[V(E.cx+(E.long?.15:0), r*1.05, E.long? E.cz+.05 : E.cz+.22), V(E.long?.18:E.cx, r*.55, E.long?E.cz-.2:zf-.25),
+               V(side, y0, zf-.6), V(side, y0, (zf+zr)/2), V(side*.6, y0, zr+.35)];
+    tube(pts, .027, exh);
+    add(exh, rbox(.46,.18,.36,.06), 0, r*.55, tail+.42);                          /* rear silencer */
+    tube([V(side*.6,y0,zr+.35), V(-.1,r*.55,tail+.62), V(0,r*.55,tail+.60)], .027, exh);
+    for (const tx of (nCyl>=8 ? [-.55,-.35,.35,.55] : [-.35])){
+      const tp = disc(.035,.16,M(0x9aa1aa,{metalness:.9,roughness:.25}),'z');
+      tp.position.set(tx*Math.min(1,inner), r*.52, tail+.14); grpE.add(tp); }
+  }
+
+  /* ── SUSPENSION, every corner, from the measured wheel ──────────── */
+  const corner=(k,type)=>{
+    const w=W[k], sx = k[1]==='l'?1:-1, front=k[0]==='f';
+    const kn = V(w.c.x - sx*(w.w/2+.05), w.c.y, w.c.z);                         /* knuckle */
+    add(cast, rbox(.07,.22,.10,.02), kn.x, kn.y, kn.z, grpS);
+    const disc_ = disc(r*.62,.028,steel,'x'); disc_.position.set(w.c.x - sx*(w.w/2-.02), w.c.y, w.c.z);
+    if (!parts['rotor_'+k] && !parts['caliper_'+k]) grpS.add(disc_);
+    const inX = sx*Math.max(.18, m.inner - .22);
+    const lowK = kn.clone().add(V(0,-.09,0)), upK = kn.clone().add(V(0,.13,0));
+    const top  = V(w.c.x - sx*(w.w/2+.14), Math.min(bayTop-.02, w.c.y + r*1.25), w.c.z + (front?-.03:.03));
+    if (type==='strut' || type==='wishbone' || type==='multilink'){
+      /* lower arm: an A-arm to two inboard pivots */
+      rod(lowK, V(inX, lowK.y-.02, w.c.z+.16), .016, steel, grpS);
+      rod(lowK, V(inX, lowK.y-.02, w.c.z-.14), .016, steel, grpS);
+    }
+    if (type==='wishbone'){                          /* upper A-arm + coilover to the lower arm */
+      rod(upK, V(inX*.85, upK.y+.03, w.c.z+.12), .013, steel, grpS);
+      rod(upK, V(inX*.85, upK.y+.03, w.c.z-.10), .013, steel, grpS);
+      const lo = lowK.clone().lerp(V(inX,lowK.y,w.c.z),.35).add(V(0,.02,0));
+      rod(lo, top, .022, alu, grpS); coil(lo.clone().lerp(top,.25), top.clone().lerp(lo,.08), .052, 5, .009, spring);
+    } else if (type==='strut'){                      /* damper from the knuckle to the tower */
+      rod(upK, top, .024, alu, grpS);
+      coil(upK.clone().lerp(top,.38), top.clone().lerp(upK,.06), .065, 5, .010, spring);
+      add(rubber, rbox(.10,.04,.10,.015), top.x, top.y, top.z, grpS);           /* top mount */
+    } else if (type==='multilink'){                   /* three links + spring + damper */
+      rod(upK, V(inX*.8, upK.y+.02, w.c.z+.06), .011, steel, grpS);
+      rod(kn.clone().add(V(0,0,.08)), V(inX, kn.y, w.c.z+.26), .011, steel, grpS);
+      const sp = lowK.clone().lerp(V(inX,lowK.y,w.c.z),.45);
+      coil(sp, V(sp.x, Math.min(bayTop, w.c.y+r*.85), sp.z), .058, 4, .010, spring);
+      rod(lowK.clone().add(V(0,0,-.07)), V(lowK.x-sx*.05, w.c.y+r*.9, w.c.z-.10), .019, alu, grpS);
+    } else if (type==='beam'){                        /* twist beam: trailing arm + cross beam */
+      const piv = V(w.c.x - sx*(w.w/2+.10), w.c.y+.02, w.c.z + .48);
+      rod(kn, piv, .03, steel, grpS);
+      const sp = V(kn.x - sx*.12, kn.y-.03, kn.z+.10);
+      coil(sp, V(sp.x, w.c.y + r*.75, sp.z), .06, 4, .010, spring);
+      rod(kn.clone().add(V(0,0,-.06)), V(kn.x, w.c.y+r*.9, kn.z-.12), .019, alu, grpS);
+    } else if (type==='leaf'){                        /* leaf pack under a live axle */
+      const lx = w.c.x - sx*(w.w/2+.16), ly = w.c.y - .12;
+      for (let i=0;i<4;i++){
+        const L = .95 - i*.16, sag = .05 - i*.01;
+        tube([V(lx,ly+sag,w.c.z+L/2), V(lx,ly-i*.012,w.c.z), V(lx,ly+sag,w.c.z-L/2)], .012, steel, grpS); }
+      rod(V(lx,ly,w.c.z-.05), V(lx+sx*.02, w.c.y+r*.9, w.c.z-.18), .019, alu, grpS);
+    }
+  };
+  for (const k of ['fl','fr']) corner(k, pt.front);
+  for (const k of ['rl','rr']) corner(k, pt.rear);
+  /* anti-roll bars and a front subframe */
+  const arb=(z,y)=>{ const L=Math.max(.3,m.inner-.2);
+    tube([V(L,y+.06,z+.12), V(L*.8,y,z), V(-L*.8,y,z), V(-L,y+.06,z+.12)], .012, steel, grpS); };
+  arb(zf-.16, r*.72);
+  if (pt.rear!=='leaf') arb(zr+.16, r*.78);
+  add(steel, rbox(Math.max(.4,m.inner*1.6), .06, .30, .02), 0, r*.62, zf-.05, grpS);
+  if (pt.rear==='leaf'){                                 /* the live axle */
+    rod(hub('rl'), hub('rr'), .042, steel, grpS);
+    const dh = new THREE.Mesh(new THREE.SphereGeometry(.13,16,12), cast);
+    dh.position.set(0, r, zr); grpS.add(dh);
+  } else if (pt.rear==='beam'){
+    rod(V(W.rl.c.x - (W.rl.w/2+.08), r*.95, zr+.24), V(W.rr.c.x + (W.rr.w/2+.08), r*.95, zr+.24), .04, steel, grpS);
+  } else {
+    add(steel, rbox(Math.max(.4,m.inner*1.5), .06, .30, .02), 0, r*.72, zr, grpS);  /* rear subframe */
+  }
+
+  ptAsm.add(grpE, grpS); carRoot.add(ptAsm);
+  /* register them as parts so hover, click, x-ray and explode all work */
+  const reg=(id,g)=>{ const meshes=[]; g.traverse(o=>{ if(o.isMesh){ o.userData.partId=id; meshes.push(o);
+      o.userData.m0={transparent:o.material.transparent,opacity:o.material.opacity,depthWrite:o.material.depthWrite}; }});
+    if(!meshes.length) return;
+    const box=new THREE.Box3().setFromObject(g), c=box.getCenter(new THREE.Vector3());
+    const tris=meshes.reduce((s,o)=>s+(o.geometry.index?o.geometry.index.count:o.geometry.attributes.position.count)/3,0);
+    parts[id]={meshes,group:g,home:g.position.clone(),centre:c,box,dir:c.clone().sub(V(0,.7,0)).normalize(),
+      tris:Math.round(tris),built:true}; };
+  reg('powertrain', grpE); reg('suspension', grpS);
+  return {engine:eng, measured:{r:+r.toFixed(3), track:+m.tf.toFixed(3), wheelbase:+(zf-zr).toFixed(3),
+          bayTop:+bayTop.toFixed(3)}};
+}
+
 function buildCar(root){
   carRoot.add(root); carRoot.updateMatrixWorld(true);
   const by = {};
@@ -879,6 +1182,12 @@ function buildCar(root){
       ` nodes — part classification failed, nothing will come apart.`);
     document.getElementById('caption').textContent =
       `WARNING: ${nParts} part group(s) recognised — teardown disabled`;
+  }
+  /* constructed engine + chassis for every car except the Golf, whose
+     engine bay is its own hand-built assembly */
+  if (CAR_ID!=='golf' && VEHICLE.pt){
+    try { window.__ptInfo = buildPowertrain(VEHICLE.pt); }
+    catch(e){ console.error('Strip Bay: powertrain build failed', e); }
   }
   buildDoorRig();
   if (!parts.panel_bonnet) console.error('Strip Bay: panel_bonnet not found — '+
@@ -4345,7 +4654,16 @@ const man = (title, items, open) => `
 
 /* The Golf's PART prose is about the Golf. On any other car show the part's
    name and group only, so no Golf fact is presented as this car's. */
-const partInfo = id => { const p=PART[id]; if(!p) return null;
+const partInfo = id => {
+  if (parts[id] && parts[id].built) return {built:true, g:'Constructed',
+    l: id==='powertrain' ? 'Engine, gearbox and drive' : 'Suspension',
+    n: id==='powertrain'
+      ? `Built in code to the ${VEHICLE.pt.say}. Sized to this car's measured wheels and bonnet. `
+        +`A representative layout for the model, not this car's build sheet — the exact engine depends on the trim.`
+      : `Built in code: ${({strut:'MacPherson struts',wishbone:'double wishbones'})[VEHICLE.pt.front]} at the front, `
+        +`${({beam:'a twist beam',multilink:'multi-link',leaf:'leaf springs on a live axle'})[VEHICLE.pt.rear]} at the rear, `
+        +`fitted to each measured wheel centre. Typical of the model, not verified for this car.`};
+  const p=PART[id]; if(!p) return null;
   return CAR_ID==='golf' ? p
     : {l:p.l, g:p.g, n:`Real geometry from this car's file, moved as one part. `
         +`The detailed notes in this bay were written for the Golf and are not repeated here.`}; };
@@ -4380,7 +4698,8 @@ function pStrip(){
   </div>
   ${p?`<div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
-      <div class="eyebrow">${p.g}</div><span class="prov real">real geometry</span></div>
+      <div class="eyebrow">${p.g}</div>${p.built?'<span class="prov built">constructed</span>'
+        :'<span class="prov real">real geometry</span>'}</div>
     <h3 style="margin-top:4px">${p.l}</h3>
     <p style="margin-top:6px">${p.n}</p>
     <dl class="spec"><dt>meshes</dt><dd>${pt.meshes.length}</dd>
