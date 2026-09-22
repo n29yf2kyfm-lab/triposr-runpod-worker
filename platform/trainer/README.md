@@ -1,13 +1,31 @@
 # Strip Bay — mechanics teardown trainer
 
-`golf-bay.html` is the whole app: one file, thirteen modes, no build step.
+`golf-bay.html` is the whole app: one file, fifteen modes, no build step.
 Published 2026-09-17 as a private artifact.
 
 The modes, as the tab strip orders them: Strip · Door off · Bonnet off ·
 Inside a door · Starter · Alternator · Mirror & lock · Starter off ·
-Interior · Engine · Brake job · Diagnose · Bench. (This line read "seven
-bays" until 2026-09-19 and had been wrong for some time — count them from
-`MODES` rather than trusting prose.)
+Interior · Engine · Clutch · Cooling · Brake job · Diagnose · Bench. (This
+line read "seven bays" until 2026-09-19 and had been wrong for some time —
+count them from `MODES` rather than trusting prose. The `Bay N` numbers in
+the panel headings are generated from that same order; they had drifted
+into two duplicate "Bay 6"s and were corrected the same day.)
+
+## The sound is SYNTHESISED
+
+The Clutch and Cooling bays make a noise. Every one of those sounds is
+built at runtime from oscillators and filtered noise — none is a recording,
+and none is a recording of this car. That is deliberate: the app stays
+self-contained and makes no third-party request, the sound is driven by the
+simulation (the release-bearing whine tracks pedal travel, the fan spools
+with coolant temperature) rather than triggered near a part, and a sampled
+clip captioned "your water pump" would be exactly the kind of fabrication
+the rest of this app refuses.
+
+Where a real part makes no noise, this makes none: a wax thermostat opens
+silently, so nothing plays for it, and the panel says so. An `AudioContext`
+cannot start without a user gesture, so nothing is created until the Sound
+chip is pressed — which `clcool.mjs` asserts.
 
 ## What is REAL and what is CONSTRUCTED
 

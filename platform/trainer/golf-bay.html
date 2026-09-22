@@ -2358,6 +2358,512 @@ function alternatorTick(dt){
 buildAlternator();     /* after its own declarations — see the note above */
 
 /* ═════════════════════════════════════════════════════════════════════
+   PART AUDIO — SYNTHESISED, AND THAT IS NOT A DETAIL
+
+   Diagnosing by ear is a real skill: a release bearing announces itself
+   with the pedal DOWN, an input-shaft bearing with the pedal UP, and a
+   cooling fan cutting in at idle tells you the thermostat already opened.
+   Those are the patterns worth teaching, and they are patterns in WHEN a
+   noise appears rather than in its exact timbre.
+
+   So every sound in here is BUILT FROM OSCILLATORS AND FILTERED NOISE.
+   None of it is a recording, and none of it is a recording of THIS car.
+   That is a deliberate choice, not a shortcut:
+
+     * it keeps the app self-contained — no audio files to lose, and the
+       page still makes no third-party request;
+     * it is driven by the simulation, so the bearing whine tracks pedal
+       travel and the fan spools with coolant temperature, instead of a
+       clip being triggered near something;
+     * and a sampled noise captioned "your water pump" would be a
+       fabrication of exactly the kind the rest of this app refuses. A
+       trainee has to know what they are listening to.
+
+   Every bay that makes a noise says SYNTHESISED on screen.
+
+   WHERE A REAL PART MAKES NO NOISE, THIS MAKES NONE. A wax thermostat
+   opening is silent; there is no click to play, so nothing plays, and the
+   panel says so rather than inventing a sound to fill the gap. That is
+   the same rule as a torque figure this trainer does not have.
+
+   An AudioContext cannot start without a user gesture, so nothing is
+   created until the Sound chip is pressed — which also means the app is
+   never unexpectedly noisy. */
+const SND = {ctx:null, master:null, on:false, noise:null, v:{}};
+function sndStart(){
+  if (SND.ctx){ SND.ctx.resume(); SND.on=true; return true; }
+  const C = window.AudioContext || window.webkitAudioContext;
+  if (!C) return false;                       /* no Web Audio: bays still work */
+  SND.ctx = new C();
+  SND.master = SND.ctx.createGain();
+  SND.master.gain.value = 0.85;
+  SND.master.connect(SND.ctx.destination);
+  /* one shared two-second white-noise buffer, looped — cheaper than a
+     ScriptProcessor and good enough for fan rush and mechanical clacks */
+  const n = SND.ctx.sampleRate*2, b = SND.ctx.createBuffer(1,n,SND.ctx.sampleRate);
+  const d = b.getChannelData(0);
+  for (let i=0;i<n;i++) d[i] = Math.random()*2-1;
+  SND.noise = b;
+  SND.on = true;
+  return true;
+}
+function sndStop(){ if (SND.ctx){ SND.on=false; sndSilence(); SND.ctx.suspend(); } }
+/* every continuous voice down to zero — called when a bay is left, so a
+   whine cannot follow the trainee into the next bay */
+function sndSilence(){
+  if (!SND.ctx) return;
+  for (const k in SND.v){ const v=SND.v[k];
+    if (v && v.g) v.g.gain.setTargetAtTime(0, SND.ctx.currentTime, .02); }
+}
+/* a rotating-part WHINE: sawtooth through a narrow bandpass. Pitch tracks
+   shaft speed, which is what makes a bearing identifiable — it rises and
+   falls with the thing it is bolted to, unlike an electrical buzz. */
+function sndWhine(key,f0,q){
+  if (!SND.ctx) return null;
+  if (SND.v[key]) return SND.v[key];
+  const c=SND.ctx, o=c.createOscillator(), bp=c.createBiquadFilter(), g=c.createGain();
+  o.type='sawtooth'; o.frequency.value=f0;
+  bp.type='bandpass'; bp.frequency.value=f0*2; bp.Q.value=q||7;
+  g.gain.value=0;
+  o.connect(bp); bp.connect(g); g.connect(SND.master); o.start();
+  return SND.v[key] = {g,o,bp, set(f,a){ const t=c.currentTime;
+    o.frequency.setTargetAtTime(Math.max(20,f),t,.06);
+    bp.frequency.setTargetAtTime(Math.max(40,f*2),t,.06);
+    g.gain.setTargetAtTime(Math.max(0,a),t,.08); }};
+}
+/* BROADBAND rush — moving air, moving coolant. Lowpass cutoff carries the
+   sense of speed; a fan spooling up opens the filter as it gains gain. */
+function sndRush(key,cut){
+  if (!SND.ctx) return null;
+  if (SND.v[key]) return SND.v[key];
+  const c=SND.ctx, s=c.createBufferSource(), lp=c.createBiquadFilter(), g=c.createGain();
+  s.buffer=SND.noise; s.loop=true;
+  lp.type='lowpass'; lp.frequency.value=cut||900;
+  g.gain.value=0;
+  s.connect(lp); lp.connect(g); g.connect(SND.master); s.start();
+  return SND.v[key] = {g,s,lp, set(f,a){ const t=c.currentTime;
+    lp.frequency.setTargetAtTime(Math.max(80,f),t,.12);
+    g.gain.setTargetAtTime(Math.max(0,a),t,.15); }};
+}
+/* a LUMPY low rumble for judder — amplitude modulated at a few Hz, which
+   is what a juddering clutch actually does to the whole car */
+function sndRumble(key){
+  if (!SND.ctx) return null;
+  if (SND.v[key]) return SND.v[key];
+  const c=SND.ctx, s=c.createBufferSource(), lp=c.createBiquadFilter(),
+        g=c.createGain(), lfo=c.createOscillator(), lg=c.createGain();
+  s.buffer=SND.noise; s.loop=true;
+  lp.type='lowpass'; lp.frequency.value=150;
+  g.gain.value=0;
+  lfo.type='sine'; lfo.frequency.value=9; lg.gain.value=0;
+  lfo.connect(lg); lg.connect(g.gain);      /* modulate the gain itself */
+  s.connect(lp); lp.connect(g); g.connect(SND.master); s.start(); lfo.start();
+  return SND.v[key] = {g,lfo,lg, set(hz,a){ const t=c.currentTime;
+    lfo.frequency.setTargetAtTime(Math.max(1,hz),t,.1);
+    g.gain.setTargetAtTime(Math.max(0,a),t,.1);
+    lg.gain.setTargetAtTime(Math.max(0,a*.9),t,.1); }};
+}
+/* one-shot mechanical CLACK — a noise burst with a fast decay. Used where
+   metal actually meets metal, not as punctuation. */
+function sndClack(amp,cut,dur){
+  if (!SND.ctx || !SND.on) return;
+  const c=SND.ctx, s=c.createBufferSource(), bp=c.createBiquadFilter(), g=c.createGain();
+  s.buffer=SND.noise; s.loop=true;
+  bp.type='bandpass'; bp.frequency.value=cut||1400; bp.Q.value=1.2;
+  const t=c.currentTime, d=dur||.09;
+  g.gain.setValueAtTime(0,t);
+  g.gain.linearRampToValueAtTime(amp,t+.004);
+  g.gain.exponentialRampToValueAtTime(.0001,t+d);
+  s.connect(bp); bp.connect(g); g.connect(SND.master);
+  s.start(t); s.stop(t+d+.02);
+}
+
+/* ═════════════════════════════════════════════════════════════════════
+   CONSTRUCTED: HOW A CLUTCH WORKS
+
+   The thing a trainee has to SEE is that a clutch is a friction joint
+   that can be anywhere between locked and free, and that the middle of
+   that range is where it lives for a second on every pull-away and where
+   it dies if you sit in it. So the flywheel and the friction plate here
+   turn at their OWN speeds, computed from the clamp load — when they
+   differ, you are watching slip, and the face heats up on screen.
+
+   Nothing here is measured off the Golf: it is the standard single-plate
+   diaphragm clutch every manual car has had for fifty years.
+   ═══════════════════════════════════════════════════════════════════ */
+const cluAsm = new THREE.Group(); sceneRig.add(cluAsm);
+/* pedal 0 = up (engaged) … 1 = floored (free). `wear` is the fault knob:
+   a worn lining bites later and slips under load. */
+const CLU = {pedal:0, rpm:900, load:1, wear:0, engAng:0, outAng:0,
+             out:0, heat:0, lastLock:true};
+const cP = {};
+function buildClutch(){
+  const M=(c,o={})=>new THREE.MeshStandardMaterial({color:c,roughness:.45,metalness:.7,...o});
+  const steel=M(0x8d95a1,{metalness:.92,roughness:.3}),
+        cast =M(0x6e767f,{roughness:.62,metalness:.5}),
+        dark =M(0x1d2127,{metalness:.2,roughness:.8}),
+        fric =M(0x6b5a48,{metalness:.05,roughness:.95}),   /* friction lining */
+        cu   =M(0xb87333,{metalness:.9,roughness:.3});
+  const add=(m,g,x,y,z,grp)=>{const o=new THREE.Mesh(g,m);o.position.set(x,y,z);
+    (grp||cluAsm).add(o);return o};
+  const XC=g=>{g.rotation.z=Math.PI/2;return g};
+
+  /* ── FLYWHEEL, on the crank. Turns at engine speed, always. ── */
+  cP.fly=new THREE.Group(); cP.fly.position.set(-.115,.30,0); cluAsm.add(cP.fly);
+  const fw=new THREE.Mesh(new THREE.CylinderGeometry(.175,.175,.038,40),cast);
+  fw.rotation.z=Math.PI/2; cP.fly.add(fw);
+  /* the starter ring gear round its edge — the same one the Starter bay
+     throws its pinion into, which is worth seeing on the same part */
+  for (let i=0;i<48;i++){
+    const a=i/48*Math.PI*2;
+    const t=new THREE.Mesh(new THREE.BoxGeometry(.030,.016,.012),steel);
+    t.position.set(0,Math.cos(a)*.184,Math.sin(a)*.184); t.rotation.x=a;
+    cP.fly.add(t);
+  }
+  /* a wear mark on the friction face so rotation is VISIBLE — without a
+     feature on a smooth disc you cannot tell it is turning at all */
+  for (const a of [0, Math.PI*.5, Math.PI, Math.PI*1.5]){
+    const m=new THREE.Mesh(new THREE.BoxGeometry(.004,.10,.010),dark);
+    m.position.set(.020,Math.cos(a)*.105,Math.sin(a)*.105); m.rotation.x=a;
+    cP.fly.add(m);
+  }
+
+  /* ── FRICTION PLATE — the only part splined to the GEARBOX. Its speed
+     is the output speed, and the gap between this and the flywheel is
+     the whole lesson. ── */
+  cP.plate=new THREE.Group(); cP.plate.position.set(-.072,.30,0); cluAsm.add(cP.plate);
+  cP.lining=new THREE.Mesh(new THREE.CylinderGeometry(.160,.160,.012,36),fric);
+  cP.lining.rotation.z=Math.PI/2; cP.plate.add(cP.lining);
+  /* the sprung hub — those coil springs damp driveline shock, and they
+     are the give-away that this is the driven plate and not a disc */
+  const hub=new THREE.Mesh(new THREE.CylinderGeometry(.052,.052,.026,20),steel);
+  hub.rotation.z=Math.PI/2; cP.plate.add(hub);
+  for (let i=0;i<6;i++){
+    const a=i/6*Math.PI*2;
+    const sp=new THREE.Mesh(new THREE.CylinderGeometry(.011,.011,.030,8),cu);
+    sp.position.set(0,Math.cos(a)*.078,Math.sin(a)*.078); sp.rotation.x=a+Math.PI/2;
+    cP.plate.add(sp);
+  }
+  for (const a of [0,Math.PI*.5,Math.PI,Math.PI*1.5]){   /* rotation markers */
+    const m=new THREE.Mesh(new THREE.BoxGeometry(.006,.055,.012),dark);
+    m.position.set(-.008,Math.cos(a)*.125,Math.sin(a)*.125); m.rotation.x=a;
+    cP.plate.add(m);
+  }
+
+  /* ── PRESSURE PLATE + COVER, bolted to the flywheel. It turns with the
+     ENGINE and squeezes the friction plate against the flywheel. ── */
+  cP.press=new THREE.Group(); cP.press.position.set(-.040,.30,0); cluAsm.add(cP.press);
+  const pp=new THREE.Mesh(new THREE.CylinderGeometry(.168,.168,.022,36),cast);
+  pp.rotation.z=Math.PI/2; cP.press.add(pp);
+  const cover=new THREE.Mesh(new THREE.CylinderGeometry(.180,.176,.010,36,1,true),steel);
+  cover.rotation.z=Math.PI/2; cover.position.x=.030; cP.press.add(cover);
+  /* ── DIAPHRAGM SPRING — the fingers. Press the middle and the OUTER rim
+     lifts: a lever, and the reason a modern clutch pedal is light. ── */
+  cP.fingers=[];
+  for (let i=0;i<18;i++){
+    const a=i/18*Math.PI*2;
+    const f=new THREE.Mesh(new THREE.BoxGeometry(.080,.014,.009),steel);
+    f.position.set(.055,Math.cos(a)*.062,Math.sin(a)*.062); f.rotation.x=a;
+    cP.press.add(f); cP.fingers.push({m:f,a});
+  }
+  /* ── RELEASE BEARING on its guide sleeve. Rides the fingers when the
+     pedal is down — which is exactly when a dry one is heard. ── */
+  cP.rel=new THREE.Group(); cP.rel.position.set(.075,.30,0); cluAsm.add(cP.rel);
+  const rb=new THREE.Mesh(new THREE.CylinderGeometry(.044,.044,.034,22),steel);
+  rb.rotation.z=Math.PI/2; cP.rel.add(rb);
+  const rc=new THREE.Mesh(new THREE.CylinderGeometry(.050,.050,.012,22),dark);
+  rc.rotation.z=Math.PI/2; rc.position.x=-.020; cP.rel.add(rc);
+  /* ── RELEASE FORK ── */
+  cP.fork=new THREE.Group(); cP.fork.position.set(.105,.30,0); cluAsm.add(cP.fork);
+  const fk=new THREE.Mesh(new THREE.BoxGeometry(.016,.20,.030),cast);
+  cP.fork.add(fk);
+  add(cast,new THREE.CylinderGeometry(.014,.014,.13,12),.105,.30,0).rotation.x=Math.PI/2;
+  /* ── GEARBOX INPUT SHAFT — splined, and the plate slides along it ── */
+  const sh=new THREE.Mesh(new THREE.CylinderGeometry(.021,.021,.46,16),steel);
+  sh.rotation.z=Math.PI/2; sh.position.set(.060,.30,0); cluAsm.add(sh);
+  for (let i=0;i<12;i++){                    /* the splines */
+    const a=i/12*Math.PI*2;
+    const s=new THREE.Mesh(new THREE.BoxGeometry(.12,.006,.005),steel);
+    s.position.set(-.060,.30+Math.cos(a)*.024,Math.sin(a)*.024); s.rotation.x=a;
+    cluAsm.add(s);
+  }
+  /* crank stub into the flywheel, so it is bolted to something */
+  add(steel,new THREE.CylinderGeometry(.030,.030,.10,18),-.175,.30,0).rotation.z=Math.PI/2;
+
+  cluAsm.traverse(o=>{ if(o.isMesh){o.castShadow=true;o.receiveShadow=true;} });
+  cluAsm.visible=false;
+}
+/* THE PHYSICS, such as it is: clamp load falls as the pedal goes down, a
+   worn lining needs more clamp to carry the same torque, and whatever the
+   clutch cannot carry appears as SLIP. Deliberately simple, and it is the
+   relationship that matters rather than the numbers. */
+function cluSolve(){
+  const bite = .30 + CLU.wear*.34;      /* worn linings bite later */
+  const free = .78;
+  /* clamp 1 = fully home, 0 = fully released */
+  const clamp = CLU.pedal<=bite ? 1 : CLU.pedal>=free ? 0
+              : 1-(CLU.pedal-bite)/(free-bite);
+  const torqueCap = clamp*(1-CLU.wear*.45);      /* what it can carry */
+  const demand = [0.10,0.34,0.62,0.92][CLU.load];/* coasting … up a hill */
+  const locked = torqueCap > demand + .02;
+  /* when it cannot carry the load it slips: output falls short of engine.
+     CLAMPED AT ZERO, and not as a tidiness measure: `locked` has a 0.02
+     margin on it, so between torqueCap == demand and torqueCap == demand
+     + 0.02 the clutch reads "not locked" while the shortfall is NEGATIVE.
+     Unclamped that gave a negative slip — the gearbox turning FASTER than
+     the engine — and the lining then cooled while the panel said slipping.
+     Found by a harness that sat in exactly that band waiting for heat that
+     could never arrive. */
+  const slipFrac = locked ? 0
+    : Math.max(0, Math.min(1, (demand-torqueCap)/Math.max(.08,demand)));
+  const outRpm = CLU.rpm*(1-slipFrac);
+  const judder = (!locked && clamp>0.12 && clamp<0.55) ? (CLU.wear*.6+.25) : 0;
+  return {clamp,torqueCap,demand,locked,slipFrac,outRpm,judder,bite,free};
+}
+function clutchTick(dt){
+  const r = cluSolve();
+  /* geometry: pedal travel moves the bearing, the fork and the cover */
+  const push = CLU.pedal*.030;
+  cP.rel.position.x  = .075 - push;
+  cP.fork.rotation.z = -CLU.pedal*.26;
+  cP.press.position.x = -.040 + (1-r.clamp)*.010;   /* plate lifts off */
+  for (const {m,a} of cP.fingers){                  /* fingers pivot inward */
+    m.rotation.z = -CLU.pedal*.30;
+    m.position.x = .055 - CLU.pedal*.012;
+  }
+  /* two speeds, and you can watch them diverge */
+  CLU.engAng += CLU.rpm/60*Math.PI*2*dt*.10;
+  CLU.outAng += r.outRpm/60*Math.PI*2*dt*.10;
+  cP.fly.rotation.x   = CLU.engAng;
+  cP.press.rotation.x = CLU.engAng;      /* cover turns WITH the engine */
+  cP.plate.rotation.x = CLU.outAng;      /* the driven plate does not */
+  CLU.out = r.outRpm;
+  /* the lining heats while it slips and cools when it does not — this is
+     what destroys a clutch, so it is shown rather than described */
+  CLU.heat += ((r.slipFrac>0.02 ? r.slipFrac*r.demand : -0.22))*dt*0.9;
+  CLU.heat = Math.max(0,Math.min(1,CLU.heat));
+  cP.lining.material.color.setRGB(.42+CLU.heat*.55, .35-CLU.heat*.14, .28-CLU.heat*.20);
+  cP.lining.material.emissive?.setRGB(CLU.heat*.42, CLU.heat*.07, 0);
+
+  if (!SND.on) return;
+  /* ENGINE: a hum at firing frequency — a four-stroke four fires twice a
+     rev, so 900 rpm is 30 Hz. It is the reference the other sounds sit on. */
+  const eng = sndWhine('cl_eng', 30, 3);
+  if (eng) eng.set(CLU.rpm/60*2, .045);
+  /* RELEASE BEARING: heard with the pedal DOWN, because that is when it
+     is loaded against the spinning fingers. Pitch follows engine speed. */
+  const rel = sndWhine('cl_rel', 1200, 9);
+  if (rel) rel.set(700+CLU.rpm*.45, CLU.pedal*CLU.wear*0.10);
+  /* JUDDER: a lumpy rumble at a few Hz, only at the bite point */
+  const jud = sndRumble('cl_jud');
+  if (jud) jud.set(7+CLU.rpm/240, r.judder*0.075);
+  /* SLIP: the engine runs away from the road, and the giveaway is that
+     the note RISES while nothing else changes */
+  const slp = sndRush('cl_slip', 700);
+  if (slp) slp.set(600+r.slipFrac*1500, r.slipFrac*0.05);
+  /* and the clack as it finally takes up */
+  if (r.locked && !CLU.lastLock) sndClack(.22,1100,.07);
+  CLU.lastLock = r.locked;
+}
+
+/* ═════════════════════════════════════════════════════════════════════
+   CONSTRUCTED: THE COOLING SYSTEM
+
+   Built around the two faults that actually walk into a workshop and the
+   test that separates them, because that is the teachable part:
+
+     THERMOSTAT STUCK SHUT → it overheats and the TOP HOSE STAYS COLD.
+       No coolant is reaching the radiator at all.
+     FAN DEAD              → it is fine moving and overheats at a standstill.
+       Airflow through the radiator was doing the fan's job.
+
+   Both present as "it overheats". One hose you can feel tells them apart,
+   and that is worth more than any amount of describing a water pump.
+
+   Generic system, not this car's. Temperatures are typical values.
+   ═══════════════════════════════════════════════════════════════════ */
+const coolAsm = new THREE.Group(); sceneRig.add(coolAsm);
+const COO = {temp:20, rpm:900, speed:0, fault:'none', run:true,
+             fanOn:false, tOpen:false, t:0, boil:false, lastFan:false};
+const oP = {flow:[]};
+function buildCooling(){
+  const M=(c,o={})=>new THREE.MeshStandardMaterial({color:c,roughness:.5,metalness:.5,...o});
+  const alu=M(0x8f979f,{metalness:.8,roughness:.42}),
+        dark=M(0x16191e,{roughness:.9,metalness:.05}),
+        rubber=M(0x15181c,{roughness:.95,metalness:.03}),
+        cast=M(0x6e767f,{roughness:.62,metalness:.5}),
+        trans=new THREE.MeshStandardMaterial({color:0xcfd6de,transparent:true,
+          opacity:.40,roughness:.25,metalness:0});
+  const add=(m,g,x,y,z,grp)=>{const o=new THREE.Mesh(g,m);o.position.set(x,y,z);
+    (grp||coolAsm).add(o);return o};
+
+  /* ── RADIATOR: core, tanks, and fins you can count ── */
+  add(alu,new THREE.BoxGeometry(.030,.34,.44),-.30,.34,0);
+  for (let i=0;i<22;i++)
+    add(M(0x9aa2aa,{metalness:.75,roughness:.5}),
+        new THREE.BoxGeometry(.034,.30,.008),-.30,.34,-.205+i*.0195);
+  add(dark,new THREE.BoxGeometry(.045,.05,.46),-.30,.525,0);   /* top tank */
+  add(dark,new THREE.BoxGeometry(.045,.05,.46),-.30,.155,0);   /* bottom tank */
+
+  /* ── FAN behind the core ── */
+  oP.fan=new THREE.Group(); oP.fan.position.set(-.245,.34,0); coolAsm.add(oP.fan);
+  const hubf=new THREE.Mesh(new THREE.CylinderGeometry(.034,.034,.030,16),dark);
+  hubf.rotation.z=Math.PI/2; oP.fan.add(hubf);
+  for (let i=0;i<7;i++){
+    const a=i/7*Math.PI*2;
+    const bl=new THREE.Mesh(new THREE.BoxGeometry(.010,.125,.052),dark);
+    bl.position.set(0,Math.cos(a)*.085,Math.sin(a)*.085);
+    bl.rotation.x=a; bl.rotation.y=.42;       /* pitched, like a real blade */
+    oP.fan.add(bl);
+  }
+  add(M(0x23282f,{roughness:.85,metalness:.06}),
+      new THREE.TorusGeometry(.150,.012,8,26),-.245,.34,0).rotation.y=Math.PI/2;
+
+  /* ── ENGINE BLOCK stand-in, the thing being cooled. TRANSLUCENT on
+     purpose: the bypass runs THROUGH the engine, so with a solid block the
+     coolant beads disappear for a third of their circuit and the bay stops
+     showing the one thing it is about — where the coolant is going while
+     the thermostat is shut. ── */
+  add(new THREE.MeshStandardMaterial({color:0x7c848d,transparent:true,opacity:.34,
+      roughness:.55,metalness:.3,depthWrite:false}),
+      new THREE.BoxGeometry(.24,.22,.26),.12,.34,0);
+  /* ── WATER PUMP on its nose, belt driven ── */
+  oP.pump=new THREE.Group(); oP.pump.position.set(-.020,.28,0); coolAsm.add(oP.pump);
+  const pb=new THREE.Mesh(new THREE.CylinderGeometry(.048,.048,.050,20),cast);
+  pb.rotation.z=Math.PI/2; oP.pump.add(pb);
+  for (let i=0;i<6;i++){                       /* impeller vanes, visible */
+    const a=i/6*Math.PI*2;
+    const v=new THREE.Mesh(new THREE.BoxGeometry(.012,.034,.010),alu);
+    v.position.set(.028,Math.cos(a)*.026,Math.sin(a)*.026); v.rotation.x=a;
+    oP.pump.add(v);
+  }
+  /* ── THERMOSTAT HOUSING — the valve that decides everything ── */
+  oP.tstat=new THREE.Group(); oP.tstat.position.set(.010,.46,0); coolAsm.add(oP.tstat);
+  add(cast,new THREE.CylinderGeometry(.040,.040,.055,18),0,0,0,oP.tstat)
+    .rotation.z=Math.PI/2;
+  oP.valve=new THREE.Mesh(new THREE.CylinderGeometry(.030,.030,.008,18),
+    M(0xb0563a,{metalness:.5,roughness:.5}));
+  oP.valve.rotation.z=Math.PI/2; oP.valve.position.x=-.022; oP.tstat.add(oP.valve);
+
+  /* ── HOSES. The top one is the diagnostic: it only gets hot once the
+     thermostat opens, so a cold top hose on a hot engine is the fault. ── */
+  const hose=(pts,r0,mat)=>{
+    const c=new THREE.CatmullRomCurve3(pts.map(p=>new THREE.Vector3(...p)));
+    return add(mat,new THREE.TubeGeometry(c,26,r0,12,false),0,0,0);
+  };
+  oP.top = hose([[-.010,.485,0],[-.12,.52,0],[-.26,.50,0],[-.30,.47,0]],.022,
+                rubber.clone());
+  oP.bot = hose([[-.30,.20,0],[-.20,.19,0],[-.09,.24,0],[-.045,.27,0]],.020,
+                rubber.clone());
+  /* the bypass — how coolant circulates round the engine while the
+     thermostat is shut, which is why the heater works before the gauge moves */
+  oP.byp = hose([[.010,.44,0],[.07,.38,.07],[.02,.31,.05],[-.008,.29,.02]],.013,
+                rubber.clone());
+  /* ── EXPANSION TANK + cap ── */
+  add(trans,new THREE.BoxGeometry(.10,.13,.09),.20,.52,.10);
+  oP.cap=add(M(0x2E7CD6,{roughness:.4,metalness:.15}),
+    new THREE.CylinderGeometry(.028,.028,.022,18),.20,.60,.10);
+  hose([[.20,.50,.055],[.14,.52,.02],[-.02,.50,0]],.009,rubber.clone());
+  /* ── HEATER MATRIX, the cabin's own little radiator ── */
+  add(M(0x9aa2aa,{metalness:.7,roughness:.55}),new THREE.BoxGeometry(.016,.10,.13),
+      .30,.50,-.12);
+  hose([[.10,.45,-.06],[.22,.48,-.11],[.295,.49,-.12]],.010,rubber.clone());
+  hose([[.295,.52,-.12],[.20,.55,-.06],[.06,.47,-.02]],.010,rubber.clone());
+
+  /* ── FLOW BEADS. Coolant is invisible in a hose, so the flow is drawn:
+     beads that run the loop when the pump turns, and take the radiator
+     branch only once the thermostat opens. ── */
+  const beadM=M(0x3DA9E0,{emissive:0x0a3550,roughness:.3,metalness:.1});
+  for (let i=0;i<14;i++){
+    const b=new THREE.Mesh(new THREE.SphereGeometry(.013,10,8),beadM.clone());
+    coolAsm.add(b); oP.flow.push({m:b,p:i/14});
+  }
+  coolAsm.traverse(o=>{ if(o.isMesh){o.castShadow=true;o.receiveShadow=true;} });
+  coolAsm.visible=false;
+}
+/* the RADIATOR loop and the BYPASS loop, as two closed paths the beads
+   can be walked along — which path they take IS the thermostat's state */
+const COOL_RAD = [[-.010,.485,0],[-.12,.52,0],[-.26,.50,0],[-.30,.47,0],
+                  [-.30,.20,0],[-.20,.19,0],[-.09,.24,0],[-.045,.27,0],
+                  [-.020,.28,0],[.010,.40,0],[.010,.46,0]];
+const COOL_BYP = [[.010,.46,0],[.010,.44,0],[.07,.38,.07],[.02,.31,.05],
+                  [-.008,.29,.02],[-.020,.28,0],[.010,.40,0]];
+function coolPoint(path,t){
+  const n=path.length-1, f=Math.max(0,Math.min(.9999,t))*n, i=Math.floor(f), k=f-i;
+  const a=path[i], b=path[Math.min(n,i+1)];
+  return [a[0]+(b[0]-a[0])*k, a[1]+(b[1]-a[1])*k, a[2]+(b[2]-a[2])*k];
+}
+function coolSolve(){
+  const tStuck = COO.fault==='tstat';
+  const fanDead= COO.fault==='fan';
+  const airlock= COO.fault==='airlock';
+  const tOpen  = !tStuck && COO.temp >= 88;
+  const fanOn  = !fanDead && COO.temp >= 100;
+  /* heat in from the engine, heat out through whatever path is open */
+  const heatIn = COO.run ? (28 + COO.rpm*0.010) : 0;
+  const airflow = COO.speed*0.9 + (fanOn?42:0);
+  const radOut = tOpen ? (10 + airflow) * (airlock?0.45:1) : 0;
+  const shed   = 7 + radOut*0.55;
+  return {tOpen,fanOn,heatIn,shed,airlock,tStuck,fanDead,
+          boil: COO.temp>=119};
+}
+function coolTick(dt){
+  const r = coolSolve();
+  COO.tOpen=r.tOpen; COO.fanOn=r.fanOn; COO.boil=r.boil;
+  /* temperature is integrated, so it takes TIME — which is the point: a
+     stuck thermostat does not overheat instantly, it climbs while you
+     drive, and the trainee should watch it climb */
+  COO.temp += ((r.heatIn - r.shed*(COO.temp-20)/95) )*dt*0.42;
+  COO.temp = Math.max(18, Math.min(130, COO.temp));
+
+  /* the valve lifts when it opens */
+  oP.valve.position.x = -.022 + (r.tOpen?.016:0);
+  oP.valve.material.color.setHex(r.tOpen?0x49B07A:0xb0563a);
+  /* the fan spools rather than snapping on */
+  COO.t += dt;
+  oP.fan.rotation.x += (r.fanOn?16:0.4)*dt;
+  /* HOSE COLOUR IS THE DIAGNOSTIC. The top hose only carries hot coolant
+     once the thermostat opens; cold top hose + hot engine = stuck shut. */
+  const hot = Math.max(0,Math.min(1,(COO.temp-40)/70));
+  const topHot = r.tOpen ? hot : 0.02;
+  const paint=(mesh,h)=>mesh.material.color.setRGB(.08+h*.62,.09+h*.06,.11-h*.06);
+  paint(oP.top, topHot);
+  paint(oP.bot, r.tOpen ? hot*0.72 : 0.02);
+  paint(oP.byp, hot);                 /* the bypass is hot either way */
+  /* beads: round the bypass while shut, round the radiator once open */
+  const path = r.tOpen ? COOL_RAD : COOL_BYP;
+  const rate = (COO.run ? COO.rpm/900 : 0) * (r.airlock?0.35:1) * 0.22;
+  for (const b of oP.flow){
+    b.p = (b.p + rate*dt) % 1;
+    const p = coolPoint(path, b.p);
+    b.m.position.set(p[0],p[1],p[2]);
+    b.m.visible = rate > 0.001;
+    const h = r.tOpen && b.p>0.30 && b.p<0.62 ? hot*0.35 : hot;  /* cools in the rad */
+    b.m.material.color.setRGB(.18+h*.55,.55-h*.18,.85-h*.42);
+  }
+
+  if (!SND.on) return;
+  /* WATER PUMP: belt driven, so its whine tracks engine speed. A dry
+     pump bearing is one of the noises worth knowing. */
+  const pmp = sndWhine('co_pump', 500, 8);
+  if (pmp) pmp.set(260+COO.rpm*.30, COO.run?0.030:0);
+  /* FAN: broadband rush, and the thing to notice is WHEN it arrives */
+  const fan = sndRush('co_fan', 1100);
+  if (fan) fan.set(r.fanOn?1500:400, r.fanOn?0.11:0);
+  if (r.fanOn && !COO.lastFan) sndClack(.10,700,.14);   /* the relay */
+  COO.lastFan = r.fanOn;
+  /* AIRLOCK: a real, diagnosable gurgle behind the dash */
+  const gur = sndRumble('co_gur');
+  if (gur) gur.set(3.2, r.airlock && COO.run ? 0.055 : 0);
+  /* BOILING / pressure relief — hiss, and it means stop the car */
+  const hs = sndRush('co_hiss', 3200);
+  if (hs) hs.set(3600, r.boil?0.09:0);
+  /* THE THERMOSTAT MAKES NO SOUND. A wax element opens silently, so
+     nothing is played for it — see the note on the audio engine. */
+}
+buildClutch(); buildCooling();
+
+/* ═════════════════════════════════════════════════════════════════════
    STARTER OFF, AND INSIDE THE CAR — two more jobs ON the vehicle
 
    THE STARTER CUTAWAY ON THE PLINTH SHOWS HOW ONE WORKS. It does not
@@ -3202,7 +3708,8 @@ const BJ={i:0,ans:{},score:0,asked:0};
 const MODES=[['strip','Strip'],['doorOff','Door off'],['bonnetOff','Bonnet off'],
              ['door','Inside a door'],['starter','Starter'],['alt','Alternator'],
              ['dparts','Mirror & lock'],['starterOff','Starter off'],
-             ['interior','Interior'],['engine','Engine'],['brakes','Brake job'],
+             ['interior','Interior'],['engine','Engine'],['clutch','Clutch'],
+             ['cool','Cooling'],['brakes','Brake job'],
              ['diag','Diagnose'],['bench','Bench']];
 let MODE='strip';
 const tabsEl=document.getElementById('tabs');
@@ -3222,6 +3729,8 @@ const CAP={
   starter:'Constructed starter motor · motion slowed for clarity',
   engine:'Constructed four-stroke cutaway · not the Golf’s own engine',
   strip:'Real geometry from volkswagen-golf-2021-w12-v1',
+  clutch:'Constructed single-plate clutch · sound is SYNTHESISED, not a recording of this car · motion slowed',
+  cool:'Constructed cooling system · sound is SYNTHESISED, not a recording of this car · temperatures typical of class',
   brakes:'Real disc and caliper · pads are constructed'};
 /* Put back whatever another bay left open or detached. `keep` is the mode
    being entered, so the bay that owns a panel does not fight its own setup. */
@@ -3264,8 +3773,9 @@ function restoreJobPanels(keep){
 function setMode(m){
   MODE=m;
   tabsEl.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.m===m));
-  /* THIRTEEN BAYS IN A STRIP THAT IS 390px WIDE — measured, 828px of it is off
-     the right-hand edge on a phone, and the only affordance is a mask fade.
+  /* FIFTEEN BAYS IN A STRIP THAT IS 390px WIDE — measured at thirteen, 828px of
+     it was already off the right-hand edge on a phone, and the only affordance
+     is a mask fade.
      A bay can also be entered without touching the strip at all (tapping the
      alternator in the engine bay jumps to its bay), and then the tab marked
      current is one the trainee cannot see. Scroll it into view. */
@@ -3277,11 +3787,19 @@ function setMode(m){
   document.getElementById('bench-stage').hidden=!bench;
   canvas.style.visibility=bench?'hidden':'visible';
   document.getElementById('loading').hidden=!(needCar && !carReady);
-  document.getElementById('readout').hidden=(m!=='engine'&&m!=='starter'&&m!=='alt');
+  document.getElementById('readout').hidden=(m!=='engine'&&m!=='starter'&&m!=='alt'
+    &&m!=='clutch'&&m!=='cool');
   const cap=document.getElementById('caption');
   cap.hidden=!CAP[m]; if(CAP[m]) cap.textContent=CAP[m];
   doorAsm.visible=(m==='door'); starterAsm.visible=(m==='starter'); engAsm.visible=(m==='engine');
   altAsm.visible=(m==='alt');
+  cluAsm.visible=(m==='clutch'); coolAsm.visible=(m==='cool');
+  /* A CONTINUOUS VOICE MUST NOT FOLLOW THE TRAINEE OUT OF THE BAY. The
+     whines and rushes are held open between frames, so leaving the clutch
+     bay mid-slip left the slip hiss playing over the Strip bay. Every
+     voice goes to zero on any bay change; the bay that is entered opens
+     its own again on its first tick. */
+  sndSilence();
   doorRig.visible=(m==='doorOff'); bonnetRig.visible=(m==='bonnetOff');
   bayAsm.visible=((m==='bonnetOff' && BAY.engine) || m==='diag');
   /* the cover hides the coils, the cam cover and the coolant sensor, so the
@@ -3301,7 +3819,8 @@ function setMode(m){
      body shell anyway, leaving one red pressing floating in front of the
      engine was the odd thing. Restored in every other bay. */
   if (bP.wingR) bP.wingR.visible = (m!=='starterOff');
-  plinth.visible=(m==='door'||m==='starter'||m==='engine'||m==='alt');
+  plinth.visible=(m==='door'||m==='starter'||m==='engine'||m==='alt'
+                  ||m==='clutch'||m==='cool');
   /* CROSS-BAY BLEED. Each job MOVES real geometry, and leaving the bay used
      to leave it moved: open the bonnet in Bay 3, tap Door off, and the door
      job renders with the bonnet still standing up. The panel a bay owns is
@@ -3393,6 +3912,18 @@ function setMode(m){
   if (m==='door') flyTo(new THREE.Vector3(0,.68,0),new THREE.Vector3(.75,1.05,2.45));
   if (m==='starter') flyTo(new THREE.Vector3(.20,.31,0),new THREE.Vector3(.72,.72,1.15));
   if (m==='alt') flyTo(new THREE.Vector3(0,.30,0),new THREE.Vector3(.52,.60,.78));
+  /* THE CLUTCH IS A STACK ALONG X — flywheel at -0.115, plate, cover,
+     bearing, fork at +0.105 — and the lesson is the ORDER of that stack.
+     The first camera sat off the release end at 45°, where the cover is a
+     plain disc filling the frame and the friction lining behind it is one
+     tan sliver. Measured from the render, not argued. Sitting nearer the
+     side (about 25° off the Z axis) lays the stack out left to right with
+     enough obliquity to still read the diaphragm fingers. */
+  if (m==='clutch') flyTo(new THREE.Vector3(-.02,.31,0),new THREE.Vector3(.42,.50,.98));
+  /* radiator at x -0.30, thermostat at +0.010, top tank at y 0.525 — the
+     whole loop has to be in frame or the bay teaches nothing, because the
+     lesson is WHICH HOSE is hot */
+  if (m==='cool') flyTo(new THREE.Vector3(-.12,.35,0),new THREE.Vector3(.60,.82,1.02));
   /* the assembly grew a flywheel, a ring gear and two camshafts, so the
      old framing cropped the cam line off the top and the flywheel off the
      right — measured extents are now x +/-1.1, y 0 to 1.75 */
@@ -3400,6 +3931,11 @@ function setMode(m){
   if (bench) drawCircuit();
   drawHud(); drawPanel();
 }
+/* written once so the chip and the frame loop cannot disagree */
+const cluChipText = () => `${CLU.pedal<.05?'pedal up':CLU.pedal>.75?'pedal floored':'at the bite'
+  } · ${cluSolve().locked?'driving':'SLIPPING'}`;
+const cooChipText = () => `${Math.round(COO.temp)}°C · ${
+  COO.tOpen?'stat open':'stat shut'}${COO.fanOn?' · fan on':''}`;
 function drawHud(){
   const h=document.getElementById('hud');
   const b=(a,l,on)=>`<button class="chip ${on?'on':''}" data-a="${a}">${l}</button>`;
@@ -3435,6 +3971,18 @@ function drawHud(){
       +`<span class="chip">${['Key off','Ignition on','Cranking','Running']
         [['off','ign','crank','run'].indexOf(DIAG.state)]} · tap a point to probe${
         DIAG.replaced.length?` · ${DIAG.replaced.length} part${DIAG.replaced.length>1?'s':''} replaced`:''}</span>`
+    /* THE CHIP HAS TO BE LIVE. The HUD is only redrawn on interaction, so
+       a temperature baked into it at bay entry sat at "20°C · stat shut"
+       while the readout underneath it said 69.3 °C — two contradictory
+       numbers on one screen, the same fault the engine bay had. It carries
+       an id and the frame loop rewrites it. */
+    : MODE==='clutch'
+    ? b('snd',SND.on?'Sound on':'Sound off',SND.on)+b('clReset','Start again')
+      +`<span class="chip" id="cluChip">${cluChipText()}</span>`
+    : MODE==='cool'
+    ? b('snd',SND.on?'Sound on':'Sound off',SND.on)+b('coReset','Start again')
+      +b('corun',COO.run?'Engine running':'Engine off',COO.run)
+      +`<span class="chip" id="cooChip">${cooChipText()}</span>`
     : MODE==='door'
     ? b('dcard',DOOR.card?'Card on':'Card off',DOOR.card)+b('dlatch','Pull the handle')
     : MODE==='starter'
@@ -3467,13 +4015,23 @@ function act(a){
   if(a==='dpReset') dpAct('reset');
   if(a==='sjReset') starterJobAct('reset');
   if(a==='inReset') interiorAct('reset');
+  /* AUDIO NEEDS A GESTURE. An AudioContext created without one is created
+     SUSPENDED and silently plays nothing, so the context is not built at
+     all until this chip is pressed. sndStart returns false where Web Audio
+     is missing — the bays then run silently rather than erroring. */
+  if(a==='snd'){ if(SND.on) sndStop(); else if(!sndStart())
+    alert('This browser has no Web Audio. The bays still work — there will be no sound.'); }
+  if(a==='clReset'){ CLU.pedal=0; CLU.rpm=900; CLU.load=1; CLU.wear=0; CLU.heat=0; }
+  if(a==='coReset'){ COO.temp=20; COO.rpm=900; COO.speed=0; COO.fault='none'; COO.run=true; }
+  if(a==='corun') COO.run=!COO.run;
   drawHud(); drawPanel();
 }
 const panel=document.getElementById('panel');
 function drawPanel(){
   panel.innerHTML=({strip:pStrip,doorOff:pDoorOff,bonnetOff:pBonnetOff,door:pDoor,starter:pStarter,
                     alt:pAlt,engine:pEngine,brakes:pBrakes,diag:pDiag,dparts:pDparts,
-                    starterOff:pStarterOff,interior:pInterior,bench:pBench}[MODE])();
+                    starterOff:pStarterOff,interior:pInterior,bench:pBench,
+                    clutch:pClutch,cool:pCool}[MODE])();
   panel.querySelectorAll('[data-x]').forEach(el=>
     el.addEventListener(el.tagName==='INPUT'?'input':'click',()=>handle(el.dataset.x,el)));
 }
@@ -3603,7 +4161,7 @@ function pStarterOff(){
       ${hint?`<div class="hint" style="margin-top:3px">${hint}</div>`:''}</button>`;
   const outN=Object.keys(SFIX).filter(k=>ST2.out[k]).length;
   return `
-  <div><div class="eyebrow">Bay 9 · Starter off the engine</div>
+  <div><div class="eyebrow">Bay 8 · Starter off the engine</div>
     <h2 style="font-size:19px;margin-top:2px">Starter motor</h2>
     <p style="font-size:13px;color:var(--ink2);margin-top:6px">The <b>Starter</b> bay
     shows you how one works on a bench. This is the other half: getting one off a car,
@@ -3666,7 +4224,7 @@ function pInterior(){
       ${hint?`<div class="hint" style="margin-top:3px">${hint}</div>`:''}</button>`;
   const p=selected&&PART[selected], pt=selected&&parts[selected];
   return `
-  <div><div class="eyebrow">Bay 10 · Inside the car</div>
+  <div><div class="eyebrow">Bay 9 · Inside the car</div>
     <h2 style="font-size:19px;margin-top:2px">Interior</h2>
     <p style="font-size:13px;color:var(--ink2);margin-top:6px">The cabin is
     <b>278,841 triangles — 51.3% of the whole car</b>, the biggest thing in the model.
@@ -3723,7 +4281,7 @@ function pDparts(){
       ${hint?`<div class="hint" style="margin-top:3px">${hint}</div>`:''}</button>`;
   const fix = mir?MFIX:LFIX, outN=Object.keys(fix).filter(k=>st.out[k]).length;
   const head=`
-  <div><div class="eyebrow">Bay 8 · Door components</div>
+  <div><div class="eyebrow">Bay 7 · Door components</div>
     <div class="row" style="margin-top:6px">
       <button class="btn ${mir?'on':''}" data-x="dpjob:mirror">Mirror off</button>
       <button class="btn ${!mir?'on':''}" data-x="dpjob:lock">Door lock out</button></div></div>`;
@@ -3856,7 +4414,7 @@ function pDiag(){
     return d;};
   const graded = DIAG.verdict!==null;
   return `
-  <div><div class="eyebrow">Bay 7 · Diagnose</div>
+  <div><div class="eyebrow">Bay 14 · Diagnose</div>
     <h2 style="font-size:19px;margin-top:2px">Find the fault</h2>
     <p style="font-size:13px;color:var(--ink2);margin-top:6px">You get the customer's
     words and nothing else. Put the probes on real points <b>in the engine bay</b>,
@@ -4093,6 +4651,204 @@ function pAlt(){
     '<b>Never disconnect the battery to "test" the charging system on a running engine.</b> The battery is what damps the system; removing it can spike the voltage into every electronic module on the car. Test with a meter across the battery, and follow the manufacturer\'s procedure.'
   ], true)}`;
 }
+/* THE SOUND NOTICE. Every bay that makes a noise carries this, because a
+   trainee who thinks they are hearing a recording of a Golf is learning
+   something false. Written once so the two bays cannot drift apart. */
+const SNDNOTE = `<div class="note info" style="margin-top:10px">
+  <b>The sound is synthesised.</b> These are oscillators and filtered noise
+  driven by the simulation on screen — not recordings, and not recordings of
+  this car. What is worth learning here is <i>when</i> a noise appears and
+  what changes it, because that is what identifies a fault by ear. The timbre
+  of the real part is something to learn on the real part.</div>`;
+
+function pClutch(){
+  const r = cluSolve();
+  const LOAD = ['Coasting','Pulling away on the flat','Loaded — up a hill','Full throttle in too high a gear'];
+  /* the pedal map, drawn: free travel, then the band where it is a
+     variable friction joint, then fully released. Seeing that the bite is
+     a BAND and not a point is most of the lesson. */
+  const W=300,H=54, xp=v=>8+v*(W-16);
+  return `
+  <div><div class="eyebrow">Bay 11 · Clutch</div>
+    <h2 style="font-size:19px;margin-top:2px">How a clutch works</h2>
+    <p style="font-size:13px;color:var(--ink2);margin-top:6px">A clutch is not a
+    switch. It is a friction joint that can sit <b>anywhere</b> between locked and
+    free, and every pull-away spends a second in the middle of that range. The
+    flywheel and the driven plate on screen turn at their own speeds — when they
+    differ, you are watching slip.</p></div>
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+      <div class="eyebrow">What it is doing</div>
+      <span class="prov built">constructed</span></div>
+    <div class="mono" style="font-size:26px;font-weight:700;margin-top:4px;
+      color:${r.locked?'var(--good)':'var(--warn)'}">${r.locked?'DRIVING':'SLIPPING'}</div>
+    <div class="note ${r.locked?'good':'bad'}" style="margin-top:8px">
+      ${r.locked
+        ? (CLU.pedal<.05
+          ? 'Fully engaged. The clamp load is carrying more torque than the engine is making, so the plate and the flywheel are locked together and turning as one.'
+          : 'Still gripping. The pedal has taken some clamp load off, but there is enough left to carry this load without slipping.')
+        : (CLU.pedal>=r.free
+          ? 'Fully released — the drive is disconnected. This is the position for changing gear, and the only position the pedal should rest in for more than a moment.'
+          : `Slipping: the clutch can carry about ${Math.round(r.torqueCap*100)}% and the engine is asking for ${Math.round(r.demand*100)}%. The engine speed runs away from the gearbox and the difference turns into heat in the lining.`)}
+    </div>
+    <dl class="spec">
+      <dt>engine</dt><dd>${Math.round(CLU.rpm)} rpm</dd>
+      <dt>gearbox input</dt><dd>${Math.round(r.outRpm)} rpm</dd>
+      <dt>slip</dt><dd id="cluSlip" style="color:${(CLU.rpm-r.outRpm)>40?'var(--warn)':'var(--good)'}">${Math.round(CLU.rpm-r.outRpm)} rpm</dd>
+      <dt>clamp load</dt><dd>${Math.round(r.clamp*100)}%</dd>
+      <dt>bite point</dt><dd>${Math.round(r.bite*100)}% of travel${CLU.wear>.35?' — late':''}</dd>
+      <dt>judder</dt><dd style="color:${r.judder>.4?'var(--warn)':'var(--ink2)'}">${r.judder>.4?'yes':r.judder>0?'slight':'none'}</dd>
+    </dl>
+    <div class="eyebrow" style="margin-top:10px">Lining temperature</div>
+    <div style="height:6px;border-radius:3px;background:var(--line);margin-top:5px;overflow:hidden">
+      <i id="cluHeat" style="display:block;height:100%;width:${(CLU.heat*100).toFixed(0)}%;
+        background:${CLU.heat<.7?'var(--warn)':'var(--danger)'}"></i></div>
+    <p class="hint" style="margin-top:5px">Slip puts heat into the friction face. Hold it
+    at the bite under load and watch this climb — that is what burns a clutch out,
+    and it is why riding the pedal is not a harmless habit.</p>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">The pedal is a band, not a point</div>
+    <svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;margin-top:8px" role="img"
+      aria-label="Pedal travel: free play, the bite band, then fully released">
+      <rect x="8" y="16" width="${xp(r.bite)-8}" height="12" fill="var(--good)" opacity=".45"/>
+      <rect x="${xp(r.bite)}" y="16" width="${xp(r.free)-xp(r.bite)}" height="12" fill="var(--warn)" opacity=".55"/>
+      <rect x="${xp(r.free)}" y="16" width="${xp(1)-xp(r.free)}" height="12" fill="var(--ink3)" opacity=".35"/>
+      <line x1="${xp(CLU.pedal)}" y1="10" x2="${xp(CLU.pedal)}" y2="34"
+        stroke="var(--pri)" stroke-width="2.5"/>
+      <text x="8" y="46" font-size="9" fill="var(--good)">fully home</text>
+      <text x="${xp((r.bite+r.free)/2)-14}" y="46" font-size="9" fill="var(--warn)">bite</text>
+      <text x="${W-46}" y="46" font-size="9" fill="var(--ink3)">released</text>
+      <text x="8" y="12" font-size="9" fill="var(--ink3)">pedal up</text>
+      <text x="${W-48}" y="12" font-size="9" fill="var(--ink3)">floored</text>
+    </svg>
+    <p class="hint" style="margin-top:6px">Wear moves the <b>left-hand edge</b> of the
+    amber band to the right: the lining is thinner, so the pressure plate sits further
+    forward and the pedal has to come further up before anything grips. A bite point
+    that has crept towards the top of the travel is a worn clutch, not a maladjusted one.</p>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Drive it</div>
+    <div class="switchrow" style="border-bottom:0">
+      <span>Clutch pedal</span><span class="mono">${Math.round(CLU.pedal*100)}%</span></div>
+    <input type="range" min="0" max="100" step="1" value="${Math.round(CLU.pedal*100)}" data-x="clped">
+    <div class="switchrow" style="border-bottom:0;margin-top:6px">
+      <span>Engine speed</span><span class="mono">${Math.round(CLU.rpm)} rpm</span></div>
+    <input type="range" min="700" max="4500" step="50" value="${Math.round(CLU.rpm)}" data-x="clrpm">
+    <div class="switchrow" style="border-bottom:0;margin-top:6px">
+      <span>Lining wear</span><span class="mono">${Math.round(CLU.wear*100)}%</span></div>
+    <input type="range" min="0" max="100" step="1" value="${Math.round(CLU.wear*100)}" data-x="clwear">
+    <div class="eyebrow" style="margin-top:10px">Load on the engine</div>
+    <div class="row" style="margin-top:7px">
+      ${LOAD.map((l,i)=>`<button class="btn ${CLU.load===i?'on':''}" data-x="clload:${i}">${l}</button>`).join('')}
+    </div>
+    <p class="hint" style="margin-top:8px"><b>The classic test.</b> Set wear high, pick
+    the hill, hold a steady pedal and raise the revs: the engine speed climbs and the
+    gearbox speed does not follow. A clutch that lets the engine run away under load
+    while the car does not accelerate is slipping, and no adjustment fixes it.</p>
+    ${SNDNOTE}
+  </div>
+
+  ${man('Training manual — the clutch',[
+    '<b>What is actually clamping it.</b> The friction plate is squeezed between the engine’s flywheel and a pressure plate, and a diaphragm spring in the cover provides the clamp load. Pushing the pedal pushes a release bearing against the fingers of that diaphragm, which levers the pressure plate <i>away</i> from the plate and lets the drive go. The pedal releases the clutch; it does not apply it.',
+    '<b>Slip is normal for a second and fatal for a minute.</b> Pulling away, the two faces must run at different speeds while the car catches up with the engine, and that difference becomes heat. A few seconds is what the lining is designed for. Holding a car on the clutch at a junction instead of the brake is the same mechanism with nowhere for the heat to go.',
+    '<b>Slipping and dragging are opposite faults.</b> <i>Slipping</i> — engine revs rise without matching acceleration, worst in a high gear under load — is a clutch that will not fully engage. <i>Dragging</i> — crunching into first, the car creeping with the pedal floored — is a clutch that will not fully disengage, and that points at hydraulics, cable adjustment or the plate sticking on the splines rather than at worn friction material. Establish which one you have before quoting anything.',
+    '<b>Where the noises are, and which pedal position finds them.</b> A worn <i>release bearing</i> is loaded only when the pedal is DOWN, so the noise appears as you press and goes as you lift. A worn <i>input-shaft bearing</i> is heard with the pedal UP in neutral and quietens when you press, because pressing stops driving it. That single test — pedal up, pedal down, engine idling in neutral — separates two jobs of very different size. Confirm against the manufacturer’s procedure before condemning either.',
+    '<b>Judder is usually contamination or distortion, not wear.</b> A shudder that arrives only at the bite point and only when taking up drive points at oil on the lining (a leaking crank seal or gearbox input seal), a distorted plate, or worn engine and gearbox mounts letting the driveline move. Replacing the clutch without finding a leak buys the same fault again.',
+    '<b>Renew it as a set, and look at what it bolts to.</b> Plate, cover and release bearing are replaced together because the labour is in the access, not the parts. Inspect the flywheel face while it is exposed — heat cracking, scoring, and on a dual-mass flywheel excessive rock or rattle — and check the crank and input-shaft seals. Dual-mass units have their own wear checks; use the data for the car.',
+    '<b>Two safety points that are not optional.</b> A gearbox is far heavier and far more awkward than it looks and must be supported properly, not balanced. And clutch dust is not to be blown out with an airline: it is a respirable dust from friction material, and older material may contain asbestos. Follow the workshop’s procedure for both.'
+  ], true)}`;
+}
+
+function pCool(){
+  const r = coolSolve();
+  const FAULT = [['none','Healthy'],['tstat','Thermostat stuck shut'],
+                 ['fan','Cooling fan dead'],['airlock','Air in the system']];
+  const col = COO.temp>=119?'var(--danger)':COO.temp>=105?'var(--warn)':'var(--good)';
+  /* the gauge as a bar, with the two thresholds that matter marked on it */
+  const W=300, x=v=>8+((v-20)/110)*(W-16);
+  return `
+  <div><div class="eyebrow">Bay 12 · Cooling</div>
+    <h2 style="font-size:19px;margin-top:2px">How the cooling system works</h2>
+    <p style="font-size:13px;color:var(--ink2);margin-top:6px">An engine has to be kept
+    <i>hot</i>, not cold — around 90 °C, quickly, and then held there. The thermostat does
+    the holding, the pump does the moving, and the radiator and fan only get involved when
+    there is more heat than the engine wants to keep.</p></div>
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+      <div class="eyebrow">Coolant temperature</div>
+      <span class="prov built">constructed</span></div>
+    <div class="mono" id="cooT" style="font-size:30px;font-weight:700;margin-top:4px;
+      color:${col}">${COO.temp.toFixed(1)} °C</div>
+    <svg viewBox="0 0 ${W} 34" style="width:100%;height:auto;margin-top:6px" role="img"
+      aria-label="Coolant temperature against the thermostat, fan and boiling thresholds">
+      <rect x="8" y="10" width="${W-16}" height="9" rx="4" fill="var(--line)"/>
+      <rect x="8" y="10" width="${Math.max(0,x(COO.temp)-8)}" height="9" rx="4" fill="${col}"/>
+      ${[[88,'stat'],[100,'fan'],[119,'boil']].map(([v,l])=>
+        `<line x1="${x(v)}" y1="6" x2="${x(v)}" y2="23" stroke="var(--ink3)" stroke-width="1"/>
+         <text x="${x(v)-9}" y="32" font-size="8.5" fill="var(--ink3)">${l}</text>`).join('')}
+    </svg>
+    <div class="note ${r.boil?'bad':COO.temp>=105?'':'good'}" style="margin-top:8px">
+      ${r.boil
+        ? 'BOILING. Pressure is lifting the cap and coolant is being pushed out. Stop, and do not open anything until it has cooled — a hot system is at pressure and will scald.'
+        : r.tStuck
+        ? 'Climbing with the top hose COLD. No coolant is reaching the radiator, so nothing is carrying the heat away however fast you go or how hard the fan works.'
+        : r.fanDead && COO.speed < 15
+        ? 'Climbing at a standstill. The thermostat is open and the radiator is full of hot coolant, but nothing is pulling air through it.'
+        : r.airlock
+        ? 'Rising and unsteady. An air pocket is interrupting circulation, so the system sheds heat in fits and the heater may blow cold.'
+        : COO.temp < 70 ? 'Warming up. The thermostat is shut, the coolant is going round the bypass and the block only, and that is how it should reach working temperature quickly.'
+        : 'Steady at working temperature. The thermostat is metering flow to the radiator to hold it there.'}
+    </div>
+    <dl class="spec">
+      <dt>thermostat</dt><dd>${r.tOpen?'open (from 88 °C)':'shut'}</dd>
+      <dt>top hose</dt><dd id="cooTop" style="color:${r.tOpen?'var(--good)':'var(--danger)'}">${r.tOpen?'hot':'cold'}</dd>
+      <dt>cooling fan</dt><dd>${r.fanDead?'DEAD':r.fanOn?'running':'off'}</dd>
+      <dt>road speed</dt><dd>${COO.speed} mph</dd>
+      <dt>engine</dt><dd>${COO.run?Math.round(COO.rpm)+' rpm':'stopped'}</dd>
+    </dl>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Drive it</div>
+    <div class="row" style="margin-top:2px">
+      <button class="btn wide ${COO.run?'on':''}" data-x="corun">${COO.run?'Engine running':'Engine off'}</button>
+      <button class="btn wide" data-x="coReset">Cold start again</button>
+    </div>
+    <div class="switchrow" style="border-bottom:0;margin-top:8px">
+      <span>Engine speed</span><span class="mono">${Math.round(COO.rpm)} rpm</span></div>
+    <input type="range" min="700" max="4000" step="50" value="${Math.round(COO.rpm)}" data-x="corpm">
+    <div class="switchrow" style="border-bottom:0;margin-top:6px">
+      <span>Road speed</span><span class="mono">${COO.speed} mph</span></div>
+    <input type="range" min="0" max="70" step="1" value="${COO.speed}" data-x="cospd">
+    <div class="eyebrow" style="margin-top:10px">Introduce a fault</div>
+    <div class="row" style="margin-top:7px">
+      ${FAULT.map(([k,l])=>`<button class="btn ${COO.fault===k?'on':''}" data-x="cofault:${k}">${l}</button>`).join('')}
+    </div>
+    <p class="hint" style="margin-top:8px"><b>The test that separates the two.</b> Both a
+    stuck thermostat and a dead fan present as “it overheats”. Set each in turn, run it up,
+    and watch two things: the <b>top hose colour</b> on screen, and what happens when you
+    wind the road speed up. A dead fan cools down as soon as the car is moving. A stuck
+    thermostat does not care how fast you go.</p>
+    ${SNDNOTE}
+  </div>
+
+  ${man('Training manual — cooling',[
+    '<b>The loop, in order.</b> The pump pushes coolant through the block and head, where it picks up heat. While the engine is cold the thermostat is shut and that coolant goes round a short <i>bypass</i> back to the pump — so the engine warms up fast and the heater works early. Once it reaches its opening temperature the thermostat lets coolant out to the radiator, air takes the heat out of it, and it returns through the bottom hose.',
+    '<b>The system is pressurised on purpose.</b> Raising the pressure raises the boiling point, which is what lets the coolant run near 90 °C without boiling and gives a margin above it. That is also why a hot system must never be opened: releasing the pressure drops the boiling point and the coolant flashes to steam. Let it cool, and follow the workshop procedure for the cap.',
+    '<b>Thermostat stuck SHUT — it overheats and the top hose stays cold.</b> That one check finds it. No coolant is reaching the radiator at all, so the radiator is cool while the engine is not, and driving faster changes nothing.',
+    '<b>Thermostat stuck OPEN — the opposite complaint.</b> It takes an age to warm up, the gauge sits low, the heater is lukewarm and the fuel consumption goes up, because the engine never reaches the temperature it is mapped for. Not dramatic, and still a fault worth fixing.',
+    '<b>Fan dead — fine moving, overheats at a standstill.</b> At road speed there is enough air through the radiator without help; in traffic there is none, and the fan is what replaces it. So the story “it only does it in town” is the fan circuit until proven otherwise: the fan motor, its relay and fuse, and the temperature sensor or control module that asks for it.',
+    '<b>Air in the system behaves like an intermittent fault.</b> An air pocket interrupts circulation, so the temperature swings, the heater blows cold at idle and warm when revved, and the expansion tank gurgles. It comes from a coolant change that was not bled properly — or from a leak, or from combustion gases being pushed in past a failed head gasket, which is a different and much larger job. Bleed it by the correct procedure; if it keeps filling with air, find out where the air is coming from.',
+    '<b>Do not judge the coolant level from a hot engine, and do not judge the fault from the gauge alone.</b> Level readings are taken cold on a level surface, to the marks on the expansion tank. A dashboard gauge on most cars is damped and will sit in the middle across a wide band — use the scan data or a thermometer when the number matters.',
+    '<b>Use the specified coolant, and treat it as harmful.</b> Coolant types are not interchangeable and mixing them can gel; the correct specification and concentration come from the vehicle data. It is toxic and it is sweet-tasting, so it must not be left in an open container or allowed to reach a drain.'
+  ], true)}`;
+}
+
 function pBonnetOff(){
   const step=(k,label,ok,act,hint)=>`
     <button class="choice ${ok?'right':''}" data-x="bo:${act}" ${ok?'disabled':''}>
@@ -4166,7 +4922,7 @@ function pBonnetOff(){
 }
 function pDoor(){
   return `
-  <div><div class="eyebrow">Bay 2 · Inside a door</div>
+  <div><div class="eyebrow">Bay 4 · Inside a door</div>
     <h2 style="font-size:19px;margin-top:2px">Take the card off</h2>
     <p style="font-size:13px;color:var(--ink2);margin-top:6px">Viewed from inside the car looking
     out — the view you get once the trim card is off. Wind the window and watch the regulator
@@ -4197,7 +4953,7 @@ function pDoor(){
 }
 function pStarter(){
   return `
-  <div><div class="eyebrow">Bay 3 · Starter motor</div>
+  <div><div class="eyebrow">Bay 5 · Starter motor</div>
     <h2 style="font-size:19px;margin-top:2px">How it throws the pinion</h2>
     <p style="font-size:13px;color:var(--ink2);margin-top:6px">Turn the key and watch the solenoid
     pull, the fork push the pinion into the flywheel ring gear, and the motor spin. Then watch it
@@ -4225,7 +4981,7 @@ function pStarter(){
 function pEngine(){
   const a=ENG.angle, cyl=[0,1,2,3].map(i=>(a+FIRING[i])%720);
   return `
-  <div><div class="eyebrow">Bay 4 · Four-stroke</div>
+  <div><div class="eyebrow">Bay 10 · Four-stroke</div>
     <h2 style="font-size:19px;margin-top:2px">How it actually turns</h2>
     <p style="font-size:13px;color:var(--ink2);margin-top:6px">Crank, rods, pistons, valves and cam
     driven by the real slider-crank geometry — the mechanism, not a looping animation.</p></div>
@@ -4257,7 +5013,7 @@ function pEngine(){
 function pBrakes(){
   const s=JOB[BJ.i], ans=BJ.ans[BJ.i];
   return `
-  <div><div class="eyebrow">Bay 5 · Front brake job</div>
+  <div><div class="eyebrow">Bay 13 · Front brake job</div>
     <h2 style="font-size:19px;margin-top:2px">Step ${BJ.i+1} of ${JOB.length}</h2></div>
   <div class="card"><h3>${s.t}</h3><p style="margin-top:6px">${s.d}</p>
     <div class="row" style="margin-top:10px"><span class="badge tool">${s.tool}</span>
@@ -4289,7 +5045,7 @@ function pBrakes(){
 function pBench(){
   const r=solve(), m=meterRead(), lbl=id=>(TP.find(t=>t[0]===id)||[,'—'])[1];
   return `
-  <div><div class="eyebrow">Bay 6 · Electrical bench</div>
+  <div><div class="eyebrow">Bay 15 · Electrical bench</div>
     <h2 style="font-size:19px;margin-top:2px">Find the fault</h2>
     <p style="font-size:13px;color:var(--ink2);margin-top:6px">Click a test point for the
     <b style="color:var(--danger)">red</b> probe; shift-click or right-click for
@@ -4394,6 +5150,17 @@ function handle(x,el){
     BEN.fault=ks[1+Math.floor(Math.random()*(ks.length-1))];
     BEN.found='hidden'; BEN.ign=0; BEN.lamps=false; BEN.clutch=false;}
   if(k==='guess') BEN.found=v;
+  /* CLUTCH. Note the prefix: a bare `clutch` key is already taken by the
+     bench circuit's clutch SWITCH, which is a different thing entirely. */
+  if(k==='clped') CLU.pedal=+el.value/100;
+  if(k==='clrpm') CLU.rpm=+el.value;
+  if(k==='clload') CLU.load=+v;
+  if(k==='clwear') CLU.wear=+el.value/100;
+  /* COOLING */
+  if(k==='corpm') COO.rpm=+el.value;
+  if(k==='cospd') COO.speed=+el.value;
+  if(k==='cofault') COO.fault=v;
+  if(k==='snd'||k==='clReset'||k==='coReset'||k==='corun'){act(k); return;}
   if(k==='dcard'||k==='dlatch'||k==='skey'||k==='erun'||k==='ecut'||k==='estep'){act(k); return;}
   if(MODE==='bench') drawCircuit();
   drawHud(); drawPanel();
@@ -4456,6 +5223,39 @@ function frame(now){
     const vl=document.getElementById('altV');
     if (vl){ vl.textContent=r.V.toFixed(2)+' V';
       vl.style.color=r.lamp?'var(--danger)':'var(--good)'; }
+    renderer.render(sceneRig,camera);
+  } else if (MODE==='clutch'){
+    clutchTick(dt);
+    const r=cluSolve();
+    readout.innerHTML=`<span class="mono" style="color:${r.locked?'var(--good)':'var(--warn)'};
+      font-weight:700">${r.locked?'DRIVING':'SLIPPING'}</span> · engine ${Math.round(CLU.rpm)} rpm ·
+      gearbox ${Math.round(r.outRpm)} rpm · lining ${
+        CLU.heat<.3?'cool':CLU.heat<.7?'hot':'BURNING'}`;
+    /* the panel is drawn on interaction only, so the live figures inside
+       it go stale while the sim runs — the same contradiction the engine
+       bay hit, fixed the same way */
+    const sl=document.getElementById('cluSlip');
+    if (sl){ sl.textContent = Math.round(CLU.rpm-r.outRpm)+' rpm';
+      sl.style.color = (CLU.rpm-r.outRpm)>40?'var(--warn)':'var(--good)'; }
+    const hl=document.getElementById('cluHeat');
+    if (hl){ hl.style.width=(CLU.heat*100).toFixed(0)+'%';
+      hl.style.background = CLU.heat<.7?'var(--warn)':'var(--danger)'; }
+    const cc=document.getElementById('cluChip'); if (cc) cc.textContent=cluChipText();
+    renderer.render(sceneRig,camera);
+  } else if (MODE==='cool'){
+    coolTick(dt);
+    const r=coolSolve();
+    const col = COO.temp>=119?'var(--danger)':COO.temp>=105?'var(--warn)':'var(--good)';
+    readout.innerHTML=`<span class="mono" style="color:${col};font-weight:700">${
+      COO.temp.toFixed(1)} °C</span> · thermostat <b style="color:var(--ink)">${
+      r.tOpen?'OPEN':'shut'}</b> · fan ${r.fanOn?'ON':'off'} · top hose <b
+      style="color:var(--ink)">${r.tOpen?'hot':'COLD'}</b>`;
+    const tl=document.getElementById('cooT');
+    if (tl){ tl.textContent=COO.temp.toFixed(1)+' °C'; tl.style.color=col; }
+    const hh=document.getElementById('cooTop');
+    if (hh){ hh.textContent = r.tOpen?'hot':'cold';
+      hh.style.color = r.tOpen?'var(--good)':'var(--danger)'; }
+    const oc=document.getElementById('cooChip'); if (oc) oc.textContent=cooChipText();
     renderer.render(sceneRig,camera);
   } else if (MODE==='door'){
     doorTick(); renderer.render(sceneRig,camera);
@@ -4537,6 +5337,26 @@ window.__bay = () => ({visible:bayAsm.visible, on:BAY.engine,
     return Math.round(t); })(),
   bonnetRotX:parts.panel_bonnet
     ?+parts.panel_bonnet.group.rotation.x.toFixed(3):null});
+/* CLUTCH AND COOLING probes. Both bays are pure simulation, so the thing
+   worth asserting is that the SOLVER moves — a bay whose numbers never
+   change is the empty-by-construction failure this project keeps paying
+   for. `meshes` also catches a build that silently produced nothing. */
+window.__clutch = () => { const r=cluSolve(); return {
+  pedal:+CLU.pedal.toFixed(3), rpm:CLU.rpm, load:CLU.load, wear:+CLU.wear.toFixed(2),
+  clamp:+r.clamp.toFixed(3), locked:r.locked, slipRpm:Math.round(CLU.rpm-r.outRpm),
+  heat:+CLU.heat.toFixed(3), bite:+r.bite.toFixed(3),
+  meshes:cluAsm.children.length, visible:cluAsm.visible,
+  /* proof the two shafts really are turning independently */
+  engAng:+CLU.engAng.toFixed(3), outAng:+CLU.outAng.toFixed(3) }; };
+window.__cool = () => { const r=coolSolve(); return {
+  temp:+COO.temp.toFixed(2), rpm:COO.rpm, speed:COO.speed, fault:COO.fault,
+  run:COO.run, tOpen:r.tOpen, fanOn:r.fanOn, boil:r.boil,
+  meshes:coolAsm.children.length, visible:coolAsm.visible,
+  /* the diagnostic itself: the top hose's own rendered colour */
+  topHoseR:+oP.top.material.color.r.toFixed(3),
+  beadsMoving:oP.flow.some(b=>b.m.visible) }; };
+window.__sound = () => ({ctx:!!SND.ctx, on:SND.on,
+  voices:Object.keys(SND.v), files:0});   /* files:0 — nothing is sampled */
 window.__groups = () => Object.fromEntries(Object.entries(parts).map(([k,v])=>
   [k,{meshes:v.meshes.length, tris:v.tris,
       names:v.meshes.slice(0,2).map(m=>(m.name||'').slice(0,34)),
