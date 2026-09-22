@@ -141,6 +141,93 @@ RULES2 = [(re.compile(p, re.I), i) for p, i in RULES2]
 _MAT_SUFFIX = re.compile(r'_mat_.*$|_\d+$')
 
 
+# ── CONVENTION 3 — THE SIM-MOD FAMILY, and it beats the Golf ────────────
+# `volvo-xc90-v1` and `volkswagen-golf-gti-vw2-v1` name their parts
+# `<car>_door_FL`, `<car>_hood`, `<car>_tailgate`, `<car>_seat_FL`,
+# `<car>_engine_i4`, `<car>_turbo_i4`, `<car>_intercooler`,
+# `<car>_transmission`, `<car>_driveshaft`, `<car>_lowerarm_F`,
+# `<car>_spring_R`, `<car>_subframe_F`. That is a driving-sim vehicle mod,
+# and it carries an ENGINE BAY, A DRIVELINE AND A SUSPENSION — none of
+# which exist in the reference Golf at all. For a mechanics trainer this
+# is a BETTER asset than the car the trainer was built on.
+#
+# TWO HONEST GAPS IN IT, found by reading the part list rather than
+# assuming the richer car wins everything:
+#   * THE FOUR WHEELS ARE INSTANCES, NOT CORNERS. They are `wheel_x`,
+#     `wheel_x.001`, `.002`, `.003` and `tire`, `tire.001`… so no name
+#     says which corner is which. "Take the front left wheel off" needs a
+#     POSITION lookup here, where the Golf says `Rim_FL` outright.
+#   * NO BRAKE DISCS OR CALIPERS. `pedal_brake_A` is the pedal. The brake
+#     job cannot run on this family as it stands.
+# Both are recorded rather than smoothed over, because a trainer that
+# says "front left" while moving an arbitrary wheel teaches nothing.
+RULES3 = [
+    (r'^hood$|^bonnet$', 'panel_bonnet'),
+    (r'^mirror_L(_base)?$', 'mirror_fl'),
+    # door glass is named separately here; it travels WITH the door, the
+    # same way `Ext_Door_FL_Glass` does under convention 1
+    (r'^door_?glass_FL$|^door_FL', 'door_fl'),
+    (r'^door_?glass_FR$|^door_FR', 'door_fr'),
+    (r'^door_?glass_RL$|^door_RL', 'door_rl'),
+    (r'^door_?glass_RR$|^door_RR', 'door_rr'),
+    (r'^tailgate|^trunk|^boot_lid|^hatch', 'tailgate'),
+    (r'^windshield|^windscreen|^sideglass|^rearglass|^backglass', 'glazing'),
+    (r'^seat_[FR][LR]?|^seats?$', 'seats'),
+    (r'^steeringwheel$|^steering_wheel', 'steering'),
+    (r'^interior|^gauge|^speedo|^tacho|^needle_|^pedal_|^shifter|^ceiling'
+     r'|^shelf|^signalstalk|^dash|^console|^carpet', 'cabin'),
+    (r'^headlight|^headlamp', 'lamps_front'),
+    (r'^taillight|^taillamp|^rearlight', 'lamps_rear'),
+    # the parts the Golf simply does not have — scored so the gain is
+    # visible rather than implied
+    (r'^engine|^engbay|^intake|^intakecover|^turbo|^intercooler|^airbox'
+     r'|^podfilter|^radiator|^radfan|^radsupport|^fueltank|^strut_bar'
+     r'|^exhaust', 'engine'),
+    (r'^transmission|^transfercase|^driveshaft|^halfshaft|^diff_'
+     r'|^gearbox|^clutch', 'driveline'),
+    (r'^lowerarm|^upperarm|^wishbone|^spring_|^shock_|^strut_front'
+     r'|^swaybar|^subframe|^tierod|^trailingarm|^rearbeam|^hub_[FR]'
+     r'|^tubs_|^tray_', 'suspension'),
+    (r'^wheel|^tire|^tyre|^rim', 'wheels_unsided'),   # instanced, see above
+    (r'.', 'body'),
+]
+RULES3 = [(re.compile(p, re.I), i) for p, i in RULES3]
+# this family suffixes every mesh with its material and an instance index
+_C3_STRIP = re.compile(
+    r'(?:[._]\d+)+$|_(?:vivace|etk\w*|bastion|gmk\d|usdm|jdm)\w*$', re.I)
+
+
+def classify3(n, prefix=''):
+    base = n
+    if prefix and base.lower().startswith(prefix.lower()):
+        base = base[len(prefix):]
+    for _ in range(3):                       # suffixes stack: `.001_x_black`
+        nb = _C3_STRIP.sub('', base)
+        if nb == base:
+            break
+        base = nb
+    base = base.strip('_. ')
+    for rx, pid in RULES3:
+        if rx.match(base):
+            return pid
+    return 'body'
+
+
+def c3_prefix(names):
+    """This family prefixes EVERY mesh with the car's own short name —
+    `xc90_`, `w177_`, `pab_v55_`. Find it as the commonest leading token
+    rather than hard-coding one, or the rules match nothing."""
+    heads = Counter()
+    for n in names:
+        m = re.match(r'^([a-z0-9]{2,12}_)', n, re.I)
+        if m:
+            heads[m.group(1).lower()] += 1
+    if not heads:
+        return ''
+    top, cnt = heads.most_common(1)[0]
+    return top if cnt >= max(6, len(names) * 0.25) else ''
+
+
 _MAT_TOKEN = re.compile(r'_mat_(.+?)_\d+$')
 
 
@@ -339,6 +426,15 @@ def audit_one(asset):
                       for k, (ids, _b) in NEEDED.items()}
     row['strict2Pass'] = all(all(i in g2 for i in ids)
                              for ids, _b in NEEDED.values())
+    pre = c3_prefix(names)
+    g3 = Counter(classify3(n, pre) for n in names)
+    row['c3prefix'] = pre
+    row['groups3'] = dict(sorted(g3.items()))
+    row['strict3'] = {k: f'{len([i for i in ids if i in g3])}/{len(ids)}'
+                      for k, (ids, _b) in NEEDED.items()}
+    # the three things convention 3 has that the Golf does not
+    row['extras3'] = [k for k in ('engine', 'driveline', 'suspension')
+                      if k in g3]
     row['bytesRead'] = nbytes
     row['nodes'] = len(g.get('nodes', []))
     row['meshes'] = len(g.get('meshes', []))
