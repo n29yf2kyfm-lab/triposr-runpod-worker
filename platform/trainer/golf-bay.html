@@ -110,16 +110,11 @@ nav#tabs::-webkit-scrollbar{display:none}
 /* VEHICLE SWITCHER. Inside the artifact frame nobody can type ?car=xc90
    into an address bar, so without this the second car is unreachable by
    the very person it was built for. */
-.carpick{display:flex;gap:2px;padding:2px;border:1px solid var(--line);
-  border-radius:8px;flex:none}
-.carpick button{padding:5px 10px;border-radius:6px;font-size:12px;font-weight:700;
-  color:var(--ink2);white-space:nowrap}
-.carpick button:hover{color:var(--ink);background:var(--panel2)}
-/* same treatment as the selected tab. The first version used var(--bg),
-   which is not a token in this file — the declaration was invalid, the
-   text fell back to dark, and the chosen car rendered as a blank black
-   pill. Seen on the phone screenshot, not in the source. */
-.carpick button[aria-pressed="true"]{background:var(--pri);color:#fff}
+.carpick{display:flex;align-items:center;gap:7px;flex:none;min-width:0}
+.carpick select{font:inherit;font-size:12.5px;font-weight:700;color:var(--ink);
+  background:var(--panel2);border:1px solid var(--line);border-radius:8px;
+  padding:6px 28px 6px 10px;max-width:58vw;cursor:pointer}
+.carpick select:hover{border-color:var(--ink3)}
 
 /* THE ROW HAS TO BE EXPLICIT, or the canvas decides how tall the app is.
    With no grid-template-rows the single implicit row is `auto`, so it sizes
@@ -342,7 +337,8 @@ ol.steps li.now .n{background:var(--pri);border-color:var(--pri);color:#fff}
     <div class="mark">SB</div>
     <div class="brand"><b>Strip Bay</b><span class="sub" id="brandSub">teardown trainer</span></div>
     <nav id="tabs" role="tablist"></nav>
-    <div class="carpick" id="carPick" role="group" aria-label="Vehicle"></div>
+    <label class="carpick"><span class="eyebrow">Car</span>
+      <select id="carPick" aria-label="Vehicle"></select></label>
     <button class="iconbtn" id="themeBtn" title="Light / dark" aria-label="Toggle light and dark">◐</button>
   </header>
   <div id="work">
@@ -495,6 +491,11 @@ const FLEET = {
    data or a preview frame can make the accessor THROW rather than return
    null, and a trainer that dies on load over a remembered preference is
    worse than one that forgets it. */
+/* FLEET_GEN:BEGIN — written by fleet_gen.py from sb_convert.py's reports.
+   Do not hand-edit between the markers; re-run the tool. */
+const FLEET_GEN = {};
+/* FLEET_GEN:END */
+Object.assign(FLEET, FLEET_GEN);
 const CAR_ID = (() => {
   const q = (new URLSearchParams(location.search).get('car')||'').toLowerCase();
   if (q in FLEET) return q;
@@ -808,7 +809,7 @@ function buildCar(root){
        before relying on it; a name is only a candidate, which is why the
        respray was then rendered on each car and the glass and tyres looked at
        (a material called paint is not always the body — see CLAUDE.md). */
-    if (o.material && /paint/i.test(o.material.name||'')){
+    if (VEHICLE.paint!==false && o.material && /paint/i.test(o.material.name||'')){
       o.userData.paint0 = {color:o.material.color.clone(), map:o.material.map||null,
                            rough:o.material.roughness};
       PAINTED.push(o);
@@ -3992,15 +3993,18 @@ tabsEl.addEventListener('click',e=>{const b=e.target.closest('[data-m]'); if(b) 
    Both the header and the Strip caption read from VEHICLE. */
 { const pick=document.getElementById('carPick');
   if (pick){
-    pick.innerHTML = Object.entries(FLEET).map(([id,v])=>
-      `<button type="button" data-car="${id}" aria-pressed="${id===CAR_ID}">${v.short}</button>`).join('');
-    pick.addEventListener('click', e => {
-      const b = e.target.closest('[data-car]'); if (!b || b.dataset.car===CAR_ID) return;
-      try { localStorage.setItem('stripbay.car', b.dataset.car); } catch(err){}
+    /* A DROP-DOWN, not a button row: twenty cars do not fit a phone header,
+       and a row that scrolls hides most of the fleet. Sorted by name. */
+    pick.innerHTML = Object.entries(FLEET)
+      .sort((x,y)=>x[1].name.localeCompare(y[1].name))
+      .map(([id,v])=>`<option value="${id}" ${id===CAR_ID?'selected':''}>${v.name}</option>`).join('');
+    pick.addEventListener('change', () => {
+      const id = pick.value; if (id===CAR_ID) return;
+      try { localStorage.setItem('stripbay.car', id); } catch(err){}
       /* a ?car= in the URL would override the new choice on reload, so
          drop it; otherwise a plain reload is enough */
       const u = new URL(location.href);
-      if (u.searchParams.has('car')){ u.searchParams.set('car', b.dataset.car); location.href = u.toString(); }
+      if (u.searchParams.has('car')){ u.searchParams.set('car', id); location.href = u.toString(); }
       else location.reload();
     });
   }
@@ -4369,7 +4373,10 @@ function pStrip(){
         title="${n}" aria-label="${n}"><i style="background:${h===null
           ? 'conic-gradient(from 45deg,#a3141c,#163f8c,#e0b31a,#a3141c)'
           : '#'+h.toString(16).padStart(6,'0')}"></i><span>${n}</span></button>`).join('')}
-    </div>` : `<p class="hint" style="margin-top:6px">No paint material found in this file.</p>`}
+    </div>` : `<p class="hint" style="margin-top:6px">${VEHICLE.paint===false
+      ? `Respray is off for this car. Its paint shares one material with trim and
+         interior parts, so changing the colour would repaint more than the body.`
+      : 'No paint material found in this file.'}</p>`}
   </div>
   ${p?`<div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
@@ -5698,8 +5705,7 @@ window.__act = (what,arg) => {
   if (what==='tail')   setTailgate(!S.tailgate);
   if (what==='wheel')  setWheelOff('wheel_'+arg, !S.wheelOff['wheel_'+arg]);
   if (what==='iso')    iso(arg);
-  if (what==='bonnet'){ const p=parts.panel_bonnet;
-    if (p) tween(p.group.rotation,'x', p.group.rotation.x < -0.1 ? 0 : -BONNET_OPEN, 620); }
+  if (what==='bonnet') setBonnet(!S.bonnet);   /* same path as the button */
   return true; };
 window.__paint = () => ({meshes:PAINTED.length, paint:S.paint,
   names:[...new Set(PAINTED.map(m=>m.material.name))],
