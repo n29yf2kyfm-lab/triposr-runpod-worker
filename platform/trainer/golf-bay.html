@@ -107,6 +107,19 @@ nav#tabs::-webkit-scrollbar{display:none}
 .iconbtn{width:32px;height:32px;border-radius:7px;display:grid;place-items:center;
   border:1px solid var(--line);color:var(--ink2);font-size:14px}
 .iconbtn:hover{color:var(--ink);border-color:var(--ink3)}
+/* VEHICLE SWITCHER. Inside the artifact frame nobody can type ?car=xc90
+   into an address bar, so without this the second car is unreachable by
+   the very person it was built for. */
+.carpick{display:flex;gap:2px;padding:2px;border:1px solid var(--line);
+  border-radius:8px;flex:none}
+.carpick button{padding:5px 10px;border-radius:6px;font-size:12px;font-weight:700;
+  color:var(--ink2);white-space:nowrap}
+.carpick button:hover{color:var(--ink);background:var(--panel2)}
+/* same treatment as the selected tab. The first version used var(--bg),
+   which is not a token in this file — the declaration was invalid, the
+   text fell back to dark, and the chosen car rendered as a blank black
+   pill. Seen on the phone screenshot, not in the source. */
+.carpick button[aria-pressed="true"]{background:var(--pri);color:#fff}
 
 /* THE ROW HAS TO BE EXPLICIT, or the canvas decides how tall the app is.
    With no grid-template-rows the single implicit row is `auto`, so it sizes
@@ -320,6 +333,7 @@ ol.steps li.now .n{background:var(--pri);border-color:var(--pri);color:#fff}
     <div class="mark">SB</div>
     <div class="brand"><b>Strip Bay</b><span class="sub" id="brandSub">teardown trainer</span></div>
     <nav id="tabs" role="tablist"></nav>
+    <div class="carpick" id="carPick" role="group" aria-label="Vehicle"></div>
     <button class="iconbtn" id="themeBtn" title="Light / dark" aria-label="Toggle light and dark">◐</button>
   </header>
   <div id="work">
@@ -436,10 +450,19 @@ const FLEET = {
 };
 /* ?car=xc90 — the Golf stays the default because it is the tested one and
    every bay after Strip is built around its constructed assemblies. */
-const CAR_ID = (new URLSearchParams(location.search).get('car')||'golf')
-               .toLowerCase() in FLEET
-  ? (new URLSearchParams(location.search).get('car')||'golf').toLowerCase()
-  : 'golf';
+/* WHICH CAR: ?car= wins, then the choice remembered from the switcher,
+   then the Golf. The remembered choice is a per-viewer convenience, so it
+   lives in localStorage — wrapped, because a private window, cleared site
+   data or a preview frame can make the accessor THROW rather than return
+   null, and a trainer that dies on load over a remembered preference is
+   worse than one that forgets it. */
+const CAR_ID = (() => {
+  const q = (new URLSearchParams(location.search).get('car')||'').toLowerCase();
+  if (q in FLEET) return q;
+  try { const m = localStorage.getItem('stripbay.car'); if (m && m in FLEET) return m; }
+  catch(e){}
+  return 'golf';
+})();
 const VEHICLE = FLEET[CAR_ID];
 const HINGE = VEHICLE.hinge;
 
@@ -3878,6 +3901,21 @@ tabsEl.addEventListener('click',e=>{const b=e.target.closest('[data-m]'); if(b) 
    owner as "the Golf" for an hour because a filename said so, and the
    rule that came out of it is that nothing names a car except the car.
    Both the header and the Strip caption read from VEHICLE. */
+{ const pick=document.getElementById('carPick');
+  if (pick){
+    pick.innerHTML = Object.entries(FLEET).map(([id,v])=>
+      `<button type="button" data-car="${id}" aria-pressed="${id===CAR_ID}">${v.short}</button>`).join('');
+    pick.addEventListener('click', e => {
+      const b = e.target.closest('[data-car]'); if (!b || b.dataset.car===CAR_ID) return;
+      try { localStorage.setItem('stripbay.car', b.dataset.car); } catch(err){}
+      /* a ?car= in the URL would override the new choice on reload, so
+         drop it; otherwise a plain reload is enough */
+      const u = new URL(location.href);
+      if (u.searchParams.has('car')){ u.searchParams.set('car', b.dataset.car); location.href = u.toString(); }
+      else location.reload();
+    });
+  }
+}
 { const sub=document.getElementById('brandSub');
   if (sub) sub.textContent = VEHICLE.name + ' \u00b7 teardown trainer';
   document.title = 'Strip Bay \u2014 ' + VEHICLE.name; }
