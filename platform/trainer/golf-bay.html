@@ -211,6 +211,15 @@ aside > *{min-width:0;max-width:100%}
 .btn.primary:hover{filter:brightness(1.08)}
 .btn:disabled{opacity:.42;cursor:not-allowed}
 .btn.ghost{background:transparent}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:6px}
+.swatch{display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 4px;
+  border-radius:8px;border:1px solid var(--line);background:var(--panel);font-size:11px;
+  color:var(--ink2)}
+.swatch i{width:24px;height:24px;border-radius:50%;display:block;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.25)}
+.swatch:hover{border-color:var(--ink3)}
+.swatch[aria-pressed="true"]{border-color:var(--pri);color:var(--ink);
+  box-shadow:0 0 0 1px var(--pri)}
 dl.spec{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:8px 0 0;font-size:12.5px}
 dl.spec dt{color:var(--ink3)}
 dl.spec dd{margin:0;text-align:right;font-family:"Roboto Mono",monospace;font-variant-numeric:tabular-nums}
@@ -794,6 +803,16 @@ function buildCar(root){
        `CarPaint` across dozens of parts, so without this a highlight or
        an x-ray on the body would silently change every door too. */
     if (o.material) o.material = o.material.clone();
+    /* PAINT is found by the material's NAME — `CarPaint` on the Golf,
+       `xc90_paint`, plain `paint` on the A6. Checked against all three files
+       before relying on it; a name is only a candidate, which is why the
+       respray was then rendered on each car and the glass and tyres looked at
+       (a material called paint is not always the body — see CLAUDE.md). */
+    if (o.material && /paint/i.test(o.material.name||'')){
+      o.userData.paint0 = {color:o.material.color.clone(), map:o.material.map||null,
+                           rough:o.material.roughness};
+      PAINTED.push(o);
+    }
     o.userData.partId = VEHICLE.conv === 4
       ? (classify4(o.name) || classify4(o.parent?.name||'') || 'body')
       : classify(o.name || o.parent?.name || '');
@@ -918,6 +937,35 @@ function setDoor(id,open){
   const p=parts[id]; if(!p) return;
   S.doors[id]=open?1:0;
   tween(p.group.rotation,'y', open ? (id.endsWith('l')?-1:1)*DOOR_OPEN : 0, 640);
+}
+/* ── RESPRAY ─────────────────────────────────────────────────────────
+   The colours are plain names, not manufacturer paint names: nothing here
+   knows which OEM colour a car was offered in, and claiming one would be a
+   guess dressed as data. `null` puts back exactly what the file shipped. */
+const PAINTED = [];
+const PAINTS = [['Original',null],['Black',0x0b0c0e],['White',0xeef0f2],
+  ['Silver',0xa9aeb4],['Grey',0x4a4f56],['Red',0xa3141c],['Blue',0x163f8c],
+  ['Green',0x1f4d36],['Yellow',0xe0b31a]];
+S.paint = null;
+function setPaint(hex){
+  S.paint = hex;
+  for (const m of PAINTED){
+    const mat=m.material, o=m.userData.paint0; if(!mat||!o) continue;
+    if (hex===null){ mat.color.copy(o.color); mat.map=o.map; mat.roughness=o.rough; }
+    /* the A6 carries its body colour in a flat texture, which a tint would
+       only MULTIPLY — a light texture times blue is blue, a red one times
+       blue is black. Dropping the map makes the new colour the colour.
+       ROUGHNESS FLOOR: the XC90 ships its paint at roughness 0, a perfect
+       mirror. A respray gets a real paint finish (0.22, inside the 0.18-0.30
+       band the production brief sets); Original is left alone.
+       NOT A FIX FOR THE XC90's PALE PATCHES on the bonnet and front wing. I
+       expected the mirror finish to be their cause; the re-render at 0.22
+       kept them, and they stay white whatever colour is chosen — so they
+       are some other surface over the paint, present in Original too, and
+       still unexplained. */
+    else { mat.map=null; mat.color.setHex(hex); mat.roughness=Math.max(o.rough??0.22,0.22); }
+    mat.needsUpdate=true;
+  }
 }
 function setBonnet(open){
   const p=parts.panel_bonnet; if(!p) return; S.bonnet=open?1:0;
@@ -4315,6 +4363,13 @@ function pStrip(){
     <div class="eyebrow" style="margin-top:12px">Wheels off</div>
     <div class="row" style="margin-top:8px">
       ${['fl','fr','rl','rr'].map(x=>`<button class="btn ${S.wheelOff['wheel_'+x]?'on':''}" data-x="wheel:${x}">${x.toUpperCase()}</button>`).join('')}</div>
+    <div class="eyebrow" style="margin-top:12px">Paint</div>
+    ${PAINTED.length ? `<div class="swatches" style="margin-top:8px">
+      ${PAINTS.map(([n,h],i)=>`<button class="swatch" data-x="paint:${i}" aria-pressed="${S.paint===h}"
+        title="${n}" aria-label="${n}"><i style="background:${h===null
+          ? 'conic-gradient(from 45deg,#a3141c,#163f8c,#e0b31a,#a3141c)'
+          : '#'+h.toString(16).padStart(6,'0')}"></i><span>${n}</span></button>`).join('')}
+    </div>` : `<p class="hint" style="margin-top:6px">No paint material found in this file.</p>`}
   </div>
   ${p?`<div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
@@ -5378,6 +5433,7 @@ function handle(x,el){
   if(k==='door') setDoor('door_'+v,!S.doors['door_'+v]);
   if(k==='tail') setTailgate(!S.tailgate);
   if(k==='bonnet') setBonnet(!S.bonnet);
+  if(k==='paint') setPaint(PAINTS[+v][1]);
   if(k==='wheel') setWheelOff('wheel_'+v,!S.wheelOff['wheel_'+v]);
   if(k==='next'){BJ.i=Math.min(JOB.length-1,BJ.i+1); JOB[BJ.i].a?.();}
   if(k==='prev'){BJ.i=Math.max(0,BJ.i-1); JOB[BJ.i].a?.();}
@@ -5645,6 +5701,10 @@ window.__act = (what,arg) => {
   if (what==='bonnet'){ const p=parts.panel_bonnet;
     if (p) tween(p.group.rotation,'x', p.group.rotation.x < -0.1 ? 0 : -BONNET_OPEN, 620); }
   return true; };
+window.__paint = () => ({meshes:PAINTED.length, paint:S.paint,
+  names:[...new Set(PAINTED.map(m=>m.material.name))],
+  parts:[...new Set(PAINTED.map(m=>m.userData.partId))].sort()});
+window.__setPaint = h => { setPaint(h); drawPanel(); };
 window.__vehicle = () => ({id:CAR_ID, name:VEHICLE.name, conv:VEHICLE.conv,
   url:VEHICLE.url, prefix:C3_PREFIX, hinges:Object.keys(VEHICLE.hinge)});
 window.__groups = () => Object.fromEntries(Object.entries(parts).map(([k,v])=>
