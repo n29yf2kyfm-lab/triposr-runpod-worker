@@ -445,7 +445,37 @@ const FLEET = {
       panel_bonnet:{x:0,y:1.1344,z:0.8953},
       tailgate:{x:0,y:1.6310,z:-2.1988}},
     note:'Real geometry from volvo-xc90-v1 · hinges and wheel corners '
-        +'DERIVED from the file, not hand-measured'
+        +'DERIVED from the file, not hand-measured',
+    manual:[
+      `<b>The four wheels are placed, not named.</b> This file instances one wheel four times, so nothing in the data says which corner is which. They are assigned by where they sit. That is worth knowing before you trust "front left" on any car from this family.`,
+      `<b>It carries an engine, a driveline and a suspension</b> — engine block, intake, turbo, intercooler, radiator, gearbox, driveshafts, arms and springs are real geometry here, where the Golf has none of it and the app builds those bays from scratch. The constructed bays still run on their own models, not on this car.`,
+      `<b>What is missing:</b> no brake discs or calipers are modelled, so the Brake job cannot run on it, and the Golf-specific bays (door internals, starter, mirror and lock) are built around the Golf's own geometry.`]
+  },
+  a6: {
+    name:'Audi A6 (C8)', short:'A6',
+    /* CONVENTION 4 — the file was rebuilt offline so the app needs no rules
+       for it. The catalogue asset (audi-a6-c8-ad1-v1) is a game-vehicle rig:
+       every part is a mesh skinned 100% to one bone. bake_rig.py applied the
+       skin, rig_canon.py turned the frame to the app's (nose +Z, left +X,
+       ground 0), lifted the bonnet and boot lid out of the paint mesh where
+       they sat as loose islands, and named every node SB_<partId>__<n>. */
+    url:'a6.glb.wasm', conv:4,
+    /* printed by rig_canon.py from the parts themselves. Cross-check: the
+       door x of 0.914 agrees with the game rig's own door-bone position,
+       0.911, which is where the game swings the door. */
+    hinge:{
+      door_fl:{x: 0.914,y:0.832,z: 1.0676}, door_fr:{x:-0.9132,y:0.832,z: 1.0676},
+      door_rl:{x: 0.9113,y:0.8446,z:-0.0333}, door_rr:{x:-0.9104,y:0.8446,z:-0.0333},
+      panel_bonnet:{x:0,y:0.9855,z:1.0769},
+      tailgate:{x:0,y:1.1104,z:-1.7191}},
+    note:'Real geometry from audi-a6-c8-ad1-v1 · bonnet and boot lid lifted from the paint '
+        +'mesh · hinges DERIVED from the file',
+    manual:[
+      `<b>This is a game-vehicle model, rebuilt for the bay.</b> In the original file every part is driven by a bone, the way a driving game moves it. That was converted offline into one plain part per bone, so nothing was remodelled — the doors, the glass in them, the handles and the door lamps are exactly the file's own pieces.`,
+      `<b>The bonnet and the boot lid were loose pieces inside the paint.</b> They had no bone of their own but were not welded to the body either, so they were lifted out whole — 654 and 1,004 faces — rather than cut along a guessed line. The Tailgate button opens the boot lid on this car.`,
+      `<b>There is no engine in this file.</b> Open the bonnet and the bay is empty. The engine, starter and alternator bays are built in code around the Golf and do not run on this car.`,
+      `<b>The brake calipers are modelled</b> — take a wheel off and the red caliper is behind it (the game rig calls these "hubs"). There is no separate disc, though, so the Brake job stays Golf-only. The seats are part of the cabin mesh here rather than parts of their own.`,
+      `<b>Left-hand drive</b>, like the Golf — the steering wheel is on the car's left. A UK A6 has it on the right.`]
   }
 };
 /* ?car=xc90 — the Golf stays the default because it is the tested one and
@@ -733,8 +763,13 @@ loader.load(VEHICLE.url, g => buildCar(g.scene),
    instead of 24, so every door/wheel/brake action hit `if(!p) return` and did
    nothing at all — with no error anywhere. Match against the raw name AND both
    de-prefixed forms, rules in priority order. */
+/* CONVENTION 4: the node name IS the part id — `SB_door_fl__3`, written by
+   rig_canon.py. three.js may append `_1`, `_2` to the meshes of a
+   multi-material node, so match the prefix and ignore the tail. */
+const classify4 = n => { const m=/^SB_([a-z_]+?)__\d/.exec(n); return m ? m[1] : null; };
 const classify = n => {
   if (VEHICLE.conv === 3) return classify3(n);
+  if (VEHICLE.conv === 4) return classify4(n) || 'body';
   const cands = [n];
   if (n.startsWith('G:')) cands.push(n.slice(2));
   if (/^G[A-Z]/.test(n)) cands.push(n.slice(1));
@@ -759,7 +794,9 @@ function buildCar(root){
        `CarPaint` across dozens of parts, so without this a highlight or
        an x-ray on the body would silently change every door too. */
     if (o.material) o.material = o.material.clone();
-    o.userData.partId = classify(o.name || o.parent?.name || '');
+    o.userData.partId = VEHICLE.conv === 4
+      ? (classify4(o.name) || classify4(o.parent?.name||'') || 'body')
+      : classify(o.name || o.parent?.name || '');
     /* shadows, and a little more environment in the paint. The GLB's own
        material values are untouched apart from envMapIntensity, which is a
        RENDER setting rather than an asset property — it controls how much
@@ -881,6 +918,10 @@ function setDoor(id,open){
   const p=parts[id]; if(!p) return;
   S.doors[id]=open?1:0;
   tween(p.group.rotation,'y', open ? (id.endsWith('l')?-1:1)*DOOR_OPEN : 0, 640);
+}
+function setBonnet(open){
+  const p=parts.panel_bonnet; if(!p) return; S.bonnet=open?1:0;
+  tween(p.group.rotation,'x', open?-BONNET_OPEN:0, 700);
 }
 function setTailgate(open){
   const p=parts.tailgate; if(!p) return; S.tailgate=open?1:0;
@@ -3959,6 +4000,7 @@ function restoreJobPanels(keep){
     const pb=parts.panel_bonnet;
     if (pb){ tween(pb.group.rotation,'x',0,420);
       tweenV(pb.group.position,pb.home.clone(),420); }
+    S.bonnet=0;   /* the Strip button must not claim it is still up */
   }
   if (!owns('mirror_fl')){
     const pm=parts.mirror_fl;
@@ -4199,6 +4241,7 @@ function act(a){
     ['door_fl','door_fr','door_rl','door_rr'].forEach(id=>setDoor(id,o)); setTailgate(o);}
   if(a==='reset'){setXray(false);setExplode(0);
     ['door_fl','door_fr','door_rl','door_rr'].forEach(id=>setDoor(id,false)); setTailgate(false);
+    setBonnet(false);
     Object.keys(S.wheelOff).forEach(id=>setWheelOff(id,false)); iso(null); selected=null;
     flyTo(new THREE.Vector3(0,.72,0),new THREE.Vector3(5.2,2.3,6.4));}
   if(a==='erun') ENG.running=!ENG.running;
@@ -4248,8 +4291,14 @@ const man = (title, items, open) => `
       <div class="note info" style="margin-top:11px">${STANDING}</div></div>
   </details>`;
 
+/* The Golf's PART prose is about the Golf. On any other car show the part's
+   name and group only, so no Golf fact is presented as this car's. */
+const partInfo = id => { const p=PART[id]; if(!p) return null;
+  return CAR_ID==='golf' ? p
+    : {l:p.l, g:p.g, n:`Real geometry from this car's file, moved as one part. `
+        +`The detailed notes in this bay were written for the Golf and are not repeated here.`}; };
 function pStrip(){
-  const p=selected&&PART[selected], pt=selected&&parts[selected];
+  const p=selected&&partInfo(selected), pt=selected&&parts[selected];
   const d=pt?pt.box.getSize(new THREE.Vector3()):null;
   return `
   <div><div class="eyebrow">Bay 1 · Strip</div>
@@ -4261,6 +4310,7 @@ function pStrip(){
     <div class="eyebrow">Open up</div>
     <div class="row" style="margin-top:8px">
       ${['fl','fr','rl','rr'].map(x=>`<button class="btn ${S.doors['door_'+x]?'on':''}" data-x="door:${x}">${x.toUpperCase()} door</button>`).join('')}
+      <button class="btn ${S.bonnet?'on':''}" data-x="bonnet" ${parts.panel_bonnet?'':'disabled'}>Bonnet</button>
       <button class="btn ${S.tailgate?'on':''}" data-x="tail">Tailgate</button></div>
     <div class="eyebrow" style="margin-top:12px">Wheels off</div>
     <div class="row" style="margin-top:8px">
@@ -4293,10 +4343,8 @@ function pStrip(){
     '<b>This car is left-hand drive.</b> Steering wheel measured at 350 mm to the car’s left of centre. A UK car is right-hand drive — not a mirror image, since the rest of the car is not simply flipped, but the driving controls are on the other side. Worth saying out loud when you teach UK trainees on a left-hand-drive model.'
     ]),
     ...(CAR_ID==='golf' ? [] : [
-      `<b>This is ${VEHICLE.name}, loaded as a second vehicle.</b> Its parts were not named the way the Golf's are, so the app reads a different naming convention for it, and its hinge lines were DERIVED from the file rather than hand-measured — a door swings on its own forward edge, the bonnet on its rear edge, the tailgate on its top edge.`,
-      `<b>The four wheels are placed, not named.</b> This file instances one wheel four times, so nothing in the data says which corner is which. They are assigned by where they sit. That is worth knowing before you trust "front left" on any car from this family.`,
-      `<b>It carries an engine, a driveline and a suspension</b> — engine block, intake, turbo, intercooler, radiator, gearbox, driveshafts, arms and springs are real geometry here, where the Golf has none of it and the app builds those bays from scratch. The constructed bays still run on their own models, not on this car.`,
-      `<b>What is missing:</b> no brake discs or calipers are modelled, so the Brake job cannot run on it, and the Golf-specific bays (door internals, starter, mirror and lock) are built around the Golf's own geometry.`
+      `<b>This is ${VEHICLE.name}, loaded as another vehicle.</b> Its parts were not named the way the Golf's are, and its hinge lines were DERIVED from the file rather than hand-measured — a door swings on its own forward edge, the bonnet on its rear edge, the tailgate on its hinge edge.`,
+      ...(VEHICLE.manual||[])
     ])
   ], true)}`;
 }
@@ -4441,7 +4489,7 @@ function pInterior(){
     <button class="choice ${ok?'right':''}" data-x="in:${act}" ${ok?'disabled':''}>
       <b>${k}</b> ${label}${ok?' ✓':''}
       ${hint?`<div class="hint" style="margin-top:3px">${hint}</div>`:''}</button>`;
-  const p=selected&&PART[selected], pt=selected&&parts[selected];
+  const p=selected&&partInfo(selected), pt=selected&&parts[selected];
   return `
   <div><div class="eyebrow">Bay 9 · Inside the car</div>
     <h2 style="font-size:19px;margin-top:2px">Interior</h2>
@@ -5329,6 +5377,7 @@ function handle(x,el){
   if(k==='dpjob'){ DP.job=v; setMode('dparts'); return; }
   if(k==='door') setDoor('door_'+v,!S.doors['door_'+v]);
   if(k==='tail') setTailgate(!S.tailgate);
+  if(k==='bonnet') setBonnet(!S.bonnet);
   if(k==='wheel') setWheelOff('wheel_'+v,!S.wheelOff['wheel_'+v]);
   if(k==='next'){BJ.i=Math.min(JOB.length-1,BJ.i+1); JOB[BJ.i].a?.();}
   if(k==='prev'){BJ.i=Math.max(0,BJ.i-1); JOB[BJ.i].a?.();}
