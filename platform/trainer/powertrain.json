@@ -214,5 +214,14 @@
   "rear": "multilink",
   "turbo": true,
   "say": "transverse turbo four, front-wheel drive"
+ },
+ "audi-rs6-v1": {
+  "engine": "V8",
+  "mount": "long",
+  "drive": "AWD",
+  "front": "wishbone",
+  "rear": "multilink",
+  "turbo": true,
+  "say": "longitudinal twin-turbo V8 with quattro all-wheel drive (source titled '2020 Audi RS6 Avant'; the file carries its own V8)"
  }
 }

@@ -5388,3 +5388,21 @@ back in `/root/.alam3d_env` (absent since 2026-09-19). Also: gltf-transform
 picks its output FORMAT from the extension, so writing straight to
 `.glb.wasm` produced a JSON .gltf with sidecar files. Write `.glb`, then
 rename.
+
+**Doors as loose pieces, and the rescale that rescued two cars (2026-09-23,
+Audi RS6).** `audi-rs6-v1` ("2020 Audi RS6 Avant"; nothing in the catalogue is
+a 2026) is a Forza-family rip with the body grouped by MATERIAL: the whole
+paint is one mesh, and each side's two doors are ONE loose piece inside it.
+The outer skin runs continuously across the shut line (the edge count never
+drops below 84), so a connectivity split sees nothing. The groove does leave
+sharp, near-vertical edges: their length summed along the car gave 3.70 at 49%
+of the piece against 0.35 anywhere else. `core._find_doors` +
+`_shut_line` + `_adopt_into_doors` do this; calibrated on n=1.
+Also measured: a rejected wheel piece is not necessarily off the wheel. The
+RS6's rear CALIPERS sat outside the wheel hierarchy and rode away on the rear
+doors. They are now their own `brakes` class, which stays on the hub.
+Rescaling cars outside 2.5-7.5 long by wheel size (0.68 m) also turned the
+previously refused Volvo V60 into a full rig. Regression over 26 cars: the only
+behaviour changes are the ones intended, and one real regression (the 308's
+bonnet lift, when the closed-shell test ran first) was caught and fixed.
+

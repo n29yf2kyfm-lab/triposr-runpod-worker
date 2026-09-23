@@ -75,6 +75,10 @@ RULES = [
     # variant left behind z-fights under the one that lifts (BMW M6)
     ('bonnet',   r'(hood|bonnet)(?!_?(piston|strut|latch|ornament|release|prop|scoop_body|vent_body|ie))'),
     ('tailgate', r'(^|[^a-z])(trunk|tailgate|hatch|bootlid|boot)(?!_?(divider|floor|panel|carpet|cam|liner|light_body|piston|strut|latch))'),
+    # BEFORE wheel: a caliper stays bolted to the hub when the wheel comes
+    # off, so it is neither wheel nor door. The RS6's rear calipers sit outside
+    # the wheel hierarchy and were carried off by the rear DOORS.
+    ('brakes',   r'call?iper|brake_?disc|(^|[^a-z])rotor([^a-z]|$)'),
     ('wheel',    r'(^|[^a-z])(wheel|tyre|tire|rim)(?!_?(arch|house|well|cover|liner|trim_body|lip_body))'
                  # abbreviated corners: `wfl_0`, `wrr_3` (Mercedes Vito), `whl_fl`
                  r'|(^|[^a-z])(w[fr][lr]|whl)([^a-z]|$)'),
@@ -95,6 +99,8 @@ DROP = re.compile(r'(_dam\b|_dam[_.\d]|_vlo\b|_vlo[_.]|\blod[1-9]\b|_lod[1-9]|sh
 # 0.7 m BELOW its own tyres that read as part of the car
 PRIM = re.compile(r'^(icosphere|uv ?sphere|sphere|cube|plane|cylinder|cone|torus)(\.\d+)?$', re.I)
 SLIDE_NAME = re.compile(r'slid', re.I)
+FRONT_RX = re.compile(r'(^|[^a-z])front([^a-z]|$)', re.I)
+REAR_RX = re.compile(r'(^|[^a-z])(rear|back)([^a-z]|$)', re.I)
 
 
 def _chain(o):
@@ -223,12 +229,20 @@ def convert(imported, rep, override=None):
     tl = [o for o in objs if K[o] == 'lamps_rear']
     if hl and tl:
         cues['head_vs_tail_lamps'] = 1 if centre(hl).z > centre(tl).z else -1
+    # the WHEELS' own names, when they say front/rear ("3DWheel Front L",
+    # "Calliper Rear R" on the Forza-family RS6). Trusted for which AXLE is
+    # the front, never for which corner — corners still come from position.
+    wf = [o for o in wheels if FRONT_RX.search(o['sb_chain']) and not REAR_RX.search(o['sb_chain'])]
+    wr = [o for o in wheels if REAR_RX.search(o['sb_chain']) and not FRONT_RX.search(o['sb_chain'])]
+    if wf and wr:
+        cues['wheel_names'] = 1 if centre(wf).z > centre(wr).z else -1
     if not cues:
-        raise Refused('cannot decide the nose: no bonnet/boot pair, no lamps and no steering wheel')
+        raise Refused('cannot decide the nose: no bonnet/boot pair, no lamps, no front/rear wheel names '
+                      'and no steering wheel')
     # PRIORITY, not a vote. The steering wheel is the WEAKEST cue: it sits
     # BEHIND the midpoint on a long-bonnet coupe (the GR Supra). The two ends
     # of the car outrank it, and must not contradict each other.
-    ends = [cues[k] for k in ('bonnet_vs_boot', 'head_vs_tail_lamps') if k in cues]
+    ends = [cues[k] for k in ('bonnet_vs_boot', 'head_vs_tail_lamps', 'wheel_names') if k in cues]
     if len(set(ends)) > 1:
         raise Refused(f'the two end cues disagree: {cues}')
     nose = ends[0] if ends else cues['steering']
@@ -239,6 +253,24 @@ def convert(imported, rep, override=None):
         for o in objs:
             o.matrix_world = R180 @ o.matrix_world
         bpy.context.view_layer.update()
+    # SCALE. A quarter of the catalogue is modelled at ~0.05 units long, and
+    # every rule below (wheel shape, door spacing, the app's 0.85 m wheel pull)
+    # is in metres. A car outside 2.5-7.5 long is rescaled so its wheels are
+    # 0.68 m tall — a typical road wheel. That puts it within a few per cent of
+    # real size; it does NOT claim the car's real dimensions.
+    lo, hi = bbox([v for o in objs for v in wv(o)])
+    if not 2.5 <= hi.z - lo.z <= 7.5:
+        wvs = [v for o in wheels for v in wv(o)]
+        wh = max(v.y for v in wvs) - min(v.y for v in wvs)
+        if wh <= 0:
+            raise Refused('cannot size the car: the wheels have no height')
+        f = 0.68 / wh
+        S = Matrix.Scale(f, 4)
+        for o in objs:
+            o.matrix_world = S @ o.matrix_world
+        bpy.context.view_layer.update()
+        rep['rescaled'] = {'factor': round(f, 4), 'length_before': round(hi.z - lo.z, 4),
+                           'why': 'not metre scale; wheels set to 0.68 m tall (typical, not measured)'}
     ground = min(v.y for o in wheels for v in wv(o))
     T = Matrix.Translation((0, 0, -ground))
     for o in objs:
@@ -257,6 +289,10 @@ def convert(imported, rep, override=None):
     def put(pid, o):
         parts.setdefault(pid, []).append(o)
 
+    if not any(K[o] == 'door' for o in objs):
+        for o in _find_doors(objs, K, wheels, lo, hi, rep):
+            objs.append(o)
+            K[o] = 'door'
     doorkey = {}
     for o in objs:
         if K[o] != 'door':
@@ -320,12 +356,34 @@ def convert(imported, rep, override=None):
         inside = any(all(pb0[i] - .03 <= c[i] <= pb1[i] + .03 for i in range(3))
                      and (b1 - b0).length < (pb1 - pb0).length for pb0, pb1 in boxes)
         (prim if inside else rest).append(o)
-    rep['wheel_rejects'] = [o['sb_chain'][:50] for o in rest][:8]
-    for o in rest:
-        K[o] = 'body'
     for o in prim:
         c = centre([o])
         put('wheel_' + ('f' if c.z > mid.z else 'r') + ('l' if c.x > 0 else 'r'), o)
+    # A wheel-NAMED piece that is not wheel-shaped on its own (a caliper, one
+    # rim-lip fragment) still belongs to the wheel it sits on. On the RS6 the
+    # red caliper pieces sat right at the wheel's edge, fell back to "body",
+    # and were then carried off by the rear DOOR. Rule: within 1.15 wheel radii
+    # of a corner's centre (side view) and on its side of the car -> that wheel.
+    hubs = {}
+    for k in [k for k in parts if k.startswith('wheel_')]:
+        b0, b1 = bbox([v for o in parts[k] for v in wv(o)])
+        hubs[k] = ((b0 + b1) / 2, (b1.y - b0.y) / 2)
+    joined = 0
+    for o in list(rest):
+        c = centre([o])
+        best = None
+        for k, (hc, R) in hubs.items():
+            d = ((c.y - hc.y) ** 2 + (c.z - hc.z) ** 2) ** .5
+            if d < 1.15 * R and abs(c.x - hc.x) < R and (best is None or d < best[1]):
+                best = (k, d)
+        if best:
+            put(best[0], o)
+            rest.remove(o)
+            joined += 1
+    rep['wheel_pieces_joined'] = joined
+    rep['wheel_rejects'] = [o['sb_chain'][:50] for o in rest][:8]
+    for o in rest:
+        K[o] = 'body'
     got = sorted(k for k in parts if k.startswith('wheel_'))
     if got != ['wheel_fl', 'wheel_fr', 'wheel_rl', 'wheel_rr']:
         raise Refused(f'wheels do not fill four corners ({got}) — often ONE wheel the game copies at run time')
@@ -346,6 +404,9 @@ def convert(imported, rep, override=None):
             if other in parts:
                 parts[other] = keep
 
+    if rep.get('door_finder', {}).get('doors'):
+        _adopt_into_doors(parts, rep)
+
     # ── 4. TYRES MUST READ AS BLACK RUBBER ─────────────────────────────
     rep['tyre_faces_to_rubber'] = _rubber_tyres(parts)
 
@@ -357,7 +418,7 @@ def convert(imported, rep, override=None):
     rep['missing'] = [p for p in _wanted(parts) if not parts.get(p)]
 
     # ── 7. HINGES, and which doors SLIDE ───────────────────────────────
-    hinge = _hinges(parts)
+    hinge = _hinges(parts, bool(rep.get('door_finder', {}).get('doors')))
     rep['hinge'] = hinge
     rep['motion'] = _motion(parts, hi.y - lo.y, rep, override)
 
@@ -501,9 +562,15 @@ def _islands(o):
                         stk.append(h)
         vs = [G(mw @ v.co) for g in comp for v in g.verts]
         area = sum(g.calc_area() for g in comp)
-        up = sum(G(n3 @ g.normal).y * g.calc_area() for g in comp) / max(area, 1e-9)
-        fwd = sum(G(n3 @ g.normal).z * g.calc_area() for g in comp) / max(area, 1e-9)
-        comps.append((bbox(vs), up, [g[tag] for g in comp], fwd))
+        ns = [(G(n3 @ g.normal), g.calc_area()) for g in comp]
+        up = sum(n.y * a for n, a in ns) / max(area, 1e-9)
+        fwd = sum(n.z * a for n, a in ns) / max(area, 1e-9)
+        # a panel modelled with THICKNESS is a closed shell whose top and
+        # bottom normals cancel (the RS6's bonnet reads mean-up 0.0), so also
+        # keep the share of area that is horizontal / faces along the car
+        upf = sum(a for n, a in ns if n.length and abs(n.normalized().y) > .55) / max(area, 1e-9)
+        endf = sum(a for n, a in ns if n.length and abs(n.normalized().z) > .55) / max(area, 1e-9)
+        comps.append((bbox(vs), up, [g[tag] for g in comp], fwd, area, upf, endf))
     bm.free()
     return comps
 
@@ -543,6 +610,193 @@ def _wanted(parts):
     return [p for p in ('panel_bonnet', 'tailgate') if not (p == 'tailgate' and barn)]
 
 
+def _lift_many(o, groups):
+    """Separate several face groups (ORIGINAL indices) off `o`, one new object
+    per group. Every group is stamped before the first separation, because a
+    separation renumbers the faces left behind."""
+    att = o.data.attributes.new('sb_lift', 'INT', 'FACE')
+    for gi, fidx in enumerate(groups, 1):
+        for i in fidx:
+            att.data[i].value = gi
+    out = []
+    for gi in range(1, len(groups) + 1):
+        before = set(bpy.data.objects)
+        _select_only([o])
+        bpy.ops.object.mode_set(mode='EDIT')
+        bpy.ops.mesh.select_mode(type='FACE')
+        bpy.ops.mesh.select_all(action='DESELECT')
+        ebm = bmesh.from_edit_mesh(o.data)
+        lay = ebm.faces.layers.int['sb_lift']
+        for f in ebm.faces:
+            f.select_set(f[lay] == gi)
+        ebm.select_flush_mode()
+        bmesh.update_edit_mesh(o.data)
+        bpy.ops.mesh.separate(type='SELECTED')
+        bpy.ops.object.mode_set(mode='OBJECT')
+        out.append([x for x in bpy.data.objects if x not in before][0])
+    for ob in [o] + out:
+        if 'sb_lift' in ob.data.attributes:
+            ob.data.attributes.remove(ob.data.attributes['sb_lift'])
+    return out
+
+
+def _shut_line(o, fidx, z0, z1):
+    """Where a piece holding BOTH doors of one side splits.
+
+    Connectivity cannot say: on the RS6 the two doors' outer skin is one
+    continuous surface (edge count across the flank never drops below 84 of a
+    median 90), so the shut line is a GROOVE, not a gap. What a groove leaves
+    is a bunch of SHARP (>30 deg), near-VERTICAL edges. Sum their length along
+    the car in 60 bins, search the middle 25-75% of the piece, and take the
+    peak — only when it clearly stands out (>= 3x everything else searched).
+    RS6: one peak of 3.70 at 49% of the piece, zero elsewhere in range."""
+    bm = bmesh.new()
+    bm.from_mesh(o.data)
+    bm.faces.ensure_lookup_table()
+    keep = set(fidx)
+    for f in [f for f in bm.faces if f.index not in keep]:
+        f.tag = True
+    bmesh.ops.delete(bm, geom=[f for f in bm.faces if f.tag], context='FACES')
+    bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-6)
+    mw = o.matrix_world
+    NB = 60
+    hist = [0.0] * NB
+    for e in bm.edges:
+        if len(e.link_faces) != 2 or e.calc_face_angle(0) < math.radians(30):
+            continue
+        a, b = G(mw @ e.verts[0].co), G(mw @ e.verts[1].co)
+        d = b - a
+        if d.length == 0 or abs(d.y) / d.length < .8:
+            continue
+        k = min(NB - 1, max(0, int(((a.z + b.z) / 2 - z0) / (z1 - z0) * NB)))
+        hist[k] += d.length
+    bm.free()
+    lo_k, hi_k = int(.25 * NB), int(.75 * NB)
+    k = max(range(lo_k, hi_k), key=lambda i: hist[i])
+    rest = [hist[i] for i in range(lo_k, hi_k) if abs(i - k) > 3]
+    ref = max(rest) if rest else 0
+    prof = {'peak': round(hist[k], 3), 'at_frac': round((k + .5) / NB, 3), 'next_best': round(ref, 3)}
+    if hist[k] > 0 and hist[k] >= 3 * ref:
+        return z0 + (k + .5) / NB * (z1 - z0), prof
+    return None, prof
+
+
+def _find_doors(objs, K, wheels, lo, hi, rep):
+    """STEP-3 SEED: doors that are LOOSE PIECES inside a body mesh rather than
+    named objects. Game rips often keep each panel as its own island inside
+    one paint mesh (the Forza-family Audi RS6: the whole paint is one mesh, and
+    each side's two doors are one loose piece). A door island here is: wholly
+    on one flank, at least 45% of the car's height from low down, 15-60% of its
+    length, centred between the axles, with a mirror-image partner on the other
+    side. A piece long enough to be two doors is split at its shut line.
+    Calibrated on ONE car (the RS6); refuses rather than guesses when the two
+    sides disagree."""
+    L, W, H = hi.z - lo.z, hi.x - lo.x, hi.y - lo.y
+    cx = (lo.x + hi.x) / 2
+    wz = [centre([o]).z for o in wheels]
+    zf, zr = max(wz), min(wz)
+    found = {'l': [], 'r': []}
+    for o in objs:
+        if K[o] != 'body' or len(o.data.polygons) < 50:
+            continue
+        for c in _islands(o):
+            b0, b1 = c[0]
+            side = 'l' if b0.x - cx > .25 * W else 'r' if cx - b1.x > .25 * W else None
+            if not side or not (b1.y - b0.y > .45 * H and b0.y < lo.y + .35 * H):
+                continue
+            if not (.15 * L < b1.z - b0.z < .6 * L and zr < (b0.z + b1.z) / 2 < zf):
+                continue
+            found[side].append((c[4], o, c[2], b0, b1))
+    info = rep.setdefault('door_finder', {})
+    if not found['l'] or not found['r']:
+        info['result'] = f"no door-shaped piece on {'both sides' if not (found['l'] or found['r']) else 'one side'}"
+        return []
+    for side in found:
+        found[side].sort(key=lambda t: -t[0])
+        big = found[side][0][0]
+        found[side] = [t for t in found[side] if t[0] > .3 * big][:2]
+    (l0, l1), (r0, r1) = [(found[sd][0][3], found[sd][0][4]) for sd in ('l', 'r')]
+    if abs(l0.z - r0.z) > .05 * L or abs(l1.z - r1.z) > .05 * L:
+        info['result'] = 'left and right door pieces do not mirror each other — not guessing'
+        return []
+    groups = {}                                   # object -> list of (name, fidx)
+    for side in ('l', 'r'):
+        lst = found[side]
+        if len(lst) == 1 and lst[0][4].z - lst[0][3].z > .3 * L:
+            area, o, fidx, b0, b1 = lst[0]
+            cut, prof = _shut_line(o, fidx, b0.z, b1.z)
+            info[f'shut_line_{side}'] = prof
+            if cut is not None:
+                bm = bmesh.new()
+                bm.from_mesh(o.data)
+                bm.faces.ensure_lookup_table()
+                mw = o.matrix_world
+                fr = [i for i in fidx if G(mw @ bm.faces[i].calc_center_median()).z > cut]
+                rr = [i for i in fidx if i not in set(fr)]
+                bm.free()
+                info[f'split_{side}'] = {'cut_z': round(cut, 4), 'cut_frac': round((cut - lo.z) / L, 3),
+                                         'front': len(fr), 'rear': len(rr)}
+                groups.setdefault(o, []).extend([(f'door_island_{side}f', fr), (f'door_island_{side}r', rr)])
+                continue
+        for k, (area, o, fidx, b0, b1) in enumerate(lst):
+            groups.setdefault(o, []).append((f'door_island_{side}{k}', fidx))
+    out = []
+    for o, gl in groups.items():
+        for (name, _), new in zip(gl, _lift_many(o, [g for _, g in gl])):
+            new.name = name
+            new['sb_chain'] = name
+            out.append(new)
+    info['doors'] = [o.name for o in out]
+    info['result'] = f'{len(out)} door piece(s) lifted from body islands'
+    return out
+
+
+def _adopt_into_doors(parts, rep):
+    """For doors found as islands: the glass, handles, trim and door card are
+    loose pieces of OTHER meshes (all windows are one Window mesh on the RS6).
+    Any island lying wholly inside a side's door box travels with the door.
+    Where that side's doors were split at a shut line, the same cut divides
+    the adopted pieces too — a chrome strip running along both windows goes
+    half with each door rather than staying behind floating."""
+    info = rep.setdefault('door_finder', {})
+    moved = 0
+    for side in ('l', 'r'):
+        dps = [p for p in ('door_f' + side, 'door_r' + side) if p in parts]
+        if not dps:
+            continue
+        boxes = {p: bbox([v for o in parts[p] for v in wv(o)]) for p in dps}
+        b0 = Vector([min(boxes[p][0][i] for p in dps) for i in range(3)])
+        b1 = Vector([max(boxes[p][1][i] for p in dps) for i in range(3)])
+        cut = info.get(f'split_{side}', {}).get('cut_z')
+        m = .02
+        for other in ('glazing', 'body', 'cabin'):
+            for o in list(parts.get(other, [])):
+                if len(o.data.polygons) < 2:
+                    continue
+                mw = o.matrix_world
+                grp = {p: [] for p in dps}
+                for c in _islands(o):
+                    cb0, cb1 = c[0]
+                    if not all(b0[i] - m <= cb0[i] and cb1[i] <= b1[i] + m for i in range(3)):
+                        continue
+                    if cut is not None and len(dps) == 2:
+                        for i in c[2]:
+                            z = G(mw @ o.data.polygons[i].center).z
+                            grp['door_f' + side if z > cut else 'door_r' + side].append(i)
+                    else:
+                        cz = (cb0.z + cb1.z) / 2
+                        p = min(dps, key=lambda q: abs((boxes[q][0].z + boxes[q][1].z) / 2 - cz))
+                        grp[p] += c[2]
+                todo = [(p, g) for p, g in grp.items() if g]
+                if not todo or sum(len(g) for _, g in todo) >= len(o.data.polygons):
+                    continue
+                for (p, g), new in zip(todo, _lift_many(o, [g for _, g in todo])):
+                    new['sb_chain'] = o['sb_chain']
+                    parts[p].append(new)
+                    moved += len(g)
+    info['adopted_faces'] = moved
+
+
 def _lift_panels(parts, paint, lo, hi, rep):
     need = [p for p in _wanted(parts) if not parts.get(p)]
     if not (need and paint):
@@ -558,10 +812,19 @@ def _lift_panels(parts, paint, lo, hi, rep):
             for pid in list(need):
                 # a bonnet or saloon boot lid faces UP; a hatch or van tailgate
                 # stands near-vertical and faces BACK
-                cand = [c for c in comps if (c[0][1].x - c[0][0].x) > .6 * W and c[0][0].y > lo.y + .25 * H
-                        and (abs(c[1]) > .55 if pid == 'panel_bonnet' else (abs(c[1]) > .55 or c[3] < -.55))
-                        and (c[0][1].z > hi.z - .15 * L if pid == 'panel_bonnet'
-                             else c[0][0].z < lo.z + .15 * L)]
+                def where(c):
+                    return ((c[0][1].x - c[0][0].x) > .6 * W and c[0][0].y > lo.y + .25 * H
+                            and (c[0][1].z > hi.z - .15 * L if pid == 'panel_bonnet'
+                                 else c[0][0].z < lo.z + .15 * L))
+                cand = [c for c in comps if where(c)
+                        and (abs(c[1]) > .55 if pid == 'panel_bonnet' else (abs(c[1]) > .55 or c[3] < -.55))]
+                if not cand:
+                    # FALLBACK ONLY: a panel modelled with thickness is a closed
+                    # shell whose normals cancel (RS6 bonnet mean-up 0.0). Used
+                    # first, this test let a SECOND piece qualify on the Peugeot
+                    # 308 and the unique-candidate rule then refused its bonnet.
+                    cand = [c for c in comps if where(c)
+                            and (c[5] > .6 if pid == 'panel_bonnet' else c[5] + c[6] > .9)]
                 rep.setdefault('island_candidates', {})[pid] = len(cand)
                 if len(cand) == 1:
                     parts.setdefault(pid, []).append(_lift(o, cand[0][2]))
@@ -573,7 +836,7 @@ def _lift_panels(parts, paint, lo, hi, rep):
             break
 
 
-def _hinges(parts):
+def _hinges(parts, island_doors=False):
     hinge = {}
     for pid in [k for k in parts if k.startswith('door_b')]:
         # barn door: vertical hinge on its OUTER edge, at the back face
@@ -588,8 +851,14 @@ def _hinges(parts):
         vs = [v for o in parts[pid] for v in wv(o)]
         b0, b1 = bbox(vs)
         edge = [v for v in vs if v.z > b1.z - .06]
+        if island_doors:
+            # an island door carries the inner pieces it adopted (door card,
+            # trim); the last 6 cm can be ALL inner trim — the RS6's rear door
+            # put its hinge 24 cm inboard that way. Use the front 15% instead,
+            # so the outer skin is in the sample.
+            edge = [v for v in vs if v.z > b1.z - .15 * (b1.z - b0.z)]
         xs = sorted(abs(v.x) for v in edge)
-        x = xs[int(.9 * (len(xs) - 1))]
+        x = xs[int((.95 if island_doors else .9) * (len(xs) - 1))]
         hinge[pid] = {'x': round(x if pid[-1] == 'l' else -x, 4), 'y': round((b0.y + b1.y) / 2, 4),
                       'z': round(b1.z, 4)}
     if parts.get('panel_bonnet'):

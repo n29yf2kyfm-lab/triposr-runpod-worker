@@ -57,6 +57,19 @@ everything again. One broken file never stops the batch.
   parts are separately named at all (916 are one welded mesh), and not all of
   the 128 have separate doors. Expect most of a random folder to be refused
   until the shape-based door finder (step 3) exists.
+- **Doors that are loose pieces are found too.** Some game rips keep the whole
+  paint as one mesh with each panel a loose piece inside it (the Audi RS6).
+  The rigger looks for a door-shaped piece on each flank, mirrored left and
+  right. When one piece holds both doors, it is split at the shut line, found
+  as the tight bunch of sharp vertical edges the groove leaves. Glass, handles
+  and the door card that sit inside the door travel with it. Calibrated on one
+  car so far; the report's `door_finder` says what it did.
+- **Tiny models are rescaled.** A quarter of the catalogue is modelled about
+  0.05 units long. Any car outside 2.5–7.5 long is scaled so its wheels are
+  0.68 m tall, and the report records the factor. That is typical size, not
+  the car's measured size.
+- **Calipers stay on the car.** A caliper is bolted to the hub, so it neither
+  comes off with the wheel nor leaves with a door.
 - **It needs four road wheels.** Some game files carry one wheel that the
   game copies four times; those are refused and say so.
 - **Names say WHAT a part is, never WHICH one.** Corners (front left, rear
