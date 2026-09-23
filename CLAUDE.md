@@ -5351,3 +5351,40 @@ indicator lens and the chrome insert". Parsing the GLB's JSON chunk:
 `Asm_Mirror_FL`, 4 primitives, materials `CarPaint` / `Atlas` / `light_glass` /
 `phong13`. Exactly right, and settled offline for nothing — where reading it
 off the render would have been a guess about a dark band under a painted cap.
+
+## Strip Bay Rigger (Blender add-on): three traps, all measured (2026-09-23)
+
+`platform/trainer/blender_addon/` rigs car and van GLBs (doors, bonnet,
+tailgate, sliding and barn doors, wheels) one at a time with sliders, or
+a folder at once. `selftest.py` must pass after any change to it.
+
+**BLENDER DRIVERS DIE SILENTLY IF THE SCENE WAS EVALUATED BEFORE THEIR
+PROPERTY EXISTED.** Every slider on a freshly rigged car moved nothing until
+the .blend was saved and reopened. Adding a custom property does not tag the
+object, so the evaluated copy lacks it. The driver fails, is flagged invalid,
+and Blender never retries it. `is_valid=True` followed by a single update
+re-kills it. The fix: `update_tag()` the owner after adding the property,
+evaluate, THEN clear the flags. Bisected over all 12 orderings. **A saved
+and reloaded .blend HIDES this bug**, which is how the batch test passed
+while the interactive add-on was dead. Test drivers in the same session.
+
+**NEVER JUDGE THIS CATALOGUE IN METRES.** A "vehicle >= 1.75 m tall means a
+van" rule slid the rear doors of a Micra and a Captur, whose files sit at
+~1.25x real size. Measure in wheel diameters. An MPV (Sharan, sliding
+doors) and a Mazda 3 (hinged) have the same shape by every bbox ratio tried.
+Some rulings need a person: `overrides.json`.
+
+**PAINT = THE MATERIAL ON THE OUTWARD-FACING SKIN, not the largest area.**
+Largest-area chose the BMW M235i's window-surround trim (`black.001`). The
+`.NNN`-sibling rename then tagged EVERY `black*` material as paint, so the
+live Strip Bay respray painted all the black trim. Counting only faces that
+face out (up for a bonnet, away from the centreline for a door) picks the
+skin. Verified by a red-respray render of each choice.
+
+**The Strip Bay artifact is at its size cap.** It holds ~63.6 MiB against a
+64 MiB per-version cap. It cannot hold 1,050 cars, or even 30. At scale, the
+GLBs must be served from the `car-meshes` bucket, and that needs `SB_KEY`
+back in `/root/.alam3d_env` (absent since 2026-09-19). Also: gltf-transform
+picks its output FORMAT from the extension, so writing straight to
+`.glb.wasm` produced a JSON .gltf with sidecar files. Write `.glb`, then
+rename.
