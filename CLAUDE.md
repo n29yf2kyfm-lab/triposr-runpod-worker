@@ -5448,3 +5448,19 @@ Three traps cost time building it:
   column on a phone (400px in a 358px column). Use aspect-ratio alone.
 And again: `pkill -f` on a broad pattern killed this session's own shell
 (exit 144). Kill by PID.
+
+**Codex assemblies and tap-to-open (2026-09-23).** The trainer repository
+`n29yf2kyfm-lab/training-manual` holds the constructed learning assemblies on
+`main` @ 05115cc: `engine-bay-detail.js`, `engine-bay-shell.js`,
+`transmission-detail.js`, `brake-assembly.js`. They are copied into
+`platform/trainer/` unchanged and fitted to the simulator's real Golf in
+`buildGolf`, in the car frame golf-bay.html measured. Its branch
+`codex/unreal-wheel-workshop` is an Unreal Engine 5.8 wheel-service prototype.
+It is SOURCE ONLY: its generated GLBs and Content are git-ignored, and it is built
+from the same `golf.glb.wasm` (same sha256), so there is no new car mesh to
+download. Two traps: the constructed bay stands taller than the space under the
+closed bonnet, and it pokes through and steals the bonnet tap, so it is drawn only
+while the bonnet is open. And a door, bonnet or tailgate tap goes to the stage
+FIRST. `order()`'s onPick returns true for any part one of its steps or traps
+names, so tapping the bonnet before the release is still a recorded fault. Only
+an unclaimed tap toggles the panel.

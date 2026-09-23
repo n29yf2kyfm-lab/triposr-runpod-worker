@@ -18,6 +18,12 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
+// Constructed learning assemblies from the Strip Bay trainer repository
+// (n29yf2kyfm-lab/training-manual, main @ 05115cc), used unchanged.
+import { buildEngineBayDetail } from './engine-bay-detail.js';
+import { buildInnerApron } from './engine-bay-shell.js';
+import { buildTransmission } from './transmission-detail.js';
+import { buildFrontBrake } from './brake-assembly.js';
 
 const $ = s => document.querySelector(s);
 const rnd = a => a[Math.floor(Math.random() * a.length)];
@@ -38,7 +44,9 @@ function h(tag, attrs = {}, ...kids) {
 
 /* ───────────────────────── 3D stage ───────────────────────── */
 const host = $('#sim-canvas');
-const tip = $('#sim-tip');
+const tip = $('#sim-tip'), hint = $('#sim-hint');
+const HINT_CAR = 'Drag to turn · pinch or scroll to zoom · tap a door, the bonnet or the tailgate to open it';
+const HINT_JOB = 'Drag to turn · pinch or scroll to zoom · tap a part to name it';
 let renderer = null;
 try {
   renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -49,17 +57,79 @@ else {
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.05;
+  // contact shadows: without them the car floats and reads flat
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   host.prepend(renderer.domElement);
 }
 const camera = new THREE.PerspectiveCamera(35, 4 / 3, 0.01, 100);
 const controls = renderer ? new OrbitControls(camera, renderer.domElement) : null;
 if (controls) { controls.enableDamping = true; controls.dampingFactor = 0.08; controls.minDistance = 0.25; controls.maxDistance = 9; }
 const env = renderer ? new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture : null;
+/* Studio for the real car, from golf-bay.html. RoomEnvironment lights everything
+   evenly, which makes car paint read as matte plastic. A car photograph is
+   bright sources in a dark room: one overhead softbox, a tall strip down each
+   flank, a kicker and a rim light. Those give the long streaks on the flanks
+   and the hard edge on the shoulder line. */
+function studioScene() {
+  const s = new THREE.Scene(); s.background = new THREE.Color(0x05070a);
+  s.add(new THREE.Mesh(new THREE.BoxGeometry(32, 18, 32), new THREE.MeshBasicMaterial({ color: 0x0b0f14, side: THREE.BackSide })));
+  const lamp = (w, hh, d, x, y, z, c, i) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w, hh, d), new THREE.MeshBasicMaterial({ color: c })); m.material.color.multiplyScalar(i); m.position.set(x, y, z); s.add(m); };
+  lamp(16, 0.4, 10, 0, 8.6, 0, 0xffffff, 5.4);     // overhead softbox
+  lamp(0.4, 5.5, 20, 11, 4.2, 0, 0xfff3e2, 3.4);   // right flank strip
+  lamp(0.4, 5.5, 20, -11, 4.2, 0, 0xe8f1ff, 2.9);  // left flank strip
+  lamp(9, 0.4, 0.4, 0, 1.1, 12, 0xffffff, 1.5);    // front kicker
+  lamp(9, 0.4, 0.4, 0, 1.1, -12, 0xdfe8f5, 1.1);   // rear rim
+  lamp(20, 0.4, 20, 0, -3, 0, 0x2a2f38, 1.0);      // dim floor bounce
+  return s;
+}
+const studio = renderer ? new THREE.PMREMGenerator(renderer).fromScene(studioScene(), 0.035).texture : null;
+
+/* Workshop surfaces, also from golf-bay.html: tiny generated roughness and
+   normal maps, so cast alloy, moulded plastic and rubber break a highlight
+   the way the real finishes do. No texture files to download. */
+function surfaceMaps(seed, repeat) {
+  const n = 64, rough = new Uint8Array(n * n * 4), norm = new Uint8Array(n * n * 4);
+  let st = seed >>> 0; const rr = () => ((st = (st * 1664525 + 1013904223) >>> 0) / 4294967295);
+  for (let i = 0; i < n * n; i++) {
+    const grain = rr() - 0.5, pore = rr() < 0.035 ? -34 : 0, v = Math.max(80, Math.min(245, 190 + grain * 44 + pore));
+    rough.set([v, v, v, 255], i * 4); norm.set([128 + Math.round(grain * 18), 128 + Math.round((rr() - 0.5) * 18), 255, 255], i * 4);
+  }
+  const out = {};
+  for (const [k, d] of [['roughness', rough], ['normal', norm]]) {
+    const t = new THREE.DataTexture(d, n, n, THREE.RGBAFormat); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(repeat, repeat);
+    t.colorSpace = THREE.NoColorSpace; t.needsUpdate = true; out[k] = t;
+  }
+  return out;
+}
+let SURF = null;
+function workshopMaterial(color, options = {}, finish = 'cast') {
+  SURF ||= { cast: surfaceMaps(0x5ca57, 7), plastic: surfaceMaps(0x91a57, 9), brushed: surfaceMaps(0xb4a55, 12), rubber: surfaceMaps(0x7abb3, 8) };
+  const maps = SURF[finish] || SURF.cast, m = new THREE.MeshPhysicalMaterial({ color, ...options });
+  if (!m.transparent) {
+    m.roughnessMap = maps.roughness; m.normalMap = maps.normal;
+    const k = finish === 'cast' ? 0.24 : finish === 'plastic' ? 0.13 : finish === 'rubber' ? 0.18 : 0.08; m.normalScale.set(k, k);
+  }
+  if (finish === 'paint') { m.clearcoat = 0.78; m.clearcoatRoughness = 0.19; m.envMapIntensity = 1.15; }
+  else m.envMapIntensity = finish === 'rubber' ? 0.28 : 0.72;
+  return m;
+}
 if (renderer) new ResizeObserver(() => {
   const w = host.clientWidth, hh = host.clientHeight;
   if (!w || !hh) return;
   renderer.setSize(w, hh, false); camera.aspect = w / hh; camera.updateProjectionMatrix();
 }).observe(host);
+
+// Cameras are authored for the 4:3 desktop stage. A narrower stage (1:1 on a phone)
+// has a narrower horizontal view, so the camera backs off along the same line and
+// the framing still holds the subject.
+function place(pos, target) {
+  const w = host.clientWidth, hh = host.clientHeight;
+  const k = w && hh ? Math.max(1, ((4 / 3) / (w / hh)) ** 0.7) : 1; // 0.7: the subject is rarely full-width
+  controls.target.set(...target);
+  camera.position.set(...pos.map((v, i) => target[i] + (v - target[i]) * k));
+  controls.update();
+}
 
 /* materials: fixed colours are fine inside the 3D view, which has its own lit ground */
 const MS = (color, metalness, roughness, extra = {}) => new THREE.MeshStandardMaterial({ color, metalness, roughness, ...extra });
@@ -169,7 +239,9 @@ if (renderer) {
   renderer.domElement.addEventListener('pointerup', e => {
     if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 6) return;
     const part = pickAt(e); showTip(e, part);
-    if (part && api && api.onPick && !api.done) api.onPick(part);
+    // a stage that uses the part decides; otherwise a door or panel on the real car just opens
+    const claimed = part && api && api.onPick && !api.done ? api.onPick(part) : false;
+    if (part && !claimed && !(api && api.busy) && R === CAR) toggleHinged(part);
   });
 }
 
@@ -206,20 +278,46 @@ function classifyGolf(n) {
 }
 const GOLF_HINGE = { door_fl: [0.772, 0, 0.870], door_fr: [-0.772, 0, 0.870], door_rl: [0.754, 0, -0.209], door_rr: [-0.754, 0, -0.209],
   tailgate: [0, 1.394, -1.472], panel_bonnet: [0, 0.975, 1.115] };
-const BONNET_OPEN = 52 * Math.PI / 180, DOOR_OPEN = 64 * Math.PI / 180;
+const BONNET_OPEN = 52 * Math.PI / 180, DOOR_OPEN = 64 * Math.PI / 180, TAIL_OPEN = 62 * Math.PI / 180;
+// axis and open angle for every part that swings on the real car (signs: golf-bay.html)
+const HINGED = { door_fl: ['y', -DOOR_OPEN], door_rl: ['y', -DOOR_OPEN], door_fr: ['y', DOOR_OPEN], door_rr: ['y', DOOR_OPEN],
+  panel_bonnet: ['x', -BONNET_OPEN], tailgate: ['x', TAIL_OPEN] };
+function toggleHinged(id) {
+  const g = carPart(id), hg = HINGED[id]; if (!g || !hg) return false;
+  const [ax, ang] = hg, open = Math.abs(g.rotation[ax]) < Math.abs(ang) / 2;
+  tween(g.rotation, { [ax]: open ? ang : 0 }, id === 'panel_bonnet' || id === 'tailgate' ? 0.85 : 0.7);
+  return true;
+}
 let carP = null, CAR = null;
 function loadCar() {
   if (!carP) carP = new Promise((res, rej) => gltf.load('golf.glb.wasm', g => { CAR = buildGolf(g.scene); res(CAR); }, undefined, rej));
   return carP;
 }
 function buildGolf(root) {
-  const sc = new THREE.Scene(); sc.environment = env;
-  const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(3, 5, 4); sc.add(key);
-  sc.add(new THREE.HemisphereLight(0xffffff, 0x3a3a44, 0.5));
+  const sc = new THREE.Scene(); sc.environment = studio;
+  // lights sit UNDER the environment: a hard key for the shadow and the shoulder
+  // highlight, a cool fill so the dark side is not black, a warm rim, little ambient
+  const key = new THREE.DirectionalLight(0xffffff, 2.3); key.position.set(4.5, 7.5, 5.5); key.castShadow = true;
+  key.shadow.mapSize.set(2048, 2048);
+  Object.assign(key.shadow.camera, { left: -4.2, right: 4.2, top: 4.2, bottom: -4.2, near: 0.5, far: 26 });
+  key.shadow.bias = -0.0012; key.shadow.normalBias = 0.02;
+  const fill = new THREE.DirectionalLight(0xbfd4ff, 0.42); fill.position.set(-6, 4.6, -4);
+  const rim = new THREE.DirectionalLight(0xffe9cf, 0.5); rim.position.set(-2, 3.8, -7);
+  sc.add(key, fill, rim, new THREE.AmbientLight(0xffffff, 0.1));
+  // the floor is the stage's own ground: it only catches the shadow
+  const floor = add(sc, new THREE.CircleGeometry(7, 64), new THREE.ShadowMaterial({ opacity: 0.55 }), { rot: [-Math.PI / 2, 0, 0], nopick: true });
+  floor.receiveShadow = true;
   shadow(sc, 3.4, 0.002).scale.set(0.75, 1.3, 1);
   const car = new THREE.Group(); sc.add(car); car.add(root); car.updateMatrixWorld(true);
   const by = {};
   root.traverse(o => { if (o.isMesh) (by[classifyGolf(o.name || (o.parent && o.parent.name) || '')] ||= []).push(o); });
+  // shadows, and more of the studio in everything but the glass (which keeps refracting).
+  // envMapIntensity is a render setting, not an asset property; the GLB's materials are otherwise untouched.
+  const glassMats = new Set((by.glazing || []).flatMap(m => [].concat(m.material)));
+  for (const id in by) for (const m of by[id]) {
+    m.castShadow = m.receiveShadow = true;
+    for (const mt of [].concat(m.material)) if (mt && !glassMats.has(mt) && mt.envMapIntensity !== undefined) mt.envMapIntensity = 1.45;
+  }
   const parts = {};
   for (const id in by) {
     const box = new THREE.Box3(); by[id].forEach(m => box.expandByObject(m));
@@ -230,6 +328,39 @@ function buildGolf(root) {
     g.userData.part = id;
     parts[id] = { group: g, home: pv.clone(), centre: c };
   }
+  /* The file has no engine and plain brake corners. The trainer repository's
+     constructed assemblies fill the bay (engine, cooling, battery, inner aprons,
+     gearbox) and replace the front discs and calipers with detailed corners
+     (hub, knuckle, strut). They are training geometry, and their labels say so. */
+  const shade = o => o.traverse(m => { if (m.isMesh) m.castShadow = m.receiveShadow = true; });
+  let bayG = null;
+  try {
+    const bay = buildEngineBayDetail({ materialFactory: workshopMaterial });
+    bay.group.getObjectByName('bellhousing-starter-interface')?.removeFromParent();
+    bayG = group(car, { part: 'engine_bay' });
+    bayG.add(bay.group, buildInnerApron(1, workshopMaterial), buildInnerApron(-1, workshopMaterial));
+    const gb = buildTransmission({ materialFactory: workshopMaterial }).group; gb.userData.part = 'gearbox'; car.add(gb);
+    // the generated alternator, where golf-bay.html seats it on the belt
+    const alt = group(bayG, { pos: [0.43, 0.70, 1.72], part: 'alternator' });
+    gltf.load('alt.glb.wasm', g => {
+      const m = g.scene; m.rotation.y = -Math.PI / 2; m.scale.setScalar(0.19985); m.updateMatrixWorld(true);
+      const bb = new THREE.Box3().setFromObject(m), c = bb.getCenter(new THREE.Vector3());
+      m.position.sub(c); m.position.x += -0.0725 + (bb.max.x - bb.min.x) / 2; shade(m); alt.add(m);
+    }, undefined, () => { /* the bay still reads without it */ });
+    shade(bayG); shade(gb);
+    const AX = { y: 0.315, z: 1.3157, x: 0.764 };
+    for (const [side, sfx] of [[1, 'fl'], [-1, 'fr']]) {
+      const as = buildFrontBrake({ side, discRadius: 0.1708, discThickness: 0.0309, materialFactory: workshopMaterial });
+      const axle = new THREE.Vector3(side * AX.x, AX.y, AX.z);
+      for (const [type, detail] of [['rotor', as.rotor], ['caliper', as.caliper]]) {
+        const p = parts[type + '_' + sfx]; if (!p || !detail) continue;
+        p.group.clear(); detail.position.copy(axle).sub(p.home); p.group.add(detail); shade(detail);
+      }
+      const support = group(car, { pos: axle.toArray(), part: 'hub_' + sfx });
+      for (const piece of [as.hub, as.knuckle, as.extras, as.pads]) if (piece) support.add(piece);
+      shade(support);
+    }
+  } catch (e) { console.error('Strip Bay: constructed assemblies failed to build', e); }
   // axle stand, placed under the front-left sill; hidden until the job puts it there
   const stand = group(car, { pos: [0.72, 0, 0.95], part: 'stand' });
   add(stand, cyl(0.03, 0.09, 24, 0.09), MAT.darkSteel, { pos: [0, 0.045, 0] });
@@ -239,10 +370,16 @@ function buildGolf(root) {
   const labels = { panel_bonnet: 'Bonnet', door_fl: 'Driver’s door (front left: this car is left-hand drive)', door_fr: 'Front passenger door',
     door_rl: 'Rear door', door_rr: 'Rear door', tailgate: 'Tailgate', wheel_fl: 'Front-left wheel', wheel_fr: 'Front-right wheel',
     wheel_rl: 'Rear wheel', wheel_rr: 'Rear wheel', rotor_fl: 'Brake disc, front left (MIN TH stamped on the hat)', rotor_fr: 'Brake disc, front right',
-    caliper_fl: 'Brake caliper, front left', caliper_fr: 'Brake caliper, front right', airbags: 'Airbags', seats: 'Seats',
+    caliper_fl: 'Brake caliper, front left', caliper_fr: 'Brake caliper, front right',
+    hub_fl: 'Hub, knuckle and strut, front left (constructed)', hub_fr: 'Hub, knuckle and strut, front right (constructed)',
+    engine_bay: 'Engine bay (constructed: the source car has no engine)', gearbox: 'Gearbox and driveshafts (constructed)',
+    alternator: 'Alternator', airbags: 'Airbags', seats: 'Seats',
     steering: 'Steering wheel (driver airbag in the hub)', glazing: 'Glass', cabin: 'Cabin trim', body: 'Body shell', stand: 'Axle stand' };
   return {
-    scene: sc, parts, car, stand, labels, update() {},
+    scene: sc, parts, car, stand, labels,
+    // the constructed bay is taller in places than the space under the closed
+    // bonnet, so it is drawn only while the bonnet is up
+    update() { if (bayG && parts.panel_bonnet) bayG.visible = Math.abs(parts.panel_bonnet.group.rotation.x) > 0.03; },
     reset() {
       for (const id in parts) { parts[id].group.position.copy(parts[id].home); parts[id].group.rotation.set(0, 0, 0); }
       car.position.set(0, 0, 0); stand.visible = false;
@@ -299,10 +436,14 @@ function renderStage() {
       loadCar().then(() => { if (run === me) renderStage(); }, () => { me.noCar = true; if (run === me) renderStage(); });
       return;
     }
-    if (run.view !== 'car') { CAR.reset(); scene = CAR.scene; R = CAR; run.view = 'car'; camera.position.set(...s.car.cam[0]); controls.target.set(...s.car.cam[1]); controls.update(); }
+    if (run.view !== 'car') {
+      CAR.reset(); scene = CAR.scene; R = CAR; run.view = 'car'; place(s.car.cam[0], s.car.cam[1]);
+      renderer.toneMappingExposure = 1.16; hint.textContent = HINT_CAR;
+    }
   } else if (renderer && run.view !== 'job') {
     scene = run.jobScene; R = run.jobR; run.view = 'job';
-    camera.position.set(...job.cam.pos); controls.target.set(...job.cam.target); controls.update();
+    place(job.cam.pos, job.cam.target);
+    renderer.toneMappingExposure = 1.05; hint.textContent = HINT_JOB;
   }
   const head = h('div', { class: 'ph' }, h('span', {}, `Stage ${run.idx + 1} of ${job.stages.length}`), h('span', { class: 'fc', id: 'sim-fc' }, faultText()));
   const body = h('div', { class: 'pb' });
@@ -390,6 +531,7 @@ function order({ title, lead, steps, traps = [], done: doneMsg, intro, car }) {
     const box = h('div', { class: 'opts' });
     b.append(h('p', { class: 'q' }, 'Choose the next action.'), box, h('p', { class: 'sub' }, 'Done'), list);
     const done = steps.map(() => false); let busy = false;
+    const claims = new Set([...steps, ...traps].map(x => x.pick).filter(Boolean));
     const items = shuffle([...steps.map((s, i) => ({ s, i })), ...traps.map(t => ({ trap: t }))]);
     const btn = new Map();
     items.forEach(it => { const bt = h('button', { class: 'opt', type: 'button' }, it.trap ? it.trap.t : it.s.t); bt.addEventListener('click', () => act(it)); btn.set(it, bt); box.append(bt); });
@@ -410,6 +552,7 @@ function order({ title, lead, steps, traps = [], done: doneMsg, intro, car }) {
       const it = items.find(x => x.s && !done[x.i] && x.s.pick === part)
         || items.find(x => x.trap && x.trap.pick === part && btn.get(x).isConnected);
       if (it) act(it);
+      return claims.has(part);
     };
   } };
 }
@@ -423,7 +566,7 @@ const sim = t => h('span', { class: 'simtag' }, t || 'simulation value');
 /* ── real-car stages shared by several jobs ── */
 function bonnetStage(after) {
   return order({
-    title: 'Bonnet up', car: { cam: [[2.4, 1.75, 3.9], [0, 0.72, 1.05]] },
+    title: 'Bonnet up', car: { cam: [[2.9, 1.75, 4.3], [0.05, 0.55, 0.25]] },
     lead: 'This is the real Golf. Get the bonnet up and held before anything else.',
     steps: [
       { t: 'Pull the bonnet release inside the car' },
@@ -1174,7 +1317,7 @@ brakes.stages = [
     title: 'Measure before you decide', car: { cam: BRAKE_CAM },
     render(b, a) {
       const st = a.st; st.mic = []; st.used = {};
-      a.onPick = part => { if (part === 'rotor_fl') a.info('Real disc, front left. The hat is stamped MIN TH 22.0 mm (simulation value). Measure the swept face, not the rusty lip at the edge.'); };
+      a.onPick = part => { if (part === 'rotor_fl') a.info('Disc, front left. The hat is stamped MIN TH 22.0 mm (simulation value). Measure the swept face, not the rusty lip at the edge.'); };
       const minTh = 22.0;
       b.append(h('p', {}, `Pad friction material and disc thickness decide the job. The disc hat is stamped `, h('b', {}, `MIN TH ${f1(minTh)} mm`), ' ', sim(), '.'));
       const m = meterBox(); b.append(m.el);
@@ -1412,7 +1555,14 @@ function route() {
 window.addEventListener('hashchange', route);
 $('#sim-ready').hidden = true;
 // read-only handle for the automated walkthrough test (platform/trainer/simtest.mjs)
-window.__sim = { get run() { return run; }, get api() { return api; }, get car() { return CAR; }, get tweens() { return tweens.length; }, get frames() { return frames; }, get active() { return [activeId, !!scene, document.hidden]; } };
+window.__sim = { get run() { return run; }, get api() { return api; }, get car() { return CAR; }, get tweens() { return tweens.length; }, get frames() { return frames; }, get active() { return [activeId, !!scene, document.hidden]; },
+  // screen point of a real-car part's centre, so a test can tap it like a person would
+  screenOf(id) {
+    const g = carPart(id); if (!g) return null;
+    const v = new THREE.Box3().setFromObject(g).getCenter(new THREE.Vector3()).project(camera), r = renderer.domElement.getBoundingClientRect();
+    return [r.left + (v.x + 1) / 2 * r.width, r.top + (1 - v.y) / 2 * r.height];
+  },
+  rot(id) { const g = carPart(id); return g ? [g.rotation.x, g.rotation.y] : null; } };
 route();
 
 const clock = new THREE.Clock();
