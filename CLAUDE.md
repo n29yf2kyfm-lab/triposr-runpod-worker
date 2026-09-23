@@ -5406,3 +5406,33 @@ previously refused Volvo V60 into a full rig. Regression over 26 cars: the only
 behaviour changes are the ones intended, and one real regression (the 308's
 bonnet lift, when the closed-shell test ran first) was caught and fixed.
 
+
+## Strip Bay Training Simulator: how it is built and tested (2026-09-23)
+
+The manual artifact (https://claude.ai/artifact/FyF8L4VKj5sV2qu2bTTPmx) is now a
+training simulator: `platform/trainer/manual.html` plus `platform/trainer/sim.js`
+(three.js 0.160 from cdn.jsdelivr.net/npm via an importmap). There are five jobs:
+misfire, starter, alternator, brake pads and airbag. Each job is a list of stages.
+A wrong action is refused and recorded, and the next stage stays locked until the
+current one is right. Faults are drawn at random every run: the misfiring
+cylinder and its cause (coil, plug or injector), the charging fault (diode,
+brushes or B+ cable), and whether the disc is worn. So a trainee learns the
+method, not the answers. A diagnosis needs EVIDENCE: the right answer given
+without the proving test is refused.
+
+`platform/trainer/simtest.mjs` walks all five jobs end to end in headless
+Chromium. It makes deliberate wrong moves and checks that they are refused.
+Run it after any change to sim.js:
+`python3 -m http.server 8765` in platform/trainer, then
+`node simtest.mjs http://localhost:8765/manual.html OUT_DIR`
+(set FORCE_OK=1 to force the brake branch where the disc is not worn).
+Three traps cost time building it:
+* **The test browser does not trust this container's proxy CA.** The three.js
+  fetch fails with ERR_CERT_AUTHORITY_INVALID, and the page simply never becomes
+  interactive. Use `ignoreHTTPSErrors: true`. It is not a page bug.
+* **Playwright `hasText` is a case-insensitive SUBSTRING.** Clicking "Spark plug"
+  pressed "Swap the spark plug" instead. Anchor with a regex (`^Spark plug$`).
+* **A `min-height` combined with `aspect-ratio` forces the box WIDER** than its
+  column on a phone (400px in a 358px column). Use aspect-ratio alone.
+And again: `pkill -f` on a broad pattern killed this session's own shell
+(exit 144). Kill by PID.

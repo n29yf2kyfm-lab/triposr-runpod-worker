@@ -6,7 +6,7 @@
      fine without this — but served anywhere else a page with no viewport meta
      lays out at 980px and is zoomed out on a phone. Keep it. -->
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Strip Bay Workshop Manual</title>
+<title>Strip Bay Training Simulator</title>
 <style>
 /* Apple-style system: system type, quiet neutrals, one accent, semantic reds
    and ambers kept for safety only. Every colour is a token; components never
@@ -246,18 +246,91 @@ td.muted,.muted{color:var(--ink3)}
 footer{border-top:1px solid var(--line); padding-block:22px 48px; font-size:13px; color:var(--ink3)}
 footer p{max-width:72ch; margin-bottom:8px}
 
+
+/* ─ simulator ─ */
+.stepper{list-style:none; display:flex; gap:6px; overflow-x:auto; padding:2px 0 6px; margin:18px 0 0; scrollbar-width:none}
+.stepper li{display:flex; align-items:center; gap:7px; flex:none; padding:6px 12px 6px 6px; border-radius:980px; background:var(--surface);
+  font-size:13px; color:var(--ink3); border:1px solid var(--line2); white-space:nowrap}
+.stepper .dot{display:grid; place-items:center; width:20px; height:20px; border-radius:50%; background:var(--fill); color:var(--ink2); font-size:11px; font-weight:700}
+.stepper li.now{color:var(--ink); border-color:var(--accent); font-weight:600}
+.stepper li.now .dot{background:var(--accent); color:#fff}
+.stepper li.done .dot{background:var(--ok); color:#fff}
+.stepper li.locked{opacity:.6}
+.stepper .lock{width:9px; height:11px; border:1.6px solid var(--ink3); border-radius:2px; position:relative; margin-left:2px}
+.stepper .lock::before{content:""; position:absolute; left:1px; top:-6px; width:4px; height:5px; border:1.6px solid var(--ink3); border-bottom:0; border-radius:4px 4px 0 0}
+.simgrid{display:grid; gap:16px; grid-template-columns:minmax(0,1.3fr) minmax(0,1fr); align-items:start; margin-top:14px}
+@media (max-width:880px){ .simgrid{grid-template-columns:1fr} }
+.stage3d{position:relative; aspect-ratio:4/3; background:radial-gradient(ellipse at 50% 38%, var(--surface) 0%, var(--fill) 120%)}
+.stage3d canvas{display:block; width:100%; height:100%; touch-action:none}
+.stage3d .hint{position:absolute; left:12px; bottom:10px; font-size:12px; color:var(--ink3); pointer-events:none}
+.stage3d .tip{position:absolute; padding:5px 10px; border-radius:8px; background:var(--ink); color:var(--bg); font-size:12.5px; font-weight:500; pointer-events:none; white-space:nowrap; z-index:2}
+.stage3d .nogl{position:absolute; inset:0; display:grid; place-items:center; padding:24px; text-align:center; color:var(--ink3); font-size:15px}
+.panel{padding:18px 20px 20px}
+@media (min-width:881px){ .panel{position:sticky; top:66px; max-height:calc(100vh - 80px); overflow-y:auto} }
+.panel h2{font-size:24px; margin:4px 0 10px}
+.panel p{font-size:15.5px; color:var(--ink2)}
+.panel .q{font-weight:600; color:var(--ink); margin:16px 0 8px}
+.panel .sub{font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.02em; color:var(--ink3); margin:14px 0 6px}
+.ph{display:flex; justify-content:space-between; gap:10px; font-size:12px; font-weight:600; color:var(--ink3); text-transform:uppercase; letter-spacing:.02em}
+.ph .fc{color:var(--ink3)}
+.opts{display:grid; gap:8px}
+.opts.two{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.opt{display:block; width:100%; text-align:left; font:inherit; font-size:15px; letter-spacing:-.01em; color:var(--ink);
+  background:var(--surface2); border:1px solid var(--line); border-radius:12px; padding:10px 14px; cursor:pointer; transition:border-color .15s ease, background .15s ease}
+.opt:hover{border-color:var(--accent)}
+.opt.ok{border-color:var(--ok); background:var(--ok-bg)}
+.opt.no{border-color:var(--danger); background:var(--danger-bg)}
+.row{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:10px 0}
+.row select{font:inherit; font-size:14px; padding:6px 10px; border-radius:9px; border:1px solid var(--line); background:var(--surface2); color:var(--ink)}
+.btn.sm{font-size:14px; padding:7px 14px}
+.btn.ghost2{background:var(--fill); color:var(--ink)}
+ol.ticks{list-style:none; padding:0; margin:0; display:grid; gap:4px}
+ol.ticks li{font-size:14px; color:var(--ink2); padding-left:22px; position:relative}
+ol.ticks li::before{content:"✓"; position:absolute; left:2px; color:var(--ok); font-weight:700}
+ol.ticks:empty::after{content:"Nothing yet."; font-size:14px; color:var(--ink3)}
+.fb{margin-top:14px; border-radius:12px; font-size:15px; line-height:1.4}
+.fb:empty{display:none}
+.fb.ok,.fb.bad,.fb.info{padding:12px 14px}
+.fb.ok{background:var(--ok-bg)} .fb.ok b{color:var(--ok)}
+.fb.bad{background:var(--danger-bg)} .fb.bad b{color:var(--danger)}
+.fb.info{background:var(--accent-bg); color:var(--ink)}
+.pf{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
+.pf:empty{display:none}
+.counters{display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin:6px 0 4px}
+.counters div{background:var(--surface2); border:1px solid var(--line2); border-radius:10px; padding:6px 8px; text-align:center}
+.counters span{display:block; font-size:11px; color:var(--ink3); text-transform:uppercase}
+.counters b{font-family:var(--mono); font-size:20px; font-variant-numeric:tabular-nums}
+.counters .hot{border-color:var(--danger); background:var(--danger-bg)} .counters .hot b{color:var(--danger)}
+.codes{font-family:var(--mono); font-size:13.5px; background:var(--surface2); border:1px solid var(--line2); border-radius:10px; padding:10px 12px; margin:8px 0}
+.codes .muted{font-family:var(--sans); font-size:13px; margin-top:4px}
+.meter{background:#0e0f10; color:#e9f6ea; border-radius:14px; padding:12px 16px; margin:8px 0}
+.meter .mval{font-family:var(--mono); font-size:30px; font-variant-numeric:tabular-nums; letter-spacing:0; color:#b9f5c0}
+.meter .mcap{font-size:13px; color:#9aa39b; margin-top:2px}
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip{font:inherit; font-size:13px; padding:6px 12px; border-radius:980px; border:1px solid var(--line); background:var(--surface2); color:var(--ink); cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--caution-bg); border-color:var(--caution); color:var(--ink)}
+.simtag{display:inline-block; font-size:11px; font-weight:600; padding:1px 7px; border-radius:980px; background:var(--caution-bg); color:var(--caution); vertical-align:1px}
+.pent{position:relative; width:200px; height:200px; margin:10px auto; border-radius:50%; background:var(--fill)}
+.pent button{position:absolute; width:40px; height:40px; margin:-20px 0 0 -20px; border-radius:50%; border:2px solid var(--ink3); background:var(--surface); font:inherit; font-weight:700; color:var(--ink); cursor:pointer}
+.pent button.on{background:var(--accent); border-color:var(--accent); color:#fff}
+ol.log{margin:10px 0 0; padding-left:20px; font-size:14px; color:var(--ink2); display:grid; gap:6px}
+.tile .badge{display:inline-block; margin-left:8px; font-size:12px; font-weight:600; padding:2px 8px; border-radius:980px; background:var(--ok-bg); color:var(--ok)}
+.tile .eyebrow{font-size:12px; margin-bottom:4px}
+.simnote{font-size:13px; color:var(--ink3); margin:22px auto 0; text-align:center}
+@media (max-width:880px){ .stage3d{aspect-ratio:1/1} }
 @media (prefers-reduced-motion:reduce){*{transition:none !important; animation:none !important}}
 </style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 </head>
 <body>
 <script>document.documentElement.classList.add('js')</script>
 
 <header class="bar">
   <div class="wrap">
-    <a class="brand" href="#jobs">Strip Bay <span>Workshop Manual</span></a>
-    <nav class="seg" aria-label="Manual">
-      <a href="#jobs" data-top="jobs">Jobs</a>
-      <a href="#safety" data-top="safety">Safety</a>
+    <a class="brand" href="#sim">Strip Bay <span>Training</span></a>
+    <nav class="seg" aria-label="Sections">
+      <a href="#sim" data-top="sim">Simulator</a>
+      <a href="#jobs" data-top="jobs">Manual</a>
       <a href="#reference" data-top="reference">Reference</a>
     </nav>
   </div>
@@ -265,12 +338,44 @@ footer p{max-width:72ch; margin-bottom:8px}
 
 <main class="wrap">
 
+<!-- ════════════════════════════════════════ SIMULATOR ═ -->
+<div class="view" id="v-sim" data-top="sim">
+  <div class="hero">
+    <p class="eyebrow">Strip Bay · Volkswagen Golf Mk8 GTI</p>
+    <h1>Training Simulator</h1>
+    <p class="lede">Diagnose it, fix it, prove it. The next stage stays locked until this one is right.</p>
+    <div class="pills">
+      <span class="pill">Five jobs</span>
+      <span class="pill">A new fault every run</span>
+      <span class="pill">Every mistake recorded</span>
+    </div>
+  </div>
+  <p class="simnote" id="sim-ready">Loading the 3D simulator…</p>
+  <div class="tiles" id="sim-tiles" style="margin-top:34px"></div>
+  <p class="simnote">Meter readings and measurements are simulation values. On a real car, the workshop data governs. <a href="#safety">Read Safety</a> before your first job.</p>
+</div>
+
+<div class="view" id="v-sim-run" data-top="sim">
+  <a class="back" href="#sim">‹ All simulations</a>
+  <p class="eyebrow" id="sim-kind"></p>
+  <h1 id="sim-title" style="margin-bottom:0"></h1>
+  <ol class="stepper" id="sim-steps" aria-label="Stages"></ol>
+  <div class="simgrid">
+    <div class="card stage3d" id="sim-canvas">
+      <div class="tip" id="sim-tip" hidden></div>
+      <div class="hint">Drag to turn · scroll or pinch to zoom · tap a part</div>
+      <div class="nogl" id="sim-nogl" hidden>This browser could not start 3D graphics. The stages still work from the panel.</div>
+    </div>
+    <div class="card panel" id="sim-panel" aria-live="polite"><p class="small">Loading the 3D simulator…</p></div>
+  </div>
+</div>
+
 <!-- ════════════════════════════════════════ JOBS (home) ═ -->
 <div class="view" id="v-jobs" data-top="jobs">
   <div class="hero">
     <p class="eyebrow">Volkswagen Golf Mk8 GTI</p>
     <h1>Workshop Manual</h1>
-    <p class="lede">Seven jobs, each written in the order that keeps you safe.</p>
+    <p class="lede">The written procedures behind the simulator, in the order that keeps you safe.</p>
     <div class="pills">
       <span class="pill">Five-door</span>
       <span class="pill">Transverse four · front-wheel drive</span>
@@ -347,7 +452,7 @@ footer p{max-width:72ch; margin-bottom:8px}
 </div>
 
 <!-- ════════════════════════════════════════ SAFETY ═ -->
-<div class="view" id="v-safety" data-top="safety">
+<div class="view" id="v-safety" data-top="jobs">
   <p class="eyebrow danger">Before you start</p>
   <h1>Three things that hurt people</h1>
   <p class="lede">Each one is the reason a job in this manual is written in the order it is.</p>
@@ -1260,10 +1365,11 @@ footer p{max-width:72ch; margin-bottom:8px}
   var views = [].slice.call(document.querySelectorAll('.view'));
   var subs = [].slice.call(document.querySelectorAll('.sub'));
   function show(){
-    var h = (location.hash || '#jobs').slice(1);
+    var h = (location.hash || '#sim').slice(1);
     var sub = null;
     if (h.indexOf('ref-') === 0){ sub = h.slice(4); h = 'reference'; }
-    var v = document.getElementById('v-' + h) || document.getElementById('v-jobs');
+    if (h.indexOf('sim-') === 0) h = 'sim-run';
+    var v = document.getElementById('v-' + h) || document.getElementById('v-sim');
     views.forEach(function(x){ x.classList.toggle('on', x === v); });
     var top = v.getAttribute('data-top');
     [].forEach.call(document.querySelectorAll('.bar .seg a'), function(a){
@@ -1392,7 +1498,9 @@ footer p{max-width:72ch; margin-bottom:8px}
   draw(0);
 
   show();
+  setTimeout(function(){ var r = document.getElementById('sim-ready'); if (r && !r.hidden) r.textContent = 'The 3D simulator could not load. It needs cdn.jsdelivr.net to be reachable.'; }, 12000);
 })();
 </script>
+<script type="module" src="sim.js"></script>
 </body>
 </html>
