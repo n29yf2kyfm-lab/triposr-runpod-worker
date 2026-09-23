@@ -320,7 +320,8 @@ ol.log{margin:10px 0 0; padding-left:20px; font-size:14px; color:var(--ink2); di
 @media (max-width:880px){ .stage3d{aspect-ratio:1/1} }
 @media (prefers-reduced-motion:reduce){*{transition:none !important; animation:none !important}}
 </style>
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<!-- three.js r169 is served beside the page (copied from the Strip Bay app), so the simulator makes no request off its own origin -->
+<script type="importmap">{"imports":{"three":"./lib/three.module.js","three/addons/":"./lib/addons/"}}</script>
 </head>
 <body>
 <script>document.documentElement.classList.add('js')</script>
@@ -346,6 +347,7 @@ ol.log{margin:10px 0 0; padding-left:20px; font-size:14px; color:var(--ink2); di
     <p class="lede">Diagnose it, fix it, prove it. The next stage stays locked until this one is right.</p>
     <div class="pills">
       <span class="pill">Five jobs</span>
+      <span class="pill">The real Golf</span>
       <span class="pill">A new fault every run</span>
       <span class="pill">Every mistake recorded</span>
     </div>
@@ -1498,7 +1500,7 @@ ol.log{margin:10px 0 0; padding-left:20px; font-size:14px; color:var(--ink2); di
   draw(0);
 
   show();
-  setTimeout(function(){ var r = document.getElementById('sim-ready'); if (r && !r.hidden) r.textContent = 'The 3D simulator could not load. It needs cdn.jsdelivr.net to be reachable.'; }, 12000);
+  setTimeout(function(){ var r = document.getElementById('sim-ready'); if (r && !r.hidden) r.textContent = 'The 3D simulator could not load. Reload the page to try again.'; }, 12000);
 })();
 </script>
 <script type="module" src="sim.js"></script>

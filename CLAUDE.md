@@ -5410,8 +5410,20 @@ bonnet lift, when the closed-shell test ran first) was caught and fixed.
 ## Strip Bay Training Simulator: how it is built and tested (2026-09-23)
 
 The manual artifact (https://claude.ai/artifact/FyF8L4VKj5sV2qu2bTTPmx) is now a
-training simulator: `platform/trainer/manual.html` plus `platform/trainer/sim.js`
-(three.js 0.160 from cdn.jsdelivr.net/npm via an importmap). There are five jobs:
+training simulator: `platform/trainer/manual.html` plus `platform/trainer/sim.js`.
+Like the Strip Bay app, it makes no request off its own origin. three.js r169
+(`lib/`), `golf.glb.wasm` and `alt.glb.wasm` are copied into the artifact
+server-side from the Strip Bay artifact with `files: {path: {artifact, path}}`.
+Those files are NOT in the repo, so to test locally, fetch them with
+Artifact read `paths` and delete them afterwards (standing order: no GLBs on
+the box). Jobs START ON THE REAL GOLF where the file has the parts: bonnet up
+(misfire, starter and alternator jobs), front-left wheel off on stands with the
+real disc and caliper (brakes), and the driver's door open onto the real cabin
+(airbag). The part rules and hinge points are reused from golf-bay.html. The
+file has no engine, so the component stages use teaching models and say so on
+screen. **Software rendering in the headless test browser draws the full Golf
+at about 0.5 fps.** Tweens therefore run on wall-clock time, and the test uses
+180 s screenshot timeouts. That is the test machine, not the page. There are five jobs:
 misfire, starter, alternator, brake pads and airbag. Each job is a list of stages.
 A wrong action is refused and recorded, and the next stage stays locked until the
 current one is right. Faults are drawn at random every run: the misfiring

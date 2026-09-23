@@ -5,6 +5,9 @@
  * Every wrong action is recorded as a fault with the reason, so the report at
  * the end is an assessor's record, not a score.
  *
+ * Jobs start on the real Golf (golf.glb.wasm) where the file has the parts,
+ * then move to teaching models for what it does not contain.
+ *
  * Faults are drawn at random each run (which cylinder, which part, which
  * charging fault, disc worn or not), so a trainee cannot learn the answers,
  * only the method. Numbers shown by the meter and gauges are SIMULATION values
@@ -13,6 +16,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 
 const $ = s => document.querySelector(s);
 const rnd = a => a[Math.floor(Math.random() * a.length)];
@@ -168,6 +173,84 @@ if (renderer) {
   });
 }
 
+/* ───────────────────────── the real car ─────────────────────────
+ * golf.glb.wasm is the Strip Bay app's own Golf Mk8 GTI, copied server-side
+ * from that artifact. The part rules, hinge points and the ".glb.wasm" trick
+ * are taken from platform/trainer/golf-bay.html, where every one of them was
+ * measured off this exact file. Frame: +X is the car's LEFT, +Y up, +Z the
+ * nose, ground at Y=0. The file has NO engine, battery or ancillaries, so the
+ * real car is used for what it genuinely contains (bonnet, doors, wheels,
+ * brake discs and calipers, cabin) and the component jobs switch to teaching
+ * models for the rest, saying so on screen. */
+const gltf = new GLTFLoader(); gltf.setMeshoptDecoder(MeshoptDecoder);
+const GOLF_RULES = [
+  [/^Panel_Bonnet/, 'panel_bonnet'],
+  // the mirror is its own part in the app; here it rides on the door it is bolted to
+  [/^Asm_Mirror_FL|^Ext_Door_FL_|^Int_Door_FL_|^Ext_Door_Limiter_FL/, 'door_fl'],
+  [/^Ext_Door_FR_|^Int_Door_FR_|^Ext_Door_Limiter_FR/, 'door_fr'],
+  [/^Ext_Door_RL_|^Int_Door_RL_|^Ext_Door_Limiter_RL/, 'door_rl'],
+  [/^Ext_Door_RR_|^Int_Door_RR_|^Ext_Door_Limiter_RR/, 'door_rr'],
+  [/^Ext_Trunk_Lid|^Int_Trunk_Lid/, 'tailgate'],
+  [/^Rim_FL|^Tire_FL/, 'wheel_fl'], [/^Rim_FR|^Tire_FR/, 'wheel_fr'],
+  [/^Rim_RL|^Tire_RL/, 'wheel_rl'], [/^Rim_RR|^Tire_RR/, 'wheel_rr'],
+  [/^Ext_Brake_FL_Rotor/, 'rotor_fl'], [/^Ext_Brake_FR_Rotor/, 'rotor_fr'],
+  [/^Ext_Brake_FL_Caliper/, 'caliper_fl'], [/^Ext_Brake_FR/, 'caliper_fr'],
+  [/^Int_Airbag/, 'airbags'], [/^Int_Seats|^seat_/, 'seats'], [/^Int_SW/, 'steering'],
+  [/^Ext_Window|^Int_Window|^Int_Body_Window|^Ext_Body_Window|^Int_Glass_Clear|^Ext_Sunroof/, 'glazing'],
+  [/^Int_/, 'cabin'], [/./, 'body']];
+// three.js DELETES the colon from "G:Ext_…" (sanitizeNodeName), so test all three spellings
+function classifyGolf(n) {
+  const c = [n]; if (n.startsWith('G:')) c.push(n.slice(2)); if (/^G[A-Z]/.test(n)) c.push(n.slice(1));
+  for (const [re, id] of GOLF_RULES) for (const x of c) if (re.test(x)) return id;
+  return 'body';
+}
+const GOLF_HINGE = { door_fl: [0.772, 0, 0.870], door_fr: [-0.772, 0, 0.870], door_rl: [0.754, 0, -0.209], door_rr: [-0.754, 0, -0.209],
+  tailgate: [0, 1.394, -1.472], panel_bonnet: [0, 0.975, 1.115] };
+const BONNET_OPEN = 52 * Math.PI / 180, DOOR_OPEN = 64 * Math.PI / 180;
+let carP = null, CAR = null;
+function loadCar() {
+  if (!carP) carP = new Promise((res, rej) => gltf.load('golf.glb.wasm', g => { CAR = buildGolf(g.scene); res(CAR); }, undefined, rej));
+  return carP;
+}
+function buildGolf(root) {
+  const sc = new THREE.Scene(); sc.environment = env;
+  const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(3, 5, 4); sc.add(key);
+  sc.add(new THREE.HemisphereLight(0xffffff, 0x3a3a44, 0.5));
+  shadow(sc, 3.4, 0.002).scale.set(0.75, 1.3, 1);
+  const car = new THREE.Group(); sc.add(car); car.add(root); car.updateMatrixWorld(true);
+  const by = {};
+  root.traverse(o => { if (o.isMesh) (by[classifyGolf(o.name || (o.parent && o.parent.name) || '')] ||= []).push(o); });
+  const parts = {};
+  for (const id in by) {
+    const box = new THREE.Box3(); by[id].forEach(m => box.expandByObject(m));
+    const c = box.getCenter(new THREE.Vector3());
+    const pv = GOLF_HINGE[id] ? new THREE.Vector3(...GOLF_HINGE[id]) : c;
+    const g = new THREE.Group(); g.position.copy(pv); car.add(g); g.updateMatrixWorld(true);
+    by[id].forEach(m => g.attach(m));
+    g.userData.part = id;
+    parts[id] = { group: g, home: pv.clone(), centre: c };
+  }
+  // axle stand, placed under the front-left sill; hidden until the job puts it there
+  const stand = group(car, { pos: [0.72, 0, 0.95], part: 'stand' });
+  add(stand, cyl(0.03, 0.09, 24, 0.09), MAT.darkSteel, { pos: [0, 0.045, 0] });
+  add(stand, cyl(0.018, 0.2), MAT.yellow, { pos: [0, 0.18, 0] });
+  add(stand, new THREE.BoxGeometry(0.07, 0.025, 0.05), MAT.darkSteel, { pos: [0, 0.29, 0] });
+  stand.visible = false;
+  const labels = { panel_bonnet: 'Bonnet', door_fl: 'Driver’s door (front left: this car is left-hand drive)', door_fr: 'Front passenger door',
+    door_rl: 'Rear door', door_rr: 'Rear door', tailgate: 'Tailgate', wheel_fl: 'Front-left wheel', wheel_fr: 'Front-right wheel',
+    wheel_rl: 'Rear wheel', wheel_rr: 'Rear wheel', rotor_fl: 'Brake disc, front left (MIN TH stamped on the hat)', rotor_fr: 'Brake disc, front right',
+    caliper_fl: 'Brake caliper, front left', caliper_fr: 'Brake caliper, front right', airbags: 'Airbags', seats: 'Seats',
+    steering: 'Steering wheel (driver airbag in the hub)', glazing: 'Glass', cabin: 'Cabin trim', body: 'Body shell', stand: 'Axle stand' };
+  return {
+    scene: sc, parts, car, stand, labels, update() {},
+    reset() {
+      for (const id in parts) { parts[id].group.position.copy(parts[id].home); parts[id].group.rotation.set(0, 0, 0); }
+      car.position.set(0, 0, 0); stand.visible = false;
+    },
+  };
+}
+const carPart = id => CAR && CAR.parts[id] ? CAR.parts[id].group : null;
+
 /* ───────────────────────── stage engine ───────────────────────── */
 const PROG = 'sb-sim-progress';
 const loadProg = () => { try { return JSON.parse(localStorage.getItem(PROG) || '{}'); } catch (e) { return {}; } };
@@ -187,8 +270,9 @@ function openJob(id) {
     const key = new THREE.DirectionalLight(0xffffff, 1.5); key.position.set(2, 3, 2.5); scene.add(key);
     scene.add(new THREE.HemisphereLight(0xffffff, 0x3a3a44, 0.55));
     R = def.build(scene, run.st);
-    camera.position.set(...def.cam.pos); controls.target.set(...def.cam.target); controls.update();
-  } else { R = { labels: {}, update() {} }; }
+    run.jobScene = scene; run.jobR = R; run.view = null;
+    if (CAR) CAR.reset();
+  } else { R = { labels: {}, update() {} }; run.jobR = R; }
   $('#sim-kind').textContent = def.kind; $('#sim-title').textContent = def.title;
   renderStage();
 }
@@ -207,19 +291,33 @@ function renderStage() {
   renderStepper();
   panel.textContent = ''; ticks = [];
   const s = job.stages[run.idx];
+  // real-car stages run on the Golf itself; everything else on the job's teaching model
+  if (s.car && renderer && !run.noCar) {
+    if (!CAR) {
+      const me = run;
+      panel.append(h('p', { class: 'small' }, 'Loading the real Golf (6.5 MB)…'));
+      loadCar().then(() => { if (run === me) renderStage(); }, () => { me.noCar = true; if (run === me) renderStage(); });
+      return;
+    }
+    if (run.view !== 'car') { CAR.reset(); scene = CAR.scene; R = CAR; run.view = 'car'; camera.position.set(...s.car.cam[0]); controls.target.set(...s.car.cam[1]); controls.update(); }
+  } else if (renderer && run.view !== 'job') {
+    scene = run.jobScene; R = run.jobR; run.view = 'job';
+    camera.position.set(...job.cam.pos); controls.target.set(...job.cam.target); controls.update();
+  }
   const head = h('div', { class: 'ph' }, h('span', {}, `Stage ${run.idx + 1} of ${job.stages.length}`), h('span', { class: 'fc', id: 'sim-fc' }, faultText()));
   const body = h('div', { class: 'pb' });
   const fb = h('div', { class: 'fb', role: 'status', 'aria-live': 'polite' });
   const foot = h('div', { class: 'pf' });
   panel.append(head, h('h2', {}, s.title), body, fb, foot);
   api = makeApi(fb, foot);
+  if (s.car && run.noCar) body.append(h('p', { class: 'small' }, 'The real car could not load, so this stage runs without it. The steps are the same.'));
   s.render(body, api);
 }
 const faultText = () => run.faults ? `${run.faults} not accepted` : 'No faults';
 
 function makeApi(fb, foot) {
   const a = {
-    st: run.st, R, done: false, onPick: null,
+    st: run.st, R, C: CAR, done: false, onPick: null,
     tween, wait, camTo,
     tick(fn) { ticks.push(fn); },
     say(kind, title, msg) {
@@ -284,8 +382,8 @@ function quiz({ title, lead, demo, q, opts, need, needMsg }) {
 // order: steps must be done in sequence (steps sharing `g` may be done in any order
 // among themselves). `early` is the consequence shown when a step is taken too soon,
 // `traps` are plausible wrong actions, `pick` lets a 3D part stand in for the button.
-function order({ title, lead, steps, traps = [], done: doneMsg, intro }) {
-  return { title, render(b, a) {
+function order({ title, lead, steps, traps = [], done: doneMsg, intro, car }) {
+  return { title, car, render(b, a) {
     if (lead) b.append(h('p', {}, lead));
     if (intro) intro(b, a);
     const list = h('ol', { class: 'ticks' });
@@ -309,7 +407,8 @@ function order({ title, lead, steps, traps = [], done: doneMsg, intro }) {
       if (done.every(Boolean)) a.pass(doneMsg);
     }
     a.onPick = part => {
-      const it = items.find(x => x.s && !done[x.i] && x.s.pick === part);
+      const it = items.find(x => x.s && !done[x.i] && x.s.pick === part)
+        || items.find(x => x.trap && x.trap.pick === part && btn.get(x).isConnected);
       if (it) act(it);
     };
   } };
@@ -320,6 +419,22 @@ function meterBox() {
   return { el: h('div', { class: 'meter' }, val, cap), set(v, c) { val.textContent = v; cap.textContent = c; } };
 }
 const sim = t => h('span', { class: 'simtag' }, t || 'simulation value');
+
+/* ── real-car stages shared by several jobs ── */
+function bonnetStage(after) {
+  return order({
+    title: 'Bonnet up', car: { cam: [[2.4, 1.75, 3.9], [0, 0.72, 1.05]] },
+    lead: 'This is the real Golf. Get the bonnet up and held before anything else.',
+    steps: [
+      { t: 'Pull the bonnet release inside the car' },
+      { t: 'Release the safety catch at the front of the bonnet', pick: 'panel_bonnet' },
+      { t: 'Lift it until it is held open', pick: 'panel_bonnet', anim: async () => { const g = carPart('panel_bonnet'); if (g) await tween(g.rotation, { x: -BONNET_OPEN }, 0.9); } },
+    ],
+    traps: [{ t: 'Lean in before checking the bonnet is held', why: 'A bonnet that drops is a head injury. Check it is held by its stay or struts before you lean in.' }],
+    done: 'Bonnet up and held. ' + after,
+  });
+}
+const TEACH = 'The next stages use a teaching model of the parts: this car’s 3D file has no engine or ancillaries inside it.';
 
 /* ───────────────────────── JOB 1: MISFIRE ───────────────────────── */
 const FIRE = { 1: 0, 3: 180, 4: 360, 2: 540 };
@@ -425,6 +540,7 @@ function engineControls(b, a, live = true) {
   return row;
 }
 misfire.stages = [
+  bonnetStage(TEACH),
   quiz({
     title: 'Find the cylinder',
     lead: 'Job card: "It shakes at idle and the engine light flashes when I pull away." Connect the scan tool, then find which cylinder is not firing.',
@@ -454,7 +570,7 @@ misfire.stages = [
 ];
 // the answer depends on the random fault, so patch the options at render time
 {
-  const q = misfire.stages[0], render = q.render;
+  const q = misfire.stages[1], render = q.render;
   q.render = (b, a) => {
     render(b, a);
     [...b.querySelectorAll('.opts .opt')].forEach(bt => {
@@ -678,6 +794,7 @@ const starter = {
     return R;
   },
   stages: [
+    bonnetStage('The starter sits low at the joint between engine and gearbox. ' + TEACH),
     quiz({
       title: 'How it engages',
       lead: 'Turn the key and watch. The solenoid does two jobs at once: it throws the pinion into the flywheel ring gear, and it closes the heavy contacts that feed the motor.',
@@ -770,22 +887,23 @@ const alternator = {
   build(scene, st) {
     shadow(scene, 2, -2.8);
     const L = {};
+    const cutG = group(scene);   // the cutaway; swapped for the real part on request
     add(scene, X(cyl(0.045, 2.1)), MAT.steel, { pos: [-0.1, 0, 0], nopick: true });
     const pulley = group(scene, { pos: [0.88, 0, 0], part: 'pulley' });
     add(pulley, X(cyl(0.22, 0.2)), MAT.darkSteel);
     for (let k = 0; k < 5; k++) add(pulley, new THREE.TorusGeometry(0.225, 0.012, 8, 48), MAT.steel, { pos: [-0.08 + k * 0.04, 0, 0], rot: [0, Math.PI / 2, 0] });
-    add(scene, X(cyl(0.72, 0.5, 48, 0.72, true)), MAT.glass, { pos: [0.45, 0, 0], nopick: true });
-    add(scene, X(cyl(0.72, 0.45, 48, 0.72, true)), MAT.glass, { pos: [-0.45, 0, 0], nopick: true });
-    add(scene, X(annulus(0.52, 0.68, 0.36)), MAT.lam, { part: 'stator' });
+    add(cutG, X(cyl(0.72, 0.5, 48, 0.72, true)), MAT.glass, { pos: [0.45, 0, 0], nopick: true });
+    add(cutG, X(cyl(0.72, 0.45, 48, 0.72, true)), MAT.glass, { pos: [-0.45, 0, 0], nopick: true });
+    add(cutG, X(annulus(0.52, 0.68, 0.36)), MAT.lam, { part: 'stator' });
     const bundles = [];
     for (let k = 0; k < 18; k++) {
       const a0 = k / 18 * Math.PI * 2;
       for (const x of [-0.22, 0.22]) {
-        const m = add(scene, new THREE.BoxGeometry(0.08, 0.1, 0.12), new THREE.MeshStandardMaterial({ color: 0xc9763a, metalness: 1, roughness: 0.35, emissive: 0xff6a10, emissiveIntensity: 0 }), { pos: [x, Math.cos(a0) * 0.55, Math.sin(a0) * 0.55], rot: [-a0, 0, 0], part: 'stator' });
+        const m = add(cutG, new THREE.BoxGeometry(0.08, 0.1, 0.12), new THREE.MeshStandardMaterial({ color: 0xc9763a, metalness: 1, roughness: 0.35, emissive: 0xff6a10, emissiveIntensity: 0 }), { pos: [x, Math.cos(a0) * 0.55, Math.sin(a0) * 0.55], rot: [-a0, 0, 0], part: 'stator' });
         m.userData.phase = k % 3; bundles.push(m);
       }
     }
-    const rotor = group(scene, { part: 'rotor' });
+    const rotor = group(cutG, { part: 'rotor' });
     const field = add(rotor, X(cyl(0.28, 0.26)), new THREE.MeshStandardMaterial({ color: 0xc9763a, metalness: 1, roughness: 0.35, emissive: 0xff8a2a, emissiveIntensity: 0 }), { part: 'field' });
     add(rotor, X(cyl(0.46, 0.05)), MAT.darkSteel, { pos: [0.19, 0, 0] });
     add(rotor, X(cyl(0.46, 0.05)), MAT.darkSteel, { pos: [-0.19, 0, 0] });
@@ -793,12 +911,12 @@ const alternator = {
       const a0 = k / 12 * Math.PI * 2, side = k % 2 ? 1 : -1;
       add(rotor, new THREE.BoxGeometry(0.3, 0.05, 0.14), MAT.darkSteel, { pos: [side * 0.04, Math.cos(a0) * 0.44, Math.sin(a0) * 0.44], rot: [-a0, 0, side * 0.12] });
     }
-    add(scene, X(cyl(0.09, 0.05)), MAT.copper, { pos: [-0.75, 0, 0], part: 'slip' });
-    add(scene, X(cyl(0.09, 0.05)), MAT.copper, { pos: [-0.85, 0, 0], part: 'slip' });
-    add(scene, new THREE.BoxGeometry(0.05, 0.12, 0.05), MAT.carbon, { pos: [-0.75, 0.15, 0], part: 'brushes' });
-    add(scene, new THREE.BoxGeometry(0.05, 0.12, 0.05), MAT.carbon, { pos: [-0.85, 0.15, 0], part: 'brushes' });
-    add(scene, new THREE.BoxGeometry(0.3, 0.12, 0.34), MAT.plastic, { pos: [-0.8, 0.29, 0], part: 'regulator' });
-    const rect = group(scene, { pos: [-1.02, 0, 0], part: 'rectifier' });
+    add(cutG, X(cyl(0.09, 0.05)), MAT.copper, { pos: [-0.75, 0, 0], part: 'slip' });
+    add(cutG, X(cyl(0.09, 0.05)), MAT.copper, { pos: [-0.85, 0, 0], part: 'slip' });
+    add(cutG, new THREE.BoxGeometry(0.05, 0.12, 0.05), MAT.carbon, { pos: [-0.75, 0.15, 0], part: 'brushes' });
+    add(cutG, new THREE.BoxGeometry(0.05, 0.12, 0.05), MAT.carbon, { pos: [-0.85, 0.15, 0], part: 'brushes' });
+    add(cutG, new THREE.BoxGeometry(0.3, 0.12, 0.34), MAT.plastic, { pos: [-0.8, 0.29, 0], part: 'regulator' });
+    const rect = group(cutG, { pos: [-1.02, 0, 0], part: 'rectifier' });
     add(rect, X(cyl(0.6, 0.04)), MAT.darkSteel);
     for (let k = 0; k < 6; k++) { const a0 = k / 6 * Math.PI * 2 + 0.3; add(rect, X(cyl(0.05, 0.06)), MAT.steel, { pos: [-0.04, Math.cos(a0) * 0.42, Math.sin(a0) * 0.42] }); }
     const bplus = add(scene, X(cyl(0.04, 0.2)), MAT.copper, { pos: [-1.12, 0.5, 0.3], part: 'bplus' });
@@ -813,12 +931,25 @@ const alternator = {
     for (let k = 0; k <= 12; k++) { const t = Math.PI * k / 12; belt.push([0.88, Math.sin(t) * 0.235, Math.cos(t) * 0.235]); }
     for (let k = 0; k <= 12; k++) { const t = Math.PI + Math.PI * k / 12; belt.push([0.88, -2.2 + Math.sin(t) * 0.515, Math.cos(t) * 0.515]); }
     tube(scene, belt, 0.02, MAT.rubber, { closed: true, part: 'belt', seg: 120 });
-    Object.assign(L, { pulley: 'Pulley', stator: 'Stator: output is generated here', rotor: 'Rotor: claw poles', field: 'Field winding', slip: 'Slip rings',
+    // THE REAL PART: the alternator modelled from a photograph for the Strip Bay app
+    // (alt.glb.wasm). Its shaft is along Z with the cut end at -X once turned, as
+    // measured in golf-bay.html; scaled to this scene's 1.44-unit case diameter.
+    const real = group(scene, { part: 'realalt' }); real.visible = false;
+    gltf.load('alt.glb.wasm', g => {
+      const m = g.scene; m.rotation.y = -Math.PI / 2; m.updateMatrixWorld(true);
+      let bb = new THREE.Box3().setFromObject(m);
+      const d = Math.max(bb.max.y - bb.min.y, bb.max.z - bb.min.z);
+      m.scale.setScalar(1.44 / d); m.updateMatrixWorld(true);
+      bb = new THREE.Box3().setFromObject(m);
+      m.position.sub(bb.getCenter(new THREE.Vector3())); m.position.x += 0.72 - (bb.max.x - bb.min.x) / 2;
+      real.add(m);
+    }, undefined, () => { st.noReal = true; });
+    Object.assign(L, { realalt: 'The real alternator: cast housings, cooling slots, windings visible through them', pulley: 'Pulley', stator: 'Stator: output is generated here', rotor: 'Rotor: claw poles', field: 'Field winding', slip: 'Slip rings',
       brushes: 'Brushes', regulator: 'Regulator and brush holder', rectifier: 'Rectifier: six diodes', bplus: 'B+ output stud', cable: 'Main charging cable',
       battery: 'Battery', crankpulley: 'Crankshaft pulley', belt: 'Auxiliary belt' });
     let ang = 0;
     return {
-      labels: L, bplus,
+      labels: L, bplus, cutG, real,
       update(dt) {
         const load = st.loads.reduce((s, on, i) => s + (on ? LOADS[i][1] : 0), 0);
         const noField = st.fault === 'brushes' && !st.fixed;
@@ -870,10 +1001,23 @@ function altBench(b, a, onRead) {
   a.onPick = part => { if (part === 'battery') probe('bat'); if (part === 'bplus') probe('bp'); };
 }
 alternator.stages = [
+  bonnetStage(TEACH),
   quiz({
     title: 'How it makes power',
     lead: 'Start the engine and switch loads on. Watch the field winding and the stator: the regulator raises the field current as the demand rises, and the stator windings light up in three phases.',
-    demo: (b, a) => altBench(b, a),
+    demo: (b, a) => {
+      const view = h('div', { class: 'toggle' }, ['Cutaway', 'Real part'].map((t, i) => {
+        const x = h('button', { type: 'button', 'aria-pressed': String(i === 0) }, t);
+        x.addEventListener('click', () => {
+          if (i === 1 && a.st.noReal) return a.info('The real alternator model could not load.');
+          a.R.cutG.visible = i === 0; a.R.real.visible = i === 1;
+          [...view.children].forEach(y => y.setAttribute('aria-pressed', String(y === x)));
+        });
+        return x;
+      }));
+      b.append(h('div', { class: 'row' }, h('span', { class: 'small' }, 'View'), view));
+      altBench(b, a);
+    },
     need: a => a.st.running && a.st.touchedLoad, needMsg: 'Run the engine and switch a load on first. Watch what the field does.',
     q: 'Where is the output current actually generated?',
     opts: [
@@ -1002,27 +1146,35 @@ const brakes = {
     Object.assign(L, { hub: 'Hub', disc: 'Brake disc (vented). MIN TH stamped on the hat', carrier: 'Caliper carrier (bolted to the hub)', pads: 'Brake pads', caliper: 'Caliper', piston: 'Caliper piston',
       gb1: 'Guide bolt', gb2: 'Guide bolt', hose: 'Flexible brake hose', spring: 'Road spring: hang the caliper here', wheel: 'Road wheel' });
     for (let k = 0; k < 5; k++) L['wb' + k] = 'Wheel bolt';
+    wheel.position.z = 0.7; wheel.visible = false;   // the real car's wheel came off in stage 1
     return { labels: L, wheel, wb, cal, gbs, piston, padIn, padOut, fIn, disc, hook, update() {} };
   },
   stages: [],
 };
+const BRAKE_CAM = [[2.05, 0.62, 2.05], [0.78, 0.36, 1.3]];
 brakes.stages = [
   order({
-    title: 'Wheel off, safely',
-    lead: 'Job card: "Grinding from the front when braking." The car is on the workshop floor.',
+    title: 'Wheel off, safely', car: { cam: [[3.1, 1.2, 3.1], [0.5, 0.45, 1.0]] },
+    lead: 'Job card: "Grinding from the front when braking." This is the real Golf on the workshop floor. Take the front-left wheel off.',
     steps: [
-      { t: 'Slacken the wheel bolts, car on the ground', pick: 'wheel' },
-      { t: 'Raise the car with the jack at the lifting point', early: 'Slacken the bolts first. With the wheel in the air it just turns when you push on the bar.' },
-      { t: 'Axle stand under the lifting point, lower onto it' },
-      { t: 'Remove the bolts and the wheel', pick: 'wheel', anim: async a => { await tween(a.R.wheel.position, { z: 0.7 }, 0.8); a.R.wheel.visible = false; } },
+      { t: 'Slacken the front-left wheel bolts, car on the ground', pick: 'wheel_fl' },
+      { t: 'Raise the car with the jack at the front-left lifting point', early: 'Slacken the bolts first. With the wheel in the air it just turns when you push on the bar.',
+        anim: async a => { if (a.C) await tween(a.C.car.position, { y: 0.07 }, 0.9); } },
+      { t: 'Axle stand under the lifting point, lower onto it', pick: 'body', anim: async a => { if (a.C) a.C.stand.visible = true; } },
+      { t: 'Remove the bolts and the wheel', pick: 'wheel_fl', anim: async a => {
+        const g = carPart('wheel_fl');
+        if (g) await tween(g.position, { x: CAR.parts.wheel_fl.home.x + 0.85, y: CAR.parts.wheel_fl.home.y + 0.04 }, 0.9);
+        if (a.C) await camTo(...BRAKE_CAM);
+      } },
     ],
     traps: [{ t: 'Work with the car on the trolley jack alone', why: 'A trolley jack lifts. It never holds. Axle stands before anything comes off.' }],
     done: 'Wheel off, car on stands.',
   }),
   {
-    title: 'Measure before you decide',
+    title: 'Measure before you decide', car: { cam: BRAKE_CAM },
     render(b, a) {
       const st = a.st; st.mic = []; st.used = {};
+      a.onPick = part => { if (part === 'rotor_fl') a.info('Real disc, front left. The hat is stamped MIN TH 22.0 mm (simulation value). Measure the swept face, not the rusty lip at the edge.'); };
       const minTh = 22.0;
       b.append(h('p', {}, `Pad friction material and disc thickness decide the job. The disc hat is stamped `, h('b', {}, `MIN TH ${f1(minTh)} mm`), ' ', sim(), '.'));
       const m = meterBox(); b.append(m.el);
@@ -1177,12 +1329,13 @@ const airbag = {
   },
   stages: [
     order({
-      title: 'Isolate and wait',
-      lead: 'The airbag unit keeps a reserve charge so the bag still fires if a crash destroys the battery. That reserve is what can fire it on your bench.',
+      title: 'Isolate and wait', car: { cam: [[3.2, 1.55, 2.3], [0.45, 0.85, 0.4]] },
+      lead: 'This is the real Golf. The airbag unit keeps a reserve charge so the bag still fires if a crash destroys the battery. That reserve is what can fire it on your bench.',
       steps: [
         { t: 'Look up the procedure and the stand-down time' },
-        { t: 'Ignition off, key out of the car' },
-        { t: 'Battery negative off and secured', pick: 'batneg', anim: async a => { await tween(a.R.neg.position, { y: 0.14 }, 0.4); } },
+        { t: 'Open the driver\u2019s door', pick: 'door_fl', anim: async a => { const g = carPart('door_fl'); if (g) await tween(g.rotation, { y: -DOOR_OPEN }, 0.8); if (a.C) await camTo([2.1, 1.35, -0.2], [0.36, 0.95, 0.6]); } },
+        { t: 'Ignition off, key out of the car', early: 'Open the driver\u2019s door first.' },
+        { t: 'Battery negative off and secured', anim: async () => {} },
         { t: 'Wait the stand-down time', note: 'Waiting. On the car, the time comes from the workshop data. This sim uses 10 seconds.', anim: async a => {
           for (let s = 10; s > 0; s--) { a.info(`Waiting: ${s} s. The reserve charge is draining. (Sim: 10 s. On the car, the time in the data.)`); await wait(1000); }
           a.clear();
@@ -1190,6 +1343,7 @@ const airbag = {
       ],
       traps: [
         { t: 'Pull the airbag fuse and start straight away', why: 'The reserve charge is inside the airbag unit, after the fuse. Isolate, then wait the full time.' },
+        { t: 'Open the front-right door to reach the wheel', pick: 'door_fr', why: 'This car is left-hand drive: the steering wheel is on the LEFT. Check the drive side of the car in front of you.' },
         { t: 'Check the airbag circuit with a multimeter to see if it is safe', why: 'A meter passes its own test current through the igniter. That can fire it. Never.' },
       ],
       done: 'Isolated and stood down.',
@@ -1258,15 +1412,18 @@ function route() {
 window.addEventListener('hashchange', route);
 $('#sim-ready').hidden = true;
 // read-only handle for the automated walkthrough test (platform/trainer/simtest.mjs)
-window.__sim = { get run() { return run; }, get api() { return api; } };
+window.__sim = { get run() { return run; }, get api() { return api; }, get car() { return CAR; }, get tweens() { return tweens.length; }, get frames() { return frames; }, get active() { return [activeId, !!scene, document.hidden]; } };
 route();
 
 const clock = new THREE.Clock();
+let frames = 0;
 (function loop() {
-  requestAnimationFrame(loop);
-  const dt = Math.min(clock.getDelta(), 0.05);
+  requestAnimationFrame(loop); frames++;
+  const raw = clock.getDelta(), dt = Math.min(raw, 0.05);
   if (!activeId || !renderer || !scene || document.hidden) return;
-  runTweens(dt);
+  // tweens run on wall-clock time so a slow device finishes an action on time
+  // (the engine and rotor animations keep the capped step so they never jump)
+  runTweens(Math.min(raw, 1));
   if (R && R.update) R.update(dt);
   ticks.forEach(f => f());
   controls.update();
