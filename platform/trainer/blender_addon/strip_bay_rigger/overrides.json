@@ -1,0 +1,5 @@
+{
+  "_about": "Per-car rulings for what geometry cannot decide. Keys are GLB file names without .glb. door_rl/door_rr: \"slide\" or \"swing\". A copy named overrides.json in the INPUT folder is read too, and wins.",
+  "volkswagen-sharan-vw1-v1": {"door_rl": "slide", "door_rr": "slide",
+    "_why": "Second-generation Sharan (7N): sliding rear doors. Same bounding-box shape as a Mazda 3, so no geometric rule can tell; decided by looking at the render."}
+}

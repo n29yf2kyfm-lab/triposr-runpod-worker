@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Write the app's FLEET_GEN block from sb_convert.py reports.
+"""Write the app's FLEET_GEN block from converter reports (sb_convert.py
+writes `<assetId>.json`; the Blender add-on's batch writes
+`<assetId>.report.json` — either is read).
 
     python3 fleet_gen.py golf-bay.html rep_dir accepted.txt
 
@@ -21,7 +23,8 @@ for line in open(acc):
     nopaint = line.endswith('|nopaint')
     line = line.replace('|nopaint', '').strip()
     aid, name = line.split(' ', 1)
-    r = json.load(open(f'{repdir}/{aid}.json'))
+    rp = f'{repdir}/{aid}.report.json'
+    r = json.load(open(rp if __import__('os').path.exists(rp) else f'{repdir}/{aid}.json'))
     key = re.sub(r'[^a-z0-9]', '', aid.replace('-v1', '').replace('-v2', ''))[:24]
     p = r['parts']
     man = [f"<b>Converted from a game-style model.</b> The parts are the file's own pieces, renamed and "
@@ -36,6 +39,13 @@ for line in open(acc):
         man.append('<b>Lifted out of the paint:</b> ' + ', '.join(
             {'panel_bonnet': 'the bonnet', 'tailgate': 'the boot lid'}[k] + f' ({v:,} faces)'
             for k, v in r['lifted'].items()) + ' sat as loose pieces inside the body mesh and were taken out whole.')
+    motion = r.get('motion') or {}
+    if any(v['type'] == 'slide' for v in motion.values()):
+        man.append('<b>Sliding side doors.</b> The rear side doors run back along the body on a rail rather '
+                   'than swinging — decided from ' + '; '.join(sorted({v['why'] for v in motion.values()
+                                                                     if v['type'] == 'slide'})) + '.')
+    if any(v['type'] == 'barn' for v in motion.values()):
+        man.append('<b>Barn doors at the back.</b> Two doors across the rear, each hinged on its outer edge.')
     pt = PT.get(aid)
     if pt and 'engine' in p:
         # the FILE has an engine: keep it, and only the chassis is built
@@ -54,7 +64,7 @@ for line in open(acc):
     man.append('The engine, starter, brake and door-internals bays are built around the Golf and do not run on this car.')
     entries.append((key, {
         'name': name, 'short': name.split(' ')[-1], 'url': f'{aid}.glb.wasm', 'conv': 4,
-        'hinge': r['hinge'], **({'paint': False} if nopaint else {}), **({'pt': pt} if pt else {}),
+        'hinge': r['hinge'], **({'motion': motion} if motion else {}), **({'paint': False} if nopaint else {}), **({'pt': pt} if pt else {}),
         'note': f"Real geometry from {aid} · hinges DERIVED from the file"
                 + ((" · suspension CONSTRUCTED" if 'engine' in p else
                     " · engine and suspension CONSTRUCTED to the model's typical layout") if pt else ""),
