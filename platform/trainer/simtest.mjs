@@ -5,6 +5,8 @@ import { chromium } from 'playwright';
 const [, , url, out] = process.argv;
 const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
 const p = await b.newPage({ viewport: { width: 1000, height: 760 }, ignoreHTTPSErrors: true });
+// software GL draws the full car at well under 1 fps; a click waits for frames, so allow for it
+p.setDefaultTimeout(180000);
 const errs = []; p.on('pageerror', e => errs.push(e.message)); p.on('console', m => { if (m.type() === 'error') errs.push('console: ' + m.text()); });
 const sleep = ms => p.waitForTimeout(ms);
 const st = () => p.evaluate(() => ({ idx: __sim.run.idx, faults: __sim.run.faults, st: JSON.parse(JSON.stringify(__sim.run.st, (k, v) => v instanceof Set ? [...v] : v)), done: __sim.api.done }));

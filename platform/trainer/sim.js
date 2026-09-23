@@ -18,6 +18,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 // Constructed learning assemblies from the Strip Bay trainer repository
 // (n29yf2kyfm-lab/training-manual, main @ 05115cc), used unchanged.
 import { buildEngineBayDetail } from './engine-bay-detail.js';
@@ -60,9 +61,14 @@ else {
   // contact shadows: without them the car floats and reads flat
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  // the shadow is only re-rendered while something moves (see the loop): the full
+  // car is 543k triangles, and redrawing it into the shadow map every frame
+  // nearly doubled the draw calls for a floor shadow that is usually static
+  renderer.shadowMap.autoUpdate = false;
   host.prepend(renderer.domElement);
 }
 const camera = new THREE.PerspectiveCamera(35, 4 / 3, 0.01, 100);
+let shadowDirty = true;   // set when the car scene is shown; see the render loop
 const controls = renderer ? new OrbitControls(camera, renderer.domElement) : null;
 if (controls) { controls.enableDamping = true; controls.dampingFactor = 0.08; controls.minDistance = 0.25; controls.maxDistance = 9; }
 const env = renderer ? new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture : null;
@@ -99,6 +105,31 @@ function surfaceMaps(seed, repeat) {
   for (const [k, d] of [['roughness', rough], ['normal', norm]]) {
     const t = new THREE.DataTexture(d, n, n, THREE.RGBAFormat); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(repeat, repeat);
     t.colorSpace = THREE.NoColorSpace; t.needsUpdate = true; out[k] = t;
+  }
+  return out;
+}
+/* The constructed assemblies arrive as hundreds of small meshes (the gearbox is
+   211, each brake corner about 180). Here nothing inside them moves on its own,
+   so each one is baked to one mesh per material: same geometry, a few draw
+   calls instead of several hundred, which matters on a phone. */
+function bake(root) {
+  root.updateMatrixWorld(true);
+  const inv = root.matrixWorld.clone().invert(), buckets = new Map();
+  root.traverse(o => {
+    if (!o.isMesh || Array.isArray(o.material) || !o.visible) return;
+    const g = o.geometry.clone().applyMatrix4(new THREE.Matrix4().multiplyMatrices(inv, o.matrixWorld));
+    for (const k of Object.keys(g.attributes)) if (!['position', 'normal', 'uv'].includes(k)) g.deleteAttribute(k);
+    if (!g.attributes.normal) g.computeVertexNormals();
+    if (!g.attributes.uv) g.setAttribute('uv', new THREE.Float32BufferAttribute(new Float32Array(g.attributes.position.count * 2), 2));
+    if (!g.index) g.setIndex([...Array(g.attributes.position.count).keys()]);
+    g.morphAttributes = {};
+    if (!buckets.has(o.material)) buckets.set(o.material, []);
+    buckets.get(o.material).push(g);
+  });
+  const out = new THREE.Group(); out.userData = { ...root.userData };
+  for (const [mat, gs] of buckets) {
+    const merged = mergeGeometries(gs, false); if (!merged) continue;
+    const m = new THREE.Mesh(merged, mat); m.receiveShadow = true; out.add(m);
   }
   return out;
 }
@@ -314,8 +345,11 @@ function buildGolf(root) {
   // shadows, and more of the studio in everything but the glass (which keeps refracting).
   // envMapIntensity is a render setting, not an asset property; the GLB's materials are otherwise untouched.
   const glassMats = new Set((by.glazing || []).flatMap(m => [].concat(m.material)));
+  // only the outside of the car casts: the floor shadow comes from the shell and
+  // wheels, and interior and small parts would add draw calls and nothing visible
+  const CASTS = /^(body|door_|panel_|tailgate|wheel_)/;
   for (const id in by) for (const m of by[id]) {
-    m.castShadow = m.receiveShadow = true;
+    m.castShadow = CASTS.test(id); m.receiveShadow = true;
     for (const mt of [].concat(m.material)) if (mt && !glassMats.has(mt) && mt.envMapIntensity !== undefined) mt.envMapIntensity = 1.45;
   }
   const parts = {};
@@ -332,7 +366,7 @@ function buildGolf(root) {
      constructed assemblies fill the bay (engine, cooling, battery, inner aprons,
      gearbox) and replace the front discs and calipers with detailed corners
      (hub, knuckle, strut). They are training geometry, and their labels say so. */
-  const shade = o => o.traverse(m => { if (m.isMesh) m.castShadow = m.receiveShadow = true; });
+  const shade = o => o.traverse(m => { if (m.isMesh) { m.castShadow = false; m.receiveShadow = true; } });
   let bayG = null;
   try {
     const bay = buildEngineBayDetail({ materialFactory: workshopMaterial });
@@ -348,17 +382,20 @@ function buildGolf(root) {
       m.position.sub(c); m.position.x += -0.0725 + (bb.max.x - bb.min.x) / 2; shade(m); alt.add(m);
     }, undefined, () => { /* the bay still reads without it */ });
     shade(bayG); shade(gb);
+    const bakedBay = bake(bay.group); bay.group.removeFromParent(); bayG.add(bakedBay);
+    const bakedGb = bake(gb); gb.removeFromParent(); car.add(bakedGb);
     const AX = { y: 0.315, z: 1.3157, x: 0.764 };
     for (const [side, sfx] of [[1, 'fl'], [-1, 'fr']]) {
       const as = buildFrontBrake({ side, discRadius: 0.1708, discThickness: 0.0309, materialFactory: workshopMaterial });
       const axle = new THREE.Vector3(side * AX.x, AX.y, AX.z);
       for (const [type, detail] of [['rotor', as.rotor], ['caliper', as.caliper]]) {
         const p = parts[type + '_' + sfx]; if (!p || !detail) continue;
-        p.group.clear(); detail.position.copy(axle).sub(p.home); p.group.add(detail); shade(detail);
+        p.group.clear(); detail.position.copy(axle).sub(p.home); p.group.add(detail);
+        const bd = bake(detail); bd.position.copy(detail.position); detail.removeFromParent(); p.group.add(bd);
       }
       const support = group(car, { pos: axle.toArray(), part: 'hub_' + sfx });
-      for (const piece of [as.hub, as.knuckle, as.extras, as.pads]) if (piece) support.add(piece);
-      shade(support);
+      const pieces = new THREE.Group(); for (const piece of [as.hub, as.knuckle, as.extras, as.pads]) if (piece) pieces.add(piece);
+      support.add(bake(pieces));
     }
   } catch (e) { console.error('Strip Bay: constructed assemblies failed to build', e); }
   // axle stand, placed under the front-left sill; hidden until the job puts it there
@@ -438,7 +475,7 @@ function renderStage() {
     }
     if (run.view !== 'car') {
       CAR.reset(); scene = CAR.scene; R = CAR; run.view = 'car'; place(s.car.cam[0], s.car.cam[1]);
-      renderer.toneMappingExposure = 1.16; hint.textContent = HINT_CAR;
+      renderer.toneMappingExposure = 1.16; hint.textContent = HINT_CAR; shadowDirty = true;
     }
   } else if (renderer && run.view !== 'job') {
     scene = run.jobScene; R = run.jobR; run.view = 'job';
@@ -1562,7 +1599,8 @@ window.__sim = { get run() { return run; }, get api() { return api; }, get car()
     const v = new THREE.Box3().setFromObject(g).getCenter(new THREE.Vector3()).project(camera), r = renderer.domElement.getBoundingClientRect();
     return [r.left + (v.x + 1) / 2 * r.width, r.top + (1 - v.y) / 2 * r.height];
   },
-  rot(id) { const g = carPart(id); return g ? [g.rotation.x, g.rotation.y] : null; } };
+  rot(id) { const g = carPart(id); return g ? [g.rotation.x, g.rotation.y] : null; },
+  get info() { return renderer ? { calls: renderer.info.render.calls, tris: renderer.info.render.triangles } : null; } };
 route();
 
 const clock = new THREE.Clock();
@@ -1577,5 +1615,6 @@ let frames = 0;
   if (R && R.update) R.update(dt);
   ticks.forEach(f => f());
   controls.update();
+  if (shadowDirty || tweens.length) { renderer.shadowMap.needsUpdate = true; shadowDirty = false; }
   renderer.render(scene, camera);
 })();
