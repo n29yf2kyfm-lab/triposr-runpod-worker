@@ -254,4 +254,14 @@ else
   echo "WARN opencode absent — review_pair will report the third seat unavailable"
 fi
 
+# ------------------------------------------------------------ playwright-cli ---
+# Microsoft's browser CLI for agents (Apache-2.0). The skill is vendored at
+# .claude/skills/playwright-cli; the npm CLI is machine-local and dies with a
+# rollback, so it is reinstalled here. .playwright/cli.config.json points it at
+# the PREINSTALLED Chromium in /opt/pw-browsers, so it never downloads its own
+# 187 MB browser. Its output dir .playwright-cli/ is gitignored (snapshots can
+# carry cookies).
+have playwright-cli || { echo "installing @playwright/cli"; npm install -g @playwright/cli@latest >/dev/null 2>&1 || echo "WARN playwright-cli install"; }
+have playwright-cli && echo "OK playwright-cli $(playwright-cli --version 2>/dev/null)" || echo "WARN playwright-cli absent"
+
 echo "=== done $(date -u +%FT%TZ) ==="

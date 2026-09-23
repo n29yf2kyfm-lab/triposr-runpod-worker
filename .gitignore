@@ -39,3 +39,5 @@ graphify-out/*
 # The council reviewer itself lives in pipeline/machine/review_pair.py, which is
 # where the other two reviewers are and is the part that must survive a rollback.
 .opencode/
+# Playwright CLI output (may contain credentials)
+.playwright-cli/
