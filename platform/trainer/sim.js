@@ -46,8 +46,8 @@ function h(tag, attrs = {}, ...kids) {
 /* ───────────────────────── 3D stage ───────────────────────── */
 const host = $('#sim-canvas');
 const tip = $('#sim-tip'), hint = $('#sim-hint');
-const HINT_CAR = 'Drag to turn · pinch or scroll to zoom · tap a door, the bonnet or the tailgate to open it';
-const HINT_JOB = 'Drag to turn · pinch or scroll to zoom · tap a part to name it';
+const HINT_CAR = 'Drag to turn · pinch to zoom · tap a door or panel to open it';
+const HINT_JOB = 'Drag to turn · pinch to zoom · tap a part to name it';
 let renderer = null;
 try {
   renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -1343,7 +1343,8 @@ brakes.stages = [
       { t: 'Axle stand under the lifting point, lower onto it', pick: 'body', anim: async a => { if (a.C) a.C.stand.visible = true; } },
       { t: 'Remove the bolts and the wheel', pick: 'wheel_fl', anim: async a => {
         const g = carPart('wheel_fl');
-        if (g) await tween(g.position, { x: CAR.parts.wheel_fl.home.x + 0.85, y: CAR.parts.wheel_fl.home.y + 0.04 }, 0.9);
+        // set down outboard and behind the corner, out of the line of sight to the brake
+        if (g) await tween(g.position, { x: CAR.parts.wheel_fl.home.x + 0.7, y: CAR.parts.wheel_fl.home.y + 0.04, z: CAR.parts.wheel_fl.home.z - 1.0 }, 0.9);
         if (a.C) await camTo(...BRAKE_CAM);
       } },
     ],
