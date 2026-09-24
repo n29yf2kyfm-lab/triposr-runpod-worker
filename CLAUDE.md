@@ -5464,3 +5464,16 @@ while the bonnet is open. And a door, bonnet or tailgate tap goes to the stage
 FIRST. `order()`'s onPick returns true for any part one of its steps or traps
 names, so tapping the bonnet before the release is still a recorded fault. Only
 an unclaimed tap toggles the panel.
+
+## Kimi K2.6 connected via OpenRouter (2026-09-24)
+
+`OX_MODEL=moonshotai/kimi-k2.6 python3 pipeline/machine/ox.py --stdin < prompt.txt`
+reaches it on the existing `OPENROUTER_API_KEY`. No new key or code was needed. It is
+NOT free: $0.95 per million input tokens and $4 per million output, with text and
+image input and a 262k context. It is a reasoning model, so most of the billed
+output is thinking: a two-sentence answer used 3,034 completion tokens ($0.0058).
+Keep `max_tokens` high for the same reason as ox-alpha. First test: a brake
+question (why the Mk8 GTI's EPB rear pistons must not be wound back) came back
+correct and matched the manual. Pass the prompt with `--stdin`, not as a file
+path: a bare path is sent as the prompt text itself.
+OpenRouter also lists kimi-k2.5 (cheaper), kimi-k2.7-code and kimi-k3.
