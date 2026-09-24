@@ -5477,3 +5477,22 @@ question (why the Mk8 GTI's EPB rear pistons must not be wound back) came back
 correct and matched the manual. Pass the prompt with `--stdin`, not as a file
 path: a bare path is sent as the prompt text itself.
 OpenRouter also lists kimi-k2.5 (cheaper), kimi-k2.7-code and kimi-k3.
+
+## Golf Workshop redesign lives in training-manual, on a branch (2026-09-24)
+
+The owner's brief: "THE GOLF WORKSHOP — A LIVING, INTERACTIVE 3D LEARNING EXPERIENCE".
+It is built as `workshop.html` + `workshop.js` on training-manual branch
+`redesign/living-workshop`, with no change to Lovable or the live site.
+
+The live site (golf-mechanics-workshop.mmyt2fqwrg.chatgpt.site) is a
+separate React build. Its bundle holds a phone mockup, a vehicle library and a
+parts catalogue, and it embeds the simulator. Its source is in no repository
+this session can reach, so redesigning it in place was not possible.
+
+**three r169 IGNORES `material.envMapIntensity` for anything lit by
+`scene.environment`.** Under the environment fallback it uses
+`scene.environmentIntensity` (three.module.js ~30825). So `sim.js`'s
+`mt.envMapIntensity = 1.45` on the Golf, and golf-bay.html's equivalent, have
+always been no-ops. A per-material intensity only applies when the material
+carries its own `envMap`. `workshop.js` sets `mt.envMap = studio` on the car's
+materials, which is what lets the car dim while the brake corner stays lit.
