@@ -82,3 +82,21 @@ the WebGL `three.module.js` build, so using it there means vendoring the WebGPU 
 
 21st skills 25/MEDIUM CAUTION, webgpu-threejs-tsl 0/LOW SAFE. Neither had any
 HIGH or CRITICAL finding.
+
+## Taste Skill variants added (2026-09-24, owner request)
+
+Upstream Leonxlnx/taste-skill is still at c184364, and the installed `taste-skill`
+is byte-identical to its v2 (experimental), the version on the site in the video.
+Two of the variants left out first time were added from the same commit (MIT):
+
+* `.claude/skills/redesign-skill` (name `redesign-existing-projects`) is an
+  audit-first upgrade of an existing site that keeps function intact. It suggests
+  picsum.photos placeholder images when real assets are missing. Do not ship those
+  in the trainer: it makes no off-origin requests, by design.
+* `.claude/skills/image-to-code-skill` (name `image-to-code`) builds a page to
+  match a design image. It is written for Codex and tells the agent to GENERATE
+  the design image first. Here that means a paid image tool (for example
+  Higgsfield), so ask before spending credits.
+
+SkillSpector (static): redesign-skill 0/CAUTION, image-to-code-skill 0/SAFE, with
+no HIGH or CRITICAL findings.
