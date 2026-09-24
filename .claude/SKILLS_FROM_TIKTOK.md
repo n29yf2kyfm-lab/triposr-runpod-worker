@@ -35,3 +35,50 @@ live.md, "never commit auth-state files" in playwright's storage-state.md, a
 reference list, test commands in img2threejs's SKILL.md, and ordinary design
 guidance. This is the same noise pattern CLAUDE.md records for SkillSpector.
 The two CRITICAL findings are the excluded vision dependency above.
+
+# Second TikTok: "How to make your vibe coded landing page look fire" (2026-09-24)
+
+Four tools in the video. Two were already installed from the first one:
+No. 4 "world class design prompting" is **Impeccable**, and "steal any famous
+design system with getdesign.md" is **awesome-design** (VoltAgent/awesome-design-md,
+whose site is getdesign.md). Upstream is still at f696123 with 74 DESIGN.md files,
+the same commit installed above, so there was nothing to update. The "300+"
+catalogue in the video is the getdesign.md website, not the repo.
+
+| Tool in the video | Source | Licence | Installed as |
+|---|---|---|---|
+| 21st.dev ("integrate high quality design assets") | github.com/21st-dev/skill (15c7436), CLI `@21st-dev/cli` 1.17.1 | Apache-2.0 | `.claude/skills/21st-{cli-use,ai,registry,design-sync,ui-build,ui-explore,ui-review}` |
+| No. 3 "insane web animations with WebGPU" | github.com/dgreenheck/webgpu-claude-skill (af2319b) | MIT | `.claude/skills/webgpu-threejs-tsl` |
+
+## What the 21st.dev skills need, measured rather than assumed
+
+* **An account.** Without one, `21st search` returns "Not signed in. Run
+  `21st login` or set TWENTYFIRST_TOKEN." Only `21st logo` works keyless. A free
+  key comes from 21st.dev/settings/api-keys and belongs in `/root/.alam3d_env` as
+  `API_KEY_21ST`, never in the repo. Code retrieval has a free daily quota; hosted
+  21st AI generation is paid and off on the free plan.
+* **Telemetry needs a token.** The CLI posts command names and review summaries
+  to `21st.dev/api/v1/cli/events`, but `trackDirectCliCommand` and
+  `trackCliSummary` both return at `if (!token) return`. Read in the 1.17.1 source.
+* **`21st review --help` ignores `--help` and RUNS a review** of the current
+  directory. It is a local lint and writes nothing without `--fix`, but do not use
+  `--help` on that subcommand.
+* **`--context auto` sends the project's design context** (`.21st/design.json`)
+  with a search or a generation, and `21st init --design-context` writes a `.21st/`
+  folder into the repo. The `21st-ui-*` skills do both. Keep them to UI work.
+* **`21st-registry` and `21st-design-sync` PUBLISH to the public 21st.dev site.**
+  They are installed because they only trigger on an explicit "publish" request,
+  and publishing is outward-facing, so it is confirmed with the owner first.
+* **Overlap:** the `21st-ui-*` skills trigger on the same wording as Impeccable
+  ("build this UI", "review this page"). When both fit, name the one you want.
+
+## The WebGPU skill
+
+Documentation and examples only: no network, environment or process access.
+It targets `three/webgpu` + TSL. The simulator's vendored three.js r169 ships only
+the WebGL `three.module.js` build, so using it there means vendoring the WebGPU build.
+
+## SkillSpector (static, --no-llm)
+
+21st skills 25/MEDIUM CAUTION, webgpu-threejs-tsl 0/LOW SAFE. Neither had any
+HIGH or CRITICAL finding.
