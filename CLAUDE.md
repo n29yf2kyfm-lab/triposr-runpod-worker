@@ -5496,3 +5496,32 @@ this session can reach, so redesigning it in place was not possible.
 always been no-ops. A per-material intensity only applies when the material
 carries its own `envMap`. `workshop.js` sets `mt.envMap = studio` on the car's
 materials, which is what lets the car dim while the brake corner stays lit.
+
+## The Garage: twenty cars taken apart by hand (2026-09-26, training-manual)
+
+`garage.html` + `garage.js` on training-manual branch `redesign/living-workshop`,
+published in the Golf Workshop artifact (Mwv7ahiqrWymYQhvheLkg9). Full-screen 3D
+over the Strip Bay fleet (Golf, XC90 and the 18 converted cars, copied
+server-side from the Strip Bay artifact with `files: {path: {artifact, path}}`).
+Every part has a joint: hinges swing, wheels spin or pull off along the axle,
+discs/pulleys/fan/steering spin with inertia, bumpers slide off, engine parts
+lift out and drop. The bonnet is locked until the learner gets in, pulls the
+release, and reaches under the front edge for the catch. `powertrain.js` is
+Strip Bay's buildPowertrain split into grabbable components.
+
+Traps it paid for, all measured with `garagetest.mjs`:
+* **A slow renderer turns a Playwright drag into slow motion.** Each move is
+  delivered after a frame, so a "flick" at 3-4 fps leaves the hand at
+  0.05 rad/s. Fire fast gestures from inside the page with synthetic
+  PointerEvents and busy-wait spacing; keep real mouse drags for the rest.
+* **Time pointer samples by `event.timeStamp`**, not by when the handler ran:
+  a busy frame batches moves and a flick reads as a stopped hand.
+* **Physics must substep.** One 0.25 s gravity step relaunched a dropped part
+  off the floor every frame; it hovered in a steady bounce forever.
+* **Constructed engine parts sit a few cm inside the body skins** (the fit is to
+  measured wheels and bonnet, not the bay's panels), so picking allows a 0.6 m
+  reach past a body surface to a constructed part; fixed dressing never blocks.
+* `pgrep -f` / killing by a pattern killed this session's shell AGAIN (exit
+  144). Kill by `ps -eo pid,comm | awk '$2=="chrome"'`.
+* Some fleet files model engine parts inside the body mesh (Micra); the built
+  engine overlaps them there. Not fixed; recorded in the training-manual README.
