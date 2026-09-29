@@ -20,7 +20,7 @@ Refusals are reported, not faked: a car whose doors are welded into the body
 has nothing to open, and result.json says so with the rigger's reason.
 Exit code 0 when the machine ran (rigged OR refused), 1 on an error.
 """
-import bpy, sys, os, json, math, time, traceback
+import bpy, sys, os, re, json, math, time, traceback
 from mathutils import Vector
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -98,6 +98,168 @@ def world_bbox(objs):
     return lo, hi
 
 
+# ── showcase: glass cleared, an engine in the bay ─────────────────────────
+SHOW = '--showcase' in opt
+GLASS_RX = re.compile(r'glass|window|vitre|screen|glaz', re.I)
+LAMP_RX = re.compile(r'red|amber|orange|lamp|light|indicator|reflect|signal', re.I)   # a coloured lens is not a window
+
+
+def clear_glass():
+    """Make the windows see-through so the cabin reads. Only materials on the
+    glazing and on the doors are touched, and only glass-named ones on the
+    doors, so a lamp lens (`headlight_glass`) keeps its colour. A glazing
+    object's own material is cleared only if nothing else on the car uses it."""
+    users = {}
+    for pid, os_ in parts.items():
+        for o in os_:
+            for s in o.material_slots:
+                if s.material:
+                    users.setdefault(s.material.name, set()).add(pid)
+    cleared = set()
+    for pid, os_ in parts.items():
+        for o in os_:
+            for s in o.material_slots:
+                m = s.material
+                if not m or m.name in cleared:
+                    continue
+                if LAMP_RX.search(m.name):
+                    continue
+                named = bool(GLASS_RX.search(m.name))
+                own = pid == 'glazing' and users[m.name] <= {'glazing'} | {k for k in users[m.name] if k.startswith('door_')}
+                if (pid == 'glazing' or pid.startswith('door_')) and (named or own):
+                    m.use_nodes = True
+                    bs = next((n for n in m.node_tree.nodes if n.type == 'BSDF_PRINCIPLED'), None)
+                    if bs is None:
+                        continue
+                    for l in list(bs.inputs['Alpha'].links):
+                        m.node_tree.links.remove(l)
+                    bs.inputs['Alpha'].default_value = 0.0      # Cycles honours alpha with no blend mode
+                    cleared.add(m.name)
+    return sorted(cleared)
+
+
+def fit_engine(path, kind, mount):
+    """Import a real engine model and stand it in the bay, sized from the car's
+    own wheels and bonnet — the Garage's fitPart/addRealEngine, in Blender.
+    Frame here: nose -Y, car's left +X, up +Z, ground 0."""
+    before = set(bpy.data.objects)
+    bpy.ops.import_scene.gltf(filepath=path)
+    new = [o for o in bpy.data.objects if o not in before]
+    meshes = [o for o in new if o.type == 'MESH']
+    root = bpy.data.objects.new('RM_engine', None)
+    sc0 = bpy.context.scene.collection
+    sc0.objects.link(root)
+    bpy.context.view_layer.update()
+    for o in new:
+        if o.parent is None:
+            mw = o.matrix_world.copy()
+            o.parent = root
+            o.matrix_world = mw
+    for m in {s.material for o in meshes for s in o.material_slots if s.material}:
+        bs = next((n for n in (m.node_tree.nodes if m.use_nodes else []) if n.type == 'BSDF_PRINCIPLED'), None)
+        if bs and not bs.inputs['Base Color'].links and min(bs.inputs['Base Color'].default_value[:3]) > 0.97:
+            bs.inputs['Base Color'].default_value = (0.36, 0.38, 0.4, 1)   # untextured white casting reads as aluminium
+            bs.inputs['Metallic'].default_value = 0.75
+            bs.inputs['Roughness'].default_value = 0.36
+    W = {}
+    for k in ('fl', 'fr', 'rl', 'rr'):
+        a, b = world_bbox(parts['wheel_' + k])
+        W[k] = ((a + b) / 2, (b.z - a.z) / 2, b.x - a.x)
+    r = sum(w[1] for w in W.values()) / 4
+    yf = (W['fl'][0].y + W['fr'][0].y) / 2
+    track = abs(W['fl'][0].x - W['fr'][0].x)
+    tw = min((W['fl'][2] + W['fr'][2]) / 2, 0.36)
+    inner = track / 2 - tw / 2 - 0.07
+    ylow = r * 0.62
+    if parts.get('panel_bonnet'):
+        a, b = world_bbox(parts['panel_bonnet'])
+        ceiling = (a.z + b.z) / 2 - 0.04
+    else:
+        ceiling = r * 2 + 0.18
+    long_ = mount == 'long'
+    vee = kind == 'v8'
+    length = 0.72 if vee else (0.5 if kind == 'ev' else 0.62)
+    max_h = max(0.35, ceiling - ylow)
+    max_w = max(0.55, inner * 1.6) if long_ else 0.72
+    # turn so the longest horizontal side runs across the car (transverse) or along it
+    a, b = world_bbox(meshes)
+    sz = b - a
+    along_x = not long_
+    if (sz.x >= sz.y) != along_x:
+        root.rotation_euler.z = math.pi / 2
+    bpy.context.view_layer.update()
+    a, b = world_bbox(meshes)
+    sz = b - a
+    L, Wd = (sz.x, sz.y) if along_x else (sz.y, sz.x)
+    s = min(length / L, max_h / sz.z, max_w / Wd)
+    root.scale = (s, s, s)
+    bpy.context.view_layer.update()
+    a, b = world_bbox(meshes)
+    c = (a + b) / 2
+    # transverse: just ahead of the front axle; longitudinal: behind it
+    cy = yf - 0.10 if not long_ else yf + length * 0.35 - 0.05
+    root.location += Vector((0 - c.x, cy - c.y, ylow - a.z))
+    bpy.context.view_layer.update()
+    a, b = world_bbox(meshes)
+    return meshes, root, {'kind': kind, 'mount': 'longitudinal' if long_ else 'transverse',
+                          'scale': round(s, 4), 'size_m': [round(v, 3) for v in (b - a)],
+                          'note': 'a representative engine standing in for this car\'s, not its own'}
+
+
+def bay_contents():
+    """How much of the car already sits in the engine bay. Counted in the
+    bonnet's footprint (shrunk 15% so the wings and arches stay out), from
+    axle height up to the bonnet. A modelled bay (the RS6's V8 under its
+    cover) means the car keeps its own engine; an empty shell gets ours."""
+    if not parts.get('panel_bonnet'):
+        return None
+    a, b = world_bbox(parts['panel_bonnet'])
+    mx, my = (b.x - a.x) * 0.15, (b.y - a.y) * 0.15
+    wa, wb = world_bbox(parts['wheel_fl'])
+    z0 = (wa.z + wb.z) / 2
+    n = 0
+    for pid, os_ in parts.items():
+        if pid == 'panel_bonnet' or pid.startswith(('wheel_', 'door_', 'brakes')):
+            continue
+        for o in os_:
+            if o.type != 'MESH':
+                continue
+            M = o.matrix_world
+            for v in o.data.vertices:
+                w = M @ v.co
+                if a.x + mx < w.x < b.x - mx and a.y + my < w.y < b.y - my and z0 < w.z < a.z:
+                    n += 1
+    return n
+
+
+BAY_FULL = 1500          # vertices; see README for how this was set
+engine_objs = []
+if SHOW:
+    result['glass_cleared'] = clear_glass()
+    epath, ekind = opt.get('--engine-file'), opt.get('--engine') or 'none'
+    bay = bay_contents()
+    own = parts.get('engine') or (bay is not None and bay > BAY_FULL)
+    if ekind != 'none' and own:
+        result['engine'] = {'own': True, 'bay_vertices': bay, 'named_engine_parts': len(parts.get('engine', [])),
+                            'note': 'this car has its own engine bay modelled, so ours is not added'}
+    elif epath and ekind != 'none' and all(parts.get('wheel_' + k) for k in ('fl', 'fr', 'rl', 'rr')):
+        try:
+            engine_objs, eroot, result['engine'] = fit_engine(epath, ekind, opt.get('--mount') or 'trans')
+            result['engine']['bay_vertices'] = bay
+            for o in bpy.data.objects:
+                o.select_set(False)
+            eroot.select_set(True)
+            for o in engine_objs:
+                o.select_set(True)
+            bpy.ops.export_scene.gltf(filepath=os.path.join(OUT, car + '.engine.glb'), export_format='GLB',
+                                      use_selection=True, export_apply=True, export_animations=False)
+            result['engine']['file'] = car + '.engine.glb'
+        except Exception as e:                # an engine is dressing; the car still ships
+            result['engine'] = {'error': f'{type(e).__name__}: {e}'}
+    elif ekind != 'none':
+        result['engine'] = {'skipped': 'no engine file, or the car has no four wheels to size the bay from'}
+    STATES = [('showcase', doors + ends)] + [s for s in STATES if s[0] == 'shut']
+
 # frame every still on the car with EVERYTHING open, so all views share one
 # camera and a sheet reads as the same car opening, not a zoom
 pose(doors + ends)
@@ -171,18 +333,35 @@ VIEWS = {'fl': (math.radians(38), math.radians(16)),      # front-left three-qua
          'rr': (math.radians(218), math.radians(16))}     # rear-right three-quarter
 
 
-def aim(az, el):
+def aim(az, el, target=None, d_=None):
+    target = target if target is not None else centre
     d = Vector((math.sin(az) * math.cos(el), -math.cos(az) * math.cos(el), math.sin(el)))
-    cam.location = centre + d * dist
-    cam.rotation_euler = (centre - cam.location).to_track_quat('-Z', 'Y').to_euler()
+    cam.location = target + d * (d_ or dist)
+    cam.rotation_euler = (target - cam.location).to_track_quat('-Z', 'Y').to_euler()
+
+
+def views_for(state):
+    if state != 'showcase':
+        return [(v, a, e, None, None) for v, (a, e) in VIEWS.items()]
+    out = [('fl', *VIEWS['fl'], None, None), ('rr', *VIEWS['rr'], None, None)]
+    # the engine bay, from the front-left and above, framed on the engine
+    if engine_objs:
+        a, b = world_bbox(engine_objs)
+        c = (a + b) / 2
+        r_ = max((b - a).length / 2, 0.35)
+        out.append(('bay', math.radians(24), math.radians(42), c, r_ / math.sin(fov / 2) * 1.9))
+    # the cabin, through the cleared glass on the open driver's-side flank
+    out.append(('cabin', math.radians(78), math.radians(24), Vector((0, (slo.y + shi.y) / 2, shi.z * 0.55)),
+                max(shi.x - slo.x, 1.6) / math.sin(fov / 2) * 0.62))
+    return out
 
 
 stills = []
 t1 = time.time()
 for name, ks in STATES:
     pose(ks)
-    for v, (az, el) in VIEWS.items():
-        aim(az, el)
+    for v, az, el, tgt, dd in views_for(name):
+        aim(az, el, tgt, dd)
         path = os.path.join(OUT, f'{car}_{name}_{v}.png')
         sc.render.filepath = path
         bpy.ops.render.render(write_still=True)

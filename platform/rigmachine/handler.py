@@ -1,7 +1,11 @@
 """On-demand entry point: a RunPod serverless job that rigs and renders one car.
 
-Job input:
-    {"glb_url": "https://…/car.glb", "size": "1280x800", "samples": 24}
+Job input, either a decoded vehicle (the showcase: doors open, glass cleared,
+engine in the bay) or a GLB link:
+    {"vehicle": {"make": "Audi", "model": "RS6", "year": 2021, "fuel": "PETROL", "cc": 3996, "colour": "GREY"}}
+    {"glb_url": "https://…/car.glb", "showcase": true, "engine": "v8", "mount": "long"}
+plus optional "size": "1280x800", "samples": 24. A registration is never an
+input; one sent by mistake is dropped before anything runs.
 
 It runs run.py (rig in Blender, render every state, build the sheet and the
 viewer page), then uploads everything to the public bucket under
@@ -35,13 +39,21 @@ def upload(path, key, sb_key):
 
 def handler(job):
     inp = job.get('input') or {}
-    url = inp.get('glb_url')
-    if not url or not url.startswith(('http://', 'https://')):
-        return {'error': 'give glb_url: a public http(s) link to a .glb'}
+    url, vehicle = inp.get('glb_url'), inp.get('vehicle')
+    size = [f"--size={inp.get('size', '1280x800')}", f"--samples={int(inp.get('samples', 24))}"]
     out = tempfile.mkdtemp(prefix='rig_')
     t0 = time.time()
-    cmd = [sys.executable, os.path.join(HERE, 'run.py'), url, out,
-           f"--size={inp.get('size', '1280x800')}", f"--samples={int(inp.get('samples', 24))}"]
+    if vehicle:
+        # the app's decode (make, model, year, fuel, cc, colour) — never the reg
+        vehicle = {k: v for k, v in vehicle.items() if k.lower() not in ('reg', 'registration', 'vrm')}
+        cmd = [sys.executable, os.path.join(HERE, 'car.py'), out, '--vehicle=' + json.dumps(vehicle)] + size
+    elif url and url.startswith(('http://', 'https://')):
+        cmd = [sys.executable, os.path.join(HERE, 'run.py'), url, out] + size
+        if inp.get('showcase'):
+            cmd += ['--showcase', f"--engine={inp.get('engine', 'i4')}", f"--mount={inp.get('mount', 'trans')}"]
+    else:
+        shutil.rmtree(out, ignore_errors=True)
+        return {'error': 'give vehicle {make, model, year, ...} or glb_url (a public http(s) link to a .glb)'}
     rc = subprocess.call(cmd)
     rp = os.path.join(out, 'result.json')
     if not os.path.exists(rp):
@@ -49,6 +61,7 @@ def handler(job):
         return {'error': f'the machine exited {rc} without a result'}
     res = json.load(open(rp))
     res['seconds'] = round(time.time() - t0, 1)
+    res.setdefault('car', (res.get('resolver') or {}).get('resolution', {}).get('assetId') or 'no-match')
     sb_key = os.environ.get('SB_KEY')
     if not sb_key:
         res['uploaded'] = False

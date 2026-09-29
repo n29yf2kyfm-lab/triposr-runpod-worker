@@ -11,7 +11,8 @@ html,body{margin:0;height:100%;background:var(--ground);color:var(--text);font:1
 canvas{display:block;width:100%;height:100%;touch-action:none}
 header{position:fixed;top:0;left:0;right:0;padding:calc(12px + env(safe-area-inset-top)) 16px 12px;pointer-events:none}
 header b{display:block;font-size:17px;letter-spacing:-.01em}
-header span{color:var(--muted);font-size:13px}
+header span,header small{display:block;color:var(--muted);font-size:13px}
+header small{margin-top:4px;max-width:36em}
 nav{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom));display:flex;gap:4px;padding:6px;border-radius:22px;background:var(--bar);border:1px solid var(--line);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);max-width:calc(100% - 32px);overflow-x:auto}
 nav button{min-height:44px;padding:0 12px;border-radius:14px;border:0;background:transparent;color:var(--text);font:inherit;font-weight:600;white-space:nowrap;cursor:pointer}
 nav button[aria-pressed="true"]{background:rgba(255,255,255,.14)}
@@ -22,10 +23,11 @@ nav button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 </style>
 </head>
 <body>
-<header><b data-title>__CAR__</b><span data-hint>Drag to turn</span></header>
+<header><b data-title>__CAR__</b><span data-hint>Drag to turn</span><small data-note hidden></small></header>
 <div id="msg">Loading the car…</div>
 <nav hidden></nav>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"}}</script>
+<script type="application/json" id="show">__SHOW__</script>
 <script type="module">
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
@@ -34,6 +36,9 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 
 const CAR = '__CAR__', GLB = '__GLB__';
+// showcase extras written by run.py: which windows to clear, the engine file,
+// the vehicle's name and how sure the catalogue match is
+const SHOW = JSON.parse(document.getElementById('show').textContent);
 const msg = document.getElementById('msg'), nav = document.querySelector('nav');
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
@@ -77,6 +82,17 @@ const [gltf, rep] = await Promise.all([
 ]).catch(e => { msg.textContent = 'This car could not be loaded: ' + e.message; throw e; });
 const car = gltf.scene; scene.add(car);
 car.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+// clear the windows so the cabin reads (the same materials the render cleared)
+const clear = new Set(SHOW.glass || []);
+car.traverse(o => { if (o.isMesh) for (const m of [].concat(o.material)) if (m && clear.has(m.name)) {
+  m.transparent = true; m.opacity = 0.04; m.depthWrite = false; m.transmission = 0; } });
+if (SHOW.engine) {
+  try { const e = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync(SHOW.engine);
+    e.scene.traverse(o => { if (o.isMesh) o.castShadow = true; }); e.scene.name = 'engine'; car.add(e.scene); }
+  catch (err) { console.warn('engine did not load', err); }
+}
+if (SHOW.title) document.querySelector('[data-title]').textContent = SHOW.title;
+if (SHOW.note) { const n = document.querySelector('[data-note]'); n.textContent = SHOW.note; n.hidden = false; }
 car.updateMatrixWorld(true);
 const byPid = {};
 car.traverse(o => { const m = /^SB_([a-z_]+?)__\d+/.exec(o.name); if (m && !o.parent.name.startsWith('SB_' + m[1])) (byPid[m[1]] ||= []).push(o); });
@@ -95,7 +111,7 @@ for (const [pid, h] of Object.entries(rep.hinge || {})) {
 const box = new THREE.Box3().setFromObject(car), c = box.getCenter(new THREE.Vector3()), size = box.getSize(new THREE.Vector3());
 // fit the bounding sphere (with room for the open doors) to the NARROWER of
 // the two fields of view, so a portrait phone sees the whole car
-const radius = size.length() / 2 * 1.15;
+const radius = size.length() / 2 * 1.0;
 function fit() {
   const v = camera.fov * Math.PI / 180, h = 2 * Math.atan(Math.tan(v / 2) * camera.aspect);
   const dist = radius / Math.sin(Math.min(v, h) / 2);
@@ -112,8 +128,9 @@ const doorIds = Object.keys(parts).filter(k => k.startsWith('door_'));
 const groups = [['Doors', doorIds], ['Bonnet', ['panel_bonnet']], ['Tailgate', ['tailgate']]]
   .map(([label, ids]) => [label, ids.filter(i => parts[i])]).filter(([, ids]) => ids.length);
 const all = groups.flatMap(([, ids]) => ids);
-function sync() { for (const b of nav.children) { const ids = JSON.parse(b.dataset.ids);
-  b.setAttribute('aria-pressed', ids.every(i => parts[i].userData.to === 1)); } }
+function sync() { for (const b of nav.children) { const ids = JSON.parse(b.dataset.ids), open = ids.every(i => parts[i].userData.to === 1);
+  if (b.classList.contains('primary')) b.textContent = open ? 'Shut all' : 'Open all';   // say what the tap will do
+  else b.setAttribute('aria-pressed', open); } }
 function toggle(ids) { const open = !ids.every(i => parts[i].userData.to === 1); for (const i of ids) tween(parts[i], open ? 1 : 0); sync(); }
 for (const [label, ids] of [...groups, ['Open all', all]]) {
   const b = document.createElement('button'); b.textContent = label; b.dataset.ids = JSON.stringify(ids);
@@ -121,7 +138,8 @@ for (const [label, ids] of [...groups, ['Open all', all]]) {
   b.onclick = () => toggle(ids); nav.append(b);
 }
 if (!all.length) msg.textContent = 'Nothing on this car opens: its doors are part of the body.';
-else { msg.hidden = true; nav.hidden = false; document.querySelector('[data-hint]').textContent = 'Drag to turn · tap a part to open it'; }
+else { msg.hidden = true; nav.hidden = false; document.querySelector('[data-hint]').textContent = 'Drag to turn · tap a part to open or shut it';
+  if (SHOW.openOnArrival) toggle(all); }
 
 // tap a part to open or shut it
 const ray = new THREE.Raycaster(), ptr = new THREE.Vector2(); let down = null;

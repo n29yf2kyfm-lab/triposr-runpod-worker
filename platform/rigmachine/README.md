@@ -32,12 +32,56 @@ states so a sheet reads as the same car opening.
 
 Exit code 0 when the car was rigged, 2 when it was refused, 1 on an error.
 
+## From a vehicle: doors open, glass cleared, engine in the bay
+
+```
+python3 platform/rigmachine/car.py OUT_DIR --make=Volkswagen --model=Sharan --year=2014 \
+        --fuel=DIESEL --cc=1968 --colour=RED
+```
+
+The input is what the app **already decodes from a registration**. The
+registration itself is never an input, never logged and never stored; one sent
+by mistake is dropped. DVLA's own lookup gives make, year, fuel, engine size and
+colour but **not the model**. The model comes from the app's existing decode.
+
+1. **Match.** `resolve.mjs` runs the live resolver (`platform/resolver/index.ts`,
+   unchanged) under Node. It picks the catalogue car, the colour variant and
+   the honesty disclosure ("representative", "generation-correct" …).
+2. **Engine choice.** An electric drive unit for `ELECTRICITY`, a V8 from 3.5 litres,
+   otherwise an inline four. It sits lengthways for BMW, Mercedes, Jaguar,
+   Porsche, most Audis and so on, and across the car otherwise. It is always
+   labelled as a stand-in, not the car's own engine.
+3. **Showcase render** (`run.py --showcase`):
+   - every door, the bonnet and the tailgate open;
+   - the windows cleared, so the cabin shows. Only glass-named materials on the
+     glazing and doors are cleared, and lamp lenses keep their colour;
+   - the engine fitted in the bay, sized from the car's own wheels and bonnet;
+   - stills: front-left, rear-right, an engine-bay close-up and a cabin view,
+     plus two shut stills.
+   - The viewer page opens with everything open, names the car and shows the
+     disclosure.
+4. **If the car already has a modelled engine bay**, the car keeps its own engine
+   and ours is not added. A bay counts as modelled when it has a part named
+   engine, or more than 1,500 vertices under the bonnet. Calibrated on two cars
+   only: the RS6 (its own V8, 2,847 vertices, kept) and the Sharan (empty shell,
+   729 vertices, ours added). Treat that threshold as provisional.
+
+Engine models: `parts/` (meshopt; credits in `parts/CREDITS.json`, all CC-BY),
+decoded per job with `gltf-transform` because Blender cannot read meshopt.
+
+| vehicle in | catalogue car | result |
+|---|---|---|
+| 2021 Audi RS6, petrol, 3996 cc | `audi-rs6-v1` | all open, own V8 kept, glass cleared |
+| 2014 VW Sharan, diesel, 1968 cc, red | `volkswagen-sharan-vw1-v1__red` | doors (rear sliding) and bonnet open, inline four fitted, glass cleared |
+| 2019 Ford Fiesta, petrol, 998 cc | `ford-fiesta-2009-w12-v1` (representative) | **refused**: the file names no wheels |
+
 ## On demand
 
 `handler.py` is the same thing as a RunPod serverless job:
 
 ```json
-{"input": {"glb_url": "https://…/car.glb", "size": "1280x800", "samples": 24}}
+{"input": {"vehicle": {"make": "Volkswagen", "model": "Sharan", "year": 2014, "fuel": "DIESEL", "cc": 1968, "colour": "RED"}}}
+{"input": {"glb_url": "https://…/car.glb", "showcase": true, "engine": "i4", "mount": "trans"}}
 ```
 
 It returns `result.json` with a public link to every file, uploaded to

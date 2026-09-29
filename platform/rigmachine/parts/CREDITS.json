@@ -1,0 +1,27 @@
+{
+ "engine-i4": {
+  "uid": "3eaf7bf7fab44f969e1ce15c2e8965e1",
+  "name": "Motor",
+  "author": "Zuncho Multimedia",
+  "username": "zunchomultimedia",
+  "license": "by",
+  "url": "https://sketchfab.com/3d-models/3eaf7bf7fab44f969e1ce15c2e8965e1",
+  "changes": "gearbox removed (the garage builds its own); block and head re-set from mirror chrome to cast aluminium; plastics made matte; meshopt compressed"
+ },
+ "engine-v8": {
+  "uid": "a5acea083aca48b98056917a53d91c4a",
+  "name": "V8 Engine - \ud835\ude4e\ud835\ude4d\ud835\ude4f \ud835\ude4b\ud835\ude5a\ud835\ude67\ud835\ude5b\ud835\ude64\ud835\ude62\ud835\ude56\ud835\ude63\ud835\ude58\ud835\ude5a\u2122",
+  "author": "\ud835\ude4e\ud835\ude4d\ud835\ude4f \ud835\ude4b\ud835\ude5a\ud835\ude67\ud835\ude5b\ud835\ude64\ud835\ude62\ud835\ude56\ud835\ude63\ud835\ude58\ud835\ude5a\u2122",
+  "username": "TheRealSRT",
+  "license": "by",
+  "url": "https://sketchfab.com/3d-models/a5acea083aca48b98056917a53d91c4a"
+ },
+ "drive-ev": {
+  "uid": "5a7ef5ea984544a29f584f53dee67753",
+  "name": "Tesla Front Small Drive Unit",
+  "author": "tangentinnovationgroup",
+  "username": "tangentinnovations",
+  "license": "by",
+  "url": "https://sketchfab.com/3d-models/5a7ef5ea984544a29f584f53dee67753"
+ }
+}

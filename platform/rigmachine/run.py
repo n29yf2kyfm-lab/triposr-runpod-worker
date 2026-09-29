@@ -18,9 +18,30 @@ OUT_DIR ends up holding:
 Exit code 0 when the car was rigged, 2 when the rigger refused it (the reason
 is in result.json), 1 on an error.
 """
-import json, os, shutil, subprocess, sys, urllib.request
+import json, os, shutil, subprocess, sys, time, urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+ENGINES = {'i4': 'engine-i4.glb', 'v8': 'engine-v8.glb', 'ev': 'drive-ev.glb'}
+
+
+def fetch(url, dst, tries=4):
+    """Download, and prove the whole file arrived: a transfer cut off through
+    the proxy left a 39 MB Sharan short, and Blender only said "Bad GLB"."""
+    last = None
+    for i in range(tries):
+        try:
+            req = urllib.request.Request(url, headers={'User-Agent': 'rigmachine/1.0'})
+            with urllib.request.urlopen(req, timeout=300) as r, open(dst, 'wb') as f:
+                want = int(r.headers.get('Content-Length') or 0)
+                shutil.copyfileobj(r, f)
+            got = os.path.getsize(dst)
+            if want and got != want:
+                raise IOError(f'short download: {got} of {want} bytes')
+            return
+        except Exception as e:                    # retry with backoff: 2, 4, 8 s
+            last = e
+            time.sleep(2 ** (i + 1))
+    raise RuntimeError(f'could not download {url}: {last}')
 
 
 def main():
@@ -36,14 +57,25 @@ def main():
         name = os.path.basename(src.split('?')[0]) or 'car.glb'
         os.makedirs(os.path.join(out, '_src'), exist_ok=True)
         local = os.path.join(out, '_src', name)       # a folder, so the car keeps its own name
-        req = urllib.request.Request(src, headers={'User-Agent': 'rigmachine/1.0'})
-        with urllib.request.urlopen(req, timeout=300) as r, open(local, 'wb') as f:
-            shutil.copyfileobj(r, f)
+        fetch(src, local)
         src = local
+    eng = next((a.split('=', 1)[1] for a in flags if a.startswith('--engine=')), 'none')
+    if eng != 'none':
+        # the engine models ship meshopt-compressed and Blender cannot read
+        # meshopt, so decode a copy for this job and delete it afterwards
+        tool = shutil.which('gltf-transform')
+        srcp = os.path.join(HERE, 'parts', ENGINES[eng])
+        dec = os.path.join(out, '_parts', ENGINES[eng])
+        os.makedirs(os.path.dirname(dec), exist_ok=True)
+        if tool and subprocess.call([tool, 'copy', srcp, dec], stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT) == 0:
+            flags.append('--engine-file=' + dec)
+        else:
+            print('RIGMACHINE warning: gltf-transform missing or failed; no engine fitted')
     blender = os.environ.get('BLENDER_BIN', 'blender')
     cmd = [blender, '-b', '--factory-startup', '--python', os.path.join(HERE, 'rig_render.py'), '--', src, out] + flags
     log = open(os.path.join(out, 'blender.log'), 'w')
     rc = subprocess.call(cmd, stdout=log, stderr=subprocess.STDOUT)
+    shutil.rmtree(os.path.join(out, '_parts'), ignore_errors=True)
     if os.path.dirname(src) == os.path.join(out, '_src'):
         shutil.rmtree(os.path.dirname(src))   # the source is the caller's; keep only what we made
     rp = os.path.join(out, 'result.json')
@@ -59,8 +91,8 @@ def main():
     return {'ok': 0, 'partial': 0, 'refused': 2}.get(res['status'], 1)
 
 
-LABEL = {'shut': 'Shut', 'doors': 'Doors open', 'ends': 'Bonnet and tailgate up', 'open': 'Everything open'}
-VIEW = {'fl': 'front left', 'rr': 'rear right'}
+LABEL = {'showcase': 'Everything open, glass cleared', 'shut': 'Shut', 'doors': 'Doors open', 'ends': 'Bonnet and tailgate up', 'open': 'Everything open'}
+VIEW = {'fl': 'front left', 'rr': 'rear right', 'bay': 'engine bay', 'cabin': 'cabin'}
 
 
 def label(state, opens):
@@ -115,6 +147,11 @@ def web(out, res):
         res['web_glb'] = None
         res['web_glb_why'] = f'gltf-transform exited {rc}'
         return
+    e = res.get('engine') or {}
+    if e.get('file'):                            # the fitted engine, compressed the same way
+        es, ed = os.path.join(out, e['file']), os.path.join(out, e['file'].replace('.glb', '.web.glb'))
+        if subprocess.call([tool, 'meshopt', es, ed], stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT) == 0:
+            e['web'] = os.path.basename(ed)
     res['web_glb'] = os.path.basename(dst)
     res['web_glb_mb'] = round(os.path.getsize(dst) / 1e6, 2)
     res['glb_mb'] = round(os.path.getsize(src) / 1e6, 2)
@@ -123,6 +160,21 @@ def web(out, res):
 
 def viewer(out, res):
     page = open(os.path.join(HERE, 'viewer.html')).read()
+    show = {'glass': res.get('glass_cleared') or [], 'openOnArrival': bool(res.get('glass_cleared') is not None),
+            'engine': (res.get('engine') or {}).get('web') or (res.get('engine') or {}).get('file')}
+    v = res.get('vehicle')
+    if v:                                        # came in through car.py
+        show['title'] = ' '.join(str(v[k]) for k in ('year', 'make', 'model') if v.get(k))
+        rs = (res.get('resolver') or {}).get('resolution') or {}
+        e = res.get('engine') or {}
+        bits = [rs.get('disclosure') or '']
+        if e.get('file'):
+            bits.append('The engine is a representative ' + {'v8': 'V8', 'i4': 'four-cylinder', 'ev': 'electric drive unit'}
+                        .get(e.get('kind'), 'engine') + ', not this car\'s own.')
+        elif e.get('own'):
+            bits.append('The engine is the one modelled with this car.')
+        show['note'] = ' '.join(b for b in bits if b)
+    page = page.replace('__SHOW__', json.dumps(show).replace('</', '<\\/'))
     page = page.replace('__GLB__', res.get('web_glb') or res['car'] + '.glb').replace('__CAR__', res['car'])
     open(os.path.join(out, 'viewer.html'), 'w').write(page)
 
