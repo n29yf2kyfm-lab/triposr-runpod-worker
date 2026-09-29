@@ -41,3 +41,7 @@ graphify-out/*
 .opencode/
 # Playwright CLI output (may contain credentials)
 .playwright-cli/
+
+# the rig machine's three engine stand-ins (meshopt, 1.5 MB total, CC-BY; see parts/CREDITS.json).
+# A deliberate, narrow exception: the machine cannot fit an engine without them.
+!platform/rigmachine/parts/*.glb
