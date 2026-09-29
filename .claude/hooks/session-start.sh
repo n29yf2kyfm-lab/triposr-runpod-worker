@@ -264,4 +264,16 @@ fi
 have playwright-cli || { echo "installing @playwright/cli"; npm install -g @playwright/cli@latest >/dev/null 2>&1 || echo "WARN playwright-cli install"; }
 have playwright-cli && echo "OK playwright-cli $(playwright-cli --version 2>/dev/null)" || echo "WARN playwright-cli absent"
 
+# ------------------------------------------------ owner's everywhere skills ---
+# Skills the owner asked for "in all Claude sessions" (2026-09-29). The repo copy
+# loads in every session of this repo already; copying it to ~/.claude/skills
+# makes it load in sessions opened on any other repo in this container too.
+# ~/.claude does not survive a rollback, which is why this runs every session.
+for sk in claude-agent-sdk apple-premium-ui; do
+  src="${ROOT}/.claude/skills/${sk}"
+  if [ -f "${src}/SKILL.md" ]; then
+    mkdir -p "${HOME}/.claude/skills/${sk}" && cp -f "${src}/SKILL.md" "${HOME}/.claude/skills/${sk}/SKILL.md" && echo "OK skill ${sk} -> ~/.claude/skills"
+  else echo "WARN skill ${sk} missing from the repo"; fi
+done
+
 echo "=== done $(date -u +%FT%TZ) ==="
