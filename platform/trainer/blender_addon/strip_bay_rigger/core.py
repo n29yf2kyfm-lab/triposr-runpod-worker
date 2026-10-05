@@ -74,7 +74,9 @@ RULES = [
     # no word boundary before hood: variants are GLUED (`carbonhood`), and a
     # variant left behind z-fights under the one that lifts (BMW M6)
     ('bonnet',   r'(hood|bonnet)(?!_?(piston|strut|latch|ornament|release|prop|scoop_body|vent_body|ie))'),
-    ('tailgate', r'(^|[^a-z])(trunk|tailgate|hatch|bootlid|boot)(?!_?(divider|floor|panel|carpet|cam|liner|light_body|piston|strut|latch))'),
+    # not a LAMP on the lid: the 2026 308's `Trunk_Light` was taken as its
+    # tailgate and the slider moved nothing (`light_body` alone was excluded)
+    ('tailgate', r'(^|[^a-z])(trunk|tailgate|hatch|bootlid|boot)(?!_?(divider|floor|panel|carpet|cam|liner|light|lamp|lens|piston|strut|latch))'),
     # BEFORE wheel: a caliper stays bolted to the hub when the wheel comes
     # off, so it is neither wheel nor door. The RS6's rear calipers sit outside
     # the wheel hierarchy and were carried off by the rear DOORS.
@@ -422,7 +424,11 @@ def convert(imported, rep, override=None):
         for other in ('glazing', 'body'):
             keep = []
             for o in parts.get(other, []):
-                ob0, ob1 = bbox(wv(o))
+                ov = wv(o)
+                if not ov:                  # a mesh left with no vertices (3 catalogue cars crashed here)
+                    keep.append(o)
+                    continue
+                ob0, ob1 = bbox(ov)
                 inside = all(b0[i] - .02 <= ob0[i] and ob1[i] <= b1[i] + .02 for i in range(3))
                 (parts[pid] if inside else keep).append(o)
             if other in parts:
