@@ -283,6 +283,16 @@ def convert(imported, rep, override=None):
     if st:
         rep['frame']['drive'] = 'LHD' if centre(st).x > 0 else 'RHD'
 
+    # ── 2b. MIRRORED PAIRS saved as ONE mesh ───────────────────────────
+    # Some exports keep both front tyres in one mesh, both rear brakes in
+    # another, and both front door skins in a third (the 2022 Tiguan: all
+    # three). Corners are decided per OBJECT, so a pair centred on the car's
+    # middle could never fill a corner ("wheels do not fill four corners").
+    split = _split_pairs(objs, K, hi.x - lo.x)
+    if split:
+        rep['split_pairs'] = split
+        wheels = [o for o in objs if K[o] == 'wheel']
+
     # ── 3. CORNERS by position ─────────────────────────────────────────
     parts = {}
 
@@ -303,6 +313,20 @@ def convert(imported, rep, override=None):
     size = lambda t: sum(len(o.data.vertices) for o in t[1])
     DOOR = {}
     L, W = hi.z - lo.z, hi.x - lo.x
+    # A SIDE-door group whose pieces sit on BOTH flanks is two doors under
+    # one name (the Tiguan's `lf_door` holds both front skins once its mesh
+    # is split): grouped as one, its centre lands on the middle of the car
+    # and both skins swing as one. Split it by flank. Groups at the back are
+    # left alone — a tailgate or barn-door pair is decided below as before.
+    for root in list(doorkey):
+        os_ = doorkey[root]
+        if centre(os_).z < lo.z + .15 * L:
+            continue
+        xs = [centre([o]).x for o in os_]
+        if max(xs) > .15 * W and min(xs) < -.15 * W:
+            del doorkey[root]
+            for o, x in zip(os_, xs):
+                doorkey.setdefault((root, 'l' if x > 0 else 'r'), []).append(o)
     for os_ in doorkey.values():
         c = centre(os_)
         b0, b1 = bbox([v for o in os_ for v in wv(o)])
@@ -601,6 +625,38 @@ def _lift(o, fidx):
         if 'sb_lift' in ob.data.attributes:
             ob.data.attributes.remove(ob.data.attributes['sb_lift'])
     return new
+
+
+def _split_pairs(objs, K, width):
+    """Split a door, wheel or brake mesh that holds BOTH sides of the car into
+    a left and a right object. Narrow on purpose: the mesh must reach well past
+    the centreline on both sides, each side must carry at least a fifth of its
+    faces, and almost nothing may cross the middle — a pair of separate pieces,
+    never one part that genuinely spans the car. Returns what it split."""
+    done = []
+    for o in [o for o in objs if K[o] in ('door', 'wheel', 'brakes')]:
+        b0, b1 = bbox(wv(o))
+        if not (b0.x < -.25 * width and b1.x > .25 * width):
+            continue
+        if o.data.users > 1:                       # a shared mesh must not be cut for everyone
+            o.data = o.data.copy()
+        mw = o.matrix_world
+        vx = [G(mw @ v.co).x for v in o.data.vertices]
+        left, cross, n = [], 0, len(o.data.polygons)
+        for p in o.data.polygons:
+            xs = [vx[i] for i in p.vertices]
+            if min(xs) < -.02 * width and max(xs) > .02 * width:
+                cross += 1
+            elif sum(xs) > 0:
+                left.append(p.index)
+        if not n or cross > .02 * n or not (.2 * n <= len(left) <= .8 * n):
+            continue
+        new = _lift(o, left)
+        new['sb_chain'] = o['sb_chain']
+        objs.append(new)
+        K[new] = K[o]
+        done.append(f'{o.name[:40]} ({K[o]})')
+    return done
 
 
 def _wanted(parts):

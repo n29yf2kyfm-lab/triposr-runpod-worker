@@ -64,6 +64,13 @@ everything again. One broken file never stops the batch.
   as the tight bunch of sharp vertical edges the groove leaves. Glass, handles
   and the door card that sit inside the door travel with it. Calibrated on one
   car so far; the report's `door_finder` says what it did.
+- **Mirrored pairs saved as one mesh are split.** Some exports keep both
+  front tyres in one mesh and both front door skins in another (the 2022
+  Tiguan and Tiguan Allspace). A door, wheel or brake mesh that reaches well
+  past the centreline on both sides, with almost nothing crossing the middle,
+  is split into a left and a right piece; a side-door group whose pieces sit on
+  both flanks is split by flank. Measured 2026-10-05: both Tiguans went from
+  refused to fully rigged, and the RS6 and Sharan hinges are byte-identical.
 - **Tiny models are rescaled.** A quarter of the catalogue is modelled about
   0.05 units long. Any car outside 2.5–7.5 long is scaled so its wheels are
   0.68 m tall, and the report records the factor. That is typical size, not
