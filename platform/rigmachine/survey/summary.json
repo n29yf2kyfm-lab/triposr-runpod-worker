@@ -1,0 +1,44 @@
+{
+ "cars": 1044,
+ "status": {
+  "refused": 846,
+  "ok": 147,
+  "partial": 48,
+  "error": 3
+ },
+ "refusal_reasons": [
+  [
+   "no wheels named",
+   578
+  ],
+  [
+   "nose",
+   225
+  ],
+  [
+   "door part",
+   23
+  ],
+  [
+   "wheels do not fill",
+   16
+  ],
+  [
+   "valueerror: min() arg is an empty sequen",
+   3
+  ],
+  [
+   "no geometry",
+   2
+  ],
+  [
+   "upside down",
+   1
+  ],
+  [
+   "deforming rig",
+   1
+  ]
+ ],
+ "opens_something": 195
+}
