@@ -55,10 +55,23 @@ DESCRIBE = {
     'floor-jack': 'compact car scissor jack from a spare-wheel kit, folded steel diamond frame with a threaded rod',
     'interior-view-mirror-cover': 'small black plastic cover that clips over a rear-view mirror mount on a windscreen',
     'interior-view-mirror-cover-access-cover': 'small black plastic cover that clips over a rear-view mirror mount on a windscreen',
+    # third contact-sheet pass: small stops drawn as car bumpers, wheels drawn for non-wheels
+    'lift-gate-glass-bumper': 'small black rubber stop buffer, a short cylindrical rubber stud with a mounting peg',
+    'lift-gate-stop-bumper': 'small black rubber stop buffer, a short cylindrical rubber stud with a mounting peg',
+    'overslam-bumper': 'small black rubber stop buffer, a short cylindrical rubber stud with a mounting peg',
+    'tank-strap': 'long flat steel fuel tank strap, a bent galvanised metal band with a bolt hole at each end',
+    'slave-cylinder': 'clutch slave cylinder, a small cylindrical hydraulic actuator with a push rod and bleed nipple, no reservoir',
+    'wheel-housing-access-cover': 'small black moulded plastic oval access cover panel with clips',
+    'wheel-housing-panel': 'black moulded plastic wheel arch liner, a curved half-round shell, no wheel',
+    'tow-eye': 'screw-in steel towing eye, a short threaded rod with a closed round ring at one end, no wheel',
+    'splash-guard': 'black rubber mud flap, a flat moulded rubber panel with mounting holes',
+    'splash-guards-black': 'black rubber mud flap, a flat moulded rubber panel with mounting holes',
 }
 # FLUX schnell drew these wrong three times over (drive axles for both shafts,
 # a belt for the cover, a bracket for the spindle; 'repair' names no part). No picture is better than a wrong one: never generated.
-NO_IMAGE = {'balance-shaft', 'crankshaft', 'timing-cover', 'spindle', 'repair', 'brest-rel', 'floor-jack', 'interior-view-mirror-cover', 'interior-view-mirror-cover-access-cover'}
+NO_IMAGE = {'balance-shaft', 'crankshaft', 'timing-cover', 'spindle', 'repair', 'brest-rel', 'floor-jack', 'interior-view-mirror-cover', 'interior-view-mirror-cover-access-cover',
+            'lift-gate-packing', 'member', 'protect-plate', 'spare-tire-label', 'tire-information-label',
+            'vehicle-lifting-jack-handle-black', 'tire-repair', 'wheel-housing-panel', 'slave-cylinder'}
 
 
 def illustration_key(part_type):
