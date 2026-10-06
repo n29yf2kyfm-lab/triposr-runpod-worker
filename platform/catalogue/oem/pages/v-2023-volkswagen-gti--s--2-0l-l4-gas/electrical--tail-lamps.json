@@ -1,0 +1,84 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2023-volkswagen-gti--s--2-0l-l4-gas/electrical--tail-lamps",
+ "title": "Tail Lamps for 2023 Volkswagen GTI",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Tail Lamp Assembly",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/4d6b7d107a015adabc3a303f92263862/696c4cfd01183949e445a7e9227cf002.png",
+   "url": "https://vw.oempartsonline.com/v-2023-volkswagen-gti--s--2-0l-l4-gas/electrical--tail-lamps?assembly=1"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "5H0945095D",
+   "oem_display": "5H0 945 095 D",
+   "oem_from": "printed",
+   "name": "Tail Light Assembly",
+   "label": "Tail Lamp Assembly, Left",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 215.13,
+   "msrp_usd": 323.32,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-light-assembly-5h0945095d"
+  },
+  {
+   "oem": "5H0945096D",
+   "oem_display": "5H0 945 096 D",
+   "oem_from": "printed",
+   "name": "Tail Light Assembly",
+   "label": "Tail Lamp Assembly, Right",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 200.1,
+   "msrp_usd": 300.73,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-light-assembly-5h0945096d"
+  },
+  {
+   "oem": "5H0945067",
+   "oem_display": "5H0 945 067",
+   "oem_from": "printed",
+   "name": "Tail Lamp Assembly Mount",
+   "label": "Tail Lamp Assembly Mount, Left",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": 2.31,
+   "msrp_usd": 3.78,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-lamp-assembly-mount-5h0945067"
+  },
+  {
+   "oem": "5H0945311B",
+   "oem_display": "5H0 945 311 B",
+   "oem_from": "printed",
+   "name": "Tail Light Cover",
+   "label": "Trim, Left",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 15.19,
+   "msrp_usd": 24.89,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-light-cover-5h0945311b"
+  },
+  {
+   "oem": "5H0945312B",
+   "oem_display": "5H0 945 312 B",
+   "oem_from": "printed",
+   "name": "Tail Light Cover",
+   "label": "Trim, Right",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 15.19,
+   "msrp_usd": 24.89,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-light-cover-5h0945312b"
+  }
+ ]
+}

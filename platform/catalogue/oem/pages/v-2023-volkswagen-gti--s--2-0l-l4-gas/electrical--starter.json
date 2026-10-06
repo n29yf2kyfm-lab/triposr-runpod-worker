@@ -1,0 +1,122 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2023-volkswagen-gti--s--2-0l-l4-gas/electrical--starter",
+ "title": "Starter for 2023 Volkswagen GTI",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Starter",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/1579457529508a95e373be11285326db/36df1f1ca7f8b29a4ea650cb05cfbb5b.png",
+   "url": "https://vw.oempartsonline.com/v-2023-volkswagen-gti--s--2-0l-l4-gas/electrical--starter?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Starter",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/aedcfb4a87e96a58dea9b895944a58c0/237c82d2510b1fb7ec1c03f327f07a0d.png",
+   "url": "https://vw.oempartsonline.com/v-2023-volkswagen-gti--s--2-0l-l4-gas/electrical--starter?assembly=2"
+  },
+  {
+   "n": 3,
+   "name": "Starter",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/f5c93f845fff48d754a6e8bdc5a38e10/281a95e38379cdd2468b44733ea85f23.png",
+   "url": "https://vw.oempartsonline.com/v-2023-volkswagen-gti--s--2-0l-l4-gas/electrical--starter?assembly=3"
+  },
+  {
+   "n": 4,
+   "name": "Starter",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/b2da496bcbe93e7abd3d93e7e3c6c357/06b59f7005b4d02b9738d5801a99c562.png",
+   "url": "https://vw.oempartsonline.com/v-2023-volkswagen-gti--s--2-0l-l4-gas/electrical--starter?assembly=4"
+  },
+  {
+   "n": 5,
+   "name": "Starter",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/416c0199a10bdbb0e80d441746417f6d/2e8e17b52f0be8d106f1265aab24ea7a.png",
+   "url": "https://vw.oempartsonline.com/v-2023-volkswagen-gti--s--2-0l-l4-gas/electrical--starter?assembly=5"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "02E911022HX",
+   "oem_display": "02E 911 022 HX",
+   "oem_from": "printed",
+   "name": "Starter",
+   "label": "Vendor:bosch. Start/Stop Feature. 1.1 Kw. Auto trans, remanufactured. Bosch, remanufactured. 2.0L, gas, remanufactured, denso. From 03/04/2019. 1.1 Kw. To 03/03/2019. 1.1 Kw.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 82.43,
+   "msrp_usd": 121.68,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2e911022hx"
+  },
+  {
+   "oem": "02E911024P",
+   "oem_display": "02E 911 024 P",
+   "oem_from": "printed",
+   "name": "Starter",
+   "label": "New. Reman.. Jetta. 2.0l. Auto trans. Denso. Taos. 7 speed trans. Arteon. Start/Stop Feature. 1.5 Kw.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 192.05,
+   "msrp_usd": 288.62,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2e911024p"
+  },
+  {
+   "oem": "02M911022FX",
+   "oem_display": "02M 911 022 FX",
+   "oem_from": "printed",
+   "name": "Starter",
+   "label": "Vendor:bosch. 2.0L, bosch, remanufactured. Optional. Manual trans, bosch, remanufactured. Start/Stop Feature. From 01/14/2019. 1.5 Kw. From 11/26/2018. 1.5 Kw.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 182.97,
+   "msrp_usd": 274.98,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2m911022fx"
+  },
+  {
+   "oem": "02E911022H",
+   "oem_display": "02E 911 022 H",
+   "oem_from": "printed",
+   "name": "Starter",
+   "label": "Starter",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 146.86,
+   "msrp_usd": 220.72,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2e911022h"
+  },
+  {
+   "oem": "02M911022F",
+   "oem_display": "02M 911 022 F",
+   "oem_from": "printed",
+   "name": "Starter",
+   "label": "Starter",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 68.44,
+   "msrp_usd": 101.04,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2m911022f"
+  },
+  {
+   "oem": "02M911024J",
+   "oem_display": "02M 911 024 J",
+   "oem_from": "printed",
+   "name": "Starter",
+   "label": "2.0L, denso, remanufactured.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 346.55,
+   "msrp_usd": 520.82,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2m911024j"
+  }
+ ]
+}

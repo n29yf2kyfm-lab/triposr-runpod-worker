@@ -1,0 +1,76 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2023-volkswagen-gti--s--2-0l-l4-gas/electrical--alternator",
+ "title": "Alternator for 2023 Volkswagen GTI",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Alternator",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/dcec98cb2911ff978fc035cecc011c40/58ac241142715133c2ef3912e0d3377c.png",
+   "url": "https://vw.oempartsonline.com/v-2023-volkswagen-gti--s--2-0l-l4-gas/electrical--alternator?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Alternator",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/312b48cba1a44d74e19b68cb99bb02a3/18bcc9ad6510873ace79821f8685c835.png",
+   "url": "https://vw.oempartsonline.com/v-2023-volkswagen-gti--s--2-0l-l4-gas/electrical--alternator?assembly=2"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "06K903026CX",
+   "oem_display": "06K 903 026 CX",
+   "oem_from": "printed",
+   "name": "Alternator",
+   "label": "140 Amp.. Vendor:valeo. Valeo, remanufactered. 2.0L, valeo, 140a, remanufactured.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 267.82,
+   "msrp_usd": 371.53,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-alternator-6k903026cx"
+  },
+  {
+   "oem": "06K903026C",
+   "oem_display": "06K 903 026 C",
+   "oem_from": "printed",
+   "name": "Alternator",
+   "label": "Tiguan. Optional. GTI. Passat. 3.6L, 140 amp, valeo. 140a, 2.0L/type 2. Golf R. 140a, 2.0L/valeo. New, valeo.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 368.73,
+   "msrp_usd": 511.53,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-alternator-6k903026c"
+  },
+  {
+   "oem": "06K903026L",
+   "oem_display": "06K 903 026 L",
+   "oem_from": "printed",
+   "name": "Alternator",
+   "label": "Alternator",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 385.37,
+   "msrp_usd": 534.6,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-alternator-6k903026l"
+  },
+  {
+   "oem": "06Q903143G",
+   "oem_display": "06Q 903 143 G",
+   "oem_from": "printed",
+   "name": "Alternator Bracket",
+   "label": "2022-23. Engine code: dyla, dylb.",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": 62.72,
+   "msrp_usd": 92.57,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-alternator-bracket-6q903143g"
+  }
+ ]
+}
