@@ -1,0 +1,35 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/automatic-transaxle--case-and-related-parts",
+ "title": "Case & Related Parts for 2019 Volkswagen Golf",
+ "diagrams": [],
+ "parts": [
+  {
+   "oem": "09S323571",
+   "oem_display": "09S 323 571",
+   "oem_from": "printed",
+   "name": "Torque Converter",
+   "label": "Jetta. 8 spd. With 1.4l. Golf SportWagen. 1.4l.",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 1237.94,
+   "msrp_usd": 1594.67,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-torque-converter-9s323571"
+  },
+  {
+   "oem": "09S409061B",
+   "oem_display": "09S 409 061 B",
+   "oem_from": "printed",
+   "name": "Oil Cooler",
+   "label": "Jetta. 8 spd. Code-vtt. 8-speed transmission. Taos. Fwd. With 1.4l. Golf SportWagen. 1.4l.",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 129.8,
+   "msrp_usd": 195.07,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-oil-cooler-9s409061b"
+  }
+ ]
+}

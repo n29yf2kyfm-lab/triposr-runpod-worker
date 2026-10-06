@@ -1,0 +1,35 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/automatic-transmission--automatic-transmission",
+ "title": "Automatic Transmission for 2019 Volkswagen Golf",
+ "diagrams": [],
+ "parts": [
+  {
+   "oem": "038105327B",
+   "oem_display": "038 105 327 B",
+   "oem_from": "printed",
+   "name": "Automatic Transmission Flex-Plate",
+   "label": "Drive Plate",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 131.62,
+   "msrp_usd": 197.8,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-automatic-transmission-flex-plate-38105327b"
+  },
+  {
+   "oem": "09S300035J",
+   "oem_display": "09S 300 035 J",
+   "oem_from": "printed",
+   "name": "Automatic Transmission Assembly",
+   "label": "Trans-axle",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 3287.28,
+   "msrp_usd": 3952.24,
+   "notes": "Golf SportWagen. 1.4l.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-automatic-transmission-assembly-9s300035j"
+  }
+ ]
+}

@@ -1,0 +1,70 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/belts-and-cooling--cooling-fan-clutch-and-motor",
+ "title": "Cooling Fan, Clutch & Motor for 2019 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Shroud",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/cf5dbf7cd604ed206528e41e114895ed/eceebfb62d8218a1304a2f571cb52a08.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/belts-and-cooling--cooling-fan-clutch-and-motor?assembly=1"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "5QM121205P",
+   "oem_display": "5QM 121 205 P",
+   "oem_from": "printed",
+   "name": "Shroud",
+   "label": "Fan shroud. Golf SportWagen. 1.4L, without fan, type 2.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 302.75,
+   "msrp_usd": 454.99,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-shroud-5qm121205p"
+  },
+  {
+   "oem": "5QM121203M",
+   "oem_display": "5QM 121 203 M",
+   "oem_from": "printed",
+   "name": "Engine Cooling Fan Shroud",
+   "label": "Engine Cooling Fan Shroud, Front",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 363.87,
+   "msrp_usd": 546.86,
+   "notes": "1.4L, with fan. Fan assy. Golf SportWagen.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-cooling-fan-shroud-5qm121203m"
+  },
+  {
+   "oem": "WHT007235",
+   "oem_display": "WHT 007 235",
+   "oem_from": "printed",
+   "name": "Fan & Motor Bolt",
+   "label": "Shroud Bolt",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 5.54,
+   "msrp_usd": 9.08,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-fan-and-motor-bolt-wht007235"
+  },
+  {
+   "oem": "7E0121223",
+   "oem_display": "7E0 121 223",
+   "oem_from": "printed",
+   "name": "Radiator Shutter Assembly",
+   "label": "Louver",
+   "callout": 4,
+   "diagram": 1,
+   "price_usd": 13.82,
+   "msrp_usd": 22.66,
+   "notes": "Small. 1.4L. Magna type 1. 2.0L diesel. Louver.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-radiator-shutter-assembly-7e0121223"
+  }
+ ]
+}
