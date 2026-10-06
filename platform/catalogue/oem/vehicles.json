@@ -88,5 +88,32 @@
   "trim": "S",
   "engine": "2.0L L4 gas",
   "market": "US"
+ },
+ {
+  "slug": "v-2025-volkswagen-atlas--sel-premium-r-line--2-0l-l4-gas",
+  "year": 2025,
+  "make": "Volkswagen",
+  "model": "Atlas",
+  "trim": "SEL Premium R Line",
+  "engine": "2.0L L4 gas",
+  "market": "US"
+ },
+ {
+  "slug": "v-2025-volkswagen-tiguan--sel-r-line--2-0l-l4-gas",
+  "year": 2025,
+  "make": "Volkswagen",
+  "model": "Tiguan",
+  "trim": "SEL R Line",
+  "engine": "2.0L L4 gas",
+  "market": "US"
+ },
+ {
+  "slug": "v-2026-volkswagen-jetta--gli-autobahn--2-0l-l4-gas",
+  "year": 2026,
+  "make": "Volkswagen",
+  "model": "Jetta",
+  "trim": "GLI Autobahn",
+  "engine": "2.0L L4 gas",
+  "market": "US"
  }
 ]
