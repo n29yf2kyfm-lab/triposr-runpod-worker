@@ -46,7 +46,8 @@ def parse(raw, url):
     ref = re.search(r'reference #(\w+) in illustration', raw)
     sup = props.get('Superseded MPNs') or ''
     return {
-        'oem': (prod.get('mpn') or '').upper(),
+        # from the URL: the schema.org mpn drops leading zeros (000071597d -> 71597d)
+        'oem': url.rstrip('/').rsplit('-', 1)[1].upper(),
         'number': prod.get('productID') or '',
         'name': html.unescape(prod.get('name') or ''),
         'other_names': props.get('Other Names') or '',
