@@ -29,7 +29,7 @@ def main():
         m = re.search(r'oempartsonline\.com/(v-[^/]+)/([^/?]+)', url)
         if not m or 'markdown' not in d:
             continue
-        if (d.get('metadata') or {}).get('statusCode') == 404:
+        if (d.get('metadata') or {}).get('statusCode') in (404, 410):
             # a category this car does not have: remember it so gap_queue.py skips it
             with open(os.path.join(HERE, 'gap_missing.txt'), 'a') as fh:
                 fh.write(f'{m.group(1)}/{m.group(2)}\n')

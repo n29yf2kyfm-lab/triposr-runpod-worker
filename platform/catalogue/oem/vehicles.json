@@ -99,6 +99,24 @@
   "market": "US"
  },
  {
+  "slug": "v-2025-volkswagen-golf-r--base--2-0l-l4-gas",
+  "year": 2025,
+  "make": "Volkswagen",
+  "model": "Golf R",
+  "trim": "Base",
+  "engine": "2.0L L4 gas",
+  "market": "US"
+ },
+ {
+  "slug": "v-2025-volkswagen-taos--sel--1-5l-l4-gas",
+  "year": 2025,
+  "make": "Volkswagen",
+  "model": "Taos",
+  "trim": "SEL",
+  "engine": "1.5L L4 gas",
+  "market": "US"
+ },
+ {
   "slug": "v-2025-volkswagen-tiguan--sel-r-line--2-0l-l4-gas",
   "year": 2025,
   "make": "Volkswagen",
