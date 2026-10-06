@@ -497,7 +497,7 @@ def convert(imported, rep, override=None):
         # What was taken for the doors was not (the Polo's "doors" were its
         # wings). If no side door is left, cut the real ones from the body.
         if not any(k in parts for k in ('door_fl', 'door_fr', 'door_rl', 'door_rr')) \
-                and any(d.startswith('door_') for d in dropped) and 'door_cutter' not in rep:
+                and any(d.startswith('door_') and 'kept' not in d for d in dropped) and 'door_cutter' not in rep:
             pool = parts.get('body', []) + parts.get('glazing', [])
             kk = {o: ('glazing' if o in parts.get('glazing', []) else 'body') for o in pool}
             cut = _cut_doors(pool, kk, [o for k in parts if k.startswith('wheel_') for o in parts[k]], lo, hi, rep)
@@ -510,7 +510,8 @@ def convert(imported, rep, override=None):
                         hinge[pid] = h
                 again = _implausible(parts, {k: v for k, v in hinge.items() if k in cut})
                 for d in again:
-                    hinge.pop(d.split(':')[0], None)
+                    if 'kept' not in d:
+                        hinge.pop(d.split(':')[0], None)
                 rep['implausible'] += again
         rep['missing'] = [p for p in _wanted(parts) if not parts.get(p)]
     rep['hinge'] = hinge
@@ -786,7 +787,7 @@ def _implausible(parts, hinge):
     car long, swinging into the air) and the 2023 Polo (a 'bonnet' carrying the
     wings and bumper, tearing the front apart). Returns what it dropped."""
     wc = {k: centre(parts[k]) for k in ('wheel_fl', 'wheel_fr', 'wheel_rl', 'wheel_rr') if parts.get(k)}
-    if len(wc) < 4:
+    if len(wc) < 4 or os.environ.get('SB_NO_IMPLAUSIBLE'):       # the switch is for A/B renders only
         return []
     allv = [v for os_ in parts.values() for o in os_ if len(o.data.vertices) for v in wv(o)]
     lo, hi = bbox(allv)
@@ -800,6 +801,40 @@ def _implausible(parts, hinge):
         if not objs_:
             continue
         b0, b1 = bbox([v for o in objs_ for v in wv(o)])
+        lim = .42 * L if pid.startswith('door_') else .35 * L if pid == 'tailgate' else None
+        if lim and b1.z - b0.z > lim and len(objs_) > 1:
+            # TOO LONG is usually ONE stray piece grouped with a good door (the
+            # Stonic, Lancer, G-class): send back to the body what lies away from
+            # the part's largest piece, and judge what is left
+            main = max(objs_, key=lambda o: len(o.data.vertices))
+            m0, m1 = bbox(wv(main))
+            # a piece belongs if it lies WITHIN the main piece's length (with a
+            # margin): the Lancer's stray is a 2.8 m body-colour strip centred
+            # inside the door, the Stonic's are pieces of the REAR door
+            def within(o):
+                o0, o1 = bbox(wv(o))
+                return m0.z - .08 * L <= o0.z and o1.z <= m1.z + .08 * L
+            stray = [o for o in objs_ if o is not main and not within(o)]
+            rest = [o for o in objs_ if o not in stray]
+            if stray and rest:
+                r0, r1 = bbox([v for o in rest for v in wv(o)])
+                if r1.z - r0.z <= lim:
+                    parts[pid] = rest
+                    # a piece of the OTHER door on this side goes to that door
+                    twin = None
+                    if pid.startswith('door_') and pid[5] in 'fr':
+                        twin = 'door_' + ('r' if pid[5] == 'f' else 'f') + pid[6]
+                    for o in stray:
+                        if twin in parts and twin in hinge:
+                            t0, t1 = bbox([v for x in parts[twin] for v in wv(x)])
+                            o0, o1 = bbox(wv(o))
+                            if t0.z - .05 * L <= o0.z and o1.z <= t1.z + .05 * L:
+                                parts[twin].append(o)
+                                continue
+                        parts.setdefault('body', []).append(o)
+                    hinge[pid] = _hinges({pid: rest}, False)[pid]
+                    out.append(f'{pid}: kept; {len(stray)} stray piece(s) sent back to the body')
+                    objs_, b0, b1 = rest, r0, r1
         h, why = hinge[pid], None
         wb = zf - zr
         cz = (b0.z + b1.z) / 2
@@ -818,12 +853,14 @@ def _implausible(parts, hinge):
             elif pid[5] == 'r' and h['z'] > zf - .2 * wb:
                 why = 'a rear door hinged at the front axle'
         elif pid == 'panel_bonnet':
-            if b1.y - b0.y > .35 * H:
-                why = f'{b1.y - b0.y:.2f} tall, a bonnet is nearly flat'
+            # A bonnet can be a CLAMSHELL that carries the wings (Jaguar
+            # F-type, 370Z) or a low front lid (Porsche 911): height and mean
+            # height both rejected real ones. What a bonnet never does is
+            # reach down to bumper height, which the Polo's "bonnet" did.
+            if b0.y < .6 * wtop:
+                why = f'reaches down to {b0.y:.2f}, bumper height — not a bonnet'
             elif cz < zf - .15 * L:
                 why = 'not over the front of the car'
-            elif (b0.y + b1.y) / 2 < wtop:
-                why = 'below the tops of the wheels (a lower panel, not the bonnet)'
         elif pid == 'tailgate':
             if b1.z - b0.z > .35 * L:
                 why = f'{b1.z - b0.z:.2f} long, more than 35% of the car'
