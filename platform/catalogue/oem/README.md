@@ -54,22 +54,26 @@ dropped, never stored or logged.
 
 ## Status
 
-7 vehicles, 1,113 OEM numbers, 100 crawled pages, 0 part links lost:
+10 vehicles, 1,451 OEM numbers, 157 crawled pages, 0 part links lost. Every
+Golf generation sold in the US from 1997 to 2023 is covered:
 
 | car | generation (US) | categories |
 |---|---|---|
-| 2019 Golf S 1.4 TSI | Mk7 facelift | 21 |
-| 2016 Golf S 1.8 TSI | Mk7 | 21 |
-| 2012 Golf 2.5 | Mk6 | 20 |
-| 2005 Golf GL 2.0 | Mk4 | 18 |
+| 1997 Golf GL 2.0 | Mk3 | 16 |
 | 1999 Golf GL 2.0 | Mk4 | 18 |
+| 2005 Golf GL 2.0 | Mk4 | 18 |
+| 2008 Rabbit S 2.5 | Mk5 (sold in the US as the Rabbit) | 20 |
+| 2012 Golf 2.5 | Mk6 | 20 |
+| 2016 Golf S 1.8 TSI | Mk7 | 21 |
+| 2019 Golf S 1.4 TSI | Mk7 facelift | 21 |
+| 2023 GTI S 2.0 | Mk8 | 21 |
 | 2021 Golf 1.4 TSI | Mk7 facelift | front brakes |
 | 2019 Golf Alltrack 1.8 | Mk7 | brakes |
 
 The categories are the same set on every car: brakes, suspension and struts,
 steering, engine mounts, filters, air intake, turbo, cooling, water pump,
 alternator, starter, ignition, exterior lights, tail lamps, exhaust, A/C
-compressor and wipers. 1,106 parts have an illustration. Four part types never
+compressor and wipers. 1,442 parts have an illustration. Five part types never
 get one (`NO_IMAGE` in `illustrate.py`) because the image model kept drawing
 the wrong part; the page shows "No picture yet" for them.
 

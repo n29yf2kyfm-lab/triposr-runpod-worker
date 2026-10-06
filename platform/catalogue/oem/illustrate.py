@@ -38,10 +38,13 @@ DESCRIBE = {
     'valve-keeper': 'pair of tiny half-cone steel valve keepers (collets) next to a valve spring retainer',
     'suspension-control-arm-bushing': 'round rubber-and-steel suspension bushing: a short steel sleeve inside a thick black rubber cylinder inside an outer steel ring',
     'spindle': 'cast iron front suspension steering knuckle with wheel spindle, strut mounting ears and ball joint boss',
+    'disc-brake-pad': 'pair of disc brake pads, each a steel backing plate with a thick grey friction block, no rotor',
+    'headlight-hardware': 'small set of headlamp mounting screws, plastic clips and a bracket',
+    'exhaust-heat-shield': 'pressed aluminium exhaust heat shield, a thin dimpled curved metal sheet with mounting holes, no pipe',
 }
 # FLUX schnell drew these wrong three times over (drive axles for both shafts,
-# a belt for the cover, a bracket for the spindle). No picture is better than a wrong one: never generated.
-NO_IMAGE = {'balance-shaft', 'crankshaft', 'timing-cover', 'spindle'}
+# a belt for the cover, a bracket for the spindle; 'repair' names no part). No picture is better than a wrong one: never generated.
+NO_IMAGE = {'balance-shaft', 'crankshaft', 'timing-cover', 'spindle', 'repair'}
 
 
 def illustration_key(part_type):
