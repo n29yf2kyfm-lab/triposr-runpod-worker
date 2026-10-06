@@ -1,7 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "mcp__Firecrawl"
+      "mcp__Firecrawl",
+      "mcp__Firecrawl__*",
+      "mcp__Firecrawl__firecrawl_scrape",
+      "mcp__Firecrawl__firecrawl_search",
+      "mcp__Firecrawl__firecrawl_find_tools",
+      "mcp__Firecrawl__firecrawl_developer_search"
     ]
   },
   "hooks": {
