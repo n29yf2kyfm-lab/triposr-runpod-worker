@@ -192,6 +192,14 @@
    },
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
@@ -333,6 +341,14 @@
     "callout": 2
    },
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--fuel-injection-system-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/eb16485c65b8c30bce62db5847a836c8/03f35cc5445be3c9ee9dc7e717baf8e6.png",
+    "callout": 2
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--filters",
     "diagram": 1,
@@ -357,6 +373,14 @@
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
@@ -466,6 +490,14 @@
    },
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/53b488aa7f5e16dd52e42c4fcce98a24/d694c02a214df4d5a6fff249ecdf5023.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": null,
@@ -495,6 +527,14 @@
     "diagram_name": "Air Cleaner Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/eb16485c65b8c30bce62db5847a836c8/03f35cc5445be3c9ee9dc7e717baf8e6.png",
     "callout": 1
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--fuel-injection-system-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/eb16485c65b8c30bce62db5847a836c8/03f35cc5445be3c9ee9dc7e717baf8e6.png",
+    "callout": 1
    }
   ],
   "notes": [
@@ -515,6 +555,14 @@
    {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/eb16485c65b8c30bce62db5847a836c8/03f35cc5445be3c9ee9dc7e717baf8e6.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--fuel-injection-system-and-related-components",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/eb16485c65b8c30bce62db5847a836c8/03f35cc5445be3c9ee9dc7e717baf8e6.png",
@@ -611,6 +659,14 @@
    },
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
@@ -653,6 +709,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/53b488aa7f5e16dd52e42c4fcce98a24/d694c02a214df4d5a6fff249ecdf5023.png",
     "callout": 2
    },
    {
@@ -795,6 +859,14 @@
    },
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
@@ -823,6 +895,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 6
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/53b488aa7f5e16dd52e42c4fcce98a24/d694c02a214df4d5a6fff249ecdf5023.png",
     "callout": 6
    },
    {
@@ -1252,6 +1332,14 @@
    },
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/53b488aa7f5e16dd52e42c4fcce98a24/d694c02a214df4d5a6fff249ecdf5023.png",
+    "callout": 9
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": null,
@@ -1294,6 +1382,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/53b488aa7f5e16dd52e42c4fcce98a24/d694c02a214df4d5a6fff249ecdf5023.png",
     "callout": 5
    },
    {
@@ -1362,6 +1458,14 @@
    },
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
@@ -1404,6 +1508,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/53b488aa7f5e16dd52e42c4fcce98a24/d694c02a214df4d5a6fff249ecdf5023.png",
     "callout": 3
    },
    {
@@ -1556,6 +1668,14 @@
    },
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/53b488aa7f5e16dd52e42c4fcce98a24/d694c02a214df4d5a6fff249ecdf5023.png",
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": null,
@@ -1584,6 +1704,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/53b488aa7f5e16dd52e42c4fcce98a24/d694c02a214df4d5a6fff249ecdf5023.png",
     "callout": 8
    },
    {
@@ -1641,6 +1769,14 @@
     "diagram_name": "Air Cleaner Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/eb16485c65b8c30bce62db5847a836c8/03f35cc5445be3c9ee9dc7e717baf8e6.png",
     "callout": 5
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--fuel-injection-system-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/eb16485c65b8c30bce62db5847a836c8/03f35cc5445be3c9ee9dc7e717baf8e6.png",
+    "callout": 5
    }
   ],
   "notes": [
@@ -1680,6 +1816,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/53b488aa7f5e16dd52e42c4fcce98a24/d694c02a214df4d5a6fff249ecdf5023.png",
     "callout": 4
    },
    {
@@ -1748,6 +1892,14 @@
    },
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 9
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
@@ -1805,6 +1957,14 @@
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 6
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
@@ -1877,6 +2037,14 @@
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
@@ -2028,6 +2196,14 @@
    },
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 10
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
@@ -2053,6 +2229,14 @@
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 13
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
@@ -2146,6 +2330,14 @@
    },
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
@@ -2195,6 +2387,14 @@
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 14
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
@@ -2354,6 +2554,14 @@
    },
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/53b488aa7f5e16dd52e42c4fcce98a24/d694c02a214df4d5a6fff249ecdf5023.png",
+    "callout": 10
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": null,
@@ -2417,7 +2625,7 @@
    "GTI. Fuel tank leak diagnosis. Awd. 1.8L. Golf R. Gas."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-evaporative-emissions-system-leak-detection-pump-8k0906651d",
-  "illustration": null
+  "illustration": "illustrations/evaporative-emissions-system-leak-detection-pump.webp"
  },
  {
   "oem": "04E145722N",
@@ -2958,6 +3166,14 @@
     "diagram_name": "Air Cleaner Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/eb16485c65b8c30bce62db5847a836c8/03f35cc5445be3c9ee9dc7e717baf8e6.png",
     "callout": 4
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--fuel-injection-system-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/eb16485c65b8c30bce62db5847a836c8/03f35cc5445be3c9ee9dc7e717baf8e6.png",
+    "callout": 4
    }
   ],
   "notes": [],
@@ -3301,7 +3517,7 @@
    "Fuel tank,insulator. Fwd, bumper. 1.8L awd. Gas. All wheel drive. Front wheel drive."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-tank-insulator-8k0201274b",
-  "illustration": null
+  "illustration": "illustrations/fuel-tank-insulator.webp"
  },
  {
   "oem": "5QM919673A",
@@ -3623,7 +3839,7 @@
    "Manual trans, 1.4L. Manual trans 1.5L. CONVENTIONAL. 1.8L manual trans. Conventional, 2.0L, manual trans."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-ground-cable-5q0971250n",
-  "illustration": null
+  "illustration": "illustrations/ground-cable.webp"
  },
  {
   "oem": "04E103474H",
@@ -3849,6 +4065,14 @@
     "diagram_name": "Air Cleaner Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/eb16485c65b8c30bce62db5847a836c8/03f35cc5445be3c9ee9dc7e717baf8e6.png",
     "callout": 3
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--fuel-injection-system-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/eb16485c65b8c30bce62db5847a836c8/03f35cc5445be3c9ee9dc7e717baf8e6.png",
+    "callout": 3
    }
   ],
   "notes": [
@@ -3944,6 +4168,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/53b488aa7f5e16dd52e42c4fcce98a24/d694c02a214df4d5a6fff249ecdf5023.png",
     "callout": 7
    },
    {
@@ -11654,6 +11886,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 4
    }
   ],
   "notes": [],
@@ -11803,6 +12043,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 19
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 19
    }
   ],
@@ -12645,6 +12893,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 26
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 26
    }
   ],
@@ -14522,6 +14778,14 @@
     "diagram_name": "Center Console",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/828797d19806772c7bad1f43ccea5d4e/ffd442a949d439d93355849ee9dabef2.png",
     "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 6
    }
   ],
   "notes": [
@@ -14586,6 +14850,14 @@
     "diagram_name": "Center Console",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/828797d19806772c7bad1f43ccea5d4e/ffd442a949d439d93355849ee9dabef2.png",
     "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 6
    }
   ],
   "notes": [
@@ -14650,6 +14922,14 @@
     "diagram_name": "Center Console",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/828797d19806772c7bad1f43ccea5d4e/ffd442a949d439d93355849ee9dabef2.png",
     "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 6
    }
   ],
   "notes": [
@@ -15148,6 +15428,14 @@
     "diagram_name": "Center Console",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/828797d19806772c7bad1f43ccea5d4e/ffd442a949d439d93355849ee9dabef2.png",
     "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 6
    }
   ],
   "notes": [
@@ -15212,6 +15500,14 @@
     "diagram_name": "Center Console",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/828797d19806772c7bad1f43ccea5d4e/ffd442a949d439d93355849ee9dabef2.png",
     "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 6
    }
   ],
   "notes": [
@@ -15276,6 +15572,14 @@
     "diagram_name": "Center Console",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/828797d19806772c7bad1f43ccea5d4e/ffd442a949d439d93355849ee9dabef2.png",
     "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 6
    }
   ],
   "notes": [
@@ -16358,6 +16662,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 22
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 22
    }
   ],
   "notes": [],
@@ -16696,6 +17008,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 27
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 27
    }
   ],
   "notes": [
@@ -16736,6 +17056,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 27
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 27
    }
   ],
@@ -24165,6 +24493,14 @@
     "diagram_name": "Center Console",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/828797d19806772c7bad1f43ccea5d4e/ffd442a949d439d93355849ee9dabef2.png",
     "callout": 9
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 7
    }
   ],
   "notes": [
@@ -24204,6 +24540,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 8
    }
   ],
@@ -24737,6 +25081,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 15
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 15
    }
   ],
   "notes": [
@@ -24776,6 +25128,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 15
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 15
    }
   ],
@@ -24817,6 +25177,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 15
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 15
    }
   ],
   "notes": [
@@ -24857,6 +25225,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 16
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 16
    }
   ],
   "notes": [
@@ -24896,6 +25272,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 16
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 16
    }
   ],
@@ -25583,6 +25967,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 1
    }
   ],
   "notes": [
@@ -25623,6 +26015,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 1
    }
   ],
   "notes": [],
@@ -25660,6 +26060,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 1
    }
   ],
@@ -25699,6 +26107,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 2
    }
   ],
   "notes": [],
@@ -25737,6 +26153,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 2
    }
   ],
   "notes": [],
@@ -25774,6 +26198,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 2
    }
   ],
@@ -26824,6 +27256,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 14
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 14
    }
   ],
   "notes": [
@@ -26863,6 +27303,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 14
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 14
    }
   ],
@@ -30113,6 +30561,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 20
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 20
    }
   ],
   "notes": [
@@ -30153,6 +30609,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 20
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 20
    }
   ],
   "notes": [
@@ -30192,6 +30656,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 20
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 20
    }
   ],
@@ -30505,6 +30977,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 21
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 21
    }
   ],
@@ -31726,6 +32206,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 20
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 20
    }
   ],
   "notes": [
@@ -31765,6 +32253,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 20
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 20
    }
   ],
@@ -31806,6 +32302,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 20
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 20
    }
   ],
   "notes": [
@@ -31846,6 +32350,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 21
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 21
    }
   ],
   "notes": [
@@ -31885,6 +32397,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 21
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 21
    }
   ],
@@ -32974,6 +33494,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 17
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 17
    }
   ],
   "notes": [
@@ -33045,6 +33573,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 17
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 17
    }
   ],
@@ -33334,6 +33870,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 5
    }
   ],
   "notes": [
@@ -33373,6 +33917,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 5
    }
   ],
@@ -33414,6 +33966,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 5
    }
   ],
   "notes": [
@@ -33453,6 +34013,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 5
    }
   ],
@@ -33494,6 +34062,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 5
    }
   ],
   "notes": [
@@ -33533,6 +34109,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 5
    }
   ],
@@ -33574,6 +34158,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 5
    }
   ],
   "notes": [
@@ -33614,6 +34206,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 5
    }
   ],
   "notes": [
@@ -33653,6 +34253,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 5
    }
   ],
@@ -34092,7 +34700,7 @@
    "Without e-Golf, trw."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-power-brake-booster-5q1614106q",
-  "illustration": null
+  "illustration": "illustrations/power-brake-booster.webp"
  },
  {
   "oem": "8V1612107A",
@@ -34124,7 +34732,7 @@
    "All. To 06/2019, ate. Vendor:ATE. To 12/06/2015."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-power-brake-booster-8v1612107a",
-  "illustration": null
+  "illustration": "illustrations/power-brake-booster.webp"
  },
  {
   "oem": "5Q0612161B",
@@ -34218,7 +34826,7 @@
    "From 12/11/2017. Ate. Without e-Golf. To vin 1k6741206. With gli. From 08/15/2017. To 06/2019. To 08/14/2017. Sedan from 1/05, wagon 2009 only, from vin 1k6741207."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-power-brake-booster-grommet-1s0612250a",
-  "illustration": null
+  "illustration": "illustrations/power-brake-booster-grommet.webp"
  },
  {
   "oem": "1K09597779B9",
@@ -34258,7 +34866,7 @@
    "Driver side front power seat. seat back. GTI. Left. 4 door, seat cushion components, without 12 way adjust. Back rest. Front passenger side power seat. seat back. With multi position switch. Golf R. Sedan from 1/05, wagon 2009 only, sedan, without memory package. Wagon, 2010-11,. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-power-seat-switch-1k09597779b9) 26"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-power-seat-switch-1k09597779b9",
-  "illustration": null
+  "illustration": "illustrations/power-seat-switch.webp"
  },
  {
   "oem": "5C6959817QWA",
@@ -34298,7 +34906,7 @@
    "4 door without r, e-Golf seat cushion components."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-power-seat-switch-knob-5c6959817qwa",
-  "illustration": null
+  "illustration": "illustrations/power-seat-switch-knob.webp"
  },
  {
   "oem": "5C6959818QWA",
@@ -34338,7 +34946,7 @@
    "4 door without r, e-Golf seat cushion components. Seat cushion components, passenger side."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-power-seat-switch-knob-5c6959818qwa",
-  "illustration": null
+  "illustration": "illustrations/power-seat-switch-knob.webp"
  },
  {
   "oem": "5G6809677",
@@ -34779,6 +35387,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 27
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 27
    }
   ],
   "notes": [],
@@ -34816,6 +35432,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 27
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 27
    }
   ],
@@ -34857,6 +35481,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 27
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 27
    }
   ],
   "notes": [
@@ -34896,6 +35528,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 27
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 27
    }
   ],
@@ -35529,6 +36169,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 5
    }
   ],
   "notes": [
@@ -35568,6 +36216,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 5
    }
   ],
@@ -35609,6 +36265,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 3
    }
   ],
   "notes": [
@@ -35649,6 +36313,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 3
    }
   ],
   "notes": [
@@ -35688,6 +36360,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 3
    }
   ],
@@ -40562,6 +41242,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 23
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 23
    }
   ],
   "notes": [],
@@ -40599,6 +41287,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 9
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 9
    }
   ],
@@ -40639,6 +41335,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 10
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 10
    }
   ],
@@ -42046,6 +42750,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 11
    }
   ],
   "notes": [
@@ -42085,6 +42797,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 11
    }
   ],
@@ -42126,6 +42846,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 11
    }
   ],
   "notes": [
@@ -42165,6 +42893,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 11
    }
   ],
@@ -42206,6 +42942,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 11
    }
   ],
   "notes": [
@@ -42245,6 +42989,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 11
    }
   ],
@@ -42286,6 +43038,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 12
    }
   ],
   "notes": [],
@@ -42323,6 +43083,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 13
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 13
    }
   ],
@@ -42364,6 +43132,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 13
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 13
    }
   ],
   "notes": [
@@ -42404,6 +43180,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 13
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 13
    }
   ],
   "notes": [
@@ -42443,6 +43227,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 14
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 14
    }
   ],
@@ -44256,6 +45048,14 @@
     "diagram_name": "Center Console",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/828797d19806772c7bad1f43ccea5d4e/ffd442a949d439d93355849ee9dabef2.png",
     "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 8
    }
   ],
   "notes": [
@@ -44696,6 +45496,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 25
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 25
    }
   ],
   "notes": [
@@ -44735,6 +45543,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 25
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 25
    }
   ],
@@ -44776,6 +45592,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 25
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 25
    }
   ],
   "notes": [
@@ -44815,6 +45639,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 25
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 25
    }
   ],
@@ -44856,6 +45688,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 25
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
+    "callout": 25
    }
   ],
   "notes": [
@@ -44895,6 +45735,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 25
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--lighting-interior",
+    "diagram": 1,
+    "diagram_name": "Headliner",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfdc660b9c3009c41a14dfdc2664544f/0500b70bca22d00263b2da1d89596683.png",
     "callout": 25
    }
   ],
@@ -55953,7 +56801,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-park-brake-warning-switch-1j0947561c",
-  "illustration": null
+  "illustration": "illustrations/park-brake-warning-switch.webp"
  },
  {
   "oem": "3Q0998281",
@@ -56117,7 +56965,7 @@
    "2018-21 auto trans lever components. black. Lever components manual trans."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-parking-brake-lever-cover-5gm7114576qb",
-  "illustration": null
+  "illustration": "illustrations/parking-brake-lever-cover.webp"
  },
  {
   "oem": "5GM711457AKUI",
@@ -56157,7 +57005,7 @@
    "2018-21 auto trans lever components. black/red. Lever components, manual trans. 2015-17 auto trans lever components."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-parking-brake-lever-cover-5gm711457akui",
-  "illustration": null
+  "illustration": "illustrations/parking-brake-lever-cover.webp"
  },
  {
   "oem": "5K0615295",
@@ -56245,7 +57093,7 @@
    "2018-21 auto trans lever components. black. 2015-17 auto trans lever components. Lever components manual trans. Lever components, auto trans, leather."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-parking-brake-pedal-release-handle-5gm711503bkla",
-  "illustration": null
+  "illustration": "illustrations/parking-brake-pedal-release-handle.webp"
  },
  {
   "oem": "5GM711503C82V",
@@ -56277,7 +57125,7 @@
    "Auto trans lever components. plastic. 2018-21 auto trans lever components. titanium black. Lever components, manual trans, plastic."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-parking-brake-pedal-release-handle-5gm711503c82v",
-  "illustration": null
+  "illustration": "illustrations/parking-brake-pedal-release-handle.webp"
  },
  {
   "oem": "5G1959839B3Q7",
@@ -62131,7 +62979,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-plate-1k0407357c",
-  "illustration": null
+  "illustration": "illustrations/plate.webp"
  },
  {
   "oem": "N91108201",
@@ -69395,7 +70243,7 @@
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-positive-cable-5q0971228ad) 12"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-positive-cable-5q0971228ad",
-  "illustration": null
+  "illustration": "illustrations/positive-cable.webp"
  },
  {
   "oem": "5Q0971228AE",
@@ -69435,7 +70283,7 @@
    "GTI. 1.5L, manual trans. Positive. Optional. Jetta. 2.0L. Conventional, 1.8L, manual trans. Start/Stop Feature. From 01/06/2020. Golf. 2.0L, auto trans, manual trans."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-positive-cable-5q0971228ae",
-  "illustration": null
+  "illustration": "illustrations/positive-cable.webp"
  },
  {
   "oem": "5Q0971228P",
@@ -69473,7 +70321,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-positive-cable-5q0971228p",
-  "illustration": null
+  "illustration": "illustrations/positive-cable.webp"
  },
  {
   "oem": "0269039991",
@@ -73021,6 +73869,14 @@
    },
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
@@ -73052,6 +73908,14 @@
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
