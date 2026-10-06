@@ -1,0 +1,124 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--keyless-entry-components",
+ "title": "Keyless Entry Components for 2019 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Control Module",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/54f794571248e07b68128081502325f2/d881e895620bc1d05dd1d8a631f28e1c.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--keyless-entry-components?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Control Module",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/f96c80497c18b6cb03e3840df6a45159/2f03c2cc409c97697816d5b8ed16b916.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--keyless-entry-components?assembly=2"
+  },
+  {
+   "n": 3,
+   "name": "Module",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/9ad5a621a935807d0063425f02f6d814/8c699c636b0b7ddc4b1f6e87c4cd49bd.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--keyless-entry-components?assembly=3"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "3Q0959435Q",
+   "oem_display": "3Q0 959 435 Q",
+   "oem_from": "printed",
+   "name": "Keyless Entry Module",
+   "label": "Control Module",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 107.95,
+   "msrp_usd": 159.37,
+   "notes": "Atlas. E-Golf.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-keyless-entry-module-3q0959435q"
+  },
+  {
+   "oem": "5Q1971303D",
+   "oem_display": "5Q1 971 303 D",
+   "oem_from": "printed",
+   "name": "Bracket",
+   "label": "Control Module Mount Bracket",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": 13.9,
+   "msrp_usd": 18.98,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-bracket-5q1971303d"
+  },
+  {
+   "oem": "5K0962132B",
+   "oem_display": "5K0 962 132 B",
+   "oem_from": "printed",
+   "name": "Keyless Entry Antenna",
+   "label": "Antenna",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 52.13,
+   "msrp_usd": 74.32,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-keyless-entry-antenna-5k0962132b"
+  },
+  {
+   "oem": "5Q0962131",
+   "oem_display": "5Q0 962 131",
+   "oem_from": "printed",
+   "name": "Keyless Entry Antenna",
+   "label": "Keyless Entry Antenna, Rear lower",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 66.6,
+   "msrp_usd": 98.32,
+   "notes": "Jetta. Outer. Rear bumper. Tiguan. Atlas Cross Sport. Arteon. Taos. Liftgate.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-keyless-entry-antenna-5q0962131"
+  },
+  {
+   "oem": "5K0962132A",
+   "oem_display": "5K0 962 132 A",
+   "oem_from": "printed",
+   "name": "Keyless Entry Antenna",
+   "label": "Keyless Entry Antenna, Rear upper",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 52.71,
+   "msrp_usd": 75.15,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-keyless-entry-antenna-5k0962132a"
+  },
+  {
+   "oem": "5G0959752BEINF",
+   "oem_display": "5G0 959 752 BE INF",
+   "oem_from": "printed",
+   "name": "Keyless Entry Transmitter",
+   "label": "Key",
+   "callout": 6,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "315 MHz. A vehicle key and/or remote used to open or Control various functions of a vehicle, including but not limited to vehicle door entry, ignition, alarm system, Trunk lid, etc?K. Keyless Ignition. Fits AllTrack, e-Golf, Golf, Golf R, GTI, SportWagen E-Golf. Golf. Golf AllTrack. Golf R. Golf Sportwagen. Golf w/o S Trim. GTI 4 Button. E-Golf. Golf R. GTI. 4 button. Golf AllTrack. w/o s trim. Golf SportWagen. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-keyless-entry-transmitter-5g0959752beinf) 6",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-keyless-entry-transmitter-5g0959752beinf"
+  },
+  {
+   "oem": "5G0959752BDINF",
+   "oem_display": "5G0 959 752 BD INF",
+   "oem_from": "printed",
+   "name": "Keyless Entry Transmitter",
+   "label": "A vehicle key and/or remote used to open or Control various functions of a vehicle, including but not limited to vehicle door entry, ignition, alarm system, Trunk lid, etc?K. Exc.Keyless Ignition.",
+   "callout": 6,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "Fits AllTrack, e-Golf, Golf, GTI, SportWagen Golf AllTrack. Golf Sportwagen. Golf w/S Trim. GTI 4 Button. w/ s trim. GTI. 4 button. Golf AllTrack. Golf SportWagen. Exc.Keyless Ignition. 315 MHz. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-keyless-entry-transmitter-5g0959752bdinf) Diagram 2: Control Module1 Diagram 3: Module1 Related Parts: Control Module3 Store ratingby Google 3.9star Press space for more information.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-keyless-entry-transmitter-5g0959752bdinf"
+  }
+ ]
+}

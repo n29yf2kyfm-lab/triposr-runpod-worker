@@ -31,6 +31,14 @@
     "diagram_name": "Air Bag Label",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/0ca6141542eb9b8644d7b46ddbef16e0/cd256bd16fb3324b420bbf2f800053f4.png",
     "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--information-labels",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 3
    }
   ],
   "notes": [
@@ -70,6 +78,14 @@
     "diagram": 1,
     "diagram_name": "Air Bag Label",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/0ca6141542eb9b8644d7b46ddbef16e0/cd256bd16fb3324b420bbf2f800053f4.png",
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--information-labels",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 3
    }
   ],
@@ -142,6 +158,14 @@
     "diagram": 1,
     "diagram_name": "Air Bag Label",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/0ca6141542eb9b8644d7b46ddbef16e0/cd256bd16fb3324b420bbf2f800053f4.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--information-labels",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 1
    }
   ],
@@ -576,6 +600,14 @@
     "diagram": 1,
     "diagram_name": "Air Bag Label",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/0ca6141542eb9b8644d7b46ddbef16e0/cd256bd16fb3324b420bbf2f800053f4.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--information-labels",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 4
    }
   ],
@@ -1504,6 +1536,14 @@
     "diagram_name": "Air Bag Label",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/0ca6141542eb9b8644d7b46ddbef16e0/cd256bd16fb3324b420bbf2f800053f4.png",
     "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--information-labels",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
    }
   ],
   "notes": [
@@ -2080,6 +2120,14 @@
     "diagram_name": "Air Bag Label",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/0ca6141542eb9b8644d7b46ddbef16e0/cd256bd16fb3324b420bbf2f800053f4.png",
     "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--information-labels",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
    }
   ],
   "notes": [
@@ -2490,6 +2538,14 @@
     "diagram_name": "Air Bag Label",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/0ca6141542eb9b8644d7b46ddbef16e0/cd256bd16fb3324b420bbf2f800053f4.png",
     "callout": 6
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--information-labels",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 6
    }
   ],
   "notes": [],
@@ -2565,6 +2621,14 @@
     "diagram": 1,
     "diagram_name": "Air Bag Label",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/0ca6141542eb9b8644d7b46ddbef16e0/cd256bd16fb3324b420bbf2f800053f4.png",
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--information-labels",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 7
    }
   ],
@@ -6840,6 +6904,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--instruments-and-gauges",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 7
    }
   ],
   "notes": [
@@ -6860,6 +6932,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--cluster-and-switches",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 6
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--instruments-and-gauges",
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
@@ -7022,6 +7102,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--instruments-and-gauges",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 8
    }
   ],
   "notes": [
@@ -7042,6 +7130,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--cluster-and-switches",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 9
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--instruments-and-gauges",
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
@@ -22940,6 +23036,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--instruments-and-gauges",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
    }
   ],
   "notes": [],
@@ -23032,6 +23136,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--instruments-and-gauges",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
    }
   ],
   "notes": [],
@@ -23050,6 +23162,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--cluster-and-switches",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--instruments-and-gauges",
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
@@ -25449,6 +25569,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--instruments-and-gauges",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
    }
   ],
   "notes": [
@@ -25469,6 +25597,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--cluster-and-switches",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--instruments-and-gauges",
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
@@ -25704,6 +25840,14 @@
     "diagram": 1,
     "diagram_name": "Instrument Panel",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/8c98d821df022233eaab2155f744143a/ef4e1ba874af5e9d0f94e8fba66ab01e.png",
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--instruments-and-gauges",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 2
    }
   ],
@@ -27979,7 +28123,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-lens-5g0947133e9b9",
-  "illustration": null
+  "illustration": "illustrations/lens.webp"
  },
  {
   "oem": "5GM807287H9B9",
@@ -28071,7 +28215,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-lift-gate-5g6827025ab",
-  "illustration": null
+  "illustration": "illustrations/lift-gate.webp"
  },
  {
   "oem": "5G6827025Q",
@@ -28103,7 +28247,7 @@
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-lift-gate-5g6827025q) 1"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-lift-gate-5g6827025q",
-  "illustration": null
+  "illustration": "illustrations/lift-gate.webp"
  },
  {
   "oem": "5G6845051BJNVB",
@@ -28125,7 +28269,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-lift-gate-glass-5g6845051bjnvb",
-  "illustration": null
+  "illustration": "illustrations/lift-gate-glass.webp"
  },
  {
   "oem": "1T0845237",
@@ -28165,7 +28309,7 @@
    "With lane departure assist. To 09/2011. To 08/06/2017."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-lift-gate-glass-bumper-1t0845237",
-  "illustration": null
+  "illustration": "illustrations/lift-gate-glass-bumper.webp"
  },
  {
   "oem": "5G6971829B",
@@ -28195,7 +28339,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-lift-gate-grommet-5g6971829b",
-  "illustration": null
+  "illustration": "illustrations/lift-gate-grommet.webp"
  },
  {
   "oem": "5G6827301C",
@@ -28227,7 +28371,7 @@
    "From 09/5/2016. To 10/12/2015. 10/13/2015 to 09/05/2016, 10/13/2015 to 09/05/2016."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-lift-gate-hinge-5g6827301c",
-  "illustration": null
+  "illustration": "illustrations/lift-gate-hinge.webp"
  },
  {
   "oem": "N91206801",
@@ -28323,7 +28467,7 @@
    "GTI. Without r, e-Golf. To 01/31/2017. From 02/01/2017."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-lift-gate-lift-support-5gm827550b",
-  "illustration": null
+  "illustration": "illustrations/lift-gate-lift-support.webp"
  },
  {
   "oem": "5GM867054",
@@ -28355,7 +28499,7 @@
    "Without r or e-Golf."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-lift-gate-lock-5gm867054",
-  "illustration": null
+  "illustration": "illustrations/lift-gate-lock.webp"
  },
  {
   "oem": "5GM827469JFOD",
@@ -28387,7 +28531,7 @@
    "Without e-Golf without R."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-lift-gate-lock-actuator-5gm827469jfod",
-  "illustration": null
+  "illustration": "illustrations/lift-gate-lock-actuator.webp"
  },
  {
   "oem": "N10569501",
@@ -28451,7 +28595,7 @@
    "GTI. Golf SportWagen. To 06/24/2019. E-Golf. Golf Alltrack. From 06/24/2019. Golf R."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-lift-gate-lock-striker-plate-5g0827517g",
-  "illustration": null
+  "illustration": "illustrations/lift-gate-lock-striker-plate.webp"
  },
  {
   "oem": "N90511505",
@@ -28513,7 +28657,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-lift-gate-packing-867955499",
-  "illustration": null
+  "illustration": "illustrations/lift-gate-packing.webp"
  },
  {
   "oem": "1J6867815A9B9",
@@ -53018,7 +53162,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-lever-assembly-5g0711303",
-  "illustration": null
+  "illustration": "illustrations/lever.webp"
  },
  {
   "oem": "803501221",
@@ -61579,6 +61723,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--keyless-entry-components",
+    "diagram": 1,
+    "diagram_name": "Control Module",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/54f794571248e07b68128081502325f2/d881e895620bc1d05dd1d8a631f28e1c.png",
+    "callout": 2
    }
   ],
   "notes": [],
@@ -62463,6 +62615,38 @@
   "illustration": "illustrations/daytime-running-light-module.webp"
  },
  {
+  "oem": "04E905199H",
+  "oem_display": "04E 905 199 H",
+  "name": "Direct Ignition Coil Boot",
+  "part_type": "direct ignition coil boot",
+  "system": "electrical",
+  "price_usd": 33.54,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--ignition-system",
+    "diagram": 1,
+    "diagram_name": "Ignition Coil",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fd5ae7086f0d7fb14559e1195ea38200/30fe667d305e4646de1ff2158246e3e7.png",
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "ignition--ignition-coil",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 2
+   }
+  ],
+  "notes": [
+   "1.4L. Vendor:eldor."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-direct-ignition-coil-boot-4e905199h",
+  "illustration": "illustrations/direct-ignition-coil-boot.webp"
+ },
+ {
   "oem": "02A911335K",
   "oem_display": "02A 911 335 K",
   "name": "Drive",
@@ -62744,6 +62928,100 @@
   "illustration": "illustrations/drive-motor-battery-pack-cover.webp"
  },
  {
+  "oem": "04E906024S",
+  "oem_display": "04E 906 024 S",
+  "name": "ECM",
+  "part_type": "ecm",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--ignition-system",
+    "diagram": 1,
+    "diagram_name": "Ignition Coil",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fd5ae7086f0d7fb14559e1195ea38200/30fe667d305e4646de1ff2158246e3e7.png",
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "ignition--ignition-coil",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 7
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-ecm-4e906024s) 7"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-ecm-4e906024s",
+  "illustration": "illustrations/ecm.webp"
+ },
+ {
+  "oem": "04E906024AD",
+  "oem_display": "04E 906 024 AD",
+  "name": "Engine Control Module (ECM)",
+  "part_type": "engine control module ecm",
+  "system": "electrical",
+  "price_usd": 987.0,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--ignition-system",
+    "diagram": 1,
+    "diagram_name": "Ignition Coil",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fd5ae7086f0d7fb14559e1195ea38200/30fe667d305e4646de1ff2158246e3e7.png",
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "ignition--ignition-coil",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 7
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-control-module-ecm-4e906024ad",
+  "illustration": "illustrations/engine-control-module-ecm.webp"
+ },
+ {
+  "oem": "04E906024K",
+  "oem_display": "04E 906 024 K",
+  "name": "Engine Control Module (ECM)",
+  "part_type": "engine control module ecm",
+  "system": "electrical",
+  "price_usd": 1085.19,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--ignition-system",
+    "diagram": 1,
+    "diagram_name": "Ignition Coil",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fd5ae7086f0d7fb14559e1195ea38200/30fe667d305e4646de1ff2158246e3e7.png",
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "ignition--ignition-coil",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 7
+   }
+  ],
+  "notes": [
+   "Golf. 1.4l. Automatic transmission."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-control-module-ecm-4e906024k",
+  "illustration": "illustrations/engine-control-module-ecm.webp"
+ },
+ {
   "oem": "4H0951253A",
   "oem_display": "4H0 951 253 A",
   "name": "Engine Control Module (ECM) Relay",
@@ -62782,6 +63060,38 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-control-module-ecm-relay-4h0951253a",
   "illustration": "illustrations/engine-control-module-ecm-relay.webp"
+ },
+ {
+  "oem": "05E906433E",
+  "oem_display": "05E 906 433 E",
+  "name": "Engine Crankshaft Position Sensor",
+  "part_type": "engine crankshaft position sensor",
+  "system": "electrical",
+  "price_usd": 112.89,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--ignition-system",
+    "diagram": 1,
+    "diagram_name": "Ignition Coil",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fd5ae7086f0d7fb14559e1195ea38200/30fe667d305e4646de1ff2158246e3e7.png",
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "ignition--ignition-coil",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
+   }
+  ],
+  "notes": [
+   "Jetta. 1.5l. Taos. 1.5l. 1.4L without hybrid. Golf SportWagen. 1.4l."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-crankshaft-position-sensor-5e906433e",
+  "illustration": "illustrations/engine-crankshaft-position-sensor.webp"
  },
  {
   "oem": "N90974701",
@@ -65432,6 +65742,66 @@
   "illustration": "illustrations/hybrid-high-voltage-information-label.webp"
  },
  {
+  "oem": "04C905110N",
+  "oem_display": "04C 905 110 N",
+  "name": "Ignition Coil",
+  "part_type": "ignition coil",
+  "system": "electrical",
+  "price_usd": 71.12,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--ignition-system",
+    "diagram": 1,
+    "diagram_name": "Ignition Coil",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fd5ae7086f0d7fb14559e1195ea38200/30fe667d305e4646de1ff2158246e3e7.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "ignition--ignition-coil",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-ignition-coil-4c905110n",
+  "illustration": "illustrations/ignition-coil.webp"
+ },
+ {
+  "oem": "04E905110P",
+  "oem_display": "04E 905 110 P",
+  "name": "Ignition Coil",
+  "part_type": "ignition coil",
+  "system": "electrical",
+  "price_usd": 63.21,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--ignition-system",
+    "diagram": 1,
+    "diagram_name": "Ignition Coil",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fd5ae7086f0d7fb14559e1195ea38200/30fe667d305e4646de1ff2158246e3e7.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "ignition--ignition-coil",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-ignition-coil-4e905110p",
+  "illustration": "illustrations/ignition-coil.webp"
+ },
+ {
   "oem": "N91076601",
   "oem_display": "N 910 766 01",
   "name": "Ignition Knock (Detonation) Sensor Bolt",
@@ -65511,6 +65881,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--keyless-entry-components",
+    "diagram": 1,
+    "diagram_name": "Control Module",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/54f794571248e07b68128081502325f2/d881e895620bc1d05dd1d8a631f28e1c.png",
+    "callout": 3
    }
   ],
   "notes": [],
@@ -65541,6 +65919,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--keyless-entry-components",
+    "diagram": 1,
+    "diagram_name": "Control Module",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/54f794571248e07b68128081502325f2/d881e895620bc1d05dd1d8a631f28e1c.png",
+    "callout": 3
    }
   ],
   "notes": [],
@@ -65570,6 +65956,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--keyless-entry-components",
+    "diagram": 1,
+    "diagram_name": "Control Module",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/54f794571248e07b68128081502325f2/d881e895620bc1d05dd1d8a631f28e1c.png",
     "callout": 3
    }
   ],
@@ -65603,6 +65997,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--keyless-entry-components",
+    "diagram": 1,
+    "diagram_name": "Control Module",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/54f794571248e07b68128081502325f2/d881e895620bc1d05dd1d8a631f28e1c.png",
+    "callout": 1
    }
   ],
   "notes": [
@@ -65635,9 +66037,18 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 6
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--keyless-entry-components",
+    "diagram": 1,
+    "diagram_name": "Control Module",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/54f794571248e07b68128081502325f2/d881e895620bc1d05dd1d8a631f28e1c.png",
+    "callout": 6
    }
   ],
   "notes": [
+   "Fits AllTrack, e-Golf, Golf, GTI, SportWagen Golf AllTrack. Golf Sportwagen. Golf w/S Trim. GTI 4 Button. w/ s trim. GTI. 4 button. Golf AllTrack. Golf SportWagen. Exc.Keyless Ignition. 315 MHz. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-keyless-entry-transmitter-5g0959752bdinf) Diagram 2: Control Module1 Diagram 3: Module1 Related Parts: Control Module3 Store ratingby Google 3.9star Press space for more information.",
    "Fits AllTrack, e-Golf, Golf, GTI, SportWagen Golf AllTrack. Golf Sportwagen. Golf w/S Trim. GTI 4 Button. w/ s trim. GTI. 4 button. Golf AllTrack. Golf SportWagen. Exc.Keyless Ignition. 315 MHz. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-keyless-entry-transmitter-5g0959752bdinf) Diagram 2: Siren6 Store ratingby Google 3.9star Press space for more information.",
    "Fits AllTrack, e-Golf, Golf, GTI, SportWagen Golf AllTrack. Golf Sportwagen. Golf w/S Trim. GTI 4 Button. w/ s trim. GTI. 4 button. Golf AllTrack. Golf SportWagen. Exc.Keyless Ignition. 315 MHz. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-keyless-entry-transmitter-5g0959752bdinf) Store ratingby Google 3.9star Press space for more information."
   ],
@@ -65667,6 +66078,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 6
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--keyless-entry-components",
+    "diagram": 1,
+    "diagram_name": "Control Module",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/54f794571248e07b68128081502325f2/d881e895620bc1d05dd1d8a631f28e1c.png",
     "callout": 6
    }
   ],
@@ -67208,6 +67627,38 @@
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-socket-gasket-5qe915433l",
   "illustration": "illustrations/gasket.webp"
+ },
+ {
+  "oem": "04E905602D",
+  "oem_display": "04E 905 602 D",
+  "name": "Spark Plug",
+  "part_type": "spark plug",
+  "system": "electrical",
+  "price_usd": 20.24,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--ignition-system",
+    "diagram": 1,
+    "diagram_name": "Ignition Coil",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fd5ae7086f0d7fb14559e1195ea38200/30fe667d305e4646de1ff2158246e3e7.png",
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "ignition--ignition-coil",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 3
+   }
+  ],
+  "notes": [
+   "Fits Golf, Jetta, SportWagen 1.4 Liter. 1.4L."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-spark-plug-4e905602d",
+  "illustration": "illustrations/spark-plug.webp"
  },
  {
   "oem": "5Q0907651",
@@ -82838,30 +83289,6 @@
   "illustration": "illustrations/valve.webp"
  },
  {
-  "oem": "04E905199H",
-  "oem_display": "04E 905 199 H",
-  "name": "Direct Ignition Coil Boot",
-  "part_type": "direct ignition coil boot",
-  "system": "ignition",
-  "price_usd": 33.54,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
-    "category": "ignition--ignition-coil",
-    "diagram": 1,
-    "diagram_name": null,
-    "diagram_image": null,
-    "callout": 2
-   }
-  ],
-  "notes": [
-   "1.4L. Vendor:eldor."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-direct-ignition-coil-boot-4e905199h",
-  "illustration": "illustrations/direct-ignition-coil-boot.webp"
- },
- {
   "oem": "06H905199C",
   "oem_display": "06H 905 199 C",
   "name": "Direct Ignition Coil Boot",
@@ -82932,30 +83359,6 @@
   "illustration": "illustrations/direct-ignition-coil-boot.webp"
  },
  {
-  "oem": "04E906024S",
-  "oem_display": "04E 906 024 S",
-  "name": "ECM",
-  "part_type": "ecm",
-  "system": "ignition",
-  "price_usd": null,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
-    "category": "ignition--ignition-coil",
-    "diagram": 1,
-    "diagram_name": null,
-    "diagram_image": null,
-    "callout": 7
-   }
-  ],
-  "notes": [
-   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-ecm-4e906024s) 7"
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-ecm-4e906024s",
-  "illustration": "illustrations/ecm.webp"
- },
- {
   "oem": "06K907425N5H0",
   "oem_display": "06K 907 425 N 5H0",
   "name": "ECM",
@@ -82993,6 +83396,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--ignition-system",
+    "diagram": 1,
+    "diagram_name": "Ignition Coil",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fd5ae7086f0d7fb14559e1195ea38200/30fe667d305e4646de1ff2158246e3e7.png",
+    "callout": 4
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
@@ -83088,52 +83499,6 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-camshaft-position-sensor-7k907601a",
   "illustration": "illustrations/engine-camshaft-position-sensor.webp"
- },
- {
-  "oem": "04E906024AD",
-  "oem_display": "04E 906 024 AD",
-  "name": "Engine Control Module (ECM)",
-  "part_type": "engine control module ecm",
-  "system": "ignition",
-  "price_usd": 987.0,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
-    "category": "ignition--ignition-coil",
-    "diagram": 1,
-    "diagram_name": null,
-    "diagram_image": null,
-    "callout": 7
-   }
-  ],
-  "notes": [],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-control-module-ecm-4e906024ad",
-  "illustration": "illustrations/engine-control-module-ecm.webp"
- },
- {
-  "oem": "04E906024K",
-  "oem_display": "04E 906 024 K",
-  "name": "Engine Control Module (ECM)",
-  "part_type": "engine control module ecm",
-  "system": "ignition",
-  "price_usd": 1085.19,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
-    "category": "ignition--ignition-coil",
-    "diagram": 1,
-    "diagram_name": null,
-    "diagram_image": null,
-    "callout": 7
-   }
-  ],
-  "notes": [
-   "Golf. 1.4l. Automatic transmission."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-control-module-ecm-4e906024k",
-  "illustration": "illustrations/engine-control-module-ecm.webp"
  },
  {
   "oem": "06A906032RF",
@@ -83296,6 +83661,14 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--ignition-system",
+    "diagram": 1,
+    "diagram_name": "Ignition Coil",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fd5ae7086f0d7fb14559e1195ea38200/30fe667d305e4646de1ff2158246e3e7.png",
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "ignition--ignition-coil",
     "diagram": 1,
     "diagram_name": null,
@@ -83398,6 +83771,14 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--ignition-system",
+    "diagram": 1,
+    "diagram_name": "Ignition Coil",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fd5ae7086f0d7fb14559e1195ea38200/30fe667d305e4646de1ff2158246e3e7.png",
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "ignition--ignition-coil",
     "diagram": 1,
     "diagram_name": null,
@@ -83432,30 +83813,6 @@
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-control-module-ecm-cover-5wa907411",
   "illustration": "illustrations/engine-control-module-ecm-cover.webp"
- },
- {
-  "oem": "05E906433E",
-  "oem_display": "05E 906 433 E",
-  "name": "Engine Crankshaft Position Sensor",
-  "part_type": "engine crankshaft position sensor",
-  "system": "ignition",
-  "price_usd": 112.89,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
-    "category": "ignition--ignition-coil",
-    "diagram": 1,
-    "diagram_name": null,
-    "diagram_image": null,
-    "callout": 5
-   }
-  ],
-  "notes": [
-   "Jetta. 1.5l. Taos. 1.5l. 1.4L without hybrid. Golf SportWagen. 1.4l."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-crankshaft-position-sensor-5e906433e",
-  "illustration": "illustrations/engine-crankshaft-position-sensor.webp"
  },
  {
   "oem": "06H906433E",
@@ -83549,50 +83906,6 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-ignition-coil-32905106f",
-  "illustration": "illustrations/ignition-coil.webp"
- },
- {
-  "oem": "04C905110N",
-  "oem_display": "04C 905 110 N",
-  "name": "Ignition Coil",
-  "part_type": "ignition coil",
-  "system": "ignition",
-  "price_usd": 71.12,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
-    "category": "ignition--ignition-coil",
-    "diagram": 1,
-    "diagram_name": null,
-    "diagram_image": null,
-    "callout": 1
-   }
-  ],
-  "notes": [],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-ignition-coil-4c905110n",
-  "illustration": "illustrations/ignition-coil.webp"
- },
- {
-  "oem": "04E905110P",
-  "oem_display": "04E 905 110 P",
-  "name": "Ignition Coil",
-  "part_type": "ignition coil",
-  "system": "ignition",
-  "price_usd": 63.21,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
-    "category": "ignition--ignition-coil",
-    "diagram": 1,
-    "diagram_name": null,
-    "diagram_image": null,
-    "callout": 1
-   }
-  ],
-  "notes": [],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-ignition-coil-4e905110p",
   "illustration": "illustrations/ignition-coil.webp"
  },
  {
@@ -83739,6 +84052,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--ignition-system",
+    "diagram": 1,
+    "diagram_name": "Ignition Coil",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fd5ae7086f0d7fb14559e1195ea38200/30fe667d305e4646de1ff2158246e3e7.png",
+    "callout": 6
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
@@ -83936,30 +84257,6 @@
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-sensor-6a906433g",
   "illustration": "illustrations/sensor.webp"
- },
- {
-  "oem": "04E905602D",
-  "oem_display": "04E 905 602 D",
-  "name": "Spark Plug",
-  "part_type": "spark plug",
-  "system": "ignition",
-  "price_usd": 20.24,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
-    "category": "ignition--ignition-coil",
-    "diagram": 1,
-    "diagram_name": null,
-    "diagram_image": null,
-    "callout": 3
-   }
-  ],
-  "notes": [
-   "Fits Golf, Jetta, SportWagen 1.4 Liter. 1.4L."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-spark-plug-4e905602d",
-  "illustration": "illustrations/spark-plug.webp"
  },
  {
   "oem": "06K905601D",
