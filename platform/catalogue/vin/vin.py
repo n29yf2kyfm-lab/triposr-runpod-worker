@@ -30,7 +30,8 @@ YEAR = 'ABCDEFGHJKLMNPRSTVWXY123456789'           # 1980.. / 2010.. on a 30-year
 WMI = {
     'WVW': ('Volkswagen', 'Germany', 'car'), 'WV1': ('Volkswagen', 'Germany', 'commercial'),
     'WV2': ('Volkswagen', 'Germany', 'bus/van'), 'WVG': ('Volkswagen', 'Germany', 'SUV'),
-    '1VW': ('Volkswagen', 'USA', 'car'), '3VW': ('Volkswagen', 'Mexico', 'car'), '9BW': ('Volkswagen', 'Brazil', 'car'),
+    '1VW': ('Volkswagen', 'USA', 'car'), '3VW': ('Volkswagen', 'Mexico', 'car'),
+    '3VV': ('Volkswagen', 'Mexico', 'SUV'), '1V2': ('Volkswagen', 'USA', 'SUV'), '9BW': ('Volkswagen', 'Brazil', 'car'),
     'WAU': ('Audi', 'Germany', 'car'), 'WA1': ('Audi', 'Germany', 'SUV'), 'TRU': ('Audi', 'Hungary', 'car'),
     'VSS': ('SEAT', 'Spain', 'car'), 'TMB': ('Skoda', 'Czech Republic', 'car'), 'WP0': ('Porsche', 'Germany', 'car'),
     'WP1': ('Porsche', 'Germany', 'SUV'), 'WBA': ('BMW', 'Germany', 'car'), 'WBS': ('BMW M', 'Germany', 'car'),
@@ -58,8 +59,40 @@ TYPE = {
 
 # rough production span per type code: only used to pick which 30-year cycle
 # position 10 means, never shown as a fact about the car
-SPAN = {'1H': (1991, 1999), '1J': (1997, 2006), '1K': (2003, 2010), '5K': (2008, 2014),
+SPAN = {'1H': (1991, 1999), '1J': (1997, 2006), '1K': (2003, 2014), '5K': (2008, 2014),
         'AU': (2012, 2021), 'CD': (2019, 2030)}
+# US VW type codes 1995-2026 -> the dealer catalogue's model names, so a VIN can
+# pick parts by model + year from each part's fitment. Usual community-documented
+# codes; VW does not publish them. Kept identical to VWMODELS in catalogue.html.
+VWMODELS = {
+    '1H': (['Golf', 'GTI', 'Jetta'], (1993, 1999), 'Golf / GTI / Jetta Mk3'),
+    '1E': (['Cabrio'], (1995, 2002), 'Cabrio'),
+    '1J': (['Golf', 'GTI', 'R32'], (1999, 2006), 'Golf / GTI Mk4'),
+    '9M': (['Jetta'], (1999, 2005), 'Jetta Mk4'),
+    '1C': (['Beetle'], (1998, 2010), 'New Beetle'),
+    '1Y': (['Beetle'], (2003, 2010), 'New Beetle Convertible'),
+    '1K': (['Rabbit', 'GTI', 'Jetta', 'R32', 'Golf'], (2005, 2014), 'Golf Mk5 / Rabbit / GTI / Jetta Mk5'),
+    '5K': (['Golf', 'GTI', 'Golf R'], (2010, 2014), 'Golf / GTI Mk6'),
+    'AJ': (['Jetta'], (2011, 2018), 'Jetta Mk6'),
+    'BU': (['Jetta'], (2019, 2030), 'Jetta Mk7'),
+    'AT': (['Beetle'], (2012, 2019), 'Beetle (A5)'),
+    'AU': (['Golf', 'GTI', 'Golf R', 'Golf SportWagen', 'Golf Alltrack', 'e-Golf'], (2015, 2021), 'Golf Mk7 family'),
+    'CD': (['Golf', 'GTI', 'Golf R'], (2019, 2030), 'Golf Mk8'),
+    '3B': (['Passat'], (1998, 2005), 'Passat B5'),
+    '3C': (['Passat', 'CC'], (2006, 2017), 'Passat B6 / CC'),
+    'A3': (['Passat'], (2012, 2022), 'Passat (US-built)'),
+    '5N': (['Tiguan', 'Tiguan Limited'], (2009, 2018), 'Tiguan Mk1'),
+    'AX': (['Tiguan'], (2018, 2030), 'Tiguan Mk2'),
+    'CA': (['Atlas', 'Atlas Cross Sport'], (2018, 2030), 'Atlas'),
+    '7L': (['Touareg'], (2004, 2010), 'Touareg Mk1'),
+    'BP': (['Touareg'], (2011, 2017), 'Touareg Mk2'),
+    '1F': (['Eos'], (2007, 2016), 'Eos'),
+    '3D': (['Phaeton'], (2004, 2006), 'Phaeton'),
+    '70': (['Eurovan'], (1993, 2003), 'EuroVan'),
+    '3H': (['Arteon'], (2019, 2030), 'Arteon'),
+}
+for _c, (_m, _span, _l) in VWMODELS.items():
+    SPAN.setdefault(_c, _span)
 
 
 def check_digit(v):
@@ -98,10 +131,18 @@ def decode(vin, online=False):
         f['year'] = year
         src['year'] = 'position 10'
     if f.get('make') in VW_GROUP:
-        t = TYPE.get(v[6:8])
+        code = v[6:8]
+        t = TYPE.get(code) or (VWMODELS[code][2] if code in VWMODELS else None)
         if t:
             f['model'] = t
             src['model'] = 'VW group type code (positions 7-8)'
+        else:
+            out['notes'].append(f'type code {code} is not in the table, so the model is not decoded')
+        if code in VWMODELS and f.get('make') == 'Volkswagen':
+            f['dealer_models'] = VWMODELS[code][0]
+            y0, y1 = VWMODELS[code][1]
+            if f.get('year') and not y0 <= f['year'] <= y1:
+                out['notes'].append(f'model year {f["year"]} is outside the usual {y0}-{min(y1, 2026)} span for {code}: mistyped VIN?')
         if v[3:6] == 'ZZZ':
             out['notes'].append('European VW VIN: trim and engine are not encoded — confirm from the V5C or the car')
     na = v[:1] in '12345'
@@ -141,7 +182,11 @@ def parts_for(dec):
         fam = {'rabbit': 'golf', 'gti': 'golf'}          # US names for Golf models
         hits = [v['slug'] for v in same
                 if fam.get(v.get('model', '').lower().split()[0], v.get('model', '').lower().split()[0]) in model]
-    return hits, [p for p in parts if any(a['vehicle'] in hits for a in p['appears_on'])]
+    out = [p for p in parts if any(a['vehicle'] in hits for a in p['appears_on'])]
+    if f.get('dealer_models') and f.get('year'):     # every VW: each part page's own fitment
+        models, y = set(f['dealer_models']), f['year']
+        out += [p for p in parts if p not in out and any(m in models and lo <= y <= hi for m, lo, hi in p.get('fits', []))]
+    return hits, out
 
 
 def main():

@@ -277,7 +277,7 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt
 const norm = s => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
 const PAGE = 48;
 
-const state = {parts: [], vehicles: [], vmap: {}, asm: [], q: '', veh: new Set(), sys: new Set(), sort: 'system', shown: PAGE, vinHits: null};
+const state = {parts: [], vehicles: [], vmap: {}, asm: [], q: '', veh: new Set(), sys: new Set(), sort: 'system', shown: PAGE, vinHits: null, vinFit: null};
 
 /* ---------- VIN (port of platform/catalogue/vin/vin.py, offline) ---------- */
 const TRANS = {};
@@ -289,7 +289,7 @@ TRANS.P = 7; TRANS.R = 9;
 const WEIGHTS = [8,7,6,5,4,3,2,10,0,9,8,7,6,5,4,3,2];
 const YEAR = 'ABCDEFGHJKLMNPRSTVWXY123456789';
 const WMI = {
-  WVW:['Volkswagen','Germany','car'], WV1:['Volkswagen','Germany','commercial'], WV2:['Volkswagen','Germany','bus/van'],
+  WVW:['Volkswagen','Germany','car'], '3VV':['Volkswagen','Mexico','SUV'], '1V2':['Volkswagen','USA','SUV'], WV1:['Volkswagen','Germany','commercial'], WV2:['Volkswagen','Germany','bus/van'],
   WVG:['Volkswagen','Germany','SUV'], '1VW':['Volkswagen','USA','car'], '3VW':['Volkswagen','Mexico','car'],
   '9BW':['Volkswagen','Brazil','car'], WAU:['Audi','Germany','car'], WA1:['Audi','Germany','SUV'], TRU:['Audi','Hungary','car'],
   VSS:['SEAT','Spain','car'], TMB:['Skoda','Czech Republic','car'], WP0:['Porsche','Germany','car'], WP1:['Porsche','Germany','SUV'],
@@ -301,7 +301,38 @@ const WMI = {
   SHH:['Honda','UK','car'], JHM:['Honda','Japan','car'], KMH:['Hyundai','Korea','car'], KNA:['Kia','Korea','car'],
   JMZ:['Mazda','Japan','car'], YV1:['Volvo','Sweden','car'], TSM:['Suzuki','Hungary','car']
 };
-const SPAN = {'1H':[1991,1999], '1J':[1997,2006], '1K':[2003,2010], '5K':[2008,2014], AU:[2012,2021], CD:[2019,2030]};
+const SPAN = {'1H':[1991,1999], '1J':[1997,2006], '1K':[2003,2014], '5K':[2008,2014], AU:[2012,2021], CD:[2019,2030]};
+/* US VW type codes (VIN positions 7-8), 1995-2026, mapped to the dealer catalogue's own model names
+   so a VIN can pick parts by model + year from each part's fitment. These are the usual
+   community-documented codes; VW does not publish them. Codes not listed say so, never a guess. */
+const VWMODELS = {
+  '1H': [['Golf','GTI','Jetta'], [1993,1999], 'Golf / GTI / Jetta Mk3'],
+  '1E': [['Cabrio'], [1995,2002], 'Cabrio'],
+  '1J': [['Golf','GTI','R32'], [1999,2006], 'Golf / GTI Mk4'],
+  '9M': [['Jetta'], [1999,2005], 'Jetta Mk4'],
+  '1C': [['Beetle'], [1998,2010], 'New Beetle'],
+  '1Y': [['Beetle'], [2003,2010], 'New Beetle Convertible'],
+  '1K': [['Rabbit','GTI','Jetta','R32','Golf'], [2005,2014], 'Golf Mk5 / Rabbit / GTI / Jetta Mk5'],
+  '5K': [['Golf','GTI','Golf R'], [2010,2014], 'Golf / GTI Mk6'],
+  'AJ': [['Jetta'], [2011,2018], 'Jetta Mk6'],
+  'BU': [['Jetta'], [2019,2030], 'Jetta Mk7'],
+  'AT': [['Beetle'], [2012,2019], 'Beetle (A5)'],
+  'AU': [['Golf','GTI','Golf R','Golf SportWagen','Golf Alltrack','e-Golf'], [2015,2021], 'Golf Mk7 family'],
+  'CD': [['Golf','GTI','Golf R'], [2019,2030], 'Golf Mk8'],
+  '3B': [['Passat'], [1998,2005], 'Passat B5'],
+  '3C': [['Passat','CC'], [2006,2017], 'Passat B6 / CC'],
+  'A3': [['Passat'], [2012,2022], 'Passat (US-built)'],
+  '5N': [['Tiguan','Tiguan Limited'], [2009,2018], 'Tiguan Mk1'],
+  'AX': [['Tiguan'], [2018,2030], 'Tiguan Mk2'],
+  'CA': [['Atlas','Atlas Cross Sport'], [2018,2030], 'Atlas'],
+  '7L': [['Touareg'], [2004,2010], 'Touareg Mk1'],
+  'BP': [['Touareg'], [2011,2017], 'Touareg Mk2'],
+  '1F': [['Eos'], [2007,2016], 'Eos'],
+  '3D': [['Phaeton'], [2004,2006], 'Phaeton'],
+  '70': [['Eurovan'], [1993,2003], 'EuroVan'],
+  '3H': [['Arteon'], [2019,2030], 'Arteon']
+};
+for (const [c, [, span]] of Object.entries(VWMODELS)) SPAN[c] ||= span;
 const VW_GROUP = new Set(['Volkswagen','Audi','SEAT','Skoda','Porsche']);
 const TYPE = {
   '1H':'Golf Mk3 / Vento', '1J':'Golf Mk4 / Bora', '1K':'Golf Mk5 / Jetta Mk5', '5K':'Golf Mk6', AU:'Golf Mk7', CD:'Golf Mk8',
@@ -331,13 +362,24 @@ function decodeVin(raw){
     out.src.year = 'position 10';
   }
   if (VW_GROUP.has(out.f.make)) {
-    const t = TYPE[v.slice(6, 8)];
+    const code = v.slice(6, 8), t = TYPE[code] || (VWMODELS[code] && VWMODELS[code][2]);
     if (t) { out.f.model = t; out.src.model = 'positions 7–8'; }
+    if (VWMODELS[code] && out.f.make === 'Volkswagen') {
+      out.f.dealerModels = VWMODELS[code][0];
+      const [y0, y1] = VWMODELS[code][1];
+      if (out.f.year && (out.f.year < y0 || out.f.year > y1))
+        out.notes.push(`Model year ${out.f.year} is outside the usual ${y0}–${Math.min(y1, 2026)} span for type code ${code}. Check the VIN for a mistyped character.`);
+    }
+    if (!t) out.notes.push(`Type code ${code} (positions 7–8) is not in this page's table, so the model is not decoded.`);
     if (v.slice(3, 6) === 'ZZZ') out.notes.push('European VW VIN: trim and engine are not in the VIN. Confirm them from the V5C or the car.');
   }
   if ('12345'.includes(v[0]) && checkDigit(v) !== v[8]) out.notes.push('The check digit (position 9) does not match. Is a character mistyped?');
   if ('12345'.includes(v[0])) out.notes.push('North-American VIN: trim and engine can be decoded with NHTSA (vin.py --online). This page does not contact NHTSA.');
   return out;
+}
+function fitsVin(p, vf){
+  if (vf.slugs.size && p.appears_on.some(a => vf.slugs.has(a.vehicle))) return true;
+  return !!p.fits && p.fits.some(([m, lo, hi]) => vf.models.has(m) && lo <= vf.year && vf.year <= hi);
 }
 function vinMatches(dec){
   const f = dec.f, make = (f.make || '').toLowerCase(), model = (f.model || '').toLowerCase();
@@ -360,10 +402,11 @@ function yearsText(ys){ if (!ys.length) return ''; return ys.length === 1 ? Stri
 
 function filtered(){
   const q = state.q.trim(), nq = norm(q), words = q.toLowerCase().split(/\s+/).filter(Boolean);
-  const vset = state.vinHits ? new Set(state.vinHits) : state.veh;
+  const vset = state.vinHits ? new Set(state.vinHits) : state.veh, vf = state.vinFit;
   let list = state.parts.filter(p => {
     if (state.sys.size && !state.sys.has(p.system)) return false;
-    if (vset.size && !p.appears_on.some(a => vset.has(a.vehicle))) return false;
+    if (vf) { if (!fitsVin(p, vf)) return false; }
+    else if (vset.size && !p.appears_on.some(a => vset.has(a.vehicle))) return false;
     if (!q) return true;
     if (nq.length >= 4 && p._oem.includes(nq)) return true;
     return words.every(w => p._text.includes(w));
@@ -415,7 +458,7 @@ function card(p){
 
 function renderParts(){
   const list = filtered();
-  const any = state.q || state.veh.size || state.sys.size || state.vinHits;
+  const any = state.q || state.veh.size || state.sys.size || state.vinHits || state.vinFit;
   $('#clear').hidden = !any;
   $('#count').innerHTML = `<b>${list.length}</b> of ${state.parts.length} OEM numbers`;
   $('#grid').innerHTML = list.length ? list.slice(0, state.shown).map(card).join('')
@@ -498,20 +541,25 @@ function openPart(oem){
 /* ---------- VIN box ---------- */
 function showVin(dec){
   const box = $('#vinbox'); box.hidden = false;
-  if (!dec.valid) { box.innerHTML = `<h2>VIN</h2><p class="note">${esc(dec.notes[0])}</p>`; state.vinHits = null; renderParts(); return; }
+  if (!dec.valid) { box.innerHTML = `<h2>VIN</h2><p class="note">${esc(dec.notes[0])}</p>`; state.vinHits = null; state.vinFit = null; renderParts(); return; }
   const f = dec.f, m = vinMatches(dec);
   const kv = [['Make', f.make, dec.src.make], ['Built in', f.country], ['Model year', f.year, dec.src.year], ['Platform', f.model, dec.src.model]]
     .filter(r => r[1]).map(r => `<div><dt>${r[0]}</dt><dd>${esc(r[1])}${r[2] ? ` <small>· ${esc(r[2])}</small>` : ''}</dd></div>`).join('');
   let msg = '', actions = '';
-  if (m.exact.length) {
+  if (f.dealerModels && f.year) {
+    state.vinFit = {models: new Set(f.dealerModels), year: f.year, slugs: new Set(m.exact.map(v => v.slug))};
+    const n = state.parts.filter(p => fitsVin(p, state.vinFit)).length;
+    const known = state.parts.filter(p => p.fits || p.appears_on.length).length;
+    msg = `Showing <b>${n.toLocaleString()}</b> part${n === 1 ? '' : 's'} listed for a ${esc(f.year)} ${esc(f.dealerModels.join(' / '))}. Fitment is collected for ${known.toLocaleString()} of ${state.parts.length.toLocaleString()} numbers so far, so more parts appear as collection continues. These fit the model and year; confirm the exact part for this car before ordering.`;
+  } else if (m.exact.length) {
     state.vinHits = m.exact.map(v => v.slug);
     msg = `Showing parts listed for ${m.exact.map(vlabel).map(esc).join(' and ')}. These fit the model and year — confirm the exact part for this car before ordering.`;
   } else if (m.near.length) {
-    state.vinHits = null;
+    state.vinHits = null; state.vinFit = null;
     msg = `No ${esc(f.year)} ${esc(f.model)} is catalogued yet. The nearest catalogued years are below. They may be a different generation, so check before trusting a part.`;
     actions = m.near.map(v => `<button class="chip" data-near="${esc(v.slug)}">${esc(vlabel(v))}</button>`).join('');
   } else {
-    state.vinHits = null;
+    state.vinHits = null; state.vinFit = null;
     msg = f.make ? `Fitment is collected for the VW Golf family so far, so no part is matched to this vehicle yet. Search by name or number instead.` : '';
   }
   box.innerHTML = `<h2>VIN decoded</h2><dl class="kv">${kv || '<div><dd>Nothing could be read from this VIN.</dd></div>'}</dl>
@@ -597,19 +645,19 @@ async function load(){
 
 document.addEventListener('click', e => {
   const t = e.target;
-  const vb = t.closest('.vbtn'); if (vb) { const s = vb.dataset.v; state.veh.has(s) ? state.veh.delete(s) : state.veh.add(s); state.vinHits = null; state.shown = PAGE; renderFilters(); renderParts(); return; }
+  const vb = t.closest('.vbtn'); if (vb) { const s = vb.dataset.v; state.veh.has(s) ? state.veh.delete(s) : state.veh.add(s); state.vinHits = null; state.vinFit = null; state.shown = PAGE; renderFilters(); renderParts(); return; }
   const ch = t.closest('.chip[data-s]'); if (ch) { const s = ch.dataset.s; state.sys.has(s) ? state.sys.delete(s) : state.sys.add(s); state.shown = PAGE; renderFilters(); renderParts(); return; }
-  const nr = t.closest('.chip[data-near]'); if (nr) { state.veh = new Set([nr.dataset.near]); state.vinHits = null; state.shown = PAGE; renderFilters(); renderParts(); tab('parts'); return; }
+  const nr = t.closest('.chip[data-near]'); if (nr) { state.veh = new Set([nr.dataset.near]); state.vinHits = null; state.vinFit = null; state.shown = PAGE; renderFilters(); renderParts(); tab('parts'); return; }
   const cd = t.closest('.card'); if (cd) { openPart(cd.dataset.oem); return; }
   if (t.closest('.close')) { $('#dlg').close(); return; }
   const cp = t.closest('.copy'); if (cp) { navigator.clipboard?.writeText(cp.dataset.copy).then(() => toast('Copied ' + cp.dataset.copy), () => toast('Copy failed — select the number instead')); return; }
-  if (t.id === 'vinclear') { $('#vin').value = ''; $('#vinbox').hidden = true; state.vinHits = null; renderParts(); return; }
+  if (t.id === 'vinclear') { $('#vin').value = ''; $('#vinbox').hidden = true; state.vinHits = null; state.vinFit = null; renderParts(); return; }
 });
 $('#dlg').addEventListener('click', e => { if (e.target === $('#dlg')) $('#dlg').close(); });
 $('#q').addEventListener('input', e => { state.q = e.target.value; state.shown = PAGE; renderParts(); });
 $('#sort').addEventListener('change', e => { state.sort = e.target.value; renderParts(); });
 $('#more').addEventListener('click', () => { state.shown += PAGE; renderParts(); });
-$('#clear').addEventListener('click', () => { state.q = ''; $('#q').value = ''; state.veh.clear(); state.sys.clear(); state.vinHits = null; $('#vinbox').hidden = true; $('#vin').value = ''; state.shown = PAGE; renderFilters(); renderParts(); });
+$('#clear').addEventListener('click', () => { state.q = ''; $('#q').value = ''; state.veh.clear(); state.sys.clear(); state.vinHits = null; state.vinFit = null; $('#vinbox').hidden = true; $('#vin').value = ''; state.shown = PAGE; renderFilters(); renderParts(); });
 $('#vinform').addEventListener('submit', e => { e.preventDefault(); showVin(decodeVin($('#vin').value)); tab('parts'); });
 $('#tab-parts').addEventListener('click', () => tab('parts'));
 $('#tab-torques').addEventListener('click', () => tab('torques'));
