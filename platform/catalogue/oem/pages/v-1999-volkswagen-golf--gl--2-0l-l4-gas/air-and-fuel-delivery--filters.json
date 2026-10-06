@@ -1,0 +1,104 @@
+{
+ "page": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gl--2-0l-l4-gas/air-and-fuel-delivery--filters",
+ "title": "Filters for 1999 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Air Cleaner Assembly",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/eb16485c65b8c30bce62db5847a836c8/03f35cc5445be3c9ee9dc7e717baf8e6.png",
+   "url": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gl--2-0l-l4-gas/air-and-fuel-delivery--filters?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Fuel Tank",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
+   "url": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gl--2-0l-l4-gas/air-and-fuel-delivery--filters?assembly=2"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "1J0129607BP",
+   "oem_display": "1J0 129 607 BP",
+   "oem_from": "printed",
+   "name": "Air Filter And Housing Assembly",
+   "label": "Air Cleaner Assembly",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "2.0L, federal. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-air-filter-and-housing-assembly-1j0129607bp) 1",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-air-filter-and-housing-assembly-1j0129607bp"
+  },
+  {
+   "oem": "1J0129607AE",
+   "oem_display": "1J0 129 607 AE",
+   "oem_from": "printed",
+   "name": "Air Filter And Housing Assembly",
+   "label": "Air Cleaner Assembly",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "1.9L 1999-2003. 2.0L, california. 1.9L 90 horsepower. 1.9L 2004-06. without cold climate. 100 horsepower. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-air-filter-and-housing-assembly-1j0129607ae) 2",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-air-filter-and-housing-assembly-1j0129607ae"
+  },
+  {
+   "oem": "1J0129620",
+   "oem_display": "1J0 129 620",
+   "oem_from": "printed",
+   "name": "Air Filter",
+   "label": "Air Filter",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": 19.51,
+   "msrp_usd": 26.65,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-air-filter-1j0129620"
+  },
+  {
+   "oem": "06A906461A",
+   "oem_display": "06A 906 461 A",
+   "oem_from": "printed",
+   "name": "Mass Air Flow Sensor",
+   "label": "Air Mass Sensor",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 291.1,
+   "msrp_usd": 437.48,
+   "notes": "1.8L, new. 2.0L, new. Golf, GTI, R32. 2.0l. 2.0L, california. Beetle. 1.8l. Beetle. 2.0l. Sedan. Jetta. 2.0l.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-mass-air-flow-sensor-6a906461a"
+  },
+  {
+   "oem": "WHT006727",
+   "oem_display": "WHT 006 727",
+   "oem_from": "printed",
+   "name": "Fuel Injection Air Flow Meter Gasket / O-Ring",
+   "label": "Air Mass Sensor Gasket",
+   "callout": 4,
+   "diagram": 1,
+   "price_usd": 7.0,
+   "msrp_usd": 11.47,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-injection-air-flow-meter-gasket-o-ring-wht006727"
+  },
+  {
+   "oem": "1J0129684G",
+   "oem_display": "1J0 129 684 G",
+   "oem_from": "printed",
+   "name": "Engine Air Intake Hose",
+   "label": "Connector Pipe",
+   "callout": 5,
+   "diagram": 1,
+   "price_usd": 199.61,
+   "msrp_usd": 299.99,
+   "notes": "2.0L, without cold climate.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-air-intake-hose-1j0129684g"
+  }
+ ]
+}
