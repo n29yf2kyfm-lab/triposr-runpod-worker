@@ -4,14 +4,12 @@ lamborghini-urus-x-2017-2019-v1,propose,suv
 bmw-m3-e30-undated-v1,propose,coupe
 fiat-500-classic-v1,propose,hatchback
 ferrari-308-v1,propose,coupe
-polestar-2-v1,REVIEW (models disagree),
 kia-ev6-2022-v1,propose,hatchback
 citroen-c3-picasso-2017-w6-v1,propose,mpv
 citroen-c4-lounge-2018-w6-v1,propose,saloon
 byd-dolphin-2025-w6-v1,propose,hatchback
 byd-dolphin-mini-2024-w6-v1,propose,hatchback
 hyundai-kona-w6-v1,propose,suv
-citroen-cactus-2015-w6-v1,REVIEW (models disagree),
 genesis-g70-w6-v1,propose,saloon
 fiat-bravo-2011-w6-v1,propose,hatchback
 hyundai-kona-w6-v2,propose,suv
@@ -20,7 +18,6 @@ jaguar-xj-2010-w6-v1,propose,saloon
 jeep-renegade-2021-w6-v1,propose,suv
 kia-carnival-w6-v1,propose,mpv
 kia-sportage-2011-w6-v1,propose,suv
-kia-ev6-2022-w6-v1,REVIEW (models disagree),
 kia-carnival-2022-w6-v1,propose,mpv
 kia-picanto-w6-v1,propose,hatchback
 kia-sportage-w6-v1,propose,suv
@@ -43,12 +40,10 @@ lexus-rx450h-2023-w7-v1,propose,suv
 volkswagen-polo-w7-v1,propose,hatchback
 mazda-cx-5-2017-w7-v1,propose,suv
 mercedes-benz-s600-1999-w7-v1,propose,saloon
-polestar-2-w7-v1,REVIEW (models disagree),
 tesla-model-3-w7-v2,propose,saloon
 tesla-model-3-2024-w7-v1,propose,saloon
 renault-clio-2020-w7-v1,propose,hatchback
 toyota-corolla-w7-v1,propose,saloon
-dacia-lodgy-2024-w7-v1,REVIEW (models disagree),
 lexus-ls-2018-w7-v1,propose,saloon
 tesla-model-y-2021-w7-v1,propose,suv
 skoda-fabia-w7-v1,propose,hatchback
@@ -56,7 +51,6 @@ kia-picanto-2012-w7-v1,propose,hatchback
 opel-astra-1998-w7-v1,propose,saloon
 kia-sportage-2018-w7-v1,propose,suv
 volvo-xc60-2023-w7-v1,propose,suv
-subaru-outback-2022-w7-v1,REVIEW (models disagree),
 lexus-nx-2017-w7-v1,propose,suv
 renault-clio-2023-w7-v1,propose,hatchback
 tesla-model-3-w7-v3,propose,saloon
@@ -77,16 +71,12 @@ renault-clio-w8-v1,propose,hatchback
 volkswagen-vw-beetle-w7-v1,propose,coupe
 ford-ranger-w7-v1,propose,pickup
 volkswagen-fox-2004-vw1-v1,propose,hatchback
-ford-focus-2006-w12-v1,REVIEW (models disagree),
-mercedes-benz-eqe-w8-v1,REVIEW (models disagree),
 volkswagen-sharan-vw1-v1,propose,mpv
-volkswagen-new-beetle-2006-vw2-v1,REVIEW (models disagree),
 volkswagen-golf-2017-vw2-v1,propose,hatchback
 volkswagen-golf-gti-2025-vw2-v1,propose,hatchback
 volkswagen-golf-gti-vw2-v1,propose,hatchback
 volkswagen-jetta-2010-vw2-v1,propose,saloon
 volkswagen-golf-r-2019-vw2-v1,propose,hatchback
-volkswagen-id-buzz-2021-vw2-v1,REVIEW (models disagree),
 volkswagen-golf-gti-2021-vw2-v1,propose,hatchback
 volkswagen-jetta-2019-vw2-v1,propose,saloon
 volkswagen-scirocco-r-2015-vw2-v1,propose,hatchback
@@ -108,7 +98,6 @@ fiat-126-fw1-v1,propose,hatchback
 fiat-132-fw1-v1,propose,saloon
 fiat-133-fw1-v1,propose,hatchback
 fiat-2300-1961-fw1-v1,propose,coupe
-fiat-500-fw1-v1,REVIEW (models disagree),
 fiat-500-1970-fw1-v1,propose,hatchback
 fiat-600-1967-fw1-v1,propose,van
 fiat-600-1960-fw1-v1,propose,coupe
@@ -127,7 +116,6 @@ fiat-850-spring-1968-fw1-v1,propose,convertible
 fiat-tipo-fw1-v1,propose,saloon
 fiat-toro-fw1-v1,propose,pickup
 fiat-147-fw1-v2,propose,hatchback
-fiat-x1-9-fw1-v1,REVIEW (models disagree),
 fiat-ducato-fw1-v1,propose,van
 ford-gt40-1964-fow1-v1,propose,coupe
 ford-consul-capri-fow1-v1,propose,coupe
@@ -157,7 +145,6 @@ nissan-370z-2020-nw1-v1,propose,coupe
 nissan-gt-r-nismo-2024-nw1-v1,propose,coupe
 nissan-skyline-1964-nw1-v1,propose,saloon
 nissan-gt-r-nw1-v2,propose,coupe
-nissan-cube-nw1-v1,REVIEW (models disagree),
 nissan-silvia-nw1-v1,propose,coupe
 nissan-tiida-2017-nw1-v1,propose,hatchback
 nissan-gt-r-2017-nw1-v1,propose,coupe
@@ -213,9 +200,7 @@ nissan-datsun-nw1-v1,propose,pickup
 nissan-gt-r-1997-nw1-v1,propose,coupe
 nissan-altima-2019-nw1-v1,propose,saloon
 nissan-patrol-safari-nw1-v1,propose,suv
-nissan-juke-2015-nw1-v1,REVIEW (models disagree),
 nissan-sentra-2018-nw1-v1,propose,saloon
-nissan-cube-2010-nw1-v1,REVIEW (models disagree),
 nissan-gt-r-1989-nw1-v2,propose,coupe
 nissan-micra-nw1-v1,propose,hatchback
 nissan-frontier-2022-nw1-v1,propose,pickup
@@ -250,13 +235,11 @@ byd-sealion-7-2024-bw1-v1,propose,suv
 byd-tang-2024-bw1-v1,propose,suv
 byd-yangwang-u8-2023-bw1-v1,propose,suv
 byd-atto-3-2024-bw1-v1,propose,suv
-byd-seal-06-2024-bw1-v1,REVIEW (models disagree),
 byd-dolphin-2024-bw1-v1,propose,hatchback
 byd-han-2022-bw1-v1,propose,saloon
 byd-yangwang-u9-2024-bw1-v1,propose,coupe
 hyundai-grand-i10-nios-hyw1-v1,propose,hatchback
 hyundai-ix55-veracruz-2011-hyw1-v1,propose,suv
-byd-yangwang-u7-2024-bw1-v1,REVIEW (models disagree),
 hyundai-accent-2013-hyw1-v1,propose,saloon
 hyundai-getz-2006-hyw1-v1,propose,hatchback
 hyundai-i20-2010-hyw1-v1,propose,hatchback
@@ -282,12 +265,10 @@ subaru-brz-2020-sbw1-v1,propose,coupe
 subaru-impreza-wrx-sti-2018-sbw1-v1,propose,saloon
 subaru-legacy-2010-sbw1-v1,propose,saloon
 subaru-wrx-wagon-sbw1-v1,propose,estate
-subaru-impreza-wrx-sti-sbw1-v1,REVIEW (models disagree),
 subaru-forester-2009-sbw1-v1,propose,suv
 subaru-brz-2013-sbw1-v1,propose,coupe
 subaru-impreza-wrx-sti-2006-sbw1-v1,propose,saloon
 subaru-impreza-22b-sti-1998-sbw1-v1,propose,coupe
-porsche-911-2021-pw2-v1,REVIEW (models disagree),
 porsche-cayman-2014-pw2-v1,propose,coupe
 subaru-legacy-wagon-sbw1-v1,propose,estate
 porsche-911-2018-pw2-v1,propose,coupe
@@ -318,12 +299,9 @@ porsche-718-boxster-2017-pw2-v1,propose,convertible
 porsche-911-pw2-v3,propose,coupe
 porsche-cayenne-2020-pw2-v1,propose,suv
 porsche-911-2016-pw2-v1,propose,coupe
-porsche-taycan-2025-pw2-v1,REVIEW (models disagree),
-porsche-911-pw2-v5,REVIEW (models disagree),
 porsche-911-pw2-v4,propose,coupe
 porsche-944-1991-pw2-v1,propose,coupe
 porsche-911-pw2-v6,propose,coupe
-porsche-panamera-2019-pw2-v1,REVIEW (models disagree),
 porsche-911-2019-pw2-v2,propose,convertible
 porsche-930-pw2-v1,propose,coupe
 porsche-718-boxster-2019-pw2-v1,propose,convertible
@@ -336,10 +314,8 @@ porsche-911-pw2-v9,propose,coupe
 porsche-911-pw2-v10,propose,coupe
 porsche-911-pw2-v11,propose,coupe
 porsche-911-2015-pw2-v1,propose,coupe
-porsche-911-2019-pw2-v3,REVIEW (models disagree),
 porsche-911-pw2-v12,propose,coupe
 porsche-panamera-2010-pw2-v1,propose,saloon
-porsche-carrera-gt-pw2-v1,REVIEW (models disagree),
 porsche-911-2019-pw2-v4,propose,coupe
 porsche-911-2013-pw2-v1,propose,coupe
 porsche-cayman-pw2-v2,propose,coupe
@@ -348,8 +324,6 @@ porsche-911-2019-pw2-v5,propose,coupe
 porsche-911-pw2-v15,propose,coupe
 porsche-911-pw2-v14,propose,coupe
 porsche-993-1995-pw2-v1,propose,coupe
-porsche-carrera-gt-2004-pw2-v1,REVIEW (models disagree),
-porsche-panamera-pw2-v1,REVIEW (models disagree),
 porsche-918-2015-pw2-v1,propose,coupe
 porsche-911-2019-pw2-v6,propose,coupe
 porsche-911-2022-pw2-v2,propose,coupe
@@ -358,10 +332,8 @@ porsche-718-cayman-2022-pw2-v1,propose,coupe
 porsche-macan-2022-pw2-v1,propose,suv
 porsche-911-2017-pw2-v2,propose,coupe
 porsche-911-2021-pw2-v3,propose,coupe
-porsche-911-2025-pw2-v2,REVIEW (models disagree),
 porsche-911-2022-pw2-v3,propose,coupe
 porsche-cayenne-2010-pw2-v1,propose,suv
-porsche-panamera-2010-pw2-v2,REVIEW (models disagree),
 porsche-918-2015-pw2-v2,propose,convertible
 porsche-cayman-2011-pw2-v1,propose,coupe
 porsche-taycan-pw2-v2,propose,estate
@@ -371,7 +343,6 @@ porsche-911-2019-pw2-v7,propose,convertible
 porsche-718-2020-pw2-v2,propose,convertible
 porsche-macan-pw2-v1,propose,suv
 porsche-911-1977-pw2-v1,propose,coupe
-porsche-panamera-pw2-v2,REVIEW (models disagree),
 porsche-959-pw2-v2,propose,coupe
 porsche-unknown-pw2-v1,propose,coupe
 porsche-718-cayman-2018-pw2-v1,propose,coupe
@@ -381,7 +352,6 @@ porsche-macan-2022-pw2-v2,propose,suv
 porsche-911-2023-pw2-v1,propose,coupe
 porsche-panamera-2021-pw2-v1,propose,estate
 porsche-911-2024-pw2-v1,propose,coupe
-porsche-panamera-2017-pw2-v1,REVIEW (models disagree),
 porsche-macan-2022-pw2-v3,propose,suv
 porsche-911-pw2-v17,propose,coupe
 porsche-911-pw2-v18,propose,coupe
@@ -438,16 +408,13 @@ jeep-grand-cherokee-jpw1-v2,propose,suv
 jeep-wrangler-jpw1-v1,propose,suv
 jeep-wrangler-2023-jpw1-v1,propose,suv
 jeep-wrangler-jpw1-v2,propose,suv
-jeep-wrangler-2007-jpw1-v1,REVIEW (models disagree),
 jeep-gladiator-1962-jpw1-v1,propose,pickup
-jeep-wagoneer-1978-jpw1-v1,REVIEW (models disagree),
 jeep-grand-commander-2021-jpw1-v1,propose,suv
 jeep-gladiator-2020-jpw1-v1,propose,pickup
 chrysler-pt-cruiser-2005-crw1-v1,propose,hatchback
 chrysler-300c-crw1-v1,propose,saloon
 chrysler-pacifica-2021-crw1-v1,propose,mpv
 volvo-v60-vow1-v1,propose,estate
-chrysler-pacifica-2008-crw1-v1,REVIEW (models disagree),
 volvo-v40-2018-vow1-v1,propose,hatchback
 volvo-c30-vow1-v1,propose,hatchback
 volvo-v50-vow1-v1,propose,estate
@@ -463,7 +430,6 @@ mazda-mpv-2002-mzw1-v1,propose,mpv
 mazda-cx-5-2020-mzw1-v1,propose,suv
 mazda-mx-5-2009-mzw1-v1,propose,convertible
 mazda-mx-3-mzw1-v1,propose,coupe
-mazda-mx-5-1998-mzw1-v1,REVIEW (models disagree),
 mazda-mx-5-1989-mzw1-v1,propose,convertible
 mazda-mx-6-1992-mzw1-v1,propose,coupe
 mazda-mazda-2-2011-mzw1-v1,propose,hatchback
@@ -497,23 +463,23 @@ ford-mondeo-2021-cr3-v1,propose,estate
 mg-mg3-2025-m1-v1,propose,hatchback
 polestar-2-v1,propose,hatchback
 citroen-cactus-2015-w6-v1,propose,hatchback
-kia-ev6-2022-w6-v1,awaiting owner,suv
+kia-ev6-2022-w6-v1,propose,suv
 polestar-2-w7-v1,propose,hatchback
 dacia-lodgy-2024-w7-v1,propose,mpv
-subaru-outback-2022-w7-v1,awaiting owner,estate
+subaru-outback-2022-w7-v1,propose,estate
 ford-focus-2006-w12-v1,propose,hatchback
 mercedes-benz-eqe-w8-v1,propose,saloon
 volkswagen-new-beetle-2006-vw2-v1,propose,hatchback
 volkswagen-id-buzz-2021-vw2-v1,propose,mpv
-fiat-500-fw1-v1,awaiting owner,coupe
-fiat-x1-9-fw1-v1,awaiting owner,convertible
-nissan-cube-nw1-v1,awaiting owner,mpv
+fiat-500-fw1-v1,propose,coupe
+fiat-x1-9-fw1-v1,propose,convertible
+nissan-cube-nw1-v1,propose,mpv
 nissan-juke-2015-nw1-v1,propose,suv
-nissan-cube-2010-nw1-v1,awaiting owner,mpv
-byd-seal-06-2024-bw1-v1,awaiting owner,suv
+nissan-cube-2010-nw1-v1,propose,mpv
+byd-seal-06-2024-bw1-v1,propose,suv
 byd-yangwang-u7-2024-bw1-v1,propose,saloon
 subaru-impreza-wrx-sti-sbw1-v1,propose,saloon
-porsche-911-2021-pw2-v1,awaiting owner,coupe
+porsche-911-2021-pw2-v1,propose,coupe
 porsche-taycan-2025-pw2-v1,propose,saloon
 porsche-911-pw2-v5,propose,convertible
 porsche-panamera-2019-pw2-v1,propose,hatchback
@@ -526,6 +492,6 @@ porsche-panamera-2010-pw2-v2,propose,hatchback
 porsche-panamera-pw2-v2,propose,hatchback
 porsche-panamera-2017-pw2-v1,propose,hatchback
 jeep-wrangler-2007-jpw1-v1,propose,suv
-jeep-wagoneer-1978-jpw1-v1,awaiting owner,suv
-chrysler-pacifica-2008-crw1-v1,awaiting owner,estate
+jeep-wagoneer-1978-jpw1-v1,propose,suv
+chrysler-pacifica-2008-crw1-v1,propose,estate
 mazda-mx-5-1998-mzw1-v1,propose,convertible
