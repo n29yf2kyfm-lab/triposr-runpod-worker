@@ -1,0 +1,49 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2005-volkswagen-golf--gl--2-0l-l4-gas/electrical--tail-lamps",
+ "title": "Tail Lamps for 2005 Volkswagen Golf",
+ "diagrams": [],
+ "parts": [
+  {
+   "oem": "1J6945299",
+   "oem_display": "1J6 945 299",
+   "oem_from": "printed",
+   "name": "Tail Lamp Assembly Bushing",
+   "label": "Tail Lamp Assembly Bushing, Left",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 2.06,
+   "msrp_usd": 2.82,
+   "notes": "Sedan.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-lamp-assembly-bushing-1j6945299"
+  },
+  {
+   "oem": "N0177322",
+   "oem_display": "N 017 732 2",
+   "oem_from": "printed",
+   "name": "Bulb",
+   "label": "Tail Lamp Bulb, Right",
+   "callout": 4,
+   "diagram": 1,
+   "price_usd": 3.25,
+   "msrp_usd": 4.1,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-bulb-n0177322"
+  },
+  {
+   "oem": "N0177192",
+   "oem_display": "N 017 719 2",
+   "oem_from": "printed",
+   "name": "Bulb",
+   "label": "Tail Lamp Bulb, Left",
+   "callout": 5,
+   "diagram": 1,
+   "price_usd": 2.62,
+   "msrp_usd": 3.3,
+   "notes": "10 watt. EuroVan. Back-up lamp.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-bulb-n0177192"
+  }
+ ]
+}
