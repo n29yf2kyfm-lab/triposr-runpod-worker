@@ -1251,6 +1251,14 @@
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
     "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 3
    }
   ],
   "notes": [],
@@ -7313,6 +7321,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 11
    }
   ],
   "notes": [
@@ -7352,6 +7368,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
     "callout": 11
    }
   ],
@@ -7473,6 +7497,14 @@
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
     "callout": 23
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 23
    }
   ],
   "notes": [
@@ -7509,6 +7541,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--sensors",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 23
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
@@ -7572,6 +7612,14 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 18
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "exhaust--exhaust-components",
     "diagram": 1,
     "diagram_name": "Converter & Pipe",
@@ -7611,6 +7659,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--sensors",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 24
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
@@ -7655,6 +7711,14 @@
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
     "callout": 24
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 24
    }
   ],
   "notes": [
@@ -7691,6 +7755,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--sensors",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
@@ -9289,6 +9361,14 @@
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
     "callout": 14
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 14
    }
   ],
   "notes": [],
@@ -10177,6 +10257,14 @@
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
     "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 1
    }
   ],
   "notes": [],
@@ -10211,6 +10299,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--sensors",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
@@ -10275,6 +10371,14 @@
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
     "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 8
    }
   ],
   "notes": [
@@ -10311,6 +10415,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--sensors",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
@@ -10419,6 +10531,14 @@
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
     "callout": 19
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 19
    }
   ],
   "notes": [
@@ -10523,6 +10643,14 @@
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
     "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 11
    }
   ],
   "notes": [
@@ -10559,6 +10687,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--sensors",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
@@ -10603,6 +10739,14 @@
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
     "callout": 13
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 13
    }
   ],
   "notes": [
@@ -10639,6 +10783,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--sensors",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 13
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
@@ -10711,6 +10863,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--sensors",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 16
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
@@ -14436,6 +14596,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 21
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 21
    }
   ],
   "notes": [
@@ -14475,6 +14643,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 21
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
     "callout": 21
    }
   ],
@@ -14764,6 +14940,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 18
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 18
    }
   ],
   "notes": [
@@ -14800,6 +14984,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--sensors",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 15
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
@@ -14844,6 +15036,14 @@
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
     "callout": 15
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 15
    }
   ],
   "notes": [
@@ -14875,6 +15075,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
     "callout": 1
    }
   ],
@@ -14908,6 +15116,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 1
    }
   ],
   "notes": [
@@ -14939,6 +15155,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
     "callout": 1
    }
   ],
@@ -14972,6 +15196,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 1
    }
   ],
   "notes": [
@@ -15003,6 +15235,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
     "callout": 1
    }
   ],
@@ -15036,6 +15276,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 1
    }
   ],
   "notes": [
@@ -15067,6 +15315,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
     "callout": 1
    }
   ],
@@ -15108,6 +15364,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 1
    }
   ],
   "notes": [
@@ -15147,6 +15411,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
     "callout": 1
    }
   ],
@@ -15188,6 +15460,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 1
    }
   ],
   "notes": [
@@ -15227,6 +15507,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
     "callout": 1
    }
   ],
@@ -15268,6 +15556,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 1
    }
   ],
   "notes": [
@@ -15307,6 +15603,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
     "callout": 1
    }
   ],
@@ -15348,6 +15652,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 1
    }
   ],
   "notes": [
@@ -15387,6 +15699,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
     "callout": 1
    }
   ],
@@ -16499,6 +16819,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 10
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 10
    }
   ],
   "notes": [
@@ -16530,6 +16858,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 10
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
     "callout": 10
    }
   ],
@@ -16667,6 +17003,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 2
    }
   ],
   "notes": [],
@@ -16705,6 +17049,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 5
    }
   ],
   "notes": [
@@ -16744,6 +17096,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
     "callout": 3
    }
   ],
@@ -16785,6 +17145,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 4
    }
   ],
   "notes": [
@@ -21336,6 +21704,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 4
    }
   ],
   "notes": [],
@@ -21974,6 +22350,14 @@
     "diagram_name": "Retractor Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5f0e84e75c50c4bec11581c580969e59/09ae1822b564b42725a58b86bdb0b04c.png",
     "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-seat-belts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 8
    }
   ],
   "notes": [
@@ -21997,6 +22381,14 @@
     "diagram": 1,
     "diagram_name": "Retractor Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5f0e84e75c50c4bec11581c580969e59/09ae1822b564b42725a58b86bdb0b04c.png",
+    "callout": 17
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-seat-belts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 17
    }
   ],
@@ -22060,6 +22452,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 7
    }
   ],
   "notes": [
@@ -22099,6 +22499,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
     "callout": 7
    }
   ],
@@ -22141,6 +22549,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 7
    }
   ],
   "notes": [
@@ -22180,6 +22596,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
     "callout": 7
    }
   ],
@@ -22221,6 +22645,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
     "callout": 8
    }
   ],
@@ -24665,7 +25097,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-impact-bar-5gm807109ae",
-  "illustration": null
+  "illustration": "illustrations/impact-bar.webp"
  },
  {
   "oem": "5GM807305A",
@@ -24699,13 +25131,21 @@
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
     "callout": 17
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 17
    }
   ],
   "notes": [
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-impact-bar-5gm807305a) 18"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-impact-bar-5gm807305a",
-  "illustration": null
+  "illustration": "illustrations/impact-bar.webp"
  },
  {
   "oem": "5GM868301A",
@@ -24729,7 +25169,7 @@
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-impact-pad-5gm868301a) 9"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-impact-pad-5gm868301a",
-  "illustration": null
+  "illustration": "illustrations/impact-pad.webp"
  },
  {
   "oem": "5GM868302A",
@@ -24753,7 +25193,7 @@
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-impact-pad-5gm868302a) 10"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-impact-pad-5gm868302a",
-  "illustration": null
+  "illustration": "illustrations/impact-pad.webp"
  },
  {
   "oem": "N10726401",
@@ -24775,7 +25215,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-impact-pad-fastener-n10726401",
-  "illustration": null
+  "illustration": "illustrations/impact-pad-fastener.webp"
  },
  {
   "oem": "5GM880201A81U",
@@ -24815,7 +25255,7 @@
    "GTI. Without multifunction. AIR BAGS. without tiptronic without e-Golf. Air bags. all. Golf Alltrack. Without radio control. Golf SportWagen."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-driver-inflator-module-5gm880201a81u",
-  "illustration": null
+  "illustration": "illustrations/inflator-module.webp"
  },
  {
   "oem": "3G0919605H",
@@ -24839,7 +25279,7 @@
    "Without navigation. Display. Golf. GTI."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-driver-information-display-3g0919605h",
-  "illustration": null
+  "illustration": "illustrations/information-display.webp"
  },
  {
   "oem": "5GM919605",
@@ -24863,7 +25303,7 @@
    "With navigation. GTI."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-driver-information-display-5gm919605",
-  "illustration": null
+  "illustration": "illustrations/information-display.webp"
  },
  {
   "oem": "5G1920840D",
@@ -24887,7 +25327,7 @@
    "Golf Alltrack. Golf SportWagen. 1.4l. Golf SportWagen. 1.8l."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-instrument-cluster-5g1920840d",
-  "illustration": null
+  "illustration": "illustrations/instrument-cluster.webp"
  },
  {
   "oem": "5G0941334WHS",
@@ -24911,7 +25351,7 @@
    "GTI. Golf SportWagen. Golf Alltrack. Golf R."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-instrument-light-rheostat-5g0941334whs",
-  "illustration": null
+  "illustration": "illustrations/instrument-light-rheostat.webp"
  },
  {
   "oem": "5GM857003FHR6",
@@ -27158,6 +27598,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 19
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 19
    }
   ],
   "notes": [
@@ -27189,6 +27637,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 19
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
     "callout": 19
    }
   ],
@@ -27222,6 +27678,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 19
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 19
    }
   ],
   "notes": [
@@ -27253,6 +27717,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 19
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
     "callout": 19
    }
   ],
@@ -27287,6 +27759,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 20
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 20
    }
   ],
   "notes": [
@@ -27318,6 +27798,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 20
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
     "callout": 20
    }
   ],
@@ -28459,6 +28947,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 15
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 15
    }
   ],
   "notes": [
@@ -28490,6 +28986,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 15
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
     "callout": 15
    }
   ],
@@ -29378,6 +29882,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 12
    }
   ],
   "notes": [],
@@ -29412,6 +29924,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--sensors",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 28
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
@@ -29456,6 +29976,14 @@
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
     "callout": 27
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 27
    }
   ],
   "notes": [
@@ -29492,6 +30020,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--sensors",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 28
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
@@ -29536,6 +30072,14 @@
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
     "callout": 27
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 27
    }
   ],
   "notes": [
@@ -29572,6 +30116,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--sensors",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 29
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
@@ -30575,6 +31127,14 @@
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
     "callout": 22
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 22
    }
   ],
   "notes": [
@@ -30611,6 +31171,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--sensors",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 21
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
@@ -30653,6 +31221,14 @@
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
     "callout": 21
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 21
    }
   ],
   "notes": [],
@@ -30687,6 +31263,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--sensors",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 22
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
@@ -30727,6 +31311,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--sensors",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 22
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
@@ -34339,6 +34931,14 @@
     "diagram_name": "Retractor Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5f0e84e75c50c4bec11581c580969e59/09ae1822b564b42725a58b86bdb0b04c.png",
     "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-seat-belts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 2
    }
   ],
   "notes": [
@@ -34362,6 +34962,14 @@
     "diagram": 1,
     "diagram_name": "Retractor Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5f0e84e75c50c4bec11581c580969e59/09ae1822b564b42725a58b86bdb0b04c.png",
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-seat-belts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 7
    }
   ],
@@ -34481,6 +35089,14 @@
     "diagram_name": "Retractor Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5f0e84e75c50c4bec11581c580969e59/09ae1822b564b42725a58b86bdb0b04c.png",
     "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-seat-belts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 8
    }
   ],
   "notes": [
@@ -34505,6 +35121,14 @@
     "diagram_name": "Retractor Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5f0e84e75c50c4bec11581c580969e59/09ae1822b564b42725a58b86bdb0b04c.png",
     "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-seat-belts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
    }
   ],
   "notes": [],
@@ -34527,6 +35151,14 @@
     "diagram_name": "Retractor Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5f0e84e75c50c4bec11581c580969e59/09ae1822b564b42725a58b86bdb0b04c.png",
     "callout": 6
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-seat-belts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 6
    }
   ],
   "notes": [],
@@ -34548,6 +35180,14 @@
     "diagram": 1,
     "diagram_name": "Retractor Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5f0e84e75c50c4bec11581c580969e59/09ae1822b564b42725a58b86bdb0b04c.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-seat-belts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 1
    }
   ],
@@ -34573,6 +35213,14 @@
     "diagram_name": "Retractor Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5f0e84e75c50c4bec11581c580969e59/09ae1822b564b42725a58b86bdb0b04c.png",
     "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-seat-belts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
    }
   ],
   "notes": [
@@ -34596,6 +35244,14 @@
     "diagram": 1,
     "diagram_name": "Retractor Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5f0e84e75c50c4bec11581c580969e59/09ae1822b564b42725a58b86bdb0b04c.png",
+    "callout": 13
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-seat-belts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 13
    }
   ],
@@ -34621,6 +35277,14 @@
     "diagram_name": "Retractor Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5f0e84e75c50c4bec11581c580969e59/09ae1822b564b42725a58b86bdb0b04c.png",
     "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-seat-belts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 3
    }
   ],
   "notes": [
@@ -34645,6 +35309,14 @@
     "diagram_name": "Retractor Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5f0e84e75c50c4bec11581c580969e59/09ae1822b564b42725a58b86bdb0b04c.png",
     "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-seat-belts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 3
    }
   ],
   "notes": [],
@@ -34666,6 +35338,14 @@
     "diagram": 1,
     "diagram_name": "Retractor Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5f0e84e75c50c4bec11581c580969e59/09ae1822b564b42725a58b86bdb0b04c.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-seat-belts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 4
    }
   ],
@@ -34691,6 +35371,14 @@
     "diagram_name": "Retractor Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5f0e84e75c50c4bec11581c580969e59/09ae1822b564b42725a58b86bdb0b04c.png",
     "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-seat-belts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 12
    }
   ],
   "notes": [
@@ -34714,6 +35402,14 @@
     "diagram": 1,
     "diagram_name": "Retractor Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5f0e84e75c50c4bec11581c580969e59/09ae1822b564b42725a58b86bdb0b04c.png",
+    "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-seat-belts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 12
    }
   ],
@@ -36649,6 +37345,14 @@
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
     "callout": 20
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 20
    }
   ],
   "notes": [],
@@ -37453,6 +38157,14 @@
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
     "callout": 6
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 6
    }
   ],
   "notes": [],
@@ -37641,6 +38353,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--sensors",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
@@ -39337,6 +40057,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 9
    }
   ],
   "notes": [
@@ -39377,6 +40105,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 9
    }
   ],
   "notes": [
@@ -39445,6 +40181,14 @@
     "diagram_name": "Retractor Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5f0e84e75c50c4bec11581c580969e59/09ae1822b564b42725a58b86bdb0b04c.png",
     "callout": 9
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-seat-belts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 9
    }
   ],
   "notes": [
@@ -39469,6 +40213,14 @@
     "diagram_name": "Retractor Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5f0e84e75c50c4bec11581c580969e59/09ae1822b564b42725a58b86bdb0b04c.png",
     "callout": 9
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-seat-belts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 9
    }
   ],
   "notes": [
@@ -39492,6 +40244,14 @@
     "diagram": 1,
     "diagram_name": "Retractor Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5f0e84e75c50c4bec11581c580969e59/09ae1822b564b42725a58b86bdb0b04c.png",
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-seat-belts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 11
    }
   ],
@@ -39813,6 +40573,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--sensors",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
@@ -40917,6 +41685,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 16
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 16
    }
   ],
   "notes": [],
@@ -40946,6 +41722,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 17
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
     "callout": 17
    }
   ],
@@ -41545,6 +42329,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--sensors",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 9
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
@@ -42313,6 +43105,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 13
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 13
    }
   ],
   "notes": [
@@ -42353,6 +43153,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 13
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 13
    }
   ],
   "notes": [
@@ -42385,6 +43193,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 14
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
+    "callout": 14
    }
   ],
   "notes": [
@@ -42416,6 +43232,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 14
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--front-door",
+    "diagram": 1,
+    "diagram_name": "Door Trim Panel",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a2927ce7b8dc58102672b88bfd4c1fd2/7cf8be8c4856ff4c8876ba0ef4952cf8.png",
     "callout": 14
    }
   ],
@@ -60990,6 +61814,14 @@
     "diagram_name": "Starter",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/afdc162c369c886e8392fe76730b4ba5/efeb0c5e6798bcd27258f75e3e4cd10f.png",
     "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 5
    }
   ],
   "notes": [
@@ -61185,6 +62017,14 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
@@ -61220,7 +62060,7 @@
    "Jetta. Without led. Left. Without Alltrack. Golf."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fog-lamp-assembly-5gm941661a",
-  "illustration": null
+  "illustration": "illustrations/fog-lamp.webp"
  },
  {
   "oem": "5GM941662A",
@@ -61244,7 +62084,7 @@
    "Jetta. Without led. Right. Without Alltrack. Golf."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fog-lamp-assembly-5gm941662a",
-  "illustration": null
+  "illustration": "illustrations/fog-lamp.webp"
  },
  {
   "oem": "N0177622",
@@ -61382,7 +62222,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n01713111",
-  "illustration": null
+  "illustration": "illustrations/fuse.webp"
  },
  {
   "oem": "N01713112",
@@ -61400,13 +62240,21 @@
     "diagram_name": "Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
     "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 6
    }
   ],
   "notes": [
    "15 amp."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n01713112",
-  "illustration": null
+  "illustration": "illustrations/fuse.webp"
  },
  {
   "oem": "N01713113",
@@ -61424,11 +62272,19 @@
     "diagram_name": "Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
     "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 6
    }
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n01713113",
-  "illustration": null
+  "illustration": "illustrations/fuse.webp"
  },
  {
   "oem": "N01713114",
@@ -61446,11 +62302,19 @@
     "diagram_name": "Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
     "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 6
    }
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n01713114",
-  "illustration": null
+  "illustration": "illustrations/fuse.webp"
  },
  {
   "oem": "N01713116",
@@ -61468,11 +62332,19 @@
     "diagram_name": "Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
     "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 6
    }
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n01713116",
-  "illustration": null
+  "illustration": "illustrations/fuse.webp"
  },
  {
   "oem": "N01713118",
@@ -61490,13 +62362,21 @@
     "diagram_name": "Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
     "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 6
    }
   ],
   "notes": [
    "Engine compartment, standard, 7.5 amp. Passenger compartment, 19/2x5, 7.5 amp. Under hood, main, standard, 7.5 amp. Convertible, body control module, 7.5 amp. Wagon, 2010-11, passenger compartment, 7.5 amp."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n01713118",
-  "illustration": null
+  "illustration": "illustrations/fuse.webp"
  },
  {
   "oem": "N01713120",
@@ -61518,7 +62398,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n01713120",
-  "illustration": null
+  "illustration": "illustrations/fuse.webp"
  },
  {
   "oem": "N01713138",
@@ -61536,13 +62416,21 @@
     "diagram_name": "Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
     "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 6
    }
   ],
   "notes": [
    "Interior, standard, 30 amp. Under hood, main, standard, 30 amp."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n01713138",
-  "illustration": null
+  "illustration": "illustrations/fuse.webp"
  },
  {
   "oem": "N10251901",
@@ -61566,7 +62454,7 @@
    "Main, 2020-23, 40 amp. Coupe, 40 amp. Engine compartment-secondary fuses. 40 amp. Wagon, engine compartment, 40 amp. Passenger compartment, 40 amp. Rear fuse box. 40 amp. Under hood, main, 40 amp. Sedan from 1/05, wagon 2009 only, 40 amp."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n10251901",
-  "illustration": null
+  "illustration": "illustrations/fuse.webp"
  },
  {
   "oem": "N10251904",
@@ -61590,7 +62478,7 @@
    "Main, 2020-23, 50 amp. Engine compartment-secondary fuses. 50 amp. Wagon, engine compartment, 50 amp. Under hood, main, 50 amp. Sedan from 1/05, wagon 2009 only, 50 amp."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n10251904",
-  "illustration": null
+  "illustration": "illustrations/fuse.webp"
  },
  {
   "oem": "N10261501",
@@ -61608,13 +62496,21 @@
     "diagram_name": "Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
     "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 7
    }
   ],
   "notes": [
    "Gateway. 5 amp. 2013-2017 passenger compartment. 5 amp. 2009-2012 passenger compartment. 5 amp. Instrument panel, 5 amp. Convertible, 5 amp. Passenger compartment. 10/2x2,8 5 amp. Passenger compartment. 5 amp type 2. Instrumemt panel, 5 amp. #2 front fuse box. 5 amp. Wagon, 2010-11, passenger compartment, 5 amp."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n10261501",
-  "illustration": null
+  "illustration": "illustrations/fuse.webp"
  },
  {
   "oem": "N10261502",
@@ -61632,13 +62528,21 @@
     "diagram_name": "Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
     "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 7
    }
   ],
   "notes": [
    "2012-15 passenger compartment. 7.5 amp. Gateway. 7.5 amp. 2013-2017 passenger compartment. 7.5 amp. 2009-2012 passenger compartment. 7.5 amp. Instrument panel, 7.5 amp. Convertible, 7.5 amp. Passenger compartment. 10/2x2,8 7.5 amp. Sedan, 7.5 amp. Instrumemt panel, 7.5 amp. Wagon, 2010-11, passenger compartment, 7.5 amp."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n10261502",
-  "illustration": null
+  "illustration": "illustrations/fuse.webp"
  },
  {
   "oem": "N10261503",
@@ -61656,11 +62560,19 @@
     "diagram_name": "Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
     "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 7
    }
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n10261503",
-  "illustration": null
+  "illustration": "illustrations/fuse.webp"
  },
  {
   "oem": "N10261505",
@@ -61678,13 +62590,21 @@
     "diagram_name": "Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
     "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 7
    }
   ],
   "notes": [
    "Instrument panel, 2 amp. Cabin compartment. 2 amp. Sedan, 2 amp. Instrumemt panel, 2 amp."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n10261505",
-  "illustration": null
+  "illustration": "illustrations/fuse.webp"
  },
  {
   "oem": "N10261507",
@@ -61702,13 +62622,21 @@
     "diagram_name": "Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
     "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 7
    }
   ],
   "notes": [
    "Gateway. 15 amp. 2013-2017 passenger compartment. 15 amp. 2009-2012 passenger compartment. 15 amp. 2016-19 passenger compartment. 15 amp type 2. Instrument panel, 15 amp. Convertible, 15 amp. Passenger compartment. 10/2x2,8 15 amp. Instrumemt panel, 15 amp. Wagon, 2010-11, passenger compartment, 15 amp."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n10261507",
-  "illustration": null
+  "illustration": "illustrations/fuse.webp"
  },
  {
   "oem": "N91186303",
@@ -61726,11 +62654,21 @@
     "diagram_name": "Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
     "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 8
    }
   ],
-  "notes": [],
+  "notes": [
+   "Interior, blade, 30 amp. Main, 2020-23, blade, 30 amp. Cabin compartment, 30 amp. Engine compartment. blade 30 amp. 2016-19 passenger compartment. 30 amp. Sedan, 30 amp. Under hood, main, blade, 30 amp. Convertible, 30 amp."
+  ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n91186303",
-  "illustration": null
+  "illustration": "illustrations/fuse.webp"
  },
  {
   "oem": "N91186304",
@@ -61748,11 +62686,21 @@
     "diagram_name": "Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
     "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 8
    }
   ],
-  "notes": [],
+  "notes": [
+   "Main, 2020-23, blade, 40 amp. Engine compartment. blade 40 amp. 2016-19 passenger compartment. 40 amp. Sedan, 40 amp. Interior, blade, 40 amp. Coupe, 40 amp. Under hood, main, blade, 40 amp."
+  ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n91186304",
-  "illustration": null
+  "illustration": "illustrations/fuse.webp"
  },
  {
   "oem": "N91186305",
@@ -61770,11 +62718,21 @@
     "diagram_name": "Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
     "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 8
    }
   ],
-  "notes": [],
+  "notes": [
+   "Engine compartment. blade 50 amp. Cabin compartment, 50 amp. 2016-19 passenger compartment. 50 amp. Sedan, 50 amp. Under hood, main, blade, 50 amp. Coupe, 50 amp."
+  ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n91186305",
-  "illustration": null
+  "illustration": "illustrations/fuse.webp"
  },
  {
   "oem": "5Q0937125D",
@@ -61792,13 +62750,45 @@
     "diagram_name": "Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
     "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 1
    }
   ],
   "notes": [
    "Fuse box main. 2018-23 main under hood. Main, 2018-23, delphi. Under hood, main, delphi. Engine compartment, from 11/08/2016."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-and-relay-center-5q0937125d",
-  "illustration": null
+  "illustration": "illustrations/fuse-and-relay.webp"
+ },
+ {
+  "oem": "5Q0937615C",
+  "oem_display": "5Q0 937 615 C",
+  "name": "Fuse And Relay Center",
+  "part_type": "fuse and relay",
+  "system": "electrical",
+  "price_usd": 208.48,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "Cabin compartment. Fuse holder. Interior. Relay & fuse plt. Passenger compartment. Relay plate."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-and-relay-center-5q0937615c",
+  "illustration": "illustrations/fuse-and-relay.webp"
  },
  {
   "oem": "5Q0907361D",
@@ -61822,7 +62812,7 @@
    "2018-23 main under hood. 2020-23 main under hood. Main, 2020-23, delphi. Engine compartment, delphi. Under hood, main, delphi. Engine compartment, from 11/08/2016."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-and-relay-center-cover-5q0907361d",
-  "illustration": null
+  "illustration": "illustrations/fuse-and-relay-cover.webp"
  },
  {
   "oem": "5Q0927165G",
@@ -61846,7 +62836,53 @@
    "Engine compartment. End plate. 2018-23 main under hood. 2020-23 main under hood. Main, 2020-23, delphi. Under hood, main, delphi."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-and-relay-center-cover-5q0927165g",
+  "illustration": "illustrations/fuse-and-relay-cover.webp"
+ },
+ {
+  "oem": "8K0941824D",
+  "oem_display": "8K0 941 824 D",
+  "name": "Fuse Box",
+  "part_type": "fuse box",
+  "system": "electrical",
+  "price_usd": 28.06,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 12
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-box-8k0941824d",
   "illustration": null
+ },
+ {
+  "oem": "4G0971845E",
+  "oem_display": "4G0 971 845 E",
+  "name": "Fuse Box Bracket",
+  "part_type": "fuse box bracket",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 11
+   }
+  ],
+  "notes": [
+   "Passenger compartment. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-box-bracket-4g0971845e) 12"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-box-bracket-4g0971845e",
+  "illustration": "illustrations/bracket.webp"
  },
  {
   "oem": "4A0937530",
@@ -61864,6 +62900,14 @@
     "diagram_name": "Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
     "callout": 6
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 10
    }
   ],
   "notes": [],
@@ -61914,7 +62958,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-puller-5q0941802",
-  "illustration": null
+  "illustration": "illustrations/fuse-puller.webp"
  },
  {
   "oem": "3C0881090",
@@ -63964,9 +65008,19 @@
     "diagram_name": "Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
     "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 6
    }
   ],
-  "notes": [],
+  "notes": [
+   "2018-23 main under hood. standard 3 amp. Main, 2020-23, standard, 3 amp. Gateway. 3 amp. Engine compartment. 3 amp. 2013-2017 passenger compartment. 3 amp. 2009-2012 passenger compartment. 3 amp. Cabin compartment. 3 amp. Interior, standard, 3 amp."
+  ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-multi-purpose-fuse-n01713117",
   "illustration": null
  },
@@ -64010,9 +65064,19 @@
     "diagram_name": "Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
     "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 6
    }
   ],
-  "notes": [],
+  "notes": [
+   "Passenger compartment. 35 amp."
+  ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-multi-purpose-fuse-n01713122",
   "illustration": null
  },
@@ -64125,6 +65189,30 @@
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-negative-cable-5q0971235d",
   "illustration": null
+ },
+ {
+  "oem": "5Q0937503F",
+  "oem_display": "5Q0 937 503 F",
+  "name": "Parking Aid System Control Module Bracket",
+  "part_type": "parking aid system control module bracket",
+  "system": "electrical",
+  "price_usd": 6.73,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 3
+   }
+  ],
+  "notes": [
+   "Interior. Passenger compartment. Relay plate. Park assist. Park sensor. Parking aid."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-parking-aid-system-control-module-bracket-5q0937503f",
+  "illustration": "illustrations/bracket.webp"
  },
  {
   "oem": "1J0941953",
@@ -64400,6 +65488,14 @@
     "diagram_name": "Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
     "callout": 10
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 5
    }
   ],
   "notes": [],
@@ -64422,6 +65518,14 @@
     "diagram_name": "Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
     "callout": 10
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 5
    }
   ],
   "notes": [],
@@ -64444,6 +65548,14 @@
     "diagram_name": "Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
     "callout": 6
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 4
    }
   ],
   "notes": [
@@ -64468,9 +65580,19 @@
     "diagram_name": "Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
     "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 3
    }
   ],
-  "notes": [],
+  "notes": [
+   "Relay plate. Engine compartment, 2 point."
+  ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-relay-plate-5q0937507d",
   "illustration": null
  },
@@ -66276,6 +67398,28 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-light-socket-1k6945258",
   "illustration": "illustrations/tail-light-socket.webp"
+ },
+ {
+  "oem": "443937105B",
+  "oem_display": "443 937 105 B",
+  "name": "Thermo Fuse",
+  "part_type": "thermo fuse",
+  "system": "electrical",
+  "price_usd": 65.47,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fuse-and-relay",
+    "diagram": 1,
+    "diagram_name": "Relay & Fuse Plt",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7245be556e7a31282724acdb12043ac0/b19184608a13853dd3fa017557d82265.png",
+    "callout": 9
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-thermo-fuse-443937105b",
+  "illustration": null
  },
  {
   "oem": "5K0945257",
@@ -90530,6 +91674,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--sensors",
+    "diagram": 1,
+    "diagram_name": "Bumper Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
+    "callout": 26
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Bumper Cover",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/dd22ad21521f01fba17ef97b4f591876/03aaa01cb7079fa369c029ad3c32da7d.png",
