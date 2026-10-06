@@ -4292,6 +4292,14 @@
     "diagram_name": "Upper",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/9e153ec68f135996369df6e655432625/049e96fc140f5620d32c5747ee6274bd.png",
     "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fog-lamps",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 2
    }
   ],
   "notes": [
@@ -4498,7 +4506,7 @@
    "With e-Golf."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hood-latch-support-5g0805567",
-  "illustration": null
+  "illustration": "illustrations/hood-latch-support.webp"
  },
  {
   "oem": "5Q0122051BD",
@@ -23981,7 +23989,7 @@
    "Hood Insulation Pad. w/o R, e-Golf. Plug. Protector. Silencer. Fits AllTrack, Golf, Golf SportWagen, GTI, SportWagen w/o R, e-Golf. w/o r, e-Golf."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hood-insulation-pad-5gm863831",
-  "illustration": null
+  "illustration": "illustrations/hood-insulation-pad.webp"
  },
  {
   "oem": "8E0863727A",
@@ -24139,7 +24147,7 @@
    "GTI. From 05/16/2017. Golf Alltrack. Golf SportWagen. Without r, e-Golf."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hood-lift-support-5gm823359a",
-  "illustration": null
+  "illustration": "illustrations/hood-lift-support.webp"
  },
  {
   "oem": "1H5827905",
@@ -24235,7 +24243,7 @@
    "Hood Panel. Fits Alltrack, e-Golf, Golf, Golf R, Golf SportWagen, GTI, SportWagen"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hood-panel-5g0823031j",
-  "illustration": null
+  "illustration": "illustrations/hood-panel.webp"
  },
  {
   "oem": "N10628101",
@@ -24273,7 +24281,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hood-plug-n10628101",
-  "illustration": null
+  "illustration": "illustrations/hood-plug.webp"
  },
  {
   "oem": "431971908",
@@ -24311,7 +24319,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hood-release-cable-grommet-431971908",
-  "illustration": null
+  "illustration": "illustrations/hood-release-cable-grommet.webp"
  },
  {
   "oem": "6R1823633",
@@ -24389,7 +24397,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hood-safety-catch-5g0823186b",
-  "illustration": null
+  "illustration": "illustrations/hood-safety-catch.webp"
  },
  {
   "oem": "5G0823707",
@@ -24509,7 +24517,7 @@
    "Outer. Buffer. Hood,bumper. Sedan from 1/05, wagon 2009 only, from vin 1k5603885."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hood-stop-buffer-3b0823499e",
-  "illustration": null
+  "illustration": "illustrations/hood-stop-buffer.webp"
  },
  {
   "oem": "5G0951182C",
@@ -24583,7 +24591,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-humidity-sensor-81d907253",
-  "illustration": null
+  "illustration": "illustrations/humidity-sensor.webp"
  },
  {
   "oem": "5Q0819663",
@@ -24605,7 +24613,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hvac-duct-adapter-5q0819663",
-  "illustration": null
+  "illustration": "illustrations/hvac-duct-adapter.webp"
  },
  {
   "oem": "1K0907543E",
@@ -24627,7 +24635,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hvac-duct-air-temperature-sensor-1k0907543e",
-  "illustration": null
+  "illustration": "illustrations/hvac-duct-air-temperature-sensor.webp"
  },
  {
   "oem": "5GM807109AE",
@@ -51179,7 +51187,7 @@
    "Arteon. Manual regulating a/c. GTI. SWITCHES. without climate control to 12/2014. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-hvac-temperature-control-panel-5g0907426bjwzu) 5"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hvac-temperature-control-panel-5g0907426bjwzu",
-  "illustration": null
+  "illustration": "illustrations/hvac-temperature-control-panel.webp"
  },
  {
   "oem": "5GM907044FWZU",
@@ -51203,7 +51211,7 @@
    "GTI. With climate control. Without heated seats. Automatic controls. Golf R. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-hvac-temperature-control-panel-5gm907044fwzu) 5"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hvac-temperature-control-panel-5gm907044fwzu",
-  "illustration": null
+  "illustration": "illustrations/hvac-temperature-control-panel.webp"
  },
  {
   "oem": "5GM907044GWZU",
@@ -51227,7 +51235,7 @@
    "GTI. With climate control. SWITCHES. with auto climate contr. With auto temp control. From 12/11/16. With heated seats. Automatic controls. To 12/11/16. Golf R."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hvac-temperature-control-panel-5gm907044gwzu",
-  "illustration": null
+  "illustration": "illustrations/hvac-temperature-control-panel.webp"
  },
  {
   "oem": "5GM907426FWZU",
@@ -51251,7 +51259,7 @@
    "GTI. Without climate control. Without auto temp control.. Without heated seats. Manual controls. Golf R."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hvac-temperature-control-panel-5gm907426fwzu",
-  "illustration": null
+  "illustration": "illustrations/hvac-temperature-control-panel.webp"
  },
  {
   "oem": "5GM907426GWZU",
@@ -51275,7 +51283,7 @@
    "GTI. Without climate control. Without auto temp control.. With heated seats. Manual controls. Golf R. Switches."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hvac-temperature-control-panel-5gm907426gwzu",
-  "illustration": null
+  "illustration": "illustrations/hvac-temperature-control-panel.webp"
  },
  {
   "oem": "3G0807300",
@@ -57863,6 +57871,14 @@
     "diagram_name": "Battery Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
     "callout": 18
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--control-modules",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 18
    }
   ],
   "notes": [
@@ -57892,6 +57908,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--control-modules",
     "diagram": 1,
     "diagram_name": "Battery Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
@@ -58028,6 +58052,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 19
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--electrical-sockets",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
@@ -59234,11 +59266,19 @@
     "diagram_name": "Battery Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
     "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--control-modules",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 2
    }
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-battery-cover-5qe804841acnvb",
-  "illustration": null
+  "illustration": "illustrations/battery-cover.webp"
  },
  {
   "oem": "5Q0803219C",
@@ -59610,6 +59650,14 @@
     "diagram_name": "Battery Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
     "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--control-modules",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 4
    }
   ],
   "notes": [
@@ -59707,6 +59755,30 @@
   "illustration": "illustrations/bracket.webp"
  },
  {
+  "oem": "5G0907324",
+  "oem_display": "5G0 907 324",
+  "name": "Bracket",
+  "part_type": "bracket",
+  "system": "electrical",
+  "price_usd": 23.29,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--electrical-components",
+    "diagram": 1,
+    "diagram_name": "Accelerometer",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/416e70088cea5d65ccebfd61bbb805a1/3e9627294b15ef7730ab6ecb17b82f78.png",
+    "callout": 3
+   }
+  ],
+  "notes": [
+   "Suspension dampimg control."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-bracket-5g0907324",
+  "illustration": "illustrations/bracket.webp"
+ },
+ {
   "oem": "5G0951227B",
   "oem_display": "5G0 951 227 B",
   "name": "Bracket",
@@ -59753,6 +59825,14 @@
     "diagram": 1,
     "diagram_name": "Control Module",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/54f794571248e07b68128081502325f2/d881e895620bc1d05dd1d8a631f28e1c.png",
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--doors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 2
    }
   ],
@@ -59920,6 +60000,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 13
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--electrical-sockets",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
@@ -60151,6 +60239,14 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--electrical-sockets",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 20
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
@@ -60313,13 +60409,21 @@
     "diagram_name": "Battery Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
     "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--control-modules",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 12
    }
   ],
   "notes": [
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-control-assembly-5ge915340ck) 13"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-control-assembly-5ge915340ck",
-  "illustration": null
+  "illustration": "illustrations/control.webp"
  },
  {
   "oem": "5GE915225B",
@@ -60337,12 +60441,44 @@
     "diagram_name": "Battery Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
     "callout": 13
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--control-modules",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 13
    }
   ],
   "notes": [
    "High voltage. Control module."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-control-module-5ge915225b",
+  "illustration": "illustrations/control-module.webp"
+ },
+ {
+  "oem": "5Q0907376BZ00",
+  "oem_display": "5Q0 907 376 B Z00",
+  "name": "Control Module",
+  "part_type": "control module",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--electrical-components",
+    "diagram": 1,
+    "diagram_name": "Accelerometer",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/416e70088cea5d65ccebfd61bbb805a1/3e9627294b15ef7730ab6ecb17b82f78.png",
+    "callout": 2
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-control-module-5q0907376bz00) 3"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-control-module-5q0907376bz00",
   "illustration": "illustrations/control-module.webp"
  },
  {
@@ -60414,6 +60550,28 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-control-module-992941571ah",
   "illustration": "illustrations/control-module.webp"
+ },
+ {
+  "oem": "5Q0937132D",
+  "oem_display": "5Q0 937 132 D",
+  "name": "Cover",
+  "part_type": "cover",
+  "system": "electrical",
+  "price_usd": 32.25,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 1
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-cover-5q0937132d",
+  "illustration": "illustrations/cover.webp"
  },
  {
   "oem": "5GM880741G",
@@ -60567,9 +60725,18 @@
     "diagram_name": "Battery Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
     "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--control-modules",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 1
    }
   ],
   "notes": [
+   "High voltage. with code es9. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-5qe915597r) 1",
    "High voltage. with code es9. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-5qe915597r) 2"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-5qe915597r",
@@ -60591,11 +60758,19 @@
     "diagram_name": "Battery Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
     "callout": 13
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--control-modules",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 13
    }
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-control-module-bh325147",
-  "illustration": null
+  "illustration": "illustrations/drive-motor-battery-pack-control-module.webp"
  },
  {
   "oem": "5GE915340CL",
@@ -60613,13 +60788,21 @@
     "diagram_name": "Battery Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
     "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--control-modules",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 12
    }
   ],
   "notes": [
    "High voltage. with code es9. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-control-module-5ge915340cl) 12"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-control-module-5ge915340cl",
-  "illustration": null
+  "illustration": "illustrations/drive-motor-battery-pack-control-module.webp"
  },
  {
   "oem": "5QE905452",
@@ -60637,13 +60820,21 @@
     "diagram_name": "Battery Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
     "callout": 13
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--control-modules",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 13
    }
   ],
   "notes": [
    "High voltage. Control assy,gasket."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-control-module-5qe905452",
-  "illustration": null
+  "illustration": "illustrations/drive-motor-battery-pack-control-module.webp"
  },
  {
   "oem": "5QE803641E",
@@ -60661,10 +60852,19 @@
     "diagram_name": "Battery Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
     "callout": 17
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--control-modules",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 17
    }
   ],
   "notes": [
-   "High voltage. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-control-module-bracket-5qe803641e) 17"
+   "High voltage. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-control-module-bracket-5qe803641e) 17",
+   "High voltage. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-control-module-bracket-5qe803641e) 18"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-control-module-bracket-5qe803641e",
   "illustration": "illustrations/bracket.webp"
@@ -60685,9 +60885,18 @@
     "diagram_name": "Battery Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
     "callout": 17
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--control-modules",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 17
    }
   ],
   "notes": [
+   "High voltage. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-control-module-bracket-5qe803642e) 17",
    "High voltage. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-control-module-bracket-5qe803642e) 18"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-control-module-bracket-5qe803642e",
@@ -60709,13 +60918,21 @@
     "diagram_name": "Battery Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
     "callout": 16
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--control-modules",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 16
    }
   ],
   "notes": [
    "High voltage. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-control-module-connector-12e915703a) 17"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-control-module-connector-12e915703a",
-  "illustration": null
+  "illustration": "illustrations/drive-motor-battery-pack-control-module-connector.webp"
  },
  {
   "oem": "7LE804841",
@@ -60733,13 +60950,21 @@
     "diagram_name": "Battery Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
     "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--control-modules",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 2
    }
   ],
   "notes": [
    "High voltage. from 02/16/2015. High voltage. without code es9."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-cover-7le804841",
-  "illustration": null
+  "illustration": "illustrations/drive-motor-battery-pack-cover.webp"
  },
  {
   "oem": "4H0951253A",
@@ -60974,6 +61199,54 @@
   "illustration": "illustrations/bolt.webp"
  },
  {
+  "oem": "5GM941661A",
+  "oem_display": "5GM 941 661 A",
+  "name": "Fog Lamp Assembly",
+  "part_type": "fog lamp",
+  "system": "electrical",
+  "price_usd": 128.77,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fog-lamps",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "Jetta. Without led. Left. Without Alltrack. Golf."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fog-lamp-assembly-5gm941661a",
+  "illustration": null
+ },
+ {
+  "oem": "5GM941662A",
+  "oem_display": "5GM 941 662 A",
+  "name": "Fog Lamp Assembly",
+  "part_type": "fog lamp",
+  "system": "electrical",
+  "price_usd": 128.77,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fog-lamps",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "Jetta. Without led. Right. Without Alltrack. Golf."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fog-lamp-assembly-5gm941662a",
+  "illustration": null
+ },
+ {
   "oem": "N0177622",
   "oem_display": "N 017 762 2",
   "name": "Fog Lamp Bulb",
@@ -61001,6 +61274,28 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fog-lamp-bulb-n0177622",
+  "illustration": "illustrations/bulb.webp"
+ },
+ {
+  "oem": "N10529701",
+  "oem_display": "N 105 297 01",
+  "name": "Fog Lamp Bulb",
+  "part_type": "fog lamp bulb",
+  "system": "electrical",
+  "price_usd": 24.14,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--fog-lamps",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 3
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fog-lamp-bulb-n10529701",
   "illustration": "illustrations/bulb.webp"
  },
  {
@@ -61066,6 +61361,560 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-ft-seat-air-bag-5gm880242b",
   "illustration": "illustrations/ft-seat-air-bag.webp"
+ },
+ {
+  "oem": "N01713111",
+  "oem_display": "N 017 131 11",
+  "name": "Fuse",
+  "part_type": "fuse",
+  "system": "electrical",
+  "price_usd": 2.39,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 11
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n01713111",
+  "illustration": null
+ },
+ {
+  "oem": "N01713112",
+  "oem_display": "N 017 131 12",
+  "name": "Fuse",
+  "part_type": "fuse",
+  "system": "electrical",
+  "price_usd": 1.96,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 12
+   }
+  ],
+  "notes": [
+   "15 amp."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n01713112",
+  "illustration": null
+ },
+ {
+  "oem": "N01713113",
+  "oem_display": "N 017 131 13",
+  "name": "Fuse",
+  "part_type": "fuse",
+  "system": "electrical",
+  "price_usd": 1.66,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 12
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n01713113",
+  "illustration": null
+ },
+ {
+  "oem": "N01713114",
+  "oem_display": "N 017 131 14",
+  "name": "Fuse",
+  "part_type": "fuse",
+  "system": "electrical",
+  "price_usd": 0.2,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 12
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n01713114",
+  "illustration": null
+ },
+ {
+  "oem": "N01713116",
+  "oem_display": "N 017 131 16",
+  "name": "Fuse",
+  "part_type": "fuse",
+  "system": "electrical",
+  "price_usd": 0.22,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 12
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n01713116",
+  "illustration": null
+ },
+ {
+  "oem": "N01713118",
+  "oem_display": "N 017 131 18",
+  "name": "Fuse",
+  "part_type": "fuse",
+  "system": "electrical",
+  "price_usd": 0.22,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 12
+   }
+  ],
+  "notes": [
+   "Engine compartment, standard, 7.5 amp. Passenger compartment, 19/2x5, 7.5 amp. Under hood, main, standard, 7.5 amp. Convertible, body control module, 7.5 amp. Wagon, 2010-11, passenger compartment, 7.5 amp."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n01713118",
+  "illustration": null
+ },
+ {
+  "oem": "N01713120",
+  "oem_display": "N 017 131 20",
+  "name": "Fuse",
+  "part_type": "fuse",
+  "system": "electrical",
+  "price_usd": 2.15,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 11
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n01713120",
+  "illustration": null
+ },
+ {
+  "oem": "N01713138",
+  "oem_display": "N 017 131 38",
+  "name": "Fuse",
+  "part_type": "fuse",
+  "system": "electrical",
+  "price_usd": 1.7,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 12
+   }
+  ],
+  "notes": [
+   "Interior, standard, 30 amp. Under hood, main, standard, 30 amp."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n01713138",
+  "illustration": null
+ },
+ {
+  "oem": "N10251901",
+  "oem_display": "N 102 519 01",
+  "name": "Fuse",
+  "part_type": "fuse",
+  "system": "electrical",
+  "price_usd": 5.94,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 12
+   }
+  ],
+  "notes": [
+   "Main, 2020-23, 40 amp. Coupe, 40 amp. Engine compartment-secondary fuses. 40 amp. Wagon, engine compartment, 40 amp. Passenger compartment, 40 amp. Rear fuse box. 40 amp. Under hood, main, 40 amp. Sedan from 1/05, wagon 2009 only, 40 amp."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n10251901",
+  "illustration": null
+ },
+ {
+  "oem": "N10251904",
+  "oem_display": "N 102 519 04",
+  "name": "Fuse",
+  "part_type": "fuse",
+  "system": "electrical",
+  "price_usd": 5.94,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 12
+   }
+  ],
+  "notes": [
+   "Main, 2020-23, 50 amp. Engine compartment-secondary fuses. 50 amp. Wagon, engine compartment, 50 amp. Under hood, main, 50 amp. Sedan from 1/05, wagon 2009 only, 50 amp."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n10251904",
+  "illustration": null
+ },
+ {
+  "oem": "N10261501",
+  "oem_display": "N 102 615 01",
+  "name": "Fuse",
+  "part_type": "fuse",
+  "system": "electrical",
+  "price_usd": 1.95,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 12
+   }
+  ],
+  "notes": [
+   "Gateway. 5 amp. 2013-2017 passenger compartment. 5 amp. 2009-2012 passenger compartment. 5 amp. Instrument panel, 5 amp. Convertible, 5 amp. Passenger compartment. 10/2x2,8 5 amp. Passenger compartment. 5 amp type 2. Instrumemt panel, 5 amp. #2 front fuse box. 5 amp. Wagon, 2010-11, passenger compartment, 5 amp."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n10261501",
+  "illustration": null
+ },
+ {
+  "oem": "N10261502",
+  "oem_display": "N 102 615 02",
+  "name": "Fuse",
+  "part_type": "fuse",
+  "system": "electrical",
+  "price_usd": 1.78,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 12
+   }
+  ],
+  "notes": [
+   "2012-15 passenger compartment. 7.5 amp. Gateway. 7.5 amp. 2013-2017 passenger compartment. 7.5 amp. 2009-2012 passenger compartment. 7.5 amp. Instrument panel, 7.5 amp. Convertible, 7.5 amp. Passenger compartment. 10/2x2,8 7.5 amp. Sedan, 7.5 amp. Instrumemt panel, 7.5 amp. Wagon, 2010-11, passenger compartment, 7.5 amp."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n10261502",
+  "illustration": null
+ },
+ {
+  "oem": "N10261503",
+  "oem_display": "N 102 615 03",
+  "name": "Fuse",
+  "part_type": "fuse",
+  "system": "electrical",
+  "price_usd": 1.7,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 12
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n10261503",
+  "illustration": null
+ },
+ {
+  "oem": "N10261505",
+  "oem_display": "N 102 615 05",
+  "name": "Fuse",
+  "part_type": "fuse",
+  "system": "electrical",
+  "price_usd": 0.31,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 12
+   }
+  ],
+  "notes": [
+   "Instrument panel, 2 amp. Cabin compartment. 2 amp. Sedan, 2 amp. Instrumemt panel, 2 amp."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n10261505",
+  "illustration": null
+ },
+ {
+  "oem": "N10261507",
+  "oem_display": "N 102 615 07",
+  "name": "Fuse",
+  "part_type": "fuse",
+  "system": "electrical",
+  "price_usd": 0.32,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 12
+   }
+  ],
+  "notes": [
+   "Gateway. 15 amp. 2013-2017 passenger compartment. 15 amp. 2009-2012 passenger compartment. 15 amp. 2016-19 passenger compartment. 15 amp type 2. Instrument panel, 15 amp. Convertible, 15 amp. Passenger compartment. 10/2x2,8 15 amp. Instrumemt panel, 15 amp. Wagon, 2010-11, passenger compartment, 15 amp."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n10261507",
+  "illustration": null
+ },
+ {
+  "oem": "N91186303",
+  "oem_display": "N 911 863 03",
+  "name": "Fuse",
+  "part_type": "fuse",
+  "system": "electrical",
+  "price_usd": 1.79,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 11
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n91186303",
+  "illustration": null
+ },
+ {
+  "oem": "N91186304",
+  "oem_display": "N 911 863 04",
+  "name": "Fuse",
+  "part_type": "fuse",
+  "system": "electrical",
+  "price_usd": 5.86,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 11
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n91186304",
+  "illustration": null
+ },
+ {
+  "oem": "N91186305",
+  "oem_display": "N 911 863 05",
+  "name": "Fuse",
+  "part_type": "fuse",
+  "system": "electrical",
+  "price_usd": 5.53,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 11
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-n91186305",
+  "illustration": null
+ },
+ {
+  "oem": "5Q0937125D",
+  "oem_display": "5Q0 937 125 D",
+  "name": "Fuse And Relay Center",
+  "part_type": "fuse and relay",
+  "system": "electrical",
+  "price_usd": 146.38,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 3
+   }
+  ],
+  "notes": [
+   "Fuse box main. 2018-23 main under hood. Main, 2018-23, delphi. Under hood, main, delphi. Engine compartment, from 11/08/2016."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-and-relay-center-5q0937125d",
+  "illustration": null
+ },
+ {
+  "oem": "5Q0907361D",
+  "oem_display": "5Q0 907 361 D",
+  "name": "Fuse And Relay Center Cover",
+  "part_type": "fuse and relay cover",
+  "system": "electrical",
+  "price_usd": 56.92,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 4
+   }
+  ],
+  "notes": [
+   "2018-23 main under hood. 2020-23 main under hood. Main, 2020-23, delphi. Engine compartment, delphi. Under hood, main, delphi. Engine compartment, from 11/08/2016."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-and-relay-center-cover-5q0907361d",
+  "illustration": null
+ },
+ {
+  "oem": "5Q0927165G",
+  "oem_display": "5Q0 927 165 G",
+  "name": "Fuse And Relay Center Cover",
+  "part_type": "fuse and relay cover",
+  "system": "electrical",
+  "price_usd": 15.85,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 5
+   }
+  ],
+  "notes": [
+   "Engine compartment. End plate. 2018-23 main under hood. 2020-23 main under hood. Main, 2020-23, delphi. Under hood, main, delphi."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-and-relay-center-cover-5q0927165g",
+  "illustration": null
+ },
+ {
+  "oem": "4A0937530",
+  "oem_display": "4A0 937 530",
+  "name": "Fuse Holder",
+  "part_type": "fuse holder",
+  "system": "electrical",
+  "price_usd": 13.04,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 6
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-holder-4a0937530",
+  "illustration": "illustrations/bracket.webp"
+ },
+ {
+  "oem": "5Q0941824B",
+  "oem_display": "5Q0 941 824 B",
+  "name": "Fuse Holder",
+  "part_type": "fuse holder",
+  "system": "electrical",
+  "price_usd": 17.56,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 6
+   }
+  ],
+  "notes": [
+   "2018-23 main under hood. Main, 2018-23, delphi. 2020-23 main under hood. Main, 2020-23, delphi. Engine compartment, delphi. Fuse holder. Under hood, main, delphi."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-holder-5q0941824b",
+  "illustration": "illustrations/bracket.webp"
+ },
+ {
+  "oem": "5Q0941802",
+  "oem_display": "5Q0 941 802",
+  "name": "Fuse Puller",
+  "part_type": "fuse puller",
+  "system": "electrical",
+  "price_usd": 4.15,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 2
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuse-puller-5q0941802",
+  "illustration": null
  },
  {
   "oem": "3C0881090",
@@ -61190,6 +62039,14 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--electrical-sockets",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
@@ -61215,6 +62072,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--electrical-sockets",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
@@ -61366,6 +62231,14 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--electrical-sockets",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
@@ -61411,6 +62284,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--electrical-sockets",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
@@ -61496,6 +62377,14 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--electrical-sockets",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
@@ -61521,6 +62410,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 6
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--electrical-sockets",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
@@ -62046,6 +62943,14 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--electrical-sockets",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 10
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
@@ -62115,6 +63020,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--electrical-sockets",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
@@ -62233,13 +63146,21 @@
     "diagram_name": "Battery Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
     "callout": 9
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--control-modules",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 9
    }
   ],
   "notes": [
    "High voltage. #3."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hybrid-high-voltage-information-label-12e010006",
-  "illustration": null
+  "illustration": "illustrations/hybrid-high-voltage-information-label.webp"
  },
  {
   "oem": "12E010006Q",
@@ -62257,13 +63178,21 @@
     "diagram_name": "Battery Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
     "callout": 10
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--control-modules",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 10
    }
   ],
   "notes": [
    "High voltage. #4."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hybrid-high-voltage-information-label-12e010006q",
-  "illustration": null
+  "illustration": "illustrations/hybrid-high-voltage-information-label.webp"
  },
  {
   "oem": "12E010849F",
@@ -62281,13 +63210,21 @@
     "diagram_name": "Battery Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
     "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--control-modules",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 7
    }
   ],
   "notes": [
    "High voltage. #1."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hybrid-high-voltage-information-label-12e010849f",
-  "illustration": null
+  "illustration": "illustrations/hybrid-high-voltage-information-label.webp"
  },
  {
   "oem": "12E010849G",
@@ -62305,13 +63242,21 @@
     "diagram_name": "Battery Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
     "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--control-modules",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 8
    }
   ],
   "notes": [
    "High voltage. #2. Battery & components, 91 kwh, type 4."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hybrid-high-voltage-information-label-12e010849g",
-  "illustration": null
+  "illustration": "illustrations/hybrid-high-voltage-information-label.webp"
  },
  {
   "oem": "N91076601",
@@ -62385,6 +63330,14 @@
     "diagram_name": "Control Module",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/54f794571248e07b68128081502325f2/d881e895620bc1d05dd1d8a631f28e1c.png",
     "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--doors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 3
    }
   ],
   "notes": [],
@@ -62407,6 +63360,14 @@
     "diagram_name": "Control Module",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/54f794571248e07b68128081502325f2/d881e895620bc1d05dd1d8a631f28e1c.png",
     "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--doors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 3
    }
   ],
   "notes": [],
@@ -62428,6 +63389,14 @@
     "diagram": 1,
     "diagram_name": "Control Module",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/54f794571248e07b68128081502325f2/d881e895620bc1d05dd1d8a631f28e1c.png",
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--doors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 3
    }
   ],
@@ -62453,6 +63422,14 @@
     "diagram_name": "Control Module",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/54f794571248e07b68128081502325f2/d881e895620bc1d05dd1d8a631f28e1c.png",
     "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--doors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
    }
   ],
   "notes": [
@@ -62477,10 +63454,19 @@
     "diagram_name": "Control Module",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/54f794571248e07b68128081502325f2/d881e895620bc1d05dd1d8a631f28e1c.png",
     "callout": 6
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--doors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 6
    }
   ],
   "notes": [
-   "Fits AllTrack, e-Golf, Golf, GTI, SportWagen Golf AllTrack. Golf Sportwagen. Golf w/S Trim. GTI 4 Button. w/ s trim. GTI. 4 button. Golf AllTrack. Golf SportWagen. Exc.Keyless Ignition. 315 MHz. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-keyless-entry-transmitter-5g0959752bdinf) Diagram 2: Siren6 Store ratingby Google 3.9star Press space for more information."
+   "Fits AllTrack, e-Golf, Golf, GTI, SportWagen Golf AllTrack. Golf Sportwagen. Golf w/S Trim. GTI 4 Button. w/ s trim. GTI. 4 button. Golf AllTrack. Golf SportWagen. Exc.Keyless Ignition. 315 MHz. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-keyless-entry-transmitter-5g0959752bdinf) Diagram 2: Siren6 Store ratingby Google 3.9star Press space for more information.",
+   "Fits AllTrack, e-Golf, Golf, GTI, SportWagen Golf AllTrack. Golf Sportwagen. Golf w/S Trim. GTI 4 Button. w/ s trim. GTI. 4 button. Golf AllTrack. Golf SportWagen. Exc.Keyless Ignition. 315 MHz. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-keyless-entry-transmitter-5g0959752bdinf) Store ratingby Google 3.9star Press space for more information."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-keyless-entry-transmitter-5g0959752bdinf",
   "illustration": null
@@ -62500,6 +63486,14 @@
     "diagram": 1,
     "diagram_name": "Control Module",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/54f794571248e07b68128081502325f2/d881e895620bc1d05dd1d8a631f28e1c.png",
+    "callout": 6
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--doors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 6
    }
   ],
@@ -62521,6 +63515,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--control-modules",
     "diagram": 1,
     "diagram_name": "Battery Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
@@ -62614,6 +63616,14 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--electrical-sockets",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
@@ -62690,6 +63700,14 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--electrical-sockets",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 9
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
@@ -62739,6 +63757,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--electrical-sockets",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
@@ -62824,6 +63850,14 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--electrical-sockets",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 18
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
@@ -62851,13 +63885,208 @@
     "diagram_name": "Battery Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
     "callout": 19
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--control-modules",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 19
    }
   ],
   "notes": [
-   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-mount-bracket-5ge906129c) 2 This part contains hazardous materials. Extra shipping costs apply. Diagram 2: Bumper Cover79 Diagram 3: Radiator Support47 Diagram 4: Alarm Horn4 Diagram 5: Charging Port5 Diagram 6: Control Module12 Diagram 7: Clock Spring19 Diagram 8: Relay & Fuse Plt30 Diagram 9: Upper Column Cover22 Store ratingby Google 3.9star Press space for more information."
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-mount-bracket-5ge906129c) 2 This part contains hazardous materials. Extra shipping costs apply. Diagram 2: Bumper Cover79 Diagram 3: Radiator Support47 Diagram 4: Alarm Horn4 Diagram 5: Charging Port5 Diagram 6: Control Module12 Diagram 7: Clock Spring19 Diagram 8: Relay & Fuse Plt30 Diagram 9: Upper Column Cover22 Store ratingby Google 3.9star Press space for more information.",
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-mount-bracket-5ge906129c) 2 This part contains hazardous materials. Extra shipping costs apply. Diagram 2: Control Module12 Diagram 3: Clock Spring19 Store ratingby Google 3.9star Press space for more information."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-mount-bracket-5ge906129c",
   "illustration": "illustrations/bracket.webp"
+ },
+ {
+  "oem": "811857991B",
+  "oem_display": "811 857 991 B",
+  "name": "Mount Bracket Strip",
+  "part_type": "mount bracket strip",
+  "system": "electrical",
+  "price_usd": 3.32,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--electrical-components",
+    "diagram": 1,
+    "diagram_name": "Accelerometer",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/416e70088cea5d65ccebfd61bbb805a1/3e9627294b15ef7730ab6ecb17b82f78.png",
+    "callout": 4
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-mount-bracket-strip-811857991b",
+  "illustration": "illustrations/bracket.webp"
+ },
+ {
+  "oem": "5Q0937629C",
+  "oem_display": "5Q0 937 629 C",
+  "name": "Multi-Purpose Fuse",
+  "part_type": "multi purpose fuse",
+  "system": "electrical",
+  "price_usd": 33.19,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 9
+   }
+  ],
+  "notes": [
+   "Main fuse. Engine compartment, type 1. Engine compartment. 80a/80a/50a."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-multi-purpose-fuse-5q0937629c",
+  "illustration": null
+ },
+ {
+  "oem": "N01713117",
+  "oem_display": "N 017 131 17",
+  "name": "Multi-Purpose Fuse",
+  "part_type": "multi purpose fuse",
+  "system": "electrical",
+  "price_usd": 0.34,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 12
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-multi-purpose-fuse-n01713117",
+  "illustration": null
+ },
+ {
+  "oem": "N01713119",
+  "oem_display": "N 017 131 19",
+  "name": "Multi-Purpose Fuse",
+  "part_type": "multi purpose fuse",
+  "system": "electrical",
+  "price_usd": 1.66,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 11
+   }
+  ],
+  "notes": [
+   "Cabin compartment, 1 amp. Engine compartment, standard, 1 amp. 2012-15 passenger compartment. 1 amp. Interior, standard, 1 amp. Gateway. 1 amp. 2013-2017 passenger compartment. 1 amp. 2009-2012 passenger compartment. 1 amp. 2016-19 passenger compartment. 1 amp. Sedan, 1 amp. Under hood, main, standard, 1 amp."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-multi-purpose-fuse-n01713119",
+  "illustration": null
+ },
+ {
+  "oem": "N01713122",
+  "oem_display": "N 017 131 22",
+  "name": "Multi-Purpose Fuse",
+  "part_type": "multi purpose fuse",
+  "system": "electrical",
+  "price_usd": 1.57,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 12
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-multi-purpose-fuse-n01713122",
+  "illustration": null
+ },
+ {
+  "oem": "N10251902",
+  "oem_display": "N 102 519 02",
+  "name": "Multi-Purpose Fuse",
+  "part_type": "multi purpose fuse",
+  "system": "electrical",
+  "price_usd": 1.88,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 12
+   }
+  ],
+  "notes": [
+   "Engine compartment-secondary fuses. 60 amp. Rear fuse box. 60 amp. Under hood, main, 60 amp."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-multi-purpose-fuse-n10251902",
+  "illustration": null
+ },
+ {
+  "oem": "N10251903",
+  "oem_display": "N 102 519 03",
+  "name": "Multi-Purpose Fuse",
+  "part_type": "multi purpose fuse",
+  "system": "electrical",
+  "price_usd": 1.74,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 12
+   }
+  ],
+  "notes": [
+   "Main, 2020-23, 30 amp. Passenger compartment, 30 amp. Under hood, main, 30 amp. Sedan from 1/05, wagon 2009 only, 30 amp. Wagon, 2010-11, engine compartment, 30 amp."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-multi-purpose-fuse-n10251903",
+  "illustration": null
+ },
+ {
+  "oem": "N10251905",
+  "oem_display": "N 102 519 05",
+  "name": "Multi-Purpose Fuse",
+  "part_type": "multi purpose fuse",
+  "system": "electrical",
+  "price_usd": 1.7,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 12
+   }
+  ],
+  "notes": [
+   "Engine compartment. 80 amp. Main, 2020-23, 80 amp. Rear fuse box. 80 amp. Under hood, main, 80 amp."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-multi-purpose-fuse-n10251905",
+  "illustration": null
  },
  {
   "oem": "5Q0971235D",
@@ -63156,6 +64385,96 @@
   "illustration": null
  },
  {
+  "oem": "4H0951253",
+  "oem_display": "4H0 951 253",
+  "name": "Relay",
+  "part_type": "relay",
+  "system": "electrical",
+  "price_usd": 27.11,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 10
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-relay-4h0951253",
+  "illustration": null
+ },
+ {
+  "oem": "4H0951253C",
+  "oem_display": "4H0 951 253 C",
+  "name": "Relay",
+  "part_type": "relay",
+  "system": "electrical",
+  "price_usd": 23.53,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 10
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-relay-4h0951253c",
+  "illustration": null
+ },
+ {
+  "oem": "4H0937527",
+  "oem_display": "4H0 937 527",
+  "name": "Relay Box Bracket",
+  "part_type": "relay box bracket",
+  "system": "electrical",
+  "price_usd": 1.92,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 6
+   }
+  ],
+  "notes": [
+   "Holder. Sedan,. Luggage compartment, 9 pin. Convertible, body control module, 9 pin. Coupe, 9 pin."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-relay-box-bracket-4h0937527",
+  "illustration": "illustrations/bracket.webp"
+ },
+ {
+  "oem": "5Q0937507D",
+  "oem_display": "5Q0 937 507 D",
+  "name": "Relay Plate",
+  "part_type": "relay plate",
+  "system": "electrical",
+  "price_usd": 9.8,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--flasher-units-fuses-and-circuit-breakers",
+    "diagram": 1,
+    "diagram_name": "Cover",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/28cd1279fd4765b7c0f96cb5385b4539/78696bf7aebabea04100390bb2f60d73.png",
+    "callout": 8
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-relay-plate-5q0937507d",
+  "illustration": null
+ },
+ {
   "oem": "5H0998607B",
   "oem_display": "5H0 998 607 B",
   "name": "Repair Kit",
@@ -63219,6 +64538,14 @@
     "diagram_name": "Battery Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
     "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--control-modules",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 3
    }
   ],
   "notes": [
@@ -63239,6 +64566,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--control-modules",
     "diagram": 1,
     "diagram_name": "Battery Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
@@ -63319,6 +64654,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 14
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--electrical-sockets",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
@@ -63465,6 +64808,14 @@
     "diagram_name": "Battery Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
     "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--control-modules",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 5
    }
   ],
   "notes": [
@@ -63513,11 +64864,43 @@
     "diagram_name": "Battery Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
     "callout": 6
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--control-modules",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 6
    }
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-socket-gasket-5qe915433l",
   "illustration": "illustrations/gasket.webp"
+ },
+ {
+  "oem": "5Q0907651",
+  "oem_display": "5Q0 907 651",
+  "name": "Speed Sensor",
+  "part_type": "speed sensor",
+  "system": "electrical",
+  "price_usd": 125.75,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--electrical-components",
+    "diagram": 1,
+    "diagram_name": "Accelerometer",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/416e70088cea5d65ccebfd61bbb805a1/3e9627294b15ef7730ab6ecb17b82f78.png",
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "Suspension dampimg control. GTI. Front. Golf R."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-speed-sensor-5q0907651",
+  "illustration": null
  },
  {
   "oem": "02A911023LX",
@@ -64009,6 +65392,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--electrical-sockets",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",

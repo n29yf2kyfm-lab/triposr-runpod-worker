@@ -1,0 +1,82 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--electrical-components",
+ "title": "Electrical Components for 2019 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Accelerometer",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/416e70088cea5d65ccebfd61bbb805a1/3e9627294b15ef7730ab6ecb17b82f78.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--electrical-components?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Charging Port",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/89adc17c16efbfb8f221fc78f3a47525/1fea987efd8e50f9dcfb2d3a53265387.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--electrical-components?assembly=2"
+  },
+  {
+   "n": 3,
+   "name": "Fuse",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/d5013962247d7706af7981d46836acb8/1eeb914a1424d318f2339bc7e140870a.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--electrical-components?assembly=3"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "5Q0907651",
+   "oem_display": "5Q0 907 651",
+   "oem_from": "printed",
+   "name": "Speed Sensor",
+   "label": "Accelerometer",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 125.75,
+   "msrp_usd": 188.98,
+   "notes": "Suspension dampimg control. GTI. Front. Golf R.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-speed-sensor-5q0907651"
+  },
+  {
+   "oem": "5Q0907376BZ00",
+   "oem_display": "5Q0 907 376 B Z00",
+   "oem_from": "printed",
+   "name": "Control Module",
+   "label": "GTI. Golf R. Suspension dampimg control, with r.",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-control-module-5q0907376bz00) 3",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-control-module-5q0907376bz00"
+  },
+  {
+   "oem": "5G0907324",
+   "oem_display": "5G0 907 324",
+   "oem_from": "printed",
+   "name": "Bracket",
+   "label": "Mount Bracket",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 23.29,
+   "msrp_usd": 31.82,
+   "notes": "Suspension dampimg control.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-bracket-5g0907324"
+  },
+  {
+   "oem": "811857991B",
+   "oem_display": "811 857 991 B",
+   "oem_from": "printed",
+   "name": "Mount Bracket Strip",
+   "label": "Suspension dampimg control.",
+   "callout": 4,
+   "diagram": 1,
+   "price_usd": 3.32,
+   "msrp_usd": 5.44,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-mount-bracket-strip-811857991b"
+  }
+ ]
+}
