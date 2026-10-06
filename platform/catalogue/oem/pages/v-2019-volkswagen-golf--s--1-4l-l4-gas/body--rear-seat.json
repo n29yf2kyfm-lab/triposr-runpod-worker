@@ -1,0 +1,34 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/body--rear-seat",
+ "title": "Rear Seat for 2019 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Latch",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/f51aebd405dfe183b29885fc6514263c/21261354629e19c8e48552abdcbdb2f5.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/body--rear-seat?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Latch",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/9e6b911bb8214db9946ce9ba967d0429/a5129c3caf1ee017203a4b8c8ea8acac.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/body--rear-seat?assembly=2"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "5Q0885682N",
+   "oem_display": "5Q0 885 682 N",
+   "oem_from": "printed",
+   "name": "Brest Rel",
+   "label": "Latch",
+   "callout": 5,
+   "diagram": 1,
+   "price_usd": 49.44,
+   "msrp_usd": 70.49,
+   "notes": "With e-Golf, seat back, from 4/2015. Without r, e-Golf, seat back.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-brest-rel-5q0885682n"
+  }
+ ]
+}
