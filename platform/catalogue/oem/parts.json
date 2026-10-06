@@ -1,5 +1,29 @@
 [
  {
+  "oem": "5C6010008",
+  "oem_display": "5C6 010 008",
+  "name": "A/C System Information Label",
+  "part_type": "a c system information label",
+  "system": "air and fuel delivery",
+  "price_usd": 10.86,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--information-labels",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 9
+   }
+  ],
+  "notes": [
+   "Coupe, r134a. Sedan from 1/05, wagon 2009 only,. Wagon, 2010-11,."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-a-c-system-information-label-5c6010008",
+  "illustration": "illustrations/a-c-system-information-label.webp"
+ },
+ {
   "oem": "5Q0010008D",
   "oem_display": "5Q0 010 008 D",
   "name": "A/C System Information Label",
@@ -136,6 +160,52 @@
   "illustration": "illustrations/bolt.webp"
  },
  {
+  "oem": "1C0010332",
+  "oem_display": "1C0 010 332",
+  "name": "Air Bag Information Label",
+  "part_type": "air bag information label",
+  "system": "air and fuel delivery",
+  "price_usd": 9.99,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--information-labels",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
+   }
+  ],
+  "notes": [
+   "Child safety seat. Info & warning. Child seats. Convertible, front. Child seat warning. Child seat position. Air bag. Coupe, text."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-air-bag-information-label-1c0010332",
+  "illustration": "illustrations/air-bag-information-label.webp"
+ },
+ {
+  "oem": "4D0010142A",
+  "oem_display": "4D0 010 142 A",
+  "name": "Air Bag Information Label",
+  "part_type": "air bag information label",
+  "system": "air and fuel delivery",
+  "price_usd": 12.9,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--information-labels",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 6
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-air-bag-information-label-4d0010142a",
+  "illustration": "illustrations/air-bag-information-label.webp"
+ },
+ {
   "oem": "5G0010029J",
   "oem_display": "5G0 010 029 J",
   "name": "Air Bag Information Label",
@@ -144,6 +214,14 @@
   "price_usd": 11.54,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--information-labels",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 6
+   },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "air-and-fuel-delivery--information-labels",
@@ -177,7 +255,9 @@
     "callout": 1
    }
   ],
-  "notes": [],
+  "notes": [
+   "Pictogram, inner. Pictogram, outer. Replace air bag. Child pictogram. Coupe, pictogram. Child seat restraint. 2021-22, child seat. Child seat restrict. Convertible, pictogram. Sedan from 1/05, wagon 2009 only, pictogram."
+  ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-air-bag-information-label-5g0010029j",
   "illustration": "illustrations/air-bag-information-label.webp"
  },
@@ -209,6 +289,14 @@
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--fuel-injection-system-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1d9084db64c3b1d6902407dee6d3a858/f26716a97236791755345165bf0baca3.png",
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1d9084db64c3b1d6902407dee6d3a858/f26716a97236791755345165bf0baca3.png",
@@ -525,6 +613,14 @@
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--fuel-injection-system-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1d9084db64c3b1d6902407dee6d3a858/f26716a97236791755345165bf0baca3.png",
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1d9084db64c3b1d6902407dee6d3a858/f26716a97236791755345165bf0baca3.png",
@@ -963,6 +1059,14 @@
    },
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1d9084db64c3b1d6902407dee6d3a858/f26716a97236791755345165bf0baca3.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
@@ -1267,6 +1371,14 @@
    },
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1d9084db64c3b1d6902407dee6d3a858/f26716a97236791755345165bf0baca3.png",
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
@@ -1442,6 +1554,14 @@
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
@@ -1809,6 +1929,52 @@
   "illustration": "illustrations/cap.webp"
  },
  {
+  "oem": "1K0010358R",
+  "oem_display": "1K0 010 358 R",
+  "name": "Caution Label",
+  "part_type": "caution label",
+  "system": "air and fuel delivery",
+  "price_usd": 9.92,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--information-labels",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 8
+   }
+  ],
+  "notes": [
+   "Jack usage."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-caution-label-1k0010358r",
+  "illustration": "illustrations/caution-label.webp"
+ },
+ {
+  "oem": "1K0010467T",
+  "oem_display": "1K0 010 467 T",
+  "name": "Caution Label",
+  "part_type": "caution label",
+  "system": "air and fuel delivery",
+  "price_usd": 8.24,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--information-labels",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-caution-label-1k0010467t",
+  "illustration": "illustrations/caution-label.webp"
+ },
+ {
   "oem": "701010002AA",
   "oem_display": "701 010 002 AA",
   "name": "Caution Label",
@@ -1817,6 +1983,14 @@
   "price_usd": 4.03,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--information-labels",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 3
+   },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "air-and-fuel-delivery--information-labels",
@@ -1850,8 +2024,34 @@
     "callout": 4
    }
   ],
-  "notes": [],
+  "notes": [
+   "Parts origin # 2. High voltage. Vehicle info, to 03/30/2020. Fan label. Coupe, radiator fan."
+  ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-caution-label-701010002aa",
+  "illustration": "illustrations/caution-label.webp"
+ },
+ {
+  "oem": "8K0010539A",
+  "oem_display": "8K0 010 539 A",
+  "name": "Caution Label",
+  "part_type": "caution label",
+  "system": "air and fuel delivery",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--information-labels",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 2
+   }
+  ],
+  "notes": [
+   "Spare wheel. Spare tire label. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-caution-label-8k0010539a) 3"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-caution-label-8k0010539a",
   "illustration": "illustrations/caution-label.webp"
  },
  {
@@ -2323,6 +2523,14 @@
    },
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1d9084db64c3b1d6902407dee6d3a858/f26716a97236791755345165bf0baca3.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
@@ -2701,6 +2909,14 @@
    },
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1d9084db64c3b1d6902407dee6d3a858/f26716a97236791755345165bf0baca3.png",
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
@@ -2796,6 +3012,14 @@
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--fuel-injection-system-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1d9084db64c3b1d6902407dee6d3a858/f26716a97236791755345165bf0baca3.png",
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1d9084db64c3b1d6902407dee6d3a858/f26716a97236791755345165bf0baca3.png",
@@ -3471,6 +3695,14 @@
    },
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1d9084db64c3b1d6902407dee6d3a858/f26716a97236791755345165bf0baca3.png",
+    "callout": 9
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
@@ -3568,6 +3800,14 @@
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--fuel-injection-system-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1d9084db64c3b1d6902407dee6d3a858/f26716a97236791755345165bf0baca3.png",
+    "callout": 6
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1d9084db64c3b1d6902407dee6d3a858/f26716a97236791755345165bf0baca3.png",
@@ -3744,6 +3984,14 @@
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--fuel-injection-system-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1d9084db64c3b1d6902407dee6d3a858/f26716a97236791755345165bf0baca3.png",
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1d9084db64c3b1d6902407dee6d3a858/f26716a97236791755345165bf0baca3.png",
@@ -4087,6 +4335,14 @@
    },
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1d9084db64c3b1d6902407dee6d3a858/f26716a97236791755345165bf0baca3.png",
+    "callout": 10
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
@@ -4279,6 +4535,14 @@
    },
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1d9084db64c3b1d6902407dee6d3a858/f26716a97236791755345165bf0baca3.png",
+    "callout": 13
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
@@ -4390,6 +4654,14 @@
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--fuel-injection-system-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1d9084db64c3b1d6902407dee6d3a858/f26716a97236791755345165bf0baca3.png",
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1d9084db64c3b1d6902407dee6d3a858/f26716a97236791755345165bf0baca3.png",
@@ -4550,6 +4822,14 @@
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--fuel-injection-system-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Air Cleaner Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1d9084db64c3b1d6902407dee6d3a858/f26716a97236791755345165bf0baca3.png",
+    "callout": 14
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1d9084db64c3b1d6902407dee6d3a858/f26716a97236791755345165bf0baca3.png",
@@ -5549,6 +5829,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
     "callout": 13
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 13
    }
   ],
   "notes": [],
@@ -5607,6 +5895,14 @@
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 13
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
@@ -5699,6 +5995,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--information-labels",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   },
+   {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "air-and-fuel-delivery--information-labels",
     "diagram": 1,
@@ -5748,6 +6052,14 @@
   "appears_on": [
    {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--information-labels",
+    "diagram": null,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": null
+   },
+   {
+    "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--information-labels",
     "diagram": null,
     "diagram_name": null,
@@ -5969,6 +6281,14 @@
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
@@ -6505,6 +6825,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
     "callout": 1
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 1
    }
   ],
   "notes": [
@@ -6542,6 +6870,14 @@
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
@@ -6709,6 +7045,14 @@
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
@@ -6881,6 +7225,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
     "callout": 5
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 5
    }
   ],
   "notes": [
@@ -6917,6 +7269,14 @@
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
@@ -7003,6 +7363,14 @@
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 6
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
@@ -7254,6 +7622,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
     "callout": 12
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 12
    }
   ],
   "notes": [],
@@ -7416,6 +7792,14 @@
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 9
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
@@ -7596,6 +7980,14 @@
     "callout": 10
    },
    {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 10
+   },
+   {
     "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
     "diagram": 1,
@@ -7720,6 +8112,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
     "callout": 4
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 4
    }
   ],
   "notes": [
@@ -7780,6 +8180,14 @@
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
@@ -8458,6 +8866,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
     "callout": 7
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 7
    }
   ],
   "notes": [
@@ -8494,6 +8910,14 @@
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
@@ -9744,6 +10168,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
     "callout": 12
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 12
    }
   ],
   "notes": [],
@@ -9958,6 +10390,14 @@
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
@@ -53078,7 +53518,7 @@
    "4 door. Mount. Inner wheelhouse, left side. 2 door. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-wheel-housing-access-cover-5q0802191) 13"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wheel-housing-access-cover-5q0802191",
-  "illustration": null
+  "illustration": "illustrations/wheel-housing-access-cover.webp"
  },
  {
   "oem": "5Q0802192",
@@ -53102,7 +53542,7 @@
    "4 door. Mount. Inner wheelhouse, right side. 2 door. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-wheel-housing-access-cover-5q0802192) 12"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wheel-housing-access-cover-5q0802192",
-  "illustration": null
+  "illustration": "illustrations/wheel-housing-access-cover.webp"
  },
  {
   "oem": "5Q0802397",
@@ -53174,7 +53614,7 @@
    "4 door. 2 door."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wheel-housing-side-panel-5g6809411",
-  "illustration": null
+  "illustration": "illustrations/wheel-housing-panel.webp"
  },
  {
   "oem": "5G6809412",
@@ -53198,7 +53638,7 @@
    "4 door. 2 door."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wheel-housing-side-panel-5g6809412",
-  "illustration": null
+  "illustration": "illustrations/wheel-housing-panel.webp"
  },
  {
   "oem": "5G6809851",
@@ -53222,7 +53662,7 @@
    "2 door. 4 door. with r."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wheel-housing-side-panel-5g6809851",
-  "illustration": null
+  "illustration": "illustrations/wheel-housing-panel.webp"
  },
  {
   "oem": "5G6809852",
@@ -53246,7 +53686,7 @@
    "2 door. 4 door. with r. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-wheel-housing-side-panel-5g6809852) 10"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wheel-housing-side-panel-5g6809852",
-  "illustration": null
+  "illustration": "illustrations/wheel-housing-panel.webp"
  },
  {
   "oem": "5G4810421A",
@@ -53270,7 +53710,7 @@
    "4 door. Gusset."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wheel-housing-side-panel-brace-5g4810421a",
-  "illustration": null
+  "illustration": "illustrations/wheel-housing-panel-brace.webp"
  },
  {
   "oem": "5G4810422A",
@@ -53294,7 +53734,7 @@
    "4 door. Gusset."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wheel-housing-side-panel-brace-5g4810422a",
-  "illustration": null
+  "illustration": "illustrations/wheel-housing-panel-brace.webp"
  },
  {
   "oem": "5Q0802951AF",
@@ -53335,7 +53775,7 @@
    "Without r or e-Golf. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-wheel-housing-side-panel-brace-5q0802951af) 20"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wheel-housing-side-panel-brace-5q0802951af",
-  "illustration": null
+  "illustration": "illustrations/wheel-housing-panel-brace.webp"
  },
  {
   "oem": "5Q0802952AF",
@@ -53376,7 +53816,7 @@
    "Without r or e-Golf. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-wheel-housing-side-panel-brace-5q0802952af) 9"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wheel-housing-side-panel-brace-5q0802952af",
-  "illustration": null
+  "illustration": "illustrations/wheel-housing-panel-brace.webp"
  },
  {
   "oem": "5Q0813173",
@@ -53409,7 +53849,7 @@
    "Without r or e-Golf. Filler plate. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-wheel-housing-side-panel-brace-5q0813173) 7"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wheel-housing-side-panel-brace-5q0813173",
-  "illustration": null
+  "illustration": "illustrations/wheel-housing-panel-brace.webp"
  },
  {
   "oem": "5Q0813174",
@@ -53442,7 +53882,7 @@
    "Without r or e-Golf. Filler plate. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-wheel-housing-side-panel-brace-5q0813174) 7"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wheel-housing-side-panel-brace-5q0813174",
-  "illustration": null
+  "illustration": "illustrations/wheel-housing-panel-brace.webp"
  },
  {
   "oem": "4D0012219A",
@@ -53466,7 +53906,7 @@
    "This handy 17mm wrench will allow you to remove or install Wheel lug bolts. Keyword(s): Wrench, spare, spare tire, Wheel, tool, bolt wrench, Wheel bolt wrench Fwd. Awd. Coupe. Convertible,. Wagon, 2010-11,. Sedan/Wagon, Sedan. Compressor & jack Components."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wheel-lug-wrench-4d0012219a",
-  "illustration": null
+  "illustration": "illustrations/wheel-lug-wrench.webp"
  },
  {
   "oem": "N91090701",
@@ -53554,7 +53994,7 @@
    "4 door. 2 door."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wheelhouse-brace-5g6809129",
-  "illustration": null
+  "illustration": "illustrations/wheelhouse-brace.webp"
  },
  {
   "oem": "5GM867427ACA9",
@@ -53586,7 +54026,7 @@
    "Without r, e-Golf."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wheelhouse-trim-5gm867427aca9",
-  "illustration": null
+  "illustration": "illustrations/wheelhouse-trim.webp"
  },
  {
   "oem": "5GM867428ACA9",
@@ -53618,7 +54058,7 @@
    "Without r, e-Golf."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wheelhouse-trim-5gm867428aca9",
-  "illustration": null
+  "illustration": "illustrations/wheelhouse-trim.webp"
  },
  {
   "oem": "1918671999B9",
@@ -53650,7 +54090,7 @@
    "Floor components. Side trim panel,plug. Lwr pillar trim,plug. Sedan from 1/05, wagon 2009 only, sedan."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wheelhouse-trim-plug-1918671999b9",
-  "illustration": null
+  "illustration": "illustrations/wheelhouse-trim-plug.webp"
  },
  {
   "oem": "5GM837431G5AP",
@@ -53706,7 +54146,7 @@
    "From 03/2015. 4 door. without r, e-Golf."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-window-channel-5gm837431g5ap",
-  "illustration": null
+  "illustration": "illustrations/window-channel.webp"
  },
  {
   "oem": "5GM837432G5AP",
@@ -53762,7 +54202,7 @@
    "From 03/2015. 4 door. without r, e-Golf."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-window-channel-5gm837432g5ap",
-  "illustration": null
+  "illustration": "illustrations/window-channel.webp"
  },
  {
   "oem": "5GM839431J5AP",
@@ -53810,7 +54250,7 @@
    "Without R, e-Golf from 11/2014. Without r, e-Golf, to 10/2014."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-window-channel-5gm839431j5ap",
-  "illustration": null
+  "illustration": "illustrations/window-channel.webp"
  },
  {
   "oem": "5GM839432J5AP",
@@ -53858,7 +54298,7 @@
    "Without R, e-Golf from 11/2014. Without r, e-Golf, to 10/2014."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-window-channel-5gm839432j5ap",
-  "illustration": null
+  "illustration": "illustrations/window-channel.webp"
  },
  {
   "oem": "5G0837732A",
@@ -53939,7 +54379,7 @@
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-window-motor-5q4959801b) Diagram 2: Regulator Module Tape2 Store ratingby Google 3.9star Press space for more information."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-window-motor-5q4959801b",
-  "illustration": null
+  "illustration": "illustrations/window-motor.webp"
  },
  {
   "oem": "5Q4959802B",
@@ -53999,7 +54439,7 @@
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-window-motor-5q4959802b) Store ratingby Google 3.9star Press space for more information."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-window-motor-5q4959802b",
-  "illustration": null
+  "illustration": "illustrations/window-motor.webp"
  },
  {
   "oem": "5Q4959811F",
@@ -54047,7 +54487,7 @@
    "Jetta. To 6/11/22. To 11/06/2022. From 01/15/18. GTI. Left. From 2/5/24 to 13/4/25. Without r, e-Golf, from 10/13/2014."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-window-motor-5q4959811f",
-  "illustration": null
+  "illustration": "illustrations/window-motor.webp"
  },
  {
   "oem": "5Q4959812F",
@@ -54095,7 +54535,7 @@
    "Jetta. To 6/11/22. To 11/06/2022. From 01/15/18. GTI. Right. Without r, e-Golf, from 10/13/2014."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-window-motor-5q4959812f",
-  "illustration": null
+  "illustration": "illustrations/window-motor.webp"
  },
  {
   "oem": "5GM837461E",
@@ -54151,7 +54591,7 @@
    "GTI. 4 door. Power Operated. Optional. Left. Without s trim. Golf Alltrack."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-window-regulator-5gm837461e",
-  "illustration": null
+  "illustration": "illustrations/window-regulator.webp"
  },
  {
   "oem": "5GM837462E",
@@ -54207,7 +54647,7 @@
    "GTI. 4 door. Right. 4 door, without r, e-Golf. Power Operated. Optional. Golf Alltrack."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-window-regulator-5gm837462e",
-  "illustration": null
+  "illustration": "illustrations/window-regulator.webp"
  },
  {
   "oem": "5GM839461C",
@@ -54255,7 +54695,7 @@
    "Power Operated. GTI. Left. Without r, e-Golf. Golf Alltrack."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-window-regulator-5gm839461c",
-  "illustration": null
+  "illustration": "illustrations/window-regulator.webp"
  },
  {
   "oem": "5GM839462C",
@@ -54303,7 +54743,7 @@
    "Power Operated. GTI. Right. Without r, e-Golf. Golf Alltrack."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-window-regulator-5gm839462c",
-  "illustration": null
+  "illustration": "illustrations/window-regulator.webp"
  },
  {
   "oem": "N90456002",
@@ -54407,7 +54847,7 @@
    "Black/white, without r, e-Golf."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-window-switch-5g0959855kwhs",
-  "illustration": null
+  "illustration": "illustrations/window-switch.webp"
  },
  {
   "oem": "5G0959855LWZU",
@@ -54455,7 +54895,7 @@
    "Black/aluminum."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-window-switch-5g0959855lwzu",
-  "illustration": null
+  "illustration": "illustrations/window-switch.webp"
  },
  {
   "oem": "5G0959857DWHS",
@@ -54495,7 +54935,7 @@
    "4 door, black/white."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-window-switch-5g0959857dwhs",
-  "illustration": null
+  "illustration": "illustrations/window-switch.webp"
  },
  {
   "oem": "5G0959857EWZU",
@@ -54535,7 +54975,7 @@
    "4 door, black/aluminum."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-window-switch-5g0959857ewzu",
-  "illustration": null
+  "illustration": "illustrations/window-switch.webp"
  },
  {
   "oem": "5G0845011BLNVB",
@@ -54565,7 +55005,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-windshield-5g0845011blnvb",
-  "illustration": null
+  "illustration": "illustrations/windshield.webp"
  },
  {
   "oem": "5GM845011AHNVB",
@@ -54595,7 +55035,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-windshield-5gm845011ahnvb",
-  "illustration": null
+  "illustration": "illustrations/windshield.webp"
  },
  {
   "oem": "7P6853910A",
