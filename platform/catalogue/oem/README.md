@@ -54,9 +54,26 @@ dropped, never stored or logged.
 
 ## Status
 
-Pilot: the 2019 Golf S 1.4 TSI (22 categories), front brakes for the
-1999, 2005, 2012, 2016 and 2021 Golf, and 2019 Golf Alltrack brakes —
-7 vehicles, 27 pages, 389 OEM numbers. Add pages with
-`ingest_firecrawl.py <saved Firecrawl results>` then `build_catalogue.py`. Scaling to 1995–2026 needs `FIRECRAWL_API_KEY` in the environment so
-the crawl can run as a script at the site's pace (~390 category pages per
-vehicle, plus one page per drawing).
+7 vehicles, 1,113 OEM numbers, 100 crawled pages, 0 part links lost:
+
+| car | generation (US) | categories |
+|---|---|---|
+| 2019 Golf S 1.4 TSI | Mk7 facelift | 21 |
+| 2016 Golf S 1.8 TSI | Mk7 | 21 |
+| 2012 Golf 2.5 | Mk6 | 20 |
+| 2005 Golf GL 2.0 | Mk4 | 18 |
+| 1999 Golf GL 2.0 | Mk4 | 18 |
+| 2021 Golf 1.4 TSI | Mk7 facelift | front brakes |
+| 2019 Golf Alltrack 1.8 | Mk7 | brakes |
+
+The categories are the same set on every car: brakes, suspension and struts,
+steering, engine mounts, filters, air intake, turbo, cooling, water pump,
+alternator, starter, ignition, exterior lights, tail lamps, exhaust, A/C
+compressor and wipers. 1,106 parts have an illustration. Four part types never
+get one (`NO_IMAGE` in `illustrate.py`) because the image model kept drawing
+the wrong part; the page shows "No picture yet" for them.
+
+Add pages with `ingest_firecrawl.py <saved Firecrawl results>`, then
+`build_catalogue.py`, then `illustrate.py`, and check the new pictures on a
+contact sheet before committing them. Firecrawl allows about 10 pages a minute
+on this plan. Faster calls are refused.
