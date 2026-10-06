@@ -1,0 +1,864 @@
+[
+ {
+  "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/brakes--front-brakes",
+  "title": "Front Brakes for 2019 Volkswagen Golf",
+  "diagrams": [
+   {
+    "n": 1,
+    "name": "Hub & Bearing",
+    "image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/brakes--front-brakes?assembly=1"
+   },
+   {
+    "n": 2,
+    "name": "Caliper Support Mount Bolt",
+    "image": "https://cdn-illustrations.revolutionparts.io/strapr1/231e17b2b6b36e8ec84cfbedec4f7f0c/efc870060d8443222b3dc15d0efb274c.png",
+    "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/brakes--front-brakes?assembly=2"
+   },
+   {
+    "n": 3,
+    "name": "Caliper Mount Bolt",
+    "image": "https://cdn-illustrations.revolutionparts.io/strapr1/5b7bab6bdc4ec23e939bf388e8fca4e9/2b7c407aa2ec750a2eb9d5acd3c1cd50.png",
+    "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/brakes--front-brakes?assembly=3"
+   },
+   {
+    "n": 4,
+    "name": "Brake Hose",
+    "image": "https://cdn-illustrations.revolutionparts.io/strapr1/8481603ad7a409eb41f39299387e4895/e02019b44fc1260e3176513e518cf1eb.png",
+    "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/brakes--front-brakes?assembly=4"
+   },
+   {
+    "n": 5,
+    "name": "ABS Sensor",
+    "image": "https://cdn-illustrations.revolutionparts.io/strapr1/d14a08147bead0fcaf75ca424719c2bc/9dc5bd185fbc857a1eafc88456404be3.png",
+    "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/brakes--front-brakes?assembly=5"
+   },
+   {
+    "n": 6,
+    "name": "Hub & Bearing Bolt",
+    "image": "https://cdn-illustrations.revolutionparts.io/strapr1/cc8e1713a14fba706c08ccc5cf0c8957/60a3258146b2f48064edb0017a9ef010.png",
+    "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/brakes--front-brakes?assembly=6"
+   },
+   {
+    "n": 7,
+    "name": "Axle Bolt",
+    "image": "https://cdn-illustrations.revolutionparts.io/strapr1/a4c4462aea3ce01a621acbdfebedd7b1/c60894f236b6e7249704511f538ceee1.png",
+    "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/brakes--front-brakes?assembly=7"
+   }
+  ],
+  "parts": [
+   {
+    "oem": "8V0498625",
+    "oem_display": "8V0 498 625",
+    "name": "Hub & Bearing",
+    "callout": 1,
+    "diagram": 1,
+    "price_usd": 127.34,
+    "notes": "80mm. Part has related Components that cannot be reused/ reinstalled mount bolt and axle bolt. Wheel Bearing and Hub Assembly. Wheel Hub. Amplifier. Front. 288X25 Rotor. E-Golf. Golf. Golf AllTrack. Golf Sportwagen. w/o R. w/o r. Golf, e-Golf. 288x25 Rotor. Golf AllTrack. Golf SportWagen.",
+    "fits": "AllTrack, e-Golf, Golf, SportWagen",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-hub-and-bearing-8v0498625"
+   },
+   {
+    "oem": "8S0498625A",
+    "oem_display": "8S0 498 625 A",
+    "name": "Wheel Bearing And Hub Assembly",
+    "callout": 1,
+    "diagram": 1,
+    "price_usd": 59.51,
+    "notes": "85mm. GTI. 312x25 rotor. Without performance brakes. Arteon. To 01/31/2021. To 04/24/2017. Golf R. With r. 340x30 mm.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-wheel-bearing-and-hub-assembly-8s0498625a"
+   },
+   {
+    "oem": "5Q0598611",
+    "oem_display": "5Q0 598 611",
+    "name": "Wheel Bearing And Hub Assembly",
+    "callout": 1,
+    "diagram": 1,
+    "price_usd": 230.11,
+    "notes": "Without awd, without e-Golf.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-hub-and-bearing-5q0598611"
+   },
+   {
+    "oem": "7N0698647A",
+    "oem_display": "7N0 698 647 A",
+    "name": "Caliper Mount Bushing Kit",
+    "callout": 10,
+    "diagram": 1,
+    "price_usd": 6.53,
+    "notes": "All Required. 288x25 rotor. 340x30mm. 340x30 mm. With gli. With performance brakes. From 09/28/2020. 2021-22. With r. Bolt,Sleeve.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-pin-boot-7n0698647a"
+   },
+   {
+    "oem": "5Q0698151M",
+    "oem_display": "5Q0 698 151 M",
+    "name": "Brake Pads",
+    "callout": 11,
+    "diagram": 1,
+    "price_usd": 69.75,
+    "notes": "A set of Disc brake pads for a vehicle's Disc brake caliper brake system. Exc.Performance Package. From 09/22/2014. From 10/01/2020. Incl.Disc Brake Pad Wear Sensor. To 09/30/2020. Lining. Disc Pad Set. Front. Rear. Wear indicator.",
+    "fits": "Alltrack, Golf, G ...",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-brake-lining-5q0698151m"
+   },
+   {
+    "oem": "7N0698451A",
+    "oem_display": "7N0 698 451 A",
+    "name": "Disc Brake Pad Set",
+    "callout": 11,
+    "diagram": 1,
+    "price_usd": 58.36,
+    "notes": "A set of disc Brake pads for a vehicle's disc Brake caliper Brake system. Exc.Performance Package. From 07/01/2014. Incl.Clips. To 09/30/2020. AWD. FWD. FWD, 272X10 mm. Golf. Golf AllTrack. Golf Sportwagen. GTI AUTO. GTI Manual. Passat. Q3. w/o AWD, w/o E-Golf. w/o PERFORMANCE Brakes. GTI. Auto. Passat. Fwd, 272x10 mm. Golf AllTrack. Golf SportWagen. w/o awd, w/o e-Golf. w/o performance Brakes.",
+    "fits": "AllTrack, Golf, GTI, Passat, SportWagen",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-brake-pads-rear-7n0698451a"
+   },
+   {
+    "oem": "8V0615437",
+    "oem_display": "8V0 615 437",
+    "name": "Wear Indicator",
+    "callout": 12,
+    "diagram": 1,
+    "price_usd": 42.42,
+    "notes": "Without gli. 288x25 rotor. GTI. Golf SportWagen. Without performance brakes. Golf Alltrack. Taos. With r.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-wear-indicator-8v0615437"
+   },
+   {
+    "oem": "5C0615301D",
+    "oem_display": "5C0 615 301 D",
+    "name": "Rotor",
+    "callout": 13,
+    "diagram": 1,
+    "price_usd": 86.04,
+    "notes": "",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-rotor-front-5c0615301d"
+   },
+   {
+    "oem": "5QM615601E",
+    "oem_display": "5QM 615 601 E",
+    "name": "Disc Brake Rotor",
+    "callout": 13,
+    "diagram": 1,
+    "price_usd": 81.03,
+    "notes": "Awd. Golf.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-rotor-5qm615601e"
+   },
+   {
+    "oem": "N10648301",
+    "oem_display": "N 106 483 01",
+    "name": "Rotor Screw",
+    "callout": 14,
+    "diagram": 1,
+    "price_usd": 2.03,
+    "notes": "",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-rotor-screw-n10648301"
+   },
+   {
+    "oem": "5Q0615311G",
+    "oem_display": "5Q0 615 311 G",
+    "name": "Splash Shield",
+    "callout": 15,
+    "diagram": 1,
+    "price_usd": 58.24,
+    "notes": "",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-splash-shield-5q0615311g"
+   },
+   {
+    "oem": "5Q0615312G",
+    "oem_display": "5Q0 615 312 G",
+    "name": "Splash Shield",
+    "callout": 15,
+    "diagram": 1,
+    "price_usd": 58.24,
+    "notes": "",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-splash-shield-5q0615312g"
+   },
+   {
+    "oem": "N91073301",
+    "oem_display": "N 910 733 01",
+    "name": "Splash Shield Bolt",
+    "callout": 16,
+    "diagram": 1,
+    "price_usd": 0.33,
+    "notes": "From 07/29/2024. Suspension code: g01 or g04 340x30mm. All wheel drive, brake code: 1kx. Suspension code: g01 or g04, 306x26mm. Rear wheel drive. Front wheel drive. All wheel drive, brake code: 1kz.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-splash-shield-bolt-n91073301"
+   },
+   {
+    "oem": "5QM611701C",
+    "oem_display": "5QM 611 701 C",
+    "name": "Brake Hose",
+    "callout": 17,
+    "diagram": 1,
+    "price_usd": 35.76,
+    "notes": "Without r.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-brake-hose-5qm611701c"
+   },
+   {
+    "oem": "191611715",
+    "oem_display": "191 611 715",
+    "name": "Brake Hose Retainer Spring",
+    "callout": 18,
+    "diagram": 1,
+    "price_usd": 4.87,
+    "notes": "",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-brake-hydraulic-hose-lock-clip-191611715"
+   },
+   {
+    "oem": "5Q0611841A",
+    "oem_display": "5Q0 611 841 A",
+    "name": "Brake Hose Holder",
+    "callout": 19,
+    "diagram": 1,
+    "price_usd": 8.85,
+    "notes": "Without gli. 288x25 rotor. Brake hose,holder. 312x25 rotor. 340X30 MM. lower. With GLI. lower. With performance brakes. 312X25 MM. lower. With r. Suspension code: g01 or g04, 306x26mm.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-brake-hydraulic-line-bracket-5q0611841a"
+   },
+   {
+    "oem": "5Q0611842B",
+    "oem_display": "5Q0 611 842 B",
+    "name": "Brake Hose Holder",
+    "callout": 19,
+    "diagram": 1,
+    "price_usd": 9.72,
+    "notes": "Without gli. 288x25 rotor. Brake hose,holder. 312x25 rotor. 340X30 MM. lower. With GLI. lower. With performance brakes. 312X25 MM. lower. With r. Suspension code: g01 or g04, 306x26mm.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-brake-hydraulic-line-bracket-5q0611842b"
+   },
+   {
+    "oem": "WHT000237",
+    "oem_display": "WHT 000 237",
+    "name": "Hub & Bearing Mount Bolt",
+    "callout": 2,
+    "diagram": 1,
+    "price_usd": 9.47,
+    "notes": "288x25 rotor. 312x25 rotor. Without performance brakes. 312x25 mm. With r. With gli, to 10/14/2019.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-hub-and-bearing-mount-bolt-wht000237"
+   },
+   {
+    "oem": "5Q0611845B",
+    "oem_display": "5Q0 611 845 B",
+    "name": "Brake Hose Bracket",
+    "callout": 20,
+    "diagram": 1,
+    "price_usd": 7.49,
+    "notes": "",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-brake-hydraulic-line-bracket-5q0611845b"
+   },
+   {
+    "oem": "5Q0611846B",
+    "oem_display": "5Q0 611 846 B",
+    "name": "Brake Hose Bracket",
+    "callout": 20,
+    "diagram": 1,
+    "price_usd": 7.49,
+    "notes": "Outer rail,rear bracket. Without gli. 288x25 rotor. Brake hose,bracket. 340X30 MM. upper. With GLI. upper. With performance brakes. 312X25 MM. upper. With r. Suspension code: g01 or g04, 306x26mm.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-brake-hydraulic-line-bracket-5q0611846b"
+   },
+   {
+    "oem": "WHT003860B",
+    "oem_display": "WHT 003 860 B",
+    "name": "ABS Sensor",
+    "callout": 21,
+    "diagram": 1,
+    "price_usd": 32.86,
+    "notes": "Without r. 340x30 mm.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wht003860b"
+   },
+   {
+    "oem": "WHT003861B",
+    "oem_display": "WHT 003 861 B",
+    "name": "ABS Sensor",
+    "callout": 21,
+    "diagram": 1,
+    "price_usd": 113.11,
+    "notes": "Without r. 340x30 mm.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wht003861b"
+   },
+   {
+    "oem": "N10546403",
+    "oem_display": "N 105 464 03",
+    "name": "ABS Sensor Bolt",
+    "callout": 22,
+    "diagram": 1,
+    "price_usd": 0.41,
+    "notes": "",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-sensor-bolt-n10546403"
+   },
+   {
+    "oem": "5G0927903AA",
+    "oem_display": "5G0 927 903 AA",
+    "name": "ABS Sensor Wire",
+    "callout": 23,
+    "diagram": 1,
+    "price_usd": 181.86,
+    "notes": "Exc.Brake Wear Sensor Harness. 288x25 rotor. Exc.Electronic Controlled Suspension. With adaptive lamps. With gli, without damper control. Without r, without e-Golf. Without performance brakes.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wiring-harness-5g0927903aa"
+   },
+   {
+    "oem": "5G0927903S",
+    "oem_display": "5G0 927 903 S",
+    "name": "ABS Sensor Wire",
+    "callout": 23,
+    "diagram": 1,
+    "price_usd": 165.23,
+    "notes": "288x25 rotor. Without r, without e-Golf. Exc.Electronic Controlled Suspension. Exc.Adaptive Headlight System. Without performance brakes. With performance brakes, code 2h5. Without adaptive lamps. With gli, without damper control.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wiring-harness-5g0927903s"
+   },
+   {
+    "oem": "5G0927903AH",
+    "oem_display": "5G0 927 903 AH",
+    "name": "ABS Wheel Speed Sensor Wiring Harness",
+    "callout": 23,
+    "diagram": 1,
+    "price_usd": 130.86,
+    "notes": "Incl.Brake Wear Sensor Harness. Exc.Electronic Controlled Suspension. Without r, without e-Golf. Without performance brakes.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wiring-harness-5g0927903ah"
+   },
+   {
+    "oem": "5G0927904AQ",
+    "oem_display": "5G0 927 904 AQ",
+    "name": "ABS Wheel Speed Sensor Wiring Harness",
+    "callout": 23,
+    "diagram": 1,
+    "price_usd": 146.38,
+    "notes": "Exc.Adaptive Headlight System. Fwd, 272x10 mm. Without awd, without e-Golf. Exc.Electronic Controlled Suspension. Exc.Automatic Headlight Range Control Dynamic. Without performance brakes.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wiring-harness-5g0927904aq"
+   },
+   {
+    "oem": "5G0927904BB",
+    "oem_display": "5G0 927 904 BB",
+    "name": "ABS Wheel Speed Sensor Wiring Harness",
+    "callout": 23,
+    "diagram": 1,
+    "price_usd": 146.38,
+    "notes": "Fwd, 272x10 mm. Without awd, without e-Golf. Without performance brakes. Exc.Electronic Controlled Suspension.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wiring-harness-5g0927904bb"
+   },
+   {
+    "oem": "WHT005437A",
+    "oem_display": "WHT 005 437 A",
+    "name": "Axle Bolt",
+    "callout": 3,
+    "diagram": 1,
+    "price_usd": 2.55,
+    "notes": "To 06/11/2018. Awd. Without r.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-axle-bolt-wht005437a"
+   },
+   {
+    "oem": "5QM615123",
+    "oem_display": "5QM 615 123",
+    "name": "Caliper",
+    "callout": 4,
+    "diagram": 1,
+    "price_usd": 276.55,
+    "notes": "288x25 rotor. Jetta. Without red caliper. To 9/30/20. Left. Without r, without e-Golf. Golf Alltrack. To 09/30/2020. From 07/01/2014.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-5qm615123"
+   },
+   {
+    "oem": "5QM615124",
+    "oem_display": "5QM 615 124",
+    "name": "Caliper",
+    "callout": 4,
+    "diagram": 1,
+    "price_usd": 311.48,
+    "notes": "288x25 rotor. Jetta. Without red caliper. To 9/30/20. Right. Without r, without e-Golf. Golf Alltrack. To 09/30/2020. From 07/01/2014.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-5qm615124"
+   },
+   {
+    "oem": "5QM615424A",
+    "oem_display": "5QM 615 424 A",
+    "name": "Disc Brake Caliper",
+    "callout": 4,
+    "diagram": 1,
+    "price_usd": 190.96,
+    "notes": "Passat. Right. Fwd, 272x10 mm. From 07/01/2014. Without red. Golf. To 06/30/2014.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-5qm615424a"
+   },
+   {
+    "oem": "N90948802",
+    "oem_display": "N 909 488 02",
+    "name": "Caliper Mount Bolt",
+    "callout": 5,
+    "diagram": 1,
+    "price_usd": 6.88,
+    "notes": "Without r. Without gli. 288x25 rotor. To 09/28/2020.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-bracket-mounting-bolt-n90948802"
+   },
+   {
+    "oem": "1K0615273B",
+    "oem_display": "1K0 615 273 B",
+    "name": "Bleeder Valve",
+    "callout": 6,
+    "diagram": 1,
+    "price_usd": 19.51,
+    "notes": "",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-bleeder-valve-1k0615273b"
+   },
+   {
+    "oem": "4H0611483",
+    "oem_display": "4H0 611 483",
+    "name": "Bleeder Valve Dust Cap",
+    "callout": 7,
+    "diagram": 1,
+    "price_usd": 7.49,
+    "notes": "",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-bleeder-valve-dust-cap-4h0611483"
+   },
+   {
+    "oem": "5QM615125",
+    "oem_display": "5QM 615 125",
+    "name": "Caliper Mount",
+    "callout": 8,
+    "diagram": 1,
+    "price_usd": 252.29,
+    "notes": "Incl.Disc Brake Caliper Guide Pin. 288x25 rotor. Without r, without e-Golf. To 09/30/2020. From 07/01/2014.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-bracket-5qm615125"
+   },
+   {
+    "oem": "5QM615126",
+    "oem_display": "5QM 615 126",
+    "name": "Caliper Mount",
+    "callout": 8,
+    "diagram": 1,
+    "price_usd": 249.62,
+    "notes": "Incl.Disc Brake Caliper Guide Pin. 288x25 rotor. Without r, without e-Golf. To 09/30/2020. From 07/01/2014.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-bracket-5qm615126"
+   },
+   {
+    "oem": "WHT010085",
+    "oem_display": "WHT 010 085",
+    "name": "Caliper Mount Mount Bolt",
+    "callout": 9,
+    "diagram": 1,
+    "price_usd": 4.58,
+    "notes": "This OEM Volkswagen bolt, part number WHT-010-085, is a genuine replacement for Volkswagen models. It helps secure the brake caliper to the caliper bracket. This outer mount pin can be used front or rear, on either the left or the right. It's a direct replacement for part numbers 8E0-615-141, WHT-003-250, and WHT-003-252.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-pin-bolt-wht010085"
+   }
+  ]
+ },
+ {
+  "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas/brakes--brake-components",
+  "title": "Brake Components for 2019 Volkswagen Golf Alltrack",
+  "diagrams": [
+   {
+    "n": 1,
+    "name": "Hub & Bearing",
+    "image": "https://cdn-illustrations.revolutionparts.io/strapr1/ac912a4fae9d5fc1595213a306c6aef8/4fa1d3a10424350117caa8c9c07d0447.png",
+    "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas/brakes--brake-components?assembly=1"
+   },
+   {
+    "n": 2,
+    "name": "Hub & Bearing",
+    "image": "https://cdn-illustrations.revolutionparts.io/strapr1/d59a2d8e8e932a8ce7c521769bf403f1/7c255c3b23ebc8a8c7b2941b84948f46.png",
+    "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas/brakes--brake-components?assembly=2"
+   }
+  ],
+  "parts": [
+   {
+    "oem": "8V0498625",
+    "oem_display": "8V0 498 625",
+    "name": "Hub & Bearing",
+    "callout": 1,
+    "diagram": 1,
+    "price_usd": 127.34,
+    "notes": "80mm. Part has related Components that cannot be reused/ reinstalled mount bolt and axle bolt. Wheel Bearing and Hub Assembly. Wheel Hub. Amplifier. Front. 288X25 Rotor. E-Golf. Golf. Golf AllTrack. Golf Sportwagen. w/o R. w/o r. Golf, e-Golf. 288x25 Rotor. Golf AllTrack. Golf SportWagen.",
+    "fits": "AllTrack, e-Golf, Golf, SportWagen",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-hub-and-bearing-8v0498625"
+   },
+   {
+    "oem": "7N0698647A",
+    "oem_display": "7N0 698 647 A",
+    "name": "Caliper Mount Bushing Kit",
+    "callout": 10,
+    "diagram": 1,
+    "price_usd": 6.53,
+    "notes": "All Required. 288x25 rotor. 340x30mm. 340x30 mm. With gli. With performance brakes. From 09/28/2020. 2021-22. With r. Bolt,Sleeve.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-pin-boot-7n0698647a"
+   },
+   {
+    "oem": "5Q0698151M",
+    "oem_display": "5Q0 698 151 M",
+    "name": "Brake Pads",
+    "callout": 11,
+    "diagram": 1,
+    "price_usd": 69.75,
+    "notes": "A set of Disc brake pads for a vehicle's Disc brake caliper brake system. Exc.Performance Package. From 09/22/2014. From 10/01/2020. Incl.Disc Brake Pad Wear Sensor. To 09/30/2020. Lining. Disc Pad Set. Front. Rear. Wear indicator.",
+    "fits": "Alltrack, Golf, G ...",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-brake-lining-5q0698151m"
+   },
+   {
+    "oem": "8V0615437",
+    "oem_display": "8V0 615 437",
+    "name": "Wear Indicator",
+    "callout": 12,
+    "diagram": 1,
+    "price_usd": 42.42,
+    "notes": "Without gli. 288x25 rotor. GTI. Golf SportWagen. Without performance brakes. Golf Alltrack. Taos. With r.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-wear-indicator-8v0615437"
+   },
+   {
+    "oem": "5C0615301D",
+    "oem_display": "5C0 615 301 D",
+    "name": "Rotor",
+    "callout": 13,
+    "diagram": 1,
+    "price_usd": 86.04,
+    "notes": "",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-rotor-front-5c0615301d"
+   },
+   {
+    "oem": "N10648301",
+    "oem_display": "N 106 483 01",
+    "name": "Rotor Screw",
+    "callout": 14,
+    "diagram": 1,
+    "price_usd": 2.03,
+    "notes": "",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-rotor-screw-n10648301"
+   },
+   {
+    "oem": "5Q0615311G",
+    "oem_display": "5Q0 615 311 G",
+    "name": "Splash Shield",
+    "callout": 15,
+    "diagram": 1,
+    "price_usd": 58.24,
+    "notes": "",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-splash-shield-5q0615311g"
+   },
+   {
+    "oem": "5Q0615312G",
+    "oem_display": "5Q0 615 312 G",
+    "name": "Splash Shield",
+    "callout": 15,
+    "diagram": 1,
+    "price_usd": 58.24,
+    "notes": "",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-splash-shield-5q0615312g"
+   },
+   {
+    "oem": "N91073301",
+    "oem_display": "N 910 733 01",
+    "name": "Splash Shield Bolt",
+    "callout": 16,
+    "diagram": 1,
+    "price_usd": 0.33,
+    "notes": "From 07/29/2024. Suspension code: g01 or g04 340x30mm. All wheel drive, brake code: 1kx. Suspension code: g01 or g04, 306x26mm. Rear wheel drive. Front wheel drive. All wheel drive, brake code: 1kz.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-splash-shield-bolt-n91073301"
+   },
+   {
+    "oem": "5QM611701C",
+    "oem_display": "5QM 611 701 C",
+    "name": "Brake Hose",
+    "callout": 17,
+    "diagram": 1,
+    "price_usd": 35.76,
+    "notes": "Without r.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-brake-hose-5qm611701c"
+   },
+   {
+    "oem": "191611715",
+    "oem_display": "191 611 715",
+    "name": "Brake Hose Retainer Spring",
+    "callout": 18,
+    "diagram": 1,
+    "price_usd": 4.87,
+    "notes": "",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-brake-hydraulic-hose-lock-clip-191611715"
+   },
+   {
+    "oem": "5Q0611841A",
+    "oem_display": "5Q0 611 841 A",
+    "name": "Brake Hose Holder",
+    "callout": 19,
+    "diagram": 1,
+    "price_usd": 8.85,
+    "notes": "Without gli. 288x25 rotor. Brake hose,holder. 312x25 rotor. 340X30 MM. lower. With GLI. lower. With performance brakes. 312X25 MM. lower. With r. Suspension code: g01 or g04, 306x26mm.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-brake-hydraulic-line-bracket-5q0611841a"
+   },
+   {
+    "oem": "5Q0611842B",
+    "oem_display": "5Q0 611 842 B",
+    "name": "Brake Hose Holder",
+    "callout": 19,
+    "diagram": 1,
+    "price_usd": 9.72,
+    "notes": "Without gli. 288x25 rotor. Brake hose,holder. 312x25 rotor. 340X30 MM. lower. With GLI. lower. With performance brakes. 312X25 MM. lower. With r. Suspension code: g01 or g04, 306x26mm.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-brake-hydraulic-line-bracket-5q0611842b"
+   },
+   {
+    "oem": "WHT000237",
+    "oem_display": "WHT 000 237",
+    "name": "Hub & Bearing Mount Bolt",
+    "callout": 2,
+    "diagram": 1,
+    "price_usd": 9.47,
+    "notes": "288x25 rotor. 312x25 rotor. Without performance brakes. 312x25 mm. With r. With gli, to 10/14/2019.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-hub-and-bearing-mount-bolt-wht000237"
+   },
+   {
+    "oem": "5Q0611845B",
+    "oem_display": "5Q0 611 845 B",
+    "name": "Brake Hose Bracket",
+    "callout": 20,
+    "diagram": 1,
+    "price_usd": 7.49,
+    "notes": "",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-brake-hydraulic-line-bracket-5q0611845b"
+   },
+   {
+    "oem": "5Q0611846B",
+    "oem_display": "5Q0 611 846 B",
+    "name": "Brake Hose Bracket",
+    "callout": 20,
+    "diagram": 1,
+    "price_usd": 7.49,
+    "notes": "Outer rail,rear bracket. Without gli. 288x25 rotor. Brake hose,bracket. 340X30 MM. upper. With GLI. upper. With performance brakes. 312X25 MM. upper. With r. Suspension code: g01 or g04, 306x26mm.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-brake-hydraulic-line-bracket-5q0611846b"
+   },
+   {
+    "oem": "WHT003860B",
+    "oem_display": "WHT 003 860 B",
+    "name": "ABS Sensor",
+    "callout": 21,
+    "diagram": 1,
+    "price_usd": 32.86,
+    "notes": "Without r. 340x30 mm.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wht003860b"
+   },
+   {
+    "oem": "WHT003861B",
+    "oem_display": "WHT 003 861 B",
+    "name": "ABS Sensor",
+    "callout": 21,
+    "diagram": 1,
+    "price_usd": 113.11,
+    "notes": "Without r. 340x30 mm.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wht003861b"
+   },
+   {
+    "oem": "N10546403",
+    "oem_display": "N 105 464 03",
+    "name": "ABS Sensor Bolt",
+    "callout": 22,
+    "diagram": 1,
+    "price_usd": 0.41,
+    "notes": "",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-sensor-bolt-n10546403"
+   },
+   {
+    "oem": "5G0927903AA",
+    "oem_display": "5G0 927 903 AA",
+    "name": "ABS Sensor Wire",
+    "callout": 23,
+    "diagram": 1,
+    "price_usd": 181.86,
+    "notes": "Exc.Brake Wear Sensor Harness. 288x25 rotor. Exc.Electronic Controlled Suspension. With adaptive lamps. With gli, without damper control. Without r, without e-Golf. Without performance brakes.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wiring-harness-5g0927903aa"
+   },
+   {
+    "oem": "5G0927903S",
+    "oem_display": "5G0 927 903 S",
+    "name": "ABS Sensor Wire",
+    "callout": 23,
+    "diagram": 1,
+    "price_usd": 165.23,
+    "notes": "288x25 rotor. Without r, without e-Golf. Exc.Electronic Controlled Suspension. Exc.Adaptive Headlight System. Without performance brakes. With performance brakes, code 2h5. Without adaptive lamps. With gli, without damper control.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wiring-harness-5g0927903s"
+   },
+   {
+    "oem": "WHT005437A",
+    "oem_display": "WHT 005 437 A",
+    "name": "Axle Bolt",
+    "callout": 3,
+    "diagram": 1,
+    "price_usd": 2.55,
+    "notes": "To 06/11/2018. Awd. Without r.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-axle-bolt-wht005437a"
+   },
+   {
+    "oem": "5QM615123",
+    "oem_display": "5QM 615 123",
+    "name": "Caliper",
+    "callout": 4,
+    "diagram": 1,
+    "price_usd": 276.55,
+    "notes": "288x25 rotor. Jetta. Without red caliper. To 9/30/20. Left. Without r, without e-Golf. Golf Alltrack. To 09/30/2020. From 07/01/2014.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-5qm615123"
+   },
+   {
+    "oem": "5QM615124",
+    "oem_display": "5QM 615 124",
+    "name": "Caliper",
+    "callout": 4,
+    "diagram": 1,
+    "price_usd": 311.48,
+    "notes": "288x25 rotor. Jetta. Without red caliper. To 9/30/20. Right. Without r, without e-Golf. Golf Alltrack. To 09/30/2020. From 07/01/2014.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-5qm615124"
+   },
+   {
+    "oem": "8V0615123D",
+    "oem_display": "8V0 615 123 D",
+    "name": "Disc Brake Caliper",
+    "callout": 4,
+    "diagram": 1,
+    "price_usd": 279.46,
+    "notes": "312x25 rotor. Taos. 2021-22. 312x25 mm. Passat. Left. From 09/28/2020.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-8v0615123d"
+   },
+   {
+    "oem": "8V0615124D",
+    "oem_display": "8V0 615 124 D",
+    "name": "Disc Brake Caliper",
+    "callout": 4,
+    "diagram": 1,
+    "price_usd": 308.57,
+    "notes": "312x25 rotor. Taos. 2021-22. 312x25 mm. Passat. Right. From 09/28/2020.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-8v0615124d"
+   },
+   {
+    "oem": "N90948802",
+    "oem_display": "N 909 488 02",
+    "name": "Caliper Mount Bolt",
+    "callout": 5,
+    "diagram": 1,
+    "price_usd": 6.88,
+    "notes": "Without r. Without gli. 288x25 rotor. To 09/28/2020.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-bracket-mounting-bolt-n90948802"
+   },
+   {
+    "oem": "1K0615273B",
+    "oem_display": "1K0 615 273 B",
+    "name": "Bleeder Valve",
+    "callout": 6,
+    "diagram": 1,
+    "price_usd": 19.51,
+    "notes": "",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-bleeder-valve-1k0615273b"
+   },
+   {
+    "oem": "4H0611483",
+    "oem_display": "4H0 611 483",
+    "name": "Bleeder Valve Dust Cap",
+    "callout": 7,
+    "diagram": 1,
+    "price_usd": 7.49,
+    "notes": "",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-bleeder-valve-dust-cap-4h0611483"
+   },
+   {
+    "oem": "5QM615125",
+    "oem_display": "5QM 615 125",
+    "name": "Caliper Mount",
+    "callout": 8,
+    "diagram": 1,
+    "price_usd": 252.29,
+    "notes": "Incl.Disc Brake Caliper Guide Pin. 288x25 rotor. Without r, without e-Golf. To 09/30/2020. From 07/01/2014.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-bracket-5qm615125"
+   },
+   {
+    "oem": "5QM615126",
+    "oem_display": "5QM 615 126",
+    "name": "Caliper Mount",
+    "callout": 8,
+    "diagram": 1,
+    "price_usd": 249.62,
+    "notes": "Incl.Disc Brake Caliper Guide Pin. 288x25 rotor. Without r, without e-Golf. To 09/30/2020. From 07/01/2014.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-bracket-5qm615126"
+   },
+   {
+    "oem": "5Q0615125A",
+    "oem_display": "5Q0 615 125 A",
+    "name": "Disc Brake Caliper Bracket",
+    "callout": 8,
+    "diagram": 1,
+    "price_usd": 211.81,
+    "notes": "Incl.Disc Brake Caliper Guide Pin. 312x25 rotor. From 09/28/2020. 2021-22. 312x25 mm. To 05/01/2022. From 05/02/2022.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-bracket-5q0615125a"
+   },
+   {
+    "oem": "5Q0615126A",
+    "oem_display": "5Q0 615 126 A",
+    "name": "Disc Brake Caliper Bracket",
+    "callout": 8,
+    "diagram": 1,
+    "price_usd": 211.81,
+    "notes": "Incl.Disc Brake Caliper Guide Pin. 312x25 rotor. From 09/28/2020. 2021-22. 312x25 mm. To 05/01/2022. From 05/02/2022.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-bracket-5q0615126a"
+   },
+   {
+    "oem": "WHT010085",
+    "oem_display": "WHT 010 085",
+    "name": "Caliper Mount Mount Bolt",
+    "callout": 9,
+    "diagram": 1,
+    "price_usd": 4.58,
+    "notes": "This OEM Volkswagen bolt, part number WHT-010-085, is a genuine replacement for Volkswagen models. It helps secure the brake caliper to the caliper bracket. This outer mount pin can be used front or rear, on either the left or the right. It's a direct replacement for part numbers 8E0-615-141, WHT-003-250, and WHT-003-252.",
+    "fits": "",
+    "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-pin-bolt-wht010085"
+   }
+  ]
+ }
+]
