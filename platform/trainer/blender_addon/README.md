@@ -68,9 +68,12 @@ everything again. One broken file never stops the batch.
   Polo), picked as lines that run at least five-sixths of the door's height,
   so a door handle is not mistaken for one. Each door skin is grown from its
   middle across smooth edges only, so it stops at the panel's own edges, and
-  is cut at the measured line only where no edge stops it. Its window goes
-  with it as a whole pane, the door card and handle as loose pieces inside
-  it, and a dark inner panel backs the skin. A door that comes out too big,
+  is cut at the measured line only where no edge stops it. Everything in the
+  door's aperture goes with it: window frame, glass, belt moulding, mirror
+  and the door card, which may sit 25 cm inside the skin and is told from a
+  seat by being thin and facing into the cabin. Above the glass line it takes
+  a whole frame or none — one upright of a surround shared by both doors
+  stays on the body. A dark inner panel backs the skin. A door that comes out too big,
   too small or reaching above the glass stays shut together with its twin,
   and the report's `door_cutter` says why. Measured 2026-10-06 on the Focus
   (4 doors), the Polo (4 doors) and the Sportage (front pair; the rear pair

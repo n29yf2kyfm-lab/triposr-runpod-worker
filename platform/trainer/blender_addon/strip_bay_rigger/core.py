@@ -1260,6 +1260,15 @@ def _cut_doors(objs, K, wheels, lo, hi, rep):
     if not Rr < seed_z['r'] < Bp:
         seed_z['r'] = (Rr + Bp) / 2
     groups, area, clamped, top = {}, {}, [], {}
+    skin_x = {}
+    for o in src:
+        for i, c, n, a, m in faces(o):
+            sd = 1 if c.x > cx else -1
+            if GLASS_MAT.search(m) or sd * n.x <= .7 or not ysill < c.y < ytop:
+                continue
+            for d in ('f', 'r'):
+                if abs(c.z - seed_z[d]) < .06 * wb and abs(c.y - 1.45 * r) < .35 * r:
+                    skin_x[(sd, d)] = max(skin_x.get((sd, d), -1e9), sd * c.x)
     for o in src:
         mw = o.matrix_world
         n3 = mw.to_3x3().inverted().transposed()
@@ -1303,8 +1312,12 @@ def _cut_doors(objs, K, wheels, lo, hi, rep):
                          and abs(info_f[f.index][0].y - ym) < .35 * r]
                 if not seeds:
                     continue
-                mx = max(sd * info_f[f.index][0].x for f in seeds)
-                seeds = [f for f in seeds if sd * info_f[f.index][0].x > mx - .03 * W]
+                # seeds only on the car's OUTER skin, measured over every mesh:
+                # taken per mesh, a seat's outward-facing side was "the door"
+                # of the seat mesh, and the Polo's doors carried seat bolsters
+                seeds = [f for f in seeds if sd * info_f[f.index][0].x > skin_x.get((sd, d), 1e9) - .03 * W]
+                if not seeds:
+                    continue
                 # the door's paint: the material covering most of the seed area
                 ms = {}
                 for f in seeds:
@@ -1454,6 +1467,14 @@ def _adopt_into_doors(parts, rep):
                 hubs.append(((w0.z + w1.z) / 2, (w1.y - w0.y) / 2))
         cut = info.get(f'split_{side}', {}).get('cut_z')
         m = .02
+        if cutter:
+            allv = [v for os_ in parts.values() for o in os_ if len(o.data.vertices) for v in wv(o)]
+            c0, c1 = bbox(allv)
+            Wc, roof = c1.x - c0.x, c1.y - .02 * (c1.y - c0.y)
+            sx = 1 if side == 'l' else -1
+            # the door card plane: the innermost of the door's own pieces
+            outer = {q: max(abs(v.x) for o in parts[q] for v in wv(o)) for q in dps}
+            tops = rep['door_cutter'].get('skin_top', {})
         for other in ('glazing', 'body', 'cabin'):
             for o in list(parts.get(other, [])):
                 if len(o.data.polygons) < 2:
@@ -1462,28 +1483,53 @@ def _adopt_into_doors(parts, rep):
                 grp = {p: [] for p in dps}
                 for c in _islands(o):
                     cb0, cb1 = c[0]
-                    if not all(b0[i] - m <= cb0[i] and cb1[i] <= b1[i] + m for i in range(3)):
-                        continue
                     if cutter:
-                        # a cut door takes only pieces that fit inside ONE door:
-                        # the Focus's window surround runs along both doors as one
-                        # piece, and splitting it face by face left black shards
-                        # and nothing standing above the door's paint but its glass
-                        # (the Focus's left window frame came along, the right did not)
-                        tops = rep['door_cutter'].get('skin_top', {})
-                        p = next((q for q in dps if all(boxes[q][0][i] - m <= cb0[i] and cb1[i] <= boxes[q][1][i] + m
-                                                        for i in range(3))
-                                  and (other == 'glazing' or cb1.y <= tops.get(q, 1e9) + m
-                                       # a thin strip along the door's top (the Polo's
-                                       # shoulder) is the door's, a window frame is not
-                                       or (cb1.y - cb0.y < .06 * (b1.y - b0.y) and cb0.y >= tops.get(q, 1e9) - m))), None)
+                        # A CUT door takes everything in its APERTURE: centred in
+                        # the door's length, sill to roof rail, in the outer slab
+                        # of the car. The window frame, glass and belt moulding
+                        # are loose pieces that overhang the shut line by a few
+                        # cm; a must-fit-in-the-box rule left the Polo's on the
+                        # body as a bar floating across the opening.
+                        mid = (cb0 + cb1) / 2
+                        p = None
+                        for q in dps:
+                            q0, q1 = boxes[q]
+                            ln = q1.z - q0.z
+                            if not (q0.z - m <= mid.z <= q1.z + m and cb0.z >= q0.z - .12 * ln
+                                    and cb1.z <= q1.z + .12 * ln and cb0.y >= q0.y - m and cb1.y <= roof):
+                                continue
+                            # outer slab: not inboard of the door card by more
+                            # than a little, and nothing crossing the car
+                            inb = min(abs(cb0.x), abs(cb1.x))
+                            if sx * cb0.x < 0 or inb < outer[q] - .2 * Wc:
+                                continue
+                            # DEEP and below the glass, a piece must be a door
+                            # card: thin across the car and facing INTO the cabin.
+                            # The Polo's card sits 24 cm inside the skin, as deep
+                            # as the outward-facing side of a seat.
+                            # ABOVE the glass line a door takes its glass, its
+                            # mirror (standing proud of the skin) or a frame long
+                            # enough to be the frame — never one upright of a
+                            # window surround that runs along both doors: alone it
+                            # stands off the open door like a fin (the Focus)
+                            if (other != 'glazing' and cb0.y >= tops.get(q, 1e9) - m
+                                    and cb1.z - cb0.z < .4 * ln
+                                    and max(abs(cb0.x), abs(cb1.x)) <= outer[q] + .03 * Wc):
+                                continue
+                            if inb < outer[q] - .08 * Wc and cb0.y < tops.get(q, 1e9) - m:
+                                if cb1.x - cb0.x > .12 * Wc or facing(o, c[2], sx) > -.1:
+                                    continue
+                            p = q
+                            break
                         # never anything round a wheel: brake shields and arch
                         # liners sit inside a rear door's box (the Polo's rode off)
-                        mid = (cb0 + cb1) / 2
                         if p and not any((mid.y - wr_) ** 2 + (mid.z - wz_) ** 2 < (1.35 * wr_) ** 2
                                          for wz_, wr_ in hubs):
                             grp[p] += c[2]
-                    elif cut is not None and len(dps) == 2:
+                        continue
+                    if not all(b0[i] - m <= cb0[i] and cb1[i] <= b1[i] + m for i in range(3)):
+                        continue
+                    if cut is not None and len(dps) == 2:
                         for i in c[2]:
                             z = G(mw @ o.data.polygons[i].center).z
                             grp['door_f' + side if z > cut else 'door_r' + side].append(i)
@@ -1492,13 +1538,35 @@ def _adopt_into_doors(parts, rep):
                         p = min(dps, key=lambda q: abs((boxes[q][0].z + boxes[q][1].z) / 2 - cz))
                         grp[p] += c[2]
                 todo = [(p, g) for p, g in grp.items() if g]
-                if not todo or sum(len(g) for _, g in todo) >= len(o.data.polygons):
+                if not todo:
+                    continue
+                if len(todo) == 1 and len(todo[0][1]) >= len(o.data.polygons):
+                    # the whole object is the door's: move it as it is
+                    parts[other].remove(o)
+                    parts[todo[0][0]].append(o)
+                    moved += len(todo[0][1])
+                    continue
+                if sum(len(g) for _, g in todo) >= len(o.data.polygons) and not cutter:
                     continue
                 for (p, g), new in zip(todo, _lift_many(o, [g for _, g in todo])):
                     new['sb_chain'] = o['sb_chain']
                     parts[p].append(new)
                     moved += len(g)
     info['adopted_faces'] = moved
+
+
+def facing(o, fidx, sx):
+    """Area-weighted mean of a face set's normal across the car, signed so that
+    + is outward on side `sx` (+1 left, -1 right) and - is into the cabin."""
+    n3 = o.matrix_world.to_3x3().inverted().transposed()
+    num = den = 0.0
+    for i in fidx:
+        p = o.data.polygons[i]
+        n = G(n3 @ p.normal)
+        if n.length:
+            num += sx * n.normalized().x * p.area
+            den += p.area
+    return num / den if den else 0.0
 
 
 def _lift_panels(parts, paint, lo, hi, rep):
