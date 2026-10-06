@@ -1,0 +1,35 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electric-propulsion-system--battery",
+ "title": "Battery for 2019 Volkswagen Golf",
+ "diagrams": [],
+ "parts": [
+  {
+   "oem": "5QE915681N",
+   "oem_display": "5QE 915 681 N",
+   "oem_from": "printed",
+   "name": "Battery Charger",
+   "label": "High voltage. E-Golf.",
+   "callout": 5,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-battery-charger-5qe915681n) 7",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-battery-charger-5qe915681n"
+  },
+  {
+   "oem": "5QE915597BE",
+   "oem_display": "5QE 915 597 BE",
+   "oem_from": "printed",
+   "name": "Drive Motor Battery Pack",
+   "label": "Battery",
+   "callout": 7,
+   "diagram": 1,
+   "price_usd": 16174.44,
+   "msrp_usd": 18230.89,
+   "notes": "High voltage. without code es9. E-Golf.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-5qe915597be"
+  }
+ ]
+}
