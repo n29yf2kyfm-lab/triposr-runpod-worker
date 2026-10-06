@@ -1,5 +1,41 @@
 [
  {
+  "slug": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+  "year": 1999,
+  "make": "Volkswagen",
+  "model": "Golf",
+  "trim": "GL",
+  "engine": "2.0L L4 gas",
+  "market": "US"
+ },
+ {
+  "slug": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
+  "year": 2005,
+  "make": "Volkswagen",
+  "model": "Golf",
+  "trim": "GL",
+  "engine": "2.0L L4 gas",
+  "market": "US"
+ },
+ {
+  "slug": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+  "year": 2012,
+  "make": "Volkswagen",
+  "model": "Golf",
+  "trim": "Base",
+  "engine": "2.5L L5 gas",
+  "market": "US"
+ },
+ {
+  "slug": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+  "year": 2016,
+  "make": "Volkswagen",
+  "model": "Golf",
+  "trim": "S",
+  "engine": "1.8L L4 gas",
+  "market": "US"
+ },
+ {
   "slug": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
   "year": 2019,
   "make": "Volkswagen",
@@ -15,6 +51,15 @@
   "model": "Golf Alltrack",
   "trim": "S",
   "engine": "1.8L L4 gas",
+  "market": "US"
+ },
+ {
+  "slug": "v-2021-volkswagen-golf--tsi--1-4l-l4-gas",
+  "year": 2021,
+  "make": "Volkswagen",
+  "model": "Golf",
+  "trim": "TSI",
+  "engine": "1.4L L4 gas",
   "market": "US"
  }
 ]

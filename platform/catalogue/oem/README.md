@@ -47,7 +47,9 @@ dropped, never stored or logged.
 
 ## Status
 
-Pilot: the 2019 Golf S 1.4 TSI (22 categories) and 2019 Golf Alltrack
-(brakes). Scaling to 1995–2026 needs `FIRECRAWL_API_KEY` in the environment so
+Pilot: the 2019 Golf S 1.4 TSI (22 categories), front brakes for the
+1999, 2005, 2012, 2016 and 2021 Golf, and 2019 Golf Alltrack brakes —
+7 vehicles, 27 pages, 389 OEM numbers. Add pages with
+`ingest_firecrawl.py <saved Firecrawl results>` then `build_catalogue.py`. Scaling to 1995–2026 needs `FIRECRAWL_API_KEY` in the environment so
 the crawl can run as a script at the site's pace (~390 category pages per
 vehicle, plus one page per drawing).
