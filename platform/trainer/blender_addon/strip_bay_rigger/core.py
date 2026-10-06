@@ -1133,6 +1133,11 @@ def _find_doors(objs, K, wheels, lo, hi, rep):
 
 
 ANG = float(os.environ.get('SB_CUT_ANG', 40))
+# Two-door body styles. The rigger cannot tell a coupe from a hatch by shape,
+# and assuming four doors cut REAR doors into eight coupes and convertibles
+# (Jaguar E-type, BMW i8, MG Cyberster...). The caller says which it is via
+# SB_BODY — the catalogue's bodyStyle — and an unknown style keeps four.
+TWO_DOOR = re.compile(r'coupe|coupé|convertible|cabrio|roadster|spider|spyder|targa', re.I)
 GLASS_MAT = re.compile(r'glass|window|vitre|windscreen|windshield|lamp|light|lens|tyre|tire|rubber|chrome_?badge', re.I)
 
 
@@ -1255,9 +1260,15 @@ def _cut_doors(objs, K, wheels, lo, hi, rep):
         cand = [i for i in cand if hist[i] >= .6 * top_]
         return max(cand) if front else min(cand)
     kf = line(int(.50 * NB), int(.85 * NB), True)
-    kb = line(int(.20 * NB), (kf if kf is not None else int(.70 * NB)) - int(.22 * NB), False)
+    two = bool(TWO_DOOR.search(os.environ.get('SB_BODY', '')))
+    info['doors_expected'] = 2 if two else 4
+    if two:
+        # one LONG door: its rear edge is the rearmost line well behind the front
+        kb = line(int(.12 * NB), (kf if kf is not None else int(.70 * NB)) - int(.30 * NB), False)
+    else:
+        kb = line(int(.20 * NB), (kf if kf is not None else int(.70 * NB)) - int(.22 * NB), False)
     F = zat(kf) if kf is not None else zf - .33 * wb
-    Bp = zat(kb) if kb is not None else zf - .63 * wb
+    Bp = zat(kb) if kb is not None else zf - (.70 if two else .63) * wb
     Rr = zr + .045 * wb
     ev = {'front_edge': 'shut line' if kf is not None else 'proportion',
           'b_pillar': 'shut line' if kb is not None else 'proportion', 'rear_edge': 'proportion'}
@@ -1289,7 +1300,7 @@ def _cut_doors(objs, K, wheels, lo, hi, rep):
     # separate panels whose front edge sits 0.35 m ahead of the proportion
     # line, and a tight limit clamped them there with a saw-toothed edge.
     pad = .04 * wb
-    nom = {'f': (Bp, F), 'r': (Rr, Bp)}
+    nom = {'f': (Bp, F)} if two else {'f': (Bp, F), 'r': (Rr, Bp)}
     grow = {'f': (Bp - pad, zf - .9 * r), 'r': (Rr - pad, F)}
     seed_z = {'f': zf - .48 * wb, 'r': zf - .80 * wb}
     if not Bp < seed_z['f'] < F:
@@ -1403,7 +1414,7 @@ def _cut_doors(objs, K, wheels, lo, hi, rep):
     info['skin_top'] = {p: round(y, 4) for p, y in top.items()}
     want = {'f': (F - Bp) * 1.6 * r, 'r': (Bp - Rr) * 1.6 * r}     # a door is ~1.6 wheel radii tall below the glass
     info['skin_area_share'] = {p: round(area.get(p, 0) / want[p[5]], 2)
-                               for p in ('door_fl', 'door_rl', 'door_fr', 'door_rr')}
+                               for p in (('door_fl', 'door_fr') if two else ('door_fl', 'door_rl', 'door_fr', 'door_rr'))}
     # THE GATE. A door is cut only if it reads as a door: enough skin, not
     # absurdly much, below the glass line, and a clean outline. A failed door
     # stays welded shut — honest — rather than swinging a ragged slab.

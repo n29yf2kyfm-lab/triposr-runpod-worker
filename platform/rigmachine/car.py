@@ -87,8 +87,11 @@ def main():
         print(json.dumps({'status': 'no-match', 'why': summary['why']}))
         return 2
     extra = [a for a in args if a.startswith(('--size=', '--samples='))]
+    # the body style decides two doors or four when doors are cut from a welded body
+    # (the matched catalogue car's style first: it is that mesh that gets cut)
+    body = (res.get('vehicle') or {}).get('bodyStyle') or v.get('bodyStyle') or ''
     rc = subprocess.call([sys.executable, os.path.join(HERE, 'run.py'), glb, out, '--showcase',
-                          f'--engine={kind}', f'--mount={mount}'] + extra)
+                          f'--engine={kind}', f'--mount={mount}'] + extra, env=dict(os.environ, SB_BODY=body))
     rp = os.path.join(out, 'result.json')
     r = json.load(open(rp)) if os.path.exists(rp) else {'status': 'error'}
     r.update(summary)

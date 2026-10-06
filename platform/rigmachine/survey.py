@@ -21,7 +21,7 @@ CLI = os.path.join(HERE, '..', 'trainer', 'blender_addon', 'strip_bay_rigger', '
 lock = threading.Lock()
 
 
-def one(e, out):
+def one(e, out, body=''):
     aid = e['assetId']
     d = tempfile.mkdtemp(prefix='survey_')
     row = {'assetId': aid, 'make': e.get('make'), 'model': e.get('model')}
@@ -31,7 +31,8 @@ def one(e, out):
         os.makedirs(src)
         fetch(e['desktopGlbUrl'], os.path.join(src, aid + '.glb'))
         subprocess.run([os.environ.get('BLENDER_BIN', 'blender'), '-b', '--factory-startup', '--python', CLI,
-                        '--', src, os.path.join(d, 'out')], capture_output=True, timeout=900)
+                        '--', src, os.path.join(d, 'out')], capture_output=True, timeout=900,
+                       env=dict(os.environ, SB_BODY=body or ''))     # 2-door styles get two doors
         rp = os.path.join(d, 'out', aid + '.report.json')
         rep = json.load(open(rp)) if os.path.exists(rp) else {'error': 'no report (Blender crashed or timed out)'}
         p = rep.get('parts', {})
@@ -52,6 +53,19 @@ def one(e, out):
         with open(os.path.join(out, 'survey.jsonl'), 'a') as f:
             f.write(json.dumps(row) + '\n')
     return row
+
+
+PROPOSALS = os.path.join(HERE, '..', 'catalogue', 'proposals', 'body_style_approved.csv')
+_prop = None
+
+
+def body_style(e):
+    """The catalogue's bodyStyle, else the owner-approved proposal for it."""
+    global _prop
+    if _prop is None:
+        import csv
+        _prop = {r['assetId']: r['proposal'] for r in csv.DictReader(open(PROPOSALS))} if os.path.exists(PROPOSALS) else {}
+    return e.get('bodyStyle') or _prop.get(e['assetId'], '')
 
 
 def reason_class(r):
@@ -83,7 +97,7 @@ def main():
         todo = todo[:int(opt['limit'])]
     print(f'SURVEY {len(done)} already done, {len(todo)} to go', flush=True)
     with cf.ThreadPoolExecutor(int(opt.get('workers', 3))) as ex:
-        for i, r in enumerate(ex.map(lambda e: one(e, out), todo), 1):
+        for i, r in enumerate(ex.map(lambda e: one(e, out, body_style(e)), todo), 1):
             print(f'SURVEY [{i}/{len(todo)}] {r["status"]:8s} {r["assetId"]} {r.get("reason", "")[:70]}', flush=True)
     rows = [json.loads(l) for l in open(jl)]
     st = collections.Counter(r['status'] for r in rows)

@@ -32,7 +32,8 @@ def one(e, body, out, survey):
         fetch(e['desktopGlbUrl'], src)
         subprocess.run([os.environ.get('BLENDER_BIN', 'blender'), '-b', '--factory-startup', '--python',
                         os.path.join(HERE, 'rig_render.py'), '--', src, os.path.join(d, 'out'),
-                        '--only=open:fl', '--size=800x500', '--samples=14'], capture_output=True, timeout=1200)
+                        '--only=open:fl', '--size=800x500', '--samples=14'], capture_output=True, timeout=1200,
+                       env=dict(os.environ, SB_BODY=body or ''))
         rp = os.path.join(d, 'out', 'result.json')
         res = json.load(open(rp)) if os.path.exists(rp) else {'status': 'error', 'error': 'no result'}
         row['status'] = res.get('status')
