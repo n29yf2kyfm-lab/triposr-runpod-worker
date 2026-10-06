@@ -131,7 +131,7 @@ def _select_only(objs):
     separate and the glTF exporter read the REAL selection, not an override."""
     vl = bpy.context.view_layer
     for o in vl.objects:
-        if o.select_get():
+        if o is not None and o.select_get():
             o.select_set(False)
     for o in objs:
         o.select_set(True)
@@ -212,6 +212,14 @@ def convert(imported, rep, override=None):
         bpy.context.view_layer.update()
         rep['turn90'] = True
     wheels = [o for o in objs if K[o] == 'wheel']
+    if not wheels:
+        # Most "no wheels named" cars DO have wheels: the export named the
+        # pieces after their MATERIAL (`Object_21` carrying `Rubber_Rough`,
+        # `tire`, `Carro_Pneu`, `llanta`), so read the materials instead.
+        # Only reached when the names found nothing, so a car that rigs by
+        # name today cannot change.
+        _material_wheels(objs, K, rep)
+        wheels = [o for o in objs if K[o] == 'wheel']
     glass = [o for o in objs if K[o] == 'glazing']
     if not wheels:
         raise Refused('no wheels named')
@@ -239,12 +247,17 @@ def convert(imported, rep, override=None):
     if wf and wr:
         cues['wheel_names'] = 1 if centre(wf).z > centre(wr).z else -1
     if not cues:
+        rl = _red_lamp_end(objs, lo, hi)
+        if rl:
+            cues['red_tail_lamps'] = -rl            # the red end is the BACK, so the nose is the other end
+            rep['red_tail_lamps'] = rl
+    if not cues:
         raise Refused('cannot decide the nose: no bonnet/boot pair, no lamps, no front/rear wheel names '
                       'and no steering wheel')
     # PRIORITY, not a vote. The steering wheel is the WEAKEST cue: it sits
     # BEHIND the midpoint on a long-bonnet coupe (the GR Supra). The two ends
     # of the car outrank it, and must not contradict each other.
-    ends = [cues[k] for k in ('bonnet_vs_boot', 'head_vs_tail_lamps', 'wheel_names') if k in cues]
+    ends = [cues[k] for k in ('bonnet_vs_boot', 'head_vs_tail_lamps', 'wheel_names', 'red_tail_lamps') if k in cues]
     if len(set(ends)) > 1:
         raise Refused(f'the two end cues disagree: {cues}')
     nose = ends[0] if ends else cues['steering']
@@ -274,7 +287,19 @@ def convert(imported, rep, override=None):
         rep['rescaled'] = {'factor': round(f, 4), 'length_before': round(hi.z - lo.z, 4),
                            'why': 'not metre scale; wheels set to 0.68 m tall (typical, not measured)'}
     ground = min(v.y for o in wheels for v in wv(o))
-    T = Matrix.Translation((0, 0, -ground))
+    # CENTRE ACROSS THE CAR when the file is off-centre. Left and right are
+    # decided by the sign of x everywhere below, so a car modelled 0.3 m to
+    # one side (the Model Y, the Corolla) put all four wheels on the "left".
+    # Centred by the wheels, not the bounding box, which mirrors widen; and
+    # only past 2% of the width, so a car that rigs today is not moved at all.
+    wx = [v.x for o in wheels for v in wv(o)]
+    dx = -(min(wx) + max(wx)) / 2
+    lo0, hi0 = bbox([v for o in objs for v in wv(o)])
+    if abs(dx) <= .02 * (hi0.x - lo0.x):
+        dx = 0.0
+    else:
+        rep['centred_across'] = round(dx, 4)
+    T = Matrix.Translation((dx, 0, -ground))        # glTF x is Blender x
     for o in objs:
         o.matrix_world = T @ o.matrix_world
     bpy.context.view_layer.update()
@@ -412,6 +437,11 @@ def convert(imported, rep, override=None):
         K[o] = 'body'
     got = sorted(k for k in parts if k.startswith('wheel_'))
     if got != ['wheel_fl', 'wheel_fr', 'wheel_rl', 'wheel_rr']:
+        rep['wheel_shapes'] = []                   # why each candidate failed the wheel-shape test
+        for o in wheels:
+            b0, b1 = bbox(wv(o))
+            rep['wheel_shapes'].append({'part': o['sb_chain'][:40], 'h': round(b1.y - b0.y, 3),
+                                        'l': round(b1.z - b0.z, 3), 'w': round(b1.x - b0.x, 3)})
         raise Refused(f'wheels do not fill four corners ({got}) — often ONE wheel the game copies at run time')
     for o in objs:
         if K[o] in ('door', 'wheel') or any(o in v for v in parts.values()):
@@ -449,6 +479,10 @@ def convert(imported, rep, override=None):
 
     # ── 7. HINGES, and which doors SLIDE ───────────────────────────────
     hinge = _hinges(parts, bool(rep.get('door_finder', {}).get('doors')))
+    dropped = _implausible(parts, hinge)
+    if dropped:
+        rep['implausible'] = dropped
+        rep['missing'] = [p for p in _wanted(parts) if not parts.get(p)]
     rep['hinge'] = hinge
     rep['motion'] = _motion(parts, hi.y - lo.y, rep, override)
 
@@ -633,6 +667,145 @@ def _lift(o, fidx):
     return new
 
 
+WHEEL_MAT = re.compile(r'tyre|tire|rubber|pneu|reifen|llanta|luntai|lungu|wheel|felge|rueda'
+                       r'|(^|[^a-z])rim([^a-z]|$)|(^|_)rin(_|\d|$)', re.I)
+
+
+def _material_wheels(objs, K, rep):
+    """Find the four wheels from MATERIAL names and position, for exports that
+    name every piece after its material. Takes the faces whose material reads
+    as tyre / rim / wheel, keeps those in the lower 45% of the car and away
+    from its centreline (no steering wheel, no spare in the boot floor's
+    middle), splits them into the four corners and lifts each corner into one
+    object. Refuses silently (finds nothing) unless all four corners have a
+    real share of faces. Returns what it did."""
+    bpy.context.view_layer.update()            # the drop step left stale view-layer entries
+    lo, hi = bbox([v for o in objs for v in wv(o)])
+    H, W = hi.y - lo.y, hi.x - lo.x
+    xm, zm = (lo.x + hi.x) / 2, (lo.z + hi.z) / 2
+    plan, cand = {}, {}
+    for o in objs:
+        if K[o] in ('wheel', 'glazing', 'lamps_front', 'lamps_rear', 'cabin', 'steering'):
+            continue
+        hit = {i for i, s in enumerate(o.material_slots) if s.material and WHEEL_MAT.search(s.material.name)}
+        if not hit:
+            continue
+        mw = o.matrix_world
+        vs = [G(mw @ v.co) for v in o.data.vertices]
+        for p in o.data.polygons:
+            if p.material_index not in hit:
+                continue
+            c = sum((vs[i] for i in p.vertices), Vector()) / len(p.vertices)
+            if c.y > lo.y + .45 * H or abs(c.x - xm) < .12 * W:
+                continue
+            q = ('f' if c.z > zm else 'r') + ('l' if c.x > xm else 'r')
+            cand.setdefault(q, []).append((o, p.index, c))
+    # A rim or tyre MATERIAL often also covers the axle, the hub carrier or
+    # brake hardware (A3, Model Y, Corolla: corners came out twice as long as
+    # they were tall). Keep only what sits ON the wheel: inside its circle in
+    # side view, and within a wheel-width of the outside of the car.
+    for q, fs in cand.items():
+        ys = sorted(f[2].y for f in fs)
+        y0, y1 = ys[int(.01 * (len(ys) - 1))], ys[int(.99 * (len(ys) - 1))]
+        D = max(y1 - y0, 1e-6)
+        yc = y0 + D / 2
+        top = sorted(f[2].z for f in fs if f[2].y > y0 + .85 * D) or sorted(f[2].z for f in fs)
+        zc = top[len(top) // 2]
+        xs = sorted(abs(f[2].x - xm) for f in fs)
+        xout = xs[int(.99 * (len(xs) - 1))]
+        for o, i, c in fs:
+            if (c.z - zc) ** 2 + (c.y - yc) ** 2 <= (.56 * D) ** 2 and abs(c.x - xm) >= xout - .5 * D:
+                plan.setdefault(o, {}).setdefault(q, []).append(i)
+    counts = {q: sum(len(g.get(q, [])) for g in plan.values()) for q in ('fl', 'fr', 'rl', 'rr')}
+    if min(counts.values()) < 24:                  # a wheel is never a handful of faces
+        rep['material_wheels'] = {'found': False, 'faces_per_corner': counts}
+        return
+    used = sorted({s.material.name for o in plan for s in o.material_slots
+                   if s.material and WHEEL_MAT.search(s.material.name)})[:8]
+    byq = {}
+    for o, g in plan.items():
+        if o.data.users > 1:
+            o.data = o.data.copy()
+        qs = [q for q in ('fl', 'fr', 'rl', 'rr') if g.get(q)]
+        for q, piece in zip(qs, _lift_many(o, [g[q] for q in qs])):
+            piece['sb_chain'] = o['sb_chain']
+            byq.setdefault(q, []).append(piece)
+    for q, pieces in byq.items():
+        if len(pieces) > 1:                        # one object per corner, so the shape test sees a whole wheel
+            _select_only(pieces)
+            bpy.ops.object.join()
+        w = pieces[0]
+        w['sb_chain'] = f'material_wheel_{q}|' + w['sb_chain']
+        objs.append(w)
+        K[w] = 'wheel'
+    # the pieces a join consumed were never added to objs; drop any source
+    # mesh the lift emptied completely (a tyre-only object)
+    empty = [o for o in plan if not len(o.data.polygons)]
+    for o in empty:
+        objs.remove(o)
+        K.pop(o, None)
+    _remove(empty)
+    bpy.context.view_layer.update()
+    rep['material_wheels'] = {'found': True, 'faces_per_corner': counts, 'materials': used}
+
+
+def _implausible(parts, hinge):
+    """Put back into the body any opening part that cannot physically be what
+    it claims, so it stays shut instead of flying off. Measured on the 2023
+    Sportage (front 'doors' hinged AHEAD of the front wheels, a fifth of the
+    car long, swinging into the air) and the 2023 Polo (a 'bonnet' carrying the
+    wings and bumper, tearing the front apart). Returns what it dropped."""
+    wc = {k: centre(parts[k]) for k in ('wheel_fl', 'wheel_fr', 'wheel_rl', 'wheel_rr') if parts.get(k)}
+    if len(wc) < 4:
+        return []
+    allv = [v for os_ in parts.values() for o in os_ if len(o.data.vertices) for v in wv(o)]
+    lo, hi = bbox(allv)
+    L, H = hi.z - lo.z, hi.y - lo.y
+    wtop = max(max(v.y for o in parts[k] for v in wv(o)) for k in wc)
+    zf = (wc['wheel_fl'].z + wc['wheel_fr'].z) / 2
+    zr = (wc['wheel_rl'].z + wc['wheel_rr'].z) / 2
+    out = []
+    for pid in list(hinge):
+        objs_ = [o for o in parts.get(pid, []) if len(o.data.vertices)]
+        if not objs_:
+            continue
+        b0, b1 = bbox([v for o in objs_ for v in wv(o)])
+        h, why = hinge[pid], None
+        wb = zf - zr
+        cz = (b0.z + b1.z) / 2
+        if pid.startswith('door_') and pid[5] in 'fr':
+            if b1.z - b0.z > .42 * L:
+                why = f'{b1.z - b0.z:.2f} long, more than 42% of the car'
+            elif not zr - .05 * L <= h['z'] <= zf + .04 * L:
+                # a door's hinge is behind the front axle; ahead of it is the
+                # WING (the Polo's "front doors" sat right over the front wheel)
+                why = 'hinged outside the wheelbase (a wing, not a door)'
+            # a FRONT door hangs just behind the front axle; a REAR door on
+            # the B-pillar, in the rear part of the wheelbase (the Polo's
+            # "front doors" were pieces of its rear half)
+            elif pid[5] == 'f' and h['z'] < zf - .45 * wb:
+                why = 'a front door hinged in the rear half of the wheelbase'
+            elif pid[5] == 'r' and h['z'] > zf - .2 * wb:
+                why = 'a rear door hinged at the front axle'
+        elif pid == 'panel_bonnet':
+            if b1.y - b0.y > .35 * H:
+                why = f'{b1.y - b0.y:.2f} tall, a bonnet is nearly flat'
+            elif cz < zf - .15 * L:
+                why = 'not over the front of the car'
+            elif (b0.y + b1.y) / 2 < wtop:
+                why = 'below the tops of the wheels (a lower panel, not the bonnet)'
+        elif pid == 'tailgate':
+            if b1.z - b0.z > .35 * L:
+                why = f'{b1.z - b0.z:.2f} long, more than 35% of the car'
+            elif cz > zr + .15 * L:
+                why = 'not at the back of the car'
+        if why:
+            parts.setdefault('body', []).extend(parts.pop(pid))
+            del hinge[pid]
+            out.append(f'{pid}: {why}')
+    return out
+
+
 def _split_pairs(objs, K, width):
     """Split a door, wheel or brake mesh that holds BOTH sides of the car into
     a left and a right object. Narrow on purpose: the mesh must reach well past
@@ -662,7 +835,86 @@ def _split_pairs(objs, K, width):
         objs.append(new)
         K[new] = K[o]
         done.append(f'{o.name[:40]} ({K[o]})')
+    # ...and a wheel object holding BOTH AXLES (the 2023 Sportage keeps all
+    # four wheels in one object) is split front / rear, the same narrow way
+    lo, hi = bbox([v for o in objs for v in wv(o)])
+    L, zm = hi.z - lo.z, (lo.z + hi.z) / 2
+    for o in [o for o in objs if K[o] == 'wheel']:
+        b0, b1 = bbox(wv(o))
+        if not (b0.z < zm - .2 * L and b1.z > zm + .2 * L):
+            continue
+        if o.data.users > 1:
+            o.data = o.data.copy()
+        mw = o.matrix_world
+        vz = [G(mw @ v.co).z for v in o.data.vertices]
+        front, cross, n = [], 0, len(o.data.polygons)
+        for p in o.data.polygons:
+            zs = [vz[i] for i in p.vertices]
+            if min(zs) < zm < max(zs):
+                cross += 1
+            elif sum(zs) / len(zs) > zm:
+                front.append(p.index)
+        if not n or cross > .02 * n or not (.2 * n <= len(front) <= .8 * n):
+            continue
+        new = _lift(o, front)
+        new['sb_chain'] = o['sb_chain']
+        objs.append(new)
+        K[new] = K[o]
+        done.append(f'{o.name[:40]} (wheel, front/rear)')
     return done
+
+
+RED_NAME = re.compile(r'(?<![a-z])red|red(?![a-z])|tail|lanterna|brake.?light|stop.?light|rear.?light|rueckl|feu.?arr', re.I)
+
+
+def _red_lamp_end(objs, lo, hi):
+    """Which end carries the red tail lamps: +1 (+Z end), -1, or None.
+    A material counts as a red lamp by its NAME or its base colour, never
+    the body paint (the material with the most area), so a red car does not
+    paint both ends red. Only faces at lamp height in the end 15% of the
+    length count, and one end must carry three times the other."""
+    L, H = hi.z - lo.z, hi.y - lo.y
+    area = {}
+    for o in objs:
+        for p in o.data.polygons:
+            if o.material_slots and p.material_index < len(o.material_slots):
+                m = o.material_slots[p.material_index].material
+                if m:
+                    area[m.name] = area.get(m.name, 0) + p.area
+    paint = max(area, key=area.get) if area else None
+
+    def red(m):
+        if not m or m.name == paint:
+            return False
+        if RED_NAME.search(m.name):
+            return True
+        bs = next((n for n in (m.node_tree.nodes if m.use_nodes and m.node_tree else []) if n.type == 'BSDF_PRINCIPLED'), None)
+        if bs and not bs.inputs['Base Color'].links:
+            r, g, b = bs.inputs['Base Color'].default_value[:3]
+            return r > .45 and g < .2 and b < .2
+        return False
+    end = {1: 0.0, -1: 0.0}
+    for o in objs:
+        reds = {i for i, s in enumerate(o.material_slots) if red(s.material)}
+        if not reds:
+            continue
+        mw = o.matrix_world
+        for p in o.data.polygons:
+            if p.material_index not in reds:
+                continue
+            c = G(mw @ p.center)
+            if not lo.y + .25 * H < c.y < lo.y + .85 * H:
+                continue
+            if c.z > hi.z - .15 * L:
+                end[1] += p.area
+            elif c.z < lo.z + .15 * L:
+                end[-1] += p.area
+    a, b = end[1], end[-1]
+    if a > 3 * b and a > 0:
+        return 1
+    if b > 3 * a and b > 0:
+        return -1
+    return None
 
 
 def _wanted(parts):
