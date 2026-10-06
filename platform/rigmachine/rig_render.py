@@ -356,11 +356,21 @@ def views_for(state):
     return out
 
 
+# --only=open:fl renders ONE state from ONE camera (a gallery over the whole
+# catalogue). `open` here means every part that opens, even when the car has
+# doors but no bonnet or tailgate, which the full sheet would skip as a repeat.
+ONLY = opt.get('--only')
+if ONLY:
+    only_state, only_view = (ONLY.split(':') + ['fl'])[:2]
+    STATES = [('open', doors + ends)] if only_state == 'open' else [s for s in STATES if s[0] == only_state]
+
 stills = []
 t1 = time.time()
 for name, ks in STATES:
     pose(ks)
     for v, az, el, tgt, dd in views_for(name):
+        if ONLY and v != only_view:
+            continue
         aim(az, el, tgt, dd)
         path = os.path.join(OUT, f'{car}_{name}_{v}.png')
         sc.render.filepath = path
