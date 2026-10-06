@@ -1,0 +1,90 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--anti-theft-components",
+ "title": "Anti-Theft Components for 2019 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Siren",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/d30e4d5ff4558ff0612e4eadeda1b01d/e2613e123399b22a9a88068fcd8ef8f4.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--anti-theft-components?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Alarm Horn",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/c994ac10c5a0bcafec45dceb9b6dfd93/5f75403cb0c99f7be34ed31c7bd4572b.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--anti-theft-components?assembly=2"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "5Q0951605A",
+   "oem_display": "5Q0 951 605 A",
+   "oem_from": "printed",
+   "name": "Anti-Theft Alarm Siren",
+   "label": "Siren",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 111.57,
+   "msrp_usd": 167.67,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-anti-theft-alarm-siren-5q0951605a"
+  },
+  {
+   "oem": "2H0951115A",
+   "oem_display": "2H0 951 115 A",
+   "oem_from": "printed",
+   "name": "Anti-Theft Alarm Siren",
+   "label": "Anti-Theft Alarm Siren",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 30.44,
+   "msrp_usd": 52.08,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-anti-theft-alarm-siren-2h0951115a"
+  },
+  {
+   "oem": "5G0951227B",
+   "oem_display": "5G0 951 227 B",
+   "oem_from": "printed",
+   "name": "Bracket",
+   "label": "Siren Bracket",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "With motion sensor. 2024-26. With r, e-Golf. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-bracket-5g0951227b) 3",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-bracket-5g0951227b"
+  },
+  {
+   "oem": "N10609201",
+   "oem_display": "N 106 092 01",
+   "oem_from": "printed",
+   "name": "Lift-Gate Latch Nut",
+   "label": "Siren Nut",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 1.92,
+   "msrp_usd": 3.14,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-lift-gate-latch-nut-n10609201"
+  },
+  {
+   "oem": "5Q0951172A",
+   "oem_display": "5Q0 951 172 A",
+   "oem_from": "printed",
+   "name": "Sensor",
+   "label": "Motion Sensor",
+   "callout": 4,
+   "diagram": 1,
+   "price_usd": 144.08,
+   "msrp_usd": 216.53,
+   "notes": "With interior sensor. With r, e-Golf.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-sensor-5q0951172a"
+  }
+ ]
+}

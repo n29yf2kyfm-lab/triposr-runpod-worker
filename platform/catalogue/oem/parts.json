@@ -6956,6 +6956,14 @@
     "diagram_name": "Display Unit",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7d41a287a412ae086f0ca0733177080d/1830b90f98074a43f2d68780f50ecfe7.png",
     "callout": 10
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--antenna-and-radio",
+    "diagram": 1,
+    "diagram_name": "Antenna",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/36a91a6ca1e0d11b4f88808ec0902ac6/8bae99a0e462eb57affcc46debd43de1.png",
+    "callout": 2
    }
   ],
   "notes": [
@@ -6980,6 +6988,14 @@
     "diagram_name": "Display Unit",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7d41a287a412ae086f0ca0733177080d/1830b90f98074a43f2d68780f50ecfe7.png",
     "callout": 10
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--antenna-and-radio",
+    "diagram": 1,
+    "diagram_name": "Antenna",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/36a91a6ca1e0d11b4f88808ec0902ac6/8bae99a0e462eb57affcc46debd43de1.png",
+    "callout": 3
    }
   ],
   "notes": [
@@ -21450,7 +21466,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-glove-box-frame-5gm857101b82v",
-  "illustration": null
+  "illustration": "illustrations/glove-box-frame.webp"
  },
  {
   "oem": "5GM857101BZA2",
@@ -21474,7 +21490,7 @@
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-glove-box-frame-5gm857101bza2) 2"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-glove-box-frame-5gm857101bza2",
-  "illustration": null
+  "illustration": "illustrations/glove-box-frame.webp"
  },
  {
   "oem": "5G1858309",
@@ -21498,7 +21514,7 @@
    "2018-23. 2020-23."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-glove-box-frame-stop-5g1858309",
-  "illustration": null
+  "illustration": "illustrations/glove-box-frame-stop.webp"
  },
  {
   "oem": "7L0947415",
@@ -21546,7 +21562,7 @@
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-glove-box-storage-compartment-5g0858373a9b9) 4"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-glove-box-storage-compartment-5g0858373a9b9",
-  "illustration": null
+  "illustration": "illustrations/glove-box-storage-compartment.webp"
  },
  {
   "oem": "3Q0035878A",
@@ -21570,7 +21586,7 @@
    "Without e-Golf without R. Without premium audio. Tiguan. Composition media. To 6/25/17. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-gps-navigation-control-module-3q0035878a) 3"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-gps-navigation-control-module-3q0035878a",
-  "illustration": null
+  "illustration": "illustrations/gps-navigation-control-module.webp"
  },
  {
   "oem": "5G0853651CCZLL",
@@ -21592,7 +21608,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-grille-5g0853651cczll",
-  "illustration": null
+  "illustration": "illustrations/grille.webp"
  },
  {
   "oem": "5GM853665F9B9",
@@ -21624,7 +21640,7 @@
    "Cover and components. Without r, e-Golf, 2018."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-outer-grille-5gm853665f9b9",
-  "illustration": null
+  "illustration": "illustrations/grille.webp"
  },
  {
   "oem": "5GM853666F9B9",
@@ -21656,7 +21672,7 @@
    "Cover and components. Without r, e-Golf, 2018."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-outer-grille-5gm853666f9b9",
-  "illustration": null
+  "illustration": "illustrations/grille.webp"
  },
  {
   "oem": "5GM853671CRYP",
@@ -21686,7 +21702,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-center-grille-5gm853671cryp",
-  "illustration": null
+  "illustration": "illustrations/grille.webp"
  },
  {
   "oem": "3G0853601AJZA",
@@ -21708,7 +21724,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-grille-emblem-3g0853601ajza",
-  "illustration": null
+  "illustration": "illustrations/grille-emblem.webp"
  },
  {
   "oem": "5G9857607C82V",
@@ -21748,7 +21764,7 @@
    "Front black. 2015-17. front."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-grip-handle-5g9857607c82v",
-  "illustration": null
+  "illustration": "illustrations/grip-handle.webp"
  },
  {
   "oem": "5G9857607CY20",
@@ -21788,7 +21804,7 @@
    "Front, gray."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-grip-handle-5g9857607cy20",
-  "illustration": null
+  "illustration": "illustrations/grip-handle.webp"
  },
  {
   "oem": "5G9857607CZA2",
@@ -21828,7 +21844,7 @@
    "Front, beige."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-grip-handle-5g9857607cza2",
-  "illustration": null
+  "illustration": "illustrations/grip-handle.webp"
  },
  {
   "oem": "5G9857643C82V",
@@ -21868,7 +21884,7 @@
    "Rear black. 2015-17. rear."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-grip-handle-5g9857643c82v",
-  "illustration": null
+  "illustration": "illustrations/grip-handle.webp"
  },
  {
   "oem": "5G9857643CZA2",
@@ -21908,7 +21924,7 @@
    "Rear, beige."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-grip-handle-5g9857643cza2",
-  "illustration": null
+  "illustration": "illustrations/grip-handle.webp"
  },
  {
   "oem": "N10664901",
@@ -21978,7 +21994,7 @@
    "From 03/01/2015. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-handle-5gd89892482v) 14"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-handle-5gd89892482v",
-  "illustration": null
+  "illustration": "illustrations/handle.webp"
  },
  {
   "oem": "5G0868039A81U",
@@ -22018,7 +22034,7 @@
    "4 DOOR. black. To 02/08/2015, black. To 02/08/2016, black. 2 door, black."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-handle-cover-5g0868039a81u",
-  "illustration": null
+  "illustration": "illustrations/handle-cover.webp"
  },
  {
   "oem": "5G0868039AZE4",
@@ -22059,7 +22075,7 @@
    "4 DOOR. beige. To 02/08/2015, beige. To 02/08/2016, beige. 2 door, beige. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-handle-cover-5g0868039aze4) 8"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-handle-cover-5g0868039aze4",
-  "illustration": null
+  "illustration": "illustrations/handle-cover.webp"
  },
  {
   "oem": "5G0868040A81U",
@@ -22099,7 +22115,7 @@
    "4 DOOR. black. To 02/08/2015, black. To 02/08/2016, black. 2 door, black."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-handle-cover-5g0868040a81u",
-  "illustration": null
+  "illustration": "illustrations/handle-cover.webp"
  },
  {
   "oem": "5G0868040AZE4",
@@ -22140,7 +22156,7 @@
    "4 DOOR. beige. To 02/08/2015, beige. To 02/08/2016, beige. 2 door, beige. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-handle-cover-5g0868040aze4) 8"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-handle-cover-5g0868040aze4",
-  "illustration": null
+  "illustration": "illustrations/handle-cover.webp"
  },
  {
   "oem": "5G0867947",
@@ -22234,7 +22250,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hardware-kit-5g0898010b",
-  "illustration": null
+  "illustration": "illustrations/hardware.webp"
  },
  {
   "oem": "5G0898011",
@@ -22258,7 +22274,7 @@
    "4 door. 2 door."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hardware-kit-5g0898011",
-  "illustration": null
+  "illustration": "illustrations/hardware.webp"
  },
  {
   "oem": "5G0853617A",
@@ -22282,7 +22298,7 @@
    "Emblem. Without e-Golf."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hatch-emblem-5g0853617a",
-  "illustration": null
+  "illustration": "illustrations/hatch-emblem.webp"
  },
  {
   "oem": "5G08536872ZZ",
@@ -22306,7 +22322,7 @@
    "Golf, type 1."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hatch-emblem-5g08536872zz",
-  "illustration": null
+  "illustration": "illustrations/hatch-emblem.webp"
  },
  {
   "oem": "5G6827705E",
@@ -24745,6 +24761,22 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 6
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--air-bag-components",
+    "diagram": 1,
+    "diagram_name": "Passenger Air Bag",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f93009515d6dde7c53edc57c5babe21e/2440df02fe54f1ab53a55c23d6b8ac72.png",
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--air-bag-system",
+    "diagram": 1,
+    "diagram_name": "Passenger Air Bag",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f93009515d6dde7c53edc57c5babe21e/2440df02fe54f1ab53a55c23d6b8ac72.png",
+    "callout": 2
    }
   ],
   "notes": [
@@ -37677,9 +37709,27 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 6
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--air-bag-components",
+    "diagram": 1,
+    "diagram_name": "Passenger Air Bag",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f93009515d6dde7c53edc57c5babe21e/2440df02fe54f1ab53a55c23d6b8ac72.png",
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--air-bag-system",
+    "diagram": 1,
+    "diagram_name": "Passenger Air Bag",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f93009515d6dde7c53edc57c5babe21e/2440df02fe54f1ab53a55c23d6b8ac72.png",
+    "callout": 2
    }
   ],
-  "notes": [],
+  "notes": [
+   "Golf Alltrack. With radio control. Golf SportWagen. Air bags."
+  ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-steering-wheel-air-bag-5gm880201c81u",
   "illustration": null
  },
@@ -57787,7 +57837,7 @@
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-battery-charger-5qe915681n) 7"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-battery-charger-5qe915681n",
-  "illustration": null
+  "illustration": "illustrations/battery-charger.webp"
  },
  {
   "oem": "5QE915597BE",
@@ -57811,7 +57861,7 @@
    "High voltage. without code es9. E-Golf."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-5qe915597be",
-  "illustration": null
+  "illustration": "illustrations/drive-motor-battery-pack.webp"
  },
  {
   "oem": "N10610001",
@@ -57878,6 +57928,30 @@
   "illustration": "illustrations/bolt.webp"
  },
  {
+  "oem": "5N0035570",
+  "oem_display": "5N0 035 570",
+  "name": "Active Noise Cancellation Module",
+  "part_type": "active noise cancellation module",
+  "system": "electrical",
+  "price_usd": 44.41,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--antenna-and-radio",
+    "diagram": 1,
+    "diagram_name": "Antenna",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/36a91a6ca1e0d11b4f88808ec0902ac6/8bae99a0e462eb57affcc46debd43de1.png",
+    "callout": 5
+   }
+  ],
+  "notes": [
+   "All, 2012-17, lower. With navigation system. Without satellite radio, fm. Coupe, upper."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-active-noise-cancellation-module-5n0035570",
+  "illustration": "illustrations/active-noise-cancellation-module.webp"
+ },
+ {
   "oem": "1K6941295",
   "oem_display": "1K6 941 295",
   "name": "Adjust Motor",
@@ -57924,6 +57998,38 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-adjust-motor-cap-5g0998295",
   "illustration": "illustrations/cap.webp"
+ },
+ {
+  "oem": "5G0971584N",
+  "oem_display": "5G0 971 584 N",
+  "name": "Air Bag Wiring Harness",
+  "part_type": "air bag wiring harness",
+  "system": "electrical",
+  "price_usd": 39.57,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--air-bag-components",
+    "diagram": 1,
+    "diagram_name": "Passenger Air Bag",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f93009515d6dde7c53edc57c5babe21e/2440df02fe54f1ab53a55c23d6b8ac72.png",
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--air-bag-system",
+    "diagram": 1,
+    "diagram_name": "Passenger Air Bag",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f93009515d6dde7c53edc57c5babe21e/2440df02fe54f1ab53a55c23d6b8ac72.png",
+    "callout": 3
+   }
+  ],
+  "notes": [
+   "AIR BAGS. without tiptronic. Air bags, all."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-air-bag-wiring-harness-5g0971584n",
+  "illustration": "illustrations/air-bag-wiring-harness.webp"
  },
  {
   "oem": "028903025G",
@@ -58092,6 +58198,14 @@
   "price_usd": 734.7,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--alternator-generator-and-related-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--alternator",
@@ -58624,6 +58738,66 @@
   "illustration": "illustrations/alternator-pulley-hardware.webp"
  },
  {
+  "oem": "2H0951115A",
+  "oem_display": "2H0 951 115 A",
+  "name": "Anti-Theft Alarm Siren",
+  "part_type": "anti theft alarm siren",
+  "system": "electrical",
+  "price_usd": 30.44,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--alarm-system",
+    "diagram": 1,
+    "diagram_name": "Siren",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/d30e4d5ff4558ff0612e4eadeda1b01d/e2613e123399b22a9a88068fcd8ef8f4.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--anti-theft-components",
+    "diagram": 1,
+    "diagram_name": "Siren",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/d30e4d5ff4558ff0612e4eadeda1b01d/e2613e123399b22a9a88068fcd8ef8f4.png",
+    "callout": 1
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-anti-theft-alarm-siren-2h0951115a",
+  "illustration": "illustrations/anti-theft-alarm-siren.webp"
+ },
+ {
+  "oem": "5Q0951605A",
+  "oem_display": "5Q0 951 605 A",
+  "name": "Anti-Theft Alarm Siren",
+  "part_type": "anti theft alarm siren",
+  "system": "electrical",
+  "price_usd": 111.57,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--alarm-system",
+    "diagram": 1,
+    "diagram_name": "Siren",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/d30e4d5ff4558ff0612e4eadeda1b01d/e2613e123399b22a9a88068fcd8ef8f4.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--anti-theft-components",
+    "diagram": 1,
+    "diagram_name": "Siren",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/d30e4d5ff4558ff0612e4eadeda1b01d/e2613e123399b22a9a88068fcd8ef8f4.png",
+    "callout": 1
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-anti-theft-alarm-siren-5q0951605a",
+  "illustration": "illustrations/anti-theft-alarm-siren.webp"
+ },
+ {
   "oem": "045903141F",
   "oem_display": "045 903 141 F",
   "name": "Bracket",
@@ -58669,6 +58843,60 @@
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-bracket-6a903141p) 7"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-bracket-6a903141p",
+  "illustration": "illustrations/bracket.webp"
+ },
+ {
+  "oem": "5G0951227B",
+  "oem_display": "5G0 951 227 B",
+  "name": "Bracket",
+  "part_type": "bracket",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--alarm-system",
+    "diagram": 1,
+    "diagram_name": "Siren",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/d30e4d5ff4558ff0612e4eadeda1b01d/e2613e123399b22a9a88068fcd8ef8f4.png",
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--anti-theft-components",
+    "diagram": 1,
+    "diagram_name": "Siren",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/d30e4d5ff4558ff0612e4eadeda1b01d/e2613e123399b22a9a88068fcd8ef8f4.png",
+    "callout": 2
+   }
+  ],
+  "notes": [
+   "With motion sensor. 2024-26. With r, e-Golf. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-bracket-5g0951227b) 3"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-bracket-5g0951227b",
+  "illustration": "illustrations/bracket.webp"
+ },
+ {
+  "oem": "5Q1971303D",
+  "oem_display": "5Q1 971 303 D",
+  "name": "Bracket",
+  "part_type": "bracket",
+  "system": "electrical",
+  "price_usd": 13.9,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--anti-theft-system",
+    "diagram": 1,
+    "diagram_name": "Control Module",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/54f794571248e07b68128081502325f2/d881e895620bc1d05dd1d8a631f28e1c.png",
+    "callout": 2
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-bracket-5q1971303d",
   "illustration": "illustrations/bracket.webp"
  },
  {
@@ -59263,6 +59491,70 @@
   "illustration": "illustrations/control-module.webp"
  },
  {
+  "oem": "5GM880741G",
+  "oem_display": "5GM 880 741 G",
+  "name": "Curtain Air Bag",
+  "part_type": "curtain air bag",
+  "system": "electrical",
+  "price_usd": 332.7,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--air-bag-components",
+    "diagram": 1,
+    "diagram_name": "Passenger Air Bag",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f93009515d6dde7c53edc57c5babe21e/2440df02fe54f1ab53a55c23d6b8ac72.png",
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--air-bag-system",
+    "diagram": 1,
+    "diagram_name": "Passenger Air Bag",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f93009515d6dde7c53edc57c5babe21e/2440df02fe54f1ab53a55c23d6b8ac72.png",
+    "callout": 5
+   }
+  ],
+  "notes": [
+   "Right. Without knee inflator. GTI. 4 door. Left. Golf R. Air bags."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-curtain-air-bag-5gm880741g",
+  "illustration": "illustrations/curtain-air-bag.webp"
+ },
+ {
+  "oem": "5GM880742G",
+  "oem_display": "5GM 880 742 G",
+  "name": "Curtain Air Bag",
+  "part_type": "curtain air bag",
+  "system": "electrical",
+  "price_usd": 332.7,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--air-bag-components",
+    "diagram": 1,
+    "diagram_name": "Passenger Air Bag",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f93009515d6dde7c53edc57c5babe21e/2440df02fe54f1ab53a55c23d6b8ac72.png",
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--air-bag-system",
+    "diagram": 1,
+    "diagram_name": "Passenger Air Bag",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f93009515d6dde7c53edc57c5babe21e/2440df02fe54f1ab53a55c23d6b8ac72.png",
+    "callout": 5
+   }
+  ],
+  "notes": [
+   "Left. Without knee inflator. GTI. 4 door. Right. Golf R. Air bags."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-curtain-air-bag-5gm880742g",
+  "illustration": "illustrations/curtain-air-bag.webp"
+ },
+ {
   "oem": "5H0998478D",
   "oem_display": "5H0 998 478 D",
   "name": "Daytime Running Light Module",
@@ -59595,6 +59887,102 @@
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fog-lamp-bulb-n0177622",
   "illustration": "illustrations/bulb.webp"
+ },
+ {
+  "oem": "5GM880241B",
+  "oem_display": "5GM 880 241 B",
+  "name": "Ft Seat Air Bag",
+  "part_type": "ft seat air bag",
+  "system": "electrical",
+  "price_usd": 332.7,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--air-bag-components",
+    "diagram": 1,
+    "diagram_name": "Passenger Air Bag",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f93009515d6dde7c53edc57c5babe21e/2440df02fe54f1ab53a55c23d6b8ac72.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--air-bag-system",
+    "diagram": 1,
+    "diagram_name": "Passenger Air Bag",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f93009515d6dde7c53edc57c5babe21e/2440df02fe54f1ab53a55c23d6b8ac72.png",
+    "callout": 4
+   }
+  ],
+  "notes": [
+   "GTI. Left. Golf Alltrack. Golf R."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-ft-seat-air-bag-5gm880241b",
+  "illustration": "illustrations/ft-seat-air-bag.webp"
+ },
+ {
+  "oem": "5GM880242B",
+  "oem_display": "5GM 880 242 B",
+  "name": "Ft Seat Air Bag",
+  "part_type": "ft seat air bag",
+  "system": "electrical",
+  "price_usd": 332.7,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--air-bag-components",
+    "diagram": 1,
+    "diagram_name": "Passenger Air Bag",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f93009515d6dde7c53edc57c5babe21e/2440df02fe54f1ab53a55c23d6b8ac72.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--air-bag-system",
+    "diagram": 1,
+    "diagram_name": "Passenger Air Bag",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f93009515d6dde7c53edc57c5babe21e/2440df02fe54f1ab53a55c23d6b8ac72.png",
+    "callout": 4
+   }
+  ],
+  "notes": [
+   "GTI. Right. Golf Alltrack. Golf R."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-ft-seat-air-bag-5gm880242b",
+  "illustration": "illustrations/ft-seat-air-bag.webp"
+ },
+ {
+  "oem": "3C0881090",
+  "oem_display": "3C0 881 090",
+  "name": "Head Air Bag Clip",
+  "part_type": "head air bag clip",
+  "system": "electrical",
+  "price_usd": 3.22,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--air-bag-components",
+    "diagram": 1,
+    "diagram_name": "Passenger Air Bag",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f93009515d6dde7c53edc57c5babe21e/2440df02fe54f1ab53a55c23d6b8ac72.png",
+    "callout": 6
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--air-bag-system",
+    "diagram": 1,
+    "diagram_name": "Passenger Air Bag",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f93009515d6dde7c53edc57c5babe21e/2440df02fe54f1ab53a55c23d6b8ac72.png",
+    "callout": 6
+   }
+  ],
+  "notes": [
+   "Air bags."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-head-air-bag-clip-3c0881090",
+  "illustration": "illustrations/clip.webp"
  },
  {
   "oem": "1K6941005S",
@@ -60675,6 +61063,208 @@
   "illustration": "illustrations/bolt.webp"
  },
  {
+  "oem": "5GM880204F",
+  "oem_display": "5GM 880 204 F",
+  "name": "Instrument Panel Air Bag",
+  "part_type": "instrument panel air bag",
+  "system": "electrical",
+  "price_usd": 82.71,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--air-bag-components",
+    "diagram": 1,
+    "diagram_name": "Passenger Air Bag",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f93009515d6dde7c53edc57c5babe21e/2440df02fe54f1ab53a55c23d6b8ac72.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--air-bag-system",
+    "diagram": 1,
+    "diagram_name": "Passenger Air Bag",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f93009515d6dde7c53edc57c5babe21e/2440df02fe54f1ab53a55c23d6b8ac72.png",
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "Air bags. GTI. Without knee inflator. Golf Alltrack. Golf R."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-instrument-panel-air-bag-5gm880204f",
+  "illustration": null
+ },
+ {
+  "oem": "5K0962132A",
+  "oem_display": "5K0 962 132 A",
+  "name": "Keyless Entry Antenna",
+  "part_type": "keyless entry antenna",
+  "system": "electrical",
+  "price_usd": 52.71,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--anti-theft-system",
+    "diagram": 1,
+    "diagram_name": "Control Module",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/54f794571248e07b68128081502325f2/d881e895620bc1d05dd1d8a631f28e1c.png",
+    "callout": 3
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-keyless-entry-antenna-5k0962132a",
+  "illustration": null
+ },
+ {
+  "oem": "5K0962132B",
+  "oem_display": "5K0 962 132 B",
+  "name": "Keyless Entry Antenna",
+  "part_type": "keyless entry antenna",
+  "system": "electrical",
+  "price_usd": 52.13,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--anti-theft-system",
+    "diagram": 1,
+    "diagram_name": "Control Module",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/54f794571248e07b68128081502325f2/d881e895620bc1d05dd1d8a631f28e1c.png",
+    "callout": 3
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-keyless-entry-antenna-5k0962132b",
+  "illustration": null
+ },
+ {
+  "oem": "5Q0962131",
+  "oem_display": "5Q0 962 131",
+  "name": "Keyless Entry Antenna",
+  "part_type": "keyless entry antenna",
+  "system": "electrical",
+  "price_usd": 66.6,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--anti-theft-system",
+    "diagram": 1,
+    "diagram_name": "Control Module",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/54f794571248e07b68128081502325f2/d881e895620bc1d05dd1d8a631f28e1c.png",
+    "callout": 3
+   }
+  ],
+  "notes": [
+   "Jetta. Outer. Rear bumper. Tiguan. Atlas Cross Sport. Arteon. Taos. Liftgate."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-keyless-entry-antenna-5q0962131",
+  "illustration": null
+ },
+ {
+  "oem": "3Q0959435Q",
+  "oem_display": "3Q0 959 435 Q",
+  "name": "Keyless Entry Module",
+  "part_type": "keyless entry module",
+  "system": "electrical",
+  "price_usd": 107.95,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--anti-theft-system",
+    "diagram": 1,
+    "diagram_name": "Control Module",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/54f794571248e07b68128081502325f2/d881e895620bc1d05dd1d8a631f28e1c.png",
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "Atlas. E-Golf."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-keyless-entry-module-3q0959435q",
+  "illustration": null
+ },
+ {
+  "oem": "5G0959752BDINF",
+  "oem_display": "5G0 959 752 BD INF",
+  "name": "Keyless Entry Transmitter",
+  "part_type": "keyless entry transmitter",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--anti-theft-system",
+    "diagram": 1,
+    "diagram_name": "Control Module",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/54f794571248e07b68128081502325f2/d881e895620bc1d05dd1d8a631f28e1c.png",
+    "callout": 6
+   }
+  ],
+  "notes": [
+   "Fits AllTrack, e-Golf, Golf, GTI, SportWagen Golf AllTrack. Golf Sportwagen. Golf w/S Trim. GTI 4 Button. w/ s trim. GTI. 4 button. Golf AllTrack. Golf SportWagen. Exc.Keyless Ignition. 315 MHz. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-keyless-entry-transmitter-5g0959752bdinf) Diagram 2: Siren6 Store ratingby Google 3.9star Press space for more information."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-keyless-entry-transmitter-5g0959752bdinf",
+  "illustration": null
+ },
+ {
+  "oem": "5G0959752BEINF",
+  "oem_display": "5G0 959 752 BE INF",
+  "name": "Keyless Entry Transmitter",
+  "part_type": "keyless entry transmitter",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--anti-theft-system",
+    "diagram": 1,
+    "diagram_name": "Control Module",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/54f794571248e07b68128081502325f2/d881e895620bc1d05dd1d8a631f28e1c.png",
+    "callout": 6
+   }
+  ],
+  "notes": [
+   "315 MHz. A vehicle key and/or remote used to open or Control various functions of a vehicle, including but not limited to vehicle door entry, ignition, alarm system, Trunk lid, etc?K. Keyless Ignition. Fits AllTrack, e-Golf, Golf, Golf R, GTI, SportWagen E-Golf. Golf. Golf AllTrack. Golf R. Golf Sportwagen. Golf w/o S Trim. GTI 4 Button. E-Golf. Golf R. GTI. 4 button. Golf AllTrack. w/o s trim. Golf SportWagen. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-keyless-entry-transmitter-5g0959752beinf) 6"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-keyless-entry-transmitter-5g0959752beinf",
+  "illustration": null
+ },
+ {
+  "oem": "N10609201",
+  "oem_display": "N 106 092 01",
+  "name": "Lift-Gate Latch Nut",
+  "part_type": "lift gate latch nut",
+  "system": "electrical",
+  "price_usd": 1.92,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--alarm-system",
+    "diagram": 1,
+    "diagram_name": "Siren",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/d30e4d5ff4558ff0612e4eadeda1b01d/e2613e123399b22a9a88068fcd8ef8f4.png",
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--anti-theft-components",
+    "diagram": 1,
+    "diagram_name": "Siren",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/d30e4d5ff4558ff0612e4eadeda1b01d/e2613e123399b22a9a88068fcd8ef8f4.png",
+    "callout": 3
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-lift-gate-latch-nut-n10609201",
+  "illustration": "illustrations/nut.webp"
+ },
+ {
   "oem": "N10320102",
   "oem_display": "N 103 201 02",
   "name": "Low Beam Bulb",
@@ -61007,6 +61597,54 @@
   "illustration": "illustrations/nut.webp"
  },
  {
+  "oem": "5Q0035507AA5FQ",
+  "oem_display": "5Q0 035 507 AA 5FQ",
+  "name": "Radio Antenna Assembly",
+  "part_type": "radio antenna",
+  "system": "electrical",
+  "price_usd": 321.6,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--antenna-and-radio",
+    "diagram": 1,
+    "diagram_name": "Antenna",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/36a91a6ca1e0d11b4f88808ec0902ac6/8bae99a0e462eb57affcc46debd43de1.png",
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "With satellite radio, all. GTI. With satellite radio, with navigation, without on line service. Without navigation from 06/26/2017. Golf R."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-radio-antenna-assembly-5q0035507aa5fq",
+  "illustration": null
+ },
+ {
+  "oem": "5Q0035570",
+  "oem_display": "5Q0 035 570",
+  "name": "Radio Capacitor",
+  "part_type": "radio capacitor",
+  "system": "electrical",
+  "price_usd": 24.39,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--antenna-and-radio",
+    "diagram": 1,
+    "diagram_name": "Antenna",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/36a91a6ca1e0d11b4f88808ec0902ac6/8bae99a0e462eb57affcc46debd43de1.png",
+    "callout": 4
+   }
+  ],
+  "notes": [
+   "Am."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-radio-capacitor-5q0035570",
+  "illustration": null
+ },
+ {
   "oem": "5H0998607B",
   "oem_display": "5H0 998 607 B",
   "name": "Repair Kit",
@@ -61077,6 +61715,38 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-retainer-ring-1t0941621",
   "illustration": "illustrations/clip.webp"
+ },
+ {
+  "oem": "5Q0951172A",
+  "oem_display": "5Q0 951 172 A",
+  "name": "Sensor",
+  "part_type": "sensor",
+  "system": "electrical",
+  "price_usd": 144.08,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--alarm-system",
+    "diagram": 1,
+    "diagram_name": "Siren",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/d30e4d5ff4558ff0612e4eadeda1b01d/e2613e123399b22a9a88068fcd8ef8f4.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--anti-theft-components",
+    "diagram": 1,
+    "diagram_name": "Siren",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/d30e4d5ff4558ff0612e4eadeda1b01d/e2613e123399b22a9a88068fcd8ef8f4.png",
+    "callout": 4
+   }
+  ],
+  "notes": [
+   "With interior sensor. With r, e-Golf."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-sensor-5q0951172a",
+  "illustration": "illustrations/sensor.webp"
  },
  {
   "oem": "5G0941319C",
@@ -62616,6 +63286,82 @@
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turn-signal-parking-light-bulb-n10733102",
   "illustration": "illustrations/bulb.webp"
+ },
+ {
+  "oem": "09S927321",
+  "oem_display": "09S 927 321",
+  "name": "Vehicle Speed Sensor",
+  "part_type": "vehicle speed sensor",
+  "system": "electrical",
+  "price_usd": 95.95,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--automatic-transaxle",
+    "diagram": null,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": null
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-vehicle-speed-sensor-9s927321",
+  "illustration": null
+ },
+ {
+  "oem": "09S927321A",
+  "oem_display": "09S 927 321 A",
+  "name": "Vehicle Speed Sensor",
+  "part_type": "vehicle speed sensor",
+  "system": "electrical",
+  "price_usd": 95.95,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--automatic-transaxle",
+    "diagram": null,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": null
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-vehicle-speed-sensor-9s927321a",
+  "illustration": null
+ },
+ {
+  "oem": "5G0971584S",
+  "oem_display": "5G0 971 584 S",
+  "name": "Wire Harness",
+  "part_type": "wire harness",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--air-bag-components",
+    "diagram": 1,
+    "diagram_name": "Passenger Air Bag",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f93009515d6dde7c53edc57c5babe21e/2440df02fe54f1ab53a55c23d6b8ac72.png",
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--air-bag-system",
+    "diagram": 1,
+    "diagram_name": "Passenger Air Bag",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f93009515d6dde7c53edc57c5babe21e/2440df02fe54f1ab53a55c23d6b8ac72.png",
+    "callout": 3
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-wire-harness-5g0971584s) 3"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wire-harness-5g0971584s",
+  "illustration": null
  },
  {
   "oem": "2Q0129668",

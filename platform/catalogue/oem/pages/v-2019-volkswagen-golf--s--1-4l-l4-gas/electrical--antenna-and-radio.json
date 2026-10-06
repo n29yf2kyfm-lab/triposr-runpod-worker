@@ -1,0 +1,90 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--antenna-and-radio",
+ "title": "Antenna & Radio for 2019 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Antenna",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/36a91a6ca1e0d11b4f88808ec0902ac6/8bae99a0e462eb57affcc46debd43de1.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--antenna-and-radio?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Display Unit",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/7d41a287a412ae086f0ca0733177080d/1830b90f98074a43f2d68780f50ecfe7.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--antenna-and-radio?assembly=2"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "5Q0035507AA5FQ",
+   "oem_display": "5Q0 035 507 AA 5FQ",
+   "oem_from": "printed",
+   "name": "Radio Antenna Assembly",
+   "label": "Antenna",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 321.6,
+   "msrp_usd": 483.32,
+   "notes": "With satellite radio, all. GTI. With satellite radio, with navigation, without on line service. Without navigation from 06/26/2017. Golf R.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-radio-antenna-assembly-5q0035507aa5fq"
+  },
+  {
+   "oem": "5G6035577E",
+   "oem_display": "5G6 035 577 E",
+   "oem_from": "printed",
+   "name": "Antenna Booster",
+   "label": "Antenna Booster, Right",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": 63.78,
+   "msrp_usd": 94.15,
+   "notes": "GTI. Right. Golf R.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-antenna-booster-5g6035577e"
+  },
+  {
+   "oem": "5G6035577F",
+   "oem_display": "5G6 035 577 F",
+   "oem_from": "printed",
+   "name": "Antenna Booster",
+   "label": "Antenna Booster, Left",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 39.7,
+   "msrp_usd": 56.6,
+   "notes": "GTI. Left. Golf R.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-antenna-booster-5g6035577f"
+  },
+  {
+   "oem": "5Q0035570",
+   "oem_display": "5Q0 035 570",
+   "oem_from": "printed",
+   "name": "Radio Capacitor",
+   "label": "Suppressor",
+   "callout": 4,
+   "diagram": 1,
+   "price_usd": 24.39,
+   "msrp_usd": 39.98,
+   "notes": "Am.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-radio-capacitor-5q0035570"
+  },
+  {
+   "oem": "5N0035570",
+   "oem_display": "5N0 035 570",
+   "oem_from": "printed",
+   "name": "Active Noise Cancellation Module",
+   "label": "Suppressor",
+   "callout": 5,
+   "diagram": 1,
+   "price_usd": 44.41,
+   "msrp_usd": 63.32,
+   "notes": "All, 2012-17, lower. With navigation system. Without satellite radio, fm. Coupe, upper.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-active-noise-cancellation-module-5n0035570"
+  }
+ ]
+}

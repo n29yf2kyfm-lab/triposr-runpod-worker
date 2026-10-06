@@ -1,0 +1,35 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--automatic-transaxle",
+ "title": "Automatic Transaxle for 2019 Volkswagen Golf",
+ "diagrams": [],
+ "parts": [
+  {
+   "oem": "09S927321",
+   "oem_display": "09S 927 321",
+   "oem_from": "printed",
+   "name": "Vehicle Speed Sensor",
+   "label": "Transmission Speed Sensor. Exc.Harness. Taos. Fwd. Golf SportWagen. 1.4l.",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 95.95,
+   "msrp_usd": 141.65,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-vehicle-speed-sensor-9s927321"
+  },
+  {
+   "oem": "09S927321A",
+   "oem_display": "09S 927 321 A",
+   "oem_from": "printed",
+   "name": "Vehicle Speed Sensor",
+   "label": "Transmission Speed Sensor. Incl.Harness. Taos. Fwd. Golf SportWagen. 1.4l.",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 95.95,
+   "msrp_usd": 141.65,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-vehicle-speed-sensor-9s927321a"
+  }
+ ]
+}

@@ -1,0 +1,172 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--air-bag-system",
+ "title": "Air Bag System for 2019 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Passenger Air Bag",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/f93009515d6dde7c53edc57c5babe21e/2440df02fe54f1ab53a55c23d6b8ac72.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--air-bag-system?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Clock Spring",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/badd86b8ca0caa2de31c9050c7db8d2f/245e73588d2fb88f4ac194f3166e5e08.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--air-bag-system?assembly=2"
+  },
+  {
+   "n": 3,
+   "name": "Steering Wheel",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/6a3fd13dda370fa6f8536476ca60d205/e7d3cc25f4312d30ef8eb77e788a5cfe.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--air-bag-system?assembly=3"
+  },
+  {
+   "n": 4,
+   "name": "Cluster Assembly",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/ae94c716ff711c2690692baa3f7ad470/ac54f07665683f6267f281229d0e6fd8.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--air-bag-system?assembly=4"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "5GM880204F",
+   "oem_display": "5GM 880 204 F",
+   "oem_from": "printed",
+   "name": "Instrument Panel Air Bag",
+   "label": "Passenger Air Bag",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 82.71,
+   "msrp_usd": 104.66,
+   "notes": "Air bags. GTI. Without knee inflator. Golf Alltrack. Golf R.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-instrument-panel-air-bag-5gm880204f"
+  },
+  {
+   "oem": "5GM880201A81U",
+   "oem_display": "5GM 880 201 A 81U",
+   "oem_from": "printed",
+   "name": "Driver Inflator Module",
+   "label": "Driver Air Bag",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": 332.7,
+   "msrp_usd": 428.57,
+   "notes": "GTI. Without multifunction. AIR BAGS. without tiptronic without e-Golf. Air bags. all. Golf Alltrack. Without radio control. Golf SportWagen.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-driver-inflator-module-5gm880201a81u"
+  },
+  {
+   "oem": "5GM880201C81U",
+   "oem_display": "5GM 880 201 C 81U",
+   "oem_from": "printed",
+   "name": "Steering Wheel Air Bag",
+   "label": "Driver Air Bag",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": 332.7,
+   "msrp_usd": 428.57,
+   "notes": "Golf Alltrack. With radio control. Golf SportWagen. Air bags.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-steering-wheel-air-bag-5gm880201c81u"
+  },
+  {
+   "oem": "5G0971584S",
+   "oem_display": "5G0 971 584 S",
+   "oem_from": "printed",
+   "name": "Wire Harness",
+   "label": "Air bags, with heated wheel.",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-wire-harness-5g0971584s) 3",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-wire-harness-5g0971584s"
+  },
+  {
+   "oem": "5G0971584N",
+   "oem_display": "5G0 971 584 N",
+   "oem_from": "printed",
+   "name": "Air Bag Wiring Harness",
+   "label": "Wire Harness",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 39.57,
+   "msrp_usd": 52.08,
+   "notes": "AIR BAGS. without tiptronic. Air bags, all.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-air-bag-wiring-harness-5g0971584n"
+  },
+  {
+   "oem": "5GM880241B",
+   "oem_display": "5GM 880 241 B",
+   "oem_from": "printed",
+   "name": "Ft Seat Air Bag",
+   "label": "Ft Seat Air Bag, Left",
+   "callout": 4,
+   "diagram": 1,
+   "price_usd": 332.7,
+   "msrp_usd": 428.57,
+   "notes": "GTI. Left. Golf Alltrack. Golf R.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-ft-seat-air-bag-5gm880241b"
+  },
+  {
+   "oem": "5GM880242B",
+   "oem_display": "5GM 880 242 B",
+   "oem_from": "printed",
+   "name": "Ft Seat Air Bag",
+   "label": "Ft Seat Air Bag, Right",
+   "callout": 4,
+   "diagram": 1,
+   "price_usd": 332.7,
+   "msrp_usd": 428.57,
+   "notes": "GTI. Right. Golf Alltrack. Golf R.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-ft-seat-air-bag-5gm880242b"
+  },
+  {
+   "oem": "5GM880742G",
+   "oem_display": "5GM 880 742 G",
+   "oem_from": "printed",
+   "name": "Curtain Air Bag",
+   "label": "Head Air Bag, Right",
+   "callout": 5,
+   "diagram": 1,
+   "price_usd": 332.7,
+   "msrp_usd": 428.57,
+   "notes": "Left. Without knee inflator. GTI. 4 door. Right. Golf R. Air bags.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-curtain-air-bag-5gm880742g"
+  },
+  {
+   "oem": "5GM880741G",
+   "oem_display": "5GM 880 741 G",
+   "oem_from": "printed",
+   "name": "Curtain Air Bag",
+   "label": "Head Air Bag, Left",
+   "callout": 5,
+   "diagram": 1,
+   "price_usd": 332.7,
+   "msrp_usd": 428.57,
+   "notes": "Right. Without knee inflator. GTI. 4 door. Left. Golf R. Air bags.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-curtain-air-bag-5gm880741g"
+  },
+  {
+   "oem": "3C0881090",
+   "oem_display": "3C0 881 090",
+   "oem_from": "printed",
+   "name": "Head Air Bag Clip",
+   "label": "Head Air Bag Clip, Left",
+   "callout": 6,
+   "diagram": 1,
+   "price_usd": 3.22,
+   "msrp_usd": 5.28,
+   "notes": "Air bags.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-head-air-bag-clip-3c0881090"
+  }
+ ]
+}
