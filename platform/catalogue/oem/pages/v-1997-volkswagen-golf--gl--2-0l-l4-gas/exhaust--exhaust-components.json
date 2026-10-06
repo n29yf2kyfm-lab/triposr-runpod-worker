@@ -1,0 +1,84 @@
+{
+ "page": "https://vw.oempartsonline.com/v-1997-volkswagen-golf--gl--2-0l-l4-gas/exhaust--exhaust-components",
+ "title": "Exhaust Components for 1997 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Exhaust Manifold",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/652ad0b4a5bc6154987ebba21e7f1d14/c54e1c4efd9f45e09bb19419abc19bf5.png",
+   "url": "https://vw.oempartsonline.com/v-1997-volkswagen-golf--gl--2-0l-l4-gas/exhaust--exhaust-components?assembly=1"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "037253031CB",
+   "oem_display": "037 253 031 CB",
+   "oem_from": "printed",
+   "name": "Exhaust Manifold",
+   "label": "Exc.Calif. Jetta. 2.0l. Federal. From 1et003001. Cabrio. Golf, GTI. 2.0l.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-manifold-37253031cb) 3",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-manifold-37253031cb"
+  },
+  {
+   "oem": "1HM253087B",
+   "oem_display": "1HM 253 087 B",
+   "oem_from": "printed",
+   "name": "Front Pipe",
+   "label": "Cabrio. 4 cylinder, gas engine. Golf, GTI. 2.0l. Passat. 2.0l.",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-front-pipe-1hm253087b) 5",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-front-pipe-1hm253087b"
+  },
+  {
+   "oem": "1HM253201M",
+   "oem_display": "1HM 253 201 M",
+   "oem_from": "printed",
+   "name": "Exhaust Intermediate Pipe",
+   "label": "Extension Pipe",
+   "callout": 5,
+   "diagram": 1,
+   "price_usd": 93.01,
+   "msrp_usd": 137.29,
+   "notes": "4 cylinder gas. Jetta. 2.0l. Cabrio. Golf, GTI. 2.0l.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-intermediate-pipe-1hm253201m"
+  },
+  {
+   "oem": "1H0253409C",
+   "oem_display": "1H0 253 409 C",
+   "oem_from": "printed",
+   "name": "Exhaust Muffler",
+   "label": "Muffler",
+   "callout": 7,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-muffler-1h0253409c) 9",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-muffler-1h0253409c"
+  },
+  {
+   "oem": "1H0253144C",
+   "oem_display": "1H0 253 144 C",
+   "oem_from": "printed",
+   "name": "Exhaust Bracket",
+   "label": "Muffler W/Tailpipe Hanger",
+   "callout": 9,
+   "diagram": 1,
+   "price_usd": 29.21,
+   "msrp_usd": 49.98,
+   "notes": "2.0L, rear. 4 cylinder gas. 2.8L, 6 cylinder. 2.8L, rear. 4 cylinder diesel.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-bracket-1h0253144c"
+  }
+ ]
+}

@@ -1,0 +1,84 @@
+{
+ "page": "https://vw.oempartsonline.com/v-1997-volkswagen-golf--gl--2-0l-l4-gas/cooling-system--radiator-and-components",
+ "title": "Radiator & Components for 1997 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Radiator",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/9475844b1718d2a7d45cf71d9a7333c6/296e71ebdaa32959df6576dad6d15316.png",
+   "url": "https://vw.oempartsonline.com/v-1997-volkswagen-golf--gl--2-0l-l4-gas/cooling-system--radiator-and-components?assembly=1"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "1H0959481B",
+   "oem_display": "1H0 959 481 B",
+   "oem_from": "printed",
+   "name": "Engine Cooling Fan Temperature Switch",
+   "label": "Thermo Switch",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 90.35,
+   "msrp_usd": 133.38,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-cooling-fan-temperature-switch-1h0959481b"
+  },
+  {
+   "oem": "1H0973203",
+   "oem_display": "1H0 973 203",
+   "oem_from": "printed",
+   "name": "Engine Coolant Fan Temperature Switch Connector",
+   "label": "Terminal",
+   "callout": 4,
+   "diagram": 1,
+   "price_usd": 32.6,
+   "msrp_usd": 46.49,
+   "notes": "2.0L. 4 cylinder gas, housing. 1.8L. 2.8L, 1999-02. 6 cylinder, housing. 4 cylinder diesel.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-coolant-fan-temperature-switch-connector-1h0973203"
+  },
+  {
+   "oem": "1H0121051C",
+   "oem_display": "1H0 121 051 C",
+   "oem_from": "printed",
+   "name": "Radiator Coolant Hose",
+   "label": "Lower Hose",
+   "callout": 6,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-radiator-coolant-hose-1h0121051c) 8",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-radiator-coolant-hose-1h0121051c"
+  },
+  {
+   "oem": "N90614001",
+   "oem_display": "N 906 140 01",
+   "oem_from": "printed",
+   "name": "Reservoir Screw",
+   "label": "Without 1.8L. 4 cylinder gas. 4 cylinder, mounting. 6 cylinder. 4 cylinder diesel.",
+   "callout": 8,
+   "diagram": 1,
+   "price_usd": 5.51,
+   "msrp_usd": 9.04,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-reservoir-screw-n90614001"
+  },
+  {
+   "oem": "1H0121321C",
+   "oem_display": "1H0 121 321 C",
+   "oem_from": "printed",
+   "name": "Radiator Cap",
+   "label": "Cover",
+   "callout": 9,
+   "diagram": 1,
+   "price_usd": 31.9,
+   "msrp_usd": 54.58,
+   "notes": "Without 1.8L. Location-Reservoir. EuroVan. Without ac. 6 cylinder. Mexico Built Vehicle. From Chassis/VIN 1G-L-006 601. 4 cylinder diesel.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-radiator-cap-1h0121321c"
+  }
+ ]
+}

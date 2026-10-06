@@ -1,5 +1,14 @@
 [
  {
+  "slug": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+  "year": 1997,
+  "make": "Volkswagen",
+  "model": "Golf",
+  "trim": "GL",
+  "engine": "2.0L L4 gas",
+  "market": "US"
+ },
+ {
   "slug": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
   "year": 1999,
   "make": "Volkswagen",
@@ -15,6 +24,15 @@
   "model": "Golf",
   "trim": "GL",
   "engine": "2.0L L4 gas",
+  "market": "US"
+ },
+ {
+  "slug": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+  "year": 2008,
+  "make": "Volkswagen",
+  "model": "Rabbit",
+  "trim": "S",
+  "engine": "2.5L L5 gas",
   "market": "US"
  },
  {
@@ -60,6 +78,15 @@
   "model": "Golf",
   "trim": "TSI",
   "engine": "1.4L L4 gas",
+  "market": "US"
+ },
+ {
+  "slug": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+  "year": 2023,
+  "make": "Volkswagen",
+  "model": "GTI",
+  "trim": "S",
+  "engine": "2.0L L4 gas",
   "market": "US"
  }
 ]

@@ -1,0 +1,35 @@
+{
+ "page": "https://vw.oempartsonline.com/v-1997-volkswagen-golf--gl--2-0l-l4-gas/electrical--starter",
+ "title": "Starter for 1997 Volkswagen Golf",
+ "diagrams": [],
+ "parts": [
+  {
+   "oem": "02A911023TU",
+   "oem_display": "02A 911 023 TU",
+   "oem_from": "printed",
+   "name": "Starter",
+   "label": "Auto trans, 6 cylinder. 2.8L, new. 4 cylinder, manual trans. 6 cylinder, manual trans.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2a911023tu) 2",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2a911023tu"
+  },
+  {
+   "oem": "4H0951253A",
+   "oem_display": "4H0 951 253 A",
+   "oem_from": "printed",
+   "name": "Engine Control Module (ECM) Relay",
+   "label": "Relay",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": 29.56,
+   "msrp_usd": 50.59,
+   "notes": "This OEM Volkswagen fuel pump relay, part number 4H0-951-253-A, is compatible with most VW vehicles from the model years between 1984 and 2021. It fits many classic cars and vans, like Fox, Quantum, Scirocco, Vanagon, and EuroVan, plus more modern ones, li ...",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-control-module-ecm-relay-4h0951253a"
+  }
+ ]
+}

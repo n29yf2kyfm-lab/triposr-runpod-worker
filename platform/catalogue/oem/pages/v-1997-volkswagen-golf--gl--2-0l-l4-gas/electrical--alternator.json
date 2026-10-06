@@ -1,0 +1,56 @@
+{
+ "page": "https://vw.oempartsonline.com/v-1997-volkswagen-golf--gl--2-0l-l4-gas/electrical--alternator",
+ "title": "Alternator for 1997 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Alternator",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/e2c02ebd8f672405670c0a8dfa2f5821/4d6928e546a6bfa9f31935a1f0615630.png",
+   "url": "https://vw.oempartsonline.com/v-1997-volkswagen-golf--gl--2-0l-l4-gas/electrical--alternator?assembly=1"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "028903025G",
+   "oem_display": "028 903 025 G",
+   "oem_from": "printed",
+   "name": "Alternator",
+   "label": "Vendor:valeo. Stamped #030 903 023E. 70 amp. Stamped #028 903 025G. Vendor:bosch. New.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-alternator-28903025g) 1",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-alternator-28903025g"
+  },
+  {
+   "oem": "028903025H",
+   "oem_display": "028 903 025 H",
+   "oem_from": "printed",
+   "name": "Alternator",
+   "label": "Vendor:valeo. Stamped #037 903 023Q. Stamped #021 903 025. Vendor:bosch. Stamped #028 903 025H. Stamped #021 903 023J. New. Passat. 70 amp. 6 cylinder, 70 amp.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-alternator-28903025h) 2",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-alternator-28903025h"
+  },
+  {
+   "oem": "028903803D",
+   "oem_display": "028 903 803 D",
+   "oem_from": "printed",
+   "name": "Charging System Voltage Regulator",
+   "label": "Voltage Reg",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-charging-system-voltage-regulator-28903803d) Related Parts: Accessory Drive Belt Tensioner Pulley2 Store ratingby Google 3.9star Press space for more information.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-charging-system-voltage-regulator-28903803d"
+  }
+ ]
+}

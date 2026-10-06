@@ -1,0 +1,49 @@
+{
+ "page": "https://vw.oempartsonline.com/v-1997-volkswagen-golf--gl--2-0l-l4-gas/electrical--tail-lamps",
+ "title": "Tail Lamps for 1997 Volkswagen Golf",
+ "diagrams": [],
+ "parts": [
+  {
+   "oem": "1EM945112A",
+   "oem_display": "1EM 945 112 A",
+   "oem_from": "printed",
+   "name": "Tail Lamp Assembly",
+   "label": "Tail Lamp Assembly, Right",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "Gl. GTI. Without dark lens. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-tail-lamp-assembly-1em945112a) 3",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-lamp-assembly-1em945112a"
+  },
+  {
+   "oem": "N0177322",
+   "oem_display": "N 017 732 2",
+   "oem_from": "printed",
+   "name": "Bulb",
+   "label": "Tail Lamp Bulb, Left",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 3.25,
+   "msrp_usd": 4.1,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-bulb-n0177322"
+  },
+  {
+   "oem": "N0177186",
+   "oem_display": "N 017 718 6",
+   "oem_from": "printed",
+   "name": "Bulb",
+   "label": "Tail Lamp Bulb, Left",
+   "callout": 4,
+   "diagram": 1,
+   "price_usd": 2.76,
+   "msrp_usd": 3.47,
+   "notes": "Jetta. WAGON. center. Sedan, on body, signal. 4 door sedan, with 5 watt. Touareg Hybrid. 5w. On lift gate without led. to 09/21/2012. 2011-12, on lift gate.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-bulb-n0177186"
+  }
+ ]
+}

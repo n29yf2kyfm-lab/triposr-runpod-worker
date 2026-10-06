@@ -1,0 +1,49 @@
+{
+ "page": "https://vw.oempartsonline.com/v-1997-volkswagen-golf--gl--2-0l-l4-gas/suspension--struts-and-components",
+ "title": "Struts & Components for 1997 Volkswagen Golf",
+ "diagrams": [],
+ "parts": [
+  {
+   "oem": "191512113",
+   "oem_display": "191 512 113",
+   "oem_from": "printed",
+   "name": "Spring Seat",
+   "label": "Upper Seat, Right",
+   "callout": 10,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "Upper. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-spring-seat-191512113) 14",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-spring-seat-191512113"
+  },
+  {
+   "oem": "N10328605",
+   "oem_display": "N 103 286 05",
+   "oem_from": "printed",
+   "name": "Spacer Sleeve Nut",
+   "label": "Spacer Sleeve Nut, Right",
+   "callout": 14,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "Concave. Thrust. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-spacer-sleeve-nut-n10328605) 18",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-spacer-sleeve-nut-n10328605"
+  },
+  {
+   "oem": "191512337",
+   "oem_display": "191 512 337",
+   "oem_from": "printed",
+   "name": "Thrust Washer Washer",
+   "label": "Washer Nut, Left",
+   "callout": 18,
+   "diagram": 1,
+   "price_usd": 5.73,
+   "msrp_usd": 9.41,
+   "notes": "Concave.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-thrust-washer-washer-191512337"
+  }
+ ]
+}

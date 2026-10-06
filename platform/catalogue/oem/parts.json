@@ -228,6 +228,30 @@
   "illustration": "illustrations/engine-timing-belt.webp"
  },
  {
+  "oem": "037121010C",
+  "oem_display": "037 121 010 C",
+  "name": "Engine Water Pump Assembly",
+  "part_type": "engine water pump",
+  "system": "belts and cooling",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "belts-and-cooling--water-pump-and-related-components",
+    "diagram": null,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": null
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-engine-water-pump-assembly-37121010c) Store ratingby Google 3.9star Press space for more information."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-water-pump-assembly-37121010c",
+  "illustration": "illustrations/engine-water-pump.webp"
+ },
+ {
   "oem": "06A121012X",
   "oem_display": "06A 121 012 X",
   "name": "Engine Water Pump",
@@ -404,6 +428,30 @@
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-water-pump-outlet-pipe-6k121132",
   "illustration": "illustrations/pipe.webp"
+ },
+ {
+  "oem": "028121031K",
+  "oem_display": "028 121 031 K",
+  "name": "Engine Water Pump Pulley",
+  "part_type": "engine water pump pulley",
+  "system": "belts and cooling",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "belts-and-cooling--water-pump-and-related-components",
+    "diagram": null,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": null
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-engine-water-pump-pulley-28121031k)"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-water-pump-pulley-28121031k",
+  "illustration": null
  },
  {
   "oem": "N10473402",
@@ -772,6 +820,22 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 6
+   },
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 6
+   },
+   {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "brakes--rear-brakes",
     "diagram": 1,
@@ -914,6 +978,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Caliper",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa48d810efb46a159b1cb7d4ff91e42f/e2b15b6e51b79a666a49c1676a2c4afd.png",
+    "callout": 11
+   },
+   {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "brakes--front-brakes",
     "diagram": 1,
@@ -969,6 +1041,14 @@
   "price_usd": 116.43,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Caliper",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa48d810efb46a159b1cb7d4ff91e42f/e2b15b6e51b79a666a49c1676a2c4afd.png",
+    "callout": 11
+   },
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "brakes--front-brakes",
@@ -1033,6 +1113,28 @@
   "illustration": "illustrations/abs-wheel-speed-sensor.webp"
  },
  {
+  "oem": "WHT003860A",
+  "oem_display": "WHT 003 860 A",
+  "name": "ABS Wheel Speed Sensor",
+  "part_type": "abs wheel speed sensor",
+  "system": "brakes",
+  "price_usd": 114.22,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 20
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wht003860a",
+  "illustration": "illustrations/abs-wheel-speed-sensor.webp"
+ },
+ {
   "oem": "WHT003860B",
   "oem_display": "WHT 003 860 B",
   "name": "ABS Wheel Speed Sensor",
@@ -1078,6 +1180,28 @@
    "Without r. 340x30 mm."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wht003860b",
+  "illustration": "illustrations/abs-wheel-speed-sensor.webp"
+ },
+ {
+  "oem": "WHT003861A",
+  "oem_display": "WHT 003 861 A",
+  "name": "ABS Wheel Speed Sensor",
+  "part_type": "abs wheel speed sensor",
+  "system": "brakes",
+  "price_usd": 112.89,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 20
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wht003861a",
   "illustration": "illustrations/abs-wheel-speed-sensor.webp"
  },
  {
@@ -1137,6 +1261,22 @@
   "price_usd": 49.32,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 5
+   },
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
+   },
    {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "brakes--rear-brakes",
@@ -1222,6 +1362,30 @@
    "Incl.Brake Wear Sensor Harness. 4 cylinder, with wear indicator. Convertible, 288 x 25mm rotor, with wear indicator. 1.9 & 2.0L. Convertible, 280 x 22mm rotor. Coupe, 2.5L, with wear indicator. Coupe, 1.8L. 6 cylinder, with wear indicator, sedan."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wiring-harness-1j0927903r",
+  "illustration": "illustrations/abs-wheel-speed-sensor-wiring-harness.webp"
+ },
+ {
+  "oem": "1K0927903A",
+  "oem_display": "1K0 927 903 A",
+  "name": "ABS Wheel Speed Sensor Wiring Harness",
+  "part_type": "abs wheel speed sensor wiring harness",
+  "system": "brakes",
+  "price_usd": 120.87,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Caliper",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa48d810efb46a159b1cb7d4ff91e42f/e2b15b6e51b79a666a49c1676a2c4afd.png",
+    "callout": 12
+   }
+  ],
+  "notes": [
+   "288x25mm, without hid headlamps. GTI. Right. 345x30mm, without hid headlamps."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wiring-harness-1k0927903a",
   "illustration": "illustrations/abs-wheel-speed-sensor-wiring-harness.webp"
  },
  {
@@ -1562,6 +1726,198 @@
   "illustration": "illustrations/abs-wheel-speed-sensor-wiring-harness.webp"
  },
  {
+  "oem": "5WA927902AK",
+  "oem_display": "5WA 927 902 AK",
+  "name": "ABS Wheel Speed Sensor Wiring Harness",
+  "part_type": "abs wheel speed sensor wiring harness",
+  "system": "brakes",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 21
+   }
+  ],
+  "notes": [
+   "With adaptive chassis. Electronic Controlled Suspension. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wiring-harness-5wa927902ak) 21"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wiring-harness-5wa927902ak",
+  "illustration": "illustrations/abs-wheel-speed-sensor-wiring-harness.webp"
+ },
+ {
+  "oem": "5WA927902AN",
+  "oem_display": "5WA 927 902 AN",
+  "name": "ABS Wheel Speed Sensor Wiring Harness",
+  "part_type": "abs wheel speed sensor wiring harness",
+  "system": "brakes",
+  "price_usd": 80.15,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 21
+   }
+  ],
+  "notes": [
+   "Without adaptive chassis. Exc.Electronic Controlled Suspension."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wiring-harness-5wa927902an",
+  "illustration": "illustrations/abs-wheel-speed-sensor-wiring-harness.webp"
+ },
+ {
+  "oem": "5WA927902AR",
+  "oem_display": "5WA 927 902 AR",
+  "name": "ABS Wheel Speed Sensor Wiring Harness",
+  "part_type": "abs wheel speed sensor wiring harness",
+  "system": "brakes",
+  "price_usd": 125.31,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 21
+   }
+  ],
+  "notes": [
+   "With adaptive chassis. Electronic Controlled Suspension."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wiring-harness-5wa927902ar",
+  "illustration": "illustrations/abs-wheel-speed-sensor-wiring-harness.webp"
+ },
+ {
+  "oem": "5WA927903",
+  "oem_display": "5WA 927 903",
+  "name": "ABS Wheel Speed Sensor Wiring Harness",
+  "part_type": "abs wheel speed sensor wiring harness",
+  "system": "brakes",
+  "price_usd": 153.03,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 21
+   }
+  ],
+  "notes": [
+   "Exc.Electronic Controlled Suspension. Exc.Adaptive Headlight System. Without ft matrix lamps."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wiring-harness-5wa927903",
+  "illustration": "illustrations/abs-wheel-speed-sensor-wiring-harness.webp"
+ },
+ {
+  "oem": "5WA927903A",
+  "oem_display": "5WA 927 903 A",
+  "name": "ABS Wheel Speed Sensor Wiring Harness",
+  "part_type": "abs wheel speed sensor wiring harness",
+  "system": "brakes",
+  "price_usd": 112.0,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 21
+   }
+  ],
+  "notes": [
+   "With ft matrix lamps, with adapt chassis. Electronic Controlled Suspension."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wiring-harness-5wa927903a",
+  "illustration": "illustrations/abs-wheel-speed-sensor-wiring-harness.webp"
+ },
+ {
+  "oem": "5WA927903AD",
+  "oem_display": "5WA 927 903 AD",
+  "name": "ABS Wheel Speed Sensor Wiring Harness",
+  "part_type": "abs wheel speed sensor wiring harness",
+  "system": "brakes",
+  "price_usd": 134.18,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 21
+   }
+  ],
+  "notes": [
+   "Exc.Electronic Controlled Suspension. Adaptive Headlight System. With ft matrix lamps, without adapt chassis."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wiring-harness-5wa927903ad",
+  "illustration": "illustrations/abs-wheel-speed-sensor-wiring-harness.webp"
+ },
+ {
+  "oem": "5WA927903C",
+  "oem_display": "5WA 927 903 C",
+  "name": "ABS Wheel Speed Sensor Wiring Harness",
+  "part_type": "abs wheel speed sensor wiring harness",
+  "system": "brakes",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 21
+   }
+  ],
+  "notes": [
+   "Exc.Electronic Controlled Suspension. With ft matrix lamps, without adapt chassis. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wiring-harness-5wa927903c) 21"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wiring-harness-5wa927903c",
+  "illustration": "illustrations/abs-wheel-speed-sensor-wiring-harness.webp"
+ },
+ {
+  "oem": "5WA927903E",
+  "oem_display": "5WA 927 903 E",
+  "name": "ABS Wheel Speed Sensor Wiring Harness",
+  "part_type": "abs wheel speed sensor wiring harness",
+  "system": "brakes",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 21
+   }
+  ],
+  "notes": [
+   "With ft matrix lamps, with adapt chassis. Electronic Controlled Suspension. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wiring-harness-5wa927903e) 21"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-wiring-harness-5wa927903e",
+  "illustration": "illustrations/abs-wheel-speed-sensor-wiring-harness.webp"
+ },
+ {
   "oem": "WHT005437A",
   "oem_display": "WHT 005 437 A",
   "name": "Axle Bolt",
@@ -1625,6 +1981,14 @@
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a1eb5bc545d0044ad7d9e1b9553d7081/077c6f61e4b09d905030327d8dd44127.png",
     "callout": 3
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 3
    }
   ],
   "notes": [
@@ -1642,6 +2006,22 @@
   "price_usd": 6.82,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 16
+   },
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 16
+   },
    {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "brakes--rear-brakes",
@@ -1721,6 +2101,22 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 2
+   },
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 2
+   },
+   {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "brakes--rear-brakes",
     "diagram": 1,
@@ -1744,6 +2140,22 @@
   "price_usd": null,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 2
+   },
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 2
+   },
    {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "brakes--rear-brakes",
@@ -1817,6 +2229,22 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 19
+   },
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 19
+   },
+   {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "brakes--rear-brakes",
     "diagram": 1,
@@ -1841,6 +2269,22 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 18
+   },
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 18
+   },
+   {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "brakes--rear-brakes",
     "diagram": 1,
@@ -1854,6 +2298,30 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-bearing-311405645b",
   "illustration": "illustrations/bearing.webp"
+ },
+ {
+  "oem": "N90329301",
+  "oem_display": "N 903 293 01",
+  "name": "Bearing Assembly Lock Ring",
+  "part_type": "bearing lock ring",
+  "system": "brakes",
+  "price_usd": 6.16,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Splash Shield",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/611aa80c4fc063010e3abe16f7fc8329/32deccdd363e219b37584d72c98ad30c.png",
+    "callout": 8
+   }
+  ],
+  "notes": [
+   "2.0l gas & 1.9l tdi diesel. 4 cylinder. 2.8L. 6 cylinder."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-bearing-assembly-lock-ring-n90329301",
+  "illustration": "illustrations/bearing-lock-ring.webp"
  },
  {
   "oem": "N90663201",
@@ -2026,6 +2494,50 @@
   "illustration": "illustrations/cap.webp"
  },
  {
+  "oem": "1K0611845B",
+  "oem_display": "1K0 611 845 B",
+  "name": "Bracket",
+  "part_type": "bracket",
+  "system": "brakes",
+  "price_usd": 6.14,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Caliper",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa48d810efb46a159b1cb7d4ff91e42f/e2b15b6e51b79a666a49c1676a2c4afd.png",
+    "callout": 10
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-bracket-1k0611845b",
+  "illustration": "illustrations/bracket.webp"
+ },
+ {
+  "oem": "1K0611846B",
+  "oem_display": "1K0 611 846 B",
+  "name": "Bracket",
+  "part_type": "bracket",
+  "system": "brakes",
+  "price_usd": 6.14,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Caliper",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa48d810efb46a159b1cb7d4ff91e42f/e2b15b6e51b79a666a49c1676a2c4afd.png",
+    "callout": 10
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-bracket-1k0611846b",
+  "illustration": "illustrations/bracket.webp"
+ },
+ {
   "oem": "1K0615273A",
   "oem_display": "1K0 615 273 A",
   "name": "Brake Bleeder Screw",
@@ -2047,6 +2559,30 @@
    "Brazil Built Vehicle. 10 x 1mm. 272mm Brake Rotor. 288mm Brake Rotors. 288 x 25mm Brakes. 10 x 1mm. Vendor:bosch. With r. From Chassis/VIN 70V047441. To Chassis/VIN 1C-7-512 080. Vented Brake Rotors."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-brake-bleeder-screw-1k0615273a",
+  "illustration": "illustrations/bolt.webp"
+ },
+ {
+  "oem": "357615273",
+  "oem_display": "357 615 273",
+  "name": "Brake Bleeder Screw",
+  "part_type": "brake bleeder screw",
+  "system": "brakes",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 6
+   }
+  ],
+  "notes": [
+   "Optional. 10 x 1mm. Germany Built Vehicle. 10 x 1mm. 280mm Brake Rotors. 10 x 1mm. 280 x 22mm Brakes. 10 x 1mm. To Chassis/VIN 70V047440. 10 x 1mm. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-brake-bleeder-screw-357615273) 7"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-brake-bleeder-screw-357615273",
   "illustration": "illustrations/bolt.webp"
  },
  {
@@ -2089,6 +2625,14 @@
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bc5c885239293676aa58e93ccb84d165/2a1fde51b47aa81ee2b7107c485b037e.png",
     "callout": 6
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 7
    }
   ],
   "notes": [],
@@ -2241,6 +2785,30 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-brake-hose-1k0611701k",
+  "illustration": "illustrations/hose.webp"
+ },
+ {
+  "oem": "1K0611701L",
+  "oem_display": "1K0 611 701 L",
+  "name": "Brake Hose",
+  "part_type": "brake hose",
+  "system": "brakes",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Caliper",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa48d810efb46a159b1cb7d4ff91e42f/e2b15b6e51b79a666a49c1676a2c4afd.png",
+    "callout": 9
+   }
+  ],
+  "notes": [
+   "With r. 345x30mm. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-brake-hose-1k0611701l) 10"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-brake-hose-1k0611701l",
   "illustration": "illustrations/hose.webp"
  },
  {
@@ -2413,6 +2981,14 @@
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a1eb5bc545d0044ad7d9e1b9553d7081/077c6f61e4b09d905030327d8dd44127.png",
     "callout": 17
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 16
    }
   ],
   "notes": [
@@ -2501,6 +3077,14 @@
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a1eb5bc545d0044ad7d9e1b9553d7081/077c6f61e4b09d905030327d8dd44127.png",
     "callout": 18
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 17
    }
   ],
   "notes": [],
@@ -2556,6 +3140,54 @@
   "illustration": "illustrations/pipe.webp"
  },
  {
+  "oem": "1K0611841A",
+  "oem_display": "1K0 611 841 A",
+  "name": "Brake Hydraulic Line Bracket",
+  "part_type": "brake hydraulic line bracket",
+  "system": "brakes",
+  "price_usd": 6.14,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Caliper",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa48d810efb46a159b1cb7d4ff91e42f/e2b15b6e51b79a666a49c1676a2c4afd.png",
+    "callout": 10
+   }
+  ],
+  "notes": [
+   "345x30mm. With r."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-brake-hydraulic-line-bracket-1k0611841a",
+  "illustration": "illustrations/bracket.webp"
+ },
+ {
+  "oem": "1K0611842A",
+  "oem_display": "1K0 611 842 A",
+  "name": "Brake Hydraulic Line Bracket",
+  "part_type": "brake hydraulic line bracket",
+  "system": "brakes",
+  "price_usd": 6.14,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Caliper",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa48d810efb46a159b1cb7d4ff91e42f/e2b15b6e51b79a666a49c1676a2c4afd.png",
+    "callout": 10
+   }
+  ],
+  "notes": [
+   "345x30mm. With r."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-brake-hydraulic-line-bracket-1k0611842a",
+  "illustration": "illustrations/bracket.webp"
+ },
+ {
   "oem": "5Q0611841A",
   "oem_display": "5Q0 611 841 A",
   "name": "Brake Hydraulic Line Bracket",
@@ -2595,6 +3227,14 @@
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a1eb5bc545d0044ad7d9e1b9553d7081/077c6f61e4b09d905030327d8dd44127.png",
     "callout": 19
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 18
    }
   ],
   "notes": [
@@ -2643,6 +3283,14 @@
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a1eb5bc545d0044ad7d9e1b9553d7081/077c6f61e4b09d905030327d8dd44127.png",
     "callout": 19
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 18
    }
   ],
   "notes": [
@@ -2691,6 +3339,14 @@
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a1eb5bc545d0044ad7d9e1b9553d7081/077c6f61e4b09d905030327d8dd44127.png",
     "callout": 20
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 19
    }
   ],
   "notes": [],
@@ -2737,6 +3393,14 @@
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a1eb5bc545d0044ad7d9e1b9553d7081/077c6f61e4b09d905030327d8dd44127.png",
     "callout": 20
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 19
    }
   ],
   "notes": [
@@ -2755,6 +3419,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Caliper",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa48d810efb46a159b1cb7d4ff91e42f/e2b15b6e51b79a666a49c1676a2c4afd.png",
+    "callout": 5
+   },
+   {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "brakes--front-brakes",
     "diagram": 1,
@@ -2767,6 +3439,30 @@
    "Golf. Without awd."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-brake-lining-front-3c0698151k",
+  "illustration": "illustrations/brake-lining.webp"
+ },
+ {
+  "oem": "3Q0698151K",
+  "oem_display": "3Q0 698 151 K",
+  "name": "Brake Lining",
+  "part_type": "brake lining",
+  "system": "brakes",
+  "price_usd": 131.96,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 11
+   }
+  ],
+  "notes": [
+   "Incl.Disc Brake Pad Wear Sensor. Tiguan. From 9/1/20. GTI. Arteon. From 06/22/2020. From 09/01/2020. From 06/09/2021. From 10/01/2020."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-brake-lining-3q0698151k",
   "illustration": "illustrations/brake-lining.webp"
  },
  {
@@ -2993,6 +3689,30 @@
   "illustration": "illustrations/caliper-mount.webp"
  },
  {
+  "oem": "1K0615125F",
+  "oem_display": "1K0 615 125 F",
+  "name": "Caliper Mount",
+  "part_type": "caliper mount",
+  "system": "brakes",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Caliper",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa48d810efb46a159b1cb7d4ff91e42f/e2b15b6e51b79a666a49c1676a2c4afd.png",
+    "callout": 3
+   }
+  ],
+  "notes": [
+   "345x30mm. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-caliper-mount-1k0615125f) 4"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-caliper-mount-1k0615125f",
+  "illustration": "illustrations/caliper-mount.webp"
+ },
+ {
   "oem": "5Q0615425CQB7",
   "oem_display": "5Q0 615 425 C QB7",
   "name": "Caliper Mount",
@@ -3079,6 +3799,22 @@
   "price_usd": 0.33,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 14
+   },
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 14
+   },
    {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "brakes--rear-brakes",
@@ -3180,6 +3916,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Caliper",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa48d810efb46a159b1cb7d4ff91e42f/e2b15b6e51b79a666a49c1676a2c4afd.png",
+    "callout": 2
+   },
+   {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "brakes--front-brakes",
     "diagram": 1,
@@ -3232,6 +3976,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Caliper",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa48d810efb46a159b1cb7d4ff91e42f/e2b15b6e51b79a666a49c1676a2c4afd.png",
+    "callout": 2
+   },
+   {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "brakes--front-brakes",
     "diagram": 1,
@@ -3242,6 +3994,78 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-1k0615124e",
+  "illustration": "illustrations/disc-brake-caliper.webp"
+ },
+ {
+  "oem": "1K0615124J",
+  "oem_display": "1K0 615 124 J",
+  "name": "Disc Brake Caliper",
+  "part_type": "disc brake caliper",
+  "system": "brakes",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Caliper",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa48d810efb46a159b1cb7d4ff91e42f/e2b15b6e51b79a666a49c1676a2c4afd.png",
+    "callout": 2
+   }
+  ],
+  "notes": [
+   "345x30mm. GTI. Right. R32. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-1k0615124j) 2"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-1k0615124j",
+  "illustration": "illustrations/disc-brake-caliper.webp"
+ },
+ {
+  "oem": "5G0615123B",
+  "oem_display": "5G0 615 123 B",
+  "name": "Disc Brake Caliper",
+  "part_type": "disc brake caliper",
+  "system": "brakes",
+  "price_usd": 413.37,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 4
+   }
+  ],
+  "notes": [
+   "Jetta. With red caliper. Left. With gli. GTI."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-5g0615123b",
+  "illustration": "illustrations/disc-brake-caliper.webp"
+ },
+ {
+  "oem": "5G0615124B",
+  "oem_display": "5G0 615 124 B",
+  "name": "Disc Brake Caliper",
+  "part_type": "disc brake caliper",
+  "system": "brakes",
+  "price_usd": 427.93,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 4
+   }
+  ],
+  "notes": [
+   "Jetta. With red caliper. Right. With gli. GTI."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-5g0615124b",
   "illustration": "illustrations/disc-brake-caliper.webp"
  },
  {
@@ -3617,6 +4441,54 @@
   "illustration": "illustrations/bolt.webp"
  },
  {
+  "oem": "5G0615125A",
+  "oem_display": "5G0 615 125 A",
+  "name": "Disc Brake Caliper Bracket",
+  "part_type": "disc brake caliper bracket",
+  "system": "brakes",
+  "price_usd": 299.42,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 8
+   }
+  ],
+  "notes": [
+   "Incl.Disc Brake Caliper Guide Pin. With performance brakes. With gli. Performance Package."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-bracket-5g0615125a",
+  "illustration": "illustrations/bracket.webp"
+ },
+ {
+  "oem": "5G0615126A",
+  "oem_display": "5G0 615 126 A",
+  "name": "Disc Brake Caliper Bracket",
+  "part_type": "disc brake caliper bracket",
+  "system": "brakes",
+  "price_usd": 299.42,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 8
+   }
+  ],
+  "notes": [
+   "Incl.Disc Brake Caliper Guide Pin. With performance brakes. With gli. Performance Package."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-bracket-5g0615126a",
+  "illustration": "illustrations/bracket.webp"
+ },
+ {
   "oem": "5K0615425",
   "oem_display": "5K0 615 425",
   "name": "Disc Brake Caliper Bracket",
@@ -3937,6 +4809,30 @@
   "illustration": "illustrations/bolt.webp"
  },
  {
+  "oem": "N91084901",
+  "oem_display": "N 910 849 01",
+  "name": "Disc Brake Caliper Bracket Mounting Bolt",
+  "part_type": "disc brake caliper bracket mounting bolt",
+  "system": "brakes",
+  "price_usd": 9.08,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 5
+   }
+  ],
+  "notes": [
+   "Rear wheel drive. All wheel drive. 312x25 rotor. Without performance brakes. With gli. From 09/28/2020. Suspension code: g01 or g04, 306x26mm. Suspension code: g01 or g04 340x30mm. With r."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-bracket-mounting-bolt-n91084901",
+  "illustration": "illustrations/bolt.webp"
+ },
+ {
   "oem": "N91168901",
   "oem_display": "N 911 689 01",
   "name": "Disc Brake Caliper Bracket Mounting Bolt",
@@ -4087,6 +4983,30 @@
   "illustration": "illustrations/disc-brake-caliper-pin-boot.webp"
  },
  {
+  "oem": "7N0698647B",
+  "oem_display": "7N0 698 647 B",
+  "name": "Disc Brake Caliper Pin Boot",
+  "part_type": "disc brake caliper pin boot",
+  "system": "brakes",
+  "price_usd": 25.16,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 9
+   }
+  ],
+  "notes": [
+   "All Required. All wheel drive, brake code: 1kx. Front wheel drive."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-caliper-pin-boot-7n0698647b",
+  "illustration": "illustrations/disc-brake-caliper-pin-boot.webp"
+ },
+ {
   "oem": "8V0698647",
   "oem_display": "8V0 698 647",
   "name": "Disc Brake Caliper Pin Boot Kit",
@@ -4095,6 +5015,14 @@
   "price_usd": 24.91,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Caliper",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa48d810efb46a159b1cb7d4ff91e42f/e2b15b6e51b79a666a49c1676a2c4afd.png",
+    "callout": 4
+   },
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "brakes--front-brakes",
@@ -4203,6 +5131,30 @@
   "illustration": "illustrations/seal.webp"
  },
  {
+  "oem": "1K0698151P",
+  "oem_display": "1K0 698 151 P",
+  "name": "Disc Brake Pad Set",
+  "part_type": "disc brake pad",
+  "system": "brakes",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Caliper",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa48d810efb46a159b1cb7d4ff91e42f/e2b15b6e51b79a666a49c1676a2c4afd.png",
+    "callout": 5
+   }
+  ],
+  "notes": [
+   "345x30mm. CC. 345 mm rotors. Passat. 345 mm rotors. With 345mm rotor. R32. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-pad-set-1k0698151p) 5"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-pad-set-1k0698151p",
+  "illustration": null
+ },
+ {
   "oem": "1K0615269",
   "oem_display": "1K0 615 269",
   "name": "Disc Brake Pad Retaining Clip",
@@ -4248,6 +5200,30 @@
    "Disc Brake Rotor. 280mm Dia. A single Disc brake Rotor. Germany Built Vehicle. Fits Beetle, Beetle Convertible, Golf, GTI, Jetta, Jetta GLI, Jetta Wagon , 280 X 22mm Rotor. 1.9 & 2.0 Liter. 4 Cylinder. Beetle; 1.9L Diesel. Beetle; 2.0L. Convertible, 28 ..."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-rotor-1j0615301p",
+  "illustration": "illustrations/disc-brake-rotor.webp"
+ },
+ {
+  "oem": "1K0615301AR",
+  "oem_display": "1K0 615 301 AR",
+  "name": "Disc Brake Rotor",
+  "part_type": "disc brake rotor",
+  "system": "brakes",
+  "price_usd": 128.29,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Caliper",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa48d810efb46a159b1cb7d4ff91e42f/e2b15b6e51b79a666a49c1676a2c4afd.png",
+    "callout": 7
+   }
+  ],
+  "notes": [
+   "CC. 345 mm rotors. 345x30mm. Passat. 345 mm rotors. With 345mm rotor. With r. Golf. With awd. GTI. 345mm. R32."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-rotor-1k0615301ar",
   "illustration": "illustrations/disc-brake-rotor.webp"
  },
  {
@@ -4316,6 +5292,30 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-rotor-front-5c0615301d",
+  "illustration": "illustrations/disc-brake-rotor.webp"
+ },
+ {
+  "oem": "5Q0615301G",
+  "oem_display": "5Q0 615 301 G",
+  "name": "Disc Brake Rotor",
+  "part_type": "disc brake rotor",
+  "system": "brakes",
+  "price_usd": 123.35,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 12
+   }
+  ],
+  "notes": [
+   "340X30 mm. A single disc Brake Rotor. From 10/10/2016. Performance Package. To 10/09/2016. Fits Arteon, CC, Golf R, GTI, Jetta GLI, Tiguan 340X30 mm. Arteon. CC 345 mm Rotors. Golf R. GTI. Q3. S3. Sedan/Wagon, w/o S3, 340x30mm. Tiguan. w/GLI. w/o S3, 340x30mm. w/PERFORMANCE Brakes. w/R. w/S3. GTI. Tiguan. Arteon. Golf R. w/ r. w/ gli. 340x30 mm. CC. 345 mm Rotors. w/ performance Brakes."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-rotor-5q0615301g",
   "illustration": "illustrations/disc-brake-rotor.webp"
  },
  {
@@ -4449,6 +5449,30 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-spring-8v0615269",
   "illustration": "illustrations/disc-brake-spring.webp"
+ },
+ {
+  "oem": "5WA927902AG",
+  "oem_display": "5WA 927 902 AG",
+  "name": "Harness",
+  "part_type": "harness",
+  "system": "brakes",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 21
+   }
+  ],
+  "notes": [
+   "Without adaptive chassis. Exc.Electronic Controlled Suspension. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-harness-5wa927902ag) Diagram 2: Hub & Bearing Bolt2 Diagram 3: Axle Bolt2 Diagram 4: Axle Bolt2 Related Parts: ABS Sensor Screw3 Store ratingby Google 3.9star Press space for more information."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-harness-5wa927902ag",
+  "illustration": null
  },
  {
   "oem": "1J0407613G",
@@ -4736,6 +5760,14 @@
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a1eb5bc545d0044ad7d9e1b9553d7081/077c6f61e4b09d905030327d8dd44127.png",
     "callout": 2
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 2
    }
   ],
   "notes": [],
@@ -4766,6 +5798,14 @@
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
     "callout": 2
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 2
    }
   ],
   "notes": [],
@@ -4781,6 +5821,22 @@
   "price_usd": 5.39,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 15
+   },
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 15
+   },
    {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "brakes--rear-brakes",
@@ -4959,6 +6015,30 @@
   "illustration": "illustrations/parking-brake-lever-return-spring.webp"
  },
  {
+  "oem": "4F0615269",
+  "oem_display": "4F0 615 269",
+  "name": "Retainer Spring",
+  "part_type": "retainer spring",
+  "system": "brakes",
+  "price_usd": 53.29,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Caliper",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa48d810efb46a159b1cb7d4ff91e42f/e2b15b6e51b79a666a49c1676a2c4afd.png",
+    "callout": 6
+   }
+  ],
+  "notes": [
+   "345x30mm. With 345mm rotor. Retaining Spring."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-retainer-spring-4f0615269",
+  "illustration": "illustrations/clip.webp"
+ },
+ {
   "oem": "5Q0615601E",
   "oem_display": "5Q0 615 601 E",
   "name": "Rotor Front",
@@ -5062,6 +6142,14 @@
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a1eb5bc545d0044ad7d9e1b9553d7081/077c6f61e4b09d905030327d8dd44127.png",
     "callout": 14
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 13
    }
   ],
   "notes": [],
@@ -5078,6 +6166,22 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 21
+   },
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 21
+   },
+   {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "brakes--rear-brakes",
     "diagram": 1,
@@ -5087,7 +6191,8 @@
    }
   ],
   "notes": [
-   "With abs. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-spindle-333501117a) 21"
+   "With abs. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-spindle-333501117a) 21",
+   "With abs. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-spindle-333501117a) 23"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-spindle-333501117a",
   "illustration": null
@@ -5102,6 +6207,22 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 21
+   },
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 21
+   },
+   {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "brakes--rear-brakes",
     "diagram": 1,
@@ -5111,6 +6232,7 @@
    }
   ],
   "notes": [
+   "With abs. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-spindle-333501118a) 21",
    "With abs. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-spindle-333501118a) 23"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-spindle-333501118a",
@@ -5125,6 +6247,22 @@
   "price_usd": 98.1,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 11
+   },
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 11
+   },
    {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "brakes--rear-brakes",
@@ -5150,6 +6288,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Splash Shield",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/611aa80c4fc063010e3abe16f7fc8329/32deccdd363e219b37584d72c98ad30c.png",
+    "callout": 2
+   },
+   {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "brakes--front-brakes",
     "diagram": 1,
@@ -5167,9 +6313,34 @@
    }
   ],
   "notes": [
-   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-splash-shield-1j0615311a) 2"
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-splash-shield-1j0615311a) 2",
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-splash-shield-1j0615311a) 8"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-splash-shield-1j0615311a",
+  "illustration": "illustrations/splash-shield.webp"
+ },
+ {
+  "oem": "1K0615311C",
+  "oem_display": "1K0 615 311 C",
+  "name": "Splash Shield",
+  "part_type": "splash shield",
+  "system": "brakes",
+  "price_usd": 39.08,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Caliper",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa48d810efb46a159b1cb7d4ff91e42f/e2b15b6e51b79a666a49c1676a2c4afd.png",
+    "callout": 8
+   }
+  ],
+  "notes": [
+   "CC. 345 mm rotors. Left. 340x30mm. 345x30mm. Passat. 345 mm rotors. With 345mm rotor. With r. Golf. With awd. R32."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-splash-shield-1k0615311c",
   "illustration": "illustrations/splash-shield.webp"
  },
  {
@@ -5195,6 +6366,30 @@
   "illustration": "illustrations/splash-shield.webp"
  },
  {
+  "oem": "1K0615312C",
+  "oem_display": "1K0 615 312 C",
+  "name": "Splash Shield",
+  "part_type": "splash shield",
+  "system": "brakes",
+  "price_usd": 39.08,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Caliper",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa48d810efb46a159b1cb7d4ff91e42f/e2b15b6e51b79a666a49c1676a2c4afd.png",
+    "callout": 8
+   }
+  ],
+  "notes": [
+   "CC. 345 mm rotors. Right. 340x30mm. 345x30mm. Passat. 345 mm rotors. With 345mm rotor. With r. Golf. With awd. R32."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-splash-shield-1k0615312c",
+  "illustration": "illustrations/splash-shield.webp"
+ },
+ {
   "oem": "1K0615312F",
   "oem_display": "1K0 615 312 F",
   "name": "Splash Shield",
@@ -5214,6 +6409,28 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-splash-shield-1k0615312f",
+  "illustration": "illustrations/splash-shield.webp"
+ },
+ {
+  "oem": "5Q0615311F",
+  "oem_display": "5Q0 615 311 F",
+  "name": "Splash Shield",
+  "part_type": "splash shield",
+  "system": "brakes",
+  "price_usd": 58.24,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 14
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-splash-shield-5q0615311f",
   "illustration": "illustrations/splash-shield.webp"
  },
  {
@@ -5260,6 +6477,28 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-splash-shield-5q0615311g",
+  "illustration": "illustrations/splash-shield.webp"
+ },
+ {
+  "oem": "5Q0615312F",
+  "oem_display": "5Q0 615 312 F",
+  "name": "Splash Shield",
+  "part_type": "splash shield",
+  "system": "brakes",
+  "price_usd": 51.66,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 14
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-splash-shield-5q0615312f",
   "illustration": "illustrations/splash-shield.webp"
  },
  {
@@ -5444,6 +6683,14 @@
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a1eb5bc545d0044ad7d9e1b9553d7081/077c6f61e4b09d905030327d8dd44127.png",
     "callout": 16
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 15
    }
   ],
   "notes": [
@@ -5462,6 +6709,22 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 23
+   },
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 23
+   },
+   {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "brakes--rear-brakes",
     "diagram": 1,
@@ -5475,6 +6738,78 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-suspension-control-arm-bushing-1h0501541a",
   "illustration": "illustrations/suspension-control-arm-bushing.webp"
+ },
+ {
+  "oem": "871511423",
+  "oem_display": "871 511 423",
+  "name": "Suspension Stabilizer Bar Bushing",
+  "part_type": "suspension stabilizer bar bushing",
+  "system": "brakes",
+  "price_usd": 7.48,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 25
+   },
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 25
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": "Spindle",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bcbc68dc10c7e08a6e836e93b8c0c0a3/d191d5788cadbe61006abbbe673e9e76.png",
+    "callout": 6
+   },
+   {
+    "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": "Spindle",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bcbc68dc10c7e08a6e836e93b8c0c0a3/d191d5788cadbe61006abbbe673e9e76.png",
+    "callout": 6
+   }
+  ],
+  "notes": [
+   "Beetle. Golf, GTI. 18mm. Convertible,. Coupe,."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-suspension-stabilizer-bar-bushing-871511423",
+  "illustration": "illustrations/suspension-stabilizer-bar-bushing.webp"
+ },
+ {
+  "oem": "171407277",
+  "oem_display": "171 407 277",
+  "name": "Washer",
+  "part_type": "washer",
+  "system": "brakes",
+  "price_usd": 6.59,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Splash Shield",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/611aa80c4fc063010e3abe16f7fc8329/32deccdd363e219b37584d72c98ad30c.png",
+    "callout": 10
+   }
+  ],
+  "notes": [
+   "2.0l gas & 1.9l tdi diesel."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-washer-171407277",
+  "illustration": "illustrations/washer.webp"
  },
  {
   "oem": "8V0615437",
@@ -5606,6 +6941,30 @@
   "illustration": "illustrations/wheel-bearing-and-hub.webp"
  },
  {
+  "oem": "5Q0407621D",
+  "oem_display": "5Q0 407 621 D",
+  "name": "Wheel Bearing And Hub Assembly",
+  "part_type": "wheel bearing and hub",
+  "system": "brakes",
+  "price_usd": 194.06,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/fa8cf1c1b7518c31d169568572f40c36/255097de2258853753c101b1eff49fa7.png",
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "340x30 mm. GTI. Arteon. 312x25 mm."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wheel-bearing-and-hub-assembly-5q0407621d",
+  "illustration": "illustrations/wheel-bearing-and-hub.webp"
+ },
+ {
   "oem": "8S0498625A",
   "oem_display": "8S0 498 625 A",
   "name": "Wheel Bearing And Hub Assembly",
@@ -5647,6 +7006,22 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 13
+   },
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 13
+   },
+   {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "brakes--rear-brakes",
     "diagram": 1,
@@ -5670,6 +7045,22 @@
   "price_usd": 27.11,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 20
+   },
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 20
+   },
    {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "brakes--rear-brakes",
@@ -6048,6 +7439,14 @@
   "price_usd": 32.6,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--radiator-and-components",
+    "diagram": 1,
+    "diagram_name": "Radiator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/9475844b1718d2a7d45cf71d9a7333c6/296e71ebdaa32959df6576dad6d15316.png",
+    "callout": 4
+   },
    {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "cooling-system--radiator-and-components",
@@ -7052,6 +8451,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--radiator-and-components",
+    "diagram": 1,
+    "diagram_name": "Radiator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/9475844b1718d2a7d45cf71d9a7333c6/296e71ebdaa32959df6576dad6d15316.png",
+    "callout": 3
+   },
+   {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "cooling-system--radiator-and-components",
     "diagram": 1,
@@ -7805,6 +9212,54 @@
   "illustration": "illustrations/bracket.webp"
  },
  {
+  "oem": "1H0121321C",
+  "oem_display": "1H0 121 321 C",
+  "name": "Radiator Cap",
+  "part_type": "radiator cap",
+  "system": "cooling system",
+  "price_usd": 31.9,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--radiator-and-components",
+    "diagram": 1,
+    "diagram_name": "Radiator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/9475844b1718d2a7d45cf71d9a7333c6/296e71ebdaa32959df6576dad6d15316.png",
+    "callout": 9
+   }
+  ],
+  "notes": [
+   "Without 1.8L. Location-Reservoir. EuroVan. Without ac. 6 cylinder. Mexico Built Vehicle. From Chassis/VIN 1G-L-006 601. 4 cylinder diesel."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-radiator-cap-1h0121321c",
+  "illustration": "illustrations/cap.webp"
+ },
+ {
+  "oem": "1H0121051C",
+  "oem_display": "1H0 121 051 C",
+  "name": "Radiator Coolant Hose",
+  "part_type": "radiator coolant hose",
+  "system": "cooling system",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--radiator-and-components",
+    "diagram": 1,
+    "diagram_name": "Radiator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/9475844b1718d2a7d45cf71d9a7333c6/296e71ebdaa32959df6576dad6d15316.png",
+    "callout": 6
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-radiator-coolant-hose-1h0121051c) 8"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-radiator-coolant-hose-1h0121051c",
+  "illustration": "illustrations/hose.webp"
+ },
+ {
   "oem": "1J0122051H",
   "oem_display": "1J0 122 051 H",
   "name": "Radiator Coolant Hose",
@@ -8371,6 +9826,28 @@
   "illustration": "illustrations/bolt.webp"
  },
  {
+  "oem": "N90614001",
+  "oem_display": "N 906 140 01",
+  "name": "Reservoir Screw",
+  "part_type": "reservoir screw",
+  "system": "cooling system",
+  "price_usd": 5.51,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--radiator-and-components",
+    "diagram": 1,
+    "diagram_name": "Radiator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/9475844b1718d2a7d45cf71d9a7333c6/296e71ebdaa32959df6576dad6d15316.png",
+    "callout": 8
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-reservoir-screw-n90614001",
+  "illustration": "illustrations/bolt.webp"
+ },
+ {
   "oem": "04E122447BQ",
   "oem_display": "04E 122 447 BQ",
   "name": "Return Hose",
@@ -8554,6 +10031,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "electrical--alternator",
+    "diagram": 1,
+    "diagram_name": "Alternator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e2c02ebd8f672405670c0a8dfa2f5821/4d6928e546a6bfa9f31935a1f0615630.png",
+    "callout": 1
+   },
+   {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "electrical--alternator",
     "diagram": 1,
@@ -8577,6 +10062,14 @@
   "price_usd": null,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "electrical--alternator",
+    "diagram": 1,
+    "diagram_name": "Alternator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e2c02ebd8f672405670c0a8dfa2f5821/4d6928e546a6bfa9f31935a1f0615630.png",
+    "callout": 1
+   },
    {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "electrical--alternator",
@@ -9171,6 +10664,30 @@
   "illustration": "illustrations/brushes.webp"
  },
  {
+  "oem": "N0177186",
+  "oem_display": "N 017 718 6",
+  "name": "Bulb",
+  "part_type": "bulb",
+  "system": "electrical",
+  "price_usd": 2.76,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "electrical--tail-lamps",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   }
+  ],
+  "notes": [
+   "Jetta. WAGON. center. Sedan, on body, signal. 4 door sedan, with 5 watt. Touareg Hybrid. 5w. On lift gate without led. to 09/21/2012. 2011-12, on lift gate."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-bulb-n0177186",
+  "illustration": "illustrations/bulb.webp"
+ },
+ {
   "oem": "N0177192",
   "oem_display": "N 017 719 2",
   "name": "Bulb",
@@ -9211,6 +10728,14 @@
   "price_usd": 3.25,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "electrical--tail-lamps",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 3
+   },
    {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "electrical--tail-lamps",
@@ -9494,6 +11019,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "electrical--alternator",
+    "diagram": 1,
+    "diagram_name": "Alternator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e2c02ebd8f672405670c0a8dfa2f5821/4d6928e546a6bfa9f31935a1f0615630.png",
+    "callout": 2
+   },
+   {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "electrical--alternator",
     "diagram": 1,
@@ -9503,7 +11036,8 @@
    }
   ],
   "notes": [
-   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-charging-system-voltage-regulator-28903803d) Diagram 2: Alternator11 Diagram 3: Alternator2 Store ratingby Google 3.9star Press space for more information."
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-charging-system-voltage-regulator-28903803d) Diagram 2: Alternator11 Diagram 3: Alternator2 Store ratingby Google 3.9star Press space for more information.",
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-charging-system-voltage-regulator-28903803d) Related Parts: Accessory Drive Belt Tensioner Pulley2 Store ratingby Google 3.9star Press space for more information."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-charging-system-voltage-regulator-28903803d",
   "illustration": "illustrations/charging-system-voltage-regulator.webp"
@@ -9633,6 +11167,14 @@
   "price_usd": 29.56,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "electrical--starter",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 2
+   },
    {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "electrical--starter",
@@ -10668,6 +12210,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "electrical--starter",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   },
+   {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "electrical--starter",
     "diagram": 1,
@@ -10957,6 +12507,30 @@
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-sunroof-frame-bolt-n91166401",
   "illustration": "illustrations/bolt.webp"
+ },
+ {
+  "oem": "1EM945112A",
+  "oem_display": "1EM 945 112 A",
+  "name": "Tail Lamp Assembly",
+  "part_type": "tail lamp",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "electrical--tail-lamps",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "Gl. GTI. Without dark lens. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-tail-lamp-assembly-1em945112a) 3"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-lamp-assembly-1em945112a",
+  "illustration": "illustrations/tail-lamp.webp"
  },
  {
   "oem": "5GM945095F",
@@ -11960,6 +13534,52 @@
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-balance-shaft-6h198205ad",
   "illustration": null
+ },
+ {
+  "oem": "026198491A",
+  "oem_display": "026 198 491 A",
+  "name": "Bearing",
+  "part_type": "bearing",
+  "system": "engine",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 22
+   }
+  ],
+  "notes": [
+   "Bearing set. Cabrio. All models. With no. 4. Position 4. Golf, GTI. 2.0l. Jetta. 2.0l. Lower. Corrado. Passat. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-bearing-26198491a) 22"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-bearing-26198491a",
+  "illustration": "illustrations/bearing.webp"
+ },
+ {
+  "oem": "026198491B",
+  "oem_display": "026 198 491 B",
+  "name": "Bearing",
+  "part_type": "bearing",
+  "system": "engine",
+  "price_usd": 86.92,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 22
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-bearing-26198491b",
+  "illustration": "illustrations/bearing.webp"
  },
  {
   "oem": "04E105701GLB",
@@ -13457,6 +15077,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 21
+   },
+   {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
     "diagram": 1,
@@ -14195,6 +15823,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 25
+   },
+   {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--filters",
     "diagram": 1,
@@ -14303,6 +15939,30 @@
    "Touareg. Passat. Jetta. Golf. From 4/18/10. 2.5L, from 4/19/10. Sedan, 2.5L. Beetle. From 04/18/2010."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-crankshaft-seal-59103051k",
+  "illustration": "illustrations/seal.webp"
+ },
+ {
+  "oem": "068103171F",
+  "oem_display": "068 103 171 F",
+  "name": "Engine Crankshaft Seal",
+  "part_type": "engine crankshaft seal",
+  "system": "engine",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 24
+   }
+  ],
+  "notes": [
+   "Seal. with Retainer. Cabrio. Jetta. Golf, GTI. All models. EuroVan. Oil seal & retainer. Passat. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-engine-crankshaft-seal-68103171f) 25"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-crankshaft-seal-68103171f",
   "illustration": "illustrations/seal.webp"
  },
  {
@@ -14446,6 +16106,14 @@
   "price_usd": 73.49,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 22
+   },
    {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
@@ -15524,6 +17192,30 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-timing-belt-idler-4e109244b",
   "illustration": "illustrations/engine-timing-belt-idler.webp"
+ },
+ {
+  "oem": "026109243L",
+  "oem_display": "026 109 243 L",
+  "name": "Engine Timing Belt Tensioner",
+  "part_type": "engine timing belt tensioner",
+  "system": "engine",
+  "price_usd": 71.12,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 17
+   }
+  ],
+  "notes": [
+   "All models. Jetta. Golf, GTI. To Chassis/VIN 1HV 098 995. Cabrio. Vanagon. Gas. To Chassis/VIN 1EV 006 004. Passat."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-timing-belt-tensioner-26109243l",
+  "illustration": "illustrations/engine-timing-belt-tensioner.webp"
  },
  {
   "oem": "05E109479B",
@@ -16751,6 +18443,30 @@
   "illustration": "illustrations/clip.webp"
  },
  {
+  "oem": "026109675",
+  "oem_display": "026 109 675",
+  "name": "Engine Valve Stem Oil Seal",
+  "part_type": "engine valve stem oil seal",
+  "system": "engine",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 7
+   }
+  ],
+  "notes": [
+   "8mm. All models. Jetta. Golf, GTI. Vanagon. Cabrio. EuroVan. Passat. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-engine-valve-stem-oil-seal-26109675) 8"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-valve-stem-oil-seal-26109675",
+  "illustration": "illustrations/seal.webp"
+ },
+ {
   "oem": "027109675",
   "oem_display": "027 109 675",
   "name": "Engine Valve Stem Oil Seal",
@@ -16981,6 +18697,14 @@
   "price_usd": 58.2,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 6
+   },
    {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
@@ -17577,6 +19301,14 @@
   "price_usd": 58.2,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
+   },
    {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
@@ -18244,6 +19976,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": null,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": null
+   },
+   {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--filters",
     "diagram": 1,
@@ -18564,6 +20304,30 @@
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-oil-pan-7k103603b",
   "illustration": "illustrations/oil-pan.webp"
+ },
+ {
+  "oem": "044103609D",
+  "oem_display": "044 103 609 D",
+  "name": "Oil Pan Gasket",
+  "part_type": "oil pan gasket",
+  "system": "engine",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 29
+   }
+  ],
+  "notes": [
+   "Store ratingby Google 3.9star Press space for more information."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-oil-pan-gasket-44103609d",
+  "illustration": "illustrations/gasket.webp"
  },
  {
   "oem": "04E115103AC",
@@ -19626,6 +21390,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   },
+   {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--filters",
     "diagram": 1,
@@ -19708,6 +21480,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 10
+   },
+   {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
     "diagram": 1,
@@ -19738,6 +21518,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 11
+   },
+   {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
     "diagram": 1,
@@ -19767,6 +21555,14 @@
   "price_usd": 12.31,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 9
+   },
    {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
@@ -19819,6 +21615,14 @@
   "price_usd": 16.46,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 8
+   },
    {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
@@ -20337,6 +22141,30 @@
   "illustration": "illustrations/bolt.webp"
  },
  {
+  "oem": "1H0253144C",
+  "oem_display": "1H0 253 144 C",
+  "name": "Exhaust Bracket",
+  "part_type": "exhaust bracket",
+  "system": "exhaust",
+  "price_usd": 29.21,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "exhaust--exhaust-components",
+    "diagram": 1,
+    "diagram_name": "Exhaust Manifold",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/652ad0b4a5bc6154987ebba21e7f1d14/c54e1c4efd9f45e09bb19419abc19bf5.png",
+    "callout": 9
+   }
+  ],
+  "notes": [
+   "2.0L, rear. 4 cylinder gas. 2.8L, 6 cylinder. 2.8L, rear. 4 cylinder diesel."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-bracket-1h0253144c",
+  "illustration": "illustrations/bracket.webp"
+ },
+ {
   "oem": "1J0253144G",
   "oem_display": "1J0 253 144 G",
   "name": "Exhaust Bracket",
@@ -20365,6 +22193,54 @@
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-bracket-1j0253144g",
   "illustration": "illustrations/bracket.webp"
+ },
+ {
+  "oem": "1HM253201M",
+  "oem_display": "1HM 253 201 M",
+  "name": "Exhaust Intermediate Pipe",
+  "part_type": "exhaust intermediate pipe",
+  "system": "exhaust",
+  "price_usd": 93.01,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "exhaust--exhaust-components",
+    "diagram": 1,
+    "diagram_name": "Exhaust Manifold",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/652ad0b4a5bc6154987ebba21e7f1d14/c54e1c4efd9f45e09bb19419abc19bf5.png",
+    "callout": 5
+   }
+  ],
+  "notes": [
+   "4 cylinder gas. Jetta. 2.0l. Cabrio. Golf, GTI. 2.0l."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-intermediate-pipe-1hm253201m",
+  "illustration": "illustrations/pipe.webp"
+ },
+ {
+  "oem": "037253031CB",
+  "oem_display": "037 253 031 CB",
+  "name": "Exhaust Manifold",
+  "part_type": "exhaust manifold",
+  "system": "exhaust",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "exhaust--exhaust-components",
+    "diagram": 1,
+    "diagram_name": "Exhaust Manifold",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/652ad0b4a5bc6154987ebba21e7f1d14/c54e1c4efd9f45e09bb19419abc19bf5.png",
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-manifold-37253031cb) 3"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-manifold-37253031cb",
+  "illustration": "illustrations/exhaust-manifold.webp"
  },
  {
   "oem": "06A253031BP",
@@ -20411,6 +22287,30 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-manifold-heat-shield-6a133229n",
   "illustration": "illustrations/exhaust-manifold-heat-shield.webp"
+ },
+ {
+  "oem": "1H0253409C",
+  "oem_display": "1H0 253 409 C",
+  "name": "Exhaust Muffler",
+  "part_type": "exhaust muffler",
+  "system": "exhaust",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "exhaust--exhaust-components",
+    "diagram": 1,
+    "diagram_name": "Exhaust Manifold",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/652ad0b4a5bc6154987ebba21e7f1d14/c54e1c4efd9f45e09bb19419abc19bf5.png",
+    "callout": 7
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-muffler-1h0253409c) 9"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-muffler-1h0253409c",
+  "illustration": "illustrations/exhaust-muffler.webp"
  },
  {
   "oem": "1J0253209N",
@@ -21440,6 +23340,30 @@
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-oxygen-sensor-1k0998262q",
   "illustration": "illustrations/oxygen-sensor.webp"
+ },
+ {
+  "oem": "1HM253087B",
+  "oem_display": "1HM 253 087 B",
+  "name": "Front Pipe",
+  "part_type": "pipe",
+  "system": "exhaust",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "exhaust--exhaust-components",
+    "diagram": 1,
+    "diagram_name": "Exhaust Manifold",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/652ad0b4a5bc6154987ebba21e7f1d14/c54e1c4efd9f45e09bb19419abc19bf5.png",
+    "callout": 3
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-front-pipe-1hm253087b) 5"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-front-pipe-1hm253087b",
+  "illustration": "illustrations/pipe.webp"
  },
  {
   "oem": "N10753101",
@@ -23485,6 +25409,28 @@
    "2.0L, gas."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-ignition-coil-7k905715g",
+  "illustration": "illustrations/ignition-coil.webp"
+ },
+ {
+  "oem": "6N0905104",
+  "oem_display": "6N0 905 104",
+  "name": "Ignition Coil",
+  "part_type": "ignition coil",
+  "system": "ignition",
+  "price_usd": 219.57,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "ignition--ignition-coil",
+    "diagram": null,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": null
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-ignition-coil-6n0905104",
   "illustration": "illustrations/ignition-coil.webp"
  },
  {
@@ -25861,6 +27807,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--struts-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 14
+   },
+   {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--struts-and-components",
     "diagram": 1,
@@ -25884,6 +27838,14 @@
   "price_usd": null,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--struts-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 10
+   },
    {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--struts-and-components",
@@ -27140,38 +29102,6 @@
   "illustration": "illustrations/suspension-stabilizer-bar-bushing.webp"
  },
  {
-  "oem": "871511423",
-  "oem_display": "871 511 423",
-  "name": "Suspension Stabilizer Bar Bushing",
-  "part_type": "suspension stabilizer bar bushing",
-  "system": "suspension",
-  "price_usd": 7.48,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
-    "category": "suspension--rear-suspension",
-    "diagram": 1,
-    "diagram_name": "Spindle",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bcbc68dc10c7e08a6e836e93b8c0c0a3/d191d5788cadbe61006abbbe673e9e76.png",
-    "callout": 6
-   },
-   {
-    "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
-    "category": "suspension--rear-suspension",
-    "diagram": 1,
-    "diagram_name": "Spindle",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bcbc68dc10c7e08a6e836e93b8c0c0a3/d191d5788cadbe61006abbbe673e9e76.png",
-    "callout": 6
-   }
-  ],
-  "notes": [
-   "Beetle. Golf, GTI. 18mm. Convertible,. Coupe,."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-suspension-stabilizer-bar-bushing-871511423",
-  "illustration": "illustrations/suspension-stabilizer-bar-bushing.webp"
- },
- {
   "oem": "1H0413031P",
   "oem_display": "1H0 413 031 P",
   "name": "Suspension Strut",
@@ -27620,6 +29550,14 @@
   "price_usd": 5.73,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--struts-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 18
+   },
    {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--struts-and-components",
@@ -29162,6 +31100,30 @@
   "illustration": "illustrations/washer.webp"
  },
  {
+  "oem": "1J6955425C",
+  "oem_display": "1J6 955 425 C",
+  "name": "Wiper Blade",
+  "part_type": "wiper blade",
+  "system": "wiper and washer",
+  "price_usd": 9.49,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": null,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": null
+   }
+  ],
+  "notes": [
+   "340mm. 350mm."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wiper-blade-1j6955425c",
+  "illustration": "illustrations/wiper-blade.webp"
+ },
+ {
   "oem": "1Q1998002",
   "oem_display": "1Q1 998 002",
   "name": "Wiper Blade",
@@ -29400,6 +31362,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": null,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": null
+   },
+   {
     "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
     "diagram": 1,
@@ -29418,7 +31388,8 @@
   ],
   "notes": [
    "Without wear indicator. 550mm. Coupe,. Convertible,. Vendor:bosch. Without R32. Valeo. From Chassis/VIN 1C-4-418 301. To Chassis/VIN 1C-4-418 300. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-wiper-blade-refill-895955429a) 6",
-   "Without wear indicator. 550mm. Coupe,. Convertible,. Vendor:bosch. Without R32. Valeo. From Chassis/VIN 1C-4-418 301. To Chassis/VIN 1C-4-418 300. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-wiper-blade-refill-895955429a) 7"
+   "Without wear indicator. 550mm. Coupe,. Convertible,. Vendor:bosch. Without R32. Valeo. From Chassis/VIN 1C-4-418 301. To Chassis/VIN 1C-4-418 300. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-wiper-blade-refill-895955429a) 7",
+   "Without wear indicator. 550mm. Coupe,. Convertible,. Vendor:bosch. Without R32. Valeo. From Chassis/VIN 1C-4-418 301. To Chassis/VIN 1C-4-418 300. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-wiper-blade-refill-895955429a) Store ratingby Google 3.9star Press space for more information."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wiper-blade-refill-895955429a",
   "illustration": "illustrations/wiper-blade-refill.webp"
