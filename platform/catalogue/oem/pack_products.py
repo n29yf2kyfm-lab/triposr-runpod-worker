@@ -21,6 +21,8 @@ def main():
     packs = [dict() for _ in range(BUCKETS)]
     for f in glob.glob(os.path.join(HERE, 'products', '*.json')):
         d = json.load(open(f))
+        if d.get('gone'):
+            continue
         packs[zlib.crc32(d['oem'].encode()) % BUCKETS][d['oem']] = {
             'fits': d['fits'], 'diagrams': d['diagrams'], 'callout': d['callout'], 'url': d['url']}
     total = 0
