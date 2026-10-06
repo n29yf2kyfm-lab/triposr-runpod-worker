@@ -1,0 +1,48 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2012-volkswagen-golf--base--2-5l-l5-gas/steering--steering-gear",
+ "title": "Steering Gear for 2012 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Gear Assembly",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/f49c2faac6a8fe26c26cf0c20d0c7238/0c5d80b9894cb5ee44dc2a98b416a3b8.png",
+   "url": "https://vw.oempartsonline.com/v-2012-volkswagen-golf--base--2-5l-l5-gas/steering--steering-gear?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Boot",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/90a862614b229176ac1e04bd868b8ad3/7de08b4bf4c637a1512a280fcc692217.png",
+   "url": "https://vw.oempartsonline.com/v-2012-volkswagen-golf--base--2-5l-l5-gas/steering--steering-gear?assembly=2"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "1K1423055M",
+   "oem_display": "1K1 423 055 M",
+   "oem_from": "printed",
+   "name": "Rack And Pinion Assembly",
+   "label": "Gear Assembly",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 2653.27,
+   "msrp_usd": 3417.84,
+   "notes": "Coupe, remanufactured. With electric gear, remanufactured. With variable assist, remanufactured, from 12/2010 to 12/09/2011. Golf. GTI. Jetta.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-rack-and-pinion-assembly-1k1423055m"
+  },
+  {
+   "oem": "N90942902",
+   "oem_display": "N 909 429 02",
+   "oem_from": "printed",
+   "name": "Outer Tie Rod Lock Nut",
+   "label": "Outer Tie Rod Lock Nut, Left",
+   "callout": 5,
+   "diagram": 1,
+   "price_usd": 0.74,
+   "msrp_usd": 1.22,
+   "notes": "With variable assist. Convertible,. Coupe,. To 07/2011. Without electric gear. Wagon, 2010-11,.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-outer-tie-rod-lock-nut-n90942902"
+  }
+ ]
+}

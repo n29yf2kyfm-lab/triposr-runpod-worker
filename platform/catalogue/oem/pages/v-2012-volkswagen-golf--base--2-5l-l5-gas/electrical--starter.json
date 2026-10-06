@@ -1,0 +1,76 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2012-volkswagen-golf--base--2-5l-l5-gas/electrical--starter",
+ "title": "Starter for 2012 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Starter",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/96170e9997e9257cd8292e2528ce92d6/5492cb3d022e10b339e6ca1193a6e2e0.png",
+   "url": "https://vw.oempartsonline.com/v-2012-volkswagen-golf--base--2-5l-l5-gas/electrical--starter?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Starter",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/e57fca84e54cc980e0c119e47012580b/ece9104a24584778e6325efd38794308.png",
+   "url": "https://vw.oempartsonline.com/v-2012-volkswagen-golf--base--2-5l-l5-gas/electrical--starter?assembly=2"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "02M911023S",
+   "oem_display": "02M 911 023 S",
+   "oem_from": "printed",
+   "name": "Starter",
+   "label": "2.0 Kw. Manual trans. 2.0l. With turbo. Vendor:bosch. Jetta wagon. Passat. Beetle. 2.5l. New. Golf. Auto trans.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 1034.13,
+   "msrp_usd": 1554.15,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2m911023s"
+  },
+  {
+   "oem": "02M911024P",
+   "oem_display": "02M 911 024 P",
+   "oem_from": "printed",
+   "name": "Starter",
+   "label": "2.0 Kw. Golf. Manual trans. 6 speed. Manual trans. 2.0l tdi. Passat. 2009-2012, 3.6L, valeo, new. Jetta wagon. Optional. Wagon, 2.0L, new, manual trans.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 374.28,
+   "msrp_usd": 562.48,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2m911024p"
+  },
+  {
+   "oem": "02M911024X",
+   "oem_display": "02M 911 024 X",
+   "oem_from": "printed",
+   "name": "Starter",
+   "label": "Golf. Manual trans. 6 speed. 2.0 Kw. Vendor:bosch. 2.0L diesel, manual trans, bosch, remanufactured.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2m911024x) 1",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2m911024x"
+  },
+  {
+   "oem": "02Z911023J",
+   "oem_display": "02Z 911 023 J",
+   "oem_from": "printed",
+   "name": "Starter",
+   "label": "1.4 Kw. Beetle. 2.5l. Rabbit. Sedan, 2.5L, remanufactured, manual trans. Wagon, 2.5L, remanufactured, manual trans. Coupe, 2.5L, manual trans, remanufactured.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 693.11,
+   "msrp_usd": 1041.65,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2z911023j"
+  }
+ ]
+}
