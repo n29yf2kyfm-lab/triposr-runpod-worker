@@ -29,6 +29,12 @@ def main():
         m = re.search(r'oempartsonline\.com/(v-[^/]+)/([^/?]+)', url)
         if not m or 'markdown' not in d:
             continue
+        if (d.get('metadata') or {}).get('statusCode') == 404:
+            # a category this car does not have: remember it so gap_queue.py skips it
+            with open(os.path.join(HERE, 'gap_missing.txt'), 'a') as fh:
+                fh.write(f'{m.group(1)}/{m.group(2)}\n')
+            os.remove(f)
+            continue
         md = d['markdown']
         pg = parse(md, url)
         links = set(re.findall(r'/oem-parts/([a-z0-9-]+)', md[max(0, md.find('\n# ')):]))
@@ -39,6 +45,8 @@ def main():
         os.makedirs(os.path.join(HERE, 'pages', m.group(1)), exist_ok=True)
         json.dump(pg, open(os.path.join(HERE, 'pages', m.group(1), m.group(2) + '.json'), 'w'), indent=1)
         done += 1
+        if not links - got:
+            os.remove(f)   # parsed in full and kept in pages/; the raw copy is not needed
     print(f'INGEST {done} pages, {lost} part links lost')
     return 1 if lost else 0
 
