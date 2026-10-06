@@ -15,6 +15,17 @@ type, and VIN lookup. Built 2026-10-06.
 | `../vin/vin.py` | VIN → make, country, year, model/platform (+ trim and engine for US VINs) → catalogue parts |
 | `../../trainer/data/golf_mk7_assemblies.json` | the Golf workshop manual: 296 exploded drawings, 2,902 parts, 517 tightening torques |
 
+**Whole VW range (2026-10-06).** `sitemap_parts.txt` holds the 27,309 part
+pages in the dealer's parts sitemap (lastmod 2021-02, every VW model). The
+build adds each number not already crawled, with the name and number taken
+from its URL, `system_guessed: true`, and an empty `appears_on`: which cars it
+fits is unknown until a category page that lists it is crawled. The sitemap is
+a partial, older snapshot — only 381 of the 2,970 crawled Golf numbers are in
+it — so category crawling is still how new parts and fitment arrive. Those
+rows ship in `parts_more.json` as compact arrays so the page stays light. A
+direct fetch of the dealer site is refused (403, bot firewall), so pages come
+through Firecrawl only.
+
 Tools: `parse_revolution.py` (page → parts), `build_catalogue.py` (pages →
 parts/vehicles/CSV), `illustrate.py` (part types → images).
 

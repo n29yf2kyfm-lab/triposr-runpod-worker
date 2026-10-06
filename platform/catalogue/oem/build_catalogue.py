@@ -18,6 +18,7 @@ pages/ keep them only as crawled source data. Illustrations are AI-made, one per
 TYPE, and are labelled as illustrations wherever shown.
 """
 import csv, glob, json, os, re
+from collections import Counter
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 import sys
@@ -70,6 +71,29 @@ def main():
                                     'callout': p.get('callout')})
             if p.get('notes') and 'price' not in p['notes'].lower():   # no prices anywhere in the outputs
                 e['notes'].add(p['notes'])
+    crawled = len(parts)
+    # Every VW part the dealer's 2021 sitemap lists (all models). Number and
+    # name come straight from the part's URL; which cars it fits is unknown
+    # until a category page containing it is crawled, so appears_on stays empty.
+    by_type = {}
+    for e in parts.values():
+        by_type.setdefault(e['part_type'], Counter())[e['system']] += 1
+    for line in open(os.path.join(HERE, 'sitemap_parts.txt')):
+        if not line.startswith('http'):
+            continue
+        url = line.strip()
+        slug = url.rsplit('/oem-parts/', 1)[1][len('volkswagen-'):]
+        words, num = slug.rsplit('-', 1)
+        oem = num.upper()
+        if oem in parts:
+            continue
+        name = re.sub(r'\bA C\b', 'A/C', words.replace('-', ' ').title())
+        pt = part_type(name)
+        guess = by_type.get(pt)
+        parts[oem] = {'oem': oem, 'oem_display': vw_display(oem), 'name': name, 'part_type': pt,
+                      'system': guess.most_common(1)[0][0] if guess else 'not yet sorted',
+                      'system_guessed': True, 'unavailable': False, 'appears_on': [], 'notes': set(),
+                      'source': url, 'illustration': None}
     img_dir = os.path.join(HERE, 'illustrations')
     for e in parts.values():
         e['notes'] = sorted(e['notes'])
@@ -78,7 +102,15 @@ def main():
             e['illustration'] = f'illustrations/{key}.webp'
     out = sorted(parts.values(), key=lambda e: (e['system'], e['part_type'], e['oem']))
     json.dump(sorted(vehicles.values(), key=lambda v: v['slug']), open(os.path.join(HERE, 'vehicles.json'), 'w'), indent=1)
-    json.dump(out, open(os.path.join(HERE, 'parts.json'), 'w'), indent=1)
+    # parts.json: parts with crawled fitment, full records. parts_more.json: the
+    # sitemap-only parts as compact rows [oem, display, name, part_type, system,
+    # url slug, illustration] so the page stays light enough for a phone.
+    json.dump([e for e in out if not e.get('system_guessed')], open(os.path.join(HERE, 'parts.json'), 'w'),
+              separators=(',', ':'))
+    pre = 'https://vw.oempartsonline.com/oem-parts/volkswagen-'
+    json.dump([[e['oem'], e['oem_display'], e['name'], e['part_type'], e['system'],
+                e['source'][len(pre):], e['illustration'] or ''] for e in out if e.get('system_guessed')],
+              open(os.path.join(HERE, 'parts_more.json'), 'w'), separators=(',', ':'))
     with open(os.path.join(HERE, 'parts.csv'), 'w', newline='') as fh:
         w = csv.writer(fh)
         w.writerow(['oem', 'oem_display', 'name', 'part_type', 'system', 'unavailable',
@@ -89,7 +121,7 @@ def main():
                         ' | '.join(f"{a['diagram_name'] or a['category']} #{a['callout']}" for a in e['appears_on']),
                         ' / '.join(e['notes'])[:500], e['illustration'] or '', e['source']])
     types = sorted({e['part_type'] for e in out})
-    print(f'CATALOGUE {len(vehicles)} vehicles, {len(out)} OEM numbers, {len(types)} part types, '
+    print(f'CATALOGUE {len(vehicles)} vehicles, {len(out)} OEM numbers ({crawled} with fitment), {len(types)} part types, '
           f'{sum(1 for e in out if e["illustration"])} illustrated')
     return 0
 

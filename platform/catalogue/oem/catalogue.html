@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Golf Parts Desk</title>
+<title>VW Parts Desk</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -188,7 +188,7 @@ footer p{margin:0}
 <header class="top">
   <div class="wrap">
     <div class="brand">
-      <h1>Golf <span>Parts</span> Desk</h1>
+      <h1>VW <span>Parts</span> Desk</h1>
       <div class="stats" id="stats" aria-live="polite">Loading catalogue…</div>
     </div>
     <div class="tools">
@@ -457,11 +457,12 @@ function openPart(oem){
       <div class="bigoem"><span class="oem">${esc(p.oem_display)}</span><button class="copy" data-copy="${esc(p.oem_display)}">Copy number</button></div>
       <h2 id="dlg-title">${esc(p.name)}</h2>
       <dl class="kv">
-        <div><dt>System</dt><dd>${esc(p.system)}</dd></div>
+        <div><dt>System</dt><dd>${esc(p.system)}${p.system_guessed && p.system !== 'not yet sorted' ? ' <small>· guessed from the name</small>' : ''}</dd></div>
         ${p.unavailable ? '<div><dt>Dealer status</dt><dd><span class="pill">Unavailable</span></dd></div>' : ''}
-        <div><dt>Fits</dt><dd>${new Set(p.appears_on.map(a => a.vehicle)).size} catalogued car(s)</dd></div>
+        <div><dt>Fits</dt><dd>${p.appears_on.length ? new Set(p.appears_on.map(a => a.vehicle)).size + ' catalogued car(s)' : 'Not collected yet'}</dd></div>
       </dl>
-      <div class="sec"><h4>Where it appears</h4><div class="scroll"><table class="fits">
+      ${p.appears_on.length ? '' : '<p class="note">This number comes from the dealer\'s list of every VW part. Which cars it fits is filled in as each car\'s catalogue pages are crawled.</p>'}
+      <div class="sec" ${p.appears_on.length ? '' : 'hidden'}><h4>Where it appears</h4><div class="scroll"><table class="fits">
         <thead><tr><th>Car</th><th>Section · drawing</th><th>Callout</th></tr></thead><tbody>${rows}</tbody></table></div>
         <p class="note" style="margin-top:6px">Drawing links open the dealer's exploded diagram; the callout is the number on that drawing.</p></div>
       ${p.notes.length ? `<div class="sec"><h4>Fitment notes (as printed by the dealer)</h4><ul class="notes">${p.notes.map(n => `<li>${esc(n)}</li>`).join('')}</ul></div>` : ''}
@@ -488,7 +489,7 @@ function showVin(dec){
     actions = m.near.map(v => `<button class="chip" data-near="${esc(v.slug)}">${esc(vlabel(v))}</button>`).join('');
   } else {
     state.vinHits = null;
-    msg = f.make ? `This catalogue covers the VW Golf family so far, so it has no parts for this vehicle yet.` : '';
+    msg = f.make ? `Fitment is collected for the VW Golf family so far, so no part is matched to this vehicle yet. Search by name or number instead.` : '';
   }
   box.innerHTML = `<h2>VIN decoded</h2><dl class="kv">${kv || '<div><dd>Nothing could be read from this VIN.</dd></div>'}</dl>
     ${msg ? `<p class="note">${msg}</p>` : ''}${actions ? `<div class="actions">${actions}</div>` : ''}
@@ -547,7 +548,11 @@ function tab(which){
 
 async function load(){
   const get = u => fetch(u).then(r => { if (!r.ok) throw new Error(u + ' ' + r.status); return r.json(); });
-  const [parts, vehicles] = await Promise.all([get('parts.json'), get('vehicles.json')]);
+  const [parts, vehicles, more] = await Promise.all([get('parts.json'), get('vehicles.json'), get('parts_more.json').catch(() => [])]);
+  // sitemap-only parts: number and name from the dealer link, fitment not crawled yet
+  const PRE = 'https://vw.oempartsonline.com/oem-parts/volkswagen-';
+  more.forEach(([oem, oem_display, name, part_type, system, slug, ill]) => parts.push({oem, oem_display, name, part_type, system,
+    system_guessed: true, unavailable: false, appears_on: [], notes: [], source: PRE + slug, illustration: ill || null}));
   state.vehicles = vehicles.sort((a, b) => a.year - b.year || a.model.localeCompare(b.model));
   state.vehicles.forEach(v => state.vmap[v.slug] = v);
   parts.forEach(p => {
@@ -557,7 +562,8 @@ async function load(){
   });
   state.parts = parts;
   renderFilters(); renderParts();
-  const statsBase = `<span><b>${vehicles.length}</b> cars</span><span><b>${parts.length}</b> OEM numbers</span>`;
+  const fitted = parts.filter(p => p.appears_on.length).length;
+  const statsBase = `<span><b>${parts.length.toLocaleString()}</b> VW OEM numbers</span><span><b>${fitted.toLocaleString()}</b> with fitment for <b>${vehicles.length}</b> cars</span>`;
   $('#stats').innerHTML = statsBase;
   try {
     state.asm = await get('assemblies.json');
