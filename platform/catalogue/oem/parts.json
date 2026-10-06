@@ -473,6 +473,30 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1c2996a532a2bb1089b21b75b8da2302/0fbfa5c5a2162ecc6b6b839e3f89761d.png",
     "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 14
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 14
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 14
    }
   ],
   "notes": [
@@ -22376,7 +22400,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hazard-switch-5g0953509a",
-  "illustration": null
+  "illustration": "illustrations/hazard-switch.webp"
  },
  {
   "oem": "5G6817123",
@@ -22398,7 +22422,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-header-panel-5g6817123",
-  "illustration": null
+  "illustration": "illustrations/header-panel.webp"
  },
  {
   "oem": "5G6817123A",
@@ -22422,7 +22446,7 @@
    "Lower."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-header-panel-5g6817123a",
-  "illustration": null
+  "illustration": "illustrations/header-panel.webp"
  },
  {
   "oem": "5G6817467",
@@ -22446,7 +22470,7 @@
    "Upper. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-header-panel-5g6817467) 3"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-header-panel-5g6817467",
-  "illustration": null
+  "illustration": "illustrations/header-panel.webp"
  },
  {
   "oem": "5G0941431BJWZU",
@@ -22468,7 +22492,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headlamp-switch-5g0941431bjwzu",
-  "illustration": null
+  "illustration": "illustrations/headlamp-switch.webp"
  },
  {
   "oem": "5GM941431BWZU",
@@ -22490,7 +22514,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headlamp-switch-5gm941431bwzu",
-  "illustration": null
+  "illustration": "illustrations/headlamp-switch.webp"
  },
  {
   "oem": "5GM867501AFZA4",
@@ -22530,7 +22554,7 @@
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-headliner-5gm867501afza4) 1"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headliner-5gm867501afza4",
-  "illustration": null
+  "illustration": "illustrations/headliner.webp"
  },
  {
   "oem": "5GM867501AFZB5",
@@ -22568,7 +22592,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headliner-5gm867501afzb5",
-  "illustration": null
+  "illustration": "illustrations/headliner.webp"
  },
  {
   "oem": "5GM867501AFZC6",
@@ -22606,7 +22630,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headliner-5gm867501afzc6",
-  "illustration": null
+  "illustration": "illustrations/headliner.webp"
  },
  {
   "oem": "5GM867501ALZA4",
@@ -22644,7 +22668,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headliner-5gm867501alza4",
-  "illustration": null
+  "illustration": "illustrations/headliner.webp"
  },
  {
   "oem": "5GM867501ALZB5",
@@ -22682,7 +22706,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headliner-5gm867501alzb5",
-  "illustration": null
+  "illustration": "illustrations/headliner.webp"
  },
  {
   "oem": "5GM867501ALZC6",
@@ -22720,7 +22744,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headliner-5gm867501alzc6",
-  "illustration": null
+  "illustration": "illustrations/headliner.webp"
  },
  {
   "oem": "5GM881903DTJI",
@@ -22752,7 +22776,7 @@
    "4 door without r, e-Golf seat back components. without power seat black. 2 door, seat back components, cloth, black. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-5gm881903dtji) 17"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-5gm881903dtji",
-  "illustration": null
+  "illustration": "illustrations/headrest.webp"
  },
  {
   "oem": "5GM881903DTKI",
@@ -22784,7 +22808,7 @@
    "Seat back components, cloth, beige. 4 door without r, e-Golf seat back components. without power seat beige. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-5gm881903dtki) 17"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-5gm881903dtki",
-  "illustration": null
+  "illustration": "illustrations/headrest.webp"
  },
  {
   "oem": "5GM881903GFMA",
@@ -22816,7 +22840,7 @@
    "2 door, seat back components, leatherette, black."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-5gm881903gfma",
-  "illustration": null
+  "illustration": "illustrations/headrest.webp"
  },
  {
   "oem": "5GM881903GTNI",
@@ -22848,7 +22872,7 @@
    "4 door with e-Golf seat back components. leatherette beige. 4 door without r, e-Golf seat back components. with power seat beige. Seat back components. shetland. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-5gm881903gtni) 17"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-5gm881903gtni",
-  "illustration": null
+  "illustration": "illustrations/headrest.webp"
  },
  {
   "oem": "5GM885901CAEJ",
@@ -22889,7 +22913,7 @@
    "Seat back, leathertte, with sport seat, black. Without r, e-Golf, seat back, with sport seat, black. 4 door without r, e-Golf seat back. leatherette black. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-outer-5gm885901caej) 6"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-outer-5gm885901caej",
-  "illustration": null
+  "illustration": "illustrations/headrest.webp"
  },
  {
   "oem": "5GM885901CZAI",
@@ -22930,7 +22954,7 @@
    "Seat back, leathertte, with sport seat, beige. Without r, e-Golf, seat back, with sport seat, beige. 4 door without r, e-Golf seat back. leatherette beige. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-outer-5gm885901czai) 6"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-outer-5gm885901czai",
-  "illustration": null
+  "illustration": "illustrations/headrest.webp"
  },
  {
   "oem": "5GM885901ELI8",
@@ -22971,7 +22995,7 @@
    "4 door without r, e-Golf seat back. cloth black. 2 door, seat back, cloth, black. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-outer-5gm885901eli8) 6"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-outer-5gm885901eli8",
-  "illustration": null
+  "illustration": "illustrations/headrest.webp"
  },
  {
   "oem": "5GM885901ETI7",
@@ -23012,7 +23036,7 @@
    "4 door without r, e-Golf seat back. cloth beige. 2 door, seat back, cloth, beige. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-outer-5gm885901eti7) 7"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-outer-5gm885901eti7",
-  "illustration": null
+  "illustration": "illustrations/headrest.webp"
  },
  {
   "oem": "5GM885902BAEJ",
@@ -23053,7 +23077,7 @@
    "Seat back, leatherette, with sport seat, black. Without r, e-Golf, seat back, with sport seat, black. 4 door without r, e-Golf seat back. leatherette black. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-center-5gm885902baej) 5"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-center-5gm885902baej",
-  "illustration": null
+  "illustration": "illustrations/headrest.webp"
  },
  {
   "oem": "5GM885902BZAI",
@@ -23094,7 +23118,7 @@
    "Seat back, leatherette, with sport seat, beige. Without r, e-Golf, seat back, with sport seat, beige. 4 door without r, e-Golf seat back. leatherette beige. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-center-5gm885902bzai) 5"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-center-5gm885902bzai",
-  "illustration": null
+  "illustration": "illustrations/headrest.webp"
  },
  {
   "oem": "5GM885902LI8",
@@ -23135,7 +23159,7 @@
    "4 door without r, e-Golf seat back. cloth black. 2 door, seat back, cloth, black. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-center-5gm885902li8) 5"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-center-5gm885902li8",
-  "illustration": null
+  "illustration": "illustrations/headrest.webp"
  },
  {
   "oem": "5GM885902TI7",
@@ -23176,7 +23200,7 @@
    "4 door without r, e-Golf seat back. cloth beige. 2 door, seat back, cloth, beige. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-center-5gm885902ti7) 6"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-center-5gm885902ti7",
-  "illustration": null
+  "illustration": "illustrations/headrest.webp"
  },
  {
   "oem": "5G088192082V",
@@ -23216,7 +23240,7 @@
    "4 door with e-Golf seat back components. locking beige. With r, seat back components, locking, black."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-guide-5g088192082v",
-  "illustration": null
+  "illustration": "illustrations/headrest-guide.webp"
  },
  {
   "oem": "5G0881920A82V",
@@ -23256,7 +23280,7 @@
    "With r, seat back components, non-locking, black."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-guide-5g0881920a82v",
-  "illustration": null
+  "illustration": "illustrations/headrest-guide.webp"
  },
  {
   "oem": "5G0881920AZA2",
@@ -23297,7 +23321,7 @@
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-guide-5g0881920aza2) 7"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-guide-5g0881920aza2",
-  "illustration": null
+  "illustration": "illustrations/headrest-guide.webp"
  },
  {
   "oem": "5G0881920ZA2",
@@ -23339,7 +23363,7 @@
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-guide-5g0881920za2) 7"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-guide-5g0881920za2",
-  "illustration": null
+  "illustration": "illustrations/headrest-guide.webp"
  },
  {
   "oem": "5G088692082V",
@@ -23361,7 +23385,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-guide-5g088692082v",
-  "illustration": null
+  "illustration": "illustrations/headrest-guide.webp"
  },
  {
   "oem": "5G0886920D82V",
@@ -23383,7 +23407,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-guide-5g0886920d82v",
-  "illustration": null
+  "illustration": "illustrations/headrest-guide.webp"
  },
  {
   "oem": "5G0886920DZA2",
@@ -23407,7 +23431,7 @@
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-guide-5g0886920dza2) 7"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-guide-5g0886920dza2",
-  "illustration": null
+  "illustration": "illustrations/headrest-guide.webp"
  },
  {
   "oem": "5G0886920ZA2",
@@ -23431,7 +23455,7 @@
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-guide-5g0886920za2) 9"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-headrest-guide-5g0886920za2",
-  "illustration": null
+  "illustration": "illustrations/headrest-guide.webp"
  },
  {
   "oem": "5Q1612163A",
@@ -23495,7 +23519,7 @@
    "Without e-Golf. To vin 1k6741206. Sedan from 1/05, wagon 2009 only, from vin 1k6741207."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-heat-shield-buffer-357612166",
-  "illustration": null
+  "illustration": "illustrations/heat-shield-buffer.webp"
  },
  {
   "oem": "5Q0951223D",
@@ -23517,7 +23541,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-high-note-horn-5q0951223d",
-  "illustration": null
+  "illustration": "illustrations/high-note-horn.webp"
  },
  {
   "oem": "N90798702",
@@ -23841,7 +23865,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hood-contact-switch-5g0953236",
-  "illustration": null
+  "illustration": "illustrations/hood-contact-switch.webp"
  },
  {
   "oem": "5G0823301B",
@@ -23879,7 +23903,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hood-hinge-5g0823301b",
-  "illustration": null
+  "illustration": "illustrations/hood-hinge.webp"
  },
  {
   "oem": "5G0823302B",
@@ -23917,7 +23941,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hood-hinge-5g0823302b",
-  "illustration": null
+  "illustration": "illustrations/hood-hinge.webp"
  },
  {
   "oem": "5GM863831",
@@ -57831,9 +57855,18 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 18
    }
   ],
   "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-battery-charger-5qe915681n) 19",
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-battery-charger-5qe915681n) 7"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-battery-charger-5qe915681n",
@@ -57855,6 +57888,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 1
    }
   ],
   "notes": [
@@ -57984,6 +58025,14 @@
   "price_usd": null,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 19
+   },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
@@ -58798,6 +58847,818 @@
   "illustration": "illustrations/anti-theft-alarm-siren.webp"
  },
  {
+  "oem": "5GM945093J",
+  "oem_display": "5GM 945 093 J",
+  "name": "Back Up Light Assembly",
+  "part_type": "back up light",
+  "system": "electrical",
+  "price_usd": 193.11,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--backup-lamps",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "2018-19. 2018-20. Fits e-Golf, Golf, Golf R, GTI 2018-19. 2018-21. 2018-19. 2018-20."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-back-up-light-assembly-5gm945093j",
+  "illustration": "illustrations/back-up-light.webp"
+ },
+ {
+  "oem": "5GM945094J",
+  "oem_display": "5GM 945 094 J",
+  "name": "Back Up Light Assembly",
+  "part_type": "back up light",
+  "system": "electrical",
+  "price_usd": 230.37,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--backup-lamps",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "2018."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-back-up-light-assembly-5gm945094j",
+  "illustration": "illustrations/back-up-light.webp"
+ },
+ {
+  "oem": "5GM945197B",
+  "oem_display": "5GM 945 197 B",
+  "name": "Back Up Light Assembly Gasket",
+  "part_type": "back up light gasket",
+  "system": "electrical",
+  "price_usd": 10.02,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--backup-lamps",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 3
+   }
+  ],
+  "notes": [
+   "2018-19. 2018-21."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-back-up-light-assembly-gasket-5gm945197b",
+  "illustration": "illustrations/gasket.webp"
+ },
+ {
+  "oem": "N10017304",
+  "oem_display": "N 100 173 04",
+  "name": "Back Up Light Assembly Nut",
+  "part_type": "back up light nut",
+  "system": "electrical",
+  "price_usd": 2.06,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--backup-lamps",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 2
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-back-up-light-assembly-nut-n10017304",
+  "illustration": "illustrations/nut.webp"
+ },
+ {
+  "oem": "5Q0915411D",
+  "oem_display": "5Q0 915 411 D",
+  "name": "Battery Box",
+  "part_type": "battery box",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-battery-box-5q0915411d) 4",
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-battery-box-5q0915411d) 5"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-battery-box-5q0915411d",
+  "illustration": "illustrations/battery-box.webp"
+ },
+ {
+  "oem": "5Q0915411E",
+  "oem_display": "5Q0 915 411 E",
+  "name": "Battery Box",
+  "part_type": "battery box",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-battery-box-5q0915411e) 4"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-battery-box-5q0915411e",
+  "illustration": "illustrations/battery-box.webp"
+ },
+ {
+  "oem": "5Q0915411F",
+  "oem_display": "5Q0 915 411 F",
+  "name": "Battery Box",
+  "part_type": "battery box",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-battery-box-5q0915411f) 4"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-battery-box-5q0915411f",
+  "illustration": "illustrations/battery-box.webp"
+ },
+ {
+  "oem": "5Q0915411G",
+  "oem_display": "5Q0 915 411 G",
+  "name": "Battery Box",
+  "part_type": "battery box",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-battery-box-5q0915411g) 4"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-battery-box-5q0915411g",
+  "illustration": "illustrations/battery-box.webp"
+ },
+ {
+  "oem": "5Q0915411H",
+  "oem_display": "5Q0 915 411 H",
+  "name": "Battery Box",
+  "part_type": "battery box",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-battery-box-5q0915411h) 4",
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-battery-box-5q0915411h) 5"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-battery-box-5q0915411h",
+  "illustration": "illustrations/battery-box.webp"
+ },
+ {
+  "oem": "5Q0915181K",
+  "oem_display": "5Q0 915 181 K",
+  "name": "Battery Cable",
+  "part_type": "battery cable",
+  "system": "electrical",
+  "price_usd": 71.12,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 12
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-battery-cable-5q0915181k",
+  "illustration": "illustrations/battery-cable.webp"
+ },
+ {
+  "oem": "5Q0971228A",
+  "oem_display": "5Q0 971 228 A",
+  "name": "Battery Cable",
+  "part_type": "battery cable",
+  "system": "electrical",
+  "price_usd": 74.5,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 12
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-battery-cable-5q0971228a",
+  "illustration": "illustrations/battery-cable.webp"
+ },
+ {
+  "oem": "5QE804841ACNVB",
+  "oem_display": "5QE 804 841 AC NVB",
+  "name": "Battery Cover",
+  "part_type": "battery cover",
+  "system": "electrical",
+  "price_usd": 220.28,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 2
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-battery-cover-5qe804841acnvb",
+  "illustration": null
+ },
+ {
+  "oem": "5Q0803219C",
+  "oem_display": "5Q0 803 219 C",
+  "name": "Battery Hold Down",
+  "part_type": "battery hold down",
+  "system": "electrical",
+  "price_usd": 12.92,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
+   }
+  ],
+  "notes": [
+   "Conventional."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-battery-hold-down-5q0803219c",
+  "illustration": "illustrations/battery-hold-down.webp"
+ },
+ {
+  "oem": "N10675602",
+  "oem_display": "N 106 756 02",
+  "name": "Battery Hold Down Bolt",
+  "part_type": "battery hold down bolt",
+  "system": "electrical",
+  "price_usd": 0.6,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 6
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 6
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 6
+   }
+  ],
+  "notes": [
+   "1.4L with hybrid. Conventional, 12 volt."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-battery-hold-down-bolt-n10675602",
+  "illustration": "illustrations/bolt.webp"
+ },
+ {
+  "oem": "000915506",
+  "oem_display": "000 915 506",
+  "name": "Battery Plug",
+  "part_type": "battery plug",
+  "system": "electrical",
+  "price_usd": 1.42,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 2
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-battery-plug-915506",
+  "illustration": "illustrations/battery-plug.webp"
+ },
+ {
+  "oem": "7N0915429A",
+  "oem_display": "7N0 915 429 A",
+  "name": "Battery Terminal Cover",
+  "part_type": "battery terminal cover",
+  "system": "electrical",
+  "price_usd": 1.73,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 3
+   }
+  ],
+  "notes": [
+   "Conventional. 2.0L. Positive from 11/06/2017. Convertible,."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-battery-terminal-cover-7n0915429a",
+  "illustration": "illustrations/battery-terminal-cover.webp"
+ },
+ {
+  "oem": "5Q0915331K",
+  "oem_display": "5Q0 915 331 K",
+  "name": "Battery Tray",
+  "part_type": "battery tray",
+  "system": "electrical",
+  "price_usd": 112.0,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 7
+   }
+  ],
+  "notes": [
+   "Fits AllTrack, Arteon, e-Golf, Golf, Golf R, Golf SportWagen, GTI, Jetta, Jetta GLI, SportWagen Conventional. Conventional w/o 1.4 Liter. Convertible,. Sedan, Conventional w/o 1.4 Liter. Sedan/Wagon, Conventional w/o 1.4 Liter. Conventional."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-battery-tray-5q0915331k",
+  "illustration": "illustrations/battery-tray.webp"
+ },
+ {
+  "oem": "N10785701",
+  "oem_display": "N 107 857 01",
+  "name": "Battery Tray Bolt",
+  "part_type": "battery tray bolt",
+  "system": "electrical",
+  "price_usd": 0.63,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 8
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-battery-tray-bolt-n10785701",
+  "illustration": "illustrations/bolt.webp"
+ },
+ {
+  "oem": "5Q0915325D",
+  "oem_display": "5Q0 915 325 D",
+  "name": "Battery Tray Insulator",
+  "part_type": "battery tray insulator",
+  "system": "electrical",
+  "price_usd": 27.11,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 10
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 10
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 10
+   }
+  ],
+  "notes": [
+   "Conventional."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-battery-tray-insulator-5q0915325d",
+  "illustration": "illustrations/battery-tray-insulator.webp"
+ },
+ {
+  "oem": "N91173301",
+  "oem_display": "N 911 733 01",
+  "name": "Battery Tray Nut",
+  "part_type": "battery tray nut",
+  "system": "electrical",
+  "price_usd": 2.1,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 9
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 9
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 9
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-battery-tray-nut-n91173301",
+  "illustration": "illustrations/nut.webp"
+ },
+ {
+  "oem": "N90577001",
+  "oem_display": "N 905 770 01",
+  "name": "Battery Tray Washer",
+  "part_type": "battery tray washer",
+  "system": "electrical",
+  "price_usd": 0.26,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 11
+   }
+  ],
+  "notes": [
+   "Conventional."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-battery-tray-washer-n90577001",
+  "illustration": "illustrations/washer.webp"
+ },
+ {
+  "oem": "12E998754",
+  "oem_display": "12E 998 754",
+  "name": "Battery Vent Tube",
+  "part_type": "battery vent tube",
+  "system": "electrical",
+  "price_usd": 7.7,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 4
+   }
+  ],
+  "notes": [
+   "High voltage."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-battery-vent-tube-12e998754",
+  "illustration": "illustrations/pipe.webp"
+ },
+ {
+  "oem": "5Q0971250AH",
+  "oem_display": "5Q0 971 250 AH",
+  "name": "Body Electrical Ground Strap",
+  "part_type": "body electrical ground strap",
+  "system": "electrical",
+  "price_usd": 76.76,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 14
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 14
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 14
+   }
+  ],
+  "notes": [
+   "Auto trans, 1.5L. Auto trans, 1.4L. Type 1. Conventional, 1.4L."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-body-electrical-ground-strap-5q0971250ah",
+  "illustration": "illustrations/body-electrical-ground-strap.webp"
+ },
+ {
   "oem": "045903141F",
   "oem_display": "045 903 141 F",
   "name": "Bracket",
@@ -59058,6 +59919,14 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 13
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
@@ -59274,6 +60143,14 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 20
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
@@ -59419,6 +60296,54 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-composite-headlamp-5k0941005c",
   "illustration": "illustrations/composite-headlamp.webp"
+ },
+ {
+  "oem": "5GE915340CK",
+  "oem_display": "5GE 915 340 CK",
+  "name": "Control Assembly",
+  "part_type": "control",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 12
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-control-assembly-5ge915340ck) 13"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-control-assembly-5ge915340ck",
+  "illustration": null
+ },
+ {
+  "oem": "5GE915225B",
+  "oem_display": "5GE 915 225 B",
+  "name": "Control Module",
+  "part_type": "control module",
+  "system": "electrical",
+  "price_usd": 115.42,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 13
+   }
+  ],
+  "notes": [
+   "High voltage. Control module."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-control-module-5ge915225b",
+  "illustration": "illustrations/control-module.webp"
  },
  {
   "oem": "7L6941329B",
@@ -59625,6 +60550,196 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-drive-2a911335k",
   "illustration": "illustrations/drive.webp"
+ },
+ {
+  "oem": "5QE915597R",
+  "oem_display": "5QE 915 597 R",
+  "name": "Drive Motor Battery Pack",
+  "part_type": "drive motor battery pack",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "High voltage. with code es9. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-5qe915597r) 2"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-5qe915597r",
+  "illustration": "illustrations/drive-motor-battery-pack.webp"
+ },
+ {
+  "oem": "0BH325147",
+  "oem_display": "0BH 325 147",
+  "name": "Drive Motor Battery Pack Control Module",
+  "part_type": "drive motor battery pack control module",
+  "system": "electrical",
+  "price_usd": 1.11,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 13
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-control-module-bh325147",
+  "illustration": null
+ },
+ {
+  "oem": "5GE915340CL",
+  "oem_display": "5GE 915 340 CL",
+  "name": "Drive Motor Battery Pack Control Module",
+  "part_type": "drive motor battery pack control module",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 12
+   }
+  ],
+  "notes": [
+   "High voltage. with code es9. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-control-module-5ge915340cl) 12"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-control-module-5ge915340cl",
+  "illustration": null
+ },
+ {
+  "oem": "5QE905452",
+  "oem_display": "5QE 905 452",
+  "name": "Drive Motor Battery Pack Control Module",
+  "part_type": "drive motor battery pack control module",
+  "system": "electrical",
+  "price_usd": 13.09,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 13
+   }
+  ],
+  "notes": [
+   "High voltage. Control assy,gasket."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-control-module-5qe905452",
+  "illustration": null
+ },
+ {
+  "oem": "5QE803641E",
+  "oem_display": "5QE 803 641 E",
+  "name": "Drive Motor Battery Pack Control Module Bracket",
+  "part_type": "drive motor battery pack control module bracket",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 17
+   }
+  ],
+  "notes": [
+   "High voltage. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-control-module-bracket-5qe803641e) 17"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-control-module-bracket-5qe803641e",
+  "illustration": "illustrations/bracket.webp"
+ },
+ {
+  "oem": "5QE803642E",
+  "oem_display": "5QE 803 642 E",
+  "name": "Drive Motor Battery Pack Control Module Bracket",
+  "part_type": "drive motor battery pack control module bracket",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 17
+   }
+  ],
+  "notes": [
+   "High voltage. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-control-module-bracket-5qe803642e) 18"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-control-module-bracket-5qe803642e",
+  "illustration": "illustrations/bracket.webp"
+ },
+ {
+  "oem": "12E915703A",
+  "oem_display": "12E 915 703 A",
+  "name": "Drive Motor Battery Pack Control Module Connector",
+  "part_type": "drive motor battery pack control module connector",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 16
+   }
+  ],
+  "notes": [
+   "High voltage. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-control-module-connector-12e915703a) 17"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-control-module-connector-12e915703a",
+  "illustration": null
+ },
+ {
+  "oem": "7LE804841",
+  "oem_display": "7LE 804 841",
+  "name": "Drive Motor Battery Pack Cover",
+  "part_type": "drive motor battery pack cover",
+  "system": "electrical",
+  "price_usd": 213.24,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 2
+   }
+  ],
+  "notes": [
+   "High voltage. from 02/16/2015. High voltage. without code es9."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-drive-motor-battery-pack-cover-7le804841",
+  "illustration": null
  },
  {
   "oem": "4H0951253A",
@@ -60067,6 +61182,14 @@
   "appears_on": [
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
@@ -60089,6 +61212,14 @@
   "price_usd": 295.22,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 1
+   },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
@@ -60227,6 +61358,14 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
@@ -60269,6 +61408,14 @@
   "price_usd": 2.7,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 4
+   },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
@@ -60341,6 +61488,14 @@
   "appears_on": [
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
@@ -60363,6 +61518,14 @@
   "price_usd": 1.92,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 6
+   },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
@@ -60875,6 +62038,14 @@
   "appears_on": [
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 10
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
@@ -60941,6 +62112,14 @@
   "price_usd": 10.66,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 12
+   },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
@@ -61037,6 +62216,102 @@
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-center-high-mount-stop-light-bulb-n0177535",
   "illustration": "illustrations/bulb.webp"
+ },
+ {
+  "oem": "12E010006",
+  "oem_display": "12E 010 006",
+  "name": "Hybrid High Voltage Information Label",
+  "part_type": "hybrid high voltage information label",
+  "system": "electrical",
+  "price_usd": 5.06,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 9
+   }
+  ],
+  "notes": [
+   "High voltage. #3."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hybrid-high-voltage-information-label-12e010006",
+  "illustration": null
+ },
+ {
+  "oem": "12E010006Q",
+  "oem_display": "12E 010 006 Q",
+  "name": "Hybrid High Voltage Information Label",
+  "part_type": "hybrid high voltage information label",
+  "system": "electrical",
+  "price_usd": 5.54,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 10
+   }
+  ],
+  "notes": [
+   "High voltage. #4."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hybrid-high-voltage-information-label-12e010006q",
+  "illustration": null
+ },
+ {
+  "oem": "12E010849F",
+  "oem_display": "12E 010 849 F",
+  "name": "Hybrid High Voltage Information Label",
+  "part_type": "hybrid high voltage information label",
+  "system": "electrical",
+  "price_usd": 5.06,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 7
+   }
+  ],
+  "notes": [
+   "High voltage. #1."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hybrid-high-voltage-information-label-12e010849f",
+  "illustration": null
+ },
+ {
+  "oem": "12E010849G",
+  "oem_display": "12E 010 849 G",
+  "name": "Hybrid High Voltage Information Label",
+  "part_type": "hybrid high voltage information label",
+  "system": "electrical",
+  "price_usd": 5.69,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 8
+   }
+  ],
+  "notes": [
+   "High voltage. #2. Battery & components, 91 kwh, type 4."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hybrid-high-voltage-information-label-12e010849g",
+  "illustration": null
  },
  {
   "oem": "N91076601",
@@ -61235,6 +62510,30 @@
   "illustration": null
  },
  {
+  "oem": "12E010001B",
+  "oem_display": "12E 010 001 B",
+  "name": "Label",
+  "part_type": "label",
+  "system": "electrical",
+  "price_usd": 0.04,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 11
+   }
+  ],
+  "notes": [
+   "Hybrid controller. High voltage. #5. Battery & components, 82 kwh, type 3. Battery & components with hybrid. Battery & components, 91 kwh, type 3. 62 kwh battery & components high voltage. type 3."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-label-12e010001b",
+  "illustration": null
+ },
+ {
   "oem": "N10609201",
   "oem_display": "N 106 092 01",
   "name": "Lift-Gate Latch Nut",
@@ -61307,6 +62606,14 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
@@ -61375,6 +62682,14 @@
   "appears_on": [
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 9
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
@@ -61421,6 +62736,14 @@
   "price_usd": 15.24,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 8
+   },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
@@ -61493,6 +62816,14 @@
   "appears_on": [
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 18
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
@@ -61503,6 +62834,68 @@
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-motor-5c5941295",
   "illustration": "illustrations/motor.webp"
+ },
+ {
+  "oem": "5GE906129C",
+  "oem_display": "5GE 906 129 C",
+  "name": "Mount Bracket",
+  "part_type": "mount bracket",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 19
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-mount-bracket-5ge906129c) 2 This part contains hazardous materials. Extra shipping costs apply. Diagram 2: Bumper Cover79 Diagram 3: Radiator Support47 Diagram 4: Alarm Horn4 Diagram 5: Charging Port5 Diagram 6: Control Module12 Diagram 7: Clock Spring19 Diagram 8: Relay & Fuse Plt30 Diagram 9: Upper Column Cover22 Store ratingby Google 3.9star Press space for more information."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-mount-bracket-5ge906129c",
+  "illustration": "illustrations/bracket.webp"
+ },
+ {
+  "oem": "5Q0971235D",
+  "oem_display": "5Q0 971 235 D",
+  "name": "Negative Cable",
+  "part_type": "negative cable",
+  "system": "electrical",
+  "price_usd": 128.63,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 12
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-negative-cable-5q0971235d",
+  "illustration": null
  },
  {
   "oem": "1J0941953",
@@ -61535,6 +62928,124 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-parking-light-bulb-socket-1j0941953",
   "illustration": "illustrations/bulb.webp"
+ },
+ {
+  "oem": "5Q0971228AD",
+  "oem_display": "5Q0 971 228 AD",
+  "name": "Positive Cable",
+  "part_type": "positive cable",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 12
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-positive-cable-5q0971228ad) 12"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-positive-cable-5q0971228ad",
+  "illustration": null
+ },
+ {
+  "oem": "5Q0971228AE",
+  "oem_display": "5Q0 971 228 AE",
+  "name": "Positive Cable",
+  "part_type": "positive cable",
+  "system": "electrical",
+  "price_usd": 109.5,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 12
+   }
+  ],
+  "notes": [
+   "GTI. 1.5L, manual trans. Positive. Optional. Jetta. 2.0L. Conventional, 1.8L, manual trans. Start/Stop Feature. From 01/06/2020. Golf. 2.0L, auto trans, manual trans."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-positive-cable-5q0971228ae",
+  "illustration": null
+ },
+ {
+  "oem": "5Q0971228P",
+  "oem_display": "5Q0 971 228 P",
+  "name": "Positive Cable",
+  "part_type": "positive cable",
+  "system": "electrical",
+  "price_usd": 125.31,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 12
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-positive-cable-5q0971228p",
+  "illustration": null
  },
  {
   "oem": "0269039991",
@@ -61693,6 +63204,54 @@
   "illustration": null
  },
  {
+  "oem": "5QE804713",
+  "oem_display": "5QE 804 713",
+  "name": "Retainer",
+  "part_type": "retainer",
+  "system": "electrical",
+  "price_usd": 29.8,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 3
+   }
+  ],
+  "notes": [
+   "High voltage, ground tab."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-retainer-5qe804713",
+  "illustration": "illustrations/clip.webp"
+ },
+ {
+  "oem": "5QE804714A",
+  "oem_display": "5QE 804 714 A",
+  "name": "Retainer",
+  "part_type": "retainer",
+  "system": "electrical",
+  "price_usd": 3.0,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 3
+   }
+  ],
+  "notes": [
+   "High voltage, ground tab."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-retainer-5qe804714a",
+  "illustration": "illustrations/clip.webp"
+ },
+ {
   "oem": "1T0941621",
   "oem_display": "1T0 941 621",
   "name": "Retainer Ring",
@@ -61757,6 +63316,14 @@
   "price_usd": 24.54,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 14
+   },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
@@ -61883,6 +63450,30 @@
   "illustration": "illustrations/socket.webp"
  },
  {
+  "oem": "5QE915703B",
+  "oem_display": "5QE 915 703 B",
+  "name": "Socket",
+  "part_type": "socket",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 5
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-socket-5qe915703b) 6"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-socket-5qe915703b",
+  "illustration": "illustrations/socket.webp"
+ },
+ {
   "oem": "8L0941953",
   "oem_display": "8L0 941 953",
   "name": "Socket & Wire",
@@ -61905,6 +63496,28 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-socket-and-wire-8l0941953",
   "illustration": "illustrations/socket-wire.webp"
+ },
+ {
+  "oem": "5QE915433L",
+  "oem_display": "5QE 915 433 L",
+  "name": "Socket Gasket",
+  "part_type": "socket gasket",
+  "system": "electrical",
+  "price_usd": 7.91,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Battery Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5c227af27bcc2153844eb80a933d439c/366c2d71824e6ef2d818300a29137fbc.png",
+    "callout": 6
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-socket-gasket-5qe915433l",
+  "illustration": "illustrations/gasket.webp"
  },
  {
   "oem": "02A911023LX",
@@ -62395,6 +64008,14 @@
   "appears_on": [
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--bulbs-chassis",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/f52da951a62013696069fa57212c2e70/ecf1378656d70e775505b22e15984354.png",
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "electrical--lighting-exterior",
     "diagram": 1,
     "diagram_name": "Headlamp Assembly",
@@ -62853,6 +64474,30 @@
   "illustration": "illustrations/tail-light-bezel.webp"
  },
  {
+  "oem": "5GM945309B",
+  "oem_display": "5GM 945 309 B",
+  "name": "Tail Light Bezel",
+  "part_type": "tail light bezel",
+  "system": "electrical",
+  "price_usd": 20.73,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--backup-lamps",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   }
+  ],
+  "notes": [
+   "2018."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-light-bezel-5gm945309b",
+  "illustration": "illustrations/tail-light-bezel.webp"
+ },
+ {
   "oem": "5GM945310",
   "oem_display": "5GM 945 310",
   "name": "Tail Light Bezel",
@@ -62882,6 +64527,30 @@
    "2015-17, from 07/09/2014. 2015-17, without r, e-Golf."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-light-bezel-5gm945310",
+  "illustration": "illustrations/tail-light-bezel.webp"
+ },
+ {
+  "oem": "5GM945310B",
+  "oem_display": "5GM 945 310 B",
+  "name": "Tail Light Bezel",
+  "part_type": "tail light bezel",
+  "system": "electrical",
+  "price_usd": 20.73,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--backup-lamps",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   }
+  ],
+  "notes": [
+   "2018."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-light-bezel-5gm945310b",
   "illustration": "illustrations/tail-light-bezel.webp"
  },
  {
@@ -63286,6 +64955,286 @@
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turn-signal-parking-light-bulb-n10733102",
   "illustration": "illustrations/bulb.webp"
+ },
+ {
+  "oem": "000915089AB",
+  "oem_display": "000 915 089 AB",
+  "name": "Vehicle Battery",
+  "part_type": "vehicle battery",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "380 cca. 59 ah. Optional. 59 ah, type 2. Conventional, 59 ah. 59ah, type 2. Battery & components, conventional, 59 amp hour. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-vehicle-battery-915089ab) 1"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-vehicle-battery-915089ab",
+  "illustration": null
+ },
+ {
+  "oem": "000915089AC",
+  "oem_display": "000 915 089 AC",
+  "name": "Vehicle Battery",
+  "part_type": "vehicle battery",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "Optional. 420 cca. 70 ah. Conventional, 69 ah. 70ah. 69ah/360a. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-vehicle-battery-915089ac) 1"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-vehicle-battery-915089ac",
+  "illustration": null
+ },
+ {
+  "oem": "000915089E",
+  "oem_display": "000 915 089 E",
+  "name": "Vehicle Battery",
+  "part_type": "vehicle battery",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "60 ah. 61ah. Conventional, 61 ah. 2.0L. 330 amp. 2.0L. 60 amp hour. Without hybrid, all. 61, 60 amp hour. Battery & components, conventional, 61 amp hour. 60ah, type 1. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-vehicle-battery-915089e) 1"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-vehicle-battery-915089e",
+  "illustration": null
+ },
+ {
+  "oem": "000915089F",
+  "oem_display": "000 915 089 F",
+  "name": "Vehicle Battery",
+  "part_type": "vehicle battery",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "Conventional, 72 ah. 2.0L. 380 amp. 2.0L. 70 amp hour. 72ah/380 amp. 3.6L. 70 amp. Sedan, without hybrid, 72 amp hour. Wagon, 2010-11, 72 amp hour. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-vehicle-battery-915089f) 1"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-vehicle-battery-915089f",
+  "illustration": null
+ },
+ {
+  "oem": "1S0915105A",
+  "oem_display": "1S0 915 105 A",
+  "name": "Vehicle Battery",
+  "part_type": "vehicle battery",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-vehicle-battery-1s0915105a) 1"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-vehicle-battery-1s0915105a",
+  "illustration": null
+ },
+ {
+  "oem": "5K0915105G",
+  "oem_display": "5K0 915 105 G",
+  "name": "Vehicle Battery",
+  "part_type": "vehicle battery",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-vehicle-battery-5k0915105g) 1"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-vehicle-battery-5k0915105g",
+  "illustration": null
+ },
+ {
+  "oem": "5TA915105B",
+  "oem_display": "5TA 915 105 B",
+  "name": "Vehicle Battery",
+  "part_type": "vehicle battery",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--battery",
+    "diagram": 1,
+    "diagram_name": "Battery",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/63b5a8927bad4e33f297471eca1e8089/5d40c7d7e2124c2aded4bf7b6d1b99ac.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--body-wiring-harness-and-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-vehicle-battery-5ta915105b) 2"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-vehicle-battery-5ta915105b",
+  "illustration": null
  },
  {
   "oem": "09S927321",
