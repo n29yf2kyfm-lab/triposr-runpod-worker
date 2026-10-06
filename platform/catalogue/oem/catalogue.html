@@ -398,7 +398,7 @@ function renderFilters(){
 function card(p){
   const ys = partYears(p);
   return `<button class="card" data-oem="${esc(p.oem)}">
-    <div class="thumb">${p.illustration ? `<img src="${esc(p.illustration)}" alt="" loading="lazy" width="512" height="512"><span class="badge">Illustration</span>` : '<span class="nopic">No picture yet</span>'}</div>
+    <div class="thumb">${p.illustration ? `<img data-pic="${esc(picKey(p.illustration))}" alt="" width="512" height="512"><span class="badge">Illustration</span>` : '<span class="nopic">No picture yet</span>'}</div>
     <div class="body">
       <span class="oem">${esc(p.oem_display)}</span>
       <span class="name">${esc(p.name)}</span>
@@ -416,6 +416,32 @@ function renderParts(){
     : `<div class="empty">No part matches. Try fewer words, or the number without spaces.</div>`;
   $('#more').hidden = list.length <= state.shown;
   $('#more').textContent = `Show more (${list.length - state.shown} left)`;
+  watchPics($('#grid'));
+}
+
+/* ---------- pictures: packed into 32 bundles (an artifact holds at most 511 files) ---------- */
+const PIC_BUCKETS = 32, picPacks = {};
+const CRC = (() => { const t = []; for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+function picBucket(key){   // must match pack_pictures.py: crc32(key) % 32
+  let c = 0xFFFFFFFF; for (const ch of new TextEncoder().encode(key)) c = CRC[(c ^ ch) & 0xFF] ^ (c >>> 8);
+  return ((c ^ 0xFFFFFFFF) >>> 0) % PIC_BUCKETS;
+}
+function picKey(path){ return path.replace(/^.*\//, '').replace(/\.webp$/, ''); }
+function loadPack(i){
+  const name = `pics/b${String(i).padStart(2, '0')}.json`;
+  return picPacks[i] ||= fetch(name).then(r => r.ok ? r.json() : {}).catch(() => ({}));
+}
+async function fillPic(img){
+  const key = img.dataset.pic; if (!key || img.src) return;
+  const pack = await loadPack(picBucket(key));
+  if (pack[key]) img.src = pack[key];
+  else img.closest('.thumb, .pic')?.querySelector('.badge')?.remove();
+}
+const picObs = 'IntersectionObserver' in window
+  ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { picObs.unobserve(e.target); fillPic(e.target); } }), {rootMargin: '400px'})
+  : null;
+function watchPics(root){
+  root.querySelectorAll('img[data-pic]').forEach(img => picObs ? picObs.observe(img) : fillPic(img));
 }
 
 function openPart(oem){
@@ -428,7 +454,7 @@ function openPart(oem){
       <td>${esc(cat)}<br><small style="color:var(--muted)">${dia}</small></td><td class="c">${a.callout ?? ''}</td></tr>`;
   }).join('');
   $('#dlg').innerHTML = `<div class="dlg">
-    <div class="pic">${p.illustration ? `<img src="${esc(p.illustration)}" alt="AI illustration of a ${esc(p.part_type)}">
+    <div class="pic">${p.illustration ? `<img data-pic="${esc(picKey(p.illustration))}" alt="AI illustration of a ${esc(p.part_type)}">
       <span class="badge">Illustration</span><div class="cap">AI image of this kind of part — not a photo of ${esc(p.oem_display)}.</div>` : '<span class="nopic">No picture yet</span>'}</div>
     <div class="info">
       <button class="close" aria-label="Close">×</button>
@@ -446,6 +472,7 @@ function openPart(oem){
       <div class="sec"><h4>Source</h4><a href="${esc(p.source)}" target="_blank" rel="noopener">Dealer catalogue page</a></div>
     </div></div>`;
   $('#dlg').showModal();
+  $('#dlg').querySelectorAll('img[data-pic]').forEach(fillPic);
 }
 
 /* ---------- VIN box ---------- */

@@ -19,11 +19,19 @@ Tools: `parse_revolution.py` (page → parts), `build_catalogue.py` (pages →
 parts/vehicles/CSV), `illustrate.py` (part types → images).
 
 `catalogue.html` is the browser page (published as the "Golf Parts Desk"
-artifact). It reads `parts.json`, `vehicles.json`, `illustrations/` and
+artifact). It reads `parts.json`, `vehicles.json`, `pics/bNN.json` and
 `assemblies.json` (the workshop file, published under that name) from beside
 itself. It searches by OEM number or name, filters by car and system,
 decodes a VIN offline, and lists the workshop torques. To test it locally,
 serve a folder holding those files and open the page.
+
+An artifact version holds at most 511 files, and there are more part-type
+pictures than that. So the pictures are not published one file each:
+`pack_pictures.py OUT_DIR` packs them into 32 bundles (`pics/b00.json` …
+`b31.json`, 384 px WebP data URIs, about 3.4 MB in all). The page loads a
+bundle only when a card from it scrolls into view. The bucket is crc32 of
+the picture key mod 32, in both the script and the page. Rebuild the bundles
+before every publish; they are derived files and are not committed.
 
 ## Where it comes from, and what that means
 

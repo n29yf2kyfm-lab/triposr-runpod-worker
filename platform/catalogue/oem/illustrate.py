@@ -71,7 +71,7 @@ DESCRIBE = {
 # a belt for the cover, a bracket for the spindle; 'repair' names no part). No picture is better than a wrong one: never generated.
 NO_IMAGE = {'balance-shaft', 'crankshaft', 'timing-cover', 'spindle', 'repair', 'brest-rel', 'floor-jack', 'interior-view-mirror-cover', 'interior-view-mirror-cover-access-cover',
             'lift-gate-packing', 'member', 'protect-plate', 'spare-tire-label', 'tire-information-label',
-            'vehicle-lifting-jack-handle-black', 'tire-repair', 'wheel-housing-panel', 'slave-cylinder'}
+            'vehicle-lifting-jack-handle-black', 'tire-repair', 'wheel-housing-panel', 'slave-cylinder', 'air-bag-information-label'}
 
 
 def illustration_key(part_type):
