@@ -1,0 +1,76 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2016-volkswagen-golf--s--1-8l-l4-gas/electrical--starter",
+ "title": "Starter for 2016 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Starter",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/2fe6065705986900212e139224d98c11/a48f5da0e0a17e83458a769854bd2e8f.png",
+   "url": "https://vw.oempartsonline.com/v-2016-volkswagen-golf--s--1-8l-l4-gas/electrical--starter?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Starter",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/9559524cd0e60481921491e629f510b8/7aff27bac1e5cf249e4aa3359f78636f.png",
+   "url": "https://vw.oempartsonline.com/v-2016-volkswagen-golf--s--1-8l-l4-gas/electrical--starter?assembly=2"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "02M911021HX",
+   "oem_display": "02M 911 021 HX",
+   "oem_from": "printed",
+   "name": "Starter",
+   "label": "Exc.Start/Stop Feature. 1.1 Kw. Vendor:bosch. Passat. Auto trans. 1.8l. Coupe, remanufactured.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 235.65,
+   "msrp_usd": 354.15,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2m911021hx"
+  },
+  {
+   "oem": "02Z911024F",
+   "oem_display": "02Z 911 024 F",
+   "oem_from": "printed",
+   "name": "Starter",
+   "label": "Golf SportWagen. 1.8l. Jetta. Exc.Start/Stop Feature. 1.1 Kw. Fwd. Golf. 1.4l. Golf Alltrack. New. Vendor:bosch.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 612.71,
+   "msrp_usd": 920.82,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2z911024f"
+  },
+  {
+   "oem": "02Z911024FX",
+   "oem_display": "02Z 911 024 FX",
+   "oem_from": "printed",
+   "name": "Starter",
+   "label": "Exc.Start/Stop Feature. 1.1 Kw. Golf. 1.8l. Reman.. Vendor:bosch.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 181.49,
+   "msrp_usd": 272.75,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2z911024fx"
+  },
+  {
+   "oem": "02M911021H",
+   "oem_display": "02M 911 021 H",
+   "oem_from": "printed",
+   "name": "Starter",
+   "label": "Starter",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 374.28,
+   "msrp_usd": 562.48,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2m911021h"
+  }
+ ]
+}

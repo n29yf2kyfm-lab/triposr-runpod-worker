@@ -1,0 +1,124 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2016-volkswagen-golf--s--1-8l-l4-gas/electrical--alternator",
+ "title": "Alternator for 2016 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Alternator",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/e3996c0eecf4bced5a980d6906d9e5b8/5af6fbc6b611f4afd12ac17656a92378.png",
+   "url": "https://vw.oempartsonline.com/v-2016-volkswagen-golf--s--1-8l-l4-gas/electrical--alternator?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Alternator",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/5e998c849838a08d59faf567e27fa1c1/0c83b8c213c8e41510715b0773343cbe.png",
+   "url": "https://vw.oempartsonline.com/v-2016-volkswagen-golf--s--1-8l-l4-gas/electrical--alternator?assembly=2"
+  },
+  {
+   "n": 3,
+   "name": "Alternator",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/94214638072d24c94aefb522da51f429/4d55c9ba3b407e0be87ec4737638cd3e.png",
+   "url": "https://vw.oempartsonline.com/v-2016-volkswagen-golf--s--1-8l-l4-gas/electrical--alternator?assembly=3"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "06K903024C",
+   "oem_display": "06K 903 024 C",
+   "oem_from": "printed",
+   "name": "Alternator",
+   "label": "1.8L, new. 140 amp, bosch, new.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 870.55,
+   "msrp_usd": 1207.68,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-alternator-6k903024c"
+  },
+  {
+   "oem": "06K903024CX",
+   "oem_display": "06K 903 024 CX",
+   "oem_from": "printed",
+   "name": "Alternator",
+   "label": "Vendor:bosch. From 04/16/2018. 140 Amp.. 2.0L, bosch, 140a, remanufactured. From 10/10/2016. 140 Amp.. From 07/01/2014. 140 Amp.. To 04/16/2018. 140 Amp.. 2019-21, 140 amp, bosch, from 01/27/2020, remanufactured. 2.0L, gas, remanufactured, bosch. To 04/15/2016. 140 Amp..",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": 502.52,
+   "msrp_usd": 697.12,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-alternator-6k903024cx"
+  },
+  {
+   "oem": "06K903023K",
+   "oem_display": "06K 903 023 K",
+   "oem_from": "printed",
+   "name": "Alternator",
+   "label": "GTI. 150 amp. Vendor:bosch. Reman.. Golf Alltrack. Golf R. 150a. 2.0L. Golf. 1.8l.",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": 443.59,
+   "msrp_usd": 615.36,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-alternator-6k903023k"
+  },
+  {
+   "oem": "N91204501",
+   "oem_display": "N 912 045 01",
+   "oem_from": "printed",
+   "name": "A/C Compressor Bolt",
+   "label": "Alternator Mount Bolt",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 1.35,
+   "msrp_usd": 1.84,
+   "notes": "1.8L. Without e-Golf. 2019-21. R1234yf. 2022-23. 2.0L, gas. Engine code: dyla, dylb. 2.0L, diesel. 1.4L.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-a-c-compressor-bolt-n91204501"
+  },
+  {
+   "oem": "N91026802",
+   "oem_display": "N 910 268 02",
+   "oem_from": "printed",
+   "name": "Alternator Bracket Bolt",
+   "label": "Alternator Bracket Bolt, Lower",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 4.58,
+   "msrp_usd": 7.5,
+   "notes": "Duel tone. 1.8L. Convertible. 2.0L, gas, m8x20.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-alternator-bracket-bolt-n91026802"
+  },
+  {
+   "oem": "N91045502",
+   "oem_display": "N 910 455 02",
+   "oem_from": "printed",
+   "name": "Alternator Bracket Bolt",
+   "label": "Alternator Bracket Bolt, Upper",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 1.21,
+   "msrp_usd": 1.98,
+   "notes": "1.8L. Filter housing,bolt. 2022-23. 2.0L, gas, m8x65. Engine code: dyla, dylb, m8x65. Coupe,.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-alternator-bracket-bolt-n91045502"
+  },
+  {
+   "oem": "06L903143S",
+   "oem_display": "06L 903 143 S",
+   "oem_from": "printed",
+   "name": "Alternator Adjusting Bracket",
+   "label": "Alternator Bracket",
+   "callout": 6,
+   "diagram": 1,
+   "price_usd": 224.56,
+   "msrp_usd": 337.48,
+   "notes": "1.8L. 2019-21. From 12/06/2014.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-alternator-adjusting-bracket-6l903143s"
+  }
+ ]
+}

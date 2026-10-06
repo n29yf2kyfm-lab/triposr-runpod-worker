@@ -1,0 +1,158 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2016-volkswagen-golf--s--1-8l-l4-gas/cooling-system--radiator-and-components",
+ "title": "Radiator & Components for 2016 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Radiator",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/bb0d33a3060827d1227167061e3b94e8/3d27a7303c70ef7c2054023f00b8b1a3.png",
+   "url": "https://vw.oempartsonline.com/v-2016-volkswagen-golf--s--1-8l-l4-gas/cooling-system--radiator-and-components?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Auxiliary Pump",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/a87ee791bc74b60069770cd2a90fbb4c/9a0bd3dc583acc807059bceacb1a68c0.png",
+   "url": "https://vw.oempartsonline.com/v-2016-volkswagen-golf--s--1-8l-l4-gas/cooling-system--radiator-and-components?assembly=2"
+  },
+  {
+   "n": 3,
+   "name": "Radiator",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/c56af4d5b0c81aadb194a20c5b6af679/8b12a5f95283d4b0bc5ed69ce3bd4020.png",
+   "url": "https://vw.oempartsonline.com/v-2016-volkswagen-golf--s--1-8l-l4-gas/cooling-system--radiator-and-components?assembly=3"
+  },
+  {
+   "n": 4,
+   "name": "Radiator",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/e09ac963d7074cd4e59ffb764472402d/a6742920c26b44a3e840d50e89173da8.png",
+   "url": "https://vw.oempartsonline.com/v-2016-volkswagen-golf--s--1-8l-l4-gas/cooling-system--radiator-and-components?assembly=4"
+  },
+  {
+   "n": 5,
+   "name": "Radiator",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/d0f522448ad758b860ce51f75dabce59/73c49db99841ea7da10fef11c7a0d079.png",
+   "url": "https://vw.oempartsonline.com/v-2016-volkswagen-golf--s--1-8l-l4-gas/cooling-system--radiator-and-components?assembly=5"
+  },
+  {
+   "n": 6,
+   "name": "Radiator",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/10d3ac48e9b020b3f5c2a213c91ac91f/ee2359dd6fb6c8fe73c1840671023213.png",
+   "url": "https://vw.oempartsonline.com/v-2016-volkswagen-golf--s--1-8l-l4-gas/cooling-system--radiator-and-components?assembly=6"
+  },
+  {
+   "n": 7,
+   "name": "Reservoir",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/739279d94aabc041648dcd4662f4c71f/1acef143211956dee2f318ed384003a8.png",
+   "url": "https://vw.oempartsonline.com/v-2016-volkswagen-golf--s--1-8l-l4-gas/cooling-system--radiator-and-components?assembly=7"
+  },
+  {
+   "n": 8,
+   "name": "Lower Hose",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/1af6b02b5c27f4433cb8eaff3beded40/4456bd917a7a1769418636ce9dbd1232.png",
+   "url": "https://vw.oempartsonline.com/v-2016-volkswagen-golf--s--1-8l-l4-gas/cooling-system--radiator-and-components?assembly=8"
+  },
+  {
+   "n": 10,
+   "name": "Reservoir",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/5f2e1667e077b8fab7e1785f761bcef5/673e1f0a9e6460f8621481365fc1beb8.png",
+   "url": "https://vw.oempartsonline.com/v-2016-volkswagen-golf--s--1-8l-l4-gas/cooling-system--radiator-and-components?assembly=10"
+  },
+  {
+   "n": 11,
+   "name": "Temp Sensor",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/a22ed2f952566d8ab8b453017eb70edc/2168256a5071ee2949fa889bc3226f6e.png",
+   "url": "https://vw.oempartsonline.com/v-2016-volkswagen-golf--s--1-8l-l4-gas/cooling-system--radiator-and-components?assembly=11"
+  },
+  {
+   "n": 12,
+   "name": "Temp Sensor",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/f59c16f856586e23d83eeec4e829f238/b8d95c9ba79190b5baa8add57df64877.png",
+   "url": "https://vw.oempartsonline.com/v-2016-volkswagen-golf--s--1-8l-l4-gas/cooling-system--radiator-and-components?assembly=12"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "5WA121251H",
+   "oem_display": "5WA 121 251 H",
+   "oem_from": "printed",
+   "name": "Radiator",
+   "label": "Optional. 1.8L. Golf SportWagen. Jetta. Type 1. Tiguan. From 08/25/2015. From 04/28/2015. To 10/11/2021.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 233.11,
+   "msrp_usd": 350.34,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-radiator-5wa121251h"
+  },
+  {
+   "oem": "5Q0121345C",
+   "oem_display": "5Q0 121 345 C",
+   "oem_from": "printed",
+   "name": "Radiator Air Seal",
+   "label": "Radiator Upper Seal",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": 12.92,
+   "msrp_usd": 21.18,
+   "notes": "1.8L. 2019-21. Gas, main. Engine cooling.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-radiator-air-seal-5q0121345c"
+  },
+  {
+   "oem": "5Q0121331D",
+   "oem_display": "5Q0 121 331 D",
+   "oem_from": "printed",
+   "name": "Radiator Side Seal",
+   "label": "Radiator Side Seal, Left",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 2.96,
+   "msrp_usd": 4.85,
+   "notes": "1.8L. 2019-21. Gas, main.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-radiator-side-seal-5q0121331d"
+  },
+  {
+   "oem": "5Q0121407AA",
+   "oem_display": "5Q0 121 407 AA",
+   "oem_from": "printed",
+   "name": "Engine Coolant Reservoir",
+   "label": "Reservoir",
+   "callout": 4,
+   "diagram": 1,
+   "price_usd": 57.97,
+   "msrp_usd": 82.65,
+   "notes": "1.8L.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-coolant-reservoir-5q0121407aa"
+  },
+  {
+   "oem": "5Q0121321",
+   "oem_display": "5Q0 121 321",
+   "oem_from": "printed",
+   "name": "Cap",
+   "label": "Reservoir Cap",
+   "callout": 5,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-cap-5q0121321) 6",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-cap-5q0121321"
+  },
+  {
+   "oem": "1H0121687A",
+   "oem_display": "1H0 121 687 A",
+   "oem_from": "printed",
+   "name": "Engine Coolant Reservoir Cap Seal",
+   "label": "Reservoir Cap Seal",
+   "callout": 6,
+   "diagram": 1,
+   "price_usd": 4.12,
+   "msrp_usd": 6.77,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-coolant-reservoir-cap-seal-1h0121687a"
+  }
+ ]
+}
