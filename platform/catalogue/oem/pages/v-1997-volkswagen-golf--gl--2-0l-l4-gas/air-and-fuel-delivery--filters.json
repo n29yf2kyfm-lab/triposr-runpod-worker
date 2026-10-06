@@ -1,0 +1,35 @@
+{
+ "page": "https://vw.oempartsonline.com/v-1997-volkswagen-golf--gl--2-0l-l4-gas/air-and-fuel-delivery--filters",
+ "title": "Filters for 1997 Volkswagen Golf",
+ "diagrams": [],
+ "parts": [
+  {
+   "oem": "1H0129620",
+   "oem_display": "1H0 129 620",
+   "oem_from": "printed",
+   "name": "Engine Air Filter",
+   "label": "Cabrio. Air cleaner & ducts. 2.8L. 6 cylinder. Gas. Golf, GTI, Jetta. 4 cylinder diesel.",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 19.51,
+   "msrp_usd": 26.65,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-air-filter-1h0129620"
+  },
+  {
+   "oem": "1H0201511A",
+   "oem_display": "1H0 201 511 A",
+   "oem_from": "printed",
+   "name": "Fuel Filter",
+   "label": "Fuel Filter",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 26.99,
+   "msrp_usd": 38.48,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-filter-1h0201511a"
+  }
+ ]
+}

@@ -245,6 +245,14 @@
     "diagram_name": "Air Cleaner Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5892ea9f6c054bfb2aae6e7c972212d3/72256a01673668dc01282020b4ab1ae9.png",
     "callout": 4
+   },
+   {
+    "vehicle": "v-2021-volkswagen-golf--tsi--1-4l-l4-gas",
+    "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
    }
   ],
   "notes": [
@@ -292,6 +300,14 @@
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5892ea9f6c054bfb2aae6e7c972212d3/72256a01673668dc01282020b4ab1ae9.png",
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2021-volkswagen-golf--tsi--1-4l-l4-gas",
+    "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 2
    }
   ],
@@ -398,6 +414,14 @@
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5892ea9f6c054bfb2aae6e7c972212d3/72256a01673668dc01282020b4ab1ae9.png",
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2021-volkswagen-golf--tsi--1-4l-l4-gas",
+    "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 3
    }
   ],
@@ -552,6 +576,14 @@
     "diagram_name": "Air Cleaner Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5892ea9f6c054bfb2aae6e7c972212d3/72256a01673668dc01282020b4ab1ae9.png",
     "callout": 1
+   },
+   {
+    "vehicle": "v-2021-volkswagen-golf--tsi--1-4l-l4-gas",
+    "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
    }
   ],
   "notes": [
@@ -635,6 +667,28 @@
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-air-filter-housing-grommet-36129689b",
   "illustration": "illustrations/air-filter-housing-grommet.webp"
+ },
+ {
+  "oem": "04E103560",
+  "oem_display": "04E 103 560",
+  "name": "Air Hose",
+  "part_type": "air hose",
+  "system": "air and fuel delivery",
+  "price_usd": 19.14,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2021-volkswagen-golf--tsi--1-4l-l4-gas",
+    "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 12
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-air-hose-4e103560",
+  "illustration": "illustrations/hose.webp"
  },
  {
   "oem": "04E103560L",
@@ -721,6 +775,14 @@
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5892ea9f6c054bfb2aae6e7c972212d3/72256a01673668dc01282020b4ab1ae9.png",
+    "callout": 17
+   },
+   {
+    "vehicle": "v-2021-volkswagen-golf--tsi--1-4l-l4-gas",
+    "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 17
    },
    {
@@ -834,12 +896,44 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 14
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/cb7fc6820726b017283e82404386c4ff/c3b131da379813b2911ab0984a0a092f.png",
+    "callout": 2
    }
   ],
   "notes": [
    "With gli. 2.0L, gas. With awd. 1.8L. Sedan from 1/05, wagon 2009 only, diesel engine. Wagon, 2010-11, 2.0L."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-body-electrical-ground-strap-1j0201142a",
+  "illustration": "illustrations/body-electrical-ground-strap.webp"
+ },
+ {
+  "oem": "5Q0971250S",
+  "oem_display": "5Q0 971 250 S",
+  "name": "Body Electrical Ground Strap",
+  "part_type": "body electrical ground strap",
+  "system": "air and fuel delivery",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/cb7fc6820726b017283e82404386c4ff/c3b131da379813b2911ab0984a0a092f.png",
+    "callout": 2
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-body-electrical-ground-strap-5q0971250s) 3"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-body-electrical-ground-strap-5q0971250s",
   "illustration": "illustrations/body-electrical-ground-strap.webp"
  },
  {
@@ -874,10 +968,19 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1c2996a532a2bb1089b21b75b8da2302/0fbfa5c5a2162ecc6b6b839e3f89761d.png",
     "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/cb7fc6820726b017283e82404386c4ff/c3b131da379813b2911ab0984a0a092f.png",
+    "callout": 7
    }
   ],
   "notes": [
-   "1.8L. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-cap-5wa201550k) 6"
+   "1.8L. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-cap-5wa201550k) 6",
+   "1.8L. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-cap-5wa201550k) 8"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-cap-5wa201550k",
   "illustration": "illustrations/cap.webp"
@@ -927,6 +1030,44 @@
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-caution-label-701010002aa",
   "illustration": "illustrations/caution-label.webp"
+ },
+ {
+  "oem": "5Q0253115B",
+  "oem_display": "5Q0 253 115 B",
+  "name": "Converter & Pipe Gasket",
+  "part_type": "converter & pipe gasket",
+  "system": "air and fuel delivery",
+  "price_usd": 7.94,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "exhaust--exhaust-components",
+    "diagram": 1,
+    "diagram_name": "Converter & Pipe",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/319f57001f079fdeb5829274b530e573/a5240bdb57818acca5ee219a9ab61978.png",
+    "callout": 3
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-converter-and-pipe-gasket-5q0253115b",
+  "illustration": "illustrations/gasket.webp"
  },
  {
   "oem": "5G4809611",
@@ -1062,6 +1203,14 @@
     "diagram_name": "Air Cleaner Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5892ea9f6c054bfb2aae6e7c972212d3/72256a01673668dc01282020b4ab1ae9.png",
     "callout": 11
+   },
+   {
+    "vehicle": "v-2021-volkswagen-golf--tsi--1-4l-l4-gas",
+    "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 7
    }
   ],
   "notes": [],
@@ -1196,6 +1345,14 @@
     "callout": 7
    },
    {
+    "vehicle": "v-2021-volkswagen-golf--tsi--1-4l-l4-gas",
+    "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 7
+   },
+   {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--carburetion",
     "diagram": 1,
@@ -1265,6 +1422,28 @@
   "illustration": "illustrations/engine-air-filter.webp"
  },
  {
+  "oem": "1H0129620",
+  "oem_display": "1H0 129 620",
+  "name": "Engine Air Filter",
+  "part_type": "engine air filter",
+  "system": "air and fuel delivery",
+  "price_usd": 19.51,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": null,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": null
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-air-filter-1h0129620",
+  "illustration": "illustrations/engine-air-filter.webp"
+ },
+ {
   "oem": "04E129654R",
   "oem_display": "04E 129 654 R",
   "name": "Engine Air Intake Hose",
@@ -1303,6 +1482,14 @@
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5892ea9f6c054bfb2aae6e7c972212d3/72256a01673668dc01282020b4ab1ae9.png",
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2021-volkswagen-golf--tsi--1-4l-l4-gas",
+    "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 8
    }
   ],
@@ -1680,6 +1867,14 @@
     "callout": 12
    },
    {
+    "vehicle": "v-2021-volkswagen-golf--tsi--1-4l-l4-gas",
+    "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 14
+   },
+   {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--carburetion",
     "diagram": 1,
@@ -1742,6 +1937,14 @@
     "diagram_name": "Air Cleaner Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5892ea9f6c054bfb2aae6e7c972212d3/72256a01673668dc01282020b4ab1ae9.png",
     "callout": 12
+   },
+   {
+    "vehicle": "v-2021-volkswagen-golf--tsi--1-4l-l4-gas",
+    "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 12
    }
   ],
   "notes": [
@@ -1789,6 +1992,14 @@
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5892ea9f6c054bfb2aae6e7c972212d3/72256a01673668dc01282020b4ab1ae9.png",
+    "callout": 6
+   },
+   {
+    "vehicle": "v-2021-volkswagen-golf--tsi--1-4l-l4-gas",
+    "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 6
    }
   ],
@@ -1900,6 +2111,14 @@
     "diagram_name": "Air Cleaner Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5892ea9f6c054bfb2aae6e7c972212d3/72256a01673668dc01282020b4ab1ae9.png",
     "callout": 10
+   },
+   {
+    "vehicle": "v-2021-volkswagen-golf--tsi--1-4l-l4-gas",
+    "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 10
    }
   ],
   "notes": [
@@ -1938,6 +2157,30 @@
    "Flap. 1.5L. 1.4L. Engine code: dyla, dylb."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-air-intake-hose-debris-screen-5q0129747b",
+  "illustration": "illustrations/hose.webp"
+ },
+ {
+  "oem": "5QM129747",
+  "oem_display": "5QM 129 747",
+  "name": "Engine Air Intake Hose Debris Screen",
+  "part_type": "engine air intake hose debris screen",
+  "system": "air and fuel delivery",
+  "price_usd": 13.04,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2021-volkswagen-golf--tsi--1-4l-l4-gas",
+    "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 13
+   }
+  ],
+  "notes": [
+   "Front."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-air-intake-hose-debris-screen-5qm129747",
   "illustration": "illustrations/hose.webp"
  },
  {
@@ -2028,12 +2271,52 @@
     "diagram_name": "Turbocharger",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/6cb5a8f191287fcf213914f91a4e6ecc/0fb5077861724936773ecc764fa2452c.png",
     "callout": 17
+   },
+   {
+    "vehicle": "v-2021-volkswagen-golf--tsi--1-4l-l4-gas",
+    "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 9
    }
   ],
   "notes": [
    "1.5L. 1.4L without hybrid."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-air-intake-hose-o-ring-wht001386",
+  "illustration": "illustrations/o-ring.webp"
+ },
+ {
+  "oem": "WHT006114",
+  "oem_display": "WHT 006 114",
+  "name": "Engine Coolant Pipe O-Ring",
+  "part_type": "engine coolant pipe o ring",
+  "system": "air and fuel delivery",
+  "price_usd": 2.43,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
+    "callout": 7
+   }
+  ],
+  "notes": [
+   "15 x 2mm. 1.8L. upper. 2.0L, 2020-23, upper. 2014-18. Gas. Coupe, 15x2."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-coolant-pipe-o-ring-wht006114",
   "illustration": "illustrations/o-ring.webp"
  },
  {
@@ -2083,6 +2366,60 @@
   "illustration": "illustrations/engine-cover-emblem.webp"
  },
  {
+  "oem": "N90067202",
+  "oem_display": "N 900 672 02",
+  "name": "Engine Oil Dipstick Tube O-Ring",
+  "part_type": "engine oil dipstick tube o ring",
+  "system": "air and fuel delivery",
+  "price_usd": 1.42,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 12
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
+    "callout": 12
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-oil-dipstick-tube-o-ring-n90067202",
+  "illustration": "illustrations/o-ring.webp"
+ },
+ {
+  "oem": "8K0906651D",
+  "oem_display": "8K0 906 651 D",
+  "name": "Evaporative Emissions System Leak Detection Pump",
+  "part_type": "evaporative emissions system leak detection pump",
+  "system": "air and fuel delivery",
+  "price_usd": 66.37,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/cb7fc6820726b017283e82404386c4ff/c3b131da379813b2911ab0984a0a092f.png",
+    "callout": 12
+   }
+  ],
+  "notes": [
+   "GTI. Fuel tank leak diagnosis. Awd. 1.8L. Golf R. Gas."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-evaporative-emissions-system-leak-detection-pump-8k0906651d",
+  "illustration": null
+ },
+ {
   "oem": "04E145722N",
   "oem_display": "04E 145 722 N",
   "name": "Exhaust Manifold",
@@ -2121,6 +2458,70 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-manifold-4e145722n",
   "illustration": "illustrations/exhaust-manifold.webp"
+ },
+ {
+  "oem": "06K145713L",
+  "oem_display": "06K 145 713 L",
+  "name": "Exhaust Manifold",
+  "part_type": "exhaust manifold",
+  "system": "air and fuel delivery",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "Incl.Turbocharger. Incl.Exhaust Manifold. Golf. 1.8l. Golf Alltrack. From 05/21/2019. To 10/31/2014. To 05/20/2019. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-manifold-6k145713l) 2"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-manifold-6k145713l",
+  "illustration": "illustrations/exhaust-manifold.webp"
+ },
+ {
+  "oem": "06K145536A",
+  "oem_display": "06K 145 536 A",
+  "name": "Exhaust Manifold Bracket",
+  "part_type": "exhaust manifold bracket",
+  "system": "air and fuel delivery",
+  "price_usd": 37.51,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 20
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
+    "callout": 20
+   }
+  ],
+  "notes": [
+   "1.8L. 2019-21. Support. 2.0L, 2020-23. 2.0L gas."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-manifold-bracket-6k145536a",
+  "illustration": "illustrations/bracket.webp"
  },
  {
   "oem": "04E253039D",
@@ -2288,6 +2689,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1c2996a532a2bb1089b21b75b8da2302/0fbfa5c5a2162ecc6b6b839e3f89761d.png",
     "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/cb7fc6820726b017283e82404386c4ff/c3b131da379813b2911ab0984a0a092f.png",
+    "callout": 9
    }
   ],
   "notes": [],
@@ -2464,6 +2873,28 @@
   "illustration": "illustrations/fuel-filler-housing.webp"
  },
  {
+  "oem": "1H0201511A",
+  "oem_display": "1H0 201 511 A",
+  "name": "Fuel Filter",
+  "part_type": "fuel filter",
+  "system": "air and fuel delivery",
+  "price_usd": 26.99,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": null,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": null
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-filter-1h0201511a",
+  "illustration": "illustrations/fuel-filter.webp"
+ },
+ {
   "oem": "04E010012M",
   "oem_display": "04E 010 012 M",
   "name": "Fuel Information Label",
@@ -2578,6 +3009,30 @@
   "illustration": "illustrations/o-ring.webp"
  },
  {
+  "oem": "5Q0919087AQ",
+  "oem_display": "5Q0 919 087 AQ",
+  "name": "Fuel Pump And Sender Assembly",
+  "part_type": "fuel pump and sender",
+  "system": "air and fuel delivery",
+  "price_usd": 270.72,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/cb7fc6820726b017283e82404386c4ff/c3b131da379813b2911ab0984a0a092f.png",
+    "callout": 13
+   }
+  ],
+  "notes": [
+   "Incl.Fuel Tank Sending Unit. Awd. Golf Alltrack. Gas. Golf R. In tank. Primary. Manual trans. Golf SportWagen. 1.8l. To 05/25/2015."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-pump-and-sender-assembly-5q0919087aq",
+  "illustration": "illustrations/fuel-pump-and-sender.webp"
+ },
+ {
   "oem": "5QM919051B",
   "oem_display": "5QM 919 051 B",
   "name": "Fuel Pump And Sender Assembly",
@@ -2649,6 +3104,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1c2996a532a2bb1089b21b75b8da2302/0fbfa5c5a2162ecc6b6b839e3f89761d.png",
     "callout": 14
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/cb7fc6820726b017283e82404386c4ff/c3b131da379813b2911ab0984a0a092f.png",
+    "callout": 11
    }
   ],
   "notes": [
@@ -2656,6 +3119,54 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-pump-driver-module-5q0906093c",
   "illustration": "illustrations/fuel-pump-module.webp"
+ },
+ {
+  "oem": "5Q0919673AK",
+  "oem_display": "5Q0 919 673 AK",
+  "name": "Fuel Sender And Hanger Assembly",
+  "part_type": "fuel sender and hanger",
+  "system": "air and fuel delivery",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/cb7fc6820726b017283e82404386c4ff/c3b131da379813b2911ab0984a0a092f.png",
+    "callout": 16
+   }
+  ],
+  "notes": [
+   "Gauge. Awd. Golf R. Right. Gas. Golf Alltrack. Golf SportWagen. 1.8l. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-sender-and-hanger-assembly-5q0919673ak) Diagram 2: Turbocharger29 Store ratingby Google 3.9star Press space for more information."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-sender-and-hanger-assembly-5q0919673ak",
+  "illustration": "illustrations/bracket.webp"
+ },
+ {
+  "oem": "5Q0201055CN",
+  "oem_display": "5Q0 201 055 CN",
+  "name": "Fuel Tank",
+  "part_type": "fuel tank",
+  "system": "air and fuel delivery",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/cb7fc6820726b017283e82404386c4ff/c3b131da379813b2911ab0984a0a092f.png",
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-tank-5q0201055cn) 2"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-tank-5q0201055cn",
+  "illustration": "illustrations/fuel-tank.webp"
  },
  {
   "oem": "5WA201055C",
@@ -2696,6 +3207,30 @@
   "illustration": "illustrations/fuel-tank.webp"
  },
  {
+  "oem": "5Q0201519",
+  "oem_display": "5Q0 201 519",
+  "name": "Fuel Tank Bracket",
+  "part_type": "fuel tank bracket",
+  "system": "air and fuel delivery",
+  "price_usd": 7.63,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/cb7fc6820726b017283e82404386c4ff/c3b131da379813b2911ab0984a0a092f.png",
+    "callout": 6
+   }
+  ],
+  "notes": [
+   "1.8L awd. With gli. 2.0L gas."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-tank-bracket-5q0201519",
+  "illustration": "illustrations/bracket.webp"
+ },
+ {
   "oem": "5Q0201557",
   "oem_display": "5Q0 201 557",
   "name": "Fuel Tank Cap Seal",
@@ -2727,13 +3262,46 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1c2996a532a2bb1089b21b75b8da2302/0fbfa5c5a2162ecc6b6b839e3f89761d.png",
     "callout": 6
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/cb7fc6820726b017283e82404386c4ff/c3b131da379813b2911ab0984a0a092f.png",
+    "callout": 8
    }
   ],
   "notes": [
-   "Awd. With gli. 2022-23. 2.0L gas. 2019-21 all wheel drive. from 09/20/2021. 1.8L. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-tank-cap-seal-5q0201557) 7"
+   "Awd. With gli. 2022-23. 2.0L gas. 2019-21 all wheel drive. from 09/20/2021. 1.8L. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-tank-cap-seal-5q0201557) 7",
+   "Awd. With gli. 2022-23. 2.0L gas. 2019-21 all wheel drive. from 09/20/2021. 1.8L. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-tank-cap-seal-5q0201557) 9"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-tank-cap-seal-5q0201557",
   "illustration": "illustrations/seal.webp"
+ },
+ {
+  "oem": "8K0201274B",
+  "oem_display": "8K0 201 274 B",
+  "name": "Fuel Tank Insulator",
+  "part_type": "fuel tank insulator",
+  "system": "air and fuel delivery",
+  "price_usd": 2.32,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/cb7fc6820726b017283e82404386c4ff/c3b131da379813b2911ab0984a0a092f.png",
+    "callout": 3
+   }
+  ],
+  "notes": [
+   "Fuel tank,insulator. Fwd, bumper. 1.8L awd. Gas. All wheel drive. Front wheel drive."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-tank-insulator-8k0201274b",
+  "illustration": null
  },
  {
   "oem": "5QM919673A",
@@ -2807,6 +3375,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1c2996a532a2bb1089b21b75b8da2302/0fbfa5c5a2162ecc6b6b839e3f89761d.png",
     "callout": 13
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/cb7fc6820726b017283e82404386c4ff/c3b131da379813b2911ab0984a0a092f.png",
+    "callout": 15
    }
   ],
   "notes": [],
@@ -2845,6 +3421,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1c2996a532a2bb1089b21b75b8da2302/0fbfa5c5a2162ecc6b6b839e3f89761d.png",
     "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/cb7fc6820726b017283e82404386c4ff/c3b131da379813b2911ab0984a0a092f.png",
+    "callout": 14
    }
   ],
   "notes": [],
@@ -2892,6 +3476,54 @@
   "illustration": "illustrations/fuel-tank-shield.webp"
  },
  {
+  "oem": "5Q0201307S",
+  "oem_display": "5Q0 201 307 S",
+  "name": "Fuel Tank Shield",
+  "part_type": "fuel tank shield",
+  "system": "air and fuel delivery",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/cb7fc6820726b017283e82404386c4ff/c3b131da379813b2911ab0984a0a092f.png",
+    "callout": 10
+   }
+  ],
+  "notes": [
+   "Awd. Gas. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-tank-shield-5q0201307s) 11"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-tank-shield-5q0201307s",
+  "illustration": "illustrations/fuel-tank-shield.webp"
+ },
+ {
+  "oem": "5Q0201974E",
+  "oem_display": "5Q0 201 974 E",
+  "name": "Fuel Tank Shield",
+  "part_type": "fuel tank shield",
+  "system": "air and fuel delivery",
+  "price_usd": 40.8,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/cb7fc6820726b017283e82404386c4ff/c3b131da379813b2911ab0984a0a092f.png",
+    "callout": 5
+   }
+  ],
+  "notes": [
+   "Awd. Gas."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-tank-shield-5q0201974e",
+  "illustration": "illustrations/fuel-tank-shield.webp"
+ },
+ {
   "oem": "1J0201048C",
   "oem_display": "1J0 201 048 C",
   "name": "Fuel Tank Strap Spacer",
@@ -2930,6 +3562,68 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-tank-strap-spacer-1j0201048c",
   "illustration": "illustrations/fuel-tank-strap-spacer.webp"
+ },
+ {
+  "oem": "06L253039",
+  "oem_display": "06L 253 039",
+  "name": "Gasket",
+  "part_type": "gasket",
+  "system": "air and fuel delivery",
+  "price_usd": 5.08,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 2
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-gasket-6l253039",
+  "illustration": "illustrations/gasket.webp"
+ },
+ {
+  "oem": "5Q0971250N",
+  "oem_display": "5Q0 971 250 N",
+  "name": "Ground Cable",
+  "part_type": "ground cable",
+  "system": "air and fuel delivery",
+  "price_usd": 111.76,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/cb7fc6820726b017283e82404386c4ff/c3b131da379813b2911ab0984a0a092f.png",
+    "callout": 2
+   }
+  ],
+  "notes": [
+   "Manual trans, 1.4L. Manual trans 1.5L. CONVENTIONAL. 1.8L manual trans. Conventional, 2.0L, manual trans."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-ground-cable-5q0971250n",
+  "illustration": null
  },
  {
   "oem": "04E103474H",
@@ -3296,6 +3990,38 @@
   "illustration": "illustrations/bracket.webp"
  },
  {
+  "oem": "06K145778AS",
+  "oem_display": "06K 145 778 AS",
+  "name": "Oil Inlet Line",
+  "part_type": "oil inlet line",
+  "system": "air and fuel delivery",
+  "price_usd": 43.48,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
+    "callout": 11
+   }
+  ],
+  "notes": [
+   "Oil inlet tube. Arteon. GTI. 2019-21. Oil feed tube. Golf. 1.8l. Golf Alltrack. Golf R. 2.0L."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-oil-inlet-line-6k145778as",
+  "illustration": "illustrations/pipe.webp"
+ },
+ {
   "oem": "04E145735AC",
   "oem_display": "04E 145 735 AC",
   "name": "Oil Return Line",
@@ -3325,6 +4051,38 @@
    "Oil return tube. Jetta. Return. 1.4l. 1.4L without hybrid. Golf SportWagen. 1.4l."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-oil-return-line-4e145735ac",
+  "illustration": "illustrations/pipe.webp"
+ },
+ {
+  "oem": "06K145735T",
+  "oem_display": "06K 145 735 T",
+  "name": "Oil Return Line",
+  "part_type": "oil return line",
+  "system": "air and fuel delivery",
+  "price_usd": 26.24,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 13
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
+    "callout": 13
+   }
+  ],
+  "notes": [
+   "Oil outlet tube. Arteon. GTI. 2019-21. Oil return tube. Golf. 1.8l. Golf Alltrack. Golf R. 2.0L."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-oil-return-line-6k145735t",
   "illustration": "illustrations/pipe.webp"
  },
  {
@@ -3682,6 +4440,54 @@
   "illustration": null
  },
  {
+  "oem": "5Q0201653A",
+  "oem_display": "5Q0 201 653 A",
+  "name": "Tank Strap",
+  "part_type": "tank strap",
+  "system": "air and fuel delivery",
+  "price_usd": 51.16,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/cb7fc6820726b017283e82404386c4ff/c3b131da379813b2911ab0984a0a092f.png",
+    "callout": 4
+   }
+  ],
+  "notes": [
+   "Awd. Gas."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-tank-strap-5q0201653a",
+  "illustration": null
+ },
+ {
+  "oem": "5Q0201654A",
+  "oem_display": "5Q0 201 654 A",
+  "name": "Tank Strap",
+  "part_type": "tank strap",
+  "system": "air and fuel delivery",
+  "price_usd": 51.16,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/cb7fc6820726b017283e82404386c4ff/c3b131da379813b2911ab0984a0a092f.png",
+    "callout": 4
+   }
+  ],
+  "notes": [
+   "Awd. Gas."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-tank-strap-5q0201654a",
+  "illustration": null
+ },
+ {
   "oem": "5Q0201656G",
   "oem_display": "5Q0 201 656 G",
   "name": "Tank Strap",
@@ -3768,6 +4574,38 @@
   "illustration": null
  },
  {
+  "oem": "06H145710J",
+  "oem_display": "06H 145 710 J",
+  "name": "Turbocharger Boost Pressure Safety Switch",
+  "part_type": "turbocharger boost pressure safety switch",
+  "system": "air and fuel delivery",
+  "price_usd": 168.56,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
+    "callout": 5
+   }
+  ],
+  "notes": [
+   "This OEM Volkswagen cutoff valve, part number 06H-145-710-J, is a boost pressure safety switch for the turbochargers in select VW vehicles from between the 2009 and 2021 model years. It fits cars like Eos, GTI, and Jetta and SUVs like Tiguan, Atlas, and At ..."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-boost-pressure-safety-switch-6h145710j",
+  "illustration": "illustrations/turbocharger-boost-pressure-safety-switch.webp"
+ },
+ {
   "oem": "04E198725R",
   "oem_display": "04E 198 725 R",
   "name": "Turbocharger Boost Solenoid",
@@ -3800,6 +4638,228 @@
   "illustration": "illustrations/turbocharger-boost-solenoid.webp"
  },
  {
+  "oem": "06K121492F",
+  "oem_display": "06K 121 492 F",
+  "name": "Turbocharger Coolant Line",
+  "part_type": "turbocharger coolant line",
+  "system": "air and fuel delivery",
+  "price_usd": 35.29,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 6
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
+    "callout": 6
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-coolant-line-6k121492f",
+  "illustration": "illustrations/pipe.webp"
+ },
+ {
+  "oem": "06K121497BD",
+  "oem_display": "06K 121 497 BD",
+  "name": "Turbocharger Coolant Line",
+  "part_type": "turbocharger coolant line",
+  "system": "air and fuel delivery",
+  "price_usd": 77.89,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 6
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
+    "callout": 6
+   }
+  ],
+  "notes": [
+   "1.8 Liter. 2.0 Liter Engine Code CNTC. 2.0 Liter Gas. 2.0 Liter, Code CYFB Rear. Engine Coolant Hose. Turbocharger Coolant Line. Fits AllTrack, Golf, Golf R, Golf SportWagen, GTI, SportWagen 1.8 Liter. 2.0 Liter Gas, to 12/05/2016. 2.0 Liter, Code CYFB, Rear. Convertible, 1.8 Liter. Convertible, 2.0 Liter, Engine Code CNTC, to 12/05/2016. Gas. Sedan, 1.8 Liter. Sedan, 2.0 Liter Gas, to 12/05/2016. Sedan/Wagon, 2.0 Liter Gas, to 12/05/2016. Gas. 1.8L."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-coolant-line-6k121497bd",
+  "illustration": "illustrations/pipe.webp"
+ },
+ {
+  "oem": "WHT006124",
+  "oem_display": "WHT 006 124",
+  "name": "Turbocharger Coolant Line O-Ring",
+  "part_type": "turbocharger coolant line o ring",
+  "system": "air and fuel delivery",
+  "price_usd": 2.0,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
+    "callout": 8
+   }
+  ],
+  "notes": [
+   "At Engine. 20 x 3mm. Turbocharger Cooling. 20 x 3mm. 1.8L. 2.0L, 2020-23, lower. Water inlet pipe,o-ring. Vin code s or t. 2.0L gas, lower. Coupe, 20x3."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-coolant-line-o-ring-wht006124",
+  "illustration": "illustrations/o-ring.webp"
+ },
+ {
+  "oem": "06K129597C",
+  "oem_display": "06K 129 597 C",
+  "name": "Turbocharger Mount Heat Shield",
+  "part_type": "turbocharger mount heat shield",
+  "system": "air and fuel delivery",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 18
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
+    "callout": 18
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-mount-heat-shield-6k129597c) 20"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-mount-heat-shield-6k129597c",
+  "illustration": "illustrations/turbocharger-mount-heat-shield.webp"
+ },
+ {
+  "oem": "06K133833AK",
+  "oem_display": "06K 133 833 AK",
+  "name": "Turbocharger Mount Heat Shield",
+  "part_type": "turbocharger mount heat shield",
+  "system": "air and fuel delivery",
+  "price_usd": 15.24,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 17
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
+    "callout": 17
+   }
+  ],
+  "notes": [
+   "2.0L. oil outlet tube."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-mount-heat-shield-6k133833ak",
+  "illustration": "illustrations/turbocharger-mount-heat-shield.webp"
+ },
+ {
+  "oem": "06K133833CH",
+  "oem_display": "06K 133 833 CH",
+  "name": "Turbocharger Mount Heat Shield",
+  "part_type": "turbocharger mount heat shield",
+  "system": "air and fuel delivery",
+  "price_usd": 9.26,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 16
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
+    "callout": 16
+   }
+  ],
+  "notes": [
+   "Upper. 2.0L. oil inlet tube."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-mount-heat-shield-6k133833ch",
+  "illustration": "illustrations/turbocharger-mount-heat-shield.webp"
+ },
+ {
+  "oem": "06K129598B",
+  "oem_display": "06K 129 598 B",
+  "name": "Turbocharger Mount Heat Shield Bracket",
+  "part_type": "turbocharger mount heat shield bracket",
+  "system": "air and fuel delivery",
+  "price_usd": 18.41,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 18
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
+    "callout": 18
+   }
+  ],
+  "notes": [
+   "1.8L. Protector. Cover plate. 2019-21. 2.0L, 2020-23. 2.0L gas."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-mount-heat-shield-bracket-6k129598b",
+  "illustration": "illustrations/bracket.webp"
+ },
+ {
   "oem": "WHT000001N",
   "oem_display": "WHT 000 001 N",
   "name": "Turbocharger Nut",
@@ -3829,6 +4889,38 @@
    "1.5L. Turbocharger,lock nut. 1.4L without hybrid."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-nut-wht000001n",
+  "illustration": "illustrations/nut.webp"
+ },
+ {
+  "oem": "WHT007210",
+  "oem_display": "WHT 007 210",
+  "name": "Turbocharger Nut",
+  "part_type": "turbocharger nut",
+  "system": "air and fuel delivery",
+  "price_usd": 0.85,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
+    "callout": 2
+   }
+  ],
+  "notes": [
+   "1.8L. 2019-21. Turbocharger,lock nut. 2.0L, 2020-23. 2022-23. 2.0L, gas vin code s or t. Convertible,."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-nut-wht007210",
   "illustration": "illustrations/nut.webp"
  },
  {
@@ -3896,6 +4988,70 @@
   "illustration": "illustrations/o-ring.webp"
  },
  {
+  "oem": "WHT006112",
+  "oem_display": "WHT 006 112",
+  "name": "Turbocharger Oil Line O-Ring",
+  "part_type": "turbocharger oil line o ring",
+  "system": "air and fuel delivery",
+  "price_usd": 1.51,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 15
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
+    "callout": 15
+   }
+  ],
+  "notes": [
+   "Return. At Turbo. O-Ring. 1.8L. 2.0L, 2020-23, lower. 2.0L, gas vin code s or t. Feed line,seal. 2014-18. 2.0L gas, lower. Convertible, 16,75x1,65."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-oil-line-o-ring-wht006112",
+  "illustration": "illustrations/o-ring.webp"
+ },
+ {
+  "oem": "WHT006113",
+  "oem_display": "WHT 006 113",
+  "name": "Turbocharger Oil Line O-Ring",
+  "part_type": "turbocharger oil line o ring",
+  "system": "air and fuel delivery",
+  "price_usd": 3.37,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 14
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
+    "callout": 14
+   }
+  ],
+  "notes": [
+   "Return. At Engine. 1.8L. Coolant hose,o-ring. 2.0L, 2020-23, upper. 2.0L, gas vin code s or t. Feed line,gasket. 2014-18. 2.0L gas, upper. Convertible, 15x1,8."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-oil-line-o-ring-wht006113",
+  "illustration": "illustrations/o-ring.webp"
+ },
+ {
   "oem": "WHT006990A",
   "oem_display": "WHT 006 990 A",
   "name": "Turbocharger Oil Line O-Ring",
@@ -3955,6 +5111,36 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-stud-n91200201",
+  "illustration": "illustrations/bolt.webp"
+ },
+ {
+  "oem": "N91231701",
+  "oem_display": "N 912 317 01",
+  "name": "Turbocharger Stud",
+  "part_type": "turbocharger stud",
+  "system": "air and fuel delivery",
+  "price_usd": 0.23,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--brackets-flanges-and-hangers",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
+    "callout": 3
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-stud-n91231701",
   "illustration": "illustrations/bolt.webp"
  },
  {
@@ -31866,7 +33052,7 @@
    "Mount plate. 2018-21. 2015-17. Lamps, handles, and visiors."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-mount-plate-5gm858687d",
-  "illustration": null
+  "illustration": "illustrations/mount-plate.webp"
  },
  {
   "oem": "5G6845025",
@@ -31914,7 +33100,7 @@
    "Volkswagen."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-movable-glass-5g6845025",
-  "illustration": null
+  "illustration": "illustrations/movable-glass.webp"
  },
  {
   "oem": "5G6845026",
@@ -31962,7 +33148,7 @@
    "Volkswagen."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-movable-glass-5g6845026",
-  "illustration": null
+  "illustration": "illustrations/movable-glass.webp"
  },
  {
   "oem": "5Q0804025",
@@ -32058,7 +33244,7 @@
    "Without lane departure assist."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-multi-purpose-adhesive-8u0955609",
-  "illustration": null
+  "illustration": "illustrations/multi-purpose-adhesive.webp"
  },
  {
   "oem": "D437S40A2",
@@ -32114,7 +33300,7 @@
    "4 door. 2 door."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-multi-purpose-tape-d437s40a2",
-  "illustration": null
+  "illustration": "illustrations/multi-purpose-tape.webp"
  },
  {
   "oem": "5G0867591CY20",
@@ -32154,7 +33340,7 @@
    "2018-21. without sunroof, without storage tray gray. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-overhead-console-5g0867591cy20) 5"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-overhead-console-5g0867591cy20",
-  "illustration": null
+  "illustration": "illustrations/overhead-console.webp"
  },
  {
   "oem": "5G0867591CZA2",
@@ -32194,7 +33380,7 @@
    "Without sunroof, without storage tray beige. Without panoramic. 2018-21. without sunroof, without storage tray shetland."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-overhead-console-5g0867591cza2",
-  "illustration": null
+  "illustration": "illustrations/overhead-console.webp"
  },
  {
   "oem": "5G0867591D82V",
@@ -32234,7 +33420,7 @@
    "2018-21. with sunroof, without storage tray black. 2015-17. with sunroof without storage tray. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-overhead-console-5g0867591d82v) 5"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-overhead-console-5g0867591d82v",
-  "illustration": null
+  "illustration": "illustrations/overhead-console.webp"
  },
  {
   "oem": "5G0867591DZA2",
@@ -32274,7 +33460,7 @@
    "With sunroof, without storage tray beige. 2018-21. with sunroof, without storage tray shetland. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-overhead-console-5g0867591dza2) 5"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-overhead-console-5g0867591dza2",
-  "illustration": null
+  "illustration": "illustrations/overhead-console.webp"
  },
  {
   "oem": "5G0868837A82V",
@@ -32314,7 +33500,7 @@
    "With panoramic sunroof. black. 2018-21. with sunroof, with storage tray black. 2015-17. with sunroof with storage tray. Headliner and components. black."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-overhead-console-5g0868837a82v",
-  "illustration": null
+  "illustration": "illustrations/overhead-console.webp"
  },
  {
   "oem": "5G0868837AY20",
@@ -32354,7 +33540,7 @@
    "2018-21. with sunroof, with storage tray gray. Headliner and components. gray."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-overhead-console-5g0868837ay20",
-  "illustration": null
+  "illustration": "illustrations/overhead-console.webp"
  },
  {
   "oem": "5G0868837AZA2",
@@ -32394,7 +33580,7 @@
    "With sunroof, with storage tray beige. 2018-21. with sunroof, with storage tray shetland. Headliner and components. beige."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-overhead-console-5g0868837aza2",
-  "illustration": null
+  "illustration": "illustrations/overhead-console.webp"
  },
  {
   "oem": "5G0868837Y20",
@@ -32434,7 +33620,7 @@
    "2018-21. without sunroof, with storage tray gray."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-overhead-console-5g0868837y20",
-  "illustration": null
+  "illustration": "illustrations/overhead-console.webp"
  },
  {
   "oem": "5G0868837ZA2",
@@ -32474,7 +33660,7 @@
    "Without sunroof, with storage tray beige. Without panoramic. 2018-21. without sunroof, with storage tray sheatland."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-overhead-console-5g0868837za2",
-  "illustration": null
+  "illustration": "illustrations/overhead-console.webp"
  },
  {
   "oem": "6Q6827499E",
@@ -32504,7 +33690,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-overslam-bumper-6q6827499e",
-  "illustration": null
+  "illustration": "illustrations/overslam-bumper.webp"
  },
  {
   "oem": "N90805102",
@@ -32558,7 +33744,7 @@
    "4 door. 2 door."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-paint-protection-film-321201299",
-  "illustration": null
+  "illustration": "illustrations/paint-protection-film.webp"
  },
  {
   "oem": "5G4809603",
@@ -32582,7 +33768,7 @@
    "4 door. with e-Golf."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-inner-side-panel-5g4809603",
-  "illustration": null
+  "illustration": "illustrations/panel.webp"
  },
  {
   "oem": "5G4809604A",
@@ -32606,7 +33792,7 @@
    "4 door. without e-Golf."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-inner-side-panel-5g4809604a",
-  "illustration": null
+  "illustration": "illustrations/panel.webp"
  },
  {
   "oem": "5G0919491",
@@ -54617,7 +55803,7 @@
    "Switches, left side."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-multi-switch-5g1927137aawzu",
-  "illustration": null
+  "illustration": "illustrations/multi-switch.webp"
  },
  {
   "oem": "5G1927137MWZU",
@@ -54649,7 +55835,7 @@
    "Switches, left side, without sport suspension. Switches, left side, without start stop."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-multi-switch-5g1927137mwzu",
-  "illustration": null
+  "illustration": "illustrations/multi-switch.webp"
  },
  {
   "oem": "5G1927238EWZU",
@@ -54681,7 +55867,7 @@
    "Switches, right side, without park assist. Switches, right side, without parking aid."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-multi-switch-5g1927238ewzu",
-  "illustration": null
+  "illustration": "illustrations/multi-switch.webp"
  },
  {
   "oem": "5G1927238FWZU",
@@ -54713,7 +55899,7 @@
    "Switches, right side, with park assist. Switches, right side, with parking aid."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-multi-switch-5g1927238fwzu",
-  "illustration": null
+  "illustration": "illustrations/multi-switch.webp"
  },
  {
   "oem": "1J0698151P",
@@ -64542,6 +65728,14 @@
     "diagram_name": "Air Cleaner Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5892ea9f6c054bfb2aae6e7c972212d3/72256a01673668dc01282020b4ab1ae9.png",
     "callout": 10
+   },
+   {
+    "vehicle": "v-2021-volkswagen-golf--tsi--1-4l-l4-gas",
+    "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 16
    }
   ],
   "notes": [
@@ -67907,7 +69101,7 @@
    "Main fuse. Engine compartment, type 1. Engine compartment. 80a/80a/50a."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-multi-purpose-fuse-5q0937629c",
-  "illustration": null
+  "illustration": "illustrations/multi-purpose-fuse.webp"
  },
  {
   "oem": "N01713117",
@@ -67939,7 +69133,7 @@
    "2018-23 main under hood. standard 3 amp. Main, 2020-23, standard, 3 amp. Gateway. 3 amp. Engine compartment. 3 amp. 2013-2017 passenger compartment. 3 amp. 2009-2012 passenger compartment. 3 amp. Cabin compartment. 3 amp. Interior, standard, 3 amp."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-multi-purpose-fuse-n01713117",
-  "illustration": null
+  "illustration": "illustrations/multi-purpose-fuse.webp"
  },
  {
   "oem": "N01713119",
@@ -67963,7 +69157,7 @@
    "Cabin compartment, 1 amp. Engine compartment, standard, 1 amp. 2012-15 passenger compartment. 1 amp. Interior, standard, 1 amp. Gateway. 1 amp. 2013-2017 passenger compartment. 1 amp. 2009-2012 passenger compartment. 1 amp. 2016-19 passenger compartment. 1 amp. Sedan, 1 amp. Under hood, main, standard, 1 amp."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-multi-purpose-fuse-n01713119",
-  "illustration": null
+  "illustration": "illustrations/multi-purpose-fuse.webp"
  },
  {
   "oem": "N01713122",
@@ -67995,7 +69189,7 @@
    "Passenger compartment. 35 amp."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-multi-purpose-fuse-n01713122",
-  "illustration": null
+  "illustration": "illustrations/multi-purpose-fuse.webp"
  },
  {
   "oem": "N10251902",
@@ -68019,7 +69213,7 @@
    "Engine compartment-secondary fuses. 60 amp. Rear fuse box. 60 amp. Under hood, main, 60 amp."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-multi-purpose-fuse-n10251902",
-  "illustration": null
+  "illustration": "illustrations/multi-purpose-fuse.webp"
  },
  {
   "oem": "N10251903",
@@ -68043,7 +69237,7 @@
    "Main, 2020-23, 30 amp. Passenger compartment, 30 amp. Under hood, main, 30 amp. Sedan from 1/05, wagon 2009 only, 30 amp. Wagon, 2010-11, engine compartment, 30 amp."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-multi-purpose-fuse-n10251903",
-  "illustration": null
+  "illustration": "illustrations/multi-purpose-fuse.webp"
  },
  {
   "oem": "N10251905",
@@ -68067,7 +69261,7 @@
    "Engine compartment. 80 amp. Main, 2020-23, 80 amp. Rear fuse box. 80 amp. Under hood, main, 80 amp."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-multi-purpose-fuse-n10251905",
-  "illustration": null
+  "illustration": "illustrations/multi-purpose-fuse.webp"
  },
  {
   "oem": "5Q0971235D",
@@ -68105,7 +69299,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-negative-cable-5q0971235d",
-  "illustration": null
+  "illustration": "illustrations/negative-cable.webp"
  },
  {
   "oem": "5Q0937503F",
@@ -71285,36 +72479,6 @@
   "illustration": "illustrations/connecting-rod.webp"
  },
  {
-  "oem": "5Q0253115B",
-  "oem_display": "5Q0 253 115 B",
-  "name": "Converter & Pipe Gasket",
-  "part_type": "converter & pipe gasket",
-  "system": "engine",
-  "price_usd": 7.94,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
-    "callout": 4
-   },
-   {
-    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
-    "category": "exhaust--exhaust-components",
-    "diagram": 1,
-    "diagram_name": "Converter & Pipe",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/319f57001f079fdeb5829274b530e573/a5240bdb57818acca5ee219a9ab61978.png",
-    "callout": 3
-   }
-  ],
-  "notes": [],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-converter-and-pipe-gasket-5q0253115b",
-  "illustration": "illustrations/gasket.webp"
- },
- {
   "oem": "5Q0253115C",
   "oem_display": "5Q0 253 115 C",
   "name": "Converter & Pipe Gasket",
@@ -71837,6 +73001,14 @@
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/5892ea9f6c054bfb2aae6e7c972212d3/72256a01673668dc01282020b4ab1ae9.png",
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2021-volkswagen-golf--tsi--1-4l-l4-gas",
+    "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 5
    },
    {
@@ -72460,30 +73632,6 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-connecting-rod-bearing-7k105701fglb",
   "illustration": "illustrations/engine-connecting-rod-bearing.webp"
- },
- {
-  "oem": "WHT006114",
-  "oem_display": "WHT 006 114",
-  "name": "Engine Coolant Pipe O-Ring",
-  "part_type": "engine coolant pipe o ring",
-  "system": "engine",
-  "price_usd": 2.43,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
-    "callout": 7
-   }
-  ],
-  "notes": [
-   "15 x 2mm. 1.8L. upper. 2.0L, 2020-23, upper. 2014-18. Gas. Coupe, 15x2."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-coolant-pipe-o-ring-wht006114",
-  "illustration": "illustrations/o-ring.webp"
  },
  {
   "oem": "06A103465",
@@ -73928,28 +75076,6 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-oil-dipstick-tube-6q115610b",
   "illustration": "illustrations/pipe.webp"
- },
- {
-  "oem": "N90067202",
-  "oem_display": "N 900 672 02",
-  "name": "Engine Oil Dipstick Tube O-Ring",
-  "part_type": "engine oil dipstick tube o ring",
-  "system": "engine",
-  "price_usd": 1.42,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
-    "callout": 12
-   }
-  ],
-  "notes": [],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-oil-dipstick-tube-o-ring-n90067202",
-  "illustration": "illustrations/o-ring.webp"
  },
  {
   "oem": "WHT002784",
@@ -76463,30 +77589,6 @@
   "illustration": "illustrations/engine-variable-valve-timing-vvt-solenoid-pressure-valve.webp"
  },
  {
-  "oem": "06K145713L",
-  "oem_display": "06K 145 713 L",
-  "name": "Exhaust Manifold",
-  "part_type": "exhaust manifold",
-  "system": "engine",
-  "price_usd": null,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
-    "callout": 1
-   }
-  ],
-  "notes": [
-   "Incl.Turbocharger. Incl.Exhaust Manifold. Golf. 1.8l. Golf Alltrack. From 05/21/2019. To 10/31/2014. To 05/20/2019. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-manifold-6k145713l) 2"
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-manifold-6k145713l",
-  "illustration": "illustrations/exhaust-manifold.webp"
- },
- {
   "oem": "06Q145702C",
   "oem_display": "06Q 145 702 C",
   "name": "Exhaust Manifold",
@@ -76509,30 +77611,6 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-manifold-6q145702c",
   "illustration": "illustrations/exhaust-manifold.webp"
- },
- {
-  "oem": "06K145536A",
-  "oem_display": "06K 145 536 A",
-  "name": "Exhaust Manifold Bracket",
-  "part_type": "exhaust manifold bracket",
-  "system": "engine",
-  "price_usd": 37.51,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
-    "callout": 20
-   }
-  ],
-  "notes": [
-   "1.8L. 2019-21. Support. 2.0L, 2020-23. 2.0L gas."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-manifold-bracket-6k145536a",
-  "illustration": "illustrations/bracket.webp"
  },
  {
   "oem": "048109611B",
@@ -76758,36 +77836,6 @@
    "Jetta. 1.4l. 1.4L. type 2. Golf SportWagen. 1.4l. To throttle body."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-gasket-3c133073a",
-  "illustration": "illustrations/gasket.webp"
- },
- {
-  "oem": "06L253039",
-  "oem_display": "06L 253 039",
-  "name": "Gasket",
-  "part_type": "gasket",
-  "system": "engine",
-  "price_usd": 5.08,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
-    "callout": 4
-   },
-   {
-    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
-    "callout": 2
-   }
-  ],
-  "notes": [],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-gasket-6l253039",
   "illustration": "illustrations/gasket.webp"
  },
  {
@@ -77961,30 +79009,6 @@
   "illustration": "illustrations/oil-filter.webp"
  },
  {
-  "oem": "06K145778AS",
-  "oem_display": "06K 145 778 AS",
-  "name": "Oil Inlet Line",
-  "part_type": "oil inlet line",
-  "system": "engine",
-  "price_usd": 43.48,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
-    "callout": 11
-   }
-  ],
-  "notes": [
-   "Oil inlet tube. Arteon. GTI. 2019-21. Oil feed tube. Golf. 1.8l. Golf Alltrack. Golf R. 2.0L."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-oil-inlet-line-6k145778as",
-  "illustration": "illustrations/pipe.webp"
- },
- {
   "oem": "038103601AQ",
   "oem_display": "038 103 601 AQ",
   "name": "Oil Pan",
@@ -78360,30 +79384,6 @@
   "illustration": "illustrations/oil-pump.webp"
  },
  {
-  "oem": "06K145735T",
-  "oem_display": "06K 145 735 T",
-  "name": "Oil Return Line",
-  "part_type": "oil return line",
-  "system": "engine",
-  "price_usd": 26.24,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
-    "callout": 13
-   }
-  ],
-  "notes": [
-   "Oil outlet tube. Arteon. GTI. 2019-21. Oil return tube. Golf. 1.8l. Golf Alltrack. Golf R. 2.0L."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-oil-return-line-6k145735t",
-  "illustration": "illustrations/pipe.webp"
- },
- {
   "oem": "06K103649J",
   "oem_display": "06K 103 649 J",
   "name": "Pan Gasket",
@@ -78712,30 +79712,6 @@
   "illustration": "illustrations/pipe.webp"
  },
  {
-  "oem": "06H145710J",
-  "oem_display": "06H 145 710 J",
-  "name": "Turbocharger Boost Pressure Safety Switch",
-  "part_type": "turbocharger boost pressure safety switch",
-  "system": "engine",
-  "price_usd": 168.56,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
-    "callout": 5
-   }
-  ],
-  "notes": [
-   "This OEM Volkswagen cutoff valve, part number 06H-145-710-J, is a boost pressure safety switch for the turbochargers in select VW vehicles from between the 2009 and 2021 model years. It fits cars like Eos, GTI, and Jetta and SUVs like Tiguan, Atlas, and At ..."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-boost-pressure-safety-switch-6h145710j",
-  "illustration": "illustrations/turbocharger-boost-pressure-safety-switch.webp"
- },
- {
   "oem": "06Q145039B",
   "oem_display": "06Q 145 039 B",
   "name": "Turbocharger Brace",
@@ -78758,52 +79734,6 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-brace-6q145039b",
   "illustration": "illustrations/turbocharger-brace.webp"
- },
- {
-  "oem": "06K121492F",
-  "oem_display": "06K 121 492 F",
-  "name": "Turbocharger Coolant Line",
-  "part_type": "turbocharger coolant line",
-  "system": "engine",
-  "price_usd": 35.29,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
-    "callout": 6
-   }
-  ],
-  "notes": [],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-coolant-line-6k121492f",
-  "illustration": "illustrations/pipe.webp"
- },
- {
-  "oem": "06K121497BD",
-  "oem_display": "06K 121 497 BD",
-  "name": "Turbocharger Coolant Line",
-  "part_type": "turbocharger coolant line",
-  "system": "engine",
-  "price_usd": 77.89,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
-    "callout": 6
-   }
-  ],
-  "notes": [
-   "1.8 Liter. 2.0 Liter Engine Code CNTC. 2.0 Liter Gas. 2.0 Liter, Code CYFB Rear. Engine Coolant Hose. Turbocharger Coolant Line. Fits AllTrack, Golf, Golf R, Golf SportWagen, GTI, SportWagen 1.8 Liter. 2.0 Liter Gas, to 12/05/2016. 2.0 Liter, Code CYFB, Rear. Convertible, 1.8 Liter. Convertible, 2.0 Liter, Engine Code CNTC, to 12/05/2016. Gas. Sedan, 1.8 Liter. Sedan, 2.0 Liter Gas, to 12/05/2016. Sedan/Wagon, 2.0 Liter Gas, to 12/05/2016. Gas. 1.8L."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-coolant-line-6k121497bd",
-  "illustration": "illustrations/pipe.webp"
  },
  {
   "oem": "06Q121085D",
@@ -78878,78 +79808,6 @@
   "illustration": "illustrations/pipe.webp"
  },
  {
-  "oem": "WHT006124",
-  "oem_display": "WHT 006 124",
-  "name": "Turbocharger Coolant Line O-Ring",
-  "part_type": "turbocharger coolant line o ring",
-  "system": "engine",
-  "price_usd": 2.0,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
-    "callout": 8
-   }
-  ],
-  "notes": [
-   "At Engine. 20 x 3mm. Turbocharger Cooling. 20 x 3mm. 1.8L. 2.0L, 2020-23, lower. Water inlet pipe,o-ring. Vin code s or t. 2.0L gas, lower. Coupe, 20x3."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-coolant-line-o-ring-wht006124",
-  "illustration": "illustrations/o-ring.webp"
- },
- {
-  "oem": "06K129597C",
-  "oem_display": "06K 129 597 C",
-  "name": "Turbocharger Mount Heat Shield",
-  "part_type": "turbocharger mount heat shield",
-  "system": "engine",
-  "price_usd": null,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
-    "callout": 18
-   }
-  ],
-  "notes": [
-   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-mount-heat-shield-6k129597c) 20"
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-mount-heat-shield-6k129597c",
-  "illustration": "illustrations/turbocharger-mount-heat-shield.webp"
- },
- {
-  "oem": "06K133833AK",
-  "oem_display": "06K 133 833 AK",
-  "name": "Turbocharger Mount Heat Shield",
-  "part_type": "turbocharger mount heat shield",
-  "system": "engine",
-  "price_usd": 15.24,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
-    "callout": 17
-   }
-  ],
-  "notes": [
-   "2.0L. oil outlet tube."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-mount-heat-shield-6k133833ak",
-  "illustration": "illustrations/turbocharger-mount-heat-shield.webp"
- },
- {
   "oem": "06K133833CA",
   "oem_display": "06K 133 833 CA",
   "name": "Turbocharger Mount Heat Shield",
@@ -78969,30 +79827,6 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-mount-heat-shield-6k133833ca",
-  "illustration": "illustrations/turbocharger-mount-heat-shield.webp"
- },
- {
-  "oem": "06K133833CH",
-  "oem_display": "06K 133 833 CH",
-  "name": "Turbocharger Mount Heat Shield",
-  "part_type": "turbocharger mount heat shield",
-  "system": "engine",
-  "price_usd": 9.26,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
-    "callout": 16
-   }
-  ],
-  "notes": [
-   "Upper. 2.0L. oil inlet tube."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-mount-heat-shield-6k133833ch",
   "illustration": "illustrations/turbocharger-mount-heat-shield.webp"
  },
  {
@@ -79042,54 +79876,6 @@
   "illustration": "illustrations/turbocharger-mount-heat-shield.webp"
  },
  {
-  "oem": "06K129598B",
-  "oem_display": "06K 129 598 B",
-  "name": "Turbocharger Mount Heat Shield Bracket",
-  "part_type": "turbocharger mount heat shield bracket",
-  "system": "engine",
-  "price_usd": 18.41,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
-    "callout": 18
-   }
-  ],
-  "notes": [
-   "1.8L. Protector. Cover plate. 2019-21. 2.0L, 2020-23. 2.0L gas."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-mount-heat-shield-bracket-6k129598b",
-  "illustration": "illustrations/bracket.webp"
- },
- {
-  "oem": "WHT007210",
-  "oem_display": "WHT 007 210",
-  "name": "Turbocharger Nut",
-  "part_type": "turbocharger nut",
-  "system": "engine",
-  "price_usd": 0.85,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
-    "callout": 2
-   }
-  ],
-  "notes": [
-   "1.8L. 2019-21. Turbocharger,lock nut. 2.0L, 2020-23. 2022-23. 2.0L, gas vin code s or t. Convertible,."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-nut-wht007210",
-  "illustration": "illustrations/nut.webp"
- },
- {
   "oem": "06Q145735F",
   "oem_display": "06Q 145 735 F",
   "name": "Turbocharger Oil Line",
@@ -79134,76 +79920,6 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-oil-line-6q145778b",
   "illustration": "illustrations/pipe.webp"
- },
- {
-  "oem": "WHT006112",
-  "oem_display": "WHT 006 112",
-  "name": "Turbocharger Oil Line O-Ring",
-  "part_type": "turbocharger oil line o ring",
-  "system": "engine",
-  "price_usd": 1.51,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
-    "callout": 15
-   }
-  ],
-  "notes": [
-   "Return. At Turbo. O-Ring. 1.8L. 2.0L, 2020-23, lower. 2.0L, gas vin code s or t. Feed line,seal. 2014-18. 2.0L gas, lower. Convertible, 16,75x1,65."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-oil-line-o-ring-wht006112",
-  "illustration": "illustrations/o-ring.webp"
- },
- {
-  "oem": "WHT006113",
-  "oem_display": "WHT 006 113",
-  "name": "Turbocharger Oil Line O-Ring",
-  "part_type": "turbocharger oil line o ring",
-  "system": "engine",
-  "price_usd": 3.37,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
-    "callout": 14
-   }
-  ],
-  "notes": [
-   "Return. At Engine. 1.8L. Coolant hose,o-ring. 2.0L, 2020-23, upper. 2.0L, gas vin code s or t. Feed line,gasket. 2014-18. 2.0L gas, upper. Convertible, 15x1,8."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-oil-line-o-ring-wht006113",
-  "illustration": "illustrations/o-ring.webp"
- },
- {
-  "oem": "N91231701",
-  "oem_display": "N 912 317 01",
-  "name": "Turbocharger Stud",
-  "part_type": "turbocharger stud",
-  "system": "engine",
-  "price_usd": 0.23,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a62927bf89f7bcbcc20dbd1f8ec51c1c/29a873f97b779a0a15c337e302946bef.png",
-    "callout": 3
-   }
-  ],
-  "notes": [],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-stud-n91231701",
-  "illustration": "illustrations/bolt.webp"
  },
  {
   "oem": "04E103469EA",
