@@ -1,0 +1,62 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/cooling-system--belts-and-pulleys",
+ "title": "Belts & Pulleys for 2019 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Serpentine Belt",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/e50175490b74f727da5256c8d4d10641/9d2833b6f55a10cd596e6bb4b9680685.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/cooling-system--belts-and-pulleys?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Serpentine Belt",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/a80ea4d63799f6d3d94b4f9f44506fae/7ed94af0de28c83d780dea8396d81ad0.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/cooling-system--belts-and-pulleys?assembly=2"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "04E145933AL",
+   "oem_display": "04E 145 933 AL",
+   "oem_from": "printed",
+   "name": "Serpentine Belt",
+   "label": "Jetta. 1.4l. Ac compressor. Without hybrid.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 38.57,
+   "msrp_usd": 54.99,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-serpentine-belt-4e145933al"
+  },
+  {
+   "oem": "04E145299N",
+   "oem_display": "04E 145 299 N",
+   "oem_from": "printed",
+   "name": "Accessory Drive Belt Tensioner Assembly",
+   "label": "Belt Tensioner",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": 154.14,
+   "msrp_usd": 231.65,
+   "notes": "Jetta. 1.5l. Taos. 1.5l. Without hybrid. Jetta. 1.4l. Ac compressor. Golf SportWagen. 1.4l.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-accessory-drive-belt-tensioner-assembly-4e145299n"
+  },
+  {
+   "oem": "N10665001",
+   "oem_display": "N 106 650 01",
+   "oem_from": "printed",
+   "name": "Belt Tensioner Bolt",
+   "label": "1.5L. 1.4L without hybrid. 2.0L diesel 2015. Belt tensioner,bolt.",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 0.4,
+   "msrp_usd": 0.66,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-belt-tensioner-bolt-n10665001"
+  }
+ ]
+}

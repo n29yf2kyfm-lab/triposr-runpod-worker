@@ -1,0 +1,82 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/cooling-system--intercooler",
+ "title": "Intercooler for 2019 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Inter-cooler",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/6cedec5c326395bf80936cb81b7c7343/56b45f13b89f6009726fe081f23719a2.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/cooling-system--intercooler?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Inter-Cooler",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/c136c7bc22d29ccda5cc1e0f97713121/8d9468d122c29a88b9571a4bf38397d1.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/cooling-system--intercooler?assembly=2"
+  },
+  {
+   "n": 3,
+   "name": "Pressure Sensor",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/041af1cf2260f3519582005246071b2f/3cd450fc63205e2d76918ef1079a98d1.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/cooling-system--intercooler?assembly=3"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "04E145749M",
+   "oem_display": "04E 145 749 M",
+   "oem_from": "printed",
+   "name": "Inter-Cooler",
+   "label": "Without hybrid. Golf SportWagen. 1.4l.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 327.14,
+   "msrp_usd": 491.65,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-inter-cooler-4e145749m"
+  },
+  {
+   "oem": "WHT009512",
+   "oem_display": "WHT 009 512",
+   "oem_from": "printed",
+   "name": "Inter-Cooler Bolt",
+   "label": "Intercooler,bolt. Without hybrid.",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": 0.29,
+   "msrp_usd": 0.48,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-inter-cooler-bolt-wht009512"
+  },
+  {
+   "oem": "04E145757",
+   "oem_display": "04E 145 757",
+   "oem_from": "printed",
+   "name": "Inter-Cooler Gasket",
+   "label": "Intercooler,gasket. Without hybrid. 1.4L.",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 5.82,
+   "msrp_usd": 9.54,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-inter-cooler-gasket-4e145757"
+  },
+  {
+   "oem": "04E129717C",
+   "oem_display": "04E 129 717 C",
+   "oem_from": "printed",
+   "name": "Inter-Cooler Seal",
+   "label": "Intercooler,seal. Without hybrid. 1.4L. To air cooler.",
+   "callout": 4,
+   "diagram": 1,
+   "price_usd": 22.4,
+   "msrp_usd": 36.71,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-inter-cooler-seal-4e129717c"
+  }
+ ]
+}

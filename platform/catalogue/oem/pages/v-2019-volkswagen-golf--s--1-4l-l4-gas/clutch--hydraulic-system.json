@@ -1,0 +1,49 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/clutch--hydraulic-system",
+ "title": "Hydraulic System for 2019 Volkswagen Golf",
+ "diagrams": [],
+ "parts": [
+  {
+   "oem": "1K0721261AM",
+   "oem_display": "1K0 721 261 AM",
+   "oem_from": "printed",
+   "name": "Slave Cylinder",
+   "label": "Jetta. Trans mq350. Golf. 1.8l. Golf Alltrack. Golf. 1.4l.",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 163.83,
+   "msrp_usd": 246.21,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-slave-cylinder-1k0721261am"
+  },
+  {
+   "oem": "1S1721453B",
+   "oem_display": "1S1 721 453 B",
+   "oem_from": "printed",
+   "name": "Flex Hose",
+   "label": "Golf SportWagen. Golf Alltrack.",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 6.42,
+   "msrp_usd": 10.51,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-flex-hose-1s1721453b"
+  },
+  {
+   "oem": "5Q0721388H",
+   "oem_display": "5Q0 721 388 H",
+   "oem_from": "printed",
+   "name": "Master Cylinder",
+   "label": "GTI. Golf SportWagen. Golf Alltrack. Golf R.",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 172.92,
+   "msrp_usd": 259.86,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-master-cylinder-5q0721388h"
+  }
+ ]
+}

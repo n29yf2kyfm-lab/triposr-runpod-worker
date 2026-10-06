@@ -1,0 +1,63 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/clutch--clutch-and-flywheel",
+ "title": "Clutch & Flywheel for 2019 Volkswagen Golf",
+ "diagrams": [],
+ "parts": [
+  {
+   "oem": "02A141165R",
+   "oem_display": "02A 141 165 R",
+   "oem_from": "printed",
+   "name": "Release Bearing",
+   "label": "Jetta. Golf SportWagen. 1.8l. Fwd. Golf Alltrack. Golf SportWagen. 1.4l.",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 97.08,
+   "msrp_usd": 143.32,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-release-bearing-2a141165r"
+  },
+  {
+   "oem": "02J141719C",
+   "oem_display": "02J 141 719 C",
+   "oem_from": "printed",
+   "name": "Clutch Release Arm",
+   "label": "Release Fork",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 43.83,
+   "msrp_usd": 62.48,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-clutch-release-arm-2j141719c"
+  },
+  {
+   "oem": "03C105269AK",
+   "oem_display": "03C 105 269 AK",
+   "oem_from": "printed",
+   "name": "Clutch Flywheel",
+   "label": "Flywheel",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 460.22,
+   "msrp_usd": 691.65,
+   "notes": "Jetta. 1.4l. Incl.Clutch Flywheel Ring Gear. Golf SportWagen. 1.4l.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-clutch-flywheel-3c105269ak"
+  },
+  {
+   "oem": "04E141016H",
+   "oem_display": "04E 141 016 H",
+   "oem_from": "printed",
+   "name": "Pressure Plate",
+   "label": "Jetta. Golf SportWagen. 1.4l. Reman.",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 485.18,
+   "msrp_usd": 729.16,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-pressure-plate-4e141016h"
+  }
+ ]
+}
