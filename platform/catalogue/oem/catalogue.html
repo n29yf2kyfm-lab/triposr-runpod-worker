@@ -126,7 +126,6 @@ aside.filters{display:grid;gap:18px;position:sticky;top:12px}
 .oem{font:600 14.5px var(--mono);color:var(--accent);letter-spacing:.02em}
 .card .name{font-weight:600;line-height:1.3}
 .card .meta{display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:12.5px;margin-top:4px}
-.price{font:600 13px var(--mono);color:var(--ink);font-variant-numeric:tabular-nums}
 .pill{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.04em;padding:1px 7px;border-radius:999px;background:var(--bad-soft);color:var(--bad)}
 .empty{padding:40px 16px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:10px}
 .more{display:block;margin:16px auto 0;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:8px 18px;cursor:pointer;font-weight:600}
@@ -233,7 +232,6 @@ footer p{margin:0}
               <option value="system">Sort: system</option>
               <option value="name">Sort: name</option>
               <option value="oem">Sort: OEM number</option>
-              <option value="price">Sort: price, low first</option>
               <option value="fits">Sort: fits most cars</option>
             </select>
             <button class="linkbtn" id="csv" hidden>Download these as CSV</button>
@@ -262,7 +260,7 @@ footer p{margin:0}
 
 <footer>
   <div class="wrap">
-    <p><b>OEM numbers</b> are copied from US Volkswagen dealer catalogue pages, never generated. A US number is a strong lead for a UK car, not a guarantee — right-hand drive, engines and trims differ. Prices are US dealer prices on the day they were collected.</p>
+    <p><b>OEM numbers</b> are copied from US Volkswagen dealer catalogue pages, never generated. A US number is a strong lead for a UK car, not a guarantee — right-hand drive, engines and trims differ.</p>
     <p><b>Pictures are AI illustrations of the kind of part</b>, one per part type. They are not photographs of the part with that number.</p>
     <p><b>Torques</b> come from the Golf Mk7 workshop manual's assembly overviews (vwgolf.org). Check the manual for your exact car before tightening anything.</p>
     <p><b>Your VIN is decoded in this page and is never sent or stored.</b></p>
@@ -277,7 +275,6 @@ footer p{margin:0}
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const norm = s => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
-const money = v => v == null ? '' : '$' + v.toFixed(2);
 const PAGE = 48;
 
 const state = {parts: [], vehicles: [], vmap: {}, asm: [], q: '', veh: new Set(), sys: new Set(), sort: 'system', shown: PAGE, vinHits: null};
@@ -375,7 +372,6 @@ function filtered(){
     system: (a, b) => a.system.localeCompare(b.system) || a.name.localeCompare(b.name),
     name: (a, b) => a.name.localeCompare(b.name),
     oem: (a, b) => a.oem.localeCompare(b.oem),
-    price: (a, b) => (a.price_usd ?? 1e9) - (b.price_usd ?? 1e9),
     fits: (a, b) => b._veh - a._veh || a.name.localeCompare(b.name)
   }[state.sort];
   return list.sort(by);
@@ -403,7 +399,7 @@ function card(p){
       <span class="oem">${esc(p.oem_display)}</span>
       <span class="name">${esc(p.name)}</span>
       <span class="meta"><span>${esc(p.system)}${ys.length ? ' · ' + esc(yearsText(ys)) : ''}</span>
-      ${p.unavailable ? '<span class="pill">Unavailable</span>' : `<span class="price">${money(p.price_usd)}</span>`}</span>
+      ${p.unavailable ? '<span class="pill">Unavailable</span>' : ''}</span>
     </div></button>`;
 }
 
@@ -462,7 +458,7 @@ function openPart(oem){
       <h2 id="dlg-title">${esc(p.name)}</h2>
       <dl class="kv">
         <div><dt>System</dt><dd>${esc(p.system)}</dd></div>
-        <div><dt>US dealer price</dt><dd>${p.unavailable ? '<span class="pill">Unavailable</span>' : (money(p.price_usd) || '—')}</dd></div>
+        ${p.unavailable ? '<div><dt>Dealer status</dt><dd><span class="pill">Unavailable</span></dd></div>' : ''}
         <div><dt>Fits</dt><dd>${new Set(p.appears_on.map(a => a.vehicle)).size} catalogued car(s)</dd></div>
       </dl>
       <div class="sec"><h4>Where it appears</h4><div class="scroll"><table class="fits">
@@ -593,8 +589,8 @@ $('#tq-all').addEventListener('change', renderTorques);
 /* CSV of the parts currently listed — offered only where the viewer allows downloads */
 function csvCell(v){ v = String(v ?? ''); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }
 function partsCsv(list){
-  const head = ['oem', 'oem_display', 'name', 'part_type', 'system', 'price_usd', 'unavailable', 'vehicles', 'drawing_callouts', 'notes', 'source'];
-  const rows = list.map(p => [p.oem, p.oem_display, p.name, p.part_type, p.system, p.price_usd ?? '', p.unavailable,
+  const head = ['oem', 'oem_display', 'name', 'part_type', 'system', 'unavailable', 'vehicles', 'drawing_callouts', 'notes', 'source'];
+  const rows = list.map(p => [p.oem, p.oem_display, p.name, p.part_type, p.system, p.unavailable,
     [...new Set(p.appears_on.map(a => { const v = state.vmap[a.vehicle]; return v ? `${v.year} ${v.model} ${v.trim} ${v.engine}` : a.vehicle; }))].join(' | '),
     p.appears_on.map(a => `${a.diagram_name || a.category} #${a.callout ?? ''}`).join(' | '),
     (p.notes || []).join(' / '), p.source]);

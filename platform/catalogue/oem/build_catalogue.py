@@ -7,13 +7,14 @@ Reads pages/<vehicle-slug>/<category>.json (written by parse_revolution.py)
 and writes, next to this file:
 
   vehicles.json  one entry per vehicle: year, make, model, trim, engine, slug
-  parts.json     one entry per OEM number: name, part type, system, price,
+  parts.json     one entry per OEM number: name, part type, system,
                  every vehicle/category/drawing/callout it appears on, notes,
                  source links, and its illustration (if generated)
   parts.csv      the same, flattened, one row per OEM number
 
-OEM numbers are copied from the dealer page, never generated. Prices are US
-dealer prices on the day crawled. Illustrations are AI-made, one per PART
+OEM numbers are copied from the dealer page, never generated. Prices are
+left out of every output on purpose (owner's call, 2026-10-06); the raw
+pages/ keep them only as crawled source data. Illustrations are AI-made, one per PART
 TYPE, and are labelled as illustrations wherever shown.
 """
 import csv, glob, json, os, re
@@ -61,16 +62,14 @@ def main():
             e = parts.setdefault(p['oem'], {
                 'oem': p['oem'], 'oem_display': vw_display(p['oem']), 'name': p['name'],
                 'part_type': part_type(p['name']), 'system': system.replace('-', ' '),
-                'price_usd': p.get('price_usd'), 'unavailable': p.get('unavailable', False),
+                'unavailable': p.get('unavailable', False),
                 'appears_on': [], 'notes': set(), 'source': p['url'], 'illustration': None})
             d = dia.get(p.get('diagram')) or {}
             e['appears_on'].append({'vehicle': slug, 'category': cat, 'diagram': p.get('diagram'),
                                     'diagram_name': d.get('name'), 'diagram_image': d.get('image'),
                                     'callout': p.get('callout')})
-            if p.get('notes'):
+            if p.get('notes') and 'price' not in p['notes'].lower():   # no prices anywhere in the outputs
                 e['notes'].add(p['notes'])
-            if e['price_usd'] is None and p.get('price_usd') is not None:
-                e['price_usd'] = p['price_usd']
     img_dir = os.path.join(HERE, 'illustrations')
     for e in parts.values():
         e['notes'] = sorted(e['notes'])
@@ -82,10 +81,10 @@ def main():
     json.dump(out, open(os.path.join(HERE, 'parts.json'), 'w'), indent=1)
     with open(os.path.join(HERE, 'parts.csv'), 'w', newline='') as fh:
         w = csv.writer(fh)
-        w.writerow(['oem', 'oem_display', 'name', 'part_type', 'system', 'price_usd', 'unavailable',
+        w.writerow(['oem', 'oem_display', 'name', 'part_type', 'system', 'unavailable',
                     'vehicles', 'drawing_callouts', 'notes', 'illustration', 'source'])
         for e in out:
-            w.writerow([e['oem'], e['oem_display'], e['name'], e['part_type'], e['system'], e['price_usd'],
+            w.writerow([e['oem'], e['oem_display'], e['name'], e['part_type'], e['system'],
                         e['unavailable'], ' | '.join(sorted({a['vehicle'] for a in e['appears_on']})),
                         ' | '.join(f"{a['diagram_name'] or a['category']} #{a['callout']}" for a in e['appears_on']),
                         ' / '.join(e['notes'])[:500], e['illustration'] or '', e['source']])
