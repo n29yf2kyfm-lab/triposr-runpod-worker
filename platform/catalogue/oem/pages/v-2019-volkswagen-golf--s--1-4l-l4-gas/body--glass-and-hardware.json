@@ -1,0 +1,35 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/body--glass-and-hardware",
+ "title": "Glass & Hardware for 2019 Volkswagen Golf",
+ "diagrams": [],
+ "parts": [
+  {
+   "oem": "5G0845411ENVB",
+   "oem_display": "5G0 845 411 E NVB",
+   "oem_from": "printed",
+   "name": "Vent Window Assembly",
+   "label": "Glass, Left",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 167.45,
+   "msrp_usd": 251.65,
+   "notes": "2 door, volkswagen.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-vent-window-assembly-5g0845411envb"
+  },
+  {
+   "oem": "5G0845412ENVB",
+   "oem_display": "5G0 845 412 E NVB",
+   "oem_from": "printed",
+   "name": "Vent Window Assembly",
+   "label": "Glass, Right",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 167.45,
+   "msrp_usd": 251.65,
+   "notes": "2 door, volkswagen.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-vent-window-assembly-5g0845412envb"
+  }
+ ]
+}
