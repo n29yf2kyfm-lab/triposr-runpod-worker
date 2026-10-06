@@ -1,0 +1,150 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/body--labels",
+ "title": "Labels for 2019 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Air Bag Label",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/0ca6141542eb9b8644d7b46ddbef16e0/cd256bd16fb3324b420bbf2f800053f4.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/body--labels?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Caution Label",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/8eaee9fad422f577855ccdef7902bcda/42265e378ca19801217e7badbfdd4c60.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/body--labels?assembly=2"
+  },
+  {
+   "n": 3,
+   "name": "Info Label",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/5e430d63202d1719a9386bfe7a144caf/5e9c2dfb48d2e170964df66918321106.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/body--labels?assembly=3"
+  },
+  {
+   "n": 4,
+   "name": "Warning Label",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/3070cf055c54ad9f95770527cbbe7c69/52ac4a6ac63a05ee05cbb36355edafb0.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/body--labels?assembly=4"
+  },
+  {
+   "n": 5,
+   "name": "Caution Label",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/6e5003a23f1d004194e88fd2e996eb5c/5445b186447dcd3003f4689ef73fdc75.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/body--labels?assembly=5"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "8E0010352P",
+   "oem_display": "8E0 010 352 P",
+   "oem_from": "printed",
+   "name": "Label",
+   "label": "Air Bag Label",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 7.99,
+   "msrp_usd": 13.1,
+   "notes": "In glove box. Side air bag. Front air bag. Data plate. 2021-22. Air bag notice. Airbag. Coupe, text. 2023. Sedan from 1/05, wagon 2009 only, info & warning.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-label-8e0010352p"
+  },
+  {
+   "oem": "5G0010029J",
+   "oem_display": "5G0 010 029 J",
+   "oem_from": "printed",
+   "name": "Air Bag Information Label",
+   "label": "Pictogram, inner. Pictogram, outer. Replace air bag. Child pictogram. Coupe, pictogram. Child seat restraint. 2021-22, child seat. Child seat restrict. Convertible, pictogram. Sedan from 1/05, wagon 2009 only, pictogram.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 11.54,
+   "msrp_usd": 18.92,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-air-bag-information-label-5g0010029j"
+  },
+  {
+   "oem": "5Q0010008D",
+   "oem_display": "5Q0 010 008 D",
+   "oem_from": "printed",
+   "name": "A/C System Information Label",
+   "label": "AC Label",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 11.24,
+   "msrp_usd": 18.42,
+   "notes": "With e-Golf r134a. Without e-Golf.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-a-c-system-information-label-5q0010008d"
+  },
+  {
+   "oem": "5QF010008A",
+   "oem_display": "5QF 010 008 A",
+   "oem_from": "printed",
+   "name": "A/C System Information Label",
+   "label": "AC Label",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 3.98,
+   "msrp_usd": 6.52,
+   "notes": "2021-22. Without e-Golf, r1234yf. Coupe, r1234yf.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-a-c-system-information-label-5qf010008a"
+  },
+  {
+   "oem": "701010002AA",
+   "oem_display": "701 010 002 AA",
+   "oem_from": "printed",
+   "name": "Caution Label",
+   "label": "Parts origin # 2. High voltage. Vehicle info, to 03/30/2020. Fan label. Coupe, radiator fan.",
+   "callout": 4,
+   "diagram": 1,
+   "price_usd": 4.03,
+   "msrp_usd": 6.6,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-caution-label-701010002aa"
+  },
+  {
+   "oem": "04E010012M",
+   "oem_display": "04E 010 012 M",
+   "oem_from": "printed",
+   "name": "Fuel Information Label",
+   "label": "Fuel Label",
+   "callout": 5,
+   "diagram": 1,
+   "price_usd": 8.74,
+   "msrp_usd": 14.32,
+   "notes": "1.8L.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-information-label-4e010012m"
+  },
+  {
+   "oem": "3AA010006C",
+   "oem_display": "3AA 010 006 C",
+   "oem_from": "printed",
+   "name": "Spare Tire Label",
+   "label": "Spare tire label. From 02/24/2020. Spare wheel. To 08/26/2024. Convertible,. From 08/26/2024.",
+   "callout": 6,
+   "diagram": 1,
+   "price_usd": 7.84,
+   "msrp_usd": 12.86,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-spare-tire-label-3aa010006c"
+  },
+  {
+   "oem": "1K0010833P",
+   "oem_display": "1K0 010 833 P",
+   "oem_from": "printed",
+   "name": "Tire Information Label",
+   "label": "Tire Press Label",
+   "callout": 7,
+   "diagram": 1,
+   "price_usd": 11.98,
+   "msrp_usd": 19.64,
+   "notes": "Tire press label. Tire info label. Without e-Golf. 1.4L. 1.8L. 2021-22. TPMS control. Coupe, tire press monitor. 2.0L, gas with turbocharger. Monitor label.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-tire-information-label-1k0010833p"
+  }
+ ]
+}
