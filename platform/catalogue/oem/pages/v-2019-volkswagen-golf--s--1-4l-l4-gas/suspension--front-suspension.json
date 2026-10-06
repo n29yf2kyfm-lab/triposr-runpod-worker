@@ -1,0 +1,286 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/suspension--front-suspension",
+ "title": "Front Suspension for 2019 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Lower Spring Insulator",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/3290716e6c8b0af21200aa45fc570feb/abaeef16f43a51c11cb868e86e04a69d.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/suspension--front-suspension?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Bushings",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/bb35522ee11f6c1c94a80fea74e362e4/5e6c1d6379351d3a15f271d1956be676.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/suspension--front-suspension?assembly=2"
+  },
+  {
+   "n": 3,
+   "name": "Bushings",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/5340eec2e68828407faca7ad18f29e20/0121f3ad92133df945e5355d8b0ddbd6.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/suspension--front-suspension?assembly=3"
+  },
+  {
+   "n": 4,
+   "name": "Link",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/c8ec242d2117bfeee06079d0208d1587/c6651a5e08c3d4d447ced11853577be2.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/suspension--front-suspension?assembly=4"
+  },
+  {
+   "n": 5,
+   "name": "Link",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/ff601147de74ab5f3a6e845706e084af/91849814d2c126277b6b7c74c7ef2e95.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/suspension--front-suspension?assembly=5"
+  },
+  {
+   "n": 6,
+   "name": "Link",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/7426131bd22bf3beb2a4d49a7bb417ce/f4da79a8631d35a4220f64b774fc659a.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/suspension--front-suspension?assembly=6"
+  },
+  {
+   "n": 7,
+   "name": "Link",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/13079f7be986672bd313fcb8ef0d3fdd/44d72f18bc0cdfb2ce5568fe53e24670.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/suspension--front-suspension?assembly=7"
+  },
+  {
+   "n": 8,
+   "name": "Link",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/eba94abd0a3397247507a6e205f1cc35/46929b510698af5d609fa98a89de871c.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/suspension--front-suspension?assembly=8"
+  },
+  {
+   "n": 9,
+   "name": "Link",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/c12b1117bca2339ca119238c06c52b40/581de15c5b77a3314b8c43ad25cb1299.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/suspension--front-suspension?assembly=9"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "5QM412545",
+   "oem_display": "5QM 412 545",
+   "oem_from": "printed",
+   "name": "Coil Spring Insulator",
+   "label": "Lower Spring Insulator",
+   "callout": null,
+   "diagram": 1,
+   "price_usd": 4.93,
+   "msrp_usd": 8.08,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-coil-spring-insulator-5qm412545"
+  },
+  {
+   "oem": "5QM407256",
+   "oem_display": "5QM 407 256",
+   "oem_from": "printed",
+   "name": "Knuckle",
+   "label": "Without r, from 08/10/2015. Fwd. From 8/9/15. Golf. Right.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 412.64,
+   "msrp_usd": 620.13,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-knuckle-5qm407256"
+  },
+  {
+   "oem": "5QM407255",
+   "oem_display": "5QM 407 255",
+   "oem_from": "printed",
+   "name": "Knuckle",
+   "label": "Without r, from 08/10/2015. Fwd. Golf. Left.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 391.87,
+   "msrp_usd": 588.91,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-knuckle-5qm407255"
+  },
+  {
+   "oem": "8V0498625",
+   "oem_display": "8V0 498 625",
+   "oem_from": "printed",
+   "name": "Hub & Bearing",
+   "label": "Front Hub & Bearing",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "80mm. Part has related Components that cannot be reused/ reinstalled mount bolt and axle bolt. Wheel Bearing and Hub Assembly. Wheel Hub. Amplifier. Front. Fits AllTrack, e-Golf, Golf, SportWagen 288X25 Rotor. E-Golf. Golf. Golf AllTrack. Golf Sportwagen. w/o R. w/o r. Golf, e-Golf. 288x25 Rotor. Golf AllTrack. Golf SportWagen. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-hub-and-bearing-8v0498625) 5",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-hub-and-bearing-8v0498625"
+  },
+  {
+   "oem": "5Q0413175C",
+   "oem_display": "5Q0 413 175 C",
+   "oem_from": "printed",
+   "name": "Suspension Strut Bellows",
+   "label": "Boot",
+   "callout": 5,
+   "diagram": 1,
+   "price_usd": 36.11,
+   "msrp_usd": 51.48,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-suspension-strut-bellows-5q0413175c"
+  },
+  {
+   "oem": "1K0412303B",
+   "oem_display": "1K0 412 303 B",
+   "oem_from": "printed",
+   "name": "Suspension Strut Bumper",
+   "label": "Strut Bumper",
+   "callout": 6,
+   "diagram": 1,
+   "price_usd": 28.51,
+   "msrp_usd": 48.77,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-suspension-strut-bumper-1k0412303b"
+  },
+  {
+   "oem": "5QM412249",
+   "oem_display": "5QM 412 249",
+   "oem_from": "printed",
+   "name": "Suspension Strut Bearing",
+   "label": "Strut Bearing",
+   "callout": 7,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-suspension-strut-bearing-5qm412249) 8",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-suspension-strut-bearing-5qm412249"
+  },
+  {
+   "oem": "5Q0412331E",
+   "oem_display": "5Q0 412 331 E",
+   "oem_from": "printed",
+   "name": "Strut Mount",
+   "label": "Strut Mount",
+   "callout": 8,
+   "diagram": 1,
+   "price_usd": 68.86,
+   "msrp_usd": 101.65,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-strut-mount-5q0412331e"
+  },
+  {
+   "oem": "5QM407152C",
+   "oem_display": "5QM 407 152 C",
+   "oem_from": "printed",
+   "name": "Control Arm",
+   "label": "Lower Control Arm",
+   "callout": 9,
+   "diagram": 1,
+   "price_usd": 320.59,
+   "msrp_usd": 481.79,
+   "notes": "Incl.Bushings. GTI. Right. Without r, without e-Golf. Golf SportWagen. 1.8l. Golf Alltrack. From 03/29/2020. To 03/29/2020.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-control-arm-5qm407152c"
+  },
+  {
+   "oem": "5QM407151C",
+   "oem_display": "5QM 407 151 C",
+   "oem_from": "printed",
+   "name": "Control Arm",
+   "label": "Lower Control Arm",
+   "callout": 9,
+   "diagram": 1,
+   "price_usd": 314.3,
+   "msrp_usd": 472.34,
+   "notes": "Incl.Bushings. GTI. Left. Without r, without e-Golf. Golf SportWagen. 1.8l. Golf Alltrack. From 03/29/2020.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-control-arm-5qm407151c"
+  },
+  {
+   "oem": "5Q0407183L",
+   "oem_display": "5Q0 407 183 L",
+   "oem_from": "printed",
+   "name": "Control Arm Rear Bushing",
+   "label": "Bushings",
+   "callout": 10,
+   "diagram": 1,
+   "price_usd": 21.58,
+   "msrp_usd": 35.38,
+   "notes": "Rear. GTI, Golf R. With r. To 07/01/2019. E-Golf.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-control-arm-rear-bushing-5q0407183l"
+  },
+  {
+   "oem": "5Q0407182A",
+   "oem_display": "5Q0 407 182 A",
+   "oem_from": "printed",
+   "name": "Lower Control Arm Front Bushing",
+   "label": "Bushings",
+   "callout": 10,
+   "diagram": 1,
+   "price_usd": 12.68,
+   "msrp_usd": 20.78,
+   "notes": "Jetta. Front. Tiguan. Without r, without e-Golf. GTI. With gli. Golf Alltrack. Taos. Suspension code: g01 or g04, suspension code: g01, g04.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-lower-control-arm-front-bushing-5q0407182a"
+  },
+  {
+   "oem": "5WA407365",
+   "oem_display": "5WA 407 365",
+   "oem_from": "printed",
+   "name": "Ball Joint",
+   "label": "Lower Ball Joint",
+   "callout": 11,
+   "diagram": 1,
+   "price_usd": 75.63,
+   "msrp_usd": 111.65,
+   "notes": "Without r. Fwd. Golf SportWagen. Left.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-ball-joint-5wa407365"
+  },
+  {
+   "oem": "5WA407366",
+   "oem_display": "5WA 407 366",
+   "oem_from": "printed",
+   "name": "Ball Joint",
+   "label": "Lower Ball Joint",
+   "callout": 11,
+   "diagram": 1,
+   "price_usd": 75.63,
+   "msrp_usd": 111.65,
+   "notes": "Without r. Fwd. Golf SportWagen. Right.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-ball-joint-5wa407366"
+  },
+  {
+   "oem": "5QM411303",
+   "oem_display": "5QM 411 303",
+   "oem_from": "printed",
+   "name": "Stabilizer Bar",
+   "label": "Jetta. Without red caliper. Without r, without e-Golf, 23.2x3.5. Golf SportWagen. Fwd. From 06/30/2014. Without gli. code: 0ad.",
+   "callout": 12,
+   "diagram": 1,
+   "price_usd": 162.26,
+   "msrp_usd": 243.84,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-stabilizer-bar-5qm411303"
+  },
+  {
+   "oem": "5Q0411315D",
+   "oem_display": "5Q0 411 315 D",
+   "oem_from": "printed",
+   "name": "Stabilizer Link",
+   "label": "Link",
+   "callout": 14,
+   "diagram": 1,
+   "price_usd": 60.95,
+   "msrp_usd": 89.98,
+   "notes": "Jetta. With r. Golf. With awd.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-stabilizer-link-5q0411315d"
+  }
+ ]
+}

@@ -1,0 +1,34 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/steering--steering-gear",
+ "title": "Steering Gear for 2019 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Outer Tie Rod Lock Nut",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/f49c2faac6a8fe26c26cf0c20d0c7238/0c5d80b9894cb5ee44dc2a98b416a3b8.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/steering--steering-gear?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Boot",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/90a862614b229176ac1e04bd868b8ad3/7de08b4bf4c637a1512a280fcc692217.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/steering--steering-gear?assembly=2"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "N90942902",
+   "oem_display": "N 909 429 02",
+   "oem_from": "printed",
+   "name": "Outer Tie Rod Lock Nut",
+   "label": "Outer Tie Rod Lock Nut, Left",
+   "callout": 5,
+   "diagram": 1,
+   "price_usd": 0.74,
+   "msrp_usd": 1.22,
+   "notes": "With variable assist. Convertible,. Coupe,. To 07/2011. Without electric gear. Wagon, 2010-11,.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-outer-tie-rod-lock-nut-n90942902"
+  }
+ ]
+}

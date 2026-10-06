@@ -1,0 +1,62 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--starter",
+ "title": "Starter for 2019 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Starter",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/973bf0275dc596717ffd62def28072fa/850d51b2cdcbb68048151728e2a0091e.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--starter?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Starter",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/9559524cd0e60481921491e629f510b8/7aff27bac1e5cf249e4aa3359f78636f.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--starter?assembly=2"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "02Z911024FX",
+   "oem_display": "02Z 911 024 FX",
+   "oem_from": "printed",
+   "name": "Starter",
+   "label": "Exc.Start/Stop Feature. 1.1 Kw. Golf. 1.8l. Reman.. Vendor:bosch.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 181.49,
+   "msrp_usd": 272.75,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2z911024fx"
+  },
+  {
+   "oem": "0AM911022CX",
+   "oem_display": "0AM 911 022 CX",
+   "oem_from": "printed",
+   "name": "Starter",
+   "label": "Vendor:bosch. To 03/03/2019. 1.5 Kw. From 03/04/2019. 1.5 Kw. Auto trans/bosch, remanufactured. From 01/28/2019. 1.5 Kw.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 182.97,
+   "msrp_usd": 274.98,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-starter-am911022cx"
+  },
+  {
+   "oem": "0AM911024A",
+   "oem_display": "0AM 911 024 A",
+   "oem_from": "printed",
+   "name": "Starter",
+   "label": "New. Jetta. 1.4l. Jetta. 1.5l. 1.5 Kw. Taos. 8 speed trans. 1.5L, auto trans, denso. 8 speed trans, denso. Engine code: dyla, dylb, fwd, denso. Golf SportWagen. 1.4l. 8-spd auto trans.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 321.6,
+   "msrp_usd": 483.32,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-starter-am911024a"
+  }
+ ]
+}

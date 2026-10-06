@@ -1,0 +1,91 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--tail-lamps",
+ "title": "Tail Lamps for 2019 Volkswagen Golf",
+ "diagrams": [],
+ "parts": [
+  {
+   "oem": "5GM945095F",
+   "oem_display": "5GM 945 095 F",
+   "oem_from": "printed",
+   "name": "Tail Lamp Assembly",
+   "label": "Tail Lamp Assembly, Left",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 218.46,
+   "msrp_usd": 328.32,
+   "notes": "2018-19. 2018-20. Tail Light Assembly. Housing. Light Assembly. Combo Assembly. Fits e-Golf, Golf, Golf R, GTI 2018-19. 2018-21. 2018-19. 2018-20.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-lamp-assembly-5gm945095f"
+  },
+  {
+   "oem": "5GM945096F",
+   "oem_display": "5GM 945 096 F",
+   "oem_from": "printed",
+   "name": "Tail Lamp Assembly",
+   "label": "Tail Lamp Assembly, Right",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 209.4,
+   "msrp_usd": 314.69,
+   "notes": "2018-19. 2018-20. Tail Light Assembly. Housing. Light Assembly. Combo Assembly. Lens. Fits e-Golf, Golf, Golf R, GTI 2018-19. 2018-21. 2018-19. 2018-20.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-lamp-assembly-5gm945096f"
+  },
+  {
+   "oem": "6RU945300",
+   "oem_display": "6RU 945 300",
+   "oem_from": "printed",
+   "name": "Tail Lamp Assembly Fastener",
+   "label": "Tail Lamp Assembly Fastener, Left",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": 9.66,
+   "msrp_usd": 13.19,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-lamp-assembly-fastener-6ru945300"
+  },
+  {
+   "oem": "5GM945311C",
+   "oem_display": "5GM 945 311 C",
+   "oem_from": "printed",
+   "name": "Tail Light Bezel",
+   "label": "Trim, Left",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 20.73,
+   "msrp_usd": 28.31,
+   "notes": "2018.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-light-bezel-5gm945311c"
+  },
+  {
+   "oem": "5GM945312C",
+   "oem_display": "5GM 945 312 C",
+   "oem_from": "printed",
+   "name": "Tail Light Bezel",
+   "label": "Trim, Right",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 20.73,
+   "msrp_usd": 28.31,
+   "notes": "2018.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-light-bezel-5gm945312c"
+  },
+  {
+   "oem": "5GM998145E",
+   "oem_display": "5GM 998 145 E",
+   "oem_from": "printed",
+   "name": "Tail Light Gasket",
+   "label": "Gasket, Left",
+   "callout": 4,
+   "diagram": 1,
+   "price_usd": 24.14,
+   "msrp_usd": 39.58,
+   "notes": "2018.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-light-gasket-5gm998145e"
+  }
+ ]
+}
