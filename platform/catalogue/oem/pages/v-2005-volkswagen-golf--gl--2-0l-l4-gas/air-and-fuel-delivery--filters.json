@@ -1,0 +1,90 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2005-volkswagen-golf--gl--2-0l-l4-gas/air-and-fuel-delivery--filters",
+ "title": "Filters for 2005 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Air Cleaner Assembly",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/eb16485c65b8c30bce62db5847a836c8/03f35cc5445be3c9ee9dc7e717baf8e6.png",
+   "url": "https://vw.oempartsonline.com/v-2005-volkswagen-golf--gl--2-0l-l4-gas/air-and-fuel-delivery--filters?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Fuel Tank",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
+   "url": "https://vw.oempartsonline.com/v-2005-volkswagen-golf--gl--2-0l-l4-gas/air-and-fuel-delivery--filters?assembly=2"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "1J0129607BP",
+   "oem_display": "1J0 129 607 BP",
+   "oem_from": "printed",
+   "name": "Air Filter And Housing Assembly",
+   "label": "Air Cleaner Assembly",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "2.0L, federal. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-air-filter-and-housing-assembly-1j0129607bp) 2",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-air-filter-and-housing-assembly-1j0129607bp"
+  },
+  {
+   "oem": "1J0129620",
+   "oem_display": "1J0 129 620",
+   "oem_from": "printed",
+   "name": "Air Filter",
+   "label": "Air Filter",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": 19.51,
+   "msrp_usd": 26.65,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-air-filter-1j0129620"
+  },
+  {
+   "oem": "06A906461G",
+   "oem_display": "06A 906 461 G",
+   "oem_from": "printed",
+   "name": "Mass Air Flow Sensor",
+   "label": "Air Mass Sensor",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 316.05,
+   "msrp_usd": 474.98,
+   "notes": "Jetta. 2.0l. Wagon. 2.0L, all. 2.0L, federal. Touareg. 4.2l. 2.0L, new. 4.2L, new. Phaeton. 4.2l. 4.2L, from 12/06, remanufactured.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-mass-air-flow-sensor-6a906461g"
+  },
+  {
+   "oem": "1J0129684CB",
+   "oem_display": "1J0 129 684 CB",
+   "oem_from": "printed",
+   "name": "Engine Air Intake Hose",
+   "label": "Connector Pipe",
+   "callout": 5,
+   "diagram": 1,
+   "price_usd": 307.74,
+   "msrp_usd": 462.49,
+   "notes": "2.0L. all.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-air-intake-hose-1j0129684cb"
+  },
+  {
+   "oem": "06A103474D",
+   "oem_display": "06A 103 474 D",
+   "oem_from": "printed",
+   "name": "Engine Air Intake Hose",
+   "label": "2.0L. Air hose.",
+   "callout": 5,
+   "diagram": 1,
+   "price_usd": 64.34,
+   "msrp_usd": 94.98,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-air-intake-hose-6a103474d"
+  }
+ ]
+}
