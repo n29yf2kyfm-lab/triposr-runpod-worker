@@ -1,0 +1,35 @@
+{
+ "page": "https://vw.oempartsonline.com/v-1997-volkswagen-golf--gl--2-0l-l4-gas/air-and-fuel-delivery--hardware-fasteners-and-fittings",
+ "title": "Hardware, Fasteners & Fittings for 1997 Volkswagen Golf",
+ "diagrams": [],
+ "parts": [
+  {
+   "oem": "1J0201550BF9B9",
+   "oem_display": "1J0 201 550 BF 9B9",
+   "oem_from": "printed",
+   "name": "Cap",
+   "label": "Fuel Tank Cap",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 33.89,
+   "msrp_usd": 48.32,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-cap-1j0201550bf9b9"
+  },
+  {
+   "oem": "7D0201551C",
+   "oem_display": "7D0 201 551 C",
+   "oem_from": "printed",
+   "name": "Fuel Tank Cap",
+   "label": "Single Key System. Locking. From 53e022075. Dual Key System. From Chassis/VIN 022074.",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 33.89,
+   "msrp_usd": 48.32,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-tank-cap-7d0201551c"
+  }
+ ]
+}
