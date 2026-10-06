@@ -1,0 +1,35 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/body--exterior-trim-lift-gate",
+ "title": "Exterior Trim - Lift Gate for 2019 Volkswagen Golf",
+ "diagrams": [],
+ "parts": [
+  {
+   "oem": "5G0853617A",
+   "oem_display": "5G0 853 617 A",
+   "oem_from": "printed",
+   "name": "Hatch Emblem",
+   "label": "Emblem",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 69.99,
+   "msrp_usd": 103.32,
+   "notes": "Emblem. Without e-Golf.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-hatch-emblem-5g0853617a"
+  },
+  {
+   "oem": "5G08536872ZZ",
+   "oem_display": "5G0 853 687 2ZZ",
+   "oem_from": "printed",
+   "name": "Hatch Emblem",
+   "label": "Hatch Emblem, Rear",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 43.59,
+   "msrp_usd": 62.15,
+   "notes": "Golf, type 1.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-hatch-emblem-5g08536872zz"
+  }
+ ]
+}

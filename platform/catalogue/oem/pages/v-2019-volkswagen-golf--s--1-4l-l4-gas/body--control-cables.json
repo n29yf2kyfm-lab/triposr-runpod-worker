@@ -1,0 +1,35 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/body--control-cables",
+ "title": "Control Cables for 2019 Volkswagen Golf",
+ "diagrams": [],
+ "parts": [
+  {
+   "oem": "5G0823535B",
+   "oem_display": "5G0 823 535 B",
+   "oem_from": "printed",
+   "name": "Release Cable",
+   "label": "Hood Release Cable, Front rearward",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 68.86,
+   "msrp_usd": 101.65,
+   "notes": "GTI. From release. Golf Alltrack. Golf R. Golf, e-Golf. Rear.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-release-cable-5g0823535b"
+  },
+  {
+   "oem": "5G1823531C",
+   "oem_display": "5G1 823 531 C",
+   "oem_from": "printed",
+   "name": "Release Cable",
+   "label": "Hood Release Cable, Front forward",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 36.11,
+   "msrp_usd": 51.48,
+   "notes": "GTI. From latch. Golf Alltrack. Golf R. Front. Golf, e-Golf.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-release-cable-5g1823531c"
+  }
+ ]
+}

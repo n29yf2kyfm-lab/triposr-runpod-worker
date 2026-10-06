@@ -1,0 +1,49 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/body--exterior-trim-rear-door",
+ "title": "Exterior Trim - Rear Door for 2019 Volkswagen Golf",
+ "diagrams": [],
+ "parts": [
+  {
+   "oem": "5GM839901A041",
+   "oem_display": "5GM 839 901 A 041",
+   "oem_from": "printed",
+   "name": "Door Applique",
+   "label": "Frame Molding, Left",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 71.12,
+   "msrp_usd": 104.99,
+   "notes": "Without r, e-Golf.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-door-applique-5gm839901a041"
+  },
+  {
+   "oem": "5GM839902A041",
+   "oem_display": "5GM 839 902 A 041",
+   "oem_from": "printed",
+   "name": "Door Applique",
+   "label": "Frame Molding, Right",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 72.59,
+   "msrp_usd": 107.17,
+   "notes": "Without r, e-Golf.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-door-applique-5gm839902a041"
+  },
+  {
+   "oem": "6R0839829D",
+   "oem_display": "6R0 839 829 D",
+   "oem_from": "printed",
+   "name": "Applique Rivet",
+   "label": "Frame Molding Rivet, Left",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": 1.67,
+   "msrp_usd": 2.74,
+   "notes": "From 11/15/2014. 2 door, from 11/17/2014.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-applique-rivet-6r0839829d"
+  }
+ ]
+}

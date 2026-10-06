@@ -1,0 +1,35 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/body--control-modules",
+ "title": "Control Modules for 2019 Volkswagen Golf",
+ "diagrams": [],
+ "parts": [
+  {
+   "oem": "5Q4959592EZ00",
+   "oem_display": "5Q4 959 592 E Z00",
+   "oem_from": "printed",
+   "name": "Door Control Module",
+   "label": "Door Control Module, Front right",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 122.26,
+   "msrp_usd": 183.74,
+   "notes": "Jetta. Right. To 09/02/2018. Tiguan. 4 door. all.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-door-control-module-5q4959592ez00"
+  },
+  {
+   "oem": "5Q4959593EZ00",
+   "oem_display": "5Q4 959 593 E Z00",
+   "oem_from": "printed",
+   "name": "Door Control Module",
+   "label": "Door Control Module, Front left",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 130.4,
+   "msrp_usd": 195.97,
+   "notes": "Jetta. Left. To 09/02/2018. Tiguan. 4 door. all.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-door-control-module-5q4959593ez00"
+  }
+ ]
+}
