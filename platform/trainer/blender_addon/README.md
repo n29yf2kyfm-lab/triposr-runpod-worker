@@ -51,12 +51,10 @@ everything again. One broken file never stops the batch.
 
 ## What it can and cannot do
 
-- **It needs the doors to be separate objects in the file.** A car whose
-  doors are welded into one body mesh cannot be opened by renaming anything,
-  so it is refused. Of the 1,044 catalogue cars, a survey found 128 whose
-  parts are separately named at all (916 are one welded mesh), and not all of
-  the 128 have separate doors. Expect most of a random folder to be refused
-  until the shape-based door finder (step 3) exists.
+- **Doors are best as separate objects in the file.** Named doors are used
+  as they are. When there are none, the rigger looks for doors as loose
+  pieces, and then cuts welded ones out of the body (below). A car whose
+  wheels or front and back it cannot tell is still refused.
 - **Doors that are loose pieces are found too.** Some game rips keep the whole
   paint as one mesh with each panel a loose piece inside it (the Audi RS6).
   The rigger looks for a door-shaped piece on each flank, mirrored left and
@@ -64,6 +62,20 @@ everything again. One broken file never stops the batch.
   as the tight bunch of sharp vertical edges the groove leaves. Glass, handles
   and the door card that sit inside the door travel with it. Calibrated on one
   car so far; the report's `door_finder` says what it did.
+- **Welded doors are cut out.** When no door is found by name or as a loose
+  piece, the doors are cut from the body shell. The shut lines come from the
+  mesh: sharp grooves (Ford Focus) or the edges of separate panels (2023
+  Polo), picked as lines that run at least five-sixths of the door's height,
+  so a door handle is not mistaken for one. Each door skin is grown from its
+  middle across smooth edges only, so it stops at the panel's own edges, and
+  is cut at the measured line only where no edge stops it. Its window goes
+  with it as a whole pane, the door card and handle as loose pieces inside
+  it, and a dark inner panel backs the skin. A door that comes out too big,
+  too small or reaching above the glass stays shut together with its twin,
+  and the report's `door_cutter` says why. Measured 2026-10-06 on the Focus
+  (4 doors), the Polo (4 doors) and the Sportage (front pair; the rear pair
+  refused). Proportions are the fallback where a car has no line at all;
+  they were calibrated on one car.
 - **Mirrored pairs saved as one mesh are split.** Some exports keep both
   front tyres in one mesh and both front door skins in another (the 2022
   Tiguan and Tiguan Allspace). A door, wheel or brake mesh that reaches well

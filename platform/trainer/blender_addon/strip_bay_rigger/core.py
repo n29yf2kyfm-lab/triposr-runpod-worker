@@ -28,9 +28,13 @@ FAMILIES this was written against, all measured in the catalogue:
 
 REFUSES rather than shipping a car whose teardown would silently not work:
 no doors, not four road wheels, wheels above the glass, or a frame it cannot
-decide. Of the 1,044 catalogue cars a survey found ~40 with separately named
-doors; a car whose doors are welded into its body shell cannot be opened by
-any renaming, and is refused, not cut along a guessed line.
+decide.
+
+WELDED DOORS (2026-10-06): a car whose doors are part of its body shell is no
+longer refused outright. `_cut_doors` cuts the door skins out along the car's
+own shut lines (a groove, or the edge of a separate panel), grows each skin to
+its panel edges, and gates every door: one that cannot be cut cleanly stays
+shut, together with its twin. See its docstring for what it measures.
 """
 import bpy, bmesh, json, re, math, os
 from mathutils import Vector, Matrix
@@ -388,6 +392,14 @@ def convert(imported, rep, override=None):
                 put(f"door_{'fr'[k]}{side}", o)
     nd = sum(1 for k in parts if k.startswith('door_') and k[5] in 'fr')
     if nd < 2:
+        # WELDED: the doors are part of the body shell. Cut them out.
+        for pid, os_ in _cut_doors(objs, K, wheels, lo, hi, rep).items():
+            for o in os_:
+                objs.append(o)
+                K[o] = 'door'
+                put(pid, o)
+        nd = sum(1 for k in parts if k.startswith('door_') and k[5] in 'fr')
+    if nd < 2:
         raise Refused(f'only {nd} door part(s) found — the doors are not separate objects in this file')
 
     # A WHEEL MUST BE WHEEL-SHAPED. On the Rolls-Royce Ghost, parts NAMED for
@@ -464,8 +476,8 @@ def convert(imported, rep, override=None):
             if other in parts:
                 parts[other] = keep
 
-    if rep.get('door_finder', {}).get('doors'):
-        _adopt_into_doors(parts, rep)
+    if rep.get('door_finder', {}).get('doors') or rep.get('door_cutter', {}).get('faces'):
+        _adopt_into_doors(parts, rep)       # handles, door cards: loose pieces inside the door
 
     # ── 4. TYRES MUST READ AS BLACK RUBBER ─────────────────────────────
     rep['tyre_faces_to_rubber'] = _rubber_tyres(parts)
@@ -478,10 +490,28 @@ def convert(imported, rep, override=None):
     rep['missing'] = [p for p in _wanted(parts) if not parts.get(p)]
 
     # ── 7. HINGES, and which doors SLIDE ───────────────────────────────
-    hinge = _hinges(parts, bool(rep.get('door_finder', {}).get('doors')))
+    hinge = _hinges(parts, bool(rep.get('door_finder', {}).get('doors') or rep.get('door_cutter', {}).get('faces')))
     dropped = _implausible(parts, hinge)
     if dropped:
         rep['implausible'] = dropped
+        # What was taken for the doors was not (the Polo's "doors" were its
+        # wings). If no side door is left, cut the real ones from the body.
+        if not any(k in parts for k in ('door_fl', 'door_fr', 'door_rl', 'door_rr')) \
+                and any(d.startswith('door_') for d in dropped) and 'door_cutter' not in rep:
+            pool = parts.get('body', []) + parts.get('glazing', [])
+            kk = {o: ('glazing' if o in parts.get('glazing', []) else 'body') for o in pool}
+            cut = _cut_doors(pool, kk, [o for k in parts if k.startswith('wheel_') for o in parts[k]], lo, hi, rep)
+            for pid, os_ in cut.items():
+                parts[pid] = os_
+            if cut:
+                _adopt_into_doors(parts, rep)
+                for pid, h in _hinges(parts, True).items():
+                    if pid in cut:
+                        hinge[pid] = h
+                again = _implausible(parts, {k: v for k, v in hinge.items() if k in cut})
+                for d in again:
+                    hinge.pop(d.split(':')[0], None)
+                rep['implausible'] += again
         rep['missing'] = [p for p in _wanted(parts) if not parts.get(p)]
     rep['hinge'] = hinge
     rep['motion'] = _motion(parts, hi.y - lo.y, rep, override)
@@ -1065,6 +1095,341 @@ def _find_doors(objs, K, wheels, lo, hi, rep):
     return out
 
 
+ANG = float(os.environ.get('SB_CUT_ANG', 40))
+GLASS_MAT = re.compile(r'glass|window|vitre|windscreen|windshield|lamp|light|lens|tyre|tire|rubber|chrome_?badge', re.I)
+
+
+def _peak(hist, a, b, need):
+    """The strongest bin in [a, b) if it clears `need`, else None."""
+    a, b = max(0, a), min(len(hist), b)
+    if a >= b:
+        return None
+    k = max(range(a, b), key=lambda i: hist[i])
+    return k if hist[k] >= need else None
+
+
+def _cut_doors(objs, K, wheels, lo, hi, rep):
+    """WELDED DOORS: cut the door skins out of the body shell, so a car whose
+    doors are part of one paint mesh still opens (owner, 2026-10-06: "if the
+    doors are welded just rebuild them with the doors open").
+
+    Only reached when no door was found by name or as a loose island.
+
+    WHERE TO CUT, strongest evidence first:
+      1. SHUT LINES. A modelled shut line is a groove, and a groove leaves a
+         bunch of sharp (>30 deg) near-vertical edges. Summed along the car on
+         both flanks, the Ford Focus peaks at exactly the front door's leading
+         edge and the B-pillar (checked on a side render with the peaks drawn).
+      2. PROPORTIONS, when the mesh has no groove (the 2023 Polo's flank has
+         none): front door from 33% to 63% of the wheelbase behind the front
+         axle, rear door back to 4.5% ahead of the rear axle. Calibrated on
+         ONE car (the Focus, whose grooves land at 33% and 63%); a GUESSED line,
+         and `rep['door_cutter']['evidence']` says so.
+    Top: where the door's PAINT ends — the window surround is another
+    material. Not the lowest glass: the Focus models its panes running down
+    INSIDE the door, which put the "belt" 30 cm low and cut the doors in half.
+    Bottom: 0.7 wheel radii up (the sill stays on the body). The arches are cut
+    round, not through. Each side window goes with its door as a WHOLE pane
+    (cut face by face, a pane was split at the line).
+
+    Assumes four doors; a two-door car needs an override. Each door gets a
+    dark inner card so it reads as a door, not a hollow skin, once open.
+    Returns {pid: [objects]}, or {} when the cut finds too little skin."""
+    info = rep.setdefault('door_cutter', {})
+    L, W, H = hi.z - lo.z, hi.x - lo.x, hi.y - lo.y
+    cx = (lo.x + hi.x) / 2
+    wz = [centre([o]).z for o in wheels]
+    zf, zr = max(wz), min(wz)
+    wb = zf - zr
+    r = max(v.y for o in wheels for v in wv(o)) / 2       # ground is 0
+    if wb < .3 * L or r <= 0:
+        info['result'] = 'cannot place the axles'
+        return {}
+    src = [o for o in objs if K[o] == 'body' and len(o.data.polygons) >= 50]
+    gls = [o for o in objs if K[o] == 'glazing' and len(o.data.polygons)]
+
+    def faces(o):
+        mw = o.matrix_world
+        n3 = mw.to_3x3().inverted().transposed()
+        s = abs(mw.to_3x3().determinant()) ** (2 / 3)
+        mats = [sl.material.name if sl.material else '' for sl in o.material_slots]
+        for p in o.data.polygons:
+            n = G(n3 @ p.normal)
+            if n.length:
+                n.normalize()
+            yield p.index, G(mw @ p.center), n, p.area * s, mats[p.material_index] if mats else ''
+
+    ysill = .7 * r
+    ytop = hi.y - .12 * H                           # never the roof
+
+    # shut lines: sharp, near-vertical edges on either flank between the belt and the sill
+    NB, NY = 80, 6
+    hist = [0.0] * NB
+    hits = [[set(), set()] for _ in range(NB)]      # height bands hit, per flank
+    # An OPEN edge counts too: where a panel is its own piece of mesh, the shut
+    # line is its boundary, not a groove (the 2023 Polo: no groove anywhere,
+    # and its shut lines are the edges of separate panels and thin dark strips).
+    for o in [o for o in objs if K[o] == 'body']:
+        mw = o.matrix_world
+        bm = bmesh.new()
+        bm.from_mesh(o.data)
+        bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-6)
+        for e in bm.edges:
+            nl = len(e.link_faces)
+            if nl > 2 or nl == 0 or (nl == 2 and e.calc_face_angle(0) < math.radians(30)):
+                continue
+            a, b = G(mw @ e.verts[0].co), G(mw @ e.verts[1].co)
+            d = b - a
+            if d.length == 0 or abs(d.y) / d.length < .8 or abs((a.x + b.x) / 2 - cx) < .3 * W:
+                continue
+            zc, yc = (a.z + b.z) / 2, (a.y + b.y) / 2
+            # the MIDDLE of the door's height: lower down, the arch lips and
+            # sill ends are vertical too (the Focus's first pass took one for
+            # the front door's edge, 27 cm into the wing)
+            # and nothing round the wheel arches: an arch lip is vertical where
+            # it meets the door's height, and on the Polo it outweighed every
+            # real shut line
+            if zr < zc < zf and 1.0 * r < yc < 2.4 * r and \
+                    all((yc - r) ** 2 + (zc - z) ** 2 > (1.3 * r) ** 2 for z in (zf, zr)):
+                k = min(NB - 1, int((zc - zr) / wb * NB))
+                hist[k] += d.length
+                for yy in (a.y, b.y, yc):
+                    hits[k][0 if (a.x + b.x) / 2 > cx else 1].add(min(NY - 1, max(0, int((yy - r) / (1.4 * r) * NY))))
+        bm.free()
+    # COVERAGE: how much of the door's height a line spans (6 bands, best
+    # flank, neighbouring bins merged). A shut line runs the door's full
+    # height; a handle or a badge only a band of it.
+    cover = [max(len(set().union(*(hits[j][s] for j in range(max(0, k - 1), min(NB, k + 2))))) for s in (0, 1))
+             for k in range(NB)]
+    mean = sum(hist) / NB
+    need = max(.1 * H, 1.5 * mean)
+    zat = lambda k: zr + (k + .5) / NB * wb
+    # A LINE is a bin covering at least 5 of the 6 height bands with at least
+    # 60% of the strongest such bin's edge length in its search range. The
+    # front door's leading edge is the MOST FORWARD line; the B-pillar is the
+    # REARMOST line well behind it — so the handle at the back of the front
+    # door (a full-height line on the Polo, stronger than either real edge)
+    # loses both ways.
+    def line(a, b, front):
+        cand = [i for i in range(max(0, a), min(NB, b)) if cover[i] >= 5 and hist[i] >= need]
+        if not cand:
+            return None
+        top_ = max(hist[i] for i in cand)
+        cand = [i for i in cand if hist[i] >= .6 * top_]
+        return max(cand) if front else min(cand)
+    kf = line(int(.50 * NB), int(.85 * NB), True)
+    kb = line(int(.20 * NB), (kf if kf is not None else int(.70 * NB)) - int(.22 * NB), False)
+    F = zat(kf) if kf is not None else zf - .33 * wb
+    Bp = zat(kb) if kb is not None else zf - .63 * wb
+    Rr = zr + .045 * wb
+    ev = {'front_edge': 'shut line' if kf is not None else 'proportion',
+          'b_pillar': 'shut line' if kb is not None else 'proportion', 'rear_edge': 'proportion'}
+    info['profile'] = [round(h, 2) for h in hist]       # rear axle -> front axle, for diagnosis
+    info['cover'] = cover
+    info.update(evidence=ev, front_edge_z=round(F, 3), b_pillar_z=round(Bp, 3), rear_edge_z=round(Rr, 3),
+                peak_need=round(need, 3))
+    if not (zr < Rr < Bp < F < zf) or F - Bp < .15 * wb or Bp - Rr < .15 * wb:
+        info['result'] = 'door edges out of order — not cutting'
+        return {}
+
+    def near_arch(c):
+        return any((c.y - r) ** 2 + (c.z - z) ** 2 < (1.35 * r) ** 2 for z in (zf, zr))
+
+    def in_arch(c):
+        # just inside the arch opening; the arch lip is a crease and stops the
+        # growth anyway (1.12 r notched the Focus's rear doors)
+        return any((c.y - r) ** 2 + (c.z - z) ** 2 < (1.03 * r) ** 2 for z in (zf, zr))
+
+    # Each door skin is GROWN from a seed in its middle across smooth edges
+    # only, so it stops at the creases that bound a real panel — the shut-line
+    # groove, the belt crease, the sill, the arch lip — and the cut follows the
+    # mesh's own edges. A face-by-face test against a plane left saw-teeth
+    # wherever a big triangle crossed it (seen on the Focus's first render).
+    # Where a side has no crease (no groove: the Polo) the growth runs to the
+    # hard limit, and only then is it clamped at the line.
+    # Growth is allowed well past each line; a line is applied only where the
+    # growth ran on without meeting a panel edge. The Polo's door skins are
+    # separate panels whose front edge sits 0.35 m ahead of the proportion
+    # line, and a tight limit clamped them there with a saw-toothed edge.
+    pad = .04 * wb
+    nom = {'f': (Bp, F), 'r': (Rr, Bp)}
+    grow = {'f': (Bp - pad, zf - .9 * r), 'r': (Rr - pad, F)}
+    seed_z = {'f': zf - .48 * wb, 'r': zf - .80 * wb}
+    if not Bp < seed_z['f'] < F:
+        seed_z['f'] = (Bp + F) / 2
+    if not Rr < seed_z['r'] < Bp:
+        seed_z['r'] = (Rr + Bp) / 2
+    groups, area, clamped, top = {}, {}, [], {}
+    for o in src:
+        mw = o.matrix_world
+        n3 = mw.to_3x3().inverted().transposed()
+        sc = abs(mw.to_3x3().determinant()) ** (2 / 3)
+        mats = [sl.material.name if sl.material else '' for sl in o.material_slots]
+        bm = bmesh.new()
+        bm.from_mesh(o.data)
+        tag = bm.faces.layers.int.new('orig')
+        for f in bm.faces:
+            f[tag] = f.index
+        bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-5)    # weld for GROWTH only
+        bm.faces.ensure_lookup_table()
+        info_f = {}
+        for f in bm.faces:
+            n = G(n3 @ f.normal)
+            if n.length:
+                n.normalize()
+            m = mats[f.material_index] if f.material_index < len(mats) else ''
+            info_f[f.index] = (G(mw @ f.calc_center_median()), n, f.calc_area() * sc, m)
+        for sd in (1, -1):
+            side = 'l' if sd > 0 else 'r'
+            for d, (z0, z1) in nom.items():
+                pid = f'door_{d}{side}'
+                g0, g1 = grow[d]
+
+                paint = [None]
+
+                def fits(f):
+                    c, n, a, m = info_f[f.index]
+                    return (not GLASS_MAT.search(m) and (paint[0] is None or m == paint[0])
+                            and sd * (c.x - cx) > .25 * W and sd * n.x > .25
+                            and ysill < c.y < ytop
+                            and g0 < c.z < g1 and not in_arch(c)
+                            # round an arch the flare turns toward the wheel; a
+                            # door skin there stays flat to the side (the Polo's
+                            # rear door ran on down its rear arch flare)
+                            and (sd * n.x > .8 or not near_arch(c)))
+                zm, ym = seed_z[d], 1.45 * r
+                seeds = [f for f in bm.faces if fits(f) and sd * info_f[f.index][1].x > .7
+                         and abs(info_f[f.index][0].z - zm) < .06 * wb
+                         and abs(info_f[f.index][0].y - ym) < .35 * r]
+                if not seeds:
+                    continue
+                mx = max(sd * info_f[f.index][0].x for f in seeds)
+                seeds = [f for f in seeds if sd * info_f[f.index][0].x > mx - .03 * W]
+                # the door's paint: the material covering most of the seed area
+                ms = {}
+                for f in seeds:
+                    ms[info_f[f.index][3]] = ms.get(info_f[f.index][3], 0) + info_f[f.index][2]
+                paint[0] = max(ms, key=ms.get)
+                seeds = [f for f in seeds if info_f[f.index][3] == paint[0]]
+                seen = {f.index for f in seeds}
+                stk = list(seeds)
+                while stk:
+                    g = stk.pop()
+                    for e in g.edges:
+                        if len(e.link_faces) != 2 or e.calc_face_angle(0) > math.radians(ANG):
+                            continue
+                        for h in e.link_faces:
+                            if h.index not in seen and fits(h):
+                                seen.add(h.index)
+                                stk.append(h)
+                zs = [info_f[i][0].z for i in seen]
+                # past the line it shares with the other door, or out to the
+                # limit of growth: no panel edge there, so cut at the line
+                lo_c = min(zs) < (z0 - .5 * pad if d == 'f' else g0 + .25 * pad)
+                hi_c = max(zs) > (g1 - .25 * pad if d == 'f' else z1 + .5 * pad)
+                if lo_c or hi_c:
+                    clamped.append(f"{pid}{' rear' if lo_c else ''}{' front' if hi_c else ''}")
+                keep = [i for i in seen if (not lo_c or info_f[i][0].z >= z0) and (not hi_c or info_f[i][0].z < z1)]
+                if d == 'r' and lo_c:
+                    # cut at a line with no panel edge: below the belt a rear
+                    # door's edge follows the arch, so keep it off the arch
+                    keep = [i for i in keep if (info_f[i][0].y - r) ** 2 + (info_f[i][0].z - zr) ** 2 > (1.25 * r) ** 2]
+                for i in keep:
+                    groups.setdefault(o, {}).setdefault(pid, set()).add(bm.faces[i][tag])
+                    area[pid] = area.get(pid, 0) + info_f[i][2]
+                    top[pid] = max(top.get(pid, -1e9), info_f[i][0].y)
+        bm.free()
+    # a face both doors grew into (no groove at the B-pillar) goes by the line
+    for o, g in groups.items():
+        for side in 'lr':
+            f_, r_ = g.get('door_f' + side), g.get('door_r' + side)
+            if f_ and r_ and f_ & r_:
+                both = f_ & r_
+                cz = {p.index: G(o.matrix_world @ p.center).z for p in o.data.polygons if p.index in both}
+                f_ -= {i for i in both if cz[i] < Bp}
+                r_ -= {i for i in both if cz[i] >= Bp}
+    groups = {o: {p: sorted(f) for p, f in g.items()} for o, g in groups.items()}
+    info['clamped_at_line'] = clamped
+    info['skin_top'] = {p: round(y, 4) for p, y in top.items()}
+    want = {'f': (F - Bp) * 1.6 * r, 'r': (Bp - Rr) * 1.6 * r}     # a door is ~1.6 wheel radii tall below the glass
+    info['skin_area_share'] = {p: round(area.get(p, 0) / want[p[5]], 2)
+                               for p in ('door_fl', 'door_rl', 'door_fr', 'door_rr')}
+    # THE GATE. A door is cut only if it reads as a door: enough skin, not
+    # absurdly much, below the glass line, and a clean outline. A failed door
+    # stays welded shut — honest — rather than swinging a ragged slab.
+    bad = {}
+    for p_, sh in info['skin_area_share'].items():
+        if sh < .4:
+            bad[p_] = f'too little skin ({sh})'
+        elif sh > 1.8:
+            bad[p_] = f'too much skin ({sh}) — grew past the door'
+        elif top.get(p_, 0) > lo.y + .78 * H:
+            bad[p_] = 'reaches above the glass line'
+        elif sh > 1.3 and sum(1 for c_ in clamped if c_.startswith(p_ + ' ')
+                               and 'rear' in c_ and 'front' in c_):
+            bad[p_] = f'no panel edge at either end and oversized ({sh}) — not a door'
+    # a door and its mirror twin are cut together or not at all: one rear door
+    # opening and the other welded shut is a broken car, not an honest one
+    for p_ in list(bad):
+        twin = p_[:-1] + ('r' if p_[-1] == 'l' else 'l')
+        bad.setdefault(twin, f'its twin {p_} was refused')
+    info['refused_doors'] = bad
+    ok = [p_ for p_ in info['skin_area_share'] if p_ not in bad]
+    if not {'door_fl', 'door_fr'} <= set(ok):
+        info['result'] = f'too little door skin found ({info["skin_area_share"]}) — not cutting'
+        return {}
+    # each side window above a kept door goes with it, as a whole pane
+    for o in gls:
+        for c in _islands(o):
+            b0, b1 = c[0]
+            mid = (b0 + b1) / 2
+            sd = 1 if mid.x > cx else -1
+            if sd * (mid.x - cx) < .25 * W or b1.y < 1.6 * r or b1.z - b0.z > .6 * wb:
+                continue
+            d = 'f' if Bp <= mid.z < F + .03 * wb else 'r' if Rr <= mid.z < Bp else None
+            pid = d and f"door_{d}{'l' if sd > 0 else 'r'}"
+            if pid in ok:
+                groups.setdefault(o, {}).setdefault(pid, []).extend(c[2])
+    inner = bpy.data.materials.get('SB_door_inner') or bpy.data.materials.new('SB_door_inner')
+    inner.use_nodes = True
+    bsdf = inner.node_tree.nodes.get('Principled BSDF')
+    bsdf.inputs['Base Color'].default_value = (0.045, 0.045, 0.05, 1)
+    bsdf.inputs['Roughness'].default_value = 0.7
+    out = {}
+    for o, g in groups.items():
+        todo = [(p, f) for p, f in g.items() if p in ok]
+        if not todo:
+            continue
+        for (pid, _), new in zip(todo, _lift_many(o, [f for _, f in todo])):
+            new.name = 'door_cut_' + pid[5:]
+            new['sb_chain'] = new.name
+            if o in src:
+                _door_card(new, inner, 1 if pid[-1] == 'l' else -1, .025 * W)
+            out.setdefault(pid, []).append(new)
+    info['result'] = f"cut {len(out)} door(s) from the body: {sorted(out)}"
+    info['faces'] = {p: sum(len(x.data.polygons) for x in os_) for p, os_ in out.items()}
+    return out
+
+
+def _door_card(o, mat, sd, t):
+    """Back a cut door skin with a dark inner panel `t` inboard, facing in, so
+    the open door is not a hollow sheet seen from behind."""
+    o.data.materials.append(mat)
+    mi = len(o.data.materials) - 1
+    off = o.matrix_world.to_3x3().inverted() @ B(Vector((-sd * t, 0, 0)))
+    bm = bmesh.new()
+    bm.from_mesh(o.data)
+    vmap = {v: bm.verts.new(v.co + off) for v in list(bm.verts)}
+    for f in list(bm.faces):
+        try:
+            nf = bm.faces.new([vmap[v] for v in reversed(f.verts)])
+            nf.material_index = mi
+        except ValueError:
+            pass
+    bm.to_mesh(o.data)
+    bm.free()
+
+
 def _adopt_into_doors(parts, rep):
     """For doors found as islands: the glass, handles, trim and door card are
     loose pieces of OTHER meshes (all windows are one Window mesh on the RS6).
@@ -1081,6 +1446,12 @@ def _adopt_into_doors(parts, rep):
         boxes = {p: bbox([v for o in parts[p] for v in wv(o)]) for p in dps}
         b0 = Vector([min(boxes[p][0][i] for p in dps) for i in range(3)])
         b1 = Vector([max(boxes[p][1][i] for p in dps) for i in range(3)])
+        cutter = bool(rep.get('door_cutter', {}).get('faces'))
+        hubs = []
+        for k in ('wheel_fl', 'wheel_fr', 'wheel_rl', 'wheel_rr'):
+            if parts.get(k):
+                w0, w1 = bbox([v for o in parts[k] for v in wv(o)])
+                hubs.append(((w0.z + w1.z) / 2, (w1.y - w0.y) / 2))
         cut = info.get(f'split_{side}', {}).get('cut_z')
         m = .02
         for other in ('glazing', 'body', 'cabin'):
@@ -1093,7 +1464,26 @@ def _adopt_into_doors(parts, rep):
                     cb0, cb1 = c[0]
                     if not all(b0[i] - m <= cb0[i] and cb1[i] <= b1[i] + m for i in range(3)):
                         continue
-                    if cut is not None and len(dps) == 2:
+                    if cutter:
+                        # a cut door takes only pieces that fit inside ONE door:
+                        # the Focus's window surround runs along both doors as one
+                        # piece, and splitting it face by face left black shards
+                        # and nothing standing above the door's paint but its glass
+                        # (the Focus's left window frame came along, the right did not)
+                        tops = rep['door_cutter'].get('skin_top', {})
+                        p = next((q for q in dps if all(boxes[q][0][i] - m <= cb0[i] and cb1[i] <= boxes[q][1][i] + m
+                                                        for i in range(3))
+                                  and (other == 'glazing' or cb1.y <= tops.get(q, 1e9) + m
+                                       # a thin strip along the door's top (the Polo's
+                                       # shoulder) is the door's, a window frame is not
+                                       or (cb1.y - cb0.y < .06 * (b1.y - b0.y) and cb0.y >= tops.get(q, 1e9) - m))), None)
+                        # never anything round a wheel: brake shields and arch
+                        # liners sit inside a rear door's box (the Polo's rode off)
+                        mid = (cb0 + cb1) / 2
+                        if p and not any((mid.y - wr_) ** 2 + (mid.z - wz_) ** 2 < (1.35 * wr_) ** 2
+                                         for wz_, wr_ in hubs):
+                            grp[p] += c[2]
+                    elif cut is not None and len(dps) == 2:
                         for i in c[2]:
                             z = G(mw @ o.data.polygons[i].center).z
                             grp['door_f' + side if z > cut else 'door_r' + side].append(i)
