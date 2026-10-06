@@ -41,10 +41,24 @@ DESCRIBE = {
     'disc-brake-pad': 'pair of disc brake pads, each a steel backing plate with a thick grey friction block, no rotor',
     'headlight-hardware': 'small set of headlamp mounting screws, plastic clips and a bracket',
     'exhaust-heat-shield': 'pressed aluminium exhaust heat shield, a thin dimpled curved metal sheet with mounting holes, no pipe',
+    # second contact-sheet pass (2019 Golf electrical/body): brand logos, wrong objects
+    'grille-emblem': 'plain round blank chrome badge disc with a smooth empty face, no letters, no symbol, no logo',
+    'hatch-emblem': 'plain round blank chrome badge disc with a smooth empty face, no letters, no symbol, no logo',
+    'clutch-flywheel': 'engine dual-mass flywheel, a heavy flat steel disc with a toothed starter ring gear around its edge and bolt holes in the centre, not a road wheel',
+    'boot': 'black ribbed rubber CV joint boot, a concertina bellows cone with two clamp grooves',
+    '12-volt-accessory-power-outlet': 'car 12 volt cigarette-lighter style power socket, a round black cylindrical socket with a single centre contact',
+    '12-volt-accessory-power-outlet-housing': 'black plastic housing for a car 12 volt cigarette-lighter style round socket',
+    '12-volt-accessory-power-outlet-cover': 'small round black hinged plastic cap for a car 12 volt cigarette-lighter style socket',
+    'door-interior-reflector': 'small thin red rectangular plastic reflector strip for the edge of a car door trim panel',
+    'door-check-cover': 'small black plastic cover cap for a car door check strap',
+    'fender-mtg-bkt': 'small stamped steel mounting bracket for a car front wing, a bent flat plate with bolt holes',
+    'floor-jack': 'compact car scissor jack from a spare-wheel kit, folded steel diamond frame with a threaded rod',
+    'interior-view-mirror-cover': 'small black plastic cover that clips over a rear-view mirror mount on a windscreen',
+    'interior-view-mirror-cover-access-cover': 'small black plastic cover that clips over a rear-view mirror mount on a windscreen',
 }
 # FLUX schnell drew these wrong three times over (drive axles for both shafts,
 # a belt for the cover, a bracket for the spindle; 'repair' names no part). No picture is better than a wrong one: never generated.
-NO_IMAGE = {'balance-shaft', 'crankshaft', 'timing-cover', 'spindle', 'repair'}
+NO_IMAGE = {'balance-shaft', 'crankshaft', 'timing-cover', 'spindle', 'repair', 'brest-rel', 'floor-jack', 'interior-view-mirror-cover', 'interior-view-mirror-cover-access-cover'}
 
 
 def illustration_key(part_type):
