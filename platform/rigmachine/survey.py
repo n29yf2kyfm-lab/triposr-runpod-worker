@@ -2,7 +2,7 @@
 """Measure which catalogue cars can open: rig every approved car, record why
 not when it cannot. Read-only against the catalogue; nothing is published.
 
-    python3 platform/rigmachine/survey.py OUT_DIR [--workers=3] [--limit=N]
+    python3 platform/rigmachine/survey.py OUT_DIR [--workers=3] [--limit=N] [--ids=FILE]
 
 For each approved v2 catalogue entry: download its GLB into a private temp
 folder, run the Strip Bay Rigger on it headless, append one line to
@@ -39,7 +39,10 @@ def one(e, out):
                    'partial' if rep.get('missing') else 'ok',
                    reason=rep.get('refused') or rep.get('error') or '',
                    doors=sum(1 for k in p if k.startswith('door_')), bonnet='panel_bonnet' in p,
-                   tailgate='tailgate' in p, split=bool(rep.get('split_pairs')))
+                   tailgate='tailgate' in p, split=bool(rep.get('split_pairs')),
+                   missing=rep.get('missing') or [], implausible=rep.get('implausible') or [],
+                   cut=(rep.get('door_cutter') or {}).get('result', ''),
+                   cut_refused=(rep.get('door_cutter') or {}).get('refused_doors') or {})
     except Exception as ex:
         row.update(status='error', reason=f'{type(ex).__name__}: {ex}'[:200])
     finally:
@@ -73,6 +76,9 @@ def main():
     cat = json.loads(subprocess.run(['curl', '-sS', CAT], capture_output=True, text=True, check=True).stdout)
     todo = [e for e in cat if e.get('publicationStatus') == 'approved' and e.get('desktopGlbUrl')
             and e['assetId'] not in done]
+    if opt.get('ids'):                             # a file of assetIds, one per line
+        want = {l.strip() for l in open(opt['ids']) if l.strip()}
+        todo = [e for e in todo if e['assetId'] in want]
     if opt.get('limit'):
         todo = todo[:int(opt['limit'])]
     print(f'SURVEY {len(done)} already done, {len(todo)} to go', flush=True)
