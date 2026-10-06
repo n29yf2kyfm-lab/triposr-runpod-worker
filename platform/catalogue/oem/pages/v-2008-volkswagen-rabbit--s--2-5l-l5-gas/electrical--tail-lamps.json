@@ -1,0 +1,104 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2008-volkswagen-rabbit--s--2-5l-l5-gas/electrical--tail-lamps",
+ "title": "Tail Lamps for 2008 Volkswagen Rabbit",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Tail Lamp Assembly",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/be2a6591927df2b8338bc2de5241a864/1dec91cf8b4959fcd6de56a3529e4ba1.png",
+   "url": "https://vw.oempartsonline.com/v-2008-volkswagen-rabbit--s--2-5l-l5-gas/electrical--tail-lamps?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Tail Lamp Assembly",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/3b7f4075d6d5e61aee32dd29c61e4073/99cf9a08f8b32133d3c4fbab96825fe8.png",
+   "url": "https://vw.oempartsonline.com/v-2008-volkswagen-rabbit--s--2-5l-l5-gas/electrical--tail-lamps?assembly=2"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "1K6945095AD",
+   "oem_display": "1K6 945 095 AD",
+   "oem_from": "printed",
+   "name": "Tail Light Assembly",
+   "label": "Tail Lamp Assembly, Left",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "Outer. from vin# 1k6100001. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-tail-light-assembly-1k6945095ad) 2",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-light-assembly-1k6945095ad"
+  },
+  {
+   "oem": "N10205802",
+   "oem_display": "N 102 058 02",
+   "oem_from": "printed",
+   "name": "Headlight Level Sensor Nut",
+   "label": "Tail Lamp Assembly Retainer Nut, Left",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": 0.37,
+   "msrp_usd": 0.6,
+   "notes": "Ride control components. Headlamp level control. Headlamp leveling components. Outer. Level sensor,nut. Headlamp leveling system.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-headlight-level-sensor-nut-n10205802"
+  },
+  {
+   "oem": "1K6945258",
+   "oem_display": "1K6 945 258",
+   "oem_from": "printed",
+   "name": "Tail Light Socket",
+   "label": "Socket Plate, Right",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "Outer. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-tail-light-socket-1k6945258) 3",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-light-socket-1k6945258"
+  },
+  {
+   "oem": "1K6945257",
+   "oem_display": "1K6 945 257",
+   "oem_from": "printed",
+   "name": "Tail Light Socket",
+   "label": "Socket Plate, Left",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "Outer. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-tail-light-socket-1k6945257) 4",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-light-socket-1k6945257"
+  },
+  {
+   "oem": "N0177326",
+   "oem_display": "N 017 732 6",
+   "oem_from": "printed",
+   "name": "Tail Lamp Bulb",
+   "label": "Tail Lamp Bulb, Right",
+   "callout": 4,
+   "diagram": 1,
+   "price_usd": 3.94,
+   "msrp_usd": 4.98,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-lamp-bulb-n0177326"
+  },
+  {
+   "oem": "5M0945167",
+   "oem_display": "5M0 945 167",
+   "oem_from": "printed",
+   "name": "Tail Light Bracket",
+   "label": "Adjuster, Right",
+   "callout": 7,
+   "diagram": 1,
+   "price_usd": 12.55,
+   "msrp_usd": 17.15,
+   "notes": "Adjust bracket. Adjuster. Sedan, 2011-14, inner. 2011-14, outer. 2015-18, inner, without led. 2015-18, outer, without led. Convertible, without led. Coupe, without led.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-light-bracket-5m0945167"
+  }
+ ]
+}

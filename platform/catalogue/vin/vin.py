@@ -47,7 +47,7 @@ WMI = {
 VW_GROUP = {'Volkswagen', 'Audi', 'SEAT', 'Skoda', 'Porsche'}
 # VW group type code, VIN positions 7-8 -> model and generation.
 TYPE = {
-    '1J': 'Golf Mk4 / Bora', '1K': 'Golf Mk5 / Jetta Mk5', '5K': 'Golf Mk6', 'AU': 'Golf Mk7',
+    '1H': 'Golf Mk3 / Vento', '1J': 'Golf Mk4 / Bora', '1K': 'Golf Mk5 / Jetta Mk5', '5K': 'Golf Mk6', 'AU': 'Golf Mk7',
     'CD': 'Golf Mk8', '6R': 'Polo Mk5', '6C': 'Polo Mk5 (facelift)', 'AW': 'Polo Mk6',
     '5N': 'Tiguan Mk1', '3C': 'Passat B6/B7', '3G': 'Passat B8', '3H': 'Arteon', 'A1': 'T-Roc',
     '1T': 'Touran Mk1', '5T': 'Touran Mk2', '7N': 'Sharan Mk2', '13': 'Scirocco Mk3',
@@ -55,6 +55,11 @@ TYPE = {
     '1Z': 'Skoda Octavia Mk2', '5E': 'Skoda Octavia Mk3', 'NX': 'Skoda Octavia Mk4',
     '1P': 'SEAT Leon Mk2', '5F': 'SEAT Leon Mk3', 'KL': 'SEAT/Cupra Leon Mk4',
 }
+
+# rough production span per type code: only used to pick which 30-year cycle
+# position 10 means, never shown as a fact about the car
+SPAN = {'1H': (1991, 1999), '1J': (1997, 2006), '1K': (2003, 2010), '5K': (2008, 2014),
+        'AU': (2012, 2021), 'CD': (2019, 2030)}
 
 
 def check_digit(v):
@@ -85,6 +90,11 @@ def decode(vin, online=False):
             year = cands[0]
         else:
             year = cands[1] if cands[1] <= 2027 else cands[0]
+        span = SPAN.get(v[6:8])
+        if span and wmi and wmi[0] in VW_GROUP:     # the type code settles the 30-year cycle
+            inside = [c for c in cands if span[0] <= c <= span[1]]
+            if len(inside) == 1:
+                year = inside[0]
         f['year'] = year
         src['year'] = 'position 10'
     if f.get('make') in VW_GROUP:
@@ -128,7 +138,9 @@ def parts_for(dec):
         hits = [v['slug'] for v in same if v.get('model', '').lower() == f['model_nhtsa'].lower()]
     else:                             # only the platform is known: every model on it
         model = (f.get('model') or '').lower()
-        hits = [v['slug'] for v in same if v.get('model', '').lower().split()[0] in model]
+        fam = {'rabbit': 'golf', 'gti': 'golf'}          # US names for Golf models
+        hits = [v['slug'] for v in same
+                if fam.get(v.get('model', '').lower().split()[0], v.get('model', '').lower().split()[0]) in model]
     return hits, [p for p in parts if any(a['vehicle'] in hits for a in p['appears_on'])]
 
 

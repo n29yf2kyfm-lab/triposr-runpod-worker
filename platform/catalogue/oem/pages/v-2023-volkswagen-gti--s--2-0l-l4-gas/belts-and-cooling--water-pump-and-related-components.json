@@ -1,0 +1,148 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2023-volkswagen-gti--s--2-0l-l4-gas/belts-and-cooling--water-pump-and-related-components",
+ "title": "Water Pump & Related Components for 2023 Volkswagen GTI",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Water Pump Assembly",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/f314f443592ccbce73eebea7b4c20365/114f502980b77b272de6d6845fda2a41.png",
+   "url": "https://vw.oempartsonline.com/v-2023-volkswagen-gti--s--2-0l-l4-gas/belts-and-cooling--water-pump-and-related-components?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Water Pump Assembly",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/993cdf38302a95d43a6c70d20d110a72/2651d96e0e1b87f30886a6d6879662fc.png",
+   "url": "https://vw.oempartsonline.com/v-2023-volkswagen-gti--s--2-0l-l4-gas/belts-and-cooling--water-pump-and-related-components?assembly=2"
+  },
+  {
+   "n": 3,
+   "name": "Engine Water Pump",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/c909ed2ace63184a0a90b02bc8248f12/eb850e228d1e47134aed4b4293723fa8.png",
+   "url": "https://vw.oempartsonline.com/v-2023-volkswagen-gti--s--2-0l-l4-gas/belts-and-cooling--water-pump-and-related-components?assembly=3"
+  },
+  {
+   "n": 4,
+   "name": "Water Pump",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/6cab1adb30815bfcf010c3c1bcfc7f9b/02199285835cdad9ca2ebb79d6322280.png",
+   "url": "https://vw.oempartsonline.com/v-2023-volkswagen-gti--s--2-0l-l4-gas/belts-and-cooling--water-pump-and-related-components?assembly=4"
+  },
+  {
+   "n": 5,
+   "name": "Engine Water Pump",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/51ce4a00f4cfbc76d724907866adab05/37c295e53b7e52022b0248a4ab743b4e.png",
+   "url": "https://vw.oempartsonline.com/v-2023-volkswagen-gti--s--2-0l-l4-gas/belts-and-cooling--water-pump-and-related-components?assembly=5"
+  },
+  {
+   "n": 6,
+   "name": "Engine Water Pump",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/905c0a8147686aab4166a557060de2c1/8c4c066efaeacb3dcce5cff7215ad40f.png",
+   "url": "https://vw.oempartsonline.com/v-2023-volkswagen-gti--s--2-0l-l4-gas/belts-and-cooling--water-pump-and-related-components?assembly=6"
+  },
+  {
+   "n": 7,
+   "name": "Upper Hose",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/fed7719df38ae953de40ba7ace53ba32/dc905efc51a9531eb25d91a77284ba43.png",
+   "url": "https://vw.oempartsonline.com/v-2023-volkswagen-gti--s--2-0l-l4-gas/belts-and-cooling--water-pump-and-related-components?assembly=7"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "06L121012L",
+   "oem_display": "06L 121 012 L",
+   "oem_from": "printed",
+   "name": "Engine Water Pump",
+   "label": "Water Pump Assembly",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 130.85,
+   "msrp_usd": 196.65,
+   "notes": "1.8L, main.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-water-pump-6l121012l"
+  },
+  {
+   "oem": "06L121043B",
+   "oem_display": "06L 121 043 B",
+   "oem_from": "printed",
+   "name": "Gasket",
+   "label": "Water Pump Assembly Gasket",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": 5.15,
+   "msrp_usd": 8.44,
+   "notes": "2.0L.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-gasket-6l121043b"
+  },
+  {
+   "oem": "06K121605C",
+   "oem_display": "06K 121 605 C",
+   "oem_from": "printed",
+   "name": "Belt",
+   "label": "Drive Belt",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 30.5,
+   "msrp_usd": 43.48,
+   "notes": "1.8L, main.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-belt-6k121605c"
+  },
+  {
+   "oem": "06L121111N",
+   "oem_display": "06L 121 111 N",
+   "oem_from": "printed",
+   "name": "Thermostat",
+   "label": "1.8L, main.",
+   "callout": 4,
+   "diagram": 1,
+   "price_usd": 390.37,
+   "msrp_usd": 586.67,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-thermostat-6l121111n"
+  },
+  {
+   "oem": "06L121139A",
+   "oem_display": "06L 121 139 A",
+   "oem_from": "printed",
+   "name": "Engine Water Pump Housing Gasket",
+   "label": "Thermostat Seal",
+   "callout": 5,
+   "diagram": 1,
+   "price_usd": 8.89,
+   "msrp_usd": 14.58,
+   "notes": "1.8L, main.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-water-pump-housing-gasket-6l121139a"
+  },
+  {
+   "oem": "06K121132",
+   "oem_display": "06K 121 132",
+   "oem_from": "printed",
+   "name": "Engine Water Pump Outlet Pipe",
+   "label": "Flange",
+   "callout": 6,
+   "diagram": 1,
+   "price_usd": 22.19,
+   "msrp_usd": 36.38,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-water-pump-outlet-pipe-6k121132"
+  },
+  {
+   "oem": "WHT001688",
+   "oem_display": "WHT 001 688",
+   "oem_from": "printed",
+   "name": "Engine Coolant Outlet Gasket",
+   "label": "Flange Seal",
+   "callout": 7,
+   "diagram": 1,
+   "price_usd": 0.92,
+   "msrp_usd": 1.5,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-coolant-outlet-gasket-wht001688"
+  }
+ ]
+}

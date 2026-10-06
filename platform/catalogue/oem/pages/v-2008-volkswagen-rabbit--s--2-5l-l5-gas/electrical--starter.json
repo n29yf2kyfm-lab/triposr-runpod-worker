@@ -1,0 +1,62 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2008-volkswagen-rabbit--s--2-5l-l5-gas/electrical--starter",
+ "title": "Starter for 2008 Volkswagen Rabbit",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Starter",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/46c2ce9dc1a9db1f5dae56d6c35dfad3/a99b02dc714c12a7f673b65e5a1b2d5f.png",
+   "url": "https://vw.oempartsonline.com/v-2008-volkswagen-rabbit--s--2-5l-l5-gas/electrical--starter?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Starter",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/10c57ee9f28a4ce8577e9b733ef44bf5/9ecbb84a1305ff744519ac4bc8268fe8.png",
+   "url": "https://vw.oempartsonline.com/v-2008-volkswagen-rabbit--s--2-5l-l5-gas/electrical--starter?assembly=2"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "02M911023S",
+   "oem_display": "02M 911 023 S",
+   "oem_from": "printed",
+   "name": "Starter",
+   "label": "2.0 Kw. Manual trans. 2.0l. With turbo. Vendor:bosch. Jetta wagon. Passat. Beetle. 2.5l. New. Golf. Auto trans.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 1034.13,
+   "msrp_usd": 1554.15,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2m911023s"
+  },
+  {
+   "oem": "02M911023SX",
+   "oem_display": "02M 911 023 SX",
+   "oem_from": "printed",
+   "name": "Starter",
+   "label": "2.0 Kw. Vendor:bosch. Beetle. 2.5l. Sedan, 2.5L, remanufactured, auto trans.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 410.32,
+   "msrp_usd": 616.65,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2m911023sx"
+  },
+  {
+   "oem": "02Z911023J",
+   "oem_display": "02Z 911 023 J",
+   "oem_from": "printed",
+   "name": "Starter",
+   "label": "1.4 Kw. Beetle. 2.5l. Rabbit. Sedan, 2.5L, remanufactured, manual trans. Wagon, 2.5L, remanufactured, manual trans. Coupe, 2.5L, manual trans, remanufactured.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 693.11,
+   "msrp_usd": 1041.65,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2z911023j"
+  }
+ ]
+}

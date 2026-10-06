@@ -1,0 +1,46 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2008-volkswagen-rabbit--s--2-5l-l5-gas/belts-and-cooling--water-pump-and-related-components",
+ "title": "Water Pump & Related Components for 2008 Volkswagen Rabbit",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Water Pump Assembly",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/72d1dff187e1536eecf9be7d250a184a/8d81f6b36d0d64dacad85c0cf7af0593.png",
+   "url": "https://vw.oempartsonline.com/v-2008-volkswagen-rabbit--s--2-5l-l5-gas/belts-and-cooling--water-pump-and-related-components?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Engine Water Pump Pulley",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/4e1efeff46ee46009f95d15b30743545/fded35c631a26f9a816d374e3671871d.png",
+   "url": "https://vw.oempartsonline.com/v-2008-volkswagen-rabbit--s--2-5l-l5-gas/belts-and-cooling--water-pump-and-related-components?assembly=2"
+  },
+  {
+   "n": 3,
+   "name": "Engine Water Pump Pulley",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/3aa8396c7028d42fe060d4205abd709f/6bdc25227e0d3ea7cc532b583dc3c385.png",
+   "url": "https://vw.oempartsonline.com/v-2008-volkswagen-rabbit--s--2-5l-l5-gas/belts-and-cooling--water-pump-and-related-components?assembly=3"
+  },
+  {
+   "n": 4,
+   "name": "Engine Water Pump Pulley",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/601b3635395db387aedd3eb6422eff4e/0ba25043db06478e700c3529d7e847b7.png",
+   "url": "https://vw.oempartsonline.com/v-2008-volkswagen-rabbit--s--2-5l-l5-gas/belts-and-cooling--water-pump-and-related-components?assembly=4"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "07K121011B",
+   "oem_display": "07K 121 011 B",
+   "oem_from": "printed",
+   "name": "Engine Water Pump",
+   "label": "Water Pump Assembly",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 125.75,
+   "msrp_usd": 188.99,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-water-pump-7k121011b"
+  }
+ ]
+}

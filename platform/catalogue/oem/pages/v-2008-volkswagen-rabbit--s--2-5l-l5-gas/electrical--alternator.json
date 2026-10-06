@@ -1,0 +1,118 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2008-volkswagen-rabbit--s--2-5l-l5-gas/electrical--alternator",
+ "title": "Alternator for 2008 Volkswagen Rabbit",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Alternator",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/a1d301d194425e4f5db8821a3b46ff15/a7707cc144091d573fa07b3615f3a496.png",
+   "url": "https://vw.oempartsonline.com/v-2008-volkswagen-rabbit--s--2-5l-l5-gas/electrical--alternator?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Alternator",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/b1b1865317f244b9e621a42275d4cf2a/4d5415008b0d50200184c5099629563e.png",
+   "url": "https://vw.oempartsonline.com/v-2008-volkswagen-rabbit--s--2-5l-l5-gas/electrical--alternator?assembly=2"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "07K903023A",
+   "oem_display": "07K 903 023 A",
+   "oem_from": "printed",
+   "name": "Alternator",
+   "label": "140 Amp.. Wagon, 2.5L, new. Jetta wagon. 2.5l. Golf. 2.0l. Bosch.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 906.6,
+   "msrp_usd": 1257.68,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-alternator-7k903023a"
+  },
+  {
+   "oem": "06F903023FX",
+   "oem_display": "06F 903 023 FX",
+   "oem_from": "printed",
+   "name": "Alternator",
+   "label": "Alternator",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 469.25,
+   "msrp_usd": 650.97,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-alternator-6f903023fx"
+  },
+  {
+   "oem": "06F903193A",
+   "oem_display": "06F 903 193 A",
+   "oem_from": "printed",
+   "name": "Cap",
+   "label": "Cap",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 58.7,
+   "msrp_usd": 86.65,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-cap-6f903193a"
+  },
+  {
+   "oem": "06F903803B",
+   "oem_display": "06F 903 803 B",
+   "oem_from": "printed",
+   "name": "Charging System Voltage Regulator",
+   "label": "Voltage Reg",
+   "callout": 4,
+   "diagram": 1,
+   "price_usd": 238.42,
+   "msrp_usd": 358.32,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-charging-system-voltage-regulator-6f903803b"
+  },
+  {
+   "oem": "07K903119E",
+   "oem_display": "07K 903 119 E",
+   "oem_from": "printed",
+   "name": "Alternator Pulley",
+   "label": "Pulley",
+   "callout": 5,
+   "diagram": 1,
+   "price_usd": 224.56,
+   "msrp_usd": 337.48,
+   "notes": "Passat. 2.5l. Beetle. Wagon, 2.5L.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-alternator-pulley-7k903119e"
+  },
+  {
+   "oem": "028903320C",
+   "oem_display": "028 903 320 C",
+   "oem_from": "printed",
+   "name": "Alternator Pulley Hardware Kit",
+   "label": "Pulley Hardware Kit",
+   "callout": 6,
+   "diagram": 1,
+   "price_usd": 11.2,
+   "msrp_usd": 18.36,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-alternator-pulley-hardware-kit-28903320c"
+  },
+  {
+   "oem": "07K903141C",
+   "oem_display": "07K 903 141 C",
+   "oem_from": "printed",
+   "name": "Alternator Adjusting Bracket",
+   "label": "Alternator Bracket",
+   "callout": 7,
+   "diagram": 1,
+   "price_usd": 312.86,
+   "msrp_usd": 470.18,
+   "notes": "Wagon, 2.5L.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-alternator-adjusting-bracket-7k903141c"
+  }
+ ]
+}

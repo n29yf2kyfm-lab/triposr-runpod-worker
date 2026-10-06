@@ -304,9 +304,10 @@ const WMI = {
   SHH:['Honda','UK','car'], JHM:['Honda','Japan','car'], KMH:['Hyundai','Korea','car'], KNA:['Kia','Korea','car'],
   JMZ:['Mazda','Japan','car'], YV1:['Volvo','Sweden','car'], TSM:['Suzuki','Hungary','car']
 };
+const SPAN = {'1H':[1991,1999], '1J':[1997,2006], '1K':[2003,2010], '5K':[2008,2014], AU:[2012,2021], CD:[2019,2030]};
 const VW_GROUP = new Set(['Volkswagen','Audi','SEAT','Skoda','Porsche']);
 const TYPE = {
-  '1J':'Golf Mk4 / Bora', '1K':'Golf Mk5 / Jetta Mk5', '5K':'Golf Mk6', AU:'Golf Mk7', CD:'Golf Mk8',
+  '1H':'Golf Mk3 / Vento', '1J':'Golf Mk4 / Bora', '1K':'Golf Mk5 / Jetta Mk5', '5K':'Golf Mk6', AU:'Golf Mk7', CD:'Golf Mk8',
   '6R':'Polo Mk5', '6C':'Polo Mk5 (facelift)', AW:'Polo Mk6', '5N':'Tiguan Mk1', '3C':'Passat B6/B7', '3G':'Passat B8',
   '3H':'Arteon', A1:'T-Roc', '1T':'Touran Mk1', '5T':'Touran Mk2', '7N':'Sharan Mk2', '13':'Scirocco Mk3',
   '8P':'Audi A3 Mk2', '8V':'Audi A3 Mk3', '8Y':'Audi A3 Mk4', '8X':'Audi A1 Mk1', '1Z':'Skoda Octavia Mk2',
@@ -328,6 +329,8 @@ function decodeVin(raw){
   if (yi >= 0) {
     const c = [1980 + yi, 2010 + yi];
     out.f.year = ('12345'.includes(v[0]) && /\d/.test(v[6])) ? c[0] : (c[1] <= 2027 ? c[1] : c[0]);
+    const span = SPAN[v.slice(6, 8)];   // the type code settles which 30-year cycle position 10 means
+    if (span && w && VW_GROUP.has(w[0])) { const inside = c.filter(y => y >= span[0] && y <= span[1]); if (inside.length === 1) out.f.year = inside[0]; }
     out.src.year = 'position 10';
   }
   if (VW_GROUP.has(out.f.make)) {
@@ -341,7 +344,9 @@ function decodeVin(raw){
 }
 function vinMatches(dec){
   const f = dec.f, make = (f.make || '').toLowerCase(), model = (f.model || '').toLowerCase();
-  const fam = state.vehicles.filter(v => v.make.toLowerCase() === make && model && model.includes(v.model.toLowerCase().split(' ')[0]));
+  // the US sold the Mk5 Golf as the Rabbit, and the GTI and Golf R under their own names
+  const family = m => ({rabbit: 'golf', gti: 'golf'}[m.toLowerCase().split(' ')[0]] || m.toLowerCase().split(' ')[0]);
+  const fam = state.vehicles.filter(v => v.make.toLowerCase() === make && model && model.includes(family(v.model)));
   const exact = fam.filter(v => v.year === f.year);
   let near = [];
   if (!exact.length && fam.length && f.year) {
