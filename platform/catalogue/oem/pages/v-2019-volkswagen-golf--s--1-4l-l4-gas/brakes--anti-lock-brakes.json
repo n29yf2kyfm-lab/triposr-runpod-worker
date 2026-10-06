@@ -1,0 +1,54 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/brakes--anti-lock-brakes",
+ "title": "Anti-Lock Brakes for 2019 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "ABS Pump Assembly",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/6cef32896c369df164e7beafa8cdb59e/a349980c631855da35fdf51f34b4e9d0.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/brakes--anti-lock-brakes?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Hub & Bearing",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/brakes--anti-lock-brakes?assembly=2"
+  },
+  {
+   "n": 3,
+   "name": "Hub & Bearing",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/brakes--anti-lock-brakes?assembly=3"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "5Q0614517DCBEF",
+   "oem_display": "5Q0 614 517 DC BEF",
+   "oem_from": "printed",
+   "name": "ABS Hydraulic Assembly",
+   "label": "ABS Pump Assembly",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "Exc.Adaptive Cruise Control. To 01/15/2019. Incl.ABS Control Module,Modulator,Pump and Motor Assembly. GTI. Auto trans. With autobahn trim. Golf. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-abs-hydraulic-assembly-5q0614517dcbef) 1",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-hydraulic-assembly-5q0614517dcbef"
+  },
+  {
+   "oem": "5Q0614517DRBEF",
+   "oem_display": "5Q0 614 517 DR BEF",
+   "oem_from": "printed",
+   "name": "ABS Hydraulic Assembly",
+   "label": "Exc.Adaptive Cruise Control. From 01/16/2019. Incl.ABS Control Module,Modulator,Pump and Motor Assembly. GTI. Manual trans. With s trim.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 541.62,
+   "msrp_usd": 813.98,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-hydraulic-assembly-5q0614517drbef"
+  }
+ ]
+}
