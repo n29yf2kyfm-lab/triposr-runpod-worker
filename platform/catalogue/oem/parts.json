@@ -1301,7 +1301,7 @@
    "4 door. 2 door."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-door-spring-5k6809931",
-  "illustration": null
+  "illustration": "illustrations/fuel-door-spring.webp"
  },
  {
   "oem": "5G0809909GRU",
@@ -1333,7 +1333,7 @@
    "4 door. 2 door."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-filler-door-5g0809909gru",
-  "illustration": null
+  "illustration": "illustrations/fuel-filler-door.webp"
  },
  {
   "oem": "5C6810773K",
@@ -1365,7 +1365,7 @@
    "Passat. 4 door. Golf SportWagen. Sedan,. 2 door. Golf Alltrack."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fuel-filler-door-lock-actuator-5c6810773k",
-  "illustration": null
+  "illustration": "illustrations/fuel-filler-door-lock-actuator.webp"
  },
  {
   "oem": "5G6809313",
@@ -9244,6 +9244,14 @@
     "diagram_name": "Booster Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
     "callout": 19
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hydraulic-system",
+    "diagram": 1,
+    "diagram_name": "Booster Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
+    "callout": 19
    }
   ],
   "notes": [
@@ -9484,6 +9492,14 @@
     "diagram_name": "Booster Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
     "callout": 15
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hydraulic-system",
+    "diagram": 1,
+    "diagram_name": "Booster Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
+    "callout": 15
    }
   ],
   "notes": [
@@ -9504,6 +9520,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--master-cylinder-components-on-dash-panel",
+    "diagram": 1,
+    "diagram_name": "Booster Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hydraulic-system",
     "diagram": 1,
     "diagram_name": "Booster Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
@@ -9532,6 +9556,14 @@
     "diagram_name": "Booster Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
     "callout": 9
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hydraulic-system",
+    "diagram": 1,
+    "diagram_name": "Booster Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
+    "callout": 9
    }
   ],
   "notes": [
@@ -9556,6 +9588,14 @@
     "diagram_name": "Booster Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
     "callout": 10
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hydraulic-system",
+    "diagram": 1,
+    "diagram_name": "Booster Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
+    "callout": 10
    }
   ],
   "notes": [
@@ -9576,6 +9616,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--master-cylinder-components-on-dash-panel",
+    "diagram": 1,
+    "diagram_name": "Booster Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
+    "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hydraulic-system",
     "diagram": 1,
     "diagram_name": "Booster Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
@@ -20072,7 +20120,7 @@
    "Cover and components. Without r, e-Golf, 2018, without fog lamp."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fog-light-cover-5gm853211c9b9",
-  "illustration": null
+  "illustration": "illustrations/fog-light-cover.webp"
  },
  {
   "oem": "5GM853211D9B9",
@@ -20104,7 +20152,7 @@
    "Without r, e-Golf, 2018, with fog lamp."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fog-light-cover-5gm853211d9b9",
-  "illustration": null
+  "illustration": "illustrations/fog-light-cover.webp"
  },
  {
   "oem": "5GM853212C9B9",
@@ -20136,7 +20184,7 @@
    "Cover and components. Without r, e-Golf, 2018, without fog lamp."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fog-light-cover-5gm853212c9b9",
-  "illustration": null
+  "illustration": "illustrations/fog-light-cover.webp"
  },
  {
   "oem": "5GM853212D9B9",
@@ -20168,7 +20216,7 @@
    "Without r, e-Golf, 2018, with fog lamp."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-fog-light-cover-5gm853212d9b9",
-  "illustration": null
+  "illustration": "illustrations/fog-light-cover.webp"
  },
  {
   "oem": "N91128701",
@@ -20300,7 +20348,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-frame-assembly-5gm877045a",
-  "illustration": null
+  "illustration": "illustrations/frame.webp"
  },
  {
   "oem": "5Q0803105",
@@ -20332,7 +20380,7 @@
    "To 01/06/2020. Frm 01/06/2020."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-frame-side-member-5q0803105",
-  "illustration": null
+  "illustration": "illustrations/frame-member.webp"
  },
  {
   "oem": "5Q0803106",
@@ -20364,7 +20412,7 @@
    "To 01/06/2020."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-frame-side-member-5q0803106",
-  "illustration": null
+  "illustration": "illustrations/frame-member.webp"
  },
  {
   "oem": "5Q0803209",
@@ -20396,7 +20444,7 @@
    "Driver side."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-frame-side-member-reinforcement-5q0803209",
-  "illustration": null
+  "illustration": "illustrations/frame-member-reinforcement.webp"
  },
  {
   "oem": "5Q0803210",
@@ -20429,7 +20477,7 @@
    "Passenger side. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-frame-side-member-reinforcement-5q0803210) 15"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-frame-side-member-reinforcement-5q0803210",
-  "illustration": null
+  "illustration": "illustrations/frame-member-reinforcement.webp"
  },
  {
   "oem": "5Q0804105",
@@ -20462,7 +20510,7 @@
    "Frm 09/20/2021. To 09/20/2021. Driver side. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-frame-side-member-reinforcement-5q0804105) 17"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-frame-side-member-reinforcement-5q0804105",
-  "illustration": null
+  "illustration": "illustrations/frame-member-reinforcement.webp"
  },
  {
   "oem": "5Q0804106",
@@ -20495,7 +20543,7 @@
    "To 09/20/2021. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-frame-side-member-reinforcement-5q0804106) 17"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-frame-side-member-reinforcement-5q0804106",
-  "illustration": null
+  "illustration": "illustrations/frame-member-reinforcement.webp"
  },
  {
   "oem": "5Q0804505A",
@@ -20527,7 +20575,7 @@
    "AWD. inner. Fwd, inner, front. With r."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-frame-side-member-reinforcement-5q0804505a",
-  "illustration": null
+  "illustration": "illustrations/frame-member-reinforcement.webp"
  },
  {
   "oem": "5Q0804506A",
@@ -20559,7 +20607,7 @@
    "AWD. inner. Fwd, inner, front. With r. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-frame-side-member-reinforcement-5q0804506a) 12"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-frame-side-member-reinforcement-5q0804506a",
-  "illustration": null
+  "illustration": "illustrations/frame-member-reinforcement.webp"
  },
  {
   "oem": "5Q0804795",
@@ -20591,7 +20639,7 @@
    "Without R OR e-Golf. spare wheel well. Fwd, inner, rear."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-frame-side-member-reinforcement-5q0804795",
-  "illustration": null
+  "illustration": "illustrations/frame-member-reinforcement.webp"
  },
  {
   "oem": "5Q0804796",
@@ -20623,7 +20671,7 @@
    "Without R OR e-Golf. spare wheel well. Fwd, inner, rear."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-frame-side-member-reinforcement-5q0804796",
-  "illustration": null
+  "illustration": "illustrations/frame-member-reinforcement.webp"
  },
  {
   "oem": "5Q0805757",
@@ -20719,7 +20767,7 @@
    "Driver side."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-frame-rail-end-5q0804181b",
-  "illustration": null
+  "illustration": "illustrations/frame-rail-end.webp"
  },
  {
   "oem": "5Q0804182B",
@@ -20751,7 +20799,7 @@
    "Passenger side."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-frame-rail-end-5q0804182b",
-  "illustration": null
+  "illustration": "illustrations/frame-rail-end.webp"
  },
  {
   "oem": "5Q0803127",
@@ -20783,7 +20831,7 @@
    "Driver side."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-frame-stiffener-5q0803127",
-  "illustration": null
+  "illustration": "illustrations/frame-stiffener.webp"
  },
  {
   "oem": "5Q0803128",
@@ -20815,7 +20863,7 @@
    "Passenger side."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-frame-stiffener-5q0803128",
-  "illustration": null
+  "illustration": "illustrations/frame-stiffener.webp"
  },
  {
   "oem": "5G0867525",
@@ -20879,7 +20927,7 @@
    "2018-21. with sunroof. 2015-17. with sunroof. Headliner and components."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-frame-trim-5g0867525",
-  "illustration": null
+  "illustration": "illustrations/frame-trim.webp"
  },
  {
   "oem": "5G0867289D",
@@ -23120,6 +23168,14 @@
     "diagram_name": "Booster Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
     "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hydraulic-system",
+    "diagram": 1,
+    "diagram_name": "Booster Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
+    "callout": 5
    }
   ],
   "notes": [
@@ -23140,6 +23196,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--master-cylinder-components-on-dash-panel",
+    "diagram": 1,
+    "diagram_name": "Booster Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
+    "callout": 6
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hydraulic-system",
     "diagram": 1,
     "diagram_name": "Booster Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
@@ -24842,6 +24906,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--master-cylinder-components-on-dash-panel",
+    "diagram": 1,
+    "diagram_name": "Booster Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hydraulic-system",
     "diagram": 1,
     "diagram_name": "Booster Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
@@ -28360,9 +28432,18 @@
     "diagram_name": "Booster Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
     "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hydraulic-system",
+    "diagram": 1,
+    "diagram_name": "Booster Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
+    "callout": 8
    }
   ],
   "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-master-cylinder-5q1614019acrep) 8",
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-master-cylinder-5q1614019acrep) 9"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-master-cylinder-5q1614019acrep",
@@ -28380,6 +28461,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--master-cylinder-components-on-dash-panel",
+    "diagram": 1,
+    "diagram_name": "Booster Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hydraulic-system",
     "diagram": 1,
     "diagram_name": "Booster Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
@@ -30369,6 +30458,14 @@
     "diagram_name": "Booster Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
     "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hydraulic-system",
+    "diagram": 1,
+    "diagram_name": "Booster Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
+    "callout": 1
    }
   ],
   "notes": [
@@ -30389,6 +30486,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--master-cylinder-components-on-dash-panel",
+    "diagram": 1,
+    "diagram_name": "Booster Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hydraulic-system",
     "diagram": 1,
     "diagram_name": "Booster Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
@@ -30417,6 +30522,14 @@
     "diagram_name": "Booster Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
     "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hydraulic-system",
+    "diagram": 1,
+    "diagram_name": "Booster Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
+    "callout": 2
    }
   ],
   "notes": [
@@ -30441,6 +30554,14 @@
     "diagram_name": "Booster Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
     "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hydraulic-system",
+    "diagram": 1,
+    "diagram_name": "Booster Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
+    "callout": 2
    }
   ],
   "notes": [],
@@ -30459,6 +30580,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--master-cylinder-components-on-dash-panel",
+    "diagram": 1,
+    "diagram_name": "Booster Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hydraulic-system",
     "diagram": 1,
     "diagram_name": "Booster Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
@@ -31290,6 +31419,14 @@
     "diagram_name": "Booster Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
     "callout": 13
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hydraulic-system",
+    "diagram": 1,
+    "diagram_name": "Booster Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
+    "callout": 13
    }
   ],
   "notes": [
@@ -31310,6 +31447,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--master-cylinder-components-on-dash-panel",
+    "diagram": 1,
+    "diagram_name": "Booster Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
+    "callout": 14
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hydraulic-system",
     "diagram": 1,
     "diagram_name": "Booster Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
@@ -37383,6 +37528,14 @@
     "diagram_name": "Booster Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
     "callout": 16
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hydraulic-system",
+    "diagram": 1,
+    "diagram_name": "Booster Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
+    "callout": 16
    }
   ],
   "notes": [],
@@ -42309,6 +42462,14 @@
     "callout": 18
    },
    {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
+    "callout": 18
+   },
+   {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "brakes--rear-brakes",
     "diagram": null,
@@ -42358,7 +42519,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 22
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 22
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 22
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -42833,7 +43018,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 21
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 21
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 21
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -42919,7 +43128,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 21
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 21
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 21
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -43271,7 +43504,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 23
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 23
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 23
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -43335,7 +43592,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 23
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 23
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 23
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -43391,7 +43672,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 23
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 23
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 23
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -43471,7 +43776,39 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 23
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 23
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 23
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
+    "callout": 19
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -43530,7 +43867,39 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 23
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 23
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 23
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
+    "callout": 19
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -43761,6 +44130,126 @@
   "illustration": "illustrations/abs-wheel-speed-sensor-wiring-harness.webp"
  },
  {
+  "oem": "5Q0713061",
+  "oem_display": "5Q0 713 061",
+  "name": "Automatic Transmission Shift Lever Bracket",
+  "part_type": "automatic transmission shift lever bracket",
+  "system": "brakes",
+  "price_usd": 84.66,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--parking-brake",
+    "diagram": 1,
+    "diagram_name": "Shift Knob",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/14da349ed78519627c6804744aac72e8/8bd340f5f747cadf8a15076e7bd6dc34.png",
+    "callout": 3
+   }
+  ],
+  "notes": [
+   "Auto trans lever components. without r, e-Golf. Shift housing. Auto trans, 2018-21. Auto trans, 2015-17."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-automatic-transmission-shift-lever-bracket-5q0713061",
+  "illustration": "illustrations/bracket.webp"
+ },
+ {
+  "oem": "5G1713203KMNQ",
+  "oem_display": "5G1 713 203 K MNQ",
+  "name": "Automatic Transmission Shift Lever Knob",
+  "part_type": "automatic transmission shift lever knob",
+  "system": "brakes",
+  "price_usd": 241.2,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--parking-brake",
+    "diagram": 1,
+    "diagram_name": "Shift Knob",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/14da349ed78519627c6804744aac72e8/8bd340f5f747cadf8a15076e7bd6dc34.png",
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "Lever components, auto trans, aluminum. GTI. Auto trans, 2015-17. Auto trans, 2018-21, leather, black/alum/red."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-automatic-transmission-shift-lever-knob-5g1713203kmnq",
+  "illustration": "illustrations/automatic-transmission-shift-lever-knob.webp"
+ },
+ {
+  "oem": "5G1713203LPLE",
+  "oem_display": "5G1 713 203 L PLE",
+  "name": "Automatic Transmission Shift Lever Knob",
+  "part_type": "automatic transmission shift lever knob",
+  "system": "brakes",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--parking-brake",
+    "diagram": 1,
+    "diagram_name": "Shift Knob",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/14da349ed78519627c6804744aac72e8/8bd340f5f747cadf8a15076e7bd6dc34.png",
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "2018-21 auto trans lever components. leather satin black/alum. Auto trans lever components. plastic 1.8L. Auto trans lever components. plastic 1.4L. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-automatic-transmission-shift-lever-knob-5g1713203lple) 1"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-automatic-transmission-shift-lever-knob-5g1713203lple",
+  "illustration": "illustrations/automatic-transmission-shift-lever-knob.webp"
+ },
+ {
+  "oem": "5G1713203MUMF",
+  "oem_display": "5G1 713 203 M UMF",
+  "name": "Automatic Transmission Shift Lever Knob",
+  "part_type": "automatic transmission shift lever knob",
+  "system": "brakes",
+  "price_usd": 212.92,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--parking-brake",
+    "diagram": 1,
+    "diagram_name": "Shift Knob",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/14da349ed78519627c6804744aac72e8/8bd340f5f747cadf8a15076e7bd6dc34.png",
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "Auto trans, 2018-21, leather, black/aluminum. Lever components, auto trans, 1.8L. Lever components, auto trans, leather, 1.4L."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-automatic-transmission-shift-lever-knob-5g1713203mumf",
+  "illustration": "illustrations/automatic-transmission-shift-lever-knob.webp"
+ },
+ {
+  "oem": "5GM711113CMIT",
+  "oem_display": "5GM 711 113 C MIT",
+  "name": "Automatic Transmission Shift Lever Knob",
+  "part_type": "automatic transmission shift lever knob",
+  "system": "brakes",
+  "price_usd": 144.61,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Shift Knob",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/274c41d843745296a61da167ea78fb7c/8f07f6c9d6ae094c1b04e3dd5788be19.png",
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "Lever components, manual trans."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-automatic-transmission-shift-lever-knob-5gm711113cmit",
+  "illustration": "illustrations/automatic-transmission-shift-lever-knob.webp"
+ },
+ {
   "oem": "WHT005437A",
   "oem_display": "WHT 005 437 A",
   "name": "Axle Bolt",
@@ -43819,6 +44308,22 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
@@ -43831,6 +44336,14 @@
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bc5c885239293676aa58e93ccb84d165/2a1fde51b47aa81ee2b7107c485b037e.png",
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
     "callout": 3
    },
    {
@@ -44289,6 +44802,22 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 6
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 6
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
@@ -44297,11 +44826,27 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--rear-brakes",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bc5c885239293676aa58e93ccb84d165/2a1fde51b47aa81ee2b7107c485b037e.png",
     "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 6
    },
    {
     "vehicle": "v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas",
@@ -44397,7 +44942,39 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
+    "callout": 6
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -44531,6 +45108,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
     "callout": 5
    }
   ],
@@ -44830,6 +45415,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 14
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
+    "callout": 14
    }
   ],
   "notes": [
@@ -44885,6 +45478,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 14
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
     "callout": 14
    }
   ],
@@ -44999,7 +45600,39 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 17
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 17
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 17
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hoses-and-pipes",
+    "diagram": null,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": null
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -45052,6 +45685,22 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 16
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
+    "callout": 16
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hoses-and-pipes",
+    "diagram": null,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": null
    }
   ],
   "notes": [
@@ -45297,6 +45946,22 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 18
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 18
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
@@ -45305,11 +45970,27 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
+    "callout": 17
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--rear-brakes",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bc5c885239293676aa58e93ccb84d165/2a1fde51b47aa81ee2b7107c485b037e.png",
     "callout": 20
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 18
    },
    {
     "vehicle": "v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas",
@@ -45511,7 +46192,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 19
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 19
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 19
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -45599,7 +46304,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 19
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 19
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 19
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -45703,7 +46432,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 20
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 20
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 20
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -45789,7 +46542,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 20
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 20
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 20
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -45965,7 +46742,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -46140,7 +46941,39 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -46178,13 +47011,21 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 10
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
+    "callout": 10
    }
   ],
   "notes": [
    "With link suspension without awd without e-Golf. Without performance brakes. Fwd with link suspension 272x10 mm. Exc.Performance Package. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-bushing-kit-5q0698470) 11"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-bushing-kit-5q0698470",
-  "illustration": null
+  "illustration": "illustrations/bushing.webp"
  },
  {
   "oem": "5WA615423BQB7",
@@ -46441,6 +47282,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
     "callout": 3
    },
    {
@@ -46837,7 +47686,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -46901,7 +47774,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -46962,6 +47859,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
+    "callout": 4
    }
   ],
   "notes": [
@@ -47013,7 +47918,39 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -47541,7 +48478,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -47605,7 +48566,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -47658,6 +48643,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 9
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
+    "callout": 9
    }
   ],
   "notes": [
@@ -47697,6 +48690,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 9
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
     "callout": 9
    }
   ],
@@ -47749,7 +48750,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -47888,6 +48913,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
+    "callout": 11
    }
   ],
   "notes": [
@@ -47931,7 +48964,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 9
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 9
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 9
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -48019,7 +49076,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 10
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 10
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 10
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -48381,7 +49462,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 13
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 13
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 13
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -48496,6 +49601,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
+    "callout": 12
    }
   ],
   "notes": [],
@@ -48529,7 +49642,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 13
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 13
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 13
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -48617,6 +49754,30 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-disc-brake-spring-8v0615269",
   "illustration": "illustrations/disc-brake-spring.webp"
+ },
+ {
+  "oem": "5GM7113333Q7",
+  "oem_display": "5GM 711 333 3Q7",
+  "name": "Electronic Parking Brake Control Switch",
+  "part_type": "electronic parking brake control switch",
+  "system": "brakes",
+  "price_usd": 4.86,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--parking-brake",
+    "diagram": 1,
+    "diagram_name": "Shift Knob",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/14da349ed78519627c6804744aac72e8/8bd340f5f747cadf8a15076e7bd6dc34.png",
+    "callout": 7
+   }
+  ],
+  "notes": [
+   "Lever components, manual trans. 2018-21 auto trans lever components. Button. 2015-17 auto trans lever components."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-electronic-parking-brake-control-switch-5gm7113333q7",
+  "illustration": null
  },
  {
   "oem": "5WA927902AG",
@@ -48849,7 +50010,39 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -48905,7 +50098,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -48996,7 +50213,39 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -49105,6 +50354,14 @@
     "callout": 2
    },
    {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
+    "callout": 2
+   },
+   {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "brakes--front-brakes",
     "diagram": 1,
@@ -49124,6 +50381,28 @@
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hub-and-bearing-mount-bolt-wht007150",
   "illustration": "illustrations/bolt.webp"
+ },
+ {
+  "oem": "5G0711303",
+  "oem_display": "5G0 711 303",
+  "name": "Lever Assembly",
+  "part_type": "lever",
+  "system": "brakes",
+  "price_usd": 120.87,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--parking-brake",
+    "diagram": 1,
+    "diagram_name": "Shift Knob",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/14da349ed78519627c6804744aac72e8/8bd340f5f747cadf8a15076e7bd6dc34.png",
+    "callout": 4
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-lever-assembly-5g0711303",
+  "illustration": null
  },
  {
   "oem": "803501221",
@@ -49162,6 +50441,102 @@
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-lock-ring-803501221",
   "illustration": "illustrations/lock-ring.webp"
+ },
+ {
+  "oem": "5K0711144B",
+  "oem_display": "5K0 711 144 B",
+  "name": "Manual Transmission Shift Knob Cap",
+  "part_type": "manual transmission shift knob cap",
+  "system": "brakes",
+  "price_usd": 14.87,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Shift Knob",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/274c41d843745296a61da167ea78fb7c/8f07f6c9d6ae094c1b04e3dd5788be19.png",
+    "callout": 3
+   }
+  ],
+  "notes": [
+   "Lever components, manual trans, 5 speed trans. Manual trans switches & levers. with 5 speed trans."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-manual-transmission-shift-knob-cap-5k0711144b",
+  "illustration": "illustrations/cap.webp"
+ },
+ {
+  "oem": "5K0711144C",
+  "oem_display": "5K0 711 144 C",
+  "name": "Manual Transmission Shift Knob Cap",
+  "part_type": "manual transmission shift knob cap",
+  "system": "brakes",
+  "price_usd": 14.87,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Shift Knob",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/274c41d843745296a61da167ea78fb7c/8f07f6c9d6ae094c1b04e3dd5788be19.png",
+    "callout": 3
+   }
+  ],
+  "notes": [
+   "Manual trans switches & levers. with 6 speed trans. Lever components manual trans. Manual transmission shifter and components. to 01/03/2022."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-manual-transmission-shift-knob-cap-5k0711144c",
+  "illustration": "illustrations/cap.webp"
+ },
+ {
+  "oem": "5Q0711049BM",
+  "oem_display": "5Q0 711 049 BM",
+  "name": "Manual Transmission Shift Lever",
+  "part_type": "manual transmission shift lever",
+  "system": "brakes",
+  "price_usd": 274.47,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Shift Knob",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/274c41d843745296a61da167ea78fb7c/8f07f6c9d6ae094c1b04e3dd5788be19.png",
+    "callout": 4
+   }
+  ],
+  "notes": [
+   "GTI. Lever components, manual trans, to 09/29/2019. Lever components manual trans. 6 speed trans. Golf. 6 speed trans. Golf R. 6 speed."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-manual-transmission-shift-lever-5q0711049bm",
+  "illustration": null
+ },
+ {
+  "oem": "5QD711049B",
+  "oem_display": "5QD 711 049 B",
+  "name": "Manual Transmission Shift Lever",
+  "part_type": "manual transmission shift lever",
+  "system": "brakes",
+  "price_usd": 260.6,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Shift Knob",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/274c41d843745296a61da167ea78fb7c/8f07f6c9d6ae094c1b04e3dd5788be19.png",
+    "callout": 4
+   }
+  ],
+  "notes": [
+   "Lever components manual trans. 5 speed trans. Golf SportWagen. 5-spd trans. Golf. 5 speed trans. Golf Alltrack. 5-spd trans. Jetta. Manual transmission shifter and components. to 06/09/2019 trans code 0ej."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-manual-transmission-shift-lever-5qd711049b",
+  "illustration": null
  },
  {
   "oem": "5Q0698365",
@@ -49226,6 +50601,28 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-front-pads-1j0698151p",
   "illustration": "illustrations/pads.webp"
+ },
+ {
+  "oem": "1J0947561C",
+  "oem_display": "1J0 947 561 C",
+  "name": "Park Brake Warning Switch",
+  "part_type": "park brake warning switch",
+  "system": "brakes",
+  "price_usd": 20.67,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--parking-brake",
+    "diagram": 1,
+    "diagram_name": "Shift Knob",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/14da349ed78519627c6804744aac72e8/8bd340f5f747cadf8a15076e7bd6dc34.png",
+    "callout": 5
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-park-brake-warning-switch-1j0947561c",
+  "illustration": null
  },
  {
   "oem": "3Q0998281",
@@ -49336,6 +50733,86 @@
   "illustration": "illustrations/parking-brake-actuator.webp"
  },
  {
+  "oem": "WHT005614",
+  "oem_display": "WHT 005 614",
+  "name": "Parking Brake Cable Guide Nut",
+  "part_type": "parking brake cable guide nut",
+  "system": "brakes",
+  "price_usd": 1.31,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--parking-brake",
+    "diagram": 1,
+    "diagram_name": "Shift Knob",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/14da349ed78519627c6804744aac72e8/8bd340f5f747cadf8a15076e7bd6dc34.png",
+    "callout": 6
+   }
+  ],
+  "notes": [
+   "Lever components manual trans. 2018-21 auto trans lever components. 2015-17 auto trans lever components."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-parking-brake-cable-guide-nut-wht005614",
+  "illustration": "illustrations/nut.webp"
+ },
+ {
+  "oem": "5GM7114576QB",
+  "oem_display": "5GM 711 457 6QB",
+  "name": "Parking Brake Lever Cover",
+  "part_type": "parking brake lever cover",
+  "system": "brakes",
+  "price_usd": 11.81,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Shift Knob",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/274c41d843745296a61da167ea78fb7c/8f07f6c9d6ae094c1b04e3dd5788be19.png",
+    "callout": 10
+   }
+  ],
+  "notes": [
+   "2018-21 auto trans lever components. black. Lever components manual trans."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-parking-brake-lever-cover-5gm7114576qb",
+  "illustration": null
+ },
+ {
+  "oem": "5GM711457AKUI",
+  "oem_display": "5GM 711 457 A KUI",
+  "name": "Parking Brake Lever Cover",
+  "part_type": "parking brake lever cover",
+  "system": "brakes",
+  "price_usd": 45.58,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Shift Knob",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/274c41d843745296a61da167ea78fb7c/8f07f6c9d6ae094c1b04e3dd5788be19.png",
+    "callout": 10
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--parking-brake",
+    "diagram": 1,
+    "diagram_name": "Shift Knob",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/14da349ed78519627c6804744aac72e8/8bd340f5f747cadf8a15076e7bd6dc34.png",
+    "callout": 9
+   }
+  ],
+  "notes": [
+   "2018-21 auto trans lever components. black/red. Lever components, manual trans. 2015-17 auto trans lever components."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-parking-brake-lever-cover-5gm711457akui",
+  "illustration": null
+ },
+ {
   "oem": "5K0615295",
   "oem_display": "5K0 615 295",
   "name": "Parking Brake Lever Return Spring",
@@ -49382,6 +50859,62 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-parking-brake-lever-return-spring-5k0615296",
   "illustration": "illustrations/parking-brake-lever-return-spring.webp"
+ },
+ {
+  "oem": "5GM711503BKLA",
+  "oem_display": "5GM 711 503 B KLA",
+  "name": "Parking Brake Pedal Release Handle",
+  "part_type": "parking brake pedal release handle",
+  "system": "brakes",
+  "price_usd": 55.52,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Shift Knob",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/274c41d843745296a61da167ea78fb7c/8f07f6c9d6ae094c1b04e3dd5788be19.png",
+    "callout": 9
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--parking-brake",
+    "diagram": 1,
+    "diagram_name": "Shift Knob",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/14da349ed78519627c6804744aac72e8/8bd340f5f747cadf8a15076e7bd6dc34.png",
+    "callout": 8
+   }
+  ],
+  "notes": [
+   "2018-21 auto trans lever components. black. 2015-17 auto trans lever components. Lever components manual trans. Lever components, auto trans, leather."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-parking-brake-pedal-release-handle-5gm711503bkla",
+  "illustration": null
+ },
+ {
+  "oem": "5GM711503C82V",
+  "oem_display": "5GM 711 503 C 82V",
+  "name": "Parking Brake Pedal Release Handle",
+  "part_type": "parking brake pedal release handle",
+  "system": "brakes",
+  "price_usd": 31.9,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--parking-brake",
+    "diagram": 1,
+    "diagram_name": "Shift Knob",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/14da349ed78519627c6804744aac72e8/8bd340f5f747cadf8a15076e7bd6dc34.png",
+    "callout": 8
+   }
+  ],
+  "notes": [
+   "Auto trans lever components. plastic. 2018-21 auto trans lever components. titanium black. Lever components, manual trans, plastic."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-parking-brake-pedal-release-handle-5gm711503c82v",
+  "illustration": null
  },
  {
   "oem": "4F0615269",
@@ -49530,6 +51063,22 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 14
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 14
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
@@ -49538,11 +51087,27 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
+    "callout": 13
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--rear-brakes",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bc5c885239293676aa58e93ccb84d165/2a1fde51b47aa81ee2b7107c485b037e.png",
     "callout": 16
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 14
    },
    {
     "vehicle": "v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas",
@@ -49580,6 +51145,72 @@
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-rotor-screw-n10648301",
   "illustration": "illustrations/bolt.webp"
+ },
+ {
+  "oem": "5GM711113AMIS",
+  "oem_display": "5GM 711 113 A MIS",
+  "name": "Shift Knob",
+  "part_type": "shift knob",
+  "system": "brakes",
+  "price_usd": 180.76,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Shift Knob",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/274c41d843745296a61da167ea78fb7c/8f07f6c9d6ae094c1b04e3dd5788be19.png",
+    "callout": 1
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-shift-knob-5gm711113amis",
+  "illustration": null
+ },
+ {
+  "oem": "5GM711113DCBR",
+  "oem_display": "5GM 711 113 D CBR",
+  "name": "Shift Knob",
+  "part_type": "shift knob",
+  "system": "brakes",
+  "price_usd": 195.17,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Shift Knob",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/274c41d843745296a61da167ea78fb7c/8f07f6c9d6ae094c1b04e3dd5788be19.png",
+    "callout": 1
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-shift-knob-5gm711113dcbr",
+  "illustration": null
+ },
+ {
+  "oem": "N10255501",
+  "oem_display": "N 102 555 01",
+  "name": "Shift Knob Clamp",
+  "part_type": "shift knob clamp",
+  "system": "brakes",
+  "price_usd": 0.4,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Shift Knob",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/274c41d843745296a61da167ea78fb7c/8f07f6c9d6ae094c1b04e3dd5788be19.png",
+    "callout": 2
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-shift-knob-clamp-n10255501",
+  "illustration": "illustrations/clip.webp"
  },
  {
   "oem": "333501117A",
@@ -49893,7 +51524,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 15
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 15
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 15
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -49977,7 +51632,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 15
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 15
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 15
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -50143,6 +51822,22 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 16
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 16
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
@@ -50151,11 +51846,27 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
+    "callout": 15
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--rear-brakes",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bc5c885239293676aa58e93ccb84d165/2a1fde51b47aa81ee2b7107c485b037e.png",
     "callout": 18
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 16
    },
    {
     "vehicle": "v-2019-volkswagen-golf-alltrack--s--1-8l-l4-gas",
@@ -50228,6 +51939,14 @@
     "diagram_name": null,
     "diagram_image": null,
     "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
+    "callout": 7
    }
   ],
   "notes": [],
@@ -50265,6 +51984,14 @@
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bfa78efb521fa00d22ffcaa6f1d87c35/c44204a79033c73eeb16395ffa5acd60.png",
     "callout": 7
    }
   ],
@@ -50419,7 +52146,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 12
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -50613,7 +52364,31 @@
    },
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--disc-pads-and-brake-shoes",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--drums-and-rotors",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "brakes--front-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Bearing",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--sensors",
     "diagram": 1,
     "diagram_name": "Hub & Bearing",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f8265747bf75ce3b5b70622b6db19ff/4bb684ff035b483fc4298d3172ad1364.png",
@@ -81720,6 +83495,14 @@
    {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "body--master-cylinder-components-on-dash-panel",
+    "diagram": 1,
+    "diagram_name": "Booster Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "brakes--hydraulic-system",
     "diagram": 1,
     "diagram_name": "Booster Assembly",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/861377bf7050b879bd907a3160317081/2835da103b3ef2a380df4a5c5e117a4c.png",
