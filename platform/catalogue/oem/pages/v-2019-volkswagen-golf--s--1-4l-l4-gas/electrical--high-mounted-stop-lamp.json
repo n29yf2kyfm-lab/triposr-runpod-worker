@@ -1,0 +1,48 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--high-mounted-stop-lamp",
+ "title": "High Mounted Stop Lamp for 2019 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Rear",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/476411ad3f280c8efd88e76a361607d3/1df7fb1b70fd4de1bfe9ee7d89335746.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--high-mounted-stop-lamp?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "High Mount Lamp",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/2b351c2ced8b2baf5701bfe0f3959f61/43a0b17378077ba106ccd0a181326541.png",
+   "url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas/electrical--high-mounted-stop-lamp?assembly=2"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "5G0945087B",
+   "oem_display": "5G0 945 087 B",
+   "oem_from": "printed",
+   "name": "Center High Mount Stop Light",
+   "label": "High Mount Lamp",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 86.92,
+   "msrp_usd": 128.32,
+   "notes": "Without spoiler.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-center-high-mount-stop-light-5g0945087b"
+  },
+  {
+   "oem": "5G6945087A",
+   "oem_display": "5G6 945 087 A",
+   "oem_from": "printed",
+   "name": "Center High Mount Stop Light",
+   "label": "High Mount Lamp",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": 66.6,
+   "msrp_usd": 98.32,
+   "notes": "With spoiler.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-center-high-mount-stop-light-5g6945087a"
+  }
+ ]
+}
