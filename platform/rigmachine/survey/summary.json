@@ -1,26 +1,31 @@
 {
  "cars": 1044,
  "status": {
-  "refused": 846,
-  "ok": 149,
-  "partial": 49
+  "refused": 546,
+  "ok": 265,
+  "partial": 231,
+  "error": 2
  },
  "refusal_reasons": [
   [
    "no wheels named",
-   578
+   255
   ],
   [
    "nose",
-   225
+   196
   ],
   [
    "door part",
-   23
+   63
   ],
   [
    "wheels do not fill",
-   16
+   28
+  ],
+  [
+   "timeoutexpired: command '['blender', '-b",
+   2
   ],
   [
    "no geometry",
@@ -35,5 +40,5 @@
    1
   ]
  ],
- "opens_something": 198
+ "opens_something": 496
 }
