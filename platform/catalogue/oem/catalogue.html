@@ -120,6 +120,7 @@ aside.filters{display:grid;gap:18px;position:sticky;top:12px}
 @media (prefers-reduced-motion:no-preference){.card:hover{transform:translateY(-1px)}}
 .thumb{position:relative;aspect-ratio:4/3;background:#E9ECEF;overflow:hidden}
 .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.nopic{position:absolute;inset:0;display:grid;place-items:center;color:#7A8592;font-size:13px;letter-spacing:.04em}
 .badge{position:absolute;left:8px;top:8px;background:var(--amber-soft);color:var(--amber);font:600 10.5px var(--body);letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px}
 .card .body{padding:10px 12px 12px;display:grid;gap:4px;align-content:start}
 .oem{font:600 14.5px var(--mono);color:var(--accent);letter-spacing:.02em}
@@ -392,7 +393,7 @@ function renderFilters(){
 function card(p){
   const ys = partYears(p);
   return `<button class="card" data-oem="${esc(p.oem)}">
-    <div class="thumb">${p.illustration ? `<img src="${esc(p.illustration)}" alt="" loading="lazy" width="512" height="512">` : ''}<span class="badge">Illustration</span></div>
+    <div class="thumb">${p.illustration ? `<img src="${esc(p.illustration)}" alt="" loading="lazy" width="512" height="512"><span class="badge">Illustration</span>` : '<span class="nopic">No picture yet</span>'}</div>
     <div class="body">
       <span class="oem">${esc(p.oem_display)}</span>
       <span class="name">${esc(p.name)}</span>
@@ -422,8 +423,8 @@ function openPart(oem){
       <td>${esc(cat)}<br><small style="color:var(--muted)">${dia}</small></td><td class="c">${a.callout ?? ''}</td></tr>`;
   }).join('');
   $('#dlg').innerHTML = `<div class="dlg">
-    <div class="pic">${p.illustration ? `<img src="${esc(p.illustration)}" alt="AI illustration of a ${esc(p.part_type)}">` : ''}
-      <span class="badge">Illustration</span><div class="cap">AI image of this kind of part — not a photo of ${esc(p.oem_display)}.</div></div>
+    <div class="pic">${p.illustration ? `<img src="${esc(p.illustration)}" alt="AI illustration of a ${esc(p.part_type)}">
+      <span class="badge">Illustration</span><div class="cap">AI image of this kind of part — not a photo of ${esc(p.oem_display)}.</div>` : '<span class="nopic">No picture yet</span>'}</div>
     <div class="info">
       <button class="close" aria-label="Close">×</button>
       <div class="bigoem"><span class="oem">${esc(p.oem_display)}</span><button class="copy" data-copy="${esc(p.oem_display)}">Copy number</button></div>

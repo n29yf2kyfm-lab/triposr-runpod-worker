@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate ONE AI illustration per part type for the OEM catalogue.
 
-    python3 platform/catalogue/oem/illustrate.py [--limit=N] [--only=key,key]
+    python3 platform/catalogue/oem/illustrate.py [--limit=N] [--only=key,key] [--force=key,key]
 
 Reads parts.json, groups part types into illustration keys (every bolt shares
 one bolt picture), and for each key without an image asks fal.ai's FLUX
@@ -25,6 +25,21 @@ GENERIC = [(r'\bbolt\b|\bscrew\b|\bstud\b', 'bolt'), (r'\bnut\b', 'nut'),
            (r'\bseal\b', 'seal'), (r'\bbracket\b|\bholder\b|\bhanger\b', 'bracket'), (r'\bcap\b', 'cap'),
            (r'\bbulb\b', 'bulb'), (r'\bhose\b', 'hose'), (r'\bpipe\b|\bline\b|\btube\b', 'pipe')]
 SPELL = {'a c': 'A/C', 'abs': 'ABS', 'ecm': 'engine control module'}
+# keys whose plain name drew the wrong part (checked by eye on a contact sheet)
+DESCRIBE = {
+    'balance-shaft': 'single engine balance shaft lying flat, cast iron, with two large half-moon counterweights, no wheels, no joints',
+    'crankshaft': 'bare inline-four engine crankshaft lying flat, forged steel, zig-zag crank throws with flat counterweights between polished journals, no CV joints',
+    'engine-camshaft': 'bare engine camshaft lying flat, one long polished steel rod with eight egg-shaped cam lobes along it, no springs',
+    'camshaft': 'bare engine camshaft lying flat, one long polished steel rod with eight egg-shaped cam lobes along it, no springs',
+    'alternator-pulley-hardware': 'small set of alternator pulley fasteners: one nut, one washer and a plastic dust cap',
+    'engine-cover-emblem': 'small plain round blank grey plastic badge with no symbol',
+    'valve-lifters': 'three small cylindrical steel hydraulic valve lifters (tappets), shiny metal cups',
+    'timing-cover': 'black moulded plastic engine timing belt cover, a long flat curved shroud with bolt holes',
+    'valve-keeper': 'pair of tiny half-cone steel valve keepers (collets) next to a valve spring retainer',
+}
+# FLUX schnell drew these wrong three times over (drive axles for both shafts,
+# a belt for the cover). No picture is better than a wrong one: never generated.
+NO_IMAGE = {'balance-shaft', 'crankshaft', 'timing-cover'}
 
 
 def illustration_key(part_type):
@@ -35,7 +50,7 @@ def illustration_key(part_type):
 
 
 def prompt(key):
-    words = key.replace('-', ' ')
+    words = DESCRIBE.get(key) or key.replace('-', ' ')
     for a, b in SPELL.items():
         words = re.sub(rf'\b{a}\b', b, words)
     return (f'Studio product photograph of a single new genuine automotive {words}, car part, '
@@ -75,7 +90,8 @@ def main():
     keys = sorted({illustration_key(p['part_type']) for p in parts})
     if opt.get('only'):
         keys = [k for k in keys if k in opt['only'].split(',')]
-    todo = [k for k in keys if not os.path.exists(os.path.join(OUT, k + '.webp'))][:int(opt.get('limit', 10 ** 6))]
+    force = set(opt.get('force', '').split(',')) - {''}
+    todo = [k for k in keys if k not in NO_IMAGE and (k in force or not os.path.exists(os.path.join(OUT, k + '.webp')))][:int(opt.get('limit', 10 ** 6))]
     print(f'ILLUSTRATE {len(keys)} part types, {len(keys) - len(todo)} done, {len(todo)} to make', flush=True)
     for i, k in enumerate(todo, 1):
         for attempt in range(3):
