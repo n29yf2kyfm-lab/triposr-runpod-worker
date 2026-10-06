@@ -240,6 +240,14 @@
    },
    {
     "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
@@ -731,6 +739,14 @@
    },
    {
     "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
@@ -944,6 +960,14 @@
    {
     "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
     "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
@@ -1171,6 +1195,14 @@
    },
    {
     "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
@@ -1242,6 +1274,14 @@
    {
     "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/805b6b7dab20927cd0542ee86ba96c5c/5caadfd81d2a1ececa684a62b2eeac57.png",
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/805b6b7dab20927cd0542ee86ba96c5c/5caadfd81d2a1ececa684a62b2eeac57.png",
@@ -1819,6 +1859,14 @@
    },
    {
     "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
@@ -2149,6 +2197,14 @@
    },
    {
     "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 12
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
@@ -2268,6 +2324,14 @@
    {
     "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
     "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
@@ -2426,6 +2490,14 @@
    {
     "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
     "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
@@ -3047,6 +3119,14 @@
    },
    {
     "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 10
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
@@ -3191,6 +3271,14 @@
    },
    {
     "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 6
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
@@ -3224,6 +3312,14 @@
    {
     "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
     "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 9
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
@@ -3463,6 +3559,14 @@
    },
    {
     "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
     "category": "engine--air-intake",
     "diagram": 1,
     "diagram_name": "Air Cleaner Assembly",
@@ -3496,6 +3600,14 @@
    {
     "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
     "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 10
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
@@ -3742,6 +3854,14 @@
    {
     "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
     "category": "air-and-fuel-delivery--carburetion",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 14
+   },
+   {
+    "vehicle": "v-2016-volkswagen-golf--s--1-8l-l4-gas",
+    "category": "air-and-fuel-delivery--filters",
     "diagram": 1,
     "diagram_name": null,
     "diagram_image": null,
@@ -4308,6 +4428,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
     "callout": 8
+   },
+   {
+    "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
+    "callout": 8
    }
   ],
   "notes": [],
@@ -4591,6 +4719,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
     "callout": 17
+   },
+   {
+    "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
+    "callout": 17
    }
   ],
   "notes": [],
@@ -4637,6 +4773,14 @@
     "callout": 12
    },
    {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/805b6b7dab20927cd0542ee86ba96c5c/5caadfd81d2a1ececa684a62b2eeac57.png",
+    "callout": 12
+   },
+   {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
     "diagram": 1,
@@ -4677,6 +4821,14 @@
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
+    "callout": 19
+   },
+   {
+    "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
@@ -4881,6 +5033,14 @@
     "callout": 8
    },
    {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/805b6b7dab20927cd0542ee86ba96c5c/5caadfd81d2a1ececa684a62b2eeac57.png",
+    "callout": 8
+   },
+   {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
     "diagram": 1,
@@ -4921,6 +5081,14 @@
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
+    "callout": 14
+   },
+   {
+    "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
@@ -5179,6 +5347,14 @@
     "callout": 1
    },
    {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/805b6b7dab20927cd0542ee86ba96c5c/5caadfd81d2a1ececa684a62b2eeac57.png",
+    "callout": 1
+   },
+   {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
     "diagram": 1,
@@ -5344,6 +5520,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
     "callout": 7
+   },
+   {
+    "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
+    "callout": 7
    }
   ],
   "notes": [
@@ -5388,6 +5572,14 @@
    {
     "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/805b6b7dab20927cd0542ee86ba96c5c/5caadfd81d2a1ececa684a62b2eeac57.png",
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/805b6b7dab20927cd0542ee86ba96c5c/5caadfd81d2a1ececa684a62b2eeac57.png",
@@ -5444,6 +5636,14 @@
    {
     "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/805b6b7dab20927cd0542ee86ba96c5c/5caadfd81d2a1ececa684a62b2eeac57.png",
+    "callout": 6
+   },
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/805b6b7dab20927cd0542ee86ba96c5c/5caadfd81d2a1ececa684a62b2eeac57.png",
@@ -5567,6 +5767,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
     "callout": 12
+   },
+   {
+    "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
+    "callout": 12
    }
   ],
   "notes": [
@@ -5587,6 +5795,14 @@
    {
     "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/805b6b7dab20927cd0542ee86ba96c5c/5caadfd81d2a1ececa684a62b2eeac57.png",
+    "callout": 9
+   },
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/805b6b7dab20927cd0542ee86ba96c5c/5caadfd81d2a1ececa684a62b2eeac57.png",
@@ -5661,6 +5877,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
     "callout": 16
+   },
+   {
+    "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
+    "callout": 16
    }
   ],
   "notes": [
@@ -5681,6 +5905,14 @@
    {
     "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/805b6b7dab20927cd0542ee86ba96c5c/5caadfd81d2a1ececa684a62b2eeac57.png",
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/805b6b7dab20927cd0542ee86ba96c5c/5caadfd81d2a1ececa684a62b2eeac57.png",
@@ -5757,8 +5989,24 @@
     "callout": 13
    },
    {
+    "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
+    "callout": 13
+   },
+   {
     "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/805b6b7dab20927cd0542ee86ba96c5c/5caadfd81d2a1ececa684a62b2eeac57.png",
+    "callout": 10
+   },
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/805b6b7dab20927cd0542ee86ba96c5c/5caadfd81d2a1ececa684a62b2eeac57.png",
@@ -5827,6 +6075,14 @@
     "callout": 4
    },
    {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/805b6b7dab20927cd0542ee86ba96c5c/5caadfd81d2a1ececa684a62b2eeac57.png",
+    "callout": 4
+   },
+   {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
     "diagram": 1,
@@ -5853,6 +6109,14 @@
    {
     "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/805b6b7dab20927cd0542ee86ba96c5c/5caadfd81d2a1ececa684a62b2eeac57.png",
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/805b6b7dab20927cd0542ee86ba96c5c/5caadfd81d2a1ececa684a62b2eeac57.png",
@@ -6001,6 +6265,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
     "callout": 4
+   },
+   {
+    "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
+    "callout": 4
    }
   ],
   "notes": [],
@@ -6035,6 +6307,14 @@
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
@@ -6079,6 +6359,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
     "callout": 2
+   },
+   {
+    "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
+    "callout": 2
    }
   ],
   "notes": [
@@ -6115,6 +6403,14 @@
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
@@ -6225,6 +6521,14 @@
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
+    "callout": 9
+   },
+   {
+    "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
@@ -7313,6 +7617,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
     "callout": 13
+   },
+   {
+    "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
+    "callout": 13
    }
   ],
   "notes": [
@@ -7341,7 +7653,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-sending-unit-1k0919673am",
-  "illustration": null
+  "illustration": "illustrations/sending-unit.webp"
  },
  {
   "oem": "04E253041J",
@@ -7401,6 +7713,14 @@
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
+    "callout": 6
+   },
+   {
+    "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
@@ -7471,6 +7791,14 @@
    {
     "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/805b6b7dab20927cd0542ee86ba96c5c/5caadfd81d2a1ececa684a62b2eeac57.png",
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2008-volkswagen-rabbit--s--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--fuel-storage",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/805b6b7dab20927cd0542ee86ba96c5c/5caadfd81d2a1ececa684a62b2eeac57.png",
@@ -42226,7 +42554,7 @@
    "4 door without r, e-Golf seat cushion components. cloth black. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-seat-cover-5gm881405afazy) 20"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-cover-5gm881405afazy",
-  "illustration": null
+  "illustration": "illustrations/seat-cover.webp"
  },
  {
   "oem": "5GM881405AFAZZ",
@@ -42274,7 +42602,7 @@
    "4 door without r, e-Golf seat cushion components. cloth beige. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-seat-cover-5gm881405afazz) 20"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-cover-5gm881405afazz",
-  "illustration": null
+  "illustration": "illustrations/seat-cover.webp"
  },
  {
   "oem": "5GM881405AMEQZ",
@@ -42322,7 +42650,7 @@
    "Seat cushion components, black."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-cover-5gm881405ameqz",
-  "illustration": null
+  "illustration": "illustrations/seat-cover.webp"
  },
  {
   "oem": "5GM881405AMEVT",
@@ -42370,7 +42698,7 @@
    "Seat cushion components, leatherette, without power lumbar, beige. 4 door without r, e-Golf seat cushion components. without power seat beige. 4 door without r, e-Golf seat cushion components. leathette beige. 4 door with e-Golf seat cushion components. leatherette beige, to 1/2015. 2 door, seat cushion components, leatherette, beige. Seat cushion components, shetland."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-cover-5gm881405amevt",
-  "illustration": null
+  "illustration": "illustrations/seat-cover.webp"
  },
  {
   "oem": "5GM881406TEQZ",
@@ -42418,7 +42746,7 @@
    "Seat cushion components, black."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-cover-5gm881406teqz",
-  "illustration": null
+  "illustration": "illustrations/seat-cover.webp"
  },
  {
   "oem": "5GM881406TEVT",
@@ -42466,7 +42794,7 @@
    "Seat cushion components, leatherette, without power lumbar, beige. 4 door without r, e-Golf seat cushion components. without power seat beige. 4 door without r, e-Golf seat cushion components. leathette beige. 4 door with e-Golf seat cushion components. leatherette beige, to 1/2015. 2 door, seat cushion components, leatherette, beige. Seat cushion components, shetland. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-seat-cover-5gm881406tevt) 20"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-cover-5gm881406tevt",
-  "illustration": null
+  "illustration": "illustrations/seat-cover.webp"
  },
  {
   "oem": "5GM885873CSL1",
@@ -42490,7 +42818,7 @@
    "Seat back. black. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-seat-cushion-foam-5gm885873csl1) 11"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-cushion-foam-5gm885873csl1",
-  "illustration": null
+  "illustration": "illustrations/seat-cushion-foam.webp"
  },
  {
   "oem": "5GM885873CZD3",
@@ -42514,7 +42842,7 @@
    "4 door with e-Golf seat back. leatherette beige. 2 door, seat back, leatherette, beige. SEAT BACK. shetland. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-seat-cushion-foam-5gm885873czd3) 11"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-cushion-foam-5gm885873czd3",
-  "illustration": null
+  "illustration": "illustrations/seat-cushion-foam.webp"
  },
  {
   "oem": "5GM885873LI8",
@@ -42538,7 +42866,7 @@
    "4 door with e-Golf seat back. cloth black. 2 door, seat back, cloth, black. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-seat-cushion-foam-5gm885873li8) 11"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-cushion-foam-5gm885873li8",
-  "illustration": null
+  "illustration": "illustrations/seat-cushion-foam.webp"
  },
  {
   "oem": "5GM885873TI7",
@@ -42562,7 +42890,7 @@
    "4 door without r, e-Golf seat back. cloth beige. 2 door, seat back, cloth, beige. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-seat-cushion-foam-5gm885873ti7) 12"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-cushion-foam-5gm885873ti7",
-  "illustration": null
+  "illustration": "illustrations/seat-cushion-foam.webp"
  },
  {
   "oem": "5GM963555",
@@ -42610,7 +42938,7 @@
    "Left. Without power lumbar. Seat cushion components."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-cushion-heater-5gm963555",
-  "illustration": null
+  "illustration": "illustrations/seat-cushion-heater.webp"
  },
  {
   "oem": "5GM963555E",
@@ -42658,7 +42986,7 @@
    "Right. Without power lumbar. Seat cushion components. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-seat-cushion-heater-5gm963555e) 21"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-cushion-heater-5gm963555e",
-  "illustration": null
+  "illustration": "illustrations/seat-cushion-heater.webp"
  },
  {
   "oem": "5GM963555K",
@@ -42706,7 +43034,7 @@
    "Golf SportWagen. With power lumbar. 4 door without r, e-Golf seat cushion components. with power seat. Golf Alltrack. Left."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-cushion-heater-5gm963555k",
-  "illustration": null
+  "illustration": "illustrations/seat-cushion-heater.webp"
  },
  {
   "oem": "5GM963555L",
@@ -42754,7 +43082,7 @@
    "Golf SportWagen. With power lumbar. 4 door without r, e-Golf seat cushion components. with power seat. Golf Alltrack. Right."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-cushion-heater-5gm963555l",
-  "illustration": null
+  "illustration": "illustrations/seat-cushion-heater.webp"
  },
  {
   "oem": "5GM881375",
@@ -42802,7 +43130,7 @@
    "Seat cushion components."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-cushion-pad-5gm881375",
-  "illustration": null
+  "illustration": "illustrations/seat-cushion-pad.webp"
  },
  {
   "oem": "5GM881375D",
@@ -42850,7 +43178,7 @@
    "Seat cushion components. with power lumbar. 4 door without r, e-Golf seat cushion components. with power seat."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-cushion-pad-5gm881375d",
-  "illustration": null
+  "illustration": "illustrations/seat-cushion-pad.webp"
  },
  {
   "oem": "5QM881105C",
@@ -42898,7 +43226,7 @@
    "Seat cushion components."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-5qm881105c",
-  "illustration": null
+  "illustration": "illustrations/seat-frame.webp"
  },
  {
   "oem": "5QM881105D",
@@ -42946,7 +43274,7 @@
    "4 door, seat cushion components, with 12 way adjust. Seat cushion components, with power lumbar, from 05/2015. 4 door without r, e-Golf seat cushion components. with power seat. Seat cushion components, with power lumbar, to 04/2015. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-5qm881105d) 1"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-5qm881105d",
-  "illustration": null
+  "illustration": "illustrations/seat-frame.webp"
  },
  {
   "oem": "5QM881106C",
@@ -42994,7 +43322,7 @@
    "Without r, e-Golf, seat cushion components, without power seat."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-5qm881106c",
-  "illustration": null
+  "illustration": "illustrations/seat-frame.webp"
  },
  {
   "oem": "5G0885219A82V",
@@ -43018,7 +43346,7 @@
    "Passenger side seat back. Right side seat cushion components. 4 door with e-Golf seat back. 4 door with r seat back. 60% side, with armrest seat back components. 2 door, seat back. Seat back components, frame & hardware."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5g0885219a82v",
-  "illustration": null
+  "illustration": "illustrations/seat-frame-trim-panel.webp"
  },
  {
   "oem": "5GM881313A82V",
@@ -43083,7 +43411,7 @@
    "4 door without r, e-Golf seat cushion components. with power seat, without power lumbar black. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881313a82v) 7"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881313a82v",
-  "illustration": null
+  "illustration": "illustrations/seat-frame-trim-panel.webp"
  },
  {
   "oem": "5GM881313AZA2",
@@ -43148,7 +43476,7 @@
    "4 door without r, e-Golf seat cushion components. with power seat, without power lumbar beige. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881313aza2) 7"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881313aza2",
-  "illustration": null
+  "illustration": "illustrations/seat-frame-trim-panel.webp"
  },
  {
   "oem": "5GM881313B82V",
@@ -43212,7 +43540,7 @@
    "4 door without r, e-Golf seat cushion components. with power seat, with power lumbar black. 4 door, seat cushion components, with 12 way adjust, black. 4 door, seat cushion components, with 12 way adjust, all."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881313b82v",
-  "illustration": null
+  "illustration": "illustrations/seat-frame-trim-panel.webp"
  },
  {
   "oem": "5GM881313BZA2",
@@ -43277,7 +43605,7 @@
    "4 door without r, e-Golf seat cushion components. with power seat, with power lumbar beige. 4 door, seat cushion components, with 12 way adjust, shetland. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881313bza2) 7"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881313bza2",
-  "illustration": null
+  "illustration": "illustrations/seat-frame-trim-panel.webp"
  },
  {
   "oem": "5GM881313G82V",
@@ -43342,7 +43670,7 @@
    "4 door, seat cushion components, without 12 way adjust, all. Seat cushion components, black. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881313g82v) 7"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881313g82v",
-  "illustration": null
+  "illustration": "illustrations/seat-frame-trim-panel.webp"
  },
  {
   "oem": "5GM881313GZA2",
@@ -43407,7 +43735,7 @@
    "Seat cushion components, without power lumbar, beige. 4 door with e-Golf seat cushion components. beige. Seat cushion components, shetland. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881313gza2) 7"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881313gza2",
-  "illustration": null
+  "illustration": "illustrations/seat-frame-trim-panel.webp"
  },
  {
   "oem": "5GM881314A82V",
@@ -43472,7 +43800,7 @@
    "4 door, seat cushion components, with 12 way adjust, all. Without r, e-Golf, seat cushion components, with power seat, with power lumbar, black. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881314a82v) 7"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881314a82v",
-  "illustration": null
+  "illustration": "illustrations/seat-frame-trim-panel.webp"
  },
  {
   "oem": "5GM881314AZA2",
@@ -43537,7 +43865,7 @@
    "4 door without r, e-Golf seat cushion components. with power seat, without power lumbar beige. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881314aza2) 7"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881314aza2",
-  "illustration": null
+  "illustration": "illustrations/seat-frame-trim-panel.webp"
  },
  {
   "oem": "5GM881314F82V",
@@ -43601,7 +43929,7 @@
    "4 door, seat cushion components, without 12 way adjust, all. With r, seat cushion components, right side. Seat cushion components, black."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881314f82v",
-  "illustration": null
+  "illustration": "illustrations/seat-frame-trim-panel.webp"
  },
  {
   "oem": "5GM881314FZA2",
@@ -43666,7 +43994,7 @@
    "Seat cushion components, without power lumbar, beige. 4 door with e-Golf seat cushion components. beige. Seat cushion components, shetland. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881314fza2) 8"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881314fza2",
-  "illustration": null
+  "illustration": "illustrations/seat-frame-trim-panel.webp"
  },
  {
   "oem": "5GM881479A82V",
@@ -43698,7 +44026,7 @@
    "4 door seat back components. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881479a82v) 15"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881479a82v",
-  "illustration": null
+  "illustration": "illustrations/seat-frame-trim-panel.webp"
  },
  {
   "oem": "5GM881479AZA2",
@@ -43730,7 +44058,7 @@
    "4 door without r, e-Golf seat back components. beige. Seat back components. shetland. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881479aza2) 15"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881479aza2",
-  "illustration": null
+  "illustration": "illustrations/seat-frame-trim-panel.webp"
  },
  {
   "oem": "5GM881480A82V",
@@ -43762,7 +44090,7 @@
    "4 door seat back components. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881480a82v) 15"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881480a82v",
-  "illustration": null
+  "illustration": "illustrations/seat-frame-trim-panel.webp"
  },
  {
   "oem": "5GM881480AZA2",
@@ -43794,7 +44122,7 @@
    "4 door without r, e-Golf seat back components. beige. Seat back components. shetland. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881480aza2) 15"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-5gm881480aza2",
-  "illustration": null
+  "illustration": "illustrations/seat-frame-trim-panel.webp"
  },
  {
   "oem": "8V0885771",
@@ -43818,7 +44146,7 @@
    "4 door, seat back. Strip. Seat cushion components, right side. Seat back components, 60% side, with armrest. Passenger side seat back. With r, seat back. 2 door, seat back. Seat back components, frame & hardware."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-brace-8v0885771",
-  "illustration": null
+  "illustration": "illustrations/seat-frame-trim-panel-brace.webp"
  },
  {
   "oem": "5GM881559",
@@ -44168,7 +44496,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-rivet-n0385012",
-  "illustration": null
+  "illustration": "illustrations/seat-frame-trim-panel-rivet.webp"
  },
  {
   "oem": "N90536901",
@@ -44230,7 +44558,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-frame-trim-panel-rivet-n90536901",
-  "illustration": null
+  "illustration": "illustrations/seat-frame-trim-panel-rivet.webp"
  },
  {
   "oem": "5G0886331C4PK",
@@ -44302,7 +44630,7 @@
    "Left side seat cushion components. Without r, e-Golf, seat back, from 01/2016, black. 4 door without r, e-Golf seat back. to 12/2015 black. 2 door, seat back, black."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-latch-cover-5gm885893a82v",
-  "illustration": null
+  "illustration": "illustrations/seat-latch-cover.webp"
  },
  {
   "oem": "5GM885893AZA2",
@@ -44326,7 +44654,7 @@
    "Without r, e-Golf, seat back, from 01/2016, beige. 4 door without r, e-Golf seat back. to 12/2015 beige. 2 door, seat back, beige. SEAT BACK. shetland."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-latch-cover-5gm885893aza2",
-  "illustration": null
+  "illustration": "illustrations/seat-latch-cover.webp"
  },
  {
   "oem": "5GM885894A82V",
@@ -44350,7 +44678,7 @@
    "Right side seat cushion components. Without r, e-Golf, seat back, from 01/2016, black. 4 door without r, e-Golf seat back. to 12/2015 black. 2 door, seat back, black."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-latch-cover-5gm885894a82v",
-  "illustration": null
+  "illustration": "illustrations/seat-latch-cover.webp"
  },
  {
   "oem": "5GM885894AZA2",
@@ -44374,7 +44702,7 @@
    "Without r, e-Golf, seat back, from 01/2016, beige. 4 door without r, e-Golf seat back. to 12/2015 beige. 2 door, seat back, beige. SEAT BACK. shetland."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-latch-cover-5gm885894aza2",
-  "illustration": null
+  "illustration": "illustrations/seat-latch-cover.webp"
  },
  {
   "oem": "5N0881880",
@@ -44406,7 +44734,7 @@
    "Seat back components. manual adjust. 4 door seat back components. without 12 way adjust. Seat back components. with lumbar support. 4 door with e-Golf seat back components. SEAT BACK. without power seat. Coupe, driver seat back components. 2 door, seat back components."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-lumbar-support-cushion-5n0881880",
-  "illustration": null
+  "illustration": "illustrations/seat-lumbar-support-cushion.webp"
  },
  {
   "oem": "5N0881880E",
@@ -44438,7 +44766,7 @@
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-seat-lumbar-support-cushion-5n0881880e) 13"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-lumbar-support-cushion-5n0881880e",
-  "illustration": null
+  "illustration": "illustrations/seat-lumbar-support-cushion.webp"
  },
  {
   "oem": "5GM8825999B9",
@@ -44518,7 +44846,7 @@
    "Center. 4 door without e-Golf. 2 door. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-seat-track-reinforcement-5q0803233) 21"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-track-reinforcement-5q0803233",
-  "illustration": null
+  "illustration": "illustrations/seat-track-reinforcement.webp"
  },
  {
   "oem": "5Q0803234",
@@ -44550,7 +44878,7 @@
    "Center. 4 door without e-Golf. 2 door. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-seat-track-reinforcement-5q0803234) 22"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-seat-track-reinforcement-5q0803234",
-  "illustration": null
+  "illustration": "illustrations/seat-track-reinforcement.webp"
  },
  {
   "oem": "5Q0919275BGRU",
