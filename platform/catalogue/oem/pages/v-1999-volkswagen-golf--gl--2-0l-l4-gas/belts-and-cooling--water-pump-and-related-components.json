@@ -1,0 +1,91 @@
+{
+ "page": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gl--2-0l-l4-gas/belts-and-cooling--water-pump-and-related-components",
+ "title": "Water Pump & Related Components for 1999 Volkswagen Golf",
+ "diagrams": [],
+ "parts": [
+  {
+   "oem": "06A121012G",
+   "oem_display": "06A 121 012 G",
+   "oem_from": "printed",
+   "name": "Water Pump Assembly",
+   "label": "New. Incl.O-Ring. Golf, GTI, R32. 2.0l. 2.0L, remanufactured. Jetta. 2.0l. Wagon. Jetta. 1.8l. Sedan, without turbocharger, remanufactured.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": 128.08,
+   "msrp_usd": 192.49,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-water-pump-assembly-6a121012g"
+  },
+  {
+   "oem": "06A121012X",
+   "oem_display": "06A 121 012 X",
+   "oem_from": "printed",
+   "name": "Engine Water Pump",
+   "label": "Incl.O-Ring. Reman.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-engine-water-pump-6a121012x) 2",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-water-pump-6a121012x"
+  },
+  {
+   "oem": "06A121119",
+   "oem_display": "06A 121 119",
+   "oem_from": "printed",
+   "name": "Engine Water Pump Gasket",
+   "label": "Water Pump Assembly Gasket",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": 1.26,
+   "msrp_usd": 2.06,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-water-pump-gasket-6a121119"
+  },
+  {
+   "oem": "050121113C",
+   "oem_display": "050 121 113 C",
+   "oem_from": "printed",
+   "name": "Engine Coolant Thermostat",
+   "label": "Thermostat",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 43.01,
+   "msrp_usd": 61.32,
+   "notes": "Beetle. 1.8l, 2.0l. Golf, GTI, R32. 2.0l. Passat. 1.8l. Golf, GTI, R32. 1.8l. Jetta. Convertible, 1.8L. Convertible, 2.0L. 87-102 Degrees C. 1.8L turbo. Sedan, without turbocharger.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-coolant-thermostat-50121113c"
+  },
+  {
+   "oem": "038121121D",
+   "oem_display": "038 121 121 D",
+   "oem_from": "printed",
+   "name": "Thermostat Housing",
+   "label": "2.0L. Coupe, 1.9L. Beetle. 1.9l diesel. Golf, GTI, R32. 1.9l tdi. 1.9L, with 100 horsepower.",
+   "callout": 5,
+   "diagram": 1,
+   "price_usd": 27.93,
+   "msrp_usd": 47.78,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-thermostat-housing-38121121d"
+  },
+  {
+   "oem": "06A121121C",
+   "oem_display": "06A 121 121 C",
+   "oem_from": "printed",
+   "name": "Engine Coolant Thermostat Housing",
+   "label": "Golf, GTI, R32. 1.8l. Cabrio. Jetta. Convertible, 1.8L. Convertible, 2.0L. Sedan, without turbocharger.",
+   "callout": 5,
+   "diagram": 1,
+   "price_usd": 25.12,
+   "msrp_usd": 42.98,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-coolant-thermostat-housing-6a121121c"
+  }
+ ]
+}

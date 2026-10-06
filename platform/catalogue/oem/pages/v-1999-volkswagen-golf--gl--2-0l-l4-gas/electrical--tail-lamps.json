@@ -1,0 +1,62 @@
+{
+ "page": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gl--2-0l-l4-gas/electrical--tail-lamps",
+ "title": "Tail Lamps for 1999 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Tail Lamp Assembly",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/45c5eb04772532bccb02fe30490eaf89/9193cf9cdb85001ebe9ae69a557c2416.png",
+   "url": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gl--2-0l-l4-gas/electrical--tail-lamps?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Tail Lamp Assembly",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/43b2eb704122ddd8317201029cc09895/9074d5956b865046c37d2a602d0edc98.png",
+   "url": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gl--2-0l-l4-gas/electrical--tail-lamps?assembly=2"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "1J6945299",
+   "oem_display": "1J6 945 299",
+   "oem_from": "printed",
+   "name": "Tail Lamp Assembly Bushing",
+   "label": "Tail Lamp Assembly Bushing, Left",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 2.06,
+   "msrp_usd": 2.82,
+   "notes": "Sedan.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-lamp-assembly-bushing-1j6945299"
+  },
+  {
+   "oem": "N0177322",
+   "oem_display": "N 017 732 2",
+   "oem_from": "printed",
+   "name": "Bulb",
+   "label": "Tail Lamp Bulb, Left",
+   "callout": 4,
+   "diagram": 1,
+   "price_usd": 3.25,
+   "msrp_usd": 4.1,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-bulb-n0177322"
+  },
+  {
+   "oem": "N0177192",
+   "oem_display": "N 017 719 2",
+   "oem_from": "printed",
+   "name": "Bulb",
+   "label": "Tail Lamp Bulb, Left",
+   "callout": 5,
+   "diagram": 1,
+   "price_usd": 2.62,
+   "msrp_usd": 3.3,
+   "notes": "10 watt. EuroVan. Back-up lamp.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-bulb-n0177192"
+  }
+ ]
+}

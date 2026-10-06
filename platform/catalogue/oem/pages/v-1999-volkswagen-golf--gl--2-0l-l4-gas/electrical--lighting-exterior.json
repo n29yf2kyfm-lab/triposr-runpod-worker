@@ -1,0 +1,142 @@
+{
+ "page": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gl--2-0l-l4-gas/electrical--lighting-exterior",
+ "title": "Lighting - Exterior for 1999 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Headlamp Assembly",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/a609e9ddc41a21339ce8f2cc65b8d531/1a879bd0e2d7313a451426aba83921aa.png",
+   "url": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gl--2-0l-l4-gas/electrical--lighting-exterior?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Signal Lamp",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/241df79fdb47576fecabe4aae98399c7/be5a77c71f4707b6abee682871a43ca4.png",
+   "url": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gl--2-0l-l4-gas/electrical--lighting-exterior?assembly=2"
+  },
+  {
+   "n": 3,
+   "name": "Side Marker Lamp",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/c80ca80123cf0bbc7867b5856f20373c/957a97f3d18db53f9401573c6a9d3123.png",
+   "url": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gl--2-0l-l4-gas/electrical--lighting-exterior?assembly=3"
+  },
+  {
+   "n": 4,
+   "name": "Tail Lamp Assembly",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/45c5eb04772532bccb02fe30490eaf89/9193cf9cdb85001ebe9ae69a557c2416.png",
+   "url": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gl--2-0l-l4-gas/electrical--lighting-exterior?assembly=4"
+  },
+  {
+   "n": 5,
+   "name": "License Lamp",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/cfc668a177e332b91be6c6cc733517c0/dbb1d8130148263da7bdfdaf6f5a4961.png",
+   "url": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gl--2-0l-l4-gas/electrical--lighting-exterior?assembly=5"
+  },
+  {
+   "n": 6,
+   "name": "Rear",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/1f77839aa6baccce31e44299d23da734/b5cef9b7cb9e9babf72b687530e7a94d.png",
+   "url": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gl--2-0l-l4-gas/electrical--lighting-exterior?assembly=6"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "N10320102",
+   "oem_display": "N 103 201 02",
+   "oem_from": "printed",
+   "name": "Low Beam Bulb",
+   "label": "Headlamp Bulb, Left",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": 19.26,
+   "msrp_usd": 24.29,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-low-beam-bulb-n10320102"
+  },
+  {
+   "oem": "N0177622",
+   "oem_display": "N 017 762 2",
+   "oem_from": "printed",
+   "name": "Fog Lamp Bulb",
+   "label": "Fog Lamp Bulb, Right",
+   "callout": 3,
+   "diagram": 1,
+   "price_usd": 7.78,
+   "msrp_usd": 9.82,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-fog-lamp-bulb-n0177622"
+  },
+  {
+   "oem": "N10475903",
+   "oem_display": "N 104 759 03",
+   "oem_from": "printed",
+   "name": "Signal Lamp Bulb",
+   "label": "Signal Lamp Bulb, Left",
+   "callout": 4,
+   "diagram": 1,
+   "price_usd": 3.57,
+   "msrp_usd": 5.86,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-signal-lamp-bulb-n10475903"
+  },
+  {
+   "oem": "N0177535",
+   "oem_display": "N 017 753 5",
+   "oem_from": "printed",
+   "name": "Center High Mount Stop Light Bulb",
+   "label": "Park Lamp Bulb, Right",
+   "callout": 5,
+   "diagram": 1,
+   "price_usd": 4.68,
+   "msrp_usd": 5.91,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-center-high-mount-stop-light-bulb-n0177535"
+  },
+  {
+   "oem": "1J0953123B",
+   "oem_display": "1J0 953 123 B",
+   "oem_from": "printed",
+   "name": "Socket",
+   "label": "Socket, Right",
+   "callout": 6,
+   "diagram": 1,
+   "price_usd": 22.18,
+   "msrp_usd": 30.29,
+   "notes": "Signal. With xenon. With directional beam, 2009-11.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-socket-1j0953123b"
+  },
+  {
+   "oem": "1J0941953",
+   "oem_display": "1J0 941 953",
+   "oem_from": "printed",
+   "name": "Parking Light Bulb Socket",
+   "label": "Socket, Left",
+   "callout": 7,
+   "diagram": 1,
+   "price_usd": 16.82,
+   "msrp_usd": 22.99,
+   "notes": "Parking lamp. 2007-11, without xenon lamp.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-parking-light-bulb-socket-1j0941953"
+  },
+  {
+   "oem": "1J0998226",
+   "oem_display": "1J0 998 226",
+   "oem_from": "printed",
+   "name": "Headlight Restoration Kit",
+   "label": "Repair Kit, Right",
+   "callout": 10,
+   "diagram": 1,
+   "price_usd": 34.36,
+   "msrp_usd": 58.78,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-headlight-restoration-kit-1j0998226"
+  }
+ ]
+}

@@ -1,0 +1,62 @@
+{
+ "page": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gl--2-0l-l4-gas/suspension--struts-and-components",
+ "title": "Struts & Components for 1999 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Strut",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/39c943c8c30011601c9ad05aa4efd73d/fd6e3cf840ea55df7e6e991a4ebb54f5.png",
+   "url": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gl--2-0l-l4-gas/suspension--struts-and-components?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Strut",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/e72b3983c8ace7f42fa472d8fd4ce7a9/0ac390e9bb0629caaea2a30dce258b3b.png",
+   "url": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gl--2-0l-l4-gas/suspension--struts-and-components?assembly=2"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "191512113",
+   "oem_display": "191 512 113",
+   "oem_from": "printed",
+   "name": "Spring Seat",
+   "label": "Upper Seat, Right",
+   "callout": 10,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "Upper. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-spring-seat-191512113) 14",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-spring-seat-191512113"
+  },
+  {
+   "oem": "N10328605",
+   "oem_display": "N 103 286 05",
+   "oem_from": "printed",
+   "name": "Spacer Sleeve Nut",
+   "label": "Spacer Sleeve Nut, Left",
+   "callout": 14,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "Concave. Thrust. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-spacer-sleeve-nut-n10328605) 18",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-spacer-sleeve-nut-n10328605"
+  },
+  {
+   "oem": "191512337",
+   "oem_display": "191 512 337",
+   "oem_from": "printed",
+   "name": "Thrust Washer Washer",
+   "label": "Washer Nut, Right",
+   "callout": 18,
+   "diagram": 1,
+   "price_usd": 5.73,
+   "msrp_usd": 9.41,
+   "notes": "Concave.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-thrust-washer-washer-191512337"
+  }
+ ]
+}

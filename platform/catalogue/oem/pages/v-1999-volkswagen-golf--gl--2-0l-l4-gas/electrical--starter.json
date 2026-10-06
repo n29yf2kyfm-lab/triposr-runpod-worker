@@ -1,0 +1,54 @@
+{
+ "page": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gl--2-0l-l4-gas/electrical--starter",
+ "title": "Starter for 1999 Volkswagen Golf",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Starter",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/afdc162c369c886e8392fe76730b4ba5/efeb0c5e6798bcd27258f75e3e4cd10f.png",
+   "url": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gl--2-0l-l4-gas/electrical--starter?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Starter",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/f8d4583c0ed3c5ac285d3e1909d8081d/23ceff31382ca7e5bf645304092acaf5.png",
+   "url": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gl--2-0l-l4-gas/electrical--starter?assembly=2"
+  },
+  {
+   "n": 3,
+   "name": "Starter",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/72b558bd9a08fdd9bd46c1704b336f90/c5a20a4d60132736e42db09c17ed137f.png",
+   "url": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gl--2-0l-l4-gas/electrical--starter?assembly=3"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "02A911023TU",
+   "oem_display": "02A 911 023 TU",
+   "oem_from": "printed",
+   "name": "Starter",
+   "label": "Auto trans, 6 cylinder. 2.8L, new. 4 cylinder, manual trans. 6 cylinder, manual trans.",
+   "callout": 1,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2a911023tu) 2",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2a911023tu"
+  },
+  {
+   "oem": "4H0951253A",
+   "oem_display": "4H0 951 253 A",
+   "oem_from": "printed",
+   "name": "Engine Control Module (ECM) Relay",
+   "label": "Relay",
+   "callout": 2,
+   "diagram": 1,
+   "price_usd": 29.56,
+   "msrp_usd": 50.59,
+   "notes": "This OEM Volkswagen fuel pump relay, part number 4H0-951-253-A, is compatible with most VW vehicles from the model years between 1984 and 2021. It fits many classic cars and vans, like Fox, Quantum, Scirocco, Vanagon, and EuroVan, plus more modern ones, li ...",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-control-module-ecm-relay-4h0951253a"
+  }
+ ]
+}

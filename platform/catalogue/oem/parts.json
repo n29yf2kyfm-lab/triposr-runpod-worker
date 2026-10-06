@@ -103,6 +103,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "belts-and-cooling--water-pump-and-related-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 3
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "belts-and-cooling--water-pump-and-related-components",
     "diagram": 1,
@@ -150,6 +158,14 @@
   "price_usd": 25.12,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "belts-and-cooling--water-pump-and-related-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "belts-and-cooling--water-pump-and-related-components",
@@ -221,6 +237,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "belts-and-cooling--water-pump-and-related-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "belts-and-cooling--water-pump-and-related-components",
     "diagram": 1,
@@ -290,6 +314,14 @@
   "price_usd": 1.26,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "belts-and-cooling--water-pump-and-related-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 2
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "belts-and-cooling--water-pump-and-related-components",
@@ -479,6 +511,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "belts-and-cooling--water-pump-and-related-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "belts-and-cooling--water-pump-and-related-components",
     "diagram": 1,
@@ -568,6 +608,14 @@
   "price_usd": 128.08,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "belts-and-cooling--water-pump-and-related-components",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "belts-and-cooling--water-pump-and-related-components",
@@ -713,6 +761,30 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-sensor-wire-5g0927902ap",
   "illustration": "illustrations/abs-sensor-wire.webp"
+ },
+ {
+  "oem": "1H0927807D",
+  "oem_display": "1H0 927 807 D",
+  "name": "ABS Wheel Speed Sensor",
+  "part_type": "abs wheel speed sensor",
+  "system": "brakes",
+  "price_usd": 205.15,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 6
+   }
+  ],
+  "notes": [
+   "Incl.ABS Wheel Speed Sensor Wire Harness. Cabrio. Rear. From Chassis/VIN 1H-S-086 670. Jetta. Golf, GTI."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-abs-wheel-speed-sensor-1h0927807d",
+  "illustration": "illustrations/abs-wheel-speed-sensor.webp"
  },
  {
   "oem": "1J0927803",
@@ -1065,6 +1137,14 @@
   "price_usd": 49.32,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 5
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "brakes--rear-brakes",
@@ -1554,6 +1634,30 @@
   "illustration": "illustrations/bolt.webp"
  },
  {
+  "oem": "N0111671",
+  "oem_display": "N 011 167 1",
+  "name": "Axle Nut",
+  "part_type": "axle nut",
+  "system": "brakes",
+  "price_usd": 6.82,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 16
+   }
+  ],
+  "notes": [
+   "2wd."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-axle-nut-n0111671",
+  "illustration": "illustrations/nut.webp"
+ },
+ {
   "oem": "N90587602",
   "oem_display": "N 905 876 02",
   "name": "Axle Nut",
@@ -1608,6 +1712,54 @@
   "illustration": "illustrations/nut.webp"
  },
  {
+  "oem": "6Q0609425E",
+  "oem_display": "6Q0 609 425 E",
+  "name": "Backing Plate",
+  "part_type": "backing plate",
+  "system": "brakes",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 2
+   }
+  ],
+  "notes": [
+   "With abs. From ch 1gk005317. Drum Brake. Right. Rear drum. Left. Cabrio. EuroVan. Golf, GTI. To chassis/vin 1e-xm806130. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-backing-plate-6q0609425e) 2"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-backing-plate-6q0609425e",
+  "illustration": "illustrations/backing-plate.webp"
+ },
+ {
+  "oem": "6Q0609426E",
+  "oem_display": "6Q0 609 426 E",
+  "name": "Backing Plate",
+  "part_type": "backing plate",
+  "system": "brakes",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 2
+   }
+  ],
+  "notes": [
+   "Without abs. From ch 1gk005317. Drum Brake. To chassis/vin 1e-xm806130. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-backing-plate-6q0609426e) 5"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-backing-plate-6q0609426e",
+  "illustration": "illustrations/backing-plate.webp"
+ },
+ {
   "oem": "1J0498625A",
   "oem_display": "1J0 498 625 A",
   "name": "Bearing Assembly",
@@ -1623,6 +1775,14 @@
     "diagram_name": "Rotor",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e3a4c9d88f6b6980712fbceea2b4f514/df72a46bbc6b03e37365a71eac31f0fd.png",
     "callout": 9
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--front-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
    },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
@@ -1645,6 +1805,54 @@
    "Beetle. 4 cylinder. Convertible, 288 x 25mm rotor. 1.8L. 6 cylinder. Coupe, 2.5L. Coupe, 1.9 & 2.0L. Jetta. 2.0l. Golf, GTI. 2.8l. Jetta. 1.9l tdi."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-bearing-assembly-1j0498625a",
+  "illustration": "illustrations/bearing.webp"
+ },
+ {
+  "oem": "311405625N",
+  "oem_display": "311 405 625 N",
+  "name": "Bearing",
+  "part_type": "bearing",
+  "system": "brakes",
+  "price_usd": 66.6,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 19
+   }
+  ],
+  "notes": [
+   "All models. Germany Built Vehicle. To Trans 31 07 8. From Trans 01 08 8. Quantum. Cabrio. Jetta. 2wd, inner. Passat. Golf, GTI."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-bearing-311405625n",
+  "illustration": "illustrations/bearing.webp"
+ },
+ {
+  "oem": "311405645B",
+  "oem_display": "311 405 645 B",
+  "name": "Bearing",
+  "part_type": "bearing",
+  "system": "brakes",
+  "price_usd": 23.41,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 18
+   }
+  ],
+  "notes": [
+   "All models. Quantum. Jetta. Cabrio. Standard. 2wd, outer. Passat. Golf, GTI."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-bearing-311405645b",
   "illustration": "illustrations/bearing.webp"
  },
  {
@@ -2860,6 +3068,28 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-cap-1j0501249c",
+  "illustration": "illustrations/cap.webp"
+ },
+ {
+  "oem": "N0125361",
+  "oem_display": "N 012 536 1",
+  "name": "Cap Cotter Pin",
+  "part_type": "cap cotter pin",
+  "system": "brakes",
+  "price_usd": 0.33,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 14
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-cap-cotter-pin-n0125361",
   "illustration": "illustrations/cap.webp"
  },
  {
@@ -4238,6 +4468,14 @@
     "callout": 8
    },
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--front-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 12
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "brakes--front-brakes",
     "diagram": 1,
@@ -4256,6 +4494,7 @@
   ],
   "notes": [
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-hub-1j0407613g) 12",
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-hub-1j0407613g) 2 This part contains hazardous materials. Extra shipping costs apply. Store ratingby Google 3.9star Press space for more information.",
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-hub-1j0407613g) 8",
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-hub-1j0407613g) 9"
   ],
@@ -4534,6 +4773,28 @@
   "illustration": "illustrations/bolt.webp"
  },
  {
+  "oem": "803501221",
+  "oem_display": "803 501 221",
+  "name": "Lock Ring",
+  "part_type": "lock ring",
+  "system": "brakes",
+  "price_usd": 5.39,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 15
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-lock-ring-803501221",
+  "illustration": "illustrations/lock-ring.webp"
+ },
+ {
   "oem": "5Q0698365",
   "oem_display": "5Q0 698 365",
   "name": "Motor Hardware Kit",
@@ -4806,6 +5067,78 @@
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-rotor-screw-n10648301",
   "illustration": "illustrations/bolt.webp"
+ },
+ {
+  "oem": "333501117A",
+  "oem_display": "333 501 117 A",
+  "name": "Spindle",
+  "part_type": "spindle",
+  "system": "brakes",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 21
+   }
+  ],
+  "notes": [
+   "With abs. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-spindle-333501117a) 21"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-spindle-333501117a",
+  "illustration": null
+ },
+ {
+  "oem": "333501118A",
+  "oem_display": "333 501 118 A",
+  "name": "Spindle",
+  "part_type": "spindle",
+  "system": "brakes",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 21
+   }
+  ],
+  "notes": [
+   "With abs. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-spindle-333501118a) 23"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-spindle-333501118a",
+  "illustration": null
+ },
+ {
+  "oem": "191615611D",
+  "oem_display": "191 615 611 D",
+  "name": "Splash Shield",
+  "part_type": "splash shield",
+  "system": "brakes",
+  "price_usd": 98.1,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 11
+   }
+  ],
+  "notes": [
+   "Rear disc. Cabrio. With abs. Corrado. Left. Golf, GTI, Jetta."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-splash-shield-191615611d",
+  "illustration": "illustrations/splash-shield.webp"
  },
  {
   "oem": "1J0615311A",
@@ -5120,6 +5453,30 @@
   "illustration": "illustrations/bolt.webp"
  },
  {
+  "oem": "1H0501541A",
+  "oem_display": "1H0 501 541 A",
+  "name": "Suspension Control Arm Bushing",
+  "part_type": "suspension control arm bushing",
+  "system": "brakes",
+  "price_usd": 83.53,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 23
+   }
+  ],
+  "notes": [
+   "Rear Axle Assembly. 6 cylinder."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-suspension-control-arm-bushing-1h0501541a",
+  "illustration": "illustrations/suspension-control-arm-bushing.webp"
+ },
+ {
   "oem": "8V0615437",
   "oem_display": "8V0 615 437",
   "name": "Wear Indicator",
@@ -5281,6 +5638,54 @@
   "illustration": "illustrations/wheel-bearing-and-hub.webp"
  },
  {
+  "oem": "823501249",
+  "oem_display": "823 501 249",
+  "name": "Wheel Bearing Grease Cap",
+  "part_type": "wheel bearing grease cap",
+  "system": "brakes",
+  "price_usd": 21.83,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 13
+   }
+  ],
+  "notes": [
+   "2wd."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wheel-bearing-grease-cap-823501249",
+  "illustration": "illustrations/cap.webp"
+ },
+ {
+  "oem": "357501641B",
+  "oem_display": "357 501 641 B",
+  "name": "Wheel Seal",
+  "part_type": "wheel seal",
+  "system": "brakes",
+  "price_usd": 27.11,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "brakes--rear-brakes",
+    "diagram": 1,
+    "diagram_name": "Hub & Drum",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/81c0a743a7986d30b6345fc07b29349b/1d09aae79b44dade270a6bb7f4ab4615.png",
+    "callout": 20
+   }
+  ],
+  "notes": [
+   "All models. Dust. Jetta. Cabrio. 2wd. Golf, GTI."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wheel-seal-357501641b",
+  "illustration": "illustrations/seal.webp"
+ },
+ {
   "oem": "5GM121283",
   "oem_display": "5GM 121 283",
   "name": "Side Air Baffle",
@@ -5410,6 +5815,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--radiator-and-components",
+    "diagram": 1,
+    "diagram_name": "Radiator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/8dd31dd7f8f613e031f099bffa3e76b2/f291c9728f5fdb16edc803ebf686a17e.png",
+    "callout": 27
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "cooling-system--radiator-and-components",
     "diagram": 1,
@@ -5479,6 +5892,14 @@
   "price_usd": 28.51,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--radiator-and-components",
+    "diagram": 1,
+    "diagram_name": "Radiator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/8dd31dd7f8f613e031f099bffa3e76b2/f291c9728f5fdb16edc803ebf686a17e.png",
+    "callout": 8
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "cooling-system--radiator-and-components",
@@ -5596,6 +6017,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--radiator-and-components",
+    "diagram": 1,
+    "diagram_name": "Radiator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/8dd31dd7f8f613e031f099bffa3e76b2/f291c9728f5fdb16edc803ebf686a17e.png",
+    "callout": 11
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "cooling-system--radiator-and-components",
     "diagram": 1,
@@ -5619,6 +6048,14 @@
   "price_usd": 32.6,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--radiator-and-components",
+    "diagram": 1,
+    "diagram_name": "Radiator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/8dd31dd7f8f613e031f099bffa3e76b2/f291c9728f5fdb16edc803ebf686a17e.png",
+    "callout": 5
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "cooling-system--radiator-and-components",
@@ -5668,6 +6105,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--radiator-and-components",
+    "diagram": 1,
+    "diagram_name": "Radiator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/8dd31dd7f8f613e031f099bffa3e76b2/f291c9728f5fdb16edc803ebf686a17e.png",
+    "callout": 14
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "cooling-system--radiator-and-components",
     "diagram": 1,
@@ -5677,7 +6122,8 @@
    }
   ],
   "notes": [
-   "ATF Cooler. Cooler to Pipe. 2.0L, to trans cooler. 1.9L diesel, 1999-03, to trans cooler. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-engine-coolant-hose-1j0121058ac) 15"
+   "ATF Cooler. Cooler to Pipe. 2.0L, to trans cooler. 1.9L diesel, 1999-03, to trans cooler. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-engine-coolant-hose-1j0121058ac) 15",
+   "ATF Cooler. Cooler to Pipe. 2.0L, to trans cooler. 1.9L diesel, 1999-03, to trans cooler. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-engine-coolant-hose-1j0121058ac) 20"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-coolant-hose-1j0121058ac",
   "illustration": "illustrations/hose.webp"
@@ -5739,6 +6185,14 @@
   "price_usd": 40.44,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--radiator-and-components",
+    "diagram": 1,
+    "diagram_name": "Radiator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/8dd31dd7f8f613e031f099bffa3e76b2/f291c9728f5fdb16edc803ebf686a17e.png",
+    "callout": 20
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "cooling-system--radiator-and-components",
@@ -6030,6 +6484,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--radiator-and-components",
+    "diagram": 1,
+    "diagram_name": "Radiator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/8dd31dd7f8f613e031f099bffa3e76b2/f291c9728f5fdb16edc803ebf686a17e.png",
+    "callout": 23
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "cooling-system--radiator-and-components",
     "diagram": 1,
@@ -6123,6 +6585,14 @@
   "price_usd": 4.12,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--radiator-and-components",
+    "diagram": 1,
+    "diagram_name": "Radiator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/8dd31dd7f8f613e031f099bffa3e76b2/f291c9728f5fdb16edc803ebf686a17e.png",
+    "callout": 26
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "cooling-system--radiator-and-components",
@@ -6265,6 +6735,28 @@
   "illustration": "illustrations/clip.webp"
  },
  {
+  "oem": "059919501",
+  "oem_display": "059 919 501",
+  "name": "Engine Coolant Temperature Sensor",
+  "part_type": "engine coolant temperature sensor",
+  "system": "cooling system",
+  "price_usd": 33.77,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--radiator-and-components",
+    "diagram": 1,
+    "diagram_name": "Radiator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/8dd31dd7f8f613e031f099bffa3e76b2/f291c9728f5fdb16edc803ebf686a17e.png",
+    "callout": 22
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-coolant-temperature-sensor-59919501",
+  "illustration": "illustrations/engine-coolant-temperature-sensor.webp"
+ },
+ {
   "oem": "059919501A",
   "oem_display": "059 919 501 A",
   "name": "Engine Coolant Temperature Sensor",
@@ -6273,6 +6765,14 @@
   "price_usd": 33.77,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--radiator-and-components",
+    "diagram": 1,
+    "diagram_name": "Radiator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/8dd31dd7f8f613e031f099bffa3e76b2/f291c9728f5fdb16edc803ebf686a17e.png",
+    "callout": 22
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "cooling-system--radiator-and-components",
@@ -6543,6 +7043,28 @@
   "illustration": "illustrations/seal.webp"
  },
  {
+  "oem": "1H0959481B",
+  "oem_display": "1H0 959 481 B",
+  "name": "Engine Cooling Fan Temperature Switch",
+  "part_type": "engine cooling fan temperature switch",
+  "system": "cooling system",
+  "price_usd": 90.35,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--radiator-and-components",
+    "diagram": 1,
+    "diagram_name": "Radiator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/8dd31dd7f8f613e031f099bffa3e76b2/f291c9728f5fdb16edc803ebf686a17e.png",
+    "callout": 4
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-cooling-fan-temperature-switch-1h0959481b",
+  "illustration": "illustrations/engine-cooling-fan-temperature-switch.webp"
+ },
+ {
   "oem": "1J0959481A",
   "oem_display": "1J0 959 481 A",
   "name": "Engine Cooling Fan Temperature Switch",
@@ -6658,6 +7180,28 @@
    "Outlet Flange to Reservoir Pipe. Supply. 2018-23, inlet. Gas, inlet. Left side."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hose-6k121049a",
+  "illustration": "illustrations/hose.webp"
+ },
+ {
+  "oem": "1J0122073A",
+  "oem_display": "1J0 122 073 A",
+  "name": "Hose",
+  "part_type": "hose",
+  "system": "cooling system",
+  "price_usd": 43.71,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--radiator-and-components",
+    "diagram": 1,
+    "diagram_name": "Radiator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/8dd31dd7f8f613e031f099bffa3e76b2/f291c9728f5fdb16edc803ebf686a17e.png",
+    "callout": 12
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hose-1j0122073a",
   "illustration": "illustrations/hose.webp"
  },
  {
@@ -7210,6 +7754,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--radiator-and-components",
+    "diagram": 1,
+    "diagram_name": "Radiator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/8dd31dd7f8f613e031f099bffa3e76b2/f291c9728f5fdb16edc803ebf686a17e.png",
+    "callout": 2
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "cooling-system--radiator-and-components",
     "diagram": 1,
@@ -7231,6 +7783,14 @@
   "price_usd": 19.63,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--radiator-and-components",
+    "diagram": 1,
+    "diagram_name": "Radiator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/8dd31dd7f8f613e031f099bffa3e76b2/f291c9728f5fdb16edc803ebf686a17e.png",
+    "callout": 3
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "cooling-system--radiator-and-components",
@@ -7254,6 +7814,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--radiator-and-components",
+    "diagram": 1,
+    "diagram_name": "Radiator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/8dd31dd7f8f613e031f099bffa3e76b2/f291c9728f5fdb16edc803ebf686a17e.png",
+    "callout": 6
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "cooling-system--radiator-and-components",
     "diagram": 1,
@@ -7275,6 +7843,14 @@
   "price_usd": 115.32,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--radiator-and-components",
+    "diagram": 1,
+    "diagram_name": "Radiator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/8dd31dd7f8f613e031f099bffa3e76b2/f291c9728f5fdb16edc803ebf686a17e.png",
+    "callout": 7
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "cooling-system--radiator-and-components",
@@ -7420,6 +7996,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--radiator-and-components",
+    "diagram": 1,
+    "diagram_name": "Radiator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/8dd31dd7f8f613e031f099bffa3e76b2/f291c9728f5fdb16edc803ebf686a17e.png",
+    "callout": 9
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "cooling-system--radiator-and-components",
     "diagram": 1,
@@ -7495,6 +8079,14 @@
   "price_usd": 1.6,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--hoses-and-lines",
+    "diagram": null,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": null
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "cooling-system--hoses-and-lines",
@@ -7698,6 +8290,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--radiator-and-components",
+    "diagram": 1,
+    "diagram_name": "Radiator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/8dd31dd7f8f613e031f099bffa3e76b2/f291c9728f5fdb16edc803ebf686a17e.png",
+    "callout": 25
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "cooling-system--radiator-and-components",
     "diagram": 1,
@@ -7749,6 +8349,14 @@
   "price_usd": 2.66,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "cooling-system--radiator-and-components",
+    "diagram": 1,
+    "diagram_name": "Radiator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/8dd31dd7f8f613e031f099bffa3e76b2/f291c9728f5fdb16edc803ebf686a17e.png",
+    "callout": 24
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "cooling-system--radiator-and-components",
@@ -7935,6 +8543,54 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-adjust-motor-cap-5g0998295",
   "illustration": "illustrations/cap.webp"
+ },
+ {
+  "oem": "028903025G",
+  "oem_display": "028 903 025 G",
+  "name": "Alternator",
+  "part_type": "alternator",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "electrical--alternator",
+    "diagram": 1,
+    "diagram_name": "Alternator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e2c02ebd8f672405670c0a8dfa2f5821/4d6928e546a6bfa9f31935a1f0615630.png",
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-alternator-28903025g) 1"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-alternator-28903025g",
+  "illustration": "illustrations/alternator.webp"
+ },
+ {
+  "oem": "028903025H",
+  "oem_display": "028 903 025 H",
+  "name": "Alternator",
+  "part_type": "alternator",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "electrical--alternator",
+    "diagram": 1,
+    "diagram_name": "Alternator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e2c02ebd8f672405670c0a8dfa2f5821/4d6928e546a6bfa9f31935a1f0615630.png",
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-alternator-28903025h) 2"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-alternator-28903025h",
+  "illustration": "illustrations/alternator.webp"
  },
  {
   "oem": "028903028D",
@@ -8524,6 +9180,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "electrical--tail-lamps",
+    "diagram": 1,
+    "diagram_name": "Tail Lamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/45c5eb04772532bccb02fe30490eaf89/9193cf9cdb85001ebe9ae69a557c2416.png",
+    "callout": 5
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "electrical--tail-lamps",
     "diagram": 1,
@@ -8547,6 +9211,14 @@
   "price_usd": 3.25,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "electrical--tail-lamps",
+    "diagram": 1,
+    "diagram_name": "Tail Lamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/45c5eb04772532bccb02fe30490eaf89/9193cf9cdb85001ebe9ae69a557c2416.png",
+    "callout": 4
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "electrical--tail-lamps",
@@ -8813,6 +9485,30 @@
   "illustration": "illustrations/cap.webp"
  },
  {
+  "oem": "028903803D",
+  "oem_display": "028 903 803 D",
+  "name": "Charging System Voltage Regulator",
+  "part_type": "charging system voltage regulator",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "electrical--alternator",
+    "diagram": 1,
+    "diagram_name": "Alternator",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e2c02ebd8f672405670c0a8dfa2f5821/4d6928e546a6bfa9f31935a1f0615630.png",
+    "callout": 2
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-charging-system-voltage-regulator-28903803d) Diagram 2: Alternator11 Diagram 3: Alternator2 Store ratingby Google 3.9star Press space for more information."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-charging-system-voltage-regulator-28903803d",
+  "illustration": "illustrations/charging-system-voltage-regulator.webp"
+ },
+ {
   "oem": "048903803",
   "oem_display": "048 903 803",
   "name": "Charging System Voltage Regulator",
@@ -8929,6 +9625,30 @@
   "illustration": "illustrations/drive.webp"
  },
  {
+  "oem": "4H0951253A",
+  "oem_display": "4H0 951 253 A",
+  "name": "Engine Control Module (ECM) Relay",
+  "part_type": "engine control module ecm relay",
+  "system": "electrical",
+  "price_usd": 29.56,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "electrical--starter",
+    "diagram": 1,
+    "diagram_name": "Starter",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/afdc162c369c886e8392fe76730b4ba5/efeb0c5e6798bcd27258f75e3e4cd10f.png",
+    "callout": 2
+   }
+  ],
+  "notes": [
+   "This OEM Volkswagen fuel pump relay, part number 4H0-951-253-A, is compatible with most VW vehicles from the model years between 1984 and 2021. It fits many classic cars and vans, like Fox, Quantum, Scirocco, Vanagon, and EuroVan, plus more modern ones, li ..."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-control-module-ecm-relay-4h0951253a",
+  "illustration": "illustrations/engine-control-module-ecm-relay.webp"
+ },
+ {
   "oem": "N90974701",
   "oem_display": "N 909 747 01",
   "name": "Fender Liner Bolt",
@@ -8969,6 +9689,14 @@
   "price_usd": 7.78,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "electrical--lighting-exterior",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a609e9ddc41a21339ce8f2cc65b8d531/1a879bd0e2d7313a451426aba83921aa.png",
+    "callout": 3
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "electrical--lighting-exterior",
@@ -9324,6 +10052,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "electrical--lighting-exterior",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a609e9ddc41a21339ce8f2cc65b8d531/1a879bd0e2d7313a451426aba83921aa.png",
+    "callout": 10
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "electrical--lighting-exterior",
     "diagram": 1,
@@ -9530,6 +10266,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "electrical--lighting-exterior",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a609e9ddc41a21339ce8f2cc65b8d531/1a879bd0e2d7313a451426aba83921aa.png",
+    "callout": 5
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "electrical--lighting-exterior",
     "diagram": 1,
@@ -9575,6 +10319,14 @@
   "price_usd": 19.26,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "electrical--lighting-exterior",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a609e9ddc41a21339ce8f2cc65b8d531/1a879bd0e2d7313a451426aba83921aa.png",
+    "callout": 2
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "electrical--lighting-exterior",
@@ -9732,6 +10484,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "electrical--lighting-exterior",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a609e9ddc41a21339ce8f2cc65b8d531/1a879bd0e2d7313a451426aba83921aa.png",
+    "callout": 7
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "electrical--lighting-exterior",
     "diagram": 1,
@@ -9824,6 +10584,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "electrical--lighting-exterior",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a609e9ddc41a21339ce8f2cc65b8d531/1a879bd0e2d7313a451426aba83921aa.png",
+    "callout": 4
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "electrical--lighting-exterior",
     "diagram": 1,
@@ -9845,6 +10613,14 @@
   "price_usd": 22.18,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "electrical--lighting-exterior",
+    "diagram": 1,
+    "diagram_name": "Headlamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/a609e9ddc41a21339ce8f2cc65b8d531/1a879bd0e2d7313a451426aba83921aa.png",
+    "callout": 6
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "electrical--lighting-exterior",
@@ -9880,6 +10656,30 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2a911023lx",
+  "illustration": "illustrations/starter.webp"
+ },
+ {
+  "oem": "02A911023TU",
+  "oem_display": "02A 911 023 TU",
+  "name": "Starter",
+  "part_type": "starter",
+  "system": "electrical",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "electrical--starter",
+    "diagram": 1,
+    "diagram_name": "Starter",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/afdc162c369c886e8392fe76730b4ba5/efeb0c5e6798bcd27258f75e3e4cd10f.png",
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2a911023tu) 2"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-starter-2a911023tu",
   "illustration": "illustrations/starter.webp"
  },
  {
@@ -10263,6 +11063,14 @@
   "price_usd": 2.06,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "electrical--tail-lamps",
+    "diagram": 1,
+    "diagram_name": "Tail Lamp Assembly",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/45c5eb04772532bccb02fe30490eaf89/9193cf9cdb85001ebe9ae69a557c2416.png",
+    "callout": 3
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "electrical--tail-lamps",
@@ -11309,6 +12117,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 3
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--filters",
     "diagram": 1,
@@ -11541,6 +12357,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 23
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
     "diagram": 1,
@@ -11612,6 +12436,14 @@
   "price_usd": null,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": null
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
@@ -11704,6 +12536,14 @@
   "price_usd": 1153.35,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
@@ -12608,6 +13448,28 @@
   "illustration": "illustrations/engine-complete.webp"
  },
  {
+  "oem": "034105701007",
+  "oem_display": "034 105 701 007",
+  "name": "Engine Connecting Rod Bearing",
+  "part_type": "engine connecting rod bearing",
+  "system": "engine",
+  "price_usd": 23.92,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 21
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-connecting-rod-bearing-34105701007",
+  "illustration": "illustrations/engine-connecting-rod-bearing.webp"
+ },
+ {
   "oem": "06H105701RGLB",
   "oem_display": "06H 105 701 R GLB",
   "name": "Engine Connecting Rod Bearing",
@@ -12726,6 +13588,30 @@
   "illustration": "illustrations/engine-cover-emblem.webp"
  },
  {
+  "oem": "06A103465",
+  "oem_display": "06A 103 465",
+  "name": "Engine Crankcase Vent Valve",
+  "part_type": "engine crankcase vent valve",
+  "system": "engine",
+  "price_usd": 86.92,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 6
+   }
+  ],
+  "notes": [
+   "Breather. 2.0L."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-crankcase-vent-valve-6a103465",
+  "illustration": "illustrations/engine-crankcase-vent-valve.webp"
+ },
+ {
   "oem": "06K103495AP",
   "oem_display": "06K 103 495 AP",
   "name": "Engine Crankcase Vent Valve",
@@ -12783,6 +13669,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 22
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
     "diagram": 1,
@@ -12806,6 +13700,14 @@
   "price_usd": 30.38,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 22
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
@@ -12831,6 +13733,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 22
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
     "diagram": 1,
@@ -12854,6 +13764,14 @@
   "price_usd": 30.38,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 22
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
@@ -13277,6 +14195,22 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 7
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 25
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--filters",
     "diagram": 1,
@@ -13380,6 +14314,14 @@
   "price_usd": 99.34,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 24
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
@@ -13493,6 +14435,28 @@
    "Beetle. Jetta. Thrust bearing set. Golf."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-crankshaft-thrust-washer-26105635a",
+  "illustration": "illustrations/washer.webp"
+ },
+ {
+  "oem": "026198421",
+  "oem_display": "026 198 421",
+  "name": "Engine Crankshaft Thrust Washer",
+  "part_type": "engine crankshaft thrust washer",
+  "system": "engine",
+  "price_usd": 73.49,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 22
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-crankshaft-thrust-washer-26198421",
   "illustration": "illustrations/washer.webp"
  },
  {
@@ -13793,6 +14757,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 21
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--filters",
     "diagram": 1,
@@ -14016,6 +14988,14 @@
   "price_usd": 71.12,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 19
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--filters",
@@ -14258,6 +15238,30 @@
   "illustration": "illustrations/engine-piston.webp"
  },
  {
+  "oem": "06A198151C",
+  "oem_display": "06A 198 151 C",
+  "name": "Engine Piston Ring",
+  "part_type": "engine piston ring",
+  "system": "engine",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 18
+   }
+  ],
+  "notes": [
+   "Passat. All models. Beetle. Golf. Jetta. To Chassis/VIN 1C-3-410 256. To Chassis/VIN 1J-3-012 159. To Chassis/VIN 9M-3-043-015. Vanagon. Diesel. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-engine-piston-ring-6a198151c) 21"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-piston-ring-6a198151c",
+  "illustration": "illustrations/engine-piston-ring.webp"
+ },
+ {
   "oem": "06A198151D",
   "oem_display": "06A 198 151 D",
   "name": "Engine Piston Ring",
@@ -14453,6 +15457,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 13
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--filters",
     "diagram": 1,
@@ -14547,6 +15559,22 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 16
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 17
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--filters",
     "diagram": 1,
@@ -14578,6 +15606,22 @@
   "price_usd": 118.65,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 14
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 15
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--filters",
@@ -14951,6 +15995,22 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 8
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 14
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--filters",
     "diagram": 1,
@@ -14982,6 +16042,14 @@
   "price_usd": 20.24,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 12
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--filters",
@@ -15015,6 +16083,22 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 9
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 14
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--filters",
     "diagram": 1,
@@ -15044,6 +16128,22 @@
   "price_usd": 50.58,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 10
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 14
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--filters",
@@ -15250,6 +16350,22 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 15
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 15
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--filters",
     "diagram": 1,
@@ -15365,6 +16481,54 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-timing-sprocket-7k109077e",
   "illustration": "illustrations/engine-timing-sprocket.webp"
+ },
+ {
+  "oem": "050103591",
+  "oem_display": "050 103 591",
+  "name": "Engine Valve Cover Hold Down Tab",
+  "part_type": "engine valve cover hold down tab",
+  "system": "engine",
+  "price_usd": 28.16,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   }
+  ],
+  "notes": [
+   "2.0L, front."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-valve-cover-hold-down-tab-50103591",
+  "illustration": "illustrations/engine-valve-cover-hold-down-tab.webp"
+ },
+ {
+  "oem": "056103591",
+  "oem_display": "056 103 591",
+  "name": "Engine Valve Cover Hold Down Tab",
+  "part_type": "engine valve cover hold down tab",
+  "system": "engine",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
+   }
+  ],
+  "notes": [
+   "2.0L, rear. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-engine-valve-cover-hold-down-tab-56103591) 6"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-valve-cover-hold-down-tab-56103591",
+  "illustration": "illustrations/engine-valve-cover-hold-down-tab.webp"
  },
  {
   "oem": "04E109623AB",
@@ -15596,6 +16760,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 7
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
     "diagram": 1,
@@ -15809,6 +16981,14 @@
   "price_usd": 58.2,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 6
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
@@ -16188,6 +17368,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 2
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
     "diagram": 1,
@@ -16389,6 +17577,14 @@
   "price_usd": 58.2,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
@@ -16716,6 +17912,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": null
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
     "diagram": 1,
@@ -16761,6 +17965,14 @@
   "price_usd": 153.7,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": null
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
@@ -16873,6 +18085,14 @@
   "price_usd": 299.42,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 24
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--filters",
@@ -17024,6 +18244,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 23
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--filters",
     "diagram": 1,
@@ -17105,6 +18333,98 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-oil-inlet-line-6k145778as",
   "illustration": "illustrations/pipe.webp"
+ },
+ {
+  "oem": "038103601AQ",
+  "oem_display": "038 103 601 AQ",
+  "name": "Oil Pan",
+  "part_type": "oil pan",
+  "system": "engine",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 28
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-oil-pan-38103601aq) 28"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-oil-pan-38103601aq",
+  "illustration": "illustrations/oil-pan.webp"
+ },
+ {
+  "oem": "038103601NA",
+  "oem_display": "038 103 601 NA",
+  "name": "Oil Pan",
+  "part_type": "oil pan",
+  "system": "engine",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 17
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-oil-pan-38103601na) 19"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-oil-pan-38103601na",
+  "illustration": "illustrations/oil-pan.webp"
+ },
+ {
+  "oem": "038103603M",
+  "oem_display": "038 103 603 M",
+  "name": "Oil Pan",
+  "part_type": "oil pan",
+  "system": "engine",
+  "price_usd": 239.63,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 17
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-oil-pan-38103603m",
+  "illustration": "illustrations/oil-pan.webp"
+ },
+ {
+  "oem": "038103603N",
+  "oem_display": "038 103 603 N",
+  "name": "Oil Pan",
+  "part_type": "oil pan",
+  "system": "engine",
+  "price_usd": 239.63,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 28
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-oil-pan-38103603n",
+  "illustration": "illustrations/oil-pan.webp"
  },
  {
   "oem": "06A103601T",
@@ -17276,6 +18596,14 @@
   "price_usd": 310.51,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 30
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
@@ -17537,6 +18865,22 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 13
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 16
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--filters",
     "diagram": 1,
@@ -17611,6 +18955,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 11
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--filters",
     "diagram": 1,
@@ -17632,6 +18984,14 @@
   "price_usd": 31.79,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 22
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--filters",
@@ -18140,6 +19500,39 @@
   "illustration": "illustrations/valve-cover.webp"
  },
  {
+  "oem": "06A103475C",
+  "oem_display": "06A 103 475 C",
+  "name": "Valve Cover",
+  "part_type": "valve cover",
+  "system": "engine",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 3
+   }
+  ],
+  "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-valve-cover-6a103475c) 2",
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-valve-cover-6a103475c) 4"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-valve-cover-6a103475c",
+  "illustration": "illustrations/valve-cover.webp"
+ },
+ {
   "oem": "06G103429B",
   "oem_display": "06G 103 429 B",
   "name": "Valve Cover",
@@ -18224,6 +19617,36 @@
   "illustration": "illustrations/gasket.webp"
  },
  {
+  "oem": "051103483A",
+  "oem_display": "051 103 483 A",
+  "name": "Valve Cover Gasket",
+  "part_type": "valve cover gasket",
+  "system": "engine",
+  "price_usd": 55.28,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--filters",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 2
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-valve-cover-gasket-51103483a",
+  "illustration": "illustrations/gasket.webp"
+ },
+ {
   "oem": "06A103483C",
   "oem_display": "06A 103 483 C",
   "name": "Valve Cover Gasket",
@@ -18285,6 +19708,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 10
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
     "diagram": 1,
@@ -18307,6 +19738,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 11
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
     "diagram": 1,
@@ -18328,6 +19767,14 @@
   "price_usd": 12.31,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 9
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
@@ -18372,6 +19819,14 @@
   "price_usd": 16.46,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "engine--mounts",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 8
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "engine--mounts",
@@ -18512,6 +19967,30 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-bracket-5q0253249",
   "illustration": "illustrations/bracket.webp"
+ },
+ {
+  "oem": "1J0254504SX",
+  "oem_display": "1J0 254 504 SX",
+  "name": "Catalytic Converter",
+  "part_type": "catalytic converter",
+  "system": "exhaust",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "exhaust--exhaust-components",
+    "diagram": 1,
+    "diagram_name": "Exhaust Manifold",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1ab3b82ca58f565975025d2f94afe9a1/079b022497a92a882c710460aa315a79.png",
+    "callout": 5
+   }
+  ],
+  "notes": [
+   "6"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-catalytic-converter-1j0254504sx",
+  "illustration": "illustrations/catalytic-converter.webp"
  },
  {
   "oem": "5C0253059AL",
@@ -18789,6 +20268,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "exhaust--exhaust-components",
+    "diagram": 1,
+    "diagram_name": "Exhaust Manifold",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1ab3b82ca58f565975025d2f94afe9a1/079b022497a92a882c710460aa315a79.png",
+    "callout": 11
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "exhaust--exhaust-components",
     "diagram": 1,
@@ -18859,6 +20346,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "exhaust--exhaust-components",
+    "diagram": 1,
+    "diagram_name": "Exhaust Manifold",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1ab3b82ca58f565975025d2f94afe9a1/079b022497a92a882c710460aa315a79.png",
+    "callout": 10
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "exhaust--exhaust-components",
     "diagram": 1,
@@ -18926,6 +20421,14 @@
   "price_usd": 229.01,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "exhaust--exhaust-components",
+    "diagram": 1,
+    "diagram_name": "Exhaust Manifold",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1ab3b82ca58f565975025d2f94afe9a1/079b022497a92a882c710460aa315a79.png",
+    "callout": 7
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "exhaust--exhaust-components",
@@ -19023,6 +20526,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "exhaust--exhaust-components",
+    "diagram": 1,
+    "diagram_name": "Exhaust Manifold",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1ab3b82ca58f565975025d2f94afe9a1/079b022497a92a882c710460aa315a79.png",
+    "callout": 14
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "exhaust--exhaust-components",
     "diagram": 1,
@@ -19045,6 +20556,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "exhaust--exhaust-components",
+    "diagram": 1,
+    "diagram_name": "Exhaust Manifold",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1ab3b82ca58f565975025d2f94afe9a1/079b022497a92a882c710460aa315a79.png",
+    "callout": 13
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "exhaust--exhaust-components",
     "diagram": 1,
@@ -19066,6 +20585,14 @@
   "price_usd": 30.62,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "exhaust--exhaust-components",
+    "diagram": 1,
+    "diagram_name": "Exhaust Manifold",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1ab3b82ca58f565975025d2f94afe9a1/079b022497a92a882c710460aa315a79.png",
+    "callout": 9
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "exhaust--exhaust-components",
@@ -19090,6 +20617,14 @@
   "price_usd": 42.31,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "exhaust--exhaust-components",
+    "diagram": 1,
+    "diagram_name": "Exhaust Manifold",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1ab3b82ca58f565975025d2f94afe9a1/079b022497a92a882c710460aa315a79.png",
+    "callout": 8
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "exhaust--exhaust-components",
@@ -19469,6 +21004,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "exhaust--exhaust-components",
+    "diagram": 1,
+    "diagram_name": "Exhaust Manifold",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1ab3b82ca58f565975025d2f94afe9a1/079b022497a92a882c710460aa315a79.png",
+    "callout": 19
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "exhaust--exhaust-components",
     "diagram": 1,
@@ -19478,6 +21021,7 @@
    }
   ],
   "notes": [
+   "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-floor-pan-heat-shield-1j0803310e) Diagram 2: Exhaust Manifold10 Related Parts: Front Pipe2 Store ratingby Google 3.9star Press space for more information.",
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-floor-pan-heat-shield-1j0803310e) Related Parts: Exhaust Clamp1 Store ratingby Google 3.9star Press space for more information."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-floor-pan-heat-shield-1j0803310e",
@@ -19492,6 +21036,14 @@
   "price_usd": 124.2,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "exhaust--exhaust-components",
+    "diagram": 1,
+    "diagram_name": "Exhaust Manifold",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1ab3b82ca58f565975025d2f94afe9a1/079b022497a92a882c710460aa315a79.png",
+    "callout": 16
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "exhaust--exhaust-components",
@@ -19514,6 +21066,14 @@
   "price_usd": null,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "exhaust--exhaust-components",
+    "diagram": 1,
+    "diagram_name": "Exhaust Manifold",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1ab3b82ca58f565975025d2f94afe9a1/079b022497a92a882c710460aa315a79.png",
+    "callout": 18
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "exhaust--exhaust-components",
@@ -19538,6 +21098,14 @@
   "price_usd": 42.89,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "exhaust--exhaust-components",
+    "diagram": 1,
+    "diagram_name": "Exhaust Manifold",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1ab3b82ca58f565975025d2f94afe9a1/079b022497a92a882c710460aa315a79.png",
+    "callout": 17
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "exhaust--exhaust-components",
@@ -19576,6 +21144,30 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-floor-pan-heat-shield-3q0825469",
   "illustration": "illustrations/floor-pan-heat-shield.webp"
+ },
+ {
+  "oem": "357253115D",
+  "oem_display": "357 253 115 D",
+  "name": "Gasket",
+  "part_type": "gasket",
+  "system": "exhaust",
+  "price_usd": 21.09,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "exhaust--exhaust-components",
+    "diagram": 1,
+    "diagram_name": "Exhaust Manifold",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1ab3b82ca58f565975025d2f94afe9a1/079b022497a92a882c710460aa315a79.png",
+    "callout": 6
+   }
+  ],
+  "notes": [
+   "2.0L. 12 valve engine. 2.8L, upper."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-gasket-357253115d",
+  "illustration": "illustrations/gasket.webp"
  },
  {
   "oem": "5Q0825661BS",
@@ -19668,6 +21260,14 @@
   "price_usd": 24.02,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "exhaust--exhaust-components",
+    "diagram": 1,
+    "diagram_name": "Exhaust Manifold",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1ab3b82ca58f565975025d2f94afe9a1/079b022497a92a882c710460aa315a79.png",
+    "callout": 2
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "exhaust--exhaust-components",
@@ -19776,6 +21376,28 @@
   "illustration": "illustrations/oxygen-sensor.webp"
  },
  {
+  "oem": "1K0998262",
+  "oem_display": "1K0 998 262",
+  "name": "Oxygen Sensor",
+  "part_type": "oxygen sensor",
+  "system": "exhaust",
+  "price_usd": 249.51,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "exhaust--exhaust-components",
+    "diagram": 1,
+    "diagram_name": "Exhaust Manifold",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1ab3b82ca58f565975025d2f94afe9a1/079b022497a92a882c710460aa315a79.png",
+    "callout": 15
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-oxygen-sensor-1k0998262",
+  "illustration": "illustrations/oxygen-sensor.webp"
+ },
+ {
   "oem": "1K0998262D",
   "oem_display": "1K0 998 262 D",
   "name": "Oxygen Sensor",
@@ -19795,6 +21417,28 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-oxygen-sensor-1k0998262d",
+  "illustration": "illustrations/oxygen-sensor.webp"
+ },
+ {
+  "oem": "1K0998262Q",
+  "oem_display": "1K0 998 262 Q",
+  "name": "Oxygen Sensor",
+  "part_type": "oxygen sensor",
+  "system": "exhaust",
+  "price_usd": 184.77,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "exhaust--exhaust-components",
+    "diagram": 1,
+    "diagram_name": "Exhaust Manifold",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/1ab3b82ca58f565975025d2f94afe9a1/079b022497a92a882c710460aa315a79.png",
+    "callout": 15
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-oxygen-sensor-1k0998262q",
   "illustration": "illustrations/oxygen-sensor.webp"
  },
  {
@@ -19842,6 +21486,30 @@
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-steering-column-bolt-n10240003",
   "illustration": "illustrations/bolt.webp"
+ },
+ {
+  "oem": "1J0820803A",
+  "oem_display": "1J0 820 803 A",
+  "name": "A/C Compressor",
+  "part_type": "a c compressor",
+  "system": "hvac",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "hvac--a-c-clutch-and-compressor",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 3
+   }
+  ],
+  "notes": [
+   "6"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-a-c-compressor-1j0820803a",
+  "illustration": "illustrations/a-c-compressor.webp"
  },
  {
   "oem": "1J0820803N",
@@ -20079,6 +21747,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "hvac--a-c-clutch-and-compressor",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "hvac--a-c-clutch-and-compressor",
     "diagram": 1,
@@ -20285,6 +21961,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "hvac--a-c-clutch-and-compressor",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 6
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "hvac--a-c-clutch-and-compressor",
     "diagram": 1,
@@ -20356,6 +22040,14 @@
   "price_usd": 10.85,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "hvac--a-c-clutch-and-compressor",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 9
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "hvac--a-c-clutch-and-compressor",
@@ -20524,6 +22216,14 @@
   "price_usd": 269.94,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "hvac--a-c-clutch-and-compressor",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 8
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "hvac--a-c-clutch-and-compressor",
@@ -20695,6 +22395,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "hvac--a-c-clutch-and-compressor",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 15
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "hvac--a-c-clutch-and-compressor",
     "diagram": 1,
@@ -20711,7 +22419,9 @@
     "callout": 13
    }
   ],
-  "notes": [],
+  "notes": [
+   "2.0L. With rear ac, 3.2 & 3.6L. With rear ac, 4.2L, #1. With rear ac, 5.0L, #1. 3.2L. With rear ac, 3.0L."
+  ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-a-c-service-valve-cap-357820809b",
   "illustration": "illustrations/cap.webp"
  },
@@ -20724,6 +22434,14 @@
   "price_usd": 15.31,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "hvac--a-c-clutch-and-compressor",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 14
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "hvac--a-c-clutch-and-compressor",
@@ -20856,6 +22574,14 @@
   "price_usd": 43.24,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "hvac--a-c-clutch-and-compressor",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 13
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "hvac--a-c-clutch-and-compressor",
@@ -21086,6 +22812,14 @@
   "price_usd": 43.24,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "hvac--a-c-clutch-and-compressor",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 12
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "hvac--a-c-clutch-and-compressor",
@@ -21344,6 +23078,14 @@
   "price_usd": 131.96,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "ignition--ignition-coil",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "ignition--ignition-coil",
@@ -21612,6 +23354,28 @@
   "illustration": "illustrations/engine-crankshaft-position-sensor.webp"
  },
  {
+  "oem": "032905106F",
+  "oem_display": "032 905 106 F",
+  "name": "Ignition Coil",
+  "part_type": "ignition coil",
+  "system": "ignition",
+  "price_usd": 224.56,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "ignition--ignition-coil",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 1
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-ignition-coil-32905106f",
+  "illustration": "illustrations/ignition-coil.webp"
+ },
+ {
   "oem": "04C905110N",
   "oem_display": "04C 905 110 N",
   "name": "Ignition Coil",
@@ -21778,6 +23542,30 @@
   "illustration": "illustrations/knock-sensor.webp"
  },
  {
+  "oem": "06A906433C",
+  "oem_display": "06A 906 433 C",
+  "name": "Sensor",
+  "part_type": "sensor",
+  "system": "ignition",
+  "price_usd": 167.45,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "ignition--ignition-coil",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 7
+   }
+  ],
+  "notes": [
+   "Passat. 2.8l. Auto trans. Beetle. 1.8l, 2.0l. Golf, GTI, R32. 2.0l. Impulse, 1.8 & 2.0L. Convertible, 2.0L. Golf, GTI, R32. 1.8l. Jetta. 1.8l. Jetta. 2.0l. Sedan."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-sensor-6a906433c",
+  "illustration": "illustrations/sensor.webp"
+ },
+ {
   "oem": "06A906433G",
   "oem_display": "06A 906 433 G",
   "name": "Sensor",
@@ -21844,6 +23632,102 @@
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-spark-plug-6k905601d",
   "illustration": "illustrations/spark-plug.webp"
+ },
+ {
+  "oem": "06A905430AC",
+  "oem_display": "06A 905 430 AC",
+  "name": "Spark Plug Wire",
+  "part_type": "spark plug wire",
+  "system": "ignition",
+  "price_usd": 47.22,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "ignition--ignition-coil",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
+   }
+  ],
+  "notes": [
+   "Golf, GTI. Plug wire. 2.0l. Beetle. 2.0l. No. 2. Jetta. Sedan, 2.0L, gas, without turbocharger, #2 cylinder."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-spark-plug-wire-6a905430ac",
+  "illustration": "illustrations/spark-plug-wire.webp"
+ },
+ {
+  "oem": "06A905430AD",
+  "oem_display": "06A 905 430 AD",
+  "name": "Spark Plug Wire",
+  "part_type": "spark plug wire",
+  "system": "ignition",
+  "price_usd": 47.22,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "ignition--ignition-coil",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
+   }
+  ],
+  "notes": [
+   "Golf, GTI. Plug wire. 2.0l. Beetle. 2.0l. No. 3. Jetta. Sedan, 2.0L, gas, without turbocharger, #3 cylinder."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-spark-plug-wire-6a905430ad",
+  "illustration": "illustrations/spark-plug-wire.webp"
+ },
+ {
+  "oem": "06A905430AE",
+  "oem_display": "06A 905 430 AE",
+  "name": "Spark Plug Wire",
+  "part_type": "spark plug wire",
+  "system": "ignition",
+  "price_usd": 47.22,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "ignition--ignition-coil",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
+   }
+  ],
+  "notes": [
+   "Golf, GTI. Plug wire. 2.0l. Beetle. 2.0l. No. 4. Jetta. Sedan, 2.0L, gas, without turbocharger, #4 cylinder."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-spark-plug-wire-6a905430ae",
+  "illustration": "illustrations/spark-plug-wire.webp"
+ },
+ {
+  "oem": "06A905430AF",
+  "oem_display": "06A 905 430 AF",
+  "name": "Spark Plug Wire",
+  "part_type": "spark plug wire",
+  "system": "ignition",
+  "price_usd": 47.22,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "ignition--ignition-coil",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
+   }
+  ],
+  "notes": [
+   "Golf, GTI. Plug wire. 2.0l. Beetle. 2.0l. No. 1. Jetta. Sedan, 2.0L, gas, without turbocharger, #1 cylinder."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-spark-plug-wire-6a905430af",
+  "illustration": "illustrations/spark-plug-wire.webp"
  },
  {
   "oem": "06A905430AK",
@@ -22015,6 +23899,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": "Spindle",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bcbc68dc10c7e08a6e836e93b8c0c0a3/d191d5788cadbe61006abbbe673e9e76.png",
+    "callout": 5
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--rear-suspension",
     "diagram": 1,
@@ -22038,6 +23930,14 @@
   "price_usd": 102.73,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": "Spindle",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bcbc68dc10c7e08a6e836e93b8c0c0a3/d191d5788cadbe61006abbbe673e9e76.png",
+    "callout": 5
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--rear-suspension",
@@ -22063,6 +23963,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": "Spindle",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bcbc68dc10c7e08a6e836e93b8c0c0a3/d191d5788cadbe61006abbbe673e9e76.png",
+    "callout": 4
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--rear-suspension",
     "diagram": 1,
@@ -22087,6 +23995,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--front-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--front-suspension",
     "diagram": 1,
@@ -22108,6 +24024,14 @@
   "price_usd": 75.63,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--front-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--front-suspension",
@@ -22240,6 +24164,14 @@
   "price_usd": null,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": "Spindle",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bcbc68dc10c7e08a6e836e93b8c0c0a3/d191d5788cadbe61006abbbe673e9e76.png",
+    "callout": 7
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--rear-suspension",
@@ -22416,6 +24348,14 @@
   "price_usd": 2.73,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": "Spindle",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bcbc68dc10c7e08a6e836e93b8c0c0a3/d191d5788cadbe61006abbbe673e9e76.png",
+    "callout": 14
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--rear-suspension",
@@ -22669,6 +24609,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": "Spindle",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bcbc68dc10c7e08a6e836e93b8c0c0a3/d191d5788cadbe61006abbbe673e9e76.png",
+    "callout": 17
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--rear-suspension",
     "diagram": 1,
@@ -22738,6 +24686,14 @@
   "price_usd": null,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--front-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 3
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--front-suspension",
@@ -23054,6 +25010,30 @@
   "illustration": "illustrations/control-arm-adjust-cam.webp"
  },
  {
+  "oem": "191407181D",
+  "oem_display": "191 407 181 D",
+  "name": "Lower Control Arm Rear Bushing",
+  "part_type": "control arm bushing",
+  "system": "suspension",
+  "price_usd": 50.26,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--front-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   }
+  ],
+  "notes": [
+   "2.0l gas & 1.9l tdi diesel. Rear. Cabrio. 4 cylinder. Passat. 2.8L. Fox. 6 cylinder. Golf, GTI. Jetta."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-lower-control-arm-rear-bushing-191407181d",
+  "illustration": "illustrations/control-arm-bushing.webp"
+ },
+ {
   "oem": "1J0407181",
   "oem_display": "1J0 407 181",
   "name": "Lower Control Arm Rear Bushing",
@@ -23108,6 +25088,14 @@
   "price_usd": 25.94,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--front-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--front-suspension",
@@ -23789,6 +25777,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": "Spindle",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bcbc68dc10c7e08a6e836e93b8c0c0a3/d191d5788cadbe61006abbbe673e9e76.png",
+    "callout": 9
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--rear-suspension",
     "diagram": 1,
@@ -23856,6 +25852,54 @@
   "illustration": "illustrations/bolt.webp"
  },
  {
+  "oem": "N10328605",
+  "oem_display": "N 103 286 05",
+  "name": "Spacer Sleeve Nut",
+  "part_type": "spacer sleeve nut",
+  "system": "suspension",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--struts-and-components",
+    "diagram": 1,
+    "diagram_name": "Strut",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/39c943c8c30011601c9ad05aa4efd73d/fd6e3cf840ea55df7e6e991a4ebb54f5.png",
+    "callout": 14
+   }
+  ],
+  "notes": [
+   "Concave. Thrust. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-spacer-sleeve-nut-n10328605) 18"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-spacer-sleeve-nut-n10328605",
+  "illustration": "illustrations/nut.webp"
+ },
+ {
+  "oem": "191512113",
+  "oem_display": "191 512 113",
+  "name": "Spring Seat",
+  "part_type": "spring seat",
+  "system": "suspension",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--struts-and-components",
+    "diagram": 1,
+    "diagram_name": "Strut",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/39c943c8c30011601c9ad05aa4efd73d/fd6e3cf840ea55df7e6e991a4ebb54f5.png",
+    "callout": 10
+   }
+  ],
+  "notes": [
+   "Upper. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-spring-seat-191512113) 14"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-spring-seat-191512113",
+  "illustration": "illustrations/spring-seat.webp"
+ },
+ {
   "oem": "1J0412341",
   "oem_display": "1J0 412 341",
   "name": "Spring Seat",
@@ -23888,6 +25932,14 @@
   "price_usd": 19.14,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": "Spindle",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bcbc68dc10c7e08a6e836e93b8c0c0a3/d191d5788cadbe61006abbbe673e9e76.png",
+    "callout": 16
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--rear-suspension",
@@ -24199,6 +26251,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--front-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 11
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--front-suspension",
     "diagram": 1,
@@ -24307,6 +26367,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--front-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 2
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--front-suspension",
     "diagram": 1,
@@ -24330,6 +26398,14 @@
   "price_usd": 329.57,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--front-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 2
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--front-suspension",
@@ -24447,6 +26523,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": "Spindle",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bcbc68dc10c7e08a6e836e93b8c0c0a3/d191d5788cadbe61006abbbe673e9e76.png",
+    "callout": 2
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--rear-suspension",
     "diagram": 1,
@@ -24470,6 +26554,14 @@
   "price_usd": 18.29,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": "Spindle",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bcbc68dc10c7e08a6e836e93b8c0c0a3/d191d5788cadbe61006abbbe673e9e76.png",
+    "callout": 2
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--rear-suspension",
@@ -24516,6 +26608,14 @@
   "price_usd": 25.12,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--front-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 8
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--front-suspension",
@@ -24600,6 +26700,14 @@
   "price_usd": 90.87,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": "Spindle",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bcbc68dc10c7e08a6e836e93b8c0c0a3/d191d5788cadbe61006abbbe673e9e76.png",
+    "callout": 1
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--rear-suspension",
@@ -24811,6 +26919,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": "Spindle",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bcbc68dc10c7e08a6e836e93b8c0c0a3/d191d5788cadbe61006abbbe673e9e76.png",
+    "callout": 10
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--rear-suspension",
     "diagram": 1,
@@ -24834,6 +26950,14 @@
   "price_usd": null,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": "Spindle",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bcbc68dc10c7e08a6e836e93b8c0c0a3/d191d5788cadbe61006abbbe673e9e76.png",
+    "callout": 12
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--rear-suspension",
@@ -24859,6 +26983,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": "Spindle",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bcbc68dc10c7e08a6e836e93b8c0c0a3/d191d5788cadbe61006abbbe673e9e76.png",
+    "callout": 11
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--rear-suspension",
     "diagram": 1,
@@ -24882,6 +27014,14 @@
   "price_usd": 45.58,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": "Spindle",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bcbc68dc10c7e08a6e836e93b8c0c0a3/d191d5788cadbe61006abbbe673e9e76.png",
+    "callout": 11
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--rear-suspension",
@@ -24953,6 +27093,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--front-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 10
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--front-suspension",
     "diagram": 1,
@@ -24968,6 +27116,30 @@
   "illustration": "illustrations/suspension-stabilizer-bar-bushing.webp"
  },
  {
+  "oem": "1J0511423",
+  "oem_display": "1J0 511 423",
+  "name": "Suspension Stabilizer Bar Bushing",
+  "part_type": "suspension stabilizer bar bushing",
+  "system": "suspension",
+  "price_usd": 5.26,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": "Spindle",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bcbc68dc10c7e08a6e836e93b8c0c0a3/d191d5788cadbe61006abbbe673e9e76.png",
+    "callout": 6
+   }
+  ],
+  "notes": [
+   "Without R32, 21.7mm."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-suspension-stabilizer-bar-bushing-1j0511423",
+  "illustration": "illustrations/suspension-stabilizer-bar-bushing.webp"
+ },
+ {
   "oem": "871511423",
   "oem_display": "871 511 423",
   "name": "Suspension Stabilizer Bar Bushing",
@@ -24976,6 +27148,14 @@
   "price_usd": 7.48,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": "Spindle",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bcbc68dc10c7e08a6e836e93b8c0c0a3/d191d5788cadbe61006abbbe673e9e76.png",
+    "callout": 6
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--rear-suspension",
@@ -24990,6 +27170,30 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-suspension-stabilizer-bar-bushing-871511423",
   "illustration": "illustrations/suspension-stabilizer-bar-bushing.webp"
+ },
+ {
+  "oem": "1H0413031P",
+  "oem_display": "1H0 413 031 P",
+  "name": "Suspension Strut",
+  "part_type": "suspension strut",
+  "system": "suspension",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--front-suspension",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 6
+   }
+  ],
+  "notes": [
+   "2.0l gas & 1.9l tdi diesel. 4 cylinder, gas. From Chassis/VIN 1H-T-070 450. Jetta. 2.0l. Jetta. 1.9l tdi. 4 cylinder, diesel. Golf, GTI. 2.0l. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-suspension-strut-1h0413031p) 8"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-suspension-strut-1h0413031p",
+  "illustration": "illustrations/suspension-strut.webp"
  },
  {
   "oem": "1T0413031KH",
@@ -25321,6 +27525,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": "Spindle",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bcbc68dc10c7e08a6e836e93b8c0c0a3/d191d5788cadbe61006abbbe673e9e76.png",
+    "callout": 3
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--rear-suspension",
     "diagram": 1,
@@ -25400,6 +27612,30 @@
   "illustration": "illustrations/bolt.webp"
  },
  {
+  "oem": "191512337",
+  "oem_display": "191 512 337",
+  "name": "Thrust Washer Washer",
+  "part_type": "thrust washer washer",
+  "system": "suspension",
+  "price_usd": 5.73,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--struts-and-components",
+    "diagram": 1,
+    "diagram_name": "Strut",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/39c943c8c30011601c9ad05aa4efd73d/fd6e3cf840ea55df7e6e991a4ebb54f5.png",
+    "callout": 18
+   }
+  ],
+  "notes": [
+   "Concave."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-thrust-washer-washer-191512337",
+  "illustration": "illustrations/washer.webp"
+ },
+ {
   "oem": "N10403702",
   "oem_display": "N 104 037 02",
   "name": "Top Nut",
@@ -25408,6 +27644,14 @@
   "price_usd": null,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "suspension--rear-suspension",
+    "diagram": 1,
+    "diagram_name": "Spindle",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/bcbc68dc10c7e08a6e836e93b8c0c0a3/d191d5788cadbe61006abbbe673e9e76.png",
+    "callout": 13
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "suspension--rear-suspension",
@@ -25711,6 +27955,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Wiper Arm",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/203c8255ddcb6a31a1fbf9b5461aadfc/0f198509064d05a6c70a6419645c2d2c.png",
+    "callout": 16
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
     "diagram": 1,
@@ -25869,6 +28121,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Wiper Arm",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/203c8255ddcb6a31a1fbf9b5461aadfc/0f198509064d05a6c70a6419645c2d2c.png",
+    "callout": 24
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
     "diagram": 1,
@@ -25893,6 +28153,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Wiper Arm",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/203c8255ddcb6a31a1fbf9b5461aadfc/0f198509064d05a6c70a6419645c2d2c.png",
+    "callout": 24
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
     "diagram": 1,
@@ -25916,6 +28184,14 @@
   "price_usd": 69.99,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Wiper Arm",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/203c8255ddcb6a31a1fbf9b5461aadfc/0f198509064d05a6c70a6419645c2d2c.png",
+    "callout": 19
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
@@ -25969,6 +28245,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Wiper Arm",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/203c8255ddcb6a31a1fbf9b5461aadfc/0f198509064d05a6c70a6419645c2d2c.png",
+    "callout": 21
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
     "diagram": 1,
@@ -25998,6 +28282,14 @@
   "price_usd": 4.75,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Wiper Arm",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/203c8255ddcb6a31a1fbf9b5461aadfc/0f198509064d05a6c70a6419645c2d2c.png",
+    "callout": 22
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
@@ -26230,6 +28522,30 @@
   "illustration": "illustrations/hose.webp"
  },
  {
+  "oem": "443955665",
+  "oem_display": "443 955 665",
+  "name": "Windshield Washer Hose Connector",
+  "part_type": "windshield washer hose connector",
+  "system": "wiper and washer",
+  "price_usd": 4.99,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Wiper Arm",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/203c8255ddcb6a31a1fbf9b5461aadfc/0f198509064d05a6c70a6419645c2d2c.png",
+    "callout": 23
+   }
+  ],
+  "notes": [
+   "Convertible,. Coupe,."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-windshield-washer-hose-connector-443955665",
+  "illustration": "illustrations/hose.webp"
+ },
+ {
   "oem": "1J0955489",
   "oem_display": "1J0 955 489",
   "name": "Windshield Washer Pump Grommet",
@@ -26238,6 +28554,14 @@
   "price_usd": 4.88,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Wiper Arm",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/203c8255ddcb6a31a1fbf9b5461aadfc/0f198509064d05a6c70a6419645c2d2c.png",
+    "callout": 18
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
@@ -26283,6 +28607,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Wiper Arm",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/203c8255ddcb6a31a1fbf9b5461aadfc/0f198509064d05a6c70a6419645c2d2c.png",
+    "callout": 20
+   },
+   {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
     "diagram": 1,
@@ -26291,7 +28623,9 @@
     "callout": 16
    }
   ],
-  "notes": [],
+  "notes": [
+   "Coupe,. 2019-21, #1. 2022-23. With r. 2022-24. 2025-26. Washer pump,grommet. Convertible,. Sedan from 1/05, wagon 2009 only,."
+  ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-windshield-washer-pump-grommet-443955465",
   "illustration": "illustrations/windshield-washer-pump-grommet.webp"
  },
@@ -26304,6 +28638,14 @@
   "price_usd": 13.53,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Wiper Arm",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/203c8255ddcb6a31a1fbf9b5461aadfc/0f198509064d05a6c70a6419645c2d2c.png",
+    "callout": 17
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
@@ -26337,6 +28679,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Wiper Arm",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/203c8255ddcb6a31a1fbf9b5461aadfc/0f198509064d05a6c70a6419645c2d2c.png",
+    "callout": 1
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
     "diagram": 1,
@@ -26360,6 +28710,14 @@
   "price_usd": 138.36,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Wiper Arm",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/203c8255ddcb6a31a1fbf9b5461aadfc/0f198509064d05a6c70a6419645c2d2c.png",
+    "callout": 1
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
@@ -26597,6 +28955,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Wiper Arm",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/203c8255ddcb6a31a1fbf9b5461aadfc/0f198509064d05a6c70a6419645c2d2c.png",
+    "callout": 4
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
     "diagram": 1,
@@ -26648,6 +29014,28 @@
   "illustration": "illustrations/gasket.webp"
  },
  {
+  "oem": "N0111513",
+  "oem_display": "N 011 151 3",
+  "name": "Wiper Arm Nut",
+  "part_type": "wiper arm nut",
+  "system": "wiper and washer",
+  "price_usd": 1.96,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Wiper Arm",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/203c8255ddcb6a31a1fbf9b5461aadfc/0f198509064d05a6c70a6419645c2d2c.png",
+    "callout": 3
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wiper-arm-nut-n0111513",
+  "illustration": "illustrations/nut.webp"
+ },
+ {
   "oem": "N10609204",
   "oem_display": "N 106 092 04",
   "name": "Wiper Arm Nut",
@@ -26697,6 +29085,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Wiper Arm",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/203c8255ddcb6a31a1fbf9b5461aadfc/0f198509064d05a6c70a6419645c2d2c.png",
+    "callout": 3
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
     "diagram": 1,
@@ -26720,6 +29116,14 @@
   "price_usd": 3.38,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Wiper Arm",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/203c8255ddcb6a31a1fbf9b5461aadfc/0f198509064d05a6c70a6419645c2d2c.png",
+    "callout": 2
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
@@ -26788,6 +29192,14 @@
   "price_usd": 13.57,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Wiper Arm",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/203c8255ddcb6a31a1fbf9b5461aadfc/0f198509064d05a6c70a6419645c2d2c.png",
+    "callout": 5
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
@@ -26931,6 +29343,30 @@
   "illustration": "illustrations/wiper-blade.webp"
  },
  {
+  "oem": "6N0955427A",
+  "oem_display": "6N0 955 427 A",
+  "name": "Wiper Blade",
+  "part_type": "wiper blade",
+  "system": "wiper and washer",
+  "price_usd": null,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Wiper Arm",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/203c8255ddcb6a31a1fbf9b5461aadfc/0f198509064d05a6c70a6419645c2d2c.png",
+    "callout": 5
+   }
+  ],
+  "notes": [
+   "Vendor:valeo. With wear indicator. Incl.Wear Indicator. To Chassis/VIN 9M-5-149 999. 475mm. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-wiper-blade-6n0955427a) 5"
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wiper-blade-6n0955427a",
+  "illustration": "illustrations/wiper-blade.webp"
+ },
+ {
   "oem": "1J0955429A",
   "oem_display": "1J0 955 429 A",
   "name": "Wiper Blade Refill",
@@ -26964,6 +29400,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Wiper Arm",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/203c8255ddcb6a31a1fbf9b5461aadfc/0f198509064d05a6c70a6419645c2d2c.png",
+    "callout": 6
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
     "diagram": 1,
@@ -26973,7 +29417,8 @@
    }
   ],
   "notes": [
-   "Without wear indicator. 550mm. Coupe,. Convertible,. Vendor:bosch. Without R32. Valeo. From Chassis/VIN 1C-4-418 301. To Chassis/VIN 1C-4-418 300. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-wiper-blade-refill-895955429a) 6"
+   "Without wear indicator. 550mm. Coupe,. Convertible,. Vendor:bosch. Without R32. Valeo. From Chassis/VIN 1C-4-418 301. To Chassis/VIN 1C-4-418 300. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-wiper-blade-refill-895955429a) 6",
+   "Without wear indicator. 550mm. Coupe,. Convertible,. Vendor:bosch. Without R32. Valeo. From Chassis/VIN 1C-4-418 301. To Chassis/VIN 1C-4-418 300. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-wiper-blade-refill-895955429a) 7"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wiper-blade-refill-895955429a",
   "illustration": "illustrations/wiper-blade-refill.webp"
@@ -26987,6 +29432,14 @@
   "price_usd": 121.98,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Wiper Arm",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/203c8255ddcb6a31a1fbf9b5461aadfc/0f198509064d05a6c70a6419645c2d2c.png",
+    "callout": 9
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
@@ -27034,6 +29487,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Wiper Arm",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/203c8255ddcb6a31a1fbf9b5461aadfc/0f198509064d05a6c70a6419645c2d2c.png",
+    "callout": 9
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
     "diagram": 1,
@@ -27058,6 +29519,14 @@
   "unavailable": false,
   "appears_on": [
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Wiper Arm",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/203c8255ddcb6a31a1fbf9b5461aadfc/0f198509064d05a6c70a6419645c2d2c.png",
+    "callout": 12
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
     "diagram": 1,
@@ -27081,6 +29550,14 @@
   "price_usd": 5.59,
   "unavailable": false,
   "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Wiper Arm",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/203c8255ddcb6a31a1fbf9b5461aadfc/0f198509064d05a6c70a6419645c2d2c.png",
+    "callout": 11
+   },
    {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
@@ -27119,6 +29596,28 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wiper-linkage-hardware-kit-1t0998754",
   "illustration": "illustrations/wiper-linkage-hardware.webp"
+ },
+ {
+  "oem": "1C0955119",
+  "oem_display": "1C0 955 119",
+  "name": "Wiper Motor",
+  "part_type": "wiper motor",
+  "system": "wiper and washer",
+  "price_usd": 182.97,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "wiper-and-washer--wiper-arm-blade-and-related-components",
+    "diagram": 1,
+    "diagram_name": "Wiper Arm",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/203c8255ddcb6a31a1fbf9b5461aadfc/0f198509064d05a6c70a6419645c2d2c.png",
+    "callout": 7
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-wiper-motor-1c0955119",
+  "illustration": "illustrations/wiper-motor.webp"
  },
  {
   "oem": "1Q1955119C",

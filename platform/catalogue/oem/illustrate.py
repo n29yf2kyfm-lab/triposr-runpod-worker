@@ -36,10 +36,12 @@ DESCRIBE = {
     'valve-lifters': 'three small cylindrical steel hydraulic valve lifters (tappets), shiny metal cups',
     'timing-cover': 'black moulded plastic engine timing belt cover, a long flat curved shroud with bolt holes',
     'valve-keeper': 'pair of tiny half-cone steel valve keepers (collets) next to a valve spring retainer',
+    'suspension-control-arm-bushing': 'round rubber-and-steel suspension bushing: a short steel sleeve inside a thick black rubber cylinder inside an outer steel ring',
+    'spindle': 'cast iron front suspension steering knuckle with wheel spindle, strut mounting ears and ball joint boss',
 }
 # FLUX schnell drew these wrong three times over (drive axles for both shafts,
-# a belt for the cover). No picture is better than a wrong one: never generated.
-NO_IMAGE = {'balance-shaft', 'crankshaft', 'timing-cover'}
+# a belt for the cover, a bracket for the spindle). No picture is better than a wrong one: never generated.
+NO_IMAGE = {'balance-shaft', 'crankshaft', 'timing-cover', 'spindle'}
 
 
 def illustration_key(part_type):
