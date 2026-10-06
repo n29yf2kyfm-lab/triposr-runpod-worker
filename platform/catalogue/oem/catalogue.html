@@ -391,6 +391,16 @@ function renderFilters(){
     `<button class="chip" data-s="${esc(s)}" aria-pressed="${state.sys.has(s)}">${esc(s)} <span class="n">${sc[s]}</span></button>`).join('');
 }
 
+const yr = (lo, hi) => lo === hi ? `${lo}` : `${lo}–${String(hi).slice(-2)}`;
+function fitsShort(f){ return f.length ? `${f[0][0]} ${yr(f[0][1], f[0][2])}${f.length > 1 ? ` +${f.length - 1} more` : ''}` : ''; }
+
+/* part-page detail (trims, engines, diagrams) in 64 bundles, fetched when a part opens */
+const prodPacks = {};
+function loadProd(oem){
+  const i = picBucketN(oem, 64), name = `prod/b${String(i).padStart(2, '0')}.json`;
+  return (prodPacks[i] ||= fetch(name).then(r => r.ok ? r.json() : {}).catch(() => ({}))).then(p => p[oem]);
+}
+
 function card(p){
   const ys = partYears(p);
   return `<button class="card" data-oem="${esc(p.oem)}">
@@ -398,7 +408,7 @@ function card(p){
     <div class="body">
       <span class="oem">${esc(p.oem_display)}</span>
       <span class="name">${esc(p.name)}</span>
-      <span class="meta"><span>${esc(p.system)}${ys.length ? ' · ' + esc(yearsText(ys)) : ''}</span>
+      <span class="meta"><span>${esc(p.system)}${p.fits ? ' · ' + esc(fitsShort(p.fits)) : ys.length ? ' · ' + esc(yearsText(ys)) : ''}</span>
       ${p.unavailable ? '<span class="pill">Unavailable</span>' : ''}</span>
     </div></button>`;
 }
@@ -418,10 +428,11 @@ function renderParts(){
 /* ---------- pictures: packed into 32 bundles (an artifact holds at most 511 files) ---------- */
 const PIC_BUCKETS = 32, picPacks = {};
 const CRC = (() => { const t = []; for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
-function picBucket(key){   // must match pack_pictures.py: crc32(key) % 32
+function picBucketN(key, n){   // crc32(key) % n, as in pack_pictures.py and pack_products.py
   let c = 0xFFFFFFFF; for (const ch of new TextEncoder().encode(key)) c = CRC[(c ^ ch) & 0xFF] ^ (c >>> 8);
-  return ((c ^ 0xFFFFFFFF) >>> 0) % PIC_BUCKETS;
+  return ((c ^ 0xFFFFFFFF) >>> 0) % n;
 }
+function picBucket(key){ return picBucketN(key, PIC_BUCKETS); }
 function picKey(path){ return path.replace(/^.*\//, '').replace(/\.webp$/, ''); }
 function loadPack(i){
   const name = `pics/b${String(i).padStart(2, '0')}.json`;
@@ -459,9 +470,16 @@ function openPart(oem){
       <dl class="kv">
         <div><dt>System</dt><dd>${esc(p.system)}${p.system_guessed && p.system !== 'not yet sorted' ? ' <small>· guessed from the name</small>' : ''}</dd></div>
         ${p.unavailable ? '<div><dt>Dealer status</dt><dd><span class="pill">Unavailable</span></dd></div>' : ''}
-        <div><dt>Fits</dt><dd>${p.appears_on.length ? new Set(p.appears_on.map(a => a.vehicle)).size + ' catalogued car(s)' : 'Not collected yet'}</dd></div>
+        ${p.position ? `<div><dt>Position</dt><dd>${esc(p.position)}</dd></div>` : ''}
+        ${p.other_names ? `<div><dt>Dealer short name</dt><dd>${esc(p.other_names)}</dd></div>` : ''}
+        ${p.category ? `<div><dt>Dealer category</dt><dd>${esc(p.category)}</dd></div>` : ''}
+        ${p.superseded ? `<div><dt>Replaces</dt><dd>${p.superseded.map(esc).join(', ')}</dd></div>` : ''}
+        ${p.dealer_gone ? '<div><dt>Dealer status</dt><dd>No longer listed by the dealer</dd></div>' : p.fits || p.appears_on.length ? '' : '<div><dt>Fits</dt><dd>Not collected yet</dd></div>'}
       </dl>
-      ${p.appears_on.length ? '' : '<p class="note">This number comes from the dealer\'s list of every VW part. Which cars it fits is filled in as each car\'s catalogue pages are crawled.</p>'}
+      ${p.fitment_notes ? `<p class="note"><b>Fitment note:</b> ${esc(p.fitment_notes)}</p>` : ''}
+      ${p.fits ? `<div class="sec"><h4>Fits (every VW, from the part's own page)</h4><div class="scroll" id="fitall"><table class="fits"><thead><tr><th>Model</th><th>Years</th></tr></thead><tbody>
+        ${p.fits.map(([m, lo, hi]) => `<tr><td>${esc(m)}</td><td>${yr(lo, hi)}</td></tr>`).join('')}</tbody></table></div></div>` : ''}
+      ${p.fits || p.appears_on.length ? '' : '<p class="note">This number comes from the dealer\'s list of every VW part. Which cars it fits is filled in as each part\'s page is collected.</p>'}
       <div class="sec" ${p.appears_on.length ? '' : 'hidden'}><h4>Where it appears</h4><div class="scroll"><table class="fits">
         <thead><tr><th>Car</th><th>Section · drawing</th><th>Callout</th></tr></thead><tbody>${rows}</tbody></table></div>
         <p class="note" style="margin-top:6px">Drawing links open the dealer's exploded diagram; the callout is the number on that drawing.</p></div>
@@ -470,6 +488,11 @@ function openPart(oem){
     </div></div>`;
   $('#dlg').showModal();
   $('#dlg').querySelectorAll('img[data-pic]').forEach(fillPic);
+  if (p.detail) loadProd(p.oem).then(d => {
+    const box = $('#fitall'); if (!d || !box || !$('#dlg').open) return;
+    box.innerHTML = `<table class="fits"><thead><tr><th>Year</th><th>Model · trims</th><th>Engine</th></tr></thead><tbody>${
+      d.fits.map(([y, m, t, e]) => `<tr><td>${y}</td><td>${esc(m)}<br><small style="color:var(--muted)">${esc(t)}</small></td><td>${esc(e)}</td></tr>`).join('')}</tbody></table>`;
+  });
 }
 
 /* ---------- VIN box ---------- */
@@ -557,7 +580,7 @@ async function load(){
   state.vehicles.forEach(v => state.vmap[v.slug] = v);
   parts.forEach(p => {
     p._oem = norm(p.oem);
-    p._text = [p.oem_display, p.name, p.part_type, p.system, ...(p.notes || [])].join(' ').toLowerCase();
+    p._text = [p.oem_display, p.name, p.part_type, p.system, p.other_names || '', p.category || '', ...(p.fits || []).map(f => f[0]), ...(p.notes || [])].join(' ').toLowerCase();
     p._veh = new Set(p.appears_on.map(a => a.vehicle)).size;
   });
   state.parts = parts;

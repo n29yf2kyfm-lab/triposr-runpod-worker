@@ -94,6 +94,33 @@ def main():
                       'system': guess.most_common(1)[0][0] if guess else 'not yet sorted',
                       'system_guessed': True, 'unavailable': False, 'appears_on': [], 'notes': set(),
                       'source': url, 'illustration': None}
+    # Part pages (ingest_products.py): full VW fitment and the dealer's details.
+    # The list carries a compact summary — model and year range — and the
+    # full rows go to the page in lazily loaded bundles (pack_products.py).
+    for f in glob.glob(os.path.join(HERE, 'products', '*.json')):
+        d = json.load(open(f))
+        e = parts.get(d['oem'])
+        if not e:
+            continue
+        if d.get('gone'):
+            e['dealer_gone'] = True
+            continue
+        rng = {}
+        for y, model, cfg, eng in d['fits']:
+            lo, hi = rng.get(model, (y, y))
+            rng[model] = (min(lo, y), max(hi, y))
+        e['fits'] = sorted([m, lo, hi] for m, (lo, hi) in rng.items())
+        e['detail'] = True
+        for k in ('other_names', 'position', 'fitment_notes'):
+            if d.get(k):
+                e[k] = d[k]
+        if d.get('superseded'):
+            e['superseded'] = d['superseded']
+        if d.get('category'):
+            e['category'] = d['category']
+            if e.get('system_guessed'):
+                e['system'] = d['category'].split(' > ')[0].lower()
+                e['system_guessed'] = False
     img_dir = os.path.join(HERE, 'illustrations')
     for e in parts.values():
         e['notes'] = sorted(e['notes'])
@@ -105,23 +132,27 @@ def main():
     # parts.json: parts with crawled fitment, full records. parts_more.json: the
     # sitemap-only parts as compact rows [oem, display, name, part_type, system,
     # url slug, illustration] so the page stays light enough for a phone.
-    json.dump([e for e in out if not e.get('system_guessed')], open(os.path.join(HERE, 'parts.json'), 'w'),
+    compact = lambda e: not e['appears_on'] and not e.get('detail') and not e.get('dealer_gone')
+    json.dump([e for e in out if not compact(e)], open(os.path.join(HERE, 'parts.json'), 'w'),
               separators=(',', ':'))
     pre = 'https://vw.oempartsonline.com/oem-parts/volkswagen-'
     json.dump([[e['oem'], e['oem_display'], e['name'], e['part_type'], e['system'],
-                e['source'][len(pre):], e['illustration'] or ''] for e in out if e.get('system_guessed')],
+                e['source'][len(pre):], e['illustration'] or ''] for e in out if compact(e)],
               open(os.path.join(HERE, 'parts_more.json'), 'w'), separators=(',', ':'))
     with open(os.path.join(HERE, 'parts.csv'), 'w', newline='') as fh:
         w = csv.writer(fh)
         w.writerow(['oem', 'oem_display', 'name', 'part_type', 'system', 'unavailable',
-                    'vehicles', 'drawing_callouts', 'notes', 'illustration', 'source'])
+                    'vehicles', 'fits_all_vw', 'drawing_callouts', 'notes', 'illustration', 'source'])
         for e in out:
             w.writerow([e['oem'], e['oem_display'], e['name'], e['part_type'], e['system'],
                         e['unavailable'], ' | '.join(sorted({a['vehicle'] for a in e['appears_on']})),
+                        ' | '.join(f'{m} {lo}-{hi}' if lo != hi else f'{m} {lo}' for m, lo, hi in e.get('fits', [])),
                         ' | '.join(f"{a['diagram_name'] or a['category']} #{a['callout']}" for a in e['appears_on']),
                         ' / '.join(e['notes'])[:500], e['illustration'] or '', e['source']])
     types = sorted({e['part_type'] for e in out})
-    print(f'CATALOGUE {len(vehicles)} vehicles, {len(out)} OEM numbers ({crawled} with fitment), {len(types)} part types, '
+    nfit = sum(1 for e in out if e['appears_on'] or e.get('detail'))
+    print(f'CATALOGUE {len(out)} OEM numbers, {nfit} with fitment ({sum(1 for e in out if e.get("detail"))} from part pages), '
+          f'{len(types)} part types, '
           f'{sum(1 for e in out if e["illustration"])} illustrated')
     return 0
 
