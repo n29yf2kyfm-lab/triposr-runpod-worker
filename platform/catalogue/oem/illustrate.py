@@ -119,7 +119,11 @@ def main():
         sys.exit('FAL_KEY is not set and is not in /root/.alam3d_env')
     os.makedirs(OUT, exist_ok=True)
     parts = json.load(open(os.path.join(HERE, 'parts.json')))
-    keys = sorted({illustration_key(p['part_type']) for p in parts})
+    types = {p['part_type'] for p in parts}
+    more = os.path.join(HERE, 'parts_more.json')   # compact rows; part_type is index 3
+    if os.path.exists(more):
+        types |= {r[3] for r in json.load(open(more))}
+    keys = sorted({illustration_key(t) for t in types})
     if opt.get('only'):
         keys = [k for k in keys if k in opt['only'].split(',')]
     force = set(opt.get('force', '').split(',')) - {''}
