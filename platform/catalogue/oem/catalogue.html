@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Golf Parts Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ground:#F2F4F6; --surface:#FFFFFF; --sunk:#E8ECF0; --line:#D3DAE1;
+  --ink:#16212C; --muted:#5A6977; --faint:#8794A1;
+  --accent:#1D4F8F; --accent-ink:#FFFFFF; --accent-soft:#DFE8F4;
+  --amber:#9A6412; --amber-soft:#F6EAD3;
+  --good:#23704A; --bad:#A3352B; --bad-soft:#F6DEDA;
+  --shadow:0 1px 2px rgba(22,33,44,.06),0 4px 14px rgba(22,33,44,.06);
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0E141A; --surface:#161F28; --sunk:#1D2832; --line:#2A3743;
+    --ink:#E4EAF0; --muted:#9AA8B5; --faint:#6E7C89;
+    --accent:#86B4EE; --accent-ink:#0E141A; --accent-soft:#1E3149;
+    --amber:#E3AE5A; --amber-soft:#3A2D18;
+    --good:#6CC394; --bad:#EE8B80; --bad-soft:#3E211E;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0E141A; --surface:#161F28; --sunk:#1D2832; --line:#2A3743;
+  --ink:#E4EAF0; --muted:#9AA8B5; --faint:#6E7C89;
+  --accent:#86B4EE; --accent-ink:#0E141A; --accent-soft:#1E3149;
+  --amber:#E3AE5A; --amber-soft:#3A2D18;
+  --good:#6CC394; --bad:#EE8B80; --bad-soft:#3E211E;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font:15px/1.5 var(--body);-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 16px}
+
+/* masthead */
+header.top{background:var(--surface);border-bottom:1px solid var(--line)}
+.top .wrap{display:grid;gap:14px;padding-top:18px;padding-bottom:16px}
+.brand{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+h1{font:700 34px/1 var(--display);letter-spacing:.01em;margin:0;text-transform:uppercase}
+h1 span{color:var(--accent)}
+.stats{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+.stats b{font:600 15px var(--mono);color:var(--ink);font-variant-numeric:tabular-nums}
+.tools{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:12px}
+@media (max-width:760px){.tools{grid-template-columns:1fr}}
+.field{display:flex;align-items:center;gap:8px;background:var(--sunk);border:1px solid var(--line);border-radius:8px;padding:0 10px;height:44px}
+.field:focus-within{border-color:var(--accent);background:var(--surface)}
+.field label{font:600 12px var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.field input{flex:1;min-width:0;border:0;background:transparent;height:100%;outline:0}
+.field input.mono{font-family:var(--mono);letter-spacing:.04em;text-transform:uppercase}
+.field button{border:0;background:var(--accent);color:var(--accent-ink);border-radius:6px;padding:5px 12px;font-weight:600;cursor:pointer}
+
+nav.tabs{display:flex;gap:4px}
+nav.tabs button{border:0;background:transparent;padding:8px 14px 10px;font:600 17px var(--display);letter-spacing:.04em;text-transform:uppercase;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+
+/* VIN result */
+.vin{margin:0 0 18px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:10px;box-shadow:var(--shadow)}
+.vin h2{font:600 18px var(--display);letter-spacing:.04em;text-transform:uppercase;margin:0}
+.kv{display:flex;flex-wrap:wrap;gap:8px 22px}
+.kv div{display:grid}
+.kv dt{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.kv dd{margin:0;font-weight:600}
+.kv dd small{font-weight:400;color:var(--muted);font-size:12px}
+.note{color:var(--muted);font-size:13px;margin:0}
+.vin .actions{display:flex;gap:8px;flex-wrap:wrap}
+
+/* layout */
+main{padding:18px 0 40px}
+.parts-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:22px;align-items:start}
+@media (max-width:900px){.parts-layout{grid-template-columns:1fr}}
+aside.filters{display:grid;gap:18px;position:sticky;top:12px}
+@media (max-width:900px){
+  aside.filters{position:static;gap:12px}
+  .vlist,.filters .chips{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:6px;padding-bottom:4px;scrollbar-width:thin}
+  .vbtn{flex:0 0 auto;grid-template-columns:auto auto;border-color:var(--line);background:var(--surface)}
+  .vbtn .n{display:none}
+  .filters .chip{flex:0 0 auto}
+}
+.fgroup h3{font:600 13px var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 11px;font-size:13px;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.chip .n{font:500 11px var(--mono);color:var(--faint)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.chip[aria-pressed="true"] .n{color:inherit;opacity:.8}
+.vlist{display:grid;gap:4px}
+.vbtn{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:baseline;border:1px solid transparent;background:transparent;border-radius:7px;padding:6px 8px;text-align:left;cursor:pointer}
+.vbtn:hover{background:var(--sunk)}
+.vbtn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent)}
+.vbtn .yr{font:600 14px var(--mono)}
+.vbtn .nm{font-size:13px;line-height:1.25}
+.vbtn .nm small{display:block;color:var(--muted);font-size:12px}
+.vbtn .n{font:500 11px var(--mono);color:var(--faint)}
+
+.resultbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.resultbar p{margin:0;color:var(--muted);font-size:14px}
+.resultbar p b{color:var(--ink);font-variant-numeric:tabular-nums}
+.resultbar select{border:1px solid var(--line);background:var(--surface);border-radius:7px;padding:5px 8px;font-size:13px}
+.linkbtn{border:0;background:none;color:var(--accent);cursor:pointer;padding:0;font-size:13px;text-decoration:underline}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:grid;grid-template-rows:auto 1fr;cursor:pointer;text-align:left;padding:0;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent)}
+@media (prefers-reduced-motion:no-preference){.card:hover{transform:translateY(-1px)}}
+.thumb{position:relative;aspect-ratio:4/3;background:#E9ECEF;overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.badge{position:absolute;left:8px;top:8px;background:var(--amber-soft);color:var(--amber);font:600 10.5px var(--body);letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px}
+.card .body{padding:10px 12px 12px;display:grid;gap:4px;align-content:start}
+.oem{font:600 14.5px var(--mono);color:var(--accent);letter-spacing:.02em}
+.card .name{font-weight:600;line-height:1.3}
+.card .meta{display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:12.5px;margin-top:4px}
+.price{font:600 13px var(--mono);color:var(--ink);font-variant-numeric:tabular-nums}
+.pill{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.04em;padding:1px 7px;border-radius:999px;background:var(--bad-soft);color:var(--bad)}
+.empty{padding:40px 16px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:10px}
+.more{display:block;margin:16px auto 0;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:8px 18px;cursor:pointer;font-weight:600}
+
+/* detail */
+dialog{border:0;padding:0;border-radius:14px;background:var(--surface);color:var(--ink);width:min(860px,calc(100vw - 32px));max-height:calc(100vh - 32px);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(10,16,22,.55)}
+.dlg{display:grid;grid-template-columns:300px minmax(0,1fr)}
+@media (max-width:700px){.dlg{grid-template-columns:1fr}}
+.dlg .pic{position:relative;background:#E9ECEF;min-height:220px}
+.dlg .pic img{width:100%;height:100%;object-fit:cover;display:block}
+.dlg .pic .cap{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(0,0,0,.55));color:#fff;font-size:12px;padding:20px 12px 10px}
+.dlg .info{padding:18px 20px 20px;display:grid;gap:14px;align-content:start;overflow:auto;max-height:calc(100vh - 32px)}
+.dlg .close{position:absolute;right:12px;top:10px;border:0;background:var(--sunk);border-radius:999px;width:34px;height:34px;cursor:pointer;font-size:18px;line-height:1}
+.bigoem{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.bigoem .oem{font-size:24px}
+.copy{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:3px 9px;font-size:12px;cursor:pointer}
+.dlg h2{font:600 26px/1.1 var(--display);margin:0}
+.sec h4{font:600 12px var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.fits{width:100%;border-collapse:collapse;font-size:13px}
+.fits th{text-align:left;font-weight:500;color:var(--faint);font-size:11px;letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid var(--line);padding:4px 6px}
+.fits td{border-bottom:1px solid var(--line);padding:6px;vertical-align:top}
+.fits td.c{font:600 13px var(--mono);text-align:center;color:var(--accent)}
+.scroll{overflow-x:auto}
+.notes{margin:0;padding-left:18px;color:var(--ink);font-size:13.5px}
+.notes li{margin:2px 0}
+
+/* torques */
+.tq-layout{display:grid;gap:14px}
+.tq-bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.tq-bar .field{flex:1;min-width:240px}
+.toggle{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--muted);cursor:pointer}
+.asm{background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.asm summary{list-style:none;cursor:pointer;padding:12px 14px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center}
+.asm summary::-webkit-details-marker{display:none}
+.asm summary .crumb{font-size:12px;color:var(--faint)}
+.asm summary .t{font-weight:600}
+.asm summary .tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.tag{font:500 11.5px var(--mono);padding:2px 7px;border-radius:5px;background:var(--sunk);color:var(--muted);white-space:nowrap}
+.tag.t1{background:var(--accent-soft);color:var(--accent)}
+.tag.t2{background:var(--amber-soft);color:var(--amber)}
+.asm[open] summary{border-bottom:1px solid var(--line)}
+.asm .inner{padding:8px 14px 14px}
+.tq{width:100%;border-collapse:collapse;font-size:13.5px}
+.tq th{text-align:left;font-weight:500;color:var(--faint);font-size:11px;letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid var(--line);padding:5px 6px}
+.tq td{border-bottom:1px solid var(--line);padding:6px;vertical-align:top}
+.tq td.n{font:600 13px var(--mono);color:var(--muted);width:2.5em}
+.tq td.v{font:600 13.5px var(--mono);white-space:nowrap;font-variant-numeric:tabular-nums}
+.tq td small{display:block;color:var(--muted);font-size:12px;line-height:1.4}
+.renew{display:inline-block;font:600 10.5px var(--body);letter-spacing:.05em;text-transform:uppercase;color:var(--amber);background:var(--amber-soft);padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:1px}
+.sechead{font:600 20px var(--display);letter-spacing:.03em;text-transform:uppercase;margin:12px 0 2px}
+
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+footer .wrap{padding-top:18px;padding-bottom:30px;display:grid;gap:6px;max-width:900px;margin:0 auto}
+footer p{margin:0}
+.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:var(--ink);color:var(--ground);padding:8px 14px;border-radius:8px;font-size:13px;z-index:20}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <h1>Golf <span>Parts</span> Desk</h1>
+      <div class="stats" id="stats" aria-live="polite">Loading catalogue…</div>
+    </div>
+    <div class="tools">
+      <div class="field">
+        <label for="q">Find</label>
+        <input id="q" type="search" placeholder="OEM number or part name — e.g. 5Q0 615 301, thermostat" autocomplete="off" spellcheck="false">
+      </div>
+      <form class="field" id="vinform" autocomplete="off">
+        <label for="vin">VIN</label>
+        <input id="vin" class="mono" maxlength="20" placeholder="17 characters" autocomplete="off" spellcheck="false">
+        <button type="submit">Decode</button>
+      </form>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button role="tab" id="tab-parts" aria-selected="true" aria-controls="view-parts">Parts</button>
+      <button role="tab" id="tab-torques" aria-selected="false" aria-controls="view-torques">Torques</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="view-parts" role="tabpanel" aria-labelledby="tab-parts">
+    <section class="vin" id="vinbox" hidden aria-live="polite"></section>
+    <div class="parts-layout">
+      <aside class="filters">
+        <div class="fgroup">
+          <h3>Vehicle</h3>
+          <div class="vlist" id="vehicles"></div>
+        </div>
+        <div class="fgroup">
+          <h3>System</h3>
+          <div class="chips" id="systems"></div>
+        </div>
+      </aside>
+      <div>
+        <div class="resultbar">
+          <p id="count"></p>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <button class="linkbtn" id="clear" hidden>Clear filters</button>
+            <select id="sort" aria-label="Sort parts">
+              <option value="system">Sort: system</option>
+              <option value="name">Sort: name</option>
+              <option value="oem">Sort: OEM number</option>
+              <option value="price">Sort: price, low first</option>
+              <option value="fits">Sort: fits most cars</option>
+            </select>
+            <button class="linkbtn" id="csv" hidden>Download these as CSV</button>
+          </div>
+        </div>
+        <div class="grid" id="grid"></div>
+        <button class="more" id="more" hidden>Show more</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-torques" role="tabpanel" aria-labelledby="tab-torques" hidden>
+    <div class="tq-layout">
+      <div class="tq-bar">
+        <div class="field">
+          <label for="tq-q">Search</label>
+          <input id="tq-q" type="search" placeholder="Drawing or part — e.g. brake caliper, wheel bearing, door" autocomplete="off">
+        </div>
+        <label class="toggle"><input type="checkbox" id="tq-all"> Show every numbered part, not only torques</label>
+      </div>
+      <p class="note" id="tq-count"></p>
+      <div id="tq-list"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b>OEM numbers</b> are copied from US Volkswagen dealer catalogue pages, never generated. A US number is a strong lead for a UK car, not a guarantee — right-hand drive, engines and trims differ. Prices are US dealer prices on the day they were collected.</p>
+    <p><b>Pictures are AI illustrations of the kind of part</b>, one per part type. They are not photographs of the part with that number.</p>
+    <p><b>Torques</b> come from the Golf Mk7 workshop manual's assembly overviews (vwgolf.org). Check the manual for your exact car before tightening anything.</p>
+    <p><b>Your VIN is decoded in this page and is never sent or stored.</b></p>
+  </div>
+</footer>
+
+<dialog id="dlg" aria-labelledby="dlg-title"></dialog>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+'use strict';
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const norm = s => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
+const money = v => v == null ? '' : '$' + v.toFixed(2);
+const PAGE = 48;
+
+const state = {parts: [], vehicles: [], vmap: {}, asm: [], q: '', veh: new Set(), sys: new Set(), sort: 'system', shown: PAGE, vinHits: null};
+
+/* ---------- VIN (port of platform/catalogue/vin/vin.py, offline) ---------- */
+const TRANS = {};
+'0123456789'.split('').forEach((c, i) => TRANS[c] = i);
+'ABCDEFGH'.split('').forEach((c, i) => TRANS[c] = i + 1);
+'JKLMN'.split('').forEach((c, i) => TRANS[c] = i + 1);
+TRANS.P = 7; TRANS.R = 9;
+'STUVWXYZ'.split('').forEach((c, i) => TRANS[c] = i + 2);
+const WEIGHTS = [8,7,6,5,4,3,2,10,0,9,8,7,6,5,4,3,2];
+const YEAR = 'ABCDEFGHJKLMNPRSTVWXY123456789';
+const WMI = {
+  WVW:['Volkswagen','Germany','car'], WV1:['Volkswagen','Germany','commercial'], WV2:['Volkswagen','Germany','bus/van'],
+  WVG:['Volkswagen','Germany','SUV'], '1VW':['Volkswagen','USA','car'], '3VW':['Volkswagen','Mexico','car'],
+  '9BW':['Volkswagen','Brazil','car'], WAU:['Audi','Germany','car'], WA1:['Audi','Germany','SUV'], TRU:['Audi','Hungary','car'],
+  VSS:['SEAT','Spain','car'], TMB:['Skoda','Czech Republic','car'], WP0:['Porsche','Germany','car'], WP1:['Porsche','Germany','SUV'],
+  WBA:['BMW','Germany','car'], WBS:['BMW M','Germany','car'], WMW:['MINI','Germany/UK','car'], WDD:['Mercedes-Benz','Germany','car'],
+  WDB:['Mercedes-Benz','Germany','car'], W1K:['Mercedes-Benz','Germany','car'], WF0:['Ford','Germany','car'], SFA:['Ford','UK','car'],
+  W0L:['Opel/Vauxhall','Germany','car'], VF1:['Renault','France','car'], VF3:['Peugeot','France','car'], VF7:['Citroen','France','car'],
+  ZFA:['Fiat','Italy','car'], SAJ:['Jaguar','UK','car'], SAL:['Land Rover','UK','SUV'], SB1:['Toyota','UK','car'],
+  JTD:['Toyota','Japan','car'], VNK:['Toyota','France','car'], SJN:['Nissan','UK','car'], JN1:['Nissan','Japan','car'],
+  SHH:['Honda','UK','car'], JHM:['Honda','Japan','car'], KMH:['Hyundai','Korea','car'], KNA:['Kia','Korea','car'],
+  JMZ:['Mazda','Japan','car'], YV1:['Volvo','Sweden','car'], TSM:['Suzuki','Hungary','car']
+};
+const VW_GROUP = new Set(['Volkswagen','Audi','SEAT','Skoda','Porsche']);
+const TYPE = {
+  '1J':'Golf Mk4 / Bora', '1K':'Golf Mk5 / Jetta Mk5', '5K':'Golf Mk6', AU:'Golf Mk7', CD:'Golf Mk8',
+  '6R':'Polo Mk5', '6C':'Polo Mk5 (facelift)', AW:'Polo Mk6', '5N':'Tiguan Mk1', '3C':'Passat B6/B7', '3G':'Passat B8',
+  '3H':'Arteon', A1:'T-Roc', '1T':'Touran Mk1', '5T':'Touran Mk2', '7N':'Sharan Mk2', '13':'Scirocco Mk3',
+  '8P':'Audi A3 Mk2', '8V':'Audi A3 Mk3', '8Y':'Audi A3 Mk4', '8X':'Audi A1 Mk1', '1Z':'Skoda Octavia Mk2',
+  '5E':'Skoda Octavia Mk3', NX:'Skoda Octavia Mk4', '1P':'SEAT Leon Mk2', '5F':'SEAT Leon Mk3', KL:'SEAT/Cupra Leon Mk4'
+};
+function checkDigit(v){
+  let s = 0; for (let i = 0; i < 17; i++) s += (TRANS[v[i]] || 0) * WEIGHTS[i];
+  s %= 11; return s === 10 ? 'X' : String(s);
+}
+function decodeVin(raw){
+  const v = String(raw).replace(/[\s-]/g, '').toUpperCase();
+  const out = {valid:false, f:{}, src:{}, notes:[]};
+  if (v.length !== 17 || /[^A-HJ-NPR-Z0-9]/.test(v)) { out.notes.push('That is not a 17-character VIN. VINs never use the letters I, O or Q.'); return out; }
+  out.valid = true;
+  const w = WMI[v.slice(0, 3)];
+  if (w) { [out.f.make, out.f.country, out.f.kind] = w; out.src.make = 'positions 1–3'; }
+  else out.notes.push(`Manufacturer code ${v.slice(0, 3)} is not in this page's table.`);
+  const yi = YEAR.indexOf(v[9]);
+  if (yi >= 0) {
+    const c = [1980 + yi, 2010 + yi];
+    out.f.year = ('12345'.includes(v[0]) && /\d/.test(v[6])) ? c[0] : (c[1] <= 2027 ? c[1] : c[0]);
+    out.src.year = 'position 10';
+  }
+  if (VW_GROUP.has(out.f.make)) {
+    const t = TYPE[v.slice(6, 8)];
+    if (t) { out.f.model = t; out.src.model = 'positions 7–8'; }
+    if (v.slice(3, 6) === 'ZZZ') out.notes.push('European VW VIN: trim and engine are not in the VIN. Confirm them from the V5C or the car.');
+  }
+  if ('12345'.includes(v[0]) && checkDigit(v) !== v[8]) out.notes.push('The check digit (position 9) does not match. Is a character mistyped?');
+  if ('12345'.includes(v[0])) out.notes.push('North-American VIN: trim and engine can be decoded with NHTSA (vin.py --online). This page does not contact NHTSA.');
+  return out;
+}
+function vinMatches(dec){
+  const f = dec.f, make = (f.make || '').toLowerCase(), model = (f.model || '').toLowerCase();
+  const fam = state.vehicles.filter(v => v.make.toLowerCase() === make && model && model.includes(v.model.toLowerCase().split(' ')[0]));
+  const exact = fam.filter(v => v.year === f.year);
+  let near = [];
+  if (!exact.length && fam.length && f.year) {
+    const years = [...new Set(fam.map(v => v.year))].sort((a, b) => Math.abs(a - f.year) - Math.abs(b - f.year));
+    near = fam.filter(v => years.slice(0, 2).includes(v.year));
+  }
+  return {exact, near};
+}
+
+/* ---------- parts ---------- */
+function vlabel(v){ return `${v.year} ${v.model} ${v.trim}`; }
+function partYears(p){ return [...new Set(p.appears_on.map(a => state.vmap[a.vehicle]?.year).filter(Boolean))].sort(); }
+function yearsText(ys){ if (!ys.length) return ''; return ys.length === 1 ? String(ys[0]) : ys.length === 2 ? ys.join(', ') : `${ys[0]}–${ys[ys.length - 1]} (${ys.length} cars)`; }
+
+function filtered(){
+  const q = state.q.trim(), nq = norm(q), words = q.toLowerCase().split(/\s+/).filter(Boolean);
+  const vset = state.vinHits ? new Set(state.vinHits) : state.veh;
+  let list = state.parts.filter(p => {
+    if (state.sys.size && !state.sys.has(p.system)) return false;
+    if (vset.size && !p.appears_on.some(a => vset.has(a.vehicle))) return false;
+    if (!q) return true;
+    if (nq.length >= 4 && p._oem.includes(nq)) return true;
+    return words.every(w => p._text.includes(w));
+  });
+  const by = {
+    system: (a, b) => a.system.localeCompare(b.system) || a.name.localeCompare(b.name),
+    name: (a, b) => a.name.localeCompare(b.name),
+    oem: (a, b) => a.oem.localeCompare(b.oem),
+    price: (a, b) => (a.price_usd ?? 1e9) - (b.price_usd ?? 1e9),
+    fits: (a, b) => b._veh - a._veh || a.name.localeCompare(b.name)
+  }[state.sort];
+  return list.sort(by);
+}
+
+function renderFilters(){
+  const counts = {};
+  state.parts.forEach(p => p.appears_on.forEach(a => counts[a.vehicle] = (counts[a.vehicle] || 0) + 1));
+  $('#vehicles').innerHTML = state.vehicles.map(v => {
+    const n = state.parts.filter(p => p.appears_on.some(a => a.vehicle === v.slug)).length;
+    return `<button class="vbtn" data-v="${esc(v.slug)}" aria-pressed="${state.veh.has(v.slug)}">
+      <span class="yr">${v.year}</span><span class="nm">${esc(v.model)} ${esc(v.trim)}<small>${esc(v.engine)} · ${esc(v.market)}</small></span><span class="n">${n}</span></button>`;
+  }).join('');
+  const sc = {};
+  state.parts.forEach(p => sc[p.system] = (sc[p.system] || 0) + 1);
+  $('#systems').innerHTML = Object.keys(sc).sort().map(s =>
+    `<button class="chip" data-s="${esc(s)}" aria-pressed="${state.sys.has(s)}">${esc(s)} <span class="n">${sc[s]}</span></button>`).join('');
+}
+
+function card(p){
+  const ys = partYears(p);
+  return `<button class="card" data-oem="${esc(p.oem)}">
+    <div class="thumb">${p.illustration ? `<img src="${esc(p.illustration)}" alt="" loading="lazy" width="512" height="512">` : ''}<span class="badge">Illustration</span></div>
+    <div class="body">
+      <span class="oem">${esc(p.oem_display)}</span>
+      <span class="name">${esc(p.name)}</span>
+      <span class="meta"><span>${esc(p.system)}${ys.length ? ' · ' + esc(yearsText(ys)) : ''}</span>
+      ${p.unavailable ? '<span class="pill">Unavailable</span>' : `<span class="price">${money(p.price_usd)}</span>`}</span>
+    </div></button>`;
+}
+
+function renderParts(){
+  const list = filtered();
+  const any = state.q || state.veh.size || state.sys.size || state.vinHits;
+  $('#clear').hidden = !any;
+  $('#count').innerHTML = `<b>${list.length}</b> of ${state.parts.length} OEM numbers`;
+  $('#grid').innerHTML = list.length ? list.slice(0, state.shown).map(card).join('')
+    : `<div class="empty">No part matches. Try fewer words, or the number without spaces.</div>`;
+  $('#more').hidden = list.length <= state.shown;
+  $('#more').textContent = `Show more (${list.length - state.shown} left)`;
+}
+
+function openPart(oem){
+  const p = state.parts.find(x => x.oem === oem); if (!p) return;
+  const rows = p.appears_on.map(a => {
+    const v = state.vmap[a.vehicle];
+    const cat = a.category.replace(/--/g, ' › ').replace(/-/g, ' ');
+    const dia = a.diagram_image ? `<a href="${esc(a.diagram_image)}" target="_blank" rel="noopener">${esc(a.diagram_name || 'drawing')}</a>` : esc(a.diagram_name || '');
+    return `<tr><td>${v ? `${v.year} ${esc(v.model)} ${esc(v.trim)}<br><small style="color:var(--muted)">${esc(v.engine)}</small>` : esc(a.vehicle)}</td>
+      <td>${esc(cat)}<br><small style="color:var(--muted)">${dia}</small></td><td class="c">${a.callout ?? ''}</td></tr>`;
+  }).join('');
+  $('#dlg').innerHTML = `<div class="dlg">
+    <div class="pic">${p.illustration ? `<img src="${esc(p.illustration)}" alt="AI illustration of a ${esc(p.part_type)}">` : ''}
+      <span class="badge">Illustration</span><div class="cap">AI image of this kind of part — not a photo of ${esc(p.oem_display)}.</div></div>
+    <div class="info">
+      <button class="close" aria-label="Close">×</button>
+      <div class="bigoem"><span class="oem">${esc(p.oem_display)}</span><button class="copy" data-copy="${esc(p.oem_display)}">Copy number</button></div>
+      <h2 id="dlg-title">${esc(p.name)}</h2>
+      <dl class="kv">
+        <div><dt>System</dt><dd>${esc(p.system)}</dd></div>
+        <div><dt>US dealer price</dt><dd>${p.unavailable ? '<span class="pill">Unavailable</span>' : (money(p.price_usd) || '—')}</dd></div>
+        <div><dt>Fits</dt><dd>${new Set(p.appears_on.map(a => a.vehicle)).size} catalogued car(s)</dd></div>
+      </dl>
+      <div class="sec"><h4>Where it appears</h4><div class="scroll"><table class="fits">
+        <thead><tr><th>Car</th><th>Section · drawing</th><th>Callout</th></tr></thead><tbody>${rows}</tbody></table></div>
+        <p class="note" style="margin-top:6px">Drawing links open the dealer's exploded diagram; the callout is the number on that drawing.</p></div>
+      ${p.notes.length ? `<div class="sec"><h4>Fitment notes (as printed by the dealer)</h4><ul class="notes">${p.notes.map(n => `<li>${esc(n)}</li>`).join('')}</ul></div>` : ''}
+      <div class="sec"><h4>Source</h4><a href="${esc(p.source)}" target="_blank" rel="noopener">Dealer catalogue page</a></div>
+    </div></div>`;
+  $('#dlg').showModal();
+}
+
+/* ---------- VIN box ---------- */
+function showVin(dec){
+  const box = $('#vinbox'); box.hidden = false;
+  if (!dec.valid) { box.innerHTML = `<h2>VIN</h2><p class="note">${esc(dec.notes[0])}</p>`; state.vinHits = null; renderParts(); return; }
+  const f = dec.f, m = vinMatches(dec);
+  const kv = [['Make', f.make, dec.src.make], ['Built in', f.country], ['Model year', f.year, dec.src.year], ['Platform', f.model, dec.src.model]]
+    .filter(r => r[1]).map(r => `<div><dt>${r[0]}</dt><dd>${esc(r[1])}${r[2] ? ` <small>· ${esc(r[2])}</small>` : ''}</dd></div>`).join('');
+  let msg = '', actions = '';
+  if (m.exact.length) {
+    state.vinHits = m.exact.map(v => v.slug);
+    msg = `Showing parts listed for ${m.exact.map(vlabel).map(esc).join(' and ')}. These fit the model and year — confirm the exact part for this car before ordering.`;
+  } else if (m.near.length) {
+    state.vinHits = null;
+    msg = `No ${esc(f.year)} ${esc(f.model)} is catalogued yet. The nearest catalogued years are below. They may be a different generation, so check before trusting a part.`;
+    actions = m.near.map(v => `<button class="chip" data-near="${esc(v.slug)}">${esc(vlabel(v))}</button>`).join('');
+  } else {
+    state.vinHits = null;
+    msg = f.make ? `This catalogue covers the VW Golf family so far, so it has no parts for this vehicle yet.` : '';
+  }
+  box.innerHTML = `<h2>VIN decoded</h2><dl class="kv">${kv || '<div><dd>Nothing could be read from this VIN.</dd></div>'}</dl>
+    ${msg ? `<p class="note">${msg}</p>` : ''}${actions ? `<div class="actions">${actions}</div>` : ''}
+    ${dec.notes.map(n => `<p class="note">${esc(n)}</p>`).join('')}
+    <div class="actions"><button class="linkbtn" id="vinclear">Clear VIN</button></div>`;
+  state.shown = PAGE; renderParts();
+}
+
+/* ---------- torques ---------- */
+const SECTION_ALIAS = {'4- cylinder injection engine(1.4 1 direct inction. turbocharger)': 'Engine — 1.4 TSI (4-cylinder, direct injection, turbo)'};
+function torqueText(p){
+  const t = p.torque_nm.map(x => `${+x % 1 ? x : x.toFixed(0)} Nm`).join(' / ');
+  const a = p.angle_deg.map(x => `+ ${x}°`).join(' ');
+  return [t, a].filter(Boolean).join(' ');
+}
+function isRenew(p){ return p.renew || p.notes.some(n => /^renew\b/i.test(n.trim())); }
+function renderTorques(){
+  const q = $('#tq-q').value.trim().toLowerCase(), all = $('#tq-all').checked;
+  const words = q.split(/\s+/).filter(Boolean);
+  const groups = new Map(); let shownAsm = 0, shownRows = 0;
+  for (const a of state.asm) {
+    const hay = (a.title + ' ' + a.path.join(' ')).toLowerCase();
+    const titleHit = words.every(w => hay.includes(w));
+    let rows = a.parts.filter(p => all || p.torque_nm.length || p.angle_deg.length || isRenew(p));
+    if (words.length && !titleHit) rows = rows.filter(p => words.every(w => (p.name + ' ' + p.notes.join(' ')).toLowerCase().includes(w)));
+    if (!rows.length) continue;
+    const sec = SECTION_ALIAS[a.path[1]] || a.path[1] || 'Other';
+    if (!groups.has(sec)) groups.set(sec, []);
+    groups.get(sec).push({a, rows}); shownAsm++; shownRows += rows.length;
+  }
+  $('#tq-count').textContent = `${shownAsm} drawings, ${shownRows} ${all ? 'numbered parts' : 'torque or replace-after-removal entries'}. Golf Mk7 workshop manual.`;
+  const open = words.length > 0;
+  $('#tq-list').innerHTML = [...groups.entries()].sort((x, y) => x[0].localeCompare(y[0])).map(([sec, items]) =>
+    `<h3 class="sechead">${esc(sec)}</h3>` + items.map(({a, rows}) => {
+      const nT = rows.filter(p => p.torque_nm.length).length, nR = rows.filter(isRenew).length;
+      return `<details class="asm"${open ? ' open' : ''}><summary>
+        <div><div class="crumb">${esc(a.path.slice(2).join(' › '))}</div><div class="t">${esc(a.title.replace(/^Assembly overview - /i, ''))}</div></div>
+        <div class="tags">${nT ? `<span class="tag t1">${nT} torque${nT > 1 ? 's' : ''}</span>` : ''}${nR ? `<span class="tag t2">${nR} renew</span>` : ''}</div></summary>
+        <div class="inner"><div class="scroll"><table class="tq"><thead><tr><th>#</th><th>Part</th><th>Tighten to</th></tr></thead><tbody>
+        ${rows.map(p => {
+          const notes = p.notes.filter(n => !/^renew after/i.test(n.trim()) && !/^\d+(\.\d+)?\s*Nm/i.test(n.trim()));
+          return `<tr><td class="n">${p.n}</td><td>${esc(p.name)}${isRenew(p) ? '<span class="renew">Renew after removal</span>' : ''}${notes.length ? `<small>${notes.map(esc).join('<br>')}</small>` : ''}</td><td class="v">${esc(torqueText(p)) || '—'}</td></tr>`;
+        }).join('')}</tbody></table></div>
+        <p class="note" style="margin-top:8px"><a href="${esc(a.url)}" target="_blank" rel="noopener">Open the drawing in the manual</a></p></div></details>`;
+    }).join('')).join('') || `<div class="empty">Nothing matches. Try one word, such as “caliper”.</div>`;
+}
+
+/* ---------- wiring ---------- */
+function toast(t){ const el = $('#toast'); el.textContent = t; el.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(() => el.hidden = true, 1600); }
+function tab(which){
+  const parts = which === 'parts';
+  $('#tab-parts').setAttribute('aria-selected', parts); $('#tab-torques').setAttribute('aria-selected', !parts);
+  $('#view-parts').hidden = !parts; $('#view-torques').hidden = parts;
+  if (!parts && !$('#tq-list').innerHTML) renderTorques();
+}
+
+async function load(){
+  const get = u => fetch(u).then(r => { if (!r.ok) throw new Error(u + ' ' + r.status); return r.json(); });
+  const [parts, vehicles] = await Promise.all([get('parts.json'), get('vehicles.json')]);
+  state.vehicles = vehicles.sort((a, b) => a.year - b.year || a.model.localeCompare(b.model));
+  state.vehicles.forEach(v => state.vmap[v.slug] = v);
+  parts.forEach(p => {
+    p._oem = norm(p.oem);
+    p._text = [p.oem_display, p.name, p.part_type, p.system, ...(p.notes || [])].join(' ').toLowerCase();
+    p._veh = new Set(p.appears_on.map(a => a.vehicle)).size;
+  });
+  state.parts = parts;
+  renderFilters(); renderParts();
+  const statsBase = `<span><b>${vehicles.length}</b> cars</span><span><b>${parts.length}</b> OEM numbers</span>`;
+  $('#stats').innerHTML = statsBase;
+  try {
+    state.asm = await get('assemblies.json');
+    const torques = state.asm.reduce((n, a) => n + a.parts.reduce((m, p) => m + p.torque_nm.length, 0), 0);
+    $('#stats').innerHTML = statsBase + `<span><b>${state.asm.length}</b> workshop drawings</span><span><b>${torques}</b> torques</span>`;
+  } catch (e) { $('#tab-torques').disabled = true; }
+}
+
+document.addEventListener('click', e => {
+  const t = e.target;
+  const vb = t.closest('.vbtn'); if (vb) { const s = vb.dataset.v; state.veh.has(s) ? state.veh.delete(s) : state.veh.add(s); state.vinHits = null; state.shown = PAGE; renderFilters(); renderParts(); return; }
+  const ch = t.closest('.chip[data-s]'); if (ch) { const s = ch.dataset.s; state.sys.has(s) ? state.sys.delete(s) : state.sys.add(s); state.shown = PAGE; renderFilters(); renderParts(); return; }
+  const nr = t.closest('.chip[data-near]'); if (nr) { state.veh = new Set([nr.dataset.near]); state.vinHits = null; state.shown = PAGE; renderFilters(); renderParts(); tab('parts'); return; }
+  const cd = t.closest('.card'); if (cd) { openPart(cd.dataset.oem); return; }
+  if (t.closest('.close')) { $('#dlg').close(); return; }
+  const cp = t.closest('.copy'); if (cp) { navigator.clipboard?.writeText(cp.dataset.copy).then(() => toast('Copied ' + cp.dataset.copy), () => toast('Copy failed — select the number instead')); return; }
+  if (t.id === 'vinclear') { $('#vin').value = ''; $('#vinbox').hidden = true; state.vinHits = null; renderParts(); return; }
+});
+$('#dlg').addEventListener('click', e => { if (e.target === $('#dlg')) $('#dlg').close(); });
+$('#q').addEventListener('input', e => { state.q = e.target.value; state.shown = PAGE; renderParts(); });
+$('#sort').addEventListener('change', e => { state.sort = e.target.value; renderParts(); });
+$('#more').addEventListener('click', () => { state.shown += PAGE; renderParts(); });
+$('#clear').addEventListener('click', () => { state.q = ''; $('#q').value = ''; state.veh.clear(); state.sys.clear(); state.vinHits = null; $('#vinbox').hidden = true; $('#vin').value = ''; state.shown = PAGE; renderFilters(); renderParts(); });
+$('#vinform').addEventListener('submit', e => { e.preventDefault(); showVin(decodeVin($('#vin').value)); tab('parts'); });
+$('#tab-parts').addEventListener('click', () => tab('parts'));
+$('#tab-torques').addEventListener('click', () => tab('torques'));
+let tqT; $('#tq-q').addEventListener('input', () => { clearTimeout(tqT); tqT = setTimeout(renderTorques, 150); });
+$('#tq-all').addEventListener('change', renderTorques);
+/* CSV of the parts currently listed — offered only where the viewer allows downloads */
+function csvCell(v){ v = String(v ?? ''); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }
+function partsCsv(list){
+  const head = ['oem', 'oem_display', 'name', 'part_type', 'system', 'price_usd', 'unavailable', 'vehicles', 'drawing_callouts', 'notes', 'source'];
+  const rows = list.map(p => [p.oem, p.oem_display, p.name, p.part_type, p.system, p.price_usd ?? '', p.unavailable,
+    [...new Set(p.appears_on.map(a => { const v = state.vmap[a.vehicle]; return v ? `${v.year} ${v.model} ${v.trim} ${v.engine}` : a.vehicle; }))].join(' | '),
+    p.appears_on.map(a => `${a.diagram_name || a.category} #${a.callout ?? ''}`).join(' | '),
+    (p.notes || []).join(' / '), p.source]);
+  return [head, ...rows].map(r => r.map(csvCell).join(',')).join('\n') + '\n';
+}
+(async () => {
+  const dl = await window.claude?.use?.('downloads').catch(() => null);
+  if (!dl) return;
+  const btn = $('#csv'); btn.hidden = false;
+  btn.addEventListener('click', async () => {
+    const list = filtered();
+    try { await dl.save({filename: `golf_oem_parts_${list.length}.csv`, data: partsCsv(list)}); toast(`Saved ${list.length} parts`); }
+    catch (e) {
+      if (e?.code === 'declined') return;
+      if (e?.code === 'rate_limited') { toast('A save is already waiting for you'); return; }
+      toast('Downloads are not available here'); btn.hidden = true;
+    }
+  });
+})();
+load().catch(err => { $('#stats').textContent = 'The catalogue data did not load.'; $('#grid').innerHTML = `<div class="empty">The catalogue data did not load (${esc(err.message)}).</div>`; });
+</script>
+</body>
+</html>

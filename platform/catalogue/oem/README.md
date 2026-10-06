@@ -18,6 +18,13 @@ type, and VIN lookup. Built 2026-10-06.
 Tools: `parse_revolution.py` (page → parts), `build_catalogue.py` (pages →
 parts/vehicles/CSV), `illustrate.py` (part types → images).
 
+`catalogue.html` is the browser page (published as the "Golf Parts Desk"
+artifact). It reads `parts.json`, `vehicles.json`, `illustrations/` and
+`assemblies.json` (the workshop file, published under that name) from beside
+itself. It searches by OEM number or name, filters by car and system,
+decodes a VIN offline, and lists the workshop torques. To test it locally,
+serve a folder holding those files and open the page.
+
 ## Where it comes from, and what that means
 
 - **OEM numbers** are copied from US VW dealer catalogue pages
