@@ -1414,6 +1414,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
     "callout": 7
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 7
    }
   ],
   "notes": [
@@ -1622,6 +1630,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
     "callout": 8
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 8
    }
   ],
   "notes": [],
@@ -1819,6 +1835,46 @@
   "illustration": "illustrations/gasket.webp"
  },
  {
+  "oem": "5Q0253115C",
+  "oem_display": "5Q0 253 115 C",
+  "name": "Converter & Pipe Gasket",
+  "part_type": "converter & pipe gasket",
+  "system": "air and fuel delivery",
+  "price_usd": 4.9,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "exhaust--exhaust-components",
+    "diagram": 1,
+    "diagram_name": "Converter & Pipe",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/542ee3aa566ad4036e4bfb330965ef69/b44fb4cdc22bd912c18308344198e02b.png",
+    "callout": 3
+   }
+  ],
+  "notes": [
+   "Outlet. 2024-26. GTI. 2022-23. Golf R."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-converter-and-pipe-gasket-5q0253115c",
+  "illustration": "illustrations/gasket.webp"
+ },
+ {
   "oem": "3B081635501C",
   "oem_display": "3B0 816 355 01C",
   "name": "Front Cover Valve",
@@ -1841,6 +1897,36 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-front-cover-valve-3b081635501c",
   "illustration": "illustrations/cover-valve.webp"
+ },
+ {
+  "oem": "06Q198751",
+  "oem_display": "06Q 198 751",
+  "name": "Cut-Off Valve",
+  "part_type": "cut off valve",
+  "system": "air and fuel delivery",
+  "price_usd": 119.76,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 4
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 4
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-cut-off-valve-6q198751",
+  "illustration": "illustrations/cut-off-valve.webp"
  },
  {
   "oem": "5K0819703KVAL",
@@ -4663,6 +4749,38 @@
   "illustration": "illustrations/exhaust-manifold.webp"
  },
  {
+  "oem": "06Q145702C",
+  "oem_display": "06Q 145 702 C",
+  "name": "Exhaust Manifold",
+  "part_type": "exhaust manifold",
+  "system": "air and fuel delivery",
+  "price_usd": 747.9,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 1
+   }
+  ],
+  "notes": [
+   "GTI. Incl.Integrated Exhaust Manifold. Turbocharger."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-manifold-6q145702c",
+  "illustration": "illustrations/exhaust-manifold.webp"
+ },
+ {
   "oem": "06K145536A",
   "oem_display": "06K 145 536 A",
   "name": "Exhaust Manifold Bracket",
@@ -5161,6 +5279,14 @@
     "callout": 17
    },
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 17
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
     "diagram": 1,
@@ -5209,6 +5335,14 @@
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--fuel-storage",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 13
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
@@ -5267,6 +5401,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
     "callout": 13
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 13
    }
   ],
   "notes": [],
@@ -5296,6 +5438,14 @@
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
+    "callout": 19
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 19
    },
    {
@@ -5581,6 +5731,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
     "callout": 11
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 11
    }
   ],
   "notes": [],
@@ -5610,6 +5768,14 @@
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
+    "callout": 14
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 14
    },
    {
@@ -6008,6 +6174,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
     "callout": 1
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 1
    }
   ],
   "notes": [
@@ -6037,6 +6211,14 @@
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--fuel-storage",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
@@ -6168,6 +6350,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
     "callout": 8
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 8
    }
   ],
   "notes": [
@@ -6199,6 +6389,14 @@
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
+    "callout": 7
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 7
    },
    {
@@ -6304,6 +6502,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
     "callout": 5
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 5
    }
   ],
   "notes": [
@@ -6332,6 +6538,14 @@
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--fuel-storage",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
@@ -6388,6 +6602,14 @@
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--fuel-storage",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 6
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
@@ -6513,6 +6735,14 @@
     "callout": 12
    },
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 12
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
     "diagram": 1,
@@ -6587,6 +6817,14 @@
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--fuel-storage",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 12
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
@@ -6743,6 +6981,14 @@
     "callout": 9
    },
    {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 9
+   },
+   {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
     "diagram": 1,
@@ -6885,6 +7131,14 @@
     "callout": 10
    },
    {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 10
+   },
+   {
     "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
     "diagram": 1,
@@ -6985,6 +7239,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
     "callout": 4
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 4
    }
   ],
   "notes": [
@@ -7037,6 +7299,14 @@
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--fuel-storage",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
@@ -7195,6 +7465,14 @@
     "callout": 4
    },
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
     "diagram": 1,
@@ -7246,6 +7524,14 @@
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
+    "callout": 3
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 3
    },
    {
@@ -7305,6 +7591,14 @@
     "callout": 2
    },
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 2
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
     "diagram": 1,
@@ -7358,6 +7652,14 @@
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
+    "callout": 5
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 5
    },
    {
@@ -7498,6 +7800,14 @@
    },
    {
     "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
     "category": "engine--turbocharger-and-components",
     "diagram": 1,
     "diagram_name": "Turbocharger",
@@ -7532,6 +7842,14 @@
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
+    "callout": 9
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 9
    },
    {
@@ -7587,6 +7905,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
     "callout": 7
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 7
    }
   ],
   "notes": [
@@ -7615,6 +7941,14 @@
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--fuel-storage",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
@@ -8683,6 +9017,14 @@
     "callout": 13
    },
    {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 13
+   },
+   {
     "vehicle": "v-2005-volkswagen-golf--gl--2-0l-l4-gas",
     "category": "air-and-fuel-delivery--fuel-pumps-and-related-components",
     "diagram": 1,
@@ -8733,6 +9075,14 @@
    {
     "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
     "category": "air-and-fuel-delivery--fuel-storage",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 12
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
@@ -8796,6 +9146,14 @@
     "diagram": 1,
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/e0e00dc4414c333e3da37b7884516b64/7c95edced5d4565945dec9eb7cb95988.png",
+    "callout": 6
+   },
+   {
+    "vehicle": "v-1999-volkswagen-golf--gl--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--hardware-fasteners-and-fittings",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 6
    },
    {
@@ -8923,6 +9281,14 @@
     "diagram_name": "Fuel Tank",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
     "callout": 2
+   },
+   {
+    "vehicle": "v-2012-volkswagen-golf--base--2-5l-l5-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Fuel Tank",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/07a41836aa02ad40d977c15f26ef1277/873276d0d73be2a45a68a45f5c4eddee.png",
+    "callout": 2
    }
   ],
   "notes": [
@@ -8953,7 +9319,7 @@
    "Awd. Gas."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-tank-strap-5q0201653a",
-  "illustration": null
+  "illustration": "illustrations/tank-strap.webp"
  },
  {
   "oem": "5Q0201654A",
@@ -8977,7 +9343,7 @@
    "Awd. Gas."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-tank-strap-5q0201654a",
-  "illustration": null
+  "illustration": "illustrations/tank-strap.webp"
  },
  {
   "oem": "5Q0201656G",
@@ -9047,7 +9413,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-tank-strap-5q0201656g",
-  "illustration": null
+  "illustration": "illustrations/tank-strap.webp"
  },
  {
   "oem": "1K0010833P",
@@ -9095,7 +9461,7 @@
    "Tire press label. Tire info label. Without e-Golf. 1.4L. 1.8L. 2021-22. TPMS control. Coupe, tire press monitor. 2.0L, gas with turbocharger. Monitor label."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-tire-information-label-1k0010833p",
-  "illustration": null
+  "illustration": "illustrations/tire-information-label.webp"
  },
  {
   "oem": "06H145710J",
@@ -9162,6 +9528,38 @@
   "illustration": "illustrations/turbocharger-boost-solenoid.webp"
  },
  {
+  "oem": "06Q145039B",
+  "oem_display": "06Q 145 039 B",
+  "name": "Turbocharger Brace",
+  "part_type": "turbocharger brace",
+  "system": "air and fuel delivery",
+  "price_usd": 0.6,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 3
+   }
+  ],
+  "notes": [
+   "2.0L, 2024-26. 2022-23."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-brace-6q145039b",
+  "illustration": "illustrations/turbocharger-brace.webp"
+ },
+ {
   "oem": "06K121492F",
   "oem_display": "06K 121 492 F",
   "name": "Turbocharger Coolant Line",
@@ -9221,6 +9619,102 @@
    "1.8 Liter. 2.0 Liter Engine Code CNTC. 2.0 Liter Gas. 2.0 Liter, Code CYFB Rear. Engine Coolant Hose. Turbocharger Coolant Line. Fits AllTrack, Golf, Golf R, Golf SportWagen, GTI, SportWagen 1.8 Liter. 2.0 Liter Gas, to 12/05/2016. 2.0 Liter, Code CYFB, Rear. Convertible, 1.8 Liter. Convertible, 2.0 Liter, Engine Code CNTC, to 12/05/2016. Gas. Sedan, 1.8 Liter. Sedan, 2.0 Liter Gas, to 12/05/2016. Sedan/Wagon, 2.0 Liter Gas, to 12/05/2016. Gas. 1.8L."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-coolant-line-6k121497bd",
+  "illustration": "illustrations/pipe.webp"
+ },
+ {
+  "oem": "06Q121085D",
+  "oem_display": "06Q 121 085 D",
+  "name": "Turbocharger Coolant Line",
+  "part_type": "turbocharger coolant line",
+  "system": "air and fuel delivery",
+  "price_usd": 18.93,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 8
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 8
+   }
+  ],
+  "notes": [
+   "Outer. GTI. Turbocharger Cooling. Outlet. Pipe to Pipe. Incl.Pipe. 2022-23 right side. Cooling pipe. Golf R."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-coolant-line-6q121085d",
+  "illustration": "illustrations/pipe.webp"
+ },
+ {
+  "oem": "06Q121492B",
+  "oem_display": "06Q 121 492 B",
+  "name": "Turbocharger Coolant Line",
+  "part_type": "turbocharger coolant line",
+  "system": "air and fuel delivery",
+  "price_usd": 18.0,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 7
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 7
+   }
+  ],
+  "notes": [
+   "Inner. Return tube. 2022-23, right side."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-coolant-line-6q121492b",
+  "illustration": "illustrations/pipe.webp"
+ },
+ {
+  "oem": "06Q121497D",
+  "oem_display": "06Q 121 497 D",
+  "name": "Turbocharger Coolant Line",
+  "part_type": "turbocharger coolant line",
+  "system": "air and fuel delivery",
+  "price_usd": 52.36,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 5
+   }
+  ],
+  "notes": [
+   "2.0L 2024-26. Turbocharger Cooling. Inlet. Incl.Pipe. 2022-23, right side, upper."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-coolant-line-6q121497d",
   "illustration": "illustrations/pipe.webp"
  },
  {
@@ -9320,6 +9814,36 @@
   "illustration": "illustrations/turbocharger-mount-heat-shield.webp"
  },
  {
+  "oem": "06K133833CA",
+  "oem_display": "06K 133 833 CA",
+  "name": "Turbocharger Mount Heat Shield",
+  "part_type": "turbocharger mount heat shield",
+  "system": "air and fuel delivery",
+  "price_usd": 13.04,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 13
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 13
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-mount-heat-shield-6k133833ca",
+  "illustration": "illustrations/turbocharger-mount-heat-shield.webp"
+ },
+ {
   "oem": "06K133833CH",
   "oem_display": "06K 133 833 CH",
   "name": "Turbocharger Mount Heat Shield",
@@ -9349,6 +9873,68 @@
    "Upper. 2.0L. oil inlet tube."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-mount-heat-shield-6k133833ch",
+  "illustration": "illustrations/turbocharger-mount-heat-shield.webp"
+ },
+ {
+  "oem": "06Q129597F",
+  "oem_display": "06Q 129 597 F",
+  "name": "Turbocharger Mount Heat Shield",
+  "part_type": "turbocharger mount heat shield",
+  "system": "air and fuel delivery",
+  "price_usd": 38.58,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 13
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 13
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-mount-heat-shield-6q129597f",
+  "illustration": "illustrations/turbocharger-mount-heat-shield.webp"
+ },
+ {
+  "oem": "06Q133833",
+  "oem_display": "06Q 133 833",
+  "name": "Turbocharger Mount Heat Shield",
+  "part_type": "turbocharger mount heat shield",
+  "system": "air and fuel delivery",
+  "price_usd": 11.87,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 13
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 13
+   }
+  ],
+  "notes": [
+   "Oil inlet tube."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-mount-heat-shield-6q133833",
   "illustration": "illustrations/turbocharger-mount-heat-shield.webp"
  },
  {
@@ -9477,6 +10063,68 @@
    "Oil feed tube. Jetta. Inlet. 1.4l. 1.4L without hybrid. Golf SportWagen. 1.4l."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-oil-line-4e145140as",
+  "illustration": "illustrations/pipe.webp"
+ },
+ {
+  "oem": "06Q145735F",
+  "oem_display": "06Q 145 735 F",
+  "name": "Turbocharger Oil Line",
+  "part_type": "turbocharger oil line",
+  "system": "air and fuel delivery",
+  "price_usd": 41.6,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 9
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 9
+   }
+  ],
+  "notes": [],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-oil-line-6q145735f",
+  "illustration": "illustrations/pipe.webp"
+ },
+ {
+  "oem": "06Q145778B",
+  "oem_display": "06Q 145 778 B",
+  "name": "Turbocharger Oil Line",
+  "part_type": "turbocharger oil line",
+  "system": "air and fuel delivery",
+  "price_usd": 30.02,
+  "unavailable": false,
+  "appears_on": [
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "air-and-fuel-delivery--gaskets-and-sealing-systems",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 9
+   },
+   {
+    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
+    "category": "engine--turbocharger-and-components",
+    "diagram": 1,
+    "diagram_name": "Turbocharger",
+    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
+    "callout": 9
+   }
+  ],
+  "notes": [
+   "Oil inlet tube. GTI. Feed."
+  ],
+  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-oil-line-6q145778b",
   "illustration": "illustrations/pipe.webp"
  },
  {
@@ -48741,7 +49389,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-rear-support-5g0809471",
-  "illustration": null
+  "illustration": "illustrations/support.webp"
  },
  {
   "oem": "5G0809561",
@@ -48763,7 +49411,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-front-support-5g0809561",
-  "illustration": null
+  "illustration": "illustrations/support.webp"
  },
  {
   "oem": "5G6804743A",
@@ -48785,7 +49433,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-outer-support-5g6804743a",
-  "illustration": null
+  "illustration": "illustrations/support.webp"
  },
  {
   "oem": "5G6804744A",
@@ -48807,7 +49455,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-outer-support-5g6804744a",
-  "illustration": null
+  "illustration": "illustrations/support.webp"
  },
  {
   "oem": "5GD898924Y20",
@@ -48831,7 +49479,7 @@
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-support-assembly-handle-5gd898924y20) 14"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-support-assembly-handle-5gd898924y20",
-  "illustration": null
+  "illustration": "illustrations/support-handle.webp"
  },
  {
   "oem": "5GD898924ZA2",
@@ -48855,7 +49503,7 @@
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-support-assembly-handle-5gd898924za2) 15"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-support-assembly-handle-5gd898924za2",
-  "illustration": null
+  "illustration": "illustrations/support-handle.webp"
  },
  {
   "oem": "5Q0198037A",
@@ -48910,7 +49558,7 @@
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-suspension-strut-tower-5q0809121) 9"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-suspension-strut-tower-5q0809121",
-  "illustration": null
+  "illustration": "illustrations/suspension-strut-tower.webp"
  },
  {
   "oem": "5Q0809122",
@@ -48943,7 +49591,7 @@
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-suspension-strut-tower-5q0809122) 9"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-suspension-strut-tower-5q0809122",
-  "illustration": null
+  "illustration": "illustrations/suspension-strut-tower.webp"
  },
  {
   "oem": "5Q0810812A",
@@ -48999,7 +49647,7 @@
    "Exc.Lane Departure Warning. Exc.Adaptive Cruise Control. Jetta. Arteon. 2019-20, without adaptive cruise. Without r, e-Golf."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-switch-5g0959442aaicx",
-  "illustration": null
+  "illustration": "illustrations/switch.webp"
  },
  {
   "oem": "5G0959777QWA",
@@ -49047,7 +49695,7 @@
    "GTI. Arteon. Golf SportWagen. Seat cushion components. without massage. Golf Alltrack. 4 door with r left side seat cushion components. Golf R. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-switch-5g0959777qwa) 25"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-switch-5g0959777qwa",
-  "illustration": null
+  "illustration": "illustrations/switch.webp"
  },
  {
   "oem": "8W0959747",
@@ -49095,7 +49743,7 @@
    "Without r, e-Golf, seat cushion components."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-switch-8w0959747",
-  "illustration": null
+  "illustration": "illustrations/switch.webp"
  },
  {
   "oem": "5GM8583411QB",
@@ -49127,7 +49775,7 @@
    "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-switch-bezel-5gm8583411qb) 3"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-switch-bezel-5gm8583411qb",
-  "illustration": null
+  "illustration": "illustrations/switch-bezel.webp"
  },
  {
   "oem": "5GM86834581U",
@@ -49175,7 +49823,7 @@
    "4 door. 2 door, black."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-switch-housing-5gm86834581u",
-  "illustration": null
+  "illustration": "illustrations/switch-housing.webp"
  },
  {
   "oem": "5GM868345ZE4",
@@ -49223,7 +49871,7 @@
    "4 DOOR. beige without e-Golf. 4 door, shetland. 2 door, beige."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-switch-housing-5gm868345ze4",
-  "illustration": null
+  "illustration": "illustrations/switch-housing.webp"
  },
  {
   "oem": "5G6813327A",
@@ -49245,7 +49893,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-lamp-pocket-5g6813327a",
-  "illustration": null
+  "illustration": "illustrations/tail-lamp-pocket.webp"
  },
  {
   "oem": "5G6813328A",
@@ -49267,7 +49915,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-tail-lamp-pocket-5g6813328a",
-  "illustration": null
+  "illustration": "illustrations/tail-lamp-pocket.webp"
  },
  {
   "oem": "5G4857619",
@@ -49299,7 +49947,7 @@
    "GTI. Left. Golf R."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-tensioner-5g4857619",
-  "illustration": null
+  "illustration": "illustrations/tensioner.webp"
  },
  {
   "oem": "5G4857620",
@@ -49331,7 +49979,7 @@
    "GTI. Right. Golf R."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-tensioner-5g4857620",
-  "illustration": null
+  "illustration": "illustrations/tensioner.webp"
  },
  {
   "oem": "N91215401",
@@ -49393,7 +50041,7 @@
    "Hook."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-tie-down-hook-1k08678359b9",
-  "illustration": null
+  "illustration": "illustrations/tie-down-hook.webp"
  },
  {
   "oem": "8V0863503C4PK",
@@ -49425,7 +50073,7 @@
    "Right side wheelhouse trim. Tie down."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-tie-down-hook-8v0863503c4pk",
-  "illustration": null
+  "illustration": "illustrations/tie-down-hook.webp"
  },
  {
   "oem": "N90969901",
@@ -52922,6 +53570,14 @@
     "diagram_name": "Start Button",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/879235afe80754158cfcd6769a3129c1/facc9a0d3a72a9223276892d7543a71e.png",
     "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--power-outlets",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 8
    }
   ],
   "notes": [
@@ -52954,6 +53610,14 @@
     "diagram_name": "Start Button",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/879235afe80754158cfcd6769a3129c1/facc9a0d3a72a9223276892d7543a71e.png",
     "callout": 8
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--power-outlets",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 8
    }
   ],
   "notes": [],
@@ -52983,6 +53647,14 @@
     "diagram": 1,
     "diagram_name": "Start Button",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/879235afe80754158cfcd6769a3129c1/facc9a0d3a72a9223276892d7543a71e.png",
+    "callout": 11
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--power-outlets",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 11
    }
   ],
@@ -53015,6 +53687,14 @@
     "diagram": 1,
     "diagram_name": "Start Button",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/879235afe80754158cfcd6769a3129c1/facc9a0d3a72a9223276892d7543a71e.png",
+    "callout": 9
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--power-outlets",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 9
    }
   ],
@@ -58225,6 +58905,14 @@
     "diagram_name": "Start Button",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/879235afe80754158cfcd6769a3129c1/facc9a0d3a72a9223276892d7543a71e.png",
     "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--power-outlets",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 3
    }
   ],
   "notes": [],
@@ -61406,10 +62094,19 @@
     "diagram_name": "Start Button",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/879235afe80754158cfcd6769a3129c1/facc9a0d3a72a9223276892d7543a71e.png",
     "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--power-outlets",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
    }
   ],
   "notes": [
-   "Arteon. Manual regulating a/c. GTI. SWITCHES. without climate control to 12/2014. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-hvac-temperature-control-panel-5g0907426bjwzu) 5"
+   "Arteon. Manual regulating a/c. GTI. SWITCHES. without climate control to 12/2014. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-hvac-temperature-control-panel-5g0907426bjwzu) 5",
+   "Arteon. Manual regulating a/c. GTI. SWITCHES. without climate control to 12/2014. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-hvac-temperature-control-panel-5g0907426bjwzu) 6"
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-hvac-temperature-control-panel-5g0907426bjwzu",
   "illustration": "illustrations/hvac-temperature-control-panel.webp"
@@ -61437,6 +62134,14 @@
     "diagram": 1,
     "diagram_name": "Start Button",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/879235afe80754158cfcd6769a3129c1/facc9a0d3a72a9223276892d7543a71e.png",
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--power-outlets",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 5
    }
   ],
@@ -61470,6 +62175,14 @@
     "diagram_name": "Start Button",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/879235afe80754158cfcd6769a3129c1/facc9a0d3a72a9223276892d7543a71e.png",
     "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--power-outlets",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
    }
   ],
   "notes": [
@@ -61501,6 +62214,14 @@
     "diagram": 1,
     "diagram_name": "Start Button",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/879235afe80754158cfcd6769a3129c1/facc9a0d3a72a9223276892d7543a71e.png",
+    "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--power-outlets",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 5
    }
   ],
@@ -61534,6 +62255,14 @@
     "diagram_name": "Start Button",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/879235afe80754158cfcd6769a3129c1/facc9a0d3a72a9223276892d7543a71e.png",
     "callout": 5
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--power-outlets",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 5
    }
   ],
   "notes": [
@@ -61565,6 +62294,14 @@
     "diagram": 1,
     "diagram_name": "Start Button",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/879235afe80754158cfcd6769a3129c1/facc9a0d3a72a9223276892d7543a71e.png",
+    "callout": 6
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--power-outlets",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 6
    }
   ],
@@ -61802,6 +62539,14 @@
     "diagram_name": "Start Button",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/879235afe80754158cfcd6769a3129c1/facc9a0d3a72a9223276892d7543a71e.png",
     "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--power-outlets",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 3
    }
   ],
   "notes": [
@@ -61833,6 +62578,14 @@
     "diagram": 1,
     "diagram_name": "Start Button",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/879235afe80754158cfcd6769a3129c1/facc9a0d3a72a9223276892d7543a71e.png",
+    "callout": 3
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--power-outlets",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 3
    }
   ],
@@ -61866,6 +62619,14 @@
     "diagram_name": "Start Button",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/879235afe80754158cfcd6769a3129c1/facc9a0d3a72a9223276892d7543a71e.png",
     "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--power-outlets",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 2
    }
   ],
   "notes": [
@@ -61897,6 +62658,14 @@
     "diagram": 1,
     "diagram_name": "Start Button",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/879235afe80754158cfcd6769a3129c1/facc9a0d3a72a9223276892d7543a71e.png",
+    "callout": 2
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--power-outlets",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 2
    }
   ],
@@ -62307,6 +63076,14 @@
     "diagram": 1,
     "diagram_name": "Start Button",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/879235afe80754158cfcd6769a3129c1/facc9a0d3a72a9223276892d7543a71e.png",
+    "callout": 1
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--power-outlets",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
     "callout": 1
    }
   ],
@@ -63543,13 +64320,21 @@
     "diagram_name": "Start Button",
     "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/879235afe80754158cfcd6769a3129c1/facc9a0d3a72a9223276892d7543a71e.png",
     "callout": 4
+   },
+   {
+    "vehicle": "v-2019-volkswagen-golf--s--1-4l-l4-gas",
+    "category": "electrical--power-outlets",
+    "diagram": 1,
+    "diagram_name": null,
+    "diagram_image": null,
+    "callout": 4
    }
   ],
   "notes": [
    "Golf R. PRK brake switch. Switches."
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-switch-5g0927225dwzu",
-  "illustration": null
+  "illustration": "illustrations/switch.webp"
  },
  {
   "oem": "171407277",
@@ -77615,7 +78400,7 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-thermo-fuse-443937105b",
-  "illustration": null
+  "illustration": "illustrations/thermo-fuse.webp"
  },
  {
   "oem": "5K0945257",
@@ -78406,38 +79191,6 @@
   "illustration": "illustrations/connecting-rod.webp"
  },
  {
-  "oem": "5Q0253115C",
-  "oem_display": "5Q0 253 115 C",
-  "name": "Converter & Pipe Gasket",
-  "part_type": "converter & pipe gasket",
-  "system": "engine",
-  "price_usd": 4.9,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
-    "callout": 2
-   },
-   {
-    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
-    "category": "exhaust--exhaust-components",
-    "diagram": 1,
-    "diagram_name": "Converter & Pipe",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/542ee3aa566ad4036e4bfb330965ef69/b44fb4cdc22bd912c18308344198e02b.png",
-    "callout": 3
-   }
-  ],
-  "notes": [
-   "Outlet. 2024-26. GTI. 2022-23. Golf R."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-converter-and-pipe-gasket-5q0253115c",
-  "illustration": "illustrations/gasket.webp"
- },
- {
   "oem": "04C109121E",
   "oem_display": "04C 109 121 E",
   "name": "Cover",
@@ -78618,28 +79371,6 @@
   ],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-crankshaft-7k105101l",
   "illustration": null
- },
- {
-  "oem": "06Q198751",
-  "oem_display": "06Q 198 751",
-  "name": "Cut-Off Valve",
-  "part_type": "cut off valve",
-  "system": "engine",
-  "price_usd": 119.76,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
-    "callout": 4
-   }
-  ],
-  "notes": [],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-cut-off-valve-6q198751",
-  "illustration": "illustrations/cut-off-valve.webp"
  },
  {
   "oem": "06A103101AD",
@@ -83230,30 +83961,6 @@
   "illustration": "illustrations/engine-variable-valve-timing-vvt-solenoid-pressure-valve.webp"
  },
  {
-  "oem": "06Q145702C",
-  "oem_display": "06Q 145 702 C",
-  "name": "Exhaust Manifold",
-  "part_type": "exhaust manifold",
-  "system": "engine",
-  "price_usd": 747.9,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
-    "callout": 1
-   }
-  ],
-  "notes": [
-   "GTI. Incl.Integrated Exhaust Manifold. Turbocharger."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-manifold-6q145702c",
-  "illustration": "illustrations/exhaust-manifold.webp"
- },
- {
   "oem": "048109611B",
   "oem_display": "048 109 611 B",
   "name": "Exhaust Valve",
@@ -85350,216 +86057,6 @@
   ],
   "notes": [],
   "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-tube-6k115610m",
-  "illustration": "illustrations/pipe.webp"
- },
- {
-  "oem": "06Q145039B",
-  "oem_display": "06Q 145 039 B",
-  "name": "Turbocharger Brace",
-  "part_type": "turbocharger brace",
-  "system": "engine",
-  "price_usd": 0.6,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
-    "callout": 3
-   }
-  ],
-  "notes": [
-   "2.0L, 2024-26. 2022-23."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-brace-6q145039b",
-  "illustration": "illustrations/turbocharger-brace.webp"
- },
- {
-  "oem": "06Q121085D",
-  "oem_display": "06Q 121 085 D",
-  "name": "Turbocharger Coolant Line",
-  "part_type": "turbocharger coolant line",
-  "system": "engine",
-  "price_usd": 18.93,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
-    "callout": 8
-   }
-  ],
-  "notes": [
-   "Outer. GTI. Turbocharger Cooling. Outlet. Pipe to Pipe. Incl.Pipe. 2022-23 right side. Cooling pipe. Golf R."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-coolant-line-6q121085d",
-  "illustration": "illustrations/pipe.webp"
- },
- {
-  "oem": "06Q121492B",
-  "oem_display": "06Q 121 492 B",
-  "name": "Turbocharger Coolant Line",
-  "part_type": "turbocharger coolant line",
-  "system": "engine",
-  "price_usd": 18.0,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
-    "callout": 7
-   }
-  ],
-  "notes": [
-   "Inner. Return tube. 2022-23, right side."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-coolant-line-6q121492b",
-  "illustration": "illustrations/pipe.webp"
- },
- {
-  "oem": "06Q121497D",
-  "oem_display": "06Q 121 497 D",
-  "name": "Turbocharger Coolant Line",
-  "part_type": "turbocharger coolant line",
-  "system": "engine",
-  "price_usd": 52.36,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
-    "callout": 5
-   }
-  ],
-  "notes": [
-   "2.0L 2024-26. Turbocharger Cooling. Inlet. Incl.Pipe. 2022-23, right side, upper."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-coolant-line-6q121497d",
-  "illustration": "illustrations/pipe.webp"
- },
- {
-  "oem": "06K133833CA",
-  "oem_display": "06K 133 833 CA",
-  "name": "Turbocharger Mount Heat Shield",
-  "part_type": "turbocharger mount heat shield",
-  "system": "engine",
-  "price_usd": 13.04,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
-    "callout": 13
-   }
-  ],
-  "notes": [],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-mount-heat-shield-6k133833ca",
-  "illustration": "illustrations/turbocharger-mount-heat-shield.webp"
- },
- {
-  "oem": "06Q129597F",
-  "oem_display": "06Q 129 597 F",
-  "name": "Turbocharger Mount Heat Shield",
-  "part_type": "turbocharger mount heat shield",
-  "system": "engine",
-  "price_usd": 38.58,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
-    "callout": 13
-   }
-  ],
-  "notes": [],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-mount-heat-shield-6q129597f",
-  "illustration": "illustrations/turbocharger-mount-heat-shield.webp"
- },
- {
-  "oem": "06Q133833",
-  "oem_display": "06Q 133 833",
-  "name": "Turbocharger Mount Heat Shield",
-  "part_type": "turbocharger mount heat shield",
-  "system": "engine",
-  "price_usd": 11.87,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
-    "callout": 13
-   }
-  ],
-  "notes": [
-   "Oil inlet tube."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-mount-heat-shield-6q133833",
-  "illustration": "illustrations/turbocharger-mount-heat-shield.webp"
- },
- {
-  "oem": "06Q145735F",
-  "oem_display": "06Q 145 735 F",
-  "name": "Turbocharger Oil Line",
-  "part_type": "turbocharger oil line",
-  "system": "engine",
-  "price_usd": 41.6,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
-    "callout": 9
-   }
-  ],
-  "notes": [],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-oil-line-6q145735f",
-  "illustration": "illustrations/pipe.webp"
- },
- {
-  "oem": "06Q145778B",
-  "oem_display": "06Q 145 778 B",
-  "name": "Turbocharger Oil Line",
-  "part_type": "turbocharger oil line",
-  "system": "engine",
-  "price_usd": 30.02,
-  "unavailable": false,
-  "appears_on": [
-   {
-    "vehicle": "v-2023-volkswagen-gti--s--2-0l-l4-gas",
-    "category": "engine--turbocharger-and-components",
-    "diagram": 1,
-    "diagram_name": "Turbocharger",
-    "diagram_image": "https://cdn-illustrations.revolutionparts.io/strapr1/7cb2154c8c9316a69d282509df5e5c8a/54462cfef173a9b6a75964f0420e8883.png",
-    "callout": 9
-   }
-  ],
-  "notes": [
-   "Oil inlet tube. GTI. Feed."
-  ],
-  "source": "https://vw.oempartsonline.com/oem-parts/volkswagen-turbocharger-oil-line-6q145778b",
   "illustration": "illustrations/pipe.webp"
  },
  {
