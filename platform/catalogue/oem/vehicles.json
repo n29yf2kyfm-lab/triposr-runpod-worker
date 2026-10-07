@@ -1,11 +1,47 @@
 [
  {
+  "slug": "v-1996-volkswagen-jetta--gl--2-0l-l4-gas",
+  "year": 1996,
+  "make": "Volkswagen",
+  "model": "Jetta",
+  "trim": "GL",
+  "engine": "2.0L L4 gas",
+  "market": "US"
+ },
+ {
+  "slug": "v-1996-volkswagen-jetta--glx--2-8l-v6-gas",
+  "year": 1996,
+  "make": "Volkswagen",
+  "model": "Jetta",
+  "trim": "GLX",
+  "engine": "2.8L V6 gas",
+  "market": "US"
+ },
+ {
   "slug": "v-1997-volkswagen-golf--gl--2-0l-l4-gas",
   "year": 1997,
   "make": "Volkswagen",
   "model": "Golf",
   "trim": "GL",
   "engine": "2.0L L4 gas",
+  "market": "US"
+ },
+ {
+  "slug": "v-1997-volkswagen-passat--glx--2-8l-v6-gas",
+  "year": 1997,
+  "make": "Volkswagen",
+  "model": "Passat",
+  "trim": "GLX",
+  "engine": "2.8L V6 gas",
+  "market": "US"
+ },
+ {
+  "slug": "v-1997-volkswagen-passat--tdi--1-9l-l4-diesel",
+  "year": 1997,
+  "make": "Volkswagen",
+  "model": "Passat",
+  "trim": "TDI",
+  "engine": "1.9L L4 diesel",
   "market": "US"
  },
  {

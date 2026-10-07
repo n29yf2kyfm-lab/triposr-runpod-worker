@@ -1,0 +1,56 @@
+{
+ "page": "https://vw.oempartsonline.com/v-1996-volkswagen-jetta--gl--2-0l-l4-gas/engine--engine-parts",
+ "title": "Engine Parts for 1996 Volkswagen Jetta",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Crankshaft Pulley",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/87c4be94a34fe0dd8c8cf051efd25afb/e39247a26b774ab6329129b1d75d2c9d.png",
+   "url": "https://vw.oempartsonline.com/v-1996-volkswagen-jetta--gl--2-0l-l4-gas/engine--engine-parts?assembly=1"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "048109173D",
+   "oem_display": "048 109 173 D",
+   "oem_from": "printed",
+   "name": "Inner Timing Cover",
+   "label": "Beetle. Inner. Convertible, 2.0L, upper.",
+   "callout": 5,
+   "diagram": 1,
+   "price_usd": 20.24,
+   "msrp_usd": 33.18,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-inner-timing-cover-48109173d"
+  },
+  {
+   "oem": "044103609D",
+   "oem_display": "044 103 609 D",
+   "oem_from": "printed",
+   "name": "Oil Pan Gasket",
+   "label": "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-oil-pan-gasket-44103609d)",
+   "callout": 9,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "11",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-oil-pan-gasket-44103609d"
+  },
+  {
+   "oem": "056115561G",
+   "oem_display": "056 115 561 G",
+   "oem_from": "printed",
+   "name": "Oil Filter",
+   "label": "1.8L. 2.0L. 1980-93. 1982-88 5 cylinder. 2.8L. Gas.",
+   "callout": 11,
+   "diagram": 1,
+   "price_usd": 14.95,
+   "msrp_usd": 20.42,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-oil-filter-56115561g"
+  }
+ ]
+}

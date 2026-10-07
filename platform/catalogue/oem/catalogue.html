@@ -264,7 +264,7 @@ footer p{margin:0}
 
 <footer>
   <div class="wrap">
-    <p><b>OEM numbers</b> are copied from US Volkswagen dealer catalogue pages, never generated. A US number is a strong lead for a UK car, not a guarantee — right-hand drive, engines and trims differ.</p>
+    <p><b>OEM numbers</b> are copied from US Volkswagen, Audi and Porsche dealer catalogue pages, never generated. One entry per number, however many brands list it. A US number is a strong lead for a UK car, not a guarantee — right-hand drive, engines and trims differ.</p>
     <p><b>Pictures are AI illustrations of the kind of part</b>, one per part type. They are not photographs of the part with that number.</p>
     <p><b>Torques</b> come from the Golf Mk7 workshop manual's assembly overviews (vwgolf.org). Check the manual for your exact car before tightening anything.</p>
     <p><b>Your VIN is decoded in this page and is never sent or stored.</b></p>
@@ -443,7 +443,7 @@ function renderFilters(){
   const counts = {};
   state.parts.forEach(p => p.appears_on.forEach(a => counts[a.vehicle] = (counts[a.vehicle] || 0) + 1));
   $('#vehicles').innerHTML = state.vehicles.map(v => {
-    const n = state.parts.filter(p => p.appears_on.some(a => a.vehicle === v.slug)).length;
+    const n = counts[v.slug] || 0;
     return `<button class="vbtn" data-v="${esc(v.slug)}" aria-pressed="${state.veh.has(v.slug)}">
       <span class="yr">${v.year}</span><span class="nm">${esc(v.model)} ${esc(v.trim)}<small>${esc(v.engine)} · ${esc(v.market)}</small></span><span class="n">${n}</span></button>`;
   }).join('');
@@ -545,7 +545,7 @@ function openPart(oem){
       ${p.fitment_notes ? `<p class="note"><b>Fitment note:</b> ${esc(p.fitment_notes)}</p>` : ''}
       ${p.fits ? `<div class="sec"><h4>Fits (every VW, from the part's own page)</h4><div class="scroll" id="fitall"><table class="fits"><thead><tr><th>Model</th><th>Years</th></tr></thead><tbody>
         ${p.fits.map(([m, lo, hi]) => `<tr><td>${esc(m)}</td><td>${yr(lo, hi)}</td></tr>`).join('')}</tbody></table></div></div>` : ''}
-      ${p.fits || p.appears_on.length ? '' : '<p class="note">This number comes from the dealer\'s list of every VW part. Which cars it fits is filled in as each part\'s page is collected.</p>'}
+      ${p.fits || p.appears_on.length ? '' : '<p class="note">This number comes from the brand dealer\'s list of every part it sells. Which cars it fits is filled in as each part\'s page is collected.</p>'}
       <div class="sec" ${p.appears_on.length ? '' : 'hidden'}><h4>Where it appears</h4><div class="scroll"><table class="fits">
         <thead><tr><th>Car</th><th>Section · drawing</th><th>Callout</th></tr></thead><tbody>${rows}</tbody></table></div>
         <p class="note" style="margin-top:6px">Drawing links open the dealer's exploded diagram; the callout is the number on that drawing.</p></div>
@@ -640,32 +640,61 @@ function tab(which){
   if (!parts && !$('#tq-list').innerHTML) renderTorques();
 }
 
+/* OEM display, as parse_revolution.vw_display (VW/Audi/SEAT/Skoda 3-3-3-suffix), plus Porsche's
+   11-digit 3-3-3-2 numbers with an optional colour code: 99650110100 -> 996 501 101 00 */
+function oemDisplay(n){
+  let m;
+  if ((m = n.match(/^(N)(\d{3})(\d{3})(\d{2})$/)) || (m = n.match(/^(N)(\d{3})(\d{3})(\d)$/)) ||
+      (m = n.match(/^(D)(\d{3})(\d{3})([A-Z]\d)$/)) || (m = n.match(/^(\d{3})(\d{3})(\d{3})(\d{2})([A-Z0-9]{3})?$/)) ||
+      (m = n.match(/^([0-9A-Z]{3})([0-9]{3})([0-9]{3})([A-Z]{0,3}?)([A-Z0-9]{3})?$/))) return m.slice(1).filter(Boolean).join(' ');
+  return n;
+}
+const titleWords = w => w.split('-').map(x => x && x[0].toUpperCase() + x.slice(1)).join(' ').replace(/\bA C\b/g, 'A/C');
+
+function indexPart(p){
+  p.brands = p.brands || ['vw'];
+  p._oem = norm(p.oem);
+  p._text = [p.oem_display, p.name, p.part_type, p.system, p.other_names || '', p.category || '', ...(p.fits || []).map(f => f[0]), ...(p.notes || [])].join(' ').toLowerCase();
+  p._veh = new Set(p.appears_on.map(a => a.vehicle)).size;
+}
+
+function showStats(loading){
+  const parts = state.parts, fitted = parts.filter(p => p.appears_on.length || p.fits).length;
+  $('#stats').innerHTML = `<span><b>${parts.length.toLocaleString()}</b> VW Group OEM numbers</span><span><b>${fitted.toLocaleString()}</b> with fitment</span><span><b>${new Set(parts.flatMap(p => p.brands)).size}</b> brands</span>` +
+    (state.torques ? `<span><b>${state.asm.length}</b> workshop drawings</span><span><b>${state.torques}</b> torques</span>` : '') +
+    (loading ? `<span>Loading ${esc(loading)}…</span>` : '');
+}
+
 async function load(){
   const get = u => fetch(u).then(r => { if (!r.ok) throw new Error(u + ' ' + r.status); return r.json(); });
-  const [parts, vehicles, more] = await Promise.all([get('parts.json'), get('vehicles.json'), get('parts_more.json').catch(() => [])]);
-  // sitemap-only parts: number and name from the dealer link, fitment not crawled yet
-  const PRE = 'https://vw.oempartsonline.com/oem-parts/volkswagen-';
-  more.forEach(([oem, oem_display, name, part_type, system, slug, ill, brands]) => parts.push({oem, oem_display, name, part_type, system,
-    system_guessed: true, unavailable: false, appears_on: [], notes: [], source: slug.startsWith('http') ? slug : PRE + slug,
-    illustration: ill || null, brands: (brands || 'vw').split(',')}));
+  const [parts, vehicles, idx] = await Promise.all([get('parts.json'), get('vehicles.json'), get('more/index.json').catch(() => null)]);
   state.vehicles = vehicles.sort((a, b) => a.year - b.year || a.model.localeCompare(b.model));
   state.vehicles.forEach(v => state.vmap[v.slug] = v);
-  parts.forEach(p => {
-    p.brands = p.brands || ['vw'];
-    p._oem = norm(p.oem);
-    p._text = [p.oem_display, p.name, p.part_type, p.system, p.other_names || '', p.category || '', ...(p.fits || []).map(f => f[0]), ...(p.notes || [])].join(' ').toLowerCase();
-    p._veh = new Set(p.appears_on.map(a => a.vehicle)).size;
-  });
+  parts.forEach(indexPart);
   state.parts = parts;
-  renderFilters(); renderParts();
-  const fitted = parts.filter(p => p.appears_on.length || p.fits).length;
-  const statsBase = `<span><b>${parts.length.toLocaleString()}</b> VW Group OEM numbers</span><span><b>${fitted.toLocaleString()}</b> with fitment</span><span><b>${new Set(parts.flatMap(p => p.brands)).size}</b> brands</span>`;
-  $('#stats').innerHTML = statsBase;
-  try {
-    state.asm = await get('assemblies.json');
-    const torques = state.asm.reduce((n, a) => n + a.parts.reduce((m, p) => m + p.torque_nm.length, 0), 0);
-    $('#stats').innerHTML = statsBase + `<span><b>${state.asm.length}</b> workshop drawings</span><span><b>${torques}</b> torques</span>`;
-  } catch (e) { $('#tab-torques').disabled = true; }
+  renderFilters(); renderParts(); showStats(idx && 'the rest of the catalogue');
+  get('assemblies.json').then(a => {
+    state.asm = a; state.torques = a.reduce((n, x) => n + x.parts.reduce((m, p) => m + p.torque_nm.length, 0), 0); showStats();
+  }).catch(() => { $('#tab-torques').disabled = true; });
+  if (!idx) return;
+  // Sitemap-only parts: number and name from the dealer link, fitment not collected yet.
+  // Loaded in small files after the first paint, VW first, so a phone is usable at once.
+  const order = f => (f.brand === 'vw' ? 0 : f.brand === 'audi' ? 1 : 2);
+  const files = [...idx.files].sort((a, b) => order(a) - order(b) || a.file.localeCompare(b.file));
+  for (let i = 0; i < files.length; i++) {
+    const f = files[i], host = f.brand, make = idx.make[host] || host + '-';
+    showStats(`${BRAND[host] || host} (${i + 1} of ${files.length})`);
+    let rows; try { rows = await get('more/' + f.file); } catch (e) { continue; }
+    for (const [oem, words, si, ii, other] of rows) {
+      const name = titleWords(words), p = {oem, oem_display: oemDisplay(oem), name, part_type: name.toLowerCase(),
+        system: idx.systems[si], system_guessed: true, unavailable: false, appears_on: [], notes: [],
+        source: `https://${host}.oempartsonline.com/oem-parts/${make}${words}-${oem.toLowerCase()}`,
+        illustration: ii >= 0 ? idx.illustrations[ii] : null, brands: other ? [host, ...other.split(',')] : [host]};
+      indexPart(p); state.parts.push(p);
+    }
+    if (i === files.length - 1 || files[i + 1].brand !== f.brand) { renderFilters(); renderParts(); }
+  }
+  showStats();
 }
 
 document.addEventListener('click', e => {

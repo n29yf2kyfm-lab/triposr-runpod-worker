@@ -1,0 +1,28 @@
+{
+ "page": "https://vw.oempartsonline.com/v-1997-volkswagen-passat--glx--2-8l-v6-gas/engine--engine-parts",
+ "title": "Engine Parts for 1997 Volkswagen Passat",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Damper & Pulley",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/6536005398f49244df1e1100f9c87450/e80dff084f27e889b94efc1f2271ba0b.png",
+   "url": "https://vw.oempartsonline.com/v-1997-volkswagen-passat--glx--2-8l-v6-gas/engine--engine-parts?assembly=1"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "03H109465A",
+   "oem_display": "03H 109 465 A",
+   "oem_from": "printed",
+   "name": "Timing Chain",
+   "label": "R32. Crank to intermed. shaft.",
+   "callout": 4,
+   "diagram": 1,
+   "price_usd": 175.21,
+   "msrp_usd": 263.32,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-timing-chain-3h109465a"
+  }
+ ]
+}

@@ -17,8 +17,10 @@ have = {os.path.basename(f)[:-5] for f in glob.glob(os.path.join(HERE, 'products
 # hold a VW link as a bare slug and any other brand's as a full URL.
 crawled = {p['oem']: p['source'] for p in json.load(open(os.path.join(HERE, 'parts.json')))
            if p['source'].startswith('https://vw.')}
-more = {r[0]: 'https://vw.oempartsonline.com/oem-parts/volkswagen-' + r[5]
-        for r in json.load(open(os.path.join(HERE, 'parts_more.json'))) if not r[5].startswith('http')}
+more = {}
+for f in glob.glob(os.path.join(HERE, 'more', 'vw_*.json')):     # VW's sitemap-only rows
+    for oem, words, *_ in json.load(open(f)):
+        more[oem] = f'https://vw.oempartsonline.com/oem-parts/volkswagen-{words}-{oem.lower()}'
 h = lambda k: zlib.crc32(k.encode())
 todo = sorted((k for k in more if k not in have), key=h) + sorted((k for k in crawled if k not in have), key=h)
 print(len(todo), 'part pages left')

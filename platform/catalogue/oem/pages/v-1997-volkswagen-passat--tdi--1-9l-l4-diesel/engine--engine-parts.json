@@ -1,0 +1,112 @@
+{
+ "page": "https://vw.oempartsonline.com/v-1997-volkswagen-passat--tdi--1-9l-l4-diesel/engine--engine-parts",
+ "title": "Engine Parts for 1997 Volkswagen Passat",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Damper & Pulley",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/14f462949ad2e2a0661c14c5c718c2c7/71029512ccd8289b52c38aa7adf1d8ec.png",
+   "url": "https://vw.oempartsonline.com/v-1997-volkswagen-passat--tdi--1-9l-l4-diesel/engine--engine-parts?assembly=1"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "028109119P",
+   "oem_display": "028 109 119 P",
+   "oem_from": "printed",
+   "name": "Timing Belt",
+   "label": "4 cylinder, diesel.",
+   "callout": 5,
+   "diagram": 1,
+   "price_usd": 90.31,
+   "msrp_usd": 133.32,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-timing-belt-28109119p"
+  },
+  {
+   "oem": "037109119C",
+   "oem_display": "037 109 119 C",
+   "oem_from": "printed",
+   "name": "Timing Belt",
+   "label": "Jetta. Cabrio. All models. 2.0l. 4 cylinder, gas. Golf, GTI. Passat. 124-Teeth. Late.",
+   "callout": 5,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-timing-belt-37109119c) 7",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-timing-belt-37109119c"
+  },
+  {
+   "oem": "044103609D",
+   "oem_display": "044 103 609 D",
+   "oem_from": "printed",
+   "name": "Oil Pan Gasket",
+   "label": "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-oil-pan-gasket-44103609d)",
+   "callout": 7,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "8",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-oil-pan-gasket-44103609d"
+  },
+  {
+   "oem": "056115561G",
+   "oem_display": "056 115 561 G",
+   "oem_from": "printed",
+   "name": "Oil Filter",
+   "label": "1.8L. 2.0L. 1980-93. 1982-88 5 cylinder. 2.8L. Gas.",
+   "callout": 8,
+   "diagram": 1,
+   "price_usd": 14.95,
+   "msrp_usd": 20.42,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-oil-filter-56115561g"
+  },
+  {
+   "oem": "068115561B",
+   "oem_display": "068 115 561 B",
+   "oem_from": "printed",
+   "name": "Oil Filter",
+   "label": "1.6L. Passat. 1.8l. 1982-85 diesel. Jetta. Vanagon. 4 cylinder diesel.",
+   "callout": 8,
+   "diagram": 1,
+   "price_usd": 14.44,
+   "msrp_usd": 19.73,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-oil-filter-68115561b"
+  },
+  {
+   "oem": "068117021B",
+   "oem_display": "068 117 021 B",
+   "oem_from": "printed",
+   "name": "Cooler",
+   "label": "Cooler",
+   "callout": 9,
+   "diagram": 1,
+   "price_usd": 288.33,
+   "msrp_usd": 433.32,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-cooler-68117021b"
+  },
+  {
+   "oem": "053115417A",
+   "oem_display": "053 115 417 A",
+   "oem_from": "printed",
+   "name": "Filter Housing",
+   "label": "4 cylinder.",
+   "callout": 10,
+   "diagram": 1,
+   "price_usd": 304.96,
+   "msrp_usd": 458.33,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-filter-housing-53115417a"
+  }
+ ]
+}

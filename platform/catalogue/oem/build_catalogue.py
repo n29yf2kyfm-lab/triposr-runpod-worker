@@ -66,6 +66,40 @@ def part_type(name):
     return re.sub(r'\s+', ' ', t).strip() or name.lower()
 
 
+MORE_ROWS = 40000      # rows per file: ~2 MB, well under the artifact's 16 MB per file
+
+
+def write_more(rows):
+    """Sitemap-only parts, written small enough for a phone and for the
+    artifact's per-file limit: more/index.json lists the system and picture
+    names once, and more/<brand>_NN.json holds rows
+    [oem, slug words, system index, picture index or -1, other brands or ''].
+    The page rebuilds the name, display number and dealer link from these
+    (the URL is https://<brand>.oempartsonline.com/oem-parts/<make>-<words>-<oem>)."""
+    d = os.path.join(HERE, 'more')
+    os.makedirs(d, exist_ok=True)
+    for f in glob.glob(os.path.join(d, '*.json')):
+        os.remove(f)
+    systems = sorted({e['system'] for e in rows})
+    ills = sorted({e['illustration'] for e in rows if e['illustration']})
+    si = {x: i for i, x in enumerate(systems)}
+    ii = {x: i for i, x in enumerate(ills)}
+    by_brand = {}
+    for e in rows:
+        b = re.match(r'https://([a-z0-9]+)\.oempartsonline', e['source']).group(1)
+        words = e['source'].rsplit('/oem-parts/', 1)[1].split('-', 1)[1].rsplit('-', 1)[0]
+        by_brand.setdefault(b, []).append([e['oem'], words, si[e['system']], ii.get(e['illustration'], -1),
+                                           ','.join(x for x in e['brands'] if x != b)])
+    files = []
+    for b, rs in sorted(by_brand.items()):
+        for k in range(0, len(rs), MORE_ROWS):
+            name = f'{b}_{k // MORE_ROWS:02d}.json'
+            json.dump(rs[k:k + MORE_ROWS], open(os.path.join(d, name), 'w'), separators=(',', ':'))
+            files.append({'brand': b, 'file': name, 'n': len(rs[k:k + MORE_ROWS])})
+    json.dump({'systems': systems, 'illustrations': ills, 'make': PREFIX, 'files': files},
+              open(os.path.join(d, 'index.json'), 'w'), separators=(',', ':'))
+
+
 def main():
     vehicles, parts = {}, {}
     for f in sorted(glob.glob(os.path.join(HERE, 'pages', '*', '*.json'))):
@@ -167,12 +201,10 @@ def main():
     compact = lambda e: not e['appears_on'] and not e.get('detail') and not e.get('dealer_gone')
     json.dump([e for e in out if not compact(e)], open(os.path.join(HERE, 'parts.json'), 'w'),
               separators=(',', ':'))
-    pre = 'https://vw.oempartsonline.com/oem-parts/volkswagen-'
-    json.dump([[e['oem'], e['oem_display'], e['name'], e['part_type'], e['system'],
-                e['source'][len(pre):] if e['source'].startswith(pre) else e['source'],
-                e['illustration'] or '', ','.join(e['brands'])] for e in out if compact(e)],
-              open(os.path.join(HERE, 'parts_more.json'), 'w'), separators=(',', ':'))
-    with open(os.path.join(HERE, 'parts.csv'), 'w', newline='') as fh:
+    write_more([e for e in out if compact(e)])
+    # gzip: the full Group list is ~60 MB as plain CSV
+    import gzip, io
+    with gzip.open(os.path.join(HERE, 'parts.csv.gz'), 'wt', newline='', compresslevel=6) as fh:
         w = csv.writer(fh)
         w.writerow(['oem', 'oem_display', 'name', 'part_type', 'system', 'brands', 'unavailable',
                     'vehicles', 'fits_all_group', 'drawing_callouts', 'notes', 'illustration', 'source'])

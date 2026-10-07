@@ -86,7 +86,9 @@ def main():
     todo = []
     for c in CATS:
         for v in GAP:
-            if os.path.exists(os.path.join(HERE, 'pages', v, c + '.json')) or f'{v}/{c}' in missing:
+            # electric cars have no combustion engine, fuel or exhaust pages (410 Gone)
+            ice = c.split('--')[0] in ('engine', 'fuel-system', 'exhaust', 'emission-system', 'ignition-system')
+            if (v.endswith('--electric') and ice) or os.path.exists(os.path.join(HERE, 'pages', v, c + '.json')) or f'{v}/{c}' in missing:
                 continue
             todo.append(f'{SITE}/{v}/{c}')
     print(len(todo), 'gap pages left')

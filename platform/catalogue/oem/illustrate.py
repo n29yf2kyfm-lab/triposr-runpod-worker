@@ -12,7 +12,7 @@ These are ILLUSTRATIONS of the kind of part, not photographs of the part
 with that OEM number, and every page that shows one must say so. FAL_KEY is
 read from the environment or /root/.alam3d_env; it is never written anywhere.
 """
-import io, json, os, re, sys, time, urllib.request
+import glob, io, json, os, re, sys, time, urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, 'illustrations')
@@ -118,12 +118,16 @@ def main():
     if not token:
         sys.exit('FAL_KEY is not set and is not in /root/.alam3d_env')
     os.makedirs(OUT, exist_ok=True)
-    parts = json.load(open(os.path.join(HERE, 'parts.json')))
-    types = {p['part_type'] for p in parts}
-    more = os.path.join(HERE, 'parts_more.json')   # compact rows; part_type is index 3
-    if os.path.exists(more):
-        types |= {r[3] for r in json.load(open(more))}
-    keys = sorted({illustration_key(t) for t in types})
+    from collections import Counter
+    sys.path.insert(0, HERE)
+    from build_catalogue import part_type
+    # every part type in the catalogue, most common first, so the pictures
+    # that cover the most parts are made first (the full list runs to tens of
+    # thousands of types once every Group brand's sitemap is in)
+    count = Counter(illustration_key(p['part_type']) for p in json.load(open(os.path.join(HERE, 'parts.json'))))
+    for f in glob.glob(os.path.join(HERE, 'more', '*_*.json')):
+        count.update(illustration_key(part_type(w.replace('-', ' '))) for _, w, *_ in json.load(open(f)))
+    keys = [k for k, _ in count.most_common()]
     if opt.get('only'):
         keys = [k for k in keys if k in opt['only'].split(',')]
     force = set(opt.get('force', '').split(',')) - {''}

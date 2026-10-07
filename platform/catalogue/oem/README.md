@@ -1,4 +1,4 @@
-# OEM parts catalogue (pilot: VW Golf family)
+# OEM parts catalogue (VW Group)
 
 Our own parts catalogue: real OEM part numbers, where each part sits on the
 factory exploded drawing, what it fits, a generated illustration per part
@@ -43,6 +43,25 @@ pictures than that. So the pictures are not published one file each:
 bundle only when a card from it scrolls into view. The bucket is crc32 of
 the picture key mod 32, in both the script and the page. Rebuild the bundles
 before every publish; they are derived files and are not committed.
+
+**Whole VW Group (2026-10-07).** Each Group brand with a dealer catalogue of
+the same kind has its own folder, `sources/<brand>/`, holding its
+`sitemap_parts.txt` (every part page the dealer lists) and `products/` (part
+pages collected so far). So far: Audi (audi.oempartsonline.com, 32,079 part
+pages) and Porsche (porsche.oempartsonline.com, 261,761, sitemap dated
+2026-09-17). VW keeps its original top-level `sitemap_parts.txt` and
+`products/`. `build_catalogue.py` merges them all into **one entry per OEM
+number**, whichever brands list it (the Group shares one numbering system),
+with a `brands` list. Fitment from each brand's part pages is merged too;
+models from brands other than VW carry the make ("Audi Q7").
+`ingest_products.py` routes each part page to its brand by the URL's host, and
+`next_brand.py BRAND N` is the per-brand queue (`next_products.py` is VW's).
+SEAT, Skoda, Cupra, Bentley, Lamborghini and Europe-only VW models need other
+sources; findings go in `sources/SOURCES.md`.
+
+Derived, not committed (rebuild with `build_catalogue.py`): `more/` (the parts
+without fitment, as 40,000-row per-brand files the page loads after first
+paint) and `parts.csv`. The full list ships as `parts.csv.gz`.
 
 ## Where it comes from, and what that means
 

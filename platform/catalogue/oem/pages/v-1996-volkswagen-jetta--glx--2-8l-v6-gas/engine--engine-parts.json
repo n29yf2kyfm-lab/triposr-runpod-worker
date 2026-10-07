@@ -1,0 +1,28 @@
+{
+ "page": "https://vw.oempartsonline.com/v-1996-volkswagen-jetta--glx--2-8l-v6-gas/engine--engine-parts",
+ "title": "Engine Parts for 1996 Volkswagen Jetta",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Crankshaft Pulley",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/86e0d4dbcde389208aee5daa3bc8d8cc/817f47c8105d08152d8469dcff285480.png",
+   "url": "https://vw.oempartsonline.com/v-1996-volkswagen-jetta--glx--2-8l-v6-gas/engine--engine-parts?assembly=1"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "021115562A",
+   "oem_display": "021 115 562 A",
+   "oem_from": "printed",
+   "name": "Oil Filter",
+   "label": "Oil Filter",
+   "callout": 7,
+   "diagram": 1,
+   "price_usd": 18.71,
+   "msrp_usd": 25.57,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-oil-filter-21115562a"
+  }
+ ]
+}
