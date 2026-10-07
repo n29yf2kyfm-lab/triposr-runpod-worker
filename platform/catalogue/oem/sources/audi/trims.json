@@ -405,6 +405,15 @@
 "url": "https://audi.oempartsonline.com/v-1999-audi-a8--base--3-7l-v8-gas"
 },
 {
+"year": 1999,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-1999-audi-a8-quattro--base--4-2l-v8-gas"
+},
+{
 "year": 2000,
 "make": "Audi",
 "model": "A4",
@@ -502,6 +511,24 @@
 "engine": "4.2L V8 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2000-audi-a6-quattro--base--4-2l-v8-gas"
+},
+{
+"year": 2000,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2000-audi-a8-quattro--base--4-2l-v8-gas"
+},
+{
+"year": 2000,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "L",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2000-audi-a8-quattro--l--4-2l-v8-gas"
 },
 {
 "year": 2001,
@@ -603,6 +630,24 @@
 "url": "https://audi.oempartsonline.com/v-2001-audi-a6-quattro--base--4-2l-v8-gas"
 },
 {
+"year": 2001,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2001-audi-a8-quattro--base--4-2l-v8-gas"
+},
+{
+"year": 2001,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "L",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2001-audi-a8-quattro--l--4-2l-v8-gas"
+},
+{
 "year": 2002,
 "make": "Audi",
 "model": "A4",
@@ -700,6 +745,24 @@
 "engine": "4.2L V8 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2002-audi-a6-quattro--base--4-2l-v8-gas"
+},
+{
+"year": 2002,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2002-audi-a8-quattro--base--4-2l-v8-gas"
+},
+{
+"year": 2002,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "L",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2002-audi-a8-quattro--l--4-2l-v8-gas"
 },
 {
 "year": 2003,
@@ -817,6 +880,24 @@
 "engine": "4.2L V8 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2003-audi-a6-quattro--base--4-2l-v8-gas"
+},
+{
+"year": 2003,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2003-audi-a8-quattro--base--4-2l-v8-gas"
+},
+{
+"year": 2003,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "L",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2003-audi-a8-quattro--l--4-2l-v8-gas"
 },
 {
 "year": 2004,
@@ -943,6 +1024,15 @@
 "engine": "4.2L V8 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2004-audi-a6-quattro--base--4-2l-v8-gas"
+},
+{
+"year": 2004,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "L",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2004-audi-a8-quattro--l--4-2l-v8-gas"
 },
 {
 "year": 2005,
@@ -1089,6 +1179,33 @@
 "url": "https://audi.oempartsonline.com/v-2005-audi-a6-quattro--base--4-2l-v8-gas"
 },
 {
+"year": 2005,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2005-audi-a8-quattro--base--4-2l-v8-gas"
+},
+{
+"year": 2005,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "L",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2005-audi-a8-quattro--l--4-2l-v8-gas"
+},
+{
+"year": 2005,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "L",
+"engine": "6.0L W12 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2005-audi-a8-quattro--l--6-0l-w12-gas"
+},
+{
 "year": 2006,
 "make": "Audi",
 "model": "A3",
@@ -1213,6 +1330,33 @@
 "engine": "4.2L V8 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2006-audi-a6-quattro--base--4-2l-v8-gas"
+},
+{
+"year": 2006,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2006-audi-a8-quattro--base--4-2l-v8-gas"
+},
+{
+"year": 2006,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "L",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2006-audi-a8-quattro--l--4-2l-v8-gas"
+},
+{
+"year": 2006,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "L",
+"engine": "6.0L W12 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2006-audi-a8-quattro--l--6-0l-w12-gas"
 },
 {
 "year": 2007,
@@ -1348,6 +1492,33 @@
 "engine": "4.2L V8 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2007-audi-a6-quattro--base--4-2l-v8-gas"
+},
+{
+"year": 2007,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2007-audi-a8-quattro--base--4-2l-v8-gas"
+},
+{
+"year": 2007,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "L",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2007-audi-a8-quattro--l--4-2l-v8-gas"
+},
+{
+"year": 2007,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "L",
+"engine": "6.0L W12 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2007-audi-a8-quattro--l--6-0l-w12-gas"
 },
 {
 "year": 2008,
@@ -1492,6 +1663,33 @@
 "engine": "4.2L V8 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2008-audi-a6-quattro--base--4-2l-v8-gas"
+},
+{
+"year": 2008,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2008-audi-a8-quattro--base--4-2l-v8-gas"
+},
+{
+"year": 2008,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "L",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2008-audi-a8-quattro--l--4-2l-v8-gas"
+},
+{
+"year": 2008,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "L",
+"engine": "6.0L W12 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2008-audi-a8-quattro--l--6-0l-w12-gas"
 },
 {
 "year": 2009,

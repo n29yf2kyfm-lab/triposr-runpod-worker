@@ -1284,6 +1284,12 @@
 "https://audi.oempartsonline.com/v-1999-audi-a8--base--3-7l-v8-gas"
 ]
 ],
+"v-1999-audi-a8-quattro": [
+[
+"Base 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-1999-audi-a8-quattro--base--4-2l-v8-gas"
+]
+],
 "v-2000-audi-a4": [
 [
 "Base 1.8L L4 - Gas",
@@ -1334,6 +1340,16 @@
 [
 "Base 4.2L V8 - Gas",
 "https://audi.oempartsonline.com/v-2000-audi-a6-quattro--base--4-2l-v8-gas"
+]
+],
+"v-2000-audi-a8-quattro": [
+[
+"Base 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2000-audi-a8-quattro--base--4-2l-v8-gas"
+],
+[
+"L 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2000-audi-a8-quattro--l--4-2l-v8-gas"
 ]
 ],
 "v-2001-audi-a4": [
@@ -1388,6 +1404,16 @@
 "https://audi.oempartsonline.com/v-2001-audi-a6-quattro--base--4-2l-v8-gas"
 ]
 ],
+"v-2001-audi-a8-quattro": [
+[
+"Base 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2001-audi-a8-quattro--base--4-2l-v8-gas"
+],
+[
+"L 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2001-audi-a8-quattro--l--4-2l-v8-gas"
+]
+],
 "v-2002-audi-a4": [
 [
 "Base 1.8L L4 - Gas",
@@ -1438,6 +1464,16 @@
 [
 "Base 4.2L V8 - Gas",
 "https://audi.oempartsonline.com/v-2002-audi-a6-quattro--base--4-2l-v8-gas"
+]
+],
+"v-2002-audi-a8-quattro": [
+[
+"Base 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2002-audi-a8-quattro--base--4-2l-v8-gas"
+],
+[
+"L 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2002-audi-a8-quattro--l--4-2l-v8-gas"
 ]
 ],
 "v-2003-audi-a4": [
@@ -1498,6 +1534,16 @@
 [
 "Base 4.2L V8 - Gas",
 "https://audi.oempartsonline.com/v-2003-audi-a6-quattro--base--4-2l-v8-gas"
+]
+],
+"v-2003-audi-a8-quattro": [
+[
+"Base 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2003-audi-a8-quattro--base--4-2l-v8-gas"
+],
+[
+"L 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2003-audi-a8-quattro--l--4-2l-v8-gas"
 ]
 ],
 "v-2004-audi-a4": [
@@ -1562,6 +1608,12 @@
 [
 "Base 4.2L V8 - Gas",
 "https://audi.oempartsonline.com/v-2004-audi-a6-quattro--base--4-2l-v8-gas"
+]
+],
+"v-2004-audi-a8-quattro": [
+[
+"L 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2004-audi-a8-quattro--l--4-2l-v8-gas"
 ]
 ],
 "v-2005-audi-a4": [
@@ -1634,6 +1686,20 @@
 "https://audi.oempartsonline.com/v-2005-audi-a6-quattro--base--4-2l-v8-gas"
 ]
 ],
+"v-2005-audi-a8-quattro": [
+[
+"Base 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2005-audi-a8-quattro--base--4-2l-v8-gas"
+],
+[
+"L 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2005-audi-a8-quattro--l--4-2l-v8-gas"
+],
+[
+"L 6.0L W12 - Gas",
+"https://audi.oempartsonline.com/v-2005-audi-a8-quattro--l--6-0l-w12-gas"
+]
+],
 "v-2006-audi-a3": [
 [
 "Base 2.0L L4 - Gas",
@@ -1700,6 +1766,20 @@
 [
 "Base 4.2L V8 - Gas",
 "https://audi.oempartsonline.com/v-2006-audi-a6-quattro--base--4-2l-v8-gas"
+]
+],
+"v-2006-audi-a8-quattro": [
+[
+"Base 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2006-audi-a8-quattro--base--4-2l-v8-gas"
+],
+[
+"L 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2006-audi-a8-quattro--l--4-2l-v8-gas"
+],
+[
+"L 6.0L W12 - Gas",
+"https://audi.oempartsonline.com/v-2006-audi-a8-quattro--l--6-0l-w12-gas"
 ]
 ],
 "v-2007-audi-a3": [
@@ -1772,6 +1852,20 @@
 [
 "Base 4.2L V8 - Gas",
 "https://audi.oempartsonline.com/v-2007-audi-a6-quattro--base--4-2l-v8-gas"
+]
+],
+"v-2007-audi-a8-quattro": [
+[
+"Base 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2007-audi-a8-quattro--base--4-2l-v8-gas"
+],
+[
+"L 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2007-audi-a8-quattro--l--4-2l-v8-gas"
+],
+[
+"L 6.0L W12 - Gas",
+"https://audi.oempartsonline.com/v-2007-audi-a8-quattro--l--6-0l-w12-gas"
 ]
 ],
 "v-2008-audi-a3": [
@@ -1850,6 +1944,20 @@
 [
 "Base 4.2L V8 - Gas",
 "https://audi.oempartsonline.com/v-2008-audi-a6-quattro--base--4-2l-v8-gas"
+]
+],
+"v-2008-audi-a8-quattro": [
+[
+"Base 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2008-audi-a8-quattro--base--4-2l-v8-gas"
+],
+[
+"L 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2008-audi-a8-quattro--l--4-2l-v8-gas"
+],
+[
+"L 6.0L W12 - Gas",
+"https://audi.oempartsonline.com/v-2008-audi-a8-quattro--l--6-0l-w12-gas"
 ]
 ],
 "v-2009-audi-a3": [
