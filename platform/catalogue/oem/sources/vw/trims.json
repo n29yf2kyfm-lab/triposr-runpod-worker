@@ -1,5 +1,23 @@
 [
 {
+"year": 1995,
+"make": "Volkswagen",
+"model": "Cabrio",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1995-volkswagen-cabrio--base--2-0l-l4-gas"
+},
+{
+"year": 1996,
+"make": "Volkswagen",
+"model": "Cabrio",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1996-volkswagen-cabrio--base--2-0l-l4-gas"
+},
+{
 "year": 1998,
 "make": "Volkswagen",
 "model": "Beetle",
@@ -594,6 +612,285 @@
 "url": "https://vw.oempartsonline.com/v-2012-volkswagen-beetle--turbo--2-0l-l4-gas"
 },
 {
+"year": 2013,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "Base",
+"engine": "2.5L L5 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2013-volkswagen-beetle--base--2-5l-l5-gas"
+},
+{
+"year": 2013,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "R-Line",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2013-volkswagen-beetle--r-line--2-0l-l4-gas"
+},
+{
+"year": 2013,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "TDI",
+"engine": "2.0L L4 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2013-volkswagen-beetle--tdi--2-0l-l4-diesel"
+},
+{
+"year": 2013,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "Turbo",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2013-volkswagen-beetle--turbo--2-0l-l4-gas"
+},
+{
+"year": 2014,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "Base",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2014-volkswagen-beetle--base--1-8l-l4-gas"
+},
+{
+"year": 2014,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "Base",
+"engine": "2.5L L5 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2014-volkswagen-beetle--base--2-5l-l5-gas"
+},
+{
+"year": 2014,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "GSR",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2014-volkswagen-beetle--gsr--2-0l-l4-gas"
+},
+{
+"year": 2014,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "R-Line",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2014-volkswagen-beetle--r-line--2-0l-l4-gas"
+},
+{
+"year": 2014,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "TDI",
+"engine": "2.0L L4 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2014-volkswagen-beetle--tdi--2-0l-l4-diesel"
+},
+{
+"year": 2015,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "Base",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2015-volkswagen-beetle--base--1-8l-l4-gas"
+},
+{
+"year": 2015,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "Classic",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2015-volkswagen-beetle--classic--1-8l-l4-gas"
+},
+{
+"year": 2015,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "Fleet Edition",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2015-volkswagen-beetle--fleet-edition--1-8l-l4-gas"
+},
+{
+"year": 2015,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "R-Line",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2015-volkswagen-beetle--r-line--2-0l-l4-gas"
+},
+{
+"year": 2015,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "TDI",
+"engine": "2.0L L4 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2015-volkswagen-beetle--tdi--2-0l-l4-diesel"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "Denim",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-beetle--denim--1-8l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "Dune",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-beetle--dune--1-8l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "Fleet Edition",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-beetle--fleet-edition--1-8l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "R-Line S",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-beetle--r-line-s--2-0l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "R-Line SE",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-beetle--r-line-se--2-0l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "R-Line SEL",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-beetle--r-line-sel--2-0l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "S",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-beetle--s--1-8l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "SE",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-beetle--se--1-8l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "SEL",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-beetle--sel--1-8l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "Wolfsburg Edition",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-beetle--wolfsburg-edition--1-8l-l4-gas"
+},
+{
+"year": 2017,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "#PinkBeetle",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2017-volkswagen-beetle--pinkbeetle--1-8l-l4-gas"
+},
+{
+"year": 2017,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "Classic",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2017-volkswagen-beetle--classic--1-8l-l4-gas"
+},
+{
+"year": 2017,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "Dune",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2017-volkswagen-beetle--dune--1-8l-l4-gas"
+},
+{
+"year": 2017,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "R-Line SEL",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2017-volkswagen-beetle--r-line-sel--2-0l-l4-gas"
+},
+{
+"year": 2017,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "S",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2017-volkswagen-beetle--s--1-8l-l4-gas"
+},
+{
+"year": 2017,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "SE",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2017-volkswagen-beetle--se--1-8l-l4-gas"
+},
+{
+"year": 2017,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "SEL",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2017-volkswagen-beetle--sel--1-8l-l4-gas"
+},
+{
 "year": 2018,
 "make": "Volkswagen",
 "model": "Atlas",
@@ -664,6 +961,42 @@
 "engine": "3.6L V6 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2018-volkswagen-atlas--sel-premium--3-6l-v6-gas"
+},
+{
+"year": 2018,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "Coast",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2018-volkswagen-beetle--coast--2-0l-l4-gas"
+},
+{
+"year": 2018,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "Dune",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2018-volkswagen-beetle--dune--2-0l-l4-gas"
+},
+{
+"year": 2018,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "S",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2018-volkswagen-beetle--s--2-0l-l4-gas"
+},
+{
+"year": 2018,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "SE",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2018-volkswagen-beetle--se--2-0l-l4-gas"
 },
 {
 "year": 2019,
@@ -790,6 +1123,42 @@
 "engine": "3.6L V6 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2019-volkswagen-atlas--sel-r-line--3-6l-v6-gas"
+},
+{
+"year": 2019,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "Final Edition SE",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2019-volkswagen-beetle--final-edition-se--2-0l-l4-gas"
+},
+{
+"year": 2019,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "Final Edition SEL",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2019-volkswagen-beetle--final-edition-sel--2-0l-l4-gas"
+},
+{
+"year": 2019,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "S",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2019-volkswagen-beetle--s--2-0l-l4-gas"
+},
+{
+"year": 2019,
+"make": "Volkswagen",
+"model": "Beetle",
+"trim": "SE",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2019-volkswagen-beetle--se--2-0l-l4-gas"
 },
 {
 "year": 2020,

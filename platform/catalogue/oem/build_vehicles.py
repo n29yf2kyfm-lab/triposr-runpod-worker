@@ -23,7 +23,10 @@ def key(s):
 
 def main():
     rows = {}
-    for f in sorted(glob.glob(os.path.join(HERE, 'sources', '*', 'vehicles.json'))):
+    # trims.json (trim_pages.py: dealer year pages, display-cased names) is read first so its
+    # spelling wins over slug-derived rows describing the same car.
+    for f in (sorted(glob.glob(os.path.join(HERE, 'sources', '*', 'trims.json'))) +
+              sorted(glob.glob(os.path.join(HERE, 'sources', '*', 'vehicles.json')))):
         try:
             data = json.load(open(f))
         except ValueError:

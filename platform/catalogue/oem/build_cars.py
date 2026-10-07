@@ -23,6 +23,8 @@ sys_path.insert(0, HERE)
 from car_images import slug   # noqa: E402
 
 MAKE = {'Volkswagen Commercial Vehicles': 'Volkswagen'}
+# dealer model name -> article model name, where the two name the same car differently
+ALIAS = {('volkswagen', 'beetle'): 'new beetle'}
 # a generation article's title minus its generation marker gives the model
 GEN = re.compile(r'\s+(?:Mk\s?\d+|\([^)]*\)|[IVX]+|[A-Z]{1,2}\d{1,2}|\d(?:st|nd|rd|th) generation|Typ \w+)$', re.I)
 
@@ -55,13 +57,32 @@ def main():
     vp = os.path.join(HERE, 'group_vehicles.json')
     dealer = json.load(open(vp)) if os.path.exists(vp) else []
     models = {}
+    names = {}
+    for r in rows:
+        names.setdefault(norm(MAKE.get(r['brand'], r['brand'])), set()).add(norm(model_of(r)))
+
+    def owner(v):
+        # a dealer row belongs to the LONGEST model name it starts with (under its own name and its ALIAS), so "Atlas Cross Sport"
+        # rows go to an Atlas Cross Sport article when there is one and to Atlas otherwise
+        out = set()
+        for dm in {norm(v.get('model')), ALIAS.get((norm(v.get('make')), norm(v.get('model'))))} - {None}:
+            hits = [m for m in names.get(norm(v.get('make')), ()) if dm == m or dm.startswith(m + ' ')]
+            if hits:
+                out.add(max(hits, key=len))
+        return out   # the generation's own year span then decides between them
+
+    for v in dealer:
+        v['_owner'] = owner(v)
     for r in rows:
         brand = MAKE.get(r['brand'], r['brand'])
         m = model_of(r)
         s = slug(r)
+        # a variant article (911 GT3, GT2...) only takes trims that name the variant
+        variant = re.search(r'\b(GT\d)\b', r['generation'] or '')
         trims = sorted({(v['year'], v.get('trim') or '', v.get('engine') or '') for v in dealer
-                        if norm(v.get('make')) == norm(brand) and norm(v.get('model')).startswith(norm(m))
-                        and r['years'][0] <= (v['year'] or 0) <= r['years'][1]})
+                        if norm(v.get('make')) == norm(brand) and norm(m) in v['_owner']
+                        and r['years'][0] <= (v['year'] or 0) <= r['years'][1]
+                        and (not variant or variant.group(1).lower() in norm(v.get('trim')).replace(' ', ''))})
         models.setdefault((brand, m), []).append({
             'name': r['generation'], 'code': r.get('code') or '', 'years': r['years'],
             'body': (r.get('body_styles') or [''])[0], 'pic': f'cars/{s}.webp' if s in pics else None,
