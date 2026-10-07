@@ -33,6 +33,19 @@ def fetch(url):
     return ok, msg
 
 
+def commit(n):
+    """Save progress to origin every few pages: local disk does not survive."""
+    repo = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
+    tp.build()
+    subprocess.run(['git', 'add', '-A', os.path.join(HERE, 'sources')], cwd=repo, capture_output=True)
+    r = subprocess.run(['git', 'commit', '-qm', f'Trims: crawl progress ({n} pages this run)\n\n'
+                        'Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\n'
+                        'Claude-Session: https://claude.ai/code/session_01WhuBPFH24hTfC3LJVPmD1c'],
+                       cwd=repo, capture_output=True)
+    if r.returncode == 0:
+        subprocess.run(['git', 'push', '-q', 'origin', 'HEAD'], cwd=repo, capture_output=True)
+
+
 def main():
     limit = int(sys.argv[1]) if len(sys.argv) > 1 else 10 ** 6
     os.makedirs(tp.TR, exist_ok=True)
@@ -54,6 +67,8 @@ def main():
                 done += 1
                 fails = 0
                 print(f'TRIM_CRAWL {done} {url}', flush=True)
+                if done % 10 == 0:
+                    commit(done)
             else:
                 fails += 1
                 low = msg.lower()
