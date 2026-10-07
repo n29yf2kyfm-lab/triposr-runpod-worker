@@ -369,6 +369,24 @@
 "url": "https://vw.oempartsonline.com/v-1997-volkswagen-jetta--tdi--1-9l-l4-diesel"
 },
 {
+"year": 1997,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "GLX",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1997-volkswagen-passat--glx--2-8l-v6-gas"
+},
+{
+"year": 1997,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "TDI",
+"engine": "1.9L L4 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1997-volkswagen-passat--tdi--1-9l-l4-diesel"
+},
+{
 "year": 1998,
 "make": "Volkswagen",
 "model": "Beetle",
@@ -511,6 +529,33 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-1998-volkswagen-jetta--wolfsburg-edition--2-0l-l4-gas"
+},
+{
+"year": 1998,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "GLS",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1998-volkswagen-passat--gls--1-8l-l4-gas"
+},
+{
+"year": 1998,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "GLS",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1998-volkswagen-passat--gls--2-8l-v6-gas"
+},
+{
+"year": 1998,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "GLX",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1998-volkswagen-passat--glx--2-8l-v6-gas"
 },
 {
 "year": 1999,
@@ -727,6 +772,33 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-1999-volkswagen-jetta--wolfsburg-edition--2-0l-l4-gas"
+},
+{
+"year": 1999,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "GLS",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1999-volkswagen-passat--gls--1-8l-l4-gas"
+},
+{
+"year": 1999,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "GLS",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1999-volkswagen-passat--gls--2-8l-v6-gas"
+},
+{
+"year": 1999,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "GLX",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1999-volkswagen-passat--glx--2-8l-v6-gas"
 },
 {
 "year": 2000,
@@ -952,6 +1024,42 @@
 "engine": "1.9L L4 Diesel",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2000-volkswagen-jetta--tdi--1-9l-l4-diesel"
+},
+{
+"year": 2000,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "4 Motion",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2000-volkswagen-passat--4-motion--2-8l-v6-gas"
+},
+{
+"year": 2000,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "GLS",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2000-volkswagen-passat--gls--1-8l-l4-gas"
+},
+{
+"year": 2000,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "GLS",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2000-volkswagen-passat--gls--2-8l-v6-gas"
+},
+{
+"year": 2000,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "GLX",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2000-volkswagen-passat--glx--2-8l-v6-gas"
 },
 {
 "year": 2001,
@@ -1213,6 +1321,51 @@
 "engine": "1.8L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2001-volkswagen-jetta--wolfsburg-edition--1-8l-l4-gas"
+},
+{
+"year": 2001,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "GLS",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2001-volkswagen-passat--gls--1-8l-l4-gas"
+},
+{
+"year": 2001,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "GLS",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2001-volkswagen-passat--gls--2-8l-v6-gas"
+},
+{
+"year": 2001,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "GLS 4 Motion",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2001-volkswagen-passat--gls-4-motion--2-8l-v6-gas"
+},
+{
+"year": 2001,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "GLX",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2001-volkswagen-passat--glx--2-8l-v6-gas"
+},
+{
+"year": 2001,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "GLX 4 Motion",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2001-volkswagen-passat--glx-4-motion--2-8l-v6-gas"
 },
 {
 "year": 2002,
@@ -1483,6 +1636,60 @@
 "engine": "1.9L L4 Diesel",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2002-volkswagen-jetta--tdi--1-9l-l4-diesel"
+},
+{
+"year": 2002,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "GLS",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2002-volkswagen-passat--gls--1-8l-l4-gas"
+},
+{
+"year": 2002,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "GLS",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2002-volkswagen-passat--gls--2-8l-v6-gas"
+},
+{
+"year": 2002,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "GLS 4 Motion",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2002-volkswagen-passat--gls-4-motion--2-8l-v6-gas"
+},
+{
+"year": 2002,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "GLX",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2002-volkswagen-passat--glx--2-8l-v6-gas"
+},
+{
+"year": 2002,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "GLX 4 Motion",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2002-volkswagen-passat--glx-4-motion--2-8l-v6-gas"
+},
+{
+"year": 2002,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "W8",
+"engine": "4.0L W8 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2002-volkswagen-passat--w8--4-0l-w8-gas"
 },
 {
 "year": 2003,
