@@ -5625,6 +5625,51 @@
 "url": "https://audi.oempartsonline.com/v-2018-audi-q7--prestige--3-0l-v6-gas"
 },
 {
+"year": 2018,
+"make": "Audi",
+"model": "R8",
+"trim": "Base",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2018-audi-r8--base--5-2l-v10-gas"
+},
+{
+"year": 2018,
+"make": "Audi",
+"model": "R8",
+"trim": "Plus",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2018-audi-r8--plus--5-2l-v10-gas"
+},
+{
+"year": 2018,
+"make": "Audi",
+"model": "R8",
+"trim": "Plus Spyder",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2018-audi-r8--plus-spyder--5-2l-v10-gas"
+},
+{
+"year": 2018,
+"make": "Audi",
+"model": "R8",
+"trim": "RWS",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2018-audi-r8--rws--5-2l-v10-gas"
+},
+{
+"year": 2018,
+"make": "Audi",
+"model": "R8",
+"trim": "Spyder",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2018-audi-r8--spyder--5-2l-v10-gas"
+},
+{
 "year": 2019,
 "make": "Audi",
 "model": "A3",
@@ -6608,6 +6653,42 @@
 {
 "year": 2020,
 "make": "Audi",
+"model": "R8",
+"trim": "Base",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2020-audi-r8--base--5-2l-v10-gas"
+},
+{
+"year": 2020,
+"make": "Audi",
+"model": "R8",
+"trim": "Performance",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2020-audi-r8--performance--5-2l-v10-gas"
+},
+{
+"year": 2020,
+"make": "Audi",
+"model": "R8",
+"trim": "Performance Spyder",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2020-audi-r8--performance-spyder--5-2l-v10-gas"
+},
+{
+"year": 2020,
+"make": "Audi",
+"model": "R8",
+"trim": "Spyder",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2020-audi-r8--spyder--5-2l-v10-gas"
+},
+{
+"year": 2020,
+"make": "Audi",
 "model": "e-tron Sportback",
 "trim": "Premium Plus Electric",
 "engine": "",
@@ -7054,6 +7135,42 @@
 "engine": "3.0L V6 Electric/Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2021-audi-q8--prestige--3-0l-v6-electric-gas"
+},
+{
+"year": 2021,
+"make": "Audi",
+"model": "R8",
+"trim": "Base",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2021-audi-r8--base--5-2l-v10-gas"
+},
+{
+"year": 2021,
+"make": "Audi",
+"model": "R8",
+"trim": "Performance",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2021-audi-r8--performance--5-2l-v10-gas"
+},
+{
+"year": 2021,
+"make": "Audi",
+"model": "R8",
+"trim": "Performance Spyder",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2021-audi-r8--performance-spyder--5-2l-v10-gas"
+},
+{
+"year": 2021,
+"make": "Audi",
+"model": "R8",
+"trim": "Spyder",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2021-audi-r8--spyder--5-2l-v10-gas"
 },
 {
 "year": 2021,
@@ -7639,6 +7756,51 @@
 "engine": "3.0L V6 Electric/Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2022-audi-q8--prestige--3-0l-v6-electric-gas"
+},
+{
+"year": 2022,
+"make": "Audi",
+"model": "R8",
+"trim": "Performance",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2022-audi-r8--performance--5-2l-v10-gas"
+},
+{
+"year": 2022,
+"make": "Audi",
+"model": "R8",
+"trim": "Performance RWD",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2022-audi-r8--performance-rwd--5-2l-v10-gas"
+},
+{
+"year": 2022,
+"make": "Audi",
+"model": "R8",
+"trim": "Performance RWD Spyder",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2022-audi-r8--performance-rwd-spyder--5-2l-v10-gas"
+},
+{
+"year": 2022,
+"make": "Audi",
+"model": "R8",
+"trim": "Performance Spyder",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2022-audi-r8--performance-spyder--5-2l-v10-gas"
+},
+{
+"year": 2022,
+"make": "Audi",
+"model": "RS e-tron GT",
+"trim": "Base",
+"engine": "Electric",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2022-audi-rs-e-tron-gt--base--electric"
 },
 {
 "year": 2022,
@@ -8233,6 +8395,51 @@
 "engine": "3.0L V6 Electric/Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2023-audi-q8--prestige--3-0l-v6-electric-gas"
+},
+{
+"year": 2023,
+"make": "Audi",
+"model": "R8",
+"trim": "Performance",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2023-audi-r8--performance--5-2l-v10-gas"
+},
+{
+"year": 2023,
+"make": "Audi",
+"model": "R8",
+"trim": "Performance RWD",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2023-audi-r8--performance-rwd--5-2l-v10-gas"
+},
+{
+"year": 2023,
+"make": "Audi",
+"model": "R8",
+"trim": "Performance RWD Spyder",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2023-audi-r8--performance-rwd-spyder--5-2l-v10-gas"
+},
+{
+"year": 2023,
+"make": "Audi",
+"model": "R8",
+"trim": "Performance Spyder",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2023-audi-r8--performance-spyder--5-2l-v10-gas"
+},
+{
+"year": 2023,
+"make": "Audi",
+"model": "RS e-tron GT",
+"trim": "Base",
+"engine": "Electric",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2023-audi-rs-e-tron-gt--base--electric"
 },
 {
 "year": 2023,
@@ -8885,6 +9092,15 @@
 {
 "year": 2024,
 "make": "Audi",
+"model": "RS e-tron GT",
+"trim": "Base",
+"engine": "Electric",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2024-audi-rs-e-tron-gt--base--electric"
+},
+{
+"year": 2024,
+"make": "Audi",
 "model": "e-tron GT",
 "trim": "Premium Plus Electric",
 "engine": "",
@@ -9531,6 +9747,15 @@
 "url": "https://audi.oempartsonline.com/v-2025-audi-q8-e-tron-sportback--prestige--electric"
 },
 {
+"year": 2025,
+"make": "Audi",
+"model": "RS e-tron GT Performance",
+"trim": "Base",
+"engine": "Electric",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2025-audi-rs-e-tron-gt-performance--base--electric"
+},
+{
 "year": 2026,
 "make": "Audi",
 "model": "A3 Quattro",
@@ -9781,5 +10006,14 @@
 "engine": "3.0L V6 Electric/Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2026-audi-q8--prestige--3-0l-v6-electric-gas"
+},
+{
+"year": 2026,
+"make": "Audi",
+"model": "RS e-tron GT Performance",
+"trim": "Base",
+"engine": "Electric",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2026-audi-rs-e-tron-gt-performance--base--electric"
 }
 ]
