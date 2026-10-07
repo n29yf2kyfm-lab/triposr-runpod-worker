@@ -1953,6 +1953,15 @@
 "url": "https://audi.oempartsonline.com/v-2012-audi-a6-quattro--prestige--3-0l-v6-gas"
 },
 {
+"year": 2012,
+"make": "Audi",
+"model": "A7 Quattro",
+"trim": "Base",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2012-audi-a7-quattro--base--3-0l-v6-gas"
+},
+{
 "year": 2013,
 "make": "Audi",
 "model": "A3",
@@ -2095,6 +2104,15 @@
 "engine": "3.0L V6 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2013-audi-a6-quattro--prestige--3-0l-v6-gas"
+},
+{
+"year": 2013,
+"make": "Audi",
+"model": "A7 Quattro",
+"trim": "Base",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2013-audi-a7-quattro--base--3-0l-v6-gas"
 },
 {
 "year": 2014,
@@ -2248,6 +2266,42 @@
 "engine": "3.0L V6 Diesel",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2014-audi-a6-quattro--tdi-prestige--3-0l-v6-diesel"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "A7 Quattro",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-a7-quattro--premium-plus--3-0l-v6-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "A7 Quattro",
+"trim": "Prestige",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-a7-quattro--prestige--3-0l-v6-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "A7 Quattro",
+"trim": "TDI Premium Plus",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-a7-quattro--tdi-premium-plus--3-0l-v6-diesel"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "A7 Quattro",
+"trim": "TDI Prestige",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-a7-quattro--tdi-prestige--3-0l-v6-diesel"
 },
 {
 "year": 2015,
@@ -2536,6 +2590,42 @@
 "engine": "3.0L V6 Diesel",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2015-audi-a6-quattro--tdi-prestige--3-0l-v6-diesel"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "A7 Quattro",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-a7-quattro--premium-plus--3-0l-v6-gas"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "A7 Quattro",
+"trim": "Prestige",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-a7-quattro--prestige--3-0l-v6-gas"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "A7 Quattro",
+"trim": "TDI Premium Plus",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-a7-quattro--tdi-premium-plus--3-0l-v6-diesel"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "A7 Quattro",
+"trim": "TDI Prestige",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-a7-quattro--tdi-prestige--3-0l-v6-diesel"
 },
 {
 "year": 2016,
@@ -4885,6 +4975,33 @@
 "engine": "",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2025-audi-a6-sportback-e-tron--prestige--electric"
+},
+{
+"year": 2025,
+"make": "Audi",
+"model": "A6 Sportback e-tron Quattro",
+"trim": "Premium Electric",
+"engine": "",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2025-audi-a6-sportback-e-tron-quattro--premium--electric"
+},
+{
+"year": 2025,
+"make": "Audi",
+"model": "A6 Sportback e-tron Quattro",
+"trim": "Premium Plus Electric",
+"engine": "",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2025-audi-a6-sportback-e-tron-quattro--premium-plus--electric"
+},
+{
+"year": 2025,
+"make": "Audi",
+"model": "A6 Sportback e-tron Quattro",
+"trim": "Prestige Electric",
+"engine": "",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2025-audi-a6-sportback-e-tron-quattro--prestige--electric"
 },
 {
 "year": 2025,

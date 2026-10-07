@@ -3114,6 +3114,33 @@
 "url": "https://vw.oempartsonline.com/v-2008-volkswagen-rabbit--s--2-5l-l5-gas"
 },
 {
+"year": 2008,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "Base",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2008-volkswagen-touareg--base--3-6l-v6-gas"
+},
+{
+"year": 2008,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2008-volkswagen-touareg--base--4-2l-v8-gas"
+},
+{
+"year": 2008,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "TDI",
+"engine": "5.0L V10 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2008-volkswagen-touareg--tdi--5-0l-v10-diesel"
+},
+{
 "year": 2009,
 "make": "Volkswagen",
 "model": "Beetle",
@@ -3328,6 +3355,33 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2009-volkswagen-tiguan--sel--2-0l-l4-gas"
+},
+{
+"year": 2009,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "Base",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2009-volkswagen-touareg--base--3-6l-v6-gas"
+},
+{
+"year": 2009,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2009-volkswagen-touareg--base--4-2l-v8-gas"
+},
+{
+"year": 2009,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "TDI",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2009-volkswagen-touareg--tdi--3-0l-v6-diesel"
 },
 {
 "year": 2010,
@@ -3564,6 +3618,24 @@
 "url": "https://vw.oempartsonline.com/v-2010-volkswagen-tiguan--wolfsburg-edition--2-0l-l4-gas"
 },
 {
+"year": 2010,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "TDI",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2010-volkswagen-touareg--tdi--3-0l-v6-diesel"
+},
+{
+"year": 2010,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "VR6",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2010-volkswagen-touareg--vr6--3-6l-v6-gas"
+},
+{
 "year": 2011,
 "make": "Volkswagen",
 "model": "CC",
@@ -3760,6 +3832,42 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2011-volkswagen-tiguan--sel--2-0l-l4-gas"
+},
+{
+"year": 2011,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "Hybrid",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2011-volkswagen-touareg--hybrid--3-0l-v6-electric-gas"
+},
+{
+"year": 2011,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "Hybrid",
+"engine": "3.0L V6 FULL HYBRID EV-GAS (FHEV)",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2011-volkswagen-touareg--hybrid--3-0l-v6-full-hybrid-ev-gas-fhev"
+},
+{
+"year": 2011,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "TDI",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2011-volkswagen-touareg--tdi--3-0l-v6-diesel"
+},
+{
+"year": 2011,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "VR6",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2011-volkswagen-touareg--vr6--3-6l-v6-gas"
 },
 {
 "year": 2012,
@@ -4102,6 +4210,78 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2012-volkswagen-tiguan--sel--2-0l-l4-gas"
+},
+{
+"year": 2012,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "Hybrid",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2012-volkswagen-touareg--hybrid--3-0l-v6-electric-gas"
+},
+{
+"year": 2012,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "Hybrid",
+"engine": "3.0L V6 FULL HYBRID EV-GAS (FHEV)",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2012-volkswagen-touareg--hybrid--3-0l-v6-full-hybrid-ev-gas-fhev"
+},
+{
+"year": 2012,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "TDI Executive",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2012-volkswagen-touareg--tdi-executive--3-0l-v6-diesel"
+},
+{
+"year": 2012,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "TDI Lux",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2012-volkswagen-touareg--tdi-lux--3-0l-v6-diesel"
+},
+{
+"year": 2012,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "TDI Sport",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2012-volkswagen-touareg--tdi-sport--3-0l-v6-diesel"
+},
+{
+"year": 2012,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "V6 Executive",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2012-volkswagen-touareg--v6-executive--3-6l-v6-gas"
+},
+{
+"year": 2012,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "V6 Lux",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2012-volkswagen-touareg--v6-lux--3-6l-v6-gas"
+},
+{
+"year": 2012,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "V6 Sport",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2012-volkswagen-touareg--v6-sport--3-6l-v6-gas"
 },
 {
 "year": 2013,

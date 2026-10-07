@@ -2108,6 +2108,12 @@
 "https://audi.oempartsonline.com/v-2012-audi-a6-quattro--prestige--3-0l-v6-gas"
 ]
 ],
+"v-2012-audi-a7-quattro": [
+[
+"Base 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2012-audi-a7-quattro--base--3-0l-v6-gas"
+]
+],
 "v-2013-audi-a3": [
 [
 "Base 2.0L L4 - Gas",
@@ -2185,6 +2191,12 @@
 [
 "Prestige 3.0L V6 - Gas",
 "https://audi.oempartsonline.com/v-2013-audi-a6-quattro--prestige--3-0l-v6-gas"
+]
+],
+"v-2013-audi-a7-quattro": [
+[
+"Base 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2013-audi-a7-quattro--base--3-0l-v6-gas"
 ]
 ],
 "v-2014-audi-a4": [
@@ -2265,6 +2277,24 @@
 [
 "TDI Prestige 3.0L V6 - Diesel",
 "https://audi.oempartsonline.com/v-2014-audi-a6-quattro--tdi-prestige--3-0l-v6-diesel"
+]
+],
+"v-2014-audi-a7-quattro": [
+[
+"Premium Plus 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2014-audi-a7-quattro--premium-plus--3-0l-v6-gas"
+],
+[
+"Prestige 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2014-audi-a7-quattro--prestige--3-0l-v6-gas"
+],
+[
+"TDI Premium Plus 3.0L V6 - Diesel",
+"https://audi.oempartsonline.com/v-2014-audi-a7-quattro--tdi-premium-plus--3-0l-v6-diesel"
+],
+[
+"TDI Prestige 3.0L V6 - Diesel",
+"https://audi.oempartsonline.com/v-2014-audi-a7-quattro--tdi-prestige--3-0l-v6-diesel"
 ]
 ],
 "v-2015-audi-a3": [
@@ -2407,6 +2437,24 @@
 [
 "TDI Prestige 3.0L V6 - Diesel",
 "https://audi.oempartsonline.com/v-2015-audi-a6-quattro--tdi-prestige--3-0l-v6-diesel"
+]
+],
+"v-2015-audi-a7-quattro": [
+[
+"Premium Plus 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2015-audi-a7-quattro--premium-plus--3-0l-v6-gas"
+],
+[
+"Prestige 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2015-audi-a7-quattro--prestige--3-0l-v6-gas"
+],
+[
+"TDI Premium Plus 3.0L V6 - Diesel",
+"https://audi.oempartsonline.com/v-2015-audi-a7-quattro--tdi-premium-plus--3-0l-v6-diesel"
+],
+[
+"TDI Prestige 3.0L V6 - Diesel",
+"https://audi.oempartsonline.com/v-2015-audi-a7-quattro--tdi-prestige--3-0l-v6-diesel"
 ]
 ],
 "v-2016-audi-a3": [
@@ -3623,6 +3671,20 @@
 [
 "Prestige Electric",
 "https://audi.oempartsonline.com/v-2025-audi-a6-sportback-e-tron--prestige--electric"
+]
+],
+"v-2025-audi-a6-sportback-e-tron-quattro": [
+[
+"Premium Electric",
+"https://audi.oempartsonline.com/v-2025-audi-a6-sportback-e-tron-quattro--premium--electric"
+],
+[
+"Premium Plus Electric",
+"https://audi.oempartsonline.com/v-2025-audi-a6-sportback-e-tron-quattro--premium-plus--electric"
+],
+[
+"Prestige Electric",
+"https://audi.oempartsonline.com/v-2025-audi-a6-sportback-e-tron-quattro--prestige--electric"
 ]
 ],
 "v-2026-audi-a3-quattro": [
