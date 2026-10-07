@@ -103,17 +103,26 @@ def main():
     ip = os.path.join(OUT, 'index.json')
     index = json.load(open(ip)) if os.path.exists(ip) else {}
     print(f'CARS {len(rows)} generations, {len(todo)} to draw', flush=True)
-    for i, r in enumerate(todo, 1):
+    import threading
+    from concurrent.futures import ThreadPoolExecutor
+    lock, done = threading.Lock(), [0]
+
+    def one(r):
         for attempt in range(3):
             try:
                 how = generate(r, token)
-                index[slug(r)] = {'method': how, 'reference': r.get('image') or None, 'wikipedia_title': r['wikipedia_title']}
-                json.dump(index, open(ip, 'w'), indent=0)
-                print(f'CARS [{i}/{len(todo)}] {slug(r)} ({how})', flush=True)
-                break
+                with lock:
+                    index[slug(r)] = {'method': how, 'reference': r.get('image') or None, 'wikipedia_title': r['wikipedia_title']}
+                    json.dump(index, open(ip, 'w'), indent=0)
+                    done[0] += 1
+                    print(f'CARS [{done[0]}/{len(todo)}] {slug(r)} ({how})', flush=True)
+                return
             except Exception as ex:
                 print(f'CARS retry {slug(r)}: {type(ex).__name__}: {str(ex)[:120]}', flush=True)
                 time.sleep(2 ** (attempt + 1))
+
+    with ThreadPoolExecutor(int(opt.get('workers', 4))) as pool:
+        list(pool.map(one, todo))
     print('CARS_DONE', flush=True)
 
 
