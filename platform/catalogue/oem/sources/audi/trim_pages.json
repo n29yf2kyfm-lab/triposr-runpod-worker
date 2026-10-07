@@ -1534,6 +1534,12 @@
 "https://audi.oempartsonline.com/v-2008-audi-a4-quattro--cabriolet--3-2l-v6-gas"
 ]
 ],
+"v-2008-audi-a5-quattro": [
+[
+"Base 3.2L V6 - Gas",
+"https://audi.oempartsonline.com/v-2008-audi-a5-quattro--base--3-2l-v6-gas"
+]
+],
 "v-2009-audi-a3": [
 [
 "Base 2.0L L4 - Gas",
@@ -1582,6 +1588,12 @@
 "https://audi.oempartsonline.com/v-2009-audi-a4-quattro--cabriolet--3-2l-v6-gas"
 ]
 ],
+"v-2009-audi-a5-quattro": [
+[
+"Base 3.2L V6 - Gas",
+"https://audi.oempartsonline.com/v-2009-audi-a5-quattro--base--3-2l-v6-gas"
+]
+],
 "v-2010-audi-a3": [
 [
 "Base 2.0L L4 - Gas",
@@ -1618,6 +1630,20 @@
 [
 "Cabriolet 2.0L L4 - Gas",
 "https://audi.oempartsonline.com/v-2010-audi-a5--cabriolet--2-0l-l4-gas"
+]
+],
+"v-2010-audi-a5-quattro": [
+[
+"Base 2.0L L4 - Gas",
+"https://audi.oempartsonline.com/v-2010-audi-a5-quattro--base--2-0l-l4-gas"
+],
+[
+"Base 3.2L V6 - Gas",
+"https://audi.oempartsonline.com/v-2010-audi-a5-quattro--base--3-2l-v6-gas"
+],
+[
+"Cabriolet 2.0L L4 - Gas",
+"https://audi.oempartsonline.com/v-2010-audi-a5-quattro--cabriolet--2-0l-l4-gas"
 ]
 ],
 "v-2011-audi-a3": [
@@ -1728,6 +1754,12 @@
 "https://audi.oempartsonline.com/v-2013-audi-a4-quattro--base--2-0l-l4-gas"
 ]
 ],
+"v-2013-audi-a5": [
+[
+"Cabriolet 2.0L L4 - Gas",
+"https://audi.oempartsonline.com/v-2013-audi-a5--cabriolet--2-0l-l4-gas"
+]
+],
 "v-2014-audi-a4": [
 [
 "Base 2.0L L4 - Gas",
@@ -1742,6 +1774,12 @@
 [
 "Base 2.0L L4 - Gas",
 "https://audi.oempartsonline.com/v-2014-audi-a4-quattro--base--2-0l-l4-gas"
+]
+],
+"v-2014-audi-a5": [
+[
+"Cabriolet 2.0L L4 - Gas",
+"https://audi.oempartsonline.com/v-2014-audi-a5--cabriolet--2-0l-l4-gas"
 ]
 ],
 "v-2015-audi-a3": [

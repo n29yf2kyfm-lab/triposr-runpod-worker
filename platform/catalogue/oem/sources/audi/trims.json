@@ -927,6 +927,15 @@
 "url": "https://audi.oempartsonline.com/v-2008-audi-a4-quattro--cabriolet--3-2l-v6-gas"
 },
 {
+"year": 2008,
+"make": "Audi",
+"model": "A5 Quattro",
+"trim": "Base",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2008-audi-a5-quattro--base--3-2l-v6-gas"
+},
+{
 "year": 2009,
 "make": "Audi",
 "model": "A3",
@@ -1017,6 +1026,15 @@
 "url": "https://audi.oempartsonline.com/v-2009-audi-a4-quattro--cabriolet--3-2l-v6-gas"
 },
 {
+"year": 2009,
+"make": "Audi",
+"model": "A5 Quattro",
+"trim": "Base",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2009-audi-a5-quattro--base--3-2l-v6-gas"
+},
+{
 "year": 2010,
 "make": "Audi",
 "model": "A3",
@@ -1078,6 +1096,33 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2010-audi-a5--cabriolet--2-0l-l4-gas"
+},
+{
+"year": 2010,
+"make": "Audi",
+"model": "A5 Quattro",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2010-audi-a5-quattro--base--2-0l-l4-gas"
+},
+{
+"year": 2010,
+"make": "Audi",
+"model": "A5 Quattro",
+"trim": "Base",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2010-audi-a5-quattro--base--3-2l-v6-gas"
+},
+{
+"year": 2010,
+"make": "Audi",
+"model": "A5 Quattro",
+"trim": "Cabriolet",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2010-audi-a5-quattro--cabriolet--2-0l-l4-gas"
 },
 {
 "year": 2011,
@@ -1260,6 +1305,15 @@
 "url": "https://audi.oempartsonline.com/v-2013-audi-a4-quattro--base--2-0l-l4-gas"
 },
 {
+"year": 2013,
+"make": "Audi",
+"model": "A5",
+"trim": "Cabriolet",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2013-audi-a5--cabriolet--2-0l-l4-gas"
+},
+{
 "year": 2014,
 "make": "Audi",
 "model": "A4",
@@ -1285,6 +1339,15 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2014-audi-a4-quattro--base--2-0l-l4-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "A5",
+"trim": "Cabriolet",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-a5--cabriolet--2-0l-l4-gas"
 },
 {
 "year": 2015,
