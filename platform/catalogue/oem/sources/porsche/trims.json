@@ -1251,6 +1251,24 @@
 "url": "https://porsche.oempartsonline.com/v-2009-porsche-cayenne--turbo-s--4-8l-v8-gas"
 },
 {
+"year": 2009,
+"make": "Porsche",
+"model": "Cayman",
+"trim": "Base",
+"engine": "2.9L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2009-porsche-cayman--base--2-9l-h6-gas"
+},
+{
+"year": 2009,
+"make": "Porsche",
+"model": "Cayman",
+"trim": "S",
+"engine": "3.4L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2009-porsche-cayman--s--3-4l-h6-gas"
+},
+{
 "year": 2010,
 "make": "Porsche",
 "model": "911",
@@ -1402,6 +1420,24 @@
 "engine": "4.8L V8 Gas",
 "market": "US",
 "url": "https://porsche.oempartsonline.com/v-2010-porsche-cayenne--turbo-s--4-8l-v8-gas"
+},
+{
+"year": 2010,
+"make": "Porsche",
+"model": "Cayman",
+"trim": "Base",
+"engine": "2.9L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2010-porsche-cayman--base--2-9l-h6-gas"
+},
+{
+"year": 2010,
+"make": "Porsche",
+"model": "Cayman",
+"trim": "S",
+"engine": "3.4L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2010-porsche-cayman--s--3-4l-h6-gas"
 },
 {
 "year": 2011,
@@ -1600,6 +1636,24 @@
 "engine": "4.8L V8 Gas",
 "market": "US",
 "url": "https://porsche.oempartsonline.com/v-2011-porsche-cayenne--turbo--4-8l-v8-gas"
+},
+{
+"year": 2011,
+"make": "Porsche",
+"model": "Cayman",
+"trim": "Base",
+"engine": "2.9L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2011-porsche-cayman--base--2-9l-h6-gas"
+},
+{
+"year": 2011,
+"make": "Porsche",
+"model": "Cayman",
+"trim": "S",
+"engine": "3.4L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2011-porsche-cayman--s--3-4l-h6-gas"
 },
 {
 "year": 2012,

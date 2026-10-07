@@ -4185,6 +4185,60 @@
 "url": "https://vw.oempartsonline.com/v-2021-volkswagen-golf--tsi--1-4l-l4-gas"
 },
 {
+"year": 2021,
+"make": "Volkswagen",
+"model": "ID.4",
+"trim": "1st Edition BATTERY EV (EV/BEV)",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2021-volkswagen-id-4--1st-edition--battery-ev-ev-bev"
+},
+{
+"year": 2021,
+"make": "Volkswagen",
+"model": "ID.4",
+"trim": "1st Edition Electric",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2021-volkswagen-id-4--1st-edition--electric"
+},
+{
+"year": 2021,
+"make": "Volkswagen",
+"model": "ID.4",
+"trim": "Pro BATTERY EV (EV/BEV)",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2021-volkswagen-id-4--pro--battery-ev-ev-bev"
+},
+{
+"year": 2021,
+"make": "Volkswagen",
+"model": "ID.4",
+"trim": "Pro Electric",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2021-volkswagen-id-4--pro--electric"
+},
+{
+"year": 2021,
+"make": "Volkswagen",
+"model": "ID.4",
+"trim": "Pro S BATTERY EV (EV/BEV)",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2021-volkswagen-id-4--pro-s--battery-ev-ev-bev"
+},
+{
+"year": 2021,
+"make": "Volkswagen",
+"model": "ID.4",
+"trim": "Pro S Electric",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2021-volkswagen-id-4--pro-s--electric"
+},
+{
 "year": 2022,
 "make": "Volkswagen",
 "model": "Arteon",
@@ -4381,6 +4435,42 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2022-volkswagen-golf-r--base--2-0l-l4-gas"
+},
+{
+"year": 2022,
+"make": "Volkswagen",
+"model": "ID.4",
+"trim": "Pro BATTERY EV (EV/BEV)",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2022-volkswagen-id-4--pro--battery-ev-ev-bev"
+},
+{
+"year": 2022,
+"make": "Volkswagen",
+"model": "ID.4",
+"trim": "Pro Electric",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2022-volkswagen-id-4--pro--electric"
+},
+{
+"year": 2022,
+"make": "Volkswagen",
+"model": "ID.4",
+"trim": "Pro S BATTERY EV (EV/BEV)",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2022-volkswagen-id-4--pro-s--battery-ev-ev-bev"
+},
+{
+"year": 2022,
+"make": "Volkswagen",
+"model": "ID.4",
+"trim": "Pro S Electric",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2022-volkswagen-id-4--pro-s--electric"
 },
 {
 "year": 2023,
@@ -4781,6 +4871,33 @@
 {
 "year": 2025,
 "make": "Volkswagen",
+"model": "GTI",
+"trim": "Autobahn",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2025-volkswagen-gti--autobahn--2-0l-l4-gas"
+},
+{
+"year": 2025,
+"make": "Volkswagen",
+"model": "GTI",
+"trim": "S",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2025-volkswagen-gti--s--2-0l-l4-gas"
+},
+{
+"year": 2025,
+"make": "Volkswagen",
+"model": "GTI",
+"trim": "SE",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2025-volkswagen-gti--se--2-0l-l4-gas"
+},
+{
+"year": 2025,
+"make": "Volkswagen",
 "model": "Golf R",
 "trim": "Base",
 "engine": "2.0L L4 Gas",
@@ -4867,6 +4984,33 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2026-volkswagen-atlas-cross-sport--sel-r-line-black--2-0l-l4-gas"
+},
+{
+"year": 2026,
+"make": "Volkswagen",
+"model": "GTI",
+"trim": "Autobahn",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2026-volkswagen-gti--autobahn--2-0l-l4-gas"
+},
+{
+"year": 2026,
+"make": "Volkswagen",
+"model": "GTI",
+"trim": "S",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2026-volkswagen-gti--s--2-0l-l4-gas"
+},
+{
+"year": 2026,
+"make": "Volkswagen",
+"model": "GTI",
+"trim": "SE",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2026-volkswagen-gti--se--2-0l-l4-gas"
 },
 {
 "year": 2026,
