@@ -324,6 +324,15 @@
 "url": "https://porsche.oempartsonline.com/v-2021-porsche-718-cayman--t--2-0l-h4-gas"
 },
 {
+"year": 2021,
+"make": "Porsche",
+"model": "718 Spyder",
+"trim": "Base",
+"engine": "4.0L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2021-porsche-718-spyder--base--4-0l-h6-gas"
+},
+{
 "year": 2022,
 "make": "Porsche",
 "model": "718 Boxster",
@@ -423,6 +432,15 @@
 "url": "https://porsche.oempartsonline.com/v-2022-porsche-718-cayman--t--2-0l-h4-gas"
 },
 {
+"year": 2022,
+"make": "Porsche",
+"model": "718 Spyder",
+"trim": "Base",
+"engine": "4.0L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2022-porsche-718-spyder--base--4-0l-h6-gas"
+},
+{
 "year": 2023,
 "make": "Porsche",
 "model": "718 Boxster",
@@ -513,6 +531,15 @@
 "url": "https://porsche.oempartsonline.com/v-2023-porsche-718-cayman--t--2-0l-h4-gas"
 },
 {
+"year": 2023,
+"make": "Porsche",
+"model": "718 Spyder",
+"trim": "Base",
+"engine": "4.0L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2023-porsche-718-spyder--base--4-0l-h6-gas"
+},
+{
 "year": 2024,
 "make": "Porsche",
 "model": "718 Boxster",
@@ -592,6 +619,15 @@
 "engine": "2.0L H4 Gas",
 "market": "US",
 "url": "https://porsche.oempartsonline.com/v-2024-porsche-718-cayman--style-edition--2-0l-h4-gas"
+},
+{
+"year": 2024,
+"make": "Porsche",
+"model": "718 Spyder",
+"trim": "Rs",
+"engine": "4.0L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2024-porsche-718-spyder--rs--4-0l-h6-gas"
 },
 {
 "year": 2025,

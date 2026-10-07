@@ -1143,6 +1143,42 @@
 "url": "https://vw.oempartsonline.com/v-2015-volkswagen-beetle--tdi--2-0l-l4-diesel"
 },
 {
+"year": 2015,
+"make": "Volkswagen",
+"model": "CC",
+"trim": "Executive",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2015-volkswagen-cc--executive--2-0l-l4-gas"
+},
+{
+"year": 2015,
+"make": "Volkswagen",
+"model": "CC",
+"trim": "Executive 4 Motion",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2015-volkswagen-cc--executive-4-motion--3-6l-v6-gas"
+},
+{
+"year": 2015,
+"make": "Volkswagen",
+"model": "CC",
+"trim": "R-Line",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2015-volkswagen-cc--r-line--2-0l-l4-gas"
+},
+{
+"year": 2015,
+"make": "Volkswagen",
+"model": "CC",
+"trim": "Sport",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2015-volkswagen-cc--sport--2-0l-l4-gas"
+},
+{
 "year": 2016,
 "make": "Volkswagen",
 "model": "Beetle",
@@ -1233,6 +1269,51 @@
 "url": "https://vw.oempartsonline.com/v-2016-volkswagen-beetle--wolfsburg-edition--1-8l-l4-gas"
 },
 {
+"year": 2016,
+"make": "Volkswagen",
+"model": "CC",
+"trim": "R-Line",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-cc--r-line--2-0l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
+"model": "CC",
+"trim": "R-Line Executive",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-cc--r-line-executive--2-0l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
+"model": "CC",
+"trim": "Sport",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-cc--sport--2-0l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
+"model": "CC",
+"trim": "Trend",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-cc--trend--2-0l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
+"model": "CC",
+"trim": "V6 Executive 4Motion",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-cc--v6-executive-4motion--3-6l-v6-gas"
+},
+{
 "year": 2017,
 "make": "Volkswagen",
 "model": "Beetle",
@@ -1294,6 +1375,24 @@
 "engine": "1.8L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2017-volkswagen-beetle--sel--1-8l-l4-gas"
+},
+{
+"year": 2017,
+"make": "Volkswagen",
+"model": "CC",
+"trim": "R-Line Executive",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2017-volkswagen-cc--r-line-executive--2-0l-l4-gas"
+},
+{
+"year": 2017,
+"make": "Volkswagen",
+"model": "CC",
+"trim": "Sport",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2017-volkswagen-cc--sport--2-0l-l4-gas"
 },
 {
 "year": 2018,
