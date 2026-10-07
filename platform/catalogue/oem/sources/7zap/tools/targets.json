@@ -1,0 +1,4162 @@
+[
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Amarok (Typ NF)",
+"code": "gen_R80xUN0e2uRndeeM2JE9b7cWCmPfICA4v_q5ausYAh7o0pM",
+"region": "global",
+"from": 2023,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_R80xUN0e2uRndeeM2JE9b7cWCmPfICA4v_q5ausYAh7o0pM&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Amarok (Typ 2H) Facelift",
+"code": "gen_WvM0mVLMLTZx93CHiZvQoT1nJbcGF5OnaZAGulb1R6RUcnI",
+"region": "global",
+"from": 2017,
+"to": 2022,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_WvM0mVLMLTZx93CHiZvQoT1nJbcGF5OnaZAGulb1R6RUcnI&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Amarok (Typ 2H)",
+"code": "gen_dEdkWqbGSLZhjFdknaslKrCXEaS3hILG48QlsniasRHEMDE",
+"region": "global",
+"from": 2010,
+"to": 2016,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_dEdkWqbGSLZhjFdknaslKrCXEaS3hILG48QlsniasRHEMDE&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Ameo",
+"code": "gen_M0hWOISrEYRyaKxyWKCofEHDzaFavom_CK5NpMnReBjrmac",
+"region": "global",
+"from": 2017,
+"to": 2020,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_M0hWOISrEYRyaKxyWKCofEHDzaFavom_CK5NpMnReBjrmac&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Arteon (Typ 3H) Facelift",
+"code": "gen_w5EWGVyu-L1a_GaJD93YMrzXNL2LDx55ei5tl1Ytwz31nU8",
+"region": "global",
+"from": 2021,
+"to": 2025,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_w5EWGVyu-L1a_GaJD93YMrzXNL2LDx55ei5tl1Ytwz31nU8&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Arteon (Typ 3H)",
+"code": "gen_1eNbbA7t1gjRtJ-eai-iVwgE8nwe6CsoYGUpOBBn12xdnY4",
+"region": "global",
+"from": 2017,
+"to": 2020,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_1eNbbA7t1gjRtJ-eai-iVwgE8nwe6CsoYGUpOBBn12xdnY4&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Atlas Cross Sport 1st Generation",
+"code": "gen_13kUvRHD_U0RtRIf8kQB9blGkSto8osKAAwjaZVLtpM0s5Q",
+"region": "global",
+"from": 2020,
+"to": 2023,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_13kUvRHD_U0RtRIf8kQB9blGkSto8osKAAwjaZVLtpM0s5Q&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Beetle (Typ 5C) Facelift",
+"code": "gen_AMh7sZnbT5EqfDpbV7pYvq7rnqC_X5kCVnrYXFe1rnNxF5w",
+"region": "global",
+"from": 2017,
+"to": 2019,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_AMh7sZnbT5EqfDpbV7pYvq7rnqC_X5kCVnrYXFe1rnNxF5w&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Beetle (Typ 5C)",
+"code": "gen_rbfajGiTV2XEupgRppYc1IpYoXKH5N0cadSUM85jPK8O1jA",
+"region": "global",
+"from": 2012,
+"to": 2016,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_rbfajGiTV2XEupgRppYc1IpYoXKH5N0cadSUM85jPK8O1jA&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Beetle (Typ 9C) Facelift",
+"code": "gen_bjNXoC6_c0Z2FgsMdNfhhwlZoBORy3fHqY1ecUvBL7jl_JY",
+"region": "global",
+"from": 2006,
+"to": 2010,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_bjNXoC6_c0Z2FgsMdNfhhwlZoBORy3fHqY1ecUvBL7jl_JY&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Beetle (Typ 9C)",
+"code": "gen_DHGLMbj6lYOIaQOongXoEPQZJIb-CSEtQKRHKUI6sYsCHA",
+"region": "global",
+"from": 1999,
+"to": 2005,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_DHGLMbj6lYOIaQOongXoEPQZJIb-CSEtQKRHKUI6sYsCHA&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Beetle (Type 1)",
+"code": "gen_rjnxbf9sX5k3yAOH_TbPvHiI4wmo71pcpwEqQHJhhbwH0Q",
+"region": "global",
+"from": 1947,
+"to": 1999,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_rjnxbf9sX5k3yAOH_TbPvHiI4wmo71pcpwEqQHJhhbwH0Q&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Bora A4 (Typ 1J)",
+"code": "gen_3gkau4yCxGTQDzfkSUW0sTxuyvu-5dMBdInYiQauglFSIQ",
+"region": "global",
+"from": 1999,
+"to": 2005,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_3gkau4yCxGTQDzfkSUW0sTxuyvu-5dMBdInYiQauglFSIQ&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "CC B7 (Typ 358)",
+"code": "gen_uGeQXAuvistRn8D6kayq4fDCMNQNj7YK3kmBWiIqX-Y7vxI",
+"region": "global",
+"from": 2012,
+"to": 2017,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_uGeQXAuvistRn8D6kayq4fDCMNQNj7YK3kmBWiIqX-Y7vxI&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Corrado (Typ 53i) Facelift",
+"code": "gen_tdnjJKeeaGgKnukhGT5fkwPfEPZkgRb162vml6IB5KdubA",
+"region": "global",
+"from": 1991,
+"to": 1995,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_tdnjJKeeaGgKnukhGT5fkwPfEPZkgRb162vml6IB5KdubA&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Eos (Typ 1F) Facelift",
+"code": "gen_BxoJYW6DkpOIj9o5P4q_Wr1PZLFT5Or8XZ6dHdD08YMgzX4",
+"region": "global",
+"from": 2011,
+"to": 2016,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_BxoJYW6DkpOIj9o5P4q_Wr1PZLFT5Or8XZ6dHdD08YMgzX4&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Eos (Typ 1F)",
+"code": "gen_UR-BKqtR2or9iAAqlViu_AJ0vJZ30gnoHT3Tsss78MgY7io",
+"region": "global",
+"from": 2006,
+"to": 2011,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_UR-BKqtR2or9iAAqlViu_AJ0vJZ30gnoHT3Tsss78MgY7io&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Fox (Typ 5Z)",
+"code": "gen_eEZFAPmeTU0G0MqlK7Lq8cV6fMQpwoYdYIGgbYVWsX3XDOw",
+"region": "global",
+"from": 2004,
+"to": 2012,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_eEZFAPmeTU0G0MqlK7Lq8cV6fMQpwoYdYIGgbYVWsX3XDOw&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Gol G5",
+"code": "gen_TG0MKR9mC_HuJG26dwusYHX-jgryEYBih3GZs-99iXx65l0",
+"region": "global",
+"from": 2009,
+"to": 2011,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_TG0MKR9mC_HuJG26dwusYHX-jgryEYBih3GZs-99iXx65l0&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Gol G4",
+"code": "gen__cuGdihxgGkQcEXZ36CRqaxRBlyFT3qZCmlGVxx9XgRFAMI",
+"region": "global",
+"from": 2006,
+"to": 2010,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen__cuGdihxgGkQcEXZ36CRqaxRBlyFT3qZCmlGVxx9XgRFAMI&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Gol G3",
+"code": "gen_oQQVonIc8PmzQ0XIGEP0km5anbmKzpcKigEl0DNQieNxR68",
+"region": "global",
+"from": 2004,
+"to": 2006,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_oQQVonIc8PmzQ0XIGEP0km5anbmKzpcKigEl0DNQieNxR68&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Golf A7 Facelift",
+"code": "gen_GkJZ-KVuYedMQ7LyBi-VCwWfh4SJy6FDjAp20C5Kiu7YFNY",
+"region": "global",
+"from": 2017,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_GkJZ-KVuYedMQ7LyBi-VCwWfh4SJy6FDjAp20C5Kiu7YFNY&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "e-Golf A7",
+"code": "gen_FTyNhgjmplsa3yzY9v-RXT6lu9P0_unn4fw0v4xxAK6k6W0",
+"region": "global",
+"from": 2014,
+"to": 2021,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_FTyNhgjmplsa3yzY9v-RXT6lu9P0_unn4fw0v4xxAK6k6W0&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Golf A7",
+"code": "gen_agMt-PzK9xsghscrbuoAB4fS_hhlnzVfIYBWWsAjZZ-iogU",
+"region": "global",
+"from": 2013,
+"to": 2017,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_agMt-PzK9xsghscrbuoAB4fS_hhlnzVfIYBWWsAjZZ-iogU&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Golf A6",
+"code": "gen_-3cxSS9uIENY__1LlLHvXKtQpcNtUmH45CaMcGx74QX9ECs",
+"region": "global",
+"from": 2009,
+"to": 2016,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_-3cxSS9uIENY__1LlLHvXKtQpcNtUmH45CaMcGx74QX9ECs&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Golf A5",
+"code": "gen_2pKY83aBAruiHQdYPgcN79g7HDU8XtqqJ-_EMA5KIboAMTM",
+"region": "global",
+"from": 2003,
+"to": 2009,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_2pKY83aBAruiHQdYPgcN79g7HDU8XtqqJ-_EMA5KIboAMTM&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Golf A4",
+"code": "gen_BGKmpYyOl8ULCSAJ313ZtUBlfze77PUQI0mywf3alPvIrA",
+"region": "global",
+"from": 1997,
+"to": 2002,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_BGKmpYyOl8ULCSAJ313ZtUBlfze77PUQI0mywf3alPvIrA&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Golf A3 Facelift",
+"code": "gen_yE75Yupbmk46AxsAwkYCI-NIuP7PrwEi1YB_sea0gRun8g",
+"region": "global",
+"from": 1995,
+"to": 1999,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_yE75Yupbmk46AxsAwkYCI-NIuP7PrwEi1YB_sea0gRun8g&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Golf A3",
+"code": "gen_nPgz_5buhnrzI8Ag0QUBzNpJ5IYTy7OBmYUqibP8HiP88A",
+"region": "global",
+"from": 1992,
+"to": 1998,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_nPgz_5buhnrzI8Ag0QUBzNpJ5IYTy7OBmYUqibP8HiP88A&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Golf Plus A5 Facelift",
+"code": "gen_rWJB_ds4lgpNrEDFoWTD37t1JxZz8bMfkywcFucZwNfOy7k",
+"region": "global",
+"from": 2009,
+"to": 2014,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_rWJB_ds4lgpNrEDFoWTD37t1JxZz8bMfkywcFucZwNfOy7k&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Golf Plus A5",
+"code": "gen_zzvNf_nblFSCk3gdeySy5E-RFHs8Ax3fBr7_hN3Qcqxbs1c",
+"region": "global",
+"from": 2005,
+"to": 2009,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_zzvNf_nblFSCk3gdeySy5E-RFHs8Ax3fBr7_hN3Qcqxbs1c&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Golf Sportsvan (Typ AM) Facelift",
+"code": "gen_BZ72j1OQp6XR7PsaZYVxCIjd6NBzWPffJOcz1Fb7B7MLuNo",
+"region": "global",
+"from": 2018,
+"to": 2020,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_BZ72j1OQp6XR7PsaZYVxCIjd6NBzWPffJOcz1Fb7B7MLuNo&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Golf Sportsvan (Typ AM)",
+"code": "gen_9zYW8uAz8ld6jnLg1311Wq1JfkBjaxD_tkDGw4D2RzrXm70",
+"region": "global",
+"from": 2014,
+"to": 2017,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_9zYW8uAz8ld6jnLg1311Wq1JfkBjaxD_tkDGw4D2RzrXm70&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "ID. Buzz (Type EB)",
+"code": "gen_oisYiwtuO3xAFi1YgALhPvFFxp4Kv4mnkyO0r6C5Nxc4Nd4",
+"region": "global",
+"from": 2023,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_oisYiwtuO3xAFi1YgALhPvFFxp4Kv4mnkyO0r6C5Nxc4Nd4&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "ID.3 (Type E1)",
+"code": "gen_lhF8ALybOyVQKjaWjqIzb6r2P-AULtMjrmHETjqkZzgDPSo",
+"region": "global",
+"from": 2020,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_lhF8ALybOyVQKjaWjqIzb6r2P-AULtMjrmHETjqkZzgDPSo&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "ID.4/5 (Type E2/E3)",
+"code": "gen_5chZaxzDhuTH70CpRyTGcD2yGUnMtCUE9eHlhKbnc2Qb9hM",
+"region": "global",
+"from": 2021,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_5chZaxzDhuTH70CpRyTGcD2yGUnMtCUE9eHlhKbnc2Qb9hM&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "ID.7 (Type ED)",
+"code": "gen_YnW0HtbqM2xf4A9PWGOTn4aXML1Fc6svfH4BaHuLYUSb0Nk",
+"region": "global",
+"from": 2024,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_YnW0HtbqM2xf4A9PWGOTn4aXML1Fc6svfH4BaHuLYUSb0Nk&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Jetta A7 2nd Facelift",
+"code": "gen_k5JnLgQ5Nttvxyz3s7noW-EtTndJCf-Gu9I5JbXEyXR517E",
+"region": "global",
+"from": 2027,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_k5JnLgQ5Nttvxyz3s7noW-EtTndJCf-Gu9I5JbXEyXR517E&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Jetta A7 1st Facelift",
+"code": "gen_Y7vRQNLg_0SnlCMrAOkVJmZqjAQ86MiGoxq55mv1zcw4-ok",
+"region": "global",
+"from": 2022,
+"to": 2024,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Y7vRQNLg_0SnlCMrAOkVJmZqjAQ86MiGoxq55mv1zcw4-ok&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Jetta A7",
+"code": "gen_Fe4NKydeifJY18QosslZ1W3SxblTo7nfNLKTcpCcNbXcaR4",
+"region": "global",
+"from": 2020,
+"to": 2021,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Fe4NKydeifJY18QosslZ1W3SxblTo7nfNLKTcpCcNbXcaR4&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Jetta A6 Facelift",
+"code": "gen_n0sIGBvd4Jq5MFUQz2fOE1Pbxwv4ffXJK__l8h_3klDeSrg",
+"region": "global",
+"from": 2015,
+"to": 2018,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_n0sIGBvd4Jq5MFUQz2fOE1Pbxwv4ffXJK__l8h_3klDeSrg&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Jetta A6",
+"code": "gen_z3UauWF8FOtaj6-bTExKQ85b4VmPcNSucwWZpuIToWE_e_k",
+"region": "global",
+"from": 2011,
+"to": 2014,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_z3UauWF8FOtaj6-bTExKQ85b4VmPcNSucwWZpuIToWE_e_k&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Jetta A5",
+"code": "gen_ZTTxTUTHx0ET2tGuENsx3BS-2RYcKTtmjwT3zHFy45MkGN8",
+"region": "global",
+"from": 2006,
+"to": 2011,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_ZTTxTUTHx0ET2tGuENsx3BS-2RYcKTtmjwT3zHFy45MkGN8&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Lupo",
+"code": "gen_IgG-y6dUNaPAtx_gS9n8K0xwS1-3OMRYL-EISvoOHcY5T0s",
+"region": "global",
+"from": 1999,
+"to": 2006,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_IgG-y6dUNaPAtx_gS9n8K0xwS1-3OMRYL-EISvoOHcY5T0s&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Parati G4",
+"code": "gen_ykx5yr2YaMcMgcpq0oiP1hqNcBipdssrJa-TH86k_Mc-Mt0",
+"region": "global",
+"from": 2006,
+"to": 2010,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_ykx5yr2YaMcMgcpq0oiP1hqNcBipdssrJa-TH86k_Mc-Mt0&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Parati G3",
+"code": "gen_fw1hhuKgfbdUlDpPkdoFd7MtB1OFO_eaUo_WxbUCBgUJPTI",
+"region": "global",
+"from": 2004,
+"to": 2006,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_fw1hhuKgfbdUlDpPkdoFd7MtB1OFO_eaUo_WxbUCBgUJPTI&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Passat/Santana B9 (Typ 3J)",
+"code": "gen_gtQvOi9HOyXFVsLFyWKjLT7IhD3A8u4xlTRN0vg6Cw2hzFE",
+"region": "global",
+"from": 2024,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_gtQvOi9HOyXFVsLFyWKjLT7IhD3A8u4xlTRN0vg6Cw2hzFE&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Passat/Santana B8 (Typ 3G)",
+"code": "gen_H7D5b4qvFGvWWBqrwq0V11GTv-GERzBVyO2-RIajYOlAs-w",
+"region": "global",
+"from": 2015,
+"to": 2024,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_H7D5b4qvFGvWWBqrwq0V11GTv-GERzBVyO2-RIajYOlAs-w&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Passat/Santana B7 (Typ 3C)",
+"code": "gen_TB8ei45lKlxYbf7VV7e1B_eNpTy1YH39Vcz2p-1RQqzfQ34",
+"region": "global",
+"from": 2011,
+"to": 2015,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_TB8ei45lKlxYbf7VV7e1B_eNpTy1YH39Vcz2p-1RQqzfQ34&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Passat CC B6 (Typ 3C)",
+"code": "gen_utGujjc_9_rsOveBpEU-_CJHjfYwdQUwrQU64mstcqySR_s",
+"region": "global",
+"from": 2009,
+"to": 2012,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_utGujjc_9_rsOveBpEU-_CJHjfYwdQUwrQU64mstcqySR_s&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Passat/Santana B6 (Typ 3C)",
+"code": "gen_I0Wi3f2htJ5iCgdYmsQwGbB4IlioUT9IcTJy-WIWqwsPmys",
+"region": "global",
+"from": 2006,
+"to": 2011,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_I0Wi3f2htJ5iCgdYmsQwGbB4IlioUT9IcTJy-WIWqwsPmys&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Passat/Santana B5.5 (Typ 3BG)",
+"code": "gen_rpCAmdBDP8qP-ptjtDBpX7luDOoa7VsAXde0A636okNNIwA",
+"region": "global",
+"from": 2001,
+"to": 2005,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_rpCAmdBDP8qP-ptjtDBpX7luDOoa7VsAXde0A636okNNIwA&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Passat B5 (Typ 3B)",
+"code": "gen_Eq_4jNe31SdeNQPcHr-VAPDYh8z_EOviByYO7wEVk7hS_Q",
+"region": "global",
+"from": 1997,
+"to": 1999,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Eq_4jNe31SdeNQPcHr-VAPDYh8z_EOviByYO7wEVk7hS_Q&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Passat/Santana B5 (Typ 3B)",
+"code": "gen_iag82rqJjKNqjaNRXGFY5bG22kaX5XTjhfjSXyJk25S4YA",
+"region": "global",
+"from": 1997,
+"to": 2000,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_iag82rqJjKNqjaNRXGFY5bG22kaX5XTjhfjSXyJk25S4YA&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Passat B4 (Typ 35i)",
+"code": "gen_gXBFCyD13XgWuO0sv4d_3NKZLCZqi-NN4xt3kUWhDISyBw",
+"region": "global",
+"from": 1994,
+"to": 1997,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_gXBFCyD13XgWuO0sv4d_3NKZLCZqi-NN4xt3kUWhDISyBw&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Passat/Santana B4 (Typ 35i)",
+"code": "gen_DR5TeaXJe7nua-eQiF1oyW8xdItxjviWr6fJvDPHoyhIIw",
+"region": "global",
+"from": 1994,
+"to": 1997,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_DR5TeaXJe7nua-eQiF1oyW8xdItxjviWr6fJvDPHoyhIIw&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Phaeton (GP4)",
+"code": "gen_0dwEASGy9Hhjonu9YJrFJ0GkeiPaF1RkhXUDk0Zh6vR1SsA",
+"region": "global",
+"from": 2014,
+"to": 2016,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_0dwEASGy9Hhjonu9YJrFJ0GkeiPaF1RkhXUDk0Zh6vR1SsA&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Phaeton (GP3)",
+"code": "gen_1J5CHXWRBHsTIF0MSOzG7dac2jnwNzDwzpztrpiD1_53K80",
+"region": "global",
+"from": 2011,
+"to": 2013,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_1J5CHXWRBHsTIF0MSOzG7dac2jnwNzDwzpztrpiD1_53K80&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Phaeton (GP2)",
+"code": "gen_tdUgFiR6JXMZysNlDjTTntbvO9zdSKwYj20_Pmb7IYtSdSs",
+"region": "global",
+"from": 2008,
+"to": 2010,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_tdUgFiR6JXMZysNlDjTTntbvO9zdSKwYj20_Pmb7IYtSdSs&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Phaeton (GP1)",
+"code": "gen_IKGrT4Q7HW4FKdgHPSDI-yoI-QOh3iQq7Jfg1YNS4k2zzDU",
+"region": "global",
+"from": 2007,
+"to": 2007,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_IKGrT4Q7HW4FKdgHPSDI-yoI-QOh3iQq7Jfg1YNS4k2zzDU&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Phaeton (GP0)",
+"code": "gen_1LXUIqlM8zcFluJ2C0dUk3_hfLu50Je2tLjyUq0oM5k4o1E",
+"region": "global",
+"from": 2002,
+"to": 2006,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_1LXUIqlM8zcFluJ2C0dUk3_hfLu50Je2tLjyUq0oM5k4o1E&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Polo/Derby/Vento (Type AW) Facelift",
+"code": "gen_c2M4KR-mYHBYaDGBG1nP9KadTf9qq32V_OzMXvajpr26_Vo",
+"region": "global",
+"from": 2020,
+"to": 2023,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_c2M4KR-mYHBYaDGBG1nP9KadTf9qq32V_OzMXvajpr26_Vo&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Polo/Derby/Vento (Type AW)",
+"code": "gen_rcxeauhScZ4GH9-ln71_XlCEcGl6_312l1gOXCx9xz15x9w",
+"region": "global",
+"from": 2018,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_rcxeauhScZ4GH9-ln71_XlCEcGl6_312l1gOXCx9xz15x9w&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Polo/Derby/Vento (Typ 6R)",
+"code": "gen_gIwZ5y6hHAV4kZOI7P1DuDIltRfdvQkUQQacQwxeSqPg-yA",
+"region": "global",
+"from": 2009,
+"to": 2022,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_gIwZ5y6hHAV4kZOI7P1DuDIltRfdvQkUQQacQwxeSqPg-yA&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Polo (Typ 9N)",
+"code": "gen_dY-rWi1_0rpe0Bg73ddHAJPVGPbwqeZDVqDxwnnIs0G861w",
+"region": "global",
+"from": 2004,
+"to": 2006,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_dY-rWi1_0rpe0Bg73ddHAJPVGPbwqeZDVqDxwnnIs0G861w&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Polo Classic (Typ 9N)",
+"code": "gen_e-6m9kMNkKsS3XsckoYt8s1IDpfxzfukZaFvQ3Qx5zw7hAs",
+"region": "global",
+"from": 2004,
+"to": 2009,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_e-6m9kMNkKsS3XsckoYt8s1IDpfxzfukZaFvQ3Qx5zw7hAs&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Polo/Derby/Vento (Typ 9N)",
+"code": "gen_2bkGx3ObcF3RaAw7DG_4QQ5D8pdUdFm_frZIQfl4ijoafNo",
+"region": "global",
+"from": 2002,
+"to": 2008,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_2bkGx3ObcF3RaAw7DG_4QQ5D8pdUdFm_frZIQfl4ijoafNo&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Polo Classic (Typ 6N)",
+"code": "gen_NRN1vgbGJPge2jnnnZwSS2lOlhrqoWLZJj-4hjk9SqyJ5A",
+"region": "global",
+"from": 1996,
+"to": 2002,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_NRN1vgbGJPge2jnnnZwSS2lOlhrqoWLZJj-4hjk9SqyJ5A&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Polo/Derby/Vento (Typ 6N)",
+"code": "gen_XJJDhONb-id6LaqNtD0zziWGNCTzqGiESX0sEYDDS7fYFA",
+"region": "global",
+"from": 1995,
+"to": 2002,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_XJJDhONb-id6LaqNtD0zziWGNCTzqGiESX0sEYDDS7fYFA&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Saveiro G5",
+"code": "gen_gmRBB7p5tWhr_oIdCHLD8cS566gmEC7wfSC2ETxawudqm3o",
+"region": "global",
+"from": 2010,
+"to": 2013,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_gmRBB7p5tWhr_oIdCHLD8cS566gmEC7wfSC2ETxawudqm3o&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Saveiro G4",
+"code": "gen_m882l7A2Kubi6e1udCQdXz89VMPzT613J5p113BgAkkoqS0",
+"region": "global",
+"from": 2006,
+"to": 2010,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_m882l7A2Kubi6e1udCQdXz89VMPzT613J5p113BgAkkoqS0&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Saveiro G3",
+"code": "gen_CUD5yIUBb45_8iBF0I2LFDxkbR67ckRAsyxSxZrooQ5BG5c",
+"region": "global",
+"from": 2005,
+"to": 2006,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_CUD5yIUBb45_8iBF0I2LFDxkbR67ckRAsyxSxZrooQ5BG5c&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Scirocco lll (Type 13) Facelift",
+"code": "gen_P39K0Rk-THoUm58iDKxndWZuqn-nDpgNV_ZsWvmN4n5wj4Q",
+"region": "global",
+"from": 2015,
+"to": 2018,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_P39K0Rk-THoUm58iDKxndWZuqn-nDpgNV_ZsWvmN4n5wj4Q&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Scirocco lll (Type 13)",
+"code": "gen_mbDDRP-TIVigBQm5N2HfyjqiXSxFFt7uL7NFlVeLLDHJXRM",
+"region": "global",
+"from": 2009,
+"to": 2014,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_mbDDRP-TIVigBQm5N2HfyjqiXSxFFt7uL7NFlVeLLDHJXRM&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Sharan (Typ 7N) Facelift",
+"code": "gen_8c2PtYxnlqvy3ZpE9cAI728denAAtReH7anMslgnTCHszN0",
+"region": "global",
+"from": 2016,
+"to": 2023,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_8c2PtYxnlqvy3ZpE9cAI728denAAtReH7anMslgnTCHszN0&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Sharan (Typ 7N)",
+"code": "gen_pcId9IrIyt9MRMrATGeLXt86D7gwJkyJIeFCeiEabAxV5PY",
+"region": "global",
+"from": 2011,
+"to": 2016,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_pcId9IrIyt9MRMrATGeLXt86D7gwJkyJIeFCeiEabAxV5PY&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Sharan (Typ 7M) 2nd Facelift",
+"code": "gen_WRy8UcCdaJJLTCsW2nkZLOZNUKs7SjTKsbihHidoRjCaqyM",
+"region": "global",
+"from": 2003,
+"to": 2010,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_WRy8UcCdaJJLTCsW2nkZLOZNUKs7SjTKsbihHidoRjCaqyM&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Sharan (Typ 7M) 1st Facelift",
+"code": "gen_0B4TAjilF1FmOUR8eKTZ4WV8osRvV5kMxaUy58grPvVq4RM",
+"region": "global",
+"from": 2001,
+"to": 2002,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_0B4TAjilF1FmOUR8eKTZ4WV8osRvV5kMxaUy58grPvVq4RM&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Sharan (Typ 7M)",
+"code": "gen_W7cjZRuEp2Rw47w57yeiSzjD8-9teo1kjdkH5SD3qRHh0A",
+"region": "global",
+"from": 1996,
+"to": 2000,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_W7cjZRuEp2Rw47w57yeiSzjD8-9teo1kjdkH5SD3qRHh0A&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Suran/Spacefox Phase II",
+"code": "gen_Gdf8C13U1BzBT-yyV5I_PcbqhkfeD-AQbVSvMHUgQry4jbA",
+"region": "global",
+"from": 2011,
+"to": 2014,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Gdf8C13U1BzBT-yyV5I_PcbqhkfeD-AQbVSvMHUgQry4jbA&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "T-Cross (Type C1) Facelift",
+"code": "gen_itFCCbmYIXDYicddJ66kuYbsP0H-zPXOTP5eqL4xXxAW1Qs",
+"region": "global",
+"from": 2024,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_itFCCbmYIXDYicddJ66kuYbsP0H-zPXOTP5eqL4xXxAW1Qs&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "T-Cross (Type C1)",
+"code": "gen_jpLUaHlSr8WSoZnju6uDp6d_LSGP8Ai0ZdtyoGqExnPH5Ws",
+"region": "global",
+"from": 2019,
+"to": 2023,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_jpLUaHlSr8WSoZnju6uDp6d_LSGP8Ai0ZdtyoGqExnPH5Ws&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "T-Roc (Typ A1) Facelift",
+"code": "gen_iIIuW0a8aj3EZQ55CH9TpIHj5Z41uoNdNHHIy0jGfLzgvcg",
+"region": "global",
+"from": 2021,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_iIIuW0a8aj3EZQ55CH9TpIHj5Z41uoNdNHHIy0jGfLzgvcg&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "T-Roc (Typ A1)",
+"code": "gen_zNA9c04qjIqGVvGqJ0joTtzSXSPmCootweszpFOIb7ksNVM",
+"region": "global",
+"from": 2018,
+"to": 2020,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_zNA9c04qjIqGVvGqJ0joTtzSXSPmCootweszpFOIb7ksNVM&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Taigo (Typ CS)",
+"code": "gen_X0fWPQuh0kJ8sZf11LdW2Fq39jnYrUXtXjjxy_VHOrqJyjM",
+"region": "global",
+"from": 2022,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_X0fWPQuh0kJ8sZf11LdW2Fq39jnYrUXtXjjxy_VHOrqJyjM&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Taigun (Type CW) Facelift",
+"code": "gen_kZMzJK1gKEiXaUZ0gDjQ-cGRfqNuAcNMh6HV6mjg4eH89yA",
+"region": "global",
+"from": 2026,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_kZMzJK1gKEiXaUZ0gDjQ-cGRfqNuAcNMh6HV6mjg4eH89yA&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Taigun (Type CW)",
+"code": "gen_97CIN5thuvZoz0BcCpL7F4fNvOqhD_YoyOC0oC4O21ZrgK8",
+"region": "global",
+"from": 2022,
+"to": 2025,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_97CIN5thuvZoz0BcCpL7F4fNvOqhD_YoyOC0oC4O21ZrgK8&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Taos",
+"code": "gen_LTLz2TkLyDxm8XYcm7-b2ZPzdvuLjWnqEk4grsxnfwrYGr8",
+"region": "global",
+"from": 2021,
+"to": 2023,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_LTLz2TkLyDxm8XYcm7-b2ZPzdvuLjWnqEk4grsxnfwrYGr8&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Taro (Typ 7A)",
+"code": "gen_i6TZKQx0C2PHZuW0VqOhGuvmra-qwABFa00QSRgvX1s78g",
+"region": "global",
+"from": 1989,
+"to": 1997,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_i6TZKQx0C2PHZuW0VqOhGuvmra-qwABFa00QSRgvX1s78g&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Tayron (Typ DN)",
+"code": "gen_w2CWPToMVrvuMNLff3w9rQV7cFU2CXDwv8ADaL0cPCkgeJo",
+"region": "global",
+"from": 2025,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_w2CWPToMVrvuMNLff3w9rQV7cFU2CXDwv8ADaL0cPCkgeJo&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Teramont 2nd Facelift",
+"code": "gen_U0ERDQNr5POYUj40-I_21aMIgmCMud_ud6DtGBVfU38YxhQ",
+"region": "global",
+"from": 2024,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_U0ERDQNr5POYUj40-I_21aMIgmCMud_ud6DtGBVfU38YxhQ&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Teramont 1st Facelift",
+"code": "gen__bCgk7ICtjP0xQR634xKpKCmtdzNv5L4kve3b5GvmO775Zs",
+"region": "global",
+"from": 2021,
+"to": 2023,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen__bCgk7ICtjP0xQR634xKpKCmtdzNv5L4kve3b5GvmO775Zs&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Teramont",
+"code": "gen_VniSfVydHmnRLLjc_BjDanC1pjmNM3pHkTk5fOFwO_xf3SM",
+"region": "global",
+"from": 2018,
+"to": 2020,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_VniSfVydHmnRLLjc_BjDanC1pjmNM3pHkTk5fOFwO_xf3SM&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Tiguan (Typ CT)",
+"code": "gen_7i0gpjgC_sC-YlJPMlsTOKLOxz2Mh4lpjK1qoXudCL2sXWM",
+"region": "global",
+"from": 2024,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_7i0gpjgC_sC-YlJPMlsTOKLOxz2Mh4lpjK1qoXudCL2sXWM&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Tiguan (Typ AD/BW) Facelift",
+"code": "gen_SbZswzTpV2pVIwShM6Datrkb7NbF4xtGHpm-qtkpNu4w96Y",
+"region": "global",
+"from": 2020,
+"to": 2024,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_SbZswzTpV2pVIwShM6Datrkb7NbF4xtGHpm-qtkpNu4w96Y&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Tiguan (Typ AD/BW)",
+"code": "gen_Zoa2Wrt-QXbWmTJ6zpQt_8B0CqWvfLXChDPhauPjGbEI9fw",
+"region": "global",
+"from": 2016,
+"to": 2019,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Zoa2Wrt-QXbWmTJ6zpQt_8B0CqWvfLXChDPhauPjGbEI9fw&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Tiguan (Typ 5N) Facelift",
+"code": "gen_zWyEwxDsYHQAnCq0Rpf7_8JEDVJa14vI6jX8lVUVRfwz6J0",
+"region": "global",
+"from": 2012,
+"to": 2018,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_zWyEwxDsYHQAnCq0Rpf7_8JEDVJa14vI6jX8lVUVRfwz6J0&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Tiguan (Typ 5N)",
+"code": "gen_QZZli7EoNYd6FlGk0h2i_wUIIibXNRqMLudtZfZ1doDB3lw",
+"region": "global",
+"from": 2008,
+"to": 2011,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_QZZli7EoNYd6FlGk0h2i_wUIIibXNRqMLudtZfZ1doDB3lw&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Tiguan Allspace (Typ AD/BW) Facelift",
+"code": "gen_dOPW9PLCIqCFlxXJczZ6cf6RIP3fvuR5uMSJTkHdZx8sBVc",
+"region": "global",
+"from": 2020,
+"to": 2025,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_dOPW9PLCIqCFlxXJczZ6cf6RIP3fvuR5uMSJTkHdZx8sBVc&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Tiguan Allspace (Typ AD/BW)",
+"code": "gen_ywCy6e9jmcEBGrX950blaxM_kZURQx2dUNrJxK2Yb2qDOmg",
+"region": "global",
+"from": 2018,
+"to": 2019,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_ywCy6e9jmcEBGrX950blaxM_kZURQx2dUNrJxK2Yb2qDOmg&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Touareg (Typ CR)",
+"code": "gen_XjaaxTAHMEQexoSS-_YL6P1TU1f1OoBiQlZrmMKnCf4Rduc",
+"region": "global",
+"from": 2018,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_XjaaxTAHMEQexoSS-_YL6P1TU1f1OoBiQlZrmMKnCf4Rduc&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Touareg (Typ 7P) Facelift",
+"code": "gen_75-qO9RpWA20AH28oBLLdq6Edbca9ddGrKllrGKce-0BI3U",
+"region": "global",
+"from": 2013,
+"to": 2018,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_75-qO9RpWA20AH28oBLLdq6Edbca9ddGrKllrGKce-0BI3U&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Touareg (Typ 7P)",
+"code": "gen_IW-3gcA63k8mQhE-HQVJ_mniLQSrBWrHr4-OdS-3Yp5jRTs",
+"region": "global",
+"from": 2011,
+"to": 2012,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_IW-3gcA63k8mQhE-HQVJ_mniLQSrBWrHr4-OdS-3Yp5jRTs&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Touareg (Typ 7L) Facelift",
+"code": "gen_g6TRSwe-EaX1kVttgdTUXyBkaqnCBoS0386wZ8UixEtF6MI",
+"region": "global",
+"from": 2007,
+"to": 2010,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_g6TRSwe-EaX1kVttgdTUXyBkaqnCBoS0386wZ8UixEtF6MI&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Touareg (Typ 7L)",
+"code": "gen_un4mYejSjvEp66foMNoGynAphs0Y_jw331W67JCBJFBgTpI",
+"region": "global",
+"from": 2003,
+"to": 2007,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_un4mYejSjvEp66foMNoGynAphs0Y_jw331W67JCBJFBgTpI&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Touran (Typ 5T) Facelift",
+"code": "gen_nMyMGC2NyvzM_HcYkl3EWY09kaQp_swt5_RXmOOVr4fGUbc",
+"region": "global",
+"from": 2023,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_nMyMGC2NyvzM_HcYkl3EWY09kaQp_swt5_RXmOOVr4fGUbc&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Touran (Typ 5T)",
+"code": "gen_LkemvqaM1mYd8yubVW5EY1z-JKngScQUAsxNXpoQ4sdOYIY",
+"region": "global",
+"from": 2016,
+"to": 2022,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_LkemvqaM1mYd8yubVW5EY1z-JKngScQUAsxNXpoQ4sdOYIY&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Touran (Typ 1T) 2nd Facelift",
+"code": "gen_7UMmex5iUkkxQvT-tlMxBqiTf282DdZWWw5gDlIi_jXM1Tw",
+"region": "global",
+"from": 2011,
+"to": 2015,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_7UMmex5iUkkxQvT-tlMxBqiTf282DdZWWw5gDlIi_jXM1Tw&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Touran (Typ 1T) 1st Facelift",
+"code": "gen_xO6WsrTitq_nMQ3cRkkPsOuVgpMLi6FpzasrtdhZSURqiGM",
+"region": "global",
+"from": 2006,
+"to": 2010,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_xO6WsrTitq_nMQ3cRkkPsOuVgpMLi6FpzasrtdhZSURqiGM&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Touran (Typ 1T)",
+"code": "gen_wvsCLliJnWkGRzIhfPrNtCu8xLBH82Yqx8D3K9zBxVhHwks",
+"region": "global",
+"from": 2003,
+"to": 2005,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_wvsCLliJnWkGRzIhfPrNtCu8xLBH82Yqx8D3K9zBxVhHwks&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Transporter T7",
+"code": "gen_xDCu2rYyMIdsIIo80cNFjTmyrmYl7u6Xn9GyKa2zlxsW8Ww",
+"region": "global",
+"from": 2025,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_xDCu2rYyMIdsIIo80cNFjTmyrmYl7u6Xn9GyKa2zlxsW8Ww&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Transporter T6.1",
+"code": "gen_0G9uw6HJRMxyqycQwBfr3YgniOnHTssjxU06P3AXrcCRg68",
+"region": "global",
+"from": 2020,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_0G9uw6HJRMxyqycQwBfr3YgniOnHTssjxU06P3AXrcCRg68&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Transporter T6",
+"code": "gen_Nd3Q7q0dwMfcbRCm0r9i8nFc1Xpt4mBQjUKolDlsELXd1Sw",
+"region": "global",
+"from": 2016,
+"to": 2019,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Nd3Q7q0dwMfcbRCm0r9i8nFc1Xpt4mBQjUKolDlsELXd1Sw&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Transporter T5 Facelift",
+"code": "gen_3vJh_RM0JHfaiEHTLT6q_TJJ16iT-PqFme2PZV9eVh9W07c",
+"region": "global",
+"from": 2009,
+"to": 2015,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_3vJh_RM0JHfaiEHTLT6q_TJJ16iT-PqFme2PZV9eVh9W07c&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Transporter T5",
+"code": "gen_zZ3SvgMHZvkSadIl7HqxFN1cdwBH8UrO2FaItSdogODPRPY",
+"region": "global",
+"from": 2003,
+"to": 2008,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_zZ3SvgMHZvkSadIl7HqxFN1cdwBH8UrO2FaItSdogODPRPY&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Transporter T4 Facelift",
+"code": "gen_tZ-ojinHOsS-dBxDT9JUbEvEtuUdzD2SEDdK4ynoqxdNew",
+"region": "global",
+"from": 1996,
+"to": 2004,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_tZ-ojinHOsS-dBxDT9JUbEvEtuUdzD2SEDdK4ynoqxdNew&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Transporter T4",
+"code": "gen_tWUhCb9uHiIkncOPpH4SXECeJd7Q2a0WM_PjH20jaMLZ6Q",
+"region": "global",
+"from": 1991,
+"to": 1996,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_tWUhCb9uHiIkncOPpH4SXECeJd7Q2a0WM_PjH20jaMLZ6Q&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Transporter T3 (Typ 2) Facelift",
+"code": "gen_IPzMkoap4_M9Lvf2SpqLxV86nBpU4tLfTT4KAa4g892mbw",
+"region": "global",
+"from": 1985,
+"to": 1996,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_IPzMkoap4_M9Lvf2SpqLxV86nBpU4tLfTT4KAa4g892mbw&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "up! (Type 12/BL) Facelift",
+"code": "gen_elvQuBip0_Dp19X_rSi3lHs9JY3u1-Ldq1pSFqql3nl_yHU",
+"region": "global",
+"from": 2017,
+"to": 2024,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_elvQuBip0_Dp19X_rSi3lHs9JY3u1-Ldq1pSFqql3nl_yHU&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "up!/e-up! (Type 12/BL) Facelift",
+"code": "gen_H2jaWfxf6P8wRMaHT_JtIKR1s09HlArord5YSLEofdRRhWM",
+"region": "global",
+"from": 2017,
+"to": 2024,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_H2jaWfxf6P8wRMaHT_JtIKR1s09HlArord5YSLEofdRRhWM&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "up!/e-up! (Type 12/BL)",
+"code": "gen_5eTBAtGZrLYLN2tuEz1GaRQbAmThQN3q9JQM1syRn7xBArU",
+"region": "global",
+"from": 2012,
+"to": 2016,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_5eTBAtGZrLYLN2tuEz1GaRQbAmThQN3q9JQM1syRn7xBArU&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Vento A3",
+"code": "gen_4E_1T68v4SA0o4PNIrQHgjyVpTP246l7eIwc8hgpd1kdPA",
+"region": "global",
+"from": 1992,
+"to": 1998,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_4E_1T68v4SA0o4PNIrQHgjyVpTP246l7eIwc8hgpd1kdPA&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "Virtus Facelift",
+"code": "gen_b7WEqSYZZ4Ud3pNtjOz5RPuPS5jYP1nGSPs0yYK1_ScsPvw",
+"region": "global",
+"from": 2022,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_b7WEqSYZZ4Ud3pNtjOz5RPuPS5jYP1nGSPs0yYK1_ScsPvw&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Volkswagen",
+"brand": "volkswagen",
+"gen": "XL1",
+"code": "gen_mM0LpOXmxveQLERmlKZzgGD6_l4swgD20njcHFsrs3nU6qc",
+"region": "global",
+"from": 2015,
+"to": 2015,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_mM0LpOXmxveQLERmlKZzgGD6_l4swgD20njcHFsrs3nU6qc&brand=volkswagen&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "80 RS 2 (Typ 8C)",
+"code": "gen_6h2bFty3unxaAyKwG-wzZX_QywiVPg",
+"region": "global",
+"from": 1994,
+"to": 1996,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_6h2bFty3unxaAyKwG-wzZX_QywiVPg&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "80/90 B4 (Typ 8C)",
+"code": "gen_HMVlAH2N2_gDdVGG5X7jUkGAdynYGw",
+"region": "global",
+"from": 1990,
+"to": 1996,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_HMVlAH2N2_gDdVGG5X7jUkGAdynYGw&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A1 (Typ GB)",
+"code": "gen_Oe4IxmD_upO8EBDyaYHxXUsj80-SR5M",
+"region": "global",
+"from": 2019,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Oe4IxmD_upO8EBDyaYHxXUsj80-SR5M&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A1 (Typ 8X) Facelift",
+"code": "gen_25gtDp23BvagHvFNiVjvgWBkC_lGqNA",
+"region": "global",
+"from": 2015,
+"to": 2018,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_25gtDp23BvagHvFNiVjvgWBkC_lGqNA&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A1 (Typ 8X)",
+"code": "gen_Fy1obKoUa_OI4ZjSfKFQcQhAHOIHKw4",
+"region": "global",
+"from": 2011,
+"to": 2014,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Fy1obKoUa_OI4ZjSfKFQcQhAHOIHKw4&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A2 (Typ 8Z)",
+"code": "gen_7AZ21cW4yN7ZDFmyG2nTSZEFVWHffA",
+"region": "global",
+"from": 2000,
+"to": 2005,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_7AZ21cW4yN7ZDFmyG2nTSZEFVWHffA&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A3/S3/RS3 (Typ 8Y) Facelift",
+"code": "gen_UYesr7Hdd-UHG4knE0srMKbrlgGiHWA",
+"region": "global",
+"from": 2024,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_UYesr7Hdd-UHG4knE0srMKbrlgGiHWA&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A3/S3 (Typ 8Y)",
+"code": "gen_s0wjiwv2HOWmtOrrCjrjhsN6S2iFEiw",
+"region": "global",
+"from": 2020,
+"to": 2023,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_s0wjiwv2HOWmtOrrCjrjhsN6S2iFEiw&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A3 (Typ 8V) Facelift",
+"code": "gen_D2rzJ1Il8NHFZA4L06mGdQeiPOl9s5g",
+"region": "global",
+"from": 2017,
+"to": 2021,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_D2rzJ1Il8NHFZA4L06mGdQeiPOl9s5g&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A3/S3 (Typ 8V) Facelift",
+"code": "gen_4rIkhP2HltthBAm-UnrA3yyi9qNK2Us",
+"region": "global",
+"from": 2017,
+"to": 2020,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_4rIkhP2HltthBAm-UnrA3yyi9qNK2Us&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A3 (Typ 8V)",
+"code": "gen_51XPUAaOGe9TQpoWa_M8Uvg3iFU6tUk",
+"region": "global",
+"from": 2015,
+"to": 2016,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_51XPUAaOGe9TQpoWa_M8Uvg3iFU6tUk&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A3/S3 (Typ 8V)",
+"code": "gen_E-iZqG3DYFL3RaKcdkhoxWvLf-4KXDA",
+"region": "global",
+"from": 2013,
+"to": 2016,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_E-iZqG3DYFL3RaKcdkhoxWvLf-4KXDA&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A3 (Typ 8P) Facelift",
+"code": "gen_Gk7qQ8baQ8ZUIvMPxOF8_xY9wUiXa30",
+"region": "global",
+"from": 2008,
+"to": 2013,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Gk7qQ8baQ8ZUIvMPxOF8_xY9wUiXa30&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A3/S3 (Typ 8P) Facelift",
+"code": "gen_Wa0Lgue-yJ13QLrYgkS5mFXwgpTP2yc",
+"region": "global",
+"from": 2008,
+"to": 2013,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Wa0Lgue-yJ13QLrYgkS5mFXwgpTP2yc&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A3/S3 (Typ 8P)",
+"code": "gen_XvmS8N4MOllzVL8HHOTNakrnBwbusOY",
+"region": "global",
+"from": 2004,
+"to": 2007,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_XvmS8N4MOllzVL8HHOTNakrnBwbusOY&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A3/S3 (Typ 8L) Facelift",
+"code": "gen_jIBUp8maMqa4OJL1hdYKSHXALrncDA",
+"region": "global",
+"from": 2001,
+"to": 2003,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_jIBUp8maMqa4OJL1hdYKSHXALrncDA&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A3/S3 (Typ 8L)",
+"code": "gen_eyBJoFOIuufEW5_I51uGXmZTlWiRCQ",
+"region": "global",
+"from": 1997,
+"to": 2000,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_eyBJoFOIuufEW5_I51uGXmZTlWiRCQ&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A4 B9 (Typ 8W) Facelift",
+"code": "gen_E3_LDqtfqQcve9ReTIMYv0Hq-xE9Xoo",
+"region": "global",
+"from": 2019,
+"to": 2025,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_E3_LDqtfqQcve9ReTIMYv0Hq-xE9Xoo&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A4/S4 B9 (Typ 8W) Facelift",
+"code": "gen_neBEVOoFJtiyVSGcr_frcn9lx7yZbXg",
+"region": "global",
+"from": 2019,
+"to": 2025,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_neBEVOoFJtiyVSGcr_frcn9lx7yZbXg&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A4 B9 (Typ 8W)",
+"code": "gen_Zld5Bx-HDho8gAddMW_NpJlbaT5FGAg",
+"region": "global",
+"from": 2016,
+"to": 2018,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Zld5Bx-HDho8gAddMW_NpJlbaT5FGAg&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A4/S4 B9 (Typ 8W)",
+"code": "gen_Asi9ie3OeYFcT6EoT4YFxuYcgLCfsm4",
+"region": "global",
+"from": 2016,
+"to": 2018,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Asi9ie3OeYFcT6EoT4YFxuYcgLCfsm4&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A4/S4 B8 (Typ 8K) Facelift",
+"code": "gen_-NWjq-JRpoi9vgn9859av6gM_OpeEwc",
+"region": "global",
+"from": 2013,
+"to": 2015,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_-NWjq-JRpoi9vgn9859av6gM_OpeEwc&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A4 B8 (Typ 8K) Facelift",
+"code": "gen_FqWVYPNdtHpq5-rKCpJ5J8FMSLtXHGI",
+"region": "global",
+"from": 2012,
+"to": 2016,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_FqWVYPNdtHpq5-rKCpJ5J8FMSLtXHGI&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A4 B8 (Typ 8K)",
+"code": "gen_XyIxNo7y5TKXjneqi8eaGFuH1a4W9N0",
+"region": "global",
+"from": 2008,
+"to": 2012,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_XyIxNo7y5TKXjneqi8eaGFuH1a4W9N0&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A4/S4 B8 (Typ 8K)",
+"code": "gen_Nz98wvMVh31mZ9oSuOm29cSRntccugU",
+"region": "global",
+"from": 2008,
+"to": 2012,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Nz98wvMVh31mZ9oSuOm29cSRntccugU&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A4 B7 (Typ 8E/8H)",
+"code": "gen_gijX-66jxCwZLrxvZwhlgI7TgY0ezvI",
+"region": "global",
+"from": 2005,
+"to": 2008,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_gijX-66jxCwZLrxvZwhlgI7TgY0ezvI&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A4 B6 (Typ 8E/8H)",
+"code": "gen_4waWw8FKjlvWcXBi6627x0L9XvhQj0E",
+"region": "global",
+"from": 2001,
+"to": 2005,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_4waWw8FKjlvWcXBi6627x0L9XvhQj0E&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A4/S4 B6 (Typ 8E/8H)",
+"code": "gen_vO6Zch6eX5s0Z-JOGOHXBljXfAiB7iA",
+"region": "global",
+"from": 2001,
+"to": 2009,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_vO6Zch6eX5s0Z-JOGOHXBljXfAiB7iA&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A4 B5 (Typ 8D) Facelift",
+"code": "gen_HrlxfuKWqgeJGuCd6XMyW4P_keUZSg",
+"region": "global",
+"from": 1999,
+"to": 2001,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_HrlxfuKWqgeJGuCd6XMyW4P_keUZSg&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A4/S4 B5 (Typ 8D) Facelift",
+"code": "gen_LbTMaa7tMn55qByoLN_HpIEx2eT62g",
+"region": "global",
+"from": 1999,
+"to": 2001,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_LbTMaa7tMn55qByoLN_HpIEx2eT62g&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A4 B5 (Typ 8D)",
+"code": "gen_EFfkLepa_DeeJwL4258e5lyGPSXUmg",
+"region": "global",
+"from": 1995,
+"to": 1999,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_EFfkLepa_DeeJwL4258e5lyGPSXUmg&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A4/S4 B5 (Typ 8D)",
+"code": "gen_-09h_UQO2dNjDlenrX3JAE6xkPN0Yw",
+"region": "global",
+"from": 1995,
+"to": 1999,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_-09h_UQO2dNjDlenrX3JAE6xkPN0Yw&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A5L (B10)",
+"code": "gen_B3XULrOoFkkob1seCJeKTpzYNd1RRBw",
+"region": "global",
+"from": 2025,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_B3XULrOoFkkob1seCJeKTpzYNd1RRBw&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A5 (B10)",
+"code": "gen_5kOvhVvDXSYIb-2EZ-BSTQs7987X4Vg",
+"region": "global",
+"from": 2024,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_5kOvhVvDXSYIb-2EZ-BSTQs7987X4Vg&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A5/S5 (F5) Facelift",
+"code": "gen_swMLY7pv1zkDZBkPYOnt86055popp-4",
+"region": "global",
+"from": 2019,
+"to": 2025,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_swMLY7pv1zkDZBkPYOnt86055popp-4&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A5/S5 (F5)",
+"code": "gen_8K5lubzEEhp_77VRnozNoPp_lZelW_s",
+"region": "global",
+"from": 2017,
+"to": 2018,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_8K5lubzEEhp_77VRnozNoPp_lZelW_s&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A5/S5 (8T) Facelift",
+"code": "gen_rLmgxH-y0IcHTIBzOUHXXhN05SHS0Rw",
+"region": "global",
+"from": 2012,
+"to": 2017,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_rLmgxH-y0IcHTIBzOUHXXhN05SHS0Rw&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A5/S5 (8T)",
+"code": "gen_AkdcTjqv0gxoR_6m-a7J2nMARoPgAcM",
+"region": "global",
+"from": 2008,
+"to": 2011,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_AkdcTjqv0gxoR_6m-a7J2nMARoPgAcM&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A6 C9 (Typ 4L)",
+"code": "gen_guHoV59wgL_GlNOrMQoMhxsGqZfZl4g",
+"region": "global",
+"from": 2026,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_guHoV59wgL_GlNOrMQoMhxsGqZfZl4g&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A6L C9 (Typ 4L)",
+"code": "gen_VZ5UDoUy0_qyJigIrip9ZT6Ia6G61Gw",
+"region": "global",
+"from": 2026,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_VZ5UDoUy0_qyJigIrip9ZT6Ia6G61Gw&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A6 e-tron C9 (Typ 4L)",
+"code": "gen_7j6v46Ghr1QAixwS4HTp6b_QaYiTQeg",
+"region": "global",
+"from": 2025,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_7j6v46Ghr1QAixwS4HTp6b_QaYiTQeg&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A6 C8 (Typ 4K) Facelift",
+"code": "gen_T0dc5uW3TkieTieDfoLtqZHbn7k_2p0",
+"region": "global",
+"from": 2023,
+"to": 2026,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_T0dc5uW3TkieTieDfoLtqZHbn7k_2p0&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A6/S6 C8 (Typ 4K) Facelift",
+"code": "gen_bm41J1K3KUS9nRG3je2bEddKifFz68w",
+"region": "global",
+"from": 2023,
+"to": 2026,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_bm41J1K3KUS9nRG3je2bEddKifFz68w&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A6 C8 (Typ 4K)",
+"code": "gen_Jw_eCFZCY0pnTqT-LBtgtJVeYkjqffA",
+"region": "global",
+"from": 2019,
+"to": 2022,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Jw_eCFZCY0pnTqT-LBtgtJVeYkjqffA&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A6/S6 C8 (Typ 4K)",
+"code": "gen_44SiyKmLhmW-Kadde4gc93dw4QYi5iU",
+"region": "global",
+"from": 2019,
+"to": 2022,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_44SiyKmLhmW-Kadde4gc93dw4QYi5iU&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A6 C7 (Typ 4G) Facelift",
+"code": "gen_KMIQNYTZDdt7K9F2xzK6b29TCvfQ88U",
+"region": "global",
+"from": 2015,
+"to": 2018,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_KMIQNYTZDdt7K9F2xzK6b29TCvfQ88U&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A6/S6 C7 (Typ 4G) Facelift",
+"code": "gen_RXGRgu13ns0Tnsvn0Ace4m1yrwKJdro",
+"region": "global",
+"from": 2015,
+"to": 2018,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_RXGRgu13ns0Tnsvn0Ace4m1yrwKJdro&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A6 C7 (Typ 4G)",
+"code": "gen_yfVTyru6ZnEiFm6ATL9oEY0FZ83pKJk",
+"region": "global",
+"from": 2011,
+"to": 2018,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_yfVTyru6ZnEiFm6ATL9oEY0FZ83pKJk&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A6/S6 C7 (Typ 4G)",
+"code": "gen_4F5tz0p1IVszYRD5vq__EnqU6RHNGG0",
+"region": "global",
+"from": 2011,
+"to": 2014,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_4F5tz0p1IVszYRD5vq__EnqU6RHNGG0&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A6 C6 (Typ 4F) Facelift",
+"code": "gen_YAokQkZ0JIOhY0TOEQUzcUGy-ylg3f0",
+"region": "global",
+"from": 2009,
+"to": 2011,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_YAokQkZ0JIOhY0TOEQUzcUGy-ylg3f0&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A6/S6 C6 (Typ 4F) Facelift",
+"code": "gen_yDFy6NwNA8xUTtmEotWgi1PGNpWA3kY",
+"region": "global",
+"from": 2009,
+"to": 2011,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_yDFy6NwNA8xUTtmEotWgi1PGNpWA3kY&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A6 C6 (Typ 4F)",
+"code": "gen_UaXBI-FmVFb-1tI_ztSDxCRMcl78TRI",
+"region": "global",
+"from": 2005,
+"to": 2011,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_UaXBI-FmVFb-1tI_ztSDxCRMcl78TRI&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A6/S6 C6 (Typ 4F)",
+"code": "gen_VwnvRULCzMZOB7f-z2FIERMHezjO1W0",
+"region": "global",
+"from": 2005,
+"to": 2008,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_VwnvRULCzMZOB7f-z2FIERMHezjO1W0&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A6/S6 C5 (Typ 4B) Facelift",
+"code": "gen_dIS2OU9zZ2VqxqExTKaLJqiXkbdzsDo",
+"region": "global",
+"from": 2002,
+"to": 2005,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_dIS2OU9zZ2VqxqExTKaLJqiXkbdzsDo&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A6 C5 (Typ 4B) Facelift",
+"code": "gen_J_envvR8f0S-whv0k-eh_I4GxXV-0A",
+"region": "global",
+"from": 2000,
+"to": 2005,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_J_envvR8f0S-whv0k-eh_I4GxXV-0A&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A6 C5 (Typ 4B)",
+"code": "gen_I3pjwqRz_Fcb3PDKD2-VU-vByj9VORY",
+"region": "global",
+"from": 1998,
+"to": 2001,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_I3pjwqRz_Fcb3PDKD2-VU-vByj9VORY&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A6/S6 C5 (Typ 4B)",
+"code": "gen_J2dvgkXOTABQ588pJWKpnS6kC_Ld28I",
+"region": "global",
+"from": 1998,
+"to": 2001,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_J2dvgkXOTABQ588pJWKpnS6kC_Ld28I&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "S6 Plus C4 (Typ 4A)",
+"code": "gen_svPEZ7CMzJdI18WHzq-rWXoQvKFGmQ",
+"region": "global",
+"from": 1996,
+"to": 1997,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_svPEZ7CMzJdI18WHzq-rWXoQvKFGmQ&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A6 C4 (Typ 4A)",
+"code": "gen_dq2lrEf6XN8ocH1IWEtRzVR3ySsMgg",
+"region": "global",
+"from": 1995,
+"to": 1997,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_dq2lrEf6XN8ocH1IWEtRzVR3ySsMgg&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A6/S6 C4 (Typ 4A)",
+"code": "gen_p0sPGStBYudLnBQM5flXTS-8sLte4Q",
+"region": "global",
+"from": 1995,
+"to": 1997,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_p0sPGStBYudLnBQM5flXTS-8sLte4Q&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A7 Sportback C8 (Type 4K8) Facelift",
+"code": "gen_xJOCbU59vIynms_o5-gPVwjZPWm3XOk",
+"region": "global",
+"from": 2023,
+"to": 2026,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_xJOCbU59vIynms_o5-gPVwjZPWm3XOk&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A7 Sportback C8 (Type 4K8)",
+"code": "gen_xzW8LMbN34VZ7cHIV0eaIRomSA2D3Fc",
+"region": "global",
+"from": 2019,
+"to": 2022,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_xzW8LMbN34VZ7cHIV0eaIRomSA2D3Fc&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A7 Sportback C7 (Type 4G8) Facelift",
+"code": "gen_QSj78zMj7C07PUs3HGyK7nYtMM560dE",
+"region": "global",
+"from": 2015,
+"to": 2018,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_QSj78zMj7C07PUs3HGyK7nYtMM560dE&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A7 Sportback C7 (Type 4G8)",
+"code": "gen_PF_o3LaY6sfOi9Oe265hpczw0WmMb5o",
+"region": "global",
+"from": 2011,
+"to": 2014,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_PF_o3LaY6sfOi9Oe265hpczw0WmMb5o&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A8 D5 (Typ 4N) Facelift",
+"code": "gen_z3XK5xlVwkAWSKC203iseRwLH-s1fdc",
+"region": "global",
+"from": 2021,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_z3XK5xlVwkAWSKC203iseRwLH-s1fdc&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A8/S8 D5 (Typ 4N) Facelift",
+"code": "gen_jzNz0sM1bzu-WDEBXbKclhVPTYgzEPg",
+"region": "global",
+"from": 2021,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_jzNz0sM1bzu-WDEBXbKclhVPTYgzEPg&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A8 D5 (Typ 4N)",
+"code": "gen_O2INaewQ9YZkenf0nHL3zCFoQB9mk34",
+"region": "global",
+"from": 2018,
+"to": 2020,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_O2INaewQ9YZkenf0nHL3zCFoQB9mk34&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A8/S8 D5 (Typ 4N)",
+"code": "gen_kxr2QLc8qimuv0VruVjEmZ-5IPebRnI",
+"region": "global",
+"from": 2018,
+"to": 2020,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_kxr2QLc8qimuv0VruVjEmZ-5IPebRnI&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A8 D4 (Typ 4H) Facelift",
+"code": "gen_nATKFLWaUkPOT7cO1RnjZPjHNZfan_o",
+"region": "global",
+"from": 2014,
+"to": 2017,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_nATKFLWaUkPOT7cO1RnjZPjHNZfan_o&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A8/S8 D4 (Typ 4H) Facelift",
+"code": "gen_bi6Z5dLyfoW9mgvkeOWvDS7y66Z1tAg",
+"region": "global",
+"from": 2014,
+"to": 2017,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_bi6Z5dLyfoW9mgvkeOWvDS7y66Z1tAg&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A8 D4 (Typ 4H)",
+"code": "gen_IGLVpjwweJ6WVyqmZIemzVuH8XjCTts",
+"region": "global",
+"from": 2010,
+"to": 2013,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_IGLVpjwweJ6WVyqmZIemzVuH8XjCTts&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A8/S8 D4 (Typ 4H)",
+"code": "gen_FPmQvbr7zD-QtUtVnH7aTXRpQfvDHaY",
+"region": "global",
+"from": 2010,
+"to": 2013,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_FPmQvbr7zD-QtUtVnH7aTXRpQfvDHaY&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A8 D3 (Typ 4E) Facelift",
+"code": "gen_-keEMd3u3gx_1HxZ5YVahh6A6SDcECY",
+"region": "global",
+"from": 2008,
+"to": 2010,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_-keEMd3u3gx_1HxZ5YVahh6A6SDcECY&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A8/S8 D3 (Typ 4E) Facelift",
+"code": "gen_vqFu0LwFDxrtOTagxQq4FZ_wXo42aJQ",
+"region": "global",
+"from": 2008,
+"to": 2010,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_vqFu0LwFDxrtOTagxQq4FZ_wXo42aJQ&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A8 D3 (Typ 4E)",
+"code": "gen_oI8copjdxBeINk4T_LzBpsaRaRQOhq8",
+"region": "global",
+"from": 2004,
+"to": 2007,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_oI8copjdxBeINk4T_LzBpsaRaRQOhq8&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A8/S8 D3 (Typ 4E)",
+"code": "gen_Pxd3Md5jcwyjVQ8NIkwDluXTApQ7pGo",
+"region": "global",
+"from": 2003,
+"to": 2007,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Pxd3Md5jcwyjVQ8NIkwDluXTApQ7pGo&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A8 D2 (Typ 4D) Facelift",
+"code": "gen_GNtaZMQWr9Bye4s32jfD9hbh1OpO5j8",
+"region": "global",
+"from": 1999,
+"to": 2003,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_GNtaZMQWr9Bye4s32jfD9hbh1OpO5j8&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A8/S8 D2 (Typ 4D) Facelift",
+"code": "gen_O1LCy8FIlxF1eAIsSsnrNxfoLlVNTuE",
+"region": "global",
+"from": 1999,
+"to": 2003,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_O1LCy8FIlxF1eAIsSsnrNxfoLlVNTuE&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A8 D2 (Typ 4D)",
+"code": "gen_bAIFUbVuAhctCCxu1e49Q1_sRDZ4vA",
+"region": "global",
+"from": 1994,
+"to": 1999,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_bAIFUbVuAhctCCxu1e49Q1_sRDZ4vA&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "A8/S8 D2 (Typ 4D)",
+"code": "gen_Iof4-67CJRhAs7T0aIjLRWxxopmEDg",
+"region": "global",
+"from": 1994,
+"to": 1999,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Iof4-67CJRhAs7T0aIjLRWxxopmEDg&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Cabriolet (Typ 8G) Facelift",
+"code": "gen_8kfhzvKLyzgNQBmH761WhX_ze4BeMAI",
+"region": "global",
+"from": 1997,
+"to": 2000,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_8kfhzvKLyzgNQBmH761WhX_ze4BeMAI&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Cabriolet (Typ 8G)",
+"code": "gen_0fVxqmXjyOl_RQMOjYEGSYeDfezLBZM",
+"region": "global",
+"from": 1992,
+"to": 1996,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_0fVxqmXjyOl_RQMOjYEGSYeDfezLBZM&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Coupe B3",
+"code": "gen_Ka7dgGCz-m11Fu7B0NpjGazsoTC0cQ",
+"region": "global",
+"from": 1988,
+"to": 1996,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Ka7dgGCz-m11Fu7B0NpjGazsoTC0cQ&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "e-tron",
+"code": "gen_6CVBLgckMsa77iXoz0yzOhRjLaHt2YU",
+"region": "global",
+"from": 2019,
+"to": 2023,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_6CVBLgckMsa77iXoz0yzOhRjLaHt2YU&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "e-tron GT Facelift",
+"code": "gen_3du8BGEE35_jKOed5V2XPzmmUaPtXjk",
+"region": "global",
+"from": 2024,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_3du8BGEE35_jKOed5V2XPzmmUaPtXjk&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "e-tron GT",
+"code": "gen_KANIIu9uEHc8Ar9qcXv5dhUHf8rc1GY",
+"region": "global",
+"from": 2021,
+"to": 2023,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_KANIIu9uEHc8Ar9qcXv5dhUHf8rc1GY&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Q2 (Typ GA) Facelift",
+"code": "gen_UWAPC3XaazrYIWaF81PzeOElm8tm6k0",
+"region": "global",
+"from": 2020,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_UWAPC3XaazrYIWaF81PzeOElm8tm6k0&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Q2 (Typ GA)",
+"code": "gen_kXeWLtujDWVRjWVbnwrCwt5p1GrZo3k",
+"region": "global",
+"from": 2017,
+"to": 2019,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_kXeWLtujDWVRjWVbnwrCwt5p1GrZo3k&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Q3 (Typ FJ)",
+"code": "gen_N0RH-o7kc9XwQVoebgGwiS_oCKAsaBw",
+"region": "global",
+"from": 2025,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_N0RH-o7kc9XwQVoebgGwiS_oCKAsaBw&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Q3 (Typ F3) Facelift",
+"code": "gen_x8PHjfwQ0Ewz3cYkMFZcy7LiuH2dbg4",
+"region": "global",
+"from": 2024,
+"to": 2026,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_x8PHjfwQ0Ewz3cYkMFZcy7LiuH2dbg4&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "RS Q3 (Typ F3)",
+"code": "gen_q2hZ1ShCq9n1K-sJsxb3WpB24Y5FDKY",
+"region": "global",
+"from": 2020,
+"to": 2024,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_q2hZ1ShCq9n1K-sJsxb3WpB24Y5FDKY&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Q3 (Typ F3)",
+"code": "gen_EPScsd74SKoV17m2OyaXz08jk60ZQvk",
+"region": "global",
+"from": 2019,
+"to": 2023,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_EPScsd74SKoV17m2OyaXz08jk60ZQvk&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Q3 (Typ 8U) Facelift",
+"code": "gen_ssfgZutIKxkkUhvQ70OGHCUn7e6SXQg",
+"region": "global",
+"from": 2015,
+"to": 2018,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_ssfgZutIKxkkUhvQ70OGHCUn7e6SXQg&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "RS Q3 (Typ 8U)",
+"code": "gen_ENTZ7irjuMfrI6J5lPDQF4Ri2GHN2Ac",
+"region": "global",
+"from": 2014,
+"to": 2018,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_ENTZ7irjuMfrI6J5lPDQF4Ri2GHN2Ac&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Q3 (Typ 8U)",
+"code": "gen_HndIuMF-OxnCzpIe6PiqjUqivpigla4",
+"region": "global",
+"from": 2012,
+"to": 2014,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_HndIuMF-OxnCzpIe6PiqjUqivpigla4&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Q4 e-tron (Typ F4)",
+"code": "gen_KQ4RiCS3T5_gZ0C5s_69trT5vHRPMyo",
+"region": "global",
+"from": 2022,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_KQ4RiCS3T5_gZ0C5s_69trT5vHRPMyo&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Q5 (Typ B10)",
+"code": "gen_fzXzXq97akb-5IoCDcG0FKcF51yEyRY",
+"region": "global",
+"from": 2025,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_fzXzXq97akb-5IoCDcG0FKcF51yEyRY&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Q5 (Typ FY) Facelift",
+"code": "gen_z7vKD-EEd3TkdYolhiKe1_mCjp3deJg",
+"region": "global",
+"from": 2021,
+"to": 2025,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_z7vKD-EEd3TkdYolhiKe1_mCjp3deJg&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Q5 (Typ FY)",
+"code": "gen_DrVvbrLfCRpM7FJKXcnwhuBRQ72llzs",
+"region": "global",
+"from": 2017,
+"to": 2020,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_DrVvbrLfCRpM7FJKXcnwhuBRQ72llzs&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Q5 (Typ 8R) Facelift",
+"code": "gen_pEzGQ6FYEU5f1ajr9tpWUoYF2zq0mSo",
+"region": "global",
+"from": 2013,
+"to": 2017,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_pEzGQ6FYEU5f1ajr9tpWUoYF2zq0mSo&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Q5 (Typ 8R)",
+"code": "gen_ZQKrKWEoLU3ORJWRtrZYxgW59pYeD9A",
+"region": "global",
+"from": 2009,
+"to": 2012,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_ZQKrKWEoLU3ORJWRtrZYxgW59pYeD9A&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Q6 e-tron",
+"code": "gen_plyLAxgRCE1kCsgTYsXiZKnBO56L4Ms",
+"region": "global",
+"from": 2024,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_plyLAxgRCE1kCsgTYsXiZKnBO56L4Ms&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Q7 (Typ 4M) 2nd Facelift",
+"code": "gen_9CZy5H6eM2ST4w2DNJWrTYRmgLm653o",
+"region": "global",
+"from": 2025,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_9CZy5H6eM2ST4w2DNJWrTYRmgLm653o&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Q7 (Typ 4M) 1st Facelift",
+"code": "gen_p0tkgs2vMS1eocGsOWwXKPfAJsPtTA0",
+"region": "global",
+"from": 2020,
+"to": 2024,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_p0tkgs2vMS1eocGsOWwXKPfAJsPtTA0&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Q7 (Typ 4M)",
+"code": "gen_EXjemzwiCAfVwN9wIG3VI5Yb__FdfAw",
+"region": "global",
+"from": 2016,
+"to": 2019,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_EXjemzwiCAfVwN9wIG3VI5Yb__FdfAw&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Q7 (Typ 4L) Facelift",
+"code": "gen_P_nEGGXw4TX6IWAyfqDQhMNG0gxLL3U",
+"region": "global",
+"from": 2010,
+"to": 2015,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_P_nEGGXw4TX6IWAyfqDQhMNG0gxLL3U&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Q7 (Typ 4L)",
+"code": "gen_5ZOb_zGVj-ZxKx5fwSwt3w38kiR6tjU",
+"region": "global",
+"from": 2007,
+"to": 2009,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_5ZOb_zGVj-ZxKx5fwSwt3w38kiR6tjU&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Q8 (Typ 4M) Facelift",
+"code": "gen_XfwdAdcjpWUSJjl8LgnPX1IAccp3J3c",
+"region": "global",
+"from": 2024,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_XfwdAdcjpWUSJjl8LgnPX1IAccp3J3c&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Q8 e-tron (Typ 4M) Facelift",
+"code": "gen_B_w__ZL0uIjsS0qkpjm-VkcawDK099U",
+"region": "global",
+"from": 2024,
+"to": 2025,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_B_w__ZL0uIjsS0qkpjm-VkcawDK099U&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "RS Q8 (Typ 4M) Facelift",
+"code": "gen_JCC9Qh-ugU8ZP2DjtFyWyrA3y2GYe2g",
+"region": "global",
+"from": 2024,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_JCC9Qh-ugU8ZP2DjtFyWyrA3y2GYe2g&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "RS Q8 (Typ 4M)",
+"code": "gen_5L664NB7oeG_z8hmx5eVgscx7BBrKzE",
+"region": "global",
+"from": 2020,
+"to": 2023,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_5L664NB7oeG_z8hmx5eVgscx7BBrKzE&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "Q8 (Typ 4M)",
+"code": "gen_QsKfCsGGeksFSpu-1730FoMaoZT1oFQ",
+"region": "global",
+"from": 2019,
+"to": 2023,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_QsKfCsGGeksFSpu-1730FoMaoZT1oFQ&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "R8/Spyder (Typ 4S) Facelift",
+"code": "gen__PBTbw9x52xnpbR-UHtm9iPJWVykHJM",
+"region": "global",
+"from": 2019,
+"to": 2024,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen__PBTbw9x52xnpbR-UHtm9iPJWVykHJM&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "R8/Spyder (Typ 4S)",
+"code": "gen_jCnCqPzlMJ0VXnN91eQpXNgwiMuysZE",
+"region": "global",
+"from": 2016,
+"to": 2018,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_jCnCqPzlMJ0VXnN91eQpXNgwiMuysZE&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "R8/Spyder (Typ 42) Facelift",
+"code": "gen_j_8Mi4xDPzG0iCSM6yLH5yIDVopvaFU",
+"region": "global",
+"from": 2013,
+"to": 2015,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_j_8Mi4xDPzG0iCSM6yLH5yIDVopvaFU&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "R8/Spyder (Typ 42)",
+"code": "gen_4DP3K_f-Kw4wIoKAp4yWeIzzDEHSd20",
+"region": "global",
+"from": 2007,
+"to": 2012,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_4DP3K_f-Kw4wIoKAp4yWeIzzDEHSd20&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "RS3 (8V) Facelift",
+"code": "gen_SVD6rYLPKeOc89wYMV1G6W7EKexfYxc",
+"region": "global",
+"from": 2017,
+"to": 2021,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_SVD6rYLPKeOc89wYMV1G6W7EKexfYxc&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "RS 3 (8P)",
+"code": "gen_RR0BINq9sdVmrqQY7MOcG65_fchIjus",
+"region": "global",
+"from": 2016,
+"to": 2016,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_RR0BINq9sdVmrqQY7MOcG65_fchIjus&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "RS 3 (8P)",
+"code": "gen_7JaQY9GuhAcvKH3wYJcxCVyegv3VJ_A",
+"region": "global",
+"from": 2011,
+"to": 2013,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_7JaQY9GuhAcvKH3wYJcxCVyegv3VJ_A&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "RS 4 B8",
+"code": "gen_ZadYXXajpaendnCdJgatFwV1BgJrnb8",
+"region": "global",
+"from": 2013,
+"to": 2025,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_ZadYXXajpaendnCdJgatFwV1BgJrnb8&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "RS 4 B7",
+"code": "gen__YkBlTUFUPn6PQ6_j8MKw_o6zx0JhmU",
+"region": "global",
+"from": 2006,
+"to": 2009,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen__YkBlTUFUPn6PQ6_j8MKw_o6zx0JhmU&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "RS 4 B5",
+"code": "gen_WxdkHvRADWhNrgS_44iyCteKdAhFUQ",
+"region": "global",
+"from": 2000,
+"to": 2002,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_WxdkHvRADWhNrgS_44iyCteKdAhFUQ&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "RRS 5 (F5) Facelift",
+"code": "gen_oVRGPLUfF7artnDatFp5a4RL0Oiu3-8",
+"region": "global",
+"from": 2020,
+"to": 2025,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_oVRGPLUfF7artnDatFp5a4RL0Oiu3-8&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "RS 5 (F5)",
+"code": "gen_03EQDasDavweMR5lKBlolwzAkzvMN4Q",
+"region": "global",
+"from": 2018,
+"to": 2019,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_03EQDasDavweMR5lKBlolwzAkzvMN4Q&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "RS 5 (8T) Facelift",
+"code": "gen_Fp-8nZsW933r8Tb9EXOUZrAUrbAD05I",
+"region": "global",
+"from": 2012,
+"to": 2016,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Fp-8nZsW933r8Tb9EXOUZrAUrbAD05I&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "RS 5 (8T)",
+"code": "gen_r1e9NMuLamcm_UbQg6_inojyeBDjNs4",
+"region": "global",
+"from": 2010,
+"to": 2012,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_r1e9NMuLamcm_UbQg6_inojyeBDjNs4&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "RS 6 Plus C8 Facelift",
+"code": "gen_0ce2DNINqPoQKWiw8Op-f-Vo9vACLcc",
+"region": "global",
+"from": 2024,
+"to": 2026,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_0ce2DNINqPoQKWiw8Op-f-Vo9vACLcc&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "RS 6 Plus C8",
+"code": "gen_0mcuu5P4JSZGXdBEeTA7wIM9yU9ScjM",
+"region": "global",
+"from": 2020,
+"to": 2023,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_0mcuu5P4JSZGXdBEeTA7wIM9yU9ScjM&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "RS 6 Plus C7 Facelift",
+"code": "gen_UBaKOWzSXvDeKOPZGMulV_NYVPP0JEE",
+"region": "global",
+"from": 2015,
+"to": 2018,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_UBaKOWzSXvDeKOPZGMulV_NYVPP0JEE&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "RS 6 Plus C7",
+"code": "gen_Uv5LYsR1LZ57dXkzm9FxCnye2zWZcX4",
+"region": "global",
+"from": 2013,
+"to": 2014,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Uv5LYsR1LZ57dXkzm9FxCnye2zWZcX4&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "RS 6 Plus C6",
+"code": "gen_IPu4Q3uIbl_7jysKW4BXxUXgWogd2Jo",
+"region": "global",
+"from": 2008,
+"to": 2011,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_IPu4Q3uIbl_7jysKW4BXxUXgWogd2Jo&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "RS 6 Plus C5",
+"code": "gen_idCXQ-9UP5Bcl5q-wPgtu-7SLqhMVHk",
+"region": "global",
+"from": 2003,
+"to": 2005,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_idCXQ-9UP5Bcl5q-wPgtu-7SLqhMVHk&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "RS 7 C8 (Typ 4K) Facelift",
+"code": "gen_sgutHIJIX2npfAoVN5CZRtZSBIvuSMU",
+"region": "global",
+"from": 2024,
+"to": 2026,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_sgutHIJIX2npfAoVN5CZRtZSBIvuSMU&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "RS 7 C8 (Typ 4K)",
+"code": "gen_URUhZ6gTnp2AQoRyWUgCIGvia870lqk",
+"region": "global",
+"from": 2020,
+"to": 2023,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_URUhZ6gTnp2AQoRyWUgCIGvia870lqk&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "RS 7 C7 (Typ 4G)",
+"code": "gen_4vxOgiTnjTPX3Vrbt17X2Ib8gGFQVzk",
+"region": "global",
+"from": 2014,
+"to": 2018,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_4vxOgiTnjTPX3Vrbt17X2Ib8gGFQVzk&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "TT (Type 8S) Facelift",
+"code": "gen_MD0n1KoIXv5sDwYnCJKnwyuRv05yW5g",
+"region": "global",
+"from": 2019,
+"to": 2024,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_MD0n1KoIXv5sDwYnCJKnwyuRv05yW5g&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "TT RS (Type 8S)",
+"code": "gen_T0zXEGbMgu9Dru1iP1PYE35u2Ap2ttI",
+"region": "global",
+"from": 2017,
+"to": 2018,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_T0zXEGbMgu9Dru1iP1PYE35u2Ap2ttI&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "TT/TTS (Type 8S)",
+"code": "gen_Tq_uLi_r_cQx4_ZNcJYEk0NrbX4VXfI",
+"region": "global",
+"from": 2015,
+"to": 2018,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Tq_uLi_r_cQx4_ZNcJYEk0NrbX4VXfI&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "TT/TTS (Type 8J) Facelift",
+"code": "gen_YjGaimLzwSukoTzSx6LWQkTAEyhm3ns",
+"region": "global",
+"from": 2011,
+"to": 2014,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_YjGaimLzwSukoTzSx6LWQkTAEyhm3ns&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "TT RS (Type 8J) Facelift",
+"code": "gen_M8kC-tjs0Xyw7PRvBFcAY8wuh6gcePU",
+"region": "global",
+"from": 2010,
+"to": 2014,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_M8kC-tjs0Xyw7PRvBFcAY8wuh6gcePU&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "TT/TTS (Type 8J)",
+"code": "gen_miJlxRFLFZ1zVTlSeHyzxzCQeK-H1DQ",
+"region": "global",
+"from": 2007,
+"to": 2010,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_miJlxRFLFZ1zVTlSeHyzxzCQeK-H1DQ&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "TT/TTS (Type 8N) Facelift",
+"code": "gen_NFxWmuGKEH0T4mWpQ8helt_25Op8PfM",
+"region": "global",
+"from": 2003,
+"to": 2006,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_NFxWmuGKEH0T4mWpQ8helt_25Op8PfM&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Audi",
+"brand": "audi",
+"gen": "TT/TTS (Type 8N)",
+"code": "gen_6gUWkn2H9YAbJbBsrugJPoRxEFPexg",
+"region": "global",
+"from": 1999,
+"to": 2002,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_6gUWkn2H9YAbJbBsrugJPoRxEFPexg&brand=audi&section=cars&region_url_code=global"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Citigo Facelift",
+"code": "gen_NfwLNXxR7O2cpYGGM4FkY1-uwpA4yIH_",
+"region": "europe",
+"from": 2017,
+"to": 2022,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_NfwLNXxR7O2cpYGGM4FkY1-uwpA4yIH_&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Citigo",
+"code": "gen_1ea3AqMtmwGflxh7sQHqune0rTcTYHCR",
+"region": "europe",
+"from": 2012,
+"to": 2016,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_1ea3AqMtmwGflxh7sQHqune0rTcTYHCR&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Enyaq/Elroq",
+"code": "gen_B5qnRqaRL270-DdvYxoM3jIHEPZN3fYi",
+"region": "europe",
+"from": 2021,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_B5qnRqaRL270-DdvYxoM3jIHEPZN3fYi&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Fabia (Type PJ) Facelift",
+"code": "gen_8lxzr3yBGO0TuguzmIoxpw7WV3bun7Zl",
+"region": "europe",
+"from": 2026,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_8lxzr3yBGO0TuguzmIoxpw7WV3bun7Zl&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Fabia (Type PJ)",
+"code": "gen_L2ysLDhwSoslnasBKSfUqACkpTmpPnK3",
+"region": "europe",
+"from": 2022,
+"to": 2025,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_L2ysLDhwSoslnasBKSfUqACkpTmpPnK3&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Fabia (Type NJ) Facelift",
+"code": "gen_eKVD8EIqmxJUizMeXhHJCADzojWug1Mz",
+"region": "europe",
+"from": 2018,
+"to": 2023,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_eKVD8EIqmxJUizMeXhHJCADzojWug1Mz&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Fabia (Type NJ)",
+"code": "gen_cMAZ-Pkk-13NCEMHSnzlgY5F54Ls1pjH",
+"region": "europe",
+"from": 2015,
+"to": 2017,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_cMAZ-Pkk-13NCEMHSnzlgY5F54Ls1pjH&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Fabia (Type 5J) Facelift",
+"code": "gen_j1P_vRqWWunq3DVqpze2ihj_rOp8iYAz",
+"region": "europe",
+"from": 2009,
+"to": 2015,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_j1P_vRqWWunq3DVqpze2ihj_rOp8iYAz&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Fabia (Type 5J)",
+"code": "gen_l5Yc03KXO1u34EaweVENxJcXB10r67Pi",
+"region": "europe",
+"from": 2007,
+"to": 2010,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_l5Yc03KXO1u34EaweVENxJcXB10r67Pi&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Fabia (Type 6Y) Facelift",
+"code": "gen_7NLEAXdmg92fGYOu1kHVSwJX2X56UOWi",
+"region": "europe",
+"from": 2005,
+"to": 2008,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_7NLEAXdmg92fGYOu1kHVSwJX2X56UOWi&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Fabia (Type 6Y)",
+"code": "gen_QYfzFldQl-1Tvfes7tVjue6jFRWpI9W4",
+"region": "europe",
+"from": 2000,
+"to": 2004,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_QYfzFldQl-1Tvfes7tVjue6jFRWpI9W4&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Favorit Forman Pickup (Typ 785)",
+"code": "gen_lFMsUdOL5Lo6asXs2UYFtFysiyVEQZBP",
+"region": "europe",
+"from": 1988,
+"to": 1995,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_lFMsUdOL5Lo6asXs2UYFtFysiyVEQZBP&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Felicia Facelift",
+"code": "gen_9JrguGM5cSVYWRtw7RKxpszdqnM9UhXe",
+"region": "europe",
+"from": 1998,
+"to": 2001,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_9JrguGM5cSVYWRtw7RKxpszdqnM9UhXe&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Felicia",
+"code": "gen_Q5f7OLzEWGMqKVKMqUD6oLBPelroWEHa",
+"region": "europe",
+"from": 1995,
+"to": 1997,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Q5f7OLzEWGMqKVKMqUD6oLBPelroWEHa&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Karoq Facelift",
+"code": "gen_3LSSbhO3GbHJCAFhx4sjm3hXCgPVSL1l",
+"region": "europe",
+"from": 2021,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_3LSSbhO3GbHJCAFhx4sjm3hXCgPVSL1l&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Karoq",
+"code": "gen_lItaiiXMZ7TxxpJLVfyHVrelr4W5QBc8",
+"region": "europe",
+"from": 2018,
+"to": 2020,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_lItaiiXMZ7TxxpJLVfyHVrelr4W5QBc8&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Kodiaq ll",
+"code": "gen_JPqQtcyQfG-r4a5sDlP0UJv82k0lm6uY",
+"region": "europe",
+"from": 2024,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_JPqQtcyQfG-r4a5sDlP0UJv82k0lm6uY&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Kodiaq l Facelift",
+"code": "gen_aG3qEst-fWoiJfS4oUdpB3w1dEC6puSE",
+"region": "europe",
+"from": 2021,
+"to": 2024,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_aG3qEst-fWoiJfS4oUdpB3w1dEC6puSE&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Kodiaq l",
+"code": "gen_FiEtXCd1ypP20v5IMqPR7qpUaFzPvImW",
+"region": "europe",
+"from": 2017,
+"to": 2020,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_FiEtXCd1ypP20v5IMqPR7qpUaFzPvImW&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Kushaq Facelift",
+"code": "gen_Ht0-WgIkrkFF9p0lfKPlf2z8H6y2auFr",
+"region": "europe",
+"from": 2025,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Ht0-WgIkrkFF9p0lfKPlf2z8H6y2auFr&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Kushaq",
+"code": "gen_NO2ziO8XUQ5wkDqVw0Y0faM51A9hkKgX",
+"region": "europe",
+"from": 2021,
+"to": 2024,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_NO2ziO8XUQ5wkDqVw0Y0faM51A9hkKgX&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Kylaq",
+"code": "gen_Nt7CXPqMwjHYivLFVGKAD3zRuGGs6b_R",
+"region": "europe",
+"from": 2025,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Nt7CXPqMwjHYivLFVGKAD3zRuGGs6b_R&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Octavia A8 (Typ NX) Facelift",
+"code": "gen_6lbW9wsVd3eywt_H6p6URhRSkV5W7TSV",
+"region": "europe",
+"from": 2024,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_6lbW9wsVd3eywt_H6p6URhRSkV5W7TSV&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Octavia A8 (Typ NX)",
+"code": "gen_sgdxPPLasB6VzQ5BVvWqfjXwOOnHQCEG",
+"region": "europe",
+"from": 2020,
+"to": 2023,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_sgdxPPLasB6VzQ5BVvWqfjXwOOnHQCEG&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Octavia A7 (Typ 5E) Facelift",
+"code": "gen_hLKkS7Xn5GY9Sipv7mzzviZ6IbpZM8jZ",
+"region": "europe",
+"from": 2018,
+"to": 2021,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_hLKkS7Xn5GY9Sipv7mzzviZ6IbpZM8jZ&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Octavia A7 (Typ 5E)",
+"code": "gen_fFsyFiKb3xvGvrEAS9TGZ75-hPRXMphm",
+"region": "europe",
+"from": 2013,
+"to": 2017,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_fFsyFiKb3xvGvrEAS9TGZ75-hPRXMphm&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Octavia A5 (Typ 1Z) Facelift",
+"code": "gen_LXotiwigiHo7Y--lnEgdsl_1c8NP7gmU",
+"region": "europe",
+"from": 2009,
+"to": 2013,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_LXotiwigiHo7Y--lnEgdsl_1c8NP7gmU&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Octavia A5 (Typ 1Z)",
+"code": "gen_WU_Kbf1FjABbK1ga_vBZoq_owUZCOrwB",
+"region": "europe",
+"from": 2004,
+"to": 2008,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_WU_Kbf1FjABbK1ga_vBZoq_owUZCOrwB&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Octavia I (Typ 1U) Facelift",
+"code": "gen_DglcbKWXL-UYPh759FOXtc07tLNGkyq6",
+"region": "europe",
+"from": 2001,
+"to": 2011,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_DglcbKWXL-UYPh759FOXtc07tLNGkyq6&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Octavia I (Typ 1U)",
+"code": "gen_7rLVJ5PXjE3vjd7akRpQVCZbOdwTxYsp",
+"region": "europe",
+"from": 1997,
+"to": 2000,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_7rLVJ5PXjE3vjd7akRpQVCZbOdwTxYsp&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Pick Up",
+"code": "gen_c0Ca7UyKU7aZXggyXDzHmSWG0EovqfFK",
+"region": "europe",
+"from": 1996,
+"to": 2001,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_c0Ca7UyKU7aZXggyXDzHmSWG0EovqfFK&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Rapid Facelift",
+"code": "gen_cHzDimCB2DszM7f-5gKK2tJtAnR9wY9x",
+"region": "europe",
+"from": 2017,
+"to": 2022,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_cHzDimCB2DszM7f-5gKK2tJtAnR9wY9x&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Rapid",
+"code": "gen_u26bwaLMKJZtRUqPA3SEkIw_BGJhfDqS",
+"region": "europe",
+"from": 2012,
+"to": 2016,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_u26bwaLMKJZtRUqPA3SEkIw_BGJhfDqS&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Roomster (Type 5J) Facelift",
+"code": "gen__-R6xuEj7h_ulr9kIHi8jkuvWI5isq0b",
+"region": "europe",
+"from": 2011,
+"to": 2015,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen__-R6xuEj7h_ulr9kIHi8jkuvWI5isq0b&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Roomster (Type 5J)",
+"code": "gen_WnYi4WZntmO3gcYCmq32Uwj-Ue604uty",
+"region": "europe",
+"from": 2006,
+"to": 2010,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_WnYi4WZntmO3gcYCmq32Uwj-Ue604uty&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Scala/Kamiq Facelift",
+"code": "gen_G7r-czCitWgFBup8Eb5l56hqpH7HCx7I",
+"region": "europe",
+"from": 2023,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_G7r-czCitWgFBup8Eb5l56hqpH7HCx7I&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Scala/Kamiq",
+"code": "gen_40t_5uvnq2DRB5kqqzr2ih3_CBz7JEWo",
+"region": "europe",
+"from": 2019,
+"to": 2022,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_40t_5uvnq2DRB5kqqzr2ih3_CBz7JEWo&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Slavia",
+"code": "gen_pkQ2IpNfaQa7a2Jaday6DjLGbEjp7FOq",
+"region": "europe",
+"from": 2021,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_pkQ2IpNfaQa7a2Jaday6DjLGbEjp7FOq&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Superb B9 (Typ 3Y)",
+"code": "gen_1MOXYtH4P6P0t2UMgOSnjYXo-8kGIELY",
+"region": "europe",
+"from": 2024,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_1MOXYtH4P6P0t2UMgOSnjYXo-8kGIELY&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Superb B8 (Typ 3V) Facelift",
+"code": "gen_OIrMD4Rb9x1Y25y2gEZlLWjgvGJ2NZMm",
+"region": "europe",
+"from": 2019,
+"to": 2024,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_OIrMD4Rb9x1Y25y2gEZlLWjgvGJ2NZMm&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Superb B8 (Typ 3V)",
+"code": "gen_FSFtHaQHWKpieeemby3yUear_4L0OkHZ",
+"region": "europe",
+"from": 2014,
+"to": 2018,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_FSFtHaQHWKpieeemby3yUear_4L0OkHZ&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Superb B6 (Typ 3T) Facelift",
+"code": "gen_lEQflesWrb5ekTAqe7DzUYkcEbqYgx28",
+"region": "europe",
+"from": 2013,
+"to": 2013,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_lEQflesWrb5ekTAqe7DzUYkcEbqYgx28&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Superb B6 (Typ 3T)",
+"code": "gen_vOCNQvcagXpCAwd0iGdz02lQUDaKPzY0",
+"region": "europe",
+"from": 2008,
+"to": 2012,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_vOCNQvcagXpCAwd0iGdz02lQUDaKPzY0&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Superb B5 (Typ 3U) Facelift",
+"code": "gen_UCk-ku2mxTdlNSY-_6T0dFt1W1Lo7Iib",
+"region": "europe",
+"from": 2006,
+"to": 2008,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_UCk-ku2mxTdlNSY-_6T0dFt1W1Lo7Iib&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Superb B5 (Typ 3U)",
+"code": "gen_jYo_yc6QqzSwkhFv0iOTyuDcBzsciIzk",
+"region": "europe",
+"from": 2002,
+"to": 2005,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_jYo_yc6QqzSwkhFv0iOTyuDcBzsciIzk&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Yeti 5L Facelift",
+"code": "gen_mBzbSWofGWbcKC6lACyqxIfSlsF_bFDU",
+"region": "europe",
+"from": 2014,
+"to": 2018,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_mBzbSWofGWbcKC6lACyqxIfSlsF_bFDU&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "Skoda",
+"brand": "skoda",
+"gen": "Yeti (5L)",
+"code": "gen_j87HOLr-Q5FBVBfwsl2Jh1ZTqsf9ZV39",
+"region": "europe",
+"from": 2010,
+"to": 2013,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_j87HOLr-Q5FBVBfwsl2Jh1ZTqsf9ZV39&brand=skoda&section=cars&region_url_code=europe"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Alhambra (Typ 7N) Facelift",
+"code": "gen_br_4vJcJ9Wz5ngnyH1FGGVmcUx436Q",
+"region": "global",
+"from": 2016,
+"to": 2023,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_br_4vJcJ9Wz5ngnyH1FGGVmcUx436Q&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Alhambra (Typ 7N)",
+"code": "gen_6t5N9B68CCpRBF5nv9ZN0i19ck_1CA",
+"region": "global",
+"from": 2011,
+"to": 2015,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_6t5N9B68CCpRBF5nv9ZN0i19ck_1CA&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Alhambra (Typ 7M) Facelift",
+"code": "gen_RP2s-6fwTX-fgG-tg9SDzmaFPJb6aA",
+"region": "global",
+"from": 2001,
+"to": 2010,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_RP2s-6fwTX-fgG-tg9SDzmaFPJb6aA&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Alhambra (Typ 7M)",
+"code": "gen_ZIt9WMO0WS9SpelGWLQRwL3giB5YxQ",
+"region": "global",
+"from": 1996,
+"to": 2000,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_ZIt9WMO0WS9SpelGWLQRwL3giB5YxQ&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Altea (Typ 5P) Facelift",
+"code": "gen_UFwAvCKTTule5kVU9UZ9tVJnYK8PcQ",
+"region": "global",
+"from": 2011,
+"to": 2015,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_UFwAvCKTTule5kVU9UZ9tVJnYK8PcQ&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Altea (Typ 5P)",
+"code": "gen_ZmsZrbE-hp24w3FRj7mmQRAxE-_TIw",
+"region": "global",
+"from": 2004,
+"to": 2010,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_ZmsZrbE-hp24w3FRj7mmQRAxE-_TIw&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Arona (Typ KJ) Facelift",
+"code": "gen_XdgFEULwmV3LizkWZhQnMFpPGH_7Ow",
+"region": "global",
+"from": 2021,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_XdgFEULwmV3LizkWZhQnMFpPGH_7Ow&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Arona (Typ KJ)",
+"code": "gen_oMTfy_vihgS98Uc4bx9bZRTQv-xH2Q",
+"region": "global",
+"from": 2018,
+"to": 2020,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_oMTfy_vihgS98Uc4bx9bZRTQv-xH2Q&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Arosa (Typ 6H) Facelift",
+"code": "gen_0zpxgGctWpH7DxffI8KQEQCunATcPA",
+"region": "global",
+"from": 2004,
+"to": 2004,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_0zpxgGctWpH7DxffI8KQEQCunATcPA&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Arosa (Typ 6H)",
+"code": "gen_DHYOiWIeA6bEmKgqc41dpBMlHnCeMQ",
+"region": "global",
+"from": 1997,
+"to": 2003,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_DHYOiWIeA6bEmKgqc41dpBMlHnCeMQ&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Cordoba (Typ 6K) Facelift",
+"code": "gen_LqWZk-ejfNYHlduMnO3k94T_rcxDMw",
+"region": "global",
+"from": 1999,
+"to": 2002,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_LqWZk-ejfNYHlduMnO3k94T_rcxDMw&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Cordoba (Typ 6L) Facelift",
+"code": "gen_MCchZv43IlLyGXUHLjhZnRtBmc9d4A",
+"region": "global",
+"from": 2006,
+"to": 2009,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_MCchZv43IlLyGXUHLjhZnRtBmc9d4A&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Cordoba (Typ 6L)",
+"code": "gen_4D2UNVwpf3jYEVb35oW5lWMnoRsY3w",
+"region": "global",
+"from": 2003,
+"to": 2005,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_4D2UNVwpf3jYEVb35oW5lWMnoRsY3w&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Cordoba (Typ 6K)",
+"code": "gen_0mVpRSbl2K6B6eQMbtvJroVgYYVCNg",
+"region": "global",
+"from": 1993,
+"to": 1999,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_0mVpRSbl2K6B6eQMbtvJroVgYYVCNg&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Exeo (Typ 3R) Facelift",
+"code": "gen_SW5ZPGZYHo9XdoD-kg2mWHTsLypSuw",
+"region": "global",
+"from": 2011,
+"to": 2014,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_SW5ZPGZYHo9XdoD-kg2mWHTsLypSuw&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Exeo (Typ 3R)",
+"code": "gen_UErDks-wW9zhsZXv5-nCoEm2nu4nbQ",
+"region": "global",
+"from": 2009,
+"to": 2010,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_UErDks-wW9zhsZXv5-nCoEm2nu4nbQ&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Ibiza (Typ KJ7) Facelift",
+"code": "gen_3oF-iu7Rism_t17z-r1SK33nzcpx2w",
+"region": "global",
+"from": 2021,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_3oF-iu7Rism_t17z-r1SK33nzcpx2w&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Ibiza (Typ KJ7)",
+"code": "gen_xOmPA6XzeJmc8yHiF0W37W4kZyzgWQ",
+"region": "global",
+"from": 2018,
+"to": 2020,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_xOmPA6XzeJmc8yHiF0W37W4kZyzgWQ&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Ibiza (Typ 6J) Facelift",
+"code": "gen_mobGEEjhsUQS2ISNcRpzwcwUlBH0AQ",
+"region": "global",
+"from": 2012,
+"to": 2017,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_mobGEEjhsUQS2ISNcRpzwcwUlBH0AQ&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Ibiza (Typ 6J)",
+"code": "gen_hmKADhLRK_x00t7ak9cMPLYZieoO-g",
+"region": "global",
+"from": 2009,
+"to": 2011,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_hmKADhLRK_x00t7ak9cMPLYZieoO-g&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Ibiza (Typ 6L) Facelift",
+"code": "gen_l5BNVwW104rLirutot8of_Eb-WdjfQ",
+"region": "global",
+"from": 2006,
+"to": 2010,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_l5BNVwW104rLirutot8of_Eb-WdjfQ&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Ibiza (Typ 6L)",
+"code": "gen_UrcLKvWYhPnBeV2zdYreH650CARHiA",
+"region": "global",
+"from": 2002,
+"to": 2005,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_UrcLKvWYhPnBeV2zdYreH650CARHiA&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Ibiza (Typ 6K) Facelift",
+"code": "gen_lt3Fud_CfNylTQgntz629ijrTPPmeA",
+"region": "global",
+"from": 1997,
+"to": 2002,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_lt3Fud_CfNylTQgntz629ijrTPPmeA&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Ibiza (Typ 6K)",
+"code": "gen_GRNmjgjebm8rWHb86Uhu5Rdc8RYTLw",
+"region": "global",
+"from": 1993,
+"to": 1996,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_GRNmjgjebm8rWHb86Uhu5Rdc8RYTLw&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Inca (Typ 9K)",
+"code": "gen_s08E_7rOt37AWZVmXS1yz0Cme4QKEA",
+"region": "global",
+"from": 1996,
+"to": 2003,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_s08E_7rOt37AWZVmXS1yz0Cme4QKEA&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Leon (Typ 5F) Facelift",
+"code": "gen_J8Mm_27Dg4wfIs8QwhIw7_vpECZA-A",
+"region": "global",
+"from": 2017,
+"to": 2020,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_J8Mm_27Dg4wfIs8QwhIw7_vpECZA-A&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Leon (Typ 5F)",
+"code": "gen_98piSd9z-Awu0Z-HCeGqd2lBqj7WgQ",
+"region": "global",
+"from": 2013,
+"to": 2016,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_98piSd9z-Awu0Z-HCeGqd2lBqj7WgQ&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Leon (Typ 1P) Facelift",
+"code": "gen_mpmOYdKRWcKreqmNkq_AFL28t_6UXQ",
+"region": "global",
+"from": 2011,
+"to": 2013,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_mpmOYdKRWcKreqmNkq_AFL28t_6UXQ&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Leon (Typ 1P)",
+"code": "gen_Emlqq3_d1sSNCFbgyqXFDRTCbBNZ9w",
+"region": "global",
+"from": 2006,
+"to": 2010,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Emlqq3_d1sSNCFbgyqXFDRTCbBNZ9w&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Leon (Typ 1M)",
+"code": "gen_1x1EiWCRhT2AUXaj2aqQVGptsR9k1Q",
+"region": "global",
+"from": 2000,
+"to": 2006,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_1x1EiWCRhT2AUXaj2aqQVGptsR9k1Q&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Mii (Typ KF)",
+"code": "gen_gdNp2cyHOR_u6GS3wJaFjAF0AuXd9Q",
+"region": "global",
+"from": 2012,
+"to": 2021,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_gdNp2cyHOR_u6GS3wJaFjAF0AuXd9Q&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Tarraco (Typ KN)",
+"code": "gen_8erBOjSNwSnY-54IhE74tYc2UeD1Mg",
+"region": "global",
+"from": 2019,
+"to": 2024,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_8erBOjSNwSnY-54IhE74tYc2UeD1Mg&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Toledo (Typ KG) Facelift",
+"code": "gen_I3IbBlcEevM6Nl-NCpvKT4NvsDBklg",
+"region": "global",
+"from": 2016,
+"to": 2019,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_I3IbBlcEevM6Nl-NCpvKT4NvsDBklg&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Toledo (Typ KG)",
+"code": "gen_NDhxmHyayt6Wl5rk-6PvxwefZVOkSA",
+"region": "global",
+"from": 2013,
+"to": 2015,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_NDhxmHyayt6Wl5rk-6PvxwefZVOkSA&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Toledo (Typ 5P)",
+"code": "gen_kTaVRLjozxIHrEPjkayF0RFPWaD6mQ",
+"region": "global",
+"from": 2005,
+"to": 2009,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_kTaVRLjozxIHrEPjkayF0RFPWaD6mQ&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Toledo (Typ 1M)",
+"code": "gen_l7rHbIFAS2BKja8N0uU4C_gAxE9-6w",
+"region": "global",
+"from": 1999,
+"to": 2004,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_l7rHbIFAS2BKja8N0uU4C_gAxE9-6w&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Toledo (Typ 1L) Facelift",
+"code": "gen_Os0_BVB0Ypy5mzbFqKa7Zc82wGOBaQ",
+"region": "global",
+"from": 1997,
+"to": 1999,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Os0_BVB0Ypy5mzbFqKa7Zc82wGOBaQ&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "SEAT",
+"brand": "seat",
+"gen": "Toledo (Typ 1L)",
+"code": "gen_q9xAzbof_yeTn17kSfQFUQyOxrmJQA",
+"region": "global",
+"from": 1992,
+"to": 1996,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_q9xAzbof_yeTn17kSfQFUQyOxrmJQA&brand=seat&section=cars&region_url_code=global"
+},
+{
+"make": "Cupra",
+"brand": "cupra",
+"gen": "Ateca Facelift",
+"code": "gen_ppIFDCee4bweY_pDYDJC0OVSQnAeXhA",
+"region": "global",
+"from": 2020,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_ppIFDCee4bweY_pDYDJC0OVSQnAeXhA&brand=cupra&section=cars&region_url_code=global"
+},
+{
+"make": "Cupra",
+"brand": "cupra",
+"gen": "Ateca",
+"code": "gen_ES32NSlAZZ9rvWgxUe3tOWuYzZ2uH8k",
+"region": "global",
+"from": 2016,
+"to": 2019,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_ES32NSlAZZ9rvWgxUe3tOWuYzZ2uH8k&brand=cupra&section=cars&region_url_code=global"
+},
+{
+"make": "Cupra",
+"brand": "cupra",
+"gen": "Born",
+"code": "gen_k6aoNcjtBoH4tXDawgMFKnSJXywKuQI",
+"region": "global",
+"from": 2022,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_k6aoNcjtBoH4tXDawgMFKnSJXywKuQI&brand=cupra&section=cars&region_url_code=global"
+},
+{
+"make": "Cupra",
+"brand": "cupra",
+"gen": "Formentor (Typ KM) Facelift",
+"code": "gen_hsklQtcgxbkS40g9t6JMviwtqyaEfhQ",
+"region": "global",
+"from": 2024,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_hsklQtcgxbkS40g9t6JMviwtqyaEfhQ&brand=cupra&section=cars&region_url_code=global"
+},
+{
+"make": "Cupra",
+"brand": "cupra",
+"gen": "Formentor (Typ KM)",
+"code": "gen__tBoW5Me5CZRuwQDybxhhGSBU7qH6WE",
+"region": "global",
+"from": 2021,
+"to": 2023,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen__tBoW5Me5CZRuwQDybxhhGSBU7qH6WE&brand=cupra&section=cars&region_url_code=global"
+},
+{
+"make": "Cupra",
+"brand": "cupra",
+"gen": "Leon (Typ KL) Facelift",
+"code": "gen_1LgxBA9BepOUiM0buUbQSx9UwoS0bNk",
+"region": "global",
+"from": 2024,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_1LgxBA9BepOUiM0buUbQSx9UwoS0bNk&brand=cupra&section=cars&region_url_code=global"
+},
+{
+"make": "Cupra",
+"brand": "cupra",
+"gen": "Leon (Typ KL)",
+"code": "gen_PBc-k42uuJLccgn5ysIsKrscqej9h5A",
+"region": "global",
+"from": 2020,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_PBc-k42uuJLccgn5ysIsKrscqej9h5A&brand=cupra&section=cars&region_url_code=global"
+},
+{
+"make": "Cupra",
+"brand": "cupra",
+"gen": "Tavascan",
+"code": "gen_Q7_oMpYJShGkDFr9pg3JHfQtOHOJnik",
+"region": "global",
+"from": 2024,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Q7_oMpYJShGkDFr9pg3JHfQtOHOJnik&brand=cupra&section=cars&region_url_code=global"
+},
+{
+"make": "Cupra",
+"brand": "cupra",
+"gen": "Terramar",
+"code": "gen_fRf6i9i-fF5ad0UXZcAm5zQGHtVfPeU",
+"region": "global",
+"from": 2025,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_fRf6i9i-fF5ad0UXZcAm5zQGHtVfPeU&brand=cupra&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "718 Spyder (982)",
+"code": "gen_MVT-cDx9m7-LvXyqf7TIBiI7kJh-lpmCZbkqHYM",
+"region": "global",
+"from": 2019,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_MVT-cDx9m7-LvXyqf7TIBiI7kJh-lpmCZbkqHYM&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "911 Turbo/S (992) Facelift",
+"code": "gen_n4LNzOPg-B5slVbCgijr-MGuQk1Ca4CYRT_H2ic",
+"region": "global",
+"from": 2026,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_n4LNzOPg-B5slVbCgijr-MGuQk1Ca4CYRT_H2ic&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "911 Carrera (992.2)",
+"code": "gen_IKew339KKNQS6HM3vwnPo1h0q_4wJ_8mUQ6Mr_c",
+"region": "global",
+"from": 2024,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_IKew339KKNQS6HM3vwnPo1h0q_4wJ_8mUQ6Mr_c&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "911 Turbo/S (992)",
+"code": "gen_6Ye-EShd8GDQaNcoT-yd4Z7Ny90C1927uO0sI3E",
+"region": "global",
+"from": 2020,
+"to": 2025,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_6Ye-EShd8GDQaNcoT-yd4Z7Ny90C1927uO0sI3E&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "911 Carrera (992.1)",
+"code": "gen_4cBxqBipvt27IOMv92pyZOmw8Zwhb0yQv_bPmnc",
+"region": "global",
+"from": 2019,
+"to": 2024,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_4cBxqBipvt27IOMv92pyZOmw8Zwhb0yQv_bPmnc&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "911 Carrera (991.2)",
+"code": "gen_nviapZvT0KxODtwO87f72kQzTPF3K9gpbGk08LY",
+"region": "global",
+"from": 2017,
+"to": 2019,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_nviapZvT0KxODtwO87f72kQzTPF3K9gpbGk08LY&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "911 Carrera (991.1)",
+"code": "gen__J6RtEyPu8QmAG0tYetiHdc7KQ8YS1waIr3CefY",
+"region": "global",
+"from": 2012,
+"to": 2016,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen__J6RtEyPu8QmAG0tYetiHdc7KQ8YS1waIr3CefY&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "911 Carrera (997.2)",
+"code": "gen_2V2qadZYF6notaZQ2dXiyAl5nqQxwSiayTX-Rs4",
+"region": "global",
+"from": 2009,
+"to": 2012,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_2V2qadZYF6notaZQ2dXiyAl5nqQxwSiayTX-Rs4&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "911 Carrera (997.1)",
+"code": "gen_ulCwa-m7EzbQr0ZVNUdcvhrWgh4Xn8pTAAB1bQc",
+"region": "global",
+"from": 2005,
+"to": 2008,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_ulCwa-m7EzbQr0ZVNUdcvhrWgh4Xn8pTAAB1bQc&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "911 Carrera (996)",
+"code": "gen_snF6AMRpzfNbUBB_CHl-LlGXKodSFrMLb5xCY00",
+"region": "global",
+"from": 1998,
+"to": 2005,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_snF6AMRpzfNbUBB_CHl-LlGXKodSFrMLb5xCY00&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "911 Carrera (993)",
+"code": "gen_10kaQjkNjRZqzX29zCo_p-HsgDA7XT4sgd6Mkwc",
+"region": "global",
+"from": 1994,
+"to": 1998,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_10kaQjkNjRZqzX29zCo_p-HsgDA7XT4sgd6Mkwc&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "911 Turbo/GT2 RS (991)",
+"code": "gen_akihyMwofsWgFOaRPOYLymfCMZCF4ArApj73YAw",
+"region": "global",
+"from": 2014,
+"to": 2020,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_akihyMwofsWgFOaRPOYLymfCMZCF4ArApj73YAw&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "911 Turbo/GT2 RS (997) Facelift",
+"code": "gen_49ImNdGi9EBAvBcl_1CpgIsv0gUKyBNAPYZioKg",
+"region": "global",
+"from": 2010,
+"to": 2013,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_49ImNdGi9EBAvBcl_1CpgIsv0gUKyBNAPYZioKg&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "911 Turbo/GT2 (997)",
+"code": "gen_5DXDtf6nJcp_glAJvtaGQFI5Rr3Ee2N8QpYsUVc",
+"region": "global",
+"from": 2007,
+"to": 2009,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_5DXDtf6nJcp_glAJvtaGQFI5Rr3Ee2N8QpYsUVc&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "911 Turbo/GT2 (996)",
+"code": "gen_QprigkHlMelYwjZ1lI5mrmkt2ozue_yVuVqLz2U",
+"region": "global",
+"from": 2001,
+"to": 2005,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_QprigkHlMelYwjZ1lI5mrmkt2ozue_yVuVqLz2U&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "911 GT3 (992.2)",
+"code": "gen_p1Cq6mZInA2AMucfXJaN3PSggYKH0Ro1ibShNUY",
+"region": "global",
+"from": 2025,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_p1Cq6mZInA2AMucfXJaN3PSggYKH0Ro1ibShNUY&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "911 GT3 RS (992.1)",
+"code": "gen_Q6Y5RsEu9AymczUZtXWAnUA6VVOd693DhPtgAHI",
+"region": "global",
+"from": 2021,
+"to": 2025,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Q6Y5RsEu9AymczUZtXWAnUA6VVOd693DhPtgAHI&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "911 GT3 RS (991.2)",
+"code": "gen_dv2n6BKYuo0g84MtOgWpiz1RNNlHrWf8Dv3683M",
+"region": "global",
+"from": 2017,
+"to": 2021,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_dv2n6BKYuo0g84MtOgWpiz1RNNlHrWf8Dv3683M&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "911 GT3 RS (991.1)",
+"code": "gen_94mZ1Mw7usyDQMceu_8Opm3Ord31j1jQp6Nh9cI",
+"region": "global",
+"from": 2014,
+"to": 2016,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_94mZ1Mw7usyDQMceu_8Opm3Ord31j1jQp6Nh9cI&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "911 GT3 (997)",
+"code": "gen_sWfMP6kNIdU7yOH-ALO6V-nAivKH5VzMr7_Xjjw",
+"region": "global",
+"from": 2007,
+"to": 2011,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_sWfMP6kNIdU7yOH-ALO6V-nAivKH5VzMr7_Xjjw&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "911 GT3 (996)",
+"code": "gen_3XQolzC2HbPXe1ToQNxEXtQVuIBjj-E2w8UvRME",
+"region": "global",
+"from": 1999,
+"to": 2005,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_3XQolzC2HbPXe1ToQNxEXtQVuIBjj-E2w8UvRME&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "918 Spyder",
+"code": "gen_LybTsXVAnVK2sa-oKzqjCjJ-WXu06On5azqUanI",
+"region": "global",
+"from": 2015,
+"to": 2015,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_LybTsXVAnVK2sa-oKzqjCjJ-WXu06On5azqUanI&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "928 GTS 3rd Facelift",
+"code": "gen_VK_HdZvhfm2Gk4UnS0_tjQwsKCyteMhVEWrbMnA",
+"region": "global",
+"from": 1992,
+"to": 1995,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_VK_HdZvhfm2Gk4UnS0_tjQwsKCyteMhVEWrbMnA&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "968",
+"code": "gen_S9q_9k6O-ScJujJcHdPx2DvMajTFgFtvWvh3MRM",
+"region": "global",
+"from": 1992,
+"to": 1995,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_S9q_9k6O-ScJujJcHdPx2DvMajTFgFtvWvh3MRM&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "718 Boxster (982)",
+"code": "gen_bwcMM6CwzLMZFyddpQQr9mKlJtpgMEew0zo3_qY",
+"region": "global",
+"from": 2017,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_bwcMM6CwzLMZFyddpQQr9mKlJtpgMEew0zo3_qY&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Boxster Spyder (981)",
+"code": "gen_gUbxI_gpGNQls0R8woEtGyKgH8IP4_jgAx7mc1A",
+"region": "global",
+"from": 2016,
+"to": 2016,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_gUbxI_gpGNQls0R8woEtGyKgH8IP4_jgAx7mc1A&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Boxster (981)",
+"code": "gen_JvwXXo2yFlbohPWnPKmnvd9cncvecGBX6IQ828E",
+"region": "global",
+"from": 2012,
+"to": 2016,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_JvwXXo2yFlbohPWnPKmnvd9cncvecGBX6IQ828E&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Boxster (987.2)",
+"code": "gen_YbY3Y3Q7XKkujSXW7Y5tUY7z2ejSbH3nWJHaJYY",
+"region": "global",
+"from": 2009,
+"to": 2012,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_YbY3Y3Q7XKkujSXW7Y5tUY7z2ejSbH3nWJHaJYY&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Boxster (987.1)",
+"code": "gen_1oi7rMwb0-MA9NZ-WKWJkF35BDw6FoGzQYNVBHY",
+"region": "global",
+"from": 2005,
+"to": 2008,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_1oi7rMwb0-MA9NZ-WKWJkF35BDw6FoGzQYNVBHY&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Boxster Facelift (986)",
+"code": "gen_6s5JXrjH8D5n6F_AD4JSKB1w5nSPdKaYLoaOUB4",
+"region": "global",
+"from": 2003,
+"to": 2004,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_6s5JXrjH8D5n6F_AD4JSKB1w5nSPdKaYLoaOUB4&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Boxster (986)",
+"code": "gen_S1WW-HPhMQj1Al_Idw3NZFuPXNUE_E_PGVZ5W_I",
+"region": "global",
+"from": 1997,
+"to": 2002,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_S1WW-HPhMQj1Al_Idw3NZFuPXNUE_E_PGVZ5W_I&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Carrera GT (980)",
+"code": "gen_t2JJYfSURm-jM4LB0s7kb4MBrabXU11zmV5h2ts",
+"region": "global",
+"from": 2004,
+"to": 2006,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_t2JJYfSURm-jM4LB0s7kb4MBrabXU11zmV5h2ts&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Cayenne III Facelift (9G0)",
+"code": "gen_VnPtWLosfkY4BdrOoRk3r4AMWj8TeH6vw_lloRk",
+"region": "global",
+"from": 2023,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_VnPtWLosfkY4BdrOoRk3r4AMWj8TeH6vw_lloRk&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Cayenne III (9Y0)",
+"code": "gen_-0D-31GlRw_bLd8V2QV4AJNS76b2D5M4j_3vqU8",
+"region": "global",
+"from": 2018,
+"to": 2024,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_-0D-31GlRw_bLd8V2QV4AJNS76b2D5M4j_3vqU8&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Cayenne II Facelift (958.2)",
+"code": "gen_66uCtBhzy4HS1K3ZvH4VlBmmT9Xl4IXNbCfrKOk",
+"region": "global",
+"from": 2014,
+"to": 2018,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_66uCtBhzy4HS1K3ZvH4VlBmmT9Xl4IXNbCfrKOk&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Cayenne II (958/92A)",
+"code": "gen_m-aHOQ2sn-M3umjD-Fc2WFpX_9l6S3zIN8kdWDo",
+"region": "global",
+"from": 2011,
+"to": 2013,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_m-aHOQ2sn-M3umjD-Fc2WFpX_9l6S3zIN8kdWDo&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Cayenne I Facelift (957)",
+"code": "gen_1_LzroTwDR3AyZ1FfBP4mX33cD5Hddo_JzPMPyY",
+"region": "global",
+"from": 2007,
+"to": 2010,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_1_LzroTwDR3AyZ1FfBP4mX33cD5Hddo_JzPMPyY&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Cayenne I (955/9PA)",
+"code": "gen_ffQbHdY6AXdGd7m2aK43hJbkwnTrhClqUBE0EGU",
+"region": "global",
+"from": 2003,
+"to": 2006,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_ffQbHdY6AXdGd7m2aK43hJbkwnTrhClqUBE0EGU&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "718 Cayman (982)",
+"code": "gen_6nl9o7EAyW3k5x-qfRekCmKFfczvVZgAfQvHWCc",
+"region": "global",
+"from": 2017,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_6nl9o7EAyW3k5x-qfRekCmKFfczvVZgAfQvHWCc&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Cayman (981C)",
+"code": "gen_Kwma7-lkIIqBSEsb2AW4wP4T1mS9FuGc2JOMGNA",
+"region": "global",
+"from": 2014,
+"to": 2016,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_Kwma7-lkIIqBSEsb2AW4wP4T1mS9FuGc2JOMGNA&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Cayman (987.2)",
+"code": "gen_DyOUUQWbS1msva5vb2XnZg6PvZfMDw4vrqtjafY",
+"region": "global",
+"from": 2009,
+"to": 2012,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_DyOUUQWbS1msva5vb2XnZg6PvZfMDw4vrqtjafY&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Cayman (987.1)",
+"code": "gen_uq7U5VdXietfXI3aMvKFz9OT_A4a8HCm84zV_zQ",
+"region": "global",
+"from": 2006,
+"to": 2008,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_uq7U5VdXietfXI3aMvKFz9OT_A4a8HCm84zV_zQ&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "718 Cayman GT4 (982)",
+"code": "gen_sTFJgQGU_Wj6pbEBSlaIu2-ptOjNntqYe8PRHGo",
+"region": "global",
+"from": 2019,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_sTFJgQGU_Wj6pbEBSlaIu2-ptOjNntqYe8PRHGo&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Cayman GT4 (981)",
+"code": "gen_pnhl-R1__2haEYspRu9gKQNE0Z6KXH8obGL_YYE",
+"region": "global",
+"from": 2016,
+"to": 2016,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_pnhl-R1__2haEYspRu9gKQNE0Z6KXH8obGL_YYE&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Macan-e (95C)",
+"code": "gen_MVruFQ6QYFPZsppaYr8JMW3Zf7tc1U9jfANS3mk",
+"region": "global",
+"from": 2024,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_MVruFQ6QYFPZsppaYr8JMW3Zf7tc1U9jfANS3mk&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Macan III (95B.3) 2nd Facelift",
+"code": "gen_uq-6ymWI90JPgtwMu2e77H-yoL8qIu4TiXEWq1c",
+"region": "global",
+"from": 2021,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_uq-6ymWI90JPgtwMu2e77H-yoL8qIu4TiXEWq1c&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Macan II (95B.2) 1st Facelift",
+"code": "gen_ET5W0KN7WHP7Qm65f7Avhl92VT-4fi_7l0GRq4A",
+"region": "global",
+"from": 2019,
+"to": 2020,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_ET5W0KN7WHP7Qm65f7Avhl92VT-4fi_7l0GRq4A&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Macan I (95B.1)",
+"code": "gen_7fmNMQFjWBkHqGN5F9bwUTyyuHXvTwEL_6rpIA0",
+"region": "global",
+"from": 2014,
+"to": 2018,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_7fmNMQFjWBkHqGN5F9bwUTyyuHXvTwEL_6rpIA0&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Panamera G3 (976)",
+"code": "gen_0Bwi__52_s7u4MpjWIUXh9ZD738plv8Zb1RFRnY",
+"region": "global",
+"from": 2024,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_0Bwi__52_s7u4MpjWIUXh9ZD738plv8Zb1RFRnY&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Panamera G2 (971) Facelift",
+"code": "gen_HNVv8ukwI1yYWBcp9jkJcr4NlfAedqZ3F8SCamQ",
+"region": "global",
+"from": 2021,
+"to": 2024,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_HNVv8ukwI1yYWBcp9jkJcr4NlfAedqZ3F8SCamQ&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Panamera G2 (971)",
+"code": "gen_pKDPott8LTLr0OG5FwFTS8mUzStjFJa15ff9zwc",
+"region": "global",
+"from": 2017,
+"to": 2021,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_pKDPott8LTLr0OG5FwFTS8mUzStjFJa15ff9zwc&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Panamera G1 (970) Facelift",
+"code": "gen_7ksjU5rgOY_KJ07vq4pydP0xzxQnU_MwSyQxZ9Q",
+"region": "global",
+"from": 2013,
+"to": 2016,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_7ksjU5rgOY_KJ07vq4pydP0xzxQnU_MwSyQxZ9Q&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Panamera G1 (970)",
+"code": "gen_NhXFoXziYJaZmZh6jWlNvjxZi8vifLyvAYomps8",
+"region": "global",
+"from": 2010,
+"to": 2012,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_NhXFoXziYJaZmZh6jWlNvjxZi8vifLyvAYomps8&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Taycan (J1) Facelift",
+"code": "gen_uAY4qdvDef5GNx23DPohxTghCl9iWf1_XXBU5I8",
+"region": "global",
+"from": 2024,
+"to": 2027,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_uAY4qdvDef5GNx23DPohxTghCl9iWf1_XXBU5I8&brand=porsche&section=cars&region_url_code=global"
+},
+{
+"make": "Porsche",
+"brand": "porsche",
+"gen": "Taycan (J1)",
+"code": "gen_mbs_ZDORvg_RON0s_EThO83BcWD3zxNMNa905gY",
+"region": "global",
+"from": 2020,
+"to": 2024,
+"url": "https://7zap.com/api/catalog/modifications_by_name?generation_id=gen_mbs_ZDORvg_RON0s_EThO83BcWD3zxNMNa905gY&brand=porsche&section=cars&region_url_code=global"
+}
+]
