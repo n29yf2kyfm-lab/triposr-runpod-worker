@@ -1376,6 +1376,12 @@
 "https://audi.oempartsonline.com/v-2000-audi-a8-quattro--l--4-2l-v8-gas"
 ]
 ],
+"v-2000-audi-s4": [
+[
+"Base 2.7L V6 - Gas",
+"https://audi.oempartsonline.com/v-2000-audi-s4--base--2-7l-v6-gas"
+]
+],
 "v-2001-audi-a4": [
 [
 "Base 1.8L L4 - Gas",
@@ -1444,6 +1450,16 @@
 "https://audi.oempartsonline.com/v-2001-audi-allroad-quattro--base--2-7l-v6-gas"
 ]
 ],
+"v-2001-audi-s4": [
+[
+"Avant 2.7L V6 - Gas",
+"https://audi.oempartsonline.com/v-2001-audi-s4--avant--2-7l-v6-gas"
+],
+[
+"Base 2.7L V6 - Gas",
+"https://audi.oempartsonline.com/v-2001-audi-s4--base--2-7l-v6-gas"
+]
+],
 "v-2002-audi-a4": [
 [
 "Base 1.8L L4 - Gas",
@@ -1510,6 +1526,16 @@
 [
 "Base 2.7L V6 - Gas",
 "https://audi.oempartsonline.com/v-2002-audi-allroad-quattro--base--2-7l-v6-gas"
+]
+],
+"v-2002-audi-s4": [
+[
+"Avant 2.7L V6 - Gas",
+"https://audi.oempartsonline.com/v-2002-audi-s4--avant--2-7l-v6-gas"
+],
+[
+"Base 2.7L V6 - Gas",
+"https://audi.oempartsonline.com/v-2002-audi-s4--base--2-7l-v6-gas"
 ]
 ],
 "v-2003-audi-a4": [
@@ -1674,6 +1700,20 @@
 "https://audi.oempartsonline.com/v-2004-audi-allroad-quattro--base--4-2l-v8-gas"
 ]
 ],
+"v-2004-audi-s4": [
+[
+"Avant 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2004-audi-s4--avant--4-2l-v8-gas"
+],
+[
+"Base 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2004-audi-s4--base--4-2l-v8-gas"
+],
+[
+"Cabriolet 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2004-audi-s4--cabriolet--4-2l-v8-gas"
+]
+],
 "v-2005-audi-a4": [
 [
 "Base 1.8L L4 - Gas",
@@ -1768,6 +1808,20 @@
 "https://audi.oempartsonline.com/v-2005-audi-allroad-quattro--base--4-2l-v8-gas"
 ]
 ],
+"v-2005-audi-s4": [
+[
+"Avant 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2005-audi-s4--avant--4-2l-v8-gas"
+],
+[
+"Base 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2005-audi-s4--base--4-2l-v8-gas"
+],
+[
+"Cabriolet 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2005-audi-s4--cabriolet--4-2l-v8-gas"
+]
+],
 "v-2006-audi-a3": [
 [
 "Base 2.0L L4 - Gas",
@@ -1848,6 +1902,20 @@
 [
 "L 6.0L W12 - Gas",
 "https://audi.oempartsonline.com/v-2006-audi-a8-quattro--l--6-0l-w12-gas"
+]
+],
+"v-2006-audi-s4": [
+[
+"Avant 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2006-audi-s4--avant--4-2l-v8-gas"
+],
+[
+"Base 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2006-audi-s4--base--4-2l-v8-gas"
+],
+[
+"Cabriolet 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2006-audi-s4--cabriolet--4-2l-v8-gas"
 ]
 ],
 "v-2007-audi-a3": [
@@ -5815,6 +5883,20 @@
 "https://audi.oempartsonline.com/v-2023-audi-rs7-sportback--base--4-0l-v8-electric-gas"
 ]
 ],
+"v-2023-audi-s3": [
+[
+"Premium 2.0L L4 - Gas",
+"https://audi.oempartsonline.com/v-2023-audi-s3--premium--2-0l-l4-gas"
+],
+[
+"Premium Plus 2.0L L4 - Gas",
+"https://audi.oempartsonline.com/v-2023-audi-s3--premium-plus--2-0l-l4-gas"
+],
+[
+"Prestige 2.0L L4 - Gas",
+"https://audi.oempartsonline.com/v-2023-audi-s3--prestige--2-0l-l4-gas"
+]
+],
 "v-2024-audi-a3": [
 [
 "Premium 2.0L L4 - Electric/Gas",
@@ -6145,6 +6227,20 @@
 [
 "Performance 4.0L V8 ELECTRIC - Gas",
 "https://audi.oempartsonline.com/v-2024-audi-rs7-sportback--performance--4-0l-v8-electric-gas"
+]
+],
+"v-2024-audi-s3": [
+[
+"Premium 2.0L L4 - Gas",
+"https://audi.oempartsonline.com/v-2024-audi-s3--premium--2-0l-l4-gas"
+],
+[
+"Premium Plus 2.0L L4 - Gas",
+"https://audi.oempartsonline.com/v-2024-audi-s3--premium-plus--2-0l-l4-gas"
+],
+[
+"Prestige 2.0L L4 - Gas",
+"https://audi.oempartsonline.com/v-2024-audi-s3--prestige--2-0l-l4-gas"
 ]
 ],
 "v-2025-audi-a3-quattro": [
@@ -6521,6 +6617,20 @@
 "https://audi.oempartsonline.com/v-2025-audi-s-e-tron-gt--prestige--electric"
 ]
 ],
+"v-2025-audi-s3": [
+[
+"Premium 2.0L L4 - Gas",
+"https://audi.oempartsonline.com/v-2025-audi-s3--premium--2-0l-l4-gas"
+],
+[
+"Premium Plus 2.0L L4 - Gas",
+"https://audi.oempartsonline.com/v-2025-audi-s3--premium-plus--2-0l-l4-gas"
+],
+[
+"Prestige 2.0L L4 - Gas",
+"https://audi.oempartsonline.com/v-2025-audi-s3--prestige--2-0l-l4-gas"
+]
+],
 "v-2026-audi-a3-quattro": [
 [
 "Premium 2.0L L4 - Electric/Gas",
@@ -6693,6 +6803,12 @@
 [
 "Prestige Electric",
 "https://audi.oempartsonline.com/v-2026-audi-s-e-tron-gt--prestige--electric"
+]
+],
+"v-2026-audi-s3": [
+[
+"Base 2.0L L4 - Gas",
+"https://audi.oempartsonline.com/v-2026-audi-s3--base--2-0l-l4-gas"
 ]
 ]
 }
