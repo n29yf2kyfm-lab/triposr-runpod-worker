@@ -24,39 +24,72 @@ def compact(d):
             'engines': [{'engine': k, 'years': sorted(v['years']), 'bodies': sorted(v['bodies']),
                          'gearboxes': sorted(v['gearboxes']), 'trims': sorted(v['trims'])} for k, v in sorted(eng.items())]}
 
+PROJ = '/root/.claude/projects/-home-user-triposr-runpod-worker'
+
+def _mods_from_str(s):
+    """Find a 7zap modifications payload in any text: String raw/json envelope,
+    markdown (JSON as-is or in a code block) or a Firecrawl result."""
+    out = []
+    try:
+        j = json.loads(s)
+    except Exception:
+        j = None
+    if j is not None:
+        stack = [j]
+        while stack:
+            x = stack.pop()
+            if isinstance(x, dict):
+                if 'modifications' in x and x.get('generation'): out.append(x); continue
+                stack.extend(x.values())
+            elif isinstance(x, list): stack.extend(x)
+            elif isinstance(x, str) and '"modifications"' in x: out.extend(_mods_from_str(x))
+        if out: return out
+    i = s.find('{"loggedIn"')
+    if i < 0: i = s.find('{"series"')
+    if i >= 0:
+        k = s.rfind('}')
+        while k > i:
+            try:
+                d = json.loads(s[i:k + 1])
+                if isinstance(d, dict) and 'modifications' in d: return [d]
+                break
+            except Exception:
+                k = s.rfind('}', i, k)
+    return out
+
 def ingest():
-    n = 0
-    for f in glob.glob(os.path.join(TR, 'mcp-string-web_access_fetch-*.txt')):
-        try:
-            j = json.load(open(f)); d = json.loads(j['body'])
-        except Exception:
-            continue
-        if not isinstance(d, dict) or 'modifications' not in d or not d.get('generation'):
-            continue
-        c = compact(d)
-        json.dump(c, open(os.path.join(OUT, c['code'] + '.json'), 'w'), ensure_ascii=False)
-        os.remove(f); n += 1
-    # small replies arrive inline: read them from the session transcript
-    TX = '/root/.claude/projects/-home-user-triposr-runpod-worker/34795087-6986-5aae-b59f-cce8aae2f506.jsonl'
-    dn = done()
-    for line in open(TX):
-        if 'modifications' not in line or 'statusCode' not in line: continue
-        try: rec = json.loads(line)
+    n = 0; dn = done()
+    def keep(d):
+        nonlocal n
+        if not isinstance(d, dict) or not d.get('generation'): return
+        code = d['generation']['code']
+        if code in dn: return
+        cc = compact(d)
+        json.dump(cc, open(os.path.join(OUT, code + '.json'), 'w'), ensure_ascii=False)
+        dn.add(code); n += 1
+    # big replies are saved as files (main session and helper agents alike)
+    for f in glob.glob(os.path.join(PROJ, '**', 'tool-results', '*.txt'), recursive=True):
+        try: s = open(f).read()
         except Exception: continue
-        content = (rec.get('message') or {}).get('content')
-        if not isinstance(content, list): continue
-        for c in content:
-            if not isinstance(c, dict) or c.get('type') != 'tool_result': continue
-            parts = c.get('content')
-            texts = [p.get('text', '') for p in parts if isinstance(p, dict)] if isinstance(parts, list) else [parts or '']
-            for t in texts:
-                try: d = json.loads(json.loads(t)['body'])
-                except Exception: continue
-                if not isinstance(d, dict) or 'modifications' not in d or not d.get('generation'): continue
-                if d['generation']['code'] in dn: continue
-                cc = compact(d)
-                json.dump(cc, open(os.path.join(OUT, cc['code'] + '.json'), 'w'), ensure_ascii=False)
-                dn.add(cc['code']); n += 1
+        if '"modifications' not in s and '\\"modifications' not in s: continue
+        ds = _mods_from_str(s)
+        for d in ds: keep(d)
+        if ds: os.remove(f)
+    # small replies arrive inline: read them from every transcript (incl. agents)
+    for tx in glob.glob(os.path.join(PROJ, '**', '*.jsonl'), recursive=True):
+        for line in open(tx, errors='ignore'):
+            if 'modifications' not in line or 'tool_result' not in line: continue
+            try: rec = json.loads(line)
+            except Exception: continue
+            content = (rec.get('message') or {}).get('content')
+            if not isinstance(content, list): continue
+            for c in content:
+                if not isinstance(c, dict) or c.get('type') != 'tool_result': continue
+                parts = c.get('content')
+                texts = [p.get('text', '') for p in parts if isinstance(p, dict)] if isinstance(parts, list) else [parts or '']
+                for t in texts:
+                    if 'modifications' in t:
+                        for d in _mods_from_str(t): keep(d)
     print('ingested', n)
 
 def done():
