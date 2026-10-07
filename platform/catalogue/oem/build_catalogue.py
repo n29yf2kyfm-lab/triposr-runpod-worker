@@ -132,8 +132,8 @@ def main():
         if not os.path.exists(sm):
             continue
         for line in open(sm):
-            if not line.startswith('http'):
-                continue
+            if not line.startswith('http') or '/oem-parts/' not in line:
+                continue      # other shops' lists (skoda-parts.com) feed only their own crawl queue
             url = line.strip()
             slug = url.rsplit('/oem-parts/', 1)[1]
             slug = slug[len(PREFIX[brand]):] if slug.startswith(PREFIX.get(brand, '\0')) else slug.split('-', 1)[1]
@@ -157,6 +157,15 @@ def main():
         for f in glob.glob(os.path.join(pdir, '*.json')):
             d = json.load(open(f))
             e = parts.get(d['oem'])
+            if not e and not d.get('gone') and d.get('name'):
+                # a number known only from another brand's shop (e.g. a Skoda part page)
+                pt = part_type(d['name'])
+                guess = by_type.get(pt)
+                e = parts[d['oem']] = {
+                    'oem': d['oem'], 'oem_display': vw_display(d['oem']), 'name': d['name'], 'part_type': pt,
+                    'system': (d.get('category') or '').split(' > ')[0].lower() or (guess.most_common(1)[0][0] if guess else 'not yet sorted'),
+                    'unavailable': False, 'appears_on': [], 'notes': set(), 'source': d.get('url', ''),
+                    'illustration': None, 'brands': {brand}}
             if not e:
                 continue
             e['brands'].add(brand)
