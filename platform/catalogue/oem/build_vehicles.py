@@ -21,6 +21,20 @@ def key(s):
     return re.sub(r'[^a-z0-9]+', ' ', (s or '').lower()).strip()
 
 
+def display(t, engine=False):
+    """Display case for slug-derived text, e.g. "carrera 4s" -> "Carrera 4S",
+    "3 0l h6 gas" -> "3.0L H6 Gas". Only the case and the decimal point change."""
+    if engine:
+        t = re.sub(r'\b(\d) (\d)l\b', r'\1.\2l', t)
+    out = []
+    for w in t.split():
+        if re.fullmatch(r'\d+(\.\d+)?l|[vhlw]\d+|gt\d?|gts|rs|\d+s|s|e|ev|phev|tdi|tsi|gli|gti|awd|4motion', w):
+            out.append(w.upper())
+        else:
+            out.append(w.capitalize())
+    return ' '.join(out)
+
+
 def main():
     rows = {}
     # trims.json (trim_pages.py: dealer year pages, display-cased names) is read first so its
@@ -37,7 +51,13 @@ def main():
             if y and not 1995 <= y <= 2026:
                 continue
             k = (y, key(v.get('make')), key(v.get('model')), key(v.get('trim')), key(v.get('engine')))
-            rows.setdefault(k, {x: v.get(x) for x in ('year', 'make', 'model', 'trim', 'engine', 'url')})
+            r = {x: v.get(x) for x in ('year', 'make', 'model', 'trim', 'engine', 'url')}
+            for x in ('model', 'trim', 'engine'):
+                if r[x] and r[x] == r[x].lower():   # slug text ("3 0l v6 gas"): restore display case
+                    r[x] = display(r[x], x == 'engine')
+            if r['engine']:
+                r['engine'] = re.sub(r'\s+-\s+', ' ', r['engine'])   # "3.0L H6 - Gas" -> "3.0L H6 Gas"
+            rows.setdefault(k, r)
     imgs = {}
     ip = os.path.join(HERE, 'sources', 'images', 'images.json')
     if os.path.exists(ip):
