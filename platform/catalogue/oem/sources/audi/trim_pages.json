@@ -2110,6 +2110,20 @@
 "https://audi.oempartsonline.com/v-2009-audi-a8-quattro--l--6-0l-w12-gas"
 ]
 ],
+"v-2009-audi-q5": [
+[
+"Premium 3.2L V6 - Gas",
+"https://audi.oempartsonline.com/v-2009-audi-q5--premium--3-2l-v6-gas"
+],
+[
+"Premium Plus 3.2L V6 - Gas",
+"https://audi.oempartsonline.com/v-2009-audi-q5--premium-plus--3-2l-v6-gas"
+],
+[
+"Prestige 3.2L V6 - Gas",
+"https://audi.oempartsonline.com/v-2009-audi-q5--prestige--3-2l-v6-gas"
+]
+],
 "v-2010-audi-a3": [
 [
 "Base 2.0L L4 - Gas",
@@ -4199,6 +4213,20 @@
 "https://audi.oempartsonline.com/v-2022-audi-q4-e-tron--prestige--electric"
 ]
 ],
+"v-2022-audi-q4-e-tron-sportback": [
+[
+"Premium Electric",
+"https://audi.oempartsonline.com/v-2022-audi-q4-e-tron-sportback--premium--electric"
+],
+[
+"Premium Plus Electric",
+"https://audi.oempartsonline.com/v-2022-audi-q4-e-tron-sportback--premium-plus--electric"
+],
+[
+"Prestige Electric",
+"https://audi.oempartsonline.com/v-2022-audi-q4-e-tron-sportback--prestige--electric"
+]
+],
 "v-2023-audi-a3": [
 [
 "Premium 2.0L L4 - Electric/Gas",
@@ -4403,6 +4431,34 @@
 "https://audi.oempartsonline.com/v-2023-audi-q3--s-line-premium-plus--2-0l-l4-gas"
 ]
 ],
+"v-2023-audi-q4-e-tron": [
+[
+"Premium Electric",
+"https://audi.oempartsonline.com/v-2023-audi-q4-e-tron--premium--electric"
+],
+[
+"Premium Plus Electric",
+"https://audi.oempartsonline.com/v-2023-audi-q4-e-tron--premium-plus--electric"
+],
+[
+"Prestige Electric",
+"https://audi.oempartsonline.com/v-2023-audi-q4-e-tron--prestige--electric"
+]
+],
+"v-2023-audi-q4-e-tron-sportback": [
+[
+"Premium Electric",
+"https://audi.oempartsonline.com/v-2023-audi-q4-e-tron-sportback--premium--electric"
+],
+[
+"Premium Plus Electric",
+"https://audi.oempartsonline.com/v-2023-audi-q4-e-tron-sportback--premium-plus--electric"
+],
+[
+"Prestige Electric",
+"https://audi.oempartsonline.com/v-2023-audi-q4-e-tron-sportback--prestige--electric"
+]
+],
 "v-2024-audi-a3": [
 [
 "Premium 2.0L L4 - Electric/Gas",
@@ -4549,6 +4605,34 @@
 [
 "Premium Plus 2.0L L4 - Gas",
 "https://audi.oempartsonline.com/v-2024-audi-q3--premium-plus--2-0l-l4-gas"
+]
+],
+"v-2024-audi-q4-e-tron": [
+[
+"Premium Electric",
+"https://audi.oempartsonline.com/v-2024-audi-q4-e-tron--premium--electric"
+],
+[
+"Premium Plus Electric",
+"https://audi.oempartsonline.com/v-2024-audi-q4-e-tron--premium-plus--electric"
+],
+[
+"Prestige Electric",
+"https://audi.oempartsonline.com/v-2024-audi-q4-e-tron--prestige--electric"
+]
+],
+"v-2024-audi-q4-e-tron-sportback": [
+[
+"Premium Electric",
+"https://audi.oempartsonline.com/v-2024-audi-q4-e-tron-sportback--premium--electric"
+],
+[
+"Premium Plus Electric",
+"https://audi.oempartsonline.com/v-2024-audi-q4-e-tron-sportback--premium-plus--electric"
+],
+[
+"Prestige Electric",
+"https://audi.oempartsonline.com/v-2024-audi-q4-e-tron-sportback--prestige--electric"
 ]
 ],
 "v-2025-audi-a3-quattro": [
@@ -4703,6 +4787,34 @@
 "https://audi.oempartsonline.com/v-2025-audi-q3--premium-plus--2-0l-l4-gas"
 ]
 ],
+"v-2025-audi-q4-e-tron": [
+[
+"Premium Electric",
+"https://audi.oempartsonline.com/v-2025-audi-q4-e-tron--premium--electric"
+],
+[
+"Premium Plus Electric",
+"https://audi.oempartsonline.com/v-2025-audi-q4-e-tron--premium-plus--electric"
+],
+[
+"Prestige Electric",
+"https://audi.oempartsonline.com/v-2025-audi-q4-e-tron--prestige--electric"
+]
+],
+"v-2025-audi-q4-e-tron-sportback": [
+[
+"Premium Electric",
+"https://audi.oempartsonline.com/v-2025-audi-q4-e-tron-sportback--premium--electric"
+],
+[
+"Premium Plus Electric",
+"https://audi.oempartsonline.com/v-2025-audi-q4-e-tron-sportback--premium-plus--electric"
+],
+[
+"Prestige Electric",
+"https://audi.oempartsonline.com/v-2025-audi-q4-e-tron-sportback--prestige--electric"
+]
+],
 "v-2026-audi-a3-quattro": [
 [
 "Premium 2.0L L4 - Electric/Gas",
@@ -4733,6 +4845,26 @@
 [
 "Base 2.0L L4 - Gas",
 "https://audi.oempartsonline.com/v-2026-audi-q3--base--2-0l-l4-gas"
+]
+],
+"v-2026-audi-q4-e-tron": [
+[
+"Premium Electric",
+"https://audi.oempartsonline.com/v-2026-audi-q4-e-tron--premium--electric"
+],
+[
+"Premium Plus Electric",
+"https://audi.oempartsonline.com/v-2026-audi-q4-e-tron--premium-plus--electric"
+]
+],
+"v-2026-audi-q4-e-tron-sportback": [
+[
+"Premium Electric",
+"https://audi.oempartsonline.com/v-2026-audi-q4-e-tron-sportback--premium--electric"
+],
+[
+"Premium Plus Electric",
+"https://audi.oempartsonline.com/v-2026-audi-q4-e-tron-sportback--premium-plus--electric"
 ]
 ]
 }
