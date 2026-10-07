@@ -7,7 +7,7 @@ OUT = os.path.join(HERE, 'mods'); os.makedirs(OUT, exist_ok=True)
 T = json.load(open(os.path.join(HERE, 'targets.json')))
 
 def compact(d):
-    eng = collections.defaultdict(lambda: {'years': set(), 'bodies': set(), 'gearboxes': set()})
+    eng = collections.defaultdict(lambda: {'years': set(), 'bodies': set(), 'gearboxes': set(), 'trims': set()})
     other = collections.Counter()
     for m in d['modifications']:
         p = {x['name']: x['value'] for x in m['params']}
@@ -15,13 +15,14 @@ def compact(d):
         if p.get('year'): e['years'].add(p['year'])
         if p.get('body'): e['bodies'].add(p['body'])
         if p.get('transmission'): e['gearboxes'].add(p['transmission'])
+        if p.get('trim'): e['trims'].add(p['trim'])
         for k in p:
-            if k not in ('engine', 'year', 'body', 'transmission'): other[k] += 1
+            if k not in ('engine', 'year', 'body', 'transmission', 'trim'): other[k] += 1
     return {'code': d['generation']['code'], 'generation': d['generation']['name'],
             'series': d['generation'].get('series'), 'region': d['generation']['region']['name'],
             'modifications': len(d['modifications']), 'otherParams': dict(other),
             'engines': [{'engine': k, 'years': sorted(v['years']), 'bodies': sorted(v['bodies']),
-                         'gearboxes': sorted(v['gearboxes'])} for k, v in sorted(eng.items())]}
+                         'gearboxes': sorted(v['gearboxes']), 'trims': sorted(v['trims'])} for k, v in sorted(eng.items())]}
 
 def ingest():
     n = 0
