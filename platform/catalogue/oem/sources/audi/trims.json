@@ -36,6 +36,24 @@
 "url": "https://audi.oempartsonline.com/v-1995-audi-90-quattro--sport--2-8l-v6-gas"
 },
 {
+"year": 1995,
+"make": "Audi",
+"model": "A6",
+"trim": "Avant",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-1995-audi-a6--avant--2-8l-v6-gas"
+},
+{
+"year": 1995,
+"make": "Audi",
+"model": "A6",
+"trim": "Base",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-1995-audi-a6--base--2-8l-v6-gas"
+},
+{
 "year": 1996,
 "make": "Audi",
 "model": "A4",
@@ -52,6 +70,24 @@
 "engine": "2.8L V6 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-1996-audi-a4-quattro--base--2-8l-v6-gas"
+},
+{
+"year": 1996,
+"make": "Audi",
+"model": "A6",
+"trim": "Avant",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-1996-audi-a6--avant--2-8l-v6-gas"
+},
+{
+"year": 1996,
+"make": "Audi",
+"model": "A6",
+"trim": "Base",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-1996-audi-a6--base--2-8l-v6-gas"
 },
 {
 "year": 1997,
@@ -88,6 +124,24 @@
 "engine": "2.8L V6 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-1997-audi-a4-quattro--base--2-8l-v6-gas"
+},
+{
+"year": 1997,
+"make": "Audi",
+"model": "A6",
+"trim": "Avant",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-1997-audi-a6--avant--2-8l-v6-gas"
+},
+{
+"year": 1997,
+"make": "Audi",
+"model": "A6",
+"trim": "Base",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-1997-audi-a6--base--2-8l-v6-gas"
 },
 {
 "year": 1998,
@@ -144,6 +198,15 @@
 "url": "https://audi.oempartsonline.com/v-1998-audi-a4-quattro--base--2-8l-v6-gas"
 },
 {
+"year": 1998,
+"make": "Audi",
+"model": "A6",
+"trim": "Base",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-1998-audi-a6--base--2-8l-v6-gas"
+},
+{
 "year": 1999,
 "make": "Audi",
 "model": "A4",
@@ -196,6 +259,15 @@
 "engine": "2.8L V6 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-1999-audi-a4-quattro--base--2-8l-v6-gas"
+},
+{
+"year": 1999,
+"make": "Audi",
+"model": "A6",
+"trim": "Base",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-1999-audi-a6--base--2-8l-v6-gas"
 },
 {
 "year": 2000,
