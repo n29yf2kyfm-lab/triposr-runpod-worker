@@ -1100,6 +1100,16 @@
 "https://audi.oempartsonline.com/v-1995-audi-cabriolet--base--2-8l-v6-gas"
 ]
 ],
+"v-1995-audi-s6": [
+[
+"Avant 2.2L L5 - Gas",
+"https://audi.oempartsonline.com/v-1995-audi-s6--avant--2-2l-l5-gas"
+],
+[
+"Base 2.2L L5 - Gas",
+"https://audi.oempartsonline.com/v-1995-audi-s6--base--2-2l-l5-gas"
+]
+],
 "v-1996-audi-a4": [
 [
 "Base 2.8L V6 - Gas",
@@ -1538,6 +1548,12 @@
 "https://audi.oempartsonline.com/v-2002-audi-s4--base--2-7l-v6-gas"
 ]
 ],
+"v-2002-audi-s6": [
+[
+"Avant 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2002-audi-s6--avant--4-2l-v8-gas"
+]
+],
 "v-2003-audi-a4": [
 [
 "Base 1.8L L4 - Gas",
@@ -1618,6 +1634,12 @@
 [
 "Base 4.2L V8 - Gas",
 "https://audi.oempartsonline.com/v-2003-audi-rs6--base--4-2l-v8-gas"
+]
+],
+"v-2003-audi-s6": [
+[
+"Avant 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2003-audi-s6--avant--4-2l-v8-gas"
 ]
 ],
 "v-2004-audi-a4": [
@@ -2042,6 +2064,12 @@
 "https://audi.oempartsonline.com/v-2007-audi-s4--cabriolet--4-2l-v8-gas"
 ]
 ],
+"v-2007-audi-s6": [
+[
+"Base 5.2L V10 - Gas",
+"https://audi.oempartsonline.com/v-2007-audi-s6--base--5-2l-v10-gas"
+]
+],
 "v-2008-audi-a3": [
 [
 "Base 2.0L L4 - Gas",
@@ -2182,6 +2210,12 @@
 [
 "Base 4.2L V8 - Gas",
 "https://audi.oempartsonline.com/v-2008-audi-s5--base--4-2l-v8-gas"
+]
+],
+"v-2008-audi-s6": [
+[
+"Base 5.2L V10 - Gas",
+"https://audi.oempartsonline.com/v-2008-audi-s6--base--5-2l-v10-gas"
 ]
 ],
 "v-2009-audi-a3": [
@@ -5423,6 +5457,20 @@
 "https://audi.oempartsonline.com/v-2021-audi-s5--prestige--3-0l-v6-gas"
 ]
 ],
+"v-2021-audi-s5-sportback": [
+[
+"Premium 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2021-audi-s5-sportback--premium--3-0l-v6-gas"
+],
+[
+"Premium Plus 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2021-audi-s5-sportback--premium-plus--3-0l-v6-gas"
+],
+[
+"Prestige 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2021-audi-s5-sportback--prestige--3-0l-v6-gas"
+]
+],
 "v-2022-audi-a3": [
 [
 "Premium 2.0L L4 - Electric/Gas",
@@ -5855,6 +5903,20 @@
 "https://audi.oempartsonline.com/v-2022-audi-s5--prestige--3-0l-v6-gas"
 ]
 ],
+"v-2022-audi-s5-sportback": [
+[
+"Premium 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2022-audi-s5-sportback--premium--3-0l-v6-gas"
+],
+[
+"Premium Plus 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2022-audi-s5-sportback--premium-plus--3-0l-v6-gas"
+],
+[
+"Prestige 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2022-audi-s5-sportback--prestige--3-0l-v6-gas"
+]
+],
 "v-2023-audi-a3": [
 [
 "Premium 2.0L L4 - Electric/Gas",
@@ -6267,6 +6329,20 @@
 "https://audi.oempartsonline.com/v-2023-audi-s5--prestige--3-0l-v6-gas"
 ]
 ],
+"v-2023-audi-s5-sportback": [
+[
+"Premium 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2023-audi-s5-sportback--premium--3-0l-v6-gas"
+],
+[
+"Premium Plus 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2023-audi-s5-sportback--premium-plus--3-0l-v6-gas"
+],
+[
+"Prestige 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2023-audi-s5-sportback--prestige--3-0l-v6-gas"
+]
+],
 "v-2024-audi-a3": [
 [
 "Premium 2.0L L4 - Electric/Gas",
@@ -6639,6 +6715,20 @@
 [
 "Prestige 3.0L V6 - Gas",
 "https://audi.oempartsonline.com/v-2024-audi-s5--prestige--3-0l-v6-gas"
+]
+],
+"v-2024-audi-s5-sportback": [
+[
+"Premium 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2024-audi-s5-sportback--premium--3-0l-v6-gas"
+],
+[
+"Premium Plus 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2024-audi-s5-sportback--premium-plus--3-0l-v6-gas"
+],
+[
+"Prestige 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2024-audi-s5-sportback--prestige--3-0l-v6-gas"
 ]
 ],
 "v-2025-audi-a3-quattro": [
@@ -7055,6 +7145,20 @@
 [
 "Prestige 3.0L V6 - Gas",
 "https://audi.oempartsonline.com/v-2025-audi-s5--prestige--3-0l-v6-gas"
+]
+],
+"v-2025-audi-s5-sportback": [
+[
+"Premium 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2025-audi-s5-sportback--premium--3-0l-v6-gas"
+],
+[
+"Premium Plus 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2025-audi-s5-sportback--premium-plus--3-0l-v6-gas"
+],
+[
+"Prestige 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2025-audi-s5-sportback--prestige--3-0l-v6-gas"
 ]
 ],
 "v-2026-audi-a3-quattro": [
