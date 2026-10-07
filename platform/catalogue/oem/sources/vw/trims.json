@@ -144,6 +144,24 @@
 "url": "https://vw.oempartsonline.com/v-1999-volkswagen-beetle--glx--1-8l-l4-gas"
 },
 {
+"year": 1999,
+"make": "Volkswagen",
+"model": "Cabrio",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1999-volkswagen-cabrio--base--2-0l-l4-gas"
+},
+{
+"year": 1999,
+"make": "Volkswagen",
+"model": "Cabrio",
+"trim": "GLS",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1999-volkswagen-cabrio--gls--2-0l-l4-gas"
+},
+{
 "year": 2000,
 "make": "Volkswagen",
 "model": "Beetle",
@@ -205,6 +223,24 @@
 "engine": "1.8L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2000-volkswagen-beetle--glx--1-8l-l4-gas"
+},
+{
+"year": 2000,
+"make": "Volkswagen",
+"model": "Cabrio",
+"trim": "GL",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2000-volkswagen-cabrio--gl--2-0l-l4-gas"
+},
+{
+"year": 2000,
+"make": "Volkswagen",
+"model": "Cabrio",
+"trim": "GLS",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2000-volkswagen-cabrio--gls--2-0l-l4-gas"
 },
 {
 "year": 2001,
@@ -295,6 +331,33 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2001-volkswagen-beetle--sport--2-0l-l4-gas"
+},
+{
+"year": 2001,
+"make": "Volkswagen",
+"model": "Cabrio",
+"trim": "GL",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2001-volkswagen-cabrio--gl--2-0l-l4-gas"
+},
+{
+"year": 2001,
+"make": "Volkswagen",
+"model": "Cabrio",
+"trim": "GLS",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2001-volkswagen-cabrio--gls--2-0l-l4-gas"
+},
+{
+"year": 2001,
+"make": "Volkswagen",
+"model": "Cabrio",
+"trim": "GLX",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2001-volkswagen-cabrio--glx--2-0l-l4-gas"
 },
 {
 "year": 2002,
@@ -394,6 +457,33 @@
 "engine": "1.8L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2002-volkswagen-beetle--turbo-s--1-8l-l4-gas"
+},
+{
+"year": 2002,
+"make": "Volkswagen",
+"model": "Cabrio",
+"trim": "GL",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2002-volkswagen-cabrio--gl--2-0l-l4-gas"
+},
+{
+"year": 2002,
+"make": "Volkswagen",
+"model": "Cabrio",
+"trim": "GLS",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2002-volkswagen-cabrio--gls--2-0l-l4-gas"
+},
+{
+"year": 2002,
+"make": "Volkswagen",
+"model": "Cabrio",
+"trim": "GLX",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2002-volkswagen-cabrio--glx--2-0l-l4-gas"
 },
 {
 "year": 2003,
