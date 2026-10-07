@@ -11,7 +11,7 @@ CLI is logged in. Stops on a credit, auth or rate-limit error that does not
 clear after a back-off, or when every queue is empty. Resumable: state lives in
 sources/<brand>/trim_pages.json.
 """
-import json, os, subprocess, sys, time
+import json, os, shutil, subprocess, sys, time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -36,6 +36,10 @@ def fetch(url):
 def commit(n):
     """Save progress to origin every few pages: local disk does not survive."""
     repo = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
+    if tp.STATE_DIR:
+        for b in tp.BRANDS:
+            if os.path.exists(tp.spath(b)):
+                shutil.copyfile(tp.spath(b), tp.repo_spath(b))
     tp.build()
     subprocess.run(['git', 'add', '-A', os.path.join(HERE, 'sources')], cwd=repo, capture_output=True)
     r = subprocess.run(['git', 'commit', '-qm', f'Trims: crawl progress ({n} pages this run)\n\n'

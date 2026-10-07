@@ -28,15 +28,27 @@ SKIP = {'vw': {'quantum', 'vanagon', 'scirocco', 'corrado'},
         'porsche': {'924', '944'}}
 
 
-def spath(b):
+# A long unattended run (trim_crawl.py) keeps its live state outside the repo in
+# TRIM_STATE_DIR and copies it into sources/ only when it commits, so the working
+# tree stays clean between commits. Without the variable, state lives in sources/.
+STATE_DIR = os.environ.get('TRIM_STATE_DIR')
+
+
+def repo_spath(b):
     return os.path.join(HERE, 'sources', b, 'trim_pages.json')
 
 
+def spath(b):
+    return os.path.join(STATE_DIR, f'{b}_trim_pages.json') if STATE_DIR else repo_spath(b)
+
+
 def load(b):
-    try:
-        return json.load(open(spath(b)))
-    except (OSError, ValueError):
-        return {'models': None, 'years': {}, 'model_years': {}, 'names': {}}
+    for p in (spath(b), repo_spath(b)):
+        try:
+            return json.load(open(p))
+        except (OSError, ValueError):
+            continue
+    return {'models': None, 'years': {}, 'model_years': {}, 'names': {}}
 
 
 def save(b, s):
