@@ -1926,6 +1926,33 @@
 "url": "https://audi.oempartsonline.com/v-2012-audi-a6--premium-plus--2-0l-l4-gas"
 },
 {
+"year": 2012,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2012-audi-a6-quattro--premium--3-0l-v6-gas"
+},
+{
+"year": 2012,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2012-audi-a6-quattro--premium-plus--3-0l-v6-gas"
+},
+{
+"year": 2012,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Prestige",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2012-audi-a6-quattro--prestige--3-0l-v6-gas"
+},
+{
 "year": 2013,
 "make": "Audi",
 "model": "A3",
@@ -2025,6 +2052,51 @@
 "url": "https://audi.oempartsonline.com/v-2013-audi-a5-quattro--cabriolet--2-0l-l4-gas"
 },
 {
+"year": 2013,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2013-audi-a6-quattro--premium--2-0l-l4-gas"
+},
+{
+"year": 2013,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2013-audi-a6-quattro--premium--3-0l-v6-gas"
+},
+{
+"year": 2013,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2013-audi-a6-quattro--premium-plus--2-0l-l4-gas"
+},
+{
+"year": 2013,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2013-audi-a6-quattro--premium-plus--3-0l-v6-gas"
+},
+{
+"year": 2013,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Prestige",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2013-audi-a6-quattro--prestige--3-0l-v6-gas"
+},
+{
 "year": 2014,
 "make": "Audi",
 "model": "A4",
@@ -2113,6 +2185,69 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2014-audi-a6--premium-plus--2-0l-l4-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-a6-quattro--premium--2-0l-l4-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-a6-quattro--premium--3-0l-v6-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-a6-quattro--premium-plus--2-0l-l4-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-a6-quattro--premium-plus--3-0l-v6-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Prestige",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-a6-quattro--prestige--3-0l-v6-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "TDI Premium Plus",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-a6-quattro--tdi-premium-plus--3-0l-v6-diesel"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "TDI Prestige",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-a6-quattro--tdi-prestige--3-0l-v6-diesel"
 },
 {
 "year": 2015,
@@ -2349,6 +2484,60 @@
 "url": "https://audi.oempartsonline.com/v-2015-audi-a6--premium-plus--2-0l-l4-gas"
 },
 {
+"year": 2015,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-a6-quattro--premium--2-0l-l4-gas"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-a6-quattro--premium-plus--2-0l-l4-gas"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-a6-quattro--premium-plus--3-0l-v6-gas"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Prestige",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-a6-quattro--prestige--3-0l-v6-gas"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "TDI Premium Plus",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-a6-quattro--tdi-premium-plus--3-0l-v6-diesel"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "TDI Prestige",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-a6-quattro--tdi-prestige--3-0l-v6-diesel"
+},
+{
 "year": 2016,
 "make": "Audi",
 "model": "A3",
@@ -2563,6 +2752,51 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2016-audi-a6--premium-plus--2-0l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-a6-quattro--premium-plus--2-0l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-a6-quattro--premium-plus--3-0l-v6-gas"
+},
+{
+"year": 2016,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Prestige",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-a6-quattro--prestige--3-0l-v6-gas"
+},
+{
+"year": 2016,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "TDI Premium Plus",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-a6-quattro--tdi-premium-plus--3-0l-v6-diesel"
+},
+{
+"year": 2016,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "TDI Prestige",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-a6-quattro--tdi-prestige--3-0l-v6-diesel"
 },
 {
 "year": 2017,
