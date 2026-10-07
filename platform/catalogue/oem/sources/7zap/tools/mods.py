@@ -66,7 +66,7 @@ if __name__ == '__main__':
     cmd = sys.argv[1]
     if cmd == 'ingest': ingest()
     if cmd in ('next', 'status'):
-        dn = done(); sk = set(open(os.path.join(HERE,'skip.txt')).read().split()) if os.path.exists(os.path.join(HERE,'skip.txt')) else set()
+        dn = done(); sk = {w for w in open(os.path.join(HERE,'skip.txt')).read().split() if w.startswith('gen_')} if os.path.exists(os.path.join(HERE,'skip.txt')) else set()
         todo = [t for t in T if t['code'] not in dn and t['code'] not in sk]
         print('skipped (too large for the connector)', len(sk))
         print('done', len(T) - len(todo), 'todo', len(todo))
