@@ -4241,6 +4241,24 @@
 {
 "year": 2014,
 "make": "Audi",
+"model": "SQ5",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-sq5--premium-plus--3-0l-v6-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "SQ5",
+"trim": "Prestige",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-sq5--prestige--3-0l-v6-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
 "model": "allroad",
 "trim": "Premium",
 "engine": "2.0L L4 Flex",
@@ -4952,6 +4970,24 @@
 {
 "year": 2015,
 "make": "Audi",
+"model": "SQ5",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-sq5--premium-plus--3-0l-v6-gas"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "SQ5",
+"trim": "Prestige",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-sq5--prestige--3-0l-v6-gas"
+},
+{
+"year": 2015,
+"make": "Audi",
 "model": "allroad",
 "trim": "Premium",
 "engine": "2.0L L4 Flex",
@@ -5542,6 +5578,24 @@
 "engine": "4.0L V8 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2016-audi-s8--plus--4-0l-v8-gas"
+},
+{
+"year": 2016,
+"make": "Audi",
+"model": "SQ5",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-sq5--premium-plus--3-0l-v6-gas"
+},
+{
+"year": 2016,
+"make": "Audi",
+"model": "SQ5",
+"trim": "Prestige",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-sq5--prestige--3-0l-v6-gas"
 },
 {
 "year": 2016,
@@ -8048,6 +8102,15 @@
 {
 "year": 2020,
 "make": "Audi",
+"model": "S8",
+"trim": "Base",
+"engine": "4.0L V8 ELECTRIC Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2020-audi-s8--base--4-0l-v8-electric-gas"
+},
+{
+"year": 2020,
+"make": "Audi",
 "model": "e-tron Sportback",
 "trim": "Premium Plus Electric",
 "engine": "",
@@ -8692,6 +8755,15 @@
 "engine": "2.9L V6 Electric/Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2021-audi-s7-sportback--prestige--2-9l-v6-electric-gas"
+},
+{
+"year": 2021,
+"make": "Audi",
+"model": "S8",
+"trim": "Base",
+"engine": "4.0L V8 ELECTRIC Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2021-audi-s8--base--4-0l-v8-electric-gas"
 },
 {
 "year": 2021,
@@ -9520,6 +9592,15 @@
 "engine": "2.9L V6 Electric/Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2022-audi-s7-sportback--prestige--2-9l-v6-electric-gas"
+},
+{
+"year": 2022,
+"make": "Audi",
+"model": "S8",
+"trim": "Base",
+"engine": "4.0L V8 ELECTRIC Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2022-audi-s8--base--4-0l-v8-electric-gas"
 },
 {
 "year": 2022,
@@ -10375,6 +10456,15 @@
 "engine": "2.9L V6 Electric/Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2023-audi-s7-sportback--prestige--2-9l-v6-electric-gas"
+},
+{
+"year": 2023,
+"make": "Audi",
+"model": "S8",
+"trim": "Base",
+"engine": "4.0L V8 ELECTRIC Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2023-audi-s8--base--4-0l-v8-electric-gas"
 },
 {
 "year": 2023,
@@ -11248,6 +11338,15 @@
 "engine": "2.9L V6 Electric/Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2024-audi-s7-sportback--prestige--2-9l-v6-electric-gas"
+},
+{
+"year": 2024,
+"make": "Audi",
+"model": "S8",
+"trim": "Base",
+"engine": "4.0L V8 ELECTRIC Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2024-audi-s8--base--4-0l-v8-electric-gas"
 },
 {
 "year": 2024,
@@ -12168,6 +12267,15 @@
 "url": "https://audi.oempartsonline.com/v-2025-audi-s7-sportback--prestige--2-9l-v6-electric-gas"
 },
 {
+"year": 2025,
+"make": "Audi",
+"model": "S8",
+"trim": "Base",
+"engine": "4.0L V8 ELECTRIC Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2025-audi-s8--base--4-0l-v8-electric-gas"
+},
+{
 "year": 2026,
 "make": "Audi",
 "model": "A3 Quattro",
@@ -12517,5 +12625,14 @@
 "engine": "3.0L V6 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2026-audi-s5--prestige--3-0l-v6-gas"
+},
+{
+"year": 2026,
+"make": "Audi",
+"model": "S8",
+"trim": "Base",
+"engine": "4.0L V8 ELECTRIC Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2026-audi-s8--base--4-0l-v8-electric-gas"
 }
 ]

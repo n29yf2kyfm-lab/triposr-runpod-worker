@@ -3367,6 +3367,16 @@
 "https://audi.oempartsonline.com/v-2014-audi-s8--base--4-0l-v8-gas"
 ]
 ],
+"v-2014-audi-sq5": [
+[
+"Premium Plus 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2014-audi-sq5--premium-plus--3-0l-v6-gas"
+],
+[
+"Prestige 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2014-audi-sq5--prestige--3-0l-v6-gas"
+]
+],
 "v-2015-audi-a3": [
 [
 "Premium 1.8L L4 - Gas",
@@ -3729,6 +3739,16 @@
 "https://audi.oempartsonline.com/v-2015-audi-s8--base--4-0l-v8-gas"
 ]
 ],
+"v-2015-audi-sq5": [
+[
+"Premium Plus 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2015-audi-sq5--premium-plus--3-0l-v6-gas"
+],
+[
+"Prestige 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2015-audi-sq5--prestige--3-0l-v6-gas"
+]
+],
 "v-2016-audi-a3": [
 [
 "Premium 1.8L L4 - Gas",
@@ -4029,6 +4049,16 @@
 [
 "Plus 4.0L V8 - Gas",
 "https://audi.oempartsonline.com/v-2016-audi-s8--plus--4-0l-v8-gas"
+]
+],
+"v-2016-audi-sq5": [
+[
+"Premium Plus 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2016-audi-sq5--premium-plus--3-0l-v6-gas"
+],
+[
+"Prestige 3.0L V6 - Gas",
+"https://audi.oempartsonline.com/v-2016-audi-sq5--prestige--3-0l-v6-gas"
 ]
 ],
 "v-2017-audi-a3": [
@@ -5339,6 +5369,12 @@
 "https://audi.oempartsonline.com/v-2020-audi-s7-sportback--prestige--2-9l-v6-electric-gas"
 ]
 ],
+"v-2020-audi-s8": [
+[
+"Base 4.0L V8 ELECTRIC - Gas",
+"https://audi.oempartsonline.com/v-2020-audi-s8--base--4-0l-v8-electric-gas"
+]
+],
 "v-2021-audi-a4-allroad": [
 [
 "Premium 2.0L L4 - Electric/Gas",
@@ -5695,6 +5731,12 @@
 [
 "Prestige 2.9L V6 - Electric/Gas",
 "https://audi.oempartsonline.com/v-2021-audi-s7-sportback--prestige--2-9l-v6-electric-gas"
+]
+],
+"v-2021-audi-s8": [
+[
+"Base 4.0L V8 ELECTRIC - Gas",
+"https://audi.oempartsonline.com/v-2021-audi-s8--base--4-0l-v8-electric-gas"
 ]
 ],
 "v-2022-audi-a3": [
@@ -6163,6 +6205,12 @@
 "https://audi.oempartsonline.com/v-2022-audi-s7-sportback--prestige--2-9l-v6-electric-gas"
 ]
 ],
+"v-2022-audi-s8": [
+[
+"Base 4.0L V8 ELECTRIC - Gas",
+"https://audi.oempartsonline.com/v-2022-audi-s8--base--4-0l-v8-electric-gas"
+]
+],
 "v-2023-audi-a3": [
 [
 "Premium 2.0L L4 - Electric/Gas",
@@ -6617,6 +6665,12 @@
 "https://audi.oempartsonline.com/v-2023-audi-s7-sportback--prestige--2-9l-v6-electric-gas"
 ]
 ],
+"v-2023-audi-s8": [
+[
+"Base 4.0L V8 ELECTRIC - Gas",
+"https://audi.oempartsonline.com/v-2023-audi-s8--base--4-0l-v8-electric-gas"
+]
+],
 "v-2024-audi-a3": [
 [
 "Premium 2.0L L4 - Electric/Gas",
@@ -7031,6 +7085,12 @@
 [
 "Prestige 2.9L V6 - Electric/Gas",
 "https://audi.oempartsonline.com/v-2024-audi-s7-sportback--prestige--2-9l-v6-electric-gas"
+]
+],
+"v-2024-audi-s8": [
+[
+"Base 4.0L V8 ELECTRIC - Gas",
+"https://audi.oempartsonline.com/v-2024-audi-s8--base--4-0l-v8-electric-gas"
 ]
 ],
 "v-2025-audi-a3-quattro": [
@@ -7505,6 +7565,12 @@
 "https://audi.oempartsonline.com/v-2025-audi-s7-sportback--prestige--2-9l-v6-electric-gas"
 ]
 ],
+"v-2025-audi-s8": [
+[
+"Base 4.0L V8 ELECTRIC - Gas",
+"https://audi.oempartsonline.com/v-2025-audi-s8--base--4-0l-v8-electric-gas"
+]
+],
 "v-2026-audi-a3-quattro": [
 [
 "Premium 2.0L L4 - Electric/Gas",
@@ -7697,6 +7763,12 @@
 [
 "Prestige 3.0L V6 - Gas",
 "https://audi.oempartsonline.com/v-2026-audi-s5--prestige--3-0l-v6-gas"
+]
+],
+"v-2026-audi-s8": [
+[
+"Base 4.0L V8 ELECTRIC - Gas",
+"https://audi.oempartsonline.com/v-2026-audi-s8--base--4-0l-v8-electric-gas"
 ]
 ]
 }
