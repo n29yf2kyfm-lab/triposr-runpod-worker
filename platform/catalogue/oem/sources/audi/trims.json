@@ -2583,6 +2583,24 @@
 "url": "https://audi.oempartsonline.com/v-2010-audi-s4--base--3-0l-v6-gas"
 },
 {
+"year": 2010,
+"make": "Audi",
+"model": "S5",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2010-audi-s5--base--4-2l-v8-gas"
+},
+{
+"year": 2010,
+"make": "Audi",
+"model": "S5",
+"trim": "Cabriolet",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2010-audi-s5--cabriolet--3-0l-v6-gas"
+},
+{
 "year": 2011,
 "make": "Audi",
 "model": "A3",
@@ -2851,6 +2869,24 @@
 "engine": "3.0L V6 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2011-audi-s4--base--3-0l-v6-gas"
+},
+{
+"year": 2011,
+"make": "Audi",
+"model": "S5",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2011-audi-s5--base--4-2l-v8-gas"
+},
+{
+"year": 2011,
+"make": "Audi",
+"model": "S5",
+"trim": "Cabriolet",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2011-audi-s5--cabriolet--3-0l-v6-gas"
 },
 {
 "year": 2012,
@@ -3168,6 +3204,24 @@
 "url": "https://audi.oempartsonline.com/v-2012-audi-s4--base--3-0l-v6-gas"
 },
 {
+"year": 2012,
+"make": "Audi",
+"model": "S5",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2012-audi-s5--base--4-2l-v8-gas"
+},
+{
+"year": 2012,
+"make": "Audi",
+"model": "S5",
+"trim": "Cabriolet",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2012-audi-s5--cabriolet--3-0l-v6-gas"
+},
+{
 "year": 2013,
 "make": "Audi",
 "model": "A3",
@@ -3481,6 +3535,24 @@
 "engine": "3.0L V6 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2013-audi-s4--base--3-0l-v6-gas"
+},
+{
+"year": 2013,
+"make": "Audi",
+"model": "S5",
+"trim": "Base",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2013-audi-s5--base--3-0l-v6-gas"
+},
+{
+"year": 2013,
+"make": "Audi",
+"model": "S5",
+"trim": "Cabriolet",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2013-audi-s5--cabriolet--3-0l-v6-gas"
 },
 {
 "year": 2013,
@@ -3958,6 +4030,24 @@
 "engine": "3.0L V6 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2014-audi-s4--prestige--3-0l-v6-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "S5",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-s5--premium-plus--3-0l-v6-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "S5",
+"trim": "Prestige",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-s5--prestige--3-0l-v6-gas"
 },
 {
 "year": 2014,
@@ -4628,6 +4718,24 @@
 {
 "year": 2015,
 "make": "Audi",
+"model": "S5",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-s5--premium-plus--3-0l-v6-gas"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "S5",
+"trim": "Prestige",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-s5--prestige--3-0l-v6-gas"
+},
+{
+"year": 2015,
+"make": "Audi",
 "model": "allroad",
 "trim": "Premium",
 "engine": "2.0L L4 Flex",
@@ -5159,6 +5267,24 @@
 {
 "year": 2016,
 "make": "Audi",
+"model": "S5",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-s5--premium-plus--3-0l-v6-gas"
+},
+{
+"year": 2016,
+"make": "Audi",
+"model": "S5",
+"trim": "Prestige",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-s5--prestige--3-0l-v6-gas"
+},
+{
+"year": 2016,
+"make": "Audi",
 "model": "allroad",
 "trim": "Premium",
 "engine": "2.0L L4 Flex",
@@ -5668,6 +5794,15 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2017-audi-s3--prestige--2-0l-l4-gas"
+},
+{
+"year": 2017,
+"make": "Audi",
+"model": "S5",
+"trim": "Base",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2017-audi-s5--base--3-0l-v6-gas"
 },
 {
 "year": 2018,
@@ -6237,6 +6372,24 @@
 "url": "https://audi.oempartsonline.com/v-2018-audi-s4--prestige--3-0l-v6-gas"
 },
 {
+"year": 2018,
+"make": "Audi",
+"model": "S5",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2018-audi-s5--premium-plus--3-0l-v6-gas"
+},
+{
+"year": 2018,
+"make": "Audi",
+"model": "S5",
+"trim": "Prestige",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2018-audi-s5--prestige--3-0l-v6-gas"
+},
+{
 "year": 2019,
 "make": "Audi",
 "model": "A3",
@@ -6757,6 +6910,33 @@
 "engine": "3.0L V6 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2019-audi-s4--prestige--3-0l-v6-gas"
+},
+{
+"year": 2019,
+"make": "Audi",
+"model": "S5",
+"trim": "Premium",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2019-audi-s5--premium--3-0l-v6-gas"
+},
+{
+"year": 2019,
+"make": "Audi",
+"model": "S5",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2019-audi-s5--premium-plus--3-0l-v6-gas"
+},
+{
+"year": 2019,
+"make": "Audi",
+"model": "S5",
+"trim": "Prestige",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2019-audi-s5--prestige--3-0l-v6-gas"
 },
 {
 "year": 2019,
