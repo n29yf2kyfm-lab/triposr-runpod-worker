@@ -18,6 +18,17 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, 'products')
 
 
+def out_dir(url):
+    """VW parts go to products/; every other Group brand's dealer site
+    (audi., porsche., ... .oempartsonline.com) to sources/<brand>/products/.
+    Routed by the URL's own host, so a file can never land under the wrong brand."""
+    m = re.match(r'https?://([a-z0-9]+)\.oempartsonline\.com/', url)
+    brand = m.group(1) if m else 'vw'
+    d = OUT if brand == 'vw' else os.path.join(HERE, 'sources', brand, 'products')
+    os.makedirs(d, exist_ok=True)
+    return d
+
+
 def parse(raw, url):
     prod = None
     for m in re.finditer(r'<script[^>]*application/ld\+json[^>]*>(.*?)</script>', raw, re.S):
@@ -70,7 +81,7 @@ def main():
     for f in sorted(glob.glob(os.path.join(src, '*.txt')) + glob.glob(os.path.join(src, '*.json'))):
         try:
             d = json.load(open(f))
-        except (ValueError, UnicodeDecodeError):
+        except (ValueError, UnicodeDecodeError, OSError):   # OSError: another ingest took it first
             continue
         if not isinstance(d, dict) or 'rawHtml' not in d:
             continue
@@ -81,9 +92,9 @@ def main():
         if '/oem-parts/' not in (meta.get('url') or url):
             # the dealer redirects a part it no longer carries to the model list
             oem = url.rsplit('-', 1)[1].upper()
-            json.dump({'oem': oem, 'gone': True, 'url': url}, open(os.path.join(OUT, oem + '.json'), 'w'))
+            json.dump({'oem': oem, 'gone': True, 'url': url}, open(os.path.join(out_dir(url), oem + '.json'), 'w'))
             gone += 1
-            if not keep:
+            if not keep and os.path.exists(f):
                 os.remove(f)
             continue
         p = parse(d['rawHtml'], url)
@@ -91,11 +102,11 @@ def main():
             bad += 1
             print(f'PRODUCT unparsed {url}', flush=True)
             continue
-        json.dump(p, open(os.path.join(OUT, p['oem'] + '.json'), 'w'), separators=(',', ':'))
+        json.dump(p, open(os.path.join(out_dir(url), p['oem'] + '.json'), 'w'), separators=(',', ':'))
         n += 1
-        if not keep:
+        if not keep and os.path.exists(f):
             os.remove(f)
-    print(f'PRODUCTS +{n} ingested, {gone} no longer listed, {bad} unparsed; {len(os.listdir(OUT))} on disk', flush=True)
+    print(f'PRODUCTS +{n} ingested, {gone} no longer listed, {bad} unparsed; {len(os.listdir(OUT))} VW on disk', flush=True)
 
 
 if __name__ == '__main__':

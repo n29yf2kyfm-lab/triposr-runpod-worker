@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>VW Parts Desk</title>
+<title>VW Group Parts Desk</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -188,7 +188,7 @@ footer p{margin:0}
 <header class="top">
   <div class="wrap">
     <div class="brand">
-      <h1>VW <span>Parts</span> Desk</h1>
+      <h1>VW Group <span>Parts</span> Desk</h1>
       <div class="stats" id="stats" aria-live="polite">Loading catalogue…</div>
     </div>
     <div class="tools">
@@ -214,6 +214,10 @@ footer p{margin:0}
     <section class="vin" id="vinbox" hidden aria-live="polite"></section>
     <div class="parts-layout">
       <aside class="filters">
+        <div class="fgroup">
+          <h3>Brand</h3>
+          <div class="chips" id="brands"></div>
+        </div>
         <div class="fgroup">
           <h3>Vehicle</h3>
           <div class="vlist" id="vehicles"></div>
@@ -277,7 +281,7 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt
 const norm = s => String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
 const PAGE = 48;
 
-const state = {parts: [], vehicles: [], vmap: {}, asm: [], q: '', veh: new Set(), sys: new Set(), sort: 'system', shown: PAGE, vinHits: null, vinFit: null};
+const state = {parts: [], vehicles: [], vmap: {}, asm: [], q: '', veh: new Set(), sys: new Set(), sort: 'system', shown: PAGE, vinHits: null, vinFit: null, brand: new Set()};
 
 /* ---------- VIN (port of platform/catalogue/vin/vin.py, offline) ---------- */
 const TRANS = {};
@@ -400,11 +404,13 @@ function vlabel(v){ return `${v.year} ${v.model} ${v.trim}`; }
 function partYears(p){ return [...new Set(p.appears_on.map(a => state.vmap[a.vehicle]?.year).filter(Boolean))].sort(); }
 function yearsText(ys){ if (!ys.length) return ''; return ys.length === 1 ? String(ys[0]) : ys.length === 2 ? ys.join(', ') : `${ys[0]}–${ys[ys.length - 1]} (${ys.length} cars)`; }
 
+const BRAND = {vw: 'Volkswagen', audi: 'Audi', porsche: 'Porsche', bentley: 'Bentley', lamborghini: 'Lamborghini', seat: 'SEAT', skoda: 'Skoda', cupra: 'Cupra'};
 function filtered(){
   const q = state.q.trim(), nq = norm(q), words = q.toLowerCase().split(/\s+/).filter(Boolean);
   const vset = state.vinHits ? new Set(state.vinHits) : state.veh, vf = state.vinFit;
   let list = state.parts.filter(p => {
     if (state.sys.size && !state.sys.has(p.system)) return false;
+    if (state.brand.size && !p.brands.some(b => state.brand.has(b))) return false;
     if (vf) { if (!fitsVin(p, vf)) return false; }
     else if (vset.size && !p.appears_on.some(a => vset.has(a.vehicle))) return false;
     if (!q) return true;
@@ -430,6 +436,10 @@ function renderFilters(){
   }).join('');
   const sc = {};
   state.parts.forEach(p => sc[p.system] = (sc[p.system] || 0) + 1);
+  const bc = {};
+  state.parts.forEach(p => p.brands.forEach(b => bc[b] = (bc[b] || 0) + 1));
+  $('#brands').innerHTML = Object.keys(bc).sort((a, b) => bc[b] - bc[a]).map(b =>
+    `<button class="chip" data-b="${esc(b)}" aria-pressed="${state.brand.has(b)}">${esc(BRAND[b] || b)} <span class="n">${bc[b]}</span></button>`).join('');
   $('#systems').innerHTML = Object.keys(sc).sort().map(s =>
     `<button class="chip" data-s="${esc(s)}" aria-pressed="${state.sys.has(s)}">${esc(s)} <span class="n">${sc[s]}</span></button>`).join('');
 }
@@ -458,7 +468,7 @@ function card(p){
 
 function renderParts(){
   const list = filtered();
-  const any = state.q || state.veh.size || state.sys.size || state.vinHits || state.vinFit;
+  const any = state.q || state.veh.size || state.sys.size || state.brand.size || state.vinHits || state.vinFit;
   $('#clear').hidden = !any;
   $('#count').innerHTML = `<b>${list.length}</b> of ${state.parts.length} OEM numbers`;
   $('#grid').innerHTML = list.length ? list.slice(0, state.shown).map(card).join('')
@@ -622,19 +632,21 @@ async function load(){
   const [parts, vehicles, more] = await Promise.all([get('parts.json'), get('vehicles.json'), get('parts_more.json').catch(() => [])]);
   // sitemap-only parts: number and name from the dealer link, fitment not crawled yet
   const PRE = 'https://vw.oempartsonline.com/oem-parts/volkswagen-';
-  more.forEach(([oem, oem_display, name, part_type, system, slug, ill]) => parts.push({oem, oem_display, name, part_type, system,
-    system_guessed: true, unavailable: false, appears_on: [], notes: [], source: PRE + slug, illustration: ill || null}));
+  more.forEach(([oem, oem_display, name, part_type, system, slug, ill, brands]) => parts.push({oem, oem_display, name, part_type, system,
+    system_guessed: true, unavailable: false, appears_on: [], notes: [], source: slug.startsWith('http') ? slug : PRE + slug,
+    illustration: ill || null, brands: (brands || 'vw').split(',')}));
   state.vehicles = vehicles.sort((a, b) => a.year - b.year || a.model.localeCompare(b.model));
   state.vehicles.forEach(v => state.vmap[v.slug] = v);
   parts.forEach(p => {
+    p.brands = p.brands || ['vw'];
     p._oem = norm(p.oem);
     p._text = [p.oem_display, p.name, p.part_type, p.system, p.other_names || '', p.category || '', ...(p.fits || []).map(f => f[0]), ...(p.notes || [])].join(' ').toLowerCase();
     p._veh = new Set(p.appears_on.map(a => a.vehicle)).size;
   });
   state.parts = parts;
   renderFilters(); renderParts();
-  const fitted = parts.filter(p => p.appears_on.length).length;
-  const statsBase = `<span><b>${parts.length.toLocaleString()}</b> VW OEM numbers</span><span><b>${fitted.toLocaleString()}</b> with fitment for <b>${vehicles.length}</b> cars</span>`;
+  const fitted = parts.filter(p => p.appears_on.length || p.fits).length;
+  const statsBase = `<span><b>${parts.length.toLocaleString()}</b> VW Group OEM numbers</span><span><b>${fitted.toLocaleString()}</b> with fitment</span><span><b>${new Set(parts.flatMap(p => p.brands)).size}</b> brands</span>`;
   $('#stats').innerHTML = statsBase;
   try {
     state.asm = await get('assemblies.json');
@@ -646,6 +658,7 @@ async function load(){
 document.addEventListener('click', e => {
   const t = e.target;
   const vb = t.closest('.vbtn'); if (vb) { const s = vb.dataset.v; state.veh.has(s) ? state.veh.delete(s) : state.veh.add(s); state.vinHits = null; state.vinFit = null; state.shown = PAGE; renderFilters(); renderParts(); return; }
+  const bb = t.closest('.chip[data-b]'); if (bb) { const b = bb.dataset.b; state.brand.has(b) ? state.brand.delete(b) : state.brand.add(b); state.shown = PAGE; renderFilters(); renderParts(); return; }
   const ch = t.closest('.chip[data-s]'); if (ch) { const s = ch.dataset.s; state.sys.has(s) ? state.sys.delete(s) : state.sys.add(s); state.shown = PAGE; renderFilters(); renderParts(); return; }
   const nr = t.closest('.chip[data-near]'); if (nr) { state.veh = new Set([nr.dataset.near]); state.vinHits = null; state.vinFit = null; state.shown = PAGE; renderFilters(); renderParts(); tab('parts'); return; }
   const cd = t.closest('.card'); if (cd) { openPart(cd.dataset.oem); return; }
@@ -657,7 +670,7 @@ $('#dlg').addEventListener('click', e => { if (e.target === $('#dlg')) $('#dlg')
 $('#q').addEventListener('input', e => { state.q = e.target.value; state.shown = PAGE; renderParts(); });
 $('#sort').addEventListener('change', e => { state.sort = e.target.value; renderParts(); });
 $('#more').addEventListener('click', () => { state.shown += PAGE; renderParts(); });
-$('#clear').addEventListener('click', () => { state.q = ''; $('#q').value = ''; state.veh.clear(); state.sys.clear(); state.vinHits = null; state.vinFit = null; $('#vinbox').hidden = true; $('#vin').value = ''; state.shown = PAGE; renderFilters(); renderParts(); });
+$('#clear').addEventListener('click', () => { state.q = ''; $('#q').value = ''; state.veh.clear(); state.sys.clear(); state.brand.clear(); state.vinHits = null; state.vinFit = null; $('#vinbox').hidden = true; $('#vin').value = ''; state.shown = PAGE; renderFilters(); renderParts(); });
 $('#vinform').addEventListener('submit', e => { e.preventDefault(); showVin(decodeVin($('#vin').value)); tab('parts'); });
 $('#tab-parts').addEventListener('click', () => tab('parts'));
 $('#tab-torques').addEventListener('click', () => tab('torques'));

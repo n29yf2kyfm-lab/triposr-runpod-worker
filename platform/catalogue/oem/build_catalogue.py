@@ -43,6 +43,22 @@ def vehicle(slug):
             'model': nice(model), 'trim': nice(trim), 'engine': engine, 'market': 'US'}
 
 
+# one dealer catalogue per Group brand; VW keeps its original top-level paths
+PREFIX = {'vw': 'volkswagen-', 'audi': 'audi-', 'porsche': 'porsche-', 'bentley': 'bentley-',
+          'lamborghini': 'lamborghini-'}
+BRAND_NAME = {'vw': 'Volkswagen', 'audi': 'Audi', 'porsche': 'Porsche', 'bentley': 'Bentley',
+              'lamborghini': 'Lamborghini', 'seat': 'SEAT', 'skoda': 'Skoda', 'cupra': 'Cupra'}
+
+
+def brand_sources():
+    """(brand, sitemap list, products dir) for VW and every sources/<brand>/."""
+    out = [('vw', os.path.join(HERE, 'sitemap_parts.txt'), os.path.join(HERE, 'products'))]
+    for d in sorted(glob.glob(os.path.join(HERE, 'sources', '*', ''))):
+        b = os.path.basename(d.rstrip('/'))
+        out.append((b, os.path.join(d, 'sitemap_parts.txt'), os.path.join(d, 'products')))
+    return out
+
+
 def part_type(name):
     t = re.sub(WHERE, ' ', name.lower())
     t = re.sub(r'\b(assembly|assy|kit|set)\b', ' ', t)
@@ -64,7 +80,7 @@ def main():
                 'oem': p['oem'], 'oem_display': vw_display(p['oem']), 'name': p['name'],
                 'part_type': part_type(p['name']), 'system': system.replace('-', ' '),
                 'unavailable': p.get('unavailable', False),
-                'appears_on': [], 'notes': set(), 'source': p['url'], 'illustration': None})
+                'appears_on': [], 'notes': set(), 'source': p['url'], 'illustration': None, 'brands': {'vw'}})
             d = dia.get(p.get('diagram')) or {}
             e['appears_on'].append({'vehicle': slug, 'category': cat, 'diagram': p.get('diagram'),
                                     'diagram_name': d.get('name'), 'diagram_image': d.get('image'),
@@ -78,49 +94,65 @@ def main():
     by_type = {}
     for e in parts.values():
         by_type.setdefault(e['part_type'], Counter())[e['system']] += 1
-    for line in open(os.path.join(HERE, 'sitemap_parts.txt')):
-        if not line.startswith('http'):
+    for brand, sm, pdir in brand_sources():
+        if not os.path.exists(sm):
             continue
-        url = line.strip()
-        slug = url.rsplit('/oem-parts/', 1)[1][len('volkswagen-'):]
-        words, num = slug.rsplit('-', 1)
-        oem = num.upper()
-        if oem in parts:
-            continue
-        name = re.sub(r'\bA C\b', 'A/C', words.replace('-', ' ').title())
-        pt = part_type(name)
-        guess = by_type.get(pt)
-        parts[oem] = {'oem': oem, 'oem_display': vw_display(oem), 'name': name, 'part_type': pt,
-                      'system': guess.most_common(1)[0][0] if guess else 'not yet sorted',
-                      'system_guessed': True, 'unavailable': False, 'appears_on': [], 'notes': set(),
-                      'source': url, 'illustration': None}
-    # Part pages (ingest_products.py): full VW fitment and the dealer's details.
-    # The list carries a compact summary — model and year range — and the
-    # full rows go to the page in lazily loaded bundles (pack_products.py).
-    for f in glob.glob(os.path.join(HERE, 'products', '*.json')):
-        d = json.load(open(f))
-        e = parts.get(d['oem'])
-        if not e:
-            continue
-        if d.get('gone'):
+        for line in open(sm):
+            if not line.startswith('http'):
+                continue
+            url = line.strip()
+            slug = url.rsplit('/oem-parts/', 1)[1]
+            slug = slug[len(PREFIX[brand]):] if slug.startswith(PREFIX.get(brand, '\0')) else slug.split('-', 1)[1]
+            words, num = slug.rsplit('-', 1)
+            oem = num.upper()
+            if oem in parts:
+                parts[oem]['brands'].add(brand)
+                continue
+            name = re.sub(r'\bA C\b', 'A/C', words.replace('-', ' ').title())
+            pt = part_type(name)
+            guess = by_type.get(pt)
+            parts[oem] = {'oem': oem, 'oem_display': vw_display(oem), 'name': name, 'part_type': pt,
+                          'system': guess.most_common(1)[0][0] if guess else 'not yet sorted',
+                          'system_guessed': True, 'unavailable': False, 'appears_on': [], 'notes': set(),
+                          'source': url, 'illustration': None, 'brands': {brand}}
+    # Part pages (ingest_products.py): full fitment and the dealer's details,
+    # from every brand's dealer site. One entry per OEM number however many
+    # brands list it (VW Group brands share one numbering system): fitment is
+    # merged, and models from brands other than VW carry the make ("Audi Q7").
+    for brand, sm, pdir in brand_sources():
+        for f in glob.glob(os.path.join(pdir, '*.json')):
+            d = json.load(open(f))
+            e = parts.get(d['oem'])
+            if not e:
+                continue
+            e['brands'].add(brand)
+            if d.get('gone'):
+                e.setdefault('gone_on', set()).add(brand)
+                continue
+            rng = {m: (lo, hi) for m, lo, hi in e.get('fits', [])}
+            for y, model, cfg, eng in d['fits']:
+                if brand != 'vw':
+                    model = f'{BRAND_NAME[brand]} {model}'
+                lo, hi = rng.get(model, (y, y))
+                rng[model] = (min(lo, y), max(hi, y))
+            e['fits'] = sorted([m, lo, hi] for m, (lo, hi) in rng.items())
+            e['detail'] = True
+            for k in ('other_names', 'position', 'fitment_notes'):
+                if d.get(k) and not e.get(k):
+                    e[k] = d[k]
+            if d.get('superseded'):
+                e['superseded'] = sorted(set(e.get('superseded', [])) | set(d['superseded']))
+            if d.get('category') and not e.get('category'):
+                e['category'] = d['category']
+                if e.get('system_guessed'):
+                    e['system'] = d['category'].split(' > ')[0].lower()
+                    e['system_guessed'] = False
+    for e in parts.values():
+        # gone only when every brand site that has a page for it dropped it
+        if e.get('gone_on') and not e.get('detail'):
             e['dealer_gone'] = True
-            continue
-        rng = {}
-        for y, model, cfg, eng in d['fits']:
-            lo, hi = rng.get(model, (y, y))
-            rng[model] = (min(lo, y), max(hi, y))
-        e['fits'] = sorted([m, lo, hi] for m, (lo, hi) in rng.items())
-        e['detail'] = True
-        for k in ('other_names', 'position', 'fitment_notes'):
-            if d.get(k):
-                e[k] = d[k]
-        if d.get('superseded'):
-            e['superseded'] = d['superseded']
-        if d.get('category'):
-            e['category'] = d['category']
-            if e.get('system_guessed'):
-                e['system'] = d['category'].split(' > ')[0].lower()
-                e['system_guessed'] = False
+        e.pop('gone_on', None)
+        e['brands'] = sorted(e['brands'])
     img_dir = os.path.join(HERE, 'illustrations')
     for e in parts.values():
         e['notes'] = sorted(e['notes'])
@@ -137,21 +169,23 @@ def main():
               separators=(',', ':'))
     pre = 'https://vw.oempartsonline.com/oem-parts/volkswagen-'
     json.dump([[e['oem'], e['oem_display'], e['name'], e['part_type'], e['system'],
-                e['source'][len(pre):], e['illustration'] or ''] for e in out if compact(e)],
+                e['source'][len(pre):] if e['source'].startswith(pre) else e['source'],
+                e['illustration'] or '', ','.join(e['brands'])] for e in out if compact(e)],
               open(os.path.join(HERE, 'parts_more.json'), 'w'), separators=(',', ':'))
     with open(os.path.join(HERE, 'parts.csv'), 'w', newline='') as fh:
         w = csv.writer(fh)
-        w.writerow(['oem', 'oem_display', 'name', 'part_type', 'system', 'unavailable',
-                    'vehicles', 'fits_all_vw', 'drawing_callouts', 'notes', 'illustration', 'source'])
+        w.writerow(['oem', 'oem_display', 'name', 'part_type', 'system', 'brands', 'unavailable',
+                    'vehicles', 'fits_all_group', 'drawing_callouts', 'notes', 'illustration', 'source'])
         for e in out:
             w.writerow([e['oem'], e['oem_display'], e['name'], e['part_type'], e['system'],
-                        e['unavailable'], ' | '.join(sorted({a['vehicle'] for a in e['appears_on']})),
+                        ' '.join(e['brands']), e['unavailable'], ' | '.join(sorted({a['vehicle'] for a in e['appears_on']})),
                         ' | '.join(f'{m} {lo}-{hi}' if lo != hi else f'{m} {lo}' for m, lo, hi in e.get('fits', [])),
                         ' | '.join(f"{a['diagram_name'] or a['category']} #{a['callout']}" for a in e['appears_on']),
                         ' / '.join(e['notes'])[:500], e['illustration'] or '', e['source']])
     types = sorted({e['part_type'] for e in out})
     nfit = sum(1 for e in out if e['appears_on'] or e.get('detail'))
-    print(f'CATALOGUE {len(out)} OEM numbers, {nfit} with fitment ({sum(1 for e in out if e.get("detail"))} from part pages), '
+    bc = Counter(b for e in out for b in e['brands'])
+    print(f'CATALOGUE {len(out)} OEM numbers ({", ".join(f"{b} {n}" for b, n in sorted(bc.items()))}), {nfit} with fitment ({sum(1 for e in out if e.get("detail"))} from part pages), '
           f'{len(types)} part types, '
           f'{sum(1 for e in out if e["illustration"])} illustrated')
     return 0
