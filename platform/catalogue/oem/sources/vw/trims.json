@@ -1620,6 +1620,15 @@
 "url": "https://vw.oempartsonline.com/v-2009-volkswagen-eos--lux--2-0l-l4-gas"
 },
 {
+"year": 2009,
+"make": "Volkswagen",
+"model": "GTI",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2009-volkswagen-gti--base--2-0l-l4-gas"
+},
+{
 "year": 2010,
 "make": "Volkswagen",
 "model": "Beetle",
@@ -1694,6 +1703,15 @@
 {
 "year": 2010,
 "make": "Volkswagen",
+"model": "GTI",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2010-volkswagen-gti--base--2-0l-l4-gas"
+},
+{
+"year": 2010,
+"make": "Volkswagen",
 "model": "Golf",
 "trim": "Base",
 "engine": "2.5L L5 Gas",
@@ -1762,6 +1780,15 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2011-volkswagen-eos--lux--2-0l-l4-gas"
+},
+{
+"year": 2011,
+"make": "Volkswagen",
+"model": "GTI",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2011-volkswagen-gti--base--2-0l-l4-gas"
 },
 {
 "year": 2011,

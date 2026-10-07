@@ -1809,6 +1809,78 @@
 "url": "https://porsche.oempartsonline.com/v-2013-porsche-boxster--s--3-4l-h6-gas"
 },
 {
+"year": 2013,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "Base",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2013-porsche-cayenne--base--3-6l-v6-gas"
+},
+{
+"year": 2013,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "Diesel",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2013-porsche-cayenne--diesel--3-0l-v6-diesel"
+},
+{
+"year": 2013,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "GTS",
+"engine": "4.8L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2013-porsche-cayenne--gts--4-8l-v8-gas"
+},
+{
+"year": 2013,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "S",
+"engine": "4.8L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2013-porsche-cayenne--s--4-8l-v8-gas"
+},
+{
+"year": 2013,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "S Hybrid",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2013-porsche-cayenne--s-hybrid--3-0l-v6-electric-gas"
+},
+{
+"year": 2013,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "S Hybrid",
+"engine": "3.0L V6 FULL HYBRID EV-GAS (FHEV)",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2013-porsche-cayenne--s-hybrid--3-0l-v6-full-hybrid-ev-gas-fhev"
+},
+{
+"year": 2013,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "Turbo",
+"engine": "4.8L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2013-porsche-cayenne--turbo--4-8l-v8-gas"
+},
+{
+"year": 2013,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "Turbo S",
+"engine": "4.8L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2013-porsche-cayenne--turbo-s--4-8l-v8-gas"
+},
+{
 "year": 2014,
 "make": "Porsche",
 "model": "911",
@@ -1915,6 +1987,96 @@
 "engine": "3.4L H6 Gas",
 "market": "US",
 "url": "https://porsche.oempartsonline.com/v-2014-porsche-boxster--s--3-4l-h6-gas"
+},
+{
+"year": 2014,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "Base",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2014-porsche-cayenne--base--3-6l-v6-gas"
+},
+{
+"year": 2014,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "Diesel",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2014-porsche-cayenne--diesel--3-0l-v6-diesel"
+},
+{
+"year": 2014,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "Diesel Platinum Edition",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2014-porsche-cayenne--diesel-platinum-edition--3-0l-v6-diesel"
+},
+{
+"year": 2014,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "GTS",
+"engine": "4.8L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2014-porsche-cayenne--gts--4-8l-v8-gas"
+},
+{
+"year": 2014,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "Platinum Edition",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2014-porsche-cayenne--platinum-edition--3-6l-v6-gas"
+},
+{
+"year": 2014,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "S",
+"engine": "4.8L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2014-porsche-cayenne--s--4-8l-v8-gas"
+},
+{
+"year": 2014,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "S Hybrid",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2014-porsche-cayenne--s-hybrid--3-0l-v6-electric-gas"
+},
+{
+"year": 2014,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "S Hybrid",
+"engine": "3.0L V6 FULL HYBRID EV-GAS (FHEV)",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2014-porsche-cayenne--s-hybrid--3-0l-v6-full-hybrid-ev-gas-fhev"
+},
+{
+"year": 2014,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "Turbo",
+"engine": "4.8L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2014-porsche-cayenne--turbo--4-8l-v8-gas"
+},
+{
+"year": 2014,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "Turbo S",
+"engine": "4.8L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2014-porsche-cayenne--turbo-s--4-8l-v8-gas"
 },
 {
 "year": 2015,
@@ -2050,6 +2212,69 @@
 "engine": "3.4L H6 Gas",
 "market": "US",
 "url": "https://porsche.oempartsonline.com/v-2015-porsche-boxster--s--3-4l-h6-gas"
+},
+{
+"year": 2015,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "Base",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2015-porsche-cayenne--base--3-6l-v6-gas"
+},
+{
+"year": 2015,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "Diesel",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2015-porsche-cayenne--diesel--3-0l-v6-diesel"
+},
+{
+"year": 2015,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "GTS",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2015-porsche-cayenne--gts--3-6l-v6-gas"
+},
+{
+"year": 2015,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "S",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2015-porsche-cayenne--s--3-6l-v6-gas"
+},
+{
+"year": 2015,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "S E-Hybrid",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2015-porsche-cayenne--s-e-hybrid--3-0l-v6-electric-gas"
+},
+{
+"year": 2015,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "S E-Hybrid",
+"engine": "3.0L V6 PLUG-IN HYBRID EV-GAS (PH",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2015-porsche-cayenne--s-e-hybrid--3-0l-v6-plug-in-hybrid-ev-gas-ph"
+},
+{
+"year": 2015,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "Turbo",
+"engine": "4.8L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2015-porsche-cayenne--turbo--4-8l-v8-gas"
 },
 {
 "year": 2016,
@@ -2239,6 +2464,78 @@
 "engine": "3.8L H6 Gas",
 "market": "US",
 "url": "https://porsche.oempartsonline.com/v-2016-porsche-boxster--spyder--3-8l-h6-gas"
+},
+{
+"year": 2016,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "Base",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2016-porsche-cayenne--base--3-6l-v6-gas"
+},
+{
+"year": 2016,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "Diesel",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2016-porsche-cayenne--diesel--3-0l-v6-diesel"
+},
+{
+"year": 2016,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "GTS",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2016-porsche-cayenne--gts--3-6l-v6-gas"
+},
+{
+"year": 2016,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "S",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2016-porsche-cayenne--s--3-6l-v6-gas"
+},
+{
+"year": 2016,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "S E-Hybrid",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2016-porsche-cayenne--s-e-hybrid--3-0l-v6-electric-gas"
+},
+{
+"year": 2016,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "S E-Hybrid",
+"engine": "3.0L V6 PLUG-IN HYBRID EV-GAS (PH",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2016-porsche-cayenne--s-e-hybrid--3-0l-v6-plug-in-hybrid-ev-gas-ph"
+},
+{
+"year": 2016,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "Turbo",
+"engine": "4.8L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2016-porsche-cayenne--turbo--4-8l-v8-gas"
+},
+{
+"year": 2016,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "Turbo S",
+"engine": "4.8L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2016-porsche-cayenne--turbo-s--4-8l-v8-gas"
 },
 {
 "year": 2017,
