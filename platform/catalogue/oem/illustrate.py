@@ -16,6 +16,13 @@ import glob, io, json, os, re, sys, time, urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, 'illustrations')
+# A long run can write into PIC_STAGE/illustrations instead, outside the repo, so the working
+# tree stays clean; pic_sync.py moves finished pictures into illustrations/ and commits them.
+NEW = os.path.join(os.environ['PIC_STAGE'], 'illustrations') if os.environ.get('PIC_STAGE') else OUT
+
+
+def have(name):
+    return os.path.exists(os.path.join(OUT, name)) or os.path.exists(os.path.join(NEW, name))
 MODEL = 'https://fal.run/fal-ai/flux/schnell'
 
 # generic hardware shares one picture per kind
@@ -137,7 +144,7 @@ def generate(key, token):
     raw = urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'}), timeout=60).read()
     from PIL import Image
     im = Image.open(io.BytesIO(raw)).convert('RGB')
-    im.save(os.path.join(OUT, key + '.webp'), 'WEBP', quality=80, method=6)
+    im.save(os.path.join(NEW, key + '.webp'), 'WEBP', quality=80, method=6)
 
 
 def main():
@@ -145,7 +152,7 @@ def main():
     token = fal_key()
     if not token:
         sys.exit('FAL_KEY is not set and is not in /root/.alam3d_env')
-    os.makedirs(OUT, exist_ok=True)
+    os.makedirs(NEW, exist_ok=True)
     from collections import Counter
     sys.path.insert(0, HERE)
     from build_catalogue import part_type
@@ -159,7 +166,7 @@ def main():
     if opt.get('only'):
         keys = [k for k in keys if k in opt['only'].split(',')]
     force = set(opt.get('force', '').split(',')) - {''}
-    todo = [k for k in keys if k not in NO_IMAGE and (k in force or not os.path.exists(os.path.join(OUT, k + '.webp')))][:int(opt.get('limit', 10 ** 6))]
+    todo = [k for k in keys if k not in NO_IMAGE and (k in force or not have(k + '.webp'))][:int(opt.get('limit', 10 ** 6))]
     print(f'ILLUSTRATE {len(keys)} part types, {len(keys) - len(todo)} done, {len(todo)} to make', flush=True)
     import threading
     from concurrent.futures import ThreadPoolExecutor

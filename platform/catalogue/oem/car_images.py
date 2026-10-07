@@ -20,6 +20,13 @@ import io, json, os, re, sys, time, urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, 'cars')
+# A long run can write into PIC_STAGE/cars instead, outside the repo, so the working
+# tree stays clean; pic_sync.py moves finished pictures into cars/ and commits them.
+NEW = os.path.join(os.environ['PIC_STAGE'], 'cars') if os.environ.get('PIC_STAGE') else OUT
+
+
+def have(name):
+    return os.path.exists(os.path.join(OUT, name)) or os.path.exists(os.path.join(NEW, name))
 sys.path.insert(0, HERE)
 from illustrate import fal_key   # noqa: E402
 
@@ -87,20 +94,22 @@ def generate(row, token, model=None):
     from PIL import Image
     im = Image.open(io.BytesIO(raw)).convert('RGB')
     im.thumbnail((640, 640))
-    im.save(os.path.join(OUT, slug(row) + '.webp'), 'WEBP', quality=80, method=6)
+    im.save(os.path.join(NEW, slug(row) + '.webp'), 'WEBP', quality=80, method=6)
     return how
 
 
 def main():
     opt = dict(a[2:].split('=', 1) for a in sys.argv[1:] if a.startswith('--') and '=' in a)
     token = fal_key() or sys.exit('FAL_KEY is not set')
-    os.makedirs(OUT, exist_ok=True)
+    os.makedirs(NEW, exist_ok=True)
     rows = json.load(open(os.path.join(HERE, 'sources', 'models', 'models.json')))
     if opt.get('only'):
         rows = [r for r in rows if slug(r) in opt['only'].split(',')]
-    todo = [r for r in rows if opt.get('only') or not os.path.exists(os.path.join(OUT, slug(r) + '.webp'))]
+    todo = [r for r in rows if opt.get('only') or not have(slug(r) + '.webp')]
     todo = todo[:int(opt.get('limit', 10 ** 6))]
-    ip = os.path.join(OUT, 'index.json')
+    ip = os.path.join(NEW, 'index.json')
+    if not os.path.exists(ip) and os.path.exists(os.path.join(OUT, 'index.json')):
+        __import__('shutil').copyfile(os.path.join(OUT, 'index.json'), ip)
     index = json.load(open(ip)) if os.path.exists(ip) else {}
     print(f'CARS {len(rows)} generations, {len(todo)} to draw', flush=True)
     import threading
