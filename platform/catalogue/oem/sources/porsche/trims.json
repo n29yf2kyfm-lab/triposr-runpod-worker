@@ -180,6 +180,15 @@
 "url": "https://porsche.oempartsonline.com/v-1998-porsche-911--targa--3-6l-h6-gas"
 },
 {
+"year": 1998,
+"make": "Porsche",
+"model": "Boxster",
+"trim": "Base",
+"engine": "2.5L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-1998-porsche-boxster--base--2-5l-h6-gas"
+},
+{
 "year": 1999,
 "make": "Porsche",
 "model": "911",
@@ -198,6 +207,15 @@
 "url": "https://porsche.oempartsonline.com/v-1999-porsche-911--carrera-4--3-4l-h6-gas"
 },
 {
+"year": 1999,
+"make": "Porsche",
+"model": "Boxster",
+"trim": "Base",
+"engine": "2.5L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-1999-porsche-boxster--base--2-5l-h6-gas"
+},
+{
 "year": 2000,
 "make": "Porsche",
 "model": "911",
@@ -214,6 +232,33 @@
 "engine": "3.4L H6 Gas",
 "market": "US",
 "url": "https://porsche.oempartsonline.com/v-2000-porsche-911--carrera-4--3-4l-h6-gas"
+},
+{
+"year": 2000,
+"make": "Porsche",
+"model": "Boxster",
+"trim": "Roadster",
+"engine": "2.7L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2000-porsche-boxster--roadster--2-7l-h6-gas"
+},
+{
+"year": 2000,
+"make": "Porsche",
+"model": "Boxster",
+"trim": "Roadster",
+"engine": "3.2L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2000-porsche-boxster--roadster--3-2l-h6-gas"
+},
+{
+"year": 2000,
+"make": "Porsche",
+"model": "Boxster",
+"trim": "Roadster S",
+"engine": "3.2L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2000-porsche-boxster--roadster-s--3-2l-h6-gas"
 },
 {
 "year": 2001,
@@ -241,6 +286,24 @@
 "engine": "3.6L H6 Gas",
 "market": "US",
 "url": "https://porsche.oempartsonline.com/v-2001-porsche-911--turbo--3-6l-h6-gas"
+},
+{
+"year": 2001,
+"make": "Porsche",
+"model": "Boxster",
+"trim": "Roadster",
+"engine": "2.7L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2001-porsche-boxster--roadster--2-7l-h6-gas"
+},
+{
+"year": 2001,
+"make": "Porsche",
+"model": "Boxster",
+"trim": "Roadster S",
+"engine": "3.2L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2001-porsche-boxster--roadster-s--3-2l-h6-gas"
 },
 {
 "year": 2002,
