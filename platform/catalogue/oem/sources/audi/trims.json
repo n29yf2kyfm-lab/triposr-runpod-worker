@@ -828,6 +828,24 @@
 "url": "https://audi.oempartsonline.com/v-2016-audi-a3-sportback-e-tron--prestige--1-4l-l4-electric-gas"
 },
 {
+"year": 2016,
+"make": "Audi",
+"model": "A4",
+"trim": "Premium",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-a4--premium--2-0l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Audi",
+"model": "A4",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-a4--premium-plus--2-0l-l4-gas"
+},
+{
 "year": 2017,
 "make": "Audi",
 "model": "A3",
@@ -907,6 +925,33 @@
 "engine": "1.4L L4 Electric/Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2017-audi-a3-sportback-e-tron--prestige--1-4l-l4-electric-gas"
+},
+{
+"year": 2017,
+"make": "Audi",
+"model": "A4",
+"trim": "Premium",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2017-audi-a4--premium--2-0l-l4-gas"
+},
+{
+"year": 2017,
+"make": "Audi",
+"model": "A4",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2017-audi-a4--premium-plus--2-0l-l4-gas"
+},
+{
+"year": 2017,
+"make": "Audi",
+"model": "A4",
+"trim": "Prestige",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2017-audi-a4--prestige--2-0l-l4-gas"
 },
 {
 "year": 2018,
@@ -990,6 +1035,33 @@
 "url": "https://audi.oempartsonline.com/v-2018-audi-a3-sportback-e-tron--prestige--1-4l-l4-electric-gas"
 },
 {
+"year": 2018,
+"make": "Audi",
+"model": "A4",
+"trim": "Premium",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2018-audi-a4--premium--2-0l-l4-gas"
+},
+{
+"year": 2018,
+"make": "Audi",
+"model": "A4",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2018-audi-a4--premium-plus--2-0l-l4-gas"
+},
+{
+"year": 2018,
+"make": "Audi",
+"model": "A4",
+"trim": "Prestige",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2018-audi-a4--prestige--2-0l-l4-gas"
+},
+{
 "year": 2019,
 "make": "Audi",
 "model": "A3",
@@ -1051,6 +1123,42 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2019-audi-a3-quattro--prestige--2-0l-l4-gas"
+},
+{
+"year": 2019,
+"make": "Audi",
+"model": "A4",
+"trim": "Premium",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2019-audi-a4--premium--2-0l-l4-gas"
+},
+{
+"year": 2019,
+"make": "Audi",
+"model": "A4",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2019-audi-a4--premium-plus--2-0l-l4-gas"
+},
+{
+"year": 2019,
+"make": "Audi",
+"model": "A4",
+"trim": "Prestige",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2019-audi-a4--prestige--2-0l-l4-gas"
+},
+{
+"year": 2019,
+"make": "Audi",
+"model": "A4",
+"trim": "Titanium",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2019-audi-a4--titanium--2-0l-l4-gas"
 },
 {
 "year": 2020,
