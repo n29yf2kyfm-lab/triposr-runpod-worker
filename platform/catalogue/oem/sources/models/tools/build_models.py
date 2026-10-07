@@ -96,9 +96,21 @@ TITLE_BRAND = [(r'^Audi\b', 'Audi'), (r'^(SEAT|Seat)\b', 'SEAT'), (r'^(Cupra|CUP
                (r'^Porsche\b', 'Porsche'), (r'^Bentley\b', 'Bentley'), (r'^Lamborghini\b', 'Lamborghini'), (r'^(Volkswagen|VW)\b', 'Volkswagen')]
 
 
-NAVBOX = {'Volkswagen': ['Template:Volkswagen', 'Template:Volkswagen Commercial Vehicles', 'Template:Volkswagen do Brasil'],
-          'Audi': ['Template:Audi'], 'SEAT': ['Template:SEAT'], 'Cupra': ['Template:Cupra'], 'Skoda': ['Template:Škoda'],
-          'Porsche': ['Template:Porsche'], 'Bentley': ['Template:Bentley'], 'Lamborghini': ['Template:Lamborghini']}
+# the brands' own navigation and timeline templates (names read from the
+# articles themselves): every road car a brand sold, region by region
+NAVBOX = {'Volkswagen': ['Template:Volkswagen', 'Template:Volkswagen (Europe) timeline 1980 to date',
+                         'Template:Volkswagen (China) timeline 1984 to date',
+                         'Template:Volkswagen (South America) timeline 1980 to date',
+                         'Template:Volkswagen (North America) timeline 1980 to date',
+                         'Template:Volkswagen Commercial Vehicles', 'Template:Volkswagen Commercial Vehicles (Europe) timeline',
+                         'Template:Volkswagen Passenger Cars', 'Template:Volkswagen Truck and Bus'],
+          'Audi': ['Template:Audi', 'Template:Audi vehicles timeline (Europe) 2020 to date',
+                   'Template:Audi vehicles timeline (North America)', 'Template:Audi vehicles timeline (Europe) 1965–2019'],
+          'SEAT': ['Template:SEAT', 'Template:Modern SEAT vehicles'], 'Cupra': ['Template:Cupra timeline'],
+          'Skoda': ['Template:Škoda', 'Template:Škoda timeline 1990 to date', 'Template:Škoda vehicles'],
+          'Porsche': ['Template:Porsche vehicles', 'Template:Porsche modern timeline'],
+          'Bentley': ['Template:Bentley Motors Limited', 'Template:Bentley timeline 1998 to date'],
+          'Lamborghini': ['Template:Lamborghini', 'Template:Lamborghini road car timeline 1990 to date']}
 
 
 def navbox_articles(tpl):
@@ -229,11 +241,13 @@ def main():
                 cls = clean(field(box, 'class'))
                 if re.search(r'concept|prototype|one-off|show car|race car|racing', prod + ' ' + cls, re.I):
                     continue
-                if not re.match(MAKES, title):
-                    continue          # tuners and other makers filed in a brand category (9ff, Meyers Manx, Chrysler)
+                if not re.match(MAKES, title) or re.search(r'platform|\d+Tr$|trolleybus|\btram\b', title, re.I):
+                    continue      # not a road car: platforms, Škoda Transportation trolleybuses          # tuners and other makers filed in a brand category (9ff, Meyers Manx, Chrysler)
                 yr = years(prod)
                 if not yr or yr[1] < 1995 or yr[0] > 2026:
                     continue
+                if yr[0] == yr[1] and yr[0] < 2025:
+                    continue      # a one-year run before 2025 is a show car (Tarek, Ahoj!, 5-95 Zagato)
                 name = clean(field(box, 'name')) or title
                 key = (brand, name.lower(), tuple(yr))
                 if key in seen:

@@ -68,6 +68,10 @@ def main():
             'method': pics.get(s, {}).get('method'), 'source': r['wikipedia_title'],
             'trims': [list(t) for t in trims]})
     out = []
+    for key, gens in models.items():
+        # drop a whole-model summary when the model also has per-generation entries inside it
+        models[key] = [g for g in gens if not sum(1 for o in gens if o is not g and g['years'][0] <= o['years'][0]
+                                                    and o['years'][1] <= g['years'][1]) >= 2] or gens
     for (brand, m), gens in sorted(models.items()):
         gens.sort(key=lambda g: (-g['years'][0], g['name']))
         out.append({'brand': brand, 'model': m, 'gens': gens})
