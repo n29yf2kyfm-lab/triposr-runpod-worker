@@ -106,5 +106,23 @@
 "engine": "2.0L L4 Diesel",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2011-audi-a3--tdi--2-0l-l4-diesel"
+},
+{
+"year": 2012,
+"make": "Audi",
+"model": "A3",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2012-audi-a3--base--2-0l-l4-gas"
+},
+{
+"year": 2012,
+"make": "Audi",
+"model": "A3",
+"trim": "TDI",
+"engine": "2.0L L4 Diesel",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2012-audi-a3--tdi--2-0l-l4-diesel"
 }
 ]
