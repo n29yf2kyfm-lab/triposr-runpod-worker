@@ -80,7 +80,29 @@ NO_IMAGE = {'balance-shaft', 'crankshaft', 'timing-cover', 'spindle', 'repair', 
             'vehicle-lifting-jack-handle-black', 'tire-repair', 'wheel-housing-panel', 'slave-cylinder', 'air-bag-information-label', 'foam-part'}
 
 
+# trailing words that only name a colour or finish: "door trim panel agate grey" and
+# "door trim panel black" are the same part, so they share one picture. light/dark/
+# matt/gloss are stripped only after a colour word ("light grey"), never on their own
+# ("tail light" keeps its name).
+COLOUR = {'black', 'grey', 'gray', 'beige', 'white', 'brown', 'red', 'blue', 'silver', 'chrome',
+          'satin', 'titan', 'soul', 'slate', 'agate', 'luxor', 'anthracite', 'graphite', 'platinum',
+          'cream', 'sand', 'tan', 'cognac', 'savanna', 'espresso', 'arctic', 'titanium', 'basalt',
+          'granite', 'lava', 'marble', 'palladium', 'oak', 'pure', 'chalk', 'ivory', 'stone', 'mocha',
+          'flint', 'mistral', 'ash', 'champagne', 'bronze'}
+SHADE = {'light', 'dark', 'matt', 'matte', 'gloss', 'glossy'}
+
+
+def strip_colour(t):
+    w = t.split()
+    seen = False
+    while len(w) > 1 and (w[-1] in COLOUR or (seen and w[-1] in SHADE)):
+        seen = True
+        w.pop()
+    return ' '.join(w)
+
+
 def illustration_key(part_type):
+    part_type = strip_colour(part_type)
     for rx, k in GENERIC:
         if re.search(rx, part_type):
             return k
@@ -139,15 +161,24 @@ def main():
     force = set(opt.get('force', '').split(',')) - {''}
     todo = [k for k in keys if k not in NO_IMAGE and (k in force or not os.path.exists(os.path.join(OUT, k + '.webp')))][:int(opt.get('limit', 10 ** 6))]
     print(f'ILLUSTRATE {len(keys)} part types, {len(keys) - len(todo)} done, {len(todo)} to make', flush=True)
-    for i, k in enumerate(todo, 1):
+    import threading
+    from concurrent.futures import ThreadPoolExecutor
+    lock, done = threading.Lock(), [0]
+
+    def one(k):
         for attempt in range(3):
             try:
                 generate(k, token)
-                print(f'ILLUSTRATE [{i}/{len(todo)}] {k}', flush=True)
-                break
+                with lock:
+                    done[0] += 1
+                    print(f'ILLUSTRATE [{done[0]}/{len(todo)}] {k}', flush=True)
+                return
             except Exception as ex:
                 print(f'ILLUSTRATE retry {k}: {type(ex).__name__}: {str(ex)[:120]}', flush=True)
                 time.sleep(2 ** (attempt + 1))
+
+    with ThreadPoolExecutor(int(opt.get('workers', 4))) as pool:
+        list(pool.map(one, todo))
     print('ILLUSTRATE_DONE', flush=True)
     return 0
 
