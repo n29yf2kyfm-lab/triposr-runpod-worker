@@ -1854,6 +1854,15 @@
 "url": "https://audi.oempartsonline.com/v-2008-audi-q7--premium--4-2l-v8-gas"
 },
 {
+"year": 2008,
+"make": "Audi",
+"model": "R8",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2008-audi-r8--base--4-2l-v8-gas"
+},
+{
 "year": 2009,
 "make": "Audi",
 "model": "A3",
@@ -2079,6 +2088,24 @@
 "url": "https://audi.oempartsonline.com/v-2009-audi-q7--tdi--3-0l-v6-diesel"
 },
 {
+"year": 2009,
+"make": "Audi",
+"model": "R8",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2009-audi-r8--base--4-2l-v8-gas"
+},
+{
+"year": 2009,
+"make": "Audi",
+"model": "R8",
+"trim": "Base",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2009-audi-r8--base--5-2l-v10-gas"
+},
+{
 "year": 2010,
 "make": "Audi",
 "model": "A3",
@@ -2284,6 +2311,24 @@
 "engine": "3.0L V6 Diesel",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2010-audi-q7--tdi--3-0l-v6-diesel"
+},
+{
+"year": 2010,
+"make": "Audi",
+"model": "R8",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2010-audi-r8--base--4-2l-v8-gas"
+},
+{
+"year": 2010,
+"make": "Audi",
+"model": "R8",
+"trim": "Base",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2010-audi-r8--base--5-2l-v10-gas"
 },
 {
 "year": 2011,
@@ -2509,6 +2554,42 @@
 "engine": "3.0L V6 Diesel",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2011-audi-q7--tdi-prestige--3-0l-v6-diesel"
+},
+{
+"year": 2011,
+"make": "Audi",
+"model": "R8",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2011-audi-r8--base--4-2l-v8-gas"
+},
+{
+"year": 2011,
+"make": "Audi",
+"model": "R8",
+"trim": "Base",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2011-audi-r8--base--5-2l-v10-gas"
+},
+{
+"year": 2011,
+"make": "Audi",
+"model": "R8",
+"trim": "Spyder",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2011-audi-r8--spyder--4-2l-v8-gas"
+},
+{
+"year": 2011,
+"make": "Audi",
+"model": "R8",
+"trim": "Spyder",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2011-audi-r8--spyder--5-2l-v10-gas"
 },
 {
 "year": 2012,
@@ -2761,6 +2842,60 @@
 "engine": "3.0L V6 Diesel",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2012-audi-q7--tdi-prestige--3-0l-v6-diesel"
+},
+{
+"year": 2012,
+"make": "Audi",
+"model": "R8",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2012-audi-r8--base--4-2l-v8-gas"
+},
+{
+"year": 2012,
+"make": "Audi",
+"model": "R8",
+"trim": "Base",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2012-audi-r8--base--5-2l-v10-gas"
+},
+{
+"year": 2012,
+"make": "Audi",
+"model": "R8",
+"trim": "GT",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2012-audi-r8--gt--5-2l-v10-gas"
+},
+{
+"year": 2012,
+"make": "Audi",
+"model": "R8",
+"trim": "GT Spyder",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2012-audi-r8--gt-spyder--5-2l-v10-gas"
+},
+{
+"year": 2012,
+"make": "Audi",
+"model": "R8",
+"trim": "Spyder",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2012-audi-r8--spyder--4-2l-v8-gas"
+},
+{
+"year": 2012,
+"make": "Audi",
+"model": "R8",
+"trim": "Spyder",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2012-audi-r8--spyder--5-2l-v10-gas"
 },
 {
 "year": 2013,
@@ -3449,6 +3584,51 @@
 {
 "year": 2014,
 "make": "Audi",
+"model": "R8",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-r8--base--4-2l-v8-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "R8",
+"trim": "Base",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-r8--base--5-2l-v10-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "R8",
+"trim": "Plus",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-r8--plus--5-2l-v10-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "R8",
+"trim": "Spyder",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-r8--spyder--4-2l-v8-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "R8",
+"trim": "Spyder",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-r8--spyder--5-2l-v10-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
 "model": "allroad",
 "trim": "Premium",
 "engine": "2.0L L4 Flex",
@@ -4003,6 +4183,51 @@
 "engine": "3.0L V6 Diesel",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2015-audi-q7--tdi-prestige--3-0l-v6-diesel"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "R8",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-r8--base--4-2l-v8-gas"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "R8",
+"trim": "Base",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-r8--base--5-2l-v10-gas"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "R8",
+"trim": "Plus",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-r8--plus--5-2l-v10-gas"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "R8",
+"trim": "Spyder",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-r8--spyder--4-2l-v8-gas"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "R8",
+"trim": "Spyder",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-r8--spyder--5-2l-v10-gas"
 },
 {
 "year": 2015,
@@ -4921,6 +5146,33 @@
 "engine": "3.0L V6 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2017-audi-q7--prestige--3-0l-v6-gas"
+},
+{
+"year": 2017,
+"make": "Audi",
+"model": "R8",
+"trim": "Base",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2017-audi-r8--base--5-2l-v10-gas"
+},
+{
+"year": 2017,
+"make": "Audi",
+"model": "R8",
+"trim": "Plus",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2017-audi-r8--plus--5-2l-v10-gas"
+},
+{
+"year": 2017,
+"make": "Audi",
+"model": "R8",
+"trim": "Spyder",
+"engine": "5.2L V10 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2017-audi-r8--spyder--5-2l-v10-gas"
 },
 {
 "year": 2018,
@@ -8597,6 +8849,42 @@
 {
 "year": 2024,
 "make": "Audi",
+"model": "Q8 e-tron Sportback",
+"trim": "Launch Edition Electric",
+"engine": "",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2024-audi-q8-e-tron-sportback--launch-edition--electric"
+},
+{
+"year": 2024,
+"make": "Audi",
+"model": "Q8 e-tron Sportback",
+"trim": "Premium Electric",
+"engine": "",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2024-audi-q8-e-tron-sportback--premium--electric"
+},
+{
+"year": 2024,
+"make": "Audi",
+"model": "Q8 e-tron Sportback",
+"trim": "Premium Plus Electric",
+"engine": "",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2024-audi-q8-e-tron-sportback--premium-plus--electric"
+},
+{
+"year": 2024,
+"make": "Audi",
+"model": "Q8 e-tron Sportback",
+"trim": "Prestige Electric",
+"engine": "",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2024-audi-q8-e-tron-sportback--prestige--electric"
+},
+{
+"year": 2024,
+"make": "Audi",
 "model": "e-tron GT",
 "trim": "Premium Plus Electric",
 "engine": "",
@@ -9214,6 +9502,33 @@
 "engine": "3.0L V6 Electric/Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2025-audi-q8--prestige--3-0l-v6-electric-gas"
+},
+{
+"year": 2025,
+"make": "Audi",
+"model": "Q8 e-tron Sportback",
+"trim": "Premium Electric",
+"engine": "",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2025-audi-q8-e-tron-sportback--premium--electric"
+},
+{
+"year": 2025,
+"make": "Audi",
+"model": "Q8 e-tron Sportback",
+"trim": "Premium Plus Electric",
+"engine": "",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2025-audi-q8-e-tron-sportback--premium-plus--electric"
+},
+{
+"year": 2025,
+"make": "Audi",
+"model": "Q8 e-tron Sportback",
+"trim": "Prestige Electric",
+"engine": "",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2025-audi-q8-e-tron-sportback--prestige--electric"
 },
 {
 "year": 2026,
