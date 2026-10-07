@@ -954,6 +954,24 @@
 "url": "https://vw.oempartsonline.com/v-2011-volkswagen-cc--vr6-4motion--3-6l-v6-gas"
 },
 {
+"year": 2011,
+"make": "Volkswagen",
+"model": "Eos",
+"trim": "Komfort",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2011-volkswagen-eos--komfort--2-0l-l4-gas"
+},
+{
+"year": 2011,
+"make": "Volkswagen",
+"model": "Eos",
+"trim": "Lux",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2011-volkswagen-eos--lux--2-0l-l4-gas"
+},
+{
 "year": 2012,
 "make": "Volkswagen",
 "model": "Beetle",
@@ -1024,6 +1042,33 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2012-volkswagen-cc--sport--2-0l-l4-gas"
+},
+{
+"year": 2012,
+"make": "Volkswagen",
+"model": "Eos",
+"trim": "Executive",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2012-volkswagen-eos--executive--2-0l-l4-gas"
+},
+{
+"year": 2012,
+"make": "Volkswagen",
+"model": "Eos",
+"trim": "Komfort",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2012-volkswagen-eos--komfort--2-0l-l4-gas"
+},
+{
+"year": 2012,
+"make": "Volkswagen",
+"model": "Eos",
+"trim": "Lux",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2012-volkswagen-eos--lux--2-0l-l4-gas"
 },
 {
 "year": 2013,
