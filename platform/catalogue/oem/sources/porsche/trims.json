@@ -360,6 +360,24 @@
 "url": "https://porsche.oempartsonline.com/v-2002-porsche-911--turbo--3-6l-h6-gas"
 },
 {
+"year": 2002,
+"make": "Porsche",
+"model": "Boxster",
+"trim": "Roadster",
+"engine": "2.7L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2002-porsche-boxster--roadster--2-7l-h6-gas"
+},
+{
+"year": 2002,
+"make": "Porsche",
+"model": "Boxster",
+"trim": "Roadster S",
+"engine": "3.2L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2002-porsche-boxster--roadster-s--3-2l-h6-gas"
+},
+{
 "year": 2003,
 "make": "Porsche",
 "model": "911",
@@ -403,6 +421,24 @@
 "engine": "3.6L H6 Gas",
 "market": "US",
 "url": "https://porsche.oempartsonline.com/v-2003-porsche-911--turbo--3-6l-h6-gas"
+},
+{
+"year": 2003,
+"make": "Porsche",
+"model": "Boxster",
+"trim": "Roadster",
+"engine": "2.7L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2003-porsche-boxster--roadster--2-7l-h6-gas"
+},
+{
+"year": 2003,
+"make": "Porsche",
+"model": "Boxster",
+"trim": "Roadster S",
+"engine": "3.2L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2003-porsche-boxster--roadster-s--3-2l-h6-gas"
 },
 {
 "year": 2004,
@@ -466,6 +502,33 @@
 "engine": "3.6L H6 Gas",
 "market": "US",
 "url": "https://porsche.oempartsonline.com/v-2004-porsche-911--turbo--3-6l-h6-gas"
+},
+{
+"year": 2004,
+"make": "Porsche",
+"model": "Boxster",
+"trim": "Base",
+"engine": "2.7L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2004-porsche-boxster--base--2-7l-h6-gas"
+},
+{
+"year": 2004,
+"make": "Porsche",
+"model": "Boxster",
+"trim": "S",
+"engine": "3.2L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2004-porsche-boxster--s--3-2l-h6-gas"
+},
+{
+"year": 2004,
+"make": "Porsche",
+"model": "Boxster",
+"trim": "S Special Edition",
+"engine": "3.2L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2004-porsche-boxster--s-special-edition--3-2l-h6-gas"
 },
 {
 "year": 2005,

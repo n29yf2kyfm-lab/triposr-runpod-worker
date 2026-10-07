@@ -2837,6 +2837,33 @@
 {
 "year": 2018,
 "make": "Volkswagen",
+"model": "Golf",
+"trim": "S",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2018-volkswagen-golf--s--1-8l-l4-gas"
+},
+{
+"year": 2018,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "SE",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2018-volkswagen-golf--se--1-8l-l4-gas"
+},
+{
+"year": 2018,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "SEL",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2018-volkswagen-golf--sel--1-8l-l4-gas"
+},
+{
+"year": 2018,
+"make": "Volkswagen",
 "model": "e-Golf",
 "trim": "Limited Edition Electric",
 "engine": "",
@@ -3040,6 +3067,24 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2019-volkswagen-beetle--se--2-0l-l4-gas"
+},
+{
+"year": 2019,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "S",
+"engine": "1.4L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--s--1-4l-l4-gas"
+},
+{
+"year": 2019,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "SE",
+"engine": "1.4L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf--se--1-4l-l4-gas"
 },
 {
 "year": 2019,
@@ -3283,6 +3328,15 @@
 "engine": "3.6L V6 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2020-volkswagen-atlas-cross-sport--sel-r-line--3-6l-v6-gas"
+},
+{
+"year": 2020,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "Tsi",
+"engine": "1.4L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2020-volkswagen-golf--tsi--1-4l-l4-gas"
 },
 {
 "year": 2021,
