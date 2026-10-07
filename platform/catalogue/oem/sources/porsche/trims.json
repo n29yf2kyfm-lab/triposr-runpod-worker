@@ -4230,6 +4230,42 @@
 "url": "https://porsche.oempartsonline.com/v-2021-porsche-cayenne--turbo-s-e-hybrid-coupe--4-0l-v8-plug-in-hybrid-ev-gas-ph"
 },
 {
+"year": 2021,
+"make": "Porsche",
+"model": "Macan",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2021-porsche-macan--base--2-0l-l4-gas"
+},
+{
+"year": 2021,
+"make": "Porsche",
+"model": "Macan",
+"trim": "GTS",
+"engine": "2.9L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2021-porsche-macan--gts--2-9l-v6-gas"
+},
+{
+"year": 2021,
+"make": "Porsche",
+"model": "Macan",
+"trim": "S",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2021-porsche-macan--s--3-0l-v6-gas"
+},
+{
+"year": 2021,
+"make": "Porsche",
+"model": "Macan",
+"trim": "Turbo",
+"engine": "2.9L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2021-porsche-macan--turbo--2-9l-v6-gas"
+},
+{
 "year": 2022,
 "make": "Porsche",
 "model": "718 Boxster",
@@ -4615,6 +4651,33 @@
 "engine": "4.0L V8 PLUG-IN HYBRID EV-GAS (PH",
 "market": "US",
 "url": "https://porsche.oempartsonline.com/v-2022-porsche-cayenne--turbo-s-e-hybrid-coupe--4-0l-v8-plug-in-hybrid-ev-gas-ph"
+},
+{
+"year": 2022,
+"make": "Porsche",
+"model": "Macan",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2022-porsche-macan--base--2-0l-l4-gas"
+},
+{
+"year": 2022,
+"make": "Porsche",
+"model": "Macan",
+"trim": "GTS",
+"engine": "2.9L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2022-porsche-macan--gts--2-9l-v6-gas"
+},
+{
+"year": 2022,
+"make": "Porsche",
+"model": "Macan",
+"trim": "S",
+"engine": "2.9L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2022-porsche-macan--s--2-9l-v6-gas"
 },
 {
 "year": 2023,
@@ -5049,6 +5112,42 @@
 "url": "https://porsche.oempartsonline.com/v-2023-porsche-cayenne--turbo-s-e-hybrid-coupe--4-0l-v8-electric-gas"
 },
 {
+"year": 2023,
+"make": "Porsche",
+"model": "Macan",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2023-porsche-macan--base--2-0l-l4-gas"
+},
+{
+"year": 2023,
+"make": "Porsche",
+"model": "Macan",
+"trim": "GTS",
+"engine": "2.9L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2023-porsche-macan--gts--2-9l-v6-gas"
+},
+{
+"year": 2023,
+"make": "Porsche",
+"model": "Macan",
+"trim": "S",
+"engine": "2.9L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2023-porsche-macan--s--2-9l-v6-gas"
+},
+{
+"year": 2023,
+"make": "Porsche",
+"model": "Macan",
+"trim": "T",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2023-porsche-macan--t--2-0l-l4-gas"
+},
+{
 "year": 2024,
 "make": "Porsche",
 "model": "718 Boxster",
@@ -5389,6 +5488,60 @@
 "engine": "4.0L V8 Gas",
 "market": "US",
 "url": "https://porsche.oempartsonline.com/v-2024-porsche-cayenne--turbo-gt-coupe--4-0l-v8-gas"
+},
+{
+"year": 2024,
+"make": "Porsche",
+"model": "Macan",
+"trim": "4 Electric Electric",
+"engine": "",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2024-porsche-macan--4-electric--electric"
+},
+{
+"year": 2024,
+"make": "Porsche",
+"model": "Macan",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2024-porsche-macan--base--2-0l-l4-gas"
+},
+{
+"year": 2024,
+"make": "Porsche",
+"model": "Macan",
+"trim": "GTS",
+"engine": "2.9L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2024-porsche-macan--gts--2-9l-v6-gas"
+},
+{
+"year": 2024,
+"make": "Porsche",
+"model": "Macan",
+"trim": "S",
+"engine": "2.9L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2024-porsche-macan--s--2-9l-v6-gas"
+},
+{
+"year": 2024,
+"make": "Porsche",
+"model": "Macan",
+"trim": "T",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2024-porsche-macan--t--2-0l-l4-gas"
+},
+{
+"year": 2024,
+"make": "Porsche",
+"model": "Macan",
+"trim": "Turbo Electric Electric",
+"engine": "",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2024-porsche-macan--turbo-electric--electric"
 },
 {
 "year": 2025,
