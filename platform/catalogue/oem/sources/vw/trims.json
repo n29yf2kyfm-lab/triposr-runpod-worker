@@ -1910,6 +1910,15 @@
 {
 "year": 2012,
 "make": "Volkswagen",
+"model": "GTI",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2012-volkswagen-gti--base--2-0l-l4-gas"
+},
+{
+"year": 2012,
+"make": "Volkswagen",
 "model": "Golf",
 "trim": "Base",
 "engine": "2.5L L5 Gas",
@@ -2072,6 +2081,15 @@
 {
 "year": 2013,
 "make": "Volkswagen",
+"model": "GTI",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2013-volkswagen-gti--base--2-0l-l4-gas"
+},
+{
+"year": 2013,
+"make": "Volkswagen",
 "model": "Golf",
 "trim": "Base",
 "engine": "2.5L L5 Gas",
@@ -2212,6 +2230,24 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2014-volkswagen-eos--sport--2-0l-l4-gas"
+},
+{
+"year": 2014,
+"make": "Volkswagen",
+"model": "GTI",
+"trim": "Driver's Edition",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2014-volkswagen-gti--driver-s-edition--2-0l-l4-gas"
+},
+{
+"year": 2014,
+"make": "Volkswagen",
+"model": "GTI",
+"trim": "Wolfsburg Edition",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2014-volkswagen-gti--wolfsburg-edition--2-0l-l4-gas"
 },
 {
 "year": 2014,
