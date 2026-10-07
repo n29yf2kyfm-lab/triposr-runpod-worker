@@ -1,11 +1,12 @@
 """Fetch 7zap modifications straight through String's REST API (no MCP size limit).
-Key is read from /root/.alam3d_env (STRING_API_KEY=...), never from tracked files.
+Key is read from the STRING_API_KEY environment variable (set in the cloud environment's settings)
+or /root/.alam3d_env, never from tracked files.
     python3 direct.py skipped | todo [N] [--workers 6]"""
 import json, os, sys, time, concurrent.futures as cf, urllib.request
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import mods
 ENV = '/root/.alam3d_env'
-KEY = next((l.split('=', 1)[1].strip().strip('"\'') for l in open(ENV) if l.startswith('STRING_API_KEY=')), None) if os.path.exists(ENV) else None
+KEY = os.environ.get('STRING_API_KEY') or (next((l.split('=', 1)[1].strip().strip('"\'') for l in open(ENV) if l.startswith('STRING_API_KEY=')), None) if os.path.exists(ENV) else None)
 
 def fetch(t):
     body = json.dumps({'url': t['url'], 'format': 'raw', 'solveCaptcha': False,
@@ -27,7 +28,7 @@ def fetch(t):
     return t['code'], 'error ' + err
 
 if __name__ == '__main__':
-    if not KEY: sys.exit('no STRING_API_KEY in ' + ENV)
+    if not KEY: sys.exit('no STRING_API_KEY in the environment or ' + ENV)
     dn = mods.done()
     skip = {w for w in open(os.path.join(mods.HERE, 'skip.txt')).read().split() if w.startswith('gen_')}
     if sys.argv[1] == 'skipped': todo = [t for t in mods.T if t['code'] in skip and t['code'] not in dn]
