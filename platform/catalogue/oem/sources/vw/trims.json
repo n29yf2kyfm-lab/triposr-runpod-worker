@@ -1728,6 +1728,24 @@
 "url": "https://vw.oempartsonline.com/v-2011-volkswagen-eos--lux--2-0l-l4-gas"
 },
 {
+"year": 2011,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "Base",
+"engine": "2.5L L5 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2011-volkswagen-golf--base--2-5l-l5-gas"
+},
+{
+"year": 2011,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "TDI",
+"engine": "2.0L L4 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2011-volkswagen-golf--tdi--2-0l-l4-diesel"
+},
+{
 "year": 2012,
 "make": "Volkswagen",
 "model": "Beetle",
@@ -1825,6 +1843,33 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2012-volkswagen-eos--lux--2-0l-l4-gas"
+},
+{
+"year": 2012,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "Base",
+"engine": "2.5L L5 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2012-volkswagen-golf--base--2-5l-l5-gas"
+},
+{
+"year": 2012,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "R",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2012-volkswagen-golf--r--2-0l-l4-gas"
+},
+{
+"year": 2012,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "TDI",
+"engine": "2.0L L4 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2012-volkswagen-golf--tdi--2-0l-l4-diesel"
 },
 {
 "year": 2013,
@@ -1953,6 +1998,33 @@
 "url": "https://vw.oempartsonline.com/v-2013-volkswagen-eos--sport--2-0l-l4-gas"
 },
 {
+"year": 2013,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "Base",
+"engine": "2.5L L5 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2013-volkswagen-golf--base--2-5l-l5-gas"
+},
+{
+"year": 2013,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "R",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2013-volkswagen-golf--r--2-0l-l4-gas"
+},
+{
+"year": 2013,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "TDI",
+"engine": "2.0L L4 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2013-volkswagen-golf--tdi--2-0l-l4-diesel"
+},
+{
 "year": 2014,
 "make": "Volkswagen",
 "model": "Beetle",
@@ -2059,6 +2131,24 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2014-volkswagen-eos--sport--2-0l-l4-gas"
+},
+{
+"year": 2014,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "Base",
+"engine": "2.5L L5 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2014-volkswagen-golf--base--2-5l-l5-gas"
+},
+{
+"year": 2014,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "TDI",
+"engine": "2.0L L4 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2014-volkswagen-golf--tdi--2-0l-l4-diesel"
 },
 {
 "year": 2015,

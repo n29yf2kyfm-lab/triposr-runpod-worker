@@ -18,6 +18,24 @@
 "url": "https://porsche.oempartsonline.com/v-1995-porsche-911--carrera-4--3-6l-h6-gas"
 },
 {
+"year": 1995,
+"make": "Porsche",
+"model": "928",
+"trim": "Gts",
+"engine": "5.4L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-1995-porsche-928--gts--5-4l-v8-gas"
+},
+{
+"year": 1995,
+"make": "Porsche",
+"model": "968",
+"trim": "Base",
+"engine": "3.0L L4 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-1995-porsche-968--base--3-0l-l4-gas"
+},
+{
 "year": 1996,
 "make": "Porsche",
 "model": "911",
@@ -106,6 +124,15 @@
 "engine": "3.6L H6 Gas",
 "market": "US",
 "url": "https://porsche.oempartsonline.com/v-1997-porsche-911--turbo--3-6l-h6-gas"
+},
+{
+"year": 1997,
+"make": "Porsche",
+"model": "Boxster",
+"trim": "Base",
+"engine": "2.5L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-1997-porsche-boxster--base--2-5l-h6-gas"
 },
 {
 "year": 1998,
