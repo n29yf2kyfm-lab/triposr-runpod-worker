@@ -6203,6 +6203,15 @@
 {
 "year": 2017,
 "make": "Volkswagen",
+"model": "Tiguan Limited",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2017-volkswagen-tiguan-limited--base--2-0l-l4-gas"
+},
+{
+"year": 2017,
+"make": "Volkswagen",
 "model": "e-Golf",
 "trim": "Limited Edition BATTERY EV (EV/BEV)",
 "engine": "",
@@ -8694,6 +8703,42 @@
 "url": "https://vw.oempartsonline.com/v-2023-volkswagen-taos--sel--1-5l-l4-gas"
 },
 {
+"year": 2023,
+"make": "Volkswagen",
+"model": "Tiguan",
+"trim": "S",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2023-volkswagen-tiguan--s--2-0l-l4-gas"
+},
+{
+"year": 2023,
+"make": "Volkswagen",
+"model": "Tiguan",
+"trim": "SE",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2023-volkswagen-tiguan--se--2-0l-l4-gas"
+},
+{
+"year": 2023,
+"make": "Volkswagen",
+"model": "Tiguan",
+"trim": "SE R-Line Black",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2023-volkswagen-tiguan--se-r-line-black--2-0l-l4-gas"
+},
+{
+"year": 2023,
+"make": "Volkswagen",
+"model": "Tiguan",
+"trim": "SEL R-Line",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2023-volkswagen-tiguan--sel-r-line--2-0l-l4-gas"
+},
+{
 "year": 2024,
 "make": "Volkswagen",
 "model": "Atlas",
@@ -8935,6 +8980,51 @@
 "engine": "1.5L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2024-volkswagen-taos--sel--1-5l-l4-gas"
+},
+{
+"year": 2024,
+"make": "Volkswagen",
+"model": "Tiguan",
+"trim": "S",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2024-volkswagen-tiguan--s--2-0l-l4-gas"
+},
+{
+"year": 2024,
+"make": "Volkswagen",
+"model": "Tiguan",
+"trim": "SE",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2024-volkswagen-tiguan--se--2-0l-l4-gas"
+},
+{
+"year": 2024,
+"make": "Volkswagen",
+"model": "Tiguan",
+"trim": "SE R-Line Black",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2024-volkswagen-tiguan--se-r-line-black--2-0l-l4-gas"
+},
+{
+"year": 2024,
+"make": "Volkswagen",
+"model": "Tiguan",
+"trim": "SEL R-Line",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2024-volkswagen-tiguan--sel-r-line--2-0l-l4-gas"
+},
+{
+"year": 2024,
+"make": "Volkswagen",
+"model": "Tiguan",
+"trim": "Wolfsburg Edition",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2024-volkswagen-tiguan--wolfsburg-edition--2-0l-l4-gas"
 },
 {
 "year": 2025,
@@ -9225,6 +9315,42 @@
 "url": "https://vw.oempartsonline.com/v-2025-volkswagen-taos--sel--1-5l-l4-gas"
 },
 {
+"year": 2025,
+"make": "Volkswagen",
+"model": "Tiguan",
+"trim": "S",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2025-volkswagen-tiguan--s--2-0l-l4-gas"
+},
+{
+"year": 2025,
+"make": "Volkswagen",
+"model": "Tiguan",
+"trim": "SE",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2025-volkswagen-tiguan--se--2-0l-l4-gas"
+},
+{
+"year": 2025,
+"make": "Volkswagen",
+"model": "Tiguan",
+"trim": "SE R-Line Black",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2025-volkswagen-tiguan--se-r-line-black--2-0l-l4-gas"
+},
+{
+"year": 2025,
+"make": "Volkswagen",
+"model": "Tiguan",
+"trim": "SEL R-Line",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2025-volkswagen-tiguan--sel-r-line--2-0l-l4-gas"
+},
+{
 "year": 2026,
 "make": "Volkswagen",
 "model": "Atlas",
@@ -9448,5 +9574,32 @@
 "engine": "1.5L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2026-volkswagen-taos--sel--1-5l-l4-gas"
+},
+{
+"year": 2026,
+"make": "Volkswagen",
+"model": "Tiguan",
+"trim": "S",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2026-volkswagen-tiguan--s--2-0l-l4-gas"
+},
+{
+"year": 2026,
+"make": "Volkswagen",
+"model": "Tiguan",
+"trim": "SE",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2026-volkswagen-tiguan--se--2-0l-l4-gas"
+},
+{
+"year": 2026,
+"make": "Volkswagen",
+"model": "Tiguan",
+"trim": "SE R-Line Black",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2026-volkswagen-tiguan--se-r-line-black--2-0l-l4-gas"
 }
 ]
