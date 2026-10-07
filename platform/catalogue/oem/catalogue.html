@@ -292,59 +292,70 @@ TRANS.P = 7; TRANS.R = 9;
 'STUVWXYZ'.split('').forEach((c, i) => TRANS[c] = i + 2);
 const WEIGHTS = [8,7,6,5,4,3,2,10,0,9,8,7,6,5,4,3,2];
 const YEAR = 'ABCDEFGHJKLMNPRSTVWXY123456789';
-const WMI = {
-  WVW:['Volkswagen','Germany','car'], '3VV':['Volkswagen','Mexico','SUV'], '1V2':['Volkswagen','USA','SUV'], WV1:['Volkswagen','Germany','commercial'], WV2:['Volkswagen','Germany','bus/van'],
-  WVG:['Volkswagen','Germany','SUV'], '1VW':['Volkswagen','USA','car'], '3VW':['Volkswagen','Mexico','car'],
-  '9BW':['Volkswagen','Brazil','car'], WAU:['Audi','Germany','car'], WA1:['Audi','Germany','SUV'], TRU:['Audi','Hungary','car'],
-  VSS:['SEAT','Spain','car'], TMB:['Skoda','Czech Republic','car'], WP0:['Porsche','Germany','car'], WP1:['Porsche','Germany','SUV'],
-  WBA:['BMW','Germany','car'], WBS:['BMW M','Germany','car'], WMW:['MINI','Germany/UK','car'], WDD:['Mercedes-Benz','Germany','car'],
-  WDB:['Mercedes-Benz','Germany','car'], W1K:['Mercedes-Benz','Germany','car'], WF0:['Ford','Germany','car'], SFA:['Ford','UK','car'],
-  W0L:['Opel/Vauxhall','Germany','car'], VF1:['Renault','France','car'], VF3:['Peugeot','France','car'], VF7:['Citroen','France','car'],
-  ZFA:['Fiat','Italy','car'], SAJ:['Jaguar','UK','car'], SAL:['Land Rover','UK','SUV'], SB1:['Toyota','UK','car'],
-  JTD:['Toyota','Japan','car'], VNK:['Toyota','France','car'], SJN:['Nissan','UK','car'], JN1:['Nissan','Japan','car'],
-  SHH:['Honda','UK','car'], JHM:['Honda','Japan','car'], KMH:['Hyundai','Korea','car'], KNA:['Kia','Korea','car'],
-  JMZ:['Mazda','Japan','car'], YV1:['Volvo','Sweden','car'], TSM:['Suzuki','Hungary','car']
-};
-const SPAN = {'1H':[1991,1999], '1J':[1997,2006], '1K':[2003,2014], '5K':[2008,2014], AU:[2012,2021], CD:[2019,2030]};
-/* US VW type codes (VIN positions 7-8), 1995-2026, mapped to the dealer catalogue's own model names
-   so a VIN can pick parts by model + year from each part's fitment. These are the usual
-   community-documented codes; VW does not publish them. Codes not listed say so, never a guess. */
+/* generated from vin/vin.py (WMI, SPAN, VWMODELS, AUDIMODELS, VW_GROUP, TYPE) — keep the two identical.
+   Type codes are community-documented; the makers do not publish them. Codes not listed say so, never a guess. */
+const WMI = {"WVW":["Volkswagen","Germany","car"],"WV1":["Volkswagen","Germany","commercial"],"WV2":["Volkswagen","Germany","bus/van"],"WVG":["Volkswagen","Germany","SUV"],"1VW":["Volkswagen","USA","car"],"3VW":["Volkswagen","Mexico","car"],"3VV":["Volkswagen","Mexico","SUV"],"1V2":["Volkswagen","USA","SUV"],"9BW":["Volkswagen","Brazil","car"],"WAU":["Audi","Germany","car"],"WA1":["Audi","Germany","SUV"],"TRU":["Audi","Hungary","car"],"VSS":["SEAT","Spain","car"],"TMB":["Skoda","Czech Republic","car"],"WP0":["Porsche","Germany","car"],"WP1":["Porsche","Germany","SUV"],"WBA":["BMW","Germany","car"],"WBS":["BMW M","Germany","car"],"WMW":["MINI","Germany/UK","car"],"WDD":["Mercedes-Benz","Germany","car"],"WDB":["Mercedes-Benz","Germany","car"],"W1K":["Mercedes-Benz","Germany","car"],"WF0":["Ford","Germany","car"],"SFA":["Ford","UK","car"],"W0L":["Opel/Vauxhall","Germany","car"],"VF1":["Renault","France","car"],"VF3":["Peugeot","France","car"],"VF7":["Citroen","France","car"],"ZFA":["Fiat","Italy","car"],"SAJ":["Jaguar","UK","car"],"SAL":["Land Rover","UK","SUV"],"SB1":["Toyota","UK","car"],"JTD":["Toyota","Japan","car"],"VNK":["Toyota","France","car"],"SJN":["Nissan","UK","car"],"JN1":["Nissan","Japan","car"],"SHH":["Honda","UK","car"],"JHM":["Honda","Japan","car"],"KMH":["Hyundai","Korea","car"],"KNA":["Kia","Korea","car"],"JMZ":["Mazda","Japan","car"],"YV1":["Volvo","Sweden","car"],"TSM":["Suzuki","Hungary","car"],"WUA":["Audi","Germany (Audi Sport / quattro GmbH)","car"],"SCB":["Bentley","UK","car"],"SJA":["Bentley","UK","SUV"],"ZHW":["Lamborghini","Italy","car"],"ZPB":["Lamborghini","Italy","SUV"],"8AW":["Volkswagen","Argentina","car"],"AAV":["Volkswagen","South Africa","car"],"LSV":["Volkswagen","China (SAIC VW)","car"],"LFV":["Volkswagen","China (FAW-VW)","car"]};
+const SPAN = {"1H":[1991,1999],"1J":[1997,2006],"1K":[2003,2014],"5K":[2008,2014],"AU":[2012,2021],"CD":[2019,2030],"1E":[1995,2002],"9M":[1999,2005],"1C":[1998,2010],"1Y":[2003,2010],"AJ":[2011,2018],"BU":[2019,2030],"AT":[2012,2019],"3B":[1998,2005],"3C":[2006,2017],"A3":[2012,2022],"5N":[2009,2018],"AX":[2018,2030],"CA":[2018,2030],"7L":[2004,2010],"BP":[2011,2017],"1F":[2007,2016],"3D":[2004,2006],"70":[1993,2003],"3H":[2019,2030],"8L":[1997,2003],"8P":[2004,2013],"8V":[2013,2020],"8Y":[2020,2030],"8D":[1995,2001],"8E":[2001,2008],"8K":[2008,2016],"8W":[2016,2030],"8T":[2007,2017],"F5":[2017,2030],"4B":[1997,2005],"4F":[2004,2011],"4G":[2011,2018],"4D":[1994,2003],"4E":[2002,2010],"4H":[2010,2017],"4N":[2018,2030],"8N":[1998,2006],"8J":[2006,2014],"FV":[2014,2023],"8U":[2011,2018],"F3":[2018,2030],"8R":[2008,2017],"FY":[2017,2030],"4L":[2006,2015],"4M":[2016,2030],"42":[2007,2015],"4S":[2016,2024]};
 const VWMODELS = {
-  '1H': [['Golf','GTI','Jetta'], [1993,1999], 'Golf / GTI / Jetta Mk3'],
-  '1E': [['Cabrio'], [1995,2002], 'Cabrio'],
-  '1J': [['Golf','GTI','R32'], [1999,2006], 'Golf / GTI Mk4'],
-  '9M': [['Jetta'], [1999,2005], 'Jetta Mk4'],
-  '1C': [['Beetle'], [1998,2010], 'New Beetle'],
-  '1Y': [['Beetle'], [2003,2010], 'New Beetle Convertible'],
-  '1K': [['Rabbit','GTI','Jetta','R32','Golf'], [2005,2014], 'Golf Mk5 / Rabbit / GTI / Jetta Mk5'],
-  '5K': [['Golf','GTI','Golf R'], [2010,2014], 'Golf / GTI Mk6'],
-  'AJ': [['Jetta'], [2011,2018], 'Jetta Mk6'],
-  'BU': [['Jetta'], [2019,2030], 'Jetta Mk7'],
-  'AT': [['Beetle'], [2012,2019], 'Beetle (A5)'],
-  'AU': [['Golf','GTI','Golf R','Golf SportWagen','Golf Alltrack','e-Golf'], [2015,2021], 'Golf Mk7 family'],
-  'CD': [['Golf','GTI','Golf R'], [2019,2030], 'Golf Mk8'],
-  '3B': [['Passat'], [1998,2005], 'Passat B5'],
-  '3C': [['Passat','CC'], [2006,2017], 'Passat B6 / CC'],
-  'A3': [['Passat'], [2012,2022], 'Passat (US-built)'],
-  '5N': [['Tiguan','Tiguan Limited'], [2009,2018], 'Tiguan Mk1'],
-  'AX': [['Tiguan'], [2018,2030], 'Tiguan Mk2'],
-  'CA': [['Atlas','Atlas Cross Sport'], [2018,2030], 'Atlas'],
-  '7L': [['Touareg'], [2004,2010], 'Touareg Mk1'],
-  'BP': [['Touareg'], [2011,2017], 'Touareg Mk2'],
-  '1F': [['Eos'], [2007,2016], 'Eos'],
-  '3D': [['Phaeton'], [2004,2006], 'Phaeton'],
-  '70': [['Eurovan'], [1993,2003], 'EuroVan'],
-  '3H': [['Arteon'], [2019,2030], 'Arteon']
+  "1H": [["Golf","GTI","Jetta"],[1993,1999],"Golf / GTI / Jetta Mk3"],
+  "1E": [["Cabrio"],[1995,2002],"Cabrio"],
+  "1J": [["Golf","GTI","R32"],[1999,2006],"Golf / GTI Mk4"],
+  "9M": [["Jetta"],[1999,2005],"Jetta Mk4"],
+  "1C": [["Beetle"],[1998,2010],"New Beetle"],
+  "1Y": [["Beetle"],[2003,2010],"New Beetle Convertible"],
+  "1K": [["Rabbit","GTI","Jetta","R32","Golf"],[2005,2014],"Golf Mk5 / Rabbit / GTI / Jetta Mk5"],
+  "5K": [["Golf","GTI","Golf R"],[2010,2014],"Golf / GTI Mk6"],
+  "AJ": [["Jetta"],[2011,2018],"Jetta Mk6"],
+  "BU": [["Jetta"],[2019,2030],"Jetta Mk7"],
+  "AT": [["Beetle"],[2012,2019],"Beetle (A5)"],
+  "AU": [["Golf","GTI","Golf R","Golf SportWagen","Golf Alltrack","e-Golf"],[2015,2021],"Golf Mk7 family"],
+  "CD": [["Golf","GTI","Golf R"],[2019,2030],"Golf Mk8"],
+  "3B": [["Passat"],[1998,2005],"Passat B5"],
+  "3C": [["Passat","CC"],[2006,2017],"Passat B6 / CC"],
+  "A3": [["Passat"],[2012,2022],"Passat (US-built)"],
+  "5N": [["Tiguan","Tiguan Limited"],[2009,2018],"Tiguan Mk1"],
+  "AX": [["Tiguan"],[2018,2030],"Tiguan Mk2"],
+  "CA": [["Atlas","Atlas Cross Sport"],[2018,2030],"Atlas"],
+  "7L": [["Touareg"],[2004,2010],"Touareg Mk1"],
+  "BP": [["Touareg"],[2011,2017],"Touareg Mk2"],
+  "1F": [["Eos"],[2007,2016],"Eos"],
+  "3D": [["Phaeton"],[2004,2006],"Phaeton"],
+  "70": [["Eurovan"],[1993,2003],"EuroVan"],
+  "3H": [["Arteon"],[2019,2030],"Arteon"]
 };
-for (const [c, [, span]] of Object.entries(VWMODELS)) SPAN[c] ||= span;
-const VW_GROUP = new Set(['Volkswagen','Audi','SEAT','Skoda','Porsche']);
-const TYPE = {
-  '1H':'Golf Mk3 / Vento', '1J':'Golf Mk4 / Bora', '1K':'Golf Mk5 / Jetta Mk5', '5K':'Golf Mk6', AU:'Golf Mk7', CD:'Golf Mk8',
-  '6R':'Polo Mk5', '6C':'Polo Mk5 (facelift)', AW:'Polo Mk6', '5N':'Tiguan Mk1', '3C':'Passat B6/B7', '3G':'Passat B8',
-  '3H':'Arteon', A1:'T-Roc', '1T':'Touran Mk1', '5T':'Touran Mk2', '7N':'Sharan Mk2', '13':'Scirocco Mk3',
-  '8P':'Audi A3 Mk2', '8V':'Audi A3 Mk3', '8Y':'Audi A3 Mk4', '8X':'Audi A1 Mk1', '1Z':'Skoda Octavia Mk2',
-  '5E':'Skoda Octavia Mk3', NX:'Skoda Octavia Mk4', '1P':'SEAT Leon Mk2', '5F':'SEAT Leon Mk3', KL:'SEAT/Cupra Leon Mk4'
+const AUDIMODELS = {
+  "8L": [["Audi A3","Audi S3"],[1997,2003],"Audi A3 Mk1 (8L)"],
+  "8P": [["Audi A3","Audi S3","Audi RS 3"],[2004,2013],"Audi A3 Mk2 (8P)"],
+  "8V": [["Audi A3","Audi S3","Audi RS 3"],[2013,2020],"Audi A3 Mk3 (8V)"],
+  "8Y": [["Audi A3","Audi S3","Audi RS 3"],[2020,2030],"Audi A3 Mk4 (8Y)"],
+  "8D": [["Audi A4","Audi S4"],[1995,2001],"Audi A4 B5"],
+  "8E": [["Audi A4","Audi S4","Audi RS 4"],[2001,2008],"Audi A4 B6/B7"],
+  "8K": [["Audi A4","Audi S4","Audi RS 4"],[2008,2016],"Audi A4 B8"],
+  "8W": [["Audi A4","Audi S4","Audi RS 4"],[2016,2030],"Audi A4 B9"],
+  "8T": [["Audi A5","Audi S5","Audi RS 5"],[2007,2017],"Audi A5 Mk1"],
+  "F5": [["Audi A5","Audi S5","Audi RS 5"],[2017,2030],"Audi A5 Mk2"],
+  "4B": [["Audi A6","Audi S6","Audi RS 6","Audi allroad"],[1997,2005],"Audi A6 C5"],
+  "4F": [["Audi A6","Audi S6","Audi RS 6"],[2004,2011],"Audi A6 C6"],
+  "4G": [["Audi A6","Audi S6","Audi RS 6","Audi A7","Audi S7","Audi RS 7"],[2011,2018],"Audi A6/A7 C7"],
+  "4D": [["Audi A8","Audi S8"],[1994,2003],"Audi A8 D2"],
+  "4E": [["Audi A8","Audi S8"],[2002,2010],"Audi A8 D3"],
+  "4H": [["Audi A8","Audi S8"],[2010,2017],"Audi A8 D4"],
+  "4N": [["Audi A8","Audi S8"],[2018,2030],"Audi A8 D5"],
+  "8N": [["Audi TT"],[1998,2006],"Audi TT Mk1"],
+  "8J": [["Audi TT","Audi TTS","Audi TT RS"],[2006,2014],"Audi TT Mk2"],
+  "FV": [["Audi TT","Audi TTS","Audi TT RS"],[2014,2023],"Audi TT Mk3"],
+  "8U": [["Audi Q3"],[2011,2018],"Audi Q3 Mk1"],
+  "F3": [["Audi Q3","Audi RS Q3"],[2018,2030],"Audi Q3 Mk2"],
+  "8R": [["Audi Q5","Audi SQ5"],[2008,2017],"Audi Q5 Mk1"],
+  "FY": [["Audi Q5","Audi SQ5"],[2017,2030],"Audi Q5 Mk2"],
+  "4L": [["Audi Q7"],[2006,2015],"Audi Q7 Mk1"],
+  "4M": [["Audi Q7","Audi SQ7","Audi Q8","Audi SQ8","Audi RS Q8"],[2016,2030],"Audi Q7 Mk2 / Q8"],
+  "42": [["Audi R8"],[2007,2015],"Audi R8 Mk1"],
+  "4S": [["Audi R8"],[2016,2024],"Audi R8 Mk2"]
 };
+const BRANDMODELS = {Volkswagen: VWMODELS, Audi: AUDIMODELS};
+const VW_GROUP = new Set(["Audi","Bentley","Cupra","Lamborghini","Porsche","SEAT","Skoda","Volkswagen"]);
+const TYPE = {"1H":"Golf Mk3 / Vento","1J":"Golf Mk4 / Bora","1K":"Golf Mk5 / Jetta Mk5","5K":"Golf Mk6","AU":"Golf Mk7","CD":"Golf Mk8","6R":"Polo Mk5","6C":"Polo Mk5 (facelift)","AW":"Polo Mk6","5N":"Tiguan Mk1","3C":"Passat B6/B7","3G":"Passat B8","3H":"Arteon","A1":"T-Roc","1T":"Touran Mk1","5T":"Touran Mk2","7N":"Sharan Mk2","13":"Scirocco Mk3","8P":"Audi A3 Mk2","8V":"Audi A3 Mk3","8Y":"Audi A3 Mk4","8X":"Audi A1 Mk1","1Z":"Skoda Octavia Mk2","5E":"Skoda Octavia Mk3","NX":"Skoda Octavia Mk4","1P":"SEAT Leon Mk2","5F":"SEAT Leon Mk3","KL":"SEAT/Cupra Leon Mk4","9N":"Polo Mk4","6N":"Polo Mk3","1U":"Skoda Octavia Mk1","3T":"Skoda Superb Mk2","3V":"Skoda Superb Mk3","5J":"Skoda Fabia Mk2","NJ":"Skoda Fabia Mk3","5L":"Skoda Yeti","NS":"Skoda Kodiaq","1M":"SEAT Leon Mk1","6L":"SEAT Ibiza Mk3","6J":"SEAT Ibiza Mk4","KJ":"SEAT Ibiza Mk5","7D":"Transporter T4","7H":"Transporter T5","2E":"Crafter Mk1","2H":"Amarok Mk1","2K":"Caddy Mk3"};
 function checkDigit(v){
   let s = 0; for (let i = 0; i < 17; i++) s += (TRANS[v[i]] || 0) * WEIGHTS[i];
   s %= 11; return s === 10 ? 'X' : String(s);
@@ -366,16 +377,16 @@ function decodeVin(raw){
     out.src.year = 'position 10';
   }
   if (VW_GROUP.has(out.f.make)) {
-    const code = v.slice(6, 8), t = TYPE[code] || (VWMODELS[code] && VWMODELS[code][2]);
+    const code = v.slice(6, 8), tab = BRANDMODELS[out.f.make] || {}, t = (tab[code] && tab[code][2]) || TYPE[code];
     if (t) { out.f.model = t; out.src.model = 'positions 7–8'; }
-    if (VWMODELS[code] && out.f.make === 'Volkswagen') {
-      out.f.dealerModels = VWMODELS[code][0];
-      const [y0, y1] = VWMODELS[code][1];
+    if (tab[code]) {
+      out.f.dealerModels = tab[code][0];
+      const [y0, y1] = tab[code][1];
       if (out.f.year && (out.f.year < y0 || out.f.year > y1))
         out.notes.push(`Model year ${out.f.year} is outside the usual ${y0}–${Math.min(y1, 2026)} span for type code ${code}. Check the VIN for a mistyped character.`);
     }
     if (!t) out.notes.push(`Type code ${code} (positions 7–8) is not in this page's table, so the model is not decoded.`);
-    if (v.slice(3, 6) === 'ZZZ') out.notes.push('European VW VIN: trim and engine are not in the VIN. Confirm them from the V5C or the car.');
+    if (v.slice(3, 6) === 'ZZZ') out.notes.push('European VW Group VIN: trim and engine are not in the VIN. Confirm them from the V5C or the car.');
   }
   if ('12345'.includes(v[0]) && checkDigit(v) !== v[8]) out.notes.push('The check digit (position 9) does not match. Is a character mistyped?');
   if ('12345'.includes(v[0])) out.notes.push('North-American VIN: trim and engine can be decoded with NHTSA (vin.py --online). This page does not contact NHTSA.');
@@ -383,7 +394,9 @@ function decodeVin(raw){
 }
 function fitsVin(p, vf){
   if (vf.slugs.size && p.appears_on.some(a => vf.slugs.has(a.vehicle))) return true;
-  return !!p.fits && p.fits.some(([m, lo, hi]) => vf.models.has(m) && lo <= vf.year && vf.year <= hi);
+  // other brands' models carry the make and match by prefix: "Audi A4" covers "Audi A4 allroad"
+  const ok = m => vf.models.has(m) || (vf.prefix && [...vf.models].some(x => m.startsWith(x + ' ')));
+  return !!p.fits && p.fits.some(([m, lo, hi]) => ok(m) && lo <= vf.year && vf.year <= hi);
 }
 function vinMatches(dec){
   const f = dec.f, make = (f.make || '').toLowerCase(), model = (f.model || '').toLowerCase();
@@ -557,7 +570,7 @@ function showVin(dec){
     .filter(r => r[1]).map(r => `<div><dt>${r[0]}</dt><dd>${esc(r[1])}${r[2] ? ` <small>· ${esc(r[2])}</small>` : ''}</dd></div>`).join('');
   let msg = '', actions = '';
   if (f.dealerModels && f.year) {
-    state.vinFit = {models: new Set(f.dealerModels), year: f.year, slugs: new Set(m.exact.map(v => v.slug))};
+    state.vinFit = {models: new Set(f.dealerModels), prefix: f.make !== 'Volkswagen', year: f.year, slugs: new Set(m.exact.map(v => v.slug))};
     const n = state.parts.filter(p => fitsVin(p, state.vinFit)).length;
     const known = state.parts.filter(p => p.fits || p.appears_on.length).length;
     msg = `Showing <b>${n.toLocaleString()}</b> part${n === 1 ? '' : 's'} listed for a ${esc(f.year)} ${esc(f.dealerModels.join(' / '))}. Fitment is collected for ${known.toLocaleString()} of ${state.parts.length.toLocaleString()} numbers so far, so more parts appear as collection continues. These fit the model and year; confirm the exact part for this car before ordering.`;

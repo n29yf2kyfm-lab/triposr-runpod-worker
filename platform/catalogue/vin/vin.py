@@ -44,8 +44,13 @@ WMI = {
     'SJN': ('Nissan', 'UK', 'car'), 'JN1': ('Nissan', 'Japan', 'car'), 'SHH': ('Honda', 'UK', 'car'),
     'JHM': ('Honda', 'Japan', 'car'), 'KMH': ('Hyundai', 'Korea', 'car'), 'KNA': ('Kia', 'Korea', 'car'),
     'JMZ': ('Mazda', 'Japan', 'car'), 'YV1': ('Volvo', 'Sweden', 'car'), 'TSM': ('Suzuki', 'Hungary', 'car'),
+    # rest of the VW Group (2026-10-07)
+    'WUA': ('Audi', 'Germany (Audi Sport / quattro GmbH)', 'car'),
+    'SCB': ('Bentley', 'UK', 'car'), 'SJA': ('Bentley', 'UK', 'SUV'), 'ZHW': ('Lamborghini', 'Italy', 'car'),
+    'ZPB': ('Lamborghini', 'Italy', 'SUV'), '8AW': ('Volkswagen', 'Argentina', 'car'), 'AAV': ('Volkswagen', 'South Africa', 'car'),
+    'LSV': ('Volkswagen', 'China (SAIC VW)', 'car'), 'LFV': ('Volkswagen', 'China (FAW-VW)', 'car'),
 }
-VW_GROUP = {'Volkswagen', 'Audi', 'SEAT', 'Skoda', 'Porsche'}
+VW_GROUP = {'Volkswagen', 'Audi', 'SEAT', 'Skoda', 'Porsche', 'Bentley', 'Lamborghini', 'Cupra'}
 # VW group type code, VIN positions 7-8 -> model and generation.
 TYPE = {
     '1H': 'Golf Mk3 / Vento', '1J': 'Golf Mk4 / Bora', '1K': 'Golf Mk5 / Jetta Mk5', '5K': 'Golf Mk6', 'AU': 'Golf Mk7',
@@ -55,6 +60,11 @@ TYPE = {
     '8P': 'Audi A3 Mk2', '8V': 'Audi A3 Mk3', '8Y': 'Audi A3 Mk4', '8X': 'Audi A1 Mk1',
     '1Z': 'Skoda Octavia Mk2', '5E': 'Skoda Octavia Mk3', 'NX': 'Skoda Octavia Mk4',
     '1P': 'SEAT Leon Mk2', '5F': 'SEAT Leon Mk3', 'KL': 'SEAT/Cupra Leon Mk4',
+    # Euro VW, commercial vehicles, Skoda, SEAT (community-documented type codes)
+    '9N': 'Polo Mk4', '6N': 'Polo Mk3', '1U': 'Skoda Octavia Mk1', '3T': 'Skoda Superb Mk2',
+    '3V': 'Skoda Superb Mk3', '5J': 'Skoda Fabia Mk2', 'NJ': 'Skoda Fabia Mk3', '5L': 'Skoda Yeti',
+    'NS': 'Skoda Kodiaq', '1M': 'SEAT Leon Mk1', '6L': 'SEAT Ibiza Mk3', '6J': 'SEAT Ibiza Mk4', 'KJ': 'SEAT Ibiza Mk5',
+    '7D': 'Transporter T4', '7H': 'Transporter T5', '2E': 'Crafter Mk1', '2H': 'Amarok Mk1', '2K': 'Caddy Mk3',
 }
 
 # rough production span per type code: only used to pick which 30-year cycle
@@ -91,8 +101,46 @@ VWMODELS = {
     '70': (['Eurovan'], (1993, 2003), 'EuroVan'),
     '3H': (['Arteon'], (2019, 2030), 'Arteon'),
 }
-for _c, (_m, _span, _l) in VWMODELS.items():
-    SPAN.setdefault(_c, _span)
+# Audi type codes -> the Audi dealer catalogue's models ("Audi A4" matches
+# "Audi A4 allroad" etc. by prefix). Same caveat: community-documented codes.
+AUDIMODELS = {
+    '8L': (['Audi A3', 'Audi S3'], (1997, 2003), 'Audi A3 Mk1 (8L)'),
+    '8P': (['Audi A3', 'Audi S3', 'Audi RS 3'], (2004, 2013), 'Audi A3 Mk2 (8P)'),
+    '8V': (['Audi A3', 'Audi S3', 'Audi RS 3'], (2013, 2020), 'Audi A3 Mk3 (8V)'),
+    '8Y': (['Audi A3', 'Audi S3', 'Audi RS 3'], (2020, 2030), 'Audi A3 Mk4 (8Y)'),
+    '8D': (['Audi A4', 'Audi S4'], (1995, 2001), 'Audi A4 B5'),
+    '8E': (['Audi A4', 'Audi S4', 'Audi RS 4'], (2001, 2008), 'Audi A4 B6/B7'),
+    '8K': (['Audi A4', 'Audi S4', 'Audi RS 4'], (2008, 2016), 'Audi A4 B8'),
+    '8W': (['Audi A4', 'Audi S4', 'Audi RS 4'], (2016, 2030), 'Audi A4 B9'),
+    '8T': (['Audi A5', 'Audi S5', 'Audi RS 5'], (2007, 2017), 'Audi A5 Mk1'),
+    'F5': (['Audi A5', 'Audi S5', 'Audi RS 5'], (2017, 2030), 'Audi A5 Mk2'),
+    '4B': (['Audi A6', 'Audi S6', 'Audi RS 6', 'Audi allroad'], (1997, 2005), 'Audi A6 C5'),
+    '4F': (['Audi A6', 'Audi S6', 'Audi RS 6'], (2004, 2011), 'Audi A6 C6'),
+    '4G': (['Audi A6', 'Audi S6', 'Audi RS 6', 'Audi A7', 'Audi S7', 'Audi RS 7'], (2011, 2018), 'Audi A6/A7 C7'),
+    '4D': (['Audi A8', 'Audi S8'], (1994, 2003), 'Audi A8 D2'),
+    '4E': (['Audi A8', 'Audi S8'], (2002, 2010), 'Audi A8 D3'),
+    '4H': (['Audi A8', 'Audi S8'], (2010, 2017), 'Audi A8 D4'),
+    '4N': (['Audi A8', 'Audi S8'], (2018, 2030), 'Audi A8 D5'),
+    '8N': (['Audi TT'], (1998, 2006), 'Audi TT Mk1'),
+    '8J': (['Audi TT', 'Audi TTS', 'Audi TT RS'], (2006, 2014), 'Audi TT Mk2'),
+    'FV': (['Audi TT', 'Audi TTS', 'Audi TT RS'], (2014, 2023), 'Audi TT Mk3'),
+    '8U': (['Audi Q3'], (2011, 2018), 'Audi Q3 Mk1'),
+    'F3': (['Audi Q3', 'Audi RS Q3'], (2018, 2030), 'Audi Q3 Mk2'),
+    '8R': (['Audi Q5', 'Audi SQ5'], (2008, 2017), 'Audi Q5 Mk1'),
+    'FY': (['Audi Q5', 'Audi SQ5'], (2017, 2030), 'Audi Q5 Mk2'),
+    '4L': (['Audi Q7'], (2006, 2015), 'Audi Q7 Mk1'),
+    '4M': (['Audi Q7', 'Audi SQ7', 'Audi Q8', 'Audi SQ8', 'Audi RS Q8'], (2016, 2030), 'Audi Q7 Mk2 / Q8'),
+    '42': (['Audi R8'], (2007, 2015), 'Audi R8 Mk1'),
+    '4S': (['Audi R8'], (2016, 2024), 'Audi R8 Mk2'),
+}
+# make -> type code -> (dealer catalogue models, usual span, label). Porsche,
+# Bentley and Lamborghini VINs are decoded to make and year only: their
+# positions 7-8 are not a type code we can map with confidence, and an
+# unknown code is reported, never guessed.
+BRANDMODELS = {'Volkswagen': VWMODELS, 'Audi': AUDIMODELS}
+for _tab in BRANDMODELS.values():
+    for _c, (_m, _span, _l) in _tab.items():
+        SPAN.setdefault(_c, _span)
 
 
 def check_digit(v):
@@ -132,19 +180,20 @@ def decode(vin, online=False):
         src['year'] = 'position 10'
     if f.get('make') in VW_GROUP:
         code = v[6:8]
-        t = TYPE.get(code) or (VWMODELS[code][2] if code in VWMODELS else None)
+        tab = BRANDMODELS.get(f.get('make'), {})
+        t = (tab[code][2] if code in tab else None) or TYPE.get(code)
         if t:
             f['model'] = t
             src['model'] = 'VW group type code (positions 7-8)'
         else:
             out['notes'].append(f'type code {code} is not in the table, so the model is not decoded')
-        if code in VWMODELS and f.get('make') == 'Volkswagen':
-            f['dealer_models'] = VWMODELS[code][0]
-            y0, y1 = VWMODELS[code][1]
+        if code in tab:
+            f['dealer_models'] = tab[code][0]
+            y0, y1 = tab[code][1]
             if f.get('year') and not y0 <= f['year'] <= y1:
                 out['notes'].append(f'model year {f["year"]} is outside the usual {y0}-{min(y1, 2026)} span for {code}: mistyped VIN?')
         if v[3:6] == 'ZZZ':
-            out['notes'].append('European VW VIN: trim and engine are not encoded — confirm from the V5C or the car')
+            out['notes'].append('European VW Group VIN: trim and engine are not encoded — confirm from the V5C or the car')
     na = v[:1] in '12345'
     if na and check_digit(v) != v[8]:
         out['notes'].append('check digit (position 9) does not match — mistyped VIN?')
@@ -185,7 +234,9 @@ def parts_for(dec):
     out = [p for p in parts if any(a['vehicle'] in hits for a in p['appears_on'])]
     if f.get('dealer_models') and f.get('year'):     # every VW: each part page's own fitment
         models, y = set(f['dealer_models']), f['year']
-        out += [p for p in parts if p not in out and any(m in models and lo <= y <= hi for m, lo, hi in p.get('fits', []))]
+        prefix = f.get('make') != 'Volkswagen'       # "Audi A4" also covers "Audi A4 allroad"
+        ok = lambda m: m in models or (prefix and any(m.startswith(x + ' ') for x in models))
+        out += [p for p in parts if p not in out and any(ok(m) and lo <= y <= hi for m, lo, hi in p.get('fits', []))]
     return hits, out
 
 

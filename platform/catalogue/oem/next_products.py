@@ -13,9 +13,12 @@ import glob, json, os, sys, zlib
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 have = {os.path.basename(f)[:-5] for f in glob.glob(os.path.join(HERE, 'products', '*.json'))}
-crawled = {p['oem']: p['source'] for p in json.load(open(os.path.join(HERE, 'parts.json')))}
+# VW site only; other brands have their own queue (next_brand.py). Compact rows
+# hold a VW link as a bare slug and any other brand's as a full URL.
+crawled = {p['oem']: p['source'] for p in json.load(open(os.path.join(HERE, 'parts.json')))
+           if p['source'].startswith('https://vw.')}
 more = {r[0]: 'https://vw.oempartsonline.com/oem-parts/volkswagen-' + r[5]
-        for r in json.load(open(os.path.join(HERE, 'parts_more.json')))}
+        for r in json.load(open(os.path.join(HERE, 'parts_more.json'))) if not r[5].startswith('http')}
 h = lambda k: zlib.crc32(k.encode())
 todo = sorted((k for k in more if k not in have), key=h) + sorted((k for k in crawled if k not in have), key=h)
 print(len(todo), 'part pages left')
