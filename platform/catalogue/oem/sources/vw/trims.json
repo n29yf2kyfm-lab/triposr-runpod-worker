@@ -2844,6 +2844,15 @@
 "url": "https://vw.oempartsonline.com/v-2007-volkswagen-passat--wolfsburg-edition--2-0l-l4-gas"
 },
 {
+"year": 2007,
+"make": "Volkswagen",
+"model": "Rabbit",
+"trim": "2 5",
+"engine": "2.5L L5 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2007-volkswagen-rabbit--2-5--2-5l-l5-gas"
+},
+{
 "year": 2008,
 "make": "Volkswagen",
 "model": "Beetle",
@@ -2997,6 +3006,15 @@
 "url": "https://vw.oempartsonline.com/v-2008-volkswagen-r32--base--3-2l-v6-gas"
 },
 {
+"year": 2008,
+"make": "Volkswagen",
+"model": "Rabbit",
+"trim": "S",
+"engine": "2.5L L5 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2008-volkswagen-rabbit--s--2-5l-l5-gas"
+},
+{
 "year": 2009,
 "make": "Volkswagen",
 "model": "Beetle",
@@ -3148,6 +3166,42 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2009-volkswagen-passat--komfort--2-0l-l4-gas"
+},
+{
+"year": 2009,
+"make": "Volkswagen",
+"model": "Rabbit",
+"trim": "S",
+"engine": "2.5L L5 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2009-volkswagen-rabbit--s--2-5l-l5-gas"
+},
+{
+"year": 2009,
+"make": "Volkswagen",
+"model": "Routan",
+"trim": "S",
+"engine": "3.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2009-volkswagen-routan--s--3-8l-v6-gas"
+},
+{
+"year": 2009,
+"make": "Volkswagen",
+"model": "Routan",
+"trim": "SE",
+"engine": "3.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2009-volkswagen-routan--se--3-8l-v6-gas"
+},
+{
+"year": 2009,
+"make": "Volkswagen",
+"model": "Routan",
+"trim": "SEL",
+"engine": "4.0L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2009-volkswagen-routan--sel--4-0l-v6-gas"
 },
 {
 "year": 2010,
