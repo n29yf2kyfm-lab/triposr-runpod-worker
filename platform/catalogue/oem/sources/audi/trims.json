@@ -189,6 +189,15 @@
 "url": "https://audi.oempartsonline.com/v-2012-audi-a3--tdi--2-0l-l4-diesel"
 },
 {
+"year": 2012,
+"make": "Audi",
+"model": "A3 Quattro",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2012-audi-a3-quattro--base--2-0l-l4-gas"
+},
+{
 "year": 2013,
 "make": "Audi",
 "model": "A3",
@@ -205,6 +214,15 @@
 "engine": "2.0L L4 Diesel",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2013-audi-a3--tdi--2-0l-l4-diesel"
+},
+{
+"year": 2013,
+"make": "Audi",
+"model": "A3 Quattro",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2013-audi-a3-quattro--base--2-0l-l4-gas"
 },
 {
 "year": 2015,
@@ -259,6 +277,33 @@
 "engine": "2.0L L4 Diesel",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2015-audi-a3--tdi-prestige--2-0l-l4-diesel"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "A3 Quattro",
+"trim": "Premium",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-a3-quattro--premium--2-0l-l4-gas"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "A3 Quattro",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-a3-quattro--premium-plus--2-0l-l4-gas"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "A3 Quattro",
+"trim": "Prestige",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-a3-quattro--prestige--2-0l-l4-gas"
 },
 {
 "year": 2016,

@@ -225,6 +225,42 @@
 "url": "https://vw.oempartsonline.com/v-1998-volkswagen-cabrio--gls--2-0l-l4-gas"
 },
 {
+"year": 1998,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GL",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1998-volkswagen-golf--gl--2-0l-l4-gas"
+},
+{
+"year": 1998,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GTI",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1998-volkswagen-golf--gti--2-0l-l4-gas"
+},
+{
+"year": 1998,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GTI VR6",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1998-volkswagen-golf--gti-vr6--2-8l-v6-gas"
+},
+{
+"year": 1998,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "K2",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1998-volkswagen-golf--k2--2-0l-l4-gas"
+},
+{
 "year": 1999,
 "make": "Volkswagen",
 "model": "Beetle",
@@ -324,6 +360,69 @@
 "url": "https://vw.oempartsonline.com/v-1999-volkswagen-eurovan--mv--2-8l-v6-gas"
 },
 {
+"year": 1999,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GL",
+"engine": "1.9L L4 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gl--1-9l-l4-diesel"
+},
+{
+"year": 1999,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GL",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gl--2-0l-l4-gas"
+},
+{
+"year": 1999,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GLS",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gls--2-0l-l4-gas"
+},
+{
+"year": 1999,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GTI",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gti--2-0l-l4-gas"
+},
+{
+"year": 1999,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GTI",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--gti--2-8l-v6-gas"
+},
+{
+"year": 1999,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "TDI",
+"engine": "1.9L L4 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--tdi--1-9l-l4-diesel"
+},
+{
+"year": 1999,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "Wolfsburg Edition",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1999-volkswagen-golf--wolfsburg-edition--2-0l-l4-gas"
+},
+{
 "year": 2000,
 "make": "Volkswagen",
 "model": "Beetle",
@@ -421,6 +520,78 @@
 "engine": "2.8L V6 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2000-volkswagen-eurovan--mv--2-8l-v6-gas"
+},
+{
+"year": 2000,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GL",
+"engine": "1.9L L4 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2000-volkswagen-golf--gl--1-9l-l4-diesel"
+},
+{
+"year": 2000,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GL",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2000-volkswagen-golf--gl--2-0l-l4-gas"
+},
+{
+"year": 2000,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GLS",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2000-volkswagen-golf--gls--1-8l-l4-gas"
+},
+{
+"year": 2000,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GLS",
+"engine": "1.9L L4 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2000-volkswagen-golf--gls--1-9l-l4-diesel"
+},
+{
+"year": 2000,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GLS",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2000-volkswagen-golf--gls--2-0l-l4-gas"
+},
+{
+"year": 2000,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GTI GLS",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2000-volkswagen-golf--gti-gls--1-8l-l4-gas"
+},
+{
+"year": 2000,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GTI GLS",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2000-volkswagen-golf--gti-gls--2-0l-l4-gas"
+},
+{
+"year": 2000,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GTI GLX",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2000-volkswagen-golf--gti-glx--2-8l-v6-gas"
 },
 {
 "year": 2001,
@@ -556,6 +727,69 @@
 "engine": "2.8L V6 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2001-volkswagen-eurovan--mv--2-8l-v6-gas"
+},
+{
+"year": 2001,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GL",
+"engine": "1.9L L4 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2001-volkswagen-golf--gl--1-9l-l4-diesel"
+},
+{
+"year": 2001,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GL",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2001-volkswagen-golf--gl--2-0l-l4-gas"
+},
+{
+"year": 2001,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GLS",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2001-volkswagen-golf--gls--1-8l-l4-gas"
+},
+{
+"year": 2001,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GLS",
+"engine": "1.9L L4 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2001-volkswagen-golf--gls--1-9l-l4-diesel"
+},
+{
+"year": 2001,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GLS",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2001-volkswagen-golf--gls--2-0l-l4-gas"
+},
+{
+"year": 2001,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GTI GLS",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2001-volkswagen-golf--gti-gls--1-8l-l4-gas"
+},
+{
+"year": 2001,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GTI GLX",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2001-volkswagen-golf--gti-glx--2-8l-v6-gas"
 },
 {
 "year": 2002,
