@@ -2567,6 +2567,15 @@
 {
 "year": 2016,
 "make": "Volkswagen",
+"model": "Golf R",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-golf-r--base--2-0l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
 "model": "e-Golf",
 "trim": "SE BATTERY EV (EV/BEV)",
 "engine": "",
@@ -2725,6 +2734,15 @@
 "engine": "1.8L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2017-volkswagen-golf-alltrack--sel--1-8l-l4-gas"
+},
+{
+"year": 2017,
+"make": "Volkswagen",
+"model": "Golf R",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2017-volkswagen-golf-r--base--2-0l-l4-gas"
 },
 {
 "year": 2017,
@@ -2941,6 +2959,15 @@
 "engine": "1.8L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2018-volkswagen-golf-alltrack--sel--1-8l-l4-gas"
+},
+{
+"year": 2018,
+"make": "Volkswagen",
+"model": "Golf R",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2018-volkswagen-golf-r--base--2-0l-l4-gas"
 },
 {
 "year": 2018,

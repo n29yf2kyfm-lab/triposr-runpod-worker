@@ -1350,6 +1350,42 @@
 "url": "https://porsche.oempartsonline.com/v-2012-porsche-911--turbo-s--3-8l-h6-gas"
 },
 {
+"year": 2012,
+"make": "Porsche",
+"model": "Boxster",
+"trim": "Base",
+"engine": "2.9L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2012-porsche-boxster--base--2-9l-h6-gas"
+},
+{
+"year": 2012,
+"make": "Porsche",
+"model": "Boxster",
+"trim": "S",
+"engine": "3.4L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2012-porsche-boxster--s--3-4l-h6-gas"
+},
+{
+"year": 2012,
+"make": "Porsche",
+"model": "Boxster",
+"trim": "S Black Edition",
+"engine": "3.4L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2012-porsche-boxster--s-black-edition--3-4l-h6-gas"
+},
+{
+"year": 2012,
+"make": "Porsche",
+"model": "Boxster",
+"trim": "Spyder",
+"engine": "3.4L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2012-porsche-boxster--spyder--3-4l-h6-gas"
+},
+{
 "year": 2013,
 "make": "Porsche",
 "model": "911",
@@ -1402,6 +1438,24 @@
 "engine": "3.8L H6 Gas",
 "market": "US",
 "url": "https://porsche.oempartsonline.com/v-2013-porsche-911--turbo-s--3-8l-h6-gas"
+},
+{
+"year": 2013,
+"make": "Porsche",
+"model": "Boxster",
+"trim": "Base",
+"engine": "2.7L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2013-porsche-boxster--base--2-7l-h6-gas"
+},
+{
+"year": 2013,
+"make": "Porsche",
+"model": "Boxster",
+"trim": "S",
+"engine": "3.4L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2013-porsche-boxster--s--3-4l-h6-gas"
 },
 {
 "year": 2014,
@@ -1492,6 +1546,24 @@
 "engine": "3.8L H6 Gas",
 "market": "US",
 "url": "https://porsche.oempartsonline.com/v-2014-porsche-911--turbo-s--3-8l-h6-gas"
+},
+{
+"year": 2014,
+"make": "Porsche",
+"model": "Boxster",
+"trim": "Base",
+"engine": "2.7L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2014-porsche-boxster--base--2-7l-h6-gas"
+},
+{
+"year": 2014,
+"make": "Porsche",
+"model": "Boxster",
+"trim": "S",
+"engine": "3.4L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2014-porsche-boxster--s--3-4l-h6-gas"
 },
 {
 "year": 2015,
