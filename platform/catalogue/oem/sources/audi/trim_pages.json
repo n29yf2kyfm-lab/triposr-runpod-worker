@@ -3049,6 +3049,12 @@
 "https://audi.oempartsonline.com/v-2013-audi-s6--base--4-0l-v8-gas"
 ]
 ],
+"v-2013-audi-s7": [
+[
+"Base 4.0L V8 - Gas",
+"https://audi.oempartsonline.com/v-2013-audi-s7--base--4-0l-v8-gas"
+]
+],
 "v-2014-audi-a4": [
 [
 "Base 2.0L L4 - Gas",
@@ -3305,6 +3311,12 @@
 [
 "Base 4.0L V8 - Gas",
 "https://audi.oempartsonline.com/v-2014-audi-s6--base--4-0l-v8-gas"
+]
+],
+"v-2014-audi-s7": [
+[
+"Base 4.0L V8 - Gas",
+"https://audi.oempartsonline.com/v-2014-audi-s7--base--4-0l-v8-gas"
 ]
 ],
 "v-2015-audi-a3": [
@@ -3657,6 +3669,12 @@
 "https://audi.oempartsonline.com/v-2015-audi-s6--base--4-0l-v8-gas"
 ]
 ],
+"v-2015-audi-s7": [
+[
+"Base 4.0L V8 - Gas",
+"https://audi.oempartsonline.com/v-2015-audi-s7--base--4-0l-v8-gas"
+]
+],
 "v-2016-audi-a3": [
 [
 "Premium 1.8L L4 - Gas",
@@ -3941,6 +3959,12 @@
 [
 "Prestige 4.0L V8 - Gas",
 "https://audi.oempartsonline.com/v-2016-audi-s6--prestige--4-0l-v8-gas"
+]
+],
+"v-2016-audi-s7": [
+[
+"Base 4.0L V8 - Gas",
+"https://audi.oempartsonline.com/v-2016-audi-s7--base--4-0l-v8-gas"
 ]
 ],
 "v-2017-audi-a3": [
@@ -5547,6 +5571,16 @@
 "https://audi.oempartsonline.com/v-2021-audi-s5-sportback--prestige--3-0l-v6-gas"
 ]
 ],
+"v-2021-audi-s6": [
+[
+"Premium Plus 2.9L V6 - Electric/Gas",
+"https://audi.oempartsonline.com/v-2021-audi-s6--premium-plus--2-9l-v6-electric-gas"
+],
+[
+"Prestige 2.9L V6 - Electric/Gas",
+"https://audi.oempartsonline.com/v-2021-audi-s6--prestige--2-9l-v6-electric-gas"
+]
+],
 "v-2022-audi-a3": [
 [
 "Premium 2.0L L4 - Electric/Gas",
@@ -5993,6 +6027,16 @@
 "https://audi.oempartsonline.com/v-2022-audi-s5-sportback--prestige--3-0l-v6-gas"
 ]
 ],
+"v-2022-audi-s6": [
+[
+"Premium Plus 2.9L V6 - Electric/Gas",
+"https://audi.oempartsonline.com/v-2022-audi-s6--premium-plus--2-9l-v6-electric-gas"
+],
+[
+"Prestige 2.9L V6 - Electric/Gas",
+"https://audi.oempartsonline.com/v-2022-audi-s6--prestige--2-9l-v6-electric-gas"
+]
+],
 "v-2023-audi-a3": [
 [
 "Premium 2.0L L4 - Electric/Gas",
@@ -6419,6 +6463,20 @@
 "https://audi.oempartsonline.com/v-2023-audi-s5-sportback--prestige--3-0l-v6-gas"
 ]
 ],
+"v-2023-audi-s6": [
+[
+"Premium 2.9L V6 - Electric/Gas",
+"https://audi.oempartsonline.com/v-2023-audi-s6--premium--2-9l-v6-electric-gas"
+],
+[
+"Premium Plus 2.9L V6 - Electric/Gas",
+"https://audi.oempartsonline.com/v-2023-audi-s6--premium-plus--2-9l-v6-electric-gas"
+],
+[
+"Prestige 2.9L V6 - Electric/Gas",
+"https://audi.oempartsonline.com/v-2023-audi-s6--prestige--2-9l-v6-electric-gas"
+]
+],
 "v-2024-audi-a3": [
 [
 "Premium 2.0L L4 - Electric/Gas",
@@ -6805,6 +6863,20 @@
 [
 "Prestige 3.0L V6 - Gas",
 "https://audi.oempartsonline.com/v-2024-audi-s5-sportback--prestige--3-0l-v6-gas"
+]
+],
+"v-2024-audi-s6": [
+[
+"Premium 2.9L V6 - Electric/Gas",
+"https://audi.oempartsonline.com/v-2024-audi-s6--premium--2-9l-v6-electric-gas"
+],
+[
+"Premium Plus 2.9L V6 - Electric/Gas",
+"https://audi.oempartsonline.com/v-2024-audi-s6--premium-plus--2-9l-v6-electric-gas"
+],
+[
+"Prestige 2.9L V6 - Electric/Gas",
+"https://audi.oempartsonline.com/v-2024-audi-s6--prestige--2-9l-v6-electric-gas"
 ]
 ],
 "v-2025-audi-a3-quattro": [
@@ -7235,6 +7307,34 @@
 [
 "Prestige 3.0L V6 - Gas",
 "https://audi.oempartsonline.com/v-2025-audi-s5-sportback--prestige--3-0l-v6-gas"
+]
+],
+"v-2025-audi-s6": [
+[
+"Premium 2.9L V6 - Electric/Gas",
+"https://audi.oempartsonline.com/v-2025-audi-s6--premium--2-9l-v6-electric-gas"
+],
+[
+"Premium Plus 2.9L V6 - Electric/Gas",
+"https://audi.oempartsonline.com/v-2025-audi-s6--premium-plus--2-9l-v6-electric-gas"
+],
+[
+"Prestige 2.9L V6 - Electric/Gas",
+"https://audi.oempartsonline.com/v-2025-audi-s6--prestige--2-9l-v6-electric-gas"
+]
+],
+"v-2025-audi-s6-sportback-e-tron": [
+[
+"Premium Electric",
+"https://audi.oempartsonline.com/v-2025-audi-s6-sportback-e-tron--premium--electric"
+],
+[
+"Premium Plus Electric",
+"https://audi.oempartsonline.com/v-2025-audi-s6-sportback-e-tron--premium-plus--electric"
+],
+[
+"Prestige Electric",
+"https://audi.oempartsonline.com/v-2025-audi-s6-sportback-e-tron--prestige--electric"
 ]
 ],
 "v-2026-audi-a3-quattro": [
