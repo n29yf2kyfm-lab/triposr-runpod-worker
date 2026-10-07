@@ -72,6 +72,15 @@
 "url": "https://audi.oempartsonline.com/v-1995-audi-a6-quattro--base--2-8l-v6-gas"
 },
 {
+"year": 1995,
+"make": "Audi",
+"model": "Cabriolet",
+"trim": "Base",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-1995-audi-cabriolet--base--2-8l-v6-gas"
+},
+{
 "year": 1996,
 "make": "Audi",
 "model": "A4",
@@ -124,6 +133,15 @@
 "engine": "2.8L V6 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-1996-audi-a6-quattro--base--2-8l-v6-gas"
+},
+{
+"year": 1996,
+"make": "Audi",
+"model": "Cabriolet",
+"trim": "Base",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-1996-audi-cabriolet--base--2-8l-v6-gas"
 },
 {
 "year": 1997,
@@ -214,6 +232,15 @@
 "engine": "4.2L V8 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-1997-audi-a8-quattro--base--4-2l-v8-gas"
+},
+{
+"year": 1997,
+"make": "Audi",
+"model": "Cabriolet",
+"trim": "Base",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-1997-audi-cabriolet--base--2-8l-v6-gas"
 },
 {
 "year": 1998,
@@ -313,6 +340,15 @@
 "engine": "4.2L V8 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-1998-audi-a8-quattro--base--4-2l-v8-gas"
+},
+{
+"year": 1998,
+"make": "Audi",
+"model": "Cabriolet",
+"trim": "Base",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-1998-audi-cabriolet--base--2-8l-v6-gas"
 },
 {
 "year": 1999,
@@ -774,6 +810,15 @@
 "url": "https://audi.oempartsonline.com/v-2002-audi-a8-quattro--l--4-2l-v8-gas"
 },
 {
+"year": 2002,
+"make": "Audi",
+"model": "Allroad Quattro",
+"trim": "Base",
+"engine": "2.7L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2002-audi-allroad-quattro--base--2-7l-v6-gas"
+},
+{
 "year": 2003,
 "make": "Audi",
 "model": "A4",
@@ -909,6 +954,15 @@
 "url": "https://audi.oempartsonline.com/v-2003-audi-a8-quattro--l--4-2l-v8-gas"
 },
 {
+"year": 2003,
+"make": "Audi",
+"model": "Allroad Quattro",
+"trim": "Base",
+"engine": "2.7L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2003-audi-allroad-quattro--base--2-7l-v6-gas"
+},
+{
 "year": 2004,
 "make": "Audi",
 "model": "A4",
@@ -1042,6 +1096,24 @@
 "engine": "4.2L V8 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2004-audi-a8-quattro--l--4-2l-v8-gas"
+},
+{
+"year": 2004,
+"make": "Audi",
+"model": "Allroad Quattro",
+"trim": "Base",
+"engine": "2.7L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2004-audi-allroad-quattro--base--2-7l-v6-gas"
+},
+{
+"year": 2004,
+"make": "Audi",
+"model": "Allroad Quattro",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2004-audi-allroad-quattro--base--4-2l-v8-gas"
 },
 {
 "year": 2005,
@@ -1213,6 +1285,24 @@
 "engine": "6.0L W12 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2005-audi-a8-quattro--l--6-0l-w12-gas"
+},
+{
+"year": 2005,
+"make": "Audi",
+"model": "Allroad Quattro",
+"trim": "Base",
+"engine": "2.7L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2005-audi-allroad-quattro--base--2-7l-v6-gas"
+},
+{
+"year": 2005,
+"make": "Audi",
+"model": "Allroad Quattro",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2005-audi-allroad-quattro--base--4-2l-v8-gas"
 },
 {
 "year": 2006,
@@ -5346,6 +5436,24 @@
 "url": "https://audi.oempartsonline.com/v-2022-audi-a8-quattro--l--3-0l-v6-electric-gas"
 },
 {
+"year": 2022,
+"make": "Audi",
+"model": "e-tron GT",
+"trim": "Premium Plus Electric",
+"engine": "",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2022-audi-e-tron-gt--premium-plus--electric"
+},
+{
+"year": 2022,
+"make": "Audi",
+"model": "e-tron GT",
+"trim": "Prestige Electric",
+"engine": "",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2022-audi-e-tron-gt--prestige--electric"
+},
+{
 "year": 2023,
 "make": "Audi",
 "model": "A3",
@@ -5587,6 +5695,24 @@
 "engine": "3.0L V6 ELECTRIC Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2023-audi-a8-quattro--l--3-0l-v6-electric-gas"
+},
+{
+"year": 2023,
+"make": "Audi",
+"model": "e-tron GT",
+"trim": "Premium Plus Electric",
+"engine": "",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2023-audi-e-tron-gt--premium-plus--electric"
+},
+{
+"year": 2023,
+"make": "Audi",
+"model": "e-tron GT",
+"trim": "Prestige Electric",
+"engine": "",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2023-audi-e-tron-gt--prestige--electric"
 },
 {
 "year": 2024,

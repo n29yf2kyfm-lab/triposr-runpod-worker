@@ -1094,6 +1094,12 @@
 "https://audi.oempartsonline.com/v-1995-audi-a6-quattro--base--2-8l-v6-gas"
 ]
 ],
+"v-1995-audi-cabriolet": [
+[
+"Base 2.8L V6 - Gas",
+"https://audi.oempartsonline.com/v-1995-audi-cabriolet--base--2-8l-v6-gas"
+]
+],
 "v-1996-audi-a4": [
 [
 "Base 2.8L V6 - Gas",
@@ -1124,6 +1130,12 @@
 [
 "Base 2.8L V6 - Gas",
 "https://audi.oempartsonline.com/v-1996-audi-a6-quattro--base--2-8l-v6-gas"
+]
+],
+"v-1996-audi-cabriolet": [
+[
+"Base 2.8L V6 - Gas",
+"https://audi.oempartsonline.com/v-1996-audi-cabriolet--base--2-8l-v6-gas"
 ]
 ],
 "v-1997-audi-a4": [
@@ -1176,6 +1188,12 @@
 [
 "Base 4.2L V8 - Gas",
 "https://audi.oempartsonline.com/v-1997-audi-a8-quattro--base--4-2l-v8-gas"
+]
+],
+"v-1997-audi-cabriolet": [
+[
+"Base 2.8L V6 - Gas",
+"https://audi.oempartsonline.com/v-1997-audi-cabriolet--base--2-8l-v6-gas"
 ]
 ],
 "v-1998-audi-a4": [
@@ -1232,6 +1250,12 @@
 [
 "Base 4.2L V8 - Gas",
 "https://audi.oempartsonline.com/v-1998-audi-a8-quattro--base--4-2l-v8-gas"
+]
+],
+"v-1998-audi-cabriolet": [
+[
+"Base 2.8L V6 - Gas",
+"https://audi.oempartsonline.com/v-1998-audi-cabriolet--base--2-8l-v6-gas"
 ]
 ],
 "v-1999-audi-a4": [
@@ -1482,6 +1506,12 @@
 "https://audi.oempartsonline.com/v-2002-audi-a8-quattro--l--4-2l-v8-gas"
 ]
 ],
+"v-2002-audi-allroad-quattro": [
+[
+"Base 2.7L V6 - Gas",
+"https://audi.oempartsonline.com/v-2002-audi-allroad-quattro--base--2-7l-v6-gas"
+]
+],
 "v-2003-audi-a4": [
 [
 "Base 1.8L L4 - Gas",
@@ -1552,6 +1582,12 @@
 "https://audi.oempartsonline.com/v-2003-audi-a8-quattro--l--4-2l-v8-gas"
 ]
 ],
+"v-2003-audi-allroad-quattro": [
+[
+"Base 2.7L V6 - Gas",
+"https://audi.oempartsonline.com/v-2003-audi-allroad-quattro--base--2-7l-v6-gas"
+]
+],
 "v-2004-audi-a4": [
 [
 "Base 1.8L L4 - Gas",
@@ -1620,6 +1656,16 @@
 [
 "L 4.2L V8 - Gas",
 "https://audi.oempartsonline.com/v-2004-audi-a8-quattro--l--4-2l-v8-gas"
+]
+],
+"v-2004-audi-allroad-quattro": [
+[
+"Base 2.7L V6 - Gas",
+"https://audi.oempartsonline.com/v-2004-audi-allroad-quattro--base--2-7l-v6-gas"
+],
+[
+"Base 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2004-audi-allroad-quattro--base--4-2l-v8-gas"
 ]
 ],
 "v-2005-audi-a4": [
@@ -1704,6 +1750,16 @@
 [
 "L 6.0L W12 - Gas",
 "https://audi.oempartsonline.com/v-2005-audi-a8-quattro--l--6-0l-w12-gas"
+]
+],
+"v-2005-audi-allroad-quattro": [
+[
+"Base 2.7L V6 - Gas",
+"https://audi.oempartsonline.com/v-2005-audi-allroad-quattro--base--2-7l-v6-gas"
+],
+[
+"Base 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2005-audi-allroad-quattro--base--4-2l-v8-gas"
 ]
 ],
 "v-2006-audi-a3": [
@@ -3863,6 +3919,16 @@
 "https://audi.oempartsonline.com/v-2022-audi-a8-quattro--l--3-0l-v6-electric-gas"
 ]
 ],
+"v-2022-audi-e-tron-gt": [
+[
+"Premium Plus Electric",
+"https://audi.oempartsonline.com/v-2022-audi-e-tron-gt--premium-plus--electric"
+],
+[
+"Prestige Electric",
+"https://audi.oempartsonline.com/v-2022-audi-e-tron-gt--prestige--electric"
+]
+],
 "v-2023-audi-a3": [
 [
 "Premium 2.0L L4 - Electric/Gas",
@@ -3989,6 +4055,16 @@
 [
 "L 3.0L V6 ELECTRIC - Gas",
 "https://audi.oempartsonline.com/v-2023-audi-a8-quattro--l--3-0l-v6-electric-gas"
+]
+],
+"v-2023-audi-e-tron-gt": [
+[
+"Premium Plus Electric",
+"https://audi.oempartsonline.com/v-2023-audi-e-tron-gt--premium-plus--electric"
+],
+[
+"Prestige Electric",
+"https://audi.oempartsonline.com/v-2023-audi-e-tron-gt--prestige--electric"
 ]
 ],
 "v-2024-audi-a3": [
