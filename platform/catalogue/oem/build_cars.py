@@ -28,13 +28,19 @@ GEN = re.compile(r'\s+(?:Mk\s?\d+|\([^)]*\)|[IVX]+|[A-Z]{1,2}\d{1,2}|\d(?:st|nd|
 
 
 def model_of(row):
+    """Model name from the article title: drop the make, then generation
+    markers ("Mk8", "(B8)", "II") but never the whole name ("Audi A4" stays A4)."""
     t = row['wikipedia_title']
-    for _ in range(3):
-        t = GEN.sub('', t)
-    brand = MAKE.get(row['brand'], row['brand'])
-    for prefix in (brand + ' ', 'Volkswagen ', 'Škoda ', 'Skoda ', 'SEAT ', 'Cupra '):
+    for prefix in ('Volkswagen ', 'VW ', 'Audi ', 'Škoda ', 'Skoda ', 'SEAT ', 'Seat ', 'Cupra ', 'CUPRA ',
+                   'Porsche ', 'Bentley ', 'Lamborghini '):
         if t.startswith(prefix):
-            return t[len(prefix):].strip() or t
+            t = t[len(prefix):]
+            break
+    for _ in range(3):
+        u = GEN.sub('', t).strip()
+        if not u or u == t:
+            break
+        t = u
     return t
 
 

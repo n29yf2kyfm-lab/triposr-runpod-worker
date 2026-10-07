@@ -1,97 +1,204 @@
 [
 {
 "brand": "Volkswagen",
-"model": "Volkswagen Corrado",
-"generation": "Volkswagen Corrado",
-"code": "",
+"model": "Volkswagen Amarok",
+"generation": "Volkswagen Amarok First generation",
+"code": "Typ 2F",
 "years": [
-1988,
-1995
+2010,
+2026
 ],
-"production": "1988–1995",
-"body_styles": [
-"3-door 2+2 coupé"
-],
-"image": "1993 Volkswagen Corrado SLC in Black, front left.jpg",
-"wikipedia_title": "Volkswagen Corrado"
+"production": "2010–present (Argentina) 2010–2020 (Europe)",
+"body_styles": [],
+"image": "2011 Volkswagen Amarok Highline 4MOTION Diesel 2.0.jpg",
+"wikipedia_title": "Volkswagen Amarok"
 },
 {
 "brand": "Volkswagen",
-"model": "Volkswagen Gol",
-"generation": "First generation (G1)",
-"code": "",
+"model": "Volkswagen Amarok",
+"generation": "Volkswagen Amarok Second generation",
+"code": "Typ NF",
 "years": [
-1980,
-1996
+2022,
+2026
 ],
-"production": "1980–1996",
-"body_styles": [
-"3-door hatchback 3-door station wagon 2/4-door sedan 2-door coupé utility"
-],
-"image": "14-01-18-autostadt-zeithaus-RalfR-152.jpg",
-"wikipedia_title": "Volkswagen Gol"
+"production": "2022–present",
+"body_styles": [],
+"image": "Volkswagen Amarok Mk2 1X7A0808.jpg",
+"wikipedia_title": "Volkswagen Amarok"
 },
 {
 "brand": "Volkswagen",
-"model": "Volkswagen Gol",
-"generation": "Second generation (G2/G3/G4)",
+"model": "Volkswagen Arteon",
+"generation": "Volkswagen Arteon",
+"code": "3H7",
+"years": [
+2017,
+2026
+],
+"production": "2017–2023 (Liftback) 2020–2024 (Shooting Brake) 2019–present (China)",
+"body_styles": [
+"5-door liftback 5-door shooting brake"
+],
+"image": "2018 Volkswagen Arteon 2.0.jpg",
+"wikipedia_title": "Volkswagen Arteon"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Atlas",
+"generation": "Volkswagen Atlas First generation",
+"code": "CA1",
+"years": [
+2017,
+2026
+],
+"production": "2017–present",
+"body_styles": [],
+"image": "2018 Volkswagen Atlas SE, front 3.24.23.jpg",
+"wikipedia_title": "Volkswagen Atlas"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Atlas",
+"generation": "Volkswagen Atlas Second generation",
 "code": "",
 "years": [
-1994,
+2025,
+2026
+],
+"production": "2025–present",
+"body_styles": [],
+"image": "Volkswagen Atlas R-Line (2026) (55212776047).jpg",
+"wikipedia_title": "Volkswagen Atlas"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Beetle (A5)",
+"generation": "Volkswagen Beetle (A5)",
+"code": "",
+"years": [
+2011,
+2019
+],
+"production": "July 2011 – July 2019",
+"body_styles": [
+"3-door hatchback 2-door cabriolet"
+],
+"image": "VW Beetle 1.4 TSI Sport – Frontansicht, 3. März 2013, Düsseldorf.jpg",
+"wikipedia_title": "Volkswagen Beetle (A5)"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Bora",
+"generation": "Volkswagen Bora (A4)",
+"code": "1J",
+"years": [
+1999,
 2015
 ],
-"production": "1994–2015",
+"production": "1999–2006 (Europe) 1999–2015 (Mexico) 2001–2008 (China)",
 "body_styles": [
-"3/5-door hatchback 3/5-door station wagon 2-door coupé utility"
+"4-door notchback sedan",
+"saloon 5-door wagon",
+"estate"
 ],
-"image": "Volkswagen Gol 2da geração.jpg",
-"wikipedia_title": "Volkswagen Gol"
+"image": "2003 Volkswagen Bora S TDi 1.9 Front.jpg",
+"wikipedia_title": "Volkswagen Bora"
 },
 {
 "brand": "Volkswagen",
-"model": "Ford Verona",
-"generation": "Ford Verona/Volkswagen Apollo",
+"model": "Volkswagen Bora (China)",
+"generation": "Volkswagen Bora",
 "code": "",
 "years": [
-1989,
-1996
+2001,
+2026
 ],
-"production": "1989–1992 1993–1996",
+"production": "2001–present",
 "body_styles": [],
-"image": "Verona 1995.jpg",
-"wikipedia_title": "Ford Verona"
+"image": "2019 FAW-Volkswagen Bora.jpg",
+"wikipedia_title": "Volkswagen Bora (China)"
 },
 {
 "brand": "Volkswagen",
-"model": "Ford Verona",
-"generation": "Second generation",
+"model": "Volkswagen Bora (China)",
+"generation": "Volkswagen Bora (China) First generation",
 "code": "",
 "years": [
-1993,
-1996
+2001,
+2008
 ],
-"production": "1993–1996",
+"production": "2001–2008",
+"body_styles": [
+"4-door notchback sedan",
+"saloon 5-door hatchback"
+],
+"image": "Volkswagen Bora CN Xiamen 01 2022-06-04.jpg",
+"wikipedia_title": "Volkswagen Bora (China)"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Bora (China)",
+"generation": "Volkswagen Bora (China) Second generation",
+"code": "",
+"years": [
+2008,
+2015
+],
+"production": "2008–2015",
 "body_styles": [
 "4-door sedan"
 ],
-"image": "Ford Verona Geração 2.jpg",
-"wikipedia_title": "Ford Verona"
+"image": "2010 FAW-Volkswagen Bora (pre-facelift, front).jpg",
+"wikipedia_title": "Volkswagen Bora (China)"
 },
 {
 "brand": "Volkswagen",
-"model": "Volkswagen Fox",
-"generation": "Volkswagen Fox",
+"model": "Volkswagen Bora (China)",
+"generation": "Volkswagen Bora (China) Third generation",
 "code": "",
 "years": [
-2003,
-2021
+2015,
+2022
 ],
-"production": "2003–2021 2005–2011 (Europe) 2006–2018 (SpaceFox, SpaceCross and SportVan) 2006–2019 (Suran, Argentina)",
+"production": "2015–2022",
 "body_styles": [
-"3-door hatchback 5-door hatchback 5-door estate (Suran)"
+"4-door sedan 5-door wagon"
 ],
-"image": "Volkswagen Fox 2015 in Punta del Este 01.JPG",
-"wikipedia_title": "Volkswagen Fox"
+"image": "Volkswagen Bora CN III China 2016-04-13.jpg",
+"wikipedia_title": "Volkswagen Bora (China)"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Bora (China)",
+"generation": "Volkswagen Bora (China) Fourth generation",
+"code": "",
+"years": [
+2018,
+2026
+],
+"production": "2018–present",
+"body_styles": [
+"4-door sedan"
+],
+"image": "VOLKSWAGEN BORA (CHINA) 4th GENERATION (40).jpg",
+"wikipedia_title": "Volkswagen Bora (China)"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen CC",
+"generation": "Volkswagen CC",
+"code": "",
+"years": [
+2008,
+2018
+],
+"production": "2008&ndash;2016 2010&ndash;2018 (China)",
+"body_styles": [
+"4-door sedan"
+],
+"image": "VW Passat CC 2.0 TDI DSG Reflexsilber.JPG",
+"wikipedia_title": "Volkswagen CC"
 },
 {
 "brand": "Volkswagen",
@@ -111,6 +218,22 @@
 },
 {
 "brand": "Volkswagen",
+"model": "Volkswagen Corrado",
+"generation": "Volkswagen Corrado",
+"code": "",
+"years": [
+1988,
+1995
+],
+"production": "1988–1995",
+"body_styles": [
+"3-door 2+2 coupé"
+],
+"image": "1993 Volkswagen Corrado SLC in Black, front left.jpg",
+"wikipedia_title": "Volkswagen Corrado"
+},
+{
+"brand": "Volkswagen",
 "model": "Volkswagen Eos",
 "generation": "Volkswagen Eos",
 "code": "",
@@ -127,67 +250,67 @@
 },
 {
 "brand": "Volkswagen",
-"model": "Volkswagen Golf Plus",
-"generation": "Volkswagen Golf Plus",
+"model": "Volkswagen Fox",
+"generation": "Volkswagen Fox",
 "code": "",
-"years": [
-2004,
-2014
-],
-"production": "2004–2014",
-"body_styles": [
-"5-door hatchback"
-],
-"image": "2005 Volkswagen Golf Plus SE 1.6.jpg",
-"wikipedia_title": "Volkswagen Golf Plus"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Crafter",
-"generation": "Volkswagen Crafter",
-"code": "",
-"years": [
-2006,
-2026
-],
-"production": "2006–present",
-"body_styles": [
-"Panel van Minibus Double cab Cab chassis"
-],
-"image": "2017 Volkswagen Crafter CR35 Trendline TD 2.0 Front.jpg",
-"wikipedia_title": "Volkswagen Crafter"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Golf Mk5",
-"generation": "Volkswagen Golf Mk5",
-"code": "1K",
 "years": [
 2003,
-2009
+2021
 ],
-"production": "August 2003 – 2009 April 2007–2009 (wagon)",
+"production": "2003–2021 2005–2011 (Europe) 2006–2018 (SpaceFox, SpaceCross and SportVan) 2006–2019 (Suran, Argentina)",
 "body_styles": [
-"3-door hatchback 5-door hatchback 5-door estate/wagon"
+"3-door hatchback 5-door hatchback 5-door estate (Suran)"
 ],
-"image": "2007 Volkswagen Golf (1K MY07) Sportline 2.0 TDI 5-door hatchback (2010-07-05).jpg",
-"wikipedia_title": "Volkswagen Golf Mk5"
+"image": "Volkswagen Fox 2015 in Punta del Este 01.JPG",
+"wikipedia_title": "Volkswagen Fox"
 },
 {
 "brand": "Volkswagen",
-"model": "Volkswagen Golf Mk4",
-"generation": "Volkswagen Golf Mk4 (1J)",
+"model": "Volkswagen Gol",
+"generation": "Volkswagen Gol First generation (G1)",
 "code": "",
 "years": [
-1997,
-2014
+1980,
+1996
 ],
-"production": "October 1997–2006 (Europe) 1999–2014 (Brazil) 2003–2010 (China)",
+"production": "1980–1996",
 "body_styles": [
-"3-door hatchback 5-door hatchback 5-door station wagon"
+"3-door hatchback 3-door station wagon 2/4-door sedan 2-door coupé utility"
 ],
-"image": "2003 Volkswagen Golf Match - 1390cc 1.4 (75PS) Petrol - Reflex Silver - 02-2025, Front.jpg",
-"wikipedia_title": "Volkswagen Golf Mk4"
+"image": "14-01-18-autostadt-zeithaus-RalfR-152.jpg",
+"wikipedia_title": "Volkswagen Gol"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Gol",
+"generation": "Volkswagen Gol Second generation (G2/G3/G4)",
+"code": "",
+"years": [
+1994,
+2015
+],
+"production": "1994–2015",
+"body_styles": [
+"3/5-door hatchback 3/5-door station wagon 2-door coupé utility"
+],
+"image": "Volkswagen Gol 2da geração.jpg",
+"wikipedia_title": "Volkswagen Gol"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Golf Mk1",
+"generation": "Volkswagen Golf Mk1 (Type 17)",
+"code": "",
+"years": [
+1974,
+2009
+],
+"production": "May 1974 – September 1983 1976–1985 (Yugoslavia) 1979–April 1993 (Cabriolet) 1978–2009 (South Africa) 1977–1987 (Mexico)",
+"body_styles": [
+"3/5-door hatchback 2-door pickup truck 2-door convertible"
+],
+"image": "Volkswagen Golf 1-2 (cropped).jpg",
+"wikipedia_title": "Volkswagen Golf Mk1"
 },
 {
 "brand": "Volkswagen",
@@ -208,98 +331,389 @@
 },
 {
 "brand": "Volkswagen",
-"model": "Volkswagen Golf Mk1",
-"generation": "Volkswagen Golf Mk1 (Type 17)",
+"model": "Volkswagen Golf Mk4",
+"generation": "Volkswagen Golf Mk4 (1J)",
 "code": "",
 "years": [
-1974,
-2009
+1997,
+2014
 ],
-"production": "May 1974 – September 1983 1976–1985 (Yugoslavia) 1979–April 1993 (Cabriolet) 1978–2009 (South Africa) 1977–1987 (Mexico)",
+"production": "October 1997–2006 (Europe) 1999–2014 (Brazil) 2003–2010 (China)",
 "body_styles": [
-"3/5-door hatchback 2-door pickup truck 2-door convertible"
+"3-door hatchback 5-door hatchback 5-door station wagon"
 ],
-"image": "Volkswagen Golf 1-2 (cropped).jpg",
-"wikipedia_title": "Volkswagen Golf Mk1"
+"image": "2003 Volkswagen Golf Match - 1390cc 1.4 (75PS) Petrol - Reflex Silver - 02-2025, Front.jpg",
+"wikipedia_title": "Volkswagen Golf Mk4"
 },
 {
 "brand": "Volkswagen",
-"model": "Volkswagen CC",
-"generation": "Volkswagen CC",
-"code": "",
+"model": "Volkswagen Golf Mk5",
+"generation": "Volkswagen Golf Mk5",
+"code": "1K",
+"years": [
+2003,
+2009
+],
+"production": "August 2003 – 2009 April 2007–2009 (wagon)",
+"body_styles": [
+"3-door hatchback 5-door hatchback 5-door estate/wagon"
+],
+"image": "2007 Volkswagen Golf (1K MY07) Sportline 2.0 TDI 5-door hatchback (2010-07-05).jpg",
+"wikipedia_title": "Volkswagen Golf Mk5"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Golf Mk6",
+"generation": "Volkswagen Golf Mk6",
+"code": "5K",
 "years": [
 2008,
-2018
+2016
 ],
-"production": "2008&ndash;2016 2010&ndash;2018 (China)",
+"production": "2008–2013 2009–2013 (wagon) 2011–2016 (cabriolet)",
+"body_styles": [
+"3/5-door hatchback 5-door estate/wagon 2-door cabriolet"
+],
+"image": "VW Golf (VI) front 20110115.jpg",
+"wikipedia_title": "Volkswagen Golf Mk6"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Golf Mk7",
+"generation": "Volkswagen Golf Mk7",
+"code": "",
+"years": [
+2012,
+2021
+],
+"production": "2012–2020 (Europe) 2013–2020 (China) 2015–2020 (Brazil) 2014–2021 (Mexico)",
+"body_styles": [],
+"image": "2013 Volkswagen Golf SE BlueMotion Technology 1.4 Front.jpg",
+"wikipedia_title": "Volkswagen Golf Mk7"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Golf Mk8",
+"generation": "Volkswagen Golf Mk8",
+"code": "",
+"years": [
+2019,
+2026
+],
+"production": "2019–present",
+"body_styles": [],
+"image": "2020 Volkswagen Golf Style 1.5 Front.jpg",
+"wikipedia_title": "Volkswagen Golf Mk8"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Golf Plus",
+"generation": "Volkswagen Golf Plus",
+"code": "",
+"years": [
+2004,
+2014
+],
+"production": "2004–2014",
+"body_styles": [
+"5-door hatchback"
+],
+"image": "2005 Volkswagen Golf Plus SE 1.6.jpg",
+"wikipedia_title": "Volkswagen Golf Plus"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Golf Sportsvan",
+"generation": "Volkswagen Golf Sportsvan",
+"code": "",
+"years": [
+2014,
+2020
+],
+"production": "2014–2020 (Europe) 2016–2020 (China)",
+"body_styles": [
+"5-door MPV"
+],
+"image": "VW Golf Sportsvan 1.4 TSI BlueMotion Technology Highline – Frontansicht, 16. August 2014, Essen.jpg",
+"wikipedia_title": "Volkswagen Golf Sportsvan"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen ID. Aura T6",
+"generation": "Volkswagen ID. Aura T6",
+"code": "",
+"years": [
+2026,
+2026
+],
+"production": "2026–present",
+"body_styles": [
+"5-door SUV"
+],
+"image": "Volkswagen ID. Aura T6 001.jpg",
+"wikipedia_title": "Volkswagen ID. Aura T6"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen ID. Cross",
+"generation": "Volkswagen ID. Cross",
+"code": "",
+"years": [
+2026,
+2026
+],
+"production": "September 2026 – present",
+"body_styles": [
+"5-door crossover SUV"
+],
+"image": "Volkswagen ID. Cross IAA 2025 DSC 1831.jpg",
+"wikipedia_title": "Volkswagen ID. Cross"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen ID. Era 5S",
+"generation": "Volkswagen ID. Era 5S",
+"code": "",
+"years": [
+2026,
+2026
+],
+"production": "July 2026 – present",
 "body_styles": [
 "4-door sedan"
 ],
-"image": "VW Passat CC 2.0 TDI DSG Reflexsilber.JPG",
-"wikipedia_title": "Volkswagen CC"
+"image": "Volkswagen ID. Era 5S 003.jpg",
+"wikipedia_title": "Volkswagen ID. Era 5S"
 },
 {
 "brand": "Volkswagen",
-"model": "Volkswagen Amarok",
-"generation": "Volkswagen Amarok",
+"model": "Volkswagen ID. Era 9X",
+"generation": "Volkswagen ID. Era 9X",
 "code": "",
 "years": [
-2010,
+2026,
 2026
 ],
-"production": "2010–present",
+"production": "March 2026 – present",
 "body_styles": [
-"2-door single cab 4-door double cab"
+"5-door crossover SUV"
 ],
-"image": "VW Amarok 3.0 TDI 4Motion Style (II) – f 05072025.jpg",
-"wikipedia_title": "Volkswagen Amarok"
+"image": "Volkswagen ID. Era 9X 006.jpg",
+"wikipedia_title": "Volkswagen ID. Era 9X"
 },
 {
 "brand": "Volkswagen",
-"model": "Volkswagen Amarok",
-"generation": "First generation",
-"code": "Typ 2F",
-"years": [
-2010,
-2026
-],
-"production": "2010–present (Argentina) 2010–2020 (Europe)",
-"body_styles": [],
-"image": "2011 Volkswagen Amarok Highline 4MOTION Diesel 2.0.jpg",
-"wikipedia_title": "Volkswagen Amarok"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Amarok",
-"generation": "Second generation",
-"code": "Typ NF",
-"years": [
-2022,
-2026
-],
-"production": "2022–present",
-"body_styles": [],
-"image": "Volkswagen Amarok Mk2 1X7A0808.jpg",
-"wikipedia_title": "Volkswagen Amarok"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Lavida",
-"generation": "Volkswagen Lavida",
+"model": "Volkswagen ID. Life",
+"generation": "Volkswagen ID. Life",
 "code": "",
 "years": [
-2008,
+2021,
+2021
+],
+"production": "2021",
+"body_styles": [
+"5-door SUV"
+],
+"image": "Volkswagen ID.Life Concept IAA 2021 1X7A0075.jpg",
+"wikipedia_title": "Volkswagen ID. Life"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen ID. Polo",
+"generation": "Volkswagen ID. Polo Volkswagen",
+"code": "",
+"years": [
+2026,
 2026
 ],
-"production": "2008–present",
+"production": "June 2026 – present",
+"body_styles": [
+"5-door hatchback"
+],
+"image": "Volkswagen ID.Polo IMG 8361.jpg",
+"wikipedia_title": "Volkswagen ID. Polo"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen ID. Unyx 07",
+"generation": "Volkswagen ID. Unyx 07",
+"code": "",
+"years": [
+2026,
+2026
+],
+"production": "January 2026 – present",
+"body_styles": [
+"4-door liftback sedan"
+],
+"image": "Volkswagen ID. UNYX 07 in Jiading, Shanghai 20260515-A.jpg",
+"wikipedia_title": "Volkswagen ID. Unyx 07"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen ID. Unyx 08",
+"generation": "Volkswagen ID. Unyx 08",
+"code": "",
+"years": [
+2026,
+2026
+],
+"production": "March 2026 – present",
+"body_styles": [
+"5-door crossover SUV"
+],
+"image": "Volkswagen ID. Unyx 08 003.jpg",
+"wikipedia_title": "Volkswagen ID. Unyx 08"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen ID. Unyx 09",
+"generation": "Volkswagen ID. Unyx 09",
+"code": "",
+"years": [
+2026,
+2026
+],
+"production": "2026 (to commence)",
+"body_styles": [
+"4-door sedan"
+],
+"image": "",
+"wikipedia_title": "Volkswagen ID. Unyx 09"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Jetta (A1)",
+"generation": "Volkswagen Jetta (Mk1, Typ 16)",
+"code": "",
+"years": [
+1979,
+1999
+],
+"production": "August 1979 – February 1984 571,030 built 1982–1999 (South Africa)",
+"body_styles": [
+"4-door notchback sedan",
+"saloon 2-door notchback sedan",
+"saloon"
+],
+"image": "1983 Volkswagen Jetta 1.3 C front.jpg",
+"wikipedia_title": "Volkswagen Jetta (A1)"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Jetta (A2)",
+"generation": "Volkswagen Jetta (A2, Typ 1G)",
+"code": "",
+"years": [
+1984,
+2013
+],
+"production": "1984–1992 1991–2013 (China) 1,708,390 built",
+"body_styles": [
+"4-door notchback sedan /saloon 2-door notchback sedan",
+"saloon"
+],
+"image": "JettaMkII.JPG",
+"wikipedia_title": "Volkswagen Jetta (A2)"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Jetta (A5)",
+"generation": "Volkswagen Jetta (A5)",
+"code": "1K",
+"years": [
+2005,
+2011
+],
+"production": "August 2005–2010 2006–2011 (China)",
+"body_styles": [
+"4-door sedan 5-door station wagon (SportWagen)"
+],
+"image": "2007 Volkswagen Jetta SE TDi 105 Automatic 1.9 (K 29).jpg",
+"wikipedia_title": "Volkswagen Jetta (A5)"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Jetta (A6)",
+"generation": "Volkswagen Jetta (A6)",
+"code": "Typ 1B",
+"years": [
+2010,
+2019
+],
+"production": "2010–2019 (Mexico) 2012–2019 (China) 2013–2018 (Russia)",
+"body_styles": [
+"4-door sedan"
+],
+"image": "VW Jetta 1.6 TDI Highline (VI) – Frontansicht, 25. August 2013, Düsseldorf.jpg",
+"wikipedia_title": "Volkswagen Jetta (A6)"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Jetta (A7)",
+"generation": "Volkswagen Jetta (A7)",
+"code": "",
+"years": [
+2018,
+2026
+],
+"production": "2018–present (Americas) 2019–present (China)",
+"body_styles": [
+"4-door sedan"
+],
+"image": "2019 Volkswagen Jetta S 1.4T R-Line in Habañero Orange Metallic, front right.jpg",
+"wikipedia_title": "Volkswagen Jetta (A7)"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Jetta (China)",
+"generation": "Volkswagen Jetta King 大众捷达王",
+"code": "",
+"years": [
+1997,
+2010
+],
+"production": "1997–2010",
+"body_styles": [
+"4-door sedan"
+],
+"image": "2004 FAW-Volkswagen Jetta (front).jpg",
+"wikipedia_title": "Volkswagen Jetta (China)"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Jetta (China)",
+"generation": "Volkswagen Jetta Pioneer 大众捷达先锋",
+"code": "",
+"years": [
+2010,
+2013
+],
+"production": "2010–2013",
+"body_styles": [
+"4-door sedan"
+],
+"image": "FAW-Volkswagen Jetta Facelift front 8.16.18.jpg",
+"wikipedia_title": "Volkswagen Jetta (China)"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Lamando",
+"generation": "Volkswagen Lamando First generation",
+"code": "",
+"years": [
+2014,
+2022
+],
+"production": "2014–2022",
 "body_styles": [],
-"image": "2019 SAIC-Volkswagen Lavida.jpg",
-"wikipedia_title": "Volkswagen Lavida"
+"image": "2017 Volkswagen Lamando GTS 01 in Bengbu Anhui China (cropped).jpg",
+"wikipedia_title": "Volkswagen Lamando"
 },
 {
 "brand": "Volkswagen",
 "model": "Volkswagen Lavida",
-"generation": "First generation",
+"generation": "Volkswagen Lavida First generation",
 "code": "",
 "years": [
 2008,
@@ -315,7 +729,7 @@
 {
 "brand": "Volkswagen",
 "model": "Volkswagen Lavida",
-"generation": "Second generation",
+"generation": "Volkswagen Lavida Second generation",
 "code": "",
 "years": [
 2012,
@@ -331,7 +745,7 @@
 {
 "brand": "Volkswagen",
 "model": "Volkswagen Lavida",
-"generation": "Third generation",
+"generation": "Volkswagen Lavida Third generation",
 "code": "",
 "years": [
 2018,
@@ -362,445 +776,6 @@
 },
 {
 "brand": "Volkswagen",
-"model": "Volkswagen Golf Mk6",
-"generation": "Volkswagen Golf Mk6",
-"code": "5K",
-"years": [
-2008,
-2016
-],
-"production": "2008–2013 2009–2013 (wagon) 2011–2016 (cabriolet)",
-"body_styles": [
-"3/5-door hatchback 5-door estate/wagon 2-door cabriolet"
-],
-"image": "VW Golf (VI) front 20110115.jpg",
-"wikipedia_title": "Volkswagen Golf Mk6"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Concept BlueSport",
-"generation": "Volkswagen Concept BlueSport",
-"code": "",
-"years": [
-2009,
-2009
-],
-"production": "2009",
-"body_styles": [
-"2-door roadster"
-],
-"image": "Volkswagen Bluesport--DC.jpg",
-"wikipedia_title": "Volkswagen Concept BlueSport"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Transporter",
-"generation": "Volkswagen Transporter",
-"code": "",
-"years": [
-1949,
-2026
-],
-"production": "November 1949 – present",
-"body_styles": [],
-"image": "2017 Volkswagen Transporter BlueMotion.jpg",
-"wikipedia_title": "Volkswagen Transporter"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Beetle (A5)",
-"generation": "Volkswagen Beetle (A5)",
-"code": "",
-"years": [
-2011,
-2019
-],
-"production": "July 2011 – July 2019",
-"body_styles": [
-"3-door hatchback 2-door cabriolet"
-],
-"image": "VW Beetle 1.4 TSI Sport – Frontansicht, 3. März 2013, Düsseldorf.jpg",
-"wikipedia_title": "Volkswagen Beetle (A5)"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Golf Mk7",
-"generation": "Volkswagen Golf Mk7",
-"code": "",
-"years": [
-2012,
-2021
-],
-"production": "2012–2020 (Europe) 2013–2020 (China) 2015–2020 (Brazil) 2014–2021 (Mexico)",
-"body_styles": [],
-"image": "2013 Volkswagen Golf SE BlueMotion Technology 1.4 Front.jpg",
-"wikipedia_title": "Volkswagen Golf Mk7"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Golf Sportsvan",
-"generation": "Volkswagen Golf Sportsvan",
-"code": "",
-"years": [
-2014,
-2020
-],
-"production": "2014–2020 (Europe) 2016–2020 (China)",
-"body_styles": [
-"5-door MPV"
-],
-"image": "VW Golf Sportsvan 1.4 TSI BlueMotion Technology Highline – Frontansicht, 16. August 2014, Essen.jpg",
-"wikipedia_title": "Volkswagen Golf Sportsvan"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Atlas",
-"generation": "Volkswagen Atlas",
-"code": "",
-"years": [
-2017,
-2026
-],
-"production": "2017–present",
-"body_styles": [
-"5-door SUV"
-],
-"image": "2024 Volkswagen Atlas IMG 2146.jpg",
-"wikipedia_title": "Volkswagen Atlas"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Atlas",
-"generation": "First generation",
-"code": "CA1",
-"years": [
-2017,
-2026
-],
-"production": "2017–present",
-"body_styles": [],
-"image": "2018 Volkswagen Atlas SE, front 3.24.23.jpg",
-"wikipedia_title": "Volkswagen Atlas"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Atlas",
-"generation": "Second generation",
-"code": "",
-"years": [
-2025,
-2026
-],
-"production": "2025–present",
-"body_styles": [],
-"image": "Volkswagen Atlas R-Line (2026) (55212776047).jpg",
-"wikipedia_title": "Volkswagen Atlas"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Arteon",
-"generation": "Volkswagen Arteon",
-"code": "3H7",
-"years": [
-2017,
-2026
-],
-"production": "2017–2023 (Liftback) 2020–2024 (Shooting Brake) 2019–present (China)",
-"body_styles": [
-"5-door liftback 5-door shooting brake"
-],
-"image": "2018 Volkswagen Arteon 2.0.jpg",
-"wikipedia_title": "Volkswagen Arteon"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Bora (China)",
-"generation": "Volkswagen Bora",
-"code": "",
-"years": [
-2001,
-2026
-],
-"production": "2001–present",
-"body_styles": [],
-"image": "2019 FAW-Volkswagen Bora.jpg",
-"wikipedia_title": "Volkswagen Bora (China)"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Bora (China)",
-"generation": "First generation",
-"code": "",
-"years": [
-2001,
-2008
-],
-"production": "2001–2008",
-"body_styles": [
-"4-door notchback sedan",
-"saloon 5-door hatchback"
-],
-"image": "Volkswagen Bora CN Xiamen 01 2022-06-04.jpg",
-"wikipedia_title": "Volkswagen Bora (China)"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Bora (China)",
-"generation": "Second generation",
-"code": "",
-"years": [
-2008,
-2015
-],
-"production": "2008–2015",
-"body_styles": [
-"4-door sedan"
-],
-"image": "2010 FAW-Volkswagen Bora (pre-facelift, front).jpg",
-"wikipedia_title": "Volkswagen Bora (China)"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Bora (China)",
-"generation": "Third generation",
-"code": "",
-"years": [
-2015,
-2022
-],
-"production": "2015–2022",
-"body_styles": [
-"4-door sedan 5-door wagon"
-],
-"image": "Volkswagen Bora CN III China 2016-04-13.jpg",
-"wikipedia_title": "Volkswagen Bora (China)"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Bora (China)",
-"generation": "Fourth generation",
-"code": "",
-"years": [
-2018,
-2026
-],
-"production": "2018–present",
-"body_styles": [
-"4-door sedan"
-],
-"image": "VOLKSWAGEN BORA (CHINA) 4th GENERATION (40).jpg",
-"wikipedia_title": "Volkswagen Bora (China)"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Jetta (A5)",
-"generation": "Volkswagen Jetta (A5)",
-"code": "1K",
-"years": [
-2005,
-2011
-],
-"production": "August 2005–2010 2006–2011 (China)",
-"body_styles": [
-"4-door sedan 5-door station wagon (SportWagen)"
-],
-"image": "2007 Volkswagen Jetta SE TDi 105 Automatic 1.9 (K 29).jpg",
-"wikipedia_title": "Volkswagen Jetta (A5)"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Bora",
-"generation": "Volkswagen Bora (A4)",
-"code": "1J",
-"years": [
-1999,
-2015
-],
-"production": "1999–2006 (Europe) 1999–2015 (Mexico) 2001–2008 (China)",
-"body_styles": [
-"4-door notchback sedan",
-"saloon 5-door wagon",
-"estate"
-],
-"image": "2003 Volkswagen Bora S TDi 1.9 Front.jpg",
-"wikipedia_title": "Volkswagen Bora"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Golf Mk8",
-"generation": "Volkswagen Golf Mk8",
-"code": "",
-"years": [
-2019,
-2026
-],
-"production": "2019–present",
-"body_styles": [],
-"image": "2020 Volkswagen Golf Style 1.5 Front.jpg",
-"wikipedia_title": "Volkswagen Golf Mk8"
-},
-{
-"brand": "Volkswagen",
-"model": "Cupra Formentor",
-"generation": "Cupra Formentor",
-"code": "Type SE316",
-"years": [
-2020,
-2026
-],
-"production": "September 2020–present",
-"body_styles": [
-"5-door SUV"
-],
-"image": "Cupra Formentor IMG 9668.jpg",
-"wikipedia_title": "Cupra Formentor"
-},
-{
-"brand": "Volkswagen",
-"model": "Cupra Tavascan",
-"generation": "Cupra Tavascan",
-"code": "",
-"years": [
-2023,
-2026
-],
-"production": "December 2023 – present",
-"body_styles": [
-"5-door coupe SUV"
-],
-"image": "Cupra Tavascan Endurance – f 18042026.jpg",
-"wikipedia_title": "Cupra Tavascan"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen ID. Life",
-"generation": "Volkswagen ID. Life",
-"code": "",
-"years": [
-2021,
-2021
-],
-"production": "2021",
-"body_styles": [
-"5-door SUV"
-],
-"image": "Volkswagen ID.Life Concept IAA 2021 1X7A0075.jpg",
-"wikipedia_title": "Volkswagen ID. Life"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen ID. Polo",
-"generation": "Volkswagen",
-"code": "",
-"years": [
-2026,
-2026
-],
-"production": "June 2026 – present",
-"body_styles": [
-"5-door hatchback"
-],
-"image": "Volkswagen ID.Polo IMG 8361.jpg",
-"wikipedia_title": "Volkswagen ID. Polo"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen ID. Cross",
-"generation": "Volkswagen ID. Cross",
-"code": "",
-"years": [
-2026,
-2026
-],
-"production": "September 2026 – present",
-"body_styles": [
-"5-door crossover SUV"
-],
-"image": "Volkswagen ID. Cross IAA 2025 DSC 1831.jpg",
-"wikipedia_title": "Volkswagen ID. Cross"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen ID. Unyx 07",
-"generation": "Volkswagen ID. Unyx 07",
-"code": "",
-"years": [
-2026,
-2026
-],
-"production": "January 2026 – present",
-"body_styles": [
-"4-door liftback sedan"
-],
-"image": "Volkswagen ID. UNYX 07 in Jiading, Shanghai 20260515-A.jpg",
-"wikipedia_title": "Volkswagen ID. Unyx 07"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen ID. Era 9X",
-"generation": "Volkswagen ID. Era 9X",
-"code": "",
-"years": [
-2026,
-2026
-],
-"production": "March 2026 – present",
-"body_styles": [
-"5-door crossover SUV"
-],
-"image": "Volkswagen ID. Era 9X 006.jpg",
-"wikipedia_title": "Volkswagen ID. Era 9X"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen ID. Aura T6",
-"generation": "Volkswagen ID. Aura T6",
-"code": "",
-"years": [
-2026,
-2026
-],
-"production": "2026–present",
-"body_styles": [
-"5-door SUV"
-],
-"image": "Volkswagen ID. Aura T6 001.jpg",
-"wikipedia_title": "Volkswagen ID. Aura T6"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen ID. Era 5S",
-"generation": "Volkswagen ID. Era 5S",
-"code": "",
-"years": [
-2026,
-2026
-],
-"production": "July 2026 – present",
-"body_styles": [
-"4-door sedan"
-],
-"image": "Volkswagen ID. Era 5S 003.jpg",
-"wikipedia_title": "Volkswagen ID. Era 5S"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Phaeton",
-"generation": "Volkswagen Phaeton",
-"code": "",
-"years": [
-2001,
-2016
-],
-"production": "November 2001 – March 2016",
-"body_styles": [
-"4-door sedan"
-],
-"image": "2005 VW Phaeton.jpg",
-"wikipedia_title": "Volkswagen Phaeton"
-},
-{
-"brand": "Volkswagen",
 "model": "Volkswagen Lupo",
 "generation": "Volkswagen Lupo",
 "code": "",
@@ -817,47 +792,17 @@
 },
 {
 "brand": "Volkswagen",
-"model": "Volkswagen Type 2",
-"generation": "Volkswagen Type 2",
+"model": "Volkswagen Magotan",
+"generation": "Volkswagen Magotan (B9)",
 "code": "",
 "years": [
-1949,
+2024,
 2026
 ],
-"production": "November 1949 – present",
+"production": "2024–present",
 "body_styles": [],
-"image": "0385 Porsche Diesel Bus blau.jpg",
-"wikipedia_title": "Volkswagen Type 2"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Passat",
-"generation": "Volkswagen Passat",
-"code": "",
-"years": [
-1973,
-2026
-],
-"production": "1973–present",
-"body_styles": [],
-"image": "VW Passat Variant Elegance (B9) – f 18052025.jpg",
-"wikipedia_title": "Volkswagen Passat"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Pointer",
-"generation": "Volkswagen Pointer",
-"code": "",
-"years": [
-1993,
-1996
-],
-"production": "October 1993 – December 1996",
-"body_styles": [
-"5-door hatchback"
-],
-"image": "Pwiki1.jpg",
-"wikipedia_title": "Volkswagen Pointer"
+"image": "VOLKSWAGEN MAGOTAN B9 China (4).jpg",
+"wikipedia_title": "Volkswagen Magotan"
 },
 {
 "brand": "Volkswagen",
@@ -877,123 +822,17 @@
 },
 {
 "brand": "Volkswagen",
-"model": "Volkswagen Polo Mk4",
-"generation": "Volkswagen Polo Mk4",
+"model": "Volkswagen Passat",
+"generation": "Volkswagen Passat",
 "code": "",
 "years": [
-2001,
-2017
-],
-"production": "2001–April 2010 (Germany) 2002–2015 (Brazil) 2002–2017 (South Africa)",
-"body_styles": [
-"3-door hatchback 5-door hatchback 4-door sedan"
-],
-"image": "2005 Volkswagen Polo E 1.2 Front.jpg",
-"wikipedia_title": "Volkswagen Polo Mk4"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Polo Mk3",
-"generation": "Volkswagen Polo Mk3 (6N/6KV)",
-"code": "",
-"years": [
-1994,
-2009
-],
-"production": "1994–2002 (Germany) 1997–2009 (Argentina)",
-"body_styles": [
-"5-door hatchback 3-door hatchback 4-door saloon 5-door estate"
-],
-"image": "VW Polo front 20090329.jpg",
-"wikipedia_title": "Volkswagen Polo Mk3"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Passat (North America and China)",
-"generation": "Volkswagen Passat (NMS)",
-"code": "",
-"years": [
-2011,
+1973,
 2026
 ],
-"production": "2011–present (China) 2011–2022 (United States)",
-"body_styles": [
-"4-door sedan"
-],
-"image": "Volkswagen Passat NMS II IMG 0007.jpg",
-"wikipedia_title": "Volkswagen Passat (North America and China)"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Passat (North America and China)",
-"generation": "First generation (A32/A33)",
-"code": "",
-"years": [
-2011,
-2021
-],
-"production": "2011–December 2021",
+"production": "1973–present",
 "body_styles": [],
-"image": "2012 Volkswagen Passat -- NHTSA 1.jpg",
-"wikipedia_title": "Volkswagen Passat (North America and China)"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Passat (North America and China)",
-"generation": "Second generation (North America)",
-"code": "",
-"years": [
-2019,
-2022
-],
-"production": "2019–2022",
-"body_styles": [],
-"image": "2021 Volkswagen Passat Highline in Pure White, Front Right, 04-24-2022.jpg",
-"wikipedia_title": "Volkswagen Passat (North America and China)"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Passat (North America and China)",
-"generation": "Second generation (China)",
-"code": "",
-"years": [
-2019,
-2026
-],
-"production": "2019–present",
-"body_styles": [],
-"image": "Volkswagen Passat NMS II IMG001 (cropped).jpg",
-"wikipedia_title": "Volkswagen Passat (North America and China)"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Magotan",
-"generation": "Volkswagen Magotan",
-"code": "",
-"years": [
-2007,
-2026
-],
-"production": "2007–present",
-"body_styles": [
-"4-door sedan"
-],
-"image": "Volkswagen Magotan III 006 (cropped).jpg",
-"wikipedia_title": "Volkswagen Magotan"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Magotan",
-"generation": "Volkswagen Magotan (B9)",
-"code": "",
-"years": [
-2024,
-2026
-],
-"production": "2024–present",
-"body_styles": [],
-"image": "VOLKSWAGEN MAGOTAN B9 China (4).jpg",
-"wikipedia_title": "Volkswagen Magotan"
+"image": "VW Passat Variant Elegance (B9) – f 18052025.jpg",
+"wikipedia_title": "Volkswagen Passat"
 },
 {
 "brand": "Volkswagen",
@@ -1061,19 +900,77 @@
 },
 {
 "brand": "Volkswagen",
-"model": "Škoda Rapid (2012)",
-"generation": "Škoda Rapid (NH1/2/3)",
+"model": "Volkswagen Passat (B9)",
+"generation": "Volkswagen Passat Pro (B9)",
 "code": "",
 "years": [
-2012,
-2023
+2024,
+2026
 ],
-"production": "2012–2019 (Czech Republic) 2012–2022 (Russia) 2012–2023 (China)",
+"production": "2024–present",
 "body_styles": [
-"4-door sedan (China) 5-door liftback 5-door hatchback"
+"4-door saloon"
 ],
-"image": "2014 Skoda Rapid SE Connect TSi 1.2 Front.jpg",
-"wikipedia_title": "Škoda Rapid (2012)"
+"image": "Volkswagen Passat Pro (帕萨特Pro) 01 China 2025-03-28.jpg",
+"wikipedia_title": "Volkswagen Passat (B9)"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Passat (North America and China)",
+"generation": "Volkswagen Passat (NMS)",
+"code": "",
+"years": [
+2011,
+2026
+],
+"production": "2011–present (China) 2011–2022 (United States)",
+"body_styles": [
+"4-door sedan"
+],
+"image": "Volkswagen Passat NMS II IMG 0007.jpg",
+"wikipedia_title": "Volkswagen Passat (North America and China)"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Passat (North America and China)",
+"generation": "Volkswagen Passat (North America and China) First generation (A32/A33)",
+"code": "",
+"years": [
+2011,
+2021
+],
+"production": "2011–December 2021",
+"body_styles": [],
+"image": "2012 Volkswagen Passat -- NHTSA 1.jpg",
+"wikipedia_title": "Volkswagen Passat (North America and China)"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Passat (North America and China)",
+"generation": "Volkswagen Passat (North America and China) Second generation (North America)",
+"code": "",
+"years": [
+2019,
+2022
+],
+"production": "2019–2022",
+"body_styles": [],
+"image": "2021 Volkswagen Passat Highline in Pure White, Front Right, 04-24-2022.jpg",
+"wikipedia_title": "Volkswagen Passat (North America and China)"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Passat (North America and China)",
+"generation": "Volkswagen Passat (North America and China) Second generation (China)",
+"code": "",
+"years": [
+2019,
+2026
+],
+"production": "2019–present",
+"body_styles": [],
+"image": "Volkswagen Passat NMS II IMG001 (cropped).jpg",
+"wikipedia_title": "Volkswagen Passat (North America and China)"
 },
 {
 "brand": "Volkswagen",
@@ -1093,33 +990,19 @@
 },
 {
 "brand": "Volkswagen",
-"model": "Volkswagen Lamando",
-"generation": "Volkswagen Lamando",
+"model": "Volkswagen Phaeton",
+"generation": "Volkswagen Phaeton",
 "code": "",
 "years": [
-2014,
-2026
+2001,
+2016
 ],
-"production": "2014–present",
+"production": "November 2001 – March 2016",
 "body_styles": [
 "4-door sedan"
 ],
-"image": "Volkswagen Lamando L Shishi 01 2022-06-11.jpg",
-"wikipedia_title": "Volkswagen Lamando"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Lamando",
-"generation": "First generation",
-"code": "",
-"years": [
-2014,
-2022
-],
-"production": "2014–2022",
-"body_styles": [],
-"image": "2017 Volkswagen Lamando GTS 01 in Bengbu Anhui China (cropped).jpg",
-"wikipedia_title": "Volkswagen Lamando"
+"image": "2005 VW Phaeton.jpg",
+"wikipedia_title": "Volkswagen Phaeton"
 },
 {
 "brand": "Volkswagen",
@@ -1139,196 +1022,116 @@
 },
 {
 "brand": "Volkswagen",
-"model": "Volkswagen Jetta (China)",
-"generation": "Volkswagen Jetta King 大众捷达王",
+"model": "Volkswagen Pointer",
+"generation": "Volkswagen Pointer",
 "code": "",
 "years": [
-1997,
-2010
+1993,
+1996
 ],
-"production": "1997–2010",
+"production": "October 1993 – December 1996",
 "body_styles": [
-"4-door sedan"
+"5-door hatchback"
 ],
-"image": "2004 FAW-Volkswagen Jetta (front).jpg",
-"wikipedia_title": "Volkswagen Jetta (China)"
+"image": "Pwiki1.jpg",
+"wikipedia_title": "Volkswagen Pointer"
 },
 {
 "brand": "Volkswagen",
-"model": "Volkswagen Jetta (China)",
-"generation": "Volkswagen Jetta Pioneer 大众捷达先锋",
+"model": "Volkswagen Polo Mk3",
+"generation": "Volkswagen Polo Mk3 (6N/6KV)",
+"code": "",
+"years": [
+1994,
+2009
+],
+"production": "1994–2002 (Germany) 1997–2009 (Argentina)",
+"body_styles": [
+"5-door hatchback 3-door hatchback 4-door saloon 5-door estate"
+],
+"image": "VW Polo front 20090329.jpg",
+"wikipedia_title": "Volkswagen Polo Mk3"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Polo Mk4",
+"generation": "Volkswagen Polo Mk4",
+"code": "",
+"years": [
+2001,
+2017
+],
+"production": "2001–April 2010 (Germany) 2002–2015 (Brazil) 2002–2017 (South Africa)",
+"body_styles": [
+"3-door hatchback 5-door hatchback 4-door sedan"
+],
+"image": "2005 Volkswagen Polo E 1.2 Front.jpg",
+"wikipedia_title": "Volkswagen Polo Mk4"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Polo Mk6",
+"generation": "Volkswagen Polo Mk6",
+"code": "AW1 BZ1 AE1",
+"years": [
+2017,
+2026
+],
+"production": "July 2017– 2026",
+"body_styles": [
+"5-door hatchback 4-door sedan (Virtus",
+"Polo Sedan)"
+],
+"image": "2018 Volkswagen Polo SE 1.0 Front.jpg",
+"wikipedia_title": "Volkswagen Polo Mk6"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Polo Playa",
+"generation": "Volkswagen Polo Playa",
+"code": "",
+"years": [
+1998,
+2002
+],
+"production": "1998–2002",
+"body_styles": [
+"5-door hatchback (Polo Playa) 4-door sedan (Polo Classic)"
+],
+"image": "VW Polo Playa Candy White.jpg",
+"wikipedia_title": "Volkswagen Polo Playa"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Polo Sedan (A05)",
+"generation": "Volkswagen Polo Sedan",
 "code": "",
 "years": [
 2010,
-2013
-],
-"production": "2010–2013",
-"body_styles": [
-"4-door sedan"
-],
-"image": "FAW-Volkswagen Jetta Facelift front 8.16.18.jpg",
-"wikipedia_title": "Volkswagen Jetta (China)"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Jetta (A1)",
-"generation": "Volkswagen Jetta (Mk1, Typ 16)",
-"code": "",
-"years": [
-1979,
-1999
-],
-"production": "August 1979 – February 1984 571,030 built 1982–1999 (South Africa)",
-"body_styles": [
-"4-door notchback sedan",
-"saloon 2-door notchback sedan",
-"saloon"
-],
-"image": "1983 Volkswagen Jetta 1.3 C front.jpg",
-"wikipedia_title": "Volkswagen Jetta (A1)"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Jetta (A2)",
-"generation": "Volkswagen Jetta (A2, Typ 1G)",
-"code": "",
-"years": [
-1984,
-2013
-],
-"production": "1984–1992 1991–2013 (China) 1,708,390 built",
-"body_styles": [
-"4-door notchback sedan /saloon 2-door notchback sedan",
-"saloon"
-],
-"image": "JettaMkII.JPG",
-"wikipedia_title": "Volkswagen Jetta (A2)"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Jetta (A6)",
-"generation": "Volkswagen Jetta (A6)",
-"code": "Typ 1B",
-"years": [
-2010,
-2019
-],
-"production": "2010–2019 (Mexico) 2012–2019 (China) 2013–2018 (Russia)",
-"body_styles": [
-"4-door sedan"
-],
-"image": "VW Jetta 1.6 TDI Highline (VI) – Frontansicht, 25. August 2013, Düsseldorf.jpg",
-"wikipedia_title": "Volkswagen Jetta (A6)"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Jetta (A7)",
-"generation": "Volkswagen Jetta (A7)",
-"code": "",
-"years": [
-2018,
-2026
-],
-"production": "2018–present (Americas) 2019–present (China)",
-"body_styles": [
-"4-door sedan"
-],
-"image": "2019 Volkswagen Jetta S 1.4T R-Line in Habañero Orange Metallic, front right.jpg",
-"wikipedia_title": "Volkswagen Jetta (A7)"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Passat (B9)",
-"generation": "Volkswagen Passat (B9)",
-"code": "CJ5",
-"years": [
-2023,
-2026
-],
-"production": "December 2023 – present",
-"body_styles": [
-"5-door estate"
-],
-"image": "VW Passat Variant Elegance (B9) – f 18052025.jpg",
-"wikipedia_title": "Volkswagen Passat (B9)"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Passat (B9)",
-"generation": "Volkswagen Passat Pro (B9)",
-"code": "",
-"years": [
-2024,
-2026
-],
-"production": "2024–present",
-"body_styles": [
-"4-door saloon"
-],
-"image": "Volkswagen Passat Pro (帕萨特Pro) 01 China 2025-03-28.jpg",
-"wikipedia_title": "Volkswagen Passat (B9)"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen ID. Unyx 08",
-"generation": "Volkswagen ID. Unyx 08",
-"code": "",
-"years": [
-2026,
-2026
-],
-"production": "March 2026 – present",
-"body_styles": [
-"5-door crossover SUV"
-],
-"image": "Volkswagen ID. Unyx 08 003.jpg",
-"wikipedia_title": "Volkswagen ID. Unyx 08"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen ID. Unyx 09",
-"generation": "Volkswagen ID. Unyx 09",
-"code": "",
-"years": [
-2026,
-2026
-],
-"production": "2026 (to commence)",
-"body_styles": [
-"4-door sedan"
-],
-"image": "",
-"wikipedia_title": "Volkswagen ID. Unyx 09"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Transporter (T4)",
-"generation": "Volkswagen Transporter (T4)",
-"code": "",
-"years": [
-1990,
-2004
-],
-"production": "1990–2004",
-"body_styles": [
-"4-door van 5-door van 6-door van 2-door pickup platform 3-door pickup platform 4-door pickup platform 4-door campervan"
-],
-"image": "1999 Volkswagen Transporter (70) 2.0 SWB van (2011-04-28) 01.jpg",
-"wikipedia_title": "Volkswagen Transporter (T4)"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Santana",
-"generation": "Volkswagen Santana",
-"code": "",
-"years": [
-1981,
 2022
 ],
-"production": "1983–2022 (China) 1981–1984 (Europe) 1984–1989 (Japan) 1984–2006 (Brazil)",
-"body_styles": [],
-"image": "Volkswagen new Santana facelift 01 (cropped).jpg",
-"wikipedia_title": "Volkswagen Santana"
+"production": "2010–2022",
+"body_styles": [
+"4-door sedan"
+],
+"image": "Vw vento polo sedan.png",
+"wikipedia_title": "Volkswagen Polo Sedan (A05)"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Routan",
+"generation": "Volkswagen Routan",
+"code": "",
+"years": [
+2008,
+2013
+],
+"production": "2008–2013",
+"body_styles": [
+"5-door minivan"
+],
+"image": "2009 Volkswagen Routan SE.jpg",
+"wikipedia_title": "Volkswagen Routan"
 },
 {
 "brand": "Volkswagen",
@@ -1428,204 +1231,6 @@
 },
 {
 "brand": "Volkswagen",
-"model": "Volkswagen Touran",
-"generation": "Volkswagen Touran",
-"code": "",
-"years": [
-2002,
-2026
-],
-"production": "December 2002 – 2026 2004 – present (China)",
-"body_styles": [
-"5-door MPV"
-],
-"image": "2018 Volkswagen Touran 1.6.jpg",
-"wikipedia_title": "Volkswagen Touran"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Touran",
-"generation": "First generation",
-"code": "1T",
-"years": [
-2002,
-2016
-],
-"production": "December 2002–2016",
-"body_styles": [],
-"image": "Volkswagen Golf Touran GLi.jpg",
-"wikipedia_title": "Volkswagen Touran"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Touran",
-"generation": "Second generation",
-"code": "5T",
-"years": [
-2015,
-2026
-],
-"production": "2015 – April 2026 2016–present (China)",
-"body_styles": [],
-"image": "Volkswagen Touran diesel registered July 2017 1968cc.jpg",
-"wikipedia_title": "Volkswagen Touran"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Type 2 (T3)",
-"generation": "Volkswagen Type 25 (T3)",
-"code": "",
-"years": [
-1979,
-2002
-],
-"production": "May 1979 – June 2002",
-"body_styles": [
-"3-door van 3-door pickup"
-],
-"image": "1984-1986 Volkswagen Caravelle (253) CL van (2015-12-07) 01.jpg",
-"wikipedia_title": "Volkswagen Type 2 (T3)"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Polo Sedan (A05)",
-"generation": "Volkswagen Polo Sedan",
-"code": "",
-"years": [
-2010,
-2022
-],
-"production": "2010–2022",
-"body_styles": [
-"4-door sedan"
-],
-"image": "Vw vento polo sedan.png",
-"wikipedia_title": "Volkswagen Polo Sedan (A05)"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Taro",
-"generation": "Volkswagen Taro ( Typ 7A)",
-"code": "",
-"years": [
-1989,
-1997
-],
-"production": "February 1989–March 1997",
-"body_styles": [
-"Pickup truck"
-],
-"image": "1991 Volkswagen Taro.jpg",
-"wikipedia_title": "Volkswagen Taro"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Polo Playa",
-"generation": "Volkswagen Polo Playa",
-"code": "",
-"years": [
-1998,
-2002
-],
-"production": "1998–2002",
-"body_styles": [
-"5-door hatchback (Polo Playa) 4-door sedan (Polo Classic)"
-],
-"image": "VW Polo Playa Candy White.jpg",
-"wikipedia_title": "Volkswagen Polo Playa"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Routan",
-"generation": "Volkswagen Routan",
-"code": "",
-"years": [
-2008,
-2013
-],
-"production": "2008–2013",
-"body_styles": [
-"5-door minivan"
-],
-"image": "2009 Volkswagen Routan SE.jpg",
-"wikipedia_title": "Volkswagen Routan"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Race Touareg 2",
-"generation": "Volkswagen Race Touareg 2",
-"code": "",
-"years": [
-2009,
-2011
-],
-"production": "2009-2011",
-"body_styles": [],
-"image": "VW Race Touareg 2 blue vl EMS.jpg",
-"wikipedia_title": "Volkswagen Race Touareg 2"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Transporter (T5)",
-"generation": "Volkswagen Transporter (T5)",
-"code": "",
-"years": [
-2003,
-2015
-],
-"production": "2003–2015",
-"body_styles": [
-"Van (cargo/passenger) Pick-up Minibus Crew cab chassis cab Campervan"
-],
-"image": "2004-2010 Volkswagen Multivan TDI van 01.jpg",
-"wikipedia_title": "Volkswagen Transporter (T5)"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Taigun",
-"generation": "Volkswagen Taigun",
-"code": "",
-"years": [
-2021,
-2026
-],
-"production": "2021–present",
-"body_styles": [
-"5-door SUV"
-],
-"image": "Volkswagen Taigun front 20230528.jpg",
-"wikipedia_title": "Volkswagen Taigun"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen T-Roc",
-"generation": "Volkswagen T-Roc",
-"code": "",
-"years": [
-2017,
-2026
-],
-"production": "2017–present",
-"body_styles": [],
-"image": "VW T-Roc 1.5 eTSI Style (II) – f 05052026.jpg",
-"wikipedia_title": "Volkswagen T-Roc"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Race Touareg 3",
-"generation": "Volkswagen Race Touareg 3",
-"code": "",
-"years": [
-2010,
-2011
-],
-"production": "2010-2011",
-"body_styles": [],
-"image": "Race Tourag 3 (02).jpg",
-"wikipedia_title": "Volkswagen Race Touareg 3"
-},
-{
-"brand": "Volkswagen",
 "model": "Volkswagen T-Cross",
 "generation": "Volkswagen T-Cross",
 "code": "C11",
@@ -1642,53 +1247,17 @@
 },
 {
 "brand": "Volkswagen",
-"model": "Volkswagen Vento (A3)",
-"generation": "Volkswagen Vento (A3, Typ 1H)",
+"model": "Volkswagen T-Roc",
+"generation": "Volkswagen T-Roc",
 "code": "",
-"years": [
-1992,
-1999
-],
-"production": "January 1992 – February 1999",
-"body_styles": [
-"4-door notchback sedan",
-"saloon"
-],
-"image": "VW Vento front 20080320.jpg",
-"wikipedia_title": "Volkswagen Vento (A3)"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Polo Mk6",
-"generation": "Volkswagen Polo Mk6",
-"code": "AW1 BZ1 AE1",
 "years": [
 2017,
 2026
 ],
-"production": "July 2017– 2026",
-"body_styles": [
-"5-door hatchback 4-door sedan (Virtus",
-"Polo Sedan)"
-],
-"image": "2018 Volkswagen Polo SE 1.0 Front.jpg",
-"wikipedia_title": "Volkswagen Polo Mk6"
-},
-{
-"brand": "Volkswagen",
-"model": "Volkswagen Viloran",
-"generation": "Volkswagen Viloran",
-"code": "",
-"years": [
-2020,
-2026
-],
-"production": "2020–present",
-"body_styles": [
-"5-door minivan"
-],
-"image": "2020 SAIC-Volkswagen Viloran 330TSI (front).jpg",
-"wikipedia_title": "Volkswagen Viloran"
+"production": "2017–present",
+"body_styles": [],
+"image": "VW T-Roc 1.5 eTSI Style (II) – f 05052026.jpg",
+"wikipedia_title": "Volkswagen T-Roc"
 },
 {
 "brand": "Volkswagen",
@@ -1708,6 +1277,22 @@
 },
 {
 "brand": "Volkswagen",
+"model": "Volkswagen Taigun",
+"generation": "Volkswagen Taigun",
+"code": "",
+"years": [
+2021,
+2026
+],
+"production": "2021–present",
+"body_styles": [
+"5-door SUV"
+],
+"image": "Volkswagen Taigun front 20230528.jpg",
+"wikipedia_title": "Volkswagen Taigun"
+},
+{
+"brand": "Volkswagen",
 "model": "Volkswagen Talagon",
 "generation": "Volkswagen Talagon",
 "code": "",
@@ -1721,6 +1306,22 @@
 ],
 "image": "2021 FAW-Volkswagen Talagon (front).jpg",
 "wikipedia_title": "Volkswagen Talagon"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Taro",
+"generation": "Volkswagen Taro ( Typ 7A)",
+"code": "",
+"years": [
+1989,
+1997
+],
+"production": "February 1989–March 1997",
+"body_styles": [
+"Pickup truck"
+],
+"image": "1991 Volkswagen Taro.jpg",
+"wikipedia_title": "Volkswagen Taro"
 },
 {
 "brand": "Volkswagen",
@@ -1755,170 +1356,695 @@
 "wikipedia_title": "Volkswagen Tera"
 },
 {
-"brand": "Volkswagen Commercial Vehicles",
-"model": "Volkswagen Crafter",
-"generation": "Volkswagen Crafter",
-"code": "",
+"brand": "Volkswagen",
+"model": "Volkswagen Touran",
+"generation": "Volkswagen Touran First generation",
+"code": "1T",
 "years": [
-2006,
+2002,
+2016
+],
+"production": "December 2002–2016",
+"body_styles": [],
+"image": "Volkswagen Golf Touran GLi.jpg",
+"wikipedia_title": "Volkswagen Touran"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Touran",
+"generation": "Volkswagen Touran Second generation",
+"code": "5T",
+"years": [
+2015,
 2026
 ],
-"production": "2006–present",
-"body_styles": [
-"Panel van Minibus Double cab Cab chassis"
-],
-"image": "2017 Volkswagen Crafter CR35 Trendline TD 2.0 Front.jpg",
-"wikipedia_title": "Volkswagen Crafter"
+"production": "2015 – April 2026 2016–present (China)",
+"body_styles": [],
+"image": "Volkswagen Touran diesel registered July 2017 1968cc.jpg",
+"wikipedia_title": "Volkswagen Touran"
 },
 {
-"brand": "Audi",
-"model": "Audi A6",
-"generation": "Audi A6",
+"brand": "Volkswagen",
+"model": "Volkswagen Transporter",
+"generation": "Volkswagen Transporter",
 "code": "",
 "years": [
-1994,
+1949,
 2026
 ],
-"production": "1994–present 2000–present (China)",
+"production": "November 1949 – present",
+"body_styles": [],
+"image": "2017 Volkswagen Transporter BlueMotion.jpg",
+"wikipedia_title": "Volkswagen Transporter"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Transporter (T4)",
+"generation": "Volkswagen Transporter (T4)",
+"code": "",
+"years": [
+1990,
+2004
+],
+"production": "1990–2004",
 "body_styles": [
-"4-door saloon/sedan 5-door Avant (estate)"
+"4-door van 5-door van 6-door van 2-door pickup platform 3-door pickup platform 4-door pickup platform 4-door campervan"
 ],
-"image": "Audi A6 C9 IAA 2025 DSC 1920.jpg",
-"wikipedia_title": "Audi A6"
+"image": "1999 Volkswagen Transporter (70) 2.0 SWB van (2011-04-28) 01.jpg",
+"wikipedia_title": "Volkswagen Transporter (T4)"
 },
 {
-"brand": "Audi",
-"model": "Audi A6",
-"generation": "First generation (C4)",
-"code": "4A",
+"brand": "Volkswagen",
+"model": "Volkswagen Transporter (T5)",
+"generation": "Volkswagen Transporter (T5)",
+"code": "",
 "years": [
-1994,
-2003
+2003,
+2015
 ],
-"production": "1994–1998 (Germany) 2000–2003 (China)",
+"production": "2003–2015",
+"body_styles": [
+"Van (cargo/passenger) Pick-up Minibus Crew cab chassis cab Campervan"
+],
+"image": "2004-2010 Volkswagen Multivan TDI van 01.jpg",
+"wikipedia_title": "Volkswagen Transporter (T5)"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Type 2",
+"generation": "Volkswagen Type 2",
+"code": "",
+"years": [
+1949,
+2026
+],
+"production": "November 1949 – present",
 "body_styles": [],
-"image": "AudiA6C4.jpg",
-"wikipedia_title": "Audi A6"
+"image": "0385 Porsche Diesel Bus blau.jpg",
+"wikipedia_title": "Volkswagen Type 2"
 },
 {
-"brand": "Audi",
-"model": "Audi A6",
-"generation": "Second generation (C5)",
-"code": "4B",
+"brand": "Volkswagen",
+"model": "Volkswagen Type 2 (T3)",
+"generation": "Volkswagen Type 25 (T3)",
+"code": "",
 "years": [
-1997,
-2005
+1979,
+2002
 ],
-"production": "1997 – 2005",
-"body_styles": [],
-"image": "Audi A6 C5 front 20081009.jpg",
-"wikipedia_title": "Audi A6"
-},
-{
-"brand": "Audi",
-"model": "Audi A6",
-"generation": "Third generation (C6)",
-"code": "4F",
-"years": [
-2004,
-2012
+"production": "May 1979 – June 2002",
+"body_styles": [
+"3-door van 3-door pickup"
 ],
-"production": "February 2004 – June 2011 (Germany) 2006–2012 (China)",
-"body_styles": [],
-"image": "Audi A6 C6 3.2.jpg",
-"wikipedia_title": "Audi A6"
+"image": "1984-1986 Volkswagen Caravelle (253) CL van (2015-12-07) 01.jpg",
+"wikipedia_title": "Volkswagen Type 2 (T3)"
 },
 {
-"brand": "Audi",
-"model": "Audi A6",
-"generation": "Fourth generation (C7)",
-"code": "4G",
+"brand": "Volkswagen",
+"model": "Volkswagen Vento (A3)",
+"generation": "Volkswagen Vento (A3, Typ 1H)",
+"code": "",
 "years": [
-2010,
+1992,
+1999
+],
+"production": "January 1992 – February 1999",
+"body_styles": [
+"4-door notchback sedan",
+"saloon"
+],
+"image": "VW Vento front 20080320.jpg",
+"wikipedia_title": "Volkswagen Vento (A3)"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Viloran",
+"generation": "Volkswagen Viloran",
+"code": "",
+"years": [
+2020,
+2026
+],
+"production": "2020–present",
+"body_styles": [
+"5-door minivan"
+],
+"image": "2020 SAIC-Volkswagen Viloran 330TSI (front).jpg",
+"wikipedia_title": "Volkswagen Viloran"
+},
+{
+"brand": "Volkswagen",
+"model": "Ford Verona",
+"generation": "Ford Verona/Volkswagen Apollo",
+"code": "",
+"years": [
+1989,
+1996
+],
+"production": "1989–1992 1993–1996",
+"body_styles": [],
+"image": "Verona 1995.jpg",
+"wikipedia_title": "Ford Verona"
+},
+{
+"brand": "Volkswagen",
+"model": "Ford Verona",
+"generation": "Ford Verona Second generation",
+"code": "",
+"years": [
+1993,
+1996
+],
+"production": "1993–1996",
+"body_styles": [
+"4-door sedan"
+],
+"image": "Ford Verona Geração 2.jpg",
+"wikipedia_title": "Ford Verona"
+},
+{
+"brand": "Volkswagen",
+"model": "Meyers Manx",
+"generation": "Meyers Manx",
+"code": "",
+"years": [
+1964,
+2026
+],
+"production": "1964&ndash;65 (prototype, 12 built) 1965&ndash;1971 (main, ~6,000 built) 1999&ndash;present (limited)",
+"body_styles": [
+"Open-wheeled"
+],
+"image": "file:1stMeyersManxWithBruceMeyers.jpg",
+"wikipedia_title": "Meyers Manx"
+},
+{
+"brand": "Volkswagen",
+"model": "Chrysler minivans (RT)",
+"generation": "Chrysler minivans (RT)",
+"code": "",
+"years": [
+2007,
+2020
+],
+"production": "2007–2020",
+"body_styles": [
+"4-door minivan"
+],
+"image": "2011_Chrysler_Town_%26_Country_Touring_-_L_--_04-22-2011.jpg",
+"wikipedia_title": "Chrysler minivans (RT)"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Golf",
+"generation": "Volkswagen Golf",
+"code": "",
+"years": [
+1974,
+2026
+],
+"production": "1974–present",
+"body_styles": [],
+"image": "2020 Volkswagen Golf Style 1.5 Front.jpg",
+"wikipedia_title": "Volkswagen Golf"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Jetta",
+"generation": "Volkswagen Jetta",
+"code": "",
+"years": [
+1979,
+2026
+],
+"production": "1979–present",
+"body_styles": [],
+"image": "2025 Volkswagen Jetta SEL, front 3.28.25.jpg",
+"wikipedia_title": "Volkswagen Jetta"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Polo",
+"generation": "Volkswagen Polo",
+"code": "",
+"years": [
+1975,
+2026
+],
+"production": "1975–present",
+"body_styles": [],
+"image": "VW Polo beats (VI) – f 03032019.jpg",
+"wikipedia_title": "Volkswagen Polo"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Caddy",
+"generation": "Volkswagen Caddy First generation ( Typ 14)",
+"code": "",
+"years": [
+1979,
+2007
+],
+"production": "1979–1995 1981–2007 (South Africa)",
+"body_styles": [],
+"image": "1988 Volkswagen Caddy (Type 148) utility (27473741605) (cropped).jpg",
+"wikipedia_title": "Volkswagen Caddy"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Caddy",
+"generation": "Volkswagen Caddy Second generation",
+"code": "",
+"years": [
+1996,
+2008
+],
+"production": "1996–2004 1996–2008 (Latin America)",
+"body_styles": [],
+"image": "VW Caddy II front 20090329.jpg",
+"wikipedia_title": "Volkswagen Caddy"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Caddy",
+"generation": "Volkswagen Caddy Third generation",
+"code": "",
+"years": [
+2003,
+2026
+],
+"production": "2003–2021 (Poland, Russia) 2004–2008 (China) 2017–2019 (Algeria) 2019–present (Kenya)",
+"body_styles": [],
+"image": "2008-2010 Volkswagen Caddy Maxi (2KN) 1.6 van (2011-11-18) 01.jpg",
+"wikipedia_title": "Volkswagen Caddy"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Caddy",
+"generation": "Volkswagen Caddy Fourth generation",
+"code": "",
+"years": [
+2020,
+2026
+],
+"production": "2020–present",
+"body_styles": [],
+"image": "Volkswagen Caddy V IMG 4136.jpg",
+"wikipedia_title": "Volkswagen Caddy"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen LT",
+"generation": "Volkswagen LT (1st generation)",
+"code": "",
+"years": [
+1975,
+1995
+],
+"production": "April 1975 – December 1995",
+"body_styles": [],
+"image": "Vw lt sst.jpg",
+"wikipedia_title": "Volkswagen LT"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen LT",
+"generation": "Volkswagen LT (2nd generation)",
+"code": "",
+"years": [
+1996,
+2006
+],
+"production": "May 1996 – July 2006",
+"body_styles": [],
+"image": "2004 Volkswagen LT35 TDi LWB 2.5 Front.jpg",
+"wikipedia_title": "Volkswagen LT"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Logus",
+"generation": "Volkswagen Logus",
+"code": "",
+"years": [
+1993,
+1997
+],
+"production": "March 1993 – January 1997",
+"body_styles": [
+"2-door sedan"
+],
+"image": "Tuned Volkswagen Logus in Uruguay.jpg",
+"wikipedia_title": "Volkswagen Logus"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Constellation",
+"generation": "Volkswagen Constellation",
+"code": "",
+"years": [
+2005,
+2026
+],
+"production": "2005–present",
+"body_styles": [
+"Tractor unit",
+" Chassis cab",
+" Flatbed - all \"cab-over-engine\""
+],
+"image": "MANConstellation.jpg",
+"wikipedia_title": "Volkswagen Constellation"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Delivery",
+"generation": "Delivery I",
+"code": "",
+"years": [
+1995,
 2018
 ],
-"production": "December 2010–2018 March 2012–2018 (China)",
+"production": "1995–2018",
 "body_styles": [
-"4-door sedan 5-door station wagon"
+"Light truck"
 ],
-"image": "2013 Audi A7 (4G) 3.0 TDI S line quattro sedan (2017-01-15) 01.jpg",
-"wikipedia_title": "Audi A6"
+"image": "Bondinho de Balneário Camboriú SC.JPG",
+"wikipedia_title": "Volkswagen Delivery"
 },
 {
-"brand": "Audi",
-"model": "Audi A6",
-"generation": "Fifth generation (C8)",
-"code": "4K",
+"brand": "Volkswagen",
+"model": "Volkswagen Delivery",
+"generation": "Delivery II",
+"code": "",
 "years": [
 2018,
 2026
 ],
-"production": "April 2018–2025 January 2019–2026 (China)",
-"body_styles": [],
-"image": "2018 Audi A6 TDi Quattro Front.jpg",
-"wikipedia_title": "Audi A6"
+"production": "2018–present",
+"body_styles": [
+"Light truck"
+],
+"image": "Volkswagen Delivery.jpg",
+"wikipedia_title": "Volkswagen Delivery"
 },
 {
-"brand": "Audi",
-"model": "Audi A6",
-"generation": "Sixth generation (C9)",
-"code": "4L",
+"brand": "Volkswagen",
+"model": "Škoda Rapid (2012)",
+"generation": "Škoda Rapid (2012) Škoda Rapid (2012) Škoda Rapid (2012) Škoda Rapid (2012) Škoda Rapid (2012) Škoda Rapid (2012) Škoda Rapid (2012) Škoda Rapid (2012) Škoda Rapid (NH1/2/3)",
+"code": "",
+"years": [
+2012,
+2023
+],
+"production": "2012–2019 (Czech Republic) 2012–2022 (Russia) 2012–2023 (China)",
+"body_styles": [
+"4-door sedan (China) 5-door liftback 5-door hatchback"
+],
+"image": "2014 Skoda Rapid SE Connect TSi 1.2 Front.jpg",
+"wikipedia_title": "Škoda Rapid (2012)"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Multivan (T7)",
+"generation": "Volkswagen Multivan (T7)",
+"code": "",
+"years": [
+2021,
+2026
+],
+"production": "November 2021 – present",
+"body_styles": [
+"5-door MPV"
+],
+"image": "Volkswagen T7 Multivan IMG 8317.jpg",
+"wikipedia_title": "Volkswagen Multivan (T7)"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen ID. Era 5X",
+"generation": "Volkswagen ID. Era 5X",
+"code": "",
+"years": [
+2026,
+2026
+],
+"production": "2026 (to commence)",
+"body_styles": [
+"5-door crossover SUV"
+],
+"image": "",
+"wikipedia_title": "Volkswagen ID. Era 5X"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen ID. Tiguan",
+"generation": "Volkswagen ID. Tiguan",
+"code": "",
+"years": [
+2026,
+2026
+],
+"production": "2026 (to commence)",
+"body_styles": [
+"5-door crossover SUV"
+],
+"image": "",
+"wikipedia_title": "Volkswagen ID. Tiguan"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Scirocco",
+"generation": "Volkswagen Scirocco Third generation",
+"code": "",
+"years": [
+2008,
+2017
+],
+"production": "2008–2017",
+"body_styles": [],
+"image": "VW Scirocco III 2.0 TSI DSG Collectors Edition 54 von 100 Oryxweiß.JPG",
+"wikipedia_title": "Volkswagen Scirocco"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Touareg",
+"generation": "Volkswagen Touareg First generation (7L)",
+"code": "",
+"years": [
+2002,
+2010
+],
+"production": "2002–2010",
+"body_styles": [],
+"image": "2005 Volkswagen Touareg V6 Sport Automatic 3.2 Front.jpg",
+"wikipedia_title": "Volkswagen Touareg"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Touareg",
+"generation": "Volkswagen Touareg Second generation (7P)",
+"code": "",
+"years": [
+2010,
+2018
+],
+"production": "2010–2018",
+"body_styles": [],
+"image": "VW Touareg V8 TDI (II) – Frontansicht (1), 2. Juli 2011, Düsseldorf.jpg",
+"wikipedia_title": "Volkswagen Touareg"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Touareg",
+"generation": "Volkswagen Touareg Third generation (CR)",
+"code": "",
+"years": [
+2018,
+2026
+],
+"production": "2018–2026",
+"body_styles": [],
+"image": "2019 Volkswagen Touareg V6 R-Line Tech TD 3.0 Front.jpg",
+"wikipedia_title": "Volkswagen Touareg"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Sharan",
+"generation": "Volkswagen Sharan First generation",
+"code": "7M",
+"years": [
+1995,
+2010
+],
+"production": "1995–2010",
+"body_styles": [],
+"image": "7M8 VW Sharan.jpg",
+"wikipedia_title": "Volkswagen Sharan"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Sharan",
+"generation": "Volkswagen Sharan Second generation",
+"code": "7N",
+"years": [
+2010,
+2022
+],
+"production": "2010–2022",
+"body_styles": [],
+"image": "VW Sharan II 2.0 TDI Reflexsilber.JPG",
+"wikipedia_title": "Volkswagen Sharan"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Tiguan",
+"generation": "Volkswagen Tiguan First generation",
+"code": "5N",
+"years": [
+2007,
+2020
+],
+"production": "2007–2018 2009–2020 (China)",
+"body_styles": [
+"5-door SUV"
+],
+"image": "VW Tiguan Sport & Style 2.0 TDI 4MOTION Team – Frontansicht, 12. Juni 2011, Düsseldorf.jpg",
+"wikipedia_title": "Volkswagen Tiguan"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Tiguan",
+"generation": "Volkswagen Tiguan Third generation",
+"code": "CT1",
+"years": [
+2024,
+2026
+],
+"production": "2024–present",
+"body_styles": [
+"5-door SUV"
+],
+"image": "Volkswagen Tiguan III DSC 7193 (cropped).jpg",
+"wikipedia_title": "Volkswagen Tiguan"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Sagitar",
+"generation": "Volkswagen Sagitar L",
+"code": "",
 "years": [
 2025,
 2026
 ],
-"production": "April 2025 – present",
+"production": "2025–present",
 "body_styles": [],
-"image": "Audi A6 C9 IAA 2025 DSC 1920.jpg",
-"wikipedia_title": "Audi A6"
+"image": "Volkswagen Sagitar L (速腾L) China 2026-03-18.jpg",
+"wikipedia_title": "Volkswagen Sagitar"
 },
 {
-"brand": "Audi",
-"model": "Audi TT",
-"generation": "Audi TT",
+"brand": "Volkswagen",
+"model": "Volkswagen Sagitar",
+"generation": "Volkswagen Sagitar S",
 "code": "",
 "years": [
-1998,
-2023
+2026,
+2026
 ],
-"production": "February 1998 – November 2023",
-"body_styles": [
-"3-door coupé (first and second generations) 2-door coupé (third generation) 2-door roadster"
-],
-"image": "2019 Audi TT Sport 40 TFSi S-A 2.0 Front.jpg",
-"wikipedia_title": "Audi TT"
+"production": "2026–present",
+"body_styles": [],
+"image": "2026 FAW-Volkswagen Sagitar S (front).jpg",
+"wikipedia_title": "Volkswagen Sagitar"
 },
 {
-"brand": "Audi",
-"model": "Audi RSQ",
-"generation": "Audi RSQ",
+"brand": "Volkswagen",
+"model": "Volkswagen Transporter (T6)",
+"generation": "Volkswagen Transporter (T6)",
 "code": "",
 "years": [
-2004,
-2004
+2015,
+2024
 ],
-"production": "2004",
+"production": "2015–2024",
 "body_styles": [
-"2-door coupé"
+"Van (cargo/passenger) Pick-up Minibus Crew cab chassis cab Campervan"
 ],
-"image": "Audi study.JPG",
-"wikipedia_title": "Audi RSQ"
+"image": "2017 Volkswagen Transporter T28 Highline TDi 2.0 Front.jpg",
+"wikipedia_title": "Volkswagen Transporter (T6)"
 },
 {
-"brand": "Audi",
-"model": "Audi RSQ",
-"generation": "Audi RSQ e-tron",
+"brand": "Volkswagen",
+"model": "Volkswagen Tayron",
+"generation": "Volkswagen Tayron First generation",
 "code": "",
 "years": [
-2019,
-2019
+2018,
+2026
 ],
-"production": "2019",
+"production": "2018–present",
 "body_styles": [
-"2-door coupé"
+"5-door SUV 5-door coupé SUV (Tayron X)"
 ],
-"image": "",
-"wikipedia_title": "Audi RSQ"
+"image": "Volkswagen Tayron Sanming 01 2022-08-26.jpg",
+"wikipedia_title": "Volkswagen Tayron"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Tayron",
+"generation": "Volkswagen Tayron Second generation",
+"code": "",
+"years": [
+2024,
+2026
+],
+"production": "November 2024 – present",
+"body_styles": [
+"5-door SUV"
+],
+"image": "Volkswagen Tayron II DSC 2953.jpg",
+"wikipedia_title": "Volkswagen Tayron"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Tarek",
+"generation": "Volkswagen Tarek",
+"code": "",
+"years": [
+2003,
+2003
+],
+"production": "2003",
+"body_styles": [],
+"image": "Volkswagen_Tarek_Paris-Dakar_2003_frontright_2010-04-08_A.jpg",
+"wikipedia_title": "Volkswagen Tarek"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Transporter (2024)",
+"generation": "Volkswagen Transporter / Caravelle",
+"code": "",
+"years": [
+2024,
+2026
+],
+"production": "2024–present",
+"body_styles": [],
+"image": "Volkswagen T7 Transporter DSC 9339.jpg",
+"wikipedia_title": "Volkswagen Transporter (2024)"
+},
+{
+"brand": "Volkswagen",
+"model": "Volkswagen Tukan",
+"generation": "Volkswagen Tukan",
+"code": "",
+"years": [
+2026,
+2026
+],
+"production": "2026 (to commence)",
+"body_styles": [
+"2-door pickup truck 4-door pickup truck"
+],
+"image": "Volkswagen Tukan front left - Yellow - Autosdeprimera.jpg",
+"wikipedia_title": "Volkswagen Tukan"
 },
 {
 "brand": "Audi",
@@ -1968,6 +2094,38 @@
 },
 {
 "brand": "Audi",
+"model": "Audi A1",
+"generation": "Audi A1 First generation",
+"code": "8X",
+"years": [
+2010,
+2018
+],
+"production": "May 2010 – August 2018",
+"body_styles": [
+"3/5-door hatchback"
+],
+"image": "Audi A1 1.4 TFSI Ambition – Frontansicht, 26. Februar 2012, Velbert.jpg",
+"wikipedia_title": "Audi A1"
+},
+{
+"brand": "Audi",
+"model": "Audi A1",
+"generation": "Audi A1 Second generation",
+"code": "GB",
+"years": [
+2018,
+2026
+],
+"production": "October 2018 – April 2026",
+"body_styles": [
+"5-door hatchback"
+],
+"image": "2019 Audi A1 S Line 30 TFSi 1.0 Front.jpg",
+"wikipedia_title": "Audi A1"
+},
+{
+"brand": "Audi",
 "model": "Audi A2",
 "generation": "Audi A2 (8Z)",
 "code": "",
@@ -1984,94 +2142,24 @@
 },
 {
 "brand": "Audi",
-"model": "Audi A8",
-"generation": "Audi A8",
+"model": "Audi A2 e-tron",
+"generation": "Audi A2 e-tron",
 "code": "",
 "years": [
-1994,
+2026,
 2026
 ],
-"production": "D2: 1994–2002 D3: 2002–2010 D4: 2009–2017 D5: 2017–2026",
+"production": "2026 (to commence)",
 "body_styles": [
-"4-door sedan"
+"5-door hatchback"
 ],
-"image": "2018 Audi A8 50 TDi Quattro Automatic 3.0.jpg",
-"wikipedia_title": "Audi A8"
-},
-{
-"brand": "Audi",
-"model": "Audi A8",
-"generation": "First generation (D2/4D)",
-"code": "",
-"years": [
-1994,
-2002
-],
-"production": "June 1994 – 4 August 2002",
-"body_styles": [],
-"image": "A8 white.jpg",
-"wikipedia_title": "Audi A8"
-},
-{
-"brand": "Audi",
-"model": "Audi A8",
-"generation": "Second generation (D3/4E)",
-"code": "",
-"years": [
-2002,
-2010
-],
-"production": "August 2002 – November 2010",
-"body_styles": [],
-"image": "2003-2005 Audi A8 (4E) 4.2 quattro sedan (2011-01-05).jpg",
-"wikipedia_title": "Audi A8"
-},
-{
-"brand": "Audi",
-"model": "Audi A8",
-"generation": "Third generation (D4/4H)",
-"code": "",
-"years": [
-2009,
-2017
-],
-"production": "2009–2013 (FWD) 2009–2017 (quattro 4WD)",
-"body_styles": [],
-"image": "2012 Audi A8 (4H) 4.2 quattro sedan (2018-10-12) 01.jpg",
-"wikipedia_title": "Audi A8"
-},
-{
-"brand": "Audi",
-"model": "Audi A8",
-"generation": "Fourth generation (D5/4N)",
-"code": "",
-"years": [
-2017,
-2026
-],
-"production": "November 2017–2026",
-"body_styles": [],
-"image": "2018 Audi A8 50 TDi Quattro Automatic 3.0 Front.jpg",
-"wikipedia_title": "Audi A8"
+"image": "",
+"wikipedia_title": "Audi A2 e-tron"
 },
 {
 "brand": "Audi",
 "model": "Audi A5",
-"generation": "Audi A5",
-"code": "",
-"years": [
-2007,
-2026
-],
-"production": "2007–present",
-"body_styles": [],
-"image": "Audi A5 B10 DSC 7314.jpg",
-"wikipedia_title": "Audi A5"
-},
-{
-"brand": "Audi",
-"model": "Audi A5",
-"generation": "First generation",
+"generation": "Audi A5 First generation",
 "code": "8T/8F",
 "years": [
 2007,
@@ -2085,7 +2173,7 @@
 {
 "brand": "Audi",
 "model": "Audi A5",
-"generation": "Second generation",
+"generation": "Audi A5 Second generation",
 "code": "F5",
 "years": [
 2016,
@@ -2099,7 +2187,7 @@
 {
 "brand": "Audi",
 "model": "Audi A5",
-"generation": "Third generation",
+"generation": "Audi A5 Third generation",
 "code": "B10",
 "years": [
 2024,
@@ -2112,6 +2200,378 @@
 ],
 "image": "Audi A5 S line (B10) – f 01032025.jpg",
 "wikipedia_title": "Audi A5"
+},
+{
+"brand": "Audi",
+"model": "Audi A6",
+"generation": "Audi A6 First generation (C4)",
+"code": "4A",
+"years": [
+1994,
+2003
+],
+"production": "1994–1998 (Germany) 2000–2003 (China)",
+"body_styles": [],
+"image": "AudiA6C4.jpg",
+"wikipedia_title": "Audi A6"
+},
+{
+"brand": "Audi",
+"model": "Audi A6",
+"generation": "Audi A6 Second generation (C5)",
+"code": "4B",
+"years": [
+1997,
+2005
+],
+"production": "1997 – 2005",
+"body_styles": [],
+"image": "Audi A6 C5 front 20081009.jpg",
+"wikipedia_title": "Audi A6"
+},
+{
+"brand": "Audi",
+"model": "Audi A6",
+"generation": "Audi A6 Third generation (C6)",
+"code": "4F",
+"years": [
+2004,
+2012
+],
+"production": "February 2004 – June 2011 (Germany) 2006–2012 (China)",
+"body_styles": [],
+"image": "Audi A6 C6 3.2.jpg",
+"wikipedia_title": "Audi A6"
+},
+{
+"brand": "Audi",
+"model": "Audi A6",
+"generation": "Audi A6 Fourth generation (C7)",
+"code": "4G",
+"years": [
+2010,
+2018
+],
+"production": "December 2010–2018 March 2012–2018 (China)",
+"body_styles": [
+"4-door sedan 5-door station wagon"
+],
+"image": "2013 Audi A7 (4G) 3.0 TDI S line quattro sedan (2017-01-15) 01.jpg",
+"wikipedia_title": "Audi A6"
+},
+{
+"brand": "Audi",
+"model": "Audi A6",
+"generation": "Audi A6 Fifth generation (C8)",
+"code": "4K",
+"years": [
+2018,
+2026
+],
+"production": "April 2018–2025 January 2019–2026 (China)",
+"body_styles": [],
+"image": "2018 Audi A6 TDi Quattro Front.jpg",
+"wikipedia_title": "Audi A6"
+},
+{
+"brand": "Audi",
+"model": "Audi A6",
+"generation": "Audi A6 Sixth generation (C9)",
+"code": "4L",
+"years": [
+2025,
+2026
+],
+"production": "April 2025 – present",
+"body_styles": [],
+"image": "Audi A6 C9 IAA 2025 DSC 1920.jpg",
+"wikipedia_title": "Audi A6"
+},
+{
+"brand": "Audi",
+"model": "Audi A6 e-tron",
+"generation": "Audi A6 e-tron",
+"code": "",
+"years": [
+2024,
+2026
+],
+"production": "2024–present",
+"body_styles": [],
+"image": "Audi A6 Avant e-tron – f 18042025.jpg",
+"wikipedia_title": "Audi A6 e-tron"
+},
+{
+"brand": "Audi",
+"model": "Audi A8",
+"generation": "Audi A8 First generation (D2/4D)",
+"code": "",
+"years": [
+1994,
+2002
+],
+"production": "June 1994 – 4 August 2002",
+"body_styles": [],
+"image": "A8 white.jpg",
+"wikipedia_title": "Audi A8"
+},
+{
+"brand": "Audi",
+"model": "Audi A8",
+"generation": "Audi A8 Second generation (D3/4E)",
+"code": "",
+"years": [
+2002,
+2010
+],
+"production": "August 2002 – November 2010",
+"body_styles": [],
+"image": "2003-2005 Audi A8 (4E) 4.2 quattro sedan (2011-01-05).jpg",
+"wikipedia_title": "Audi A8"
+},
+{
+"brand": "Audi",
+"model": "Audi A8",
+"generation": "Audi A8 Third generation (D4/4H)",
+"code": "",
+"years": [
+2009,
+2017
+],
+"production": "2009–2013 (FWD) 2009–2017 (quattro 4WD)",
+"body_styles": [],
+"image": "2012 Audi A8 (4H) 4.2 quattro sedan (2018-10-12) 01.jpg",
+"wikipedia_title": "Audi A8"
+},
+{
+"brand": "Audi",
+"model": "Audi A8",
+"generation": "Audi A8 Fourth generation (D5/4N)",
+"code": "",
+"years": [
+2017,
+2026
+],
+"production": "November 2017–2026",
+"body_styles": [],
+"image": "2018 Audi A8 50 TDi Quattro Automatic 3.0 Front.jpg",
+"wikipedia_title": "Audi A8"
+},
+{
+"brand": "Audi",
+"model": "Audi Avantissimo",
+"generation": "Audi Avantissimo",
+"code": "",
+"years": [
+2001,
+2001
+],
+"production": "2001",
+"body_styles": [
+"5-door Avant"
+],
+"image": "",
+"wikipedia_title": "Audi Avantissimo"
+},
+{
+"brand": "Audi",
+"model": "Audi Nuvolari",
+"generation": "Audi Nuvolari",
+"code": "",
+"years": [
+2026,
+2026
+],
+"production": "Late 2026 (to commence) Limited to 499 units",
+"body_styles": [
+"2-door coupé"
+],
+"image": "27 Audi Nuvolari.jpg",
+"wikipedia_title": "Audi Nuvolari"
+},
+{
+"brand": "Audi",
+"model": "Audi Q2",
+"generation": "Audi Q2",
+"code": "",
+"years": [
+2016,
+2026
+],
+"production": "2016 – April 2026 887,231 units",
+"body_styles": [
+"5-door SUV"
+],
+"image": "2017 Audi Q2 Sport TDi 1.6 Front.jpg",
+"wikipedia_title": "Audi Q2"
+},
+{
+"brand": "Audi",
+"model": "Audi Q3",
+"generation": "Audi Q3 First generation",
+"code": "8U",
+"years": [
+2011,
+2018
+],
+"production": "June 2011–2018",
+"body_styles": [
+"5-door SUV"
+],
+"image": "Audi Q3 2.0 TDI quattro S tronic Karibubraun.JPG",
+"wikipedia_title": "Audi Q3"
+},
+{
+"brand": "Audi",
+"model": "Audi Q3",
+"generation": "Audi Q3 Second generation",
+"code": "F3",
+"years": [
+2018,
+2025
+],
+"production": "August 2018– June 2025",
+"body_styles": [
+"5-door SUV 5-door coupé SUV (Sportback)"
+],
+"image": "Audi Q3 Sportback 1X7A0175.jpg",
+"wikipedia_title": "Audi Q3"
+},
+{
+"brand": "Audi",
+"model": "Audi Q3",
+"generation": "Audi Q3 Third generation",
+"code": "FJ",
+"years": [
+2025,
+2026
+],
+"production": "July 2025 – present",
+"body_styles": [
+"5-door SUV 5-door coupé SUV (Sportback)"
+],
+"image": "Audi Q3 1.5 TFSI e-hybrid S line (FJ) – f 29032026.jpg",
+"wikipedia_title": "Audi Q3"
+},
+{
+"brand": "Audi",
+"model": "Audi Q5",
+"generation": "Audi Q5 First generation",
+"code": "8R",
+"years": [
+2008,
+2017
+],
+"production": "July 2008–2017",
+"body_styles": [
+"5-door SUV"
+],
+"image": "Audi Q5 -- 03-16-2012.JPG",
+"wikipedia_title": "Audi Q5"
+},
+{
+"brand": "Audi",
+"model": "Audi Q5",
+"generation": "Audi Q5 Second generation",
+"code": "FY",
+"years": [
+2016,
+2025
+],
+"production": "September 2016 – February 2025 August 2019 — April 2025 (PHEV)",
+"body_styles": [],
+"image": "2018 Audi Q5 S Line TDi Quattro S-A 2.0 Front.jpg",
+"wikipedia_title": "Audi Q5"
+},
+{
+"brand": "Audi",
+"model": "Audi Q6",
+"generation": "Audi Q6 (China)",
+"code": "",
+"years": [
+2022,
+2026
+],
+"production": "2022–present",
+"body_styles": [
+"5-door SUV"
+],
+"image": "2022 SAIC-Audi Q6.jpg",
+"wikipedia_title": "Audi Q6"
+},
+{
+"brand": "Audi",
+"model": "Audi Q7",
+"generation": "Audi Q7 First generation",
+"code": "4L",
+"years": [
+2005,
+2015
+],
+"production": "November 2005 – 2015",
+"body_styles": [],
+"image": "2007-Audi-Q7.jpg",
+"wikipedia_title": "Audi Q7"
+},
+{
+"brand": "Audi",
+"model": "Audi Q7",
+"generation": "Audi Q7 Second generation",
+"code": "4M",
+"years": [
+2015,
+2026
+],
+"production": "May 2015 – 2026",
+"body_styles": [],
+"image": "2018 Audi Q7 3.0 TDI front.jpg",
+"wikipedia_title": "Audi Q7"
+},
+{
+"brand": "Audi",
+"model": "Audi Q7",
+"generation": "Audi Q7 Third generation",
+"code": "G8",
+"years": [
+2026,
+2026
+],
+"production": "2026 (to commence)",
+"body_styles": [],
+"image": "Audi Q7 (G8) IMG 7161.jpg",
+"wikipedia_title": "Audi Q7"
+},
+{
+"brand": "Audi",
+"model": "Audi Q8",
+"generation": "Audi Q8",
+"code": "",
+"years": [
+2018,
+2026
+],
+"production": "June 2018 – present",
+"body_styles": [
+"5-door coupe SUV"
+],
+"image": "",
+"wikipedia_title": "Audi Q8"
+},
+{
+"brand": "Audi",
+"model": "Audi Q9",
+"generation": "Audi Q9",
+"code": "",
+"years": [
+2026,
+2026
+],
+"production": "2026 (to commence)",
+"body_styles": [
+"5-door SUV"
+],
+"image": "2026 Audi Q9 right front - Autowizja (cropped) (cropped).jpg",
+"wikipedia_title": "Audi Q9"
 },
 {
 "brand": "Audi",
@@ -2131,80 +2591,120 @@
 },
 {
 "brand": "Audi",
-"model": "Audi Q7",
-"generation": "Audi Q7",
+"model": "Audi R8 (Type 42)",
+"generation": "Audi R8 (Type 42)",
 "code": "",
 "years": [
-2005,
-2026
-],
-"production": "November 2005–present",
-"body_styles": [
-"5-door SUV"
-],
-"image": "Audi Q7 4M FL2 3.0 V6 MHEV quattro Satellite Silver Metallic 01 (cropped).jpg",
-"wikipedia_title": "Audi Q7"
-},
-{
-"brand": "Audi",
-"model": "Audi Q7",
-"generation": "First generation",
-"code": "4L",
-"years": [
-2005,
+2006,
 2015
 ],
-"production": "November 2005 – 2015",
-"body_styles": [],
-"image": "2007-Audi-Q7.jpg",
-"wikipedia_title": "Audi Q7"
-},
-{
-"brand": "Audi",
-"model": "Audi Q7",
-"generation": "Second generation",
-"code": "4M",
-"years": [
-2015,
-2026
+"production": "June 2006 – August 2015",
+"body_styles": [
+"2-door coupé 2-door convertible (spyder)"
 ],
-"production": "May 2015 – 2026",
-"body_styles": [],
-"image": "2018 Audi Q7 3.0 TDI front.jpg",
-"wikipedia_title": "Audi Q7"
+"image": "2010 Audi R8 Spyder Quattro V10 5.2.jpg",
+"wikipedia_title": "Audi R8 (Type 42)"
 },
 {
 "brand": "Audi",
-"model": "Audi Q7",
-"generation": "Third generation",
-"code": "G8",
-"years": [
-2026,
-2026
-],
-"production": "2026 (to commence)",
-"body_styles": [],
-"image": "Audi Q7 (G8) IMG 7161.jpg",
-"wikipedia_title": "Audi Q7"
-},
-{
-"brand": "Audi",
-"model": "Audi RS 6",
-"generation": "Audi RS 6",
+"model": "Audi R8 (Type 4S)",
+"generation": "Audi R8 (Type 4S)",
 "code": "",
 "years": [
-2002,
+2014,
+2024
+],
+"production": "December 2014–2024",
+"body_styles": [],
+"image": "2020 Audi R8 V10 5.2 Front.jpg",
+"wikipedia_title": "Audi R8 (Type 4S)"
+},
+{
+"brand": "Audi",
+"model": "Audi RS 2 Avant",
+"generation": "Audi RS 2 Avant (8C)",
+"code": "",
+"years": [
+1994,
+1995
+],
+"production": "March 1994 – July 1995",
+"body_styles": [
+"5-door estate car"
+],
+"image": "1995 Audi RS2 Avant LC25.jpg",
+"wikipedia_title": "Audi RS 2 Avant"
+},
+{
+"brand": "Audi",
+"model": "Audi RS 4",
+"generation": "Audi RS 4 First generation B5 (8D)",
+"code": "",
+"years": [
+1999,
+2001
+],
+"production": "1999–2001<ref> cite web title=Last Audi RS 4 Leaves Neckarsulm url=https://www.audiworld.com/news/01/080201/content.shtm",
+"body_styles": [
+"5-door Avant (estate/wagon)"
+],
+"image": "Audi-RS4-B5.jpg",
+"wikipedia_title": "Audi RS 4"
+},
+{
+"brand": "Audi",
+"model": "Audi RS 4",
+"generation": "Audi RS 4 Second generation B7 (8E)",
+"code": "",
+"years": [
+2006,
+2008
+],
+"production": "2006–2008",
+"body_styles": [
+"4-door saloon/sedan",
+" 5-door Avant (estate/wagon)",
+" 2-door Cabriolet"
+],
+"image": "2005-03-04 Motorshow Geneva 052 (cropped).JPG",
+"wikipedia_title": "Audi RS 4"
+},
+{
+"brand": "Audi",
+"model": "Audi RS 4",
+"generation": "Audi RS 4 Third generation B8 (8K)",
+"code": "",
+"years": [
+2012,
+2015
+],
+"production": "2012&ndash;2015",
+"body_styles": [
+"5-door estate/wagon"
+],
+"image": "2013 Audi RS4 Avant front.jpg",
+"wikipedia_title": "Audi RS 4"
+},
+{
+"brand": "Audi",
+"model": "Audi RS 4",
+"generation": "Audi RS 4 Fourth generation B9 (8W)",
+"code": "",
+"years": [
+2018,
 2025
 ],
-"production": "2002–2004 2008–2010 2013–2018 2019–2025",
-"body_styles": [],
-"image": "2021 Audi RS6 Avant in Nardo Gray, front right.jpg",
-"wikipedia_title": "Audi RS 6"
+"production": "2018&ndash;2025",
+"body_styles": [
+"5-door estate/wagon"
+],
+"image": "2018 Audi RS4 TFSi Quattro Automatic 2.9.jpg",
+"wikipedia_title": "Audi RS 4"
 },
 {
 "brand": "Audi",
 "model": "Audi RS 6",
-"generation": "First generation (C5/4B)",
+"generation": "Audi RS 6 First generation (C5/4B)",
 "code": "",
 "years": [
 2002,
@@ -2221,7 +2721,7 @@
 {
 "brand": "Audi",
 "model": "Audi RS 6",
-"generation": "Second generation (C6/4F)",
+"generation": "Audi RS 6 Second generation (C6/4F)",
 "code": "",
 "years": [
 2007,
@@ -2238,7 +2738,7 @@
 {
 "brand": "Audi",
 "model": "Audi RS 6",
-"generation": "Third generation (C7/4G)",
+"generation": "Audi RS 6 Third generation (C7/4G)",
 "code": "",
 "years": [
 2013,
@@ -2254,7 +2754,7 @@
 {
 "brand": "Audi",
 "model": "Audi RS 6",
-"generation": "Fourth generation (C8/5G)",
+"generation": "Audi RS 6 Fourth generation (C8/5G)",
 "code": "",
 "years": [
 2019,
@@ -2269,19 +2769,19 @@
 },
 {
 "brand": "Audi",
-"model": "Audi S3",
-"generation": "Audi S3",
+"model": "Audi S2",
+"generation": "Audi S2",
 "code": "",
 "years": [
-1999,
-2026
+1990,
+1995
 ],
-"production": "1999—present",
+"production": "September 1990 – December 1995",
 "body_styles": [
-"3 or 5-door hatchback 4-door sedan"
+"3-door liftback coupé 4-door sedan 5-door estate"
 ],
-"image": "250px Audi S3 (8P)",
-"wikipedia_title": "Audi S3"
+"image": "Audi S2 Wikipedia.JPG",
+"wikipedia_title": "Audi S2"
 },
 {
 "brand": "Audi",
@@ -2350,47 +2850,93 @@
 },
 {
 "brand": "Audi",
-"model": "Audi Q5",
-"generation": "Audi Q5",
+"model": "Audi S5",
+"generation": "Audi S5",
 "code": "",
 "years": [
-2008,
+2007,
 2026
 ],
-"production": "2008–present",
+"production": "2007&ndash;present",
 "body_styles": [],
-"image": "Audi Q5 2.0 TDI quattro S line (GU) – f 13102025.jpg",
-"wikipedia_title": "Audi Q5"
+"image": "2018 Audi S5 sedan front 4.11.18.jpg",
+"wikipedia_title": "Audi S5"
 },
 {
 "brand": "Audi",
-"model": "Audi Q5",
-"generation": "First generation",
-"code": "8R",
+"model": "Audi S6",
+"generation": "Audi S6 First generation (C4/4A)",
+"code": "",
 "years": [
-2008,
-2017
+1994,
+1997
 ],
-"production": "July 2008–2017",
+"production": "1994–1997",
+"body_styles": [],
+"image": "Audi S6 C4.jpg",
+"wikipedia_title": "Audi S6"
+},
+{
+"brand": "Audi",
+"model": "Audi S6",
+"generation": "Audi S6 Second generation (C5/4B)",
+"code": "",
+"years": [
+1999,
+2003
+],
+"production": "1999–2003",
+"body_styles": [],
+"image": "2003 Audi S6 C5 (Typ 4B) (4383585474).jpg",
+"wikipedia_title": "Audi S6"
+},
+{
+"brand": "Audi",
+"model": "Audi S6",
+"generation": "Audi S6 Third generation (C6/4F)",
+"code": "",
+"years": [
+2005,
+2011
+],
+"production": "2005–2011",
+"body_styles": [],
+"image": "AudiS6av (cropped).JPG",
+"wikipedia_title": "Audi S6"
+},
+{
+"brand": "Audi",
+"model": "Audi S6",
+"generation": "Audi S6 Fourth generation (C7/4G)",
+"code": "",
+"years": [
+2012,
+2018
+],
+"production": "2012–2018",
 "body_styles": [
-"5-door SUV"
+"4-door sedan",
+" 5-door Avant (estate/wagon)"
 ],
-"image": "Audi Q5 -- 03-16-2012.JPG",
-"wikipedia_title": "Audi Q5"
+"image": "Audi S6 Avant (C7) – Frontansicht, 7. September 2013, Münster.jpg",
+"wikipedia_title": "Audi S6"
 },
 {
 "brand": "Audi",
-"model": "Audi Q5",
-"generation": "Second generation",
-"code": "FY",
+"model": "Audi S6",
+"generation": "Audi S6 Fifth generation (C8)",
+"code": "",
 "years": [
-2016,
+2018,
 2025
 ],
-"production": "September 2016 – February 2025 August 2019 — April 2025 (PHEV)",
-"body_styles": [],
-"image": "2018 Audi Q5 S Line TDi Quattro S-A 2.0 Front.jpg",
-"wikipedia_title": "Audi Q5"
+"production": "2018–2025",
+"body_styles": [
+"4-door sedan",
+" 5-door Avant (estate/wagon)"
+],
+"image": "Audi S6 Avant C8 IMG 1974.jpg",
+"wikipedia_title": "Audi S6"
 },
 {
 "brand": "Audi",
@@ -2410,335 +2956,6 @@
 },
 {
 "brand": "Audi",
-"model": "Audi RS 4",
-"generation": "First generation B5 (8D)",
-"code": "",
-"years": [
-1999,
-2001
-],
-"production": "1999–2001<ref> cite web title=Last Audi RS 4 Leaves Neckarsulm url=https://www.audiworld.com/news/01/080201/content.shtm",
-"body_styles": [
-"5-door Avant (estate/wagon)"
-],
-"image": "Audi-RS4-B5.jpg",
-"wikipedia_title": "Audi RS 4"
-},
-{
-"brand": "Audi",
-"model": "Audi RS 4",
-"generation": "Second generation B7 (8E)",
-"code": "",
-"years": [
-2006,
-2008
-],
-"production": "2006–2008",
-"body_styles": [
-"4-door saloon/sedan",
-" 5-door Avant (estate/wagon)",
-" 2-door Cabriolet"
-],
-"image": "2005-03-04 Motorshow Geneva 052 (cropped).JPG",
-"wikipedia_title": "Audi RS 4"
-},
-{
-"brand": "Audi",
-"model": "Audi RS 4",
-"generation": "Third generation B8 (8K)",
-"code": "",
-"years": [
-2012,
-2015
-],
-"production": "2012&ndash;2015",
-"body_styles": [
-"5-door estate/wagon"
-],
-"image": "2013 Audi RS4 Avant front.jpg",
-"wikipedia_title": "Audi RS 4"
-},
-{
-"brand": "Audi",
-"model": "Audi RS 4",
-"generation": "Fourth generation B9 (8W)",
-"code": "",
-"years": [
-2018,
-2025
-],
-"production": "2018&ndash;2025",
-"body_styles": [
-"5-door estate/wagon"
-],
-"image": "2018 Audi RS4 TFSi Quattro Automatic 2.9.jpg",
-"wikipedia_title": "Audi RS 4"
-},
-{
-"brand": "Audi",
-"model": "Audi S6",
-"generation": "Audi S6",
-"code": "",
-"years": [
-1994,
-2025
-],
-"production": "1994–1997 1999–2003 2006–2025",
-"body_styles": [
-"4-door saloon/sedan",
-" 5-door Avant (estate/wagon)"
-],
-"image": "Audi S6 Avant C8 IMG 4309.jpg",
-"wikipedia_title": "Audi S6"
-},
-{
-"brand": "Audi",
-"model": "Audi S6",
-"generation": "First generation (C4/4A)",
-"code": "",
-"years": [
-1994,
-1997
-],
-"production": "1994–1997",
-"body_styles": [],
-"image": "Audi S6 C4.jpg",
-"wikipedia_title": "Audi S6"
-},
-{
-"brand": "Audi",
-"model": "Audi S6",
-"generation": "Second generation (C5/4B)",
-"code": "",
-"years": [
-1999,
-2003
-],
-"production": "1999–2003",
-"body_styles": [],
-"image": "2003 Audi S6 C5 (Typ 4B) (4383585474).jpg",
-"wikipedia_title": "Audi S6"
-},
-{
-"brand": "Audi",
-"model": "Audi S6",
-"generation": "Third generation (C6/4F)",
-"code": "",
-"years": [
-2005,
-2011
-],
-"production": "2005–2011",
-"body_styles": [],
-"image": "AudiS6av (cropped).JPG",
-"wikipedia_title": "Audi S6"
-},
-{
-"brand": "Audi",
-"model": "Audi S6",
-"generation": "Fourth generation (C7/4G)",
-"code": "",
-"years": [
-2012,
-2018
-],
-"production": "2012–2018",
-"body_styles": [
-"4-door sedan",
-" 5-door Avant (estate/wagon)"
-],
-"image": "Audi S6 Avant (C7) – Frontansicht, 7. September 2013, Münster.jpg",
-"wikipedia_title": "Audi S6"
-},
-{
-"brand": "Audi",
-"model": "Audi S6",
-"generation": "Fifth generation (C8)",
-"code": "",
-"years": [
-2018,
-2025
-],
-"production": "2018–2025",
-"body_styles": [
-"4-door sedan",
-" 5-door Avant (estate/wagon)"
-],
-"image": "Audi S6 Avant C8 IMG 1974.jpg",
-"wikipedia_title": "Audi S6"
-},
-{
-"brand": "Audi",
-"model": "Audi S2",
-"generation": "Audi S2",
-"code": "",
-"years": [
-1990,
-1995
-],
-"production": "September 1990 – December 1995",
-"body_styles": [
-"3-door liftback coupé 4-door sedan 5-door estate"
-],
-"image": "Audi S2 Wikipedia.JPG",
-"wikipedia_title": "Audi S2"
-},
-{
-"brand": "Audi",
-"model": "Audi Avantissimo",
-"generation": "Audi Avantissimo",
-"code": "",
-"years": [
-2001,
-2001
-],
-"production": "2001",
-"body_styles": [
-"5-door Avant"
-],
-"image": "",
-"wikipedia_title": "Audi Avantissimo"
-},
-{
-"brand": "Audi",
-"model": "Audi Q3",
-"generation": "Audi Q3",
-"code": "",
-"years": [
-2011,
-2026
-],
-"production": "2011–present",
-"body_styles": [],
-"image": "Audi Q3 F3 DSC 7494.jpg",
-"wikipedia_title": "Audi Q3"
-},
-{
-"brand": "Audi",
-"model": "Audi Q3",
-"generation": "First generation",
-"code": "8U",
-"years": [
-2011,
-2018
-],
-"production": "June 2011–2018",
-"body_styles": [
-"5-door SUV"
-],
-"image": "Audi Q3 2.0 TDI quattro S tronic Karibubraun.JPG",
-"wikipedia_title": "Audi Q3"
-},
-{
-"brand": "Audi",
-"model": "Audi Q3",
-"generation": "Second generation",
-"code": "F3",
-"years": [
-2018,
-2025
-],
-"production": "August 2018– June 2025",
-"body_styles": [
-"5-door SUV 5-door coupé SUV (Sportback)"
-],
-"image": "Audi Q3 Sportback 1X7A0175.jpg",
-"wikipedia_title": "Audi Q3"
-},
-{
-"brand": "Audi",
-"model": "Audi Q3",
-"generation": "Third generation",
-"code": "FJ",
-"years": [
-2025,
-2026
-],
-"production": "July 2025 – present",
-"body_styles": [
-"5-door SUV 5-door coupé SUV (Sportback)"
-],
-"image": "Audi Q3 1.5 TFSI e-hybrid S line (FJ) – f 29032026.jpg",
-"wikipedia_title": "Audi Q3"
-},
-{
-"brand": "Audi",
-"model": "Audi Nuvolari",
-"generation": "Audi Nuvolari",
-"code": "",
-"years": [
-2026,
-2026
-],
-"production": "Late 2026 (to commence) Limited to 499 units",
-"body_styles": [
-"2-door coupé"
-],
-"image": "27 Audi Nuvolari.jpg",
-"wikipedia_title": "Audi Nuvolari"
-},
-{
-"brand": "Audi",
-"model": "Audi A1",
-"generation": "Audi A1",
-"code": "",
-"years": [
-2010,
-2026
-],
-"production": "May 2010 – April 2026 1,389,658 units",
-"body_styles": [],
-"image": "2018 Audi A1 S Line 30 TFSi S-A 1.0.jpg",
-"wikipedia_title": "Audi A1"
-},
-{
-"brand": "Audi",
-"model": "Audi A1",
-"generation": "First generation",
-"code": "8X",
-"years": [
-2010,
-2018
-],
-"production": "May 2010 – August 2018",
-"body_styles": [
-"3/5-door hatchback"
-],
-"image": "Audi A1 1.4 TFSI Ambition – Frontansicht, 26. Februar 2012, Velbert.jpg",
-"wikipedia_title": "Audi A1"
-},
-{
-"brand": "Audi",
-"model": "Audi A1",
-"generation": "Second generation",
-"code": "GB",
-"years": [
-2018,
-2026
-],
-"production": "October 2018 – April 2026",
-"body_styles": [
-"5-door hatchback"
-],
-"image": "2019 Audi A1 S Line 30 TFSi 1.0 Front.jpg",
-"wikipedia_title": "Audi A1"
-},
-{
-"brand": "Audi",
-"model": "Audi S5",
-"generation": "Audi S5",
-"code": "",
-"years": [
-2007,
-2026
-],
-"production": "2007&ndash;present",
-"body_styles": [],
-"image": "2018 Audi S5 sedan front 4.11.18.jpg",
-"wikipedia_title": "Audi S5"
-},
-{
-"brand": "Audi",
 "model": "Audi Steppenwolf",
 "generation": "Audi Steppenwolf",
 "code": "",
@@ -2755,143 +2972,19 @@
 },
 {
 "brand": "Audi",
-"model": "Audi RS 2 Avant",
-"generation": "Audi RS 2 Avant (8C)",
+"model": "Audi TT",
+"generation": "Audi TT",
 "code": "",
 "years": [
-1994,
-1995
+1998,
+2023
 ],
-"production": "March 1994 – July 1995",
+"production": "February 1998 – November 2023",
 "body_styles": [
-"5-door estate car"
+"3-door coupé (first and second generations) 2-door coupé (third generation) 2-door roadster"
 ],
-"image": "1995 Audi RS2 Avant LC25.jpg",
-"wikipedia_title": "Audi RS 2 Avant"
-},
-{
-"brand": "Audi",
-"model": "Audi Q2",
-"generation": "Audi Q2",
-"code": "",
-"years": [
-2016,
-2026
-],
-"production": "2016 – April 2026 887,231 units",
-"body_styles": [
-"5-door SUV"
-],
-"image": "2017 Audi Q2 Sport TDi 1.6 Front.jpg",
-"wikipedia_title": "Audi Q2"
-},
-{
-"brand": "Audi",
-"model": "Audi Q8",
-"generation": "Audi Q8",
-"code": "",
-"years": [
-2018,
-2026
-],
-"production": "June 2018 – present",
-"body_styles": [
-"5-door coupe SUV"
-],
-"image": "",
-"wikipedia_title": "Audi Q8"
-},
-{
-"brand": "Audi",
-"model": "Audi R8 (Type 42)",
-"generation": "Audi R8 (Type 42)",
-"code": "",
-"years": [
-2006,
-2015
-],
-"production": "June 2006 – August 2015",
-"body_styles": [
-"2-door coupé 2-door convertible (spyder)"
-],
-"image": "2010 Audi R8 Spyder Quattro V10 5.2.jpg",
-"wikipedia_title": "Audi R8 (Type 42)"
-},
-{
-"brand": "Audi",
-"model": "Audi R8 (Type 4S)",
-"generation": "Audi R8 (Type 4S)",
-"code": "",
-"years": [
-2014,
-2024
-],
-"production": "December 2014–2024",
-"body_styles": [],
-"image": "2020 Audi R8 V10 5.2 Front.jpg",
-"wikipedia_title": "Audi R8 (Type 4S)"
-},
-{
-"brand": "Audi",
-"model": "Audi Q6",
-"generation": "Audi Q6 (China)",
-"code": "",
-"years": [
-2022,
-2026
-],
-"production": "2022–present",
-"body_styles": [
-"5-door SUV"
-],
-"image": "2022 SAIC-Audi Q6.jpg",
-"wikipedia_title": "Audi Q6"
-},
-{
-"brand": "Audi",
-"model": "Audi A6 e-tron",
-"generation": "Audi A6 e-tron",
-"code": "",
-"years": [
-2024,
-2026
-],
-"production": "2024–present",
-"body_styles": [],
-"image": "Audi A6 Avant e-tron – f 18042025.jpg",
-"wikipedia_title": "Audi A6 e-tron"
-},
-{
-"brand": "Audi",
-"model": "Audi Q9",
-"generation": "Audi Q9",
-"code": "",
-"years": [
-2026,
-2026
-],
-"production": "2026 (to commence)",
-"body_styles": [
-"5-door SUV"
-],
-"image": "2026 Audi Q9 right front - Autowizja (cropped) (cropped).jpg",
-"wikipedia_title": "Audi Q9"
-},
-{
-"brand": "Audi",
-"model": "Audi A2 e-tron",
-"generation": "Audi A2 e-tron",
-"code": "",
-"years": [
-2026,
-2026
-],
-"production": "2026 (to commence)",
-"body_styles": [
-"5-door hatchback"
-],
-"image": "",
-"wikipedia_title": "Audi A2 e-tron"
+"image": "2019 Audi TT Sport 40 TFSi S-A 2.0 Front.jpg",
+"wikipedia_title": "Audi TT"
 },
 {
 "brand": "Audi",
@@ -2910,90 +3003,347 @@
 "wikipedia_title": "Audi e-tron GT"
 },
 {
-"brand": "SEAT",
-"model": "SEAT León",
-"generation": "SEAT León",
+"brand": "Audi",
+"model": "Audi RSQ",
+"generation": "Audi RSQ",
 "code": "",
 "years": [
-1999,
-2026
+2004,
+2004
 ],
-"production": "October 1999 – present",
-"body_styles": [],
-"image": "2020_SEAT_Leon_FR_TSi_Evo_1.5_Front.jpg",
-"wikipedia_title": "SEAT León"
+"production": "2004",
+"body_styles": [
+"2-door coupé"
+],
+"image": "Audi study.JPG",
+"wikipedia_title": "Audi RSQ"
 },
 {
-"brand": "SEAT",
-"model": "SEAT León",
-"generation": "SEAT León Mk1 (1M)",
+"brand": "Audi",
+"model": "Audi RSQ",
+"generation": "Audi RSQ e-tron",
 "code": "",
 "years": [
-1999,
-2006
+2019,
+2019
 ],
-"production": "July 1999 – August 2006",
-"body_styles": [],
-"image": "Seat Leon front 20080809.jpg",
-"wikipedia_title": "SEAT León"
+"production": "2019",
+"body_styles": [
+"2-door coupé"
+],
+"image": "",
+"wikipedia_title": "Audi RSQ"
 },
 {
-"brand": "SEAT",
-"model": "SEAT León",
-"generation": "SEAT León Mk2 (1P)",
-"code": "",
+"brand": "Audi",
+"model": "Audi A3",
+"generation": "Audi A3 First generation",
+"code": "8L",
 "years": [
-2005,
-2012
+1996,
+2003
 ],
-"production": "July 2005–2012",
-"body_styles": [],
-"image": "2008 SEAT Leon Reference 1.6 Front.jpg",
-"wikipedia_title": "SEAT León"
+"production": "September 1996–2003",
+"body_styles": [
+"3-door hatchback 5-door hatchback"
+],
+"image": "1998 Audi A3 Automatic 1.6 Front.jpg",
+"wikipedia_title": "Audi A3"
 },
 {
-"brand": "SEAT",
-"model": "SEAT León",
-"generation": "SEAT León Mk3",
-"code": "",
+"brand": "Audi",
+"model": "Audi A3",
+"generation": "Audi A3 Second generation",
+"code": "8P",
 "years": [
-2012,
-2020
+2003,
+2013
 ],
-"production": "October 2012–2020",
-"body_styles": [],
-"image": "Seat Leon 1.4 TSI Start&Stop Style (III) – Frontansicht, 10. August 2013, Ratingen.jpg",
-"wikipedia_title": "SEAT León"
+"production": "2003–2013",
+"body_styles": [
+"3-door hatchback 5-door Sportback (hatchback) 2-door convertible"
+],
+"image": "2008 Audi A3 Sport TDi 1.9 Front.jpg",
+"wikipedia_title": "Audi A3"
 },
 {
-"brand": "SEAT",
-"model": "SEAT León",
-"generation": "SEAT León Mk4",
-"code": "KL1/KL8",
+"brand": "Audi",
+"model": "Audi A3",
+"generation": "Audi A3 Fourth generation",
+"code": "8Y",
 "years": [
 2020,
 2026
 ],
-"production": "January 2020–present",
-"body_styles": [],
-"image": "SEAT Leon Mk4 IMG 4159.jpg",
-"wikipedia_title": "SEAT León"
+"production": "May 2020–present",
+"body_styles": [
+"5-door hatchback (Sportback) 4-door saloon"
+],
+"image": "2020 Audi A3 S Line Edition 1 35 TD 2.0.jpg",
+"wikipedia_title": "Audi A3"
 },
 {
-"brand": "SEAT",
-"model": "SEAT Alhambra",
-"generation": "SEAT Alhambra",
+"brand": "Audi",
+"model": "Audi A4",
+"generation": "Audi A4 First generation (B5/8D)",
 "code": "",
 "years": [
-1996,
-2020
+1994,
+2001
 ],
-"production": "1996–2020",
+"production": "1994 – 2001 1,674,943 built",
 "body_styles": [
-"5-door MPV"
+"4 door saloon/sedan",
+" 5-door Avant (estate/wagon)"
 ],
-"image": "Seat Alhambra Style (II, Facelift) – f 20052021.jpg",
-"wikipedia_title": "SEAT Alhambra"
+"image": "1996 Audi A4 SE 1.8 Front (1).jpg",
+"wikipedia_title": "Audi A4"
+},
+{
+"brand": "Audi",
+"model": "Audi A4",
+"generation": "Audi A4 Second generation (B6/8E/8H)",
+"code": "",
+"years": [
+2000,
+2006
+],
+"production": "2000–2006 (FAW-VW)",
+"body_styles": [
+"4-door saloon/sedan 5-door Avant (estate/wagon) 2-door Cabriolet"
+],
+"image": "Audi_A4_B6_Avant_black.JPG",
+"wikipedia_title": "Audi A4"
+},
+{
+"brand": "Audi",
+"model": "Audi A4",
+"generation": "Audi A4 Third generation (B7/8E/8H)",
+"code": "",
+"years": [
+2004,
+2009
+],
+"production": "2004–2009",
+"body_styles": [
+"4-door saloon/sedan",
+" 5-door Avant (estate/wagon)",
+" 2-door Cabriolet"
+],
+"image": "2005 Audi A4 T S Line 1.8 Front.jpg",
+"wikipedia_title": "Audi A4"
+},
+{
+"brand": "Audi",
+"model": "Audi A4",
+"generation": "Audi A4 Fourth generation (B8/8K)",
+"code": "",
+"years": [
+2008,
+2016
+],
+"production": "2008–2016",
+"body_styles": [
+"4-door saloon/sedan",
+" 5-door Avant (estate/wagon)"
+],
+"image": "2009 Audi A4 (8K MY10) 2.0 TDI sedan (2015-07-09) 01.jpg",
+"wikipedia_title": "Audi A4"
+},
+{
+"brand": "Audi",
+"model": "Audi A4",
+"generation": "Audi A4 Fifth generation (B9/8W)",
+"code": "",
+"years": [
+2015,
+2025
+],
+"production": "2015–2025",
+"body_styles": [
+"4-door saloon/sedan",
+" 5-door Avant (estate/wagon)"
+],
+"image": "2017 Audi A4 (8W) sport quattro sedan (2018-10-19) 01.jpg",
+"wikipedia_title": "Audi A4"
+},
+{
+"brand": "Audi",
+"model": "Audi S4",
+"generation": "Audi S4 Second generation (B5/8D)",
+"code": "",
+"years": [
+1997,
+2001
+],
+"production": "October 1997–September 2001",
+"body_styles": [
+"4-door saloon/sedan 5-door estate/wagon (Avant)"
+],
+"image": "Audis4avant b5.jpg",
+"wikipedia_title": "Audi S4"
+},
+{
+"brand": "Audi",
+"model": "Audi S4",
+"generation": "Audi S4 Third generation (B6/8E/8H)",
+"code": "",
+"years": [
+2003,
+2005
+],
+"production": "Mar 2003–Dec 2004 Feb 2004–Dec 2005 (Cabrio)",
+"body_styles": [
+"4-door saloon/sedan",
+" 5-door estate/wagon (Avant)",
+" 2-door cabriolet"
+],
+"image": "Audi S4 Cabriolet - Flickr - The Car Spy (23).jpg",
+"wikipedia_title": "Audi S4"
+},
+{
+"brand": "Audi",
+"model": "Audi S4",
+"generation": "Audi S4 Fourth generation (B7/8E/8H)",
+"code": "",
+"years": [
+2004,
+2008
+],
+"production": "Nov 2004–Jun 2008 Jan 2006–2008 (cabrio)",
+"body_styles": [
+"4-door saloon/sedan",
+" 5-door estate/wagon (Avant)",
+" 2-door cabriolet"
+],
+"image": "AudiS4 B7 Avant front.jpg",
+"wikipedia_title": "Audi S4"
+},
+{
+"brand": "Audi",
+"model": "Audi S4",
+"generation": "Audi S4 Fifth generation (B8/8K)",
+"code": "",
+"years": [
+2008,
+2016
+],
+"production": "Nov 2008–2016",
+"body_styles": [
+"4-door saloon/sedan",
+" 5-door estate/wagon (Avant)"
+],
+"image": "Audi S4 Avant (8661161216) (cropped).jpg",
+"wikipedia_title": "Audi S4"
+},
+{
+"brand": "Audi",
+"model": "Audi S4",
+"generation": "Audi S4 Sixth generation (B9/8W)",
+"code": "",
+"years": [
+2017,
+2025
+],
+"production": "2017–2025",
+"body_styles": [
+"4-door saloon/sedan",
+" 5-door estate/wagon (Avant)"
+],
+"image": "2017 Audi S4 TFSi Quattro Automatic Sedan 3.0 Front.jpg",
+"wikipedia_title": "Audi S4"
+},
+{
+"brand": "Audi",
+"model": "Audi Coupé",
+"generation": "Audi Coupé/Cabriolet",
+"code": "",
+"years": [
+1980,
+2000
+],
+"production": "1980–2000",
+"body_styles": [],
+"image": "Audi Coupé 2.3E B3, silver, front left side.jpg",
+"wikipedia_title": "Audi Coupé"
+},
+{
+"brand": "Audi",
+"model": "Audi Coupé",
+"generation": "Audi Coupé B3 ( Typ 8B)",
+"code": "",
+"years": [
+1988,
+1996
+],
+"production": "1988&ndash;1996",
+"body_styles": [
+"3-door liftback coupé"
+],
+"image": "Audi Coupé Typ 89 vorne.png",
+"wikipedia_title": "Audi Coupé"
+},
+{
+"brand": "Audi",
+"model": "Audi Coupé",
+"generation": "Audi Cabriolet ( Typ 8G)",
+"code": "",
+"years": [
+1991,
+2000
+],
+"production": "1991&ndash;2000",
+"body_styles": [
+"2-door convertible"
+],
+"image": "Disfrutando del paisaje.JPG",
+"wikipedia_title": "Audi Coupé"
+},
+{
+"brand": "Audi",
+"model": "Audi S and RS models",
+"generation": "Audi S, Audi RS",
+"code": "",
+"years": [
+1983,
+2026
+],
+"production": "1983–present",
+"body_styles": [],
+"image": "RS S AA.png",
+"wikipedia_title": "Audi S and RS models"
+},
+{
+"brand": "Audi",
+"model": "AUDI E5",
+"generation": "AUDI E5 AUDI E5 AUDI E5 AUDI E5 AUDI E5 AUDI E5 AUDI E5 Sportback",
+"code": "",
+"years": [
+2025,
+2026
+],
+"production": "August 2025 – present",
+"body_styles": [
+"5-door shooting brake"
+],
+"image": "AUDI E5 SPORTBACK China.jpg",
+"wikipedia_title": "AUDI E5"
+},
+{
+"brand": "Audi",
+"model": "AUDI E7X",
+"generation": "AUDI E7X",
+"code": "",
+"years": [
+2026,
+2026
+],
+"production": "April 2026 – present",
+"body_styles": [
+"5-door crossover SUV"
+],
+"image": "AUDI E7X China.jpg",
+"wikipedia_title": "AUDI E7X"
 },
 {
 "brand": "SEAT",
@@ -3025,38 +3375,6 @@
 },
 {
 "brand": "SEAT",
-"model": "SEAT Marbella",
-"generation": "SEAT Panda SEAT Marbella",
-"code": "",
-"years": [
-1980,
-1998
-],
-"production": "1980–1986 (Panda) 1986–1998 (Marbella)",
-"body_styles": [
-"3-door hatchback"
-],
-"image": "Seat Marbella front 20071012.jpg",
-"wikipedia_title": "SEAT Marbella"
-},
-{
-"brand": "SEAT",
-"model": "SEAT Altea",
-"generation": "SEAT Altea",
-"code": "",
-"years": [
-2004,
-2015
-],
-"production": "2004–2015",
-"body_styles": [
-"5-door MPV"
-],
-"image": "2007 SEAT Altea Reference TDi 1.9 Front.jpg",
-"wikipedia_title": "SEAT Altea"
-},
-{
-"brand": "SEAT",
 "model": "SEAT Altea",
 "generation": "SEAT Altea XL Seat Altea Freetrack",
 "code": "",
@@ -3070,274 +3388,6 @@
 ],
 "image": "Seat Altea XL 2.0 TDI – Frontansicht, 1. Mai 2013, Münster.jpg",
 "wikipedia_title": "SEAT Altea"
-},
-{
-"brand": "SEAT",
-"model": "SEAT Toledo",
-"generation": "SEAT Toledo",
-"code": "",
-"years": [
-1991,
-2019
-],
-"production": "May 1991 – May 2009 2012–February 2019",
-"body_styles": [],
-"image": "2014 Seat Toledo 1.6 TDI front view.jpg",
-"wikipedia_title": "SEAT Toledo"
-},
-{
-"brand": "SEAT",
-"model": "SEAT Toledo",
-"generation": "Mk1 (1L)",
-"code": "",
-"years": [
-1991,
-1999
-],
-"production": "May 1991 – June 1999",
-"body_styles": [
-"5-door liftback"
-],
-"image": "SEAT Toledo Sport 1992 con PackGT.jpg",
-"wikipedia_title": "SEAT Toledo"
-},
-{
-"brand": "SEAT",
-"model": "SEAT Toledo",
-"generation": "Mk2 (1M)",
-"code": "",
-"years": [
-1998,
-2004
-],
-"production": "October 1998 – July 2004",
-"body_styles": [
-"4-door notchback saloon"
-],
-"image": "Seat Toledo II front 20081230.jpg",
-"wikipedia_title": "SEAT Toledo"
-},
-{
-"brand": "SEAT",
-"model": "SEAT Toledo",
-"generation": "Mk3 (5P)",
-"code": "",
-"years": [
-2004,
-2009
-],
-"production": "February 2004 – May 2009",
-"body_styles": [
-"5-door hatchback"
-],
-"image": "Seat Toledo front 20080227.jpg",
-"wikipedia_title": "SEAT Toledo"
-},
-{
-"brand": "SEAT",
-"model": "SEAT Toledo",
-"generation": "Mk4 (KG)",
-"code": "",
-"years": [
-2012,
-2019
-],
-"production": "Late 2012 – February 2019",
-"body_styles": [
-"5-door liftback"
-],
-"image": "Seat Toledo 1.4 TSI Style Salsa (IV) – Frontansicht, 1. September 2013, Münster.jpg",
-"wikipedia_title": "SEAT Toledo"
-},
-{
-"brand": "SEAT",
-"model": "SEAT Arosa",
-"generation": "SEAT Arosa",
-"code": "",
-"years": [
-1997,
-2004
-],
-"production": "1997–2004",
-"body_styles": [
-"3-door hatchback"
-],
-"image": "2002 SEAT Arosa 1.0 Front.jpg",
-"wikipedia_title": "SEAT Arosa"
-},
-{
-"brand": "SEAT",
-"model": "SEAT Córdoba",
-"generation": "SEAT Córdoba",
-"code": "",
-"years": [
-1993,
-2008
-],
-"production": "1993–2008",
-"body_styles": [],
-"image": "2003 SEAT Cordoba S 1.4 Front (1).jpg",
-"wikipedia_title": "SEAT Córdoba"
-},
-{
-"brand": "SEAT",
-"model": "SEAT Córdoba",
-"generation": "First generation (6K)",
-"code": "",
-"years": [
-1993,
-2002
-],
-"production": "1993–2002",
-"body_styles": [
-"2-door coupé 4-door saloon 5-door estate"
-],
-"image": "Seat Cordoba front 20080328.jpg",
-"wikipedia_title": "SEAT Córdoba"
-},
-{
-"brand": "SEAT",
-"model": "SEAT Córdoba",
-"generation": "Second generation (6L)",
-"code": "",
-"years": [
-2002,
-2008
-],
-"production": "2002–2008",
-"body_styles": [
-"4-door saloon"
-],
-"image": "2003 SEAT Cordoba S 1.4 Front.jpg",
-"wikipedia_title": "SEAT Córdoba"
-},
-{
-"brand": "SEAT",
-"model": "SEAT Inca",
-"generation": "SEAT Inca",
-"code": "",
-"years": [
-1996,
-2004
-],
-"production": "1996–2004",
-"body_styles": [
-"3-door van/panel van"
-],
-"image": "MHV Seat Inca 01.jpg",
-"wikipedia_title": "SEAT Inca"
-},
-{
-"brand": "SEAT",
-"model": "SEAT Tribu",
-"generation": "SEAT Tribu",
-"code": "",
-"years": [
-2007,
-2007
-],
-"production": "2007 <small>(Concept car)</small>",
-"body_styles": [
-"3-door SUV"
-],
-"image": "Seat Tribu.jpg",
-"wikipedia_title": "SEAT Tribu"
-},
-{
-"brand": "SEAT",
-"model": "SEAT Exeo",
-"generation": "SEAT Exeo",
-"code": "",
-"years": [
-2008,
-2014
-],
-"production": "2008–2014",
-"body_styles": [
-"4-door saloon 5-door estate"
-],
-"image": "2011 SEAT Exeo Sport Tech CR TDi 168 2.0 Front.jpg",
-"wikipedia_title": "SEAT Exeo"
-},
-{
-"brand": "SEAT",
-"model": "SEAT Cupra GT",
-"generation": "SEAT Cupra GT",
-"code": "",
-"years": [
-2003,
-2003
-],
-"production": "2003",
-"body_styles": [
-"Coupé"
-],
-"image": "SEAT Cupra GT cropped.jpg",
-"wikipedia_title": "SEAT Cupra GT"
-},
-{
-"brand": "SEAT",
-"model": "SEAT Tango",
-"generation": "SEAT Tango",
-"code": "",
-"years": [
-2001,
-2001
-],
-"production": "2001",
-"body_styles": [
-"2-door 2-seat roadster"
-],
-"image": "SEAT Tango.jpg",
-"wikipedia_title": "SEAT Tango"
-},
-{
-"brand": "SEAT",
-"model": "SEAT Bolero",
-"generation": "SEAT Bolero 330 BT",
-"code": "",
-"years": [
-1998,
-1998
-],
-"production": "1998 (concept car)",
-"body_styles": [
-"4-door saloon"
-],
-"image": "SEAT_Bolero_330BT_(cropped).jpg",
-"wikipedia_title": "SEAT Bolero"
-},
-{
-"brand": "SEAT",
-"model": "SEAT Salsa",
-"generation": "SEAT Salsa",
-"code": "",
-"years": [
-2000,
-2000
-],
-"production": "2000",
-"body_styles": [
-"3-door coupé"
-],
-"image": "SEAT_Salsa_Emocion_Clasissauto_2015_(4).jpg",
-"wikipedia_title": "SEAT Salsa"
-},
-{
-"brand": "SEAT",
-"model": "SEAT Fórmula",
-"generation": "SEAT Fórmula",
-"code": "",
-"years": [
-1999,
-1999
-],
-"production": "1999 (Concept car)",
-"body_styles": [
-"2-door roadster"
-],
-"image": "Seat Formula green v TCE.jpg",
-"wikipedia_title": "SEAT Fórmula"
 },
 {
 "brand": "SEAT",
@@ -3357,22 +3407,6 @@
 },
 {
 "brand": "SEAT",
-"model": "SEAT Ateca",
-"generation": "SEAT Ateca",
-"code": "KH7",
-"years": [
-2016,
-2026
-],
-"production": "2016–2026",
-"body_styles": [
-"5-door SUV"
-],
-"image": "2017 SEAT Ateca Xcellence 1.4 Front.jpg",
-"wikipedia_title": "SEAT Ateca"
-},
-{
-"brand": "SEAT",
 "model": "SEAT Arona",
 "generation": "SEAT Arona",
 "code": "KJ7",
@@ -3386,6 +3420,254 @@
 ],
 "image": "2018 SEAT Arona SE Technology TSi 1.0 Front (1).jpg",
 "wikipedia_title": "SEAT Arona"
+},
+{
+"brand": "SEAT",
+"model": "SEAT Arosa",
+"generation": "SEAT Arosa",
+"code": "",
+"years": [
+1997,
+2004
+],
+"production": "1997–2004",
+"body_styles": [
+"3-door hatchback"
+],
+"image": "2002 SEAT Arosa 1.0 Front.jpg",
+"wikipedia_title": "SEAT Arosa"
+},
+{
+"brand": "SEAT",
+"model": "SEAT Bolero",
+"generation": "SEAT Bolero 330 BT",
+"code": "",
+"years": [
+1998,
+1998
+],
+"production": "1998 (concept car)",
+"body_styles": [
+"4-door saloon"
+],
+"image": "SEAT_Bolero_330BT_(cropped).jpg",
+"wikipedia_title": "SEAT Bolero"
+},
+{
+"brand": "SEAT",
+"model": "SEAT Cupra GT",
+"generation": "SEAT Cupra GT",
+"code": "",
+"years": [
+2003,
+2003
+],
+"production": "2003",
+"body_styles": [
+"Coupé"
+],
+"image": "SEAT Cupra GT cropped.jpg",
+"wikipedia_title": "SEAT Cupra GT"
+},
+{
+"brand": "SEAT",
+"model": "SEAT Córdoba",
+"generation": "SEAT Córdoba SEAT Córdoba SEAT Córdoba SEAT Córdoba SEAT Córdoba First generation (6K)",
+"code": "",
+"years": [
+1993,
+2002
+],
+"production": "1993–2002",
+"body_styles": [
+"2-door coupé 4-door saloon 5-door estate"
+],
+"image": "Seat Cordoba front 20080328.jpg",
+"wikipedia_title": "SEAT Córdoba"
+},
+{
+"brand": "SEAT",
+"model": "SEAT Córdoba",
+"generation": "SEAT Córdoba SEAT Córdoba SEAT Córdoba SEAT Córdoba SEAT Córdoba Second generation (6L)",
+"code": "",
+"years": [
+2002,
+2008
+],
+"production": "2002–2008",
+"body_styles": [
+"4-door saloon"
+],
+"image": "2003 SEAT Cordoba S 1.4 Front.jpg",
+"wikipedia_title": "SEAT Córdoba"
+},
+{
+"brand": "SEAT",
+"model": "SEAT Exeo",
+"generation": "SEAT Exeo",
+"code": "",
+"years": [
+2008,
+2014
+],
+"production": "2008–2014",
+"body_styles": [
+"4-door saloon 5-door estate"
+],
+"image": "2011 SEAT Exeo Sport Tech CR TDi 168 2.0 Front.jpg",
+"wikipedia_title": "SEAT Exeo"
+},
+{
+"brand": "SEAT",
+"model": "SEAT Fórmula",
+"generation": "SEAT Fórmula",
+"code": "",
+"years": [
+1999,
+1999
+],
+"production": "1999 (Concept car)",
+"body_styles": [
+"2-door roadster"
+],
+"image": "Seat Formula green v TCE.jpg",
+"wikipedia_title": "SEAT Fórmula"
+},
+{
+"brand": "SEAT",
+"model": "SEAT IBL",
+"generation": "SEAT IBL",
+"code": "",
+"years": [
+2011,
+2011
+],
+"production": "2011 <small>(Concept Car)</small>",
+"body_styles": [
+"4 door saloon"
+],
+"image": "Seat IBL (front quarter).jpg",
+"wikipedia_title": "SEAT IBL"
+},
+{
+"brand": "SEAT",
+"model": "SEAT Inca",
+"generation": "SEAT Inca",
+"code": "",
+"years": [
+1996,
+2004
+],
+"production": "1996–2004",
+"body_styles": [
+"3-door van/panel van"
+],
+"image": "MHV Seat Inca 01.jpg",
+"wikipedia_title": "SEAT Inca"
+},
+{
+"brand": "SEAT",
+"model": "SEAT León",
+"generation": "SEAT León SEAT León SEAT León SEAT León SEAT León SEAT León Mk1 (1M)",
+"code": "",
+"years": [
+1999,
+2006
+],
+"production": "July 1999 – August 2006",
+"body_styles": [],
+"image": "Seat Leon front 20080809.jpg",
+"wikipedia_title": "SEAT León"
+},
+{
+"brand": "SEAT",
+"model": "SEAT León",
+"generation": "SEAT León SEAT León SEAT León SEAT León SEAT León SEAT León Mk2 (1P)",
+"code": "",
+"years": [
+2005,
+2012
+],
+"production": "July 2005–2012",
+"body_styles": [],
+"image": "2008 SEAT Leon Reference 1.6 Front.jpg",
+"wikipedia_title": "SEAT León"
+},
+{
+"brand": "SEAT",
+"model": "SEAT León",
+"generation": "SEAT León SEAT León SEAT León SEAT León SEAT León SEAT León Mk3",
+"code": "",
+"years": [
+2012,
+2020
+],
+"production": "October 2012–2020",
+"body_styles": [],
+"image": "Seat Leon 1.4 TSI Start&Stop Style (III) – Frontansicht, 10. August 2013, Ratingen.jpg",
+"wikipedia_title": "SEAT León"
+},
+{
+"brand": "SEAT",
+"model": "SEAT León",
+"generation": "SEAT León SEAT León SEAT León SEAT León SEAT León SEAT León Mk4",
+"code": "KL1/KL8",
+"years": [
+2020,
+2026
+],
+"production": "January 2020–present",
+"body_styles": [],
+"image": "SEAT Leon Mk4 IMG 4159.jpg",
+"wikipedia_title": "SEAT León"
+},
+{
+"brand": "SEAT",
+"model": "SEAT Marbella",
+"generation": "SEAT Panda SEAT Marbella",
+"code": "",
+"years": [
+1980,
+1998
+],
+"production": "1980–1986 (Panda) 1986–1998 (Marbella)",
+"body_styles": [
+"3-door hatchback"
+],
+"image": "Seat Marbella front 20071012.jpg",
+"wikipedia_title": "SEAT Marbella"
+},
+{
+"brand": "SEAT",
+"model": "SEAT Salsa",
+"generation": "SEAT Salsa",
+"code": "",
+"years": [
+2000,
+2000
+],
+"production": "2000",
+"body_styles": [
+"3-door coupé"
+],
+"image": "SEAT_Salsa_Emocion_Clasissauto_2015_(4).jpg",
+"wikipedia_title": "SEAT Salsa"
+},
+{
+"brand": "SEAT",
+"model": "SEAT Tango",
+"generation": "SEAT Tango",
+"code": "",
+"years": [
+2001,
+2001
+],
+"production": "2001",
+"body_styles": [
+"2-door 2-seat roadster"
+],
+"image": "SEAT Tango.jpg",
+"wikipedia_title": "SEAT Tango"
 },
 {
 "brand": "SEAT",
@@ -3405,19 +3687,179 @@
 },
 {
 "brand": "SEAT",
-"model": "SEAT IBL",
-"generation": "SEAT IBL",
+"model": "SEAT Toledo",
+"generation": "SEAT Toledo Mk1 (1L)",
 "code": "",
 "years": [
-2011,
-2011
+1991,
+1999
 ],
-"production": "2011 <small>(Concept Car)</small>",
+"production": "May 1991 – June 1999",
 "body_styles": [
-"4 door saloon"
+"5-door liftback"
 ],
-"image": "Seat IBL (front quarter).jpg",
-"wikipedia_title": "SEAT IBL"
+"image": "SEAT Toledo Sport 1992 con PackGT.jpg",
+"wikipedia_title": "SEAT Toledo"
+},
+{
+"brand": "SEAT",
+"model": "SEAT Toledo",
+"generation": "SEAT Toledo Mk2 (1M)",
+"code": "",
+"years": [
+1998,
+2004
+],
+"production": "October 1998 – July 2004",
+"body_styles": [
+"4-door notchback saloon"
+],
+"image": "Seat Toledo II front 20081230.jpg",
+"wikipedia_title": "SEAT Toledo"
+},
+{
+"brand": "SEAT",
+"model": "SEAT Toledo",
+"generation": "SEAT Toledo Mk3 (5P)",
+"code": "",
+"years": [
+2004,
+2009
+],
+"production": "February 2004 – May 2009",
+"body_styles": [
+"5-door hatchback"
+],
+"image": "Seat Toledo front 20080227.jpg",
+"wikipedia_title": "SEAT Toledo"
+},
+{
+"brand": "SEAT",
+"model": "SEAT Toledo",
+"generation": "SEAT Toledo Mk4 (KG)",
+"code": "",
+"years": [
+2012,
+2019
+],
+"production": "Late 2012 – February 2019",
+"body_styles": [
+"5-door liftback"
+],
+"image": "Seat Toledo 1.4 TSI Style Salsa (IV) – Frontansicht, 1. September 2013, Münster.jpg",
+"wikipedia_title": "SEAT Toledo"
+},
+{
+"brand": "SEAT",
+"model": "SEAT Tribu",
+"generation": "SEAT Tribu",
+"code": "",
+"years": [
+2007,
+2007
+],
+"production": "2007 <small>(Concept car)</small>",
+"body_styles": [
+"3-door SUV"
+],
+"image": "Seat Tribu.jpg",
+"wikipedia_title": "SEAT Tribu"
+},
+{
+"brand": "SEAT",
+"model": "SEAT Ibiza",
+"generation": "SEAT Ibiza Mk1",
+"code": "021A",
+"years": [
+1984,
+2008
+],
+"production": "1984–1993 1999–2008 (China)",
+"body_styles": [
+"3- and 5-door hatchback"
+],
+"image": "Seat Ibiza première génération - Mondial de l'Automobile de Paris 2014 - 004.jpg",
+"wikipedia_title": "SEAT Ibiza"
+},
+{
+"brand": "SEAT",
+"model": "SEAT Ibiza",
+"generation": "SEAT Ibiza Mk2",
+"code": "6K",
+"years": [
+1993,
+2002
+],
+"production": "1993–2002",
+"body_styles": [
+"3 and 5-door hatchback"
+],
+"image": "Seat Ibiza II 6K 1391cc registered August 1995 (cropped).jpg",
+"wikipedia_title": "SEAT Ibiza"
+},
+{
+"brand": "SEAT",
+"model": "SEAT Ibiza",
+"generation": "SEAT Ibiza Mk3",
+"code": "6L",
+"years": [
+2002,
+2008
+],
+"production": "2002–2008",
+"body_styles": [
+"3 and 5-door hatchback"
+],
+"image": "2004 SEAT Ibiza SX 1.2 Front.jpg",
+"wikipedia_title": "SEAT Ibiza"
+},
+{
+"brand": "SEAT",
+"model": "SEAT Ibiza",
+"generation": "SEAT Ibiza Mk4",
+"code": "6J",
+"years": [
+2008,
+2017
+],
+"production": "2008–2017",
+"body_styles": [
+"3 and 5-door hatchback 5-door estate"
+],
+"image": "2011 SEAT Ibiza SE Copa 1.4 Front.jpg",
+"wikipedia_title": "SEAT Ibiza"
+},
+{
+"brand": "SEAT",
+"model": "SEAT Ibiza",
+"generation": "SEAT Ibiza Mk5",
+"code": "6F",
+"years": [
+2017,
+2026
+],
+"production": "2017–present",
+"body_styles": [
+"5-door hatchback"
+],
+"image": "Seat Ibiza 6F IMG 3967.jpg",
+"wikipedia_title": "SEAT Ibiza"
+},
+{
+"brand": "Cupra",
+"model": "Cupra Formentor",
+"generation": "Cupra Formentor",
+"code": "Type SE316",
+"years": [
+2020,
+2026
+],
+"production": "September 2020–present",
+"body_styles": [
+"5-door SUV"
+],
+"image": "Cupra Formentor IMG 9668.jpg",
+"wikipedia_title": "Cupra Formentor"
 },
 {
 "brand": "Cupra",
@@ -3436,114 +3878,218 @@
 "wikipedia_title": "Cupra Tavascan"
 },
 {
-"brand": "Skoda",
-"model": "Škoda Rapid (2012)",
-"generation": "Škoda Rapid (NH1/2/3)",
+"brand": "Cupra",
+"model": "SEAT León",
+"generation": "SEAT León SEAT León SEAT León SEAT León SEAT León Mk1 (1M)",
+"code": "",
+"years": [
+1999,
+2006
+],
+"production": "July 1999 – August 2006",
+"body_styles": [],
+"image": "Seat Leon front 20080809.jpg",
+"wikipedia_title": "SEAT León"
+},
+{
+"brand": "Cupra",
+"model": "SEAT León",
+"generation": "SEAT León SEAT León SEAT León SEAT León SEAT León Mk2 (1P)",
+"code": "",
+"years": [
+2005,
+2012
+],
+"production": "July 2005–2012",
+"body_styles": [],
+"image": "2008 SEAT Leon Reference 1.6 Front.jpg",
+"wikipedia_title": "SEAT León"
+},
+{
+"brand": "Cupra",
+"model": "SEAT León",
+"generation": "SEAT León SEAT León SEAT León SEAT León SEAT León Mk3",
 "code": "",
 "years": [
 2012,
-2023
+2020
 ],
-"production": "2012–2019 (Czech Republic) 2012–2022 (Russia) 2012–2023 (China)",
-"body_styles": [
-"4-door sedan (China) 5-door liftback 5-door hatchback"
-],
-"image": "2014 Skoda Rapid SE Connect TSi 1.2 Front.jpg",
-"wikipedia_title": "Škoda Rapid (2012)"
-},
-{
-"brand": "Skoda",
-"model": "Škoda Superb",
-"generation": "Škoda Superb",
-"code": "",
-"years": [
-2001,
-2026
-],
-"production": "2001–present",
+"production": "October 2012–2020",
 "body_styles": [],
-"image": "Skoda Superb L&K (IV) – f 12042026.jpg",
-"wikipedia_title": "Škoda Superb"
+"image": "Seat Leon 1.4 TSI Start&Stop Style (III) – Frontansicht, 10. August 2013, Ratingen.jpg",
+"wikipedia_title": "SEAT León"
 },
 {
-"brand": "Skoda",
-"model": "Škoda Superb",
-"generation": "First generation B5",
-"code": "3U",
+"brand": "Cupra",
+"model": "SEAT León",
+"generation": "SEAT León SEAT León SEAT León SEAT León SEAT León Mk4",
+"code": "KL1/KL8",
 "years": [
-2001,
-2008
-],
-"production": "October 2001–March 2008",
-"body_styles": [
-"4-door saloon"
-],
-"image": "Skoda Superb blau.JPG",
-"wikipedia_title": "Škoda Superb"
-},
-{
-"brand": "Skoda",
-"model": "Škoda Superb",
-"generation": "Second generation B6",
-"code": "3T",
-"years": [
-2008,
-2015
-],
-"production": "2008–2015",
-"body_styles": [
-"4-door sedan 5-door estate"
-],
-"image": "2009 Skoda Superb Elegance CRTDi Automatic 2.0 Front.jpg",
-"wikipedia_title": "Škoda Superb"
-},
-{
-"brand": "Skoda",
-"model": "Škoda Superb",
-"generation": "Third generation B8",
-"code": "3V",
-"years": [
-2015,
+2020,
 2026
 ],
-"production": "2015–2024 (Global) 2016–2026 (China)",
-"body_styles": [
-"5-door liftback 5-door estate"
-],
-"image": "Skoda Superb 162TSI, 2018 front.jpg",
-"wikipedia_title": "Škoda Superb"
+"production": "January 2020–present",
+"body_styles": [],
+"image": "SEAT Leon Mk4 IMG 4159.jpg",
+"wikipedia_title": "SEAT León"
 },
 {
 "brand": "Skoda",
-"model": "Škoda Superb",
-"generation": "Fourth generation B9",
-"code": "3Y",
-"years": [
-2023,
-2026
-],
-"production": "December 2023–present",
-"body_styles": [
-"5-door liftback 5-door estate"
-],
-"image": "2024 Škoda Superb (cropped).jpg",
-"wikipedia_title": "Škoda Superb"
-},
-{
-"brand": "Skoda",
-"model": "Škoda Octavia",
-"generation": "Škoda Octavia",
+"model": "Škoda 1203",
+"generation": "Škoda 1203",
 "code": "",
 "years": [
-1996,
+1968,
+2017
+],
+"production": "1968–1997 (mass production) 1994–2017 (small-scale production)",
+"body_styles": [],
+"image": "TAZ-1500-BUS Dolní-Kalná-P1040398.jpg",
+"wikipedia_title": "Škoda 1203"
+},
+{
+"brand": "Skoda",
+"model": "Škoda Elroq",
+"generation": "Škoda Elroq",
+"code": "",
+"years": [
+2025,
 2026
 ],
-"production": "1996–present",
+"production": "January 2025 – present",
 "body_styles": [
-"5-door liftback 5-door estate"
+"5-door SUV"
 ],
-"image": "Skoda Octavia IV liftback (cropped).jpg",
-"wikipedia_title": "Škoda Octavia"
+"image": "Škoda Elroq DSC 9260.jpg",
+"wikipedia_title": "Škoda Elroq"
+},
+{
+"brand": "Skoda",
+"model": "Škoda Epiq",
+"generation": "Škoda Epiq",
+"code": "",
+"years": [
+2026,
+2026
+],
+"production": "June 2026 – present",
+"body_styles": [
+"5-door crossover SUV"
+],
+"image": "Skoda Epiq front quarter view.jpg",
+"wikipedia_title": "Škoda Epiq"
+},
+{
+"brand": "Skoda",
+"model": "Škoda Favorit",
+"generation": "Škoda Favorit",
+"code": "",
+"years": [
+1987,
+1995
+],
+"production": "1987–1994 (Favorit) 1990–1995 (Forman) 1991–1995 (Pick-up)",
+"body_styles": [
+"5-door hatchback 5-door estate 2-door coupé utility (pick up)"
+],
+"image": "Favorit 1994 corp.jpg",
+"wikipedia_title": "Škoda Favorit"
+},
+{
+"brand": "Skoda",
+"model": "Škoda Felicia",
+"generation": "Škoda Felicia",
+"code": "",
+"years": [
+1994,
+2001
+],
+"production": "1994–2001 (Czech Republic, Poland) 1998–2001 (Bosnia and Herzegovina) 1996 (China)",
+"body_styles": [
+"5-door hatchback 5-door estate 2-door coupé utility (pick up) 2-door panel van"
+],
+"image": "Skoda Felicia outside Robinson.JPG",
+"wikipedia_title": "Škoda Felicia"
+},
+{
+"brand": "Skoda",
+"model": "Škoda Kamiq",
+"generation": "Škoda Kamiq",
+"code": "NW4",
+"years": [
+2019,
+2026
+],
+"production": "July 2019–present",
+"body_styles": [
+"5-door SUV"
+],
+"image": "Skoda Kamiq (2019) Monte Carlo 1X7A6165.jpg",
+"wikipedia_title": "Škoda Kamiq"
+},
+{
+"brand": "Skoda",
+"model": "Škoda Kamiq (China)",
+"generation": "Škoda Kamiq (China) Škoda Kamiq (China) Škoda Kamiq (China) Škoda Kamiq",
+"code": "",
+"years": [
+2018,
+2026
+],
+"production": "2018–2026",
+"body_styles": [
+"5-door SUV"
+],
+"image": "Skoda Kamiq 001.jpg",
+"wikipedia_title": "Škoda Kamiq (China)"
+},
+{
+"brand": "Skoda",
+"model": "Škoda Kodiaq",
+"generation": "Škoda Kodiaq Second generation",
+"code": "",
+"years": [
+2024,
+2026
+],
+"production": "January 2024–present",
+"body_styles": [
+"5-door crossover SUV"
+],
+"image": "Škoda Kodiaq II IMG 9433.jpg",
+"wikipedia_title": "Škoda Kodiaq"
+},
+{
+"brand": "Skoda",
+"model": "Škoda Kushaq",
+"generation": "Škoda Kushaq",
+"code": "",
+"years": [
+2021,
+2026
+],
+"production": "2021–present",
+"body_styles": [
+"5-door crossover SUV"
+],
+"image": "2021 Škoda Kushaq (India) front view.png",
+"wikipedia_title": "Škoda Kushaq"
+},
+{
+"brand": "Skoda",
+"model": "Škoda Kylaq",
+"generation": "Škoda Kylaq",
+"code": "",
+"years": [
+2024,
+2026
+],
+"production": "December 2024 – present",
+"body_styles": [
+"5-door crossover SUV"
+],
+"image": "2025 Skoda Kylaq.png",
+"wikipedia_title": "Škoda Kylaq"
 },
 {
 "brand": "Skoda",
@@ -3611,65 +4157,19 @@
 },
 {
 "brand": "Skoda",
-"model": "Škoda Felicia",
-"generation": "Škoda Felicia",
+"model": "Škoda Rapid (2012)",
+"generation": "Škoda Rapid (2012) Škoda Rapid (2012) Škoda Rapid (2012) Škoda Rapid (NH1/2/3)",
 "code": "",
 "years": [
-1994,
-2001
+2012,
+2023
 ],
-"production": "1994–2001 (Czech Republic, Poland) 1998–2001 (Bosnia and Herzegovina) 1996 (China)",
+"production": "2012–2019 (Czech Republic) 2012–2022 (Russia) 2012–2023 (China)",
 "body_styles": [
-"5-door hatchback 5-door estate 2-door coupé utility (pick up) 2-door panel van"
+"4-door sedan (China) 5-door liftback 5-door hatchback"
 ],
-"image": "Skoda Felicia outside Robinson.JPG",
-"wikipedia_title": "Škoda Felicia"
-},
-{
-"brand": "Skoda",
-"model": "Škoda Roomster",
-"generation": "Škoda Roomster (5J)",
-"code": "",
-"years": [
-2006,
-2015
-],
-"production": "March 2006–2015",
-"body_styles": [
-"5-door MPV 5-door panel van"
-],
-"image": "Skoda Roomster front 20091212.jpg",
-"wikipedia_title": "Škoda Roomster"
-},
-{
-"brand": "Skoda",
-"model": "Škoda Favorit",
-"generation": "Škoda Favorit",
-"code": "",
-"years": [
-1987,
-1995
-],
-"production": "1987–1994 (Favorit) 1990–1995 (Forman) 1991–1995 (Pick-up)",
-"body_styles": [
-"5-door hatchback 5-door estate 2-door coupé utility (pick up)"
-],
-"image": "Favorit 1994 corp.jpg",
-"wikipedia_title": "Škoda Favorit"
-},
-{
-"brand": "Skoda",
-"model": "Škoda 1203",
-"generation": "Škoda 1203",
-"code": "",
-"years": [
-1968,
-2017
-],
-"production": "1968–1997 (mass production) 1994–2017 (small-scale production)",
-"body_styles": [],
-"image": "TAZ-1500-BUS Dolní-Kalná-P1040398.jpg",
-"wikipedia_title": "Škoda 1203"
+"image": "2014 Skoda Rapid SE Connect TSi 1.2 Front.jpg",
+"wikipedia_title": "Škoda Rapid (2012)"
 },
 {
 "brand": "Skoda",
@@ -3689,51 +4189,19 @@
 },
 {
 "brand": "Skoda",
-"model": "Škoda Kodiaq",
-"generation": "Škoda Kodiaq",
+"model": "Škoda Roomster",
+"generation": "Škoda Roomster Škoda Roomster Škoda Roomster Škoda Roomster (5J)",
 "code": "",
 "years": [
-2016,
-2026
+2006,
+2015
 ],
-"production": "2016–present",
+"production": "March 2006–2015",
 "body_styles": [
-"5-door crossover SUV"
+"5-door MPV 5-door panel van"
 ],
-"image": "Škoda Kodiaq II IMG 9825.jpg",
-"wikipedia_title": "Škoda Kodiaq"
-},
-{
-"brand": "Skoda",
-"model": "Škoda Kodiaq",
-"generation": "Second generation",
-"code": "",
-"years": [
-2024,
-2026
-],
-"production": "January 2024–present",
-"body_styles": [
-"5-door crossover SUV"
-],
-"image": "Škoda Kodiaq II IMG 9433.jpg",
-"wikipedia_title": "Škoda Kodiaq"
-},
-{
-"brand": "Skoda",
-"model": "Škoda Kamiq",
-"generation": "Škoda Kamiq",
-"code": "NW4",
-"years": [
-2019,
-2026
-],
-"production": "July 2019–present",
-"body_styles": [
-"5-door SUV"
-],
-"image": "Skoda Kamiq (2019) Monte Carlo 1X7A6165.jpg",
-"wikipedia_title": "Škoda Kamiq"
+"image": "Skoda Roomster front 20091212.jpg",
+"wikipedia_title": "Škoda Roomster"
 },
 {
 "brand": "Skoda",
@@ -3753,38 +4221,6 @@
 },
 {
 "brand": "Skoda",
-"model": "Škoda Kamiq (China)",
-"generation": "Škoda Kamiq",
-"code": "",
-"years": [
-2018,
-2026
-],
-"production": "2018–2026",
-"body_styles": [
-"5-door SUV"
-],
-"image": "Skoda Kamiq 001.jpg",
-"wikipedia_title": "Škoda Kamiq (China)"
-},
-{
-"brand": "Skoda",
-"model": "Škoda Kushaq",
-"generation": "Škoda Kushaq",
-"code": "",
-"years": [
-2021,
-2026
-],
-"production": "2021–present",
-"body_styles": [
-"5-door crossover SUV"
-],
-"image": "2021 Škoda Kushaq (India) front view.png",
-"wikipedia_title": "Škoda Kushaq"
-},
-{
-"brand": "Skoda",
 "model": "Škoda Slavia",
 "generation": "Škoda Slavia",
 "code": "",
@@ -3801,51 +4237,67 @@
 },
 {
 "brand": "Skoda",
-"model": "Škoda Epiq",
-"generation": "Škoda Epiq",
-"code": "",
+"model": "Škoda Superb",
+"generation": "Škoda Superb First generation B5",
+"code": "3U",
 "years": [
-2026,
-2026
+2001,
+2008
 ],
-"production": "June 2026 – present",
+"production": "October 2001–March 2008",
 "body_styles": [
-"5-door crossover SUV"
+"4-door saloon"
 ],
-"image": "Skoda Epiq front quarter view.jpg",
-"wikipedia_title": "Škoda Epiq"
+"image": "Skoda Superb blau.JPG",
+"wikipedia_title": "Škoda Superb"
 },
 {
 "brand": "Skoda",
-"model": "Škoda Elroq",
-"generation": "Škoda Elroq",
-"code": "",
+"model": "Škoda Superb",
+"generation": "Škoda Superb Second generation B6",
+"code": "3T",
 "years": [
-2025,
-2026
+2008,
+2015
 ],
-"production": "January 2025 – present",
+"production": "2008–2015",
 "body_styles": [
-"5-door SUV"
+"4-door sedan 5-door estate"
 ],
-"image": "Škoda Elroq DSC 9260.jpg",
-"wikipedia_title": "Škoda Elroq"
+"image": "2009 Skoda Superb Elegance CRTDi Automatic 2.0 Front.jpg",
+"wikipedia_title": "Škoda Superb"
 },
 {
 "brand": "Skoda",
-"model": "Škoda Kylaq",
-"generation": "Škoda Kylaq",
-"code": "",
+"model": "Škoda Superb",
+"generation": "Škoda Superb Third generation B8",
+"code": "3V",
 "years": [
-2024,
+2015,
 2026
 ],
-"production": "December 2024 – present",
+"production": "2015–2024 (Global) 2016–2026 (China)",
 "body_styles": [
-"5-door crossover SUV"
+"5-door liftback 5-door estate"
 ],
-"image": "2025 Skoda Kylaq.png",
-"wikipedia_title": "Škoda Kylaq"
+"image": "Skoda Superb 162TSI, 2018 front.jpg",
+"wikipedia_title": "Škoda Superb"
+},
+{
+"brand": "Skoda",
+"model": "Škoda Superb",
+"generation": "Škoda Superb Fourth generation B9",
+"code": "3Y",
+"years": [
+2023,
+2026
+],
+"production": "December 2023–present",
+"body_styles": [
+"5-door liftback 5-door estate"
+],
+"image": "2024 Škoda Superb (cropped).jpg",
+"wikipedia_title": "Škoda Superb"
 },
 {
 "brand": "Skoda",
@@ -3864,140 +4316,207 @@
 "wikipedia_title": "Škoda Yeti"
 },
 {
-"brand": "Porsche",
-"model": "Porsche 928",
-"generation": "Porsche 928",
-"code": "",
+"brand": "Skoda",
+"model": "Škoda Fabia",
+"generation": "Škoda Fabia Mk1",
+"code": "Typ 6Y",
 "years": [
-1977,
-1995
-],
-"production": "May 1977&ndash;1995 61,056 produced",
-"body_styles": [
-"2-door 2+2 liftback coupé"
-],
-"image": "1991 Porsche 928 S4 LC24.jpg",
-"wikipedia_title": "Porsche 928"
-},
-{
-"brand": "Porsche",
-"model": "Porsche 968",
-"generation": "Porsche 968",
-"code": "",
-"years": [
-1991,
-1995
-],
-"production": "1991&ndash;1995",
-"body_styles": [],
-"image": "1994 Porsche 968.jpg",
-"wikipedia_title": "Porsche 968"
-},
-{
-"brand": "Porsche",
-"model": "Porsche Cayenne",
-"generation": "Porsche Cayenne",
-"code": "",
-"years": [
-2002,
-2026
-],
-"production": "August 2002 – present",
-"body_styles": [
-"5-door crossover SUV"
-],
-"image": "Porsche_Cayenne_(III,_Facelift)_–_f_01012025.jpg",
-"wikipedia_title": "Porsche Cayenne"
-},
-{
-"brand": "Porsche",
-"model": "Porsche Cayenne",
-"generation": "First generation",
-"code": "9PA",
-"years": [
-2002,
+1999,
 2009
 ],
-"production": "August 2002 – December 2009",
+"production": "July 1999 – May 2009 (Czech Republic) October 1999 – March 2007 (Poland) November 1999 - March 2008 (Germany) December 1",
 "body_styles": [
-"5-door crossover SUV"
+"4-door saloon 5-door hatchback 5-door estate"
 ],
-"image": "Porsche Cayenne Turbo front 20080527.jpg",
-"wikipedia_title": "Porsche Cayenne"
+"image": "Skoda Fabia vRS (7914423470) (cropped).jpg",
+"wikipedia_title": "Škoda Fabia"
 },
 {
-"brand": "Porsche",
-"model": "Porsche Cayenne",
-"generation": "Second generation",
-"code": "92A",
+"brand": "Skoda",
+"model": "Škoda Fabia",
+"generation": "Škoda Fabia Mk2",
+"code": "Typ 5J",
 "years": [
-2010,
-2017
+2007,
+2014
 ],
-"production": "April 2010 – August 2017",
-"body_styles": [],
-"image": "Porsche Cayenne S (92A) – Frontansicht, 10. Oktober 2011, Wülfrath.jpg",
-"wikipedia_title": "Porsche Cayenne"
+"production": "April 2007 – June 2014",
+"body_styles": [
+"5-door hatchback 5-door estate"
+],
+"image": "Skoda Fabia front 20080612.jpg",
+"wikipedia_title": "Škoda Fabia"
 },
 {
-"brand": "Porsche",
-"model": "Porsche Cayenne",
-"generation": "Third generation",
-"code": "9YA 9YB",
+"brand": "Skoda",
+"model": "Škoda Fabia",
+"generation": "Škoda Fabia Mk3 (NJ)",
+"code": "Typ NJ",
 "years": [
-2017,
+2014,
+2022
+],
+"production": "August 2014 – November 2022",
+"body_styles": [
+"5-door hatchback 5-door estate"
+],
+"image": "2018 Skoda Fabia SE MPi 1.0.jpg",
+"wikipedia_title": "Škoda Fabia"
+},
+{
+"brand": "Skoda",
+"model": "Škoda Fabia",
+"generation": "Škoda Fabia Mk4",
+"code": "Typ PJ",
+"years": [
+2021,
 2026
 ],
-"production": "August 2017 – present",
-"body_styles": [],
-"image": "2018 Porsche Cayenne V8 Turbo Tiptronic 4.0 Front.jpg",
-"wikipedia_title": "Porsche Cayenne"
+"production": "July 2021–present",
+"body_styles": [
+"5-door hatchback"
+],
+"image": "Skoda Fabia IV IMG 5307.jpg",
+"wikipedia_title": "Škoda Fabia"
 },
 {
-"brand": "Porsche",
-"model": "Porsche Cayenne",
-"generation": "Fourth generation",
-"code": "X1A X1B",
+"brand": "Skoda",
+"model": "Škoda Fabia S2000",
+"generation": "Škoda Fabia S2000",
+"code": "",
+"years": [
+2009,
+2009
+],
+"production": "2009–",
+"body_styles": [],
+"image": "Raimund Baumschlager Lavanttal Rallye 2009.jpg",
+"wikipedia_title": "Škoda Fabia S2000"
+},
+{
+"brand": "Skoda",
+"model": "Škoda 14Tr",
+"generation": "Škoda 14Tr",
+"code": "",
+"years": [
+1981,
+1998
+],
+"production": "1981–1998",
+"body_styles": [
+"Single-deck"
+],
+"image": "Szeged 5-ös trolibusz Vértói út 2012-02-27 (2).JPG",
+"wikipedia_title": "Škoda 14Tr"
+},
+{
+"brand": "Skoda",
+"model": "Škoda Beta",
+"generation": "Tatra Beta",
+"code": "",
+"years": [
+1994,
+1999
+],
+"production": "1994–1999",
+"body_styles": [
+"2-door panel van"
+],
+"image": "Škoda Beta 1995.jpg",
+"wikipedia_title": "Škoda Beta"
+},
+{
+"brand": "Skoda",
+"model": "Škoda Vision 7S",
+"generation": "Škoda Vision 7S",
+"code": "",
+"years": [
+2022,
+2026
+],
+"production": "2022 (concept) 2026 (production version)",
+"body_styles": [
+"5-door SUV"
+],
+"image": "Škoda Vision 7S concept.jpg",
+"wikipedia_title": "Škoda Vision 7S"
+},
+{
+"brand": "Skoda",
+"model": "Škoda Ahoj!",
+"generation": "Škoda Ahoj!",
+"code": "",
+"years": [
+2002,
+2002
+],
+"production": "2002",
+"body_styles": [
+"4-door hatchback"
+],
+"image": "Skoda Ahoj!.jpg",
+"wikipedia_title": "Škoda Ahoj!"
+},
+{
+"brand": "Skoda",
+"model": "Škoda Peaq",
+"generation": "Škoda Peaq",
+"code": "",
 "years": [
 2026,
 2026
 ],
-"production": "February 2026 – present",
-"body_styles": [],
-"image": "Porsche Cayenne Electric IMG 6129.jpg",
-"wikipedia_title": "Porsche Cayenne"
-},
-{
-"brand": "Porsche",
-"model": "Porsche Carrera GT",
-"generation": "Porsche Carrera GT",
-"code": "980",
-"years": [
-2003,
-2006
-],
-"production": "2003–2006 1,270 produced",
+"production": "August 2026 – present",
 "body_styles": [
-"2-door Targa roadster"
+"5-door crossover SUV"
 ],
-"image": "Porsche Carrera GT - Goodwood Breakfast Club (July 2008).jpg",
-"wikipedia_title": "Porsche Carrera GT"
+"image": "2026 Skoda Peaq (15).jpg",
+"wikipedia_title": "Škoda Peaq"
 },
 {
 "brand": "Porsche",
-"model": "Porsche Boxster (986)",
-"generation": "Porsche 986",
+"model": "Porsche 718 Boxster and Cayman (982)",
+"generation": "Porsche 982",
 "code": "",
 "years": [
-1996,
-2004
+2016,
+2025
 ],
-"production": "1996–2004",
+"production": "2016&ndash;2025",
 "body_styles": [
-"2-door roadster"
+"2-door roadster (718 Boxster",
+"Spyder)"
 ],
-"image": "2004 Porsche Boxster S Tiptronic S 3.2 Front.jpg",
-"wikipedia_title": "Porsche Boxster (986)"
+"image": "2018 Porsche 718 Cayman S S-A 2.5 Front.jpg",
+"wikipedia_title": "Porsche 718 Boxster and Cayman (982)"
+},
+{
+"brand": "Porsche",
+"model": "Porsche 911 (991)",
+"generation": "Porsche 991",
+"code": "",
+"years": [
+2011,
+2019
+],
+"production": "September 2011 – December 2019",
+"body_styles": [],
+"image": "2013 Porsche 911 Carrera 4S (991) (9626546987).jpg",
+"wikipedia_title": "Porsche 911 (991)"
+},
+{
+"brand": "Porsche",
+"model": "Porsche 911 (992)",
+"generation": "Porsche 911 (992)",
+"code": "",
+"years": [
+2019,
+2026
+],
+"production": "2019–present",
+"body_styles": [],
+"image": "2025_Porsche_992_Carrera_convertible_DSC_7026.jpg",
+"wikipedia_title": "Porsche 911 (992)"
 },
 {
 "brand": "Porsche",
@@ -4043,75 +4562,49 @@
 },
 {
 "brand": "Porsche",
-"model": "Porsche Boxster and Cayman (987)",
-"generation": "Porsche 987",
+"model": "Porsche 928",
+"generation": "Porsche 928",
 "code": "",
 "years": [
-2004,
-2012
+1977,
+1995
 ],
-"production": "September 2004–2012 (Boxster) August 2005–2012 (Cayman)",
-"body_styles": [],
-"image": "2007 Porsche Cayman S 3.4.jpg",
-"wikipedia_title": "Porsche Boxster and Cayman (987)"
-},
-{
-"brand": "Porsche",
-"model": "Porsche Macan",
-"generation": "Porsche Macan",
-"code": "",
-"years": [
-2014,
-2026
-],
-"production": "February 2014 – present",
+"production": "May 1977&ndash;1995 61,056 produced",
 "body_styles": [
-"5-door SUV"
+"2-door 2+2 liftback coupé"
 ],
-"image": "Porsche Macan 4 IMG 2153.jpg",
-"wikipedia_title": "Porsche Macan"
+"image": "1991 Porsche 928 S4 LC24.jpg",
+"wikipedia_title": "Porsche 928"
 },
 {
 "brand": "Porsche",
-"model": "Porsche Macan",
-"generation": "First generation",
-"code": "Type 95B",
-"years": [
-2014,
-2026
-],
-"production": "February 2014–2026",
-"body_styles": [],
-"image": "2017 Porsche Macan S-A 3.0.jpg",
-"wikipedia_title": "Porsche Macan"
-},
-{
-"brand": "Porsche",
-"model": "Porsche Macan",
-"generation": "Second generation",
-"code": "Type XAB",
-"years": [
-2024,
-2026
-],
-"production": "May 2024 – present",
-"body_styles": [],
-"image": "Porsche Macan (II) – f 22022025.jpg",
-"wikipedia_title": "Porsche Macan"
-},
-{
-"brand": "Porsche",
-"model": "Porsche 911 (991)",
-"generation": "Porsche 991",
+"model": "Porsche 968",
+"generation": "Porsche 968",
 "code": "",
 "years": [
-2011,
-2019
+1991,
+1995
 ],
-"production": "September 2011 – December 2019",
+"production": "1991&ndash;1995",
 "body_styles": [],
-"image": "2013 Porsche 911 Carrera 4S (991) (9626546987).jpg",
-"wikipedia_title": "Porsche 911 (991)"
+"image": "1994 Porsche 968.jpg",
+"wikipedia_title": "Porsche 968"
+},
+{
+"brand": "Porsche",
+"model": "Porsche Boxster (986)",
+"generation": "Porsche 986",
+"code": "",
+"years": [
+1996,
+2004
+],
+"production": "1996–2004",
+"body_styles": [
+"2-door roadster"
+],
+"image": "2004 Porsche Boxster S Tiptronic S 3.2 Front.jpg",
+"wikipedia_title": "Porsche Boxster (986)"
 },
 {
 "brand": "Porsche",
@@ -4131,6 +4624,122 @@
 },
 {
 "brand": "Porsche",
+"model": "Porsche Boxster and Cayman (987)",
+"generation": "Porsche 987",
+"code": "",
+"years": [
+2004,
+2012
+],
+"production": "September 2004–2012 (Boxster) August 2005–2012 (Cayman)",
+"body_styles": [],
+"image": "2007 Porsche Cayman S 3.4.jpg",
+"wikipedia_title": "Porsche Boxster and Cayman (987)"
+},
+{
+"brand": "Porsche",
+"model": "Porsche Carrera GT",
+"generation": "Porsche Carrera GT",
+"code": "980",
+"years": [
+2003,
+2006
+],
+"production": "2003–2006 1,270 produced",
+"body_styles": [
+"2-door Targa roadster"
+],
+"image": "Porsche Carrera GT - Goodwood Breakfast Club (July 2008).jpg",
+"wikipedia_title": "Porsche Carrera GT"
+},
+{
+"brand": "Porsche",
+"model": "Porsche Cayenne",
+"generation": "Porsche Cayenne First generation",
+"code": "9PA",
+"years": [
+2002,
+2009
+],
+"production": "August 2002 – December 2009",
+"body_styles": [
+"5-door crossover SUV"
+],
+"image": "Porsche Cayenne Turbo front 20080527.jpg",
+"wikipedia_title": "Porsche Cayenne"
+},
+{
+"brand": "Porsche",
+"model": "Porsche Cayenne",
+"generation": "Porsche Cayenne Second generation",
+"code": "92A",
+"years": [
+2010,
+2017
+],
+"production": "April 2010 – August 2017",
+"body_styles": [],
+"image": "Porsche Cayenne S (92A) – Frontansicht, 10. Oktober 2011, Wülfrath.jpg",
+"wikipedia_title": "Porsche Cayenne"
+},
+{
+"brand": "Porsche",
+"model": "Porsche Cayenne",
+"generation": "Porsche Cayenne Third generation",
+"code": "9YA 9YB",
+"years": [
+2017,
+2026
+],
+"production": "August 2017 – present",
+"body_styles": [],
+"image": "2018 Porsche Cayenne V8 Turbo Tiptronic 4.0 Front.jpg",
+"wikipedia_title": "Porsche Cayenne"
+},
+{
+"brand": "Porsche",
+"model": "Porsche Cayenne",
+"generation": "Porsche Cayenne Fourth generation",
+"code": "X1A X1B",
+"years": [
+2026,
+2026
+],
+"production": "February 2026 – present",
+"body_styles": [],
+"image": "Porsche Cayenne Electric IMG 6129.jpg",
+"wikipedia_title": "Porsche Cayenne"
+},
+{
+"brand": "Porsche",
+"model": "Porsche Macan",
+"generation": "Porsche Macan First generation",
+"code": "Type 95B",
+"years": [
+2014,
+2026
+],
+"production": "February 2014–2026",
+"body_styles": [],
+"image": "2017 Porsche Macan S-A 3.0.jpg",
+"wikipedia_title": "Porsche Macan"
+},
+{
+"brand": "Porsche",
+"model": "Porsche Macan",
+"generation": "Porsche Macan Second generation",
+"code": "Type XAB",
+"years": [
+2024,
+2026
+],
+"production": "May 2024 – present",
+"body_styles": [],
+"image": "Porsche Macan (II) – f 22022025.jpg",
+"wikipedia_title": "Porsche Macan"
+},
+{
+"brand": "Porsche",
 "model": "Porsche Taycan",
 "generation": "Porsche Taycan",
 "code": "",
@@ -4145,33 +4754,468 @@
 },
 {
 "brand": "Porsche",
-"model": "Porsche 718 Boxster and Cayman (982)",
-"generation": "Porsche 982",
+"model": "Porsche Panamera",
+"generation": "Porsche Panamera First generation (970) Chassis G1",
 "code": "",
 "years": [
-2016,
-2025
+2009,
+2016
 ],
-"production": "2016&ndash;2025",
+"production": "April 2009–2016",
 "body_styles": [
-"2-door roadster (718 Boxster",
-"Spyder)"
+"five-door liftback/fastback sedan"
 ],
-"image": "2018 Porsche 718 Cayman S S-A 2.5 Front.jpg",
-"wikipedia_title": "Porsche 718 Boxster and Cayman (982)"
+"image": "Porsche Panamera 4S front 20100428.jpg",
+"wikipedia_title": "Porsche Panamera"
 },
 {
 "brand": "Porsche",
-"model": "Porsche 911 (992)",
-"generation": "Porsche 911 (992)",
+"model": "Porsche Panamera",
+"generation": "Porsche Panamera Second generation (971) Chassis G2",
 "code": "",
 "years": [
-2019,
+2016,
+2024
+],
+"production": "2016–2024",
+"body_styles": [
+"5-door fastback/liftback sedan 5-door shooting brake"
+],
+"image": "JAIA18 Porsche Panamera 4 E-Hybrid 97ABE1 1.jpg",
+"wikipedia_title": "Porsche Panamera"
+},
+{
+"brand": "Porsche",
+"model": "Porsche Panamera",
+"generation": "Porsche Panamera Third generation (976) Chassis G3",
+"code": "",
+"years": [
+2024,
 2026
 ],
-"production": "2019–present",
+"production": "2024–present",
 "body_styles": [],
-"image": "2025_Porsche_992_Carrera_convertible_DSC_7026.jpg",
-"wikipedia_title": "Porsche 911 (992)"
+"image": "Porsche 972 IMG 9526.jpg",
+"wikipedia_title": "Porsche Panamera"
+},
+{
+"brand": "Porsche",
+"model": "Porsche 911 GT3",
+"generation": "Porsche 911 GT3 996 GT3",
+"code": "",
+"years": [
+1999,
+2005
+],
+"production": "1999–2005 (1,868 produced)",
+"body_styles": [],
+"image": "Porsche 996 GT3 - Flickr - Alexandre Prévot (3) (cropped).jpg",
+"wikipedia_title": "Porsche 911 GT3"
+},
+{
+"brand": "Porsche",
+"model": "Porsche 911 GT3",
+"generation": "Porsche 911 GT3 997 GT3",
+"code": "",
+"years": [
+2006,
+2011
+],
+"production": "2006–2011",
+"body_styles": [],
+"image": "2010 Porsche 911 GT3 CS 3.8 Front.jpg",
+"wikipedia_title": "Porsche 911 GT3"
+},
+{
+"brand": "Porsche",
+"model": "Porsche 911 GT3",
+"generation": "Porsche 911 GT3 991 GT3",
+"code": "",
+"years": [
+2013,
+2019
+],
+"production": "2013–2019",
+"body_styles": [],
+"image": "Porsche 991 GT3 MkII (37601199836) (cropped).jpg",
+"wikipedia_title": "Porsche 911 GT3"
+},
+{
+"brand": "Porsche",
+"model": "Porsche 911 GT3",
+"generation": "Porsche 911 GT3 992 GT3",
+"code": "",
+"years": [
+2021,
+2026
+],
+"production": "2021–present",
+"body_styles": [],
+"image": "Porsche 992 GT3 1X7A0323.jpg",
+"wikipedia_title": "Porsche 911 GT3"
+},
+{
+"brand": "Porsche",
+"model": "Porsche 911 GT2",
+"generation": "Porsche 911 GT2 993",
+"code": "",
+"years": [
+1993,
+1998
+],
+"production": "1993–1998",
+"body_styles": [],
+"image": "1996 Porsche 911 993 GT2 - Flickr - The Car Spy (4) (cropped).jpg",
+"wikipedia_title": "Porsche 911 GT2"
+},
+{
+"brand": "Porsche",
+"model": "Porsche 911 GT2",
+"generation": "Porsche 911 GT2 996",
+"code": "",
+"years": [
+2001,
+2005
+],
+"production": "2001–2005",
+"body_styles": [],
+"image": "Porsche GT2 white (6906373771).jpg",
+"wikipedia_title": "Porsche 911 GT2"
+},
+{
+"brand": "Porsche",
+"model": "Porsche 911 GT2",
+"generation": "Porsche 911 GT2 997",
+"code": "",
+"years": [
+2007,
+2012
+],
+"production": "2007–2012",
+"body_styles": [],
+"image": "White Porsche 997 GT2 with black rims in Ahrweiler (cropped) (cropped).jpg",
+"wikipedia_title": "Porsche 911 GT2"
+},
+{
+"brand": "Porsche",
+"model": "Dauer 962 Le Mans",
+"generation": "Dauer 962 Le Mans",
+"code": "",
+"years": [
+1993,
+1997
+],
+"production": "1993&ndash;1997 (13 cars)",
+"body_styles": [
+"2-door coupe"
+],
+"image": "Dauer 962 LM - Mauro Baldi, Yannick Dalmas & Hurley Haywood at Mulsanne Corner at the 1994 Le Mans (31130420074) (cropped).jpg",
+"wikipedia_title": "Dauer 962 Le Mans"
+},
+{
+"brand": "Porsche",
+"model": "9ff GT9",
+"generation": "9ff GT9",
+"code": "",
+"years": [
+2007,
+2011
+],
+"production": "2007&ndash;2008 (GT9) 2008 (GT9-R) 2011 (GT9-CS)",
+"body_styles": [
+"2-door coupé"
+],
+"image": "EMS 2011 (6436612009).jpg",
+"wikipedia_title": "9ff GT9"
+},
+{
+"brand": "Porsche",
+"model": "Porsche 911",
+"generation": "Porsche 911",
+"code": "",
+"years": [
+1964,
+2026
+],
+"production": "September 1964 – present",
+"body_styles": [],
+"image": "Porsche 911 No 1000000, 70 Years Porsche Sports Car, Berlin (1X7A3888).jpg",
+"wikipedia_title": "Porsche 911"
+},
+{
+"brand": "Porsche",
+"model": "Porsche Vision 357",
+"generation": "Porsche Vision 357",
+"code": "",
+"years": [
+2023,
+2023
+],
+"production": "2023",
+"body_styles": [
+"Coupe"
+],
+"image": "Porsche Vision 357 (6).jpg",
+"wikipedia_title": "Porsche Vision 357"
+},
+{
+"brand": "Porsche",
+"model": "Porsche Vision 357 Speedster",
+"generation": "Porsche Vision 357 Speedster",
+"code": "",
+"years": [
+2023,
+2023
+],
+"production": "2023",
+"body_styles": [
+"Coupe"
+],
+"image": "",
+"wikipedia_title": "Porsche Vision 357 Speedster"
+},
+{
+"brand": "Lamborghini",
+"model": "Lamborghini Murciélago",
+"generation": "Lamborghini Murciélago",
+"code": "",
+"years": [
+2001,
+2010
+],
+"production": "2001–2010",
+"body_styles": [],
+"image": "Lamborghini Murciélago LP-640 - Flickr - Alexandre Prévot (40).jpg",
+"wikipedia_title": "Lamborghini Murciélago"
+},
+{
+"brand": "Lamborghini",
+"model": "Lamborghini Diablo",
+"generation": "Lamborghini Diablo",
+"code": "",
+"years": [
+1990,
+2001
+],
+"production": "1990–2001 2,903 built",
+"body_styles": [
+"2-door coupé 2-door retractable hard-top convertible (roadster)"
+],
+"image": "1995 Lamborghini Diablo SE 30.jpg",
+"wikipedia_title": "Lamborghini Diablo"
+},
+{
+"brand": "Lamborghini",
+"model": "Lamborghini Gallardo",
+"generation": "Lamborghini Gallardo",
+"code": "",
+"years": [
+2003,
+2013
+],
+"production": "2003–2013",
+"body_styles": [
+"2-door coupé 2-door convertible (Spyder)"
+],
+"image": "Lamborghini Superleggera-20180708.jpg",
+"wikipedia_title": "Lamborghini Gallardo"
+},
+{
+"brand": "Lamborghini",
+"model": "Lamborghini Reventón",
+"generation": "Lamborghini Reventón",
+"code": "",
+"years": [
+2007,
+2009
+],
+"production": "2007–2009 21 coupés (\"00/20\" for museum), 15 roadsters",
+"body_styles": [
+"2-door coupé 2-door roadster"
+],
+"image": "MotorShow 2007, Lamborghini - Flickr - Gaspa (1) (cropped).jpg",
+"wikipedia_title": "Lamborghini Reventón"
+},
+{
+"brand": "Lamborghini",
+"model": "Lamborghini Sesto Elemento",
+"generation": "Lamborghini Sesto Elemento",
+"code": "",
+"years": [
+2012,
+2012
+],
+"production": "2012 (20 produced)",
+"body_styles": [
+"2-door coupé"
+],
+"image": "2012 Lamborghini Sesto Elemento.jpg",
+"wikipedia_title": "Lamborghini Sesto Elemento"
+},
+{
+"brand": "Lamborghini",
+"model": "Lamborghini Aventador",
+"generation": "Lamborghini Aventador",
+"code": "",
+"years": [
+2011,
+2022
+],
+"production": "February 2011 – September 2022",
+"body_styles": [],
+"image": "Lamborghini Aventador S (44554).jpg",
+"wikipedia_title": "Lamborghini Aventador"
+},
+{
+"brand": "Lamborghini",
+"model": "Lamborghini Urus",
+"generation": "Lamborghini Urus",
+"code": "",
+"years": [
+2017,
+2026
+],
+"production": "2017–present",
+"body_styles": [
+"5-door SUV"
+],
+"image": "Lamborghini Urus SE DSC 8524.jpg",
+"wikipedia_title": "Lamborghini Urus"
+},
+{
+"brand": "Lamborghini",
+"model": "Lamborghini Huracán",
+"generation": "Lamborghini Huracán",
+"code": "",
+"years": [
+2014,
+2024
+],
+"production": "2014–2024",
+"body_styles": [],
+"image": "2017 Lamborghini Huracan LP610.jpg",
+"wikipedia_title": "Lamborghini Huracán"
+},
+{
+"brand": "Lamborghini",
+"model": "Lamborghini Veneno",
+"generation": "Lamborghini Veneno",
+"code": "",
+"years": [
+2013,
+2014
+],
+"production": "2013&ndash;2014 (3 coupés, 9 roadsters)",
+"body_styles": [],
+"image": "Geneva MotorShow 2013 - Lamborghini Veneno 1.jpg",
+"wikipedia_title": "Lamborghini Veneno"
+},
+{
+"brand": "Lamborghini",
+"model": "Lamborghini Sián FKP 37",
+"generation": "Lamborghini Sián FKP 37",
+"code": "",
+"years": [
+2020,
+2022
+],
+"production": "2020–2022",
+"body_styles": [],
+"image": "Lamborghini Sian at IAA 2019 IMG 0332.jpg",
+"wikipedia_title": "Lamborghini Sián FKP 37"
+},
+{
+"brand": "Lamborghini",
+"model": "Lamborghini Essenza SCV12",
+"generation": "Lamborghini Essenza SCV12",
+"code": "",
+"years": [
+2020,
+2020
+],
+"production": "2020",
+"body_styles": [
+"2-door coupe"
+],
+"image": "Lamborghini Essenza SCV12 001 (cropped).jpg",
+"wikipedia_title": "Lamborghini Essenza SCV12"
+},
+{
+"brand": "Lamborghini",
+"model": "Lamborghini 5-95 Zagato",
+"generation": "Lamborghini 5-95 Zagato",
+"code": "",
+"years": [
+2014,
+2014
+],
+"production": "2014",
+"body_styles": [
+"2-door coupé 2-door roadster"
+],
+"image": "2014 Lamborghini 5-95 Zagato.jpg",
+"wikipedia_title": "Lamborghini 5-95 Zagato"
+},
+{
+"brand": "Lamborghini",
+"model": "Lamborghini Countach LPI 800-4",
+"generation": "Lamborghini Countach LPI 800-4",
+"code": "",
+"years": [
+2022,
+2022
+],
+"production": "2022 (112 units)",
+"body_styles": [
+"2-door coupe"
+],
+"image": "2022 Lamborghini Countach.jpg",
+"wikipedia_title": "Lamborghini Countach LPI 800-4"
+},
+{
+"brand": "Lamborghini",
+"model": "Lamborghini Revuelto",
+"generation": "Lamborghini Revuelto",
+"code": "",
+"years": [
+2023,
+2026
+],
+"production": "2023–present",
+"body_styles": [
+"2-door coupé"
+],
+"image": "Lamborghini Revuelto DSC 6985 (cropped).jpg",
+"wikipedia_title": "Lamborghini Revuelto"
+},
+{
+"brand": "Lamborghini",
+"model": "Lamborghini Temerario",
+"generation": "Lamborghini Temerario",
+"code": "L634",
+"years": [
+2025,
+2026
+],
+"production": "2025–present",
+"body_styles": [
+"2-door coupé"
+],
+"image": "Lamborghini Temerario IMG 5361.jpg",
+"wikipedia_title": "Lamborghini Temerario"
+},
+{
+"brand": "Lamborghini",
+"model": "Lamborghini Fenomeno",
+"generation": "Lamborghini Fenomeno",
+"code": "",
+"years": [
+2025,
+2026
+],
+"production": "2025–present (44 units planned)",
+"body_styles": [],
+"image": "2025 Lamborghini Fenomeno USG26.jpg",
+"wikipedia_title": "Lamborghini Fenomeno"
 }
 ]

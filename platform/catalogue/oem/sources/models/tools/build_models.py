@@ -65,11 +65,11 @@ CACHE = os.environ.get('WIKI_CACHE', '/tmp/claude-0/-home-user-triposr-runpod-wo
 CATS = {'Volkswagen': ['Category:Volkswagen vehicles', 'Category:Volkswagen Commercial Vehicles vehicles'],
         'Volkswagen Commercial Vehicles': [], 'Audi': ['Category:Audi vehicles'], 'SEAT': ['Category:SEAT vehicles'],
         'Cupra': ['Category:Cupra vehicles'], 'Skoda': ['Category:Škoda vehicles'], 'Porsche': ['Category:Porsche vehicles'],
-        'Bentley': ['Category:Bentley vehicles'], 'Lamborghini': ['Category:Lamborghini vehicles']}
+        'Bentley': ['Category:Bentley vehicles', 'Category:Bentley Motors vehicles'], 'Lamborghini': ['Category:Lamborghini vehicles']}
 SKIP_CAT = re.compile(r'concept|racing|race car|prototype|engine|motorsport|rally|military|by |people|images', re.I)
 
 
-def category_articles(cat, depth=2, seen=None):
+def category_articles(cat, depth=3, seen=None):
     """Every article in a brand's Wikipedia category tree (the Wikidata brand
     links miss many models: Tiguan, Touareg, ID.3...)."""
     seen = seen if seen is not None else set()
@@ -91,6 +91,30 @@ def category_articles(cat, depth=2, seen=None):
         cont = '&cmcontinue=' + urllib.parse.quote(d['continue']['cmcontinue'])
 
 
+MAKES = r'(Volkswagen|VW|Audi|SEAT|Seat|Cupra|CUPRA|Škoda|Skoda|Porsche|Bentley|Lamborghini)\b'
+TITLE_BRAND = [(r'^Audi\b', 'Audi'), (r'^(SEAT|Seat)\b', 'SEAT'), (r'^(Cupra|CUPRA)\b', 'Cupra'), (r'^(Škoda|Skoda)\b', 'Skoda'),
+               (r'^Porsche\b', 'Porsche'), (r'^Bentley\b', 'Bentley'), (r'^Lamborghini\b', 'Lamborghini'), (r'^(Volkswagen|VW)\b', 'Volkswagen')]
+
+
+NAVBOX = {'Volkswagen': ['Template:Volkswagen', 'Template:Volkswagen Commercial Vehicles', 'Template:Volkswagen do Brasil'],
+          'Audi': ['Template:Audi'], 'SEAT': ['Template:SEAT'], 'Cupra': ['Template:Cupra'], 'Skoda': ['Template:Škoda'],
+          'Porsche': ['Template:Porsche'], 'Bentley': ['Template:Bentley'], 'Lamborghini': ['Template:Lamborghini']}
+
+
+def navbox_articles(tpl):
+    """Every article linked from a brand's navigation template."""
+    out, cont = set(), ''
+    while True:
+        u = ('https://en.wikipedia.org/w/api.php?action=query&prop=links&plnamespace=0&pllimit=500&format=json'
+             '&titles=' + urllib.parse.quote(tpl) + cont)
+        d = json.loads(get(u))
+        for p in d['query']['pages'].values():
+            out |= {l['title'] for l in p.get('links', [])}
+        if 'continue' not in d:
+            return out
+        cont = '&plcontinue=' + urllib.parse.quote(d['continue']['plcontinue'])
+
+
 def wikitext(titles):
     cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}
     out = {t: cache[t] for t in titles if t in cache}
@@ -109,7 +133,7 @@ def wikitext(titles):
 
 def infoboxes(text):
     """Yield the body of each {{Infobox automobile ...}}, brace-balanced."""
-    for m in re.finditer(r'\{\{\s*Infobox[ _]automobile', text, re.I):
+    for m in re.finditer(r'\{\{\s*Infobox[ _](?:automobile|electric[ _]vehicle)(?![ _]engine)', text, re.I):
         i, depth = m.start(), 0
         while i < len(text):
             if text.startswith('{{', i):
@@ -123,16 +147,37 @@ def infoboxes(text):
         yield text[m.end():i - 2]
 
 
+def params(box):
+    """Split an infobox body into {name: value} on TOP-LEVEL pipes only, so a
+    value written as {{ubl|2011-2023|...}} over several lines stays whole."""
+    out, depth, cur, i = {}, 0, [], 0
+    parts = []
+    while i < len(box):
+        two = box[i:i + 2]
+        if two in ('{{', '[['):
+            depth += 1; cur.append(two); i += 2; continue
+        if two in ('}}', ']]'):
+            depth -= 1; cur.append(two); i += 2; continue
+        if box[i] == '|' and depth == 0:
+            parts.append(''.join(cur)); cur = []; i += 1; continue
+        cur.append(box[i]); i += 1
+    parts.append(''.join(cur))
+    for p in parts:
+        k, eq, v = p.partition('=')
+        if eq:
+            out.setdefault(k.strip().lower().replace(' ', '_'), v.strip())
+    return out
+
+
 def field(box, name):
-    m = re.search(r'^\s*\|\s*' + name + r'\s*=(.*?)(?=^\s*\||\Z)', box, re.M | re.S)
-    return m.group(1).strip() if m else ''
+    return params(box).get(name.lower().replace(' ', '_'), '')
 
 
 def clean(s):
     s = re.sub(r'<ref[^>]*/>|<ref[^>]*>.*?</ref>', '', s, flags=re.S)
     s = re.sub(r'<!--.*?-->', '', s, flags=re.S)
     s = re.sub(r'\[\[(?:[^|\]]*\|)?([^\]]*)\]\]', r'\1', s)
-    s = re.sub(r"'''?|<br\s*/?>|\{\{(?:nowrap|ubl|plainlist|unbulleted list|flatlist)\s*\|?", ' ', s, flags=re.I)
+    s = re.sub(r"'''?|<br\s*/?>|\{\{(?:nowrap|ubl|plainlist|indented plainlist|unbulleted list|flatlist|hlist)\s*\|?", ' ', s, flags=re.I)
     s = re.sub(r'\{\{[^{}]*\}\}', ' ', s)
     s = re.sub(r'[*{}|]', ' ', s)
     return re.sub(r'\s+', ' ', s).strip()
@@ -169,18 +214,23 @@ def main():
     rows, seen = [], set()
     for brand, qid in BRANDS.items():
         qid = qid or brand_qid(LABELS[brand])
-        if not qid:
-            print('no Wikidata id for', brand); continue
-        titles = set(articles(qid))
+        titles = set(articles(qid)) if qid else set()
         n = len(titles)
         for c in CATS.get(brand, []):
             titles |= category_articles(c)
+        for t in NAVBOX.get(brand, []):
+            titles |= {x for x in navbox_articles(t) if re.match(MAKES, x)}
         titles = sorted(t for t in titles if not re.search(r'^List of|concept|prototype|race|rally|\(racing|engine$', t, re.I))
         print(f'{brand} ({qid}): {n} from Wikidata, {len(titles)} with the category tree', flush=True)
         texts = wikitext(titles)
         for title, text in texts.items():
             for box in infoboxes(text):
                 prod = clean(field(box, 'production'))
+                cls = clean(field(box, 'class'))
+                if re.search(r'concept|prototype|one-off|show car|race car|racing', prod + ' ' + cls, re.I):
+                    continue
+                if not re.match(MAKES, title):
+                    continue          # tuners and other makers filed in a brand category (9ff, Meyers Manx, Chrysler)
                 yr = years(prod)
                 if not yr or yr[1] < 1995 or yr[0] > 2026:
                     continue
@@ -189,7 +239,8 @@ def main():
                 if key in seen:
                     continue
                 seen.add(key)
-                rows.append({'brand': brand, 'model': title, 'generation': name,
+                own = next((b for rx, b in TITLE_BRAND if re.match(rx, title)), brand)
+                rows.append({'brand': own, 'model': title, 'generation': name,
                              'code': clean(field(box, 'model_code')) or clean(field(box, 'model code')),
                              'years': yr, 'production': prod[:120],
                              'body_styles': [b for b in re.split(r'\s{2,}|,|;| / ', clean(field(box, 'body_style'))) if b.strip()][:8],
@@ -198,7 +249,7 @@ def main():
                              'wikipedia_title': title})
         rows = tidy(rows)
         json.dump(rows, open(os.path.join(HERE, 'models.json'), 'w'), indent=0, ensure_ascii=False)
-        print(f'  -> {sum(r["brand"] == brand for r in rows)} generations kept', flush=True)
+        print(f'  -> {len(rows)} generations so far', flush=True)
     print('MODELS', len(rows))
 
 
