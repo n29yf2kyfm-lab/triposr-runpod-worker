@@ -1387,6 +1387,36 @@
 "https://vw.oempartsonline.com/v-2003-volkswagen-jetta--wolfsburg-edition--1-8l-l4-gas"
 ]
 ],
+"v-2003-volkswagen-passat": [
+[
+"GL 1.8L L4 - Gas",
+"https://vw.oempartsonline.com/v-2003-volkswagen-passat--gl--1-8l-l4-gas"
+],
+[
+"GL 2.8L V6 - Gas",
+"https://vw.oempartsonline.com/v-2003-volkswagen-passat--gl--2-8l-v6-gas"
+],
+[
+"GLS 1.8L L4 - Gas",
+"https://vw.oempartsonline.com/v-2003-volkswagen-passat--gls--1-8l-l4-gas"
+],
+[
+"GLS 2.8L V6 - Gas",
+"https://vw.oempartsonline.com/v-2003-volkswagen-passat--gls--2-8l-v6-gas"
+],
+[
+"GLX 2.8L V6 - Gas",
+"https://vw.oempartsonline.com/v-2003-volkswagen-passat--glx--2-8l-v6-gas"
+],
+[
+"GLX 4 Motion 2.8L V6 - Gas",
+"https://vw.oempartsonline.com/v-2003-volkswagen-passat--glx-4-motion--2-8l-v6-gas"
+],
+[
+"W8 4.0L W8 - Gas",
+"https://vw.oempartsonline.com/v-2003-volkswagen-passat--w8--4-0l-w8-gas"
+]
+],
 "v-2004-volkswagen-beetle": [
 [
 "GL 1.9L L4 - Diesel",
@@ -1477,6 +1507,48 @@
 "https://vw.oempartsonline.com/v-2004-volkswagen-jetta--tdi--1-9l-l4-diesel"
 ]
 ],
+"v-2004-volkswagen-passat": [
+[
+"GL 1.8L L4 - Gas",
+"https://vw.oempartsonline.com/v-2004-volkswagen-passat--gl--1-8l-l4-gas"
+],
+[
+"GL 2.8L V6 - Gas",
+"https://vw.oempartsonline.com/v-2004-volkswagen-passat--gl--2-8l-v6-gas"
+],
+[
+"GL TDI 2.0L L4 - Diesel",
+"https://vw.oempartsonline.com/v-2004-volkswagen-passat--gl-tdi--2-0l-l4-diesel"
+],
+[
+"GLS 1.8L L4 - Gas",
+"https://vw.oempartsonline.com/v-2004-volkswagen-passat--gls--1-8l-l4-gas"
+],
+[
+"GLS 2.8L V6 - Gas",
+"https://vw.oempartsonline.com/v-2004-volkswagen-passat--gls--2-8l-v6-gas"
+],
+[
+"GLS 4 Motion 1.8L L4 - Gas",
+"https://vw.oempartsonline.com/v-2004-volkswagen-passat--gls-4-motion--1-8l-l4-gas"
+],
+[
+"GLS TDI 2.0L L4 - Diesel",
+"https://vw.oempartsonline.com/v-2004-volkswagen-passat--gls-tdi--2-0l-l4-diesel"
+],
+[
+"GLX 2.8L V6 - Gas",
+"https://vw.oempartsonline.com/v-2004-volkswagen-passat--glx--2-8l-v6-gas"
+],
+[
+"GLX 4 Motion 2.8L V6 - Gas",
+"https://vw.oempartsonline.com/v-2004-volkswagen-passat--glx-4-motion--2-8l-v6-gas"
+],
+[
+"W8 4.0L W8 - Gas",
+"https://vw.oempartsonline.com/v-2004-volkswagen-passat--w8--4-0l-w8-gas"
+]
+],
 "v-2005-volkswagen-beetle": [
 [
 "GL 2.0L L4 - Gas",
@@ -1555,6 +1627,44 @@
 "https://vw.oempartsonline.com/v-2005-volkswagen-jetta--tdi--1-9l-l4-diesel"
 ]
 ],
+"v-2005-volkswagen-passat": [
+[
+"GL 1.8L L4 - Gas",
+"https://vw.oempartsonline.com/v-2005-volkswagen-passat--gl--1-8l-l4-gas"
+],
+[
+"GL TDI 2.0L L4 - Diesel",
+"https://vw.oempartsonline.com/v-2005-volkswagen-passat--gl-tdi--2-0l-l4-diesel"
+],
+[
+"GLS 1.8L L4 - Gas",
+"https://vw.oempartsonline.com/v-2005-volkswagen-passat--gls--1-8l-l4-gas"
+],
+[
+"GLS 2.8L V6 - Gas",
+"https://vw.oempartsonline.com/v-2005-volkswagen-passat--gls--2-8l-v6-gas"
+],
+[
+"GLS 4 Motion 1.8L L4 - Gas",
+"https://vw.oempartsonline.com/v-2005-volkswagen-passat--gls-4-motion--1-8l-l4-gas"
+],
+[
+"GLS 4 Motion 2.8L V6 - Gas",
+"https://vw.oempartsonline.com/v-2005-volkswagen-passat--gls-4-motion--2-8l-v6-gas"
+],
+[
+"GLS TDI 2.0L L4 - Diesel",
+"https://vw.oempartsonline.com/v-2005-volkswagen-passat--gls-tdi--2-0l-l4-diesel"
+],
+[
+"GLX 2.8L V6 - Gas",
+"https://vw.oempartsonline.com/v-2005-volkswagen-passat--glx--2-8l-v6-gas"
+],
+[
+"GLX 4 Motion 2.8L V6 - Gas",
+"https://vw.oempartsonline.com/v-2005-volkswagen-passat--glx-4-motion--2-8l-v6-gas"
+]
+],
 "v-2006-volkswagen-beetle": [
 [
 "2.5 2.5L L5 - Gas",
@@ -1611,6 +1721,20 @@
 "https://vw.oempartsonline.com/v-2006-volkswagen-jetta--value-edition--2-5l-l5-gas"
 ]
 ],
+"v-2006-volkswagen-passat": [
+[
+"2.0T 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2006-volkswagen-passat--2-0t--2-0l-l4-gas"
+],
+[
+"3.6 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2006-volkswagen-passat--3-6--3-6l-v6-gas"
+],
+[
+"Value Edition 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2006-volkswagen-passat--value-edition--2-0l-l4-gas"
+]
+],
 "v-2007-volkswagen-beetle": [
 [
 "2.5 2.5L L5 - Gas",
@@ -1661,6 +1785,24 @@
 [
 "Wolfsburg Edition 2.5L L5 - Gas",
 "https://vw.oempartsonline.com/v-2007-volkswagen-jetta--wolfsburg-edition--2-5l-l5-gas"
+]
+],
+"v-2007-volkswagen-passat": [
+[
+"2.0T 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2007-volkswagen-passat--2-0t--2-0l-l4-gas"
+],
+[
+"3.6 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2007-volkswagen-passat--3-6--3-6l-v6-gas"
+],
+[
+"Value Edition 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2007-volkswagen-passat--value-edition--2-0l-l4-gas"
+],
+[
+"Wolfsburg Edition 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2007-volkswagen-passat--wolfsburg-edition--2-0l-l4-gas"
 ]
 ],
 "v-2008-volkswagen-beetle": [
