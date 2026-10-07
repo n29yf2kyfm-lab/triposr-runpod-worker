@@ -1800,6 +1800,33 @@
 "url": "https://audi.oempartsonline.com/v-2007-audi-rs4--base--4-2l-v8-gas"
 },
 {
+"year": 2007,
+"make": "Audi",
+"model": "S4",
+"trim": "Avant",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2007-audi-s4--avant--4-2l-v8-gas"
+},
+{
+"year": 2007,
+"make": "Audi",
+"model": "S4",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2007-audi-s4--base--4-2l-v8-gas"
+},
+{
+"year": 2007,
+"make": "Audi",
+"model": "S4",
+"trim": "Cabriolet",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2007-audi-s4--cabriolet--4-2l-v8-gas"
+},
+{
 "year": 2008,
 "make": "Audi",
 "model": "A3",
@@ -2023,6 +2050,33 @@
 "engine": "4.2L V8 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2008-audi-rs4--cabriolet--4-2l-v8-gas"
+},
+{
+"year": 2008,
+"make": "Audi",
+"model": "S4",
+"trim": "Avant",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2008-audi-s4--avant--4-2l-v8-gas"
+},
+{
+"year": 2008,
+"make": "Audi",
+"model": "S4",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2008-audi-s4--base--4-2l-v8-gas"
+},
+{
+"year": 2008,
+"make": "Audi",
+"model": "S4",
+"trim": "Cabriolet",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2008-audi-s4--cabriolet--4-2l-v8-gas"
 },
 {
 "year": 2009,
@@ -2268,6 +2322,15 @@
 "url": "https://audi.oempartsonline.com/v-2009-audi-r8--base--5-2l-v10-gas"
 },
 {
+"year": 2009,
+"make": "Audi",
+"model": "S4",
+"trim": "Cabriolet",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2009-audi-s4--cabriolet--4-2l-v8-gas"
+},
+{
 "year": 2010,
 "make": "Audi",
 "model": "A3",
@@ -2491,6 +2554,15 @@
 "engine": "5.2L V10 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2010-audi-r8--base--5-2l-v10-gas"
+},
+{
+"year": 2010,
+"make": "Audi",
+"model": "S4",
+"trim": "Base",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2010-audi-s4--base--3-0l-v6-gas"
 },
 {
 "year": 2011,
@@ -2752,6 +2824,15 @@
 "engine": "5.2L V10 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2011-audi-r8--spyder--5-2l-v10-gas"
+},
+{
+"year": 2011,
+"make": "Audi",
+"model": "S4",
+"trim": "Base",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2011-audi-s4--base--3-0l-v6-gas"
 },
 {
 "year": 2012,
@@ -3060,6 +3141,15 @@
 "url": "https://audi.oempartsonline.com/v-2012-audi-r8--spyder--5-2l-v10-gas"
 },
 {
+"year": 2012,
+"make": "Audi",
+"model": "S4",
+"trim": "Base",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2012-audi-s4--base--3-0l-v6-gas"
+},
+{
 "year": 2013,
 "make": "Audi",
 "model": "A3",
@@ -3364,6 +3454,15 @@
 "engine": "4.2L V8 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2013-audi-rs5--base--4-2l-v8-gas"
+},
+{
+"year": 2013,
+"make": "Audi",
+"model": "S4",
+"trim": "Base",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2013-audi-s4--base--3-0l-v6-gas"
 },
 {
 "year": 2013,
@@ -3823,6 +3922,24 @@
 "engine": "4.0L V8 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2014-audi-rs7--base--4-0l-v8-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "S4",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-s4--premium-plus--3-0l-v6-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "S4",
+"trim": "Prestige",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-s4--prestige--3-0l-v6-gas"
 },
 {
 "year": 2014,
@@ -4475,6 +4592,24 @@
 {
 "year": 2015,
 "make": "Audi",
+"model": "S4",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-s4--premium-plus--3-0l-v6-gas"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "S4",
+"trim": "Prestige",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-s4--prestige--3-0l-v6-gas"
+},
+{
+"year": 2015,
+"make": "Audi",
 "model": "allroad",
 "trim": "Premium",
 "engine": "2.0L L4 Flex",
@@ -4984,6 +5119,24 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2016-audi-s3--prestige--2-0l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Audi",
+"model": "S4",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-s4--premium-plus--3-0l-v6-gas"
+},
+{
+"year": 2016,
+"make": "Audi",
+"model": "S4",
+"trim": "Prestige",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-s4--prestige--3-0l-v6-gas"
 },
 {
 "year": 2016,
