@@ -1,0 +1,501 @@
+<title>Golf Mk8 eHybrid Workshop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: workshop bay — parts tree left, 3D lift in the middle, service sheet right; stacks on phones */
+:root{
+  --bg:#eef1f3; --panel:#f8fafb; --ink:#14191d; --muted:#5b6670; --line:#d3dade;
+  --accent:#0a6cff; --hv:#ff7a00; --ok:#1f8a4c; --warn:#b25e00; --stage:#dfe4e8;
+  --display:"Barlow Condensed","Arial Narrow",sans-serif; --body:"Barlow",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1316; --panel:#161b1f; --ink:#e6ecef; --muted:#93a0a9; --line:#2a3238;
+  --accent:#4f97ff; --hv:#ff8a1f; --ok:#4cc27f; --warn:#f0a446; --stage:#1b2126; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1316; --panel:#161b1f; --ink:#e6ecef; --muted:#93a0a9; --line:#2a3238;
+  --accent:#4f97ff; --hv:#ff8a1f; --ok:#4cc27f; --warn:#f0a446; --stage:#1b2126; color-scheme:dark}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:14px;margin:0;padding-inline:0}
+.app{display:grid;grid-template-columns:270px minmax(0,1fr) 320px;grid-template-rows:auto minmax(0,1fr);height:100vh;height:100dvh;min-height:560px}
+header{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--panel)}
+h1{font-family:var(--display);font-weight:700;font-size:24px;letter-spacing:.02em;margin:0;text-transform:uppercase}
+.sub{color:var(--muted);font-size:13px}
+.flag{font-family:var(--mono);font-size:11px;color:var(--warn);border:1px solid currentColor;border-radius:3px;padding:2px 6px}
+aside{background:var(--panel);overflow:auto;min-width:0;padding:12px 14px;border-right:1px solid var(--line)}
+aside.right{border-right:0;border-left:1px solid var(--line)}
+.stage{position:relative;background:var(--stage);min-width:0;min-height:0}
+#c{display:block;width:100%;height:100%;touch-action:none}
+h2{font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:14px 0 6px}
+h2:first-child{margin-top:0}
+.sys{border-top:1px solid var(--line);padding:6px 0}
+.sys>summary{cursor:pointer;display:flex;align-items:center;gap:8px;font-weight:600;list-style:none}
+.sys>summary::-webkit-details-marker{display:none}
+.sys>summary .n{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.row{display:flex;align-items:center;gap:6px;padding:3px 0 3px 4px;border-radius:4px}
+.row button{all:unset;cursor:pointer;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.row.sel{background:color-mix(in srgb,var(--accent) 14%,transparent)}
+.row .q{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.dot{width:8px;height:8px;border-radius:2px;flex:none}
+.ctl{display:grid;gap:10px}
+label.s{display:grid;gap:4px;font-size:12px;color:var(--muted)}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.btns{display:flex;flex-wrap:wrap;gap:6px}
+.b{font:600 13px var(--body);padding:7px 11px;border-radius:5px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.b:hover{border-color:var(--accent)}
+.b:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.b.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+.b:disabled{opacity:.45;cursor:default}
+.card{border:1px solid var(--line);border-radius:6px;padding:10px 12px;background:var(--bg)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:13px}
+.kv dt{color:var(--muted)} .kv dd{margin:0;font-family:var(--mono);font-size:12px;overflow-wrap:anywhere}
+.conf{display:inline-block;font:500 11px var(--mono);padding:1px 6px;border-radius:3px;border:1px solid currentColor}
+.conf.pub{color:var(--ok)} .conf.est{color:var(--warn)} .conf.na{color:var(--muted)}
+.step{font-family:var(--display);font-size:20px;font-weight:600;margin:2px 0 4px}
+.stepn{font:500 12px var(--mono);color:var(--muted)}
+.steptext{line-height:1.5;max-width:65ch}
+.hvnote{border-left:3px solid var(--hv);padding:6px 10px;background:color-mix(in srgb,var(--hv) 10%,transparent);font-size:13px;margin-top:8px}
+.legend{position:absolute;left:12px;bottom:10px;display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--muted);pointer-events:none}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.views{position:absolute;right:10px;top:10px;display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.views .b{padding:5px 9px;font-size:12px;background:var(--panel)}
+ul.src{margin:4px 0 0;padding-left:18px;color:var(--muted);font-size:12.5px;line-height:1.5}
+@media (max-width:980px){
+  .app{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 62vh auto auto;height:auto}
+  aside{border:0;border-top:1px solid var(--line);padding-inline:16px}
+  .stage{grid-row:2}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="app">
+  <header>
+    <h1>Golf Mk8 eHybrid · Workshop</h1>
+    <span class="sub">1.4 TSI EA211 + DQ400e with e-motor · explode, strip and refit</span>
+    <span class="flag">APPROXIMATE MODEL — not OEM CAD</span>
+  </header>
+
+  <aside>
+    <h2>Parts</h2>
+    <div id="tree"></div>
+  </aside>
+
+  <div class="stage">
+    <canvas id="c" aria-label="3D model of the Golf Mk8 eHybrid"></canvas>
+    <div class="views">
+      <button class="b" data-v="iso">3/4</button><button class="b" data-v="side">Side</button>
+      <button class="b" data-v="top">Top</button><button class="b" data-v="bay">Engine bay</button><button class="b" data-v="under">Under</button>
+    </div>
+    <div class="legend">
+      <span><i class="dot" style="background:#9aa4ab"></i>Aluminium</span>
+      <span><i class="dot" style="background:#3d4247"></i>Steel</span>
+      <span><i class="dot" style="background:#ff7a00"></i>High voltage</span>
+      <span><i class="dot" style="background:#2fae6b"></i>Seals</span>
+      <span><i class="dot" style="background:#d9b53d"></i>Fasteners</span>
+    </div>
+  </div>
+
+  <aside class="right">
+    <h2>View</h2>
+    <div class="ctl">
+      <label class="s" for="explode">Explode <input id="explode" type="range" min="0" max="1" step="0.01" value="0"></label>
+      <label class="s" for="xray">Body opacity <input id="xray" type="range" min="0" max="1" step="0.01" value="0.18"></label>
+      <div class="btns"><button class="b" id="isolate">Isolate selected</button><button class="b" id="showall">Show all</button></div>
+    </div>
+
+    <h2>Service: engine out and back</h2>
+    <div class="card">
+      <div class="stepn" id="stepn"></div>
+      <div class="step" id="stept"></div>
+      <div class="steptext" id="stepd"></div>
+      <div class="hvnote" id="hvnote" hidden>High-voltage system. De-energising must be done by an HV-qualified technician following VW's procedure. This model shows where parts are, not how to make them safe.</div>
+      <div class="btns" style="margin-top:10px">
+        <button class="b" id="prev">Back</button><button class="b pri" id="next">Next step</button><button class="b" id="reset">Reset</button>
+      </div>
+    </div>
+
+    <h2>Selected part</h2>
+    <div class="card" id="info"><span class="sub">Tap a part in the model or the list.</span></div>
+
+    <h2>What is real and what is estimated</h2>
+    <div class="card" style="font-size:13px;line-height:1.5">
+      <span class="conf pub">published</span> figures come from VW's public spec sheets (engine size, bore and stroke, tyre size, wheel bolt pattern, overall dimensions).
+      <span class="conf est">est.</span> shapes, positions and bolt sizes are educated estimates from proportions and photos.
+      <span class="conf na">not included</span> torque values and OEM part numbers: these need VW erWin / ETKA or TecDoc.
+      <ul class="src">
+        <li>VW Golf 8 eHybrid press kit (2020): 1.4 TSI 110 kW, e-motor 85 kW, 13 kWh battery</li>
+        <li>EA211 1.4 TSI: 1,395 cc, bore 74.5 mm, stroke 80.0 mm, 4 valves per cylinder</li>
+        <li>Golf 8 body: 4,284 × 1,789 × 1,456 mm, wheelbase 2,636 mm</li>
+        <li>Wheels 225/45 R17 (est. fitment), 5 × 112 PCD, M14 × 1.5 wheel bolts</li>
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+(() => {
+const canvas = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(38, 1, 0.05, 60);
+const controls = new THREE.OrbitControls(camera, canvas);
+controls.enableDamping = true; controls.target.set(0.2,0.6,0);
+scene.add(new THREE.HemisphereLight(0xffffff, 0x8a949b, 0.85));
+const sun = new THREE.DirectionalLight(0xffffff, 0.8); sun.position.set(4,6,3); scene.add(sun);
+const fill = new THREE.DirectionalLight(0xffffff, 0.35); fill.position.set(-4,3,-5); scene.add(fill);
+const grid = new THREE.GridHelper(10, 40, 0x7d8890, 0xa9b2b8); grid.material.opacity = .35; grid.material.transparent = true; scene.add(grid);
+
+// ---------- materials ----------
+const M = {
+  alu:  new THREE.MeshStandardMaterial({color:0x9aa4ab, metalness:.55, roughness:.45}),
+  cast: new THREE.MeshStandardMaterial({color:0x6f777d, metalness:.4, roughness:.7}),
+  steel:new THREE.MeshStandardMaterial({color:0x3d4247, metalness:.6, roughness:.5}),
+  black:new THREE.MeshStandardMaterial({color:0x1e2124, metalness:.1, roughness:.8}),
+  rubber:new THREE.MeshStandardMaterial({color:0x151617, roughness:.95}),
+  plastic:new THREE.MeshStandardMaterial({color:0x2c3136, roughness:.7}),
+  hv:   new THREE.MeshStandardMaterial({color:0xff7a00, roughness:.55}),
+  seal: new THREE.MeshStandardMaterial({color:0x2fae6b, roughness:.6}),
+  bolt: new THREE.MeshStandardMaterial({color:0xd9b53d, metalness:.7, roughness:.35}),
+  copper:new THREE.MeshStandardMaterial({color:0xb8733d, metalness:.6, roughness:.4}),
+  rad:  new THREE.MeshStandardMaterial({color:0x4b5a63, metalness:.3, roughness:.6}),
+  trim: new THREE.MeshStandardMaterial({color:0x3a3f45, roughness:.85}),
+  seat: new THREE.MeshStandardMaterial({color:0x2a2e33, roughness:.9}),
+  body: new THREE.MeshStandardMaterial({color:0x8fa3b3, metalness:.3, roughness:.35, transparent:true, opacity:.18, depthWrite:false, side:THREE.DoubleSide}),
+  glass:new THREE.MeshStandardMaterial({color:0x223644, metalness:.1, roughness:.1, transparent:true, opacity:.25, depthWrite:false}),
+  disc: new THREE.MeshStandardMaterial({color:0x8a8f93, metalness:.7, roughness:.4}),
+  rim:  new THREE.MeshStandardMaterial({color:0xc8cdd1, metalness:.8, roughness:.3}),
+};
+
+// ---------- geometry helpers (metres; x = forward, y = up, z = right) ----------
+const box = (w,h,d,m)=>new THREE.Mesh(new THREE.BoxGeometry(w,h,d), m);
+const cylZ = (r,len,m,seg=28)=>{const g=new THREE.CylinderGeometry(r,r,len,seg); g.rotateX(Math.PI/2); return new THREE.Mesh(g,m);};
+const cylY = (r,len,m,seg=24)=>new THREE.Mesh(new THREE.CylinderGeometry(r,r,len,seg), m);
+const cylX = (r,len,m,seg=24)=>{const g=new THREE.CylinderGeometry(r,r,len,seg); g.rotateZ(Math.PI/2); return new THREE.Mesh(g,m);};
+const ringZ = (r,t,m)=>new THREE.Mesh(new THREE.TorusGeometry(r,t,10,40), m);
+const at = (o,x,y,z)=>{o.position.set(x,y,z); return o;};
+function tubeBetween(a,b,r,m){
+  const A=new THREE.Vector3(...a), B=new THREE.Vector3(...b), d=B.clone().sub(A);
+  const mesh=new THREE.Mesh(new THREE.CylinderGeometry(r,r,d.length(),14), m);
+  mesh.position.copy(A).add(B).multiplyScalar(.5);
+  mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0), d.normalize()); return mesh;
+}
+function pathTube(pts,r,m){
+  const c=new THREE.CatmullRomCurve3(pts.map(p=>new THREE.Vector3(...p)));
+  return new THREE.Mesh(new THREE.TubeGeometry(c, 60, r, 10, false), m);
+}
+function coil(r, h, turns, wire, m){
+  const pts=[]; for(let i=0;i<=turns*24;i++){const a=i/24*Math.PI*2; pts.push(new THREE.Vector3(Math.cos(a)*r, i/(turns*24)*h - h/2, Math.sin(a)*r));}
+  return new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), turns*24, wire, 8, false), m);
+}
+// a hex bolt pointing along +y; dia in metres
+function bolt(dia, len){
+  const g=new THREE.Group();
+  const head=new THREE.Mesh(new THREE.CylinderGeometry(dia*0.95, dia*0.95, dia*0.65, 6), M.bolt); head.position.y=dia*0.33;
+  const shank=new THREE.Mesh(new THREE.CylinderGeometry(dia/2, dia/2, len, 10), M.bolt); shank.position.y=-len/2;
+  g.add(head, shank); return g;
+}
+function boltSet(positions, dia, len, rot){
+  const g=new THREE.Group();
+  positions.forEach(p=>{const b=bolt(dia,len); b.position.set(...p); if(rot) b.rotation.set(...rot); g.add(b);});
+  return g;
+}
+
+// ---------- parts registry ----------
+const parts=[]; const byId={};
+const SYS = {
+  engine:{name:'Engine · EA211 1.4 TSI', color:'#9aa4ab'},
+  hybrid:{name:'Hybrid drive · DQ400e + HV', color:'#ff7a00'},
+  fuel:{name:'Fuel, exhaust and cooling', color:'#6f777d'},
+  front:{name:'Front suspension and steering', color:'#3d4247'},
+  rear:{name:'Rear suspension', color:'#3d4247'},
+  wheels:{name:'Wheels and brakes', color:'#8a8f93'},
+  interior:{name:'Interior', color:'#2a2e33'},
+  body:{name:'Body', color:'#8fa3b3'},
+};
+function add(id, name, sys, obj, o={}){
+  obj.traverse(c=>{ if(c.isMesh){ c.userData.pid=id; } });
+  scene.add(obj);
+  const p={id, name, sys, obj, base:obj.position.clone(), ex:new THREE.Vector3(...(o.ex||[0,0,0])),
+    tags:o.tags||[], qty:o.qty||1, mat:o.mat||'', size:o.size||'', conf:o.conf||'est', note:o.note||'', svc:new THREE.Vector3(), svcT:new THREE.Vector3(), hideT:false, vis:true, op:1};
+  parts.push(p); byId[id]=p; return p;
+}
+
+// ===== key reference points =====
+const FA=1.312, RA=-1.324, WR=0.317, TRF=0.7745, TRR=0.760; // front/rear axle x, wheel radius, half tracks
+const CRK={x:1.42, y:0.40}; // crank centre (est.)
+const BORE=0.0745, PITCH=0.082, ZE=0.12; // bore, bore spacing (est. 82 mm), engine block centre z
+const cylZs=[-1.5,-.5,.5,1.5].map(k=>ZE+k*PITCH);
+
+// ================= ENGINE =================
+{
+  const blk=new THREE.Group();
+  const b=box(0.20,0.28,0.40,M.alu); b.position.y=0.14; blk.add(b);
+  const skirt=box(0.24,0.08,0.40,M.alu); skirt.position.y=-0.01; blk.add(skirt);
+  add('block','Cylinder block (aluminium)', 'engine', at(blk,CRK.x,CRK.y-0.06,ZE), {ex:[0,0,0], tags:['engine'], mat:'Aluminium, cast-iron liners', size:'≈ 400 × 280 × 200 mm', conf:'est', note:'EA211 uses an aluminium block with thin cast-iron liners. Bore 74.5 mm, stroke 80.0 mm (published).'});
+  add('crank','Crankshaft','engine', at(cylZ(0.024,0.46,M.steel),CRK.x,CRK.y,ZE), {ex:[0,-0.32,0], tags:['engine','internal'], mat:'Forged steel', size:'≈ 460 mm long', note:'Stroke 80 mm (published). Shape simplified to a bar with counterweights omitted.'});
+  const pist=new THREE.Group();
+  cylZs.forEach((z,i)=>{ const p=cylY(BORE/2*0.98,0.05,M.alu); p.position.set(0,0,z-ZE); pist.add(p);
+    const rod=box(0.018,0.14,0.022,M.steel); rod.position.set(0,-0.09,z-ZE); pist.add(rod); });
+  add('pistons','Pistons and connecting rods','engine', at(pist,CRK.x,CRK.y+0.19,ZE), {ex:[0,0.62,0], qty:4, tags:['engine','internal'], mat:'Aluminium pistons, steel rods', size:'Ø 74.5 mm (published)'});
+  add('gasket_head','Cylinder head gasket','engine', at(box(0.20,0.004,0.40,M.seal),CRK.x,CRK.y+0.222,ZE), {ex:[0,0.30,0], tags:['engine','seal'], mat:'Multi-layer steel', note:'Always replaced when the head comes off.'});
+  const head=new THREE.Group(); head.add(box(0.20,0.12,0.40,M.alu));
+  const cams=cylZ(0.016,0.42,M.steel); cams.position.set(0.045,0.05,0); const cams2=cams.clone(); cams2.position.x=-0.045; head.add(cams,cams2);
+  add('head','Cylinder head with camshafts','engine', at(head,CRK.x,CRK.y+0.285,ZE), {ex:[0,0.42,0], tags:['engine'], mat:'Aluminium', note:'DOHC, 4 valves per cylinder (published). Exhaust manifold is cast into the head on EA211.'});
+  const hb=[]; cylZs.concat([ZE+2.5*PITCH-0.02]).forEach(z=>{ hb.push([0.075,0.065,z-ZE-PITCH/2]); hb.push([-0.075,0.065,z-ZE-PITCH/2]); });
+  add('bolts_head','Cylinder head bolts','engine', at(boltSet(hb,0.010,0.13),CRK.x,CRK.y+0.285,ZE), {ex:[0,0.66,0], qty:10, tags:['engine','fastener'], mat:'Steel, stretch bolts', size:'M10 est.', note:'Stretch (torque-to-yield) bolts: replace, never reuse. Torque and angle sequence: erWin.'});
+  add('gasket_cam','Camshaft cover gasket','engine', at(box(0.19,0.004,0.39,M.seal),CRK.x,CRK.y+0.347,ZE), {ex:[0,0.80,0], tags:['engine','seal']});
+  add('camcover','Camshaft cover','engine', at(box(0.19,0.05,0.39,M.plastic),CRK.x,CRK.y+0.375,ZE), {ex:[0,0.95,0], tags:['engine'], mat:'Plastic composite'});
+  const cb=[]; for(let i=0;i<7;i++){ const z=-0.18+i*0.06; cb.push([0.09,0.03,z]); cb.push([-0.09,0.03,z]); }
+  add('bolts_cam','Camshaft cover bolts','engine', at(boltSet(cb,0.006,0.03),CRK.x,CRK.y+0.375,ZE), {ex:[0,1.10,0], qty:14, tags:['engine','fastener'], size:'M6 est.'});
+  add('gasket_sump','Sump sealant line','engine', at(box(0.23,0.003,0.39,M.seal),CRK.x,CRK.y-0.112,ZE), {ex:[0,-0.48,0], tags:['engine','seal'], note:'EA211 sump is sealed with liquid sealant, not a cut gasket (est.).'});
+  add('sump','Oil sump','engine', at(box(0.23,0.10,0.39,M.alu),CRK.x,CRK.y-0.165,ZE), {ex:[0,-0.62,0], tags:['engine'], mat:'Aluminium upper / steel lower (est.)'});
+  const sb=[]; for(let i=0;i<8;i++){ const z=-0.18+i*0.0514; sb.push([0.105,-0.05,z]); sb.push([-0.105,-0.05,z]); }
+  add('bolts_sump','Sump bolts','engine', at(boltSet(sb,0.006,0.03,[Math.PI,0,0]),CRK.x,CRK.y-0.165,ZE), {ex:[0,-0.78,0], qty:16, tags:['engine','fastener'], size:'M6 est.'});
+  add('seal_crank_f','Crankshaft oil seal, pulley end','engine', at(ringZ(0.032,0.005,M.seal),CRK.x,CRK.y,ZE+0.212), {ex:[0,0,0.35], tags:['engine','seal'], note:'PTFE lip seal (est.). Replace when disturbed.'});
+  add('timing','Timing belt and cover','engine', at(box(0.22,0.34,0.03,M.plastic),CRK.x,CRK.y+0.16,ZE+0.23), {ex:[0,0.1,0.52], tags:['engine'], note:'EA211 uses a toothed timing belt (published). Interval: service schedule.'});
+  add('pulley','Crank pulley and auxiliary belt','engine', at(cylZ(0.075,0.03,M.steel),CRK.x,CRK.y,ZE+0.255), {ex:[0,-0.1,0.66], tags:['engine']});
+  add('seal_crank_r','Crankshaft oil seal, flywheel end','engine', at(ringZ(0.045,0.005,M.seal),CRK.x,CRK.y,ZE-0.212), {ex:[0,0,-0.30], tags:['engine','seal']});
+  const im=new THREE.Group(); const plen=box(0.07,0.10,0.36,M.plastic); plen.position.set(0.05,0,0); im.add(plen);
+  cylZs.forEach(z=>{ const r=cylX(0.022,0.06,M.plastic); r.position.set(0,0,z-ZE); im.add(r); });
+  const ic=box(0.05,0.08,0.26,M.rad); ic.position.set(0.10,0,0); im.add(ic);
+  add('intake','Intake manifold with water-cooled intercooler','engine', at(im,CRK.x+0.13,CRK.y+0.28,ZE), {ex:[0.45,0.1,0], tags:['engine','intake'], note:'Intercooler is built into the intake manifold on EA211 (published).'});
+  add('gasket_intake','Intake manifold seals','engine', at(box(0.004,0.06,0.36,M.seal),CRK.x+0.102,CRK.y+0.28,ZE), {ex:[0.30,0.1,0], tags:['engine','seal','intake']});
+  add('throttle','Throttle body','engine', at(cylX(0.03,0.05,M.alu),CRK.x+0.19,CRK.y+0.28,ZE-0.22), {ex:[0.55,0.1,-0.2], tags:['engine','intake']});
+  const tc=new THREE.Group(); const tw=cylZ(0.055,0.06,M.cast); const cw=cylZ(0.05,0.05,M.alu); cw.position.z=0.07; tc.add(tw,cw);
+  add('turbo','Turbocharger','engine', at(tc,CRK.x-0.17,CRK.y+0.22,ZE-0.05), {ex:[-0.45,0.1,0], tags:['engine','exhaust'], mat:'Cast steel turbine housing', note:'Single-scroll turbo bolted to the head (est. position).'});
+  add('gasket_turbo','Turbo flange gasket','engine', at(box(0.004,0.06,0.06,M.seal),CRK.x-0.105,CRK.y+0.22,ZE-0.05), {ex:[-0.30,0.1,0], tags:['engine','seal','exhaust']});
+  add('wpump','Coolant pump and thermostat housing','engine', at(box(0.08,0.08,0.06,M.plastic),CRK.x-0.13,CRK.y+0.1,ZE+0.17), {ex:[-0.35,0,0.25], tags:['engine'], note:'On EA211 the coolant pump sits in a combined housing driven by a small belt from the exhaust camshaft (published).'});
+  add('seal_thermo','Thermostat housing O-ring','engine', at(ringZ(0.03,0.003,M.seal),CRK.x-0.13,CRK.y+0.1,ZE+0.135), {ex:[-0.35,0,0.12], tags:['engine','seal']});
+  add('ac','A/C compressor (electric drive est.)','engine', at(cylX(0.06,0.16,M.alu),CRK.x+0.12,CRK.y-0.04,ZE+0.08), {ex:[0.5,-0.2,0.1], tags:['engine'], note:'On the eHybrid the A/C compressor is electrically driven from the HV system (est.).'});
+  const mb=[[0,0,0],[0.05,0,0],[-0.05,0,0]];
+  add('mount_r','Engine mount, right','engine', at(box(0.12,0.06,0.08,M.rubber),CRK.x-0.02,CRK.y+0.36,ZE+0.30), {ex:[0,0.5,0.4], tags:['engine','mount']});
+  add('bolts_mount_r','Engine mount bolts, right','engine', at(boltSet(mb,0.010,0.06),CRK.x-0.02,CRK.y+0.40,ZE+0.30), {ex:[0,0.62,0.4], qty:3, tags:['engine','fastener','mount'], size:'M10 est.', note:'Stretch bolts on many VW mounts: replace. Torque: erWin.'});
+  add('pendulum','Pendulum support (torque rod)','engine', at(box(0.22,0.04,0.05,M.steel),CRK.x-0.18,CRK.y-0.20,ZE-0.12), {ex:[-0.3,-0.35,0], tags:['engine','mount']});
+}
+
+// ================= HYBRID DRIVE =================
+{
+  const zF=ZE-0.235;
+  add('dmf','Dual-mass flywheel','hybrid', at(cylZ(0.13,0.03,M.steel),CRK.x,CRK.y,zF), {ex:[0,0,-0.18], tags:['emotor'], note:'Sits between engine and e-motor/K0 clutch module (est.).'});
+  const em=new THREE.Group(); em.add(cylZ(0.155,0.12,M.alu)); const st=cylZ(0.13,0.10,M.copper); em.add(st);
+  add('emotor','E-motor and K0 disconnect clutch','hybrid', at(em,CRK.x,CRK.y,zF-0.09), {ex:[0,0,-0.32], tags:['emotor','hv'], mat:'Aluminium housing, copper stator', note:'Permanent-magnet synchronous motor, 85 kW (published). The K0 clutch couples or separates the petrol engine.'});
+  add('seal_emotor','E-motor housing O-ring','hybrid', at(ringZ(0.15,0.004,M.seal),CRK.x,CRK.y,zF-0.155), {ex:[0,0,-0.40], tags:['emotor','seal']});
+  const gb=new THREE.Group(); const bell=cylZ(0.17,0.08,M.alu); bell.position.z=0.12; gb.add(bell);
+  const cs=box(0.32,0.30,0.26,M.alu); cs.position.set(-0.06,-0.02,-0.04); gb.add(cs);
+  add('gearbox','DQ400e 6-speed DSG (dual clutch)','hybrid', at(gb,CRK.x,CRK.y,zF-0.36), {ex:[0,0,-0.55], tags:['gearbox'], mat:'Aluminium casing', note:'Wet dual-clutch gearbox with the e-motor module in front of it (published). Differential output near the front axle line.'});
+  const gbb=[]; for(let i=0;i<10;i++){ const a=i/10*Math.PI*2; gbb.push([Math.cos(a)*0.165,Math.sin(a)*0.165,0]); }
+  add('bolts_bell','Engine-to-gearbox bolts','hybrid', at(boltSet(gbb,0.010,0.07,[Math.PI/2,0,0]),CRK.x,CRK.y,zF-0.02), {ex:[0,0,-0.25], qty:10, tags:['emotor','fastener'], size:'M12 / M10 mix est.'});
+  add('pe','Power electronics (inverter)','hybrid', at(box(0.22,0.10,0.26,M.alu),CRK.x+0.05,CRK.y+0.36,zF-0.30), {ex:[0,0.5,-0.3], tags:['gearbox','hv','pe'], note:'Converts battery DC to AC for the e-motor (est. position: on top of the gearbox).'});
+  add('hvcable','HV cables, front to battery','hybrid', pathTube([[CRK.x+0.05,CRK.y+0.30,zF-0.42],[1.0,0.30,-0.15],[0.2,0.18,-0.05],[-0.40,0.20,0],[-0.55,0.25,0]],0.013,M.hv), {ex:[0,-0.2,0], tags:['hv'], note:'Orange = high voltage. Never cut or unplug without de-energising.'});
+  const bat=new THREE.Group(); bat.add(box(0.62,0.22,1.20,M.steel)); const top=box(0.60,0.02,1.18,M.hv); top.position.y=0.12; bat.add(top);
+  add('battery','HV battery, 13 kWh','hybrid', at(bat,-0.85,0.27,0), {ex:[0,-0.5,0], tags:['hv','battery'], mat:'Steel case, Li-ion cells', note:'13 kWh gross (published), under the rear seat (est. dimensions).'});
+  add('bolts_bat','HV battery mounting bolts','hybrid', at(boltSet([[0.30,0,0.58],[-0.30,0,0.58],[0.30,0,-0.58],[-0.30,0,-0.58],[0,0,0.58],[0,0,-0.58]],0.010,0.05,[Math.PI,0,0]),-0.85,0.16,0), {ex:[0,-0.75,0], qty:6, tags:['hv','fastener'], size:'M10 est.'});
+  add('charger','On-board charger and charge socket','hybrid', at(box(0.20,0.08,0.18,M.alu),1.95,0.62,-0.55), {ex:[0.3,0,-0.3], tags:['hv','frontend'], note:'Charge socket is in the front wing on Golf 8 eHybrid (est. position).'});
+}
+
+// ================= FUEL / EXHAUST / COOLING =================
+{
+  add('downpipe','Exhaust downpipe and catalytic converter','fuel', pathTube([[CRK.x-0.22,CRK.y+0.22,ZE-0.05],[CRK.x-0.30,CRK.y+0.05,ZE-0.05],[CRK.x-0.38,0.20,0],[0.95,0.18,0]],0.03,M.steel), {ex:[-0.3,-0.3,0], tags:['downpipe'], note:'Close-coupled catalytic converter and petrol particulate filter (est. layout).'});
+  add('exhaust','Exhaust: centre and rear silencer','fuel', pathTube([[0.95,0.18,0],[0,0.17,0.05],[-1.0,0.18,0.25],[-1.75,0.26,0.35],[-2.05,0.25,0.38]],0.028,M.steel), {ex:[0,-0.35,0], tags:['exhaust']});
+  add('silencer','Rear silencer','fuel', at(box(0.30,0.14,0.42,M.steel),-1.85,0.26,0.30), {ex:[-0.2,-0.4,0.2]});
+  add('tank','Fuel tank, 40 L','fuel', at(box(0.42,0.22,1.05,M.plastic),-1.10,0.40,0), {ex:[0,0.35,0], note:'40 litre tank above the rear axle on the eHybrid (published capacity; est. shape).'});
+  add('radiator','Radiator and fan','fuel', at(box(0.05,0.42,0.68,M.rad),1.93,0.52,0.02), {ex:[0.55,0,0], tags:['frontend']});
+  add('bumperbeam','Lock carrier and bumper beam','body', at(box(0.08,0.10,1.20,M.steel),2.04,0.46,0), {ex:[0.7,0,0], tags:['frontend']});
+}
+
+// ================= FRONT SUSPENSION / STEERING =================
+{
+  [1,-1].forEach(s=>{
+    const side=s>0?'right':'left';
+    const st=new THREE.Group(); st.add(tubeBetween([0,0,0],[0,0.55,-0.12*s],0.025,M.steel));
+    const sp=coil(0.075,0.22,6,0.007,M.steel); sp.position.set(0,0.40,-0.09*s); sp.rotation.x=0.21*s; st.add(sp);
+    add('strut_'+side,'Front strut and spring, '+side,'front', at(st,FA,0.38,TRF*s*0.90), {ex:[0,0.5,0.35*s], tags:['frontsusp']});
+    add('arm_'+side,'Front lower control arm, '+side,'front', tubeBetween([FA+0.25,0.24,0.33*s],[FA,0.25,0.66*s],0.018,M.steel), {ex:[0,-0.2,0.2*s], tags:['frontsusp']});
+    add('knuckle_'+side,'Wheel bearing housing, '+side,'front', at(box(0.08,0.18,0.06,M.cast),FA,WR,0.66*s), {ex:[0,0,0.5*s], tags:['frontsusp']});
+  });
+  const sf=new THREE.Group(); sf.add(box(0.06,0.06,0.90,M.steel)); const a1=box(0.40,0.05,0.05,M.steel); a1.position.set(0.15,0,0.35); const a2=a1.clone(); a2.position.z=-0.35; sf.add(a1,a2);
+  add('subframe_f','Front subframe','front', at(sf,FA+0.10,0.22,0), {ex:[0,-0.4,0], tags:['subframe']});
+  add('bolts_subframe_f','Front subframe bolts','front', at(boltSet([[0.35,0,0.35],[0.35,0,-0.35],[-0.05,0,0.42],[-0.05,0,-0.42]],0.014,0.10,[Math.PI,0,0]),FA+0.10,0.19,0), {ex:[0,-0.6,0], qty:4, tags:['subframe','fastener'], size:'M14 est.', note:'Stretch bolts: replace. Mark the subframe position before removal so wheel alignment is kept.'});
+  add('rack','Electric power steering rack','front', at(cylZ(0.032,0.78,M.alu),FA-0.13,0.30,0), {ex:[0,-0.25,0], tags:['subframe'], note:'Electromechanical rack, dual-pinion type (est.).'});
+  add('arb_f','Front anti-roll bar','front', pathTube([[FA-0.02,0.27,-0.62],[FA-0.18,0.27,-0.35],[FA-0.18,0.27,0.35],[FA-0.02,0.27,0.62]],0.011,M.steel), {ex:[0,-0.32,0], tags:['subframe']});
+  [1,-1].forEach(s=>{ add('drive_'+(s>0?'right':'left'),'Drive shaft, '+(s>0?'right':'left'),'front', tubeBetween([FA,0.33,(s>0?0.0:ZE-0.62)],[FA,WR,0.66*s],0.016,M.steel), {ex:[0,-0.1,0.25*s], tags:['driveshaft','ds'+s]}); });
+}
+
+// ================= REAR SUSPENSION =================
+{
+  const sf=new THREE.Group(); sf.add(box(0.08,0.06,1.05,M.steel)); add('subframe_r','Rear subframe','rear', at(sf,RA+0.05,0.22,0), {ex:[0,-0.35,0]});
+  [1,-1].forEach(s=>{ const side=s>0?'right':'left';
+    add('trail_'+side,'Rear trailing arm, '+side,'rear', tubeBetween([RA+0.48,0.30,0.62*s],[RA,WR,0.68*s],0.02,M.steel), {ex:[0.1,-0.1,0.25*s]});
+    add('link_'+side,'Rear upper and lower links, '+side,'rear', (()=>{const g=new THREE.Group(); g.add(tubeBetween([RA+0.05,0.42,0.12*s],[RA,0.42,0.62*s],0.012,M.steel)); g.add(tubeBetween([RA-0.05,0.22,0.12*s],[RA-0.02,0.24,0.64*s],0.014,M.steel)); return g;})(), {ex:[0,-0.15,0.3*s]});
+    add('rspring_'+side,'Rear coil spring, '+side,'rear', at(coil(0.07,0.20,5,0.007,M.steel),RA-0.05,0.36,0.50*s), {ex:[0,0.35,0.15*s], note:'On the multi-link rear the spring sits on the lower link, separate from the damper (est.).'});
+    add('rdamper_'+side,'Rear damper, '+side,'rear', tubeBetween([RA-0.12,0.28,0.62*s],[RA-0.16,0.68,0.58*s],0.02,M.steel), {ex:[-0.15,0.35,0.3*s]});
+  });
+  add('arb_r','Rear anti-roll bar','rear', pathTube([[RA+0.1,0.25,-0.6],[RA+0.12,0.25,0],[RA+0.1,0.25,0.6]],0.009,M.steel), {ex:[0,-0.25,0]});
+}
+
+// ================= WHEELS & BRAKES =================
+{
+  const mk=(x,z,front)=>{
+    const s=Math.sign(z), g=new THREE.Group();
+    const tyre=new THREE.Mesh(new THREE.TorusGeometry(WR-0.055,0.06,16,48), M.rubber); g.add(tyre);
+    const rim=cylZ(0.2159,0.20,M.rim,36); g.add(rim);
+    return g;
+  };
+  [['fl',FA,-TRF,true],['fr',FA,TRF,true],['rl',RA,-TRR,false],['rr',RA,TRR,false]].forEach(([k,x,z,front])=>{
+    const s=Math.sign(z), sideN=(front?'front ':'rear ')+(s>0?'right':'left');
+    add('wheel_'+k,'Wheel and tyre 225/45 R17, '+sideN,'wheels', at(mk(x,z,front),x,WR,z), {ex:[0,0,0.75*s], tags:['wheel'], conf:'pub', note:'225/45 R17 is one of several factory sizes. Rim 7.5J × 17 est.'});
+    const bp=[]; for(let i=0;i<5;i++){ const a=i/5*Math.PI*2; bp.push([Math.cos(a)*0.056,Math.sin(a)*0.056,0]); }
+    add('wbolts_'+k,'Wheel bolts, '+sideN,'wheels', at(boltSet(bp,0.014,0.03,[s>0?Math.PI/2:-Math.PI/2,0,0]),x,WR,z+0.10*s), {ex:[0,0,1.05*s], qty:5, tags:['fastener'], conf:'pub', size:'M14 × 1.5, 5 × 112 PCD', note:'Thread and pattern are published VW standard. Torque: erWin / wheel manufacturer.'});
+    const dr=front?0.156:0.136;
+    add('disc_'+k,'Brake disc, '+sideN,'wheels', at(cylZ(dr,front?0.025:0.012,M.disc,40),x,WR,z-0.06*s), {ex:[0,0,0.45*s], note:front?'Ventilated, ≈ 312 mm est.':'Solid, ≈ 272 mm est.'});
+    add('caliper_'+k,'Brake caliper, '+sideN,'wheels', at(box(0.08,0.12,0.06,M.black),x-0.11,WR+0.05,z-0.06*s), {ex:[-0.2,0.15,0.5*s]});
+  });
+}
+
+// ================= INTERIOR =================
+{
+  const seat=(x,z)=>{ const g=new THREE.Group(); const c=box(0.50,0.12,0.50,M.seat); g.add(c); const bk=box(0.10,0.62,0.50,M.seat); bk.position.set(-0.25,0.30,0); bk.rotation.z=-0.22; g.add(bk); const hr=box(0.08,0.16,0.26,M.seat); hr.position.set(-0.35,0.70,0); g.add(hr); return at(g,x,0.50,z); };
+  add('seat_fl','Driver seat (left-hand drive)','interior', seat(0.05,-0.37), {ex:[0,0.6,-0.4]});
+  add('seat_fr','Front passenger seat','interior', seat(0.05,0.37), {ex:[0,0.6,0.4]});
+  const bench=new THREE.Group(); bench.add(box(0.50,0.12,1.30,M.seat)); const bb=box(0.10,0.58,1.30,M.seat); bb.position.set(-0.27,0.30,0); bb.rotation.z=-0.2; bench.add(bb);
+  add('bench','Rear bench','interior', at(bench,-0.80,0.56,0), {ex:[0,0.7,0], note:'Raised slightly on the eHybrid because the HV battery sits underneath (est.).'});
+  add('dash','Dashboard and digital cockpit','interior', at(box(0.35,0.20,1.55,M.trim),0.78,0.86,0), {ex:[0.4,0.4,0]});
+  add('wheel','Steering wheel and column','interior', (()=>{const g=new THREE.Group(); const r=new THREE.Mesh(new THREE.TorusGeometry(0.18,0.017,10,40),M.trim); r.rotation.y=Math.PI/2; r.rotation.z=0.4; g.add(r); g.add(tubeBetween([0,0,0],[0.32,-0.14,0],0.02,M.steel)); return at(g,0.50,0.93,-0.37);})(), {ex:[0.2,0.5,-0.2]});
+  add('console','Centre console','interior', at(box(0.70,0.22,0.22,M.trim),0.25,0.52,0), {ex:[0,0.5,0]});
+  add('pedals','Pedal box','interior', at(box(0.12,0.20,0.30,M.steel),0.95,0.45,-0.37), {ex:[0.3,0.2,-0.2]});
+}
+
+// ================= BODY =================
+{
+  const sh=new THREE.Shape();
+  const arch=(cx)=>{ const cy=WR, r=0.37, dy=WR-0.26, dx=Math.sqrt(r*r-dy*dy); sh.lineTo(cx-dx,0.26); sh.absarc(cx,cy,r,Math.PI+Math.asin(dy/r),-Math.asin(dy/r),true); };
+  sh.moveTo(2.142,0.30); [[2.16,0.52],[2.10,0.70],[1.85,0.80],[1.10,0.92],[0.35,1.40],[0.10,1.445],[-0.90,1.456],[-1.55,1.42],[-1.80,1.30],[-2.02,1.00],[-2.12,0.92],[-2.13,0.55],[-2.08,0.30]].forEach(p=>sh.lineTo(...p));
+  sh.lineTo(-2.0,0.26); arch(RA); arch(FA); sh.lineTo(2.142,0.30);
+  const g=new THREE.ExtrudeGeometry(sh,{depth:1.70,bevelEnabled:true,bevelThickness:.045,bevelSize:.04,bevelSegments:3,curveSegments:24}); g.translate(0,0,-0.85);
+  const shell=new THREE.Mesh(g,M.body);
+  add('body','Body shell (approximate)','body', shell, {conf:'est', size:'4,284 × 1,789 × 1,456 mm (published)', note:'Overall size is published; the surface is a simplified extrusion, not the real panel shape.'});
+  const bn=new THREE.Shape(); bn.moveTo(2.10,0.70); bn.lineTo(1.85,0.80); bn.lineTo(1.12,0.92); bn.lineTo(1.12,0.90); bn.lineTo(1.85,0.78); bn.lineTo(2.08,0.68);
+  const bg=new THREE.ExtrudeGeometry(bn,{depth:1.56,bevelEnabled:false}); bg.translate(0,0.012,-0.78);
+  add('bonnet','Bonnet','body', new THREE.Mesh(bg,new THREE.MeshStandardMaterial({color:0x8fa3b3,metalness:.3,roughness:.35,transparent:true,opacity:.35,side:THREE.DoubleSide})), {ex:[0,0.7,0], tags:['bonnet']});
+  const gl=new THREE.Shape(); [[1.05,0.96],[0.35,1.38],[0.10,1.42],[-0.90,1.43],[-1.52,1.40],[-1.95,1.02],[-1.0,0.99],[0,0.98]].forEach((p,i)=>i?gl.lineTo(...p):gl.moveTo(...p));
+  const gg=new THREE.ExtrudeGeometry(gl,{depth:1.62,bevelEnabled:false}); gg.translate(0,0,-0.81);
+  add('glass','Glazing','body', new THREE.Mesh(gg,M.glass), {});
+  add('bumper','Front bumper cover','body', at(box(0.14,0.36,1.74,new THREE.MeshStandardMaterial({color:0x8fa3b3,transparent:true,opacity:.3,depthWrite:false})),2.10,0.42,0), {ex:[0.8,0,0], tags:['frontend']});
+}
+
+// ---------- service procedure (engine and gearbox out, then back in) ----------
+const PT=['engine','emotor','gearbox','subframe','pe'];
+const has=(p,t)=>p.tags.includes(t);
+const STEPS=[
+  {t:'Car on the lift', d:'Everything fitted. Bonnet is shown see-through. Use Next to remove the engine and gearbox the way VW workshops usually do on transverse Golfs: down and out from underneath.', f:()=>{}},
+  {t:'Make the high-voltage system safe', hv:true, d:'Orange parts carry up to around 350 V (est.). The HV system is de-energised and locked out before any work in the engine bay. Then disconnect the 12 V battery.', f:()=>{}},
+  {t:'Front end to service position', d:'Remove the bumper cover. Pull the lock carrier with radiator forward into the service position so the engine has room. Remove the bonnet for clarity.', f:(s)=>{ parts.forEach(p=>{ if(has(p,'frontend')) s[p.id].o.add(new THREE.Vector3(0.75,0,0)); if(has(p,'bonnet')) s[p.id].h=true; }); }},
+  {t:'Remove air intake and inverter connections', d:'Disconnect the HV cables at the power electronics. Remove the intake pipe and throttle body. Drain coolant and oil.', hv:true, f:(s)=>{ parts.forEach(p=>{ if(has(p,'intake') && p.id==='throttle') s[p.id].o.add(new THREE.Vector3(0.3,0.5,0)); }); }},
+  {t:'Disconnect exhaust', d:'Undo the downpipe clamp and separate the catalytic converter from the turbocharger. Fit a new turbo flange gasket on refit.', f:(s)=>{ s.downpipe.o.add(new THREE.Vector3(-0.25,-0.35,0)); }},
+  {t:'Remove drive shafts', d:'Undo the drive shaft flange bolts at the gearbox and the hub bolts. Swing the wheel bearing housings out and pull the shafts.', f:(s)=>{ s.drive_left.o.add(new THREE.Vector3(0,-0.1,-0.55)); s.drive_right.o.add(new THREE.Vector3(0,-0.1,0.55)); }},
+  {t:'Support powertrain, remove mounts', d:'Put an engine table under the engine, e-motor and gearbox. Remove the pendulum support, the right engine mount and the gearbox mount. Mark and undo the subframe bolts.', f:(s)=>{ ['mount_r','bolts_mount_r'].forEach(id=>s[id].o.add(new THREE.Vector3(0,0.35,0.25))); s.pendulum.o.add(new THREE.Vector3(-0.2,-0.3,0)); }},
+  {t:'Lower engine and gearbox', d:'Lower the engine, e-motor, gearbox and front subframe together on the table. Watch every hose and cable as it drops.', f:(s)=>{ parts.forEach(p=>{ if(PT.some(t=>has(p,t)) && !['mount_r','bolts_mount_r','pendulum'].includes(p.id)) s[p.id].o.add(new THREE.Vector3(0,-0.75,0)); }); }},
+  {t:'Roll it out', d:'Roll the assembly forward and clear of the car.', f:(s)=>{ parts.forEach(p=>{ if(PT.some(t=>has(p,t)) && !['mount_r','bolts_mount_r','pendulum'].includes(p.id)) s[p.id].o.add(new THREE.Vector3(1.5,0,0)); }); }},
+  {t:'Split engine from e-motor and gearbox', d:'Undo the engine-to-gearbox bolts and separate the engine from the e-motor module. Inspect the dual-mass flywheel.', f:(s)=>{ parts.forEach(p=>{ if(has(p,'engine') && !['mount_r','bolts_mount_r','pendulum'].includes(p.id)) s[p.id].o.add(new THREE.Vector3(0,0,0.55)); }); }},
+  {t:'Strip the engine', d:'Cam cover, timing belt, cylinder head, sump, then pistons and crankshaft. Replace every seal shown in green and every stretch bolt. Refit is this list in reverse, with new seals and torque values from erWin.', f:(s)=>{ parts.forEach(p=>{ if(has(p,'engine') && !['mount_r','bolts_mount_r','pendulum'].includes(p.id)) s[p.id].o.add(p.ex.clone().multiplyScalar(1.0)); }); }},
+];
+let step=0;
+function applyStep(){
+  const s={}; parts.forEach(p=>s[p.id]={o:new THREE.Vector3(),h:false});
+  for(let i=0;i<=step;i++) STEPS[i].f(s);
+  parts.forEach(p=>{ p.svcT.copy(s[p.id].o); p.hideT=s[p.id].h; });
+  document.getElementById('stepn').textContent=`Step ${step+1} of ${STEPS.length}`;
+  document.getElementById('stept').textContent=STEPS[step].t;
+  document.getElementById('stepd').textContent=STEPS[step].d;
+  document.getElementById('hvnote').hidden=!STEPS[step].hv;
+  document.getElementById('prev').disabled=step===0;
+  document.getElementById('next').textContent= step===STEPS.length-1 ? 'Refit (reverse)' : 'Next step';
+}
+let reversing=false;
+document.getElementById('next').onclick=()=>{ if(step===STEPS.length-1){ reversing=true; } if(reversing){ step=Math.max(0,step-1); if(step===0) reversing=false; } else step++; applyStep(); document.getElementById('next').textContent= reversing ? 'Refit next' : (step===STEPS.length-1?'Refit (reverse)':'Next step'); };
+document.getElementById('prev').onclick=()=>{ reversing=false; step=Math.max(0,step-1); applyStep(); };
+document.getElementById('reset').onclick=()=>{ reversing=false; step=0; applyStep(); };
+
+// ---------- tree UI ----------
+const tree=document.getElementById('tree');
+let selected=null;
+function confTag(c){ return c==='pub'?'<span class="conf pub">published</span>':'<span class="conf est">est.</span>'; }
+Object.entries(SYS).forEach(([k,s])=>{
+  const list=parts.filter(p=>p.sys===k); if(!list.length) return;
+  const d=document.createElement('details'); d.className='sys'; d.open=(k==='engine'||k==='hybrid');
+  d.innerHTML=`<summary><i class="dot" style="background:${s.color}"></i>${s.name}<span class="n">${list.reduce((a,p)=>a+p.qty,0)}</span></summary>`;
+  list.forEach(p=>{
+    const r=document.createElement('div'); r.className='row'; r.id='row_'+p.id;
+    const cb=document.createElement('input'); cb.type='checkbox'; cb.checked=true; cb.id='cb_'+p.id; cb.setAttribute('aria-label','Show '+p.name);
+    cb.onchange=()=>{ p.vis=cb.checked; };
+    const bt=document.createElement('button'); bt.textContent=p.name; bt.onclick=()=>select(p.id);
+    const q=document.createElement('span'); q.className='q'; q.textContent=p.qty>1?('×'+p.qty):'';
+    r.append(cb,bt,q); d.append(r);
+  });
+  tree.append(d);
+});
+function select(id){
+  if(selected){ document.getElementById('row_'+selected)?.classList.remove('sel'); }
+  selected=id; const p=byId[id]; if(!p) return;
+  const row=document.getElementById('row_'+id); row.classList.add('sel'); row.closest('details').open=true; row.scrollIntoView({block:'nearest'});
+  const info=document.getElementById('info');
+  info.innerHTML=`<div style="font-weight:600;font-size:15px;margin-bottom:6px"></div><dl class="kv"></dl><p class="sub" style="margin:8px 0 0;line-height:1.45"></p>`;
+  info.firstChild.textContent=p.name;
+  const kv=info.querySelector('dl');
+  const rows=[['System',SYS[p.sys].name],['Quantity',String(p.qty)],['Material',p.mat||'—'],['Size',p.size||'—'],['OEM part no.','not included'],['Torque','not included (erWin)']];
+  rows.forEach(([k,v])=>{ const dt=document.createElement('dt'); dt.textContent=k; const dd=document.createElement('dd'); dd.textContent=v; kv.append(dt,dd); });
+  const dt=document.createElement('dt'); dt.textContent='Accuracy'; const dd=document.createElement('dd'); dd.innerHTML=confTag(p.conf); kv.append(dt,dd);
+  info.querySelector('p').textContent=p.note||'Shape and position are estimates.';
+}
+document.getElementById('isolate').onclick=()=>{ if(!selected) return; parts.forEach(p=>{ p.vis=(p.id===selected)||(p.sys===byId[selected].sys); document.getElementById('cb_'+p.id).checked=p.vis; }); };
+document.getElementById('showall').onclick=()=>{ parts.forEach(p=>{ p.vis=true; document.getElementById('cb_'+p.id).checked=true; }); };
+
+// ---------- picking and highlight ----------
+const ray=new THREE.Raycaster(), mouse=new THREE.Vector2(); let downAt=null;
+canvas.addEventListener('pointerdown',e=>downAt=[e.clientX,e.clientY]);
+canvas.addEventListener('pointerup',e=>{
+  if(!downAt||Math.hypot(e.clientX-downAt[0],e.clientY-downAt[1])>5) return;
+  const r=canvas.getBoundingClientRect(); mouse.set((e.clientX-r.left)/r.width*2-1, -(e.clientY-r.top)/r.height*2+1);
+  ray.setFromCamera(mouse,camera);
+  const hits=ray.intersectObjects(parts.filter(p=>p.obj.visible && p.id!=='body' && p.id!=='glass').map(p=>p.obj),true);
+  if(hits.length) select(hits[0].object.userData.pid);
+});
+const hl=new THREE.Color(0x0a6cff);
+let lastSel=null;
+function setHighlight(){
+  if(lastSel===selected) return;
+  if(lastSel) byId[lastSel].obj.traverse(c=>{ if(c.isMesh && c.userData.origMat){ c.material=c.userData.origMat; delete c.userData.origMat; } });
+  if(selected) byId[selected].obj.traverse(c=>{ if(c.isMesh){ c.userData.origMat=c.material; const m=c.material.clone(); m.emissive=hl; m.emissiveIntensity=.55; c.material=m; } });
+  lastSel=selected;
+}
+
+// ---------- controls ----------
+let explode=0;
+document.getElementById('explode').oninput=e=>explode=+e.target.value;
+document.getElementById('xray').oninput=e=>{ M.body.opacity=+e.target.value; };
+const VIEWS={iso:[[4.2,2.6,4.4],[0.2,0.6,0]], side:[[0,1.0,6.2],[0,0.7,0]], top:[[0.01,7,0],[0,0,0]], bay:[[2.6,1.7,1.4],[1.35,0.5,0]], under:[[1.5,-1.6,3.4],[0,0.3,0]]};
+let camGoal=null;
+document.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{ camGoal=VIEWS[b.dataset.v]; });
+camera.position.set(...VIEWS.iso[0]);
+
+// ---------- loop ----------
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function resize(){ const w=canvas.clientWidth, h=canvas.clientHeight; if(canvas.width!==Math.floor(w*renderer.getPixelRatio())||canvas.height!==Math.floor(h*renderer.getPixelRatio())){ renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); } }
+function tick(){
+  resize();
+  const k=reduce?1:0.12;
+  parts.forEach(p=>{
+    p.svc.lerp(p.svcT,k);
+    p.obj.position.copy(p.base).add(p.svc).addScaledVector(p.ex,explode);
+    p.obj.visible=p.vis && !p.hideT;
+  });
+  if(camGoal){ camera.position.lerp(new THREE.Vector3(...camGoal[0]),reduce?1:0.1); controls.target.lerp(new THREE.Vector3(...camGoal[1]),reduce?1:0.1); if(camera.position.distanceTo(new THREE.Vector3(...camGoal[0]))<0.01) camGoal=null; }
+  setHighlight();
+  controls.update(); renderer.render(scene,camera); requestAnimationFrame(tick);
+}
+applyStep(); select('head'); tick();
+})();
+</script>
