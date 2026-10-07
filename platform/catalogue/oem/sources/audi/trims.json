@@ -2124,6 +2124,33 @@
 "url": "https://audi.oempartsonline.com/v-2010-audi-a8-quattro--l--4-2l-v8-gas"
 },
 {
+"year": 2010,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2010-audi-q5--premium--3-2l-v6-gas"
+},
+{
+"year": 2010,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium Plus",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2010-audi-q5--premium-plus--3-2l-v6-gas"
+},
+{
+"year": 2010,
+"make": "Audi",
+"model": "Q5",
+"trim": "Prestige",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2010-audi-q5--prestige--3-2l-v6-gas"
+},
+{
 "year": 2011,
 "make": "Audi",
 "model": "A3",
@@ -2257,6 +2284,42 @@
 "engine": "4.2L V8 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2011-audi-a8-quattro--l--4-2l-v8-gas"
+},
+{
+"year": 2011,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2011-audi-q5--premium--2-0l-l4-gas"
+},
+{
+"year": 2011,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2011-audi-q5--premium-plus--2-0l-l4-gas"
+},
+{
+"year": 2011,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium Plus",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2011-audi-q5--premium-plus--3-2l-v6-gas"
+},
+{
+"year": 2011,
+"make": "Audi",
+"model": "Q5",
+"trim": "Prestige",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2011-audi-q5--prestige--3-2l-v6-gas"
 },
 {
 "year": 2012,
@@ -2419,6 +2482,42 @@
 "engine": "6.3L W12 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2012-audi-a8-quattro--l-w12--6-3l-w12-gas"
+},
+{
+"year": 2012,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2012-audi-q5--premium--2-0l-l4-gas"
+},
+{
+"year": 2012,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2012-audi-q5--premium-plus--2-0l-l4-gas"
+},
+{
+"year": 2012,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium Plus",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2012-audi-q5--premium-plus--3-2l-v6-gas"
+},
+{
+"year": 2012,
+"make": "Audi",
+"model": "Q5",
+"trim": "Prestige",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2012-audi-q5--prestige--3-2l-v6-gas"
 },
 {
 "year": 2013,
@@ -2617,6 +2716,51 @@
 "engine": "6.3L W12 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2013-audi-a8-quattro--l-w12--6-3l-w12-gas"
+},
+{
+"year": 2013,
+"make": "Audi",
+"model": "Q5",
+"trim": "Hybrid Prestige",
+"engine": "2.0L L4 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2013-audi-q5--hybrid-prestige--2-0l-l4-electric-gas"
+},
+{
+"year": 2013,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium",
+"engine": "2.0L L4 Flex",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2013-audi-q5--premium--2-0l-l4-flex"
+},
+{
+"year": 2013,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Flex",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2013-audi-q5--premium-plus--2-0l-l4-flex"
+},
+{
+"year": 2013,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2013-audi-q5--premium-plus--3-0l-v6-gas"
+},
+{
+"year": 2013,
+"make": "Audi",
+"model": "Q5",
+"trim": "Prestige",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2013-audi-q5--prestige--3-0l-v6-gas"
 },
 {
 "year": 2013,
@@ -2887,6 +3031,69 @@
 "engine": "6.3L W12 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2014-audi-a8-quattro--l-w12--6-3l-w12-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "Q5",
+"trim": "Hybrid Prestige",
+"engine": "2.0L L4 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-q5--hybrid-prestige--2-0l-l4-electric-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium",
+"engine": "2.0L L4 Flex",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-q5--premium--2-0l-l4-flex"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Flex",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-q5--premium-plus--2-0l-l4-flex"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-q5--premium-plus--3-0l-v6-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "Q5",
+"trim": "Prestige",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-q5--prestige--3-0l-v6-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "Q5",
+"trim": "TDI Premium Plus",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-q5--tdi-premium-plus--3-0l-v6-diesel"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "Q5",
+"trim": "TDI Prestige",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-q5--tdi-prestige--3-0l-v6-diesel"
 },
 {
 "year": 2014,
@@ -3332,6 +3539,69 @@
 {
 "year": 2015,
 "make": "Audi",
+"model": "Q5",
+"trim": "Hybrid Prestige",
+"engine": "2.0L L4 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-q5--hybrid-prestige--2-0l-l4-electric-gas"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium",
+"engine": "2.0L L4 Flex",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-q5--premium--2-0l-l4-flex"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Flex",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-q5--premium-plus--2-0l-l4-flex"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-q5--premium-plus--3-0l-v6-gas"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "Q5",
+"trim": "Prestige",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-q5--prestige--3-0l-v6-gas"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "Q5",
+"trim": "TDI Premium Plus",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-q5--tdi-premium-plus--3-0l-v6-diesel"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "Q5",
+"trim": "TDI Prestige",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-q5--tdi-prestige--3-0l-v6-diesel"
+},
+{
+"year": 2015,
+"make": "Audi",
 "model": "allroad",
 "trim": "Premium",
 "engine": "2.0L L4 Flex",
@@ -3728,6 +3998,87 @@
 {
 "year": 2016,
 "make": "Audi",
+"model": "Q5",
+"trim": "Hybrid Prestige",
+"engine": "2.0L L4 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-q5--hybrid-prestige--2-0l-l4-electric-gas"
+},
+{
+"year": 2016,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium",
+"engine": "2.0L L4 Flex",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-q5--premium--2-0l-l4-flex"
+},
+{
+"year": 2016,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Flex",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-q5--premium-plus--2-0l-l4-flex"
+},
+{
+"year": 2016,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-q5--premium-plus--3-0l-v6-gas"
+},
+{
+"year": 2016,
+"make": "Audi",
+"model": "Q5",
+"trim": "Prestige",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-q5--prestige--3-0l-v6-gas"
+},
+{
+"year": 2016,
+"make": "Audi",
+"model": "Q5",
+"trim": "TDI Premium Plus",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-q5--tdi-premium-plus--3-0l-v6-diesel"
+},
+{
+"year": 2016,
+"make": "Audi",
+"model": "Q5",
+"trim": "TDI Premium Plus S-Line",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-q5--tdi-premium-plus-s-line--3-0l-v6-diesel"
+},
+{
+"year": 2016,
+"make": "Audi",
+"model": "Q5",
+"trim": "TDI Prestige",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-q5--tdi-prestige--3-0l-v6-diesel"
+},
+{
+"year": 2016,
+"make": "Audi",
+"model": "Q5",
+"trim": "TDI Prestige S-Line",
+"engine": "3.0L V6 Diesel",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-q5--tdi-prestige-s-line--3-0l-v6-diesel"
+},
+{
+"year": 2016,
+"make": "Audi",
 "model": "allroad",
 "trim": "Premium",
 "engine": "2.0L L4 Flex",
@@ -4084,6 +4435,42 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2017-audi-q3-quattro--prestige--2-0l-l4-gas"
+},
+{
+"year": 2017,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium",
+"engine": "2.0L L4 Flex",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2017-audi-q5--premium--2-0l-l4-flex"
+},
+{
+"year": 2017,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Flex",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2017-audi-q5--premium-plus--2-0l-l4-flex"
+},
+{
+"year": 2017,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2017-audi-q5--premium-plus--3-0l-v6-gas"
+},
+{
+"year": 2017,
+"make": "Audi",
+"model": "Q5",
+"trim": "Prestige",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2017-audi-q5--prestige--3-0l-v6-gas"
 },
 {
 "year": 2018,
@@ -4464,6 +4851,33 @@
 "url": "https://audi.oempartsonline.com/v-2018-audi-q3-quattro--premium-plus--2-0l-l4-gas"
 },
 {
+"year": 2018,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2018-audi-q5--premium--2-0l-l4-gas"
+},
+{
+"year": 2018,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2018-audi-q5--premium-plus--2-0l-l4-gas"
+},
+{
+"year": 2018,
+"make": "Audi",
+"model": "Q5",
+"trim": "Prestige",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2018-audi-q5--prestige--2-0l-l4-gas"
+},
+{
 "year": 2019,
 "make": "Audi",
 "model": "A3",
@@ -4813,6 +5227,33 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2019-audi-q3--prestige--2-0l-l4-gas"
+},
+{
+"year": 2019,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2019-audi-q5--premium--2-0l-l4-gas"
+},
+{
+"year": 2019,
+"make": "Audi",
+"model": "Q5",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2019-audi-q5--premium-plus--2-0l-l4-gas"
+},
+{
+"year": 2019,
+"make": "Audi",
+"model": "Q5",
+"trim": "Prestige",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2019-audi-q5--prestige--2-0l-l4-gas"
 },
 {
 "year": 2019,
