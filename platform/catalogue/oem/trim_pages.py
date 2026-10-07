@@ -87,6 +87,16 @@ def ingest():
             else:
                 rows = {a: t for a, t in links if t and re.fullmatch(
                     re.escape(host) + re.escape(path) + r'--[a-z0-9-]+--[a-z0-9-]+', a)}
+                final = ((j.get('metadata') or {}).get('url') or '').rstrip('/')
+                m3 = re.fullmatch(re.escape(host) + re.escape(path) + r'--([a-z0-9-]+)--([a-z0-9-]+)', final)
+                if m3:
+                    # a year with one trim redirects straight to that trim's page; the label
+                    # is rebuilt from the URL slug (e.g. base / 2-5l-l5-gas -> "Base 2.5L L5 - Gas")
+                    eng = re.sub(r'(\d)-(\d)l', r'\1.\2l', m3.group(2)).split('-')
+                    fuel = eng.pop() if eng else ''
+                    label = (' '.join(w.capitalize() for w in m3.group(1).split('-')) + ' ' +
+                             ' '.join(w.upper() for w in eng) + ' - ' + fuel.capitalize())
+                    rows = {final: label}
                 s['years'][path] = sorted([t, a] for a, t in rows.items())
             save(b, s)
             os.remove(f)
