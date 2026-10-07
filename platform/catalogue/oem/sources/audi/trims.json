@@ -4331,6 +4331,24 @@
 {
 "year": 2015,
 "make": "Audi",
+"model": "S3",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-s3--premium-plus--2-0l-l4-gas"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "S3",
+"trim": "Prestige",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-s3--prestige--2-0l-l4-gas"
+},
+{
+"year": 2015,
+"make": "Audi",
 "model": "allroad",
 "trim": "Premium",
 "engine": "2.0L L4 Flex",
@@ -4826,6 +4844,24 @@
 {
 "year": 2016,
 "make": "Audi",
+"model": "S3",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-s3--premium-plus--2-0l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Audi",
+"model": "S3",
+"trim": "Prestige",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-s3--prestige--2-0l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Audi",
 "model": "allroad",
 "trim": "Premium",
 "engine": "2.0L L4 Flex",
@@ -5317,6 +5353,24 @@
 "engine": "4.0L V8 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2017-audi-rs7--performance--4-0l-v8-gas"
+},
+{
+"year": 2017,
+"make": "Audi",
+"model": "S3",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2017-audi-s3--premium-plus--2-0l-l4-gas"
+},
+{
+"year": 2017,
+"make": "Audi",
+"model": "S3",
+"trim": "Prestige",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2017-audi-s3--prestige--2-0l-l4-gas"
 },
 {
 "year": 2018,
@@ -5850,6 +5904,24 @@
 "url": "https://audi.oempartsonline.com/v-2018-audi-rs7--performance--4-0l-v8-gas"
 },
 {
+"year": 2018,
+"make": "Audi",
+"model": "S3",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2018-audi-s3--premium-plus--2-0l-l4-gas"
+},
+{
+"year": 2018,
+"make": "Audi",
+"model": "S3",
+"trim": "Prestige",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2018-audi-s3--prestige--2-0l-l4-gas"
+},
+{
 "year": 2019,
 "make": "Audi",
 "model": "A3",
@@ -6325,6 +6397,24 @@
 "engine": "2.9L V6 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2019-audi-rs5-sportback--base--2-9l-v6-gas"
+},
+{
+"year": 2019,
+"make": "Audi",
+"model": "S3",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2019-audi-s3--premium-plus--2-0l-l4-gas"
+},
+{
+"year": 2019,
+"make": "Audi",
+"model": "S3",
+"trim": "Prestige",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2019-audi-s3--prestige--2-0l-l4-gas"
 },
 {
 "year": 2019,
@@ -6910,6 +7000,24 @@
 "engine": "2.5L L5 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2020-audi-rs3--base--2-5l-l5-gas"
+},
+{
+"year": 2020,
+"make": "Audi",
+"model": "S3",
+"trim": "Premium",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2020-audi-s3--premium--2-0l-l4-gas"
+},
+{
+"year": 2020,
+"make": "Audi",
+"model": "S3",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2020-audi-s3--premium-plus--2-0l-l4-gas"
 },
 {
 "year": 2020,
@@ -8125,6 +8233,33 @@
 "engine": "4.0L V8 ELECTRIC Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2022-audi-rs7-sportback--base--4-0l-v8-electric-gas"
+},
+{
+"year": 2022,
+"make": "Audi",
+"model": "S3",
+"trim": "Premium",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2022-audi-s3--premium--2-0l-l4-gas"
+},
+{
+"year": 2022,
+"make": "Audi",
+"model": "S3",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2022-audi-s3--premium-plus--2-0l-l4-gas"
+},
+{
+"year": 2022,
+"make": "Audi",
+"model": "S3",
+"trim": "Prestige",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2022-audi-s3--prestige--2-0l-l4-gas"
 },
 {
 "year": 2022,
@@ -10242,6 +10377,24 @@
 "url": "https://audi.oempartsonline.com/v-2025-audi-rs7-sportback--performance--4-0l-v8-electric-gas"
 },
 {
+"year": 2025,
+"make": "Audi",
+"model": "S e-tron GT",
+"trim": "Premium Plus Electric",
+"engine": "",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2025-audi-s-e-tron-gt--premium-plus--electric"
+},
+{
+"year": 2025,
+"make": "Audi",
+"model": "S e-tron GT",
+"trim": "Prestige Electric",
+"engine": "",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2025-audi-s-e-tron-gt--prestige--electric"
+},
+{
 "year": 2026,
 "make": "Audi",
 "model": "A3 Quattro",
@@ -10528,5 +10681,32 @@
 "engine": "4.0L V8 ELECTRIC Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2026-audi-rs6-avant--performance--4-0l-v8-electric-gas"
+},
+{
+"year": 2026,
+"make": "Audi",
+"model": "RS7 Sportback",
+"trim": "Performance",
+"engine": "4.0L V8 ELECTRIC Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2026-audi-rs7-sportback--performance--4-0l-v8-electric-gas"
+},
+{
+"year": 2026,
+"make": "Audi",
+"model": "S e-tron GT",
+"trim": "Premium Plus Electric",
+"engine": "",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2026-audi-s-e-tron-gt--premium-plus--electric"
+},
+{
+"year": 2026,
+"make": "Audi",
+"model": "S e-tron GT",
+"trim": "Prestige Electric",
+"engine": "",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2026-audi-s-e-tron-gt--prestige--electric"
 }
 ]
