@@ -348,6 +348,26 @@
 2024,
 2025,
 2026
+],
+"tiguan-limited": [
+2017,
+2018
+],
+"touareg": [
+2004,
+2005,
+2006,
+2007,
+2008,
+2009,
+2010,
+2011,
+2012,
+2013,
+2014,
+2015,
+2016,
+2017
 ]
 },
 "models": [
@@ -420,5 +440,326 @@
 "touareg": "Touareg",
 "vanagon": "Vanagon"
 },
-"years": {}
+"years": {
+"v-2018-volkswagen-atlas": [
+[
+"Launch Edition 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2018-volkswagen-atlas--launch-edition--3-6l-v6-gas"
+],
+[
+"S 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2018-volkswagen-atlas--s--2-0l-l4-gas"
+],
+[
+"S 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2018-volkswagen-atlas--s--3-6l-v6-gas"
+],
+[
+"SE 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2018-volkswagen-atlas--se--2-0l-l4-gas"
+],
+[
+"SE 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2018-volkswagen-atlas--se--3-6l-v6-gas"
+],
+[
+"SEL 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2018-volkswagen-atlas--sel--2-0l-l4-gas"
+],
+[
+"SEL 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2018-volkswagen-atlas--sel--3-6l-v6-gas"
+],
+[
+"SEL Premium 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2018-volkswagen-atlas--sel-premium--3-6l-v6-gas"
+]
+],
+"v-2019-volkswagen-arteon": [
+[
+"SE 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2019-volkswagen-arteon--se--2-0l-l4-gas"
+],
+[
+"SE R-Line 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2019-volkswagen-arteon--se-r-line--2-0l-l4-gas"
+],
+[
+"SEL 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2019-volkswagen-arteon--sel--2-0l-l4-gas"
+],
+[
+"SEL Premium 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2019-volkswagen-arteon--sel-premium--2-0l-l4-gas"
+],
+[
+"SEL Premium R-Line 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2019-volkswagen-arteon--sel-premium-r-line--2-0l-l4-gas"
+],
+[
+"SEL R-Line 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2019-volkswagen-arteon--sel-r-line--2-0l-l4-gas"
+]
+],
+"v-2019-volkswagen-atlas": [
+[
+"S 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2019-volkswagen-atlas--s--2-0l-l4-gas"
+],
+[
+"S 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2019-volkswagen-atlas--s--3-6l-v6-gas"
+],
+[
+"SE 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2019-volkswagen-atlas--se--2-0l-l4-gas"
+],
+[
+"SE 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2019-volkswagen-atlas--se--3-6l-v6-gas"
+],
+[
+"SE R-Line 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2019-volkswagen-atlas--se-r-line--3-6l-v6-gas"
+],
+[
+"SEL 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2019-volkswagen-atlas--sel--3-6l-v6-gas"
+],
+[
+"SEL Premium 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2019-volkswagen-atlas--sel-premium--3-6l-v6-gas"
+],
+[
+"SEL R-Line 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2019-volkswagen-atlas--sel-r-line--3-6l-v6-gas"
+]
+],
+"v-2020-volkswagen-arteon": [
+[
+"SE 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2020-volkswagen-arteon--se--2-0l-l4-gas"
+],
+[
+"SEL 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2020-volkswagen-arteon--sel--2-0l-l4-gas"
+],
+[
+"SEL Premium 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2020-volkswagen-arteon--sel-premium--2-0l-l4-gas"
+],
+[
+"SEL Premium R-Line 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2020-volkswagen-arteon--sel-premium-r-line--2-0l-l4-gas"
+],
+[
+"SEL R-Line 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2020-volkswagen-arteon--sel-r-line--2-0l-l4-gas"
+]
+],
+"v-2020-volkswagen-atlas": [
+[
+"S 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2020-volkswagen-atlas--s--2-0l-l4-gas"
+],
+[
+"S 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2020-volkswagen-atlas--s--3-6l-v6-gas"
+],
+[
+"SE 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2020-volkswagen-atlas--se--2-0l-l4-gas"
+],
+[
+"SE 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2020-volkswagen-atlas--se--3-6l-v6-gas"
+],
+[
+"SEL 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2020-volkswagen-atlas--sel--2-0l-l4-gas"
+],
+[
+"SEL 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2020-volkswagen-atlas--sel--3-6l-v6-gas"
+],
+[
+"SEL Premium 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2020-volkswagen-atlas--sel-premium--2-0l-l4-gas"
+],
+[
+"SEL Premium 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2020-volkswagen-atlas--sel-premium--3-6l-v6-gas"
+],
+[
+"SEL R-Line 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2020-volkswagen-atlas--sel-r-line--3-6l-v6-gas"
+]
+],
+"v-2021-volkswagen-arteon": [
+[
+"SE 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2021-volkswagen-arteon--se--2-0l-l4-gas"
+],
+[
+"SEL Premium R-Line 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2021-volkswagen-arteon--sel-premium-r-line--2-0l-l4-gas"
+],
+[
+"SEL R-Line 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2021-volkswagen-arteon--sel-r-line--2-0l-l4-gas"
+]
+],
+"v-2021-volkswagen-atlas": [
+[
+"S 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2021-volkswagen-atlas--s--2-0l-l4-gas"
+],
+[
+"S 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2021-volkswagen-atlas--s--3-6l-v6-gas"
+],
+[
+"SE 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2021-volkswagen-atlas--se--2-0l-l4-gas"
+],
+[
+"SE 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2021-volkswagen-atlas--se--3-6l-v6-gas"
+],
+[
+"SEL 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2021-volkswagen-atlas--sel--2-0l-l4-gas"
+],
+[
+"SEL 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2021-volkswagen-atlas--sel--3-6l-v6-gas"
+],
+[
+"SEL Premium 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2021-volkswagen-atlas--sel-premium--2-0l-l4-gas"
+],
+[
+"SEL Premium 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2021-volkswagen-atlas--sel-premium--3-6l-v6-gas"
+],
+[
+"SEL Premium R-Line 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2021-volkswagen-atlas--sel-premium-r-line--3-6l-v6-gas"
+],
+[
+"SEL R-Line 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2021-volkswagen-atlas--sel-r-line--3-6l-v6-gas"
+]
+],
+"v-2022-volkswagen-arteon": [
+[
+"SE R-Line 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2022-volkswagen-arteon--se-r-line--2-0l-l4-gas"
+],
+[
+"SEL Premium R-Line 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2022-volkswagen-arteon--sel-premium-r-line--2-0l-l4-gas"
+],
+[
+"SEL R-Line 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2022-volkswagen-arteon--sel-r-line--2-0l-l4-gas"
+]
+],
+"v-2022-volkswagen-atlas": [
+[
+"S 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2022-volkswagen-atlas--s--3-6l-v6-gas"
+],
+[
+"SE 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2022-volkswagen-atlas--se--2-0l-l4-gas"
+],
+[
+"SE 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2022-volkswagen-atlas--se--3-6l-v6-gas"
+],
+[
+"SEL 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2022-volkswagen-atlas--sel--2-0l-l4-gas"
+],
+[
+"SEL 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2022-volkswagen-atlas--sel--3-6l-v6-gas"
+],
+[
+"SEL Premium 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2022-volkswagen-atlas--sel-premium--3-6l-v6-gas"
+],
+[
+"SEL Premium R-Line 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2022-volkswagen-atlas--sel-premium-r-line--3-6l-v6-gas"
+],
+[
+"SEL R-Line 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2022-volkswagen-atlas--sel-r-line--3-6l-v6-gas"
+]
+],
+"v-2023-volkswagen-arteon": [
+[
+"SE R-Line 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2023-volkswagen-arteon--se-r-line--2-0l-l4-gas"
+],
+[
+"SEL Premium R-Line 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2023-volkswagen-arteon--sel-premium-r-line--2-0l-l4-gas"
+],
+[
+"SEL R-Line 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2023-volkswagen-arteon--sel-r-line--2-0l-l4-gas"
+]
+],
+"v-2023-volkswagen-atlas": [
+[
+"SE 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2023-volkswagen-atlas--se--2-0l-l4-gas"
+],
+[
+"SE 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2023-volkswagen-atlas--se--3-6l-v6-gas"
+],
+[
+"SEL 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2023-volkswagen-atlas--sel--2-0l-l4-gas"
+],
+[
+"SEL 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2023-volkswagen-atlas--sel--3-6l-v6-gas"
+],
+[
+"SEL Premium R-Line 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2023-volkswagen-atlas--sel-premium-r-line--3-6l-v6-gas"
+],
+[
+"SEL R-Line Black 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2023-volkswagen-atlas--sel-r-line-black--3-6l-v6-gas"
+]
+],
+"v-2024-volkswagen-atlas": [
+[
+"Peak Edition SE 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2024-volkswagen-atlas--peak-edition-se--2-0l-l4-gas"
+],
+[
+"Peak Edition SEL 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2024-volkswagen-atlas--peak-edition-sel--2-0l-l4-gas"
+],
+[
+"SE 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2024-volkswagen-atlas--se--2-0l-l4-gas"
+],
+[
+"SEL 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2024-volkswagen-atlas--sel--2-0l-l4-gas"
+],
+[
+"SEL Premium R-Line 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2024-volkswagen-atlas--sel-premium-r-line--2-0l-l4-gas"
+]
+]
+}
 }
