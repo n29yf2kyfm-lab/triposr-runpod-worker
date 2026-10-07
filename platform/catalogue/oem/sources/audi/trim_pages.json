@@ -1588,6 +1588,12 @@
 "https://audi.oempartsonline.com/v-2003-audi-allroad-quattro--base--2-7l-v6-gas"
 ]
 ],
+"v-2003-audi-rs6": [
+[
+"Base 4.2L V8 - Gas",
+"https://audi.oempartsonline.com/v-2003-audi-rs6--base--4-2l-v8-gas"
+]
+],
 "v-2004-audi-a4": [
 [
 "Base 1.8L L4 - Gas",
@@ -4921,6 +4927,12 @@
 "https://audi.oempartsonline.com/v-2021-audi-rs5-sportback--base--2-9l-v6-gas"
 ]
 ],
+"v-2021-audi-rs6-avant": [
+[
+"Base 4.0L V8 ELECTRIC - Gas",
+"https://audi.oempartsonline.com/v-2021-audi-rs6-avant--base--4-0l-v8-electric-gas"
+]
+],
 "v-2022-audi-a3": [
 [
 "Premium 2.0L L4 - Electric/Gas",
@@ -5299,6 +5311,12 @@
 "https://audi.oempartsonline.com/v-2022-audi-rs5-sportback--base--2-9l-v6-gas"
 ]
 ],
+"v-2022-audi-rs6-avant": [
+[
+"Base 4.0L V8 ELECTRIC - Gas",
+"https://audi.oempartsonline.com/v-2022-audi-rs6-avant--base--4-0l-v8-electric-gas"
+]
+],
 "v-2023-audi-a3": [
 [
 "Premium 2.0L L4 - Electric/Gas",
@@ -5651,6 +5669,18 @@
 "https://audi.oempartsonline.com/v-2023-audi-rs5--base--2-9l-v6-gas"
 ]
 ],
+"v-2023-audi-rs5-sportback": [
+[
+"Base 2.9L V6 - Gas",
+"https://audi.oempartsonline.com/v-2023-audi-rs5-sportback--base--2-9l-v6-gas"
+]
+],
+"v-2023-audi-rs6-avant": [
+[
+"Base 4.0L V8 ELECTRIC - Gas",
+"https://audi.oempartsonline.com/v-2023-audi-rs6-avant--base--4-0l-v8-electric-gas"
+]
+],
 "v-2024-audi-a3": [
 [
 "Premium 2.0L L4 - Electric/Gas",
@@ -5963,6 +5993,18 @@
 [
 "Base 2.9L V6 - Gas",
 "https://audi.oempartsonline.com/v-2024-audi-rs5--base--2-9l-v6-gas"
+]
+],
+"v-2024-audi-rs5-sportback": [
+[
+"Base 2.9L V6 - Gas",
+"https://audi.oempartsonline.com/v-2024-audi-rs5-sportback--base--2-9l-v6-gas"
+]
+],
+"v-2024-audi-rs6-avant": [
+[
+"Performance 4.0L V8 ELECTRIC - Gas",
+"https://audi.oempartsonline.com/v-2024-audi-rs6-avant--performance--4-0l-v8-electric-gas"
 ]
 ],
 "v-2025-audi-a3-quattro": [
@@ -6307,6 +6349,22 @@
 "https://audi.oempartsonline.com/v-2025-audi-rs3--base--2-5l-l5-gas"
 ]
 ],
+"v-2025-audi-rs5-sportback": [
+[
+"Base 2.9L V6 - Gas",
+"https://audi.oempartsonline.com/v-2025-audi-rs5-sportback--base--2-9l-v6-gas"
+]
+],
+"v-2025-audi-rs6-avant": [
+[
+"GT 4.0L V8 - Electric/Gas",
+"https://audi.oempartsonline.com/v-2025-audi-rs6-avant--gt--4-0l-v8-electric-gas"
+],
+[
+"Performance 4.0L V8 - Electric/Gas",
+"https://audi.oempartsonline.com/v-2025-audi-rs6-avant--performance--4-0l-v8-electric-gas"
+]
+],
 "v-2026-audi-a3-quattro": [
 [
 "Premium 2.0L L4 - Electric/Gas",
@@ -6457,6 +6515,12 @@
 [
 "Base 2.5L L5 - Gas",
 "https://audi.oempartsonline.com/v-2026-audi-rs3--base--2-5l-l5-gas"
+]
+],
+"v-2026-audi-rs6-avant": [
+[
+"Performance 4.0L V8 ELECTRIC - Gas",
+"https://audi.oempartsonline.com/v-2026-audi-rs6-avant--performance--4-0l-v8-electric-gas"
 ]
 ]
 }
