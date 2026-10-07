@@ -1,6 +1,6 @@
 """Rate-limited MediaWiki API client (Wikipedia + Commons). Max 1 request/second.
 Fetches JSON metadata only; never downloads image files."""
-import json, time, urllib.parse, urllib.request, os, hashlib
+import json, time, urllib.parse, urllib.request, urllib.error, os, hashlib
 
 UA = "VWGroupPartsCatalogue/1.0 (research; metadata-only)"
 WP = "https://en.wikipedia.org/w/api.php"
@@ -26,7 +26,7 @@ def api(endpoint, **params):
         _last[0] = time.time()
         NREQ[0] += 1
         try:
-            req = urllib.request.Request(endpoint, data=q.encode(), headers={"User-Agent": UA})
+            req = urllib.request.Request(endpoint + "?" + q, headers={"User-Agent": UA, "Accept": "application/json"})
             with urllib.request.urlopen(req, timeout=60) as r:
                 data = json.load(r)
             if "error" in data and data["error"].get("code") == "maxlag":
@@ -34,7 +34,11 @@ def api(endpoint, **params):
             with open(cp, "w") as f:
                 json.dump(data, f)
             return data
+        except urllib.error.HTTPError as e:
+            ra = e.headers.get("Retry-After")
+            print("  retry", attempt, e, "retry-after", ra)
+            time.sleep(max(int(ra) if ra and ra.isdigit() else 0, 10 * (attempt + 1)))
         except Exception as e:
             print("  retry", attempt, e)
-            time.sleep(3 * (attempt + 1))
+            time.sleep(5 * (attempt + 1))
     raise RuntimeError("API failed: " + q[:200])

@@ -19,7 +19,8 @@ OUT = os.path.join(HERE, 'illustrations')
 MODEL = 'https://fal.run/fal-ai/flux/schnell'
 
 # generic hardware shares one picture per kind
-GENERIC = [(r'\bbolt\b|\bscrew\b|\bstud\b', 'bolt'), (r'\bnut\b', 'nut'),
+GENERIC = [(r'\bwarranty\b|\binstructions\b|\bbooklet\b|\bowners? manual\b|\bmanual ed\b|\bservice book', 'printed-booklet'),
+           (r'\bbolt\b|\bscrew\b|\bstud\b', 'bolt'), (r'\bnut\b', 'nut'),
            (r'\bwasher\b(?!.*(nozzle|fluid|pump|reservoir|hose))', 'washer'),
            (r'\bclip\b|\bclamp\b|\bretainer\b', 'clip'), (r'o ring', 'o-ring'), (r'\bgasket\b', 'gasket'),
            (r'\bseal\b', 'seal'), (r'\bbracket\b|\bholder\b|\bhanger\b', 'bracket'), (r'\bcap\b', 'cap'),
@@ -66,12 +67,17 @@ DESCRIBE = {
     'tow-eye': 'screw-in steel towing eye, a short threaded rod with a closed round ring at one end, no wheel',
     'splash-guard': 'black rubber mud flap, a flat moulded rubber panel with mounting holes',
     'splash-guards-black': 'black rubber mud flap, a flat moulded rubber panel with mounting holes',
+    # fourth contact-sheet pass (Audi/Porsche sitemaps): manuals drawn as cars, a sneaker for a brake shoe
+    'printed-booklet': 'closed plain printed paper booklet with a blank cover, lying flat, no car, no text',
+    'shoe': 'drum brake shoe, a curved steel crescent with a thick friction lining on its outer face, no footwear',
+    'central-computer': 'plain black rectangular automotive electronic control unit box with a connector socket, no text, no letters',
+    'data-plate-for-tyre-pressure': 'small flat printed rectangular sticker label with a blank table grid, no screen, no digits',
 }
 # FLUX schnell drew these wrong three times over (drive axles for both shafts,
 # a belt for the cover, a bracket for the spindle; 'repair' names no part). No picture is better than a wrong one: never generated.
 NO_IMAGE = {'balance-shaft', 'crankshaft', 'timing-cover', 'spindle', 'repair', 'brest-rel', 'floor-jack', 'interior-view-mirror-cover', 'interior-view-mirror-cover-access-cover',
             'lift-gate-packing', 'member', 'protect-plate', 'spare-tire-label', 'tire-information-label',
-            'vehicle-lifting-jack-handle-black', 'tire-repair', 'wheel-housing-panel', 'slave-cylinder', 'air-bag-information-label'}
+            'vehicle-lifting-jack-handle-black', 'tire-repair', 'wheel-housing-panel', 'slave-cylinder', 'air-bag-information-label', 'foam-part'}
 
 
 def illustration_key(part_type):
