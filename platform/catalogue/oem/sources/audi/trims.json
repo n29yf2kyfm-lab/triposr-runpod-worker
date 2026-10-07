@@ -324,6 +324,15 @@
 "url": "https://audi.oempartsonline.com/v-2000-audi-a4-quattro--base--2-8l-v6-gas"
 },
 {
+"year": 2000,
+"make": "Audi",
+"model": "A6",
+"trim": "Base",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2000-audi-a6--base--2-8l-v6-gas"
+},
+{
 "year": 2001,
 "make": "Audi",
 "model": "A4",
@@ -378,6 +387,15 @@
 "url": "https://audi.oempartsonline.com/v-2001-audi-a4-quattro--base--2-8l-v6-gas"
 },
 {
+"year": 2001,
+"make": "Audi",
+"model": "A6",
+"trim": "Base",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2001-audi-a6--base--2-8l-v6-gas"
+},
+{
 "year": 2002,
 "make": "Audi",
 "model": "A4",
@@ -430,6 +448,15 @@
 "engine": "3.0L V6 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2002-audi-a4-quattro--base--3-0l-v6-gas"
+},
+{
+"year": 2002,
+"make": "Audi",
+"model": "A6",
+"trim": "Base",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2002-audi-a6--base--3-0l-v6-gas"
 },
 {
 "year": 2003,
@@ -502,6 +529,15 @@
 "engine": "3.0L V6 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2003-audi-a4-quattro--base--3-0l-v6-gas"
+},
+{
+"year": 2003,
+"make": "Audi",
+"model": "A6",
+"trim": "Base",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2003-audi-a6--base--3-0l-v6-gas"
 },
 {
 "year": 2004,
@@ -583,6 +619,15 @@
 "engine": "3.0L V6 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2004-audi-a4-quattro--cabriolet--3-0l-v6-gas"
+},
+{
+"year": 2004,
+"make": "Audi",
+"model": "A6",
+"trim": "Base",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2004-audi-a6--base--3-0l-v6-gas"
 },
 {
 "year": 2005,
