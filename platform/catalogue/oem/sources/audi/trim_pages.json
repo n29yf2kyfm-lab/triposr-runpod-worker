@@ -1684,6 +1684,16 @@
 "https://audi.oempartsonline.com/v-2011-audi-a5--cabriolet--2-0l-l4-gas"
 ]
 ],
+"v-2011-audi-a5-quattro": [
+[
+"Base 2.0L L4 - Gas",
+"https://audi.oempartsonline.com/v-2011-audi-a5-quattro--base--2-0l-l4-gas"
+],
+[
+"Cabriolet 2.0L L4 - Gas",
+"https://audi.oempartsonline.com/v-2011-audi-a5-quattro--cabriolet--2-0l-l4-gas"
+]
+],
 "v-2012-audi-a3": [
 [
 "Base 2.0L L4 - Gas",
@@ -1720,6 +1730,16 @@
 [
 "Cabriolet 2.0L L4 - Gas",
 "https://audi.oempartsonline.com/v-2012-audi-a5--cabriolet--2-0l-l4-gas"
+]
+],
+"v-2012-audi-a5-quattro": [
+[
+"Base 2.0L L4 - Gas",
+"https://audi.oempartsonline.com/v-2012-audi-a5-quattro--base--2-0l-l4-gas"
+],
+[
+"Cabriolet 2.0L L4 - Gas",
+"https://audi.oempartsonline.com/v-2012-audi-a5-quattro--cabriolet--2-0l-l4-gas"
 ]
 ],
 "v-2013-audi-a3": [
@@ -1760,6 +1780,24 @@
 "https://audi.oempartsonline.com/v-2013-audi-a5--cabriolet--2-0l-l4-gas"
 ]
 ],
+"v-2013-audi-a5-quattro": [
+[
+"Base 2.0L L4 - Flex",
+"https://audi.oempartsonline.com/v-2013-audi-a5-quattro--base--2-0l-l4-flex"
+],
+[
+"Base 2.0L L4 - Gas",
+"https://audi.oempartsonline.com/v-2013-audi-a5-quattro--base--2-0l-l4-gas"
+],
+[
+"Cabriolet 2.0L L4 - Flex",
+"https://audi.oempartsonline.com/v-2013-audi-a5-quattro--cabriolet--2-0l-l4-flex"
+],
+[
+"Cabriolet 2.0L L4 - Gas",
+"https://audi.oempartsonline.com/v-2013-audi-a5-quattro--cabriolet--2-0l-l4-gas"
+]
+],
 "v-2014-audi-a4": [
 [
 "Base 2.0L L4 - Gas",
@@ -1780,6 +1818,24 @@
 [
 "Cabriolet 2.0L L4 - Gas",
 "https://audi.oempartsonline.com/v-2014-audi-a5--cabriolet--2-0l-l4-gas"
+]
+],
+"v-2014-audi-a5-quattro": [
+[
+"Base 2.0L L4 - Flex",
+"https://audi.oempartsonline.com/v-2014-audi-a5-quattro--base--2-0l-l4-flex"
+],
+[
+"Base 2.0L L4 - Gas",
+"https://audi.oempartsonline.com/v-2014-audi-a5-quattro--base--2-0l-l4-gas"
+],
+[
+"Cabriolet 2.0L L4 - Flex",
+"https://audi.oempartsonline.com/v-2014-audi-a5-quattro--cabriolet--2-0l-l4-flex"
+],
+[
+"Cabriolet 2.0L L4 - Gas",
+"https://audi.oempartsonline.com/v-2014-audi-a5-quattro--cabriolet--2-0l-l4-gas"
 ]
 ],
 "v-2015-audi-a3": [

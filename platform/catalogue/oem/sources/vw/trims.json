@@ -4205,6 +4205,87 @@
 {
 "year": 2016,
 "make": "Volkswagen",
+"model": "Jetta",
+"trim": "GLI SE",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-jetta--gli-se--2-0l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "GLI SEL",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-jetta--gli-sel--2-0l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "Hybrid SEL Premium",
+"engine": "1.4L L4 Electric/Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-jetta--hybrid-sel-premium--1-4l-l4-electric-gas"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "Hybrid SEL Premium",
+"engine": "1.4L L4 FULL HYBRID EV-GAS (FHEV)",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-jetta--hybrid-sel-premium--1-4l-l4-full-hybrid-ev-gas-fhev"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "S",
+"engine": "1.4L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-jetta--s--1-4l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "SE",
+"engine": "1.4L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-jetta--se--1-4l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "SEL",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-jetta--sel--1-8l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "SEL Premium",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-jetta--sel-premium--1-8l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "Sport",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-jetta--sport--1-8l-l4-gas"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
 "model": "e-Golf",
 "trim": "SE BATTERY EV (EV/BEV)",
 "engine": "",
@@ -4435,6 +4516,51 @@
 "engine": "1.8L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2017-volkswagen-golf-sportwagen--sel--1-8l-l4-gas"
+},
+{
+"year": 2017,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "GLI",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2017-volkswagen-jetta--gli--2-0l-l4-gas"
+},
+{
+"year": 2017,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "S",
+"engine": "1.4L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2017-volkswagen-jetta--s--1-4l-l4-gas"
+},
+{
+"year": 2017,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "SE",
+"engine": "1.4L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2017-volkswagen-jetta--se--1-4l-l4-gas"
+},
+{
+"year": 2017,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "SEL",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2017-volkswagen-jetta--sel--1-8l-l4-gas"
+},
+{
+"year": 2017,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "Sport",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2017-volkswagen-jetta--sport--1-8l-l4-gas"
 },
 {
 "year": 2017,
@@ -4723,6 +4849,69 @@
 "engine": "1.8L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2018-volkswagen-golf-sportwagen--sel--1-8l-l4-gas"
+},
+{
+"year": 2018,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "GLI",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2018-volkswagen-jetta--gli--2-0l-l4-gas"
+},
+{
+"year": 2018,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "S",
+"engine": "1.4L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2018-volkswagen-jetta--s--1-4l-l4-gas"
+},
+{
+"year": 2018,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "SE",
+"engine": "1.4L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2018-volkswagen-jetta--se--1-4l-l4-gas"
+},
+{
+"year": 2018,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "SE Sport",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2018-volkswagen-jetta--se-sport--1-8l-l4-gas"
+},
+{
+"year": 2018,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "SEL",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2018-volkswagen-jetta--sel--1-8l-l4-gas"
+},
+{
+"year": 2018,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "Sport",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2018-volkswagen-jetta--sport--1-8l-l4-gas"
+},
+{
+"year": 2018,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "Wolfsburg Edition",
+"engine": "1.4L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2018-volkswagen-jetta--wolfsburg-edition--1-4l-l4-gas"
 },
 {
 "year": 2018,
