@@ -1091,6 +1091,28 @@
 "https://vw.oempartsonline.com/v-2005-volkswagen-beetle--gls-tdi--1-9l-l4-diesel"
 ]
 ],
+"v-2005-volkswagen-golf": [
+[
+"GL 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2005-volkswagen-golf--gl--2-0l-l4-gas"
+],
+[
+"GLS 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2005-volkswagen-golf--gls--2-0l-l4-gas"
+],
+[
+"GTI 1.8T 1.8L L4 - Gas",
+"https://vw.oempartsonline.com/v-2005-volkswagen-golf--gti-1-8t--1-8l-l4-gas"
+],
+[
+"GTI VR6 2.8L V6 - Gas",
+"https://vw.oempartsonline.com/v-2005-volkswagen-golf--gti-vr6--2-8l-v6-gas"
+],
+[
+"TDI 1.9L L4 - Diesel",
+"https://vw.oempartsonline.com/v-2005-volkswagen-golf--tdi--1-9l-l4-diesel"
+]
+],
 "v-2006-volkswagen-beetle": [
 [
 "2.5 2.5L L5 - Gas",
@@ -1099,6 +1121,24 @@
 [
 "TDI 1.9L L4 - Diesel",
 "https://vw.oempartsonline.com/v-2006-volkswagen-beetle--tdi--1-9l-l4-diesel"
+]
+],
+"v-2006-volkswagen-golf": [
+[
+"GL 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2006-volkswagen-golf--gl--2-0l-l4-gas"
+],
+[
+"GLS 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2006-volkswagen-golf--gls--2-0l-l4-gas"
+],
+[
+"GLS TDI 1.9L L4 - Diesel",
+"https://vw.oempartsonline.com/v-2006-volkswagen-golf--gls-tdi--1-9l-l4-diesel"
+],
+[
+"GTI 1.8T 1.8L L4 - Gas",
+"https://vw.oempartsonline.com/v-2006-volkswagen-golf--gti-1-8t--1-8l-l4-gas"
 ]
 ],
 "v-2007-volkswagen-beetle": [
@@ -1227,6 +1267,16 @@
 [
 "Lux 2.0L L4 - Gas",
 "https://vw.oempartsonline.com/v-2010-volkswagen-eos--lux--2-0l-l4-gas"
+]
+],
+"v-2010-volkswagen-golf": [
+[
+"Base 2.5L L5 - Gas",
+"https://vw.oempartsonline.com/v-2010-volkswagen-golf--base--2-5l-l5-gas"
+],
+[
+"TDI 2.0L L4 - Diesel",
+"https://vw.oempartsonline.com/v-2010-volkswagen-golf--tdi--2-0l-l4-diesel"
 ]
 ],
 "v-2011-volkswagen-cc": [

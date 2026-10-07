@@ -1314,6 +1314,51 @@
 "url": "https://vw.oempartsonline.com/v-2005-volkswagen-beetle--gls-tdi--1-9l-l4-diesel"
 },
 {
+"year": 2005,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GL",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2005-volkswagen-golf--gl--2-0l-l4-gas"
+},
+{
+"year": 2005,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GLS",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2005-volkswagen-golf--gls--2-0l-l4-gas"
+},
+{
+"year": 2005,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GTI 1.8T",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2005-volkswagen-golf--gti-1-8t--1-8l-l4-gas"
+},
+{
+"year": 2005,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GTI VR6",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2005-volkswagen-golf--gti-vr6--2-8l-v6-gas"
+},
+{
+"year": 2005,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "TDI",
+"engine": "1.9L L4 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2005-volkswagen-golf--tdi--1-9l-l4-diesel"
+},
+{
 "year": 2006,
 "make": "Volkswagen",
 "model": "Beetle",
@@ -1330,6 +1375,42 @@
 "engine": "1.9L L4 Diesel",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2006-volkswagen-beetle--tdi--1-9l-l4-diesel"
+},
+{
+"year": 2006,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GL",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2006-volkswagen-golf--gl--2-0l-l4-gas"
+},
+{
+"year": 2006,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GLS",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2006-volkswagen-golf--gls--2-0l-l4-gas"
+},
+{
+"year": 2006,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GLS TDI",
+"engine": "1.9L L4 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2006-volkswagen-golf--gls-tdi--1-9l-l4-diesel"
+},
+{
+"year": 2006,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GTI 1.8T",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2006-volkswagen-golf--gti-1-8t--1-8l-l4-gas"
 },
 {
 "year": 2007,
@@ -1573,6 +1654,24 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2010-volkswagen-eos--lux--2-0l-l4-gas"
+},
+{
+"year": 2010,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "Base",
+"engine": "2.5L L5 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2010-volkswagen-golf--base--2-5l-l5-gas"
+},
+{
+"year": 2010,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "TDI",
+"engine": "2.0L L4 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2010-volkswagen-golf--tdi--2-0l-l4-diesel"
 },
 {
 "year": 2011,
