@@ -441,6 +441,24 @@
 "url": "https://porsche.oempartsonline.com/v-2003-porsche-boxster--roadster-s--3-2l-h6-gas"
 },
 {
+"year": 2003,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "S",
+"engine": "4.5L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2003-porsche-cayenne--s--4-5l-v8-gas"
+},
+{
+"year": 2003,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "Turbo",
+"engine": "4.5L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2003-porsche-cayenne--turbo--4-5l-v8-gas"
+},
+{
 "year": 2004,
 "make": "Porsche",
 "model": "911",
@@ -540,6 +558,33 @@
 "url": "https://porsche.oempartsonline.com/v-2004-porsche-carrera-gt--base--5-7l-v10-gas"
 },
 {
+"year": 2004,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "Base",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2004-porsche-cayenne--base--3-2l-v6-gas"
+},
+{
+"year": 2004,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "S",
+"engine": "4.5L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2004-porsche-cayenne--s--4-5l-v8-gas"
+},
+{
+"year": 2004,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "Turbo",
+"engine": "4.5L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2004-porsche-cayenne--turbo--4-5l-v8-gas"
+},
+{
 "year": 2005,
 "make": "Porsche",
 "model": "911",
@@ -619,6 +664,42 @@
 "engine": "3.2L H6 Gas",
 "market": "US",
 "url": "https://porsche.oempartsonline.com/v-2005-porsche-boxster--s--3-2l-h6-gas"
+},
+{
+"year": 2005,
+"make": "Porsche",
+"model": "Carrera GT",
+"trim": "Base",
+"engine": "5.7L V10 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2005-porsche-carrera-gt--base--5-7l-v10-gas"
+},
+{
+"year": 2005,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "Base",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2005-porsche-cayenne--base--3-2l-v6-gas"
+},
+{
+"year": 2005,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "S",
+"engine": "4.5L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2005-porsche-cayenne--s--4-5l-v8-gas"
+},
+{
+"year": 2005,
+"make": "Porsche",
+"model": "Cayenne",
+"trim": "Turbo",
+"engine": "4.5L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2005-porsche-cayenne--turbo--4-5l-v8-gas"
 },
 {
 "year": 2006,

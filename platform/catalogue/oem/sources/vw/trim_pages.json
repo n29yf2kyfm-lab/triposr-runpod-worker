@@ -1641,6 +1641,32 @@
 "https://vw.oempartsonline.com/v-2015-volkswagen-golf-r--base--2-0l-l4-gas"
 ]
 ],
+"v-2015-volkswagen-golf-sportwagen": [
+[
+"S 1.8L L4 - Gas",
+"https://vw.oempartsonline.com/v-2015-volkswagen-golf-sportwagen--s--1-8l-l4-gas"
+],
+[
+"SE 1.8L L4 - Gas",
+"https://vw.oempartsonline.com/v-2015-volkswagen-golf-sportwagen--se--1-8l-l4-gas"
+],
+[
+"SEL 1.8L L4 - Gas",
+"https://vw.oempartsonline.com/v-2015-volkswagen-golf-sportwagen--sel--1-8l-l4-gas"
+],
+[
+"TDI S 2.0L L4 - Diesel",
+"https://vw.oempartsonline.com/v-2015-volkswagen-golf-sportwagen--tdi-s--2-0l-l4-diesel"
+],
+[
+"TDI SE 2.0L L4 - Diesel",
+"https://vw.oempartsonline.com/v-2015-volkswagen-golf-sportwagen--tdi-se--2-0l-l4-diesel"
+],
+[
+"TDI SEL 2.0L L4 - Diesel",
+"https://vw.oempartsonline.com/v-2015-volkswagen-golf-sportwagen--tdi-sel--2-0l-l4-diesel"
+]
+],
 "v-2016-volkswagen-beetle": [
 [
 "Denim 1.8L L4 - Gas",
@@ -2541,6 +2567,16 @@
 "https://vw.oempartsonline.com/v-2025-volkswagen-atlas-cross-sport--sel-r-line-black--2-0l-l4-gas"
 ]
 ],
+"v-2025-volkswagen-golf-r": [
+[
+"Base 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2025-volkswagen-golf-r--base--2-0l-l4-gas"
+],
+[
+"Black Edition 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2025-volkswagen-golf-r--black-edition--2-0l-l4-gas"
+]
+],
 "v-2026-volkswagen-atlas": [
 [
 "Peak Edition SE 2.0L L4 - Gas",
@@ -2575,6 +2611,12 @@
 [
 "SEL R-Line Black 2.0L L4 - Gas",
 "https://vw.oempartsonline.com/v-2026-volkswagen-atlas-cross-sport--sel-r-line-black--2-0l-l4-gas"
+]
+],
+"v-2026-volkswagen-golf-r": [
+[
+"Base 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2026-volkswagen-golf-r--base--2-0l-l4-gas"
 ]
 ]
 }

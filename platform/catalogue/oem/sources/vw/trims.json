@@ -2351,6 +2351,60 @@
 {
 "year": 2015,
 "make": "Volkswagen",
+"model": "Golf SportWagen",
+"trim": "S",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2015-volkswagen-golf-sportwagen--s--1-8l-l4-gas"
+},
+{
+"year": 2015,
+"make": "Volkswagen",
+"model": "Golf SportWagen",
+"trim": "SE",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2015-volkswagen-golf-sportwagen--se--1-8l-l4-gas"
+},
+{
+"year": 2015,
+"make": "Volkswagen",
+"model": "Golf SportWagen",
+"trim": "SEL",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2015-volkswagen-golf-sportwagen--sel--1-8l-l4-gas"
+},
+{
+"year": 2015,
+"make": "Volkswagen",
+"model": "Golf SportWagen",
+"trim": "TDI S",
+"engine": "2.0L L4 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2015-volkswagen-golf-sportwagen--tdi-s--2-0l-l4-diesel"
+},
+{
+"year": 2015,
+"make": "Volkswagen",
+"model": "Golf SportWagen",
+"trim": "TDI SE",
+"engine": "2.0L L4 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2015-volkswagen-golf-sportwagen--tdi-se--2-0l-l4-diesel"
+},
+{
+"year": 2015,
+"make": "Volkswagen",
+"model": "Golf SportWagen",
+"trim": "TDI SEL",
+"engine": "2.0L L4 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2015-volkswagen-golf-sportwagen--tdi-sel--2-0l-l4-diesel"
+},
+{
+"year": 2015,
+"make": "Volkswagen",
 "model": "e-Golf",
 "trim": "Limited Edition BATTERY EV (EV/BEV)",
 "engine": "",
@@ -4203,6 +4257,24 @@
 "url": "https://vw.oempartsonline.com/v-2025-volkswagen-atlas-cross-sport--sel-r-line-black--2-0l-l4-gas"
 },
 {
+"year": 2025,
+"make": "Volkswagen",
+"model": "Golf R",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2025-volkswagen-golf-r--base--2-0l-l4-gas"
+},
+{
+"year": 2025,
+"make": "Volkswagen",
+"model": "Golf R",
+"trim": "Black Edition",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2025-volkswagen-golf-r--black-edition--2-0l-l4-gas"
+},
+{
 "year": 2026,
 "make": "Volkswagen",
 "model": "Atlas",
@@ -4273,5 +4345,14 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2026-volkswagen-atlas-cross-sport--sel-r-line-black--2-0l-l4-gas"
+},
+{
+"year": 2026,
+"make": "Volkswagen",
+"model": "Golf R",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2026-volkswagen-golf-r--base--2-0l-l4-gas"
 }
 ]
