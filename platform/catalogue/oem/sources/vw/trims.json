@@ -693,6 +693,33 @@
 "url": "https://vw.oempartsonline.com/v-2007-volkswagen-beetle--tdi--1-9l-l4-diesel"
 },
 {
+"year": 2007,
+"make": "Volkswagen",
+"model": "Eos",
+"trim": "2.0T",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2007-volkswagen-eos--2-0t--2-0l-l4-gas"
+},
+{
+"year": 2007,
+"make": "Volkswagen",
+"model": "Eos",
+"trim": "3.2",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2007-volkswagen-eos--3-2--3-2l-v6-gas"
+},
+{
+"year": 2007,
+"make": "Volkswagen",
+"model": "Eos",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2007-volkswagen-eos--base--2-0l-l4-gas"
+},
+{
 "year": 2008,
 "make": "Volkswagen",
 "model": "Beetle",
@@ -1629,6 +1656,51 @@
 "url": "https://vw.oempartsonline.com/v-2018-volkswagen-beetle--se--2-0l-l4-gas"
 },
 {
+"year": 2018,
+"make": "Volkswagen",
+"model": "e-Golf",
+"trim": "Limited Edition Electric",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2018-volkswagen-e-golf--limited-edition--electric"
+},
+{
+"year": 2018,
+"make": "Volkswagen",
+"model": "e-Golf",
+"trim": "SE BATTERY EV (EV/BEV)",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2018-volkswagen-e-golf--se--battery-ev-ev-bev"
+},
+{
+"year": 2018,
+"make": "Volkswagen",
+"model": "e-Golf",
+"trim": "SE Electric",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2018-volkswagen-e-golf--se--electric"
+},
+{
+"year": 2018,
+"make": "Volkswagen",
+"model": "e-Golf",
+"trim": "SEL Premium BATTERY EV (EV/BEV)",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2018-volkswagen-e-golf--sel-premium--battery-ev-ev-bev"
+},
+{
+"year": 2018,
+"make": "Volkswagen",
+"model": "e-Golf",
+"trim": "SEL Premium Electric",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2018-volkswagen-e-golf--sel-premium--electric"
+},
+{
 "year": 2019,
 "make": "Volkswagen",
 "model": "Arteon",
@@ -1789,6 +1861,42 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2019-volkswagen-beetle--se--2-0l-l4-gas"
+},
+{
+"year": 2019,
+"make": "Volkswagen",
+"model": "e-Golf",
+"trim": "SE BATTERY EV (EV/BEV)",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2019-volkswagen-e-golf--se--battery-ev-ev-bev"
+},
+{
+"year": 2019,
+"make": "Volkswagen",
+"model": "e-Golf",
+"trim": "SE Electric",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2019-volkswagen-e-golf--se--electric"
+},
+{
+"year": 2019,
+"make": "Volkswagen",
+"model": "e-Golf",
+"trim": "SEL Premium BATTERY EV (EV/BEV)",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2019-volkswagen-e-golf--sel-premium--battery-ev-ev-bev"
+},
+{
+"year": 2019,
+"make": "Volkswagen",
+"model": "e-Golf",
+"trim": "SEL Premium Electric",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2019-volkswagen-e-golf--sel-premium--electric"
 },
 {
 "year": 2020,

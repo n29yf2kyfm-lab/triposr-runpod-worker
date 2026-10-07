@@ -34,5 +34,32 @@
 "engine": "2.8L V6 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-1995-audi-90-quattro--sport--2-8l-v6-gas"
+},
+{
+"year": 2006,
+"make": "Audi",
+"model": "A3",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2006-audi-a3--base--2-0l-l4-gas"
+},
+{
+"year": 2007,
+"make": "Audi",
+"model": "A3",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2007-audi-a3--base--2-0l-l4-gas"
+},
+{
+"year": 2008,
+"make": "Audi",
+"model": "A3",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2008-audi-a3--base--2-0l-l4-gas"
 }
 ]
