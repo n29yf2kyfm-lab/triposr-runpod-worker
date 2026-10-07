@@ -180,6 +180,24 @@
 "url": "https://vw.oempartsonline.com/v-1999-volkswagen-cabrio--gls--2-0l-l4-gas"
 },
 {
+"year": 1999,
+"make": "Volkswagen",
+"model": "EuroVan",
+"trim": "GLS",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1999-volkswagen-eurovan--gls--2-8l-v6-gas"
+},
+{
+"year": 1999,
+"make": "Volkswagen",
+"model": "EuroVan",
+"trim": "MV",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1999-volkswagen-eurovan--mv--2-8l-v6-gas"
+},
+{
 "year": 2000,
 "make": "Volkswagen",
 "model": "Beetle",
@@ -259,6 +277,24 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2000-volkswagen-cabrio--gls--2-0l-l4-gas"
+},
+{
+"year": 2000,
+"make": "Volkswagen",
+"model": "EuroVan",
+"trim": "GLS",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2000-volkswagen-eurovan--gls--2-8l-v6-gas"
+},
+{
+"year": 2000,
+"make": "Volkswagen",
+"model": "EuroVan",
+"trim": "MV",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2000-volkswagen-eurovan--mv--2-8l-v6-gas"
 },
 {
 "year": 2001,
