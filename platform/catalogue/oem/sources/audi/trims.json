@@ -1593,6 +1593,24 @@
 "url": "https://audi.oempartsonline.com/v-2005-audi-tt--base--1-8l-l4-gas"
 },
 {
+"year": 2005,
+"make": "Audi",
+"model": "TT Quattro",
+"trim": "Base",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2005-audi-tt-quattro--base--1-8l-l4-gas"
+},
+{
+"year": 2005,
+"make": "Audi",
+"model": "TT Quattro",
+"trim": "Base",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2005-audi-tt-quattro--base--3-2l-v6-gas"
+},
+{
 "year": 2006,
 "make": "Audi",
 "model": "A3",
@@ -1780,6 +1798,33 @@
 "engine": "1.8L L4 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2006-audi-tt--base--1-8l-l4-gas"
+},
+{
+"year": 2006,
+"make": "Audi",
+"model": "TT Quattro",
+"trim": "Base",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2006-audi-tt-quattro--base--1-8l-l4-gas"
+},
+{
+"year": 2006,
+"make": "Audi",
+"model": "TT Quattro",
+"trim": "Base",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2006-audi-tt-quattro--base--3-2l-v6-gas"
+},
+{
+"year": 2006,
+"make": "Audi",
+"model": "TT Quattro",
+"trim": "Special Edition",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2006-audi-tt-quattro--special-edition--3-2l-v6-gas"
 },
 {
 "year": 2007,

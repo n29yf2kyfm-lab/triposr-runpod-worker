@@ -24,8 +24,11 @@ FATAL = ('insufficient credits', 'unauthorized', 'invalid token', 'payment requi
 def fetch(url):
     out = os.path.join(tp.TR, f'mcp-Firecrawl-firecrawl_scrape-cli-{time.time_ns()}.txt')
     env = dict(os.environ, FIRECRAWL_NO_ENDPOINT_FEEDBACK='1')
-    r = subprocess.run(['firecrawl', 'scrape', url, '-f', 'rawHtml', '--json', '-o', out],
-                       capture_output=True, text=True, timeout=180, env=env)
+    try:
+        r = subprocess.run(['firecrawl', 'scrape', url, '-f', 'rawHtml', '--json', '-o', out],
+                           capture_output=True, text=True, timeout=180, env=env)
+    except subprocess.TimeoutExpired:
+        return False, 'timed out after 180 s'
     msg = (r.stdout + r.stderr).strip()
     ok = r.returncode == 0 and os.path.exists(out) and os.path.getsize(out) > 1000
     if not ok and os.path.exists(out):
