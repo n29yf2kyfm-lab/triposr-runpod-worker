@@ -34,3 +34,17 @@ Nothing was bulk-crawled. Prices on these sites are not to be kept.
 - **SEAT / Cupra with full fitment**: only vag247.com (small) was found. Try
   seat-parts style dealer sites next (a skoda-parts.com sibling may exist).
 - **parts.vw.com, amayama**: not checked (budget).
+
+## 7zap.com — model generations by market (fetched 2026-10-07)
+
+`sources/7zap/generations.json`: every generation 7zap lists for Volkswagen, Audi,
+Skoda, SEAT, Cupra and Porsche, in every market it carries (Global/Europe, USA,
+China, South Africa, Mexico, Brazil, Argentina). Fields: make, series, generation,
+yearFrom, yearTo, region, type, url. Read from the generation data embedded in each
+public brand page (`/en/catalog/cars/<brand>/`), fetched once per brand through the
+String web-access connector; robots.txt allows these pages. "Global" (VW, Audi,
+SEAT, Cupra) and "Europe" (Skoda, Porsche) are the European catalogues. Audi rows
+carry no URL: its brand page does not link generation pages by slug. 7zap's year
+ranges run to 2027 for current models. Engines and trims are not on these public
+pages; they sit behind the catalogue's parameter picker, which is limited on free
+accounts.
