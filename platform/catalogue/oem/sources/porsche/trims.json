@@ -1683,6 +1683,51 @@
 "url": "https://porsche.oempartsonline.com/v-2011-porsche-cayman--s--3-4l-h6-gas"
 },
 {
+"year": 2011,
+"make": "Porsche",
+"model": "Panamera",
+"trim": "4",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2011-porsche-panamera--4--3-6l-v6-gas"
+},
+{
+"year": 2011,
+"make": "Porsche",
+"model": "Panamera",
+"trim": "4S",
+"engine": "4.8L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2011-porsche-panamera--4s--4-8l-v8-gas"
+},
+{
+"year": 2011,
+"make": "Porsche",
+"model": "Panamera",
+"trim": "Base",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2011-porsche-panamera--base--3-6l-v6-gas"
+},
+{
+"year": 2011,
+"make": "Porsche",
+"model": "Panamera",
+"trim": "S",
+"engine": "4.8L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2011-porsche-panamera--s--4-8l-v8-gas"
+},
+{
+"year": 2011,
+"make": "Porsche",
+"model": "Panamera",
+"trim": "Turbo",
+"engine": "4.8L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2011-porsche-panamera--turbo--4-8l-v8-gas"
+},
+{
 "year": 2012,
 "make": "Porsche",
 "model": "911",
@@ -1890,6 +1935,78 @@
 "url": "https://porsche.oempartsonline.com/v-2012-porsche-cayman--s--3-4l-h6-gas"
 },
 {
+"year": 2012,
+"make": "Porsche",
+"model": "Panamera",
+"trim": "4",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2012-porsche-panamera--4--3-6l-v6-gas"
+},
+{
+"year": 2012,
+"make": "Porsche",
+"model": "Panamera",
+"trim": "4S",
+"engine": "4.8L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2012-porsche-panamera--4s--4-8l-v8-gas"
+},
+{
+"year": 2012,
+"make": "Porsche",
+"model": "Panamera",
+"trim": "Base",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2012-porsche-panamera--base--3-6l-v6-gas"
+},
+{
+"year": 2012,
+"make": "Porsche",
+"model": "Panamera",
+"trim": "S",
+"engine": "4.8L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2012-porsche-panamera--s--4-8l-v8-gas"
+},
+{
+"year": 2012,
+"make": "Porsche",
+"model": "Panamera",
+"trim": "S Hybrid",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2012-porsche-panamera--s-hybrid--3-0l-v6-electric-gas"
+},
+{
+"year": 2012,
+"make": "Porsche",
+"model": "Panamera",
+"trim": "S Hybrid",
+"engine": "3.0L V6 FULL HYBRID EV-GAS (FHEV)",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2012-porsche-panamera--s-hybrid--3-0l-v6-full-hybrid-ev-gas-fhev"
+},
+{
+"year": 2012,
+"make": "Porsche",
+"model": "Panamera",
+"trim": "Turbo",
+"engine": "4.8L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2012-porsche-panamera--turbo--4-8l-v8-gas"
+},
+{
+"year": 2012,
+"make": "Porsche",
+"model": "Panamera",
+"trim": "Turbo S",
+"engine": "4.8L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2012-porsche-panamera--turbo-s--4-8l-v8-gas"
+},
+{
 "year": 2013,
 "make": "Porsche",
 "model": "911",
@@ -2032,6 +2149,87 @@
 "engine": "4.8L V8 Gas",
 "market": "US",
 "url": "https://porsche.oempartsonline.com/v-2013-porsche-cayenne--turbo-s--4-8l-v8-gas"
+},
+{
+"year": 2013,
+"make": "Porsche",
+"model": "Panamera",
+"trim": "4",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2013-porsche-panamera--4--3-6l-v6-gas"
+},
+{
+"year": 2013,
+"make": "Porsche",
+"model": "Panamera",
+"trim": "4S",
+"engine": "4.8L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2013-porsche-panamera--4s--4-8l-v8-gas"
+},
+{
+"year": 2013,
+"make": "Porsche",
+"model": "Panamera",
+"trim": "Base",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2013-porsche-panamera--base--3-6l-v6-gas"
+},
+{
+"year": 2013,
+"make": "Porsche",
+"model": "Panamera",
+"trim": "GTS",
+"engine": "4.8L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2013-porsche-panamera--gts--4-8l-v8-gas"
+},
+{
+"year": 2013,
+"make": "Porsche",
+"model": "Panamera",
+"trim": "S",
+"engine": "4.8L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2013-porsche-panamera--s--4-8l-v8-gas"
+},
+{
+"year": 2013,
+"make": "Porsche",
+"model": "Panamera",
+"trim": "S Hybrid",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2013-porsche-panamera--s-hybrid--3-0l-v6-electric-gas"
+},
+{
+"year": 2013,
+"make": "Porsche",
+"model": "Panamera",
+"trim": "S Hybrid",
+"engine": "3.0L V6 FULL HYBRID EV-GAS (FHEV)",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2013-porsche-panamera--s-hybrid--3-0l-v6-full-hybrid-ev-gas-fhev"
+},
+{
+"year": 2013,
+"make": "Porsche",
+"model": "Panamera",
+"trim": "Turbo",
+"engine": "4.8L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2013-porsche-panamera--turbo--4-8l-v8-gas"
+},
+{
+"year": 2013,
+"make": "Porsche",
+"model": "Panamera",
+"trim": "Turbo S",
+"engine": "4.8L V8 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2013-porsche-panamera--turbo-s--4-8l-v8-gas"
 },
 {
 "year": 2014,
