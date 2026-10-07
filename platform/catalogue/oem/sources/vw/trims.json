@@ -63,6 +63,51 @@
 "url": "https://vw.oempartsonline.com/v-1995-volkswagen-golf--sport--2-0l-l4-gas"
 },
 {
+"year": 1995,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "Celebration Edition",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1995-volkswagen-jetta--celebration-edition--2-0l-l4-gas"
+},
+{
+"year": 1995,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "City",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1995-volkswagen-jetta--city--2-0l-l4-gas"
+},
+{
+"year": 1995,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "GL",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1995-volkswagen-jetta--gl--2-0l-l4-gas"
+},
+{
+"year": 1995,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "GLS",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1995-volkswagen-jetta--gls--2-0l-l4-gas"
+},
+{
+"year": 1995,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "GLX",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1995-volkswagen-jetta--glx--2-8l-v6-gas"
+},
+{
 "year": 1996,
 "make": "Volkswagen",
 "model": "Cabrio",
@@ -5033,6 +5078,33 @@
 {
 "year": 2025,
 "make": "Volkswagen",
+"model": "ID. Buzz",
+"trim": "1st Edition Electric",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2025-volkswagen-id-buzz--1st-edition--electric"
+},
+{
+"year": 2025,
+"make": "Volkswagen",
+"model": "ID. Buzz",
+"trim": "Pro S Electric",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2025-volkswagen-id-buzz--pro-s--electric"
+},
+{
+"year": 2025,
+"make": "Volkswagen",
+"model": "ID. Buzz",
+"trim": "Pro S Plus Electric",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2025-volkswagen-id-buzz--pro-s-plus--electric"
+},
+{
+"year": 2025,
+"make": "Volkswagen",
 "model": "ID.4",
 "trim": "Limited Electric",
 "engine": "",
@@ -5191,5 +5263,41 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2026-volkswagen-golf-r--base--2-0l-l4-gas"
+},
+{
+"year": 2026,
+"make": "Volkswagen",
+"model": "ID.4",
+"trim": "Pro Electric",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2026-volkswagen-id-4--pro--electric"
+},
+{
+"year": 2026,
+"make": "Volkswagen",
+"model": "ID.4",
+"trim": "Pro S Electric",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2026-volkswagen-id-4--pro-s--electric"
+},
+{
+"year": 2026,
+"make": "Volkswagen",
+"model": "ID.4",
+"trim": "Pro S Plus Electric",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2026-volkswagen-id-4--pro-s-plus--electric"
+},
+{
+"year": 2026,
+"make": "Volkswagen",
+"model": "ID.4",
+"trim": "S Electric",
+"engine": "",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2026-volkswagen-id-4--s--electric"
 }
 ]
