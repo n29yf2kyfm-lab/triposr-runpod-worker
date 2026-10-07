@@ -9,6 +9,15 @@
 "url": "https://vw.oempartsonline.com/v-1995-volkswagen-cabrio--base--2-0l-l4-gas"
 },
 {
+"year": 1995,
+"make": "Volkswagen",
+"model": "EuroVan",
+"trim": "Camper",
+"engine": "2.5L L5 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1995-volkswagen-eurovan--camper--2-5l-l5-gas"
+},
+{
 "year": 1996,
 "make": "Volkswagen",
 "model": "Cabrio",
@@ -1388,6 +1397,33 @@
 {
 "year": 2015,
 "make": "Volkswagen",
+"model": "Eos",
+"trim": "Executive",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2015-volkswagen-eos--executive--2-0l-l4-gas"
+},
+{
+"year": 2015,
+"make": "Volkswagen",
+"model": "Eos",
+"trim": "Final Edition",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2015-volkswagen-eos--final-edition--2-0l-l4-gas"
+},
+{
+"year": 2015,
+"make": "Volkswagen",
+"model": "Eos",
+"trim": "Komfort",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2015-volkswagen-eos--komfort--2-0l-l4-gas"
+},
+{
+"year": 2015,
+"make": "Volkswagen",
 "model": "e-Golf",
 "trim": "Limited Edition BATTERY EV (EV/BEV)",
 "engine": "",
@@ -1555,6 +1591,15 @@
 "engine": "3.6L V6 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2016-volkswagen-cc--v6-executive-4motion--3-6l-v6-gas"
+},
+{
+"year": 2016,
+"make": "Volkswagen",
+"model": "Eos",
+"trim": "Komfort",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2016-volkswagen-eos--komfort--2-0l-l4-gas"
 },
 {
 "year": 2016,
