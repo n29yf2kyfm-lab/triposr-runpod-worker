@@ -648,6 +648,15 @@
 "url": "https://audi.oempartsonline.com/v-2001-audi-a8-quattro--l--4-2l-v8-gas"
 },
 {
+"year": 2001,
+"make": "Audi",
+"model": "Allroad Quattro",
+"trim": "Base",
+"engine": "2.7L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2001-audi-allroad-quattro--base--2-7l-v6-gas"
+},
+{
 "year": 2002,
 "make": "Audi",
 "model": "A4",
@@ -2493,6 +2502,33 @@
 "url": "https://audi.oempartsonline.com/v-2013-audi-a8-quattro--l-w12--6-3l-w12-gas"
 },
 {
+"year": 2013,
+"make": "Audi",
+"model": "allroad",
+"trim": "Premium",
+"engine": "2.0L L4 Flex",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2013-audi-allroad--premium--2-0l-l4-flex"
+},
+{
+"year": 2013,
+"make": "Audi",
+"model": "allroad",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Flex",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2013-audi-allroad--premium-plus--2-0l-l4-flex"
+},
+{
+"year": 2013,
+"make": "Audi",
+"model": "allroad",
+"trim": "Prestige",
+"engine": "2.0L L4 Flex",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2013-audi-allroad--prestige--2-0l-l4-flex"
+},
+{
 "year": 2014,
 "make": "Audi",
 "model": "A4",
@@ -2734,6 +2770,33 @@
 "engine": "6.3L W12 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2014-audi-a8-quattro--l-w12--6-3l-w12-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "allroad",
+"trim": "Premium",
+"engine": "2.0L L4 Flex",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-allroad--premium--2-0l-l4-flex"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "allroad",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Flex",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-allroad--premium-plus--2-0l-l4-flex"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "allroad",
+"trim": "Prestige",
+"engine": "2.0L L4 Flex",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-allroad--prestige--2-0l-l4-flex"
 },
 {
 "year": 2015,
@@ -3114,6 +3177,33 @@
 "url": "https://audi.oempartsonline.com/v-2015-audi-a8-quattro--l-w12--6-3l-w12-gas"
 },
 {
+"year": 2015,
+"make": "Audi",
+"model": "allroad",
+"trim": "Premium",
+"engine": "2.0L L4 Flex",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-allroad--premium--2-0l-l4-flex"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "allroad",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Flex",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-allroad--premium-plus--2-0l-l4-flex"
+},
+{
+"year": 2015,
+"make": "Audi",
+"model": "allroad",
+"trim": "Prestige",
+"engine": "2.0L L4 Flex",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2015-audi-allroad--prestige--2-0l-l4-flex"
+},
+{
 "year": 2016,
 "make": "Audi",
 "model": "A3",
@@ -3445,6 +3535,24 @@
 "engine": "6.3L W12 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2016-audi-a8-quattro--l-w12--6-3l-w12-gas"
+},
+{
+"year": 2016,
+"make": "Audi",
+"model": "allroad",
+"trim": "Premium",
+"engine": "2.0L L4 Flex",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-allroad--premium--2-0l-l4-flex"
+},
+{
+"year": 2016,
+"make": "Audi",
+"model": "allroad",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Flex",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2016-audi-allroad--premium-plus--2-0l-l4-flex"
 },
 {
 "year": 2017,
@@ -5229,6 +5337,15 @@
 "url": "https://audi.oempartsonline.com/v-2022-audi-a7-sportback--prestige--3-0l-v6-electric-gas"
 },
 {
+"year": 2022,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "L",
+"engine": "3.0L V6 ELECTRIC Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2022-audi-a8-quattro--l--3-0l-v6-electric-gas"
+},
+{
 "year": 2023,
 "make": "Audi",
 "model": "A3",
@@ -5463,6 +5580,15 @@
 "url": "https://audi.oempartsonline.com/v-2023-audi-a7-sportback--prestige--3-0l-v6-electric-gas"
 },
 {
+"year": 2023,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "L",
+"engine": "3.0L V6 ELECTRIC Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2023-audi-a8-quattro--l--3-0l-v6-electric-gas"
+},
+{
 "year": 2024,
 "make": "Audi",
 "model": "A3",
@@ -5695,6 +5821,15 @@
 "engine": "3.0L V6 Electric/Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2024-audi-a7-sportback--prestige--3-0l-v6-electric-gas"
+},
+{
+"year": 2024,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "L",
+"engine": "3.0L V6 ELECTRIC Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2024-audi-a8-quattro--l--3-0l-v6-electric-gas"
 },
 {
 "year": 2025,
@@ -5958,6 +6093,15 @@
 "url": "https://audi.oempartsonline.com/v-2025-audi-a7-sportback--prestige--3-0l-v6-electric-gas"
 },
 {
+"year": 2025,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "L",
+"engine": "3.0L V6 ELECTRIC Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2025-audi-a8-quattro--l--3-0l-v6-electric-gas"
+},
+{
 "year": 2026,
 "make": "Audi",
 "model": "A3 Quattro",
@@ -5992,5 +6136,14 @@
 "engine": "3.0L V6 Electric/Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2026-audi-a6-allroad--prestige--3-0l-v6-electric-gas"
+},
+{
+"year": 2026,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "L",
+"engine": "3.0L V6 ELECTRIC Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2026-audi-a8-quattro--l--3-0l-v6-electric-gas"
 }
 ]
