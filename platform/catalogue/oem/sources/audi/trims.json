@@ -1,1 +1,38 @@
-[]
+[
+{
+"year": 1995,
+"make": "Audi",
+"model": "90",
+"trim": "Base",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-1995-audi-90--base--2-8l-v6-gas"
+},
+{
+"year": 1995,
+"make": "Audi",
+"model": "90",
+"trim": "Sport",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-1995-audi-90--sport--2-8l-v6-gas"
+},
+{
+"year": 1995,
+"make": "Audi",
+"model": "90 Quattro",
+"trim": "Base",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-1995-audi-90-quattro--base--2-8l-v6-gas"
+},
+{
+"year": 1995,
+"make": "Audi",
+"model": "90 Quattro",
+"trim": "Sport",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-1995-audi-90-quattro--sport--2-8l-v6-gas"
+}
+]

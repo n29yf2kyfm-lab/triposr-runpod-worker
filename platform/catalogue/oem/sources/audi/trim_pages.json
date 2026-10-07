@@ -1053,5 +1053,26 @@
 "tts-quattro": "TTS Quattro",
 "v8-quattro": "V8 Quattro"
 },
-"years": {}
+"years": {
+"v-1995-audi-90": [
+[
+"Base 2.8L V6 - Gas",
+"https://audi.oempartsonline.com/v-1995-audi-90--base--2-8l-v6-gas"
+],
+[
+"Sport 2.8L V6 - Gas",
+"https://audi.oempartsonline.com/v-1995-audi-90--sport--2-8l-v6-gas"
+]
+],
+"v-1995-audi-90-quattro": [
+[
+"Base 2.8L V6 - Gas",
+"https://audi.oempartsonline.com/v-1995-audi-90-quattro--base--2-8l-v6-gas"
+],
+[
+"Sport 2.8L V6 - Gas",
+"https://audi.oempartsonline.com/v-1995-audi-90-quattro--sport--2-8l-v6-gas"
+]
+]
+}
 }
