@@ -108,6 +108,24 @@
 "url": "https://vw.oempartsonline.com/v-1995-volkswagen-jetta--glx--2-8l-v6-gas"
 },
 {
+"year": 1995,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "GLS",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1995-volkswagen-passat--gls--2-0l-l4-gas"
+},
+{
+"year": 1995,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "GLX",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1995-volkswagen-passat--glx--2-8l-v6-gas"
+},
+{
 "year": 1996,
 "make": "Volkswagen",
 "model": "Cabrio",
@@ -187,6 +205,33 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-1996-volkswagen-jetta--wolfsburg-edition--2-0l-l4-gas"
+},
+{
+"year": 1996,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "GLS",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1996-volkswagen-passat--gls--2-0l-l4-gas"
+},
+{
+"year": 1996,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "GLX",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1996-volkswagen-passat--glx--2-8l-v6-gas"
+},
+{
+"year": 1996,
+"make": "Volkswagen",
+"model": "Passat",
+"trim": "TDI",
+"engine": "1.9L L4 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1996-volkswagen-passat--tdi--1-9l-l4-diesel"
 },
 {
 "year": 1997,
@@ -7216,5 +7261,50 @@
 "engine": "",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2026-volkswagen-id-4--s--electric"
+},
+{
+"year": 2026,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "GLI Autobahn",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2026-volkswagen-jetta--gli-autobahn--2-0l-l4-gas"
+},
+{
+"year": 2026,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "S",
+"engine": "1.5L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2026-volkswagen-jetta--s--1-5l-l4-gas"
+},
+{
+"year": 2026,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "SE",
+"engine": "1.5L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2026-volkswagen-jetta--se--1-5l-l4-gas"
+},
+{
+"year": 2026,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "SEL",
+"engine": "1.5L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2026-volkswagen-jetta--sel--1-5l-l4-gas"
+},
+{
+"year": 2026,
+"make": "Volkswagen",
+"model": "Jetta",
+"trim": "Sport",
+"engine": "1.5L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2026-volkswagen-jetta--sport--1-5l-l4-gas"
 }
 ]
