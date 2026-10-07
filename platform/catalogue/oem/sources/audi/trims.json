@@ -603,6 +603,15 @@
 "url": "https://audi.oempartsonline.com/v-2000-audi-tt--base--1-8l-l4-gas"
 },
 {
+"year": 2000,
+"make": "Audi",
+"model": "TT Quattro",
+"trim": "Base",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2000-audi-tt-quattro--base--1-8l-l4-gas"
+},
+{
 "year": 2001,
 "make": "Audi",
 "model": "A4",
@@ -763,6 +772,15 @@
 "engine": "1.8L L4 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2001-audi-tt--base--1-8l-l4-gas"
+},
+{
+"year": 2001,
+"make": "Audi",
+"model": "TT Quattro",
+"trim": "Base",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2001-audi-tt-quattro--base--1-8l-l4-gas"
 },
 {
 "year": 2002,
@@ -934,6 +952,24 @@
 "engine": "1.8L L4 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2002-audi-tt--base--1-8l-l4-gas"
+},
+{
+"year": 2002,
+"make": "Audi",
+"model": "TT Quattro",
+"trim": "ALMS Edition",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2002-audi-tt-quattro--alms-edition--1-8l-l4-gas"
+},
+{
+"year": 2002,
+"make": "Audi",
+"model": "TT Quattro",
+"trim": "Base",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2002-audi-tt-quattro--base--1-8l-l4-gas"
 },
 {
 "year": 2003,
@@ -1116,6 +1152,15 @@
 "url": "https://audi.oempartsonline.com/v-2003-audi-tt--base--1-8l-l4-gas"
 },
 {
+"year": 2003,
+"make": "Audi",
+"model": "TT Quattro",
+"trim": "Base",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2003-audi-tt-quattro--base--1-8l-l4-gas"
+},
+{
 "year": 2004,
 "make": "Audi",
 "model": "A4",
@@ -1294,6 +1339,33 @@
 "engine": "4.2L V8 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2004-audi-s4--cabriolet--4-2l-v8-gas"
+},
+{
+"year": 2004,
+"make": "Audi",
+"model": "TT",
+"trim": "Base",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2004-audi-tt--base--1-8l-l4-gas"
+},
+{
+"year": 2004,
+"make": "Audi",
+"model": "TT Quattro",
+"trim": "Base",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2004-audi-tt-quattro--base--1-8l-l4-gas"
+},
+{
+"year": 2004,
+"make": "Audi",
+"model": "TT Quattro",
+"trim": "Base",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2004-audi-tt-quattro--base--3-2l-v6-gas"
 },
 {
 "year": 2005,
@@ -1512,6 +1584,15 @@
 "url": "https://audi.oempartsonline.com/v-2005-audi-s4--cabriolet--4-2l-v8-gas"
 },
 {
+"year": 2005,
+"make": "Audi",
+"model": "TT",
+"trim": "Base",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2005-audi-tt--base--1-8l-l4-gas"
+},
+{
 "year": 2006,
 "make": "Audi",
 "model": "A3",
@@ -1690,6 +1771,15 @@
 "engine": "4.2L V8 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2006-audi-s4--cabriolet--4-2l-v8-gas"
+},
+{
+"year": 2006,
+"make": "Audi",
+"model": "TT",
+"trim": "Base",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2006-audi-tt--base--1-8l-l4-gas"
 },
 {
 "year": 2007,
@@ -2223,6 +2313,15 @@
 "url": "https://audi.oempartsonline.com/v-2008-audi-s8--base--5-2l-v10-gas"
 },
 {
+"year": 2008,
+"make": "Audi",
+"model": "TT",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2008-audi-tt--base--2-0l-l4-gas"
+},
+{
 "year": 2009,
 "make": "Audi",
 "model": "A3",
@@ -2500,6 +2599,15 @@
 "engine": "5.2L V10 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2009-audi-s8--base--5-2l-v10-gas"
+},
+{
+"year": 2009,
+"make": "Audi",
+"model": "TT",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2009-audi-tt--base--2-0l-l4-gas"
 },
 {
 "year": 2010,
