@@ -1565,6 +1565,20 @@
 "https://vw.oempartsonline.com/v-2004-volkswagen-r32--base--3-2l-v6-gas"
 ]
 ],
+"v-2004-volkswagen-touareg": [
+[
+"TDI 4.9L V10 - Diesel",
+"https://vw.oempartsonline.com/v-2004-volkswagen-touareg--tdi--4-9l-v10-diesel"
+],
+[
+"V6 3.2L V6 - Gas",
+"https://vw.oempartsonline.com/v-2004-volkswagen-touareg--v6--3-2l-v6-gas"
+],
+[
+"V8 4.2L V8 - Gas",
+"https://vw.oempartsonline.com/v-2004-volkswagen-touareg--v8--4-2l-v8-gas"
+]
+],
 "v-2005-volkswagen-beetle": [
 [
 "GL 2.0L L4 - Gas",
@@ -1691,6 +1705,16 @@
 "https://vw.oempartsonline.com/v-2005-volkswagen-phaeton--w12--6-0l-w12-gas"
 ]
 ],
+"v-2005-volkswagen-touareg": [
+[
+"Base 3.2L V6 - Gas",
+"https://vw.oempartsonline.com/v-2005-volkswagen-touareg--base--3-2l-v6-gas"
+],
+[
+"Base 4.2L V8 - Gas",
+"https://vw.oempartsonline.com/v-2005-volkswagen-touareg--base--4-2l-v8-gas"
+]
+],
 "v-2006-volkswagen-beetle": [
 [
 "2.5 2.5L L5 - Gas",
@@ -1777,6 +1801,20 @@
 "https://vw.oempartsonline.com/v-2006-volkswagen-rabbit--2-5--2-5l-l5-gas"
 ]
 ],
+"v-2006-volkswagen-touareg": [
+[
+"Base 3.2L V6 - Gas",
+"https://vw.oempartsonline.com/v-2006-volkswagen-touareg--base--3-2l-v6-gas"
+],
+[
+"Base 4.2L V8 - Gas",
+"https://vw.oempartsonline.com/v-2006-volkswagen-touareg--base--4-2l-v8-gas"
+],
+[
+"TDI 5.0L V10 - Diesel",
+"https://vw.oempartsonline.com/v-2006-volkswagen-touareg--tdi--5-0l-v10-diesel"
+]
+],
 "v-2007-volkswagen-beetle": [
 [
 "2.5 2.5L L5 - Gas",
@@ -1851,6 +1889,20 @@
 [
 "2 5 2.5L L5 - Gas",
 "https://vw.oempartsonline.com/v-2007-volkswagen-rabbit--2-5--2-5l-l5-gas"
+]
+],
+"v-2007-volkswagen-touareg": [
+[
+"Base 3.6L V6 - Gas",
+"https://vw.oempartsonline.com/v-2007-volkswagen-touareg--base--3-6l-v6-gas"
+],
+[
+"Base 4.2L V8 - Gas",
+"https://vw.oempartsonline.com/v-2007-volkswagen-touareg--base--4-2l-v8-gas"
+],
+[
+"TDI 5.0L V10 - Diesel",
+"https://vw.oempartsonline.com/v-2007-volkswagen-touareg--tdi--5-0l-v10-diesel"
 ]
 ],
 "v-2008-volkswagen-beetle": [
@@ -3771,6 +3823,12 @@
 [
 "SEL Premium 2.0L L4 - Gas",
 "https://vw.oempartsonline.com/v-2018-volkswagen-tiguan--sel-premium--2-0l-l4-gas"
+]
+],
+"v-2018-volkswagen-tiguan-limited": [
+[
+"Base 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2018-volkswagen-tiguan-limited--base--2-0l-l4-gas"
 ]
 ],
 "v-2019-volkswagen-arteon": [

@@ -4223,6 +4223,51 @@
 {
 "year": 2022,
 "make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium",
+"engine": "2.0L L4 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2022-audi-a6-quattro--premium--2-0l-l4-electric-gas"
+},
+{
+"year": 2022,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2022-audi-a6-quattro--premium--3-0l-v6-electric-gas"
+},
+{
+"year": 2022,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2022-audi-a6-quattro--premium-plus--2-0l-l4-electric-gas"
+},
+{
+"year": 2022,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2022-audi-a6-quattro--premium-plus--3-0l-v6-electric-gas"
+},
+{
+"year": 2022,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Prestige",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2022-audi-a6-quattro--prestige--3-0l-v6-electric-gas"
+},
+{
+"year": 2022,
+"make": "Audi",
 "model": "A6 allroad",
 "trim": "Premium Plus",
 "engine": "3.0L V6 Electric/Gas",
@@ -4381,6 +4426,51 @@
 "engine": "2.0L L4 Electric/Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2023-audi-a5-sportback--prestige--2-0l-l4-electric-gas"
+},
+{
+"year": 2023,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium",
+"engine": "2.0L L4 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2023-audi-a6-quattro--premium--2-0l-l4-electric-gas"
+},
+{
+"year": 2023,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2023-audi-a6-quattro--premium--3-0l-v6-electric-gas"
+},
+{
+"year": 2023,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2023-audi-a6-quattro--premium-plus--2-0l-l4-electric-gas"
+},
+{
+"year": 2023,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2023-audi-a6-quattro--premium-plus--3-0l-v6-electric-gas"
+},
+{
+"year": 2023,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Prestige",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2023-audi-a6-quattro--prestige--3-0l-v6-electric-gas"
 },
 {
 "year": 2023,
@@ -4547,6 +4637,51 @@
 {
 "year": 2024,
 "make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium",
+"engine": "2.0L L4 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2024-audi-a6-quattro--premium--2-0l-l4-electric-gas"
+},
+{
+"year": 2024,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2024-audi-a6-quattro--premium--3-0l-v6-electric-gas"
+},
+{
+"year": 2024,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2024-audi-a6-quattro--premium-plus--2-0l-l4-electric-gas"
+},
+{
+"year": 2024,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2024-audi-a6-quattro--premium-plus--3-0l-v6-electric-gas"
+},
+{
+"year": 2024,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Prestige",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2024-audi-a6-quattro--prestige--3-0l-v6-electric-gas"
+},
+{
+"year": 2024,
+"make": "Audi",
 "model": "A6 allroad",
 "trim": "Premium Plus",
 "engine": "3.0L V6 Electric/Gas",
@@ -4678,6 +4813,78 @@
 "engine": "2.0L L4 Electric/Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2025-audi-a5-sportback--premium-plus--2-0l-l4-electric-gas"
+},
+{
+"year": 2025,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium",
+"engine": "2.0L L4 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2025-audi-a6-quattro--premium--2-0l-l4-electric-gas"
+},
+{
+"year": 2025,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2025-audi-a6-quattro--premium--3-0l-v6-electric-gas"
+},
+{
+"year": 2025,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2025-audi-a6-quattro--premium-plus--2-0l-l4-electric-gas"
+},
+{
+"year": 2025,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2025-audi-a6-quattro--premium-plus--3-0l-v6-electric-gas"
+},
+{
+"year": 2025,
+"make": "Audi",
+"model": "A6 Quattro",
+"trim": "Prestige",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2025-audi-a6-quattro--prestige--3-0l-v6-electric-gas"
+},
+{
+"year": 2025,
+"make": "Audi",
+"model": "A6 Sportback e-tron",
+"trim": "Premium Electric",
+"engine": "",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2025-audi-a6-sportback-e-tron--premium--electric"
+},
+{
+"year": 2025,
+"make": "Audi",
+"model": "A6 Sportback e-tron",
+"trim": "Premium Plus Electric",
+"engine": "",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2025-audi-a6-sportback-e-tron--premium-plus--electric"
+},
+{
+"year": 2025,
+"make": "Audi",
+"model": "A6 Sportback e-tron",
+"trim": "Prestige Electric",
+"engine": "",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2025-audi-a6-sportback-e-tron--prestige--electric"
 },
 {
 "year": 2025,

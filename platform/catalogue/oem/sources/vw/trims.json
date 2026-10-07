@@ -2286,6 +2286,33 @@
 "url": "https://vw.oempartsonline.com/v-2004-volkswagen-r32--base--3-2l-v6-gas"
 },
 {
+"year": 2004,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "TDI",
+"engine": "4.9L V10 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2004-volkswagen-touareg--tdi--4-9l-v10-diesel"
+},
+{
+"year": 2004,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "V6",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2004-volkswagen-touareg--v6--3-2l-v6-gas"
+},
+{
+"year": 2004,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "V8",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2004-volkswagen-touareg--v8--4-2l-v8-gas"
+},
+{
 "year": 2005,
 "make": "Volkswagen",
 "model": "Beetle",
@@ -2547,6 +2574,24 @@
 "url": "https://vw.oempartsonline.com/v-2005-volkswagen-phaeton--w12--6-0l-w12-gas"
 },
 {
+"year": 2005,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "Base",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2005-volkswagen-touareg--base--3-2l-v6-gas"
+},
+{
+"year": 2005,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2005-volkswagen-touareg--base--4-2l-v8-gas"
+},
+{
 "year": 2006,
 "make": "Volkswagen",
 "model": "Beetle",
@@ -2709,6 +2754,33 @@
 "url": "https://vw.oempartsonline.com/v-2006-volkswagen-rabbit--2-5--2-5l-l5-gas"
 },
 {
+"year": 2006,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "Base",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2006-volkswagen-touareg--base--3-2l-v6-gas"
+},
+{
+"year": 2006,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2006-volkswagen-touareg--base--4-2l-v8-gas"
+},
+{
+"year": 2006,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "TDI",
+"engine": "5.0L V10 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2006-volkswagen-touareg--tdi--5-0l-v10-diesel"
+},
+{
 "year": 2007,
 "make": "Volkswagen",
 "model": "Beetle",
@@ -2851,6 +2923,33 @@
 "engine": "2.5L L5 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2007-volkswagen-rabbit--2-5--2-5l-l5-gas"
+},
+{
+"year": 2007,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "Base",
+"engine": "3.6L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2007-volkswagen-touareg--base--3-6l-v6-gas"
+},
+{
+"year": 2007,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2007-volkswagen-touareg--base--4-2l-v8-gas"
+},
+{
+"year": 2007,
+"make": "Volkswagen",
+"model": "Touareg",
+"trim": "TDI",
+"engine": "5.0L V10 Diesel",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2007-volkswagen-touareg--tdi--5-0l-v10-diesel"
 },
 {
 "year": 2008,
@@ -6649,6 +6748,15 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2018-volkswagen-tiguan--sel-premium--2-0l-l4-gas"
+},
+{
+"year": 2018,
+"make": "Volkswagen",
+"model": "Tiguan Limited",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2018-volkswagen-tiguan-limited--base--2-0l-l4-gas"
 },
 {
 "year": 2018,
