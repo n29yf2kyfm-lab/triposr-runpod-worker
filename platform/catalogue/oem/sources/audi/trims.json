@@ -324,6 +324,42 @@
 "url": "https://audi.oempartsonline.com/v-2002-audi-a4--base--3-0l-v6-gas"
 },
 {
+"year": 2002,
+"make": "Audi",
+"model": "A4 Quattro",
+"trim": "Avant",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2002-audi-a4-quattro--avant--1-8l-l4-gas"
+},
+{
+"year": 2002,
+"make": "Audi",
+"model": "A4 Quattro",
+"trim": "Avant",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2002-audi-a4-quattro--avant--3-0l-v6-gas"
+},
+{
+"year": 2002,
+"make": "Audi",
+"model": "A4 Quattro",
+"trim": "Base",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2002-audi-a4-quattro--base--1-8l-l4-gas"
+},
+{
+"year": 2002,
+"make": "Audi",
+"model": "A4 Quattro",
+"trim": "Base",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2002-audi-a4-quattro--base--3-0l-v6-gas"
+},
+{
 "year": 2003,
 "make": "Audi",
 "model": "A4",
@@ -360,6 +396,42 @@
 "url": "https://audi.oempartsonline.com/v-2003-audi-a4--cabriolet--3-0l-v6-gas"
 },
 {
+"year": 2003,
+"make": "Audi",
+"model": "A4 Quattro",
+"trim": "Avant",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2003-audi-a4-quattro--avant--1-8l-l4-gas"
+},
+{
+"year": 2003,
+"make": "Audi",
+"model": "A4 Quattro",
+"trim": "Avant",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2003-audi-a4-quattro--avant--3-0l-v6-gas"
+},
+{
+"year": 2003,
+"make": "Audi",
+"model": "A4 Quattro",
+"trim": "Base",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2003-audi-a4-quattro--base--1-8l-l4-gas"
+},
+{
+"year": 2003,
+"make": "Audi",
+"model": "A4 Quattro",
+"trim": "Base",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2003-audi-a4-quattro--base--3-0l-v6-gas"
+},
+{
 "year": 2004,
 "make": "Audi",
 "model": "A4",
@@ -394,6 +466,51 @@
 "engine": "3.0L V6 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2004-audi-a4--cabriolet--3-0l-v6-gas"
+},
+{
+"year": 2004,
+"make": "Audi",
+"model": "A4 Quattro",
+"trim": "Avant",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2004-audi-a4-quattro--avant--1-8l-l4-gas"
+},
+{
+"year": 2004,
+"make": "Audi",
+"model": "A4 Quattro",
+"trim": "Avant",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2004-audi-a4-quattro--avant--3-0l-v6-gas"
+},
+{
+"year": 2004,
+"make": "Audi",
+"model": "A4 Quattro",
+"trim": "Base",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2004-audi-a4-quattro--base--1-8l-l4-gas"
+},
+{
+"year": 2004,
+"make": "Audi",
+"model": "A4 Quattro",
+"trim": "Base",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2004-audi-a4-quattro--base--3-0l-v6-gas"
+},
+{
+"year": 2004,
+"make": "Audi",
+"model": "A4 Quattro",
+"trim": "Cabriolet",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2004-audi-a4-quattro--cabriolet--3-0l-v6-gas"
 },
 {
 "year": 2005,
@@ -439,6 +556,87 @@
 "engine": "3.0L V6 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2005-audi-a4--cabriolet--3-0l-v6-gas"
+},
+{
+"year": 2005,
+"make": "Audi",
+"model": "A4 Quattro",
+"trim": "Avant",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2005-audi-a4-quattro--avant--1-8l-l4-gas"
+},
+{
+"year": 2005,
+"make": "Audi",
+"model": "A4 Quattro",
+"trim": "Avant",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2005-audi-a4-quattro--avant--2-0l-l4-gas"
+},
+{
+"year": 2005,
+"make": "Audi",
+"model": "A4 Quattro",
+"trim": "Avant",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2005-audi-a4-quattro--avant--3-0l-v6-gas"
+},
+{
+"year": 2005,
+"make": "Audi",
+"model": "A4 Quattro",
+"trim": "Avant",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2005-audi-a4-quattro--avant--3-2l-v6-gas"
+},
+{
+"year": 2005,
+"make": "Audi",
+"model": "A4 Quattro",
+"trim": "Base",
+"engine": "1.8L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2005-audi-a4-quattro--base--1-8l-l4-gas"
+},
+{
+"year": 2005,
+"make": "Audi",
+"model": "A4 Quattro",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2005-audi-a4-quattro--base--2-0l-l4-gas"
+},
+{
+"year": 2005,
+"make": "Audi",
+"model": "A4 Quattro",
+"trim": "Base",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2005-audi-a4-quattro--base--3-0l-v6-gas"
+},
+{
+"year": 2005,
+"make": "Audi",
+"model": "A4 Quattro",
+"trim": "Base",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2005-audi-a4-quattro--base--3-2l-v6-gas"
+},
+{
+"year": 2005,
+"make": "Audi",
+"model": "A4 Quattro",
+"trim": "Cabriolet",
+"engine": "3.0L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2005-audi-a4-quattro--cabriolet--3-0l-v6-gas"
 },
 {
 "year": 2006,

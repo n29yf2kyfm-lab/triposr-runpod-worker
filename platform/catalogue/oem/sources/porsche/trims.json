@@ -792,6 +792,15 @@
 "url": "https://porsche.oempartsonline.com/v-2006-porsche-cayenne--turbo-s--4-5l-v8-gas"
 },
 {
+"year": 2006,
+"make": "Porsche",
+"model": "Cayman",
+"trim": "S",
+"engine": "3.4L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2006-porsche-cayman--s--3-4l-h6-gas"
+},
+{
 "year": 2007,
 "make": "Porsche",
 "model": "911",
@@ -889,6 +898,24 @@
 "engine": "3.4L H6 Gas",
 "market": "US",
 "url": "https://porsche.oempartsonline.com/v-2007-porsche-boxster--s--3-4l-h6-gas"
+},
+{
+"year": 2007,
+"make": "Porsche",
+"model": "Cayman",
+"trim": "Base",
+"engine": "2.7L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2007-porsche-cayman--base--2-7l-h6-gas"
+},
+{
+"year": 2007,
+"make": "Porsche",
+"model": "Cayman",
+"trim": "S",
+"engine": "3.4L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2007-porsche-cayman--s--3-4l-h6-gas"
 },
 {
 "year": 2008,
@@ -1060,6 +1087,24 @@
 "engine": "4.8L V8 Gas",
 "market": "US",
 "url": "https://porsche.oempartsonline.com/v-2008-porsche-cayenne--turbo--4-8l-v8-gas"
+},
+{
+"year": 2008,
+"make": "Porsche",
+"model": "Cayman",
+"trim": "Base",
+"engine": "2.7L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2008-porsche-cayman--base--2-7l-h6-gas"
+},
+{
+"year": 2008,
+"make": "Porsche",
+"model": "Cayman",
+"trim": "S",
+"engine": "3.4L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2008-porsche-cayman--s--3-4l-h6-gas"
 },
 {
 "year": 2009,
