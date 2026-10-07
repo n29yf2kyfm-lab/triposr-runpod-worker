@@ -1,5 +1,23 @@
 [
 {
+"year": 1995,
+"make": "Porsche",
+"model": "911",
+"trim": "Carrera",
+"engine": "3.6L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-1995-porsche-911--carrera--3-6l-h6-gas"
+},
+{
+"year": 1995,
+"make": "Porsche",
+"model": "911",
+"trim": "Carrera 4",
+"engine": "3.6L H6 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-1995-porsche-911--carrera-4--3-6l-h6-gas"
+},
+{
 "year": 2017,
 "make": "Porsche",
 "model": "718 Boxster",
