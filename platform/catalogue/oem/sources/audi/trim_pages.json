@@ -1084,6 +1084,16 @@
 "https://audi.oempartsonline.com/v-1995-audi-a6--base--2-8l-v6-gas"
 ]
 ],
+"v-1995-audi-a6-quattro": [
+[
+"Avant 2.8L V6 - Gas",
+"https://audi.oempartsonline.com/v-1995-audi-a6-quattro--avant--2-8l-v6-gas"
+],
+[
+"Base 2.8L V6 - Gas",
+"https://audi.oempartsonline.com/v-1995-audi-a6-quattro--base--2-8l-v6-gas"
+]
+],
 "v-1996-audi-a4": [
 [
 "Base 2.8L V6 - Gas",
@@ -2873,6 +2883,16 @@
 "https://audi.oempartsonline.com/v-2023-audi-a5-sportback--prestige--2-0l-l4-electric-gas"
 ]
 ],
+"v-2023-audi-a6-allroad": [
+[
+"Premium Plus 3.0L V6 - Electric/Gas",
+"https://audi.oempartsonline.com/v-2023-audi-a6-allroad--premium-plus--3-0l-v6-electric-gas"
+],
+[
+"Prestige 3.0L V6 - Electric/Gas",
+"https://audi.oempartsonline.com/v-2023-audi-a6-allroad--prestige--3-0l-v6-electric-gas"
+]
+],
 "v-2024-audi-a3": [
 [
 "Premium 2.0L L4 - Electric/Gas",
@@ -2949,6 +2969,16 @@
 "https://audi.oempartsonline.com/v-2024-audi-a5-sportback--prestige--2-0l-l4-electric-gas"
 ]
 ],
+"v-2024-audi-a6-allroad": [
+[
+"Premium Plus 3.0L V6 - Electric/Gas",
+"https://audi.oempartsonline.com/v-2024-audi-a6-allroad--premium-plus--3-0l-v6-electric-gas"
+],
+[
+"Prestige 3.0L V6 - Electric/Gas",
+"https://audi.oempartsonline.com/v-2024-audi-a6-allroad--prestige--3-0l-v6-electric-gas"
+]
+],
 "v-2025-audi-a3-quattro": [
 [
 "Premium 2.0L L4 - Electric/Gas",
@@ -3011,6 +3041,16 @@
 "https://audi.oempartsonline.com/v-2025-audi-a5-sportback--premium-plus--2-0l-l4-electric-gas"
 ]
 ],
+"v-2025-audi-a6-allroad": [
+[
+"Premium Plus 3.0L V6 - Electric/Gas",
+"https://audi.oempartsonline.com/v-2025-audi-a6-allroad--premium-plus--3-0l-v6-electric-gas"
+],
+[
+"Prestige 3.0L V6 - Electric/Gas",
+"https://audi.oempartsonline.com/v-2025-audi-a6-allroad--prestige--3-0l-v6-electric-gas"
+]
+],
 "v-2026-audi-a3-quattro": [
 [
 "Premium 2.0L L4 - Electric/Gas",
@@ -3019,6 +3059,16 @@
 [
 "Premium Plus 2.0L L4 - Electric/Gas",
 "https://audi.oempartsonline.com/v-2026-audi-a3-quattro--premium-plus--2-0l-l4-electric-gas"
+]
+],
+"v-2026-audi-a6-allroad": [
+[
+"Premium Plus 3.0L V6 - Electric/Gas",
+"https://audi.oempartsonline.com/v-2026-audi-a6-allroad--premium-plus--3-0l-v6-electric-gas"
+],
+[
+"Prestige 3.0L V6 - Electric/Gas",
+"https://audi.oempartsonline.com/v-2026-audi-a6-allroad--prestige--3-0l-v6-electric-gas"
 ]
 ]
 }
