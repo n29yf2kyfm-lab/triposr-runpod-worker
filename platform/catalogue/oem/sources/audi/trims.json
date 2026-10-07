@@ -1656,6 +1656,15 @@
 "url": "https://audi.oempartsonline.com/v-2007-audi-q7--premium--4-2l-v8-gas"
 },
 {
+"year": 2007,
+"make": "Audi",
+"model": "RS4",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2007-audi-rs4--base--4-2l-v8-gas"
+},
+{
 "year": 2008,
 "make": "Audi",
 "model": "A3",
@@ -1861,6 +1870,24 @@
 "engine": "4.2L V8 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2008-audi-r8--base--4-2l-v8-gas"
+},
+{
+"year": 2008,
+"make": "Audi",
+"model": "RS4",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2008-audi-rs4--base--4-2l-v8-gas"
+},
+{
+"year": 2008,
+"make": "Audi",
+"model": "RS4",
+"trim": "Cabriolet",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2008-audi-rs4--cabriolet--4-2l-v8-gas"
 },
 {
 "year": 2009,
@@ -3197,6 +3224,15 @@
 {
 "year": 2013,
 "make": "Audi",
+"model": "RS5",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2013-audi-rs5--base--4-2l-v8-gas"
+},
+{
+"year": 2013,
+"make": "Audi",
 "model": "allroad",
 "trim": "Premium",
 "engine": "2.0L L4 Flex",
@@ -3625,6 +3661,24 @@
 "engine": "5.2L V10 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2014-audi-r8--spyder--5-2l-v10-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "RS5",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-rs5--base--4-2l-v8-gas"
+},
+{
+"year": 2014,
+"make": "Audi",
+"model": "RS5",
+"trim": "Cabriolet",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2014-audi-rs5--cabriolet--4-2l-v8-gas"
 },
 {
 "year": 2014,
@@ -6725,6 +6779,15 @@
 {
 "year": 2020,
 "make": "Audi",
+"model": "RS3",
+"trim": "Base",
+"engine": "2.5L L5 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2020-audi-rs3--base--2-5l-l5-gas"
+},
+{
+"year": 2020,
+"make": "Audi",
 "model": "e-tron Sportback",
 "trim": "Premium Plus Electric",
 "engine": "",
@@ -7859,6 +7922,15 @@
 {
 "year": 2022,
 "make": "Audi",
+"model": "RS3",
+"trim": "Base",
+"engine": "2.5L L5 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2022-audi-rs3--base--2-5l-l5-gas"
+},
+{
+"year": 2022,
+"make": "Audi",
 "model": "e-tron GT",
 "trim": "Premium Plus Electric",
 "engine": "",
@@ -8503,6 +8575,15 @@
 "engine": "Electric",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2023-audi-rs-e-tron-gt--base--electric"
+},
+{
+"year": 2023,
+"make": "Audi",
+"model": "RS3",
+"trim": "Base",
+"engine": "2.5L L5 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2023-audi-rs3--base--2-5l-l5-gas"
 },
 {
 "year": 2023,
@@ -9173,6 +9254,15 @@
 {
 "year": 2024,
 "make": "Audi",
+"model": "RS3",
+"trim": "Base",
+"engine": "2.5L L5 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2024-audi-rs3--base--2-5l-l5-gas"
+},
+{
+"year": 2024,
+"make": "Audi",
 "model": "e-tron GT",
 "trim": "Premium Plus Electric",
 "engine": "",
@@ -9837,6 +9927,15 @@
 "url": "https://audi.oempartsonline.com/v-2025-audi-rs-e-tron-gt-performance--base--electric"
 },
 {
+"year": 2025,
+"make": "Audi",
+"model": "RS3",
+"trim": "Base",
+"engine": "2.5L L5 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2025-audi-rs3--base--2-5l-l5-gas"
+},
+{
 "year": 2026,
 "make": "Audi",
 "model": "A3 Quattro",
@@ -10105,5 +10204,14 @@
 "engine": "Electric",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2026-audi-rs-e-tron-gt-performance--base--electric"
+},
+{
+"year": 2026,
+"make": "Audi",
+"model": "RS3",
+"trim": "Base",
+"engine": "2.5L L5 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2026-audi-rs3--base--2-5l-l5-gas"
 }
 ]
