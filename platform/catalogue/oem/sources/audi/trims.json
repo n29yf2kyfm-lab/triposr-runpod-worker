@@ -63,6 +63,15 @@
 "url": "https://audi.oempartsonline.com/v-2007-audi-a3--base--2-0l-l4-gas"
 },
 {
+"year": 2007,
+"make": "Audi",
+"model": "A3 Quattro",
+"trim": "Base",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2007-audi-a3-quattro--base--3-2l-v6-gas"
+},
+{
 "year": 2008,
 "make": "Audi",
 "model": "A3",
@@ -72,6 +81,15 @@
 "url": "https://audi.oempartsonline.com/v-2008-audi-a3--base--2-0l-l4-gas"
 },
 {
+"year": 2008,
+"make": "Audi",
+"model": "A3 Quattro",
+"trim": "Base",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2008-audi-a3-quattro--base--3-2l-v6-gas"
+},
+{
 "year": 2009,
 "make": "Audi",
 "model": "A3",
@@ -79,6 +97,24 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2009-audi-a3--base--2-0l-l4-gas"
+},
+{
+"year": 2009,
+"make": "Audi",
+"model": "A3 Quattro",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2009-audi-a3-quattro--base--2-0l-l4-gas"
+},
+{
+"year": 2009,
+"make": "Audi",
+"model": "A3 Quattro",
+"trim": "Base",
+"engine": "3.2L V6 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2009-audi-a3-quattro--base--3-2l-v6-gas"
 },
 {
 "year": 2010,
@@ -97,6 +133,15 @@
 "engine": "2.0L L4 Diesel",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2010-audi-a3--tdi--2-0l-l4-diesel"
+},
+{
+"year": 2010,
+"make": "Audi",
+"model": "A3 Quattro",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2010-audi-a3-quattro--base--2-0l-l4-gas"
 },
 {
 "year": 2011,

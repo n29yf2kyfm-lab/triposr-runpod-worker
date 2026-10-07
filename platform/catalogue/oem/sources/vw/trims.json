@@ -18,6 +18,51 @@
 "url": "https://vw.oempartsonline.com/v-1995-volkswagen-eurovan--camper--2-5l-l5-gas"
 },
 {
+"year": 1995,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "Celebration Edition",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1995-volkswagen-golf--celebration-edition--2-0l-l4-gas"
+},
+{
+"year": 1995,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "City",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1995-volkswagen-golf--city--2-0l-l4-gas"
+},
+{
+"year": 1995,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GL",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1995-volkswagen-golf--gl--2-0l-l4-gas"
+},
+{
+"year": 1995,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GTI VR6",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1995-volkswagen-golf--gti-vr6--2-8l-v6-gas"
+},
+{
+"year": 1995,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "Sport",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1995-volkswagen-golf--sport--2-0l-l4-gas"
+},
+{
 "year": 1996,
 "make": "Volkswagen",
 "model": "Cabrio",
@@ -25,6 +70,33 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-1996-volkswagen-cabrio--base--2-0l-l4-gas"
+},
+{
+"year": 1996,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GL",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1996-volkswagen-golf--gl--2-0l-l4-gas"
+},
+{
+"year": 1996,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GTI",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1996-volkswagen-golf--gti--2-0l-l4-gas"
+},
+{
+"year": 1996,
+"make": "Volkswagen",
+"model": "Golf",
+"trim": "GTI VR6",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1996-volkswagen-golf--gti-vr6--2-8l-v6-gas"
 },
 {
 "year": 1997,
@@ -558,6 +630,24 @@
 "url": "https://vw.oempartsonline.com/v-2002-volkswagen-cabrio--glx--2-0l-l4-gas"
 },
 {
+"year": 2002,
+"make": "Volkswagen",
+"model": "EuroVan",
+"trim": "GLS",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2002-volkswagen-eurovan--gls--2-8l-v6-gas"
+},
+{
+"year": 2002,
+"make": "Volkswagen",
+"model": "EuroVan",
+"trim": "MV",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2002-volkswagen-eurovan--mv--2-8l-v6-gas"
+},
+{
 "year": 2003,
 "make": "Volkswagen",
 "model": "Beetle",
@@ -628,6 +718,24 @@
 "engine": "1.8L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2003-volkswagen-beetle--turbo-s--1-8l-l4-gas"
+},
+{
+"year": 2003,
+"make": "Volkswagen",
+"model": "EuroVan",
+"trim": "GLS",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2003-volkswagen-eurovan--gls--2-8l-v6-gas"
+},
+{
+"year": 2003,
+"make": "Volkswagen",
+"model": "EuroVan",
+"trim": "MV",
+"engine": "2.8L V6 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2003-volkswagen-eurovan--mv--2-8l-v6-gas"
 },
 {
 "year": 2004,
