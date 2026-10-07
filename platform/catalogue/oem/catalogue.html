@@ -49,6 +49,27 @@ button,input,select{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .wrap{max-width:1240px;margin:0 auto;padding:0 16px}
 
+/* cars view: brand > model cards > generation cards */
+.cbrands{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 14px}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:12px;margin-bottom:28px}
+.ccard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 10px 12px;cursor:pointer;text-align:center;display:grid;gap:6px;align-content:start;transition:border-color .15s,transform .15s}
+.ccard:hover{border-color:var(--accent)}
+.ccard[aria-expanded="true"]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.ccard .pic{aspect-ratio:3/2;border-radius:10px;background:#fff;display:grid;place-items:center;overflow:hidden}
+.ccard .pic img{width:100%;height:100%;object-fit:contain}
+.ccard .pic .none{color:#9AA4AE;font-size:12px}
+.ccard b{font:600 17px/1.2 var(--display);letter-spacing:.01em;text-transform:none}
+.ccard small{color:var(--muted);font:500 12px var(--mono);font-variant-numeric:tabular-nums}
+.cpanel{grid-column:1/-1;background:var(--sunk);border-radius:16px;padding:14px;display:grid;gap:12px}
+.cpanel .cgrid{margin:0}
+.cpanel h3{margin:0;font:600 20px var(--display)}
+.gen-detail{display:grid;gap:12px}
+.gen-detail img{width:100%;max-width:560px;border-radius:12px;background:#fff}
+.trims{display:grid;gap:4px;max-height:320px;overflow:auto;font-size:13px}
+.trims div{display:grid;grid-template-columns:52px 1fr;gap:10px;padding:6px 8px;background:var(--surface);border-radius:8px}
+.trims span:first-child{font:500 13px var(--mono);color:var(--muted)}
+.ai-note{font-size:12px;color:var(--muted)}
+
 /* masthead */
 header.top{background:var(--surface);border-bottom:1px solid var(--line)}
 .top .wrap{display:grid;gap:14px;padding-top:18px;padding-bottom:16px}
@@ -203,6 +224,7 @@ footer p{margin:0}
       </form>
     </div>
     <nav class="tabs" role="tablist">
+      <button role="tab" id="tab-cars" aria-selected="false" aria-controls="view-cars">Cars</button>
       <button role="tab" id="tab-parts" aria-selected="true" aria-controls="view-parts">Parts</button>
       <button role="tab" id="tab-torques" aria-selected="false" aria-controls="view-torques">Torques</button>
     </nav>
@@ -247,6 +269,11 @@ footer p{margin:0}
     </div>
   </section>
 
+  <section id="view-cars" role="tabpanel" aria-labelledby="tab-cars" hidden>
+    <div class="cbrands chips" id="cbrands"></div>
+    <div class="cgrid" id="cmodels"></div>
+    <p class="ai-note">Car pictures are AI illustrations, made from each generation's Wikipedia photo where one exists (the original is credited on Wikipedia). They show the kind of car, not a specific vehicle. Generations and years come from Wikipedia; trims come from the dealer catalogues.</p>
+  </section>
   <section id="view-torques" role="tabpanel" aria-labelledby="tab-torques" hidden>
     <div class="tq-layout">
       <div class="tq-bar">
@@ -424,6 +451,7 @@ function filtered(){
   let list = state.parts.filter(p => {
     if (state.sys.size && !state.sys.has(p.system)) return false;
     if (state.brand.size && !p.brands.some(b => state.brand.has(b))) return false;
+    if (state.genFit && !fitsGen(p, state.genFit.c, state.genFit.g)) return false;
     if (vf) { if (!fitsVin(p, vf)) return false; }
     else if (vset.size && !p.appears_on.some(a => vset.has(a.vehicle))) return false;
     if (!q) return true;
@@ -481,7 +509,7 @@ function card(p){
 
 function renderParts(){
   const list = filtered();
-  const any = state.q || state.veh.size || state.sys.size || state.brand.size || state.vinHits || state.vinFit;
+  const any = state.q || state.veh.size || state.sys.size || state.brand.size || state.genFit || state.vinHits || state.vinFit;
   $('#clear').hidden = !any;
   $('#count').innerHTML = `<b>${list.length}</b> of ${state.parts.length} OEM numbers`;
   $('#grid').innerHTML = list.length ? list.slice(0, state.shown).map(card).join('')
@@ -634,10 +662,73 @@ function renderTorques(){
 /* ---------- wiring ---------- */
 function toast(t){ const el = $('#toast'); el.textContent = t; el.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(() => el.hidden = true, 1600); }
 function tab(which){
-  const parts = which === 'parts';
-  $('#tab-parts').setAttribute('aria-selected', parts); $('#tab-torques').setAttribute('aria-selected', !parts);
-  $('#view-parts').hidden = !parts; $('#view-torques').hidden = parts;
-  if (!parts && !$('#tq-list').innerHTML) renderTorques();
+  for (const t of ['cars', 'parts', 'torques']) {
+    $('#tab-' + t).setAttribute('aria-selected', t === which);
+    $('#view-' + t).hidden = t !== which;
+  }
+  if (which === 'torques' && !$('#tq-list').innerHTML) renderTorques();
+  if (which === 'cars') renderCars();
+}
+
+/* ---- Cars: brand > model cards > generation cards > trims and parts ---- */
+const cars = {list: null, brand: 'Volkswagen', open: null};
+const carPic = (g, cls) => g && g.pic ? `<img src="${esc(g.pic)}" alt="" loading="lazy" decoding="async"${cls ? ` class="${cls}"` : ''}>` : '<span class="none">No picture yet</span>';
+const span = ys => ys[0] === ys[1] ? `(${ys[0]})` : `(${ys[0]} – ${ys[1] >= 2026 ? 'now' : ys[1]})`;
+async function renderCars(){
+  if (!cars.list) {
+    try { cars.list = await fetch('cars.json').then(r => r.json()); } catch (e) { $('#cmodels').innerHTML = '<p>The car list has not been published yet.</p>'; return; }
+  }
+  const brands = [...new Set(cars.list.map(c => c.brand))];
+  $('#cbrands').innerHTML = brands.map(b => `<button class="chip" data-cb="${esc(b)}" aria-pressed="${b === cars.brand}">${esc(b)} <span class="n">${cars.list.filter(c => c.brand === b).length}</span></button>`).join('');
+  const models = cars.list.filter(c => c.brand === cars.brand);
+  $('#cmodels').innerHTML = models.map((c, i) => {
+    const g = c.gens.find(x => x.pic) || c.gens[0];
+    const lo = Math.min(...c.gens.map(x => x.years[0])), hi = Math.max(...c.gens.map(x => x.years[1]));
+    return `<button class="ccard" data-cm="${i}" aria-expanded="false"><div class="pic">${carPic(g)}</div><b>${esc(c.model)}</b><small>${c.gens.length} generation${c.gens.length === 1 ? '' : 's'} · ${lo}–${hi >= 2026 ? 'now' : hi}</small></button>`;
+  }).join('');
+  cars.models = models;
+}
+function openModel(card){
+  const grid = $('#cmodels'), old = grid.querySelector('.cpanel');
+  const was = card.getAttribute('aria-expanded') === 'true';
+  if (old) old.remove();
+  grid.querySelectorAll('.ccard').forEach(c => c.setAttribute('aria-expanded', 'false'));
+  if (was) return;
+  const c = cars.models[+card.dataset.cm];
+  card.setAttribute('aria-expanded', 'true');
+  // the panel goes after the last card on the clicked card's row, like a drawer
+  const cardsInGrid = [...grid.querySelectorAll('.ccard')];
+  let last = card;
+  for (const x of cardsInGrid) if (x.offsetTop === card.offsetTop) last = x;
+  const panel = document.createElement('div');
+  panel.className = 'cpanel';
+  panel.innerHTML = `<h3>${esc(c.brand)} ${esc(c.model)}</h3><div class="cgrid">${c.gens.map((g, j) =>
+    `<button class="ccard" data-cg="${j}"><div class="pic">${carPic(g)}</div><b>${esc(g.name)}${g.code ? ` <span style="color:var(--muted)">(${esc(g.code)})</span>` : ''}</b><small>${span(g.years)}</small></button>`).join('')}</div><div class="gen-detail" id="gendetail"></div>`;
+  panel.dataset.model = card.dataset.cm;
+  last.after(panel);
+}
+function openGen(btn){
+  const panel = btn.closest('.cpanel'), c = cars.models[+panel.dataset.model], g = c.gens[+btn.dataset.cg];
+  const trims = g.trims.length
+    ? `<div class="trims">${g.trims.map(([y, t, e]) => `<div><span>${y}</span><span>${esc(t)}${e ? ' · ' + esc(e) : ''}</span></div>`).join('')}</div>`
+    : '<p class="ai-note">No trims for this generation in the dealer catalogues yet (they list the US market; other markets are still being added).</p>';
+  const n = state.parts.filter(p => fitsGen(p, c, g)).length;
+  panel.querySelector('#gendetail').innerHTML = `${g.pic ? carPic(g) : ''}
+    <div><b style="font:600 22px var(--display)">${esc(g.name)}</b> <span style="color:var(--muted)">${span(g.years)}${g.body ? ' · ' + esc(g.body) : ''}</span></div>
+    <button class="linkbtn" data-genparts="1" style="justify-self:start">Show ${n.toLocaleString()} part${n === 1 ? '' : 's'} listed for this generation</button>
+    <h4 style="margin:4px 0 0">Trims and engines</h4>${trims}
+    <p class="ai-note">${g.method === 'text-only' ? 'AI illustration drawn from the model name.' : g.pic ? 'AI illustration made from the Wikipedia photo of this generation.' : ''} Source: Wikipedia, “${esc(g.source)}”.</p>`;
+  cars.open = {c, g};
+  panel.querySelector('#gendetail').scrollIntoView({block: 'nearest', behavior: 'smooth'});
+}
+/* a part fits a generation when one of its fitment rows names that model
+   (VW rows bare, "Golf GTI"; other brands with the make, "Audi A4 allroad")
+   in a year inside the generation's production span */
+function fitsGen(p, c, g){
+  const base = (c.brand === 'Volkswagen' ? c.model : `${c.brand} ${c.model}`).toLowerCase();
+  const [lo, hi] = g.years;
+  if (p.fits && p.fits.some(([m, a, b]) => { m = m.toLowerCase(); return (m === base || m.startsWith(base + ' ')) && a <= hi && b >= lo; })) return true;
+  return p.appears_on.some(a => { const v = state.vmap[a.vehicle]; return v && v.make === c.brand && v.model.toLowerCase().startsWith(c.model.toLowerCase()) && v.year >= lo && v.year <= hi; });
 }
 
 /* OEM display, as parse_revolution.vw_display (VW/Audi/SEAT/Skoda 3-3-3-suffix), plus Porsche's
@@ -700,6 +791,10 @@ async function load(){
 document.addEventListener('click', e => {
   const t = e.target;
   const vb = t.closest('.vbtn'); if (vb) { const s = vb.dataset.v; state.veh.has(s) ? state.veh.delete(s) : state.veh.add(s); state.vinHits = null; state.vinFit = null; state.shown = PAGE; renderFilters(); renderParts(); return; }
+  const cb = t.closest('.chip[data-cb]'); if (cb) { cars.brand = cb.dataset.cb; renderCars(); return; }
+  const cg = t.closest('.ccard[data-cg]'); if (cg) { openGen(cg); return; }
+  const cm = t.closest('.ccard[data-cm]'); if (cm) { openModel(cm); return; }
+  if (t.closest('[data-genparts]') && cars.open) { state.genFit = cars.open; state.shown = PAGE; renderParts(); tab('parts'); toast(`Showing parts for ${cars.open.g.name} ${span(cars.open.g.years)}`); return; }
   const bb = t.closest('.chip[data-b]'); if (bb) { const b = bb.dataset.b; state.brand.has(b) ? state.brand.delete(b) : state.brand.add(b); state.shown = PAGE; renderFilters(); renderParts(); return; }
   const ch = t.closest('.chip[data-s]'); if (ch) { const s = ch.dataset.s; state.sys.has(s) ? state.sys.delete(s) : state.sys.add(s); state.shown = PAGE; renderFilters(); renderParts(); return; }
   const nr = t.closest('.chip[data-near]'); if (nr) { state.veh = new Set([nr.dataset.near]); state.vinHits = null; state.vinFit = null; state.shown = PAGE; renderFilters(); renderParts(); tab('parts'); return; }
@@ -712,10 +807,11 @@ $('#dlg').addEventListener('click', e => { if (e.target === $('#dlg')) $('#dlg')
 $('#q').addEventListener('input', e => { state.q = e.target.value; state.shown = PAGE; renderParts(); });
 $('#sort').addEventListener('change', e => { state.sort = e.target.value; renderParts(); });
 $('#more').addEventListener('click', () => { state.shown += PAGE; renderParts(); });
-$('#clear').addEventListener('click', () => { state.q = ''; $('#q').value = ''; state.veh.clear(); state.sys.clear(); state.brand.clear(); state.vinHits = null; state.vinFit = null; $('#vinbox').hidden = true; $('#vin').value = ''; state.shown = PAGE; renderFilters(); renderParts(); });
+$('#clear').addEventListener('click', () => { state.q = ''; $('#q').value = ''; state.veh.clear(); state.sys.clear(); state.brand.clear(); state.genFit = null; state.vinHits = null; state.vinFit = null; $('#vinbox').hidden = true; $('#vin').value = ''; state.shown = PAGE; renderFilters(); renderParts(); });
 $('#vinform').addEventListener('submit', e => { e.preventDefault(); showVin(decodeVin($('#vin').value)); tab('parts'); });
 $('#tab-parts').addEventListener('click', () => tab('parts'));
 $('#tab-torques').addEventListener('click', () => tab('torques'));
+$('#tab-cars').addEventListener('click', () => tab('cars'));
 let tqT; $('#tq-q').addEventListener('input', () => { clearTimeout(tqT); tqT = setTimeout(renderTorques, 150); });
 $('#tq-all').addEventListener('change', renderTorques);
 /* CSV of the parts currently listed — offered only where the viewer allows downloads */
