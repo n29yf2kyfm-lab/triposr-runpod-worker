@@ -3224,6 +3224,15 @@
 {
 "year": 2019,
 "make": "Volkswagen",
+"model": "Golf R",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2019-volkswagen-golf-r--base--2-0l-l4-gas"
+},
+{
+"year": 2019,
+"make": "Volkswagen",
 "model": "e-Golf",
 "trim": "SE BATTERY EV (EV/BEV)",
 "engine": "",
@@ -3852,6 +3861,15 @@
 "url": "https://vw.oempartsonline.com/v-2022-volkswagen-atlas-cross-sport--sel-r-line--3-6l-v6-gas"
 },
 {
+"year": 2022,
+"make": "Volkswagen",
+"model": "Golf R",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2022-volkswagen-golf-r--base--2-0l-l4-gas"
+},
+{
 "year": 2023,
 "make": "Volkswagen",
 "model": "Arteon",
@@ -3996,6 +4014,24 @@
 "url": "https://vw.oempartsonline.com/v-2023-volkswagen-atlas-cross-sport--sel-r-line-black--3-6l-v6-gas"
 },
 {
+"year": 2023,
+"make": "Volkswagen",
+"model": "Golf R",
+"trim": "20th Anniversary Edition",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2023-volkswagen-golf-r--20th-anniversary-edition--2-0l-l4-gas"
+},
+{
+"year": 2023,
+"make": "Volkswagen",
+"model": "Golf R",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2023-volkswagen-golf-r--base--2-0l-l4-gas"
+},
+{
 "year": 2024,
 "make": "Volkswagen",
 "model": "Atlas",
@@ -4075,6 +4111,15 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2024-volkswagen-atlas-cross-sport--sel-r-line--2-0l-l4-gas"
+},
+{
+"year": 2024,
+"make": "Volkswagen",
+"model": "Golf R",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2024-volkswagen-golf-r--base--2-0l-l4-gas"
 },
 {
 "year": 2025,

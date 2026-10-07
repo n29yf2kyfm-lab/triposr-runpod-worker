@@ -486,6 +486,15 @@
 "url": "https://audi.oempartsonline.com/v-2010-audi-a3-quattro--base--2-0l-l4-gas"
 },
 {
+"year": 2010,
+"make": "Audi",
+"model": "A4",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2010-audi-a4--base--2-0l-l4-gas"
+},
+{
 "year": 2011,
 "make": "Audi",
 "model": "A3",
@@ -513,6 +522,15 @@
 "url": "https://audi.oempartsonline.com/v-2011-audi-a3-quattro--base--2-0l-l4-gas"
 },
 {
+"year": 2011,
+"make": "Audi",
+"model": "A4",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2011-audi-a4--base--2-0l-l4-gas"
+},
+{
 "year": 2012,
 "make": "Audi",
 "model": "A3",
@@ -538,6 +556,15 @@
 "engine": "2.0L L4 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2012-audi-a3-quattro--base--2-0l-l4-gas"
+},
+{
+"year": 2012,
+"make": "Audi",
+"model": "A4",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2012-audi-a4--base--2-0l-l4-gas"
 },
 {
 "year": 2013,
