@@ -441,6 +441,76 @@
 "vanagon": "Vanagon"
 },
 "years": {
+"v-1998-volkswagen-beetle": [
+[
+"Base 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-1998-volkswagen-beetle--base--2-0l-l4-gas"
+],
+[
+"TDI 1.9L L4 - Diesel",
+"https://vw.oempartsonline.com/v-1998-volkswagen-beetle--tdi--1-9l-l4-diesel"
+]
+],
+"v-1999-volkswagen-beetle": [
+[
+"GL 1.8L L4 - Gas",
+"https://vw.oempartsonline.com/v-1999-volkswagen-beetle--gl--1-8l-l4-gas"
+],
+[
+"GL 1.9L L4 - Diesel",
+"https://vw.oempartsonline.com/v-1999-volkswagen-beetle--gl--1-9l-l4-diesel"
+],
+[
+"GL 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-1999-volkswagen-beetle--gl--2-0l-l4-gas"
+],
+[
+"GLS 1.8L L4 - Gas",
+"https://vw.oempartsonline.com/v-1999-volkswagen-beetle--gls--1-8l-l4-gas"
+],
+[
+"GLS 1.9L L4 - Diesel",
+"https://vw.oempartsonline.com/v-1999-volkswagen-beetle--gls--1-9l-l4-diesel"
+],
+[
+"GLS 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-1999-volkswagen-beetle--gls--2-0l-l4-gas"
+],
+[
+"GLX 1.8L L4 - Gas",
+"https://vw.oempartsonline.com/v-1999-volkswagen-beetle--glx--1-8l-l4-gas"
+]
+],
+"v-2000-volkswagen-beetle": [
+[
+"GL 1.8L L4 - Gas",
+"https://vw.oempartsonline.com/v-2000-volkswagen-beetle--gl--1-8l-l4-gas"
+],
+[
+"GL 1.9L L4 - Diesel",
+"https://vw.oempartsonline.com/v-2000-volkswagen-beetle--gl--1-9l-l4-diesel"
+],
+[
+"GL 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2000-volkswagen-beetle--gl--2-0l-l4-gas"
+],
+[
+"GLS 1.8L L4 - Gas",
+"https://vw.oempartsonline.com/v-2000-volkswagen-beetle--gls--1-8l-l4-gas"
+],
+[
+"GLS 1.9L L4 - Diesel",
+"https://vw.oempartsonline.com/v-2000-volkswagen-beetle--gls--1-9l-l4-diesel"
+],
+[
+"GLS 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2000-volkswagen-beetle--gls--2-0l-l4-gas"
+],
+[
+"GLX 1.8L L4 - Gas",
+"https://vw.oempartsonline.com/v-2000-volkswagen-beetle--glx--1-8l-l4-gas"
+]
+],
 "v-2018-volkswagen-atlas": [
 [
 "Launch Edition 3.6L V6 - Gas",
@@ -901,6 +971,24 @@
 "https://vw.oempartsonline.com/v-2024-volkswagen-atlas--sel-premium-r-line--2-0l-l4-gas"
 ]
 ],
+"v-2024-volkswagen-atlas-cross-sport": [
+[
+"SE 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2024-volkswagen-atlas-cross-sport--se--2-0l-l4-gas"
+],
+[
+"SEL 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2024-volkswagen-atlas-cross-sport--sel--2-0l-l4-gas"
+],
+[
+"SEL Premium R-Line 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2024-volkswagen-atlas-cross-sport--sel-premium-r-line--2-0l-l4-gas"
+],
+[
+"SEL R-Line 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2024-volkswagen-atlas-cross-sport--sel-r-line--2-0l-l4-gas"
+]
+],
 "v-2025-volkswagen-atlas": [
 [
 "Peak Edition SE 2.0L L4 - Gas",
@@ -919,6 +1007,28 @@
 "https://vw.oempartsonline.com/v-2025-volkswagen-atlas--sel-premium-r-line--2-0l-l4-gas"
 ]
 ],
+"v-2025-volkswagen-atlas-cross-sport": [
+[
+"SE 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2025-volkswagen-atlas-cross-sport--se--2-0l-l4-gas"
+],
+[
+"SEL 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2025-volkswagen-atlas-cross-sport--sel--2-0l-l4-gas"
+],
+[
+"SEL Premium R-Line 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2025-volkswagen-atlas-cross-sport--sel-premium-r-line--2-0l-l4-gas"
+],
+[
+"SEL R-Line 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2025-volkswagen-atlas-cross-sport--sel-r-line--2-0l-l4-gas"
+],
+[
+"SEL R-Line Black 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2025-volkswagen-atlas-cross-sport--sel-r-line-black--2-0l-l4-gas"
+]
+],
 "v-2026-volkswagen-atlas": [
 [
 "Peak Edition SE 2.0L L4 - Gas",
@@ -935,6 +1045,24 @@
 [
 "SEL Premium R-Line 2.0L L4 - Gas",
 "https://vw.oempartsonline.com/v-2026-volkswagen-atlas--sel-premium-r-line--2-0l-l4-gas"
+]
+],
+"v-2026-volkswagen-atlas-cross-sport": [
+[
+"SE 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2026-volkswagen-atlas-cross-sport--se--2-0l-l4-gas"
+],
+[
+"SEL 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2026-volkswagen-atlas-cross-sport--sel--2-0l-l4-gas"
+],
+[
+"SEL Premium R-Line 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2026-volkswagen-atlas-cross-sport--sel-premium-r-line--2-0l-l4-gas"
+],
+[
+"SEL R-Line Black 2.0L L4 - Gas",
+"https://vw.oempartsonline.com/v-2026-volkswagen-atlas-cross-sport--sel-r-line-black--2-0l-l4-gas"
 ]
 ]
 }
