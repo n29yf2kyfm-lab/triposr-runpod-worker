@@ -117,6 +117,33 @@
 "url": "https://porsche.oempartsonline.com/v-2019-porsche-718-boxster--s--2-5l-h4-gas"
 },
 {
+"year": 2019,
+"make": "Porsche",
+"model": "718 Cayman",
+"trim": "Base",
+"engine": "2.0L H4 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2019-porsche-718-cayman--base--2-0l-h4-gas"
+},
+{
+"year": 2019,
+"make": "Porsche",
+"model": "718 Cayman",
+"trim": "GTS",
+"engine": "2.5L H4 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2019-porsche-718-cayman--gts--2-5l-h4-gas"
+},
+{
+"year": 2019,
+"make": "Porsche",
+"model": "718 Cayman",
+"trim": "S",
+"engine": "2.5L H4 Gas",
+"market": "US",
+"url": "https://porsche.oempartsonline.com/v-2019-porsche-718-cayman--s--2-5l-h4-gas"
+},
+{
 "year": 2020,
 "make": "Porsche",
 "model": "718 Boxster",

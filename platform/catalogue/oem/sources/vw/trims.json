@@ -18,6 +18,24 @@
 "url": "https://vw.oempartsonline.com/v-1996-volkswagen-cabrio--base--2-0l-l4-gas"
 },
 {
+"year": 1997,
+"make": "Volkswagen",
+"model": "Cabrio",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1997-volkswagen-cabrio--base--2-0l-l4-gas"
+},
+{
+"year": 1997,
+"make": "Volkswagen",
+"model": "Cabrio",
+"trim": "High Line",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1997-volkswagen-cabrio--high-line--2-0l-l4-gas"
+},
+{
 "year": 1998,
 "make": "Volkswagen",
 "model": "Beetle",
@@ -34,6 +52,33 @@
 "engine": "1.9L L4 Diesel",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-1998-volkswagen-beetle--tdi--1-9l-l4-diesel"
+},
+{
+"year": 1998,
+"make": "Volkswagen",
+"model": "Cabrio",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1998-volkswagen-cabrio--base--2-0l-l4-gas"
+},
+{
+"year": 1998,
+"make": "Volkswagen",
+"model": "Cabrio",
+"trim": "GL",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1998-volkswagen-cabrio--gl--2-0l-l4-gas"
+},
+{
+"year": 1998,
+"make": "Volkswagen",
+"model": "Cabrio",
+"trim": "GLS",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-1998-volkswagen-cabrio--gls--2-0l-l4-gas"
 },
 {
 "year": 1999,
