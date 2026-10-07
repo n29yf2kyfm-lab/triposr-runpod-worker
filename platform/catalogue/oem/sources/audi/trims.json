@@ -198,6 +198,24 @@
 "url": "https://audi.oempartsonline.com/v-1997-audi-a6-quattro--base--2-8l-v6-gas"
 },
 {
+"year": 1997,
+"make": "Audi",
+"model": "A8",
+"trim": "Base",
+"engine": "3.7L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-1997-audi-a8--base--3-7l-v8-gas"
+},
+{
+"year": 1997,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-1997-audi-a8-quattro--base--4-2l-v8-gas"
+},
+{
 "year": 1998,
 "make": "Audi",
 "model": "A4",
@@ -279,6 +297,24 @@
 "url": "https://audi.oempartsonline.com/v-1998-audi-a6-quattro--base--2-8l-v6-gas"
 },
 {
+"year": 1998,
+"make": "Audi",
+"model": "A8",
+"trim": "Base",
+"engine": "3.7L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-1998-audi-a8--base--3-7l-v8-gas"
+},
+{
+"year": 1998,
+"make": "Audi",
+"model": "A8 Quattro",
+"trim": "Base",
+"engine": "4.2L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-1998-audi-a8-quattro--base--4-2l-v8-gas"
+},
+{
 "year": 1999,
 "make": "Audi",
 "model": "A4",
@@ -358,6 +394,15 @@
 "engine": "2.8L V6 Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-1999-audi-a6-quattro--base--2-8l-v6-gas"
+},
+{
+"year": 1999,
+"make": "Audi",
+"model": "A8",
+"trim": "Base",
+"engine": "3.7L V8 Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-1999-audi-a8--base--3-7l-v8-gas"
 },
 {
 "year": 2000,
@@ -4284,6 +4329,51 @@
 "url": "https://audi.oempartsonline.com/v-2021-audi-a6-allroad--prestige--3-0l-v6-electric-gas"
 },
 {
+"year": 2021,
+"make": "Audi",
+"model": "A7 Sportback",
+"trim": "Premium",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2021-audi-a7-sportback--premium--3-0l-v6-electric-gas"
+},
+{
+"year": 2021,
+"make": "Audi",
+"model": "A7 Sportback",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2021-audi-a7-sportback--premium-plus--2-0l-l4-electric-gas"
+},
+{
+"year": 2021,
+"make": "Audi",
+"model": "A7 Sportback",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2021-audi-a7-sportback--premium-plus--3-0l-v6-electric-gas"
+},
+{
+"year": 2021,
+"make": "Audi",
+"model": "A7 Sportback",
+"trim": "Prestige",
+"engine": "2.0L L4 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2021-audi-a7-sportback--prestige--2-0l-l4-electric-gas"
+},
+{
+"year": 2021,
+"make": "Audi",
+"model": "A7 Sportback",
+"trim": "Prestige",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2021-audi-a7-sportback--prestige--3-0l-v6-electric-gas"
+},
+{
 "year": 2022,
 "make": "Audi",
 "model": "A3",
@@ -4509,6 +4599,51 @@
 "url": "https://audi.oempartsonline.com/v-2022-audi-a6-allroad--prestige--3-0l-v6-electric-gas"
 },
 {
+"year": 2022,
+"make": "Audi",
+"model": "A7 Sportback",
+"trim": "Premium",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2022-audi-a7-sportback--premium--3-0l-v6-electric-gas"
+},
+{
+"year": 2022,
+"make": "Audi",
+"model": "A7 Sportback",
+"trim": "Premium Plus",
+"engine": "2.0L L4 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2022-audi-a7-sportback--premium-plus--2-0l-l4-electric-gas"
+},
+{
+"year": 2022,
+"make": "Audi",
+"model": "A7 Sportback",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2022-audi-a7-sportback--premium-plus--3-0l-v6-electric-gas"
+},
+{
+"year": 2022,
+"make": "Audi",
+"model": "A7 Sportback",
+"trim": "Prestige",
+"engine": "2.0L L4 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2022-audi-a7-sportback--prestige--2-0l-l4-electric-gas"
+},
+{
+"year": 2022,
+"make": "Audi",
+"model": "A7 Sportback",
+"trim": "Prestige",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2022-audi-a7-sportback--prestige--3-0l-v6-electric-gas"
+},
+{
 "year": 2023,
 "make": "Audi",
 "model": "A3",
@@ -4716,6 +4851,33 @@
 "url": "https://audi.oempartsonline.com/v-2023-audi-a6-allroad--prestige--3-0l-v6-electric-gas"
 },
 {
+"year": 2023,
+"make": "Audi",
+"model": "A7 Sportback",
+"trim": "Premium",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2023-audi-a7-sportback--premium--3-0l-v6-electric-gas"
+},
+{
+"year": 2023,
+"make": "Audi",
+"model": "A7 Sportback",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2023-audi-a7-sportback--premium-plus--3-0l-v6-electric-gas"
+},
+{
+"year": 2023,
+"make": "Audi",
+"model": "A7 Sportback",
+"trim": "Prestige",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2023-audi-a7-sportback--prestige--3-0l-v6-electric-gas"
+},
+{
 "year": 2024,
 "make": "Audi",
 "model": "A3",
@@ -4921,6 +5083,33 @@
 "engine": "3.0L V6 Electric/Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2024-audi-a6-allroad--prestige--3-0l-v6-electric-gas"
+},
+{
+"year": 2024,
+"make": "Audi",
+"model": "A7 Sportback",
+"trim": "Premium",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2024-audi-a7-sportback--premium--3-0l-v6-electric-gas"
+},
+{
+"year": 2024,
+"make": "Audi",
+"model": "A7 Sportback",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2024-audi-a7-sportback--premium-plus--3-0l-v6-electric-gas"
+},
+{
+"year": 2024,
+"make": "Audi",
+"model": "A7 Sportback",
+"trim": "Prestige",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2024-audi-a7-sportback--prestige--3-0l-v6-electric-gas"
 },
 {
 "year": 2025,
@@ -5155,6 +5344,33 @@
 "engine": "3.0L V6 Electric/Gas",
 "market": "US",
 "url": "https://audi.oempartsonline.com/v-2025-audi-a6-allroad--prestige--3-0l-v6-electric-gas"
+},
+{
+"year": 2025,
+"make": "Audi",
+"model": "A7 Sportback",
+"trim": "Premium",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2025-audi-a7-sportback--premium--3-0l-v6-electric-gas"
+},
+{
+"year": 2025,
+"make": "Audi",
+"model": "A7 Sportback",
+"trim": "Premium Plus",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2025-audi-a7-sportback--premium-plus--3-0l-v6-electric-gas"
+},
+{
+"year": 2025,
+"make": "Audi",
+"model": "A7 Sportback",
+"trim": "Prestige",
+"engine": "3.0L V6 Electric/Gas",
+"market": "US",
+"url": "https://audi.oempartsonline.com/v-2025-audi-a7-sportback--prestige--3-0l-v6-electric-gas"
 },
 {
 "year": 2026,
