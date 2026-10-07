@@ -1872,6 +1872,15 @@
 "url": "https://vw.oempartsonline.com/v-2012-volkswagen-golf--tdi--2-0l-l4-diesel"
 },
 {
+"year": 2012,
+"make": "Volkswagen",
+"model": "Golf R",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2012-volkswagen-golf-r--base--2-0l-l4-gas"
+},
+{
 "year": 2013,
 "make": "Volkswagen",
 "model": "Beetle",
@@ -2023,6 +2032,15 @@
 "engine": "2.0L L4 Diesel",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2013-volkswagen-golf--tdi--2-0l-l4-diesel"
+},
+{
+"year": 2013,
+"make": "Volkswagen",
+"model": "Golf R",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2013-volkswagen-golf-r--base--2-0l-l4-gas"
 },
 {
 "year": 2014,
@@ -2320,6 +2338,15 @@
 "engine": "2.0L L4 Diesel",
 "market": "US",
 "url": "https://vw.oempartsonline.com/v-2015-volkswagen-golf--tdi-sel--2-0l-l4-diesel"
+},
+{
+"year": 2015,
+"make": "Volkswagen",
+"model": "Golf R",
+"trim": "Base",
+"engine": "2.0L L4 Gas",
+"market": "US",
+"url": "https://vw.oempartsonline.com/v-2015-volkswagen-golf-r--base--2-0l-l4-gas"
 },
 {
 "year": 2015,
