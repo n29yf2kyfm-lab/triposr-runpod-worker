@@ -1,0 +1,91 @@
+{
+ "page": "https://vw.oempartsonline.com/v-1997-volkswagen-passat--glx--2-8l-v6-gas/engine--valve-train-components",
+ "title": "Valve Train Components for 1997 Volkswagen Passat",
+ "diagrams": [],
+ "parts": [
+  {
+   "oem": "021109509C",
+   "oem_display": "021 109 509 C",
+   "oem_from": "printed",
+   "name": "Engine Timing Chain Tensioner",
+   "label": "Guide. Cam Chain. Vendor:sachs. From Chassis/VIN 217 001.",
+   "callout": null,
+   "diagram": null,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-engine-timing-chain-tensioner-21109509c)",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-timing-chain-tensioner-21109509c"
+  },
+  {
+   "oem": "021109467",
+   "oem_display": "021 109 467",
+   "oem_from": "printed",
+   "name": "Engine Timing Chain Tensioner",
+   "label": "Engine Timing Chain Tensioner",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 89.18,
+   "msrp_usd": 131.64,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-timing-chain-tensioner-21109467"
+  },
+  {
+   "oem": "021109469",
+   "oem_display": "021 109 469",
+   "oem_from": "printed",
+   "name": "Chain Guide",
+   "label": "Engine Timing Chain Guide, Lower",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 22.68,
+   "msrp_usd": 37.18,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-chain-guide-21109469"
+  },
+  {
+   "oem": "021109569",
+   "oem_display": "021 109 569",
+   "oem_from": "printed",
+   "name": "Engine Timing Sprocket",
+   "label": "Jetta. Inner. EuroVan. Golf, GTI. Touareg. Intermediate shaft. 3.2l. R32.",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 159.68,
+   "msrp_usd": 239.98,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-timing-sprocket-21109569"
+  },
+  {
+   "oem": "03H109465A",
+   "oem_display": "03H 109 465 A",
+   "oem_from": "printed",
+   "name": "Timing Chain",
+   "label": "Engine Timing Chain",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 175.21,
+   "msrp_usd": 263.32,
+   "notes": "R32. Crank to intermed. shaft.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-timing-chain-3h109465a"
+  },
+  {
+   "oem": "066109570",
+   "oem_display": "066 109 570",
+   "oem_from": "printed",
+   "name": "Engine Timing Sprocket",
+   "label": "CC. Jetta. Outer. GTI. EuroVan. Touareg. Intermediate shaft. 3.2l. Crankshaft gear. From Chassis/VIN 217 001. R32.",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 58.7,
+   "msrp_usd": 86.65,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-timing-sprocket-66109570"
+  }
+ ]
+}

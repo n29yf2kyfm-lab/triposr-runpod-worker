@@ -88,6 +88,14 @@ def main():
         for v in GAP:
             # electric cars have no combustion engine, fuel or exhaust pages (410 Gone)
             ice = c.split('--')[0] in ('engine', 'fuel-system', 'exhaust', 'emission-system', 'ignition-system')
+            # a category gone (410) on two other cars of the same era is skipped for the rest
+            era = v[2:5]
+            gone_elsewhere = sum(1 for m in missing if m.endswith('/' + c) and m[2:5] == era and not m.startswith(v + '/'))
+            if gone_elsewhere >= 2:
+                continue
+            # four gone pages in one system on this car: the dealer has none of that system for it
+            if sum(1 for m in missing if m.startswith(v + '/' + c.split('--')[0] + '--')) >= 4:
+                continue
             if (v.endswith('--electric') and ice) or os.path.exists(os.path.join(HERE, 'pages', v, c + '.json')) or f'{v}/{c}' in missing:
                 continue
             todo.append(f'{SITE}/{v}/{c}')

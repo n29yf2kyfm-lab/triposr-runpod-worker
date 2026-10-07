@@ -1,0 +1,49 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2026-volkswagen-jetta--gli-autobahn--2-0l-l4-gas/engine--engine",
+ "title": "Engine for 2026 Volkswagen Jetta",
+ "diagrams": [],
+ "parts": [
+  {
+   "oem": "06K103171P",
+   "oem_display": "06K 103 171 P",
+   "oem_from": "printed",
+   "name": "Engine Crankshaft Seal",
+   "label": "Engine Crankshaft Seal, Rear",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 214.03,
+   "msrp_usd": 321.65,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-crankshaft-seal-6k103171p"
+  },
+  {
+   "oem": "06L103085B",
+   "oem_display": "06L 103 085 B",
+   "oem_from": "printed",
+   "name": "Engine Crankshaft Seal",
+   "label": "Engine Crankshaft Seal, Front",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 20.0,
+   "msrp_usd": 32.78,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-crankshaft-seal-6l103085b"
+  },
+  {
+   "oem": "06L103383B",
+   "oem_display": "06L 103 383 B",
+   "oem_from": "printed",
+   "name": "Head Gasket",
+   "label": "Engine Cylinder Head Gasket",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 9.98,
+   "msrp_usd": 16.36,
+   "notes": "Tiguan. GTI. Beetle. Jetta. Atlas Cross Sport. Passat. Golf Alltrack. From 09/11/2015.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-head-gasket-6l103383b"
+  }
+ ]
+}

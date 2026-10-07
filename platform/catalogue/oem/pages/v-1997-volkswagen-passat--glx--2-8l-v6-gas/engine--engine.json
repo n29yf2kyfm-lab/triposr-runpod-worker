@@ -1,0 +1,76 @@
+{
+ "page": "https://vw.oempartsonline.com/v-1997-volkswagen-passat--glx--2-8l-v6-gas/engine--engine",
+ "title": "Engine for 1997 Volkswagen Passat",
+ "diagrams": [
+  {
+   "n": 1,
+   "name": "Cylinder Head",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/63885fdc17e398d5bc5fc9590c6a5fee/9457084ba2ffc2bfeea747de76463e37.png",
+   "url": "https://vw.oempartsonline.com/v-1997-volkswagen-passat--glx--2-8l-v6-gas/engine--engine?assembly=1"
+  },
+  {
+   "n": 2,
+   "name": "Timing Chain",
+   "image": "https://cdn-illustrations.revolutionparts.io/strapr1/f22c8ec0f28e38d0769f32216f076cec/a28839cd5bf8b5914638c3bf4ff00649.png",
+   "url": "https://vw.oempartsonline.com/v-1997-volkswagen-passat--glx--2-8l-v6-gas/engine--engine?assembly=2"
+  }
+ ],
+ "parts": [
+  {
+   "oem": "021109611G",
+   "oem_display": "021 109 611 G",
+   "oem_from": "printed",
+   "name": "Exhaust Valve",
+   "label": "Jetta. EuroVan. GTI. Passat.",
+   "callout": 6,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-valve-21109611g) 21",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-exhaust-valve-21109611g"
+  },
+  {
+   "oem": "071107065C",
+   "oem_display": "071 107 065 C",
+   "oem_from": "printed",
+   "name": "Engine Piston",
+   "label": "Piston",
+   "callout": 21,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "Incl.Piston Pin and Piston Ring Set. Jetta. All models. EuroVan. GTI. Passat. [View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-engine-piston-71107065c) 22",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-piston-71107065c"
+  },
+  {
+   "oem": "022198401",
+   "oem_display": "022 198 401",
+   "oem_from": "printed",
+   "name": "Connecting Rod",
+   "label": "Complete Set. Jetta. EuroVan. All models. Golf, GTI. Passat. Touareg. 3.2l. Eos.",
+   "callout": 22,
+   "diagram": 1,
+   "price_usd": null,
+   "msrp_usd": null,
+   "notes": "[View Details](https://vw.oempartsonline.com/oem-parts/volkswagen-connecting-rod-22198401) 33",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-connecting-rod-22198401"
+  },
+  {
+   "oem": "021115279",
+   "oem_display": "021 115 279",
+   "oem_from": "printed",
+   "name": "Engine Oil Pump Drive Gear",
+   "label": "Shaft",
+   "callout": 33,
+   "diagram": 1,
+   "price_usd": 55.52,
+   "msrp_usd": 79.15,
+   "notes": "For Shaft. Jetta. All models. Golf, GTI. Passat.",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-oil-pump-drive-gear-21115279"
+  }
+ ]
+}

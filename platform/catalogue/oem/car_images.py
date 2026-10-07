@@ -48,7 +48,14 @@ def reference(row):
     import base64, urllib.parse
     if not row.get('image'):
         return None
-    u = 'https://commons.wikimedia.org/wiki/Special:FilePath/' + urllib.parse.quote(row['image'].replace(' ', '_')) + '?width=1024'
+    # Direct thumbnail URL on upload.wikimedia.org, built from Wikimedia's own
+    # path scheme (md5 of the file name), so no API or redirect call is spent
+    import hashlib
+    name = row['image'].strip().replace(' ', '_')
+    name = name[0].upper() + name[1:]
+    h = hashlib.md5(name.encode()).hexdigest()
+    q = urllib.parse.quote(name)
+    u = f'https://upload.wikimedia.org/wikipedia/commons/thumb/{h[0]}/{h[:2]}/{q}/960px-{q}' + ('.png' if name.lower().endswith('.svg') else '')
     for i in range(5):
         try:
             raw = urllib.request.urlopen(urllib.request.Request(u, headers=UA), timeout=60).read()

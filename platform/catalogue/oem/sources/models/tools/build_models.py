@@ -113,6 +113,40 @@ NAVBOX = {'Volkswagen': ['Template:Volkswagen', 'Template:Volkswagen (Europe) ti
           'Lamborghini': ['Template:Lamborghini', 'Template:Lamborghini road car timeline 1990 to date']}
 
 
+# Article titles to make sure of. The VW names are the owner's own checklist
+# (their 7zap screenshots, 2026-10-07); the rest are each brand's current and
+# recent lines. These are only titles to FETCH: a title Wikipedia does not
+# have yields nothing, and every row still comes from its article's infobox.
+SEED = {'Volkswagen': ['Volkswagen Crafter', 'Volkswagen Saveiro', 'Volkswagen Parati', 'Volkswagen Atlas Cross Sport',
+                       'Volkswagen Teramont', 'Volkswagen Suran', 'Volkswagen Ameo', 'Volkswagen Golf Mk1',
+                       'Volkswagen Golf Mk2', 'Volkswagen Golf Mk3', 'Volkswagen Golf Mk4', 'Volkswagen Golf Mk5',
+                       'Volkswagen Golf Mk6', 'Volkswagen Golf Mk7', 'Volkswagen Golf Mk8', 'Volkswagen Polo Mk4',
+                       'Volkswagen Polo Mk5', 'Volkswagen Polo Mk6', 'Volkswagen Passat (B5)', 'Volkswagen Passat (B6)',
+                       'Volkswagen Passat (B7)', 'Volkswagen Passat (B8)', 'Volkswagen Jetta (A4)', 'Volkswagen Jetta (A5)',
+                       'Volkswagen Jetta (A6)', 'Volkswagen Jetta (A7)', 'Volkswagen ID.5', 'Volkswagen ID. Buzz',
+                       'Volkswagen Transporter (T5)', 'Volkswagen Transporter (T6)', 'Volkswagen Transporter (T7)',
+                       'Volkswagen California', 'Volkswagen Caravelle', 'Volkswagen Golf Variant', 'Volkswagen Golf GTI',
+                       'Volkswagen Golf R', 'Volkswagen Beetle (A5)', 'Volkswagen Scirocco', 'Volkswagen Fox',
+                       'Volkswagen Nivus', 'Volkswagen T-Roc', 'Volkswagen Tiguan', 'Volkswagen Touareg'],
+        'Cupra': ['Cupra Born', 'Cupra León', 'Cupra Formentor', 'Cupra Ateca', 'Cupra Terramar', 'Cupra Raval',
+                  'Cupra Tavascan', 'SEAT León Cupra'],
+        'SEAT': ['SEAT Mii', 'SEAT Ateca', 'SEAT Arona', 'SEAT Tarraco', 'SEAT Leon', 'SEAT Ibiza', 'SEAT Toledo',
+                 'SEAT Altea', 'SEAT Alhambra', 'SEAT Exeo', 'SEAT Arosa', 'SEAT Córdoba', 'SEAT Inca'],
+        'Skoda': ['Škoda Citigo', 'Škoda Karoq', 'Škoda Kodiaq', 'Škoda Kamiq', 'Škoda Scala', 'Škoda Enyaq',
+                  'Škoda Elroq', 'Škoda Octavia', 'Škoda Superb', 'Škoda Fabia', 'Škoda Rapid', 'Škoda Roomster',
+                  'Škoda Yeti', 'Škoda Felicia', 'Škoda Kushaq', 'Škoda Slavia', 'Škoda Kylaq'],
+        'Porsche': ['Porsche 911', 'Porsche Boxster', 'Porsche Cayman', 'Porsche Cayenne', 'Porsche Macan',
+                    'Porsche Panamera', 'Porsche Taycan', 'Porsche 718'],
+        'Audi': ['Audi A1', 'Audi A3', 'Audi A4', 'Audi A5', 'Audi A6', 'Audi A7', 'Audi A8', 'Audi Q2', 'Audi Q3',
+                 'Audi Q4 e-tron', 'Audi Q5', 'Audi Q7', 'Audi Q8', 'Audi TT', 'Audi R8', 'Audi e-tron GT', 'Audi e-tron'],
+        'Bentley': ['Bentley Continental GT', 'Bentley Flying Spur', 'Bentley Bentayga', 'Bentley Mulsanne (2010)',
+                    'Bentley Arnage', 'Bentley Azure', 'Bentley Brooklands'],
+        'Lamborghini': ['Lamborghini Urus', 'Lamborghini Huracán', 'Lamborghini Aventador', 'Lamborghini Revuelto',
+                        'Lamborghini Temerario', 'Lamborghini Gallardo', 'Lamborghini Murciélago', 'Lamborghini Diablo']}
+# road-car lists only: racing, concept and record cars that carry a production line
+NOT_ROAD = re.compile(r'Porsche 963|Porsche 919|Volkswagen W12|Volkswagen 1-litre|Volkswagen XL1 concept|\bGT3 R\b|\bRSR\b', re.I)
+
+
 def navbox_articles(tpl):
     """Every article linked from a brand's navigation template."""
     out, cont = set(), ''
@@ -209,7 +243,10 @@ def tidy(rows):
     infobox when the same article also has per-generation ones inside its span."""
     out = []
     for r in rows:
-        if not re.search(r'[A-Z][a-z]+ [A-Z0-9]', r['generation']) or re.match(r'(first|second|third|fourth|fifth|sixth|seventh|eighth|ninth)\b', r['generation'], re.I):
+        base = r['wikipedia_title'].split(' (')[0]
+        if r['generation'].startswith(base):
+            out.append(r); continue      # already carries its model name (accents and all: "SEAT León Mk1")
+        if not re.search(r'[^\W\d_][^\W\d_]+ [A-Z0-9]', r['generation']) or re.match(r'(first|second|third|fourth|fifth|sixth|seventh|eighth|ninth)\b', r['generation'], re.I):
             r['generation'] = f"{r['wikipedia_title']} {r['generation']}" if r['generation'] != r['wikipedia_title'] else r['generation']
         out.append(r)
     keep = []
@@ -232,14 +269,15 @@ def main():
             titles |= category_articles(c)
         for t in NAVBOX.get(brand, []):
             titles |= {x for x in navbox_articles(t) if re.match(MAKES, x)}
-        titles = sorted(t for t in titles if not re.search(r'^List of|concept|prototype|race|rally|\(racing|engine$', t, re.I))
+        titles |= set(SEED.get(brand, []))
+        titles = sorted(t for t in titles if not NOT_ROAD.search(t) and not re.search(r'^List of|concept|prototype|race|rally|\(racing|engine$', t, re.I))
         print(f'{brand} ({qid}): {n} from Wikidata, {len(titles)} with the category tree', flush=True)
         texts = wikitext(titles)
         for title, text in texts.items():
             for box in infoboxes(text):
                 prod = clean(field(box, 'production'))
                 cls = clean(field(box, 'class'))
-                if re.search(r'concept|prototype|one-off|show car|race car|racing', prod + ' ' + cls, re.I):
+                if re.search(r'concept|prototype|one-off|show car|race car|racing|hypercar|le mans|gt3 cup', prod + ' ' + cls, re.I):
                     continue
                 if not re.match(MAKES, title) or re.search(r'platform|\d+Tr$|trolleybus|\btram\b', title, re.I):
                     continue      # not a road car: platforms, Škoda Transportation trolleybuses          # tuners and other makers filed in a brand category (9ff, Meyers Manx, Chrysler)
@@ -261,10 +299,24 @@ def main():
                              # the generation's own photo, from the same infobox (a Commons file name)
                              'image': re.sub(r'^(?:File|Image):', '', clean(field(box, 'image')).split(' px')[0]).strip(),
                              'wikipedia_title': title})
-        rows = tidy(rows)
-        json.dump(rows, open(os.path.join(HERE, 'models.json'), 'w'), indent=0, ensure_ascii=False)
+        # progress file (raw rows); the tidy pass runs ONCE, at the end: it renames
+        # generations, and running it per brand renamed earlier rows again and again
+        json.dump(rows, open(os.path.join(HERE, 'models.partial.json'), 'w'), indent=0, ensure_ascii=False)
         print(f'  -> {len(rows)} generations so far', flush=True)
-    print('MODELS', len(rows))
+    # dedupe BEFORE tidying: the same article collected under two brands (Crafter
+    # under VW and VW Commercial) made each copy look like a summary of the other,
+    # and the summary rule then dropped both
+    uniq, keys = [], set()
+    for r in rows:
+        k = (r['wikipedia_title'], r['generation'].lower(), tuple(r['years']))
+        if k not in keys:
+            keys.add(k); uniq.append(r)
+    uniq = tidy(uniq)
+    json.dump(uniq, open(os.path.join(HERE, 'models.json'), 'w'), indent=0, ensure_ascii=False)
+    pp = os.path.join(HERE, 'models.partial.json')
+    if os.path.exists(pp):
+        os.remove(pp)
+    print('MODELS', len(uniq))
 
 
 if __name__ == '__main__':

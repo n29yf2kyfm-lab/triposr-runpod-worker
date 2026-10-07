@@ -1,0 +1,35 @@
+{
+ "page": "https://vw.oempartsonline.com/v-2025-volkswagen-taos--sel--1-5l-l4-gas/engine--oil-pan",
+ "title": "Oil Pan for 2025 Volkswagen Taos",
+ "diagrams": [],
+ "parts": [
+  {
+   "oem": "04E115225J",
+   "oem_display": "04E 115 225 J",
+   "oem_from": "printed",
+   "name": "Engine Timing Chain",
+   "label": "Optional. Jetta. 1.5l. Taos. Oil Pump.",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 6.73,
+   "msrp_usd": 11.04,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-timing-chain-4e115225j"
+  },
+  {
+   "oem": "05C115121A",
+   "oem_display": "05C 115 121 A",
+   "oem_from": "printed",
+   "name": "Engine Timing Sprocket",
+   "label": "Oil Pump. Jetta. 1.5l.",
+   "callout": null,
+   "diagram": null,
+   "price_usd": 20.19,
+   "msrp_usd": 33.1,
+   "notes": "",
+   "fits": "",
+   "url": "https://vw.oempartsonline.com/oem-parts/volkswagen-engine-timing-sprocket-5c115121a"
+  }
+ ]
+}
