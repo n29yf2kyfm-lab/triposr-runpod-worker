@@ -13,7 +13,7 @@ import { buildEngineBayDetail } from './engine-bay-detail.js';
 import { buildInnerApron } from './engine-bay-shell.js';
 import { buildTransmission } from './transmission-detail.js';
 import { extractFrontBumper } from './front-bumper.js';
-import { buildHybrid, buildEngineStrip } from './hybrid-parts.js';
+import { buildHybrid, buildEngineStrip, buildDGEAExternals } from './hybrid-parts.js';
 import { TOOLS, SPEC, toolLabel, buildCarFasteners } from './jobs.js';
 
 /* Golf Mk8 eHybrid workshop. Built on the Golf Workshop's real Mk8 body
@@ -202,7 +202,10 @@ function buildBay(meas) {
   try { bayG.add(buildInnerApron(1, materialFactory), buildInnerApron(-1, materialFactory)); } catch (e) { /* dressing */ }
   bay.group.getObjectByName('bellhousing-starter-interface')?.removeFromParent();   // no starter on the eHybrid
   bayG.updateMatrixWorld(true);
+  // the bay's one-piece engine and its covers give way to the DGEA built in pieces
+  const REPLACED = ['engine-long-block', 'moulded-four-coil-valve-cover', 'four-coil-ignition-assembly', 'cosmetic-engine-cover-removable', 'intake-manifold', 'airbox-assembly', 'airbox-to-throttle-duct', 'engine-wiring-harness', 'accessory-drive', 'battery-positive-cable-to-starter'];
   for (const c of [...bay.group.children]) {
+    if (REPLACED.includes(c.name)) { c.removeFromParent(); continue; }
     const d = BAY_INFO[c.name] || [c.name.replace(/-/g, ' '), {}, [0, 0, 0]];
     bayG.attach(c);
     register({ id: c.name, name: d[0], sys: 'bay', obj: c, ex: V(...d[2]), ...info({ note: 'Constructed teaching geometry from the Golf Workshop bay, not OEM CAD.', ...d[1] }) });
@@ -228,7 +231,10 @@ function buildHybridParts() {
   const hy = buildHybrid(materialFactory);
   for (const p of hy.parts) { carRoot.add(p.obj); register({ ...p, ...info({ ...p, tags: p.tags }) }); }
   const st = buildEngineStrip(materialFactory, hy.M);
-  for (const p of st.parts) { carRoot.add(p.obj); register({ ...p, ...info({ ...p, tags: p.tags }), hidden: true }); }
+  for (const p of st.parts) { carRoot.add(p.obj); register({ ...p, ...info({ ...p, tags: p.tags }), hidden: false }); }
+  for (const p of buildDGEAExternals(materialFactory, hy.M).parts) { carRoot.add(p.obj); register({ ...p, ...info({ ...p, tags: p.tags }) }); }
+  byId.blk.note = 'Engine code DGEA on the Golf 8 / Leon Mk4 eHybrid (check the code label on the block). ' + byId.blk.note;
+  Object.assign(BLOCK, { dgea_intake: ['bolts_intake', 'dgea_airbox'], dgea_mount: ['bolts_mount'], dgea_coils: ['dgea_airbox'], dgea_turbo: ['dgea_airbox'] });
 }
 
 /* ───────── service procedure: engine out, strip, refit ───────── */
@@ -238,7 +244,7 @@ const TAG_HIDE = (tag, s) => parts.forEach(p => { if (has(p, tag)) s[p.id].h = t
 const STEPS = [
   { t: 'Car in the workshop', d: 'Everything fitted, bonnet up. Next takes the engine, hybrid module and gearbox out the way VW workshops do it on a transverse Golf: down and out from underneath, with the front end in its service position.', f: () => {} },
   { t: 'Make the high-voltage system safe', hv: true, d: 'Everything in orange carries high voltage. Before any work in the bay, the HV system is switched off and locked out, then the 12 V battery is disconnected.', f: () => {} },
-  { t: 'Bonnet, bumper and engine cover off', d: 'Remove the bonnet for access, take off the front bumper cover, then lift off the engine cover.', f: s => { TAG_MOVE('bonnet', V(0, 0.6, 0), s); TAG_HIDE('bonnet', s); TAG_MOVE('bumper', V(0, 0, 0.6), s); TAG_HIDE('bumper', s); TAG_MOVE('cover', V(0, 0.5, 0), s); TAG_HIDE('cover', s); } },
+  { t: 'Bonnet and bumper off', d: 'Remove the bonnet for access and take off the front bumper cover. The DGEA has no separate engine cover: the air box sits on top.', f: s => { TAG_MOVE('bonnet', V(0, 0.6, 0), s); TAG_HIDE('bonnet', s); TAG_MOVE('bumper', V(0, 0, 0.6), s); TAG_HIDE('bumper', s); TAG_MOVE('cover', V(0, 0.5, 0), s); TAG_HIDE('cover', s); } },
   { t: 'Air box, 12 V battery and coolant tank out', d: 'Drain the coolant. Remove the air filter box and intake duct, the 12 V battery with its cables, and the coolant expansion tank.', f: s => { for (const t of ['airbox', 'battery12', 'reservoir']) { TAG_MOVE(t, V(0, 0.5, 0), s); TAG_HIDE(t, s); } } },
   { t: 'Cooling pack to service position', d: 'Disconnect the radiator hoses. Pull the radiator and condenser pack forward on its carrier so the engine has room to drop.', f: s => { TAG_MOVE('hose', V(0, 0.3, 0.2), s); TAG_HIDE('hose', s); TAG_MOVE('coolpack', V(0, 0, 0.5), s); } },
   { t: 'Disconnect HV cables and exhaust', hv: true, d: 'With the system made safe, unplug the HV cable at the inverter. Split the downpipe from the turbocharger and drop the front of the exhaust.', f: s => { TAG_MOVE('hvcable', V(0, -0.06, 0), s); TAG_MOVE('exhaust', V(0, -0.12, 0), s); } },
@@ -246,7 +252,7 @@ const STEPS = [
   { t: 'Lower engine, hybrid module and gearbox', d: 'Support the assembly on an engine table, take out the pendulum support and the engine and gearbox mounts, and lower it out of the bay.', f: s => TAG_MOVE('pt', V(0, -0.78, 0), s) },
   { t: 'Roll it out', d: 'Roll the table forward, clear of the car.', f: s => TAG_MOVE('pt', V(0, 0, 2.0), s) },
   { t: 'Split engine from hybrid module and gearbox', d: 'Undo the twelve engine-to-module flange bolts, slide the engine off and mount it on an engine stand. Replace the module O-rings on refit.', f: s => TAG_MOVE('engine', V(0.55, 0.55, 0), s) },
-  { t: 'Strip the engine on the stand', strip: true, d: 'The intake manifold, coils, harness and auxiliary drive are set aside. Now take the engine down part by part: tap a part, then Remove. It will tell you what has to come off first. Or use Strip in order to watch the sequence. Renew every seal and every stretch bolt on rebuild; torque values come from erWin.', f: s => { parts.forEach(p => { if (has(p, 'longblock')) s[p.id].h = true; if (has(p, 'strip')) s[p.id].h = false; }); } },
+  { t: 'Strip the engine on the stand', strip: true, d: 'The turbo, intake manifold and intercooler, coils, filler cap, mount bracket, pulley, flywheel, electric pump and loom are set aside. Now take the engine down part by part: tap a part, then Remove. It will tell you what has to come off first. Or use Strip in order to watch the sequence. Renew every seal and every stretch bolt on rebuild; torque values come from erWin.', f: s => { parts.forEach(p => { if (has(p, 'longblock')) s[p.id].h = true; if (has(p, 'strip')) s[p.id].h = false; }); } },
 ];
 let step = 0, reversing = false, liftT = 0, liftY = 0;
 const LIFT = 0.95;
@@ -559,7 +565,7 @@ function tick() {
       b.visible = !(st === 'out' && b.userData.t > 0.045);
     }
     if (p.hinge) { p.ang += (p.angT - p.ang) * k; p.obj.rotation[p.hinge.axis] = p.ang; if (Math.abs(p.angT - p.ang) > 1e-4) moved = true; }
-    p.obj.position.copy(p.home).add(p.svc).add(p.rem).addScaledVector(p.ex, has(p, 'strip') || p.removed ? 0 : explode);
+    p.obj.position.copy(p.home).add(p.svc).add(p.rem).addScaledVector(p.ex, p.removed || (has(p, 'strip') && STEPS[step].strip) ? 0 : has(p, 'strip') ? explode * 0.6 : explode);
     const gone = p.hideT && p.svc.distanceTo(p.svcT) < 0.02;
     p.obj.visible = p.vis && !gone;
   }

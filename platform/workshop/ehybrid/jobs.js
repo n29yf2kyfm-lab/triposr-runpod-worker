@@ -42,6 +42,8 @@ export const SPEC = {
   bolts_head: { label: 'Cylinder head bolts', tool: 'p12', nm: null, renew: true, src: 'man', note: 'Renew (manual). Loosening and tightening sequence, torque and angle stages are in the manual figure, which is not in the extracted data.' },
   bolts_sump: { label: 'Lower sump bolts', tool: 's10', nm: 5, deg: 90, renew: true, src: 'man', note: 'Lower part of sump: 5 Nm + 90°, renew (' + MAN + ', sump and oil pump).' },
   bolts_main: { label: 'Main bearing bolts', tool: 'p12', nm: null, renew: true, src: 'est', note: 'Stretch bolts: renew. Torque and angle from erWin.' },
+  bolts_intake: { label: 'Intercooler cover bolts', tool: 's10', nm: null, src: 'est', note: 'Some intake-manifold bolts are thread-forming (7 Nm in the manual data for that item). The cover figure is in erWin.' },
+  bolts_mount: { label: 'Mount bracket bolts', tool: 's16', nm: 60, deg: 90, renew: true, src: 'man', note: 'Assembly mountings: 60 Nm + 90°, renew (' + MAN + ', 1.4 TSI assembly mountings; which bolt is which: check the figure).' },
   bolts_emotor: { label: 'Hybrid module to gearbox bolts', tool: 's16', nm: null, src: 'est', note: 'Value from erWin for the DQ400e.' },
   bolts_inverter: { label: 'Inverter bolts', tool: 's10', nm: null, src: 'est', note: 'Value from erWin.' },
   bolts_battery: { label: 'HV battery mounting bolts', tool: 's16', nm: null, src: 'est', note: 'Value from erWin. Battery lift table under the pack first.' },

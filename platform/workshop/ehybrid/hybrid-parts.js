@@ -486,3 +486,105 @@ export function buildEngineStrip(materialFactory, M) {
   }
   return { parts };
 }
+
+/* ═════════ DGEA externals: what you see on the engine in the car ═════════
+   Modelled from photographs of a removed DGEA (Golf 8 / Leon Mk4 eHybrid):
+   air box on top of the engine, intake manifold with built-in intercooler on
+   the back face, turbo and heat shield on the exhaust face, pencil coils,
+   yellow dipstick, mount bracket and crank pulley at the belt end, dual-mass
+   flywheel at the gearbox end. Shapes are estimates from the photos. */
+export function buildDGEAExternals(materialFactory, M) {
+  const bolt = makeBolts(M), parts = [];
+  const XC = -0.02, ZC = 1.545, CRANK = 0.37, DECK = 0.60, PITCH = 0.082;
+  const CX = [-1.5, -0.5, 0.5, 1.5].map(k => XC + k * PITCH);
+  const mesh = (geo, mat, p = [0, 0, 0], r = [0, 0, 0]) => { const o = new THREE.Mesh(geo, mat); o.position.set(...p); o.rotation.set(...r); o.castShadow = o.receiveShadow = true; return o; };
+  const cylX = (r, l, mat, p, seg = 40, r2 = r) => mesh(new THREE.CylinderGeometry(r, r2, l, seg), mat, p, [0, 0, Math.PI / 2]);
+  const cylY = (r, l, mat, p, seg = 28, r2 = r) => mesh(new THREE.CylinderGeometry(r, r2, l, seg), mat, p);
+  const cylZ = (r, l, mat, p, seg = 28, r2 = r) => mesh(new THREE.CylinderGeometry(r, r2, l, seg), mat, p, [Math.PI / 2, 0, 0]);
+  const torusX = (R, t, mat, p) => mesh(new THREE.TorusGeometry(R, t, 10, 56), mat, p, [0, Math.PI / 2, 0]);
+  const tube = (pts, r, mat, seg = 90) => mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts.map(p => V(...p))), seg, r, 14, false), mat);
+  const corrugated = (pts, r, mat) => { const g = new THREE.Group(), c = new THREE.CatmullRomCurve3(pts.map(p => V(...p)));
+    g.add(new THREE.Mesh(new THREE.TubeGeometry(c, 120, r * 0.93, 16, false), mat));
+    const L = c.getLength(), ring = new THREE.TorusGeometry(r, r * 0.09, 6, 20);
+    for (let s = 0.008; s < L - 0.004; s += 0.011) { const t = s / L, m = new THREE.Mesh(ring, mat); m.position.copy(c.getPointAt(t)); m.lookAt(m.position.clone().add(c.getTangentAt(t))); g.add(m); }
+    g.traverse(o => { if (o.isMesh) o.castShadow = true; }); return g; };
+  const yellow = materialFactory(0xf2c418, { roughness: .5, metalness: 0 }, 'plastic');
+  const part = (id, name, obj, o = {}) => { obj.name = id; parts.push({ id, name, sys: 'bay', obj, ex: V(...(o.ex || [0, 0, 0])), tags: ['pt', 'engine', ...(o.tags || [])], qty: o.qty || 1, mat: o.mat || '', size: o.size || '', conf: o.conf || 'est', note: o.note || '' }); };
+
+  // pencil ignition coils into the plug wells, with their connectors
+  { const g = new THREE.Group();
+    CX.forEach(x => { g.add(cylY(0.0105, 0.10, M.blackPlastic, [x, DECK + 0.15, ZC], 20));
+      g.add(mesh(rbox(0.030, 0.026, 0.05, 0.005), M.blackPlastic, [x, DECK + 0.212, ZC + 0.008]));
+      g.add(mesh(rbox(0.018, 0.016, 0.022, 0.003), M.greyPlastic, [x, DECK + 0.214, ZC + 0.045])); });
+    g.add(tube([[CX[0] - 0.03, DECK + 0.225, ZC + 0.06], [CX[1], DECK + 0.23, ZC + 0.065], [CX[2], DECK + 0.23, ZC + 0.065], [CX[3] + 0.05, DECK + 0.22, ZC + 0.07]], 0.007, M.dark));
+    part('dgea_coils', 'Ignition coils (pencil type) and loom', g, { ex: [0, 0.55, 0.1], tags: ['longblock'], qty: 4, mat: 'Plastic, epoxy-filled', note: 'Pull straight up after unplugging. Seen on the DGEA in the photos: four separate pencil coils.' }); }
+  // oil filler cap and the yellow dipstick handle on the cam housing
+  { const g = new THREE.Group();
+    g.add(cylY(0.024, 0.02, M.blackPlastic, [XC - 0.15, DECK + 0.20, ZC + 0.045], 32));
+    for (let i = 0; i < 8; i++) { const a = i / 8 * Math.PI * 2; g.add(mesh(new THREE.BoxGeometry(0.004, 0.018, 0.008), M.blackPlastic, [XC - 0.15 + Math.cos(a) * 0.024, DECK + 0.20, ZC + 0.045 + Math.sin(a) * 0.024], [0, -a, 0])); }
+    const loop = mesh(new THREE.TorusGeometry(0.016, 0.0045, 10, 28, Math.PI * 1.4), yellow, [XC - 0.105, DECK + 0.215, ZC + 0.05], [0, 0, Math.PI * 0.8]); g.add(loop);
+    g.add(cylY(0.004, 0.06, yellow, [XC - 0.105, DECK + 0.18, ZC + 0.05], 10));
+    part('dgea_filler', 'Oil filler cap and dipstick', g, { ex: [0, 0.7, 0.2], tags: ['longblock'], note: 'Yellow dipstick handle beside the black filler cap, as on the DGEA in the photos.' }); }
+  // intake manifold with the built-in water-cooled intercooler, on the back face
+  { const g = new THREE.Group(), z0 = ZC - 0.12;
+    const prof = shapeZY([[0, -0.07], [-0.055, -0.065], [-0.075, 0.0], [-0.06, 0.07], [0, 0.075]], 0.02);
+    g.add(mesh(alongX(prof, 0.36, 0.008, 14), M.castAlu, [XC, DECK + 0.03, z0]));
+    const plate = mesh(rbox(0.33, 0.12, 0.012, 0.012), M.machined, [XC, DECK + 0.03, z0 - 0.081]); g.add(plate);
+    for (let i = 0; i < 6; i++) g.add(mesh(new THREE.BoxGeometry(0.004, 0.105, 0.004), M.castAlu, [XC - 0.14 + i * 0.056, DECK + 0.03, z0 - 0.089]));
+    for (const dx of [-0.05, 0.05]) g.add(cylZ(0.011, 0.05, M.castAlu, [XC + 0.11 + dx * 0.4, DECK + 0.075, z0 - 0.095], 18));
+    g.add(cylX(0.034, 0.06, M.castAlu, [XC - 0.205, DECK + 0.03, z0 - 0.02], 32));                         // throttle body
+    g.add(cylX(0.026, 0.008, M.dark, [XC - 0.236, DECK + 0.03, z0 - 0.02], 32));
+    g.add(tube([[XC + 0.11, DECK + 0.10, z0 - 0.11], [XC + 0.13, DECK + 0.14, z0 - 0.15], [XC + 0.2, DECK + 0.10, z0 - 0.2]], 0.011, M.rubber));
+    g.add(tube([[XC + 0.13, DECK + 0.10, z0 - 0.11], [XC + 0.16, DECK + 0.13, z0 - 0.17], [XC + 0.26, DECK + 0.06, z0 - 0.18]], 0.011, M.rubber));
+    part('dgea_intake', 'Intake manifold with built-in water-cooled intercooler, and throttle body', g, { ex: [0, 0.25, -0.5], tags: ['longblock'], mat: 'Cast aluminium manifold, plastic plenum (est.)', conf: 'pub', note: 'The EA211 cools its charge air in a water-to-air intercooler inside the intake manifold (published). The bolted aluminium cover and coolant spigots follow the photos of a DGEA.' });
+    const b = new THREE.Group();
+    for (let i = 0; i < 6; i++) for (const dy of [-0.055, 0.055]) bolt(b, [XC - 0.15 + i * 0.06, DECK + 0.03 + dy, z0 - 0.089], 0.006, 0.02, '-z');
+    part('bolts_intake', 'Intercooler cover bolts', b, { ex: [0, 0.25, -0.62], tags: ['longblock', 'fastener'], qty: 12, size: 'M6' }); }
+  // air box on top of the engine, with its inlet and the corrugated hose to the turbo
+  { const g = new THREE.Group();
+    const box = mesh(rbox(0.34, 0.10, 0.20, 0.02), M.blackPlastic, [XC, DECK + 0.26, ZC - 0.1]); g.add(box);
+    for (let i = 0; i < 6; i++) g.add(mesh(new THREE.BoxGeometry(0.30, 0.008, 0.012), M.blackPlastic, [XC, DECK + 0.312, ZC - 0.18 + i * 0.032]));
+    for (let i = 0; i < 8; i++) g.add(mesh(new THREE.BoxGeometry(0.01, 0.03, 0.006), M.blackPlastic, [XC - 0.15 + i * 0.043, DECK + 0.225, ZC - 0.202]));
+    for (let k = 0; k < 3; k++) g.add(tube([[XC - 0.17, DECK + 0.25 + k * 0.03, ZC - 0.05], [XC - 0.25, DECK + 0.26 + k * 0.03, ZC + 0.02], [XC - 0.29, DECK + 0.26 + k * 0.03, ZC + 0.12]], 0.016, M.blackPlastic));
+    g.add(corrugated([[XC + 0.17, DECK + 0.24, ZC - 0.06], [XC + 0.25, DECK + 0.22, ZC + 0.04], [XC + 0.24, DECK + 0.15, ZC + 0.15], [XC + 0.13, DECK + 0.09, ZC + 0.21]], 0.034, M.blackPlastic));
+    part('dgea_airbox', 'Air filter box (on top of the engine) and intake hose', g, { ex: [0.1, 0.9, -0.1], tags: ['airbox'], mat: 'Plastic', note: 'On the DGEA the air box sits on top of the engine, as in the photos, with a corrugated hose down to the turbo. The air filter element is inside.' }); }
+  // turbocharger and heat shield on the exhaust face
+  { const g = new THREE.Group(), tz = ZC + 0.19, ty = DECK + 0.04, tx = XC + 0.06;
+    const vol = mesh(new THREE.TorusGeometry(0.042, 0.022, 14, 32), M.darkCast, [tx - 0.03, ty, tz]); vol.rotation.y = Math.PI / 2; g.add(vol);
+    g.add(cylX(0.04, 0.05, M.darkCast, [tx - 0.03, ty, tz], 32));
+    const comp = mesh(new THREE.TorusGeometry(0.04, 0.02, 14, 32), M.castAlu, [tx + 0.055, ty, tz]); comp.rotation.y = Math.PI / 2; g.add(comp);
+    g.add(cylX(0.038, 0.045, M.castAlu, [tx + 0.055, ty, tz], 32), cylX(0.026, 0.04, M.castAlu, [tx + 0.1, ty, tz], 28));
+    g.add(cylX(0.022, 0.04, M.steel, [tx + 0.012, ty, tz], 24));
+    const shield = mesh(new THREE.CylinderGeometry(0.075, 0.075, 0.16, 32, 1, true, -Math.PI * 0.1, Math.PI * 0.9), M.machined, [tx, ty + 0.01, tz + 0.01], [0, 0, Math.PI / 2]); shield.material = M.machined.clone(); shield.material.side = THREE.DoubleSide; g.add(shield);
+    g.add(tube([[tx - 0.01, ty + 0.06, tz], [tx - 0.02, ty + 0.12, tz - 0.03], [tx - 0.06, ty + 0.15, tz - 0.08]], 0.004, M.steel));
+    g.add(tube([[tx + 0.01, ty - 0.03, tz], [tx, ty - 0.12, tz - 0.02], [tx - 0.04, ty - 0.2, tz - 0.06]], 0.005, M.steel));
+    g.add(corrugated([[tx + 0.1, ty + 0.03, tz], [XC + 0.27, DECK + 0.13, ZC + 0.12], [XC + 0.28, DECK + 0.12, ZC - 0.05], [XC + 0.2, DECK + 0.05, ZC - 0.17]], 0.028, M.rubber));
+    part('dgea_turbo', 'Turbocharger, heat shield, oil and coolant lines, charge-air hose', g, { ex: [0.2, 0.15, 0.55], tags: ['longblock'], mat: 'Cast-steel turbine housing, aluminium compressor', note: 'Bolted straight onto the exhaust manifold cast into the head (published for EA211). Heat shield and pipe routing follow the DGEA photos. Turbo bolts and lines: 13 torque values in the manual turbocharger overview.' }); }
+  // belt end: cast mount bracket and crank pulley (vibration damper)
+  { const g = new THREE.Group(), xb = XC + 0.26;
+    g.add(mesh(rbox(0.05, 0.11, 0.17, 0.012), M.castAlu, [xb - 0.01, DECK + 0.12, ZC - 0.01]));
+    g.add(mesh(rbox(0.05, 0.03, 0.08, 0.008), M.castAlu, [xb + 0.03, DECK + 0.19, ZC + 0.03]));
+    part('dgea_mount', 'Engine mount bracket (belt end)', g, { ex: [0.55, 0.3, 0], tags: ['longblock'], mat: 'Cast aluminium', note: 'The cast bracket on the belt-end cover in the photos. Engine is supported from below before it comes off.' });
+    const b = new THREE.Group(); for (const [y, z] of [[0.08, -0.06], [0.08, 0.04], [0.16, -0.05]]) bolt(b, [xb + 0.016, DECK + y, ZC + z], 0.010, 0.05, 'x', M.blackBolt);
+    part('bolts_mount', 'Mount bracket bolts', b, { ex: [0.7, 0.3, 0], tags: ['longblock', 'fastener'], qty: 3, size: 'M10' });
+    const p = new THREE.Group(); p.add(cylX(0.074, 0.03, M.forged, [xb + 0.008, CRANK, ZC], 48));
+    for (let i = 0; i < 6; i++) p.add(torusX(0.074, 0.0022, M.steel, [xb - 0.006 + i * 0.0045, CRANK, ZC]));
+    p.add(cylX(0.03, 0.035, M.rubber, [xb + 0.008, CRANK, ZC], 32));
+    part('dgea_pulley', 'Crankshaft pulley and vibration damper', p, { ex: [0.6, -0.1, 0], tags: ['longblock'], mat: 'Steel with rubber damper ring', note: 'Contact faces must be free of oil when refitted (manual, toothed belt overview: crankshaft pulley).' }); }
+  // gearbox end: dual-mass flywheel
+  { const g = new THREE.Group(), xf = XC - 0.232;
+    g.add(cylX(0.128, 0.03, M.steel, [xf, CRANK, ZC], 64));
+    g.add(cylX(0.112, 0.032, M.machined, [xf - 0.002, CRANK, ZC], 64));
+    for (let i = 0; i < 8; i++) { const a = i / 8 * Math.PI * 2; g.add(cylX(0.006, 0.036, M.dark, [xf, CRANK + Math.sin(a) * 0.035, ZC + Math.cos(a) * 0.035], 10)); }
+    for (let i = 0; i < 6; i++) { const a = i / 6 * Math.PI * 2 + 0.3; g.add(cylX(0.009, 0.034, M.castAlu, [xf, CRANK + Math.sin(a) * 0.088, ZC + Math.cos(a) * 0.088], 14)); }
+    part('dgea_flywheel', 'Dual-mass flywheel', g, { ex: [-0.45, 0, 0], tags: ['longblock'], mat: 'Steel, two masses with arc springs', note: 'Visible at the gearbox end of the removed engine in the photos. Inspect for free play before refitting; flywheel bolts are renewed.' }); }
+  // electric auxiliary coolant pump and the engine wiring loom
+  { const g = new THREE.Group();
+    g.add(cylX(0.026, 0.09, M.machined, [XC + 0.05, 0.42, ZC + 0.17], 28));
+    g.add(tube([[XC + 0.1, 0.42, ZC + 0.17], [XC + 0.16, 0.44, ZC + 0.12], [XC + 0.19, 0.50, ZC + 0.05]], 0.012, M.rubber));
+    part('dgea_epump', 'Electric auxiliary coolant pump', g, { ex: [0.1, -0.35, 0.45], tags: ['longblock'], note: 'Silver electric pump low on the engine, as in the photos (DGEA). Keeps coolant moving when the engine is off and the car is driving electrically (est.).' });
+    const w = new THREE.Group();
+    w.add(corrugated([[XC - 0.22, DECK + 0.1, ZC - 0.14], [XC - 0.05, DECK + 0.12, ZC - 0.155], [XC + 0.12, DECK + 0.11, ZC - 0.15], [XC + 0.24, DECK + 0.04, ZC - 0.12]], 0.012, M.dark));
+    part('dgea_loom', 'Engine wiring loom', w, { ex: [0, 0.4, -0.3], tags: ['longblock'] }); }
+  return { parts };
+}
