@@ -23,6 +23,16 @@ New here:
   see-through body, 11-step engine-out / strip / refit job, parts list and part sheet;
   remove and refit in workshop order with each bolt undone and torqued with the right tool.
   Add `?debug` to the URL to expose the scene for scripted tests.
+- `training.js` — assessed workshop training, built on the Strip Bay trainer's method
+  (`platform/trainer/sim.js`): stages locked until right, every wrong action logged with the
+  reason, conditions randomised each run, a sign-off report at the end. The hands-on stages run
+  on this car bolt by bolt: the trainee picks the tool and sets the torque wrench, and the
+  workshop reports wrong tools, wrong order, wrong torque and parts outside the stage as faults.
+  Jobs: front brakes (pads and discs, measured and decided), front strut (find the leak,
+  remove, refit to the data), spark plugs on the 1.4 eHybrid (an engine that can start itself),
+  and high-voltage awareness. The engine-out walkthrough stays as an unassessed demonstration.
+  `tests/tr_brakes.mjs` and `tests/tr_rest.mjs` drive every job through the page as a trainee
+  would (needs the page served locally with `?debug`).
 - Photo studio: a seamless cyclorama with a glowing light wall, lit by the CC0 HDRI
   `studio.hdr.wasm` (*Studio Small 09*, Sergej Majboroda, Poly Haven; `.wasm` so the artifact
   host serves it). The car's materials are corrected to real-world values (clear-coated paint,

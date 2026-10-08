@@ -1,0 +1,54 @@
+import puppeteer from 'puppeteer-core';
+const b = await puppeteer.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', args: ['--no-sandbox','--use-gl=swiftshader','--enable-unsafe-swiftshader'], protocolTimeout: 900000 });
+const p = await b.newPage(); await p.setViewport({ width: 1280, height: 800 }); await p.emulateMediaFeatures([{name:'prefers-reduced-motion',value:'reduce'}]);
+p.on('pageerror', e => console.log('pageerror: '+e.message)); p.on('console', m => { if (m.type()==='error' && !/404|CERT/.test(m.text())) console.log('console: '+m.text()); });
+await p.goto('http://localhost:8765/index.html?debug', { waitUntil: 'domcontentloaded' });
+await p.waitForFunction(() => window.__ws?.TRN, { timeout: 240000 });
+const out = await p.evaluate(async () => {
+  const w = window.__ws, $ = s => document.querySelector(s), card = () => $('#card-train'), log = [];
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  const opt = t => [...card().querySelectorAll('.opt')].find(x => x.textContent.includes(t));
+  const clickOpt = async t => { const x = opt(t); if (!x) throw new Error('no option: ' + t + ' at ' + card().querySelector('h2')?.textContent); x.click(); await sleep(60); };
+  const next = async () => { const x = [...card().querySelectorAll('.btn.pri')].find(x => /Next stage|Finish/.test(x.textContent)); if (!x) throw new Error('no next at ' + card().querySelector('h2')?.textContent + ' | ' + card().querySelector('.fb')?.textContent + ' | goals: ' + [...card().querySelectorAll('.goals li')].map(l => l.className + ':' + l.textContent).join(' / ')); x.click(); await sleep(80); };
+  const tool = k => $(`.tool[data-tool="${k}"]`).click();
+  const sel = id => { w.select(id, false, true); w.TRN.changed(); };
+  const selBtn = t => { const x = [...card().querySelectorAll('.trsel button')].find(x => x.textContent.includes(t)); if (!x) throw new Error('no sel button ' + t + ' on ' + w.W.selectedPart()?.id); x.click(); };
+  const tq = n => { const i = $('#tqn'); i.value = n; i.dispatchEvent(new Event('input')); };
+  const ang = d => { const s = $('#ang'); s.value = String(d); s.dispatchEvent(new Event('change')); };
+  const fasten = (id) => { const f = w.byId[id].fx; sel(id); selBtn('Fit'); tool(f.tool); selBtn('on all'); tool('tq'); tq(f.nm ?? 8); selBtn('on all'); if (f.deg) { tool('ang'); ang(f.deg); selBtn('on all'); } };
+  const undo = id => { sel(id); tool(w.byId[id].fx.tool); selBtn('on all'); };
+  const faults = () => w.TRN.run?.faults;
+  // strut
+  w.setMode('train'); w.TRN.open('strut'); let st = w.TRN.run.st, K = id => id + '_' + st.side;
+  const other = st.side === 'fl' ? 'fr' : 'fl';
+  w.TRN.pick('strut_' + other); w.TRN.pick('strut_' + st.side); await next();
+  await clickOpt('Both front dampers'); await next();
+  for (const id of ['fix_wheel']) undo(K(id)); sel(K('wheel')); selBtn('Take it off');
+  for (const id of ['bolt_hosebracket', 'nuts_droplink', 'bolt_strutclamp', 'bolts_topmount']) undo(K(id)); sel(K('strut')); selBtn('Take it off'); await next();
+  await clickOpt('spring compressor'); await next(); await clickOpt('direction of travel, new'); await next();
+  sel(K('strut')); selBtn('Put it back'); for (const id of ['bolts_topmount', 'bolt_strutclamp', 'nuts_droplink', 'bolt_hosebracket']) fasten(K(id)); sel(K('wheel')); selBtn('Put it back'); fasten(K('fix_wheel')); await next();
+  await clickOpt('wheel alignment'); await next();
+  log.push('strut (' + st.side + '): ' + card().querySelector('h2').textContent + ' | faults ' + [...card().querySelectorAll('.log li')].length + ' | removed ' + w.parts.filter(q => q.removed).length + ' | leak marker gone: ' + !w.byId['strut_' + st.side].obj.getObjectByName('leak'));
+  w.TRN.list();
+  // plugs
+  w.TRN.open('plugs'); st = w.TRN.run.st;
+  for (const t of ['READY light out', 'Key out of range', 'Charging cable unplugged', 'Bonnet open']) await clickOpt(t); await next();
+  sel('dgea_airbox'); selBtn('Take it off'); sel('dgea_coils'); selBtn('Take it off'); undo('spark_plugs'); await next();
+  await clickOpt(st.kind === 'oil' ? 'report oil getting into' : 'report cylinder ' + st.cyl + ' running rich'); await next();
+  await clickOpt('Start it by hand'); await next();
+  fasten('spark_plugs'); sel('dgea_coils'); selBtn('Put it back'); sel('dgea_airbox'); selBtn('Put it back'); await next();
+  log.push('plugs (' + st.kind + ' ' + st.cyl + '): ' + card().querySelector('h2').textContent + ' | faults ' + [...card().querySelectorAll('.log li')].length + ' | removed ' + w.parts.filter(q => q.removed).length);
+  w.TRN.list();
+  // hv
+  w.TRN.open('hv');
+  const targets = w.parts.filter(q => q.tags.includes('hv') && !q.tags.includes('fastener') && !q.tags.includes('seal')).map(q => q.id);
+  log.push('HV parts: ' + targets.join(', '));
+  w.TRN.pick('wheel_fl'); for (const id of targets) w.TRN.pick(id); await next();
+  await clickOpt('Hands off'); await next();
+  for (const t of ['Confirm the technician', 'switch off and isolate', 'lock and tag', 'Prove it dead']) await clickOpt(t); await next();
+  log.push('hv: ' + card().querySelector('h2').textContent + ' | faults ' + [...card().querySelectorAll('.log li')].length);
+  log.push('progress: ' + localStorage.getItem('ehy-training-progress'));
+  return log.join('\n');
+});
+console.log(out);
+await b.close();

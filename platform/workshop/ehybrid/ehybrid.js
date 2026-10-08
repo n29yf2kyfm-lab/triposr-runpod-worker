@@ -8,15 +8,16 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { FLEET, classifyMesh } from './fleet.js?v=9';
-import { measureCar, buildPowertrain } from './powertrain.js?v=9';
-import { buildEngineBayDetail } from './engine-bay-detail.js?v=9';
-import { buildInnerApron } from './engine-bay-shell.js?v=9';
-import { buildTransmission } from './transmission-detail.js?v=9';
-import { extractFrontBumper } from './front-bumper.js?v=9';
-import { buildHybrid, buildEngineStrip, buildDGEAExternals } from './hybrid-parts.js?v=9';
-import { TOOLS, SPEC, toolLabel, buildCarFasteners } from './jobs.js?v=9';
-import { buildFrontCorners } from './front-corner.js?v=9';
+import { FLEET, classifyMesh } from './fleet.js?v=10';
+import { measureCar, buildPowertrain } from './powertrain.js?v=10';
+import { buildEngineBayDetail } from './engine-bay-detail.js?v=10';
+import { buildInnerApron } from './engine-bay-shell.js?v=10';
+import { buildTransmission } from './transmission-detail.js?v=10';
+import { extractFrontBumper } from './front-bumper.js?v=10';
+import { buildHybrid, buildEngineStrip, buildDGEAExternals } from './hybrid-parts.js?v=10';
+import { TOOLS, SPEC, toolLabel, buildCarFasteners } from './jobs.js?v=10';
+import { buildFrontCorners } from './front-corner.js?v=10';
+import { createTraining } from './training.js?v=10';
 
 /* Golf Mk8 eHybrid workshop. Built on the Golf Workshop's real Mk8 body
    (2021 Volkswagen Golf GTI by Ddiaz Design, Sketchfab, CC BY-NC-SA 4.0),
@@ -285,6 +286,7 @@ function buildHybridParts() {
   for (const p of st.parts) { carRoot.add(p.obj); register({ ...p, ...info({ ...p, tags: p.tags }), hidden: false }); }
   for (const p of buildDGEAExternals(materialFactory, hy.M).parts) { carRoot.add(p.obj); register({ ...p, ...info({ ...p, tags: p.tags }) }); }
   byId.blk.note = 'Engine code DGEA on the Golf 8 / Leon Mk4 eHybrid (check the code label on the block). ' + byId.blk.note;
+  if (byId.spark_plugs) { byId.spark_plugs.tags.push('incar'); BLOCK.spark_plugs = ['dgea_coils']; }
   Object.assign(BLOCK, { dgea_intake: ['bolts_intake', 'dgea_airbox', 'dgea_chargepipe'], dgea_mount: ['bolts_mount'], dgea_coils: ['dgea_airbox'], dgea_turbo: ['dgea_airbox', 'dgea_chargepipe'], dgea_chargepipe: ['dgea_airbox'], dgea_filler: ['dgea_airbox'] });
 }
 
@@ -434,7 +436,7 @@ function whyNotRemove(p) {
   const need = p.fx?.needOpen || p.needOpen;
   if (need && byId[need] && Math.abs(byId[need].angT) < 0.01) return `Open the ${nameOf(need).toLowerCase()} first${p.fx ? ', and support it' : ''}.`;
   if (FIXED.has(p.id)) return `${p.name} stays put: it is the base the other parts are fitted to.`;
-  if (has(p, 'strip') && !STEPS[step].strip) return 'Engine internals come out on the engine stand. Run the job to the last step first.';
+  if (has(p, 'strip') && !has(p, 'incar') && !STEPS[step].strip) return 'Engine internals come out on the engine stand. Run the engine job to the last step first.';
   if (has(p, 'hv') && step < 1) return 'High voltage. Make the system safe first: Engine job, step 2.';
   const left = (BLOCK[p.id] || []).filter(b => byId[b] && !offCar(byId[b]));
   return left.length ? `Remove first: ${left.map(nameOf).join(', ')}.` : '';
@@ -453,43 +455,47 @@ const STATE_MAT = {
 function paintBolt(b) { const st = b.userData.state; b.traverse(o => { if (o.isMesh) o.material = STATE_MAT[st] || o.userData.real; }); }
 const allOut = p => p.bolts.every(b => b.userData.state === 'out');
 const allIn = p => p.bolts.every(b => b.userData.state === 'in');
+let TRN = null;
+const refuse = m => { toast(m, true); TRN?.fault(m); return false; };
 function boltAction(p, b, quiet) {
-  const st = b.userData.state, need = p.fx.tool, say = (m, w) => { if (!quiet) toast(m, w); return false; };
+  const st = b.userData.state, need = p.fx.tool, say = (m, w) => { if (!quiet) { toast(m, w); if (w) TRN?.fault(m); } return false; };
+  if (TRN?.active) { const m = TRN.allowed(p); if (m) return say(m, true); }
   if (st === 'in') {
     if (tool === 'tq' || tool === 'ang') return say('That fastener is already tight. Pick the tool that undoes it: ' + toolLabel(need) + '.', true);
-    if (tool !== need) return say(`Wrong tool: ${p.fx.label.toLowerCase()} take the ${toolLabel(need)}. A near-fit socket or bit rounds the head off.`, true);
+    if (tool !== need) return say(`Wrong tool. ${p.fx.label.replace(/,.*$/, '')} need the ${toolLabel(need)}: a near-fit socket or bit rounds the head off.`, true);
     const why = whyNotRemove(p); if (why) return say(why, true);
-    b.userData.state = 'out'; b.userData.t = 0; paintBolt(b); poke();
+    b.userData.state = 'out'; b.userData.t = 0; paintBolt(b); poke(); TRN?.changed();
     if (allOut(p)) { p.removed = true; refreshRows(); say(`${p.fx.label}: all ${p.bolts.length} out.` + (p.fx.renew ? ' These are renewed: new ones go in on refit.' : '')); }
     return true;
   }
   if (st === 'loose') {
     if (tool === 'tq' || tool === 'ang') return say('Run it in first with the ' + toolLabel(need) + ', then torque it.', true);
     if (tool !== need) return say(`Wrong tool: use the ${toolLabel(need)}.`, true);
-    b.userData.state = 'snug'; paintBolt(b); poke(); return true;
+    b.userData.state = 'snug'; paintBolt(b); poke(); TRN?.changed(); return true;
   }
   if (st === 'snug') {
     if (tool !== 'tq') return say('Snug. Now the torque wrench' + (p.fx.nm ? `, set to ${p.fx.nm} Nm.` : '.'), true);
     if (p.fx.nm == null) { b.userData.state = p.fx.deg ? 'torqued' : 'in'; paintBolt(b); poke(); return say('No torque value for these in the data: take the figure from erWin for this car.'), true; }
     if (Math.abs(tqSet - p.fx.nm) > 0.25) return say(tqSet > p.fx.nm ? `STOP: ${tqSet} Nm is over the ${p.fx.nm} Nm spec. Over-torque stretches the bolt or strips the thread.` : `Under-torqued: ${tqSet} Nm. The spec is ${p.fx.nm} Nm.`, true);
-    b.userData.state = p.fx.deg ? 'torqued' : 'in'; paintBolt(b); poke(); return true;
+    b.userData.state = p.fx.deg ? 'torqued' : 'in'; paintBolt(b); poke(); TRN?.changed(); return true;
   }
   if (st === 'torqued') {
     if (tool !== 'ang') return say(`Torque stage done. Now the angle gauge: a further ${p.fx.deg}°.`, true);
     if (angSet !== p.fx.deg) return say(`Set the angle gauge to ${p.fx.deg}°, not ${angSet}°.`, true);
-    b.userData.state = 'in'; paintBolt(b); poke(); return true;
+    b.userData.state = 'in'; paintBolt(b); poke(); TRN?.changed(); return true;
   }
   return false;
 }
 function fitBolts(p) {
-  const why = whyNotRefit(p); if (why) { toast(why, true); return; }
+  if (TRN?.active) { const m = TRN.allowed(p); if (m) return refuse(m); }
+  const why = whyNotRefit(p); if (why) return refuse(why);
   p.bolts.forEach(b => { b.userData.state = 'loose'; b.userData.t = 0; paintBolt(b); });
   p.removed = false; poke(); refreshRows();
   toast((p.fx.renew ? 'New bolts fitted by hand. ' : 'Bolts started by hand. ') + `Now run them in with the ${toolLabel(p.fx.tool)}, then torque${p.fx.nm ? ' to ' + p.fx.nm + ' Nm' : ''}${p.fx.deg ? ' + ' + p.fx.deg + '°' : ''}.`);
 }
 function allBolts(p) { let n = 0; for (const b of p.bolts) if (b.userData.state !== 'out' && boltAction(p, b, true)) n++; if (!n) { const b = p.bolts.find(x => x.userData.state !== 'out'); if (b) boltAction(p, b, false); } else toast(`${n} done with the ${toolLabel(tool)}.`); renderSheet(p.id); }
 let manual = false;
-function syncTray() { $('#tray').querySelectorAll('.tool').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.tool === tool))); $('#tqbox').hidden = tool !== 'tq'; $('#angbox').hidden = tool !== 'ang'; $('#tq').value = tqSet; $('#tqv').textContent = tqSet; $('#ang').value = String(angSet); }
+function syncTray() { $('#tray').querySelectorAll('.tool').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.tool === tool))); $('#tqbox').hidden = tool !== 'tq'; $('#angbox').hidden = tool !== 'ang'; $('#tq').value = tqSet; $('#tqv').textContent = tqSet; $('#tqn').value = tqSet; $('#ang').value = String(angSet); }
 function buildTray() {
   const tray = $('#tray'); tray.textContent = '';
   for (const t of TOOLS) {
@@ -497,7 +503,8 @@ function buildTray() {
     b.onclick = () => { tool = t.k; syncTray(); };
     tray.append(b);
   }
-  $('#tq').oninput = e => { tqSet = +e.target.value; $('#tqv').textContent = tqSet; };
+  $('#tq').oninput = e => { tqSet = +e.target.value; $('#tqv').textContent = tqSet; $('#tqn').value = tqSet; };
+  $('#tqn').oninput = e => { const v = Math.max(2, Math.min(220, Math.round(+e.target.value * 2) / 2)); if (Number.isFinite(v)) { tqSet = v; $('#tq').value = v; } };
   $('#ang').onchange = e => { angSet = +e.target.value; };
 }
 let toastT = 0;
@@ -516,7 +523,8 @@ function floorSpot(p) {
 }
 function removePart(id, quiet) {
   const p = byId[id]; if (!p || p.removed) return false;
-  const why = whyNotRemove(p); if (why) { if (!quiet) { toast(why, true); flash(BLOCK[id] || []); } return false; }
+  if (TRN?.active) { const m = TRN.allowed(p); if (m) return quiet ? false : refuse(m); }
+  const why = whyNotRemove(p); if (why) { if (!quiet) { refuse(why); flash(BLOCK[id] || []); } return false; }
   if (p.hinge) p.angT = 0;
   if (!has(p, 'strip')) floorSpot(p);
   p.removed = true; poke(); refreshRows();
@@ -525,14 +533,15 @@ function removePart(id, quiet) {
 }
 function refitPart(id, quiet) {
   const p = byId[id]; if (!p || !p.removed) return false;
-  const why = whyNotRefit(p); if (why) { if (!quiet) toast(why, true); return false; }
+  if (TRN?.active) { const m = TRN.allowed(p); if (m) return quiet ? false : refuse(m); }
+  const why = whyNotRefit(p); if (why) { if (!quiet) refuse(why); return false; }
   p.removed = false; poke(); refreshRows();
   if (!quiet) toast(`${p.name}: refitted.` + (has(p, 'seal') ? ' New seal fitted.' : has(p, 'fastener') ? ' Torque to the erWin value.' : ''));
   return true;
 }
 function refitEverything() { parts.forEach(p => { p.removed = false; if (p.bolts) p.bolts.forEach(b => { b.userData.state = 'in'; paintBolt(b); }); if (p.hinge) p.angT = p.id === 'panel_bonnet' ? HINGE.panel_bonnet.ang * DEG : 0; }); poke(); refreshRows(); }
 function flash(ids) { ids.forEach(id => { const r = $('#row_' + id); if (r) { r.classList.add('flash'); setTimeout(() => r.classList.remove('flash'), 1500); } }); }
-function toggleHinge(id) { const p = byId[id]; if (!p?.hinge || p.removed || p.hideT) return; p.angT = Math.abs(p.angT) > 0.01 ? 0 : p.hinge.ang * DEG; poke(); renderCard(); }
+function toggleHinge(id) { const p = byId[id]; if (!p?.hinge || p.removed || p.hideT) return; p.angT = Math.abs(p.angT) > 0.01 ? 0 : p.hinge.ang * DEG; poke(); renderCard(); TRN?.changed(); }
 let seq = null;
 function runSequence(kind) {
   clearInterval(seq);
@@ -585,7 +594,7 @@ function setHighlight(id, on) {
     if (on) { o.userData.m0 = o.material; o.material = [].concat(o.material).map(m => { const c = m.clone(); if (c.emissive) { c.emissive = HL; c.emissiveIntensity = ['body', 'interior'].includes(p.sys) ? 0.12 : 0.45; } return c; }); if (o.material.length === 1) o.material = o.material[0]; }
     else if (o.userData.m0) { o.material = o.userData.m0; delete o.userData.m0; } });
 }
-function refreshRows() { parts.forEach(p => { const r = $('#row_' + p.id); if (r) r.classList.toggle('gone', p.removed || (p.hideT && !has(p, 'strip'))); }); const n = parts.filter(p => p.removed).length; $('#removed').textContent = n ? `${n} parts are off the car.` : 'Everything is on the car.'; }
+function refreshRows() { TRN?.changed(); parts.forEach(p => { const r = $('#row_' + p.id); if (r) r.classList.toggle('gone', p.removed || (p.hideT && !has(p, 'strip'))); }); const n = parts.filter(p => p.removed).length; $('#removed').textContent = n ? `${n} parts are off the car.` : 'Everything is on the car.'; }
 
 /* ───────── the card: one clear next step for the selected part ─────────
    Guided by default: the button picks the right tool, torque and angle itself.
@@ -728,11 +737,39 @@ function select(id, frame, keepMode) {
 function renderSheet() { renderCard(); }
 
 /* ───────── modes and panels ───────── */
-let mode = 'explore';
+let mode = 'explore', training = false, trayWanted = false;
+function markLeak(side) {
+  for (const k of ['fl', 'fr']) { const s = byId['strut_' + k]?.obj.children[0]; s?.getObjectByName('leak')?.removeFromParent(); }
+  if (!side) return; const s = byId['strut_' + side]?.obj.children[0]; if (!s) return;
+  const g = new THREE.Group(); g.name = 'leak';
+  const oil = new THREE.MeshPhysicalMaterial({ color: 0x1d1810, roughness: 0.12, metalness: 0.2, clearcoat: 1, clearcoatRoughness: 0.08 });
+  const dirt = new THREE.MeshStandardMaterial({ color: 0x4a3c2a, roughness: 0.95 });
+  const sheet = new THREE.Mesh(new THREE.CylinderGeometry(0.0262, 0.0262, 0.2, 24, 1, true, -0.6, 2.6), oil); sheet.position.y = 0.09; g.add(sheet);
+  for (let i = 0; i < 9; i++) { const d = new THREE.Mesh(new THREE.SphereGeometry(0.004 + Math.random() * 0.004, 8, 6), dirt); const a = -0.4 + Math.random() * 2.2, y = -0.02 + Math.random() * 0.17; d.position.set(Math.cos(a) * 0.026, y, Math.sin(a) * 0.026); d.scale.set(1, 1.8, 1); g.add(d); }
+  const drip = new THREE.Mesh(new THREE.SphereGeometry(0.0045, 10, 8), oil); drip.position.set(0.02, -0.06, 0.016); drip.scale.set(1, 1.6, 1); g.add(drip);
+  g.traverse(o => { if (o.isMesh) o.userData.pid = 'strut_' + side; });
+  s.add(g); poke();
+}
+const W = {
+  get byId() { return byId; }, get parts() { return parts; }, nameOf: id => byId[id]?.name || id,
+  flyTo: (p, t) => flyTo(V(p[0], p[1] + liftT, p[2]), V(t[0], t[1] + liftT, t[2])), setLift: on => { liftT = on ? LIFT : 0; poke(); },   // views follow the lift
+  flash: id => { if (id === selected) return; setHighlight(id, true); setTimeout(() => { if (id !== selected) setHighlight(id, false); poke(); }, 900); poke(); },
+  selectedPart: () => selected && byId[selected], stateText: p => stateOf(p)[0],
+  fitBolts: p => { fitBolts(p); renderCard(); }, allBolts: p => allBolts(p), toolName: () => toolLabel(tool), toolLabel,
+  removePart: id => removePart(id), refitPart: id => refitPart(id), isFixed: id => FIXED.has(id), toggleHinge, isOpen,
+  markLeak, focus: on => { focus = on; setOpacity(seeThrough()); poke(); },
+  trainingActive: on => { training = on; trayWanted = false; $('.toolbar').hidden = !manual; if (on) tool = 'hand'; syncTray(); },
+  showTray: on => { trayWanted = on; $('.toolbar').hidden = !(on || manual); },
+  resetCar: () => { clearInterval(seq); markLeak(null); refitEverything(); reversing = false; step = 0; applyStep(); liftT = 0; focus = false; setOpacity(seeThrough()); parts.forEach(p => { p.vis = true; }); select(null, false, true); },
+  openDemo: () => setMode('job'),
+};
 function setMode(m) {
   mode = m;
   document.querySelectorAll('[data-mode]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.mode === m)));
-  $('#card-explore').hidden = m !== 'explore'; $('#card-job').hidden = m !== 'job'; $('#card-photo').hidden = m !== 'photo';
+  $('#card-explore').hidden = m !== 'explore'; $('#card-job').hidden = m !== 'job'; $('#card-photo').hidden = m !== 'photo'; $('#card-train').hidden = m !== 'train';
+  document.querySelectorAll('[data-mode]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.mode === (m === 'job' ? 'train' : m))));
+  if (m === 'train' && TRN && !TRN.run) TRN.list();
+  if (m !== 'train' && training) { TRN?.run?.job.cleanup?.(); TRN?.list(); }
   if (m !== 'photo') stopPhoto();
   renderCard();
 }
@@ -745,9 +782,9 @@ function panel(which, open) {
 $('#openparts').onclick = () => panel('parts'); $('#closeparts').onclick = () => panel('parts', false);
 $('#openview').onclick = () => panel('viewpanel'); $('#closeview').onclick = () => panel('viewpanel', false);
 $('#browse').onclick = () => panel('parts', true);
-$('#gojob').onclick = () => setMode('job'); $('#ce-jobgo').onclick = () => setMode('job');
+$('#gojob').onclick = () => setMode('train'); $('#jobback').onclick = () => setMode('train'); $('#ce-jobgo').onclick = () => setMode('job');
 $('#ce-close').onclick = () => select(null);
-$('#manual').onchange = e => { manual = e.target.checked; $('.toolbar').hidden = !manual; if (manual) syncTray(); toast(manual ? 'Pick a tool, then tap each bolt. The card still shows the spec.' : 'Guided: the card picks the right tool for you.'); };
+$('#manual').onchange = e => { manual = e.target.checked; $('.toolbar').hidden = !manual && !(training && trayWanted); if (manual) syncTray(); toast(manual ? 'Pick a tool, then tap each bolt. The card still shows the spec.' : 'Guided: the card picks the right tool for you.'); };
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { panel('parts', false); panel('viewpanel', false); } });
 $('#isolate').onclick = () => { poke(); if (!selected) { toast('Tap a part first, then show only its system.', true); return; } const s = byId[selected].sys; parts.forEach(p => { p.vis = p.sys === s; }); };
 $('#showall').onclick = () => { poke(); parts.forEach(p => { p.vis = true; }); };
@@ -761,14 +798,16 @@ renderer.domElement.addEventListener('pointerup', e => {
   const hit = ray.intersectObjects(objs, true).find(h => h.object.userData.pid);
   if (hit) {
     const id = hit.object.userData.pid, p = byId[id];
+    if (TRN?.pick(id)) return;
+    const keep = mode === 'train';
     let o = hit.object; while (o && o.userData.bi === undefined && o.parent) o = o.parent;
     if (p.fx && o && o.userData.bi !== undefined) {
-      select(id, false);
-      if (!manual) { const st = o.userData.state; if (st === 'out') { renderCard(); return; } tool = st === 'snug' ? 'tq' : st === 'torqued' ? 'ang' : p.fx.tool; if (st === 'snug' && p.fx.nm != null) tqSet = p.fx.nm; if (st === 'torqued') angSet = p.fx.deg; syncTray(); }
-      boltAction(p, o); renderCard(); return;
+      select(id, false, keep);
+      if (!manual && !training) { const st = o.userData.state; if (st === 'out') { renderCard(); return; } tool = st === 'snug' ? 'tq' : st === 'torqued' ? 'ang' : p.fx.tool; if (st === 'snug' && p.fx.nm != null) tqSet = p.fx.nm; if (st === 'torqued') angSet = p.fx.deg; syncTray(); }
+      boltAction(p, o); renderCard(); TRN?.changed(); return;
     }
-    select(id, false); if (p.hinge) toggleHinge(id);
-  } else if (selected) select(null);
+    select(id, false, keep); if (p.hinge && !keep) toggleHinge(id); TRN?.changed();
+  } else if (selected) { select(null, false, mode === 'train'); TRN?.changed(); }
 });
 
 /* realistic finishes by default; the switch paints seals green and fasteners gold */
@@ -893,7 +932,7 @@ async function startPhoto() {
 function restoreLive() {
   if (photo.keep) { scene.background = photo.keep.bg; [key, fill, rim, under].forEach((l, i) => l.intensity = photo.keep.li[i]); photo.keep = null; }
   RASTER_ONLY.forEach(m => m.visible = true); cyc.box.visible = false;
-  photo.on = false; badge.hidden = true; saveBtn.disabled = true; $('.toolbar').hidden = !manual; photoBtn.textContent = 'Take photo';
+  photo.on = false; badge.hidden = true; saveBtn.disabled = true; $('.toolbar').hidden = !manual && !(training && trayWanted); photoBtn.textContent = 'Take photo';
   if (selected) setHighlight(selected, true); poke();
 }
 function stopPhoto() { if (photo.on) restoreLive(); }
@@ -934,8 +973,9 @@ loader.load(GOLF.url, gltf => {
     // bonnet up by default, so the bay reads at a glance
     const bon = byId.panel_bonnet; if (bon) { bon.ang = bon.angT = HINGE.panel_bonnet.ang * DEG; bon.obj.rotation.x = bon.ang; }
     buildTree(); buildTray(); applyStep(); refreshRows(); setOpacity(+$('#xray').value); renderCard();
+    TRN = createTraining(W);
     $('#loading').hidden = true;
-    if (new URLSearchParams(location.search).has('debug')) window.__ws = { parts, byId, BLOCK, THREE, camera, controls, flyTo, photo, doAll, plan, setMode, startPhoto, stopPhoto, scene, renderer, select, removePart, refitPart, boltAction, fitBolts, setTool: k => { tool = k; }, setTq: (n, a) => { tqSet = n; if (a) angSet = a; } };
+    if (new URLSearchParams(location.search).has('debug')) window.__ws = { parts, byId, BLOCK, THREE, camera, controls, flyTo, photo, doAll, plan, setMode, get TRN() { return TRN; }, W, startPhoto, stopPhoto, scene, renderer, select, removePart, refitPart, boltAction, fitBolts, setTool: k => { tool = k; }, setTq: (n, a) => { tqSet = n; if (a) angSet = a; } };
   } catch (e) { console.error(e); $('#loadtext').textContent = 'The car loaded but could not be assembled. Reload to try again.'; }
 }, x => { const t = x.total || 6570544; $('#loadtext').textContent = `Loading the Golf · ${(x.loaded / 1048576).toFixed(1)} of ${(t / 1048576).toFixed(1)} MB`; $('#bar').style.transform = `scaleX(${Math.min(1, x.loaded / t).toFixed(3)})`; },
   e => { console.error(e); $('#loadtext').textContent = 'The Golf could not be loaded. Check the connection and reload.'; });

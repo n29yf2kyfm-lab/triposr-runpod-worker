@@ -125,12 +125,59 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 /* manual tool tray (training mode) */
 .toolbar{position:fixed;z-index:5;left:12px;right:12px;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:8px;border-radius:16px}
 @media (min-width:820px){.toolbar{left:432px;right:16px;bottom:16px}}
-@media (max-width:819px){.toolbar{bottom:auto;top:calc(env(safe-area-inset-top,0px) + 122px)}}
+
 #tray{display:flex;flex-wrap:wrap;gap:4px}
 .tool{all:unset;cursor:pointer;font-size:13px;font-weight:550;padding:6px 10px;border-radius:9px;background:var(--fill)}
 .tool[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
 .toolbar label{display:inline-flex;align-items:center;gap:6px;font-size:13.5px}
 #tq{width:140px}
+#tqn{width:64px;font:inherit;font-variant-numeric:tabular-nums;padding:5px 6px;border-radius:8px;border:1px solid var(--hair);background:var(--surface);color:var(--ink)}
+/* training */
+.tiles{display:grid;gap:10px}
+.tile{all:unset;box-sizing:border-box;cursor:pointer;display:grid;gap:4px;padding:12px 14px;border-radius:14px;background:var(--fill)}
+.tile:hover{outline:2px solid color-mix(in srgb,var(--accent) 45%,transparent)}
+.tile .eyebrow{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.02em}
+.tile b{font-size:16px;font-weight:650}
+.tile .blurb{font-size:14px;color:var(--muted);line-height:1.4}
+.tile .meta2{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted);margin-top:4px}
+.trhead{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.trhead .btn.link{padding-left:0}
+.stepper{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.stepper li{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:12.5px;font-weight:600;background:var(--fill);color:var(--muted);font-variant-numeric:tabular-nums}
+.stepper li.now{background:var(--accent);color:var(--on-accent)}
+.stepper li.done{background:color-mix(in srgb,var(--ok) 18%,transparent);color:var(--ok)}
+.trbody{display:grid;gap:10px}
+.trbody p{margin:0}
+.q{color:var(--ink)!important;font-weight:600}
+.opts{display:grid;gap:8px}
+.opts.two{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.opt{all:unset;box-sizing:border-box;cursor:pointer;padding:11px 14px;border-radius:12px;background:var(--fill);font-size:14.5px;line-height:1.35}
+.opt:hover{outline:2px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+.opt.ok{background:color-mix(in srgb,var(--ok) 18%,transparent);color:var(--ok)}
+.opt.no{background:color-mix(in srgb,var(--warn) 16%,transparent);color:var(--warn)}
+.ticks{margin:0;padding-left:20px;color:var(--muted);font-size:14px;display:grid;gap:4px}
+.goals{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:14.5px}
+.goals li{display:flex;align-items:center;gap:10px}
+.goals .tick{width:20px;height:20px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:12px;font-weight:700;border:2px solid var(--hair)}
+.goals li.ok{color:var(--muted)} .goals li.ok .tick{background:var(--ok);border-color:var(--ok);color:#fff}
+.trsel{display:grid;gap:8px;padding:10px 12px;border-radius:12px;border:1px solid var(--hair)}
+.trname{display:flex;align-items:center;justify-content:space-between;gap:8px;font-weight:600;font-size:14.5px}
+.fb{font-size:14.5px;line-height:1.45;border-radius:12px}
+.fb:empty{display:none}
+.fb.ok,.fb.bad,.fb.info{padding:10px 12px}
+.fb.ok{background:color-mix(in srgb,var(--ok) 14%,transparent)} .fb.ok b{color:var(--ok)}
+.fb.bad{background:color-mix(in srgb,var(--warn) 14%,transparent)} .fb.bad b{color:var(--warn)}
+.fb.info{background:var(--fill);color:var(--muted)}
+.meter{display:grid;gap:2px;padding:12px 14px;border-radius:12px;background:var(--ink);color:var(--surface)}
+.mval{font:600 26px/1.1 var(--mono);font-variant-numeric:tabular-nums}
+.mcap{font-size:13px;opacity:.75}
+.simtag{font-size:12px;padding:1px 6px;border-radius:5px;background:color-mix(in srgb,var(--warn) 14%,transparent);color:var(--warn)}
+.pent{position:relative;width:min(220px,70%);aspect-ratio:1;margin:4px auto;border-radius:50%;background:var(--fill)}
+.pent button{all:unset;cursor:pointer;position:absolute;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;background:var(--surface);border:2px solid var(--hair);display:grid;place-items:center;font-weight:700}
+.pent button.on{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.log{margin:0;padding-left:20px;display:grid;gap:6px;font-size:14px;color:var(--muted)}
+.log b{color:var(--ink)}
+.small{font-size:13px;color:var(--muted)}
 
 #toast{position:fixed;z-index:9;left:50%;top:calc(env(safe-area-inset-top,0px) + 120px);transform:translateX(-50%);max-width:min(520px,calc(100% - 32px));padding:11px 16px;border-radius:16px;font-size:14.5px;text-align:center}
 #toast.warn{color:var(--warn)}
@@ -141,6 +188,9 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 #loading .tape{width:220px;height:4px;background:var(--hair);border-radius:2px;overflow:hidden;margin:auto}
 #bar{height:100%;background:var(--accent);transform:scaleX(0);transform-origin:left}
 @media (max-width:560px){.brand span{display:none}.seg{order:3;width:100%}.seg button{flex:1;padding:8px 6px}.views{top:calc(env(safe-area-inset-top,0px) + 118px)}#toast{top:calc(env(safe-area-inset-top,0px) + 160px)}}
+/* phones: one row of tools to swipe through, under the camera chips */
+@media (max-width:819px){.toolbar{bottom:auto;top:calc(env(safe-area-inset-top,0px) + 122px);flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding:6px} .toolbar::-webkit-scrollbar{display:none} #tray{flex-wrap:nowrap} .tool{white-space:nowrap;flex:none} .toolbar label{flex:none}}
+@media (max-width:560px){.toolbar{top:calc(env(safe-area-inset-top,0px) + 166px)}}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 </style>
 
@@ -150,7 +200,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
   <div class="brand"><b>Golf Mk8 eHybrid</b><span>Workshop · teaching model</span></div>
   <div class="seg" role="tablist" aria-label="Mode">
     <button role="tab" data-mode="explore" aria-selected="true">Explore</button>
-    <button role="tab" data-mode="job" aria-selected="false">Engine job</button>
+    <button role="tab" data-mode="train" aria-selected="false">Training</button>
     <button role="tab" data-mode="photo" aria-selected="false">Photo</button>
   </div>
   <div class="icons">
@@ -172,7 +222,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     <div id="ce-empty" style="display:grid;gap:12px">
       <h2>Tap any part of the car</h2>
       <p>Open the doors and bonnet, take parts off and put them back. Every step tells you the right tool and torque.</p>
-      <div class="row2"><button class="btn" id="browse">Browse all parts</button><button class="btn" id="gojob">Take the engine out</button></div>
+      <div class="row2"><button class="btn" id="browse">Browse all parts</button><button class="btn" id="gojob">Start training</button></div>
     </div>
     <div id="ce-part" hidden style="display:grid;gap:12px">
       <div class="meta"><i class="dot" id="ce-dot"></i><span class="sysname" id="ce-sys"></span><span class="pill" id="ce-state"></span><button class="x" id="ce-close" aria-label="Close">×</button></div>
@@ -186,7 +236,10 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     <div class="jobmini" id="ce-job" hidden><span id="ce-jobtext"></span><button class="btn link" id="ce-jobgo">Continue</button></div>
   </div>
 
+  <div id="card-train" hidden style="display:grid;gap:12px"></div>
+
   <div id="card-job" hidden style="display:grid;gap:12px">
+    <button class="btn link" id="jobback" style="justify-self:start;padding-left:0">‹ All training</button>
     <div class="stepn" id="stepn"></div>
     <div class="progress"><i id="stepbar" style="width:0"></i></div>
     <h2 id="stept"></h2>
@@ -206,7 +259,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 </section>
 
 <div class="toolbar glass" hidden><div id="tray" role="toolbar" aria-label="Tools"></div>
-  <label id="tqbox" hidden>Torque <input id="tq" type="range" min="2" max="220" step="0.5" value="8"> <b><span id="tqv">8</span> Nm</b></label>
+  <label id="tqbox" hidden>Torque <input id="tq" type="range" min="2" max="220" step="0.5" value="8"> <input id="tqn" type="number" min="2" max="220" step="0.5" value="8" inputmode="decimal" aria-label="Torque in newton metres"> Nm <span id="tqv" hidden>8</span></label>
   <label id="angbox" hidden>Angle <select id="ang"><option>45</option><option selected>90</option><option>135</option><option>180</option></select>°</label>
 </div>
 
@@ -244,4 +297,4 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 <div id="loading"><span id="loadtext">Loading the Golf…</span><div class="tape"><div id="bar"></div></div></div>
 
 <script type="importmap">{"imports":{"three":"./lib/three.module.js","three/addons/":"./lib/addons/","three/examples/jsm/":"./lib/addons/","three-mesh-bvh":"./lib/three-mesh-bvh/index.module.js","three-gpu-pathtracer":"./lib/pathtracer/three-gpu-pathtracer.module.js"}}</script>
-<script type="module" src="ehybrid.js?v=9"></script>
+<script type="module" src="ehybrid.js?v=10"></script>
