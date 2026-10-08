@@ -3,6 +3,10 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { FLEET, classifyMesh } from './fleet.js';
 import { measureCar, buildPowertrain } from './powertrain.js';
 import { buildEngineBayDetail } from './engine-bay-detail.js';
@@ -37,16 +41,49 @@ const camera = new THREE.PerspectiveCamera(34, 1, 0.02, 80);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true; controls.dampingFactor = 0.09; controls.screenSpacePanning = true;
 controls.minDistance = 0.6; controls.maxDistance = 14; controls.maxPolarAngle = Math.PI * 0.6;
-const key = new THREE.DirectionalLight(0xffffff, 1.6); key.position.set(4, 7, 5); key.castShadow = true;
-key.shadow.mapSize.set(2048, 2048); Object.assign(key.shadow.camera, { left: -4, right: 4, top: 4, bottom: -4, near: 1, far: 20 }); scene.add(key);
-scene.add(new THREE.HemisphereLight(0xdfe8f2, 0x3a3f46, 0.5));
-const floor = new THREE.Mesh(new THREE.CircleGeometry(9, 64), new THREE.MeshStandardMaterial({ color: 0x8c949b, roughness: 0.92, metalness: 0 }));
-floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
-const grid = new THREE.GridHelper(18, 72, 0x5f6870, 0x737c84); grid.position.y = 0.001; grid.material.transparent = true; grid.material.opacity = 0.25; scene.add(grid);
+/* studio rig from the Golf Workshop garage: key with soft shadows, cool fill, warm rim */
+const key = new THREE.DirectionalLight(0xffffff, 1.7); key.position.set(4.5, 7.5, 5.5); key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048); Object.assign(key.shadow.camera, { left: -5, right: 5, top: 5, bottom: -5, near: 0.5, far: 26 });
+key.shadow.bias = -0.0012; key.shadow.normalBias = 0.02; key.shadow.radius = 6;
+const fill = new THREE.DirectionalLight(0xbfd4ff, 0.42); fill.position.set(-6, 4.6, -4);
+const rim = new THREE.DirectionalLight(0xffe9cf, 0.65); rim.position.set(-2, 3.8, -7);
+const under = new THREE.DirectionalLight(0xffffff, 0.35); under.position.set(1, -4, 2);   // a work lamp under the lift
+scene.add(key, fill, rim, under, new THREE.AmbientLight(0xffffff, 0.12));
+function radialTexture(stops) {
+  const c = document.createElement('canvas'); c.width = c.height = 256;
+  const g = c.getContext('2d'), gr = g.createRadialGradient(128, 128, 0, 128, 128, 128);
+  for (const [at, col] of stops) gr.addColorStop(at, col);
+  g.fillStyle = gr; g.fillRect(0, 0, 256, 256);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+const flat = (geo, mat, y) => { const m = new THREE.Mesh(geo, mat); m.rotation.x = -Math.PI / 2; m.position.y = y; m.renderOrder = -1; scene.add(m); return m; };
+flat(new THREE.CircleGeometry(9, 64), new THREE.MeshStandardMaterial({ color: 0x7d858c, roughness: 0.86, metalness: 0.05 }), -0.002).receiveShadow = true;
+flat(new THREE.PlaneGeometry(16, 16), new THREE.MeshBasicMaterial({ map: radialTexture([[0, 'rgba(255,255,255,.18)'], [0.5, 'rgba(255,255,255,.06)'], [1, 'rgba(255,255,255,0)']]), transparent: true, depthWrite: false }), 0);
+flat(new THREE.PlaneGeometry(30, 30), new THREE.ShadowMaterial({ opacity: 0.45, depthWrite: false }), 0.001).receiveShadow = true;
+const contact = flat(new THREE.PlaneGeometry(2.3, 5.0), new THREE.MeshBasicMaterial({ map: radialTexture([[0, 'rgba(0,0,0,.7)'], [0.55, 'rgba(0,0,0,.38)'], [1, 'rgba(0,0,0,0)']]), transparent: true, depthWrite: false }), 0.003);
 
+/* workshop surfaces (from the Golf Workshop): fine grain and casting pores in the
+   roughness and normal maps, so cast alloy, machined faces and plastics read apart */
+function surfaceMaps(seed, repeat) {
+  const n = 64, rough = new Uint8Array(n * n * 4), norm = new Uint8Array(n * n * 4);
+  let st = seed >>> 0; const rr = () => ((st = (st * 1664525 + 1013904223) >>> 0) / 4294967295);
+  for (let i = 0; i < n * n; i++) {
+    const grain = rr() - 0.5, pore = rr() < 0.035 ? -34 : 0, v = Math.max(80, Math.min(245, 190 + grain * 44 + pore));
+    rough.set([v, v, v, 255], i * 4); norm.set([128 + Math.round(grain * 18), 128 + Math.round((rr() - 0.5) * 18), 255, 255], i * 4);
+  }
+  const out = {};
+  for (const [k, d] of [['roughness', rough], ['normal', norm]]) {
+    const t = new THREE.DataTexture(d, n, n, THREE.RGBAFormat); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(repeat, repeat);
+    t.colorSpace = THREE.NoColorSpace; t.needsUpdate = true; out[k] = t;
+  }
+  return out;
+}
+let SURF = null;
 function materialFactory(color, options = {}, finish = 'cast') {
-  const m = new THREE.MeshPhysicalMaterial({ color, ...options });
-  if (finish === 'paint') { m.clearcoat = 0.75; m.clearcoatRoughness = 0.2; }
+  SURF ||= { cast: surfaceMaps(0x5ca57, 7), plastic: surfaceMaps(0x91a57, 9), brushed: surfaceMaps(0xb4a55, 12), rubber: surfaceMaps(0x7abb3, 8) };
+  const maps = SURF[finish] || SURF.cast, m = new THREE.MeshPhysicalMaterial({ color, ...options });
+  if (!m.transparent) { m.roughnessMap = maps.roughness; m.normalMap = maps.normal; const k = finish === 'cast' ? 0.24 : finish === 'plastic' ? 0.13 : finish === 'rubber' ? 0.18 : 0.08; m.normalScale.set(k, k); }
+  if (finish === 'paint') { m.clearcoat = 0.78; m.clearcoatRoughness = 0.19; }
   return m;
 }
 
@@ -206,6 +243,7 @@ const STEPS = [
 let step = 0, reversing = false, liftT = 0, liftY = 0;
 const LIFT = 0.95;
 function applyStep() {
+  poke();
   const s = {}; parts.forEach(p => s[p.id] = { o: V(0, 0, 0), h: !!p.hidden });
   for (let i = 0; i <= step; i++) STEPS[i].f(s);
   parts.forEach(p => { p.svcT.copy(s[p.id].o); p.hideT = s[p.id].h; });
@@ -236,7 +274,7 @@ function buildTree() {
     sm.innerHTML = `<i class="dot" style="background:${SYS_COLOR[k]}"></i><span></span><span class="n">${n}</span>`; sm.children[1].textContent = label; d.append(sm);
     for (const p of list) {
       const r = document.createElement('div'); r.className = 'row'; r.id = 'row_' + p.id;
-      const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = true; cb.id = 'cb_' + p.id; cb.setAttribute('aria-label', 'Show ' + p.name); cb.onchange = () => { p.vis = cb.checked; };
+      const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = true; cb.id = 'cb_' + p.id; cb.setAttribute('aria-label', 'Show ' + p.name); cb.onchange = () => { p.vis = cb.checked; poke(); };
       const b = document.createElement('button'); b.textContent = p.name; b.onclick = () => select(p.id, true);
       const q = document.createElement('span'); q.className = 'q'; q.textContent = p.qty > 1 ? '×' + p.qty : '';
       if (has(p, 'seal')) b.classList.add('isseal'); if (has(p, 'fastener')) b.classList.add('isbolt'); if (has(p, 'hv')) b.classList.add('ishv');
@@ -254,6 +292,7 @@ function setHighlight(id, on) {
     else if (o.userData.m0) { o.material = o.userData.m0; delete o.userData.m0; } });
 }
 function select(id, frame) {
+  poke();
   if (selected) { setHighlight(selected, false); $('#row_' + selected)?.classList.remove('sel'); }
   selected = id; const p = byId[id]; if (!p) return;
   setHighlight(id, true);
@@ -269,8 +308,8 @@ function select(id, frame) {
   const n = document.createElement('p'); n.className = 'note'; n.textContent = p.note || 'Shape and position estimated.'; box.append(n);
   if (frame) { const b = new THREE.Box3().setFromObject(p.obj); if (!b.isEmpty()) { const c = b.getCenter(V(0, 0, 0)), r = Math.max(0.35, b.getSize(V(0, 0, 0)).length()); flyTo(c.clone().add(V(r * 1.1, r * 0.7, r * 1.3)), c); } }
 }
-$('#isolate').onclick = () => { if (!selected) return; const s = byId[selected].sys; parts.forEach(p => { p.vis = p.sys === s; $('#cb_' + p.id).checked = p.vis; }); };
-$('#showall').onclick = () => parts.forEach(p => { p.vis = true; $('#cb_' + p.id).checked = true; });
+$('#isolate').onclick = () => { poke(); if (!selected) return; const s = byId[selected].sys; parts.forEach(p => { p.vis = p.sys === s; $('#cb_' + p.id).checked = p.vis; }); };
+$('#showall').onclick = () => { poke(); parts.forEach(p => { p.vis = true; $('#cb_' + p.id).checked = true; }); };
 const ray = new THREE.Raycaster(), ptr = new THREE.Vector2(); let down = null;
 renderer.domElement.addEventListener('pointerdown', e => down = [e.clientX, e.clientY]);
 renderer.domElement.addEventListener('pointerup', e => {
@@ -283,12 +322,22 @@ renderer.domElement.addEventListener('pointerup', e => {
   if (hit) select(hit.object.userData.pid, false);
 });
 
+/* realistic finishes by default; the switch paints seals green and fasteners gold */
+const MARK = { seal: new THREE.MeshStandardMaterial({ color: 0x1fae62, roughness: 0.6, emissive: 0x0a3a20, emissiveIntensity: 0.4 }), fastener: new THREE.MeshStandardMaterial({ color: 0xe0b83a, metalness: 0.8, roughness: 0.3, emissive: 0x3a2a00, emissiveIntensity: 0.4 }) };
+function setMarkers(on) {
+  const sel = selected; if (sel) setHighlight(sel, false);
+  for (const p of parts) { const k = has(p, 'seal') ? 'seal' : has(p, 'fastener') ? 'fastener' : null; if (!k) continue;
+    p.obj.traverse(o => { if (!o.isMesh) return; if (on) { o.userData.real ||= o.material; o.material = MARK[k]; } else if (o.userData.real) { o.material = o.userData.real; delete o.userData.real; } }); }
+  if (sel) setHighlight(sel, true); poke();
+}
+$('#markers').onchange = e => setMarkers(e.target.checked);
+
 /* ───────── view controls ───────── */
 let explode = 0, hvPulse = false;
-$('#explode').oninput = e => explode = +e.target.value;
-$('#xray').oninput = e => setOpacity(+e.target.value);
+$('#explode').oninput = e => { explode = +e.target.value; poke(); };
+$('#xray').oninput = e => { setOpacity(+e.target.value); poke(); };
 function setOpacity(v) { for (const m of bodyMats) { m.transparent = v < 0.999 || m.userData.tr0; m.opacity = Math.min(m.userData.op0, v); m.depthWrite = v > 0.6; m.needsUpdate = true; } }
-const VIEWS = { iso: [[4.6, 2.6, 4.8], [0, 0.55, 0.2]], side: [[6.4, 1.1, 0.1], [0, 0.6, 0]], bay: [[1.9, 1.9, 3.3], [-0.05, 0.55, 1.5]], under: [[2.4, -0.4, 2.2], [0, 0.35, 0.3]], top: [[0.01, 7.5, 0.2], [0, 0, 0.2]], bench: [[3.4, 1.9, 4.4], [0.3, 0.95, 3.45]] };
+const VIEWS = { iso: [[4.6, 2.6, 4.8], [0, 0.55, 0.2]], side: [[6.4, 1.1, 0.1], [0, 0.6, 0]], bay: [[1.9, 1.9, 3.3], [-0.05, 0.55, 1.5]], under: [[2.4, -0.4, 2.2], [0, 0.35, 0.3]], top: [[0.01, 7.5, 0.2], [0, 0, 0.2]], bench: [[2.0, 2.15, 7.0], [0.4, 1.12, 3.45]] };
 let fly = null;
 function flyTo(pos, tgt) { fly = { p: pos.clone(), t: tgt.clone() }; }
 document.querySelectorAll('[data-v]').forEach(b => b.onclick = () => { const [p, t] = VIEWS[b.dataset.v], up = b.dataset.v === 'bench' || b.dataset.v === 'top' ? 0 : liftT; flyTo(V(p[0], p[1] + up, p[2]), V(t[0], t[1] + up, t[2])); });
@@ -296,12 +345,26 @@ camera.position.set(...VIEWS.iso[0]); controls.target.set(...VIEWS.iso[1]);
 
 /* ───────── loop ───────── */
 const clock = new THREE.Clock();
-function resize() { const w = stage.clientWidth, h = stage.clientHeight; if (renderer.domElement.width !== Math.floor(w * renderer.getPixelRatio()) || renderer.domElement.height !== Math.floor(h * renderer.getPixelRatio())) { renderer.setSize(w, h, false); camera.aspect = w / Math.max(h, 1); camera.updateProjectionMatrix(); } }
+function resize() { const w = stage.clientWidth, h = stage.clientHeight; if (renderer.domElement.width !== Math.floor(w * renderer.getPixelRatio()) || renderer.domElement.height !== Math.floor(h * renderer.getPixelRatio())) { renderer.setSize(w, h, false); camera.aspect = w / Math.max(h, 1); camera.updateProjectionMatrix(); if (composer) composer.setSize(w, h); poke(); } }
 const HVC = new THREE.Color(0xff6a00);
+let composer = null, gtao = null, polished = false, idleSince = 0, aoOff = new URLSearchParams(location.search).has('plain'), lastMove = 1;
+function poke() { polished = false; idleSince = performance.now(); }
+controls.addEventListener('change', poke);
+function makeComposer() {
+  const size = renderer.getDrawingBufferSize(new THREE.Vector2());
+  composer = new EffectComposer(renderer, new THREE.WebGLRenderTarget(size.x, size.y, { type: THREE.HalfFloatType, samples: 4 }));
+  composer.setPixelRatio(renderer.getPixelRatio()); composer.setSize(stage.clientWidth, stage.clientHeight);
+  composer.addPass(new RenderPass(scene, camera));
+  gtao = new GTAOPass(scene, camera, size.x, size.y);
+  gtao.updateGtaoMaterial({ radius: 0.28, distanceExponent: 1.6, thickness: 1.2, scale: 1.1, samples: 16, distanceFallOff: 1, screenSpaceRadius: false });
+  gtao.updatePdMaterial({ lumaPhi: 10, depthPhi: 2, normalPhi: 3, radius: 5, rings: 2, samples: 16 });
+  gtao.blendIntensity = 0.95;
+  composer.addPass(gtao); composer.addPass(new OutputPass());
+}
 function tick() {
   resize();
   const dt = Math.min(clock.getDelta(), 0.05), k = REDUCED ? 1 : 1 - Math.pow(0.0015, dt);
-  liftY += (liftT - liftY) * k; carRoot.position.y = liftY;
+  liftY += (liftT - liftY) * k; carRoot.position.y = liftY; contact.material.opacity = 1 - Math.min(1, liftY / 0.6);
   for (const p of parts) {
     p.svc.lerp(p.svcT, k);
     p.obj.position.copy(p.home).add(p.svc).addScaledVector(p.ex, has(p, 'strip') ? 0 : explode);
@@ -311,7 +374,14 @@ function tick() {
   if (hvPulse) { const a = 0.35 + 0.35 * Math.sin(performance.now() / 220); parts.forEach(p => { if (has(p, 'hv') && p.id !== selected) p.obj.traverse(o => { if (o.isMesh && o.material.emissive) { if (!o.userData.hvm) { o.userData.hvm = o.material; o.material = o.material.clone(); } o.material.emissive = HVC; o.material.emissiveIntensity = a; } }); }); }
   else parts.forEach(p => { if (has(p, 'hv')) p.obj.traverse(o => { if (o.isMesh && o.userData.hvm) { o.material = o.userData.hvm; delete o.userData.hvm; } }); });
   if (fly) { const f = REDUCED ? 1 : 1 - Math.pow(0.02, dt); camera.position.lerp(fly.p, f); controls.target.lerp(fly.t, f); if (camera.position.distanceTo(fly.p) < 0.01) fly = null; }
-  controls.update(); renderer.render(scene, camera); requestAnimationFrame(tick);
+  controls.update();
+  let moving = !!fly || hvPulse || Math.abs(liftT - liftY) > 1e-4;
+  if (!moving) for (const p of parts) if (p.svc.distanceToSquared(p.svcT) > 1e-9) { moving = true; break; }
+  const now = performance.now();
+  if (moving) poke();
+  if (now - idleSince < 200 || aoOff) { renderer.render(scene, camera); }
+  else if (!polished) { try { if (!composer) makeComposer(); composer.render(); } catch (e) { console.warn('ambient occlusion off on this GPU', e); aoOff = true; renderer.render(scene, camera); } polished = true; }
+  requestAnimationFrame(tick);
 }
 
 /* ───────── load ───────── */

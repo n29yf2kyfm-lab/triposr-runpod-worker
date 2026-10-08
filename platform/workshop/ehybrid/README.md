@@ -5,7 +5,7 @@ Published as a private artifact: https://claude.ai/artifact/17U3LhXH5hBdz8G6qtkF
 Built on the Golf Workshop artifact (Mwv7ahiqrWymYQhvheLkg9). The publish copies these
 files from it server side, so they are not duplicated here: `fleet.js`, `powertrain.js`,
 `engine-bay-detail.js`, `engine-bay-shell.js`, `transmission-detail.js`, `front-bumper.js`,
-`golf.glb.wasm` and the vendored three.js r169 under `lib/`.
+`engine-internals.js`, `golf.glb.wasm` and the vendored three.js r169 under `lib/` (including the post-processing passes for ambient occlusion).
 
 New here:
 - `hybrid-parts.js` — the eHybrid parts (e-motor/K0 module, inverter, HV cables, charge

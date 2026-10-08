@@ -65,6 +65,8 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 #loading{position:absolute;inset:0;display:grid;place-content:center;gap:10px;text-align:center;background:var(--stage);color:var(--muted)}
 #loading .tape{width:240px;height:4px;background:var(--line);border-radius:2px;overflow:hidden}
 #bar{height:100%;background:var(--accent);transform:scaleX(0);transform-origin:left}
+.chk{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer}
+.chk input{accent-color:var(--accent);width:16px;height:16px}
 .small{font-size:12.5px;color:var(--muted);line-height:1.5}
 .small a{color:var(--accent)}
 @media (max-width:1020px){
@@ -91,11 +93,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
       <button class="b" data-v="iso">3/4</button><button class="b" data-v="side">Side</button><button class="b" data-v="bay">Engine bay</button>
       <button class="b" data-v="under">Under</button><button class="b" data-v="top">Top</button><button class="b" data-v="bench">Bench</button>
     </div>
-    <div class="legend">
-      <span><i class="dot" style="background:#ff6a00"></i>High voltage</span>
-      <span><i class="dot" style="background:#1f9d5a"></i>Seals and gaskets</span>
-      <span><i class="dot" style="background:#d4b13f"></i>Fasteners</span>
-    </div>
+    <div class="legend"><span><i class="dot" style="background:#ff6a00"></i>Orange = high voltage</span></div>
     <div id="loading"><span id="loadtext">Loading the Golf…</span><div class="tape"><div id="bar"></div></div></div>
   </div>
 
@@ -104,6 +102,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     <div class="ctl">
       <label class="s" for="explode">Explode <input id="explode" type="range" min="0" max="1" step="0.01" value="0"></label>
       <label class="s" for="xray">Body see-through <input id="xray" type="range" min="0.08" max="1" step="0.01" value="1"></label>
+      <label class="chk" for="markers"><input id="markers" type="checkbox"> Highlight seals (green) and bolts (gold)</label>
       <div class="btns"><button class="b" id="isolate">Isolate system</button><button class="b" id="showall">Show all</button></div>
     </div>
 
