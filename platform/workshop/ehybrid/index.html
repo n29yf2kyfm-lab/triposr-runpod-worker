@@ -183,14 +183,36 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 #toast.warn{color:var(--warn)}
 #photobadge{position:fixed;z-index:6;right:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);display:flex;gap:8px;align-items:baseline;padding:8px 14px;border-radius:999px;font-size:13.5px;font-variant-numeric:tabular-nums}
 #photobadge span{color:var(--muted)}
-@media (max-width:819px){#photobadge{right:auto;left:50%;transform:translateX(-50%);bottom:auto;top:calc(env(safe-area-inset-top,0px) + 122px)}}
 #loading{position:fixed;inset:0;z-index:20;display:grid;place-content:center;gap:12px;text-align:center;background:var(--bg);color:var(--muted)}
 #loading .tape{width:220px;height:4px;background:var(--hair);border-radius:2px;overflow:hidden;margin:auto}
 #bar{height:100%;background:var(--accent);transform:scaleX(0);transform-origin:left}
-@media (max-width:560px){.brand span{display:none}.seg{order:3;width:100%}.seg button{flex:1;padding:8px 6px}.views{top:calc(env(safe-area-inset-top,0px) + 118px)}#toast{top:calc(env(safe-area-inset-top,0px) + 160px)}}
 /* phones: one row of tools to swipe through, under the camera chips */
 @media (max-width:819px){.toolbar{bottom:auto;top:calc(env(safe-area-inset-top,0px) + 122px);flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding:6px} .toolbar::-webkit-scrollbar{display:none} #tray{flex-wrap:nowrap} .tool{white-space:nowrap;flex:none} .toolbar label{flex:none}}
-@media (max-width:560px){.toolbar{top:calc(env(safe-area-inset-top,0px) + 166px)}}
+/* recentre button and the sheet's grab handle */
+.recenter{all:unset;position:fixed;z-index:6;right:16px;bottom:16px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:var(--ink);background:color-mix(in srgb,var(--surface) 82%,transparent);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border:1px solid color-mix(in srgb,var(--hair) 70%,transparent);box-shadow:0 2px 10px rgba(20,22,28,.14)}
+.recenter svg{width:22px;height:22px}
+.grab{display:none}
+.ib.phone{display:none}
+@media (min-width:820px){#photobadge{right:72px}}
+/* phones: one slim bar, views behind the camera button, a sheet you drag between three heights */
+@media (max-width:819px){
+  .bar{padding:6px;gap:6px;flex-wrap:nowrap;border-radius:16px}
+  .brand{display:none}
+  .seg{flex:1;min-width:0} .seg button{flex:1;padding:8px 4px;font-size:14px}
+  .ib{width:38px;height:38px} .ib.phone{display:grid}
+  .views{display:none;left:auto;right:12px;top:calc(env(safe-area-inset-top,0px) + 66px);width:190px;flex-direction:column;gap:2px;padding:6px;border-radius:16px;overflow:visible;background:color-mix(in srgb,var(--surface) 92%,transparent);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px);border:1px solid color-mix(in srgb,var(--hair) 70%,transparent);box-shadow:var(--shadow);z-index:7}
+  .views.open{display:flex}
+  .views .chip{background:none;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;padding:11px 12px;border-radius:10px;font-size:15px}
+  .views .chip:hover{background:var(--fill)}
+  .toolbar{bottom:auto;top:calc(env(safe-area-inset-top,0px) + 66px);flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding:6px} .toolbar::-webkit-scrollbar{display:none} #tray{flex-wrap:nowrap} .tool{white-space:nowrap;flex:none} .toolbar label{flex:none}
+  #toast{top:calc(env(safe-area-inset-top,0px) + 66px)} body.tray-on #toast{top:calc(env(safe-area-inset-top,0px) + 118px)}
+  #photobadge{right:auto;left:50%;transform:translateX(-50%);bottom:auto;top:calc(env(safe-area-inset-top,0px) + 66px)}
+  .sheet{box-sizing:border-box;max-height:none;height:var(--sheet-h,212px);padding-top:26px;transition:height .28s cubic-bezier(.2,.8,.2,1);overscroll-behavior:contain}
+  .sheet.dragging{transition:none}
+  .grab{all:unset;display:block;position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:24px;cursor:grab;touch-action:none}
+  .grab::after{content:"";position:absolute;left:50%;top:9px;width:40px;height:5px;margin-left:-20px;border-radius:3px;background:var(--hair)}
+  .recenter{right:14px;bottom:calc(var(--sheet-h,212px) + env(safe-area-inset-bottom,0px) + 24px);transition:bottom .28s cubic-bezier(.2,.8,.2,1)}
+}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 </style>
 
@@ -204,6 +226,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
     <button role="tab" data-mode="photo" aria-selected="false">Photo</button>
   </div>
   <div class="icons">
+    <button class="ib phone" id="openviews" aria-label="Camera views" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2.2l1.6-2.2h7.4L17.3 7h2.2A1.5 1.5 0 0 1 21 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/><circle cx="12" cy="13" r="3.4"/></svg></button>
     <button class="ib" id="openparts" aria-label="All parts" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1" fill="currentColor"/><circle cx="4" cy="12" r="1" fill="currentColor"/><circle cx="4" cy="18" r="1" fill="currentColor"/></svg></button>
     <button class="ib" id="openview" aria-label="View settings" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></button>
   </div>
@@ -217,19 +240,22 @@ input[type=range]{width:100%;accent-color:var(--accent)}
   <button class="chip glass" data-v="bench">Engine stand</button>
 </nav>
 
+<button class="recenter glass" id="recenter" aria-label="Back to the whole car"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></button>
+
 <section class="sheet glass" id="sheet" aria-live="polite">
+  <button class="grab" id="grab" aria-label="Show more or less of this panel"></button>
   <div id="card-explore" style="display:contents">
     <div id="ce-empty" style="display:grid;gap:12px">
       <h2>Tap any part of the car</h2>
-      <p>Open the doors and bonnet, take parts off and put them back. Every step tells you the right tool and torque.</p>
       <div class="row2"><button class="btn" id="browse">Browse all parts</button><button class="btn" id="gojob">Start training</button></div>
+      <p>Drag to turn, pinch to zoom, two fingers to move. Double-tap a part to turn around it. Every step tells you the right tool and torque.</p>
     </div>
     <div id="ce-part" hidden style="display:grid;gap:12px">
       <div class="meta"><i class="dot" id="ce-dot"></i><span class="sysname" id="ce-sys"></span><span class="pill" id="ce-state"></span><button class="x" id="ce-close" aria-label="Close">×</button></div>
       <h2 id="ce-name"></h2>
-      <div class="specs" id="ce-specs"></div>
-      <p class="hint" id="ce-hint"></p>
       <button class="btn pri big" id="ce-main"></button>
+      <p class="hint" id="ce-hint"></p>
+      <div class="specs" id="ce-specs"></div>
       <div class="row2" id="ce-more"></div>
       <div id="ce-details" hidden style="display:grid;gap:10px"></div>
     </div>
@@ -297,4 +323,4 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 <div id="loading"><span id="loadtext">Loading the Golf…</span><div class="tape"><div id="bar"></div></div></div>
 
 <script type="importmap">{"imports":{"three":"./lib/three.module.js","three/addons/":"./lib/addons/","three/examples/jsm/":"./lib/addons/","three-mesh-bvh":"./lib/three-mesh-bvh/index.module.js","three-gpu-pathtracer":"./lib/pathtracer/three-gpu-pathtracer.module.js"}}</script>
-<script type="module" src="ehybrid.js?v=10"></script>
+<script type="module" src="ehybrid.js?v=11"></script>

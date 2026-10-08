@@ -8,16 +8,16 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { FLEET, classifyMesh } from './fleet.js?v=10';
-import { measureCar, buildPowertrain } from './powertrain.js?v=10';
-import { buildEngineBayDetail } from './engine-bay-detail.js?v=10';
-import { buildInnerApron } from './engine-bay-shell.js?v=10';
-import { buildTransmission } from './transmission-detail.js?v=10';
-import { extractFrontBumper } from './front-bumper.js?v=10';
-import { buildHybrid, buildEngineStrip, buildDGEAExternals } from './hybrid-parts.js?v=10';
-import { TOOLS, SPEC, toolLabel, buildCarFasteners } from './jobs.js?v=10';
-import { buildFrontCorners } from './front-corner.js?v=10';
-import { createTraining } from './training.js?v=10';
+import { FLEET, classifyMesh } from './fleet.js?v=11';
+import { measureCar, buildPowertrain } from './powertrain.js?v=11';
+import { buildEngineBayDetail } from './engine-bay-detail.js?v=11';
+import { buildInnerApron } from './engine-bay-shell.js?v=11';
+import { buildTransmission } from './transmission-detail.js?v=11';
+import { extractFrontBumper } from './front-bumper.js?v=11';
+import { buildHybrid, buildEngineStrip, buildDGEAExternals } from './hybrid-parts.js?v=11';
+import { TOOLS, SPEC, toolLabel, buildCarFasteners } from './jobs.js?v=11';
+import { buildFrontCorners } from './front-corner.js?v=11';
+import { createTraining } from './training.js?v=11';
 
 /* Golf Mk8 eHybrid workshop. Built on the Golf Workshop's real Mk8 body
    (2021 Volkswagen Golf GTI by Ddiaz Design, Sketchfab, CC BY-NC-SA 4.0),
@@ -43,8 +43,10 @@ scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
 scene.environmentIntensity = 0.9;
 const camera = new THREE.PerspectiveCamera(34, 1, 0.02, 80);
 const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true; controls.dampingFactor = 0.09; controls.screenSpacePanning = true;
-controls.minDistance = 0.6; controls.maxDistance = 8; controls.maxPolarAngle = Math.PI * 0.6;
+const TOUCH = matchMedia('(pointer: coarse)').matches;
+controls.enableDamping = true; controls.dampingFactor = 0.12; controls.screenSpacePanning = true; controls.zoomToCursor = true;
+controls.rotateSpeed = TOUCH ? 0.6 : 0.9; controls.panSpeed = 0.8; controls.zoomSpeed = TOUCH ? 0.9 : 1;
+controls.minDistance = 0.35; controls.maxDistance = 8; controls.maxPolarAngle = Math.PI * 0.95;
 /* studio rig from the Golf Workshop garage: key with soft shadows, cool fill, warm rim */
 const key = new THREE.DirectionalLight(0xffffff, 1.7); key.position.set(4.5, 7.5, 5.5); key.castShadow = true;
 key.shadow.mapSize.set(2048, 2048); Object.assign(key.shadow.camera, { left: -5, right: 5, top: 5, bottom: -5, near: 0.5, far: 26 });
@@ -69,8 +71,8 @@ const cyc = (() => {
   const floor = new THREE.Mesh(new THREE.LatheGeometry(pts, 128), new THREE.MeshStandardMaterial({ color: 0xd2d5d8, roughness: 0.92, metalness: 0, side: THREE.DoubleSide }));
   floor.position.y = -0.002; floor.receiveShadow = true; scene.add(floor);
   // the wall above the cove is lit from behind, like a studio's light wall: it glows and wraps the paint in soft highlights
-  const wall = new THREE.Mesh(new THREE.CylinderGeometry(8.6, 8.6, 5.1, 128, 1, true), new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xf4f6f8, emissiveIntensity: 0.85, roughness: 1, side: THREE.DoubleSide }));
-  wall.position.y = 2.4 + 2.55; scene.add(wall);
+  const wall = new THREE.Mesh(new THREE.CylinderGeometry(8.6, 8.6, 11, 128, 1, true), new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xf4f6f8, emissiveIntensity: 0.85, roughness: 1, side: THREE.DoubleSide }));
+  wall.position.y = 2.4 + 5.5; scene.add(wall);
   // overhead softbox, for photos only (it would block the top view)
   const box = new THREE.Mesh(new THREE.PlaneGeometry(4.2, 2.6), new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 2.6, side: THREE.DoubleSide }));
   box.rotation.x = Math.PI / 2; box.position.set(0, 5.4, 0.2); box.visible = false; scene.add(box);
@@ -710,7 +712,7 @@ function renderCard() {
   if (a.chain) btn(a.chain === 'off' ? 'Do every step' : 'Put it all back', () => doAll(p.id, a.chain));
   else if (p.removed && !FIXED.has(p.id) && plan(p.id, 'on').length > 1) btn('Put it all back', () => doAll(p.id, 'on'));
   if (p.hinge && !p.removed && !p.hideT) btn(isOpen(p) ? 'Close' : 'Open', () => toggleHinge(p.id));
-  btn($('#ce-details').hidden ? 'Details' : 'Hide details', () => { $('#ce-details').hidden = !$('#ce-details').hidden; renderCard(); });
+  btn($('#ce-details').hidden ? 'Details' : 'Hide details', () => { $('#ce-details').hidden = !$('#ce-details').hidden; renderCard(); setDetent($('#ce-details').hidden ? 0 : 2); });
   const det = $('#ce-details');
   if (!det.hidden) {
     det.textContent = '';
@@ -729,7 +731,7 @@ function select(id, frame, keepMode) {
   if (!p) { if (focus) { focus = false; setOpacity(seeThrough()); } renderCard(); return; }
   setHighlight(id, true);
   const row = $('#row_' + id); if (row) { row.classList.add('sel'); const d = row.closest('details'); if (d) d.open = true; }
-  renderCard();
+  renderCard(); if (mode === 'explore') setDetent($('#ce-details').hidden ? 0 : 2);
   const inner = !['body', 'interior'].includes(p.sys) && !/^wheel_/.test(p.id);
   if (frame) { focus = inner; setOpacity(seeThrough()); const b = new THREE.Box3().setFromObject(p.obj); if (!b.isEmpty()) { const c = b.getCenter(V(0, 0, 0)), r = Math.max(0.45, b.getSize(V(0, 0, 0)).length()); flyTo(c.clone().add(V(Math.sign(c.x || 1) * r * 1.4, r * 0.8, r * 1.2)), c); } }
   else if (focus && !inner) { focus = false; setOpacity(seeThrough()); }
@@ -759,7 +761,8 @@ const W = {
   removePart: id => removePart(id), refitPart: id => refitPart(id), isFixed: id => FIXED.has(id), toggleHinge, isOpen,
   markLeak, focus: on => { focus = on; setOpacity(seeThrough()); poke(); },
   trainingActive: on => { training = on; trayWanted = false; $('.toolbar').hidden = !manual; if (on) tool = 'hand'; syncTray(); },
-  showTray: on => { trayWanted = on; $('.toolbar').hidden = !(on || manual); },
+  showTray: on => { trayWanted = on; $('.toolbar').hidden = !(on || manual); document.body.classList.toggle('tray-on', !$('.toolbar').hidden); updateViewOffset(); },
+  sheet: i => setDetent(i),
   resetCar: () => { clearInterval(seq); markLeak(null); refitEverything(); reversing = false; step = 0; applyStep(); liftT = 0; focus = false; setOpacity(seeThrough()); parts.forEach(p => { p.vis = true; }); select(null, false, true); },
   openDemo: () => setMode('job'),
 };
@@ -771,7 +774,7 @@ function setMode(m) {
   if (m === 'train' && TRN && !TRN.run) TRN.list();
   if (m !== 'train' && training) { TRN?.run?.job.cleanup?.(); TRN?.list(); }
   if (m !== 'photo') stopPhoto();
-  renderCard();
+  renderCard(); setDetent(m === 'explore' ? 0 : 1);
 }
 document.querySelectorAll('[data-mode]').forEach(b => b.onclick = () => setMode(b.dataset.mode));
 function panel(which, open) {
@@ -784,14 +787,22 @@ $('#openview').onclick = () => panel('viewpanel'); $('#closeview').onclick = () 
 $('#browse').onclick = () => panel('parts', true);
 $('#gojob').onclick = () => setMode('train'); $('#jobback').onclick = () => setMode('train'); $('#ce-jobgo').onclick = () => setMode('job');
 $('#ce-close').onclick = () => select(null);
-$('#manual').onchange = e => { manual = e.target.checked; $('.toolbar').hidden = !manual && !(training && trayWanted); if (manual) syncTray(); toast(manual ? 'Pick a tool, then tap each bolt. The card still shows the spec.' : 'Guided: the card picks the right tool for you.'); };
+$('#manual').onchange = e => { manual = e.target.checked; $('.toolbar').hidden = !manual && !(training && trayWanted); document.body.classList.toggle('tray-on', !$('.toolbar').hidden); updateViewOffset(); if (manual) syncTray(); toast(manual ? 'Pick a tool, then tap each bolt. The card still shows the spec.' : 'Guided: the card picks the right tool for you.'); };
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { panel('parts', false); panel('viewpanel', false); } });
 $('#isolate').onclick = () => { poke(); if (!selected) { toast('Tap a part first, then show only its system.', true); return; } const s = byId[selected].sys; parts.forEach(p => { p.vis = p.sys === s; }); };
 $('#showall').onclick = () => { poke(); parts.forEach(p => { p.vis = true; }); };
-const ray = new THREE.Raycaster(), ptr = new THREE.Vector2(); let down = null;
-renderer.domElement.addEventListener('pointerdown', e => down = [e.clientX, e.clientY]);
+const ray = new THREE.Raycaster(), ptr = new THREE.Vector2(); let down = null, lastTap = null;
+renderer.domElement.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY, e.timeStamp, e.isPrimary]; if ($('.views').classList.contains('open')) { $('.views').classList.remove('open'); $('#openviews').setAttribute('aria-expanded', 'false'); } });
 renderer.domElement.addEventListener('pointerup', e => {
-  if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 5) return;
+  if (!down || !down[3] || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > (e.pointerType === 'touch' ? 12 : 5) || e.timeStamp - down[2] > 600) return;
+  const now = e.timeStamp, dbl = lastTap && now - lastTap[0] < 330 && Math.hypot(e.clientX - lastTap[1], e.clientY - lastTap[2]) < 30;
+  lastTap = dbl ? null : [now, e.clientX, e.clientY];
+  if (dbl) {
+    const r = renderer.domElement.getBoundingClientRect(); ptr.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1); ray.setFromCamera(ptr, camera);
+    const h2 = ray.intersectObjects(parts.filter(p => p.obj.visible).map(p => p.obj), true).find(x => x.object.userData.pid);
+    if (h2) { const off = camera.position.clone().sub(controls.target), d = Math.min(off.length(), 1.6); flyTo(h2.point.clone().add(off.setLength(d)), h2.point); } else recenter();
+    return;
+  }
   const r = renderer.domElement.getBoundingClientRect(); ptr.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1);
   ray.setFromCamera(ptr, camera);
   const objs = parts.filter(p => p.obj.visible && !(seeThrough() < 0.5 && (['body', 'glazing', 'cabin', 'panel_bonnet', 'tailgate', 'bumper_f', 'charge_flap'].includes(p.id) || /^(door|wheel)_/.test(p.id)))).map(p => p.obj);
@@ -830,12 +841,59 @@ function setOpacity(v) { for (const m of bodyMats) { m.transparent = v < 0.999 |
 const VIEWS = { iso: [[4.6, 2.6, 4.8], [0, 0.55, 0.2]], side: [[6.4, 1.1, 0.1], [0, 0.6, 0]], bay: [[1.9, 1.9, 3.3], [-0.05, 0.55, 1.5]], under: [[2.4, -0.4, 2.2], [0, 0.35, 0.3]], top: [[0.01, 7.5, 0.2], [0, 0, 0.2]], bench: [[2.0, 2.15, 7.0], [0.4, 1.12, 3.45]], corner: [[2.3, 0.95, 2.6], [0.7, 0.42, 1.3]] };
 let fly = null;
 function flyTo(pos, tgt) { fly = { p: pos.clone(), t: tgt.clone() }; }
-document.querySelectorAll('[data-v]').forEach(b => b.onclick = () => { const [p, t] = VIEWS[b.dataset.v], up = b.dataset.v === 'bench' || b.dataset.v === 'top' ? 0 : liftT; flyTo(V(p[0], p[1] + up, p[2]), V(t[0], t[1] + up, t[2])); });
+// on a portrait phone the preset views step back a little so the whole subject fits
+const fit = (p, t) => { if (camera.aspect >= 1) return p; const o = p.clone().sub(t), k = Math.min(1.25, 7.6 / Math.max(o.length(), 0.01)); return t.clone().add(o.multiplyScalar(Math.max(1, k))); };
+document.querySelectorAll('[data-v]').forEach(b => b.onclick = () => { if (b.dataset.v === 'under' && liftT === 0 && !training) { liftT = LIFT; toast('Car raised on the lift to look underneath.'); }
+  const [p, t] = VIEWS[b.dataset.v], up = b.dataset.v === 'bench' || b.dataset.v === 'top' ? 0 : liftT, tt = V(t[0], t[1] + up, t[2]); flyTo(fit(V(p[0], p[1] + up, p[2]), tt), tt); });
 camera.position.set(...VIEWS.iso[0]); controls.target.set(...VIEWS.iso[1]);
+
+/* ───────── navigation: stay above the floor and near the car ───────── */
+const TMIN = V(-2.6, -0.2, -3.6), TMAX = V(2.6, 2.8, 3.8), FLOOR = 0.08;
+function keepCameraSane() {
+  const t = controls.target, c = t.clone().clamp(TMIN, TMAX).sub(t);
+  if (c.lengthSq() > 0) { t.add(c); camera.position.add(c); }
+  const d = camera.position.distanceTo(t);
+  controls.maxPolarAngle = Math.acos(Math.max(-1, Math.min(1, (FLOOR - t.y) / Math.max(d, 1e-3))));
+}
+function recenter() { const [p, t] = VIEWS.iso, tt = V(t[0], t[1] + liftT, t[2]); flyTo(fit(V(p[0], p[1] + liftT, p[2]), tt), tt); }
+
+/* ───────── phone sheet: three heights, drag or tap the handle; the 3D view re-centres in the gap ───────── */
+const sheet = $('#sheet'), isPhone = () => matchMedia('(max-width: 819px)').matches;
+let det = 0, autoDet = null;
+const detents = () => { const top = $('.bar').getBoundingClientRect().bottom; return [212, Math.round(innerHeight * 0.46), Math.round(innerHeight - top - 26)]; };
+function setDetent(i, auto) {
+  if (!isPhone()) { sheet.style.removeProperty('height'); document.documentElement.style.removeProperty('--sheet-h'); return; }
+  det = Math.max(0, Math.min(2, i)); if (!auto) autoDet = null;
+  document.documentElement.style.setProperty('--sheet-h', detents()[det] + 'px');
+}
+function updateViewOffset() {
+  const w = stage.clientWidth, h = stage.clientHeight;
+  if (!isPhone() || !w || !h) { if (camera.view?.enabled) { camera.clearViewOffset(); poke(); } return; }
+  const top = $('.bar').getBoundingClientRect().bottom + (document.body.classList.contains('tray-on') ? 52 : 0), bot = sheet.getBoundingClientRect().top;
+  const shift = Math.round(h / 2 - (top + Math.max(top + 80, bot)) / 2);
+  if (!camera.view || camera.view.offsetY !== shift || camera.view.fullWidth !== w || camera.view.fullHeight !== h) { camera.setViewOffset(w, h, 0, shift, w, h); poke(); }
+}
+new ResizeObserver(updateViewOffset).observe(sheet);
+addEventListener('resize', () => { setDetent(det); updateViewOffset(); });
+{ let y0 = null, h0 = 0, moved = false;
+  const grab = $('#grab');
+  grab.addEventListener('pointerdown', e => { if (!isPhone()) return; y0 = e.clientY; h0 = sheet.getBoundingClientRect().height; moved = false; sheet.classList.add('dragging'); grab.setPointerCapture(e.pointerId); });
+  grab.addEventListener('pointermove', e => { if (y0 == null) return; const dy = e.clientY - y0; if (Math.abs(dy) > 4) moved = true; const [a, , c] = detents(); document.documentElement.style.setProperty('--sheet-h', Math.max(a - 40, Math.min(c, h0 - dy)) + 'px'); });
+  grab.addEventListener('pointerup', e => { if (y0 == null) return; sheet.classList.remove('dragging'); const hNow = sheet.getBoundingClientRect().height; y0 = null;
+    if (!moved) return setDetent((det + 1) % 3);
+    const ds = detents(); let best = 0; ds.forEach((v, i) => { if (Math.abs(v - hNow) < Math.abs(ds[best] - hNow)) best = i; }); setDetent(best); });
+  grab.addEventListener('pointercancel', () => { y0 = null; sheet.classList.remove('dragging'); setDetent(det); });
+}
+// while turning the car the sheet drops out of the way, and comes back after
+controls.addEventListener('start', () => { fly = null; if (isPhone() && det > 0 && autoDet == null) { autoDet = det; setDetent(0, true); } });
+controls.addEventListener('end', () => { if (autoDet != null) { const back = autoDet; setTimeout(() => { if (autoDet === back) { setDetent(back); } }, 900); } });
+$('#recenter').onclick = () => { recenter(); };
+$('#openviews').onclick = e => { const v = $('.views'), open = !v.classList.contains('open'); v.classList.toggle('open', open); e.currentTarget.setAttribute('aria-expanded', String(open)); };
+document.querySelectorAll('.views .chip').forEach(b => b.addEventListener('click', () => { $('.views').classList.remove('open'); $('#openviews').setAttribute('aria-expanded', 'false'); }));
 
 /* ───────── loop ───────── */
 const clock = new THREE.Clock();
-function resize() { const w = stage.clientWidth, h = stage.clientHeight; if (renderer.domElement.width !== Math.floor(w * renderer.getPixelRatio()) || renderer.domElement.height !== Math.floor(h * renderer.getPixelRatio())) { renderer.setSize(w, h, false); camera.aspect = w / Math.max(h, 1); camera.updateProjectionMatrix(); if (composer) composer.setSize(w, h); poke(); } }
+function resize() { const w = stage.clientWidth, h = stage.clientHeight; if (renderer.domElement.width !== Math.floor(w * renderer.getPixelRatio()) || renderer.domElement.height !== Math.floor(h * renderer.getPixelRatio())) { renderer.setSize(w, h, false); camera.aspect = w / Math.max(h, 1); camera.fov = camera.aspect < 1 ? Math.min(56, 34 / Math.max(camera.aspect, 0.5) * 0.8) : 34; camera.updateProjectionMatrix(); if (composer) composer.setSize(w, h); poke(); } }
 const HVC = new THREE.Color(0xff6a00);
 let composer = null, gtao = null, polished = false, idleSince = 0, aoOff = new URLSearchParams(location.search).has('plain'), lastMove = 1;
 function poke() { polished = false; idleSince = performance.now(); }
@@ -877,6 +935,7 @@ function tick() {
   if (hvPulse) { const a = 0.35 + 0.35 * Math.sin(performance.now() / 220); parts.forEach(p => { if (has(p, 'hv') && p.id !== selected) p.obj.traverse(o => { if (o.isMesh && o.material.emissive) { if (!o.userData.hvm) { o.userData.hvm = o.material; o.material = o.material.clone(); } o.material.emissive = HVC; o.material.emissiveIntensity = a; } }); }); }
   else parts.forEach(p => { if (has(p, 'hv')) p.obj.traverse(o => { if (o.isMesh && o.userData.hvm) { o.material = o.userData.hvm; delete o.userData.hvm; } }); });
   if (fly) { const f = REDUCED ? 1 : 1 - Math.pow(0.02, dt); camera.position.lerp(fly.p, f); controls.target.lerp(fly.t, f); if (camera.position.distanceTo(fly.p) < 0.01) fly = null; }
+  keepCameraSane();
   controls.update();
   let moving = moved || !!fly || hvPulse || Math.abs(liftT - liftY) > 1e-4;
   if (!moving) for (const p of parts) if (p.svc.distanceToSquared(p.svcT) > 1e-9) { moving = true; break; }
@@ -898,7 +957,9 @@ const photoBtn = $('#photo'), saveBtn = $('#savephoto'), badge = $('#photobadge'
 const nextFrame = () => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
 function photoCamera() {
   const c = photo.cam; c.fov = camera.fov; c.aspect = camera.aspect; c.near = camera.near; c.far = camera.far;
-  c.position.copy(camera.position); c.quaternion.copy(camera.quaternion); c.updateProjectionMatrix(); c.updateMatrixWorld(true);
+  c.position.copy(camera.position); c.quaternion.copy(camera.quaternion);
+  const v = camera.view; if (v?.enabled) c.setViewOffset(v.fullWidth, v.fullHeight, v.offsetX, v.offsetY, v.width, v.height); else c.clearViewOffset();
+  c.updateProjectionMatrix(); c.updateMatrixWorld(true);
   c.focusDistance = camera.position.distanceTo(controls.target);
   if ($('#dof').checked) c.fStop = 2.8; else c.bokehSize = 0;
 }
@@ -974,6 +1035,7 @@ loader.load(GOLF.url, gltf => {
     const bon = byId.panel_bonnet; if (bon) { bon.ang = bon.angT = HINGE.panel_bonnet.ang * DEG; bon.obj.rotation.x = bon.ang; }
     buildTree(); buildTray(); applyStep(); refreshRows(); setOpacity(+$('#xray').value); renderCard();
     TRN = createTraining(W);
+    setDetent(0); updateViewOffset(); if (camera.aspect < 1) { camera.position.copy(fit(camera.position, controls.target)); }
     $('#loading').hidden = true;
     if (new URLSearchParams(location.search).has('debug')) window.__ws = { parts, byId, BLOCK, THREE, camera, controls, flyTo, photo, doAll, plan, setMode, get TRN() { return TRN; }, W, startPhoto, stopPhoto, scene, renderer, select, removePart, refitPart, boltAction, fitBolts, setTool: k => { tool = k; }, setTq: (n, a) => { tqSet = n; if (a) angSet = a; } };
   } catch (e) { console.error(e); $('#loadtext').textContent = 'The car loaded but could not be assembled. Reload to try again.'; }

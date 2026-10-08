@@ -472,7 +472,7 @@ export function createTraining(W) {
     }
     tiles.append(h('button', { class: 'tile', type: 'button', on: { click: () => W.openDemo() } },
       h('span', { class: 'eyebrow' }, 'Demonstration · not assessed'), h('b', {}, 'Engine out, strip and refit'), h('span', { class: 'blurb' }, 'Watch the engine, hybrid module and gearbox come out step by step, then strip the engine on the stand.')));
-    root.append(tiles);
+    root.append(tiles); W.sheet?.(1);
   }
   function open(id) {
     const job = JOBS.find(j => j.id === id); if (!job) return list();
@@ -502,7 +502,7 @@ export function createTraining(W) {
         foot.append(h('button', { class: 'btn pri', type: 'button', on: { click: () => { run.idx++; last ? report() : stage(); } } }, last ? 'Finish and sign off' : 'Next stage'));
       },
     };
-    W.showTray(false);
+    W.showTray(false); W.sheet?.(1);
     s.setup?.(a);
     s.render(body, a);
   }
