@@ -15,6 +15,7 @@ import { buildTransmission } from './transmission-detail.js';
 import { extractFrontBumper } from './front-bumper.js';
 import { buildHybrid, buildEngineStrip, buildDGEAExternals } from './hybrid-parts.js';
 import { TOOLS, SPEC, toolLabel, buildCarFasteners } from './jobs.js';
+import { buildFrontCorners } from './front-corner.js';
 
 /* Golf Mk8 eHybrid workshop. Built on the Golf Workshop's real Mk8 body
    (2021 Volkswagen Golf GTI by Ddiaz Design, Sketchfab, CC BY-NC-SA 4.0),
@@ -124,8 +125,6 @@ const CAR_PARTS = {
   glazing: ['Glazing (windscreen, side and rear glass)', 'body', [0, 0.4, 0], { conf: 'model' }],
   wheel_fl: ['Wheel and tyre, front-left', 'wheels', [0.95, 0, 0], { conf: 'model', tags: ['wheel'] }], wheel_fr: ['Wheel and tyre, front-right', 'wheels', [-0.95, 0, 0], { conf: 'model', tags: ['wheel'] }],
   wheel_rl: ['Wheel and tyre, rear-left', 'wheels', [0.95, 0, 0], { conf: 'model', tags: ['wheel'] }], wheel_rr: ['Wheel and tyre, rear-right', 'wheels', [-0.95, 0, 0], { conf: 'model', tags: ['wheel'] }],
-  rotor_fl: ['Front brake disc, left', 'wheels', [0.62, 0, 0], { conf: 'model' }], rotor_fr: ['Front brake disc, right', 'wheels', [-0.62, 0, 0], { conf: 'model' }],
-  caliper_fl: ['Front brake caliper, left', 'wheels', [0.72, 0.15, 0], { conf: 'model' }], caliper_fr: ['Front brake caliper and rear brakes', 'wheels', [-0.72, 0.15, 0], { conf: 'model' }],
   seats: ['Seats', 'interior', [0, 0.95, 0], { conf: 'model', note: 'The eHybrid’s rear bench sits over the HV battery (layout estimated).' }],
   steering: ['Steering wheel', 'interior', [0, 0.55, 0.35], { conf: 'model' }],
   cabin: ['Dashboard, trim, carpets and headlining', 'interior', [0, 0.65, 0], { conf: 'model' }],
@@ -146,6 +145,8 @@ function buildCar(root) {
   const boxes = {};
   for (const id in by) { const b = new THREE.Box3(); by[id].forEach(m => b.expandByObject(m)); boxes[id] = b; }
   const meas = measureCar(boxes);
+  // the model's front brakes are the GTI's (red four-pot look, big disc): the eHybrid corner in front-corner.js replaces them
+  for (const id of ['rotor_fl', 'rotor_fr', 'caliper_fl', 'caliper_fr']) { (by[id] || []).forEach(m => m.removeFromParent()); delete by[id]; }
   for (const id in by) {
     const c = boxes[id].getCenter(V(0, 0, 0)), hg = GOLF.hinge[id];
     const g = new THREE.Group(); g.position.copy(hg ? V(hg.x, hg.y || c.y, hg.z) : c); carRoot.add(g); g.updateMatrixWorld(true);
@@ -199,7 +200,8 @@ function buildBay(meas) {
   const bay = buildEngineBayDetail({ materialFactory });
   const bayG = new THREE.Group(); bayG.name = 'golf-bay'; carRoot.add(bayG);
   bayG.add(bay.group);
-  try { bayG.add(buildInnerApron(1, materialFactory), buildInnerApron(-1, materialFactory)); } catch (e) { /* dressing */ }
+  try { const ap = new THREE.Group(); ap.add(buildInnerApron(1, materialFactory), buildInnerApron(-1, materialFactory)); carRoot.add(ap);
+    register({ id: 'inner_wings', name: 'Inner wings and strut towers', sys: 'body', obj: ap, ex: V(0, 0.3, 0), ...info({ note: 'Constructed teaching geometry from the Golf Workshop bay. The strut top mounts bolt up through the tower tops.' }) }); } catch (e) { /* dressing */ }
   bay.group.getObjectByName('bellhousing-starter-interface')?.removeFromParent();   // no starter on the eHybrid
   bayG.updateMatrixWorld(true);
   // the bay's one-piece engine and its covers give way to the DGEA built in pieces
@@ -213,15 +215,16 @@ function buildBay(meas) {
   const tx = buildTransmission({ materialFactory });
   bayG.add(tx.group); bayG.updateMatrixWorld(true);
   for (const c of [...tx.group.children]) {
+    if (c.name.startsWith('driveshaft')) { c.removeFromParent(); continue; }   // replaced by the photo-modelled shafts in front-corner.js
     const d = TX_INFO[c.name] || [c.name.replace(/-/g, ' '), {}, [-0.4, 0, 0]];
     bayG.attach(c);
     register({ id: c.name, name: d[0], sys: c.name.startsWith('driveshaft') ? 'gearbox' : 'gearbox', obj: c, ex: V(...d[2]), ...info({ note: 'Constructed teaching geometry: dimensions and routing illustrative, not OEM CAD.', ...d[1] }) });
   }
   if (meas) {
     const pt = buildPowertrain({ engine: 'I4', mount: 'trans', drive: 'FWD', front: 'strut', rear: 'multilink', turbo: true }, meas, { engine: true, rotors: true });
-    const front = new THREE.Group(), rear = new THREE.Group(); carRoot.add(front, rear);
-    for (const c of [...pt.suspension.children]) { const b = new THREE.Box3().setFromObject(c); (b.getCenter(V(0, 0, 0)).z > 0 ? front : rear).add(c); }
-    register({ id: 'susp_front', name: 'Front suspension: MacPherson struts, springs, lower arms, subframe', sys: 'susp', obj: front, ex: V(0, -0.45, 0.15), ...info({ tags: ['frontsusp'], note: 'Constructed to the car’s measured wheels and track. Layout typical for the Mk8 Golf; parts simplified.' }) });
+    const rear = new THREE.Group(); carRoot.add(rear);
+    // the generic front struts give way to the corners modelled from the removed eHybrid corner
+    for (const c of [...pt.suspension.children]) { const b = new THREE.Box3().setFromObject(c); if (b.getCenter(V(0, 0, 0)).z <= 0) rear.add(c); }
     register({ id: 'susp_rear', name: 'Rear suspension: multi-link, springs, dampers, subframe', sys: 'susp', obj: rear, ex: V(0, -0.45, -0.15), ...info({ note: 'The eHybrid uses the multi-link rear (est. for this trim). Constructed geometry.' }) });
   }
 }
@@ -237,6 +240,38 @@ function buildHybridParts() {
   Object.assign(BLOCK, { dgea_intake: ['bolts_intake', 'dgea_airbox'], dgea_mount: ['bolts_mount'], dgea_coils: ['dgea_airbox'], dgea_turbo: ['dgea_airbox'] });
 }
 
+/* ───────── front corners: strut, housing, link, bearing, brake, drive shaft ───────── */
+function buildCorners() {
+  const ctr = k => byId['wheel_' + k] ? byId['wheel_' + k].box.getCenter(V(0, 0, 0)) : V(k === 'fl' ? 0.764 : -0.764, 0.315, 1.3157);
+  const fb = id => byId[id] ? new THREE.Box3().setFromObject(byId[id].obj) : null;
+  const r = fb('cv-output-right'), l = fb('cv-output-left');
+  const flanges = { fl: r ? r.min.x + 0.011 : -0.276, fr: l ? l.max.x - 0.011 : -0.575 };
+  for (const p of buildFrontCorners(materialFactory, { centres: { fl: ctr('fl'), fr: ctr('fr') }, flanges })) {
+    carRoot.add(p.obj);
+    if (p.host) {
+      const f = SPEC[p.id], h = byId[p.host];
+      register({ ...p, ex: h.ex.clone(), ...info({ name: f.label, qty: p.obj.children.length, size: toolLabel(f.tool), conf: 'pub', note: f.note, tags: h.tags.includes('ds') ? ['fastener', 'ds'] : ['fastener'] }) });
+    } else register({ ...p, ...info(p) });
+  }
+  for (const k of ['fl', 'fr']) {
+    const K = id => id + '_' + k, W = 'wheel_' + k;
+    Object.assign(BLOCK, {
+      [K('caliper')]: [W, K('bolts_caliper')], [K('pads')]: [K('caliper')], [K('carrier')]: [K('caliper'), K('pads'), K('bolts_carrier')],
+      [K('disc')]: [K('carrier'), K('screw_disc')], [K('hose')]: [K('bolt_banjo'), K('bolt_hosebracket')], [K('abs')]: [K('bolt_abs')],
+      [K('splash')]: [K('disc'), K('bolts_splash')], [K('bearing')]: [K('disc'), K('splash'), K('bolts_bearing'), K('bolt_hub'), K('abs')],
+      [K('ds')]: [K('bolt_hub'), K('bolts_dsflange'), K('nuts_bj')],
+      [K('knuckle')]: [K('bearing'), K('carrier'), K('abs'), K('bolt_strutclamp'), K('nut_bj'), K('nut_tre')],
+      [K('bj')]: [K('nuts_bj'), K('nut_bj')], [K('tre')]: [K('nut_tre')], [K('droplink')]: [K('nuts_droplink')], [K('arm')]: [K('bolts_arm'), K('nuts_bj')],
+      [K('strut')]: [W, K('bolts_topmount'), K('bolt_strutclamp'), K('nuts_droplink'), K('bolt_hosebracket')],
+      // fasteners you can only reach with something else off
+      [K('bolts_caliper')]: [W], [K('bolt_hub')]: [W], [K('bolts_carrier')]: [K('caliper')], [K('screw_disc')]: [W], [K('bolts_splash')]: [K('disc')],
+      [K('bolts_bearing')]: [K('bolt_hub'), K('disc')], [K('bolt_abs')]: [W], [K('bolt_banjo')]: [W], [K('bolt_hosebracket')]: [W],
+      [K('bolt_strutclamp')]: [W], [K('nut_bj')]: [W], [K('nuts_bj')]: [W], [K('nut_tre')]: [W], [K('nuts_droplink')]: [W],
+    });
+  }
+  BLOCK.arb_f = ['droplink_fl', 'droplink_fr'];
+}
+
 /* ───────── service procedure: engine out, strip, refit ───────── */
 const has = (p, t) => p.tags.includes(t);
 const TAG_MOVE = (tag, v, s) => parts.forEach(p => { if (has(p, tag)) s[p.id].o.add(v); });
@@ -248,7 +283,7 @@ const STEPS = [
   { t: 'Air box, 12 V battery and coolant tank out', d: 'Drain the coolant. Remove the air filter box and intake duct, the 12 V battery with its cables, and the coolant expansion tank.', f: s => { for (const t of ['airbox', 'battery12', 'reservoir']) { TAG_MOVE(t, V(0, 0.5, 0), s); TAG_HIDE(t, s); } } },
   { t: 'Cooling pack to service position', d: 'Disconnect the radiator hoses. Pull the radiator and condenser pack forward on its carrier so the engine has room to drop.', f: s => { TAG_MOVE('hose', V(0, 0.3, 0.2), s); TAG_HIDE('hose', s); TAG_MOVE('coolpack', V(0, 0, 0.5), s); } },
   { t: 'Disconnect HV cables and exhaust', hv: true, d: 'With the system made safe, unplug the HV cable at the inverter. Split the downpipe from the turbocharger and drop the front of the exhaust.', f: s => { TAG_MOVE('hvcable', V(0, -0.06, 0), s); TAG_MOVE('exhaust', V(0, -0.12, 0), s); } },
-  { t: 'Raise the car, drive shafts out', lift: true, d: 'Raise the car on the lift. Undo the drive-shaft flange bolts at the gearbox and the hub bolts, swing the wheel bearing housings out and pull both shafts.', f: s => { parts.forEach(p => { if (has(p, 'ds')) { s[p.id].o.add(V(p.id.endsWith('right') ? 0.55 : -0.55, -0.05, 0)); s[p.id].h = true; } }); } },
+  { t: 'Raise the car, drive shafts out', lift: true, d: 'Raise the car on the lift. Undo the drive-shaft flange bolts at the gearbox and the hub bolts, swing the wheel bearing housings out and pull both shafts.', f: s => { parts.forEach(p => { if (has(p, 'ds')) { s[p.id].o.add(V(p.id.endsWith('_fl') ? 0.12 : -0.12, -0.3, 0)); s[p.id].h = true; } }); } },
   { t: 'Lower engine, hybrid module and gearbox', d: 'Support the assembly on an engine table, take out the pendulum support and the engine and gearbox mounts, and lower it out of the bay.', f: s => TAG_MOVE('pt', V(0, -0.78, 0), s) },
   { t: 'Roll it out', d: 'Roll the table forward, clear of the car.', f: s => TAG_MOVE('pt', V(0, 0, 2.0), s) },
   { t: 'Split engine from hybrid module and gearbox', d: 'Undo the twelve engine-to-module flange bolts, slide the engine off and mount it on an engine stand. Replace the module O-rings on refit.', f: s => TAG_MOVE('engine', V(0.55, 0.55, 0), s) },
@@ -283,7 +318,7 @@ $('#reset').onclick = () => { reversing = false; step = 0; refitEverything(); ap
    rules backwards: a part goes back on only once everything that sits under it
    is back. Removed parts are laid on the floor beside the car; engine parts on
    the stand are laid out round it. */
-const FIXED = new Set(['body', 'glazing', 'cabin', 'engine-bay-structure', 'engine-long-block', 'gearbox-case', 'bellhousing', 'integrated-front-differential', 'blk', 'susp_front', 'susp_rear', 'moulded-four-coil-valve-cover']);
+const FIXED = new Set(['body', 'inner_wings', 'glazing', 'cabin', 'engine-bay-structure', 'engine-long-block', 'gearbox-case', 'bellhousing', 'integrated-front-differential', 'blk', 'subframe_f', 'susp_rear', 'moulded-four-coil-valve-cover']);
 const BLOCK = {
   // engine on the stand
   cam_cover: ['bolts_cam', 'spark_plugs'], seal_cam: ['cam_cover'], timing: ['timing_cover'], camshafts: ['cam_cover', 'timing'],
@@ -294,13 +329,11 @@ const BLOCK = {
   // hybrid and fuel
   inverter: ['bolts_inverter', 'hv_cable_motor'], seal_inverter: ['inverter'], emotor: ['bolts_emotor', 'hv_cable_motor'], seal_emotor: ['emotor'],
   hv_battery: ['bolts_battery', 'hv_cable_battery', 'seats'], seal_battery: ['hv_battery'], fuel_tank: ['bolts_tank', 'exhaust_rear'],
-  // wheels and brakes
-  caliper_fl: ['wheel_fl'], rotor_fl: ['wheel_fl', 'caliper_fl'], caliper_fr: ['wheel_fr'], rotor_fr: ['wheel_fr', 'caliper_fr'],
   // engine bay
   'battery-assembly': ['battery-negative-earth-lead', 'battery-positive-cable-to-starter'],
   'four-coil-ignition-assembly': ['cosmetic-engine-cover-removable'], 'intake-manifold': ['cosmetic-engine-cover-removable', 'airbox-to-throttle-duct'],
   'airbox-assembly': ['airbox-to-throttle-duct'], 'radiator-condenser-cooling-pack': ['radiator-upper-hose', 'radiator-lower-hose', 'bumper_f'],
-  'coolant-expansion-reservoir': ['coolant-degas-hose'], 'driveshaft-left': ['wheel_fr'], 'driveshaft-right': ['wheel_fl'],
+  'coolant-expansion-reservoir': ['coolant-degas-hose'],
 };
 const offCar = p => p.removed || p.hideT;
 const nameOf = id => byId[id]?.name.replace(/,.*$/, '') || id;
@@ -480,7 +513,7 @@ function select(id, frame) {
   const box = $('#info'); box.textContent = '';
   const h = document.createElement('div'); h.className = 'pname'; h.textContent = p.name; box.append(h);
   const dl = document.createElement('dl'); dl.className = 'kv';
-  const tqTxt = p.fx ? (p.fx.nm != null ? `${p.fx.nm} Nm${p.fx.deg ? ' + ' + p.fx.deg + '°' : ''} (${p.fx.src === 'man' ? 'VW manual data' : p.fx.src === 'class' ? 'class value' : 'estimate'})` : 'not in the data: erWin') : 'not included (erWin)';
+  const tqTxt = p.fx ? (p.fx.nm != null ? `${p.fx.nm} Nm${p.fx.deg ? ' + ' + p.fx.deg + '°' : ''} (${p.fx.src === 'man' ? 'VW manual data' : p.fx.src === 'class' ? 'class value' : 'estimate'})` : 'not in the data: erWin') : (BLOCK[id] || []).some(x => byId[x]?.fx) ? 'on its bolts: see below' : 'not included (erWin)';
   for (const [k, v] of [['System', SYS[p.sys]], ['Quantity', String(p.qty)], ['Material', p.mat || '—'], [p.fx ? 'Tool' : 'Size', p.fx ? toolLabel(p.fx.tool) : (p.size || '—')], ['Torque', tqTxt], ['Renew', p.fx ? (p.fx.renew ? 'yes, every time' : 'no') : (has(p, 'seal') ? 'yes, every time' : '—')], ['OEM part no.', 'not included']]) {
     const dt = document.createElement('dt'); dt.textContent = k; const dd = document.createElement('dd'); dd.textContent = v; dl.append(dt, dd);
   }
@@ -590,12 +623,14 @@ loader.load(GOLF.url, gltf => {
     const meas = buildCar(gltf.scene);
     buildBay(meas);
     buildHybridParts();
+    buildCorners();
     for (const f of buildCarFasteners(byId, materialFactory)) { carRoot.add(f.obj); register({ ...f, ex: byId[f.host].ex.clone(), ...info(f) }); BLOCK[f.host] = [...(BLOCK[f.host] || []), f.id]; }
     BLOCK.timing_cover = ['bolts_timing_cover'];
     // bonnet up by default, so the bay reads at a glance
     const bon = byId.panel_bonnet; if (bon) { bon.ang = bon.angT = HINGE.panel_bonnet.ang * DEG; bon.obj.rotation.x = bon.ang; }
     buildTree(); buildTray(); applyStep(); setOpacity(+$('#xray').value); select('emotor', false);
     $('#loading').hidden = true;
+    if (new URLSearchParams(location.search).has('debug')) window.__ws = { parts, byId, BLOCK, THREE, camera, controls, flyTo, select, removePart, refitPart, boltAction, fitBolts, setTool: k => { tool = k; }, setTq: (n, a) => { tqSet = n; if (a) angSet = a; } };
   } catch (e) { console.error(e); $('#loadtext').textContent = 'The car loaded but could not be assembled. Reload to try again.'; }
 }, x => { const t = x.total || 6570544; $('#loadtext').textContent = `Loading the Golf · ${(x.loaded / 1048576).toFixed(1)} of ${(t / 1048576).toFixed(1)} MB`; $('#bar').style.transform = `scaleX(${Math.min(1, x.loaded / t).toFixed(3)})`; },
   e => { console.error(e); $('#loadtext').textContent = 'The Golf could not be loaded. Check the connection and reload.'; });

@@ -15,7 +15,8 @@ export const TOOLS = [
   { k: 'hand', label: 'Hands' }, { k: 'trim', label: 'Trim tool' },
   { k: 't25', label: 'T25 Torx' }, { k: 't30', label: 'T30 Torx' },
   { k: 's10', label: '10 mm socket' }, { k: 's13', label: '13 mm socket' }, { k: 's16', label: '16 mm socket' },
-  { k: 's17', label: '17 mm wheel socket' }, { k: 's21', label: '21 mm socket' }, { k: 'p12', label: 'M10 12-point' },
+  { k: 's17', label: '17 mm wheel socket' }, { k: 's18', label: '18 mm socket' }, { k: 's21', label: '21 mm socket' }, { k: 'hub', label: 'Hub bolt socket' },
+  { k: 's14', label: '14 mm banjo socket' }, { k: 'p12', label: 'M10 12-point' },
   { k: 'plug', label: 'Spark plug socket' }, { k: 'tq', label: 'Torque wrench' }, { k: 'ang', label: 'Angle gauge' },
 ];
 export const toolLabel = k => (TOOLS.find(t => t.k === k) || { label: k }).label;
@@ -32,10 +33,6 @@ export const SPEC = {
   fix_wheel_fr: { label: 'Wheel bolts, front-right', tool: 's17', nm: 120, src: 'class', note: '≈120 Nm class value; tighten in a star.' },
   fix_wheel_rl: { label: 'Wheel bolts, rear-left', tool: 's17', nm: 120, src: 'class', note: '≈120 Nm class value; tighten in a star.' },
   fix_wheel_rr: { label: 'Wheel bolts, rear-right', tool: 's17', nm: 120, src: 'class', note: '≈120 Nm class value; tighten in a star.' },
-  fix_caliper_fl: { label: 'Brake carrier bolts, front-left', tool: 's21', nm: 200, src: 'man', note: 'Ribbed-collar bolts, 200 Nm (' + MAN + ', hybrid front brake). Clean if reused.' },
-  fix_caliper_fr: { label: 'Brake carrier bolts, front-right', tool: 's21', nm: 200, src: 'man', note: 'Ribbed-collar bolts, 200 Nm (hybrid front brake data).' },
-  fix_rotor_fl: { label: 'Disc retaining screw, front-left', tool: 't30', nm: 4.5, src: 'man', note: 'Disc retaining screw 4.5 Nm (hybrid front brake data). Discs are renewed in pairs across an axle.' },
-  fix_rotor_fr: { label: 'Disc retaining screw, front-right', tool: 't30', nm: 4.5, src: 'man', note: 'Disc retaining screw 4.5 Nm.' },
   spark_plugs: { label: 'Spark plugs', tool: 'plug', nm: 22, src: 'man', note: 'Spark plugs 22 Nm, with the spark plug socket and extension (' + MAN + ', ignition system).' },
   bolts_cam: { label: 'Camshaft housing cover bolts', tool: 's10', nm: 8, src: 'man', note: '8 Nm (' + MAN + ', camshaft housing). Housing-to-head bolts follow the manual sequence figure.' },
   bolts_timing_cover: { label: 'Timing belt cover bolts', tool: 's10', nm: 8, src: 'man', note: '8 Nm (' + MAN + ', toothed belt cover).' },
@@ -49,6 +46,32 @@ export const SPEC = {
   bolts_battery: { label: 'HV battery mounting bolts', tool: 's16', nm: null, src: 'est', note: 'Value from erWin. Battery lift table under the pack first.' },
   bolts_tank: { label: 'Fuel tank strap bolts', tool: 's13', nm: 20, deg: 90, renew: true, src: 'man', note: 'Securing strap bolts 20 Nm + 90°, renew (' + MAN + ', fuel tank).' },
 };
+
+/* the front corners (front-corner.js): figures from the manual's front brake,
+   wheel bearing, suspension strut, lower link, steering rack, subframe, speed
+   sensor and drive shaft overviews. Socket sizes are estimates. */
+const CORNER = {
+  bolts_caliper: ['Caliper guide bolts', 's13', 35, 0, true, 'Self-locking hexagon bolts, 35 Nm, renew (front brakes overview). Counterhold the guide pin.'],
+  bolts_carrier: ['Brake carrier bolts', 's21', 200, 0, false, 'Ribbed-collar bolts, 200 Nm; clean if reused (front brakes overview).'],
+  screw_disc: ['Disc retaining screw', 't30', 4.5, 0, false, 'Torx screw 4.5 Nm (front brakes overview). It only locates the disc: the wheel bolts clamp it.'],
+  bolts_splash: ['Splash plate bolts', 't25', 12, 0, false, '12 Nm (wheel bearing and front brakes overviews).'],
+  bolt_hub: ['Hub bolt (drive shaft)', 'hub', 200, 180, true, '200 Nm + 180°, renew; clean the thread in the CV joint with a tap first (drive shaft and wheel bearing overviews). Loosen and tighten with the car on its wheels or the hub held.'],
+  bolts_bearing: ['Wheel bearing unit bolts', 's16', 70, 90, true, '70 Nm + 90°, renew (wheel bearing assembly overview). Hub bolt out and the shaft pushed back first.'],
+  bolt_abs: ['ABS sensor bolt', 't25', 8, 0, false, '8 Nm (speed sensor on front axle overview).'],
+  bolt_banjo: ['Brake hose banjo bolt', 's14', 35, 0, false, '35 Nm with new sealing washers (front brakes overview). Bleed the brakes afterwards.'],
+  bolt_hosebracket: ['Brake hose bracket bolt', 's10', 8, 0, false, '8 Nm (front brakes overview, bracket).'],
+  bolt_strutclamp: ['Strut pinch bolt and nut', 's18', 70, 180, true, '70 Nm + 180°, bolt and nut renewed; the tip of the bolt points in the direction of travel (suspension strut overview).'],
+  bolts_topmount: ['Strut top mount bolts', 's13', 15, 90, true, '15 Nm + 90°, renew (suspension strut overview). From the engine bay: the bonnet has to be open.', 'panel_bonnet'],
+  nut_bj: ['Swivel joint stud nut', 's18', 60, 0, true, '60 Nm, renew (lower suspension link, swivel joint overview).'],
+  nuts_bj: ['Swivel joint to lower link nuts', 's13', 40, 45, true, '40 Nm + 45°, renew, in the unladen position (lower suspension link, swivel joint overview).'],
+  nut_tre: ['Track rod end nut', 's16', 20, 90, true, '20 Nm + 90°, renew (steering rack overview).'],
+  nuts_droplink: ['Coupling rod nuts', 's16', 65, 0, true, '65 Nm, renew; counterhold on the joint stub’s multi-point socket (subframe overview).'],
+  bolts_arm: ['Lower link to subframe bolts', 's18', 70, 180, true, '70 Nm + 180°, renew, tightened in the unladen position (lower suspension link overview).'],
+  bolts_dsflange: ['Drive shaft flange bolts', 'p12', 70, 0, true, 'M10 multi-point bolts: diagonally to 10 Nm first, then diagonally to 70 Nm, renew (drive shaft VL107 overview; the smaller VL100 joint uses M8 at 40 Nm).'],
+};
+for (const [k, side] of [['fl', 'front-left'], ['fr', 'front-right']])
+  for (const [id, [label, tool, nm, deg, renew, note, needOpen]] of Object.entries(CORNER))
+    SPEC[id + '_' + k] = { label: `${label}, ${side}`, tool, nm, ...(deg ? { deg } : {}), renew, src: 'man', note, ...(needOpen ? { needOpen } : {}) };
 
 /* fasteners for the real car's parts: bolt meshes where the hardware sits */
 export function buildCarFasteners(byId, materialFactory) {
@@ -68,11 +91,6 @@ export function buildCarFasteners(byId, materialFactory) {
     const c = b.getCenter(new THREE.Vector3()), s = b.getSize(new THREE.Vector3()), sx = k[1] === 'l' ? 1 : -1, x = c.x + sx * (s.x / 2 - 0.045);
     for (let i = 0; i < 5; i++) { const a = i / 5 * Math.PI * 2 + Math.PI / 2; bolt(g, [x, c.y + Math.sin(a) * 0.056, c.z + Math.cos(a) * 0.056], 0.014, 0.03, sx > 0 ? 'x' : '-x'); }
   });
-  for (const k of ['fl', 'fr']) {
-    const sx = k[1] === 'l' ? 1 : -1;
-    set('fix_caliper_' + k, 'caliper_' + k, 'wheels', (g, b) => { const c = b.getCenter(new THREE.Vector3()); for (const dy of [-0.055, 0.055]) bolt(g, [c.x - sx * 0.035, c.y + dy, c.z - 0.06], 0.014, 0.05, sx > 0 ? '-x' : 'x', dark); });
-    set('fix_rotor_' + k, 'rotor_' + k, 'wheels', (g, b) => { const c = b.getCenter(new THREE.Vector3()); bolt(g, [c.x + sx * 0.012, c.y + 0.04, c.z + 0.02], 0.008, 0.012, sx > 0 ? 'x' : '-x'); });
-  }
   // door hinge bolts: front-left positions measured on this model in Strip Bay (FIX), mirrored and estimated for the others
   const front = [[.832, 1.085, .745], [.832, 1.015, .745], [.838, .555, .845], [.838, .485, .845]];
   const rear = [[.812, 1.0, -.245], [.812, .935, -.245], [.818, .53, -.18], [.818, .465, -.18]];
