@@ -23,6 +23,13 @@ New here:
   see-through body, 11-step engine-out / strip / refit job, parts list and part sheet;
   remove and refit in workshop order with each bolt undone and torqued with the right tool.
   Add `?debug` to the URL to expose the scene for scripted tests.
+- Photo studio: a seamless cyclorama with a glowing light wall, lit by the CC0 HDRI
+  `studio.hdr.wasm` (*Studio Small 09*, Sergej Majboroda, Poly Haven; `.wasm` so the artifact
+  host serves it). The car's materials are corrected to real-world values (clear-coated paint,
+  non-metal rubber and leather, glowing screens) and its packed vertices unpacked to floats.
+- Photoreal: path-traces the current view on demand (three-gpu-pathtracer 0.0.23 with
+  three-mesh-bvh 0.7.8, both MIT, vendored under `lib/`), with optional depth of field on the
+  selected part and Save photo through the artifact `downloads` capability.
 
 Licence: the car body is "2021 Volkswagen Golf GTI" by Ddiaz Design (Sketchfab),
 CC BY-NC-SA 4.0 — non-commercial only. No OEM part numbers are included. Torque, angle and

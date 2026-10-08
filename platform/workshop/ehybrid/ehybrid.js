@@ -3,6 +3,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
@@ -42,7 +43,7 @@ scene.environmentIntensity = 0.9;
 const camera = new THREE.PerspectiveCamera(34, 1, 0.02, 80);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true; controls.dampingFactor = 0.09; controls.screenSpacePanning = true;
-controls.minDistance = 0.6; controls.maxDistance = 14; controls.maxPolarAngle = Math.PI * 0.6;
+controls.minDistance = 0.6; controls.maxDistance = 8; controls.maxPolarAngle = Math.PI * 0.6;
 /* studio rig from the Golf Workshop garage: key with soft shadows, cool fill, warm rim */
 const key = new THREE.DirectionalLight(0xffffff, 1.7); key.position.set(4.5, 7.5, 5.5); key.castShadow = true;
 key.shadow.mapSize.set(2048, 2048); Object.assign(key.shadow.camera, { left: -5, right: 5, top: 5, bottom: -5, near: 0.5, far: 26 });
@@ -59,10 +60,31 @@ function radialTexture(stops) {
   const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
 }
 const flat = (geo, mat, y) => { const m = new THREE.Mesh(geo, mat); m.rotation.x = -Math.PI / 2; m.position.y = y; m.renderOrder = -1; scene.add(m); return m; };
-flat(new THREE.CircleGeometry(9, 64), new THREE.MeshStandardMaterial({ color: 0x7d858c, roughness: 0.86, metalness: 0.05 }), -0.002).receiveShadow = true;
-flat(new THREE.PlaneGeometry(16, 16), new THREE.MeshBasicMaterial({ map: radialTexture([[0, 'rgba(255,255,255,.18)'], [0.5, 'rgba(255,255,255,.06)'], [1, 'rgba(255,255,255,0)']]), transparent: true, depthWrite: false }), 0);
-flat(new THREE.PlaneGeometry(30, 30), new THREE.ShadowMaterial({ opacity: 0.45, depthWrite: false }), 0.001).receiveShadow = true;
+/* photo studio: a seamless cyclorama, the floor sweeping up into the wall in one curve,
+   as cars are photographed, so no corner shows in the paint's reflections */
+const cyc = (() => {
+  const pts = [new THREE.Vector2(0, 0), new THREE.Vector2(6.2, 0)];
+  for (let i = 1; i <= 18; i++) { const t = i / 18 * Math.PI / 2; pts.push(new THREE.Vector2(6.2 + 2.4 * Math.sin(t), 2.4 - 2.4 * Math.cos(t))); }
+  const floor = new THREE.Mesh(new THREE.LatheGeometry(pts, 128), new THREE.MeshStandardMaterial({ color: 0xd2d5d8, roughness: 0.92, metalness: 0, side: THREE.DoubleSide }));
+  floor.position.y = -0.002; floor.receiveShadow = true; scene.add(floor);
+  // the wall above the cove is lit from behind, like a studio's light wall: it glows and wraps the paint in soft highlights
+  const wall = new THREE.Mesh(new THREE.CylinderGeometry(8.6, 8.6, 5.1, 128, 1, true), new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xf4f6f8, emissiveIntensity: 0.85, roughness: 1, side: THREE.DoubleSide }));
+  wall.position.y = 2.4 + 2.55; scene.add(wall);
+  // overhead softbox, for photos only (it would block the top view)
+  const box = new THREE.Mesh(new THREE.PlaneGeometry(4.2, 2.6), new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 2.6, side: THREE.DoubleSide }));
+  box.rotation.x = Math.PI / 2; box.position.set(0, 5.4, 0.2); box.visible = false; scene.add(box);
+  return { floor, wall, box };
+})();
+const glow = flat(new THREE.PlaneGeometry(16, 16), new THREE.MeshBasicMaterial({ map: radialTexture([[0, 'rgba(255,255,255,.18)'], [0.5, 'rgba(255,255,255,.06)'], [1, 'rgba(255,255,255,0)']]), transparent: true, depthWrite: false }), 0);
+const shadowPlane = flat(new THREE.PlaneGeometry(30, 30), new THREE.ShadowMaterial({ opacity: 0.45, depthWrite: false }), 0.001); shadowPlane.receiveShadow = true;
 const contact = flat(new THREE.PlaneGeometry(2.3, 5.0), new THREE.MeshBasicMaterial({ map: radialTexture([[0, 'rgba(0,0,0,.7)'], [0.55, 'rgba(0,0,0,.38)'], [1, 'rgba(0,0,0,0)']]), transparent: true, depthWrite: false }), 0.003);
+
+/* studio light: a real photo-studio HDRI (Poly Haven, CC0) replaces the synthetic room once it arrives */
+const ENV_ROT = 2.2;
+new RGBELoader().load('./studio.hdr.wasm', t => {
+  t.mapping = THREE.EquirectangularReflectionMapping; scene.environment = t; scene.environmentIntensity = 0.95; scene.environmentRotation.y = ENV_ROT;
+  key.intensity = 1.25; fill.intensity = 0.2; rim.intensity = 0.45; poke();
+}, undefined, e => console.warn('studio HDRI not loaded; the room light stays', e));
 
 /* workshop surfaces (from the Golf Workshop): fine grain and casting pores in the
    roughness and normal maps, so cast alloy, machined faces and plastics read apart */
@@ -133,7 +155,33 @@ const HINGE = { door_fl: { axis: 'y', ang: -64 }, door_fr: { axis: 'y', ang: 64 
 const carRoot = new THREE.Group(); scene.add(carRoot);
 let bodyMats = [];
 
+/* the source model's materials, corrected to real-world values: clear-coated paint,
+   rubber and leather that are not metal, screens that glow */
+const NONMETAL = /leather|fabric|carpet|airbag|speaker|seat|til|phong3|^tire$|_ST$|badge/i;
+function realMaterials(root) {
+  const done = new Set();
+  root.traverse(o => { if (!o.isMesh) return; for (const m of [].concat(o.material)) { if (done.has(m)) continue; done.add(m);
+    if (m.name === 'CarPaint') Object.assign(m, { metalness: 0.42, roughness: 0.3, clearcoat: 1, clearcoatRoughness: 0.03 });
+    else if (/^tire$/i.test(m.name)) Object.assign(m, { metalness: 0, roughness: 0.84 });
+    else if (/^display/i.test(m.name)) Object.assign(m, { metalness: 0, roughness: 0.1, emissive: new THREE.Color(0xffffff), emissiveMap: m.map, emissiveIntensity: 0.5 });
+    else if (NONMETAL.test(m.name)) { m.metalness = 0; if (/leather/i.test(m.name)) m.roughness = 0.52; }
+    else if (m.name === 'Atlas') m.metalness = Math.min(m.metalness, 0.45);
+    m.needsUpdate = true; } });
+}
+/* the model ships meshopt-compressed with packed integer vertices; unpack them to plain
+   floats so the path tracer (which merges raw arrays) reads true positions and normals */
+function unpackVertices(root) {
+  const G = ['getX', 'getY', 'getZ', 'getW'];
+  root.traverse(o => { if (!o.isMesh) return; const g = o.geometry;
+    for (const [name, a] of Object.entries(g.attributes)) {
+      if (!a.isInterleavedBufferAttribute && !a.normalized && a.array instanceof Float32Array) continue;
+      const n = a.count, k = a.itemSize, out = new Float32Array(n * k);
+      for (let i = 0; i < n; i++) for (let c = 0; c < k; c++) out[i * k + c] = a[G[c]](i);
+      g.setAttribute(name, new THREE.BufferAttribute(out, k));
+    } });
+}
 function buildCar(root) {
+  unpackVertices(root); realMaterials(root);
   carRoot.add(root); carRoot.updateMatrixWorld(true);
   try { extractFrontBumper(root); } catch (e) { console.warn('front bumper not split', e); }
   const by = {}, meshes = [];
@@ -583,6 +631,7 @@ function makeComposer() {
 }
 function tick() {
   resize();
+  if (photo.on) { photoFrame(); requestAnimationFrame(tick); return; }
   const dt = Math.min(clock.getDelta(), 0.05), k = REDUCED ? 1 : 1 - Math.pow(0.0015, dt);
   liftY += (liftT - liftY) * k; carRoot.position.y = liftY; contact.material.opacity = 1 - Math.min(1, liftY / 0.6);
   let moved = false;
@@ -615,6 +664,77 @@ function tick() {
   requestAnimationFrame(tick);
 }
 
+/* ───────── photoreal: progressive path tracing of the current view ─────────
+   Loaded on first use. Every sample traces light bouncing round the studio, so
+   shadows, reflections and bounced light are physically based; it sharpens the
+   longer it runs. Any interaction hands back to the live model. */
+const photo = { on: false, busy: false, pt: null, cam: null, dl: null, save: false, max: 1200, keep: null };
+const RASTER_ONLY = [glow, shadowPlane, contact];
+const photoBtn = $('#photo'), saveBtn = $('#savephoto'), badge = $('#photobadge');
+(async () => { try { if (!window.claude?.use) return; photo.dl = await window.claude.use('downloads'); saveBtn.hidden = !photo.dl; } catch (e) { /* saving not offered here */ } })();
+const nextFrame = () => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+function photoCamera() {
+  const c = photo.cam; c.fov = camera.fov; c.aspect = camera.aspect; c.near = camera.near; c.far = camera.far;
+  c.position.copy(camera.position); c.quaternion.copy(camera.quaternion); c.updateProjectionMatrix(); c.updateMatrixWorld(true);
+  c.focusDistance = camera.position.distanceTo(controls.target);
+  if ($('#dof').checked) c.fStop = 2.8; else c.bokehSize = 0;
+}
+async function startPhoto() {
+  if (photo.on || photo.busy) return;
+  photo.busy = true; clearInterval(seq); fly = null;
+  photoBtn.disabled = true; photoBtn.textContent = 'Preparing the studio…';
+  await nextFrame();
+  try {
+    if (!photo.pt) {
+      const { WebGLPathTracer, PhysicalCamera } = await import('three-gpu-pathtracer');
+      photo.pt = new WebGLPathTracer(renderer);
+      Object.assign(photo.pt, { bounces: 6, filteredGlossyFactor: 0.5, minSamples: 2, fadeDuration: 350, renderDelay: 0, renderScale: Math.min(1, 1.5 / renderer.getPixelRatio()) });
+      photo.pt.tiles.set(2, 2); photo.cam = new PhysicalCamera();
+    }
+    if (selected) setHighlight(selected, false);
+    photo.keep = { bg: scene.background, li: [key, fill, rim, under].map(l => l.intensity) };
+    RASTER_ONLY.forEach(m => m.visible = false); cyc.box.visible = true;
+    scene.background = new THREE.Color(0xd2d5d8);
+    key.intensity *= 0.3; fill.intensity = rim.intensity = under.intensity = 0;   // the light wall, softbox and HDRI do the lighting
+    photoCamera();
+    photo.pt.setScene(scene, photo.cam);
+    photo.on = true; badge.hidden = false; saveBtn.disabled = true; $('.toolbar').hidden = true;
+    $('#photon').textContent = 'Photoreal'; $('#photos').textContent = 'starting';
+    photoBtn.textContent = 'Back to live model';
+  } catch (e) {
+    console.error(e); restoreLive(); toast('Photoreal rendering is not available on this device or browser.', true);
+  }
+  photoBtn.disabled = false; photo.busy = false;
+}
+function restoreLive() {
+  if (photo.keep) { scene.background = photo.keep.bg; [key, fill, rim, under].forEach((l, i) => l.intensity = photo.keep.li[i]); photo.keep = null; }
+  RASTER_ONLY.forEach(m => m.visible = true); cyc.box.visible = false;
+  photo.on = false; badge.hidden = true; saveBtn.disabled = true; $('.toolbar').hidden = false; photoBtn.textContent = 'Render photoreal';
+  if (selected) setHighlight(selected, true); poke();
+}
+function stopPhoto() { if (photo.on) restoreLive(); }
+function photoFrame() {
+  const pt = photo.pt;
+  if (pt.samples < photo.max || photo.save) pt.renderSample();
+  const n = Math.floor(pt.samples);
+  $('#photos').textContent = n < photo.max ? `${n} samples · sharpening` : `${n} samples · finished`;
+  saveBtn.disabled = n < 24;
+  if (photo.save) {
+    photo.save = false;
+    const b64 = renderer.domElement.toDataURL('image/png').split(',')[1], bin = atob(b64), bytes = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    photo.dl.save({ filename: 'golf-mk8-ehybrid-photoreal.png', data: new Blob([bytes], { type: 'image/png' }) })
+      .then(r => { if (r.status === 'saved') toast('Photo saved.'); })
+      .catch(e => { if (e?.code === 'declined') return; toast(e?.code === 'rate_limited' ? 'A save is already waiting for your answer.' : 'The photo could not be saved in this view.', true); });
+  }
+}
+photoBtn.onclick = () => photo.on ? stopPhoto() : startPhoto();
+saveBtn.onclick = () => { if (photo.on && photo.dl) photo.save = true; };
+$('#dof').onchange = () => { if (!photo.on) return; photoCamera(); photo.pt.updateCamera(); };
+controls.addEventListener('start', stopPhoto);
+document.addEventListener('pointerdown', e => { if (photo.on && !e.target.closest('#photo, #savephoto, label[for="dof"]')) stopPhoto(); }, true);
+document.addEventListener('keydown', e => { if (photo.on && e.key === 'Escape') stopPhoto(); });
+
 /* ───────── load ───────── */
 const loader = new GLTFLoader(); loader.setMeshoptDecoder(MeshoptDecoder);
 loader.load(GOLF.url, gltf => {
@@ -630,7 +750,7 @@ loader.load(GOLF.url, gltf => {
     const bon = byId.panel_bonnet; if (bon) { bon.ang = bon.angT = HINGE.panel_bonnet.ang * DEG; bon.obj.rotation.x = bon.ang; }
     buildTree(); buildTray(); applyStep(); setOpacity(+$('#xray').value); select('emotor', false);
     $('#loading').hidden = true;
-    if (new URLSearchParams(location.search).has('debug')) window.__ws = { parts, byId, BLOCK, THREE, camera, controls, flyTo, select, removePart, refitPart, boltAction, fitBolts, setTool: k => { tool = k; }, setTq: (n, a) => { tqSet = n; if (a) angSet = a; } };
+    if (new URLSearchParams(location.search).has('debug')) window.__ws = { parts, byId, BLOCK, THREE, camera, controls, flyTo, photo, startPhoto, stopPhoto, scene, renderer, select, removePart, refitPart, boltAction, fitBolts, setTool: k => { tool = k; }, setTq: (n, a) => { tqSet = n; if (a) angSet = a; } };
   } catch (e) { console.error(e); $('#loadtext').textContent = 'The car loaded but could not be assembled. Reload to try again.'; }
 }, x => { const t = x.total || 6570544; $('#loadtext').textContent = `Loading the Golf · ${(x.loaded / 1048576).toFixed(1)} of ${(t / 1048576).toFixed(1)} MB`; $('#bar').style.transform = `scaleX(${Math.min(1, x.loaded / t).toFixed(3)})`; },
   e => { console.error(e); $('#loadtext').textContent = 'The Golf could not be loaded. Check the connection and reload.'; });
