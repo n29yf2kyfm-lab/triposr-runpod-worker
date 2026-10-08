@@ -99,6 +99,8 @@ const SYS_COLOR = { body: '#8aa0b4', interior: '#5a5148', wheels: '#9aa0a6', sus
 const parts = [], byId = {};
 function register(p) {
   p.home = p.obj.position.clone(); p.svc = V(0, 0, 0); p.svcT = V(0, 0, 0); p.hideT = !!p.hidden; p.vis = true;
+  p.rem = V(0, 0, 0); p.removed = false; p.box = new THREE.Box3().setFromObject(p.obj);
+  const hg = HINGE[p.id]; if (hg) { p.hinge = hg; p.ang = 0; p.angT = 0; }
   p.obj.traverse(o => { if (o.isMesh) o.userData.pid = p.id; });
   parts.push(p); byId[p.id] = p; return p;
 }
@@ -238,7 +240,7 @@ const STEPS = [
   { t: 'Lower engine, hybrid module and gearbox', d: 'Support the assembly on an engine table, take out the pendulum support and the engine and gearbox mounts, and lower it out of the bay.', f: s => TAG_MOVE('pt', V(0, -0.78, 0), s) },
   { t: 'Roll it out', d: 'Roll the table forward, clear of the car.', f: s => TAG_MOVE('pt', V(0, 0, 2.0), s) },
   { t: 'Split engine from hybrid module and gearbox', d: 'Undo the twelve engine-to-module flange bolts, slide the engine off and mount it on an engine stand. Replace the module O-rings on refit.', f: s => TAG_MOVE('engine', V(0.55, 0.55, 0), s) },
-  { t: 'Strip the engine', d: 'Set the intake manifold, coils, harness and auxiliary drive aside, then take it down: cam cover, camshafts, timing belt, cylinder head, sump, pistons and crankshaft, each laid out with its bolts and seals. Green parts are seals and gaskets, gold are fasteners: renew every seal and every stretch bolt. Refit is this list in reverse, with torque values from erWin.', f: s => { parts.forEach(p => { if (has(p, 'longblock')) s[p.id].h = true; if (has(p, 'strip')) { s[p.id].h = false; s[p.id].o.add(p.stripEx); } }); } },
+  { t: 'Strip the engine on the stand', strip: true, d: 'The intake manifold, coils, harness and auxiliary drive are set aside. Now take the engine down part by part: tap a part, then Remove. It will tell you what has to come off first. Or use Strip in order to watch the sequence. Renew every seal and every stretch bolt on rebuild; torque values come from erWin.', f: s => { parts.forEach(p => { if (has(p, 'longblock')) s[p.id].h = true; if (has(p, 'strip')) s[p.id].h = false; }); } },
 ];
 let step = 0, reversing = false, liftT = 0, liftY = 0;
 const LIFT = 0.95;
@@ -255,10 +257,99 @@ function applyStep() {
   $('#next').disabled = reversing && step === 0;
   hvPulse = STEPS[step].hv;
   liftT = STEPS.slice(0, step + 1).some(x => x.lift) ? LIFT : 0;
+  const onStand = !!STEPS[step].strip;
+  if (!onStand) parts.forEach(p => { if (has(p, 'strip') && p.removed) { p.removed = false; } });
+  $('#stripbtns').hidden = !onStand;
+  refreshRows(); if (selected) renderSheet(selected);
 }
 $('#next').onclick = () => { if (!reversing && step === STEPS.length - 1) reversing = true; if (reversing) step = Math.max(0, step - 1); else step++; applyStep(); };
 $('#prev').onclick = () => { if (reversing) { step = Math.min(STEPS.length - 1, step + 1); if (step === STEPS.length - 1) reversing = false; } else step = Math.max(0, step - 1); applyStep(); };
-$('#reset').onclick = () => { reversing = false; step = 0; applyStep(); };
+$('#reset').onclick = () => { reversing = false; step = 0; refitEverything(); applyStep(); };
+
+/* ───────── remove and refit, in workshop order ─────────
+   BLOCK[id] lists what has to come off before `id` can. Refit runs the same
+   rules backwards: a part goes back on only once everything that sits under it
+   is back. Removed parts are laid on the floor beside the car; engine parts on
+   the stand are laid out round it. */
+const FIXED = new Set(['body', 'glazing', 'cabin', 'engine-bay-structure', 'engine-long-block', 'gearbox-case', 'bellhousing', 'integrated-front-differential', 'blk', 'susp_front', 'susp_rear', 'moulded-four-coil-valve-cover']);
+const BLOCK = {
+  // engine on the stand
+  cam_cover: ['bolts_cam', 'spark_plugs'], seal_cam: ['cam_cover'], timing: ['timing_cover'], camshafts: ['cam_cover', 'timing'],
+  valves: ['camshafts'], bolts_head: ['camshafts'], coolant_pump: ['timing'], seal_coolant_pump: ['coolant_pump'],
+  head: ['bolts_head', 'valves', 'injectors', 'coolant_pump'], head_gasket: ['head'],
+  sump: ['bolts_sump'], seal_sump: ['sump'], oil_pump: ['sump'], pistons: ['head_gasket', 'oil_pump'],
+  seal_crank_belt: ['timing'], bolts_main: ['sump'], ladder: ['bolts_main'], crankshaft: ['ladder', 'pistons', 'seal_crank_belt', 'seal_crank_fly'],
+  // hybrid and fuel
+  inverter: ['bolts_inverter', 'hv_cable_motor'], seal_inverter: ['inverter'], emotor: ['bolts_emotor', 'hv_cable_motor'], seal_emotor: ['emotor'],
+  hv_battery: ['bolts_battery', 'hv_cable_battery', 'seats'], seal_battery: ['hv_battery'], fuel_tank: ['bolts_tank', 'exhaust_rear'],
+  // wheels and brakes
+  caliper_fl: ['wheel_fl'], rotor_fl: ['wheel_fl', 'caliper_fl'], caliper_fr: ['wheel_fr'], rotor_fr: ['wheel_fr', 'caliper_fr'],
+  // engine bay
+  'battery-assembly': ['battery-negative-earth-lead', 'battery-positive-cable-to-starter'],
+  'four-coil-ignition-assembly': ['cosmetic-engine-cover-removable'], 'intake-manifold': ['cosmetic-engine-cover-removable', 'airbox-to-throttle-duct'],
+  'airbox-assembly': ['airbox-to-throttle-duct'], 'radiator-condenser-cooling-pack': ['radiator-upper-hose', 'radiator-lower-hose', 'bumper_f'],
+  'coolant-expansion-reservoir': ['coolant-degas-hose'], 'driveshaft-left': ['wheel_fr'], 'driveshaft-right': ['wheel_fl'],
+};
+const offCar = p => p.removed || p.hideT;
+const nameOf = id => byId[id]?.name.replace(/,.*$/, '') || id;
+function whyNotRemove(p) {
+  if (FIXED.has(p.id)) return `${p.name} stays put: it is the base the other parts are fitted to.`;
+  if (has(p, 'strip') && !STEPS[step].strip) return 'Engine internals come out on the engine stand. Run the job to the last step first.';
+  if (has(p, 'hv') && step < 1) return 'High voltage: make the HV system safe first (job step 2).';
+  const left = (BLOCK[p.id] || []).filter(b => byId[b] && !offCar(byId[b]));
+  return left.length ? `Remove first: ${left.map(nameOf).join(', ')}.` : '';
+}
+function whyNotRefit(p) {
+  const under = Object.entries(BLOCK).filter(([id, bs]) => bs.includes(p.id) && byId[id] && byId[id].removed).map(([id]) => id);
+  return under.length ? `Refit first: ${under.map(nameOf).join(', ')}.` : '';
+}
+let toastT = 0;
+function toast(msg, warn) { const t = $('#toast'); t.textContent = msg; t.className = warn ? 'warn' : ''; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 3600); }
+function floorSpot(p) {
+  // beside the car, on the side it comes off; each side fills slot by slot
+  const c = p.box.getCenter(V(0, 0, 0)), sz = p.box.getSize(V(0, 0, 0));
+  let L = V(p.ex.x, 0, p.ex.z); if (L.length() < 0.15) L.set(c.x >= 0 ? 1 : -1, 0, 0);
+  const side = Math.abs(L.x) >= Math.abs(L.z) ? (L.x > 0 ? 'L' : 'R') : (L.z > 0 ? 'F' : 'B');
+  const used = new Set(parts.filter(q => q.removed && q.side === side).map(q => q.slot));
+  let slot = 0; while (used.has(slot)) slot++;
+  p.side = side; p.slot = slot;
+  const t = side === 'L' ? V(1.45 + sz.x / 2, 0, 1.9 - (slot % 7) * 0.62 - Math.floor(slot / 7) * 0.31) : side === 'R' ? V(-1.45 - sz.x / 2, 0, 1.9 - (slot % 7) * 0.62 - Math.floor(slot / 7) * 0.31)
+    : side === 'F' ? V(-1.3 + (slot % 6) * 0.52, 0, 2.85 + sz.z / 2 + Math.floor(slot / 6) * 0.5) : V(-1.3 + (slot % 6) * 0.52, 0, -2.85 - sz.z / 2 - Math.floor(slot / 6) * 0.5);
+  p.remBase = V(t.x - c.x, 0.012 - p.box.min.y, t.z - c.z);
+}
+function removePart(id, quiet) {
+  const p = byId[id]; if (!p || p.removed) return false;
+  const why = whyNotRemove(p); if (why) { if (!quiet) { toast(why, true); flash(BLOCK[id] || []); } return false; }
+  if (p.hinge) p.angT = 0;
+  if (!has(p, 'strip')) floorSpot(p);
+  p.removed = true; poke(); refreshRows();
+  if (!quiet) toast(`${p.name}: removed.` + (has(p, 'seal') ? ' Fit a new one on rebuild.' : /stretch/.test(p.size + p.note) ? ' Stretch bolts: fit new ones on rebuild.' : ''));
+  return true;
+}
+function refitPart(id, quiet) {
+  const p = byId[id]; if (!p || !p.removed) return false;
+  const why = whyNotRefit(p); if (why) { if (!quiet) toast(why, true); return false; }
+  p.removed = false; poke(); refreshRows();
+  if (!quiet) toast(`${p.name}: refitted.` + (has(p, 'seal') ? ' New seal fitted.' : has(p, 'fastener') ? ' Torque to the erWin value.' : ''));
+  return true;
+}
+function refitEverything() { parts.forEach(p => { p.removed = false; if (p.hinge) p.angT = p.id === 'panel_bonnet' ? HINGE.panel_bonnet.ang * DEG : 0; }); poke(); refreshRows(); }
+function flash(ids) { ids.forEach(id => { const r = $('#row_' + id); if (r) { r.classList.add('flash'); setTimeout(() => r.classList.remove('flash'), 1500); } }); }
+function toggleHinge(id) { const p = byId[id]; if (!p?.hinge || p.removed || p.hideT) return; p.angT = Math.abs(p.angT) > 0.01 ? 0 : p.hinge.ang * DEG; poke(); if (selected === id) renderSheet(id); }
+let seq = null;
+function runSequence(kind) {
+  clearInterval(seq);
+  const strip = parts.filter(p => has(p, 'strip') && !FIXED.has(p.id));
+  seq = setInterval(() => {
+    const next = kind === 'strip' ? strip.find(p => !p.removed && !whyNotRemove(p)) : [...strip].reverse().find(p => p.removed && !whyNotRefit(p));
+    if (!next) { clearInterval(seq); toast(kind === 'strip' ? 'Engine stripped. Seals and stretch bolts are marked for renewal.' : 'Engine rebuilt. Torque every fastener to the erWin value.'); return; }
+    kind === 'strip' ? removePart(next.id, true) : refitPart(next.id, true);
+    select(next.id, false);
+  }, REDUCED ? 30 : 420);
+}
+$('#stripall').onclick = () => runSequence('strip');
+$('#rebuildall').onclick = () => runSequence('rebuild');
+$('#refitall').onclick = () => { clearInterval(seq); refitEverything(); toast('Everything refitted.'); };
 
 /* ───────── parts list, selection ───────── */
 let selected = null;
@@ -291,6 +382,14 @@ function setHighlight(id, on) {
     if (on) { o.userData.m0 = o.material; o.material = [].concat(o.material).map(m => { const c = m.clone(); if (c.emissive) { c.emissive = HL; c.emissiveIntensity = 0.5; } return c; }); if (o.material.length === 1) o.material = o.material[0]; }
     else if (o.userData.m0) { o.material = o.userData.m0; delete o.userData.m0; } });
 }
+function renderSheet(id) {
+  const p = byId[id], acts = $('#acts'); if (!p || !acts) return; acts.textContent = '';
+  const b = (label, fn, pri) => { const e = document.createElement('button'); e.className = 'b' + (pri ? ' pri' : ''); e.textContent = label; e.onclick = fn; acts.append(e); };
+  if (p.hinge && !p.removed && !p.hideT) b(Math.abs(p.angT) > 0.01 ? 'Close' : 'Open', () => toggleHinge(id));
+  if (FIXED.has(id)) { const t = document.createElement('span'); t.className = 'small'; t.textContent = 'Fixed: the base other parts fit to.'; acts.append(t); return; }
+  if (p.removed) b('Refit', () => { refitPart(id); renderSheet(id); }, true); else if (!p.hideT) b('Remove', () => { removePart(id); renderSheet(id); }, true);
+}
+function refreshRows() { parts.forEach(p => { const r = $('#row_' + p.id); if (r) r.classList.toggle('gone', p.removed || (p.hideT && !has(p, 'strip'))); }); const n = parts.filter(p => p.removed).length; $('#removed').textContent = n ? `${n} removed` : ''; }
 function select(id, frame) {
   poke();
   if (selected) { setHighlight(selected, false); $('#row_' + selected)?.classList.remove('sel'); }
@@ -306,6 +405,7 @@ function select(id, frame) {
   const dt = document.createElement('dt'); dt.textContent = 'Source'; const dd = document.createElement('dd'); dd.innerHTML = confTag(p.conf); dl.append(dt, dd);
   box.append(dl);
   const n = document.createElement('p'); n.className = 'note'; n.textContent = p.note || 'Shape and position estimated.'; box.append(n);
+  const acts = document.createElement('div'); acts.className = 'btns acts'; acts.id = 'acts'; box.append(acts); renderSheet(id);
   if (frame) { const b = new THREE.Box3().setFromObject(p.obj); if (!b.isEmpty()) { const c = b.getCenter(V(0, 0, 0)), r = Math.max(0.35, b.getSize(V(0, 0, 0)).length()); flyTo(c.clone().add(V(r * 1.1, r * 0.7, r * 1.3)), c); } }
 }
 $('#isolate').onclick = () => { poke(); if (!selected) return; const s = byId[selected].sys; parts.forEach(p => { p.vis = p.sys === s; $('#cb_' + p.id).checked = p.vis; }); };
@@ -319,7 +419,7 @@ renderer.domElement.addEventListener('pointerup', e => {
   const xr = +$('#xray').value < 0.5;
   const objs = parts.filter(p => p.obj.visible && !(xr && ['body', 'glazing', 'cabin', 'panel_bonnet', 'tailgate', 'bumper_f'].includes(p.id) || p.id.startsWith('door_') && xr)).map(p => p.obj);
   const hit = ray.intersectObjects(objs, true).find(h => h.object.userData.pid);
-  if (hit) select(hit.object.userData.pid, false);
+  if (hit) { const id = hit.object.userData.pid; select(id, false); if (byId[id].hinge) toggleHinge(id); }
 });
 
 /* realistic finishes by default; the switch paints seals green and fasteners gold */
@@ -365,9 +465,13 @@ function tick() {
   resize();
   const dt = Math.min(clock.getDelta(), 0.05), k = REDUCED ? 1 : 1 - Math.pow(0.0015, dt);
   liftY += (liftT - liftY) * k; carRoot.position.y = liftY; contact.material.opacity = 1 - Math.min(1, liftY / 0.6);
+  let moved = false;
   for (const p of parts) {
     p.svc.lerp(p.svcT, k);
-    p.obj.position.copy(p.home).add(p.svc).addScaledVector(p.ex, has(p, 'strip') ? 0 : explode);
+    const want = !p.removed ? V(0, 0, 0) : has(p, 'strip') ? p.stripEx.clone() : p.remBase.clone().sub(p.svc).add(V(0, -liftY, 0));
+    p.rem.lerp(want, k); if (p.rem.distanceToSquared(want) > 1e-9) moved = true;
+    if (p.hinge) { p.ang += (p.angT - p.ang) * k; p.obj.rotation[p.hinge.axis] = p.ang; if (Math.abs(p.angT - p.ang) > 1e-4) moved = true; }
+    p.obj.position.copy(p.home).add(p.svc).add(p.rem).addScaledVector(p.ex, has(p, 'strip') || p.removed ? 0 : explode);
     const gone = p.hideT && p.svc.distanceTo(p.svcT) < 0.02;
     p.obj.visible = p.vis && !gone;
   }
@@ -375,7 +479,7 @@ function tick() {
   else parts.forEach(p => { if (has(p, 'hv')) p.obj.traverse(o => { if (o.isMesh && o.userData.hvm) { o.material = o.userData.hvm; delete o.userData.hvm; } }); });
   if (fly) { const f = REDUCED ? 1 : 1 - Math.pow(0.02, dt); camera.position.lerp(fly.p, f); controls.target.lerp(fly.t, f); if (camera.position.distanceTo(fly.p) < 0.01) fly = null; }
   controls.update();
-  let moving = !!fly || hvPulse || Math.abs(liftT - liftY) > 1e-4;
+  let moving = moved || !!fly || hvPulse || Math.abs(liftT - liftY) > 1e-4;
   if (!moving) for (const p of parts) if (p.svc.distanceToSquared(p.svcT) > 1e-9) { moving = true; break; }
   const now = performance.now();
   if (moving) poke();
@@ -393,7 +497,7 @@ loader.load(GOLF.url, gltf => {
     buildBay(meas);
     buildHybridParts();
     // bonnet up by default, so the bay reads at a glance
-    const bon = byId.panel_bonnet; if (bon) bon.obj.rotation.x = HINGE.panel_bonnet.ang * DEG;
+    const bon = byId.panel_bonnet; if (bon) { bon.ang = bon.angT = HINGE.panel_bonnet.ang * DEG; bon.obj.rotation.x = bon.ang; }
     buildTree(); applyStep(); setOpacity(+$('#xray').value); select('emotor', false);
     $('#loading').hidden = true;
   } catch (e) { console.error(e); $('#loadtext').textContent = 'The car loaded but could not be assembled. Reload to try again.'; }

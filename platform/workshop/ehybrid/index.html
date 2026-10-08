@@ -67,6 +67,11 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 #bar{height:100%;background:var(--accent);transform:scaleX(0);transform-origin:left}
 .chk{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer}
 .chk input{accent-color:var(--accent);width:16px;height:16px}
+.row.gone button{opacity:.45;text-decoration:line-through}
+.row.flash{background:color-mix(in srgb,var(--warn) 28%,transparent)}
+.acts{margin-top:10px}
+#toast{position:absolute;left:50%;top:54px;transform:translateX(-50%);max-width:min(560px,calc(100% - 32px));background:var(--panel);color:var(--ink);border:1px solid var(--line);border-left:4px solid var(--seal);border-radius:6px;padding:9px 13px;font-size:13.5px;box-shadow:0 6px 24px rgba(0,0,0,.18)}
+#toast.warn{border-left-color:var(--warn)}
 .small{font-size:12.5px;color:var(--muted);line-height:1.5}
 .small a{color:var(--accent)}
 @media (max-width:1020px){
@@ -94,6 +99,7 @@ input[type=range]{width:100%;accent-color:var(--accent)}
       <button class="b" data-v="under">Under</button><button class="b" data-v="top">Top</button><button class="b" data-v="bench">Bench</button>
     </div>
     <div class="legend"><span><i class="dot" style="background:#ff6a00"></i>Orange = high voltage</span></div>
+    <div id="toast" role="status" hidden></div>
     <div id="loading"><span id="loadtext">Loading the Golf…</span><div class="tape"><div id="bar"></div></div></div>
   </div>
 
@@ -103,7 +109,8 @@ input[type=range]{width:100%;accent-color:var(--accent)}
       <label class="s" for="explode">Explode <input id="explode" type="range" min="0" max="1" step="0.01" value="0"></label>
       <label class="s" for="xray">Body see-through <input id="xray" type="range" min="0.08" max="1" step="0.01" value="1"></label>
       <label class="chk" for="markers"><input id="markers" type="checkbox"> Highlight seals (green) and bolts (gold)</label>
-      <div class="btns"><button class="b" id="isolate">Isolate system</button><button class="b" id="showall">Show all</button></div>
+      <div class="btns"><button class="b" id="isolate">Isolate system</button><button class="b" id="showall">Show all</button><button class="b" id="refitall">Refit everything</button></div>
+      <span class="small" id="removed"></span>
     </div>
 
     <h2>Job: engine out, strip, refit</h2>
@@ -112,11 +119,12 @@ input[type=range]{width:100%;accent-color:var(--accent)}
       <div class="step" id="stept"></div>
       <div class="steptext" id="stepd"></div>
       <div class="hvnote" id="hvnote" hidden>High voltage. Only an HV-qualified technician makes the system safe, following VW’s procedure. This model shows where the parts are, not how to de-energise them.</div>
+      <div class="btns" id="stripbtns" hidden style="margin-top:10px"><button class="b" id="stripall">Strip in order</button><button class="b" id="rebuildall">Rebuild in order</button></div>
       <div class="btns" style="margin-top:10px"><button class="b" id="prev">Back</button><button class="b pri" id="next">Next step</button><button class="b" id="reset">Reset</button></div>
     </div>
 
     <h2>Selected part</h2>
-    <div class="card" id="info"><span class="small">Tap a part in the car or the list.</span></div>
+    <div class="card" id="info"><span class="small">Tap a part in the car or the list. Tap a door, the bonnet or the tailgate to open it.</span></div>
 
     <h2>Sources</h2>
     <div class="card small">
