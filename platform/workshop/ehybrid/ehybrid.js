@@ -8,15 +8,15 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { FLEET, classifyMesh } from './fleet.js?v=8';
-import { measureCar, buildPowertrain } from './powertrain.js?v=8';
-import { buildEngineBayDetail } from './engine-bay-detail.js?v=8';
-import { buildInnerApron } from './engine-bay-shell.js?v=8';
-import { buildTransmission } from './transmission-detail.js?v=8';
-import { extractFrontBumper } from './front-bumper.js?v=8';
-import { buildHybrid, buildEngineStrip, buildDGEAExternals } from './hybrid-parts.js?v=8';
-import { TOOLS, SPEC, toolLabel, buildCarFasteners } from './jobs.js?v=8';
-import { buildFrontCorners } from './front-corner.js?v=8';
+import { FLEET, classifyMesh } from './fleet.js?v=9';
+import { measureCar, buildPowertrain } from './powertrain.js?v=9';
+import { buildEngineBayDetail } from './engine-bay-detail.js?v=9';
+import { buildInnerApron } from './engine-bay-shell.js?v=9';
+import { buildTransmission } from './transmission-detail.js?v=9';
+import { extractFrontBumper } from './front-bumper.js?v=9';
+import { buildHybrid, buildEngineStrip, buildDGEAExternals } from './hybrid-parts.js?v=9';
+import { TOOLS, SPEC, toolLabel, buildCarFasteners } from './jobs.js?v=9';
+import { buildFrontCorners } from './front-corner.js?v=9';
 
 /* Golf Mk8 eHybrid workshop. Built on the Golf Workshop's real Mk8 body
    (2021 Volkswagen Golf GTI by Ddiaz Design, Sketchfab, CC BY-NC-SA 4.0),
@@ -204,7 +204,7 @@ function buildCar(root) {
   }
   // see-through control acts on the shell and its panels
   const seen = new Set();
-  for (const id of ['body', 'bumper_f', 'panel_bonnet', 'tailgate', 'door_fl', 'door_fr', 'door_rl', 'door_rr', 'cabin']) {
+  for (const id of ['body', 'bumper_f', 'panel_bonnet', 'tailgate', 'door_fl', 'door_fr', 'door_rl', 'door_rr', 'cabin', 'wheel_fl', 'wheel_fr', 'wheel_rl', 'wheel_rr']) {
     byId[id]?.obj.traverse(o => { if (!o.isMesh) return; o.material = [].concat(o.material).map(m => { const c = m.clone(); c.userData.op0 = c.opacity; c.userData.tr0 = c.transparent; seen.add(c); return c; }); if (o.material.length === 1) o.material = o.material[0]; });
   }
   bodyMats = [...seen];
@@ -389,18 +389,18 @@ function applyStep() {
   const s = {}; parts.forEach(p => s[p.id] = { o: V(0, 0, 0), h: !!p.hidden });
   for (let i = 0; i <= step; i++) STEPS[i].f(s);
   parts.forEach(p => { p.svcT.copy(s[p.id].o); p.hideT = s[p.id].h; });
-  $('#stepn').textContent = `Step ${step + 1} of ${STEPS.length}${reversing ? ' · refitting' : ''}`;
+  $('#stepn').textContent = `Step ${step + 1} of ${STEPS.length}${reversing ? ' · putting it back' : ''}`; $('#stepbar').style.width = `${(step + 1) / STEPS.length * 100}%`;
   $('#stept').textContent = STEPS[step].t; $('#stepd').textContent = STEPS[step].d;
   $('#hvnote').hidden = !STEPS[step].hv;
   $('#prev').disabled = step === 0 && !reversing;
-  $('#next').textContent = step === STEPS.length - 1 && !reversing ? 'Start refit' : reversing ? (step === 0 ? 'Refitted' : 'Refit next') : 'Next step';
+  $('#next').textContent = step === STEPS.length - 1 && !reversing ? 'Put it back' : reversing ? (step === 0 ? 'All back in' : 'Next step') : 'Next step';
   $('#next').disabled = reversing && step === 0;
   hvPulse = STEPS[step].hv;
   liftT = STEPS.slice(0, step + 1).some(x => x.lift) ? LIFT : 0;
   const onStand = !!STEPS[step].strip;
   if (!onStand) parts.forEach(p => { if (has(p, 'strip') && p.removed) { p.removed = false; } });
   $('#stripbtns').hidden = !onStand;
-  refreshRows(); if (selected) renderSheet(selected);
+  refreshRows(); renderCard();
 }
 $('#next').onclick = () => { if (!reversing && step === STEPS.length - 1) reversing = true; if (reversing) step = Math.max(0, step - 1); else step++; applyStep(); };
 $('#prev').onclick = () => { if (reversing) { step = Math.min(STEPS.length - 1, step + 1); if (step === STEPS.length - 1) reversing = false; } else step = Math.max(0, step - 1); applyStep(); };
@@ -435,7 +435,7 @@ function whyNotRemove(p) {
   if (need && byId[need] && Math.abs(byId[need].angT) < 0.01) return `Open the ${nameOf(need).toLowerCase()} first${p.fx ? ', and support it' : ''}.`;
   if (FIXED.has(p.id)) return `${p.name} stays put: it is the base the other parts are fitted to.`;
   if (has(p, 'strip') && !STEPS[step].strip) return 'Engine internals come out on the engine stand. Run the job to the last step first.';
-  if (has(p, 'hv') && step < 1) return 'High voltage: make the HV system safe first (job step 2).';
+  if (has(p, 'hv') && step < 1) return 'High voltage. Make the system safe first: Engine job, step 2.';
   const left = (BLOCK[p.id] || []).filter(b => byId[b] && !offCar(byId[b]));
   return left.length ? `Remove first: ${left.map(nameOf).join(', ')}.` : '';
 }
@@ -488,18 +488,20 @@ function fitBolts(p) {
   toast((p.fx.renew ? 'New bolts fitted by hand. ' : 'Bolts started by hand. ') + `Now run them in with the ${toolLabel(p.fx.tool)}, then torque${p.fx.nm ? ' to ' + p.fx.nm + ' Nm' : ''}${p.fx.deg ? ' + ' + p.fx.deg + '°' : ''}.`);
 }
 function allBolts(p) { let n = 0; for (const b of p.bolts) if (b.userData.state !== 'out' && boltAction(p, b, true)) n++; if (!n) { const b = p.bolts.find(x => x.userData.state !== 'out'); if (b) boltAction(p, b, false); } else toast(`${n} done with the ${toolLabel(tool)}.`); renderSheet(p.id); }
+let manual = false;
+function syncTray() { $('#tray').querySelectorAll('.tool').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.tool === tool))); $('#tqbox').hidden = tool !== 'tq'; $('#angbox').hidden = tool !== 'ang'; $('#tq').value = tqSet; $('#tqv').textContent = tqSet; $('#ang').value = String(angSet); }
 function buildTray() {
   const tray = $('#tray'); tray.textContent = '';
   for (const t of TOOLS) {
     const b = document.createElement('button'); b.className = 'tool'; b.dataset.tool = t.k; b.textContent = t.label; b.setAttribute('aria-pressed', String(t.k === tool));
-    b.onclick = () => { tool = t.k; tray.querySelectorAll('.tool').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.tool === tool))); $('#tqbox').hidden = tool !== 'tq'; $('#angbox').hidden = tool !== 'ang'; };
+    b.onclick = () => { tool = t.k; syncTray(); };
     tray.append(b);
   }
   $('#tq').oninput = e => { tqSet = +e.target.value; $('#tqv').textContent = tqSet; };
   $('#ang').onchange = e => { angSet = +e.target.value; };
 }
 let toastT = 0;
-function toast(msg, warn) { const t = $('#toast'); t.textContent = msg; t.className = warn ? 'warn' : ''; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 3600); }
+function toast(msg, warn) { const t = $('#toast'); t.textContent = msg; t.className = 'glass' + (warn ? ' warn' : ''); t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 3600); }
 function floorSpot(p) {
   // beside the car, on the side it comes off; each side fills slot by slot
   const c = p.box.getCenter(V(0, 0, 0)), sz = p.box.getSize(V(0, 0, 0));
@@ -530,7 +532,7 @@ function refitPart(id, quiet) {
 }
 function refitEverything() { parts.forEach(p => { p.removed = false; if (p.bolts) p.bolts.forEach(b => { b.userData.state = 'in'; paintBolt(b); }); if (p.hinge) p.angT = p.id === 'panel_bonnet' ? HINGE.panel_bonnet.ang * DEG : 0; }); poke(); refreshRows(); }
 function flash(ids) { ids.forEach(id => { const r = $('#row_' + id); if (r) { r.classList.add('flash'); setTimeout(() => r.classList.remove('flash'), 1500); } }); }
-function toggleHinge(id) { const p = byId[id]; if (!p?.hinge || p.removed || p.hideT) return; p.angT = Math.abs(p.angT) > 0.01 ? 0 : p.hinge.ang * DEG; poke(); if (selected === id) renderSheet(id); }
+function toggleHinge(id) { const p = byId[id]; if (!p?.hinge || p.removed || p.hideT) return; p.angT = Math.abs(p.angT) > 0.01 ? 0 : p.hinge.ang * DEG; poke(); renderCard(); }
 let seq = null;
 function runSequence(kind) {
   clearInterval(seq);
@@ -540,12 +542,12 @@ function runSequence(kind) {
     if (!next) { clearInterval(seq); toast(kind === 'strip' ? 'Engine stripped. Seals and stretch bolts are marked for renewal.' : 'Engine rebuilt. Torque every fastener to the erWin value.'); return; }
     if (next.fx) { if (kind === 'strip') { next.bolts.forEach(b => { b.userData.state = 'out'; paintBolt(b); }); next.removed = true; } else { next.bolts.forEach(b => { b.userData.state = 'in'; paintBolt(b); }); next.removed = false; } refreshRows(); poke(); }
     else kind === 'strip' ? removePart(next.id, true) : refitPart(next.id, true);
-    select(next.id, false);
+    select(next.id, false, true);
   }, REDUCED ? 30 : 420);
 }
 $('#stripall').onclick = () => runSequence('strip');
 $('#rebuildall').onclick = () => runSequence('rebuild');
-$('#refitall').onclick = () => { clearInterval(seq); refitEverything(); toast('Everything refitted.'); };
+$('#refitall').onclick = () => { clearInterval(seq); refitEverything(); renderCard(); toast('Everything is back on the car.'); };
 
 /* ───────── parts list, selection ───────── */
 let selected = null;
@@ -556,84 +558,217 @@ function buildTree() {
   for (const [k, label] of Object.entries(SYS)) {
     const list = parts.filter(p => p.sys === k); if (!list.length) continue;
     const n = list.reduce((a, p) => a + p.qty, 0); total += n;
-    const d = document.createElement('details'); d.className = 'sys'; d.open = k === 'hybrid' || k === 'strip';
+    const d = document.createElement('details'); d.className = 'sys';
     const sm = document.createElement('summary');
     sm.innerHTML = `<i class="dot" style="background:${SYS_COLOR[k]}"></i><span></span><span class="n">${n}</span>`; sm.children[1].textContent = label; d.append(sm);
     for (const p of list) {
-      const r = document.createElement('div'); r.className = 'row'; r.id = 'row_' + p.id;
-      const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = true; cb.id = 'cb_' + p.id; cb.setAttribute('aria-label', 'Show ' + p.name); cb.onchange = () => { p.vis = cb.checked; poke(); };
-      const b = document.createElement('button'); b.textContent = p.name; b.onclick = () => select(p.id, true);
-      const q = document.createElement('span'); q.className = 'q'; q.textContent = p.qty > 1 ? '×' + p.qty : '';
-      if (has(p, 'seal')) b.classList.add('isseal'); if (has(p, 'fastener')) b.classList.add('isbolt'); if (has(p, 'hv')) b.classList.add('ishv');
-      r.append(cb, b, q); d.append(r);
+      const r = document.createElement('div'); r.className = 'prow'; r.id = 'row_' + p.id; r.dataset.name = p.name.toLowerCase();
+      const b = document.createElement('button'); b.textContent = p.name; b.onclick = () => { select(p.id, true); if (matchMedia('(max-width: 819px)').matches) panel('parts', false); };
+      r.append(b);
+      if (has(p, 'hv')) { const t = document.createElement('span'); t.className = 'tag hv'; t.textContent = 'HV'; r.append(t); }
+      if (has(p, 'seal')) { const t = document.createElement('span'); t.className = 'tag seal'; t.textContent = 'renew'; r.append(t); }
+      if (p.qty > 1) { const q = document.createElement('span'); q.className = 'q'; q.textContent = '×' + p.qty; r.append(q); }
+      d.append(r);
     }
     tree.append(d);
   }
-  $('#count').textContent = `${total} parts`;
+  $('#count').textContent = `${total}`;
 }
+$('#psearch').oninput = e => {
+  const q = e.target.value.trim().toLowerCase();
+  document.querySelectorAll('#tree .sys').forEach(d => { let any = false; d.querySelectorAll('.prow').forEach(r => { const hit = !q || r.dataset.name.includes(q); r.hidden = !hit; any ||= hit; }); d.hidden = !any; d.open = !!q && any; });
+};
 const HL = new THREE.Color(0x2f8cff);
 function setHighlight(id, on) {
   const p = byId[id]; if (!p) return;
   p.obj.traverse(o => { if (!o.isMesh) return;
-    if (on) { o.userData.m0 = o.material; o.material = [].concat(o.material).map(m => { const c = m.clone(); if (c.emissive) { c.emissive = HL; c.emissiveIntensity = ['body', 'interior'].includes(p.sys) ? 0.14 : 0.5; } return c; }); if (o.material.length === 1) o.material = o.material[0]; }
+    if (on) { o.userData.m0 = o.material; o.material = [].concat(o.material).map(m => { const c = m.clone(); if (c.emissive) { c.emissive = HL; c.emissiveIntensity = ['body', 'interior'].includes(p.sys) ? 0.12 : 0.45; } return c; }); if (o.material.length === 1) o.material = o.material[0]; }
     else if (o.userData.m0) { o.material = o.userData.m0; delete o.userData.m0; } });
 }
-function renderSheet(id) {
-  const p = byId[id], acts = $('#acts'); if (!p || !acts) return; acts.textContent = '';
-  const b = (label, fn, pri) => { const e = document.createElement('button'); e.className = 'b' + (pri ? ' pri' : ''); e.textContent = label; e.onclick = fn; acts.append(e); };
-  if (p.hinge && !p.removed && !p.hideT) b(Math.abs(p.angT) > 0.01 ? 'Close' : 'Open', () => toggleHinge(id));
-  if (FIXED.has(id)) { const t = document.createElement('span'); t.className = 'small'; t.textContent = 'Fixed: the base other parts fit to.'; acts.append(t); return; }
-  if (p.fx) {
-    const n = k => p.bolts.filter(x => x.userData.state === k).length;
-    const st = document.createElement('div'); st.className = 'boltstate';
-    st.innerHTML = `<b>${toolLabel(p.fx.tool)}</b> · ${p.fx.nm != null ? p.fx.nm + ' Nm' : 'torque: erWin'}${p.fx.deg ? ' + ' + p.fx.deg + '°' : ''}${p.fx.renew ? ' · <span class="renew">renew</span>' : ''}<br>${n('in')} tight · ${n('out')} out${n('loose') ? ' · ' + n('loose') + ' loose' : ''}${n('snug') ? ' · ' + n('snug') + ' snug' : ''}${n('torqued') ? ' · ' + n('torqued') + ' need the angle' : ''}`;
-    acts.append(st);
-    if (allOut(p)) b(p.fx.renew ? 'Fit new bolts by hand' : 'Fit bolts by hand', () => { fitBolts(p); renderSheet(id); }, true);
-    else b(`Use the ${toolLabel(tool)} on all`, () => allBolts(p), true);
-    const t = document.createElement('span'); t.className = 'small'; t.textContent = 'Or pick a tool below the car and tap each fastener.'; acts.append(t);
-    return;
-  }
-  if (p.removed) b('Refit', () => { refitPart(id); renderSheet(id); }, true); else if (!p.hideT) b('Remove', () => { removePart(id); renderSheet(id); }, true);
-  const held = Object.entries(BLOCK).length && (BLOCK[id] || []).map(x => byId[x]).filter(q => q?.fx);
-  for (const q of held || []) { const t = document.createElement('button'); t.className = 'b'; t.textContent = `${q.fx.label}: ${q.bolts.filter(x => x.userData.state !== 'out').length}/${q.bolts.length} in`; t.onclick = () => select(q.id, true); acts.append(t); }
+function refreshRows() { parts.forEach(p => { const r = $('#row_' + p.id); if (r) r.classList.toggle('gone', p.removed || (p.hideT && !has(p, 'strip'))); }); const n = parts.filter(p => p.removed).length; $('#removed').textContent = n ? `${n} parts are off the car.` : 'Everything is on the car.'; }
+
+/* ───────── the card: one clear next step for the selected part ─────────
+   Guided by default: the button picks the right tool, torque and angle itself.
+   "Choose tools myself" in View brings back the tool tray for practice. */
+const isOpen = q => Math.abs(q.angT) > 0.01;
+function blockersOff(p) {
+  const ids = [], need = p.fx?.needOpen || p.needOpen;
+  if (need && byId[need] && !isOpen(byId[need])) ids.push(need);
+  for (const b of BLOCK[p.id] || []) if (byId[b] && !offCar(byId[b])) ids.push(b);
+  return ids;
 }
-function refreshRows() { parts.forEach(p => { const r = $('#row_' + p.id); if (r) r.classList.toggle('gone', p.removed || (p.hideT && !has(p, 'strip'))); }); const n = parts.filter(p => p.removed).length; $('#removed').textContent = n ? `${n} removed` : ''; }
-function select(id, frame) {
+const blockersOn = p => Object.entries(BLOCK).filter(([id, bs]) => bs.includes(p.id) && byId[id]?.removed).map(([id]) => id);
+const verbFor = id => { const q = byId[id]; return q.hinge && !isOpen(q) && !q.fx ? 'open the' : q.fx ? 'undo the' : 'take off the'; };
+const lc = s => /^[A-Z]{2}/.test(s) ? s : s.charAt(0).toLowerCase() + s.slice(1);
+const listOf = ids => { const n = ids.map(id => lc(nameOf(id))); return n.length > 3 ? `${n.slice(0, 3).join(', ')} and ${n.length - 3} more` : n.join(', '); };
+function drive(p, from, toolKey) {
+  tool = toolKey; syncTray();
+  let k = 0; for (const b of p.bolts) if (b.userData.state === from && boltAction(p, b, true)) k++;
+  if (!k) { const b = p.bolts.find(x => x.userData.state === from); if (b) boltAction(p, b, false); return; }
+  const n = p.fx.label.replace(/,.*$/, '');
+  if (from === 'in') toast(`${n}: ${k} out.` + (p.fx.renew ? ' Fit new ones when it goes back.' : ''));
+  else if (from === 'loose') toast(`${n}: snug. Now torque them.`);
+  else if (from === 'snug') toast(p.fx.deg ? `${p.fx.nm} Nm done. Now a further ${p.fx.deg}°.` : p.fx.nm != null ? `${n}: torqued to ${p.fx.nm} Nm.` : `${n}: tight. Take the torque value from erWin.`);
+  else toast(`${n}: fully tightened.`);
+}
+function nextAction(p) {
+  if (FIXED.has(p.id)) return { label: 'Fixed in place', hint: 'Other parts are fitted to this one, so it stays on.', off: true };
+  if (p.hideT && !p.removed && !has(p, 'strip')) return { label: 'Set aside by the engine job', hint: 'Go back in the engine job to bring it back.', off: true };
+  const chainOff = bl => ({ label: `First, ${verbFor(bl[0])} ${lc(nameOf(bl[0]))}`, go: bl[0], hint: `In the way: ${listOf(bl)}.`, warn: true, chain: 'off' });
+  const chainOn = bl => ({ label: `First, put back the ${lc(nameOf(bl[0]))}`, go: bl[0], hint: `Goes back first: ${listOf(bl)}.`, warn: true, chain: 'on' });
+  if (p.fx) {
+    const c = k => p.bolts.filter(b => b.userData.state === k).length, T = toolLabel(p.fx.tool), n = p.bolts.length;
+    if (c('loose')) return { label: `Run them in with the ${T}`, run: () => drive(p, 'loose', p.fx.tool) };
+    if (c('snug')) return { label: p.fx.nm != null ? `Torque to ${p.fx.nm} Nm` : 'Tighten them', hint: p.fx.nm != null ? 'With the torque wrench.' : 'No torque value in the data: take it from erWin.', run: () => { tqSet = p.fx.nm ?? tqSet; drive(p, 'snug', 'tq'); } };
+    if (c('torqued')) return { label: `Turn a further ${p.fx.deg}°`, hint: 'With the angle gauge.', run: () => { angSet = p.fx.deg; drive(p, 'torqued', 'ang'); } };
+    if (c('out') === n) { const bl = blockersOn(p); if (bl.length) return chainOn(bl); return { label: p.fx.renew ? 'Fit new bolts' : 'Fit the bolts', hint: 'Started by hand, then run in and torqued.', run: () => fitBolts(p) }; }
+    const bl = blockersOff(p); if (bl.length) return chainOff(bl);
+    const why = whyNotRemove(p); if (why) return { label: 'Not yet', hint: why, off: true, warn: true };
+    const k = c('in'); return { label: k === 1 ? `Undo it with the ${T}` : `Undo all ${k} with the ${T}`, run: () => drive(p, 'in', p.fx.tool) };
+  }
+  if (p.removed) { const bl = blockersOn(p); if (bl.length) return chainOn(bl); return { label: 'Put it back', run: () => refitPart(p.id) }; }
+  const bl = blockersOff(p); if (bl.length) return chainOff(bl);
+  const why = whyNotRemove(p); if (why) return { label: 'Not yet', hint: why, off: true, warn: true };
+  return { label: 'Take it off', run: () => removePart(p.id) };
+}
+// everything that has to happen, in order, to take a part off (or put it back)
+function plan(id, dir, out = [], seen = new Set()) {
+  if (seen.has(id)) return out; seen.add(id);
+  const p = byId[id]; if (!p) return out;
+  if (dir === 'off') {
+    if (offCar(p)) return out;
+    const need = p.fx?.needOpen || p.needOpen;
+    if (need && byId[need] && !isOpen(byId[need]) && !out.includes('open:' + need)) out.push('open:' + need);
+    for (const b of BLOCK[p.id] || []) if (byId[b] && !offCar(byId[b])) plan(b, 'off', out, seen);
+    out.push(id); return out;
+  }
+  // back on: what sits under it first, then the part, then whatever came off to free it, last-off first
+  for (const b of blockersOn(p)) plan(b, 'on', out, seen);
+  if (p.removed) out.push(id);
+  for (const b of [...(BLOCK[id] || [])].reverse()) if (byId[b]?.removed) plan(b, 'on', out, seen);
+  return out;
+}
+function doAll(id, dir, sync) {
+  clearInterval(seq);
+  const steps = plan(id, dir); let i = 0, n = 0, halted = false;
+  const stop = q => { halted = true; clearInterval(seq); select(q.id, false); toast(`Stopped at ${lc(nameOf(q.id))}: ${whyNotRemove(q) || whyNotRefit(q) || 'it cannot move yet.'}`, true); };
+  const one = () => {
+    if (halted) return;
+    if (i >= steps.length) { clearInterval(seq); select(id, false); toast(dir === 'off' ? `Done in ${n} steps, every bolt with the right tool.` : `Back together in ${n} steps, every bolt torqued to spec.`); return; }
+    const tok = steps[i++]; n++;
+    if (tok.startsWith('open:')) { const h = tok.slice(5); if (!isOpen(byId[h])) toggleHinge(h); select(h, false, true); return; }
+    const q = byId[tok];
+    if (dir === 'off') {
+      if (q.fx) { tool = q.fx.tool; q.bolts.forEach(b => { if (b.userData.state !== 'out') boltAction(q, b, true); }); if (!allOut(q)) return stop(q); }
+      else if (!removePart(q.id, true)) return stop(q);
+    } else {
+      if (q.fx) { if (whyNotRefit(q)) return stop(q); fitBolts(q); q.bolts.forEach(b => { b.userData.state = 'in'; paintBolt(b); }); }
+      else if (!refitPart(q.id, true)) return stop(q);
+    }
+    refreshRows(); select(q.id, false, true); poke();
+  };
+  if (sync) { while (i < steps.length && !halted) one(); if (!halted) one(); return; }
+  seq = setInterval(one, REDUCED ? 40 : 380);
+}
+function stateOf(p) {
+  if (p.fx) { const n = p.bolts.length, tight = p.bolts.filter(b => b.userData.state === 'in').length, out = p.bolts.filter(b => b.userData.state === 'out').length;
+    return out === n ? ['All out', 'off'] : tight === n ? ['All tight', 'ok'] : [`${tight} of ${n} tight`, 'off']; }
+  if (p.removed) return ['Off the car', 'off'];
+  if (p.hideT && !has(p, 'strip')) return ['Set aside', 'off'];
+  if (p.hinge && isOpen(p)) return ['Open', ''];
+  return [has(p, 'hv') ? 'High voltage' : 'Fitted', has(p, 'hv') ? 'hv' : 'ok'];
+}
+function renderCard() {
+  const p = selected && byId[selected];
+  $('#ce-empty').hidden = !!p; $('#ce-part').hidden = !p;
+  const jobOn = step > 0 || reversing; $('#ce-job').hidden = !jobOn || mode !== 'explore';
+  if (jobOn) $('#ce-jobtext').textContent = `Engine job: step ${step + 1} of ${STEPS.length}`;
+  if (!p) return;
+  $('#ce-dot').style.background = SYS_COLOR[p.sys]; $('#ce-sys').textContent = SYS[p.sys];
+  const [st, cls] = stateOf(p); const pill = $('#ce-state'); pill.textContent = st; pill.className = 'pill ' + cls;
+  $('#ce-name').textContent = p.name;
+  const specs = $('#ce-specs'); specs.textContent = '';
+  const spec = (t, c) => { const e = document.createElement('span'); e.className = 'spec' + (c ? ' ' + c : ''); e.textContent = t; specs.append(e); };
+  if (p.fx) { spec(toolLabel(p.fx.tool)); spec(p.fx.nm != null ? `${p.fx.nm} Nm${p.fx.deg ? ' + ' + p.fx.deg + '°' : ''}` : 'Torque: erWin'); if (p.fx.renew) spec('Renew every time', 'renew'); if (p.qty > 1) spec(`${p.qty} off`); }
+  else { if (p.qty > 1) spec(`${p.qty} off`); if (has(p, 'seal')) spec('Renew every time', 'renew'); const held = (BLOCK[p.id] || []).map(x => byId[x]).find(q => q?.fx); if (held) spec(`Held by ${lc(held.fx.label.replace(/,.*$/, ''))}`); }
+  specs.hidden = !specs.children.length;
+  const a = nextAction(p), main = $('#ce-main'), hint = $('#ce-hint');
+  main.textContent = a.label; main.className = 'btn big ' + (a.off ? '' : a.warn ? 'warn' : 'pri'); main.setAttribute('aria-disabled', String(!!a.off));
+  main.onclick = () => { if (a.off) return; if (a.go) { select(a.go, true); return; } a.run(); renderCard(); };
+  hint.textContent = a.hint || ''; hint.hidden = !a.hint; hint.className = 'hint' + (a.warn ? ' warn' : '');
+  const more = $('#ce-more'); more.textContent = '';
+  const btn = (label, fn) => { const e = document.createElement('button'); e.className = 'btn'; e.textContent = label; e.onclick = fn; more.append(e); };
+  if (a.chain) btn(a.chain === 'off' ? 'Do every step' : 'Put it all back', () => doAll(p.id, a.chain));
+  else if (p.removed && !FIXED.has(p.id) && plan(p.id, 'on').length > 1) btn('Put it all back', () => doAll(p.id, 'on'));
+  if (p.hinge && !p.removed && !p.hideT) btn(isOpen(p) ? 'Close' : 'Open', () => toggleHinge(p.id));
+  btn($('#ce-details').hidden ? 'Details' : 'Hide details', () => { $('#ce-details').hidden = !$('#ce-details').hidden; renderCard(); });
+  const det = $('#ce-details');
+  if (!det.hidden) {
+    det.textContent = '';
+    const dl = document.createElement('dl'); dl.className = 'kv';
+    const src = p.fx ? (p.fx.src === 'man' ? 'VW manual data' : p.fx.src === 'class' ? 'Typical value' : 'Estimate') : p.conf === 'pub' ? 'Published' : p.conf === 'model' ? 'Real car model' : 'Estimated';
+    for (const [k, v] of [['Material', p.mat], ['Size', p.fx ? '' : p.size], ['Source', src], ['OEM part no.', 'Not included']]) { if (!v) continue; const dt = document.createElement('dt'); dt.textContent = k; const dd = document.createElement('dd'); dd.textContent = v; dl.append(dt, dd); }
+    const n = document.createElement('p'); n.className = 'note'; n.textContent = p.note || 'Shape and position estimated.';
+    det.append(dl, n);
+  }
+}
+function select(id, frame, keepMode) {
   poke();
   if (selected) { setHighlight(selected, false); $('#row_' + selected)?.classList.remove('sel'); }
-  selected = id; const p = byId[id]; if (!p) return;
+  selected = id; const p = byId[id];
+  if (!keepMode && mode !== 'explore' && p) setMode('explore');
+  if (!p) { if (focus) { focus = false; setOpacity(seeThrough()); } renderCard(); return; }
   setHighlight(id, true);
-  const row = $('#row_' + id); if (row) { row.classList.add('sel'); row.closest('details').open = true; row.scrollIntoView({ block: 'nearest' }); }
-  const box = $('#info'); box.textContent = '';
-  const h = document.createElement('div'); h.className = 'pname'; h.textContent = p.name; box.append(h);
-  const dl = document.createElement('dl'); dl.className = 'kv';
-  const tqTxt = p.fx ? (p.fx.nm != null ? `${p.fx.nm} Nm${p.fx.deg ? ' + ' + p.fx.deg + '°' : ''} (${p.fx.src === 'man' ? 'VW manual data' : p.fx.src === 'class' ? 'class value' : 'estimate'})` : 'not in the data: erWin') : (BLOCK[id] || []).some(x => byId[x]?.fx) ? 'on its bolts: see below' : 'not included (erWin)';
-  for (const [k, v] of [['System', SYS[p.sys]], ['Quantity', String(p.qty)], ['Material', p.mat || '—'], [p.fx ? 'Tool' : 'Size', p.fx ? toolLabel(p.fx.tool) : (p.size || '—')], ['Torque', tqTxt], ['Renew', p.fx ? (p.fx.renew ? 'yes, every time' : 'no') : (has(p, 'seal') ? 'yes, every time' : '—')], ['OEM part no.', 'not included']]) {
-    const dt = document.createElement('dt'); dt.textContent = k; const dd = document.createElement('dd'); dd.textContent = v; dl.append(dt, dd);
-  }
-  const dt = document.createElement('dt'); dt.textContent = 'Source'; const dd = document.createElement('dd'); dd.innerHTML = confTag(p.conf); dl.append(dt, dd);
-  box.append(dl);
-  const n = document.createElement('p'); n.className = 'note'; n.textContent = p.note || 'Shape and position estimated.'; box.append(n);
-  const acts = document.createElement('div'); acts.className = 'btns acts'; acts.id = 'acts'; box.append(acts); renderSheet(id);
-  if (frame) { const b = new THREE.Box3().setFromObject(p.obj); if (!b.isEmpty()) { const c = b.getCenter(V(0, 0, 0)), r = Math.max(0.35, b.getSize(V(0, 0, 0)).length()); flyTo(c.clone().add(V(r * 1.1, r * 0.7, r * 1.3)), c); } }
+  const row = $('#row_' + id); if (row) { row.classList.add('sel'); const d = row.closest('details'); if (d) d.open = true; }
+  renderCard();
+  const inner = !['body', 'interior'].includes(p.sys) && !/^wheel_/.test(p.id);
+  if (frame) { focus = inner; setOpacity(seeThrough()); const b = new THREE.Box3().setFromObject(p.obj); if (!b.isEmpty()) { const c = b.getCenter(V(0, 0, 0)), r = Math.max(0.45, b.getSize(V(0, 0, 0)).length()); flyTo(c.clone().add(V(Math.sign(c.x || 1) * r * 1.4, r * 0.8, r * 1.2)), c); } }
+  else if (focus && !inner) { focus = false; setOpacity(seeThrough()); }
 }
-$('#isolate').onclick = () => { poke(); if (!selected) return; const s = byId[selected].sys; parts.forEach(p => { p.vis = p.sys === s; $('#cb_' + p.id).checked = p.vis; }); };
-$('#showall').onclick = () => { poke(); parts.forEach(p => { p.vis = true; $('#cb_' + p.id).checked = true; }); };
+function renderSheet() { renderCard(); }
+
+/* ───────── modes and panels ───────── */
+let mode = 'explore';
+function setMode(m) {
+  mode = m;
+  document.querySelectorAll('[data-mode]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.mode === m)));
+  $('#card-explore').hidden = m !== 'explore'; $('#card-job').hidden = m !== 'job'; $('#card-photo').hidden = m !== 'photo';
+  if (m !== 'photo') stopPhoto();
+  renderCard();
+}
+document.querySelectorAll('[data-mode]').forEach(b => b.onclick = () => setMode(b.dataset.mode));
+function panel(which, open) {
+  const el = $('#' + which), btn = $(which === 'parts' ? '#openparts' : '#openview');
+  open ??= el.hidden; el.hidden = !open; btn.setAttribute('aria-expanded', String(open)); document.body.classList.toggle('parts-open', which === 'parts' ? open : !$('#parts').hidden && !open ? true : false);
+  if (open) { const other = which === 'parts' ? 'viewpanel' : 'parts'; $('#' + other).hidden = true; $(other === 'parts' ? '#openparts' : '#openview').setAttribute('aria-expanded', 'false'); if (which === 'parts') $('#psearch').focus({ preventScroll: true }); }
+}
+$('#openparts').onclick = () => panel('parts'); $('#closeparts').onclick = () => panel('parts', false);
+$('#openview').onclick = () => panel('viewpanel'); $('#closeview').onclick = () => panel('viewpanel', false);
+$('#browse').onclick = () => panel('parts', true);
+$('#gojob').onclick = () => setMode('job'); $('#ce-jobgo').onclick = () => setMode('job');
+$('#ce-close').onclick = () => select(null);
+$('#manual').onchange = e => { manual = e.target.checked; $('.toolbar').hidden = !manual; if (manual) syncTray(); toast(manual ? 'Pick a tool, then tap each bolt. The card still shows the spec.' : 'Guided: the card picks the right tool for you.'); };
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { panel('parts', false); panel('viewpanel', false); } });
+$('#isolate').onclick = () => { poke(); if (!selected) { toast('Tap a part first, then show only its system.', true); return; } const s = byId[selected].sys; parts.forEach(p => { p.vis = p.sys === s; }); };
+$('#showall').onclick = () => { poke(); parts.forEach(p => { p.vis = true; }); };
 const ray = new THREE.Raycaster(), ptr = new THREE.Vector2(); let down = null;
 renderer.domElement.addEventListener('pointerdown', e => down = [e.clientX, e.clientY]);
 renderer.domElement.addEventListener('pointerup', e => {
   if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 5) return;
   const r = renderer.domElement.getBoundingClientRect(); ptr.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1);
   ray.setFromCamera(ptr, camera);
-  const xr = +$('#xray').value < 0.5;
-  const objs = parts.filter(p => p.obj.visible && !(xr && ['body', 'glazing', 'cabin', 'panel_bonnet', 'tailgate', 'bumper_f'].includes(p.id) || p.id.startsWith('door_') && xr)).map(p => p.obj);
+  const objs = parts.filter(p => p.obj.visible && !(seeThrough() < 0.5 && (['body', 'glazing', 'cabin', 'panel_bonnet', 'tailgate', 'bumper_f', 'charge_flap'].includes(p.id) || /^(door|wheel)_/.test(p.id)))).map(p => p.obj);
   const hit = ray.intersectObjects(objs, true).find(h => h.object.userData.pid);
   if (hit) {
     const id = hit.object.userData.pid, p = byId[id];
     let o = hit.object; while (o && o.userData.bi === undefined && o.parent) o = o.parent;
-    if (p.fx && o && o.userData.bi !== undefined) { select(id, false); boltAction(p, o); renderSheet(id); return; }
+    if (p.fx && o && o.userData.bi !== undefined) {
+      select(id, false);
+      if (!manual) { const st = o.userData.state; if (st === 'out') { renderCard(); return; } tool = st === 'snug' ? 'tq' : st === 'torqued' ? 'ang' : p.fx.tool; if (st === 'snug' && p.fx.nm != null) tqSet = p.fx.nm; if (st === 'torqued') angSet = p.fx.deg; syncTray(); }
+      boltAction(p, o); renderCard(); return;
+    }
     select(id, false); if (p.hinge) toggleHinge(id);
-  }
+  } else if (selected) select(null);
 });
 
 /* realistic finishes by default; the switch paints seals green and fasteners gold */
@@ -649,9 +784,11 @@ $('#markers').onchange = e => setMarkers(e.target.checked);
 /* ───────── view controls ───────── */
 let explode = 0, hvPulse = false;
 $('#explode').oninput = e => { explode = +e.target.value; poke(); };
-$('#xray').oninput = e => { setOpacity(+e.target.value); poke(); };
+$('#xray').oninput = () => { setOpacity(seeThrough()); poke(); };
+let focus = false;
+const seeThrough = () => focus ? Math.min(0.22, +$('#xray').value) : +$('#xray').value;
 function setOpacity(v) { for (const m of bodyMats) { m.transparent = v < 0.999 || m.userData.tr0; m.opacity = Math.min(m.userData.op0, v); m.depthWrite = v > 0.6; m.needsUpdate = true; } }
-const VIEWS = { iso: [[4.6, 2.6, 4.8], [0, 0.55, 0.2]], side: [[6.4, 1.1, 0.1], [0, 0.6, 0]], bay: [[1.9, 1.9, 3.3], [-0.05, 0.55, 1.5]], under: [[2.4, -0.4, 2.2], [0, 0.35, 0.3]], top: [[0.01, 7.5, 0.2], [0, 0, 0.2]], bench: [[2.0, 2.15, 7.0], [0.4, 1.12, 3.45]] };
+const VIEWS = { iso: [[4.6, 2.6, 4.8], [0, 0.55, 0.2]], side: [[6.4, 1.1, 0.1], [0, 0.6, 0]], bay: [[1.9, 1.9, 3.3], [-0.05, 0.55, 1.5]], under: [[2.4, -0.4, 2.2], [0, 0.35, 0.3]], top: [[0.01, 7.5, 0.2], [0, 0, 0.2]], bench: [[2.0, 2.15, 7.0], [0.4, 1.12, 3.45]], corner: [[2.3, 0.95, 2.6], [0.7, 0.42, 1.3]] };
 let fly = null;
 function flyTo(pos, tgt) { fly = { p: pos.clone(), t: tgt.clone() }; }
 document.querySelectorAll('[data-v]').forEach(b => b.onclick = () => { const [p, t] = VIEWS[b.dataset.v], up = b.dataset.v === 'bench' || b.dataset.v === 'top' ? 0 : liftT; flyTo(V(p[0], p[1] + up, p[2]), V(t[0], t[1] + up, t[2])); });
@@ -729,7 +866,7 @@ function photoCamera() {
 async function startPhoto() {
   if (photo.on || photo.busy) return;
   photo.busy = true; clearInterval(seq); fly = null;
-  photoBtn.disabled = true; photoBtn.textContent = 'Preparing the studio…';
+  photoBtn.disabled = true; photoBtn.textContent = 'Setting up the studio…';
   await nextFrame();
   try {
     if (!photo.pt) {
@@ -745,9 +882,9 @@ async function startPhoto() {
     key.intensity *= 0.3; fill.intensity = rim.intensity = under.intensity = 0;   // the light wall, softbox and HDRI do the lighting
     photoCamera();
     photo.pt.setScene(scene, photo.cam);
-    photo.on = true; badge.hidden = false; saveBtn.disabled = true; $('.toolbar').hidden = true;
+    photo.on = true; badge.hidden = false; saveBtn.disabled = true; $('.toolbar').hidden = true; $('#sheet').hidden = false;
     $('#photon').textContent = 'Photoreal'; $('#photos').textContent = 'starting';
-    photoBtn.textContent = 'Back to live model';
+    photoBtn.textContent = 'Stop';
   } catch (e) {
     console.error(e); restoreLive(); toast('Photoreal rendering is not available on this device or browser.', true);
   }
@@ -756,7 +893,7 @@ async function startPhoto() {
 function restoreLive() {
   if (photo.keep) { scene.background = photo.keep.bg; [key, fill, rim, under].forEach((l, i) => l.intensity = photo.keep.li[i]); photo.keep = null; }
   RASTER_ONLY.forEach(m => m.visible = true); cyc.box.visible = false;
-  photo.on = false; badge.hidden = true; saveBtn.disabled = true; $('.toolbar').hidden = false; photoBtn.textContent = 'Render photoreal';
+  photo.on = false; badge.hidden = true; saveBtn.disabled = true; $('.toolbar').hidden = !manual; photoBtn.textContent = 'Take photo';
   if (selected) setHighlight(selected, true); poke();
 }
 function stopPhoto() { if (photo.on) restoreLive(); }
@@ -764,7 +901,7 @@ function photoFrame() {
   const pt = photo.pt;
   if (pt.samples < photo.max || photo.save) pt.renderSample();
   const n = Math.floor(pt.samples);
-  $('#photos').textContent = n < photo.max ? `${n} samples · sharpening` : `${n} samples · finished`;
+  $('#photos').textContent = n < photo.max ? `sharpening · ${n}` : `finished · ${n}`;
   saveBtn.disabled = n < 24;
   if (photo.save) {
     photo.save = false;
@@ -779,7 +916,7 @@ photoBtn.onclick = () => photo.on ? stopPhoto() : startPhoto();
 saveBtn.onclick = () => { if (photo.on && photo.dl) photo.save = true; };
 $('#dof').onchange = () => { if (!photo.on) return; photoCamera(); photo.pt.updateCamera(); };
 controls.addEventListener('start', stopPhoto);
-document.addEventListener('pointerdown', e => { if (photo.on && !e.target.closest('#photo, #savephoto, label[for="dof"]')) stopPhoto(); }, true);
+document.addEventListener('pointerdown', e => { if (photo.on && !e.target.closest('#photo, #savephoto, label[for="dof"], #photobadge')) stopPhoto(); }, true);
 document.addEventListener('keydown', e => { if (photo.on && e.key === 'Escape') stopPhoto(); });
 
 /* ───────── load ───────── */
@@ -796,9 +933,9 @@ loader.load(GOLF.url, gltf => {
     BLOCK.timing_cover = ['bolts_timing_cover'];
     // bonnet up by default, so the bay reads at a glance
     const bon = byId.panel_bonnet; if (bon) { bon.ang = bon.angT = HINGE.panel_bonnet.ang * DEG; bon.obj.rotation.x = bon.ang; }
-    buildTree(); buildTray(); applyStep(); setOpacity(+$('#xray').value); select('emotor', false);
+    buildTree(); buildTray(); applyStep(); refreshRows(); setOpacity(+$('#xray').value); renderCard();
     $('#loading').hidden = true;
-    if (new URLSearchParams(location.search).has('debug')) window.__ws = { parts, byId, BLOCK, THREE, camera, controls, flyTo, photo, startPhoto, stopPhoto, scene, renderer, select, removePart, refitPart, boltAction, fitBolts, setTool: k => { tool = k; }, setTq: (n, a) => { tqSet = n; if (a) angSet = a; } };
+    if (new URLSearchParams(location.search).has('debug')) window.__ws = { parts, byId, BLOCK, THREE, camera, controls, flyTo, photo, doAll, plan, setMode, startPhoto, stopPhoto, scene, renderer, select, removePart, refitPart, boltAction, fitBolts, setTool: k => { tool = k; }, setTq: (n, a) => { tqSet = n; if (a) angSet = a; } };
   } catch (e) { console.error(e); $('#loadtext').textContent = 'The car loaded but could not be assembled. Reload to try again.'; }
 }, x => { const t = x.total || 6570544; $('#loadtext').textContent = `Loading the Golf · ${(x.loaded / 1048576).toFixed(1)} of ${(t / 1048576).toFixed(1)} MB`; $('#bar').style.transform = `scaleX(${Math.min(1, x.loaded / t).toFixed(3)})`; },
   e => { console.error(e); $('#loadtext').textContent = 'The Golf could not be loaded. Check the connection and reload.'; });
