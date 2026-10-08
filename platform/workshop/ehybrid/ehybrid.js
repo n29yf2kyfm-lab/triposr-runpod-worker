@@ -14,6 +14,7 @@ import { buildInnerApron } from './engine-bay-shell.js';
 import { buildTransmission } from './transmission-detail.js';
 import { extractFrontBumper } from './front-bumper.js';
 import { buildHybrid, buildEngineStrip } from './hybrid-parts.js';
+import { TOOLS, SPEC, toolLabel, buildCarFasteners } from './jobs.js';
 
 /* Golf Mk8 eHybrid workshop. Built on the Golf Workshop's real Mk8 body
    (2021 Volkswagen Golf GTI by Ddiaz Design, Sketchfab, CC BY-NC-SA 4.0),
@@ -101,6 +102,11 @@ function register(p) {
   p.home = p.obj.position.clone(); p.svc = V(0, 0, 0); p.svcT = V(0, 0, 0); p.hideT = !!p.hidden; p.vis = true;
   p.rem = V(0, 0, 0); p.removed = false; p.box = new THREE.Box3().setFromObject(p.obj);
   const hg = HINGE[p.id]; if (hg) { p.hinge = hg; p.ang = 0; p.angT = 0; }
+  if (SPEC[p.id]) {
+    p.fx = SPEC[p.id]; p.bolts = [...p.obj.children];
+    p.bolts.forEach((b, i) => { b.userData.bi = i; b.userData.base = b.position.clone(); b.userData.state = 'in'; b.userData.t = 0;
+      b.userData.axis = new THREE.Vector3(0, 1, 0).applyEuler(b.rotation).normalize(); b.traverse(o => { if (o.isMesh) o.userData.real = o.material; }); });
+  }
   p.obj.traverse(o => { if (o.isMesh) o.userData.pid = p.id; });
   parts.push(p); byId[p.id] = p; return p;
 }
@@ -293,6 +299,7 @@ const BLOCK = {
 const offCar = p => p.removed || p.hideT;
 const nameOf = id => byId[id]?.name.replace(/,.*$/, '') || id;
 function whyNotRemove(p) {
+  if (p.fx?.needOpen && byId[p.fx.needOpen] && Math.abs(byId[p.fx.needOpen].angT) < 0.01) return `Open the ${nameOf(p.fx.needOpen).toLowerCase()} first, and support it.`;
   if (FIXED.has(p.id)) return `${p.name} stays put: it is the base the other parts are fitted to.`;
   if (has(p, 'strip') && !STEPS[step].strip) return 'Engine internals come out on the engine stand. Run the job to the last step first.';
   if (has(p, 'hv') && step < 1) return 'High voltage: make the HV system safe first (job step 2).';
@@ -302,6 +309,61 @@ function whyNotRemove(p) {
 function whyNotRefit(p) {
   const under = Object.entries(BLOCK).filter(([id, bs]) => bs.includes(p.id) && byId[id] && byId[id].removed).map(([id]) => id);
   return under.length ? `Refit first: ${under.map(nameOf).join(', ')}.` : '';
+}
+/* ───────── tools and individual fasteners ───────── */
+let tool = 'hand', tqSet = 8, angSet = 90;
+const STATE_MAT = {
+  loose: new THREE.MeshStandardMaterial({ color: 0xf08a24, metalness: 0.6, roughness: 0.4, emissive: 0x3a1a00, emissiveIntensity: 0.5 }),
+  snug: new THREE.MeshStandardMaterial({ color: 0xe6c534, metalness: 0.7, roughness: 0.35, emissive: 0x302600, emissiveIntensity: 0.4 }),
+  torqued: new THREE.MeshStandardMaterial({ color: 0x7bd88f, metalness: 0.6, roughness: 0.4, emissive: 0x0d3318, emissiveIntensity: 0.4 }),
+};
+function paintBolt(b) { const st = b.userData.state; b.traverse(o => { if (o.isMesh) o.material = STATE_MAT[st] || o.userData.real; }); }
+const allOut = p => p.bolts.every(b => b.userData.state === 'out');
+const allIn = p => p.bolts.every(b => b.userData.state === 'in');
+function boltAction(p, b, quiet) {
+  const st = b.userData.state, need = p.fx.tool, say = (m, w) => { if (!quiet) toast(m, w); return false; };
+  if (st === 'in') {
+    if (tool === 'tq' || tool === 'ang') return say('That fastener is already tight. Pick the tool that undoes it: ' + toolLabel(need) + '.', true);
+    if (tool !== need) return say(`Wrong tool: ${p.fx.label.toLowerCase()} take the ${toolLabel(need)}. A near-fit socket or bit rounds the head off.`, true);
+    const why = whyNotRemove(p); if (why) return say(why, true);
+    b.userData.state = 'out'; b.userData.t = 0; paintBolt(b); poke();
+    if (allOut(p)) { p.removed = true; refreshRows(); say(`${p.fx.label}: all ${p.bolts.length} out.` + (p.fx.renew ? ' These are renewed: new ones go in on refit.' : '')); }
+    return true;
+  }
+  if (st === 'loose') {
+    if (tool === 'tq' || tool === 'ang') return say('Run it in first with the ' + toolLabel(need) + ', then torque it.', true);
+    if (tool !== need) return say(`Wrong tool: use the ${toolLabel(need)}.`, true);
+    b.userData.state = 'snug'; paintBolt(b); poke(); return true;
+  }
+  if (st === 'snug') {
+    if (tool !== 'tq') return say('Snug. Now the torque wrench' + (p.fx.nm ? `, set to ${p.fx.nm} Nm.` : '.'), true);
+    if (p.fx.nm == null) { b.userData.state = p.fx.deg ? 'torqued' : 'in'; paintBolt(b); poke(); return say('No torque value for these in the data: take the figure from erWin for this car.'), true; }
+    if (Math.abs(tqSet - p.fx.nm) > 0.25) return say(tqSet > p.fx.nm ? `STOP: ${tqSet} Nm is over the ${p.fx.nm} Nm spec. Over-torque stretches the bolt or strips the thread.` : `Under-torqued: ${tqSet} Nm. The spec is ${p.fx.nm} Nm.`, true);
+    b.userData.state = p.fx.deg ? 'torqued' : 'in'; paintBolt(b); poke(); return true;
+  }
+  if (st === 'torqued') {
+    if (tool !== 'ang') return say(`Torque stage done. Now the angle gauge: a further ${p.fx.deg}°.`, true);
+    if (angSet !== p.fx.deg) return say(`Set the angle gauge to ${p.fx.deg}°, not ${angSet}°.`, true);
+    b.userData.state = 'in'; paintBolt(b); poke(); return true;
+  }
+  return false;
+}
+function fitBolts(p) {
+  const why = whyNotRefit(p); if (why) { toast(why, true); return; }
+  p.bolts.forEach(b => { b.userData.state = 'loose'; b.userData.t = 0; paintBolt(b); });
+  p.removed = false; poke(); refreshRows();
+  toast((p.fx.renew ? 'New bolts fitted by hand. ' : 'Bolts started by hand. ') + `Now run them in with the ${toolLabel(p.fx.tool)}, then torque${p.fx.nm ? ' to ' + p.fx.nm + ' Nm' : ''}${p.fx.deg ? ' + ' + p.fx.deg + '°' : ''}.`);
+}
+function allBolts(p) { let n = 0; for (const b of p.bolts) if (b.userData.state !== 'out' && boltAction(p, b, true)) n++; if (!n) { const b = p.bolts.find(x => x.userData.state !== 'out'); if (b) boltAction(p, b, false); } else toast(`${n} done with the ${toolLabel(tool)}.`); renderSheet(p.id); }
+function buildTray() {
+  const tray = $('#tray'); tray.textContent = '';
+  for (const t of TOOLS) {
+    const b = document.createElement('button'); b.className = 'tool'; b.dataset.tool = t.k; b.textContent = t.label; b.setAttribute('aria-pressed', String(t.k === tool));
+    b.onclick = () => { tool = t.k; tray.querySelectorAll('.tool').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.tool === tool))); $('#tqbox').hidden = tool !== 'tq'; $('#angbox').hidden = tool !== 'ang'; };
+    tray.append(b);
+  }
+  $('#tq').oninput = e => { tqSet = +e.target.value; $('#tqv').textContent = tqSet; };
+  $('#ang').onchange = e => { angSet = +e.target.value; };
 }
 let toastT = 0;
 function toast(msg, warn) { const t = $('#toast'); t.textContent = msg; t.className = warn ? 'warn' : ''; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 3600); }
@@ -333,7 +395,7 @@ function refitPart(id, quiet) {
   if (!quiet) toast(`${p.name}: refitted.` + (has(p, 'seal') ? ' New seal fitted.' : has(p, 'fastener') ? ' Torque to the erWin value.' : ''));
   return true;
 }
-function refitEverything() { parts.forEach(p => { p.removed = false; if (p.hinge) p.angT = p.id === 'panel_bonnet' ? HINGE.panel_bonnet.ang * DEG : 0; }); poke(); refreshRows(); }
+function refitEverything() { parts.forEach(p => { p.removed = false; if (p.bolts) p.bolts.forEach(b => { b.userData.state = 'in'; paintBolt(b); }); if (p.hinge) p.angT = p.id === 'panel_bonnet' ? HINGE.panel_bonnet.ang * DEG : 0; }); poke(); refreshRows(); }
 function flash(ids) { ids.forEach(id => { const r = $('#row_' + id); if (r) { r.classList.add('flash'); setTimeout(() => r.classList.remove('flash'), 1500); } }); }
 function toggleHinge(id) { const p = byId[id]; if (!p?.hinge || p.removed || p.hideT) return; p.angT = Math.abs(p.angT) > 0.01 ? 0 : p.hinge.ang * DEG; poke(); if (selected === id) renderSheet(id); }
 let seq = null;
@@ -343,7 +405,8 @@ function runSequence(kind) {
   seq = setInterval(() => {
     const next = kind === 'strip' ? strip.find(p => !p.removed && !whyNotRemove(p)) : [...strip].reverse().find(p => p.removed && !whyNotRefit(p));
     if (!next) { clearInterval(seq); toast(kind === 'strip' ? 'Engine stripped. Seals and stretch bolts are marked for renewal.' : 'Engine rebuilt. Torque every fastener to the erWin value.'); return; }
-    kind === 'strip' ? removePart(next.id, true) : refitPart(next.id, true);
+    if (next.fx) { if (kind === 'strip') { next.bolts.forEach(b => { b.userData.state = 'out'; paintBolt(b); }); next.removed = true; } else { next.bolts.forEach(b => { b.userData.state = 'in'; paintBolt(b); }); next.removed = false; } refreshRows(); poke(); }
+    else kind === 'strip' ? removePart(next.id, true) : refitPart(next.id, true);
     select(next.id, false);
   }, REDUCED ? 30 : 420);
 }
@@ -387,7 +450,19 @@ function renderSheet(id) {
   const b = (label, fn, pri) => { const e = document.createElement('button'); e.className = 'b' + (pri ? ' pri' : ''); e.textContent = label; e.onclick = fn; acts.append(e); };
   if (p.hinge && !p.removed && !p.hideT) b(Math.abs(p.angT) > 0.01 ? 'Close' : 'Open', () => toggleHinge(id));
   if (FIXED.has(id)) { const t = document.createElement('span'); t.className = 'small'; t.textContent = 'Fixed: the base other parts fit to.'; acts.append(t); return; }
+  if (p.fx) {
+    const n = k => p.bolts.filter(x => x.userData.state === k).length;
+    const st = document.createElement('div'); st.className = 'boltstate';
+    st.innerHTML = `<b>${toolLabel(p.fx.tool)}</b> · ${p.fx.nm != null ? p.fx.nm + ' Nm' : 'torque: erWin'}${p.fx.deg ? ' + ' + p.fx.deg + '°' : ''}${p.fx.renew ? ' · <span class="renew">renew</span>' : ''}<br>${n('in')} tight · ${n('out')} out${n('loose') ? ' · ' + n('loose') + ' loose' : ''}${n('snug') ? ' · ' + n('snug') + ' snug' : ''}${n('torqued') ? ' · ' + n('torqued') + ' need the angle' : ''}`;
+    acts.append(st);
+    if (allOut(p)) b(p.fx.renew ? 'Fit new bolts by hand' : 'Fit bolts by hand', () => { fitBolts(p); renderSheet(id); }, true);
+    else b(`Use the ${toolLabel(tool)} on all`, () => allBolts(p), true);
+    const t = document.createElement('span'); t.className = 'small'; t.textContent = 'Or pick a tool below the car and tap each fastener.'; acts.append(t);
+    return;
+  }
   if (p.removed) b('Refit', () => { refitPart(id); renderSheet(id); }, true); else if (!p.hideT) b('Remove', () => { removePart(id); renderSheet(id); }, true);
+  const held = Object.entries(BLOCK).length && (BLOCK[id] || []).map(x => byId[x]).filter(q => q?.fx);
+  for (const q of held || []) { const t = document.createElement('button'); t.className = 'b'; t.textContent = `${q.fx.label}: ${q.bolts.filter(x => x.userData.state !== 'out').length}/${q.bolts.length} in`; t.onclick = () => select(q.id, true); acts.append(t); }
 }
 function refreshRows() { parts.forEach(p => { const r = $('#row_' + p.id); if (r) r.classList.toggle('gone', p.removed || (p.hideT && !has(p, 'strip'))); }); const n = parts.filter(p => p.removed).length; $('#removed').textContent = n ? `${n} removed` : ''; }
 function select(id, frame) {
@@ -399,7 +474,8 @@ function select(id, frame) {
   const box = $('#info'); box.textContent = '';
   const h = document.createElement('div'); h.className = 'pname'; h.textContent = p.name; box.append(h);
   const dl = document.createElement('dl'); dl.className = 'kv';
-  for (const [k, v] of [['System', SYS[p.sys]], ['Quantity', String(p.qty)], ['Material', p.mat || '—'], ['Size', p.size || '—'], ['OEM part no.', 'not included'], ['Torque', 'not included (erWin)']]) {
+  const tqTxt = p.fx ? (p.fx.nm != null ? `${p.fx.nm} Nm${p.fx.deg ? ' + ' + p.fx.deg + '°' : ''} (${p.fx.src === 'man' ? 'VW manual data' : p.fx.src === 'class' ? 'class value' : 'estimate'})` : 'not in the data: erWin') : 'not included (erWin)';
+  for (const [k, v] of [['System', SYS[p.sys]], ['Quantity', String(p.qty)], ['Material', p.mat || '—'], [p.fx ? 'Tool' : 'Size', p.fx ? toolLabel(p.fx.tool) : (p.size || '—')], ['Torque', tqTxt], ['Renew', p.fx ? (p.fx.renew ? 'yes, every time' : 'no') : (has(p, 'seal') ? 'yes, every time' : '—')], ['OEM part no.', 'not included']]) {
     const dt = document.createElement('dt'); dt.textContent = k; const dd = document.createElement('dd'); dd.textContent = v; dl.append(dt, dd);
   }
   const dt = document.createElement('dt'); dt.textContent = 'Source'; const dd = document.createElement('dd'); dd.innerHTML = confTag(p.conf); dl.append(dt, dd);
@@ -419,7 +495,12 @@ renderer.domElement.addEventListener('pointerup', e => {
   const xr = +$('#xray').value < 0.5;
   const objs = parts.filter(p => p.obj.visible && !(xr && ['body', 'glazing', 'cabin', 'panel_bonnet', 'tailgate', 'bumper_f'].includes(p.id) || p.id.startsWith('door_') && xr)).map(p => p.obj);
   const hit = ray.intersectObjects(objs, true).find(h => h.object.userData.pid);
-  if (hit) { const id = hit.object.userData.pid; select(id, false); if (byId[id].hinge) toggleHinge(id); }
+  if (hit) {
+    const id = hit.object.userData.pid, p = byId[id];
+    let o = hit.object; while (o && o.userData.bi === undefined && o.parent) o = o.parent;
+    if (p.fx && o && o.userData.bi !== undefined) { select(id, false); boltAction(p, o); renderSheet(id); return; }
+    select(id, false); if (p.hinge) toggleHinge(id);
+  }
 });
 
 /* realistic finishes by default; the switch paints seals green and fasteners gold */
@@ -468,8 +549,15 @@ function tick() {
   let moved = false;
   for (const p of parts) {
     p.svc.lerp(p.svcT, k);
-    const want = !p.removed ? V(0, 0, 0) : has(p, 'strip') ? p.stripEx.clone() : p.remBase.clone().sub(p.svc).add(V(0, -liftY, 0));
+    const want = !p.removed || p.fx ? V(0, 0, 0) : has(p, 'strip') ? p.stripEx.clone() : p.remBase.clone().sub(p.svc).add(V(0, -liftY, 0));
     p.rem.lerp(want, k); if (p.rem.distanceToSquared(want) > 1e-9) moved = true;
+    if (p.bolts) for (const b of p.bolts) {
+      const st = b.userData.state, tgt = st === 'out' ? 0.05 : st === 'loose' ? 0.012 : 0;
+      b.userData.t += (tgt - b.userData.t) * k; if (Math.abs(tgt - b.userData.t) > 1e-5) moved = true;
+      b.position.copy(b.userData.base).addScaledVector(b.userData.axis, b.userData.t);
+      b.rotation.y = b.userData.t * 60;
+      b.visible = !(st === 'out' && b.userData.t > 0.045);
+    }
     if (p.hinge) { p.ang += (p.angT - p.ang) * k; p.obj.rotation[p.hinge.axis] = p.ang; if (Math.abs(p.angT - p.ang) > 1e-4) moved = true; }
     p.obj.position.copy(p.home).add(p.svc).add(p.rem).addScaledVector(p.ex, has(p, 'strip') || p.removed ? 0 : explode);
     const gone = p.hideT && p.svc.distanceTo(p.svcT) < 0.02;
@@ -496,9 +584,11 @@ loader.load(GOLF.url, gltf => {
     const meas = buildCar(gltf.scene);
     buildBay(meas);
     buildHybridParts();
+    for (const f of buildCarFasteners(byId, materialFactory)) { carRoot.add(f.obj); register({ ...f, ex: byId[f.host].ex.clone(), ...info(f) }); BLOCK[f.host] = [...(BLOCK[f.host] || []), f.id]; }
+    BLOCK.timing_cover = ['bolts_timing_cover'];
     // bonnet up by default, so the bay reads at a glance
     const bon = byId.panel_bonnet; if (bon) { bon.ang = bon.angT = HINGE.panel_bonnet.ang * DEG; bon.obj.rotation.x = bon.ang; }
-    buildTree(); applyStep(); setOpacity(+$('#xray').value); select('emotor', false);
+    buildTree(); buildTray(); applyStep(); setOpacity(+$('#xray').value); select('emotor', false);
     $('#loading').hidden = true;
   } catch (e) { console.error(e); $('#loadtext').textContent = 'The car loaded but could not be assembled. Reload to try again.'; }
 }, x => { const t = x.total || 6570544; $('#loadtext').textContent = `Loading the Golf · ${(x.loaded / 1048576).toFixed(1)} of ${(t / 1048576).toFixed(1)} MB`; $('#bar').style.transform = `scaleX(${Math.min(1, x.loaded / t).toFixed(3)})`; },

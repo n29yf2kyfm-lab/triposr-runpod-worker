@@ -58,10 +58,18 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .step{font:600 20px var(--display);margin:2px 0 4px}
 .steptext{line-height:1.5}
 .hvnote{border-left:3px solid var(--hv);padding:6px 10px;background:color-mix(in srgb,var(--hv) 12%,transparent);font-size:13px;margin-top:8px}
-.views{position:absolute;right:10px;top:10px;display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.views{position:absolute;right:10px;top:10px;z-index:2;display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
 .views .b{padding:5px 9px;font-size:12px;background:var(--panel)}
-.legend{position:absolute;left:12px;bottom:10px;display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--muted);pointer-events:none}
-.legend span{display:inline-flex;align-items:center;gap:5px}
+.toolbar{position:absolute;left:10px;right:10px;bottom:10px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:8px;background:color-mix(in srgb,var(--panel) 88%,transparent);border:1px solid var(--line);border-radius:8px}
+#tray{display:flex;flex-wrap:wrap;gap:4px}
+.tool{font:600 12px var(--body);padding:5px 8px;border-radius:5px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.tool[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.tool:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.toolbar label{display:inline-flex;align-items:center;gap:6px;font-size:12.5px}
+#tq{width:150px;accent-color:var(--accent)}
+.legend{display:inline-flex;flex-wrap:wrap;align-items:center;gap:4px 6px;font-size:11.5px;color:var(--muted)}
+.boltstate{width:100%;font-size:13px;line-height:1.5;padding:6px 8px;border:1px dashed var(--line);border-radius:5px}
+.boltstate .renew{color:var(--warn);font-weight:600}
 #loading{position:absolute;inset:0;display:grid;place-content:center;gap:10px;text-align:center;background:var(--stage);color:var(--muted)}
 #loading .tape{width:240px;height:4px;background:var(--line);border-radius:2px;overflow:hidden}
 #bar{height:100%;background:var(--accent);transform:scaleX(0);transform-origin:left}
@@ -98,7 +106,10 @@ input[type=range]{width:100%;accent-color:var(--accent)}
       <button class="b" data-v="iso">3/4</button><button class="b" data-v="side">Side</button><button class="b" data-v="bay">Engine bay</button>
       <button class="b" data-v="under">Under</button><button class="b" data-v="top">Top</button><button class="b" data-v="bench">Bench</button>
     </div>
-    <div class="legend"><span><i class="dot" style="background:#ff6a00"></i>Orange = high voltage</span></div>
+    <div class="toolbar"><div id="tray" role="toolbar" aria-label="Tools"></div>
+      <label id="tqbox" hidden>Torque <input id="tq" type="range" min="2" max="220" step="0.5" value="8"> <b><span id="tqv">8</span> Nm</b></label>
+      <label id="angbox" hidden>Angle <select id="ang"><option>45</option><option selected>90</option><option>135</option><option>180</option></select>°</label>
+      <span class="legend"><i class="dot" style="background:#f08a24"></i>loose <i class="dot" style="background:#e6c534"></i>snug <i class="dot" style="background:#7bd88f"></i>needs angle <i class="dot" style="background:#ff6a00;margin-left:8px"></i>high voltage</span></div>
     <div id="toast" role="status" hidden></div>
     <div id="loading"><span id="loadtext">Loading the Golf…</span><div class="tape"><div id="bar"></div></div></div>
   </div>

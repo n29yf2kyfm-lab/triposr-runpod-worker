@@ -474,6 +474,9 @@ export function buildEngineStrip(materialFactory, M) {
     const rim = new THREE.Shape(outline.map(p => new THREE.Vector2(p.x, p.y))); rim.holes.push(new THREE.Path(outline.map(p => new THREE.Vector2(ZC + (p.x - ZC) * 0.95, 0.5 + (p.y - 0.5) * 0.95))));
     c.add(mesh(alongX(rim, 0.03, 0.001, 6), M.blackPlastic, [xb + 0.008, 0, 0]));
     part('timing_cover', 'Timing belt covers', c, [0.95, -0.25, -0.2], { mat: 'Plastic (est.)' });
+    const tcb = new THREE.Group();
+    for (const [dy, dz] of [[0.20, -0.07], [0.20, 0.07], [-0.02, -0.08], [-0.02, 0.08]]) bolt(tcb, [xb + 0.032, 0.5 + dy, ZC + dz], 0.006, 0.02, 'x');
+    part('bolts_timing_cover', 'Timing belt cover bolts', tcb, [1.10, -0.25, -0.2], { tags: ['fastener'], qty: 4, size: 'M6' });
     const w = new THREE.Group();
     w.add(mesh(rbox(0.07, 0.07, 0.06, 0.012), M.blackPlastic, [XC - 0.165, DECK + 0.02, ZC - 0.14]));
     w.add(mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([V(XC - 0.165, DECK + 0.05, ZC - 0.14), V(XC - 0.165, DECK + 0.09, ZC - 0.17), V(XC - 0.15, DECK + 0.1, ZC - 0.21)]), 20, 0.011, 12), M.blackPlastic));
