@@ -8,15 +8,15 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { FLEET, classifyMesh } from './fleet.js';
-import { measureCar, buildPowertrain } from './powertrain.js';
-import { buildEngineBayDetail } from './engine-bay-detail.js';
-import { buildInnerApron } from './engine-bay-shell.js';
-import { buildTransmission } from './transmission-detail.js';
-import { extractFrontBumper } from './front-bumper.js';
-import { buildHybrid, buildEngineStrip, buildDGEAExternals } from './hybrid-parts.js';
-import { TOOLS, SPEC, toolLabel, buildCarFasteners } from './jobs.js';
-import { buildFrontCorners } from './front-corner.js';
+import { FLEET, classifyMesh } from './fleet.js?v=8';
+import { measureCar, buildPowertrain } from './powertrain.js?v=8';
+import { buildEngineBayDetail } from './engine-bay-detail.js?v=8';
+import { buildInnerApron } from './engine-bay-shell.js?v=8';
+import { buildTransmission } from './transmission-detail.js?v=8';
+import { extractFrontBumper } from './front-bumper.js?v=8';
+import { buildHybrid, buildEngineStrip, buildDGEAExternals } from './hybrid-parts.js?v=8';
+import { TOOLS, SPEC, toolLabel, buildCarFasteners } from './jobs.js?v=8';
+import { buildFrontCorners } from './front-corner.js?v=8';
 
 /* Golf Mk8 eHybrid workshop. Built on the Golf Workshop's real Mk8 body
    (2021 Volkswagen Golf GTI by Ddiaz Design, Sketchfab, CC BY-NC-SA 4.0),
@@ -285,7 +285,52 @@ function buildHybridParts() {
   for (const p of st.parts) { carRoot.add(p.obj); register({ ...p, ...info({ ...p, tags: p.tags }), hidden: false }); }
   for (const p of buildDGEAExternals(materialFactory, hy.M).parts) { carRoot.add(p.obj); register({ ...p, ...info({ ...p, tags: p.tags }) }); }
   byId.blk.note = 'Engine code DGEA on the Golf 8 / Leon Mk4 eHybrid (check the code label on the block). ' + byId.blk.note;
-  Object.assign(BLOCK, { dgea_intake: ['bolts_intake', 'dgea_airbox'], dgea_mount: ['bolts_mount'], dgea_coils: ['dgea_airbox'], dgea_turbo: ['dgea_airbox'] });
+  Object.assign(BLOCK, { dgea_intake: ['bolts_intake', 'dgea_airbox', 'dgea_chargepipe'], dgea_mount: ['bolts_mount'], dgea_coils: ['dgea_airbox'], dgea_turbo: ['dgea_airbox', 'dgea_chargepipe'], dgea_chargepipe: ['dgea_airbox'], dgea_filler: ['dgea_airbox'] });
+}
+
+/* ───────── charging socket behind its flap, at the back of the front wing ─────────
+   Found by casting a ray at the body, so it sits on the real panel surface. The flap is
+   body-coloured and hinges at its front edge; the Type 2 socket sits in a recess behind it. */
+let chargeLocal = null;
+function buildChargePort() {
+  const body = byId.body; if (!body) return;
+  const meshes = []; body.obj.traverse(o => { if (o.isMesh) meshes.push(o); }); carRoot.updateMatrixWorld(true);
+  let P = V(-0.865, 0.722, 1.065), n = V(-1, 0, 0);
+  const hit = new THREE.Raycaster(V(-1.6, 0.722, 1.065), V(1, 0, 0), 0, 1.2).intersectObjects(meshes, false)[0];
+  if (hit) { P = hit.point.clone(); n = hit.face.normal.clone().transformDirection(hit.object.matrixWorld); if (n.x > 0) n.negate(); n.y = Math.max(-0.3, Math.min(0.3, n.y)); n.normalize(); }
+  const up = V(0, 1, 0).addScaledVector(n, -n.y).normalize(), fwd = new THREE.Vector3().crossVectors(up, n).normalize();
+  const basis = new THREE.Matrix4().makeBasis(fwd, up, n), q = new THREE.Quaternion().setFromRotationMatrix(basis);
+  const W = 0.15, H = 0.11, RR = 0.03;
+  const rr = (w, h, r) => { const s = new THREE.Shape(), x = -w / 2, y = -h / 2; s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r); s.lineTo(x + w, y + h - r); s.quadraticCurveTo(x + w, y + h, x + w - r, y + h); s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r); s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y); return s; };
+  const black = materialFactory(0x15171a, { metalness: 0, roughness: 0.7 }, 'plastic'), grey = materialFactory(0x2c2f33, { metalness: 0.05, roughness: 0.55 }, 'plastic');
+  // recess and Type 2 socket
+  const sg = new THREE.Group(), local = new THREE.Group(); local.position.copy(P); local.quaternion.copy(q); sg.add(local);
+  const add = (g, geo, mat, z = 0, x = 0, y = 0) => { const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = m.receiveShadow = true; g.add(m); return m; };
+  // dark surround on the panel (the recess, seen with the flap open)
+  add(local, new THREE.ExtrudeGeometry(rr(W - 0.006, H - 0.006, RR - 0.002), { depth: 0.0012, bevelEnabled: false, curveSegments: 12 }), black, 0.0008);
+  const lip = rr(W - 0.006, H - 0.006, RR - 0.002); lip.holes.push(rr(W - 0.016, H - 0.016, RR - 0.007));
+  add(local, new THREE.ExtrudeGeometry(lip, { depth: 0.003, bevelEnabled: false, curveSegments: 12 }), grey, 0.0008);
+  const face = new THREE.Shape(); face.absarc(0, 0, 0.034, -Math.PI * 0.29, Math.PI * 1.29, false); face.closePath();
+  const pins = [[-0.009, 0.019, 0.0035], [0.009, 0.019, 0.0035], [-0.019, 0.0, 0.0055], [0.019, 0.0, 0.0055], [0, 0, 0.0055], [-0.011, -0.018, 0.0055], [0.011, -0.018, 0.0055]];
+  for (const [x, y, r] of pins) { const h = new THREE.Path(); h.absarc(x, y, r, 0, Math.PI * 2, true); face.holes.push(h); }
+  add(local, new THREE.ExtrudeGeometry(face, { depth: 0.006, bevelEnabled: true, bevelThickness: 0.0015, bevelSize: 0.0015, bevelSegments: 2, curveSegments: 32 }), grey, 0.002);
+  for (const [x, y, r] of pins) add(local, new THREE.CylinderGeometry(r * 0.45, r * 0.45, 0.004, 10).rotateX(Math.PI / 2), materialFactory(0xc9a050, { metalness: 0.9, roughness: 0.3 }, 'brushed'), 0.005, x, y);
+  add(local, new THREE.TorusGeometry(0.039, 0.0016, 8, 40), new THREE.MeshStandardMaterial({ color: 0x9cff9c, emissive: 0x3cff6a, emissiveIntensity: 0.7 }), 0.004);
+  chargeLocal = local; local.visible = false;            // only seen with the flap open
+  const lead = [P.clone().addScaledVector(n, -0.07), V(-0.76, 0.73, 1.13), V(-0.7, 0.75, 1.38), V(-0.6, 0.77, 1.6), V(-0.53, 0.775, 1.66)];
+  const hv = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(lead), 60, 0.009, 10, false), materialFactory(0xff6a00, { metalness: 0.02, roughness: 0.6 }, 'plastic')); hv.castShadow = true; sg.add(hv);
+  carRoot.add(sg);
+  register({ id: 'charge_socket', name: 'Charging socket (Type 2) with lead to the on-board charger', sys: 'hybrid', obj: sg, ex: V(-0.45, 0.1, 0), needOpen: 'charge_flap', ...info({ tags: ['hv'], mat: 'Type 2 AC socket in a plastic recess', conf: 'pub', note: 'The Golf 8 eHybrid charges on AC through a Type 2 socket under a flap in the front wing, just above the wheel (owner and charging guides). Side and exact position estimated on this model.' }) });
+  // body-coloured flap, hinged at its front edge
+  const paint = (() => { let m = null; body.obj.traverse(o => { if (!m && o.isMesh && [].concat(o.material).some(x => /CarPaint/.test(x.name))) m = [].concat(o.material).find(x => /CarPaint/.test(x.name)); }); return m; })();
+  const fm = paint ? paint.clone() : materialFactory(0xc8102e, { metalness: 0.4, roughness: 0.3 }, 'paint'); fm.userData.op0 = fm.opacity; fm.userData.tr0 = fm.transparent; bodyMats.push(fm);
+  const hingePt = P.clone().addScaledVector(fwd, W / 2 - 0.004).addScaledVector(n, 0.004);
+  const fg = new THREE.Group(); fg.position.copy(hingePt); const fl = new THREE.Group(); fl.quaternion.copy(q); fg.add(fl);
+  const plate = add(fl, new THREE.ExtrudeGeometry(rr(W, H, RR), { depth: 0.004, bevelEnabled: true, bevelThickness: 0.0012, bevelSize: 0.0012, bevelSegments: 2, curveSegments: 16 }), fm, -0.003, -(W / 2 - 0.004));
+  add(fl, new THREE.ExtrudeGeometry(rr(W - 0.03, H - 0.03, RR - 0.01), { depth: 0.008, bevelEnabled: false }), black, -0.011, -(W / 2 - 0.004));
+  carRoot.add(fg);
+  HINGE.charge_flap = { axis: 'y', ang: 105 };
+  register({ id: 'charge_flap', name: 'Charging flap', sys: 'body', obj: fg, ex: V(-0.3, 0, 0), ...info({ conf: 'model', mat: 'Painted plastic flap', note: 'Tap it to open. Body-coloured, hinged at the front edge; the socket is behind it.' }) });
 }
 
 /* ───────── front corners: strut, housing, link, bearing, brake, drive shaft ───────── */
@@ -335,7 +380,7 @@ const STEPS = [
   { t: 'Lower engine, hybrid module and gearbox', d: 'Support the assembly on an engine table, take out the pendulum support and the engine and gearbox mounts, and lower it out of the bay.', f: s => TAG_MOVE('pt', V(0, -0.78, 0), s) },
   { t: 'Roll it out', d: 'Roll the table forward, clear of the car.', f: s => TAG_MOVE('pt', V(0, 0, 2.0), s) },
   { t: 'Split engine from hybrid module and gearbox', d: 'Undo the twelve engine-to-module flange bolts, slide the engine off and mount it on an engine stand. Replace the module O-rings on refit.', f: s => TAG_MOVE('engine', V(0.55, 0.55, 0), s) },
-  { t: 'Strip the engine on the stand', strip: true, d: 'The turbo, intake manifold and intercooler, coils, filler cap, mount bracket, pulley, flywheel, electric pump and loom are set aside. Now take the engine down part by part: tap a part, then Remove. It will tell you what has to come off first. Or use Strip in order to watch the sequence. Renew every seal and every stretch bolt on rebuild; torque values come from erWin.', f: s => { parts.forEach(p => { if (has(p, 'longblock')) s[p.id].h = true; if (has(p, 'strip')) s[p.id].h = false; }); } },
+  { t: 'Strip the engine on the stand', strip: true, d: 'The turbo, charge pipe, intake manifold and intercooler, coils, filler cap, mount bracket, pulley, flywheel, thermostat housing, oil filter, electric pump and loom are set aside. Now take the engine down part by part: tap a part, then Remove. It will tell you what has to come off first. Or use Strip in order to watch the sequence. Renew every seal and every stretch bolt on rebuild; torque values come from erWin.', f: s => { parts.forEach(p => { if (has(p, 'longblock')) s[p.id].h = true; if (has(p, 'strip')) s[p.id].h = false; }); } },
 ];
 let step = 0, reversing = false, liftT = 0, liftY = 0;
 const LIFT = 0.95;
@@ -386,7 +431,8 @@ const BLOCK = {
 const offCar = p => p.removed || p.hideT;
 const nameOf = id => byId[id]?.name.replace(/,.*$/, '') || id;
 function whyNotRemove(p) {
-  if (p.fx?.needOpen && byId[p.fx.needOpen] && Math.abs(byId[p.fx.needOpen].angT) < 0.01) return `Open the ${nameOf(p.fx.needOpen).toLowerCase()} first, and support it.`;
+  const need = p.fx?.needOpen || p.needOpen;
+  if (need && byId[need] && Math.abs(byId[need].angT) < 0.01) return `Open the ${nameOf(need).toLowerCase()} first${p.fx ? ', and support it' : ''}.`;
   if (FIXED.has(p.id)) return `${p.name} stays put: it is the base the other parts are fitted to.`;
   if (has(p, 'strip') && !STEPS[step].strip) return 'Engine internals come out on the engine stand. Run the job to the last step first.';
   if (has(p, 'hv') && step < 1) return 'High voltage: make the HV system safe first (job step 2).';
@@ -529,7 +575,7 @@ const HL = new THREE.Color(0x2f8cff);
 function setHighlight(id, on) {
   const p = byId[id]; if (!p) return;
   p.obj.traverse(o => { if (!o.isMesh) return;
-    if (on) { o.userData.m0 = o.material; o.material = [].concat(o.material).map(m => { const c = m.clone(); if (c.emissive) { c.emissive = HL; c.emissiveIntensity = 0.5; } return c; }); if (o.material.length === 1) o.material = o.material[0]; }
+    if (on) { o.userData.m0 = o.material; o.material = [].concat(o.material).map(m => { const c = m.clone(); if (c.emissive) { c.emissive = HL; c.emissiveIntensity = ['body', 'interior'].includes(p.sys) ? 0.14 : 0.5; } return c; }); if (o.material.length === 1) o.material = o.material[0]; }
     else if (o.userData.m0) { o.material = o.userData.m0; delete o.userData.m0; } });
 }
 function renderSheet(id) {
@@ -651,6 +697,7 @@ function tick() {
     const gone = p.hideT && p.svc.distanceTo(p.svcT) < 0.02;
     p.obj.visible = p.vis && !gone;
   }
+  if (chargeLocal && byId.charge_flap) chargeLocal.visible = Math.abs(byId.charge_flap.ang) > 0.08;
   if (hvPulse) { const a = 0.35 + 0.35 * Math.sin(performance.now() / 220); parts.forEach(p => { if (has(p, 'hv') && p.id !== selected) p.obj.traverse(o => { if (o.isMesh && o.material.emissive) { if (!o.userData.hvm) { o.userData.hvm = o.material; o.material = o.material.clone(); } o.material.emissive = HVC; o.material.emissiveIntensity = a; } }); }); }
   else parts.forEach(p => { if (has(p, 'hv')) p.obj.traverse(o => { if (o.isMesh && o.userData.hvm) { o.material = o.userData.hvm; delete o.userData.hvm; } }); });
   if (fly) { const f = REDUCED ? 1 : 1 - Math.pow(0.02, dt); camera.position.lerp(fly.p, f); controls.target.lerp(fly.t, f); if (camera.position.distanceTo(fly.p) < 0.01) fly = null; }
@@ -744,6 +791,7 @@ loader.load(GOLF.url, gltf => {
     buildBay(meas);
     buildHybridParts();
     buildCorners();
+    buildChargePort();
     for (const f of buildCarFasteners(byId, materialFactory)) { carRoot.add(f.obj); register({ ...f, ex: byId[f.host].ex.clone(), ...info(f) }); BLOCK[f.host] = [...(BLOCK[f.host] || []), f.id]; }
     BLOCK.timing_cover = ['bolts_timing_cover'];
     // bonnet up by default, so the bay reads at a glance

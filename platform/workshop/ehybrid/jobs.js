@@ -100,7 +100,7 @@ export function buildCarFasteners(byId, materialFactory) {
   }
   set('fix_bonnet', 'panel_bonnet', 'body', g => { for (const sx of [1, -1]) for (const z of [1.125, 1.075]) bolt(g, [sx * 0.555, 0.958, z], 0.008, 0.025, 'y'); });
   set('fix_bumper_f', 'bumper_f', 'body', (g, b) => {
-    for (const x of [-0.26, 0, 0.26]) bolt(g, [x, b.max.y - 0.025, b.max.z - 0.13], 0.007, 0.02, 'y', dark);
+    for (const x of [-0.26, 0, 0.26]) bolt(g, [x, b.max.y - 0.065, b.max.z - 0.16], 0.007, 0.02, 'y', dark);   // to the lock carrier, under the bonnet's front edge
     for (const sx of [1, -1]) for (const dy of [0.06, -0.06]) bolt(g, [sx * (b.max.x - 0.035), (b.min.y + b.max.y) / 2 + dy, b.min.z + 0.07], 0.007, 0.02, sx > 0 ? 'x' : '-x', dark);
     for (const x of [-0.45, -0.15, 0.15, 0.45]) bolt(g, [x, b.min.y + 0.012, b.max.z - 0.2], 0.007, 0.02, '-y', dark);
   });
