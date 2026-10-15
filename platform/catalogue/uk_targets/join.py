@@ -25,7 +25,8 @@ def find(make, gen):
 BODY={'Cars':('car',99),'Light goods vehicles':('van',99),'Heavy goods vehicles':('truck',95),'Motorcycles':('motorbike',95),'Buses and coaches':('bus',80)}
 rows=[]; summary={}
 for body,(cls,pct) in BODY.items():
-    lst=R[body]; T=sum(x['licensed'] for x in lst); cum=0; have=0; opens=0; clean=0; k=0
+    if body not in R: continue
+    lst=R[body]; T=R.get('_totals',{}).get(body) or sum(x['licensed'] for x in lst); cum=0; have=0; opens=0; clean=0; k=0
     for i,x in enumerate(lst,1):
         cum+=x['licensed']; 
         if cum-x['licensed'] >= T*pct/100: break
