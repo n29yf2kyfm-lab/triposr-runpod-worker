@@ -1,0 +1,24 @@
+{
+ "name": "Vauxhall Corsa F (2019-)",
+ "length": 4060,
+ "width": 1765,
+ "height": 1435,
+ "wheelbase": 2538,
+ "wheel_d": 621,
+ "paint": [
+  0.8,
+  0.81,
+  0.82
+ ],
+ "source": "en.wikipedia: Opel Corsa, Corsa F infobox; tyre 195/55 R16",
+ "built_with": {
+  "overhangs": "master ratio (no side photo)",
+  "overhang_front_m": 0.808,
+  "overhang_rear_m": 0.714,
+  "s_wheel": 0.9456,
+  "sx": 0.9877,
+  "k_roof_global": 0.9808,
+  "track_m": 1.509,
+  "wheel_d_m": 0.621
+ }
+}

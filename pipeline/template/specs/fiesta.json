@@ -1,0 +1,24 @@
+{
+ "name": "Ford Fiesta Mk7 (2017-2023)",
+ "length": 4040,
+ "width": 1735,
+ "height": 1483,
+ "wheelbase": 2493,
+ "wheel_d": 621,
+ "paint": [
+  0.02,
+  0.07,
+  0.3
+ ],
+ "source": "en.wikipedia: Ford Fiesta (seventh generation), base figures; tyre 195/55 R16",
+ "built_with": {
+  "overhangs": "master ratio (no side photo)",
+  "overhang_front_m": 0.821,
+  "overhang_rear_m": 0.726,
+  "s_wheel": 0.9456,
+  "sx": 0.971,
+  "k_roof_global": 1.0434,
+  "track_m": 1.484,
+  "wheel_d_m": 0.621
+ }
+}

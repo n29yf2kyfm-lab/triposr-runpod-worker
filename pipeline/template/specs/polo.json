@@ -1,0 +1,24 @@
+{
+ "name": "Volkswagen Polo Mk6 (2017-)",
+ "length": 4053,
+ "width": 1751,
+ "height": 1461,
+ "wheelbase": 2564,
+ "wheel_d": 621,
+ "paint": [
+  0.1,
+  0.11,
+  0.12
+ ],
+ "source": "en.wikipedia: Volkswagen Polo Mk6, pre-facelift figures; tyre 195/55 R16",
+ "built_with": {
+  "overhangs": "master ratio (no side photo)",
+  "overhang_front_m": 0.79,
+  "overhang_rear_m": 0.699,
+  "s_wheel": 0.9456,
+  "sx": 0.9799,
+  "k_roof_global": 1.0147,
+  "track_m": 1.497,
+  "wheel_d_m": 0.621
+ }
+}

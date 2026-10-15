@@ -128,8 +128,9 @@ def from_csv(make, model, generation=None):
     rows = [r for r in csv.DictReader(open(p)) if norm(r["make"]) == norm(make) and norm(r["model"]) == norm(model)
             and all(r[k] for k in ("length_mm", "width_mm", "height_mm", "wheelbase_mm"))]
     if generation:
-        g = [r for r in rows if norm(r["generation"]) == norm(generation)]
-        rows = g or rows
+        # a row for another generation is the wrong car: the 2018 Fiesta was
+        # given the 2002 Fiesta's figures because the row's generation was blank
+        rows = [r for r in rows if norm(r["generation"]) == norm(generation)]
     if not rows:
         return None
     r = rows[0]

@@ -1,0 +1,12 @@
+{
+  "name": "template-tools",
+  "private": true,
+  "type": "module",
+  "description": "One-time master preparation (decode) and web copies (encode). Not needed to build a car.",
+  "dependencies": {
+    "@gltf-transform/core": "4.2.1",
+    "@gltf-transform/extensions": "4.2.1",
+    "@gltf-transform/functions": "4.2.1",
+    "meshoptimizer": "0.22.0"
+  }
+}
