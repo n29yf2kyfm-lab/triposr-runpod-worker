@@ -34,6 +34,27 @@ Non-negotiable, and it overrides convenience every time:
 
 The box is scratch. Origin and Supabase are the only storage.
 
+## OWNER STANDARD 2026-10-15: every interactive model has clean glass, an interior and an engine
+
+Said in the owner's words: "Remember clean glass and interior and engine." It
+applies to every car, van, truck and motorbike that ships from the UK target
+list (`platform/catalogue/uk_targets/`), not only to hero cars:
+
+* **clean glass** — glazing is clear in the shipped glTF (the 2026-08-11 ruling
+  stands: `opaque` + `proven` is a scrap, judged from the file, never the poster);
+* **an interior** — seats, dash and wheel are present and visible through that
+  glass; a hollow shell is not interactive;
+* **an engine** — something is under the bonnet when it opens: the file's own
+  engine where it has one, otherwise one from the engine family library, sized
+  to the bay and labelled on screen as representative of its family, never as
+  that car's own unit;
+* **interactive** — doors, bonnet and tailgate open (glTF animation clips plus
+  the parts manifest), so the model works in any viewer.
+
+The app is free to use and the owner sources the models himself from Sketchfab.
+Attribution is still required by every CC licence in the catalogue, so a
+credits page listing creator and licence per model ships with the app.
+
 ## Credentials live in `~/.alam3d_env` — never in the repo (2026-07-31)
 
 All four secrets this project needs are kept in `/root/.alam3d_env` (mode 600,
