@@ -53,7 +53,11 @@ def generation_for(make, model, index):
     hits = [v for v in index if norm(v["make"]) == norm(make) and norm(v["model"]) == norm(model)]
     if not hits:
         return None
-    return max(hits, key=lambda v: (v.get("year_to") or 0, v.get("year_from") or 0))
+
+    def gen_no(v):                      # Mk8 -> 8, 8V -> 8, AW -> 0: the tie-break when years match
+        m = re.search(r"\d+", str(v.get("generation") or ""))
+        return int(m.group(0)) if m else 0
+    return max(hits, key=lambda v: (v.get("year_to") or 0, v.get("year_from") or 0, gen_no(v)))
 
 
 def render_sheet(glb, out_dir):

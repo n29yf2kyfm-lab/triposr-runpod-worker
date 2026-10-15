@@ -1,4 +1,11 @@
 {
+ "ford|fiesta|mk7": {
+  "height": 1451,
+  "length": 3930,
+  "source": "vehicle_dims.csv: Ford Fiesta (fifth generation)",
+  "wheelbase": 2486,
+  "width": 1685
+ },
  "volkswagen|golf|mk7": {
   "height": 1456,
   "length": 4284,

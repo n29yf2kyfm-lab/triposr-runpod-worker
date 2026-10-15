@@ -103,6 +103,30 @@ def info(titles):
     return out
 
 
+def front_or_rear(cutout_path):
+    """Which end is this? Tail lamps are red and sit at the two outer edges
+    at lamp height; a nose has none (unless the whole car is red, in which
+    case the lamp zone is no redder than the body and the answer is None)."""
+    im = np.asarray(Image.open(cutout_path).convert("RGBA")).astype(float)
+    a = im[:, :, 3] > 128
+    r, g, b = im[:, :, 0], im[:, :, 1], im[:, :, 2]
+    red = a & (r > 110) & (r > 1.6 * g) & (r > 1.6 * b)
+    H, W = a.shape
+    z0, z1 = int(H * 0.35), int(H * 0.75)              # lamp height band (image y grows down)
+    lamp = np.zeros_like(a)
+    lamp[z0:z1, :int(W * 0.22)] = True
+    lamp[z0:z1, int(W * 0.78):] = True
+    lamp &= a
+    body = a & ~lamp
+    f_lamp = red[lamp].mean() if lamp.any() else 0
+    f_body = red[body].mean() if body.any() else 0
+    if f_lamp >= 0.03 and f_lamp >= 3 * max(f_body, 0.002):
+        return "rear"
+    if f_lamp < 0.008 and f_body < 0.05:
+        return "front"
+    return None
+
+
 def classify(cutout_path):
     a = np.asarray(Image.open(cutout_path))[:, :, 3] > 128
     rows, cols = np.where(a.any(1))[0], np.where(a.any(0))[0]
@@ -164,7 +188,7 @@ def find_photos(make, model, hints, out_dir, max_dl=8, session=None):
             continue
         view, asp = classify(cp)
         if view == "end":
-            view = "front" if FRONT_HINT.search(name) else "rear" if REAR_HINT.search(name) else None
+            view = "front" if FRONT_HINT.search(name) else "rear" if REAR_HINT.search(name) else front_or_rear(cp)
             if view is None:
                 summary["unused"].append({"file": name, "why": f"end view but unknown which (aspect {asp:.2f})"})
                 continue
