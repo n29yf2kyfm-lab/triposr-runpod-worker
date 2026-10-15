@@ -100,16 +100,21 @@ class PhotoCar(Car):
         return super().belt_y(u)
 
     # ── plan view ────────────────────────────────────────────────────────
+    PLAN_R = {"front": 0.34, "rear": 0.30}      # bumper corner radius in plan, metres
+
     def halfwidth(self, u):
-        """No photograph here shows the plan, so the nose and tail round off
-        with a generic corner: full width to 5% from each end, then a smooth
-        fall to half width at the very end, which is what a bumper's corners
-        do. The loft's own 85% end was a brick."""
+        """No photograph here shows the plan, so the nose and tail get what a
+        real bumper has in plan: a flat face with quarter-round corners. The
+        corner radius is a typical value (0.34 m front, 0.30 m rear), not
+        this car's; it is capped at a quarter of the width for narrow cars.
+        The earlier smooth fall to half width made a snout."""
         e = 0.5 * self.W
         t = min(max(u, 0.0), 1.0)
-        f = min(max(min(t, 1.0 - t) / 0.05, 0.0), 1.0)
-        f = f * f * (3 - 2 * f)
-        return e * (0.50 + 0.50 * f)
+        s = min(t, 1.0 - t) * self.L                # distance in from the nearer end
+        R = min(self.PLAN_R["front" if t > 0.5 else "rear"], 0.25 * self.W)
+        if s >= R:
+            return e
+        return (e - R) + (R * R - (R - s) ** 2) ** 0.5
 
     # ── section: the glass starts AT the measured beltline ───────────────
     def section(self, u, nv=NV):
