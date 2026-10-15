@@ -1,27 +1,27 @@
 {
  "cars": 1044,
  "status": {
-  "refused": 546,
-  "ok": 265,
-  "partial": 231,
+  "ok": 332,
+  "refused": 414,
+  "partial": 296,
   "error": 2
  },
  "refusal_reasons": [
   [
    "no wheels named",
-   255
+   181
   ],
   [
    "nose",
-   196
+   114
   ],
   [
    "door part",
-   63
+   82
   ],
   [
    "wheels do not fill",
-   28
+   33
   ],
   [
    "timeoutexpired: command '['blender', '-b",
@@ -40,5 +40,6 @@
    1
   ]
  ],
- "opens_something": 496
+ "opens_something": 628,
+ "note": "2026-10-15: the 303 refused cars on the UK target list were re-run with rigger 1.1.0; the other 741 rows are from 1.0.0"
 }

@@ -37,7 +37,7 @@ Join result on the day it was built:
 
 | class | targets | have a model | opens today | licence-clean |
 |---|---|---|---|---|
-| car | 598 | 299 | 183 | 287 |
+| car | 598 | 299 | 231 (183 before rigger 1.1.0) | 287 |
 | van | 125 | 32 | 17 | 29 |
 | truck | 71 | 7 | 4 | 6 |
 | motorbike | 526 | 0 | 0 | 0 |

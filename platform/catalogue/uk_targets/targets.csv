@@ -1,602 +1,599 @@
 class,rank,make,genModel,licensed,cum_pct,assets,assetIds,rig,licence_clean
-car,1,FORD,FORD FIESTA,1259187,3.64,1,ford-fiesta-2009-w12-v1,refused,False
+car,1,FORD,FORD FIESTA,1259187,3.64,1,ford-fiesta-2009-w12-v1,ok,False
 car,2,VOLKSWAGEN,VOLKSWAGEN GOLF,952492,6.4,14,volkswagen-golf-mk8-v1|volkswagen-golf-mk7-v1|volkswagen-vw-golf-w5-v1|volkswagen-golf-2016-w12-v1|volkswagen-golf-2025-w12-v1|volkswagen-golf-2002-w12-v1,ok,True
-car,3,VAUXHALL,VAUXHALL CORSA,911579,9.03,1,vauxhall-corsa-2011-v1,refused,True
+car,3,VAUXHALL,VAUXHALL CORSA,911579,9.04,1,vauxhall-corsa-2011-v1,ok,True
 car,4,FORD,FORD FOCUS,862774,11.53,6,ford-focus-v1|ford-focus-2012-w7-v1|ford-focus-2006-w12-v1|ford-focus-2009-w12-v1|ford-focus-2013-w12-v1|ford-focus-2016-fow1-v1,ok,True
-car,5,NISSAN,NISSAN QASHQAI,703391,13.56,2,nissan-qashqai-2018-v1|nissan-qashqai-2010-w5-v1,ok,True
+car,5,NISSAN,NISSAN QASHQAI,703391,13.57,2,nissan-qashqai-2018-v1|nissan-qashqai-2010-w5-v1,ok,True
 car,6,VOLKSWAGEN,VOLKSWAGEN POLO,685291,15.55,6,volkswagen-polo-2023-v1|volkswagen-polo-w7-v1|volkswagen-polo-2021-w12-v1|volkswagen-polo-2022-w12-v1|volkswagen-polo-gti-2023-vw2-v1|volkswagen-polo-gti-2011-vw2-v1,ok,True
-car,7,TOYOTA,TOYOTA YARIS,589579,17.25,1,toyota-yaris-2001-v1,refused,True
+car,7,TOYOTA,TOYOTA YARIS,589579,17.25,1,toyota-yaris-2001-v1,ok,True
 car,8,VAUXHALL,VAUXHALL ASTRA,527023,18.78,2,vauxhall-astra-2012-w12-v1|vauxhall-astra-2022-cr1-v1,ok,True
 car,9,MINI,MINI COOPER,523667,20.29,1,mini-cooper-w7-v1,partial,True
-car,10,BMW,BMW 3 SERIES,474574,21.66,5,bmw-3-series-v1|bmw-320i-2023-v1|bmw-3-series-2014-w12-v1|bmw-3-series-2021-w12-v1|bmw-3-series-touring-bm1-v1,ok,True
+car,10,BMW,BMW 3 SERIES,474574,21.67,5,bmw-3-series-v1|bmw-320i-2023-v1|bmw-3-series-2014-w12-v1|bmw-3-series-2021-w12-v1|bmw-3-series-touring-bm1-v1,ok,True
 car,11,AUDI,AUDI A3,451909,22.97,3,audi-a3-v1|audi-a3-ad1-v1|audi-a3-2021-ad1-v1,partial,True
 car,12,KIA,KIA SPORTAGE,441871,24.25,5,kia-sportage-2023-v1|kia-sportage-2011-w6-v1|kia-sportage-w6-v1|kia-sportage-2018-w7-v1|kia-sportage-2023-m1-v1,ok,True
-car,13,BMW,BMW 1 SERIES,436934,25.51,1,bmw-1-series-v1,partial,True
-car,14,FIAT,FIAT 500,428014,26.75,8,fiat-500-classic-v1|fiat-500e-v1|fiat-500-2016-v1|fiat-500-w12-v1|fiat-500-2010-fw1-v1|fiat-500-fw1-v1,ok,True
-car,15,NISSAN,NISSAN JUKE,419077,27.96,5,nissan-juke-2011-w5-v1|nissan-juke-w6-v1|nissan-juke-nw1-v1|nissan-juke-2015-nw1-v1|nissan-juke-2023-cr1-v1,partial,True
+car,13,BMW,BMW 1 SERIES,436934,25.52,1,bmw-1-series-v1,partial,True
+car,14,FIAT,FIAT 500,428014,26.76,8,fiat-500-classic-v1|fiat-500e-v1|fiat-500-2016-v1|fiat-500-w12-v1|fiat-500-2010-fw1-v1|fiat-500-fw1-v1,ok,True
+car,15,NISSAN,NISSAN JUKE,419077,27.97,5,nissan-juke-2011-w5-v1|nissan-juke-w6-v1|nissan-juke-nw1-v1|nissan-juke-2015-nw1-v1|nissan-juke-2023-cr1-v1,ok,True
 car,16,MERCEDES,MERCEDES A CLASS,391181,29.1,2,mercedes-benz-a-class-2000-v1|mercedes-benz-a-class-2018-w12-v1,ok,True
 car,17,FORD,FORD KUGA,381478,30.2,0,,none,False
 car,18,VOLKSWAGEN,VOLKSWAGEN TIGUAN,358578,31.24,3,volkswagen-tiguan-allspace-2022-v1|volkswagen-tiguan-2022-w12-v1|volkswagen-tiguan-2020-vw2-v1,ok,True
-car,19,HONDA,HONDA JAZZ,348059,32.24,4,honda-jazz-2018-v1|honda-jazz-2016-w9-v1|honda-jazz-2020-w9-v1|honda-jazz-2016-hw1-v1,partial,True
-car,20,MERCEDES,MERCEDES C CLASS,334508,33.21,5,mercedes-benz-c-class-v1|mercedes-benz-c-class-w202-v1|mercedes-benz-c-class-w12-v1|mercedes-benz-c-class-mw1-v2|mercedes-benz-c-class-mw1-v3,refused,True
+car,19,HONDA,HONDA JAZZ,348059,32.25,4,honda-jazz-2018-v1|honda-jazz-2016-w9-v1|honda-jazz-2020-w9-v1|honda-jazz-2016-hw1-v1,ok,True
+car,20,MERCEDES,MERCEDES C CLASS,334508,33.21,5,mercedes-benz-c-class-v1|mercedes-benz-c-class-w202-v1|mercedes-benz-c-class-w12-v1|mercedes-benz-c-class-mw1-v2|mercedes-benz-c-class-mw1-v3,partial,True
 car,21,RENAULT,RENAULT CLIO,326654,34.16,4,renault-clio-2020-w7-v1|renault-clio-2023-w7-v1|renault-clio-2010-w7-v1|renault-clio-w8-v1,ok,True
 car,22,VAUXHALL,VAUXHALL MOKKA,314453,35.07,0,,none,False
 car,23,TOYOTA,TOYOTA AYGO,311281,35.97,0,,none,False
-car,24,HYUNDAI,HYUNDAI I10,281780,36.78,1,hyundai-i10-v1,refused,True
+car,24,HYUNDAI,HYUNDAI I10,281780,36.79,1,hyundai-i10-v1,refused,True
 car,25,AUDI,AUDI A1,274860,37.58,1,audi-a1-quattro-v1,partial,True
-car,26,HYUNDAI,HYUNDAI TUCSON,268240,38.35,3,hyundai-tucson-2015-w12-v1|hyundai-tucson-2022-w12-v1|hyundai-tucson-2022-ht1-v1,ok,True
+car,26,HYUNDAI,HYUNDAI TUCSON,268240,38.36,3,hyundai-tucson-2015-w12-v1|hyundai-tucson-2022-w12-v1|hyundai-tucson-2022-ht1-v1,ok,True
 car,27,PEUGEOT,PEUGEOT 208,265364,39.12,1,peugeot-208-v2,refused,True
-car,28,FORD,FORD PUMA,264328,39.88,0,,none,False
+car,28,FORD,FORD PUMA,264328,39.89,0,,none,False
 car,29,LAND ROVER,LAND ROVER DISCOVERY,259901,40.64,2,land-rover-discovery-2022-law1-v1|land-rover-discovery-2018-law1-v1,ok,True
-car,30,CITROEN,CITROEN C3,258197,41.38,0,,none,False
-car,31,SKODA,SKODA FABIA,248085,42.1,4,skoda-fabia-v1|skoda-fabia-2011-w5-v1|skoda-fabia-w7-v1|skoda-fabia-2011-w7-v1,ok,True
-car,32,HONDA,HONDA CIVIC,243187,42.8,12,honda-civic-v1|honda-civic-2007-w5-v1|honda-civic-2016-w5-v1|honda-civic-2023-w12-v1|honda-civic-2015-w12-v1|honda-civic-1987-hw1-v1,ok,True
+car,30,CITROEN,CITROEN C3,258197,41.39,0,,none,False
+car,31,SKODA,SKODA FABIA,248085,42.11,4,skoda-fabia-v1|skoda-fabia-2011-w5-v1|skoda-fabia-w7-v1|skoda-fabia-2011-w7-v1,ok,True
+car,32,HONDA,HONDA CIVIC,243187,42.81,12,honda-civic-v1|honda-civic-2007-w5-v1|honda-civic-2016-w5-v1|honda-civic-2023-w12-v1|honda-civic-2015-w12-v1|honda-civic-1987-hw1-v1,ok,True
 car,33,AUDI,AUDI A4,236488,43.49,2,audi-a4-v1|audi-a4-2005-w12-v1,ok,True
-car,34,LAND ROVER,LAND ROVER RANGE ROVER EVOQUE,228397,44.15,4,land-rover-range-rover-evoque-v1|land-rover-range-rover-evoque-2011-w6-v1|land-rover-range-rover-evoque-2011-w12-v1|land-rover-range-rover-evoque-2016-law1-v1,partial,True
-car,35,KIA,KIA PICANTO,223484,44.79,4,kia-picanto-2012-v1|kia-picanto-w6-v1|kia-picanto-2012-w7-v1|kia-picanto-2024-m1-v1,ok,True
-car,36,NISSAN,NISSAN MICRA,219336,45.43,5,nissan-micra-k10-v1|nissan-micra-w6-v1|nissan-micra-2004-w12-v1|nissan-micra-1982-nw1-v1|nissan-micra-nw1-v1,ok,True
-car,37,SKODA,SKODA OCTAVIA,219126,46.06,6,skoda-octavia-estate-v1|skoda-octavia-2014-w5-v1|skoda-octavia-combi-2017-w5-v1|skoda-octavia-2021-w12-v1|skoda-octavia-2019-w12-v1|skoda-octavia-2025-m1-v1,ok,True
-car,38,SEAT,SEAT IBIZA,214116,46.68,0,,none,False
-car,39,PEUGEOT,PEUGEOT 2008,213258,47.3,3,peugeot-2008-2020-w5-v1|peugeot-2008-2018-pw1-v1|peugeot-2008-2020-pw1-v1,ok,True
+car,34,LAND ROVER,LAND ROVER RANGE ROVER EVOQUE,228397,44.15,4,land-rover-range-rover-evoque-v1|land-rover-range-rover-evoque-2011-w6-v1|land-rover-range-rover-evoque-2011-w12-v1|land-rover-range-rover-evoque-2016-law1-v1,ok,True
+car,35,KIA,KIA PICANTO,223484,44.8,4,kia-picanto-2012-v1|kia-picanto-w6-v1|kia-picanto-2012-w7-v1|kia-picanto-2024-m1-v1,ok,True
+car,36,NISSAN,NISSAN MICRA,219336,45.44,5,nissan-micra-k10-v1|nissan-micra-w6-v1|nissan-micra-2004-w12-v1|nissan-micra-1982-nw1-v1|nissan-micra-nw1-v1,ok,True
+car,37,SKODA,SKODA OCTAVIA,219126,46.07,6,skoda-octavia-estate-v1|skoda-octavia-2014-w5-v1|skoda-octavia-combi-2017-w5-v1|skoda-octavia-2021-w12-v1|skoda-octavia-2019-w12-v1|skoda-octavia-2025-m1-v1,ok,True
+car,38,SEAT,SEAT IBIZA,214116,46.69,0,,none,False
+car,39,PEUGEOT,PEUGEOT 2008,213258,47.31,3,peugeot-2008-2020-w5-v1|peugeot-2008-2018-pw1-v1|peugeot-2008-2020-pw1-v1,ok,True
 car,40,MERCEDES,MERCEDES E CLASS,206798,47.9,6,mercedes-benz-e-class-w213-undated-v1|mercedes-benz-e-class-w12-v1|mercedes-benz-e-class-2022-w12-v1|mercedes-benz-e-class-mw1-v1|mercedes-benz-e-class-mw1-v5|mercedes-benz-e-class-2010-mw1-v1,ok,True
-car,41,RENAULT,RENAULT CAPTUR,201700,48.48,1,renault-captur-v1,ok,True
+car,41,RENAULT,RENAULT CAPTUR,201700,48.49,1,renault-captur-v1,ok,True
 car,42,BMW,BMW 5 SERIES,195477,49.05,4,bmw-5-series-v1|bmw-5-series-e60-v1|bmw-5-series-1995-bm2-v1|bmw-5-series-1988-bm3-v1,ok,True
-car,43,HONDA,HONDA CR-V,193967,49.61,2,honda-cr-v-v1|honda-cr-v-2001-hw1-v1,refused,True
+car,43,HONDA,HONDA CR-V,193967,49.61,2,honda-cr-v-v1|honda-cr-v-2001-hw1-v1,ok,True
 car,44,SEAT,SEAT LEON,193666,50.17,1,seat-leon-2022-v1,refused,True
-car,45,PEUGEOT,PEUGEOT 3008,185259,50.7,3,peugeot-3008-v1|peugeot-3008-w12-v1|peugeot-3008-pw1-v1,ok,True
-car,46,VOLVO,VOLVO XC40,185156,51.24,0,,none,False
+car,45,PEUGEOT,PEUGEOT 3008,185259,50.71,3,peugeot-3008-v1|peugeot-3008-w12-v1|peugeot-3008-pw1-v1,ok,True
+car,46,VOLVO,VOLVO XC40,185156,51.25,0,,none,False
 car,47,MINI,MINI COUNTRYMAN,182391,51.77,2,mini-countryman-v1|mini-countryman-v2,partial,True
-car,48,AUDI,AUDI Q3,177825,52.28,3,audi-q3-2023-v1|audi-q3-2014-w5-v1|audi-q3-sportback-ad1-v1,ok,True
-car,49,CITROEN,CITROEN C4,175831,52.79,1,citroen-c4-2008-v1,partial,True
+car,48,AUDI,AUDI Q3,177825,52.29,3,audi-q3-2023-v1|audi-q3-2014-w5-v1|audi-q3-sportback-ad1-v1,ok,True
+car,49,CITROEN,CITROEN C4,175831,52.8,1,citroen-c4-2008-v1,partial,True
 car,50,VOLKSWAGEN,VOLKSWAGEN T-ROC,175358,53.3,0,,none,False
-car,51,VOLKSWAGEN,VOLKSWAGEN PASSAT,171762,53.79,2,volkswagen-passat-v1|volkswagen-passat-2025-w12-v1,ok,True
-car,52,BMW,BMW 2 SERIES,165356,54.27,0,,none,False
-car,53,SUZUKI,SUZUKI SWIFT,161131,54.74,3,suzuki-swift-2017-v1|suzuki-swift-2024-w12-v1|suzuki-swift-w12-v1,ok,True
-car,54,HYUNDAI,HYUNDAI I20,160602,55.2,2,hyundai-i20-2022-v1|hyundai-i20-2010-hyw1-v1,partial,True
-car,55,VAUXHALL,VAUXHALL INSIGNIA,159273,55.66,0,,none,False
+car,51,VOLKSWAGEN,VOLKSWAGEN PASSAT,171762,53.8,2,volkswagen-passat-v1|volkswagen-passat-2025-w12-v1,ok,True
+car,52,BMW,BMW 2 SERIES,165356,54.28,0,,none,False
+car,53,SUZUKI,SUZUKI SWIFT,161131,54.75,3,suzuki-swift-2017-v1|suzuki-swift-2024-w12-v1|suzuki-swift-w12-v1,ok,True
+car,54,HYUNDAI,HYUNDAI I20,160602,55.21,2,hyundai-i20-2022-v1|hyundai-i20-2010-hyw1-v1,ok,True
+car,55,VAUXHALL,VAUXHALL INSIGNIA,159273,55.67,0,,none,False
 car,56,TOYOTA,TOYOTA COROLLA,156991,56.12,2,toyota-corolla-v1|toyota-corolla-w7-v1,ok,True
-car,57,VOLVO,VOLVO XC60,156357,56.57,1,volvo-xc60-2023-w7-v1,ok,True
-car,58,CITROEN,CITROEN C1,152496,57.01,0,,none,False
+car,57,VOLVO,VOLVO XC60,156357,56.58,1,volvo-xc60-2023-w7-v1,ok,True
+car,58,CITROEN,CITROEN C1,152496,57.02,0,,none,False
 car,59,TOYOTA,TOYOTA C-HR,150799,57.45,2,toyota-c-hr-v1|toyota-c-hr-2022-tw1-v1,refused,True
-car,60,LAND ROVER,LAND ROVER RANGE ROVER SPORT,149747,57.88,7,land-rover-range-rover-sport-2018-v1|land-rover-range-rover-sport-2018-w5-v1|land-rover-range-rover-sport-2015-rr1-v1|land-rover-range-rover-sport-2018-rr1-v1|land-rover-range-rover-sport-2023-rr1-v1|land-rover-range-rover-sport-2023-law1-v1,ok,True
-car,61,FORD,FORD MONDEO,149341,58.31,2,ford-mondeo-2021-v1|ford-mondeo-2021-cr3-v1,partial,True
+car,60,LAND ROVER,LAND ROVER RANGE ROVER SPORT,149747,57.89,7,land-rover-range-rover-sport-2018-v1|land-rover-range-rover-sport-2018-w5-v1|land-rover-range-rover-sport-2015-rr1-v1|land-rover-range-rover-sport-2018-rr1-v1|land-rover-range-rover-sport-2023-rr1-v1|land-rover-range-rover-sport-2023-law1-v1,ok,True
+car,61,FORD,FORD MONDEO,149341,58.32,2,ford-mondeo-2021-v1|ford-mondeo-2021-cr3-v1,partial,True
 car,62,DACIA,DACIA SANDERO,146653,58.74,0,,none,False
-car,63,VAUXHALL,VAUXHALL ZAFIRA,146376,59.16,1,vauxhall-zafira-v1,ok,True
-car,64,TESLA,TESLA MODEL 3,146205,59.58,7,tesla-model-3-v1|tesla-model-3-w5-v1|tesla-model-3-2018-w5-v1|tesla-model-3-2023-w5-v1|tesla-model-3-w7-v2|tesla-model-3-2024-w7-v1,ok,True
+car,63,VAUXHALL,VAUXHALL ZAFIRA,146376,59.17,1,vauxhall-zafira-v1,ok,True
+car,64,TESLA,TESLA MODEL 3,146205,59.59,7,tesla-model-3-v1|tesla-model-3-w5-v1|tesla-model-3-2018-w5-v1|tesla-model-3-2023-w5-v1|tesla-model-3-w7-v2|tesla-model-3-2024-w7-v1,ok,True
 car,65,TOYOTA,TOYOTA RAV4,142496,60.0,4,toyota-rav4-2010-v1|toyota-rav4-2000-w5-v1|toyota-rav4-2021-tw1-v1|toyota-rav4-2021-cr4-v1,ok,True
-car,66,TESLA,TESLA MODEL Y,141091,60.4,2,tesla-model-y-v1|tesla-model-y-2021-w7-v1,ok,True
-car,67,MG,MG ZS,140809,60.81,2,mg-zs-2025-v1|mg-zs-2025-m1-v1,partial,True
+car,66,TESLA,TESLA MODEL Y,141091,60.41,2,tesla-model-y-v1|tesla-model-y-2021-w7-v1,ok,True
+car,67,MG,MG ZS,140809,60.82,2,mg-zs-2025-v1|mg-zs-2025-m1-v1,partial,True
 car,68,TOYOTA,TOYOTA AURIS,140392,61.22,0,,none,False
-car,69,MAZDA,MAZDA 2,140038,61.62,1,mazda-2-v1,refused,True
-car,70,KIA,KIA NIRO,138040,62.02,1,kia-niro-hybrid-2020-w7-v1,refused,True
-car,71,NISSAN,NISSAN NOTE,136203,62.42,1,nissan-note-v1,refused,True
+car,69,MAZDA,MAZDA 2,140038,61.63,1,mazda-2-v1,refused,True
+car,70,KIA,KIA NIRO,138040,62.03,1,kia-niro-hybrid-2020-w7-v1,refused,True
+car,71,NISSAN,NISSAN NOTE,136203,62.42,1,nissan-note-v1,partial,True
 car,72,AUDI,AUDI Q5,135343,62.81,0,,none,False
-car,73,BMW,BMW X1,135081,63.2,1,bmw-x1-2020-w12-v1,partial,False
-car,74,VOLKSWAGEN,VOLKSWAGEN UP,131632,63.58,0,,none,False
-car,75,AUDI,AUDI A5,131165,63.96,1,audi-a5-sportback-v1,refused,True
-car,76,PEUGEOT,PEUGEOT 308,130214,64.33,5,peugeot-308-2012-w5-v1|peugeot-308-2012-w7-v1|peugeot-308-2012-w7-v2|peugeot-308-2026-pw1-v1|peugeot-308-pw1-v1,ok,True
+car,73,BMW,BMW X1,135081,63.21,1,bmw-x1-2020-w12-v1,partial,False
+car,74,VOLKSWAGEN,VOLKSWAGEN UP,131632,63.59,0,,none,False
+car,75,AUDI,AUDI A5,131165,63.97,1,audi-a5-sportback-v1,refused,True
+car,76,PEUGEOT,PEUGEOT 308,130214,64.34,5,peugeot-308-2012-w5-v1|peugeot-308-2012-w7-v1|peugeot-308-2012-w7-v2|peugeot-308-2026-pw1-v1|peugeot-308-pw1-v1,ok,True
 car,77,MG,MG HS,128533,64.71,0,,none,False
-car,78,AUDI,AUDI A6,128223,65.08,3,audi-a6-c8-v1|audi-a6-c7-ad1-v1|audi-a6-c8-ad1-v1,ok,True
+car,78,AUDI,AUDI A6,128223,65.09,3,audi-a6-c8-v1|audi-a6-c7-ad1-v1|audi-a6-c8-ad1-v1,ok,True
 car,79,TOYOTA,TOYOTA PRIUS,127426,65.45,3,toyota-prius-v1|toyota-prius-2016-tw1-v1|toyota-prius-2010-tw1-v1,ok,True
-car,80,KIA,KIA CEED,124267,65.8,1,kia-ceed-v1,refused,True
-car,81,BMW,BMW X3,123713,66.16,1,bmw-x3-2018-w12-v1,refused,False
-car,82,HYUNDAI,HYUNDAI KONA,123565,66.52,5,hyundai-kona-2019-v1|hyundai-kona-2025-n-line-v1|hyundai-kona-w6-v1|hyundai-kona-w6-v2|hyundai-kona-2019-hyw1-v1,ok,True
+car,80,KIA,KIA CEED,124267,65.81,1,kia-ceed-v1,refused,True
+car,81,BMW,BMW X3,123713,66.17,1,bmw-x3-2018-w12-v1,refused,False
+car,82,HYUNDAI,HYUNDAI KONA,123565,66.53,5,hyundai-kona-2019-v1|hyundai-kona-2025-n-line-v1|hyundai-kona-w6-v1|hyundai-kona-w6-v2|hyundai-kona-2019-hyw1-v1,ok,True
 car,83,BMW,BMW 4 SERIES,119565,66.87,2,bmw-m4-v1|bmw-4-series-v1,partial,True
-car,84,AUDI,AUDI Q2,117816,67.21,0,,none,False
+car,84,AUDI,AUDI Q2,117816,67.22,0,,none,False
 car,85,MERCEDES,MERCEDES GLA CLASS,117000,67.55,1,mercedes-benz-gla-2020-v1,refused,True
-car,86,FORD,FORD KA,116272,67.88,1,ford-ka-sedan-2015-w5-v1,ok,True
-car,87,VAUXHALL,VAUXHALL GRANDLAND,113373,68.21,0,,none,False
-car,88,NISSAN,NISSAN X-TRAIL,110375,68.53,1,nissan-x-trail-2023-v1,refused,True
-car,89,FORD,FORD ECOSPORT,110131,68.85,2,ford-ecosport-v1|ford-ecosport-2012-w5-v1,ok,True
-car,90,MERCEDES,MERCEDES CLA CLASS,109127,69.16,1,mercedes-benz-cla-v2,partial,True
-car,91,DACIA,DACIA DUSTER,108398,69.48,1,dacia-duster-v1,refused,True
-car,92,MAZDA,MAZDA 3,108311,69.79,3,mazda-3-2020-v1|mazda-3-2003-w6-v1|mazda-3-2011-w6-v1,partial,True
+car,86,FORD,FORD KA,116272,67.89,1,ford-ka-sedan-2015-w5-v1,ok,True
+car,87,VAUXHALL,VAUXHALL GRANDLAND,113373,68.22,0,,none,False
+car,88,NISSAN,NISSAN X-TRAIL,110375,68.54,1,nissan-x-trail-2023-v1,refused,True
+car,89,FORD,FORD ECOSPORT,110131,68.86,2,ford-ecosport-v1|ford-ecosport-2012-w5-v1,ok,True
+car,90,MERCEDES,MERCEDES CLA CLASS,109127,69.17,1,mercedes-benz-cla-v2,partial,True
+car,91,DACIA,DACIA DUSTER,108398,69.49,1,dacia-duster-v1,refused,True
+car,92,MAZDA,MAZDA 3,108311,69.8,3,mazda-3-2020-v1|mazda-3-2003-w6-v1|mazda-3-2011-w6-v1,partial,True
 car,93,BMW,BMW X5,105554,70.1,3,bmw-x5-2024-v1|bmw-x5-2019-w12-v1|bmw-x5-1999-bm2-v1,ok,True
-car,94,MERCEDES,MERCEDES GLC CLASS,103927,70.4,1,mercedes-benz-glc-mw1-v2,refused,True
-car,95,HYUNDAI,HYUNDAI I30,102014,70.69,1,hyundai-i30-2010-v1,refused,True
+car,94,MERCEDES,MERCEDES GLC CLASS,103927,70.4,1,mercedes-benz-glc-mw1-v2,ok,True
+car,95,HYUNDAI,HYUNDAI I30,102014,70.7,1,hyundai-i30-2010-v1,partial,True
 car,96,SKODA,SKODA KAROQ,101659,70.99,1,skoda-karoq-2020-v1,partial,True
-car,97,FORD,FORD C-MAX,98574,71.27,0,,none,False
-car,98,PEUGEOT,PEUGEOT 107,97600,71.55,0,,none,False
-car,99,LAND ROVER,LAND ROVER FREELANDER,96579,71.83,0,,none,False
-car,100,KIA,KIA RIO,96283,72.11,0,,none,False
-car,101,MINI,MINI ONE,95748,72.39,0,,none,False
-car,102,VOLVO,VOLVO XC90,95535,72.66,1,volvo-xc90-v1,ok,True
-car,103,VOLVO,VOLVO V40,93494,72.93,1,volvo-v40-2018-vow1-v1,ok,True
-car,104,MAZDA,MAZDA CX-5,93284,73.2,2,mazda-cx-5-2017-w7-v1|mazda-cx-5-2020-mzw1-v1,refused,True
-car,105,RENAULT,RENAULT MEGANE,92288,73.47,1,renault-megane-v1,partial,True
-car,106,PEUGEOT,PEUGEOT 207,92086,73.74,3,peugeot-207-pw1-v1|peugeot-207-pw1-v2|peugeot-207-pw1-v3,partial,True
-car,107,LAND ROVER,LAND ROVER RANGE ROVER,90764,74.0,8,land-rover-range-rover-sport-2018-w5-v1|land-rover-range-rover-sport-2015-rr1-v1|land-rover-range-rover-sport-2018-rr1-v1|land-rover-range-rover-sport-2023-rr1-v1|land-rover-range-rover-law1-v1|land-rover-range-rover-law1-v2,ok,True
-car,108,VAUXHALL,VAUXHALL CROSSLAND,86267,74.25,0,,none,False
-car,109,MAZDA,MAZDA MX-5,85523,74.5,6,mazda-mx-5-2015-v1|mazda-mx-5-2014-w5-v1|mazda-mx-5-w6-v1|mazda-mx-5-1989-mzw1-v1|mazda-mx-5-1998-mzw1-v1|mazda-mx-5-2009-mzw1-v1,partial,True
-car,110,JAGUAR,JAGUAR XF SERIES,85008,74.74,0,,none,False
-car,111,SUZUKI,SUZUKI VITARA,84305,74.99,1,suzuki-vitara-2024-v1,partial,True
-car,112,SEAT,SEAT ARONA,83832,75.23,1,seat-arona-2022-v1,refused,True
-car,113,SKODA,SKODA KODIAQ,83611,75.47,1,skoda-kodiaq-2020-w12-v1,ok,False
-car,114,FIAT,FIAT PANDA,78137,75.7,1,fiat-panda-fw1-v2,refused,True
-car,115,SKODA,SKODA SUPERB,76842,75.92,2,skoda-superb-v1|skoda-superb-2009-w5-v1,ok,True
-car,116,PEUGEOT,PEUGEOT 108,75416,76.14,0,,none,False
-car,117,SEAT,SEAT ATECA,73948,76.35,1,seat-ateca-2020-v1,refused,True
-car,118,SKODA,SKODA YETI,72789,76.56,0,,none,False
-car,119,LAND ROVER,LAND ROVER DEFENDER,72612,76.77,5,land-rover-defender-w5-v1|land-rover-defender-w6-v1|land-rover-defender-2021-w6-v1|land-rover-defender-2021-w7-v1|land-rover-defender-w7-v1,partial,True
-car,120,HYUNDAI,HYUNDAI IONIQ,71573,76.98,2,hyundai-ioniq-6-w5-v1|hyundai-ioniq-5-n-2024-hyw1-v1,ok,True
-car,121,VAUXHALL,VAUXHALL MERIVA,69733,77.18,0,,none,False
-car,122,JAGUAR,JAGUAR F-PACE,69526,77.38,0,,none,False
-car,123,MERCEDES,MERCEDES B CLASS,67395,77.58,0,,none,False
-car,124,RENAULT,RENAULT KADJAR,67117,77.77,1,renault-kadjar-v1,partial,True
-car,125,MITSUBISHI,MITSUBISHI OUTLANDER,66418,77.96,0,,none,False
-car,126,AUDI,AUDI Q4,64323,78.15,1,audi-q4-e-tron-v1,refused,True
-car,127,MINI,MINI CLUBMAN,62292,78.33,1,mini-clubman-v1,refused,True
-car,128,CITROEN,CITROEN DS3,62061,78.51,0,,none,False
-car,129,FORD,FORD S-MAX,62029,78.69,1,ford-s-max-v1,refused,True
-car,130,VOLKSWAGEN,VOLKSWAGEN TOURAN,61882,78.87,0,,none,False
-car,131,PEUGEOT,PEUGEOT 5008,61844,79.05,0,,none,False
-car,132,HONDA,HONDA HR-V,61782,79.22,3,honda-hr-v-v1|honda-hr-v-2025-hw1-v1|honda-hr-v-2001-hw1-v1,partial,True
-car,133,AUDI,AUDI TT,60322,79.4,1,audi-tt-rs-2006-ad1-v1,refused,True
-car,134,NISSAN,NISSAN LEAF,60320,79.57,1,nissan-leaf-2023-v1,refused,True
-car,135,SKODA,SKODA KAMIQ,60022,79.75,2,skoda-kamiq-v1|skoda-kamiq-2020-w12-v1,partial,True
-car,136,KIA,KIA STONIC,59047,79.92,1,kia-stonic-v1,ok,True
-car,137,CUPRA,CUPRA FORMENTOR,59032,80.09,2,cupra-formentor-2022-v1|cupra-formentor-2021-w5-v1,refused,True
-car,138,PORSCHE,PORSCHE 911,58777,80.26,55,porsche-911-carrera-4s-v1|porsche-911-2021-pw2-v1|porsche-911-2018-pw2-v1|porsche-911-pw2-v1|porsche-911-2021-pw2-v2|porsche-911-2014-pw2-v1,ok,True
-car,139,VOLKSWAGEN,VOLKSWAGEN T-CROSS,58579,80.43,2,volkswagen-t-cross-2021-v1|volkswagen-t-cross-vw2-v1,refused,True
-car,140,FORD,FORD TOURNEO,58494,80.6,0,,none,False
-car,141,PORSCHE,PORSCHE MACAN,57864,80.76,6,porsche-macan-v1|porsche-macan-2020-pw2-v1|porsche-macan-2022-pw2-v1|porsche-macan-pw2-v1|porsche-macan-2022-pw2-v2|porsche-macan-2022-pw2-v3,ok,True
-car,142,MG,MG 3,57075,80.93,1,mg-3-2025-v1,refused,True
-car,143,MERCEDES,MERCEDES AMG CLASS,55606,81.09,0,,none,False
-car,144,VOLKSWAGEN,VOLKSWAGEN ID3,55453,81.25,1,volkswagen-id3-gtx-2024-v1,refused,True
-car,145,VAUXHALL,VAUXHALL ADAM,54974,81.41,0,,none,False
-car,146,AUDI,AUDI Q7,53679,81.57,0,,none,False
-car,147,SMART,SMART FORTWO,52508,81.72,1,smart-fortwo-v1,refused,True
-car,148,BYD,BYD SEAL,51684,81.87,2,byd-seal-v1|byd-seal-2024-w12-v1,refused,True
-car,149,TOYOTA,TOYOTA AVENSIS,51671,82.02,2,toyota-avensis-tw1-v1|toyota-avensis-tw1-v2,refused,True
-car,150,CITROEN,CITROEN BERLINGO,51616,82.17,0,,none,False
-car,151,FORD,FORD B-MAX,51391,82.31,0,,none,False
-car,152,SKODA,SKODA CITIGO,51288,82.46,0,,none,False
-car,153,MG,MG 4,51072,82.61,2,mg-4-2025-v1|mg-mg4-v1,ok,True
-car,154,SUZUKI,SUZUKI SX,50421,82.76,0,,none,False
-car,155,MAZDA,MAZDA 6,50111,82.9,0,,none,False
-car,156,LAND ROVER,LAND ROVER RANGE ROVER VELAR,49644,83.04,8,land-rover-range-rover-sport-2018-w5-v1|land-rover-range-rover-sport-2015-rr1-v1|land-rover-range-rover-sport-2018-rr1-v1|land-rover-range-rover-sport-2023-rr1-v1|land-rover-range-rover-law1-v1|land-rover-range-rover-law1-v2,ok,True
-car,157,HYUNDAI,HYUNDAI IX35,49628,83.19,0,,none,False
-car,158,JAECOO,JAECOO 7,49553,83.33,0,,none,False
-car,159,MERCEDES,MERCEDES SLK CLASS,48362,83.47,0,,none,False
-car,160,SKODA,SKODA ENYAQ,47813,83.61,0,,none,False
-car,161,FORD,FORD GALAXY,47163,83.75,0,,none,False
-car,162,FIAT,FIAT PUNTO,46259,83.88,2,fiat-punto-2009-fw1-v1|fiat-punto-fw1-v1,ok,True
-car,163,LEXUS,LEXUS NX,46073,84.01,1,lexus-nx-2017-w7-v1,partial,True
-car,164,MAZDA,MAZDA CX-30,45519,84.15,1,mazda-cx-30-2020-v1,refused,True
-car,165,KIA,KIA VENGA,45013,84.28,0,,none,False
-car,166,AUDI,AUDI TTS,43746,84.4,1,audi-tts-ad1-v1,refused,True
-car,167,VOLKSWAGEN,VOLKSWAGEN SCIROCCO,43705,84.53,1,volkswagen-scirocco-v1,refused,True
-car,168,BMW,BMW I4,43668,84.65,1,bmw-i4-v1,refused,True
-car,169,VOLVO,VOLVO V60,43212,84.78,3,volvo-v60-2020-v1|volvo-v60-2013-w12-v1|volvo-v60-vow1-v1,ok,True
-car,170,VOLKSWAGEN,VOLKSWAGEN BEETLE,42510,84.9,1,volkswagen-beetle-v1,partial,True
-car,171,HYUNDAI,HYUNDAI SANTA FE,42391,85.03,2,hyundai-santa-fe-2020-v1|hyundai-santa-fe-w7-v1,ok,True
-car,172,SUZUKI,SUZUKI ALTO,42275,85.15,2,suzuki-alto-2020-v1|suzuki-alto-2024-w5-v1,ok,True
-car,173,KIA,KIA XCEED,41918,85.27,0,,none,False
-car,174,VOLKSWAGEN,VOLKSWAGEN TOUAREG,41833,85.39,1,volkswagen-touareg-v1,partial,True
-car,175,JAGUAR,JAGUAR XE SERIES,41666,85.51,0,,none,False
-car,176,PORSCHE,PORSCHE CAYENNE,41126,85.63,6,porsche-cayenne-v1|porsche-cayenne-v2|porsche-cayenne-v3|porsche-cayenne-2009-pw2-v1|porsche-cayenne-2020-pw2-v1|porsche-cayenne-2010-pw2-v1,refused,True
-car,177,VOLKSWAGEN,VOLKSWAGEN ID4,40864,85.75,1,volkswagen-id4-v1,partial,True
-car,178,KIA,KIA SORENTO,40246,85.86,0,,none,False
-car,179,FORD,FORD FUSION,39543,85.98,0,,none,False
-car,180,RENAULT,RENAULT SCENIC,39166,86.09,1,renault-scenic-1998-rew1-v1,refused,True
-car,181,MERCEDES,MERCEDES GLE CLASS,39079,86.2,1,mercedes-benz-gle-v1,partial,True
-car,182,LEXUS,LEXUS RX,38494,86.32,1,lexus-rx-v1,partial,True
-car,183,CITROEN,CITROEN C5,38376,86.43,1,citroen-c5-2022-v1,partial,True
-car,184,POLESTAR,POLESTAR 2,38163,86.54,2,polestar-2-v1|polestar-2-w7-v1,partial,True
-car,185,VAUXHALL,VAUXHALL VIVA,37748,86.65,0,,none,False
-car,186,AUDI,AUDI S3,36880,86.75,2,audi-s3-v1|audi-s3-ad1-v1,ok,True
-car,187,FORD,FORD KA+,36269,86.86,1,ford-ka-sedan-2015-w5-v1,ok,True
-car,188,DS,DS DS3,36039,86.96,0,,none,False
-car,189,SUZUKI,SUZUKI IGNIS,35134,87.06,2,suzuki-ignis-v1|suzuki-ignis-2022-w5-v1,refused,True
-car,190,JAGUAR,JAGUAR E-PACE,35058,87.17,0,,none,False
-car,191,MERCEDES,MERCEDES EQA CLASS,34470,87.27,0,,none,False
-car,192,VOLVO,VOLVO V70,33616,87.36,0,,none,False
-car,193,FORD,FORD GRAND C-MAX,32287,87.46,0,,none,False
-car,194,VOLKSWAGEN,VOLKSWAGEN TAIGO,31459,87.55,1,volkswagen-taigo-2022-v1,refused,True
-car,195,CUPRA,CUPRA BORN,31456,87.64,0,,none,False
-car,196,BMW,BMW Z4,31382,87.73,2,bmw-z4-2008-v1|bmw-z4-m40i-2019-v1,ok,True
-car,197,LEXUS,LEXUS IS,31284,87.82,0,,none,False
-car,198,VAUXHALL,VAUXHALL AGILA,30525,87.91,0,,none,False
-car,199,LEXUS,LEXUS CT,29839,87.99,0,,none,False
-car,200,HYUNDAI,HYUNDAI IX20,28877,88.08,0,,none,False
-car,201,JEEP,JEEP RENEGADE,28528,88.16,1,jeep-renegade-2021-w6-v1,refused,True
-car,202,JAGUAR,JAGUAR I-PACE,28401,88.24,2,jaguar-i-pace-v1|jaguar-i-pace-jgw1-v1,partial,True
-car,203,BMW,BMW X2,28357,88.32,1,bmw-x2-v1,ok,True
-car,204,VOLKSWAGEN,VOLKSWAGEN SHARAN,28256,88.41,1,volkswagen-sharan-vw1-v1,partial,True
-car,205,FORD,FORD MUSTANG,28133,88.49,2,ford-mustang-v1|ford-mustang-2015-w12-v1,ok,True
-car,206,VOLKSWAGEN,VOLKSWAGEN CADDY,27528,88.57,1,volkswagen-caddy-2022-v1,partial,True
-car,207,MITSUBISHI,MITSUBISHI ASX,27248,88.65,3,mitsubishi-asx-v1|mitsubishi-asx-w5-v1|mitsubishi-asx-2011-w5-v1,refused,True
-car,208,SUZUKI,SUZUKI CELERIO,27047,88.72,0,,none,False
-car,209,DACIA,DACIA JOGGER,26865,88.8,0,,none,False
-car,210,RENAULT,RENAULT ZOE,26584,88.88,1,renault-zoe-2012-v1,refused,True
-car,211,SAAB,SAAB 9-3,26468,88.95,0,,none,False
-car,212,TOYOTA,TOYOTA VERSO,25840,89.03,0,,none,False
-car,213,LEXUS,LEXUS UX,25526,89.1,0,,none,False
-car,214,MG,MG B,25238,89.18,0,,none,False
-car,215,BMW,BMW I3,25229,89.25,0,,none,False
-car,216,PEUGEOT,PEUGEOT 206,25228,89.32,3,peugeot-206-v1|peugeot-206-2002-w12-v1|peugeot-206-2000-pw1-v1,ok,True
-car,217,MERCEDES,MERCEDES ML CLASS,25065,89.39,0,,none,False
-car,218,PORSCHE,PORSCHE BOXSTER,24664,89.47,3,porsche-718-boxster-v1|porsche-boxster-2010-pw2-v1|porsche-boxster-2015-pw2-v1,refused,True
-car,219,MAZDA,MAZDA CX-3,24590,89.54,1,mazda-cx-30-2020-v1,refused,True
-car,220,MERCEDES,MERCEDES GLB CLASS,24149,89.61,0,,none,False
-car,221,MINI,MINI JOHN COOPER WORKS,24133,89.68,0,,none,False
-car,222,VOLVO,VOLVO EX30,24093,89.75,0,,none,False
-car,223,KIA,KIA SOUL,23754,89.82,0,,none,False
-car,224,HYUNDAI,HYUNDAI BAYON,23735,89.88,0,,none,False
-car,225,SEAT,SEAT ALHAMBRA,23646,89.95,3,seat-alhambra-2010-st1-v1|seat-alhambra-2015-st1-v1|seat-alhambra-2000-st2-v1,refused,False
-car,226,SMART,SMART FORFOUR,23585,90.02,0,,none,False
-car,227,CHERY,CHERY TIGGO,23174,90.09,0,,none,False
-car,228,JAGUAR,JAGUAR XJ SERIES,23074,90.15,0,,none,False
-car,229,AUDI,AUDI E-TRON,23023,90.22,1,audi-e-tron-v1,partial,True
-car,230,SKODA,SKODA SCALA,22867,90.29,0,,none,False
-car,231,PORSCHE,PORSCHE TAYCAN,22754,90.35,3,porsche-taycan-pw2-v1|porsche-taycan-2025-pw2-v1|porsche-taycan-pw2-v2,partial,True
-car,232,ALFA ROMEO,ALFA ROMEO GIULIETTA,22420,90.42,1,alfa-romeo-giulietta-v1,refused,True
-car,233,FORD,FORD EXPLORER,22219,90.48,0,,none,False
-car,234,VOLVO,VOLVO V50,22016,90.55,1,volvo-v50-vow1-v1,partial,True
-car,235,MERCEDES,MERCEDES S CLASS,21814,90.61,4,mercedes-benz-s-class-v1|mercedes-benz-s-class-1979-mw1-v1|mercedes-benz-s-class-1999-mw1-v1|mercedes-benz-s-class-2003-mw1-v1,ok,True
-car,236,RENAULT,RENAULT TWINGO,21593,90.67,0,,none,False
-car,237,MITSUBISHI,MITSUBISHI SHOGUN,21519,90.73,0,,none,False
-car,238,BMW,BMW IX1,21401,90.8,0,,none,False
-car,239,SKODA,SKODA RAPID,21185,90.86,1,skoda-rapid-v1,ok,True
-car,240,ABARTH,ABARTH 595,20622,90.92,0,,none,False
-car,241,BMW,BMW IX3,20580,90.98,0,,none,False
-car,242,TOYOTA,TOYOTA LAND CRUISER,20554,91.04,3,toyota-land-cruiser-v1|toyota-land-cruiser-1998-tw1-v1|toyota-land-cruiser-2024-tw1-v1,ok,True
-car,243,SUZUKI,SUZUKI JIMNY,20409,91.09,1,suzuki-jimny-v1,refused,True
-car,244,NISSAN,NISSAN PULSAR,20249,91.15,1,nissan-pulsar-v1,refused,True
-car,245,JEEP,JEEP AVENGER,20197,91.21,0,,none,False
-car,246,MERCEDES,MERCEDES EQB CLASS,20169,91.27,0,,none,False
-car,247,BMW,BMW IX,20105,91.33,1,bmw-ix-v1,refused,True
-car,248,JAGUAR,JAGUAR XK SERIES,20057,91.39,0,,none,False
-car,249,MERCEDES,MERCEDES CLS CLASS,19933,91.44,3,mercedes-benz-cls-2022-v1|mercedes-benz-cls-2013-mw1-v1|mercedes-benz-cls-mw1-v2,ok,True
-car,250,KIA,KIA EV6,19919,91.5,2,kia-ev6-2022-v1|kia-ev6-2022-w6-v1,ok,True
-car,251,HONDA,HONDA ACCORD,19486,91.56,8,honda-accord-2021-v1|honda-accord-2017-w5-v1|honda-accord-hw1-v1|honda-accord-2021-hw1-v1|honda-accord-1998-hw1-v1|honda-accord-2011-hw1-v1,partial,True
-car,252,BMW,BMW M3,19413,91.61,4,bmw-m3-e30-undated-v1|bmw-m3-f80-2013-v1|bmw-m3-e46-v1|bmw-m3-2023-w12-v1,ok,True
-car,253,RENAULT,RENAULT ARKANA,19408,91.67,1,renault-arkana-v1,refused,True
-car,254,BMW,BMW 6 SERIES,19336,91.73,0,,none,False
-car,255,AUDI,AUDI Q6,19291,91.78,0,,none,False
-car,256,BMW,BMW X4,19288,91.84,1,bmw-x4-v1,partial,True
-car,257,HYUNDAI,HYUNDAI I40,19160,91.89,0,,none,False
-car,258,MERCEDES,MERCEDES CLK CLASS,19101,91.95,0,,none,False
-car,259,RENAULT,RENAULT SYMBIOZ,18819,92.0,0,,none,False
-car,260,PEUGEOT,PEUGEOT PARTNER,18818,92.06,0,,none,False
-car,261,PEUGEOT,PEUGEOT RIFTER,18796,92.11,0,,none,False
-car,262,RENAULT,RENAULT AUSTRAL,18467,92.16,1,renault-austral-2022-w7-v1,refused,True
-car,263,VAUXHALL,VAUXHALL FRONTERA,18391,92.22,0,,none,False
-car,264,VOLVO,VOLVO C30,18305,92.27,2,volvo-c30-v1|volvo-c30-vow1-v1,partial,True
-car,265,CUPRA,CUPRA LEON,18275,92.32,1,cupra-leon-2025-v1,refused,True
-car,266,MERCEDES,MERCEDES EQC CLASS,18223,92.38,0,,none,False
-car,267,SEAT,SEAT MII,18171,92.43,1,seat-mii-v1,refused,True
-car,268,KIA,KIA EV3,18143,92.48,0,,none,False
-car,269,VOLVO,VOLVO S60,18139,92.53,1,volvo-s60-2004-v1,ok,True
-car,270,VOLVO,VOLVO V90,17892,92.59,0,,none,False
-car,271,VOLKSWAGEN,VOLKSWAGEN TRANSPORTER,17756,92.64,1,volkswagen-transporter-2003-vw2-v1,refused,True
-car,272,RENAULT,RENAULT GRAND SCENIC,17477,92.69,0,,none,False
-car,273,PEUGEOT,PEUGEOT 508,17381,92.74,2,peugeot-508-v1|peugeot-508-w12-v1,partial,True
-car,274,SKODA,SKODA ELROQ,17342,92.79,0,,none,False
-car,275,VAUXHALL,VAUXHALL VECTRA,16638,92.84,0,,none,False
-car,276,BMW,BMW 7 SERIES,16606,92.88,1,bmw-7-series-v1,refused,True
-car,277,RENAULT,RENAULT 5,16589,92.93,0,,none,False
-car,278,JEEP,JEEP COMPASS,16559,92.98,2,jeep-compass-v1|jeep-compass-2022-w12-v1,partial,True
-car,279,MITSUBISHI,MITSUBISHI COLT,16387,93.03,0,,none,False
-car,280,POLESTAR,POLESTAR 4,16361,93.07,0,,none,False
-car,281,AUDI,AUDI A7,16317,93.12,2,audi-a7-2018-v1|audi-a7-2017-ad1-v1,ok,True
-car,282,OMODA,OMODA 5 NOBLE AUTO,16222,93.17,0,,none,False
-car,283,SUBARU,SUBARU FORESTER,16119,93.22,1,subaru-forester-2009-sbw1-v1,ok,True
-car,284,SUZUKI,SUZUKI SPLASH,16017,93.26,0,,none,False
-car,285,TOYOTA,TOYOTA IQ,15966,93.31,1,toyota-iq-tw1-v1,partial,True
-car,286,VAUXHALL,VAUXHALL COMBO,15947,93.35,0,,none,False
-car,287,SKODA,SKODA ROOMSTER,15922,93.4,0,,none,False
-car,288,AUDI,AUDI Q8,15906,93.45,1,audi-sq8-e-tron-2023-v1,ok,True
-car,289,JAGUAR,JAGUAR F-TYPE,15792,93.49,10,jaguar-f-type-v1|jaguar-f-type-v2|jaguar-f-type-jgw1-v1|jaguar-f-type-jgw1-v2|jaguar-f-type-jgw1-v3|jaguar-f-type-2016-jgw1-v1,ok,True
-car,290,PEUGEOT,PEUGEOT 307,15750,93.54,2,peugeot-307-2008-v1|peugeot-307-pw1-v1,refused,True
-car,291,MERCEDES,MERCEDES SL CLASS,15697,93.58,2,mercedes-benz-sl-class-1963-mw1-v1|mercedes-benz-sl-class-mw1-v1,refused,True
-car,292,BMW,BMW X6,15673,93.63,1,bmw-x6-2020-v1,ok,True
-car,293,SUZUKI,SUZUKI GRAND VITARA,15615,93.67,0,,none,False
-car,294,LEXUS,LEXUS LBX,15409,93.72,0,,none,False
-car,295,BYD,BYD DOLPHIN,15386,93.76,4,byd-dolphin-v1|byd-dolphin-2025-w6-v1|byd-dolphin-2021-bw1-v1|byd-dolphin-2024-bw1-v1,partial,True
-car,296,MG,MG 5,15337,93.81,1,mg-5-2025-v1,partial,True
-car,297,BYD,BYD SEALION,15275,93.85,3,byd-seal-v1|byd-seal-2024-w12-v1|byd-sealion-7-2024-bw1-v1,partial,True
-car,298,BMW,BMW M4,15258,93.9,4,bmw-m4-v1|bmw-m4-w12-v1|bmw-m4-competition-2021-bm1-v1|bmw-m4-2018-bm2-v1,ok,True
-car,299,VAUXHALL,VAUXHALL ANTARA,15024,93.94,0,,none,False
-car,300,VOLVO,VOLVO XC70,14972,93.98,0,,none,False
-car,301,PORSCHE,PORSCHE 718,14878,94.03,3,porsche-718-2020-pw2-v1|porsche-718-2024-pw2-v1|porsche-718-2020-pw2-v2,partial,True
-car,302,FORD,FORD ESCORT,14738,94.07,1,ford-escort-v1,refused,True
-car,303,CITROEN,CITROEN XSARA,14654,94.11,0,,none,False
-car,304,RENAULT,RENAULT TRAFIC,14618,94.15,0,,none,False
-car,305,ALFA ROMEO,ALFA ROMEO MITO,14596,94.19,1,alfa-romeo-mito-v1,refused,True
-car,306,MORRIS,MORRIS MINOR,14534,94.24,0,,none,False
-car,307,NISSAN,NISSAN ARIYA,14451,94.28,0,,none,False
-car,308,JAGUAR,JAGUAR X TYPE,14154,94.32,0,,none,False
-car,309,BENTLEY,BENTLEY CONTINENTAL,14126,94.36,1,bentley-continental-x-undated-v1,refused,True
-car,310,DACIA,DACIA LOGAN,14052,94.4,0,,none,False
-car,311,VOLKSWAGEN,VOLKSWAGEN CC,13725,94.44,0,,none,False
-car,312,AUDI,AUDI SQ5,13684,94.48,0,,none,False
-car,313,HYUNDAI,HYUNDAI GETZ,13503,94.52,1,hyundai-getz-2006-hyw1-v1,refused,True
-car,314,TOYOTA,TOYOTA BZ4X,13290,94.56,2,toyota-bz4x-v1|toyota-bz4x-tw1-v1,ok,True
-car,315,MERCEDES,MERCEDES VITO,13241,94.6,3,mercedes-benz-vito-v1|mercedes-benz-mercedes-vito-w5-v1|mercedes-benz-mercedes-vito-2010-w5-v1,ok,True
-car,316,CUPRA,CUPRA TERRAMAR,13115,94.63,1,cupra-terramar-v1,ok,True
-car,317,VOLKSWAGEN,VOLKSWAGEN JETTA,13106,94.67,3,volkswagen-jetta-v1|volkswagen-jetta-2010-vw2-v1|volkswagen-jetta-2019-vw2-v1,ok,True
-car,318,MERCEDES,MERCEDES V CLASS,13102,94.71,1,mercedes-benz-v-class-v1,refused,True
-car,319,SEAT,SEAT TARRACO,12994,94.75,2,seat-tarraco-2020-v1|seat-tarraco-fr-2021-w5-v1,refused,True
-car,320,VOLKSWAGEN,VOLKSWAGEN ID7,12975,94.78,0,,none,False
-car,321,FIAT,FIAT TIPO,12768,94.82,2,fiat-tipo-v1|fiat-tipo-fw1-v1,ok,True
-car,322,VOLVO,VOLVO S40,12681,94.86,0,,none,False
-car,323,VOLKSWAGEN,VOLKSWAGEN ID5,12578,94.89,1,volkswagen-id5-gtx-2022-v1,refused,True
-car,324,SUBARU,SUBARU IMPREZA,12441,94.93,1,subaru-impreza-x-2010-2012-v1,refused,True
-car,325,KIA,KIA CARENS,12308,94.97,0,,none,False
-car,326,FORD,FORD CAPRI,12097,95.0,0,,none,False
-car,327,CHEVROLET,CHEVROLET SPARK,11879,95.04,0,,none,False
-car,328,VOLKSWAGEN,VOLKSWAGEN ARTEON,11831,95.07,1,volkswagen-arteon-v1,refused,True
-car,329,JAECOO,JAECOO 5,11813,95.1,0,,none,False
-car,330,MITSUBISHI,MITSUBISHI ECLIPSE,11700,95.14,1,mitsubishi-eclipse-cross-w7-v1,partial,True
-car,331,MERCEDES-BENZ,MERCEDES-BENZ CLA CLASS,11573,95.17,1,mercedes-benz-cla-v2,partial,True
-car,332,AUDI,AUDI S5,11532,95.2,2,audi-s5-v1|audi-s5-2021-ad1-v1,ok,True
-car,333,VOLKSWAGEN,VOLKSWAGEN URBAN,11216,95.24,0,,none,False
-car,334,BYD,BYD ATTO 3,11015,95.27,2,byd-atto3-v1|byd-atto-3-2024-bw1-v1,refused,True
-car,335,KIA,KIA PROCEED,10987,95.3,1,kia-ceed-v1,refused,True
-car,336,VAUXHALL,VAUXHALL VIVARO,10962,95.33,0,,none,False
-car,337,SEAT,SEAT ALTEA,10924,95.36,0,,none,False
-car,338,MITSUBISHI,MITSUBISHI MIRAGE,10799,95.4,1,mitsubishi-mirage-v1,ok,True
-car,339,MAZDA,MAZDA CX-60,10506,95.43,0,,none,False
-car,340,JEEP,JEEP GRAND CHEROKEE,10473,95.46,5,jeep-grand-cherokee-v2|jeep-grand-cherokee-v3|jeep-grand-cherokee-jpw1-v1|jeep-grand-cherokee-jpw1-v2|jeep-grand-cherokee-2018-jpw1-v1,ok,True
-car,341,RENAULT,RENAULT KANGOO,10366,95.49,1,renault-kangoo-v1,refused,True
-car,342,KIA,KIA OPTIMA,10366,95.52,1,kia-optima-v1,refused,True
-car,343,BMW,BMW I5,10202,95.55,0,,none,False
-car,344,RENAULT,RENAULT MODUS,10133,95.57,0,,none,False
-car,345,BMW,BMW IX2,10053,95.6,0,,none,False
-car,346,TESLA,TESLA MODEL S,9996,95.63,1,tesla-model-s-v1,ok,True
-car,347,BMW,BMW M2,9947,95.66,2,bmw-m2-v1|bmw-m2-2023-bm3-v1,ok,True
-car,348,FIAT,FIAT DOBLO,9912,95.69,0,,none,False
-car,349,NISSAN,NISSAN PIXO,9814,95.72,0,,none,False
-car,350,MINI,MINI ACEMAN,9796,95.75,0,,none,False
-car,351,OMODA,OMODA E5 COMFORT,9545,95.77,0,,none,False
-car,352,SUBARU,SUBARU OUTBACK,9473,95.8,1,subaru-outback-2022-w7-v1,refused,True
-car,353,VOLKSWAGEN,VOLKSWAGEN ID BUZZ,9388,95.83,2,volkswagen-id-buzz-v1|volkswagen-id-buzz-2021-vw2-v1,partial,True
-car,354,MINI,MINI PACEMAN,9359,95.86,0,,none,False
-car,355,PEUGEOT,PEUGEOT RCZ,9341,95.88,1,peugeot-rcz-pw1-v1,partial,True
-car,356,AUDI,AUDI A8,9339,95.91,1,audi-a8-2008-v1,partial,True
-car,357,MG,MG MIDGET,9302,95.94,0,,none,False
-car,358,VOLKSWAGEN,VOLKSWAGEN EOS,9295,95.96,0,,none,False
-car,359,PORSCHE,PORSCHE CAYMAN,9255,95.99,5,porsche-718-cayman-v1|porsche-cayman-2014-pw2-v1|porsche-cayman-pw2-v1|porsche-cayman-pw2-v2|porsche-cayman-2011-pw2-v1,partial,True
-car,360,AUDI,AUDI RS3,9212,96.02,0,,none,False
-car,361,VOLKSWAGEN,VOLKSWAGEN CARAVELLE,9209,96.04,1,volkswagen-multivan-v1,refused,True
-car,362,JEEP,JEEP CHEROKEE,9065,96.07,2,jeep-cherokee-2000-jpw1-v1|jeep-cherokee-2019-jpw1-v1,refused,True
-car,363,AUDI,AUDI S4,9035,96.1,0,,none,False
-car,364,CUPRA,CUPRA TAVASCAN,8929,96.12,1,cupra-tavascan-v1,partial,True
-car,365,SUZUKI,SUZUKI S-CROSS,8920,96.15,0,,none,False
-car,366,HONDA,HONDA E,8864,96.17,0,,none,False
-car,367,PORSCHE,PORSCHE PANAMERA,8852,96.2,8,porsche-panamera-v1|porsche-panamera-2019-pw2-v1|porsche-panamera-2010-pw2-v1|porsche-panamera-pw2-v1|porsche-panamera-2010-pw2-v2|porsche-panamera-pw2-v2,ok,True
-car,368,CITROEN,CITROEN DS4,8829,96.23,0,,none,False
-car,369,MG,MG S5,8805,96.25,0,,none,False
-car,370,VOLKSWAGEN,VOLKSWAGEN FOX,8745,96.28,1,volkswagen-fox-2004-vw1-v1,ok,True
-car,371,NISSAN,NISSAN ALMERA,8603,96.3,0,,none,False
-car,372,FIAT,FIAT 600,8513,96.33,2,fiat-600-1960-fw1-v1|fiat-600-1967-fw1-v1,refused,True
-car,373,FORD,FORD EDGE,8495,96.35,0,,none,False
-car,374,KIA,KIA PRO CEED,8450,96.37,1,kia-ceed-v1,refused,True
-car,375,AUSTIN,AUSTIN MINI,8410,96.4,0,,none,False
-car,376,VOLKSWAGEN,VOLKSWAGEN TAYRON,8374,96.42,0,,none,False
-car,377,ROVER,ROVER MINI,8292,96.45,0,,none,False
-car,378,MERCEDES,MERCEDES CLC CLASS,8291,96.47,0,,none,False
-car,379,BMW,BMW Z3,8252,96.49,0,,none,False
-car,380,ALFA ROMEO,ALFA ROMEO GIULIA,8245,96.52,0,,none,False
-car,381,ASTON MARTIN,ASTON MARTIN VANTAGE,8244,96.54,0,,none,False
-car,382,MERCEDES,MERCEDES SLC CLASS,8096,96.57,0,,none,False
-car,383,HONDA,HONDA INSIGHT,7941,96.59,2,honda-insight-v1|honda-insight-2010-hw1-v1,refused,True
-car,384,SSANGYONG,SSANGYONG TIVOLI,7906,96.61,1,ssangyong-tivoli-v1,refused,True
-car,385,TOYOTA,TOYOTA MR2,7902,96.63,0,,none,False
-car,386,DACIA,DACIA SPRING,7739,96.66,0,,none,False
-car,387,SSANGYONG,SSANGYONG KORANDO,7693,96.68,0,,none,False
-car,388,PEUGEOT,PEUGEOT HORIZON,7635,96.7,0,,none,False
-car,389,JEEP,JEEP WRANGLER,7509,96.72,6,jeep-wrangler-v1|jeep-wrangler-1997-w8-v1|jeep-wrangler-jpw1-v1|jeep-wrangler-2023-jpw1-v1|jeep-wrangler-jpw1-v2|jeep-wrangler-2007-jpw1-v1,ok,True
-car,390,HONDA,HONDA ZR-V SPORT,7481,96.74,1,honda-zr-v-2023-v1,partial,True
-car,391,VOLVO,VOLVO S90,7449,96.77,0,,none,False
-car,392,BMW,BMW 8 SERIES,7415,96.79,2,bmw-8-series-v1|bmw-8-series-2020-bm2-v1,ok,True
-car,393,BMW,BMW M5,7356,96.81,4,bmw-m5-f90-undated-v1|bmw-m5-2024-bm2-v1|bmw-m5-2003-bm2-v1|bmw-m5-2025-bm3-v1,ok,True
-car,394,SUBARU,SUBARU XV,7205,96.83,1,subaru-xv-v1,refused,True
-car,395,MG,MG TF,7195,96.85,0,,none,False
-car,396,JAGUAR,JAGUAR S TYPE,7164,96.87,0,,none,False
-car,397,TOYOTA,TOYOTA CELICA,7104,96.89,1,toyota-celica-1981-tw1-v1,refused,True
-car,398,HYUNDAI,HYUNDAI I800,7092,96.91,0,,none,False
-car,399,CITROEN,CITROEN SPACETOURER,7088,96.93,0,,none,False
-car,400,VOLVO,VOLVO C40,6996,96.95,0,,none,False
-car,401,MAZDA,MAZDA 5,6995,96.97,0,,none,False
-car,402,BMW,BMW X7,6786,96.99,2,bmw-x7-v1|bmw-x7-m60i-bm1-v1,ok,True
-car,403,VOLVO,VOLVO EX40,6719,97.01,0,,none,False
-car,404,VOLKSWAGEN,VOLKSWAGEN MULTIVAN,6566,97.03,1,volkswagen-multivan-v1,refused,True
-car,405,MAZDA,MAZDA MX-30,6553,97.05,1,mazda-mx-3-mzw1-v1,refused,True
-car,406,DS,DS DS4,6532,97.07,0,,none,False
-car,407,LEXUS,LEXUS ES,6530,97.09,1,lexus-es-v1,partial,True
-car,408,LEXUS,LEXUS GS,6474,97.11,0,,none,False
-car,409,SUZUKI,SUZUKI BALENO,6429,97.13,1,suzuki-baleno-v1,refused,True
-car,410,PEUGEOT,PEUGEOT 408,6375,97.14,0,,none,False
-car,411,CITROEN,CITROEN E-C3,6257,97.16,1,citroen-e-c3-v1,refused,True
-car,412,TOYOTA,TOYOTA GT86,6241,97.18,2,toyota-gt86-v1|toyota-gt86-tw1-v1,ok,True
-car,413,MERCEDES,MERCEDES 200,6215,97.2,0,,none,False
-car,414,MITSUBISHI,MITSUBISHI LANCER,6137,97.22,1,mitsubishi-lancer-evolution-v1,ok,True
-car,415,JAGUAR,JAGUAR E TYPE,6126,97.23,3,jaguar-e-type-v1|jaguar-e-type-1963-jgw1-v1|jaguar-e-type-1971-jgw1-v1,partial,True
-car,416,AUDI,AUDI RS4,6104,97.25,2,audi-rs4-v1|audi-rs4-v2,partial,True
-car,417,CHEVROLET,CHEVROLET MATIZ,6040,97.27,0,,none,False
-car,418,HYUNDAI,HYUNDAI INSTER,6017,97.29,0,,none,False
-car,419,TRIUMPH,TRIUMPH STAG,5992,97.3,0,,none,False
-car,420,TESLA,TESLA MODEL X,5947,97.32,1,tesla-model-x-v1,partial,True
-car,421,CHEVROLET,CHEVROLET AVEO,5921,97.34,0,,none,False
-car,422,LEAPMOTOR,LEAPMOTOR C10,5878,97.35,0,,none,False
-car,423,CITROEN,CITROEN C2,5869,97.37,0,,none,False
-car,424,RENAULT,RENAULT LAGUNA,5846,97.39,0,,none,False
-car,425,KIA,KIA EV9,5802,97.41,1,kia-ev9-v1,partial,True
-car,426,AUDI,AUDI RS6,5657,97.42,1,audi-rs6-v1,ok,True
-car,427,OMODA,OMODA 5 KNIGHT AUTO,5648,97.44,0,,none,False
-car,428,CUPRA,CUPRA ATECA,5616,97.45,1,cupra-ateca-v1,refused,True
-car,429,DS,DS DS7,5585,97.47,0,,none,False
-car,430,DACIA,DACIA BIGSTER,5581,97.49,0,,none,False
-car,431,VOLVO,VOLVO C70,5578,97.5,1,volvo-c70-2000-vow1-v1,refused,False
-car,432,MINI,MINI ROADSTER,5537,97.52,0,,none,False
-car,433,SAAB,SAAB 9-5,5514,97.53,0,,none,False
-car,434,VOLVO,VOLVO S80,5421,97.55,0,,none,False
-car,435,ABARTH,ABARTH 500,5401,97.57,0,,none,False
-car,436,TOYOTA,TOYOTA ESTIMA,5357,97.58,0,,none,False
-car,437,ROVER,ROVER 75,5151,97.6,0,,none,False
-car,438,TOYOTA,TOYOTA GR YARIS,5129,97.61,2,toyota-yaris-v1|toyota-gr-yaris-2021-tw2-v1,partial,True
-car,439,SUZUKI,SUZUKI WAGON R+,5124,97.63,0,,none,False
-car,440,SEAT,SEAT TOLEDO,5122,97.64,2,seat-toledo-1999-st1-v1|seat-toledo-2004-st1-v1,partial,False
-car,441,PEUGEOT,PEUGEOT 407,5087,97.66,1,peugeot-407-w9-v1,ok,True
-car,442,OMODA,OMODA 9 NOBLE PHEV AUTO,5087,97.67,0,,none,False
-car,443,AUDI,AUDI A2,5048,97.68,1,audi-a2-v1,refused,True
-car,444,MINI,MINI FIRST,4944,97.7,0,,none,False
-car,445,FORD,FORD CORTINA,4931,97.71,0,,none,False
-car,446,KIA,KIA EV4,4883,97.73,0,,none,False
-car,447,LEXUS,LEXUS RZ,4776,97.74,0,,none,False
-car,448,TOYOTA,TOYOTA URBAN CRUISER,4760,97.76,0,,none,False
-car,449,KIA,KIA EV5,4740,97.77,0,,none,False
-car,450,ALFA ROMEO,ALFA ROMEO STELVIO,4735,97.78,0,,none,False
-car,451,FORD,FORD TRANSIT CUSTOM,4719,97.8,0,,none,False
-car,452,TRIUMPH,TRIUMPH SPITFIRE,4672,97.81,0,,none,False
-car,453,INFINITI,INFINITI Q30,4647,97.82,0,,none,False
-car,454,SEAT,SEAT EXEO,4575,97.84,2,seat-exeo-2009-st1-v1|seat-exeo-2009-st1-v2,refused,False
-car,455,HONDA,HONDA FR-V,4559,97.85,0,,none,False
-car,456,DAIHATSU,DAIHATSU SIRION,4518,97.86,0,,none,False
-car,457,LOTUS,LOTUS ELISE,4507,97.88,0,,none,False
-car,458,SUZUKI,SUZUKI SWACE,4467,97.89,1,suzuki-swace-v1,partial,True
-car,459,AUDI,AUDI SQ7,4390,97.9,0,,none,False
-car,460,BENTLEY,BENTLEY BENTAYGA,4281,97.91,1,bentley-bentayga-v1,refused,True
-car,461,MERCEDES-BENZ,MERCEDES-BENZ EQE CLASS,4150,97.93,1,mercedes-benz-eqe-w8-v1,refused,True
-car,462,SHINERAY,SHINERAY STARRAY,4127,97.94,0,,none,False
-car,463,HONDA,HONDA S2000,4102,97.95,2,honda-s2000-v1|honda-s2000-1999-hw1-v1,ok,True
-car,464,VAUXHALL,VAUXHALL TIGRA,4098,97.96,0,,none,False
-car,465,MERCEDES,MERCEDES EQE CLASS,4084,97.97,1,mercedes-benz-eqe-w8-v1,refused,True
-car,466,MORRIS,MORRIS MINI,4062,97.98,0,,none,False
-car,467,TRIUMPH,TRIUMPH TR6,4057,98.0,0,,none,False
-car,468,VOLKSWAGEN,VOLKSWAGEN LUPO,4055,98.01,0,,none,False
-car,469,CHRYSLER,CHRYSLER YPSILON,4039,98.02,0,,none,False
-car,470,MERCEDES,MERCEDES VIANO,3964,98.03,0,,none,False
-car,471,MG,MG MGF,3896,98.04,0,,none,False
-car,472,HYUNDAI,HYUNDAI AMICA,3878,98.05,0,,none,False
-car,473,PEUGEOT,PEUGEOT TRAVELLER,3864,98.07,0,,none,False
-car,474,VOLKSWAGEN,VOLKSWAGEN BORA,3824,98.08,0,,none,False
-car,475,HYUNDAI,HYUNDAI COUPE,3743,98.09,0,,none,False
-car,476,ASTON MARTIN,ASTON MARTIN DB9,3734,98.1,0,,none,False
-car,477,CHRYSLER,CHRYSLER GRAND VOYAGER,3715,98.11,0,,none,False
-car,478,CHEVROLET,CHEVROLET CRUZE,3695,98.12,0,,none,False
-car,479,AUDI,AUDI RS5,3690,98.13,2,audi-rs5-2021-ad1-v1|audi-rs5-2020-ad1-v1,refused,False
-car,480,CITROEN,CITROEN DS5,3633,98.14,0,,none,False
-car,481,SSANGYONG,SSANGYONG REXTON,3622,98.15,0,,none,False
-car,482,TOYOTA,TOYOTA PROACE,3609,98.16,1,toyota-proace-v1,refused,True
-car,483,MERCEDES,MERCEDES GLS CLASS,3582,98.17,1,mercedes-benz-gls-2022-v1,refused,True
-car,484,NISSAN,NISSAN PATHFINDER,3563,98.18,2,nissan-pathfinder-nw1-v1|nissan-pathfinder-2024-nw1-v1,refused,True
-car,485,FIAT,FIAT QUBO,3562,98.19,0,,none,False
-car,486,AUDI,AUDI R8,3553,98.2,0,,none,False
-car,487,SUBARU,SUBARU LEGACY,3539,98.21,1,subaru-legacy-2010-sbw1-v1,ok,True
-car,488,HONDA,HONDA CR-Z,3528,98.22,1,honda-cr-z-2011-hw1-v1,refused,True
-car,489,RENAULT,RENAULT KOLEOS,3518,98.23,1,renault-koleos-2008-w7-v1,refused,True
-car,490,SMART,SMART 1,3449,98.24,0,,none,False
-car,491,NISSAN,NISSAN 350,3438,98.25,1,nissan-350z-2006-v1,ok,True
-car,492,AUDI,AUDI RSQ3,3425,98.26,0,,none,False
-car,493,FORD,FORD INDEPENDENCE,3412,98.27,0,,none,False
-car,494,RENAULT,RENAULT 4,3349,98.28,0,,none,False
-car,495,CHEVROLET,CHEVROLET CAPTIVA,3341,98.29,0,,none,False
-car,496,SMART,SMART CITY,3325,98.3,0,,none,False
-car,497,PEUGEOT,PEUGEOT 106,3312,98.31,0,,none,False
-car,498,MASERATI,MASERATI GHIBLI,3249,98.32,0,,none,False
-car,499,MERCEDES,MERCEDES CLE CLASS,3237,98.33,0,,none,False
-car,500,CHRYSLER,CHRYSLER 300C,3217,98.34,1,chrysler-300c-crw1-v1,ok,False
-car,501,ALPINE,ALPINE A290,3192,98.35,0,,none,False
-car,502,KIA,KIA SEDONA,3161,98.36,0,,none,False
-car,503,NISSAN,NISSAN NV200,3133,98.37,2,nissan-nv200-v1|nissan-nv200-2010-w5-v1,refused,True
-car,504,POLESTAR,POLESTAR 3,3107,98.38,0,,none,False
-car,505,LEAPMOTOR,LEAPMOTOR B10,3037,98.38,0,,none,False
-car,506,ALFA ROMEO,ALFA ROMEO JUNIOR,2985,98.39,1,alfa-romeo-milano-2023-v1,refused,True
-car,507,MASERATI,MASERATI LEVANTE,2983,98.4,1,maserati-levante-v1,ok,True
-car,508,PEUGEOT,PEUGEOT EXPERT,2974,98.41,0,,none,False
-car,509,CITROEN,CITROEN 2CV,2954,98.42,0,,none,False
-car,510,FIAT,FIAT 124,2896,98.43,2,fiat-124-1966-fw1-v1|fiat-124-1972-fw1-v1,refused,True
-car,511,RENAULT,RENAULT MASTER,2889,98.44,1,renault-master-v1,refused,True
-car,512,MERCEDES,MERCEDES 300,2880,98.44,1,mercedes-benz-300-sl-mw1-v1,refused,True
-car,513,DAIHATSU,DAIHATSU TERIOS,2850,98.45,0,,none,False
-car,514,BMW,BMW Z4 M,2836,98.46,2,bmw-z4-2008-v1|bmw-z4-m40i-2019-v1,ok,True
-car,515,LOTUS,LOTUS ELETRE,2828,98.47,0,,none,False
-car,516,MERCEDES,MERCEDES GL CLASS,2781,98.48,2,mercedes-benz-gl-class-2011-mw1-v1|mercedes-benz-gl-class-2012-mw1-v1,partial,True
-car,517,CHEVROLET,CHEVROLET ORLANDO,2779,98.49,0,,none,False
-car,518,GENESIS,GENESIS GV60,2743,98.49,0,,none,False
-car,519,LOTUS,LOTUS ELAN,2728,98.5,0,,none,False
-car,520,PEUGEOT,PEUGEOT 306,2705,98.51,0,,none,False
-car,521,AUDI,AUDI S1,2684,98.52,1,audi-s1-ad1-v1,partial,True
-car,522,SHINERAY,SHINERAY EX5,2683,98.52,0,,none,False
-car,523,ALFA ROMEO,ALFA ROMEO TONALE,2676,98.53,1,alfa-romeo-tonale-v1,refused,True
-car,524,ALFA ROMEO,ALFA ROMEO SPIDER,2673,98.54,0,,none,False
-car,525,CITROEN,CITROEN E-BERLINGO,2656,98.55,0,,none,False
-car,526,MG,MG GS,2656,98.56,0,,none,False
-car,527,SUZUKI,SUZUKI E VITARA,2655,98.56,0,,none,False
-car,528,MERCEDES-BENZ,MERCEDES-BENZ E CLASS,2651,98.57,6,mercedes-benz-e-class-w213-undated-v1|mercedes-benz-e-class-w12-v1|mercedes-benz-e-class-2022-w12-v1|mercedes-benz-e-class-mw1-v1|mercedes-benz-e-class-mw1-v5|mercedes-benz-e-class-2010-mw1-v1,ok,True
-car,529,LEXUS,LEXUS LS,2645,98.58,1,lexus-ls-2018-w7-v1,ok,True
-car,530,TRIUMPH,TRIUMPH HERALD,2645,98.59,0,,none,False
-car,531,FIAT,FIAT BRAVO,2638,98.59,1,fiat-bravo-2011-w6-v1,ok,True
-car,532,FORD,FORD ANGLIA,2628,98.6,0,,none,False
-car,533,TOYOTA,TOYOTA PREVIA,2611,98.61,0,,none,False
-car,534,VAUXHALL,VAUXHALL CASCADA,2601,98.62,0,,none,False
-car,535,PEUGEOT,PEUGEOT 205,2555,98.62,3,peugeot-205-v1|peugeot-205-1997-pw1-v1|peugeot-205-pw1-v1,ok,True
-car,536,ASTON MARTIN,ASTON MARTIN DB11,2483,98.63,0,,none,False
-car,537,MERCEDES-BENZ,MERCEDES-BENZ EQA CLASS,2474,98.64,0,,none,False
-car,538,BMW,BMW X3 M,2463,98.64,0,,none,False
-car,539,FORD,FORD SIERRA,2442,98.65,0,,none,False
-car,540,OMODA,OMODA 7,2432,98.66,0,,none,False
-car,541,RENAULT,RENAULT RAFALE,2419,98.67,0,,none,False
-car,542,AUSTIN-MORRIS,AUSTIN-MORRIS MINI,2394,98.67,0,,none,False
-car,543,TOYOTA,TOYOTA STARLET,2384,98.68,0,,none,False
-car,544,CITROEN,CITROEN E-C4,2371,98.69,0,,none,False
-car,545,SSANGYONG,SSANGYONG RODIUS,2336,98.69,0,,none,False
-car,546,LEXUS,LEXUS RC,2313,98.7,1,lexus-rc-v1,partial,True
-car,547,LAMBORGHINI,LAMBORGHINI URUS,2295,98.71,1,lamborghini-urus-x-2017-2019-v1,refused,True
-car,548,PEUGEOT,PEUGEOT BOXER,2293,98.71,1,peugeot-boxer-v1,refused,True
-car,549,AUDI,AUDI SQ2,2261,98.72,0,,none,False
-car,550,BYD,BYD ATTO 2,2251,98.73,1,byd-atto-2-2024-bw1-v1,partial,False
-car,551,MERCEDES,MERCEDES 190,2246,98.73,0,,none,False
-car,552,MERCEDES-BENZ,MERCEDES-BENZ EQB CLASS,2241,98.74,0,,none,False
-car,553,HYUNDAI,HYUNDAI VELOSTER,2233,98.75,2,hyundai-veloster-n-2022-hyw1-v1|hyundai-veloster-turbo-2013-hyw1-v1,ok,True
-car,554,MG,MG IM5,2231,98.75,0,,none,False
-car,555,TOYOTA,TOYOTA SUPRA,2197,98.76,3,toyota-gr-supra-v1|toyota-supra-tw1-v1|toyota-supra-tw1-v2,ok,True
-car,556,INFINITI,INFINITI Q50,2183,98.76,0,,none,False
-car,557,CITROEN,CITROEN SAXO,2166,98.77,0,,none,False
-car,558,MERCEDES-BENZ,MERCEDES-BENZ V CLASS,2144,98.78,1,mercedes-benz-v-class-v1,refused,True
-car,559,BMW,BMW I7,2136,98.78,1,bmw-i7-2023-bm3-v1,refused,True
-car,560,KIA,KIA STINGER,2133,98.79,1,kia-stinger-v1,partial,True
-car,561,PORSCHE,PORSCHE 944,2132,98.8,1,porsche-944-1991-pw2-v1,refused,True
-car,562,NISSAN,NISSAN 370,2130,98.8,6,nissan-370z-2020-nw1-v1|nissan-370z-2018-nw1-v1|nissan-370z-nw1-v1|nissan-370z-2013-nw1-v1|nissan-370z-2015-nw1-v1|nissan-370z-2018-nw1-v2,ok,True
-car,563,HYUNDAI,HYUNDAI MATRIX,2129,98.81,0,,none,False
-car,564,AUSTIN,AUSTIN SEVEN,2123,98.81,0,,none,False
-car,565,TOYOTA,TOYOTA NOAH,2123,98.82,0,,none,False
-car,566,AUSTIN,AUSTIN HEALEY,2122,98.83,0,,none,False
-car,567,TVR,TVR CHIMAERA,2107,98.83,0,,none,False
-car,568,FORD,FORD TRANSIT,2098,98.84,1,ford-transit-courier-2025-fow1-v1,partial,False
-car,569,NISSAN,NISSAN GT-R,2093,98.84,27,nissan-gt-r-v1|nissan-gt-r-nw1-v1|nissan-gt-r-2002-nw1-v1|nissan-gt-r-2018-nw1-v1|nissan-gt-r-1999-nw1-v1|nissan-gt-r-nw1-v2,ok,True
-car,570,CITROEN,CITROEN NEMO,2077,98.85,0,,none,False
-car,571,ALFA ROMEO,ALFA ROMEO 159,2072,98.86,0,,none,False
-car,572,MERCEDES,MERCEDES EQS CLASS,2046,98.86,0,,none,False
-car,573,MERCEDES,MERCEDES CL CLASS,2042,98.87,0,,none,False
-car,574,BMW,BMW I8,2036,98.87,1,bmw-i8-bm3-v1,partial,True
-car,575,MORGAN,MORGAN 4/4,2034,98.88,0,,none,False
-car,576,TRIUMPH,TRIUMPH TR4,2008,98.89,0,,none,False
-car,577,PEUGEOT,PEUGEOT 406,1996,98.89,0,,none,False
-car,578,VOLVO,VOLVO 940,1989,98.9,0,,none,False
-car,579,MERCEDES,MERCEDES SPRINTER,1985,98.9,2,mercedes-benz-sprinter-v1|mercedes-benz-sprinter-w7-v1,partial,True
-car,580,MAZDA,MAZDA RX-8,1943,98.91,2,mazda-rx-8-v1|mazda-rx-8-2011-mzw1-v1,ok,True
-car,581,FORD,FORD POPULAR,1925,98.91,0,,none,False
-car,582,SMART,SMART ROADSTER,1910,98.92,0,,none,False
-car,583,CHANGAN,CHANGAN DEEPAL,1903,98.93,0,,none,False
-car,584,ROVER,ROVER 25,1870,98.93,0,,none,False
-car,585,ASTON MARTIN,ASTON MARTIN DBX,1867,98.94,1,aston-martin-dbx-v1,refused,True
-car,586,LEAPMOTOR,LEAPMOTOR T03,1851,98.94,0,,none,False
-car,587,VOLKSWAGEN,VOLKSWAGEN CALIFORNIA,1843,98.95,0,,none,False
-car,588,NISSAN,NISSAN PRIMERA,1839,98.95,1,nissan-primera-1990-nw1-v1,refused,True
-car,589,MG,MG A,1834,98.96,0,,none,False
-car,590,AUDI,AUDI S6,1827,98.96,0,,none,False
-car,591,PEUGEOT,PEUGEOT BIPPER,1773,98.97,0,,none,False
-car,592,GENESIS,GENESIS GV70,1769,98.97,0,,none,False
-car,593,TOYOTA,TOYOTA VELLFIRE,1764,98.98,1,toyota-vellfire-v1,refused,True
-car,594,BMW,BMW X5 M,1758,98.98,1,bmw-x5-m-2020-bm3-v1,refused,True
-car,595,SAAB,SAAB 900,1754,98.99,0,,none,False
-car,596,RENAULT,RENAULT WIND ROADSTER,1740,98.99,0,,none,False
-car,597,HONDA,HONDA STEPWAGON,1725,99.0,0,,none,False
-car,598,CHEVROLET GMC,CHEVROLET GMC CORVETTE,1718,99.0,0,,none,False
+car,97,FORD,FORD C-MAX,98574,71.28,0,,none,False
+car,98,PEUGEOT,PEUGEOT 107,97600,71.56,0,,none,False
+car,99,LAND ROVER,LAND ROVER FREELANDER,96579,71.84,0,,none,False
+car,100,KIA,KIA RIO,96283,72.12,0,,none,False
+car,101,MINI,MINI ONE,95748,72.4,0,,none,False
+car,102,VOLVO,VOLVO XC90,95535,72.67,1,volvo-xc90-v1,ok,True
+car,103,VOLVO,VOLVO V40,93494,72.94,1,volvo-v40-2018-vow1-v1,ok,True
+car,104,MAZDA,MAZDA CX-5,93284,73.21,2,mazda-cx-5-2017-w7-v1|mazda-cx-5-2020-mzw1-v1,ok,True
+car,105,RENAULT,RENAULT MEGANE,92288,73.48,1,renault-megane-v1,partial,True
+car,106,PEUGEOT,PEUGEOT 207,92086,73.75,3,peugeot-207-pw1-v1|peugeot-207-pw1-v2|peugeot-207-pw1-v3,ok,True
+car,107,LAND ROVER,LAND ROVER RANGE ROVER,90764,74.01,8,land-rover-range-rover-sport-2018-w5-v1|land-rover-range-rover-sport-2015-rr1-v1|land-rover-range-rover-sport-2018-rr1-v1|land-rover-range-rover-sport-2023-rr1-v1|land-rover-range-rover-law1-v1|land-rover-range-rover-law1-v2,ok,True
+car,108,VAUXHALL,VAUXHALL CROSSLAND,86267,74.26,0,,none,False
+car,109,MAZDA,MAZDA MX-5,85523,74.51,6,mazda-mx-5-2015-v1|mazda-mx-5-2014-w5-v1|mazda-mx-5-w6-v1|mazda-mx-5-1989-mzw1-v1|mazda-mx-5-1998-mzw1-v1|mazda-mx-5-2009-mzw1-v1,ok,True
+car,110,JAGUAR,JAGUAR XF SERIES,85008,74.75,0,,none,False
+car,111,SUZUKI,SUZUKI VITARA,84305,75.0,1,suzuki-vitara-2024-v1,partial,True
+car,112,SEAT,SEAT ARONA,83832,75.24,1,seat-arona-2022-v1,refused,True
+car,113,SKODA,SKODA KODIAQ,83611,75.48,1,skoda-kodiaq-2020-w12-v1,ok,False
+car,114,FIAT,FIAT PANDA,78137,75.71,1,fiat-panda-fw1-v2,refused,True
+car,115,SKODA,SKODA SUPERB,76842,75.93,2,skoda-superb-v1|skoda-superb-2009-w5-v1,ok,True
+car,116,PEUGEOT,PEUGEOT 108,75416,76.15,0,,none,False
+car,117,SEAT,SEAT ATECA,73948,76.36,1,seat-ateca-2020-v1,refused,True
+car,118,SKODA,SKODA YETI,72789,76.57,0,,none,False
+car,119,LAND ROVER,LAND ROVER DEFENDER,72612,76.78,5,land-rover-defender-w5-v1|land-rover-defender-w6-v1|land-rover-defender-2021-w6-v1|land-rover-defender-2021-w7-v1|land-rover-defender-w7-v1,partial,True
+car,120,HYUNDAI,HYUNDAI IONIQ,71573,76.99,2,hyundai-ioniq-6-w5-v1|hyundai-ioniq-5-n-2024-hyw1-v1,ok,True
+car,121,VAUXHALL,VAUXHALL MERIVA,69733,77.19,0,,none,False
+car,122,JAGUAR,JAGUAR F-PACE,69526,77.39,0,,none,False
+car,123,MERCEDES,MERCEDES B CLASS,67395,77.59,0,,none,False
+car,124,RENAULT,RENAULT KADJAR,67117,77.78,1,renault-kadjar-v1,partial,True
+car,125,MITSUBISHI,MITSUBISHI OUTLANDER,66418,77.97,0,,none,False
+car,126,AUDI,AUDI Q4,64323,78.16,1,audi-q4-e-tron-v1,refused,True
+car,127,MINI,MINI CLUBMAN,62292,78.34,1,mini-clubman-v1,refused,True
+car,128,CITROEN,CITROEN DS3,62061,78.52,0,,none,False
+car,129,FORD,FORD S-MAX,62029,78.7,1,ford-s-max-v1,partial,True
+car,130,VOLKSWAGEN,VOLKSWAGEN TOURAN,61882,78.88,0,,none,False
+car,131,PEUGEOT,PEUGEOT 5008,61844,79.06,0,,none,False
+car,132,HONDA,HONDA HR-V,61782,79.23,3,honda-hr-v-v1|honda-hr-v-2025-hw1-v1|honda-hr-v-2001-hw1-v1,partial,True
+car,133,AUDI,AUDI TT,60322,79.41,1,audi-tt-rs-2006-ad1-v1,ok,True
+car,134,NISSAN,NISSAN LEAF,60320,79.58,1,nissan-leaf-2023-v1,refused,True
+car,135,SKODA,SKODA KAMIQ,60022,79.76,2,skoda-kamiq-v1|skoda-kamiq-2020-w12-v1,partial,True
+car,136,KIA,KIA STONIC,59047,79.93,1,kia-stonic-v1,ok,True
+car,137,CUPRA,CUPRA FORMENTOR,59032,80.1,2,cupra-formentor-2022-v1|cupra-formentor-2021-w5-v1,ok,True
+car,138,PORSCHE,PORSCHE 911,58777,80.27,55,porsche-911-carrera-4s-v1|porsche-911-2021-pw2-v1|porsche-911-2018-pw2-v1|porsche-911-pw2-v1|porsche-911-2021-pw2-v2|porsche-911-2014-pw2-v1,ok,True
+car,139,VOLKSWAGEN,VOLKSWAGEN T-CROSS,58579,80.44,2,volkswagen-t-cross-2021-v1|volkswagen-t-cross-vw2-v1,partial,True
+car,140,FORD,FORD TOURNEO,58494,80.61,0,,none,False
+car,141,PORSCHE,PORSCHE MACAN,57864,80.78,6,porsche-macan-v1|porsche-macan-2020-pw2-v1|porsche-macan-2022-pw2-v1|porsche-macan-pw2-v1|porsche-macan-2022-pw2-v2|porsche-macan-2022-pw2-v3,ok,True
+car,142,MG,MG 3,57075,80.94,1,mg-3-2025-v1,ok,True
+car,143,MERCEDES,MERCEDES AMG CLASS,55606,81.1,0,,none,False
+car,144,VOLKSWAGEN,VOLKSWAGEN ID3,55453,81.26,1,volkswagen-id3-gtx-2024-v1,refused,True
+car,145,VAUXHALL,VAUXHALL ADAM,54974,81.42,0,,none,False
+car,146,AUDI,AUDI Q7,53679,81.58,0,,none,False
+car,147,SMART,SMART FORTWO,52508,81.73,1,smart-fortwo-v1,ok,True
+car,148,BYD,BYD SEAL,51684,81.88,2,byd-seal-v1|byd-seal-2024-w12-v1,refused,True
+car,149,TOYOTA,TOYOTA AVENSIS,51671,82.03,2,toyota-avensis-tw1-v1|toyota-avensis-tw1-v2,ok,True
+car,150,CITROEN,CITROEN BERLINGO,51616,82.18,0,,none,False
+car,151,FORD,FORD B-MAX,51391,82.32,0,,none,False
+car,152,SKODA,SKODA CITIGO,51288,82.47,0,,none,False
+car,153,MG,MG 4,51072,82.62,2,mg-4-2025-v1|mg-mg4-v1,ok,True
+car,154,SUZUKI,SUZUKI SX,50421,82.77,0,,none,False
+car,155,MAZDA,MAZDA 6,50111,82.91,0,,none,False
+car,156,LAND ROVER,LAND ROVER RANGE ROVER VELAR,49644,83.06,8,land-rover-range-rover-sport-2018-w5-v1|land-rover-range-rover-sport-2015-rr1-v1|land-rover-range-rover-sport-2018-rr1-v1|land-rover-range-rover-sport-2023-rr1-v1|land-rover-range-rover-law1-v1|land-rover-range-rover-law1-v2,ok,True
+car,157,HYUNDAI,HYUNDAI IX35,49628,83.2,0,,none,False
+car,158,JAECOO,JAECOO 7,49553,83.34,0,,none,False
+car,159,MERCEDES,MERCEDES SLK CLASS,48362,83.48,0,,none,False
+car,160,SKODA,SKODA ENYAQ,47813,83.62,0,,none,False
+car,161,FORD,FORD GALAXY,47163,83.76,0,,none,False
+car,162,FIAT,FIAT PUNTO,46259,83.89,2,fiat-punto-2009-fw1-v1|fiat-punto-fw1-v1,ok,True
+car,163,LEXUS,LEXUS NX,46073,84.02,1,lexus-nx-2017-w7-v1,partial,True
+car,164,MAZDA,MAZDA CX-30,45519,84.16,1,mazda-cx-30-2020-v1,refused,True
+car,165,KIA,KIA VENGA,45013,84.29,0,,none,False
+car,166,AUDI,AUDI TTS,43746,84.41,1,audi-tts-ad1-v1,partial,True
+car,167,VOLKSWAGEN,VOLKSWAGEN SCIROCCO,43705,84.54,1,volkswagen-scirocco-v1,ok,True
+car,168,BMW,BMW I4,43668,84.67,1,bmw-i4-v1,refused,True
+car,169,VOLVO,VOLVO V60,43212,84.79,3,volvo-v60-2020-v1|volvo-v60-2013-w12-v1|volvo-v60-vow1-v1,ok,True
+car,170,VOLKSWAGEN,VOLKSWAGEN BEETLE,42510,84.91,1,volkswagen-beetle-v1,partial,True
+car,171,HYUNDAI,HYUNDAI SANTA FE,42391,85.04,2,hyundai-santa-fe-2020-v1|hyundai-santa-fe-w7-v1,ok,True
+car,172,SUZUKI,SUZUKI ALTO,42275,85.16,2,suzuki-alto-2020-v1|suzuki-alto-2024-w5-v1,ok,True
+car,173,KIA,KIA XCEED,41918,85.28,0,,none,False
+car,174,VOLKSWAGEN,VOLKSWAGEN TOUAREG,41833,85.4,1,volkswagen-touareg-v1,partial,True
+car,175,JAGUAR,JAGUAR XE SERIES,41666,85.52,0,,none,False
+car,176,PORSCHE,PORSCHE CAYENNE,41126,85.64,6,porsche-cayenne-v1|porsche-cayenne-v2|porsche-cayenne-v3|porsche-cayenne-2009-pw2-v1|porsche-cayenne-2020-pw2-v1|porsche-cayenne-2010-pw2-v1,ok,True
+car,177,VOLKSWAGEN,VOLKSWAGEN ID4,40864,85.76,1,volkswagen-id4-v1,partial,True
+car,178,KIA,KIA SORENTO,40246,85.87,0,,none,False
+car,179,FORD,FORD FUSION,39543,85.99,0,,none,False
+car,180,RENAULT,RENAULT SCENIC,39166,86.1,1,renault-scenic-1998-rew1-v1,refused,True
+car,181,MERCEDES,MERCEDES GLE CLASS,39079,86.22,1,mercedes-benz-gle-v1,partial,True
+car,182,LEXUS,LEXUS RX,38494,86.33,1,lexus-rx-v1,partial,True
+car,183,CITROEN,CITROEN C5,38376,86.44,1,citroen-c5-2022-v1,partial,True
+car,184,POLESTAR,POLESTAR 2,38163,86.55,2,polestar-2-v1|polestar-2-w7-v1,partial,True
+car,185,VAUXHALL,VAUXHALL VIVA,37748,86.66,0,,none,False
+car,186,AUDI,AUDI S3,36880,86.76,2,audi-s3-v1|audi-s3-ad1-v1,ok,True
+car,187,FORD,FORD KA+,36269,86.87,1,ford-ka-sedan-2015-w5-v1,ok,True
+car,188,DS,DS DS3,36039,86.97,0,,none,False
+car,189,SUZUKI,SUZUKI IGNIS,35134,87.08,2,suzuki-ignis-v1|suzuki-ignis-2022-w5-v1,ok,True
+car,190,JAGUAR,JAGUAR E-PACE,35058,87.18,0,,none,False
+car,191,MERCEDES,MERCEDES EQA CLASS,34470,87.28,0,,none,False
+car,192,VOLVO,VOLVO V70,33616,87.37,0,,none,False
+car,193,FORD,FORD GRAND C-MAX,32287,87.47,0,,none,False
+car,194,VOLKSWAGEN,VOLKSWAGEN TAIGO,31459,87.56,1,volkswagen-taigo-2022-v1,refused,True
+car,195,CUPRA,CUPRA BORN,31456,87.65,0,,none,False
+car,196,BMW,BMW Z4,31382,87.74,2,bmw-z4-2008-v1|bmw-z4-m40i-2019-v1,ok,True
+car,197,LEXUS,LEXUS IS,31284,87.83,0,,none,False
+car,198,VAUXHALL,VAUXHALL AGILA,30525,87.92,0,,none,False
+car,199,LEXUS,LEXUS CT,29839,88.0,0,,none,False
+car,200,HYUNDAI,HYUNDAI IX20,28877,88.09,0,,none,False
+car,201,JEEP,JEEP RENEGADE,28528,88.17,1,jeep-renegade-2021-w6-v1,ok,True
+car,202,JAGUAR,JAGUAR I-PACE,28401,88.25,2,jaguar-i-pace-v1|jaguar-i-pace-jgw1-v1,partial,True
+car,203,BMW,BMW X2,28357,88.34,1,bmw-x2-v1,ok,True
+car,204,VOLKSWAGEN,VOLKSWAGEN SHARAN,28256,88.42,1,volkswagen-sharan-vw1-v1,partial,True
+car,205,FORD,FORD MUSTANG,28133,88.5,2,ford-mustang-v1|ford-mustang-2015-w12-v1,ok,True
+car,206,VOLKSWAGEN,VOLKSWAGEN CADDY,27528,88.58,1,volkswagen-caddy-2022-v1,partial,True
+car,207,MITSUBISHI,MITSUBISHI ASX,27248,88.66,3,mitsubishi-asx-v1|mitsubishi-asx-w5-v1|mitsubishi-asx-2011-w5-v1,ok,True
+car,208,SUZUKI,SUZUKI CELERIO,27047,88.73,0,,none,False
+car,209,DACIA,DACIA JOGGER,26865,88.81,0,,none,False
+car,210,RENAULT,RENAULT ZOE,26584,88.89,1,renault-zoe-2012-v1,refused,True
+car,211,SAAB,SAAB 9-3,26468,88.97,0,,none,False
+car,212,TOYOTA,TOYOTA VERSO,25840,89.04,0,,none,False
+car,213,LEXUS,LEXUS UX,25526,89.11,0,,none,False
+car,214,MG,MG B,25238,89.19,0,,none,False
+car,215,BMW,BMW I3,25229,89.26,0,,none,False
+car,216,PEUGEOT,PEUGEOT 206,25228,89.33,3,peugeot-206-v1|peugeot-206-2002-w12-v1|peugeot-206-2000-pw1-v1,ok,True
+car,217,MERCEDES,MERCEDES ML CLASS,25065,89.41,0,,none,False
+car,218,PORSCHE,PORSCHE BOXSTER,24664,89.48,3,porsche-718-boxster-v1|porsche-boxster-2010-pw2-v1|porsche-boxster-2015-pw2-v1,partial,True
+car,219,MAZDA,MAZDA CX-3,24590,89.55,1,mazda-cx-30-2020-v1,refused,True
+car,220,MERCEDES,MERCEDES GLB CLASS,24149,89.62,0,,none,False
+car,221,MINI,MINI JOHN COOPER WORKS,24133,89.69,0,,none,False
+car,222,VOLVO,VOLVO EX30,24093,89.76,0,,none,False
+car,223,KIA,KIA SOUL,23754,89.83,0,,none,False
+car,224,HYUNDAI,HYUNDAI BAYON,23735,89.9,0,,none,False
+car,225,SEAT,SEAT ALHAMBRA,23646,89.96,3,seat-alhambra-2010-st1-v1|seat-alhambra-2015-st1-v1|seat-alhambra-2000-st2-v1,partial,False
+car,226,SMART,SMART FORFOUR,23585,90.03,0,,none,False
+car,227,CHERY,CHERY TIGGO,23174,90.1,0,,none,False
+car,228,JAGUAR,JAGUAR XJ SERIES,23074,90.17,0,,none,False
+car,229,AUDI,AUDI E-TRON,23023,90.23,1,audi-e-tron-v1,partial,True
+car,230,SKODA,SKODA SCALA,22867,90.3,0,,none,False
+car,231,PORSCHE,PORSCHE TAYCAN,22754,90.36,3,porsche-taycan-pw2-v1|porsche-taycan-2025-pw2-v1|porsche-taycan-pw2-v2,partial,True
+car,232,ALFA ROMEO,ALFA ROMEO GIULIETTA,22420,90.43,1,alfa-romeo-giulietta-v1,refused,True
+car,233,FORD,FORD EXPLORER,22219,90.49,0,,none,False
+car,234,VOLVO,VOLVO V50,22016,90.56,1,volvo-v50-vow1-v1,partial,True
+car,235,MERCEDES,MERCEDES S CLASS,21814,90.62,4,mercedes-benz-s-class-v1|mercedes-benz-s-class-1979-mw1-v1|mercedes-benz-s-class-1999-mw1-v1|mercedes-benz-s-class-2003-mw1-v1,ok,True
+car,236,RENAULT,RENAULT TWINGO,21593,90.68,0,,none,False
+car,237,MITSUBISHI,MITSUBISHI SHOGUN,21519,90.75,0,,none,False
+car,238,BMW,BMW IX1,21401,90.81,0,,none,False
+car,239,SKODA,SKODA RAPID,21185,90.87,1,skoda-rapid-v1,ok,True
+car,240,ABARTH,ABARTH 595,20622,90.93,0,,none,False
+car,241,BMW,BMW IX3,20580,90.99,0,,none,False
+car,242,TOYOTA,TOYOTA LAND CRUISER,20554,91.05,3,toyota-land-cruiser-v1|toyota-land-cruiser-1998-tw1-v1|toyota-land-cruiser-2024-tw1-v1,ok,True
+car,243,SUZUKI,SUZUKI JIMNY,20409,91.11,1,suzuki-jimny-v1,refused,True
+car,244,NISSAN,NISSAN PULSAR,20249,91.16,1,nissan-pulsar-v1,refused,True
+car,245,JEEP,JEEP AVENGER,20197,91.22,0,,none,False
+car,246,MERCEDES,MERCEDES EQB CLASS,20169,91.28,0,,none,False
+car,247,BMW,BMW IX,20105,91.34,1,bmw-ix-v1,partial,True
+car,248,JAGUAR,JAGUAR XK SERIES,20057,91.4,0,,none,False
+car,249,MERCEDES,MERCEDES CLS CLASS,19933,91.46,3,mercedes-benz-cls-2022-v1|mercedes-benz-cls-2013-mw1-v1|mercedes-benz-cls-mw1-v2,ok,True
+car,250,KIA,KIA EV6,19919,91.51,2,kia-ev6-2022-v1|kia-ev6-2022-w6-v1,ok,True
+car,251,HONDA,HONDA ACCORD,19486,91.57,8,honda-accord-2021-v1|honda-accord-2017-w5-v1|honda-accord-hw1-v1|honda-accord-2021-hw1-v1|honda-accord-1998-hw1-v1|honda-accord-2011-hw1-v1,ok,True
+car,252,BMW,BMW M3,19413,91.63,4,bmw-m3-e30-undated-v1|bmw-m3-f80-2013-v1|bmw-m3-e46-v1|bmw-m3-2023-w12-v1,ok,True
+car,253,RENAULT,RENAULT ARKANA,19408,91.68,1,renault-arkana-v1,refused,True
+car,254,BMW,BMW 6 SERIES,19336,91.74,0,,none,False
+car,255,AUDI,AUDI Q6,19291,91.79,0,,none,False
+car,256,BMW,BMW X4,19288,91.85,1,bmw-x4-v1,partial,True
+car,257,HYUNDAI,HYUNDAI I40,19160,91.9,0,,none,False
+car,258,MERCEDES,MERCEDES CLK CLASS,19101,91.96,0,,none,False
+car,259,RENAULT,RENAULT SYMBIOZ,18819,92.01,0,,none,False
+car,260,PEUGEOT,PEUGEOT PARTNER,18818,92.07,0,,none,False
+car,261,PEUGEOT,PEUGEOT RIFTER,18796,92.12,0,,none,False
+car,262,RENAULT,RENAULT AUSTRAL,18467,92.18,1,renault-austral-2022-w7-v1,refused,True
+car,263,VAUXHALL,VAUXHALL FRONTERA,18391,92.23,0,,none,False
+car,264,VOLVO,VOLVO C30,18305,92.28,2,volvo-c30-v1|volvo-c30-vow1-v1,partial,True
+car,265,CUPRA,CUPRA LEON,18275,92.34,1,cupra-leon-2025-v1,refused,True
+car,266,MERCEDES,MERCEDES EQC CLASS,18223,92.39,0,,none,False
+car,267,SEAT,SEAT MII,18171,92.44,1,seat-mii-v1,refused,True
+car,268,KIA,KIA EV3,18143,92.49,0,,none,False
+car,269,VOLVO,VOLVO S60,18139,92.55,1,volvo-s60-2004-v1,ok,True
+car,270,VOLVO,VOLVO V90,17892,92.6,0,,none,False
+car,271,VOLKSWAGEN,VOLKSWAGEN TRANSPORTER,17756,92.65,1,volkswagen-transporter-2003-vw2-v1,refused,True
+car,272,RENAULT,RENAULT GRAND SCENIC,17477,92.7,0,,none,False
+car,273,PEUGEOT,PEUGEOT 508,17381,92.75,2,peugeot-508-v1|peugeot-508-w12-v1,partial,True
+car,274,SKODA,SKODA ELROQ,17342,92.8,0,,none,False
+car,275,VAUXHALL,VAUXHALL VECTRA,16638,92.85,0,,none,False
+car,276,BMW,BMW 7 SERIES,16606,92.9,1,bmw-7-series-v1,refused,True
+car,277,RENAULT,RENAULT 5,16589,92.94,0,,none,False
+car,278,JEEP,JEEP COMPASS,16559,92.99,2,jeep-compass-v1|jeep-compass-2022-w12-v1,partial,True
+car,279,MITSUBISHI,MITSUBISHI COLT,16387,93.04,0,,none,False
+car,280,POLESTAR,POLESTAR 4,16361,93.09,0,,none,False
+car,281,AUDI,AUDI A7,16317,93.13,2,audi-a7-2018-v1|audi-a7-2017-ad1-v1,ok,True
+car,282,OMODA,OMODA 5 NOBLE AUTO,16222,93.18,0,,none,False
+car,283,SUBARU,SUBARU FORESTER,16119,93.23,1,subaru-forester-2009-sbw1-v1,ok,True
+car,284,SUZUKI,SUZUKI SPLASH,16017,93.27,0,,none,False
+car,285,TOYOTA,TOYOTA IQ,15966,93.32,1,toyota-iq-tw1-v1,partial,True
+car,286,VAUXHALL,VAUXHALL COMBO,15947,93.37,0,,none,False
+car,287,SKODA,SKODA ROOMSTER,15922,93.41,0,,none,False
+car,288,AUDI,AUDI Q8,15906,93.46,1,audi-sq8-e-tron-2023-v1,ok,True
+car,289,JAGUAR,JAGUAR F-TYPE,15792,93.5,10,jaguar-f-type-v1|jaguar-f-type-v2|jaguar-f-type-jgw1-v1|jaguar-f-type-jgw1-v2|jaguar-f-type-jgw1-v3|jaguar-f-type-2016-jgw1-v1,ok,True
+car,290,PEUGEOT,PEUGEOT 307,15750,93.55,2,peugeot-307-2008-v1|peugeot-307-pw1-v1,refused,True
+car,291,MERCEDES,MERCEDES SL CLASS,15697,93.59,2,mercedes-benz-sl-class-1963-mw1-v1|mercedes-benz-sl-class-mw1-v1,partial,True
+car,292,BMW,BMW X6,15673,93.64,1,bmw-x6-2020-v1,ok,True
+car,293,SUZUKI,SUZUKI GRAND VITARA,15615,93.69,0,,none,False
+car,294,LEXUS,LEXUS LBX,15409,93.73,0,,none,False
+car,295,BYD,BYD DOLPHIN,15386,93.77,4,byd-dolphin-v1|byd-dolphin-2025-w6-v1|byd-dolphin-2021-bw1-v1|byd-dolphin-2024-bw1-v1,partial,True
+car,296,MG,MG 5,15337,93.82,1,mg-5-2025-v1,partial,True
+car,297,BYD,BYD SEALION,15275,93.86,3,byd-seal-v1|byd-seal-2024-w12-v1|byd-sealion-7-2024-bw1-v1,partial,True
+car,298,BMW,BMW M4,15258,93.91,4,bmw-m4-v1|bmw-m4-w12-v1|bmw-m4-competition-2021-bm1-v1|bmw-m4-2018-bm2-v1,ok,True
+car,299,VAUXHALL,VAUXHALL ANTARA,15024,93.95,0,,none,False
+car,300,VOLVO,VOLVO XC70,14972,93.99,0,,none,False
+car,301,PORSCHE,PORSCHE 718,14878,94.04,3,porsche-718-2020-pw2-v1|porsche-718-2024-pw2-v1|porsche-718-2020-pw2-v2,partial,True
+car,302,FORD,FORD ESCORT,14738,94.08,1,ford-escort-v1,refused,True
+car,303,CITROEN,CITROEN XSARA,14654,94.12,0,,none,False
+car,304,RENAULT,RENAULT TRAFIC,14618,94.16,0,,none,False
+car,305,ALFA ROMEO,ALFA ROMEO MITO,14596,94.21,1,alfa-romeo-mito-v1,refused,True
+car,306,MORRIS,MORRIS MINOR,14534,94.25,0,,none,False
+car,307,NISSAN,NISSAN ARIYA,14451,94.29,0,,none,False
+car,308,JAGUAR,JAGUAR X TYPE,14154,94.33,0,,none,False
+car,309,BENTLEY,BENTLEY CONTINENTAL,14126,94.37,1,bentley-continental-x-undated-v1,partial,True
+car,310,DACIA,DACIA LOGAN,14052,94.41,0,,none,False
+car,311,VOLKSWAGEN,VOLKSWAGEN CC,13725,94.45,0,,none,False
+car,312,AUDI,AUDI SQ5,13684,94.49,0,,none,False
+car,313,HYUNDAI,HYUNDAI GETZ,13503,94.53,1,hyundai-getz-2006-hyw1-v1,partial,True
+car,314,TOYOTA,TOYOTA BZ4X,13290,94.57,2,toyota-bz4x-v1|toyota-bz4x-tw1-v1,ok,True
+car,315,MERCEDES,MERCEDES VITO,13241,94.61,3,mercedes-benz-vito-v1|mercedes-benz-mercedes-vito-w5-v1|mercedes-benz-mercedes-vito-2010-w5-v1,ok,True
+car,316,CUPRA,CUPRA TERRAMAR,13115,94.65,1,cupra-terramar-v1,ok,True
+car,317,VOLKSWAGEN,VOLKSWAGEN JETTA,13106,94.68,3,volkswagen-jetta-v1|volkswagen-jetta-2010-vw2-v1|volkswagen-jetta-2019-vw2-v1,ok,True
+car,318,MERCEDES,MERCEDES V CLASS,13102,94.72,1,mercedes-benz-v-class-v1,refused,True
+car,319,SEAT,SEAT TARRACO,12994,94.76,2,seat-tarraco-2020-v1|seat-tarraco-fr-2021-w5-v1,partial,True
+car,320,VOLKSWAGEN,VOLKSWAGEN ID7,12975,94.8,0,,none,False
+car,321,FIAT,FIAT TIPO,12768,94.83,2,fiat-tipo-v1|fiat-tipo-fw1-v1,ok,True
+car,322,VOLVO,VOLVO S40,12681,94.87,0,,none,False
+car,323,VOLKSWAGEN,VOLKSWAGEN ID5,12578,94.91,1,volkswagen-id5-gtx-2022-v1,refused,True
+car,324,SUBARU,SUBARU IMPREZA,12441,94.94,1,subaru-impreza-x-2010-2012-v1,ok,True
+car,325,KIA,KIA CARENS,12308,94.98,0,,none,False
+car,326,FORD,FORD CAPRI,12097,95.01,0,,none,False
+car,327,CHEVROLET,CHEVROLET SPARK,11879,95.05,0,,none,False
+car,328,VOLKSWAGEN,VOLKSWAGEN ARTEON,11831,95.08,1,volkswagen-arteon-v1,partial,True
+car,329,JAECOO,JAECOO 5,11813,95.12,0,,none,False
+car,330,MITSUBISHI,MITSUBISHI ECLIPSE,11700,95.15,1,mitsubishi-eclipse-cross-w7-v1,partial,True
+car,331,MERCEDES-BENZ,MERCEDES-BENZ CLA CLASS,11573,95.18,1,mercedes-benz-cla-v2,partial,True
+car,332,AUDI,AUDI S5,11532,95.22,2,audi-s5-v1|audi-s5-2021-ad1-v1,ok,True
+car,333,VOLKSWAGEN,VOLKSWAGEN URBAN,11216,95.25,0,,none,False
+car,334,BYD,BYD ATTO 3,11015,95.28,2,byd-atto3-v1|byd-atto-3-2024-bw1-v1,refused,True
+car,335,KIA,KIA PROCEED,10987,95.31,1,kia-ceed-v1,refused,True
+car,336,VAUXHALL,VAUXHALL VIVARO,10962,95.34,0,,none,False
+car,337,SEAT,SEAT ALTEA,10924,95.38,0,,none,False
+car,338,MITSUBISHI,MITSUBISHI MIRAGE,10799,95.41,1,mitsubishi-mirage-v1,ok,True
+car,339,MAZDA,MAZDA CX-60,10506,95.44,0,,none,False
+car,340,JEEP,JEEP GRAND CHEROKEE,10473,95.47,5,jeep-grand-cherokee-v2|jeep-grand-cherokee-v3|jeep-grand-cherokee-jpw1-v1|jeep-grand-cherokee-jpw1-v2|jeep-grand-cherokee-2018-jpw1-v1,ok,True
+car,341,RENAULT,RENAULT KANGOO,10366,95.5,1,renault-kangoo-v1,refused,True
+car,342,KIA,KIA OPTIMA,10366,95.53,1,kia-optima-v1,refused,True
+car,343,BMW,BMW I5,10202,95.56,0,,none,False
+car,344,RENAULT,RENAULT MODUS,10133,95.59,0,,none,False
+car,345,BMW,BMW IX2,10053,95.62,0,,none,False
+car,346,TESLA,TESLA MODEL S,9996,95.65,1,tesla-model-s-v1,ok,True
+car,347,BMW,BMW M2,9947,95.67,2,bmw-m2-v1|bmw-m2-2023-bm3-v1,ok,True
+car,348,FIAT,FIAT DOBLO,9912,95.7,0,,none,False
+car,349,NISSAN,NISSAN PIXO,9814,95.73,0,,none,False
+car,350,MINI,MINI ACEMAN,9796,95.76,0,,none,False
+car,351,OMODA,OMODA E5 COMFORT,9545,95.79,0,,none,False
+car,352,SUBARU,SUBARU OUTBACK,9473,95.81,1,subaru-outback-2022-w7-v1,refused,True
+car,353,VOLKSWAGEN,VOLKSWAGEN ID BUZZ,9388,95.84,2,volkswagen-id-buzz-v1|volkswagen-id-buzz-2021-vw2-v1,partial,True
+car,354,MINI,MINI PACEMAN,9359,95.87,0,,none,False
+car,355,PEUGEOT,PEUGEOT RCZ,9341,95.9,1,peugeot-rcz-pw1-v1,partial,True
+car,356,AUDI,AUDI A8,9339,95.92,1,audi-a8-2008-v1,partial,True
+car,357,MG,MG MIDGET,9302,95.95,0,,none,False
+car,358,VOLKSWAGEN,VOLKSWAGEN EOS,9295,95.98,0,,none,False
+car,359,PORSCHE,PORSCHE CAYMAN,9255,96.0,5,porsche-718-cayman-v1|porsche-cayman-2014-pw2-v1|porsche-cayman-pw2-v1|porsche-cayman-pw2-v2|porsche-cayman-2011-pw2-v1,ok,True
+car,360,AUDI,AUDI RS3,9212,96.03,0,,none,False
+car,361,VOLKSWAGEN,VOLKSWAGEN CARAVELLE,9209,96.06,1,volkswagen-multivan-v1,refused,True
+car,362,JEEP,JEEP CHEROKEE,9065,96.08,2,jeep-cherokee-2000-jpw1-v1|jeep-cherokee-2019-jpw1-v1,partial,True
+car,363,AUDI,AUDI S4,9035,96.11,0,,none,False
+car,364,CUPRA,CUPRA TAVASCAN,8929,96.13,1,cupra-tavascan-v1,partial,True
+car,365,SUZUKI,SUZUKI S-CROSS,8920,96.16,0,,none,False
+car,366,HONDA,HONDA E,8864,96.19,0,,none,False
+car,367,PORSCHE,PORSCHE PANAMERA,8852,96.21,8,porsche-panamera-v1|porsche-panamera-2019-pw2-v1|porsche-panamera-2010-pw2-v1|porsche-panamera-pw2-v1|porsche-panamera-2010-pw2-v2|porsche-panamera-pw2-v2,ok,True
+car,368,CITROEN,CITROEN DS4,8829,96.24,0,,none,False
+car,369,MG,MG S5,8805,96.26,0,,none,False
+car,370,VOLKSWAGEN,VOLKSWAGEN FOX,8745,96.29,1,volkswagen-fox-2004-vw1-v1,ok,True
+car,371,NISSAN,NISSAN ALMERA,8603,96.31,0,,none,False
+car,372,FIAT,FIAT 600,8513,96.34,2,fiat-600-1960-fw1-v1|fiat-600-1967-fw1-v1,partial,True
+car,373,FORD,FORD EDGE,8495,96.36,0,,none,False
+car,374,KIA,KIA PRO CEED,8450,96.39,1,kia-ceed-v1,refused,True
+car,375,AUSTIN,AUSTIN MINI,8410,96.41,0,,none,False
+car,376,VOLKSWAGEN,VOLKSWAGEN TAYRON,8374,96.44,0,,none,False
+car,377,ROVER,ROVER MINI,8292,96.46,0,,none,False
+car,378,MERCEDES,MERCEDES CLC CLASS,8291,96.48,0,,none,False
+car,379,BMW,BMW Z3,8252,96.51,0,,none,False
+car,380,ALFA ROMEO,ALFA ROMEO GIULIA,8245,96.53,0,,none,False
+car,381,ASTON MARTIN,ASTON MARTIN VANTAGE,8244,96.55,0,,none,False
+car,382,MERCEDES,MERCEDES SLC CLASS,8096,96.58,0,,none,False
+car,383,HONDA,HONDA INSIGHT,7941,96.6,2,honda-insight-v1|honda-insight-2010-hw1-v1,partial,True
+car,384,SSANGYONG,SSANGYONG TIVOLI,7906,96.62,1,ssangyong-tivoli-v1,ok,True
+car,385,TOYOTA,TOYOTA MR2,7902,96.65,0,,none,False
+car,386,DACIA,DACIA SPRING,7739,96.67,0,,none,False
+car,387,SSANGYONG,SSANGYONG KORANDO,7693,96.69,0,,none,False
+car,388,PEUGEOT,PEUGEOT HORIZON,7635,96.71,0,,none,False
+car,389,JEEP,JEEP WRANGLER,7509,96.74,6,jeep-wrangler-v1|jeep-wrangler-1997-w8-v1|jeep-wrangler-jpw1-v1|jeep-wrangler-2023-jpw1-v1|jeep-wrangler-jpw1-v2|jeep-wrangler-2007-jpw1-v1,ok,True
+car,390,HONDA,HONDA ZR-V SPORT,7481,96.76,1,honda-zr-v-2023-v1,partial,True
+car,391,VOLVO,VOLVO S90,7449,96.78,0,,none,False
+car,392,BMW,BMW 8 SERIES,7415,96.8,2,bmw-8-series-v1|bmw-8-series-2020-bm2-v1,ok,True
+car,393,BMW,BMW M5,7356,96.82,4,bmw-m5-f90-undated-v1|bmw-m5-2024-bm2-v1|bmw-m5-2003-bm2-v1|bmw-m5-2025-bm3-v1,ok,True
+car,394,SUBARU,SUBARU XV,7205,96.84,1,subaru-xv-v1,refused,True
+car,395,MG,MG TF,7195,96.86,0,,none,False
+car,396,JAGUAR,JAGUAR S TYPE,7164,96.88,0,,none,False
+car,397,TOYOTA,TOYOTA CELICA,7104,96.9,1,toyota-celica-1981-tw1-v1,refused,True
+car,398,HYUNDAI,HYUNDAI I800,7092,96.92,0,,none,False
+car,399,CITROEN,CITROEN SPACETOURER,7088,96.95,0,,none,False
+car,400,VOLVO,VOLVO C40,6996,96.97,0,,none,False
+car,401,MAZDA,MAZDA 5,6995,96.99,0,,none,False
+car,402,BMW,BMW X7,6786,97.01,2,bmw-x7-v1|bmw-x7-m60i-bm1-v1,ok,True
+car,403,VOLVO,VOLVO EX40,6719,97.02,0,,none,False
+car,404,VOLKSWAGEN,VOLKSWAGEN MULTIVAN,6566,97.04,1,volkswagen-multivan-v1,refused,True
+car,405,MAZDA,MAZDA MX-30,6553,97.06,1,mazda-mx-3-mzw1-v1,partial,True
+car,406,DS,DS DS4,6532,97.08,0,,none,False
+car,407,LEXUS,LEXUS ES,6530,97.1,1,lexus-es-v1,partial,True
+car,408,LEXUS,LEXUS GS,6474,97.12,0,,none,False
+car,409,SUZUKI,SUZUKI BALENO,6429,97.14,1,suzuki-baleno-v1,refused,True
+car,410,PEUGEOT,PEUGEOT 408,6375,97.16,0,,none,False
+car,411,CITROEN,CITROEN E-C3,6257,97.17,1,citroen-e-c3-v1,refused,True
+car,412,TOYOTA,TOYOTA GT86,6241,97.19,2,toyota-gt86-v1|toyota-gt86-tw1-v1,ok,True
+car,413,MERCEDES,MERCEDES 200,6215,97.21,0,,none,False
+car,414,MITSUBISHI,MITSUBISHI LANCER,6137,97.23,1,mitsubishi-lancer-evolution-v1,ok,True
+car,415,JAGUAR,JAGUAR E TYPE,6126,97.25,3,jaguar-e-type-v1|jaguar-e-type-1963-jgw1-v1|jaguar-e-type-1971-jgw1-v1,partial,True
+car,416,AUDI,AUDI RS4,6104,97.26,2,audi-rs4-v1|audi-rs4-v2,partial,True
+car,417,CHEVROLET,CHEVROLET MATIZ,6040,97.28,0,,none,False
+car,418,HYUNDAI,HYUNDAI INSTER,6017,97.3,0,,none,False
+car,419,TRIUMPH,TRIUMPH STAG,5992,97.32,0,,none,False
+car,420,TESLA,TESLA MODEL X,5947,97.33,1,tesla-model-x-v1,partial,True
+car,421,CHEVROLET,CHEVROLET AVEO,5921,97.35,0,,none,False
+car,422,LEAPMOTOR,LEAPMOTOR C10,5878,97.37,0,,none,False
+car,423,CITROEN,CITROEN C2,5869,97.38,0,,none,False
+car,424,RENAULT,RENAULT LAGUNA,5846,97.4,0,,none,False
+car,425,KIA,KIA EV9,5802,97.42,1,kia-ev9-v1,partial,True
+car,426,AUDI,AUDI RS6,5657,97.43,1,audi-rs6-v1,ok,True
+car,427,OMODA,OMODA 5 KNIGHT AUTO,5648,97.45,0,,none,False
+car,428,CUPRA,CUPRA ATECA,5616,97.47,1,cupra-ateca-v1,refused,True
+car,429,DS,DS DS7,5585,97.48,0,,none,False
+car,430,DACIA,DACIA BIGSTER,5581,97.5,0,,none,False
+car,431,VOLVO,VOLVO C70,5578,97.52,1,volvo-c70-2000-vow1-v1,refused,False
+car,432,MINI,MINI ROADSTER,5537,97.53,0,,none,False
+car,433,SAAB,SAAB 9-5,5514,97.55,0,,none,False
+car,434,VOLVO,VOLVO S80,5421,97.56,0,,none,False
+car,435,ABARTH,ABARTH 500,5401,97.58,0,,none,False
+car,436,TOYOTA,TOYOTA ESTIMA,5357,97.59,0,,none,False
+car,437,ROVER,ROVER 75,5151,97.61,0,,none,False
+car,438,TOYOTA,TOYOTA GR YARIS,5129,97.62,2,toyota-yaris-v1|toyota-gr-yaris-2021-tw2-v1,partial,True
+car,439,SUZUKI,SUZUKI WAGON R+,5124,97.64,0,,none,False
+car,440,SEAT,SEAT TOLEDO,5122,97.65,2,seat-toledo-1999-st1-v1|seat-toledo-2004-st1-v1,partial,False
+car,441,PEUGEOT,PEUGEOT 407,5087,97.67,1,peugeot-407-w9-v1,ok,True
+car,442,OMODA,OMODA 9 NOBLE PHEV AUTO,5087,97.68,0,,none,False
+car,443,AUDI,AUDI A2,5048,97.7,1,audi-a2-v1,partial,True
+car,444,MINI,MINI FIRST,4944,97.71,0,,none,False
+car,445,FORD,FORD CORTINA,4931,97.73,0,,none,False
+car,446,KIA,KIA EV4,4883,97.74,0,,none,False
+car,447,LEXUS,LEXUS RZ,4776,97.75,0,,none,False
+car,448,TOYOTA,TOYOTA URBAN CRUISER,4760,97.77,0,,none,False
+car,449,KIA,KIA EV5,4740,97.78,0,,none,False
+car,450,ALFA ROMEO,ALFA ROMEO STELVIO,4735,97.8,0,,none,False
+car,451,FORD,FORD TRANSIT CUSTOM,4719,97.81,0,,none,False
+car,452,TRIUMPH,TRIUMPH SPITFIRE,4672,97.82,0,,none,False
+car,453,INFINITI,INFINITI Q30,4647,97.84,0,,none,False
+car,454,SEAT,SEAT EXEO,4575,97.85,2,seat-exeo-2009-st1-v1|seat-exeo-2009-st1-v2,refused,False
+car,455,HONDA,HONDA FR-V,4559,97.86,0,,none,False
+car,456,DAIHATSU,DAIHATSU SIRION,4518,97.88,0,,none,False
+car,457,LOTUS,LOTUS ELISE,4507,97.89,0,,none,False
+car,458,SUZUKI,SUZUKI SWACE,4467,97.9,1,suzuki-swace-v1,partial,True
+car,459,AUDI,AUDI SQ7,4390,97.91,0,,none,False
+car,460,BENTLEY,BENTLEY BENTAYGA,4281,97.93,1,bentley-bentayga-v1,partial,True
+car,461,MERCEDES-BENZ,MERCEDES-BENZ EQE CLASS,4150,97.94,1,mercedes-benz-eqe-w8-v1,partial,True
+car,462,SHINERAY,SHINERAY STARRAY,4127,97.95,0,,none,False
+car,463,HONDA,HONDA S2000,4102,97.96,2,honda-s2000-v1|honda-s2000-1999-hw1-v1,ok,True
+car,464,VAUXHALL,VAUXHALL TIGRA,4098,97.97,0,,none,False
+car,465,MERCEDES,MERCEDES EQE CLASS,4084,97.99,1,mercedes-benz-eqe-w8-v1,partial,True
+car,466,MORRIS,MORRIS MINI,4062,98.0,0,,none,False
+car,467,TRIUMPH,TRIUMPH TR6,4057,98.01,0,,none,False
+car,468,VOLKSWAGEN,VOLKSWAGEN LUPO,4055,98.02,0,,none,False
+car,469,CHRYSLER,CHRYSLER YPSILON,4039,98.03,0,,none,False
+car,470,MERCEDES,MERCEDES VIANO,3964,98.04,0,,none,False
+car,471,MG,MG MGF,3896,98.06,0,,none,False
+car,472,HYUNDAI,HYUNDAI AMICA,3878,98.07,0,,none,False
+car,473,PEUGEOT,PEUGEOT TRAVELLER,3864,98.08,0,,none,False
+car,474,VOLKSWAGEN,VOLKSWAGEN BORA,3824,98.09,0,,none,False
+car,475,HYUNDAI,HYUNDAI COUPE,3743,98.1,0,,none,False
+car,476,ASTON MARTIN,ASTON MARTIN DB9,3734,98.11,0,,none,False
+car,477,CHRYSLER,CHRYSLER GRAND VOYAGER,3715,98.12,0,,none,False
+car,478,CHEVROLET,CHEVROLET CRUZE,3695,98.13,0,,none,False
+car,479,AUDI,AUDI RS5,3690,98.14,2,audi-rs5-2021-ad1-v1|audi-rs5-2020-ad1-v1,ok,False
+car,480,CITROEN,CITROEN DS5,3633,98.15,0,,none,False
+car,481,SSANGYONG,SSANGYONG REXTON,3622,98.16,0,,none,False
+car,482,TOYOTA,TOYOTA PROACE,3609,98.17,1,toyota-proace-v1,refused,True
+car,483,MERCEDES,MERCEDES GLS CLASS,3582,98.18,1,mercedes-benz-gls-2022-v1,refused,True
+car,484,NISSAN,NISSAN PATHFINDER,3563,98.19,2,nissan-pathfinder-nw1-v1|nissan-pathfinder-2024-nw1-v1,partial,True
+car,485,FIAT,FIAT QUBO,3562,98.2,0,,none,False
+car,486,AUDI,AUDI R8,3553,98.22,0,,none,False
+car,487,SUBARU,SUBARU LEGACY,3539,98.23,1,subaru-legacy-2010-sbw1-v1,ok,True
+car,488,HONDA,HONDA CR-Z,3528,98.24,1,honda-cr-z-2011-hw1-v1,partial,True
+car,489,RENAULT,RENAULT KOLEOS,3518,98.25,1,renault-koleos-2008-w7-v1,partial,True
+car,490,SMART,SMART 1,3449,98.26,0,,none,False
+car,491,NISSAN,NISSAN 350,3438,98.27,1,nissan-350z-2006-v1,ok,True
+car,492,AUDI,AUDI RSQ3,3425,98.28,0,,none,False
+car,493,FORD,FORD INDEPENDENCE,3412,98.29,0,,none,False
+car,494,RENAULT,RENAULT 4,3349,98.3,0,,none,False
+car,495,CHEVROLET,CHEVROLET CAPTIVA,3341,98.3,0,,none,False
+car,496,SMART,SMART CITY,3325,98.31,0,,none,False
+car,497,PEUGEOT,PEUGEOT 106,3312,98.32,0,,none,False
+car,498,MASERATI,MASERATI GHIBLI,3249,98.33,0,,none,False
+car,499,MERCEDES,MERCEDES CLE CLASS,3237,98.34,0,,none,False
+car,500,CHRYSLER,CHRYSLER 300C,3217,98.35,1,chrysler-300c-crw1-v1,ok,False
+car,501,ALPINE,ALPINE A290,3192,98.36,0,,none,False
+car,502,KIA,KIA SEDONA,3161,98.37,0,,none,False
+car,503,NISSAN,NISSAN NV200,3133,98.38,2,nissan-nv200-v1|nissan-nv200-2010-w5-v1,partial,True
+car,504,POLESTAR,POLESTAR 3,3107,98.39,0,,none,False
+car,505,LEAPMOTOR,LEAPMOTOR B10,3037,98.4,0,,none,False
+car,506,ALFA ROMEO,ALFA ROMEO JUNIOR,2985,98.41,1,alfa-romeo-milano-2023-v1,ok,True
+car,507,MASERATI,MASERATI LEVANTE,2983,98.41,1,maserati-levante-v1,ok,True
+car,508,PEUGEOT,PEUGEOT EXPERT,2974,98.42,0,,none,False
+car,509,CITROEN,CITROEN 2CV,2954,98.43,0,,none,False
+car,510,FIAT,FIAT 124,2896,98.44,2,fiat-124-1966-fw1-v1|fiat-124-1972-fw1-v1,refused,True
+car,511,RENAULT,RENAULT MASTER,2889,98.45,1,renault-master-v1,ok,True
+car,512,MERCEDES,MERCEDES 300,2880,98.46,1,mercedes-benz-300-sl-mw1-v1,refused,True
+car,513,DAIHATSU,DAIHATSU TERIOS,2850,98.47,0,,none,False
+car,514,BMW,BMW Z4 M,2836,98.47,2,bmw-z4-2008-v1|bmw-z4-m40i-2019-v1,ok,True
+car,515,LOTUS,LOTUS ELETRE,2828,98.48,0,,none,False
+car,516,MERCEDES,MERCEDES GL CLASS,2781,98.49,2,mercedes-benz-gl-class-2011-mw1-v1|mercedes-benz-gl-class-2012-mw1-v1,partial,True
+car,517,CHEVROLET,CHEVROLET ORLANDO,2779,98.5,0,,none,False
+car,518,GENESIS,GENESIS GV60,2743,98.51,0,,none,False
+car,519,LOTUS,LOTUS ELAN,2728,98.51,0,,none,False
+car,520,PEUGEOT,PEUGEOT 306,2705,98.52,0,,none,False
+car,521,AUDI,AUDI S1,2684,98.53,1,audi-s1-ad1-v1,partial,True
+car,522,SHINERAY,SHINERAY EX5,2683,98.54,0,,none,False
+car,523,ALFA ROMEO,ALFA ROMEO TONALE,2676,98.54,1,alfa-romeo-tonale-v1,refused,True
+car,524,ALFA ROMEO,ALFA ROMEO SPIDER,2673,98.55,0,,none,False
+car,525,CITROEN,CITROEN E-BERLINGO,2656,98.56,0,,none,False
+car,526,MG,MG GS,2656,98.57,0,,none,False
+car,527,SUZUKI,SUZUKI E VITARA,2655,98.58,0,,none,False
+car,528,MERCEDES-BENZ,MERCEDES-BENZ E CLASS,2651,98.58,6,mercedes-benz-e-class-w213-undated-v1|mercedes-benz-e-class-w12-v1|mercedes-benz-e-class-2022-w12-v1|mercedes-benz-e-class-mw1-v1|mercedes-benz-e-class-mw1-v5|mercedes-benz-e-class-2010-mw1-v1,ok,True
+car,529,LEXUS,LEXUS LS,2645,98.59,1,lexus-ls-2018-w7-v1,ok,True
+car,530,TRIUMPH,TRIUMPH HERALD,2645,98.6,0,,none,False
+car,531,FIAT,FIAT BRAVO,2638,98.61,1,fiat-bravo-2011-w6-v1,ok,True
+car,532,FORD,FORD ANGLIA,2628,98.61,0,,none,False
+car,533,TOYOTA,TOYOTA PREVIA,2611,98.62,0,,none,False
+car,534,VAUXHALL,VAUXHALL CASCADA,2601,98.63,0,,none,False
+car,535,PEUGEOT,PEUGEOT 205,2555,98.64,3,peugeot-205-v1|peugeot-205-1997-pw1-v1|peugeot-205-pw1-v1,ok,True
+car,536,ASTON MARTIN,ASTON MARTIN DB11,2483,98.64,0,,none,False
+car,537,MERCEDES-BENZ,MERCEDES-BENZ EQA CLASS,2474,98.65,0,,none,False
+car,538,BMW,BMW X3 M,2463,98.66,0,,none,False
+car,539,FORD,FORD SIERRA,2442,98.66,0,,none,False
+car,540,OMODA,OMODA 7,2432,98.67,0,,none,False
+car,541,RENAULT,RENAULT RAFALE,2419,98.68,0,,none,False
+car,542,AUSTIN-MORRIS,AUSTIN-MORRIS MINI,2394,98.69,0,,none,False
+car,543,TOYOTA,TOYOTA STARLET,2384,98.69,0,,none,False
+car,544,CITROEN,CITROEN E-C4,2371,98.7,0,,none,False
+car,545,SSANGYONG,SSANGYONG RODIUS,2336,98.71,0,,none,False
+car,546,LEXUS,LEXUS RC,2313,98.71,1,lexus-rc-v1,partial,True
+car,547,LAMBORGHINI,LAMBORGHINI URUS,2295,98.72,1,lamborghini-urus-x-2017-2019-v1,refused,True
+car,548,PEUGEOT,PEUGEOT BOXER,2293,98.73,1,peugeot-boxer-v1,refused,True
+car,549,AUDI,AUDI SQ2,2261,98.73,0,,none,False
+car,550,BYD,BYD ATTO 2,2251,98.74,1,byd-atto-2-2024-bw1-v1,partial,False
+car,551,MERCEDES,MERCEDES 190,2246,98.75,0,,none,False
+car,552,MERCEDES-BENZ,MERCEDES-BENZ EQB CLASS,2241,98.75,0,,none,False
+car,553,HYUNDAI,HYUNDAI VELOSTER,2233,98.76,2,hyundai-veloster-n-2022-hyw1-v1|hyundai-veloster-turbo-2013-hyw1-v1,ok,True
+car,554,MG,MG IM5,2231,98.76,0,,none,False
+car,555,TOYOTA,TOYOTA SUPRA,2197,98.77,3,toyota-gr-supra-v1|toyota-supra-tw1-v1|toyota-supra-tw1-v2,ok,True
+car,556,INFINITI,INFINITI Q50,2183,98.78,0,,none,False
+car,557,CITROEN,CITROEN SAXO,2166,98.78,0,,none,False
+car,558,MERCEDES-BENZ,MERCEDES-BENZ V CLASS,2144,98.79,1,mercedes-benz-v-class-v1,refused,True
+car,559,BMW,BMW I7,2136,98.8,1,bmw-i7-2023-bm3-v1,refused,True
+car,560,KIA,KIA STINGER,2133,98.8,1,kia-stinger-v1,partial,True
+car,561,PORSCHE,PORSCHE 944,2132,98.81,1,porsche-944-1991-pw2-v1,refused,True
+car,562,NISSAN,NISSAN 370,2130,98.81,6,nissan-370z-2020-nw1-v1|nissan-370z-2018-nw1-v1|nissan-370z-nw1-v1|nissan-370z-2013-nw1-v1|nissan-370z-2015-nw1-v1|nissan-370z-2018-nw1-v2,ok,True
+car,563,HYUNDAI,HYUNDAI MATRIX,2129,98.82,0,,none,False
+car,564,AUSTIN,AUSTIN SEVEN,2123,98.83,0,,none,False
+car,565,TOYOTA,TOYOTA NOAH,2123,98.83,0,,none,False
+car,566,AUSTIN,AUSTIN HEALEY,2122,98.84,0,,none,False
+car,567,TVR,TVR CHIMAERA,2107,98.85,0,,none,False
+car,568,FORD,FORD TRANSIT,2098,98.85,1,ford-transit-courier-2025-fow1-v1,partial,False
+car,569,NISSAN,NISSAN GT-R,2093,98.86,27,nissan-gt-r-v1|nissan-gt-r-nw1-v1|nissan-gt-r-2002-nw1-v1|nissan-gt-r-2018-nw1-v1|nissan-gt-r-1999-nw1-v1|nissan-gt-r-nw1-v2,ok,True
+car,570,CITROEN,CITROEN NEMO,2077,98.86,0,,none,False
+car,571,ALFA ROMEO,ALFA ROMEO 159,2072,98.87,0,,none,False
+car,572,MERCEDES,MERCEDES EQS CLASS,2046,98.88,0,,none,False
+car,573,MERCEDES,MERCEDES CL CLASS,2042,98.88,0,,none,False
+car,574,BMW,BMW I8,2036,98.89,1,bmw-i8-bm3-v1,partial,True
+car,575,MORGAN,MORGAN 4/4,2034,98.89,0,,none,False
+car,576,TRIUMPH,TRIUMPH TR4,2008,98.9,0,,none,False
+car,577,PEUGEOT,PEUGEOT 406,1996,98.9,0,,none,False
+car,578,VOLVO,VOLVO 940,1989,98.91,0,,none,False
+car,579,MERCEDES,MERCEDES SPRINTER,1985,98.92,2,mercedes-benz-sprinter-v1|mercedes-benz-sprinter-w7-v1,partial,True
+car,580,MAZDA,MAZDA RX-8,1943,98.92,2,mazda-rx-8-v1|mazda-rx-8-2011-mzw1-v1,ok,True
+car,581,FORD,FORD POPULAR,1925,98.93,0,,none,False
+car,582,SMART,SMART ROADSTER,1910,98.93,0,,none,False
+car,583,CHANGAN,CHANGAN DEEPAL,1903,98.94,0,,none,False
+car,584,ROVER,ROVER 25,1870,98.94,0,,none,False
+car,585,ASTON MARTIN,ASTON MARTIN DBX,1867,98.95,1,aston-martin-dbx-v1,refused,True
+car,586,LEAPMOTOR,LEAPMOTOR T03,1851,98.95,0,,none,False
+car,587,VOLKSWAGEN,VOLKSWAGEN CALIFORNIA,1843,98.96,0,,none,False
+car,588,NISSAN,NISSAN PRIMERA,1839,98.97,1,nissan-primera-1990-nw1-v1,ok,True
+car,589,MG,MG A,1834,98.97,0,,none,False
+car,590,AUDI,AUDI S6,1827,98.98,0,,none,False
+car,591,PEUGEOT,PEUGEOT BIPPER,1773,98.98,0,,none,False
+car,592,GENESIS,GENESIS GV70,1769,98.99,0,,none,False
+car,593,TOYOTA,TOYOTA VELLFIRE,1764,98.99,1,toyota-vellfire-v1,refused,True
+car,594,BMW,BMW X5 M,1758,99.0,1,bmw-x5-m-2020-bm3-v1,refused,True
+car,595,SAAB,SAAB 900,1754,99.0,0,,none,False
 van,1,FORD,FORD TRANSIT CUSTOM,529163,11.06,0,,none,False
 van,2,FORD,FORD TRANSIT,456750,20.6,1,ford-transit-courier-2025-fow1-v1,partial,False
 van,3,VOLKSWAGEN,VOLKSWAGEN TRANSPORTER,342244,27.75,1,volkswagen-transporter-2003-vw2-v1,refused,True
@@ -617,7 +614,7 @@ van,17,PEUGEOT,PEUGEOT EXPERT,82440,70.79,0,,none,False
 van,18,MERCEDES,MERCEDES VITO,81237,72.48,3,mercedes-benz-vito-v1|mercedes-benz-mercedes-vito-w5-v1|mercedes-benz-mercedes-vito-2010-w5-v1,ok,True
 van,19,MITSUBISHI,MITSUBISHI L200,75134,74.05,1,mitsubishi-l200-v1,refused,True
 van,20,CITROEN,CITROEN RELAY,74599,75.61,0,,none,False
-van,21,RENAULT,RENAULT MASTER,72196,77.12,1,renault-master-v1,refused,True
+van,21,RENAULT,RENAULT MASTER,72196,77.12,1,renault-master-v1,ok,True
 van,22,CITROEN,CITROEN DISPATCH,67246,78.53,0,,none,False
 van,23,VAUXHALL,VAUXHALL MOVANO,64159,79.87,0,,none,False
 van,24,FIAT,FIAT DUCATO,62575,81.17,2,fiat-ducato-v1|fiat-ducato-fw1-v1,refused,True
@@ -630,8 +627,8 @@ van,30,FORD,FORD TRANSIT COURIER,33417,87.14,1,ford-transit-courier-2025-fow1-v1
 van,31,VOLKSWAGEN,VOLKSWAGEN AMAROK,29688,87.76,1,volkswagen-amarok-2017-v1,ok,True
 van,32,FIAT,FIAT DOBLO,29482,88.38,0,,none,False
 van,33,MAXUS,MAXUS DELIVER,26748,88.94,0,,none,False
-van,34,NISSAN,NISSAN NV200,25369,89.47,2,nissan-nv200-v1|nissan-nv200-2010-w5-v1,refused,True
-van,35,FORD,FORD FIESTA,24551,89.98,1,ford-fiesta-2009-w12-v1,refused,False
+van,34,NISSAN,NISSAN NV200,25369,89.47,2,nissan-nv200-v1|nissan-nv200-2010-w5-v1,partial,True
+van,35,FORD,FORD FIESTA,24551,89.98,1,ford-fiesta-2009-w12-v1,ok,False
 van,36,MERCEDES,MERCEDES CITAN,20273,90.4,0,,none,False
 van,37,NISSAN,NISSAN PRIMASTAR,19698,90.81,0,,none,False
 van,38,MAN,MAN TGE,17671,91.18,0,,none,False
@@ -641,7 +638,7 @@ van,41,VOLKSWAGEN,VOLKSWAGEN CALIFORNIA,14230,92.19,0,,none,False
 van,42,PEUGEOT,PEUGEOT BIPPER,12684,92.46,0,,none,False
 van,43,VAUXHALL,VAUXHALL ASTRA,11886,92.71,2,vauxhall-astra-2012-w12-v1|vauxhall-astra-2022-cr1-v1,ok,True
 van,44,VOLKSWAGEN,VOLKSWAGEN ID BUZZ,11467,92.95,2,volkswagen-id-buzz-v1|volkswagen-id-buzz-2021-vw2-v1,partial,True
-van,45,VAUXHALL,VAUXHALL CORSA,11370,93.18,1,vauxhall-corsa-2011-v1,refused,True
+van,45,VAUXHALL,VAUXHALL CORSA,11370,93.18,1,vauxhall-corsa-2011-v1,ok,True
 van,46,ISUZU TRUCKS,ISUZU TRUCKS GRAFTER,10693,93.41,0,,none,False
 van,47,TOYOTA,TOYOTA HIACE,10444,93.62,0,,none,False
 van,48,FIAT,FIAT AUTO TRAIL,9746,93.83,0,,none,False
@@ -759,7 +756,7 @@ truck,34,HYMER,HYMER B CLASS,498,86.85,0,,none,False
 truck,35,TERBERG,TERBERG YT193,494,87.28,0,,none,False
 truck,36,DAF TRUCKS,DAF TRUCKS FA,489,87.7,0,,none,False
 truck,37,JCB,JCB 3STH,469,88.11,0,,none,False
-truck,38,RENAULT,RENAULT MASTER,466,88.51,1,renault-master-v1,refused,True
+truck,38,RENAULT,RENAULT MASTER,466,88.51,1,renault-master-v1,ok,True
 truck,39,MAN,MAN TGE,461,88.91,0,,none,False
 truck,40,FIAT,FIAT RAPIDO,418,89.27,0,,none,False
 truck,41,FORD,FORD SWIFT,412,89.63,0,,none,False
@@ -793,538 +790,521 @@ truck,68,FORD,FORD ROLLER TEAM,126,94.75,0,,none,False
 truck,69,THWAITES,THWAITES 6 TONNE,126,94.86,0,,none,False
 truck,70,LDV,LDV 400 SERIES,113,94.96,0,,none,False
 truck,71,MERCEDES-BENZ,MERCEDES-BENZ SPRINTER,113,95.06,2,mercedes-benz-sprinter-v1|mercedes-benz-sprinter-w7-v1,partial,True
-motorbike,1,SUZUKI,SUZUKI GSX,38419,3.31,0,,none,False
-motorbike,2,HONDA,HONDA CB,34639,6.3,0,,none,False
-motorbike,3,TRIUMPH,TRIUMPH TIGER,34107,9.24,0,,none,False
-motorbike,4,HONDA,HONDA CBR,33613,12.13,0,,none,False
-motorbike,5,KAWASAKI,KAWASAKI ZX,29890,14.71,0,,none,False
-motorbike,6,YAMAHA,YAMAHA MT,28642,17.18,0,,none,False
-motorbike,7,TRIUMPH,TRIUMPH BONNEVILLE,26965,19.5,0,,none,False
-motorbike,8,HONDA,HONDA WW125,21755,21.38,0,,none,False
-motorbike,9,PIAGGIO,PIAGGIO VESPA,20758,23.17,0,,none,False
-motorbike,10,TRIUMPH,TRIUMPH STREET,17453,24.67,0,,none,False
-motorbike,11,KAWASAKI,KAWASAKI ZR,17174,26.15,0,,none,False
-motorbike,12,TRIUMPH,TRIUMPH SPEED,16929,27.61,0,,none,False
-motorbike,13,YAMAHA,YAMAHA YZF,15258,28.93,0,,none,False
-motorbike,14,YAMAHA,YAMAHA GPD,14407,30.17,0,,none,False
-motorbike,15,BMW,BMW R 1200 GS,14374,31.41,0,,none,False
-motorbike,16,BMW,BMW R 1250 GS,13522,32.57,0,,none,False
-motorbike,17,SUZUKI,SUZUKI GSF,12966,33.69,0,,none,False
-motorbike,18,HONDA,HONDA NSC,11975,34.72,0,,none,False
-motorbike,19,HONDA,HONDA CBF 125,11797,35.74,0,,none,False
-motorbike,20,HARLEY-DAVIDSON,HARLEY-DAVIDSON XL,11625,36.74,0,,none,False
-motorbike,21,SUZUKI,SUZUKI DL,9740,37.58,0,,none,False
-motorbike,22,HONDA,HONDA NC750,9521,38.4,0,,none,False
-motorbike,23,HONDA,HONDA NSS,9330,39.21,0,,none,False
-motorbike,24,DUCATI,DUCATI MULTISTRADA,8900,39.97,0,,none,False
-motorbike,25,YAMAHA,YAMAHA TRACER,8762,40.73,0,,none,False
-motorbike,26,KAWASAKI,KAWASAKI EX,8406,41.45,0,,none,False
-motorbike,27,SUZUKI,SUZUKI SV,8364,42.17,0,,none,False
-motorbike,28,KTM,KTM 1290,7976,42.86,0,,none,False
-motorbike,29,KAWASAKI,KAWASAKI ER,7517,43.51,0,,none,False
-motorbike,30,HONDA,HONDA CBF,7109,44.12,0,,none,False
-motorbike,31,HONDA,HONDA SH 125,6816,44.71,0,,none,False
-motorbike,32,YAMAHA,YAMAHA XSR,6378,45.26,0,,none,False
-motorbike,33,BMW,BMW R 1300 GS,6355,45.81,0,,none,False
-motorbike,34,ROYAL ENFIELD,ROYAL ENFIELD INTERCEPTOR,5887,46.31,0,,none,False
-motorbike,35,TRIUMPH,TRIUMPH SCRAMBLER,5601,46.8,0,,none,False
-motorbike,36,KTM,KTM 125,5482,47.27,0,,none,False
-motorbike,37,BMW,BMW S 1000 XR,5430,47.74,0,,none,False
-motorbike,38,YAMAHA,YAMAHA YBR,5335,48.2,0,,none,False
-motorbike,39,YAMAHA,YAMAHA FZS,5252,48.65,0,,none,False
-motorbike,40,YAMAHA,YAMAHA FZ,5246,49.1,0,,none,False
-motorbike,41,ROYAL ENFIELD,ROYAL ENFIELD METEOR,5244,49.55,0,,none,False
-motorbike,42,HONDA,HONDA XL,5154,50.0,0,,none,False
-motorbike,43,HONDA,HONDA MSX,5146,50.44,0,,none,False
-motorbike,44,ROYAL ENFIELD,ROYAL ENFIELD HIMALAYAN,5130,50.88,0,,none,False
-motorbike,45,BMW,BMW S 1000 RR,4950,51.31,0,,none,False
-motorbike,46,TRIUMPH,TRIUMPH SPRINT,4885,51.73,0,,none,False
-motorbike,47,APRILIA,APRILIA TUONO,4755,52.14,0,,none,False
-motorbike,48,YAMAHA,YAMAHA TENERE,4747,52.55,0,,none,False
-motorbike,49,TRIUMPH,TRIUMPH TRIDENT,4620,52.95,0,,none,False
-motorbike,50,KAWASAKI,KAWASAKI KLE,4618,53.35,0,,none,False
-motorbike,51,HONDA,HONDA GLR 125,4580,53.74,0,,none,False
-motorbike,52,ZONTES,ZONTES ZT,4479,54.13,0,,none,False
-motorbike,53,HONDA,HONDA CRF,4321,54.5,0,,none,False
-motorbike,54,BMW,BMW R 1200 RT,4308,54.87,0,,none,False
-motorbike,55,SYM,SYM JET,4286,55.24,0,,none,False
-motorbike,56,BMW,BMW S 1000 R,4286,55.61,0,,none,False
-motorbike,57,HONDA,HONDA CRF 300,4154,55.97,0,,none,False
-motorbike,58,DUCATI,DUCATI MONSTER,4153,56.33,0,,none,False
-motorbike,59,TRIUMPH,TRIUMPH DAYTONA,4071,56.68,0,,none,False
-motorbike,60,YAMAHA,YAMAHA XVS,4033,57.02,0,,none,False
-motorbike,61,YAMAHA,YAMAHA X,4018,57.37,0,,none,False
-motorbike,62,YAMAHA,YAMAHA XJR,4010,57.72,0,,none,False
-motorbike,63,BMW,BMW R NINET,3814,58.05,0,,none,False
-motorbike,64,HONDA,HONDA NT,3796,58.37,0,,none,False
-motorbike,65,TRIUMPH,TRIUMPH ROCKET,3784,58.7,0,,none,False
-motorbike,66,ROYAL ENFIELD,ROYAL ENFIELD BULLET,3769,59.02,0,,none,False
-motorbike,67,HARLEY-DAVIDSON,HARLEY-DAVIDSON FAT BOY,3699,59.34,0,,none,False
-motorbike,68,KTM,KTM 390,3626,59.66,0,,none,False
-motorbike,69,HONDA,HONDA CMX 500,3614,59.97,0,,none,False
-motorbike,70,YAMAHA,YAMAHA XJ,3597,60.28,0,,none,False
-motorbike,71,DUCATI,DUCATI SCRAMBLER,3570,60.58,0,,none,False
-motorbike,72,KAWASAKI,KAWASAKI KLZ,3564,60.89,0,,none,False
-motorbike,73,HONDA,HONDA VFR,3485,61.19,0,,none,False
-motorbike,74,YAMAHA,YAMAHA XT,3474,61.49,0,,none,False
-motorbike,75,HONDA,HONDA CRF 1100,3408,61.79,0,,none,False
-motorbike,76,YAMAHA,YAMAHA R,3362,62.07,0,,none,False
-motorbike,77,KTM,KTM 790,3360,62.36,0,,none,False
-motorbike,78,KAWASAKI,KAWASAKI EN,3336,62.65,0,,none,False
-motorbike,79,LEXMOTO,LEXMOTO LXR,3318,62.94,0,,none,False
-motorbike,80,HONDA,HONDA CRF 250,3316,63.22,0,,none,False
-motorbike,81,YAMAHA,YAMAHA WR,3201,63.5,0,,none,False
-motorbike,82,BMW,BMW R 1250 RT,3156,63.77,0,,none,False
-motorbike,83,TRIUMPH,TRIUMPH THUNDERBIRD,3114,64.04,0,,none,False
-motorbike,84,KEEWAY,KEEWAY SUPERLIGHT,3055,64.3,0,,none,False
-motorbike,85,YAMAHA,YAMAHA FJR,3017,64.56,0,,none,False
-motorbike,86,KAWASAKI,KAWASAKI VN,3007,64.82,0,,none,False
-motorbike,87,YAMAHA,YAMAHA NMAX,2996,65.08,0,,none,False
-motorbike,88,HONDA,HONDA Z 125,2989,65.34,0,,none,False
-motorbike,89,BENELLI,BENELLI BN,2954,65.59,0,,none,False
-motorbike,90,HARLEY-DAVIDSON,HARLEY-DAVIDSON FAT BOB,2917,65.84,0,,none,False
-motorbike,91,KTM,KTM 690,2872,66.09,0,,none,False
-motorbike,92,KTM,KTM 890,2809,66.33,0,,none,False
-motorbike,93,KTM,KTM 250,2779,66.57,0,,none,False
-motorbike,94,PIAGGIO,PIAGGIO LIBERTY,2777,66.81,0,,none,False
-motorbike,95,TRIUMPH,TRIUMPH THRUXTON,2768,67.05,0,,none,False
-motorbike,96,ROYAL ENFIELD,ROYAL ENFIELD CLASSIC,2756,67.29,0,,none,False
-motorbike,97,SUZUKI,SUZUKI AN,2744,67.53,0,,none,False
-motorbike,98,HARLEY-DAVIDSON,HARLEY-DAVIDSON HERITAGE,2737,67.76,0,,none,False
-motorbike,99,BMW,BMW K 1600,2700,67.99,0,,none,False
-motorbike,100,APRILIA,APRILIA RS,2639,68.22,0,,none,False
-motorbike,101,DUCATI,DUCATI PANIGALE,2634,68.45,0,,none,False
-motorbike,102,MOTO GUZZI,MOTO GUZZI V7,2630,68.68,0,,none,False
-motorbike,103,HARLEY-DAVIDSON,HARLEY-DAVIDSON ROAD KING,2464,68.89,0,,none,False
-motorbike,104,INDIAN,INDIAN SCOUT,2427,69.1,0,,none,False
-motorbike,105,PIAGGIO,PIAGGIO PX125,2408,69.3,0,,none,False
-motorbike,106,KTM,KTM 300,2358,69.51,0,,none,False
-motorbike,107,HONDA,HONDA VFR800F,2324,69.71,0,,none,False
-motorbike,108,HONDA,HONDA VFR 1200,2272,69.9,0,,none,False
-motorbike,109,HONDA,HONDA VFR 800,2265,70.1,0,,none,False
-motorbike,110,HONDA,HONDA GL,2235,70.29,0,,none,False
-motorbike,111,VMOTO,VMOTO CPA,2224,70.48,0,,none,False
-motorbike,112,HARLEY-DAVIDSON,HARLEY-DAVIDSON BREAKOUT,2217,70.67,0,,none,False
-motorbike,113,HARLEY-DAVIDSON,HARLEY-DAVIDSON STREET BOB,2192,70.86,0,,none,False
-motorbike,114,HONDA,HONDA ADV 350,2135,71.05,0,,none,False
-motorbike,115,HONDA,HONDA FSH125,2122,71.23,0,,none,False
-motorbike,116,BMW,BMW F 900 XR,2105,71.41,0,,none,False
-motorbike,117,DUCATI,DUCATI STREETFIGHTER,2096,71.59,0,,none,False
-motorbike,118,KTM,KTM 990,2037,71.77,0,,none,False
-motorbike,119,DUCATI,DUCATI DIAVEL,2028,71.94,0,,none,False
-motorbike,120,BMW,BMW F 800 GS,2015,72.12,0,,none,False
-motorbike,121,BENELLI,BENELLI TORNADO,1986,72.29,0,,none,False
-motorbike,122,APRILIA,APRILIA RSV,1942,72.46,0,,none,False
-motorbike,123,SUZUKI,SUZUKI GSR,1914,72.62,0,,none,False
-motorbike,124,HONDA,HONDA GB 350 S-S,1889,72.78,0,,none,False
-motorbike,125,BMW,BMW R 1250 RS,1881,72.95,0,,none,False
-motorbike,126,DUCATI,DUCATI HYPERMOTARD,1850,73.1,0,,none,False
-motorbike,127,HONDA,HONDA CMX1100,1850,73.26,0,,none,False
-motorbike,128,HARLEY-DAVIDSON,HARLEY-DAVIDSON LOW RIDER,1817,73.42,0,,none,False
-motorbike,129,KTM,KTM 350,1766,73.57,0,,none,False
-motorbike,130,ROYAL ENFIELD,ROYAL ENFIELD CONTINENTAL,1762,73.72,0,,none,False
-motorbike,131,HONDA,HONDA VT,1748,73.88,0,,none,False
-motorbike,132,HUSQVARNA,HUSQVARNA SVARTPILEN,1702,74.02,0,,none,False
-motorbike,133,BMW,BMW K 1300,1690,74.17,0,,none,False
-motorbike,134,HARLEY-DAVIDSON,HARLEY-DAVIDSON SPORT GLIDE,1688,74.31,0,,none,False
-motorbike,135,BMW,BMW R 1200 RS,1638,74.45,0,,none,False
-motorbike,136,HUSQVARNA,HUSQVARNA FE,1626,74.59,0,,none,False
-motorbike,137,YAMAHA,YAMAHA R6,1620,74.73,0,,none,False
-motorbike,138,ROYAL ALLOY,ROYAL ALLOY GT 125,1610,74.87,0,,none,False
-motorbike,139,APRILIA,APRILIA SR,1608,75.01,0,,none,False
-motorbike,140,BMW,BMW F 900 R,1588,75.15,0,,none,False
-motorbike,141,HUSQVARNA,HUSQVARNA TE,1585,75.29,0,,none,False
-motorbike,142,BENELLI,BENELLI TRK,1582,75.42,0,,none,False
-motorbike,143,SUZUKI,SUZUKI VL,1574,75.56,0,,none,False
-motorbike,144,HARLEY-DAVIDSON,HARLEY-DAVIDSON STREET,1571,75.69,0,,none,False
-motorbike,145,BMW,BMW R 1150 GS,1569,75.83,0,,none,False
-motorbike,146,KTM,KTM RC,1562,75.96,0,,none,False
-motorbike,147,SUZUKI,SUZUKI RV,1546,76.1,0,,none,False
-motorbike,148,SUZUKI,SUZUKI UK,1534,76.23,0,,none,False
-motorbike,149,KAWASAKI,KAWASAKI BR,1532,76.36,0,,none,False
-motorbike,150,HONDA,HONDA ST,1525,76.49,0,,none,False
-motorbike,151,PIAGGIO,PIAGGIO PX 200,1518,76.62,0,,none,False
-motorbike,152,ROYAL ENFIELD,ROYAL ENFIELD HUNTER,1516,76.75,0,,none,False
-motorbike,153,HARLEY-DAVIDSON,HARLEY-DAVIDSON SPORTSTER,1510,76.88,0,,none,False
-motorbike,154,YAMAHA,YAMAHA YP,1503,77.01,0,,none,False
-motorbike,155,BMW,BMW K 1200,1482,77.14,0,,none,False
-motorbike,156,PEUGEOT,PEUGEOT KISBEE,1462,77.27,0,,none,False
-motorbike,157,BMW,BMW F 850 GS,1448,77.39,0,,none,False
-motorbike,158,PEUGEOT,PEUGEOT SPEEDFIGHT,1435,77.52,0,,none,False
-motorbike,159,BMW,BMW F 800 GT,1426,77.64,0,,none,False
-motorbike,160,LEXMOTO,LEXMOTO DIABLO,1422,77.76,0,,none,False
-motorbike,161,LEXMOTO,LEXMOTO ECHO,1401,77.88,0,,none,False
-motorbike,162,HARLEY-DAVIDSON,HARLEY-DAVIDSON STREET GLIDE,1395,78.0,0,,none,False
-motorbike,163,SUZUKI,SUZUKI DR-Z,1371,78.12,0,,none,False
-motorbike,164,KAWASAKI,KAWASAKI EJ,1350,78.24,0,,none,False
-motorbike,165,BMW,BMW F 750 GS,1349,78.35,0,,none,False
-motorbike,166,AJS,AJS MODENA,1342,78.47,0,,none,False
-motorbike,167,HONDA,HONDA VTR,1338,78.58,0,,none,False
-motorbike,168,MOTO GUZZI,MOTO GUZZI V85,1308,78.7,0,,none,False
-motorbike,169,YAMAHA,YAMAHA XV,1301,78.81,0,,none,False
-motorbike,170,HUSQVARNA,HUSQVARNA 701,1300,78.92,0,,none,False
-motorbike,171,KAWASAKI,KAWASAKI BX,1293,79.03,0,,none,False
-motorbike,172,BMW,BMW F 650 GS,1288,79.14,0,,none,False
-motorbike,173,YAMAHA,YAMAHA XC,1283,79.25,0,,none,False
-motorbike,174,BSA,BSA GOLD STAR,1273,79.36,0,,none,False
-motorbike,175,YAMAHA,YAMAHA YS,1271,79.47,0,,none,False
-motorbike,176,KYMCO,KYMCO AGILITY,1267,79.58,0,,none,False
-motorbike,177,LEXMOTO,LEXMOTO AURA,1266,79.69,0,,none,False
-motorbike,178,ROYAL ALLOY,ROYAL ALLOY GP 300,1259,79.8,0,,none,False
-motorbike,179,LML,LML STAR,1257,79.91,0,,none,False
-motorbike,180,BMW,BMW G 310 GS,1254,80.02,0,,none,False
-motorbike,181,GAS GAS,GAS GAS EC,1242,80.12,0,,none,False
-motorbike,182,SUZUKI,SUZUKI SFV,1232,80.23,0,,none,False
-motorbike,183,YAMAHA,YAMAHA TDM,1231,80.34,0,,none,False
-motorbike,184,HONDA,HONDA ANC,1230,80.44,0,,none,False
-motorbike,185,HONDA,HONDA C 125,1229,80.55,0,,none,False
-motorbike,186,BETA,BETA RR 2T,1225,80.65,0,,none,False
-motorbike,187,HARLEY-DAVIDSON,HARLEY-DAVIDSON V-ROD,1222,80.76,0,,none,False
-motorbike,188,LEXMOTO,LEXMOTO LXS,1212,80.86,0,,none,False
-motorbike,189,BMW,BMW R 1200 R,1203,80.97,0,,none,False
-motorbike,190,KTM,KTM 450,1195,81.07,0,,none,False
-motorbike,191,HONDA,HONDA C90,1189,81.17,0,,none,False
-motorbike,192,HARLEY-DAVIDSON,HARLEY-DAVIDSON SUPER GLIDE,1186,81.27,0,,none,False
-motorbike,193,TRIUMPH,TRIUMPH TROPHY,1182,81.38,0,,none,False
-motorbike,194,PIAGGIO,PIAGGIO ZIP,1170,81.48,0,,none,False
-motorbike,195,LEXMOTO,LEXMOTO MICHIGAN,1138,81.57,0,,none,False
-motorbike,196,ROYAL ALLOY,ROYAL ALLOY GP 125,1119,81.67,0,,none,False
-motorbike,197,NORTON,NORTON COMMANDO,1116,81.77,0,,none,False
-motorbike,198,BMW,BMW G 310 R,1107,81.86,0,,none,False
-motorbike,199,ROYAL ENFIELD,ROYAL ENFIELD GUERRILLA 450,1095,81.96,0,,none,False
-motorbike,200,BMW,BMW R 12,1084,82.05,0,,none,False
-motorbike,201,LAMBRETTA,LAMBRETTA GP,1076,82.14,0,,none,False
-motorbike,202,PIAGGIO,PIAGGIO MEDLEY,1076,82.24,0,,none,False
-motorbike,203,HONDA,HONDA NC,1060,82.33,0,,none,False
-motorbike,204,PEUGEOT,PEUGEOT TWEET,1042,82.42,0,,none,False
-motorbike,205,BMW,BMW C 400,1039,82.51,0,,none,False
-motorbike,206,KAWASAKI,KAWASAKI ZG,1031,82.6,0,,none,False
-motorbike,207,KTM,KTM 1190,1021,82.68,0,,none,False
-motorbike,208,HARLEY-DAVIDSON,HARLEY-DAVIDSON ELECTRA GLIDE,1005,82.77,0,,none,False
-motorbike,209,BMW,BMW F 900 GS,1005,82.86,0,,none,False
-motorbike,210,SUZUKI,SUZUKI UZ,999,82.94,0,,none,False
-motorbike,211,SUZUKI,SUZUKI UN,994,83.03,0,,none,False
-motorbike,212,LAMBRETTA,LAMBRETTA V,973,83.11,0,,none,False
-motorbike,213,KEEWAY,KEEWAY RKV 125,972,83.2,0,,none,False
-motorbike,214,BMW,BMW M 1000 R,955,83.28,0,,none,False
-motorbike,215,HARLEY-DAVIDSON,HARLEY-DAVIDSON PAN AMERICA,945,83.36,0,,none,False
-motorbike,216,VOGE,VOGE R 125,943,83.44,0,,none,False
-motorbike,217,ROYAL ALLOY,ROYAL ALLOY TG,934,83.52,0,,none,False
-motorbike,218,HONDA,HONDA CG,928,83.6,0,,none,False
-motorbike,219,DUCATI,DUCATI SUPERSPORT,923,83.68,0,,none,False
-motorbike,220,SUZUKI,SUZUKI UB,916,83.76,0,,none,False
-motorbike,221,DUCATI,DUCATI M1200,912,83.84,0,,none,False
-motorbike,222,BMW,BMW R 1250 R,907,83.92,0,,none,False
-motorbike,223,CFMOTO,CFMOTO 450,897,83.99,0,,none,False
-motorbike,224,HARLEY-DAVIDSON,HARLEY-DAVIDSON DYNA,895,84.07,0,,none,False
-motorbike,225,YAMAHA,YAMAHA DELIGHT,895,84.15,0,,none,False
-motorbike,226,BMW,BMW F 800 ST,891,84.23,0,,none,False
-motorbike,227,SUZUKI,SUZUKI VZ,889,84.3,0,,none,False
-motorbike,228,YAMAHA,YAMAHA DT,888,84.38,0,,none,False
-motorbike,229,ROYAL ENFIELD,ROYAL ENFIELD SCRAM,888,84.46,0,,none,False
-motorbike,230,HARLEY-DAVIDSON,HARLEY-DAVIDSON ROAD GLIDE,884,84.53,0,,none,False
-motorbike,231,KAWASAKI,KAWASAKI Z,883,84.61,0,,none,False
-motorbike,232,HONDA,HONDA CL,881,84.68,0,,none,False
-motorbike,233,LEXMOTO,LEXMOTO LJ,878,84.76,0,,none,False
-motorbike,234,KEEWAY,KEEWAY K-LIGHT,871,84.83,0,,none,False
-motorbike,235,YAMAHA,YAMAHA RD,860,84.91,0,,none,False
-motorbike,236,MV AGUSTA,MV AGUSTA BRUTALE,841,84.98,0,,none,False
-motorbike,237,HONDA,HONDA SH 300,828,85.05,0,,none,False
-motorbike,238,SUZUKI,SUZUKI GS,824,85.12,0,,none,False
-motorbike,239,SYM,SYM ORBIT,821,85.19,0,,none,False
-motorbike,240,BMW,BMW F 800 R,820,85.26,0,,none,False
-motorbike,241,LEXMOTO,LEXMOTO ZSB,816,85.34,0,,none,False
-motorbike,242,HARLEY-DAVIDSON,HARLEY-DAVIDSON WIDE GLIDE,812,85.41,0,,none,False
-motorbike,243,KEEWAY,KEEWAY RKS 125,809,85.47,0,,none,False
-motorbike,244,BMW,BMW R 18,805,85.54,0,,none,False
-motorbike,245,HARLEY-DAVIDSON,HARLEY-DAVIDSON ULTRA LIMITED,801,85.61,0,,none,False
-motorbike,246,BETA,BETA XTRAINER,797,85.68,0,,none,False
-motorbike,247,MUTT,MUTT MONGREL,791,85.75,0,,none,False
-motorbike,248,YAMAHA,YAMAHA YZ,782,85.82,0,,none,False
-motorbike,249,HONDA,HONDA ST1300,774,85.88,0,,none,False
-motorbike,250,HONDA,HONDA CBR 600 R3-R,774,85.95,0,,none,False
-motorbike,251,KEEWAY,KEEWAY RKF,771,86.02,0,,none,False
-motorbike,252,HONDA,HONDA SH,770,86.08,0,,none,False
-motorbike,253,HONDA,HONDA ANF,756,86.15,0,,none,False
-motorbike,254,PIAGGIO,PIAGGIO T5 125,750,86.21,0,,none,False
-motorbike,255,HONDA,HONDA XR,737,86.28,0,,none,False
-motorbike,256,INDIAN,INDIAN CHIEF,736,86.34,0,,none,False
-motorbike,257,SUZUKI,SUZUKI GZ,730,86.4,0,,none,False
-motorbike,258,BENELLI,BENELLI LEONCINO,729,86.47,0,,none,False
-motorbike,259,DUCATI,DUCATI DESERT,722,86.53,0,,none,False
-motorbike,260,VOGE,VOGE DS 900 X,715,86.59,0,,none,False
-motorbike,261,DUCATI,DUCATI X DIAVEL,713,86.65,0,,none,False
-motorbike,262,HONDA,HONDA FJS,700,86.71,0,,none,False
-motorbike,263,MOTO GUZZI,MOTO GUZZI V100,698,86.77,0,,none,False
-motorbike,264,NIU,NIU NQI,697,86.83,0,,none,False
-motorbike,265,KTM,KTM 500,691,86.89,0,,none,False
-motorbike,266,HONDA,HONDA ST1100,687,86.95,0,,none,False
-motorbike,267,HONDA,HONDA ADV750,683,87.01,0,,none,False
-motorbike,268,SINNIS,SINNIS ZS 125,682,87.07,0,,none,False
-motorbike,269,LEXMOTO,LEXMOTO ASSAULT,677,87.13,0,,none,False
-motorbike,270,KTM,KTM 1390,673,87.18,0,,none,False
-motorbike,271,BMW,BMW F 650,660,87.24,0,,none,False
-motorbike,272,APRILIA,APRILIA SX,660,87.3,0,,none,False
-motorbike,273,HARLEY-DAVIDSON,HARLEY-DAVIDSON DELUXE,653,87.35,0,,none,False
-motorbike,274,HONDA,HONDA FES,652,87.41,0,,none,False
-motorbike,275,SUZUKI,SUZUKI UH,645,87.47,0,,none,False
-motorbike,276,SYM,SYM MASK,640,87.52,0,,none,False
-motorbike,277,BSA,BSA BANTAM,636,87.58,0,,none,False
-motorbike,278,BETA,BETA RR 4T,635,87.63,0,,none,False
-motorbike,279,SINNIS,SINNIS TERRAIN,629,87.69,0,,none,False
-motorbike,280,YAMAHA,YAMAHA NXC,623,87.74,0,,none,False
-motorbike,281,APRILIA,APRILIA TUAREG,618,87.79,0,,none,False
-motorbike,282,HARLEY-DAVIDSON,HARLEY-DAVIDSON SOFTAIL STANDARD,616,87.85,0,,none,False
-motorbike,283,LEXMOTO,LEXMOTO LS,616,87.9,0,,none,False
-motorbike,284,SUZUKI,SUZUKI DR,615,87.95,0,,none,False
-motorbike,285,INDIAN,INDIAN FTR,615,88.0,0,,none,False
-motorbike,286,LEXMOTO,LEXMOTO TR,614,88.06,0,,none,False
-motorbike,287,HONDA,HONDA NT650V DEAUVILLE,605,88.11,0,,none,False
-motorbike,288,SUZUKI,SUZUKI GW,605,88.16,0,,none,False
-motorbike,289,HUSQVARNA,HUSQVARNA VITPILEN,603,88.21,0,,none,False
-motorbike,290,HARLEY-DAVIDSON,HARLEY-DAVIDSON SOFTAIL SLIM,601,88.27,0,,none,False
-motorbike,291,KAWASAKI,KAWASAKI SC,601,88.32,0,,none,False
-motorbike,292,SYM,SYM FIDDLE,597,88.37,0,,none,False
-motorbike,293,SCOMADI,SCOMADI TURISMO,593,88.42,0,,none,False
-motorbike,294,LEXMOTO,LEXMOTO TITAN,593,88.47,0,,none,False
-motorbike,295,PIAGGIO,PIAGGIO FLY,586,88.52,0,,none,False
-motorbike,296,APRILIA,APRILIA RX,582,88.57,0,,none,False
-motorbike,297,SUZUKI,SUZUKI VZR,580,88.62,0,,none,False
-motorbike,298,KAWASAKI,KAWASAKI EL,578,88.67,0,,none,False
-motorbike,299,BMW,BMW F 700 GS,575,88.72,0,,none,False
-motorbike,300,BMW,BMW M 1000 XR,572,88.77,0,,none,False
-motorbike,301,LEXMOTO,LEXMOTO MILANO,571,88.82,0,,none,False
-motorbike,302,MAEVING,MAEVING RM1S,564,88.87,0,,none,False
-motorbike,303,SUZUKI,SUZUKI TL,562,88.92,0,,none,False
-motorbike,304,LEXMOTO,LEXMOTO R66,562,88.97,0,,none,False
-motorbike,305,YAMAHA,YAMAHA XP,559,89.01,0,,none,False
-motorbike,306,BMW,BMW R 1300 RT,556,89.06,0,,none,False
-motorbike,307,BMW,BMW R 1150 RT,546,89.11,0,,none,False
-motorbike,308,DUCATI,DUCATI 848,545,89.16,0,,none,False
-motorbike,309,HUSQVARNA,HUSQVARNA 901,545,89.2,0,,none,False
-motorbike,310,PEUGEOT,PEUGEOT DJANGO,538,89.25,0,,none,False
-motorbike,311,SYM,SYM SYMPHONY,538,89.3,0,,none,False
-motorbike,312,HONDA,HONDA CG125,537,89.34,0,,none,False
-motorbike,313,BMW,BMW G 650 GS,535,89.39,0,,none,False
-motorbike,314,HONDA,HONDA ST 125,528,89.43,0,,none,False
-motorbike,315,DUCATI,DUCATI 1199,527,89.48,0,,none,False
-motorbike,316,VOGE,VOGE DS 800 X RALLY,527,89.52,0,,none,False
-motorbike,317,FANTIC MOTOR,FANTIC MOTOR CA50,523,89.57,0,,none,False
-motorbike,318,BMW,BMW R 1100 S,521,89.61,0,,none,False
-motorbike,319,DUCATI,DUCATI 899,521,89.66,0,,none,False
-motorbike,320,HONDA,HONDA C90M,520,89.7,0,,none,False
-motorbike,321,APRILIA,APRILIA SXR,519,89.75,0,,none,False
-motorbike,322,HARLEY-DAVIDSON,HARLEY-DAVIDSON FATBOY,518,89.79,0,,none,False
-motorbike,323,DUCATI,DUCATI 1299,509,89.84,0,,none,False
-motorbike,324,YAMAHA,YAMAHA FAZER,509,89.88,0,,none,False
-motorbike,325,KEEWAY,KEEWAY F-ACT,505,89.92,0,,none,False
-motorbike,326,HONDA,HONDA PES 125,504,89.97,0,,none,False
-motorbike,327,ROYAL ENFIELD,ROYAL ENFIELD SHOTGUN 650,502,90.01,0,,none,False
-motorbike,328,HONDA,HONDA VTX,490,90.05,0,,none,False
-motorbike,329,BMW,BMW R 1300 RS,489,90.1,0,,none,False
-motorbike,330,CFMOTO,CFMOTO 800,484,90.14,0,,none,False
-motorbike,331,YAMAHA,YAMAHA MWS,482,90.18,0,,none,False
-motorbike,332,DUCATI,DUCATI 959,477,90.22,0,,none,False
-motorbike,333,APRILIA,APRILIA DORSODURO,476,90.26,0,,none,False
-motorbike,334,LEXMOTO,LEXMOTO TEMPEST,476,90.3,0,,none,False
-motorbike,335,HONDA,HONDA SH350,475,90.34,0,,none,False
-motorbike,336,LEXMOTO,LEXMOTO ISCA,474,90.38,0,,none,False
-motorbike,337,KAWASAKI,KAWASAKI KLX,473,90.42,0,,none,False
-motorbike,338,RIEJU,RIEJU MRT,472,90.47,0,,none,False
-motorbike,339,WK BIKES,WK BIKES SCRAMBLER,466,90.51,0,,none,False
-motorbike,340,YAMAHA,YAMAHA SR,463,90.55,0,,none,False
-motorbike,341,LEXMOTO,LEXMOTO OCR,455,90.58,0,,none,False
-motorbike,342,HONDA,HONDA VFR750F,444,90.62,0,,none,False
-motorbike,343,YAMASAKI,YAMASAKI YM,441,90.66,0,,none,False
-motorbike,344,VOGE,VOGE 300,421,90.7,0,,none,False
-motorbike,345,KAWASAKI,KAWASAKI ER400,420,90.73,0,,none,False
-motorbike,346,MOTO GUZZI,MOTO GUZZI STELVIO,420,90.77,0,,none,False
-motorbike,347,BMW,BMW R 850 R,414,90.81,0,,none,False
-motorbike,348,BMW,BMW R 1150 R,409,90.84,0,,none,False
-motorbike,349,HONDA,HONDA CRF 450,409,90.88,0,,none,False
-motorbike,350,BMW,BMW R 1100 RT,407,90.91,0,,none,False
-motorbike,351,VMOTO,VMOTO TCM,406,90.95,0,,none,False
-motorbike,352,BMW,BMW R 80 RT,406,90.98,0,,none,False
-motorbike,353,PIAGGIO,PIAGGIO TYPHOON,404,91.02,0,,none,False
-motorbike,354,LEXMOTO,LEXMOTO VENOM,403,91.05,0,,none,False
-motorbike,355,HARLEY-DAVIDSON,HARLEY-DAVIDSON ROADSTER,401,91.08,0,,none,False
-motorbike,356,HONDA,HONDA ST1100A,399,91.12,0,,none,False
-motorbike,357,HONDA,HONDA VTR1000,396,91.15,0,,none,False
-motorbike,358,MOTO GUZZI,MOTO GUZZI BREVA,393,91.19,0,,none,False
-motorbike,359,LEXMOTO,LEXMOTO ZSX,393,91.22,0,,none,False
-motorbike,360,MOTO GUZZI,MOTO GUZZI CALIFORNIA,389,91.25,0,,none,False
-motorbike,361,AJS,AJS TEMPEST,388,91.29,0,,none,False
-motorbike,362,MONDIAL,MONDIAL HPS 125,388,91.32,0,,none,False
-motorbike,363,PIAGGIO,PIAGGIO ET2,386,91.35,0,,none,False
-motorbike,364,SINNIS,SINNIS HOODLUM,386,91.39,0,,none,False
-motorbike,365,VMOTO,VMOTO CUX,384,91.42,0,,none,False
-motorbike,366,KTM,KTM 1090,382,91.45,0,,none,False
-motorbike,367,LEXMOTO,LEXMOTO RX1,380,91.49,0,,none,False
-motorbike,368,TRIUMPH,TRIUMPH LEGEND,378,91.52,0,,none,False
-motorbike,369,HARLEY-DAVIDSON,HARLEY-DAVIDSON NIGHT TRAIN,376,91.55,0,,none,False
-motorbike,370,YAMAHA,YAMAHA YN,368,91.58,0,,none,False
-motorbike,371,DUCATI,DUCATI ST,363,91.61,0,,none,False
-motorbike,372,DUCATI,DUCATI 1098,358,91.65,0,,none,False
-motorbike,373,SHERCO,SHERCO 300,358,91.68,0,,none,False
-motorbike,374,VOGE,VOGE DS 625 X,355,91.71,0,,none,False
-motorbike,375,HARLEY-DAVIDSON,HARLEY-DAVIDSON SOFTAIL CUSTOM,354,91.74,0,,none,False
-motorbike,376,QJMOTOR,QJMOTOR SRK,351,91.77,0,,none,False
-motorbike,377,MUTT,MUTT FAT SABBATH,349,91.8,0,,none,False
-motorbike,378,QINGQI,QINGQI QM 125,345,91.83,0,,none,False
-motorbike,379,DUCATI,DUCATI 748,344,91.86,0,,none,False
-motorbike,380,LEXMOTO,LEXMOTO XDV,343,91.89,0,,none,False
-motorbike,381,DUCATI,DUCATI M1100,339,91.92,0,,none,False
-motorbike,382,GILERA,GILERA RUNNER 125,338,91.95,0,,none,False
-motorbike,383,APRILIA,APRILIA SL 750,337,91.97,0,,none,False
-motorbike,384,YAMAHA,YAMAHA TMAX,336,92.0,0,,none,False
-motorbike,385,AJS,AJS FIREFOX,335,92.03,0,,none,False
-motorbike,386,GAS GAS,GAS GAS TXT,332,92.06,0,,none,False
-motorbike,387,BETA,BETA ALP,329,92.09,0,,none,False
-motorbike,388,BMW,BMW K 100,327,92.12,0,,none,False
-motorbike,389,SYM,SYM SYMPLY,326,92.15,0,,none,False
-motorbike,390,HONDA,HONDA NHX,325,92.17,0,,none,False
-motorbike,391,SINNIS,SINNIS SHUTTLE,323,92.2,0,,none,False
-motorbike,392,HARLEY-DAVIDSON,HARLEY-DAVIDSON FORTY EIGHT,320,92.23,0,,none,False
-motorbike,393,HONDA,HONDA C 90,319,92.26,0,,none,False
-motorbike,394,SUR-RON,SUR-RON ULTRA BEE HP,318,92.28,0,,none,False
-motorbike,395,KTM,KTM 950,317,92.31,0,,none,False
-motorbike,396,CFMOTO,CFMOTO 650,317,92.34,0,,none,False
-motorbike,397,MUTT,MUTT HILTS,315,92.37,0,,none,False
-motorbike,398,BULLIT MOTORCYCLES,BULLIT MOTORCYCLES HERO,314,92.39,0,,none,False
-motorbike,399,AJS,AJS CADWELL,313,92.42,0,,none,False
-motorbike,400,NECO,NECO ONE,313,92.45,0,,none,False
-motorbike,401,HYOSUNG,HYOSUNG GV 125,312,92.47,0,,none,False
-motorbike,402,YADEA,YADEA G5,311,92.5,0,,none,False
-motorbike,403,HONDA,HONDA SES,311,92.53,0,,none,False
-motorbike,404,BMW,BMW R 1100 GS,310,92.55,0,,none,False
-motorbike,405,KEEWAY,KEEWAY V CRUISE,306,92.58,0,,none,False
-motorbike,406,MOTO GUZZI,MOTO GUZZI GRISO,306,92.61,0,,none,False
-motorbike,407,ITALJET,ITALJET DRAGSTER,304,92.63,0,,none,False
-motorbike,408,HERALD,HERALD MAVERICK,303,92.66,0,,none,False
-motorbike,409,HONDA,HONDA CBX,302,92.68,0,,none,False
-motorbike,410,YAMASAKI,YAMASAKI TY 125-4E,300,92.71,0,,none,False
-motorbike,411,ASKOLL,ASKOLL ESPRO SERIES,299,92.74,0,,none,False
-motorbike,412,MV AGUSTA,MV AGUSTA F4,297,92.76,0,,none,False
-motorbike,413,HARLEY-DAVIDSON,HARLEY-DAVIDSON NIGHTSTER,291,92.79,0,,none,False
-motorbike,414,BMW,BMW K 75,290,92.81,0,,none,False
-motorbike,415,CFMOTO,CFMOTO 700,289,92.84,0,,none,False
-motorbike,416,BUELL,BUELL LIGHTNING,287,92.86,0,,none,False
-motorbike,417,PIAGGIO,PIAGGIO BEVERLY,287,92.89,0,,none,False
-motorbike,418,YAMAHA,YAMAHA VMX,285,92.91,0,,none,False
-motorbike,419,VOGE,VOGE DS 525 X,282,92.94,0,,none,False
-motorbike,420,DUCATI,DUCATI 749,281,92.96,0,,none,False
-motorbike,421,DUCATI,DUCATI 996,279,92.98,0,,none,False
-motorbike,422,HONDA,HONDA CG125B,278,93.01,0,,none,False
-motorbike,423,KYMCO,KYMCO VISAR 125,276,93.03,0,,none,False
-motorbike,424,MGB,MGB R8,275,93.06,0,,none,False
-motorbike,425,APRILIA,APRILIA PEGASO,272,93.08,0,,none,False
-motorbike,426,DERBI,DERBI SENDA,271,93.1,0,,none,False
-motorbike,427,LEXMOTO,LEXMOTO SRT,270,93.13,0,,none,False
-motorbike,428,E-MAX,E-MAX LB1,268,93.15,0,,none,False
-motorbike,429,HARLEY-DAVIDSON,HARLEY-DAVIDSON ROCKER,268,93.17,0,,none,False
-motorbike,430,YAMAHA,YAMAHA YQ,268,93.19,0,,none,False
-motorbike,431,KEEWAY,KEEWAY V CRUISE 125,268,93.22,0,,none,False
-motorbike,432,YAMAHA,YAMAHA NS,266,93.24,0,,none,False
-motorbike,433,PIAGGIO,PIAGGIO ONE,264,93.26,0,,none,False
-motorbike,434,HARLEY-DAVIDSON,HARLEY-DAVIDSON SPRINGER,264,93.29,0,,none,False
-motorbike,435,KTM,KTM FREERIDE,263,93.31,0,,none,False
-motorbike,436,BLUROC,BLUROC LEGEND,263,93.33,0,,none,False
-motorbike,437,TRIUMPH,TRIUMPH TT600,262,93.35,0,,none,False
-motorbike,438,AJS,AJS DD,261,93.38,0,,none,False
-motorbike,439,MAEVING,MAEVING RM1,258,93.4,0,,none,False
-motorbike,440,HERALD,HERALD BRAT,258,93.42,0,,none,False
-motorbike,441,SYM,SYM NH,258,93.44,0,,none,False
-motorbike,442,TRIUMPH,TRIUMPH TR6,257,93.47,0,,none,False
-motorbike,443,BETA,BETA EVO,255,93.49,0,,none,False
-motorbike,444,BMW,BMW R 1200 C,255,93.51,0,,none,False
-motorbike,445,MONDIAL,MONDIAL SMX,253,93.53,0,,none,False
-motorbike,446,HONDA,HONDA AFS,252,93.55,0,,none,False
-motorbike,447,VOGE,VOGE 300 RALLY,252,93.57,0,,none,False
-motorbike,448,KAWASAKI,KAWASAKI KL,250,93.6,0,,none,False
-motorbike,449,KTM,KTM 200,250,93.62,0,,none,False
-motorbike,450,SUR-RON,SUR-RON LIGHT BEE,249,93.64,0,,none,False
-motorbike,451,MV AGUSTA,MV AGUSTA F3,248,93.66,0,,none,False
-motorbike,452,HONDA,HONDA F6C,248,93.68,0,,none,False
-motorbike,453,DUCATI,DUCATI 999,247,93.7,0,,none,False
-motorbike,454,KEEWAY,KEEWAY VERSILIA,245,93.72,0,,none,False
-motorbike,455,BMW,BMW R 1300 R,242,93.75,0,,none,False
-motorbike,456,KOVE,KOVE 450,239,93.77,0,,none,False
-motorbike,457,VESPA (DOUGLAS),VESPA (DOUGLAS) P200E,239,93.79,0,,none,False
-motorbike,458,VICTORY,VICTORY HAMMER,237,93.81,0,,none,False
-motorbike,459,HARLEY-DAVIDSON,HARLEY-DAVIDSON IRON,235,93.83,0,,none,False
-motorbike,460,HONDA,HONDA ADV 750-T,235,93.85,0,,none,False
-motorbike,461,LEXMOTO,LEXMOTO SR,235,93.87,0,,none,False
-motorbike,462,MOTO GUZZI,MOTO GUZZI V9,235,93.89,0,,none,False
-motorbike,463,MUTT,MUTT AKITA,235,93.91,0,,none,False
-motorbike,464,SUZUKI,SUZUKI GN,234,93.93,0,,none,False
-motorbike,465,KEEWAY,KEEWAY X-LIGHT,234,93.95,0,,none,False
-motorbike,466,BENELLI,BENELLI 502,231,93.97,0,,none,False
-motorbike,467,LEXMOTO,LEXMOTO CL,230,93.99,0,,none,False
-motorbike,468,BMW,BMW C 650,224,94.01,0,,none,False
-motorbike,469,KAWASAKI,KAWASAKI KMX,224,94.03,0,,none,False
-motorbike,470,NECO,NECO ALEX,224,94.05,0,,none,False
-motorbike,471,YAMAHA,YAMAHA MW,224,94.07,0,,none,False
-motorbike,472,STARK,STARK VARG EX,223,94.08,0,,none,False
-motorbike,473,HYOSUNG,HYOSUNG GT 125,223,94.1,0,,none,False
-motorbike,474,NIU,NIU M SERIES,222,94.12,0,,none,False
-motorbike,475,LEXMOTO,LEXMOTO CARRERA,222,94.14,0,,none,False
-motorbike,476,SYM,SYM JOYMAX,220,94.16,0,,none,False
-motorbike,477,DUCATI,DUCATI 1198,218,94.18,0,,none,False
-motorbike,478,ROYAL ALLOY,ROYAL ALLOY GP 200,217,94.2,0,,none,False
-motorbike,479,HARLEY-DAVIDSON,HARLEY-DAVIDSON XR,216,94.22,0,,none,False
-motorbike,480,HONDA,HONDA C50,215,94.24,0,,none,False
-motorbike,481,MUTT,MUTT MASTIFF,214,94.25,0,,none,False
-motorbike,482,HARLEY-DAVIDSON,HARLEY-DAVIDSON SOFTAIL,213,94.27,0,,none,False
-motorbike,483,KYMCO,KYMCO SUPER 8,210,94.29,0,,none,False
-motorbike,484,NECO,NECO JN,208,94.31,0,,none,False
-motorbike,485,PEUGEOT,PEUGEOT VIVACITY,207,94.33,0,,none,False
-motorbike,486,FANTIC MOTOR,FANTIC MOTOR XEF,207,94.34,0,,none,False
-motorbike,487,NECO,NECO GPX 50,207,94.36,0,,none,False
-motorbike,488,TALARIA,TALARIA TL,206,94.38,0,,none,False
-motorbike,489,YAMAHA,YAMAHA TW,206,94.4,0,,none,False
-motorbike,490,ZHONGNENG,ZHONGNENG ZN 50,206,94.42,0,,none,False
-motorbike,491,AJS,AJS DIGITA,205,94.43,0,,none,False
-motorbike,492,HARLEY-DAVIDSON,HARLEY-DAVIDSON SOFTAIL DEUCE,205,94.45,0,,none,False
-motorbike,493,BMW,BMW R 80,205,94.47,0,,none,False
-motorbike,494,LEXMOTO,LEXMOTO ENIGMA,205,94.49,0,,none,False
-motorbike,495,YAMAHA,YAMAHA AEROX,205,94.5,0,,none,False
-motorbike,496,UM,UM RENEGADE,204,94.52,0,,none,False
-motorbike,497,BMW,BMW CE 04,203,94.54,0,,none,False
-motorbike,498,BMW,BMW R 1100 RS,201,94.56,0,,none,False
-motorbike,499,BMW,BMW F 800 S,200,94.57,0,,none,False
-motorbike,500,SYM,SYM ADX 125,200,94.59,0,,none,False
-motorbike,501,BENELLI,BENELLI IMPERIALE,199,94.61,0,,none,False
-motorbike,502,BMW,BMW M 1000 RR,197,94.62,0,,none,False
-motorbike,503,YAMAHA,YAMAHA BT,197,94.64,0,,none,False
-motorbike,504,AJS,AJS DESERT SCRAMBLER,195,94.66,0,,none,False
-motorbike,505,HARLEY-DAVIDSON,HARLEY-DAVIDSON SWITCHBACK,195,94.68,0,,none,False
-motorbike,506,MGB,MGB FANTASY,195,94.69,0,,none,False
-motorbike,507,PIAGGIO,PIAGGIO XEVO,195,94.71,0,,none,False
-motorbike,508,YAMASAKI,YAMASAKI F31,195,94.73,0,,none,False
-motorbike,509,LEXMOTO,LEXMOTO LX,193,94.74,0,,none,False
-motorbike,510,HONDA,HONDA NTV,190,94.76,0,,none,False
-motorbike,511,PIAGGIO,PIAGGIO NRG,190,94.78,0,,none,False
-motorbike,512,QJMOTOR,QJMOTOR SRT,190,94.79,0,,none,False
-motorbike,513,KTM,KTM 640,189,94.81,0,,none,False
-motorbike,514,INDIAN,INDIAN CHIEFTAIN,189,94.82,0,,none,False
-motorbike,515,CFMOTO,CFMOTO 675,188,94.84,0,,none,False
-motorbike,516,YAMAHA,YAMAHA NEO'S,187,94.86,0,,none,False
-motorbike,517,BMW,BMW HP4,187,94.87,0,,none,False
-motorbike,518,PIAGGIO,PIAGGIO X10,185,94.89,0,,none,False
-motorbike,519,SYM,SYM SYMNH,184,94.9,0,,none,False
-motorbike,520,BMW,BMW F 450 GS,184,94.92,0,,none,False
-motorbike,521,HONDA,HONDA ST 1300 A,182,94.94,0,,none,False
-motorbike,522,KAWASAKI,KAWASAKI BN,182,94.95,0,,none,False
-motorbike,523,HONDA,HONDA XRV750,181,94.97,0,,none,False
-motorbike,524,ROYAL ALLOY,ROYAL ALLOY GP 350,180,94.98,0,,none,False
-motorbike,525,VICTORY,VICTORY VEGAS,180,95.0,0,,none,False
-motorbike,526,YAMAHA,YAMAHA NIKEN,180,95.01,0,,none,False
+motorbike,1,SUZUKI,SUZUKI GSX,38419,3.32,0,,none,False
+motorbike,2,HONDA,HONDA CB,34639,6.32,0,,none,False
+motorbike,3,TRIUMPH,TRIUMPH TIGER,34107,9.26,0,,none,False
+motorbike,4,HONDA,HONDA CBR,33613,12.17,0,,none,False
+motorbike,5,KAWASAKI,KAWASAKI ZX,29890,14.75,0,,none,False
+motorbike,6,YAMAHA,YAMAHA MT,28642,17.23,0,,none,False
+motorbike,7,TRIUMPH,TRIUMPH BONNEVILLE,26965,19.56,0,,none,False
+motorbike,8,HONDA,HONDA WW125,21755,21.44,0,,none,False
+motorbike,9,PIAGGIO,PIAGGIO VESPA,20758,23.23,0,,none,False
+motorbike,10,TRIUMPH,TRIUMPH STREET,17453,24.74,0,,none,False
+motorbike,11,KAWASAKI,KAWASAKI ZR,17174,26.23,0,,none,False
+motorbike,12,TRIUMPH,TRIUMPH SPEED,16929,27.69,0,,none,False
+motorbike,13,YAMAHA,YAMAHA YZF,15258,29.01,0,,none,False
+motorbike,14,YAMAHA,YAMAHA GPD,14407,30.26,0,,none,False
+motorbike,15,BMW,BMW R 1200 GS,14374,31.5,0,,none,False
+motorbike,16,BMW,BMW R 1250 GS,13522,32.67,0,,none,False
+motorbike,17,SUZUKI,SUZUKI GSF,12966,33.79,0,,none,False
+motorbike,18,HONDA,HONDA NSC,11975,34.82,0,,none,False
+motorbike,19,HONDA,HONDA CBF 125,11797,35.84,0,,none,False
+motorbike,20,HARLEY-DAVIDSON,HARLEY-DAVIDSON XL,11625,36.85,0,,none,False
+motorbike,21,SUZUKI,SUZUKI DL,9740,37.69,0,,none,False
+motorbike,22,HONDA,HONDA NC750,9521,38.51,0,,none,False
+motorbike,23,HONDA,HONDA NSS,9330,39.32,0,,none,False
+motorbike,24,DUCATI,DUCATI MULTISTRADA,8900,40.09,0,,none,False
+motorbike,25,YAMAHA,YAMAHA TRACER,8762,40.85,0,,none,False
+motorbike,26,KAWASAKI,KAWASAKI EX,8406,41.57,0,,none,False
+motorbike,27,SUZUKI,SUZUKI SV,8364,42.3,0,,none,False
+motorbike,28,KTM,KTM 1290,7976,42.98,0,,none,False
+motorbike,29,KAWASAKI,KAWASAKI ER,7517,43.63,0,,none,False
+motorbike,30,HONDA,HONDA CBF,7109,44.25,0,,none,False
+motorbike,31,HONDA,HONDA SH 125,6816,44.84,0,,none,False
+motorbike,32,YAMAHA,YAMAHA XSR,6378,45.39,0,,none,False
+motorbike,33,BMW,BMW R 1300 GS,6355,45.94,0,,none,False
+motorbike,34,ROYAL ENFIELD,ROYAL ENFIELD INTERCEPTOR,5887,46.45,0,,none,False
+motorbike,35,TRIUMPH,TRIUMPH SCRAMBLER,5601,46.93,0,,none,False
+motorbike,36,KTM,KTM 125,5482,47.41,0,,none,False
+motorbike,37,BMW,BMW S 1000 XR,5430,47.88,0,,none,False
+motorbike,38,YAMAHA,YAMAHA YBR,5335,48.34,0,,none,False
+motorbike,39,YAMAHA,YAMAHA FZS,5252,48.79,0,,none,False
+motorbike,40,YAMAHA,YAMAHA FZ,5246,49.24,0,,none,False
+motorbike,41,ROYAL ENFIELD,ROYAL ENFIELD METEOR,5244,49.7,0,,none,False
+motorbike,42,HONDA,HONDA XL,5154,50.14,0,,none,False
+motorbike,43,HONDA,HONDA MSX,5146,50.59,0,,none,False
+motorbike,44,ROYAL ENFIELD,ROYAL ENFIELD HIMALAYAN,5130,51.03,0,,none,False
+motorbike,45,BMW,BMW S 1000 RR,4950,51.46,0,,none,False
+motorbike,46,TRIUMPH,TRIUMPH SPRINT,4885,51.88,0,,none,False
+motorbike,47,APRILIA,APRILIA TUONO,4755,52.29,0,,none,False
+motorbike,48,YAMAHA,YAMAHA TENERE,4747,52.7,0,,none,False
+motorbike,49,TRIUMPH,TRIUMPH TRIDENT,4620,53.1,0,,none,False
+motorbike,50,KAWASAKI,KAWASAKI KLE,4618,53.5,0,,none,False
+motorbike,51,HONDA,HONDA GLR 125,4580,53.9,0,,none,False
+motorbike,52,ZONTES,ZONTES ZT,4479,54.28,0,,none,False
+motorbike,53,HONDA,HONDA CRF,4321,54.66,0,,none,False
+motorbike,54,BMW,BMW R 1200 RT,4308,55.03,0,,none,False
+motorbike,55,SYM,SYM JET,4286,55.4,0,,none,False
+motorbike,56,BMW,BMW S 1000 R,4286,55.77,0,,none,False
+motorbike,57,HONDA,HONDA CRF 300,4154,56.13,0,,none,False
+motorbike,58,DUCATI,DUCATI MONSTER,4153,56.49,0,,none,False
+motorbike,59,TRIUMPH,TRIUMPH DAYTONA,4071,56.84,0,,none,False
+motorbike,60,YAMAHA,YAMAHA XVS,4033,57.19,0,,none,False
+motorbike,61,YAMAHA,YAMAHA X,4018,57.54,0,,none,False
+motorbike,62,YAMAHA,YAMAHA XJR,4010,57.88,0,,none,False
+motorbike,63,BMW,BMW R NINET,3814,58.21,0,,none,False
+motorbike,64,HONDA,HONDA NT,3796,58.54,0,,none,False
+motorbike,65,TRIUMPH,TRIUMPH ROCKET,3784,58.87,0,,none,False
+motorbike,66,ROYAL ENFIELD,ROYAL ENFIELD BULLET,3769,59.19,0,,none,False
+motorbike,67,HARLEY-DAVIDSON,HARLEY-DAVIDSON FAT BOY,3699,59.51,0,,none,False
+motorbike,68,KTM,KTM 390,3626,59.83,0,,none,False
+motorbike,69,HONDA,HONDA CMX 500,3614,60.14,0,,none,False
+motorbike,70,YAMAHA,YAMAHA XJ,3597,60.45,0,,none,False
+motorbike,71,DUCATI,DUCATI SCRAMBLER,3570,60.76,0,,none,False
+motorbike,72,KAWASAKI,KAWASAKI KLZ,3564,61.07,0,,none,False
+motorbike,73,HONDA,HONDA VFR,3485,61.37,0,,none,False
+motorbike,74,YAMAHA,YAMAHA XT,3474,61.67,0,,none,False
+motorbike,75,HONDA,HONDA CRF 1100,3408,61.96,0,,none,False
+motorbike,76,YAMAHA,YAMAHA R,3362,62.25,0,,none,False
+motorbike,77,KTM,KTM 790,3360,62.54,0,,none,False
+motorbike,78,KAWASAKI,KAWASAKI EN,3336,62.83,0,,none,False
+motorbike,79,LEXMOTO,LEXMOTO LXR,3318,63.12,0,,none,False
+motorbike,80,HONDA,HONDA CRF 250,3316,63.41,0,,none,False
+motorbike,81,YAMAHA,YAMAHA WR,3201,63.68,0,,none,False
+motorbike,82,BMW,BMW R 1250 RT,3156,63.96,0,,none,False
+motorbike,83,TRIUMPH,TRIUMPH THUNDERBIRD,3114,64.23,0,,none,False
+motorbike,84,KEEWAY,KEEWAY SUPERLIGHT,3055,64.49,0,,none,False
+motorbike,85,YAMAHA,YAMAHA FJR,3017,64.75,0,,none,False
+motorbike,86,KAWASAKI,KAWASAKI VN,3007,65.01,0,,none,False
+motorbike,87,YAMAHA,YAMAHA NMAX,2996,65.27,0,,none,False
+motorbike,88,HONDA,HONDA Z 125,2989,65.53,0,,none,False
+motorbike,89,BENELLI,BENELLI BN,2954,65.78,0,,none,False
+motorbike,90,HARLEY-DAVIDSON,HARLEY-DAVIDSON FAT BOB,2917,66.03,0,,none,False
+motorbike,91,KTM,KTM 690,2872,66.28,0,,none,False
+motorbike,92,KTM,KTM 890,2809,66.53,0,,none,False
+motorbike,93,KTM,KTM 250,2779,66.77,0,,none,False
+motorbike,94,PIAGGIO,PIAGGIO LIBERTY,2777,67.01,0,,none,False
+motorbike,95,TRIUMPH,TRIUMPH THRUXTON,2768,67.25,0,,none,False
+motorbike,96,ROYAL ENFIELD,ROYAL ENFIELD CLASSIC,2756,67.48,0,,none,False
+motorbike,97,SUZUKI,SUZUKI AN,2744,67.72,0,,none,False
+motorbike,98,HARLEY-DAVIDSON,HARLEY-DAVIDSON HERITAGE,2737,67.96,0,,none,False
+motorbike,99,BMW,BMW K 1600,2700,68.19,0,,none,False
+motorbike,100,APRILIA,APRILIA RS,2639,68.42,0,,none,False
+motorbike,101,DUCATI,DUCATI PANIGALE,2634,68.65,0,,none,False
+motorbike,102,MOTO GUZZI,MOTO GUZZI V7,2630,68.87,0,,none,False
+motorbike,103,HARLEY-DAVIDSON,HARLEY-DAVIDSON ROAD KING,2464,69.09,0,,none,False
+motorbike,104,INDIAN,INDIAN SCOUT,2427,69.3,0,,none,False
+motorbike,105,PIAGGIO,PIAGGIO PX125,2408,69.5,0,,none,False
+motorbike,106,KTM,KTM 300,2358,69.71,0,,none,False
+motorbike,107,HONDA,HONDA VFR800F,2324,69.91,0,,none,False
+motorbike,108,HONDA,HONDA VFR 1200,2272,70.11,0,,none,False
+motorbike,109,HONDA,HONDA VFR 800,2265,70.3,0,,none,False
+motorbike,110,HONDA,HONDA GL,2235,70.5,0,,none,False
+motorbike,111,VMOTO,VMOTO CPA,2224,70.69,0,,none,False
+motorbike,112,HARLEY-DAVIDSON,HARLEY-DAVIDSON BREAKOUT,2217,70.88,0,,none,False
+motorbike,113,HARLEY-DAVIDSON,HARLEY-DAVIDSON STREET BOB,2192,71.07,0,,none,False
+motorbike,114,HONDA,HONDA ADV 350,2135,71.25,0,,none,False
+motorbike,115,HONDA,HONDA FSH125,2122,71.44,0,,none,False
+motorbike,116,BMW,BMW F 900 XR,2105,71.62,0,,none,False
+motorbike,117,DUCATI,DUCATI STREETFIGHTER,2096,71.8,0,,none,False
+motorbike,118,KTM,KTM 990,2037,71.98,0,,none,False
+motorbike,119,DUCATI,DUCATI DIAVEL,2028,72.15,0,,none,False
+motorbike,120,BMW,BMW F 800 GS,2015,72.33,0,,none,False
+motorbike,121,BENELLI,BENELLI TORNADO,1986,72.5,0,,none,False
+motorbike,122,APRILIA,APRILIA RSV,1942,72.66,0,,none,False
+motorbike,123,SUZUKI,SUZUKI GSR,1914,72.83,0,,none,False
+motorbike,124,HONDA,HONDA GB 350 S-S,1889,72.99,0,,none,False
+motorbike,125,BMW,BMW R 1250 RS,1881,73.16,0,,none,False
+motorbike,126,DUCATI,DUCATI HYPERMOTARD,1850,73.32,0,,none,False
+motorbike,127,HONDA,HONDA CMX1100,1850,73.48,0,,none,False
+motorbike,128,HARLEY-DAVIDSON,HARLEY-DAVIDSON LOW RIDER,1817,73.63,0,,none,False
+motorbike,129,KTM,KTM 350,1766,73.79,0,,none,False
+motorbike,130,ROYAL ENFIELD,ROYAL ENFIELD CONTINENTAL,1762,73.94,0,,none,False
+motorbike,131,HONDA,HONDA VT,1748,74.09,0,,none,False
+motorbike,132,HUSQVARNA,HUSQVARNA SVARTPILEN,1702,74.24,0,,none,False
+motorbike,133,BMW,BMW K 1300,1690,74.38,0,,none,False
+motorbike,134,HARLEY-DAVIDSON,HARLEY-DAVIDSON SPORT GLIDE,1688,74.53,0,,none,False
+motorbike,135,BMW,BMW R 1200 RS,1638,74.67,0,,none,False
+motorbike,136,HUSQVARNA,HUSQVARNA FE,1626,74.81,0,,none,False
+motorbike,137,YAMAHA,YAMAHA R6,1620,74.95,0,,none,False
+motorbike,138,ROYAL ALLOY,ROYAL ALLOY GT 125,1610,75.09,0,,none,False
+motorbike,139,APRILIA,APRILIA SR,1608,75.23,0,,none,False
+motorbike,140,BMW,BMW F 900 R,1588,75.37,0,,none,False
+motorbike,141,HUSQVARNA,HUSQVARNA TE,1585,75.5,0,,none,False
+motorbike,142,BENELLI,BENELLI TRK,1582,75.64,0,,none,False
+motorbike,143,SUZUKI,SUZUKI VL,1574,75.78,0,,none,False
+motorbike,144,HARLEY-DAVIDSON,HARLEY-DAVIDSON STREET,1571,75.91,0,,none,False
+motorbike,145,BMW,BMW R 1150 GS,1569,76.05,0,,none,False
+motorbike,146,KTM,KTM RC,1562,76.18,0,,none,False
+motorbike,147,SUZUKI,SUZUKI RV,1546,76.32,0,,none,False
+motorbike,148,SUZUKI,SUZUKI UK,1534,76.45,0,,none,False
+motorbike,149,KAWASAKI,KAWASAKI BR,1532,76.58,0,,none,False
+motorbike,150,HONDA,HONDA ST,1525,76.71,0,,none,False
+motorbike,151,PIAGGIO,PIAGGIO PX 200,1518,76.84,0,,none,False
+motorbike,152,ROYAL ENFIELD,ROYAL ENFIELD HUNTER,1516,76.97,0,,none,False
+motorbike,153,HARLEY-DAVIDSON,HARLEY-DAVIDSON SPORTSTER,1510,77.11,0,,none,False
+motorbike,154,YAMAHA,YAMAHA YP,1503,77.24,0,,none,False
+motorbike,155,BMW,BMW K 1200,1482,77.36,0,,none,False
+motorbike,156,PEUGEOT,PEUGEOT KISBEE,1462,77.49,0,,none,False
+motorbike,157,BMW,BMW F 850 GS,1448,77.61,0,,none,False
+motorbike,158,PEUGEOT,PEUGEOT SPEEDFIGHT,1435,77.74,0,,none,False
+motorbike,159,BMW,BMW F 800 GT,1426,77.86,0,,none,False
+motorbike,160,LEXMOTO,LEXMOTO DIABLO,1422,77.99,0,,none,False
+motorbike,161,LEXMOTO,LEXMOTO ECHO,1401,78.11,0,,none,False
+motorbike,162,HARLEY-DAVIDSON,HARLEY-DAVIDSON STREET GLIDE,1395,78.23,0,,none,False
+motorbike,163,SUZUKI,SUZUKI DR-Z,1371,78.35,0,,none,False
+motorbike,164,KAWASAKI,KAWASAKI EJ,1350,78.46,0,,none,False
+motorbike,165,BMW,BMW F 750 GS,1349,78.58,0,,none,False
+motorbike,166,AJS,AJS MODENA,1342,78.69,0,,none,False
+motorbike,167,HONDA,HONDA VTR,1338,78.81,0,,none,False
+motorbike,168,MOTO GUZZI,MOTO GUZZI V85,1308,78.92,0,,none,False
+motorbike,169,YAMAHA,YAMAHA XV,1301,79.04,0,,none,False
+motorbike,170,HUSQVARNA,HUSQVARNA 701,1300,79.15,0,,none,False
+motorbike,171,KAWASAKI,KAWASAKI BX,1293,79.26,0,,none,False
+motorbike,172,BMW,BMW F 650 GS,1288,79.37,0,,none,False
+motorbike,173,YAMAHA,YAMAHA XC,1283,79.48,0,,none,False
+motorbike,174,BSA,BSA GOLD STAR,1273,79.59,0,,none,False
+motorbike,175,YAMAHA,YAMAHA YS,1271,79.7,0,,none,False
+motorbike,176,KYMCO,KYMCO AGILITY,1267,79.81,0,,none,False
+motorbike,177,LEXMOTO,LEXMOTO AURA,1266,79.92,0,,none,False
+motorbike,178,ROYAL ALLOY,ROYAL ALLOY GP 300,1259,80.03,0,,none,False
+motorbike,179,LML,LML STAR,1257,80.14,0,,none,False
+motorbike,180,BMW,BMW G 310 GS,1254,80.25,0,,none,False
+motorbike,181,GAS GAS,GAS GAS EC,1242,80.35,0,,none,False
+motorbike,182,SUZUKI,SUZUKI SFV,1232,80.46,0,,none,False
+motorbike,183,YAMAHA,YAMAHA TDM,1231,80.57,0,,none,False
+motorbike,184,HONDA,HONDA ANC,1230,80.67,0,,none,False
+motorbike,185,HONDA,HONDA C 125,1229,80.78,0,,none,False
+motorbike,186,BETA,BETA RR 2T,1225,80.89,0,,none,False
+motorbike,187,HARLEY-DAVIDSON,HARLEY-DAVIDSON V-ROD,1222,80.99,0,,none,False
+motorbike,188,LEXMOTO,LEXMOTO LXS,1212,81.1,0,,none,False
+motorbike,189,BMW,BMW R 1200 R,1203,81.2,0,,none,False
+motorbike,190,KTM,KTM 450,1195,81.3,0,,none,False
+motorbike,191,HONDA,HONDA C90,1189,81.41,0,,none,False
+motorbike,192,HARLEY-DAVIDSON,HARLEY-DAVIDSON SUPER GLIDE,1186,81.51,0,,none,False
+motorbike,193,TRIUMPH,TRIUMPH TROPHY,1182,81.61,0,,none,False
+motorbike,194,PIAGGIO,PIAGGIO ZIP,1170,81.71,0,,none,False
+motorbike,195,LEXMOTO,LEXMOTO MICHIGAN,1138,81.81,0,,none,False
+motorbike,196,ROYAL ALLOY,ROYAL ALLOY GP 125,1119,81.91,0,,none,False
+motorbike,197,NORTON,NORTON COMMANDO,1116,82.0,0,,none,False
+motorbike,198,BMW,BMW G 310 R,1107,82.1,0,,none,False
+motorbike,199,ROYAL ENFIELD,ROYAL ENFIELD GUERRILLA 450,1095,82.19,0,,none,False
+motorbike,200,BMW,BMW R 12,1084,82.29,0,,none,False
+motorbike,201,LAMBRETTA,LAMBRETTA GP,1076,82.38,0,,none,False
+motorbike,202,PIAGGIO,PIAGGIO MEDLEY,1076,82.47,0,,none,False
+motorbike,203,HONDA,HONDA NC,1060,82.57,0,,none,False
+motorbike,204,PEUGEOT,PEUGEOT TWEET,1042,82.66,0,,none,False
+motorbike,205,BMW,BMW C 400,1039,82.75,0,,none,False
+motorbike,206,KAWASAKI,KAWASAKI ZG,1031,82.83,0,,none,False
+motorbike,207,KTM,KTM 1190,1021,82.92,0,,none,False
+motorbike,208,HARLEY-DAVIDSON,HARLEY-DAVIDSON ELECTRA GLIDE,1005,83.01,0,,none,False
+motorbike,209,BMW,BMW F 900 GS,1005,83.1,0,,none,False
+motorbike,210,SUZUKI,SUZUKI UZ,999,83.18,0,,none,False
+motorbike,211,SUZUKI,SUZUKI UN,994,83.27,0,,none,False
+motorbike,212,LAMBRETTA,LAMBRETTA V,973,83.35,0,,none,False
+motorbike,213,KEEWAY,KEEWAY RKV 125,972,83.44,0,,none,False
+motorbike,214,BMW,BMW M 1000 R,955,83.52,0,,none,False
+motorbike,215,HARLEY-DAVIDSON,HARLEY-DAVIDSON PAN AMERICA,945,83.6,0,,none,False
+motorbike,216,VOGE,VOGE R 125,943,83.68,0,,none,False
+motorbike,217,ROYAL ALLOY,ROYAL ALLOY TG,934,83.76,0,,none,False
+motorbike,218,HONDA,HONDA CG,928,83.84,0,,none,False
+motorbike,219,DUCATI,DUCATI SUPERSPORT,923,83.92,0,,none,False
+motorbike,220,SUZUKI,SUZUKI UB,916,84.0,0,,none,False
+motorbike,221,DUCATI,DUCATI M1200,912,84.08,0,,none,False
+motorbike,222,BMW,BMW R 1250 R,907,84.16,0,,none,False
+motorbike,223,CFMOTO,CFMOTO 450,897,84.24,0,,none,False
+motorbike,224,HARLEY-DAVIDSON,HARLEY-DAVIDSON DYNA,895,84.31,0,,none,False
+motorbike,225,YAMAHA,YAMAHA DELIGHT,895,84.39,0,,none,False
+motorbike,226,BMW,BMW F 800 ST,891,84.47,0,,none,False
+motorbike,227,SUZUKI,SUZUKI VZ,889,84.55,0,,none,False
+motorbike,228,YAMAHA,YAMAHA DT,888,84.62,0,,none,False
+motorbike,229,ROYAL ENFIELD,ROYAL ENFIELD SCRAM,888,84.7,0,,none,False
+motorbike,230,HARLEY-DAVIDSON,HARLEY-DAVIDSON ROAD GLIDE,884,84.78,0,,none,False
+motorbike,231,KAWASAKI,KAWASAKI Z,883,84.85,0,,none,False
+motorbike,232,HONDA,HONDA CL,881,84.93,0,,none,False
+motorbike,233,LEXMOTO,LEXMOTO LJ,878,85.0,0,,none,False
+motorbike,234,KEEWAY,KEEWAY K-LIGHT,871,85.08,0,,none,False
+motorbike,235,YAMAHA,YAMAHA RD,860,85.15,0,,none,False
+motorbike,236,MV AGUSTA,MV AGUSTA BRUTALE,841,85.23,0,,none,False
+motorbike,237,HONDA,HONDA SH 300,828,85.3,0,,none,False
+motorbike,238,SUZUKI,SUZUKI GS,824,85.37,0,,none,False
+motorbike,239,SYM,SYM ORBIT,821,85.44,0,,none,False
+motorbike,240,BMW,BMW F 800 R,820,85.51,0,,none,False
+motorbike,241,LEXMOTO,LEXMOTO ZSB,816,85.58,0,,none,False
+motorbike,242,HARLEY-DAVIDSON,HARLEY-DAVIDSON WIDE GLIDE,812,85.65,0,,none,False
+motorbike,243,KEEWAY,KEEWAY RKS 125,809,85.72,0,,none,False
+motorbike,244,BMW,BMW R 18,805,85.79,0,,none,False
+motorbike,245,HARLEY-DAVIDSON,HARLEY-DAVIDSON ULTRA LIMITED,801,85.86,0,,none,False
+motorbike,246,BETA,BETA XTRAINER,797,85.93,0,,none,False
+motorbike,247,MUTT,MUTT MONGREL,791,86.0,0,,none,False
+motorbike,248,YAMAHA,YAMAHA YZ,782,86.07,0,,none,False
+motorbike,249,HONDA,HONDA ST1300,774,86.13,0,,none,False
+motorbike,250,HONDA,HONDA CBR 600 R3-R,774,86.2,0,,none,False
+motorbike,251,KEEWAY,KEEWAY RKF,771,86.27,0,,none,False
+motorbike,252,HONDA,HONDA SH,770,86.33,0,,none,False
+motorbike,253,HONDA,HONDA ANF,756,86.4,0,,none,False
+motorbike,254,PIAGGIO,PIAGGIO T5 125,750,86.46,0,,none,False
+motorbike,255,HONDA,HONDA XR,737,86.53,0,,none,False
+motorbike,256,INDIAN,INDIAN CHIEF,736,86.59,0,,none,False
+motorbike,257,SUZUKI,SUZUKI GZ,730,86.65,0,,none,False
+motorbike,258,BENELLI,BENELLI LEONCINO,729,86.72,0,,none,False
+motorbike,259,DUCATI,DUCATI DESERT,722,86.78,0,,none,False
+motorbike,260,VOGE,VOGE DS 900 X,715,86.84,0,,none,False
+motorbike,261,DUCATI,DUCATI X DIAVEL,713,86.9,0,,none,False
+motorbike,262,HONDA,HONDA FJS,700,86.96,0,,none,False
+motorbike,263,MOTO GUZZI,MOTO GUZZI V100,698,87.02,0,,none,False
+motorbike,264,NIU,NIU NQI,697,87.08,0,,none,False
+motorbike,265,KTM,KTM 500,691,87.14,0,,none,False
+motorbike,266,HONDA,HONDA ST1100,687,87.2,0,,none,False
+motorbike,267,HONDA,HONDA ADV750,683,87.26,0,,none,False
+motorbike,268,SINNIS,SINNIS ZS 125,682,87.32,0,,none,False
+motorbike,269,LEXMOTO,LEXMOTO ASSAULT,677,87.38,0,,none,False
+motorbike,270,KTM,KTM 1390,673,87.44,0,,none,False
+motorbike,271,BMW,BMW F 650,660,87.49,0,,none,False
+motorbike,272,APRILIA,APRILIA SX,660,87.55,0,,none,False
+motorbike,273,HARLEY-DAVIDSON,HARLEY-DAVIDSON DELUXE,653,87.61,0,,none,False
+motorbike,274,HONDA,HONDA FES,652,87.66,0,,none,False
+motorbike,275,SUZUKI,SUZUKI UH,645,87.72,0,,none,False
+motorbike,276,SYM,SYM MASK,640,87.77,0,,none,False
+motorbike,277,BSA,BSA BANTAM,636,87.83,0,,none,False
+motorbike,278,BETA,BETA RR 4T,635,87.88,0,,none,False
+motorbike,279,SINNIS,SINNIS TERRAIN,629,87.94,0,,none,False
+motorbike,280,YAMAHA,YAMAHA NXC,623,87.99,0,,none,False
+motorbike,281,APRILIA,APRILIA TUAREG,618,88.05,0,,none,False
+motorbike,282,HARLEY-DAVIDSON,HARLEY-DAVIDSON SOFTAIL STANDARD,616,88.1,0,,none,False
+motorbike,283,LEXMOTO,LEXMOTO LS,616,88.15,0,,none,False
+motorbike,284,SUZUKI,SUZUKI DR,615,88.21,0,,none,False
+motorbike,285,INDIAN,INDIAN FTR,615,88.26,0,,none,False
+motorbike,286,LEXMOTO,LEXMOTO TR,614,88.31,0,,none,False
+motorbike,287,HONDA,HONDA NT650V DEAUVILLE,605,88.36,0,,none,False
+motorbike,288,SUZUKI,SUZUKI GW,605,88.42,0,,none,False
+motorbike,289,HUSQVARNA,HUSQVARNA VITPILEN,603,88.47,0,,none,False
+motorbike,290,HARLEY-DAVIDSON,HARLEY-DAVIDSON SOFTAIL SLIM,601,88.52,0,,none,False
+motorbike,291,KAWASAKI,KAWASAKI SC,601,88.57,0,,none,False
+motorbike,292,SYM,SYM FIDDLE,597,88.62,0,,none,False
+motorbike,293,SCOMADI,SCOMADI TURISMO,593,88.68,0,,none,False
+motorbike,294,LEXMOTO,LEXMOTO TITAN,593,88.73,0,,none,False
+motorbike,295,PIAGGIO,PIAGGIO FLY,586,88.78,0,,none,False
+motorbike,296,APRILIA,APRILIA RX,582,88.83,0,,none,False
+motorbike,297,SUZUKI,SUZUKI VZR,580,88.88,0,,none,False
+motorbike,298,KAWASAKI,KAWASAKI EL,578,88.93,0,,none,False
+motorbike,299,BMW,BMW F 700 GS,575,88.98,0,,none,False
+motorbike,300,BMW,BMW M 1000 XR,572,89.03,0,,none,False
+motorbike,301,LEXMOTO,LEXMOTO MILANO,571,89.08,0,,none,False
+motorbike,302,MAEVING,MAEVING RM1S,564,89.13,0,,none,False
+motorbike,303,SUZUKI,SUZUKI TL,562,89.17,0,,none,False
+motorbike,304,LEXMOTO,LEXMOTO R66,562,89.22,0,,none,False
+motorbike,305,YAMAHA,YAMAHA XP,559,89.27,0,,none,False
+motorbike,306,BMW,BMW R 1300 RT,556,89.32,0,,none,False
+motorbike,307,BMW,BMW R 1150 RT,546,89.37,0,,none,False
+motorbike,308,DUCATI,DUCATI 848,545,89.41,0,,none,False
+motorbike,309,HUSQVARNA,HUSQVARNA 901,545,89.46,0,,none,False
+motorbike,310,PEUGEOT,PEUGEOT DJANGO,538,89.51,0,,none,False
+motorbike,311,SYM,SYM SYMPHONY,538,89.55,0,,none,False
+motorbike,312,HONDA,HONDA CG125,537,89.6,0,,none,False
+motorbike,313,BMW,BMW G 650 GS,535,89.65,0,,none,False
+motorbike,314,HONDA,HONDA ST 125,528,89.69,0,,none,False
+motorbike,315,DUCATI,DUCATI 1199,527,89.74,0,,none,False
+motorbike,316,VOGE,VOGE DS 800 X RALLY,527,89.78,0,,none,False
+motorbike,317,FANTIC MOTOR,FANTIC MOTOR CA50,523,89.83,0,,none,False
+motorbike,318,BMW,BMW R 1100 S,521,89.87,0,,none,False
+motorbike,319,DUCATI,DUCATI 899,521,89.92,0,,none,False
+motorbike,320,HONDA,HONDA C90M,520,89.96,0,,none,False
+motorbike,321,APRILIA,APRILIA SXR,519,90.01,0,,none,False
+motorbike,322,HARLEY-DAVIDSON,HARLEY-DAVIDSON FATBOY,518,90.05,0,,none,False
+motorbike,323,DUCATI,DUCATI 1299,509,90.1,0,,none,False
+motorbike,324,YAMAHA,YAMAHA FAZER,509,90.14,0,,none,False
+motorbike,325,KEEWAY,KEEWAY F-ACT,505,90.18,0,,none,False
+motorbike,326,HONDA,HONDA PES 125,504,90.23,0,,none,False
+motorbike,327,ROYAL ENFIELD,ROYAL ENFIELD SHOTGUN 650,502,90.27,0,,none,False
+motorbike,328,HONDA,HONDA VTX,490,90.31,0,,none,False
+motorbike,329,BMW,BMW R 1300 RS,489,90.36,0,,none,False
+motorbike,330,CFMOTO,CFMOTO 800,484,90.4,0,,none,False
+motorbike,331,YAMAHA,YAMAHA MWS,482,90.44,0,,none,False
+motorbike,332,DUCATI,DUCATI 959,477,90.48,0,,none,False
+motorbike,333,APRILIA,APRILIA DORSODURO,476,90.52,0,,none,False
+motorbike,334,LEXMOTO,LEXMOTO TEMPEST,476,90.56,0,,none,False
+motorbike,335,HONDA,HONDA SH350,475,90.6,0,,none,False
+motorbike,336,LEXMOTO,LEXMOTO ISCA,474,90.64,0,,none,False
+motorbike,337,KAWASAKI,KAWASAKI KLX,473,90.69,0,,none,False
+motorbike,338,RIEJU,RIEJU MRT,472,90.73,0,,none,False
+motorbike,339,WK BIKES,WK BIKES SCRAMBLER,466,90.77,0,,none,False
+motorbike,340,YAMAHA,YAMAHA SR,463,90.81,0,,none,False
+motorbike,341,LEXMOTO,LEXMOTO OCR,455,90.85,0,,none,False
+motorbike,342,HONDA,HONDA VFR750F,444,90.88,0,,none,False
+motorbike,343,YAMASAKI,YAMASAKI YM,441,90.92,0,,none,False
+motorbike,344,VOGE,VOGE 300,421,90.96,0,,none,False
+motorbike,345,KAWASAKI,KAWASAKI ER400,420,91.0,0,,none,False
+motorbike,346,MOTO GUZZI,MOTO GUZZI STELVIO,420,91.03,0,,none,False
+motorbike,347,BMW,BMW R 850 R,414,91.07,0,,none,False
+motorbike,348,BMW,BMW R 1150 R,409,91.1,0,,none,False
+motorbike,349,HONDA,HONDA CRF 450,409,91.14,0,,none,False
+motorbike,350,BMW,BMW R 1100 RT,407,91.17,0,,none,False
+motorbike,351,VMOTO,VMOTO TCM,406,91.21,0,,none,False
+motorbike,352,BMW,BMW R 80 RT,406,91.24,0,,none,False
+motorbike,353,PIAGGIO,PIAGGIO TYPHOON,404,91.28,0,,none,False
+motorbike,354,LEXMOTO,LEXMOTO VENOM,403,91.31,0,,none,False
+motorbike,355,HARLEY-DAVIDSON,HARLEY-DAVIDSON ROADSTER,401,91.35,0,,none,False
+motorbike,356,HONDA,HONDA ST1100A,399,91.38,0,,none,False
+motorbike,357,HONDA,HONDA VTR1000,396,91.42,0,,none,False
+motorbike,358,MOTO GUZZI,MOTO GUZZI BREVA,393,91.45,0,,none,False
+motorbike,359,LEXMOTO,LEXMOTO ZSX,393,91.48,0,,none,False
+motorbike,360,MOTO GUZZI,MOTO GUZZI CALIFORNIA,389,91.52,0,,none,False
+motorbike,361,AJS,AJS TEMPEST,388,91.55,0,,none,False
+motorbike,362,MONDIAL,MONDIAL HPS 125,388,91.59,0,,none,False
+motorbike,363,PIAGGIO,PIAGGIO ET2,386,91.62,0,,none,False
+motorbike,364,SINNIS,SINNIS HOODLUM,386,91.65,0,,none,False
+motorbike,365,VMOTO,VMOTO CUX,384,91.69,0,,none,False
+motorbike,366,KTM,KTM 1090,382,91.72,0,,none,False
+motorbike,367,LEXMOTO,LEXMOTO RX1,380,91.75,0,,none,False
+motorbike,368,TRIUMPH,TRIUMPH LEGEND,378,91.78,0,,none,False
+motorbike,369,HARLEY-DAVIDSON,HARLEY-DAVIDSON NIGHT TRAIN,376,91.82,0,,none,False
+motorbike,370,YAMAHA,YAMAHA YN,368,91.85,0,,none,False
+motorbike,371,DUCATI,DUCATI ST,363,91.88,0,,none,False
+motorbike,372,DUCATI,DUCATI 1098,358,91.91,0,,none,False
+motorbike,373,SHERCO,SHERCO 300,358,91.94,0,,none,False
+motorbike,374,VOGE,VOGE DS 625 X,355,91.97,0,,none,False
+motorbike,375,HARLEY-DAVIDSON,HARLEY-DAVIDSON SOFTAIL CUSTOM,354,92.0,0,,none,False
+motorbike,376,QJMOTOR,QJMOTOR SRK,351,92.03,0,,none,False
+motorbike,377,MUTT,MUTT FAT SABBATH,349,92.06,0,,none,False
+motorbike,378,QINGQI,QINGQI QM 125,345,92.09,0,,none,False
+motorbike,379,DUCATI,DUCATI 748,344,92.12,0,,none,False
+motorbike,380,LEXMOTO,LEXMOTO XDV,343,92.15,0,,none,False
+motorbike,381,DUCATI,DUCATI M1100,339,92.18,0,,none,False
+motorbike,382,GILERA,GILERA RUNNER 125,338,92.21,0,,none,False
+motorbike,383,APRILIA,APRILIA SL 750,337,92.24,0,,none,False
+motorbike,384,YAMAHA,YAMAHA TMAX,336,92.27,0,,none,False
+motorbike,385,AJS,AJS FIREFOX,335,92.3,0,,none,False
+motorbike,386,GAS GAS,GAS GAS TXT,332,92.33,0,,none,False
+motorbike,387,BETA,BETA ALP,329,92.36,0,,none,False
+motorbike,388,BMW,BMW K 100,327,92.38,0,,none,False
+motorbike,389,SYM,SYM SYMPLY,326,92.41,0,,none,False
+motorbike,390,HONDA,HONDA NHX,325,92.44,0,,none,False
+motorbike,391,SINNIS,SINNIS SHUTTLE,323,92.47,0,,none,False
+motorbike,392,HARLEY-DAVIDSON,HARLEY-DAVIDSON FORTY EIGHT,320,92.5,0,,none,False
+motorbike,393,HONDA,HONDA C 90,319,92.52,0,,none,False
+motorbike,394,SUR-RON,SUR-RON ULTRA BEE HP,318,92.55,0,,none,False
+motorbike,395,KTM,KTM 950,317,92.58,0,,none,False
+motorbike,396,CFMOTO,CFMOTO 650,317,92.61,0,,none,False
+motorbike,397,MUTT,MUTT HILTS,315,92.63,0,,none,False
+motorbike,398,BULLIT MOTORCYCLES,BULLIT MOTORCYCLES HERO,314,92.66,0,,none,False
+motorbike,399,AJS,AJS CADWELL,313,92.69,0,,none,False
+motorbike,400,NECO,NECO ONE,313,92.71,0,,none,False
+motorbike,401,HYOSUNG,HYOSUNG GV 125,312,92.74,0,,none,False
+motorbike,402,YADEA,YADEA G5,311,92.77,0,,none,False
+motorbike,403,HONDA,HONDA SES,311,92.79,0,,none,False
+motorbike,404,BMW,BMW R 1100 GS,310,92.82,0,,none,False
+motorbike,405,KEEWAY,KEEWAY V CRUISE,306,92.85,0,,none,False
+motorbike,406,MOTO GUZZI,MOTO GUZZI GRISO,306,92.87,0,,none,False
+motorbike,407,ITALJET,ITALJET DRAGSTER,304,92.9,0,,none,False
+motorbike,408,HERALD,HERALD MAVERICK,303,92.93,0,,none,False
+motorbike,409,HONDA,HONDA CBX,302,92.95,0,,none,False
+motorbike,410,YAMASAKI,YAMASAKI TY 125-4E,300,92.98,0,,none,False
+motorbike,411,ASKOLL,ASKOLL ESPRO SERIES,299,93.0,0,,none,False
+motorbike,412,MV AGUSTA,MV AGUSTA F4,297,93.03,0,,none,False
+motorbike,413,HARLEY-DAVIDSON,HARLEY-DAVIDSON NIGHTSTER,291,93.06,0,,none,False
+motorbike,414,BMW,BMW K 75,290,93.08,0,,none,False
+motorbike,415,CFMOTO,CFMOTO 700,289,93.11,0,,none,False
+motorbike,416,BUELL,BUELL LIGHTNING,287,93.13,0,,none,False
+motorbike,417,PIAGGIO,PIAGGIO BEVERLY,287,93.15,0,,none,False
+motorbike,418,YAMAHA,YAMAHA VMX,285,93.18,0,,none,False
+motorbike,419,VOGE,VOGE DS 525 X,282,93.2,0,,none,False
+motorbike,420,DUCATI,DUCATI 749,281,93.23,0,,none,False
+motorbike,421,DUCATI,DUCATI 996,279,93.25,0,,none,False
+motorbike,422,HONDA,HONDA CG125B,278,93.28,0,,none,False
+motorbike,423,KYMCO,KYMCO VISAR 125,276,93.3,0,,none,False
+motorbike,424,MGB,MGB R8,275,93.32,0,,none,False
+motorbike,425,APRILIA,APRILIA PEGASO,272,93.35,0,,none,False
+motorbike,426,DERBI,DERBI SENDA,271,93.37,0,,none,False
+motorbike,427,LEXMOTO,LEXMOTO SRT,270,93.39,0,,none,False
+motorbike,428,E-MAX,E-MAX LB1,268,93.42,0,,none,False
+motorbike,429,HARLEY-DAVIDSON,HARLEY-DAVIDSON ROCKER,268,93.44,0,,none,False
+motorbike,430,YAMAHA,YAMAHA YQ,268,93.46,0,,none,False
+motorbike,431,KEEWAY,KEEWAY V CRUISE 125,268,93.49,0,,none,False
+motorbike,432,YAMAHA,YAMAHA NS,266,93.51,0,,none,False
+motorbike,433,PIAGGIO,PIAGGIO ONE,264,93.53,0,,none,False
+motorbike,434,HARLEY-DAVIDSON,HARLEY-DAVIDSON SPRINGER,264,93.56,0,,none,False
+motorbike,435,KTM,KTM FREERIDE,263,93.58,0,,none,False
+motorbike,436,BLUROC,BLUROC LEGEND,263,93.6,0,,none,False
+motorbike,437,TRIUMPH,TRIUMPH TT600,262,93.62,0,,none,False
+motorbike,438,AJS,AJS DD,261,93.65,0,,none,False
+motorbike,439,MAEVING,MAEVING RM1,258,93.67,0,,none,False
+motorbike,440,HERALD,HERALD BRAT,258,93.69,0,,none,False
+motorbike,441,SYM,SYM NH,258,93.71,0,,none,False
+motorbike,442,TRIUMPH,TRIUMPH TR6,257,93.74,0,,none,False
+motorbike,443,BETA,BETA EVO,255,93.76,0,,none,False
+motorbike,444,BMW,BMW R 1200 C,255,93.78,0,,none,False
+motorbike,445,MONDIAL,MONDIAL SMX,253,93.8,0,,none,False
+motorbike,446,HONDA,HONDA AFS,252,93.82,0,,none,False
+motorbike,447,VOGE,VOGE 300 RALLY,252,93.84,0,,none,False
+motorbike,448,KAWASAKI,KAWASAKI KL,250,93.87,0,,none,False
+motorbike,449,KTM,KTM 200,250,93.89,0,,none,False
+motorbike,450,SUR-RON,SUR-RON LIGHT BEE,249,93.91,0,,none,False
+motorbike,451,MV AGUSTA,MV AGUSTA F3,248,93.93,0,,none,False
+motorbike,452,HONDA,HONDA F6C,248,93.95,0,,none,False
+motorbike,453,DUCATI,DUCATI 999,247,93.97,0,,none,False
+motorbike,454,KEEWAY,KEEWAY VERSILIA,245,93.99,0,,none,False
+motorbike,455,BMW,BMW R 1300 R,242,94.02,0,,none,False
+motorbike,456,KOVE,KOVE 450,239,94.04,0,,none,False
+motorbike,457,VESPA (DOUGLAS),VESPA (DOUGLAS) P200E,239,94.06,0,,none,False
+motorbike,458,VICTORY,VICTORY HAMMER,237,94.08,0,,none,False
+motorbike,459,HARLEY-DAVIDSON,HARLEY-DAVIDSON IRON,235,94.1,0,,none,False
+motorbike,460,HONDA,HONDA ADV 750-T,235,94.12,0,,none,False
+motorbike,461,LEXMOTO,LEXMOTO SR,235,94.14,0,,none,False
+motorbike,462,MOTO GUZZI,MOTO GUZZI V9,235,94.16,0,,none,False
+motorbike,463,MUTT,MUTT AKITA,235,94.18,0,,none,False
+motorbike,464,SUZUKI,SUZUKI GN,234,94.2,0,,none,False
+motorbike,465,KEEWAY,KEEWAY X-LIGHT,234,94.22,0,,none,False
+motorbike,466,BENELLI,BENELLI 502,231,94.24,0,,none,False
+motorbike,467,LEXMOTO,LEXMOTO CL,230,94.26,0,,none,False
+motorbike,468,BMW,BMW C 650,224,94.28,0,,none,False
+motorbike,469,KAWASAKI,KAWASAKI KMX,224,94.3,0,,none,False
+motorbike,470,NECO,NECO ALEX,224,94.32,0,,none,False
+motorbike,471,YAMAHA,YAMAHA MW,224,94.34,0,,none,False
+motorbike,472,STARK,STARK VARG EX,223,94.36,0,,none,False
+motorbike,473,HYOSUNG,HYOSUNG GT 125,223,94.38,0,,none,False
+motorbike,474,NIU,NIU M SERIES,222,94.39,0,,none,False
+motorbike,475,LEXMOTO,LEXMOTO CARRERA,222,94.41,0,,none,False
+motorbike,476,SYM,SYM JOYMAX,220,94.43,0,,none,False
+motorbike,477,DUCATI,DUCATI 1198,218,94.45,0,,none,False
+motorbike,478,ROYAL ALLOY,ROYAL ALLOY GP 200,217,94.47,0,,none,False
+motorbike,479,HARLEY-DAVIDSON,HARLEY-DAVIDSON XR,216,94.49,0,,none,False
+motorbike,480,HONDA,HONDA C50,215,94.51,0,,none,False
+motorbike,481,MUTT,MUTT MASTIFF,214,94.53,0,,none,False
+motorbike,482,HARLEY-DAVIDSON,HARLEY-DAVIDSON SOFTAIL,213,94.54,0,,none,False
+motorbike,483,KYMCO,KYMCO SUPER 8,210,94.56,0,,none,False
+motorbike,484,NECO,NECO JN,208,94.58,0,,none,False
+motorbike,485,PEUGEOT,PEUGEOT VIVACITY,207,94.6,0,,none,False
+motorbike,486,FANTIC MOTOR,FANTIC MOTOR XEF,207,94.62,0,,none,False
+motorbike,487,NECO,NECO GPX 50,207,94.63,0,,none,False
+motorbike,488,TALARIA,TALARIA TL,206,94.65,0,,none,False
+motorbike,489,YAMAHA,YAMAHA TW,206,94.67,0,,none,False
+motorbike,490,ZHONGNENG,ZHONGNENG ZN 50,206,94.69,0,,none,False
+motorbike,491,AJS,AJS DIGITA,205,94.71,0,,none,False
+motorbike,492,HARLEY-DAVIDSON,HARLEY-DAVIDSON SOFTAIL DEUCE,205,94.72,0,,none,False
+motorbike,493,BMW,BMW R 80,205,94.74,0,,none,False
+motorbike,494,LEXMOTO,LEXMOTO ENIGMA,205,94.76,0,,none,False
+motorbike,495,YAMAHA,YAMAHA AEROX,205,94.78,0,,none,False
+motorbike,496,UM,UM RENEGADE,204,94.79,0,,none,False
+motorbike,497,BMW,BMW CE 04,203,94.81,0,,none,False
+motorbike,498,BMW,BMW R 1100 RS,201,94.83,0,,none,False
+motorbike,499,BMW,BMW F 800 S,200,94.85,0,,none,False
+motorbike,500,SYM,SYM ADX 125,200,94.86,0,,none,False
+motorbike,501,BENELLI,BENELLI IMPERIALE,199,94.88,0,,none,False
+motorbike,502,BMW,BMW M 1000 RR,197,94.9,0,,none,False
+motorbike,503,YAMAHA,YAMAHA BT,197,94.91,0,,none,False
+motorbike,504,AJS,AJS DESERT SCRAMBLER,195,94.93,0,,none,False
+motorbike,505,HARLEY-DAVIDSON,HARLEY-DAVIDSON SWITCHBACK,195,94.95,0,,none,False
+motorbike,506,MGB,MGB FANTASY,195,94.97,0,,none,False
+motorbike,507,PIAGGIO,PIAGGIO XEVO,195,94.98,0,,none,False
+motorbike,508,YAMASAKI,YAMASAKI F31,195,95.0,0,,none,False
+motorbike,509,LEXMOTO,LEXMOTO LX,193,95.02,0,,none,False
 bus,1,FORD,FORD TRANSIT,31116,33.18,1,ford-transit-courier-2025-fow1-v1,partial,False
 bus,2,MERCEDES,MERCEDES SPRINTER,12114,46.1,2,mercedes-benz-sprinter-v1|mercedes-benz-sprinter-w7-v1,partial,True
 bus,3,PEUGEOT,PEUGEOT BOXER,9471,56.2,1,peugeot-boxer-v1,refused,True
 bus,4,WRIGHTBUS,WRIGHTBUS STREETDECK,3225,59.63,0,,none,False
 bus,5,VOLKSWAGEN,VOLKSWAGEN TRANSPORTER,2423,62.22,1,volkswagen-transporter-2003-vw2-v1,refused,True
-bus,6,RENAULT,RENAULT MASTER,2170,64.53,1,renault-master-v1,refused,True
+bus,6,RENAULT,RENAULT MASTER,2170,64.53,1,renault-master-v1,ok,True
 bus,7,MERCEDES,MERCEDES TOURISMO,2166,66.84,0,,none,False
 bus,8,FIAT,FIAT DUCATO,1991,68.96,2,fiat-ducato-v1|fiat-ducato-fw1-v1,refused,True
 bus,9,IVECO,IVECO DAILY,1934,71.03,0,,none,False
