@@ -39,7 +39,7 @@ shut, together with its twin. See its docstring for what it measures.
 import bpy, bmesh, json, re, math, os
 from mathutils import Vector, Matrix
 
-VERSION = '1.0.0'
+VERSION = '1.1.0'
 
 
 class Refused(Exception):
@@ -74,7 +74,10 @@ def centre(os_):
 # ── what each mesh is, from its name chain (nearest name wins) ──────────
 RULES = [
     ('steering', r'steer'),
-    ('door',     r'(^|[^a-z])door(?!_?(mirror|handle_int|light_int|seal_body|frame_body|jamb|sill|step|trim_body|opening))|doorf|doorr|door_?[lr][fr]'),
+    # not a digit before it: `Opel_Corsa_5door_2` is the ROOT node of a file
+    # whose 76 meshes are all called `Object_N`, so every one of them read as
+    # a door (the nearest name wins, and the root was the nearest named one)
+    ('door',     r'(^|[^a-z0-9])door(?!_?(mirror|handle_int|light_int|seal_body|frame_body|jamb|sill|step|trim_body|opening))|doorf|doorr|door_?[lr][fr]'),
     # no word boundary before hood: variants are GLUED (`carbonhood`), and a
     # variant left behind z-fights under the one that lifts (BMW M6)
     ('bonnet',   r'(hood|bonnet)(?!_?(piston|strut|latch|ornament|release|prop|scoop_body|vent_body|ie))'),
@@ -224,6 +227,14 @@ def convert(imported, rep, override=None):
         # name today cannot change.
         _material_wheels(objs, K, rep)
         wheels = [o for o in objs if K[o] == 'wheel']
+    if not wheels:
+        # Names found nothing and materials found nothing (the 2011 Corsa:
+        # four wheel objects called `Object_65..68`, material `material`).
+        # Read the SHAPE instead: four round objects on the ground, in the
+        # four corners. Only reached when both earlier finders failed, so a
+        # car that rigs today cannot change.
+        _geometry_wheels(objs, K, rep)
+        wheels = [o for o in objs if K[o] == 'wheel']
     glass = [o for o in objs if K[o] == 'glazing']
     if not wheels:
         raise Refused('no wheels named')
@@ -256,12 +267,25 @@ def convert(imported, rep, override=None):
             cues['red_tail_lamps'] = -rl            # the red end is the BACK, so the nose is the other end
             rep['red_tail_lamps'] = rl
     if not cues:
+        # Nothing is NAMED (the 2009 Fiesta: one body mesh, one glass mesh,
+        # lamps at both ends in one `luz` mesh). Read the SILHOUETTE: over
+        # the front axle the bodywork is the bonnet, low; over the rear axle
+        # it is the roof or the pillars, high. True of front-engined cars,
+        # vans, and even a 911 (a frunk is lower than its engine lid). A
+        # pickup's bed rails sit as low as its bonnet, so it gives no cue
+        # and is refused as before.
+        ta = _top_over_axles(objs, K, wheels)
+        if ta:
+            cues['top_over_axles'] = ta['nose']
+            rep['top_over_axles'] = ta
+    if not cues:
         raise Refused('cannot decide the nose: no bonnet/boot pair, no lamps, no front/rear wheel names '
                       'and no steering wheel')
     # PRIORITY, not a vote. The steering wheel is the WEAKEST cue: it sits
     # BEHIND the midpoint on a long-bonnet coupe (the GR Supra). The two ends
     # of the car outrank it, and must not contradict each other.
-    ends = [cues[k] for k in ('bonnet_vs_boot', 'head_vs_tail_lamps', 'wheel_names', 'red_tail_lamps') if k in cues]
+    ends = [cues[k] for k in ('bonnet_vs_boot', 'head_vs_tail_lamps', 'wheel_names', 'red_tail_lamps',
+                              'top_over_axles') if k in cues]
     if len(set(ends)) > 1:
         raise Refused(f'the two end cues disagree: {cues}')
     nose = ends[0] if ends else cues['steering']
@@ -778,6 +802,159 @@ def _material_wheels(objs, K, rep):
     _remove(empty)
     bpy.context.view_layer.update()
     rep['material_wheels'] = {'found': True, 'faces_per_corner': counts, 'materials': used}
+
+
+def _geometry_wheels(objs, K, rep):
+    """Find the four wheels from SHAPE and POSITION alone, for exports that
+    name nothing (`Object_65`, material `material`). A road wheel is a round
+    object (as tall as it is long in side view), narrower than it is tall,
+    standing on the ground, out at the side of the car, and there are four of
+    them in four corners of about the same size. Pieces that share a corner
+    (tyre, rim, disc as separate objects) are joined into one wheel. Refuses
+    silently (finds nothing) unless all four corners are filled; writes what
+    it saw to the report either way."""
+    bpy.context.view_layer.update()
+    # The file may not be Y-up at all: the 2011 Corsa stands on its nose
+    # (length along glTF Y), which is why nothing upstream could see its
+    # wheels. Try each axis as "up"; the one in which four round grounded
+    # objects fill the corners is the real up, and the car is turned to it.
+    # Y is tried first, so a Y-up car is never turned.
+    found, up = None, None
+    for up in ('y', 'z', 'x'):
+        found = _round_corners(objs, K, up, rep)
+        if found:
+            break
+    if not found:
+        return
+    if up != 'y':
+        R = (Matrix.Rotation(math.radians(-90), 4, 'X') if up == 'z'      # Blender axes
+             else Matrix.Rotation(math.radians(-90), 4, 'Y'))
+        for o in objs:
+            o.matrix_world = R @ o.matrix_world
+        bpy.context.view_layer.update()
+        lo, hi = bbox([v for o in objs for v in wv(o)])
+        if (hi.x - lo.x) > (hi.z - lo.z):           # length along Z, as step 2 wants it
+            Rz = Matrix.Rotation(math.radians(90), 4, 'Z')
+            for o in objs:
+                o.matrix_world = Rz @ o.matrix_world
+            bpy.context.view_layer.update()
+        rep['re_upright'] = {'file_up_axis': up, 'why': 'four round grounded corner objects only exist with this axis up'}
+        found = _round_corners(objs, K, 'y', rep)
+        if not found:
+            return
+    picked, ds, ncand = found
+    for q, pieces in picked.items():
+        for o in pieces:
+            if o.data.users > 1:
+                o.data = o.data.copy()
+        if len(pieces) > 1:
+            _select_only(pieces)
+            bpy.ops.object.join()
+            for o in pieces[1:]:
+                if o in objs:
+                    objs.remove(o)
+                K.pop(o, None)
+        w = pieces[0]
+        w['sb_chain'] = f'geometry_wheel_{q}|' + w['sb_chain']
+        K[w] = 'wheel'
+    bpy.context.view_layer.update()
+    rep['geometry_wheels'] = {'found': True, 'candidates': ncand,
+                              'pieces_per_corner': {q: len(v) for q, v in picked.items()},
+                              'diameter': round(ds[-1], 3)}
+
+
+def _round_corners(objs, K, up, rep):
+    """The four-corner test behind `_geometry_wheels`, in the frame where
+    `up` ('x', 'y' or 'z' of the glTF world) is taken as up and the longer of
+    the other two axes as the car's length. Returns (picked, diameters,
+    candidates) or None; the report keeps the last attempt's numbers."""
+    P = {'y': lambda v: v,
+         'z': lambda v: Vector((v.x, v.z, -v.y)),
+         'x': lambda v: Vector((-v.y, v.x, v.z))}[up]
+    allv = [P(v) for o in objs for v in wv(o)]
+    lo, hi = bbox(allv)
+    if (hi.x - lo.x) > (hi.z - lo.z):               # length on x in this frame: look at it from the side
+        Q = lambda v: Vector((v.z, v.y, v.x))       # noqa: E731
+        allv = [Q(v) for v in allv]
+        lo, hi = bbox(allv)
+    else:
+        Q = lambda v: v                             # noqa: E731
+    H, W = hi.y - lo.y, hi.x - lo.x
+    xm, zm = (lo.x + hi.x) / 2, (lo.z + hi.z) / 2
+    cand = []
+    for o in objs:
+        if K[o] in ('glazing', 'lamps_front', 'lamps_rear', 'cabin', 'steering', 'door', 'bonnet', 'tailgate', 'engine'):
+            continue
+        if len(o.data.polygons) < 24:               # a wheel is never a handful of faces
+            continue
+        a, b = bbox([Q(P(v)) for v in wv(o)])
+        dx, dy, dz = b.x - a.x, b.y - a.y, b.z - a.z
+        if not dy or not dz:
+            continue
+        c = (a + b) / 2
+        round_ = .8 <= dy / dz <= 1.25
+        narrow = dx <= .6 * dy
+        sized = .12 * H <= dy <= .5 * H
+        grounded = a.y <= lo.y + .08 * H
+        outboard = abs(c.x - xm) >= .2 * W
+        if round_ and narrow and sized and grounded and outboard:
+            cand.append((o, c, dy))
+    rep['geometry_wheels'] = {'found': False, 'up_tried': up, 'candidates': len(cand)}
+    if len(cand) < 4:
+        return None
+    corners = {}
+    for o, c, d in cand:
+        q = ('f' if c.z > zm else 'r') + ('l' if c.x > xm else 'r')
+        corners.setdefault(q, []).append((o, c, d))
+    if set(corners) != {'fl', 'fr', 'rl', 'rr'}:
+        rep['geometry_wheels']['corners'] = {q: len(v) for q, v in corners.items()}
+        return None
+    picked = {}
+    for q, cs in corners.items():
+        # the biggest round thing in the corner is the tyre; anything whose
+        # centre sits inside it is part of the same wheel
+        cs.sort(key=lambda t: -t[2])
+        o0, c0, d0 = cs[0]
+        picked[q] = [o for o, c, d in cs if (c - c0).length <= .35 * d0]
+    ds = sorted(max(d for o, c, d in corners[q] if o in picked[q]) for q in picked)
+    if ds[0] < .75 * ds[-1]:                        # four wheels are the same size, give or take
+        rep['geometry_wheels']['diameters'] = [round(d, 3) for d in ds]
+        return None
+    return picked, ds, len(cand)
+
+
+def _top_over_axles(objs, K, wheels):
+    """Which end is the nose, from the height of the bodywork over each axle.
+    Returns {'nose': +1|-1, ...} or None when the two ends are within 12% of
+    each other. The 95th percentile of vertex height is used, not the maximum,
+    so an aerial or a mirror does not count as the roof."""
+    lo, hi = bbox([v for o in objs for v in wv(o)])
+    zm = (lo.z + hi.z) / 2
+    wc = [(centre([o]), o) for o in wheels]
+    front = [c for c, o in wc if c.z > zm]
+    rear = [c for c, o in wc if c.z <= zm]
+    if not front or not rear:
+        return None
+    za, zb = sum(c.z for c in front) / len(front), sum(c.z for c in rear) / len(rear)
+    wvs = [v for o in wheels for v in wv(o)]
+    D = max(v.y for v in wvs) - min(v.y for v in wvs)
+    if D <= 0 or abs(za - zb) < 2 * D:
+        return None
+
+    def top(z0):
+        ys = sorted(v.y for o in objs if K[o] in ('body', 'bonnet', 'tailgate', 'glazing', 'door', 'brakes')
+                    for v in wv(o) if abs(v.z - z0) <= .12 * D)
+        return ys[int(.95 * (len(ys) - 1))] if len(ys) >= 50 else None
+
+    ta, tb = top(za), top(zb)
+    if ta is None or tb is None:
+        return None
+    ha, hb = ta - lo.y, tb - lo.y
+    if ha <= 0 or hb <= 0 or max(ha, hb) < 1.12 * min(ha, hb):
+        return None
+    nose = 1 if ha < hb else -1                     # the LOWER end is the bonnet end
+    return {'nose': nose, 'top_plus_z': round(ha, 4), 'top_minus_z': round(hb, 4),
+            'ratio': round(max(ha, hb) / min(ha, hb), 3)}
 
 
 def _implausible(parts, hinge):
