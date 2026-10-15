@@ -128,9 +128,14 @@ def classify(car, us, REG, glassband):
     at, so the panel edge and the visible shut line coincide exactly.
     """
     s = car.s
-    arch_f = car.u_front + car.RW / car.L * 1.05
-    arch_r_u = car.u_rear - car.RW / car.L * 1.05
+    arch_f = car.u_front - car.RW / car.L * 1.05       # behind the front arch (u grows to the nose)
+    arch_r_u = car.u_rear + car.RW / car.L * 1.05      # ahead of the rear arch
     door_mid = (arch_f + arch_r_u) / 2
+    # Forge: a car traced from photographs knows where its real door seams
+    # are; the panel edges must sit on the same lines the grooves are cut at
+    ds = getattr(car, "door_seams", None)
+    if ds:
+        arch_f, door_mid, arch_r_u = ds["lead"], ds["mid"], ds["trail"]
     cowl_seam = s["cowl"] + 0.005
     tail_seam = s["roof_r"] - 0.01
 
@@ -159,10 +164,13 @@ def classify(car, us, REG, glassband):
     return names
 
 
-def glass_mask(car, us, REG):
+def glass_mask(car, us, REG, P=None):
     s = car.s
     NUu, nv = REG.shape
     g = np.zeros((NUu - 1, nv - 1), dtype=bool)
+    # Forge: a car traced from a side photograph answers "is this glass?"
+    # per quad, which is how the pillars come out as pillars
+    ask = getattr(car, "glass_quad", None) if P is not None else None
     for i in range(NUu - 1):
         u = 0.5 * (us[i] + us[i + 1])
         if not (s["roof_r"] - 0.005 < u < s["cowl"] + 0.02):
@@ -174,7 +182,14 @@ def glass_mask(car, us, REG):
             # glass channel down the bonnet flank (seen in the side render).
             # The raked screen and backlight are the r==5 band outside the
             # roof span.
-            if r == 4 and (s["roof_r"] + 0.02 < u < s["roof_f"] + 0.03):
+            if r == 4 and ask is not None:
+                z = P[i:i + 2, j:j + 2, 1].mean()
+                a = ask(u, z, r)
+                if a is None:
+                    g[i, j] = s["roof_r"] + 0.02 < u < s["roof_f"] + 0.03
+                else:
+                    g[i, j] = a
+            elif r == 4 and (s["roof_r"] + 0.02 < u < s["roof_f"] + 0.03):
                 g[i, j] = True
             elif r == 5 and (u > s["roof_f"] or u < s["roof_r"] + 0.06):
                 g[i, j] = True
@@ -362,7 +377,7 @@ def build_structured(car, out, root_name=None, textured=True, photo=None,
     n_bump = g.group("bumpers", root)
     n_whl = g.group("wheels", root)
 
-    gmask = glass_mask(car, us, REG)
+    gmask = glass_mask(car, us, REG, P)
     names = classify(car, us, REG, gmask)
     names[arch] = None                                     # arch holes
     uv_us = us if textured else None

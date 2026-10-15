@@ -255,8 +255,11 @@ class Car:
         seam at the rear roof pillar.
         """
         s = self.s
-        arch_f = self.u_front + self.RW / self.L * 1.05
-        arch_r = self.u_rear - self.RW / self.L * 1.05
+        # u grows toward the NOSE, so "just behind the front arch" is u_front
+        # MINUS a radius. The first version added it and hung the front door
+        # on the wing ahead of the wheel — visible in every rigged render.
+        arch_f = self.u_front - self.RW / self.L * 1.05
+        arch_r = self.u_rear + self.RW / self.L * 1.05
         seams = [
             (s["cowl"] + 0.005, (0, 5)),      # bonnet / cowl shut
             (arch_f, (0, 5)),                 # A-pillar side, front door leading edge

@@ -129,6 +129,7 @@ def fit_side(mask, facing="auto"):
             break
         if prof[i] > bonnet_h + 0.06:
             cowl_u = u[i]
+            break                        # the FIRST climb back from the nose is the screen base
     fit = {"bonnet_h": round(bonnet_h, 3),
            "roof_f": round(float(roof_f_u), 3),
            "roof_r": round(float(roof_r_u), 3),
