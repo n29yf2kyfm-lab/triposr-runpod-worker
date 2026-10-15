@@ -127,6 +127,30 @@ def front_or_rear(cutout_path):
     return None
 
 
+def plain_paint(cutout_path):
+    """False for a liveried, wrapped or two-tone car: the body (the band
+    between 25% and 55% of the height, where the doors are) must be mostly
+    one colour. The Corsa run baked a dealer's blue wrap onto the model."""
+    im = np.asarray(Image.open(cutout_path).convert("RGBA")).astype(float)
+    a = im[:, :, 3] > 128
+    H = a.shape[0]
+    band = np.zeros_like(a)
+    band[int(H * 0.45):int(H * 0.75)] = True        # image y grows down: 25-55% of height from the ground
+    px = im[a & band][:, :3]
+    if len(px) < 500:
+        return True
+    # quantise to 12 levels a channel and ask how much the top colour covers,
+    # counting near-grey shades together (silver, white, black all pass)
+    q = (px // 22).astype(int)
+    sat = px.max(1) - px.min(1)
+    q[sat < 40] = -1                                # all greys are one colour
+    keys = q[:, 0] * 10000 + q[:, 1] * 100 + q[:, 2]
+    keys[sat < 40] = -1
+    vals, counts = np.unique(keys, return_counts=True)
+    top = counts.max() / len(keys)
+    return bool(top >= 0.55)
+
+
 def classify(cutout_path):
     a = np.asarray(Image.open(cutout_path))[:, :, 3] > 128
     rows, cols = np.where(a.any(1))[0], np.where(a.any(0))[0]
@@ -135,7 +159,9 @@ def classify(cutout_path):
     w, h = cols.max() - cols.min() + 1, rows.max() - rows.min() + 1
     asp = w / h
     fill = a.mean()
-    if 2.2 <= asp <= 3.6:
+    # a true side elevation of a car is 2.5-3.6 times wider than tall; a
+    # slightly angled one at 2.2 was taken as a side and lofted as a blob
+    if 2.5 <= asp <= 3.6:
         return "side", asp
     if 0.95 <= asp <= 1.6:
         return "end", asp
@@ -200,11 +226,19 @@ def find_photos(make, model, hints, out_dir, max_dl=14, session=None):
         if view in (None, "34"):
             summary["unused"].append({"file": name, "why": f"three-quarter view (aspect {asp:.2f})"})
             continue
+        if view == "side" and not plain_paint(cp):
+            summary["unused"].append({"file": name, "why": "liveried or two-tone body"})
+            continue
         area = cut.size[0] * cut.size[1]
-        if view not in best or area > best[view][1]:
-            best[view] = (cp, area, c, asp)
+        # one car, one photographer: an end view by the author of the side
+        # view (same car, same day, same colour) beats a bigger one by
+        # somebody else
+        same = "side" in best and c["author"] and c["author"] == best["side"][2]["author"]
+        rank = (1 if same else 0, area)
+        if view not in best or rank > best[view][4]:
+            best[view] = (cp, area, c, asp, rank)
         time.sleep(1)
-    for view, (cp, area, c, asp) in best.items():
+    for view, (cp, area, c, asp, rank) in best.items():
         dst = os.path.join(out_dir, f"{view}.png")
         Image.open(cp).save(dst)
         refs.append({"view": view, "file": c["title"], "licence": c["licence"], "author": c["author"], "page": c["page"],

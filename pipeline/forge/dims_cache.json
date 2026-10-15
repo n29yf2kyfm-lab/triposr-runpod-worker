@@ -6,6 +6,20 @@
   "wheelbase": 2486,
   "width": 1685
  },
+ "ford|focus|mk4": {
+  "height": 1454,
+  "length": 4378,
+  "source": "vehicle_dims.csv: Ford Focus (fourth generation)",
+  "wheelbase": 2700,
+  "width": 1825
+ },
+ "vauxhall|corsa|f": {
+  "height": 1360,
+  "length": 3622,
+  "source": "en.wikipedia: Opel Corsa",
+  "wheelbase": 2343,
+  "width": 1532
+ },
  "volkswagen|golf|mk7": {
   "height": 1456,
   "length": 4284,

@@ -342,7 +342,7 @@ def section_marks(REG, us):
 
 
 def build_structured(car, out, root_name=None, textured=True, photo=None,
-                    photo_view="side"):
+                    photo_view="side", skin_fn=None):
     from skin import paint_skin
 
     g = GLB(generator=f"structured_car/{car.name}")
@@ -351,7 +351,14 @@ def build_structured(car, out, root_name=None, textured=True, photo=None,
 
     if textured:
         base_png, normal_png = paint_skin(car, section_marks(REG, us))
-        if photo:
+        if skin_fn:
+            # Forge: several photographs baked by where each texel faces;
+            # the AO/seam map still goes on top
+            from photo_skin import composite_ao
+            shot, stats = skin_fn(P, us)
+            print(f"photo bake: {stats}")
+            base_png = composite_ao(shot, base_png)
+        elif photo:
             # bake the real car photo into the same texture space, then keep
             # the AO/seam map on top so the engraved shut lines still read
             from photo_skin import bake, composite_ao

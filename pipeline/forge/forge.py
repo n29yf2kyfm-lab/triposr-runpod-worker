@@ -132,9 +132,15 @@ def run(folder, out=None, skin=False):
     out = out or os.path.join(folder, f"{dims['name']}.glb")
     # the side photograph is baked onto the body as its skin when asked: the
     # loft now follows the photo's own profile, so the projection lines up
-    skin_photo = first(folder, "side") if skin else None
-    size, g = build_structured(car, out, root_name=dims["name"], photo=skin_photo, photo_view="side")
-    report["skin"] = os.path.basename(skin_photo) if skin_photo else None
+    skin_fn = None
+    if skin:
+        from multiskin import bake_all
+        photos = {k: first(folder, k) for k in ("side", "front", "rear")}
+        photos = {k: v for k, v in photos.items() if v and (k == "side" or k in report["photos"] and "ignored" not in report["photos"][k])}
+        if photos:
+            skin_fn = lambda P, us: bake_all(P, us, photos)       # noqa: E731
+        report["skin"] = {k: os.path.basename(v) for k, v in photos.items()}
+    size, g = build_structured(car, out, root_name=dims["name"], skin_fn=skin_fn)
     report["glb"] = {"path": out, "kb": round(size / 1024), "meshes": len(g.g["meshes"])}
     if hasattr(car, "door_seams"):
         report["door_seams"] = {k: round(float(v), 3) for k, v in car.door_seams.items()}
