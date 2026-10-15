@@ -142,7 +142,7 @@ def classify(cutout_path):
     return "34", asp
 
 
-def find_photos(make, model, hints, out_dir, max_dl=8, session=None):
+def find_photos(make, model, hints, out_dir, max_dl=14, session=None):
     """hints: list of extra words (generation, years). Returns a summary dict
     and writes side/front/rear.png + refs.json into out_dir."""
     os.makedirs(out_dir, exist_ok=True)
@@ -151,6 +151,11 @@ def find_photos(make, model, hints, out_dir, max_dl=8, session=None):
     titles = search(queries, limit=40)
     if len(titles) < 8:
         titles = search([f"{Make} {model}"], limit=40)
+    # a true side view is the one photo Forge cannot do without, and Commons
+    # file names usually say "side" or "profile" when they have one
+    for t in search([f"{Make} {model} side", f"{Make} {model} profile"], limit=20):
+        if t not in titles:
+            titles.insert(0, t)
     cands = [c for c in info(titles) if OK_LICENCE.match(c["licence"] or "") and c["w"] >= 1000
              and 0.9 <= c["w"] / c["h"] <= 3.8 and not BAD_NAME.search(c["title"])]
     # prefer files whose names say which view they are, then the biggest
