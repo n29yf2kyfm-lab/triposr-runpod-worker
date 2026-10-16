@@ -25,6 +25,7 @@ import json
 import os
 import re
 import sys
+import threading
 import time
 import urllib.parse
 import urllib.request
@@ -158,9 +159,13 @@ def _boxes_for(base):
     return boxes, pages, title
 
 
+_LOCK = threading.Lock()                       # batch.py builds cars side by side
+
+
 def lookup(make, model, year, ratio=None, key=None, use_cache=True):
-    cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}
     key = key or f"{make}|{model}|{year}".lower()
+    with _LOCK:
+        cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}
     if use_cache and key in cache:
         return cache[key]
     mt = MAKE_TITLE.get(make.lower(), make.title())
@@ -184,8 +189,11 @@ def lookup(make, model, year, ratio=None, key=None, use_cache=True):
     ans = dict(on[0], source=f"en.wikipedia: {on[0]['page']}", candidates=len(uniq)) if on else \
         {"wheelbase": None, "why": f"no infobox on sale in {year} among {len(uniq)} on {len(tried)} pages",
          "tried": tried}
-    cache[key] = ans
-    json.dump(cache, open(CACHE, "w"), indent=1, sort_keys=True)
+    with _LOCK:
+        cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}
+        cache[key] = ans
+        json.dump(cache, open(CACHE + ".tmp", "w"), indent=1, sort_keys=True)
+        os.replace(CACHE + ".tmp", CACHE)
     return ans
 
 

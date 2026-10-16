@@ -30,7 +30,9 @@ import json
 import os
 import subprocess
 import sys
+import threading
 import time
+from concurrent.futures import ThreadPoolExecutor
 import urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -255,15 +257,29 @@ def one(target, item, args, out):
     return rec
 
 
+def targets(list_name, cls):
+    """Sales-ordered targets: the 2,000-car list (top2000_cars.csv) or the
+    multi-class one (targets.csv), as rows with rank, genModel, assetIds."""
+    base = os.path.join(REPO, "platform/catalogue/uk_targets")
+    if list_name == "top2000":
+        return [{"rank": r["rank"], "genModel": r["dft_generic_model"], "assetIds": r["catalogue_ids"]}
+                for r in csv.DictReader(open(os.path.join(base, "top2000_cars.csv")))]
+    rows = [r for r in csv.DictReader(open(os.path.join(base, "targets.csv"))) if r["class"] == cls]
+    return sorted(rows, key=lambda r: int(r["rank"]))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("out")
-    ap.add_argument("--top", type=int, default=20)
+    ap.add_argument("--top", type=int, default=20, help="how many targets that have a catalogue model")
+    ap.add_argument("--list", default="targets", choices=("targets", "top2000"))
     ap.add_argument("--class", dest="cls", default="car")
     ap.add_argument("--engine-pack", required=True)
     ap.add_argument("--tools", required=True)
     ap.add_argument("--view-dir", required=True)
     ap.add_argument("--port", type=int, default=8790)
+    ap.add_argument("--workers", type=int, default=1, help="cars built side by side (3 suits 4 cores)")
+    ap.add_argument("--keep-rig", action="store_true", help="keep each rigged copy (a fix then only re-finishes)")
     ap.add_argument("--skip", default="", help="comma-separated targets already finished, e.g. 'NISSAN QASHQAI'")
     args = ap.parse_args()
     args.engine_pack = os.path.abspath(args.engine_pack)
@@ -273,33 +289,43 @@ def main():
     if os.path.exists(state):
         done = {json.loads(line)["asset"] for line in open(state) if line.strip()}
     cat = catalogue()
-    rows = [r for r in csv.DictReader(open(os.path.join(REPO, "platform/catalogue/uk_targets/targets.csv")))
-            if r["class"] == args.cls]
-    rows.sort(key=lambda r: int(r["rank"]))
+    skip = {x.strip() for x in args.skip.split(",") if x.strip()}
+    jobs, n = [], 0
+    for t in targets(args.list, args.cls):
+        if n >= args.top:
+            break
+        item = pick(t, cat)
+        if item is None:
+            continue
+        n += 1
+        if item["assetId"] not in done and t["genModel"] not in skip and \
+                item["assetId"] not in {j[1]["assetId"] for j in jobs}:
+            jobs.append((t, item))
     server = subprocess.Popen([sys.executable, "-m", "http.server", str(args.port)], cwd=args.view_dir,
                               stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     time.sleep(1)
-    n = 0
-    try:
-        for t in rows:
-            if n >= args.top:
-                break
-            item = pick(t, cat)
-            if item is None:
-                continue
-            n += 1
-            if item["assetId"] in done or t["genModel"] in {x.strip() for x in args.skip.split(",")}:
-                continue
-            t0 = time.time()
-            try:
-                rec = one(t, item, args, args.out)
-            except Exception as e:
-                rec = {"rank": int(t["rank"]), "target": t["genModel"], "asset": item["assetId"],
-                       "status": f"error: {e}"}
-            rec["seconds"] = round(time.time() - t0)
+    lock = threading.Lock()
+
+    def work(job):
+        t, item = job
+        t0 = time.time()
+        try:
+            rec = one(t, item, args, args.out)
+        except Exception as e:
+            rec = {"rank": int(t["rank"]), "target": t["genModel"], "asset": item["assetId"], "status": f"error: {e}"}
+        rec["seconds"] = round(time.time() - t0)
+        if not args.keep_rig:
+            rg = os.path.join(args.out, item["assetId"], "rig", "src.glb")
+            if os.path.exists(rg):
+                os.remove(rg)
+        with lock:
             with open(state, "a") as f:
                 f.write(json.dumps(rec, default=str) + "\n")
-            print(rec["rank"], rec["asset"], rec["status"], rec["seconds"], "s", flush=True)
+            print(rec["rank"], rec["asset"], rec["status"], rec.get("missing"), rec["seconds"], "s", flush=True)
+    print(f"{len(jobs)} cars to build, {args.workers} at a time", flush=True)
+    try:
+        with ThreadPoolExecutor(max_workers=args.workers) as ex:
+            list(ex.map(work, jobs))
     finally:
         server.terminate()
 
