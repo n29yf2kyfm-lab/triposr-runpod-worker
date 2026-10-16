@@ -36,6 +36,24 @@ validated, rendered file.
 
 A car already rigged once only re-finishes (about 25 s).
 
+**Size.** About half the catalogue's models are not at metre scale. The
+rig machine sizes those from a guessed wheel height, which can be 15% out.
+`wheelbase.py` looks the car up instead:
+1. It reads the model's English Wikipedia page and every generation page it
+   links to (page text only, since the search API is rate-limited on shared
+   addresses).
+2. It takes the infobox on sale in the model's year. When two generations
+   overlap that year, it takes the one whose wheelbase-to-length proportion
+   matches the 3D model.
+3. The answer is used only if it leaves the wheels a real car's size
+   (0.50–0.85 m). Otherwise the car is flagged.
+
+Answers are cached in `wheelbase_cache.json`, and hand-checked figures in
+`batch.WHEELBASE` win. Tested on seven cars against hand-read infoboxes:
+Micra K12, Fiesta Mk6, Golf Mk8, Qashqai J11, Polo Mk6, Focus Mk4 and
+Corsa D (through Vauxhall to Opel). All matched, and the A-Class W176/W177
+overlap was settled by proportion.
+
 ## The steps by hand
 
 ```

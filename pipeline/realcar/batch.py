@@ -25,6 +25,7 @@ gltf-validator and puppeteer-core, plus validate.mjs, encode.mjs and view.mjs
 """
 import argparse
 import csv
+import re
 import json
 import os
 import subprocess
@@ -36,6 +37,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
 sys.path.insert(0, HERE)
 import finish  # noqa: E402
+import wheelbase  # noqa: E402
 
 GRADE = {"A": 0, "B": 1, "C": 2}
 
@@ -49,7 +51,7 @@ WHEELBASE = {
     "ford-fiesta-2009-w12-v1": 2489,          # Fiesta Mk6 (2008-2017), en.wikipedia infobox
     "volkswagen-golf-2025-w12-v1": 2636,      # Golf Mk8 / 8.5, en.wikipedia infobox
     "mercedes-benz-a-class-2018-w12-v1": 2699,  # A45 AMG W176 (2012-2018), en.wikipedia infobox
-    "nissan-micra-2004-w12-v1": 2430,         # Micra K12 hatch (2002-2010), en.wikipedia infobox
+
 }
 
 
@@ -78,6 +80,41 @@ def pick(target, cat):
     # the generation on the road now matters most; a grade is worth 4 years
     ok.sort(key=lambda i: -((i.get("yearStart") or 1990) - 4 * GRADE.get(i.get("qualityGrade"), 3)))
     return ok[0]
+
+
+TRIM = re.compile(r"\b(gti|gtd|gte|gt|r|rs\d?|st|amg|s|se|sport|line|hybrid|phev|ev|e|turbo|quattro|xdrive|\d{3}i|a\d\d)\b", re.I)
+
+
+def auto_wheelbase(item, rep, rec):
+    """The wheelbase for a model not on the hand-checked list, looked up
+    when the finisher knows the model's proportions (wheelbase.py). A model
+    the rig machine had to rescale from a guessed wheel size must get one;
+    the answer is used only if it leaves the wheels a real car's size
+    (0.50 to 0.85 m), and on a model already at metre scale only if it
+    changes the size by under 25%. Otherwise the car is flagged."""
+    model = TRIM.sub(" ", item.get("modelFamily") or item.get("model") or "")
+    model = re.sub(re.escape(item["make"]) + r"\s*", "", model, flags=re.I).strip() or item.get("model")
+    year = item.get("yearStart") or 2015
+    rescaled = rep.get("rescaled")
+
+    def get(ratio, base):
+        try:
+            ans = wheelbase.lookup(item["make"], model, year, ratio, key=item["assetId"])
+        except Exception as e:
+            ans = {"wheelbase": None, "why": str(e)}
+        wb = ans.get("wheelbase")
+        info = {k: ans.get(k) for k in ("wheelbase", "years", "source", "name", "why")}
+        if wb and ratio:
+            k = wb / 1000.0 / base
+            wheel = 0.68 * k if rescaled else None
+            if (rescaled and not 0.50 <= wheel <= 0.85) or (not rescaled and not 0.75 <= k <= 1.33):
+                info["refused"] = f"would scale x{k:.2f}" + (f", wheels {wheel:.2f} m" if wheel else "")
+                wb = None
+        if not wb and rescaled:
+            rec["scale_unverified"] = info.get("refused") or info.get("why") or rescaled.get("why")
+        rec["wheelbase_lookup"] = info
+        return wb, info
+    return get
 
 
 def credit_of(item):
@@ -144,8 +181,8 @@ def one(target, item, args, out):
         spec["paint"] = list(args.paint)
     if aid in WHEELBASE:
         spec["wheelbase"] = WHEELBASE[aid]
-    elif rep.get("rescaled"):
-        rec["scale_unverified"] = rep["rescaled"].get("why")
+    else:
+        spec["wheelbase"] = auto_wheelbase(item, rep, rec)
     fin = os.path.join(d, "finished.glb")
     t0 = time.time()
     try:

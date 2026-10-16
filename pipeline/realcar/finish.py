@@ -232,7 +232,14 @@ def finish(src, spec, out, base_dir="."):
     if zf < zr:
         raise SystemExit("front axle behind rear axle: rig frame not nose +z")
     base = zf - zr
-    s = (spec["wheelbase"] / 1000.0) / base if spec.get("wheelbase") else 1.0
+    wb_mm = spec.get("wheelbase")
+    if callable(wb_mm):
+        # looked up on demand: the model's own wheelbase-to-length proportion
+        # tells two generations on sale the same year apart
+        body_z = [r["P"][:, 2] for r in recs if not r["rig"].startswith("wheel_")]
+        length = float(max(z.max() for z in body_z) - min(z.min() for z in body_z))
+        wb_mm, log["wheelbase_lookup"] = wb_mm(base / length if length else None, base)
+    s = (wb_mm / 1000.0) / base if wb_mm else 1.0
     zmid = (zf + zr) / 2
     log["measured"] = {"wheelbase_m": round(base, 3), "front_axle_z": round(zf, 3), "rear_axle_z": round(zr, 3),
                        "wheel_d_m": round(wheel_top - ground, 3), "track_half_m": round(track_half, 3)}
