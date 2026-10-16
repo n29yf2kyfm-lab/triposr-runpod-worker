@@ -1,0 +1,16 @@
+{
+  "name": "glb-machine-tools",
+  "private": true,
+  "type": "module",
+  "description": "Node side of the GLB machine: decode a catalogue file, validate, web copy, check sheet. `npm install` here and pass this folder as --tools.",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@gltf-transform/core": "4.2.1",
+    "@gltf-transform/extensions": "4.2.1",
+    "@gltf-transform/functions": "4.2.1",
+    "draco3dgltf": "1.5.7",
+    "gltf-validator": "2.0.0-dev.3.10",
+    "meshoptimizer": "0.22.0",
+    "puppeteer-core": "23.11.1"
+  }
+}

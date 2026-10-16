@@ -170,9 +170,17 @@ def one(target, item, args, out):
         urllib.request.urlretrieve(item["desktopGlbUrl"], src)
         tm["download"] = round(time.time() - t0, 1)
         t0 = time.time()
-        # rig only: the finisher draws its own sheet, so no Blender stills
-        p = run([sys.executable, os.path.join(REPO, "platform/rigmachine/run.py"), src, rig, "--no-stills"], 2400, lg)
+        # plain geometry first (Draco / meshopt / quantized -> float), then
+        # our own rigger: no Blender anywhere
+        plain = os.path.join(d, "plain.glb")
+        run(["node", os.path.join(args.tools, "decode.mjs"), src, plain], 600, lg)
+        tm["decode"] = round(time.time() - t0, 1)
+        t0 = time.time()
+        p = run([sys.executable, os.path.join(HERE, "rig.py"), plain, rig], 1200, lg)
         tm["rig"] = round(time.time() - t0, 1)
+        for f in (src, plain):
+            if os.path.exists(f):
+                os.remove(f)
         try:
             rr = json.loads(p.stdout.strip().splitlines()[-1])
         except Exception:
