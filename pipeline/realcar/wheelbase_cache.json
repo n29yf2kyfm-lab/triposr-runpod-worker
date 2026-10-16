@@ -1,4 +1,150 @@
 {
+ "audi-a1-quattro-v1": {
+  "tried": [
+   "Audi A1"
+  ],
+  "wheelbase": null,
+  "why": "no infobox on sale in 2018 among 2 on 1 pages"
+ },
+ "audi-a3-2021-ad1-v1": {
+  "candidates": 4,
+  "length": 4337,
+  "name": "Fourth generation",
+  "page": "Audi A3",
+  "source": "en.wikipedia: Audi A3",
+  "wheelbase": 2640,
+  "years": [
+   2020,
+   2100
+  ]
+ },
+ "bmw-1-series-v1": {
+  "candidates": 5,
+  "length": 4324,
+  "name": "BMW 1 Series<br/>(Second generation)",
+  "page": "BMW 1 Series (F20)",
+  "source": "en.wikipedia: BMW 1 Series (F20)",
+  "wheelbase": 2690,
+  "years": [
+   2011,
+   2019
+  ]
+ },
+ "bmw-320i-2023-v1": {
+  "candidates": 10,
+  "length": 4709,
+  "name": "BMW 3 Series (G20)",
+  "page": "BMW 3 Series (G20)",
+  "source": "en.wikipedia: BMW 3 Series (G20)",
+  "wheelbase": 2851,
+  "years": [
+   2018,
+   2026
+  ]
+ },
+ "fiat-500e-v1": {
+  "candidates": 2,
+  "length": 3546,
+  "name": "Fiat 500 (312)",
+  "page": "Fiat 500 (2007)",
+  "source": "en.wikipedia: Fiat 500 (2007)",
+  "wheelbase": 2300,
+  "years": [
+   2007,
+   2025
+  ]
+ },
+ "fiat|500e|2021": {
+  "tried": [
+   "Fiat 500E"
+  ],
+  "wheelbase": null,
+  "why": "no infobox on sale in 2021 among 0 on 1 pages"
+ },
+ "ford-focus-v1": {
+  "candidates": 4,
+  "length": 4378,
+  "name": "Ford Focus (fourth generation)",
+  "page": "Ford Focus (fourth generation)",
+  "source": "en.wikipedia: Ford Focus (fourth generation)",
+  "wheelbase": 2700,
+  "years": [
+   2018,
+   2026
+  ]
+ },
+ "ford|fiesta|2009": {
+  "candidates": 8,
+  "length": 4008,
+  "name": "Ford Fiesta (sixth generation)",
+  "page": "Ford Fiesta (sixth generation)",
+  "source": "en.wikipedia: Ford Fiesta (sixth generation)",
+  "wheelbase": 2489,
+  "years": [
+   2008,
+   2019
+  ]
+ },
+ "ford|focus|2019": {
+  "candidates": 4,
+  "length": 4378,
+  "name": "Ford Focus (fourth generation)",
+  "page": "Ford Focus (fourth generation)",
+  "source": "en.wikipedia: Ford Focus (fourth generation)",
+  "wheelbase": 2700,
+  "years": [
+   2018,
+   2026
+  ]
+ },
+ "honda-jazz-2018-v1": {
+  "candidates": 4,
+  "length": 4028,
+  "name": "Third generation",
+  "page": "Honda Fit",
+  "source": "en.wikipedia: Honda Fit",
+  "wheelbase": 2530,
+  "years": [
+   2013,
+   2022
+  ]
+ },
+ "kia-sportage-2023-v1": {
+  "candidates": 5,
+  "length": 4515,
+  "name": "Fifth generation",
+  "page": "Kia Sportage",
+  "source": "en.wikipedia: Kia Sportage",
+  "wheelbase": 2680,
+  "years": [
+   2021,
+   2100
+  ]
+ },
+ "mini-cooper-w7-v1": {
+  "candidates": 4,
+  "length": 3821,
+  "name": "Third generation",
+  "page": "Mini Hatch",
+  "source": "en.wikipedia: Mini Hatch",
+  "wheelbase": 2495,
+  "years": [
+   2013,
+   2024
+  ]
+ },
+ "nissan-juke-2023-cr1-v1": {
+  "candidates": 2,
+  "length": 4210,
+  "name": "Second generation",
+  "page": "Nissan Juke",
+  "source": "en.wikipedia: Nissan Juke",
+  "wheelbase": 2636,
+  "years": [
+   2019,
+   2100
+  ]
+ },
  "nissan-micra-2004-w12-v1": {
   "candidates": 4,
   "length": 3719,
@@ -9,6 +155,126 @@
   "years": [
    2002,
    2010
+  ]
+ },
+ "nissan|micra|2004": {
+  "candidates": 4,
+  "length": 3719,
+  "name": "Third generation",
+  "page": "Nissan Micra",
+  "source": "en.wikipedia: Nissan Micra",
+  "wheelbase": 2430,
+  "years": [
+   2002,
+   2010
+  ]
+ },
+ "nissan|qashqai|2018": {
+  "candidates": 4,
+  "length": 4382,
+  "name": "Second generation",
+  "page": "Nissan Qashqai",
+  "source": "en.wikipedia: Nissan Qashqai",
+  "wheelbase": 2646,
+  "years": [
+   2013,
+   2022
+  ]
+ },
+ "renault-clio-2023-w7-v1": {
+  "candidates": 6,
+  "length": 4050,
+  "name": "Clio V",
+  "page": "Renault Clio",
+  "source": "en.wikipedia: Renault Clio",
+  "wheelbase": 2585,
+  "years": [
+   2018,
+   2100
+  ]
+ },
+ "toyota-yaris-2001-v1": {
+  "candidates": 23,
+  "length": 3940,
+  "name": "Toyota Yaris <br/>(XP210/MXPA1#/MXPH1#)",
+  "page": "Toyota Yaris (XP210)",
+  "source": "en.wikipedia: Toyota Yaris (XP210)",
+  "wheelbase": 2550,
+  "years": [
+   2020,
+   2100
+  ]
+ },
+ "vauxhall-astra-2022-cr1-v1": {
+  "candidates": 6,
+  "length": 4374,
+  "name": "Sixth generation (Astra L)",
+  "page": "Opel Astra",
+  "source": "en.wikipedia: Opel Astra",
+  "wheelbase": 2675,
+  "years": [
+   2021,
+   2100
+  ]
+ },
+ "vauxhall-corsa-2011-v1": {
+  "candidates": 6,
+  "length": 3999,
+  "name": "Corsa D",
+  "page": "Opel Corsa",
+  "source": "en.wikipedia: Opel Corsa",
+  "wheelbase": 2511,
+  "years": [
+   2006,
+   2014
+  ]
+ },
+ "vauxhall|corsa|2011": {
+  "candidates": 6,
+  "length": 3999,
+  "name": "Corsa D",
+  "page": "Opel Corsa",
+  "source": "en.wikipedia: Opel Corsa",
+  "wheelbase": 2511,
+  "years": [
+   2006,
+   2014
+  ]
+ },
+ "volkswagen-tiguan-allspace-2022-v1": {
+  "candidates": 3,
+  "length": 4498,
+  "name": "Second generation",
+  "page": "Volkswagen Tiguan",
+  "source": "en.wikipedia: Volkswagen Tiguan",
+  "wheelbase": 2681,
+  "years": [
+   2016,
+   2026
+  ]
+ },
+ "volkswagen|golf|2025": {
+  "candidates": 6,
+  "length": 4284,
+  "name": "Volkswagen Golf Mk8",
+  "page": "Volkswagen Golf Mk8",
+  "source": "en.wikipedia: Volkswagen Golf Mk8",
+  "wheelbase": 2636,
+  "years": [
+   2019,
+   2100
+  ]
+ },
+ "volkswagen|polo|2021": {
+  "candidates": 5,
+  "length": 4060,
+  "name": "Volkswagen Polo Mk6",
+  "page": "Volkswagen Polo Mk6",
+  "source": "en.wikipedia: Volkswagen Polo Mk6",
+  "wheelbase": 2556,
+  "years": [
+   2017,
+   2026
   ]
  }
 }

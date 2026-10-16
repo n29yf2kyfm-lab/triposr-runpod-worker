@@ -120,6 +120,44 @@ def infoboxes(text, title):
     return out
 
 
+# a make's other name, for when its own page has no generations
+SISTER = {"vauxhall": "Opel", "opel": "Vauxhall", "mini": "Mini", "dacia": "Renault", "seat": "SEAT"}
+# a model's other page name
+ALIAS = {("mini", "cooper"): "Mini Hatch", ("mini", "hatch"): "Mini Hatch", ("honda", "jazz"): "Honda Fit"}
+
+
+def _generation_link(link, stem):
+    """A generation's own page, not a spin-off: 'Nissan Micra (K12)', 'Ford
+    Fiesta (sixth generation)', 'Volkswagen Golf Mk8', 'Opel Astra K' - but
+    not 'Fiat 500L' or 'Volkswagen Polo GTI'."""
+    rest = link[len(stem):]
+    return bool(re.fullmatch(r"\s*\([^)]*\)|\s+Mk\s?\d+[^ ]*(\s*\([^)]*\))?|\s+[A-Z]{1,2}\d{0,3}|\s+\w+ generation", rest))
+
+
+def _boxes_for(base):
+    text, title = raw(base)
+    boxes, pages = [], []
+    if not text:
+        return boxes, pages, title
+    if len(text) < 6000:                       # a pointer page: follow its first car link
+        m = re.search(r"\[\[(" + re.escape(base.split()[0]) + r" [^\]|#]+)", text)
+        if m and m.group(1).strip() != base:
+            text, title = raw(m.group(1).strip())
+            if not text:
+                return boxes, pages, title
+    boxes += infoboxes(text, title)
+    stem = title.split(" (")[0]
+    for link in re.findall(r"(?:\[\[|\{\{\s*(?:main|see also|further)\s*\|)\s*(" + re.escape(stem) + r"[^\]|}#]*)", text, re.I):
+        link = link.strip()
+        if link != title and link not in pages and _generation_link(link, stem):
+            pages.append(link)
+    for p in pages[:12]:
+        t, tt = raw(p)
+        if t:
+            boxes += infoboxes(t, tt)
+    return boxes, pages, title
+
+
 def lookup(make, model, year, ratio=None, key=None, use_cache=True):
     cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}
     key = key or f"{make}|{model}|{year}".lower()
@@ -127,35 +165,25 @@ def lookup(make, model, year, ratio=None, key=None, use_cache=True):
         return cache[key]
     mt = MAKE_TITLE.get(make.lower(), make.title())
     mdl = model if re.search(r"[A-Z]", model) else model.title()
-    base = f"{mt} {mdl}"
-    text, title = raw(base)
-    boxes, pages = [], []
-    if text:
-        boxes += infoboxes(text, title)
-        # generation pages linked from the model page: "[[Nissan Micra (K12)|...]]", "{{Main|Ford Fiesta (Mk6)}}"
-        stem = re.escape(title.split(" (")[0])
-        for link in re.findall(r"(?:\[\[|\{\{\s*(?:main|see also|further)\s*\|)\s*(" + stem + r"[^\]|}#]*)", text, re.I):
-            link = link.strip()
-            if link != title and link not in pages:
-                pages.append(link)
-    for p in pages[:12]:
-        t, tt = raw(p)
-        if t:
-            boxes += infoboxes(t, tt)
-    seen, uniq = set(), []
-    for b in boxes:
-        k = (b["years"], b["wheelbase"])
-        if k not in seen:
-            seen.add(k)
-            uniq.append(b)
+    bases = [ALIAS.get((make.lower(), model.lower()), f"{mt} {mdl}")]
+    if make.lower() in SISTER:
+        bases.append(f"{SISTER[make.lower()]} {mdl}")
+    tried, uniq = [], []
+    for base in bases:
+        boxes, pages, title = _boxes_for(base)
+        tried += [title] + pages[:12]
+        seen = {(b["years"], b["wheelbase"]) for b in uniq}
+        uniq += [b for b in boxes if (b["years"], b["wheelbase"]) not in seen]
+        if any(b["years"] and year and b["years"][0] - 1 <= year <= b["years"][1] for b in uniq):
+            break
     on = [b for b in uniq if b["years"] and b["years"][0] - 1 <= year <= b["years"][1]] if year else uniq
     if len(on) > 1 and ratio:
         on.sort(key=lambda b: abs(b["wheelbase"] / b["length"] - ratio) if b.get("length") else 1)
     elif len(on) > 1:                          # the newest generation on sale that year
         on.sort(key=lambda b: -(b["years"] or (0, 0))[0])
     ans = dict(on[0], source=f"en.wikipedia: {on[0]['page']}", candidates=len(uniq)) if on else \
-        {"wheelbase": None, "why": f"no infobox on sale in {year} among {len(uniq)} on {1 + min(len(pages), 12)} pages",
-         "tried": [base] + pages[:12]}
+        {"wheelbase": None, "why": f"no infobox on sale in {year} among {len(uniq)} on {len(tried)} pages",
+         "tried": tried}
     cache[key] = ans
     json.dump(cache, open(CACHE, "w"), indent=1, sort_keys=True)
     return ans
