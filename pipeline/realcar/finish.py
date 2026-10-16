@@ -45,6 +45,7 @@ import sys
 import numpy as np
 from scipy.sparse import coo_matrix
 from scipy.sparse.csgraph import connected_components
+from scipy.ndimage import gaussian_filter1d, median_filter
 from scipy.spatial import cKDTree
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -89,7 +90,7 @@ def islands(T, weld=2e-4):
     n = nt + int(vid.max()) + 1
     A = coo_matrix((np.ones(len(rows)), (rows, cols)), shape=(n, n))
     _, lab = connected_components(A, directed=False)
-    return lab[:nt]
+    return lab[:nt], vid
 
 
 def surface_points(T, step=0.008):
@@ -109,6 +110,53 @@ def surface_points(T, step=0.008):
         P = (sel[:, None, 0] * w[None, :, None] + sel[:, None, 1] * u[None, :, None] + sel[:, None, 2] * v[None, :, None])
         pts.append(P.reshape(-1, 3))
     return np.vstack(pts)
+
+
+def split_along(g, r, eligible, field, part):
+    """Give `part` to the eligible triangles of record r inside field < 0, and
+    split those the zero line crosses: new vertices on the crossed edges
+    (every attribute interpolated), the lone corner's side one triangle, the
+    other side two, winding kept. Returns how many were split."""
+    P = r["P"]
+    f = field(P)
+    I = r["I"]
+    neg = f[I] < 0
+    cnt = neg.sum(1)
+    tp = r["tri_part"].copy()
+    tp[eligible & (cnt == 3)] = part
+    mixed = np.where(eligible & (cnt > 0) & (cnt < 3))[0]
+    if not len(mixed):
+        r["tri_part"] = tp
+        return 0
+    attr = r.get("attr") or {an: g.accessor(ai) for an, ai in r["prim"]["attributes"].items()
+                              if not an.startswith(("JOINTS", "WEIGHTS"))}
+    newP, newA = [P], {an: [A] for an, A in attr.items()}
+    nv = len(P)
+    keepI, keepT = [I[np.setdiff1d(np.arange(len(I)), mixed)]], [tp[np.setdiff1d(np.arange(len(I)), mixed)]]
+    addI, addT = [], []
+
+    def lerp(a, b):
+        nonlocal nv
+        t = f[a] / (f[a] - f[b])
+        newP.append(P[a] + t * (P[b] - P[a]))
+        for an, A in attr.items():
+            newA[an].append(A[a] + t * (A[b] - A[a]))
+        nv += 1
+        return nv - 1
+    for ti in mixed:
+        v = I[ti]
+        sv = neg[ti]
+        k = int(np.where(sv == (sv.sum() == 1))[0][0])     # the corner alone on its side
+        a, b, c = v[k], v[(k + 1) % 3], v[(k + 2) % 3]
+        pab, pac = lerp(a, b), lerp(a, c)
+        lone_in = bool(sv[k])
+        addI += [[a, pab, pac], [pab, b, c], [pab, c, pac]]
+        addT += [part if lone_in else tp[ti], tp[ti] if lone_in else part, tp[ti] if lone_in else part]
+    r["P"] = np.vstack([newP[0], np.array(newP[1:])])
+    r["attr"] = {an: np.vstack([L[0], np.array(L[1:])]) for an, L in newA.items()}
+    r["I"] = np.vstack(keepI + [np.array(addI, dtype=np.int64)])
+    r["tri_part"] = np.concatenate(keepT + [np.array(addT, dtype=object)])
+    return len(mixed)
 
 
 def is_clear_glass(mat):
@@ -166,11 +214,11 @@ def finish(src, spec, out, base_dir="."):
     log["rescale"] = round(s, 4)
 
     # ── body islands ──
-    body = [r for r in recs if r["rig"] in ("body", "panel_bonnet", "tailgate")]
+    body = [r for r in recs if r["rig"] in ("body", "panel_bonnet", "tailgate", "glazing")]
     T = np.vstack([tris(r) for r in body])
     owner = np.concatenate([np.full(len(r["I"]), k) for k, r in enumerate(body)])
     tmat = np.concatenate([np.full(len(r["I"]), -1 if r["mat"] is None else r["mat"]) for r in body])
-    lab = islands(T)
+    lab, vid = islands(T)
     area, nrm = tri_area_normal(T)
     nl = lab.max() + 1
     isl_area = np.bincount(lab, weights=area, minlength=nl)
@@ -218,6 +266,73 @@ def finish(src, spec, out, base_dir="."):
             log["bonnet"] = {"from": "island", "area_m2": round(float(isl_area[b]), 3),
                              "pieces": int((label == "bonnet").sum())}
 
+    # bonnet cut: some models weld the bonnet into one shell with the wings
+    # and have no shut line in the mesh at all. Then the bonnet is the shell's
+    # top over the front: ahead of the windscreen's base (plus the cowl),
+    # facing up (within ~50 degrees), above the wheels, and connected to the
+    # middle of that area; it stops where the nose turns down to the grille
+    # and where the wings turn down at the shoulders.
+    cut = None
+    if bonnet is None:
+        shells = [i for i in range(nl) if dom[i] == paint and lo[i, 2] < zf < hi[i, 2] and hi[i, 1] > wheel_top]
+        ws = [i for i in range(nl) if dom[i] in glass and cz[i] > (zf + zr) / 2 and lo[i, 1] > wheel_top]
+        if shells and ws:
+            sh = max(shells, key=lambda i: isl_area[i])
+            w = max(ws, key=lambda i: isl_area[i])
+            Wv = T[lab == w].reshape(-1, 3)
+            z_rear = float(Wv[Wv[:, 1] < Wv[:, 1].min() + 0.03, 2].max()) + 0.06
+            ts = np.where(lab == sh)[0]
+            cen = T[ts].mean(1)
+            ok = (cen[:, 2] > z_rear) & (np.abs(nrm[ts, 1]) > 0.65) & (cen[:, 1] > wheel_top + 0.1)
+            sub = ts[ok]
+            if len(sub):
+                rows = np.repeat(np.arange(len(sub)), 3)
+                cols = vid[sub].ravel()
+                _, cv = np.unique(cols, return_inverse=True)
+                n = len(sub) + cv.max() + 1
+                A = coo_matrix((np.ones(len(rows)), (rows, cv + len(sub))), shape=(n, n))
+                _, cl = connected_components(A, directed=False)
+                cl = cl[:len(sub)]
+                c2 = cen[ok]
+                seed = np.argmin(np.abs(c2[:, 0]) + np.abs(c2[:, 2] - (z_rear + hi[sh, 2]) / 2))
+                region = sub[cl == cl[seed]]
+                # Cutting whole triangles leaves a staircase (a model's
+                # triangles run long along the car). So the shut line is a
+                # smooth curve: the region's half-width at each 1 cm along
+                # the car (both sides averaged, median then Gaussian
+                # smoothed), and the rear edge straight across at the cowl.
+                # Triangles that cross it are split along it further down.
+                rc = T[region].mean(1)
+                zb = np.floor((rc[:, 2] - z_rear) / 0.01).astype(int)
+                nb = int(zb.max()) + 1
+                half = np.zeros(nb)
+                for k in range(nb):
+                    xs = rc[zb == k, 0]
+                    if len(xs) > 3:
+                        half[k] = (np.percentile(xs, 97) - np.percentile(xs, 3)) / 2
+                filled = half > 0
+                ra = area[region].sum()
+                if filled.sum() > 5 and ra > 0.5:
+                    half = np.interp(np.arange(nb), np.where(filled)[0], half[filled])
+                    half = gaussian_filter1d(median_filter(half, 9, mode="nearest"), 4, mode="nearest") - 0.01
+                    # the top skin only: not the shell's inner faces under it
+                    cell = np.floor(cen[:, [0, 2]] / 0.02).astype(np.int64)
+                    key = cell[:, 0] * 100000 + cell[:, 1]
+                    uk, inv = np.unique(key, return_inverse=True)
+                    top = np.full(len(uk), -np.inf)
+                    np.maximum.at(top, inv, cen[:, 1])
+                    on_top = cen[:, 1] > top[inv] - 0.04
+                    ymin = wheel_top + 0.05
+
+                    def field(P, z_rear=z_rear, half=half, nb=nb, ymin=ymin):
+                        k = np.clip(np.floor((P[:, 2] - z_rear) / 0.01).astype(int), 0, nb - 1)
+                        return np.maximum.reduce([np.abs(P[:, 0]) - half[k], z_rear - P[:, 2], ymin - P[:, 1]])
+                    cut = {"tris": ts[on_top], "field": field}
+                    bonnet = -1
+                    log["bonnet"] = {"from": "cut from the body shell along a smoothed shut line",
+                                     "rear_edge_z": round(z_rear, 3),
+                                     "half_width_m": [round(float(half.min()), 3), round(float(half.max()), 3)]}
+
     # tailgate: the rear window, the panel under it, and what sits on that skin
     gl = [i for i in range(nl) if dom[i] in glass and cz[i] < zr and lo[i, 1] > wheel_top]
     if gl:
@@ -248,29 +363,43 @@ def finish(src, spec, out, base_dir="."):
                                    "z_front": round(float(zfront), 3)},
                            "pieces": int(tg.sum())}
 
+    # no tailgate found here: the rig machine's tailgate stands, as the islands
+    # mostly made of its triangles
+    if "tailgate" not in log:
+        rig_tg = np.concatenate([np.full(len(r["I"]), r["rig"] == "tailgate") for r in body])
+        if rig_tg.any():
+            share = np.bincount(lab, weights=rig_tg.astype(float), minlength=nl) / np.maximum(
+                np.bincount(lab, minlength=nl), 1)
+            label[(share > 0.5) & (label == "body")] = "tailgate"
+            log["tailgate"] = {"from": "rig", "pieces": int((label == "tailgate").sum())}
+
     # door trims: window frames, belt mouldings and mirrors modelled as their
     # own small pieces are left on the body by the rig's door cut and float in
     # the air when the door opens. A piece inside a door's box, above the
     # wheels, that touches the door (within 1 cm of its surface) goes with it;
     # a seat or a brake inside the same box does not touch it.
+    # The tailgate takes what touches it the same way (a rear window modelled
+    # in a dark plastic rather than glass, the inner lamps).
     doors = {}
     for r in recs:
         if r["rig"].startswith("door_"):
             doors.setdefault(r["rig"], []).append(tris(r))
+    if (label == "tailgate").any():
+        doors["tailgate"] = [T[label[lab] == "tailgate"]]
     trims = {}
     if doors:
         trees = {}
         for d, ts in doors.items():
             Td = np.vstack(ts)
             trees[d] = (cKDTree(surface_points(Td)), Td.reshape(-1, 3).min(0) - 0.015, Td.reshape(-1, 3).max(0) + 0.015)
-        cand = [i for i in range(nl) if label[i] == "body" and lo[i, 1] > 0.9 * wheel_top and isl_area[i] < 0.2]
+        cand = [i for i in range(nl) if label[i] == "body" and lo[i, 1] > 0.9 * wheel_top and isl_area[i] < 1.5]
         verts_of = {}
         order = np.argsort(lab3, kind="stable")
         bounds = np.searchsorted(lab3[order], np.arange(nl + 1))
         for i in cand:
             best = None
             for d, (tree, dlo, dhi) in trees.items():
-                if (lo[i] >= dlo).all() and (hi[i] <= dhi).all():
+                if (lo[i] >= dlo).all() and (hi[i] <= dhi).all() and (d == "tailgate" or isl_area[i] < 0.2):
                     if i not in verts_of:
                         verts_of[i] = flat[order[bounds[i]:bounds[i + 1]]]
                     dist = tree.query(verts_of[i], k=1)[0].min()
@@ -288,13 +417,32 @@ def finish(src, spec, out, base_dir="."):
     for r in body:
         n = len(r["I"])
         tp = tri_part[off:off + n]
+        # the rig machine's own bonnet or tailgate stand only where no piece
+        # was found for that part here
         if r["rig"] == "panel_bonnet":
             tp = np.where(tp == "body", "bonnet" if bonnet is None else "body", tp)
+        if r["rig"] == "tailgate":
+            pass                                    # handled as islands above
         r["tri_part"] = tp
         off += n
     for r in recs:
         if "tri_part" not in r:
             r["tri_part"] = np.full(len(r["I"]), r["rig"], dtype=object)
+
+    # the bonnet cut: shell triangles inside the shut line go to the bonnet,
+    # and those crossing it are split along it
+    if cut is not None:
+        eligible = np.zeros(len(T), bool)
+        eligible[cut["tris"]] = True
+        off, nsplit = 0, 0
+        for r in body:
+            n = len(r["I"])
+            el = eligible[off:off + n]
+            off += n
+            if el.any():
+                nsplit += split_along(g, r, el, cut["field"], "bonnet")
+        parts_area = sum(tri_area_normal(r["P"][r["I"][r["tri_part"] == "bonnet"]])[0].sum() for r in body)
+        log["bonnet"].update({"area_m2": round(float(parts_area), 3), "triangles_split": nsplit})
 
     # ── output frame: centred on the wheelbase, scaled to the published one ──
     def to_out(P):
@@ -312,7 +460,7 @@ def finish(src, spec, out, base_dir="."):
             uniq, inv = np.unique(sel.ravel(), return_inverse=True)
             attrs = {}
             for an, ai in p["attributes"].items():
-                A = g.accessor(ai)[uniq]
+                A = (r["attr"][an] if "attr" in r else g.accessor(ai))[uniq]
                 if an == "POSITION":
                     A = to_out(r["P"][uniq])
                     attrs[an] = g.add_accessor(A, minmax=True, target=34962)
