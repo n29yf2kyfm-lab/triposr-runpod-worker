@@ -10,7 +10,7 @@ engine bay and exhaust, painted the colour asked for. No Blender.
     glbmachine make "VW Polo 2019" --no-sheet # the car only, in seconds
     glbmachine batch --top 20 --workers 3     # the UK best sellers
     glbmachine rig CAR.glb OUT_DIR            # the rig step alone
-    glbmachine serve --port 8080              # the web API (below)
+    glbmachine serve --port 8080              # the web API (below) and GLB Studio at /studio/
     glbmachine version
 
 WORK FOLDER: $GLBMACHINE_HOME (default ~/.glbmachine) holds view/ (the check
@@ -23,6 +23,10 @@ WEB API (`serve`):
     GET  /v1/cars/ID/car.glb    the finished car (meshopt-compressed)
     GET  /v1/cars/ID/sheet.jpg  the four-view check sheet, when asked for
     GET  /health
+GLB STUDIO (`serve`, /studio/): open a built car, select a wrong part, say
+what it is, build again. Its calls: GET /v1/library, GET /v1/library/KEY/
+rig.glb | edits | record | car.glb, POST /v1/library/KEY/edits (apply and
+rebuild), POST /v1/library/KEY/reset.
 If $GLBMACHINE_KEYS is set (comma-separated), every /v1 call needs one of
 them as `Authorization: Bearer KEY` or `X-API-Key: KEY` — the hook for
 licence keys. $GLBMACHINE_WORKERS cars are built side by side (default 2).
@@ -40,6 +44,7 @@ import subprocess
 import sys
 import threading
 import time
+import urllib.parse
 import uuid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
@@ -143,10 +148,103 @@ class Jobs:
             self.put(job)
 
 
+# ── the Studio's library: every car built here that kept its rig ────────────
+_CATALOGUE = {}
+
+
+def _catalogue_item(asset):
+    if not _CATALOGUE:
+        import batch
+        _CATALOGUE.update(batch.catalogue())
+    return _CATALOGUE.get(asset) or {}
+
+
+def _car_name(item):
+    """'Nissan Micra (2004)' from a catalogue record ('nissan', 'nissan micra')."""
+    make = str(item.get("make") or "")
+    model = str(item.get("modelFamily") or item.get("model") or "")
+    if model.lower().startswith(make.lower() + " "):
+        model = model[len(make) + 1:]
+    import wheelbase
+
+    def nice(w):
+        if any(c.isupper() for c in w):
+            return w
+        # letters beside a digit or hyphen are a code (CR-V, CX-5, XC90, X5), bar i10 / e-208
+        return re.sub(r"[a-z]+", lambda m: m.group(0) if m.group(0) in ("i", "e") and m.start() == 0 and len(w) > 1
+                      else (m.group(0).upper() if len(m.group(0)) <= 2 and re.search(r"[\d-]", w) else m.group(0).title()), w)
+    make = wheelbase.MAKE_TITLE.get(make.lower(), nice(make))
+    years = "-".join(str(y) for y in (item.get("yearStart"), item.get("yearEnd")) if y)
+    return " ".join(x for x in (make, " ".join(nice(w) for w in model.split()), f"({years})" if years else "") if x)
+
+
+def library():
+    out = []
+    for root, dirs, files in os.walk(CARS):
+        depth = os.path.relpath(root, CARS).count(os.sep)
+        if os.path.exists(os.path.join(root, "rig", "src.glb")):
+            key = os.path.relpath(root, CARS).replace(os.sep, "/")
+            rec = _json(os.path.join(root, "record.json")) or {}
+            b = _json(os.path.join(root, "build.json")) or {}
+            item = b.get("item") or _catalogue_item(os.path.basename(root))
+            ed = _json(os.path.join(root, "rig", "edits.json"))
+            name = (b.get("target") or {}).get("genModel") or _car_name(item) or os.path.basename(root)
+            out.append({"key": key, "name": name, "asset": os.path.basename(root), "status": rec.get("status"),
+                        "missing": rec.get("missing"), "opens": (rec.get("finish") or {}).get("opens"),
+                        "edited": bool(ed), "has_car": os.path.exists(os.path.join(root, "web.glb")),
+                        "updated": os.path.getmtime(os.path.join(root, "rig", "src.glb"))})
+            dirs[:] = []
+        elif depth >= 2:
+            dirs[:] = []
+    return sorted(out, key=lambda c: -c["updated"])
+
+
+def _json(p):
+    try:
+        return json.load(open(p))
+    except Exception:
+        return None
+
+
+def car_dir(key):
+    """A library key -> its folder, only if it is a car under CARS."""
+    d = os.path.realpath(os.path.join(CARS, key))
+    if not d.startswith(os.path.realpath(CARS) + os.sep) or not os.path.exists(os.path.join(d, "rig", "src.glb")):
+        return None
+    return d
+
+
+def rebuild(d, port=8799):
+    """Finish a car again from its rig (and the person's edits, if any): the
+    same path as make, without the download, the rig or the check sheet."""
+    import argparse
+    import batch
+    b = _json(os.path.join(d, "build.json"))
+    if b:
+        target, item, paint = b["target"], b["item"], b.get("paint")
+    else:
+        item = batch.catalogue().get(os.path.basename(d))
+        if item is None:
+            raise ValueError("no record of how this car was built")
+        target, paint = {"rank": 0, "genModel": f"{item['make']} {item.get('modelFamily') or item['model']}"}, None
+    args = argparse.Namespace(engine_pack=ENGINE_PACK, tools=TOOLS, view_dir=VIEW, port=port, no_sheet=True,
+                              paint=paint)
+    if os.path.exists(os.path.join(d, "sheet.jpg")):
+        os.remove(os.path.join(d, "sheet.jpg"))     # it no longer shows this car
+    return batch.one(target, item, args, os.path.dirname(d))
+
+
+STATIC = {".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css",
+          ".svg": "image/svg+xml", ".json": "application/json", ".wasm": "application/wasm"}
+
+
 def serve(port, workers):
+    import edits as ed_mod
     setup(quiet=True)
     keys = {k.strip() for k in os.environ.get("GLBMACHINE_KEYS", "").split(",") if k.strip()}
     jobs = Jobs(workers)
+    locks, locks_lock = {}, threading.Lock()
+    studio_dir, lib_dir = os.path.join(HERE, "studio"), os.path.join(VIEW, "lib")
 
     class H(BaseHTTPRequestHandler):
         server_version = f"glbmachine/{VERSION}"
@@ -154,11 +252,12 @@ def serve(port, workers):
         def log_message(self, fmt, *a):
             sys.stderr.write("%s %s\n" % (self.address_string(), fmt % a))
 
-        def send(self, code, obj=None, path=None, ctype="application/json"):
+        def send(self, code, obj=None, path=None, ctype="application/json", cache=False):
             data = open(path, "rb").read() if path else json.dumps(obj, default=str).encode()
             self.send_response(code)
             self.send_header("Content-Type", ctype)
             self.send_header("Content-Length", str(len(data)))
+            self.send_header("Cache-Control", "max-age=3600" if cache else "no-store")
             self.end_headers()
             self.wfile.write(data)
 
@@ -172,10 +271,57 @@ def serve(port, workers):
             self.send(401, {"error": "a valid API key is needed (Authorization: Bearer KEY)"})
             return False
 
+        def static(self, base, rel, cache):
+            """A file under BASE (symlinks followed only into the node tools)."""
+            p = os.path.realpath(os.path.join(base, rel))
+            roots = [os.path.realpath(base), os.path.realpath(os.path.join(TOOLS, "node_modules"))]
+            if ".." in rel.split("/") or not any(p.startswith(r + os.sep) for r in roots) or not os.path.isfile(p):
+                return self.send(404, {"error": "not found"})
+            return self.send(200, path=p, ctype=STATIC.get(os.path.splitext(p)[1], "application/octet-stream"),
+                             cache=cache)
+
+        def body(self, limit):
+            n = int(self.headers.get("Content-Length", 0))
+            if n > limit:
+                raise ValueError("too large")
+            return json.loads(self.rfile.read(n) or b"{}")
+
         def do_GET(self):
-            parts = [p for p in self.path.split("?")[0].split("/") if p]
+            path = self.path.split("?")[0]
+            parts = [urllib.parse.unquote(p) for p in path.split("/") if p]
+            if not parts:
+                self.send_response(302)
+                self.send_header("Location", "/studio/")
+                self.end_headers()
+                return
             if parts == ["health"]:
                 return self.send(200, {"ok": True, "version": VERSION})
+            if parts[0] == "studio":
+                return self.static(studio_dir, "/".join(parts[1:]) or "index.html", cache=False)
+            if parts[0] == "lib":
+                return self.static(lib_dir, "/".join(parts[1:]), cache=True)
+            if parts[:2] == ["v1", "library"]:
+                if not self.allowed():
+                    return
+                if len(parts) == 2:
+                    return self.send(200, library())
+                d = car_dir(parts[2]) if len(parts) == 4 else None
+                if not d:
+                    return self.send(404, {"error": "no such car"})
+                rig = os.path.join(d, "rig")
+                if parts[3] == "rig.glb":         # always the rigger's own parts: edits are re-applied to them
+                    orig = os.path.join(rig, "src.orig.glb")
+                    return self.send(200, path=orig if os.path.exists(orig) else os.path.join(rig, "src.glb"),
+                                     ctype="model/gltf-binary")
+                if parts[3] == "edits":
+                    return self.send(200, _json(os.path.join(rig, "edits.json")) or {})
+                if parts[3] == "record":
+                    return self.send(200, _json(os.path.join(d, "record.json")) or {})
+                if parts[3] == "car.glb" and os.path.exists(os.path.join(d, "web.glb")):
+                    return self.send(200, path=os.path.join(d, "web.glb"), ctype="model/gltf-binary")
+                if parts[3] == "sheet.jpg" and os.path.exists(os.path.join(d, "sheet.jpg")):
+                    return self.send(200, path=os.path.join(d, "sheet.jpg"), ctype="image/jpeg")
+                return self.send(404, {"error": "not found"})
             if parts[:2] != ["v1", "cars"] or len(parts) < 3:
                 return self.send(404, {"error": "not found"})
             if not self.allowed():
@@ -194,20 +340,45 @@ def serve(port, workers):
             return self.send(200, path=files[want[0]], ctype=want[1])
 
         def do_POST(self):
-            if [p for p in self.path.split("?")[0].split("/") if p] != ["v1", "cars"]:
+            parts = [urllib.parse.unquote(p) for p in self.path.split("?")[0].split("/") if p]
+            if parts[:2] == ["v1", "library"] and len(parts) == 4 and parts[3] in ("edits", "reset"):
+                if not self.allowed():
+                    return
+                d = car_dir(parts[2])
+                if not d:
+                    return self.send(404, {"error": "no such car"})
+                try:
+                    body = self.body(64 << 20) if parts[3] == "edits" else {}
+                except Exception:
+                    return self.send(400, {"error": "send the edits as JSON"})
+                with locks_lock:
+                    lock = locks.setdefault(d, threading.Lock())
+                with lock:
+                    t0 = time.time()
+                    try:
+                        if parts[3] == "edits":
+                            saved = ed_mod.apply(os.path.join(d, "rig"), body)
+                        else:
+                            ed_mod.reset(os.path.join(d, "rig"))
+                            saved = {}
+                        rec = rebuild(d)
+                    except Exception as e:
+                        return self.send(500, {"error": str(e)[-400:]})
+                    return self.send(200, {"edits": saved, "record": rec, "seconds": round(time.time() - t0, 1)})
+            if parts != ["v1", "cars"]:
                 return self.send(404, {"error": "not found"})
             if not self.allowed():
                 return
             try:
-                n = min(int(self.headers.get("Content-Length", 0)), 10000)
-                body = json.loads(self.rfile.read(n) or b"{}")
+                body = self.body(10000)
                 assert isinstance(body.get("request"), str) and body["request"].strip()
             except Exception:
                 return self.send(400, {"error": 'send JSON like {"request": "Ford Fiesta 2015 blue"}'})
             job = jobs.add(body)
             self.send(202, {"id": job["id"], "status": job["status"], "poll": f"/v1/cars/{job['id']}"})
 
-    print(json.dumps({"serving": port, "workers": workers, "keys_required": bool(keys), "home": HOME}), flush=True)
+    print(json.dumps({"serving": port, "studio": f"http://localhost:{port}/studio/", "workers": workers,
+                      "keys_required": bool(keys), "home": HOME}), flush=True)
     ThreadingHTTPServer(("0.0.0.0", port), H).serve_forever()
 
 

@@ -40,35 +40,4 @@ window.__apply = qs => {
 };
 window.__apply(location.search);
 window.__done = true;
-</script></head><body>
-<script type="module">
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
-const q = new URLSearchParams(location.search);
-const W = innerWidth, H = innerHeight;
-const r = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
-r.setSize(W, H); r.toneMapping = THREE.ACESFilmicToneMapping; document.body.appendChild(r.domElement);
-const scene = new THREE.Scene(); scene.background = new THREE.Color(0xcfd3d6);
-scene.environment = new THREE.PMREMGenerator(r).fromScene(new RoomEnvironment(), 0.04).texture;
-const sun = new THREE.DirectionalLight(0xffffff, 1.2); sun.position.set(3, 6, 4); scene.add(sun);
-const floor = new THREE.Mesh(new THREE.CircleGeometry(8, 64), new THREE.MeshStandardMaterial({ color: 0xb9bec2, roughness: 0.9 }));
-floor.rotation.x = -Math.PI / 2; floor.position.y = -0.002; if (!q.get('nofloor')) scene.add(floor);
-const cam = new THREE.PerspectiveCamera(+(q.get('fov') || 35), W / H, 0.02, 100);
-const g = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync(q.get('f'));
-scene.add(g.scene);
-const mixer = new THREE.AnimationMixer(g.scene);
-for (const n of (q.get('open') || '').split(',').filter(Boolean)) {
-  const c = g.animations.find(a => a.name === n); if (!c) { console.log('no clip ' + n); continue; }
-  const a = mixer.clipAction(c); a.setLoop(THREE.LoopOnce); a.clampWhenFinished = true; a.play();
-}
-mixer.update(5);
-for (const h of (q.get('hide') || '').split(',').filter(Boolean)) { const o = g.scene.getObjectByName(h); if (o) o.visible = false; }
-const t = new THREE.Vector3(+(q.get('tx') || 0), +(q.get('ty') || 0.6), +(q.get('tz') || 0));
-const az = +(q.get('az') || 40) * Math.PI / 180, el = +(q.get('el') || 15) * Math.PI / 180, d = +(q.get('d') || 7);
-cam.position.set(t.x + d * Math.cos(el) * Math.sin(az), t.y + d * Math.sin(el), t.z + d * Math.cos(el) * Math.cos(az));
-cam.lookAt(t);
-r.render(scene, cam);
-window.__done = true;
 </script></body></html>

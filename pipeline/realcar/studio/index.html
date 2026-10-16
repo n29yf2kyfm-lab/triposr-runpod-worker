@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GLB Studio</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='8' height='8' fill='%23ffe45c'/%3E%3Crect x='8' width='8' height='8' fill='%234aa8e8'/%3E%3Crect y='8' width='8' height='8' fill='%23ff8c42'/%3E%3Crect x='8' y='8' width='8' height='8' fill='%236cc070'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="studio.css">
+<script type="importmap">{"imports":{"three":"/lib/three.module.js","three/addons/":"/lib/addons/"}}</script>
+</head>
+<body>
+<header class="bar">
+  <div class="brand"><span class="mark" aria-hidden="true"></span><b>GLB Studio</b><span class="by">ExpertCarCheck</span></div>
+  <div class="carname"><span id="carName">No car open</span><span id="carState" class="pill" hidden></span></div>
+  <div class="bar-actions">
+    <div class="seg" id="viewSeg" role="tablist" aria-label="View">
+      <button data-v="edit" class="on" role="tab">Edit</button>
+      <button data-v="result" role="tab">Result</button>
+    </div>
+    <button id="resetBtn" class="ghost" disabled title="Throw away every edit and let the machine decide again">Back to automatic</button>
+    <button id="buildBtn" class="primary" disabled>Build car</button>
+  </div>
+</header>
+
+<main>
+  <aside class="lib" aria-label="Cars">
+    <div class="lib-head">
+      <h2>Cars</h2>
+      <input id="libSearch" type="search" placeholder="Find a car" aria-label="Find a car">
+    </div>
+    <ul id="libList"></ul>
+  </aside>
+
+  <section class="stage" id="stage">
+    <canvas id="c" tabindex="0" aria-label="Car view"></canvas>
+    <div id="boxRect" hidden></div>
+    <div class="hud" id="hud"></div>
+    <div class="toast" id="toast" role="status" hidden></div>
+    <div class="busy" id="busy" hidden><div class="spin" aria-hidden="true"></div><span id="busyText">Loading</span></div>
+    <div class="empty" id="empty">
+      <p class="empty-title">Choose a car from the list</p>
+      <p>Every car the machine has built is here. Open one to fix a part it got wrong: select the panel, say what it is, build.</p>
+    </div>
+  </section>
+
+  <aside class="insp" aria-label="Tools">
+    <div id="editPanel">
+      <section>
+        <h3>Select</h3>
+        <div class="seg wide" id="toolSeg">
+          <button data-t="panel" class="on" title="Grows from the face you click to the nearest crease or shut line">Panel</button>
+          <button data-t="piece" title="A loose piece of the model, whole">Piece</button>
+          <button data-t="box" title="Everything facing you inside a box you drag">Box</button>
+        </div>
+        <label class="row" id="creaseRow">Stop at creases
+          <span class="num"><input id="crease" type="range" min="5" max="80" value="30"><output id="creaseOut">30°</output></span>
+        </label>
+        <label class="row check"><input id="sameMat" type="checkbox" checked> Same material only</label>
+        <div class="selinfo">
+          <span id="selCount">Nothing selected</span>
+          <span class="selbtns"><button id="clearSel" class="ghost small" disabled>Clear</button><button id="undoBtn" class="ghost small" disabled>Undo</button></span>
+        </div>
+      </section>
+      <section>
+        <h3>Selection is</h3>
+        <div class="targets" id="targets"></div>
+      </section>
+      <section>
+        <h3>Parts <span class="look seg" id="lookSeg"><button data-l="car" class="on">Car</button><button data-l="parts">Colours</button></span></h3>
+        <ul class="parts" id="partsList"></ul>
+      </section>
+    </div>
+
+    <div id="resultPanel" hidden>
+      <section>
+        <h3>Open</h3>
+        <div class="clips" id="clips"></div>
+      </section>
+      <section>
+        <h3>Build</h3>
+        <dl class="report" id="report"></dl>
+        <a id="download" class="primary block" download hidden>Download GLB</a>
+      </section>
+    </div>
+  </aside>
+</main>
+
+<dialog id="keyDlg">
+  <form method="dialog">
+    <h3>Licence key</h3>
+    <p>This GLB machine needs a key. It stays in this browser.</p>
+    <input id="keyInput" type="password" autocomplete="off" required aria-label="Licence key">
+    <menu><button class="primary" value="ok">Use key</button></menu>
+  </form>
+</dialog>
+
+<script type="module" src="studio.js"></script>
+</body>
+</html>

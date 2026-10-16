@@ -208,16 +208,28 @@ def one(target, item, args, out):
         spec["wheelbase"] = WHEELBASE[aid]
     else:
         spec["wheelbase"] = auto_wheelbase(item, rep, rec)
+    # a person's corrections from the Studio (edits.py): parts set by hand and
+    # hinge choices
+    ed_p = os.path.join(rig, "edits.json")
+    if os.path.exists(ed_p):
+        ed = json.load(open(ed_p))
+        spec["manual"], spec["hinges"] = ed.get("manual") or [], ed.get("hinges") or {}
+        rec["edited"] = {"manual": spec["manual"], "hinges": spec["hinges"]}
+    # how this car was built, so the Studio can build it again
+    json.dump({"target": target, "item": item, "paint": getattr(args, "paint", None)},
+              open(os.path.join(d, "build.json"), "w"), indent=1, default=str)
     fin = os.path.join(d, "finished.glb")
     t0 = time.time()
     try:
         flog = finish.finish(rigged, spec, fin)
     except BaseException as e:            # SystemExit from a bad frame too
         rec["status"] = f"finish failed: {e}"
+        json.dump(rec, open(os.path.join(d, "record.json"), "w"), indent=1, default=str)
         return rec
     tm["finish"] = round(time.time() - t0, 1)
     rec["finish"] = {k: flog.get(k) for k in ("opens", "missing", "bonnet", "tailgate", "door_trims", "rescale",
-                                              "glass_cleared", "measured", "bay_cleared_m2", "engine_pack", "paint_set")}
+                                              "glass_cleared", "measured", "bay_cleared_m2", "engine_pack", "paint_set",
+                                              "manual")}
     # validator, web copy and check sheet at the same time: the sheet is drawn
     # from the finished file, so it need not wait for the compression
     web = os.path.join(d, "web.glb")
@@ -280,6 +292,7 @@ def one(target, item, args, out):
     ok = not rec["missing"] and rec["validator"].get("errors") == 0 and rec["web_bytes"] \
         and not rec.get("scale_unverified")
     rec["status"] = "done" if ok else "check"
+    json.dump(rec, open(os.path.join(d, "record.json"), "w"), indent=1, default=str)
     return rec
 
 

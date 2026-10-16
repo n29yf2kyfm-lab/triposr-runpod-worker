@@ -15,7 +15,10 @@ SPEC.json:
      "engine_pack": "engine_pack.glb",                        # optional
      "credit": "2023 Volkswagen Polo GTI by … (CC BY 4.0)",   # optional, -> asset.copyright
      "paint": [20, 20, 22],                                   # optional, sRGB 0-255
-     "keep_native_engine": false}                             # optional: keep a model's own bay
+     "keep_native_engine": false,                             # optional: keep a model's own bay
+     "manual": ["bonnet", "door_fl"],                         # optional: parts set by hand in the
+                                                              # Studio (edits.py): taken as they are
+     "hinges": {"bonnet": {"edge": "front", "deg": 50}}}      # optional: hinge edge and angle
 Relative paths are taken from the spec file's folder.
 
 What it does, in order:
@@ -64,6 +67,30 @@ PACK_FRAME = {"front_axle_z": 1.316, "rear_axle_z": -1.315, "ground_y": -0.013, 
               "exhaust_front_z": 0.802, "exhaust_tail_z": -2.081}
 PACK_REAR = {"bay:susp_rear", "bay:fuel_tank"}
 PACK_EXHAUST = {"bay:exhaust_rear"}
+
+
+def hinge_line(part, plo, phi, edge=None, deg=None):
+    """Pivot, axis and opening angle for a hinged part, from its box (the
+    Studio draws the same line). Doors: front edge (or rear, a rear-hinged
+    door); bonnet: rear edge (or front); tailgate: top edge (or bottom: a
+    drop-down tail; left / right: side-hinged)."""
+    deg = abs(float(deg)) if deg else abs(HINGED[part])
+    if part.startswith("door"):
+        left = (plo[0] + phi[0]) / 2 > 0
+        x = float(phi[0] - 0.03 if left else plo[0] + 0.03)
+        if edge == "rear":
+            return [x, float((plo[1] + phi[1]) / 2), float(plo[2] + 0.03)], [0, 1, 0], deg if left else -deg
+        return [x, float((plo[1] + phi[1]) / 2), float(phi[2] - 0.03)], [0, 1, 0], -deg if left else deg
+    if part == "tailgate":
+        if edge == "bottom":
+            return [0.0, float(plo[1] + 0.01), float(plo[2] + 0.01)], [1, 0, 0], -deg
+        if edge in ("left", "right"):
+            x = float(phi[0] - 0.02 if edge == "left" else plo[0] + 0.02)
+            return [x, float((plo[1] + phi[1]) / 2), float(plo[2] + 0.02)], [0, 1, 0], -deg if edge == "left" else deg
+        return [0.0, float(phi[1] - 0.01), float(phi[2] - 0.01)], [1, 0, 0], deg
+    if edge == "front":
+        return [0.0, float(phi[1] - 0.01), float(phi[2] - 0.02)], [1, 0, 0], deg
+    return [0.0, float(phi[1] - 0.01), float(plo[2] + 0.02)], [1, 0, 0], -deg
 
 
 def part_of(name):
@@ -193,6 +220,11 @@ def is_clear_glass(mat):
 
 def finish(src, spec, out, base_dir="."):
     log = {"src": os.path.basename(src)}
+    # parts a person set by hand in the Studio stand as they are: no search,
+    # no cut, no trims added
+    manual = set(spec.get("manual") or [])
+    if manual:
+        log["manual"] = sorted(manual)
     g = GLTF(src)
     j = g.j
     W, _ = g.world_matrices()
@@ -319,6 +351,9 @@ def finish(src, spec, out, base_dir="."):
 
     # bonnet: the largest flat paint island over the front of the car
     cand = [i for i in range(nl) if dom[i] == paint and cz[i] > zf - 0.35 and up[i] > 0.5 and hi[i, 1] > wheel_top]
+    if "bonnet" in manual:
+        cand = []
+        log["bonnet"] = {"from": "the Studio"}
     bonnet = None
     if cand:
         b = max(cand, key=lambda i: isl_area[i])
@@ -340,7 +375,7 @@ def finish(src, spec, out, base_dir="."):
     # middle of that area; it stops where the nose turns down to the grille
     # and where the wings turn down at the shoulders.
     cuts = []                                  # (part, triangle indices, field)
-    if bonnet is None:
+    if bonnet is None and "bonnet" not in manual:
         # a welded piece can mix materials (the shell with its trims), so the
         # shell is the piece with the most paint, and only its paint is cut
         shells = [i for i in range(nl) if mat_area[i, paint] > 0.5 and lo[i, 2] < zf < hi[i, 2] and hi[i, 1] > wheel_top]
@@ -429,7 +464,7 @@ def finish(src, spec, out, base_dir="."):
     tri_c = T.mean(1)
     waist_ = ground + 1.35 * (wheel_top - ground)
     grear = np.isin(tmat, list(glass)) & (tri_c[:, 2] < zr) & (tri_c[:, 1] > waist_) & (np.abs(nrm[:, 2]) > 0.2)
-    if area[grear].sum() > 0.15:
+    if area[grear].sum() > 0.15 and "tailgate" not in manual:
         Rv = T[grear].reshape(-1, 3)
         rw_lo, rw_hi, rw_cz, rw_m2 = Rv.min(0), Rv.max(0), float(tri_c[grear, 2].mean()), float(area[grear].sum())
         xb = max(abs(rw_lo[0]), abs(rw_hi[0])) + 0.08
@@ -506,7 +541,11 @@ def finish(src, spec, out, base_dir="."):
     # no tailgate found here: the rig machine's tailgate stands, as the islands
     # mostly made of its triangles
     rig_tg_direct = None
-    if "tailgate" not in log:
+    if "tailgate" in manual:
+        rig_tg = np.concatenate([np.full(len(r["I"]), r["rig"] == "tailgate") for r in body])
+        rig_tg_direct = rig_tg & (label[lab] == "body")
+        log["tailgate"] = {"from": "the Studio", "triangles": int(rig_tg_direct.sum())}
+    elif "tailgate" not in log:
         rig_tg = np.concatenate([np.full(len(r["I"]), r["rig"] == "tailgate") for r in body])
         if rig_tg.any():
             share = np.bincount(lab, weights=rig_tg.astype(float), minlength=nl) / np.maximum(
@@ -529,9 +568,11 @@ def finish(src, spec, out, base_dir="."):
     # in a dark plastic rather than glass, the inner lamps).
     doors = {}
     for r in recs:
-        if r["rig"].startswith("door_"):
+        if r["rig"].startswith("door_") and r["rig"] not in manual:
             doors.setdefault(r["rig"], []).append(tris(r))
-    if (label == "tailgate").any():
+    if "tailgate" in manual:
+        pass
+    elif (label == "tailgate").any():
         doors["tailgate"] = [T[label[lab] == "tailgate"]]
     elif rig_tg_direct is not None and rig_tg_direct.any():
         doors["tailgate"] = [T[rig_tg_direct]]
@@ -711,21 +752,14 @@ def finish(src, spec, out, base_dir="."):
         mi = len(meshes) - 1
         if pname in HINGED:
             V = np.vstack([g.accessor(pr["attributes"]["POSITION"]) for pr in by_part[part]])
-            plo, phi = V.min(0), V.max(0)
-            if pname.startswith("door"):
-                left = (plo[0] + phi[0]) / 2 > 0
-                piv = [float(phi[0] - 0.03 if left else plo[0] + 0.03), float((plo[1] + phi[1]) / 2), float(phi[2] - 0.03)]
-                axis = [0, 1, 0]
-            elif pname == "tailgate":
-                piv, axis = [0.0, float(phi[1] - 0.01), float(phi[2] - 0.01)], [1, 0, 0]
-            else:
-                piv, axis = [0.0, float(phi[1] - 0.01), float(plo[2] + 0.02)], [1, 0, 0]
+            h = (spec.get("hinges") or {}).get(part) or (spec.get("hinges") or {}).get(pname) or {}
+            piv, axis, deg = hinge_line(pname, V.min(0), V.max(0), h.get("edge"), h.get("deg"))
             hv = len(nodes)
             nodes.append({"name": pname + "_hinge", "translation": piv, "children": [hv + 1],
-                          "extras": {"axis": axis, "open_deg": HINGED[pname]}})
+                          "extras": {"axis": axis, "open_deg": deg}})
             nodes.append({"name": pname, "translation": [-c for c in piv], "mesh": mi})
             nodes[0]["children"].append(hv)
-            pivots[pname] = (hv, axis, HINGED[pname])
+            pivots[pname] = (hv, axis, deg)
         else:
             nodes.append({"name": pname, "mesh": mi})
             nodes[0]["children"].append(len(nodes) - 1)

@@ -10,7 +10,7 @@ travel with it (they do: each package keeps its own LICENSE file in
 
 | Part | Where it came from |
 | --- | --- |
-| `rig.py`, `finish.py`, `make.py`, `batch.py`, `source.py`, `wheelbase.py`, `glbmachine.py`, the `.mjs` tools, `view.html`, `../template/gltf.py` | written for ExpertCarCheck |
+| `rig.py`, `finish.py`, `edits.py`, `make.py`, `batch.py`, `source.py`, `wheelbase.py`, `glbmachine.py`, the `.mjs` tools, `view.html`, `studio/` (GLB Studio), `../template/gltf.py` | written for ExpertCarCheck |
 | `assets/engine_pack.glb` (engine, gearbox, cooling, battery, suspension, exhaust) | exported from our own constructed geometry (`platform/trainer/engine-bay-detail.js`, `platform/workshop/ehybrid/hybrid-parts.js`: `sourceType: constructed-training-geometry`); its 11 textures are generated in code. Nothing in it is cut from a third-party model. |
 | `vendor/no-sharp` | a stand-in so the LGPL image library below is never installed |
 
@@ -42,7 +42,7 @@ part of the product and the Docker image does not contain them.
 | meshoptimizer | MIT | opening and writing meshopt-compressed files |
 | gltf-validator (Khronos) | Apache-2.0 | checking every finished car |
 | puppeteer-core | Apache-2.0 | driving the browser that draws check sheets |
-| three (three.js r169) | MIT | the check-sheet page |
+| three (three.js r169, with its GLTFLoader, OrbitControls, RoomEnvironment and meshopt decoder add-ons) | MIT | the check-sheet page and GLB Studio |
 
 Apache-2.0 asks that its NOTICE files are kept when redistributed; they are,
 inside `node_modules`.

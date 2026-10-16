@@ -32,6 +32,33 @@ answers with an id; `GET /v1/cars/ID` gives the status and the report;
 `GLBMACHINE_KEYS` set, each call needs `Authorization: Bearer KEY`, which is
 where licence keys plug in.
 
+## GLB Studio: fix a car by hand
+
+When the machine gets a part wrong (a welded bonnet it could not find, a
+boot lid cut wrong, stray sheets in the bay), open the car in the Studio:
+
+```
+python3 pipeline/realcar/glbmachine.py serve --port 8080   # then http://localhost:8080/studio/
+```
+
+1. Pick the car from the list (every car built here that kept its rig).
+2. Click a panel: the selection grows from that face to the nearest crease or
+   shut line (*Panel*), takes a whole loose piece (*Piece*), or everything
+   facing you in a box you drag (*Box*). Shift adds, Alt takes away.
+3. Say what it is: Bonnet (B), Tailgate (T), a door (1-4), Body (0) or
+   Remove (Del). Ctrl-Z undoes. A coloured line shows where each part will
+   hinge; change the edge (a rear-hinged door, a side-hinged tailgate) or the
+   angle in the parts list.
+4. Build car: the server applies the edits to the rigger's own parts
+   (`edits.py`, kept apart so they can be changed or undone at any time) and
+   finishes the car again (`finish.py` takes hand-set parts as they are).
+   About 5 s. The Result view opens each part.
+
+Tested 2026-10-16: the Qashqai J11 and the Fiat 500e, both "bonnet missing",
+fixed with one click and one key each; both now build with everything
+opening. "Back to automatic" throws the edits away. The edits are saved with
+the car, so later rebuilds (and batch runs) keep them.
+
 ## Ask for a car
 
 The steps, in order:

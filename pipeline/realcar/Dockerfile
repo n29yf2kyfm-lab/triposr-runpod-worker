@@ -1,7 +1,7 @@
 # The GLB machine as one image. Build from the repository root:
 #
 #   docker build -f pipeline/realcar/Dockerfile -t glbmachine .
-#   docker run -p 8080:8080 -v glbdata:/data -e GLBMACHINE_KEYS=your-key glbmachine
+#   docker run -p 8080:8080 -v glbdata:/data -e GLBMACHINE_KEYS=your-key glbmachine   # API; GLB Studio at /studio/
 #   docker run --rm -v glbdata:/data glbmachine make "Ford Fiesta 2015 blue"
 #
 # No Blender: Python (numpy, scipy, Pillow), Node (gltf-transform, draco,
