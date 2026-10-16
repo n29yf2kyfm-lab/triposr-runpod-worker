@@ -14,7 +14,8 @@ newest generation, a quality grade counting as four years), and then:
   copy -> four-view check sheet
 
 One line per car goes to OUT_DIR/state.jsonl. A re-run skips cars already
-there. Only the web copy, the sheet and the log stay on disk. Nothing is
+there; remove a car's line to redo it (its rigged copy is kept, so that only
+re-finishes). The rigged copy, web copy, sheet and log stay on disk. Nothing is
 published: a person looks at each sheet first.
 
 TOOLS_DIR is a folder with node_modules for @gltf-transform, meshoptimizer,
@@ -45,6 +46,7 @@ GRADE = {"A": 0, "B": 1, "C": 2}
 WHEELBASE = {
     "volkswagen-polo-2023-v1": 2564,
     "nissan-qashqai-2018-v1": 2646,
+    "ford-fiesta-2009-w12-v1": 2489,          # Fiesta Mk6 (2008-2017)
 }
 
 
@@ -95,15 +97,19 @@ def one(target, item, args, out):
     rec = {"rank": int(target["rank"]), "target": target["genModel"], "asset": aid,
            "grade": item.get("qualityGrade"), "years": [item.get("yearStart"), item.get("yearEnd")]}
     src, rig = os.path.join(d, "src.glb"), os.path.join(d, "rig")
-    urllib.request.urlretrieve(item["desktopGlbUrl"], src)
-    p = run([sys.executable, os.path.join(REPO, "platform/rigmachine/run.py"), src, rig,
-             "--size=720x450", "--samples=6"], 2400, lg)
-    try:
-        rr = json.loads(p.stdout.strip().splitlines()[-1])
-    except Exception:
-        rr = {"status": "error", "error": (p.stderr or p.stdout)[-300:]}
-    rec["rig"] = {k: rr.get(k) for k in ("status", "opens", "missing", "refused", "error")}
     rigged = os.path.join(rig, "src.glb")
+    rr_path = os.path.join(rig, "result.json")
+    if os.path.exists(rigged) and os.path.exists(rr_path):
+        rr = json.load(open(rr_path))           # rigged before: finish again only
+    else:
+        urllib.request.urlretrieve(item["desktopGlbUrl"], src)
+        p = run([sys.executable, os.path.join(REPO, "platform/rigmachine/run.py"), src, rig,
+                 "--size=720x450", "--samples=6"], 2400, lg)
+        try:
+            rr = json.loads(p.stdout.strip().splitlines()[-1])
+        except Exception:
+            rr = {"status": "error", "error": (p.stderr or p.stdout)[-300:]}
+    rec["rig"] = {k: rr.get(k) for k in ("status", "opens", "missing", "refused", "error")}
     if not os.path.exists(rigged):
         rec["status"] = "rig failed"
         return rec
@@ -125,7 +131,7 @@ def one(target, item, args, out):
         rec["status"] = f"finish failed: {e}"
         return rec
     rec["finish"] = {k: flog.get(k) for k in ("opens", "missing", "bonnet", "tailgate", "door_trims", "rescale",
-                                              "glass_cleared", "measured")}
+                                              "glass_cleared", "measured", "native_bay_m2", "engine_pack")}
     v = run(["node", os.path.join(args.tools, "validate.mjs"), fin], 300, lg)
     try:
         rec["validator"] = json.loads(v.stdout)
@@ -152,13 +158,19 @@ def one(target, item, args, out):
             os.remove(os.path.join(d, n + ".png"))
     except Exception as e:
         rec["sheet_error"] = str(e)
-    for f in (src, fin, rigged):
+    for f in (src, fin):                         # the rigged copy stays, so a fix re-finishes in seconds
         if os.path.exists(f):
             os.remove(f)
     for f in os.listdir(rig):
         if f.endswith(".png"):
             os.remove(os.path.join(rig, f))
-    ok = not flog.get("missing") and rec["validator"].get("errors") == 0 and rec["web_bytes"]
+    # what this car should open: what the rig machine found plus what it looked
+    # for and missed (a three-door car has no rear doors to miss)
+    want = set(rr.get("opens") or []) | set(rr.get("missing") or []) | {"bonnet", "tailgate"}
+    want = {"bonnet" if w == "panel_bonnet" else w for w in want}
+    rec["missing"] = sorted(want - set(flog.get("opens") or []))
+    ok = not rec["missing"] and rec["validator"].get("errors") == 0 and rec["web_bytes"] \
+        and not rec.get("scale_unverified")
     rec["status"] = "done" if ok else "check"
     return rec
 

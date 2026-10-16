@@ -59,6 +59,7 @@ HINGED = {"door_fl": -65, "door_fr": 65, "door_rl": -65, "door_rr": 65, "bonnet"
 PACK_FRAME = {"front_axle_z": 1.316, "rear_axle_z": -1.315, "ground_y": -0.013, "track_half": 0.875,
               "exhaust_front_z": 0.802, "exhaust_tail_z": -2.081}
 PACK_REAR = {"bay:susp_rear", "bay:fuel_tank"}
+NATIVE_BAY_M2 = 0.6        # modelled engine detail under the bonnet above this: keep the model's own
 PACK_EXHAUST = {"bay:exhaust_rear"}
 
 
@@ -443,6 +444,35 @@ def finish(src, spec, out, base_dir="."):
                 nsplit += split_along(g, r, el, cut["field"], "bonnet")
         parts_area = sum(tri_area_normal(r["P"][r["I"][r["tri_part"] == "bonnet"]])[0].sum() for r in body)
         log["bonnet"].update({"area_m2": round(float(parts_area), 3), "triangles_split": nsplit})
+
+    # ── does the model have its own engine? ──
+    # Some catalogue models come with their engine bay modelled. Then the pack
+    # is not added (two engines in one bay). The bay is the box under the
+    # bonnet, between the wings (60% of the track) and above the bottom third
+    # of the wheels; what counts is the area of everything there that is
+    # not paint or glass, against the area a modelled engine has.
+    native_bay = 0.0
+    bt = [r["P"][r["I"][r["tri_part"] == "bonnet"]] for r in recs if (r["tri_part"] == "bonnet").any()]
+    if bt:
+        B = np.vstack(bt).reshape(-1, 3)
+        wd = wheel_top - ground
+        z0, z1, ytop = B[:, 2].min() + 0.05, B[:, 2].max(), B[:, 1].min()
+        for r in recs:
+            if r["rig"].startswith(("wheel_", "door_")) or r["mat"] is None or r["mat"] == paint or r["mat"] in glass:
+                continue
+            Tr = r["P"][r["I"][r["tri_part"] == "body"]]
+            if not len(Tr):
+                continue
+            c = Tr.mean(1)
+            inb = (np.abs(c[:, 0]) < 0.6 * track_half) & (c[:, 1] > ground + 0.3 * wd) & (c[:, 1] < ytop) \
+                & (c[:, 2] > z0) & (c[:, 2] < z1)
+            if inb.any():
+                native_bay += float(tri_area_normal(Tr[inb])[0].sum())
+        native_bay /= (wd / 0.66) ** 2                 # in a 0.66 m-wheel car's square metres
+    log["native_bay_m2"] = round(native_bay, 3)
+    if native_bay > NATIVE_BAY_M2 and spec.get("engine_pack"):
+        log["engine_pack"] = {"skipped": "the model has its own engine bay"}
+        spec = dict(spec, engine_pack=None)
 
     # ── output frame: centred on the wheelbase, scaled to the published one ──
     def to_out(P):
