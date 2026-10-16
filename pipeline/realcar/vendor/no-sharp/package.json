@@ -1,0 +1,8 @@
+{
+  "name": "sharp",
+  "version": "0.35.0-none",
+  "description": "Stands in for sharp, which gltf-transform loads for texture resizing the GLB machine never does. Keeps libvips (LGPL-3.0) out of the product.",
+  "license": "UNLICENSED",
+  "main": "index.cjs",
+  "exports": { "import": "./index.mjs", "require": "./index.cjs" }
+}

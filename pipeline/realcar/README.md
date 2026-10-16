@@ -1,43 +1,72 @@
-# Real-car finisher
+# The GLB machine
 
-Takes a real catalogue car that the rig machine has cut, and finishes it to
-the owner's standard: every door, the bonnet and the tailgate open (glTF
-animation clips), the glass is clear, the cabin is kept, and there is an
-engine bay and an exhaust under it. Pure Python (numpy, scipy): no Blender,
-no GPU, no network. About 2 s per car.
+Ask for a car in plain words and get back an interactive GLB: every door, the
+bonnet and the tailgate open (glTF animation clips), the glass is clear, the
+model's cabin is kept, and a generic engine bay and exhaust sit under it,
+painted the colour asked for. Python (numpy, scipy, Pillow) and Node; **no
+Blender**, no GPU. ExpertCarCheck's own software: see `LICENSE` and, for every
+component and the car models' licences, `THIRD_PARTY.md`.
+
+## Install and run
+
+```
+pip install -r pipeline/realcar/requirements.txt
+python3 pipeline/realcar/glbmachine.py setup          # npm install + work folder (~/.glbmachine)
+python3 pipeline/realcar/glbmachine.py make "Nissan Micra 2004 red"
+python3 pipeline/realcar/glbmachine.py make "Ford Fiesta 2012 blue" --no-sheet
+python3 pipeline/realcar/glbmachine.py batch --top 20 --workers 3
+python3 pipeline/realcar/glbmachine.py serve --port 8080
+```
+
+Or as one image (Python, Node 22, Chromium):
+
+```
+docker build -f pipeline/realcar/Dockerfile -t glbmachine .
+docker run -p 8080:8080 -v glbdata:/data -e GLBMACHINE_KEYS=key1,key2 glbmachine
+docker run --rm -v glbdata:/data glbmachine make "Toyota Yaris 2003 silver"
+```
+
+The web API (`serve`): `POST /v1/cars {"request": "...", "sheet": false}`
+answers with an id; `GET /v1/cars/ID` gives the status and the report;
+`GET /v1/cars/ID/car.glb` and `/sheet.jpg` give the files. With
+`GLBMACHINE_KEYS` set, each call needs `Authorization: Bearer KEY`, which is
+where licence keys plug in.
 
 ## Ask for a car
-
-```
-BLENDER_BIN=... python3 pipeline/realcar/make.py "Mercedes A-Class 2012 black 5-door" \
-    --engine-pack engine_pack.glb --tools TOOLS --view-dir VIEW
-```
 
 The steps, in order:
 1. The approved catalogue is searched for that model in a generation on
    sale that year.
 2. If it isn't there, Sketchfab is searched (`source.py`). The best match is
    downloaded with the `SKETCHFAB_TOKEN` environment variable.
-3. The car is rigged, finished in the colour asked for, validated, compressed
-   and drawn on a check sheet.
+3. The file is decoded (`decode.mjs`), rigged (`rig.py`), finished in the
+   colour asked for (`finish.py`), validated, compressed and, unless
+   `--no-sheet`, drawn on a four-view check sheet.
 
-TOOLS holds `view.mjs`, `validate.mjs` and `encode.mjs` with their node
-modules. VIEW holds `view.html` (as `index.html`) and three.js.
+Timed on catalogue cars (2026-10-16, one at a time):
 
-Timed on a cold catalogue car (Ford Focus): 34 s from typing to a finished,
-validated, rendered file.
+| Step | Fiesta 2009 | Micra 2004 | Yaris 2001 (in Docker) |
+| --- | --- | --- | --- |
+| download | 1.0 s | 0.5 s | 0.9 s |
+| decode | 0.3 s | 0.3 s | 0.6 s |
+| rig | 1.1 s | 1.9 s | 2.6 s |
+| finish | 0.5 s | 0.9 s | 1.5 s |
+| validator and web copy | 1.3 s | 1.6 s | 2.4 s |
+| **car ready** | **about 5 s** | **about 6 s** | **about 9 s** |
+| check sheet (optional) | | 20 s | 29 s |
 
-| Step | Time |
-| --- | --- |
-| download | 0.9 s |
-| rig without Blender stills | 7.8 s |
-| finish | 0.8 s |
-| validator, meshopt copy and check sheet, side by side | 22 s |
+The largest catalogue cars (Juke, Clio) rig in 13-21 s. The top-20 UK
+sellers, three at a time: 7 min 16 s in all.
 
-A car already rigged once only re-finishes (about 25 s).
+**The rigger** (`rig.py`) is the old Blender rig step ported rule for rule
+to numpy, then checked against Blender on the 21 UK top-seller catalogue
+cars: the same parts open on 20, with hinges within 5 mm. The one difference
+(the catalogue's mislabelled "Honda Jazz") is better in `rig.py`. Blender is
+GPL, and code that drives it would have made the whole product GPL; that is
+why it was replaced.
 
 **Size.** About half the catalogue's models are not at metre scale. The
-rig machine sizes those from a guessed wheel height, which can be 15% out.
+rigger sizes those from a guessed wheel height, which can be 15% out.
 `wheelbase.py` looks the car up instead:
 1. It reads the model's English Wikipedia page and every generation page it
    links to (page text only, since the search API is rate-limited on shared
@@ -57,9 +86,10 @@ overlap was settled by proportion.
 ## The steps by hand
 
 ```
-python3 platform/rigmachine/run.py SRC.glb OUT_DIR --no-stills   # cut: doors, wheels, frame (Blender, offline)
-python3 pipeline/realcar/finish.py OUT_DIR/SRC.glb SPEC.json CAR.glb
-node pipeline/template/tools/encode.mjs CAR.glb CAR_web.glb  # meshopt web copy
+node pipeline/realcar/decode.mjs SRC.glb PLAIN.glb               # Draco / meshopt -> plain
+python3 pipeline/realcar/rig.py PLAIN.glb OUT_DIR                 # cut: doors, wheels, frame
+python3 pipeline/realcar/finish.py OUT_DIR/src.glb SPEC.json CAR.glb
+node pipeline/realcar/encode.mjs CAR.glb CAR_web.glb              # meshopt web copy
 ```
 
 `SPEC.json` (see `specs/polo_mk6.json`): `name`, `wheelbase` (mm, the car

@@ -11,6 +11,11 @@
     "draco3dgltf": "1.5.7",
     "gltf-validator": "2.0.0-dev.3.10",
     "meshoptimizer": "0.22.0",
-    "puppeteer-core": "23.11.1"
+    "puppeteer-core": "23.11.1",
+    "sharp": "file:./vendor/no-sharp",
+    "three": "0.169.0"
+  },
+  "overrides": {
+    "sharp": "$sharp"
   }
 }

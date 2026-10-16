@@ -505,6 +505,7 @@ def finish(src, spec, out, base_dir="."):
 
     # no tailgate found here: the rig machine's tailgate stands, as the islands
     # mostly made of its triangles
+    rig_tg_direct = None
     if "tailgate" not in log:
         rig_tg = np.concatenate([np.full(len(r["I"]), r["rig"] == "tailgate") for r in body])
         if rig_tg.any():
@@ -512,6 +513,12 @@ def finish(src, spec, out, base_dir="."):
                 np.bincount(lab, minlength=nl), 1)
             label[(share > 0.5) & (label == "body")] = "tailgate"
             log["tailgate"] = {"from": "rig", "pieces": int((label == "tailgate").sum())}
+            if not log["tailgate"]["pieces"]:
+                # welded here into a larger piece of the shell (the 2004
+                # Micra's lid shares its edge vertices with the body): the
+                # rig's own triangles are the lid
+                rig_tg_direct = rig_tg & (label[lab] == "body")
+                log["tailgate"]["triangles"] = int(rig_tg_direct.sum())
 
     # door trims: window frames, belt mouldings and mirrors modelled as their
     # own small pieces are left on the body by the rig's door cut and float in
@@ -526,6 +533,8 @@ def finish(src, spec, out, base_dir="."):
             doors.setdefault(r["rig"], []).append(tris(r))
     if (label == "tailgate").any():
         doors["tailgate"] = [T[label[lab] == "tailgate"]]
+    elif rig_tg_direct is not None and rig_tg_direct.any():
+        doors["tailgate"] = [T[rig_tg_direct]]
     trims = {}
     if doors:
         trees = {}
@@ -561,8 +570,8 @@ def finish(src, spec, out, base_dir="."):
         # was found for that part here
         if r["rig"] == "panel_bonnet":
             tp = np.where(tp == "body", "bonnet" if bonnet is None else "body", tp)
-        if r["rig"] == "tailgate":
-            pass                                    # handled as islands above
+        if r["rig"] == "tailgate" and rig_tg_direct is not None:
+            tp = np.where(tp == "body", "tailgate", tp)
         r["tri_part"] = tp
         off += n
     for r in recs:

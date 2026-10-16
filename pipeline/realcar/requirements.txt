@@ -1,0 +1,4 @@
+# The GLB machine's Python side (all BSD-style licences)
+numpy>=1.26,<3
+scipy>=1.11,<2
+Pillow>=10,<13

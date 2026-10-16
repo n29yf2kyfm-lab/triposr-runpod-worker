@@ -1,0 +1,10 @@
+# Build context is the repository root; send only what the image copies.
+*
+!pipeline/realcar/
+!pipeline/template/gltf.py
+!platform/catalogue/catalogue.v2.json
+!platform/catalogue/uk_targets/targets.csv
+!platform/catalogue/uk_targets/top2000_cars.csv
+pipeline/realcar/node_modules/
+pipeline/realcar/__pycache__/
+pipeline/realcar/*.jpg

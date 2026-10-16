@@ -9,7 +9,7 @@ For each target in platform/catalogue/uk_targets/targets.csv (ranked by
 licensed vehicles), the best approved catalogue model is chosen (quality
 newest generation, a quality grade counting as four years), and then:
 
-  download -> rig machine (doors, wheels, frame) -> finish.py (bonnet,
+  download -> decode -> rig.py (doors, wheels, frame) -> finish.py (bonnet,
   tailgate, trims, glass, engine, clips) -> glTF validator -> meshopt web
   copy -> four-view check sheet
 
@@ -25,9 +25,9 @@ gltf-validator and puppeteer-core, plus validate.mjs, encode.mjs and view.mjs
 """
 import argparse
 import csv
-import re
 import json
 import os
+import re
 import subprocess
 import sys
 import threading
@@ -61,6 +61,9 @@ WHEELBASE = {
 # published production dates (the catalogue keeps the source's title year).
 GENERATION_FIX = {
     "mercedes-benz-a-class-2018-w12-v1": {"yearStart": 2012, "yearEnd": 2018, "generation": "W176"},
+    # a first-generation Yaris (XP10: its sheet, and the 2001 in its id),
+    # recorded as the 2020 car
+    "toyota-yaris-2001-v1": {"yearStart": 1999, "yearEnd": 2005, "generation": "XP10"},
 }
 
 
@@ -130,6 +133,9 @@ def auto_wheelbase(item, rep, rec):
 
 def credit_of(item):
     ref = item.get("sourceReferenceId")
+    if not ref:                              # most records carry the model only in its link
+        m = re.search(r"([0-9a-f]{32})/?$", item.get("sourceUrl") or "")
+        ref = m and m.group(1)
     title, who, lic = item.get("sourceTitle"), item.get("sourceCreator"), item.get("licence")
     if ref:
         try:
@@ -224,11 +230,12 @@ def one(target, item, args, out):
                                      stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True),
         "encode": subprocess.Popen(["node", os.path.join(args.tools, "encode.mjs"), fin, web],
                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True),
-        "render": subprocess.Popen(["node", os.path.join(args.tools, "view.mjs"), "1000", "640"] +
-                                   [f"{os.path.join(d, n)}.png:f={rel}&{q}" for n, q in shots],
-                                   stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
-                                   env={**os.environ, "VIEW_PORT": str(args.port)}),
     }
+    if not getattr(args, "no_sheet", False):
+        procs["render"] = subprocess.Popen(["node", os.path.join(args.tools, "view.mjs"), "1000", "640"] +
+                                           [f"{os.path.join(d, n)}.png:f={rel}&{q}" for n, q in shots],
+                                           stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
+                                           env={**os.environ, "VIEW_PORT": str(args.port)})
     outs = {}
     for k, pr in procs.items():
         try:
@@ -245,6 +252,8 @@ def one(target, item, args, out):
         rec["validator"] = {"errors": -1}
     rec["web_bytes"] = os.path.getsize(web) if os.path.exists(web) else None
     try:
+        if "render" not in procs:
+            raise RuntimeError("no sheet asked for")
         from PIL import Image
         ims = [Image.open(os.path.join(d, n + ".png")).convert("RGB") for n, _ in shots]
         W, H = ims[0].size

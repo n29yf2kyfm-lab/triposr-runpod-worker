@@ -1,0 +1,27 @@
+ExpertCarCheck GLB Machine
+Copyright (c) 2026 ExpertCarCheck. All rights reserved.
+
+This software (the files in this folder, including rig.py, finish.py,
+make.py, batch.py, source.py, wheelbase.py, glbmachine.py, the .mjs tools,
+view.html and assets/engine_pack.glb) is proprietary.
+
+No part of it may be copied, modified, distributed, sublicensed, sold, or
+used to provide a service to others, except under a written licence
+agreement signed by ExpertCarCheck. A licence agreement sets out who may use
+it, on how many machines or for how many cars, for how long, and for what
+fee.
+
+Third-party components the software uses are not covered by this notice and
+remain under their own licences, listed in THIRD_PARTY.md. Car models the
+software processes remain under their authors' licences, also explained
+there; this licence grants no rights in them.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
+
+(Template wording. Replace "ExpertCarCheck" with the owning company's legal
+name and have a solicitor review this notice and the licence agreement
+before the software is licensed to anyone.)
