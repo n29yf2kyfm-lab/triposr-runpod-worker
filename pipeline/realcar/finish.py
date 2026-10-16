@@ -270,14 +270,29 @@ def finish(src, spec, out, base_dir="."):
     np.add.at(mat_area, (lab, np.where(tmat < 0, nm, tmat)), area)
     dom = mat_area.argmax(1)
 
-    # paint: the opaque material covering most of the doors
+    # paint: the opaque material covering most of the car's outer side skin
+    # between the axles, from the wheel tops to the waist (doors and body
+    # alike, so a rig that found one door still gets it right). Counting
+    # whole doors picked their insides: the Mini's "DoorPanels", the Jazz's
+    # "dash paint", the 500e's "Interior_paint".
     door_area = np.zeros(nm + 1)
-    for r in recs:
-        if r["rig"].startswith("door_") and r["mat"] is not None:
-            m = mats[r["mat"]]
-            if m.get("alphaMode") == "BLEND" or m.get("name", "").startswith("SB_"):
-                continue
-            door_area[r["mat"]] += tri_area_normal(tris(r))[0].sum()
+    side = [r for r in recs if not r["rig"].startswith("wheel_") and r["mat"] is not None
+            and mats[r["mat"]].get("alphaMode") != "BLEND" and not mats[r["mat"]].get("name", "").startswith("SB_")]
+    if side:
+        Ts = np.vstack([tris(r) for r in side])
+        ms = np.concatenate([np.full(len(r["I"]), r["mat"]) for r in side])
+        a_, n_ = tri_area_normal(Ts)
+        c_ = Ts.mean(1)
+        cab = np.c_[np.abs(c_[:, 0]), c_[:, 1:]]
+        pab = Ts.reshape(-1, 3).copy()
+        pab[:, 0] = np.abs(pab[:, 0])             # both sides as one
+        waist_ = ground + 1.35 * (wheel_top - ground)
+        sk = skin(cab, pab, (1, 2), 1, 0.03) & (n_[:, 0] * np.sign(c_[:, 0]) > 0.3) \
+            & (c_[:, 1] > ground + 0.9 * (wheel_top - ground)) & (c_[:, 1] < waist_ + 0.1) \
+            & (c_[:, 2] > zr) & (c_[:, 2] < zf)
+        w_ = np.array([0.5 if re.search(r"int(erior)?\b|int\.|seat|leather|fabric|carpet|cloth", m.get("name", ""), re.I)
+                       else 1.0 for m in mats] + [1.0])
+        np.add.at(door_area, ms[sk], a_[sk] * w_[ms[sk]])
     paint = int(door_area.argmax())
     log["paint"] = mats[paint].get("name")
     paint_ids = {i for i, m in enumerate(mats) if m.get("name") == mats[paint].get("name")}
@@ -300,6 +315,7 @@ def finish(src, spec, out, base_dir="."):
             m["alphaMode"] = "BLEND"
 
     label = np.array(["body"] * nl, dtype=object)
+    glass_m2 = mat_area[:, sorted(glass)].sum(1) if glass else np.zeros(nl)
 
     # bonnet: the largest flat paint island over the front of the car
     cand = [i for i in range(nl) if dom[i] == paint and cz[i] > zf - 0.35 and up[i] > 0.5 and hi[i, 1] > wheel_top]
@@ -328,29 +344,39 @@ def finish(src, spec, out, base_dir="."):
         # a welded piece can mix materials (the shell with its trims), so the
         # shell is the piece with the most paint, and only its paint is cut
         shells = [i for i in range(nl) if mat_area[i, paint] > 0.5 and lo[i, 2] < zf < hi[i, 2] and hi[i, 1] > wheel_top]
-        ws = [i for i in range(nl) if dom[i] in glass and cz[i] > (zf + zr) / 2 and lo[i, 1] > wheel_top]
+        # a window is the piece with the most glass, not only one that is
+        # mostly glass: the A3's windscreen is welded to its black frame
+        tri_c = T.mean(1)
+        waist_ = ground + 1.35 * (wheel_top - ground)
+        gfront = np.isin(tmat, list(glass)) & (tri_c[:, 2] > (zf + zr) / 2) & (tri_c[:, 1] > waist_) \
+            & (np.abs(nrm[:, 2]) > 0.2)               # facing forward: the windscreen, not side glass
+        ws = [0] if area[gfront].sum() > 0.3 else []
         big = int(np.argmax(isl_area))
         log["bonnet_search"] = {"shells": len(shells), "windscreens": len(ws),
                                 "largest_piece": {"m2": round(float(isl_area[big]), 2), "material": (mats[dom[big]].get("name") if dom[big] < nm else None),
                                                   "z": [round(float(lo[big, 2]), 2), round(float(hi[big, 2]), 2)], "top_y": round(float(hi[big, 1]), 2)}}
         if shells and ws:
             sh = max(shells, key=lambda i: mat_area[i, paint])
-            w = max(ws, key=lambda i: isl_area[i])
-            Wv = T[lab == w].reshape(-1, 3)
+            # the windscreen's own triangles, wherever the model put them
+            # (the A3's and 500e's sit inside one piece with the whole shell)
+            Wv = T[gfront].reshape(-1, 3)
             z_rear = float(Wv[Wv[:, 1] < Wv[:, 1].min() + 0.03, 2].max()) + 0.06
             # All the paint, not one piece's: a model's paint can come in many
             # pieces (the Golf R's bonnet is spread over several), and a cut
             # of one leaves the rest of the panel shut.
             ts = np.where(tmat == paint)[0]
             cen = T[ts].mean(1)
-            ok = (cen[:, 2] > z_rear) & (np.abs(nrm[ts, 1]) > 0.65) & (cen[:, 1] > wheel_top + 0.1)
+            ok = (cen[:, 2] > z_rear) & (np.abs(nrm[ts, 1]) > 0.5) & (cen[:, 1] > wheel_top + 0.1)
             sub = ts[ok]
             if len(sub):
-                # connected on a 2 cm top-down grid, so pieces that touch
-                # without sharing vertices still count as one surface
+                # connected on a top-down grid, so pieces that touch without
+                # sharing vertices still count as one surface; the grid is as
+                # coarse as the model's triangles (the A3's are 5 cm across,
+                # and on a 2 cm grid its bonnet fell apart into strips)
                 c2 = cen[ok]
-                gx = np.floor(c2[:, 0] / 0.02).astype(int)
-                gz = np.floor(c2[:, 2] / 0.02).astype(int)
+                gcell = float(np.clip(1.2 * np.sqrt(np.median(area[sub])), 0.02, 0.08))
+                gx = np.floor(c2[:, 0] / gcell).astype(int)
+                gz = np.floor(c2[:, 2] / gcell).astype(int)
                 grid = np.zeros((gx.max() - gx.min() + 3, gz.max() - gz.min() + 3), bool)
                 grid[gx - gx.min() + 1, gz - gz.min() + 1] = True
                 gl_, _ = ndi_label(binary_closing(grid, np.ones((3, 3))))
@@ -399,14 +425,18 @@ def finish(src, spec, out, base_dir="."):
                                      "half_width_m": [round(float(half.min()), 3), round(float(half.max()), 3)]}
 
     # tailgate: the rear window, the panel under it, and what sits on that skin
-    gl = [i for i in range(nl) if dom[i] in glass and cz[i] < zr and lo[i, 1] > wheel_top]
-    if gl:
-        rw = max(gl, key=lambda i: isl_area[i])
-        xb = max(abs(lo[rw, 0]), abs(hi[rw, 0])) + 0.08
-        zfront = hi[rw, 2] + 0.10
-        under = [i for i in range(nl) if dom[i] == paint and abs(hi[i, 1] - lo[rw, 1]) < 0.04
-                 and cz[i] < cz[rw] and max(abs(lo[i, 0]), abs(hi[i, 0])) < xb and isl_area[i] > 0.1]
-        ybot = (min(lo[i, 1] for i in under) if under else lo[rw, 1] - 0.35) - 0.01
+    # the rear window from its glass triangles, facing back, above the waist
+    tri_c = T.mean(1)
+    waist_ = ground + 1.35 * (wheel_top - ground)
+    grear = np.isin(tmat, list(glass)) & (tri_c[:, 2] < zr) & (tri_c[:, 1] > waist_) & (np.abs(nrm[:, 2]) > 0.2)
+    if area[grear].sum() > 0.15:
+        Rv = T[grear].reshape(-1, 3)
+        rw_lo, rw_hi, rw_cz, rw_m2 = Rv.min(0), Rv.max(0), float(tri_c[grear, 2].mean()), float(area[grear].sum())
+        xb = max(abs(rw_lo[0]), abs(rw_hi[0])) + 0.08
+        zfront = rw_hi[2] + 0.10
+        under = [i for i in range(nl) if dom[i] == paint and abs(hi[i, 1] - rw_lo[1]) < 0.04
+                 and cz[i] < rw_cz and max(abs(lo[i, 0]), abs(hi[i, 0])) < xb and isl_area[i] > 0.1]
+        ybot = (min(lo[i, 1] for i in under) if under else rw_lo[1] - 0.35) - 0.01
         # the car's rear skin: the rearmost surface at each (x, y), 1 cm cells
         pts = flat
         cell = np.floor(pts[:, :2] / 0.01).astype(np.int64)
@@ -423,7 +453,7 @@ def finish(src, spec, out, base_dir="."):
         tg |= inside & np.isin(dom, list(glass))
         tg &= label == "body"
         label[tg] = "tailgate"
-        log["tailgate"] = {"from": "islands", "rear_window_m2": round(float(isl_area[rw]), 3),
+        log["tailgate"] = {"from": "islands", "rear_window_m2": round(rw_m2, 3),
                            "box": {"x_half": round(float(xb), 3), "y_bottom": round(float(ybot), 3),
                                    "z_front": round(float(zfront), 3)},
                            "pieces": int(tg.sum())}
@@ -435,7 +465,17 @@ def finish(src, spec, out, base_dir="."):
         # (else 35 cm under the window).
         tg_paint = float(sum(isl_area[i] for i in np.where(tg)[0] if dom[i] == paint))
         shells_r = [i for i in range(nl) if mat_area[i, paint] > 0.5 and lo[i, 2] < zr and label[i] == "body"]
-        if tg_paint < 0.3 and shells_r:
+        # the rig machine's own tailgate cut beats ours: a rear-skin cut on a
+        # welded shell comes away ragged (Fiesta, Golf R, A3), the rig's
+        # panel cut follows the model's own edges
+        # (when it is a panel: at least 0.3 m2 of it paint - the Golf R's
+        # "tailgate" from the rig is the boot floor carpet)
+        rig_tg_m2 = float(sum(tri_area_normal(tris(r))[0].sum() for r in body
+                              if r["rig"] == "tailgate" and r["mat"] in paint_ids))
+        if rig_tg_m2 > 0.3 and tg_paint < 0.3:
+            label[tg] = "body"
+            del log["tailgate"]
+        elif tg_paint < 0.3 and shells_r:
             sh = max(shells_r, key=lambda i: mat_area[i, paint])
             tp_ = np.where(tmat == paint)[0]
             # the panel's full thickness: paint and the liner behind it, within
@@ -445,17 +485,17 @@ def finish(src, spec, out, base_dir="."):
             on_skin = skin(cen, T[ts].reshape(-1, 3), (0, 1), -1, 0.08)
             sp = T[tp_].reshape(-1, 3)
             mid = sp[np.abs(sp[:, 0]) < 0.15]
-            ytop_b = lo[rw, 1]
+            ytop_b = rw_lo[1]
             yb = np.arange(ytop_b, 0.6 * wheel_top, -0.01)
             zb = np.array([mid[(mid[:, 1] <= y) & (mid[:, 1] > y - 0.01), 2].min()
                            if ((mid[:, 1] <= y) & (mid[:, 1] > y - 0.01)).any() else np.nan for y in yb])
-            ycut = lo[rw, 1] - 0.35
+            ycut = rw_lo[1] - 0.35
             for k in range(11, len(yb)):
                 if np.isfinite(zb[k]) and np.isfinite(zb[k - 1]) and zb[k] < zb[k - 1] - 0.02:
                     ycut = float(yb[k - 1])
                     break
-            xt = max(abs(lo[rw, 0]), abs(hi[rw, 0])) + 0.02
-            ztop = hi[rw, 2] + 0.02
+            xt = max(abs(rw_lo[0]), abs(rw_hi[0])) + 0.02
+            ztop = rw_hi[2] + 0.02
 
             def tfield(P, xt=xt, ycut=ycut, ztop=ztop):
                 return np.maximum.reduce([np.abs(P[:, 0]) - xt, ycut - P[:, 1], P[:, 2] - ztop])
@@ -564,6 +604,18 @@ def finish(src, spec, out, base_dir="."):
         B = np.vstack(bt).reshape(-1, 3)
         wd = wheel_top - ground
         z0, z1, ytop = B[:, 2].min() + 0.05, B[:, 2].max() - 0.12, B[:, 1].min()
+        # the bonnet's underside, cell by cell (cells as big as its triangles,
+        # at least 3 cm): everything below it is
+        # bay, up to just under the panel - a fake engine (the Fiesta's is a
+        # photo on a sheet 15 cm under the bonnet) sits above the lowest
+        # point of the bonnet's front lip
+        bcell = float(np.clip(2 * np.sqrt(np.median(tri_area_normal(np.vstack(bt))[0])), 0.03, 0.12))
+        bk = np.floor(B[:, [0, 2]] / bcell).astype(np.int64) @ np.array([100000, 1])
+        buk, binv = np.unique(bk, return_inverse=True)
+        bunder = np.full(len(buk), np.inf)
+        np.minimum.at(bunder, binv, B[:, 1])
+        btop = np.full(len(buk), -np.inf)
+        np.maximum.at(btop, binv, B[:, 1])
         for r in recs:
             if r["rig"].startswith(("wheel_", "door_")) or r["mat"] in glass:
                 continue
@@ -572,8 +624,28 @@ def finish(src, spec, out, base_dir="."):
                 continue
             Tr = r["P"][r["I"][body_t]]
             c = Tr.mean(1)
-            inb = (np.abs(c[:, 0]) < 0.45 * track_half) & (c[:, 1] > ground + 0.35 * wd) & (c[:, 1] < ytop) \
-                & (c[:, 2] > z0) & (c[:, 2] < z1)
+            ck = np.floor(c[:, [0, 2]] / bcell).astype(np.int64) @ np.array([100000, 1])
+            ix = np.clip(np.searchsorted(buk, ck), 0, len(buk) - 1)
+            hit = buk[ix] == ck
+            lid = np.where(hit, bunder[ix] - 0.01, ytop)
+            ar_, nr_ = tri_area_normal(Tr)
+            big = ar_ > 0.005 * (wd / 0.66) ** 2
+            # a big sheet can lie a centimetre under the bonnet's liner (the
+            # Fiesta's photo engine): for those, anything under the bonnet's
+            # top skin is bay (the bonnet itself is its own part by now)
+            lid = np.where(big & hit, btop[ix] - 0.02, lid)
+            under_bonnet = (c[:, 1] > ground + 0.35 * wd) & (c[:, 1] < lid) & (c[:, 2] > z0)
+            # small detail: the middle of the bay only (headlamp insides and
+            # the grille stay); big flat sheets (a tub, a photo of an engine:
+            # the Fiesta's are 30 cm triangles) out to the inner wings and up
+            # to the bonnet's front, except what faces forward (the grille)
+            # or is named as a lamp, chrome or badge
+            lampish = bool(re.search(r"light|lamp|lens|luz|chrome|cromo|grill|badge|logo|emblem",
+                                     mats[r["mat"]].get("name", "") if r["mat"] is not None else "", re.I))
+            inb = under_bonnet & (
+                ((np.abs(c[:, 0]) < 0.45 * track_half) & (c[:, 2] < z1)) |
+                (big & (np.abs(c[:, 0]) < 0.75 * track_half) & (c[:, 2] < z1 + 0.12) & (np.abs(nr_[:, 2]) < 0.7)
+                 & (not lampish)))
             if inb.any():
                 cleared += float(tri_area_normal(Tr[inb])[0].sum())
                 r["tri_part"][body_t[inb]] = "drop"

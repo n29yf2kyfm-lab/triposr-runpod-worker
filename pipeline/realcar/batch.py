@@ -64,6 +64,14 @@ GENERATION_FIX = {
 }
 
 
+# Catalogue models that are not the car their record says (seen on the
+# check sheets): never picked for that target.
+WRONG_CAR = {
+    "honda-jazz-2018-v1": "is a Toyota RAV4 (badge and 'JPRAV4' plate)",
+    "mini-cooper-w7-v1": "is the classic Mini, not the BMW MINI on UK roads",
+}
+
+
 def catalogue():
     d = json.load(open(os.path.join(REPO, "platform/catalogue/catalogue.v2.json")))
     items = d if isinstance(d, list) else d.get("models") or d.get("items") or list(d.values())[0]
@@ -76,7 +84,8 @@ def catalogue():
 
 def pick(target, cat):
     ids = [a for a in (target["assetIds"] or "").split("|") if a in cat]
-    ok = [cat[a] for a in ids if cat[a].get("publicationStatus") == "approved" and cat[a].get("desktopGlbUrl")]
+    ok = [cat[a] for a in ids if cat[a].get("publicationStatus") == "approved" and cat[a].get("desktopGlbUrl")
+          and a not in WRONG_CAR]
     if not ok:
         return None
     # the generation on the road now matters most; a grade is worth 4 years

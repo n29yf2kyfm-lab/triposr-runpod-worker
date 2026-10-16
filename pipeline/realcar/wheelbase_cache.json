@@ -18,6 +18,30 @@
    2100
   ]
  },
+ "audi-a4-v1": {
+  "candidates": 5,
+  "length": 4744,
+  "name": "Fifth generation (B9/8W)",
+  "page": "Audi A4",
+  "source": "en.wikipedia: Audi A4",
+  "wheelbase": 2820,
+  "years": [
+   2015,
+   2025
+  ]
+ },
+ "audi-a6-c8-v1": {
+  "candidates": 6,
+  "length": 4939,
+  "name": "Fifth generation (C8)",
+  "page": "Audi A6",
+  "source": "en.wikipedia: Audi A6",
+  "wheelbase": 2924,
+  "years": [
+   2018,
+   2026
+  ]
+ },
  "bmw-1-series-v1": {
   "candidates": 5,
   "length": 4324,
@@ -40,6 +64,42 @@
   "years": [
    2018,
    2026
+  ]
+ },
+ "bmw-x1-2020-w12-v1": {
+  "candidates": 3,
+  "length": 4439,
+  "name": "BMW X1",
+  "page": "BMW X1 (F48)",
+  "source": "en.wikipedia: BMW X1 (F48)",
+  "wheelbase": 2670,
+  "years": [
+   2015,
+   2022
+  ]
+ },
+ "bmw-x5-2024-v1": {
+  "candidates": 5,
+  "length": 4935,
+  "name": "BMW X5",
+  "page": "BMW X5 (G05)",
+  "source": "en.wikipedia: BMW X5 (G05)",
+  "wheelbase": 2975,
+  "years": [
+   2019,
+   2026
+  ]
+ },
+ "citroen-c4-2008-v1": {
+  "candidates": 3,
+  "length": 4274,
+  "name": "First generation",
+  "page": "Citro\u00ebn C4",
+  "source": "en.wikipedia: Citro\u00ebn C4",
+  "wheelbase": 2608,
+  "years": [
+   2004,
+   2015
   ]
  },
  "fiat-500e-v1": {
@@ -73,6 +133,25 @@
    2026
   ]
  },
+ "ford-ka-sedan-2015-w5-v1": {
+  "tried": [
+   "Ford Ka Sedan"
+  ],
+  "wheelbase": null,
+  "why": "no infobox on sale in 2015 among 0 on 1 pages"
+ },
+ "ford-mondeo-2021-v1": {
+  "candidates": 4,
+  "length": 4935,
+  "name": "Ford Mondeo (fifth generation)",
+  "page": "Ford Mondeo (fifth generation)",
+  "source": "en.wikipedia: Ford Mondeo (fifth generation)",
+  "wheelbase": 2945,
+  "years": [
+   2022,
+   2100
+  ]
+ },
  "ford|fiesta|2009": {
   "candidates": 8,
   "length": 4008,
@@ -97,6 +176,13 @@
    2026
   ]
  },
+ "honda-cr-v-v1": {
+  "tried": [
+   "Honda Cr-V"
+  ],
+  "wheelbase": null,
+  "why": "no infobox on sale in 2018 among 0 on 1 pages"
+ },
  "honda-jazz-2018-v1": {
   "candidates": 4,
   "length": 4028,
@@ -107,6 +193,56 @@
   "years": [
    2013,
    2022
+  ]
+ },
+ "hyundai-i20-2022-v1": {
+  "tried": [
+   "Hyundai I20"
+  ],
+  "wheelbase": null,
+  "why": "no infobox on sale in 2022 among 0 on 1 pages"
+ },
+ "hyundai-i30-2010-v1": {
+  "tried": [
+   "Hyundai I30"
+  ],
+  "wheelbase": null,
+  "why": "no infobox on sale in 2010 among 0 on 1 pages"
+ },
+ "hyundai-kona-2025-n-line-v1": {
+  "candidates": 2,
+  "length": 4368,
+  "name": "Second generation",
+  "page": "Hyundai Kona",
+  "source": "en.wikipedia: Hyundai Kona",
+  "wheelbase": 2660,
+  "years": [
+   2023,
+   2100
+  ]
+ },
+ "hyundai-tucson-2022-w12-v1": {
+  "candidates": 5,
+  "length": 4505,
+  "name": "Fourth generation",
+  "page": "Hyundai Tucson",
+  "source": "en.wikipedia: Hyundai Tucson",
+  "wheelbase": 2680,
+  "years": [
+   2020,
+   2025
+  ]
+ },
+ "kia-picanto-2024-m1-v1": {
+  "candidates": 3,
+  "length": 3595,
+  "name": "Second generation",
+  "page": "Kia Picanto",
+  "source": "en.wikipedia: Kia Picanto",
+  "wheelbase": 2385,
+  "years": [
+   2011,
+   2026
   ]
  },
  "kia-sportage-2023-v1": {
@@ -120,6 +256,60 @@
    2021,
    2100
   ]
+ },
+ "land-rover-discovery-2022-law1-v1": {
+  "tried": [
+   "Land Rover Land Rover Discovery"
+  ],
+  "wheelbase": null,
+  "why": "no infobox on sale in 2022 among 0 on 1 pages"
+ },
+ "land-rover-range-rover-evoque-v1": {
+  "tried": [
+   "Land Rover Range-Rover-Evoque"
+  ],
+  "wheelbase": null,
+  "why": "no infobox on sale in 2019 among 0 on 1 pages"
+ },
+ "land-rover-range-rover-sport-2018-v1": {
+  "tried": [
+   "Land Rover Range-Rover-"
+  ],
+  "wheelbase": null,
+  "why": "no infobox on sale in 2022 among 0 on 1 pages"
+ },
+ "land-rover-range-rover-sport-2023-rr1-v1": {
+  "candidates": 5,
+  "length": 5052,
+  "name": "Range Rover (L460)",
+  "page": "Range Rover (L460)",
+  "source": "en.wikipedia: Range Rover (L460)",
+  "wheelbase": 2997,
+  "years": [
+   2022,
+   2100
+  ]
+ },
+ "mercedes-benz-cla-v2": {
+  "tried": [
+   "Mercedes-Benz Cla"
+  ],
+  "wheelbase": null,
+  "why": "no infobox on sale in 2013 among 0 on 1 pages"
+ },
+ "mercedes-benz-glc-mw1-v2": {
+  "tried": [
+   "Mercedes-Benz Glc"
+  ],
+  "wheelbase": null,
+  "why": "no infobox on sale in 2015 among 0 on 1 pages"
+ },
+ "mg-zs-2025-m1-v1": {
+  "tried": [
+   "MG Zs"
+  ],
+  "wheelbase": null,
+  "why": "no infobox on sale in 2025 among 0 on 1 pages"
  },
  "mini-cooper-w7-v1": {
   "candidates": 4,
@@ -157,6 +347,18 @@
    2010
   ]
  },
+ "nissan-note-v1": {
+  "candidates": 3,
+  "length": 4083,
+  "name": "First generation",
+  "page": "Nissan Note",
+  "source": "en.wikipedia: Nissan Note",
+  "wheelbase": 2600,
+  "years": [
+   2004,
+   2013
+  ]
+ },
  "nissan|micra|2004": {
   "candidates": 4,
   "length": 3719,
@@ -181,6 +383,54 @@
    2022
   ]
  },
+ "peugeot-2008-2020-w5-v1": {
+  "candidates": 2,
+  "length": 4300,
+  "name": "Second generation",
+  "page": "Peugeot 2008",
+  "source": "en.wikipedia: Peugeot 2008",
+  "wheelbase": 2605,
+  "years": [
+   2019,
+   2024
+  ]
+ },
+ "peugeot-3008-v1": {
+  "candidates": 3,
+  "length": 4447,
+  "name": "Second generation",
+  "page": "Peugeot 3008",
+  "source": "en.wikipedia: Peugeot 3008",
+  "wheelbase": 2675,
+  "years": [
+   2016,
+   2024
+  ]
+ },
+ "peugeot-308-2026-pw1-v1": {
+  "candidates": 3,
+  "length": 4367,
+  "name": "Peugeot 308 III",
+  "page": "Peugeot 308",
+  "source": "en.wikipedia: Peugeot 308",
+  "wheelbase": 2675,
+  "years": [
+   2021,
+   2100
+  ]
+ },
+ "renault-captur-v1": {
+  "candidates": 3,
+  "length": 4228,
+  "name": "Second generation",
+  "page": "Renault Captur",
+  "source": "en.wikipedia: Renault Captur",
+  "wheelbase": 2639,
+  "years": [
+   2019,
+   2100
+  ]
+ },
  "renault-clio-2023-w7-v1": {
   "candidates": 6,
   "length": 4050,
@@ -191,6 +441,116 @@
   "years": [
    2018,
    2100
+  ]
+ },
+ "renault-megane-v1": {
+  "candidates": 4,
+  "length": 4359,
+  "name": "M\u00e9gane IV",
+  "page": "Renault M\u00e9gane",
+  "source": "en.wikipedia: Renault M\u00e9gane",
+  "wheelbase": 2669,
+  "years": [
+   2015,
+   2027
+  ]
+ },
+ "skoda-karoq-2020-v1": {
+  "candidates": 1,
+  "length": 4382,
+  "name": "\u0160koda Karoq",
+  "page": "\u0160koda Karoq",
+  "source": "en.wikipedia: \u0160koda Karoq",
+  "wheelbase": 2638,
+  "years": [
+   2017,
+   2026
+  ]
+ },
+ "skoda-kodiaq-2020-w12-v1": {
+  "candidates": 2,
+  "length": 4697,
+  "name": "First generation",
+  "page": "\u0160koda Kodiaq",
+  "source": "en.wikipedia: \u0160koda Kodiaq",
+  "wheelbase": 2791,
+  "years": [
+   2016,
+   2026
+  ]
+ },
+ "skoda-octavia-2025-m1-v1": {
+  "candidates": 5,
+  "length": 4689,
+  "name": "\u0160koda Octavia Mk4",
+  "page": "\u0160koda Octavia",
+  "source": "en.wikipedia: \u0160koda Octavia",
+  "wheelbase": 2669,
+  "years": [
+   2019,
+   2026
+  ]
+ },
+ "suzuki-swift-2024-w12-v1": {
+  "candidates": 4,
+  "length": 3860,
+  "name": "Fourth generation",
+  "page": "Suzuki Swift",
+  "source": "en.wikipedia: Suzuki Swift",
+  "wheelbase": 2450,
+  "years": [
+   2023,
+   2100
+  ]
+ },
+ "suzuki-vitara-2024-v1": {
+  "candidates": 4,
+  "length": 4175,
+  "name": "Fourth generation",
+  "page": "Suzuki Vitara",
+  "source": "en.wikipedia: Suzuki Vitara",
+  "wheelbase": 2500,
+  "years": [
+   2015,
+   2100
+  ]
+ },
+ "tesla-model-3-2024-w7-v1": {
+  "tried": [
+   "Tesla Model 3"
+  ],
+  "wheelbase": null,
+  "why": "no infobox on sale in 2024 among 0 on 1 pages"
+ },
+ "tesla-model-y-v1": {
+  "tried": [
+   "Tesla Model Y"
+  ],
+  "wheelbase": null,
+  "why": "no infobox on sale in 2021 among 0 on 1 pages"
+ },
+ "toyota-corolla-v1": {
+  "candidates": 11,
+  "length": 4360,
+  "name": "Toyota Corolla (E160)",
+  "page": "Toyota Corolla (E160)",
+  "source": "en.wikipedia: Toyota Corolla (E160)",
+  "wheelbase": 2600,
+  "years": [
+   2012,
+   2025
+  ]
+ },
+ "toyota-rav4-2021-tw1-v1": {
+  "candidates": 6,
+  "length": 4585,
+  "name": "Fifth generation",
+  "page": "Toyota RAV4",
+  "source": "en.wikipedia: Toyota RAV4",
+  "wheelbase": 2690,
+  "years": [
+   2018,
+   2025
   ]
  },
  "toyota-yaris-2001-v1": {
@@ -229,6 +589,18 @@
    2014
   ]
  },
+ "vauxhall-zafira-v1": {
+  "candidates": 2,
+  "length": 4317,
+  "name": "Zafira",
+  "page": "Opel Zafira",
+  "source": "en.wikipedia: Opel Zafira",
+  "wheelbase": 2694,
+  "years": [
+   1999,
+   2012
+  ]
+ },
  "vauxhall|corsa|2011": {
   "candidates": 6,
   "length": 3999,
@@ -239,6 +611,30 @@
   "years": [
    2006,
    2014
+  ]
+ },
+ "volkswagen-passat-2025-w12-v1": {
+  "candidates": 13,
+  "length": 4908,
+  "name": "Second generation (China)",
+  "page": "Volkswagen Passat (North America and China)",
+  "source": "en.wikipedia: Volkswagen Passat (North America and China)",
+  "wheelbase": 2871,
+  "years": [
+   2019,
+   2100
+  ]
+ },
+ "volkswagen-polo-gti-2023-vw2-v1": {
+  "candidates": 5,
+  "length": 4060,
+  "name": "Volkswagen Polo Mk6",
+  "page": "Volkswagen Polo Mk6",
+  "source": "en.wikipedia: Volkswagen Polo Mk6",
+  "wheelbase": 2556,
+  "years": [
+   2017,
+   2026
   ]
  },
  "volkswagen-tiguan-allspace-2022-v1": {
@@ -276,5 +672,26 @@
    2017,
    2026
   ]
+ },
+ "volvo-v40-2018-vow1-v1": {
+  "tried": [
+   "Volvo S40"
+  ],
+  "wheelbase": null,
+  "why": "no infobox on sale in 2018 among 2 on 1 pages"
+ },
+ "volvo-xc60-2023-w7-v1": {
+  "tried": [
+   "Volvo Xc60"
+  ],
+  "wheelbase": null,
+  "why": "no infobox on sale in 2023 among 0 on 1 pages"
+ },
+ "volvo-xc90-v1": {
+  "tried": [
+   "Volvo Xc90"
+  ],
+  "wheelbase": null,
+  "why": "no infobox on sale in 2015 among 0 on 1 pages"
  }
 }
