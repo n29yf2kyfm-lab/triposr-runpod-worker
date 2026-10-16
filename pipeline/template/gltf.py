@@ -44,7 +44,9 @@ class GLTF:
         bv = self.j["bufferViews"][a["bufferView"]]
         start = bv.get("byteOffset", 0) + a.get("byteOffset", 0)
         stride = bv.get("byteStride", 0) or comp * dt.itemsize
-        arr = np.ndarray((n, comp), dtype=dt, buffer=self.bin, offset=start, strides=(stride, dt.itemsize))
+        end = start + stride * (n - 1) + comp * dt.itemsize
+        buf = self.bin if end <= len(self.bin) else self.bin + bytes(self.extra)   # appended data lives in extra
+        arr = np.ndarray((n, comp), dtype=dt, buffer=buf, offset=start, strides=(stride, dt.itemsize))
         out = arr.astype(np.float64) if dt == np.float32 else arr.copy()
         if a.get("normalized"):
             out = out.astype(np.float64) / np.iinfo(dt).max
@@ -105,6 +107,73 @@ class GLTF:
             acc["max"] = [float(v) for v in arr.max(0)]
         self.j["accessors"].append(acc)
         return len(self.j["accessors"]) - 1
+
+    def append(self, other):
+        """Bring another GLB's scene into this one (an engine bay, a kit
+        part). Returns the indices, in this file, of the other file's scene
+        root nodes. Materials, textures and images come along; nothing of
+        this file changes."""
+        j, o = self.j, other.j
+        off = {k: len(j.get(k, [])) for k in ("accessors", "bufferViews", "images", "samplers", "textures",
+                                               "materials", "meshes", "nodes")}
+        # fold any pending data into the main buffer first, so reads of the
+        # merged accessors stay cheap
+        self.bin = self.bin + bytes(self.extra)
+        self.extra = bytearray()
+        while len(self.bin) % 4:
+            self.bin += b"\0"
+        base = len(self.bin)
+        self.bin = self.bin + other.bin
+        for bv in o.get("bufferViews", []):
+            j.setdefault("bufferViews", []).append(dict(bv, buffer=0, byteOffset=bv.get("byteOffset", 0) + base))
+        for a in o.get("accessors", []):
+            a = dict(a)
+            if "bufferView" in a:
+                a["bufferView"] += off["bufferViews"]
+            j.setdefault("accessors", []).append(a)
+        for im in o.get("images", []):
+            im = dict(im)
+            if "bufferView" in im:
+                im["bufferView"] += off["bufferViews"]
+            j.setdefault("images", []).append(im)
+        j.setdefault("samplers", []).extend(o.get("samplers", []))
+        for t in o.get("textures", []):
+            t = dict(t)
+            if "source" in t:
+                t["source"] += off["images"]
+            if "sampler" in t:
+                t["sampler"] += off["samplers"]
+            j.setdefault("textures", []).append(t)
+
+        def retex(x, under_texture=False):
+            if isinstance(x, dict):
+                return {k: (v + off["textures"] if k == "index" and under_texture else
+                            retex(v, k.endswith("Texture") or (under_texture and k == "extensions")))
+                        for k, v in x.items()}
+            if isinstance(x, list):
+                return [retex(v, under_texture) for v in x]
+            return x
+        for m in o.get("materials", []):
+            j.setdefault("materials", []).append(retex(m))
+        for me in o.get("meshes", []):
+            me = {**me, "primitives": []} | {"primitives": [
+                {**p, "attributes": {k: v + off["accessors"] for k, v in p["attributes"].items()},
+                 **({"indices": p["indices"] + off["accessors"]} if "indices" in p else {}),
+                 **({"material": p["material"] + off["materials"]} if "material" in p else {})}
+                for p in me["primitives"]]}
+            j.setdefault("meshes", []).append(me)
+        for n in o.get("nodes", []):
+            n = dict(n)
+            if "mesh" in n:
+                n["mesh"] += off["meshes"]
+            if "children" in n:
+                n["children"] = [c + off["nodes"] for c in n["children"]]
+            j.setdefault("nodes", []).append(n)
+        used = set(j.get("extensionsUsed", [])) | set(o.get("extensionsUsed", []))
+        if used:
+            j["extensionsUsed"] = sorted(used)
+        scene = o["scenes"][o.get("scene", 0)]
+        return [r + off["nodes"] for r in scene["nodes"]]
 
     def save(self, path, compact=True):
         """Write the GLB. With `compact`, buffer views no accessor or image
