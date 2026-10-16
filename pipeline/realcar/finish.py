@@ -13,7 +13,9 @@ rig frame (y up, nose +z, the car's left +x, ground y = 0).
 SPEC.json:
     {"name": "Volkswagen Polo Mk6", "wheelbase": 2564,       # mm, optional
      "engine_pack": "engine_pack.glb",                        # optional
-     "credit": "2023 Volkswagen Polo GTI by … (CC BY 4.0)"}   # optional, -> asset.copyright
+     "credit": "2023 Volkswagen Polo GTI by … (CC BY 4.0)",   # optional, -> asset.copyright
+     "paint": [20, 20, 22],                                   # optional, sRGB 0-255
+     "keep_native_engine": false}                             # optional: keep a model's own bay
 Relative paths are taken from the spec file's folder.
 
 What it does, in order:
@@ -27,8 +29,9 @@ What it does, in order:
    wheelbase (x = 0 down the middle, ground y = 0).
 3. Glass: every blended, colourless material is made clear (light, low
    alpha, glossy), so the cabin shows through. Lamp lenses keep their colour.
-4. Engine: the pack (the workshop's petrol bay, exported in the Golf
-   master's frame) goes in: the bay, engine, gearbox and front suspension
+4. Engine: one generic engine in every car. The middle of the model's own
+   bay is cleared (a tub, flat sheets or a rough engine), then the pack (the
+   workshop's petrol bay, exported in the Golf master's frame) goes in: the bay, engine, gearbox and front suspension
    scaled to the track about the front axle, the rear suspension and tank
    about the rear axle, and the exhaust stretched from the front pipe back
    to just inside the rear bumper.
@@ -45,7 +48,8 @@ import sys
 import numpy as np
 from scipy.sparse import coo_matrix
 from scipy.sparse.csgraph import connected_components
-from scipy.ndimage import gaussian_filter1d, median_filter
+from scipy.ndimage import binary_closing, gaussian_filter1d, median_filter
+from scipy.ndimage import label as ndi_label
 from scipy.spatial import cKDTree
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -56,10 +60,9 @@ HINGED = {"door_fl": -65, "door_fr": 65, "door_rl": -65, "door_rr": 65, "bonnet"
 
 # Where the engine pack sits in the Golf master's frame (measured from
 # tmpl/master_golf.glb): front and rear axle z, ground y, tyre outer x.
-PACK_FRAME = {"front_axle_z": 1.316, "rear_axle_z": -1.315, "ground_y": -0.013, "track_half": 0.875,
+PACK_FRAME = {"front_axle_z": 1.316, "rear_axle_z": -1.315, "ground_y": -0.013, "track_half": 0.875, "body_half": 0.894, "bonnet_half": 0.794,
               "exhaust_front_z": 0.802, "exhaust_tail_z": -2.081}
 PACK_REAR = {"bay:susp_rear", "bay:fuel_tank"}
-NATIVE_BAY_M2 = 0.6        # modelled engine detail under the bonnet above this: keep the model's own
 PACK_EXHAUST = {"bay:exhaust_rear"}
 
 
@@ -133,7 +136,8 @@ def split_along(g, r, eligible, field, part):
                               if not an.startswith(("JOINTS", "WEIGHTS"))}
     newP, newA = [P], {an: [A] for an, A in attr.items()}
     nv = len(P)
-    keepI, keepT = [I[np.setdiff1d(np.arange(len(I)), mixed)]], [tp[np.setdiff1d(np.arange(len(I)), mixed)]]
+    kept = np.setdiff1d(np.arange(len(I)), mixed)
+    keepI, keepT = [I[kept]], [tp[kept]]
     addI, addT = [], []
 
     def lerp(a, b):
@@ -157,14 +161,34 @@ def split_along(g, r, eligible, field, part):
     r["attr"] = {an: np.vstack([L[0], np.array(L[1:])]) for an, L in newA.items()}
     r["I"] = np.vstack(keepI + [np.array(addI, dtype=np.int64)])
     r["tri_part"] = np.concatenate(keepT + [np.array(addT, dtype=object)])
+    for k, fl in r.get("flags", {}).items():     # other cuts' marks follow their triangles
+        r["flags"][k] = np.concatenate([fl[kept], np.repeat(fl[mixed], 3)])
     return len(mixed)
+
+
+def skin(cen, pts, axes, sign, depth, cell=0.03):
+    """Which triangles (centroids `cen`) lie within `depth` of the outermost
+    surface of `pts`, looking along the axis not in `axes`: sign +1 the
+    highest (a bonnet's top), -1 the lowest (a tailgate's rear, nose +z)."""
+    ax = 3 - sum(axes)
+    pts = np.vstack([pts, cen])                 # a cell can hold a triangle's centre and none of its corners
+    k = lambda P: np.floor(P[:, list(axes)] / cell).astype(np.int64) @ np.array([100000, 1])  # noqa: E731
+    kp = k(pts)
+    uk, inv = np.unique(kp, return_inverse=True)
+    ext = np.full(len(uk), -np.inf)
+    np.maximum.at(ext, inv, sign * pts[:, ax])
+    kc = k(cen)
+    ix = np.clip(np.searchsorted(uk, kc), 0, len(uk) - 1)
+    return (uk[ix] == kc) & (sign * cen[:, ax] > ext[ix] - depth)
 
 
 def is_clear_glass(mat):
     if mat.get("alphaMode") != "BLEND":
         return False
     c = mat.get("pbrMetallicRoughness", {}).get("baseColorFactor", [1, 1, 1, 1])
-    return max(c[:3]) - min(c[:3]) < 0.08          # colourless: windows, headlamp lenses
+    # see-through (alpha well under 1) and colourless: windows, headlamp
+    # lenses; not a blended decal or stitching texture at full alpha
+    return c[3] < 0.7 and max(c[:3]) - min(c[:3]) < 0.08
 
 
 def finish(src, spec, out, base_dir="."):
@@ -215,7 +239,9 @@ def finish(src, spec, out, base_dir="."):
     log["rescale"] = round(s, 4)
 
     # ── body islands ──
-    body = [r for r in recs if r["rig"] in ("body", "panel_bonnet", "tailgate", "glazing")]
+    # everything but the doors and wheels: the rig machine may file the body
+    # shell under "cabin" or "lamps_rear", and its tailgate may be the boot floor
+    body = [r for r in recs if not r["rig"].startswith(("door_", "wheel_"))]
     T = np.vstack([tris(r) for r in body])
     owner = np.concatenate([np.full(len(r["I"]), k) for k, r in enumerate(body)])
     tmat = np.concatenate([np.full(len(r["I"]), -1 if r["mat"] is None else r["mat"]) for r in body])
@@ -247,7 +273,24 @@ def finish(src, spec, out, base_dir="."):
             door_area[r["mat"]] += tri_area_normal(tris(r))[0].sum()
     paint = int(door_area.argmax())
     log["paint"] = mats[paint].get("name")
+    paint_ids = {i for i, m in enumerate(mats) if m.get("name") == mats[paint].get("name")}
     glass = {i for i, m in enumerate(mats) if is_clear_glass(m)}
+    # Windows modelled as opaque black (a dark paint with a glass name, the
+    # A45's "glass2") hide the cabin. A colourless material named as glass,
+    # not a lamp's, with over half a square metre above the waist: a window.
+    waist = ground + 1.35 * (wheel_top - ground)
+    for i, m in enumerate(mats):
+        if i in glass or not re.search(r"glass|window|windscreen|vidr|vidro|scheibe|glas\b", m.get("name", ""), re.I) \
+                or re.search(r"light|lamp|head|tail|back|indic|refl|mirror|lens", m.get("name", ""), re.I):
+            continue
+        c = m.get("pbrMetallicRoughness", {}).get("baseColorFactor", [1, 1, 1, 1])
+        if max(c[:3]) - min(c[:3]) > 0.08:
+            continue
+        up_area = sum(float(tri_area_normal(tris(r)[tris(r).mean(1)[:, 1] > waist])[0].sum())
+                      for r in recs if r["mat"] == i)
+        if up_area > 0.5:
+            glass.add(i)
+            m["alphaMode"] = "BLEND"
 
     label = np.array(["body"] * nl, dtype=object)
 
@@ -273,30 +316,42 @@ def finish(src, spec, out, base_dir="."):
     # facing up (within ~50 degrees), above the wheels, and connected to the
     # middle of that area; it stops where the nose turns down to the grille
     # and where the wings turn down at the shoulders.
-    cut = None
+    cuts = []                                  # (part, triangle indices, field)
     if bonnet is None:
-        shells = [i for i in range(nl) if dom[i] == paint and lo[i, 2] < zf < hi[i, 2] and hi[i, 1] > wheel_top]
+        # a welded piece can mix materials (the shell with its trims), so the
+        # shell is the piece with the most paint, and only its paint is cut
+        shells = [i for i in range(nl) if mat_area[i, paint] > 0.5 and lo[i, 2] < zf < hi[i, 2] and hi[i, 1] > wheel_top]
         ws = [i for i in range(nl) if dom[i] in glass and cz[i] > (zf + zr) / 2 and lo[i, 1] > wheel_top]
+        big = int(np.argmax(isl_area))
+        log["bonnet_search"] = {"shells": len(shells), "windscreens": len(ws),
+                                "largest_piece": {"m2": round(float(isl_area[big]), 2), "material": (mats[dom[big]].get("name") if dom[big] < nm else None),
+                                                  "z": [round(float(lo[big, 2]), 2), round(float(hi[big, 2]), 2)], "top_y": round(float(hi[big, 1]), 2)}}
         if shells and ws:
-            sh = max(shells, key=lambda i: isl_area[i])
+            sh = max(shells, key=lambda i: mat_area[i, paint])
             w = max(ws, key=lambda i: isl_area[i])
             Wv = T[lab == w].reshape(-1, 3)
             z_rear = float(Wv[Wv[:, 1] < Wv[:, 1].min() + 0.03, 2].max()) + 0.06
-            ts = np.where(lab == sh)[0]
+            # All the paint, not one piece's: a model's paint can come in many
+            # pieces (the Golf R's bonnet is spread over several), and a cut
+            # of one leaves the rest of the panel shut.
+            ts = np.where(tmat == paint)[0]
             cen = T[ts].mean(1)
             ok = (cen[:, 2] > z_rear) & (np.abs(nrm[ts, 1]) > 0.65) & (cen[:, 1] > wheel_top + 0.1)
             sub = ts[ok]
             if len(sub):
-                rows = np.repeat(np.arange(len(sub)), 3)
-                cols = vid[sub].ravel()
-                _, cv = np.unique(cols, return_inverse=True)
-                n = len(sub) + cv.max() + 1
-                A = coo_matrix((np.ones(len(rows)), (rows, cv + len(sub))), shape=(n, n))
-                _, cl = connected_components(A, directed=False)
-                cl = cl[:len(sub)]
+                # connected on a 2 cm top-down grid, so pieces that touch
+                # without sharing vertices still count as one surface
                 c2 = cen[ok]
+                gx = np.floor(c2[:, 0] / 0.02).astype(int)
+                gz = np.floor(c2[:, 2] / 0.02).astype(int)
+                grid = np.zeros((gx.max() - gx.min() + 3, gz.max() - gz.min() + 3), bool)
+                grid[gx - gx.min() + 1, gz - gz.min() + 1] = True
+                gl_, _ = ndi_label(binary_closing(grid, np.ones((3, 3))))
                 seed = np.argmin(np.abs(c2[:, 0]) + np.abs(c2[:, 2] - (z_rear + hi[sh, 2]) / 2))
+                cl = gl_[gx - gx.min() + 1, gz - gz.min() + 1]
                 region = sub[cl == cl[seed]]
+                log["bonnet_search"].update({"facing_up": int(len(sub)), "region": int(len(region)),
+                                             "region_m2": round(float(area[region].sum()), 3), "z_rear": round(z_rear, 3)})
                 # Cutting whole triangles leaves a staircase (a model's
                 # triangles run long along the car). So the shut line is a
                 # smooth curve: the region's half-width at each 1 cm along
@@ -316,19 +371,21 @@ def finish(src, spec, out, base_dir="."):
                 if filled.sum() > 5 and ra > 0.5:
                     half = np.interp(np.arange(nb), np.where(filled)[0], half[filled])
                     half = gaussian_filter1d(median_filter(half, 9, mode="nearest"), 4, mode="nearest") - 0.01
-                    # the top skin only: not the shell's inner faces under it
-                    cell = np.floor(cen[:, [0, 2]] / 0.02).astype(np.int64)
-                    key = cell[:, 0] * 100000 + cell[:, 1]
-                    uk, inv = np.unique(key, return_inverse=True)
-                    top = np.full(len(uk), -np.inf)
-                    np.maximum.at(top, inv, cen[:, 1])
-                    on_top = cen[:, 1] > top[inv] - 0.04
+                    # The panel's full thickness: the paint and, in the same
+                    # welded piece, the inner liner under it (any material but
+                    # glass) within 7 cm of the top surface, in 3 cm cells.
+                    # Leaving the liner shuts the bay with a black lid.
+                    tall = np.where(~np.isin(tmat, list(glass)))[0]
+                    call = T[tall].mean(1)
+                    on_top = skin(call, T[tall].reshape(-1, 3), (0, 2), 1, 0.07)
+                    ts, cen = tall, call
                     ymin = wheel_top + 0.05
 
                     def field(P, z_rear=z_rear, half=half, nb=nb, ymin=ymin):
                         k = np.clip(np.floor((P[:, 2] - z_rear) / 0.01).astype(int), 0, nb - 1)
                         return np.maximum.reduce([np.abs(P[:, 0]) - half[k], z_rear - P[:, 2], ymin - P[:, 1]])
-                    cut = {"tris": ts[on_top], "field": field}
+                    cuts.append(("bonnet", ts[on_top], field))
+                    log["bonnet_search"].update({"eligible": int(on_top.sum()), "eligible_inside": int((field(cen[on_top]) < 0).sum()), "of": int(len(ts))})
                     bonnet = -1
                     log["bonnet"] = {"from": "cut from the body shell along a smoothed shut line",
                                      "rear_edge_z": round(z_rear, 3),
@@ -363,6 +420,41 @@ def finish(src, spec, out, base_dir="."):
                            "box": {"x_half": round(float(xb), 3), "y_bottom": round(float(ybot), 3),
                                    "z_front": round(float(zfront), 3)},
                            "pieces": int(tg.sum())}
+        # A tailgate welded into the body shell has no paint piece of its own:
+        # cut it from the shell's rear skin like a welded bonnet. Sides: the
+        # rear window's width; top: the window's top edge; bottom: going down
+        # the middle of the shell's rear skin, the first step back of 2 cm or
+        # more at least 10 cm under the window, which is the bumper's top
+        # (else 35 cm under the window).
+        tg_paint = float(sum(isl_area[i] for i in np.where(tg)[0] if dom[i] == paint))
+        shells_r = [i for i in range(nl) if mat_area[i, paint] > 0.5 and lo[i, 2] < zr and label[i] == "body"]
+        if tg_paint < 0.3 and shells_r:
+            sh = max(shells_r, key=lambda i: mat_area[i, paint])
+            tp_ = np.where(tmat == paint)[0]
+            # the panel's full thickness: paint and the liner behind it, within
+            # 8 cm of the rearmost surface, in 3 cm cells
+            ts = np.where(~np.isin(tmat, list(glass)))[0]
+            cen = T[ts].mean(1)
+            on_skin = skin(cen, T[ts].reshape(-1, 3), (0, 1), -1, 0.08)
+            sp = T[tp_].reshape(-1, 3)
+            mid = sp[np.abs(sp[:, 0]) < 0.15]
+            ytop_b = lo[rw, 1]
+            yb = np.arange(ytop_b, 0.6 * wheel_top, -0.01)
+            zb = np.array([mid[(mid[:, 1] <= y) & (mid[:, 1] > y - 0.01), 2].min()
+                           if ((mid[:, 1] <= y) & (mid[:, 1] > y - 0.01)).any() else np.nan for y in yb])
+            ycut = lo[rw, 1] - 0.35
+            for k in range(11, len(yb)):
+                if np.isfinite(zb[k]) and np.isfinite(zb[k - 1]) and zb[k] < zb[k - 1] - 0.02:
+                    ycut = float(yb[k - 1])
+                    break
+            xt = max(abs(lo[rw, 0]), abs(hi[rw, 0])) + 0.02
+            ztop = hi[rw, 2] + 0.02
+
+            def tfield(P, xt=xt, ycut=ycut, ztop=ztop):
+                return np.maximum.reduce([np.abs(P[:, 0]) - xt, ycut - P[:, 1], P[:, 2] - ztop])
+            cuts.append(("tailgate", ts[on_skin], tfield))
+            log["tailgate"]["cut"] = {"from": "the body shell's rear skin", "x_half": round(float(xt), 3),
+                                      "bottom_y": round(ycut, 3)}
 
     # no tailgate found here: the rig machine's tailgate stands, as the islands
     # mostly made of its triangles
@@ -430,49 +522,58 @@ def finish(src, spec, out, base_dir="."):
         if "tri_part" not in r:
             r["tri_part"] = np.full(len(r["I"]), r["rig"], dtype=object)
 
-    # the bonnet cut: shell triangles inside the shut line go to the bonnet,
-    # and those crossing it are split along it
-    if cut is not None:
-        eligible = np.zeros(len(T), bool)
-        eligible[cut["tris"]] = True
-        off, nsplit = 0, 0
+    # the cuts: shell triangles inside a shut line go to that part, and those
+    # crossing it are split along it
+    if cuts:
+        off = 0
         for r in body:
             n = len(r["I"])
-            el = eligible[off:off + n]
+            r["flags"] = {}
+            for part, tri_ids, _ in cuts:
+                el = np.zeros(len(T), bool)
+                el[tri_ids] = True
+                r["flags"][part] = el[off:off + n]
             off += n
-            if el.any():
-                nsplit += split_along(g, r, el, cut["field"], "bonnet")
-        parts_area = sum(tri_area_normal(r["P"][r["I"][r["tri_part"] == "bonnet"]])[0].sum() for r in body)
-        log["bonnet"].update({"area_m2": round(float(parts_area), 3), "triangles_split": nsplit})
+        for part, _, field in cuts:
+            nsplit = 0
+            for r in body:
+                if r["flags"][part].any():
+                    nsplit += split_along(g, r, r["flags"][part], field, part)
+            pa = sum(tri_area_normal(r["P"][r["I"][r["tri_part"] == part]])[0].sum() for r in body)
+            entry = log[part] if part == "bonnet" else log[part]["cut"]
+            entry.update({"area_m2": round(float(pa), 3), "triangles_split": nsplit})
 
-    # ── does the model have its own engine? ──
-    # Some catalogue models come with their engine bay modelled. Then the pack
-    # is not added (two engines in one bay). The bay is the box under the
-    # bonnet, between the wings (60% of the track) and above the bottom third
-    # of the wheels; what counts is the area of everything there that is
-    # not paint or glass, against the area a modelled engine has.
-    native_bay = 0.0
+    # ── the engine bay: one generic engine in every car ──
+    # The owner's rule: every car gets the same generic petrol bay. What a
+    # model has under its bonnet (nothing, a tub of flat sheets, or a rough
+    # engine of its own) is cleared from the middle of the bay so the pack is
+    # seen: |x| under 45% of the track (the headlamps and wings stay), above
+    # the bottom third of the wheels (the floor stays), under the bonnet,
+    # and 12 cm clear of the bonnet's front edge (the grille stays).
+    # spec "keep_native_engine": true keeps a model's own instead.
     bt = [r["P"][r["I"][r["tri_part"] == "bonnet"]] for r in recs if (r["tri_part"] == "bonnet").any()]
-    if bt:
+    cleared = 0.0
+    if bt and spec.get("engine_pack") and not spec.get("keep_native_engine"):
         B = np.vstack(bt).reshape(-1, 3)
         wd = wheel_top - ground
-        z0, z1, ytop = B[:, 2].min() + 0.05, B[:, 2].max(), B[:, 1].min()
+        z0, z1, ytop = B[:, 2].min() + 0.05, B[:, 2].max() - 0.12, B[:, 1].min()
         for r in recs:
-            if r["rig"].startswith(("wheel_", "door_")) or r["mat"] is None or r["mat"] == paint or r["mat"] in glass:
+            if r["rig"].startswith(("wheel_", "door_")) or r["mat"] in glass:
                 continue
-            Tr = r["P"][r["I"][r["tri_part"] == "body"]]
-            if not len(Tr):
+            body_t = np.where(r["tri_part"] == "body")[0]
+            if not len(body_t):
                 continue
+            Tr = r["P"][r["I"][body_t]]
             c = Tr.mean(1)
-            inb = (np.abs(c[:, 0]) < 0.6 * track_half) & (c[:, 1] > ground + 0.3 * wd) & (c[:, 1] < ytop) \
+            inb = (np.abs(c[:, 0]) < 0.45 * track_half) & (c[:, 1] > ground + 0.35 * wd) & (c[:, 1] < ytop) \
                 & (c[:, 2] > z0) & (c[:, 2] < z1)
             if inb.any():
-                native_bay += float(tri_area_normal(Tr[inb])[0].sum())
-        native_bay /= (wd / 0.66) ** 2                 # in a 0.66 m-wheel car's square metres
-    log["native_bay_m2"] = round(native_bay, 3)
-    if native_bay > NATIVE_BAY_M2 and spec.get("engine_pack"):
-        log["engine_pack"] = {"skipped": "the model has its own engine bay"}
+                cleared += float(tri_area_normal(Tr[inb])[0].sum())
+                r["tri_part"][body_t[inb]] = "drop"
+        log["bay_cleared_m2"] = round(cleared, 3)
+    elif spec.get("keep_native_engine"):
         spec = dict(spec, engine_pack=None)
+        log["engine_pack"] = {"skipped": "keep_native_engine"}
 
     # ── output frame: centred on the wheelbase, scaled to the published one ──
     def to_out(P):
@@ -486,6 +587,8 @@ def finish(src, spec, out, base_dir="."):
         Rm = r["M"][:3, :3]
         Nm = np.linalg.inv(Rm).T
         for part in np.unique(r["tri_part"]):
+            if part == "drop":
+                continue
             sel = r["I"][r["tri_part"] == part]
             uniq, inv = np.unique(sel.ravel(), return_inverse=True)
             attrs = {}
@@ -563,7 +666,27 @@ def finish(src, spec, out, base_dir="."):
         proots = g.append(pack)
         for i in stray:
             j["nodes"][n0 + i].pop("mesh", None)
-        se = track_half * s / F["track_half"]
+        # Scale: the body's half-width at the front axle, between the
+        # wheels' mid-height and the waist, against the Golf master's 0.894 m.
+        # (A wheel group can carry more than the wheel: the A45's is 38 cm
+        # wide, and a track from it made the engine 17% too big.)
+        wd = wheel_top - ground
+        cz_ = T.mean(1)
+        selw = (np.abs(cz_[:, 2] - zf) < 0.35) & (cz_[:, 1] > ground + 0.5 * wd) & (cz_[:, 1] < ground + 1.2 * wd)
+        body_half = float(np.percentile(np.abs(cz_[selw, 0]), 98)) if selw.sum() > 50 else track_half
+        # three measures of the front end's width against the Golf master's;
+        # the middle one sets the scale (any one can be thrown by a model's
+        # wheel group, arch flares or a narrow bonnet)
+        bon_r = [r["P"][r["I"][r["tri_part"] == "bonnet"]].reshape(-1, 3) for r in recs if (r["tri_part"] == "bonnet").any()]
+        bonnet_half = float(np.percentile(np.abs(np.vstack(bon_r)[:, 0]), 99)) if bon_r else body_half
+        ratios = [track_half / F["track_half"], body_half / F["body_half"], bonnet_half / F["bonnet_half"]]
+        # across the car by width; along and up the car by the wheelbase
+        # against the master's 2.631 m (a model can be stretched sideways:
+        # the A45's is 14% too wide), never taller than it is wide
+        sx = float(np.median(ratios)) * s
+        sl = (zf - zr) * s / 2.631
+        sy = min(sx, sl)
+        se = sx
         zf_o, zr_o = (zf - zmid) * s, (zr - zmid) * s
 
         def mat4(A, t):
@@ -573,17 +696,62 @@ def finish(src, spec, out, base_dir="."):
             return [float(v) for v in M.T.ravel()]
 
         def anchored(z_from, z_to):
-            A = np.array([se, se, se])
+            A = np.array([sx, sy, sl])
             return mat4(A, np.array([0.0, 0.0, z_to]) - A * np.array([0.0, F["ground_y"], z_from]))
         front = anchored(F["front_axle_z"], zf_o)
         rear = anchored(F["rear_axle_z"], zr_o)
+        # Fit: nothing of the bay may show through the shut bonnet or the
+        # nose. The bay's points are checked against the bonnet's underside
+        # (3 cm cells, 3 cm clear) and then the front skin (4 cm clear); the
+        # bay goes down, then back, as far as needed (at most 15 / 20 cm).
+        _, ppar = pack.world_matrices()
+        root = pack.j["scenes"][pack.j.get("scene", 0)]["nodes"][0]
+
+        def top_of(i):
+            while ppar.get(i, root) != root:
+                i = ppar[i]
+            return pack.j["nodes"][i].get("name", "")
+        pts = []
+        for i, nd in enumerate(pack.j["nodes"]):
+            if "mesh" in nd and i not in stray and top_of(i) not in PACK_REAR | PACK_EXHAUST:
+                for pr in pack.j["meshes"][nd["mesh"]]["primitives"]:
+                    Pp = pack.accessor(pr["attributes"]["POSITION"])
+                    pts.append(Pp[:: max(1, len(Pp) // 400)] @ PW[i][:3, :3].T + PW[i][:3, 3])
+        Mf = np.array(front).reshape(4, 4).T
+        Q = np.vstack(pts) @ Mf[:3, :3].T + Mf[:3, 3]
+        bon = [to_out(r["P"][r["I"][r["tri_part"] == "bonnet"]].reshape(-1, 3)) for r in recs if (r["tri_part"] == "bonnet").any()]
+        skin_pts = np.vstack([to_out(r["P"][r["I"][r["tri_part"] == "body"]].reshape(-1, 3))
+                              for r in recs if not r["rig"].startswith(("wheel_", "door_")) and (r["tri_part"] == "body").any()])
+
+        def overshoot(Q, ref, axes, ax, reduce, clear):
+            """How far points Q reach past `lim - clear` along axis ax, where
+            lim is the ref surface's min or max (reduce) in each 3 cm cell."""
+            kk = lambda P: np.floor(P[:, list(axes)] / 0.03).astype(np.int64) @ np.array([100000, 1])  # noqa: E731
+            kr = kk(ref)
+            uk, inv = np.unique(kr, return_inverse=True)
+            lim = np.full(len(uk), np.inf if reduce is np.minimum else -np.inf)
+            reduce.at(lim, inv, ref[:, ax])
+            kq = kk(Q)
+            ix = np.clip(np.searchsorted(uk, kq), 0, len(uk) - 1)
+            hit = uk[ix] == kq
+            return float(max(0.0, (Q[hit, ax] - (lim[ix[hit]] - clear)).max())) if hit.any() else 0.0
+        dy = min(0.15, overshoot(Q, np.vstack(bon), (0, 2), 1, np.minimum, 0.03)) if bon else 0.0
+        Q[:, 1] -= dy
+        # the nose only: body ahead of the front axle, bay points from the
+        # bumper's lower edge up (the arms and subframe sit under the floor)
+        nose = skin_pts[skin_pts[:, 2] > zf_o]
+        qn = Q[Q[:, 1] > 0.35 * wd * s]
+        dz = min(0.12, overshoot(qn, nose, (0, 1), 2, np.maximum, 0.04)) if len(qn) and len(nose) else 0.0
+        Mf[1, 3] -= dy
+        Mf[2, 3] -= dz
+        front = [float(v) for v in Mf.T.ravel()]
         # exhaust: from where the front pipe hands over to 10 cm inside the tail
         tail_o = (float(min(lo[:, 2])) - zmid) * s
-        z1 = se * (F["exhaust_front_z"] - F["front_axle_z"]) + zf_o
+        z1 = sl * (F["exhaust_front_z"] - F["front_axle_z"]) + zf_o
         z2 = tail_o + 0.10
         az = (z1 - z2) / (F["exhaust_front_z"] - F["exhaust_tail_z"])
-        A = np.array([se, se, az])
-        exhaust = mat4(A, np.array([0.0, -se * F["ground_y"], z1 - az * F["exhaust_front_z"]]))
+        A = np.array([sx, sy, az])
+        exhaust = mat4(A, np.array([0.0, -sy * F["ground_y"], z1 - az * F["exhaust_front_z"]]))
         wrap = {"engine_bay": front, "rear_running_gear": rear, "exhaust": exhaust}
         widx = {}
         for k, M in wrap.items():
@@ -596,11 +764,24 @@ def finish(src, spec, out, base_dir="."):
                 k = "exhaust" if nmx in PACK_EXHAUST else "rear_running_gear" if nmx in PACK_REAR else "engine_bay"
                 j["nodes"][widx[k]]["children"].append(c)
             j["nodes"][r0].pop("children", None)     # a node has one parent
-        log["engine_pack"] = {"file": os.path.basename(spec["engine_pack"]), "scale": round(se, 4),
-                              "exhaust_stretch": round(az / se, 4), "strays_dropped": len(stray)}
+        log["engine_pack"] = {"file": os.path.basename(spec["engine_pack"]), "scale": [round(sx, 4), round(sy, 4), round(sl, 4)],
+                              "lowered_m": round(dy, 3), "moved_back_m": round(dz, 3),
+                              "width_ratios": [round(x, 3) for x in ratios],
+                              "exhaust_stretch": round(az / sl, 4), "strays_dropped": len(stray)}
 
     j["scenes"] = [{"name": spec.get("name") or "car", "nodes": [0]}]
     j["scene"] = 0
+
+    # ── paint: a colour asked for (sRGB 0-255) replaces the model's own ──
+    if spec.get("paint"):
+        pm = mats[paint]
+        pbr = pm.setdefault("pbrMetallicRoughness", {})
+        pbr.pop("baseColorTexture", None)
+        lin = [float(c / 255 / 12.92 if c / 255 <= 0.04045 else ((c / 255 + 0.055) / 1.055) ** 2.4)
+               for c in spec["paint"][:3]]
+        pbr["baseColorFactor"] = lin + [1.0]
+        pbr.setdefault("roughnessFactor", 0.3)
+        log["paint_set"] = {"material": pm.get("name"), "srgb": list(spec["paint"][:3])}
 
     # ── clear glass ──
     cleared = []
@@ -612,6 +793,12 @@ def finish(src, spec, out, base_dir="."):
         pbr["metallicFactor"] = 0.0
         pbr["roughnessFactor"] = 0.04
         m["doubleSided"] = True
+        # transmission and clearcoat on a window render as smoked glass in
+        # most viewers; plain alpha blend reads as clear everywhere
+        for ext in ("KHR_materials_transmission", "KHR_materials_clearcoat", "KHR_materials_volume"):
+            (m.get("extensions") or {}).pop(ext, None)
+        if m.get("extensions") == {}:
+            m.pop("extensions")
         cleared.append(m.get("name"))
     log["glass_cleared"] = cleared
 

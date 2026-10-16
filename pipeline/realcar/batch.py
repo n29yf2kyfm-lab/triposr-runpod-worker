@@ -46,14 +46,27 @@ GRADE = {"A": 0, "B": 1, "C": 2}
 WHEELBASE = {
     "volkswagen-polo-2023-v1": 2564,
     "nissan-qashqai-2018-v1": 2646,
-    "ford-fiesta-2009-w12-v1": 2489,          # Fiesta Mk6 (2008-2017)
+    "ford-fiesta-2009-w12-v1": 2489,          # Fiesta Mk6 (2008-2017), en.wikipedia infobox
+    "volkswagen-golf-2025-w12-v1": 2636,      # Golf Mk8 / 8.5, en.wikipedia infobox
+    "mercedes-benz-a-class-2018-w12-v1": 2699,  # A45 AMG W176 (2012-2018), en.wikipedia infobox
+}
+
+
+# Catalogue years corrected by looking at the model against the generation's
+# published production dates (the catalogue keeps the source's title year).
+GENERATION_FIX = {
+    "mercedes-benz-a-class-2018-w12-v1": {"yearStart": 2012, "yearEnd": 2018, "generation": "W176"},
 }
 
 
 def catalogue():
     d = json.load(open(os.path.join(REPO, "platform/catalogue/catalogue.v2.json")))
     items = d if isinstance(d, list) else d.get("models") or d.get("items") or list(d.values())[0]
-    return {i["assetId"]: i for i in items}
+    cat = {i["assetId"]: i for i in items}
+    for aid, fix in GENERATION_FIX.items():
+        if aid in cat:
+            cat[aid] = {**cat[aid], **fix}
+    return cat
 
 
 def pick(target, cat):
@@ -120,6 +133,8 @@ def one(target, item, args, out):
             "engine_pack": args.engine_pack,
             "credit": f"Body, cabin and wheels: '{cr['title']}' by {cr['author']}, {cr['licence']}, {cr['url']}. "
                       "Rigged, glass cleared and engine bay fitted by the ExpertCarCheck GLB machine."}
+    if getattr(args, "paint", None):
+        spec["paint"] = list(args.paint)
     if aid in WHEELBASE:
         spec["wheelbase"] = WHEELBASE[aid]
     elif rep.get("rescaled"):
@@ -131,7 +146,7 @@ def one(target, item, args, out):
         rec["status"] = f"finish failed: {e}"
         return rec
     rec["finish"] = {k: flog.get(k) for k in ("opens", "missing", "bonnet", "tailgate", "door_trims", "rescale",
-                                              "glass_cleared", "measured", "native_bay_m2", "engine_pack")}
+                                              "glass_cleared", "measured", "bay_cleared_m2", "engine_pack", "paint_set")}
     v = run(["node", os.path.join(args.tools, "validate.mjs"), fin], 300, lg)
     try:
         rec["validator"] = json.loads(v.stdout)
