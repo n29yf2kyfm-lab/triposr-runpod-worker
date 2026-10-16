@@ -1,0 +1,2001 @@
+rank,make,model,dft_generic_model,licensed,share_pct,cum_pct,main_fuel,catalogue_models,catalogue_ids
+1,Ford,Fiesta,FORD FIESTA,1259187,3.609,3.61,Petrol,1,ford-fiesta-2009-w12-v1
+2,Volkswagen,Golf,VOLKSWAGEN GOLF,952492,2.73,6.34,Petrol,14,volkswagen-golf-mk8-v1|volkswagen-golf-mk7-v1|volkswagen-vw-golf-w5-v1|volkswagen-golf-2016-w12-v1|volkswagen-golf-2025-w12-v1|volkswagen-golf-2002-w12-v1
+3,Vauxhall,Corsa,VAUXHALL CORSA,911579,2.613,8.95,Petrol,1,vauxhall-corsa-2011-v1
+4,Ford,Focus,FORD FOCUS,862774,2.473,11.43,Petrol,6,ford-focus-v1|ford-focus-2012-w7-v1|ford-focus-2006-w12-v1|ford-focus-2009-w12-v1|ford-focus-2013-w12-v1|ford-focus-2016-fow1-v1
+5,Nissan,Qashqai,NISSAN QASHQAI,703391,2.016,13.44,Petrol,2,nissan-qashqai-2018-v1|nissan-qashqai-2010-w5-v1
+6,Volkswagen,Polo,VOLKSWAGEN POLO,685291,1.964,15.41,Petrol,6,volkswagen-polo-2023-v1|volkswagen-polo-w7-v1|volkswagen-polo-2021-w12-v1|volkswagen-polo-2022-w12-v1|volkswagen-polo-gti-2023-vw2-v1|volkswagen-polo-gti-2011-vw2-v1
+7,Toyota,Yaris,TOYOTA YARIS,589579,1.69,17.1,Hybrid electric (petrol),1,toyota-yaris-2001-v1
+8,Vauxhall,Astra,VAUXHALL ASTRA,527023,1.511,18.61,Petrol,2,vauxhall-astra-2012-w12-v1|vauxhall-astra-2022-cr1-v1
+9,Mini,Cooper,MINI COOPER,523667,1.501,20.11,Petrol,1,mini-cooper-w7-v1
+10,BMW,3 Series,BMW 3 SERIES,474574,1.36,21.47,Diesel,5,bmw-3-series-v1|bmw-320i-2023-v1|bmw-3-series-2014-w12-v1|bmw-3-series-2021-w12-v1|bmw-3-series-touring-bm1-v1
+11,Audi,A3,AUDI A3,451909,1.295,22.76,Petrol,3,audi-a3-v1|audi-a3-ad1-v1|audi-a3-2021-ad1-v1
+12,KIA,Sportage,KIA SPORTAGE,441871,1.267,24.03,Petrol,5,kia-sportage-2023-v1|kia-sportage-2011-w6-v1|kia-sportage-w6-v1|kia-sportage-2018-w7-v1|kia-sportage-2023-m1-v1
+13,BMW,1 Series,BMW 1 SERIES,436934,1.252,25.28,Petrol,1,bmw-1-series-v1
+14,Fiat,500,FIAT 500,428014,1.227,26.51,Petrol,8,fiat-500-classic-v1|fiat-500e-v1|fiat-500-2016-v1|fiat-500-w12-v1|fiat-500-2010-fw1-v1|fiat-500-fw1-v1
+15,Nissan,Juke,NISSAN JUKE,419077,1.201,27.71,Petrol,5,nissan-juke-2011-w5-v1|nissan-juke-w6-v1|nissan-juke-nw1-v1|nissan-juke-2015-nw1-v1|nissan-juke-2023-cr1-v1
+16,Mercedes,A Class,MERCEDES A CLASS,391181,1.121,28.83,Diesel,2,mercedes-benz-a-class-2000-v1|mercedes-benz-a-class-2018-w12-v1
+17,Ford,Kuga,FORD KUGA,381478,1.093,29.92,Diesel,0,
+18,Volkswagen,Tiguan,VOLKSWAGEN TIGUAN,358578,1.028,30.95,Diesel,3,volkswagen-tiguan-allspace-2022-v1|volkswagen-tiguan-2022-w12-v1|volkswagen-tiguan-2020-vw2-v1
+19,Honda,Jazz,HONDA JAZZ,348059,0.998,31.95,Petrol,4,honda-jazz-2018-v1|honda-jazz-2016-w9-v1|honda-jazz-2020-w9-v1|honda-jazz-2016-hw1-v1
+20,Mercedes,C Class,MERCEDES C CLASS,334508,0.959,32.91,Diesel,5,mercedes-benz-c-class-v1|mercedes-benz-c-class-w202-v1|mercedes-benz-c-class-w12-v1|mercedes-benz-c-class-mw1-v2|mercedes-benz-c-class-mw1-v3
+21,Renault,Clio,RENAULT CLIO,326654,0.936,33.84,Petrol,4,renault-clio-2020-w7-v1|renault-clio-2023-w7-v1|renault-clio-2010-w7-v1|renault-clio-w8-v1
+22,Vauxhall,Mokka,VAUXHALL MOKKA,314453,0.901,34.75,Petrol,0,
+23,Toyota,Aygo,TOYOTA AYGO,311281,0.892,35.64,Petrol,0,
+24,Hyundai,I10,HYUNDAI I10,281780,0.808,36.45,Petrol,1,hyundai-i10-v1
+25,Audi,A1,AUDI A1,274860,0.788,37.23,Petrol,1,audi-a1-quattro-v1
+26,Hyundai,Tucson,HYUNDAI TUCSON,268240,0.769,38.0,Petrol,3,hyundai-tucson-2015-w12-v1|hyundai-tucson-2022-w12-v1|hyundai-tucson-2022-ht1-v1
+27,Peugeot,208,PEUGEOT 208,265364,0.761,38.76,Petrol,1,peugeot-208-v2
+28,Ford,Puma,FORD PUMA,264328,0.758,39.52,Hybrid electric (petrol),0,
+29,Land Rover,Discovery,LAND ROVER DISCOVERY,259901,0.745,40.27,Diesel,2,land-rover-discovery-2022-law1-v1|land-rover-discovery-2018-law1-v1
+30,Citroen,C3,CITROEN C3,258197,0.74,41.01,Petrol,0,
+31,Skoda,Fabia,SKODA FABIA,248085,0.711,41.72,Petrol,4,skoda-fabia-v1|skoda-fabia-2011-w5-v1|skoda-fabia-w7-v1|skoda-fabia-2011-w7-v1
+32,Honda,Civic,HONDA CIVIC,243187,0.697,42.41,Petrol,12,honda-civic-v1|honda-civic-2007-w5-v1|honda-civic-2016-w5-v1|honda-civic-2023-w12-v1|honda-civic-2015-w12-v1|honda-civic-1987-hw1-v1
+33,Audi,A4,AUDI A4,236488,0.678,43.09,Diesel,2,audi-a4-v1|audi-a4-2005-w12-v1
+34,Land Rover,Range Rover Evoque,LAND ROVER RANGE ROVER EVOQUE,228397,0.655,43.75,Diesel,4,land-rover-range-rover-evoque-v1|land-rover-range-rover-evoque-2011-w6-v1|land-rover-range-rover-evoque-2011-w12-v1|land-rover-range-rover-evoque-2016-law1-v1
+35,KIA,Picanto,KIA PICANTO,223484,0.641,44.39,Petrol,4,kia-picanto-2012-v1|kia-picanto-w6-v1|kia-picanto-2012-w7-v1|kia-picanto-2024-m1-v1
+36,Nissan,Micra,NISSAN MICRA,219336,0.629,45.02,Petrol,5,nissan-micra-k10-v1|nissan-micra-w6-v1|nissan-micra-2004-w12-v1|nissan-micra-1982-nw1-v1|nissan-micra-nw1-v1
+37,Skoda,Octavia,SKODA OCTAVIA,219126,0.628,45.64,Diesel,6,skoda-octavia-estate-v1|skoda-octavia-2014-w5-v1|skoda-octavia-combi-2017-w5-v1|skoda-octavia-2021-w12-v1|skoda-octavia-2019-w12-v1|skoda-octavia-2025-m1-v1
+38,Seat,Ibiza,SEAT IBIZA,214116,0.614,46.26,Petrol,0,
+39,Peugeot,2008,PEUGEOT 2008,213258,0.611,46.87,Petrol,3,peugeot-2008-2020-w5-v1|peugeot-2008-2018-pw1-v1|peugeot-2008-2020-pw1-v1
+40,Mercedes,E Class,MERCEDES E CLASS,206798,0.593,47.46,Diesel,6,mercedes-benz-e-class-w213-undated-v1|mercedes-benz-e-class-w12-v1|mercedes-benz-e-class-2022-w12-v1|mercedes-benz-e-class-mw1-v1|mercedes-benz-e-class-mw1-v5|mercedes-benz-e-class-2010-mw1-v1
+41,Renault,Captur,RENAULT CAPTUR,201700,0.578,48.04,Petrol,1,renault-captur-v1
+42,BMW,5 Series,BMW 5 SERIES,195477,0.56,48.6,Diesel,4,bmw-5-series-v1|bmw-5-series-e60-v1|bmw-5-series-1995-bm2-v1|bmw-5-series-1988-bm3-v1
+43,Honda,Cr-V,HONDA CR-V,193967,0.556,49.16,Diesel,2,honda-cr-v-v1|honda-cr-v-2001-hw1-v1
+44,Seat,Leon,SEAT LEON,193666,0.555,49.71,Petrol,1,seat-leon-2022-v1
+45,Peugeot,3008,PEUGEOT 3008,185259,0.531,50.24,Diesel,3,peugeot-3008-v1|peugeot-3008-w12-v1|peugeot-3008-pw1-v1
+46,Volvo,XC40,VOLVO XC40,185156,0.531,50.77,Hybrid electric (petrol),0,
+47,Mini,Countryman,MINI COUNTRYMAN,182391,0.523,51.3,Petrol,2,mini-countryman-v1|mini-countryman-v2
+48,Audi,Q3,AUDI Q3,177825,0.51,51.81,Petrol,3,audi-q3-2023-v1|audi-q3-2014-w5-v1|audi-q3-sportback-ad1-v1
+49,Citroen,C4,CITROEN C4,175831,0.504,52.31,Diesel,1,citroen-c4-2008-v1
+50,Volkswagen,T-Roc,VOLKSWAGEN T-ROC,175358,0.503,52.81,Petrol,0,
+51,Volkswagen,Passat,VOLKSWAGEN PASSAT,171762,0.492,53.3,Diesel,2,volkswagen-passat-v1|volkswagen-passat-2025-w12-v1
+52,BMW,2 Series,BMW 2 SERIES,165356,0.474,53.78,Petrol,0,
+53,Suzuki,Swift,SUZUKI SWIFT,161131,0.462,54.24,Petrol,3,suzuki-swift-2017-v1|suzuki-swift-2024-w12-v1|suzuki-swift-w12-v1
+54,Hyundai,I20,HYUNDAI I20,160602,0.46,54.7,Petrol,2,hyundai-i20-2022-v1|hyundai-i20-2010-hyw1-v1
+55,Vauxhall,Insignia,VAUXHALL INSIGNIA,159273,0.457,55.16,Diesel,0,
+56,Toyota,Corolla,TOYOTA COROLLA,156991,0.45,55.61,Hybrid electric (petrol),2,toyota-corolla-v1|toyota-corolla-w7-v1
+57,Volvo,XC60,VOLVO XC60,156357,0.448,56.06,Diesel,1,volvo-xc60-2023-w7-v1
+58,Citroen,C1,CITROEN C1,152496,0.437,56.49,Petrol,0,
+59,Toyota,C-Hr,TOYOTA C-HR,150799,0.432,56.92,Hybrid electric (petrol),2,toyota-c-hr-v1|toyota-c-hr-2022-tw1-v1
+60,Land Rover,Range Rover Sport,LAND ROVER RANGE ROVER SPORT,149747,0.429,57.35,Diesel,7,land-rover-range-rover-sport-2018-v1|land-rover-range-rover-sport-2018-w5-v1|land-rover-range-rover-sport-2015-rr1-v1|land-rover-range-rover-sport-2018-rr1-v1|land-rover-range-rover-sport-2023-rr1-v1|land-rover-range-rover-sport-2023-law1-v1
+61,Ford,Mondeo,FORD MONDEO,149341,0.428,57.78,Diesel,2,ford-mondeo-2021-v1|ford-mondeo-2021-cr3-v1
+62,Dacia,Sandero,DACIA SANDERO,146653,0.42,58.2,Petrol,0,
+63,Vauxhall,Zafira,VAUXHALL ZAFIRA,146376,0.42,58.62,Petrol,1,vauxhall-zafira-v1
+64,Tesla,Model 3,TESLA MODEL 3,146205,0.419,59.04,Battery electric,7,tesla-model-3-v1|tesla-model-3-w5-v1|tesla-model-3-2018-w5-v1|tesla-model-3-2023-w5-v1|tesla-model-3-w7-v2|tesla-model-3-2024-w7-v1
+65,Toyota,RAV4,TOYOTA RAV4,142496,0.408,59.45,Hybrid electric (petrol),4,toyota-rav4-2010-v1|toyota-rav4-2000-w5-v1|toyota-rav4-2021-tw1-v1|toyota-rav4-2021-cr4-v1
+66,Tesla,Model Y,TESLA MODEL Y,141091,0.404,59.85,Battery electric,2,tesla-model-y-v1|tesla-model-y-2021-w7-v1
+67,MG,ZS,MG ZS,140809,0.404,60.26,Petrol,2,mg-zs-2025-v1|mg-zs-2025-m1-v1
+68,Toyota,Auris,TOYOTA AURIS,140392,0.402,60.66,Hybrid electric (petrol),0,
+69,Mazda,2,MAZDA 2,140038,0.401,61.06,Petrol,1,mazda-2-v1
+70,KIA,Niro,KIA NIRO,138040,0.396,61.46,Hybrid electric (petrol),1,kia-niro-hybrid-2020-w7-v1
+71,Nissan,Note,NISSAN NOTE,136203,0.39,61.85,Petrol,1,nissan-note-v1
+72,Audi,Q5,AUDI Q5,135343,0.388,62.23,Diesel,0,
+73,BMW,X1,BMW X1,135081,0.387,62.62,Diesel,1,bmw-x1-2020-w12-v1
+74,Volkswagen,UP,VOLKSWAGEN UP,131632,0.377,63.0,Petrol,0,
+75,Audi,A5,AUDI A5,131165,0.376,63.38,Diesel,1,audi-a5-sportback-v1
+76,Peugeot,308,PEUGEOT 308,130214,0.373,63.75,Diesel,5,peugeot-308-2012-w5-v1|peugeot-308-2012-w7-v1|peugeot-308-2012-w7-v2|peugeot-308-2026-pw1-v1|peugeot-308-pw1-v1
+77,MG,HS,MG HS,128533,0.368,64.12,Petrol,0,
+78,Audi,A6,AUDI A6,128223,0.368,64.48,Diesel,3,audi-a6-c8-v1|audi-a6-c7-ad1-v1|audi-a6-c8-ad1-v1
+79,Toyota,Prius,TOYOTA PRIUS,127426,0.365,64.85,Hybrid electric (petrol),3,toyota-prius-v1|toyota-prius-2016-tw1-v1|toyota-prius-2010-tw1-v1
+80,KIA,Ceed,KIA CEED,124267,0.356,65.21,Petrol,1,kia-ceed-v1
+81,BMW,X3,BMW X3,123713,0.355,65.56,Diesel,1,bmw-x3-2018-w12-v1
+82,Hyundai,Kona,HYUNDAI KONA,123565,0.354,65.91,Hybrid electric (petrol),5,hyundai-kona-2019-v1|hyundai-kona-2025-n-line-v1|hyundai-kona-w6-v1|hyundai-kona-w6-v2|hyundai-kona-2019-hyw1-v1
+83,BMW,4 Series,BMW 4 SERIES,119565,0.343,66.26,Diesel,2,bmw-m4-v1|bmw-4-series-v1
+84,Audi,Q2,AUDI Q2,117816,0.338,66.6,Petrol,0,
+85,Mercedes,GLA Class,MERCEDES GLA CLASS,117000,0.335,66.93,Diesel,1,mercedes-benz-gla-2020-v1
+86,Ford,KA,FORD KA,116272,0.333,67.26,Petrol,1,ford-ka-sedan-2015-w5-v1
+87,Vauxhall,Grandland,VAUXHALL GRANDLAND,113373,0.325,67.59,Petrol,0,
+88,Nissan,X-Trail,NISSAN X-TRAIL,110375,0.316,67.91,Diesel,1,nissan-x-trail-2023-v1
+89,Ford,Ecosport,FORD ECOSPORT,110131,0.316,68.22,Petrol,2,ford-ecosport-v1|ford-ecosport-2012-w5-v1
+90,Mercedes,CLA Class,MERCEDES CLA CLASS,109127,0.313,68.53,Petrol,1,mercedes-benz-cla-v2
+91,Dacia,Duster,DACIA DUSTER,108398,0.311,68.84,Petrol,1,dacia-duster-v1
+92,Mazda,3,MAZDA 3,108311,0.31,69.15,Petrol,3,mazda-3-2020-v1|mazda-3-2003-w6-v1|mazda-3-2011-w6-v1
+93,BMW,X5,BMW X5,105554,0.303,69.46,Diesel,3,bmw-x5-2024-v1|bmw-x5-2019-w12-v1|bmw-x5-1999-bm2-v1
+94,Mercedes,GLC Class,MERCEDES GLC CLASS,103927,0.298,69.76,Diesel,1,mercedes-benz-glc-mw1-v2
+95,Hyundai,I30,HYUNDAI I30,102014,0.292,70.05,Petrol,1,hyundai-i30-2010-v1
+96,Skoda,Karoq,SKODA KAROQ,101659,0.291,70.34,Petrol,1,skoda-karoq-2020-v1
+97,Ford,C-Max,FORD C-MAX,98574,0.283,70.62,Diesel,0,
+98,Peugeot,107,PEUGEOT 107,97600,0.28,70.9,Petrol,0,
+99,Land Rover,Freelander,LAND ROVER FREELANDER,96579,0.277,71.18,Diesel,0,
+100,KIA,RIO,KIA RIO,96283,0.276,71.45,Petrol,0,
+101,Mini,ONE,MINI ONE,95748,0.274,71.73,Petrol,0,
+102,Volvo,XC90,VOLVO XC90,95535,0.274,72.0,Diesel,1,volvo-xc90-v1
+103,Volvo,V40,VOLVO V40,93494,0.268,72.27,Diesel,1,volvo-v40-2018-vow1-v1
+104,Mazda,CX-5,MAZDA CX-5,93284,0.267,72.54,Petrol,2,mazda-cx-5-2017-w7-v1|mazda-cx-5-2020-mzw1-v1
+105,Renault,Megane,RENAULT MEGANE,92288,0.265,72.8,Diesel,1,renault-megane-v1
+106,Peugeot,207,PEUGEOT 207,92086,0.264,73.07,Petrol,3,peugeot-207-pw1-v1|peugeot-207-pw1-v2|peugeot-207-pw1-v3
+107,Land Rover,Range Rover,LAND ROVER RANGE ROVER,90764,0.26,73.33,Diesel,8,land-rover-range-rover-sport-2018-w5-v1|land-rover-range-rover-sport-2015-rr1-v1|land-rover-range-rover-sport-2018-rr1-v1|land-rover-range-rover-sport-2023-rr1-v1|land-rover-range-rover-law1-v1|land-rover-range-rover-law1-v2
+108,Vauxhall,Crossland,VAUXHALL CROSSLAND,86267,0.247,73.57,Petrol,0,
+109,Mazda,MX-5,MAZDA MX-5,85523,0.245,73.82,Petrol,6,mazda-mx-5-2015-v1|mazda-mx-5-2014-w5-v1|mazda-mx-5-w6-v1|mazda-mx-5-1989-mzw1-v1|mazda-mx-5-1998-mzw1-v1|mazda-mx-5-2009-mzw1-v1
+110,Jaguar,XF Series,JAGUAR XF SERIES,85008,0.244,74.06,Diesel,0,
+111,Suzuki,Vitara,SUZUKI VITARA,84305,0.242,74.3,Petrol,1,suzuki-vitara-2024-v1
+112,Seat,Arona,SEAT ARONA,83832,0.24,74.54,Petrol,1,seat-arona-2022-v1
+113,Skoda,Kodiaq,SKODA KODIAQ,83611,0.24,74.78,Petrol,1,skoda-kodiaq-2020-w12-v1
+114,Fiat,Panda,FIAT PANDA,78137,0.224,75.01,Petrol,1,fiat-panda-fw1-v2
+115,Skoda,Superb,SKODA SUPERB,76842,0.22,75.23,Diesel,2,skoda-superb-v1|skoda-superb-2009-w5-v1
+116,Peugeot,108,PEUGEOT 108,75416,0.216,75.44,Petrol,0,
+117,Seat,Ateca,SEAT ATECA,73948,0.212,75.66,Petrol,1,seat-ateca-2020-v1
+118,Skoda,Yeti,SKODA YETI,72789,0.209,75.86,Diesel,0,
+119,Land Rover,Defender,LAND ROVER DEFENDER,72612,0.208,76.07,Diesel,5,land-rover-defender-w5-v1|land-rover-defender-w6-v1|land-rover-defender-2021-w6-v1|land-rover-defender-2021-w7-v1|land-rover-defender-w7-v1
+120,Hyundai,Ioniq,HYUNDAI IONIQ,71573,0.205,76.28,Battery electric,2,hyundai-ioniq-6-w5-v1|hyundai-ioniq-5-n-2024-hyw1-v1
+121,Vauxhall,Meriva,VAUXHALL MERIVA,69733,0.2,76.48,Petrol,0,
+122,Jaguar,F-Pace,JAGUAR F-PACE,69526,0.199,76.68,Diesel,0,
+123,Mercedes,B Class,MERCEDES B CLASS,67395,0.193,76.87,Diesel,0,
+124,Renault,Kadjar,RENAULT KADJAR,67117,0.192,77.06,Petrol,1,renault-kadjar-v1
+125,Mitsubishi,Outlander,MITSUBISHI OUTLANDER,66418,0.19,77.25,Plug-in hybrid electric (petrol),0,
+126,Audi,Q4,AUDI Q4,64323,0.184,77.44,Battery electric,1,audi-q4-e-tron-v1
+127,Mini,Clubman,MINI CLUBMAN,62292,0.179,77.62,Petrol,1,mini-clubman-v1
+128,Citroen,DS3,CITROEN DS3,62061,0.178,77.79,Diesel,0,
+129,Ford,S-Max,FORD S-MAX,62029,0.178,77.97,Diesel,1,ford-s-max-v1
+130,Volkswagen,Touran,VOLKSWAGEN TOURAN,61882,0.177,78.15,Diesel,0,
+131,Peugeot,5008,PEUGEOT 5008,61844,0.177,78.33,Diesel,0,
+132,Honda,Hr-V,HONDA HR-V,61782,0.177,78.5,Hybrid electric (petrol),3,honda-hr-v-v1|honda-hr-v-2025-hw1-v1|honda-hr-v-2001-hw1-v1
+133,Audi,TT,AUDI TT,60322,0.173,78.68,Petrol,1,audi-tt-rs-2006-ad1-v1
+134,Nissan,Leaf,NISSAN LEAF,60320,0.173,78.85,Battery electric,1,nissan-leaf-2023-v1
+135,Skoda,Kamiq,SKODA KAMIQ,60022,0.172,79.02,Petrol,2,skoda-kamiq-v1|skoda-kamiq-2020-w12-v1
+136,KIA,Stonic,KIA STONIC,59047,0.169,79.19,Petrol,1,kia-stonic-v1
+137,Cupra,Formentor,CUPRA FORMENTOR,59032,0.169,79.36,Petrol,2,cupra-formentor-2022-v1|cupra-formentor-2021-w5-v1
+138,Porsche,911,PORSCHE 911,58777,0.168,79.53,Petrol,55,porsche-911-carrera-4s-v1|porsche-911-2021-pw2-v1|porsche-911-2018-pw2-v1|porsche-911-pw2-v1|porsche-911-2021-pw2-v2|porsche-911-2014-pw2-v1
+139,Volkswagen,T-Cross,VOLKSWAGEN T-CROSS,58579,0.168,79.7,Petrol,2,volkswagen-t-cross-2021-v1|volkswagen-t-cross-vw2-v1
+140,Ford,Tourneo,FORD TOURNEO,58494,0.168,79.86,Diesel,0,
+141,Porsche,Macan,PORSCHE MACAN,57864,0.166,80.03,Petrol,6,porsche-macan-v1|porsche-macan-2020-pw2-v1|porsche-macan-2022-pw2-v1|porsche-macan-pw2-v1|porsche-macan-2022-pw2-v2|porsche-macan-2022-pw2-v3
+142,MG,3,MG 3,57075,0.164,80.19,Petrol,1,mg-3-2025-v1
+143,Mercedes,AMG Class,MERCEDES AMG CLASS,55606,0.159,80.35,Petrol,0,
+144,Volkswagen,ID3,VOLKSWAGEN ID3,55453,0.159,80.51,Battery electric,1,volkswagen-id3-gtx-2024-v1
+145,Vauxhall,Adam,VAUXHALL ADAM,54974,0.158,80.67,Petrol,0,
+146,Audi,Q7,AUDI Q7,53679,0.154,80.82,Diesel,0,
+147,Smart,Fortwo,SMART FORTWO,52508,0.151,80.97,Petrol,1,smart-fortwo-v1
+148,BYD,Seal,BYD SEAL,51684,0.148,81.12,Plug-in hybrid electric (petrol),2,byd-seal-v1|byd-seal-2024-w12-v1
+149,Toyota,Avensis,TOYOTA AVENSIS,51671,0.148,81.27,Diesel,2,toyota-avensis-tw1-v1|toyota-avensis-tw1-v2
+150,Citroen,Berlingo,CITROEN BERLINGO,51616,0.148,81.42,Diesel,0,
+151,Ford,B-Max,FORD B-MAX,51391,0.147,81.57,Petrol,0,
+152,Skoda,Citigo,SKODA CITIGO,51288,0.147,81.71,Petrol,0,
+153,MG,4,MG 4,51072,0.146,81.86,Battery electric,2,mg-4-2025-v1|mg-mg4-v1
+154,Suzuki,SX,SUZUKI SX,50421,0.145,82.0,Petrol,0,
+155,Mazda,6,MAZDA 6,50111,0.144,82.15,Diesel,0,
+156,Land Rover,Range Rover Velar,LAND ROVER RANGE ROVER VELAR,49644,0.142,82.29,Diesel,8,land-rover-range-rover-sport-2018-w5-v1|land-rover-range-rover-sport-2015-rr1-v1|land-rover-range-rover-sport-2018-rr1-v1|land-rover-range-rover-sport-2023-rr1-v1|land-rover-range-rover-law1-v1|land-rover-range-rover-law1-v2
+157,Hyundai,IX35,HYUNDAI IX35,49628,0.142,82.43,Diesel,0,
+158,Jaecoo,7,JAECOO 7,49553,0.142,82.57,Plug-in hybrid electric (petrol),0,
+159,Mercedes,SLK Class,MERCEDES SLK CLASS,48362,0.139,82.71,Petrol,0,
+160,Skoda,Enyaq,SKODA ENYAQ,47813,0.137,82.85,Battery electric,0,
+161,Ford,Galaxy,FORD GALAXY,47163,0.135,82.98,Diesel,0,
+162,Fiat,Punto,FIAT PUNTO,46259,0.133,83.12,Petrol,2,fiat-punto-2009-fw1-v1|fiat-punto-fw1-v1
+163,Lexus,NX,LEXUS NX,46073,0.132,83.25,Hybrid electric (petrol),1,lexus-nx-2017-w7-v1
+164,Mazda,CX-30,MAZDA CX-30,45519,0.13,83.38,Petrol,1,mazda-cx-30-2020-v1
+165,KIA,Venga,KIA VENGA,45013,0.129,83.51,Petrol,0,
+166,Audi,TTS,AUDI TTS,43746,0.125,83.63,Petrol,1,audi-tts-ad1-v1
+167,Volkswagen,Scirocco,VOLKSWAGEN SCIROCCO,43705,0.125,83.76,Diesel,1,volkswagen-scirocco-v1
+168,BMW,I4,BMW I4,43668,0.125,83.88,Battery electric,1,bmw-i4-v1
+169,Volvo,V60,VOLVO V60,43212,0.124,84.01,Diesel,3,volvo-v60-2020-v1|volvo-v60-2013-w12-v1|volvo-v60-vow1-v1
+170,Volkswagen,Beetle,VOLKSWAGEN BEETLE,42510,0.122,84.13,Petrol,1,volkswagen-beetle-v1
+171,Hyundai,Santa FE,HYUNDAI SANTA FE,42391,0.122,84.25,Diesel,2,hyundai-santa-fe-2020-v1|hyundai-santa-fe-w7-v1
+172,Suzuki,Alto,SUZUKI ALTO,42275,0.121,84.37,Petrol,2,suzuki-alto-2020-v1|suzuki-alto-2024-w5-v1
+173,KIA,Xceed,KIA XCEED,41918,0.12,84.49,Petrol,0,
+174,Volkswagen,Touareg,VOLKSWAGEN TOUAREG,41833,0.12,84.61,Diesel,1,volkswagen-touareg-v1
+175,Jaguar,XE Series,JAGUAR XE SERIES,41666,0.119,84.73,Diesel,0,
+176,Porsche,Cayenne,PORSCHE CAYENNE,41126,0.118,84.85,Petrol,6,porsche-cayenne-v1|porsche-cayenne-v2|porsche-cayenne-v3|porsche-cayenne-2009-pw2-v1|porsche-cayenne-2020-pw2-v1|porsche-cayenne-2010-pw2-v1
+177,Volkswagen,ID4,VOLKSWAGEN ID4,40864,0.117,84.97,Battery electric,1,volkswagen-id4-v1
+178,KIA,Sorento,KIA SORENTO,40246,0.115,85.08,Diesel,0,
+179,Ford,Fusion,FORD FUSION,39543,0.113,85.2,Petrol,0,
+180,Renault,Scenic,RENAULT SCENIC,39166,0.112,85.31,Diesel,1,renault-scenic-1998-rew1-v1
+181,Mercedes,GLE Class,MERCEDES GLE CLASS,39079,0.112,85.42,Diesel,1,mercedes-benz-gle-v1
+182,Lexus,RX,LEXUS RX,38494,0.11,85.53,Hybrid electric (petrol),1,lexus-rx-v1
+183,Citroen,C5,CITROEN C5,38376,0.11,85.64,Petrol,1,citroen-c5-2022-v1
+184,Polestar,2,POLESTAR 2,38163,0.109,85.75,Battery electric,2,polestar-2-v1|polestar-2-w7-v1
+185,Vauxhall,Viva,VAUXHALL VIVA,37748,0.108,85.86,Petrol,0,
+186,Audi,S3,AUDI S3,36880,0.106,85.96,Petrol,2,audi-s3-v1|audi-s3-ad1-v1
+187,Ford,KA+,FORD KA+,36269,0.104,86.07,Petrol,1,ford-ka-sedan-2015-w5-v1
+188,DS,DS3,DS DS3,36039,0.103,86.17,Petrol,0,
+189,Suzuki,Ignis,SUZUKI IGNIS,35134,0.101,86.27,Hybrid electric (petrol),2,suzuki-ignis-v1|suzuki-ignis-2022-w5-v1
+190,Jaguar,E-Pace,JAGUAR E-PACE,35058,0.1,86.37,Diesel,0,
+191,Mercedes,EQA Class,MERCEDES EQA CLASS,34470,0.099,86.47,Battery electric,0,
+192,Volvo,V70,VOLVO V70,33616,0.096,86.57,Diesel,0,
+193,Ford,Grand C-Max,FORD GRAND C-MAX,32287,0.093,86.66,Diesel,0,
+194,Volkswagen,Taigo,VOLKSWAGEN TAIGO,31459,0.09,86.75,Petrol,1,volkswagen-taigo-2022-v1
+195,Cupra,Born,CUPRA BORN,31456,0.09,86.84,Battery electric,0,
+196,BMW,Z4,BMW Z4,31382,0.09,86.93,Petrol,2,bmw-z4-2008-v1|bmw-z4-m40i-2019-v1
+197,Lexus,IS,LEXUS IS,31284,0.09,87.02,Petrol,0,
+198,Vauxhall,Agila,VAUXHALL AGILA,30525,0.087,87.11,Petrol,0,
+199,Lexus,CT,LEXUS CT,29839,0.086,87.19,Hybrid electric (petrol),0,
+200,Hyundai,IX20,HYUNDAI IX20,28877,0.083,87.28,Petrol,0,
+201,Jeep,Renegade,JEEP RENEGADE,28528,0.082,87.36,Petrol,1,jeep-renegade-2021-w6-v1
+202,Jaguar,I-Pace,JAGUAR I-PACE,28401,0.081,87.44,Battery electric,2,jaguar-i-pace-v1|jaguar-i-pace-jgw1-v1
+203,BMW,X2,BMW X2,28357,0.081,87.52,Petrol,1,bmw-x2-v1
+204,Volkswagen,Sharan,VOLKSWAGEN SHARAN,28256,0.081,87.6,Diesel,1,volkswagen-sharan-vw1-v1
+205,Ford,Mustang,FORD MUSTANG,28133,0.081,87.68,Battery electric,2,ford-mustang-v1|ford-mustang-2015-w12-v1
+206,Volkswagen,Caddy,VOLKSWAGEN CADDY,27528,0.079,87.76,Diesel,1,volkswagen-caddy-2022-v1
+207,Mitsubishi,ASX,MITSUBISHI ASX,27248,0.078,87.84,Petrol,3,mitsubishi-asx-v1|mitsubishi-asx-w5-v1|mitsubishi-asx-2011-w5-v1
+208,Suzuki,Celerio,SUZUKI CELERIO,27047,0.078,87.92,Petrol,0,
+209,Dacia,Jogger,DACIA JOGGER,26865,0.077,87.99,Petrol,0,
+210,Renault,ZOE,RENAULT ZOE,26584,0.076,88.07,Battery electric,1,renault-zoe-2012-v1
+211,Saab,9-3,SAAB 9-3,26468,0.076,88.15,Petrol,0,
+212,Toyota,Verso,TOYOTA VERSO,25840,0.074,88.22,Petrol,0,
+213,Lexus,UX,LEXUS UX,25526,0.073,88.29,Hybrid electric (petrol),0,
+214,MG,B,MG B,25238,0.072,88.36,Petrol,0,
+215,BMW,I3,BMW I3,25229,0.072,88.44,Battery electric,0,
+216,Peugeot,206,PEUGEOT 206,25228,0.072,88.51,Petrol,3,peugeot-206-v1|peugeot-206-2002-w12-v1|peugeot-206-2000-pw1-v1
+217,Mercedes,ML Class,MERCEDES ML CLASS,25065,0.072,88.58,Diesel,0,
+218,Porsche,Boxster,PORSCHE BOXSTER,24664,0.071,88.65,Petrol,3,porsche-718-boxster-v1|porsche-boxster-2010-pw2-v1|porsche-boxster-2015-pw2-v1
+219,Mazda,CX-3,MAZDA CX-3,24590,0.07,88.72,Petrol,1,mazda-cx-30-2020-v1
+220,Mercedes,GLB Class,MERCEDES GLB CLASS,24149,0.069,88.79,Petrol,0,
+221,Mini,John Cooper Works,MINI JOHN COOPER WORKS,24133,0.069,88.86,Petrol,0,
+222,Volvo,EX30,VOLVO EX30,24093,0.069,88.93,Battery electric,0,
+223,KIA,Soul,KIA SOUL,23754,0.068,89.0,Diesel,0,
+224,Hyundai,Bayon,HYUNDAI BAYON,23735,0.068,89.07,Hybrid electric (petrol),0,
+225,Seat,Alhambra,SEAT ALHAMBRA,23646,0.068,89.13,Diesel,3,seat-alhambra-2010-st1-v1|seat-alhambra-2015-st1-v1|seat-alhambra-2000-st2-v1
+226,Smart,Forfour,SMART FORFOUR,23585,0.068,89.2,Petrol,0,
+227,Chery,Tiggo,CHERY TIGGO,23174,0.066,89.27,Plug-in hybrid electric (petrol),0,
+228,Jaguar,XJ Series,JAGUAR XJ SERIES,23074,0.066,89.33,Petrol,0,
+229,Audi,E-Tron,AUDI E-TRON,23023,0.066,89.4,Battery electric,1,audi-e-tron-v1
+230,Skoda,Scala,SKODA SCALA,22867,0.066,89.47,Petrol,0,
+231,Porsche,Taycan,PORSCHE TAYCAN,22754,0.065,89.53,Battery electric,3,porsche-taycan-pw2-v1|porsche-taycan-2025-pw2-v1|porsche-taycan-pw2-v2
+232,Alfa Romeo,Giulietta,ALFA ROMEO GIULIETTA,22420,0.064,89.59,Petrol,1,alfa-romeo-giulietta-v1
+233,Ford,Explorer,FORD EXPLORER,22219,0.064,89.66,Battery electric,0,
+234,Volvo,V50,VOLVO V50,22016,0.063,89.72,Diesel,1,volvo-v50-vow1-v1
+235,Mercedes,S Class,MERCEDES S CLASS,21814,0.063,89.78,Diesel,4,mercedes-benz-s-class-v1|mercedes-benz-s-class-1979-mw1-v1|mercedes-benz-s-class-1999-mw1-v1|mercedes-benz-s-class-2003-mw1-v1
+236,Renault,Twingo,RENAULT TWINGO,21593,0.062,89.85,Petrol,0,
+237,Mitsubishi,Shogun,MITSUBISHI SHOGUN,21519,0.062,89.91,Diesel,0,
+238,BMW,IX1,BMW IX1,21401,0.061,89.97,Battery electric,0,
+239,Skoda,Rapid,SKODA RAPID,21185,0.061,90.03,Petrol,1,skoda-rapid-v1
+240,Abarth,595,ABARTH 595,20622,0.059,90.09,Petrol,0,
+241,BMW,IX3,BMW IX3,20580,0.059,90.15,Battery electric,0,
+242,Toyota,Land Cruiser,TOYOTA LAND CRUISER,20554,0.059,90.21,Diesel,3,toyota-land-cruiser-v1|toyota-land-cruiser-1998-tw1-v1|toyota-land-cruiser-2024-tw1-v1
+243,Suzuki,Jimny,SUZUKI JIMNY,20409,0.058,90.27,Petrol,1,suzuki-jimny-v1
+244,Nissan,Pulsar,NISSAN PULSAR,20249,0.058,90.32,Petrol,1,nissan-pulsar-v1
+245,Jeep,Avenger,JEEP AVENGER,20197,0.058,90.38,Petrol,0,
+246,Mercedes,EQB Class,MERCEDES EQB CLASS,20169,0.058,90.44,Battery electric,0,
+247,BMW,IX,BMW IX,20105,0.058,90.5,Battery electric,1,bmw-ix-v1
+248,Jaguar,XK Series,JAGUAR XK SERIES,20057,0.057,90.55,Petrol,0,
+249,Mercedes,CLS Class,MERCEDES CLS CLASS,19933,0.057,90.61,Diesel,3,mercedes-benz-cls-2022-v1|mercedes-benz-cls-2013-mw1-v1|mercedes-benz-cls-mw1-v2
+250,KIA,EV6,KIA EV6,19919,0.057,90.67,Battery electric,2,kia-ev6-2022-v1|kia-ev6-2022-w6-v1
+251,Honda,Accord,HONDA ACCORD,19486,0.056,90.72,Petrol,8,honda-accord-2021-v1|honda-accord-2017-w5-v1|honda-accord-hw1-v1|honda-accord-2021-hw1-v1|honda-accord-1998-hw1-v1|honda-accord-2011-hw1-v1
+252,BMW,M3,BMW M3,19413,0.056,90.78,Petrol,4,bmw-m3-e30-undated-v1|bmw-m3-f80-2013-v1|bmw-m3-e46-v1|bmw-m3-2023-w12-v1
+253,Renault,Arkana,RENAULT ARKANA,19408,0.056,90.84,Hybrid electric (petrol),1,renault-arkana-v1
+254,BMW,6 Series,BMW 6 SERIES,19336,0.055,90.89,Diesel,0,
+255,Audi,Q6,AUDI Q6,19291,0.055,90.95,Battery electric,0,
+256,BMW,X4,BMW X4,19288,0.055,91.0,Diesel,1,bmw-x4-v1
+257,Hyundai,I40,HYUNDAI I40,19160,0.055,91.06,Diesel,0,
+258,Mercedes,CLK Class,MERCEDES CLK CLASS,19101,0.055,91.11,Petrol,0,
+259,Renault,Symbioz,RENAULT SYMBIOZ,18819,0.054,91.17,Hybrid electric (petrol),0,
+260,Peugeot,Partner,PEUGEOT PARTNER,18818,0.054,91.22,Diesel,0,
+261,Peugeot,Rifter,PEUGEOT RIFTER,18796,0.054,91.27,Diesel,0,
+262,Renault,Austral,RENAULT AUSTRAL,18467,0.053,91.33,Hybrid electric (petrol),1,renault-austral-2022-w7-v1
+263,Vauxhall,Frontera,VAUXHALL FRONTERA,18391,0.053,91.38,Battery electric,0,
+264,Volvo,C30,VOLVO C30,18305,0.052,91.43,Diesel,2,volvo-c30-v1|volvo-c30-vow1-v1
+265,Cupra,Leon,CUPRA LEON,18275,0.052,91.48,Petrol,1,cupra-leon-2025-v1
+266,Mercedes,EQC Class,MERCEDES EQC CLASS,18223,0.052,91.54,Battery electric,0,
+267,Seat,MII,SEAT MII,18171,0.052,91.59,Petrol,1,seat-mii-v1
+268,KIA,EV3,KIA EV3,18143,0.052,91.64,Battery electric,0,
+269,Volvo,S60,VOLVO S60,18139,0.052,91.69,Diesel,1,volvo-s60-2004-v1
+270,Volvo,V90,VOLVO V90,17892,0.051,91.74,Diesel,0,
+271,Volkswagen,Transporter,VOLKSWAGEN TRANSPORTER,17756,0.051,91.79,Diesel,1,volkswagen-transporter-2003-vw2-v1
+272,Renault,Grand Scenic,RENAULT GRAND SCENIC,17477,0.05,91.84,Diesel,0,
+273,Peugeot,508,PEUGEOT 508,17381,0.05,91.89,Diesel,2,peugeot-508-v1|peugeot-508-w12-v1
+274,Skoda,Elroq,SKODA ELROQ,17342,0.05,91.94,Battery electric,0,
+275,Vauxhall,Vectra,VAUXHALL VECTRA,16638,0.048,91.99,Petrol,0,
+276,BMW,7 Series,BMW 7 SERIES,16606,0.048,92.04,Diesel,1,bmw-7-series-v1
+277,Renault,5,RENAULT 5,16589,0.048,92.09,Battery electric,0,
+278,Jeep,Compass,JEEP COMPASS,16559,0.047,92.13,Petrol,2,jeep-compass-v1|jeep-compass-2022-w12-v1
+279,Mitsubishi,Colt,MITSUBISHI COLT,16387,0.047,92.18,Petrol,0,
+280,Polestar,4,POLESTAR 4,16361,0.047,92.23,Battery electric,0,
+281,Audi,A7,AUDI A7,16317,0.047,92.27,Diesel,2,audi-a7-2018-v1|audi-a7-2017-ad1-v1
+282,Omoda,5 Noble Auto,OMODA 5 NOBLE AUTO,16222,0.046,92.32,Petrol,0,
+283,Subaru,Forester,SUBARU FORESTER,16119,0.046,92.37,Petrol,1,subaru-forester-2009-sbw1-v1
+284,Suzuki,Splash,SUZUKI SPLASH,16017,0.046,92.41,Petrol,0,
+285,Toyota,IQ,TOYOTA IQ,15966,0.046,92.46,Petrol,1,toyota-iq-tw1-v1
+286,Vauxhall,Combo,VAUXHALL COMBO,15947,0.046,92.5,Diesel,0,
+287,Skoda,Roomster,SKODA ROOMSTER,15922,0.046,92.55,Petrol,0,
+288,Audi,Q8,AUDI Q8,15906,0.046,92.6,Battery electric,1,audi-sq8-e-tron-2023-v1
+289,Jaguar,F-Type,JAGUAR F-TYPE,15792,0.045,92.64,Petrol,10,jaguar-f-type-v1|jaguar-f-type-v2|jaguar-f-type-jgw1-v1|jaguar-f-type-jgw1-v2|jaguar-f-type-jgw1-v3|jaguar-f-type-2016-jgw1-v1
+290,Peugeot,307,PEUGEOT 307,15750,0.045,92.69,Petrol,2,peugeot-307-2008-v1|peugeot-307-pw1-v1
+291,Mercedes,SL Class,MERCEDES SL CLASS,15697,0.045,92.73,Petrol,2,mercedes-benz-sl-class-1963-mw1-v1|mercedes-benz-sl-class-mw1-v1
+292,BMW,X6,BMW X6,15673,0.045,92.78,Diesel,1,bmw-x6-2020-v1
+293,Suzuki,Grand Vitara,SUZUKI GRAND VITARA,15615,0.045,92.82,Petrol,0,
+294,Lexus,LBX,LEXUS LBX,15409,0.044,92.87,Hybrid electric (petrol),0,
+295,BYD,Dolphin,BYD DOLPHIN,15386,0.044,92.91,Battery electric,4,byd-dolphin-v1|byd-dolphin-2025-w6-v1|byd-dolphin-2021-bw1-v1|byd-dolphin-2024-bw1-v1
+296,MG,5,MG 5,15337,0.044,92.95,Battery electric,1,mg-5-2025-v1
+297,BYD,Sealion,BYD SEALION,15275,0.044,93.0,Battery electric,3,byd-seal-v1|byd-seal-2024-w12-v1|byd-sealion-7-2024-bw1-v1
+298,BMW,M4,BMW M4,15258,0.044,93.04,Petrol,4,bmw-m4-v1|bmw-m4-w12-v1|bmw-m4-competition-2021-bm1-v1|bmw-m4-2018-bm2-v1
+299,Vauxhall,Antara,VAUXHALL ANTARA,15024,0.043,93.08,Diesel,0,
+300,Volvo,XC70,VOLVO XC70,14972,0.043,93.13,Diesel,0,
+301,Porsche,718,PORSCHE 718,14878,0.043,93.17,Petrol,3,porsche-718-2020-pw2-v1|porsche-718-2024-pw2-v1|porsche-718-2020-pw2-v2
+302,Ford,Escort,FORD ESCORT,14738,0.042,93.21,Petrol,1,ford-escort-v1
+303,Citroen,Xsara,CITROEN XSARA,14654,0.042,93.25,Petrol,0,
+304,Renault,Trafic,RENAULT TRAFIC,14618,0.042,93.3,Diesel,0,
+305,Alfa Romeo,Mito,ALFA ROMEO MITO,14596,0.042,93.34,Petrol,1,alfa-romeo-mito-v1
+306,Morris,Minor,MORRIS MINOR,14534,0.042,93.38,Petrol,0,
+307,Nissan,Ariya,NISSAN ARIYA,14451,0.041,93.42,Battery electric,0,
+308,Jaguar,X Type,JAGUAR X TYPE,14154,0.041,93.46,Diesel,0,
+309,Bentley,Continental,BENTLEY CONTINENTAL,14126,0.04,93.5,Petrol,1,bentley-continental-x-undated-v1
+310,Dacia,Logan,DACIA LOGAN,14052,0.04,93.54,Petrol,0,
+311,Volkswagen,CC,VOLKSWAGEN CC,13725,0.039,93.58,Diesel,0,
+312,Audi,SQ5,AUDI SQ5,13684,0.039,93.62,Diesel,0,
+313,Hyundai,Getz,HYUNDAI GETZ,13503,0.039,93.66,Petrol,1,hyundai-getz-2006-hyw1-v1
+314,Toyota,BZ4X,TOYOTA BZ4X,13290,0.038,93.7,Battery electric,2,toyota-bz4x-v1|toyota-bz4x-tw1-v1
+315,Mercedes,Vito,MERCEDES VITO,13241,0.038,93.74,Diesel,3,mercedes-benz-vito-v1|mercedes-benz-mercedes-vito-w5-v1|mercedes-benz-mercedes-vito-2010-w5-v1
+316,Cupra,Terramar,CUPRA TERRAMAR,13115,0.038,93.77,Hybrid electric (petrol),1,cupra-terramar-v1
+317,Volkswagen,Jetta,VOLKSWAGEN JETTA,13106,0.038,93.81,Diesel,3,volkswagen-jetta-v1|volkswagen-jetta-2010-vw2-v1|volkswagen-jetta-2019-vw2-v1
+318,Mercedes,V Class,MERCEDES V CLASS,13102,0.038,93.85,Diesel,1,mercedes-benz-v-class-v1
+319,Seat,Tarraco,SEAT TARRACO,12994,0.037,93.89,Petrol,2,seat-tarraco-2020-v1|seat-tarraco-fr-2021-w5-v1
+320,Volkswagen,ID7,VOLKSWAGEN ID7,12975,0.037,93.92,Battery electric,0,
+321,Fiat,Tipo,FIAT TIPO,12768,0.037,93.96,Petrol,2,fiat-tipo-v1|fiat-tipo-fw1-v1
+322,Volvo,S40,VOLVO S40,12681,0.036,94.0,Petrol,0,
+323,Volkswagen,ID5,VOLKSWAGEN ID5,12578,0.036,94.03,Battery electric,1,volkswagen-id5-gtx-2022-v1
+324,Subaru,Impreza,SUBARU IMPREZA,12441,0.036,94.07,Petrol,1,subaru-impreza-x-2010-2012-v1
+325,KIA,Carens,KIA CARENS,12308,0.035,94.1,Diesel,0,
+326,Ford,Capri,FORD CAPRI,12097,0.035,94.14,Battery electric,0,
+327,Chevrolet,Spark,CHEVROLET SPARK,11879,0.034,94.17,Petrol,0,
+328,Volkswagen,Arteon,VOLKSWAGEN ARTEON,11831,0.034,94.2,Petrol,1,volkswagen-arteon-v1
+329,Jaecoo,5,JAECOO 5,11813,0.034,94.24,Battery electric,0,
+330,Mitsubishi,Eclipse,MITSUBISHI ECLIPSE,11700,0.034,94.27,Petrol,1,mitsubishi-eclipse-cross-w7-v1
+331,Mercedes-Benz,CLA Class,MERCEDES-BENZ CLA CLASS,11573,0.033,94.31,Battery electric,1,mercedes-benz-cla-v2
+332,Audi,S5,AUDI S5,11532,0.033,94.34,Petrol,2,audi-s5-v1|audi-s5-2021-ad1-v1
+333,Volkswagen,Urban,VOLKSWAGEN URBAN,11216,0.032,94.37,Petrol,0,
+334,BYD,Atto 3,BYD ATTO 3,11015,0.032,94.4,Battery electric,2,byd-atto3-v1|byd-atto-3-2024-bw1-v1
+335,KIA,Proceed,KIA PROCEED,10987,0.031,94.43,Petrol,1,kia-ceed-v1
+336,Vauxhall,Vivaro,VAUXHALL VIVARO,10962,0.031,94.47,Diesel,0,
+337,Seat,Altea,SEAT ALTEA,10924,0.031,94.5,Diesel,0,
+338,Mitsubishi,Mirage,MITSUBISHI MIRAGE,10799,0.031,94.53,Petrol,1,mitsubishi-mirage-v1
+339,Mazda,CX-60,MAZDA CX-60,10506,0.03,94.56,Plug-in hybrid electric (petrol),0,
+340,Jeep,Grand Cherokee,JEEP GRAND CHEROKEE,10473,0.03,94.59,Diesel,5,jeep-grand-cherokee-v2|jeep-grand-cherokee-v3|jeep-grand-cherokee-jpw1-v1|jeep-grand-cherokee-jpw1-v2|jeep-grand-cherokee-2018-jpw1-v1
+341,Renault,Kangoo,RENAULT KANGOO,10366,0.03,94.62,Petrol,1,renault-kangoo-v1
+342,KIA,Optima,KIA OPTIMA,10366,0.03,94.65,Diesel,1,kia-optima-v1
+343,BMW,I5,BMW I5,10202,0.029,94.68,Battery electric,0,
+344,Renault,Modus,RENAULT MODUS,10133,0.029,94.71,Petrol,0,
+345,BMW,IX2,BMW IX2,10053,0.029,94.73,Battery electric,0,
+346,Tesla,Model S,TESLA MODEL S,9996,0.029,94.76,Battery electric,1,tesla-model-s-v1
+347,BMW,M2,BMW M2,9947,0.029,94.79,Petrol,2,bmw-m2-v1|bmw-m2-2023-bm3-v1
+348,Fiat,Doblo,FIAT DOBLO,9912,0.028,94.82,Diesel,0,
+349,Nissan,Pixo,NISSAN PIXO,9814,0.028,94.85,Petrol,0,
+350,Mini,Aceman,MINI ACEMAN,9796,0.028,94.88,Battery electric,0,
+351,Omoda,E5 Comfort,OMODA E5 COMFORT,9545,0.027,94.9,Battery electric,0,
+352,Subaru,Outback,SUBARU OUTBACK,9473,0.027,94.93,Petrol,1,subaru-outback-2022-w7-v1
+353,Volkswagen,ID Buzz,VOLKSWAGEN ID BUZZ,9388,0.027,94.96,Battery electric,2,volkswagen-id-buzz-v1|volkswagen-id-buzz-2021-vw2-v1
+354,Mini,Paceman,MINI PACEMAN,9359,0.027,94.98,Petrol,0,
+355,Peugeot,RCZ,PEUGEOT RCZ,9341,0.027,95.01,Petrol,1,peugeot-rcz-pw1-v1
+356,Audi,A8,AUDI A8,9339,0.027,95.04,Diesel,1,audi-a8-2008-v1
+357,MG,Midget,MG MIDGET,9302,0.027,95.06,Petrol,0,
+358,Volkswagen,EOS,VOLKSWAGEN EOS,9295,0.027,95.09,Diesel,0,
+359,Porsche,Cayman,PORSCHE CAYMAN,9255,0.027,95.12,Petrol,5,porsche-718-cayman-v1|porsche-cayman-2014-pw2-v1|porsche-cayman-pw2-v1|porsche-cayman-pw2-v2|porsche-cayman-2011-pw2-v1
+360,Audi,RS3,AUDI RS3,9212,0.026,95.14,Petrol,0,
+361,Volkswagen,Caravelle,VOLKSWAGEN CARAVELLE,9209,0.026,95.17,Diesel,1,volkswagen-multivan-v1
+362,Jeep,Cherokee,JEEP CHEROKEE,9065,0.026,95.2,Diesel,2,jeep-cherokee-2000-jpw1-v1|jeep-cherokee-2019-jpw1-v1
+363,Audi,S4,AUDI S4,9035,0.026,95.22,Petrol,0,
+364,Cupra,Tavascan,CUPRA TAVASCAN,8929,0.026,95.25,Battery electric,1,cupra-tavascan-v1
+365,Suzuki,S-Cross,SUZUKI S-CROSS,8920,0.026,95.27,Hybrid electric (petrol),0,
+366,Honda,E,HONDA E,8864,0.025,95.3,Battery electric,0,
+367,Porsche,Panamera,PORSCHE PANAMERA,8852,0.025,95.32,Plug-in hybrid electric (petrol),8,porsche-panamera-v1|porsche-panamera-2019-pw2-v1|porsche-panamera-2010-pw2-v1|porsche-panamera-pw2-v1|porsche-panamera-2010-pw2-v2|porsche-panamera-pw2-v2
+368,Citroen,DS4,CITROEN DS4,8829,0.025,95.35,Diesel,0,
+369,MG,S5,MG S5,8805,0.025,95.37,Battery electric,0,
+370,Volkswagen,FOX,VOLKSWAGEN FOX,8745,0.025,95.4,Petrol,1,volkswagen-fox-2004-vw1-v1
+371,Nissan,Almera,NISSAN ALMERA,8603,0.025,95.42,Petrol,0,
+372,Fiat,600,FIAT 600,8513,0.024,95.45,Hybrid electric (petrol),2,fiat-600-1960-fw1-v1|fiat-600-1967-fw1-v1
+373,Ford,Edge,FORD EDGE,8495,0.024,95.47,Diesel,0,
+374,KIA,PRO Ceed,KIA PRO CEED,8450,0.024,95.5,Petrol,1,kia-ceed-v1
+375,Austin,Mini,AUSTIN MINI,8410,0.024,95.52,Petrol,0,
+376,Volkswagen,Tayron,VOLKSWAGEN TAYRON,8374,0.024,95.55,Diesel,0,
+377,Rover,Mini,ROVER MINI,8292,0.024,95.57,Petrol,0,
+378,Mercedes,CLC Class,MERCEDES CLC CLASS,8291,0.024,95.59,Petrol,0,
+379,BMW,Z3,BMW Z3,8252,0.024,95.62,Petrol,0,
+380,Alfa Romeo,Giulia,ALFA ROMEO GIULIA,8245,0.024,95.64,Petrol,0,
+381,Aston Martin,Vantage,ASTON MARTIN VANTAGE,8244,0.024,95.66,Petrol,0,
+382,Mercedes,SLC Class,MERCEDES SLC CLASS,8096,0.023,95.69,Petrol,0,
+383,Honda,Insight,HONDA INSIGHT,7941,0.023,95.71,Hybrid electric (petrol),2,honda-insight-v1|honda-insight-2010-hw1-v1
+384,Ssangyong,Tivoli,SSANGYONG TIVOLI,7906,0.023,95.73,Petrol,1,ssangyong-tivoli-v1
+385,Toyota,MR2,TOYOTA MR2,7902,0.023,95.76,Petrol,0,
+386,Dacia,Spring,DACIA SPRING,7739,0.022,95.78,Battery electric,0,
+387,Ssangyong,Korando,SSANGYONG KORANDO,7693,0.022,95.8,Diesel,0,
+388,Peugeot,Horizon,PEUGEOT HORIZON,7635,0.022,95.82,Diesel,0,
+389,Jeep,Wrangler,JEEP WRANGLER,7509,0.022,95.84,Petrol,6,jeep-wrangler-v1|jeep-wrangler-1997-w8-v1|jeep-wrangler-jpw1-v1|jeep-wrangler-2023-jpw1-v1|jeep-wrangler-jpw1-v2|jeep-wrangler-2007-jpw1-v1
+390,Honda,Zr-V Sport,HONDA ZR-V SPORT,7481,0.021,95.86,Hybrid electric (petrol),1,honda-zr-v-2023-v1
+391,Volvo,S90,VOLVO S90,7449,0.021,95.89,Diesel,0,
+392,BMW,8 Series,BMW 8 SERIES,7415,0.021,95.91,Petrol,2,bmw-8-series-v1|bmw-8-series-2020-bm2-v1
+393,BMW,M5,BMW M5,7356,0.021,95.93,Petrol,4,bmw-m5-f90-undated-v1|bmw-m5-2024-bm2-v1|bmw-m5-2003-bm2-v1|bmw-m5-2025-bm3-v1
+394,Subaru,XV,SUBARU XV,7205,0.021,95.95,Petrol,1,subaru-xv-v1
+395,MG,TF,MG TF,7195,0.021,95.97,Petrol,0,
+396,Jaguar,S Type,JAGUAR S TYPE,7164,0.021,95.99,Petrol,0,
+397,Toyota,Celica,TOYOTA CELICA,7104,0.02,96.01,Petrol,1,toyota-celica-1981-tw1-v1
+398,Hyundai,I800,HYUNDAI I800,7092,0.02,96.03,Diesel,0,
+399,Citroen,Spacetourer,CITROEN SPACETOURER,7088,0.02,96.05,Diesel,0,
+400,Volvo,C40,VOLVO C40,6996,0.02,96.07,Battery electric,0,
+401,Mazda,5,MAZDA 5,6995,0.02,96.09,Petrol,0,
+402,BMW,X7,BMW X7,6786,0.019,96.11,Hybrid electric (petrol),2,bmw-x7-v1|bmw-x7-m60i-bm1-v1
+403,Volvo,EX40,VOLVO EX40,6719,0.019,96.13,Battery electric,0,
+404,Volkswagen,Multivan,VOLKSWAGEN MULTIVAN,6566,0.019,96.15,Plug-in hybrid electric (petrol),1,volkswagen-multivan-v1
+405,Mazda,MX-30,MAZDA MX-30,6553,0.019,96.17,Battery electric,1,mazda-mx-3-mzw1-v1
+406,DS,DS4,DS DS4,6532,0.019,96.19,Diesel,0,
+407,Lexus,ES,LEXUS ES,6530,0.019,96.2,Hybrid electric (petrol),1,lexus-es-v1
+408,Lexus,GS,LEXUS GS,6474,0.019,96.22,Hybrid electric (petrol),0,
+409,Suzuki,Baleno,SUZUKI BALENO,6429,0.018,96.24,Petrol,1,suzuki-baleno-v1
+410,Peugeot,408,PEUGEOT 408,6375,0.018,96.26,Petrol,0,
+411,Citroen,E-C3,CITROEN E-C3,6257,0.018,96.28,Battery electric,1,citroen-e-c3-v1
+412,Toyota,GT86,TOYOTA GT86,6241,0.018,96.3,Petrol,2,toyota-gt86-v1|toyota-gt86-tw1-v1
+413,Mercedes,200,MERCEDES 200,6215,0.018,96.31,Petrol,0,
+414,Mitsubishi,Lancer,MITSUBISHI LANCER,6137,0.018,96.33,Petrol,1,mitsubishi-lancer-evolution-v1
+415,Jaguar,E Type,JAGUAR E TYPE,6126,0.018,96.35,Petrol,3,jaguar-e-type-v1|jaguar-e-type-1963-jgw1-v1|jaguar-e-type-1971-jgw1-v1
+416,Audi,RS4,AUDI RS4,6104,0.017,96.37,Petrol,2,audi-rs4-v1|audi-rs4-v2
+417,Chevrolet,Matiz,CHEVROLET MATIZ,6040,0.017,96.38,Petrol,0,
+418,Hyundai,Inster,HYUNDAI INSTER,6017,0.017,96.4,Battery electric,0,
+419,Triumph,Stag,TRIUMPH STAG,5992,0.017,96.42,Petrol,0,
+420,Tesla,Model X,TESLA MODEL X,5947,0.017,96.43,Battery electric,1,tesla-model-x-v1
+421,Chevrolet,Aveo,CHEVROLET AVEO,5921,0.017,96.45,Petrol,0,
+422,Leapmotor,C10,LEAPMOTOR C10,5878,0.017,96.47,Battery electric,0,
+423,Citroen,C2,CITROEN C2,5869,0.017,96.49,Petrol,0,
+424,Renault,Laguna,RENAULT LAGUNA,5846,0.017,96.5,Diesel,0,
+425,KIA,EV9,KIA EV9,5802,0.017,96.52,Battery electric,1,kia-ev9-v1
+426,Audi,RS6,AUDI RS6,5657,0.016,96.54,Petrol,1,audi-rs6-v1
+427,Omoda,5 Knight Auto,OMODA 5 KNIGHT AUTO,5648,0.016,96.55,Petrol,0,
+428,Cupra,Ateca,CUPRA ATECA,5616,0.016,96.57,Petrol,1,cupra-ateca-v1
+429,DS,DS7,DS DS7,5585,0.016,96.58,Diesel,0,
+430,Dacia,Bigster,DACIA BIGSTER,5581,0.016,96.6,Hybrid electric (petrol),0,
+431,Volvo,C70,VOLVO C70,5578,0.016,96.62,Diesel,1,volvo-c70-2000-vow1-v1
+432,Mini,Roadster,MINI ROADSTER,5537,0.016,96.63,Petrol,0,
+433,Saab,9-5,SAAB 9-5,5514,0.016,96.65,Petrol,0,
+434,Volvo,S80,VOLVO S80,5421,0.016,96.66,Diesel,0,
+435,Abarth,500,ABARTH 500,5401,0.015,96.68,Petrol,0,
+436,Toyota,Estima,TOYOTA ESTIMA,5357,0.015,96.69,Hybrid electric (petrol),0,
+437,Rover,75,ROVER 75,5151,0.015,96.71,Diesel,0,
+438,Toyota,GR Yaris,TOYOTA GR YARIS,5129,0.015,96.72,Petrol,2,toyota-yaris-v1|toyota-gr-yaris-2021-tw2-v1
+439,Suzuki,Wagon R+,SUZUKI WAGON R+,5124,0.015,96.74,Petrol,0,
+440,Seat,Toledo,SEAT TOLEDO,5122,0.015,96.75,Petrol,2,seat-toledo-1999-st1-v1|seat-toledo-2004-st1-v1
+441,Peugeot,407,PEUGEOT 407,5087,0.015,96.77,Diesel,1,peugeot-407-w9-v1
+442,Omoda,9 Noble Phev Auto,OMODA 9 NOBLE PHEV AUTO,5087,0.015,96.78,Plug-in hybrid electric (petrol),0,
+443,Audi,A2,AUDI A2,5048,0.014,96.8,Diesel,1,audi-a2-v1
+444,Mini,First,MINI FIRST,4944,0.014,96.81,Petrol,0,
+445,Ford,Cortina,FORD CORTINA,4931,0.014,96.82,Petrol,0,
+446,KIA,EV4,KIA EV4,4883,0.014,96.84,Battery electric,0,
+447,Lexus,RZ,LEXUS RZ,4776,0.014,96.85,Battery electric,0,
+448,Toyota,Urban Cruiser,TOYOTA URBAN CRUISER,4760,0.014,96.87,Diesel,0,
+449,KIA,EV5,KIA EV5,4740,0.014,96.88,Battery electric,0,
+450,Alfa Romeo,Stelvio,ALFA ROMEO STELVIO,4735,0.014,96.89,Petrol,0,
+451,Ford,Transit Custom,FORD TRANSIT CUSTOM,4719,0.014,96.91,Diesel,0,
+452,Triumph,Spitfire,TRIUMPH SPITFIRE,4672,0.013,96.92,Petrol,0,
+453,Infiniti,Q30,INFINITI Q30,4647,0.013,96.93,Diesel,0,
+454,Seat,Exeo,SEAT EXEO,4575,0.013,96.95,Diesel,2,seat-exeo-2009-st1-v1|seat-exeo-2009-st1-v2
+455,Honda,Fr-V,HONDA FR-V,4559,0.013,96.96,Petrol,0,
+456,Daihatsu,Sirion,DAIHATSU SIRION,4518,0.013,96.97,Petrol,0,
+457,Lotus,Elise,LOTUS ELISE,4507,0.013,96.98,Petrol,0,
+458,Suzuki,Swace,SUZUKI SWACE,4467,0.013,97.0,Hybrid electric (petrol),1,suzuki-swace-v1
+459,Audi,SQ7,AUDI SQ7,4390,0.013,97.01,Diesel,0,
+460,Bentley,Bentayga,BENTLEY BENTAYGA,4281,0.012,97.02,Petrol,1,bentley-bentayga-v1
+461,Mercedes-Benz,EQE Class,MERCEDES-BENZ EQE CLASS,4150,0.012,97.03,Battery electric,1,mercedes-benz-eqe-w8-v1
+462,Shineray,Starray,SHINERAY STARRAY,4127,0.012,97.05,Plug-in hybrid electric (petrol),0,
+463,Honda,S2000,HONDA S2000,4102,0.012,97.06,Petrol,2,honda-s2000-v1|honda-s2000-1999-hw1-v1
+464,Vauxhall,Tigra,VAUXHALL TIGRA,4098,0.012,97.07,Petrol,0,
+465,Mercedes,EQE Class,MERCEDES EQE CLASS,4084,0.012,97.08,Battery electric,1,mercedes-benz-eqe-w8-v1
+466,Morris,Mini,MORRIS MINI,4062,0.012,97.09,Petrol,0,
+467,Triumph,TR6,TRIUMPH TR6,4057,0.012,97.1,Petrol,0,
+468,Volkswagen,Lupo,VOLKSWAGEN LUPO,4055,0.012,97.12,Petrol,0,
+469,Chrysler,Ypsilon,CHRYSLER YPSILON,4039,0.012,97.13,Petrol,0,
+470,Mercedes,Viano,MERCEDES VIANO,3964,0.011,97.14,Diesel,0,
+471,MG,MGF,MG MGF,3896,0.011,97.15,Petrol,0,
+472,Hyundai,Amica,HYUNDAI AMICA,3878,0.011,97.16,Petrol,0,
+473,Peugeot,Traveller,PEUGEOT TRAVELLER,3864,0.011,97.17,Diesel,0,
+474,Volkswagen,Bora,VOLKSWAGEN BORA,3824,0.011,97.18,Diesel,0,
+475,Hyundai,Coupe,HYUNDAI COUPE,3743,0.011,97.19,Petrol,0,
+476,Aston Martin,DB9,ASTON MARTIN DB9,3734,0.011,97.21,Petrol,0,
+477,Chrysler,Grand Voyager,CHRYSLER GRAND VOYAGER,3715,0.011,97.22,Diesel,0,
+478,Chevrolet,Cruze,CHEVROLET CRUZE,3695,0.011,97.23,Petrol,0,
+479,Audi,RS5,AUDI RS5,3690,0.011,97.24,Petrol,2,audi-rs5-2021-ad1-v1|audi-rs5-2020-ad1-v1
+480,Citroen,DS5,CITROEN DS5,3633,0.01,97.25,Diesel,0,
+481,Ssangyong,Rexton,SSANGYONG REXTON,3622,0.01,97.26,Diesel,0,
+482,Toyota,Proace,TOYOTA PROACE,3609,0.01,97.27,Diesel,1,toyota-proace-v1
+483,Mercedes,GLS Class,MERCEDES GLS CLASS,3582,0.01,97.28,Diesel,1,mercedes-benz-gls-2022-v1
+484,Nissan,Pathfinder,NISSAN PATHFINDER,3563,0.01,97.29,Diesel,2,nissan-pathfinder-nw1-v1|nissan-pathfinder-2024-nw1-v1
+485,Fiat,Qubo,FIAT QUBO,3562,0.01,97.3,Diesel,0,
+486,Audi,R8,AUDI R8,3553,0.01,97.31,Petrol,0,
+487,Subaru,Legacy,SUBARU LEGACY,3539,0.01,97.32,Petrol,1,subaru-legacy-2010-sbw1-v1
+488,Honda,Cr-Z,HONDA CR-Z,3528,0.01,97.33,Hybrid electric (petrol),1,honda-cr-z-2011-hw1-v1
+489,Renault,Koleos,RENAULT KOLEOS,3518,0.01,97.34,Diesel,1,renault-koleos-2008-w7-v1
+490,Smart,1,SMART 1,3449,0.01,97.35,Battery electric,0,
+491,Nissan,350,NISSAN 350,3438,0.01,97.36,Petrol,1,nissan-350z-2006-v1
+492,Audi,RSQ3,AUDI RSQ3,3425,0.01,97.37,Petrol,0,
+493,Ford,Independence,FORD INDEPENDENCE,3412,0.01,97.38,Diesel,0,
+494,Renault,4,RENAULT 4,3349,0.01,97.39,Battery electric,0,
+495,Chevrolet,Captiva,CHEVROLET CAPTIVA,3341,0.01,97.4,Diesel,0,
+496,Smart,City,SMART CITY,3325,0.01,97.41,Petrol,0,
+497,Peugeot,106,PEUGEOT 106,3312,0.009,97.42,Petrol,0,
+498,Maserati,Ghibli,MASERATI GHIBLI,3249,0.009,97.43,Diesel,0,
+499,Mercedes,CLE Class,MERCEDES CLE CLASS,3237,0.009,97.44,Hybrid electric (petrol),0,
+500,Chrysler,300C,CHRYSLER 300C,3217,0.009,97.44,Diesel,1,chrysler-300c-crw1-v1
+501,Alpine,A290,ALPINE A290,3192,0.009,97.45,Battery electric,0,
+502,KIA,Sedona,KIA SEDONA,3161,0.009,97.46,Diesel,0,
+503,Nissan,NV200,NISSAN NV200,3133,0.009,97.47,Diesel,2,nissan-nv200-v1|nissan-nv200-2010-w5-v1
+504,Polestar,3,POLESTAR 3,3107,0.009,97.48,Battery electric,0,
+505,Leapmotor,B10,LEAPMOTOR B10,3037,0.009,97.49,Battery electric,0,
+506,Alfa Romeo,Junior,ALFA ROMEO JUNIOR,2985,0.009,97.5,Hybrid electric (petrol),1,alfa-romeo-milano-2023-v1
+507,Maserati,Levante,MASERATI LEVANTE,2983,0.009,97.51,Petrol,1,maserati-levante-v1
+508,Peugeot,Expert,PEUGEOT EXPERT,2974,0.009,97.52,Diesel,0,
+509,Citroen,2CV,CITROEN 2CV,2954,0.008,97.52,Petrol,0,
+510,Fiat,124,FIAT 124,2896,0.008,97.53,Petrol,2,fiat-124-1966-fw1-v1|fiat-124-1972-fw1-v1
+511,Renault,Master,RENAULT MASTER,2889,0.008,97.54,Diesel,1,renault-master-v1
+512,Mercedes,300,MERCEDES 300,2880,0.008,97.55,Petrol,1,mercedes-benz-300-sl-mw1-v1
+513,Daihatsu,Terios,DAIHATSU TERIOS,2850,0.008,97.56,Petrol,0,
+514,BMW,Z4 M,BMW Z4 M,2836,0.008,97.56,Petrol,2,bmw-z4-2008-v1|bmw-z4-m40i-2019-v1
+515,Lotus,Eletre,LOTUS ELETRE,2828,0.008,97.57,Battery electric,0,
+516,Mercedes,GL Class,MERCEDES GL CLASS,2781,0.008,97.58,Diesel,2,mercedes-benz-gl-class-2011-mw1-v1|mercedes-benz-gl-class-2012-mw1-v1
+517,Chevrolet,Orlando,CHEVROLET ORLANDO,2779,0.008,97.59,Diesel,0,
+518,Genesis,GV60,GENESIS GV60,2743,0.008,97.6,Battery electric,0,
+519,Lotus,Elan,LOTUS ELAN,2728,0.008,97.6,Petrol,0,
+520,Peugeot,306,PEUGEOT 306,2705,0.008,97.61,Petrol,0,
+521,Audi,S1,AUDI S1,2684,0.008,97.62,Petrol,1,audi-s1-ad1-v1
+522,Shineray,EX5,SHINERAY EX5,2683,0.008,97.63,Battery electric,0,
+523,Alfa Romeo,Tonale,ALFA ROMEO TONALE,2676,0.008,97.64,Hybrid electric (petrol),1,alfa-romeo-tonale-v1
+524,Alfa Romeo,Spider,ALFA ROMEO SPIDER,2673,0.008,97.64,Petrol,0,
+525,Citroen,E-Berlingo,CITROEN E-BERLINGO,2656,0.008,97.65,Battery electric,0,
+526,MG,GS,MG GS,2656,0.008,97.66,Petrol,0,
+527,Suzuki,E Vitara,SUZUKI E VITARA,2655,0.008,97.67,Battery electric,0,
+528,Mercedes-Benz,E Class,MERCEDES-BENZ E CLASS,2651,0.008,97.67,Plug-in hybrid electric (petrol),6,mercedes-benz-e-class-w213-undated-v1|mercedes-benz-e-class-w12-v1|mercedes-benz-e-class-2022-w12-v1|mercedes-benz-e-class-mw1-v1|mercedes-benz-e-class-mw1-v5|mercedes-benz-e-class-2010-mw1-v1
+529,Lexus,LS,LEXUS LS,2645,0.008,97.68,Petrol,1,lexus-ls-2018-w7-v1
+530,Triumph,Herald,TRIUMPH HERALD,2645,0.008,97.69,Petrol,0,
+531,Fiat,Bravo,FIAT BRAVO,2638,0.008,97.7,Petrol,1,fiat-bravo-2011-w6-v1
+532,Ford,Anglia,FORD ANGLIA,2628,0.008,97.7,Petrol,0,
+533,Toyota,Previa,TOYOTA PREVIA,2611,0.007,97.71,Petrol,0,
+534,Vauxhall,Cascada,VAUXHALL CASCADA,2601,0.007,97.72,Diesel,0,
+535,Peugeot,205,PEUGEOT 205,2555,0.007,97.73,Petrol,3,peugeot-205-v1|peugeot-205-1997-pw1-v1|peugeot-205-pw1-v1
+536,Aston Martin,DB11,ASTON MARTIN DB11,2483,0.007,97.73,Petrol,0,
+537,Mercedes-Benz,EQA Class,MERCEDES-BENZ EQA CLASS,2474,0.007,97.74,Battery electric,0,
+538,BMW,X3 M,BMW X3 M,2463,0.007,97.75,Petrol,0,
+539,Ford,Sierra,FORD SIERRA,2442,0.007,97.75,Petrol,0,
+540,Omoda,7,OMODA 7,2432,0.007,97.76,Plug-in hybrid electric (petrol),0,
+541,Renault,Rafale,RENAULT RAFALE,2419,0.007,97.77,Hybrid electric (petrol),0,
+542,Austin-Morris,Mini,AUSTIN-MORRIS MINI,2394,0.007,97.77,Petrol,0,
+543,Toyota,Starlet,TOYOTA STARLET,2384,0.007,97.78,Petrol,0,
+544,Citroen,E-C4,CITROEN E-C4,2371,0.007,97.79,Battery electric,0,
+545,Ssangyong,Rodius,SSANGYONG RODIUS,2336,0.007,97.8,Diesel,0,
+546,Lexus,RC,LEXUS RC,2313,0.007,97.8,Hybrid electric (petrol),1,lexus-rc-v1
+547,Lamborghini,Urus,LAMBORGHINI URUS,2295,0.007,97.81,Petrol,1,lamborghini-urus-x-2017-2019-v1
+548,Peugeot,Boxer,PEUGEOT BOXER,2293,0.007,97.81,Diesel,1,peugeot-boxer-v1
+549,Audi,SQ2,AUDI SQ2,2261,0.006,97.82,Petrol,0,
+550,BYD,Atto 2,BYD ATTO 2,2251,0.006,97.83,Battery electric,1,byd-atto-2-2024-bw1-v1
+551,Mercedes,190,MERCEDES 190,2246,0.006,97.83,Petrol,0,
+552,Mercedes-Benz,EQB Class,MERCEDES-BENZ EQB CLASS,2241,0.006,97.84,Battery electric,0,
+553,Hyundai,Veloster,HYUNDAI VELOSTER,2233,0.006,97.85,Petrol,2,hyundai-veloster-n-2022-hyw1-v1|hyundai-veloster-turbo-2013-hyw1-v1
+554,MG,IM5,MG IM5,2231,0.006,97.85,Battery electric,0,
+555,Toyota,Supra,TOYOTA SUPRA,2197,0.006,97.86,Petrol,3,toyota-gr-supra-v1|toyota-supra-tw1-v1|toyota-supra-tw1-v2
+556,Infiniti,Q50,INFINITI Q50,2183,0.006,97.87,Diesel,0,
+557,Citroen,Saxo,CITROEN SAXO,2166,0.006,97.87,Petrol,0,
+558,Mercedes-Benz,V Class,MERCEDES-BENZ V CLASS,2144,0.006,97.88,Diesel,1,mercedes-benz-v-class-v1
+559,BMW,I7,BMW I7,2136,0.006,97.88,Battery electric,1,bmw-i7-2023-bm3-v1
+560,KIA,Stinger,KIA STINGER,2133,0.006,97.89,Petrol,1,kia-stinger-v1
+561,Porsche,944,PORSCHE 944,2132,0.006,97.9,Petrol,1,porsche-944-1991-pw2-v1
+562,Nissan,370,NISSAN 370,2130,0.006,97.9,Petrol,6,nissan-370z-2020-nw1-v1|nissan-370z-2018-nw1-v1|nissan-370z-nw1-v1|nissan-370z-2013-nw1-v1|nissan-370z-2015-nw1-v1|nissan-370z-2018-nw1-v2
+563,Hyundai,Matrix,HYUNDAI MATRIX,2129,0.006,97.91,Petrol,0,
+564,Austin,Seven,AUSTIN SEVEN,2123,0.006,97.92,Petrol,0,
+565,Toyota,Noah,TOYOTA NOAH,2123,0.006,97.92,Hybrid electric (petrol),0,
+566,Austin,Healey,AUSTIN HEALEY,2122,0.006,97.93,Petrol,0,
+567,TVR,Chimaera,TVR CHIMAERA,2107,0.006,97.93,Petrol,0,
+568,Ford,Transit,FORD TRANSIT,2098,0.006,97.94,Diesel,1,ford-transit-courier-2025-fow1-v1
+569,Nissan,Gt-R,NISSAN GT-R,2093,0.006,97.95,Petrol,27,nissan-gt-r-v1|nissan-gt-r-nw1-v1|nissan-gt-r-2002-nw1-v1|nissan-gt-r-2018-nw1-v1|nissan-gt-r-1999-nw1-v1|nissan-gt-r-nw1-v2
+570,Citroen,Nemo,CITROEN NEMO,2077,0.006,97.95,Diesel,0,
+571,Alfa Romeo,159,ALFA ROMEO 159,2072,0.006,97.96,Diesel,0,
+572,Mercedes,EQS Class,MERCEDES EQS CLASS,2046,0.006,97.96,Battery electric,0,
+573,Mercedes,CL Class,MERCEDES CL CLASS,2042,0.006,97.97,Petrol,0,
+574,BMW,I8,BMW I8,2036,0.006,97.97,Plug-in hybrid electric (petrol),1,bmw-i8-bm3-v1
+575,Morgan,4/4,MORGAN 4/4,2034,0.006,97.98,Petrol,0,
+576,Triumph,TR4,TRIUMPH TR4,2008,0.006,97.99,Petrol,0,
+577,Peugeot,406,PEUGEOT 406,1996,0.006,97.99,Diesel,0,
+578,Volvo,940,VOLVO 940,1989,0.006,98.0,Petrol,0,
+579,Mercedes,Sprinter,MERCEDES SPRINTER,1985,0.006,98.0,Diesel,2,mercedes-benz-sprinter-v1|mercedes-benz-sprinter-w7-v1
+580,Mazda,RX-8,MAZDA RX-8,1943,0.006,98.01,Petrol,2,mazda-rx-8-v1|mazda-rx-8-2011-mzw1-v1
+581,Ford,Popular,FORD POPULAR,1925,0.006,98.01,Petrol,0,
+582,Smart,Roadster,SMART ROADSTER,1910,0.005,98.02,Petrol,0,
+583,Changan,Deepal,CHANGAN DEEPAL,1903,0.005,98.03,Battery electric,0,
+584,Rover,25,ROVER 25,1870,0.005,98.03,Petrol,0,
+585,Aston Martin,DBX,ASTON MARTIN DBX,1867,0.005,98.04,Petrol,1,aston-martin-dbx-v1
+586,Leapmotor,T03,LEAPMOTOR T03,1851,0.005,98.04,Battery electric,0,
+587,Volkswagen,California,VOLKSWAGEN CALIFORNIA,1843,0.005,98.05,Diesel,0,
+588,Nissan,Primera,NISSAN PRIMERA,1839,0.005,98.05,Petrol,1,nissan-primera-1990-nw1-v1
+589,MG,A,MG A,1834,0.005,98.06,Petrol,0,
+590,Audi,S6,AUDI S6,1827,0.005,98.06,Petrol,0,
+591,Peugeot,Bipper,PEUGEOT BIPPER,1773,0.005,98.07,Diesel,0,
+592,Genesis,GV70,GENESIS GV70,1769,0.005,98.07,Battery electric,0,
+593,Toyota,Vellfire,TOYOTA VELLFIRE,1764,0.005,98.08,Petrol,1,toyota-vellfire-v1
+594,BMW,X5 M,BMW X5 M,1758,0.005,98.08,Petrol,1,bmw-x5-m-2020-bm3-v1
+595,Saab,900,SAAB 900,1754,0.005,98.09,Petrol,0,
+596,Renault,Wind Roadster,RENAULT WIND ROADSTER,1740,0.005,98.09,Petrol,0,
+597,Honda,Stepwagon,HONDA STEPWAGON,1725,0.005,98.1,Petrol,0,
+598,Chevrolet GMC,Corvette,CHEVROLET GMC CORVETTE,1718,0.005,98.1,Petrol,0,
+599,Citroen,Dispatch,CITROEN DISPATCH,1709,0.005,98.11,Diesel,0,
+600,Audi,RSQ8,AUDI RSQ8,1709,0.005,98.11,Petrol,0,
+601,Abarth,Spider,ABARTH SPIDER,1707,0.005,98.12,Petrol,0,
+602,Alpine,A110,ALPINE A110,1680,0.005,98.12,Petrol,1,alpine-a110-v1
+603,Aston Martin,DBS,ASTON MARTIN DBS,1669,0.005,98.13,Petrol,1,aston-martin-dbs-v1
+604,Reliant,Scimitar,RELIANT SCIMITAR,1656,0.005,98.13,Petrol,0,
+605,Triumph,Vitesse,TRIUMPH VITESSE,1651,0.005,98.14,Petrol,0,
+606,MCC,Smart,MCC SMART,1650,0.005,98.14,Petrol,0,
+607,Peugeot,Independence,PEUGEOT INDEPENDENCE,1625,0.005,98.15,Diesel,0,
+608,Chrysler,Crossfire,CHRYSLER CROSSFIRE,1620,0.005,98.15,Petrol,0,
+609,Morgan,Plus Four,MORGAN PLUS FOUR,1619,0.005,98.16,Petrol,0,
+610,Subaru,WRX,SUBARU WRX,1593,0.005,98.16,Petrol,1,subaru-wrx-v2
+611,Ineos,Grenadier,INEOS GRENADIER,1569,0.004,98.16,Petrol,0,
+612,Mercedes,G Class,MERCEDES G CLASS,1541,0.004,98.17,Diesel,1,mercedes-benz-g-class-mw1-v1
+613,MG,ZT,MG ZT,1537,0.004,98.17,Petrol,0,
+614,BMW,XM,BMW XM,1523,0.004,98.18,Plug-in hybrid electric (petrol),1,bmw-xm-v1
+615,Triumph,TR7,TRIUMPH TR7,1514,0.004,98.18,Petrol,0,
+616,MG,S6,MG S6,1503,0.004,98.19,Battery electric,0,
+617,Lexus,SC,LEXUS SC,1496,0.004,98.19,Petrol,0,
+618,Rover,3500,ROVER 3500,1496,0.004,98.19,Petrol,0,
+619,Subaru,Crosstrek,SUBARU CROSSTREK,1495,0.004,98.2,Hybrid electric (petrol),0,
+620,Rover,Range Rover,ROVER RANGE ROVER,1481,0.004,98.2,Petrol,0,
+621,Perodua,Myvi,PERODUA MYVI,1467,0.004,98.21,Petrol,0,
+622,Toyota,GR86,TOYOTA GR86,1463,0.004,98.21,Petrol,2,toyota-gr86-v1|toyota-gr86-2023-tw1-v1
+623,Aston Martin,Vanquish,ASTON MARTIN VANQUISH,1456,0.004,98.22,Petrol,0,
+624,Ferrari,488,FERRARI 488,1449,0.004,98.22,Petrol,0,
+625,Abarth,695,ABARTH 695,1447,0.004,98.22,Petrol,0,
+626,Toyota,Camry,TOYOTA CAMRY,1441,0.004,98.23,Hybrid electric (petrol),3,toyota-camry-v1|toyota-camry-1997-tw1-v1|toyota-camry-2007-tw1-v1
+627,Aston Martin,DB7,ASTON MARTIN DB7,1424,0.004,98.23,Petrol,0,
+628,Chrysler,PT Cruiser,CHRYSLER PT CRUISER,1422,0.004,98.24,Petrol,1,chrysler-pt-cruiser-2005-crw1-v1
+629,Mazda,CX-80,MAZDA CX-80,1416,0.004,98.24,Plug-in hybrid electric (petrol),1,mazda-cx-8-2020-mzw1-v1
+630,Austin,A40,AUSTIN A40,1415,0.004,98.24,Petrol,0,
+631,KGM,Tivoli,KGM TIVOLI,1415,0.004,98.25,Petrol,0,
+632,Rover,100 Series,ROVER 100 SERIES,1403,0.004,98.25,Petrol,0,
+633,Maserati,Grecale,MASERATI GRECALE,1398,0.004,98.26,Hybrid electric (petrol),0,
+634,Audi,SQ8,AUDI SQ8,1382,0.004,98.26,Petrol,1,audi-sq8-e-tron-2023-v1
+635,Sunbeam,Alpine,SUNBEAM ALPINE,1379,0.004,98.26,Petrol,0,
+636,MG,S9,MG S9,1377,0.004,98.27,Plug-in hybrid electric (petrol),0,
+637,Ford,Granada,FORD GRANADA,1371,0.004,98.27,Petrol,0,
+638,Nissan,Elgrand,NISSAN ELGRAND,1370,0.004,98.28,Petrol,2,nissan-elgrand-v1|nissan-elgrand-2006-nw1-v1
+639,Chevrolet,Trax,CHEVROLET TRAX,1363,0.004,98.28,Petrol,0,
+640,Mercedes,R Class,MERCEDES R CLASS,1363,0.004,98.28,Diesel,0,
+641,Volvo,EX90,VOLVO EX90,1352,0.004,98.29,Battery electric,0,
+642,Rover,200 Series,ROVER 200 SERIES,1339,0.004,98.29,Petrol,0,
+643,Audi,Ttrs,AUDI TTRS,1337,0.004,98.3,Petrol,1,audi-tt-rs-2006-ad1-v1
+644,Xpeng,G6 Long Range,XPENG G6 LONG RANGE,1335,0.004,98.3,Battery electric,0,
+645,Ferrari,California,FERRARI CALIFORNIA,1328,0.004,98.3,Petrol,0,
+646,MG,IM6,MG IM6,1312,0.004,98.31,Battery electric,0,
+647,Mercedes-Benz,GLE Class,MERCEDES-BENZ GLE CLASS,1305,0.004,98.31,Hybrid electric (diesel),1,mercedes-benz-gle-v1
+648,Seat,Arosa,SEAT AROSA,1299,0.004,98.31,Petrol,0,
+649,MG,ZR,MG ZR,1295,0.004,98.32,Petrol,0,
+650,Maserati,Granturismo,MASERATI GRANTURISMO,1288,0.004,98.32,Petrol,0,
+651,Ford,Freedom,FORD FREEDOM,1284,0.004,98.33,Diesel,0,
+652,Honda,FIT,HONDA FIT,1284,0.004,98.33,Hybrid electric (petrol),1,honda-jazz-2018-v1
+653,Leyland Cars,Mini,LEYLAND CARS MINI,1284,0.004,98.33,Petrol,0,
+654,Chevrolet,Kalos,CHEVROLET KALOS,1284,0.004,98.34,Petrol,0,
+655,Lotus,Emira V6,LOTUS EMIRA V6,1280,0.004,98.34,Petrol,1,lotus-emira-v1
+656,Alfa Romeo,Brera,ALFA ROMEO BRERA,1279,0.004,98.34,Petrol,0,
+657,Mercedes,500,MERCEDES 500,1279,0.004,98.35,Petrol,0,
+658,Volvo,850,VOLVO 850,1277,0.004,98.35,Petrol,0,
+659,Omoda,5,OMODA 5,1275,0.004,98.35,Hybrid electric (petrol),0,
+660,Austin,A35,AUSTIN A35,1271,0.004,98.36,Petrol,0,
+661,DS,DS5,DS DS5,1267,0.004,98.36,Diesel,0,
+662,Isuzu,Trooper,ISUZU TROOPER,1265,0.004,98.37,Diesel,0,
+663,Mercedes-Benz,GLB Class,MERCEDES-BENZ GLB CLASS,1261,0.004,98.37,Battery electric,0,
+664,Lotus,Exige,LOTUS EXIGE,1238,0.004,98.37,Petrol,0,
+665,Bentley,Flying Spur,BENTLEY FLYING SPUR,1231,0.004,98.38,Petrol,0,
+666,Toyota,Highlander,TOYOTA HIGHLANDER,1230,0.004,98.38,Hybrid electric (petrol),2,toyota-highlander-v1|toyota-highlander-2020-tw1-v1
+667,MG,C,MG C,1216,0.003,98.38,Petrol,0,
+668,Renault,Grand Espace,RENAULT GRAND ESPACE,1212,0.003,98.39,Diesel,0,
+669,Toyota,Alphard,TOYOTA ALPHARD,1197,0.003,98.39,Petrol,1,toyota-vellfire-v1
+670,Ferrari,458,FERRARI 458,1183,0.003,98.39,Petrol,0,
+671,Fiat,Grande Panda,FIAT GRANDE PANDA,1176,0.003,98.4,Hybrid electric (petrol),0,
+672,Lamborghini,Huracan,LAMBORGHINI HURACAN,1162,0.003,98.4,Petrol,0,
+673,Rover,45,ROVER 45,1151,0.003,98.4,Petrol,0,
+674,Triumph,GT6,TRIUMPH GT6,1142,0.003,98.41,Petrol,0,
+675,Peugeot,1007,PEUGEOT 1007,1131,0.003,98.41,Petrol,0,
+676,Smart,3,SMART 3,1130,0.003,98.41,Battery electric,0,
+677,MG,6,MG 6,1118,0.003,98.42,Petrol,0,
+678,Nissan,Cube,NISSAN CUBE,1117,0.003,98.42,Petrol,2,nissan-cube-nw1-v1|nissan-cube-2010-nw1-v1
+679,Alfa Romeo,GT,ALFA ROMEO GT,1113,0.003,98.42,Petrol,0,
+680,Suzuki,Across,SUZUKI ACROSS,1112,0.003,98.43,Plug-in hybrid electric (petrol),1,suzuki-across-v1
+681,Citroen,C-Crosser,CITROEN C-CROSSER,1111,0.003,98.43,Diesel,0,
+682,Land Rover,110,LAND ROVER 110,1109,0.003,98.43,Diesel,0,
+683,Porsche,Carrera,PORSCHE CARRERA,1101,0.003,98.44,Petrol,1,porsche-911-carrera-4s-v1
+684,MG,Roadster,MG ROADSTER,1100,0.003,98.44,Petrol,0,
+685,Jaguar,Sovereign,JAGUAR SOVEREIGN,1097,0.003,98.44,Petrol,0,
+686,Ford,Consul,FORD CONSUL,1094,0.003,98.45,Petrol,1,ford-consul-capri-fow1-v1
+687,Ford,Streetka,FORD STREETKA,1094,0.003,98.45,Petrol,0,
+688,Vauxhall,Cavalier,VAUXHALL CAVALIER,1093,0.003,98.45,Petrol,0,
+689,Bentley,Arnage,BENTLEY ARNAGE,1091,0.003,98.45,Petrol,0,
+690,Hillman,Minx,HILLMAN MINX,1089,0.003,98.46,Petrol,0,
+691,BMW,M6,BMW M6,1085,0.003,98.46,Petrol,2,bmw-m6-v1|bmw-m6-2004-bm2-v1
+692,Omoda,5 Comfort Auto,OMODA 5 COMFORT AUTO,1083,0.003,98.46,Petrol,0,
+693,Volvo,240,VOLVO 240,1081,0.003,98.47,Petrol,1,volvo-240-vow1-v1
+694,Maserati,Quattroporte,MASERATI QUATTROPORTE,1079,0.003,98.47,Petrol,0,
+695,Chevrolet,Lacetti,CHEVROLET LACETTI,1078,0.003,98.47,Petrol,0,
+696,Renault,GRD Modus,RENAULT GRD MODUS,1071,0.003,98.48,Petrol,0,
+697,Rover,2000 Series,ROVER 2000 SERIES,1069,0.003,98.48,Petrol,0,
+698,Vauxhall,Ampera,VAUXHALL AMPERA,1065,0.003,98.48,Range extended electric,0,
+699,Triumph,Dolomite,TRIUMPH DOLOMITE,1055,0.003,98.49,Petrol,0,
+700,Alfa Romeo,147,ALFA ROMEO 147,1046,0.003,98.49,Petrol,0,
+701,Morris,Oxford,MORRIS OXFORD,1044,0.003,98.49,Petrol,0,
+702,Hyundai,Accent,HYUNDAI ACCENT,1038,0.003,98.49,Petrol,1,hyundai-accent-2013-hyw1-v1
+703,Jeep,Patriot,JEEP PATRIOT,1033,0.003,98.5,Diesel,0,
+704,Honda,Prelude,HONDA PRELUDE,1030,0.003,98.5,Petrol,3,honda-prelude-1983-hw1-v1|honda-prelude-1978-hw1-v1|honda-prelude-1997-hw1-v1
+705,Audi,SQ6,AUDI SQ6,1018,0.003,98.5,Battery electric,0,
+706,Rolls Royce,Ghost,ROLLS ROYCE GHOST,1017,0.003,98.51,Petrol,1,rolls-royce-ghost-v1
+707,Daihatsu,Copen,DAIHATSU COPEN,1009,0.003,98.51,Petrol,0,
+708,BMW,X4 M,BMW X4 M,998,0.003,98.51,Petrol,0,
+709,Porsche,924,PORSCHE 924,986,0.003,98.51,Petrol,0,
+710,Triumph,TR3,TRIUMPH TR3,986,0.003,98.52,Petrol,0,
+711,Jaguar,Eagle,JAGUAR EAGLE,971,0.003,98.52,Diesel,0,
+712,ORA,Funky CAT,ORA FUNKY CAT,968,0.003,98.52,Battery electric,0,
+713,Daihatsu,Fourtrak,DAIHATSU FOURTRAK,968,0.003,98.53,Diesel,0,
+714,Volkswagen,Corrado,VOLKSWAGEN CORRADO,959,0.003,98.53,Petrol,0,
+715,KIA,K4,KIA K4,954,0.003,98.53,Hybrid electric (petrol),0,
+716,Ford,Prefect,FORD PREFECT,944,0.003,98.53,Petrol,0,
+717,Alfa Romeo,GTV,ALFA ROMEO GTV,938,0.003,98.54,Petrol,0,
+718,Audi,S8,AUDI S8,915,0.003,98.54,Petrol,1,audi-a8-2008-v1
+719,KIA,PV5,KIA PV5,905,0.003,98.54,Battery electric,0,
+720,Lotus,Esprit,LOTUS ESPRIT,905,0.003,98.54,Petrol,0,
+721,Rolls Royce,Cullinan,ROLLS ROYCE CULLINAN,905,0.003,98.55,Petrol,1,rolls-royce-cullinan-v1
+722,Ford,Zephyr,FORD ZEPHYR,902,0.003,98.55,Petrol,0,
+723,Dodge,Nitro,DODGE NITRO,892,0.003,98.55,Diesel,0,
+724,Mercedes,Citan,MERCEDES CITAN,888,0.003,98.55,Diesel,0,
+725,Mercedes-Benz,CLE Class,MERCEDES-BENZ CLE CLASS,883,0.003,98.56,Plug-in hybrid electric (petrol),0,
+726,Aston Martin,DB12,ASTON MARTIN DB12,881,0.003,98.56,Petrol,0,
+727,Subaru,Solterra,SUBARU SOLTERRA,880,0.003,98.56,Battery electric,0,
+728,Peugeot,4007,PEUGEOT 4007,879,0.003,98.56,Diesel,0,
+729,Mercedes-Benz,G Class,MERCEDES-BENZ G CLASS,878,0.003,98.57,Battery electric,1,mercedes-benz-g-class-mw1-v1
+730,Volkswagen,Karmann Ghia,VOLKSWAGEN KARMANN GHIA,877,0.003,98.57,Petrol,0,
+731,Ford,Allied,FORD ALLIED,875,0.003,98.57,Diesel,0,
+732,Ferrari,F430,FERRARI F430,873,0.003,98.57,Petrol,0,
+733,Land Rover,90,LAND ROVER 90,867,0.002,98.58,Diesel,0,
+734,Mercedes,EQV Class,MERCEDES EQV CLASS,865,0.002,98.58,Battery electric,1,mercedes-benz-eqv-2020-mw1-v1
+735,Subaru,BRZ,SUBARU BRZ,865,0.002,98.58,Petrol,5,subaru-brz-sbw1-v1|subaru-brz-2024-sbw1-v1|subaru-brz-2023-sbw1-v1|subaru-brz-2020-sbw1-v1|subaru-brz-2013-sbw1-v1
+736,Ferrari,296,FERRARI 296,861,0.002,98.58,Plug-in hybrid electric (petrol),0,
+737,ORA,03 Pure +,ORA 03 PURE +,847,0.002,98.59,Battery electric,0,
+738,Vauxhall,Victor,VAUXHALL VICTOR,846,0.002,98.59,Petrol,0,
+739,Jaguar,MK II,JAGUAR MK II,842,0.002,98.59,Petrol,0,
+740,MG,Td/Tf,MG TD/TF,841,0.002,98.59,Petrol,0,
+741,Vauxhall,Nova,VAUXHALL NOVA,825,0.002,98.6,Petrol,0,
+742,Mercedes,350,MERCEDES 350,822,0.002,98.6,Petrol,0,
+743,Ferrari,812,FERRARI 812,821,0.002,98.6,Petrol,1,ferrari-812-v1
+744,Riley,1.5,RILEY 1.5,816,0.002,98.6,Petrol,0,
+745,Ferrari,Roma,FERRARI ROMA,816,0.002,98.61,Petrol,1,ferrari-roma-v1
+746,Jaguar,240,JAGUAR 240,813,0.002,98.61,Petrol,0,
+747,Audi,RS7,AUDI RS7,812,0.002,98.61,Petrol,1,audi-rs7-v1
+748,Volvo,EC40,VOLVO EC40,810,0.002,98.61,Battery electric,0,
+749,Chevrolet GMC,Camaro,CHEVROLET GMC CAMARO,810,0.002,98.62,Petrol,0,
+750,Daimler,V8,DAIMLER V8,808,0.002,98.62,Petrol,0,
+751,Daihatsu,Charade,DAIHATSU CHARADE,807,0.002,98.62,Petrol,0,
+752,Vauxhall,Movano,VAUXHALL MOVANO,804,0.002,98.62,Diesel,0,
+753,MG,Magnette,MG MAGNETTE,799,0.002,98.62,Petrol,0,
+754,Ferrari,Portofino,FERRARI PORTOFINO,795,0.002,98.63,Petrol,0,
+755,Mazda,323,MAZDA 323,794,0.002,98.63,Petrol,2,mazda-323-mzw1-v1|mazda-323-1978-mzw1-v1
+756,BMW,M8,BMW M8,794,0.002,98.63,Petrol,0,
+757,Toyota,Vitz,TOYOTA VITZ,789,0.002,98.63,Petrol,0,
+758,Volkswagen,1300,VOLKSWAGEN 1300,788,0.002,98.64,Petrol,0,
+759,Jaguar,340,JAGUAR 340,787,0.002,98.64,Petrol,0,
+760,Austin,A30,AUSTIN A30,784,0.002,98.64,Petrol,0,
+761,Ford,Zodiac,FORD ZODIAC,783,0.002,98.64,Petrol,0,
+762,Porsche,928,PORSCHE 928,780,0.002,98.65,Petrol,0,
+763,Fiat,Seicento,FIAT SEICENTO,778,0.002,98.65,Petrol,0,
+764,Rolls Royce,Phantom,ROLLS ROYCE PHANTOM,773,0.002,98.65,Petrol,0,
+765,KIA,EV2,KIA EV2,768,0.002,98.65,Battery electric,0,
+766,Audi,Cabriolet,AUDI CABRIOLET,767,0.002,98.65,Petrol,0,
+767,Hillman,IMP,HILLMAN IMP,752,0.002,98.66,Petrol,0,
+768,Subaru,Levorg,SUBARU LEVORG,749,0.002,98.66,Petrol,0,
+769,Mercedes-Benz,AMG G Class,MERCEDES-BENZ AMG G CLASS,746,0.002,98.66,Hybrid electric (petrol),0,
+770,Mercedes-Benz,C Class,MERCEDES-BENZ C CLASS,737,0.002,98.66,Plug-in hybrid electric (petrol),5,mercedes-benz-c-class-v1|mercedes-benz-c-class-w202-v1|mercedes-benz-c-class-w12-v1|mercedes-benz-c-class-mw1-v2|mercedes-benz-c-class-mw1-v3
+771,Mitsubishi,Space Star,MITSUBISHI SPACE STAR,730,0.002,98.66,Petrol,1,mitsubishi-mirage-v1
+772,Triumph,2000,TRIUMPH 2000,730,0.002,98.67,Petrol,0,
+773,Lotus,Evora,LOTUS EVORA,724,0.002,98.67,Petrol,0,
+774,Audi,Allroad,AUDI ALLROAD,718,0.002,98.67,Diesel,0,
+775,Toyota,Aqua,TOYOTA AQUA,715,0.002,98.67,Hybrid electric (petrol),0,
+776,Renault,Espace,RENAULT ESPACE,708,0.002,98.67,Diesel,0,
+777,MG,Cyberster,MG CYBERSTER,707,0.002,98.68,Battery electric,1,mg-cyberster-v1
+778,Alfa Romeo,2000,ALFA ROMEO 2000,707,0.002,98.68,Petrol,0,
+779,Nissan,Terrano,NISSAN TERRANO,700,0.002,98.68,Diesel,1,nissan-terrano-1993-nw1-v1
+780,Mazda,CX-7,MAZDA CX-7,699,0.002,98.68,Diesel,0,
+781,Alfa Romeo,156,ALFA ROMEO 156,695,0.002,98.69,Petrol,0,
+782,Aston Martin,Rapide,ASTON MARTIN RAPIDE,695,0.002,98.69,Petrol,0,
+783,Bentley,Mulsanne,BENTLEY MULSANNE,695,0.002,98.69,Petrol,0,
+784,Volkswagen,Crafter,VOLKSWAGEN CRAFTER,694,0.002,98.69,Diesel,0,
+785,Hyundai,Terracan,HYUNDAI TERRACAN,693,0.002,98.69,Diesel,0,
+786,Toyota,Hiace,TOYOTA HIACE,693,0.002,98.69,Diesel,0,
+787,TVR,Tuscan,TVR TUSCAN,693,0.002,98.7,Petrol,0,
+788,KGM,Torres K40,KGM TORRES K40,678,0.002,98.7,Petrol,0,
+789,Land Rover,88,LAND ROVER 88,677,0.002,98.7,Petrol,0,
+790,Fiat,Sedici,FIAT SEDICI,676,0.002,98.7,Petrol,0,
+791,Nissan,200,NISSAN 200,672,0.002,98.7,Petrol,0,
+792,Renault Trucks,Trafic,RENAULT TRUCKS TRAFIC,668,0.002,98.71,Diesel,0,
+793,BMW,X6 M,BMW X6 M,658,0.002,98.71,Petrol,2,bmw-x6-m-2022-bm1-v1|bmw-x6-m-2015-bm3-v1
+794,Suzuki,Liana,SUZUKI LIANA,658,0.002,98.71,Petrol,0,
+795,Mercedes,380,MERCEDES 380,655,0.002,98.71,Petrol,0,
+796,Vauxhall,Omega,VAUXHALL OMEGA,650,0.002,98.71,Petrol,0,
+797,Audi,S7,AUDI S7,644,0.002,98.72,Petrol,1,audi-rs7-v1
+798,Audi,80,AUDI 80,643,0.002,98.72,Petrol,0,
+799,Rover,3.5 Litre,ROVER 3.5 LITRE,640,0.002,98.72,Petrol,0,
+800,Mini,GT,MINI GT,635,0.002,98.72,Petrol,0,
+801,Fiat,Ducato,FIAT DUCATO,630,0.002,98.72,Diesel,2,fiat-ducato-v1|fiat-ducato-fw1-v1
+802,Mitsubishi,Grandis,MITSUBISHI GRANDIS,627,0.002,98.73,Petrol,0,
+803,KGM,Rexton,KGM REXTON,618,0.002,98.73,Diesel,0,
+804,Morgan,Plus 8,MORGAN PLUS 8,616,0.002,98.73,Petrol,0,
+805,Jensen,Interceptor,JENSEN INTERCEPTOR,612,0.002,98.73,Petrol,0,
+806,Vauxhall,Signum,VAUXHALL SIGNUM,610,0.002,98.73,Diesel,0,
+807,Fiat,Scudo,FIAT SCUDO,609,0.002,98.73,Diesel,0,
+808,Honda,Integra,HONDA INTEGRA,607,0.002,98.74,Petrol,1,honda-integra-1995-hw1-v1
+809,Ferrari,360,FERRARI 360,606,0.002,98.74,Petrol,0,
+810,Nissan,Patrol,NISSAN PATROL,603,0.002,98.74,Diesel,1,nissan-patrol-1987-nw1-v1
+811,Jaguar,3.8,JAGUAR 3.8,602,0.002,98.74,Petrol,0,
+812,Maserati,Grancabrio,MASERATI GRANCABRIO,600,0.002,98.74,Petrol,0,
+813,TVR,Griffith,TVR GRIFFITH,594,0.002,98.74,Petrol,0,
+814,Volvo,740,VOLVO 740,593,0.002,98.75,Petrol,1,volvo-740-vow1-v1
+815,Volkswagen,Phaeton,VOLKSWAGEN PHAETON,584,0.002,98.75,Diesel,0,
+816,Nissan,Skyline,NISSAN SKYLINE,581,0.002,98.75,Petrol,4,nissan-skyline-1977-nw1-v1|nissan-skyline-1964-nw1-v1|nissan-skyline-nw1-v2|nissan-skyline-nw1-v3
+817,Lexus,LC,LEXUS LC,563,0.002,98.75,Petrol,2,lexus-lc-v1|lexus-lc-2020-lxw1-v1
+818,Daimler,SP 250,DAIMLER SP 250,556,0.002,98.75,Petrol,0,
+819,Fiat,Coupe,FIAT COUPE,554,0.002,98.75,Petrol,0,
+820,Mercedes-Benz,AMG GLC Class,MERCEDES-BENZ AMG GLC CLASS,554,0.002,98.76,Hybrid electric (petrol),0,
+821,Mclaren,720S,MCLAREN 720S,550,0.002,98.76,Petrol,0,
+822,Toyota,Carina,TOYOTA CARINA,549,0.002,98.76,Petrol,0,
+823,Lancia,Fulvia,LANCIA FULVIA,546,0.002,98.76,Petrol,0,
+824,Jaecoo,8,JAECOO 8,544,0.002,98.76,Plug-in hybrid electric (petrol),0,
+825,Aston Martin,V8,ASTON MARTIN V8,543,0.002,98.76,Petrol,0,
+826,Mclaren,570S,MCLAREN 570S,543,0.002,98.77,Petrol,0,
+827,Wolseley,1500,WOLSELEY 1500,539,0.002,98.77,Petrol,0,
+828,Dodge,Caliber,DODGE CALIBER,535,0.002,98.77,Petrol,0,
+829,Mazda,RX-7,MAZDA RX-7,531,0.002,98.77,Petrol,2,mazda-rx-7-1985-mzw1-v1|mazda-rx-7-1999-mzw1-v1
+830,Citroen,E-C5,CITROEN E-C5,519,0.001,98.77,Battery electric,0,
+831,Citroen,C8,CITROEN C8,518,0.001,98.77,Diesel,0,
+832,Fiat,Talento,FIAT TALENTO,518,0.001,98.77,Diesel,0,
+833,Rolls Royce,Wraith,ROLLS ROYCE WRAITH,516,0.001,98.78,Petrol,0,
+834,Ferrari,F8,FERRARI F8,509,0.001,98.78,Petrol,1,ferrari-f8-v1
+835,Audi,Quattro,AUDI QUATTRO,508,0.001,98.78,Petrol,1,audi-quattro-1980-ib1-v1
+836,Nissan,Serena,NISSAN SERENA,505,0.001,98.78,Petrol,0,
+837,Volkswagen,1200,VOLKSWAGEN 1200,505,0.001,98.78,Petrol,0,
+838,Subaru,Justy,SUBARU JUSTY,500,0.001,98.78,Petrol,0,
+839,Pontiac,Firebird,PONTIAC FIREBIRD,499,0.001,98.78,Petrol,0,
+840,Morgan,Roadster,MORGAN ROADSTER,498,0.001,98.79,Petrol,0,
+841,Triumph,TR5,TRIUMPH TR5,496,0.001,98.79,Petrol,0,
+842,Abarth,Punto,ABARTH PUNTO,495,0.001,98.79,Petrol,0,
+843,Peugeot,807,PEUGEOT 807,494,0.001,98.79,Diesel,0,
+844,Vauxhall,Cresta,VAUXHALL CRESTA,492,0.001,98.79,Petrol,0,
+845,Sunbeam,Rapier,SUNBEAM RAPIER,492,0.001,98.79,Petrol,0,
+846,Daihatsu,Materia,DAIHATSU MATERIA,491,0.001,98.79,Petrol,0,
+847,Volkswagen,1500,VOLKSWAGEN 1500,489,0.001,98.8,Petrol,0,
+848,Daimler,Sovereign,DAIMLER SOVEREIGN,488,0.001,98.8,Petrol,0,
+849,Chrysler,Voyager,CHRYSLER VOYAGER,488,0.001,98.8,Diesel,0,
+850,Lotus,Emeya,LOTUS EMEYA,485,0.001,98.8,Battery electric,1,lotus-emeya-v1
+851,Smart,5,SMART 5,482,0.001,98.8,Battery electric,0,
+852,Rover,400 Series,ROVER 400 SERIES,482,0.001,98.8,Petrol,0,
+853,Lotus,Emira,LOTUS EMIRA,481,0.001,98.8,Petrol,1,lotus-emira-v1
+854,Nissan,Murano,NISSAN MURANO,478,0.001,98.81,Petrol,1,nissan-murano-2015-nw1-v1
+855,Morris,1100,MORRIS 1100,478,0.001,98.81,Petrol,0,
+856,BMW,2002,BMW 2002,477,0.001,98.81,Petrol,0,
+857,Morris,Cowley,MORRIS COWLEY,476,0.001,98.81,Petrol,0,
+858,Mercedes-Benz,S Class,MERCEDES-BENZ S CLASS,475,0.001,98.81,Plug-in hybrid electric (petrol),4,mercedes-benz-s-class-v1|mercedes-benz-s-class-1979-mw1-v1|mercedes-benz-s-class-1999-mw1-v1|mercedes-benz-s-class-2003-mw1-v1
+859,Vauxhall,VX,VAUXHALL VX,473,0.001,98.81,Petrol,0,
+860,KGM,Korando,KGM KORANDO,459,0.001,98.81,Petrol,0,
+861,Mazda,Demio,MAZDA DEMIO,456,0.001,98.81,Petrol,1,mazda-2-v1
+862,Wolseley,Hornet,WOLSELEY HORNET,455,0.001,98.82,Petrol,0,
+863,Jeep,Commander,JEEP COMMANDER,454,0.001,98.82,Diesel,0,
+864,Lamborghini,Aventador,LAMBORGHINI AVENTADOR,453,0.001,98.82,Petrol,0,
+865,Riley,ELF,RILEY ELF,448,0.001,98.82,Petrol,0,
+866,Mercedes,450,MERCEDES 450,447,0.001,98.82,Petrol,0,
+867,Aston Martin,DB6,ASTON MARTIN DB6,446,0.001,98.82,Petrol,0,
+868,Fiat,Multipla,FIAT MULTIPLA,444,0.001,98.82,Diesel,0,
+869,Mercedes,420,MERCEDES 420,441,0.001,98.82,Petrol,0,
+870,Mercedes-Benz,A Class,MERCEDES-BENZ A CLASS,441,0.001,98.83,Hybrid electric (petrol),2,mercedes-benz-a-class-2000-v1|mercedes-benz-a-class-2018-w12-v1
+871,Mercedes,Evito,MERCEDES EVITO,440,0.001,98.83,Battery electric,0,
+872,Audi,Coupe,AUDI COUPE,430,0.001,98.83,Petrol,0,
+873,Rolls Royce,Dawn,ROLLS ROYCE DAWN,426,0.001,98.83,Petrol,0,
+874,Daewoo,Matiz,DAEWOO MATIZ,425,0.001,98.83,Petrol,0,
+875,Chevrolet,Corvette,CHEVROLET CORVETTE,425,0.001,98.83,Petrol,1,chevrolet-corvette-v1
+876,KGM,Actyon K50 Auto,KGM ACTYON K50 AUTO,421,0.001,98.83,Petrol,0,
+877,Nissan,Silvia,NISSAN SILVIA,416,0.001,98.83,Petrol,6,nissan-silvia-nw1-v1|nissan-silvia-1990-nw1-v1|nissan-silvia-1999-nw1-v1|nissan-silvia-nw1-v2|nissan-silvia-nw1-v3|nissan-silvia-1998-nw1-v1
+878,Saab,9000,SAAB 9000,415,0.001,98.84,Petrol,0,
+879,Rover,Metro,ROVER METRO,414,0.001,98.84,Petrol,0,
+880,Rover,600 Series,ROVER 600 SERIES,413,0.001,98.84,Petrol,0,
+881,Ford,Corsair,FORD CORSAIR,412,0.001,98.84,Petrol,0,
+882,Opel,Manta,OPEL MANTA,412,0.001,98.84,Petrol,0,
+883,Austin,Sprite,AUSTIN SPRITE,409,0.001,98.84,Petrol,0,
+884,Chrysler,Delta,CHRYSLER DELTA,409,0.001,98.84,Diesel,0,
+885,Triumph,TR2,TRIUMPH TR2,404,0.001,98.84,Petrol,0,
+886,Lamborghini,Gallardo,LAMBORGHINI GALLARDO,403,0.001,98.85,Petrol,0,
+887,Morris,Marina,MORRIS MARINA,402,0.001,98.85,Petrol,0,
+888,Lotus,Eclat,LOTUS ECLAT,401,0.001,98.85,Petrol,0,
+889,Lotus,Europa,LOTUS EUROPA,400,0.001,98.85,Petrol,0,
+890,Alfa Romeo,4C,ALFA ROMEO 4C,398,0.001,98.85,Petrol,0,
+891,Toyota,Crown,TOYOTA CROWN,397,0.001,98.85,Petrol,0,
+892,Ferrari,Purosangue,FERRARI PUROSANGUE,397,0.001,98.85,Petrol,1,ferrari-purosangue-v1
+893,MG,RV8,MG RV8,395,0.001,98.85,Petrol,0,
+894,Porsche,968,PORSCHE 968,395,0.001,98.85,Petrol,0,
+895,Maserati,Gran Turismo,MASERATI GRAN TURISMO,389,0.001,98.86,Petrol,0,
+896,Bentley,Turbo,BENTLEY TURBO,387,0.001,98.86,Petrol,0,
+897,Maserati,Coupe,MASERATI COUPE,386,0.001,98.86,Petrol,0,
+898,Mitsubishi,Carisma,MITSUBISHI CARISMA,385,0.001,98.86,Petrol,0,
+899,Saab,96,SAAB 96,382,0.001,98.86,Petrol,0,
+900,Mercedes-Benz,AMG C Class,MERCEDES-BENZ AMG C CLASS,381,0.001,98.86,Hybrid electric (petrol),0,
+901,Infiniti,QX70,INFINITI QX70,377,0.001,98.86,Diesel,0,
+902,Citroen,DS,CITROEN DS,375,0.001,98.86,Petrol,0,
+903,Skoda,Felicia,SKODA FELICIA,375,0.001,98.86,Petrol,0,
+904,Ferrari,SF90,FERRARI SF90,375,0.001,98.87,Plug-in hybrid electric (petrol),1,ferrari-sf90-v1
+905,Vauxhall,VXR8,VAUXHALL VXR8,373,0.001,98.87,Petrol,0,
+906,Fiat,Stilo,FIAT STILO,372,0.001,98.87,Petrol,0,
+907,Honda,Legend,HONDA LEGEND,372,0.001,98.87,Petrol,0,
+908,Austin,1100,AUSTIN 1100,372,0.001,98.87,Petrol,0,
+909,Vauxhall,Chevette,VAUXHALL CHEVETTE,369,0.001,98.87,Petrol,0,
+910,Humber,Sceptre,HUMBER SCEPTRE,360,0.001,98.87,Petrol,0,
+911,Volvo,960,VOLVO 960,360,0.001,98.87,Petrol,0,
+912,Austin,A60,AUSTIN A60,359,0.001,98.87,Petrol,0,
+913,Microcar,M-Go,MICROCAR M-GO,358,0.001,98.87,Petrol,0,
+914,Fiat,X1/9,FIAT X1/9,356,0.001,98.88,Petrol,1,fiat-x1-9-fw1-v1
+915,Abarth,600E,ABARTH 600E,351,0.001,98.88,Battery electric,0,
+916,Jaguar,420,JAGUAR 420,351,0.001,98.88,Petrol,0,
+917,KIA,Cerato,KIA CERATO,351,0.001,98.88,Petrol,0,
+918,Renault,Twizy,RENAULT TWIZY,348,0.001,98.88,Battery electric,0,
+919,Vauxhall,Calibra,VAUXHALL CALIBRA,345,0.001,98.88,Petrol,0,
+920,Vauxhall,Monaro,VAUXHALL MONARO,344,0.001,98.88,Petrol,0,
+921,Ferrari,F12,FERRARI F12,341,0.001,98.88,Petrol,0,
+922,Mazda,Eunos,MAZDA EUNOS,340,0.001,98.88,Petrol,0,
+923,Vauxhall,Allied Venture,VAUXHALL ALLIED VENTURE,340,0.001,98.88,Diesel,0,
+924,Austin,A55,AUSTIN A55,339,0.001,98.89,Petrol,0,
+925,BMW,Alpina B3,BMW ALPINA B3,336,0.001,98.89,Petrol,0,
+926,Honda,Odyssey,HONDA ODYSSEY,336,0.001,98.89,Petrol,6,honda-odyssey-1999-hw1-v1|honda-odyssey-2008-hw1-v1|honda-odyssey-2011-hw1-v1|honda-odyssey-1994-hw1-v1|honda-odyssey-2001-hw1-v1|honda-odyssey-1999-hw1-v2
+927,Infiniti,Q70,INFINITI Q70,334,0.001,98.89,Diesel,0,
+928,Land Rover,109,LAND ROVER 109,333,0.001,98.89,Petrol,0,
+929,Citroen,Dyane,CITROEN DYANE,331,0.001,98.89,Petrol,0,
+930,Volvo,S70,VOLVO S70,328,0.001,98.89,Petrol,0,
+931,Sunbeam,Tiger,SUNBEAM TIGER,328,0.001,98.89,Petrol,0,
+932,Peugeot,Allied,PEUGEOT ALLIED,327,0.001,98.89,Diesel,0,
+933,Dodge,Journey,DODGE JOURNEY,326,0.001,98.89,Diesel,0,
+934,Infiniti,FX30,INFINITI FX30,325,0.001,98.9,Diesel,0,
+935,TVR,Cerbera,TVR CERBERA,324,0.001,98.9,Petrol,0,
+936,Datsun,240,DATSUN 240,320,0.001,98.9,Petrol,0,
+937,Ferrari,GTC4,FERRARI GTC4,320,0.001,98.9,Petrol,0,
+938,Honda,NSX,HONDA NSX,317,0.001,98.9,Petrol,4,honda-nsx-v1|honda-nsx-1992-hw1-v1|honda-nsx-1992-hw1-v2|honda-nsx-1992-hw1-v3
+939,Coleman Milne,Norwood,COLEMAN MILNE NORWOOD,316,0.001,98.9,Petrol,0,
+940,Coleman Milne,Rosedale,COLEMAN MILNE ROSEDALE,314,0.001,98.9,Petrol,0,
+941,KIA,Magentis,KIA MAGENTIS,313,0.001,98.9,Petrol,0,
+942,Humber,Snipe,HUMBER SNIPE,312,0.001,98.9,Petrol,0,
+943,Nissan,Sunny,NISSAN SUNNY,311,0.001,98.9,Petrol,0,
+944,GWM,GWM Haval Jolion PRO A,GWM GWM HAVAL JOLION PRO A,309,0.001,98.9,Hybrid electric (petrol),0,
+945,Vauxhall,VX220,VAUXHALL VX220,307,0.001,98.91,Petrol,0,
+946,Humber,Hawk,HUMBER HAWK,306,0.001,98.91,Petrol,0,
+947,Lotus,Elite,LOTUS ELITE,305,0.001,98.91,Petrol,0,
+948,Bentley,Brooklands,BENTLEY BROOKLANDS,305,0.001,98.91,Petrol,0,
+949,Talbot,Sunbeam,TALBOT SUNBEAM,305,0.001,98.91,Petrol,0,
+950,Honda,Stream,HONDA STREAM,304,0.001,98.91,Petrol,0,
+951,Citroen,Allied,CITROEN ALLIED,303,0.001,98.91,Diesel,0,
+952,Hyundai,Sonata,HYUNDAI SONATA,303,0.001,98.91,Petrol,1,hyundai-sonata-hybrid-2017-hyw1-v1
+953,Chevrolet GMC,Belair,CHEVROLET GMC BELAIR,302,0.001,98.91,Petrol,0,
+954,Volvo,1800,VOLVO 1800,302,0.001,98.91,Petrol,0,
+955,Aston Martin,Virage,ASTON MARTIN VIRAGE,301,0.001,98.91,Petrol,0,
+956,Ford,Orion,FORD ORION,298,0.001,98.91,Petrol,0,
+957,Aston Martin,DB5,ASTON MARTIN DB5,296,0.001,98.92,Petrol,0,
+958,Omoda,E5 Knight,OMODA E5 KNIGHT,295,0.001,98.92,Battery electric,0,
+959,Toyota,Hilux,TOYOTA HILUX,295,0.001,98.92,Diesel,4,toyota-hilux-v1|toyota-hilux-2005-tw1-v1|toyota-hilux-1988-tw1-v1|toyota-hilux-1978-tw1-v1
+960,Infiniti,QX30,INFINITI QX30,293,0.001,98.92,Diesel,0,
+961,Austin,Metro,AUSTIN METRO,291,0.001,98.92,Petrol,0,
+962,Austin,Allegro,AUSTIN ALLEGRO,291,0.001,98.92,Petrol,0,
+963,Genesis,GV80,GENESIS GV80,290,0.001,98.92,Petrol,0,
+964,Ford,Cougar,FORD COUGAR,288,0.001,98.92,Petrol,0,
+965,Rover,3 Litre,ROVER 3 LITRE,287,0.001,98.92,Petrol,0,
+966,Mclaren,600LT,MCLAREN 600LT,287,0.001,98.92,Petrol,0,
+967,Fiat,Barchetta,FIAT BARCHETTA,286,0.001,98.92,Petrol,1,fiat-barchetta-1995-fw1-v1
+968,Hillman,Avenger,HILLMAN AVENGER,285,0.001,98.92,Petrol,0,
+969,Lancia,Delta,LANCIA DELTA,284,0.001,98.93,Petrol,0,
+970,Fisker,Ocean,FISKER OCEAN,281,0.001,98.93,Battery electric,0,
+971,Peugeot,ION,PEUGEOT ION,279,0.001,98.93,Battery electric,0,
+972,BMW,1 Series M,BMW 1 SERIES M,271,0.001,98.93,Petrol,1,bmw-1-series-v1
+973,Riley,2.5,RILEY 2.5,271,0.001,98.93,Petrol,0,
+974,Audi,100,AUDI 100,270,0.001,98.93,Petrol,0,
+975,Peugeot,Premier,PEUGEOT PREMIER,270,0.001,98.93,Diesel,0,
+976,Fiat,126,FIAT 126,269,0.001,98.93,Petrol,1,fiat-126-fw1-v1
+977,Proton,Savvy,PROTON SAVVY,269,0.001,98.93,Petrol,0,
+978,Rolls Royce,,ROLLS ROYCE,266,0.001,98.93,Battery electric,0,
+979,Vauxhall,Velox,VAUXHALL VELOX,266,0.001,98.93,Petrol,0,
+980,ORA,03 PRO +,ORA 03 PRO +,263,0.001,98.93,Battery electric,0,
+981,Singer,Gazelle,SINGER GAZELLE,261,0.001,98.93,Petrol,0,
+982,BMW,M Roadster,BMW M ROADSTER,260,0.001,98.94,Petrol,0,
+983,Rover,90,ROVER 90,258,0.001,98.94,Petrol,0,
+984,Hillman,Super Minx,HILLMAN SUPER MINX,257,0.001,98.94,Petrol,0,
+985,Ferrari,599,FERRARI 599,256,0.001,98.94,Petrol,0,
+986,Jensen,Jensen-Healey,JENSEN JENSEN-HEALEY,256,0.001,98.94,Petrol,0,
+987,Ford,Thunderbird,FORD THUNDERBIRD,255,0.001,98.94,Petrol,0,
+988,Suzuki,Kizashi,SUZUKI KIZASHI,255,0.001,98.94,Petrol,0,
+989,Daewoo,Kalos,DAEWOO KALOS,252,0.001,98.94,Petrol,0,
+990,Citroen,Relay,CITROEN RELAY,251,0.001,98.94,Diesel,0,
+991,Genesis,G70,GENESIS G70,251,0.001,98.94,Petrol,2,genesis-g70-w6-v1|genesis-g70-w6-v2
+992,Peugeot,309,PEUGEOT 309,251,0.001,98.94,Petrol,0,
+993,Genesis,G80,GENESIS G80,248,0.001,98.94,Petrol,0,
+994,Citroen,Xantia,CITROEN XANTIA,247,0.001,98.94,Diesel,0,
+995,Ferrari,12CILINDRI,FERRARI 12CILINDRI,247,0.001,98.94,Petrol,0,
+996,Alfa Romeo,1750,ALFA ROMEO 1750,244,0.001,98.95,Petrol,0,
+997,Rover,800 Series,ROVER 800 SERIES,243,0.001,98.95,Petrol,0,
+998,Mercedes-Benz,AMG GT Class,MERCEDES-BENZ AMG GT CLASS,239,0.001,98.95,Petrol,2,mercedes-benz-amg-gt-2015-v1|mercedes-benz-amg-gt-mw1-v1
+999,Mercedes,SLS Class,MERCEDES SLS CLASS,238,0.001,98.95,Petrol,0,
+1000,BMW,M Coupe,BMW M COUPE,237,0.001,98.95,Petrol,0,
+1001,Citroen,C6,CITROEN C6,237,0.001,98.95,Diesel,0,
+1002,Volkswagen,1600,VOLKSWAGEN 1600,235,0.001,98.95,Petrol,0,
+1003,Austin,1300,AUSTIN 1300,235,0.001,98.95,Petrol,0,
+1004,Lotus,Seven,LOTUS SEVEN,234,0.001,98.95,Petrol,0,
+1005,TVR,290,TVR 290,231,0.001,98.95,Petrol,0,
+1006,Chrysler,Sebring,CHRYSLER SEBRING,230,0.001,98.95,Petrol,0,
+1007,Nissan,300,NISSAN 300,230,0.001,98.95,Petrol,3,nissan-300zx-nw1-v1|nissan-300zx-1984-nw1-v1|nissan-300zx-nw1-v2
+1008,Rover,Streetwise,ROVER STREETWISE,230,0.001,98.95,Petrol,0,
+1009,Daimler,Limousine,DAIMLER LIMOUSINE,229,0.001,98.95,Petrol,0,
+1010,Daimler,Double SIX,DAIMLER DOUBLE SIX,228,0.001,98.96,Petrol,0,
+1011,Mclaren,Artura,MCLAREN ARTURA,227,0.001,98.96,Petrol,1,mclaren-artura-v1
+1012,Sunbeam,Talbot,SUNBEAM TALBOT,225,0.001,98.96,Petrol,0,
+1013,Perodua,Kelisa,PERODUA KELISA,225,0.001,98.96,Petrol,0,
+1014,Citroen,AX,CITROEN AX,224,0.001,98.96,Petrol,0,
+1015,Lancia,Beta,LANCIA BETA,223,0.001,98.96,Petrol,0,
+1016,Ford,Probe,FORD PROBE,221,0.001,98.96,Petrol,0,
+1017,Saab,99,SAAB 99,220,0.001,98.96,Petrol,0,
+1018,Citroen,ZX,CITROEN ZX,219,0.001,98.96,Diesel,0,
+1019,Peugeot,405,PEUGEOT 405,219,0.001,98.96,Diesel,0,
+1020,Citroen,BX,CITROEN BX,216,0.001,98.96,Petrol,0,
+1021,Mercedes,Vaneo,MERCEDES VANEO,216,0.001,98.96,Petrol,0,
+1022,Fiat,Fiorino,FIAT FIORINO,214,0.001,98.96,Diesel,0,
+1023,GWM,ORA 03 PRO,GWM ORA 03 PRO,212,0.001,98.96,Battery electric,0,
+1024,Honda,Logo,HONDA LOGO,212,0.001,98.96,Petrol,0,
+1025,Triumph,2500,TRIUMPH 2500,210,0.001,98.96,Petrol,0,
+1026,Daimler,Conquest,DAIMLER CONQUEST,210,0.001,98.97,Petrol,0,
+1027,Mercedes-Benz,AMG GLE Class,MERCEDES-BENZ AMG GLE CLASS,205,0.001,98.97,Plug-in hybrid electric (petrol),0,
+1028,Mclaren,GT,MCLAREN GT,205,0.001,98.97,Petrol,0,
+1029,Fiat,Cinquecento,FIAT CINQUECENTO,203,0.001,98.97,Petrol,0,
+1030,Wolseley,16/60,WOLSELEY 16/60,202,0.001,98.97,Petrol,0,
+1031,Morgan,Plus 6,MORGAN PLUS 6,199,0.001,98.97,Petrol,0,
+1032,Vanden Plas,Princess,VANDEN PLAS PRINCESS,198,0.001,98.97,Petrol,0,
+1033,Volvo,122,VOLVO 122,198,0.001,98.97,Petrol,0,
+1034,TVR,T350,TVR T350,198,0.001,98.97,Petrol,0,
+1035,Xpeng,G6 Standard Range,XPENG G6 STANDARD RANGE,195,0.001,98.97,Battery electric,0,
+1036,Singer,Chamois,SINGER CHAMOIS,195,0.001,98.97,Petrol,0,
+1037,Ford,Classic,FORD CLASSIC,194,0.001,98.97,Petrol,0,
+1038,Triumph,1300,TRIUMPH 1300,193,0.001,98.97,Petrol,0,
+1039,Mclaren,570GT,MCLAREN 570GT,192,0.001,98.97,Petrol,0,
+1040,Triumph,2.5,TRIUMPH 2.5,191,0.001,98.97,Petrol,0,
+1041,Mazda,626,MAZDA 626,189,0.001,98.97,Petrol,1,mazda-626-1997-mzw1-v1
+1042,Lamborghini,Revuelto,LAMBORGHINI REVUELTO,189,0.001,98.97,Plug-in hybrid electric (petrol),0,
+1043,Infiniti,M35H,INFINITI M35H,188,0.001,98.97,Petrol,0,
+1044,Rover,80,ROVER 80,188,0.001,98.98,Petrol,0,
+1045,Aixam,Crossline,AIXAM CROSSLINE,187,0.001,98.98,Petrol,0,
+1046,Singer,Vogue,SINGER VOGUE,187,0.001,98.98,Petrol,0,
+1047,Ferrari,FF,FERRARI FF,185,0.001,98.98,Petrol,0,
+1048,Maserati,3200,MASERATI 3200,185,0.001,98.98,Petrol,0,
+1049,Ford,Journey,FORD JOURNEY,184,0.001,98.98,Diesel,0,
+1050,Ford,Maverick,FORD MAVERICK,184,0.001,98.98,Petrol,0,
+1051,Mini,Challenge,MINI CHALLENGE,183,0.001,98.98,Petrol,0,
+1052,Ford,Sportka,FORD SPORTKA,181,0.001,98.98,Petrol,0,
+1053,Rover,95,ROVER 95,180,0.001,98.98,Petrol,0,
+1054,Mclaren,MP4,MCLAREN MP4,180,0.001,98.98,Petrol,0,
+1055,Mercedes,Coleman Milne,MERCEDES COLEMAN MILNE,179,0.001,98.98,Hybrid electric (petrol),0,
+1056,Toyota,Sienta,TOYOTA SIENTA,179,0.001,98.98,Hybrid electric (petrol),0,
+1057,Bentley,Azure,BENTLEY AZURE,178,0.001,98.98,Petrol,0,
+1058,Lexus,LM,LEXUS LM,178,0.001,98.98,Hybrid electric (petrol),1,lexus-lm-hybrid-w5-v1
+1059,Nissan,Bluebird,NISSAN BLUEBIRD,177,0.001,98.98,Petrol,0,
+1060,Hyundai,Trajet,HYUNDAI TRAJET,175,0.001,98.98,Petrol,0,
+1061,Mclaren,750S,MCLAREN 750S,175,0.001,98.98,Petrol,0,
+1062,Daimler,4.2,DAIMLER 4.2,173,0.0,98.98,Petrol,0,
+1063,Volvo,ES90,VOLVO ES90,170,0.0,98.98,Battery electric,0,
+1064,BMW,Alpina D3,BMW ALPINA D3,170,0.0,98.99,Diesel,0,
+1065,Vanden Plas,1300,VANDEN PLAS 1300,170,0.0,98.99,Petrol,0,
+1066,Reliant,Kitten,RELIANT KITTEN,169,0.0,98.99,Petrol,0,
+1067,Chevrolet,Camaro,CHEVROLET CAMARO,169,0.0,98.99,Petrol,0,
+1068,Alfa Romeo,Alfasud,ALFA ROMEO ALFASUD,168,0.0,98.99,Petrol,0,
+1069,Perodua,Kenari,PERODUA KENARI,168,0.0,98.99,Petrol,0,
+1070,Mercedes-Benz,AMG E Class,MERCEDES-BENZ AMG E CLASS,167,0.0,98.99,Plug-in hybrid electric (petrol),0,
+1071,Suzuki,SJ,SUZUKI SJ,165,0.0,98.99,Petrol,0,
+1072,Citroen,C-Zero,CITROEN C-ZERO,164,0.0,98.99,Battery electric,0,
+1073,Triumph,Acclaim,TRIUMPH ACCLAIM,164,0.0,98.99,Petrol,0,
+1074,Nissan,Primastar,NISSAN PRIMASTAR,161,0.0,98.99,Diesel,0,
+1075,Rolls Royce,Silver Seraph,ROLLS ROYCE SILVER SERAPH,161,0.0,98.99,Petrol,0,
+1076,Rolls Royce,Silver Spirit,ROLLS ROYCE SILVER SPIRIT,161,0.0,98.99,Petrol,0,
+1077,Volkswagen,1303,VOLKSWAGEN 1303,159,0.0,98.99,Petrol,0,
+1078,Alfa Romeo,Alfetta,ALFA ROMEO ALFETTA,159,0.0,98.99,Petrol,0,
+1079,MG,Metro,MG METRO,159,0.0,98.99,Petrol,0,
+1080,Chevrolet GMC,Impala,CHEVROLET GMC IMPALA,158,0.0,98.99,Petrol,0,
+1081,Morgan,Aero 8,MORGAN AERO 8,158,0.0,98.99,Petrol,0,
+1082,Iveco,Daily,IVECO DAILY,157,0.0,98.99,Diesel,0,
+1083,BMW,CI Auto,BMW CI AUTO,157,0.0,98.99,Petrol,0,
+1084,Aixam,Crossover,AIXAM CROSSOVER,155,0.0,98.99,Petrol,0,
+1085,Suzuki,Cappuccino,SUZUKI CAPPUCCINO,154,0.0,99.0,Petrol,0,
+1086,Ford,Dorchester,FORD DORCHESTER,153,0.0,99.0,Petrol,0,
+1087,Toyota,Picnic,TOYOTA PICNIC,153,0.0,99.0,Petrol,0,
+1088,Porsche,GT,PORSCHE GT,153,0.0,99.0,Petrol,0,
+1089,Infiniti,Q60,INFINITI Q60,152,0.0,99.0,Petrol,0,
+1090,Citroen,CX,CITROEN CX,151,0.0,99.0,Petrol,0,
+1091,KGM,Torres,KGM TORRES,150,0.0,99.0,Petrol,0,
+1092,Maserati,Spyder,MASERATI SPYDER,150,0.0,99.0,Petrol,0,
+1093,Fiat,Idea,FIAT IDEA,149,0.0,99.0,Petrol,0,
+1094,Volvo,340,VOLVO 340,148,0.0,99.0,Petrol,0,
+1095,Wolseley,4/44,WOLSELEY 4/44,148,0.0,99.0,Petrol,0,
+1096,Datsun,260,DATSUN 260,148,0.0,99.0,Petrol,0,
+1097,Volvo,P1800,VOLVO P1800,146,0.0,99.0,Petrol,0,
+1098,Reva,G-Wiz,REVA G-WIZ,144,0.0,99.0,Battery electric,0,
+1099,Ferrari,612,FERRARI 612,144,0.0,99.0,Petrol,0,
+1100,Mitsubishi,I-Miev,MITSUBISHI I-MIEV,143,0.0,99.0,Battery electric,1,mitsubishi-i-miev-2010-w6-v1
+1101,Jaguar,MK IX,JAGUAR MK IX,143,0.0,99.0,Petrol,0,
+1102,Daimler,Super V8,DAIMLER SUPER V8,142,0.0,99.0,Petrol,0,
+1103,Mercedes,560,MERCEDES 560,141,0.0,99.0,Petrol,0,
+1104,Chrysler,300,CHRYSLER 300,141,0.0,99.0,Petrol,1,chrysler-300c-crw1-v1
+1105,MAN,TGE,MAN TGE,140,0.0,99.0,Diesel,0,
+1106,Rover,60,ROVER 60,140,0.0,99.0,Petrol,0,
+1107,Triumph,Toledo,TRIUMPH TOLEDO,140,0.0,99.0,Petrol,0,
+1108,TVR,Tamora,TVR TAMORA,140,0.0,99.0,Petrol,0,
+1109,DS,DS9,DS DS9,138,0.0,99.01,Plug-in hybrid electric (petrol),0,
+1110,Xpeng,G6,XPENG G6,137,0.0,99.01,Battery electric,0,
+1111,Daihatsu,Cuore,DAIHATSU CUORE,137,0.0,99.01,Petrol,0,
+1112,Ford,Transit Connect,FORD TRANSIT CONNECT,136,0.0,99.01,Diesel,0,
+1113,Opel,Kadett,OPEL KADETT,136,0.0,99.01,Petrol,1,opel-kadett-1975-vx1-v1
+1114,Volvo,480,VOLVO 480,134,0.0,99.01,Petrol,0,
+1115,Hillman,Husky,HILLMAN HUSKY,132,0.0,99.01,Petrol,0,
+1116,Infiniti,G37,INFINITI G37,132,0.0,99.01,Petrol,0,
+1117,Volvo,244,VOLVO 244,132,0.0,99.01,Petrol,0,
+1118,Mercedes-Benz,GLC Class,MERCEDES-BENZ GLC CLASS,131,0.0,99.01,Battery electric,1,mercedes-benz-glc-mw1-v2
+1119,BMW,3.0 CS,BMW 3.0 CS,131,0.0,99.01,Petrol,1,bmw-3-0-csl-1973-bm2-v1
+1120,Volvo,121,VOLVO 121,131,0.0,99.01,Petrol,0,
+1121,Dodge,Avenger,DODGE AVENGER,130,0.0,99.01,Petrol,0,
+1122,Toyota,4-RUNNER,TOYOTA 4-RUNNER,130,0.0,99.01,Petrol,0,
+1123,Toyota,Granvia,TOYOTA GRANVIA,130,0.0,99.01,Diesel,0,
+1124,Ford,Cardinal Hearse,FORD CARDINAL HEARSE,129,0.0,99.01,Petrol,0,
+1125,Honda,CRX,HONDA CRX,128,0.0,99.01,Petrol,2,honda-cr-x-1988-hw1-v1|honda-cr-x-1995-hw1-v1
+1126,Mitsubishi,Galant,MITSUBISHI GALANT,128,0.0,99.01,Petrol,1,mitsubishi-galant-w7-v1
+1127,Nissan,NV300,NISSAN NV300,127,0.0,99.01,Diesel,0,
+1128,Citroen,AMI,CITROEN AMI,125,0.0,99.01,Petrol,0,
+1129,Mercedes,320,MERCEDES 320,125,0.0,99.01,Petrol,0,
+1130,Proton,GE,PROTON GE,124,0.0,99.01,Petrol,0,
+1131,Riley,Kestrel,RILEY KESTREL,124,0.0,99.01,Petrol,0,
+1132,Triumph,1500,TRIUMPH 1500,124,0.0,99.01,Petrol,0,
+1133,BMW,M535I,BMW M535I,122,0.0,99.01,Petrol,0,
+1134,Morris,1300,MORRIS 1300,122,0.0,99.01,Petrol,0,
+1135,Skywell,BE11,SKYWELL BE11,121,0.0,99.01,Battery electric,0,
+1136,Mitsubishi,3000,MITSUBISHI 3000,121,0.0,99.02,Petrol,0,
+1137,Mazda,MX-3,MAZDA MX-3,121,0.0,99.02,Petrol,1,mazda-mx-3-mzw1-v1
+1138,Aston Martin,Cygnet,ASTON MARTIN CYGNET,121,0.0,99.02,Petrol,0,
+1139,Fiat,UNO,FIAT UNO,120,0.0,99.02,Petrol,0,
+1140,Jaguar,MK VII,JAGUAR MK VII,120,0.0,99.02,Petrol,0,
+1141,Chevrolet,Tacuma,CHEVROLET TACUMA,120,0.0,99.02,Petrol,0,
+1142,Alfa Romeo,166,ALFA ROMEO 166,119,0.0,99.02,Petrol,0,
+1143,Hillman,Hunter,HILLMAN HUNTER,119,0.0,99.02,Petrol,0,
+1144,Subaru,Tribeca,SUBARU TRIBECA,117,0.0,99.02,Petrol,0,
+1145,Ferrari,575,FERRARI 575,117,0.0,99.02,Petrol,0,
+1146,Vauxhall,Carlton,VAUXHALL CARLTON,115,0.0,99.02,Petrol,0,
+1147,Fiat,850,FIAT 850,115,0.0,99.02,Petrol,1,fiat-850-fw1-v1
+1148,Mazda,MPS,MAZDA MPS,115,0.0,99.02,Petrol,0,
+1149,Wolseley,15/50,WOLSELEY 15/50,114,0.0,99.02,Petrol,0,
+1150,BMW,Alpina B5,BMW ALPINA B5,113,0.0,99.02,Petrol,0,
+1151,Toyota,Paseo,TOYOTA PASEO,113,0.0,99.02,Petrol,0,
+1152,Toyota,FJ Cruiser,TOYOTA FJ CRUISER,113,0.0,99.02,Petrol,0,
+1153,Renault,Avantime,RENAULT AVANTIME,112,0.0,99.02,Petrol,0,
+1154,Volvo,760,VOLVO 760,112,0.0,99.02,Petrol,0,
+1155,Proton,Persona,PROTON PERSONA,111,0.0,99.02,Petrol,0,
+1156,Proton,GEN 2,PROTON GEN 2,110,0.0,99.02,Petrol,0,
+1157,MG,1100,MG 1100,110,0.0,99.02,Petrol,0,
+1158,Suzuki,Samurai,SUZUKI SAMURAI,109,0.0,99.02,Petrol,0,
+1159,Mazda,Premacy,MAZDA PREMACY,108,0.0,99.02,Petrol,0,
+1160,Peugeot,607,PEUGEOT 607,108,0.0,99.02,Diesel,0,
+1161,Toyota,Altezza,TOYOTA ALTEZZA,108,0.0,99.02,Petrol,0,
+1162,Buick,Riviera,BUICK RIVIERA,107,0.0,99.02,Petrol,0,
+1163,MG,1300,MG 1300,107,0.0,99.02,Petrol,0,
+1164,Cadillac,Escalade,CADILLAC ESCALADE,105,0.0,99.02,Petrol,0,
+1165,Proton,Satria,PROTON SATRIA,105,0.0,99.02,Petrol,0,
+1166,Austin,Maxi,AUSTIN MAXI,105,0.0,99.02,Petrol,0,
+1167,Ford,Transit Courier,FORD TRANSIT COURIER,104,0.0,99.03,Diesel,1,ford-transit-courier-2025-fow1-v1
+1168,Rover,Sterling,ROVER STERLING,104,0.0,99.03,Petrol,0,
+1169,Maserati,MC20,MASERATI MC20,104,0.0,99.03,Petrol,0,
+1170,TVR,Sagaris,TVR SAGARIS,103,0.0,99.03,Petrol,0,
+1171,Ford,Coleman Milne,FORD COLEMAN MILNE,102,0.0,99.03,Battery electric,0,
+1172,Mitsubishi,Pajero,MITSUBISHI PAJERO,102,0.0,99.03,Diesel,0,
+1173,Wolseley,6/110,WOLSELEY 6/110,102,0.0,99.03,Petrol,0,
+1174,Mitsubishi,I,MITSUBISHI I,102,0.0,99.03,Petrol,0,
+1175,Aion,V Advanced,AION V ADVANCED,101,0.0,99.03,Battery electric,0,
+1176,Peugeot,504,PEUGEOT 504,101,0.0,99.03,Petrol,0,
+1177,Vauxhall,Firenza,VAUXHALL FIRENZA,101,0.0,99.03,Petrol,0,
+1178,Volvo,131,VOLVO 131,101,0.0,99.03,Petrol,0,
+1179,Austin-Morris,Maxi,AUSTIN-MORRIS MAXI,101,0.0,99.03,Petrol,0,
+1180,Mitsubishi,Delica,MITSUBISHI DELICA,100,0.0,99.03,Petrol,0,
+1181,Austin,1800,AUSTIN 1800,100,0.0,99.03,Petrol,0,
+1182,Austin,A50,AUSTIN A50,100,0.0,99.03,Petrol,0,
+1183,Rolls Royce,Silver Spur,ROLLS ROYCE SILVER SPUR,100,0.0,99.03,Petrol,0,
+1184,Mercedes-Benz,EQV Class,MERCEDES-BENZ EQV CLASS,99,0.0,99.03,Battery electric,1,mercedes-benz-eqv-2020-mw1-v1
+1185,Citroen,SM,CITROEN SM,99,0.0,99.03,Petrol,0,
+1186,Honda,Shuttle,HONDA SHUTTLE,98,0.0,99.03,Petrol,0,
+1187,Lamborghini,Temerario,LAMBORGHINI TEMERARIO,98,0.0,99.03,Plug-in hybrid electric (petrol),0,
+1188,Hyundai,Atoz,HYUNDAI ATOZ,97,0.0,99.03,Petrol,0,
+1189,Peugeot,304,PEUGEOT 304,97,0.0,99.03,Petrol,0,
+1190,Datsun,280,DATSUN 280,97,0.0,99.03,Petrol,0,
+1191,Sunbeam,Stiletto,SUNBEAM STILETTO,97,0.0,99.03,Petrol,0,
+1192,Volvo,440,VOLVO 440,96,0.0,99.03,Petrol,0,
+1193,Daihatsu,Sportrak,DAIHATSU SPORTRAK,96,0.0,99.03,Petrol,0,
+1194,Volvo,144,VOLVO 144,95,0.0,99.03,Petrol,0,
+1195,Daimler,Majestic,DAIMLER MAJESTIC,95,0.0,99.03,Petrol,0,
+1196,Mercedes-Benz,AMG EQE Class,MERCEDES-BENZ AMG EQE CLASS,93,0.0,99.03,Battery electric,0,
+1197,Austin,Maestro,AUSTIN MAESTRO,93,0.0,99.03,Petrol,0,
+1198,Suzuki,X-90,SUZUKI X-90,93,0.0,99.03,Petrol,0,
+1199,TVR,Tasmin,TVR TASMIN,93,0.0,99.03,Petrol,0,
+1200,Citroen,XM,CITROEN XM,92,0.0,99.03,Petrol,0,
+1201,Opel,Monza,OPEL MONZA,91,0.0,99.03,Petrol,0,
+1202,Mclaren,765LT,MCLAREN 765LT,91,0.0,99.04,Petrol,0,
+1203,Maxus,Mifa,MAXUS MIFA,90,0.0,99.04,Battery electric,0,
+1204,Vauxhall,Monterey,VAUXHALL MONTEREY,90,0.0,99.04,Diesel,0,
+1205,Chevrolet,Volt,CHEVROLET VOLT,90,0.0,99.04,Range extended electric,0,
+1206,Cadillac,BLS,CADILLAC BLS,89,0.0,99.04,Diesel,0,
+1207,Daewoo,Lanos,DAEWOO LANOS,89,0.0,99.04,Petrol,0,
+1208,TVR,280,TVR 280,89,0.0,99.04,Petrol,0,
+1209,Peugeot,E7,PEUGEOT E7,88,0.0,99.04,Diesel,0,
+1210,Vauxhall,Wyvern,VAUXHALL WYVERN,88,0.0,99.04,Petrol,0,
+1211,Lancia,Flavia,LANCIA FLAVIA,88,0.0,99.04,Petrol,0,
+1212,Wolseley,18/85,WOLSELEY 18/85,88,0.0,99.04,Petrol,0,
+1213,Maserati,Gransport,MASERATI GRANSPORT,87,0.0,99.04,Petrol,0,
+1214,Mini,Inspired,MINI INSPIRED,87,0.0,99.04,Petrol,0,
+1215,Chrysler,Neon,CHRYSLER NEON,86,0.0,99.04,Petrol,0,
+1216,Mazda,MX-6,MAZDA MX-6,86,0.0,99.04,Petrol,1,mazda-mx-6-1992-mzw1-v1
+1217,Morris,1800,MORRIS 1800,85,0.0,99.04,Petrol,0,
+1218,Aston Martin,DB4,ASTON MARTIN DB4,83,0.0,99.04,Petrol,0,
+1219,Mini,Paddy Hopkirk,MINI PADDY HOPKIRK,83,0.0,99.04,Petrol,0,
+1220,BMW,2000,BMW 2000,82,0.0,99.04,Petrol,0,
+1221,DS,NO 8,DS NO 8,81,0.0,99.04,Battery electric,0,
+1222,Bond,Equipe,BOND EQUIPE,80,0.0,99.04,Petrol,0,
+1223,Seat,Cordoba,SEAT CORDOBA,80,0.0,99.04,Diesel,0,
+1224,Daihatsu,YRV,DAIHATSU YRV,80,0.0,99.04,Petrol,0,
+1225,Mclaren,675LT,MCLAREN 675LT,80,0.0,99.04,Petrol,0,
+1226,GWM,ORA 03 GT,GWM ORA 03 GT,79,0.0,99.04,Battery electric,0,
+1227,Toyota,Mirai,TOYOTA MIRAI,79,0.0,99.04,Fuel cell electric,1,toyota-mirai-tw1-v1
+1228,Citroen,Synergie,CITROEN SYNERGIE,79,0.0,99.04,Diesel,0,
+1229,Lamborghini,Murcielago,LAMBORGHINI MURCIELAGO,79,0.0,99.04,Petrol,0,
+1230,Morgan,Plus 4,MORGAN PLUS 4,79,0.0,99.04,Petrol,0,
+1231,Fiat,Ulysse,FIAT ULYSSE,78,0.0,99.04,Diesel,0,
+1232,Infiniti,EX30,INFINITI EX30,78,0.0,99.04,Diesel,0,
+1233,Renault,19,RENAULT 19,78,0.0,99.04,Petrol,0,
+1234,Infiniti,FX50,INFINITI FX50,77,0.0,99.04,Petrol,0,
+1235,Volvo,245,VOLVO 245,77,0.0,99.04,Petrol,0,
+1236,Alfa Romeo,Sprint,ALFA ROMEO SPRINT,77,0.0,99.04,Petrol,0,
+1237,Morgan,Plus SIX Auto,MORGAN PLUS SIX AUTO,77,0.0,99.04,Petrol,0,
+1238,Austin,A110,AUSTIN A110,75,0.0,99.04,Petrol,0,
+1239,Mitsubishi,Space Wagon,MITSUBISHI SPACE WAGON,75,0.0,99.04,Petrol,0,
+1240,Ford,GT,FORD GT,75,0.0,99.04,Petrol,0,
+1241,Nissan,March,NISSAN MARCH,75,0.0,99.04,Petrol,0,
+1242,Austin,Princess,AUSTIN PRINCESS,74,0.0,99.04,Petrol,0,
+1243,Rover,Maestro,ROVER MAESTRO,74,0.0,99.04,Petrol,0,
+1244,Ford,Scorpio,FORD SCORPIO,73,0.0,99.04,Petrol,0,
+1245,Mclaren,540C,MCLAREN 540C,73,0.0,99.05,Petrol,0,
+1246,MG,Maestro,MG MAESTRO,73,0.0,99.05,Petrol,0,
+1247,BMW,1602,BMW 1602,72,0.0,99.05,Petrol,0,
+1248,BMW,M635 CSI,BMW M635 CSI,72,0.0,99.05,Petrol,0,
+1249,Peugeot,Eurotaxi,PEUGEOT EUROTAXI,72,0.0,99.05,Diesel,0,
+1250,Riley,4/72,RILEY 4/72,72,0.0,99.05,Petrol,0,
+1251,Volkswagen,Variant,VOLKSWAGEN VARIANT,72,0.0,99.05,Petrol,0,
+1252,BMW,Alpina XD3,BMW ALPINA XD3,71,0.0,99.05,Diesel,0,
+1253,Nissan,100,NISSAN 100,71,0.0,99.05,Petrol,0,
+1254,Mercedes-Benz,AMG CLA Class,MERCEDES-BENZ AMG CLA CLASS,71,0.0,99.05,Hybrid electric (petrol),0,
+1255,Aston Martin,Volante,ASTON MARTIN VOLANTE,71,0.0,99.05,Petrol,0,
+1256,Riley,Lynx,RILEY LYNX,71,0.0,99.05,Petrol,0,
+1257,Wolseley,1300,WOLSELEY 1300,71,0.0,99.05,Petrol,0,
+1258,Lancia,Flaminia,LANCIA FLAMINIA,69,0.0,99.05,Petrol,0,
+1259,Vauxhall,Lotus,VAUXHALL LOTUS,69,0.0,99.05,Petrol,0,
+1260,Mercedes-Benz,EQS Class,MERCEDES-BENZ EQS CLASS,68,0.0,99.05,Battery electric,0,
+1261,Hyundai,Elantra,HYUNDAI ELANTRA,68,0.0,99.05,Diesel,2,hyundai-elantra-v1|hyundai-elantra-2022-w12-v1
+1262,Honda,S,HONDA S,68,0.0,99.05,Petrol,0,
+1263,Volkswagen,Vento,VOLKSWAGEN VENTO,67,0.0,99.05,Petrol,0,
+1264,Audi,90,AUDI 90,67,0.0,99.05,Petrol,0,
+1265,Morris,Ital,MORRIS ITAL,67,0.0,99.05,Petrol,0,
+1266,Reliant,Regal,RELIANT REGAL,67,0.0,99.05,Petrol,0,
+1267,Vanden Plas,1500,VANDEN PLAS 1500,67,0.0,99.05,Petrol,0,
+1268,Hummer,H3,HUMMER H3,66,0.0,99.05,Petrol,0,
+1269,Triumph,TR8,TRIUMPH TR8,66,0.0,99.05,Petrol,0,
+1270,Opel,Ascona,OPEL ASCONA,66,0.0,99.05,Petrol,1,opel-ascona-1970-vx1-v1
+1271,Ford,Crown Victoria,FORD CROWN VICTORIA,65,0.0,99.05,Petrol,0,
+1272,Peugeot,806,PEUGEOT 806,65,0.0,99.05,Diesel,0,
+1273,Saab,95,SAAB 95,65,0.0,99.05,Petrol,0,
+1274,Alfa Romeo,145,ALFA ROMEO 145,65,0.0,99.05,Petrol,0,
+1275,Microcar,MC1,MICROCAR MC1,64,0.0,99.05,Petrol,0,
+1276,Ssangyong,Kyron,SSANGYONG KYRON,64,0.0,99.05,Diesel,0,
+1277,Buick,Special,BUICK SPECIAL,64,0.0,99.05,Petrol,0,
+1278,Maxus,Deliver,MAXUS DELIVER,63,0.0,99.05,Diesel,0,
+1279,Humber,Imperial,HUMBER IMPERIAL,63,0.0,99.05,Petrol,0,
+1280,Honda,TN,HONDA TN,63,0.0,99.05,Hybrid electric (petrol),0,
+1281,Honda,Concerto,HONDA CONCERTO,62,0.0,99.05,Petrol,1,honda-concerto-1988-hw1-v1
+1282,Volvo,360,VOLVO 360,62,0.0,99.05,Petrol,0,
+1283,Austin,3 Litre,AUSTIN 3 LITRE,62,0.0,99.05,Petrol,0,
+1284,Morgan,Sports,MORGAN SPORTS,62,0.0,99.05,Petrol,0,
+1285,Fiat,128,FIAT 128,61,0.0,99.05,Petrol,0,
+1286,Maserati,Grecale Folgore,MASERATI GRECALE FOLGORE,61,0.0,99.05,Battery electric,0,
+1287,Alfa Romeo,75,ALFA ROMEO 75,61,0.0,99.05,Petrol,0,
+1288,Daimler,Super 8,DAIMLER SUPER 8,61,0.0,99.05,Petrol,0,
+1289,BMW,Alpina B4,BMW ALPINA B4,60,0.0,99.05,Petrol,0,
+1290,Cadillac,CTS,CADILLAC CTS,60,0.0,99.05,Petrol,0,
+1291,Chevrolet GMC,Chevelle,CHEVROLET GMC CHEVELLE,60,0.0,99.05,Petrol,0,
+1292,Citroen,Pluriel,CITROEN PLURIEL,60,0.0,99.05,Petrol,0,
+1293,Daimler,SIX,DAIMLER SIX,60,0.0,99.05,Petrol,0,
+1294,Alfa Romeo,164,ALFA ROMEO 164,59,0.0,99.05,Petrol,0,
+1295,BMW,Alpina D4,BMW ALPINA D4,59,0.0,99.05,Diesel,0,
+1296,Infiniti,QX50,INFINITI QX50,59,0.0,99.05,Diesel,0,
+1297,Renault,16,RENAULT 16,59,0.0,99.05,Petrol,0,
+1298,Audi,C,AUDI C,59,0.0,99.06,Petrol,0,
+1299,Daimler,4.0,DAIMLER 4.0,59,0.0,99.06,Petrol,0,
+1300,Fiat,Dino,FIAT DINO,58,0.0,99.06,Petrol,0,
+1301,Lincoln,Town CAR,LINCOLN TOWN CAR,58,0.0,99.06,Petrol,0,
+1302,Peugeot,Eurobus,PEUGEOT EUROBUS,58,0.0,99.06,Diesel,0,
+1303,Renault,8,RENAULT 8,58,0.0,99.06,Petrol,0,
+1304,Alfa Romeo,Montreal,ALFA ROMEO MONTREAL,58,0.0,99.06,Petrol,0,
+1305,Ferrari,Amalfi,FERRARI AMALFI,58,0.0,99.06,Petrol,0,
+1306,Renault,GTA,RENAULT GTA,58,0.0,99.06,Petrol,0,
+1307,Citroen,D Super,CITROEN D SUPER,57,0.0,99.06,Petrol,0,
+1308,Chrysler,Sunbeam,CHRYSLER SUNBEAM,57,0.0,99.06,Petrol,0,
+1309,Lancia,Montecarlo,LANCIA MONTECARLO,57,0.0,99.06,Petrol,0,
+1310,Rolls Royce,Corniche,ROLLS ROYCE CORNICHE,57,0.0,99.06,Petrol,0,
+1311,Fiat,Croma,FIAT CROMA,56,0.0,99.06,Diesel,0,
+1312,Hyundai,Lantra,HYUNDAI LANTRA,56,0.0,99.06,Petrol,1,hyundai-elantra-v1
+1313,Nissan,NV400,NISSAN NV400,56,0.0,99.06,Diesel,0,
+1314,Renault,12,RENAULT 12,56,0.0,99.06,Petrol,0,
+1315,Volvo,123,VOLVO 123,56,0.0,99.06,Petrol,0,
+1316,Mercedes,600,MERCEDES 600,56,0.0,99.06,Petrol,0,
+1317,BMW,3.0 CSI,BMW 3.0 CSI,55,0.0,99.06,Petrol,0,
+1318,Honda,S660,HONDA S660,55,0.0,99.06,Petrol,1,honda-s660-2015-hw1-v1
+1319,Citroen,ID,CITROEN ID,55,0.0,99.06,Petrol,0,
+1320,Jensen,FF,JENSEN FF,55,0.0,99.06,Petrol,0,
+1321,Mclaren,650S,MCLAREN 650S,55,0.0,99.06,Petrol,0,
+1322,Fiat,Strada,FIAT STRADA,54,0.0,99.06,Petrol,0,
+1323,Skoda,Favorit,SKODA FAVORIT,53,0.0,99.06,Petrol,0,
+1324,Fiat,Freedom,FIAT FREEDOM,53,0.0,99.06,Petrol,0,
+1325,Vauxhall,Senator,VAUXHALL SENATOR,53,0.0,99.06,Petrol,0,
+1326,BMW,Z1,BMW Z1,53,0.0,99.06,Petrol,0,
+1327,Jaguar,MK Viii,JAGUAR MK VIII,53,0.0,99.06,Petrol,0,
+1328,Nissan,Maxima,NISSAN MAXIMA,52,0.0,99.06,Petrol,0,
+1329,Alfa Romeo,155,ALFA ROMEO 155,52,0.0,99.06,Petrol,0,
+1330,Ferrari,430,FERRARI 430,52,0.0,99.06,Petrol,0,
+1331,Sunbeam,IMP,SUNBEAM IMP,52,0.0,99.06,Petrol,0,
+1332,Vanden Plas,1100,VANDEN PLAS 1100,52,0.0,99.06,Petrol,0,
+1333,Vauxhall,Ventora,VAUXHALL VENTORA,52,0.0,99.06,Petrol,0,
+1334,Wolseley,SIX,WOLSELEY SIX,52,0.0,99.06,Petrol,0,
+1335,Renault,11,RENAULT 11,51,0.0,99.06,Petrol,0,
+1336,Morgan,Aero,MORGAN AERO,51,0.0,99.06,Petrol,0,
+1337,Opel,GT,OPEL GT,51,0.0,99.06,Petrol,1,opel-gt-2008-vx1-v1
+1338,Riley,Pathfinder,RILEY PATHFINDER,51,0.0,99.06,Petrol,0,
+1339,Wolseley,6/90,WOLSELEY 6/90,51,0.0,99.06,Petrol,0,
+1340,Citroen,GS,CITROEN GS,50,0.0,99.06,Petrol,0,
+1341,Mazda,Tribute,MAZDA TRIBUTE,50,0.0,99.06,Petrol,0,
+1342,Jaguar,MK X,JAGUAR MK X,50,0.0,99.06,Petrol,0,
+1343,Austin,A95,AUSTIN A95,49,0.0,99.06,Petrol,0,
+1344,Volvo,164,VOLVO 164,49,0.0,99.06,Petrol,0,
+1345,Daewoo,Lacetti,DAEWOO LACETTI,49,0.0,99.06,Petrol,0,
+1346,Morris,Isis,MORRIS ISIS,49,0.0,99.06,Petrol,0,
+1347,Renault,VEL Satis,RENAULT VEL SATIS,48,0.0,99.06,Diesel,0,
+1348,Austin,Nash,AUSTIN NASH,48,0.0,99.06,Petrol,0,
+1349,BMW,Z8,BMW Z8,48,0.0,99.06,Petrol,1,bmw-z8-2000-bm1-v1
+1350,BMW,Alpina D5,BMW ALPINA D5,47,0.0,99.06,Diesel,0,
+1351,Toyota,Townace,TOYOTA TOWNACE,47,0.0,99.06,Diesel,0,
+1352,Volkswagen,Grand California,VOLKSWAGEN GRAND CALIFORNIA,47,0.0,99.06,Diesel,0,
+1353,Austin-Morris,Princess,AUSTIN-MORRIS PRINCESS,47,0.0,99.06,Petrol,0,
+1354,Renault Trucks,Master,RENAULT TRUCKS MASTER,46,0.0,99.06,Diesel,0,
+1355,Volvo,145,VOLVO 145,46,0.0,99.06,Petrol,0,
+1356,Toyota,Century,TOYOTA CENTURY,46,0.0,99.06,Petrol,0,
+1357,Fiat,Mirafiori,FIAT MIRAFIORI,46,0.0,99.06,Petrol,0,
+1358,Citroen,GSA,CITROEN GSA,45,0.0,99.06,Petrol,0,
+1359,Mitsubishi,Challenger,MITSUBISHI CHALLENGER,45,0.0,99.06,Diesel,0,
+1360,Daimler,Eagle,DAIMLER EAGLE,45,0.0,99.06,Petrol,0,
+1361,NSU,RO80,NSU RO80,45,0.0,99.06,Petrol,0,
+1362,Rover,Montego,ROVER MONTEGO,44,0.0,99.06,Diesel,0,
+1363,Aston Martin,Lagonda,ASTON MARTIN LAGONDA,44,0.0,99.06,Petrol,0,
+1364,Lada,Riva,LADA RIVA,44,0.0,99.06,Petrol,0,
+1365,NSU,Prinz,NSU PRINZ,44,0.0,99.06,Petrol,0,
+1366,Nissan,Fairlady,NISSAN FAIRLADY,43,0.0,99.07,Petrol,3,nissan-350z-2006-v1|nissan-fairlady-z-1978-nw1-v1|nissan-fairlady-z-1972-nw1-v1
+1367,Datsun,120,DATSUN 120,43,0.0,99.07,Petrol,0,
+1368,Datsun,Cherry,DATSUN CHERRY,43,0.0,99.07,Petrol,0,
+1369,Volvo,133,VOLVO 133,43,0.0,99.07,Petrol,0,
+1370,DS,NO 4,DS NO 4,42,0.0,99.07,Hybrid electric (petrol),0,
+1371,Mazda,Mazda 6E,MAZDA MAZDA 6E,42,0.0,99.07,Battery electric,3,mazda-mazda-6-mzw1-v1|mazda-mazda-6-mzw1-v2|mazda-mazda-6-2002-mzw1-v1
+1372,Chevrolet GMC,Blazer,CHEVROLET GMC BLAZER,42,0.0,99.07,Petrol,0,
+1373,Citroen,DS21,CITROEN DS21,42,0.0,99.07,Petrol,0,
+1374,Proton,Impian,PROTON IMPIAN,42,0.0,99.07,Petrol,0,
+1375,Fiat,127,FIAT 127,41,0.0,99.07,Petrol,0,
+1376,Cadillac,Seville,CADILLAC SEVILLE,41,0.0,99.07,Petrol,0,
+1377,Rolls Royce,Silver Dawn,ROLLS ROYCE SILVER DAWN,41,0.0,99.07,Petrol,0,
+1378,Abarth,124,ABARTH 124,41,0.0,99.07,Petrol,0,
+1379,Austin,Ambassador,AUSTIN AMBASSADOR,41,0.0,99.07,Petrol,0,
+1380,Hyundai,Genesis,HYUNDAI GENESIS,41,0.0,99.07,Petrol,0,
+1381,Toyota,Ipsum,TOYOTA IPSUM,40,0.0,99.07,Petrol,0,
+1382,Volkswagen,Kombi,VOLKSWAGEN KOMBI,40,0.0,99.07,Petrol,0,
+1383,Alpine,A390,ALPINE A390,39,0.0,99.07,Battery electric,0,
+1384,Tesla,Roadster,TESLA ROADSTER,39,0.0,99.07,Battery electric,0,
+1385,Reliant,Rebel,RELIANT REBEL,39,0.0,99.07,Petrol,0,
+1386,Toyota,Corona,TOYOTA CORONA,39,0.0,99.07,Petrol,0,
+1387,Buick,LE Sabre,BUICK LE SABRE,39,0.0,99.07,Petrol,0,
+1388,Aston Martin,Valhalla,ASTON MARTIN VALHALLA,39,0.0,99.07,Plug-in hybrid electric (petrol),0,
+1389,Citroen,D Special,CITROEN D SPECIAL,38,0.0,99.07,Petrol,0,
+1390,Infiniti,M30,INFINITI M30,38,0.0,99.07,Diesel,0,
+1391,Mazda,Xedos,MAZDA XEDOS,38,0.0,99.07,Petrol,1,mazda-xedos-6-1992-mzw1-v1
+1392,Opel,Corsa,OPEL CORSA,38,0.0,99.07,Petrol,2,opel-corsa-1997-w5-v1|opel-corsa-2011-vx1-v1
+1393,Peugeot,305,PEUGEOT 305,38,0.0,99.07,Petrol,0,
+1394,Pontiac,Bonneville,PONTIAC BONNEVILLE,38,0.0,99.07,Petrol,0,
+1395,Renault,Caravelle,RENAULT CARAVELLE,38,0.0,99.07,Petrol,0,
+1396,Lada,Niva,LADA NIVA,37,0.0,99.07,Petrol,0,
+1397,Renault,21,RENAULT 21,37,0.0,99.07,Petrol,0,
+1398,Rover,Cityrover,ROVER CITYROVER,37,0.0,99.07,Petrol,0,
+1399,Alfa Romeo,ASD Hatch,ALFA ROMEO ASD HATCH,37,0.0,99.07,Petrol,0,
+1400,Audi,Super 90,AUDI SUPER 90,37,0.0,99.07,Petrol,0,
+1401,Lancia,Gamma,LANCIA GAMMA,37,0.0,99.07,Petrol,0,
+1402,Wolseley,15/60,WOLSELEY 15/60,37,0.0,99.07,Petrol,0,
+1403,Alfa Romeo,146,ALFA ROMEO 146,36,0.0,99.07,Petrol,0,
+1404,Talbot,Avenger,TALBOT AVENGER,36,0.0,99.07,Petrol,0,
+1405,Great Wall,Funky CAT,GREAT WALL FUNKY CAT,35,0.0,99.07,Battery electric,0,
+1406,Peugeot,505,PEUGEOT 505,35,0.0,99.07,Petrol,0,
+1407,Toyota,Soarer,TOYOTA SOARER,35,0.0,99.07,Petrol,0,
+1408,Nissan,Cherry,NISSAN CHERRY,35,0.0,99.07,Petrol,0,
+1409,Talbot,Samba,TALBOT SAMBA,35,0.0,99.07,Petrol,0,
+1410,Vauxhall,Royale,VAUXHALL ROYALE,35,0.0,99.07,Petrol,0,
+1411,Vauxhall,Viscount,VAUXHALL VISCOUNT,35,0.0,99.07,Petrol,0,
+1412,Porsche,918,PORSCHE 918,35,0.0,99.07,Plug-in hybrid electric (petrol),2,porsche-918-2015-pw2-v1|porsche-918-2015-pw2-v2
+1413,Mazda,MPV,MAZDA MPV,34,0.0,99.07,Petrol,1,mazda-mpv-2002-mzw1-v1
+1414,Mitsubishi,FTO,MITSUBISHI FTO,34,0.0,99.07,Petrol,0,
+1415,Daimler,3.6,DAIMLER 3.6,34,0.0,99.07,Petrol,0,
+1416,Maserati,Merak,MASERATI MERAK,34,0.0,99.07,Petrol,0,
+1417,Aston Martin,DB2/4,ASTON MARTIN DB2/4,34,0.0,99.07,Petrol,0,
+1418,Daimler,2.8,DAIMLER 2.8,34,0.0,99.07,Petrol,0,
+1419,Datsun,Sunny,DATSUN SUNNY,34,0.0,99.07,Petrol,0,
+1420,Jensen,GT,JENSEN GT,34,0.0,99.07,Petrol,0,
+1421,Jensen,SP,JENSEN SP,34,0.0,99.07,Petrol,0,
+1422,Leyland Cars,Maxi,LEYLAND CARS MAXI,34,0.0,99.07,Petrol,0,
+1423,Mclaren,Senna,MCLAREN SENNA,34,0.0,99.07,Petrol,0,
+1424,Panther,Kallista,PANTHER KALLISTA,34,0.0,99.07,Petrol,0,
+1425,Renault,Spider,RENAULT SPIDER,34,0.0,99.07,Petrol,0,
+1426,Vanden Plas,Auto,VANDEN PLAS AUTO,34,0.0,99.07,Petrol,0,
+1427,Bond,BUG,BOND BUG,33,0.0,99.07,Petrol,0,
+1428,Mazda,121,MAZDA 121,33,0.0,99.07,Petrol,0,
+1429,Peugeot,404,PEUGEOT 404,33,0.0,99.07,Petrol,1,peugeot-404-pw1-v1
+1430,Pontiac,Catalina,PONTIAC CATALINA,33,0.0,99.07,Petrol,0,
+1431,Vauxhall,Magnum,VAUXHALL MAGNUM,33,0.0,99.07,Petrol,0,
+1432,Lancia,2000,LANCIA 2000,33,0.0,99.07,Petrol,0,
+1433,Citroen,Visa,CITROEN VISA,32,0.0,99.07,Petrol,0,
+1434,Toyota,Mark II,TOYOTA MARK II,32,0.0,99.07,Petrol,0,
+1435,Lotus,Cortina,LOTUS CORTINA,32,0.0,99.07,Petrol,0,
+1436,Volvo,221,VOLVO 221,32,0.0,99.07,Petrol,0,
+1437,Wolseley,6/99,WOLSELEY 6/99,32,0.0,99.07,Petrol,0,
+1438,Daihatsu,Move,DAIHATSU MOVE,31,0.0,99.07,Petrol,0,
+1439,Mercedes-Benz,AMG CLE Class,MERCEDES-BENZ AMG CLE CLASS,31,0.0,99.07,Hybrid electric (petrol),0,
+1440,Audi,RS2,AUDI RS2,31,0.0,99.07,Petrol,0,
+1441,Chrysler,Avenger,CHRYSLER AVENGER,31,0.0,99.07,Petrol,0,
+1442,Fiat,Brava,FIAT BRAVA,30,0.0,99.07,Petrol,0,
+1443,Ford,Sapphire,FORD SAPPHIRE,30,0.0,99.07,Petrol,0,
+1444,Opel,Astra,OPEL ASTRA,30,0.0,99.07,Petrol,4,opel-astra-2012-w5-v1|opel-astra-1991-w6-v1|opel-astra-1998-w7-v1|opel-astra-vx1-v1
+1445,Renault,Gordini,RENAULT GORDINI,30,0.0,99.07,Petrol,0,
+1446,Subaru,SVX,SUBARU SVX,30,0.0,99.07,Petrol,0,
+1447,Volkswagen,181,VOLKSWAGEN 181,30,0.0,99.07,Petrol,0,
+1448,Infiniti,FX37,INFINITI FX37,29,0.0,99.07,Petrol,0,
+1449,Opel,Insignia,OPEL INSIGNIA,29,0.0,99.07,Petrol,0,
+1450,Opel,Rekord,OPEL REKORD,29,0.0,99.07,Petrol,3,opel-rekord-1963-vx1-v1|opel-rekord-1972-vx1-v1|opel-rekord-1960-vx1-v1
+1451,Renault,Fuego,RENAULT FUEGO,29,0.0,99.07,Petrol,0,
+1452,Skoda,120,SKODA 120,29,0.0,99.07,Petrol,0,
+1453,Buick,Electra,BUICK ELECTRA,29,0.0,99.07,Petrol,0,
+1454,Hyundai,1400,HYUNDAI 1400,28,0.0,99.07,Battery electric,0,
+1455,Audi,200,AUDI 200,28,0.0,99.07,Petrol,0,
+1456,Renault,18,RENAULT 18,28,0.0,99.07,Petrol,0,
+1457,Volvo,460,VOLVO 460,28,0.0,99.07,Petrol,0,
+1458,Riley,2.6,RILEY 2.6,28,0.0,99.07,Petrol,0,
+1459,Hummer,H2,HUMMER H2,27,0.0,99.07,Petrol,0,
+1460,Opel,Zafira,OPEL ZAFIRA,27,0.0,99.07,Petrol,1,opel-zafira-2002-vx1-v1
+1461,BMW,1502,BMW 1502,27,0.0,99.07,Petrol,0,
+1462,Mazda,Bongo Friendee A,MAZDA BONGO FRIENDEE A,27,0.0,99.07,Petrol,0,
+1463,Reliant,Sabre,RELIANT SABRE,27,0.0,99.07,Petrol,0,
+1464,Renault,Fluence,RENAULT FLUENCE,26,0.0,99.07,Battery electric,0,
+1465,Austin,Montego,AUSTIN MONTEGO,26,0.0,99.07,Petrol,0,
+1466,Perodua,Nippa,PERODUA NIPPA,26,0.0,99.07,Petrol,0,
+1467,Proton,Wira,PROTON WIRA,26,0.0,99.07,Petrol,0,
+1468,Volkswagen,Derby,VOLKSWAGEN DERBY,26,0.0,99.08,Petrol,0,
+1469,Fiat,1500,FIAT 1500,25,0.0,99.08,Petrol,0,
+1470,Chevrolet,Epica,CHEVROLET EPICA,25,0.0,99.08,Diesel,0,
+1471,Nissan,Prairie,NISSAN PRAIRIE,25,0.0,99.08,Petrol,0,
+1472,Alfa Romeo,33,ALFA ROMEO 33,25,0.0,99.08,Petrol,0,
+1473,Alfa Romeo,SZ,ALFA ROMEO SZ,25,0.0,99.08,Petrol,0,
+1474,Colt,Lancer,COLT LANCER,25,0.0,99.08,Petrol,0,
+1475,Corvette,C6,CORVETTE C6,25,0.0,99.08,Petrol,0,
+1476,Leyland Cars,Princess,LEYLAND CARS PRINCESS,25,0.0,99.08,Petrol,0,
+1477,Austin,SIX,AUSTIN SIX,24,0.0,99.08,Petrol,0,
+1478,Daewoo,Musso,DAEWOO MUSSO,24,0.0,99.08,Diesel,0,
+1479,Daihatsu,Hi-Jet,DAIHATSU HI-JET,24,0.0,99.08,Petrol,0,
+1480,Ford,Taurus,FORD TAURUS,24,0.0,99.08,Petrol,0,
+1481,Suzuki,Carry,SUZUKI CARRY,24,0.0,99.08,Petrol,0,
+1482,Volkswagen,Microbus,VOLKSWAGEN MICROBUS,24,0.0,99.08,Petrol,0,
+1483,BMW,3.0 SI,BMW 3.0 SI,24,0.0,99.08,Petrol,0,
+1484,Bristol,400,BRISTOL 400,24,0.0,99.08,Petrol,0,
+1485,Citroen,Safari,CITROEN SAFARI,24,0.0,99.08,Petrol,0,
+1486,Datsun,Laurel,DATSUN LAUREL,24,0.0,99.08,Petrol,0,
+1487,Maybach,62,MAYBACH 62,24,0.0,99.08,Petrol,0,
+1488,Riley,4/68,RILEY 4/68,24,0.0,99.08,Petrol,0,
+1489,Suzuki,SC,SUZUKI SC,24,0.0,99.08,Petrol,0,
+1490,Ford,Executive,FORD EXECUTIVE,23,0.0,99.08,Petrol,0,
+1491,Volkswagen,LT,VOLKSWAGEN LT,23,0.0,99.08,Diesel,0,
+1492,Daewoo,Tacuma,DAEWOO TACUMA,23,0.0,99.08,Petrol,0,
+1493,Datsun,100A,DATSUN 100A,23,0.0,99.08,Petrol,0,
+1494,Lamborghini,Diablo,LAMBORGHINI DIABLO,23,0.0,99.08,Petrol,0,
+1495,Nissan,Laurel,NISSAN LAUREL,23,0.0,99.08,Petrol,0,
+1496,Wolseley,1100,WOLSELEY 1100,23,0.0,99.08,Petrol,0,
+1497,Audi,Avant,AUDI AVANT,22,0.0,99.08,Diesel,0,
+1498,Peugeot,403,PEUGEOT 403,22,0.0,99.08,Petrol,0,
+1499,Renault,Safrane,RENAULT SAFRANE,22,0.0,99.08,Petrol,0,
+1500,Talbot,Horizon,TALBOT HORIZON,22,0.0,99.08,Petrol,0,
+1501,Daewoo,Nubira,DAEWOO NUBIRA,22,0.0,99.08,Petrol,0,
+1502,Ferrari,Laferrari,FERRARI LAFERRARI,22,0.0,99.08,Hybrid electric (petrol),0,
+1503,Ferrari,Testarossa,FERRARI TESTAROSSA,22,0.0,99.08,Plug-in hybrid electric (petrol),0,
+1504,Ferrari,Daytona,FERRARI DAYTONA,22,0.0,99.08,Petrol,0,
+1505,Fiat,130,FIAT 130,22,0.0,99.08,Petrol,0,
+1506,Gordon Murray,T.50,GORDON MURRAY T.50,22,0.0,99.08,Petrol,0,
+1507,Lancia,Thema,LANCIA THEMA,22,0.0,99.08,Petrol,0,
+1508,Mitsubishi,Starion,MITSUBISHI STARION,22,0.0,99.08,Petrol,0,
+1509,Rolls Royce,Silver Shadow,ROLLS ROYCE SILVER SHADOW,22,0.0,99.08,Petrol,0,
+1510,TVR,400,TVR 400,22,0.0,99.08,Petrol,0,
+1511,TVR,V8,TVR V8,22,0.0,99.08,Petrol,0,
+1512,Mitsubishi,L200,MITSUBISHI L200,21,0.0,99.08,Diesel,1,mitsubishi-l200-v1
+1513,Renault,25,RENAULT 25,21,0.0,99.08,Petrol,0,
+1514,Volkswagen,412,VOLKSWAGEN 412,21,0.0,99.08,Petrol,0,
+1515,Volkswagen,Motor Caravan,VOLKSWAGEN MOTOR CARAVAN,21,0.0,99.08,Petrol,0,
+1516,Aston Martin,Valkyrie,ASTON MARTIN VALKYRIE,21,0.0,99.08,Hybrid electric (petrol),0,
+1517,BMW,Alpina XB7,BMW ALPINA XB7,21,0.0,99.08,Petrol,0,
+1518,Daihatsu,Mira,DAIHATSU MIRA,21,0.0,99.08,Petrol,0,
+1519,Mgxpower,SV,MGXPOWER SV,21,0.0,99.08,Petrol,0,
+1520,Austin,A135,AUSTIN A135,20,0.0,99.08,Petrol,0,
+1521,Austin,Taxi,AUSTIN TAXI,20,0.0,99.08,Diesel,0,
+1522,Datsun,Bluebird,DATSUN BLUEBIRD,20,0.0,99.08,Petrol,0,
+1523,Ford,Procab,FORD PROCAB,20,0.0,99.08,Diesel,0,
+1524,Isuzu,Bighorn,ISUZU BIGHORN,20,0.0,99.08,Diesel,0,
+1525,Bristol,411,BRISTOL 411,20,0.0,99.08,Petrol,0,
+1526,Bristol,405,BRISTOL 405,20,0.0,99.08,Petrol,0,
+1527,Chrysler,NEW Yorker,CHRYSLER NEW YORKER,20,0.0,99.08,Petrol,0,
+1528,Colt,Sapporo,COLT SAPPORO,20,0.0,99.08,Petrol,0,
+1529,Datsun,1200,DATSUN 1200,20,0.0,99.08,Petrol,0,
+1530,Lancia,Coupe,LANCIA COUPE,20,0.0,99.08,Petrol,0,
+1531,Lancia,HPE,LANCIA HPE,20,0.0,99.08,Petrol,0,
+1532,Maserati,Indy,MASERATI INDY,20,0.0,99.08,Petrol,0,
+1533,MG,Montego,MG MONTEGO,20,0.0,99.08,Petrol,0,
+1534,Talbot,Alpine,TALBOT ALPINE,20,0.0,99.08,Petrol,0,
+1535,Talbot,Solara,TALBOT SOLARA,20,0.0,99.08,Petrol,0,
+1536,Volvo,262,VOLVO 262,20,0.0,99.08,Petrol,0,
+1537,Zenos,E10,ZENOS E10,20,0.0,99.08,Petrol,0,
+1538,BMW,2800,BMW 2800,19,0.0,99.08,Petrol,0,
+1539,Bristol,401,BRISTOL 401,19,0.0,99.08,Petrol,0,
+1540,Ford,Ranger,FORD RANGER,19,0.0,99.08,Diesel,2,ford-ranger-2023-v1|ford-ranger-w7-v1
+1541,Hyundai,Pony,HYUNDAI PONY,19,0.0,99.08,Petrol,0,
+1542,Simca,1100,SIMCA 1100,19,0.0,99.08,Petrol,0,
+1543,Volvo,343,VOLVO 343,19,0.0,99.08,Petrol,0,
+1544,Hyundai,XG,HYUNDAI XG,19,0.0,99.08,Petrol,0,
+1545,Datsun,180,DATSUN 180,19,0.0,99.08,Petrol,0,
+1546,Aston Martin,DB2,ASTON MARTIN DB2,19,0.0,99.08,Petrol,0,
+1547,Daimler,5.3,DAIMLER 5.3,19,0.0,99.08,Petrol,0,
+1548,Mercedes-Benz,AMG A Class,MERCEDES-BENZ AMG A CLASS,19,0.0,99.08,Petrol,0,
+1549,Microcar,M-8,MICROCAR M-8,19,0.0,99.08,Petrol,0,
+1550,NSU,1200,NSU 1200,19,0.0,99.08,Petrol,0,
+1551,Simca,1000,SIMCA 1000,19,0.0,99.08,Petrol,0,
+1552,BMW,2500,BMW 2500,18,0.0,99.08,Petrol,0,
+1553,Renault,17,RENAULT 17,18,0.0,99.08,Petrol,0,
+1554,Bentley,Eight,BENTLEY EIGHT,18,0.0,99.08,Petrol,0,
+1555,Saab,90,SAAB 90,18,0.0,99.08,Petrol,0,
+1556,Austin,A99,AUSTIN A99,18,0.0,99.08,Petrol,0,
+1557,Bristol,403,BRISTOL 403,18,0.0,99.08,Petrol,0,
+1558,Ford,LTD,FORD LTD,18,0.0,99.08,Petrol,0,
+1559,Maserati,Biturbo,MASERATI BITURBO,18,0.0,99.08,Petrol,0,
+1560,Smart,Crossblade,SMART CROSSBLADE,18,0.0,99.08,Petrol,0,
+1561,BMW,1600,BMW 1600,17,0.0,99.08,Petrol,0,
+1562,Opel,Commodore,OPEL COMMODORE,17,0.0,99.08,Petrol,0,
+1563,Renault,9,RENAULT 9,17,0.0,99.08,Petrol,0,
+1564,Ssangyong,Musso,SSANGYONG MUSSO,17,0.0,99.08,Diesel,0,
+1565,Toyota,Tercel,TOYOTA TERCEL,17,0.0,99.08,Petrol,0,
+1566,Volvo,365,VOLVO 365,17,0.0,99.08,Diesel,0,
+1567,BMW,700,BMW 700,17,0.0,99.08,Petrol,0,
+1568,Chevrolet GMC,Biscayne,CHEVROLET GMC BISCAYNE,17,0.0,99.08,Petrol,0,
+1569,Fiat,1100,FIAT 1100,17,0.0,99.08,Petrol,0,
+1570,Fiat,2300,FIAT 2300,17,0.0,99.08,Petrol,1,fiat-2300-1961-fw1-v1
+1571,Proton,SE,PROTON SE,17,0.0,99.08,Petrol,0,
+1572,Toyota,Will VI,TOYOTA WILL VI,17,0.0,99.08,Petrol,0,
+1573,Wartburg,Knight,WARTBURG KNIGHT,17,0.0,99.08,Petrol,0,
+1574,Peugeot,104,PEUGEOT 104,16,0.0,99.08,Petrol,0,
+1575,Toyota,Cressida,TOYOTA CRESSIDA,16,0.0,99.08,Petrol,0,
+1576,Toyota,Harrier,TOYOTA HARRIER,16,0.0,99.08,Petrol,0,
+1577,Volkswagen,K 70,VOLKSWAGEN K 70,16,0.0,99.08,Petrol,0,
+1578,Cadillac,SRX,CADILLAC SRX,16,0.0,99.08,Petrol,0,
+1579,Toyota,Sprinter,TOYOTA SPRINTER,16,0.0,99.08,Petrol,0,
+1580,Toyota,Celsior,TOYOTA CELSIOR,16,0.0,99.08,Petrol,0,
+1581,Alfa Romeo,8C,ALFA ROMEO 8C,16,0.0,99.08,Petrol,0,
+1582,Austin,A105,AUSTIN A105,16,0.0,99.08,Petrol,0,
+1583,Datsun,160,DATSUN 160,16,0.0,99.08,Petrol,0,
+1584,Lada,1200,LADA 1200,16,0.0,99.08,Petrol,0,
+1585,Maybach,57,MAYBACH 57,16,0.0,99.08,Petrol,0,
+1586,Mercedes,SLR Mclaren,MERCEDES SLR MCLAREN,16,0.0,99.08,Petrol,3,mercedes-benz-slr-mclaren-2004-mw1-v1|mercedes-benz-slr-mclaren-mw1-v1|mercedes-benz-slr-mclaren-mw1-v2
+1587,NSU,1000,NSU 1000,16,0.0,99.08,Petrol,0,
+1588,Pontiac,Tempest,PONTIAC TEMPEST,16,0.0,99.08,Petrol,0,
+1589,Saab,Sonett,SAAB SONETT,16,0.0,99.08,Petrol,0,
+1590,Singer,Hunter,SINGER HUNTER,16,0.0,99.08,Petrol,0,
+1591,Skoda,130,SKODA 130,16,0.0,99.08,Petrol,0,
+1592,Cadillac,Lyriq EV,CADILLAC LYRIQ EV,15,0.0,99.08,Battery electric,0,
+1593,DAF,44,DAF 44,15,0.0,99.08,Petrol,0,
+1594,BMW,3.0 S,BMW 3.0 S,15,0.0,99.08,Petrol,0,
+1595,Volvo,260,VOLVO 260,15,0.0,99.08,Diesel,0,
+1596,Volvo,264,VOLVO 264,15,0.0,99.08,Petrol,0,
+1597,KIA,Shuma,KIA SHUMA,15,0.0,99.08,Petrol,0,
+1598,Honda,NC750,HONDA NC750,15,0.0,99.08,Hybrid electric (petrol),0,
+1599,Chrysler,Street Cruiser,CHRYSLER STREET CRUISER,15,0.0,99.08,Petrol,0,
+1600,Fiat,125,FIAT 125,15,0.0,99.08,Petrol,1,fiat-125-1970-fw1-v1
+1601,KTM,X-Bow,KTM X-BOW,15,0.0,99.08,Petrol,0,
+1602,Lancia,CPE,LANCIA CPE,15,0.0,99.08,Petrol,0,
+1603,Rover,Vitesse,ROVER VITESSE,15,0.0,99.08,Petrol,0,
+1604,Vauxhall,Sports,VAUXHALL SPORTS,15,0.0,99.08,Petrol,0,
+1605,Alfa Romeo,Alfa 33,ALFA ROMEO ALFA 33,14,0.0,99.08,Petrol,0,
+1606,Fiat,132,FIAT 132,14,0.0,99.08,Petrol,1,fiat-132-fw1-v1
+1607,Fiat,Marea,FIAT MAREA,14,0.0,99.08,Petrol,0,
+1608,Mitsubishi,Space Runner,MITSUBISHI SPACE RUNNER,14,0.0,99.08,Petrol,0,
+1609,Volvo,345,VOLVO 345,14,0.0,99.08,Petrol,0,
+1610,Hyundai,Nexo,HYUNDAI NEXO,14,0.0,99.08,Fuel cell electric,0,
+1611,Daihatsu,Grand Move,DAIHATSU GRAND MOVE,14,0.0,99.08,Petrol,0,
+1612,Cadillac,STS,CADILLAC STS,14,0.0,99.08,Petrol,0,
+1613,Datsun,510,DATSUN 510,14,0.0,99.08,Petrol,0,
+1614,Honda,TLM240R,HONDA TLM240R,14,0.0,99.08,Petrol,0,
+1615,Maserati,Bora,MASERATI BORA,14,0.0,99.08,Petrol,0,
+1616,Maserati,Khamsin,MASERATI KHAMSIN,14,0.0,99.08,Petrol,0,
+1617,Toyota,Aristo,TOYOTA ARISTO,14,0.0,99.08,Petrol,0,
+1618,Volkswagen,411,VOLKSWAGEN 411,14,0.0,99.08,Petrol,0,
+1619,Volvo,66,VOLVO 66,14,0.0,99.08,Petrol,0,
+1620,Honda,Super N,HONDA SUPER N,13,0.0,99.08,Battery electric,0,
+1621,Aixam,A751,AIXAM A751,13,0.0,99.08,Petrol,0,
+1622,BMW,1800,BMW 1800,13,0.0,99.08,Petrol,0,
+1623,BMW,Alpina B10,BMW ALPINA B10,13,0.0,99.08,Petrol,0,
+1624,Renault,6,RENAULT 6,13,0.0,99.08,Petrol,0,
+1625,Skoda,S110,SKODA S110,13,0.0,99.08,Petrol,0,
+1626,Toyota,Space Cruiser,TOYOTA SPACE CRUISER,13,0.0,99.08,Petrol,0,
+1627,Vauxhall,Allied,VAUXHALL ALLIED,13,0.0,99.08,Diesel,0,
+1628,Proton,GL,PROTON GL,13,0.0,99.08,Petrol,0,
+1629,Chrysler,Viper,CHRYSLER VIPER,13,0.0,99.08,Petrol,0,
+1630,DAF,66,DAF 66,13,0.0,99.08,Petrol,0,
+1631,Ford,RS 200,FORD RS 200,13,0.0,99.08,Petrol,0,
+1632,Hyundai,Grandeur,HYUNDAI GRANDEUR,13,0.0,99.08,Petrol,0,
+1633,Lotus,2 Eleven,LOTUS 2 ELEVEN,13,0.0,99.08,Petrol,0,
+1634,Oldsmobile,Toronado,OLDSMOBILE TORONADO,13,0.0,99.08,Petrol,0,
+1635,Renault,10,RENAULT 10,13,0.0,99.08,Petrol,0,
+1636,Seat,Marbella,SEAT MARBELLA,13,0.0,99.08,Petrol,0,
+1637,Volvo,132,VOLVO 132,13,0.0,99.08,Petrol,0,
+1638,Volvo,142,VOLVO 142,13,0.0,99.08,Petrol,0,
+1639,Infiniti,EX37,INFINITI EX37,12,0.0,99.08,Petrol,0,
+1640,Mazda,Familia,MAZDA FAMILIA,12,0.0,99.08,Petrol,0,
+1641,Alfa Romeo,Berlina,ALFA ROMEO BERLINA,12,0.0,99.08,Petrol,0,
+1642,Chrysler,Alpine,CHRYSLER ALPINE,12,0.0,99.08,Petrol,0,
+1643,Colt,Celeste,COLT CELESTE,12,0.0,99.08,Petrol,0,
+1644,Daimler,One-O-Four,DAIMLER ONE-O-FOUR,12,0.0,99.08,Petrol,0,
+1645,Datsun,120A,DATSUN 120A,12,0.0,99.08,Petrol,0,
+1646,Lada,1500,LADA 1500,12,0.0,99.08,Petrol,0,
+1647,Mazda,1300,MAZDA 1300,12,0.0,99.08,Petrol,0,
+1648,Mercedes-Benz,AMG SL Class,MERCEDES-BENZ AMG SL CLASS,12,0.0,99.08,Plug-in hybrid electric (petrol),0,
+1649,Proton,Compact,PROTON COMPACT,12,0.0,99.08,Petrol,0,
+1650,Renault,A610,RENAULT A610,12,0.0,99.08,Petrol,0,
+1651,Rover,V8,ROVER V8,12,0.0,99.08,Petrol,0,
+1652,Volkswagen,XL1,VOLKSWAGEN XL1,12,0.0,99.08,Plug-in hybrid electric (diesel),0,
+1653,Aixam,Coupe,AIXAM COUPE,11,0.0,99.08,Diesel,0,
+1654,Isuzu,D-Max,ISUZU D-MAX,11,0.0,99.08,Diesel,0,
+1655,Renault,15,RENAULT 15,11,0.0,99.08,Petrol,0,
+1656,Volvo,265,VOLVO 265,11,0.0,99.08,Petrol,0,
+1657,Ferrari,F80,FERRARI F80,11,0.0,99.08,Hybrid electric (petrol),0,
+1658,Caterham,21,CATERHAM 21,11,0.0,99.08,Petrol,0,
+1659,Daimler,Drop Head Coupe,DAIMLER DROP HEAD COUPE,11,0.0,99.08,Petrol,0,
+1660,Ferrari,Monza,FERRARI MONZA,11,0.0,99.08,Petrol,0,
+1661,Honda,Acty,HONDA ACTY,11,0.0,99.08,Petrol,0,
+1662,Honda,N,HONDA N,11,0.0,99.08,Petrol,0,
+1663,Infiniti,M37,INFINITI M37,11,0.0,99.08,Petrol,0,
+1664,KIA,Pride,KIA PRIDE,11,0.0,99.08,Petrol,0,
+1665,Subaru,1.8,SUBARU 1.8,11,0.0,99.08,Petrol,0,
+1666,Vauxhall,Viceroy,VAUXHALL VICEROY,11,0.0,99.08,Petrol,0,
+1667,ORA,03 GT,ORA 03 GT,10,0.0,99.08,Battery electric,0,
+1668,Mitsubishi,Legnum,MITSUBISHI LEGNUM,10,0.0,99.08,Petrol,0,
+1669,Peugeot,204,PEUGEOT 204,10,0.0,99.09,Petrol,0,
+1670,Daewoo,Leganza,DAEWOO LEGANZA,10,0.0,99.09,Petrol,0,
+1671,BMW,Fraser Nash,BMW FRASER NASH,10,0.0,99.09,Petrol,0,
+1672,Datsun,140,DATSUN 140,10,0.0,99.09,Petrol,0,
+1673,Honda,N-Van,HONDA N-VAN,10,0.0,99.09,Petrol,0,
+1674,Hyundai,S-Coupe,HYUNDAI S-COUPE,10,0.0,99.09,Petrol,0,
+1675,Hyundai,X2,HYUNDAI X2,10,0.0,99.09,Petrol,0,
+1676,Lada,Hussar,LADA HUSSAR,10,0.0,99.09,Petrol,0,
+1677,Lancia,Spyder,LANCIA SPYDER,10,0.0,99.09,Petrol,0,
+1678,Morris,2200,MORRIS 2200,10,0.0,99.09,Petrol,0,
+1679,Secma,FUN,SECMA FUN,10,0.0,99.09,Petrol,0,
+1680,Simca,1501,SIMCA 1501,10,0.0,99.09,Petrol,0,
+1681,Singer,1500,SINGER 1500,10,0.0,99.09,Petrol,0,
+1682,Hyundai,1200,HYUNDAI 1200,9,0.0,99.09,Battery electric,0,
+1683,Nissan,Dynamo,NISSAN DYNAMO,9,0.0,99.09,Battery electric,0,
+1684,Citroen,Pallas,CITROEN PALLAS,9,0.0,99.09,Petrol,0,
+1685,Toyota,Liteace,TOYOTA LITEACE,9,0.0,99.09,Diesel,0,
+1686,Vauxhall,Belmont,VAUXHALL BELMONT,9,0.0,99.09,Petrol,0,
+1687,Volvo,C3O,VOLVO C3O,9,0.0,99.09,Diesel,0,
+1688,Lada,Samara,LADA SAMARA,9,0.0,99.09,Petrol,0,
+1689,Rolls Royce,Flying Spur,ROLLS ROYCE FLYING SPUR,9,0.0,99.09,Petrol,0,
+1690,Suzuki,Hustler,SUZUKI HUSTLER,9,0.0,99.09,Petrol,0,
+1691,Aston Martin,Valour,ASTON MARTIN VALOUR,9,0.0,99.09,Petrol,0,
+1692,FSO Cars,125,FSO CARS 125,9,0.0,99.09,Petrol,0,
+1693,Honda,XBR,HONDA XBR,9,0.0,99.09,Petrol,0,
+1694,Lancia,Y10,LANCIA Y10,9,0.0,99.09,Petrol,0,
+1695,Mazda,929,MAZDA 929,9,0.0,99.09,Petrol,0,
+1696,Mclaren,620R,MCLAREN 620R,9,0.0,99.09,Petrol,0,
+1697,Nissan,Stagea,NISSAN STAGEA,9,0.0,99.09,Petrol,1,nissan-stagea-2002-nw1-v1
+1698,Opel,Kapitan,OPEL KAPITAN,9,0.0,99.09,Petrol,1,opel-kapitan-1956-vx1-v1
+1699,Saab,97,SAAB 97,9,0.0,99.09,Petrol,0,
+1700,Volkswagen,Santana,VOLKSWAGEN SANTANA,9,0.0,99.09,Petrol,0,
+1701,Wolseley,2200,WOLSELEY 2200,9,0.0,99.09,Petrol,0,
+1702,BMW,3.3 L,BMW 3.3 L,8,0.0,99.09,Petrol,0,
+1703,Isuzu,Piazza,ISUZU PIAZZA,8,0.0,99.09,Petrol,0,
+1704,Nissan,Infiniti,NISSAN INFINITI,8,0.0,99.09,Diesel,0,
+1705,Peugeot,604,PEUGEOT 604,8,0.0,99.09,Petrol,0,
+1706,Peugeot,Bailey,PEUGEOT BAILEY,8,0.0,99.09,Petrol,0,
+1707,Renault,30,RENAULT 30,8,0.0,99.09,Petrol,0,
+1708,Seat,Malaga,SEAT MALAGA,8,0.0,99.09,Diesel,0,
+1709,Volkswagen,800,VOLKSWAGEN 800,8,0.0,99.09,Diesel,0,
+1710,Bristol,Blenheim,BRISTOL BLENHEIM,8,0.0,99.09,Petrol,0,
+1711,Acura,MDX,ACURA MDX,8,0.0,99.09,Petrol,0,
+1712,BMW,Alpina B8,BMW ALPINA B8,8,0.0,99.09,Petrol,0,
+1713,Bristol,404,BRISTOL 404,8,0.0,99.09,Petrol,0,
+1714,Bristol,412,BRISTOL 412,8,0.0,99.09,Petrol,0,
+1715,Chevrolet GMC,Chevy,CHEVROLET GMC CHEVY,8,0.0,99.09,Petrol,0,
+1716,Citroen,D20,CITROEN D20,8,0.0,99.09,Petrol,0,
+1717,Citroen,G Special,CITROEN G SPECIAL,8,0.0,99.09,Petrol,0,
+1718,Colt,1400,COLT 1400,8,0.0,99.09,Petrol,0,
+1719,Daewoo,Nexia,DAEWOO NEXIA,8,0.0,99.09,Petrol,0,
+1720,Fiat,Berlinetta,FIAT BERLINETTA,8,0.0,99.09,Petrol,0,
+1721,Ford,Monarch,FORD MONARCH,8,0.0,99.09,Petrol,0,
+1722,Holden,GTS,HOLDEN GTS,8,0.0,99.09,Petrol,0,
+1723,Jensen,S-V8,JENSEN S-V8,8,0.0,99.09,Petrol,0,
+1724,Mercedes-Benz,SL Class,MERCEDES-BENZ SL CLASS,8,0.0,99.09,Petrol,2,mercedes-benz-sl-class-1963-mw1-v1|mercedes-benz-sl-class-mw1-v1
+1725,Oldsmobile,Delta,OLDSMOBILE DELTA,8,0.0,99.09,Petrol,0,
+1726,Reliant,Robin,RELIANT ROBIN,8,0.0,99.09,Petrol,0,
+1727,Rolls Royce,Park Ward,ROLLS ROYCE PARK WARD,8,0.0,99.09,Petrol,0,
+1728,Skoda,Estelle,SKODA ESTELLE,8,0.0,99.09,Petrol,0,
+1729,Ford,Transit Tourneo,FORD TRANSIT TOURNEO,7,0.0,99.09,Diesel,0,
+1730,Nissan,Navara,NISSAN NAVARA,7,0.0,99.09,Diesel,3,nissan-navara-2021-v1|nissan-navara-w5-v1|nissan-navara-2022-w5-v1
+1731,Peugeot,Elddis,PEUGEOT ELDDIS,7,0.0,99.09,Diesel,0,
+1732,Skoda,S100,SKODA S100,7,0.0,99.09,Petrol,0,
+1733,Audi,V8,AUDI V8,7,0.0,99.09,Petrol,0,
+1734,Austin,2200,AUSTIN 2200,7,0.0,99.09,Petrol,0,
+1735,Bristol,410,BRISTOL 410,7,0.0,99.09,Petrol,0,
+1736,Datsun,Stanza,DATSUN STANZA,7,0.0,99.09,Petrol,0,
+1737,FSO Cars,Polonez,FSO CARS POLONEZ,7,0.0,99.09,Petrol,0,
+1738,Maserati,Mexico,MASERATI MEXICO,7,0.0,99.09,Petrol,0,
+1739,Plymouth,Prowler,PLYMOUTH PROWLER,7,0.0,99.09,Petrol,0,
+1740,Proton,SL,PROTON SL,7,0.0,99.09,Petrol,0,
+1741,Reliant,21 E,RELIANT 21 E,7,0.0,99.09,Petrol,0,
+1742,Reliant,Petrol Tricycle,RELIANT PETROL TRICYCLE,7,0.0,99.09,Petrol,0,
+1743,Simca,Matra,SIMCA MATRA,7,0.0,99.09,Petrol,0,
+1744,Skoda,136,SKODA 136,7,0.0,99.09,Petrol,0,
+1745,Mercedes-Benz,Coleman Milne,MERCEDES-BENZ COLEMAN MILNE,7,0.0,99.09,Plug-in hybrid electric (petrol),0,
+1746,Nissan,Interstar,NISSAN INTERSTAR,6,0.0,99.09,Diesel,0,
+1747,Aixam,500,AIXAM 500,6,0.0,99.09,Diesel,0,
+1748,Chrysler,180,CHRYSLER 180,6,0.0,99.09,Petrol,0,
+1749,Chrysler,Valiant,CHRYSLER VALIANT,6,0.0,99.09,Petrol,0,
+1750,Dodge,SRT,DODGE SRT,6,0.0,99.09,Petrol,0,
+1751,Honda,CB,HONDA CB,6,0.0,99.09,Petrol,0,
+1752,Mazda,1000,MAZDA 1000,6,0.0,99.09,Petrol,0,
+1753,Mercedes,308,MERCEDES 308,6,0.0,99.09,Diesel,0,
+1754,Mercedes,400,MERCEDES 400,6,0.0,99.09,Petrol,0,
+1755,Mercedes,410,MERCEDES 410,6,0.0,99.09,Diesel,0,
+1756,Renault,14,RENAULT 14,6,0.0,99.09,Petrol,0,
+1757,Volkswagen,1000,VOLKSWAGEN 1000,6,0.0,99.09,Diesel,0,
+1758,Volkswagen,Clipper,VOLKSWAGEN CLIPPER,6,0.0,99.09,Diesel,0,
+1759,Daimler,Century,DAIMLER CENTURY,6,0.0,99.09,Petrol,0,
+1760,Ford,F150,FORD F150,6,0.0,99.09,Petrol,0,
+1761,Levc,TX,LEVC TX,6,0.0,99.09,Range extended electric,0,
+1762,Bristol,406,BRISTOL 406,6,0.0,99.09,Petrol,0,
+1763,Daewoo,Espero,DAEWOO ESPERO,6,0.0,99.09,Petrol,0,
+1764,DAF,33,DAF 33,6,0.0,99.09,Petrol,0,
+1765,Honda,C50ZAL,HONDA C50ZAL,6,0.0,99.09,Petrol,0,
+1766,Honda,CBX,HONDA CBX,6,0.0,99.09,Petrol,0,
+1767,Honda,PA50DXV,HONDA PA50DXV,6,0.0,99.09,Petrol,0,
+1768,Maserati,Kyalami,MASERATI KYALAMI,6,0.0,99.09,Petrol,0,
+1769,Microcar,Virgo,MICROCAR VIRGO,6,0.0,99.09,Petrol,0,
+1770,Morris,8CWT,MORRIS 8CWT,6,0.0,99.09,Petrol,0,
+1771,Opel,Olympia,OPEL OLYMPIA,6,0.0,99.09,Petrol,1,opel-olympia-1938-vx1-v1
+1772,Opel,Senator,OPEL SENATOR,6,0.0,99.09,Petrol,1,opel-senator-1987-vx1-v1
+1773,Proton,GLS,PROTON GLS,6,0.0,99.09,Petrol,0,
+1774,Toyota,1000,TOYOTA 1000,6,0.0,99.09,Petrol,0,
+1775,TVR,450,TVR 450,6,0.0,99.09,Petrol,0,
+1776,Mercedes-Benz,Sprinter,MERCEDES-BENZ SPRINTER,5,0.0,99.09,Battery electric,2,mercedes-benz-sprinter-v1|mercedes-benz-sprinter-w7-v1
+1777,Carbodies,Taxi,CARBODIES TAXI,5,0.0,99.09,Diesel,0,
+1778,Daewoo,Korando,DAEWOO KORANDO,5,0.0,99.09,Petrol,0,
+1779,Ford,12M/15M,FORD 12M/15M,5,0.0,99.09,Petrol,0,
+1780,LDV,200 Series,LDV 200 SERIES,5,0.0,99.09,Diesel,0,
+1781,Mazda,RX-2,MAZDA RX-2,5,0.0,99.09,Petrol,0,
+1782,Mercedes,408,MERCEDES 408,5,0.0,99.09,Diesel,0,
+1783,Toyota,Lucida,TOYOTA LUCIDA,5,0.0,99.09,Diesel,0,
+1784,Toyota,Model F,TOYOTA MODEL F,5,0.0,99.09,Petrol,0,
+1785,Vauxhall,2300,VAUXHALL 2300,5,0.0,99.09,Petrol,0,
+1786,Vauxhall,Sintra,VAUXHALL SINTRA,5,0.0,99.09,Petrol,0,
+1787,Bristol,Britannia,BRISTOL BRITANNIA,5,0.0,99.09,Petrol,0,
+1788,Chrysler,Town & Country,CHRYSLER TOWN & COUNTRY,5,0.0,99.09,Petrol,0,
+1789,Dodge,Durango,DODGE DURANGO,5,0.0,99.09,Petrol,0,
+1790,Dodge,RAM 1500,DODGE RAM 1500,5,0.0,99.09,Petrol,0,
+1791,Fiat,Ulysee,FIAT ULYSEE,5,0.0,99.09,Petrol,0,
+1792,Maserati,430,MASERATI 430,5,0.0,99.09,Petrol,0,
+1793,Alfa Romeo,Super,ALFA ROMEO SUPER,5,0.0,99.09,Petrol,0,
+1794,Aston Martin,DB3,ASTON MARTIN DB3,5,0.0,99.09,Petrol,0,
+1795,Aston Martin,Zagato,ASTON MARTIN ZAGATO,5,0.0,99.09,Petrol,0,
+1796,BMW,M1,BMW M1,5,0.0,99.09,Petrol,1,bmw-m1-bm1-v1
+1797,Chrysler,2 Litre,CHRYSLER 2 LITRE,5,0.0,99.09,Petrol,0,
+1798,Chrysler,Charger,CHRYSLER CHARGER,5,0.0,99.09,Petrol,0,
+1799,Citroen,LNA,CITROEN LNA,5,0.0,99.09,Petrol,0,
+1800,Colt,Sigma,COLT SIGMA,5,0.0,99.09,Petrol,0,
+1801,Corvette,Z06,CORVETTE Z06,5,0.0,99.09,Petrol,0,
+1802,DAF,55,DAF 55,5,0.0,99.09,Petrol,0,
+1803,Fiat,NEW Fiat GT,FIAT NEW FIAT GT,5,0.0,99.09,Petrol,0,
+1804,Honda,ATC185S,HONDA ATC185S,5,0.0,99.09,Petrol,0,
+1805,Honda,Quintet,HONDA QUINTET,5,0.0,99.09,Petrol,0,
+1806,Honda,Z600,HONDA Z600,5,0.0,99.09,Petrol,0,
+1807,Hyundai,Pick UP,HYUNDAI PICK UP,5,0.0,99.09,Petrol,0,
+1808,Kymco,MXU 500,KYMCO MXU 500,5,0.0,99.09,Petrol,0,
+1809,Lexus,LFA,LEXUS LFA,5,0.0,99.09,Petrol,2,lexus-lfa-2010-lxw1-v1|lexus-lfa-2011-lxw1-v1
+1810,Maserati,Shamal,MASERATI SHAMAL,5,0.0,99.09,Petrol,0,
+1811,Mazda,Montrose,MAZDA MONTROSE,5,0.0,99.09,Petrol,0,
+1812,Mazda,RX-3,MAZDA RX-3,5,0.0,99.09,Petrol,0,
+1813,Mercedes,Mclaren,MERCEDES MCLAREN,5,0.0,99.09,Petrol,0,
+1814,Volkswagen,Delivery VAN,VOLKSWAGEN DELIVERY VAN,5,0.0,99.09,Petrol,0,
+1815,Fiat,Tempra,FIAT TEMPRA,4,0.0,99.09,Petrol,1,fiat-tempra-1990-fw1-v1
+1816,Hyundai,Staria,HYUNDAI STARIA,4,0.0,99.09,Diesel,0,
+1817,KIA,Mentor,KIA MENTOR,4,0.0,99.09,Petrol,0,
+1818,Mazda,B Series,MAZDA B SERIES,4,0.0,99.09,Diesel,0,
+1819,Mercedes,X Class,MERCEDES X CLASS,4,0.0,99.09,Diesel,0,
+1820,Nissan,Vanette,NISSAN VANETTE,4,0.0,99.09,Petrol,0,
+1821,Renault,20,RENAULT 20,4,0.0,99.09,Petrol,0,
+1822,Santana,PS10,SANTANA PS10,4,0.0,99.09,Diesel,0,
+1823,Tata,Safari,TATA SAFARI,4,0.0,99.09,Diesel,0,
+1824,Toyota,Dyna,TOYOTA DYNA,4,0.0,99.09,Diesel,0,
+1825,Volvo,363,VOLVO 363,4,0.0,99.09,Petrol,0,
+1826,Chevrolet GMC,Tahoe,CHEVROLET GMC TAHOE,4,0.0,99.09,Petrol,0,
+1827,Datsun,2.8C,DATSUN 2.8C,4,0.0,99.09,Petrol,0,
+1828,Toyota,Avalon,TOYOTA AVALON,4,0.0,99.09,Petrol,0,
+1829,Alfa Romeo,Alfa 90,ALFA ROMEO ALFA 90,4,0.0,99.09,Petrol,0,
+1830,Alfa Romeo,GTA,ALFA ROMEO GTA,4,0.0,99.09,Petrol,0,
+1831,BMW,1802,BMW 1802,4,0.0,99.09,Petrol,0,
+1832,BMW,Alpina B7,BMW ALPINA B7,4,0.0,99.09,Petrol,0,
+1833,Bond,Petrol Tricycle,BOND PETROL TRICYCLE,4,0.0,99.09,Petrol,0,
+1834,Bristol,603,BRISTOL 603,4,0.0,99.09,Petrol,0,
+1835,Buick,Wildcat,BUICK WILDCAT,4,0.0,99.09,Petrol,0,
+1836,Citroen,DS20,CITROEN DS20,4,0.0,99.09,Petrol,0,
+1837,Citroen,GSX,CITROEN GSX,4,0.0,99.09,Petrol,0,
+1838,Classic Replicas,Viper,CLASSIC REPLICAS VIPER,4,0.0,99.09,Petrol,0,
+1839,Datsun,1000,DATSUN 1000,4,0.0,99.09,Petrol,0,
+1840,Datsun,1600,DATSUN 1600,4,0.0,99.09,Petrol,0,
+1841,Datsun,Skyline,DATSUN SKYLINE,4,0.0,99.09,Petrol,0,
+1842,Honda,NS50D,HONDA NS50D,4,0.0,99.09,Petrol,0,
+1843,Honda,Sports,HONDA SPORTS,4,0.0,99.09,Petrol,0,
+1844,Honda,TRX,HONDA TRX,4,0.0,99.09,Petrol,0,
+1845,Kymco,Maxxer,KYMCO MAXXER,4,0.0,99.09,Petrol,0,
+1846,Lada,1600,LADA 1600,4,0.0,99.09,Petrol,0,
+1847,Lancia,Dedra,LANCIA DEDRA,4,0.0,99.09,Petrol,0,
+1848,Morgan,Midsummer Auto,MORGAN MIDSUMMER AUTO,4,0.0,99.09,Petrol,0,
+1849,Morris,10,MORRIS 10,4,0.0,99.09,Petrol,0,
+1850,Moskvich,427,MOSKVICH 427,4,0.0,99.09,Petrol,0,
+1851,Nissan,Stanza,NISSAN STANZA,4,0.0,99.09,Petrol,0,
+1852,Noble,M600,NOBLE M600,4,0.0,99.09,Petrol,0,
+1853,Secma,F16,SECMA F16,4,0.0,99.09,Petrol,0,
+1854,Simca,1301,SIMCA 1301,4,0.0,99.09,Petrol,0,
+1855,Wartburg,Tourist,WARTBURG TOURIST,4,0.0,99.09,Petrol,0,
+1856,Mclaren,P1,MCLAREN P1,4,0.0,99.09,Plug-in hybrid electric (petrol),0,
+1857,MIA,C,MIA C,3,0.0,99.09,Battery electric,0,
+1858,Volvo,EX60,VOLVO EX60,3,0.0,99.09,Battery electric,0,
+1859,Colt,Galant,COLT GALANT,3,0.0,99.09,Petrol,0,
+1860,Colt,Shogun,COLT SHOGUN,3,0.0,99.09,Diesel,0,
+1861,Datsun,Patrol,DATSUN PATROL,3,0.0,99.09,Diesel,0,
+1862,Fiat,Regata,FIAT REGATA,3,0.0,99.09,Petrol,1,fiat-regata-1984-fw1-v1
+1863,FSO Cars,Caro,FSO CARS CARO,3,0.0,99.09,Diesel,0,
+1864,Honda,VF750C,HONDA VF750C,3,0.0,99.09,Petrol,0,
+1865,Hyundai,Iload,HYUNDAI ILOAD,3,0.0,99.09,Diesel,0,
+1866,Land Rover,127,LAND ROVER 127,3,0.0,99.09,Petrol,0,
+1867,Mercedes,312,MERCEDES 312,3,0.0,99.09,Diesel,0,
+1868,Mercedes,412,MERCEDES 412,3,0.0,99.09,Diesel,0,
+1869,Mitsubishi,L300,MITSUBISHI L300,3,0.0,99.09,Diesel,0,
+1870,Nissan,NT400,NISSAN NT400,3,0.0,99.09,Diesel,0,
+1871,Opel,Agila,OPEL AGILA,3,0.0,99.09,Petrol,0,
+1872,Opel,Vectra,OPEL VECTRA,3,0.0,99.09,Diesel,0,
+1873,Peugeot,605,PEUGEOT 605,3,0.0,99.09,Petrol,0,
+1874,Seat,Inca,SEAT INCA,3,0.0,99.09,Diesel,0,
+1875,Skoda,105,SKODA 105,3,0.0,99.09,Petrol,0,
+1876,Toyota,Lite ACE,TOYOTA LITE ACE,3,0.0,99.09,Diesel,0,
+1877,Honda,GL1100D,HONDA GL1100D,3,0.0,99.09,Hybrid electric (petrol),0,
+1878,Mercedes-Benz,GLS Class,MERCEDES-BENZ GLS CLASS,3,0.0,99.09,Hybrid electric (petrol),1,mercedes-benz-gls-2022-v1
+1879,Alfa Romeo,Alfa 6,ALFA ROMEO ALFA 6,3,0.0,99.09,Petrol,0,
+1880,Aston Martin,ONE-77,ASTON MARTIN ONE-77,3,0.0,99.09,Petrol,0,
+1881,Bedford,Beagle,BEDFORD BEAGLE,3,0.0,99.09,Petrol,0,
+1882,Bond,250G,BOND 250G,3,0.0,99.09,Petrol,0,
+1883,Bond,875,BOND 875,3,0.0,99.09,Petrol,0,
+1884,Bristol,407,BRISTOL 407,3,0.0,99.09,Petrol,0,
+1885,Bristol,409,BRISTOL 409,3,0.0,99.09,Petrol,0,
+1886,Chevrolet GMC,Vega,CHEVROLET GMC VEGA,3,0.0,99.09,Petrol,0,
+1887,Chrysler,Regal,CHRYSLER REGAL,3,0.0,99.09,Petrol,0,
+1888,Colt,Starion,COLT STARION,3,0.0,99.09,Petrol,0,
+1889,DAF,46,DAF 46,3,0.0,99.09,Petrol,0,
+1890,Daihatsu,Domino,DAIHATSU DOMINO,3,0.0,99.09,Petrol,0,
+1891,Datsun,1400,DATSUN 1400,3,0.0,99.09,Petrol,0,
+1892,Fiat,133,FIAT 133,3,0.0,99.09,Petrol,1,fiat-133-fw1-v1
+1893,Fiat,1600,FIAT 1600,3,0.0,99.09,Petrol,0,
+1894,Fiat,Comfort,FIAT COMFORT,3,0.0,99.09,Petrol,0,
+1895,Ford,Grosvenor,FORD GROSVENOR,3,0.0,99.09,Petrol,0,
+1896,Ford,Minster,FORD MINSTER,3,0.0,99.09,Petrol,0,
+1897,Honda,ATC200B,HONDA ATC200B,3,0.0,99.09,Petrol,0,
+1898,Honda,FT500D,HONDA FT500D,3,0.0,99.09,Petrol,0,
+1899,Honda,N600T,HONDA N600T,3,0.0,99.09,Petrol,0,
+1900,Honda,RS125R,HONDA RS125R,3,0.0,99.09,Petrol,0,
+1901,Kymco,KXR,KYMCO KXR,3,0.0,99.09,Petrol,0,
+1902,Kymco,MXU 300,KYMCO MXU 300,3,0.0,99.09,Petrol,0,
+1903,Lancia,Berlina,LANCIA BERLINA,3,0.0,99.09,Petrol,0,
+1904,Lancia,Trevi,LANCIA TREVI,3,0.0,99.09,Petrol,0,
+1905,Maserati,222,MASERATI 222,3,0.0,99.09,Petrol,0,
+1906,Maserati,Karif,MASERATI KARIF,3,0.0,99.09,Petrol,0,
+1907,Mazda,110S,MAZDA 110S,3,0.0,99.09,Petrol,0,
+1908,Mitsubishi,I City,MITSUBISHI I CITY,3,0.0,99.09,Petrol,0,
+1909,Mitsubishi,Sigma,MITSUBISHI SIGMA,3,0.0,99.09,Petrol,0,
+1910,Morris,1/2 TON VAN,MORRIS 1/2 TON VAN,3,0.0,99.09,Petrol,0,
+1911,Nissan,QX,NISSAN QX,3,0.0,99.09,Petrol,0,
+1912,Rover,Coupe,ROVER COUPE,3,0.0,99.09,Petrol,0,
+1913,Simca,1200,SIMCA 1200,3,0.0,99.09,Petrol,0,
+1914,Simca,1500,SIMCA 1500,3,0.0,99.09,Petrol,0,
+1915,Talbot,Matra,TALBOT MATRA,3,0.0,99.09,Petrol,0,
+1916,Toyota,Vista,TOYOTA VISTA,3,0.0,99.09,Petrol,0,
+1917,Triumph,Trident,TRIUMPH TRIDENT,3,0.0,99.09,Petrol,0,
+1918,Volkswagen,Pick-Up,VOLKSWAGEN PICK-UP,3,0.0,99.09,Petrol,0,
+1919,Wells,Vertige,WELLS VERTIGE,3,0.0,99.09,Petrol,0,
+1920,Yamaha,YFM,YAMAHA YFM,3,0.0,99.09,Petrol,0,
+1921,Zastava,Yugo,ZASTAVA YUGO,3,0.0,99.09,Petrol,0,
+1922,Aixam,Mega,AIXAM MEGA,2,0.0,99.09,Battery electric,0,
+1923,BYD,E6,BYD E6,2,0.0,99.09,Battery electric,0,
+1924,ORA,07 Pure,ORA 07 PURE,2,0.0,99.09,Battery electric,0,
+1925,Subaru,Uncharted,SUBARU UNCHARTED,2,0.0,99.09,Battery electric,0,
+1926,Fiat,Rapido,FIAT RAPIDO,2,0.0,99.09,Diesel,0,
+1927,Fiat,Swift,FIAT SWIFT,2,0.0,99.09,Diesel,0,
+1928,Ford,17M/20M,FORD 17M/20M,2,0.0,99.09,Petrol,0,
+1929,Honda,CF70C,HONDA CF70C,2,0.0,99.09,Diesel,0,
+1930,Isuzu Trucks,Grafter,ISUZU TRUCKS GRAFTER,2,0.0,99.09,Diesel,0,
+1931,LDV,CUB,LDV CUB,2,0.0,99.09,Diesel,0,
+1932,LDV,Maxus,LDV MAXUS,2,0.0,99.09,Diesel,0,
+1933,London Taxis INT,. TX1,LONDON TAXIS INT. TX1,2,0.0,99.09,Diesel,0,
+1934,Mazda,1800,MAZDA 1800,2,0.0,99.09,Diesel,0,
+1935,Nissan,Cabstar,NISSAN CABSTAR,2,0.0,99.09,Diesel,0,
+1936,Nissan,Lunar,NISSAN LUNAR,2,0.0,99.09,Diesel,0,
+1937,Nissan,Safari,NISSAN SAFARI,2,0.0,99.09,Diesel,0,
+1938,Nissan,Urvan,NISSAN URVAN,2,0.0,99.09,Diesel,0,
+1939,Peugeot,PLA,PEUGEOT PLA,2,0.0,99.09,Diesel,0,
+1940,Piaggio,Porter,PIAGGIO PORTER,2,0.0,99.09,Petrol,0,
+1941,Renault,B110,RENAULT B110,2,0.0,99.09,Diesel,0,
+1942,Vauxhall,Astravan,VAUXHALL ASTRAVAN,2,0.0,99.09,Diesel,2,vauxhall-astra-2012-w12-v1|vauxhall-astra-2022-cr1-v1
+1943,Volkswagen,Syncro,VOLKSWAGEN SYNCRO,2,0.0,99.09,Diesel,0,
+1944,Ford,Chausson,FORD CHAUSSON,2,0.0,99.09,Hybrid electric (petrol),0,
+1945,Toyota,Cavalier,TOYOTA CAVALIER,2,0.0,99.09,Hybrid electric (petrol),0,
+1946,Aixam,Scouty,AIXAM SCOUTY,2,0.0,99.09,Petrol,0,
+1947,Aston Martin,Speedster,ASTON MARTIN SPEEDSTER,2,0.0,99.09,Petrol,0,
+1948,BMW,3.0 L,BMW 3.0 L,2,0.0,99.09,Petrol,0,
+1949,BMW,3000,BMW 3000,2,0.0,99.09,Petrol,0,
+1950,Bristol,408,BRISTOL 408,2,0.0,99.09,Petrol,0,
+1951,Bristol,Brigand,BRISTOL BRIGAND,2,0.0,99.09,Petrol,0,
+1952,Bristol,Fighter,BRISTOL FIGHTER,2,0.0,99.09,Petrol,0,
+1953,Chrysler,CH,CHRYSLER CH,2,0.0,99.09,Petrol,0,
+1954,Citroen,D Safari,CITROEN D SAFARI,2,0.0,99.09,Petrol,0,
+1955,Citroen,D19,CITROEN D19,2,0.0,99.09,Petrol,0,
+1956,Daihatsu,Applause,DAIHATSU APPLAUSE,2,0.0,99.09,Petrol,0,
+1957,Daimler,Landaulette,DAIMLER LANDAULETTE,2,0.0,99.09,Petrol,0,
+1958,Datsun,200,DATSUN 200,2,0.0,99.09,Petrol,0,
+1959,Fiat,131,FIAT 131,2,0.0,99.09,Petrol,0,
+1960,Fiat,Argenta,FIAT ARGENTA,2,0.0,99.09,Petrol,0,
+1961,Honda,ATC70B,HONDA ATC70B,2,0.0,99.09,Petrol,0,
+1962,Honda,C90,HONDA C90,2,0.0,99.09,Petrol,0,
+1963,Honda,CR250R,HONDA CR250R,2,0.0,99.09,Petrol,0,
+1964,Honda,GL1200A,HONDA GL1200A,2,0.0,99.09,Petrol,0,
+1965,Honda,H100A,HONDA H100A,2,0.0,99.09,Petrol,0,
+1966,Honda,H100S,HONDA H100S,2,0.0,99.09,Petrol,0,
+1967,Honda,Inspire,HONDA INSPIRE,2,0.0,99.09,Petrol,0,
+1968,Honda,N-Box,HONDA N-BOX,2,0.0,99.09,Petrol,0,
+1969,Honda,Touring,HONDA TOURING,2,0.0,99.09,Petrol,0,
+1970,Honda,TRX250R,HONDA TRX250R,2,0.0,99.09,Petrol,0,
+1971,Honda,TRX300FW,HONDA TRX300FW,2,0.0,99.09,Petrol,0,
+1972,Honda,XL250R,HONDA XL250R,2,0.0,99.09,Petrol,0,
+1973,Hyundai,Stellar,HYUNDAI STELLAR,2,0.0,99.09,Petrol,0,
+1974,Kymco,MXU 250,KYMCO MXU 250,2,0.0,99.09,Petrol,0,
+1975,Lada,1300,LADA 1300,2,0.0,99.09,Petrol,0,
+1976,Lancia,HF,LANCIA HF,2,0.0,99.09,Petrol,0,
+1977,Lancia,Prisma,LANCIA PRISMA,2,0.0,99.09,Petrol,0,
+1978,Maserati,GT2 Stradale S-A,MASERATI GT2 STRADALE S-A,2,0.0,99.09,Petrol,0,
+1979,Mazda,1600,MAZDA 1600,2,0.0,99.09,Petrol,0,
+1980,Mazda,818,MAZDA 818,2,0.0,99.09,Petrol,0,
+1981,Mazda,Miata,MAZDA MIATA,2,0.0,99.09,Petrol,1,mazda-mx-5-2015-v1
+1982,Mazda,Millenia,MAZDA MILLENIA,2,0.0,99.09,Petrol,0,
+1983,Mazda,R Series,MAZDA R SERIES,2,0.0,99.09,Petrol,0,
+1984,Mazda,RX-4,MAZDA RX-4,2,0.0,99.09,Petrol,0,
+1985,Mercedes-Benz,Wilcox,MERCEDES-BENZ WILCOX,2,0.0,99.09,Petrol,0,
+1986,Mitsubishi,Cordia,MITSUBISHI CORDIA,2,0.0,99.09,Petrol,0,
+1987,Morris,7CWT,MORRIS 7CWT,2,0.0,99.09,Petrol,0,
+1988,Nissan,280,NISSAN 280,2,0.0,99.09,Petrol,0,
+1989,Nissan,Townstar,NISSAN TOWNSTAR,2,0.0,99.09,Petrol,0,
+1990,Norton,Commando,NORTON COMMANDO,2,0.0,99.09,Petrol,0,
+1991,Oldsmobile,F85,OLDSMOBILE F85,2,0.0,99.09,Petrol,0,
+1992,Opel,Commodre,OPEL COMMODRE,2,0.0,99.09,Petrol,0,
+1993,PGO,Quadzilla,PGO QUADZILLA,2,0.0,99.09,Petrol,0,
+1994,Simca,1300,SIMCA 1300,2,0.0,99.09,Petrol,0,
+1995,Stuart Taylor,Loco Blade,STUART TAYLOR LOCO BLADE,2,0.0,99.09,Petrol,0,
+1996,Subaru,4WD,SUBARU 4WD,2,0.0,99.09,Petrol,0,
+1997,Subaru,DL,SUBARU DL,2,0.0,99.09,Petrol,0,
+1998,Subaru,Vivio,SUBARU VIVIO,2,0.0,99.09,Petrol,0,
+1999,Sunbeam,Sunbeam,SUNBEAM SUNBEAM,2,0.0,99.09,Petrol,0,
+2000,Suzuki,LJ,SUZUKI LJ,2,0.0,99.09,Petrol,0,
