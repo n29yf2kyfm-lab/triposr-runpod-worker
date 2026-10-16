@@ -52,6 +52,17 @@ def norm(s):
     return re.sub(r"[^a-z0-9]", "", (s or "").lower())
 
 
+def edits(a, b):
+    """Levenshtein distance, small strings."""
+    prev = list(range(len(b) + 1))
+    for i, ca in enumerate(a, 1):
+        cur = [i]
+        for j, cb in enumerate(b, 1):
+            cur.append(min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (ca != cb)))
+        prev = cur
+    return prev[-1]
+
+
 def parse(text):
     t = text.lower()
     want = {"text": text}
@@ -110,6 +121,19 @@ def find(want, cat):
                     best, hits = len(n2), []
                 hits.append(i)
                 break
+    if not hits:
+        # a one-letter slip ("micro" for Micra): the nearest name within one
+        # edit of a word in the request, if there is exactly one such name
+        words = [norm(x) for x in want["words"].replace("-", " ").split()]
+        near = {}
+        for i in pool:
+            for n in names(i):
+                n2 = n.replace(norm(make), "")
+                if len(n2) >= 4 and any(edits(n2, w) == 1 for w in words):
+                    near.setdefault(n2, []).append(i)
+        if len(near) == 1:
+            (n2, hits), = near.items()
+            want["spelling"] = f"read as {n2}"
     if not hits:
         return None, [], "not in the catalogue"
     if want.get("body"):

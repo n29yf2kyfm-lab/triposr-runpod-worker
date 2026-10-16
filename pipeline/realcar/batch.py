@@ -49,6 +49,7 @@ WHEELBASE = {
     "ford-fiesta-2009-w12-v1": 2489,          # Fiesta Mk6 (2008-2017), en.wikipedia infobox
     "volkswagen-golf-2025-w12-v1": 2636,      # Golf Mk8 / 8.5, en.wikipedia infobox
     "mercedes-benz-a-class-2018-w12-v1": 2699,  # A45 AMG W176 (2012-2018), en.wikipedia infobox
+    "nissan-micra-2004-w12-v1": 2430,         # Micra K12 hatch (2002-2010), en.wikipedia infobox
 }
 
 
