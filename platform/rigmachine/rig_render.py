@@ -366,6 +366,10 @@ if ONLY:
 
 stills = []
 t1 = time.time()
+# --no-stills: rig only (the finisher draws its own check sheet), which takes
+# the render time (about 40 s a car) out of an on-demand build
+if '--no-stills' in opt:
+    STATES = []
 for name, ks in STATES:
     pose(ks)
     for v, az, el, tgt, dd in views_for(name):

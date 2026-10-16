@@ -14,9 +14,11 @@ batch.py run:
 The finish uses the generic petrol engine bay (or the model's own, if it has
 one) and paints the car in the colour asked for.
 
-If the catalogue has the model but not in that year's generation, the
-nearest generation is named and nothing is built, unless --nearest says to
-build it anyway. The catalogue does not record door counts, so a door count
+If the catalogue has no such car, or not in that year's generation, it is
+sourced: Sketchfab is searched (source.py: a CC licence, the model in the
+title, no toy or game cars, the nearest year) and the best hit downloaded
+with SKETCHFAB_TOKEN. Failing that, --nearest builds the catalogue's
+nearest generation. Every step is timed; a catalogue car takes about 35 s. The catalogue does not record door counts, so a door count
 is only reported back, never used to choose.
 """
 import argparse
@@ -30,6 +32,7 @@ import time
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import batch  # noqa: E402
+import source  # noqa: E402
 
 # DVLA colour names, as a typical paint of that name (sRGB)
 COLOURS = {
@@ -82,8 +85,17 @@ def find(want, cat):
             make = MAKES.get(k, makes.get(k))
             rest = q.replace(k, "", 1)
             break
+    want["make"], want["model_words"] = make, None
     if not make:
         return None, [], "no make recognised"
+    # the model words as typed, for a search outside the catalogue
+    toks = want["words"].replace("-", " ").split()
+    for k in range(1, len(toks) + 1):
+        if norm(" ".join(toks[:k])) in (norm(make), *[a for a, b in MAKES.items() if b == make]):
+            want["model_words"] = " ".join(toks[k:])
+            break
+    if want["model_words"] is None:
+        want["model_words"] = " ".join(toks[1:])
     pool = [i for i in cat.values() if norm(i["make"]) == norm(make) and i.get("publicationStatus") == "approved"
             and i.get("desktopGlbUrl")]
 
@@ -99,7 +111,7 @@ def find(want, cat):
                 hits.append(i)
                 break
     if not hits:
-        return None, [], f"no {make} model matching '{want['words']}'"
+        return None, [], "not in the catalogue"
     if want.get("body"):
         hb = [i for i in hits if (i.get("bodyStyle") or want["body"]) == want["body"]]
         hits = hb or hits
@@ -127,7 +139,8 @@ def main():
     ap.add_argument("--view-dir", required=True)
     ap.add_argument("--out", default=None, help="default: VIEW_DIR/make")
     ap.add_argument("--port", type=int, default=8791)
-    ap.add_argument("--nearest", action="store_true", help="build the nearest generation if that year's is missing")
+    ap.add_argument("--nearest", action="store_true", help="build the nearest catalogue generation if none is sourced")
+    ap.add_argument("--no-source", action="store_true", help="catalogue only, no Sketchfab search")
     args = ap.parse_args()
     args.engine_pack = os.path.abspath(args.engine_pack)
     want = parse(args.request)
@@ -135,8 +148,19 @@ def main():
     item, others, why = find(want, cat)
     report = {"asked": want, "match": why,
               "nearest": [f"{i['assetId']} ({i.get('yearStart')}-{i.get('yearEnd') or ''})" for i in others[:4]]}
+    # not in the catalogue, or not that year's generation: source it
+    if item is None and want.get("make") and not args.no_source:
+        try:
+            ok, refused = source.search(want["make"], want["model_words"], want.get("year"))
+            report["sourcing"] = {"candidates": [f"{o['name']} by {o['author']} ({o['licence']}, {o['faces']} faces)"
+                                                 for o in ok[:4]], "refused": len(refused)}
+            if ok:
+                item = source.as_item(ok[0], want["make"], want["model_words"], want.get("year"))
+                report["match"] = f"{why}; sourced from Sketchfab"
+        except Exception as e:
+            report["sourcing_error"] = str(e)
     if item is None and args.nearest and others:
-        item, report["match"] = others[0], f"{why}; building the nearest"
+        item, report["match"] = others[0], f"{why}; building the nearest catalogue generation"
     if item is None:
         print(json.dumps(report, indent=1))
         sys.exit(2)

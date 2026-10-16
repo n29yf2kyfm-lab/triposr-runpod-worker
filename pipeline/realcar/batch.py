@@ -112,12 +112,18 @@ def one(target, item, args, out):
     src, rig = os.path.join(d, "src.glb"), os.path.join(d, "rig")
     rigged = os.path.join(rig, "src.glb")
     rr_path = os.path.join(rig, "result.json")
+    tm = {}
+    t0 = time.time()
     if os.path.exists(rigged) and os.path.exists(rr_path):
         rr = json.load(open(rr_path))           # rigged before: finish again only
+        tm["rig"] = 0.0
     else:
         urllib.request.urlretrieve(item["desktopGlbUrl"], src)
-        p = run([sys.executable, os.path.join(REPO, "platform/rigmachine/run.py"), src, rig,
-                 "--size=720x450", "--samples=6"], 2400, lg)
+        tm["download"] = round(time.time() - t0, 1)
+        t0 = time.time()
+        # rig only: the finisher draws its own sheet, so no Blender stills
+        p = run([sys.executable, os.path.join(REPO, "platform/rigmachine/run.py"), src, rig, "--no-stills"], 2400, lg)
+        tm["rig"] = round(time.time() - t0, 1)
         try:
             rr = json.loads(p.stdout.strip().splitlines()[-1])
         except Exception:
@@ -140,27 +146,47 @@ def one(target, item, args, out):
     elif rep.get("rescaled"):
         rec["scale_unverified"] = rep["rescaled"].get("why")
     fin = os.path.join(d, "finished.glb")
+    t0 = time.time()
     try:
         flog = finish.finish(rigged, spec, fin)
     except BaseException as e:            # SystemExit from a bad frame too
         rec["status"] = f"finish failed: {e}"
         return rec
+    tm["finish"] = round(time.time() - t0, 1)
     rec["finish"] = {k: flog.get(k) for k in ("opens", "missing", "bonnet", "tailgate", "door_trims", "rescale",
                                               "glass_cleared", "measured", "bay_cleared_m2", "engine_pack", "paint_set")}
-    v = run(["node", os.path.join(args.tools, "validate.mjs"), fin], 300, lg)
-    try:
-        rec["validator"] = json.loads(v.stdout)
-    except Exception:
-        rec["validator"] = {"errors": -1}
+    # validator, web copy and check sheet at the same time: the sheet is drawn
+    # from the finished file, so it need not wait for the compression
     web = os.path.join(d, "web.glb")
-    run(["node", os.path.join(args.tools, "encode.mjs"), fin, web], 600, lg)
-    rec["web_bytes"] = os.path.getsize(web) if os.path.exists(web) else None
-    # the check sheet: shut, all open, rear open, bonnet up
-    rel = os.path.relpath(web, args.view_dir)
+    rel = os.path.relpath(fin, args.view_dir)
     shots = [("hero", "az=38&el=14&d=6.6&ty=0.6"), ("all", "az=40&el=22&d=6.9&open=all_open"),
              ("rear", "az=215&el=18&d=6.9&open=all_open"), ("bay", "az=8&el=48&d=3.4&tz=1.25&ty=0.6&open=bonnet_open")]
-    run(["node", os.path.join(args.tools, "view.mjs"), "1000", "640"] +
-        [f"{os.path.join(d, n)}.png:f={rel}&{q}" for n, q in shots], 900, lg, env={**os.environ, "VIEW_PORT": str(args.port)})
+    t0 = time.time()
+    procs = {
+        "validate": subprocess.Popen(["node", os.path.join(args.tools, "validate.mjs"), fin],
+                                     stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True),
+        "encode": subprocess.Popen(["node", os.path.join(args.tools, "encode.mjs"), fin, web],
+                                   stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True),
+        "render": subprocess.Popen(["node", os.path.join(args.tools, "view.mjs"), "1000", "640"] +
+                                   [f"{os.path.join(d, n)}.png:f={rel}&{q}" for n, q in shots],
+                                   stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
+                                   env={**os.environ, "VIEW_PORT": str(args.port)}),
+    }
+    outs = {}
+    for k, pr in procs.items():
+        try:
+            o, e = pr.communicate(timeout=900)
+        except subprocess.TimeoutExpired:
+            pr.kill()
+            o, e = pr.communicate()
+        outs[k] = o
+        lg.write(f"{k}\n{o[-4000:]}{e[-4000:]}\n")
+        tm[k] = round(time.time() - t0, 1)
+    try:
+        rec["validator"] = json.loads(outs["validate"])
+    except Exception:
+        rec["validator"] = {"errors": -1}
+    rec["web_bytes"] = os.path.getsize(web) if os.path.exists(web) else None
     try:
         from PIL import Image
         ims = [Image.open(os.path.join(d, n + ".png")).convert("RGB") for n, _ in shots]
@@ -173,6 +199,7 @@ def one(target, item, args, out):
             os.remove(os.path.join(d, n + ".png"))
     except Exception as e:
         rec["sheet_error"] = str(e)
+    rec["timings_s"] = tm
     for f in (src, fin):                         # the rigged copy stays, so a fix re-finishes in seconds
         if os.path.exists(f):
             os.remove(f)

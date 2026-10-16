@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """The on-demand machine: send a car GLB, get it back opening.
 
-    python3 platform/rigmachine/run.py CAR.glb|https://…/car.glb OUT_DIR [--size=1280x800] [--samples=24]
+    python3 platform/rigmachine/run.py CAR.glb|https://…/car.glb OUT_DIR [--size=1280x800] [--samples=24] [--no-stills]
 
 1. fetches the GLB when given a URL
 2. rigs it and renders every state in Blender (rig_render.py)
@@ -83,7 +83,7 @@ def main():
         print(f'RIGMACHINE error: Blender exited {rc} without a result; see {out}/blender.log')
         return 1
     res = json.load(open(rp))
-    if res['status'] in ('ok', 'partial'):
+    if res['status'] in ('ok', 'partial') and res.get('stills'):
         web(out, res)
         sheet(out, res)
         viewer(out, res)

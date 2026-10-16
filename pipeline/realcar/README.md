@@ -6,8 +6,40 @@ animation clips), the glass is clear, the cabin is kept, and there is an
 engine bay and an exhaust under it. Pure Python (numpy, scipy): no Blender,
 no GPU, no network. About 2 s per car.
 
+## Ask for a car
+
 ```
-python3 platform/rigmachine/run.py SRC.glb OUT_DIR          # cut: doors, wheels, frame (Blender, offline)
+BLENDER_BIN=... python3 pipeline/realcar/make.py "Mercedes A-Class 2012 black 5-door" \
+    --engine-pack engine_pack.glb --tools TOOLS --view-dir VIEW
+```
+
+The steps, in order:
+1. The approved catalogue is searched for that model in a generation on
+   sale that year.
+2. If it isn't there, Sketchfab is searched (`source.py`). The best match is
+   downloaded with the `SKETCHFAB_TOKEN` environment variable.
+3. The car is rigged, finished in the colour asked for, validated, compressed
+   and drawn on a check sheet.
+
+TOOLS holds `view.mjs`, `validate.mjs` and `encode.mjs` with their node
+modules. VIEW holds `view.html` (as `index.html`) and three.js.
+
+Timed on a cold catalogue car (Ford Focus): 34 s from typing to a finished,
+validated, rendered file.
+
+| Step | Time |
+| --- | --- |
+| download | 0.9 s |
+| rig without Blender stills | 7.8 s |
+| finish | 0.8 s |
+| validator, meshopt copy and check sheet, side by side | 22 s |
+
+A car already rigged once only re-finishes (about 25 s).
+
+## The steps by hand
+
+```
+python3 platform/rigmachine/run.py SRC.glb OUT_DIR --no-stills   # cut: doors, wheels, frame (Blender, offline)
 python3 pipeline/realcar/finish.py OUT_DIR/SRC.glb SPEC.json CAR.glb
 node pipeline/template/tools/encode.mjs CAR.glb CAR_web.glb  # meshopt web copy
 ```
