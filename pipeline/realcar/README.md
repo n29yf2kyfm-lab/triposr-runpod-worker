@@ -315,12 +315,20 @@ glbmachine make "..." --no-standin              # the nearest generation as it i
    once, and a Prior-Design widebody 3 Series for five 3 Series.
    - Run on the top 30 (2026-10-17, from the test machine, Flickr only):
      before these fixes 3 of 106 generations were found. After them 16 of
-     103 were, and 5 are kept under the rules: Polo 2001 and 2009, Mini
-     2013 and 2024, Qashqai 2013.
-   - The checks cannot tell a same-name model from another market. A 2016
-     Indonesian Yaris (XP150) fitted the European XP130's proportions
-     better than a real 2024 Mini fits its own, since a photo's perspective
-     alone is off by 4-8%. It was taken out by hand. The Maker shows every
+     103 were, and 5 more of 101 with the open Flickr index. Kept under the
+     rules as they now stand (`photolib.py --recheck`): Polo 2001 and 2009,
+     Mini 2013. The rest were a rally Fiesta, a long-wheelbase Tiguan, a
+     motor-show concept Yaris, and photos that fit another generation on
+     sale in their year as well (one model's generations often share their
+     proportions). A photo is dated by a year in its name (within the
+     generation's first ten years) or by when it was taken; either way no
+     other generation then on sale may fit it as well, and its name may not
+     say it is another body (Allspace, estate, cabrio, coupé, van).
+   - The checks alone cannot tell a same-name model from another market:
+     a 2016 Indonesian Yaris (XP150) fitted the European XP130's
+     proportions better than a real 2024 Mini fits its own, since a photo's
+     perspective alone is off by 4-8%. The rule above now leaves it out,
+     because the XP150 was on sale that year too. The Maker shows every
      photo it uses, so a person can see it.
    - The run can be stopped and restarted: done cars are skipped, and a
      car not found is tried again after 30 days.

@@ -123,8 +123,13 @@ def why_not(b, gens, c, cutout):
         if rx.search(words) and not rx.search(own):
             return f"{what}, not the {(b.get('body') or 'body').strip(' ,')} this generation is"
     if c.get("dated"):
+        # a year in the name dates the photo within the generation's first ten
+        # years: some are listed as sold on for a decade more somewhere (the
+        # 1999 Yaris to 2012), and a show's year names no car's ("IAA 2013")
         ys = [int(y) for y in YEAR.findall((c.get("title") or c.get("file") or "") + " " + (c.get("tags") or ""))]
-        ys = [y for y in ys if y0 - 1 <= y <= y1 + 1] or [y0]
+        ys = [y for y in ys if y0 - 1 <= y <= min(y1, y0 + 9) + 1]
+        if not ys:
+            return f"its year is not in this generation's first ten years ({y0}-{min(y1, y0 + 9)})"
     elif c.get("taken") and c["taken"] >= y0:
         ys = [c["taken"]]
     else:
