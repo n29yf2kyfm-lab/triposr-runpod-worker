@@ -222,6 +222,7 @@ function report(job) {
         `<button type="button" data-model="${esc(m)}">${esc(m)}</button>`).join('') + '</div>');
     }
     if (rep.nearest && rep.nearest.length) row('Nearest', esc(rep.nearest.join(', ')), 'mono');
+    if ((rep.passed_over || []).length) row('Passed over', rep.passed_over.map(x => `${esc(x.source || x.asset)} <span class="faint">(${esc(x.why)})</span>`).join('<br>'));
     $('#report').innerHTML = rows.join('');
     $('#links').textContent = '';
     return;
@@ -230,6 +231,8 @@ function report(job) {
   row('Car', `${esc(rep.source || rep.asset)}<br><span class="faint mono">${esc(rep.asset)}</span>`);
   row('Match', esc(rep.match || ''), /nearest/.test(rep.match || '') ? 'warn' : '');
   if (rep.spec_note) row('Spec', esc(rep.spec_note));
+  if ((rep.passed_over || []).length) row('Passed over', rep.passed_over.map(x =>
+    `${esc(x.source || x.asset)} <span class="faint">(${esc(x.why === 'no wheels named' ? 'its wheels and doors are not separate parts' : x.why)})</span>`).join('<br>'));
   if (rep.doors_note) row('Doors', esc(rep.doors_note), /\(/.test(rep.doors_note) ? 'warn' : '');
   const opens = fin.opens || [];
   row('Opens', '<div class="chips">' + (opens.map(p => `<span>${esc(PART_NAMES[p] || p)}</span>`).join('') || 'nothing') + '</div>');

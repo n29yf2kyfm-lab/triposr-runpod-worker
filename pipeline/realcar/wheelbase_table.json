@@ -137,7 +137,10 @@
 "name": "Alpine A110<br />Alpine A110S",
 "page": "Alpine A110 (2017)",
 "wheelbase": 2419,
-"years": null
+"years": [
+2017,
+2026
+]
 }
 ],
 "tried": [
@@ -196,7 +199,10 @@
 "name": "First generation",
 "page": "Audi A1",
 "wheelbase": 2469,
-"years": null
+"years": [
+2010,
+2018
+]
 },
 {
 "base": 0,
@@ -204,7 +210,10 @@
 "name": "Second generation",
 "page": "Audi A1",
 "wheelbase": 2563,
-"years": null
+"years": [
+2018,
+2026
+]
 }
 ],
 "tried": [
@@ -237,7 +246,10 @@
 "name": "First generation",
 "page": "Audi A3",
 "wheelbase": 2513,
-"years": null
+"years": [
+1996,
+2003
+]
 },
 {
 "base": 0,
@@ -285,7 +297,10 @@
 "name": "First generation (B5/8D)",
 "page": "Audi A4",
 "wheelbase": 2615,
-"years": null
+"years": [
+1994,
+2001
+]
 },
 {
 "base": 0,
@@ -293,7 +308,10 @@
 "name": "Second generation (B6/8E/8H)",
 "page": "Audi A4",
 "wheelbase": 2650,
-"years": null
+"years": [
+2000,
+2006
+]
 },
 {
 "base": 0,
@@ -342,7 +360,7 @@
 "page": "Audi A5",
 "wheelbase": 2751,
 "years": [
-2008,
+2007,
 2016
 ]
 },
@@ -364,7 +382,7 @@
 "page": "Audi A5",
 "wheelbase": 2900,
 "years": [
-2025,
+2024,
 2100
 ]
 }
@@ -404,8 +422,8 @@
 "page": "Audi A6",
 "wheelbase": 2843,
 "years": [
-2005,
-2011
+2004,
+2012
 ]
 },
 {
@@ -437,7 +455,7 @@
 "page": "Audi A6",
 "wheelbase": 2923,
 "years": [
-2026,
+2025,
 2100
 ]
 }
@@ -477,8 +495,8 @@
 "page": "Audi A6",
 "wheelbase": 2843,
 "years": [
-2005,
-2011
+2004,
+2012
 ]
 },
 {
@@ -510,7 +528,7 @@
 "page": "Audi A6",
 "wheelbase": 2923,
 "years": [
-2026,
+2025,
 2100
 ]
 }
@@ -622,7 +640,7 @@
 "page": "Audi Q3",
 "wheelbase": 2603,
 "years": [
-2012,
+2011,
 2018
 ]
 },
@@ -633,7 +651,7 @@
 "page": "Audi Q3",
 "wheelbase": 2680,
 "years": [
-2019,
+2018,
 2025
 ]
 },
@@ -644,7 +662,7 @@
 "page": "Audi Q3",
 "wheelbase": 2682,
 "years": [
-2026,
+2025,
 2100
 ]
 }
@@ -662,7 +680,7 @@
 "page": "Audi Q3",
 "wheelbase": 2603,
 "years": [
-2012,
+2011,
 2018
 ]
 },
@@ -673,7 +691,7 @@
 "page": "Audi Q3",
 "wheelbase": 2680,
 "years": [
-2019,
+2018,
 2025
 ]
 },
@@ -684,7 +702,7 @@
 "page": "Audi Q3",
 "wheelbase": 2682,
 "years": [
-2026,
+2025,
 2100
 ]
 }
@@ -754,7 +772,10 @@
 "name": "First generation B5 (8D)",
 "page": "Audi RS 4",
 "wheelbase": 2607,
-"years": null
+"years": [
+1999,
+2001
+]
 },
 {
 "base": 0,
@@ -773,7 +794,10 @@
 "name": "Third generation B8 (8K)",
 "page": "Audi RS 4",
 "wheelbase": 2811,
-"years": null
+"years": [
+2012,
+2015
+]
 },
 {
 "base": 0,
@@ -781,7 +805,10 @@
 "name": "Fourth generation B9 (8W)",
 "page": "Audi RS 4",
 "wheelbase": 2826,
-"years": null
+"years": [
+2018,
+2025
+]
 }
 ],
 "tried": [
@@ -797,7 +824,7 @@
 "page": "Audi A5",
 "wheelbase": 2751,
 "years": [
-2008,
+2007,
 2016
 ]
 },
@@ -819,7 +846,7 @@
 "page": "Audi A5",
 "wheelbase": 2900,
 "years": [
-2025,
+2024,
 2100
 ]
 }
@@ -916,7 +943,10 @@
 "name": "First generation",
 "page": "Audi A1",
 "wheelbase": 2469,
-"years": null
+"years": [
+2010,
+2018
+]
 },
 {
 "base": 0,
@@ -924,7 +954,10 @@
 "name": "Second generation",
 "page": "Audi A1",
 "wheelbase": 2563,
-"years": null
+"years": [
+2018,
+2026
+]
 }
 ],
 "tried": [
@@ -1011,6 +1044,17 @@
 },
 {
 "base": 0,
+"length": 4850,
+"name": "Third generation",
+"page": "Bentley Continental GT",
+"wheelbase": 2851,
+"years": [
+2018,
+2024
+]
+},
+{
+"base": 0,
 "length": 4895,
 "name": "Fourth generation",
 "page": "Bentley Continental GT",
@@ -1061,7 +1105,7 @@
 "page": "BMW 1 Series (F40)",
 "wheelbase": 2670,
 "years": [
-2020,
+2019,
 2024
 ]
 },
@@ -1679,6 +1723,17 @@
 },
 {
 "base": 0,
+"length": 5029,
+"name": "BMW 7 Series (E65/E66)",
+"page": "BMW 7 Series (E65)",
+"wheelbase": 2990,
+"years": [
+2001,
+2008
+]
+},
+{
+"base": 0,
 "length": 5072,
 "name": "BMW 7 Series (F01)",
 "page": "BMW 7 Series (F01)",
@@ -1719,7 +1774,10 @@
 "name": "BMW 8 Series (E31)",
 "page": "BMW 8 Series (E31)",
 "wheelbase": 2685,
-"years": null
+"years": [
+1990,
+1999
+]
 },
 {
 "base": 0,
@@ -1747,7 +1805,10 @@
 "name": "BMW 8 Series (E31)",
 "page": "BMW 8 Series (E31)",
 "wheelbase": 2685,
-"years": null
+"years": [
+1990,
+1999
+]
 },
 {
 "base": 0,
@@ -2181,7 +2242,7 @@
 "page": "BMW M5",
 "wheelbase": 3006,
 "years": [
-2025,
+2024,
 2100
 ]
 }
@@ -2259,6 +2320,17 @@
 },
 "bmw|x2": {
 "boxes": [
+{
+"base": 0,
+"length": 4360,
+"name": "First generation",
+"page": "BMW X2",
+"wheelbase": 2670,
+"years": [
+2017,
+2023
+]
+},
 {
 "base": 0,
 "length": 4554,
@@ -2375,7 +2447,7 @@
 "page": "BMW X5 (G05)",
 "wheelbase": 2975,
 "years": [
-2019,
+2018,
 2026
 ]
 },
@@ -2386,8 +2458,8 @@
 "page": "BMW X5 (G65)",
 "wheelbase": 3035,
 "years": [
-2027,
-2027
+2026,
+2100
 ]
 },
 {
@@ -2443,7 +2515,7 @@
 "page": "BMW X5 (G05)",
 "wheelbase": 2975,
 "years": [
-2019,
+2018,
 2026
 ]
 },
@@ -2454,8 +2526,8 @@
 "page": "BMW X5 (G65)",
 "wheelbase": 3035,
 "years": [
-2027,
-2027
+2026,
+2100
 ]
 },
 {
@@ -2503,6 +2575,17 @@
 2014,
 2019
 ]
+},
+{
+"base": 0,
+"length": 4935,
+"name": "Third generation",
+"page": "BMW X6",
+"wheelbase": 2975,
+"years": [
+2019,
+2100
+]
 }
 ],
 "tried": [
@@ -2531,6 +2614,17 @@
 "years": [
 2014,
 2019
+]
+},
+{
+"base": 0,
+"length": 4935,
+"name": "Third generation",
+"page": "BMW X6",
+"wheelbase": 2975,
+"years": [
+2019,
+2100
 ]
 }
 ],
@@ -2771,6 +2865,7 @@
 ],
 "tried": [
 "BYD Seal-U",
+"BYD Song Plus",
 "BYD Song Plus"
 ]
 },
@@ -2796,6 +2891,7 @@
 ],
 "tried": [
 "BYD Song-Plus",
+"BYD Song Plus",
 "BYD Song Plus"
 ]
 },
@@ -2880,7 +2976,7 @@
 {
 "base": 0,
 "length": 4078,
-"name": "",
+"name": "Citro\u00ebn C3 Picasso",
 "page": "Citro\u00ebn C3 Picasso",
 "wheelbase": 2540,
 "years": [
@@ -2912,7 +3008,10 @@
 "name": "Second generation",
 "page": "Citro\u00ebn C4",
 "wheelbase": 2608,
-"years": null
+"years": [
+2010,
+2022
+]
 },
 {
 "base": 0,
@@ -3593,6 +3692,17 @@
 "boxes": [
 {
 "base": 0,
+"length": 3380,
+"name": "First generation",
+"page": "Fiat Panda",
+"wheelbase": 2160,
+"years": [
+1980,
+2003
+]
+},
+{
+"base": 0,
 "length": 3538,
 "name": "Second generation",
 "page": "Fiat Panda",
@@ -3921,7 +4031,10 @@
 "name": "Ford Fiesta (seventh generation)",
 "page": "Ford Fiesta (seventh generation)",
 "wheelbase": 2493,
-"years": null
+"years": [
+2017,
+2023
+]
 },
 {
 "base": 0,
@@ -3929,7 +4042,10 @@
 "name": "Ford Fiesta R5",
 "page": "Ford Fiesta R5",
 "wheelbase": 2480,
-"years": null
+"years": [
+2013,
+2019
+]
 }
 ],
 "tried": [
@@ -4104,12 +4220,13 @@
 "page": "Ford Mustang Mach-E",
 "wheelbase": 2984,
 "years": [
-2021,
+2020,
 2100
 ]
 }
 ],
 "tried": [
+"Ford Mustang Mach-E",
 "Ford Mustang Mach-E",
 "Ford Mustang Mach-E"
 ]
@@ -4134,7 +4251,7 @@
 "page": "Ford Ranger (T6)",
 "wheelbase": 3270,
 "years": [
-2024,
+2022,
 2100
 ]
 },
@@ -4156,7 +4273,7 @@
 "page": "Ford Ranger (T6)",
 "wheelbase": 3270,
 "years": [
-2024,
+2022,
 2100
 ]
 },
@@ -4210,10 +4327,14 @@
 "name": "Second generation",
 "page": "Ford S-Max",
 "wheelbase": 2850,
-"years": null
+"years": [
+2015,
+2023
+]
 }
 ],
 "tried": [
+"Ford S-Max",
 "Ford S-Max",
 "Ford S-Max"
 ]
@@ -4274,8 +4395,8 @@
 "page": "Honda Accord",
 "wheelbase": 2380,
 "years": [
-1977,
-1982
+1976,
+1981
 ]
 },
 {
@@ -4616,7 +4737,12 @@
 "Honda CR-V (fourth generation)",
 "Honda CR-V (fifth generation)",
 "Honda CR-V (sixth generation)",
-"Honda Cr V"
+"Honda Cr V",
+"Honda CR-V",
+"Honda CR-V (third generation)",
+"Honda CR-V (fourth generation)",
+"Honda CR-V (fifth generation)",
+"Honda CR-V (sixth generation)"
 ]
 },
 "honda|cr-x": {
@@ -4635,7 +4761,8 @@
 ],
 "tried": [
 "Honda CR-X",
-"Honda Cr X"
+"Honda Cr X",
+"Honda CR-X"
 ]
 },
 "honda|cr-z": {
@@ -4647,14 +4774,15 @@
 "page": "Honda CR-Z",
 "wheelbase": 2435,
 "years": [
-2011,
+2010,
 2016
 ]
 }
 ],
 "tried": [
 "Honda CR-Z",
-"Honda Cr Z"
+"Honda Cr Z",
+"Honda CR-Z"
 ]
 },
 "honda|crosstour": {
@@ -4702,7 +4830,9 @@
 "tried": [
 "Honda HR-V",
 "Honda HR-V (third generation)",
-"Honda Hr V"
+"Honda Hr V",
+"Honda HR-V",
+"Honda HR-V (third generation)"
 ]
 },
 "honda|insight": {
@@ -4966,7 +5096,7 @@
 "wheelbase": 2570,
 "years": [
 2010,
-2019
+2026
 ]
 },
 {
@@ -5446,8 +5576,19 @@
 "page": "Hyundai Santa Fe",
 "wheelbase": 2765,
 "years": [
-2019,
+2018,
 2023
+]
+},
+{
+"base": 0,
+"length": 4830,
+"name": "Fifth generation",
+"page": "Hyundai Santa Fe",
+"wheelbase": 2815,
+"years": [
+2023,
+2100
 ]
 }
 ],
@@ -5497,14 +5638,26 @@
 "page": "Hyundai Santa Fe",
 "wheelbase": 2765,
 "years": [
-2019,
+2018,
 2023
+]
+},
+{
+"base": 1,
+"length": 4830,
+"name": "Fifth generation",
+"page": "Hyundai Santa Fe",
+"wheelbase": 2815,
+"years": [
+2023,
+2100
 ]
 }
 ],
 "tried": [
 "Hyundai Santa-FE",
-"Hyundai Santa Fe"
+"Hyundai Santa Fe",
+"Hyundai Santa FE"
 ]
 },
 "hyundai|sonata-hybrid": {
@@ -5600,6 +5753,7 @@
 ],
 "tried": [
 "Hyundai Sonata-Hybrid",
+"Hyundai Sonata",
 "Hyundai Sonata"
 ]
 },
@@ -5663,8 +5817,8 @@
 "page": "Hyundai Tucson",
 "wheelbase": 2670,
 "years": [
-2016,
-2021
+2015,
+2025
 ]
 },
 {
@@ -5685,8 +5839,8 @@
 "page": "Hyundai Tucson",
 "wheelbase": 2720,
 "years": [
-2027,
-2027
+2026,
+2026
 ]
 }
 ],
@@ -5733,10 +5887,19 @@
 2018,
 2022
 ]
+},
+{
+"base": 1,
+"length": 4450,
+"name": "Veloster N ETCR",
+"page": "Hyundai Veloster",
+"wheelbase": 2700,
+"years": null
 }
 ],
 "tried": [
 "Hyundai Veloster-N",
+"Hyundai Veloster",
 "Hyundai Veloster"
 ]
 },
@@ -5763,10 +5926,19 @@
 2018,
 2022
 ]
+},
+{
+"base": 1,
+"length": 4450,
+"name": "Veloster N ETCR",
+"page": "Hyundai Veloster",
+"wheelbase": 2700,
+"years": null
 }
 ],
 "tried": [
 "Hyundai Veloster-Turbo",
+"Hyundai Veloster",
 "Hyundai Veloster"
 ]
 },
@@ -5859,7 +6031,9 @@
 }
 ],
 "tried": [
-"Jaguar F-Type"
+"Jaguar F-Type",
+"Jaguar F Type",
+"Jaguar F Type"
 ]
 },
 "jaguar|f-type convertible": {
@@ -5878,11 +6052,16 @@
 "name": "Jaguar I-Pace",
 "page": "Jaguar I-Pace",
 "wheelbase": 2990,
-"years": null
+"years": [
+2018,
+2024
+]
 }
 ],
 "tried": [
-"Jaguar I-Pace"
+"Jaguar I-Pace",
+"Jaguar I Pace",
+"Jaguar I Pace"
 ]
 },
 "jaguar|mk2": {
@@ -5925,7 +6104,10 @@
 "name": "Jaguar XJ220",
 "page": "Jaguar XJ220",
 "wheelbase": 2640,
-"years": null
+"years": [
+1992,
+1994
+]
 }
 ],
 "tried": [
@@ -6018,7 +6200,10 @@
 "name": "Third generation",
 "page": "Jeep Compass",
 "wheelbase": 2795,
-"years": null
+"years": [
+2025,
+2100
+]
 }
 ],
 "tried": [
@@ -6114,7 +6299,7 @@
 "wheelbase": 2870,
 "years": [
 2024,
-2027
+2100
 ]
 }
 ],
@@ -6244,7 +6429,19 @@
 ]
 },
 "kia|ev9": {
-"boxes": [],
+"boxes": [
+{
+"base": 0,
+"length": 5012,
+"name": "Kia EV9",
+"page": "Kia EV9",
+"wheelbase": 3100,
+"years": [
+2023,
+2100
+]
+}
+],
 "tried": [
 "Kia EV9"
 ]
@@ -6258,8 +6455,19 @@
 "page": "Kia Niro",
 "wheelbase": 2700,
 "years": [
-2017,
-2022
+2016,
+2024
+]
+},
+{
+"base": 0,
+"length": 4420,
+"name": "Second generation",
+"page": "Kia Niro",
+"wheelbase": 2720,
+"years": [
+2021,
+2100
 ]
 }
 ],
@@ -6476,7 +6684,7 @@
 "page": "Lamborghini Urus",
 "wheelbase": 3002,
 "years": [
-2018,
+2017,
 2100
 ]
 }
@@ -6486,7 +6694,19 @@
 ]
 },
 "land-rover|defender": {
-"boxes": [],
+"boxes": [
+{
+"base": 0,
+"length": 4453,
+"name": "Land Rover Defender (L663)",
+"page": "Land Rover Defender (L663)",
+"wheelbase": 2587,
+"years": [
+2019,
+2100
+]
+}
+],
 "tried": [
 "Land Rover Defender",
 "Land Rover Defender (L663)"
@@ -6644,6 +6864,7 @@
 ],
 "tried": [
 "Land Rover Range-Rover-Evoque",
+"Range Rover Evoque",
 "Range Rover Evoque"
 ]
 },
@@ -6659,10 +6880,22 @@
 2005,
 2013
 ]
+},
+{
+"base": 1,
+"length": 4946,
+"name": "Third generation",
+"page": "Range Rover Sport",
+"wheelbase": 2997,
+"years": [
+2022,
+2100
+]
 }
 ],
 "tried": [
 "Land Rover Range-Rover-Sport",
+"Range Rover Sport",
 "Range Rover Sport"
 ]
 },
@@ -6793,7 +7026,19 @@
 ]
 },
 "lotus|emeya": {
-"boxes": [],
+"boxes": [
+{
+"base": 0,
+"length": 5139,
+"name": "Lotus Emeya",
+"page": "Lotus Emeya",
+"wheelbase": 3070,
+"years": [
+2024,
+2100
+]
+}
+],
 "tried": [
 "Lotus Emeya"
 ]
@@ -6813,7 +7058,7 @@
 "page": "Maserati Levante",
 "wheelbase": 3004,
 "years": [
-2017,
+2016,
 2024
 ]
 }
@@ -7030,6 +7275,17 @@
 "years": [
 2007,
 2016
+]
+},
+{
+"base": 0,
+"length": 4865,
+"name": "Third generation",
+"page": "Mazda6",
+"wheelbase": 2830,
+"years": [
+2012,
+2024
 ]
 },
 {
@@ -7425,6 +7681,12 @@
 "tried": [
 "Mercedes-Benz A-Class",
 "Mercedes-Benz A-Class (W176)",
+"Mercedes-Benz A-Class (W177)",
+"Mercedes-Benz A-Class",
+"Mercedes-Benz A-Class (W176)",
+"Mercedes-Benz A-Class (W177)",
+"Mercedes-Benz A-Class",
+"Mercedes-Benz A-Class (W176)",
 "Mercedes-Benz A-Class (W177)"
 ]
 },
@@ -7506,6 +7768,18 @@
 "Mercedes-Benz C-Class (W206)",
 "Mercedes-Benz C-Class (W202)",
 "Mercedes-Benz C-Class (W203)",
+"Mercedes-Benz C-Class (W205)",
+"Mercedes-Benz C-Class",
+"Mercedes-Benz C-Class (W204)",
+"Mercedes-Benz C-Class (W206)",
+"Mercedes-Benz C-Class (W202)",
+"Mercedes-Benz C-Class (W203)",
+"Mercedes-Benz C-Class (W205)",
+"Mercedes-Benz C-Class",
+"Mercedes-Benz C-Class (W204)",
+"Mercedes-Benz C-Class (W206)",
+"Mercedes-Benz C-Class (W202)",
+"Mercedes-Benz C-Class (W203)",
 "Mercedes-Benz C-Class (W205)"
 ]
 },
@@ -7582,7 +7856,10 @@
 "name": "Mercedes-Benz E-Class (C207/A207)",
 "page": "Mercedes-Benz E-Class (C207)",
 "wheelbase": 2760,
-"years": null
+"years": [
+2009,
+2017
+]
 },
 {
 "base": 0,
@@ -7602,12 +7879,19 @@
 "page": "Mercedes-Benz E-Class (W214)",
 "wheelbase": 2961,
 "years": [
-2024,
+2023,
 2100
 ]
 }
 ],
 "tried": [
+"Mercedes-Benz E-Class",
+"Mercedes-Benz E-Class (W210)",
+"Mercedes-Benz E-Class (W211)",
+"Mercedes-Benz E-Class (W212)",
+"Mercedes-Benz E-Class (C207)",
+"Mercedes-Benz E-Class (W213)",
+"Mercedes-Benz E-Class (W214)",
 "Mercedes-Benz E-Class",
 "Mercedes-Benz E-Class (W210)",
 "Mercedes-Benz E-Class (W211)",
@@ -7696,6 +7980,10 @@
 ],
 "tried": [
 "Mercedes-Benz G-Class",
+"Mercedes-Benz G-Class EV",
+"Mercedes-Benz G-Class",
+"Mercedes-Benz G-Class EV",
+"Mercedes-Benz G-Class",
 "Mercedes-Benz G-Class EV"
 ]
 },
@@ -7716,7 +8004,8 @@
 "tried": [
 "Mercedes-Benz GLS",
 "Mercedes-Benz GLS (X167)",
-"Mercedes-Benz Gl Class"
+"Mercedes-Benz Gl Class",
+"Mercedes-Benz GL Class"
 ]
 },
 "mercedes-benz|gla": {
@@ -7764,6 +8053,8 @@
 }
 ],
 "tried": [
+"Mercedes-Benz GLE",
+"Mercedes-Benz GLE",
 "Mercedes-Benz GLE"
 ]
 },
@@ -7790,6 +8081,17 @@
 "years": [
 2005,
 2013
+]
+},
+{
+"base": 0,
+"length": 5116,
+"name": "Sixth generation",
+"page": "Mercedes-Benz S-Class",
+"wheelbase": 3035,
+"years": [
+2013,
+2020
 ]
 },
 {
@@ -7843,6 +8145,7 @@
 "Mercedes-Benz S-Class (W220)",
 "Mercedes-Benz S-Class (W221)",
 "Mercedes-Benz S-Class (W222)",
+"Mercedes-Benz_S-Class",
 "Mercedes-Benz_S-Class"
 ]
 },
@@ -7857,6 +8160,17 @@
 "years": [
 2005,
 2013
+]
+},
+{
+"base": 0,
+"length": 5116,
+"name": "Sixth generation",
+"page": "Mercedes-Benz S-Class",
+"wheelbase": 3035,
+"years": [
+2013,
+2020
 ]
 },
 {
@@ -7982,7 +8296,12 @@
 "Mercedes-Benz SL-Class (R129)",
 "Mercedes-Benz SL-Class (R230)",
 "Mercedes-Benz SL-Class (R231)",
-"Mercedes-Benz Sl Class"
+"Mercedes-Benz Sl Class",
+"Mercedes-Benz SL-Class",
+"Mercedes-Benz SL-Class (R232)",
+"Mercedes-Benz SL-Class (R129)",
+"Mercedes-Benz SL-Class (R230)",
+"Mercedes-Benz SL-Class (R231)"
 ]
 },
 "mercedes-benz|slr-mclaren": {
@@ -8011,7 +8330,7 @@
 "boxes": [
 {
 "base": 0,
-"length": null,
+"length": 4600,
 "name": "Mercedes-Benz W638",
 "page": "Mercedes-Benz Vito",
 "wheelbase": 3000,
@@ -8044,14 +8363,16 @@
 }
 ],
 "tried": [
-"Mercedes-Benz Vito"
+"Mercedes-Benz Vito",
+"Mercedes-Benz V Class",
+"Mercedes-Benz V Class"
 ]
 },
 "mercedes-benz|vito": {
 "boxes": [
 {
 "base": 0,
-"length": null,
+"length": 4600,
 "name": "Mercedes-Benz W638",
 "page": "Mercedes-Benz Vito",
 "wheelbase": 3000,
@@ -8138,6 +8459,17 @@
 "years": [
 2022,
 2025
+]
+},
+{
+"base": 0,
+"length": 4395,
+"name": "Second generation",
+"page": "MG4 EV",
+"wheelbase": 2750,
+"years": [
+2025,
+2100
 ]
 }
 ],
@@ -8249,7 +8581,10 @@
 "name": "Second generation",
 "page": "Mini Hatch",
 "wheelbase": 2467,
-"years": null
+"years": [
+2006,
+2015
+]
 },
 {
 "base": 0,
@@ -8369,6 +8704,17 @@
 "boxes": [
 {
 "base": 0,
+"length": 4080,
+"name": "First generation",
+"page": "Mitsubishi Galant",
+"wheelbase": 2420,
+"years": [
+1969,
+1973
+]
+},
+{
+"base": 0,
 "length": 4200,
 "name": "Second generation",
 "page": "Mitsubishi Galant",
@@ -8428,7 +8774,10 @@
 "name": "Seventh generation",
 "page": "Mitsubishi Galant",
 "wheelbase": 2635,
-"years": null
+"years": [
+1992,
+1998
+]
 },
 {
 "base": 0,
@@ -8888,22 +9237,14 @@
 "boxes": [
 {
 "base": 0,
-"length": null,
-"name": "First generation",
-"page": "Nissan Elgrand",
-"wheelbase": 4758,
-"years": [
-1997,
-2017
-]
-},
-{
-"base": 0,
 "length": 4835,
 "name": "Second generation",
 "page": "Nissan Elgrand",
 "wheelbase": 2950,
-"years": null
+"years": [
+2002,
+2010
+]
 },
 {
 "base": 0,
@@ -8985,7 +9326,8 @@
 ],
 "tried": [
 "Nissan GT-R",
-"Nissan Gt R"
+"Nissan Gt R",
+"Nissan GT-R"
 ]
 },
 "nissan|gt-r-nismo": {
@@ -9062,7 +9404,7 @@
 "page": "Nissan Kicks",
 "wheelbase": 2657,
 "years": [
-2025,
+2024,
 2100
 ]
 }
@@ -9122,6 +9464,28 @@
 "years": [
 2010,
 2022
+]
+},
+{
+"base": 0,
+"length": 3999,
+"name": "Fifth generation",
+"page": "Nissan Micra",
+"wheelbase": 2525,
+"years": [
+2016,
+2023
+]
+},
+{
+"base": 0,
+"length": 3999,
+"name": "Sixth generation",
+"page": "Nissan Micra",
+"wheelbase": 2540,
+"years": [
+2025,
+2100
 ]
 }
 ],
@@ -9299,6 +9663,17 @@
 "wheelbase": 2900,
 "years": [
 2021,
+2100
+]
+},
+{
+"base": 0,
+"length": 5130,
+"name": "Fifth generation (China)",
+"page": "Nissan Pathfinder",
+"wheelbase": 2900,
+"years": [
+2023,
 2100
 ]
 }
@@ -9593,7 +9968,10 @@
 "name": "Third generation",
 "page": "Nissan Qashqai",
 "wheelbase": 2666,
-"years": null
+"years": [
+2021,
+2026
+]
 },
 {
 "base": 0,
@@ -9967,6 +10345,17 @@
 2021,
 2100
 ]
+},
+{
+"base": 0,
+"length": 5130,
+"name": "Fifth generation (China)",
+"page": "Nissan Pathfinder",
+"wheelbase": 2900,
+"years": [
+2023,
+2100
+]
 }
 ],
 "tried": [
@@ -10016,7 +10405,10 @@
 "name": "First generation",
 "page": "Nissan X-Trail",
 "wheelbase": 2622,
-"years": null
+"years": [
+2000,
+2014
+]
 },
 {
 "base": 0,
@@ -10042,6 +10434,8 @@
 }
 ],
 "tried": [
+"Nissan X-Trail",
+"Nissan X-Trail",
 "Nissan X-Trail"
 ]
 },
@@ -10377,6 +10771,17 @@
 },
 {
 "base": 0,
+"length": 4100,
+"name": "Opel Kadett B",
+"page": "Opel Kadett B",
+"wheelbase": 2416,
+"years": [
+1965,
+1973
+]
+},
+{
+"base": 0,
 "length": 4127,
 "name": "Kadett C",
 "page": "Opel Kadett C",
@@ -10456,7 +10861,7 @@
 {
 "base": 0,
 "length": 4831,
-"name": "",
+"name": "Kapit\u00e4n P2",
 "page": "Opel Kapit\u00e4n",
 "wheelbase": 2800,
 "years": [
@@ -10545,7 +10950,7 @@
 {
 "base": 0,
 "length": 4898,
-"name": "",
+"name": "Omega V8 (prototypes)",
 "page": "Opel Omega",
 "wheelbase": 2730,
 "years": [
@@ -10570,6 +10975,17 @@
 },
 "opel|senator": {
 "boxes": [
+{
+"base": 0,
+"length": 4810,
+"name": "Senator A",
+"page": "Opel Senator",
+"wheelbase": 2685,
+"years": [
+1978,
+1986
+]
+},
 {
 "base": 0,
 "length": 4845,
@@ -10767,7 +11183,10 @@
 "name": "Peugeot 208 T16",
 "page": "Peugeot 208 T16",
 "wheelbase": 2560,
-"years": null
+"years": [
+2014,
+2014
+]
 }
 ],
 "tried": [
@@ -10841,7 +11260,10 @@
 "name": "Peugeot 308 I",
 "page": "Peugeot 308",
 "wheelbase": 2608,
-"years": null
+"years": [
+2007,
+2021
+]
 },
 {
 "base": 0,
@@ -11086,17 +11508,6 @@
 "boxes": [
 {
 "base": 0,
-"length": null,
-"name": "Porsche 911 GT1 Stra\u00dfenversion",
-"page": "Porsche 911 GT1",
-"wheelbase": 4890,
-"years": [
-1996,
-1999
-]
-},
-{
-"base": 0,
 "length": 4549,
 "name": "991 (GT2 RS)",
 "page": "Porsche 911 GT2",
@@ -11276,17 +11687,6 @@
 2017,
 2019
 ]
-},
-{
-"base": 0,
-"length": null,
-"name": "Porsche 911 GT1 Stra\u00dfenversion",
-"page": "Porsche 911 GT1",
-"wheelbase": 4890,
-"years": [
-1996,
-1999
-]
 }
 ],
 "tried": [
@@ -11310,11 +11710,15 @@
 "name": "Porsche Carrera GT",
 "page": "Porsche Carrera GT",
 "wheelbase": 2730,
-"years": null
+"years": [
+2003,
+2006
+]
 }
 ],
 "tried": [
 "Porsche Carrera-GT",
+"Porsche Carrera GT",
 "Porsche Carrera GT"
 ]
 },
@@ -11446,7 +11850,10 @@
 "name": "Third generation (976) Chassis G3",
 "page": "Porsche Panamera",
 "wheelbase": 2950,
-"years": null
+"years": [
+2024,
+2100
+]
 }
 ],
 "tried": [
@@ -11503,7 +11910,10 @@
 "name": "Renault Arkana (B0+)",
 "page": "Renault Arkana",
 "wheelbase": 2720,
-"years": null
+"years": [
+2019,
+2022
+]
 },
 {
 "base": 0,
@@ -11653,7 +12063,19 @@
 ]
 },
 "renault|estafette": {
-"boxes": [],
+"boxes": [
+{
+"base": 0,
+"length": 4070,
+"name": "Renault Estafette",
+"page": "Renault Estafette",
+"wheelbase": 2270,
+"years": [
+1959,
+2020
+]
+}
+],
 "tried": [
 "Renault Estafette"
 ]
@@ -11666,7 +12088,10 @@
 "name": "Renault Kadjar",
 "page": "Renault Kadjar",
 "wheelbase": 2647,
-"years": null
+"years": [
+2015,
+2022
+]
 }
 ],
 "tried": [
@@ -11911,7 +12336,7 @@
 "page": "Rolls-Royce Ghost",
 "wheelbase": 3295,
 "years": [
-2010,
+2009,
 2020
 ]
 },
@@ -11922,7 +12347,7 @@
 "page": "Rolls-Royce Ghost",
 "wheelbase": 3295,
 "years": [
-2021,
+2020,
 2100
 ]
 }
@@ -12108,6 +12533,17 @@
 "boxes": [
 {
 "base": 0,
+"length": 4320,
+"name": "Mk1 (1L)",
+"page": "SEAT Toledo",
+"wheelbase": 2470,
+"years": [
+1991,
+1999
+]
+},
+{
+"base": 0,
 "length": 4439,
 "name": "Mk2 (1M)",
 "page": "SEAT Toledo",
@@ -12115,6 +12551,17 @@
 "years": [
 1998,
 2004
+]
+},
+{
+"base": 0,
+"length": 4460,
+"name": "Mk3 (5P)",
+"page": "SEAT Toledo",
+"wheelbase": 2580,
+"years": [
+2004,
+2009
 ]
 },
 {
@@ -12253,7 +12700,10 @@
 "name": "Second generation",
 "page": "\u0160koda Kodiaq",
 "wheelbase": 2791,
-"years": null
+"years": [
+2024,
+2100
+]
 }
 ],
 "tried": [
@@ -12580,7 +13030,7 @@
 "page": "Subaru Impreza",
 "wheelbase": 2644,
 "years": [
-2012,
+2011,
 2016
 ]
 },
@@ -12591,7 +13041,7 @@
 "page": "Subaru Impreza",
 "wheelbase": 2670,
 "years": [
-2017,
+2016,
 2023
 ]
 },
@@ -12671,6 +13121,17 @@
 "boxes": [
 {
 "base": 0,
+"length": null,
+"name": "Sixth generation",
+"page": "Subaru Outback",
+"wheelbase": 2745,
+"years": [
+2019,
+2025
+]
+},
+{
+"base": 0,
 "length": 4869,
 "name": "Seventh generation",
 "page": "Subaru Outback",
@@ -12744,6 +13205,17 @@
 "years": [
 1988,
 2001
+]
+},
+{
+"base": 0,
+"length": 3295,
+"name": "Fourth generation",
+"page": "Suzuki Alto",
+"wheelbase": 2335,
+"years": [
+1994,
+1998
 ]
 },
 {
@@ -13233,11 +13705,23 @@
 2016,
 2025
 ]
+},
+{
+"base": 0,
+"length": 4360,
+"name": "Second generation",
+"page": "Toyota C-HR",
+"wheelbase": 2640,
+"years": [
+2023,
+2100
+]
 }
 ],
 "tried": [
 "Toyota C-HR",
-"Toyota C Hr"
+"Toyota C Hr",
+"Toyota C-HR"
 ]
 },
 "toyota|camry": {
@@ -13350,6 +13834,17 @@
 "years": [
 2011,
 2020
+]
+},
+{
+"base": 0,
+"length": 4902,
+"name": "Toyota Camry (XV80)",
+"page": "Toyota Camry (XV80)",
+"wheelbase": 2825,
+"years": [
+2023,
+2024
 ]
 }
 ],
@@ -13736,8 +14231,8 @@
 "page": "Toyota Highlander",
 "wheelbase": 3050,
 "years": [
-2027,
-2027
+2026,
+2026
 ]
 }
 ],
@@ -13843,6 +14338,17 @@
 "wheelbase": 2750,
 "years": [
 2015,
+2100
+]
+},
+{
+"base": 0,
+"length": 2750,
+"name": "Ninth generation",
+"page": "Toyota Hilux",
+"wheelbase": 2750,
+"years": [
+2025,
 2100
 ]
 }
@@ -13960,6 +14466,17 @@
 },
 {
 "base": 0,
+"length": 4982,
+"name": "J300",
+"page": "Toyota Land Cruiser",
+"wheelbase": 2850,
+"years": [
+2021,
+2100
+]
+},
+{
+"base": 0,
 "length": 4592,
 "name": "Toyota Land Cruiser FJ",
 "page": "Toyota Land Cruiser FJ",
@@ -13997,7 +14514,10 @@
 "name": "First generation",
 "page": "Toyota Land Cruiser Prado",
 "wheelbase": 2730,
-"years": null
+"years": [
+1990,
+1996
+]
 },
 {
 "base": 0,
@@ -14155,6 +14675,17 @@
 },
 {
 "base": 1,
+"length": 4982,
+"name": "J300",
+"page": "Toyota Land Cruiser",
+"wheelbase": 2850,
+"years": [
+2021,
+2100
+]
+},
+{
+"base": 1,
 "length": 4592,
 "name": "Toyota Land Cruiser FJ",
 "page": "Toyota Land Cruiser FJ",
@@ -14192,7 +14723,10 @@
 "name": "First generation",
 "page": "Toyota Land Cruiser Prado",
 "wheelbase": 2730,
-"years": null
+"years": [
+1990,
+1996
+]
 },
 {
 "base": 1,
@@ -14241,6 +14775,11 @@
 ],
 "tried": [
 "Toyota Land-Cruiser",
+"Toyota Land Cruiser",
+"Toyota Land Cruiser FJ",
+"Toyota Land Cruiser (J40)",
+"Toyota Land Cruiser (J70)",
+"Toyota Land Cruiser (J250)",
 "Toyota Land Cruiser",
 "Toyota Land Cruiser FJ",
 "Toyota Land Cruiser (J40)",
@@ -14476,7 +15015,7 @@
 "page": "Toyota GR Supra",
 "wheelbase": 2470,
 "years": [
-2020,
+2019,
 2026
 ]
 }
@@ -14934,6 +15473,17 @@
 2003,
 2021
 ]
+},
+{
+"base": 0,
+"length": 4500,
+"name": "Fourth generation",
+"page": "Volkswagen Caddy",
+"wheelbase": 2755,
+"years": [
+2020,
+2100
+]
 }
 ],
 "tried": [
@@ -15219,7 +15769,7 @@
 "page": "Volkswagen Passat (North America and China)",
 "wheelbase": 2803,
 "years": [
-2020,
+2019,
 2022
 ]
 },
@@ -15328,7 +15878,10 @@
 "name": "Volkswagen Passat (B9)",
 "page": "Volkswagen Passat (B9)",
 "wheelbase": 2841,
-"years": null
+"years": [
+2023,
+2100
+]
 },
 {
 "base": 0,
@@ -15336,7 +15889,10 @@
 "name": "Volkswagen Passat Pro (B9)",
 "page": "Volkswagen Passat (B9)",
 "wheelbase": 2871,
-"years": null
+"years": [
+2024,
+2100
+]
 }
 ],
 "tried": [
@@ -15365,6 +15921,17 @@
 "years": [
 1975,
 1981
+]
+},
+{
+"base": 0,
+"length": 3655,
+"name": "Volkswagen Polo Mk2 (86C)",
+"page": "Volkswagen Polo Mk2",
+"wheelbase": 2335,
+"years": [
+1981,
+1994
 ]
 },
 {
@@ -15507,7 +16074,9 @@
 }
 ],
 "tried": [
-"Volkswagen T-Cross"
+"Volkswagen T-Cross",
+"Volkswagen T Cross",
+"Volkswagen T Cross"
 ]
 },
 "volkswagen|taigo": {
@@ -15576,7 +16145,10 @@
 "name": "Third generation",
 "page": "Volkswagen Tiguan",
 "wheelbase": 2681,
-"years": null
+"years": [
+2024,
+2100
+]
 }
 ],
 "tried": [
@@ -15613,7 +16185,10 @@
 "name": "Third generation (CR)",
 "page": "Volkswagen Touareg",
 "wheelbase": 2894,
-"years": null
+"years": [
+2018,
+2026
+]
 }
 ],
 "tried": [
@@ -15687,7 +16262,10 @@
 "name": "Volvo 780",
 "page": "Volvo_700_Series",
 "wheelbase": 2770,
-"years": null
+"years": [
+1986,
+1990
+]
 }
 ],
 "tried": [
@@ -15805,7 +16383,7 @@
 "page": "Volvo S40",
 "wheelbase": 2550,
 "years": [
-1996,
+1995,
 2004
 ]
 },

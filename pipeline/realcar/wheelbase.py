@@ -132,7 +132,8 @@ def infoboxes(text, title):
             i += 1
         box = text[m.start():i]
         fields = {}
-        for f in re.finditer(r"\|\s*([a-z_ ]+?)\s*=\s*(.*?)(?=\n\s*\|\s*[a-z_ ]+?\s*=|\}\}\s*$)", box, re.S | re.I):
+        # [ \t]* after '=': an empty field ('| aka =') must not swallow the next line
+        for f in re.finditer(r"\|\s*([a-z_ ]+?)\s*=[ \t]*(.*?)(?=\n\s*\|\s*[a-z_ ]+?\s*=|\}\}\s*$)", box, re.S | re.I):
             fields[f.group(1).strip().lower()] = f.group(2)
         wb = _mm(fields.get("wheelbase", ""))
         if not wb:
@@ -237,10 +238,39 @@ def fetch(make, model):
     return out
 
 
+RACE = re.compile(r"\b(?:R5|R2|Rally2?|WRC|S1600|S2000|N5|DTM|BTCC|TCR|race|racing|rally|concept|prototype)\b", re.I)
+
+
+def _succeeded(boxes):
+    """Each generation's years as on sale here: one still built somewhere
+    after its successor came (the Tiguan Mk2 runs on in China as the
+    Tiguan L) ends the year the successor starts. A successor starts three
+    or more years later and outlives it: a coupe launched beside the saloon
+    (E-Class C207) or a rally car (Fiesta R5) is not one. A one-year overlap
+    is left alone: the proportion settles it."""
+    out = []
+    for b in boxes:
+        y = b.get("years")
+        if y:
+            nxt = [c["years"][0] for c in boxes if c is not b and c.get("years") and c.get("base", 0) == b.get("base", 0)
+                   and c["years"][0] >= y[0] + 3 and c["years"][1] > y[1]]
+            if nxt and y[1] > min(nxt):
+                b = dict(b, years=(y[0], min(nxt)), years_listed=tuple(y))
+        out.append(b)
+    return out
+
+
 def choose(boxes, year, ratio=None):
     """The generation on sale in YEAR; of two, the proportion nearer RATIO;
     else the newest."""
-    on = [b for b in boxes if b["years"] and b["years"][0] - 1 <= year <= b["years"][1]] if year else list(boxes)
+    # race and rally cars (Fiesta R5, Polo R WRC) are not the road car's generation
+    road = [b for b in boxes if not RACE.search(b.get("name") or "")]
+    boxes = _succeeded(road or boxes)
+    # the generation that was built that year; failing that, one that started
+    # the year after (a car registered the year after it was built)
+    on = [b for b in boxes if b["years"] and b["years"][0] <= year <= b["years"][1]] if year else list(boxes)
+    if year and not on:
+        on = [b for b in boxes if b["years"] and b["years"][0] - 1 <= year <= b["years"][1]]
     if on:
         first = min(b.get("base", 0) for b in on)
         on = [b for b in on if b.get("base", 0) == first]
@@ -297,6 +327,9 @@ def build(workers=3):
 
 if __name__ == "__main__":
     if "--build" in sys.argv:
+        if "--all" in sys.argv:            # read every page again (after a parser fix)
+            for k in table():
+                _TABLE[k]["failed"] = True
         build()
         sys.exit()
     a = [x for x in sys.argv[1:] if not x.startswith("--")]

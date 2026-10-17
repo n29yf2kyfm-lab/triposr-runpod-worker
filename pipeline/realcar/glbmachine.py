@@ -554,7 +554,7 @@ def main():
         rep = make(a.request, sheet=not a.no_sheet, exact=a.exact, out=a.out, out_file=a.output, full=a.full,
                    spec=a.spec)
         print(json.dumps(rep, indent=1, default=str))
-        sys.exit(2 if "error" in rep else 0)
+        sys.exit(2 if "error" in rep else 0 if (rep.get("files") or {}).get("glb") else 3)
     elif a.cmd == "batch":
         setup(quiet=True)
         import batch

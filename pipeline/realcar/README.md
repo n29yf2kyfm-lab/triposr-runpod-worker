@@ -109,6 +109,14 @@ The steps, in order:
    sale that year. If it has the model but not that generation, the nearest
    generation is built and the report says so (`--exact` refuses instead).
    If it has no such model, the report lists what it has for that make.
+   Among records that fit as well, the plain body comes before a long or
+   special one (Allspace, Tiguan L, LWB), the newer generation first, then
+   one ExpertCarCheck may use commercially, then the newest and best graded.
+   A generation still built somewhere after its successor came (the Tiguan
+   Mk2, kept on in China) counts as on sale only until the successor starts.
+   A model the rigger cannot use (its wheels and doors fused into a few
+   shells) is passed over for the next best, up to three. The report lists
+   it under `passed_over`, with the reason.
 2. The file is decoded (`decode.mjs`), rigged (`rig.py`), finished in the
    colour asked for (`finish.py`), validated, compressed and, unless
    `--no-sheet`, drawn on a four-view check sheet; `-o` writes the GLB
@@ -148,10 +156,18 @@ ships with the machine (building a car makes no outside call):
    make and model in the catalogue, read once from English Wikipedia's page
    text by `wheelbase.py --build` (2026-10-17: 566 makes and models; a
    wheelbase for 621 of the 1,044 approved models and 487 of the 737 that
-   match the UK top 2,000). Run it again when the catalogue grows.
-2. It takes the generation on sale in the model's year. When two overlap
-   that year, it takes the one whose wheelbase-to-length proportion matches
-   the 3D model.
+   match the UK top 2,000). Run it again when the catalogue grows
+   (`--build`; `--build --all` reads every page again). Rebuilt
+   2026-10-17 after a parser fix: an empty infobox field had swallowed the
+   next line, losing years such as the Tiguan Mk3's "2024–present". Now
+   1,110 generations, 7 without years (was 1,075 and 45); no wheelbase
+   changed.
+2. It takes the generation built in the model's year (or, failing that,
+   one that started the year after). When two overlap that year, it takes
+   the one whose wheelbase-to-length proportion matches the 3D model. A
+   generation built on elsewhere after its successor came ends when the
+   successor starts. Race and rally cars on a model's page (Fiesta R5) are
+   not generations.
 3. The answer is used only if it leaves the wheels a real car's size
    (0.50–0.85 m). Otherwise the car is flagged.
 

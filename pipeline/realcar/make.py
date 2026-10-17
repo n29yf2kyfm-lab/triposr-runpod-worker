@@ -100,7 +100,7 @@ def parse(text):
     return want
 
 
-def find(want, cat):
+def find(want, cat, skip=()):
     q = norm(want["words"])
     makes = {norm(i["make"]): i["make"].lower() for i in cat.values()}
     make, rest = None, q
@@ -137,7 +137,7 @@ def find(want, cat):
     if want["model_words"] is None:
         want["model_words"] = " ".join(toks[1:])
     pool = [i for i in cat.values() if norm(i["make"]) == norm(make) and i.get("publicationStatus") == "approved"
-            and i.get("desktopGlbUrl")]
+            and i.get("desktopGlbUrl") and i["assetId"] not in skip]
 
     def names(i):
         return {norm(n) for n in [i.get("model"), i.get("modelFamily"), *(i.get("modelAliases") or [])] if n}
@@ -189,13 +189,38 @@ def find(want, cat):
             if g and g[0] - 1 <= y0 <= g[1]:
                 return min(g[0], y0), max(min(g[1], time.localtime().tm_year), i.get("yearEnd") or y0)
         return y0, i.get("yearEnd") or y0 + 7
-    order = lambda L: sorted(L, key=lambda i: (doors_rank(i), -((i.get("yearStart") or 1990)  # noqa: E731
-                                                                - 4 * batch.GRADE.get(i.get("qualityGrade"), 3))))
+    asked = {n.replace(norm(make), "") for i in hits for n in names(i)}
+    asked = {b for b in asked if b and b in rest}
+    model_rx = "|".join(re.escape(w) for w in sorted({x for i in hits for x in [str(i.get("model") or "")] if x}, key=len,
+                                                       reverse=True)) or "$^"
+
+    def is_variant(i):
+        # a long or special body the request did not name: an alias that is the
+        # asked model plus words ("Tiguan Allspace"), or a title that says so
+        # ("Tiguan L 430 PHEV"); the plain car comes first
+        if any(n.replace(norm(make), "") != b and n.replace(norm(make), "").startswith(b) for n in names(i) for b in asked):
+            return 1
+        return 1 if re.search(rf"\b(?:{model_rx})\s+(?:l|lwb|long|allspace|xl|grand|max|limited)\b",
+                              str(i.get("sourceTitle") or ""), re.I) else 0
+
+    def generation(i):
+        # when the record's generation started (the wheelbase table's), so two
+        # records of one generation are told from a newer generation's
+        y0 = i.get("yearStart") or 0
+        g = wheelbase.lookup(*batch.model_of(i), y0).get("years") if y0 else None
+        return g[0] if g and g[0] <= y0 + 1 else y0
+
+    # of the records that fit as well: the doors asked for, the plain body, the
+    # newer generation; within one generation, one ExpertCarCheck may use
+    # commercially, then the newest and best graded
+    rank = lambda i: (doors_rank(i), is_variant(i), -generation(i), not batch.credit_of(i)["commercial"],  # noqa: E731
+                      -((i.get("yearStart") or 1990) - 4 * batch.GRADE.get(i.get("qualityGrade"), 3)))
+    order = lambda L: sorted(L, key=rank)  # noqa: E731
 
     def pick(hits):
         if yr:
             on_sale = [i for i in hits if years(i)[0] - 1 <= yr <= years(i)[1]]
-            others = sorted(hits, key=lambda i: (min(abs(yr - years(i)[0]), abs(yr - years(i)[1])), doors_rank(i)))
+            others = sorted(hits, key=lambda i: (min(abs(yr - years(i)[0]), abs(yr - years(i)[1])), rank(i)))
         else:
             on_sale, others = hits, hits
         return (order(on_sale)[0] if on_sale else None), others
@@ -244,6 +269,30 @@ def spec_variants(spec, hits, pool, names, make_n, rest):
     return out, badge
 
 
+def _choose(want, cat, exact, skip):
+    """The report so far and the catalogue record to build (None, with the
+    report's "error", when there is none)."""
+    want = {k: v for k, v in want.items() if k != "spec_used"}
+    item, others, why = find(want, cat, skip)
+    report = {"asked": want, "match": why,
+              "nearest": [f"{i['assetId']} ({i.get('yearStart')}-{i.get('yearEnd') or ''})" for i in others[:4]]}
+    if item is None and others and not exact:
+        item, report["match"] = others[0], f"{why}; built the nearest generation in the catalogue"
+    if item is None:
+        report["error"] = "not in the catalogue" if not others else "that generation is not in the catalogue"
+        if want.get("make"):           # what the catalogue does have for that make
+            report["catalogue_has"] = sorted({batch.model_of(i)[1].title() for i in cat.values()
+                                              if i["make"].lower() == want["make"]
+                                              and i.get("publicationStatus") == "approved"})[:40]
+        return report, None
+    if want.get("spec"):
+        report["spec_note"] = want.pop("spec_used", None) or \
+            "the spec names no separate model in the catalogue (a trim or engine): the standard body is built"
+    report["asset"] = item["assetId"]
+    report["source"] = item.get("sourceTitle")
+    return report, item
+
+
 def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=False, no_sheet=False,
           out_file=None, full=False, spec=None):
     """One request, start to finish, from the catalogue. Returns the report
@@ -262,23 +311,6 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
             if sp.get(k) and not want.get(k):
                 want[k] = sp[k]
     cat = batch.catalogue()
-    item, others, why = find(want, cat)
-    report = {"asked": want, "match": why,
-              "nearest": [f"{i['assetId']} ({i.get('yearStart')}-{i.get('yearEnd') or ''})" for i in others[:4]]}
-    if item is None and others and not exact:
-        item, report["match"] = others[0], f"{why}; built the nearest generation in the catalogue"
-    if item is None:
-        report["error"] = "not in the catalogue" if not others else "that generation is not in the catalogue"
-        if want.get("make"):           # what the catalogue does have for that make
-            report["catalogue_has"] = sorted({batch.model_of(i)[1].title() for i in cat.values()
-                                              if i["make"].lower() == want["make"]
-                                              and i.get("publicationStatus") == "approved"})[:40]
-        return report
-    if want.get("spec"):
-        report["spec_note"] = want.pop("spec_used", None) or \
-            "the spec names no separate model in the catalogue (a trim or engine): the standard body is built"
-    report["asset"] = item["assetId"]
-    report["source"] = item.get("sourceTitle")
     args.paint = COLOURS.get(want.get("colour"))
     # the doors asked for decide the body the rigger cuts: "2 door" / "3 door"
     # is a three-door hatch or a coupe (one door each side), "4/5 door" not
@@ -288,19 +320,43 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
         args.body_style = want["body"]
     out = out or os.path.join(view_dir, "make")
     os.makedirs(out, exist_ok=True)
-    server = None
-    if not no_sheet:                      # the check sheet is drawn by a browser from this folder
-        server = subprocess.Popen([sys.executable, "-m", "http.server", str(port)], cwd=view_dir,
-                                  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        time.sleep(1)
-    try:
-        t0 = time.time()
-        rec = batch.one({"rank": 0, "genModel": request}, item, args, out)
-        rec["seconds"] = round(time.time() - t0)
-    finally:
-        if server:
-            server.terminate()
-    report["result"] = rec
+    # a model the rigger cannot use (its wheels and doors fused into a few
+    # shells) is passed over for the next best, up to three, and the report
+    # says why
+    passed = []
+    for _ in range(3):
+        report, item = _choose(want, cat, exact, {p["asset"] for p in passed})
+        if item is None:
+            break
+        server = None
+        if not no_sheet:                  # the check sheet is drawn by a browser from this folder
+            server = subprocess.Popen([sys.executable, "-m", "http.server", str(port)], cwd=view_dir,
+                                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            time.sleep(1)
+        try:
+            t0 = time.time()
+            rec = batch.one({"rank": 0, "genModel": request}, item, args, out)
+            rec["seconds"] = round(time.time() - t0)
+        finally:
+            if server:
+                server.terminate()
+        report["result"] = rec
+        if os.path.exists(os.path.join(out, item["assetId"], "web.glb")) and rec.get("status") in ("done", "check"):
+            break
+        rig = rec.get("rig") or {}
+        passed.append({"asset": item["assetId"], "source": item.get("sourceTitle"),
+                       "why": rig.get("refused") or rig.get("error") or rec.get("status")})
+    if passed:
+        report["passed_over"] = passed
+    if item is None or "error" in report:
+        if passed:
+            report["error"] = "no model of this car in the catalogue could be rigged"
+        return report
+    if not os.path.exists(os.path.join(out, item["assetId"], "web.glb")):
+        report["error"] = "no model of this car in the catalogue could be rigged"
+        return report
+    if passed:
+        report["match"] += f"; {len(passed)} model(s) passed over, the rigger could not use them"
     side = [p for p in ((rec.get("finish") or {}).get("opens") or []) if p.startswith("door_") and p[5] in "fr"]
     report["side_doors_built"] = len(side)
     if want.get("doors"):
@@ -340,6 +396,8 @@ def main():
     print(json.dumps(report, indent=1, default=str))
     if "error" in report:
         sys.exit(2)
+    if not report.get("files", {}).get("glb"):
+        sys.exit(3)
 
 if __name__ == "__main__":
     main()
