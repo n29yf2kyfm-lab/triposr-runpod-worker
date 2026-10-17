@@ -31,10 +31,13 @@ from PIL import Image
 UA = {"User-Agent": "ecc-forge/0.1 (https://github.com/n29yf2kyfm-lab/triposr-runpod-worker; reference finder)"}
 OK_LICENCE = re.compile(r"^(CC BY(-SA)?( \d\.\d)?|CC0|Public domain|CC-BY(-SA)?.*)$", re.I)
 # whole words only: "toy" is not to catch every Toyota, nor "race" a Grace;
-# a make that is one of these words (SEAT) is taken out of the name first
+# a make that is one of these words (SEAT) is taken out of the name first.
+# A tuned or widebody car has the wrong outline for the car it is named for.
 BAD_NAME = re.compile(r"\b(?:interior|engine|dash(?:board)?|cockpit|seats?|wheels?|details?|badges?|logos?|emblems?|"
                       r"boot|trunk|steering|gauges?|cluster|screen|keys?|brochure|crash(?:ed)?|rac(?:e|es|ing)|"
-                      r"rall(?:y|ies)|police|taxis?|toys?|die[ -]?cast|model car|scale model|lego|cutaway|wreck(?:ed)?)\b", re.I)
+                      r"rall(?:y|ies)|police|taxis?|toys?|die[ -]?cast|model car|scale model|lego|cutaway|wreck(?:ed)?|"
+                      r"wide ?body|body ?kit|tun(?:ed|ing)|modified|stanced?|slammed|drift(?:ing)?|"
+                      r"prior[ -]design|liberty walk|rocket bunny|limo(?:usine)?|stretch(?:ed)?)\b", re.I)
 
 
 def bad_name(title, make=""):

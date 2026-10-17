@@ -298,9 +298,19 @@ glbmachine make "..." --no-standin              # the nearest generation as it i
    no photograph. The photos stay in `$GLBMACHINE_HOME/photos/`. A stand-in
    takes its roofline from the library at once, and searches only when the
    library has nothing. The library keeps only photos dated to the
-   generation by their name or tags. One model's generations often share
-   their proportions, and an undated "VW Golf" passed the checks for three
-   Golfs at once.
+   generation by their name or tags, one photo for one generation, and no
+   tuned or widebody cars. One model's generations often share their
+   proportions: an undated "VW Golf" passed the checks for three Golfs at
+   once, and a Prior-Design widebody 3 Series for five 3 Series.
+   - Run on the top 30 (2026-10-17, from the test machine, Flickr only):
+     before these fixes 3 of 106 generations were found. After them 16 of
+     103 were, and 5 are kept under the rules: Polo 2001 and 2009, Mini
+     2013 and 2024, Qashqai 2013.
+   - The checks cannot tell a same-name model from another market. A 2016
+     Indonesian Yaris (XP150) fitted the European XP130's proportions
+     better than a real 2024 Mini fits its own, since a photo's perspective
+     alone is off by 4-8%. It was taken out by hand. The Maker shows every
+     photo it uses, so a person can see it.
    - The run can be stopped and restarted: done cars are skipped, and a
      car not found is tried again after 30 days.
    - It pauses when a source says "too many requests".
