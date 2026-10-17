@@ -15,6 +15,7 @@ the only network use is fetching the model from the catalogue's storage.
     glbmachine rig CAR.glb OUT_DIR            # the rig step alone
     glbmachine serve --port 8080              # the Maker page, the web API (below), GLB Studio
     glbmachine add CAR.obj --make Toyota --model Yaris --years 2011-2020 --doors 3 --licence "..."
+    glbmachine photos --top 100 --hours 2     # the standby roofline library, from licensed photos
     glbmachine version
 
 WORK FOLDER: $GLBMACHINE_HOME (default ~/.glbmachine) holds view/ (the check
@@ -543,6 +544,11 @@ def main():
     ad.add_argument("--author")
     ad.add_argument("--url")
     ad.add_argument("--build", action="store_true", help="build it straight away, with a check sheet")
+    ph = sub.add_parser("photos", help="build the standby roofline library from licensed photos (photolib.py)")
+    ph.add_argument("--top", type=int, default=100, help="how far down the UK licensing list")
+    ph.add_argument("--since", type=int, default=2000)
+    ph.add_argument("--hours", type=float, default=2.0, help="stop after this long; run again to carry on")
+    ph.add_argument("--status", action="store_true", help="what the library holds")
     sub.add_parser("models", help="list the models you added")
     rm = sub.add_parser("remove", help="take an added model out")
     rm.add_argument("asset")
@@ -579,6 +585,12 @@ def main():
             print(json.dumps({"built": rep.get("asset"), "status": res.get("status"), "missing": res.get("missing"),
                               "opens": (res.get("finish") or {}).get("opens"), "doors": rep.get("doors_note"),
                               "files": rep.get("files")}, indent=1))
+    elif a.cmd == "photos":
+        import photolib
+        if a.status:
+            photolib.status()
+        else:
+            photolib.run(a.top, a.since, a.hours, 30, 60)
     elif a.cmd == "models":
         import batch
         for k, v in (_json(batch.local_catalogue_path()) or {}).items():

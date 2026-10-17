@@ -469,10 +469,20 @@ class PhotoSearch:
         slug = re.sub(r"[^a-z0-9]+", "-", f"{make} {model} {target['years'][0] or ''}".lower()).strip("-")
         self.dir = os.path.join(home, "photos", slug)
         self.found_p = os.path.join(self.dir, "found.json")
-        self.result = None
+        self.result, self.thread = None, None
+        import photos
+        lib = photos.from_library(make, model, target["years"][0])
+        if lib:                                   # the standby library (photolib.py): no search at all
+            self.result = {"file": lib["photo"]["file"], "author": lib["photo"].get("author"),
+                           "licence": lib["photo"].get("licence"), "page": lib["photo"].get("page"), "seconds": 0,
+                           "from_library": True,
+                           "roofline": {k: lib[k] for k in ("u", "roof", "u_front", "u_rear", "height_photo")}}
+            local = os.path.join(self.dir, "photo.jpg")
+            if os.path.exists(local):
+                self.result["photo"] = local
+            return
         if os.path.exists(self.found_p):
             self.result = json.load(open(self.found_p))
-            self.thread = None
             return
 
         def run():
@@ -610,7 +620,9 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
                                               "page": ph.get("page"), "roofline_off_cm": [rl.get("roofline_off_cm_before"),
                                                                                         rl.get("roofline_off_cm_after")],
                                               "used_for": "the roofline only: nothing of the photo is in the car"}
-                shutil.copyfile(ph["photo"], os.path.join(out, item["assetId"], "photo.jpg"))
+                if ph.get("photo") and os.path.exists(ph["photo"]):
+                    shutil.copyfile(ph["photo"], os.path.join(out, item["assetId"], "photo.jpg"))
+                report["standin"]["photo"]["from_library"] = bool(ph.get("from_library"))
     side = [p for p in ((rec.get("finish") or {}).get("opens") or []) if p.startswith("door_") and p[5] in "fr"]
     report["side_doors_built"] = len(side)
     if want.get("doors"):

@@ -74,7 +74,9 @@ def _openverse(queries, deadline):
         try:
             with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=15) as r:
                 d = json.load(r)
-        except Exception:
+        except Exception as e:
+            if getattr(e, "code", None) == 429:
+                THROTTLED["openverse"] += 1
             continue
         for h in d.get("results", []):
             lic = OV_LICENCE.get(h.get("license"))
@@ -83,8 +85,8 @@ def _openverse(queries, deadline):
             seen.add(h["id"])
             u = h["url"]
             m = re.match(r"(https://upload\.wikimedia\.org/wikipedia/commons)/([0-9a-f])/([0-9a-f]{2})/(.+)$", u)
-            if m and (h.get("width") or 0) > 1600:
-                u = f"{m.group(1)}/thumb/{m.group(2)}/{m.group(3)}/{m.group(4)}/1600px-{m.group(4)}"
+            if m and (h.get("width") or 0) > 1280:     # Wikimedia serves standard thumbnail widths only
+                u = f"{m.group(1)}/thumb/{m.group(2)}/{m.group(3)}/{m.group(4)}/1280px-{m.group(4)}"
             out.append({"title": h.get("title") or h["id"], "url": u, "w": h.get("width") or 0, "h": h.get("height") or 1,
                         "source": h.get("source"),
                         "licence": f"{lic} {h.get('license_version') or ''}".strip(), "author": (h.get("creator") or "")[:120],
@@ -98,8 +100,41 @@ def _fetch(url, path):
         with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=30) as r:
             open(path, "wb").write(r.read())
         return True
-    except Exception:
+    except Exception as e:
+        if getattr(e, "code", None) == 429:
+            THROTTLED["files"] += 1
         return False
+
+
+THROTTLED = {"openverse": 0, "files": 0}           # refusals for too many requests, for photolib's pacing
+
+# the shipped roofline library (photolib.py): measured outlines, credits, no photos
+LIBRARY = os.path.join(HERE, "roofline_table.json")
+_LIB = {}
+MAKE_KEY = {"mercedes": "mercedesbenz", "merc": "mercedesbenz", "vw": "volkswagen", "opel": "vauxhall",
+            "rangerover": "landrover", "alfa": "alfaromeo"}
+
+
+def libkey(make, model, year0):
+    """'mercedes-benz|a-class|2012' and 'Mercedes|A Class|2012' are one key;
+    an Opel and its Vauxhall twin share an outline."""
+    n = lambda x: re.sub(r"[^a-z0-9]", "", str(x or "").lower())  # noqa: E731
+    mk = MAKE_KEY.get(n(make), n(make))
+    md = n(model)
+    if md.startswith(mk):
+        md = md[len(mk):]
+    return f"{mk}|{md}|{year0 or ''}"
+
+
+def library():
+    if not _LIB and os.path.exists(LIBRARY):
+        _LIB.update(json.load(open(LIBRARY)))
+    return _LIB
+
+
+def from_library(make, model, year0):
+    """A generation's measured outline and its photo's credit, if the library has it."""
+    return library().get(libkey(make, model, year0))
 
 
 def side_photo(make, model, years, out_dir, dims, deadline_s=45, max_dl=10):

@@ -10,7 +10,7 @@ travel with it (they do: each package keeps its own LICENSE file in
 
 | Part | Where it came from |
 | --- | --- |
-| `rig.py`, `finish.py`, `edits.py`, `make.py`, `batch.py`, `wheelbase.py`, `glbmachine.py`, `importer.py`, `standin.py`, `photos.py`, the `.mjs` tools, `view.html`, `maker/` (GLB Maker), `studio/` (GLB Studio), `../template/gltf.py` | written for ExpertCarCheck |
+| `rig.py`, `finish.py`, `edits.py`, `make.py`, `batch.py`, `wheelbase.py`, `glbmachine.py`, `importer.py`, `standin.py`, `photos.py`, `photolib.py`, the `.mjs` tools, `view.html`, `maker/` (GLB Maker), `studio/` (GLB Studio), `../template/gltf.py` | written for ExpertCarCheck |
 | `assets/engine_pack.glb` (engine, gearbox, cooling, battery, suspension, exhaust) | exported from our own constructed geometry (`platform/trainer/engine-bay-detail.js`, `platform/workshop/ehybrid/hybrid-parts.js`: `sourceType: constructed-training-geometry`); its 11 textures are generated in code. Nothing in it is cut from a third-party model. |
 | `vendor/no-sharp` | a stand-in so the LGPL image library below is never installed |
 

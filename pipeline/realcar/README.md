@@ -248,6 +248,22 @@ glbmachine make "..." --no-standin              # the nearest generation as it i
      test machine's shared address no usable side photo of a Tiguan Mk3 or
      a Puma was found in time, and those stand-ins were shaped from their
      size alone, as the report says.
+   **The standby library** (`photolib.py`, `glbmachine photos`). An agent
+   goes down the UK licensing list by rank, through each model's
+   generations from 2000 on. It finds a side photo the same way and keeps
+   the measured outline in `roofline_table.json`, which ships with the
+   machine. That file holds heights along the car, the wheel centres, and
+   the photo's file, author, licence and page: numbers and a credit only,
+   no photograph. The photos stay in `$GLBMACHINE_HOME/photos/`. A stand-in
+   takes its roofline from the library at once, and searches only when the
+   library has nothing.
+   - The run can be stopped and restarted: done cars are skipped, and a
+     car not found is tried again after 30 days.
+   - It pauses when a source says "too many requests".
+   - `glbmachine photos --top 2000 --hours 8` is a night's run;
+     `glbmachine photos --status` shows what the library holds.
+   - Google Images is not used: its photos are copyrighted, and Google's
+     terms forbid scraping its results.
 6. **No game or toy models** (`batch.is_game`), for stand-ins or anything
    else: Gran Turismo or Forza rips, low-poly game assets, die-cast, Lego.
 
