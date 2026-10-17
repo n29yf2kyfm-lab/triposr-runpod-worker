@@ -14545,6 +14545,39 @@
 2022,
 2100
 ]
+},
+{
+"base": 1,
+"length": 3615,
+"name": "First generation (XP10)",
+"page": "Toyota Vitz",
+"wheelbase": 2370,
+"years": [
+1999,
+2012
+]
+},
+{
+"base": 1,
+"length": 3750,
+"name": "Second generation (XP90)",
+"page": "Toyota Vitz",
+"wheelbase": 2460,
+"years": [
+2005,
+2016
+]
+},
+{
+"base": 1,
+"length": 3908,
+"name": "Third generation (XP130)",
+"page": "Toyota Vitz",
+"wheelbase": 2510,
+"years": [
+2010,
+2020
+]
 }
 ],
 "tried": [
@@ -14552,7 +14585,9 @@
 "Toyota Yaris (XP210)",
 "Toyota Yaris (XP150)",
 "Toyota Yaris (DJ)",
-"Toyota Yaris (AC100)"
+"Toyota Yaris (AC100)",
+"Toyota Vitz",
+"Toyota Vitz (2023)"
 ]
 },
 "vauxhall|astra": {

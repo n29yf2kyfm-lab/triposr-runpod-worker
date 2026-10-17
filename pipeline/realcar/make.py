@@ -73,6 +73,16 @@ def parse(text):
     if m:
         want["year"] = int(m.group(1))
         t = t.replace(m.group(1), " ")
+    else:
+        # a UK registration plate: "12 Yaris", "62-plate Corsa": 02-29 is that
+        # March's year, 51-79 that September's (fifty on)
+        yy = time.localtime().tm_year % 100
+        m = re.search(r"(?<![\w.])(\d\d)(?:[\s-]*(?:plate|reg))?(?![\w.])", t)
+        if m and (2 <= int(m.group(1)) <= yy or 51 <= int(m.group(1)) <= yy + 50):
+            n = int(m.group(1))
+            want["year"] = 2000 + (n if n < 50 else n - 50)
+            want["plate"] = m.group(1)
+            t = t[:m.start()] + " " + t[m.end():]
     m = re.search(r"\b([2-5])[\s-]*(?:door|dr)s?\b", t)
     if m:
         want["doors"] = int(m.group(1))
@@ -99,6 +109,22 @@ def find(want, cat):
             make = MAKES.get(k, makes.get(k))
             rest = q.replace(k, "", 1)
             break
+    if not make:
+        # a model named without its make ("12 Yaris"): the make whose
+        # catalogue model names appear in the request, if only one does
+        by_model = {}
+        for i in cat.values():
+            for n in {norm(x) for x in [i.get("model"), i.get("modelFamily")] if x}:
+                n2 = n.replace(norm(i["make"]), "")
+                if len(n2) >= 3 and n2 in q:
+                    by_model.setdefault(i["make"].lower(), set()).add(n2)
+        for uk, other in (("vauxhall", "opel"),):          # the UK badge of the same car
+            if uk in by_model and other in by_model:
+                del by_model[other]
+        if len(by_model) == 1:
+            make = next(iter(by_model))
+            rest = q
+            want["make_from_model"] = True
     want["make"], want["model_words"] = make, None
     if not make:
         return None, [], "no make recognised"
@@ -149,7 +175,7 @@ def find(want, cat):
         # catalogue often records one model year: its 2011 Corsa is the
         # 2006-2014 Corsa D), else the record's, else seven years from its start
         y0 = i.get("yearStart") or 0
-        if y0:
+        if y0 and (i.get("yearEnd") or y0) == y0:     # only a record that gives one year is widened
             g = wheelbase.lookup(*batch.model_of(i), y0).get("years")
             if g and g[0] - 1 <= y0 <= g[1]:
                 return min(g[0], y0), max(min(g[1], time.localtime().tm_year), i.get("yearEnd") or y0)
@@ -188,8 +214,6 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
         return report
     report["asset"] = item["assetId"]
     report["source"] = item.get("sourceTitle")
-    if want.get("doors"):
-        report["doors_note"] = "door count reported back only: the catalogue does not record it"
     args.paint = COLOURS.get(want.get("colour"))
     out = out or os.path.join(view_dir, "make")
     os.makedirs(out, exist_ok=True)
@@ -206,6 +230,13 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
         if server:
             server.terminate()
     report["result"] = rec
+    side = [p for p in ((rec.get("finish") or {}).get("opens") or []) if p.startswith("door_") and p[5] in "fr"]
+    report["side_doors_built"] = len(side)
+    if want.get("doors"):
+        # "2 door" / "3 door" in UK speech is a 3-door hatch: 2 side doors
+        asked = 2 if want["doors"] <= 3 else 4
+        report["doors_note"] = (f"asked for {want['doors']}-door: this model has {len(side)} side doors"
+                                + ("" if len(side) == asked else " (the catalogue has no other body of this model)"))
     d = os.path.join(out, item["assetId"])
     report["files"] = {k: os.path.join(d, f) for k, f in
                        (("glb", "web.glb"), ("glb_full", "car_full.glb"), ("sheet", "sheet.jpg"))

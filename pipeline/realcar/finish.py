@@ -696,6 +696,14 @@ def finish(src, spec, out, base_dir="."):
                 ((np.abs(c[:, 0]) < 0.45 * track_half) & (c[:, 2] < z1)) |
                 (big & (np.abs(c[:, 0]) < 0.75 * track_half) & (c[:, 2] < z1 + 0.12) & (np.abs(nr_[:, 2]) < 0.7)
                  & (not lampish)))
+            # the model's own engine, by its material's name (the 2001 Yaris's
+            # VITZ_ENGINE covers stood over the generic engine): all of it
+            # under the bonnet's top and inside its footprint goes
+            enginish = bool(re.search(r"engine|motor|engbay|intake|radiator|battery|bay\b",
+                                      mats[r["mat"]].get("name", "") if r["mat"] is not None else "", re.I))
+            if enginish:
+                inb |= (c[:, 1] > ground + 0.2 * wd) & (c[:, 1] < btop.max()) & (np.abs(c[:, 0]) < track_half) \
+                    & (c[:, 2] > z0 - 0.1) & (c[:, 2] < B[:, 2].max())
             if inb.any():
                 cleared += float(tri_area_normal(Tr[inb])[0].sum())
                 r["tri_part"][body_t[inb]] = "drop"
@@ -902,8 +910,20 @@ def finish(src, spec, out, base_dir="."):
         lin = [float(c / 255 / 12.92 if c / 255 <= 0.04045 else ((c / 255 + 0.055) / 1.055) ** 2.4)
                for c in spec["paint"][:3]]
         pbr["baseColorFactor"] = lin + [1.0]
-        pbr.setdefault("roughnessFactor", 0.3)
-        log["paint_set"] = {"material": pm.get("name"), "srgb": list(spec["paint"][:3])}
+        # the finish follows the colour, not the model's paint: white on the
+        # 2001 Yaris's metallic silver (metallic 0.8) read as silver. Silver
+        # and grey (colourless, mid-light) stay metallic; the rest are solid.
+        r_, g_, b_ = spec["paint"][:3]
+        light, chroma = (max(r_, g_, b_) + min(r_, g_, b_)) / 2, max(r_, g_, b_) - min(r_, g_, b_)
+        metallic = spec.get("paint_metallic", 0.6 if chroma < 20 and 90 < light < 215 else 0.0)
+        pbr["metallicFactor"] = float(metallic)
+        pbr["roughnessFactor"] = 0.3 if metallic else 0.35
+        pbr.pop("metallicRoughnessTexture", None)
+        sp = (pm.get("extensions") or {}).get("KHR_materials_specular")
+        if sp:                                      # a specular map painted for the old colour
+            sp.pop("specularTexture", None)
+            sp.pop("specularColorTexture", None)
+        log["paint_set"] = {"material": pm.get("name"), "srgb": list(spec["paint"][:3]), "metallic": float(metallic)}
 
     # ── clear glass ──
     cleared = []

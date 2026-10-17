@@ -147,6 +147,9 @@ def infoboxes(text, title):
 SISTER = {"vauxhall": "Opel", "opel": "Vauxhall", "mini": "Mini", "dacia": "Renault", "seat": "SEAT"}
 # a model's other page name
 ALIAS = {("mini", "cooper"): "Mini Hatch", ("mini", "hatch"): "Mini Hatch", ("honda", "jazz"): "Honda Fit"}
+# more pages that hold a model's generations: the first three Yaris
+# generations are filed under the Japanese name
+EXTRA = {("toyota", "yaris"): ["Toyota Vitz"]}
 
 
 def _generation_link(link, stem):
@@ -216,6 +219,7 @@ def fetch(make, model):
     bases = [ALIAS.get((make.lower(), model.lower()), f"{mt} {mdl}")]
     if "-" in model and not re.search(r"\d", model):           # range-rover-evoque, 3-series
         bases.append(f"{mt} {wiki_title(model.replace('-', ' '))}")
+    bases += EXTRA.get((make.lower(), model.lower()), [])
     if make.lower() in SISTER:
         bases.append(f"{SISTER[make.lower()]} {mdl}")
     tried, uniq, failed = [], [], False
