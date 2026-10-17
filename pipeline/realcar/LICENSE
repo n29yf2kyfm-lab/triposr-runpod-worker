@@ -3,7 +3,7 @@ Copyright (c) 2026 ExpertCarCheck. All rights reserved.
 
 This software (the files in this folder, including rig.py, finish.py,
 edits.py, make.py, batch.py, wheelbase.py, glbmachine.py, importer.py,
-standin.py, photos.py, photolib.py, the .mjs tools, view.html, the GLB Maker in maker/,
+standin.py, photos.py, photolib.py, openphotos.py, the .mjs tools, view.html, the GLB Maker in maker/,
 the GLB Studio in studio/ and assets/engine_pack.glb) is proprietary.
 
 No part of it may be copied, modified, distributed, sublicensed, sold, or

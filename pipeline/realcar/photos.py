@@ -4,8 +4,10 @@
     python3 pipeline/realcar/photos.py "Ford" "Puma" 2019 OUT_DIR LENGTH WHEELBASE HEIGHT   # mm
 
 side_photo() searches Openverse (api.openverse.org: openly licensed images,
-mostly Wikimedia Commons and Flickr, each with its licence and author), and
-Wikimedia Commons itself when Openverse does not answer. It keeps only
+mostly Wikimedia Commons and Flickr, each with its licence and author), the
+local index of open Flickr photos when it has been built (openphotos.py:
+YFCC100M, from Hugging Face), and Wikimedia Commons itself when Openverse
+does not answer. It keeps only
 licences that allow commercial use: CC BY, CC BY-SA, CC0, public domain.
 Side and profile views come first, then the model and its first year. It
 downloads them in that order, takes the background off (rembg, U2-Net on the
@@ -161,7 +163,7 @@ def from_library(make, model, year0):
     return library().get(libkey(make, model, year0))
 
 
-def side_photo(make, model, years, out_dir, dims, deadline_s=45, max_dl=24, dated_only=False):
+def side_photo(make, model, years, out_dir, dims, deadline_s=45, max_dl=24, dated_only=False, accept=None):
     """The first licensed, plain-painted side view of the car (passing
     check()), as {"cutout", "photo", "file", "author", "licence", "page",
     "dated", "seconds", "rejected"}; {"none": True, ...} if none in time.
@@ -170,7 +172,9 @@ def side_photo(make, model, years, out_dir, dims, deadline_s=45, max_dl=24, date
     proportions in it, which a real three-quarter view never has. "dated"
     says whether the file's name or tags gave the right years (an undated
     photo of a model's other generation with the same proportions can pass
-    check()); DATED_ONLY keeps only those, for the shipped library."""
+    check()); DATED_ONLY keeps only those. ACCEPT(candidate, cutout), if
+    given, has the last word: a reason to pass a photo over, or None (the
+    library's, which can date a photo by when it was taken)."""
     import finder
     t0 = time.time()
     os.makedirs(out_dir, exist_ok=True)
@@ -186,19 +190,25 @@ def side_photo(make, model, years, out_dir, dims, deadline_s=45, max_dl=24, date
         return 1 if not ys else (2 if any(lo <= y <= hi for y in ys) else 0)
     hits = _openverse([f"{Make} {model} side", f"{Make} {model} profile", f"{Make} {model} {y0 or ''}".strip(),
                        f"{Make} {model}"], t0 + deadline_s * 0.4)
+    try:                                           # the local index of open Flickr photos (openphotos.py), if built
+        import openphotos
+        hits += openphotos.candidates(make, model, years)
+    except Exception:
+        pass
     if not hits and deadline_s >= 90:              # Openverse down: Commons itself, polite and slow (agent runs only)
         titles = finder.search([f"{Make} {model} side"], limit=30)
         hits = finder.info(titles) if titles and time.time() - t0 < deadline_s * 0.5 else []
     want_words = [w.lower() for w in model.split()]
     cands = [c for c in hits if (finder.OK_LICENCE.match(c["licence"] or "") or c["licence"].startswith(("CC0", "Public")))
-             and c["w"] >= 1000
-             and 1.3 <= c["w"] / c["h"] <= 3.8 and not finder.bad_name(c["title"], make) and era(c) >= (2 if dated_only else 1)
+             and (c["w"] is None or (c["w"] >= 1000 and 1.3 <= c["w"] / c["h"] <= 3.8))   # None: not known until fetched
+             and not finder.bad_name(c["title"], make)
+             and era(c) >= (2 if dated_only and not (accept and c.get("taken")) else 1)
              and all(w in c["title"].lower() for w in want_words)]
     # a file named "side" or "profile" first (most photos are three-quarter
     # views); then Flickr's (Wikimedia's file server throttles busy
     # addresses, HTTP 429); then the right years, the biggest
-    cands.sort(key=lambda c: (1 if finder.SIDE_HINT.search(c["title"]) else 0, c.get("source") == "flickr", era(c),
-                              c["w"]), reverse=True)
+    cands.sort(key=lambda c: (1 if finder.SIDE_HINT.search(c["title"] + " " + (c.get("tags") or "")) else 0,
+                              c.get("source") in ("flickr", "flickr-yfcc"), era(c), c["w"] or 0), reverse=True)
     from rembg import new_session, remove
     sess, rejected = None, []
     got, refused = 0, {}
@@ -211,7 +221,8 @@ def side_photo(make, model, years, out_dir, dims, deadline_s=45, max_dl=24, date
         if not os.path.exists(raw):
             # a host that has refused twice in this search is not asked again
             # (it is busy or blocking this address); Openverse's copy is tried
-            ok = refused.get(host, 0) < 2 and _fetch(c["url"], raw, wait_s=5 if deadline_s >= 60 else 0)
+            ok = c.get("source") == "flickr-yfcc" and _fetch(re.sub(r"\.jpg$", "_b.jpg", c["url"]), raw)   # 1024 px
+            ok = ok or (refused.get(host, 0) < 2 and _fetch(c["url"], raw, wait_s=5 if deadline_s >= 60 else 0))
             if not ok:
                 refused[host] = refused.get(host, 0) + 1
                 ok = _via_openverse(c, raw)
@@ -221,6 +232,9 @@ def side_photo(make, model, years, out_dir, dims, deadline_s=45, max_dl=24, date
         got += 1
         try:
             im = Image.open(raw).convert("RGB")
+            if im.width < 450 or not 1.3 <= im.width / im.height <= 3.8:
+                rejected.append({"file": c["title"], "why": f"{im.width}x{im.height}: too small or not a car's shape"})
+                continue
             im.thumbnail((1600, 1600))
             sess = sess or new_session("u2net")
             cut = remove(im, session=sess)
@@ -240,13 +254,15 @@ def side_photo(make, model, years, out_dir, dims, deadline_s=45, max_dl=24, date
         near_side = view == "34" and 2.0 <= asp < 2.5          # a little turned: check() decides
         why = "not a side view" if view != "side" and not near_side \
             else "liveried or two-tone" if not finder.plain_paint(cp) else check(cp, dims)
+        if not why and accept:
+            why = accept(dict(c, dated=era(c) == 2), cp)
         if why:
             rejected.append({"file": c["title"], "why": why})
             continue
         photo = os.path.join(out_dir, "photo.jpg")
         im.save(photo, quality=85)
         return {"cutout": cp, "photo": photo, "file": c["title"], "author": c["author"], "licence": c["licence"],
-                "page": c["page"], "view": "side" if view == "side" else "nearly side-on", "dated": era(c) == 2,
+                "page": c["page"], "view": "side" if view == "side" else "nearly side-on", "dated": era(c) == 2, "taken": c.get("taken"),
                 "seconds": round(time.time() - t0, 1), "rejected": rejected}
     return {"none": True, "rejected": rejected, "seconds": round(time.time() - t0, 1)}
 

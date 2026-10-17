@@ -10,7 +10,7 @@ travel with it (they do: each package keeps its own LICENSE file in
 
 | Part | Where it came from |
 | --- | --- |
-| `rig.py`, `finish.py`, `edits.py`, `make.py`, `batch.py`, `wheelbase.py`, `glbmachine.py`, `importer.py`, `standin.py`, `photos.py`, `photolib.py`, the `.mjs` tools, `view.html`, `maker/` (GLB Maker), `studio/` (GLB Studio), `../template/gltf.py` | written for ExpertCarCheck |
+| `rig.py`, `finish.py`, `edits.py`, `make.py`, `batch.py`, `wheelbase.py`, `glbmachine.py`, `importer.py`, `standin.py`, `photos.py`, `photolib.py`, `openphotos.py`, the `.mjs` tools, `view.html`, `maker/` (GLB Maker), `studio/` (GLB Studio), `../template/gltf.py` | written for ExpertCarCheck |
 | `assets/engine_pack.glb` (engine, gearbox, cooling, battery, suspension, exhaust) | exported from our own constructed geometry (`platform/trainer/engine-bay-detail.js`, `platform/workshop/ehybrid/hybrid-parts.js`: `sourceType: constructed-training-geometry`); its 11 textures are generated in code. Nothing in it is cut from a third-party model. |
 | `vendor/no-sharp` | a stand-in so the LGPL image library below is never installed |
 
@@ -23,6 +23,17 @@ travel with it (they do: each package keeps its own LICENSE file in
 
 The Blender folders still sit in the repository for comparison; they are not
 part of the product and the Docker image does not contain them.
+
+## Looked at and not used
+
+| Source | Why not |
+| --- | --- |
+| Google Images | its results are other people's copyrighted photos, and Google's terms forbid scraping them; the openly licensed ones it would find are Wikimedia's and Flickr's, which Openverse and YFCC100M already give |
+| Auto Trader | dealers' copyrighted photos behind Auto Trader's terms; only through a data agreement with Auto Trader |
+| DVM-CAR (1.4 million UK advert photos, by model, year and view) | "for non-commercial research and educational purposes" only |
+| Stanford Cars, CompCars | non-commercial research licences |
+| Ultralytics Carparts-Seg | AGPL-3.0: would bind the product |
+| Objaverse (Hugging Face, ~800,000 3D models, many cars, each under its own licence) | every model was uploaded to Sketchfab, which ExpertCarCheck chose not to depend on; usable model by model (CC BY, CC0) if that choice changes |
 
 ## Python (pip)
 
@@ -66,6 +77,7 @@ inside `node_modules`.
 | Source | Used for | Licence kept to |
 | --- | --- | --- |
 | Openverse API (api.openverse.org), Wikimedia Commons API | finding a side photo of a car the catalogue lacks | CC BY, CC BY-SA, CC0, public domain only (no NC, no ND) |
+| YFCC100M, the Yahoo Flickr Creative Commons set: the 15-million-photo subset on Hugging Face (`mehdidc/yfcc15m`), indexed by `openphotos.py` | the same: photos taken 2004-2014, found by title and tags, fetched from Flickr when used | CC BY and CC BY-SA only; the index is built on the machine that runs it and is not shipped |
 | the photo itself | measured only: its outline shapes the stand-in's roofline; nothing of it is in the GLB | shown beside the car in the Maker with its author, licence and link |
 
 ## The cars: separate from the software

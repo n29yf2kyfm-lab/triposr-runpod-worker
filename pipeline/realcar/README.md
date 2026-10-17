@@ -260,6 +260,17 @@ glbmachine make "..." --no-standin              # the nearest generation as it i
    - its height-to-length proportion within 8%, which rejects an older car
      of the same name.
 
+   **More open photos** (`openphotos.py`, `glbmachine photos --index`, once):
+   the Yahoo Flickr Creative Commons set (YFCC100M), in its 15-million
+   photo subset on Hugging Face, with each photo's title, tags, date taken
+   and licence. It is streamed once (10 GB) and the CC BY and CC BY-SA
+   photos that name a car make are kept as a local index
+   (`$GLBMACHINE_HOME/open_photos.jsonl`, not shipped). A search takes them
+   beside Openverse's, fetched from Flickr (1024 px) only when used. They
+   were taken 2004-2014, so they serve older generations. A photo taken
+   before a generation went on sale cannot show it, and is left out.
+   Hugging Face serves this set from any address, which Wikimedia does not.
+
    A true side view is tried first. A nearly side-on photo (the car a
    little turned) counts when it passes the same checks, which a real
    three-quarter view cannot. The wheels are found against the ground of
@@ -388,6 +399,8 @@ is rescaled to it), `engine_pack` (the workshop petrol bay, exported by
 | Tailgate | The rear window, the paint panel directly under it, and every piece inside the box they span that sits on the car's rear skin (within 12 cm of the rearmost surface). That takes the tail-lamp inners, the badge, the wiper and the spoiler, and leaves the boot trim and the corner lamps on the body. Hinged at its top edge, opens 75°. |
 | Tailgate, from the rig | If no rear window is found (some models make it from dark plastic, not glass), the rig machine's tailgate stands. Like a door, it then takes every piece in its box that touches it: the rear window and the inner lamps. |
 | Doors | The rig machine's door cut, plus every small piece inside a door's box and above the wheels that touches the door (within 1 cm of its surface): window frames, belt mouldings and mirrors. Seats and brakes in the same box don't touch the door, so they stay on the body. Hinged at the front edge, opens 65°. |
+| Doors inside one mesh | Many models merge every paint panel into one object, which reads as "the doors are not separate objects", yet each door skin is still a loose piece of that mesh. The rigger takes the door-shaped pieces of each flank's outer skin (within 10 cm of the outermost: the cabin's trim inside is left to join its door later) and keeps each one whose twin is on the other flank at the same place along the car, pair by pair. A modeller's left and right doors are seldom the same size, so the biggest piece of one side may be the front door and of the other the rear (the Kamiq, refused before, now opens all four). Re-rigged 2026-10-17, the 58 catalogue cars refused for their doors: 4 more now build (Skoda Octavia Estate, Peugeot 307, Mercedes C-Class, Alfa Romeo Tonale; the last two partly), and the Mazda 3 opens four doors, not two. When the pieces found turn out not to be doors (a front door hinged behind the middle of the car), the car is refused, not built with doors that never open (the Audi A5 Sportback). |
+| Bonnet, front clip | A bonnet piece that runs down the sides past the wheel tops behind the front axle is a front clip, the wings welded to it: then only its top is cut out along the shoulders, as for a welded shell, and the wings stay on the car (the Kamiq, and the Superb, whose wings lifted with its bonnet). A tinted windscreen still marks where the bonnet ends; a lamp's glass never does. |
 | Glass | Every blended, colourless material becomes clear (light tint, alpha 0.14, glossy). Lamp lenses keep their colour. |
 | Engine | The workshop's petrol bay goes in. The bay, engine, gearbox and front suspension are scaled to this car's track about the front axle. The rear suspension and fuel tank are placed about the rear axle. The exhaust is stretched from the front pipe back to 10 cm inside the rear bumper. Pieces reaching below the ground (workshop leftovers) are dropped. |
 | Frame | The car is centred on its wheelbase, with x = 0 down the middle and the ground at y = 0. Nose is +z and the car's left is +x, the same frame as the template cars. |

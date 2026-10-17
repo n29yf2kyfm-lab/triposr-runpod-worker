@@ -43,7 +43,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "template"))
 from gltf import GLTF  # noqa: E402
 
-VERSION = "2.0.0-py"
+VERSION = "2.1.0-py"
 
 
 class Refused(Exception):
@@ -667,6 +667,10 @@ def convert(car, rep, override=None, body_style=""):
                         hinge.pop(d.split(":")[0], None)
                 rep["implausible"] += again
         rep["missing"] = [p for p in wanted(parts) if not parts.get(p)]
+        if not any(k in parts for k in ("door_fl", "door_fr", "door_rl", "door_rr", "door_bl", "door_br")):
+            # the pieces taken for doors were not doors, and none were found
+            # instead: a car whose doors do not open is not one to build (the A5)
+            raise Refused("the door pieces found were not doors (" + "; ".join(dropped)[:160] + ")")
     # a two-door body has front doors only: a lone "rear" door left on a side
     # once the wing taken for its front door is dropped is that side's door
     # (the BMW 1 Series coupe)
@@ -1105,13 +1109,39 @@ def find_doors(car, objs, wheels, lo, hi, rep, body_style=""):
         info["result"] = f"no door-shaped piece on {'both sides' if not (found['l'] or found['r']) else 'one side'}"
         return []
     for side in found:
+        # the door's own skin, not the trim inside it: the outermost pieces of
+        # the flank (within 10 cm), whose lining joins them later (the Mazda 3:
+        # its biggest door-shaped piece is the cabin's trim, both doors long)
+        out_x = (lambda t: t[4][0]) if side == "l" else (lambda t: -t[3][0])
+        edge = max(out_x(t) for t in found[side])
+        found[side] = [t for t in found[side] if out_x(t) >= edge - .1]
         found[side].sort(key=lambda t: -t[0])
         big = found[side][0][0]
-        found[side] = [t for t in found[side] if t[0] > .3 * big][:2]
-    (l0, l1), (r0, r1) = [(found[sd][0][3], found[sd][0][4]) for sd in ("l", "r")]
-    if abs(l0[2] - r0[2]) > .05 * L or abs(l1[2] - r1[2]) > .05 * L:
+        found[side] = [t for t in found[side] if t[0] > .3 * big][:4]
+    # every door kept has its twin on the other flank, at the same place along
+    # the car (within 5% of the length), matched pair by pair, biggest first:
+    # a modeller's left and right doors are seldom the same size to the
+    # square centimetre, so the biggest piece of one side may be the front
+    # door and of the other the rear (the Kamiq)
+    pairs, used = [], set()
+    for tl in found["l"]:
+        l0, l1 = tl[3], tl[4]
+        if any(min(l1[2], p[0][4][2]) - max(l0[2], p[0][3][2]) > .5 * (l1[2] - l0[2]) for p in pairs):
+            continue                                # the same door again (its frame, its skin)
+        j = next((j for j, tr in enumerate(found["r"]) if j not in used
+                  and abs(l0[2] - tr[3][2]) <= .05 * L and abs(l1[2] - tr[4][2]) <= .05 * L), None)
+        if j is not None:
+            used.add(j)
+            pairs.append((tl, found["r"][j]))
+        if len(pairs) == 2:
+            break
+    if not pairs:
         info["result"] = "left and right door pieces do not mirror each other — not guessing"
         return []
+    if len(pairs) < min(len(found["l"]), len(found["r"]), 2):
+        info["unpaired"] = "a door piece on one flank has no twin on the other: left out"
+    pairs.sort(key=lambda p: -p[0][3][2])            # front first
+    found = {"l": [p[0] for p in pairs], "r": [p[1] for p in pairs]}
     groups = []                                     # (obj, name, refs)
     for side in ("l", "r"):
         lst = found[side]

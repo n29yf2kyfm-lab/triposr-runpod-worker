@@ -16,6 +16,7 @@ the only network use is fetching the model from the catalogue's storage.
     glbmachine serve --port 8080              # the Maker page, the web API (below), GLB Studio
     glbmachine add CAR.obj --make Toyota --model Yaris --years 2011-2020 --doors 3 --licence "..."
     glbmachine photos --top 100 --hours 2     # the standby roofline library, from licensed photos
+    glbmachine photos --index                 # once: index open Flickr car photos for it (YFCC100M)
     glbmachine version
 
 WORK FOLDER: $GLBMACHINE_HOME (default ~/.glbmachine) holds view/ (the check
@@ -549,6 +550,8 @@ def main():
     ph.add_argument("--since", type=int, default=2000)
     ph.add_argument("--hours", type=float, default=2.0, help="stop after this long; run again to carry on")
     ph.add_argument("--status", action="store_true", help="what the library holds")
+    ph.add_argument("--index", action="store_true",
+                    help="once: index the open Flickr car photos (YFCC100M, from Hugging Face; ~10 GB streamed)")
     sub.add_parser("models", help="list the models you added")
     rm = sub.add_parser("remove", help="take an added model out")
     rm.add_argument("asset")
@@ -589,6 +592,9 @@ def main():
         import photolib
         if a.status:
             photolib.status()
+        elif a.index:
+            import openphotos
+            openphotos.build()
         else:
             photolib.run(a.top, a.since, a.hours, 30, 60)
     elif a.cmd == "models":

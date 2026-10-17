@@ -320,15 +320,26 @@ def refused():
 
 
 def incomplete():
-    """Catalogue models this rigger version made with parts missing (doors on
-    one side, no tailgate): {asset: [parts]}. Still usable, but a stand-in
-    tries the complete ones first."""
-    import rig
+    """Catalogue models that came out with parts missing (doors on one side,
+    no tailgate): {asset: [parts]}, whichever rigger version made them (a new
+    one seldom completes them, and a stand-in that waits on one is late).
+    Still usable, but a stand-in tries the complete ones first. An entry goes
+    when that model next comes out complete."""
     try:
-        return {a: v["missing"] for a, v in json.load(open(_refused_path())).items()
-                if v.get("rigger") == rig.VERSION and v.get("missing")}
+        return {a: v["missing"] for a, v in json.load(open(_refused_path())).items() if v.get("missing")}
     except (OSError, ValueError):
         return {}
+
+
+def _forget(asset):
+    p = _refused_path()
+    try:
+        d = json.load(open(p))
+    except (OSError, ValueError):
+        return
+    if d.pop(asset, None) is not None:
+        json.dump(d, open(p + ".tmp", "w"), indent=1)
+        os.replace(p + ".tmp", p)
 
 
 def _remember_refused(asset, why, missing=None):
@@ -614,6 +625,8 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
             _remember_refused(item["standin_donor"], passed[-1]["why"], rec["missing"])   # next time, later in line
             continue
         if built:
+            if item.get("standin"):
+                _forget(item["standin_donor"])     # complete now: no longer short of parts
             break
         rig = rec.get("rig") or {}
         passed.append({"asset": item.get("standin_donor") or item["assetId"], "source": item.get("sourceTitle"),

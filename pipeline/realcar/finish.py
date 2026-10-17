@@ -354,7 +354,22 @@ def finish(src, spec, out, base_dir="."):
     if "bonnet" in manual:
         cand = []
         log["bonnet"] = {"from": "the Studio"}
-    bonnet = None
+    bonnet = clip = None
+    if cand:
+        b = max(cand, key=lambda i: isl_area[i])
+        # a front clip, not a bonnet: the piece runs down the car's sides past
+        # the tops of the wheels behind the front axle (the wings welded to
+        # it, the Kamiq). Then it is cut along its shoulders like a welded
+        # shell, below. A bonnet's front corners may dip over the lamps (the
+        # Superb's); its sides behind the axle never come down that far.
+        tb = T[lab == b].reshape(-1, 3)
+        xc, xw = (lo[b, 0] + hi[b, 0]) / 2, hi[b, 0] - lo[b, 0]
+        flank = tb[(np.abs(tb[:, 0] - xc) > 0.4 * xw) & (tb[:, 2] < zf - 0.1)]
+        if len(flank) and float(flank[:, 1].min()) < wheel_top - 0.05 and xw > 1.2 * track_half:
+            log["bonnet_island_is_front_clip"] = {"area_m2": round(float(isl_area[b]), 3),
+                                                  "flank_low_y": round(float(flank[:, 1].min()), 3),
+                                                  "wheel_top": round(float(wheel_top), 3)}
+            clip, cand = b, []
     if cand:
         b = max(cand, key=lambda i: isl_area[i])
         if isl_area[b] > 0.5:
@@ -383,9 +398,17 @@ def finish(src, spec, out, base_dir="."):
         # mostly glass: the A3's windscreen is welded to its black frame
         tri_c = T.mean(1)
         waist_ = ground + 1.35 * (wheel_top - ground)
-        gfront = np.isin(tmat, list(glass)) & (tri_c[:, 2] > (zf + zr) / 2) & (tri_c[:, 1] > waist_) \
+        # a tinted windscreen is not cleared, but it is still the windscreen (the Kamiq's)
+        # (and a lamp's glass is never the windscreen, though it is cleared too)
+        named_glass = {i for i in glass | {i for i, m in enumerate(mats)
+                                           if re.search(r"glass|window|windscreen|windshield|vidr|vidro|scheibe|glas\b",
+                                                        m.get("name", ""), re.I)}
+                       if not re.search(r"light|lamp|head|tail|indic|refl|mirror|lens|trim|frame|seal|rubber",
+                                        mats[i].get("name", ""), re.I)}
+        gfront = np.isin(tmat, list(named_glass)) & (tri_c[:, 2] > (zf + zr) / 2) & (tri_c[:, 1] > waist_) \
             & (np.abs(nrm[:, 2]) > 0.2)               # facing forward: the windscreen, not side glass
         ws = [0] if area[gfront].sum() > 0.3 else []
+        Wv = T[gfront].reshape(-1, 3) if ws else None
         big = int(np.argmax(isl_area))
         log["bonnet_search"] = {"shells": len(shells), "windscreens": len(ws),
                                 "largest_piece": {"m2": round(float(isl_area[big]), 2), "material": (mats[dom[big]].get("name") if dom[big] < nm else None),
@@ -394,7 +417,6 @@ def finish(src, spec, out, base_dir="."):
             sh = max(shells, key=lambda i: mat_area[i, paint])
             # the windscreen's own triangles, wherever the model put them
             # (the A3's and 500e's sit inside one piece with the whole shell)
-            Wv = T[gfront].reshape(-1, 3)
             z_rear = float(Wv[Wv[:, 1] < Wv[:, 1].min() + 0.03, 2].max()) + 0.06
             # All the paint, not one piece's: a model's paint can come in many
             # pieces (the Golf R's bonnet is spread over several), and a cut
@@ -415,9 +437,18 @@ def finish(src, spec, out, base_dir="."):
                 grid = np.zeros((gx.max() - gx.min() + 3, gz.max() - gz.min() + 3), bool)
                 grid[gx - gx.min() + 1, gz - gz.min() + 1] = True
                 gl_, _ = ndi_label(binary_closing(grid, np.ones((3, 3))))
-                seed = np.argmin(np.abs(c2[:, 0]) + np.abs(c2[:, 2] - (z_rear + hi[sh, 2]) / 2))
+                # the seed: on the centre line, half way from the windscreen to
+                # the front of the paint that faces up (the shell's own front
+                # when the bonnet is a piece of its own, the Kamiq's clip)
+                seed = np.argmin(np.abs(c2[:, 0]) + np.abs(c2[:, 2] - (z_rear + min(hi[sh, 2], c2[:, 2].max())) / 2)
+                                 if hi[sh, 2] > z_rear + 0.2 else
+                                 np.abs(c2[:, 0]) + np.abs(c2[:, 2] - (z_rear + c2[:, 2].max()) / 2))
                 cl = gl_[gx - gx.min() + 1, gz - gz.min() + 1]
                 region = sub[cl == cl[seed]]
+                if clip is not None:                   # the clip's own top, its wings left on the body
+                    own = sub[lab[sub] == clip]
+                    if area[own].sum() > area[region].sum():
+                        region = own
                 log["bonnet_search"].update({"facing_up": int(len(sub)), "region": int(len(region)),
                                              "region_m2": round(float(area[region].sum()), 3), "z_rear": round(z_rear, 3)})
                 # Cutting whole triangles leaves a staircase (a model's
