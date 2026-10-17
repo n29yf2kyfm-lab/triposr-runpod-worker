@@ -97,6 +97,67 @@ def generations(make, model, since):
     return out
 
 
+YEAR = re.compile(r"\b(19[5-9]\d|20[0-4]\d)\b")
+
+
+def why_not(b, gens, c, cutout):
+    """The library's rule for a side photo of generation B: None to keep it,
+    else why not. It must be dated, by the years its name or tags give
+    (C["dated"]) or by when it was taken (C["taken"]); and in those years no
+    other generation of the model that was on sale may fit its proportions
+    as well (one model's generations often share them: the 2013 Yaris
+    Hybrid-R concept passed for the 1999 Yaris, sold on till 2012)."""
+    y0, y1 = b["years"][0], b["years"][1] or 2100
+    if c.get("dated"):
+        ys = [int(y) for y in YEAR.findall((c.get("title") or c.get("file") or "") + " " + (c.get("tags") or ""))]
+        ys = [y for y in ys if y0 - 1 <= y <= y1 + 1] or [y0]
+    elif c.get("taken") and c["taken"] >= y0:
+        ys = [c["taken"]]
+    else:
+        return "not dated: no year in its name or tags, and no date taken while it was on sale"
+    for o in gens:
+        if (o["years"][0], o["wheelbase"]) == (y0, b["wheelbase"]):
+            continue
+        o1 = o["years"][1] or 2100
+        if any(o["years"][0] - 1 <= y <= o1 + 1 for y in ys) and \
+                photos.check(cutout, {k: o[k] for k in ("length", "wheelbase", "height")}) is None:
+            return f"{ys[0]}: could as well be the {o['years'][0]} generation ({o.get('name') or ''})"[:160]
+    return None
+
+
+def recheck():
+    """The library's rules, as they stand, over what it holds: an entry that
+    no longer passes, or whose photo another generation also holds, goes."""
+    lib = photos.library()
+    drop = {}
+    for key, v in list(lib.items()):
+        make, model = v["make"], v["model"]
+        f = (v.get("photo") or {}).get("file") or ""
+        if __import__("finder").bad_name(f, make, model):
+            drop[key] = "not the plain production car by its name: " + f
+            continue
+        d = os.path.join(HOME, "photos", re.sub(r"[^a-z0-9]+", "-", f"{make} {model} {v['years'][0]}".lower()).strip("-"))
+        try:
+            r = json.load(open(os.path.join(d, "found.json")))
+        except (OSError, ValueError):
+            r = {}
+        cut = r.get("cutout")
+        gens = generations(make, model, 1950)
+        b = next((g for g in gens if (g["years"][0], g["wheelbase"]) == (v["years"][0], v["size_mm"]["wheelbase"])), None)
+        if b is None or not cut or not os.path.exists(cut):
+            if not YEAR.search(f):
+                drop[key] = "cannot be checked again (no cut-out kept) and its name gives no year"
+            continue
+        c = {"title": f, "dated": bool(r.get("dated", YEAR.search(f))), "taken": r.get("taken") or (v.get("photo") or {}).get("taken")}
+        why = why_not(b, gens, c, cut)
+        if why:
+            drop[key] = why
+    for key in drop:
+        lib.pop(key)
+    _save(photos.LIBRARY, lib)
+    print(json.dumps({"kept": sorted(lib), "dropped": drop}, indent=1))
+
+
 def run(top, since, hours, retry_days, per_gen_s):
     lib = photos.library()
     state = _load(STATE, {})
@@ -126,20 +187,7 @@ def run(top, since, hours, retry_days, per_gen_s):
                 gens = generations(make, model, 1950)
 
                 def accept(c, cutout, b=b, gens=gens):
-                    """Dated by its name or tags; or taken while this generation
-                    was on sale and fitting no other generation on sale by then
-                    (one model's generations often share their proportions)."""
-                    if c.get("dated"):
-                        return None
-                    t = c.get("taken")
-                    if not t or t < b["years"][0]:
-                        return "not dated: no year in its name or tags, and no date taken"
-                    for o in gens:
-                        if o is b or o["years"][0] > t or (o["years"][0], o["wheelbase"]) == (b["years"][0], b["wheelbase"]):
-                            continue
-                        if photos.check(cutout, {k: o[k] for k in ("length", "wheelbase", "height")}) is None:
-                            return f"taken {t}: could as well be the {o['years'][0]} generation"
-                    return None
+                    return why_not(b, gens, c, cutout)
                 r = photos.side_photo(make, wheelbase.wiki_title(model.lower()), y, d,
                                       {k: b[k] for k in ("length", "wheelbase", "height")}, deadline_s=per_gen_s,
                                       dated_only=True, accept=accept)
@@ -155,7 +203,8 @@ def run(top, since, hours, retry_days, per_gen_s):
                             "size_mm": {k: b[k] for k in ("length", "wheelbase", "width", "height") if b.get(k)},
                             "roof": rl["roof"], "u": rl["u"], "u_front": rl["u_front"], "u_rear": rl["u_rear"],
                             "height_photo": rl["height_photo"],
-                            "photo": {k: r.get(k) for k in ("file", "author", "licence", "page")},
+                            "photo": {k: r.get(k) for k in ("file", "author", "licence", "page", "taken")},
+                            "dated_by": "its name or tags" if r.get("dated") else "when it was taken",
                             "checked": time.strftime("%Y-%m-%d")}
                 _save(photos.LIBRARY, lib)
                 _save(os.path.join(d, "found.json"), dict(r, roofline=rl))
@@ -187,8 +236,11 @@ if __name__ == "__main__":
     ap.add_argument("--retry-days", type=float, default=30, help="look again for a car not found this long ago")
     ap.add_argument("--per-car", type=float, default=60, help="seconds to spend on one generation")
     ap.add_argument("--status", action="store_true")
+    ap.add_argument("--recheck", action="store_true", help="apply the library's current rules to what it holds")
     a = ap.parse_args()
     if a.status:
         status()
+    elif a.recheck:
+        recheck()
     else:
         run(a.top, a.since, a.hours, a.retry_days, a.per_car)

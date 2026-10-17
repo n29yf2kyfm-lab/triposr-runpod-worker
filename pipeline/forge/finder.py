@@ -37,12 +37,15 @@ BAD_NAME = re.compile(r"\b(?:interior|engine|dash(?:board)?|cockpit|seats?|wheel
                       r"boot|trunk|steering|gauges?|cluster|screen|keys?|brochure|crash(?:ed)?|rac(?:e|es|ing)|"
                       r"rall(?:y|ies)|police|taxis?|toys?|die[ -]?cast|model car|scale model|lego|cutaway|wreck(?:ed)?|"
                       r"wide ?body|body ?kit|tun(?:ed|ing)|modified|stanced?|slammed|drift(?:ing)?|"
-                      r"prior[ -]design|liberty walk|rocket bunny|limo(?:usine)?|stretch(?:ed)?)\b", re.I)
+                      r"prior[ -]design|liberty walk|rocket bunny|limo(?:usine)?|stretch(?:ed)?|"
+                      r"wrc|r[25]|rally[234]|s2000 rally|super 2000|group [abn]|rallycross|touring car|btcc|dtm|gt[34]|"
+                      r"le mans|nascar|time attack|hill ?climb|concept|prototype|show ?car|mock-?up)\b", re.I)
 
 
-def bad_name(title, make=""):
-    """Whether a file's name says it is not a photo of the whole real car."""
-    for w in str(make or "").replace("-", " ").split():
+def bad_name(title, make="", model=""):
+    """Whether a file's name says it is not a photo of the whole real car
+    (the make's and model's own words aside: SEAT, a Renault R5)."""
+    for w in (str(make or "") + " " + str(model or "")).replace("-", " ").split():
         title = re.sub(r"\b" + re.escape(w) + r"\b", " ", title, flags=re.I)
     return bool(BAD_NAME.search(title))
 FRONT_HINT = re.compile(r"front|vorne|_v\.|8v\.|face|nose|avant", re.I)

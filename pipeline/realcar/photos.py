@@ -201,7 +201,7 @@ def side_photo(make, model, years, out_dir, dims, deadline_s=45, max_dl=24, date
     want_words = [w.lower() for w in model.split()]
     cands = [c for c in hits if (finder.OK_LICENCE.match(c["licence"] or "") or c["licence"].startswith(("CC0", "Public")))
              and (c["w"] is None or (c["w"] >= 1000 and 1.3 <= c["w"] / c["h"] <= 3.8))   # None: not known until fetched
-             and not finder.bad_name(c["title"], make)
+             and not finder.bad_name(c["title"], make, model)
              and era(c) >= (2 if dated_only and not (accept and c.get("taken")) else 1)
              and all(w in c["title"].lower() for w in want_words)]
     # a file named "side" or "profile" first (most photos are three-quarter
