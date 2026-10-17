@@ -137,7 +137,7 @@ def find(want, cat, skip=()):
     if want["model_words"] is None:
         want["model_words"] = " ".join(toks[1:])
     pool = [i for i in cat.values() if norm(i["make"]) == norm(make) and i.get("publicationStatus") == "approved"
-            and i.get("desktopGlbUrl") and i["assetId"] not in skip]
+            and i.get("desktopGlbUrl") and i["assetId"] not in skip and not batch.is_game(i)]
 
     def names(i):
         return {norm(n) for n in [i.get("model"), i.get("modelFamily"), *(i.get("modelAliases") or [])] if n}
@@ -362,7 +362,8 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
     commercially and the better grade breaking ties."""
     out = []
     for i in cat.values():
-        if i.get("publicationStatus") != "approved" or not i.get("desktopGlbUrl") or i["assetId"] in skip:
+        if i.get("publicationStatus") != "approved" or not i.get("desktopGlbUrl") or i["assetId"] in skip \
+                or batch.is_game(i):
             continue
         mk, md = batch.model_of(i)
         b = _generation(mk, md, i.get("yearStart")) or {}
@@ -448,7 +449,7 @@ def _standin(want, report, item, cat, skip):
     yrs = f"{y[0]}-" + ("" if target["years"][1] is None else str(target["years"][1]))
     report["match"] = (f"stand-in: the catalogue has no {name} ({yrs}); "
                        f"'{d.get('sourceTitle') or d['assetId']}' reshaped to its size")
-    report["standin"] = {"car": name, "years": target["years"], "size_mm": {k: target[k] for k in
+    report["standin"] = {"car": name, "make": title, "model": wheelbase.wiki_title(model), "years": target["years"], "size_mm": {k: target[k] for k in
                          ("length", "wheelbase", "width", "height")}, "body": target["body"],
                          "size_from": target["source"], "donor": d["assetId"], "donor_source": d.get("sourceTitle"),
                          "others": [x["assetId"] for x in ranked[1:4]]}
@@ -457,8 +458,47 @@ def _standin(want, report, item, cat, skip):
     return report, it
 
 
+class PhotoSearch:
+    """The agent's search for a licensed true side photo of a stand-in's real
+    car (photos.py), run beside the build. Each car's answer is kept in
+    $GLBMACHINE_HOME/photos/<car>/found.json, so it is looked for once."""
+
+    def __init__(self, make, model, target, deadline_s=45):
+        import threading
+        home = os.path.expanduser(os.environ.get("GLBMACHINE_HOME", "~/.glbmachine"))
+        slug = re.sub(r"[^a-z0-9]+", "-", f"{make} {model} {target['years'][0] or ''}".lower()).strip("-")
+        self.dir = os.path.join(home, "photos", slug)
+        self.found_p = os.path.join(self.dir, "found.json")
+        self.result = None
+        if os.path.exists(self.found_p):
+            self.result = json.load(open(self.found_p))
+            self.thread = None
+            return
+
+        def run():
+            import photos
+            try:
+                r = photos.side_photo(make, wheelbase.wiki_title(model), target["years"], self.dir,
+                                      {k: target[k] for k in ("length", "wheelbase", "height")}, deadline_s)
+            except Exception as e:
+                r = {"none": True, "error": str(e)[:200]}
+            if r and r.get("cutout"):
+                r["roofline"] = photos.roofline(r["cutout"], target["length"])
+            self.result = r
+            if r and (r.get("cutout") or not r.get("error")):
+                os.makedirs(self.dir, exist_ok=True)
+                json.dump(r, open(self.found_p, "w"), indent=1)
+        self.thread = threading.Thread(target=run, daemon=True)
+        self.thread.start()
+
+    def get(self, wait_s):
+        if self.thread is not None:
+            self.thread.join(max(0.0, wait_s))
+        return self.result
+
+
 def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=False, no_sheet=False,
-          out_file=None, full=False, spec=None, standin=True):
+          out_file=None, full=False, spec=None, standin=True, photos=True):
     """One request, start to finish, from the catalogue. Returns the report
     (with "result" and "files" when a car was built, "error" when the
     catalogue has no such model). SPEC is the car's spec as a check gives it
@@ -489,7 +529,7 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
     # a model the rigger cannot use (its wheels and doors fused into a few
     # shells) is passed over for the next best, up to three, and the report
     # says why
-    passed, known, best, tried, t_start = [], refused(), None, [], time.time()
+    passed, known, best, tried, t_start, search = [], refused(), None, [], time.time(), None
     for attempt in range(3):
         if attempt and time.time() - t_start > 70:
             break                         # the two minutes: keep the best so far
@@ -499,6 +539,9 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
             st = _standin(report["asked"], report, item, cat, skip)
             if st:
                 report, item = st
+                if photos and item.get("standin") and search is None:
+                    s_ = report["standin"]
+                    search = PhotoSearch(s_["make"], s_["model"], item["standin"])
         if item is None:
             break
         t0 = time.time()
@@ -549,6 +592,25 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
         return report
     if passed:
         report["match"] += f"; {len(passed)} other model(s) tried first and passed over (see passed_over)"
+    if item.get("standin") and search is not None:
+        ph = search.get(60 - (time.time() - t_start))
+        report["standin"]["photo_search"] = ({"found": ph.get("file"), "seconds": ph.get("seconds"),
+                                             "rejected": len(ph.get("rejected") or [])} if ph else
+                                            {"found": None, "why": "still searching at the time limit"})
+        if ph and ph.get("roofline"):
+            st2 = dict(item["standin"], roof=dict(ph["roofline"], file=ph["file"]))
+            item2 = dict(item, standin=st2)
+            rec2 = batch.one({"rank": 0, "genModel": request}, item2, args, out)
+            if os.path.exists(os.path.join(out, item["assetId"], "web.glb")) and rec2.get("status") in ("done", "check") \
+                    and len(rec2.get("missing") or []) <= len(rec.get("missing") or []):
+                item, rec = item2, rec2
+                report["result"] = rec
+                rl = (rec.get("standin") or {}).get("roofline") or {}
+                report["standin"]["photo"] = {"file": ph["file"], "author": ph.get("author"), "licence": ph.get("licence"),
+                                              "page": ph.get("page"), "roofline_off_cm": [rl.get("roofline_off_cm_before"),
+                                                                                        rl.get("roofline_off_cm_after")],
+                                              "used_for": "the roofline only: nothing of the photo is in the car"}
+                shutil.copyfile(ph["photo"], os.path.join(out, item["assetId"], "photo.jpg"))
     side = [p for p in ((rec.get("finish") or {}).get("opens") or []) if p.startswith("door_") and p[5] in "fr"]
     report["side_doors_built"] = len(side)
     if want.get("doors"):
@@ -576,7 +638,7 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
     if os.path.exists(os.path.join(d, "finished.glb")):
         os.remove(os.path.join(d, "finished.glb"))
     report["files"] = {k: os.path.join(d, f) for k, f in
-                       (("glb", "web.glb"), ("glb_full", "car_full.glb"), ("sheet", "sheet.jpg"))
+                       (("glb", "web.glb"), ("glb_full", "car_full.glb"), ("sheet", "sheet.jpg"), ("photo", "photo.jpg"))
                        if os.path.exists(os.path.join(d, f))}
     if out_file and report["files"].get("glb_full" if full else "glb"):
         os.makedirs(os.path.dirname(os.path.abspath(out_file)), exist_ok=True)

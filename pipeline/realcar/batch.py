@@ -77,6 +77,17 @@ WRONG_CAR = {
 }
 
 
+# a model ripped from a video game, a toy or a low-poly game asset: never built
+# (the owner's rule). "Gran Turismo" alone is a real body (BMW, Maserati)
+GAME = re.compile(r"gran turismo (?:\d|sport)\b|grand turismo|\bforza\b|\bgta ?[ivx\d]|grand theft|need for speed|"
+                  r"\bnfs\b|assetto|project cars|burnout|midnight club|\bgame\b|low[- ]?poly|\btoy\b|lego|hot ?wheels|"
+                  r"die-?cast|matchbox|cartoon|chibi|\brc car\b", re.I)
+
+
+def is_game(item):
+    return bool(GAME.search(" ".join(str(item.get(k) or "") for k in ("sourceTitle", "model", "assetId", "sourceUrl"))))
+
+
 def local_catalogue_path():
     """The owner's own models, added with `glbmachine add`."""
     home = os.path.expanduser(os.environ.get("GLBMACHINE_HOME", "~/.glbmachine"))

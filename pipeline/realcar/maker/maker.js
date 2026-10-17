@@ -235,6 +235,15 @@ function report(job) {
     row('Stand-in', `<b>${esc(st.car)}</b> ${esc((st.years || []).filter(Boolean).join('–'))}${st.years && !st.years[1] ? '–' : ''}` +
       `<br>its real size: ${[z.length, z.width, z.height].map(v => (v / 1000).toFixed(2)).join(' × ')} m, wheelbase ${(z.wheelbase / 1000).toFixed(2)} m` +
       `<br><span class="faint">made from ${esc(st.donor_source || st.donor)}, reshaped. Lamps, grille and badges are the donor's.</span>`, 'warn');
+    if (st.photo) {
+      const off = st.photo.roofline_off_cm || [];
+      row('Photo', `<img class="refphoto" id="refPhoto" alt="The real car, side on">` +
+        `<br>roofline shaped to it: ${esc(off[0])} cm off before, ${esc(off[1])} cm after` +
+        `<br><span class="faint">${esc(st.photo.file)}${st.photo.author ? ' by ' + esc(st.photo.author) : ''}, ${esc(st.photo.licence)}` +
+        `${st.photo.page ? ` · <a href="${esc(st.photo.page)}" target="_blank" rel="noopener">source</a>` : ''}. Only measured: nothing of it is in the car.</span>`);
+    } else if (st.photo_search) {
+      row('Photo', `<span class="faint">no usable side photo of the real car found${st.photo_search.rejected ? ` (${st.photo_search.rejected} looked at)` : ''}: the size alone was used</span>`);
+    }
   } else {
     row('Match', esc(rep.match || ''), /nearest/.test(rep.match || '') ? 'warn' : '');
   }
@@ -262,6 +271,8 @@ function report(job) {
   $('#studioTab').href = '/studio/?car=' + encodeURIComponent(key);
   $('#links').innerHTML = `<a class="ghost" href="/studio/?car=${encodeURIComponent(key)}">Fix a part in Studio</a>` +
     ((job.files || {}).sheet ? '<button class="ghost" type="button" id="sheetBtn">Four-view picture</button>' : '');
+  const pi = $('#refPhoto');
+  if (pi && (job.files || {}).photo) api(job.files.photo).then(r => r.blob()).then(b => { pi.src = URL.createObjectURL(b); }).catch(() => { pi.remove(); });
   const sb = $('#sheetBtn');
   if (sb) sb.onclick = async () => {
     const w = window.open('', '_blank');

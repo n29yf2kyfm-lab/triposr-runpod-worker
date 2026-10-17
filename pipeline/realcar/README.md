@@ -220,6 +220,37 @@ glbmachine make "..." --no-standin              # the nearest generation as it i
    - no new donor is started after 70 s;
    - the sheet is drawn only for the car kept.
 
+5. **The photo agent** (`photos.py`) runs beside the build, with a
+   45-second limit. It looks for a photo of the real car on Openverse
+   (openly licensed images from Wikimedia Commons and Flickr, each with its
+   licence and author), and on Commons itself as a backup. It keeps only
+   licences that allow commercial use: CC BY, CC BY-SA, CC0, public domain.
+   It takes side and profile files first, removes the background (rembg, on
+   the CPU), and keeps the first photo that passes three checks:
+   - one car, and a plain-painted one;
+   - both wheels on the ground, at the real car's wheelbase-to-length
+     spacing within 6%;
+   - its height-to-length proportion within 8%, which rejects an older car
+     of the same name.
+
+   Then the stand-in's roof, windscreen, bonnet and tail are shaped to the
+   photo's outline (`standin.roof_stage`). The change is up to ±20% above
+   the arch tops, smoothed, and the photo's wheels sit on the new axles.
+   The published height still sets the size. The photo is only measured:
+   nothing of it is in the car. Its credit is shown beside the car in the
+   Maker. Each car's search result is kept in `$GLBMACHINE_HOME/photos/`.
+   - Measured on the Golf Mk7's side photo, the average gap to the photo's
+     outline fell from 5.9 to 2.7 cm (its own model), from 8.2 to 4.8 cm
+     (a Mk8 reshaped to it) and from 7.5 to 3.1 cm (a Corsa D reshaped to
+     it).
+   - Honest limits: most car photos are three-quarter views, which the
+     checks reject. Wikimedia throttles busy addresses (HTTP 429). From the
+     test machine's shared address no usable side photo of a Tiguan Mk3 or
+     a Puma was found in time, and those stand-ins were shaped from their
+     size alone, as the report says.
+6. **No game or toy models** (`batch.is_game`), for stand-ins or anything
+   else: Gran Turismo or Forza rips, low-poly game assets, die-cast, Lego.
+
 The report's `standin` says what the car is, its real size, its body and
 the donor. The Maker labels the car "stand-in". The file's credit names the
 donor model and its licence, and says the car was reshaped. What a stand-in

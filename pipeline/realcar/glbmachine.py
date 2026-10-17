@@ -458,10 +458,11 @@ def serve(port, workers):
                 return self.send(404, {"error": "no such car"})
             files = (job.get("report") or {}).get("files", {})
             if len(parts) == 3:
-                job = dict(job, files={k: f"/v1/cars/{job['id']}/" + ("car.glb" if k == "glb" else "sheet.jpg")
-                                       for k in files})
+                served = {"glb": "car.glb", "sheet": "sheet.jpg", "photo": "photo.jpg"}
+                job = dict(job, files={k: f"/v1/cars/{job['id']}/{served[k]}" for k in files if k in served})
                 return self.send(200, job)
-            want = {"car.glb": ("glb", "model/gltf-binary"), "sheet.jpg": ("sheet", "image/jpeg")}.get(parts[3])
+            want = {"car.glb": ("glb", "model/gltf-binary"), "sheet.jpg": ("sheet", "image/jpeg"),
+                    "photo.jpg": ("photo", "image/jpeg")}.get(parts[3])
             if not want or want[0] not in files:
                 return self.send(404, {"error": "not built"})
             return self.send(200, path=files[want[0]], ctype=want[1])

@@ -10,7 +10,7 @@ travel with it (they do: each package keeps its own LICENSE file in
 
 | Part | Where it came from |
 | --- | --- |
-| `rig.py`, `finish.py`, `edits.py`, `make.py`, `batch.py`, `wheelbase.py`, `glbmachine.py`, `importer.py`, `standin.py`, the `.mjs` tools, `view.html`, `maker/` (GLB Maker), `studio/` (GLB Studio), `../template/gltf.py` | written for ExpertCarCheck |
+| `rig.py`, `finish.py`, `edits.py`, `make.py`, `batch.py`, `wheelbase.py`, `glbmachine.py`, `importer.py`, `standin.py`, `photos.py`, the `.mjs` tools, `view.html`, `maker/` (GLB Maker), `studio/` (GLB Studio), `../template/gltf.py` | written for ExpertCarCheck |
 | `assets/engine_pack.glb` (engine, gearbox, cooling, battery, suspension, exhaust) | exported from our own constructed geometry (`platform/trainer/engine-bay-detail.js`, `platform/workshop/ehybrid/hybrid-parts.js`: `sourceType: constructed-training-geometry`); its 11 textures are generated in code. Nothing in it is cut from a third-party model. |
 | `vendor/no-sharp` | a stand-in so the LGPL image library below is never installed |
 
@@ -60,6 +60,13 @@ inside `node_modules`.
 | --- | --- | --- |
 | UK vehicle licensing statistics (DfT VEH0120) behind `top2000_cars.csv` | Open Government Licence v3.0 | credit: "Contains public sector information licensed under the Open Government Licence v3.0." |
 | Wheelbases read once from Wikipedia infoboxes into `wheelbase_table.json` | facts (not protected) | only the numbers (years, wheelbase, length) and page titles are kept; nothing is fetched while building a car |
+
+## Reference photos (stand-in cars)
+
+| Source | Used for | Licence kept to |
+| --- | --- | --- |
+| Openverse API (api.openverse.org), Wikimedia Commons API | finding a side photo of a car the catalogue lacks | CC BY, CC BY-SA, CC0, public domain only (no NC, no ND) |
+| the photo itself | measured only: its outline shapes the stand-in's roofline; nothing of it is in the GLB | shown beside the car in the Maker with its author, licence and link |
 
 ## The cars: separate from the software
 
