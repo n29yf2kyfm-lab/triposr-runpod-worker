@@ -310,11 +310,17 @@ def _succeeded(boxes):
     return out
 
 
-def choose(boxes, year, ratio=None):
+FEW_DOORS = re.compile(r"\b[23][- ]?door|convertible|cabrio|coupe|coupé|roadster", re.I)
+
+
+def choose(boxes, year, ratio=None, doors=None):
     """The generation on sale in YEAR; of two, the proportion nearer RATIO;
-    else the newest."""
+    else the newest. A car with rear DOORS is not a two- or three-door body
+    of the same name."""
     # race and rally cars (Fiesta R5, Polo R WRC) are not the road car's generation
     road = [b for b in boxes if not RACE.search(b.get("name") or "")]
+    if doors and doors >= 4:
+        road = [b for b in road if not FEW_DOORS.search(b.get("body") or "")] or road
     boxes = _succeeded(road or boxes)
     # the generation that was built that year; failing that, one that started
     # the year after (a car registered the year after it was built)
@@ -333,7 +339,7 @@ def choose(boxes, year, ratio=None):
     return dict(on[0], source=f"en.wikipedia: {on[0]['page']}", candidates=len(boxes))
 
 
-def lookup(make, model, year, ratio=None, online=None):
+def lookup(make, model, year, ratio=None, online=None, doors=None):
     key = f"{make}|{model}".lower()
     ent = table().get(key)
     if ent is None:
@@ -351,7 +357,7 @@ def lookup(make, model, year, ratio=None, online=None):
             os.makedirs(os.path.dirname(p), exist_ok=True)
             json.dump(loc, open(p + ".tmp", "w"), indent=0, sort_keys=True)
             os.replace(p + ".tmp", p)
-    return choose(ent["boxes"], year, ratio)
+    return choose(ent["boxes"], year, ratio, doors)
 
 
 def build(workers=3):

@@ -413,6 +413,15 @@ def finish(src, spec, out, base_dir="."):
         cand = []
         log["bonnet"] = {"from": "the Studio"}
     bonnet = clip = None
+    # the model's own bonnet first: the piece the rig machine took by its
+    # name. The wings and front panel welded into one larger piece (the 2026
+    # G-Class's) are not it, though bigger
+    rig_b = np.concatenate([np.full(len(r["I"]), r["rig"] == "panel_bonnet") for r in body])
+    own_b = np.bincount(lab, weights=area * rig_b, minlength=nl) / np.maximum(isl_area, 1e-12)
+    named_b = [i for i in cand if own_b[i] > 0.5 and isl_area[i] > 0.5]
+    if named_b:
+        cand = named_b
+        log["bonnet_named"] = True
     if cand:
         b = max(cand, key=lambda i: isl_area[i])
         # a front clip, not a bonnet: the piece runs down the car's sides past
@@ -553,7 +562,14 @@ def finish(src, spec, out, base_dir="."):
     tri_c = T.mean(1)
     waist_ = ground + 1.35 * (wheel_top - ground)
     grear = np.isin(tmat, list(glass)) & (tri_c[:, 2] < zr) & (tri_c[:, 1] > waist_) & (np.abs(nrm[:, 2]) > 0.2)
-    if area[grear].sum() > 0.15 and "tailgate" not in manual:
+    # the model's own tailgate, rear window and all (the rig machine took it
+    # by its name), stands: the box below would take the lamps beside it (the
+    # G-Class's sit on the body, its door swings between them)
+    rig_tg0 = np.concatenate([np.full(len(r["I"]), r["rig"] == "tailgate") for r in body])
+    named_tg = area[grear].sum() > 0.15 and area[grear & rig_tg0].sum() > 0.5 * area[grear].sum()
+    if named_tg:
+        log["tailgate_named"] = True
+    if area[grear].sum() > 0.15 and "tailgate" not in manual and not named_tg:
         Rv = T[grear].reshape(-1, 3)
         rw_lo, rw_hi, rw_cz, rw_m2 = Rv.min(0), Rv.max(0), float(tri_c[grear, 2].mean()), float(area[grear].sum())
         xb = max(abs(rw_lo[0]), abs(rw_hi[0])) + 0.08

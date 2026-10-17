@@ -130,7 +130,7 @@ def model_of(item):
     return item["make"], " ".join(model.split())
 
 
-def auto_wheelbase(item, rep, rec):
+def auto_wheelbase(item, rep, rec, year=None):
     """The wheelbase for a model not on the hand-checked list, looked up
     when the finisher knows the model's proportions (wheelbase.py). A model
     the rig machine had to rescale from a guessed wheel size must get one;
@@ -138,12 +138,14 @@ def auto_wheelbase(item, rep, rec):
     (0.50 to 0.85 m), and on a model already at metre scale only if it
     changes the size by under 25%. Otherwise the car is flagged."""
     make, model = model_of(item)
-    year = item.get("yearStart") or 2015
+    year = item.get("yearStart") or year or 2015
     rescaled = rep.get("rescaled")
+    # rear doors: not the two- or three-door body (the G-Class's 2.40 m SWB)
+    doors = 5 if any(k in (rep.get("parts") or {}) for k in ("door_rl", "door_rr")) else None
 
     def get(ratio, base):
         try:
-            ans = wheelbase.lookup(make, model, year, ratio)
+            ans = wheelbase.lookup(make, model, year, ratio, doors=doors)
         except Exception as e:
             ans = {"wheelbase": None, "why": str(e)}
         wb = ans.get("wheelbase")
@@ -307,13 +309,16 @@ def one(target, item, args, out):
     elif aid in WHEELBASE:
         spec["wheelbase"] = WHEELBASE[aid]
     else:
-        spec["wheelbase"] = auto_wheelbase(item, rep, rec)
+        spec["wheelbase"] = auto_wheelbase(item, rep, rec, getattr(args, "year", None))
     # a person's corrections from the Studio (edits.py): parts set by hand and
     # hinge choices
+    rig_hinges = (json.load(open(rr_path)).get("hinges") if os.path.exists(rr_path) else None) or {}
+    if rig_hinges:                               # the rig's own: a back door carrying the spare swings sideways
+        spec["hinges"] = dict(rig_hinges)
     ed_p = os.path.join(rig, "edits.json")
     if os.path.exists(ed_p):
         ed = json.load(open(ed_p))
-        spec["manual"], spec["hinges"] = ed.get("manual") or [], ed.get("hinges") or {}
+        spec["manual"], spec["hinges"] = ed.get("manual") or [], {**spec.get("hinges", {}), **(ed.get("hinges") or {})}
         rec["edited"] = {"manual": spec["manual"], "hinges": spec["hinges"]}
     # how this car was built, so the Studio can build it again
     json.dump({"target": target, "item": item, "paint": getattr(args, "paint", None),

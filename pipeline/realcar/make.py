@@ -38,7 +38,9 @@ import batch  # noqa: E402
 import wheelbase  # noqa: E402
 
 # DVLA colour names, as a typical paint of that name (sRGB)
-COLOURS = {
+COLOURS = {                       # longer names first: "dark grey" before "grey"
+    "dark grey": (64, 66, 70), "dark gray": (64, 66, 70), "graphite": (64, 66, 70), "gunmetal": (64, 66, 70),
+    "anthracite": (56, 58, 62),
     "black": (16, 16, 18), "white": (236, 236, 233), "silver": (186, 189, 192), "grey": (108, 111, 115),
     "gray": (108, 111, 115), "blue": (24, 52, 118), "red": (152, 16, 22), "green": (28, 78, 44),
     "yellow": (232, 190, 28), "orange": (222, 98, 20), "brown": (84, 54, 34), "beige": (201, 186, 150),
@@ -66,9 +68,26 @@ def edits(a, b):
     return prev[-1]
 
 
+# what people call a car, as its make and model; the trim it names is kept
+# as the spec ("G63" is an AMG G-Class)
+NICKNAMES = [
+    (re.compile(r"\b(?:mercedes[- ]?(?:benz)?\s+|merc\s+|amg\s+)?(?:g[- ]?wag(?:on|en)|gelaende?wagen|geländewagen)\b"),
+     "mercedes-benz g-class", None),
+    (re.compile(r"\b(?:mercedes[- ]?(?:benz)?\s+|merc\s+)?(?:mercedes-amg\s+|amg\s+)?(g\s?(?:63|65|55|500|550|400\s?d|450\s?d|350\s?d|580))\b"),
+     "mercedes-benz g-class", 1),
+]
+
+
 def parse(text):
     t = text.lower()
     want = {"text": text}
+    for rx, canon, trim in NICKNAMES:
+        m = rx.search(t)
+        if m:
+            if trim:
+                want["nickname_trim"] = m.group(trim).upper().replace(" ", "")
+            t = t[:m.start()] + " " + canon + " " + t[m.end():]
+            break
     m = re.search(r"\b(19[5-9]\d|20[0-3]\d)\b", t)
     if m:
         want["year"] = int(m.group(1))
@@ -568,6 +587,9 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
     args = argparse.Namespace(engine_pack=os.path.abspath(engine_pack), tools=tools, view_dir=view_dir,
                               port=port, no_sheet=True, keep_finished=True, keep_full=full)
     want = parse(request)
+    args.year = want.get("year")                         # the year asked: the generation's size when the model has none
+    if not (spec and spec.strip()) and want.get("nickname_trim"):
+        spec = want["nickname_trim"]                     # "G63": the AMG, as the spec
     if spec and spec.strip():
         want["spec"] = spec.strip()[:120]
         sp = parse(want["spec"])

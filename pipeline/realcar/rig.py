@@ -74,6 +74,7 @@ RULES = [
 ]
 RULES = [(k, re.compile(p, re.I)) for k, p in RULES]
 DOOR_RX = dict(RULES)["door"]
+SPARE = re.compile(r"spare_?(tire|tyre|wheel)|sparetire|reserverad|ersatzrad|stepney", re.I)
 SHIFTER_BOOT = re.compile(r"shifter_?boot|gear_?boot|gaiter", re.I)
 DROP = re.compile(r"(_dam\b|_dam[_.\d]|_vlo\b|_vlo[_.]|\blod[1-9]\b|_lod[1-9]|shadow|_l[12]_end|collision|\bcol_)", re.I)
 # default primitives left in the export: the A6 carries an `Icosphere` below its tyres
@@ -81,8 +82,9 @@ PRIM = re.compile(r"^(icosphere|uv ?sphere|sphere|cube|plane|cylinder|cone|torus
 SLIDE_NAME = re.compile(r"slid", re.I)
 FRONT_RX = re.compile(r"(^|[^a-z])front([^a-z]|$)", re.I)
 REAR_RX = re.compile(r"(^|[^a-z])(rear|back)([^a-z]|$)", re.I)
+# Turkish too (the 2018 G-Class): jant rim, lastik tyre (not plastik), teker wheel, frendisk brake disc
 WHEEL_MAT = re.compile(r"tyre|tire|rubber|pneu|reifen|llanta|luntai|lungu|wheel|felge|rueda"
-                       r"|(^|[^a-z])rim([^a-z]|$)|(^|_)rin(_|\d|$)", re.I)
+                       r"|(^|[^a-z])rim([^a-z]|$)|(^|_)rin(_|\d|$)|jant|teker|(^|[^p])lastik|frendis[ck]", re.I)
 RED_NAME = re.compile(r"(?<![a-z])red|red(?![a-z])|tail|lanterna|brake.?light|stop.?light|rear.?light|rueckl|feu.?arr", re.I)
 TWO_DOOR = re.compile(r"coupe|coupé|convertible|cabrio|roadster|spider|spyder|targa"
                       r"|\b[23][- ]?(?:door|dr)\b|\b(?:two|three)[- ]door", re.I)
@@ -343,6 +345,31 @@ def kind_of(chain):
     return "body"
 
 
+def own_name(car, objs, o):
+    """The chain to read a part from. An exporter names each material's mesh
+    `<object>_<material>_0`: a material several objects wear (`door_plastic`
+    on the 2026 G-Class's gear lever, engine and cabin; `door_handles` on its
+    tailgate) says nothing of which part this is, and is left out. The name
+    keeps the material as the artist called it, which the file may since
+    have renamed, so the names are compared, not the materials."""
+    ch = o["chain"].split("|")
+
+    def mat_part(c):
+        if len(c) < 2 or not c[0].startswith(c[1] + "_"):
+            return None
+        return re.sub(r"_\d+(\.\d+)?$", "", c[0][len(c[1]) + 1:]).lower()
+    if not hasattr(car, "_mat_users"):
+        car._mat_users = {}
+        for q in objs:
+            c = q["chain"].split("|")
+            if mat_part(c):
+                car._mat_users.setdefault(mat_part(c), set()).add(c[1])
+    m = mat_part(ch)
+    if m and len(car._mat_users.get(m, ())) > 1:
+        return "|".join(ch[1:])
+    return o["chain"]
+
+
 def islands(car, o, length):
     """Loose pieces of one object: bbox, mean up, refs, mean forward, area,
     share facing up, share facing along the car."""
@@ -388,7 +415,7 @@ def convert(car, rep, override=None, body_style=""):
     if not objs:
         raise Refused("no geometry")
     for o in objs:
-        o["kind"] = kind_of(o["chain"])
+        o["kind"] = kind_of(own_name(car, objs, o))
 
     def allv():
         return np.vstack([car.verts(o) for o in objs])
@@ -505,7 +532,8 @@ def convert(car, rep, override=None, body_style=""):
     for o in objs:
         if o["kind"] != "door":
             continue
-        root = next((n for n in o["chain"].split("|") if DOOR_RX.search(n)), o["chain"].split("|")[0])
+        ch = own_name(car, objs, o).split("|")     # the door, not its material: `G-class_FL_door_AMG`
+        root = next((n for n in ch if DOOR_RX.search(n)), ch[0])
         root = re.sub(r"(_ok|_dummy|__\d+|\.\d+|_\d+)$", "", root, flags=re.I)
         doorkey.setdefault(root, []).append(o)
 
@@ -681,6 +709,22 @@ def convert(car, rep, override=None, body_style=""):
                 if f"door_r{sd}" in hinge:
                     hinge[f"door_f{sd}"] = hinge.pop(f"door_r{sd}")
                 rep.setdefault("two_door", []).append(f"door_r{sd} is the front door")
+    # a spare wheel on the back door (the G-Class, a Jimny, an old RAV4) rides
+    # on it, and a door that carries one is hinged at the side: the side away
+    # from its handle
+    spare = [o for o in parts.get("body", []) if SPARE.search(own_name(car, objs, o))]
+    if spare and parts.get("tailgate") and "tailgate" in hinge:
+        b0, b1 = bbox(np.vstack([car.verts(o) for o in parts["tailgate"]]))
+        s0, s1 = bbox(np.vstack([car.verts(o) for o in spare]))
+        sc = (s0 + s1) / 2
+        if sc[2] < b0[2] + .02 and b0[0] - .05 <= sc[0] <= b1[0] + .05 and b0[1] <= sc[1] <= b1[1]:
+            parts["body"] = [o for o in parts["body"] if not any(o is x for x in spare)]
+            parts["tailgate"] += spare
+            handle = [o for o in parts["tailgate"] if re.search(r"handle", o["chain"], re.I)]
+            hx = centre(car, handle)[0] if handle else -sc[0]
+            rep["hinges"] = {"tailgate": {"edge": "left" if hx < 0 else "right"}}
+            rep["spare_on_tailgate"] = {"pieces": len(spare), "hinged": rep["hinges"]["tailgate"]["edge"],
+                                        "why": "a spare wheel on the back door: the door is side-hinged"}
     rep["hinge"] = hinge
     rep["motion"] = motion(car, parts, hi[1] - lo[1], rep, override)
     # ── 8. GLASS: what the file claims ──
@@ -787,12 +831,25 @@ def material_wheels(car, objs, rep):
     lo, hi = bbox(V)
     H, Wd = hi[1] - lo[1], hi[0] - lo[0]
     xm, zm = (lo[0] + hi[0]) / 2, (lo[2] + hi[2]) / 2
+    skip = ("wheel", "glazing", "lamps_front", "lamps_rear", "cabin", "steering")
+    # an exporter splits one object per material, `Object003.004_frendisk_0`:
+    # the rims and calipers of a wheel object whose tyres are named come too
+    stems = set()
+    for o in objs:
+        if o["kind"] not in skip:
+            for m in {int(m) for m in car.tris(o)[1] if m >= 0}:
+                k = o["name"].rfind("_" + car.mname(m) + "_")
+                if WHEEL_MAT.search(car.mname(m)) and k > 0:
+                    stems.add(o["name"][:k])
     cand = {}
     for oi, o in enumerate(objs):
-        if o["kind"] in ("wheel", "glazing", "lamps_front", "lamps_rear", "cabin", "steering"):
+        if o["kind"] in skip:
             continue
         T, ms, refs = car.tris(o)
-        hit = np.array([m >= 0 and bool(WHEEL_MAT.search(car.mname(m))) for m in ms]) if len(ms) else np.zeros(0, bool)
+        if any(o["name"].startswith(st + "_") for st in stems) and len(T) and T[..., 1].max() <= lo[1] + .5 * H:
+            hit = np.ones(len(ms), bool)          # all low: rims, not a body that shares the name
+        else:
+            hit = np.array([m >= 0 and bool(WHEEL_MAT.search(car.mname(m))) for m in ms]) if len(ms) else np.zeros(0, bool)
         if not hit.any():
             continue
         c = T.mean(1)
@@ -1773,6 +1830,8 @@ def run(src, out, override=None, body_style=""):
         res.update(status="partial" if rep.get("missing") else "ok", opens=opens,
                    wheels=sorted(k for k in parts if k.startswith("wheel_")), missing=rep.get("missing", []),
                    motion=rep.get("motion", {}), rescaled=rep.get("rescaled"))
+        if rep.get("hinges"):
+            res["hinges"] = rep["hinges"]
     except Refused as e:
         rep["refused"] = res["refused"] = str(e)
         res["status"] = "refused"
