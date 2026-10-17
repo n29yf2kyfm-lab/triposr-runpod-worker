@@ -76,10 +76,18 @@ WRONG_CAR = {
 }
 
 
+def local_catalogue_path():
+    """The owner's own models, added with `glbmachine add`."""
+    home = os.path.expanduser(os.environ.get("GLBMACHINE_HOME", "~/.glbmachine"))
+    return os.path.join(home, "catalogue_local.json")
+
+
 def catalogue():
     d = json.load(open(os.path.join(REPO, "platform/catalogue/catalogue.v2.json")))
     items = d if isinstance(d, list) else d.get("models") or d.get("items") or list(d.values())[0]
     cat = {i["assetId"]: i for i in items}
+    if os.path.exists(local_catalogue_path()):
+        cat.update(json.load(open(local_catalogue_path())))
     for aid, fix in GENERATION_FIX.items():
         if aid in cat:
             cat[aid] = {**cat[aid], **fix}
@@ -141,7 +149,8 @@ def auto_wheelbase(item, rep, rec):
     return get
 
 
-LICENCE = [(r"non-?commercial.*share-?alike|by-nc-sa", "CC BY-NC-SA"), (r"non-?commercial|by-nc", "CC BY-NC"),
+LICENCE = [(r"royalty[- ]free", "royalty-free"), (r"own work|owner", "owner-supplied"),
+           (r"non-?commercial.*share-?alike|by-nc-sa", "CC BY-NC-SA"), (r"non-?commercial|by-nc", "CC BY-NC"),
            (r"share-?alike|by-sa", "CC BY-SA"), (r"cc0|public domain", "CC0"), (r"attribution|cc-by|cc by", "CC BY")]
 
 
@@ -155,7 +164,7 @@ def credit_of(item):
     title = item.get("sourceTitle") or " ".join(w.upper() if len(w) <= 2 else w.capitalize()
                                                 for w in f"{make} {model}".replace("-", " ").split())   # Toyota GR Yaris
     return {"title": title, "author": item.get("sourceCreator") or None, "licence": lic, "url": item.get("sourceUrl"),
-            "commercial": lic in ("CC BY", "CC BY-SA", "CC0", "owner-supplied"),
+            "commercial": lic in ("CC BY", "CC BY-SA", "CC0", "owner-supplied", "royalty-free"),
             "author_missing": not item.get("sourceCreator")}
 
 
@@ -181,7 +190,8 @@ def one(target, item, args, out):
     # the body, so the rigger cuts the right number of doors: the request's
     # ("2 door"), else the catalogue's (coupe, convertible...), else the
     # source title's ("3dr")
-    body = getattr(args, "body_style", None) or item.get("bodyStyle") or ""
+    body = getattr(args, "body_style", None) or (f"{item['doors']}-door" if item.get("doors") else None) \
+        or item.get("bodyStyle") or ""
     if not body and re.search(r"\b[2-5][- ]?(?:door|dr)\b|coupe|cabrio|convertible", item.get("sourceTitle") or "", re.I):
         body = re.search(r"\b[2-5][- ]?(?:door|dr)\b|coupe|cabrio|convertible", item["sourceTitle"], re.I).group(0)
     rr = json.load(open(rr_path)) if os.path.exists(rigged) and os.path.exists(rr_path) else None

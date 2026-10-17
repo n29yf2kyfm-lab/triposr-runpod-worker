@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GLB Maker</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='8' height='8' fill='%23ffe45c'/%3E%3Crect x='8' width='8' height='8' fill='%234aa8e8'/%3E%3Crect y='8' width='8' height='8' fill='%23ff8c42'/%3E%3Crect x='8' y='8' width='8' height='8' fill='%236cc070'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="maker.css">
+<script type="importmap">{"imports":{"three":"/lib/three.module.js","three/addons/":"/lib/addons/"}}</script>
+</head>
+<body>
+<header class="bar">
+  <div class="brand"><span class="mark" aria-hidden="true"></span><b>GLB Machine</b><span class="by">ExpertCarCheck</span></div>
+  <nav class="tabs" aria-label="Pages">
+    <a href="/make/" class="on" aria-current="page">Make a car</a>
+    <a href="/studio/" id="studioTab">Studio</a>
+  </nav>
+  <span class="health" id="health" title="Machine status">…</span>
+</header>
+
+<main>
+  <aside class="side" aria-label="Car">
+    <form id="form" class="card" autocomplete="off" novalidate>
+      <h1>Make a car</h1>
+      <div class="two">
+        <label>Make
+          <input id="make" list="makes" placeholder="Toyota" required>
+        </label>
+        <label>Model
+          <input id="model" list="models" placeholder="Yaris" required>
+        </label>
+      </div>
+      <p class="hint" id="modelHint">Start typing: the lists show what the catalogue has.</p>
+      <div class="two">
+        <label>Year or plate
+          <input id="year" inputmode="numeric" placeholder="2012 or 12" maxlength="4">
+        </label>
+        <label>Spec
+          <input id="spec" placeholder="GTI, ST-Line, 1.0 5dr">
+        </label>
+      </div>
+      <fieldset>
+        <legend>Doors</legend>
+        <div class="seg" id="doors">
+          <button type="button" data-v="" class="on">Any</button>
+          <button type="button" data-v="2">2</button>
+          <button type="button" data-v="3">3</button>
+          <button type="button" data-v="4">4</button>
+          <button type="button" data-v="5">5</button>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Colour <span class="legend-note" id="colourName">as modelled</span></legend>
+        <div class="swatches" id="swatches"></div>
+      </fieldset>
+      <label class="check"><input id="sheet" type="checkbox"> Also draw a four-view picture <span class="faint">(about 25 s more)</span></label>
+      <div class="ask"><span class="faint">Asks for</span> <code id="ask">nothing yet</code></div>
+      <button id="buildBtn" class="primary big" type="submit">Build GLB</button>
+      <div class="status" id="status" hidden>
+        <div class="status-line"><span class="pill" id="statePill">queued</span><span id="stateText"></span><span class="clock" id="clock">0:00</span></div>
+        <div class="meter" aria-hidden="true"><i id="meter"></i><span class="budget" title="2-minute target"></span></div>
+      </div>
+    </form>
+
+    <section class="card" id="reportCard" hidden aria-label="What was built">
+      <h2 id="repTitle">Built</h2>
+      <dl class="report" id="report"></dl>
+      <div class="links" id="links"></div>
+    </section>
+
+    <section class="card recent" aria-label="Recent cars">
+      <h2>Recent</h2>
+      <ul id="recent"><li class="faint">No cars yet.</li></ul>
+    </section>
+  </aside>
+
+  <section class="stage" id="stage" aria-label="Car viewer">
+    <canvas id="c" tabindex="0" aria-label="The car in 3D: drag to turn, wheel to zoom"></canvas>
+    <div class="carname" id="carName" hidden></div>
+    <div class="empty" id="empty">
+      <p class="empty-title">Your car opens here</p>
+      <p>Type the make, model and year, pick a colour and press <b>Build GLB</b>. In under two minutes it is here with its doors, bonnet and tailgate open. Spin it, flip it to see the engine and exhaust underneath, and download the GLB.</p>
+    </div>
+    <div class="busy" id="busy" hidden><div class="spin" aria-hidden="true"></div><span id="busyText">Loading the car</span></div>
+    <div class="toolbar" id="toolbar" hidden role="toolbar" aria-label="Car controls">
+      <div class="group" id="opens">
+        <button data-part="doors" aria-pressed="false">Doors</button>
+        <button data-part="bonnet" aria-pressed="false">Bonnet</button>
+        <button data-part="tailgate" aria-pressed="false">Tailgate</button>
+        <button data-part="all" aria-pressed="false">Open all</button>
+      </div>
+      <div class="group">
+        <button id="spinBtn" aria-pressed="false" title="Turn the car on its own">Spin</button>
+        <button id="flipBtn" aria-pressed="false" title="Turn the car over: the engine, exhaust and floor">Flip</button>
+        <button id="resetBtn" title="Back to the first view">Reset</button>
+      </div>
+      <div class="group">
+        <button id="picBtn" title="Save this view as a PNG">Picture</button>
+        <button id="dlBtn" class="primary" title="The finished car, for the app or any 3D viewer">Download GLB</button>
+      </div>
+    </div>
+    <div class="toast" id="toast" role="status" hidden></div>
+  </section>
+</main>
+
+<datalist id="makes"></datalist>
+<datalist id="models"></datalist>
+
+<dialog id="keyDlg">
+  <form method="dialog">
+    <h3>Licence key</h3>
+    <p>This GLB machine needs a key. It stays in this browser.</p>
+    <input id="keyInput" type="password" autocomplete="off" required aria-label="Licence key">
+    <menu><button class="primary" value="ok">Use key</button></menu>
+  </form>
+</dialog>
+
+<script type="module" src="maker.js"></script>
+</body>
+</html>

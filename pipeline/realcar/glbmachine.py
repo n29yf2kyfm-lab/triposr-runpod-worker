@@ -13,18 +13,26 @@ the only network use is fetching the model from the catalogue's storage.
     glbmachine make "Ford Fiesta 2012" --full -o fiesta.glb     # uncompressed: any 3D program
     glbmachine batch --top 20 --workers 3     # the UK best sellers
     glbmachine rig CAR.glb OUT_DIR            # the rig step alone
-    glbmachine serve --port 8080              # the web API (below) and GLB Studio at /studio/
+    glbmachine serve --port 8080              # the Maker page, the web API (below), GLB Studio
+    glbmachine add CAR.obj --make Toyota --model Yaris --years 2011-2020 --doors 3 --licence "..."
     glbmachine version
 
 WORK FOLDER: $GLBMACHINE_HOME (default ~/.glbmachine) holds view/ (the check
 sheet page, served to a headless browser) and view/cars/ (every car built).
 
+THE MAKER (`serve`, the main address, /make/): the program in one page.
+Make, model, year (or plate), colour, doors, spec -> Build; the car opens in
+3D with its doors, bonnet and tailgate open; spin it, flip it over to see
+the engine and exhaust, save a picture, download the GLB.
+
 WEB API (`serve`):
-    POST /v1/cars            {"request": "Ford Fiesta 2015 blue", "sheet": false,
-                              "exact": false}  -> 202 {"id", "status"}
+    POST /v1/cars            {"request": "Ford Fiesta 2015 blue", "spec": "ST-Line",
+                              "sheet": false, "exact": false}  -> 202 {"id", "status"}
+    GET  /v1/cars            the last 40 cars asked for, newest first
     GET  /v1/cars/ID         -> {"id", "status": queued|building|done|failed, "report", "files"}
     GET  /v1/cars/ID/car.glb    the finished car (meshopt-compressed)
     GET  /v1/cars/ID/sheet.jpg  the four-view check sheet, when asked for
+    GET  /v1/catalogue       every make, its models and their years
     GET  /health
 GLB STUDIO (`serve`, /studio/): open a built car, select a wrong part, say
 what it is, build again. Its calls: GET /v1/library, GET /v1/library/KEY/
@@ -79,10 +87,52 @@ def setup(quiet=False):
     return {"home": HOME, "tools": TOOLS, "engine_pack": ENGINE_PACK}
 
 
-def make(request, sheet=True, exact=False, out=None, port=8791, out_file=None, full=False):
+def make(request, sheet=True, exact=False, out=None, port=8791, out_file=None, full=False, spec=None):
     import make as mk
     setup(quiet=True)
-    return mk.build(request, ENGINE_PACK, TOOLS, VIEW, out or CARS, port, exact, not sheet, out_file, full)
+    return mk.build(request, ENGINE_PACK, TOOLS, VIEW, out or CARS, port, exact, not sheet, out_file, full, spec)
+
+
+# ── your own models: added to a local catalogue beside the shared one ──────
+def add_model(src, make, model, years, licence, doors=None, body=None, title=None, author=None, url=None):
+    """A model bought or made outside (GLB, glTF or OBJ) into the catalogue,
+    so a request finds it like any other. The file is converted once and
+    kept in $GLBMACHINE_HOME/models; the record in catalogue_local.json."""
+    import batch
+    import importer
+    m = re.fullmatch(r"\s*((?:19|20)\d\d)\s*(?:[-–to ]+\s*((?:19|20)\d\d))?\s*", str(years))
+    if not m:
+        raise ValueError("years like 2011-2020 or 2012")
+    y0, y1 = int(m.group(1)), int(m.group(2) or m.group(1))
+    slug = re.sub(r"[^a-z0-9]+", "-", f"{make} {model} {y0}".lower()).strip("-") + "-own-v1"
+    os.makedirs(os.path.join(HOME, "models"), exist_ok=True)
+    dst = os.path.join(HOME, "models", slug + ".glb")
+    info = importer.to_glb(src, dst, TOOLS)
+    rec = {"assetId": slug, "make": make.lower(), "model": f"{make} {model}", "modelFamily": f"{make} {model}".lower(),
+           "modelAliases": [model], "yearStart": y0, "yearEnd": y1, "bodyStyle": body, "doors": doors,
+           "licence": licence, "sourceTitle": title or f"{make} {model} ({y0}-{y1})", "sourceCreator": author,
+           "sourceUrl": url, "provenance": "owner-supplied", "publicationStatus": "approved", "qualityGrade": "A",
+           "desktopGlbUrl": "file://" + dst, "addedFrom": os.path.basename(src), "addedAt": time.strftime("%Y-%m-%d")}
+    p = batch.local_catalogue_path()
+    cat = _json(p) or {}
+    cat[slug] = rec
+    json.dump(cat, open(p + ".tmp", "w"), indent=1)
+    os.replace(p + ".tmp", p)
+    return rec, info
+
+
+def remove_model(asset):
+    import batch
+    p = batch.local_catalogue_path()
+    cat = _json(p) or {}
+    rec = cat.pop(asset, None)
+    if rec is None:
+        raise ValueError(f"{asset} is not one of your added models")
+    json.dump(cat, open(p, "w"), indent=1)
+    f = rec["desktopGlbUrl"][len("file://"):]
+    if f.startswith(os.path.join(HOME, "models")) and os.path.exists(f):
+        os.remove(f)
+    return rec
 
 
 def rig(src, out):
@@ -125,21 +175,33 @@ class Jobs:
 
     def add(self, body):
         job = {"id": uuid.uuid4().hex[:12], "status": "queued", "asked_at": time.time(),
-               "request": str(body["request"])[:200], "sheet": bool(body.get("sheet")),
-               "exact": bool(body.get("exact"))}
+               "request": str(body["request"])[:200], "spec": str(body.get("spec") or "")[:120],
+               "sheet": bool(body.get("sheet")), "exact": bool(body.get("exact"))}
         self.put(job)
         self.q.put(job["id"])
         return job
+
+    def recent(self, n=40):
+        """The last N cars asked for, newest first (the Maker's list)."""
+        names = sorted((f for f in os.listdir(self.dir) if f.endswith(".json")),
+                       key=lambda f: -os.path.getmtime(os.path.join(self.dir, f)))[:n]
+        out = []
+        for f in names:
+            j = _json(os.path.join(self.dir, f)) or {}
+            r = j.get("report") or {}
+            out.append({k: j.get(k) for k in ("id", "request", "spec", "status", "quality", "asked_at", "finished_at")}
+                       | {"asset": r.get("asset"), "source": r.get("source")})
+        return out
 
     def worker(self, port):
         while True:
             jid = self.q.get()
             job = self.get(jid)
-            job["status"] = "building"
+            job["status"], job["started_at"] = "building", time.time()
             self.put(job)
             try:
                 rep = make(job["request"], sheet=job["sheet"], exact=job.get("exact", False),
-                           out=os.path.join(CARS, jid), port=port)
+                           out=os.path.join(CARS, jid), port=port, spec=job.get("spec"))
                 job["report"] = rep
                 res = rep.get("result") or {}
                 job["status"] = "failed" if "error" in rep or not os.path.exists(rep.get("files", {}).get("glb", "")) \
@@ -202,6 +264,48 @@ def library():
     return sorted(out, key=lambda c: -c["updated"])
 
 
+BADGES = {"gti", "gt", "st", "rs", "gr", "amg", "gtr", "vxr", "csl", "sl", "gte", "gtd", "svr", "srt", "jcw",
+          "ev", "phev", "hev", "id", "cx", "hr", "suv", "gtc", "gts"}
+
+
+def _tidy_model(model, make):
+    """'Range-Rover-Evoque' -> 'Range Rover Evoque', 'Golf Gti' -> 'Golf GTI',
+    'Land Rover Defender' (make Land Rover) -> 'Defender'; C-Class keeps its hyphen."""
+    words = re.split(r"[-\s]+", make)
+    m = re.sub(r"^" + r"[-\s]+".join(map(re.escape, words)) + r"[-\s]+", "", model.strip(), flags=re.I)
+    m = re.sub(r"(?<=[A-Za-z0-9])-(?=(?!Class\b)[A-Za-z]{4,})", " ", m)
+    return " ".join(w.upper() if w.lower() in BADGES else w for w in m.split())
+
+
+def catalogue_summary():
+    """What can be asked for: every make, its models and their years (the
+    Maker's make and model lists). Spellings of one name are merged."""
+    import batch
+    makes = {}
+    for i in batch.catalogue().values():
+        if i.get("publicationStatus") != "approved" or not i.get("desktopGlbUrl"):
+            continue
+        make = _car_name({"make": i["make"]})
+        name = _car_name({**i, "yearStart": None, "yearEnd": None})
+        model = _tidy_model(name[len(make):].strip() if name.startswith(make) else name, make)
+        if not model:
+            continue
+        mk = makes.setdefault(re.sub(r"[^a-z0-9]", "", make.lower()), {"names": set(), "models": {}})
+        mk["names"].add(make)
+        md = mk["models"].setdefault(re.sub(r"[^a-z0-9]", "", model.lower()), {"names": set(), "years": []})
+        md["names"].add(model)
+        md["years"].extend(v for v in (i.get("yearStart"), i.get("yearEnd")) if v)
+
+    def best(names):        # 'Audi' over 'AUDI', '3 Series' over '3-Series', 'Golf GTI' over 'Golf Gti'
+        return sorted(names, key=lambda n: (n.isupper() and len(n) > 3, n.count("-"), -sum(c.isupper() for c in n), n))[0]
+    out = [{"make": best(v["names"]),
+            "models": sorted(({"model": best(m["names"]),
+                               "years": [min(m["years"]), max(m["years"])] if m["years"] else None}
+                              for m in v["models"].values()), key=lambda x: x["model"].lower())}
+           for v in makes.values()]
+    return sorted(out, key=lambda x: x["make"].lower())
+
+
 def _json(p):
     try:
         return json.load(open(p))
@@ -247,7 +351,16 @@ def serve(port, workers):
     keys = {k.strip() for k in os.environ.get("GLBMACHINE_KEYS", "").split(",") if k.strip()}
     jobs = Jobs(workers)
     locks, locks_lock = {}, threading.Lock()
-    studio_dir, lib_dir = os.path.join(HERE, "studio"), os.path.join(VIEW, "lib")
+    studio_dir, lib_dir, maker_dir = os.path.join(HERE, "studio"), os.path.join(VIEW, "lib"), os.path.join(HERE, "maker")
+    summary = {}
+
+    def catalogue_cached():
+        import batch
+        p = batch.local_catalogue_path()
+        stamp = os.path.getmtime(p) if os.path.exists(p) else 0
+        if summary.get("stamp") != stamp or "list" not in summary:
+            summary.update(stamp=stamp, list=catalogue_summary())
+        return summary["list"]
 
     class H(BaseHTTPRequestHandler):
         server_version = f"glbmachine/{VERSION}"
@@ -292,13 +405,15 @@ def serve(port, workers):
         def do_GET(self):
             path = self.path.split("?")[0]
             parts = [urllib.parse.unquote(p) for p in path.split("/") if p]
-            if not parts:
-                self.send_response(302)
-                self.send_header("Location", "/studio/")
+            if not parts or (parts[0] in ("make", "studio") and len(parts) == 1 and not path.endswith("/")):
+                self.send_response(302)                  # the pages' own files are relative to the slash
+                self.send_header("Location", "/" + (parts[0] if parts else "make") + "/")
                 self.end_headers()
                 return
             if parts == ["health"]:
                 return self.send(200, {"ok": True, "version": VERSION})
+            if parts[0] == "make":
+                return self.static(maker_dir, "/".join(parts[1:]) or "index.html", cache=False)
             if parts[0] == "studio":
                 return self.static(studio_dir, "/".join(parts[1:]) or "index.html", cache=False)
             if parts[0] == "lib":
@@ -325,10 +440,14 @@ def serve(port, workers):
                 if parts[3] == "sheet.jpg" and os.path.exists(os.path.join(d, "sheet.jpg")):
                     return self.send(200, path=os.path.join(d, "sheet.jpg"), ctype="image/jpeg")
                 return self.send(404, {"error": "not found"})
-            if parts[:2] != ["v1", "cars"] or len(parts) < 3:
+            if parts == ["v1", "catalogue"]:
+                return self.allowed() and self.send(200, catalogue_cached(), cache=False)
+            if parts[:2] != ["v1", "cars"]:
                 return self.send(404, {"error": "not found"})
             if not self.allowed():
                 return
+            if len(parts) == 2:
+                return self.send(200, jobs.recent())
             job = jobs.get(parts[2])
             if not job:
                 return self.send(404, {"error": "no such car"})
@@ -380,7 +499,8 @@ def serve(port, workers):
             job = jobs.add(body)
             self.send(202, {"id": job["id"], "status": job["status"], "poll": f"/v1/cars/{job['id']}"})
 
-    print(json.dumps({"serving": port, "studio": f"http://localhost:{port}/studio/", "workers": workers,
+    print(json.dumps({"serving": port, "maker": f"http://localhost:{port}/make/",
+                      "studio": f"http://localhost:{port}/studio/", "workers": workers,
                       "keys_required": bool(keys), "home": HOME}), flush=True)
     ThreadingHTTPServer(("0.0.0.0", port), H).serve_forever()
 
@@ -397,11 +517,27 @@ def main():
     m.add_argument("--full", action="store_true", help="the uncompressed GLB (opens in any 3D program)")
     m.add_argument("--exact", action="store_true", help="only that year's generation, never the nearest")
     m.add_argument("--out", default=None, help="work folder for the build (default: the car library)")
+    m.add_argument("--spec", default=None, help='the spec, e.g. "GTI" or "ST-Line 1.0 EcoBoost 5dr"')
     b = sub.add_parser("batch")
     b.add_argument("--top", type=int, default=20)
     b.add_argument("--list", default="targets", choices=("targets", "top2000"))
     b.add_argument("--workers", type=int, default=1)
     b.add_argument("--out", default=os.path.join(CARS, "batch"))
+    ad = sub.add_parser("add", help="add your own model (GLB, glTF or OBJ) to the catalogue")
+    ad.add_argument("file")
+    ad.add_argument("--make", required=True)
+    ad.add_argument("--model", required=True)
+    ad.add_argument("--years", required=True, help="the generation's years, e.g. 2011-2020")
+    ad.add_argument("--licence", required=True, help="what you may do with it, e.g. 'royalty-free, CGTrader standard'")
+    ad.add_argument("--doors", type=int, help="3 for a three-door hatch, 5 for a five-door")
+    ad.add_argument("--body", help="hatchback, saloon, estate, suv, coupe, convertible ...")
+    ad.add_argument("--title")
+    ad.add_argument("--author")
+    ad.add_argument("--url")
+    ad.add_argument("--build", action="store_true", help="build it straight away, with a check sheet")
+    sub.add_parser("models", help="list the models you added")
+    rm = sub.add_parser("remove", help="take an added model out")
+    rm.add_argument("asset")
     r = sub.add_parser("rig")
     r.add_argument("src")
     r.add_argument("out")
@@ -415,7 +551,8 @@ def main():
     elif a.cmd == "setup":
         print(json.dumps(setup()))
     elif a.cmd == "make":
-        rep = make(a.request, sheet=not a.no_sheet, exact=a.exact, out=a.out, out_file=a.output, full=a.full)
+        rep = make(a.request, sheet=not a.no_sheet, exact=a.exact, out=a.out, out_file=a.output, full=a.full,
+                   spec=a.spec)
         print(json.dumps(rep, indent=1, default=str))
         sys.exit(2 if "error" in rep else 0)
     elif a.cmd == "batch":
@@ -424,6 +561,22 @@ def main():
         sys.argv = ["batch.py", a.out, "--top", str(a.top), "--list", a.list, "--workers", str(a.workers),
                     "--engine-pack", ENGINE_PACK, "--tools", TOOLS, "--view-dir", VIEW]
         batch.main()
+    elif a.cmd == "add":
+        rec, info = add_model(a.file, a.make, a.model, a.years, a.licence, a.doors, a.body, a.title, a.author, a.url)
+        print(json.dumps({"added": rec["assetId"], "converted": info, "record": rec}, indent=1))
+        if a.build:
+            req = f"{a.make} {a.model} {rec['yearStart']}" + (f" {a.doors} door" if a.doors else "")
+            rep = make(req)
+            res = rep.get("result") or {}
+            print(json.dumps({"built": rep.get("asset"), "status": res.get("status"), "missing": res.get("missing"),
+                              "opens": (res.get("finish") or {}).get("opens"), "doors": rep.get("doors_note"),
+                              "files": rep.get("files")}, indent=1))
+    elif a.cmd == "models":
+        import batch
+        for k, v in (_json(batch.local_catalogue_path()) or {}).items():
+            print(f"{k:40s} {v['model']} {v['yearStart']}-{v['yearEnd']}  doors {v.get('doors') or '?'}  {v['licence']}")
+    elif a.cmd == "remove":
+        print(json.dumps({"removed": remove_model(a.asset)["assetId"]}))
     elif a.cmd == "rig":
         print(json.dumps(rig(a.src, a.out)))
     elif a.cmd == "serve":

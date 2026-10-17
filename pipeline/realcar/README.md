@@ -26,11 +26,46 @@ docker run -p 8080:8080 -v glbdata:/data -e GLBMACHINE_KEYS=key1,key2 glbmachine
 docker run --rm -v glbdata:/data glbmachine make "Toyota Yaris 2003 silver"
 ```
 
-The web API (`serve`): `POST /v1/cars {"request": "...", "sheet": false}`
-answers with an id; `GET /v1/cars/ID` gives the status and the report;
-`GET /v1/cars/ID/car.glb` and `/sheet.jpg` give the files. With
-`GLBMACHINE_KEYS` set, each call needs `Authorization: Bearer KEY`, which is
-where licence keys plug in.
+The web API (`serve`): `POST /v1/cars {"request": "...", "spec": "...",
+"sheet": false}` answers with an id; `GET /v1/cars/ID` gives the status and
+the report; `GET /v1/cars/ID/car.glb` and `/sheet.jpg` give the files;
+`GET /v1/cars` lists the last 40 cars and `GET /v1/catalogue` every make,
+model and year the catalogue has. With `GLBMACHINE_KEYS` set, each call
+needs `Authorization: Bearer KEY`, which is where licence keys plug in.
+
+## The Maker: the program in one page
+
+`glbmachine serve`, then open the machine's address (`http://localhost:8080`).
+The page that opens is the whole program:
+
+1. **Make, Model**: type them; the lists offer what the catalogue has and
+   the line under them gives its years.
+2. **Year or plate**: `2012`, or a UK plate, `12` (March 2012) or `62`
+   (September 2012).
+3. **Spec** (optional): as a car check gives it. A badge the catalogue has
+   as its own model picks that model (`GTI` with a Golf, `GR` with a
+   Yaris, `Type R` with a Civic). A trim name (`ST-Line`, `R-Line`,
+   `M Sport`) or an engine keeps the standard body, and the report says
+   so. Doors (`5dr`) and body (`hatchback`) in it count too.
+4. **Doors** and **Colour**: the DVLA colour names.
+5. **Build GLB**: a clock runs against the two minutes. Catalogue cars take
+   5-20 s, or about 25 s more with the four-view picture ticked.
+
+The car then opens in 3D with every door, the bonnet and the tailgate open:
+- drag to turn it, the wheel to zoom, and go all the way round, underneath
+  too;
+- **Doors**, **Bonnet**, **Tailgate** and **Open all** shut and open them;
+- **Spin** turns it on its own;
+- **Flip** turns it over to show the floor, the engine from below and the
+  exhaust;
+- **Picture** saves the view as a PNG;
+- **Download GLB** gives the file for the app.
+
+Beside the car is what was built: the catalogue model and how it matched
+the year, what opens, what is missing, the paint, the model's credit and
+licence (with whether commercial use is allowed), and the time each step
+took. **Fix a part in Studio** opens the same car in GLB Studio. **Recent**
+lists every car built, so you can open any of them again.
 
 ## GLB Studio: fix a car by hand
 
@@ -124,6 +159,29 @@ Hand-checked figures in `batch.WHEELBASE` win. Tested on seven cars against hand
 Micra K12, Fiesta Mk6, Golf Mk8, Qashqai J11, Polo Mk6, Focus Mk4 and
 Corsa D (through Vauxhall to Opel). All matched, and the A-Class W176/W177
 overlap was settled by proportion.
+
+## Add your own model
+
+A model bought from a shop or made for you goes into the catalogue beside
+the shared one, and a request then finds it like any other. GLB, glTF and
+OBJ are read. For an OBJ, its `.mtl` colours, transparency and textures are
+packed in, and its object names are kept, so a shop's `Door_FL` still
+counts.
+
+```
+glbmachine add shop/yaris.obj --make Toyota --model Yaris --years 2011-2020 \
+    --doors 3 --licence "royalty-free, CGTrader standard" --author "..." --build
+glbmachine models                     # what you have added
+glbmachine remove toyota-yaris-2011-own-v1
+```
+
+`--doors` decides the doors the rigger cuts, and a request that asks for
+those doors prefers this model. The file is converted once, into
+`$GLBMACHINE_HOME/models`. The record goes into
+`$GLBMACHINE_HOME/catalogue_local.json`. Tested 2026-10-17: a 49 MB OBJ
+(431,000 triangles, 21 textures) was added in 7 s. "12 Yaris white colour
+2 door" then picked it and built it in 15 s, with two side doors, bonnet
+and tailgate.
 
 ## The steps by hand
 

@@ -168,6 +168,15 @@ def find(want, cat):
     if want.get("body"):
         hb = [i for i in hits if (i.get("bodyStyle") or want["body"]) == want["body"]]
         hits = hb or hits
+
+    def doors_rank(i):
+        # a record that gives its doors (an added model: `glbmachine add
+        # --doors 3`) and agrees with the request wins; one that disagrees
+        # comes last ("2 door" / "3 door" is one side door, "4/5 door" two)
+        if not want.get("doors") or not i.get("doors"):
+            return 1
+        side = lambda n: 2 if n <= 3 else 4  # noqa: E731
+        return 0 if side(int(i["doors"])) == side(want["doors"]) else 2
     yr = want.get("year")
 
     def years(i):
@@ -180,25 +189,78 @@ def find(want, cat):
             if g and g[0] - 1 <= y0 <= g[1]:
                 return min(g[0], y0), max(min(g[1], time.localtime().tm_year), i.get("yearEnd") or y0)
         return y0, i.get("yearEnd") or y0 + 7
-    if yr:
-        on_sale = [i for i in hits if years(i)[0] - 1 <= yr <= years(i)[1]]
-        others = sorted(hits, key=lambda i: min(abs(yr - years(i)[0]), abs(yr - years(i)[1])))
-    else:
-        on_sale, others = hits, hits
-    order = lambda L: sorted(L, key=lambda i: -((i.get("yearStart") or 1990) - 4 * batch.GRADE.get(i.get("qualityGrade"), 3)))  # noqa: E731
-    if on_sale:
-        return order(on_sale)[0], others, "exact generation"
+    order = lambda L: sorted(L, key=lambda i: (doors_rank(i), -((i.get("yearStart") or 1990)  # noqa: E731
+                                                                - 4 * batch.GRADE.get(i.get("qualityGrade"), 3))))
+
+    def pick(hits):
+        if yr:
+            on_sale = [i for i in hits if years(i)[0] - 1 <= yr <= years(i)[1]]
+            others = sorted(hits, key=lambda i: (min(abs(yr - years(i)[0]), abs(yr - years(i)[1])), doors_rank(i)))
+        else:
+            on_sale, others = hits, hits
+        return (order(on_sale)[0] if on_sale else None), others
+
+    variant, badge = spec_variants(want.get("spec"), hits, pool, names, norm(make), rest)
+    if variant:
+        item, others = pick(variant)
+        if item:
+            want["spec_used"] = f"{badge} is its own model in the catalogue: built that one"
+            return item, others, "exact generation"
+        want["spec_used"] = "none: the catalogue has that variant only from other years, so the standard car is built"
+    item, others = pick(hits)
+    if item:
+        return item, others, "exact generation"
     return None, others, "model found, not that year's generation"
 
 
+# a trim, not a different car: "ST-Line" is a Fiesta with ST-look bumpers,
+# "GT Line", "R-Line", "S line", "AMG Line" the same; read as one word so
+# the badge before it (ST, GT, R, S) does not pick the sports model
+_TRIM_WORD = re.compile(r"\b([a-z0-9]+)[\s-]+(line|look|design|style|pack|edition|plus)\b")
+
+
+def spec_variants(spec, hits, pool, names, make_n, rest):
+    """The catalogue records of the variant a spec names: "GTI" with a Golf
+    asked for gives the Golf GTI records, "Type R" the Civic Type R. Only a
+    name that is the asked model plus words of the spec counts. Empty if the
+    spec names no variant the catalogue has. Also the badge as written
+    for the report ("GTI", "Type R")."""
+    if not spec or not hits:
+        return [], None
+    tok = [t for t in re.split(r"[^a-z0-9]+", _TRIM_WORD.sub(r"\1\2", spec.lower())) if t]
+    grams = {"".join(tok[a:b]): " ".join(t.upper() if len(t) <= 3 else t.capitalize() for t in tok[a:b])
+             for a in range(len(tok)) for b in range(a + 1, min(len(tok), a + 3) + 1)}
+    base = {n.replace(make_n, "") for i in hits for n in names(i)}
+    base = {b for b in base if b and b in rest}
+    out, badge = [], None
+    for i in pool:
+        for n in names(i):
+            n2 = n.replace(make_n, "")
+            b = next((b for b in base if n2.startswith(b) and n2[len(b):] in grams), None)
+            if b:
+                out.append(i)
+                badge = badge or grams[n2[len(b):]]
+                break
+    return out, badge
+
+
 def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=False, no_sheet=False,
-          out_file=None, full=False):
+          out_file=None, full=False, spec=None):
     """One request, start to finish, from the catalogue. Returns the report
     (with "result" and "files" when a car was built, "error" when the
-    catalogue has no such model)."""
+    catalogue has no such model). SPEC is the car's spec as a check gives it
+    ("GTI", "ST-Line 1.0 EcoBoost 5dr hatchback"): a badge the catalogue has
+    as its own model picks it, its doors and body count when the request
+    gives none, and the rest (engine, fuel, trim) leaves the body as it is."""
     args = argparse.Namespace(engine_pack=os.path.abspath(engine_pack), tools=tools, view_dir=view_dir,
                               port=port, no_sheet=no_sheet, keep_full=full)
     want = parse(request)
+    if spec and spec.strip():
+        want["spec"] = spec.strip()[:120]
+        sp = parse(want["spec"])
+        for k in ("doors", "body", "colour"):
+            if sp.get(k) and not want.get(k):
+                want[k] = sp[k]
     cat = batch.catalogue()
     item, others, why = find(want, cat)
     report = {"asked": want, "match": why,
@@ -212,6 +274,9 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
                                               if i["make"].lower() == want["make"]
                                               and i.get("publicationStatus") == "approved"})[:40]
         return report
+    if want.get("spec"):
+        report["spec_note"] = want.pop("spec_used", None) or \
+            "the spec names no separate model in the catalogue (a trim or engine): the standard body is built"
     report["asset"] = item["assetId"]
     report["source"] = item.get("sourceTitle")
     args.paint = COLOURS.get(want.get("colour"))
@@ -241,8 +306,11 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
     if want.get("doors"):
         # "2 door" / "3 door" in UK speech is a 3-door hatch: 2 side doors
         asked = 2 if want["doors"] <= 3 else 4
-        report["doors_note"] = (f"asked for {want['doors']}-door: this model has {len(side)} side doors"
-                                + ("" if len(side) == asked else " (the catalogue has no other body of this model)"))
+        report["doors_note"] = f"asked for {want['doors']}-door: {len(side)} side doors open" + (
+            "" if len(side) == asked else
+            " (only the front doors: the model's rear doors are not separate parts, or it is a 3-door; "
+            "mark them in Studio)" if len(side) < asked else
+            " (the catalogue's model of this car is a 5-door)")
     d = os.path.join(out, item["assetId"])
     report["files"] = {k: os.path.join(d, f) for k, f in
                        (("glb", "web.glb"), ("glb_full", "car_full.glb"), ("sheet", "sheet.jpg"))
@@ -265,8 +333,10 @@ def main():
     ap.add_argument("--port", type=int, default=8791)
     ap.add_argument("--exact", action="store_true", help="only that year's generation, never the nearest")
     ap.add_argument("--no-sheet", action="store_true", help="the car only, no four-view check sheet")
+    ap.add_argument("--spec", default=None, help='the spec, e.g. "GTI" or "ST-Line 1.0 5dr"')
     a = ap.parse_args()
-    report = build(a.request, a.engine_pack, a.tools, a.view_dir, a.out, a.port, a.exact, a.no_sheet, a.output, a.full)
+    report = build(a.request, a.engine_pack, a.tools, a.view_dir, a.out, a.port, a.exact, a.no_sheet, a.output, a.full,
+                   a.spec)
     print(json.dumps(report, indent=1, default=str))
     if "error" in report:
         sys.exit(2)
