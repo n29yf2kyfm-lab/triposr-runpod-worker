@@ -11,7 +11,9 @@ top2000_cars.csv), by rank, and each of its generations from --since on
 not have), the agent finds a licensed true side photograph (photos.py:
 Openverse and Wikimedia Commons, CC BY / BY-SA / CC0 / public domain only,
 checked to be one plain car side on with the generation's own wheel spacing
-and proportions) and keeps its measured outline:
+and proportions, and dated to the generation's years by its name or tags:
+generations of one model often share their proportions, so an undated
+photo could be any of them) and keeps its measured outline:
 
   roofline_table.json   (shipped with the machine) the outline as heights
                         along the car, the wheel centres, and the photo's
@@ -121,10 +123,14 @@ def run(top, since, hours, retry_days, per_gen_s):
             t0 = time.time()
             try:
                 r = photos.side_photo(make, wheelbase.wiki_title(model.lower()), y, d,
-                                      {k: b[k] for k in ("length", "wheelbase", "height")}, deadline_s=per_gen_s)
+                                      {k: b[k] for k in ("length", "wheelbase", "height")}, deadline_s=per_gen_s,
+                                      dated_only=True)
             except Exception as e:
                 r = {"none": True, "error": str(e)[:200]}
             done += 1
+            twin = next((k for k, v in lib.items() if r and r.get("file") and (v.get("photo") or {}).get("file") == r["file"]), None)
+            if twin:                                 # one photo is one generation's, never two
+                r = {"none": True, "rejected": (r.get("rejected") or []) + [{"file": r["file"], "why": f"already {twin}'s"}]}
             if r and r.get("cutout"):
                 rl = photos.roofline(r["cutout"], b["length"])
                 lib[key] = {"make": make, "model": model, "years": y, "generation": b.get("name"),

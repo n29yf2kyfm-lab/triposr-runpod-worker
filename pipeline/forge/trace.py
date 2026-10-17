@@ -101,6 +101,16 @@ def trace_side(rgb, mask, dims):
     RW = dims.get("wheel_d", 640) / 2000.0
     ground_cols = (ground - bot_o) / pxm < 0.03
     runs = [r for r in _runs(ground_cols) if (r[1] - r[0]) / pxm > 0.12]
+    if len(runs) < 2:
+        # a camera not quite level puts one tyre a few pixels lower than the
+        # other: find each against the ground of its own half of the car
+        runs = []
+        for half in (slice(0, n // 2), slice(n // 2, n)):
+            b = bot_o[half]
+            g = float(np.percentile(b, 97))
+            own = [(r[0] + half.start, r[1] + half.start) for r in _runs((g - b) / pxm < 0.03) if (r[1] - r[0]) / pxm > 0.12]
+            if own:
+                runs.append(max(own, key=lambda r: r[1] - r[0]))
     if len(runs) >= 2:
         runs = sorted(runs, key=lambda r: -(r[1] - r[0]))[:2]
         centres = sorted(((r[0] + r[1]) / 2 / (n - 1)) for r in runs)

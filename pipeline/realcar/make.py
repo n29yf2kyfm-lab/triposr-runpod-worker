@@ -313,12 +313,25 @@ def refused():
     tried again, so a request does not wait on a known failure."""
     import rig
     try:
-        return {a for a, v in json.load(open(_refused_path())).items() if v.get("rigger") == rig.VERSION}
+        return {a for a, v in json.load(open(_refused_path())).items()
+                if v.get("rigger") == rig.VERSION and not v.get("missing")}
     except (OSError, ValueError):
         return set()
 
 
-def _remember_refused(asset, why):
+def incomplete():
+    """Catalogue models this rigger version made with parts missing (doors on
+    one side, no tailgate): {asset: [parts]}. Still usable, but a stand-in
+    tries the complete ones first."""
+    import rig
+    try:
+        return {a: v["missing"] for a, v in json.load(open(_refused_path())).items()
+                if v.get("rigger") == rig.VERSION and v.get("missing")}
+    except (OSError, ValueError):
+        return {}
+
+
+def _remember_refused(asset, why, missing=None):
     import rig
     p = _refused_path()
     try:
@@ -326,6 +339,8 @@ def _remember_refused(asset, why):
     except (OSError, ValueError):
         d = {}
     d[asset] = {"why": why, "rigger": rig.VERSION, "at": time.strftime("%Y-%m-%d")}
+    if missing:
+        d[asset]["missing"] = sorted(missing)
     os.makedirs(os.path.dirname(p), exist_ok=True)
     json.dump(d, open(p + ".tmp", "w"), indent=1)
     os.replace(p + ".tmp", p)
@@ -355,12 +370,31 @@ def _generation(make, model, year, online=False):
     return dict(b, family=fam)
 
 
+# makers that share platforms and a family look: a stand-in from the same
+# group looks more like the car than one from another group
+GROUP = {m: g for g, ms in {
+    "vw": ("volkswagen", "skoda", "seat", "cupra", "audi", "porsche", "bentley", "lamborghini"),
+    "stellantis": ("peugeot", "citroen", "ds", "vauxhall", "opel", "fiat", "alfa-romeo", "jeep", "abarth", "lancia",
+                   "chrysler", "dodge", "maserati"),
+    "renault": ("renault", "dacia", "nissan", "infiniti", "mitsubishi"),
+    "hyundai": ("hyundai", "kia", "genesis"),
+    "bmw": ("bmw", "mini", "rolls-royce"),
+    "toyota": ("toyota", "lexus", "suzuki"),
+    "mercedes": ("mercedes-benz", "smart"),
+    "jlr": ("jaguar", "land-rover"),
+    "geely": ("volvo", "polestar", "lotus"),
+    "ford": ("ford",), "honda": ("honda",), "mazda": ("mazda",), "subaru": ("subaru",), "tesla": ("tesla",),
+    "mg": ("mg",), "byd": ("byd",)}.items() for m in ms}
+
+
 def donors(target, fam, cat, make, model_key, want, skip=()):
     """Catalogue cars to make a stand-in from, best first: the same body,
     then the nearest in size; the asked model's other generation first, the
-    same make next; the doors asked for, a model ExpertCarCheck may use
-    commercially and the better grade breaking ties."""
-    out = []
+    same make next, then the same maker group (its family face, often its
+    platform); one that came out short of parts before goes later; the
+    doors asked for, a model ExpertCarCheck may use commercially and the
+    better grade breaking ties."""
+    out, short = [], incomplete()
     for i in cat.values():
         if i.get("publicationStatus") != "approved" or not i.get("desktopGlbUrl") or i["assetId"] in skip \
                 or batch.is_game(i):
@@ -391,8 +425,11 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
         variant = 0.15 if badge and badge.group(0).lower() not in (str(want.get("words") or "") + " "
                                                                      + str(want.get("spec") or "")).lower() else 0.0
         age = min(abs((i.get("yearStart") or target["years"][0] or 2015) - (target["years"][0] or 2015)) * 0.01, 0.15)
-        score = (size + age + variant + (0 if (mk.lower(), md.lower()) == model_key else 0.3) + (0 if mk.lower() == make else 0.08)
+        a_, b_ = (x.lower().replace(" ", "-") for x in (mk, make))
+        kin = 0 if a_ == b_ else 0.08 if GROUP.get(a_, a_) == GROUP.get(b_, b_) else 0.15
+        score = (size + age + variant + (0 if (mk.lower(), md.lower()) == model_key else 0.3) + kin
                  + doors_off + (0 if batch.credit_of(i)["commercial"] else 0.12)
+                 + 0.25 * len(short.get(i["assetId"], ()))          # it came out short of these parts before
                  + 0.03 * batch.GRADE.get(i.get("qualityGrade"), 3))
         out.append((round(score, 4), i["assetId"], i))
     return [i for _, _, i in sorted(out)]
@@ -574,6 +611,7 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
                 best = (report, item, rec)
             passed.append({"asset": item["standin_donor"], "source": item.get("sourceTitle"),
                            "why": "missing " + ", ".join(rec["missing"])})
+            _remember_refused(item["standin_donor"], passed[-1]["why"], rec["missing"])   # next time, later in line
             continue
         if built:
             break
@@ -617,7 +655,9 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
                 report["result"] = rec
                 rl = (rec.get("standin") or {}).get("roofline") or {}
                 report["standin"]["photo"] = {"file": ph["file"], "author": ph.get("author"), "licence": ph.get("licence"),
-                                              "page": ph.get("page"), "roofline_off_cm": [rl.get("roofline_off_cm_before"),
+                                              "page": ph.get("page"), "dated": ph.get("dated", True),
+                                              "view": ph.get("view") or "side",
+                                              "roofline_off_cm": [rl.get("roofline_off_cm_before"),
                                                                                         rl.get("roofline_off_cm_after")],
                                               "used_for": "the roofline only: nothing of the photo is in the car"}
                 if ph.get("photo") and os.path.exists(ph["photo"]):

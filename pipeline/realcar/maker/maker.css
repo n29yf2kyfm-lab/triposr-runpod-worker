@@ -102,7 +102,7 @@ input[type=checkbox] { accent-color: var(--act); margin: 0; }
 .report dt { color: var(--faint); }
 .report dd { margin: 0; overflow-wrap: anywhere; }
 .report dd.mono { font: 12px var(--mono); }
-.report .warn { color: var(--warn); }
+.report .warn, .report .warn-text { color: var(--warn); }
 .report a { color: var(--text); }
 .report .refphoto { width: 100%; max-width: 240px; border-radius: 4px; display: block; margin-bottom: 2px; background: var(--panel-2); }
 .chips { display: flex; flex-wrap: wrap; gap: 4px; }

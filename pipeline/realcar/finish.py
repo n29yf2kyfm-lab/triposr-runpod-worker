@@ -640,6 +640,48 @@ def finish(src, spec, out, base_dir="."):
             entry = log[part] if part == "bonnet" else log[part]["cut"]
             entry.update({"area_m2": round(float(pa), 3), "triangles_split": nsplit})
 
+    # a bonnet is a skin: what is not paint stays on it only where it lies
+    # just under the painted panel (its liner, hinges, washer jets), and the
+    # parts the rigger called lamps never ride on it. A model
+    # that joins its headlamps or grille to the bonnet panel (the Superb's)
+    # would otherwise lift them with it. A bonnet set in the Studio is taken
+    # as given.
+    if "bonnet" not in manual:
+        panel = [r["P"][r["I"][r["tri_part"] == "bonnet"]].reshape(-1, 3)
+                 for r in recs if r["mat"] in paint_ids and (r["tri_part"] == "bonnet").any()]
+        if panel:
+            from scipy.ndimage import minimum_filter
+            S, cell = np.vstack(panel), 0.04
+            x0, z0 = S[:, 0].min() - cell, S[:, 2].min() - cell
+            gx = np.floor((S[:, 0] - x0) / cell).astype(int)
+            gz = np.floor((S[:, 2] - z0) / cell).astype(int)
+            under = np.full((gx.max() + 3, gz.max() + 3), np.inf)
+            np.minimum.at(under, (gx, gz), S[:, 1])          # the panel's underside, cell by cell
+            under = minimum_filter(under, size=3)              # and its neighbours: no gaps at the seams
+            moved = 0
+            for r in recs:
+                on = r["tri_part"] == "bonnet"
+                if r["mat"] in paint_ids or not on.any():
+                    continue
+                if str(r.get("rig") or "").startswith("lamps"):     # the rigger's own lamps: never the bonnet's
+                    r["tri_part"] = np.where(on, "body", r["tri_part"])
+                    moved += int(on.sum())
+                    continue
+                c = r["P"][r["I"][on]].mean(1)
+                cx = np.floor((c[:, 0] - x0) / cell).astype(int)
+                cz_ = np.floor((c[:, 2] - z0) / cell).astype(int)
+                inside = (cx >= 0) & (cz_ >= 0) & (cx < under.shape[0]) & (cz_ < under.shape[1])
+                ref = np.full(len(c), np.inf)
+                ref[inside] = under[cx[inside], cz_[inside]]
+                off_skin = ~np.isfinite(ref) | (c[:, 1] < ref - 0.06)
+                if off_skin.any():
+                    idx = np.where(on)[0][off_skin]
+                    r["tri_part"] = r["tri_part"].copy()
+                    r["tri_part"][idx] = "body"
+                    moved += int(off_skin.sum())
+            if moved and isinstance(log.get("bonnet"), dict):
+                log["bonnet"]["left_on_the_body"] = {"triangles": moved, "why": "not paint and not under the panel"}
+
     # ── the engine bay: one generic engine in every car ──
     # The owner's rule: every car gets the same generic petrol bay. What a
     # model has under its bonnet (nothing, a tub of flat sheets, or a rough

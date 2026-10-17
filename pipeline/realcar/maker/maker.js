@@ -228,17 +228,27 @@ function report(job) {
     return;
   }
   $('#repTitle').textContent = 'Built';
+  function debadged(r) {
+    const d = (r.standin || {}).debadged;
+    if (!d) return "; its badges and plates too";
+    const n = (d.front_badge_pieces || 0) + (d.rear_badge_pieces || 0);
+    return n || d.plates ? `; its badges are painted over and pressed flat${d.plates ? ', its number plates left plain' : ''}`
+      : "; no badges were found to take off";
+  }
   row('Car', `${esc(rep.source || rep.asset)}<br><span class="faint mono">${esc(rep.asset)}</span>`);
   const st = rep.standin;
   if (st) {
     const z = st.size_mm || {};
     row('Stand-in', `<b>${esc(st.car)}</b> ${esc((st.years || []).filter(Boolean).join('–'))}${st.years && !st.years[1] ? '–' : ''}` +
       `<br>its real size: ${[z.length, z.width, z.height].map(v => (v / 1000).toFixed(2)).join(' × ')} m, wheelbase ${(z.wheelbase / 1000).toFixed(2)} m` +
-      `<br><span class="faint">made from ${esc(st.donor_source || st.donor)}, reshaped. Lamps, grille and badges are the donor's.</span>`, 'warn');
+      `<br><span class="faint">made from ${esc(st.donor_source || st.donor)}, reshaped. Lamps and grille are the donor's` +
+      `${debadged(res)}.</span>`, 'warn');
     if (st.photo) {
       const off = st.photo.roofline_off_cm || [];
       row('Photo', `<img class="refphoto" id="refPhoto" alt="The real car, side on">` +
         `<br>roofline shaped to it: ${esc(off[0])} cm off before, ${esc(off[1])} cm after` +
+        `${st.photo.view === 'nearly side-on' ? ' (the photo is a little turned)' : ''}` +
+        `${st.photo.dated === false ? '<br><span class="warn-text">the photo does not say its year: it may show another generation of the same shape</span>' : ''}` +
         `<br><span class="faint">${esc(st.photo.file)}${st.photo.author ? ' by ' + esc(st.photo.author) : ''}, ${esc(st.photo.licence)}` +
         `${st.photo.page ? ` · <a href="${esc(st.photo.page)}" target="_blank" rel="noopener">source</a>` : ''}. Only measured: nothing of it is in the car.</span>`);
     } else if (st.photo_search) {

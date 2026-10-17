@@ -44,7 +44,12 @@ def check(cutout, dims):
     lab, n = label(a)
     if n > 1 and np.bincount(lab.ravel())[1:].max() < 0.9 * a.sum():
         return "more than one thing in the picture"
-    r = roofline(cutout, dims["length"])
+    if (~a.any(0)[np.where(a.any(0))[0].min():np.where(a.any(0))[0].max() + 1]).any():
+        return "the outline has a gap in it"
+    try:
+        r = roofline(cutout, dims["length"])
+    except Exception:
+        return "the outline could not be traced"
     wb = r["u_front"] - r["u_rear"]
     if wb < 0.2:
         return "both wheels not seen on the ground"
@@ -88,22 +93,41 @@ def _openverse(queries, deadline):
             if m and (h.get("width") or 0) > 1280:     # Wikimedia serves standard thumbnail widths only
                 u = f"{m.group(1)}/thumb/{m.group(2)}/{m.group(3)}/{m.group(4)}/1280px-{m.group(4)}"
             out.append({"title": h.get("title") or h["id"], "url": u, "w": h.get("width") or 0, "h": h.get("height") or 1,
-                        "source": h.get("source"),
+                        "source": h.get("source"), "thumb": h.get("thumbnail"),
+                        "tags": " ".join(str(t.get("name") or "") for t in h.get("tags") or [])[:400],
                         "licence": f"{lic} {h.get('license_version') or ''}".strip(), "author": (h.get("creator") or "")[:120],
                         "page": h.get("foreign_landing_url") or h.get("url")})
     return out
 
 
-def _fetch(url, path):
+def _fetch(url, path, wait_s=0.0):
+    """Download URL to PATH. A server that says "too many requests" is asked
+    once more after the pause it names, if that fits in WAIT_S."""
     import urllib.request
-    try:
-        with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=30) as r:
-            open(path, "wb").write(r.read())
-        return True
-    except Exception as e:
-        if getattr(e, "code", None) == 429:
+    for attempt in (0, 1):
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=30) as r:
+                open(path, "wb").write(r.read())
+            return True
+        except Exception as e:
+            if getattr(e, "code", None) != 429:
+                return False
             THROTTLED["files"] += 1
-        return False
+            try:
+                pause = float(e.headers.get("Retry-After") or 2)
+            except (TypeError, ValueError, AttributeError):
+                pause = 2.0
+            if attempt or pause > wait_s:
+                return False
+            time.sleep(pause)
+    return False
+
+
+def _via_openverse(c, path):
+    """The same photo from Openverse's own copy (its image proxy), for a host
+    that will not serve this machine; Flickr's come through, Wikimedia's
+    mostly not (the proxy answers 424 when it cannot fetch them either)."""
+    return bool(c.get("thumb")) and _fetch(c["thumb"] + "?full_size=true", path)
 
 
 THROTTLED = {"openverse": 0, "files": 0}           # refusals for too many requests, for photolib's pacing
@@ -137,10 +161,16 @@ def from_library(make, model, year0):
     return library().get(libkey(make, model, year0))
 
 
-def side_photo(make, model, years, out_dir, dims, deadline_s=45, max_dl=10):
-    """The first licensed, plain-painted true side view of the car (passing
+def side_photo(make, model, years, out_dir, dims, deadline_s=45, max_dl=24, dated_only=False):
+    """The first licensed, plain-painted side view of the car (passing
     check()), as {"cutout", "photo", "file", "author", "licence", "page",
-    "seconds", "rejected"}; None if none in time."""
+    "dated", "seconds", "rejected"}; {"none": True, ...} if none in time.
+    A true side elevation is tried first; a nearly side-on photo (the car a
+    little turned) counts when check() finds the car's own wheel spacing and
+    proportions in it, which a real three-quarter view never has. "dated"
+    says whether the file's name or tags gave the right years (an undated
+    photo of a model's other generation with the same proportions can pass
+    check()); DATED_ONLY keeps only those, for the shipped library."""
     import finder
     t0 = time.time()
     os.makedirs(out_dir, exist_ok=True)
@@ -148,35 +178,46 @@ def side_photo(make, model, years, out_dir, dims, deadline_s=45, max_dl=10):
     y0 = (years or [None])[0]
     lo, hi = (y0 or 1900) - 1, ((years or [None, None])[1] or time.localtime().tm_year) + 1
 
-    def era(title):
-        ys = [int(y) for y in re.findall(r"\b(19[5-9]\d|20[0-4]\d)\b", title)]
+    def era(c):
+        """2 the right years named, 1 none named, 0 other years."""
+        ys = [int(y) for y in re.findall(r"\b(19[5-9]\d|20[0-4]\d)\b", c["title"])]
+        if not ys:                                  # the photographer's tags, when the name has no year
+            ys = [int(y) for y in re.findall(r"\b(19[5-9]\d|20[0-4]\d)\b", c.get("tags") or "")]
         return 1 if not ys else (2 if any(lo <= y <= hi for y in ys) else 0)
-    hits = _openverse([f"{Make} {model} side", f"{Make} {model} {y0 or ''}".strip(), f"{Make} {model}"],
-                      t0 + deadline_s * 0.4)
+    hits = _openverse([f"{Make} {model} side", f"{Make} {model} profile", f"{Make} {model} {y0 or ''}".strip(),
+                       f"{Make} {model}"], t0 + deadline_s * 0.4)
     if not hits and deadline_s >= 90:              # Openverse down: Commons itself, polite and slow (agent runs only)
         titles = finder.search([f"{Make} {model} side"], limit=30)
         hits = finder.info(titles) if titles and time.time() - t0 < deadline_s * 0.5 else []
     want_words = [w.lower() for w in model.split()]
     cands = [c for c in hits if (finder.OK_LICENCE.match(c["licence"] or "") or c["licence"].startswith(("CC0", "Public")))
              and c["w"] >= 1000
-             and 1.3 <= c["w"] / c["h"] <= 3.8 and not finder.BAD_NAME.search(c["title"]) and era(c["title"])
+             and 1.3 <= c["w"] / c["h"] <= 3.8 and not finder.bad_name(c["title"], make) and era(c) >= (2 if dated_only else 1)
              and all(w in c["title"].lower() for w in want_words)]
     # a file named "side" or "profile" first (most photos are three-quarter
     # views); then Flickr's (Wikimedia's file server throttles busy
     # addresses, HTTP 429); then the right years, the biggest
-    cands.sort(key=lambda c: (1 if finder.SIDE_HINT.search(c["title"]) else 0, c.get("source") == "flickr", era(c["title"]),
+    cands.sort(key=lambda c: (1 if finder.SIDE_HINT.search(c["title"]) else 0, c.get("source") == "flickr", era(c),
                               c["w"]), reverse=True)
     from rembg import new_session, remove
     sess, rejected = None, []
-    got = 0
+    got, refused = 0, {}
     for c in cands:
         if time.time() - t0 > deadline_s or got >= max_dl:
             break
         name = re.sub(r"[^A-Za-z0-9_.-]", "_", c["title"].replace("File:", ""))[:100] + "_" + str(abs(hash(c["url"])) % 10**6)
         raw = os.path.join(out_dir, name + ".jpg")
-        if not os.path.exists(raw) and not _fetch(c["url"], raw):
-            rejected.append({"file": c["title"], "why": "could not be downloaded"})
-            continue
+        host = (re.match(r"https?://([^/]+)", c["url"]) or [None, ""])[1]
+        if not os.path.exists(raw):
+            # a host that has refused twice in this search is not asked again
+            # (it is busy or blocking this address); Openverse's copy is tried
+            ok = refused.get(host, 0) < 2 and _fetch(c["url"], raw, wait_s=5 if deadline_s >= 60 else 0)
+            if not ok:
+                refused[host] = refused.get(host, 0) + 1
+                ok = _via_openverse(c, raw)
+            if not ok:
+                rejected.append({"file": c["title"], "why": "could not be downloaded"})
+                continue
         got += 1
         try:
             im = Image.open(raw).convert("RGB")
@@ -187,21 +228,26 @@ def side_photo(make, model, years, out_dir, dims, deadline_s=45, max_dl=10):
             rows, cols = np.where(a.any(1))[0], np.where(a.any(0))[0]
             if not len(rows):
                 continue
+            if a[:, :2].sum() > 0.05 * a.shape[0] or a[:, -2:].sum() > 0.05 * a.shape[0]:
+                rejected.append({"file": c["title"], "why": "the car runs off the edge of the photo"})
+                continue
             cut = cut.crop((cols.min(), rows.min(), cols.max() + 1, rows.max() + 1))
             cp = os.path.join(out_dir, "side.cut.png")
             cut.save(cp)
         except Exception:
             continue
-        view, _ = finder.classify(cp)
-        why = "not a side view" if view != "side" else "liveried or two-tone" if not finder.plain_paint(cp) \
-            else check(cp, dims)
+        view, asp = finder.classify(cp)
+        near_side = view == "34" and 2.0 <= asp < 2.5          # a little turned: check() decides
+        why = "not a side view" if view != "side" and not near_side \
+            else "liveried or two-tone" if not finder.plain_paint(cp) else check(cp, dims)
         if why:
             rejected.append({"file": c["title"], "why": why})
             continue
         photo = os.path.join(out_dir, "photo.jpg")
         im.save(photo, quality=85)
         return {"cutout": cp, "photo": photo, "file": c["title"], "author": c["author"], "licence": c["licence"],
-                "page": c["page"], "seconds": round(time.time() - t0, 1), "rejected": rejected}
+                "page": c["page"], "view": "side" if view == "side" else "nearly side-on", "dated": era(c) == 2,
+                "seconds": round(time.time() - t0, 1), "rejected": rejected}
     return {"none": True, "rejected": rejected, "seconds": round(time.time() - t0, 1)}
 
 

@@ -199,9 +199,13 @@ glbmachine make "..." --no-standin              # the nearest generation as it i
    estate, SUV, MPV, coupé, convertible, pickup or van. The record's own
    word wins, and a title saying "Shooting Brake" or "Estate" counts. Then
    the nearest in size, with height weighted most. Then the asked model's
-   own other generation first, the same make next and the closer year. Ties
-   go to the doors asked for, then the plain car before a GTI or Allspace,
-   then a licence ExpertCarCheck may use commercially, then the better grade.
+   own other generation first, the same make next, then the same maker
+   group (Volkswagen, Skoda, SEAT and Audi; Peugeot, Citroën, Vauxhall and
+   Fiat; Renault, Dacia and Nissan; Hyundai and Kia; and so on), whose cars
+   share a family look and often a platform, and the closer year. A donor
+   that came out short of parts before goes later. Ties go to the doors
+   asked for, then the plain car before a GTI or Allspace, then a licence
+   ExpertCarCheck may use commercially, then the better grade.
 3. **The reshape** (`standin.py`, between the rig and the finish):
    - one axis at a time, so normals stay exact;
    - the target's wheelbase and overhangs along the car, each arch at the
@@ -212,6 +216,28 @@ glbmachine make "..." --no-standin              # the nearest generation as it i
 
    The roof is measured with aerials and fins ignored. The finisher then
    hangs the doors, fits the engine and paints, as for any car.
+
+   **The donor's name comes off** (`standin.debadge`), found by shape on the
+   car's front and rear faces:
+   - number plates (plate-sized flat rectangles near the centre line,
+     measured in their own plane, so a tilted one counts) become plain:
+     white at the front, yellow at the back;
+   - the brand's badge (small pieces on the face within 13 cm of the centre
+     line) and the model and engine lettering at the back are painted in
+     the body colour and pressed flat onto the panel they sit on, taking the
+     panel's own normal, so not even their shape is left in relief;
+   - whatever lies inside a badge's outline goes with it: its backing, its
+     inlay and a lit logo (a ring of fragments counts as holding its middle);
+   - glass, lamps and anything seen through the glass are never touched.
+     A lit badge or plate that the rigger filed with the lamps still counts
+     as a badge.
+
+   Tested on the four donors used so far. The Superb's ŠKODA, SUPERB and
+   TSI 380 and its bonnet badge are gone, and the Arteon's VW, ARTEON and
+   HYBRID too. The Tiguan's VW roundels are body-colour discs, with faint
+   outlines left at the back. The Captur's diamond is part of its grille
+   trim, so the frame stays. The lamps and grille keep the donor's shape.
+   That is the stand-in's honest limit.
 4. **Up to three donors are tried**, and the most complete car is kept:
    - a donor the rigger refuses is skipped and remembered in
      `$GLBMACHINE_HOME/rig_refused.json`, so no request waits on it again;
@@ -221,17 +247,30 @@ glbmachine make "..." --no-standin              # the nearest generation as it i
    - the sheet is drawn only for the car kept.
 
 5. **The photo agent** (`photos.py`) runs beside the build, with a
-   45-second limit. It looks for a photo of the real car on Openverse
+   45-second limit and up to 24 downloads. It looks for a photo of the real car on Openverse
    (openly licensed images from Wikimedia Commons and Flickr, each with its
    licence and author), and on Commons itself as a backup. It keeps only
    licences that allow commercial use: CC BY, CC BY-SA, CC0, public domain.
    It takes side and profile files first, removes the background (rembg, on
-   the CPU), and keeps the first photo that passes three checks:
+   the CPU), and keeps the first photo that passes these checks:
+   - the whole car in the picture (not running off an edge), in one piece;
    - one car, and a plain-painted one;
    - both wheels on the ground, at the real car's wheelbase-to-length
      spacing within 6%;
    - its height-to-length proportion within 8%, which rejects an older car
      of the same name.
+
+   A true side view is tried first. A nearly side-on photo (the car a
+   little turned) counts when it passes the same checks, which a real
+   three-quarter view cannot. The wheels are found against the ground of
+   each half of the car, so a camera that is not quite level still counts.
+   File names that say "interior", "toy" or "rally" are skipped, matched as
+   whole words: until 2026-10-17 "toy" matched every Toyota. A host that
+   says "too many requests" is asked once more after the pause it names, if
+   that fits the time, and not again in that search after two refusals.
+   Openverse's own copy of the photo is tried instead. A photo whose name
+   or tags give no year is marked: the Maker says it may show another
+   generation of the same shape.
 
    Then the stand-in's roof, windscreen, bonnet and tail are shaped to the
    photo's outline (`standin.roof_stage`). The change is up to ±20% above
@@ -243,11 +282,13 @@ glbmachine make "..." --no-standin              # the nearest generation as it i
      outline fell from 5.9 to 2.7 cm (its own model), from 8.2 to 4.8 cm
      (a Mk8 reshaped to it) and from 7.5 to 3.1 cm (a Corsa D reshaped to
      it).
-   - Honest limits: most car photos are three-quarter views, which the
-     checks reject. Wikimedia throttles busy addresses (HTTP 429). From the
-     test machine's shared address no usable side photo of a Tiguan Mk3 or
-     a Puma was found in time, and those stand-ins were shaped from their
-     size alone, as the report says.
+   - Honest limits. Most car photos are three-quarter views, which the
+     checks reject. Wikimedia refuses the test machine's shared address
+     outright: every direct download is HTTP 429, and Openverse's copy of a
+     Wikimedia file is 424. So from there only Flickr photos come through,
+     and most stand-ins were shaped from their size alone, as the report
+     says. On a server with its own address the Wikimedia files, which are
+     most of the side views, should download. That is not yet tested.
    **The standby library** (`photolib.py`, `glbmachine photos`). An agent
    goes down the UK licensing list by rank, through each model's
    generations from 2000 on. It finds a side photo the same way and keeps
@@ -256,7 +297,10 @@ glbmachine make "..." --no-standin              # the nearest generation as it i
    the photo's file, author, licence and page: numbers and a credit only,
    no photograph. The photos stay in `$GLBMACHINE_HOME/photos/`. A stand-in
    takes its roofline from the library at once, and searches only when the
-   library has nothing.
+   library has nothing. The library keeps only photos dated to the
+   generation by their name or tags. One model's generations often share
+   their proportions, and an undated "VW Golf" passed the checks for three
+   Golfs at once.
    - The run can be stopped and restarted: done cars are skipped, and a
      car not found is tried again after 30 days.
    - It pauses when a source says "too many requests".
@@ -270,7 +314,8 @@ glbmachine make "..." --no-standin              # the nearest generation as it i
 The report's `standin` says what the car is, its real size, its body and
 the donor. The Maker labels the car "stand-in". The file's credit names the
 donor model and its licence, and says the car was reshaped. What a stand-in
-is not: the real car's face. Its lamps, grille and badges are the donor's.
+is not: the real car's face. Its lamps and grille are the donor's shape;
+its badges and plates are taken off (above).
 
 Tested 2026-10-17 (four-view sheet included):
 
@@ -281,9 +326,11 @@ Tested 2026-10-17 (four-view sheet included):
 | Vauxhall Insignia 2018 blue (looked up online) | 2020 Skoda Superb, a liftback like it (Audi A6: left doors fused; Honda Accord: front doors only) | 53 s |
 | Nissan Micra 2004 red (in the catalogue: no stand-in) | its own model | 17 s |
 
-All four open every door, the bonnet and the tailgate. Known flaw: the
-Superb model's headlamps are joined to its bonnet, so they lift with it.
-That comes from the source model, and is fixed once in the Studio.
+All four open every door, the bonnet and the tailgate. The Superb model's
+headlamps came joined to its bonnet, so at first they lifted with it. The
+finisher now keeps them on the body (the bonnet rule below), with no Studio
+fix needed. Rebuilt with debadging, the Insignia takes 31 s, the Puma 11 s
+and the Tiguan 6 s (rigs reused).
 
 ## Add your own model
 
@@ -326,7 +373,7 @@ is rescaled to it), `engine_pack` (the workshop petrol bay, exported by
 
 | Step | How |
 | --- | --- |
-| Bonnet | A modelled car's panels are separate pieces. The bonnet is the largest paint piece lying flat over the front axle, plus the badges on it. Hinged at its rear edge, opens 55°. |
+| Bonnet | A modelled car's panels are separate pieces. The bonnet is the largest paint piece lying flat over the front axle, plus the badges on it. Hinged at its rear edge, opens 55°. A piece that is not paint goes with it only if it lies on the bonnet's own skin (under the panel, within 6 cm). The rigger's lamps never go with it. Some source models join the headlamps to the bonnet, such as the Skoda Superb's 7,330 triangles; they now stay on the car. |
 | Bonnet, welded | When the bonnet is welded into one shell with the wings and has no shut line in the mesh, it is cut. The region is the shell's top over the front: ahead of the windscreen base plus the cowl, facing up, and above the wheels. The line is that region's half-width along the car, median- then Gaussian-smoothed, and straight across at the cowl. Triangles that cross the line are split along it, with every attribute interpolated, so the edge is a clean curve rather than a staircase. |
 | Tailgate | The rear window, the paint panel directly under it, and every piece inside the box they span that sits on the car's rear skin (within 12 cm of the rearmost surface). That takes the tail-lamp inners, the badge, the wiper and the spoiler, and leaves the boot trim and the corner lamps on the body. Hinged at its top edge, opens 75°. |
 | Tailgate, from the rig | If no rear window is found (some models make it from dark plastic, not glass), the rig machine's tailgate stands. Like a door, it then takes every piece in its box that touches it: the rear window and the inner lamps. |

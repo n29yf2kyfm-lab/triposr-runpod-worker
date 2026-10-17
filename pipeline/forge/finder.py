@@ -30,8 +30,18 @@ from PIL import Image
 
 UA = {"User-Agent": "ecc-forge/0.1 (https://github.com/n29yf2kyfm-lab/triposr-runpod-worker; reference finder)"}
 OK_LICENCE = re.compile(r"^(CC BY(-SA)?( \d\.\d)?|CC0|Public domain|CC-BY(-SA)?.*)$", re.I)
-BAD_NAME = re.compile(r"interior|engine|dash|cockpit|seat|wheel|detail|badge|logo|emblem|boot|trunk|steering|"
-                      r"gauge|cluster|screen|key|brochure|crash|race|rally|police|taxi|toy|model car|lego|cutaway", re.I)
+# whole words only: "toy" is not to catch every Toyota, nor "race" a Grace;
+# a make that is one of these words (SEAT) is taken out of the name first
+BAD_NAME = re.compile(r"\b(?:interior|engine|dash(?:board)?|cockpit|seats?|wheels?|details?|badges?|logos?|emblems?|"
+                      r"boot|trunk|steering|gauges?|cluster|screen|keys?|brochure|crash(?:ed)?|rac(?:e|es|ing)|"
+                      r"rall(?:y|ies)|police|taxis?|toys?|die[ -]?cast|model car|scale model|lego|cutaway|wreck(?:ed)?)\b", re.I)
+
+
+def bad_name(title, make=""):
+    """Whether a file's name says it is not a photo of the whole real car."""
+    for w in str(make or "").replace("-", " ").split():
+        title = re.sub(r"\b" + re.escape(w) + r"\b", " ", title, flags=re.I)
+    return bool(BAD_NAME.search(title))
 FRONT_HINT = re.compile(r"front|vorne|_v\.|8v\.|face|nose|avant", re.I)
 REAR_HINT = re.compile(r"rear|back|hinten|_h\.|8h\.|heck|tail|arri", re.I)
 SIDE_HINT = re.compile(r"side|profile|seite|lateral|profil", re.I)
@@ -183,7 +193,7 @@ def find_photos(make, model, hints, out_dir, max_dl=14, session=None):
         if t not in titles:
             titles.insert(0, t)
     cands = [c for c in info(titles) if OK_LICENCE.match(c["licence"] or "") and c["w"] >= 1000
-             and 0.9 <= c["w"] / c["h"] <= 3.8 and not BAD_NAME.search(c["title"])]
+             and 0.9 <= c["w"] / c["h"] <= 3.8 and not bad_name(c["title"], make)]
     # prefer files whose names say which view they are, then the biggest
     def score(c):
         n = c["title"]
