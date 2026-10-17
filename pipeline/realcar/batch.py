@@ -28,6 +28,7 @@ import csv
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 import threading
@@ -175,6 +176,37 @@ def run(cmd, timeout, log=None, **kw):
     return p
 
 
+SHOTS = [("hero", "az=38&el=14&d=6.6&ty=0.6"), ("all", "az=40&el=22&d=6.9&open=all_open"),
+         ("rear", "az=215&el=18&d=6.9&open=all_open"), ("bay", "az=8&el=48&d=3.4&tz=1.25&ty=0.6&open=bonnet_open")]
+
+
+def render_sheet(d, args):
+    """The four-view check sheet of a car finished with keep_finished
+    (D/finished.glb), drawn after the build: a request that tries more than
+    one model draws only the one it keeps. Seconds taken, or an error."""
+    fin = os.path.join(d, "finished.glb")
+    if not os.path.exists(fin):
+        return {"error": "no finished car to draw"}
+    rel = os.path.relpath(fin, args.view_dir)
+    t0 = time.time()
+    p = subprocess.run(["node", os.path.join(args.tools, "view.mjs"), "1000", "640"] +
+                       [f"{os.path.join(d, n)}.png:f={rel}&{q}" for n, q in SHOTS],
+                       capture_output=True, text=True, timeout=900, env={**os.environ, "VIEW_PORT": str(args.port)})
+    try:
+        from PIL import Image
+        ims = [Image.open(os.path.join(d, n + ".png")).convert("RGB") for n, _ in SHOTS]
+        W, H = ims[0].size
+        S = Image.new("RGB", (W * 2, H * 2))
+        for i, im in enumerate(ims):
+            S.paste(im, ((i % 2) * W, (i // 2) * H))
+        S.save(os.path.join(d, "sheet.jpg"), quality=86)
+        for n, _ in SHOTS:
+            os.remove(os.path.join(d, n + ".png"))
+    except Exception as e:
+        return {"error": f"{e}: {(p.stderr or '')[-300:]}"}
+    return {"seconds": round(time.time() - t0, 1)}
+
+
 def one(target, item, args, out):
     aid = item["assetId"]
     d = os.path.join(out, aid)
@@ -196,9 +228,11 @@ def one(target, item, args, out):
         body = re.search(r"\b[2-5][- ]?(?:door|dr)\b|coupe|cabrio|convertible", item["sourceTitle"], re.I).group(0)
     rr = json.load(open(rr_path)) if os.path.exists(rigged) and os.path.exists(rr_path) else None
     two = lambda b: bool(TWO_DOOR.search(b or ""))  # noqa: E731
+    fresh_rig = False
     if rr is not None and two(rr.get("body_style")) == two(body):
         tm["rig"] = 0.0                          # rigged before, with as many doors: finish again only
     else:
+        fresh_rig = True
         if rr is not None:                       # another body: the old cut, and edits made on it, no longer apply
             for f in ("src.glb", "src.orig.glb", "edits.json", "result.json", "src.report.json"):
                 if os.path.exists(os.path.join(rig, f)):
@@ -227,16 +261,39 @@ def one(target, item, args, out):
         rec["status"] = "rig failed"
         return rec
     rep = json.load(open(os.path.join(rig, "src.report.json")))
+    # a stand-in (standin.py): the donor's cut, reshaped to the car asked for.
+    # The donor's own cut is kept beside it, so a rebuild reshapes it afresh
+    st = item.get("standin")
+    if st:
+        import standin
+        donor = os.path.join(rig, "src.donor.glb")
+        if fresh_rig or not os.path.exists(donor):
+            shutil.copyfile(rigged, donor)
+        st_p = os.path.join(rig, "standin.json")
+        prev = json.load(open(st_p)) if os.path.exists(st_p) else None
+        if fresh_rig or not prev or prev.get("target") != st or prev.get("version") != standin.VERSION:
+            t0 = time.time()
+            try:
+                prev = {"target": st, "version": standin.VERSION, "warp": standin.warp(donor, st, rigged)}
+            except Exception as e:
+                rec["status"] = f"stand-in failed: {e}"
+                return rec
+            json.dump(prev, open(st_p, "w"), indent=1)
+            tm["reshape"] = round(time.time() - t0, 1)
+        rec["standin"] = prev["warp"]
     cr = credit_of(item)
     rec["credit"] = cr
     spec = {"name": f"{item['make'].title()} {item.get('modelFamily') or item['model']}",
             "engine_pack": args.engine_pack,
             "credit": f"Body, cabin and wheels: '{cr['title']}'" + (f" by {cr['author']}" if cr["author"] else "")
                       + f", {cr['licence']}" + (f", {cr['url']}" if cr["url"] else "") + ". "
-                      "Rigged, glass cleared and engine bay fitted by the ExpertCarCheck GLB machine."}
+                      + (f"Reshaped to the size of the {st['name']} (a stand-in: not that car's own model), r" if st else "R")
+                      + "igged, glass cleared and engine bay fitted by the ExpertCarCheck GLB machine."}
     if getattr(args, "paint", None):
         spec["paint"] = list(args.paint)
-    if aid in WHEELBASE:
+    if st:
+        spec["wheelbase"] = st["wheelbase"]      # reshaped to it already: the finisher checks, and moves nothing
+    elif aid in WHEELBASE:
         spec["wheelbase"] = WHEELBASE[aid]
     else:
         spec["wheelbase"] = auto_wheelbase(item, rep, rec)
@@ -267,8 +324,7 @@ def one(target, item, args, out):
     # from the finished file, so it need not wait for the compression
     web = os.path.join(d, "web.glb")
     rel = os.path.relpath(fin, args.view_dir)
-    shots = [("hero", "az=38&el=14&d=6.6&ty=0.6"), ("all", "az=40&el=22&d=6.9&open=all_open"),
-             ("rear", "az=215&el=18&d=6.9&open=all_open"), ("bay", "az=8&el=48&d=3.4&tz=1.25&ty=0.6&open=bonnet_open")]
+    shots = SHOTS
     t0 = time.time()
     procs = {
         "validate": subprocess.Popen(["node", os.path.join(args.tools, "validate.mjs"), fin],
@@ -311,9 +367,10 @@ def one(target, item, args, out):
     except Exception as e:
         rec["sheet_error"] = str(e)
     rec["timings_s"] = tm
+    keep_fin = getattr(args, "keep_finished", False)    # a sheet is drawn from it afterwards (render_sheet)
     if getattr(args, "keep_full", False) and os.path.exists(fin):
-        os.replace(fin, os.path.join(d, "car_full.glb"))    # uncompressed: opens in any 3D program
-    for f in (src, fin):                         # the rigged copy stays, so a fix re-finishes in seconds
+        (shutil.copyfile if keep_fin else os.replace)(fin, os.path.join(d, "car_full.glb"))   # opens in any 3D program
+    for f in (src,) if keep_fin else (src, fin):  # the rigged copy stays, so a fix re-finishes in seconds
         if os.path.exists(f):
             os.remove(f)
     for f in os.listdir(rig):
@@ -323,6 +380,8 @@ def one(target, item, args, out):
     # for and missed (a three-door car has no rear doors to miss)
     want = set(rr.get("opens") or []) | set(rr.get("missing") or []) | {"bonnet", "tailgate"}
     want = {"bonnet" if w == "panel_bonnet" else w for w in want}
+    # doors come in pairs: a right front door means a left front door to open
+    want |= {w[:6] + {"l": "r", "r": "l"}[w[6]] for w in want if re.fullmatch(r"door_[fr][lr]", w)}
     rec["missing"] = sorted(want - set(flog.get("opens") or []))
     ok = not rec["missing"] and rec["validator"].get("errors") == 0 and rec["web_bytes"] \
         and not rec.get("scale_unverified")

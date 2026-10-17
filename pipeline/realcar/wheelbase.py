@@ -90,10 +90,11 @@ def _clean(v):
     return re.sub(r"\{\{\s*cite[^{}]*\}\}", "", v, flags=re.I)
 
 
-def _mm(v):
+def _mm(v, lo=1500, hi=7000):
     """The first length in mm in an infobox value: {{convert|2430|mm|..}},
     {{convert|2548-2564|mm|..}} or {{convert|4292|-|4367|mm|..}} (a range:
-    its middle), '2,430 mm'."""
+    its middle), '2,430 mm'. Only figures from LO to HI count: a wheelbase or
+    a length by default, a width or a height given its own range."""
     v = _clean(v)
     m = re.search(r"\{\{\s*(?:convert|cvt)\s*\|([^{}]*?)\|\s*mm\b", v, re.I)
     if m:
@@ -101,8 +102,37 @@ def _mm(v):
     else:
         m = re.search(r"([\d,]{4,6})\s*(?:[-–]\s*([\d,]{4,6})\s*)?mm", v)
         nums = [float(x.replace(",", "")) for x in m.groups() if x] if m else []
-    nums = [n for n in nums if 1500 <= n <= 7000]
+    nums = [n for n in nums if lo <= n <= hi]
     return int(round((nums[0] + nums[-1]) / 2)) if nums else None
+
+
+def _text(v):
+    """An infobox value as plain words, its first line or list item only
+    ('{{ubl|5-door [[hatchback]]|...}}' -> '5-door hatchback')."""
+    v = re.sub(r"<br\s*/?>|\s/\s|;", "\n", _clean(v), flags=re.I)
+    v = re.sub(r"\{\{\s*(?:ubl|unbulleted list|plainlist|flatlist|hlist)\s*\|?", "", v, flags=re.I)
+    v = re.sub(r"\[\[(?:[^\]|]*\|)?([^\]]*)\]\]", r"\1", v)
+    v = re.sub(r"\{\{[^{}]*\}\}|<[^>]+>|'{2,3}", " ", v)
+    first = next((x for x in re.split(r"\n|\*|\|", v) if x.strip(" }{")), "")
+    return " ".join(first.strip(" }{").split())
+
+
+def body_family(body, cls="", name=""):
+    """hatch, saloon, estate, suv, mpv, coupe, convertible, pickup or van,
+    from a generation's body style, else its class, else its name."""
+    for text in (body, cls, name):
+        t = (text or "").lower()
+        for fam, rx in (("convertible", r"convertible|cabrio|roadster|spider|spyder|targa"),
+                        ("pickup", r"pick-?up|\bute\b"), ("van", r"panel van|\bvan\b"),
+                        ("mpv", r"\bmpv\b|minivan|people carrier|multi-purpose|leisure activity"),
+                        ("suv", r"\bsuv\b|crossover|sport utility|off-road|4x4"),
+                        ("estate", r"estate|station wagon|\bwagon\b|touring|shooting brake|\bavant\b"),
+                        ("coupe", r"coup[eé]"),
+                        ("saloon", r"saloon|sedan|notchback|fastback"),
+                        ("hatch", r"hatchback|liftback|supermini|city car|small family|hot hatch")):
+            if re.search(rx, t):
+                return fam
+    return None
 
 
 def _years(v):
@@ -140,7 +170,9 @@ def infoboxes(text, title):
             continue
         yr = _years(fields.get("production", "")) or _years(fields.get("model_years", ""))
         out.append({"page": title, "name": re.sub(r"\[\[|\]\]|'''|''", "", fields.get("name", "")).strip()[:80],
-                    "years": yr, "wheelbase": wb, "length": _mm(fields.get("length", ""))})
+                    "years": yr, "wheelbase": wb, "length": _mm(fields.get("length", "")),
+                    "width": _mm(fields.get("width", ""), 1300, 2700), "height": _mm(fields.get("height", ""), 1000, 2600),
+                    "body": _text(fields.get("body_style", ""))[:80], "class": _text(fields.get("class", ""))[:80]})
     return out
 
 
@@ -167,7 +199,14 @@ def _boxes_for(base):
     boxes, pages = [], []
     if not text:
         return boxes, pages, title, 0 if getattr(_LAST, "missing", False) else 1
-    if len(text) < 6000:                       # a pointer page: follow its first car link
+    if len(text) < 6000:                       # a pointer page
+        own = list(dict.fromkeys(re.findall(r"\[\[(" + re.escape(base) + r" \([^\]|#]+\))", text)))
+        if own:                                # "Ford Puma (crossover)", "Ford Puma (sport compact)": each
+            for link in own[:6]:
+                t, tt = raw(link)
+                if t:
+                    boxes += infoboxes(t, tt)
+            return boxes, own, title, 0
         m = re.search(r"\[\[(" + re.escape(base.split()[0]) + r" [^\]|#]+)", text)
         if m and m.group(1).strip() != base:
             text, title = raw(m.group(1).strip())
@@ -195,9 +234,20 @@ TABLE = os.path.join(HERE, "wheelbase_table.json")
 _TABLE = {}
 
 
+def local_table_path():
+    """Cars looked up while the machine runs (a model the catalogue does not
+    have, for a stand-in): kept in the work folder, beside the shipped table."""
+    home = os.path.expanduser(os.environ.get("GLBMACHINE_HOME", "~/.glbmachine"))
+    return os.path.join(home, "wheelbase_local.json")
+
+
 def table():
     if not _TABLE and os.path.exists(TABLE):
         _TABLE.update(json.load(open(TABLE)))
+        try:
+            _TABLE.update({k: v for k, v in json.load(open(local_table_path())).items() if k not in _TABLE})
+        except (OSError, ValueError):
+            pass
     return _TABLE
 
 
@@ -292,8 +342,15 @@ def lookup(make, model, year, ratio=None, online=None):
         ent = fetch(make, model)
         with _LOCK:
             _TABLE[key] = ent
-            json.dump(_TABLE, open(TABLE + ".tmp", "w"), indent=0, sort_keys=True)
-            os.replace(TABLE + ".tmp", TABLE)
+            p = local_table_path()
+            try:
+                loc = json.load(open(p))
+            except (OSError, ValueError):
+                loc = {}
+            loc[key] = ent
+            os.makedirs(os.path.dirname(p), exist_ok=True)
+            json.dump(loc, open(p + ".tmp", "w"), indent=0, sort_keys=True)
+            os.replace(p + ".tmp", p)
     return choose(ent["boxes"], year, ratio)
 
 

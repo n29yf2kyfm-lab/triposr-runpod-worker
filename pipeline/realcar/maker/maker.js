@@ -229,7 +229,15 @@ function report(job) {
   }
   $('#repTitle').textContent = 'Built';
   row('Car', `${esc(rep.source || rep.asset)}<br><span class="faint mono">${esc(rep.asset)}</span>`);
-  row('Match', esc(rep.match || ''), /nearest/.test(rep.match || '') ? 'warn' : '');
+  const st = rep.standin;
+  if (st) {
+    const z = st.size_mm || {};
+    row('Stand-in', `<b>${esc(st.car)}</b> ${esc((st.years || []).filter(Boolean).join('–'))}${st.years && !st.years[1] ? '–' : ''}` +
+      `<br>its real size: ${[z.length, z.width, z.height].map(v => (v / 1000).toFixed(2)).join(' × ')} m, wheelbase ${(z.wheelbase / 1000).toFixed(2)} m` +
+      `<br><span class="faint">made from ${esc(st.donor_source || st.donor)}, reshaped. Lamps, grille and badges are the donor's.</span>`, 'warn');
+  } else {
+    row('Match', esc(rep.match || ''), /nearest/.test(rep.match || '') ? 'warn' : '');
+  }
   if (rep.spec_note) row('Spec', esc(rep.spec_note));
   if ((rep.passed_over || []).length) row('Passed over', rep.passed_over.map(x =>
     `${esc(x.source || x.asset)} <span class="faint">(${esc(x.why === 'no wheels named' ? 'its wheels and doors are not separate parts' : x.why)})</span>`).join('<br>'));
@@ -405,7 +413,8 @@ async function showCar(job) {
     S.open = { doors: false, bonnet: false, tailgate: false };
     const rep = job.report || {};
     S.name = slug(job.request + (job.spec ? ' ' + job.spec : '')) || rep.asset || 'car';
-    $('#carName').innerHTML = esc(rep.source || rep.asset) + (job.quality === 'check' ? ' <span class="pill check">check</span>' : '');
+    $('#carName').innerHTML = (rep.standin ? esc(rep.standin.car) + ' <span class="pill check">stand-in</span>' : esc(rep.source || rep.asset)) +
+      (job.quality === 'check' ? ' <span class="pill check">check</span>' : '');
     $('#carName').hidden = false; $('#empty').hidden = true; $('#toolbar').hidden = false;
     for (const btn of $('#opens').querySelectorAll('button')) {
       const p = btn.dataset.part;

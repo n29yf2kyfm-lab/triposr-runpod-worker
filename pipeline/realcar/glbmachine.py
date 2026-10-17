@@ -27,7 +27,9 @@ the engine and exhaust, save a picture, download the GLB.
 
 WEB API (`serve`):
     POST /v1/cars            {"request": "Ford Fiesta 2015 blue", "spec": "ST-Line",
-                              "sheet": false, "exact": false}  -> 202 {"id", "status"}
+                              "sheet": false, "exact": false, "standin": true}  -> 202 {"id", "status"}
+                             (standin: a car the catalogue lacks is made from the nearest one of
+                             the same body, reshaped to its real size; false builds the nearest as it is)
     GET  /v1/cars            the last 40 cars asked for, newest first
     GET  /v1/cars/ID         -> {"id", "status": queued|building|done|failed, "report", "files"}
     GET  /v1/cars/ID/car.glb    the finished car (meshopt-compressed)
@@ -87,10 +89,11 @@ def setup(quiet=False):
     return {"home": HOME, "tools": TOOLS, "engine_pack": ENGINE_PACK}
 
 
-def make(request, sheet=True, exact=False, out=None, port=8791, out_file=None, full=False, spec=None):
+def make(request, sheet=True, exact=False, out=None, port=8791, out_file=None, full=False, spec=None, standin=True):
     import make as mk
     setup(quiet=True)
-    return mk.build(request, ENGINE_PACK, TOOLS, VIEW, out or CARS, port, exact, not sheet, out_file, full, spec)
+    return mk.build(request, ENGINE_PACK, TOOLS, VIEW, out or CARS, port, exact, not sheet, out_file, full, spec,
+                    standin)
 
 
 # ── your own models: added to a local catalogue beside the shared one ──────
@@ -176,7 +179,8 @@ class Jobs:
     def add(self, body):
         job = {"id": uuid.uuid4().hex[:12], "status": "queued", "asked_at": time.time(),
                "request": str(body["request"])[:200], "spec": str(body.get("spec") or "")[:120],
-               "sheet": bool(body.get("sheet")), "exact": bool(body.get("exact"))}
+               "sheet": bool(body.get("sheet")), "exact": bool(body.get("exact")),
+               "standin": body.get("standin", True) is not False}
         self.put(job)
         self.q.put(job["id"])
         return job
@@ -201,7 +205,8 @@ class Jobs:
             self.put(job)
             try:
                 rep = make(job["request"], sheet=job["sheet"], exact=job.get("exact", False),
-                           out=os.path.join(CARS, jid), port=port, spec=job.get("spec"))
+                           out=os.path.join(CARS, jid), port=port, spec=job.get("spec"),
+                           standin=job.get("standin", True))
                 job["report"] = rep
                 res = rep.get("result") or {}
                 job["status"] = "failed" if "error" in rep or not os.path.exists(rep.get("files", {}).get("glb", "")) \
@@ -518,6 +523,8 @@ def main():
     m.add_argument("--exact", action="store_true", help="only that year's generation, never the nearest")
     m.add_argument("--out", default=None, help="work folder for the build (default: the car library)")
     m.add_argument("--spec", default=None, help='the spec, e.g. "GTI" or "ST-Line 1.0 EcoBoost 5dr"')
+    m.add_argument("--no-standin", action="store_true",
+                   help="for a car the catalogue lacks, build the nearest as it is rather than a stand-in")
     b = sub.add_parser("batch")
     b.add_argument("--top", type=int, default=20)
     b.add_argument("--list", default="targets", choices=("targets", "top2000"))
@@ -552,7 +559,7 @@ def main():
         print(json.dumps(setup()))
     elif a.cmd == "make":
         rep = make(a.request, sheet=not a.no_sheet, exact=a.exact, out=a.out, out_file=a.output, full=a.full,
-                   spec=a.spec)
+                   spec=a.spec, standin=not a.no_standin)
         print(json.dumps(rep, indent=1, default=str))
         sys.exit(2 if "error" in rep else 0 if (rep.get("files") or {}).get("glb") else 3)
     elif a.cmd == "batch":

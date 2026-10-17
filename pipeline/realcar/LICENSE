@@ -2,7 +2,7 @@ ExpertCarCheck GLB Machine
 Copyright (c) 2026 ExpertCarCheck. All rights reserved.
 
 This software (the files in this folder, including rig.py, finish.py,
-edits.py, make.py, batch.py, wheelbase.py, glbmachine.py, importer.py, the
+edits.py, make.py, batch.py, wheelbase.py, glbmachine.py, importer.py, standin.py, the
 .mjs tools, view.html, the GLB Maker in maker/, the GLB Studio in studio/
 and assets/engine_pack.glb)
 is proprietary.

@@ -176,6 +176,68 @@ Micra K12, Fiesta Mk6, Golf Mk8, Qashqai J11, Polo Mk6, Focus Mk4 and
 Corsa D (through Vauxhall to Opel). All matched, and the A-Class W176/W177
 overlap was settled by proportion.
 
+## Stand-in cars: a car the catalogue does not have
+
+When the catalogue has no model of the car asked for, or not of the
+generation sold that year, the machine builds a **stand-in**. It takes the
+nearest catalogue car of the same body and reshapes it to the real car's
+size, so everything still works: doors, bonnet and tailgate open, the glass
+is clear, the cabin, engine bay and exhaust are there, and the paint is
+right.
+
+```
+glbmachine make "2026 Tiguan green 4 door"      # 2022 Tiguan Allspace, reshaped to the Tiguan Mk3
+glbmachine make "Vauxhall Insignia 2018 blue"   # no Insignia in the catalogue: a saloon of its size
+glbmachine make "..." --no-standin              # the nearest generation as it is, never reshaped
+```
+
+1. **The real car's size.** Its length, wheelbase, width, height and body
+   come from the wheelbase table (`wheelbase.py`). A model the table has
+   never seen is looked up on Wikipedia once, which is the agent's one
+   outside call, and kept in `$GLBMACHINE_HOME/wheelbase_local.json`.
+2. **The donor** (`make.donors`) must have the same body: hatch, saloon,
+   estate, SUV, MPV, coupé, convertible, pickup or van. The record's own
+   word wins, and a title saying "Shooting Brake" or "Estate" counts. Then
+   the nearest in size, with height weighted most. Then the asked model's
+   own other generation first, the same make next and the closer year. Ties
+   go to the doors asked for, then the plain car before a GTI or Allspace,
+   then a licence ExpertCarCheck may use commercially, then the better grade.
+3. **The reshape** (`standin.py`, between the rig and the finish):
+   - one axis at a time, so normals stay exact;
+   - the target's wheelbase and overhangs along the car, each arch at the
+     wheel's own scale;
+   - the height above the arch tops;
+   - the width across;
+   - the wheels moved whole to the new axles and track.
+
+   The roof is measured with aerials and fins ignored. The finisher then
+   hangs the doors, fits the engine and paints, as for any car.
+4. **Up to three donors are tried**, and the most complete car is kept:
+   - a donor the rigger refuses is skipped and remembered in
+     `$GLBMACHINE_HOME/rig_refused.json`, so no request waits on it again;
+   - a donor whose result misses parts gives way to the next. Doors on one
+     side only, or front doors only on a 5-door, count as missing;
+   - no new donor is started after 70 s;
+   - the sheet is drawn only for the car kept.
+
+The report's `standin` says what the car is, its real size, its body and
+the donor. The Maker labels the car "stand-in". The file's credit names the
+donor model and its licence, and says the car was reshaped. What a stand-in
+is not: the real car's face. Its lamps, grille and badges are the donor's.
+
+Tested 2026-10-17 (four-view sheet included):
+
+| Asked | Stand-in made from | Time |
+| --- | --- | --- |
+| 2026 Tiguan green 4 door | 2022 Tiguan Allspace (the plain 2020 Tiguan is fused: passed over once, then remembered) | 22 s |
+| Ford Puma 2021 grey | Renault Captur (Skoda Kamiq: doors not separate, passed over once) | 31 s |
+| Vauxhall Insignia 2018 blue (looked up online) | 2020 Skoda Superb, a liftback like it (Audi A6: left doors fused; Honda Accord: front doors only) | 53 s |
+| Nissan Micra 2004 red (in the catalogue: no stand-in) | its own model | 17 s |
+
+All four open every door, the bonnet and the tailgate. Known flaw: the
+Superb model's headlamps are joined to its bonnet, so they lift with it.
+That comes from the source model, and is fixed once in the Studio.
+
 ## Add your own model
 
 A model bought from a shop or made for you goes into the catalogue beside

@@ -293,16 +293,182 @@ def _choose(want, cat, exact, skip):
     return report, item
 
 
+RECORD_BODY = {"hatchback": "hatch", "hatch": "hatch", "saloon": "saloon", "sedan": "saloon", "estate": "estate",
+               "wagon": "estate", "suv": "suv", "crossover": "suv", "mpv": "mpv", "coupe": "coupe",
+               "convertible": "convertible", "cabriolet": "convertible", "roadster": "convertible",
+               "pickup": "pickup", "van": "van"}
+
+
+VARIANT = re.compile(r"\b(?:GTI|GTD|GTE|GTS|R32|RS ?\d?|ST|AMG|Type R|GR|Nismo|JCW|Cupra|vRS|SVR|Allspace|LWB|"
+                     r"Cabrio(?:let)?|Convertible|Coup[eé]|Works|Trophy|Rally|WRC)\b|\bgolf-r\b|\bgolf r\b|\b(?:tiguan|range rover|a6|a8|5 series) l\b",
+                     re.I)
+
+
+def _refused_path():
+    return os.path.join(os.path.expanduser(os.environ.get("GLBMACHINE_HOME", "~/.glbmachine")), "rig_refused.json")
+
+
+def refused():
+    """Catalogue models this rigger version could not use (fused shells): not
+    tried again, so a request does not wait on a known failure."""
+    import rig
+    try:
+        return {a for a, v in json.load(open(_refused_path())).items() if v.get("rigger") == rig.VERSION}
+    except (OSError, ValueError):
+        return set()
+
+
+def _remember_refused(asset, why):
+    import rig
+    p = _refused_path()
+    try:
+        d = json.load(open(p))
+    except (OSError, ValueError):
+        d = {}
+    d[asset] = {"why": why, "rigger": rig.VERSION, "at": time.strftime("%Y-%m-%d")}
+    os.makedirs(os.path.dirname(p), exist_ok=True)
+    json.dump(d, open(p + ".tmp", "w"), indent=1)
+    os.replace(p + ".tmp", p)
+
+
+def _generation(make, model, year, online=False):
+    """The wheelbase table's generation of MAKE MODEL built in YEAR (the newest
+    with no year), with its size and body family; None without a full size."""
+    try:
+        b = wheelbase.lookup(make, model, year or 2100, online=online)
+    except Exception:
+        return None
+    if not b.get("wheelbase"):
+        return None
+    fam = wheelbase.body_family(b.get("body"), b.get("class"), b.get("name"))
+    if not fam:
+        # the model's other generations' body (the Kuga's first two are SUVs),
+        # else its proportions: tall for its length is an SUV
+        ent = wheelbase.table().get(f"{make}|{model}".lower()) or {}
+        y0 = (b.get("years") or [year or 2015])[0]
+        near = sorted(((abs((x.get("years") or [9999])[0] - y0), wheelbase.body_family(x.get("body"), x.get("class"),
+                                                                                       x.get("name")))
+                       for x in ent.get("boxes", []) if x is not b), key=lambda t: t[0])
+        fam = next((f for _, f in near if f), None)          # the nearest generation in time
+        if not fam and b.get("height") and b.get("length"):
+            fam = "suv" if b["height"] >= 1560 and b["height"] / b["length"] >= 0.355 else None
+    return dict(b, family=fam)
+
+
+def donors(target, fam, cat, make, model_key, want, skip=()):
+    """Catalogue cars to make a stand-in from, best first: the same body,
+    then the nearest in size; the asked model's other generation first, the
+    same make next; the doors asked for, a model ExpertCarCheck may use
+    commercially and the better grade breaking ties."""
+    out = []
+    for i in cat.values():
+        if i.get("publicationStatus") != "approved" or not i.get("desktopGlbUrl") or i["assetId"] in skip:
+            continue
+        mk, md = batch.model_of(i)
+        b = _generation(mk, md, i.get("yearStart")) or {}
+        f = RECORD_BODY.get(str(i.get("bodyStyle") or "").lower()) or b.get("family")   # the record's own word first
+        title = str(i.get("sourceTitle") or "")
+        if re.search(r"shooting brake|\bestate\b|\btouring\b|\bavant\b|\bvariant\b|sports ?wagon|\bwagon\b|\bSW\b", title, re.I):
+            f = "estate"                         # the model's other body, not the one its page leads with
+        elif re.search(r"cabrio|convertible|roadster|spider|spyder", title, re.I):
+            f = "convertible"
+        if fam and f != fam:
+            continue
+        def off(k, w):
+            return abs(b[k] / target[k] - 1) * w if b.get(k) else 0.12 * w
+        size = off("length", 1.0) + off("height", 1.5) + off("width", 1.0)
+        three = bool(re.search(r"\b[23][- ]?(?:door|dr)\b|coup[eé]", str(i.get("sourceTitle") or ""), re.I)) \
+            or (i.get("doors") and int(i["doors"]) <= 3)
+        doors_off = 0.0
+        if want.get("doors"):
+            doors_off = 0.0 if three == (want["doors"] <= 3) else 0.4
+        elif three:
+            doors_off = 0.1                      # most cars on the road have rear doors
+        # a sporting or special version ("Golf GTI" for a Golf) after the plain
+        # car, unless the request or spec names it
+        badge = VARIANT.search(" ".join(str(i.get(k) or "") for k in ("model", "modelFamily", "sourceTitle", "assetId")))
+        variant = 0.15 if badge and badge.group(0).lower() not in (str(want.get("words") or "") + " "
+                                                                     + str(want.get("spec") or "")).lower() else 0.0
+        age = min(abs((i.get("yearStart") or target["years"][0] or 2015) - (target["years"][0] or 2015)) * 0.01, 0.15)
+        score = (size + age + variant + (0 if (mk.lower(), md.lower()) == model_key else 0.3) + (0 if mk.lower() == make else 0.08)
+                 + doors_off + (0 if batch.credit_of(i)["commercial"] else 0.12)
+                 + 0.03 * batch.GRADE.get(i.get("qualityGrade"), 3))
+        out.append((round(score, 4), i["assetId"], i))
+    return [i for _, _, i in sorted(out)]
+
+
+def _standin(want, report, item, cat, skip):
+    """For a car the catalogue does not have (or not in the year asked), a
+    stand-in: the nearest catalogue car of the same body, reshaped to the
+    real car's size (standin.py). (report, item) for it, or None to build as
+    before (no size known for the car)."""
+    if item is not None and report["match"].startswith("exact generation"):
+        return None
+    if item is not None:
+        make, model = (x.lower() for x in batch.model_of(item))
+        gen = _generation(make, model, want.get("year"))
+    elif want.get("make") and want.get("model_words"):
+        make, model = want["make"], want["model_words"]
+        gen = _generation(make, model, want.get("year"), online=True)     # the agent's one outside call
+    else:
+        return None
+    if not gen or not all(gen.get(k) for k in ("length", "width", "height")):
+        return None
+    y = gen.get("years") or [None, None]
+    if want.get("year") and y[0] and not (y[0] - 1 <= want["year"] <= y[1]):
+        return None                              # the table has no generation for that year either
+    title = wheelbase.MAKE_TITLE.get(make, make.title())
+    name = re.sub(r"<[^>]+>|\s+", " ", str(gen.get("name") or "")).strip()
+    name = name if name.lower().startswith(title.lower()) else f"{title} {wheelbase.wiki_title(model)} ({name})"
+    # the side doors it must open: the request's, else the most its body has ("3/5-door hatchback": 4)
+    nd = [int(x) for x in re.findall(r"([2-5])(?=[-/ ]?(?:\d-?)?door)", str(gen.get("body") or ""))]
+    nd = want.get("doors") or (max(nd) if nd else None)
+    target = {"name": name, "length": gen["length"], "wheelbase": gen["wheelbase"], "width": gen["width"],
+              "height": gen["height"], "years": [y[0], None if (y[1] or 0) >= 2100 else y[1]],
+              "body": gen.get("family"), "source": gen.get("source"),
+              "side_doors": (2 if nd <= 3 else 4) if nd else None}
+    ranked = donors(target, gen.get("family"), cat, make, (make, model), want, skip)
+    if not ranked:
+        return None
+    d = ranked[0]
+    dg = _generation(*batch.model_of(d), d.get("yearStart")) or {}
+    if (dg.get("name"), dg.get("page")) == (gen.get("name"), gen.get("page")):
+        # the donor is that very generation (its record gave other years): no
+        # stand-in, the car itself
+        report = dict(report, match="exact generation (the wheelbase table's years for it)", asset=d["assetId"],
+                      source=d.get("sourceTitle"))
+        report.pop("error", None)
+        report.pop("catalogue_has", None)
+        return report, d
+    sid = re.sub(r"[^a-z0-9]+", "-", f"{make} {model} {y[0] or ''}".lower()).strip("-")
+    it = dict(d, assetId=f"{d['assetId']}--as-{sid}", standin=target, standin_donor=d["assetId"])
+    report = dict(report)
+    report.pop("error", None)
+    report.pop("catalogue_has", None)
+    yrs = f"{y[0]}-" + ("" if target["years"][1] is None else str(target["years"][1]))
+    report["match"] = (f"stand-in: the catalogue has no {name} ({yrs}); "
+                       f"'{d.get('sourceTitle') or d['assetId']}' reshaped to its size")
+    report["standin"] = {"car": name, "years": target["years"], "size_mm": {k: target[k] for k in
+                         ("length", "wheelbase", "width", "height")}, "body": target["body"],
+                         "size_from": target["source"], "donor": d["assetId"], "donor_source": d.get("sourceTitle"),
+                         "others": [x["assetId"] for x in ranked[1:4]]}
+    report["asset"] = it["assetId"]
+    report["source"] = d.get("sourceTitle")
+    return report, it
+
+
 def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=False, no_sheet=False,
-          out_file=None, full=False, spec=None):
+          out_file=None, full=False, spec=None, standin=True):
     """One request, start to finish, from the catalogue. Returns the report
     (with "result" and "files" when a car was built, "error" when the
     catalogue has no such model). SPEC is the car's spec as a check gives it
     ("GTI", "ST-Line 1.0 EcoBoost 5dr hatchback"): a badge the catalogue has
     as its own model picks it, its doors and body count when the request
     gives none, and the rest (engine, fuel, trim) leaves the body as it is."""
+    # each try is built without its sheet and keeps its finished file; the
+    # sheet is drawn once, for the car kept
     args = argparse.Namespace(engine_pack=os.path.abspath(engine_pack), tools=tools, view_dir=view_dir,
-                              port=port, no_sheet=no_sheet, keep_full=full)
+                              port=port, no_sheet=True, keep_finished=True, keep_full=full)
     want = parse(request)
     if spec and spec.strip():
         want["spec"] = spec.strip()[:120]
@@ -323,29 +489,55 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
     # a model the rigger cannot use (its wheels and doors fused into a few
     # shells) is passed over for the next best, up to three, and the report
     # says why
-    passed = []
-    for _ in range(3):
-        report, item = _choose(want, cat, exact, {p["asset"] for p in passed})
+    passed, known, best, tried, t_start = [], refused(), None, [], time.time()
+    for attempt in range(3):
+        if attempt and time.time() - t_start > 70:
+            break                         # the two minutes: keep the best so far
+        skip = {p["asset"] for p in passed} | known
+        report, item = _choose(want, cat, exact, skip)
+        if standin and not exact:
+            st = _standin(report["asked"], report, item, cat, skip)
+            if st:
+                report, item = st
         if item is None:
             break
-        server = None
-        if not no_sheet:                  # the check sheet is drawn by a browser from this folder
-            server = subprocess.Popen([sys.executable, "-m", "http.server", str(port)], cwd=view_dir,
-                                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            time.sleep(1)
-        try:
-            t0 = time.time()
-            rec = batch.one({"rank": 0, "genModel": request}, item, args, out)
-            rec["seconds"] = round(time.time() - t0)
-        finally:
-            if server:
-                server.terminate()
+        t0 = time.time()
+        rec = batch.one({"rank": 0, "genModel": request}, item, args, out)
+        rec["seconds"] = round(time.time() - t0)
+        tried.append(item["assetId"])
         report["result"] = rec
-        if os.path.exists(os.path.join(out, item["assetId"], "web.glb")) and rec.get("status") in ("done", "check"):
+        built = os.path.exists(os.path.join(out, item["assetId"], "web.glb")) and rec.get("status") in ("done", "check")
+        if built and item.get("standin"):
+            # the real car's doors: a 5-door stand-in with front doors only is short of two
+            side = [p for p in ((rec.get("finish") or {}).get("opens") or []) if re.fullmatch(r"door_[fr][lr]", p)]
+            need = item["standin"].get("side_doors")
+            if need and len(side) < need:
+                rec["missing"] = sorted(set(rec.get("missing") or []) | ({"door_rl", "door_rr"} - set(side)))
+        if built and item.get("standin") and rec.get("missing"):
+            # a stand-in's donor is a choice: one that comes out with parts
+            # missing (doors on one side only) gives way to the next, and the
+            # most complete of the tries is kept
+            if best is None or len(rec["missing"]) < len(best[2]["missing"]):
+                best = (report, item, rec)
+            passed.append({"asset": item["standin_donor"], "source": item.get("sourceTitle"),
+                           "why": "missing " + ", ".join(rec["missing"])})
+            continue
+        if built:
             break
         rig = rec.get("rig") or {}
-        passed.append({"asset": item["assetId"], "source": item.get("sourceTitle"),
+        passed.append({"asset": item.get("standin_donor") or item["assetId"], "source": item.get("sourceTitle"),
                        "why": rig.get("refused") or rig.get("error") or rec.get("status")})
+        if rig.get("status") == "refused":
+            _remember_refused(passed[-1]["asset"], passed[-1]["why"])
+    if best is not None and (item is None or "error" in report or not report.get("result")
+                             or len((report["result"].get("missing") or [])) > len(best[2]["missing"])
+                             or not os.path.exists(os.path.join(out, item["assetId"], "web.glb"))):
+        report, item, rec = best
+        passed = [p for p in passed if p["asset"] != item.get("standin_donor")]
+    for a in set(tried) - {item and item["assetId"]}:     # finished files kept for a sheet only
+        f = os.path.join(out, a, "finished.glb")
+        if os.path.exists(f):
+            os.remove(f)
     if passed:
         report["passed_over"] = passed
     if item is None or "error" in report:
@@ -356,7 +548,7 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
         report["error"] = "no model of this car in the catalogue could be rigged"
         return report
     if passed:
-        report["match"] += f"; {len(passed)} model(s) passed over, the rigger could not use them"
+        report["match"] += f"; {len(passed)} other model(s) tried first and passed over (see passed_over)"
     side = [p for p in ((rec.get("finish") or {}).get("opens") or []) if p.startswith("door_") and p[5] in "fr"]
     report["side_doors_built"] = len(side)
     if want.get("doors"):
@@ -368,6 +560,21 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
             "mark them in Studio)" if len(side) < asked else
             " (the catalogue's model of this car is a 5-door)")
     d = os.path.join(out, item["assetId"])
+    if not no_sheet:                      # the sheet, drawn by a browser from the view folder
+        server = subprocess.Popen([sys.executable, "-m", "http.server", str(port)], cwd=view_dir,
+                                  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        time.sleep(0.6)
+        try:
+            sh = batch.render_sheet(d, args)
+        finally:
+            server.terminate()
+        if "seconds" in sh:
+            rec.setdefault("timings_s", {})["render"] = sh["seconds"]
+            rec.pop("sheet_error", None)
+        else:
+            rec["sheet_error"] = sh["error"]
+    if os.path.exists(os.path.join(d, "finished.glb")):
+        os.remove(os.path.join(d, "finished.glb"))
     report["files"] = {k: os.path.join(d, f) for k, f in
                        (("glb", "web.glb"), ("glb_full", "car_full.glb"), ("sheet", "sheet.jpg"))
                        if os.path.exists(os.path.join(d, f))}
@@ -390,9 +597,10 @@ def main():
     ap.add_argument("--exact", action="store_true", help="only that year's generation, never the nearest")
     ap.add_argument("--no-sheet", action="store_true", help="the car only, no four-view check sheet")
     ap.add_argument("--spec", default=None, help='the spec, e.g. "GTI" or "ST-Line 1.0 5dr"')
+    ap.add_argument("--no-standin", action="store_true", help="never reshape another car: the nearest as it is")
     a = ap.parse_args()
     report = build(a.request, a.engine_pack, a.tools, a.view_dir, a.out, a.port, a.exact, a.no_sheet, a.output, a.full,
-                   a.spec)
+                   a.spec, not a.no_standin)
     print(json.dumps(report, indent=1, default=str))
     if "error" in report:
         sys.exit(2)
