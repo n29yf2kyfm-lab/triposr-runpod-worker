@@ -151,8 +151,10 @@ def credit_of(item):
     by title and link, and says so."""
     raw = item.get("licence") or ""
     lic = next((name for rx, name in LICENCE if re.search(rx, raw, re.I)), raw or "unknown")
-    title = item.get("sourceTitle") or f"{item['make'].title()} {item.get('modelFamily') or item.get('model')}"
-    return {"title": title, "author": item.get("sourceCreator"), "licence": lic, "url": item.get("sourceUrl"),
+    make, model = model_of(item)
+    title = item.get("sourceTitle") or " ".join(w.upper() if len(w) <= 2 else w.capitalize()
+                                                for w in f"{make} {model}".replace("-", " ").split())   # Toyota GR Yaris
+    return {"title": title, "author": item.get("sourceCreator") or None, "licence": lic, "url": item.get("sourceUrl"),
             "commercial": lic in ("CC BY", "CC BY-SA", "CC0", "owner-supplied"),
             "author_missing": not item.get("sourceCreator")}
 
