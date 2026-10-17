@@ -218,6 +218,64 @@ def is_clear_glass(mat):
     return c[3] < 0.7 and max(c[:3]) - min(c[:3]) < 0.08
 
 
+def _normal_maps(m):
+    """The texture slots of a material that need a tangent space."""
+    out = []
+    if "normalTexture" in m:
+        out.append((m, "normalTexture"))
+    cc = m.get("extensions", {}).get("KHR_materials_clearcoat") or {}
+    if "clearcoatNormalTexture" in cc:
+        out.append((cc, "clearcoatNormalTexture"))
+    return out
+
+
+def ensure_tangents(g):
+    """Every primitive whose material needs a tangent space (a normal map, a
+    clear coat's normal map) gets tangents of its own, from its texture
+    coordinates: the source models seldom carry them, and a viewer left to
+    make its own may differ from another (glTF validator, a warning; an
+    error where the only normal map is the clear coat's). With no texture
+    coordinates the map cannot apply, and is dropped. Returns counts."""
+    mats = g.j.get("materials", [])
+    made = dropped = 0
+    for mesh in g.j.get("meshes", []):
+        for p in mesh["primitives"]:
+            if p.get("material") is None or "TANGENT" in p["attributes"]:
+                continue
+            slots = _normal_maps(mats[p["material"]])
+            if not slots:
+                continue
+            a = p["attributes"]
+            uv = f"TEXCOORD_{slots[0][0][slots[0][1]].get('texCoord', 0)}"
+            if not all(k in a for k in ("POSITION", "NORMAL", uv)):
+                for holder, key in slots:
+                    holder.pop(key, None)
+                dropped += 1
+                continue
+            P, N, UV = g.accessor(a["POSITION"]), g.accessor(a["NORMAL"]), g.accessor(a[uv])
+            I = g.accessor(p["indices"]).reshape(-1, 3).astype(np.int64) if "indices" in p \
+                else np.arange(len(P)).reshape(-1, 3)
+            e1, e2 = P[I[:, 1]] - P[I[:, 0]], P[I[:, 2]] - P[I[:, 0]]
+            d1, d2 = UV[I[:, 1]] - UV[I[:, 0]], UV[I[:, 2]] - UV[I[:, 0]]
+            r = d1[:, 0] * d2[:, 1] - d2[:, 0] * d1[:, 1]
+            r = np.where(np.abs(r) < 1e-12, 1e-12, r)
+            t = (e1 * d2[:, 1:2] - e2 * d1[:, 1:2]) / r[:, None]
+            bt = (e2 * d1[:, 0:1] - e1 * d2[:, 0:1]) / r[:, None]
+            T, B = np.zeros_like(P), np.zeros_like(P)
+            for k in range(3):
+                np.add.at(T, I[:, k], t)
+                np.add.at(B, I[:, k], bt)
+            n = N / np.maximum(np.linalg.norm(N, axis=1, keepdims=True), 1e-12)
+            T = T - n * (T * n).sum(1, keepdims=True)                 # Gram-Schmidt against the normal
+            bad = np.linalg.norm(T, axis=1) < 1e-9                       # no texture gradient: any tangent
+            T[bad] = np.cross(n, np.where(np.abs(n[:, :1]) < 0.9, [[1.0, 0, 0]], [[0, 1.0, 0]]))[bad]
+            T = T / np.maximum(np.linalg.norm(T, axis=1, keepdims=True), 1e-12)
+            w = np.where((np.cross(n, T) * B).sum(1) < 0, -1.0, 1.0)
+            a["TANGENT"] = g.add_accessor(np.c_[T, w].astype(np.float32), atype="VEC4")
+            made += 1
+    return {"made": made, "maps_dropped": dropped}
+
+
 def finish(src, spec, out, base_dir="."):
     log = {"src": os.path.basename(src)}
     # parts a person set by hand in the Studio stand as they are: no search,
@@ -1033,6 +1091,7 @@ def finish(src, spec, out, base_dir="."):
     if spec.get("credit"):
         j.setdefault("asset", {})["copyright"] = spec["credit"]
     j.setdefault("asset", {}).setdefault("extras", {})["realcar_finish"] = log
+    log["tangents"] = ensure_tangents(g)
     log["bytes"] = g.save(out)
     return log
 
