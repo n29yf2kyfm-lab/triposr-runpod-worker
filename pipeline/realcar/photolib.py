@@ -98,6 +98,15 @@ def generations(make, model, since):
 
 
 YEAR = re.compile(r"\b(19[5-9]\d|20[0-4]\d)\b")
+# another body of the same model: its outline is not this one's (a Tiguan
+# Allspace, a Golf Estate), though wheel spacing over length may agree
+OTHER_BODY = {"a long-wheelbase body": re.compile(r"allspace|\blwb\b|long[ -]wheel ?base|\bxwb\b", re.I),
+              "an estate": re.compile(r"\bestate\b|touring|\bavant\b|\bvariant\b|sport ?wagen|sports? ?wagon|\bwagon\b"
+                                      r"|\bsw\b|shooting ?brake|sports? ?tourer|\bkombi\b|\bbreak\b", re.I),
+              "a convertible": re.compile(r"cabrio|convertible|roadster|spider|spyder", re.I),
+              "a coupé": re.compile(r"coup[eé]", re.I),
+              "a van": re.compile(r"\bvan\b|panel ?van|\bcombi\b", re.I),
+              "a pickup": re.compile(r"pick-?up|double ?cab", re.I)}
 
 
 def why_not(b, gens, c, cutout):
@@ -108,6 +117,11 @@ def why_not(b, gens, c, cutout):
     as well (one model's generations often share them: the 2013 Yaris
     Hybrid-R concept passed for the 1999 Yaris, sold on till 2012)."""
     y0, y1 = b["years"][0], b["years"][1] or 2100
+    words = (c.get("title") or c.get("file") or "") + " " + (c.get("tags") or "")
+    own = (b.get("body") or "") + " " + (b.get("name") or "")
+    for what, rx in OTHER_BODY.items():
+        if rx.search(words) and not rx.search(own):
+            return f"{what}, not the {(b.get('body') or 'body').strip(' ,')} this generation is"
     if c.get("dated"):
         ys = [int(y) for y in YEAR.findall((c.get("title") or c.get("file") or "") + " " + (c.get("tags") or ""))]
         ys = [y for y in ys if y0 - 1 <= y <= y1 + 1] or [y0]
