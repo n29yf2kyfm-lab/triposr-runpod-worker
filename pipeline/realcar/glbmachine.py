@@ -224,14 +224,14 @@ def rebuild(d, port=8799):
     import batch
     b = _json(os.path.join(d, "build.json"))
     if b:
-        target, item, paint = b["target"], b["item"], b.get("paint")
+        target, item, paint, body = b["target"], b["item"], b.get("paint"), b.get("body_style")
     else:
         item = batch.catalogue().get(os.path.basename(d))
         if item is None:
             raise ValueError("no record of how this car was built")
-        target, paint = {"rank": 0, "genModel": f"{item['make']} {item.get('modelFamily') or item['model']}"}, None
+        target, paint, body = {"rank": 0, "genModel": f"{item['make']} {item.get('modelFamily') or item['model']}"}, None, None
     args = argparse.Namespace(engine_pack=ENGINE_PACK, tools=TOOLS, view_dir=VIEW, port=port, no_sheet=True,
-                              paint=paint)
+                              paint=paint, body_style=body)
     if os.path.exists(os.path.join(d, "sheet.jpg")):
         os.remove(os.path.join(d, "sheet.jpg"))     # it no longer shows this car
     return batch.one(target, item, args, os.path.dirname(d))

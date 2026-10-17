@@ -215,6 +215,12 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
     report["asset"] = item["assetId"]
     report["source"] = item.get("sourceTitle")
     args.paint = COLOURS.get(want.get("colour"))
+    # the doors asked for decide the body the rigger cuts: "2 door" / "3 door"
+    # is a three-door hatch or a coupe (one door each side), "4/5 door" not
+    if want.get("doors"):
+        args.body_style = "3-door" if want["doors"] <= 3 else f"{want['doors']}-door"
+    elif want.get("body"):
+        args.body_style = want["body"]
     out = out or os.path.join(view_dir, "make")
     os.makedirs(out, exist_ok=True)
     server = None

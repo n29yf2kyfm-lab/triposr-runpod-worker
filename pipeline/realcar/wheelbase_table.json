@@ -609,6 +609,7 @@
 "boxes": [],
 "tried": [
 "Audi E-Tron",
+"Audi E Tron",
 "Audi E Tron"
 ]
 },
@@ -4918,7 +4919,8 @@
 "boxes": [],
 "tried": [
 "Honda ZR-V",
-"Honda Zr V"
+"Honda Zr V",
+"Honda ZR-V"
 ]
 },
 "hyundai|accent": {
@@ -5123,6 +5125,7 @@
 "boxes": [],
 "tried": [
 "Hyundai Elantra-N",
+"Hyundai Elantra N",
 "Hyundai Elantra N"
 ]
 },
@@ -5130,7 +5133,8 @@
 "boxes": [],
 "tried": [
 "Hyundai Encino-EV",
-"Hyundai Encino Ev"
+"Hyundai Encino Ev",
+"Hyundai Encino EV"
 ]
 },
 "hyundai|getz": {
@@ -5694,6 +5698,7 @@
 "boxes": [],
 "tried": [
 "Hyundai Tucson-L-Turbo-Hybrid",
+"Hyundai Tucson L Turbo Hybrid",
 "Hyundai Tucson L Turbo Hybrid"
 ]
 },
@@ -5701,7 +5706,8 @@
 "boxes": [],
 "tried": [
 "Hyundai Tucson-Plug-IN-Hybrid",
-"Hyundai Tucson Plug In Hybrid"
+"Hyundai Tucson Plug In Hybrid",
+"Hyundai Tucson Plug IN Hybrid"
 ]
 },
 "hyundai|veloster-n": {
@@ -5834,6 +5840,7 @@
 "boxes": [],
 "tried": [
 "Jaguar E-Type",
+"Jaguar E-Type",
 "Jaguar E-Type"
 ]
 },
@@ -5859,6 +5866,7 @@
 "boxes": [],
 "tried": [
 "Jaguar F-Type Convertible",
+"Jaguar F TYpe COnvertible",
 "Jaguar F TYpe COnvertible"
 ]
 },
@@ -5899,6 +5907,7 @@
 "boxes": [],
 "tried": [
 "Jaguar Xfr-S",
+"Jaguar Xfr S",
 "Jaguar Xfr S"
 ]
 },
@@ -5953,6 +5962,7 @@
 "boxes": [],
 "tried": [
 "Jaguar Xkr-S",
+"Jaguar Xkr S",
 "Jaguar Xkr S"
 ]
 },
@@ -7428,7 +7438,8 @@
 "boxes": [],
 "tried": [
 "Mercedes-Benz Amg-GT",
-"Mercedes-Benz Amg Gt"
+"Mercedes-Benz Amg Gt",
+"Mercedes-Benz Amg GT"
 ]
 },
 "mercedes-benz|c-class": {
@@ -7520,6 +7531,7 @@
 "boxes": [],
 "tried": [
 "Mercedes-Benz Clk-Gtr",
+"Mercedes-Benz Clk Gtr",
 "Mercedes-Benz Clk Gtr"
 ]
 },
@@ -7977,6 +7989,7 @@
 "boxes": [],
 "tried": [
 "Mercedes-Benz Slr-Mclaren",
+"Mercedes-Benz Slr Mclaren",
 "Mercedes-Benz Slr Mclaren"
 ]
 },
@@ -7984,6 +7997,7 @@
 "boxes": [],
 "tried": [
 "Mercedes-Benz Sls-Amg",
+"Mercedes-Benz Sls Amg",
 "Mercedes-Benz Sls Amg"
 ]
 },
@@ -8922,6 +8936,7 @@
 "boxes": [],
 "tried": [
 "Nissan Fairlady-Z",
+"Nissan Z-car",
 "Nissan Z-car"
 ]
 },
@@ -8977,7 +8992,8 @@
 "boxes": [],
 "tried": [
 "Nissan GT-R-Nismo",
-"Nissan Gt R Nismo"
+"Nissan Gt R Nismo",
+"Nissan GT R Nismo"
 ]
 },
 "nissan|gt-r50": {
@@ -9390,6 +9406,7 @@
 "boxes": [],
 "tried": [
 "Nissan Patrol-Safari",
+"Nissan Patrol Safari",
 "Nissan Patrol Safari"
 ]
 },
@@ -12605,6 +12622,7 @@
 "boxes": [],
 "tried": [
 "Subaru Impreza-Wrx",
+"Subaru Impreza Wrx",
 "Subaru Impreza Wrx"
 ]
 },
@@ -12612,6 +12630,7 @@
 "boxes": [],
 "tried": [
 "Subaru Impreza-Wrx-Sti",
+"Subaru Impreza Wrx Sti",
 "Subaru Impreza Wrx Sti"
 ]
 },
@@ -12644,6 +12663,7 @@
 "boxes": [],
 "tried": [
 "Subaru Legacy-Wagon",
+"Subaru Legacy Wagon",
 "Subaru Legacy Wagon"
 ]
 },
@@ -12675,6 +12695,7 @@
 "boxes": [],
 "tried": [
 "Subaru Wrx-Wagon",
+"Subaru Wrx Wagon",
 "Subaru Wrx Wagon"
 ]
 },
@@ -13609,17 +13630,43 @@
 ]
 },
 "toyota|gr-corolla": {
-"boxes": [],
+"boxes": [
+{
+"base": 2,
+"length": 4410,
+"name": "Toyota GR Corolla",
+"page": "Toyota GR Corolla",
+"wheelbase": 2640,
+"years": [
+2022,
+2100
+]
+}
+],
 "tried": [
 "Toyota GR-Corolla",
-"Toyota Gr Corolla"
+"Toyota Gr Corolla",
+"Toyota GR Corolla"
 ]
 },
 "toyota|gr-yaris": {
-"boxes": [],
+"boxes": [
+{
+"base": 2,
+"length": 3995,
+"name": "Toyota GR Yaris",
+"page": "Toyota GR Yaris",
+"wheelbase": 2560,
+"years": [
+2020,
+2100
+]
+}
+],
 "tried": [
 "Toyota GR-Yaris",
-"Toyota Gr Yaris"
+"Toyota Gr Yaris",
+"Toyota GR Yaris"
 ]
 },
 "toyota|gr86": {
@@ -14298,6 +14345,7 @@
 "boxes": [],
 "tried": [
 "Toyota Proace-City-Verso",
+"Toyota Proace City Verso",
 "Toyota Proace City Verso"
 ]
 },

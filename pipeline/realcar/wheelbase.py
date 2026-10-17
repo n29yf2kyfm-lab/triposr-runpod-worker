@@ -217,8 +217,10 @@ def fetch(make, model):
     mt = MAKE_TITLE.get(make.lower(), make.title())
     mdl = model if re.search(r"[A-Z]", model) else wiki_title(model)
     bases = [ALIAS.get((make.lower(), model.lower()), f"{mt} {mdl}")]
-    if "-" in model and not re.search(r"\d", model):           # range-rover-evoque, 3-series
-        bases.append(f"{mt} {wiki_title(model.replace('-', ' '))}")
+    if "-" in model and not re.search(r"\d", model):           # range-rover-evoque, 3-series, gr-yaris
+        spaced = wiki_title(model.replace("-", " "))
+        bases.append(f"{mt} {spaced}")
+        bases.append(f"{mt} " + " ".join(w.upper() if len(w) <= 2 else w for w in spaced.split()))   # GR Yaris
     bases += EXTRA.get((make.lower(), model.lower()), [])
     if make.lower() in SISTER:
         bases.append(f"{SISTER[make.lower()]} {mdl}")

@@ -39,6 +39,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
 sys.path.insert(0, HERE)
 import finish  # noqa: E402
+from rig import TWO_DOOR  # noqa: E402
 import wheelbase  # noqa: E402
 
 GRADE = {"A": 0, "B": 1, "C": 2}
@@ -175,10 +176,22 @@ def one(target, item, args, out):
     rr_path = os.path.join(rig, "result.json")
     tm = {}
     t0 = time.time()
-    if os.path.exists(rigged) and os.path.exists(rr_path):
-        rr = json.load(open(rr_path))           # rigged before: finish again only
-        tm["rig"] = 0.0
+    # the body, so the rigger cuts the right number of doors: the request's
+    # ("2 door"), else the catalogue's (coupe, convertible...), else the
+    # source title's ("3dr")
+    body = getattr(args, "body_style", None) or item.get("bodyStyle") or ""
+    if not body and re.search(r"\b[2-5][- ]?(?:door|dr)\b|coupe|cabrio|convertible", item.get("sourceTitle") or "", re.I):
+        body = re.search(r"\b[2-5][- ]?(?:door|dr)\b|coupe|cabrio|convertible", item["sourceTitle"], re.I).group(0)
+    rr = json.load(open(rr_path)) if os.path.exists(rigged) and os.path.exists(rr_path) else None
+    two = lambda b: bool(TWO_DOOR.search(b or ""))  # noqa: E731
+    if rr is not None and two(rr.get("body_style")) == two(body):
+        tm["rig"] = 0.0                          # rigged before, with as many doors: finish again only
     else:
+        if rr is not None:                       # another body: the old cut, and edits made on it, no longer apply
+            for f in ("src.glb", "src.orig.glb", "edits.json", "result.json", "src.report.json"):
+                if os.path.exists(os.path.join(rig, f)):
+                    os.remove(os.path.join(rig, f))
+            rec["rerigged"] = {"was": rr.get("body_style", ""), "now": body}
         urllib.request.urlretrieve(item["desktopGlbUrl"], src)
         tm["download"] = round(time.time() - t0, 1)
         t0 = time.time()
@@ -188,7 +201,7 @@ def one(target, item, args, out):
         run(["node", os.path.join(args.tools, "decode.mjs"), src, plain], 600, lg)
         tm["decode"] = round(time.time() - t0, 1)
         t0 = time.time()
-        p = run([sys.executable, os.path.join(HERE, "rig.py"), plain, rig], 1200, lg)
+        p = run([sys.executable, os.path.join(HERE, "rig.py"), plain, rig, f"--body={body}"], 1200, lg)
         tm["rig"] = round(time.time() - t0, 1)
         for f in (src, plain):
             if os.path.exists(f):
@@ -223,7 +236,8 @@ def one(target, item, args, out):
         spec["manual"], spec["hinges"] = ed.get("manual") or [], ed.get("hinges") or {}
         rec["edited"] = {"manual": spec["manual"], "hinges": spec["hinges"]}
     # how this car was built, so the Studio can build it again
-    json.dump({"target": target, "item": item, "paint": getattr(args, "paint", None)},
+    json.dump({"target": target, "item": item, "paint": getattr(args, "paint", None),
+               "body_style": getattr(args, "body_style", None)},
               open(os.path.join(d, "build.json"), "w"), indent=1, default=str)
     fin = os.path.join(d, "finished.glb")
     t0 = time.time()

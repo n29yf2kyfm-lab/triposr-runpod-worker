@@ -84,7 +84,8 @@ REAR_RX = re.compile(r"(^|[^a-z])(rear|back)([^a-z]|$)", re.I)
 WHEEL_MAT = re.compile(r"tyre|tire|rubber|pneu|reifen|llanta|luntai|lungu|wheel|felge|rueda"
                        r"|(^|[^a-z])rim([^a-z]|$)|(^|_)rin(_|\d|$)", re.I)
 RED_NAME = re.compile(r"(?<![a-z])red|red(?![a-z])|tail|lanterna|brake.?light|stop.?light|rear.?light|rueckl|feu.?arr", re.I)
-TWO_DOOR = re.compile(r"coupe|coupé|convertible|cabrio|roadster|spider|spyder|targa", re.I)
+TWO_DOOR = re.compile(r"coupe|coupé|convertible|cabrio|roadster|spider|spyder|targa"
+                      r"|\b[23][- ]?(?:door|dr)\b|\b(?:two|three)[- ]door", re.I)
 GLASS_MAT = re.compile(r"glass|window|vitre|windscreen|windshield|lamp|light|lens|tyre|tire|rubber|chrome_?badge", re.I)
 ANG = float(os.environ.get("SB_CUT_ANG", 40))
 
@@ -497,7 +498,7 @@ def convert(car, rep, override=None, body_style=""):
         parts.setdefault(pid, []).append(o)
 
     if not any(o["kind"] == "door" for o in objs):
-        for o in find_doors(car, objs, wheels, lo, hi, rep):
+        for o in find_doors(car, objs, wheels, lo, hi, rep, body_style):
             objs.append(o)
             o["kind"] = "door"
     doorkey = {}
@@ -666,6 +667,16 @@ def convert(car, rep, override=None, body_style=""):
                         hinge.pop(d.split(":")[0], None)
                 rep["implausible"] += again
         rep["missing"] = [p for p in wanted(parts) if not parts.get(p)]
+    # a two-door body has front doors only: a lone "rear" door left on a side
+    # once the wing taken for its front door is dropped is that side's door
+    # (the BMW 1 Series coupe)
+    if TWO_DOOR.search(body_style or os.environ.get("SB_BODY", "")):
+        for sd in "lr":
+            if f"door_r{sd}" in parts and f"door_f{sd}" not in parts:
+                parts[f"door_f{sd}"] = parts.pop(f"door_r{sd}")
+                if f"door_r{sd}" in hinge:
+                    hinge[f"door_f{sd}"] = hinge.pop(f"door_r{sd}")
+                rep.setdefault("two_door", []).append(f"door_r{sd} is the front door")
     rep["hinge"] = hinge
     rep["motion"] = motion(car, parts, hi[1] - lo[1], rep, override)
     # ── 8. GLASS: what the file claims ──
@@ -1068,7 +1079,7 @@ def shut_line(car, o, refs, z0, z1, length):
     return None, prof
 
 
-def find_doors(car, objs, wheels, lo, hi, rep):
+def find_doors(car, objs, wheels, lo, hi, rep, body_style=""):
     """Doors that are LOOSE PIECES inside a body mesh (the RS6): wholly on one
     flank, 45% of the car's height from low down, 15-60% of its length,
     between the axles, mirrored on the other side. A piece two doors long is
@@ -1104,7 +1115,10 @@ def find_doors(car, objs, wheels, lo, hi, rep):
     groups = []                                     # (obj, name, refs)
     for side in ("l", "r"):
         lst = found[side]
-        if len(lst) == 1 and lst[0][4][2] - lst[0][3][2] > .3 * L:
+        # one long piece is two doors on a five-door side; on a two-door body
+        # (a coupe, a three-door hatch: the GR Yaris) it is the door
+        two = bool(TWO_DOOR.search(body_style or os.environ.get("SB_BODY", "")))
+        if len(lst) == 1 and lst[0][4][2] - lst[0][3][2] > .3 * L and not two:
             area, o, refs, b0, b1 = lst[0]
             cut, prof = shut_line(car, o, refs, b0[2], b1[2], L)
             info[f"shut_line_{side}"] = prof
@@ -1718,7 +1732,7 @@ def run(src, out, override=None, body_style=""):
     os.makedirs(out, exist_ok=True)
     t0 = time.time()
     rep = {"src": os.path.basename(src), "rigger": VERSION}
-    res = {"car": "src", "src": os.path.basename(src), "rigger": VERSION}
+    res = {"car": "src", "src": os.path.basename(src), "rigger": VERSION, "body_style": body_style or ""}
     try:
         car = Car(src)
         parts, hinge = convert(car, rep, override, body_style)
@@ -1742,4 +1756,4 @@ if __name__ == "__main__":
     a = [x for x in sys.argv[1:] if not x.startswith("--")]
     body = next((x.split("=", 1)[1] for x in sys.argv if x.startswith("--body=")), "")
     r = run(a[0], a[1], body_style=body)
-    print(json.dumps({k: r.get(k) for k in ("car", "status", "opens", "missing", "refused", "seconds")}))
+    print(json.dumps({k: r.get(k) for k in ("car", "status", "opens", "missing", "refused", "seconds", "body_style")}))
