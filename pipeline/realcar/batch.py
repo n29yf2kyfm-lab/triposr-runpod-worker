@@ -53,7 +53,7 @@ WHEELBASE = {
     "ford-fiesta-2009-w12-v1": 2489,          # Fiesta Mk6 (2008-2017), en.wikipedia infobox
     "volkswagen-golf-2025-w12-v1": 2636,      # Golf Mk8 / 8.5, en.wikipedia infobox
     "mercedes-benz-a-class-2018-w12-v1": 2699,  # A45 AMG W176 (2012-2018), en.wikipedia infobox
-
+    "toyota-yaris-2001-v1": 2370,             # Yaris / Vitz XP10 (1999-2005): its page is titled Vitz
 }
 
 
@@ -96,7 +96,17 @@ def pick(target, cat):
     return ok[0]
 
 
-TRIM = re.compile(r"\b(gti|gtd|gte|gt|r|rs\d?|st|amg|s|se|sport|line|hybrid|phev|ev|e|turbo|quattro|xdrive|\d{3}i|a\d\d)\b", re.I)
+# trim words, never part of a hyphenated name (E-Class, GT-R, CR-V keep theirs)
+TRIM = re.compile(r"(?<![\w-])(gti|gtd|gte|gt|r|rs\d?|st|amg|s|se|sport|line|hybrid|phev|ev|e|turbo|quattro|xdrive|\d{3}i|a\d\d)(?![\w-])", re.I)
+
+
+def model_of(item):
+    """(make, model) as the wheelbase table knows it: trim words and the make
+    taken off ('volkswagen', 'polo' from 'Volkswagen Polo GTI')."""
+    model = TRIM.sub(" ", item.get("modelFamily") or item.get("model") or "")
+    make_rx = r"[-\s]".join(re.escape(w) for w in re.split(r"[-\s]+", item["make"]))   # land-rover = land rover
+    model = re.sub(make_rx + r"\s*", "", model, flags=re.I).strip(" -") or item.get("model")
+    return item["make"], " ".join(model.split())
 
 
 def auto_wheelbase(item, rep, rec):
@@ -106,14 +116,13 @@ def auto_wheelbase(item, rep, rec):
     the answer is used only if it leaves the wheels a real car's size
     (0.50 to 0.85 m), and on a model already at metre scale only if it
     changes the size by under 25%. Otherwise the car is flagged."""
-    model = TRIM.sub(" ", item.get("modelFamily") or item.get("model") or "")
-    model = re.sub(re.escape(item["make"]) + r"\s*", "", model, flags=re.I).strip() or item.get("model")
+    make, model = model_of(item)
     year = item.get("yearStart") or 2015
     rescaled = rep.get("rescaled")
 
     def get(ratio, base):
         try:
-            ans = wheelbase.lookup(item["make"], model, year, ratio, key=item["assetId"])
+            ans = wheelbase.lookup(make, model, year, ratio)
         except Exception as e:
             ans = {"wheelbase": None, "why": str(e)}
         wb = ans.get("wheelbase")
@@ -131,23 +140,20 @@ def auto_wheelbase(item, rep, rec):
     return get
 
 
+LICENCE = [(r"non-?commercial.*share-?alike|by-nc-sa", "CC BY-NC-SA"), (r"non-?commercial|by-nc", "CC BY-NC"),
+           (r"share-?alike|by-sa", "CC BY-SA"), (r"cc0|public domain", "CC0"), (r"attribution|cc-by|cc by", "CC BY")]
+
+
 def credit_of(item):
-    ref = item.get("sourceReferenceId")
-    if not ref:                              # most records carry the model only in its link
-        m = re.search(r"([0-9a-f]{32})/?$", item.get("sourceUrl") or "")
-        ref = m and m.group(1)
-    title, who, lic = item.get("sourceTitle"), item.get("sourceCreator"), item.get("licence")
-    if ref:
-        try:
-            with urllib.request.urlopen(f"https://api.sketchfab.com/v3/models/{ref}", timeout=20) as r:
-                m = json.load(r)
-            title, who = m.get("name") or title, m["user"]["displayName"]
-            lic = {"by": "CC BY 4.0", "by-sa": "CC BY-SA 4.0", "by-nc": "CC BY-NC 4.0",
-                   "by-nc-sa": "CC BY-NC-SA 4.0", "cc0": "CC0"}.get(m["license"]["slug"], m["license"]["label"])
-        except Exception:
-            pass
-    return {"title": title, "author": who, "licence": lic, "url": item.get("sourceUrl"),
-            "commercial": bool(lic) and "NC" not in lic.upper().replace("NON-COMMERCIAL", "NC")}
+    """Who made the model and under what licence, from the catalogue record
+    alone (no outside call). A record without its author's name is credited
+    by title and link, and says so."""
+    raw = item.get("licence") or ""
+    lic = next((name for rx, name in LICENCE if re.search(rx, raw, re.I)), raw or "unknown")
+    title = item.get("sourceTitle") or f"{item['make'].title()} {item.get('modelFamily') or item.get('model')}"
+    return {"title": title, "author": item.get("sourceCreator"), "licence": lic, "url": item.get("sourceUrl"),
+            "commercial": lic in ("CC BY", "CC BY-SA", "CC0", "owner-supplied"),
+            "author_missing": not item.get("sourceCreator")}
 
 
 def run(cmd, timeout, log=None, **kw):
@@ -200,7 +206,8 @@ def one(target, item, args, out):
     rec["credit"] = cr
     spec = {"name": f"{item['make'].title()} {item.get('modelFamily') or item['model']}",
             "engine_pack": args.engine_pack,
-            "credit": f"Body, cabin and wheels: '{cr['title']}' by {cr['author']}, {cr['licence']}, {cr['url']}. "
+            "credit": f"Body, cabin and wheels: '{cr['title']}'" + (f" by {cr['author']}" if cr["author"] else "")
+                      + f", {cr['licence']}" + (f", {cr['url']}" if cr["url"] else "") + ". "
                       "Rigged, glass cleared and engine bay fitted by the ExpertCarCheck GLB machine."}
     if getattr(args, "paint", None):
         spec["paint"] = list(args.paint)
@@ -278,6 +285,8 @@ def one(target, item, args, out):
     except Exception as e:
         rec["sheet_error"] = str(e)
     rec["timings_s"] = tm
+    if getattr(args, "keep_full", False) and os.path.exists(fin):
+        os.replace(fin, os.path.join(d, "car_full.glb"))    # uncompressed: opens in any 3D program
     for f in (src, fin):                         # the rigged copy stays, so a fix re-finishes in seconds
         if os.path.exists(f):
             os.remove(f)

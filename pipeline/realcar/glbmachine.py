@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 """glbmachine — ExpertCarCheck's GLB machine as one program.
 
-Ask for a car in plain words; get back an interactive GLB: doors, bonnet and
-tailgate that open (named clips), clear glass, the model's cabin, a generic
-engine bay and exhaust, painted the colour asked for. No Blender.
+Ask for a car in plain words; it is found in your catalogue and you get back
+your own interactive GLB: doors, bonnet and tailgate that open (named
+clips), clear glass, the model's cabin, a generic engine bay and exhaust,
+painted the colour asked for. No Blender, no Sketchfab, no outside service:
+the only network use is fetching the model from the catalogue's storage.
 
     glbmachine setup                          # once: node tools + work folder
-    glbmachine make "Nissan Micra 2004 red"   # one car -> web.glb (+ sheet.jpg)
-    glbmachine make "VW Polo 2019" --no-sheet # the car only, in seconds
+    glbmachine make "Nissan Micra 2004 red" -o micra.glb        # + a check sheet
+    glbmachine make "VW Polo 2019" --no-sheet -o polo.glb       # the car only, in seconds
+    glbmachine make "Ford Fiesta 2012" --full -o fiesta.glb     # uncompressed: any 3D program
     glbmachine batch --top 20 --workers 3     # the UK best sellers
     glbmachine rig CAR.glb OUT_DIR            # the rig step alone
     glbmachine serve --port 8080              # the web API (below) and GLB Studio at /studio/
@@ -18,7 +21,7 @@ sheet page, served to a headless browser) and view/cars/ (every car built).
 
 WEB API (`serve`):
     POST /v1/cars            {"request": "Ford Fiesta 2015 blue", "sheet": false,
-                              "nearest": false}  -> 202 {"id", "status"}
+                              "exact": false}  -> 202 {"id", "status"}
     GET  /v1/cars/ID         -> {"id", "status": queued|building|done|failed, "report", "files"}
     GET  /v1/cars/ID/car.glb    the finished car (meshopt-compressed)
     GET  /v1/cars/ID/sheet.jpg  the four-view check sheet, when asked for
@@ -76,10 +79,10 @@ def setup(quiet=False):
     return {"home": HOME, "tools": TOOLS, "engine_pack": ENGINE_PACK}
 
 
-def make(request, sheet=True, nearest=False, no_source=False, out=None, port=8791):
+def make(request, sheet=True, exact=False, out=None, port=8791, out_file=None, full=False):
     import make as mk
     setup(quiet=True)
-    return mk.build(request, ENGINE_PACK, TOOLS, VIEW, out or CARS, port, nearest, no_source, not sheet)
+    return mk.build(request, ENGINE_PACK, TOOLS, VIEW, out or CARS, port, exact, not sheet, out_file, full)
 
 
 def rig(src, out):
@@ -123,7 +126,7 @@ class Jobs:
     def add(self, body):
         job = {"id": uuid.uuid4().hex[:12], "status": "queued", "asked_at": time.time(),
                "request": str(body["request"])[:200], "sheet": bool(body.get("sheet")),
-               "nearest": bool(body.get("nearest"))}
+               "exact": bool(body.get("exact"))}
         self.put(job)
         self.q.put(job["id"])
         return job
@@ -135,7 +138,7 @@ class Jobs:
             job["status"] = "building"
             self.put(job)
             try:
-                rep = make(job["request"], sheet=job["sheet"], nearest=job["nearest"],
+                rep = make(job["request"], sheet=job["sheet"], exact=job.get("exact", False),
                            out=os.path.join(CARS, jid), port=port)
                 job["report"] = rep
                 res = rep.get("result") or {}
@@ -390,9 +393,10 @@ def main():
     m = sub.add_parser("make")
     m.add_argument("request")
     m.add_argument("--no-sheet", action="store_true", help="the car only, no four-view check sheet")
-    m.add_argument("--nearest", action="store_true", help="build the nearest catalogue generation if none is sourced")
-    m.add_argument("--no-source", action="store_true", help="catalogue only, no Sketchfab search")
-    m.add_argument("--out", default=None)
+    m.add_argument("-o", "--output", default=None, help="write the finished GLB here")
+    m.add_argument("--full", action="store_true", help="the uncompressed GLB (opens in any 3D program)")
+    m.add_argument("--exact", action="store_true", help="only that year's generation, never the nearest")
+    m.add_argument("--out", default=None, help="work folder for the build (default: the car library)")
     b = sub.add_parser("batch")
     b.add_argument("--top", type=int, default=20)
     b.add_argument("--list", default="targets", choices=("targets", "top2000"))
@@ -411,7 +415,7 @@ def main():
     elif a.cmd == "setup":
         print(json.dumps(setup()))
     elif a.cmd == "make":
-        rep = make(a.request, sheet=not a.no_sheet, nearest=a.nearest, no_source=a.no_source, out=a.out)
+        rep = make(a.request, sheet=not a.no_sheet, exact=a.exact, out=a.out, out_file=a.output, full=a.full)
         print(json.dumps(rep, indent=1, default=str))
         sys.exit(2 if "error" in rep else 0)
     elif a.cmd == "batch":

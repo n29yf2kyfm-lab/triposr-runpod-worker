@@ -10,7 +10,7 @@ travel with it (they do: each package keeps its own LICENSE file in
 
 | Part | Where it came from |
 | --- | --- |
-| `rig.py`, `finish.py`, `edits.py`, `make.py`, `batch.py`, `source.py`, `wheelbase.py`, `glbmachine.py`, the `.mjs` tools, `view.html`, `studio/` (GLB Studio), `../template/gltf.py` | written for ExpertCarCheck |
+| `rig.py`, `finish.py`, `edits.py`, `make.py`, `batch.py`, `wheelbase.py`, `glbmachine.py`, the `.mjs` tools, `view.html`, `studio/` (GLB Studio), `../template/gltf.py` | written for ExpertCarCheck |
 | `assets/engine_pack.glb` (engine, gearbox, cooling, battery, suspension, exhaust) | exported from our own constructed geometry (`platform/trainer/engine-bay-detail.js`, `platform/workshop/ehybrid/hybrid-parts.js`: `sourceType: constructed-training-geometry`); its 11 textures are generated in code. Nothing in it is cut from a third-party model. |
 | `vendor/no-sharp` | a stand-in so the LGPL image library below is never installed |
 
@@ -59,7 +59,7 @@ inside `node_modules`.
 | Data | Licence | Note |
 | --- | --- | --- |
 | UK vehicle licensing statistics (DfT VEH0120) behind `top2000_cars.csv` | Open Government Licence v3.0 | credit: "Contains public sector information licensed under the Open Government Licence v3.0." |
-| Wheelbases read from Wikipedia infoboxes | facts (not protected) | only the numbers are kept |
+| Wheelbases read once from Wikipedia infoboxes into `wheelbase_table.json` | facts (not protected) | only the numbers (years, wheelbase, length) and page titles are kept; nothing is fetched while building a car |
 
 ## The cars: separate from the software
 

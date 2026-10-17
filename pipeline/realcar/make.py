@@ -1,25 +1,25 @@
 #!/usr/bin/env python3
-"""make.py — ask for a car in plain words, get it back finished.
+"""make.py — ask for a car in plain words, get back your own GLB file. Your
+catalogue only: no Sketchfab, no outside service.
 
-    python3 pipeline/realcar/glbmachine.py make "Mercedes A-Class 2012 black 5-door" [--nearest]
+    python3 pipeline/realcar/glbmachine.py make "Mercedes A-Class 2012 black 5-door" -o a-class.glb
     python3 pipeline/realcar/make.py "..." --engine-pack E --tools T --view-dir V   # the same, all paths given
 
 The request is read for a make and model, a year, a colour (DVLA colour
 names), and a door count or body style. The approved catalogue is searched
-for that model in a generation on sale in that year. Then the same steps as
+for that model in a generation on sale in that year; if the catalogue has
+the model but not that generation, the nearest generation it has is built
+and the report says so (--exact refuses instead). Then the same steps as
 batch.py run:
 
-    decode -> rig.py -> finish.py -> validator -> web copy -> check sheet
+    download from the catalogue -> decode -> rig.py -> finish.py -> validator
+    -> web copy (-> check sheet)
 
-The finish uses the generic petrol engine bay (or the model's own, if it has
-one) and paints the car in the colour asked for.
-
-If the catalogue has no such car, or not in that year's generation, it is
-sourced: Sketchfab is searched (source.py: a CC licence, the model in the
-title, no toy or game cars, the nearest year) and the best hit downloaded
-with SKETCHFAB_TOKEN. Failing that, --nearest builds the catalogue's
-nearest generation. Every step is timed: a catalogue car is built in
-5-15 s and its four-view check sheet takes 25-50 s more (--no-sheet skips
+The finish uses the generic petrol engine bay and paints the car in the
+colour asked for. The only network use is fetching the model file from the
+catalogue's own storage; wheelbases come from the table that ships with the
+machine (wheelbase.py) and credits from the catalogue record. A car is built
+in 5-15 s; its four-view check sheet takes 25-50 s more (--no-sheet skips
 it). The catalogue does not record door counts, so a door count is only
 reported back, never used to choose.
 """
@@ -27,6 +27,7 @@ import argparse
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -34,7 +35,7 @@ import time
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import batch  # noqa: E402
-import source  # noqa: E402
+import wheelbase  # noqa: E402
 
 # DVLA colour names, as a typical paint of that name (sRGB)
 COLOURS = {
@@ -144,7 +145,14 @@ def find(want, cat):
     yr = want.get("year")
 
     def years(i):
+        # the generation's own production years from the wheelbase table (the
+        # catalogue often records one model year: its 2011 Corsa is the
+        # 2006-2014 Corsa D), else the record's, else seven years from its start
         y0 = i.get("yearStart") or 0
+        if y0:
+            g = wheelbase.lookup(*batch.model_of(i), y0).get("years")
+            if g and g[0] - 1 <= y0 <= g[1]:
+                return min(g[0], y0), max(min(g[1], time.localtime().tm_year), i.get("yearEnd") or y0)
         return y0, i.get("yearEnd") or y0 + 7
     if yr:
         on_sale = [i for i in hits if years(i)[0] - 1 <= yr <= years(i)[1]]
@@ -157,32 +165,26 @@ def find(want, cat):
     return None, others, "model found, not that year's generation"
 
 
-def build(request, engine_pack, tools, view_dir, out=None, port=8791, nearest=False, no_source=False,
-          no_sheet=False):
-    """One request, start to finish. Returns the report (with "result" and
-    "files" when a car was built, "error" when none could be found)."""
+def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=False, no_sheet=False,
+          out_file=None, full=False):
+    """One request, start to finish, from the catalogue. Returns the report
+    (with "result" and "files" when a car was built, "error" when the
+    catalogue has no such model)."""
     args = argparse.Namespace(engine_pack=os.path.abspath(engine_pack), tools=tools, view_dir=view_dir,
-                              port=port, no_sheet=no_sheet)
+                              port=port, no_sheet=no_sheet, keep_full=full)
     want = parse(request)
     cat = batch.catalogue()
     item, others, why = find(want, cat)
     report = {"asked": want, "match": why,
               "nearest": [f"{i['assetId']} ({i.get('yearStart')}-{i.get('yearEnd') or ''})" for i in others[:4]]}
-    # not in the catalogue, or not that year's generation: source it
-    if item is None and want.get("make") and not no_source:
-        try:
-            ok, refused = source.search(want["make"], want["model_words"], want.get("year"))
-            report["sourcing"] = {"candidates": [f"{o['name']} by {o['author']} ({o['licence']}, {o['faces']} faces)"
-                                                 for o in ok[:4]], "refused": len(refused)}
-            if ok:
-                item = source.as_item(ok[0], want["make"], want["model_words"], want.get("year"))
-                report["match"] = f"{why}; sourced from Sketchfab"
-        except Exception as e:
-            report["sourcing_error"] = str(e)
-    if item is None and nearest and others:
-        item, report["match"] = others[0], f"{why}; building the nearest catalogue generation"
+    if item is None and others and not exact:
+        item, report["match"] = others[0], f"{why}; built the nearest generation in the catalogue"
     if item is None:
-        report["error"] = "no such car in the catalogue, and none sourced"
+        report["error"] = "not in the catalogue" if not others else "that generation is not in the catalogue"
+        if want.get("make"):           # what the catalogue does have for that make
+            report["catalogue_has"] = sorted({batch.model_of(i)[1].title() for i in cat.values()
+                                              if i["make"].lower() == want["make"]
+                                              and i.get("publicationStatus") == "approved"})[:40]
         return report
     report["asset"] = item["assetId"]
     report["source"] = item.get("sourceTitle")
@@ -204,10 +206,15 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, nearest=Fa
         if server:
             server.terminate()
     report["result"] = rec
-    report["files"] = {k: os.path.join(out, item["assetId"], f) for k, f in
-                       (("glb", "web.glb"), ("sheet", "sheet.jpg")) if os.path.exists(os.path.join(out, item["assetId"], f))}
+    d = os.path.join(out, item["assetId"])
+    report["files"] = {k: os.path.join(d, f) for k, f in
+                       (("glb", "web.glb"), ("glb_full", "car_full.glb"), ("sheet", "sheet.jpg"))
+                       if os.path.exists(os.path.join(d, f))}
+    if out_file and report["files"].get("glb_full" if full else "glb"):
+        os.makedirs(os.path.dirname(os.path.abspath(out_file)), exist_ok=True)
+        shutil.copyfile(report["files"]["glb_full" if full else "glb"], out_file)
+        report["files"]["yours"] = os.path.abspath(out_file)
     return report
-
 
 def main():
     ap = argparse.ArgumentParser()
@@ -215,17 +222,17 @@ def main():
     ap.add_argument("--engine-pack", required=True)
     ap.add_argument("--tools", required=True)
     ap.add_argument("--view-dir", required=True)
-    ap.add_argument("--out", default=None, help="default: VIEW_DIR/make")
+    ap.add_argument("--out", default=None, help="work folder (default: VIEW_DIR/make)")
+    ap.add_argument("-o", "--output", default=None, help="write the finished GLB here")
+    ap.add_argument("--full", action="store_true", help="the uncompressed GLB (opens in any 3D program)")
     ap.add_argument("--port", type=int, default=8791)
-    ap.add_argument("--nearest", action="store_true", help="build the nearest catalogue generation if none is sourced")
-    ap.add_argument("--no-source", action="store_true", help="catalogue only, no Sketchfab search")
+    ap.add_argument("--exact", action="store_true", help="only that year's generation, never the nearest")
     ap.add_argument("--no-sheet", action="store_true", help="the car only, no four-view check sheet")
     a = ap.parse_args()
-    report = build(a.request, a.engine_pack, a.tools, a.view_dir, a.out, a.port, a.nearest, a.no_source, a.no_sheet)
+    report = build(a.request, a.engine_pack, a.tools, a.view_dir, a.out, a.port, a.exact, a.no_sheet, a.output, a.full)
     print(json.dumps(report, indent=1, default=str))
     if "error" in report:
         sys.exit(2)
-
 
 if __name__ == "__main__":
     main()

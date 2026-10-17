@@ -61,14 +61,27 @@ the car, so later rebuilds (and batch runs) keep them.
 
 ## Ask for a car
 
+Your catalogue only: no Sketchfab, no outside service. The only network use
+is fetching the model file from the catalogue's own storage.
+
+```
+glbmachine make "Vauxhall Corsa 2012 red" -o corsa.glb           # web GLB (meshopt)
+glbmachine make "Vauxhall Corsa 2012 red" --full -o corsa.glb    # opens in any 3D program
+```
+
 The steps, in order:
 1. The approved catalogue is searched for that model in a generation on
-   sale that year.
-2. If it isn't there, Sketchfab is searched (`source.py`). The best match is
-   downloaded with the `SKETCHFAB_TOKEN` environment variable.
-3. The file is decoded (`decode.mjs`), rigged (`rig.py`), finished in the
+   sale that year. If it has the model but not that generation, the nearest
+   generation is built and the report says so (`--exact` refuses instead).
+   If it has no such model, the report lists what it has for that make.
+2. The file is decoded (`decode.mjs`), rigged (`rig.py`), finished in the
    colour asked for (`finish.py`), validated, compressed and, unless
-   `--no-sheet`, drawn on a four-view check sheet.
+   `--no-sheet`, drawn on a four-view check sheet; `-o` writes the GLB
+   where you want it.
+3. The credit written into the file (`asset.copyright`) comes from the
+   catalogue record: title, author, licence, link. Only 187 of the 1,044
+   approved records carry the author's name; the others are credited by
+   title and link until the catalogue records the author.
 
 Timed on catalogue cars (2026-10-16, one at a time):
 
@@ -94,18 +107,20 @@ why it was replaced.
 
 **Size.** About half the catalogue's models are not at metre scale. The
 rigger sizes those from a guessed wheel height, which can be 15% out.
-`wheelbase.py` looks the car up instead:
-1. It reads the model's English Wikipedia page and every generation page it
-   links to (page text only, since the search API is rate-limited on shared
-   addresses).
-2. It takes the infobox on sale in the model's year. When two generations
-   overlap that year, it takes the one whose wheelbase-to-length proportion
-   matches the 3D model.
+`wheelbase.py` looks the car up instead, in `wheelbase_table.json`, which
+ships with the machine (building a car makes no outside call):
+1. The table holds every generation's years, wheelbase and length for each
+   make and model in the catalogue, read once from English Wikipedia's page
+   text by `wheelbase.py --build` (2026-10-17: 566 makes and models; a
+   wheelbase for 621 of the 1,044 approved models and 487 of the 737 that
+   match the UK top 2,000). Run it again when the catalogue grows.
+2. It takes the generation on sale in the model's year. When two overlap
+   that year, it takes the one whose wheelbase-to-length proportion matches
+   the 3D model.
 3. The answer is used only if it leaves the wheels a real car's size
    (0.50–0.85 m). Otherwise the car is flagged.
 
-Answers are cached in `wheelbase_cache.json`, and hand-checked figures in
-`batch.WHEELBASE` win. Tested on seven cars against hand-read infoboxes:
+Hand-checked figures in `batch.WHEELBASE` win. Tested on seven cars against hand-read infoboxes:
 Micra K12, Fiesta Mk6, Golf Mk8, Qashqai J11, Polo Mk6, Focus Mk4 and
 Corsa D (through Vauxhall to Opel). All matched, and the A-Class W176/W177
 overlap was settled by proportion.

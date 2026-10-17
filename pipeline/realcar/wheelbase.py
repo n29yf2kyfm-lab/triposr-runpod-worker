@@ -1,25 +1,25 @@
 #!/usr/bin/env python3
-"""wheelbase.py — a model's published wheelbase, found without a person.
+"""wheelbase.py — a model's published wheelbase, from a table that ships with
+the machine: building a car makes no outside call.
 
-    python3 pipeline/realcar/wheelbase.py nissan micra 2004 [--ratio 0.62]
+    python3 pipeline/realcar/wheelbase.py nissan micra 2004 [--ratio=0.62]
+    python3 pipeline/realcar/wheelbase.py --build      # (re)make the table, once
 
 A catalogue model that is not at metre scale has to be scaled to the real
 car, and the wheelbase is the figure that fixes the scale best (it is not
-changed by bumpers or spoilers). This reads English Wikipedia's page text
-(index.php?action=raw: the search API is often rate-limited on shared
-addresses, the page text is not):
+changed by bumpers or spoilers).
 
-  1. the model's page ("Nissan Micra"), following a redirect;
-  2. every generation page it links to ("Nissan Micra (K12)", "Ford Fiesta
-     (sixth generation)", "Volkswagen Golf Mk8"), up to 12;
-  3. every {{Infobox automobile}} on them: production years, wheelbase and
-     length (the first figure given, which is the main body style's).
+THE TABLE (wheelbase_table.json) holds, for every make and model in the
+catalogue, every generation's production years, wheelbase and length, read
+once from English Wikipedia's page text (the model's page, a sister make's,
+and every generation page they link to, up to 12) by `--build`. Facts, not
+text: only the numbers are kept. A model added to the catalogue later is
+added with `--build` again (or GLBMACHINE_ONLINE=1 looks it up on the spot).
 
-The infobox on sale in the given year wins. When two are (a generation
-change that year: the A-Class W176 ended and the W177 began in 2018), the
-one whose wheelbase-to-length proportion is closest to the 3D model's
-(`ratio`) wins. Every answer, and every miss, is cached in
-wheelbase_cache.json so a car is looked up once.
+CHOOSING, offline: the generation on sale in the model's year wins. When two
+are (a generation change that year: the A-Class W176 ended and the W177
+began in 2018), the one whose wheelbase-to-length proportion is closest to
+the 3D model's (`ratio`) wins.
 """
 import json
 import os
@@ -31,15 +31,36 @@ import urllib.parse
 import urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-CACHE = os.path.join(HERE, "wheelbase_cache.json")
 UA = "ExpertCarCheck-GLB/1.0 (car model sizing; https://github.com/n29yf2kyfm-lab/triposr-runpod-worker)"
 MAKE_TITLE = {"mercedes-benz": "Mercedes-Benz", "volkswagen": "Volkswagen", "bmw": "BMW", "mg": "MG", "byd": "BYD",
               "land-rover": "Land Rover", "alfa-romeo": "Alfa Romeo", "aston-martin": "Aston Martin",
               "rolls-royce": "Rolls-Royce", "mini": "Mini", "ds": "DS", "seat": "SEAT", "kia": "Kia"}
 
 
+_LAST = threading.local()                     # why the last page came back empty
+
+
+class _Pace:
+    def __init__(self):
+        self.lock, self.next = threading.Lock(), 0.0
+
+    def __enter__(self):
+        self.lock.acquire()
+
+    def __exit__(self, *a):
+        self.lock.release()
+
+
+_PACE = _Pace()
+
+
 def raw(title, _seen=None):
-    """Page wikitext, redirects followed (twice at most)."""
+    """Page wikitext, redirects followed (twice at most). None when the page
+    does not exist (_LAST.missing) or could not be reached."""
+    _LAST.missing = False
+    with _PACE:                                # a few requests a second: Wikipedia throttles bursts
+        time.sleep(max(0.0, _PACE.next - time.time()))
+        _PACE.next = time.time() + 0.35
     url = "https://en.wikipedia.org/w/index.php?" + urllib.parse.urlencode({"title": title, "action": "raw"})
     for attempt in range(3):
         try:
@@ -49,6 +70,7 @@ def raw(title, _seen=None):
             break
         except urllib.error.HTTPError as e:
             if e.code == 404:
+                _LAST.missing = True
                 return None, title
             time.sleep(2 * (attempt + 1))
         except Exception:
@@ -136,68 +158,141 @@ def _generation_link(link, stem):
 
 
 def _boxes_for(base):
+    """(boxes, generation pages, title, pages that could not be reached)."""
     text, title = raw(base)
     boxes, pages = [], []
     if not text:
-        return boxes, pages, title
+        return boxes, pages, title, 0 if getattr(_LAST, "missing", False) else 1
     if len(text) < 6000:                       # a pointer page: follow its first car link
         m = re.search(r"\[\[(" + re.escape(base.split()[0]) + r" [^\]|#]+)", text)
         if m and m.group(1).strip() != base:
             text, title = raw(m.group(1).strip())
             if not text:
-                return boxes, pages, title
+                return boxes, pages, title, 0 if getattr(_LAST, "missing", False) else 1
     boxes += infoboxes(text, title)
     stem = title.split(" (")[0]
     for link in re.findall(r"(?:\[\[|\{\{\s*(?:main|see also|further)\s*\|)\s*(" + re.escape(stem) + r"[^\]|}#]*)", text, re.I):
         link = link.strip()
         if link != title and link not in pages and _generation_link(link, stem):
             pages.append(link)
+    unreached = 0
     for p in pages[:12]:
         t, tt = raw(p)
-        if t:
+        if t is None and not getattr(_LAST, "missing", False):
+            unreached += 1
+        # a link can redirect to another make's car ("Toyota Yaris R" is the Mazda2)
+        if t and tt.split()[0].lower() == stem.split()[0].lower():
             boxes += infoboxes(t, tt)
-    return boxes, pages, title
+    return boxes, pages, title, unreached
 
 
 _LOCK = threading.Lock()                       # batch.py builds cars side by side
+TABLE = os.path.join(HERE, "wheelbase_table.json")
+_TABLE = {}
 
 
-def lookup(make, model, year, ratio=None, key=None, use_cache=True):
-    key = key or f"{make}|{model}|{year}".lower()
-    with _LOCK:
-        cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}
-    if use_cache and key in cache:
-        return cache[key]
+def table():
+    if not _TABLE and os.path.exists(TABLE):
+        _TABLE.update(json.load(open(TABLE)))
+    return _TABLE
+
+
+def wiki_title(model):
+    """A model name as Wikipedia titles it: Micra, E-Class, CR-V, GT-R, CX-5."""
+    def word(w):
+        if re.fullmatch(r"[ie]\d+", w):           # i10, i30: Hyundai keeps the small i
+            return w
+        return re.sub(r"[a-z]+", lambda m: m.group(0).upper() if len(m.group(0)) <= 2 and re.search(r"[\d-]", w)
+                      else m.group(0).title(), w)
+    return " ".join(word(w) for w in model.split())
+
+
+def fetch(make, model):
+    """Every generation's infobox for a make and model (the outside call;
+    only `--build` or GLBMACHINE_ONLINE=1 makes it). Boxes from the sister
+    make's page carry base 1, so the make's own page wins a tie."""
     mt = MAKE_TITLE.get(make.lower(), make.title())
-    mdl = model if re.search(r"[A-Z]", model) else model.title()
+    mdl = model if re.search(r"[A-Z]", model) else wiki_title(model)
     bases = [ALIAS.get((make.lower(), model.lower()), f"{mt} {mdl}")]
+    if "-" in model and not re.search(r"\d", model):           # range-rover-evoque, 3-series
+        bases.append(f"{mt} {wiki_title(model.replace('-', ' '))}")
     if make.lower() in SISTER:
         bases.append(f"{SISTER[make.lower()]} {mdl}")
-    tried, uniq = [], []
-    for base in bases:
-        boxes, pages, title = _boxes_for(base)
+    tried, uniq, failed = [], [], False
+    for k, base in enumerate(bases):
+        boxes, pages, title, unreached = _boxes_for(base)
+        failed |= unreached > 0                   # unreachable (rate limit), not "no such page"
         tried += [title] + pages[:12]
-        seen = {(b["years"], b["wheelbase"]) for b in uniq}
-        uniq += [b for b in boxes if (b["years"], b["wheelbase"]) not in seen]
-        if any(b["years"] and year and b["years"][0] - 1 <= year <= b["years"][1] for b in uniq):
-            break
-    on = [b for b in uniq if b["years"] and b["years"][0] - 1 <= year <= b["years"][1]] if year else uniq
+        seen = {(tuple(b["years"] or ()), b["wheelbase"]) for b in uniq}
+        uniq += [dict(b, base=k) for b in boxes if (tuple(b["years"] or ()), b["wheelbase"]) not in seen]
+    out = {"boxes": uniq, "tried": tried}
+    if failed:
+        out["failed"] = True                      # fetched again by the next --build
+    return out
+
+
+def choose(boxes, year, ratio=None):
+    """The generation on sale in YEAR; of two, the proportion nearer RATIO;
+    else the newest."""
+    on = [b for b in boxes if b["years"] and b["years"][0] - 1 <= year <= b["years"][1]] if year else list(boxes)
+    if on:
+        first = min(b.get("base", 0) for b in on)
+        on = [b for b in on if b.get("base", 0) == first]
     if len(on) > 1 and ratio:
         on.sort(key=lambda b: abs(b["wheelbase"] / b["length"] - ratio) if b.get("length") else 1)
-    elif len(on) > 1:                          # the newest generation on sale that year
+    elif len(on) > 1:
         on.sort(key=lambda b: -(b["years"] or (0, 0))[0])
-    ans = dict(on[0], source=f"en.wikipedia: {on[0]['page']}", candidates=len(uniq)) if on else \
-        {"wheelbase": None, "why": f"no infobox on sale in {year} among {len(uniq)} on {len(tried)} pages",
-         "tried": tried}
-    with _LOCK:
-        cache = json.load(open(CACHE)) if os.path.exists(CACHE) else {}
-        cache[key] = ans
-        json.dump(cache, open(CACHE + ".tmp", "w"), indent=1, sort_keys=True)
-        os.replace(CACHE + ".tmp", CACHE)
-    return ans
+    if not on:
+        return {"wheelbase": None, "why": f"no generation on sale in {year} among {len(boxes)} in the table"}
+    return dict(on[0], source=f"en.wikipedia: {on[0]['page']}", candidates=len(boxes))
+
+
+def lookup(make, model, year, ratio=None, online=None):
+    key = f"{make}|{model}".lower()
+    ent = table().get(key)
+    if ent is None:
+        if not (online if online is not None else os.environ.get("GLBMACHINE_ONLINE") == "1"):
+            return {"wheelbase": None, "why": f"{make} {model} is not in the wheelbase table"}
+        ent = fetch(make, model)
+        with _LOCK:
+            _TABLE[key] = ent
+            json.dump(_TABLE, open(TABLE + ".tmp", "w"), indent=0, sort_keys=True)
+            os.replace(TABLE + ".tmp", TABLE)
+    return choose(ent["boxes"], year, ratio)
+
+
+def build(workers=3):
+    """The table for every approved catalogue model, fetched once."""
+    from concurrent.futures import ThreadPoolExecutor
+    sys.path.insert(0, HERE)
+    import batch
+    want = sorted({batch.model_of(i) for i in batch.catalogue().values()
+                   if i.get("publicationStatus") == "approved" and i.get("desktopGlbUrl")})
+    todo = [mm for mm in want if f"{mm[0]}|{mm[1]}".lower() not in table()
+            or table()[f"{mm[0]}|{mm[1]}".lower()].get("failed")]
+    print(f"{len(want)} makes and models, {len(todo)} to fetch", flush=True)
+
+    def one(mm):
+        try:
+            return mm, fetch(*mm)
+        except Exception as e:
+            return mm, {"boxes": [], "tried": [], "error": str(e), "failed": True}
+    done = 0
+    with ThreadPoolExecutor(workers) as ex:
+        for (make, model), ent in ex.map(one, todo):
+            with _LOCK:
+                _TABLE[f"{make}|{model}".lower()] = ent
+                done += 1
+                if done % 25 == 0 or done == len(todo):
+                    json.dump(_TABLE, open(TABLE + ".tmp", "w"), indent=0, sort_keys=True)
+                    os.replace(TABLE + ".tmp", TABLE)
+                    print(done, "fetched", flush=True)
 
 
 if __name__ == "__main__":
+    if "--build" in sys.argv:
+        build()
+        sys.exit()
     a = [x for x in sys.argv[1:] if not x.startswith("--")]
     ratio = next((float(x.split("=")[1]) for x in sys.argv if x.startswith("--ratio=")), None)
-    print(json.dumps(lookup(a[0], " ".join(a[1:-1]), int(a[-1]), ratio, use_cache=False), indent=1))
+    print(json.dumps(lookup(a[0], " ".join(a[1:-1]), int(a[-1]), ratio), indent=1))
