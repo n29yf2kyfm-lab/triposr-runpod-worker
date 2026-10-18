@@ -8,3 +8,4 @@
 pipeline/realcar/node_modules/
 pipeline/realcar/__pycache__/
 pipeline/realcar/*.jpg
+pipeline/realcar/docker-compose.yml

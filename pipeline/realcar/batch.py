@@ -41,6 +41,7 @@ REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
 sys.path.insert(0, HERE)
 import finish  # noqa: E402
 from rig import TWO_DOOR  # noqa: E402
+import rig as rig_mod  # noqa: E402
 import wheelbase  # noqa: E402
 
 GRADE = {"A": 0, "B": 1, "C": 2}
@@ -239,14 +240,28 @@ def one(target, item, args, out):
         or item.get("bodyStyle") or ""
     if not body and re.search(r"\b[2-5][- ]?(?:door|dr)\b|coupe|cabrio|convertible", item.get("sourceTitle") or "", re.I):
         body = re.search(r"\b[2-5][- ]?(?:door|dr)\b|coupe|cabrio|convertible", item["sourceTitle"], re.I).group(0)
+    # a model only ever built with two or three doors (the GR Yaris), when
+    # neither the request nor the catalogue says: else its one long door is
+    # split into two
+    if not getattr(args, "body_style", None) and not TWO_DOOR.search(body or "") \
+            and not re.search(r"\b[45][- ]?(?:door|dr)\b", body or "", re.I):
+        few = wheelbase.few_doors(*model_of(item), item.get("yearStart") or getattr(args, "year", None))
+        if few:
+            body = f"{few} {body}".strip()
+            rec["body_from_table"] = few
     rr = json.load(open(rr_path)) if os.path.exists(rigged) and os.path.exists(rr_path) else None
     two = lambda b: bool(TWO_DOOR.search(b or ""))  # noqa: E731
     fresh_rig = False
-    if rr is not None and two(rr.get("body_style")) == two(body):
-        tm["rig"] = 0.0                          # rigged before, with as many doors: finish again only
+    # rigged before, with as many doors, by this rigger (or corrected by hand
+    # in the Studio since, which a new rig would lose): finish again only
+    same_rigger = rr is not None and (rr.get("rigger") == rig_mod.VERSION or os.path.exists(os.path.join(rig, "edits.json")))
+    if rr is not None and two(rr.get("body_style")) == two(body) and same_rigger:
+        tm["rig"] = 0.0
     else:
         fresh_rig = True
-        if rr is not None:                       # another body: the old cut, and edits made on it, no longer apply
+        if rr is not None and not same_rigger:
+            rec["rerigged"] = {"was_rigger": rr.get("rigger"), "now": rig_mod.VERSION}
+        elif rr is not None:                     # another body: the old cut, and edits made on it, no longer apply
             for f in ("src.glb", "src.orig.glb", "edits.json", "result.json", "src.report.json"):
                 if os.path.exists(os.path.join(rig, f)):
                     os.remove(os.path.join(rig, f))

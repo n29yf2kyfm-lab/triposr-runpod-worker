@@ -43,7 +43,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "template"))
 from gltf import GLTF  # noqa: E402
 
-VERSION = "2.1.0-py"
+VERSION = "2.2.0-py"
 
 
 class Refused(Exception):
@@ -563,6 +563,36 @@ def convert(car, rep, override=None, body_style=""):
                     put("door_b" + ("l" if c[0] > 0 else "r"), o)
             continue
         DOOR.setdefault("l" if c[0] > 0 else "r", []).append((c[2], os_))
+    # ONE named piece two doors long on a side of a five-door body (the 2017
+    # Golf's `Doors`, both doors of each flank in one mesh): split at its
+    # shut line, as a loose door piece is (find_doors)
+    two_body = bool(TWO_DOOR.search(body_style or os.environ.get("SB_BODY", "")))
+    for side, lst in DOOR.items():
+        if len(lst) != 1 or two_body:
+            continue
+        os_ = lst[0][1]
+        b0, b1 = bbox(np.vstack([car.verts(o) for o in os_]))
+        if b1[2] - b0[2] <= .42 * L:
+            continue
+        big = max(os_, key=car.nfaces)
+        cut, prof = shut_line(car, big, car.tris(big)[2], b0[2], b1[2], L)
+        rep.setdefault("named_door_split", {})[side] = dict(prof, cut_z=None if cut is None else round(float(cut), 4))
+        if cut is None:
+            continue
+        front, rear = [], []
+        for o in os_:
+            T, _, refs = car.tris(o)
+            cz = T.mean(1)[:, 2]
+            fr, rr = refs[cz > cut], refs[cz <= cut]
+            if not len(fr) or not len(rr):
+                (front if len(fr) else rear).append(o)
+                continue
+            f_new, r_new = car.lift(o, [fr, rr])
+            objs.extend([f_new, r_new])
+            front.append(f_new)
+            rear.append(r_new)
+        objs[:] = [o for o in objs if car.nfaces(o)]
+        DOOR[side] = [(centre(car, g)[2], g) for g in (front, rear) if g]
     for side, lst in DOOR.items():
         lst.sort(key=lambda t: -t[0])
         biggest = max(size(t) for t in lst)
@@ -1430,7 +1460,8 @@ def cut_doors(car, objs, wheels, lo, hi, rep, body_style=""):
     info["refused_doors"] = bad
     ok = [p_ for p_ in info["skin_area_share"] if p_ not in bad]
     if not {"door_fl", "door_fr"} <= set(ok):
-        info["result"] = f"too little door skin found ({info['skin_area_share']}) — not cutting"
+        info["result"] = "no clean door cut: " + "; ".join(f"{k} {v}" for k, v in bad.items()
+                                                         if not v.startswith("its twin"))[:300]
         return {}
     # each side window above a kept door goes with it, as a whole pane
     gl_groups = []

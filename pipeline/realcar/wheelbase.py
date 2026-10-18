@@ -339,6 +339,24 @@ def choose(boxes, year, ratio=None, doors=None):
     return dict(on[0], source=f"en.wikipedia: {on[0]['page']}", candidates=len(boxes))
 
 
+def few_doors(make, model, year=None):
+    """'3-door' or '2-door' when every generation of the model on sale in YEAR
+    (every one, with no year) was built only with that many doors, from the
+    table alone: the GR Yaris ('3-door hatchback'). None when any body had
+    more, or the model is not in the table."""
+    ent = table().get(f"{make}|{model}".lower())
+    if not ent:
+        return None
+    boxes = [b for b in ent.get("boxes", []) if not RACE.search(b.get("name") or "")]
+    if year:
+        boxes = [b for b in boxes if b.get("years") and b["years"][0] - 1 <= year <= b["years"][1]]
+    bodies = [b.get("body") or "" for b in boxes]
+    if not bodies or not all(FEW_DOORS.search(x) for x in bodies) or any(re.search(r"[45][- ]?door|/\s*[45]", x) for x in bodies):
+        return None
+    return "2-door" if all(re.search(r"\b2[- ]?door|coupe|coupé|convertible|cabrio|roadster", x, re.I) for x in bodies) \
+        else "3-door"
+
+
 def lookup(make, model, year, ratio=None, online=None, doors=None):
     key = f"{make}|{model}".lower()
     ent = table().get(key)

@@ -81,13 +81,14 @@ NICKNAMES = [
 def parse(text):
     t = text.lower()
     want = {"text": text}
+    placed = False                       # "G Wagon G63": the model once, the G63 as its trim
     for rx, canon, trim in NICKNAMES:
         m = rx.search(t)
         if m:
             if trim:
                 want["nickname_trim"] = m.group(trim).upper().replace(" ", "")
-            t = t[:m.start()] + " " + canon + " " + t[m.end():]
-            break
+            t = t[:m.start()] + " " + ("" if placed else canon) + " " + t[m.end():]
+            placed = True
     m = re.search(r"\b(19[5-9]\d|20[0-3]\d)\b", t)
     if m:
         want["year"] = int(m.group(1))
@@ -117,6 +118,15 @@ def parse(text):
             t = re.sub(rf"\b{b}\b", " ", t)
     want["words"] = t.strip()
     return want
+
+
+def in_words(name, text):
+    """NAME (normalised) is the request's words, whole: one word or several
+    side by side ("g class", "gclass"), or a word with digits after it
+    ("golf7"); never letters inside a word: "cla" is not in "G-Class"."""
+    w = [norm(x) for x in re.split(r"[\s\-_/.,]+", text or "") if norm(x)]
+    joins = {"".join(w[a:b]) for a in range(len(w)) for b in range(a + 1, len(w) + 1)}
+    return name in joins or any(j.startswith(name) and j[len(name):].isdigit() for j in joins)
 
 
 def find(want, cat, skip=()):
@@ -149,7 +159,7 @@ def find(want, cat, skip=()):
         return None, [], "no make recognised"
     # the model words as typed, for a search outside the catalogue
     toks = want["words"].replace("-", " ").split()
-    for k in range(1, len(toks) + 1):
+    for k in range(len(toks), 0, -1):           # the longest: "mercedes benz", not "mercedes"
         if norm(" ".join(toks[:k])) in (norm(make), *[a for a, b in MAKES.items() if b == make]):
             want["model_words"] = " ".join(toks[k:])
             break
@@ -164,7 +174,7 @@ def find(want, cat, skip=()):
     for i in pool:
         for n in names(i):
             n2 = n.replace(norm(make), "")
-            if n2 and n2 in rest and len(n2) >= best:
+            if n2 and n2 in rest and in_words(n2, want["words"]) and len(n2) >= best:
                 if len(n2) > best:
                     best, hits = len(n2), []
                 hits.append(i)
@@ -209,7 +219,7 @@ def find(want, cat, skip=()):
                 return min(g[0], y0), max(min(g[1], time.localtime().tm_year), i.get("yearEnd") or y0)
         return y0, i.get("yearEnd") or y0 + 7
     asked = {n.replace(norm(make), "") for i in hits for n in names(i)}
-    asked = {b for b in asked if b and b in rest}
+    asked = {b for b in asked if b and b in rest and in_words(b, want["words"])}
     model_rx = "|".join(re.escape(w) for w in sorted({x for i in hits for x in [str(i.get("model") or "")] if x}, key=len,
                                                        reverse=True)) or "$^"
 
@@ -437,6 +447,10 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
             f = "estate"                         # the model's other body, not the one its page leads with
         elif re.search(r"cabrio|convertible|roadster|spider|spyder", title, re.I):
             f = "convertible"
+        elif re.search(r"pick[- ]?up|double cab|crew cab|single cab|\bute\b", title, re.I) or \
+                re.fullmatch(r"ranger|hilux|navara|l200|amarok|d-?max|tacoma|tundra|f-?150|f-?250|silverado|"
+                             r"sierra|ram|gladiator|x-class|frontier|colorado|musso|bt-50|triton", md.lower()):
+            f = "pickup"                         # an open load bed: not an SUV's shape (the Defender 130 pickup)
         if fam and f != fam:
             continue
         def off(k, w):
@@ -574,8 +588,28 @@ class PhotoSearch:
         return self.result
 
 
+def _licence_note(report, commercial_only, nc_best):
+    """What the build may be used for, in its report: commercial only, and the
+    non-commercial model left out for it, if one fitted better."""
+    report["licence_mode"] = "commercial only" if commercial_only else "any licence (demo)"
+    if nc_best:
+        report["noncommercial_left_out"] = dict(nc_best, why="CC BY-NC: not for anything sold; "
+                                                "build with commercial_only off for a demo")
+    res = report.get("result") or {}
+    if res.get("credit"):
+        report["commercial_use"] = bool(res["credit"].get("commercial"))
+    return report
+
+
+def commercial_only_default():
+    """Builds use only models ExpertCarCheck may use commercially unless
+    $GLBMACHINE_COMMERCIAL_ONLY is 0: a car that is sold must not be made
+    from a non-commercial (CC BY-NC) model."""
+    return os.environ.get("GLBMACHINE_COMMERCIAL_ONLY", "1").strip().lower() not in ("0", "false", "no", "off")
+
+
 def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=False, no_sheet=False,
-          out_file=None, full=False, spec=None, standin=True, photos=True):
+          out_file=None, full=False, spec=None, standin=True, photos=True, commercial_only=None):
     """One request, start to finish, from the catalogue. Returns the report
     (with "result" and "files" when a car was built, "error" when the
     catalogue has no such model). SPEC is the car's spec as a check gives it
@@ -597,6 +631,23 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
             if sp.get(k) and not want.get(k):
                 want[k] = sp[k]
     cat = batch.catalogue()
+    # COMMERCIAL ONLY (the default): the non-commercial models are left out,
+    # so a car the catalogue has only under CC BY-NC is made as a stand-in
+    # from a model that may be sold. The report names the model left out: a
+    # demo may build it with commercial_only=False.
+    if commercial_only is None:
+        commercial_only = commercial_only_default()
+    nc_best = None
+    if commercial_only:
+        whole = cat
+        cat = {k: i for k, i in cat.items() if batch.credit_of(i)["commercial"]}
+        try:
+            r0, i0 = _choose(want, whole, exact, refused())
+            if i0 is not None and not batch.credit_of(i0)["commercial"]:
+                nc_best = {"asset": i0["assetId"], "source": i0.get("sourceTitle"), "match": r0.get("match"),
+                           "licence": batch.credit_of(i0)["licence"]}
+        except Exception:
+            nc_best = None
     args.paint = COLOURS.get(want.get("colour"))
     # the doors asked for decide the body the rigger cuts: "2 door" / "3 door"
     # is a three-door hatch or a coupe (one door each side), "4/5 door" not
@@ -669,10 +720,10 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
     if item is None or "error" in report:
         if passed:
             report["error"] = "no model of this car in the catalogue could be rigged"
-        return report
+        return _licence_note(report, commercial_only, nc_best)
     if not os.path.exists(os.path.join(out, item["assetId"], "web.glb")):
         report["error"] = "no model of this car in the catalogue could be rigged"
-        return report
+        return _licence_note(report, commercial_only, nc_best)
     if passed:
         report["match"] += f"; {len(passed)} other model(s) tried first and passed over (see passed_over)"
     if item.get("standin") and search is not None:
@@ -731,7 +782,7 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
         os.makedirs(os.path.dirname(os.path.abspath(out_file)), exist_ok=True)
         shutil.copyfile(report["files"]["glb_full" if full else "glb"], out_file)
         report["files"]["yours"] = os.path.abspath(out_file)
-    return report
+    return _licence_note(report, commercial_only, nc_best)
 
 def main():
     ap = argparse.ArgumentParser()
@@ -747,9 +798,11 @@ def main():
     ap.add_argument("--no-sheet", action="store_true", help="the car only, no four-view check sheet")
     ap.add_argument("--spec", default=None, help='the spec, e.g. "GTI" or "ST-Line 1.0 5dr"')
     ap.add_argument("--no-standin", action="store_true", help="never reshape another car: the nearest as it is")
+    ap.add_argument("--allow-noncommercial", action="store_true",
+                    help="a demo: non-commercial (CC BY-NC) models may be used; never for anything sold")
     a = ap.parse_args()
     report = build(a.request, a.engine_pack, a.tools, a.view_dir, a.out, a.port, a.exact, a.no_sheet, a.output, a.full,
-                   a.spec, not a.no_standin)
+                   a.spec, not a.no_standin, commercial_only=False if a.allow_noncommercial else None)
     print(json.dumps(report, indent=1, default=str))
     if "error" in report:
         sys.exit(2)

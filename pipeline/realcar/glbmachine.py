@@ -29,7 +29,11 @@ the engine and exhaust, save a picture, download the GLB.
 
 WEB API (`serve`):
     POST /v1/cars            {"request": "Ford Fiesta 2015 blue", "spec": "ST-Line",
-                              "sheet": false, "exact": false, "standin": true}  -> 202 {"id", "status"}
+                              "sheet": false, "exact": false, "standin": true,
+                              "noncommercial": false}  -> 202 {"id", "status"}
+                             (commercial only by default: no CC BY-NC model is used unless
+                             "noncommercial": true, for a demo; $GLBMACHINE_COMMERCIAL_ONLY=0 turns
+                             the default off for the whole server)
                              (standin: a car the catalogue lacks is made from the nearest one of
                              the same body, reshaped to its real size; false builds the nearest as it is)
     GET  /v1/cars            the last 40 cars asked for, newest first
@@ -91,11 +95,12 @@ def setup(quiet=False):
     return {"home": HOME, "tools": TOOLS, "engine_pack": ENGINE_PACK}
 
 
-def make(request, sheet=True, exact=False, out=None, port=8791, out_file=None, full=False, spec=None, standin=True):
+def make(request, sheet=True, exact=False, out=None, port=8791, out_file=None, full=False, spec=None, standin=True,
+         commercial_only=None):
     import make as mk
     setup(quiet=True)
     return mk.build(request, ENGINE_PACK, TOOLS, VIEW, out or CARS, port, exact, not sheet, out_file, full, spec,
-                    standin)
+                    standin, commercial_only=commercial_only)
 
 
 # ── your own models: added to a local catalogue beside the shared one ──────
@@ -182,7 +187,9 @@ class Jobs:
         job = {"id": uuid.uuid4().hex[:12], "status": "queued", "asked_at": time.time(),
                "request": str(body["request"])[:200], "spec": str(body.get("spec") or "")[:120],
                "sheet": bool(body.get("sheet")), "exact": bool(body.get("exact")),
-               "standin": body.get("standin", True) is not False}
+               "standin": body.get("standin", True) is not False,
+               # a demo only: CC BY-NC models allowed (the server's default is commercial only)
+               "noncommercial": body.get("noncommercial") is True}
         self.put(job)
         self.q.put(job["id"])
         return job
@@ -208,7 +215,8 @@ class Jobs:
             try:
                 rep = make(job["request"], sheet=job["sheet"], exact=job.get("exact", False),
                            out=os.path.join(CARS, jid), port=port, spec=job.get("spec"),
-                           standin=job.get("standin", True))
+                           standin=job.get("standin", True),
+                           commercial_only=False if job.get("noncommercial") else None)
                 job["report"] = rep
                 res = rep.get("result") or {}
                 job["status"] = "failed" if "error" in rep or not os.path.exists(rep.get("files", {}).get("glb", "")) \
@@ -528,6 +536,8 @@ def main():
     m.add_argument("--spec", default=None, help='the spec, e.g. "GTI" or "ST-Line 1.0 EcoBoost 5dr"')
     m.add_argument("--no-standin", action="store_true",
                    help="for a car the catalogue lacks, build the nearest as it is rather than a stand-in")
+    m.add_argument("--allow-noncommercial", action="store_true",
+                   help="a demo: CC BY-NC models may be used (never for anything sold); default: commercial only")
     b = sub.add_parser("batch")
     b.add_argument("--top", type=int, default=20)
     b.add_argument("--list", default="targets", choices=("targets", "top2000"))
@@ -569,7 +579,8 @@ def main():
         print(json.dumps(setup()))
     elif a.cmd == "make":
         rep = make(a.request, sheet=not a.no_sheet, exact=a.exact, out=a.out, out_file=a.output, full=a.full,
-                   spec=a.spec, standin=not a.no_standin)
+                   spec=a.spec, standin=not a.no_standin,
+                   commercial_only=False if a.allow_noncommercial else None)
         print(json.dumps(rep, indent=1, default=str))
         sys.exit(2 if "error" in rep else 0 if (rep.get("files") or {}).get("glb") else 3)
     elif a.cmd == "batch":

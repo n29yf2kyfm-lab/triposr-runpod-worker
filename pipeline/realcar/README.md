@@ -26,8 +26,26 @@ docker run -p 8080:8080 -v glbdata:/data -e GLBMACHINE_KEYS=key1,key2 glbmachine
 docker run --rm -v glbdata:/data glbmachine make "Toyota Yaris 2003 silver"
 ```
 
+On any rented server with Docker, one command builds and starts it, restarts it
+after a reboot and keeps the cars on a volume:
+
+```
+GLBMACHINE_KEYS=key-a,key-b docker compose -f pipeline/realcar/docker-compose.yml up -d
+```
+
+Customers need nothing installed: they call the API with their key. Put
+HTTPS in front before they do.
+
+Commercial only by default: no CC BY-NC model is used, and a car the
+catalogue has only under CC BY-NC is made as a stand-in from one that may be
+sold; the report names the model left out (`noncommercial_left_out`) and
+says `"licence_mode": "commercial only"`. A demo may allow them per car
+(`--allow-noncommercial`, or `"noncommercial": true` in the API request) or
+for the whole server (`GLBMACHINE_COMMERCIAL_ONLY=0`). Of the UK's 40 best
+sellers, only the Ford Fiesta has no commercial model.
+
 The web API (`serve`): `POST /v1/cars {"request": "...", "spec": "...",
-"sheet": false}` answers with an id; `GET /v1/cars/ID` gives the status and
+"sheet": false, "noncommercial": false}` answers with an id; `GET /v1/cars/ID` gives the status and
 the report; `GET /v1/cars/ID/car.glb` and `/sheet.jpg` give the files;
 `GET /v1/cars` lists the last 40 cars and `GET /v1/catalogue` every make,
 model and year the catalogue has. With `GLBMACHINE_KEYS` set, each call
@@ -414,6 +432,10 @@ is rescaled to it), `engine_pack` (the workshop petrol bay, exported by
 | Spare wheel on the back door | A spare wheel mounted on the tailgate (the G-Class, a Jimny, an old RAV4) rides on it, and the door swings sideways: hinged on the side away from its handle. |
 | The model's own lids first | When the rigger found the bonnet or tailgate by the artist's names, the finisher starts from that piece: the G-Class's wings and front panel, welded into one larger piece, are not its bonnet, and the box round its rear window would take the tail lamps beside a door that swings between them. |
 | Wheelbase by year and doors | A catalogue model with no years is sized from the generation of the year asked (a 2026 G-Class: the W465's 2,890 mm, not the 2,400 mm of the short W461), and a car with rear doors never from a two- or three-door body of the same name. |
+| Both doors in one named mesh | A five-door model whose doors are one named mesh per side (the 2017 Golf's `Doors`) is split at the shut line between them, as a loose door piece is; it opened only its bonnet and tailgate before. |
+| Three doors from the table | When neither the request nor the catalogue gives the doors, a model only ever built with two or three (the GR Yaris, "3-door hatchback") is cut as one: its one long door is not split into two. |
+| Names match whole words | A model's name must be the request's words, whole: "CLA" is not found inside "G-Class". |
+| A saved rig from an older rigger | is rigged again on the next build, unless it was corrected by hand in the Studio. |
 | Tangents | Every piece whose material has a normal map (or a clear coat's) gets tangents of its own, from its texture coordinates, so no viewer has to make them up and the file passes the glTF validator with no errors or warnings. The engine bay's pieces carry theirs in `assets/engine_pack.glb` (about 0.7 MB more per car). A map with no texture coordinates to apply it is dropped. |
 | Engine | The workshop's petrol bay goes in. The bay, engine, gearbox and front suspension are scaled to this car's track about the front axle. The rear suspension and fuel tank are placed about the rear axle. The exhaust is stretched from the front pipe back to 10 cm inside the rear bumper. Pieces reaching below the ground (workshop leftovers) are dropped. |
 | Frame | The car is centred on its wheelbase, with x = 0 down the middle and the ground at y = 0. Nose is +z and the car's left is +x, the same frame as the template cars. |
