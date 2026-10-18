@@ -436,6 +436,9 @@ is rescaled to it), `engine_pack` (the workshop petrol bay, exported by
 | Three doors from the table | When neither the request nor the catalogue gives the doors, a model only ever built with two or three (the GR Yaris, "3-door hatchback") is cut as one: its one long door is not split into two. |
 | Names match whole words | A model's name must be the request's words, whole: "CLA" is not found inside "G-Class". |
 | A saved rig from an older rigger | is rigged again on the next build, unless it was corrected by hand in the Studio. |
+| Vans: barn doors | A van's back opens as two barn doors, each hinged at its outer edge, not as one lid (a stand-in Transit from the Renault Master); its tail lamps stay in the rear pillars. A tailgate the model names stands as it is. |
+| Two doors asked for | "Transit 2 door" from a model with rear side doors keeps them shut, part of the body. |
+| A van's rear plate | may sit on one of its doors, off the centre line: it is made plain too (the NV200's). |
 | Tangents | Every piece whose material has a normal map (or a clear coat's) gets tangents of its own, from its texture coordinates, so no viewer has to make them up and the file passes the glTF validator with no errors or warnings. The engine bay's pieces carry theirs in `assets/engine_pack.glb` (about 0.7 MB more per car). A map with no texture coordinates to apply it is dropped. |
 | Engine | The workshop's petrol bay goes in. The bay, engine, gearbox and front suspension are scaled to this car's track about the front axle. The rear suspension and fuel tank are placed about the rear axle. The exhaust is stretched from the front pipe back to 10 cm inside the rear bumper. Pieces reaching below the ground (workshop leftovers) are dropped. |
 | Frame | The car is centred on its wheelbase, with x = 0 down the middle and the ground at y = 0. Nose is +z and the car's left is +x, the same frame as the template cars. |

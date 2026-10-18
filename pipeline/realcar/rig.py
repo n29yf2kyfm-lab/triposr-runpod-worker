@@ -739,6 +739,12 @@ def convert(car, rep, override=None, body_style=""):
                 if f"door_r{sd}" in hinge:
                     hinge[f"door_f{sd}"] = hinge.pop(f"door_r{sd}")
                 rep.setdefault("two_door", []).append(f"door_r{sd} is the front door")
+            elif f"door_r{sd}" in parts:
+                # a two-door body asked for ("Transit 2 door") from a model
+                # with rear side doors: they stay shut, part of the body
+                parts.setdefault("body", []).extend(parts.pop(f"door_r{sd}"))
+                hinge.pop(f"door_r{sd}", None)
+                rep.setdefault("two_door", []).append(f"door_r{sd} kept shut: the body asked for has no rear side doors")
     # a spare wheel on the back door (the G-Class, a Jimny, an old RAV4) rides
     # on it, and a door that carries one is hinged at the side: the side away
     # from its handle

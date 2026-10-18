@@ -5459,6 +5459,59 @@
 "Ford S-Max"
 ]
 },
+"ford|transit": {
+"boxes": [
+{
+"base": 0,
+"body": "3/4-door van",
+"class": "",
+"height": null,
+"length": null,
+"name": "First generation facelift \"Mark II\"",
+"page": "Ford Transit",
+"wheelbase": 2690,
+"width": null,
+"years": [
+1977,
+1986
+]
+},
+{
+"base": 0,
+"body": "Cargo van",
+"class": "Full-size van",
+"height": null,
+"length": null,
+"name": "Fourth generation",
+"page": "Ford Transit",
+"wheelbase": 3300,
+"width": null,
+"years": [
+2014,
+2100
+]
+},
+{
+"base": 0,
+"body": "3-door van",
+"class": "Large van",
+"height": 2083,
+"length": 4863,
+"name": "Ford Transit (2006 facelift, SWB)",
+"page": "CarExpert NZ: 2006 Ford Transit 2.4L cargo van RWD (SWB)",
+"wheelbase": 2933,
+"width": 1974,
+"years": [
+2006,
+2014
+]
+}
+],
+"tried": [
+"Ford Transit",
+"CarExpert NZ (hand-entered 2026-10-18: Wikipedia gives no size for this generation)"
+]
+},
 "ford|transit courier": {
 "boxes": [
 {

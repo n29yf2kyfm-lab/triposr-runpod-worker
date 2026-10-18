@@ -24,7 +24,8 @@ const COLOURS = [
   ['pink', [220, 120, 160]], ['turquoise', [28, 140, 140]],
 ];
 const PART_NAMES = { door_fl: 'Front left door', door_fr: 'Front right door', door_rl: 'Rear left door',
-  door_rr: 'Rear right door', bonnet: 'Bonnet', tailgate: 'Tailgate' };
+  door_rr: 'Rear right door', bonnet: 'Bonnet', tailgate: 'Tailgate',
+  door_bl: 'Back door, left', door_br: 'Back door, right' };
 const STEPS = [['download', '#4aa8e8'], ['decode', '#6cc070'], ['rig', '#ffe45c'], ['finish', '#ff8c42'],
   ['validate', '#b07be0'], ['encode', '#2fb8a6'], ['render', '#8b939c']];
 
@@ -428,9 +429,10 @@ async function showCar(job) {
     wake(true);
     // the clips: each door, the bonnet, the tailgate
     S.mixer = new THREE.AnimationMixer(S.car); S.actions = {};
-    S.clips = { doors: gltf.animations.filter(a => /^door_..?_open$/.test(a.name)),
+    S.clips = { doors: gltf.animations.filter(a => /^door_[fr][lr]_open$/.test(a.name)),
       bonnet: gltf.animations.filter(a => a.name === 'bonnet_open'),
-      tailgate: gltf.animations.filter(a => a.name === 'tailgate_open') };
+      // a van's back opens as two barn doors
+      tailgate: gltf.animations.filter(a => /^(tailgate|door_b[lr])_open$/.test(a.name)) };
     S.open = { doors: false, bonnet: false, tailgate: false };
     const rep = job.report || {};
     S.name = slug(job.request + (job.spec ? ' ' + job.spec : '')) || rep.asset || 'car';

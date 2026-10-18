@@ -319,6 +319,9 @@ def one(target, item, args, out):
                       + "igged, glass cleared and engine bay fitted by the ExpertCarCheck GLB machine."}
     if getattr(args, "paint", None):
         spec["paint"] = list(args.paint)
+    # a van opens at the back as two barn doors (finish.py)
+    if str(item.get("bodyStyle") or "").lower() == "van" or (st or {}).get("body") == "van":
+        spec["body_family"] = "van"
     if st:
         spec["wheelbase"] = st["wheelbase"]      # reshaped to it already: the finisher checks, and moves nothing
     elif aid in WHEELBASE:
@@ -413,6 +416,8 @@ def one(target, item, args, out):
     want = {"bonnet" if w == "panel_bonnet" else w for w in want}
     # doors come in pairs: a right front door means a left front door to open
     want |= {w[:6] + {"l": "r", "r": "l"}[w[6]] for w in want if re.fullmatch(r"door_[fr][lr]", w)}
+    if {"door_bl", "door_br"} & set(flog.get("opens") or []):
+        want = (want - {"tailgate"}) | {"door_bl", "door_br"}        # a van's back: two barn doors
     rec["missing"] = sorted(want - set(flog.get("opens") or []))
     ok = not rec["missing"] and rec["validator"].get("errors") == 0 and rec["web_bytes"] \
         and not rec.get("scale_unverified")

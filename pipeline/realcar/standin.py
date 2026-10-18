@@ -43,7 +43,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "template"))
 from gltf import GLTF  # noqa: E402
 
-VERSION = "1.9"                     # a change here reshapes stand-ins built before
+VERSION = "1.10"                    # a change here reshapes stand-ins built before
 WHEEL = re.compile(r"^SB_wheel_(fl|fr|rl|rr)")
 
 
@@ -570,7 +570,10 @@ def debadge(path):
                          "layer": max(w, h) <= 0.56 and not lamp[end][kx, ky] and not behind_glass(end, kx, ky, lo, hi)}
                 pieces.append(piece)
                 # a plate: upright and plate-sized, or tilted and plate-sized in its own plane
-                if len(pv) >= 4 and abs(cx) < 0.15 and w >= 0.3 and proud < 0.15:
+                # at the back it may sit on one of a van's doors (the NV200's), off the centre line
+                off_ok = abs(cx) < 0.15 or (end == "rear" and abs(cx) < 0.5 and not lamp[end][kx, ky]
+                                            and not behind_glass(end, kx, ky, lo, hi))
+                if len(pv) >= 4 and off_ok and w >= 0.3 and proud < 0.15:
                     nz = cr[t, 2].sum() / max(np.linalg.norm(cr[t].sum(0)), 1e-12)
                     upright = 0.36 <= w <= 0.56 and 0.08 <= h <= 0.17 and dz < 0.05 and abs(nz) > 0.7
                     q = pv - pv.mean(0)

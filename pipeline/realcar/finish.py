@@ -59,7 +59,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "template"))
 from gltf import GLTF  # noqa: E402
 
-HINGED = {"door_fl": -65, "door_fr": 65, "door_rl": -65, "door_rr": 65, "bonnet": -55, "tailgate": 75}
+HINGED = {"door_fl": -65, "door_fr": 65, "door_rl": -65, "door_rr": 65, "bonnet": -55, "tailgate": 75,
+          "door_bl": 95, "door_br": 95}                 # a van's barn doors, hinged at the back's outer edges
+BARN = ("door_bl", "door_br")
 
 # Where the engine pack sits in the Golf master's frame (measured from
 # tmpl/master_golf.glb): front and rear axle z, ground y, tyre outer x.
@@ -75,6 +77,10 @@ def hinge_line(part, plo, phi, edge=None, deg=None):
     door); bonnet: rear edge (or front); tailgate: top edge (or bottom: a
     drop-down tail; left / right: side-hinged)."""
     deg = abs(float(deg)) if deg else abs(HINGED[part])
+    if part in BARN:
+        left = part == "door_bl"
+        x = float(phi[0] - 0.02 if left else plo[0] + 0.02)
+        return [x, float((plo[1] + phi[1]) / 2), float(plo[2] + 0.02)], [0, 1, 0], -deg if left else deg
     if part.startswith("door"):
         left = (plo[0] + phi[0]) / 2 > 0
         x = float(phi[0] - 0.03 if left else plo[0] + 0.03)
@@ -864,6 +870,28 @@ def finish(src, spec, out, base_dir="."):
         Q = (P - np.array([0.0, ground, zmid])) * s
         return Q
 
+    # a VAN's back is two barn doors, not a lid (the Master, the Transit): the
+    # tailgate found or cut here splits down its middle, each half hinged at
+    # its outer edge. A tailgate the model names stands as it is.
+    if spec.get("body_family") == "van" and "tailgate" not in manual and not log.get("tailgate_named"):
+        xs = [r["P"][r["I"][r["tri_part"] == "tailgate"]].reshape(-1, 3)[:, 0] for r in recs
+              if (r["tri_part"] == "tailgate").any()]
+        if xs:
+            xa = np.concatenate(xs)
+            xm = (xa.min() + xa.max()) / 2
+            lamp_rx = re.compile(r"lamp|light|lens|(red|orange|amber)_?glass|reflector|indicator|signal|brake|stop", re.I)
+            for r in recs:
+                on = r["tri_part"] == "tailgate"
+                if on.any():
+                    # a van's tail lamps sit in its rear pillars, beside the doors
+                    if r["rig"] == "lamps_rear" or (r["mat"] is not None
+                                                    and lamp_rx.search(mats[r["mat"]].get("name", ""))):
+                        r["tri_part"] = np.where(on, "body", r["tri_part"])
+                        continue
+                    cx_ = r["P"][r["I"]].mean(1)[:, 0]
+                    r["tri_part"] = np.where(on, np.where(cx_ > xm, "door_bl", "door_br"), r["tri_part"])
+            log["barn_doors"] = {"split_x": round(float(xm), 3), "why": "a van: the back opens as two doors"}
+
     # ── rebuild meshes, one per part, primitives kept per source material ──
     by_part = {}
     for r in recs:
@@ -923,7 +951,8 @@ def finish(src, spec, out, base_dir="."):
     log["parts"] = {rename.get(k, k): int(sum(j["accessors"][pr["indices"]]["count"] // 3 for pr in v))
                     for k, v in by_part.items()}
     log["opens"] = sorted(pivots)
-    log["missing"] = sorted(set(HINGED) - set(pivots))
+    barn = any(b in pivots for b in BARN)
+    log["missing"] = sorted(set(HINGED) - set(pivots) - set(BARN) - ({"tailgate"} if barn else set()))
 
     # ── engine pack ──
     if spec.get("engine_pack"):
@@ -1097,7 +1126,7 @@ def finish(src, spec, out, base_dir="."):
     for part, (hv, axis, deg) in pivots.items():
         q = g.add_accessor(np.array([[0, 0, 0, 1], quat(axis, deg)]))
         clips.setdefault(part + "_open", []).append((hv, q))
-        if part.startswith("door"):
+        if part.startswith("door") and part not in BARN:
             clips.setdefault("doors_open", []).append((hv, q))
         clips.setdefault("all_open", []).append((hv, q))
     j["animations"] = [{"name": nm_, "samplers": [{"input": tin, "output": q, "interpolation": "LINEAR"} for _, q in ch],
