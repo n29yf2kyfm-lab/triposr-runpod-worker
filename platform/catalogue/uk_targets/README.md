@@ -47,3 +47,15 @@ Join result on the day it was built:
 (commercial-OK licences only: CC-BY, CC-BY-SA, CC0) for every target and writes
 `candidates.jsonl`; downloading and surveying a candidate needs
 `SKETCHFAB_TOKENS` and Blender, which `source.py` deliberately does not use.
+
+## Motorbikes
+
+`motorbike_source.py` runs the same anonymous search for the 526 motorbike
+targets (Harley-Davidson first). Run on 2026-10-19: 90 of the 526 have at
+least one commercially licensed model (CC BY), 45% of the UK's licensed
+motorbikes by count, 21 of the top 50, and 15 Harley-Davidson models (the
+DfT's `XL` is the Sportster). `motorbike_candidates.csv` is the shortlist:
+up to three per bike, leaving out scans, toys and models under 20,000 faces.
+A model uploaded by more than one account is one only its maker can license:
+check before use. The machine builds cars and vans today; bikes need a bike
+mode (two wheels, steering, side stand).
