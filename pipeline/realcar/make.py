@@ -744,12 +744,12 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
                     search = PhotoSearch(s_["make"], s_["model"], item["standin"])
         if item is None:
             break
-        known = search.result if search is not None and (search.thread is None or not search.thread.is_alive()) else None
-        if item.get("standin") and (known or {}).get("roofline"):
+        photo = search.result if search is not None and (search.thread is None or not search.thread.is_alive()) else None
+        if item.get("standin") and (photo or {}).get("roofline"):
             # the photo is known already (the standby library, or a search for
             # this car before): its roofline goes into this build, not into a
             # second build after it that the time may not allow
-            item = dict(item, standin=dict(item["standin"], roof=dict(known["roofline"], file=known["file"])))
+            item = dict(item, standin=dict(item["standin"], roof=dict(photo["roofline"], file=photo["file"])))
         t0 = time.time()
         rec = batch.one({"rank": 0, "genModel": request}, item, args, out)
         last_s = time.time() - t0
