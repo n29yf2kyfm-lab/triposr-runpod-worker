@@ -42,6 +42,7 @@ What it does, in order:
    file carries glTF animation clips (door_fl_open … tailgate_open,
    doors_open, all_open).
 """
+import copy
 import json
 import math
 import os
@@ -233,6 +234,49 @@ def _normal_maps(m):
     if "clearcoatNormalTexture" in cc:
         out.append((cc, "clearcoatNormalTexture"))
     return out
+
+
+def _texture_slots(d):
+    """Every texture binding in a material, as (holder, key) pairs."""
+    for k, v in list(d.items()):
+        if isinstance(v, dict):
+            if k.endswith("Texture") and "index" in v:
+                yield d, k
+            else:
+                yield from _texture_slots(v)
+
+
+def drop_unreachable_maps(g):
+    """A primitive with no texture coordinates for a map its material binds
+    (the engine pack's gearbox case wears a roughness map on pieces with
+    none: glTF validator, an error, once the file is re-written) gets a copy
+    of the material without those maps; the material stays as it is for the
+    pieces that have them. Returns how many primitives were given a copy."""
+    mats = g.j.get("materials", [])
+    made, fixed = {}, 0
+    for mesh in g.j.get("meshes", []):
+        for p in mesh["primitives"]:
+            mi = p.get("material")
+            if mi is None:
+                continue
+            missing = []
+            for holder, key in _texture_slots(mats[mi]):
+                if f"TEXCOORD_{holder[key].get('texCoord', 0)}" not in p["attributes"]:
+                    missing.append(key)
+            if not missing:
+                continue
+            k = (mi, tuple(sorted(missing)))
+            if k not in made:
+                m2 = copy.deepcopy(mats[mi])
+                for holder, key in list(_texture_slots(m2)):
+                    if key in missing:
+                        holder.pop(key)
+                m2["name"] = (m2.get("name") or "material") + " (no maps)"
+                mats.append(m2)
+                made[k] = len(mats) - 1
+            p["material"] = made[k]
+            fixed += 1
+    return fixed
 
 
 def ensure_tangents(g):
@@ -1266,6 +1310,7 @@ def finish(src, spec, out, base_dir="."):
     if spec.get("credit"):
         j.setdefault("asset", {})["copyright"] = spec["credit"]
     j.setdefault("asset", {}).setdefault("extras", {})["realcar_finish"] = log
+    log["maps_without_uv"] = drop_unreachable_maps(g)
     log["tangents"] = ensure_tangents(g)
     log["bytes"] = g.save(out)
     return log

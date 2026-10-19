@@ -418,6 +418,15 @@ def one(target, item, args, out):
     except Exception:
         rec["validator"] = {"errors": -1}
     rec["web_bytes"] = os.path.getsize(web) if os.path.exists(web) else None
+    # the web copy is the file people get: it is checked too (a re-write can
+    # break what the finished file had right)
+    if rec["web_bytes"]:
+        try:
+            pv = subprocess.run(["node", os.path.join(args.tools, "validate.mjs"), web],
+                                capture_output=True, text=True, timeout=600)
+            rec["validator_web"] = json.loads(pv.stdout)
+        except Exception:
+            rec["validator_web"] = {"errors": -1}
     try:
         if "render" not in procs:
             raise RuntimeError("no sheet asked for")
@@ -452,6 +461,7 @@ def one(target, item, args, out):
         want = (want - {"tailgate"}) | {"door_bl", "door_br"}        # a van's back: two barn doors
     rec["missing"] = sorted(want - set(flog.get("opens") or []))
     ok = not rec["missing"] and rec["validator"].get("errors") == 0 and rec["web_bytes"] \
+        and (rec.get("validator_web") or {}).get("errors", 0) == 0 \
         and not rec.get("scale_unverified")
     rec["status"] = "done" if ok else "check"
     json.dump(rec, open(os.path.join(d, "record.json"), "w"), indent=1, default=str)
