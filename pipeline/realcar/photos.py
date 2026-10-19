@@ -12,7 +12,8 @@ licences that allow commercial use: CC BY, CC BY-SA, CC0, public domain.
 Side and profile views come first, then the model and its first year. It
 downloads them in that order, takes the background off (rembg, U2-Net on the
 CPU) and stops at the first true side elevation of a plain-painted car. A
-deadline keeps it inside the machine's two minutes.
+deadline keeps it inside the machine's minute; a search still running when
+the build is done goes on, and its photo is used the next time.
 
 roofline() reads the top of the car along its length from that cut-out
 (pipeline/forge/trace.py), scaled by the published length, with the wheel

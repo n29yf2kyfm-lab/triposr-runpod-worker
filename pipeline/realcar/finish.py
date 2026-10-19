@@ -58,7 +58,7 @@ from scipy.spatial import cKDTree
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "template"))
-from gltf import GLTF  # noqa: E402
+from gltf import GLTF, row_ids  # noqa: E402
 
 HINGED = {"door_fl": -65, "door_fr": 65, "door_rl": -65, "door_rr": 65, "bonnet": -55, "tailgate": 75,
           "door_bl": 95, "door_br": 95}                 # a van's barn doors, hinged at the back's outer edges
@@ -119,9 +119,7 @@ def tri_area_normal(T):
 
 
 def islands(T, weld=2e-4):
-    V = np.round(T.reshape(-1, 3) / weld).astype(np.int64)
-    _, vid = np.unique(V, axis=0, return_inverse=True)
-    vid = vid.reshape(-1, 3)
+    vid = row_ids(np.round(T.reshape(-1, 3) / weld).astype(np.int64)).reshape(-1, 3)
     nt = len(T)
     rows = np.repeat(np.arange(nt), 3)
     cols = vid.ravel() + nt

@@ -248,6 +248,112 @@ def render_sheet(d, args):
     return {"seconds": round(time.time() - t0, 1)}
 
 
+def body_of(item, args):
+    """The body the rigger cuts for, so it cuts the right number of doors:
+    the request's ("2 door"), else the catalogue's (coupe, convertible...),
+    else the source title's ("3dr"); and the door count the wheelbase table
+    gave, if it was that (else None)."""
+    body = getattr(args, "body_style", None) or (f"{item['doors']}-door" if item.get("doors") else None) \
+        or item.get("bodyStyle") or ""
+    if not body and re.search(r"\b[2-5][- ]?(?:door|dr)\b|coupe|cabrio|convertible", item.get("sourceTitle") or "", re.I):
+        body = re.search(r"\b[2-5][- ]?(?:door|dr)\b|coupe|cabrio|convertible", item["sourceTitle"], re.I).group(0)
+    # a model only ever built with two or three doors (the GR Yaris), when
+    # neither the request nor the catalogue says: else its one long door is
+    # split into two
+    if not getattr(args, "body_style", None) and not TWO_DOOR.search(body or "") \
+            and not re.search(r"\b[45][- ]?(?:door|dr)\b", body or "", re.I):
+        few = wheelbase.few_doors(*model_of(item), item.get("yearStart") or getattr(args, "year", None))
+        if few:
+            return f"{few} {body}".strip(), few
+    return body, None
+
+
+RIG_FILES = ("src.glb", "src.report.json", "result.json")
+
+
+def rig_cache(item, body):
+    """The shared folder a catalogue model's rig is kept in for every request
+    after the first: $GLBMACHINE_HOME/rigs/<model>/<2|4> (the rigger cuts a
+    two-door body apart from a four-door one). Each server job builds in a
+    fresh folder; without this it downloaded and rigged its model again."""
+    home = os.environ.get("GLBMACHINE_HOME")
+    if not home:
+        return None
+    aid = item.get("standin_donor") or item["assetId"]
+    return os.path.join(os.path.expanduser(home), "rigs", aid, "2" if TWO_DOOR.search(body or "") else "4")
+
+
+def keep_rig(rig, cache):
+    """A fresh rig into the shared cache: copied (a stand-in reshapes its
+    src.glb in place afterwards), then put in place whole."""
+    tmp = f"{cache}.tmp{os.getpid()}.{threading.get_ident()}"
+    try:
+        os.makedirs(tmp, exist_ok=True)
+        for f in RIG_FILES:
+            shutil.copyfile(os.path.join(rig, f), os.path.join(tmp, f))
+        if os.path.exists(cache):
+            shutil.rmtree(cache)
+        os.rename(tmp, cache)
+    except OSError:
+        shutil.rmtree(tmp, ignore_errors=True)     # another build kept it first
+
+
+def rig_model(item, d, body, tools, lg, tm):
+    """Download a catalogue model into D, decode it to plain geometry (Draco,
+    meshopt, quantized -> float) and rig it with our own rigger into D/rig:
+    no Blender anywhere. Returns the rigger's result."""
+    src, rig = os.path.join(d, "src.glb"), os.path.join(d, "rig")
+    t0 = time.time()
+    urllib.request.urlretrieve(item["desktopGlbUrl"], src)
+    tm["download"] = round(time.time() - t0, 1)
+    t0 = time.time()
+    plain = os.path.join(d, "plain.glb")
+    run(["node", os.path.join(tools, "decode.mjs"), src, plain], 600, lg)
+    tm["decode"] = round(time.time() - t0, 1)
+    t0 = time.time()
+    p = run([sys.executable, os.path.join(HERE, "rig.py"), plain, rig, f"--body={body}"], 1200, lg)
+    tm["rig"] = round(time.time() - t0, 1)
+    for f in (src, plain):
+        if os.path.exists(f):
+            os.remove(f)
+    try:
+        return json.loads(p.stdout.strip().splitlines()[-1])
+    except Exception:
+        return {"status": "error", "error": (p.stderr or p.stdout)[-300:]}
+
+
+def warm(items, args, workers=2, log=print):
+    """Rig catalogue models ahead of any request, into the shared cache, so a
+    request for them is only finished (seconds). Models already in the cache
+    for this rigger are left. Returns {assetId: status}."""
+    out = {}
+
+    def one_model(item):
+        body, _ = body_of(item, args)
+        cache = rig_cache(item, body)
+        rc = os.path.join(cache, "result.json")
+        if os.path.exists(rc) and json.load(open(rc)).get("rigger") == rig_mod.VERSION:
+            return item["assetId"], "cached"
+        d = f"{cache}.work{os.getpid()}.{threading.get_ident()}"
+        os.makedirs(d, exist_ok=True)
+        tm = {}
+        try:
+            with open(os.path.join(d, "warm.log"), "w") as lg:
+                rr = rig_model(item, d, body, args.tools, lg, tm)
+            if os.path.exists(os.path.join(d, "rig", "src.glb")):
+                keep_rig(os.path.join(d, "rig"), cache)
+            return item["assetId"], f"{rr.get('status')} in {sum(tm.values()):.0f} s"
+        except Exception as e:
+            return item["assetId"], f"failed: {e}"[:200]
+        finally:
+            shutil.rmtree(d, ignore_errors=True)
+    with ThreadPoolExecutor(workers) as ex:
+        for aid, st in ex.map(one_model, items):
+            out[aid] = st
+            log(f"{aid}: {st}")
+    return out
+
+
 def one(target, item, args, out):
     aid = item["assetId"]
     d = os.path.join(out, aid)
@@ -260,22 +366,19 @@ def one(target, item, args, out):
     rr_path = os.path.join(rig, "result.json")
     tm = {}
     t0 = time.time()
-    # the body, so the rigger cuts the right number of doors: the request's
-    # ("2 door"), else the catalogue's (coupe, convertible...), else the
-    # source title's ("3dr")
-    body = getattr(args, "body_style", None) or (f"{item['doors']}-door" if item.get("doors") else None) \
-        or item.get("bodyStyle") or ""
-    if not body and re.search(r"\b[2-5][- ]?(?:door|dr)\b|coupe|cabrio|convertible", item.get("sourceTitle") or "", re.I):
-        body = re.search(r"\b[2-5][- ]?(?:door|dr)\b|coupe|cabrio|convertible", item["sourceTitle"], re.I).group(0)
-    # a model only ever built with two or three doors (the GR Yaris), when
-    # neither the request nor the catalogue says: else its one long door is
-    # split into two
-    if not getattr(args, "body_style", None) and not TWO_DOOR.search(body or "") \
-            and not re.search(r"\b[45][- ]?(?:door|dr)\b", body or "", re.I):
-        few = wheelbase.few_doors(*model_of(item), item.get("yearStart") or getattr(args, "year", None))
-        if few:
-            body = f"{few} {body}".strip()
-            rec["body_from_table"] = few
+    body, few = body_of(item, args)
+    if few:
+        rec["body_from_table"] = few
+    # the model rigged before, for any request (the shared rig cache): its rig
+    # is copied in, and nothing is downloaded or rigged
+    cache = rig_cache(item, body)
+    if cache and not os.path.exists(rigged):
+        rc = json.load(open(os.path.join(cache, "result.json"))) if os.path.exists(os.path.join(cache, "result.json")) else {}
+        if rc.get("rigger") == rig_mod.VERSION and all(os.path.exists(os.path.join(cache, f)) for f in RIG_FILES):
+            os.makedirs(rig, exist_ok=True)
+            for f in RIG_FILES:
+                shutil.copyfile(os.path.join(cache, f), os.path.join(rig, f))
+            rec["rig_from_cache"] = True
     rr = json.load(open(rr_path)) if os.path.exists(rigged) and os.path.exists(rr_path) else None
     two = lambda b: bool(TWO_DOOR.search(b or ""))  # noqa: E731
     fresh_rig = False
@@ -293,24 +396,9 @@ def one(target, item, args, out):
                 if os.path.exists(os.path.join(rig, f)):
                     os.remove(os.path.join(rig, f))
             rec["rerigged"] = {"was": rr.get("body_style", ""), "now": body}
-        urllib.request.urlretrieve(item["desktopGlbUrl"], src)
-        tm["download"] = round(time.time() - t0, 1)
-        t0 = time.time()
-        # plain geometry first (Draco / meshopt / quantized -> float), then
-        # our own rigger: no Blender anywhere
-        plain = os.path.join(d, "plain.glb")
-        run(["node", os.path.join(args.tools, "decode.mjs"), src, plain], 600, lg)
-        tm["decode"] = round(time.time() - t0, 1)
-        t0 = time.time()
-        p = run([sys.executable, os.path.join(HERE, "rig.py"), plain, rig, f"--body={body}"], 1200, lg)
-        tm["rig"] = round(time.time() - t0, 1)
-        for f in (src, plain):
-            if os.path.exists(f):
-                os.remove(f)
-        try:
-            rr = json.loads(p.stdout.strip().splitlines()[-1])
-        except Exception:
-            rr = {"status": "error", "error": (p.stderr or p.stdout)[-300:]}
+        rr = rig_model(item, d, body, args.tools, lg, tm)
+        if cache and os.path.exists(rigged):
+            keep_rig(rig, cache)
     rec["rig"] = {k: rr.get(k) for k in ("status", "opens", "missing", "refused", "error")}
     if not os.path.exists(rigged):
         rec["status"] = "rig failed"

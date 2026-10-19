@@ -652,6 +652,16 @@ def _licence_note(report, commercial_only, nc_best):
     return report
 
 
+def deadline_s():
+    """The time a request has, from asking to its file: $GLBMACHINE_DEADLINE_S,
+    50 s by default (the promise is under a minute; the check sheet, when
+    asked for, comes after the file)."""
+    try:
+        return float(os.environ.get("GLBMACHINE_DEADLINE_S", 50))
+    except ValueError:
+        return 50.0
+
+
 def commercial_only_default():
     """Builds use only models ExpertCarCheck may use commercially unless
     $GLBMACHINE_COMMERCIAL_ONLY is 0: a car that is sold must not be made
@@ -660,13 +670,16 @@ def commercial_only_default():
 
 
 def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=False, no_sheet=False,
-          out_file=None, full=False, spec=None, standin=True, photos=True, commercial_only=None):
+          out_file=None, full=False, spec=None, standin=True, photos=True, commercial_only=None, sheet_after=False):
     """One request, start to finish, from the catalogue. Returns the report
     (with "result" and "files" when a car was built, "error" when the
     catalogue has no such model). SPEC is the car's spec as a check gives it
     ("GTI", "ST-Line 1.0 EcoBoost 5dr hatchback"): a badge the catalogue has
     as its own model picks it, its doors and body count when the request
-    gives none, and the rest (engine, fuel, trim) leaves the body as it is."""
+    gives none, and the rest (engine, fuel, trim) leaves the body as it is.
+    SHEET_AFTER: no sheet now, but the finished file is kept for draw_sheet,
+    which the caller runs once it has handed the file over (the server)."""
+    t_start = time.time()                                # the request's clock: to its file, under the deadline
     # each try is built without its sheet and keeps its finished file; the
     # sheet is drawn once, for the car kept
     args = argparse.Namespace(engine_pack=os.path.abspath(engine_pack), tools=tools, view_dir=view_dir,
@@ -711,10 +724,14 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
     # a model the rigger cannot use (its wheels and doors fused into a few
     # shells) is passed over for the next best, up to three, and the report
     # says why
-    passed, known, best, tried, t_start, search = [], refused(), None, [], time.time(), None
+    passed, known, best, tried, search = [], refused(), None, [], None
+    deadline, last_s = deadline_s(), 0.0
     for attempt in range(3):
-        if attempt and time.time() - t_start > 70:
-            break                         # the two minutes: keep the best so far
+        if attempt and time.time() - t_start + last_s > deadline:
+            # another try would not finish in time (it takes about as long as
+            # the last): keep the best so far
+            report["time_limit"] = f"stopped trying other models at {time.time() - t_start:.0f} s"
+            break
         skip = {p["asset"] for p in passed} | known
         report, item = _choose(want, cat, exact, skip)
         if standin and not exact:
@@ -728,7 +745,8 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
             break
         t0 = time.time()
         rec = batch.one({"rank": 0, "genModel": request}, item, args, out)
-        rec["seconds"] = round(time.time() - t0)
+        last_s = time.time() - t0
+        rec["seconds"] = round(last_s)
         tried.append(item["assetId"])
         report["result"] = rec
         built = os.path.exists(os.path.join(out, item["assetId"], "web.glb")) and rec.get("status") in ("done", "check")
@@ -778,11 +796,16 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
     if passed:
         report["match"] += f"; {len(passed)} other model(s) tried first and passed over (see passed_over)"
     if item.get("standin") and search is not None:
-        ph = search.get(60 - (time.time() - t_start))
+        # the photo is waited for only while a rebuild with it still fits in
+        # the time; a search still running goes on and is kept for next time
+        ph = search.get(deadline - (time.time() - t_start) - last_s)
         report["standin"]["photo_search"] = ({"found": ph.get("file"), "seconds": ph.get("seconds"),
                                              "rejected": len(ph.get("rejected") or [])} if ph else
-                                            {"found": None, "why": "still searching at the time limit"})
-        if ph and ph.get("roofline"):
+                                            {"found": None, "why": "still searching at the time limit: "
+                                                                   "a photo found later is used next time"})
+        if ph and ph.get("roofline") and time.time() - t_start + last_s > deadline:
+            report["standin"]["photo_search"]["why"] = "found too late to rebuild in time: used next time"
+        elif ph and ph.get("roofline"):
             st2 = dict(item["standin"], roof=dict(ph["roofline"], file=ph["file"]))
             item2 = dict(item, standin=st2)
             rec2 = batch.one({"rank": 0, "genModel": request}, item2, args, out)
@@ -811,29 +834,50 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
             "mark them in Studio)" if len(side) < asked else
             " (the catalogue's model of this car is a 5-door)")
     d = os.path.join(out, item["assetId"])
-    if not no_sheet:                      # the sheet, drawn by a browser from the view folder
-        server = subprocess.Popen([sys.executable, "-m", "http.server", str(port)], cwd=view_dir,
+    # the file first: the time a request is promised is to its file; the
+    # check sheet, when asked for, comes after it
+    report["files"] = _files(d)
+    if out_file and report["files"].get("glb_full" if full else "glb"):
+        os.makedirs(os.path.dirname(os.path.abspath(out_file)), exist_ok=True)
+        shutil.copyfile(report["files"]["glb_full" if full else "glb"], out_file)
+        report["files"]["yours"] = os.path.abspath(out_file)
+    report["seconds_to_file"] = round(time.time() - t_start, 1)
+    if sheet_after:
+        report["sheet_from"] = d
+    elif not no_sheet:
+        draw_sheet(d, args, rec)
+        report["files"].update(_files(d))
+    elif os.path.exists(os.path.join(d, "finished.glb")):
+        os.remove(os.path.join(d, "finished.glb"))
+    return _licence_note(report, commercial_only, nc_best)
+
+
+def _files(d):
+    return {k: os.path.join(d, f) for k, f in
+            (("glb", "web.glb"), ("glb_full", "car_full.glb"), ("sheet", "sheet.jpg"), ("photo", "photo.jpg"))
+            if os.path.exists(os.path.join(d, f))}
+
+
+def draw_sheet(d, args, rec):
+    """The four-view check sheet of the car built in D (from its kept
+    finished.glb, which goes afterwards), drawn by a browser from the view
+    folder. Its time goes in REC's timings, or its error."""
+    if os.path.exists(os.path.join(d, "finished.glb")):
+        server = subprocess.Popen([sys.executable, "-m", "http.server", str(args.port)], cwd=args.view_dir,
                                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         time.sleep(0.6)
         try:
             sh = batch.render_sheet(d, args)
         finally:
             server.terminate()
-        if "seconds" in sh:
-            rec.setdefault("timings_s", {})["render"] = sh["seconds"]
-            rec.pop("sheet_error", None)
-        else:
-            rec["sheet_error"] = sh["error"]
-    if os.path.exists(os.path.join(d, "finished.glb")):
         os.remove(os.path.join(d, "finished.glb"))
-    report["files"] = {k: os.path.join(d, f) for k, f in
-                       (("glb", "web.glb"), ("glb_full", "car_full.glb"), ("sheet", "sheet.jpg"), ("photo", "photo.jpg"))
-                       if os.path.exists(os.path.join(d, f))}
-    if out_file and report["files"].get("glb_full" if full else "glb"):
-        os.makedirs(os.path.dirname(os.path.abspath(out_file)), exist_ok=True)
-        shutil.copyfile(report["files"]["glb_full" if full else "glb"], out_file)
-        report["files"]["yours"] = os.path.abspath(out_file)
-    return _licence_note(report, commercial_only, nc_best)
+    else:
+        sh = {"error": "no finished car to draw"}
+    if "seconds" in sh:
+        rec.setdefault("timings_s", {})["render"] = sh["seconds"]
+        rec.pop("sheet_error", None)
+    else:
+        rec["sheet_error"] = sh["error"]
 
 def main():
     ap = argparse.ArgumentParser()

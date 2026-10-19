@@ -13,7 +13,7 @@ import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const norm = s => String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-const BUDGET = 120;            // seconds: the machine's promise
+const BUDGET = 60;             // seconds: the machine's promise, request to file
 
 // DVLA colour names, painted as make.py paints them
 const COLOURS = [
@@ -201,10 +201,16 @@ async function follow(id, fresh) {
   const secs = (job.finished_at || 0) - (job.asked_at || 0);
   const q = job.status === 'done' ? (job.quality === 'check' ? 'check' : 'done') : 'failed';
   clock(secs > 0 ? secs : (performance.now() - S.t0) / 1000, q === 'failed' ? 'failed' : 'done');
-  status(q, q === 'failed' ? 'See below' : `Built in ${Math.round(secs)} s` + (secs <= BUDGET ? ', inside the 2 minutes' : ''));
+  status(q, q === 'failed' ? 'See below' : `Built in ${Math.round(secs)} s` + (secs <= BUDGET ? ', inside the minute' : ''));
   report(job);
   recent();
   if (job.status === 'done') await showCar(job);
+  // the check sheet comes after the car: its button appears when it is drawn
+  while (job.sheet_status === 'drawing' && S.job.id === id) {
+    await new Promise(r => { S.poll = setTimeout(r, 2000); });
+    try { job = await (await api('/v1/cars/' + id)).json(); } catch (e) { break; }
+    if (job.sheet_status !== 'drawing' && S.job.id === id) report(job);
+  }
 }
 
 // ── report ───────────────────────────────────────────────────────────────

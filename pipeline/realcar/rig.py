@@ -41,7 +41,7 @@ from scipy.sparse.csgraph import connected_components
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "template"))
-from gltf import GLTF  # noqa: E402
+from gltf import GLTF, row_ids  # noqa: E402
 
 VERSION = "2.2.0-py"
 
@@ -277,10 +277,17 @@ def drop(lst, o):
     del lst[next(i for i, x in enumerate(lst) if x is o)]
 
 
+def per_material(ms, test):
+    """TEST of each triangle's material (MS: material index per triangle),
+    asked once per material, not once per triangle."""
+    if not len(ms):
+        return np.zeros(0, bool)
+    u, inv = np.unique(ms, return_inverse=True)
+    return np.array([bool(test(int(m))) for m in u])[inv.reshape(-1)]
+
+
 def weld_ids(T, scale):
-    V = np.round(T.reshape(-1, 3) / max(scale, 1e-9)).astype(np.int64)
-    _, vid = np.unique(V, axis=0, return_inverse=True)
-    return vid.reshape(-1, 3)
+    return row_ids(np.round(T.reshape(-1, 3) / max(scale, 1e-9)).astype(np.int64)).reshape(-1, 3)
 
 
 def components(vid, mask=None):
@@ -885,7 +892,7 @@ def material_wheels(car, objs, rep):
         if any(o["name"].startswith(st + "_") for st in stems) and len(T) and T[..., 1].max() <= lo[1] + .5 * H:
             hit = np.ones(len(ms), bool)          # all low: rims, not a body that shares the name
         else:
-            hit = np.array([m >= 0 and bool(WHEEL_MAT.search(car.mname(m))) for m in ms]) if len(ms) else np.zeros(0, bool)
+            hit = per_material(ms, lambda m: m >= 0 and bool(WHEEL_MAT.search(car.mname(m))))
         if not hit.any():
             continue
         c = T.mean(1)
@@ -1078,7 +1085,7 @@ def red_lamp_end(car, objs, lo, hi):
         return r > .45 and g < .2 and b < .2
     end = {1: 0.0, -1: 0.0}
     for T, ms, a in data:
-        reds = np.array([red(m) for m in ms])
+        reds = per_material(ms, red)
         if not reds.any():
             continue
         c = T.mean(1)
@@ -1381,7 +1388,7 @@ def cut_doors(car, objs, wheels, lo, hi, rep, body_style=""):
     for o in src:
         T, ms, refs, vid, a_, n_, E = cache[id(o)]
         c = T.mean(1)
-        mn = np.array([bool(GLASS_MAT.search(car.mname(m))) for m in ms])
+        mn = per_material(ms, lambda m: GLASS_MAT.search(car.mname(m)))
         for sd in (1, -1):
             ok = ~mn & (sd * n_[:, 0] > .7) & (ysill < c[:, 1]) & (c[:, 1] < ytop) & (np.sign(c[:, 0] - cx) == sd)
             for d in ("f", "r"):
@@ -1392,8 +1399,9 @@ def cut_doors(car, objs, wheels, lo, hi, rep, body_style=""):
     for o in src:
         T, ms, refs, vid, a_, n_, E = cache[id(o)]
         c = T.mean(1)
-        mname = np.array([car.mname(m) for m in ms])
-        isg = np.array([bool(GLASS_MAT.search(m)) for m in mname])
+        u, inv = np.unique(ms, return_inverse=True) if len(ms) else (np.zeros(0, int), np.zeros(0, int))
+        mname = np.array([car.mname(int(m)) for m in u] or [""])[inv.reshape(-1)]
+        isg = per_material(ms, lambda m: GLASS_MAT.search(car.mname(m)))
         smooth = E["two"].copy()
         smooth[E["two"]] = E["ang"] <= ANG
         sa, sb = E["fa"][E["ang"] <= ANG], E["fb"][E["ang"] <= ANG]

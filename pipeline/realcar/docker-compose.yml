@@ -17,6 +17,9 @@ services:
     environment:
       GLBMACHINE_KEYS: ${GLBMACHINE_KEYS:?set GLBMACHINE_KEYS to the licence keys customers may use}
       GLBMACHINE_WORKERS: ${GLBMACHINE_WORKERS:-2}
+      # rigged at start, beside the builders: the first 100 cars of the UK sales
+      # list ("all": every model the server may use, about 10 GB more on the volume)
+      GLBMACHINE_WARM: ${GLBMACHINE_WARM:-100}
       # 1 (the default): no CC BY-NC model is ever used; 0 only for a demo server
       GLBMACHINE_COMMERCIAL_ONLY: ${GLBMACHINE_COMMERCIAL_ONLY:-1}
     volumes:

@@ -10,6 +10,7 @@ the only network use is fetching the model from the catalogue's storage.
     glbmachine setup                          # once: node tools + work folder
     glbmachine make "Nissan Micra 2004 red" -o micra.glb        # + a check sheet
     glbmachine make "VW Polo 2019" --no-sheet -o polo.glb       # the car only, in seconds
+    glbmachine warm --top 100                                   # rig ahead: those requests only finish
     glbmachine make "Ford Fiesta 2012" --full -o fiesta.glb     # uncompressed: any 3D program
     glbmachine batch --top 20 --workers 3     # the UK best sellers
     glbmachine rig CAR.glb OUT_DIR            # the rig step alone
@@ -37,7 +38,10 @@ WEB API (`serve`):
                              (standin: a car the catalogue lacks is made from the nearest one of
                              the same body, reshaped to its real size; false builds the nearest as it is)
     GET  /v1/cars            the last 40 cars asked for, newest first
-    GET  /v1/cars/ID         -> {"id", "status": queued|building|done|failed, "report", "files"}
+    GET  /v1/cars/ID         -> {"id", "status": queued|building|done|failed, "report", "files",
+                                 "sheet_status": drawing|done|failed (when a sheet was asked for)}
+                             a car is "done" as soon as its file is ready, inside the minute;
+                             a sheet asked for is drawn after it and added to "files"
     GET  /v1/cars/ID/car.glb    the finished car (meshopt-compressed)
     GET  /v1/cars/ID/sheet.jpg  the four-view check sheet, when asked for
     GET  /v1/catalogue       every make, its models and their years
@@ -49,6 +53,8 @@ rebuild), POST /v1/library/KEY/reset.
 If $GLBMACHINE_KEYS is set (comma-separated), every /v1 call needs one of
 them as `Authorization: Bearer KEY` or `X-API-Key: KEY` — the hook for
 licence keys. $GLBMACHINE_WORKERS cars are built side by side (default 2).
+$GLBMACHINE_WARM rigs models before anyone asks (the first N of the UK sales
+list, or "all"), so a request for them only finishes: seconds, not a minute.
 
 NEEDS: Python 3.10+ with numpy, scipy and Pillow; Node 18+ (decode, validate,
 web copy); Chromium only for check sheets ($CHROME_PATH).
@@ -71,6 +77,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 VERSION = "1.0.0"
 HOME = os.path.abspath(os.path.expanduser(os.environ.get("GLBMACHINE_HOME", "~/.glbmachine")))
+os.environ["GLBMACHINE_HOME"] = HOME          # the build steps keep their shared rigs there (batch.rig_cache)
 VIEW = os.path.join(HOME, "view")
 CARS = os.path.join(VIEW, "cars")
 ENGINE_PACK = os.path.join(HERE, "assets", "engine_pack.glb")
@@ -96,11 +103,55 @@ def setup(quiet=False):
 
 
 def make(request, sheet=True, exact=False, out=None, port=8791, out_file=None, full=False, spec=None, standin=True,
-         commercial_only=None):
+         commercial_only=None, sheet_after=False):
     import make as mk
     setup(quiet=True)
     return mk.build(request, ENGINE_PACK, TOOLS, VIEW, out or CARS, port, exact, not sheet, out_file, full, spec,
-                    standin, commercial_only=commercial_only)
+                    standin, commercial_only=commercial_only, sheet_after=sheet_after)
+
+
+def sheet_after(rep, d, port=8791):
+    """The check sheet of a car already handed over (make with sheet_after,
+    built in folder D): drawn now, added to the report's files."""
+    import argparse
+    import make as mk
+    rec = rep.get("result") or {}
+    args = argparse.Namespace(engine_pack=ENGINE_PACK, tools=TOOLS, view_dir=VIEW, port=port)
+    mk.draw_sheet(d, args, rec)
+    rep.setdefault("files", {}).update(mk._files(d))
+    return rep
+
+
+def warm(top=100, every=False, workers=2):
+    """Rig ahead of requests (batch.warm): the model a request would pick for
+    each of the first TOP cars on the UK sales list, or EVERY approved model
+    this server may use. A request for a rigged model downloads and rigs
+    nothing: it is finished, checked and compressed, in seconds."""
+    import argparse
+    import batch
+    import make as mk
+    cat = batch.catalogue()
+    use = {k: i for k, i in cat.items() if i.get("publicationStatus") == "approved" and i.get("desktopGlbUrl")
+           and not batch.is_game(i) and (batch.credit_of(i)["commercial"] or not mk.commercial_only_default())}
+    skip = mk.refused()
+    if every:
+        items = [i for k, i in use.items() if k not in skip]
+    else:
+        items, seen = [], set()
+        for r in batch.targets("top2000", "car")[:top]:
+            want = mk.parse(" ".join(w.capitalize() for w in r["genModel"].split()))
+            try:
+                _, item = mk._choose(want, use, False, skip)
+            except Exception:
+                item = None
+            if item and item["assetId"] not in seen:
+                seen.add(item["assetId"])
+                items.append(item)
+    t0 = time.time()
+    done = batch.warm(items, argparse.Namespace(tools=TOOLS, body_style=None, year=None), workers,
+                      log=lambda m: print(m, file=sys.stderr, flush=True))
+    return {"models": len(items), "seconds": round(time.time() - t0), "cached_before": sum(v == "cached" for v in done.values()),
+            "failed": {k: v for k, v in done.items() if v.startswith(("failed", "error", "refused"))}}
 
 
 # ── your own models: added to a local catalogue beside the shared one ──────
@@ -213,10 +264,12 @@ class Jobs:
             job["status"], job["started_at"] = "building", time.time()
             self.put(job)
             try:
-                rep = make(job["request"], sheet=job["sheet"], exact=job.get("exact", False),
+                # the car is handed over as soon as it is built; its check
+                # sheet, if asked for, is drawn after and added to the job
+                rep = make(job["request"], sheet=False, exact=job.get("exact", False),
                            out=os.path.join(CARS, jid), port=port, spec=job.get("spec"),
                            standin=job.get("standin", True),
-                           commercial_only=False if job.get("noncommercial") else None)
+                           commercial_only=False if job.get("noncommercial") else None, sheet_after=job["sheet"])
                 job["report"] = rep
                 res = rep.get("result") or {}
                 job["status"] = "failed" if "error" in rep or not os.path.exists(rep.get("files", {}).get("glb", "")) \
@@ -225,7 +278,18 @@ class Jobs:
             except Exception as e:
                 job["status"], job["error"] = "failed", str(e)[-500:]
             job["finished_at"] = time.time()
+            sheet_from = (job.get("report") or {}).pop("sheet_from", None)
+            if sheet_from and job["status"] == "done":
+                job["sheet_status"] = "drawing"
             self.put(job)
+            if job.get("sheet_status") == "drawing":
+                try:
+                    job["report"] = sheet_after(job["report"], sheet_from, port)
+                    job["sheet_status"] = "done" if (job["report"].get("files") or {}).get("sheet") else "failed"
+                except Exception as e:
+                    job["sheet_status"] = "failed"
+                    job["sheet_error"] = str(e)[-300:]
+                self.put(job)
 
 
 # ── the Studio's library: every car built here that kept its rig ────────────
@@ -365,6 +429,13 @@ def serve(port, workers):
     setup(quiet=True)
     keys = {k.strip() for k in os.environ.get("GLBMACHINE_KEYS", "").split(",") if k.strip()}
     jobs = Jobs(workers)
+    # the models rigged before anyone asks ($GLBMACHINE_WARM: the first N cars
+    # of the UK sales list, or "all"), one at a time beside the builders, so
+    # a request for them is only finished
+    w = os.environ.get("GLBMACHINE_WARM", "").strip().lower()
+    if w and w not in ("0", "no", "off"):
+        threading.Thread(target=lambda: warm(every=w == "all", top=int(w) if w.isdigit() else 100, workers=1),
+                         daemon=True).start()
     locks, locks_lock = {}, threading.Lock()
     studio_dir, lib_dir, maker_dir = os.path.join(HERE, "studio"), os.path.join(VIEW, "lib"), os.path.join(HERE, "maker")
     summary = {}
@@ -543,6 +614,11 @@ def main():
     b.add_argument("--list", default="targets", choices=("targets", "top2000"))
     b.add_argument("--workers", type=int, default=1)
     b.add_argument("--out", default=os.path.join(CARS, "batch"))
+    w = sub.add_parser("warm", help="rig catalogue models before anyone asks, so each request only finishes (seconds)")
+    w.add_argument("--top", type=int, default=100, help="the model a request picks for each of the first N "
+                                                        "cars on the UK sales list (default 100)")
+    w.add_argument("--all", action="store_true", help="every approved model this server may use")
+    w.add_argument("--workers", type=int, default=2)
     ad = sub.add_parser("add", help="add your own model (GLB, glTF or OBJ) to the catalogue")
     ad.add_argument("file")
     ad.add_argument("--make", required=True)
@@ -589,6 +665,9 @@ def main():
         sys.argv = ["batch.py", a.out, "--top", str(a.top), "--list", a.list, "--workers", str(a.workers),
                     "--engine-pack", ENGINE_PACK, "--tools", TOOLS, "--view-dir", VIEW]
         batch.main()
+    elif a.cmd == "warm":
+        setup(quiet=True)
+        print(json.dumps(warm(a.top, a.all, a.workers), indent=1))
     elif a.cmd == "add":
         rec, info = add_model(a.file, a.make, a.model, a.years, a.licence, a.doors, a.body, a.title, a.author, a.url)
         print(json.dumps({"added": rec["assetId"], "converted": info, "record": rec}, indent=1))

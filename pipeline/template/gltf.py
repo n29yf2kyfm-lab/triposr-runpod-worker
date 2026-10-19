@@ -16,6 +16,22 @@ CTYPE = {5120: np.int8, 5121: np.uint8, 5122: np.int16, 5123: np.uint16, 5125: n
 NCOMP = {"SCALAR": 1, "VEC2": 2, "VEC3": 3, "VEC4": 4, "MAT4": 16}
 
 
+def row_ids(V):
+    """The index of each row of integer triples V among its distinct rows,
+    in sorted order: np.unique(V, axis=0, return_inverse=True)'s inverse.
+    The rows are packed into one 64-bit key when each column spans under 2^21
+    (±400 m at a 0.2 mm weld): sorting rows of three was most of a big car's
+    rig and finish time."""
+    V = np.asarray(V, dtype=np.int64)
+    if not len(V):
+        return np.zeros(0, np.int64)
+    lo = V.min(0)
+    if ((V.max(0) - lo) < (1 << 21)).all():
+        W = V - lo
+        return np.unique((W[:, 0] << 42) | (W[:, 1] << 21) | W[:, 2], return_inverse=True)[1].reshape(-1)
+    return np.unique(V, axis=0, return_inverse=True)[1].reshape(-1)
+
+
 class GLTF:
     def __init__(self, path):
         b = open(path, "rb").read()
@@ -45,7 +61,14 @@ class GLTF:
         start = bv.get("byteOffset", 0) + a.get("byteOffset", 0)
         stride = bv.get("byteStride", 0) or comp * dt.itemsize
         end = start + stride * (n - 1) + comp * dt.itemsize
-        buf = self.bin if end <= len(self.bin) else self.bin + bytes(self.extra)   # appended data lives in extra
+        if end <= len(self.bin):
+            buf = self.bin
+        elif start >= len(self.bin):
+            # appended data lives in extra: read it there (joining it to the
+            # original BIN copied the whole file for every accessor read)
+            buf, start = self.extra, start - len(self.bin)
+        else:
+            buf = self.bin + bytes(self.extra)
         arr = np.ndarray((n, comp), dtype=dt, buffer=buf, offset=start, strides=(stride, dt.itemsize))
         out = arr.astype(np.float64) if dt == np.float32 else arr.copy()
         if a.get("normalized"):

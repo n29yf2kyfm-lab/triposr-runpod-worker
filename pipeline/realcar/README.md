@@ -66,8 +66,12 @@ The page that opens is the whole program:
    `M Sport`) or an engine keeps the standard body, and the report says
    so. Doors (`5dr`) and body (`hatchback`) in it count too.
 4. **Doors** and **Colour**: the DVLA colour names.
-5. **Build GLB**: a clock runs against the two minutes. Catalogue cars take
-   5-20 s, or about 25 s more with the four-view picture ticked.
+5. **Build GLB**: a clock runs against the minute, from asking to the file.
+   Catalogue cars take 5-20 s. A request has 50 s
+   (`GLBMACHINE_DEADLINE_S`): no other model is tried, and no stand-in photo
+   waited for, that would not fit in it. The four-view picture, when ticked,
+   is drawn after the car is handed over, and its button appears when it is
+   ready.
 
 The car then opens in 3D with every door, the bonnet and the tailgate open:
 - drag to turn it, the wheel to zoom, and go all the way round, underneath
@@ -84,6 +88,33 @@ the year, what opens, what is missing, the paint, the model's credit and
 licence (with whether commercial use is allowed), and the time each step
 took. **Fix a part in Studio** opens the same car in GLB Studio. **Recent**
 lists every car built, so you can open any of them again.
+
+## Under a minute, every request
+
+A request has 50 s to its file (`GLBMACHINE_DEADLINE_S`):
+- **No retry past the deadline.** The machine starts another model only when another try, about as long as the last one, would still finish inside it.
+- **Photo search is cut short.** A stand-in waits for its photo search only while a rebuild with the photo would still fit. A search still running carries on, and its photo is used the next time.
+- **The sheet comes after.** The car is handed over as soon as it is built. A four-view sheet, when asked for, is drawn afterwards: the API marks the car `done`, then `sheet_status` goes from `drawing` to `done`, and the Maker shows the sheet's button when it is ready.
+
+**The rig cache.** Every model's rig is kept in `$GLBMACHINE_HOME/rigs/<model>/<2|4>`. Each server job builds in a fresh folder, and before the cache it downloaded and rigged its model again every time. With the cache, a model rigged once is only finished (finished, checked and compressed) for every request after.
+
+**Rigging ahead of time.** `glbmachine warm --top N`, or `--all`, rigs models before anyone asks. `GLBMACHINE_WARM` does the same in the background when the server starts; the compose file sets 100. `--all` covers the 782 models the server may sell: about 10 GB as published, more once decoded.
+
+**Faster steps.** Two changes made the steps faster without changing a byte of their output:
+- the file reader no longer copies the whole buffer to read data the finisher has added;
+- the rigger and finisher sort vertices as one packed number, not rows of three.
+
+The rigger also tests each material's name once, not once per triangle. On the largest model tested, the 2021 Land Rover Defender, the rig went from 37.8 to 19.5 s and the finish from 35.7 to 14.4 s. Rig output was checked byte-identical on three models, and finish output on four.
+
+Time to file for 14 requests, as the server runs them, 2026-10-19 (one process, no check sheet, 2 CPU cores shared):
+
+| | slowest | median | over a minute |
+| --- | --- | --- | --- |
+| Before | 95.8 s (G63 stand-in), 85.9 s (Defender) | 12.4 s | 2 |
+| Cold: fresh folder, empty rig cache | 40.8 s (Defender) | 10.2 s | 0 |
+| Warm: fresh folder, model rigged before | 19.0 s (Defender) | 5.9 s | 0 |
+
+The minute is from the start of the build. A request waiting in the queue behind others adds its wait, so a busy server needs more `GLBMACHINE_WORKERS`: about one per CPU core.
 
 ## GLB Studio: fix a car by hand
 
