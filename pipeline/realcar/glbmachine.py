@@ -12,6 +12,7 @@ the only network use is fetching the model from the catalogue's storage.
     glbmachine make "VW Polo 2019" --no-sheet -o polo.glb       # the car only, in seconds
     glbmachine warm --top 100                                   # rig ahead: those requests only finish
     glbmachine make "Peugeot 307 2001 blue" --page p307         # the car as a page anyone can open
+    glbmachine car Peugeot 307 2001 blue                        # the same, one short answer: what to publish
     glbmachine make "Ford Fiesta 2012" --full -o fiesta.glb     # uncompressed: any 3D program
     glbmachine batch --top 20 --workers 3     # the UK best sellers
     glbmachine rig CAR.glb OUT_DIR            # the rig step alone
@@ -121,6 +122,31 @@ def sheet_after(rep, d, port=8791):
     mk.draw_sheet(d, args, rec)
     rep.setdefault("files", {}).update(mk._files(d))
     return rep
+
+
+def car(request, sheet=False, out=None, noncommercial=False):
+    """One request, start to finish, as a page anyone can open: the car
+    built (no check sheet unless asked: the page shows the car itself), its
+    page written (page.py), and one short answer saying what to publish.
+    The answer has "error" (and what the catalogue has) when no car was
+    built."""
+    import page
+    t0 = time.time()
+    rep = make(request, sheet=sheet, commercial_only=False if noncommercial else None)
+    ans = {"request": request}
+    if not (rep.get("files") or {}).get("glb"):
+        ans.update({k: rep.get(k) for k in ("error", "match", "catalogue_has", "nearest") if rep.get(k)})
+        ans["seconds"] = round(time.time() - t0, 1)
+        return ans
+    slug = re.sub(r"[^a-z0-9]+", "-", request.lower()).strip("-")[:40] or "car"
+    d = out or os.path.join(HOME, "pages", f"{slug}-{time.strftime('%Y%m%d-%H%M%S')}")
+    pg = page.write(rep, d)
+    ans.update({"title": pg["title"], "summary": pg["summary"], "notes": pg["notes"],
+                "index": os.path.join(pg["dir"], "index.html"),
+                "files": {f: os.path.join(pg["dir"], f) for f in pg["files"] if f != "index.html"},
+                "glb": rep["files"]["glb"], "seconds_to_file": rep.get("seconds_to_file"),
+                "seconds": round(time.time() - t0, 1)})
+    return ans
 
 
 def warm(top=100, every=False, workers=2):
@@ -640,6 +666,12 @@ def main():
     b.add_argument("--list", default="targets", choices=("targets", "top2000"))
     b.add_argument("--workers", type=int, default=1)
     b.add_argument("--out", default=os.path.join(CARS, "batch"))
+    c = sub.add_parser("car", help="one request to a page anyone can open: the car built, its page written, "
+                                   "and what to publish (one JSON answer)")
+    c.add_argument("request", nargs="+")
+    c.add_argument("--sheet", action="store_true", help="draw the four-view check sheet too (about 25 s more)")
+    c.add_argument("--out", default=None, help="the page folder (default: $GLBMACHINE_HOME/pages/<car>-<time>)")
+    c.add_argument("--allow-noncommercial", action="store_true", help="a demo: CC BY-NC models may be used")
     w = sub.add_parser("warm", help="rig catalogue models before anyone asks, so each request only finishes (seconds)")
     w.add_argument("--top", type=int, default=100, help="the model a request picks for each of the first N "
                                                         "cars on the UK sales list (default 100)")
@@ -694,6 +726,8 @@ def main():
         sys.argv = ["batch.py", a.out, "--top", str(a.top), "--list", a.list, "--workers", str(a.workers),
                     "--engine-pack", ENGINE_PACK, "--tools", TOOLS, "--view-dir", VIEW]
         batch.main()
+    elif a.cmd == "car":
+        print(json.dumps(car(" ".join(a.request), a.sheet, a.out, a.allow_noncommercial), indent=1, default=str))
     elif a.cmd == "warm":
         setup(quiet=True)
         print(json.dumps(warm(a.top, a.all, a.workers), indent=1))

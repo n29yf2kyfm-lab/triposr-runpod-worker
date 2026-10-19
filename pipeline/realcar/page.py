@@ -166,7 +166,9 @@ def write(report, out):
         "{{CONFIG}}", json.dumps(cfg, ensure_ascii=False).replace("</", "<\\/"))
     open(os.path.join(out, "index.html"), "w").write(page)
     return {"dir": os.path.abspath(out), "files": ["index.html"] + files + (["views.jpg"] if cfg["sheet"] else []),
-            "seconds": round(time.time() - t0, 1)}
+            "seconds": round(time.time() - t0, 1), "title": title, "notes": notes,
+            "summary": f"{title}: {facts[4]['v']}, " + ", ".join(n for _, n in parts).lower()
+                       + f" open; file in {secs} s"}
 
 
 if __name__ == "__main__":

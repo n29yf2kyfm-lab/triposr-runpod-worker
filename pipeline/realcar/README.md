@@ -135,6 +135,16 @@ It is filled in from the build's report:
 
 The GLB travels as base64 JSON parts of 15 MB at most, so the folder can be published where only data files are served. A request for a model rigged before took 4.5 s from asking to a finished page.
 
+## One request, one page: `glbmachine car` and `/car`
+
+`glbmachine car Peugeot 307 2001 blue` builds the car, writes its page, and prints one short JSON answer. The answer holds:
+- the page's `index`, and the `files` to publish beside it;
+- a one-line `summary` and the machine's `notes`;
+- the time to the file;
+- or, if no car was built, `error` and what the catalogue has instead.
+
+In Claude Code the `/car` skill (`.claude/skills/car/SKILL.md`) runs it, publishes the page, and replies with the link, before any checking. A request takes about 4 s for a model rigged before, and a first build 10–40 s. With publishing, it stays under a minute from the message to the link.
+
 ## GLB Studio: fix a car by hand
 
 When the machine gets a part wrong (a welded bonnet it could not find, a
