@@ -11,6 +11,7 @@ the only network use is fetching the model from the catalogue's storage.
     glbmachine make "Nissan Micra 2004 red" -o micra.glb        # + a check sheet
     glbmachine make "VW Polo 2019" --no-sheet -o polo.glb       # the car only, in seconds
     glbmachine warm --top 100                                   # rig ahead: those requests only finish
+    glbmachine make "Peugeot 307 2001 blue" --page p307         # the car as a page anyone can open
     glbmachine make "Ford Fiesta 2012" --full -o fiesta.glb     # uncompressed: any 3D program
     glbmachine batch --top 20 --workers 3     # the UK best sellers
     glbmachine rig CAR.glb OUT_DIR            # the rig step alone
@@ -631,6 +632,9 @@ def main():
                    help="for a car the catalogue lacks, build the nearest as it is rather than a stand-in")
     m.add_argument("--allow-noncommercial", action="store_true",
                    help="a demo: CC BY-NC models may be used (never for anything sold); default: commercial only")
+    m.add_argument("--page", default=None, metavar="DIR",
+                   help="also write the car as a page anyone can open (page.py), with no check sheet unless --sheet")
+    m.add_argument("--sheet", action="store_true", help="with --page: draw the check sheet too (about 25 s more)")
     b = sub.add_parser("batch")
     b.add_argument("--top", type=int, default=20)
     b.add_argument("--list", default="targets", choices=("targets", "top2000"))
@@ -676,9 +680,12 @@ def main():
     elif a.cmd == "setup":
         print(json.dumps(setup()))
     elif a.cmd == "make":
-        rep = make(a.request, sheet=not a.no_sheet, exact=a.exact, out=a.out, out_file=a.output, full=a.full,
-                   spec=a.spec, standin=not a.no_standin,
+        rep = make(a.request, sheet=not a.no_sheet and (not a.page or a.sheet), exact=a.exact, out=a.out,
+                   out_file=a.output, full=a.full, spec=a.spec, standin=not a.no_standin,
                    commercial_only=False if a.allow_noncommercial else None)
+        if a.page and (rep.get("files") or {}).get("glb"):
+            import page
+            rep["page"] = page.write(rep, a.page)
         print(json.dumps(rep, indent=1, default=str))
         sys.exit(2 if "error" in rep else 0 if (rep.get("files") or {}).get("glb") else 3)
     elif a.cmd == "batch":

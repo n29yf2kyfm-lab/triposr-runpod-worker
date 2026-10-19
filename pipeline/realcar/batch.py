@@ -503,6 +503,8 @@ def one(target, item, args, out):
                "layout": spec.get("layout")},          # the sheet drawn later (render_sheet) looks where this car's bay is
               open(os.path.join(d, "build.json"), "w"), indent=1, default=str)
     fin = os.path.join(d, "finished.glb")
+    if os.path.exists(os.path.join(d, "sheet.jpg")):
+        os.remove(os.path.join(d, "sheet.jpg"))     # an earlier build's picture: not this car
     t0 = time.time()
     try:
         flog = finish.finish(rigged, spec, fin)

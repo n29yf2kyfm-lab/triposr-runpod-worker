@@ -117,6 +117,24 @@ Time to file for 14 requests, as the server runs them, 2026-10-19 (one process, 
 
 The minute is from the start of the build. A request waiting in the queue behind others adds its wait, so a busy server needs more `GLBMACHINE_WORKERS`: about one per CPU core.
 
+## A car as a page: `--page`
+
+`glbmachine make "Peugeot 307 2001 blue" --page DIR` builds the car with no check sheet, unless `--sheet` is given. It then writes it as a page anyone can open: `DIR/index.html` plus `car1.json` … `carN.json` (`page.py`, about 0.1 s).
+
+The page is the machine's own viewer:
+- spin, zoom, and flip the car over;
+- open each part, or everything at once;
+- the Finish Lab: wheels, calipers and body in chrome, gloss, satin, matt, brushed or candy, in any colour.
+
+It is filled in from the build's report:
+- the request and how it was read;
+- the time to the file, what opens, the paint and the model used;
+- the file's size and validator result;
+- the machine's own notes (parts not opening, a stand-in, a trim not matched);
+- the model's credit and licence.
+
+The GLB travels as base64 JSON parts of 15 MB at most, so the folder can be published where only data files are served. A request for a model rigged before took 4.5 s from asking to a finished page.
+
 ## GLB Studio: fix a car by hand
 
 When the machine gets a part wrong (a welded bonnet it could not find, a

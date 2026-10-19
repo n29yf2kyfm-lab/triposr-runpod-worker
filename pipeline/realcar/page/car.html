@@ -1,0 +1,544 @@
+<title>{{TITLE}}</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a build sheet. The car fills a wide stage, the part switches sit under it, the facts and licence follow. */
+:root {
+  --bg: #eceef0;
+  --surface: #f8f9fa;
+  --stage: #d9dde1;
+  --fg: #16181b;
+  --muted: #595f66;
+  --line: #cfd4d9;
+  --accent: #1f4f86;          /* only for parts that are open */
+  --accent-fg: #ffffff;
+  --display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111315; --surface: #1a1d20; --stage: #1f2327; --fg: #e8ebee; --muted: #9aa1a9;
+    --line: #2d3237; --accent: #86a4f2; --accent-fg: #0d1222; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111315; --surface: #1a1d20; --stage: #1f2327; --fg: #e8ebee; --muted: #9aa1a9;
+  --line: #2d3237; --accent: #86a4f2; --accent-fg: #0d1222; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg); font: 15px/1.55 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 40px;
+}
+.wrap { max-width: 1120px; margin: 0 auto; display: grid; gap: 20px; }
+header { display: grid; gap: 4px; }
+.eyebrow { font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+h1 { font: 700 clamp(34px, 6vw, 56px)/1 var(--display); letter-spacing: .01em; margin: 4px 0 0; text-wrap: balance; }
+.sub { color: var(--muted); margin: 0; }
+.swatch { display: inline-block; width: .9em; height: .9em; border-radius: 2px; background: transparent;
+  vertical-align: -0.1em; margin-right: .35em; box-shadow: inset 0 0 0 1px rgba(255,255,255,.18); }
+
+.stage { position: relative; width: 100%; aspect-ratio: 16 / 9; max-height: 72vh; max-width: 100%;
+  background: var(--stage); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; touch-action: none; }
+@media (max-width: 640px) { .stage { aspect-ratio: 4 / 3.4; } }
+canvas#view { display: block; width: 100%; height: 100%; outline: none; }
+.status { position: absolute; inset: auto 12px 12px 12px; font: 500 13px/1.4 var(--mono); color: var(--muted);
+  pointer-events: none; }
+.hint { position: absolute; top: 10px; right: 12px; font: 12px/1.3 var(--mono); color: var(--muted); pointer-events: none; }
+.fail { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; padding: 24px; gap: 6px; }
+.fail p { margin: 0; max-width: 46ch; }
+
+.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.controls .sep { width: 1px; align-self: stretch; background: var(--line); margin: 0 4px; }
+button { font: 500 14px/1 var(--body); color: var(--fg); background: var(--surface); border: 1px solid var(--line);
+  border-radius: 4px; padding: 10px 14px; cursor: pointer; min-height: 40px; }
+button:hover { border-color: var(--muted); }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button[aria-pressed="true"] { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+button:disabled { opacity: .45; cursor: default; }
+
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px; background: var(--line);
+  border: 1px solid var(--line); border-radius: 6px; overflow: hidden; margin: 0; }
+.facts div { background: var(--surface); padding: 12px 14px; min-width: 0; }
+.facts dt { font: 500 11px/1.2 var(--mono); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.facts dd { margin: 6px 0 0; font: 600 20px/1.2 var(--display); letter-spacing: .01em; font-variant-numeric: tabular-nums; }
+.facts dd small { display: block; font: 400 13px/1.4 var(--body); color: var(--muted); margin-top: 2px; letter-spacing: 0; }
+
+section h2 { font: 600 22px/1.1 var(--display); margin: 8px 0 10px; letter-spacing: .01em; }
+.views img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; display: block; }
+.views figcaption { color: var(--muted); font-size: 13px; margin-top: 6px; }
+.licence { border-top: 1px solid var(--line); padding-top: 14px; color: var(--muted); font-size: 13px; max-width: 80ch; }
+.licence p { margin: 0 0 6px; }
+.licence a { color: var(--fg); }
+.tag { display: inline-block; font: 600 11px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase;
+  border: 1px solid var(--accent); color: var(--accent); border-radius: 3px; padding: 4px 6px; margin-right: 6px; }
+
+.lab { display: grid; gap: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 16px; }
+.lab h2 { font: 600 24px/1 var(--display); margin: 0; letter-spacing: .01em; }
+.lab .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.lab .lbl { font: 500 11px/1.2 var(--mono); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); min-width: 64px; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; flex-wrap: wrap; }
+.seg button { border: 0; border-radius: 0; min-height: 38px; }
+.seg button + button { border-left: 1px solid var(--line); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, 34px); gap: 6px; flex: 1 1 260px; }
+.chip { width: 34px; height: 34px; min-height: 34px; padding: 0; border-radius: 6px; border: 1px solid var(--line); }
+.chip[aria-pressed="true"] { outline: 2px solid var(--accent); outline-offset: 2px; }
+.custom { display: inline-flex; gap: 6px; align-items: center; color: var(--muted); font-size: 14px; }
+.custom input { width: 44px; height: 34px; padding: 0; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+.code { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.code output { font: 13px/1.4 var(--mono); background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 8px 10px; flex: 1 1 280px; min-width: 0; overflow-wrap: anywhere; }
+.lab .note { color: var(--muted); font-size: 13px; margin: 0; }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow" id="eyebrow"></span>
+    <h1 id="carTitle"></h1>
+    <p class="sub"><span class="swatch" id="swatch" aria-hidden="true" hidden></span><span id="carSub"></span> Drag to spin, pinch or scroll to zoom.</p>
+  </header>
+
+  <div class="stage" id="stage">
+    <canvas id="view" aria-label="3D model of the car. Drag to turn it."></canvas>
+    <span class="hint" id="hint" hidden>drag · zoom</span>
+    <div class="status" id="status" role="status">Loading the car…</div>
+  </div>
+
+  <div class="controls" id="controls" aria-label="Open and close parts">
+    <button type="button" id="all" disabled>Open everything</button>
+    <span class="sep" aria-hidden="true"></span>
+    <span id="parts" style="display:contents"></span>
+    <span class="sep" aria-hidden="true"></span>
+    <button type="button" id="flip" disabled aria-pressed="false">Flip over</button>
+    <button type="button" id="reset" disabled>Reset view</button>
+  </div>
+
+
+  <section class="lab" id="lab" aria-label="Finish Lab">
+    <h2>Finish Lab</h2>
+    <div class="row"><span class="lbl">Part</span>
+      <div class="seg" id="target" role="group" aria-label="Part to finish">
+        <button type="button" data-t="wheels" aria-pressed="true">Wheels</button>
+        <button type="button" data-t="calipers" aria-pressed="false">Calipers</button>
+        <button type="button" data-t="body" aria-pressed="false">Body</button>
+      </div>
+      <button type="button" id="lookWheel" disabled>Look at the wheel</button>
+    </div>
+    <div class="row"><span class="lbl">Finish</span>
+      <div class="seg" id="finish" role="group" aria-label="Finish"></div>
+    </div>
+    <div class="row"><span class="lbl">Colour</span>
+      <div class="grid" id="colours" role="group" aria-label="Colour"></div>
+      <label class="custom">Any colour <input type="color" id="customColour" value="#121214"></label>
+    </div>
+    <div class="code"><span class="lbl">Build</span><output id="buildCode" aria-live="polite"></output>
+      <button type="button" id="copyCode">Copy</button>
+      <button type="button" id="resetLab">Factory finish</button>
+    </div>
+    <p class="note">Each part keeps its own finish. Wheels and calipers change on all four corners. The body changes its paint only, not its trim or glass.</p>
+  </section>
+  <dl class="facts" id="facts"></dl>
+
+  <section class="lab" id="notes" hidden>
+    <h2>Notes from the machine</h2>
+    <div id="notesList"></div>
+  </section>
+
+  <section class="views" id="views" hidden>
+    <h2>Check sheet</h2>
+    <figure style="margin:0">
+      <img src="views.jpg" alt="Four renders of the car: closed, everything open from the front, everything open from the rear, and the engine bay." width="2000" height="1280" loading="lazy">
+      <figcaption>The machine's four check views: closed, open from the front, open from the rear, the engine bay.</figcaption>
+    </figure>
+  </section>
+
+  <footer class="licence" id="credit"></footer>
+</div>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+} }
+</script>
+<script type="application/json" id="car-config">{{CONFIG}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
+
+const $ = id => document.getElementById(id);
+// everything this page says about its car: filled in by the machine (page.py)
+const CAR = JSON.parse(document.getElementById('car-config').textContent);
+function el(tag, text, cls) { const e = document.createElement(tag); if (text != null) e.textContent = text; if (cls) e.className = cls; return e; }
+$('eyebrow').textContent = CAR.eyebrow;
+$('carTitle').textContent = CAR.title;
+$('carSub').textContent = CAR.sub;
+if (CAR.swatch) { $('swatch').style.background = CAR.swatch; $('swatch').hidden = false; }
+for (const f of CAR.facts) {
+  const d = el('div'); d.append(el('dt', f.k));
+  const dd = el('dd', f.v); if (f.s) dd.append(el('small', f.s)); d.append(dd); $('facts').append(d);
+}
+if (CAR.notes.length) { for (const n of CAR.notes) $('notesList').append(el('p', n, 'note')); $('notes').hidden = false; }
+if (CAR.sheet) $('views').hidden = false;
+{
+  const c = CAR.credit, p = el('p');
+  p.append(el('span', c.commercial ? 'Commercial use allowed' : 'Not for sale', 'tag'));
+  p.append(`The 3D body, cabin and wheels are “${c.title}”` + (c.author ? ` by ${c.author}` : '') + ', licensed ' + (c.licence || 'as recorded') + '. ');
+  if (c.url) { const a = el('a', 'Source'); a.href = c.url; a.target = '_blank'; a.rel = 'noopener'; p.append(a, '. '); }
+  p.append(c.commercial ? 'Credit as given here is required. The file carries it too.' : 'Fine to view and demo; not for paid use.');
+  const q = el('p', 'Rigged, glass cleared and engine bay fitted by the ExpertCarCheck GLB machine. Makes and model names are trademarks of their owners; this model is independent and not endorsed by them.');
+  $('credit').append(p, q);
+}
+const stage = $('stage'), canvas = $('view'), status = $('status');
+const PARTS = CAR.parts;
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function fail(why) {
+  canvas.hidden = true;
+  status.hidden = true;
+  const d = document.createElement('div');
+  d.className = 'fail';
+  d.innerHTML = '<p><b>The 3D view could not start in this browser.</b></p><p></p><p>The check sheet below shows the same car from four sides.</p>';
+  d.children[1].textContent = why;
+  stage.append(d);
+}
+
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+} catch (e) {
+  fail('WebGL is turned off or not supported.');
+  throw e;
+}
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+
+const scene = new THREE.Scene();
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+const sun = new THREE.DirectionalLight(0xffffff, 1.2);
+sun.position.set(4, 8, 5);
+scene.add(sun);
+
+function paintStage() {
+  const c = getComputedStyle(document.documentElement).getPropertyValue('--stage').trim() || '#d9dde1';
+  scene.background = new THREE.Color(c);
+}
+paintStage();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', paintStage);
+new MutationObserver(paintStage).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+const camera = new THREE.PerspectiveCamera(32, 16 / 9, 0.05, 200);
+const controls = new OrbitControls(camera, canvas);
+controls.enableDamping = true;
+controls.minDistance = 2.2;
+controls.maxDistance = 22;
+
+function fit() {
+  const w = stage.clientWidth, h = stage.clientHeight;
+  if (!w || !h) return;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+new ResizeObserver(fit).observe(stage);
+fit();
+
+// soft contact shadow on the ground
+function shadowDisc(len, wid) {
+  const c = document.createElement('canvas');
+  c.width = c.height = 256;
+  const g = c.getContext('2d');
+  const grad = g.createRadialGradient(128, 128, 10, 128, 128, 128);
+  grad.addColorStop(0, 'rgba(0,0,0,0.55)');
+  grad.addColorStop(0.6, 'rgba(0,0,0,0.25)');
+  grad.addColorStop(1, 'rgba(0,0,0,0)');
+  g.fillStyle = grad;
+  g.fillRect(0, 0, 256, 256);
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(wid * 1.5, len * 1.25),
+    new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(c), transparent: true, depthWrite: false }));
+  m.rotation.x = -Math.PI / 2;
+  m.position.y = 0.003;
+  return m;
+}
+
+const S = { mixer: null, actions: {}, open: {}, pivot: null, flipTo: 0, home: null, shadow: null };
+const clock = new THREE.Clock();
+
+const loader = new GLTFLoader();
+loader.setMeshoptDecoder(MeshoptDecoder);
+
+// the GLB travels inside JSON files (artifact pages serve data, not .glb),
+// in two parts: each file is kept under the page's size cap
+async function fetchPart(url, done, whole) {
+  const r = await fetch(url);
+  if (!r.ok) throw new Error(`The car file did not load (${r.status}).`);
+  const total = +r.headers.get('content-length') || 0;
+  if (!(r.body && r.body.getReader)) return JSON.parse(await r.text()).glb_base64;
+  const reader = r.body.getReader(), chunks = [];
+  let got = 0;
+  for (;;) {
+    const { done: end, value } = await reader.read();
+    if (end) break;
+    chunks.push(value);
+    got += value.length;
+    progress({ loaded: done + got, total: total ? whole || total * 2 : 0 });
+  }
+  const all = new Uint8Array(got);
+  let o = 0;
+  for (const c of chunks) { all.set(c, o); o += c.length; }
+  return JSON.parse(new TextDecoder().decode(all)).glb_base64;
+}
+async function fetchGlb(urls) {
+  let b64 = '', done = 0;
+  for (const u of urls) {
+    const part = await fetchPart(u, done);
+    b64 += part;
+    done += part.length;
+  }
+  status.textContent = 'Unpacking the car…';
+  const bin = atob(b64);
+  const out = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+  return out.buffer;
+}
+function progress(ev) {
+  status.textContent = ev.total
+    ? `Loading the car… ${Math.round(ev.loaded / ev.total * 100)}%`
+    : `Loading the car… ${(ev.loaded / 1048576).toFixed(1)} MB`;
+}
+
+fetchGlb(CAR.files)
+  .then(buf => new Promise((res, rej) => loader.parse(buf, '', res, rej)))
+  .then(onCar)
+  .catch(err => fail(err && err.message ? err.message : String(err)));
+
+function onCar(gltf) {
+  const root = gltf.scene;
+  const box = new THREE.Box3().setFromObject(root);
+  const size = box.getSize(new THREE.Vector3()), ctr = box.getCenter(new THREE.Vector3());
+  S.pivot = new THREE.Group();
+  S.pivot.position.copy(ctr);
+  root.position.sub(ctr);
+  S.pivot.add(root);
+  scene.add(S.pivot);
+  S.shadow = shadowDisc(size.z, size.x);
+  S.shadow.position.x = ctr.x;
+  S.shadow.position.z = ctr.z;
+  scene.add(S.shadow);
+
+  S.mixer = new THREE.AnimationMixer(root);
+  const parts = $('parts');
+  for (const [id, label] of PARTS) {
+    const clip = gltf.animations.find(a => a.name === id + '_open');
+    if (!clip) continue;
+    const a = S.mixer.clipAction(clip);
+    a.setLoop(THREE.LoopOnce, 1);
+    a.clampWhenFinished = true;
+    S.actions[id] = a;
+    S.open[id] = false;
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.id = 'part-' + id;
+    b.textContent = label;
+    b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', () => { setOpen(id, !S.open[id]); syncAll(); });
+    parts.append(b);
+  }
+
+  const L = size.z;
+  camera.position.set(ctr.x + L * 0.78, ctr.y + size.y * 0.75, ctr.z + L * 0.92);
+  controls.target.set(ctr.x, ctr.y * 0.85, ctr.z);
+  controls.update();
+  S.home = { pos: camera.position.clone(), target: controls.target.clone() };
+
+  for (const id of ['all', 'flip', 'reset']) $(id).disabled = false;
+  status.hidden = true;
+  $('hint').hidden = false;
+  labSetup(root);
+  labRestore();
+}
+
+function setOpen(id, open) {
+  const a = S.actions[id];
+  if (!a) return;
+  S.open[id] = open;
+  a.timeScale = (open ? 1 : -1) * (reduced ? 25 : 1);
+  a.paused = false;
+  if (!a.isRunning()) a.play();
+  const b = $('part-' + id);
+  if (b) b.setAttribute('aria-pressed', String(open));
+}
+function syncAll() {
+  const any = Object.values(S.open).some(Boolean);
+  $('all').textContent = any ? 'Close everything' : 'Open everything';
+}
+$('all').addEventListener('click', () => {
+  const any = Object.values(S.open).some(Boolean);
+  for (const id of Object.keys(S.actions)) setOpen(id, !any);
+  syncAll();
+});
+$('flip').addEventListener('click', () => {
+  S.flipTo = S.flipTo ? 0 : Math.PI;
+  $('flip').setAttribute('aria-pressed', String(!!S.flipTo));
+  $('flip').textContent = S.flipTo ? 'Turn back' : 'Flip over';
+});
+$('reset').addEventListener('click', () => {
+  if (!S.home) return;
+  camera.position.copy(S.home.pos);
+  controls.target.copy(S.home.target);
+  controls.update();
+});
+
+
+// ── Finish Lab: our own material presets on the car's named parts ──────────
+const FINISHES = {
+  chrome:  { label: 'Chrome',  metalness: 1.0, roughness: 0.05, clearcoat: 0,   tint: 0.15 },
+  gloss:   { label: 'Gloss',   metalness: 0.0, roughness: 0.12, clearcoat: 1,   clearcoatRoughness: 0.03 },
+  satin:   { label: 'Satin',   metalness: 0.2, roughness: 0.42, clearcoat: 0.3, clearcoatRoughness: 0.35 },
+  matt:    { label: 'Matt',    metalness: 0.0, roughness: 0.86, clearcoat: 0 },
+  brushed: { label: 'Brushed', metalness: 1.0, roughness: 0.32, clearcoat: 0,   anisotropy: 0.8 },
+  candy:   { label: 'Candy',   metalness: 0.65, roughness: 0.18, clearcoat: 1,  clearcoatRoughness: 0.04 },
+};
+const COLOURS = ['#0f0f11', '#2a2c30', '#4b4f54', '#8c9196', '#c9ccd0', '#f2f2ee', '#b8913f', '#8a5a34',
+  '#c8102e', '#e2541b', '#f0b81a', '#9ccc2c', '#1f8f4a', '#178f8f', '#1f5fbf', '#1d3768', '#5b2d8f', '#d14f8f'];
+// which of this car's materials are which part, by name (page.py read them
+// from the file): { names, where: wheel | body | any }
+const LAB_PARTS = CAR.lab;
+const LAB = { target: 'wheels', meshes: { wheels: [], calipers: [], body: [] }, mats: { wheels: [], calipers: [], body: [] },
+  factory: new Map(), grain: new Set(), state: { wheels: null, calipers: null, body: null } };
+
+function labSetup(root) {
+  root.traverse(o => {
+    if (!o.isMesh) return;
+    let wheel = false;
+    for (let p = o; p; p = p.parent) if (/^wheel_[fr][lr]$/.test(p.name)) { wheel = true; break; }
+    for (const [t, { names, where }] of Object.entries(LAB_PARTS)) {
+      if (!names.includes(o.material.name) || (where === 'wheel' && !wheel) || (where === 'body' && wheel)) continue;
+      // a material the body shares with the wheels is copied, so only the wheels change
+      if (t !== 'body') o.material = o.material.clone();
+      if (!LAB.mats[t].includes(o.material)) {
+        LAB.mats[t].push(o.material);
+        LAB.factory.set(o.material, { color: o.material.color.clone(), metalness: o.material.metalness, roughness: o.material.roughness,
+          clearcoat: o.material.clearcoat || 0, clearcoatRoughness: o.material.clearcoatRoughness || 0, anisotropy: o.material.anisotropy || 0 });
+      }
+      LAB.meshes[t].push(o);
+    }
+  });
+  // materials without clear coat or anisotropy become physical ones, keeping their maps
+  for (const t of Object.keys(LAB.mats)) {
+    LAB.mats[t] = LAB.mats[t].map(m => {
+      if (m.isMeshPhysicalMaterial) return m;
+      const pm = new THREE.MeshPhysicalMaterial();
+      THREE.MeshStandardMaterial.prototype.copy.call(pm, m);
+      pm.defines = { STANDARD: '', PHYSICAL: '' };           // the standard copy drops the physical switch
+      pm.name = m.name;
+      LAB.factory.set(pm, LAB.factory.get(m));
+      for (const o of LAB.meshes[t]) if (o.material === m) o.material = pm;
+      return pm;
+    });
+  }
+  for (const t of Object.keys(LAB.mats)) for (const m of LAB.mats[t]) {
+    m.clearcoat = Math.max(m.clearcoat || 0, 0.001); m.needsUpdate = true;
+    // brushed grain only where every piece wearing it has texture coordinates
+    const users = LAB.meshes[t].filter(o => o.material === m);
+    if (users.length && users.every(o => o.geometry.attributes.uv || o.geometry.attributes.tangent)) LAB.grain.add(m);
+  }
+  $('lookWheel').disabled = !LAB.meshes.wheels.length;
+  // a part this car's file does not have is not offered
+  const have = Object.keys(LAB.meshes).filter(t => LAB.meshes[t].length);
+  document.querySelectorAll('#target button').forEach(b => { b.hidden = !have.includes(b.dataset.t); });
+  if (!have.length) $('lab').hidden = true;
+  else if (!have.includes(LAB.target)) LAB.target = have[0];
+  labUI();
+}
+function applyFinish(t, finish, hex) {
+  const f = FINISHES[finish], c = new THREE.Color(hex);
+  for (const m of LAB.mats[t]) {
+    m.color.copy(f.tint ? new THREE.Color(1, 1, 1).lerp(c, f.tint) : c);
+    m.metalness = f.metalness; m.roughness = f.roughness;
+    // a trace of clear coat always, so the shader is built once and a change of
+    // finish only changes its numbers; the brushed grain needs texture
+    // coordinates, so only parts that have them get it
+    m.clearcoat = Math.max(f.clearcoat || 0, 0.001); m.clearcoatRoughness = f.clearcoatRoughness || 0;
+    const grain = (f.anisotropy || 0) > 0 && LAB.grain.has(m) ? f.anisotropy : 0;
+    if ((grain > 0) !== (m.anisotropy > 0)) m.needsUpdate = true;
+    m.anisotropy = grain;
+  }
+  LAB.state[t] = { finish, hex };
+  try { localStorage.setItem(CAR.key, JSON.stringify(LAB.state)); } catch (e) { /* storage off */ }
+  labUI();
+}
+function factory(t) {
+  for (const m of LAB.mats[t]) {
+    const f = LAB.factory.get(m); if (!f) continue;
+    m.color.copy(f.color); m.metalness = f.metalness; m.roughness = f.roughness;
+    if ((f.anisotropy > 0) !== (m.anisotropy > 0)) m.needsUpdate = true;
+    m.clearcoat = Math.max(f.clearcoat, 0.001); m.clearcoatRoughness = f.clearcoatRoughness; m.anisotropy = f.anisotropy;
+  }
+  LAB.state[t] = null;
+}
+function labUI() {
+  const st = LAB.state[LAB.target];
+  document.querySelectorAll('#target button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.t === LAB.target)));
+  document.querySelectorAll('#finish button').forEach(b => b.setAttribute('aria-pressed', String(!!st && b.dataset.f === st.finish)));
+  document.querySelectorAll('#colours button').forEach(b => b.setAttribute('aria-pressed', String(!!st && b.dataset.c === st.hex)));
+  if (st) $('customColour').value = st.hex;
+  const parts = Object.entries(LAB.state).map(([t, v]) => v ? `${t} ${v.finish} ${v.hex}` : `${t} factory`);
+  $('buildCode').value = CAR.title + ' · ' + parts.join(' · ');
+}
+for (const [k, f] of Object.entries(FINISHES)) {
+  const b = document.createElement('button'); b.type = 'button'; b.dataset.f = k; b.id = 'finish-' + k; b.textContent = f.label;
+  b.setAttribute('aria-pressed', 'false');
+  b.addEventListener('click', () => applyFinish(LAB.target, k, (LAB.state[LAB.target] || {}).hex || $('customColour').value));
+  $('finish').append(b);
+}
+COLOURS.forEach((hex, i) => {
+  const b = document.createElement('button'); b.type = 'button'; b.className = 'chip'; b.dataset.c = hex; b.id = 'colour-' + i;
+  b.style.background = hex; b.title = hex; b.setAttribute('aria-label', 'Colour ' + hex); b.setAttribute('aria-pressed', 'false');
+  b.addEventListener('click', () => applyFinish(LAB.target, (LAB.state[LAB.target] || {}).finish || 'gloss', hex));
+  $('colours').append(b);
+});
+$('customColour').addEventListener('input', e => applyFinish(LAB.target, (LAB.state[LAB.target] || {}).finish || 'gloss', e.target.value));
+document.querySelectorAll('#target button').forEach(b => b.addEventListener('click', () => { LAB.target = b.dataset.t; labUI(); }));
+$('resetLab').addEventListener('click', () => { for (const t of Object.keys(LAB.state)) factory(t);
+  try { localStorage.removeItem(CAR.key); } catch (e) { /* storage off */ } labUI(); });
+$('copyCode').addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText($('buildCode').value); $('copyCode').textContent = 'Copied'; }
+  catch (e) { const r = document.createRange(); r.selectNodeContents($('buildCode')); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); $('copyCode').textContent = 'Selected'; }
+  setTimeout(() => { $('copyCode').textContent = 'Copy'; }, 1600);
+});
+$('lookWheel').addEventListener('click', () => {
+  const w = LAB.meshes.wheels[0]; if (!w) return;
+  const c = new THREE.Box3().setFromObject(w).getCenter(new THREE.Vector3());
+  const side = Math.sign(c.x - (S.pivot ? S.pivot.position.x : 0)) || 1;
+  controls.target.copy(c); camera.position.set(c.x + side * 1.5, c.y + 0.25, c.z + 0.6); controls.update();
+});
+function labRestore() {
+  let saved = null;
+  try { saved = JSON.parse(localStorage.getItem(CAR.key) || 'null'); } catch (e) { saved = null; }
+  if (saved) for (const [t, v] of Object.entries(saved)) if (v && FINISHES[v.finish] && LAB.mats[t]) applyFinish(t, v.finish, v.hex);
+}
+labUI();
+
+renderer.setAnimationLoop(() => {
+  const dt = Math.min(clock.getDelta(), 0.1);
+  if (S.mixer) S.mixer.update(dt);
+  if (S.pivot) {
+    const r = S.pivot.rotation.z, d = S.flipTo - r;
+    S.pivot.rotation.z = Math.abs(d) < 0.002 || reduced ? S.flipTo : r + d * Math.min(1, dt * 4);
+    if (S.shadow) S.shadow.visible = Math.abs(S.pivot.rotation.z) < 0.2;
+  }
+  controls.update();
+  renderer.render(scene, camera);
+});
+</script>
