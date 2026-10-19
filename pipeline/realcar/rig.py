@@ -1400,8 +1400,9 @@ def cut_doors(car, objs, wheels, lo, hi, rep, body_style=""):
         T, ms, refs, vid, a_, n_, E = cache[id(o)]
         c = T.mean(1)
         u, inv = np.unique(ms, return_inverse=True) if len(ms) else (np.zeros(0, int), np.zeros(0, int))
-        mname = np.array([car.mname(int(m)) for m in u] or [""])[inv.reshape(-1)]
-        isg = per_material(ms, lambda m: GLASS_MAT.search(car.mname(m)))
+        un = [car.mname(int(m)) for m in u]           # each material's name, looked up once
+        mname = np.array(un or [""])[inv.reshape(-1)]
+        isg = np.array([bool(GLASS_MAT.search(m)) for m in un] or [False])[inv.reshape(-1)]
         smooth = E["two"].copy()
         smooth[E["two"]] = E["ang"] <= ANG
         sa, sb = E["fa"][E["ang"] <= ANG], E["fb"][E["ang"] <= ANG]

@@ -150,6 +150,9 @@ def warm(top=100, every=False, workers=2):
     t0 = time.time()
     done = batch.warm(items, argparse.Namespace(tools=TOOLS, body_style=None, year=None), workers,
                       log=lambda m: print(m, file=sys.stderr, flush=True))
+    for aid, v in done.items():
+        if v.startswith("refused: "):
+            mk._remember_refused(aid, v[len("refused: "):])     # not tried again, by requests or the next warm
     return {"models": len(items), "seconds": round(time.time() - t0), "cached_before": sum(v == "cached" for v in done.values()),
             "failed": {k: v for k, v in done.items() if v.startswith(("failed", "error", "refused"))}}
 
@@ -216,9 +219,20 @@ class Jobs:
         self.dir = os.path.join(HOME, "jobs")
         os.makedirs(self.dir, exist_ok=True)
         self.q = queue.Queue()
+        self.sheets = queue.Queue()
         self.lock = threading.Lock()
+        # a sheet being drawn when the server stopped is never finished: said
+        # so, or its car would read "drawing" (and the Maker wait) for ever
+        for f in os.listdir(self.dir):
+            j = _json(os.path.join(self.dir, f)) if f.endswith(".json") else None
+            if j and j.get("sheet_status") == "drawing":
+                j["sheet_status"], j["sheet_error"] = "failed", "the server restarted while it was drawn"
+                self.put(j)
         for k in range(workers):
             threading.Thread(target=self.worker, args=(8800 + k,), daemon=True).start()
+        # check sheets on a thread of their own (and a port of their own), so
+        # a car waiting in the queue does not also wait for another's sheet
+        threading.Thread(target=self.sheet_worker, args=(8800 + workers,), daemon=True).start()
 
     def path(self, jid):
         return os.path.join(self.dir, jid + ".json")
@@ -283,13 +297,21 @@ class Jobs:
                 job["sheet_status"] = "drawing"
             self.put(job)
             if job.get("sheet_status") == "drawing":
-                try:
-                    job["report"] = sheet_after(job["report"], sheet_from, port)
-                    job["sheet_status"] = "done" if (job["report"].get("files") or {}).get("sheet") else "failed"
-                except Exception as e:
-                    job["sheet_status"] = "failed"
-                    job["sheet_error"] = str(e)[-300:]
-                self.put(job)
+                self.sheets.put((jid, sheet_from))
+            elif sheet_from and os.path.exists(os.path.join(sheet_from, "finished.glb")):
+                os.remove(os.path.join(sheet_from, "finished.glb"))     # kept for a sheet that is not drawn
+
+    def sheet_worker(self, port):
+        while True:
+            jid, d = self.sheets.get()
+            job = self.get(jid)
+            try:
+                job["report"] = sheet_after(job["report"], d, port)
+                job["sheet_status"] = "done" if (job["report"].get("files") or {}).get("sheet") else "failed"
+            except Exception as e:
+                job["sheet_status"] = "failed"
+                job["sheet_error"] = str(e)[-300:]
+            self.put(job)
 
 
 # ── the Studio's library: every car built here that kept its rig ────────────

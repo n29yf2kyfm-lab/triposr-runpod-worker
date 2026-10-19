@@ -574,7 +574,8 @@ def _standin(want, report, item, cat, skip):
         report.pop("catalogue_has", None)
         return report, d
     sid = re.sub(r"[^a-z0-9]+", "-", f"{make} {model} {y[0] or ''}".lower()).strip("-")
-    it = dict(d, assetId=f"{d['assetId']}--as-{sid}", standin=target, standin_donor=d["assetId"])
+    it = dict(d, assetId=f"{d['assetId']}--as-{sid}", standin=target, standin_donor=d["assetId"],
+              standin_of={"make": make, "model": model})          # the car asked for: its layout (batch.layout_of)
     report = dict(report)
     report.pop("error", None)
     report.pop("catalogue_has", None)
@@ -743,6 +744,12 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
                     search = PhotoSearch(s_["make"], s_["model"], item["standin"])
         if item is None:
             break
+        known = search.result if search is not None and (search.thread is None or not search.thread.is_alive()) else None
+        if item.get("standin") and (known or {}).get("roofline"):
+            # the photo is known already (the standby library, or a search for
+            # this car before): its roofline goes into this build, not into a
+            # second build after it that the time may not allow
+            item = dict(item, standin=dict(item["standin"], roof=dict(known["roofline"], file=known["file"])))
         t0 = time.time()
         rec = batch.one({"rank": 0, "genModel": request}, item, args, out)
         last_s = time.time() - t0
@@ -796,14 +803,29 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
     if passed:
         report["match"] += f"; {len(passed)} other model(s) tried first and passed over (see passed_over)"
     if item.get("standin") and search is not None:
-        # the photo is waited for only while a rebuild with it still fits in
-        # the time; a search still running goes on and is kept for next time
-        ph = search.get(deadline - (time.time() - t_start) - last_s)
+        def photo_used(ph, rec):
+            rl = (rec.get("standin") or {}).get("roofline") or {}
+            report["standin"]["photo"] = {"file": ph["file"], "author": ph.get("author"), "licence": ph.get("licence"),
+                                          "page": ph.get("page"), "dated": ph.get("dated", True),
+                                          "view": ph.get("view") or "side",
+                                          "roofline_off_cm": [rl.get("roofline_off_cm_before"),
+                                                              rl.get("roofline_off_cm_after")],
+                                          "used_for": "the roofline only: nothing of the photo is in the car",
+                                          "from_library": bool(ph.get("from_library"))}
+            if ph.get("photo") and os.path.exists(ph["photo"]):
+                shutil.copyfile(ph["photo"], os.path.join(out, item["assetId"], "photo.jpg"))
+        # a photo known before the build went into it; else it is waited for
+        # only while a rebuild with it still fits in the time, and a search
+        # still running goes on and is kept for next time
+        ph = search.result if item["standin"].get("roof") else \
+            search.get(deadline - (time.time() - t_start) - last_s)
         report["standin"]["photo_search"] = ({"found": ph.get("file"), "seconds": ph.get("seconds"),
                                              "rejected": len(ph.get("rejected") or [])} if ph else
                                             {"found": None, "why": "still searching at the time limit: "
                                                                    "a photo found later is used next time"})
-        if ph and ph.get("roofline") and time.time() - t_start + last_s > deadline:
+        if item["standin"].get("roof"):
+            photo_used(ph, rec)
+        elif ph and ph.get("roofline") and time.time() - t_start + last_s > deadline:
             report["standin"]["photo_search"]["why"] = "found too late to rebuild in time: used next time"
         elif ph and ph.get("roofline"):
             st2 = dict(item["standin"], roof=dict(ph["roofline"], file=ph["file"]))
@@ -813,16 +835,7 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
                     and len(rec2.get("missing") or []) <= len(rec.get("missing") or []):
                 item, rec = item2, rec2
                 report["result"] = rec
-                rl = (rec.get("standin") or {}).get("roofline") or {}
-                report["standin"]["photo"] = {"file": ph["file"], "author": ph.get("author"), "licence": ph.get("licence"),
-                                              "page": ph.get("page"), "dated": ph.get("dated", True),
-                                              "view": ph.get("view") or "side",
-                                              "roofline_off_cm": [rl.get("roofline_off_cm_before"),
-                                                                                        rl.get("roofline_off_cm_after")],
-                                              "used_for": "the roofline only: nothing of the photo is in the car"}
-                if ph.get("photo") and os.path.exists(ph["photo"]):
-                    shutil.copyfile(ph["photo"], os.path.join(out, item["assetId"], "photo.jpg"))
-                report["standin"]["photo"]["from_library"] = bool(ph.get("from_library"))
+                photo_used(ph, rec)
     side = [p for p in ((rec.get("finish") or {}).get("opens") or []) if p.startswith("door_") and p[5] in "fr"]
     report["side_doors_built"] = len(side)
     if want.get("doors"):
@@ -868,9 +881,11 @@ def draw_sheet(d, args, rec):
         time.sleep(0.6)
         try:
             sh = batch.render_sheet(d, args)
+        except Exception as e:                # the browser timed out: the finished file still goes
+            sh = {"error": str(e)[-300:]}
         finally:
             server.terminate()
-        os.remove(os.path.join(d, "finished.glb"))
+            os.remove(os.path.join(d, "finished.glb"))
     else:
         sh = {"error": "no finished car to draw"}
     if "seconds" in sh:

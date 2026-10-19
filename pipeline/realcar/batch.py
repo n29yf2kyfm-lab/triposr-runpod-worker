@@ -81,7 +81,14 @@ REAR_ENGINE = re.compile(r"^porsche\|(911|930|959|964|993|996|997|991|992)\b")
 
 
 def layout_of(item):
-    make, model = model_of(item)
+    """'rear' for a rear-engined car, else None. A stand-in takes the layout
+    of the car it stands in for, not its donor's: a 911 of a generation the
+    catalogue lacks is rear-engined whatever it is reshaped from."""
+    if item.get("standin"):
+        of = item.get("standin_of") or {}
+        make, model = str(of.get("make") or ""), str(of.get("model") or "")
+    else:
+        make, model = model_of(item)
     return "rear" if REAR_ENGINE.search(f"{make.lower()}|{model.lower()}") else None
 
 
@@ -225,14 +232,29 @@ def render_sheet(d, args):
     if not os.path.exists(fin):
         return {"error": "no finished car to draw"}
     rel = os.path.relpath(fin, args.view_dir)
+    borrowed = None
+    if rel.startswith(".."):
+        # built outside the folder the sheet page is served from (make --out):
+        # the page can only load a car inside it, so a copy goes there a while
+        borrowed = os.path.join(args.view_dir, "_sheet", f"{os.getpid()}.{threading.get_ident()}.glb")
+        os.makedirs(os.path.dirname(borrowed), exist_ok=True)
+        shutil.copyfile(fin, borrowed)
+        rel = os.path.relpath(borrowed, args.view_dir)
     t0 = time.time()
     try:
-        shots = shots_for(layout_of(json.load(open(os.path.join(d, "build.json")))["item"]))
+        # the layout the build used (one() keeps it in build.json; an older
+        # build.json: the same rule)
+        b = json.load(open(os.path.join(d, "build.json")))
+        shots = shots_for(b["layout"] if "layout" in b else layout_of(b["item"]))
     except Exception:
         shots = SHOTS
-    p = subprocess.run(["node", os.path.join(args.tools, "view.mjs"), "1000", "640"] +
-                       [f"{os.path.join(d, n)}.png:f={rel}&{q}" for n, q in shots],
-                       capture_output=True, text=True, timeout=900, env={**os.environ, "VIEW_PORT": str(args.port)})
+    try:
+        p = subprocess.run(["node", os.path.join(args.tools, "view.mjs"), "1000", "640"] +
+                           [f"{os.path.join(d, n)}.png:f={rel}&{q}" for n, q in shots],
+                           capture_output=True, text=True, timeout=900, env={**os.environ, "VIEW_PORT": str(args.port)})
+    finally:
+        if borrowed and os.path.exists(borrowed):
+            os.remove(borrowed)
     try:
         from PIL import Image
         ims = [Image.open(os.path.join(d, n + ".png")).convert("RGB") for n, _ in shots]
@@ -283,6 +305,15 @@ def rig_cache(item, body):
     return os.path.join(os.path.expanduser(home), "rigs", aid, "2" if TWO_DOOR.search(body or "") else "4")
 
 
+def cache_ok(cache):
+    """A shared rig made by this rigger, with every file of it there."""
+    try:
+        return json.load(open(os.path.join(cache, "result.json"))).get("rigger") == rig_mod.VERSION \
+            and all(os.path.exists(os.path.join(cache, f)) for f in RIG_FILES)
+    except (OSError, ValueError):
+        return False
+
+
 def keep_rig(rig, cache):
     """A fresh rig into the shared cache: copied (a stand-in reshapes its
     src.glb in place afterwards), then put in place whole."""
@@ -331,8 +362,9 @@ def warm(items, args, workers=2, log=print):
     def one_model(item):
         body, _ = body_of(item, args)
         cache = rig_cache(item, body)
-        rc = os.path.join(cache, "result.json")
-        if os.path.exists(rc) and json.load(open(rc)).get("rigger") == rig_mod.VERSION:
+        if cache is None:
+            return item["assetId"], "failed: no $GLBMACHINE_HOME for the rig cache"
+        if cache_ok(cache):
             return item["assetId"], "cached"
         d = f"{cache}.work{os.getpid()}.{threading.get_ident()}"
         os.makedirs(d, exist_ok=True)
@@ -342,6 +374,8 @@ def warm(items, args, workers=2, log=print):
                 rr = rig_model(item, d, body, args.tools, lg, tm)
             if os.path.exists(os.path.join(d, "rig", "src.glb")):
                 keep_rig(os.path.join(d, "rig"), cache)
+            if rr.get("status") == "refused":
+                return item["assetId"], f"refused: {rr.get('refused')}"      # the rigger's own reason
             return item["assetId"], f"{rr.get('status')} in {sum(tm.values()):.0f} s"
         except Exception as e:
             return item["assetId"], f"failed: {e}"[:200]
@@ -372,13 +406,18 @@ def one(target, item, args, out):
     # the model rigged before, for any request (the shared rig cache): its rig
     # is copied in, and nothing is downloaded or rigged
     cache = rig_cache(item, body)
-    if cache and not os.path.exists(rigged):
-        rc = json.load(open(os.path.join(cache, "result.json"))) if os.path.exists(os.path.join(cache, "result.json")) else {}
-        if rc.get("rigger") == rig_mod.VERSION and all(os.path.exists(os.path.join(cache, f)) for f in RIG_FILES):
+    if cache and not os.path.exists(rigged) and cache_ok(cache):
+        try:
             os.makedirs(rig, exist_ok=True)
             for f in RIG_FILES:
                 shutil.copyfile(os.path.join(cache, f), os.path.join(rig, f))
             rec["rig_from_cache"] = True
+        except OSError:
+            # replaced by another build's rig while it was read (keep_rig):
+            # nothing half-copied stays, and the model is rigged here
+            for f in RIG_FILES:
+                if os.path.exists(os.path.join(rig, f)):
+                    os.remove(os.path.join(rig, f))
     rr = json.load(open(rr_path)) if os.path.exists(rigged) and os.path.exists(rr_path) else None
     two = lambda b: bool(TWO_DOOR.search(b or ""))  # noqa: E731
     fresh_rig = False
@@ -439,7 +478,7 @@ def one(target, item, args, out):
         spec["body_family"] = "van"
     # a 911: the engine under the rear lid, which lifts 60 degrees from the
     # rear window; luggage under the front lid
-    if layout_of(item) == "rear" and not st:
+    if layout_of(item) == "rear":
         spec["layout"] = "rear"
         spec.setdefault("hinges", {})["tailgate"] = {"deg": 60}
     if st:
@@ -460,7 +499,8 @@ def one(target, item, args, out):
         rec["edited"] = {"manual": spec["manual"], "hinges": spec["hinges"]}
     # how this car was built, so the Studio can build it again
     json.dump({"target": target, "item": item, "paint": getattr(args, "paint", None),
-               "body_style": getattr(args, "body_style", None)},
+               "body_style": getattr(args, "body_style", None),
+               "layout": spec.get("layout")},          # the sheet drawn later (render_sheet) looks where this car's bay is
               open(os.path.join(d, "build.json"), "w"), indent=1, default=str)
     fin = os.path.join(d, "finished.glb")
     t0 = time.time()
@@ -491,7 +531,7 @@ def one(target, item, args, out):
                                            [f"{os.path.join(d, n)}.png:f={rel}&{q}" for n, q in shots],
                                            stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
                                            env={**os.environ, "VIEW_PORT": str(args.port)})
-    outs = {}
+    outs, pv = {}, None
     for k, pr in procs.items():
         try:
             o, e = pr.communicate(timeout=900)
@@ -501,19 +541,24 @@ def one(target, item, args, out):
         outs[k] = o
         lg.write(f"{k}\n{o[-4000:]}{e[-4000:]}\n")
         tm[k] = round(time.time() - t0, 1)
+        if k == "encode" and os.path.exists(web):
+            # the web copy is the file people get: it is checked too (a
+            # re-write can break what the finished file had right), while the
+            # sheet is still being drawn
+            pv = subprocess.Popen(["node", os.path.join(args.tools, "validate.mjs"), web],
+                                  stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     try:
         rec["validator"] = json.loads(outs["validate"])
     except Exception:
         rec["validator"] = {"errors": -1}
     rec["web_bytes"] = os.path.getsize(web) if os.path.exists(web) else None
-    # the web copy is the file people get: it is checked too (a re-write can
-    # break what the finished file had right)
     if rec["web_bytes"]:
         try:
-            pv = subprocess.run(["node", os.path.join(args.tools, "validate.mjs"), web],
-                                capture_output=True, text=True, timeout=600)
-            rec["validator_web"] = json.loads(pv.stdout)
+            rec["validator_web"] = json.loads(pv.communicate(timeout=600)[0])
         except Exception:
+            if pv is not None and pv.poll() is None:
+                pv.kill()
+                pv.communicate()
             rec["validator_web"] = {"errors": -1}
     try:
         if "render" not in procs:
