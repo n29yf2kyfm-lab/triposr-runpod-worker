@@ -492,3 +492,19 @@ says NC-SA, so it is free-app use only.
   takes 11 more small touching pieces (checked by eye).
 
 ![Qashqai finished](qashqai_j11_sheet.jpg)
+
+## Bikes modelled in code
+
+`bikes/cruiser.mjs` builds a heavy cruiser motorbike from three.js geometry
+and writes it as glTF with gltf-transform: no downloaded model, so the file is
+wholly ExpertCarCheck's. Its sizes are a real bike's published figures (the
+`FATBOY` preset: 1,665 mm wheelbase, 2,370 mm long, 30 deg rake, 132 mm trail,
+675 mm seat, 160/60R18 and 240/40R18 tyres); the fork offset follows from rake
+and trail (48 mm). Parts move about their real pivots: `wheels_spin` (a loop),
+`steer_left` / `steer_right` (about the raked steering axis, with the front
+wheel), `stand_down`. The paint is one material (`paint`), set with
+`--paint=#hex` or changed in a viewer. No maker's badge or lettering is
+modelled; the maker's names are trademarks.
+
+    node pipeline/realcar/bikes/cruiser.mjs bike.glb --paint=#121214
+    node pipeline/realcar/encode.mjs bike.glb bike_web.glb      # 0.83 MB, validator clean
