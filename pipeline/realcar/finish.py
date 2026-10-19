@@ -289,6 +289,12 @@ def finish(src, spec, out, base_dir="."):
     manual = set(spec.get("manual") or [])
     if manual:
         log["manual"] = sorted(manual)
+    # a rear-engined car (the 911): the engine under the rear lid, which is
+    # the engine lid behind a fixed rear window; the front lid opens on the
+    # luggage space
+    rear_engine = spec.get("layout") == "rear"
+    if rear_engine:
+        log["layout"] = "rear engine"
     g = GLTF(src)
     j = g.j
     W, _ = g.world_matrices()
@@ -583,6 +589,24 @@ def finish(src, spec, out, base_dir="."):
         under = [i for i in range(nl) if dom[i] == paint and abs(hi[i, 1] - rw_lo[1]) < 0.04
                  and cz[i] < rw_cz and max(abs(lo[i, 0]), abs(hi[i, 0])) < xb and isl_area[i] > 0.1]
         ybot = (min(lo[i, 1] for i in under) if under else rw_lo[1] - 0.35) - 0.01
+        if rear_engine:
+            # the engine lid: from the rear window's lower edge back, above the
+            # rear lamps (the 992's light bar stays on the body), the window
+            # fixed. The lamps: the backward-facing lamp triangles behind the
+            # rear axle, under the window; their main band (most lamp area:
+            # the light bar, not the third brake light in the wing) and its top
+            zfront = rw_lo[2] + 0.01
+            lamp_m = [i for i in range(nm) if re.search(r"lamp|light|lens|reflector|indicator|signal|brake|stop",
+                                                         mats[i].get("name", ""), re.I)]
+            lt = np.isin(tmat, lamp_m) & (tri_c[:, 2] < zr) & (tri_c[:, 1] < rw_lo[1]) & (nrm[:, 2] < -0.5)
+            ybot = rw_lo[1] - 0.25
+            if area[lt].sum() > 0.005:
+                ly, la = tri_c[lt, 1], area[lt]
+                o = np.argsort(ly)
+                main = float(ly[o][np.searchsorted(np.cumsum(la[o]), la.sum() / 2)])
+                band = np.abs(T[lt].reshape(-1, 3)[:, 1] - main) < 0.08
+                ybot = float(np.percentile(T[lt].reshape(-1, 3)[band, 1], 98))
+            ybot += 0.01
         # the car's rear skin: the rearmost surface at each (x, y), 1 cm cells
         pts = flat
         cell = np.floor(pts[:, :2] / 0.01).astype(np.int64)
@@ -596,8 +620,11 @@ def finish(src, spec, out, base_dir="."):
         inside = (np.abs(lo[:, 0]) <= xb) & (np.abs(hi[:, 0]) <= xb) & (lo[:, 1] >= ybot) & (hi[:, 2] <= zfront)
         tg = inside & (near_share > 0.5)
         # the window pane can be modelled twice (outer and inner face): both go
-        tg |= inside & np.isin(dom, list(glass))
+        if not rear_engine:
+            tg |= inside & np.isin(dom, list(glass))
         tg &= label == "body"
+        if rear_engine:
+            tg &= ~np.isin(dom, list(glass))
         label[tg] = "tailgate"
         log["tailgate"] = {"from": "islands", "rear_window_m2": round(rw_m2, 3),
                            "box": {"x_half": round(float(xb), 3), "y_bottom": round(float(ybot), 3),
@@ -629,6 +656,8 @@ def finish(src, spec, out, base_dir="."):
             ts = np.where(~np.isin(tmat, list(glass)))[0]
             cen = T[ts].mean(1)
             on_skin = skin(cen, T[ts].reshape(-1, 3), (0, 1), -1, 0.08)
+            if rear_engine:                    # an engine lid lies flat: its top skin too
+                on_skin |= skin(cen, T[ts].reshape(-1, 3), (0, 2), 1, 0.07)
             sp = T[tp_].reshape(-1, 3)
             mid = sp[np.abs(sp[:, 0]) < 0.15]
             ytop_b = rw_lo[1]
@@ -642,6 +671,8 @@ def finish(src, spec, out, base_dir="."):
                     break
             xt = max(abs(rw_lo[0]), abs(rw_hi[0])) + 0.02
             ztop = rw_hi[2] + 0.02
+            if rear_engine:                    # the engine lid's box, as above
+                ycut, ztop = ybot, zfront
 
             def tfield(P, xt=xt, ycut=ycut, ztop=ztop):
                 return np.maximum.reduce([np.abs(P[:, 0]) - xt, ycut - P[:, 1], P[:, 2] - ztop])
@@ -801,18 +832,32 @@ def finish(src, spec, out, base_dir="."):
     # the bottom third of the wheels (the floor stays), under the bonnet,
     # and 12 cm clear of the bonnet's front edge (the grille stays).
     # spec "keep_native_engine": true keeps a model's own instead.
-    bt = [r["P"][r["I"][r["tri_part"] == "bonnet"]] for r in recs if (r["tri_part"] == "bonnet").any()]
+    # (a rear-engined car's bay is under its engine lid, the "tailgate": the
+    # same, front and back swapped - 12 cm clear of the lid's rear edge, where
+    # the lamps are)
+    lid_part = "tailgate" if rear_engine else "bonnet"
+    bt = [r["P"][r["I"][r["tri_part"] == lid_part]] for r in recs if (r["tri_part"] == lid_part).any()]
     cleared = 0.0
     if bt and spec.get("engine_pack") and not spec.get("keep_native_engine"):
         B = np.vstack(bt).reshape(-1, 3)
         wd = wheel_top - ground
         z0, z1, ytop = B[:, 2].min() + 0.05, B[:, 2].max() - 0.12, B[:, 1].min()
+        if rear_engine:
+            z0, z1 = B[:, 2].min() + 0.12, B[:, 2].max() - 0.02
+        # big sheets reach to the lid's edge at the lamps' end
+        zb0, zb1 = (z0 - 0.12, z1) if rear_engine else (z0, z1 + 0.12)
         # the bonnet's underside, cell by cell (cells as big as its triangles,
         # at least 3 cm): everything below it is
         # bay, up to just under the panel - a fake engine (the Fiesta's is a
         # photo on a sheet 15 cm under the bonnet) sits above the lowest
         # point of the bonnet's front lip
         bcell = float(np.clip(2 * np.sqrt(np.median(tri_area_normal(np.vstack(bt))[0])), 0.03, 0.12))
+        # a rear-engined car: the cabin's back, as the open lid shows it (the
+        # 992's seat backs are a zigzag of carpet and leather), goes where it
+        # reaches behind the lid's front edge; a panel closes the bay there
+        zfe_s = float(B[:, 2].max())
+        xfe_s = float(np.percentile(np.abs(B[B[:, 2] > zfe_s - 0.05, 0]), 98))
+        trim_rx = re.compile(r"(^|[_\W])int($|[_\W\d])|interior|rug|carpet|leather|seat|fabric|alcantara|upholst", re.I)
         bk = np.floor(B[:, [0, 2]] / bcell).astype(np.int64) @ np.array([100000, 1])
         buk, binv = np.unique(bk, return_inverse=True)
         bunder = np.full(len(buk), np.inf)
@@ -837,7 +882,7 @@ def finish(src, spec, out, base_dir="."):
             # Fiesta's photo engine): for those, anything under the bonnet's
             # top skin is bay (the bonnet itself is its own part by now)
             lid = np.where(big & hit, btop[ix] - 0.02, lid)
-            under_bonnet = (c[:, 1] > ground + 0.35 * wd) & (c[:, 1] < lid) & (c[:, 2] > z0)
+            under_bonnet = (c[:, 1] > ground + 0.35 * wd) & (c[:, 1] < lid) & (c[:, 2] > min(z0, zb0))
             # small detail: the middle of the bay only (headlamp insides and
             # the grille stay); big flat sheets (a tub, a photo of an engine:
             # the Fiesta's are 30 cm triangles) out to the inner wings and up
@@ -846,9 +891,9 @@ def finish(src, spec, out, base_dir="."):
             lampish = bool(re.search(r"light|lamp|lens|luz|chrome|cromo|grill|badge|logo|emblem",
                                      mats[r["mat"]].get("name", "") if r["mat"] is not None else "", re.I))
             inb = under_bonnet & (
-                ((np.abs(c[:, 0]) < 0.45 * track_half) & (c[:, 2] < z1)) |
-                (big & (np.abs(c[:, 0]) < 0.75 * track_half) & (c[:, 2] < z1 + 0.12) & (np.abs(nr_[:, 2]) < 0.7)
-                 & (not lampish)))
+                ((np.abs(c[:, 0]) < 0.45 * track_half) & (c[:, 2] > z0) & (c[:, 2] < z1)) |
+                (big & (np.abs(c[:, 0]) < 0.75 * track_half) & (c[:, 2] > zb0) & (c[:, 2] < zb1)
+                 & (np.abs(nr_[:, 2]) < 0.7) & (not lampish)))
             # the model's own engine, by its material's name (the 2001 Yaris's
             # VITZ_ENGINE covers stood over the generic engine): all of it
             # under the bonnet's top and inside its footprint goes
@@ -857,6 +902,17 @@ def finish(src, spec, out, base_dir="."):
             if enginish:
                 inb |= (c[:, 1] > ground + 0.2 * wd) & (c[:, 1] < btop.max()) & (np.abs(c[:, 0]) < track_half) \
                     & (c[:, 2] > z0 - 0.1) & (c[:, 2] < B[:, 2].max())
+            if rear_engine and r["mat"] not in paint_ids and not lampish:
+                # under an engine lid all but the body's paint and the lamps
+                # goes, up to the lid's top, in the lid's box (its vertex grid
+                # has holes under its big triangles): the 992's grille has deep
+                # fins the lid's cut leaves standing in the bay
+                inb |= (np.abs(c[:, 0]) < xfe_s) & (c[:, 1] > ground + 0.35 * wd) & (c[:, 1] < B[:, 1].max() - 0.02) \
+                    & (c[:, 2] > z0) & (c[:, 2] < zfe_s - 0.005)
+            if rear_engine and trim_rx.search(mats[r["mat"]].get("name", "") if r["mat"] is not None else ""):
+                inb |= (np.abs(nr_[:, 2]) > 0.3) & (np.abs(c[:, 0]) < xfe_s) & (c[:, 1] > ground + 0.35 * wd) \
+                    & (c[:, 1] < B[:, 1].max()) & (c[:, 2] > zfe_s - 0.25) & (c[:, 2] < zfe_s + 0.08) \
+                    & (Tr[:, :, 2].min(1) < zfe_s - 0.015)
             if inb.any():
                 cleared += float(tri_area_normal(Tr[inb])[0].sum())
                 r["tri_part"][body_t[inb]] = "drop"
@@ -1002,10 +1058,13 @@ def finish(src, spec, out, base_dir="."):
             return [float(v) for v in M.T.ravel()]
 
         def anchored(z_from, z_to):
-            A = np.array([sx, sy, sl])
+            # a rear-engined car's pack is turned round (180 degrees about the
+            # vertical): the bay, engine and gearbox on the rear axle, the
+            # engine behind it; the tank and the other axle's gear in front
+            A = np.array([-sx, sy, -sl] if rear_engine else [sx, sy, sl])
             return mat4(A, np.array([0.0, 0.0, z_to]) - A * np.array([0.0, F["ground_y"], z_from]))
-        front = anchored(F["front_axle_z"], zf_o)
-        rear = anchored(F["rear_axle_z"], zr_o)
+        front = anchored(F["front_axle_z"], zr_o if rear_engine else zf_o)
+        rear = anchored(F["rear_axle_z"], zf_o if rear_engine else zr_o)
         # Fit: nothing of the bay may show through the shut bonnet or the
         # nose. The bay's points are checked against the bonnet's underside
         # (3 cm cells, 3 cm clear) and then the front skin (4 cm clear); the
@@ -1017,17 +1076,35 @@ def finish(src, spec, out, base_dir="."):
             while ppar.get(i, root) != root:
                 i = ppar[i]
             return pack.j["nodes"][i].get("name", "")
+        # a 911's radiators are in its nose: the pack's, at the back of a
+        # turned-round bay, stay out (and the engine goes further back)
+        left_out = (lambda nm: nm.startswith("bay:radiator")) if rear_engine else (lambda nm: False)
         pts = []
         for i, nd in enumerate(pack.j["nodes"]):
-            if "mesh" in nd and i not in stray and top_of(i) not in PACK_REAR | PACK_EXHAUST:
+            if "mesh" in nd and i not in stray and top_of(i) not in PACK_REAR | PACK_EXHAUST and not left_out(top_of(i)):
                 for pr in pack.j["meshes"][nd["mesh"]]["primitives"]:
                     Pp = pack.accessor(pr["attributes"]["POSITION"])
                     pts.append(Pp[:: max(1, len(Pp) // 400)] @ PW[i][:3, :3].T + PW[i][:3, 3])
         Mf = np.array(front).reshape(4, 4).T
         Q = np.vstack(pts) @ Mf[:3, :3].T + Mf[:3, 3]
-        bon = [to_out(r["P"][r["I"][r["tri_part"] == "bonnet"]].reshape(-1, 3)) for r in recs if (r["tri_part"] == "bonnet").any()]
+        bon = [to_out(r["P"][r["I"][r["tri_part"] == lid_part]].reshape(-1, 3)) for r in recs if (r["tri_part"] == lid_part).any()]
         skin_pts = np.vstack([to_out(r["P"][r["I"][r["tri_part"] == "body"]].reshape(-1, 3))
                               for r in recs if not r["rig"].startswith(("wheel_", "door_")) and (r["tri_part"] == "body").any()])
+        back = 0.0
+        lid_out = np.vstack(bon) if bon else None
+        if rear_engine and bon:
+            # the engine under the middle of the engine lid (the pack's block
+            # sits ahead of its axle; a 911's flat six behind it), and nothing
+            # up through the fixed rear window over it
+            blk = [i for i, nd in enumerate(pack.j["nodes"]) if "mesh" in nd and nd.get("name") in ("bay:blk", "bay:head")]
+            ez = np.mean([(pack.accessor(pr["attributes"]["POSITION"]) @ PW[i][:3, :3].T + PW[i][:3, 3])[:, 2].mean()
+                          for i in blk for pr in pack.j["meshes"][pack.j["nodes"][i]["mesh"]]["primitives"]]) \
+                if blk else F["front_axle_z"] + 0.24
+            ez_out = Mf[2, 2] * ez + Mf[2, 3]
+            back = float(np.clip(np.vstack(bon)[:, 2].mean() - ez_out, -0.6, 0.0))
+            Q[:, 2] += back
+            Mf[2, 3] += back
+            bon = bon + [to_out(r["P"][r["I"]].reshape(-1, 3)) for r in recs if r["mat"] in glass]
 
         def overshoot(Q, ref, axes, ax, reduce, clear):
             """How far points Q reach past `lim - clear` along axis ax, where
@@ -1043,22 +1120,35 @@ def finish(src, spec, out, base_dir="."):
             return float(max(0.0, (Q[hit, ax] - (lim[ix[hit]] - clear)).max())) if hit.any() else 0.0
         dy = min(0.15, overshoot(Q, np.vstack(bon), (0, 2), 1, np.minimum, 0.03)) if bon else 0.0
         Q[:, 1] -= dy
-        # the nose only: body ahead of the front axle, bay points from the
-        # bumper's lower edge up (the arms and subframe sit under the floor)
-        nose = skin_pts[skin_pts[:, 2] > zf_o]
         qn = Q[Q[:, 1] > 0.35 * wd * s]
-        dz = min(0.12, overshoot(qn, nose, (0, 1), 2, np.maximum, 0.04)) if len(qn) and len(nose) else 0.0
+        if rear_engine:
+            # the tail only: body behind the rear axle; the bay comes forward
+            # out of it (z mirrored, so the same check looks backwards)
+            tail = skin_pts[skin_pts[:, 2] < zr_o] * np.array([1.0, 1.0, -1.0])
+            dz = -min(0.12 - back, overshoot(qn * np.array([1.0, 1.0, -1.0]), tail, (0, 1), 2, np.maximum, 0.04)) \
+                if len(qn) and len(tail) else 0.0
+        else:
+            # the nose only: body ahead of the front axle, bay points from the
+            # bumper's lower edge up (the arms and subframe sit under the floor)
+            nose = skin_pts[skin_pts[:, 2] > zf_o]
+            dz = min(0.12, overshoot(qn, nose, (0, 1), 2, np.maximum, 0.04)) if len(qn) and len(nose) else 0.0
         Mf[1, 3] -= dy
         Mf[2, 3] -= dz
         front = [float(v) for v in Mf.T.ravel()]
         # exhaust: from where the front pipe hands over to 10 cm inside the tail
         tail_o = (float(min(lo[:, 2])) - zmid) * s
         z1 = sl * (F["exhaust_front_z"] - F["front_axle_z"]) + zf_o
+        if rear_engine:                      # the pipe hands over ahead of the engine, turned round
+            z1 = float(Mf[2, 2] * F["exhaust_front_z"] + Mf[2, 3])
         z2 = tail_o + 0.10
         az = (z1 - z2) / (F["exhaust_front_z"] - F["exhaust_tail_z"])
         A = np.array([sx, sy, az])
         exhaust = mat4(A, np.array([0.0, -sy * F["ground_y"], z1 - az * F["exhaust_front_z"]]))
         wrap = {"engine_bay": front, "rear_running_gear": rear, "exhaust": exhaust}
+        if rear_engine:
+            # the nose is the luggage space: the pack's tank and other axle stay
+            # out (the model's own floor and liner stand under the front lid)
+            del wrap["rear_running_gear"]
         widx = {}
         for k, M in wrap.items():
             widx[k] = len(j["nodes"])
@@ -1068,10 +1158,50 @@ def finish(src, spec, out, base_dir="."):
             for c in j["nodes"][r0].get("children", [r0]):
                 nmx = j["nodes"][c].get("name", "")
                 k = "exhaust" if nmx in PACK_EXHAUST else "rear_running_gear" if nmx in PACK_REAR else "engine_bay"
-                j["nodes"][widx[k]]["children"].append(c)
+                if k in widx and not left_out(nmx):
+                    j["nodes"][widx[k]]["children"].append(c)
             j["nodes"][r0].pop("children", None)     # a node has one parent
+        if rear_engine and lid_out is not None:
+            # the bay's front wall: a model is seldom finished behind its rear
+            # seats (the 992's seat backs are a zigzag of carpet and leather,
+            # seen from the bay), so the bay is closed at the lid's front edge
+            # with a dark panel from the bay's floor up to just under the lid
+            # (its top follows the lid's edge across the car); the engine runs
+            # on under the parcel shelf behind it, as a 911's does
+            zfe = float(lid_out[:, 2].max())
+            band = lid_out[lid_out[:, 2] > zfe - 0.05]
+            xh = float(np.percentile(np.abs(band[:, 0]), 98)) - 0.01
+            y_lo = 0.35 * wd * s
+            cols = np.linspace(-xh, xh, 17)
+            tops = []
+            for x in cols:
+                near = band[np.abs(band[:, 0] - x) < xh / 16 + 0.02]
+                tops.append(float(near[:, 1].max()) - 0.015 if len(near) else np.nan)
+            tops = np.array(tops)
+            if np.isfinite(tops).sum() > 4 and xh > 0.2:
+                ok = np.isfinite(tops)
+                tops = np.interp(cols, cols[ok], tops[ok])
+                zw = zfe - 0.015
+                V = np.array([[x, y, zw] for x, t in zip(cols, tops) for y in (y_lo, t)], np.float32)
+                n = len(cols)
+                quads = [(2 * k, 2 * k + 2, 2 * k + 3, 2 * k + 1) for k in range(n - 1)]
+                fwd = [i for a, b, c, d in quads for i in (a, b, c, a, c, d)]           # facing the nose
+                Ix = np.array(fwd + [i + 2 * n for a, b, c, d in quads for i in (a, c, b, a, d, c)], np.uint32)
+                Vp = np.vstack([V, V])
+                Nn = np.array([[0, 0, 1]] * (2 * n) + [[0, 0, -1]] * (2 * n), np.float32)
+                j["materials"].append({"name": "bay_front_wall", "pbrMetallicRoughness": {
+                    "baseColorFactor": [0.025, 0.025, 0.028, 1.0], "metallicFactor": 0.0, "roughnessFactor": 0.85}})
+                j["meshes"].append({"name": "bay_front_wall", "primitives": [{
+                    "attributes": {"POSITION": g.add_accessor(Vp, minmax=True, target=34962),
+                                   "NORMAL": g.add_accessor(Nn, target=34962)},
+                    "indices": g.add_accessor(Ix, ctype=5125, atype="SCALAR", target=34963),
+                    "material": len(j["materials"]) - 1}]})
+                j["nodes"].append({"name": "bay_front_wall", "mesh": len(j["meshes"]) - 1})
+                nodes[0]["children"].append(len(j["nodes"]) - 1)
+                log["bay_front_wall"] = {"z": round(zw, 3), "y": [round(y_lo, 3), round(float(tops.min()), 3),
+                                                                  round(float(tops.max()), 3)], "x_half": round(xh, 3)}
         log["engine_pack"] = {"file": os.path.basename(spec["engine_pack"]), "scale": [round(sx, 4), round(sy, 4), round(sl, 4)],
-                              "lowered_m": round(dy, 3), "moved_back_m": round(dz, 3),
+                              "lowered_m": round(dy, 3), "moved_back_m": round(dz - back, 3),
                               "width_ratios": [round(x, 3) for x in ratios],
                               "exhaust_stretch": round(az / sl, 4), "strays_dropped": len(stray)}
 

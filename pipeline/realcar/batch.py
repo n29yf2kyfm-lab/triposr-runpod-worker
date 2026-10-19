@@ -67,7 +67,22 @@ GENERATION_FIX = {
     # a first-generation Yaris (XP10: its sheet, and the 2001 in its id),
     # recorded as the 2020 car
     "toyota-yaris-2001-v1": {"yearStart": 1999, "yearEnd": 2005, "generation": "XP10"},
+    # recorded with no year: a 992 Turbo (its sheet: full-width rear light
+    # bar, flush door handles, 992 bumpers and side intakes)
+    "porsche-911-pw2-v7": {"yearStart": 2020, "generation": "992"},
 }
+
+
+# Engines behind the rear axle under an engine lid (finish.py "layout":
+# "rear"): every 911, under whatever name the catalogue gives it. (A Smart's
+# or a Twingo's engine is under the boot floor, its tailgate a hatch: not
+# these.)
+REAR_ENGINE = re.compile(r"^porsche\|(911|930|959|964|993|996|997|991|992)\b")
+
+
+def layout_of(item):
+    make, model = model_of(item)
+    return "rear" if REAR_ENGINE.search(f"{make.lower()}|{model.lower()}") else None
 
 
 # Catalogue models that are not the car their record says (seen on the
@@ -194,6 +209,14 @@ SHOTS = [("hero", "az=38&el=14&d=6.6&ty=0.6"), ("all", "az=40&el=22&d=6.9&open=a
          ("rear", "az=215&el=18&d=6.9&open=all_open"), ("bay", "az=8&el=48&d=3.4&tz=1.25&ty=0.6&open=bonnet_open")]
 
 
+def shots_for(layout):
+    """The sheet's views: a rear-engined car's bay is under its engine lid,
+    so its bay view looks at the back."""
+    if layout == "rear":
+        return [(n, "az=172&el=48&d=3.4&tz=-1.35&ty=0.6&open=tailgate_open" if n == "bay" else q) for n, q in SHOTS]
+    return SHOTS
+
+
 def render_sheet(d, args):
     """The four-view check sheet of a car finished with keep_finished
     (D/finished.glb), drawn after the build: a request that tries more than
@@ -203,18 +226,22 @@ def render_sheet(d, args):
         return {"error": "no finished car to draw"}
     rel = os.path.relpath(fin, args.view_dir)
     t0 = time.time()
+    try:
+        shots = shots_for(layout_of(json.load(open(os.path.join(d, "build.json")))["item"]))
+    except Exception:
+        shots = SHOTS
     p = subprocess.run(["node", os.path.join(args.tools, "view.mjs"), "1000", "640"] +
-                       [f"{os.path.join(d, n)}.png:f={rel}&{q}" for n, q in SHOTS],
+                       [f"{os.path.join(d, n)}.png:f={rel}&{q}" for n, q in shots],
                        capture_output=True, text=True, timeout=900, env={**os.environ, "VIEW_PORT": str(args.port)})
     try:
         from PIL import Image
-        ims = [Image.open(os.path.join(d, n + ".png")).convert("RGB") for n, _ in SHOTS]
+        ims = [Image.open(os.path.join(d, n + ".png")).convert("RGB") for n, _ in shots]
         W, H = ims[0].size
         S = Image.new("RGB", (W * 2, H * 2))
         for i, im in enumerate(ims):
             S.paste(im, ((i % 2) * W, (i // 2) * H))
         S.save(os.path.join(d, "sheet.jpg"), quality=86)
-        for n, _ in SHOTS:
+        for n, _ in shots:
             os.remove(os.path.join(d, n + ".png"))
     except Exception as e:
         return {"error": f"{e}: {(p.stderr or '')[-300:]}"}
@@ -322,6 +349,11 @@ def one(target, item, args, out):
     # a van opens at the back as two barn doors (finish.py)
     if str(item.get("bodyStyle") or "").lower() == "van" or (st or {}).get("body") == "van":
         spec["body_family"] = "van"
+    # a 911: the engine under the rear lid, which lifts 60 degrees from the
+    # rear window; luggage under the front lid
+    if layout_of(item) == "rear" and not st:
+        spec["layout"] = "rear"
+        spec.setdefault("hinges", {})["tailgate"] = {"deg": 60}
     if st:
         spec["wheelbase"] = st["wheelbase"]      # reshaped to it already: the finisher checks, and moves nothing
     elif aid in WHEELBASE:
@@ -332,7 +364,7 @@ def one(target, item, args, out):
     # hinge choices
     rig_hinges = (json.load(open(rr_path)).get("hinges") if os.path.exists(rr_path) else None) or {}
     if rig_hinges:                               # the rig's own: a back door carrying the spare swings sideways
-        spec["hinges"] = dict(rig_hinges)
+        spec["hinges"] = {**spec.get("hinges", {}), **rig_hinges}
     ed_p = os.path.join(rig, "edits.json")
     if os.path.exists(ed_p):
         ed = json.load(open(ed_p))
@@ -351,14 +383,14 @@ def one(target, item, args, out):
         json.dump(rec, open(os.path.join(d, "record.json"), "w"), indent=1, default=str)
         return rec
     tm["finish"] = round(time.time() - t0, 1)
-    rec["finish"] = {k: flog.get(k) for k in ("opens", "missing", "bonnet", "tailgate", "door_trims", "rescale",
+    rec["finish"] = {k: flog.get(k) for k in ("opens", "missing", "layout", "bonnet", "tailgate", "door_trims", "rescale",
                                               "glass_cleared", "measured", "bay_cleared_m2", "engine_pack", "paint_set",
                                               "manual")}
     # validator, web copy and check sheet at the same time: the sheet is drawn
     # from the finished file, so it need not wait for the compression
     web = os.path.join(d, "web.glb")
     rel = os.path.relpath(fin, args.view_dir)
-    shots = SHOTS
+    shots = shots_for(spec.get("layout"))
     t0 = time.time()
     procs = {
         "validate": subprocess.Popen(["node", os.path.join(args.tools, "validate.mjs"), fin],

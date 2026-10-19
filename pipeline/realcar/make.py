@@ -89,10 +89,10 @@ def parse(text):
                 want["nickname_trim"] = m.group(trim).upper().replace(" ", "")
             t = t[:m.start()] + " " + ("" if placed else canon) + " " + t[m.end():]
             placed = True
-    m = re.search(r"\b(19[5-9]\d|20[0-3]\d)\b", t)
+    m = re.search(r"\b(19[5-9]\d|20[0-3]\d)\b(?:[\s-]*(?:plate|reg)\b)?", t)
     if m:
-        want["year"] = int(m.group(1))
-        t = t.replace(m.group(1), " ")
+        want["year"] = int(m.group(1))         # "2024 plate": the year, the word "plate" with it
+        t = t[:m.start()] + " " + t[m.end():]
     else:
         # a UK registration plate: "12 Yaris", "62-plate Corsa": 02-29 is that
         # March's year, 51-79 that September's (fifty on)
@@ -246,13 +246,13 @@ def find(want, cat, skip=()):
                       -((i.get("yearStart") or 1990) - 4 * batch.GRADE.get(i.get("qualityGrade"), 3)))
     order = lambda L: sorted(L, key=rank)  # noqa: E731
 
-    def pick(hits):
+    def pick(hits, first=lambda i: ()):
         if yr:
             on_sale = [i for i in hits if years(i)[0] - 1 <= yr <= years(i)[1]]
-            others = sorted(hits, key=lambda i: (min(abs(yr - years(i)[0]), abs(yr - years(i)[1])), rank(i)))
+            others = sorted(hits, key=lambda i: (min(abs(yr - years(i)[0]), abs(yr - years(i)[1])), first(i), rank(i)))
         else:
-            on_sale, others = hits, hits
-        return (order(on_sale)[0] if on_sale else None), others
+            on_sale, others = hits, sorted(hits, key=lambda i: (first(i), rank(i)))
+        return (min(on_sale, key=lambda i: (first(i), rank(i))) if on_sale else None), others
 
     variant, badge = spec_variants(want.get("spec"), hits, pool, names, norm(make), rest)
     if variant:
@@ -261,6 +261,17 @@ def find(want, cat, skip=()):
             want["spec_used"] = f"{badge} is its own model in the catalogue: built that one"
             return item, others, "exact generation"
         want["spec_used"] = "none: the catalogue has that variant only from other years, so the standard car is built"
+    fit, asked_trim = trim_fit(want, hits, names, norm(make))
+    if fit:
+        # of the records of the trim asked, the one on sale that year; the
+        # whole trim named beats part of it, a record of one trim a list
+        item, others = pick([i for i in hits if i["assetId"] in fit], lambda i: fit[i["assetId"]][:3])
+        if item:
+            want["trim_used"] = {"asked": asked_trim, "built": fit[item["assetId"]][3],
+                                 "words_not_matched": fit[item["assetId"]][4]}
+            return item, others, "exact generation"
+        want["trim_used"] = {"asked": asked_trim, "built": None,
+                             "why": "the catalogue has that trim only from other years: the standard car is built"}
     item, others = pick(hits)
     if item:
         return item, others, "exact generation"
@@ -298,10 +309,47 @@ def spec_variants(spec, hits, pool, names, make_n, rest):
     return out, badge
 
 
+def _words(s):
+    return [norm(x) for x in re.split(r"[\s\-_/.,]+", s or "") if norm(x)]
+
+
+def trim_fit(want, hits, names, make_n):
+    """The records whose trim the request names: the words after the model
+    ("911 turbo s": Turbo S), and the spec. Only a record made as one or two
+    trims counts (a 911 Turbo, a Civic Type R); a record listing the trims
+    its body fits (SE, Sport, ST-Line ...) is the standard car. Returns
+    {assetId: (part of the trim only, -words matched, trims listed, trim,
+    request words not in it)} and the trim words asked."""
+    toks = _words(want.get("model_words"))
+    for n2 in sorted({n.replace(make_n, "") for i in hits for n in names(i)} - {""}, key=len, reverse=True):
+        run = next(((a, b) for a in range(len(toks)) for b in range(a + 1, len(toks) + 1)
+                    if "".join(toks[a:b]) == n2), None)
+        if run:                                          # the model's own words are not its trim
+            toks = toks[:run[0]] + toks[run[1]:]
+            break
+    toks += [t for t in _words(want.get("spec")) if t not in toks]
+    if not toks:
+        return {}, None
+    fit = {}
+    for i in hits:
+        trims = [t for t in (i.get("compatibleTrimFamilies") or []) if _words(t)]
+        if not 1 <= len(trims) <= 2:
+            continue
+        for tf in trims:
+            T = _words(tf)
+            k = max(next((n for n in range(len(T), 0, -1) if toks[a:a + n] == T[:n]), 0) for a in range(len(toks)))
+            # the whole trim, or a word of it long enough to mean it ("turbo", not "s")
+            if k == len(T) or (k and any(len(t) >= 3 for t in T[:k])):
+                key = (k < len(T), -k, len(trims), tf, [t for t in toks if t not in T[:k]])
+                if i["assetId"] not in fit or key[:3] < fit[i["assetId"]][:3]:
+                    fit[i["assetId"]] = key
+    return fit, " ".join(toks)
+
+
 def _choose(want, cat, exact, skip):
     """The report so far and the catalogue record to build (None, with the
     report's "error", when there is none)."""
-    want = {k: v for k, v in want.items() if k != "spec_used"}
+    want = {k: v for k, v in want.items() if k not in ("spec_used", "trim_used")}
     item, others, why = find(want, cat, skip)
     report = {"asked": want, "match": why,
               "nearest": [f"{i['assetId']} ({i.get('yearStart')}-{i.get('yearEnd') or ''})" for i in others[:4]]}
@@ -314,9 +362,12 @@ def _choose(want, cat, exact, skip):
                                               if i["make"].lower() == want["make"]
                                               and i.get("publicationStatus") == "approved"})[:40]
         return report, None
+    if want.get("trim_used"):
+        report["trim"] = want.pop("trim_used")
     if want.get("spec"):
-        report["spec_note"] = want.pop("spec_used", None) or \
-            "the spec names no separate model in the catalogue (a trim or engine): the standard body is built"
+        report["spec_note"] = want.pop("spec_used", None) or (
+            f"the {report['trim']['built']} body in the catalogue is built" if (report.get("trim") or {}).get("built")
+            else "the spec names no separate model in the catalogue (a trim or engine): the standard body is built")
     report["asset"] = item["assetId"]
     report["source"] = item.get("sourceTitle")
     return report, item
