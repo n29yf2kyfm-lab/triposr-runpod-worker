@@ -438,7 +438,23 @@ def finish(src, spec, out, base_dir="."):
                        else 1.0 for m in mats] + [1.0])
         np.add.at(door_area, ms[sk], a_[sk] * w_[ms[sk]])
     paint = int(door_area.argmax())
+    # a door card or sill moulding of colourless near-black plastic lying ON
+    # the door skin (the 1998 Micra's `Material.003`, no thickness between
+    # them) outweighs the paint: the rig's own pick from the doors' outer
+    # faces (renamed `…_paint`) wins when it has 40% of that area
+    def dark_plastic(m):
+        pbr = m.get("pbrMetallicRoughness") or {}
+        c = (pbr.get("baseColorFactor") or [1, 1, 1])[:3]
+        return "baseColorTexture" not in pbr and max(c) < 0.05 and max(c) - min(c) < 0.01
+    if paint < nm and dark_plastic(mats[paint]) and "paint" not in mats[paint].get("name", "").lower():
+        alt = [i for i in range(nm) if mats[i].get("name", "").endswith("_paint") and not dark_plastic(mats[i])
+               and door_area[i] >= 0.4 * door_area[paint]]
+        if alt:
+            log["paint_over_plastic"] = mats[paint].get("name")
+            paint = max(alt, key=lambda i: door_area[i])
     log["paint"] = mats[paint].get("name")
+    log["paint_side_m2"] = {mats[i].get("name") if i < nm else "-": round(float(door_area[i]), 3)
+                            for i in np.argsort(-door_area)[:3] if door_area[i] > 0}
     paint_ids = {i for i, m in enumerate(mats) if m.get("name") == mats[paint].get("name")}
     glass = {i for i, m in enumerate(mats) if is_clear_glass(m)}
     # Windows modelled as opaque black (a dark paint with a glass name, the

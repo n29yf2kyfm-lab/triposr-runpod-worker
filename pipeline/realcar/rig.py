@@ -827,6 +827,9 @@ def rubber_tyres(car, parts):
     return split
 
 
+DEFAULT_MAT = re.compile(r"^(material|mat|default|defaultmaterial|lambert\d*|phong\d*|blinn\d*|standard|surface|no name|none)?[\s_#-]*\d*$", re.I)
+
+
 def find_paint(car, parts, rep):
     """The material on the OUTSIDE of the panel: faces facing out (up for a
     bonnet, away from the centreline for a door). Counting all area picked
@@ -856,9 +859,13 @@ def find_paint(car, parts, rep):
     name = car.mname(paint)
     rep["paint"] = {"material": name, "from": "bonnet" if parts.get("panel_bonnet") else "doors",
                     "share": round(A[paint] / sum(A.values()), 3)}
-    # SIBLINGS ARE THE SAME PAINT (the Micra's `primary.001` and `primary`)
+    # SIBLINGS ARE THE SAME PAINT (the Micra's `primary.001` and `primary`),
+    # but not a modeller's untouched defaults (`Material.001` … `Material.019`
+    # on the 1998 Micra are its tyres, glass and lamps)
     base = re.sub(r"\.\d+$", "", name)
     sib = [m for m in car.mats if re.sub(r"\.\d+$", "", m.get("name", "")) == base]
+    if DEFAULT_MAT.match(base):
+        sib = [car.mats[paint]]
     for m in sib:
         if "paint" not in m.get("name", "").lower():
             m["name"] = m.get("name", "") + "_paint"
@@ -988,15 +995,55 @@ def round_corners(car, objs, up, rep):
     return picked, ds, len(cand), P
 
 
+def axle_halves(car, objs, rep):
+    """Wheel meshes holding BOTH wheels of one axle, left and right, with
+    nothing named (the 1998 Micra: `Object_4..7`, `Material.007`): split
+    where each half, alone, is round, narrow and grounded at one side.
+    The file is upright here (length on Z, up Y). Returns how many split."""
+    V = np.vstack([car.verts(o) for o in objs])
+    lo, hi = bbox(V)
+    H, Wd, xm = hi[1] - lo[1], hi[0] - lo[0], (lo[0] + hi[0]) / 2
+
+    def wheel_like(P):
+        a, b = P.min(0), P.max(0)
+        dx, dy, dz = b - a
+        return (dz > 0 and .8 <= dy / dz <= 1.25 and dx <= .6 * dy and .12 * H <= dy <= .5 * H
+                and a[1] <= lo[1] + .08 * H and abs((a[0] + b[0]) / 2 - xm) >= .2 * Wd)
+    done = []
+    for o in list(objs):
+        if o["kind"] in ("glazing", "lamps_front", "lamps_rear", "cabin", "steering", "door", "bonnet",
+                         "tailgate", "engine") or car.nfaces(o) < 48:
+            continue
+        T, _, refs = car.tris(o)
+        xs = T[:, :, 0] - xm
+        cross = (xs.min(1) < 0) & (xs.max(1) > 0)
+        left = ~cross & (xs.mean(1) > 0)
+        right = ~cross & ~left
+        n = len(T)
+        if cross.sum() > .02 * n or not (.3 * n <= left.sum() <= .7 * n):
+            continue
+        if not (wheel_like(T[left].reshape(-1, 3)) and wheel_like(T[right].reshape(-1, 3))):
+            continue
+        objs.append(car.lift(o, [refs[left]])[0])
+        done.append(o["name"][:40])
+    if done:
+        rep["axle_halves"] = done
+    return len(done)
+
+
 def geometry_wheels(car, objs, rep):
     """Wheels from SHAPE and POSITION alone (the 2011 Corsa: `Object_65..68`,
     material `material`, and a file standing on its nose). Each axis is tried
-    as up; the one where four round grounded corner objects appear is up."""
+    as up; the one where four round grounded corner objects appear is up.
+    Last, wheels kept in pairs, one mesh an axle, are split and tried again."""
     found = None
     for up in ("y", "z", "x"):
         found = round_corners(car, objs, up, rep)
         if found:
             break
+    if not found and axle_halves(car, objs, rep):
+        up = "y"
+        found = round_corners(car, objs, up, rep)
     if not found:
         return
     if up != "y":
@@ -1575,10 +1622,20 @@ def adopt_into_doors(car, parts, rep, length):
                         continue
                     if not all(b0[i] - m <= cb0[i] and cb1[i] <= b1[i] + m for i in range(3)):
                         continue
-                    if cut is not None and len(dps) == 2:
+                    shut = cut
+                    if shut is None and len(dps) == 2:
+                        # a lining both doors long (the 1998 Micra's door cards,
+                        # one piece a side) splits where the doors meet
+                        zf, zr = boxes["door_f" + side][0][2], boxes["door_r" + side][1][2]
+                        z_ = (zf + zr) / 2
+                        lf = boxes["door_f" + side][1][2] - zf
+                        lr = zr - boxes["door_r" + side][0][2]
+                        if cb0[2] < z_ - .25 * lr and cb1[2] > z_ + .25 * lf:
+                            shut = z_
+                    if shut is not None and len(dps) == 2:
                         cz = T[cmp["ix"]].mean(1)[:, 2]
-                        grp["door_f" + side].append(cmp["refs"][cz > cut])
-                        grp["door_r" + side].append(cmp["refs"][cz <= cut])
+                        grp["door_f" + side].append(cmp["refs"][cz > shut])
+                        grp["door_r" + side].append(cmp["refs"][cz <= shut])
                     else:
                         cz = (cb0[2] + cb1[2]) / 2
                         p = min(dps, key=lambda q: abs((boxes[q][0][2] + boxes[q][1][2]) / 2 - cz))
