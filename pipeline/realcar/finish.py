@@ -13,6 +13,8 @@ rig frame (y up, nose +z, the car's left +x, ground y = 0).
 SPEC.json:
     {"name": "Volkswagen Polo Mk6", "wheelbase": 2564,       # mm, optional
      "engine_pack": "engine_pack.glb",                        # optional
+     "cabin_pack": "cabin_pack.glb",                          # optional: fitted when the
+                                                              # model's cabin is empty
      "credit": "2023 Volkswagen Polo GTI by … (CC BY 4.0)",   # optional, -> asset.copyright
      "paint": [20, 20, 22],                                   # optional, sRGB 0-255
      "keep_native_engine": false,                             # optional: keep a model's own bay
@@ -322,6 +324,84 @@ def ensure_tangents(g):
             a["TANGENT"] = g.add_accessor(np.c_[T, w].astype(np.float32), atype="VEC4")
             made += 1
     return {"made": made, "maps_dropped": dropped}
+
+
+def cabin_count(recs, ground, wheel_top, zf, zr):
+    """Triangles of the body (not the doors) in the cabin's middle: inboard,
+    between the axles, from a little over the wheel centres to well over
+    them. A modelled cabin has thousands; a shell with nothing in it (the
+    sourced 1998 Micra) a few dozen."""
+    body = [r for r in recs if not r["rig"].startswith(("door_", "wheel_"))]
+    T = np.vstack([r["P"][r["I"]] for r in body])
+    c = T.mean(1)
+    half = float(np.abs(T[:, :, 0]).max())
+    D, wb = wheel_top - ground, zf - zr
+    wy = (ground + wheel_top) / 2
+    box = ((np.abs(c[:, 0]) < .6 * half) & (c[:, 2] < zf - .1 * wb) & (c[:, 2] > zr + .1 * wb)
+           & (c[:, 1] > wy + .15 * D) & (c[:, 1] < wy + 1.1 * D))
+    return int(box.sum())
+
+
+def fit_cabin(g, recs, path, to_out, s, ground, zf, zr):
+    """Bring the cabin pack in (cabin_pack.py): scaled to this car's
+    wheelbase, width and roof, then moved back, down or made lower (at most
+    20 cm, 4 cm, 12%) until it stays inside the car: under the roof and the
+    windscreen, over the floor, nothing outside the body's plan. Returns
+    the pack's root node and the log."""
+    from cabin_pack import dense_points, roof_of
+    pack = GLTF(path)
+    info = (pack.j.get("asset", {}).get("extras") or {}).get("cabin_pack") or {}
+    near = [r for r in recs if not r["rig"].startswith("wheel_")]
+    T = np.vstack([to_out(r["P"][r["I"]].reshape(-1, 3)).reshape(-1, 3, 3) for r in near])
+    S = dense_points(T, 0.015)
+    zf_o, zr_o = (zf - zr) * s / 2, -(zf - zr) * s / 2
+    half_r = (S[:, 0].max() - S[:, 0].min()) / 2
+    roof_r = roof_of(S, zf_o, zr_o)
+    sx, sy, sz = half_r / info["half_width"], roof_r / info["roof_y"], (zf - zr) * s / info["wheelbase"]
+    # the pack's points, and this car's surfaces in 3 cm cells across x and z
+    PW, _ = pack.world_matrices()
+    pts = []
+    for i, nd in enumerate(pack.j["nodes"]):
+        if "mesh" in nd:
+            for pr in pack.j["meshes"][nd["mesh"]]["primitives"]:
+                Pp = pack.accessor(pr["attributes"]["POSITION"])
+                pts.append(Pp @ PW[i][:3, :3].T + PW[i][:3, 3])
+    Q0 = np.vstack(pts)
+    Q0 = Q0[:: max(1, len(Q0) // 20000)] * np.array([sx, sy, sz])
+    z_lo, z_hi = Q0[:, 2].min() - .3, Q0[:, 2].max() + .1
+    S = S[(S[:, 2] > z_lo) & (S[:, 2] < z_hi)]
+    key = lambda P: np.floor(P[:, [0, 2]] / 0.03).astype(np.int64) @ np.array([100000, 1])  # noqa: E731
+    uk, inv = np.unique(key(S), return_inverse=True)
+    top = np.full(len(uk), -np.inf)
+    bot = np.full(len(uk), np.inf)
+    np.maximum.at(top, inv, S[:, 1])
+    np.minimum.at(bot, inv, S[:, 1])
+
+    def outside(Q):
+        k = key(Q)
+        ix = np.clip(np.searchsorted(uk, k), 0, len(uk) - 1)
+        hit = uk[ix] == k
+        return float(np.mean(~hit | (Q[:, 1] > top[ix] - 0.02) | (Q[:, 1] < bot[ix] + 0.01)))
+    best = None
+    for shrink in (1.0, .97, .94, .91, .88):
+        for dy in (0.0, -.02, -.04, .02):
+            for dz in np.arange(0, -.205, -.01):
+                Q = Q0 * np.array([1, shrink, 1]) + np.array([0, dy, dz])
+                out = outside(Q)
+                cost = (out > 0.002, out if out > 0.002 else 0, -dz / .2 + (1 - shrink) / .12 * 1.5 + abs(dy) / .04)
+                if best is None or cost < best[0]:
+                    best = (cost, shrink, dy, float(dz), out)
+    _, shrink, dy, dz, out = best
+    M = np.eye(4)
+    M[:3, :3] = np.diag([sx, sy * shrink, sz])
+    M[:3, 3] = [0.0, dy, dz]
+    roots = g.append(pack)
+    root = roots[0]
+    g.j["nodes"][root]["matrix"] = [float(v) for v in M.T.ravel()]
+    cr = info.get("credit") or {}
+    return root, {"from": cr.get("title"), "author": cr.get("author"), "licence": cr.get("licence"), "url": cr.get("url"),
+                  "scale": [round(sx, 3), round(sy * shrink, 3), round(sz, 3)], "back_m": round(-dz, 3),
+                  "down_m": round(-dy, 3), "outside": round(out, 4)}
 
 
 def finish(src, spec, out, base_dir="."):
@@ -1263,6 +1343,19 @@ def finish(src, spec, out, base_dir="."):
                               "width_ratios": [round(x, 3) for x in ratios],
                               "exhaust_stretch": round(az / sl, 4), "strays_dropped": len(stray)}
 
+    # ── cabin: a model with nothing inside gets the cabin pack (the 1998
+    # Micra: a shell), fitted between its axles; the pack's maker is credited
+    if spec.get("cabin_pack") and spec.get("body_family") != "van" and "cabin" not in manual:
+        n_cab = cabin_count(recs, ground, wheel_top, zf, zr)
+        if n_cab < 300:
+            root, log["cabin_pack"] = fit_cabin(g, recs, spec["cabin_pack"], to_out, s, ground, zf, zr)
+            log["cabin_pack"]["cabin_triangles_before"] = n_cab
+            nodes[0]["children"].append(root)
+            c = log["cabin_pack"]
+            spec = dict(spec, credit=(spec.get("credit") or "") + f" Cabin fitted from '{c['from']}'"
+                        + (f" by {c['author']}" if c.get("author") else "") + f", {c['licence']}"
+                        + (f", {c['url']}" if c.get("url") else "") + ".")
+
     j["scenes"] = [{"name": spec.get("name") or "car", "nodes": [0]}]
     j["scene"] = 0
 
@@ -1334,6 +1427,7 @@ if __name__ == "__main__":
     src, spec_p, out = sys.argv[1:4]
     spec = json.load(open(spec_p))
     d = os.path.dirname(os.path.abspath(spec_p))
-    if spec.get("engine_pack") and not os.path.isabs(spec["engine_pack"]):
-        spec["engine_pack"] = os.path.join(d, spec["engine_pack"])
+    for k in ("engine_pack", "cabin_pack"):
+        if spec.get(k) and not os.path.isabs(spec[k]):
+            spec[k] = os.path.join(d, spec[k])
     print(json.dumps(finish(src, spec, out, d), indent=1, default=float))

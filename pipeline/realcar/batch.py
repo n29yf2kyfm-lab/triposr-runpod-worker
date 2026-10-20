@@ -38,6 +38,7 @@ import urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
+CABIN_PACK = os.path.join(HERE, "assets", "cabin_pack.glb")   # cabin_pack.py: fitted when a model has no cabin
 sys.path.insert(0, HERE)
 import finish  # noqa: E402
 from rig import TWO_DOOR  # noqa: E402
@@ -467,6 +468,7 @@ def one(target, item, args, out):
     rec["credit"] = cr
     spec = {"name": f"{item['make'].title()} {item.get('modelFamily') or item['model']}",
             "engine_pack": args.engine_pack,
+            "cabin_pack": getattr(args, "cabin_pack", None) or CABIN_PACK,
             "credit": f"Body, cabin and wheels: '{cr['title']}'" + (f" by {cr['author']}" if cr["author"] else "")
                       + f", {cr['licence']}" + (f", {cr['url']}" if cr["url"] else "") + ". "
                       + (f"Reshaped to the size of the {st['name']} (a stand-in: not that car's own model), r" if st else "R")
@@ -514,7 +516,7 @@ def one(target, item, args, out):
         return rec
     tm["finish"] = round(time.time() - t0, 1)
     rec["finish"] = {k: flog.get(k) for k in ("opens", "missing", "layout", "bonnet", "tailgate", "door_trims", "rescale",
-                                              "glass_cleared", "measured", "bay_cleared_m2", "engine_pack", "paint_set",
+                                              "glass_cleared", "measured", "bay_cleared_m2", "engine_pack", "cabin_pack", "paint_set",
                                               "manual")}
     # validator, web copy and check sheet at the same time: the sheet is drawn
     # from the finished file, so it need not wait for the compression

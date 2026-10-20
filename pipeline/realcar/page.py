@@ -65,7 +65,7 @@ def lab_parts(j, paint_names):
         if re.fullmatch(r"wheel_[fr][lr]", n.get("name") or ""):
             names_under(i, in_wheels)
     rims = sorted(m for m in in_wheels if m and not TYRE.search(m))
-    every = {m.get("name") or "" for m in mats}
+    every = {m.get("name") or "" for m in mats if not (m.get("name") or "").startswith("cabin_")}
     wheels = {"names": rims, "where": "wheel"} if rims else \
         {"names": sorted(m for m in every if m and RIM.search(m) and not TYRE.search(m)), "where": "any"}
     calipers = {"names": sorted(m for m in every if m and CALIPER.search(m) and not NOT_CALIPER.search(m)), "where": "any"}
@@ -112,8 +112,9 @@ def write(report, out):
     try:
         rr = json.load(open(os.path.join(os.path.dirname(glb), "rig", "src.report.json")))
         paint_names = (rr.get("paint") or {}).get("renamed") or []
+        closed = rr.get("closed_up") or {}
     except Exception:
-        paint_names = []
+        paint_names, closed = [], {}
     if fin.get("paint_set"):
         paint_names = list(paint_names) + [fin["paint_set"].get("material")]
 
@@ -151,7 +152,14 @@ def write(report, out):
                      "was reshaped to its size.")
     if report.get("noncommercial_left_out"):
         notes.append("A closer model exists under a non-commercial licence; it was left out because this car may be sold.")
+    if closed:
+        notes.append("The model is a 5-door: its rear doors are closed into the body (handles off, shut lines "
+                     "covered), so it reads as the 3-door asked for.")
     cr = res.get("credit") or {}
+    cab = fin.get("cabin_pack") or {}
+    if cab:
+        notes.append(f"The model came without a cabin: the seats, dashboard and steering wheel are from the "
+                     f"“{cab.get('from')}”, fitted to this body.")
     sheet = (report.get("files") or {}).get("sheet")
     if sheet and os.path.exists(sheet):
         shutil.copyfile(sheet, os.path.join(out, "views.jpg"))
@@ -160,7 +168,9 @@ def write(report, out):
            "facts": facts, "notes": notes, "parts": parts, "files": files, "sheet": bool(sheet and os.path.exists(sheet)),
            "lab": lab_parts(j, paint_names), "key": "car-" + re.sub(r"[^a-z0-9-]", "", str(report.get("asset") or "x").lower()),
            "credit": {"title": cr.get("title") or "", "author": cr.get("author"), "licence": cr.get("licence"),
-                      "url": cr.get("url"), "commercial": bool(cr.get("commercial"))}}
+                      "url": cr.get("url"), "commercial": bool(cr.get("commercial")),
+                      "cabin": {"title": cab.get("from"), "author": cab.get("author"), "licence": cab.get("licence"),
+                                "url": cab.get("url")} if cab else None}}
     page = open(os.path.join(HERE, "page", "car.html")).read()
     page = page.replace("{{TITLE}}", html.escape(title)).replace(
         "{{CONFIG}}", json.dumps(cfg, ensure_ascii=False).replace("</", "<\\/"))

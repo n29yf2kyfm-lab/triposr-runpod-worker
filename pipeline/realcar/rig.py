@@ -43,7 +43,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "template"))
 from gltf import GLTF, row_ids  # noqa: E402
 
-VERSION = "2.2.0-py"
+VERSION = "2.3.0-py"
 
 
 class Refused(Exception):
@@ -748,10 +748,14 @@ def convert(car, rep, override=None, body_style=""):
                 rep.setdefault("two_door", []).append(f"door_r{sd} is the front door")
             elif f"door_r{sd}" in parts:
                 # a two-door body asked for ("Transit 2 door") from a model
-                # with rear side doors: they stay shut, part of the body
-                parts.setdefault("body", []).extend(parts.pop(f"door_r{sd}"))
+                # with rear side doors: they stay shut, part of the body,
+                # closed up so they do not read as doors (no handle, no seam)
+                shut = parts.pop(f"door_r{sd}")
+                closed = close_up(car, shut, [o for o in parts.get("body", []) if o["kind"] != "wheel"], L)
+                parts.setdefault("body", []).extend(shut)
                 hinge.pop(f"door_r{sd}", None)
                 rep.setdefault("two_door", []).append(f"door_r{sd} kept shut: the body asked for has no rear side doors")
+                rep.setdefault("closed_up", {})[f"door_r{sd}"] = closed
     # a spare wheel on the back door (the G-Class, a Jimny, an old RAV4) rides
     # on it, and a door that carries one is hinged at the side: the side away
     # from its handle
@@ -1184,6 +1188,115 @@ def split_pairs(car, objs, width):
         objs.append(car.lift(o, [refs[front]])[0])
         done.append(f"{o['name'][:40]} (wheel, front/rear)")
     return done
+
+
+def close_up(car, door, body, length):
+    """A rear door kept shut (a 3-door asked for, a 5-door model: the 1998
+    Micra) closed up so it reads as body: its outside handle goes; the
+    skin's OUTER edge (not its window opening, not the edge against the
+    front door, which opens) grows over the gap to the body, 1.5 times the
+    gap measured (at most 0.4% of the car's length); the lining behind the
+    skin, whose edges showed as a dark outline, steps inboard. Returns what
+    was done."""
+    from scipy.spatial import cKDTree
+    isl = [(o, c) for o in door for c in islands(car, o, length)]
+    if not isl:
+        return {}
+    skin_o, skin = max(isl, key=lambda t: t[1]["area"])
+    s0, s1 = skin["lo"], skin["hi"]
+    side = 1 if s0[0] + s1[0] > 0 else -1
+    outer = max(abs(s0[0]), abs(s1[0]))
+    out = {"handles_removed": 0, "linings_inboard": 0}
+    step = max(.0025 * length, .003)
+
+    handles = []
+    for o, c in isl:
+        if c is skin:
+            continue
+        b0, b1 = c["lo"], c["hi"]
+        x_out = max(abs(b0[0]), abs(b1[0])) if np.sign(b0[0] + b1[0]) == side else 0.0
+        if np.linalg.norm(b1 - b0) <= .06 * length and c["area"] <= .08 * skin["area"]:
+            if x_out >= .9 * outer:
+                handles.append((o, c))              # the handle (and its lock)
+            continue
+        mi = int(car.tris(o)[1][c["ix"][0]])
+        glass = 0 <= mi < len(car.mats) and car.mats[mi].get("alphaMode") == "BLEND"
+        if x_out >= .97 * outer and not glass:
+            for pi, vs in _island_verts(car, o, c).items():
+                car.prims[pi]["P"][vs, 0] -= side * step
+            out["linings_inboard"] += 1
+    # the skin's boundary: its outer loop is the widest
+    T = car.tris(skin_o)[0][skin["ix"]]
+    V = T.reshape(-1, 3)
+    q = 1e-5 * car.unit(skin_o)
+    vid = weld_ids(T, q).ravel()
+    E = np.sort(vid.reshape(-1, 3)[:, [0, 1, 1, 2, 2, 0]].reshape(-1, 2), axis=1)
+    ue, cnt = np.unique(E, axis=0, return_counts=True)
+    bnd = ue[cnt == 1]
+    if not len(bnd):
+        out["handles_removed"] = _lift_out(car, handles)
+        return out
+    nv = int(vid.max()) + 1
+    _, lab = connected_components(coo_matrix((np.ones(len(bnd)), (bnd[:, 0], bnd[:, 1])), shape=(nv, nv)),
+                                  directed=False)
+    first = np.full(nv, -1)
+    first[vid[::-1]] = np.arange(len(vid))[::-1]
+    on = np.unique(bnd.ravel())
+    loops = {l: on[lab[on] == l] for l in np.unique(lab[on])}
+    widest = max(loops.values(), key=lambda lp: np.ptp(V[first[lp], 2]) * np.ptp(V[first[lp], 1]))
+    rim = V[first[widest]]
+    BT = [car.tris(o)[0] for o in body if car.nfaces(o)]
+    if not BT:
+        out["handles_removed"] = _lift_out(car, handles)
+        return out
+    BT = np.vstack(BT)
+    BT = BT[(np.abs(BT[:, :, 0]).mean(1) >= .7 * outer) & (np.sign(BT[:, :, 0].mean(1)) == side)]
+    if not len(BT):
+        out["handles_removed"] = _lift_out(car, handles)
+        return out
+    from cabin_pack import dense_points
+    zf_edge = s1[2] - .15 * (s1[2] - s0[2])
+    rim = rim[rim[:, 2] < zf_edge]              # not the edge against the front door
+    if not len(rim):
+        out["handles_removed"] = _lift_out(car, handles)
+        return out
+    gap = float(np.median(cKDTree(dense_points(BT, .002 * length)).query(rim)[0]))
+    grow = min(1.5 * gap, .004 * length)
+    c = (s0 + s1) / 2
+    keys = {tuple(k) for k in np.round(rim / q).astype(np.int64)}
+    moved = 0
+    for pi, vs in _island_verts(car, skin_o, skin).items():
+        P = car.prims[pi]["P"]
+        hit = np.array([tuple(k) in keys for k in np.round(P[vs] / q).astype(np.int64)], bool)
+        if not hit.any():
+            continue
+        d = P[vs[hit], 1:] - c[1:]
+        P[vs[hit], 1:] += d / np.maximum(np.linalg.norm(d, axis=1, keepdims=True), 1e-12) * grow
+        moved += int(hit.sum())
+    out.update({"gap": round(gap, 4), "rim_grown": round(grow, 4), "rim_vertices": moved,
+                "handles_removed": _lift_out(car, handles)})
+    return out
+
+
+def _lift_out(car, pieces):
+    """Lift islands out of their objects and keep them nowhere (last: a lift
+    renumbers what is left of the object)."""
+    by = {}
+    for o, c in pieces:
+        by.setdefault(id(o), (o, []))[1].append(c["refs"])
+    for o, refs in by.values():
+        car.lift(o, [np.vstack(refs)])
+    return len(pieces)
+
+
+def _island_verts(car, o, c):
+    """{prim index: vertex indices} of one island of `o`."""
+    vs = {}
+    for si, t in c["refs"]:
+        pi = o["segs"][si][0]
+        vs.setdefault(pi, set()).update(car.prims[pi]["I"][t].tolist())
+    return {pi: np.array(sorted(v)) for pi, v in vs.items()}
+
 
 
 def wanted(parts):

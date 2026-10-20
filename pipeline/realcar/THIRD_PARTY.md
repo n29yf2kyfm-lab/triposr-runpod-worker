@@ -13,6 +13,13 @@ travel with it (they do: each package keeps its own LICENSE file in
 | `rig.py`, `finish.py`, `edits.py`, `make.py`, `batch.py`, `wheelbase.py`, `glbmachine.py`, `importer.py`, `standin.py`, `photos.py`, `photolib.py`, `openphotos.py`, the `.mjs` tools, `view.html`, `maker/` (GLB Maker), `studio/` (GLB Studio), `../template/gltf.py` | written for ExpertCarCheck |
 | `assets/engine_pack.glb` (engine, gearbox, cooling, battery, suspension, exhaust) | exported from our own constructed geometry (`platform/trainer/engine-bay-detail.js`, `platform/workshop/ehybrid/hybrid-parts.js`: `sourceType: constructed-training-geometry`); its 11 textures are generated in code. Nothing in it is cut from a third-party model. |
 | `vendor/no-sharp` | a stand-in so the LGPL image library below is never installed |
+| `cabin_pack.py` | written for ExpertCarCheck |
+
+## Third-party content in the product
+
+| Part | Source and licence | What it asks |
+| --- | --- | --- |
+| `assets/cabin_pack.glb` (seats, dashboard, steering wheel, console: 29,828 triangles) | cut by `cabin_pack.py` from "2001 Toyota Yaris" by Dave Love (Tyler_Dave), https://sketchfab.com/3d-models/2001-toyota-yaris-443fd49eb0844557a06854cae0b61267, **CC BY 4.0** | credit wherever it is used: every car it is fitted to carries the credit in its file (`asset.copyright`) and on its page |
 
 ## Taken out on purpose
 

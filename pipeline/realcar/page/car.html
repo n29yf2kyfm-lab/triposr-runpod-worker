@@ -190,8 +190,13 @@ if (CAR.sheet) $('views').hidden = false;
 {
   const c = CAR.credit, p = el('p');
   p.append(el('span', c.commercial ? 'Commercial use allowed' : 'Not for sale', 'tag'));
-  p.append(`The 3D body, cabin and wheels are “${c.title}”` + (c.author ? ` by ${c.author}` : '') + ', licensed ' + (c.licence || 'as recorded') + '. ');
+  const cab = c.cabin;
+  p.append(`The 3D body${cab ? '' : ', cabin'} and wheels are “${c.title}”` + (c.author ? ` by ${c.author}` : '') + ', licensed ' + (c.licence || 'as recorded') + '. ');
   if (c.url) { const a = el('a', 'Source'); a.href = c.url; a.target = '_blank'; a.rel = 'noopener'; p.append(a, '. '); }
+  if (cab) {
+    p.append(`The cabin is from “${cab.title}”` + (cab.author ? ` by ${cab.author}` : '') + ', licensed ' + (cab.licence || 'as recorded') + ', fitted to this body. ');
+    if (cab.url) { const a = el('a', 'Source'); a.href = cab.url; a.target = '_blank'; a.rel = 'noopener'; p.append(a, '. '); }
+  }
   p.append(c.commercial ? 'Credit as given here is required. The file carries it too.' : 'Fine to view and demo; not for paid use.');
   const q = el('p', 'Rigged, glass cleared and engine bay fitted by the ExpertCarCheck GLB machine. Makes and model names are trademarks of their owners; this model is independent and not endorsed by them.');
   $('credit').append(p, q);

@@ -164,6 +164,10 @@ class GLTF:
             t = dict(t)
             if "source" in t:
                 t["source"] += off["images"]
+            if t.get("extensions"):                 # EXT_texture_webp, KHR_texture_basisu: their own image
+                t["extensions"] = {k: (dict(e, source=e["source"] + off["images"])
+                                       if isinstance(e, dict) and "source" in e else e)
+                                   for k, e in t["extensions"].items()}
             if "sampler" in t:
                 t["sampler"] += off["samplers"]
             j.setdefault("textures", []).append(t)
