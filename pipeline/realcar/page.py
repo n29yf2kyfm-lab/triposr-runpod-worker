@@ -254,6 +254,9 @@ def write(report, out):
 
     colour = asked.get("colour")
     srgb = (fin.get("paint_set") or {}).get("srgb")
+    finish = asked.get("finish") if srgb else None     # "matt grey": the body starts matt, in the paint asked
+    if finish and colour:
+        colour = f"{finish} {colour}"
     read = ", ".join(str(x) for x in (name, year, colour) if x)
     if report.get("spelling") or asked.get("make_from_model"):
         read += " (the make read from the model)" if asked.get("make_from_model") else f" ({report['spelling']})"
@@ -275,7 +278,7 @@ def write(report, out):
     if res.get("missing"):
         notes.append("Not opening: " + ", ".join(PART_NAMES.get(p, p) for p in res["missing"])
                      + ". Fix it in the Studio, or ask for another model.")
-    for k in ("doors_note", "spec_note", "time_limit"):
+    for k in ("doors_note", "body_note", "spec_note", "time_limit"):
         if report.get(k):
             notes.append(str(report[k])[0].upper() + str(report[k])[1:] + ".")
     tr = report.get("trim") or {}
@@ -304,6 +307,7 @@ def write(report, out):
            "lab": lab_parts(j, paint_names), "key": "car-" + re.sub(r"[^a-z0-9-]", "", str(report.get("asset") or "x").lower()),
            "catalogue": cat, "procedures": procedures(cat, opens, rear),
            "engine": {"lid": "tailgate" if rear else "bonnet"},
+           "finish": {"finish": finish, "hex": "#%02x%02x%02x" % tuple(srgb)} if finish else None,
            "credit": {"title": cr.get("title") or "", "author": cr.get("author"), "licence": cr.get("licence"),
                       "url": cr.get("url"), "commercial": bool(cr.get("commercial")),
                       "cabin": {"title": cab.get("from"), "author": cab.get("author"), "licence": cab.get("licence"),

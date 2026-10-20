@@ -317,16 +317,21 @@ glbmachine make "..." --no-standin              # the nearest generation as it i
    never seen is looked up on Wikipedia once, which is the agent's one
    outside call, and kept in `$GLBMACHINE_HOME/wheelbase_local.json`.
 2. **The donor** (`make.donors`) must have the same body: hatch, saloon,
-   estate, SUV, MPV, coupé, convertible, pickup or van. The record's own
-   word wins, and a title saying "Shooting Brake" or "Estate" counts. Then
-   the nearest in size, with height weighted most. Then the asked model's
-   own other generation first, the same make next, then the same maker
-   group (Volkswagen, Skoda, SEAT and Audi; Peugeot, Citroën, Vauxhall and
-   Fiat; Renault, Dacia and Nissan; Hyundai and Kia; and so on), whose cars
-   share a family look and often a platform, and the closer year. A donor
-   that came out short of parts before goes later. Ties go to the doors
-   asked for, then the plain car before a GTI or Allspace, then a licence
-   ExpertCarCheck may use commercially, then the better grade.
+   estate, SUV, MPV, coupé, convertible, pickup or van. The body asked for
+   wins ("M5 Touring" is an estate); else the record's own word, and a
+   title saying "Touring", "Avant", "SW", "Combi", "Shooting Brake" or
+   "Estate" counts (`make.record_body`). When the body is known, a donor of
+   the same make or maker group comes first if one is within about 10% of
+   the size: the reshape makes any donor the car's size, so the face counts
+   most (a BMW 3 Series Touring for an M5 Touring, not a Ford of the right
+   size). Then the nearest in size, with height weighted most. Then the
+   asked model's own other generation first, the same make next, then the
+   same maker group (Volkswagen, Skoda, SEAT and Audi; Peugeot, Citroën,
+   Vauxhall and Fiat; Renault, Dacia and Nissan; Hyundai and Kia; and so
+   on), whose cars share a family look and often a platform, and the closer
+   year. A donor that came out short of parts before goes later. Ties go to
+   the doors asked for, then the plain car before a GTI or Allspace, then a
+   licence ExpertCarCheck may use commercially, then the better grade.
 3. **The reshape** (`standin.py`, between the rig and the finish):
    - one axis at a time, so normals stay exact;
    - the target's wheelbase and overhangs along the car, each arch at the
@@ -543,6 +548,8 @@ is rescaled to it), `engine_pack` (the workshop petrol bay, exported by
 | Two doors asked for | "Transit 2 door" from a model with rear side doors keeps them shut, part of the body. A five-door model whose doors are one piece a side (the 2017 Golf's `Doors`) is still split at its shut line when that piece is longer than any door (42% of the car), and a cut that comes out that long is cut again as four: before, "Golf 2017 2 door" was refused and built with four doors open. The rear pair are closed up so they read as body: the outside handles go, the skin's outer edge grows over the 4 mm gap to the body (never at the edge against the front door, which opens), and the lining behind it steps 1 cm inboard, so its edge no longer shows as an outline. The 1998 Micra (a 5-door model, asked for as a 2-door) is the case. |
 | Required extensions travel with a pack | A file brought in (`gltf.append`: the cabin pack, whose WebP textures have no fallback image) brings its `extensionsRequired` along, so the car file says what it cannot be read without. |
 | A download cut short | is tried again, twice (the Discovery's 47 MB came through 1.2 MB short once). |
+| A body the catalogue does not have | Makers' own names for an estate count as estate: Touring, Avant, Variant, SW, Combi, Sports Tourer, Shooting Brake, Wagon (not a Wagon R, a 911 GT3 Touring or an Active Tourer). When the model is in the catalogue only in another body, it is a stand-in of the body asked: "BMW M5 Touring 2025" was the F90 saloon, said nowhere; it is now a BMW 3 Series Touring reshaped to the M5's size. A hatch's estate takes the donor's own proportions on the car's wheelbase (a Golf estate is longer than the Golf). If no stand-in can be made, the note says which body was built. |
+| A paint finish | "matt grey" (or matte, satin, BMW's "Frozen"): the page starts the body in that Finish Lab finish, in the colour asked, until the viewer picks another. |
 | A cabin for a model with none | A model with nothing inside (the 1998 Micra: 42 triangles where a modelled cabin has thousands) gets the cabin pack, `assets/cabin_pack.glb`: the seats, dashboard, steering wheel and console of the 2001 Toyota Yaris (CC BY 4.0, credited in the file and on the page). It is scaled to the car's wheelbase, width and roof height (the roof read over the middle of the cabin, so an aerial does not count), then moved back, down or made lower, by at most 20 cm, 4 cm and 12%, until it stays under the roof and the windscreen and over the floor. The Micra's moved back 18 cm. `cabin_pack.py` cuts a pack from any rigged car: only the pieces wholly inside the cabin, below 78% of the roof (the pillar trims, mirror and visors follow their own car's glass). |
 | Wheels kept in pairs | A model whose wheel meshes each hold both wheels of an axle, with nothing named (the 1998 Micra's `Object_4..12`), has them split left and right, where each half alone is round, narrow and grounded. |
 | Default material names | Siblings of the paint by name (`primary`, `primary.001`) are the same paint, but not a modeller's untouched defaults (`Material.001` ... `Material.019`), which were the Micra's tyres, glass and lamps. A default with its own number (`Material_1467`, Maya's `lambert2`) is one material, and its `.001` copies that one again. When the finisher's pick of the paint is a colourless near-black layer lying on the door skin (a door card with no thickness), the rigger's pick from the doors' outer faces wins. |

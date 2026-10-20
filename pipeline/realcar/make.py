@@ -51,6 +51,15 @@ MAKES = {"mercedes": "mercedes-benz", "merc": "mercedes-benz", "benz": "mercedes
          "landrover": "land-rover", "rangerover": "land-rover", "alfa": "alfa-romeo", "astonmartin": "aston-martin",
          "rollsroyce": "rolls-royce", "opel": "vauxhall"}
 BODIES = ("hatchback", "saloon", "sedan", "estate", "coupe", "convertible", "suv", "mpv", "van", "pickup", "roadster")
+# makers' own names for a body; an "Active Tourer" or "Gran Tourer" is not an
+# estate (its body is left to the table: no body is asked), nor a 911 GT3
+# Touring or a Grand Touring
+BODY_WORDS = [
+    (re.compile(r"\b(?:active|gran)\s+tourer\b"), None),
+    (re.compile(r"(?<!gt3\s)(?<!grand\s)\btouring\b|\bsports?\s?tourer\b|\bavant\b|\bvariant\b|\bsports?\s?wagon\b"
+                r"|\bwagon\b(?![\s-]?r\b)|\bshooting\s+brake\b|\bk?combi\b|\bsw\b"), "estate"),   # a Wagon R is a hatch
+]
+BIKE = re.compile(r"\b(?:harley|motorbike|motorcycle|bike)\b")
 
 
 def norm(s):
@@ -107,6 +116,12 @@ def parse(text):
     if m:
         want["doors"] = int(m.group(1))
         t = t[:m.start()] + " " + t[m.end():]
+    # a paint finish ("matt grey", BMW's "Frozen"): the page starts the body
+    # in it (the Finish Lab's), the colour as asked
+    m = re.search(r"\b(matte?|frozen|satin)\b", t)
+    if m:
+        want["finish"] = "satin" if m.group(1) == "satin" else "matt"
+        t = t[:m.start()] + " " + t[m.end():]
     for c in COLOURS:
         if re.search(rf"\b{c}\b", t):
             want["colour"] = c
@@ -116,6 +131,16 @@ def parse(text):
         if re.search(rf"\b{b}\b", t):
             want["body"] = "saloon" if b == "sedan" else b
             t = re.sub(rf"\b{b}\b", " ", t)
+    # what makers call their estates ("M5 Touring", "RS6 Avant", "308 SW") and
+    # MPVs ("Active Tourer"): the body, but the word stays in the request, as
+    # a model's name can carry it ("3 Series Touring", "Octavia Combi")
+    if "body" not in want and not BIKE.search(t):
+        for rx, b in BODY_WORDS:
+            m = rx.search(t)
+            if m:
+                if b:
+                    want["body"], want["body_word"] = b, m.group(0)
+                break
     want["words"] = t.strip()
     return want
 
@@ -197,8 +222,19 @@ def find(want, cat, skip=()):
     if not hits:
         return None, [], "not in the catalogue"
     if want.get("body"):
-        hb = [i for i in hits if (i.get("bodyStyle") or want["body"]) == want["body"]]
-        hits = hb or hits
+        # the body asked: a record of that body first; one that says nothing of
+        # its body may be it. A model the catalogue has only in another body
+        # (an "M5 Touring" where it has the saloon alone) is marked, so a
+        # stand-in of the body asked is made from another car, or the note
+        # says the other body was built; never the other body unsaid
+        fam = RECORD_BODY.get(want["body"], want["body"])
+        bodies = {i["assetId"]: record_body(i) for i in hits}
+        exact = [i for i in hits if bodies[i["assetId"]] == fam]
+        unknown = [i for i in hits if bodies[i["assetId"]] is None]
+        if exact or unknown:
+            hits = exact or unknown
+        else:
+            want["body_missing"] = {"asked": fam, "has": sorted({bodies[i["assetId"]] for i in hits})}
 
     def doors_rank(i):
         # a record that gives its doors (an added model: `glbmachine add
@@ -355,6 +391,15 @@ def _choose(want, cat, exact, skip):
     item, others, why = find(want, cat, skip)
     report = {"asked": want, "match": why,
               "nearest": [f"{i['assetId']} ({i.get('yearStart')}-{i.get('yearEnd') or ''})" for i in others[:4]]}
+    bm = want.get("body_missing")
+    if bm and item is not None:
+        # the model, but not in the body asked: not an exact match, so a
+        # stand-in of that body is tried (_standin); if none can be made, the
+        # note says which body was built
+        has = " or ".join(BODY_NAME.get(b, b or "body not recorded") for b in bm["has"])
+        asked = BODY_NAME.get(bm["asked"], bm["asked"])
+        report["match"] = f"the catalogue has this model only as a {has}, not as the {asked} asked for"
+        report["body_note"] = f"The catalogue has this model only as a {has}, so the {has} is built, not the {asked} asked for"
     if item is None and others and not exact:
         item, report["match"] = others[0], f"{why}; built the nearest generation in the catalogue"
     if item is None:
@@ -379,6 +424,7 @@ RECORD_BODY = {"hatchback": "hatch", "hatch": "hatch", "saloon": "saloon", "seda
                "wagon": "estate", "suv": "suv", "crossover": "suv", "mpv": "mpv", "coupe": "coupe",
                "convertible": "convertible", "cabriolet": "convertible", "roadster": "convertible",
                "pickup": "pickup", "van": "van"}
+BODY_NAME = {"hatch": "hatchback", "suv": "SUV", "mpv": "MPV"}     # a body family in words; the rest as they are
 
 
 VARIANT = re.compile(r"\b(?:GTI|GTD|GTE|GTS|R32|RS ?\d?|ST|AMG|Type R|GR|Nismo|JCW|Cupra|vRS|SVR|Allspace|LWB|"
@@ -480,6 +526,36 @@ GROUP = {m: g for g, ms in {
     "mg": ("mg",), "byd": ("byd",)}.items() for m in ms}
 
 
+TITLE_ESTATE = re.compile(r"shooting brake|\bestate\b|(?<!gt3 )(?<!grand )\btouring\b|\bavant\b|\bvariant\b|sports ?wagon"
+                          r"|\bwagon\b(?![\s-]?r\b)|\bSW\b|\bk?combi\b|sports? ?tourer", re.I)
+
+
+def record_body(i, gen=None):
+    """A catalogue record's body family (hatch, saloon, estate, suv, ...): its
+    own bodyStyle, else the wheelbase table's for its generation; a title
+    that names another body wins over both (the model's other body, not the
+    one its page leads with: "BMW 3 Series touring (E46)"). None when nothing
+    says."""
+    if gen is None:
+        gen = _generation(*batch.model_of(i), i.get("yearStart")) or {}
+    f = RECORD_BODY.get(str(i.get("bodyStyle") or "").lower()) or gen.get("family")
+    title, md = str(i.get("sourceTitle") or ""), batch.model_of(i)[1]
+    if re.search(r"\b(?:active|gran) tourer\b", title, re.I):
+        f = "mpv"
+    elif TITLE_ESTATE.search(title):
+        f = "estate"
+    elif re.search(r"cabrio|convertible|roadster|spider|spyder", title, re.I):
+        f = "convertible"
+    elif re.search(r"pick[- ]?up|double cab|crew cab|single cab|\bute\b", title, re.I) or \
+            re.fullmatch(r"ranger|hilux|navara|l200|amarok|d-?max|tacoma|tundra|f-?150|f-?250|silverado|"
+                         r"sierra|ram|gladiator|x-class|frontier|colorado|musso|bt-50|triton", md.lower()):
+        f = "pickup"                             # an open load bed: not an SUV's shape (the Defender 130 pickup)
+    return f
+
+
+REACH = 0.35      # a donor's size term (length + 1.5 height + width off) the reshape still carries well: about 10% each
+
+
 def donors(target, fam, cat, make, model_key, want, skip=()):
     """Catalogue cars to make a stand-in from, best first: the same body,
     then the nearest in size; the asked model's other generation first, the
@@ -494,16 +570,7 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
             continue
         mk, md = batch.model_of(i)
         b = _generation(mk, md, i.get("yearStart")) or {}
-        f = RECORD_BODY.get(str(i.get("bodyStyle") or "").lower()) or b.get("family")   # the record's own word first
-        title = str(i.get("sourceTitle") or "")
-        if re.search(r"shooting brake|\bestate\b|\btouring\b|\bavant\b|\bvariant\b|sports ?wagon|\bwagon\b|\bSW\b", title, re.I):
-            f = "estate"                         # the model's other body, not the one its page leads with
-        elif re.search(r"cabrio|convertible|roadster|spider|spyder", title, re.I):
-            f = "convertible"
-        elif re.search(r"pick[- ]?up|double cab|crew cab|single cab|\bute\b", title, re.I) or \
-                re.fullmatch(r"ranger|hilux|navara|l200|amarok|d-?max|tacoma|tundra|f-?150|f-?250|silverado|"
-                             r"sierra|ram|gladiator|x-class|frontier|colorado|musso|bt-50|triton", md.lower()):
-            f = "pickup"                         # an open load bed: not an SUV's shape (the Defender 130 pickup)
+        f = record_body(i, b)
         if fam and f != fam:
             continue
         def off(k, w):
@@ -524,12 +591,19 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
         age = min(abs((i.get("yearStart") or target["years"][0] or 2015) - (target["years"][0] or 2015)) * 0.01, 0.15)
         a_, b_ = (x.lower().replace(" ", "-") for x in (mk, make))
         kin = 0 if a_ == b_ else 0.08 if GROUP.get(a_, a_) == GROUP.get(b_, b_) else 0.15
+        tier = 0 if kin < 0.15 else 1                 # the make or its group (a Picanto for an i10), or another maker
         score = (size + age + variant + (0 if (mk.lower(), md.lower()) == model_key else 0.3) + kin
                  + doors_off + (0 if batch.credit_of(i)["commercial"] else 0.12)
                  + 0.25 * len(short.get(i["assetId"], ()))          # it came out short of these parts before
                  + 0.03 * batch.GRADE.get(i.get("qualityGrade"), 3))
-        out.append((round(score, 4), i["assetId"], i))
-    return [i for _, _, i in sorted(out)]
+        out.append((round(score, 4), i["assetId"], i, tier, size <= REACH and not short.get(i["assetId"])))
+    # the reshape makes any donor the car's size, so its face counts most: when
+    # the body is known (every donor has it), the make or its group first if
+    # one is within reach of the size (a BMW estate stretched 10% reads as a
+    # BMW, a Ford of the right size as a Ford); otherwise the nearest in
+    # size, as scored
+    best = min((r[3] for r in out if r[4]), default=1) if fam else 0
+    return [r[2] for r in sorted(out, key=lambda r: (r[3] > best, r[0], r[1]))]
 
 
 def _standin(want, report, item, cat, skip):
@@ -555,18 +629,34 @@ def _standin(want, report, item, cat, skip):
     title = wheelbase.MAKE_TITLE.get(make, make.title())
     name = re.sub(r"<[^>]+>|\s+", " ", str(gen.get("name") or "")).strip()
     name = name if name.lower().startswith(title.lower()) else f"{title} {wheelbase.wiki_title(model)} ({name})"
+    # the body the stand-in must have: the one asked for, else the
+    # generation's (an M5 Touring is made from an estate, not from the M5
+    # saloon the catalogue has); its size is the generation's published one
+    bm = want.get("body_missing")
+    fam = RECORD_BODY.get(want.get("body") or "", None) or gen.get("family")
+    other = bool(gen.get("family") and fam != gen["family"])         # not the body the table's size is for
+    if other:
+        name = f"{name} {str(want.get('body_word') or BODY_NAME.get(fam, fam)).title()}"
     # the side doors it must open: the request's, else the most its body has ("3/5-door hatchback": 4)
     nd = [int(x) for x in re.findall(r"([2-5])(?=[-/ ]?(?:\d-?)?door)", str(gen.get("body") or ""))]
     nd = want.get("doors") or (max(nd) if nd else None)
     target = {"name": name, "length": gen["length"], "wheelbase": gen["wheelbase"], "width": gen["width"],
               "height": gen["height"], "years": [y[0], None if (y[1] or 0) >= 2100 else y[1]],
-              "body": gen.get("family"), "source": gen.get("source"),
+              "body": fam, "source": gen.get("source"),
               "side_doors": (2 if nd <= 3 else 4) if nd else None}
-    ranked = donors(target, gen.get("family"), cat, make, (make, model), want, skip)
+    if other:
+        target["no_photo"] = True     # the model's photos would be of its other body: the donor's own roof stays
+    ranked = donors(target, fam, cat, make, (make, model), want, skip)
     if not ranked:
         return None
     d = ranked[0]
     dg = _generation(*batch.model_of(d), d.get("yearStart")) or {}
+    if other and gen["family"] == "hatch" and fam in ("estate", "saloon") and dg.get("length") and dg.get("wheelbase"):
+        # a hatch's estate or saloon is longer behind (a Golf estate is 30 cm
+        # on the hatch): the donor's own overhangs on the car's wheelbase,
+        # never shorter than the hatch
+        target["length"] = max(target["length"], round(dg["length"] * target["wheelbase"] / dg["wheelbase"]))
+        target["length_from"] = "the donor's proportions on the car's wheelbase"
     if (dg.get("name"), dg.get("page")) == (gen.get("name"), gen.get("page")):
         # the donor is that very generation (its record gave other years): no
         # stand-in, the car itself
@@ -575,12 +665,13 @@ def _standin(want, report, item, cat, skip):
         report.pop("error", None)
         report.pop("catalogue_has", None)
         return report, d
-    sid = re.sub(r"[^a-z0-9]+", "-", f"{make} {model} {y[0] or ''}".lower()).strip("-")
+    sid = re.sub(r"[^a-z0-9]+", "-", f"{make} {model} {y[0] or ''} {fam if other else ''}".lower()).strip("-")
     it = dict(d, assetId=f"{d['assetId']}--as-{sid}", standin=target, standin_donor=d["assetId"],
               standin_of={"make": make, "model": model})          # the car asked for: its layout (batch.layout_of)
     report = dict(report)
     report.pop("error", None)
     report.pop("catalogue_has", None)
+    report.pop("body_note", None)                # the body asked is built: no note that it is not
     yrs = f"{y[0]}-" + ("" if target["years"][1] is None else str(target["years"][1]))
     report["match"] = (f"stand-in: the catalogue has no {name} ({yrs}); "
                        f"'{d.get('sourceTitle') or d['assetId']}' reshaped to its size")
@@ -694,7 +785,7 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
     if spec and spec.strip():
         want["spec"] = spec.strip()[:120]
         sp = parse(want["spec"])
-        for k in ("doors", "body", "colour"):
+        for k in ("doors", "body", "body_word", "colour"):
             if sp.get(k) and not want.get(k):
                 want[k] = sp[k]
     cat = batch.catalogue()
@@ -741,7 +832,7 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
             st = _standin(report["asked"], report, item, cat, skip)
             if st:
                 report, item = st
-                if photos and item.get("standin") and search is None:
+                if photos and item.get("standin") and not item["standin"].get("no_photo") and search is None:
                     s_ = report["standin"]
                     search = PhotoSearch(s_["make"], s_["model"], item["standin"])
         if item is None:
