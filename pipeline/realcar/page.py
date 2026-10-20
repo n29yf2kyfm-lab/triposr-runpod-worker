@@ -38,10 +38,19 @@ def _glb_json(data):
     return json.loads(data[20:20 + n])
 
 
+def _word(w):
+    """A model word as written on the car: a short code of letters then digits
+    in capitals (M5, RS6, X5, A4), but BMW's i cars stay lower case (i4, iX4)."""
+    if w.lower() in CAPS:
+        return CAPS[w.lower()]
+    if re.fullmatch(r"[a-z]{1,3}\d{1,3}", w) and not w.startswith("i"):
+        return w.upper()
+    return w if any(c.isdigit() for c in w) or w.isupper() else w.capitalize()
+
+
 def _name(make, model):
     mk = "-".join(CAPS.get(w, w.capitalize()) for w in str(make or "").split("-"))
-    md = " ".join(CAPS.get(w.lower(), w if any(c.isdigit() for c in w) or w.isupper() else w.capitalize())
-                  for w in str(model or "").replace(str(make or ""), "").split())
+    md = " ".join(_word(w) for w in str(model or "").replace(str(make or ""), "").split())
     return f"{mk} {md}".strip()
 
 
