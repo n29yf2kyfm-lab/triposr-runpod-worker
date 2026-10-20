@@ -54,10 +54,11 @@ BODIES = ("hatchback", "saloon", "sedan", "estate", "coupe", "convertible", "suv
 # makers' own names for a body; an "Active Tourer" or "Gran Tourer" is not an
 # estate (its body is left to the table: no body is asked), nor a 911 GT3
 # Touring or a Grand Touring
+ESTATE_WORDS = (r"(?<!gt3\s)(?<!grand\s)\btouring\b|\bsports?\s?tourer\b|\bavant\b|\bvariant\b|\bsports?\s?wagon\b"
+                r"|\bwagon\b(?![\s-]?r\b)|\bshooting\s+brake\b|\bk?combi\b|\bsw\b")      # a Wagon R is a hatch
 BODY_WORDS = [
     (re.compile(r"\b(?:active|gran)\s+tourer\b"), None),
-    (re.compile(r"(?<!gt3\s)(?<!grand\s)\btouring\b|\bsports?\s?tourer\b|\bavant\b|\bvariant\b|\bsports?\s?wagon\b"
-                r"|\bwagon\b(?![\s-]?r\b)|\bshooting\s+brake\b|\bk?combi\b|\bsw\b"), "estate"),   # a Wagon R is a hatch
+    (re.compile(ESTATE_WORDS), "estate"),
 ]
 BIKE = re.compile(r"\b(?:harley|motorbike|motorcycle|bike)\b")
 
@@ -540,8 +541,7 @@ GROUP = {m: g for g, ms in {
     "mg": ("mg",), "byd": ("byd",)}.items() for m in ms}
 
 
-TITLE_ESTATE = re.compile(r"shooting brake|\bestate\b|(?<!gt3 )(?<!grand )\btouring\b|\bavant\b|\bvariant\b|sports ?wagon"
-                          r"|\bwagon\b(?![\s-]?r\b)|\bSW\b|\bk?combi\b|sports? ?tourer", re.I)
+TITLE_ESTATE = re.compile(r"\bestate\b|" + ESTATE_WORDS, re.I)     # a record's title: the request's estate words, and "Estate" itself
 
 
 def record_body(i, gen=None):
@@ -616,7 +616,7 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
     # one is within reach of the size (a BMW estate stretched 10% reads as a
     # BMW, a Ford of the right size as a Ford); otherwise the nearest in
     # size, as scored
-    best = min((r[3] for r in out if r[4]), default=1) if fam else 0
+    best = min((r[3] for r in out if r[4]), default=1) if fam else 1
     return [r[2] for r in sorted(out, key=lambda r: (r[3] > best, r[0], r[1]))]
 
 
@@ -678,6 +678,7 @@ def _standin(want, report, item, cat, skip):
                       source=d.get("sourceTitle"))
         report.pop("error", None)
         report.pop("catalogue_has", None)
+        report.pop("body_note", None)                # the body asked for, found under the table's years: no note
         return report, d
     sid = re.sub(r"[^a-z0-9]+", "-", f"{make} {model} {y[0] or ''} {fam if other else ''}".lower()).strip("-")
     it = dict(d, assetId=f"{d['assetId']}--as-{sid}", standin=target, standin_donor=d["assetId"],

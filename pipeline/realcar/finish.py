@@ -504,7 +504,7 @@ def wheel_strays(recs, mats, log):
     return moved
 
 
-def right_hand_drive(recs, mats, log, ground, xc):
+def right_hand_drive(g, recs, mats, log, ground, xc):
     """A left-hand-drive model made right-hand drive (a UK car): the cabin
     mirrored across the car's centre plane, its steering wheel carried across
     whole (not mirrored, so its badge and buttons read the right way round).
@@ -526,6 +526,9 @@ def right_hand_drive(recs, mats, log, ground, xc):
     own = np.concatenate([np.full(len(ix), k) for k, ix in rows])
     row = np.concatenate([ix for _, ix in rows])
     cab = np.concatenate([np.full(len(ix), recs[k]["rig"] == "cabin") for k, ix in rows])   # the rigger's cabin (the finisher files it as body)
+    if not cab.any():
+        log["right_hand_drive"] = {"done": False, "why": "the rig found no cabin"}
+        return
     lab, _ = islands(T)
     nl = lab.max() + 1
     flat, lab3 = T.reshape(-1, 3), np.repeat(lab, 3)
@@ -535,9 +538,6 @@ def right_hand_drive(recs, mats, log, ground, xc):
         np.maximum.at(hi[:, a], lab3, flat[:, a])
     body_half = float(np.abs(T[:, :, 0] - xc).max())
     roof = float(T[:, :, 1].max())
-    if not cab.any():
-        log["right_hand_drive"] = {"done": False, "why": "the rig found no cabin"}
-        return
     # the front of the cabin part (its bulkhead: the pedals hang just behind
     # it, the 2025 M5's 25 cm forward of most of the dash)
     z_dash = float(np.percentile(T[cab][:, :, 2], 99.9))
@@ -572,22 +572,44 @@ def right_hand_drive(recs, mats, log, ground, xc):
     wheel = inside & (np.linalg.norm(np.maximum(np.abs(lo - wc), np.abs(hi - wc)), axis=1) < 0.24)
     move = inside & ~wheel
     dx = 2 * (wc[0] - xc)
+
+    def own_verts(r, rows):
+        # a vertex the triangles `rows` share with others of the record (a door
+        # card cut from the same mesh, a piece outside the cabin): `rows` get
+        # their own copy, so a moved triangle never drags a staying one with it
+        other = np.ones(len(r["I"]), bool)
+        other[rows] = False
+        shared = np.intersect1d(np.unique(r["I"][rows]), np.unique(r["I"][other]))
+        if not len(shared):
+            return
+        attr = r.get("attr") or {an: g.accessor(ai) for an, ai in r["prim"]["attributes"].items()
+                                  if not an.startswith(("JOINTS", "WEIGHTS"))}
+        nv = len(r["P"])
+        r["P"] = np.vstack([r["P"], r["P"][shared]])
+        r["attr"] = {an: np.vstack([A, A[shared]]) for an, A in attr.items()}
+        remap = np.arange(nv + len(shared))
+        remap[shared] = nv + np.arange(len(shared))
+        I = r["I"].copy()
+        I[rows] = remap[I[rows]]
+        r["I"] = I
     n_m = n_w = 0
     for k in np.unique(own):
         r = recs[k]
         sel = own == k
         tm, tw = row[sel & move[lab]], row[sel & wheel[lab]]
         if len(tm):
+            own_verts(r, tm)
             v = np.unique(r["I"][tm])
             r["P"] = r["P"].copy()
             r["P"][v, 0] = 2 * xc - r["P"][v, 0]
-            mv = r.get("mirror_v", np.zeros(len(r["P"]), bool))
+            mv = np.zeros(len(r["P"]), bool)
             mv[v] = True
-            r["mirror_v"] = mv
+            r["mirror_v"] = mv                               # normals and tangents turn with it (the rebuild)
             r["I"] = r["I"].copy()
             r["I"][tm] = r["I"][tm][:, [0, 2, 1]]          # a mirror turns a triangle over: wound back
             n_m += len(tm)
         if len(tw):
+            own_verts(r, tw)
             v = np.unique(r["I"][tw])
             r["P"] = r["P"].copy()
             r["P"][v, 0] -= dx
@@ -1287,7 +1309,7 @@ def finish(src, spec, out, base_dir="."):
     # ── right-hand drive asked for (a UK car) from a left-hand-drive model ──
     if spec.get("drive") == "right":
         xc = float(np.mean([r["P"][np.unique(r["I"]), 0].mean() for r in recs if r["rig"].startswith("wheel_")]))
-        right_hand_drive(recs, mats, log, ground, xc)        # xc: the car's centre plane, between its wheels
+        right_hand_drive(g, recs, mats, log, ground, xc)     # xc: the car's centre plane, between its wheels
 
     # ── rebuild meshes, one per part, primitives kept per source material ──
     by_part = {}

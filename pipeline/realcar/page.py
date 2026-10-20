@@ -201,7 +201,8 @@ def procedures(cat, opens, rear_engine=False):
     ]
     lid = "tailgate" if rear_engine else "bonnet"
     bay = [
-        step("Open the lid. Look for fresh paint on the slam panel and bolt heads: a sign of front-end repair.", "bay", [lid], [lid]),
+        step(("Open the engine lid. Look for fresh paint on the panel edges and bolt heads: a sign of rear-end repair." if rear_engine
+              else "Open the lid. Look for fresh paint on the slam panel and bolt heads: a sign of front-end repair."), "bay", [lid], [lid]),
         step("Battery: terminals clean, clamp tight, no white deposits.", "part", ["bay:battery-assembly"], [lid]),
         step("Coolant tank: level between the marks, no oil film on the coolant.", "part", ["bay:coolant-expansion-reservoir"], [lid]),
         step("Radiator and hoses: hoses firm, clamps dry, radiator fins straight.", "part",
@@ -217,7 +218,9 @@ def procedures(cat, opens, rear_engine=False):
     doors.append(step("Cabin: seat bolsters, steering wheel wear against the mileage, warning lights at ignition.", "cabin",
                       ["cabin"], [d for d in ("door_fl",) if d in opens]))
     under = [
-        step("Open the tailgate: boot floor and spare wheel well dry, no ripples in the floor.", "boot", ["tailgate"], ["tailgate"]),
+        step(("Open the front lid: the luggage space floor dry, no ripples in it." if rear_engine
+              else "Open the tailgate: boot floor and spare wheel well dry, no ripples in the floor."),
+             "boot", ["bonnet" if rear_engine else "tailgate"], ["bonnet" if rear_engine else "tailgate"]),   # a 911's luggage is under its front lid
         step("Turn the car over: fuel tank straps, rear suspension bushes, exhaust hangers and corrosion.", "under",
              ["bay:fuel_tank", "bay:susp_rear", "exhaust"]),
     ]

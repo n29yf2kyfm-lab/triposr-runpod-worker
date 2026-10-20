@@ -194,7 +194,7 @@ section h2 { font: 600 22px/1.1 var(--display); margin: 8px 0 10px; letter-spaci
 }
 @media print {
   .stage, .bar, .tabs, .views, #pane-style, #pane-engine, #pane-steps { display: none !important; }
-  .bench { grid-template-columns: 1fr; } .side { max-height: none; border: 0; } .pane[hidden] { display: block; }
+  .bench { grid-template-columns: 1fr; } .side { max-height: none; border: 0; } .pane[hidden] { display: block !important; }
   .thumbs img { width: 160px; height: 120px; }
 }
 </style>
@@ -446,7 +446,9 @@ if (CAR.sheet) $('views').hidden = false;
 const stage = $('stage'), canvas = $('view'), status = $('status');
 const PARTS = CAR.parts;
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const phone = matchMedia('(max-width: 999px)').matches;
+const phoneMq = matchMedia('(max-width: 999px)');
+let phone = phoneMq.matches;                    // a tablet turned round crosses the line: camera distances and list scrolling follow
+phoneMq.addEventListener('change', e => { phone = e.matches; redraw(); });
 const coarse = matchMedia('(pointer: coarse)').matches;
 
 function fail(why) {
@@ -737,10 +739,9 @@ function wheelOffSet(on) {
   RAMP.wheelOff = on;
   $('wheelOff').setAttribute('aria-pressed', String(on));
   $('wheelOff').textContent = on ? 'Put it back' : 'Take a wheel off';
-  if (!on) { const n = B.node.get('wheel_fl'); if (n) { B.rampD.delete(n); place(n); } }
   redraw();
 }
-const ease3 = t => t < 0 ? 0 : t > 1 ? 1 : t * t * (3 - 2 * t);
+const ease = t => t < 0 ? 0 : t > 1 ? 1 : t * t * (3 - 2 * t);
 function rampStep(dt) {
   if (!RAMP.posts) return false;
   const goal = RAMP.on ? 1 : 0, wgoal = RAMP.wheelOff ? 1 : 0;
@@ -748,7 +749,7 @@ function rampStep(dt) {
   if (RAMP.p !== goal) { RAMP.p = Math.max(0, Math.min(1, RAMP.p + Math.sign(goal - RAMP.p) * dt / 1.6)); moving = true; }
   if (RAMP.wo !== wgoal) { RAMP.wo = Math.max(0, Math.min(1, RAMP.wo + Math.sign(wgoal - RAMP.wo) * dt / 1.1)); moving = true; }
   if (reduced) { RAMP.p = goal; RAMP.wo = wgoal; }
-  const lift = ease3(RAMP.p) * RAMP.H;
+  const lift = ease(RAMP.p) * RAMP.H;
   if (S.pivot) S.pivot.position.y = RAMP.baseY + lift;
   for (const a of RAMP.arms) a.position.y = lift;
   RAMP.posts.visible = RAMP.p > 0.001;
@@ -783,7 +784,7 @@ const CAT = CAR.catalogue || [], PROCS = CAR.procedures || [];
 const B = { node: new Map(), idOf: new Map(), hinge: new Map(), item: new Map(), rows: new Map(), level: null, picked: new Set(),
   xray: false, isolate: false, callouts: !phone, explode: 0, base: new Map(), explodeD: new Map(), offsetD: new Map(), liftD: new Map(), rampD: new Map(),
   ghost: null, hl: new Map(), orig: new WeakMap(), measure: false, mPts: [], mLine: null,
-  proc: null, step: -1, timer: null, flags: {}, co: new Map(), cutPlane: new THREE.Plane() };
+  proc: null, step: -1, timer: null, flags: {}, co: new Map(), coC: new Map(), cutPlane: new THREE.Plane() };
 const TOP_GROUPS = { engine_bay: 'Engine bay', rear_running_gear: 'Under the back', exhaust: 'Exhaust system', cabin: 'Cabin' };
 const HIDE = new THREE.MeshBasicMaterial({ visible: false });   // a factory wheel under a new one
 
@@ -957,6 +958,7 @@ function buildCallouts() {
   const svg = $('callouts');
   svg.replaceChildren();
   B.co.clear();
+  B.coC.clear();
   for (const it of levelItems()) {
     const g = document.createElementNS(svgNS, 'g'); g.classList.add('co');
     const line = document.createElementNS(svgNS, 'line'), dot = document.createElementNS(svgNS, 'circle'), tag = document.createElementNS(svgNS, 'circle'), t = document.createElementNS(svgNS, 'text');
@@ -966,6 +968,8 @@ function buildCallouts() {
     const title = document.createElementNS(svgNS, 'title'); title.textContent = it.label; g.append(title);
     svg.append(g);
     B.co.set(it.id, g);
+    const n = B.node.get(it.id);
+    if (n) { const bx = new THREE.Box3().setFromObject(n); B.coC.set(it.id, bx.isEmpty() ? null : n.worldToLocal(bx.getCenter(new THREE.Vector3()))); }
     g.classList.toggle('on', B.picked.has(it.id));
     g.classList.toggle('flag', !!B.flags[it.id]);
   }
@@ -977,9 +981,9 @@ function updateCallouts() {
   for (const [id, g] of B.co) {
     const n = B.node.get(id);
     if (!n || !n.visible) { g.style.display = 'none'; continue; }
-    _box.setFromObject(n);
-    if (_box.isEmpty()) { g.style.display = 'none'; continue; }
-    _box.getCenter(_v).project(camera);
+    const cl = B.coC.get(id);                   // the part's centre in its own frame (buildCallouts): no subtree walk per frame
+    if (!cl) { g.style.display = 'none'; continue; }
+    n.localToWorld(_v.copy(cl)).project(camera);
     if (_v.z > 1) { g.style.display = 'none'; continue; }
     const x = (_v.x + 1) / 2 * w, y = (1 - _v.y) / 2 * h;
     let dx = x - cx, dy = y - cy; const d = Math.hypot(dx, dy) || 1; dx /= d; dy /= d;
@@ -1012,12 +1016,16 @@ function setExplode(k) {
   const items = levelItems();
   const lvl = B.level ? B.node.get(B.level) : S.car;
   const toCar = new THREE.Matrix4().copy(S.car.matrixWorld).invert();
+  // the ways out come from the parts at rest (the explode taken off first), so
+  // the layout is the slider's value alone, not the path dragged to it
+  for (const it of items) { const n = mover(it.id); if (n && B.base.has(n)) { B.explodeD.delete(n); place(n); } }
   const lc = new THREE.Box3().setFromObject(lvl).getCenter(new THREE.Vector3()).applyMatrix4(toCar);
   const reach = B.level ? 0.55 : S.box.size.z * 0.42;
+  if (!k) return;
   for (const it of items) {
     const n = mover(it.id); if (!n || !B.base.has(n)) continue;
     const c = new THREE.Box3().setFromObject(B.node.get(it.id)).getCenter(new THREE.Vector3()).applyMatrix4(toCar);
-    B.explodeD.set(n, k ? carDelta(n, wayOut(it.id, c, lc).multiplyScalar(k * reach)) : new THREE.Vector3());
+    B.explodeD.set(n, carDelta(n, wayOut(it.id, c, lc).multiplyScalar(k * reach)));
     place(n);
   }
 }
@@ -1069,6 +1077,7 @@ function updateMeasure() {
 function view(name) {
   const { size, ctr } = S.box, L = size.z, H = size.y, W = size.x;
   const far = phone ? 1.25 : 1;                 // a tall, narrow phone stage needs more room
+  const e = (CAR.engine && CAR.engine.lid) === 'tailgate' ? -1 : 1;   // the engine's end: the nose, or a 911's tail
   const t = ctr.clone(), p = ctr.clone();
   switch (name) {
     case 'front': p.add(new THREE.Vector3(L * .35, H * .55, L * 1.45).multiplyScalar(far)); break;
@@ -1076,11 +1085,11 @@ function view(name) {
     case 'nearside': p.add(new THREE.Vector3(L * 1.35, H * .45, L * .15).multiplyScalar(far)); break;
     case 'offside': p.add(new THREE.Vector3(-L * 1.35, H * .45, L * .15).multiplyScalar(far)); break;
     case 'top': p.add(new THREE.Vector3(0.01, L * 1.6, 0.02)); break;
-    case 'bay': t.add(new THREE.Vector3(0, H * .25, L * .33)); p.copy(t).add(new THREE.Vector3(L * .12, L * .55, L * .62).multiplyScalar(far)); break;
-    case 'boot': t.add(new THREE.Vector3(0, H * .2, -L * .3)); p.copy(t).add(new THREE.Vector3(L * .25, L * .5, -L * .7).multiplyScalar(far)); break;
+    case 'bay': t.add(new THREE.Vector3(0, H * .25, e * L * .33)); p.copy(t).add(new THREE.Vector3(L * .12, L * .55, e * L * .62).multiplyScalar(far)); break;
+    case 'boot': t.add(new THREE.Vector3(0, H * .2, -e * L * .3)); p.copy(t).add(new THREE.Vector3(L * .25, L * .5, -e * L * .7).multiplyScalar(far)); break;
     case 'cabin': t.add(new THREE.Vector3(0, H * .1, 0)); p.copy(t).add(new THREE.Vector3(W * 1.2, H * .9, L * .05).multiplyScalar(far)); break;
     case 'under': p.add(new THREE.Vector3(L * .3, L * 1.1, L * .5).multiplyScalar(far)); break;
-    case 'hoist': t.add(new THREE.Vector3(0, H * .7, L * .55)); p.copy(t).add(new THREE.Vector3(L * 1.1, L * .45, L * .55).multiplyScalar(far)); break;
+    case 'hoist': t.add(new THREE.Vector3(0, H * .7, e * L * .55)); p.copy(t).add(new THREE.Vector3(L * 1.1, L * .45, e * L * .55).multiplyScalar(far)); break;
     default:
       if (name.startsWith('door:') || name.startsWith('wheel:')) {
         const id = name.replace(':', '_'), n = B.node.get(id);
@@ -1318,7 +1327,7 @@ function showTab(t) {
   store.set(CAR.key + '-tab', t);
 }
 for (const t of TABS) $('tab-' + t).addEventListener('click', () => showTab(t));
-{ const t = store.get(CAR.key + '-tab'); if (TABS.includes(t)) showTab(t); }
+// the saved tab is restored at the end of the script (showTab reads RUN, declared below)
 
 // ── Style: new wheels, rim size, ride height, offset ─────────────────────────
 // The wheel designs are modelled here, in code, at the car's own wheel size
@@ -1567,7 +1576,6 @@ function liftEngine(on) {
   $('liftEngine').textContent = on ? 'Put the engine back' : 'Lift the engine out';
 }
 function onHoist(o) { for (let p = o; p; p = p.parent) if (B.lift.set && B.lift.set.has(p)) return true; return o.name === '_hoist' || (o.parent && o.parent.name === '_hoist'); }
-const ease = t => t < 0 ? 0 : t > 1 ? 1 : t * t * (3 - 2 * t);
 function stepLift(dt) {
   const L = B.lift;
   const goal = L.on ? 1 : 0;
@@ -1600,7 +1608,7 @@ const RUN = { on: false, play: true, mode: 'run', speed: 0.26, strip: 0, theta: 
 const EG = { s: 0.112, rb: 0.0425, r: 0.0425, l: 0.136, deck: 0.0, zc: 0 };
 EG.cx = [-1.5, -0.5, 0.5, 1.5].map(k => k * EG.s);
 EG.phase = [0, Math.PI, Math.PI, 0];                 // crank throw per cylinder (1,4 up together; 2,3 down)
-EG.cycle = [0, 540, 180, 360];                        // where each sits in the 720° four-stroke cycle (firing 1-3-4-2)
+EG.cycle = [0, 180, 540, 360];                        // where each sits in the 720° cycle: power on 1, then 3, 4, 2 (firing order 1-3-4-2)
 const STROKE = [['Intake', '#1f8f4a'], ['Compression', '#1f5fbf'], ['Power', '#c8102e'], ['Exhaust', '#595f66']];
 const SYSTEMS = [
   ['air', 'Air', 'Air is drawn through the intake runners and past the open intake valve into the cylinder on the intake stroke.'],
@@ -1622,7 +1630,9 @@ function makeRunEngine() {
   const mBlock = emat(0x8a9099, 0.55, 0.5, true), mHead = emat(0x767c85, 0.55, 0.5, true);
   const mBore = emat(0x3b3f45, 0.3, 0.7, true);
   const mPiston = emat(0xc6cacf, 0.9, 0.3), mRod = emat(0x9aa0a6, 0.9, 0.34), mCrank = emat(0x6d7278, 0.95, 0.3);
-  const mSteel = emat(0xb9bdc2, 1, 0.25), mValve = emat(0xcacdd1, 0.95, 0.28), mSpring = emat(0x55595e, 0.8, 0.4);
+  // one material per system (not shared across them), so Systems lights only its own parts
+  const mSteel = emat(0xb9bdc2, 1, 0.25), mSprocket = emat(0xb9bdc2, 1, 0.25);
+  const mValves = { in: emat(0xcacdd1, 0.95, 0.28), ex: emat(0xcacdd1, 0.95, 0.28) }, mSprings = { in: emat(0x55595e, 0.8, 0.4), ex: emat(0x55595e, 0.8, 0.4) };
   const mPlug = emat(0xd9b24a, 0.7, 0.35), mChain = emat(0x5b6066, 0.9, 0.45);
   const halfX = (EG.cx[3] - EG.cx[0]) / 2 + EG.s * 0.7, zB = 0.052;
 
@@ -1680,6 +1690,7 @@ function makeRunEngine() {
     });
     head.add(cam); RUN.cams.push(cam);
     // valves under this cam (intake side −z, exhaust side +z)
+    const mValve = mValves[side < 0 ? 'in' : 'ex'], mSpring = mSprings[side < 0 ? 'in' : 'ex'];
     EG.cx.forEach((x, i) => {
       const v = new THREE.Group(); v.position.set(x, headY - 0.01, side * 0.028);
       const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.006, 0.006, 0.07, 12), mValve); stem.position.y = 0.0; v.add(stem);
@@ -1700,9 +1711,9 @@ function makeRunEngine() {
   // timing chain: a sprocket on the crank nose and on each cam nose, a chain loop over them
   RUN.sprockets = [];
   const nose = halfX + 0.012;
-  const sCrank = new THREE.Mesh(new THREE.CylinderGeometry(0.028, 0.028, 0.012, seg), mSteel); sCrank.rotation.z = Math.PI / 2; sCrank.position.set(nose, 0, 0); G.add(sCrank); RUN.sprockets.push({ m: sCrank, ratio: 1 });
+  const sCrank = new THREE.Mesh(new THREE.CylinderGeometry(0.028, 0.028, 0.012, seg), mSprocket); sCrank.rotation.z = Math.PI / 2; sCrank.position.set(nose, 0, 0); G.add(sCrank); RUN.sprockets.push({ m: sCrank, ratio: 1 });
   for (const side of [-1, 1]) {
-    const sc = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.012, seg), mSteel); sc.rotation.z = Math.PI / 2; sc.position.set(nose, headY + 0.03, side * 0.028); G.add(sc); RUN.sprockets.push({ m: sc, ratio: 0.5 });
+    const sc = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.012, seg), mSprocket); sc.rotation.z = Math.PI / 2; sc.position.set(nose, headY + 0.03, side * 0.028); G.add(sc); RUN.sprockets.push({ m: sc, ratio: 0.5 });
   }
   // chain: a flat closed loop over the three sprockets, drawn as a thin tube
   const cp = [new THREE.Vector3(nose, -0.028, -0.028), new THREE.Vector3(nose, -0.028, 0.028), new THREE.Vector3(nose, headY + 0.07, 0.028), new THREE.Vector3(nose, headY + 0.07, -0.028)];
@@ -1770,13 +1781,14 @@ function runUpdate(dt) {
   // ignition flash at the top of each compression stroke
   RUN.flashes.forEach((f, i) => {
     const { phi } = strokeOf(i, th);
-    if (RUN.play && phi >= 356 && phi <= 360 && f.k <= 0) f.k = 1;
+    // fired when the cylinder's cycle passed the top of compression (360°) since the last frame, whatever the frame's step
+    if (RUN.play && f.prev !== undefined && f.prev < 360 && (phi >= 360 || phi < f.prev)) f.k = 1;
+    f.prev = phi;
     f.k = Math.max(0, f.k - dt * 6);
     f.m.opacity = f.k * 0.8;
   });
 }
 function runReadout() {
-  const bank = STROKE.map((_, i) => '').slice();
   const rows = [0, 1, 2, 3].map(i => {
     const [name, col] = STROKE[strokeOf(i, RUN.theta).i];
     return `<span style="display:inline-flex;align-items:center;gap:5px"><b style="font:600 13px var(--mono)">${i + 1}</b><span style="width:9px;height:9px;border-radius:2px;background:${col}"></span>${name}</span>`;
@@ -1796,6 +1808,7 @@ function runView(on) {
     if (S.pivot) S.pivot.visible = false;
     if (S.shadow) S.shadow.visible = false;
     RUN.save = { pos: camera.position.clone(), target: controls.target.clone() };
+    $('cutAxis').value = ''; setCut();          // the car's cut plane is the renderer's: it would slice the engine too
     runUpdate(0);
     const box = new THREE.Box3().setFromObject(RUN.group), c = box.getCenter(new THREE.Vector3()), sz = box.getSize(new THREE.Vector3());
     const radius = Math.max(sz.x, sz.y * 1.1) * 0.5;
@@ -1828,7 +1841,7 @@ function runSystem(sys) {
   const on = new Set(sys === 'none' ? [] : (RUN.sysTag[sys] || []).flatMap(g => { const a = []; g.traverse(o => { if (o.isMesh) a.push(o); }); return a; }));
   for (const mat of RUN.allMats) { mat.emissive = mat.emissive || new THREE.Color(0); mat.emissive.setRGB(0, 0, 0); mat.color.copy(mat.userData.base); if (sys !== 'none') mat.color.lerp(new THREE.Color(0x2a2c30), 0.5); }
   const info = SYSTEMS.find(s => s[0] === sys);
-  on.forEach(o => { o.material.color.copy(o.material.userData.base); o.material.emissive = new THREE.Color(info ? STROKE[0][1] : 0); o.material.emissive.set(0x2f6fe0); o.material.emissiveIntensity = 0.6; });
+  on.forEach(o => { o.material.color.copy(o.material.userData.base); o.material.emissive.set(0x2f6fe0); o.material.emissiveIntensity = 0.6; });
   $('runSysNote').hidden = !info; if (info) $('runSysNote').textContent = info[2];
   redraw();
 }
@@ -1909,7 +1922,7 @@ function labTargets() {
   document.querySelectorAll('#target button').forEach(b => { b.hidden = !have.includes(b.dataset.t); });
   if (have.length && !have.includes(LAB.target)) LAB.target = have[0];
 }
-function applyFinish(t, finish, hex, quiet) {
+function applyFinish(t, finish, hex, quiet, persist = true) {
   redraw();
   const f = FINISHES[finish], c = new THREE.Color(hex);
   for (const m of LAB.mats[t]) {
@@ -1926,7 +1939,7 @@ function applyFinish(t, finish, hex, quiet) {
   LAB.state[t] = { finish, hex };
   B.hl.clear();                                  // highlight copies follow the new finish
   if (B.picked.size) refreshLook();
-  store.set(CAR.key, LAB.state);
+  if (persist) store.set(CAR.key, LAB.state);  // the request's own start (labRestore) is shown, not saved as a choice
   if (!quiet) labUI();
 }
 function factory(t) {
@@ -1988,9 +2001,10 @@ function labRestore() {
   if (saved) for (const [t, v] of Object.entries(saved)) if (v && FINISHES[v.finish] && LAB.mats[t]) applyFinish(t, v.finish, v.hex);
   // what the request asked for ("matt grey", "gloss black wheels"): those parts start in it, until the viewer chooses another
   for (const [t, f] of Object.entries(CAR.start || {}))
-    if (!(saved && saved[t]) && f && FINISHES[f.finish] && LAB.mats[t] && LAB.mats[t].length) applyFinish(t, f.finish, f.hex, true);
+    if (!(saved && saved[t]) && f && FINISHES[f.finish] && LAB.mats[t] && LAB.mats[t].length) applyFinish(t, f.finish, f.hex, true, false);
 }
 labUI();
+{ const t = store.get(CAR.key + '-tab'); if (TABS.includes(t)) showTab(t); }   // the viewer's last tab, once everything it reads exists
 
 let runTick = 0;
 renderer.setAnimationLoop(() => {
@@ -2004,7 +2018,7 @@ renderer.setAnimationLoop(() => {
     const r = S.pivot.rotation.z, d = S.flipTo - r;
     S.pivot.rotation.z = Math.abs(d) < 0.002 || reduced ? S.flipTo : r + d * Math.min(1, dt * 4);
     if (Math.abs(d) >= 0.002 && !reduced) moving = true;
-    if (S.shadow) S.shadow.visible = Math.abs(S.pivot.rotation.z) < 0.2 && RAMP.p < 0.08;
+    if (S.shadow) S.shadow.visible = Math.abs(S.pivot.rotation.z) < 0.2 && RAMP.p < 0.08 && !RUN.on;
   }
   if (S.camTo) {
     const k = Math.min(1, (performance.now() - S.camTo.at) / 550), e = 1 - Math.pow(1 - k, 3);
