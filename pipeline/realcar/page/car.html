@@ -223,6 +223,8 @@ section h2 { font: 600 22px/1.1 var(--display); margin: 8px 0 10px; letter-spaci
         <span id="parts" style="display:contents"></span>
         <span class="sep" aria-hidden="true"></span>
         <button type="button" id="flip" disabled aria-pressed="false">Flip over</button>
+        <button type="button" id="ramp" disabled aria-pressed="false">On the ramp</button>
+        <button type="button" id="wheelOff" hidden aria-pressed="false">Take a wheel off</button>
         <button type="button" id="reset" disabled>Reset view</button>
       </div>
 
@@ -644,9 +646,10 @@ function onCar(gltf) {
   styleSetup();
   engineSetup();
   runSetup();
+  rampSetup();
   redraw();
   // ?debug: the page's state for a test to read
-  if (new URLSearchParams(location.search).has('debug')) window.__car = { THREE, S, B, ST, LAB, camera, renderer, scene };
+  if (new URLSearchParams(location.search).has('debug')) window.__car = { THREE, S, B, ST, LAB, RUN, RAMP, camera, renderer, scene };
 }
 
 function setOpen(id, open) {
@@ -671,6 +674,7 @@ $('all').addEventListener('click', () => {
 });
 function setFlip(on) {
   redraw();
+  if (on && RAMP.on) rampSet(false);     // can't be on the ramp and flipped at once
   S.flipTo = on ? Math.PI : 0;
   $('flip').setAttribute('aria-pressed', String(on));
   $('flip').textContent = on ? 'Turn back' : 'Flip over';
@@ -684,6 +688,92 @@ function moveCam(pos, target) {
   S.camTo = { p0: camera.position.clone(), t0: controls.target.clone(), p1: pos.clone(), t1: target.clone(), at: performance.now() };
 }
 
+// ── On the ramp: a two-post lift raises the car so you can see underneath, ──
+// and a front wheel comes off to show the hub. Our own geometry; the posts
+// stand on the ground, the carriages and arms rise with the car.
+const RAMP = { on: false, p: 0, H: 0, baseY: 0, posts: null, arms: [], wheelOff: false, wo: 0, save: null };
+function makeRamp() {
+  const { size, ctr } = S.box, W = size.x, L = size.z;
+  RAMP.H = Math.max(0.95, size.y * 0.85);
+  const g = new THREE.Group();
+  const mPost = new THREE.MeshStandardMaterial({ color: 0xd98a1f, metalness: 0.5, roughness: 0.5 });
+  const mArm = new THREE.MeshStandardMaterial({ color: 0x5b6066, metalness: 0.7, roughness: 0.4 });
+  const mPad = new THREE.MeshStandardMaterial({ color: 0x1c1e21, metalness: 0.2, roughness: 0.8 });
+  const colH = RAMP.H + Math.max(0.5, size.y * 0.5), px = W / 2 + 0.22;
+  RAMP.arms = [];
+  for (const sx of [-1, 1]) {
+    const post = new THREE.Mesh(new THREE.BoxGeometry(0.11, colH, 0.14), mPost);
+    post.position.set(ctr.x + sx * px, colH / 2, ctr.z); g.add(post);
+    const base = new THREE.Mesh(new THREE.BoxGeometry(0.26, 0.04, 0.4), mPost); base.position.set(ctr.x + sx * px, 0.02, ctr.z); g.add(base);
+    // a carriage that rides up the post, with two arms reaching under the sill
+    const car = new THREE.Group(); car.position.set(ctr.x + sx * px, 0, ctr.z);
+    const carriage = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.16, 0.18), mArm); carriage.position.y = 0.12; car.add(carriage);
+    for (const sz of [-1, 1]) {
+      const arm = new THREE.Mesh(new THREE.BoxGeometry(px - W / 2 + 0.12, 0.05, 0.07), mArm);
+      arm.position.set(-sx * (px - W / 2 + 0.12) / 2, 0.1, sz * L * 0.18); car.add(arm);
+      const pad = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.06, 0.05, 16), mPad);
+      pad.position.set(-sx * (px - W / 2 + 0.06), 0.14, sz * L * 0.18); car.add(pad);
+    }
+    g.add(car); RAMP.arms.push(car);
+  }
+  g.visible = false;
+  scene.add(g);
+  return g;
+}
+function rampSet(on) {
+  if (on && S.flipTo) setFlip(false);
+  RAMP.on = on;
+  if (!RAMP.posts) { RAMP.posts = makeRamp(); RAMP.baseY = S.pivot.position.y; }
+  RAMP.posts.visible = true;
+  $('ramp').setAttribute('aria-pressed', String(on));
+  $('ramp').textContent = on ? 'Lower it' : 'On the ramp';
+  $('wheelOff').hidden = !on;
+  if (!on && RAMP.wheelOff) wheelOffSet(false);
+  if (on) { RAMP.save = { pos: camera.position.clone(), target: controls.target.clone() }; }
+  else if (RAMP.save) moveCam(RAMP.save.pos, RAMP.save.target);
+  redraw();
+}
+function wheelOffSet(on) {
+  RAMP.wheelOff = on;
+  $('wheelOff').setAttribute('aria-pressed', String(on));
+  $('wheelOff').textContent = on ? 'Put it back' : 'Take a wheel off';
+  if (!on) { const n = B.node.get('wheel_fl'); if (n) { B.rampD.delete(n); place(n); } }
+  redraw();
+}
+const ease3 = t => t < 0 ? 0 : t > 1 ? 1 : t * t * (3 - 2 * t);
+function rampStep(dt) {
+  if (!RAMP.posts) return false;
+  const goal = RAMP.on ? 1 : 0, wgoal = RAMP.wheelOff ? 1 : 0;
+  let moving = false;
+  if (RAMP.p !== goal) { RAMP.p = Math.max(0, Math.min(1, RAMP.p + Math.sign(goal - RAMP.p) * dt / 1.6)); moving = true; }
+  if (RAMP.wo !== wgoal) { RAMP.wo = Math.max(0, Math.min(1, RAMP.wo + Math.sign(wgoal - RAMP.wo) * dt / 1.1)); moving = true; }
+  if (reduced) { RAMP.p = goal; RAMP.wo = wgoal; }
+  const lift = ease3(RAMP.p) * RAMP.H;
+  if (S.pivot) S.pivot.position.y = RAMP.baseY + lift;
+  for (const a of RAMP.arms) a.position.y = lift;
+  RAMP.posts.visible = RAMP.p > 0.001;
+  if (S.shadow) S.shadow.visible = RAMP.p < 0.08 && Math.abs(S.pivot ? S.pivot.rotation.z : 0) < 0.2;
+  // the removed front-left wheel rides out to the side and down onto the floor
+  const n = B.node.get('wheel_fl');
+  if (n && B.base.has(n) && (RAMP.wo > 0 || B.rampD.has(n))) {
+    if (RAMP.wo <= 0.0001) { B.rampD.delete(n); }
+    else { const d = carDelta(n, new THREE.Vector3(0.6, 0, 0)).multiplyScalar(RAMP.wo); d.y -= lift * RAMP.wo; B.rampD.set(n, d); }
+    place(n);
+  }
+  if (moving && RAMP.on && RAMP.p > 0.98 && !RAMP._framed) {   // once up, drop the camera to look underneath
+    RAMP._framed = true;
+    const c = new THREE.Vector3(S.box.ctr.x, RAMP.baseY + lift * 0.4, S.box.ctr.z);
+    moveCam(new THREE.Vector3(c.x + S.box.size.z * 0.5, 0.35, c.z + S.box.size.z * 0.7), c);
+  }
+  if (!RAMP.on) RAMP._framed = false;
+  return moving;
+}
+function rampSetup() {
+  $('ramp').disabled = false;
+  $('ramp').addEventListener('click', () => rampSet(!RAMP.on));
+  $('wheelOff').addEventListener('click', () => wheelOffSet(!RAMP.wheelOff));
+}
+
 // ── the bench: parts catalogue, callouts, explode, x-ray, cut-away, measure, procedures, report ──
 // The car's parts, numbered and grouped (page.py read them from the file);
 // a tap in the list or on the car picks a part, as a parts catalogue links
@@ -691,7 +781,7 @@ function moveCam(pos, target) {
 // callouts and the explode slider spreads them.
 const CAT = CAR.catalogue || [], PROCS = CAR.procedures || [];
 const B = { node: new Map(), idOf: new Map(), hinge: new Map(), item: new Map(), rows: new Map(), level: null, picked: new Set(),
-  xray: false, isolate: false, callouts: !phone, explode: 0, base: new Map(), explodeD: new Map(), offsetD: new Map(), liftD: new Map(),
+  xray: false, isolate: false, callouts: !phone, explode: 0, base: new Map(), explodeD: new Map(), offsetD: new Map(), liftD: new Map(), rampD: new Map(),
   ghost: null, hl: new Map(), orig: new WeakMap(), measure: false, mPts: [], mLine: null,
   proc: null, step: -1, timer: null, flags: {}, co: new Map(), cutPlane: new THREE.Plane() };
 const TOP_GROUPS = { engine_bay: 'Engine bay', rear_running_gear: 'Under the back', exhaust: 'Exhaust system', cabin: 'Cabin' };
@@ -768,7 +858,7 @@ function mover(id) { return B.hinge.get(id) || B.node.get(id) || null; }
 function place(n) {
   const b = B.base.get(n); if (!b) return;
   n.position.copy(b);
-  for (const m of [B.explodeD, B.offsetD, B.liftD]) { const d = m.get(n); if (d) n.position.add(d); }
+  for (const m of [B.explodeD, B.offsetD, B.liftD, B.rampD]) { const d = m.get(n); if (d) n.position.add(d); }
 }
 // a move given in the car's own frame (x across, y up, z along, metres), in
 // the node's parent's frame: the engine bay group is scaled to its car
@@ -1911,7 +2001,7 @@ renderer.setAnimationLoop(() => {
     const r = S.pivot.rotation.z, d = S.flipTo - r;
     S.pivot.rotation.z = Math.abs(d) < 0.002 || reduced ? S.flipTo : r + d * Math.min(1, dt * 4);
     if (Math.abs(d) >= 0.002 && !reduced) moving = true;
-    if (S.shadow) S.shadow.visible = Math.abs(S.pivot.rotation.z) < 0.2;
+    if (S.shadow) S.shadow.visible = Math.abs(S.pivot.rotation.z) < 0.2 && RAMP.p < 0.08;
   }
   if (S.camTo) {
     const k = Math.min(1, (performance.now() - S.camTo.at) / 550), e = 1 - Math.pow(1 - k, 3);
@@ -1920,6 +2010,7 @@ renderer.setAnimationLoop(() => {
     if (k >= 1) S.camTo = null; else moving = true;
   }
   if (S.root && stepLift(Math.min(raw, 0.5))) moving = true;
+  if (rampStep(dt)) moving = true;
   if (RUN.on) {
     runUpdate(dt);
     if (RUN.play) { moving = true; runTick = (runTick + 1) % 6; if (!runTick) runReadout(); }

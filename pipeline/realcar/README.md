@@ -165,7 +165,7 @@ something changes or moves, so a still car costs no battery.
 
 | Tab | What it does |
 | --- | --- |
-| Parts | The parts bench above. Callouts start off on a phone (a small screen fills up); one tap turns them on. |
+| Parts | The parts bench above. Callouts start off on a phone (a small screen fills up); one tap turns them on. **On the ramp** raises the car on a two-post lift so you can see underneath, and **Take a wheel off** lifts the front wheel out onto the floor to show the hub; both our own geometry. |
 | Steps | The procedures, with the step's text at the top of the car on a phone. |
 | Report | Flagged parts with notes and **photos from the phone's camera**: each part has Add photo, and the car itself has its own. Photos are shrunk to 1,600 px and kept on that device only (the browser's own database), never sent anywhere. **Share report** opens the phone's share sheet with the text and the photos (mail, WhatsApp ...); where there is none it copies the text. Print or save as PDF prints the report with its photos. |
 | Style | **New wheels**, modelled by the machine in code at the car's own wheel size: 5-spoke, 10-spoke, cross-spoke, turbine, steel, each with its tyre, barrel, brake disc, caliper and wheel nuts; the factory wheel stays in the file, hidden under it. **Rim size** standard, +1 or +2 inch (the tyre gets lower, the wheel stays the same size). **Ride height** -60 to +40 mm (the body and everything on it moves; the wheels stay on the ground). **Wheel offset** -20 to +40 mm. The **Finish Lab** (chrome, gloss, satin, matt, brushed, candy, any colour) works on the new rims and calipers too. The build line and every choice are kept on the device. |
