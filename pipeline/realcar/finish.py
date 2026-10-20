@@ -45,6 +45,7 @@ What it does, in order:
    doors_open, all_open).
 """
 import copy
+import io
 import json
 import math
 import os
@@ -72,6 +73,7 @@ PACK_FRAME = {"front_axle_z": 1.316, "rear_axle_z": -1.315, "ground_y": -0.013, 
               "exhaust_front_z": 0.802, "exhaust_tail_z": -2.081}
 PACK_REAR = {"bay:susp_rear", "bay:fuel_tank"}
 PACK_EXHAUST = {"bay:exhaust_rear"}
+EXHAUST_INSIDE = 0.30      # m: where the pack's exhaust ends, inside the car's rearmost point
 
 
 def hinge_line(part, plo, phi, edge=None, deg=None):
@@ -214,6 +216,31 @@ def skin(cen, pts, axes, sign, depth, cell=0.03):
     kc = k(cen)
     ix = np.clip(np.searchsorted(uk, kc), 0, len(uk) - 1)
     return (uk[ix] == kc) & (sign * cen[:, ax] > ext[ix] - depth)
+
+
+def _alpha_soft(g, mat):
+    """The share of a material's base-colour texture that is neither clear nor
+    solid (alpha 0.1-0.9): 1.0 is see-through all over, near 0 a cut-out
+    pattern. None when there is no texture with alpha to read."""
+    t = mat.get("pbrMetallicRoughness", {}).get("baseColorTexture")
+    if not t:
+        return None
+    try:
+        tex = g.j["textures"][t["index"]]
+        src = tex.get("source", next((e.get("source") for e in (tex.get("extensions") or {}).values()
+                                      if isinstance(e, dict) and "source" in e), None))
+        img = g.j["images"][src]
+        bv = g.j["bufferViews"][img["bufferView"]]
+        data = g.bin[bv.get("byteOffset", 0): bv.get("byteOffset", 0) + bv["byteLength"]]
+        from PIL import Image
+        im = Image.open(io.BytesIO(data))
+        if im.mode not in ("RGBA", "LA", "PA") and "transparency" not in im.info:
+            return None
+        im.thumbnail((256, 256))
+        a = np.asarray(im.convert("RGBA"))[:, :, 3].astype(np.float32) / 255
+        return float(np.mean((a >= 0.1) & (a <= 0.9)))
+    except Exception:
+        return None
 
 
 def is_clear_glass(mat):
@@ -1351,12 +1378,14 @@ def finish(src, spec, out, base_dir="."):
         Mf[1, 3] -= dy
         Mf[2, 3] -= dz
         front = [float(v) for v in Mf.T.ravel()]
-        # exhaust: from where the front pipe hands over to 10 cm inside the tail
+        # exhaust: from where the front pipe hands over to 30 cm inside the tail:
+        # under the floor, seen from below, never a second tailpipe beside the
+        # model's own (the 2025 M5's four dark tips had a silver fifth)
         tail_o = (float(min(lo[:, 2])) - zmid) * s
         z1 = sl * (F["exhaust_front_z"] - F["front_axle_z"]) + zf_o
         if rear_engine:                      # the pipe hands over ahead of the engine, turned round
             z1 = float(Mf[2, 2] * F["exhaust_front_z"] + Mf[2, 3])
-        z2 = tail_o + 0.10
+        z2 = tail_o + EXHAUST_INSIDE
         az = (z1 - z2) / (F["exhaust_front_z"] - F["exhaust_tail_z"])
         A = np.array([sx, sy, az])
         exhaust = mat4(A, np.array([0.0, -sy * F["ground_y"], z1 - az * F["exhaust_front_z"]]))
@@ -1478,6 +1507,30 @@ def finish(src, spec, out, base_dir="."):
             m.pop("extensions")
         cleared.append(m.get("name"))
     log["glass_cleared"] = cleared
+
+    # ── blended, yet solid: a cut-out instead ──
+    # A material at full alpha marked BLEND (the 2025 M5's cabin, its
+    # steering wheel with it) blends with whatever is behind: the dash screen
+    # showed through the wheel's rim. When its texture's alpha is mostly on
+    # or off (a cut-out pattern: perforation, stitching, a grille's holes),
+    # MASK draws it solid with its holes. One soft all over is see-through
+    # by design (the 2001 Yaris's gauge cover) and stays; so do glass, lamp
+    # lenses and anything named as a shadow or decal.
+    masked = []
+    for i, m in enumerate(mats):
+        if m.get("alphaMode") != "BLEND" or i in glass or is_clear_glass(m):
+            continue
+        c = m.get("pbrMetallicRoughness", {}).get("baseColorFactor", [1, 1, 1, 1])
+        if c[3] < 0.99 or re.search(r"glass|window|windscreen|lamp|light|lens|refl|indic|shadow|decal|\bao\b|dirt|grime"
+                                    r"|smoke|^detail-", m.get("name", ""), re.I):
+            continue
+        soft = _alpha_soft(g, m)
+        if soft is not None and soft >= 0.5:
+            continue
+        m["alphaMode"], m["alphaCutoff"] = "MASK", 0.1     # low: a soft edge stays, as blended it showed
+        masked.append(m.get("name"))
+    if masked:
+        log["blend_to_mask"] = masked
 
     # ── animation clips ──
     tin = g.add_accessor(np.array([0.0, 1.0]), minmax=True)

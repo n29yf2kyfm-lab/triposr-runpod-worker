@@ -649,7 +649,7 @@ function onCar(gltf) {
   rampSetup();
   redraw();
   // ?debug: the page's state for a test to read
-  if (new URLSearchParams(location.search).has('debug')) window.__car = { THREE, S, B, ST, LAB, RUN, RAMP, camera, renderer, scene };
+  if (new URLSearchParams(location.search).has('debug')) window.__car = { THREE, S, B, ST, LAB, RUN, RAMP, camera, controls, renderer, scene };
 }
 
 function setOpen(id, open) {
