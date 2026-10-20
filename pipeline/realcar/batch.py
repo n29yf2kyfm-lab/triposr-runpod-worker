@@ -492,6 +492,8 @@ def one(target, item, args, out):
                       + "igged, glass cleared and engine bay fitted by the ExpertCarCheck GLB machine."}
     if getattr(args, "paint", None):
         spec["paint"] = list(args.paint)
+    if getattr(args, "drive", None):
+        spec["drive"] = args.drive
     # a van opens at the back as two barn doors (finish.py)
     if str(item.get("bodyStyle") or "").lower() == "van" or (st or {}).get("body") == "van":
         spec["body_family"] = "van"
@@ -534,7 +536,7 @@ def one(target, item, args, out):
     tm["finish"] = round(time.time() - t0, 1)
     rec["finish"] = {k: flog.get(k) for k in ("opens", "missing", "layout", "bonnet", "tailgate", "door_trims", "rescale",
                                               "glass_cleared", "measured", "bay_cleared_m2", "engine_pack", "cabin_pack", "paint_set",
-                                              "manual", "wheel_strays", "wheel_tyres_from_body")}
+                                              "manual", "wheel_strays", "wheel_tyres_from_body", "right_hand_drive")}
     # validator, web copy and check sheet at the same time: the sheet is drawn
     # from the finished file, so it need not wait for the compression
     web = os.path.join(d, "web.glb")

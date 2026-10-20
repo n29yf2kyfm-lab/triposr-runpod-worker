@@ -310,6 +310,12 @@ def write(report, out):
     if st:
         notes.append(f"A stand-in: the catalogue has no {st.get('car')}, so “{st.get('donor_source') or st.get('donor')}” "
                      "was reshaped to its size.")
+    rhd = fin.get("right_hand_drive") or {}
+    if rhd.get("done"):
+        notes.append("Right-hand drive: the model is left-hand drive, so its cabin is mirrored and the steering wheel "
+                     f"moved across ({rhd['wheel_moved_m']:.2f} m), its badge the right way round.")
+    elif rhd:
+        notes.append(f"Right-hand drive asked for, not made: {rhd.get('why')}.")
     if report.get("noncommercial_left_out"):
         notes.append("A closer model exists under a non-commercial licence; it was left out because this car may be sold.")
     if closed:

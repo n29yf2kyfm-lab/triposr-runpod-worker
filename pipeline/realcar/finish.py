@@ -504,6 +504,99 @@ def wheel_strays(recs, mats, log):
     return moved
 
 
+def right_hand_drive(recs, mats, log, ground, xc):
+    """A left-hand-drive model made right-hand drive (a UK car): the cabin
+    mirrored across the car's centre plane, its steering wheel carried across
+    whole (not mirrored, so its badge and buttons read the right way round).
+
+    The cabin: every island (welded triangles) of the rig's cabin part or the
+    body that lies wholly inside the cabin: within the door lines, under the
+    roof, behind the dash (the front of the cabin part). The outer shell,
+    doors, wheels and the engine bay stay. The driver's side is the one with
+    the dense pieces of a steering wheel and its column in the metre behind
+    the dash at hand height; a model already right-hand drive, or one whose
+    wheel is not found, is left as it is (the log says which)."""
+    cand = [(k, r) for k, r in enumerate(recs) if "tri_part" in r]
+    rows = [(k, np.nonzero(np.isin(r["tri_part"], ("cabin", "body")))[0]) for k, r in cand]
+    rows = [(k, ix) for k, ix in rows if len(ix)]
+    if not rows:
+        log["right_hand_drive"] = {"done": False, "why": "no cabin"}
+        return
+    T = np.vstack([recs[k]["P"][recs[k]["I"][ix]] for k, ix in rows])
+    own = np.concatenate([np.full(len(ix), k) for k, ix in rows])
+    row = np.concatenate([ix for _, ix in rows])
+    cab = np.concatenate([np.full(len(ix), recs[k]["rig"] == "cabin") for k, ix in rows])   # the rigger's cabin (the finisher files it as body)
+    lab, _ = islands(T)
+    nl = lab.max() + 1
+    flat, lab3 = T.reshape(-1, 3), np.repeat(lab, 3)
+    lo, hi = np.full((nl, 3), np.inf), np.full((nl, 3), -np.inf)
+    for a in range(3):
+        np.minimum.at(lo[:, a], lab3, flat[:, a])
+        np.maximum.at(hi[:, a], lab3, flat[:, a])
+    body_half = float(np.abs(T[:, :, 0] - xc).max())
+    roof = float(T[:, :, 1].max())
+    if not cab.any():
+        log["right_hand_drive"] = {"done": False, "why": "the rig found no cabin"}
+        return
+    # the front of the cabin part (its bulkhead: the pedals hang just behind
+    # it, the 2025 M5's 25 cm forward of most of the dash)
+    z_dash = float(np.percentile(T[cab][:, :, 2], 99.9))
+    z_back = float(T[cab][:, :, 2].min())
+    inside = ((np.maximum(np.abs(lo[:, 0] - xc), np.abs(hi[:, 0] - xc)) < body_half - 0.10)
+              & (lo[:, 1] > ground + 0.10) & (hi[:, 1] < roof - 0.03)
+              & (hi[:, 2] < z_dash + 0.05) & (lo[:, 2] > z_back - 0.05))
+    # the driver's side: the steering wheel and its column, at hand height in the metre behind the dash
+    c = (lo + hi) / 2
+    xd = 0.37 * body_half / 0.99
+    win = inside & (c[:, 1] > ground + 0.60) & (c[:, 1] < ground + 1.05) & (c[:, 2] > z_dash - 1.0)
+    ntri = np.bincount(lab, minlength=nl)
+    side_n = {sd: int(ntri[win & (np.abs(c[:, 0] - xc - sd * xd) < 0.18)].sum()) for sd in (1, -1)}
+    drv = 1 if side_n[1] > side_n[-1] else -1
+    if side_n[drv] < 500 or side_n[drv] < 2 * side_n[-drv]:
+        log["right_hand_drive"] = {"done": False, "why": "the steering wheel's side is not clear", "triangles": side_n}
+        return
+    if drv == -1:
+        log["right_hand_drive"] = {"done": False, "why": "the model is right-hand drive already"}
+        return
+    # the wheel: rim-sized pieces on the driver's side (one dimension 20-45 cm,
+    # another under 20); its centre, then every piece within 24 cm of it moves whole
+    s3 = hi - lo
+    rim = win & (np.abs(c[:, 0] - xc - xd) < 0.18) & (s3.max(1) > 0.2) & (s3.max(1) < 0.45) & (s3.min(1) < 0.2)
+    if not rim.any():
+        log["right_hand_drive"] = {"done": False, "why": "no steering wheel rim found"}
+        return
+    wc = (c[rim] * ntri[rim, None]).sum(0) / ntri[rim].sum()
+    # across, the middle of the rim's own span: the wheel is symmetric about it, so
+    # the pieces carried across line up with those mirrored (the column under it)
+    wc[0] = (lo[rim, 0].min() + hi[rim, 0].max()) / 2
+    wheel = inside & (np.linalg.norm(np.maximum(np.abs(lo - wc), np.abs(hi - wc)), axis=1) < 0.24)
+    move = inside & ~wheel
+    dx = 2 * (wc[0] - xc)
+    n_m = n_w = 0
+    for k in np.unique(own):
+        r = recs[k]
+        sel = own == k
+        tm, tw = row[sel & move[lab]], row[sel & wheel[lab]]
+        if len(tm):
+            v = np.unique(r["I"][tm])
+            r["P"] = r["P"].copy()
+            r["P"][v, 0] = 2 * xc - r["P"][v, 0]
+            mv = r.get("mirror_v", np.zeros(len(r["P"]), bool))
+            mv[v] = True
+            r["mirror_v"] = mv
+            r["I"] = r["I"].copy()
+            r["I"][tm] = r["I"][tm][:, [0, 2, 1]]          # a mirror turns a triangle over: wound back
+            n_m += len(tm)
+        if len(tw):
+            v = np.unique(r["I"][tw])
+            r["P"] = r["P"].copy()
+            r["P"][v, 0] -= dx
+            n_w += len(tw)
+    log["right_hand_drive"] = {"done": True, "from": "left-hand drive", "cabin_triangles_mirrored": n_m,
+                               "wheel_triangles_moved": n_w, "wheel_centre": [round(float(x), 3) for x in wc],
+                               "wheel_moved_m": round(float(dx), 3)}
+
+
 def finish(src, spec, out, base_dir="."):
     log = {"src": os.path.basename(src)}
     # parts a person set by hand in the Studio stand as they are: no search,
@@ -1191,6 +1284,11 @@ def finish(src, spec, out, base_dir="."):
                     r["tri_part"] = np.where(on, np.where(cx_ > xm, "door_bl", "door_br"), r["tri_part"])
             log["barn_doors"] = {"split_x": round(float(xm), 3), "why": "a van: the back opens as two doors"}
 
+    # ── right-hand drive asked for (a UK car) from a left-hand-drive model ──
+    if spec.get("drive") == "right":
+        xc = float(np.mean([r["P"][np.unique(r["I"]), 0].mean() for r in recs if r["rig"].startswith("wheel_")]))
+        right_hand_drive(recs, mats, log, ground, xc)        # xc: the car's centre plane, between its wheels
+
     # ── rebuild meshes, one per part, primitives kept per source material ──
     by_part = {}
     for r in recs:
@@ -1216,6 +1314,11 @@ def finish(src, spec, out, base_dir="."):
                     t3 = A[:, :3] @ Rm.T
                     t3 /= np.maximum(np.linalg.norm(t3, axis=1, keepdims=True), 1e-12)
                     A = np.c_[t3, A[:, 3:4] * np.sign(np.linalg.det(Rm))]
+                if an in ("NORMAL", "TANGENT") and "mirror_v" in r:
+                    mv = r["mirror_v"][uniq]          # mirrored across the car (right_hand_drive): x turns, and the tangent's hand
+                    A[mv, 0] *= -1
+                    if an == "TANGENT":
+                        A[mv, 3] *= -1
                 if an.startswith("JOINTS") or an.startswith("WEIGHTS"):
                     continue
                 attrs[an] = g.add_accessor(A, target=34962)

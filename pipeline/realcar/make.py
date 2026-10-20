@@ -116,6 +116,12 @@ def parse(text):
     if m:
         want["doors"] = int(m.group(1))
         t = t[:m.start()] + " " + t[m.end():]
+    # the steering wheel's side: "RHD", "right hand drive" (a UK car from a
+    # left-hand-drive model: finish.right_hand_drive)
+    m = re.search(r"\b(?:rhd|right[\s-]?hand[\s-]?drive)\b", t)
+    if m:
+        want["drive"] = "right"
+        t = t[:m.start()] + " " + t[m.end():]
     # the wheels' colour ("black wheels", "gloss black alloys"): read first,
     # so its colour is not taken for the paint; the page starts the rims in it
     names = "|".join(re.escape(c) for c in COLOURS)
@@ -815,6 +821,7 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
         except Exception:
             nc_best = None
     args.paint = COLOURS.get(want.get("colour"))
+    args.drive = want.get("drive")                       # "right": a left-hand-drive model's cabin turned round
     # the doors asked for decide the body the rigger cuts: "2 door" / "3 door"
     # is a three-door hatch or a coupe (one door each side), "4/5 door" not
     if want.get("doors"):
