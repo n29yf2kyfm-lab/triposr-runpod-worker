@@ -116,6 +116,14 @@ def parse(text):
     if m:
         want["doors"] = int(m.group(1))
         t = t[:m.start()] + " " + t[m.end():]
+    # the wheels' colour ("black wheels", "gloss black alloys"): read first,
+    # so its colour is not taken for the paint; the page starts the rims in it
+    names = "|".join(re.escape(c) for c in COLOURS)
+    m = re.search(rf"\b(?:(matte?|gloss|satin)\s+)?({names})\s+(?:wheels?|alloys?|rims?)\b", t)
+    if m:
+        want["wheels"] = {"colour": m.group(2), "srgb": list(COLOURS[m.group(2)]),
+                          "finish": "matt" if (m.group(1) or "").startswith("matt") else m.group(1) or "gloss"}
+        t = t[:m.start()] + " " + t[m.end():]
     # a paint finish ("matt grey", BMW's "Frozen"): the page starts the body
     # in it (the Finish Lab's), the colour as asked
     m = re.search(r"\b(matte?|frozen|satin)\b", t)

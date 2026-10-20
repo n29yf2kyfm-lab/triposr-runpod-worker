@@ -1986,9 +1986,9 @@ $('lookWheel').addEventListener('click', () => {
 function labRestore() {
   const saved = store.get(CAR.key);
   if (saved) for (const [t, v] of Object.entries(saved)) if (v && FINISHES[v.finish] && LAB.mats[t]) applyFinish(t, v.finish, v.hex);
-  // the finish the request asked for ("matt grey"): the body starts in it, until the viewer chooses another
-  const f = CAR.finish;
-  if (!(saved && saved.body) && f && FINISHES[f.finish] && LAB.mats.body.length) applyFinish('body', f.finish, f.hex, true);
+  // what the request asked for ("matt grey", "gloss black wheels"): those parts start in it, until the viewer chooses another
+  for (const [t, f] of Object.entries(CAR.start || {}))
+    if (!(saved && saved[t]) && f && FINISHES[f.finish] && LAB.mats[t] && LAB.mats[t].length) applyFinish(t, f.finish, f.hex, true);
 }
 labUI();
 

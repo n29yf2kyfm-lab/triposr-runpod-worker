@@ -45,6 +45,20 @@ def _name(make, model):
     return f"{mk} {md}".strip()
 
 
+def start_finish(asked, finish, srgb):
+    """The Finish Lab state the page starts in, from the request: the body in
+    the finish asked ("matt grey"), the rims in the colour asked ("gloss
+    black wheels"). None when the request names neither."""
+    hx = lambda c: "#%02x%02x%02x" % tuple(c)  # noqa: E731
+    out = {}
+    if finish and srgb:
+        out["body"] = {"finish": finish, "hex": hx(srgb)}
+    w = asked.get("wheels") or {}
+    if w.get("srgb"):
+        out["wheels"] = {"finish": w.get("finish") or "gloss", "hex": hx(w["srgb"])}
+    return out or None
+
+
 def lab_parts(j, paint_names):
     """The Finish Lab's parts, by material name: the rims (in the wheel
     groups, or by name where a model keeps them on the body), the calipers,
@@ -307,7 +321,7 @@ def write(report, out):
            "lab": lab_parts(j, paint_names), "key": "car-" + re.sub(r"[^a-z0-9-]", "", str(report.get("asset") or "x").lower()),
            "catalogue": cat, "procedures": procedures(cat, opens, rear),
            "engine": {"lid": "tailgate" if rear else "bonnet"},
-           "finish": {"finish": finish, "hex": "#%02x%02x%02x" % tuple(srgb)} if finish else None,
+           "start": start_finish(asked, finish, srgb),
            "credit": {"title": cr.get("title") or "", "author": cr.get("author"), "licence": cr.get("licence"),
                       "url": cr.get("url"), "commercial": bool(cr.get("commercial")),
                       "cabin": {"title": cab.get("from"), "author": cab.get("author"), "licence": cab.get("licence"),
