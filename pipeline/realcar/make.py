@@ -123,10 +123,12 @@ def parse(text):
 def in_words(name, text):
     """NAME (normalised) is the request's words, whole: one word or several
     side by side ("g class", "gclass"), or a word with digits after it
-    ("golf7"); never letters inside a word: "cla" is not in "G-Class"."""
+    ("golf7"); never letters inside a word: "cla" is not in "G-Class". A
+    short name with digits after it is another model, not a generation:
+    "iX4" is not the iX, "X5" not an X."""
     w = [norm(x) for x in re.split(r"[\s\-_/.,]+", text or "") if norm(x)]
     joins = {"".join(w[a:b]) for a in range(len(w)) for b in range(a + 1, len(w) + 1)}
-    return name in joins or any(j.startswith(name) and j[len(name):].isdigit() for j in joins)
+    return name in joins or (len(name) >= 3 and any(j.startswith(name) and j[len(name):].isdigit() for j in joins))
 
 
 def find(want, cat, skip=()):

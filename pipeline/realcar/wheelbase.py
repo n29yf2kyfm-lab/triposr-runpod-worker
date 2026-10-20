@@ -336,7 +336,8 @@ def choose(boxes, year, ratio=None, doors=None):
         on.sort(key=lambda b: -(b["years"] or (0, 0))[0])
     if not on:
         return {"wheelbase": None, "why": f"no generation on sale in {year} among {len(boxes)} in the table"}
-    return dict(on[0], source=f"en.wikipedia: {on[0]['page']}", candidates=len(boxes))
+    # a size added by hand to the local table names where it came from
+    return dict(on[0], source=on[0].get("source") or f"en.wikipedia: {on[0]['page']}", candidates=len(boxes))
 
 
 def few_doors(make, model, year=None):
