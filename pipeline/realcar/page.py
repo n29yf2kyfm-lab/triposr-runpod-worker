@@ -73,6 +73,140 @@ def lab_parts(j, paint_names):
     return {"wheels": wheels, "calipers": calipers, "body": body}
 
 
+# ── parts catalogue and procedures (the page's Parts & procedures panel) ──
+PART_LABEL = {
+    "body": "Body shell", "bonnet": "Bonnet", "tailgate": "Tailgate", "door_fl": "Front left door", "door_fr": "Front right door",
+    "door_rl": "Rear left door", "door_rr": "Rear right door", "door_bl": "Back door, left", "door_br": "Back door, right",
+    "wheel_fl": "Front left wheel", "wheel_fr": "Front right wheel", "wheel_rl": "Rear left wheel", "wheel_rr": "Rear right wheel",
+    "engine_bay": "Engine bay", "rear_running_gear": "Under the back", "exhaust": "Exhaust system", "cabin": "Cabin",
+    "bay_front_wall": "Bay wall",
+    # the workshop's engine pack, by its node names
+    "bay:engine-bay-structure": "Bay structure and inner wings", "bay:battery-assembly": "Battery",
+    "bay:battery-negative-earth-lead": "Battery earth lead", "bay:radiator-condenser-cooling-pack": "Radiator and cooling pack",
+    "bay:radiator-upper-hose": "Radiator top hose", "bay:radiator-lower-hose": "Radiator bottom hose",
+    "bay:radiator-upper-engine-hose-clamp": "Top hose clamp, engine end", "bay:radiator-upper-radiator-hose-clamp": "Top hose clamp, radiator end",
+    "bay:radiator-lower-radiator-hose-clamp": "Bottom hose clamp, radiator end", "bay:radiator-lower-engine-hose-clamp": "Bottom hose clamp, engine end",
+    "bay:coolant-expansion-reservoir": "Coolant expansion tank", "bay:coolant-degas-hose": "Coolant degas hose",
+    "bay:gearbox-case": "Gearbox", "bay:bellhousing": "Bell housing", "bay:mechatronic-cover": "Gearbox control unit cover",
+    "bay:transmission-oil-filter": "Transmission oil filter", "bay:transmission-oil-cooler": "Transmission oil cooler",
+    "bay:integrated-front-differential": "Front differential", "bay:cv-output-left": "Driveshaft output, left",
+    "bay:cv-output-right": "Driveshaft output, right", "bay:blk": "Engine block", "bay:sump": "Oil sump", "bay:head": "Cylinder head",
+    "bay:cam_cover": "Cam cover", "bay:timing_cover": "Timing cover", "bay:coolant_pump": "Coolant pump", "bay:dgea_coils": "Ignition coils",
+    "bay:dgea_filler": "Oil filler cap", "bay:dgea_intake": "Intake manifold", "bay:dgea_airbox": "Air filter box",
+    "bay:dgea_chargepipe": "Charge pipe", "bay:dgea_turbo": "Turbocharger", "bay:dgea_mount": "Engine mount",
+    "bay:dgea_pulley": "Crank pulley and belt", "bay:dgea_thermo": "Thermostat housing", "bay:dgea_oilfilter": "Oil filter",
+    "bay:dgea_epump": "Electric coolant pump", "bay:dgea_loom": "Engine wiring loom", "bay:exhaust_front": "Front exhaust pipe",
+    "bay:subframe_f": "Front subframe", "bay:arb_f": "Front anti-roll bar", "bay:fuel_tank": "Fuel tank", "bay:susp_rear": "Rear suspension",
+}
+SIDE = {"fl": "front left", "fr": "front right", "rl": "rear left", "rr": "rear right"}
+CORNER_PART = {"knuckle": "hub carrier", "strut": "strut", "droplink": "anti-roll bar drop link", "tre": "track rod end",
+               "bj": "ball joint", "arm": "lower arm", "ds": "driveshaft"}
+
+
+def part_label(name):
+    """A part's name for people: the dictionary, else the node name cleaned
+    up ("bay:dgea_airbox" -> "Air filter box"; "bay:knuckle_fl" -> "Hub
+    carrier, front left")."""
+    if name in PART_LABEL:
+        return PART_LABEL[name]
+    n = re.sub(r"^bay:", "", name)
+    m = re.fullmatch(r"([a-z]+)_([fr][lr])", n)
+    if m and m.group(1) in CORNER_PART:
+        return f"{CORNER_PART[m.group(1)].capitalize()}, {SIDE[m.group(2)]}"
+    n = re.sub(r"^dgea_", "", n).replace("_", " ").replace("-", " ").strip()
+    return n[:1].upper() + n[1:]
+
+
+def catalogue(j):
+    """The car's parts as the page lists them: groups of items, each item a
+    node of the file (its name is how the page finds it), numbered through
+    the whole list, as a parts catalogue numbers its callouts."""
+    nodes = j.get("nodes") or []
+    root = nodes[j["scenes"][j.get("scene", 0)]["nodes"][0]]
+    top = {nodes[c].get("name") or "": c for c in root.get("children", [])}
+
+    def kids(name):
+        i = top.get(name)
+        return [nodes[c].get("name") for c in (nodes[i].get("children") or [])] if i is not None else []
+    groups = []
+
+    def group(title, names, drill=None):
+        items = [{"id": n, "label": part_label(n)} for n in names if n]
+        if items:
+            groups.append({"title": title, "drill": drill, "items": items})
+    body = [n for n in ("body", "bonnet", "door_fl", "door_fr", "door_rl", "door_rr", "door_bl", "door_br", "tailgate")
+            if n in top or n + "_hinge" in top]
+    group("Body and openings", body)
+    group("Wheels", [n for n in ("wheel_fl", "wheel_fr", "wheel_rl", "wheel_rr") if n in top])
+    bay = [n for n in kids("engine_bay") if not str(n).startswith("bay:engine-bay-structure")]
+    group("Engine bay", bay, drill="engine_bay")
+    under = kids("rear_running_gear") + (["exhaust"] if "exhaust" in top else [])
+    group("Under the car", under, drill="rear_running_gear")
+    if "cabin" in top:
+        group("Cabin", ["cabin"])
+    k = 0
+    for g in groups:
+        for it in g["items"]:
+            k += 1
+            it["n"] = k
+    return groups
+
+
+def procedures(cat, opens, rear_engine=False):
+    """Step-by-step checks over the car, as a maintenance manual walks a
+    procedure: each step says what to look at, which parts to open and
+    highlight, and where the camera goes. Only steps whose parts this car
+    has are kept."""
+    have = {it["id"] for g in cat for it in g["items"]}
+    opens = set(opens or [])
+
+    def step(text, view, parts=(), open_=(), note=None):
+        parts = [p for p in parts if p in have]
+        open_ = [p for p in open_ if p in opens]
+        return {"text": text, "view": view, "parts": parts, "open": open_, **({"note": note} if note else {})}
+    walk = [
+        step("Front: bonnet shut line even both sides, lamps clear and matching, bumper paint matching the wings.", "front",
+             ["bonnet"]),
+        step("Front left corner: tyre tread and wear across the width, wheel for kerbing, arch for rust.", "wheel:fl", ["wheel_fl"]),
+        step("Left side: door gaps even, paint matching panel to panel, sills straight. Look along the side for ripples.", "nearside",
+             ["door_fl", "door_rl"]),
+        step("Rear left corner: tyre and wheel as at the front; the arch lip.", "wheel:rl", ["wheel_rl"]),
+        step("Rear: tailgate shut lines, lamps, bumper. A boot that does not close flush has been hit.", "rear", ["tailgate"]),
+        step("Rear right corner.", "wheel:rr", ["wheel_rr"]),
+        step("Right side: the same as the left, and the fuel filler area.", "offside", ["door_fr", "door_rr"]),
+        step("Front right corner.", "wheel:fr", ["wheel_fr"]),
+    ]
+    lid = "tailgate" if rear_engine else "bonnet"
+    bay = [
+        step("Open the lid. Look for fresh paint on the slam panel and bolt heads: a sign of front-end repair.", "bay", [lid], [lid]),
+        step("Battery: terminals clean, clamp tight, no white deposits.", "part", ["bay:battery-assembly"], [lid]),
+        step("Coolant tank: level between the marks, no oil film on the coolant.", "part", ["bay:coolant-expansion-reservoir"], [lid]),
+        step("Radiator and hoses: hoses firm, clamps dry, radiator fins straight.", "part",
+             ["bay:radiator-condenser-cooling-pack", "bay:radiator-upper-hose", "bay:radiator-lower-hose"], [lid]),
+        step("Oil filler and cam cover: no mayonnaise under the cap, no oil weeping from the cover gasket.", "part",
+             ["bay:dgea_filler", "bay:cam_cover"], [lid]),
+        step("Air box and intake: clips in place, no split ducting.", "part", ["bay:dgea_airbox", "bay:dgea_intake"], [lid]),
+        step("Belt and pulley: belt not glazed or cracked.", "part", ["bay:dgea_pulley"], [lid]),
+        step("Engine mount and wiring loom: mount rubber whole, loom tidy and clipped.", "part", ["bay:dgea_mount", "bay:dgea_loom"], [lid]),
+    ]
+    doors = [step(f"Open the {part_label(d).lower()}: hinges and check strap, door card fit, window operation.",
+                  "door:" + d[-2:], [d], [d]) for d in ("door_fl", "door_fr", "door_rl", "door_rr") if d in opens]
+    doors.append(step("Cabin: seat bolsters, steering wheel wear against the mileage, warning lights at ignition.", "cabin",
+                      ["cabin"], [d for d in ("door_fl",) if d in opens]))
+    under = [
+        step("Open the tailgate: boot floor and spare wheel well dry, no ripples in the floor.", "boot", ["tailgate"], ["tailgate"]),
+        step("Turn the car over: fuel tank straps, rear suspension bushes, exhaust hangers and corrosion.", "under",
+             ["bay:fuel_tank", "bay:susp_rear", "exhaust"]),
+    ]
+    out = []
+    for title, steps in (("Walk-round inspection", walk), ("Under the bonnet" if not rear_engine else "Under the engine lid", bay),
+                         ("Doors and cabin", doors), ("Boot and underside", under)):
+        steps = [st for st in steps if st["parts"] or st["view"] in ("front", "rear", "nearside", "offside")]
+        if len(steps) >= 2:
+            out.append({"title": title, "steps": steps})
+    return out
+
+
 def write(report, out):
     """REPORT: make.build's. Writes the page into OUT; returns its files."""
     t0 = time.time()
@@ -163,10 +297,12 @@ def write(report, out):
     sheet = (report.get("files") or {}).get("sheet")
     if sheet and os.path.exists(sheet):
         shutil.copyfile(sheet, os.path.join(out, "views.jpg"))
+    cat = catalogue(j)
     cfg = {"title": title, "eyebrow": "ExpertCarCheck GLB machine · built " + time.strftime("%-d %b %Y"),
            "sub": f"{name}" + (f", {colour}" if colour else "") + ".", "swatch": f"rgb({srgb[0]}, {srgb[1]}, {srgb[2]})" if srgb else None,
            "facts": facts, "notes": notes, "parts": parts, "files": files, "sheet": bool(sheet and os.path.exists(sheet)),
            "lab": lab_parts(j, paint_names), "key": "car-" + re.sub(r"[^a-z0-9-]", "", str(report.get("asset") or "x").lower()),
+           "catalogue": cat, "procedures": procedures(cat, opens, rear),
            "credit": {"title": cr.get("title") or "", "author": cr.get("author"), "licence": cr.get("licence"),
                       "url": cr.get("url"), "commercial": bool(cr.get("commercial")),
                       "cabin": {"title": cab.get("from"), "author": cab.get("author"), "licence": cab.get("licence"),

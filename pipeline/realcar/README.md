@@ -135,6 +135,25 @@ It is filled in from the build's report:
 
 The GLB travels as base64 JSON parts of 15 MB at most, so the folder can be published where only data files are served. A request for a model rigged before took 4.5 s from asking to a finished page.
 
+## The parts bench: catalogue, callouts, explode, cut-away, procedures
+
+Every car page carries a parts bench beside the 3D view, the kind of thing a
+3D technical-documentation suite sells (an interactive parts catalogue and
+animated procedures), built here from scratch for a car:
+
+| Bench | What it does |
+| --- | --- |
+| Parts list | Every named part of the file, numbered and grouped: body and openings, wheels, the engine bay's 54 parts by name (battery, radiator top hose, turbocharger ...), under the car, the cabin. A click in the list picks the part on the car; a click on the car picks it in the list; shift adds to the pick. ◎ looks at it. |
+| Callouts | Numbered labels over the car, each on a leader to its part, as a parts drawing numbers them. They follow the car as it turns. Focus a group (Engine bay) and the callouts are its parts. A callout is a button. |
+| X-ray, Isolate | X-ray ghosts everything but the pick (12% grey); Isolate hides everything else. |
+| Explode | A slider moves the focused level's parts apart, each its own way: doors out sideways, lids up and away, wheels out, the engine up out of the bay; inside the bay, each part away from the bay's middle. |
+| Cut away | A plane slides through the car across, along or by height (the renderer's clipping plane), a dynamic cross-section. |
+| Measure | Two clicks on the car give the distance between them in mm. |
+| Procedures | Step-by-step checks over the car, each step opening the parts it needs, picking the ones to look at, and moving the camera: the walk-round inspection (8 steps), under the bonnet (8), doors and cabin, boot and underside (the car turned over). Prev, Next, Play (6 s a step), a scrub bar, arrow keys, the step's text over the view. `page.py` writes the steps for each car from the parts it has. |
+| Report | ⚑ flags a part; the Report tab lists the flagged parts with room for a note each and a copy button, kept in the browser for that car. The print view is the list and the report. |
+
+None of it is the other suite's code or assets: it is our viewer (three.js) reading the parts our own rigger and finisher named.
+
 ## One request, one page: `glbmachine car` and `/car`
 
 `glbmachine car Peugeot 307 2001 blue` builds the car, writes its page, and prints one short JSON answer. The answer holds:

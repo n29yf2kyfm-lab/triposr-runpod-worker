@@ -1,10 +1,11 @@
+<meta charset="utf-8">
 <title>{{TITLE}}</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: a build sheet. The car fills a wide stage, the part switches sit under it, the facts and licence follow. */
+/* Layout: a build sheet. The car fills a wide stage with the parts bench beside it, the facts and licence follow. */
 :root {
   --bg: #eceef0;
   --surface: #f8f9fa;
@@ -12,8 +13,9 @@
   --fg: #16181b;
   --muted: #595f66;
   --line: #cfd4d9;
-  --accent: #1f4f86;          /* only for parts that are open */
+  --accent: #1f4f86;          /* only for parts that are open or picked */
   --accent-fg: #ffffff;
+  --flag: #b4420f;
   --display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
   --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -21,12 +23,12 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #111315; --surface: #1a1d20; --stage: #1f2327; --fg: #e8ebee; --muted: #9aa1a9;
-    --line: #2d3237; --accent: #86a4f2; --accent-fg: #0d1222; color-scheme: dark;
+    --line: #2d3237; --accent: #86a4f2; --accent-fg: #0d1222; --flag: #f0905a; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #111315; --surface: #1a1d20; --stage: #1f2327; --fg: #e8ebee; --muted: #9aa1a9;
-  --line: #2d3237; --accent: #86a4f2; --accent-fg: #0d1222; color-scheme: dark;
+  --line: #2d3237; --accent: #86a4f2; --accent-fg: #0d1222; --flag: #f0905a; color-scheme: dark;
 }
 * { box-sizing: border-box; }
 body {
@@ -35,7 +37,7 @@ body {
   padding-right: max(16px, env(safe-area-inset-right, 0px));
   padding-block: 20px 40px;
 }
-.wrap { max-width: 1120px; margin: 0 auto; display: grid; gap: 20px; }
+.wrap { max-width: 1240px; margin: 0 auto; display: grid; gap: 20px; }
 header { display: grid; gap: 4px; }
 .eyebrow { font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 h1 { font: 700 clamp(34px, 6vw, 56px)/1 var(--display); letter-spacing: .01em; margin: 4px 0 0; text-wrap: balance; }
@@ -43,7 +45,11 @@ h1 { font: 700 clamp(34px, 6vw, 56px)/1 var(--display); letter-spacing: .01em; m
 .swatch { display: inline-block; width: .9em; height: .9em; border-radius: 2px; background: transparent;
   vertical-align: -0.1em; margin-right: .35em; box-shadow: inset 0 0 0 1px rgba(255,255,255,.18); }
 
-.stage { position: relative; width: 100%; aspect-ratio: 16 / 9; max-height: 72vh; max-width: 100%;
+/* the bench: the stage and its tools on the left, the parts and procedures beside them */
+.bench { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 1000px) { .bench { grid-template-columns: minmax(0, 1fr) 372px; } .bench .side { position: sticky; top: 12px; } }
+.left { display: grid; gap: 12px; min-width: 0; }
+.stage { position: relative; width: 100%; aspect-ratio: 16 / 10; max-height: 72vh; max-width: 100%;
   background: var(--stage); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; touch-action: none; }
 @media (max-width: 640px) { .stage { aspect-ratio: 4 / 3.4; } }
 canvas#view { display: block; width: 100%; height: 100%; outline: none; }
@@ -52,15 +58,72 @@ canvas#view { display: block; width: 100%; height: 100%; outline: none; }
 .hint { position: absolute; top: 10px; right: 12px; font: 12px/1.3 var(--mono); color: var(--muted); pointer-events: none; }
 .fail { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; padding: 24px; gap: 6px; }
 .fail p { margin: 0; max-width: 46ch; }
+/* callouts: numbered labels over the car, each tied to its part by a leader, as a parts drawing numbers them */
+svg.callouts { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+svg.callouts line { stroke: var(--fg); stroke-width: 1; opacity: .55; }
+svg.callouts circle.dot { fill: var(--fg); opacity: .7; }
+svg.callouts g.co { pointer-events: auto; cursor: pointer; }
+svg.callouts g.co circle.tag { fill: var(--surface); stroke: var(--fg); stroke-width: 1; }
+svg.callouts g.co text { font: 600 11px var(--mono); fill: var(--fg); text-anchor: middle; dominant-baseline: central; }
+svg.callouts g.co.on circle.tag { fill: var(--accent); stroke: var(--accent); }
+svg.callouts g.co.on text { fill: var(--accent-fg); }
+svg.callouts g.co.flag circle.tag { stroke: var(--flag); stroke-width: 2; }
+.measure { position: absolute; transform: translate(-50%, -120%); font: 600 12px var(--mono); background: var(--surface);
+  border: 1px solid var(--line); border-radius: 3px; padding: 3px 6px; pointer-events: none; white-space: nowrap; }
+.stepbox { position: absolute; left: 12px; right: 12px; bottom: 12px; background: color-mix(in srgb, var(--surface) 92%, transparent);
+  border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; display: grid; gap: 4px; pointer-events: none; }
+.stepbox b { font: 600 12px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
+.stepbox p { margin: 0; font-size: 14px; }
 
-.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-.controls .sep { width: 1px; align-self: stretch; background: var(--line); margin: 0 4px; }
+.controls, .tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.controls .sep, .tools .sep { width: 1px; align-self: stretch; background: var(--line); margin: 0 4px; }
+.tools { font-size: 13px; color: var(--muted); }
+.tools label { display: inline-flex; gap: 6px; align-items: center; }
+.tools input[type=range] { width: 120px; accent-color: var(--accent); }
+.tools select { font: 500 13px var(--body); color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 6px 8px; min-height: 36px; }
+.tools button { min-height: 36px; padding: 8px 12px; font-size: 13px; }
 button { font: 500 14px/1 var(--body); color: var(--fg); background: var(--surface); border: 1px solid var(--line);
   border-radius: 4px; padding: 10px 14px; cursor: pointer; min-height: 40px; }
 button:hover { border-color: var(--muted); }
 button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 button[aria-pressed="true"] { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
 button:disabled { opacity: .45; cursor: default; }
+
+/* the side panel: parts, procedures, report */
+.side { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; display: grid; grid-template-rows: auto minmax(0, 1fr); max-height: 82vh; min-height: 320px; }
+.tabs { display: flex; border-bottom: 1px solid var(--line); }
+.tabs button { flex: 1; border: 0; border-radius: 0; background: transparent; min-height: 44px; font: 600 15px var(--display); letter-spacing: .02em; color: var(--muted); }
+.tabs button[aria-selected="true"] { color: var(--fg); box-shadow: inset 0 -2px 0 var(--accent); }
+.pane { overflow: auto; padding: 8px 0 12px; }
+.pane[hidden] { display: none; }
+.group { padding: 6px 12px 2px; display: flex; align-items: center; gap: 8px; }
+.group h3 { margin: 0; flex: 1; font: 600 12px/1.2 var(--mono); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.group button { min-height: 28px; padding: 4px 8px; font-size: 12px; }
+.row { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; align-items: center; gap: 6px; padding: 5px 8px 5px 12px; cursor: pointer; border-left: 3px solid transparent; }
+.row:hover { background: color-mix(in srgb, var(--fg) 5%, transparent); }
+.row[aria-selected="true"] { border-left-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.row .n { font: 600 11px var(--mono); color: var(--muted); text-align: right; padding-right: 2px; }
+.row .nm { font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.row .acts { display: inline-flex; gap: 2px; }
+.row .acts button { min-height: 26px; min-width: 26px; padding: 2px 6px; font-size: 12px; border-color: transparent; background: transparent; }
+.row .acts button:hover { border-color: var(--line); background: var(--surface); }
+.row .acts button.fl[aria-pressed="true"] { color: var(--flag); border-color: var(--flag); background: transparent; }
+.row.missing { opacity: .4; cursor: default; }
+.proc { padding: 6px 12px; display: grid; gap: 8px; }
+.proc select { width: 100%; font: 500 14px var(--body); color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 8px; }
+.proc .bar { display: flex; gap: 6px; align-items: center; }
+.proc .bar button { min-height: 36px; padding: 8px 12px; font-size: 13px; }
+.proc input[type=range] { width: 100%; accent-color: var(--accent); }
+ol.steps { margin: 0; padding: 0 0 0 26px; display: grid; gap: 2px; }
+ol.steps li { padding: 5px 8px 5px 4px; border-radius: 4px; cursor: pointer; font-size: 14px; }
+ol.steps li:hover { background: color-mix(in srgb, var(--fg) 5%, transparent); }
+ol.steps li[aria-current="step"] { background: color-mix(in srgb, var(--accent) 12%, transparent); box-shadow: inset 3px 0 0 var(--accent); }
+.report { padding: 6px 12px; display: grid; gap: 10px; }
+.report .item { display: grid; gap: 4px; }
+.report .item b { font-size: 14px; }
+.report textarea { width: 100%; min-height: 44px; font: 14px var(--body); color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 6px 8px; resize: vertical; }
+.report output { display: block; font: 13px/1.5 var(--mono); white-space: pre-wrap; background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 8px 10px; }
+.empty { color: var(--muted); font-size: 13px; padding: 4px 12px; }
 
 .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px; background: var(--line);
   border: 1px solid var(--line); border-radius: 6px; overflow: hidden; margin: 0; }
@@ -80,7 +143,8 @@ section h2 { font: 600 22px/1.1 var(--display); margin: 8px 0 10px; letter-spaci
 
 .lab { display: grid; gap: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 16px; }
 .lab h2 { font: 600 24px/1 var(--display); margin: 0; letter-spacing: .01em; }
-.lab .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.lab .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 0; border: 0; cursor: default; }
+.lab .row:hover { background: transparent; }
 .lab .lbl { font: 500 11px/1.2 var(--mono); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); min-width: 64px; }
 .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; flex-wrap: wrap; }
 .seg button { border: 0; border-radius: 0; min-height: 38px; }
@@ -93,30 +157,86 @@ section h2 { font: 600 22px/1.1 var(--display); margin: 8px 0 10px; letter-spaci
 .code { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .code output { font: 13px/1.4 var(--mono); background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 8px 10px; flex: 1 1 280px; min-width: 0; overflow-wrap: anywhere; }
 .lab .note { color: var(--muted); font-size: 13px; margin: 0; }
+@media print {
+  .stage, .controls, .tools, .lab, .tabs, .views { display: none !important; }
+  .bench { grid-template-columns: 1fr; } .side { max-height: none; border: 0; } .pane[hidden] { display: block; }
+}
 </style>
 
 <div class="wrap">
   <header>
     <span class="eyebrow" id="eyebrow"></span>
     <h1 id="carTitle"></h1>
-    <p class="sub"><span class="swatch" id="swatch" aria-hidden="true" hidden></span><span id="carSub"></span> Drag to spin, pinch or scroll to zoom.</p>
+    <p class="sub"><span class="swatch" id="swatch" aria-hidden="true" hidden></span><span id="carSub"></span> Drag to spin, pinch or scroll to zoom, click a part to pick it.</p>
   </header>
 
-  <div class="stage" id="stage">
-    <canvas id="view" aria-label="3D model of the car. Drag to turn it."></canvas>
-    <span class="hint" id="hint" hidden>drag · zoom</span>
-    <div class="status" id="status" role="status">Loading the car…</div>
-  </div>
+  <div class="bench">
+    <div class="left">
+      <div class="stage" id="stage">
+        <canvas id="view" aria-label="3D model of the car. Drag to turn it; click a part to pick it."></canvas>
+        <svg class="callouts" id="callouts" aria-hidden="true"></svg>
+        <div class="measure" id="measureLabel" hidden></div>
+        <div class="stepbox" id="stepBox" hidden><b id="stepN"></b><p id="stepText"></p></div>
+        <span class="hint" id="hint" hidden>drag · zoom · click a part</span>
+        <div class="status" id="status" role="status">Loading the car…</div>
+      </div>
 
-  <div class="controls" id="controls" aria-label="Open and close parts">
-    <button type="button" id="all" disabled>Open everything</button>
-    <span class="sep" aria-hidden="true"></span>
-    <span id="parts" style="display:contents"></span>
-    <span class="sep" aria-hidden="true"></span>
-    <button type="button" id="flip" disabled aria-pressed="false">Flip over</button>
-    <button type="button" id="reset" disabled>Reset view</button>
-  </div>
+      <div class="controls" id="controls" aria-label="Open and close parts">
+        <button type="button" id="all" disabled>Open everything</button>
+        <span class="sep" aria-hidden="true"></span>
+        <span id="parts" style="display:contents"></span>
+        <span class="sep" aria-hidden="true"></span>
+        <button type="button" id="flip" disabled aria-pressed="false">Flip over</button>
+        <button type="button" id="reset" disabled>Reset view</button>
+      </div>
 
+      <div class="tools" id="tools" aria-label="Viewing tools">
+        <label>Explode <input type="range" id="explode" min="0" max="100" value="0" disabled aria-label="Explode the parts apart"></label>
+        <span class="sep" aria-hidden="true"></span>
+        <button type="button" id="xray" aria-pressed="false" disabled>X-ray</button>
+        <button type="button" id="isolate" aria-pressed="false" disabled>Isolate</button>
+        <button type="button" id="calloutsBtn" aria-pressed="true" disabled>Callouts</button>
+        <span class="sep" aria-hidden="true"></span>
+        <label>Cut away
+          <select id="cutAxis" disabled aria-label="Cut-away direction"><option value="">off</option><option value="x">across</option><option value="z">along</option><option value="y">height</option></select>
+          <input type="range" id="cutAt" min="0" max="100" value="50" disabled aria-label="Where the cut is"></label>
+        <span class="sep" aria-hidden="true"></span>
+        <button type="button" id="measure" aria-pressed="false" disabled>Measure</button>
+        <button type="button" id="upLevel" hidden>Back to the whole car</button>
+        <button type="button" id="clearPick" hidden>Clear pick</button>
+      </div>
+    </div>
+
+    <aside class="side" id="side" aria-label="Parts and procedures">
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" id="tab-parts" aria-selected="true" aria-controls="pane-parts">Parts</button>
+        <button type="button" role="tab" id="tab-procs" aria-selected="false" aria-controls="pane-procs">Procedures</button>
+        <button type="button" role="tab" id="tab-report" aria-selected="false" aria-controls="pane-report">Report</button>
+      </div>
+      <div class="pane" id="pane-parts" role="tabpanel"></div>
+      <div class="pane" id="pane-procs" role="tabpanel" hidden>
+        <div class="proc">
+          <select id="procPick" aria-label="Procedure"></select>
+          <div class="bar">
+            <button type="button" id="procPrev">◀ Prev</button>
+            <button type="button" id="procPlay" aria-pressed="false">Play</button>
+            <button type="button" id="procNext">Next ▶</button>
+            <button type="button" id="procStop">Stop</button>
+          </div>
+          <input type="range" id="procScrub" min="0" max="0" value="0" aria-label="Step">
+          <ol class="steps" id="procSteps"></ol>
+        </div>
+      </div>
+      <div class="pane" id="pane-report" role="tabpanel" hidden>
+        <div class="report">
+          <p class="empty" id="reportEmpty">Flag a part in the list (⚑) and it appears here with room for a note.</p>
+          <div id="reportItems"></div>
+          <output id="reportText" hidden></output>
+          <div class="bar" style="display:flex;gap:6px"><button type="button" id="copyReport">Copy report</button><button type="button" id="clearReport">Clear</button></div>
+        </div>
+      </div>
+    </aside>
+  </div>
 
   <section class="lab" id="lab" aria-label="Finish Lab">
     <h2>Finish Lab</h2>
@@ -226,6 +346,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.05;
+renderer.localClippingEnabled = false;
 
 const scene = new THREE.Scene();
 const pmrem = new THREE.PMREMGenerator(renderer);
@@ -245,7 +366,7 @@ new MutationObserver(paintStage).observe(document.documentElement, { attributes:
 const camera = new THREE.PerspectiveCamera(32, 16 / 9, 0.05, 200);
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
-controls.minDistance = 2.2;
+controls.minDistance = 0.6;
 controls.maxDistance = 22;
 
 function fit() {
@@ -276,7 +397,7 @@ function shadowDisc(len, wid) {
   return m;
 }
 
-const S = { mixer: null, actions: {}, open: {}, pivot: null, flipTo: 0, home: null, shadow: null };
+const S = { mixer: null, actions: {}, open: {}, pivot: null, root: null, car: null, flipTo: 0, home: null, shadow: null, box: null, camTo: null };
 const clock = new THREE.Clock();
 
 const loader = new GLTFLoader();
@@ -335,6 +456,9 @@ function onCar(gltf) {
   S.pivot.position.copy(ctr);
   root.position.sub(ctr);
   S.pivot.add(root);
+  S.root = root;
+  S.car = root.children.length === 1 && root.children[0].children.length ? root.children[0] : root;
+  S.box = { size, ctr };
   scene.add(S.pivot);
   S.shadow = shadowDisc(size.z, size.x);
   S.shadow.position.x = ctr.x;
@@ -371,6 +495,7 @@ function onCar(gltf) {
   $('hint').hidden = false;
   labSetup(root);
   labRestore();
+  benchSetup();
 }
 
 function setOpen(id, open) {
@@ -382,6 +507,7 @@ function setOpen(id, open) {
   if (!a.isRunning()) a.play();
   const b = $('part-' + id);
   if (b) b.setAttribute('aria-pressed', String(open));
+  redraw();
 }
 function syncAll() {
   const any = Object.values(S.open).some(Boolean);
@@ -392,18 +518,436 @@ $('all').addEventListener('click', () => {
   for (const id of Object.keys(S.actions)) setOpen(id, !any);
   syncAll();
 });
-$('flip').addEventListener('click', () => {
-  S.flipTo = S.flipTo ? 0 : Math.PI;
-  $('flip').setAttribute('aria-pressed', String(!!S.flipTo));
-  $('flip').textContent = S.flipTo ? 'Turn back' : 'Flip over';
-});
+function setFlip(on) {
+  redraw();
+  S.flipTo = on ? Math.PI : 0;
+  $('flip').setAttribute('aria-pressed', String(on));
+  $('flip').textContent = on ? 'Turn back' : 'Flip over';
+}
+$('flip').addEventListener('click', () => setFlip(!S.flipTo));
 $('reset').addEventListener('click', () => {
   if (!S.home) return;
-  camera.position.copy(S.home.pos);
-  controls.target.copy(S.home.target);
-  controls.update();
+  moveCam(S.home.pos, S.home.target);
+});
+// a camera move eases over half a second (at once when motion is reduced)
+function moveCam(pos, target) {
+  redraw();
+  if (reduced) { camera.position.copy(pos); controls.target.copy(target); controls.update(); S.camTo = null; return; }
+  S.camTo = { p0: camera.position.clone(), t0: controls.target.clone(), p1: pos.clone(), t1: target.clone(), at: performance.now() };
+}
+
+// ── the bench: parts catalogue, callouts, explode, x-ray, cut-away, measure, procedures, report ──
+// The car's parts, numbered and grouped (page.py read them from the file);
+// a click in the list or on the car picks a part, as a parts catalogue links
+// its list to its drawing. A group can be focused: its items get the
+// callouts and the explode slider spreads them.
+const CAT = CAR.catalogue || [], PROCS = CAR.procedures || [];
+const B = { node: new Map(), idOf: new Map(), hinge: new Map(), item: new Map(), rows: new Map(), level: null, picked: new Set(), xray: false, isolate: false,
+  callouts: true, explode: 0, base: new Map(), ghost: null, hl: new Map(), orig: new WeakMap(), measure: null, mPts: [], mLine: null,
+  proc: null, step: -1, timer: null, flags: {}, co: new Map(), cut: null, cutPlane: new THREE.Plane() };
+const TOP_GROUPS = { engine_bay: 'Engine bay', rear_running_gear: 'Under the back', exhaust: 'Exhaust system', cabin: 'Cabin' };
+
+// the loader writes node names its own way (spaces to "_", ":" and "." dropped:
+// "bay:battery-assembly" is "baybattery-assembly" in the scene), so the
+// catalogue's ids are matched through the same rule
+const loaderName = s => String(s).replace(/\s/g, '_').replace(/[^\w\-]/g, '');
+function benchSetup() {
+  const byName = new Map();
+  S.root.traverse(o => { if (o.name && !byName.has(o.name)) byName.set(o.name, o); });
+  const ids = new Set([...CAT.flatMap(g => g.items.map(it => it.id)), ...CAT.map(g => g.drill).filter(Boolean), ...Object.keys(TOP_GROUPS)]);
+  for (const id of ids) {
+    const n = byName.get(id) || byName.get(loaderName(id)), h = byName.get(id + '_hinge') || byName.get(loaderName(id + '_hinge'));
+    if (n) { B.node.set(id, n); B.idOf.set(n, id); }
+    if (h) B.hinge.set(id, h);
+  }
+  const pane = $('pane-parts');
+  for (const g of CAT) {
+    const head = el('div', null, 'group');
+    head.append(el('h3', g.title));
+    if (g.drill && B.node.has(g.drill)) {
+      const f = el('button', 'Focus'); f.type = 'button'; f.setAttribute('aria-pressed', 'false'); f.dataset.focus = g.drill;
+      f.addEventListener('click', () => setLevel(B.level === g.drill ? null : g.drill));
+      head.append(f);
+    }
+    pane.append(head);
+    for (const it of g.items) {
+      B.item.set(it.id, it);
+      const r = el('div', null, 'row'); r.setAttribute('role', 'button'); r.tabIndex = 0; r.id = 'row-' + it.id; r.setAttribute('aria-selected', 'false');
+      r.append(el('span', String(it.n), 'n'), el('span', it.label, 'nm'));
+      const acts = el('span', null, 'acts');
+      const look = el('button', '◎'); look.type = 'button'; look.title = 'Look at it'; look.setAttribute('aria-label', 'Look at ' + it.label);
+      look.addEventListener('click', e => { e.stopPropagation(); pick([it.id]); frameParts([it.id]); });
+      const fl = el('button', '⚑', 'fl'); fl.type = 'button'; fl.title = 'Flag for the report'; fl.setAttribute('aria-pressed', 'false');
+      fl.setAttribute('aria-label', 'Flag ' + it.label + ' for the report');
+      fl.addEventListener('click', e => { e.stopPropagation(); setFlag(it.id, !B.flags[it.id]); });
+      acts.append(look, fl);
+      r.append(acts);
+      if (!B.node.has(it.id)) { r.classList.add('missing'); r.title = 'Not in this file'; }
+      else {
+        r.addEventListener('click', e => pick([it.id], e.shiftKey));
+        r.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick([it.id], e.shiftKey); } });
+      }
+      B.rows.set(it.id, r);
+      pane.append(r);
+    }
+  }
+  // explode moves a hinged part by its hinge, the rest by their own node
+  for (const id of B.node.keys()) {
+    const n = mover(id);
+    if (n && !B.base.has(n)) B.base.set(n, n.position.clone());
+  }
+  B.ghost = new THREE.MeshStandardMaterial({ color: 0x8e97a2, transparent: true, opacity: 0.1, depthWrite: false, metalness: 0, roughness: 1 });
+  for (const id of ['explode', 'xray', 'isolate', 'calloutsBtn', 'cutAxis', 'cutAt', 'measure']) $(id).disabled = false;
+  procSetup();
+  reportRestore();
+  setLevel(null);
+}
+function mover(id) { return B.hinge.get(id) || B.node.get(id) || null; }
+const GROUP_TAG = { engine_bay: 'E', rear_running_gear: 'U' };
+// the whole car's callouts: every part that is its own node under the root
+// (doors, lids, wheels, the exhaust, the cabin) by its number, and each
+// drill-down group as one callout with a letter
+function levelItems() {
+  if (B.level) { const g = CAT.find(g => g.drill === B.level); return g ? g.items.filter(it => B.node.has(it.id)) : []; }
+  const out = [];
+  for (const g of CAT) for (const it of g.items) {
+    const n = mover(it.id);
+    if (n && it.id !== 'body' && n.parent === S.car) out.push(it);
+  }
+  for (const g of CAT) if (g.drill && B.node.has(g.drill)) out.push({ id: g.drill, label: g.title, n: GROUP_TAG[g.drill] || '+', group: true });
+  return out;
+}
+function setLevel(level) {
+  redraw();
+  setExplode(0);
+  B.level = level;
+  document.querySelectorAll('[data-focus]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.focus === level)));
+  $('upLevel').hidden = !level;
+  buildCallouts();
+  if (level) frameParts([level], 1.15);
+  else if (S.home) moveCam(S.home.pos, S.home.target);   // back to the whole car: the home view
+}
+$('upLevel').addEventListener('click', () => setLevel(null));
+
+// ── picking: in the list, on the car, from a callout ──
+function pick(ids, add = false) {
+  redraw();
+  if (!add) B.picked.clear();
+  for (const id of ids) if (B.node.has(id)) { if (add && B.picked.has(id)) B.picked.delete(id); else B.picked.add(id); }
+  for (const [id, r] of B.rows) r.setAttribute('aria-selected', String(B.picked.has(id)));
+  const first = [...B.picked][0];
+  if (first && B.rows.get(first)) B.rows.get(first).scrollIntoView({ block: 'nearest' });
+  $('clearPick').hidden = !B.picked.size;
+  refreshLook();
+}
+$('clearPick').addEventListener('click', () => pick([]));
+function underPick(o) { for (let p = o; p; p = p.parent) { const id = B.idOf.get(p); if (id && B.picked.has(id)) return true; } return false; }
+function refreshLook() {
+  const any = B.picked.size > 0;
+  S.root.traverse(o => {
+    if (!o.isMesh) return;
+    if (!B.orig.has(o)) B.orig.set(o, o.material);
+    const orig = B.orig.get(o), on = any && underPick(o);
+    o.visible = !(B.isolate && any) || on;
+    if (on) {
+      let h = B.hl.get(orig);
+      if (!h) { h = orig.clone(); h.emissive = new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#1f4f86'); h.emissiveIntensity = 0.35; B.hl.set(orig, h); }
+      o.material = h;
+    } else o.material = (B.xray && any) ? B.ghost : orig;
+  });
+  for (const [id, g] of B.co) g.classList.toggle('on', B.picked.has(id));
+}
+$('xray').addEventListener('click', () => { B.xray = !B.xray; $('xray').setAttribute('aria-pressed', String(B.xray)); refreshLook(); });
+$('isolate').addEventListener('click', () => { B.isolate = !B.isolate; $('isolate').setAttribute('aria-pressed', String(B.isolate)); refreshLook(); });
+$('calloutsBtn').addEventListener('click', () => { B.callouts = !B.callouts; $('calloutsBtn').setAttribute('aria-pressed', String(B.callouts)); $('callouts').style.display = B.callouts ? '' : 'none'; });
+
+// a click (not a drag) on the car picks the part under the pointer; in
+// measure mode it sets a point
+const ray = new THREE.Raycaster(), ptr = new THREE.Vector2();
+let down = null;
+canvas.addEventListener('pointerdown', e => { down = { x: e.clientX, y: e.clientY }; });
+canvas.addEventListener('pointerup', e => {
+  if (!down || !S.root) return;
+  const moved = Math.hypot(e.clientX - down.x, e.clientY - down.y) > 4;
+  down = null;
+  if (moved) return;
+  const r = canvas.getBoundingClientRect();
+  ptr.set((e.clientX - r.left) / r.width * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+  ray.setFromCamera(ptr, camera);
+  const hits = ray.intersectObject(S.root, true).filter(h => h.object.visible && h.object.material !== B.ghost);
+  if (B.measure) { if (hits[0]) measurePoint(hits[0].point); return; }
+  if (!hits[0]) { if (!e.shiftKey) pick([]); return; }
+  // the catalogue item that owns the mesh: the deepest named node in the list
+  let id = null;
+  for (let p = hits[0].object; p && p !== S.root; p = p.parent) { if (B.idOf.has(p)) { id = B.idOf.get(p); break; } }
+  if (id) pick([id], e.shiftKey);
 });
 
+// ── callouts: numbered labels tied to the parts of the focused level ──
+const svgNS = 'http://www.w3.org/2000/svg';
+function buildCallouts() {
+  const svg = $('callouts');
+  svg.replaceChildren();
+  B.co.clear();
+  for (const it of levelItems()) {
+    const g = document.createElementNS(svgNS, 'g'); g.classList.add('co');
+    const line = document.createElementNS(svgNS, 'line'), dot = document.createElementNS(svgNS, 'circle'), tag = document.createElementNS(svgNS, 'circle'), t = document.createElementNS(svgNS, 'text');
+    dot.classList.add('dot'); dot.setAttribute('r', '2.5'); tag.classList.add('tag'); tag.setAttribute('r', it.group ? '11' : '10'); t.textContent = String(it.n);
+    g.append(line, dot, tag, t);
+    g.addEventListener('click', e => { pick([it.id], e.shiftKey); if (it.group && !B.level && CAT.some(c => c.drill === it.id)) setLevel(it.id); });
+    const title = document.createElementNS(svgNS, 'title'); title.textContent = it.label; g.append(title);
+    svg.append(g);
+    B.co.set(it.id, g);
+    g.classList.toggle('on', B.picked.has(it.id));
+    g.classList.toggle('flag', !!B.flags[it.id]);
+  }
+}
+const _v = new THREE.Vector3(), _box = new THREE.Box3();
+function updateCallouts() {
+  if (!B.callouts || !B.co.size) return;
+  const w = stage.clientWidth, h = stage.clientHeight, cx = w / 2, cy = h / 2;
+  for (const [id, g] of B.co) {
+    const n = B.node.get(id);
+    if (!n || !n.visible) { g.style.display = 'none'; continue; }
+    _box.setFromObject(n);
+    if (_box.isEmpty()) { g.style.display = 'none'; continue; }
+    _box.getCenter(_v).project(camera);
+    if (_v.z > 1) { g.style.display = 'none'; continue; }
+    const x = (_v.x + 1) / 2 * w, y = (1 - _v.y) / 2 * h;
+    let dx = x - cx, dy = y - cy; const d = Math.hypot(dx, dy) || 1; dx /= d; dy /= d;
+    const lx = x + dx * 34, ly = y + dy * 34;
+    g.style.display = '';
+    const [line, dot, tag, t] = g.children;
+    line.setAttribute('x1', x); line.setAttribute('y1', y); line.setAttribute('x2', lx); line.setAttribute('y2', ly);
+    dot.setAttribute('cx', x); dot.setAttribute('cy', y);
+    tag.setAttribute('cx', lx); tag.setAttribute('cy', ly); t.setAttribute('x', lx); t.setAttribute('y', ly);
+  }
+}
+
+// ── explode: the focused level's parts move apart, each along its own way out ──
+const WAY = { bonnet: [0, .6, .8], tailgate: [0, .6, -.8], engine_bay: [0, 1, .45], rear_running_gear: [0, -.8, -.4], exhaust: [0, -.9, 0], cabin: [0, .9, 0] };
+function wayOut(id, centre, levelCentre) {
+  if (WAY[id]) return new THREE.Vector3(...WAY[id]);
+  if (/^door_[fr]l$/.test(id)) return new THREE.Vector3(1, 0, 0);
+  if (/^door_[fr]r$/.test(id)) return new THREE.Vector3(-1, 0, 0);
+  if (/^wheel_[fr]l$/.test(id)) return new THREE.Vector3(1, -.15, 0);
+  if (/^wheel_[fr]r$/.test(id)) return new THREE.Vector3(-1, -.15, 0);
+  const d = centre.clone().sub(levelCentre); d.y += 0.12;
+  return d.length() < 0.02 ? new THREE.Vector3(0, 1, 0) : d.normalize();
+}
+function setExplode(k) {
+  redraw();
+  B.explode = k;
+  $('explode').value = String(Math.round(k * 100));
+  const items = levelItems();
+  const lvl = B.level ? B.node.get(B.level) : S.root;
+  const lc = new THREE.Box3().setFromObject(lvl).getCenter(new THREE.Vector3());
+  const reach = B.level ? 0.55 : S.box.size.z * 0.42;
+  // local directions: the car's own axes (x across, y up, z along) in the root's frame
+  const inv = new THREE.Matrix4().copy(S.root.matrixWorld).invert();
+  for (const it of items) {
+    const n = mover(it.id); if (!n) continue;
+    const base = B.base.get(n); if (!base) continue;
+    const c = new THREE.Box3().setFromObject(B.node.get(it.id)).getCenter(new THREE.Vector3());
+    const way = wayOut(it.id, c.applyMatrix4(inv), lc.clone().applyMatrix4(inv));
+    const parentInv = n.parent ? new THREE.Matrix4().copy(n.parent.matrixWorld).invert().multiply(S.root.matrixWorld) : new THREE.Matrix4();
+    n.position.copy(base).add(way.transformDirection(parentInv).multiplyScalar(k * reach));
+  }
+}
+$('explode').addEventListener('input', e => setExplode(+e.target.value / 100));
+
+// ── cut-away: a plane slides through the car along one axis ──
+function setCut() {
+  redraw();
+  const axis = $('cutAxis').value;
+  if (!axis || !S.box) { renderer.clippingPlanes = []; B.cut = null; return; }
+  const k = +$('cutAt').value / 100;
+  const { size, ctr } = S.box;
+  const n = new THREE.Vector3(axis === 'x' ? -1 : 0, axis === 'y' ? -1 : 0, axis === 'z' ? -1 : 0);
+  const at = ctr[axis] - size[axis] / 2 + k * size[axis];
+  B.cutPlane.setFromNormalAndCoplanarPoint(n, new THREE.Vector3(axis === 'x' ? at : 0, axis === 'y' ? at : 0, axis === 'z' ? at : 0));
+  renderer.clippingPlanes = [B.cutPlane];
+}
+$('cutAxis').addEventListener('change', setCut);
+$('cutAt').addEventListener('input', setCut);
+
+// ── measure: two points on the car, the distance between them ──
+function measurePoint(p) {
+  redraw();
+  if (B.mPts.length >= 2) { B.mPts = []; if (B.mLine) { scene.remove(B.mLine); B.mLine = null; } $('measureLabel').hidden = true; }
+  B.mPts.push(p.clone());
+  if (B.mPts.length === 2) {
+    const geo = new THREE.BufferGeometry().setFromPoints(B.mPts);
+    B.mLine = new THREE.Line(geo, new THREE.LineBasicMaterial({ color: 0xff6a00, depthTest: false }));
+    B.mLine.renderOrder = 10;
+    scene.add(B.mLine);
+    $('measureLabel').textContent = `${Math.round(B.mPts[0].distanceTo(B.mPts[1]) * 1000)} mm`;
+    $('measureLabel').hidden = false;
+  }
+}
+$('measure').addEventListener('click', () => {
+  B.measure = !B.measure; $('measure').setAttribute('aria-pressed', String(B.measure));
+  canvas.style.cursor = B.measure ? 'crosshair' : '';
+  if (!B.measure) { B.mPts = []; if (B.mLine) { scene.remove(B.mLine); B.mLine = null; } $('measureLabel').hidden = true; }
+});
+function updateMeasure() {
+  if (B.mPts.length !== 2) return;
+  _v.copy(B.mPts[0]).lerp(B.mPts[1], 0.5).project(camera);
+  const lbl = $('measureLabel');
+  lbl.style.left = (_v.x + 1) / 2 * stage.clientWidth + 'px';
+  lbl.style.top = (1 - _v.y) / 2 * stage.clientHeight + 'px';
+}
+
+// ── camera views: named views of the car, or a frame round some parts ──
+function view(name) {
+  const { size, ctr } = S.box, L = size.z, H = size.y, W = size.x;
+  const t = ctr.clone(), p = ctr.clone();
+  switch (name) {
+    case 'front': p.add(new THREE.Vector3(L * .35, H * .55, L * 1.45)); break;
+    case 'rear': p.add(new THREE.Vector3(-L * .35, H * .55, -L * 1.45)); break;
+    case 'nearside': p.add(new THREE.Vector3(L * 1.35, H * .45, L * .15)); break;
+    case 'offside': p.add(new THREE.Vector3(-L * 1.35, H * .45, L * .15)); break;
+    case 'top': p.add(new THREE.Vector3(0.01, L * 1.6, 0.02)); break;
+    case 'bay': t.add(new THREE.Vector3(0, H * .25, L * .33)); p.copy(t).add(new THREE.Vector3(L * .12, L * .55, L * .62)); break;
+    case 'boot': t.add(new THREE.Vector3(0, H * .2, -L * .3)); p.copy(t).add(new THREE.Vector3(L * .25, L * .5, -L * .7)); break;
+    case 'cabin': t.add(new THREE.Vector3(0, H * .1, 0)); p.copy(t).add(new THREE.Vector3(W * 1.2, H * .9, L * .05)); break;
+    case 'under': p.add(new THREE.Vector3(L * .3, L * 1.1, L * .5)); break;
+    default:
+      if (name.startsWith('door:') || name.startsWith('wheel:')) {
+        const id = name.replace(':', '_'), n = B.node.get(id);
+        if (n) {
+          const c = new THREE.Box3().setFromObject(n).getCenter(new THREE.Vector3());
+          const side = id.endsWith('l') ? 1 : -1, end = id.includes('_f') ? 1 : -1;
+          t.copy(c); p.copy(c).add(new THREE.Vector3(side * L * (name.startsWith('door') ? .7 : .45), H * .35, end * L * .2));
+          break;
+        }
+      }
+      return false;
+  }
+  moveCam(p, t);
+  return true;
+}
+function frameParts(ids, pad = 1.0) {
+  const box = new THREE.Box3();
+  for (const id of ids) { const n = B.node.get(id); if (n) box.union(new THREE.Box3().setFromObject(n)); }
+  if (box.isEmpty()) return;
+  const c = box.getCenter(new THREE.Vector3()), r = Math.max(box.getSize(new THREE.Vector3()).length() / 2, 0.12);
+  const dist = Math.max(r * 2.6 * pad, 0.9);
+  // look from above and the near front corner, from the side the part is on
+  const side = c.x - S.pivot.position.x >= 0 ? 1 : -1;
+  const dir = new THREE.Vector3(side * .55, .75, .8).normalize();
+  moveCam(c.clone().addScaledVector(dir, dist), c);
+}
+
+// ── procedures: step by step over the car, each step opening, picking and framing ──
+function procSetup() {
+  const sel = $('procPick');
+  if (!PROCS.length) { $('pane-procs').replaceChildren(el('p', 'No procedures for this car.', 'empty')); return; }
+  PROCS.forEach((p, i) => { const o = el('option', `${p.title} (${p.steps.length} steps)`); o.value = String(i); sel.append(o); });
+  sel.addEventListener('change', () => startProc(+sel.value));
+  $('procPrev').addEventListener('click', () => goStep(B.step - 1));
+  $('procNext').addEventListener('click', () => goStep(B.step + 1));
+  $('procScrub').addEventListener('input', e => goStep(+e.target.value));
+  $('procPlay').addEventListener('click', () => playProc(!B.timer));
+  $('procStop').addEventListener('click', stopProc);
+  $('pane-procs').addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); goStep(B.step + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); goStep(B.step - 1); }
+  });
+  startProc(0, false);
+}
+function startProc(i, go = true) {
+  stopProc(false);
+  B.proc = PROCS[i];
+  const ol = $('procSteps');
+  ol.replaceChildren();
+  B.proc.steps.forEach((st, k) => {
+    const li = el('li', st.text); li.addEventListener('click', () => goStep(k)); ol.append(li);
+  });
+  $('procScrub').max = String(B.proc.steps.length - 1);
+  if (go) goStep(0);
+}
+function goStep(k) {
+  if (!B.proc) return;
+  k = Math.max(0, Math.min(B.proc.steps.length - 1, k));
+  B.step = k;
+  const st = B.proc.steps[k];
+  $('procScrub').value = String(k);
+  [...$('procSteps').children].forEach((li, i) => { if (i === k) { li.setAttribute('aria-current', 'step'); li.scrollIntoView({ block: 'nearest' }); } else li.removeAttribute('aria-current'); });
+  $('stepN').textContent = `${B.proc.title} · step ${k + 1} of ${B.proc.steps.length}`;
+  $('stepText').textContent = st.text;
+  $('stepBox').hidden = false;
+  for (const id of Object.keys(S.actions)) setOpen(id, st.open.includes(id));
+  syncAll();
+  setFlip(st.view === 'under');
+  pick(st.parts);
+  if (st.view === 'part') frameParts(st.parts, 1.1);
+  else if (!view(st.view)) frameParts(st.parts, 1.1);
+  $('procPrev').disabled = k === 0; $('procNext').disabled = k === B.proc.steps.length - 1;
+  if (B.timer && k === B.proc.steps.length - 1) playProc(false);
+}
+function playProc(on) {
+  if (B.timer) { clearInterval(B.timer); B.timer = null; }
+  $('procPlay').setAttribute('aria-pressed', String(on)); $('procPlay').textContent = on ? 'Pause' : 'Play';
+  if (!on) return;
+  if (B.step < 0 || B.step >= B.proc.steps.length - 1) goStep(0);
+  B.timer = setInterval(() => goStep(B.step + 1), 6000);
+}
+function stopProc(clear = true) {
+  playProc(false);
+  B.step = -1;
+  $('stepBox').hidden = true;
+  [...$('procSteps').children].forEach(li => li.removeAttribute('aria-current'));
+  if (clear) { pick([]); setFlip(false); }
+}
+
+// ── report: flagged parts with notes, as a parts basket collects an order ──
+function setFlag(id, on, note) {
+  if (on) B.flags[id] = { note: note != null ? note : (B.flags[id] || {}).note || '' }; else delete B.flags[id];
+  const r = B.rows.get(id); if (r) r.querySelector('.fl').setAttribute('aria-pressed', String(on));
+  const g = B.co.get(id); if (g) g.classList.toggle('flag', on);
+  try { localStorage.setItem(CAR.key + '-report', JSON.stringify(B.flags)); } catch (e) { /* storage off */ }
+  reportUI();
+}
+function reportUI() {
+  const box = $('reportItems'); box.replaceChildren();
+  const ids = Object.keys(B.flags);
+  $('reportEmpty').hidden = ids.length > 0;
+  const lines = [CAR.title];
+  for (const id of ids) {
+    const it = B.item.get(id) || { label: id, n: '' };
+    const d = el('div', null, 'item');
+    d.append(el('b', `${it.n ? it.n + '. ' : ''}${it.label}`));
+    const ta = el('textarea'); ta.placeholder = 'What you found'; ta.value = B.flags[id].note || '';
+    ta.addEventListener('input', () => { B.flags[id].note = ta.value; try { localStorage.setItem(CAR.key + '-report', JSON.stringify(B.flags)); } catch (e) { /* off */ } reportText(); });
+    const un = el('button', 'Remove'); un.type = 'button'; un.style.justifySelf = 'start'; un.addEventListener('click', () => setFlag(id, false));
+    d.append(ta, un); box.append(d);
+    lines.push(`${it.n ? it.n + '. ' : ''}${it.label}${B.flags[id].note ? ': ' + B.flags[id].note : ''}`);
+  }
+  reportText();
+}
+function reportText() {
+  const ids = Object.keys(B.flags);
+  const lines = [CAR.title, ...ids.map(id => { const it = B.item.get(id) || { label: id, n: '' }; return `${it.n ? it.n + '. ' : ''}${it.label}${B.flags[id].note ? ': ' + B.flags[id].note : ''}`; })];
+  $('reportText').value = lines.join('\n'); $('reportText').hidden = !ids.length;
+}
+function reportRestore() {
+  let saved = null;
+  try { saved = JSON.parse(localStorage.getItem(CAR.key + '-report') || 'null'); } catch (e) { saved = null; }
+  if (saved && typeof saved === 'object') for (const [id, v] of Object.entries(saved)) if (B.item.has(id)) setFlag(id, true, (v && v.note) || '');
+  reportUI();
+}
+$('copyReport').addEventListener('click', async () => {
+  const t = $('reportText').value || CAR.title;
+  try { await navigator.clipboard.writeText(t); $('copyReport').textContent = 'Copied'; } catch (e) { $('copyReport').textContent = 'Select and copy'; }
+  setTimeout(() => { $('copyReport').textContent = 'Copy report'; }, 1600);
+});
+$('clearReport').addEventListener('click', () => { for (const id of Object.keys(B.flags)) setFlag(id, false); });
+
+// tabs
+for (const t of ['parts', 'procs', 'report']) $('tab-' + t).addEventListener('click', () => {
+  for (const u of ['parts', 'procs', 'report']) { $('tab-' + u).setAttribute('aria-selected', String(u === t)); $('pane-' + u).hidden = u !== t; }
+});
 
 // ── Finish Lab: our own material presets on the car's named parts ──────────
 const FINISHES = {
@@ -480,6 +1024,8 @@ function applyFinish(t, finish, hex) {
     m.anisotropy = grain;
   }
   LAB.state[t] = { finish, hex };
+  B.hl.clear();                                  // highlight copies follow the new finish
+  if (B.picked.size) refreshLook();
   try { localStorage.setItem(CAR.key, JSON.stringify(LAB.state)); } catch (e) { /* storage off */ }
   labUI();
 }
@@ -491,6 +1037,8 @@ function factory(t) {
     m.clearcoat = Math.max(f.clearcoat, 0.001); m.clearcoatRoughness = f.clearcoatRoughness; m.anisotropy = f.anisotropy;
   }
   LAB.state[t] = null;
+  B.hl.clear();
+  if (B.picked.size) refreshLook();
 }
 function labUI() {
   const st = LAB.state[LAB.target];
@@ -526,7 +1074,7 @@ $('lookWheel').addEventListener('click', () => {
   const w = LAB.meshes.wheels[0]; if (!w) return;
   const c = new THREE.Box3().setFromObject(w).getCenter(new THREE.Vector3());
   const side = Math.sign(c.x - (S.pivot ? S.pivot.position.x : 0)) || 1;
-  controls.target.copy(c); camera.position.set(c.x + side * 1.5, c.y + 0.25, c.z + 0.6); controls.update();
+  moveCam(new THREE.Vector3(c.x + side * 1.5, c.y + 0.25, c.z + 0.6), c);
 });
 function labRestore() {
   let saved = null;
@@ -535,15 +1083,41 @@ function labRestore() {
 }
 labUI();
 
+// A frame is drawn when something changed (a drag, a button, a pick) and
+// kept going while anything moves (a door swinging, the car turning over,
+// the camera easing); a still car costs nothing. On a machine with no
+// graphics chip a frame of this car takes seconds, so this matters there too.
+let needs = 2;
+function redraw() { needs = Math.max(needs, 2); }
+controls.addEventListener('change', redraw);
+new ResizeObserver(redraw).observe(stage);
+document.addEventListener('click', redraw, true);
+document.addEventListener('input', redraw, true);
+document.addEventListener('change', redraw, true);
 renderer.setAnimationLoop(() => {
   const dt = Math.min(clock.getDelta(), 0.1);
-  if (S.mixer) S.mixer.update(dt);
+  let moving = false;
+  if (S.mixer) {
+    S.mixer.update(dt);
+    moving = Object.values(S.actions).some(a => a.isRunning() && !a.paused && !(a.time <= 0 && a.timeScale < 0) && !(a.time >= a.getClip().duration && a.timeScale > 0));
+  }
   if (S.pivot) {
     const r = S.pivot.rotation.z, d = S.flipTo - r;
     S.pivot.rotation.z = Math.abs(d) < 0.002 || reduced ? S.flipTo : r + d * Math.min(1, dt * 4);
+    if (Math.abs(d) >= 0.002 && !reduced) moving = true;
     if (S.shadow) S.shadow.visible = Math.abs(S.pivot.rotation.z) < 0.2;
   }
-  controls.update();
+  if (S.camTo) {
+    const k = Math.min(1, (performance.now() - S.camTo.at) / 550), e = 1 - Math.pow(1 - k, 3);
+    camera.position.lerpVectors(S.camTo.p0, S.camTo.p1, e);
+    controls.target.lerpVectors(S.camTo.t0, S.camTo.t1, e);
+    if (k >= 1) S.camTo = null; else moving = true;
+  }
+  // damping keeps the camera drifting a little after a drag: controls.update() says so
+  if (controls.update()) moving = true;
+  if (!moving && needs <= 0) return;
+  if (!moving) needs--;
   renderer.render(scene, camera);
+  if (S.root) { updateCallouts(); updateMeasure(); }
 });
 </script>
