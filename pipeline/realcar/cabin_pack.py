@@ -27,7 +27,6 @@ import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import rig  # noqa: E402
 
 NOT_CABIN = ("SB_door", "SB_wheel", "SB_panel_bonnet", "SB_bonnet", "SB_tailgate")
 GLASS = re.compile(r"glass|window|windscreen|screen", re.I)
@@ -83,6 +82,7 @@ def measures(car):
 
 def pick(car, m):
     """(prim index, triangle indices) of the cabin's pieces."""
+    import rig
     zf, zr, half, roof = m["front_axle_z"], m["rear_axle_z"], m["half_width"], m["roof_y"]
     wb = zf - zr
     L = max(float(np.ptp(np.vstack([car.verts(o) for o in car.objs if car.nfaces(o)])[:, 2])), 1e-6)
@@ -113,7 +113,8 @@ def pick(car, m):
 
 
 def extract(src, out, credit):
-    car = rig.Car(src)
+    import rig                                  # here, not at load: finish.py and rig.py borrow
+    car = rig.Car(src)                          # dense_points and roof_of without the rigger
     m = measures(car)
     zmid = (m["front_axle_z"] + m["rear_axle_z"]) / 2
     sel = pick(car, m)

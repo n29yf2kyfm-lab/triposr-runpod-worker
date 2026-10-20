@@ -527,7 +527,7 @@ def finish(src, spec, out, base_dir="."):
         c = (pbr.get("baseColorFactor") or [1, 1, 1])[:3]
         return "baseColorTexture" not in pbr and max(c) < 0.05 and max(c) - min(c) < 0.01
     if paint < nm and dark_plastic(mats[paint]) and "paint" not in mats[paint].get("name", "").lower():
-        alt = [i for i in range(nm) if mats[i].get("name", "").endswith("_paint") and not dark_plastic(mats[i])
+        alt = [i for i in range(nm) if "paint" in mats[i].get("name", "").lower() and not dark_plastic(mats[i])
                and door_area[i] >= 0.4 * door_area[paint]]
         if alt:
             log["paint_over_plastic"] = mats[paint].get("name")

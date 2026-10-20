@@ -34,6 +34,7 @@ import sys
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
+import urllib.error
 import urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -335,8 +336,24 @@ def rig_model(item, d, body, tools, lg, tm):
     meshopt, quantized -> float) and rig it with our own rigger into D/rig:
     no Blender anywhere. Returns the rigger's result."""
     src, rig = os.path.join(d, "src.glb"), os.path.join(d, "rig")
+    # an earlier rig's files go first: a rigger that refuses writes no
+    # src.glb, and the build then carried on with the old geometry under the
+    # new result ("Golf 2017 2 door": refused as a two-door, built from the
+    # four-door rig, and cached that way)
+    for f in RIG_FILES:
+        if os.path.exists(os.path.join(rig, f)):
+            os.remove(os.path.join(rig, f))
     t0 = time.time()
-    urllib.request.urlretrieve(item["desktopGlbUrl"], src)
+    for attempt in range(3):                     # a transfer cut short is tried again (the Discovery:
+        try:                                     # "got only 46219264 out of 47396108 bytes")
+            urllib.request.urlretrieve(item["desktopGlbUrl"], src)
+            break
+        except (urllib.error.ContentTooShortError, urllib.error.URLError, OSError):
+            if attempt == 2:
+                raise
+            if lg is not None:                   # the build's log file
+                lg.write(f"download cut short, trying again ({attempt + 2}/3)\n")
+            time.sleep(2 * (attempt + 1))
     tm["download"] = round(time.time() - t0, 1)
     t0 = time.time()
     plain = os.path.join(d, "plain.glb")

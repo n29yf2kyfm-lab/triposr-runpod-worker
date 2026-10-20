@@ -572,10 +572,11 @@ def convert(car, rep, override=None, body_style=""):
         DOOR.setdefault("l" if c[0] > 0 else "r", []).append((c[2], os_))
     # ONE named piece two doors long on a side of a five-door body (the 2017
     # Golf's `Doors`, both doors of each flank in one mesh): split at its
-    # shut line, as a loose door piece is (find_doors)
-    two_body = bool(TWO_DOOR.search(body_style or os.environ.get("SB_BODY", "")))
+    # shut line, as a loose door piece is (find_doors). A two-door body asked
+    # for changes nothing here: no door is 42% of the car, so a piece that
+    # long is two, and the rear one is kept shut later ("Golf 2017 2 door")
     for side, lst in DOOR.items():
-        if len(lst) != 1 or two_body:
+        if len(lst) != 1:
             continue
         os_ = lst[0][1]
         b0, b1 = bbox(np.vstack([car.verts(o) for o in os_]))
@@ -714,14 +715,17 @@ def convert(car, rep, override=None, body_style=""):
         # what was taken for the doors was not (the Polo's "doors" were its wings)
         if not any(k in parts for k in ("door_fl", "door_fr", "door_rl", "door_rr")) \
                 and any(d.startswith("door_") and "kept" not in d for d in dropped) and "door_cutter" not in rep:
-            pool = parts.get("body", []) + parts.get("glazing", [])
-            for o in pool:
-                o["kind"] = "glazing" if any(o is x for x in parts.get("glazing", [])) else "body"
-            cut = cut_doors(car, pool, [o for k in parts if k.startswith("wheel_") for o in parts[k]], lo, hi, rep,
-                            body_style)
-            for pid, os_ in cut.items():
-                parts[pid] = os_
-            if cut:
+            two_asked = bool(TWO_DOOR.search(body_style or os.environ.get("SB_BODY", "")))
+            for bs in ([body_style, ""] if two_asked else [body_style]):
+                pool = parts.get("body", []) + parts.get("glazing", [])
+                for o in pool:
+                    o["kind"] = "glazing" if any(o is x for x in parts.get("glazing", [])) else "body"
+                cut = cut_doors(car, pool, [o for k in parts if k.startswith("wheel_") for o in parts[k]], lo, hi, rep,
+                                bs)
+                for pid, os_ in cut.items():
+                    parts[pid] = os_
+                if not cut:
+                    break
                 adopt_into_doors(car, parts, rep, L)
                 for pid, h in hinges(car, parts, True).items():
                     if pid in cut:
@@ -731,6 +735,11 @@ def convert(car, rep, override=None, body_style=""):
                     if "kept" not in d:
                         hinge.pop(d.split(":")[0], None)
                 rep["implausible"] += again
+                if not any(d.startswith("door_") and "kept" not in d for d in again):
+                    break
+                # a two-door cut longer than any door: the model is a five-door;
+                # cut four, and the rear pair is kept shut below
+                rep["two_door_cut_as_four"] = again
         rep["missing"] = [p for p in wanted(parts) if not parts.get(p)]
         if not any(k in parts for k in ("door_fl", "door_fr", "door_rl", "door_rr", "door_bl", "door_br")):
             # the pieces taken for doors were not doors, and none were found
@@ -831,7 +840,11 @@ def rubber_tyres(car, parts):
     return split
 
 
-DEFAULT_MAT = re.compile(r"^(material|mat|default|defaultmaterial|lambert\d*|phong\d*|blinn\d*|standard|surface|no name|none)?[\s_#-]*\d*$", re.I)
+# a modeller's untouched default, named by the tool: Blender's "Material",
+# "Material.001" ... are DIFFERENT materials, one a new slot. A default with
+# its own number ("Material_1467", Maya's "lambert2") is one material, and
+# its ".001" copies are that one again.
+DEFAULT_MAT = re.compile(r"^(material|mat|default|defaultmaterial|lambert|phong|blinn|standard|surface|no name|none)?[\s_#-]*$", re.I)
 
 
 def find_paint(car, parts, rep):
@@ -1406,9 +1419,11 @@ def find_doors(car, objs, wheels, lo, hi, rep, body_style=""):
     for side in ("l", "r"):
         lst = found[side]
         # one long piece is two doors on a five-door side; on a two-door body
-        # (a coupe, a three-door hatch: the GR Yaris) it is the door
+        # (a coupe, a three-door hatch: the GR Yaris) it is the door, unless
+        # it is longer than any door (42% of the car: a five-door model asked
+        # for as a two-door), when it is two and the rear one is kept shut
         two = bool(TWO_DOOR.search(body_style or os.environ.get("SB_BODY", "")))
-        if len(lst) == 1 and lst[0][4][2] - lst[0][3][2] > .3 * L and not two:
+        if len(lst) == 1 and lst[0][4][2] - lst[0][3][2] > (.42 if two else .3) * L:
             area, o, refs, b0, b1 = lst[0]
             cut, prof = shut_line(car, o, refs, b0[2], b1[2], L)
             info[f"shut_line_{side}"] = prof

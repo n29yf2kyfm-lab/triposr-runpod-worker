@@ -199,6 +199,11 @@ class GLTF:
         used = set(j.get("extensionsUsed", [])) | set(o.get("extensionsUsed", []))
         if used:
             j["extensionsUsed"] = sorted(used)
+        # what the other file cannot be read without (its WebP textures have
+        # no fallback image) this file cannot either
+        req = set(j.get("extensionsRequired", [])) | set(o.get("extensionsRequired", []))
+        if req:
+            j["extensionsRequired"] = sorted(req)
         scene = o["scenes"][o.get("scene", 0)]
         return [r + off["nodes"] for r in scene["nodes"]]
 
