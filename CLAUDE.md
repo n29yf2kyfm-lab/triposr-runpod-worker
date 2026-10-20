@@ -51,6 +51,24 @@ list (`platform/catalogue/uk_targets/`), not only to hero cars:
 * **interactive** — doors, bonnet and tailgate open (glTF animation clips plus
   the parts manifest), so the model works in any viewer.
 
+## OWNER INSTRUCTION 2026-10-20: AutoTrader photos as REFERENCE for builds
+
+The owner's words: "use auto trader for images … use the car image as
+reference … you got full permission, save in your memory". How it is applied:
+
+* **Reference only.** An AutoTrader photo (or any dealer or press photo, such as
+  the NetCarShow screenshot of the 2027 iX4) is looked at and measured: which
+  car, generation, trim, colour, body and doors were meant; its shape
+  (roofline, proportions) for a stand-in. It is never saved into the repo, a
+  model, a texture, a page, a page's files or a dataset, and never shipped. The
+  photos are the dealers' and AutoTrader's copyright: the owner's permission
+  covers how we use them; it cannot license them.
+* **How they arrive.** The owner sends a screenshot, photo or a listing's
+  details in chat, and the build uses it. The machine does not fetch
+  AutoTrader itself: its robots.txt disallows `/car-search` and
+  `/car-details*` to every robot (checked 2026-10-20). Automated use would need
+  a licensed feed (AutoTrader Connect, a partner API).
+
 The app is free to use and the owner sources the models himself from Sketchfab.
 Attribution is still required by every CC licence in the catalogue, so a
 credits page listing creator and licence per model ships with the app.
