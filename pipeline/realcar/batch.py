@@ -534,7 +534,7 @@ def one(target, item, args, out):
     tm["finish"] = round(time.time() - t0, 1)
     rec["finish"] = {k: flog.get(k) for k in ("opens", "missing", "layout", "bonnet", "tailgate", "door_trims", "rescale",
                                               "glass_cleared", "measured", "bay_cleared_m2", "engine_pack", "cabin_pack", "paint_set",
-                                              "manual")}
+                                              "manual", "wheel_strays", "wheel_tyres_from_body")}
     # validator, web copy and check sheet at the same time: the sheet is drawn
     # from the finished file, so it need not wait for the compression
     web = os.path.join(d, "web.glb")

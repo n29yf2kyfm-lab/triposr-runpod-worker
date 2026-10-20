@@ -404,6 +404,79 @@ def fit_cabin(g, recs, path, to_out, s, ground, zf, zr):
                   "down_m": round(-dy, 3), "outside": round(out, 4)}
 
 
+def wheel_strays(recs, mats, log):
+    """A wheel's pieces the rigger left in the body: the body's triangles in
+    that wheel's own cylinder (round its axle, within its width) go to the
+    wheel. Its tyre, when the model filed it under the body (the 2023 Clio:
+    the wheel group is the rim, the tyre a ring of the paint material round
+    it, painted blue with the car), is found as a full ring just outside the
+    rim (23 of 24 sectors round filled, band after band) and turns rubber. The
+    wheels then explode whole, stand on their tyres, and a new wheel design
+    replaces the tyre too. Returns the moved triangles per wheel."""
+    wheels = {}
+    for r in recs:
+        if r["rig"].startswith("wheel_"):
+            wheels.setdefault(r["rig"], []).append(r["P"][np.unique(r["I"])])
+    body = [r for r in recs if r["rig"] == "body" and len(r["I"])]
+    if len(wheels) != 4 or not body:
+        return {}
+    C = [r["P"][r["I"]] for r in body]
+    rubber = None
+    moved = {}
+    for k, vs in sorted(wheels.items()):
+        V = np.vstack(vs)
+        lo, hi = V.min(0), V.max(0)
+        c = (lo + hi) / 2
+        R0 = max(hi[1] - lo[1], hi[2] - lo[2]) / 2
+        slab = max((hi[0] - lo[0]) / 2 * 1.1, 0.3 * R0)
+        if R0 <= 0:
+            continue
+        # the ring outside the rim: how full each radius band is, round the axle
+        pts = np.vstack([np.vstack([T.reshape(-1, 3), T.mean(1)]) for T in C])
+        pts = pts[np.abs(pts[:, 0] - c[0]) < slab]
+        rho = np.hypot(pts[:, 1] - c[1], pts[:, 2] - c[2])
+        ang = ((np.arctan2(pts[:, 1] - c[1], pts[:, 2] - c[2]) + np.pi) / (2 * np.pi) * 24).astype(int) % 24
+        Rt, step = R0, 0.04 * R0
+        for b in range(18):
+            r_lo, r_hi = R0 * 0.98 + b * step, R0 * 0.98 + (b + 1) * step
+            band = (rho >= r_lo) & (rho < r_hi)
+            if len(np.unique(ang[band])) < 23:          # all the way round: an arch liner stops at the sill
+                break
+            Rt = r_hi
+        n_tyre = 0
+        lim = Rt * 1.02 if Rt > R0 * 1.02 else R0 * 0.98
+        for r, T in zip(body, C):
+            tc = T.mean(1)
+            rr = np.hypot(tc[:, 1] - c[1], tc[:, 2] - c[2])
+            # every corner inside the wheel: its width and its radius
+            rv = np.hypot(T[:, :, 1] - c[1], T[:, :, 2] - c[2])
+            take = (np.abs(T[:, :, 0] - c[0]) < slab).all(1) & (rv <= lim).all(1)
+            if not take.any():
+                continue
+            name = mats[r["mat"]].get("name", "") if r["mat"] is not None else ""
+            ring = take & (rr > R0 * 0.98) if Rt > R0 * 1.02 and "paint" in name.lower() else np.zeros(len(take), bool)
+            if ring.any():
+                if rubber is None:
+                    mats.append({"name": "SB_tyre_rubber", "pbrMetallicRoughness": {
+                        "baseColorFactor": [0.03, 0.03, 0.032, 1.0], "metallicFactor": 0.0, "roughnessFactor": 0.9}})
+                    rubber = len(mats) - 1
+                recs.append(dict(r, I=r["I"][ring], rig=k, mat=rubber))
+                n_tyre += int(ring.sum())
+            rest = take & ~ring
+            if rest.any():
+                recs.append(dict(r, I=r["I"][rest], rig=k))
+            r["I"] = r["I"][~take]
+            moved[k] = moved.get(k, 0) + int(take.sum())
+        if Rt > R0 * 1.02:
+            log.setdefault("wheel_tyres_from_body", {})[k] = {"rim_d_m": round(2 * R0, 3), "tyre_d_m": round(2 * Rt, 3),
+                                                              "rubber_triangles": n_tyre}
+        C = [r["P"][r["I"]] for r in body]
+    recs[:] = [r for r in recs if len(r["I"])]
+    if moved:
+        log["wheel_strays"] = moved
+    return moved
+
+
 def finish(src, spec, out, base_dir="."):
     log = {"src": os.path.basename(src)}
     # parts a person set by hand in the Studio stand as they are: no search,
@@ -441,11 +514,12 @@ def finish(src, spec, out, base_dir="."):
     def tris(r):
         return r["P"][r["I"]]
 
+
     # ── frame: wheels give the axles, the ground and the track ──
     wc = {}
     for r in recs:
         if r["rig"].startswith("wheel_"):
-            wc.setdefault(r["rig"], []).append(r["P"])
+            wc.setdefault(r["rig"], []).append(r["P"][np.unique(r["I"])])
     wb = {k: (np.vstack(v).min(0), np.vstack(v).max(0)) for k, v in wc.items()}
     cen = {k: (lo + hi) / 2 for k, (lo, hi) in wb.items()}
     zf = float(np.mean([cen[k][2] for k in cen if k[6] == "f"]))
@@ -465,6 +539,10 @@ def finish(src, spec, out, base_dir="."):
         wb_mm, log["wheelbase_lookup"] = wb_mm(base / length if length else None, base)
     s = (wb_mm / 1000.0) / base if wb_mm else 1.0
     zmid = (zf + zr) / 2
+    # a wheel's pieces left in the body go to the wheel (its tyre turns
+    # rubber), after the car is measured: its frame and sizes stay as they were
+    if not any(p.startswith("wheel_") for p in manual):
+        wheel_strays(recs, mats, log)
     log["measured"] = {"wheelbase_m": round(base, 3), "front_axle_z": round(zf, 3), "rear_axle_z": round(zr, 3),
                        "wheel_d_m": round(wheel_top - ground, 3), "track_half_m": round(track_half, 3)}
     log["rescale"] = round(s, 4)

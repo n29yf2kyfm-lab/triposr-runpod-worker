@@ -1,11 +1,13 @@
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{{TITLE}}</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: a build sheet. The car fills a wide stage with the parts bench beside it, the facts and licence follow. */
+/* Layout: a workshop app. The car fills the stage (pinned at the top on a phone), the tools sit under it,
+   and five tabs beside it (under it on a phone): Parts, Steps, Report, Style, Engine. */
 :root {
   --bg: #eceef0;
   --surface: #f8f9fa;
@@ -13,7 +15,7 @@
   --fg: #16181b;
   --muted: #595f66;
   --line: #cfd4d9;
-  --accent: #1f4f86;          /* only for parts that are open or picked */
+  --accent: #1f4f86;          /* only for what is open, picked or chosen */
   --accent-fg: #ffffff;
   --flag: #b4420f;
   --display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
@@ -31,34 +33,35 @@
   --line: #2d3237; --accent: #86a4f2; --accent-fg: #0d1222; --flag: #f0905a; color-scheme: dark;
 }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }        /* a hidden element stays hidden whatever its own display */
+html { -webkit-text-size-adjust: 100%; }
 body {
+  margin: 0;
   background: var(--bg); color: var(--fg); font: 15px/1.55 var(--body);
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 20px 40px;
+  padding-top: max(16px, env(safe-area-inset-top, 0px));
+  padding-bottom: max(40px, env(safe-area-inset-bottom, 0px));
 }
-.wrap { max-width: 1240px; margin: 0 auto; display: grid; gap: 20px; }
+.wrap { max-width: 1240px; margin: 0 auto; display: grid; gap: 18px; }
 header { display: grid; gap: 4px; }
 .eyebrow { font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-h1 { font: 700 clamp(34px, 6vw, 56px)/1 var(--display); letter-spacing: .01em; margin: 4px 0 0; text-wrap: balance; }
+h1 { font: 700 clamp(30px, 6vw, 56px)/1 var(--display); letter-spacing: .01em; margin: 4px 0 0; text-wrap: balance; }
 .sub { color: var(--muted); margin: 0; }
 .swatch { display: inline-block; width: .9em; height: .9em; border-radius: 2px; background: transparent;
   vertical-align: -0.1em; margin-right: .35em; box-shadow: inset 0 0 0 1px rgba(255,255,255,.18); }
 
-/* the bench: the stage and its tools on the left, the parts and procedures beside them */
 .bench { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); align-items: start; }
-@media (min-width: 1000px) { .bench { grid-template-columns: minmax(0, 1fr) 372px; } .bench .side { position: sticky; top: 12px; } }
-.left { display: grid; gap: 12px; min-width: 0; }
+@media (min-width: 1000px) { .bench { grid-template-columns: minmax(0, 1fr) 380px; } .bench .side { position: sticky; top: 12px; } }
+.left { display: grid; gap: 10px; min-width: 0; }
 .stage { position: relative; width: 100%; aspect-ratio: 16 / 10; max-height: 72vh; max-width: 100%;
   background: var(--stage); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; touch-action: none; }
-@media (max-width: 640px) { .stage { aspect-ratio: 4 / 3.4; } }
 canvas#view { display: block; width: 100%; height: 100%; outline: none; }
-.status { position: absolute; inset: auto 12px 12px 12px; font: 500 13px/1.4 var(--mono); color: var(--muted);
-  pointer-events: none; }
+.status { position: absolute; inset: auto 12px 12px 12px; font: 500 13px/1.4 var(--mono); color: var(--muted); pointer-events: none; }
 .hint { position: absolute; top: 10px; right: 12px; font: 12px/1.3 var(--mono); color: var(--muted); pointer-events: none; }
 .fail { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; padding: 24px; gap: 6px; }
 .fail p { margin: 0; max-width: 46ch; }
-/* callouts: numbered labels over the car, each tied to its part by a leader, as a parts drawing numbers them */
+/* callouts: numbered labels over the car, each on a leader to its part, as a parts drawing numbers them */
 svg.callouts { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
 svg.callouts line { stroke: var(--fg); stroke-width: 1; opacity: .55; }
 svg.callouts circle.dot { fill: var(--fg); opacity: .7; }
@@ -75,64 +78,93 @@ svg.callouts g.co.flag circle.tag { stroke: var(--flag); stroke-width: 2; }
 .stepbox b { font: 600 12px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
 .stepbox p { margin: 0; font-size: 14px; }
 
-.controls, .tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-.controls .sep, .tools .sep { width: 1px; align-self: stretch; background: var(--line); margin: 0 4px; }
+/* toolbars: one row each; on a phone they scroll sideways rather than wrap */
+.bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.bar .sep { width: 1px; align-self: stretch; background: var(--line); margin: 0 4px; flex: 0 0 1px; }
 .tools { font-size: 13px; color: var(--muted); }
-.tools label { display: inline-flex; gap: 6px; align-items: center; }
-.tools input[type=range] { width: 120px; accent-color: var(--accent); }
-.tools select { font: 500 13px var(--body); color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 6px 8px; min-height: 36px; }
-.tools button { min-height: 36px; padding: 8px 12px; font-size: 13px; }
+.tools label { display: inline-flex; gap: 6px; align-items: center; white-space: nowrap; }
+input[type=range] { accent-color: var(--accent); }
+.tools input[type=range] { width: 120px; }
+select { font: 500 13px var(--body); color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 6px 8px; min-height: 38px; }
+.tools button { min-height: 38px; padding: 8px 12px; font-size: 13px; }
 button { font: 500 14px/1 var(--body); color: var(--fg); background: var(--surface); border: 1px solid var(--line);
-  border-radius: 4px; padding: 10px 14px; cursor: pointer; min-height: 40px; }
+  border-radius: 4px; padding: 10px 14px; cursor: pointer; min-height: 42px; white-space: nowrap; touch-action: manipulation; }
 button:hover { border-color: var(--muted); }
-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button:focus-visible, [role=button]:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 button[aria-pressed="true"] { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
 button:disabled { opacity: .45; cursor: default; }
 
-/* the side panel: parts, procedures, report */
-.side { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; display: grid; grid-template-rows: auto minmax(0, 1fr); max-height: 82vh; min-height: 320px; }
-.tabs { display: flex; border-bottom: 1px solid var(--line); }
-.tabs button { flex: 1; border: 0; border-radius: 0; background: transparent; min-height: 44px; font: 600 15px var(--display); letter-spacing: .02em; color: var(--muted); }
+/* the side panel: five tabs */
+.side { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; display: grid; grid-template-rows: auto minmax(0, 1fr); max-height: 84vh; min-height: 320px; min-width: 0; }
+.tabs { display: flex; border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tabs button { flex: 1 0 auto; border: 0; border-radius: 0; background: transparent; min-height: 46px; padding: 8px 12px; font: 600 15px var(--display); letter-spacing: .02em; color: var(--muted); }
 .tabs button[aria-selected="true"] { color: var(--fg); box-shadow: inset 0 -2px 0 var(--accent); }
 .pane { overflow: auto; padding: 8px 0 12px; }
 .pane[hidden] { display: none; }
+.pad { padding: 6px 12px; display: grid; gap: 12px; }
 .group { padding: 6px 12px 2px; display: flex; align-items: center; gap: 8px; }
-.group h3 { margin: 0; flex: 1; font: 600 12px/1.2 var(--mono); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
-.group button { min-height: 28px; padding: 4px 8px; font-size: 12px; }
-.row { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; align-items: center; gap: 6px; padding: 5px 8px 5px 12px; cursor: pointer; border-left: 3px solid transparent; }
+.group h3, .pad h3 { margin: 0; flex: 1; font: 600 12px/1.2 var(--mono); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.group button { min-height: 32px; padding: 4px 10px; font-size: 12px; }
+.row { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; align-items: center; gap: 6px; padding: 4px 8px 4px 12px; min-height: 44px; cursor: pointer; border-left: 3px solid transparent; }
 .row:hover { background: color-mix(in srgb, var(--fg) 5%, transparent); }
 .row[aria-selected="true"] { border-left-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); }
 .row .n { font: 600 11px var(--mono); color: var(--muted); text-align: right; padding-right: 2px; }
 .row .nm { font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .row .acts { display: inline-flex; gap: 2px; }
-.row .acts button { min-height: 26px; min-width: 26px; padding: 2px 6px; font-size: 12px; border-color: transparent; background: transparent; }
+.row .acts button { min-height: 36px; min-width: 36px; padding: 2px 6px; font-size: 13px; border-color: transparent; background: transparent; }
 .row .acts button:hover { border-color: var(--line); background: var(--surface); }
 .row .acts button.fl[aria-pressed="true"] { color: var(--flag); border-color: var(--flag); background: transparent; }
 .row.missing { opacity: .4; cursor: default; }
-.proc { padding: 6px 12px; display: grid; gap: 8px; }
-.proc select { width: 100%; font: 500 14px var(--body); color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 8px; }
-.proc .bar { display: flex; gap: 6px; align-items: center; }
-.proc .bar button { min-height: 36px; padding: 8px 12px; font-size: 13px; }
-.proc input[type=range] { width: 100%; accent-color: var(--accent); }
+.ctl { display: grid; gap: 6px; }
+.ctl .lbl, .lbl { font: 500 11px/1.2 var(--mono); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.ctl .line { display: flex; gap: 10px; align-items: center; }
+.ctl .line input[type=range] { flex: 1; min-width: 0; }
+.ctl output { font: 500 13px var(--mono); min-width: 64px; text-align: right; font-variant-numeric: tabular-nums; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; flex-wrap: wrap; }
+.seg button { border: 0; border-radius: 0; min-height: 40px; }
+.seg button + button { border-left: 1px solid var(--line); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips button { min-height: 40px; padding: 8px 12px; font-size: 13px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, 36px); gap: 8px; }
+.chip { width: 36px; height: 36px; min-height: 36px; padding: 0; border-radius: 6px; border: 1px solid var(--line); }
+.chip[aria-pressed="true"] { outline: 2px solid var(--accent); outline-offset: 2px; }
+.custom { display: inline-flex; gap: 6px; align-items: center; color: var(--muted); font-size: 14px; }
+.custom input { width: 44px; height: 36px; padding: 0; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+.code output { display: block; font: 13px/1.4 var(--mono); background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 8px 10px; overflow-wrap: anywhere; }
+.note { color: var(--muted); font-size: 13px; margin: 0; }
+.card { border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; background: var(--bg); }
+.card b { display: block; font: 600 18px/1.2 var(--display); letter-spacing: .01em; }
+.proc select { width: 100%; font-size: 14px; padding: 8px; }
+.proc .btns { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.proc .btns button { min-height: 40px; padding: 8px 12px; font-size: 13px; }
+.proc input[type=range] { width: 100%; }
 ol.steps { margin: 0; padding: 0 0 0 26px; display: grid; gap: 2px; }
-ol.steps li { padding: 5px 8px 5px 4px; border-radius: 4px; cursor: pointer; font-size: 14px; }
+ol.steps li { padding: 7px 8px 7px 4px; border-radius: 4px; cursor: pointer; font-size: 14px; }
 ol.steps li:hover { background: color-mix(in srgb, var(--fg) 5%, transparent); }
 ol.steps li[aria-current="step"] { background: color-mix(in srgb, var(--accent) 12%, transparent); box-shadow: inset 3px 0 0 var(--accent); }
-.report { padding: 6px 12px; display: grid; gap: 10px; }
-.report .item { display: grid; gap: 4px; }
+.report .item { display: grid; gap: 6px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
 .report .item b { font-size: 14px; }
-.report textarea { width: 100%; min-height: 44px; font: 14px var(--body); color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 6px 8px; resize: vertical; }
+.report textarea { width: 100%; min-height: 48px; font: 15px var(--body); color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 6px 8px; resize: vertical; }
 .report output { display: block; font: 13px/1.5 var(--mono); white-space: pre-wrap; background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 8px 10px; }
-.empty { color: var(--muted); font-size: 13px; padding: 4px 12px; }
+.report .btns { display: flex; gap: 6px; flex-wrap: wrap; }
+.thumbs { display: flex; gap: 6px; flex-wrap: wrap; }
+.thumbs figure { margin: 0; position: relative; }
+.thumbs img { width: 76px; height: 76px; object-fit: cover; border-radius: 4px; border: 1px solid var(--line); display: block; cursor: zoom-in; }
+.thumbs figure button { position: absolute; top: 2px; right: 2px; min-height: 24px; min-width: 24px; padding: 0 5px; font-size: 12px; border-radius: 12px; }
+.lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.86); display: grid; place-items: center; z-index: 50; padding: 16px; }
+.lightbox img { max-width: 100%; max-height: 100%; border-radius: 4px; }
+.empty { color: var(--muted); font-size: 13px; padding: 4px 12px; margin: 0; }
 
-.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px; background: var(--line);
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1px; background: var(--line);
   border: 1px solid var(--line); border-radius: 6px; overflow: hidden; margin: 0; }
 .facts div { background: var(--surface); padding: 12px 14px; min-width: 0; }
 .facts dt { font: 500 11px/1.2 var(--mono); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
-.facts dd { margin: 6px 0 0; font: 600 20px/1.2 var(--display); letter-spacing: .01em; font-variant-numeric: tabular-nums; }
+.facts dd { margin: 6px 0 0; font: 600 20px/1.2 var(--display); letter-spacing: .01em; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
 .facts dd small { display: block; font: 400 13px/1.4 var(--body); color: var(--muted); margin-top: 2px; letter-spacing: 0; }
-
 section h2 { font: 600 22px/1.1 var(--display); margin: 8px 0 10px; letter-spacing: .01em; }
+.notes { display: grid; gap: 8px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; }
+.notes h2 { margin: 0; }
 .views img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; display: block; }
 .views figcaption { color: var(--muted); font-size: 13px; margin-top: 6px; }
 .licence { border-top: 1px solid var(--line); padding-top: 14px; color: var(--muted); font-size: 13px; max-width: 80ch; }
@@ -141,25 +173,29 @@ section h2 { font: 600 22px/1.1 var(--display); margin: 8px 0 10px; letter-spaci
 .tag { display: inline-block; font: 600 11px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase;
   border: 1px solid var(--accent); color: var(--accent); border-radius: 3px; padding: 4px 6px; margin-right: 6px; }
 
-.lab { display: grid; gap: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 16px; }
-.lab h2 { font: 600 24px/1 var(--display); margin: 0; letter-spacing: .01em; }
-.lab .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 0; border: 0; cursor: default; }
-.lab .row:hover { background: transparent; }
-.lab .lbl { font: 500 11px/1.2 var(--mono); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); min-width: 64px; }
-.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; flex-wrap: wrap; }
-.seg button { border: 0; border-radius: 0; min-height: 38px; }
-.seg button + button { border-left: 1px solid var(--line); }
-.grid { display: grid; grid-template-columns: repeat(auto-fill, 34px); gap: 6px; flex: 1 1 260px; }
-.chip { width: 34px; height: 34px; min-height: 34px; padding: 0; border-radius: 6px; border: 1px solid var(--line); }
-.chip[aria-pressed="true"] { outline: 2px solid var(--accent); outline-offset: 2px; }
-.custom { display: inline-flex; gap: 6px; align-items: center; color: var(--muted); font-size: 14px; }
-.custom input { width: 44px; height: 34px; padding: 0; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
-.code { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-.code output { font: 13px/1.4 var(--mono); background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 8px 10px; flex: 1 1 280px; min-width: 0; overflow-wrap: anywhere; }
-.lab .note { color: var(--muted); font-size: 13px; margin: 0; }
+/* a phone: the car pinned at the top, everything else scrolls under it */
+@media (max-width: 999px) {
+  body { padding-top: max(10px, env(safe-area-inset-top, 0px)); }
+  .wrap { gap: 12px; }
+  header .sub { font-size: 13px; }
+  .stage { position: sticky; top: 0; z-index: 5; aspect-ratio: auto; height: 46svh; min-height: 240px; max-height: none; border-radius: 0 0 6px 6px; }
+  .bar { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; -webkit-overflow-scrolling: touch; }
+  .bar::-webkit-scrollbar { display: none; }
+  .bar > * { flex: 0 0 auto; }
+  .side { max-height: none; }
+  .pane { overflow: visible; }
+  .stepbox { top: 10px; bottom: auto; padding: 8px 10px; }
+  .stepbox p { font-size: 13px; }
+  .hint { display: none; }
+}
+@media (max-width: 420px) {
+  .tabs button { padding: 8px 10px; font-size: 14px; }
+  .facts dd { font-size: 18px; }
+}
 @media print {
-  .stage, .controls, .tools, .lab, .tabs, .views { display: none !important; }
+  .stage, .bar, .tabs, .views, #pane-style, #pane-engine, #pane-steps { display: none !important; }
   .bench { grid-template-columns: 1fr; } .side { max-height: none; border: 0; } .pane[hidden] { display: block; }
+  .thumbs img { width: 160px; height: 120px; }
 }
 </style>
 
@@ -167,13 +203,13 @@ section h2 { font: 600 22px/1.1 var(--display); margin: 8px 0 10px; letter-spaci
   <header>
     <span class="eyebrow" id="eyebrow"></span>
     <h1 id="carTitle"></h1>
-    <p class="sub"><span class="swatch" id="swatch" aria-hidden="true" hidden></span><span id="carSub"></span> Drag to spin, pinch or scroll to zoom, click a part to pick it.</p>
+    <p class="sub"><span class="swatch" id="swatch" aria-hidden="true" hidden></span><span id="carSub"></span> Drag to spin, pinch to zoom, tap a part to pick it.</p>
   </header>
 
   <div class="bench">
     <div class="left">
       <div class="stage" id="stage">
-        <canvas id="view" aria-label="3D model of the car. Drag to turn it; click a part to pick it."></canvas>
+        <canvas id="view" aria-label="3D model of the car. Drag to turn it; tap a part to pick it."></canvas>
         <svg class="callouts" id="callouts" aria-hidden="true"></svg>
         <div class="measure" id="measureLabel" hidden></div>
         <div class="stepbox" id="stepBox" hidden><b id="stepN"></b><p id="stepText"></p></div>
@@ -181,7 +217,7 @@ section h2 { font: 600 22px/1.1 var(--display); margin: 8px 0 10px; letter-spaci
         <div class="status" id="status" role="status">Loading the car…</div>
       </div>
 
-      <div class="controls" id="controls" aria-label="Open and close parts">
+      <div class="bar controls" id="controls" aria-label="Open and close parts">
         <button type="button" id="all" disabled>Open everything</button>
         <span class="sep" aria-hidden="true"></span>
         <span id="parts" style="display:contents"></span>
@@ -190,34 +226,38 @@ section h2 { font: 600 22px/1.1 var(--display); margin: 8px 0 10px; letter-spaci
         <button type="button" id="reset" disabled>Reset view</button>
       </div>
 
-      <div class="tools" id="tools" aria-label="Viewing tools">
+      <div class="bar tools" id="tools" aria-label="Viewing tools">
         <label>Explode <input type="range" id="explode" min="0" max="100" value="0" disabled aria-label="Explode the parts apart"></label>
         <span class="sep" aria-hidden="true"></span>
         <button type="button" id="xray" aria-pressed="false" disabled>X-ray</button>
         <button type="button" id="isolate" aria-pressed="false" disabled>Isolate</button>
         <button type="button" id="calloutsBtn" aria-pressed="true" disabled>Callouts</button>
         <span class="sep" aria-hidden="true"></span>
-        <label>Cut away
+        <label>Cut
           <select id="cutAxis" disabled aria-label="Cut-away direction"><option value="">off</option><option value="x">across</option><option value="z">along</option><option value="y">height</option></select>
           <input type="range" id="cutAt" min="0" max="100" value="50" disabled aria-label="Where the cut is"></label>
         <span class="sep" aria-hidden="true"></span>
         <button type="button" id="measure" aria-pressed="false" disabled>Measure</button>
-        <button type="button" id="upLevel" hidden>Back to the whole car</button>
+        <button type="button" id="upLevel" hidden>Whole car</button>
         <button type="button" id="clearPick" hidden>Clear pick</button>
       </div>
     </div>
 
-    <aside class="side" id="side" aria-label="Parts and procedures">
+    <aside class="side" id="side" aria-label="Parts, steps, report, style and engine">
       <div class="tabs" role="tablist">
         <button type="button" role="tab" id="tab-parts" aria-selected="true" aria-controls="pane-parts">Parts</button>
-        <button type="button" role="tab" id="tab-procs" aria-selected="false" aria-controls="pane-procs">Procedures</button>
+        <button type="button" role="tab" id="tab-steps" aria-selected="false" aria-controls="pane-steps">Steps</button>
         <button type="button" role="tab" id="tab-report" aria-selected="false" aria-controls="pane-report">Report</button>
+        <button type="button" role="tab" id="tab-style" aria-selected="false" aria-controls="pane-style">Style</button>
+        <button type="button" role="tab" id="tab-engine" aria-selected="false" aria-controls="pane-engine">Engine</button>
       </div>
+
       <div class="pane" id="pane-parts" role="tabpanel"></div>
-      <div class="pane" id="pane-procs" role="tabpanel" hidden>
-        <div class="proc">
+
+      <div class="pane" id="pane-steps" role="tabpanel" hidden>
+        <div class="pad proc">
           <select id="procPick" aria-label="Procedure"></select>
-          <div class="bar">
+          <div class="btns">
             <button type="button" id="procPrev">◀ Prev</button>
             <button type="button" id="procPlay" aria-pressed="false">Play</button>
             <button type="button" id="procNext">Next ▶</button>
@@ -227,43 +267,85 @@ section h2 { font: 600 22px/1.1 var(--display); margin: 8px 0 10px; letter-spaci
           <ol class="steps" id="procSteps"></ol>
         </div>
       </div>
+
       <div class="pane" id="pane-report" role="tabpanel" hidden>
-        <div class="report">
-          <p class="empty" id="reportEmpty">Flag a part in the list (⚑) and it appears here with room for a note.</p>
-          <div id="reportItems"></div>
+        <div class="pad report">
+          <p class="note" id="reportEmpty">Flag a part in the Parts list (⚑) and it appears here with room for a note and photos. Photos stay on this device.</p>
+          <div class="btns"><button type="button" id="addGeneral">Add a photo of the car</button></div>
+          <div id="reportItems" style="display:grid;gap:10px"></div>
           <output id="reportText" hidden></output>
-          <div class="bar" style="display:flex;gap:6px"><button type="button" id="copyReport">Copy report</button><button type="button" id="clearReport">Clear</button></div>
+          <div class="btns">
+            <button type="button" id="shareReport">Share report</button>
+            <button type="button" id="copyReport">Copy text</button>
+            <button type="button" id="printReport">Print or save PDF</button>
+            <button type="button" id="clearReport">Clear</button>
+          </div>
+          <input type="file" id="photoIn" accept="image/*" capture="environment" multiple hidden>
+        </div>
+      </div>
+
+      <div class="pane" id="pane-style" role="tabpanel" hidden>
+        <div class="pad">
+          <div class="ctl"><span class="lbl">Wheels</span>
+            <div class="chips" id="designs" role="group" aria-label="Wheel design"></div>
+          </div>
+          <div class="ctl" id="sizeCtl"><span class="lbl">Rim size</span>
+            <div class="seg" id="sizes" role="group" aria-label="Rim size">
+              <button type="button" data-in="0" aria-pressed="true">Standard</button>
+              <button type="button" data-in="1" aria-pressed="false">+1 inch</button>
+              <button type="button" data-in="2" aria-pressed="false">+2 inch</button>
+            </div>
+          </div>
+          <div class="ctl"><span class="lbl">Ride height</span>
+            <div class="line"><input type="range" id="ride" min="-60" max="40" step="5" value="0" aria-label="Ride height in millimetres"><output id="rideOut">0 mm</output></div>
+          </div>
+          <div class="ctl"><span class="lbl">Wheel offset</span>
+            <div class="line"><input type="range" id="offset" min="-20" max="40" step="5" value="0" aria-label="Wheels in or out, millimetres"><output id="offsetOut">0 mm</output></div>
+          </div>
+
+          <h3>Finish Lab</h3>
+          <div class="ctl"><span class="lbl">Part</span>
+            <div class="line" style="flex-wrap:wrap">
+              <div class="seg" id="target" role="group" aria-label="Part to finish">
+                <button type="button" data-t="wheels" aria-pressed="true">Wheels</button>
+                <button type="button" data-t="calipers" aria-pressed="false">Calipers</button>
+                <button type="button" data-t="body" aria-pressed="false">Body</button>
+              </div>
+              <button type="button" id="lookWheel" disabled>Look at the wheel</button>
+            </div>
+          </div>
+          <div class="ctl"><span class="lbl">Finish</span><div class="seg" id="finish" role="group" aria-label="Finish"></div></div>
+          <div class="ctl"><span class="lbl">Colour</span>
+            <div class="grid" id="colours" role="group" aria-label="Colour"></div>
+            <label class="custom">Any colour <input type="color" id="customColour" value="#121214"></label>
+          </div>
+          <div class="ctl code"><span class="lbl">Build</span><output id="buildCode" aria-live="polite"></output>
+            <div class="line"><button type="button" id="copyCode">Copy</button><button type="button" id="resetLab">Back to standard</button></div>
+          </div>
+          <p class="note">Wheels and calipers change on all four corners; the body changes its paint only. The new wheels are modelled by the machine at this car's own wheel size. Your build is kept on this device.</p>
+        </div>
+      </div>
+
+      <div class="pane" id="pane-engine" role="tabpanel" hidden>
+        <div class="pad">
+          <div class="card" id="engineCard"><b>Turbo petrol engine and gearbox</b>
+            <p class="note">A representative engine, fitted by the machine to every car of this kind and sized to its bay. It stands for the family, not this car's own unit.</p></div>
+          <div class="line" style="display:flex;gap:8px;flex-wrap:wrap">
+            <button type="button" id="liftEngine" aria-pressed="false" disabled>Lift the engine out</button>
+            <button type="button" id="lookBay" disabled>Look in the bay</button>
+            <button type="button" id="focusBay" disabled>Number every part</button>
+          </div>
+          <h3>Engine and gearbox</h3>
+          <div id="engineList"></div>
+          <p class="empty" id="noEngine" hidden>This file has no engine parts.</p>
         </div>
       </div>
     </aside>
   </div>
 
-  <section class="lab" id="lab" aria-label="Finish Lab">
-    <h2>Finish Lab</h2>
-    <div class="row"><span class="lbl">Part</span>
-      <div class="seg" id="target" role="group" aria-label="Part to finish">
-        <button type="button" data-t="wheels" aria-pressed="true">Wheels</button>
-        <button type="button" data-t="calipers" aria-pressed="false">Calipers</button>
-        <button type="button" data-t="body" aria-pressed="false">Body</button>
-      </div>
-      <button type="button" id="lookWheel" disabled>Look at the wheel</button>
-    </div>
-    <div class="row"><span class="lbl">Finish</span>
-      <div class="seg" id="finish" role="group" aria-label="Finish"></div>
-    </div>
-    <div class="row"><span class="lbl">Colour</span>
-      <div class="grid" id="colours" role="group" aria-label="Colour"></div>
-      <label class="custom">Any colour <input type="color" id="customColour" value="#121214"></label>
-    </div>
-    <div class="code"><span class="lbl">Build</span><output id="buildCode" aria-live="polite"></output>
-      <button type="button" id="copyCode">Copy</button>
-      <button type="button" id="resetLab">Factory finish</button>
-    </div>
-    <p class="note">Each part keeps its own finish. Wheels and calipers change on all four corners. The body changes its paint only, not its trim or glass.</p>
-  </section>
   <dl class="facts" id="facts"></dl>
 
-  <section class="lab" id="notes" hidden>
+  <section class="notes" id="notes" hidden>
     <h2>Notes from the machine</h2>
     <div id="notesList"></div>
   </section>
@@ -278,6 +360,7 @@ section h2 { font: 600 22px/1.1 var(--display); margin: 8px 0 10px; letter-spaci
 
   <footer class="licence" id="credit"></footer>
 </div>
+<div class="lightbox" id="lightbox" hidden><img id="lightImg" alt=""></div>
 
 <script type="importmap">
 { "imports": {
@@ -297,6 +380,11 @@ const $ = id => document.getElementById(id);
 // everything this page says about its car: filled in by the machine (page.py)
 const CAR = JSON.parse(document.getElementById('car-config').textContent);
 function el(tag, text, cls) { const e = document.createElement(tag); if (text != null) e.textContent = text; if (cls) e.className = cls; return e; }
+const store = {                                    // per-device memory; a private window may refuse it
+  get(k) { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* storage off */ } },
+  del(k) { try { localStorage.removeItem(k); } catch (e) { /* storage off */ } },
+};
 $('eyebrow').textContent = CAR.eyebrow;
 $('carTitle').textContent = CAR.title;
 $('carSub').textContent = CAR.sub;
@@ -318,12 +406,14 @@ if (CAR.sheet) $('views').hidden = false;
     if (cab.url) { const a = el('a', 'Source'); a.href = cab.url; a.target = '_blank'; a.rel = 'noopener'; p.append(a, '. '); }
   }
   p.append(c.commercial ? 'Credit as given here is required. The file carries it too.' : 'Fine to view and demo; not for paid use.');
-  const q = el('p', 'Rigged, glass cleared and engine bay fitted by the ExpertCarCheck GLB machine. Makes and model names are trademarks of their owners; this model is independent and not endorsed by them.');
+  const q = el('p', 'Rigged, glass cleared, engine bay fitted and new wheels modelled by the ExpertCarCheck GLB machine. Makes and model names are trademarks of their owners; this model is independent and not endorsed by them.');
   $('credit').append(p, q);
 }
 const stage = $('stage'), canvas = $('view'), status = $('status');
 const PARTS = CAR.parts;
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const phone = matchMedia('(max-width: 999px)').matches;
+const coarse = matchMedia('(pointer: coarse)').matches;
 
 function fail(why) {
   canvas.hidden = true;
@@ -337,16 +427,16 @@ function fail(why) {
 
 let renderer;
 try {
-  renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: !coarse });
 } catch (e) {
   fail('WebGL is turned off or not supported.');
   throw e;
 }
-renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+// a phone's screen has three pixels to the point: two are as sharp to the eye and half the work
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, coarse ? 1.75 : 2));
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.05;
-renderer.localClippingEnabled = false;
 
 const scene = new THREE.Scene();
 const pmrem = new THREE.PMREMGenerator(renderer);
@@ -358,16 +448,27 @@ scene.add(sun);
 function paintStage() {
   const c = getComputedStyle(document.documentElement).getPropertyValue('--stage').trim() || '#d9dde1';
   scene.background = new THREE.Color(c);
+  redraw();
 }
-paintStage();
-matchMedia('(prefers-color-scheme: dark)').addEventListener('change', paintStage);
-new MutationObserver(paintStage).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-
 const camera = new THREE.PerspectiveCamera(32, 16 / 9, 0.05, 200);
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
 controls.minDistance = 0.6;
 controls.maxDistance = 22;
+
+// A frame is drawn when something changed (a drag, a button, a pick) and
+// kept going while anything moves (a door swinging, the car turning over,
+// the camera easing, the engine on its hoist); a still car costs nothing,
+// which a phone's battery notices.
+let needs = 2;
+function redraw() { needs = Math.max(needs, 2); }
+controls.addEventListener('change', redraw);
+document.addEventListener('click', redraw, true);
+document.addEventListener('input', redraw, true);
+document.addEventListener('change', redraw, true);
+paintStage();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', paintStage);
+new MutationObserver(paintStage).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
 function fit() {
   const w = stage.clientWidth, h = stage.clientHeight;
@@ -375,6 +476,7 @@ function fit() {
   renderer.setSize(w, h, false);
   camera.aspect = w / h;
   camera.updateProjectionMatrix();
+  redraw();
 }
 new ResizeObserver(fit).observe(stage);
 fit();
@@ -397,14 +499,15 @@ function shadowDisc(len, wid) {
   return m;
 }
 
-const S = { mixer: null, actions: {}, open: {}, pivot: null, root: null, car: null, flipTo: 0, home: null, shadow: null, box: null, camTo: null };
+const S = { mixer: null, actions: {}, open: {}, pivot: null, root: null, car: null, sprung: null, flipTo: 0, home: null,
+  shadow: null, box: null, camTo: null };
 const clock = new THREE.Clock();
 
 const loader = new GLTFLoader();
 loader.setMeshoptDecoder(MeshoptDecoder);
 
 // the GLB travels inside JSON files (artifact pages serve data, not .glb),
-// in two parts: each file is kept under the page's size cap
+// in parts: each file is kept under the page's size cap
 async function fetchPart(url, done, whole) {
   const r = await fetch(url);
   if (!r.ok) throw new Error(`The car file did not load (${r.status}).`);
@@ -417,7 +520,7 @@ async function fetchPart(url, done, whole) {
     if (end) break;
     chunks.push(value);
     got += value.length;
-    progress({ loaded: done + got, total: total ? whole || total * 2 : 0 });
+    progress({ loaded: done + got, total: total ? whole || total * CAR.files.length : 0 });
   }
   const all = new Uint8Array(got);
   let o = 0;
@@ -439,7 +542,7 @@ async function fetchGlb(urls) {
 }
 function progress(ev) {
   status.textContent = ev.total
-    ? `Loading the car… ${Math.round(ev.loaded / ev.total * 100)}%`
+    ? `Loading the car… ${Math.min(99, Math.round(ev.loaded / ev.total * 100))}%`
     : `Loading the car… ${(ev.loaded / 1048576).toFixed(1)} MB`;
 }
 
@@ -457,9 +560,17 @@ function onCar(gltf) {
   root.position.sub(ctr);
   S.pivot.add(root);
   S.root = root;
+  // the file's own top node (the car), and inside it a "sprung" group: the
+  // body and all on it rise and fall on the suspension (ride height); the
+  // wheels stay on the ground
   S.car = root.children.length === 1 && root.children[0].children.length ? root.children[0] : root;
+  S.sprung = new THREE.Group();
+  S.sprung.name = '_sprung';
+  for (const c of [...S.car.children]) if (!/^wheel_[fr][lr]$/.test(c.name)) S.sprung.add(c);
+  S.car.add(S.sprung);
   S.box = { size, ctr };
   scene.add(S.pivot);
+  scene.updateMatrixWorld(true);                 // measures below read world positions before the first frame
   S.shadow = shadowDisc(size.z, size.x);
   S.shadow.position.x = ctr.x;
   S.shadow.position.z = ctr.z;
@@ -485,7 +596,8 @@ function onCar(gltf) {
   }
 
   const L = size.z;
-  camera.position.set(ctr.x + L * 0.78, ctr.y + size.y * 0.75, ctr.z + L * 0.92);
+  if (phone) camera.position.set(ctr.x + L * 1.0, ctr.y + size.y * 0.9, ctr.z + L * 1.25);
+  else camera.position.set(ctr.x + L * 0.78, ctr.y + size.y * 0.75, ctr.z + L * 0.92);
   controls.target.set(ctr.x, ctr.y * 0.85, ctr.z);
   controls.update();
   S.home = { pos: camera.position.clone(), target: controls.target.clone() };
@@ -496,6 +608,11 @@ function onCar(gltf) {
   labSetup(root);
   labRestore();
   benchSetup();
+  styleSetup();
+  engineSetup();
+  redraw();
+  // ?debug: the page's state for a test to read
+  if (new URLSearchParams(location.search).has('debug')) window.__car = { THREE, S, B, ST, LAB, camera, renderer, scene };
 }
 
 function setOpen(id, open) {
@@ -525,10 +642,7 @@ function setFlip(on) {
   $('flip').textContent = on ? 'Turn back' : 'Flip over';
 }
 $('flip').addEventListener('click', () => setFlip(!S.flipTo));
-$('reset').addEventListener('click', () => {
-  if (!S.home) return;
-  moveCam(S.home.pos, S.home.target);
-});
+$('reset').addEventListener('click', () => { if (S.home) moveCam(S.home.pos, S.home.target); });
 // a camera move eases over half a second (at once when motion is reduced)
 function moveCam(pos, target) {
   redraw();
@@ -538,14 +652,16 @@ function moveCam(pos, target) {
 
 // ── the bench: parts catalogue, callouts, explode, x-ray, cut-away, measure, procedures, report ──
 // The car's parts, numbered and grouped (page.py read them from the file);
-// a click in the list or on the car picks a part, as a parts catalogue links
-// its list to its drawing. A group can be focused: its items get the
+// a tap in the list or on the car picks a part, as a parts catalogue links
+// its list to its drawing. A group can be focused: its parts get the
 // callouts and the explode slider spreads them.
 const CAT = CAR.catalogue || [], PROCS = CAR.procedures || [];
-const B = { node: new Map(), idOf: new Map(), hinge: new Map(), item: new Map(), rows: new Map(), level: null, picked: new Set(), xray: false, isolate: false,
-  callouts: true, explode: 0, base: new Map(), ghost: null, hl: new Map(), orig: new WeakMap(), measure: null, mPts: [], mLine: null,
-  proc: null, step: -1, timer: null, flags: {}, co: new Map(), cut: null, cutPlane: new THREE.Plane() };
+const B = { node: new Map(), idOf: new Map(), hinge: new Map(), item: new Map(), rows: new Map(), level: null, picked: new Set(),
+  xray: false, isolate: false, callouts: !phone, explode: 0, base: new Map(), explodeD: new Map(), offsetD: new Map(), liftD: new Map(),
+  ghost: null, hl: new Map(), orig: new WeakMap(), measure: false, mPts: [], mLine: null,
+  proc: null, step: -1, timer: null, flags: {}, co: new Map(), cutPlane: new THREE.Plane() };
 const TOP_GROUPS = { engine_bay: 'Engine bay', rear_running_gear: 'Under the back', exhaust: 'Exhaust system', cabin: 'Cabin' };
+const HIDE = new THREE.MeshBasicMaterial({ visible: false });   // a factory wheel under a new one
 
 // the loader writes node names its own way (spaces to "_", ":" and "." dropped:
 // "bay:battery-assembly" is "baybattery-assembly" in the scene), so the
@@ -570,41 +686,65 @@ function benchSetup() {
       head.append(f);
     }
     pane.append(head);
-    for (const it of g.items) {
-      B.item.set(it.id, it);
-      const r = el('div', null, 'row'); r.setAttribute('role', 'button'); r.tabIndex = 0; r.id = 'row-' + it.id; r.setAttribute('aria-selected', 'false');
-      r.append(el('span', String(it.n), 'n'), el('span', it.label, 'nm'));
-      const acts = el('span', null, 'acts');
-      const look = el('button', '◎'); look.type = 'button'; look.title = 'Look at it'; look.setAttribute('aria-label', 'Look at ' + it.label);
-      look.addEventListener('click', e => { e.stopPropagation(); pick([it.id]); frameParts([it.id]); });
-      const fl = el('button', '⚑', 'fl'); fl.type = 'button'; fl.title = 'Flag for the report'; fl.setAttribute('aria-pressed', 'false');
-      fl.setAttribute('aria-label', 'Flag ' + it.label + ' for the report');
-      fl.addEventListener('click', e => { e.stopPropagation(); setFlag(it.id, !B.flags[it.id]); });
-      acts.append(look, fl);
-      r.append(acts);
-      if (!B.node.has(it.id)) { r.classList.add('missing'); r.title = 'Not in this file'; }
-      else {
-        r.addEventListener('click', e => pick([it.id], e.shiftKey));
-        r.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick([it.id], e.shiftKey); } });
-      }
-      B.rows.set(it.id, r);
-      pane.append(r);
-    }
+    for (const it of g.items) pane.append(partRow(it));
   }
-  // explode moves a hinged part by its hinge, the rest by their own node
+  // explode, the stance and the hoist move a hinged part by its hinge, the
+  // rest by their own node: each of those moves is kept apart and added up
   for (const id of B.node.keys()) {
     const n = mover(id);
     if (n && !B.base.has(n)) B.base.set(n, n.position.clone());
   }
   B.ghost = new THREE.MeshStandardMaterial({ color: 0x8e97a2, transparent: true, opacity: 0.1, depthWrite: false, metalness: 0, roughness: 1 });
+  B.liftGhost = new THREE.MeshStandardMaterial({ color: 0x8e97a2, transparent: true, opacity: 0.28, depthWrite: false, metalness: 0, roughness: 0.8 });
   for (const id of ['explode', 'xray', 'isolate', 'calloutsBtn', 'cutAxis', 'cutAt', 'measure']) $(id).disabled = false;
+  $('calloutsBtn').setAttribute('aria-pressed', String(B.callouts));
+  $('callouts').style.display = B.callouts ? '' : 'none';
   procSetup();
   reportRestore();
-  setLevel(null);
+  setLevel(null, true);
+}
+function partRow(it, where) {
+  B.item.set(it.id, it);
+  const r = el('div', null, 'row'); r.setAttribute('role', 'button'); r.tabIndex = 0; r.setAttribute('aria-selected', 'false');
+  if (!where) r.id = 'row-' + it.id;
+  r.dataset.id = it.id;
+  r.append(el('span', String(it.n), 'n'), el('span', it.label, 'nm'));
+  const acts = el('span', null, 'acts');
+  const look = el('button', '◎'); look.type = 'button'; look.title = 'Look at it'; look.setAttribute('aria-label', 'Look at ' + it.label);
+  look.addEventListener('click', e => { e.stopPropagation(); pick([it.id]); frameParts([it.id]); });
+  acts.append(look);
+  if (!where) {
+    const fl = el('button', '⚑', 'fl'); fl.type = 'button'; fl.title = 'Flag for the report'; fl.setAttribute('aria-pressed', 'false');
+    fl.setAttribute('aria-label', 'Flag ' + it.label + ' for the report');
+    fl.addEventListener('click', e => { e.stopPropagation(); setFlag(it.id, !B.flags[it.id]); });
+    acts.append(fl);
+  }
+  r.append(acts);
+  if (!B.node.has(it.id)) { r.classList.add('missing'); r.title = 'Not in this file'; }
+  else {
+    const go = e => { pick([it.id], e.shiftKey); if (where === 'engine') frameParts([it.id], 1.1); };
+    r.addEventListener('click', go);
+    r.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(e); } });
+  }
+  if (!where) B.rows.set(it.id, r);
+  return r;
 }
 function mover(id) { return B.hinge.get(id) || B.node.get(id) || null; }
+// every move of a node is the sum of its parts: explode, stance, hoist
+function place(n) {
+  const b = B.base.get(n); if (!b) return;
+  n.position.copy(b);
+  for (const m of [B.explodeD, B.offsetD, B.liftD]) { const d = m.get(n); if (d) n.position.add(d); }
+}
+// a move given in the car's own frame (x across, y up, z along, metres), in
+// the node's parent's frame: the engine bay group is scaled to its car
+const _m = new THREE.Matrix4();
+function carDelta(n, v) {
+  _m.copy(n.parent.matrixWorld).invert().multiply(S.car.matrixWorld);
+  return v.clone().applyMatrix4(_m).sub(new THREE.Vector3().applyMatrix4(_m));
+}
 const GROUP_TAG = { engine_bay: 'E', rear_running_gear: 'U' };
-// the whole car's callouts: every part that is its own node under the root
+// the whole car's callouts: every part that is its own node on the car
 // (doors, lids, wheels, the exhaust, the cabin) by its number, and each
 // drill-down group as one callout with a letter
 function levelItems() {
@@ -612,12 +752,12 @@ function levelItems() {
   const out = [];
   for (const g of CAT) for (const it of g.items) {
     const n = mover(it.id);
-    if (n && it.id !== 'body' && n.parent === S.car) out.push(it);
+    if (n && it.id !== 'body' && (n.parent === S.car || n.parent === S.sprung)) out.push(it);
   }
   for (const g of CAT) if (g.drill && B.node.has(g.drill)) out.push({ id: g.drill, label: g.title, n: GROUP_TAG[g.drill] || '+', group: true });
   return out;
 }
-function setLevel(level) {
+function setLevel(level, quiet) {
   redraw();
   setExplode(0);
   B.level = level;
@@ -625,7 +765,7 @@ function setLevel(level) {
   $('upLevel').hidden = !level;
   buildCallouts();
   if (level) frameParts([level], 1.15);
-  else if (S.home) moveCam(S.home.pos, S.home.target);   // back to the whole car: the home view
+  else if (S.home && !quiet) moveCam(S.home.pos, S.home.target);   // back to the whole car: the home view
 }
 $('upLevel').addEventListener('click', () => setLevel(null));
 
@@ -634,47 +774,51 @@ function pick(ids, add = false) {
   redraw();
   if (!add) B.picked.clear();
   for (const id of ids) if (B.node.has(id)) { if (add && B.picked.has(id)) B.picked.delete(id); else B.picked.add(id); }
-  for (const [id, r] of B.rows) r.setAttribute('aria-selected', String(B.picked.has(id)));
+  document.querySelectorAll('.row[data-id]').forEach(r => r.setAttribute('aria-selected', String(B.picked.has(r.dataset.id))));
   const first = [...B.picked][0];
-  if (first && B.rows.get(first)) B.rows.get(first).scrollIntoView({ block: 'nearest' });
+  const r = first && B.rows.get(first);
+  if (r && !phone) r.scrollIntoView({ block: 'nearest' });
   $('clearPick').hidden = !B.picked.size;
   refreshLook();
 }
 $('clearPick').addEventListener('click', () => pick([]));
 function underPick(o) { for (let p = o; p; p = p.parent) { const id = B.idOf.get(p); if (id && B.picked.has(id)) return true; } return false; }
 function refreshLook() {
+  redraw();
   const any = B.picked.size > 0;
   S.root.traverse(o => {
     if (!o.isMesh) return;
     if (!B.orig.has(o)) B.orig.set(o, o.material);
+    if (o.userData.swapHidden) { o.material = HIDE; return; }
     const orig = B.orig.get(o), on = any && underPick(o);
     o.visible = !(B.isolate && any) || on;
     if (on) {
       let h = B.hl.get(orig);
       if (!h) { h = orig.clone(); h.emissive = new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#1f4f86'); h.emissiveIntensity = 0.35; B.hl.set(orig, h); }
       o.material = h;
-    } else o.material = (B.xray && any) ? B.ghost : orig;
+    } else o.material = (B.xray && any) ? B.ghost : (B.lift.ghost && !onHoist(o)) ? B.liftGhost : orig;
   });
   for (const [id, g] of B.co) g.classList.toggle('on', B.picked.has(id));
 }
 $('xray').addEventListener('click', () => { B.xray = !B.xray; $('xray').setAttribute('aria-pressed', String(B.xray)); refreshLook(); });
 $('isolate').addEventListener('click', () => { B.isolate = !B.isolate; $('isolate').setAttribute('aria-pressed', String(B.isolate)); refreshLook(); });
-$('calloutsBtn').addEventListener('click', () => { B.callouts = !B.callouts; $('calloutsBtn').setAttribute('aria-pressed', String(B.callouts)); $('callouts').style.display = B.callouts ? '' : 'none'; });
+$('calloutsBtn').addEventListener('click', () => { B.callouts = !B.callouts; $('calloutsBtn').setAttribute('aria-pressed', String(B.callouts)); $('callouts').style.display = B.callouts ? '' : 'none'; redraw(); });
 
-// a click (not a drag) on the car picks the part under the pointer; in
-// measure mode it sets a point
+// a tap (not a drag) on the car picks the part under it; in measure mode it sets a point
 const ray = new THREE.Raycaster(), ptr = new THREE.Vector2();
 let down = null;
-canvas.addEventListener('pointerdown', e => { down = { x: e.clientX, y: e.clientY }; });
+canvas.addEventListener('pointerdown', e => { down = { x: e.clientX, y: e.clientY, n: (down && down.n || 0) + 1 }; });
+canvas.addEventListener('pointercancel', () => { down = null; });
 canvas.addEventListener('pointerup', e => {
   if (!down || !S.root) return;
-  const moved = Math.hypot(e.clientX - down.x, e.clientY - down.y) > 4;
+  const moved = Math.hypot(e.clientX - down.x, e.clientY - down.y) > (coarse ? 10 : 4) || down.n > 1;
   down = null;
   if (moved) return;
   const r = canvas.getBoundingClientRect();
   ptr.set((e.clientX - r.left) / r.width * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
   ray.setFromCamera(ptr, camera);
-  const hits = ray.intersectObject(S.root, true).filter(h => h.object.visible && h.object.material !== B.ghost);
+  const hits = ray.intersectObject(S.root, true).filter(h => h.object.visible && h.object.material !== B.ghost && h.object.material.visible !== false
+    && (!renderer.clippingPlanes.length || B.cutPlane.distanceToPoint(h.point) >= 0));
   if (B.measure) { if (hits[0]) measurePoint(hits[0].point); return; }
   if (!hits[0]) { if (!e.shiftKey) pick([]); return; }
   // the catalogue item that owns the mesh: the deepest named node in the list
@@ -692,7 +836,7 @@ function buildCallouts() {
   for (const it of levelItems()) {
     const g = document.createElementNS(svgNS, 'g'); g.classList.add('co');
     const line = document.createElementNS(svgNS, 'line'), dot = document.createElementNS(svgNS, 'circle'), tag = document.createElementNS(svgNS, 'circle'), t = document.createElementNS(svgNS, 'text');
-    dot.classList.add('dot'); dot.setAttribute('r', '2.5'); tag.classList.add('tag'); tag.setAttribute('r', it.group ? '11' : '10'); t.textContent = String(it.n);
+    dot.classList.add('dot'); dot.setAttribute('r', '2.5'); tag.classList.add('tag'); tag.setAttribute('r', it.group ? '12' : (coarse ? '12' : '10')); t.textContent = String(it.n);
     g.append(line, dot, tag, t);
     g.addEventListener('click', e => { pick([it.id], e.shiftKey); if (it.group && !B.level && CAT.some(c => c.drill === it.id)) setLevel(it.id); });
     const title = document.createElementNS(svgNS, 'title'); title.textContent = it.label; g.append(title);
@@ -727,31 +871,30 @@ function updateCallouts() {
 // ── explode: the focused level's parts move apart, each along its own way out ──
 const WAY = { bonnet: [0, .6, .8], tailgate: [0, .6, -.8], engine_bay: [0, 1, .45], rear_running_gear: [0, -.8, -.4], exhaust: [0, -.9, 0], cabin: [0, .9, 0] };
 function wayOut(id, centre, levelCentre) {
-  if (WAY[id]) return new THREE.Vector3(...WAY[id]);
+  if (WAY[id]) return new THREE.Vector3(...WAY[id]).normalize();
   if (/^door_[fr]l$/.test(id)) return new THREE.Vector3(1, 0, 0);
   if (/^door_[fr]r$/.test(id)) return new THREE.Vector3(-1, 0, 0);
-  if (/^wheel_[fr]l$/.test(id)) return new THREE.Vector3(1, -.15, 0);
-  if (/^wheel_[fr]r$/.test(id)) return new THREE.Vector3(-1, -.15, 0);
+  if (/^wheel_[fr]l$/.test(id)) return new THREE.Vector3(1, -.15, 0).normalize();
+  if (/^wheel_[fr]r$/.test(id)) return new THREE.Vector3(-1, -.15, 0).normalize();
   const d = centre.clone().sub(levelCentre); d.y += 0.12;
   return d.length() < 0.02 ? new THREE.Vector3(0, 1, 0) : d.normalize();
 }
 function setExplode(k) {
   redraw();
+  if (B.lift && B.lift.on && k) k = 0;            // the engine is on the hoist: no explode
   B.explode = k;
   $('explode').value = String(Math.round(k * 100));
+  if (!S.root) return;
   const items = levelItems();
-  const lvl = B.level ? B.node.get(B.level) : S.root;
-  const lc = new THREE.Box3().setFromObject(lvl).getCenter(new THREE.Vector3());
+  const lvl = B.level ? B.node.get(B.level) : S.car;
+  const toCar = new THREE.Matrix4().copy(S.car.matrixWorld).invert();
+  const lc = new THREE.Box3().setFromObject(lvl).getCenter(new THREE.Vector3()).applyMatrix4(toCar);
   const reach = B.level ? 0.55 : S.box.size.z * 0.42;
-  // local directions: the car's own axes (x across, y up, z along) in the root's frame
-  const inv = new THREE.Matrix4().copy(S.root.matrixWorld).invert();
   for (const it of items) {
-    const n = mover(it.id); if (!n) continue;
-    const base = B.base.get(n); if (!base) continue;
-    const c = new THREE.Box3().setFromObject(B.node.get(it.id)).getCenter(new THREE.Vector3());
-    const way = wayOut(it.id, c.applyMatrix4(inv), lc.clone().applyMatrix4(inv));
-    const parentInv = n.parent ? new THREE.Matrix4().copy(n.parent.matrixWorld).invert().multiply(S.root.matrixWorld) : new THREE.Matrix4();
-    n.position.copy(base).add(way.transformDirection(parentInv).multiplyScalar(k * reach));
+    const n = mover(it.id); if (!n || !B.base.has(n)) continue;
+    const c = new THREE.Box3().setFromObject(B.node.get(it.id)).getCenter(new THREE.Vector3()).applyMatrix4(toCar);
+    B.explodeD.set(n, k ? carDelta(n, wayOut(it.id, c, lc).multiplyScalar(k * reach)) : new THREE.Vector3());
+    place(n);
   }
 }
 $('explode').addEventListener('input', e => setExplode(+e.target.value / 100));
@@ -760,7 +903,7 @@ $('explode').addEventListener('input', e => setExplode(+e.target.value / 100));
 function setCut() {
   redraw();
   const axis = $('cutAxis').value;
-  if (!axis || !S.box) { renderer.clippingPlanes = []; B.cut = null; return; }
+  if (!axis || !S.box) { renderer.clippingPlanes = []; return; }
   const k = +$('cutAt').value / 100;
   const { size, ctr } = S.box;
   const n = new THREE.Vector3(axis === 'x' ? -1 : 0, axis === 'y' ? -1 : 0, axis === 'z' ? -1 : 0);
@@ -771,7 +914,7 @@ function setCut() {
 $('cutAxis').addEventListener('change', setCut);
 $('cutAt').addEventListener('input', setCut);
 
-// ── measure: two points on the car, the distance between them ──
+// ── measure: two taps on the car, the distance between them ──
 function measurePoint(p) {
   redraw();
   if (B.mPts.length >= 2) { B.mPts = []; if (B.mLine) { scene.remove(B.mLine); B.mLine = null; } $('measureLabel').hidden = true; }
@@ -801,24 +944,26 @@ function updateMeasure() {
 // ── camera views: named views of the car, or a frame round some parts ──
 function view(name) {
   const { size, ctr } = S.box, L = size.z, H = size.y, W = size.x;
+  const far = phone ? 1.25 : 1;                 // a tall, narrow phone stage needs more room
   const t = ctr.clone(), p = ctr.clone();
   switch (name) {
-    case 'front': p.add(new THREE.Vector3(L * .35, H * .55, L * 1.45)); break;
-    case 'rear': p.add(new THREE.Vector3(-L * .35, H * .55, -L * 1.45)); break;
-    case 'nearside': p.add(new THREE.Vector3(L * 1.35, H * .45, L * .15)); break;
-    case 'offside': p.add(new THREE.Vector3(-L * 1.35, H * .45, L * .15)); break;
+    case 'front': p.add(new THREE.Vector3(L * .35, H * .55, L * 1.45).multiplyScalar(far)); break;
+    case 'rear': p.add(new THREE.Vector3(-L * .35, H * .55, -L * 1.45).multiplyScalar(far)); break;
+    case 'nearside': p.add(new THREE.Vector3(L * 1.35, H * .45, L * .15).multiplyScalar(far)); break;
+    case 'offside': p.add(new THREE.Vector3(-L * 1.35, H * .45, L * .15).multiplyScalar(far)); break;
     case 'top': p.add(new THREE.Vector3(0.01, L * 1.6, 0.02)); break;
-    case 'bay': t.add(new THREE.Vector3(0, H * .25, L * .33)); p.copy(t).add(new THREE.Vector3(L * .12, L * .55, L * .62)); break;
-    case 'boot': t.add(new THREE.Vector3(0, H * .2, -L * .3)); p.copy(t).add(new THREE.Vector3(L * .25, L * .5, -L * .7)); break;
-    case 'cabin': t.add(new THREE.Vector3(0, H * .1, 0)); p.copy(t).add(new THREE.Vector3(W * 1.2, H * .9, L * .05)); break;
-    case 'under': p.add(new THREE.Vector3(L * .3, L * 1.1, L * .5)); break;
+    case 'bay': t.add(new THREE.Vector3(0, H * .25, L * .33)); p.copy(t).add(new THREE.Vector3(L * .12, L * .55, L * .62).multiplyScalar(far)); break;
+    case 'boot': t.add(new THREE.Vector3(0, H * .2, -L * .3)); p.copy(t).add(new THREE.Vector3(L * .25, L * .5, -L * .7).multiplyScalar(far)); break;
+    case 'cabin': t.add(new THREE.Vector3(0, H * .1, 0)); p.copy(t).add(new THREE.Vector3(W * 1.2, H * .9, L * .05).multiplyScalar(far)); break;
+    case 'under': p.add(new THREE.Vector3(L * .3, L * 1.1, L * .5).multiplyScalar(far)); break;
+    case 'hoist': t.add(new THREE.Vector3(0, H * .7, L * .55)); p.copy(t).add(new THREE.Vector3(L * 1.1, L * .45, L * .55).multiplyScalar(far)); break;
     default:
       if (name.startsWith('door:') || name.startsWith('wheel:')) {
         const id = name.replace(':', '_'), n = B.node.get(id);
         if (n) {
           const c = new THREE.Box3().setFromObject(n).getCenter(new THREE.Vector3());
           const side = id.endsWith('l') ? 1 : -1, end = id.includes('_f') ? 1 : -1;
-          t.copy(c); p.copy(c).add(new THREE.Vector3(side * L * (name.startsWith('door') ? .7 : .45), H * .35, end * L * .2));
+          t.copy(c); p.copy(c).add(new THREE.Vector3(side * L * (name.startsWith('door') ? .7 : .45), H * .35, end * L * .2).multiplyScalar(far));
           break;
         }
       }
@@ -832,7 +977,7 @@ function frameParts(ids, pad = 1.0) {
   for (const id of ids) { const n = B.node.get(id); if (n) box.union(new THREE.Box3().setFromObject(n)); }
   if (box.isEmpty()) return;
   const c = box.getCenter(new THREE.Vector3()), r = Math.max(box.getSize(new THREE.Vector3()).length() / 2, 0.12);
-  const dist = Math.max(r * 2.6 * pad, 0.9);
+  const dist = Math.max(r * 2.6 * pad * (phone ? 1.3 : 1), 0.9);
   // look from above and the near front corner, from the side the part is on
   const side = c.x - S.pivot.position.x >= 0 ? 1 : -1;
   const dir = new THREE.Vector3(side * .55, .75, .8).normalize();
@@ -842,7 +987,7 @@ function frameParts(ids, pad = 1.0) {
 // ── procedures: step by step over the car, each step opening, picking and framing ──
 function procSetup() {
   const sel = $('procPick');
-  if (!PROCS.length) { $('pane-procs').replaceChildren(el('p', 'No procedures for this car.', 'empty')); return; }
+  if (!PROCS.length) { $('pane-steps').replaceChildren(el('p', 'No procedures for this car.', 'empty')); return; }
   PROCS.forEach((p, i) => { const o = el('option', `${p.title} (${p.steps.length} steps)`); o.value = String(i); sel.append(o); });
   sel.addEventListener('change', () => startProc(+sel.value));
   $('procPrev').addEventListener('click', () => goStep(B.step - 1));
@@ -850,7 +995,7 @@ function procSetup() {
   $('procScrub').addEventListener('input', e => goStep(+e.target.value));
   $('procPlay').addEventListener('click', () => playProc(!B.timer));
   $('procStop').addEventListener('click', stopProc);
-  $('pane-procs').addEventListener('keydown', e => {
+  $('pane-steps').addEventListener('keydown', e => {
     if (e.key === 'ArrowRight') { e.preventDefault(); goStep(B.step + 1); }
     if (e.key === 'ArrowLeft') { e.preventDefault(); goStep(B.step - 1); }
   });
@@ -861,19 +1006,18 @@ function startProc(i, go = true) {
   B.proc = PROCS[i];
   const ol = $('procSteps');
   ol.replaceChildren();
-  B.proc.steps.forEach((st, k) => {
-    const li = el('li', st.text); li.addEventListener('click', () => goStep(k)); ol.append(li);
-  });
+  B.proc.steps.forEach((st, k) => { const li = el('li', st.text); li.addEventListener('click', () => goStep(k)); ol.append(li); });
   $('procScrub').max = String(B.proc.steps.length - 1);
   if (go) goStep(0);
 }
 function goStep(k) {
   if (!B.proc) return;
+  if (B.lift && B.lift.on) liftEngine(false);
   k = Math.max(0, Math.min(B.proc.steps.length - 1, k));
   B.step = k;
   const st = B.proc.steps[k];
   $('procScrub').value = String(k);
-  [...$('procSteps').children].forEach((li, i) => { if (i === k) { li.setAttribute('aria-current', 'step'); li.scrollIntoView({ block: 'nearest' }); } else li.removeAttribute('aria-current'); });
+  [...$('procSteps').children].forEach((li, i) => { if (i === k) { li.setAttribute('aria-current', 'step'); if (!phone) li.scrollIntoView({ block: 'nearest' }); } else li.removeAttribute('aria-current'); });
   $('stepN').textContent = `${B.proc.title} · step ${k + 1} of ${B.proc.steps.length}`;
   $('stepText').textContent = st.text;
   $('stepBox').hidden = false;
@@ -901,53 +1045,422 @@ function stopProc(clear = true) {
   if (clear) { pick([]); setFlip(false); }
 }
 
-// ── report: flagged parts with notes, as a parts basket collects an order ──
+// ── report: flagged parts with notes and photos ──
+// Photos are made smaller (1600 px at most) and kept on this device only
+// (the browser's own database); nothing is sent anywhere. A phone's share
+// sheet takes the report and its photos to mail or a messaging app.
+const PHOTOS = { mem: {}, db: null };
+function photoDb() {
+  if (PHOTOS.db !== null) return PHOTOS.db;
+  PHOTOS.db = new Promise(res => {
+    try {
+      const r = indexedDB.open('ecc-car-report', 1);
+      r.onupgradeneeded = () => r.result.createObjectStore('photos');
+      r.onsuccess = () => res(r.result);
+      r.onerror = () => res(null);
+    } catch (e) { res(null); }
+  });
+  return PHOTOS.db;
+}
+async function photosLoad() {
+  const db = await photoDb();
+  if (!db) return;
+  await new Promise(res => {
+    try {
+      const q = db.transaction('photos').objectStore('photos').get(CAR.key);
+      q.onsuccess = () => { if (q.result && typeof q.result === 'object') PHOTOS.mem = q.result; res(); };
+      q.onerror = () => res();
+    } catch (e) { res(); }
+  });
+}
+async function photosSave() {
+  const db = await photoDb();
+  if (!db) return;
+  try { db.transaction('photos', 'readwrite').objectStore('photos').put(PHOTOS.mem, CAR.key); } catch (e) { /* kept for this visit only */ }
+}
+function shrink(file) {
+  return new Promise(res => {
+    const url = URL.createObjectURL(file), img = new Image();
+    img.onload = () => {
+      const k = Math.min(1, 1600 / Math.max(img.naturalWidth, img.naturalHeight));
+      const c = document.createElement('canvas');
+      c.width = Math.round(img.naturalWidth * k); c.height = Math.round(img.naturalHeight * k);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url);
+      res(c.toDataURL('image/jpeg', 0.82));
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); res(null); };
+    img.src = url;
+  });
+}
+let photoFor = null;
+function askPhoto(id) { photoFor = id; $('photoIn').value = ''; $('photoIn').click(); }
+$('photoIn').addEventListener('change', async e => {
+  const id = photoFor; if (!id) return;
+  for (const f of [...e.target.files].slice(0, 8)) {
+    const d = await shrink(f);
+    if (d) (PHOTOS.mem[id] = PHOTOS.mem[id] || []).push(d);
+  }
+  if (id !== '_general' && !B.flags[id]) setFlag(id, true); else reportUI();
+  photosSave();
+});
+$('addGeneral').addEventListener('click', () => askPhoto('_general'));
+$('lightbox').addEventListener('click', () => { $('lightbox').hidden = true; });
 function setFlag(id, on, note) {
-  if (on) B.flags[id] = { note: note != null ? note : (B.flags[id] || {}).note || '' }; else delete B.flags[id];
+  if (on) B.flags[id] = { note: note != null ? note : (B.flags[id] || {}).note || '' }; else { delete B.flags[id]; delete PHOTOS.mem[id]; photosSave(); }
   const r = B.rows.get(id); if (r) r.querySelector('.fl').setAttribute('aria-pressed', String(on));
   const g = B.co.get(id); if (g) g.classList.toggle('flag', on);
-  try { localStorage.setItem(CAR.key + '-report', JSON.stringify(B.flags)); } catch (e) { /* storage off */ }
+  store.set(CAR.key + '-report', B.flags);
   reportUI();
+}
+function itemLabel(id) { if (id === '_general') return 'The car'; const it = B.item.get(id) || { label: id, n: '' }; return `${it.n ? it.n + '. ' : ''}${it.label}`; }
+function thumbs(id) {
+  const box = el('div', null, 'thumbs');
+  (PHOTOS.mem[id] || []).forEach((src, i) => {
+    const f = el('figure'), img = el('img'); img.src = src; img.alt = `Photo ${i + 1} of ${itemLabel(id)}`;
+    img.addEventListener('click', () => { $('lightImg').src = src; $('lightbox').hidden = false; });
+    const x = el('button', '×'); x.type = 'button'; x.setAttribute('aria-label', 'Remove this photo');
+    x.addEventListener('click', () => { PHOTOS.mem[id].splice(i, 1); photosSave(); reportUI(); });
+    f.append(img, x); box.append(f);
+  });
+  return box;
 }
 function reportUI() {
   const box = $('reportItems'); box.replaceChildren();
   const ids = Object.keys(B.flags);
-  $('reportEmpty').hidden = ids.length > 0;
-  const lines = [CAR.title];
+  $('reportEmpty').hidden = ids.length > 0 || (PHOTOS.mem._general || []).length > 0;
+  if ((PHOTOS.mem._general || []).length) {
+    const d = el('div', null, 'item'); d.append(el('b', 'The car'), thumbs('_general')); box.append(d);
+  }
   for (const id of ids) {
-    const it = B.item.get(id) || { label: id, n: '' };
     const d = el('div', null, 'item');
-    d.append(el('b', `${it.n ? it.n + '. ' : ''}${it.label}`));
-    const ta = el('textarea'); ta.placeholder = 'What you found'; ta.value = B.flags[id].note || '';
-    ta.addEventListener('input', () => { B.flags[id].note = ta.value; try { localStorage.setItem(CAR.key + '-report', JSON.stringify(B.flags)); } catch (e) { /* off */ } reportText(); });
-    const un = el('button', 'Remove'); un.type = 'button'; un.style.justifySelf = 'start'; un.addEventListener('click', () => setFlag(id, false));
-    d.append(ta, un); box.append(d);
-    lines.push(`${it.n ? it.n + '. ' : ''}${it.label}${B.flags[id].note ? ': ' + B.flags[id].note : ''}`);
+    d.append(el('b', itemLabel(id)));
+    const ta = el('textarea'); ta.placeholder = 'What you found'; ta.value = B.flags[id].note || ''; ta.setAttribute('aria-label', 'Note for ' + itemLabel(id));
+    ta.addEventListener('input', () => { B.flags[id].note = ta.value; store.set(CAR.key + '-report', B.flags); reportText(); });
+    const btns = el('div', null, 'btns');
+    const ph = el('button', 'Add photo'); ph.type = 'button'; ph.addEventListener('click', () => askPhoto(id));
+    const look = el('button', 'Show me'); look.type = 'button'; look.addEventListener('click', () => { pick([id]); frameParts([id]); });
+    const un = el('button', 'Remove'); un.type = 'button'; un.addEventListener('click', () => setFlag(id, false));
+    btns.append(ph, look, un);
+    d.append(ta, thumbs(id), btns); box.append(d);
   }
   reportText();
 }
 function reportText() {
   const ids = Object.keys(B.flags);
-  const lines = [CAR.title, ...ids.map(id => { const it = B.item.get(id) || { label: id, n: '' }; return `${it.n ? it.n + '. ' : ''}${it.label}${B.flags[id].note ? ': ' + B.flags[id].note : ''}`; })];
-  $('reportText').value = lines.join('\n'); $('reportText').hidden = !ids.length;
+  const n = id => (PHOTOS.mem[id] || []).length;
+  const lines = [CAR.title, ...ids.map(id => `${itemLabel(id)}${B.flags[id].note ? ': ' + B.flags[id].note : ''}${n(id) ? ` (${n(id)} photo${n(id) > 1 ? 's' : ''})` : ''}`)];
+  if (n('_general')) lines.push(`Photos of the car: ${n('_general')}`);
+  $('reportText').value = lines.join('\n'); $('reportText').hidden = lines.length < 2;
 }
-function reportRestore() {
-  let saved = null;
-  try { saved = JSON.parse(localStorage.getItem(CAR.key + '-report') || 'null'); } catch (e) { saved = null; }
+async function reportRestore() {
+  await photosLoad();
+  const saved = store.get(CAR.key + '-report');
   if (saved && typeof saved === 'object') for (const [id, v] of Object.entries(saved)) if (B.item.has(id)) setFlag(id, true, (v && v.note) || '');
   reportUI();
 }
+function dataUrlFile(src, name) {
+  const [head, b64] = src.split(','); const bin = atob(b64); const a = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i);
+  return new File([a], name, { type: (head.match(/data:([^;]+)/) || [])[1] || 'image/jpeg' });
+}
+$('shareReport').addEventListener('click', async () => {
+  const text = $('reportText').value || CAR.title;
+  const files = [];
+  for (const id of Object.keys(PHOTOS.mem)) (PHOTOS.mem[id] || []).forEach((src, i) => files.push(dataUrlFile(src, `${loaderName(itemLabel(id)).toLowerCase()}-${i + 1}.jpg`)));
+  try {
+    if (navigator.share && (!files.length || (navigator.canShare && navigator.canShare({ files })))) {
+      await navigator.share({ title: CAR.title + ' report', text, ...(files.length ? { files } : {}) });
+      return;
+    }
+  } catch (e) { if (e && e.name === 'AbortError') return; }
+  try { await navigator.clipboard.writeText(text); $('shareReport').textContent = 'Copied (no share sheet here)'; }
+  catch (e) { $('shareReport').textContent = 'Use Copy text'; }
+  setTimeout(() => { $('shareReport').textContent = 'Share report'; }, 2200);
+});
 $('copyReport').addEventListener('click', async () => {
   const t = $('reportText').value || CAR.title;
   try { await navigator.clipboard.writeText(t); $('copyReport').textContent = 'Copied'; } catch (e) { $('copyReport').textContent = 'Select and copy'; }
-  setTimeout(() => { $('copyReport').textContent = 'Copy report'; }, 1600);
+  setTimeout(() => { $('copyReport').textContent = 'Copy text'; }, 1600);
 });
-$('clearReport').addEventListener('click', () => { for (const id of Object.keys(B.flags)) setFlag(id, false); });
+$('printReport').addEventListener('click', () => { showTab('report'); setTimeout(() => window.print(), 50); });
+$('clearReport').addEventListener('click', () => { for (const id of Object.keys(B.flags)) setFlag(id, false); PHOTOS.mem = {}; photosSave(); reportUI(); });
 
 // tabs
-for (const t of ['parts', 'procs', 'report']) $('tab-' + t).addEventListener('click', () => {
-  for (const u of ['parts', 'procs', 'report']) { $('tab-' + u).setAttribute('aria-selected', String(u === t)); $('pane-' + u).hidden = u !== t; }
-});
+const TABS = ['parts', 'steps', 'report', 'style', 'engine'];
+function showTab(t) {
+  for (const u of TABS) { $('tab-' + u).setAttribute('aria-selected', String(u === t)); $('pane-' + u).hidden = u !== t; }
+  store.set(CAR.key + '-tab', t);
+}
+for (const t of TABS) $('tab-' + t).addEventListener('click', () => showTab(t));
+{ const t = store.get(CAR.key + '-tab'); if (TABS.includes(t)) showTab(t); }
+
+// ── Style: new wheels, rim size, ride height, offset ─────────────────────────
+// The wheel designs are modelled here, in code, at the car's own wheel size
+// (tyre, rim face, barrel, brake disc, caliper, wheel nuts): no one else's
+// wheel models. The factory wheel stays in the file, hidden under the new one.
+const WHEEL_IDS = ['wheel_fl', 'wheel_fr', 'wheel_rl', 'wheel_rr'];
+const DESIGNS = { factory: 'Standard', five: '5-spoke', ten: '10-spoke', mesh: 'Cross-spoke', turbine: 'Turbine', steel: 'Steel' };
+const ST = { design: 'factory', inch: 0, ride: 0, offset: 0, dims: {}, factory: {}, mats: null };
+function styleSetup() {
+  for (const id of WHEEL_IDS) {
+    const n = B.node.get(id); if (!n) continue;
+    const box = new THREE.Box3().setFromObject(n), size = box.getSize(new THREE.Vector3()), c = box.getCenter(new THREE.Vector3());
+    const ws = n.getWorldScale(new THREE.Vector3());
+    ST.dims[id] = { c: n.worldToLocal(c.clone()), D: Math.max(size.y, size.z), W: size.x, ws };
+    const own = []; n.traverse(o => { if (o.isMesh) own.push(o); }); ST.factory[id] = own;
+  }
+  if (!Object.keys(ST.dims).length) { $('designs').replaceChildren(el('p', 'This file has no wheels to change.', 'note')); return; }
+  $('lookWheel').disabled = false;
+  wheelLeftovers();
+  for (const [k, label] of Object.entries(DESIGNS)) {
+    const b = el('button', label); b.type = 'button'; b.dataset.d = k; b.setAttribute('aria-pressed', String(k === 'factory'));
+    b.addEventListener('click', () => { ST.design = k; applyStyle(); });
+    $('designs').append(b);
+  }
+  document.querySelectorAll('#sizes button').forEach(b => b.addEventListener('click', () => { ST.inch = +b.dataset.in; applyStyle(); }));
+  $('ride').addEventListener('input', e => { ST.ride = +e.target.value; applyStance(); saveStyle(); });
+  $('offset').addEventListener('input', e => { ST.offset = +e.target.value; applyStance(); saveStyle(); });
+  const saved = store.get(CAR.key + '-style');
+  if (saved) { Object.assign(ST, { design: DESIGNS[saved.design] ? saved.design : 'factory', inch: +saved.inch || 0, ride: +saved.ride || 0, offset: +saved.offset || 0 }); }
+  $('ride').value = ST.ride; $('offset').value = ST.offset;
+  applyStyle();
+  applyStance();
+}
+// Some models leave pieces of their wheels in the body mesh (the Clio: tyre
+// and rim faces outside its wheel group). Under a new wheel they would show
+// through it, so the body's triangles inside each wheel's cylinder (round the
+// axle, within the tyre's radius and width) go when new wheels go on, and
+// come back with the standard ones. Only the body: the suspension stays.
+function wheelLeftovers() {
+  ST.left = [];
+  const body = B.node.get('body'); if (!body) return;
+  const toCar = new THREE.Matrix4().copy(S.car.matrixWorld).invert();
+  const cyl = Object.entries(ST.dims).map(([id, d]) => {
+    const n = B.node.get(id), c = n.localToWorld(d.c.clone()).applyMatrix4(toCar);
+    return { c, R: d.D * 0.5, hw: d.W * 0.55 };
+  });
+  const a = new THREE.Vector3(), b = new THREE.Vector3(), t = new THREE.Vector3(), M = new THREE.Matrix4();
+  body.traverse(o => {
+    if (!o.isMesh || !o.geometry.attributes.position) return;
+    const g = o.geometry, pos = g.attributes.position;
+    const idx = g.index ? g.index.array : null, nt = (idx ? idx.length : pos.count) / 3;
+    M.multiplyMatrices(toCar, o.matrixWorld);
+    const keep = [];
+    let drop = 0;
+    for (let i = 0; i < nt; i++) {
+      const i0 = idx ? idx[3 * i] : 3 * i, i1 = idx ? idx[3 * i + 1] : 3 * i + 1, i2 = idx ? idx[3 * i + 2] : 3 * i + 2;
+      t.fromBufferAttribute(pos, i0).add(a.fromBufferAttribute(pos, i1)).add(b.fromBufferAttribute(pos, i2)).multiplyScalar(1 / 3).applyMatrix4(M);
+      const inside = cyl.some(q => Math.abs(t.x - q.c.x) < q.hw && Math.hypot(t.y - q.c.y, t.z - q.c.z) < q.R);
+      if (inside) drop++; else keep.push(i0, i1, i2);
+    }
+    if (!drop) return;
+    const full = idx ? g.index.clone() : null;
+    const cut = new THREE.BufferAttribute(pos.count > 65535 ? new Uint32Array(keep) : new Uint16Array(keep), 1);
+    ST.left.push({ g, full, cut, drop });
+  });
+}
+function leftovers(hide) {
+  for (const e of ST.left || []) e.g.setIndex(hide ? e.cut : e.full);
+}
+function wheelMats() {
+  if (ST.mats) return ST.mats;
+  const rim = new THREE.MeshPhysicalMaterial({ name: 'new_wheel_rim', color: 0xc9ccd0, metalness: 0.92, roughness: 0.24, clearcoat: 0.001 });
+  const cal = new THREE.MeshPhysicalMaterial({ name: 'new_wheel_caliper', color: 0x9a1b1b, metalness: 0.1, roughness: 0.4, clearcoat: 0.6 });
+  ST.mats = {
+    rim, cal,
+    barrel: new THREE.MeshStandardMaterial({ color: 0x8d9298, metalness: 0.85, roughness: 0.38 }),
+    tyre: new THREE.MeshStandardMaterial({ color: 0x151517, metalness: 0, roughness: 0.93, side: THREE.DoubleSide }),
+    disc: new THREE.MeshStandardMaterial({ color: 0x6a6f75, metalness: 0.85, roughness: 0.42 }),
+    nut: new THREE.MeshStandardMaterial({ color: 0xb8bcc1, metalness: 1, roughness: 0.2 }),
+  };
+  for (const [t, m] of [['wheels', rim], ['calipers', cal]]) {
+    LAB.factory.set(m, { color: m.color.clone(), metalness: m.metalness, roughness: m.roughness, clearcoat: m.clearcoat, clearcoatRoughness: m.clearcoatRoughness, anisotropy: 0 });
+    LAB.grain.add(m);
+  }
+  return ST.mats;
+}
+// one window between spokes: an arc out, an arc back in; `skew` turns the outer arc (a turbine's blades)
+function windowPath(rIn, rOut, a0, a1, skew = 0, steps = 10) {
+  const p = new THREE.Path();
+  for (let i = 0; i <= steps; i++) { const a = a0 + (a1 - a0) * i / steps + skew; const x = Math.cos(a) * rOut, y = Math.sin(a) * rOut; if (i) p.lineTo(x, y); else p.moveTo(x, y); }
+  for (let i = steps; i >= 0; i--) { const a = a0 + (a1 - a0) * i / steps; p.lineTo(Math.cos(a) * rIn, Math.sin(a) * rIn); }
+  p.closePath();
+  return p;
+}
+function faceShape(design, r) {
+  const s = new THREE.Shape(); s.absarc(0, 0, r * 0.97, 0, Math.PI * 2, false);
+  const ring = (n, rIn, rOut, spoke, skew = 0, off = 0) => {
+    for (let i = 0; i < n; i++) {
+      const a0 = off + i * Math.PI * 2 / n + spoke / 2, a1 = off + (i + 1) * Math.PI * 2 / n - spoke / 2;
+      s.holes.push(windowPath(rIn, rOut, a0, a1, skew));
+    }
+  };
+  if (design === 'five') ring(5, r * 0.34, r * 0.86, 0.52);
+  else if (design === 'ten') ring(10, r * 0.34, r * 0.87, 0.24);
+  else if (design === 'turbine') ring(14, r * 0.36, r * 0.86, 0.13, 0.42);
+  else if (design === 'mesh') { ring(10, r * 0.34, r * 0.58, 0.17); ring(20, r * 0.62, r * 0.88, 0.09, 0, Math.PI / 20); }
+  else if (design === 'steel') {
+    for (let i = 0; i < 8; i++) { const a = i * Math.PI / 4, h = new THREE.Path(); h.absarc(Math.cos(a) * r * 0.6, Math.sin(a) * r * 0.6, r * 0.085, 0, Math.PI * 2, true); s.holes.push(h); }
+  }
+  return s;
+}
+function makeWheel(design, D, W, inch) {
+  const M = wheelMats(), g = new THREE.Group();
+  const R = D / 2, r = Math.min(0.42 * D, 0.33 * D + inch * 0.0127), w = W * 0.92;
+  // tyre: a rounded section turned about the axle (the lathe turns about y; the axle is x)
+  const prof = [[r * 0.995, -w * 0.43], [r + (R - r) * 0.18, -w * 0.5], [R * 0.965, -w * 0.47], [R * 0.995, -w * 0.38], [R, -w * 0.2],
+    [R, w * 0.2], [R * 0.995, w * 0.38], [R * 0.965, w * 0.47], [r + (R - r) * 0.18, w * 0.5], [r * 0.995, w * 0.43]].map(([a, b]) => new THREE.Vector2(a, b));
+  const tyre = new THREE.Mesh(new THREE.LatheGeometry(prof, coarse ? 40 : 64), M.tyre);
+  tyre.rotation.z = -Math.PI / 2;
+  const barrel = new THREE.Mesh(new THREE.CylinderGeometry(r * 0.985, r * 0.985, w * 0.86, coarse ? 40 : 64, 1, true), M.barrel);
+  barrel.rotation.z = -Math.PI / 2; barrel.material.side = THREE.DoubleSide;
+  // the face: a disc with the design's windows cut through, a lip round it
+  const faceGeo = new THREE.ExtrudeGeometry(faceShape(design, r), { depth: w * 0.07, bevelEnabled: true, bevelThickness: w * 0.02, bevelSize: r * 0.012, bevelSegments: 2, curveSegments: coarse ? 32 : 48 });
+  const face = new THREE.Mesh(faceGeo, design === 'steel' ? M.barrel : M.rim);
+  face.rotation.y = Math.PI / 2; face.position.x = w * 0.30;
+  const lip = new THREE.Mesh(new THREE.TorusGeometry(r * 0.975, w * 0.035, 8, coarse ? 40 : 64), M.rim);
+  lip.rotation.y = Math.PI / 2; lip.position.x = w * 0.40;
+  const cap = new THREE.Mesh(new THREE.CylinderGeometry(r * 0.15, r * 0.17, w * 0.06, 32), M.rim);
+  cap.rotation.z = -Math.PI / 2; cap.position.x = w * 0.40;
+  g.add(tyre, barrel, face, lip, cap);
+  for (let i = 0; i < 5; i++) {                  // wheel nuts
+    const a = i * Math.PI * 2 / 5, nut = new THREE.Mesh(new THREE.CylinderGeometry(r * 0.03, r * 0.03, w * 0.05, 6), M.nut);
+    nut.rotation.z = -Math.PI / 2; nut.position.set(w * 0.405, Math.sin(a) * r * 0.24, Math.cos(a) * r * 0.24); g.add(nut);
+  }
+  const disc = new THREE.Mesh(new THREE.CylinderGeometry(r * 0.8, r * 0.8, w * 0.07, coarse ? 32 : 48), M.disc);
+  disc.rotation.z = -Math.PI / 2; disc.position.x = w * 0.02;
+  const phi = 2.1, cal = new THREE.Mesh(new THREE.BoxGeometry(w * 0.16, r * 0.22, r * 0.5), M.cal);
+  cal.position.set(w * 0.13, Math.sin(phi) * r * 0.66, Math.cos(phi) * r * 0.66); cal.rotation.x = phi + Math.PI / 2;
+  g.add(disc, cal);
+  return g;
+}
+function applyStyle() {
+  redraw();
+  for (const id of WHEEL_IDS) {
+    const n = B.node.get(id); if (!n || !ST.dims[id]) continue;
+    const old = n.getObjectByName(id + '_new');
+    if (old) { old.parent.remove(old); old.traverse(o => { if (o.isMesh) o.geometry.dispose(); }); }
+    for (const o of ST.factory[id]) { if (!B.orig.has(o)) B.orig.set(o, o.material); o.userData.swapHidden = ST.design !== 'factory'; }
+    if (ST.design === 'factory') continue;
+    const d = ST.dims[id], wheel = makeWheel(ST.design, d.D, d.W, ST.inch);
+    wheel.name = id + '_new';
+    wheel.position.copy(d.c);
+    const side = id.endsWith('l') ? 1 : -1;     // the face outward: +x on the left, -x on the right
+    wheel.scale.set(side / d.ws.x, 1 / d.ws.y, 1 / d.ws.z);
+    n.add(wheel);
+  }
+  leftovers(ST.design !== 'factory');
+  // the new rims and calipers take the Finish Lab with them
+  const M = ST.design === 'factory' ? null : wheelMats();
+  for (const [t, m] of ST.mats ? [['wheels', ST.mats.rim], ['calipers', ST.mats.cal]] : []) {
+    const i = LAB.mats[t].indexOf(m);
+    if (M && i < 0) { LAB.mats[t].push(m); const s = LAB.state[t]; if (s) applyFinish(t, s.finish, s.hex, true); }
+    if (!M && i >= 0) LAB.mats[t].splice(i, 1);
+  }
+  document.querySelectorAll('#designs button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.d === ST.design)));
+  document.querySelectorAll('#sizes button').forEach(b => { b.setAttribute('aria-pressed', String(+b.dataset.in === ST.inch)); b.disabled = ST.design === 'factory'; });
+  refreshLook();
+  labTargets();
+  labUI();
+  saveStyle();
+}
+function applyStance() {
+  redraw();
+  if (S.sprung) S.sprung.position.y = ST.ride / 1000;
+  for (const id of WHEEL_IDS) {
+    const n = B.node.get(id); if (!n || !B.base.has(n)) continue;
+    B.offsetD.set(n, carDelta(n, new THREE.Vector3((id.endsWith('l') ? 1 : -1) * ST.offset / 1000, 0, 0)));
+    place(n);
+  }
+  $('rideOut').value = `${ST.ride > 0 ? '+' : ''}${ST.ride} mm`;
+  $('offsetOut').value = `${ST.offset > 0 ? '+' : ''}${ST.offset} mm`;
+  labUI();
+}
+function saveStyle() { store.set(CAR.key + '-style', { design: ST.design, inch: ST.inch, ride: ST.ride, offset: ST.offset }); }
+
+// ── Engine: lift it out on a hoist, and its parts by name ────────────────────
+// Up and clear of the bay first, then out over the nose (over the tail on a
+// rear-engined car), as a workshop crane takes it; a chain to the hook.
+const ENGINE_IDS = ['bay:blk', 'bay:head', 'bay:cam_cover', 'bay:timing_cover', 'bay:sump', 'bay:coolant_pump', 'bay:dgea_coils',
+  'bay:dgea_filler', 'bay:dgea_intake', 'bay:dgea_chargepipe', 'bay:dgea_turbo', 'bay:dgea_pulley', 'bay:dgea_thermo', 'bay:dgea_oilfilter',
+  'bay:dgea_epump', 'bay:dgea_loom', 'bay:dgea_mount', 'bay:gearbox-case', 'bay:bellhousing', 'bay:mechatronic-cover',
+  'bay:transmission-oil-filter', 'bay:transmission-oil-cooler', 'bay:integrated-front-differential', 'bay:cv-output-left',
+  'bay:cv-output-right', 'bay:exhaust_front'];
+B.lift = { on: false, p: 0, nodes: [], set: null, ghost: false, up: new Map(), out: new Map(), chain: null, top: null, dir: 1 };
+function engineSetup() {
+  const ids = ENGINE_IDS.filter(id => B.node.has(id));
+  if (!ids.length) { $('noEngine').hidden = false; $('engineCard').hidden = true; return; }
+  const list = $('engineList');
+  for (const id of ids) list.append(partRow(B.item.get(id) || { id, label: id, n: '' }, 'engine'));
+  B.lift.nodes = ids.map(id => mover(id)).filter(n => n && B.base.has(n));
+  const lid = (CAR.engine && CAR.engine.lid) || 'bonnet';
+  B.lift.lid = lid;
+  B.lift.set = new Set(B.lift.nodes);
+  if (!(lid in S.actions)) {
+    // a lid welded to the body: the body turns see-through while the engine is out
+    const p = el('p'); p.className = 'note';
+    p.textContent = 'On this model the ' + lid + ' is part of the body and does not open, so the body turns see-through while the engine is out.';
+    $('engineCard').append(p);
+  }
+  for (const id of ['liftEngine', 'lookBay', 'focusBay']) $(id).disabled = false;
+  $('liftEngine').addEventListener('click', () => liftEngine(!B.lift.on));
+  $('lookBay').addEventListener('click', () => { if (B.lift.lid in S.actions) setOpen(B.lift.lid, true); syncAll(); view('bay'); });
+  $('focusBay').addEventListener('click', () => { showTab('parts'); setLevel('engine_bay'); });
+}
+function liftEngine(on) {
+  redraw();
+  const L = B.lift;
+  if (on) {
+    setExplode(0);
+    $('explode').disabled = true;
+    if (L.lid in S.actions) { setOpen(L.lid, true); syncAll(); }
+    // the engine's top and middle in the car's frame, and which end it leaves by
+    const box = new THREE.Box3(); for (const n of L.nodes) box.union(new THREE.Box3().setFromObject(n));
+    const toCar = new THREE.Matrix4().copy(S.car.matrixWorld).invert();
+    const lo = box.min.clone().applyMatrix4(toCar), hi = box.max.clone().applyMatrix4(toCar);
+    const c = lo.clone().add(hi).multiplyScalar(0.5);
+    L.dir = c.z >= 0 ? 1 : -1;
+    L.top = new THREE.Vector3(c.x, Math.max(lo.y, hi.y), c.z);
+    const rise = 0.85, out = 0.95;
+    for (const n of L.nodes) { L.up.set(n, carDelta(n, new THREE.Vector3(0, rise, 0))); L.out.set(n, carDelta(n, new THREE.Vector3(0, 0, out * L.dir))); }
+    if (!L.chain) {
+      const chainMat = new THREE.MeshStandardMaterial({ color: 0x9aa0a6, metalness: 1, roughness: 0.35 });
+      L.chain = new THREE.Group();
+      const rod = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 2.6, 8), chainMat); rod.position.y = 1.3;
+      const hook = new THREE.Mesh(new THREE.TorusGeometry(0.05, 0.012, 8, 20, Math.PI * 1.4), chainMat); hook.rotation.y = Math.PI / 2;
+      L.chain.add(rod, hook);
+      L.chain.name = '_hoist';
+      S.sprung.add(L.chain);
+    }
+    view('hoist');
+  }
+  L.on = on;
+  if (on && !(L.lid in S.actions)) { L.ghost = true; refreshLook(); }
+  if (!on) $('explode').disabled = false;
+  $('liftEngine').setAttribute('aria-pressed', String(on));
+  $('liftEngine').textContent = on ? 'Put the engine back' : 'Lift the engine out';
+}
+function onHoist(o) { for (let p = o; p; p = p.parent) if (B.lift.set && B.lift.set.has(p)) return true; return o.name === '_hoist' || (o.parent && o.parent.name === '_hoist'); }
+const ease = t => t < 0 ? 0 : t > 1 ? 1 : t * t * (3 - 2 * t);
+function stepLift(dt) {
+  const L = B.lift;
+  const goal = L.on ? 1 : 0;
+  if (L.p === goal) return false;
+  L.p = reduced ? goal : Math.max(0, Math.min(1, L.p + Math.sign(goal - L.p) * dt / 2.6));
+  const u = ease(L.p / 0.5), f = ease((L.p - 0.45) / 0.55);
+  for (const n of L.nodes) {
+    B.liftD.set(n, L.up.get(n).clone().multiplyScalar(u).add(L.out.get(n).clone().multiplyScalar(f)));
+    place(n);
+  }
+  if (L.chain) {
+    L.chain.visible = L.p > 0;
+    // the hook stays over the engine's top as it rides up and out
+    L.chain.position.set(L.top.x, L.top.y + 0.85 * u + 0.02, L.top.z + 0.95 * L.dir * f);
+  }
+  if (L.p === goal && L.ghost && !L.on) { L.ghost = false; refreshLook(); }   // back in: the body solid again
+  return L.p !== goal;
+}
 
 // ── Finish Lab: our own material presets on the car's named parts ──────────
 const FINISHES = {
@@ -1002,15 +1515,18 @@ function labSetup(root) {
     const users = LAB.meshes[t].filter(o => o.material === m);
     if (users.length && users.every(o => o.geometry.attributes.uv || o.geometry.attributes.tangent)) LAB.grain.add(m);
   }
-  $('lookWheel').disabled = !LAB.meshes.wheels.length;
-  // a part this car's file does not have is not offered
-  const have = Object.keys(LAB.meshes).filter(t => LAB.meshes[t].length);
-  document.querySelectorAll('#target button').forEach(b => { b.hidden = !have.includes(b.dataset.t); });
-  if (!have.length) $('lab').hidden = true;
-  else if (!have.includes(LAB.target)) LAB.target = have[0];
+  $('lookWheel').disabled = !LAB.meshes.wheels.length && !B.node.has('wheel_fl');
+  labTargets();
   labUI();
 }
-function applyFinish(t, finish, hex) {
+// a part this car has nothing of is not offered (new wheels bring calipers)
+function labTargets() {
+  const have = Object.keys(LAB.mats).filter(t => LAB.mats[t].length);
+  document.querySelectorAll('#target button').forEach(b => { b.hidden = !have.includes(b.dataset.t); });
+  if (have.length && !have.includes(LAB.target)) LAB.target = have[0];
+}
+function applyFinish(t, finish, hex, quiet) {
+  redraw();
   const f = FINISHES[finish], c = new THREE.Color(hex);
   for (const m of LAB.mats[t]) {
     m.color.copy(f.tint ? new THREE.Color(1, 1, 1).lerp(c, f.tint) : c);
@@ -1026,8 +1542,8 @@ function applyFinish(t, finish, hex) {
   LAB.state[t] = { finish, hex };
   B.hl.clear();                                  // highlight copies follow the new finish
   if (B.picked.size) refreshLook();
-  try { localStorage.setItem(CAR.key, JSON.stringify(LAB.state)); } catch (e) { /* storage off */ }
-  labUI();
+  store.set(CAR.key, LAB.state);
+  if (!quiet) labUI();
 }
 function factory(t) {
   for (const m of LAB.mats[t]) {
@@ -1046,8 +1562,10 @@ function labUI() {
   document.querySelectorAll('#finish button').forEach(b => b.setAttribute('aria-pressed', String(!!st && b.dataset.f === st.finish)));
   document.querySelectorAll('#colours button').forEach(b => b.setAttribute('aria-pressed', String(!!st && b.dataset.c === st.hex)));
   if (st) $('customColour').value = st.hex;
-  const parts = Object.entries(LAB.state).map(([t, v]) => v ? `${t} ${v.finish} ${v.hex}` : `${t} factory`);
-  $('buildCode').value = CAR.title + ' · ' + parts.join(' · ');
+  const parts = Object.entries(LAB.state).map(([t, v]) => v ? `${t} ${v.finish} ${v.hex}` : `${t} standard`);
+  const stance = [ST.design !== 'factory' ? `rims ${DESIGNS[ST.design].toLowerCase()}${ST.inch ? ` +${ST.inch}in` : ''}` : 'rims standard',
+    `ride ${ST.ride > 0 ? '+' : ''}${ST.ride} mm`, `offset ${ST.offset > 0 ? '+' : ''}${ST.offset} mm`];
+  $('buildCode').value = [CAR.title, ...stance, ...parts].join(' · ');
 }
 for (const [k, f] of Object.entries(FINISHES)) {
   const b = document.createElement('button'); b.type = 'button'; b.dataset.f = k; b.id = 'finish-' + k; b.textContent = f.label;
@@ -1063,39 +1581,32 @@ COLOURS.forEach((hex, i) => {
 });
 $('customColour').addEventListener('input', e => applyFinish(LAB.target, (LAB.state[LAB.target] || {}).finish || 'gloss', e.target.value));
 document.querySelectorAll('#target button').forEach(b => b.addEventListener('click', () => { LAB.target = b.dataset.t; labUI(); }));
-$('resetLab').addEventListener('click', () => { for (const t of Object.keys(LAB.state)) factory(t);
-  try { localStorage.removeItem(CAR.key); } catch (e) { /* storage off */ } labUI(); });
+$('resetLab').addEventListener('click', () => {
+  for (const t of Object.keys(LAB.state)) factory(t);
+  store.del(CAR.key);
+  Object.assign(ST, { design: 'factory', inch: 0, ride: 0, offset: 0 }); $('ride').value = 0; $('offset').value = 0;
+  if (S.root) { applyStyle(); applyStance(); }
+  labUI();
+});
 $('copyCode').addEventListener('click', async () => {
   try { await navigator.clipboard.writeText($('buildCode').value); $('copyCode').textContent = 'Copied'; }
   catch (e) { const r = document.createRange(); r.selectNodeContents($('buildCode')); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); $('copyCode').textContent = 'Selected'; }
   setTimeout(() => { $('copyCode').textContent = 'Copy'; }, 1600);
 });
 $('lookWheel').addEventListener('click', () => {
-  const w = LAB.meshes.wheels[0]; if (!w) return;
+  const w = B.node.get('wheel_fl') || LAB.meshes.wheels[0]; if (!w) return;
   const c = new THREE.Box3().setFromObject(w).getCenter(new THREE.Vector3());
   const side = Math.sign(c.x - (S.pivot ? S.pivot.position.x : 0)) || 1;
-  moveCam(new THREE.Vector3(c.x + side * 1.5, c.y + 0.25, c.z + 0.6), c);
+  moveCam(new THREE.Vector3(c.x + side * (phone ? 1.9 : 1.5), c.y + 0.25, c.z + 0.6), c);
 });
 function labRestore() {
-  let saved = null;
-  try { saved = JSON.parse(localStorage.getItem(CAR.key) || 'null'); } catch (e) { saved = null; }
+  const saved = store.get(CAR.key);
   if (saved) for (const [t, v] of Object.entries(saved)) if (v && FINISHES[v.finish] && LAB.mats[t]) applyFinish(t, v.finish, v.hex);
 }
 labUI();
 
-// A frame is drawn when something changed (a drag, a button, a pick) and
-// kept going while anything moves (a door swinging, the car turning over,
-// the camera easing); a still car costs nothing. On a machine with no
-// graphics chip a frame of this car takes seconds, so this matters there too.
-let needs = 2;
-function redraw() { needs = Math.max(needs, 2); }
-controls.addEventListener('change', redraw);
-new ResizeObserver(redraw).observe(stage);
-document.addEventListener('click', redraw, true);
-document.addEventListener('input', redraw, true);
-document.addEventListener('change', redraw, true);
 renderer.setAnimationLoop(() => {
-  const dt = Math.min(clock.getDelta(), 0.1);
+  const raw = clock.getDelta(), dt = Math.min(raw, 0.1);
   let moving = false;
   if (S.mixer) {
     S.mixer.update(dt);
@@ -1113,7 +1624,8 @@ renderer.setAnimationLoop(() => {
     controls.target.lerpVectors(S.camTo.t0, S.camTo.t1, e);
     if (k >= 1) S.camTo = null; else moving = true;
   }
-  // damping keeps the camera drifting a little after a drag: controls.update() says so
+  if (S.root && stepLift(Math.min(raw, 0.5))) moving = true;
+  // damping keeps the camera drifting a little after a drag: update() says so
   if (controls.update()) moving = true;
   if (!moving && needs <= 0) return;
   if (!moving) needs--;

@@ -303,6 +303,7 @@ def write(report, out):
            "facts": facts, "notes": notes, "parts": parts, "files": files, "sheet": bool(sheet and os.path.exists(sheet)),
            "lab": lab_parts(j, paint_names), "key": "car-" + re.sub(r"[^a-z0-9-]", "", str(report.get("asset") or "x").lower()),
            "catalogue": cat, "procedures": procedures(cat, opens, rear),
+           "engine": {"lid": "tailgate" if rear else "bonnet"},
            "credit": {"title": cr.get("title") or "", "author": cr.get("author"), "licence": cr.get("licence"),
                       "url": cr.get("url"), "commercial": bool(cr.get("commercial")),
                       "cabin": {"title": cab.get("from"), "author": cab.get("author"), "licence": cab.get("licence"),
