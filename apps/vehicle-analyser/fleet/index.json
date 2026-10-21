@@ -1,0 +1,142 @@
+{
+ "schema": "expertcarcheck.fleet/1",
+ "vehicles": [
+  {
+   "id": "volkswagen-golf-2017",
+   "title": "Volkswagen Golf 2017",
+   "kind": "car",
+   "body": "hatchback",
+   "glb": "volkswagen-golf-2017.glb",
+   "json": "volkswagen-golf-2017.json",
+   "bytes": 11467976,
+   "hero": "volkswagen-golf-2017.webp",
+   "summary": "Five-door hatchback. All four doors, the bonnet and the tailgate open, and every panel comes off.",
+   "parts": 68,
+   "opens": [
+    "bonnet",
+    "door_fl",
+    "door_fr",
+    "door_rl",
+    "door_rr",
+    "tailgate"
+   ],
+   "credit": "“Volkswagen+ Golf+(2017)(3ds)(1)” by ArnaudGaidon, CC BY, https://sketchfab.com/3d-models/volkswagen-golf20173ds1-0fcad8513cc248008fbd6c19d12ebb1f"
+  },
+  {
+   "id": "nissan-qashqai-2018",
+   "title": "Nissan Qashqai 2018",
+   "kind": "car",
+   "body": "SUV",
+   "glb": "nissan-qashqai-2018.glb",
+   "json": "nissan-qashqai-2018.json",
+   "bytes": 8215984,
+   "hero": "nissan-qashqai-2018.webp",
+   "summary": "Compact SUV, for years the UK's best seller. All four doors, the bonnet and the tailgate open.",
+   "parts": 68,
+   "opens": [
+    "bonnet",
+    "door_fl",
+    "door_fr",
+    "door_rl",
+    "door_rr",
+    "tailgate"
+   ],
+   "credit": "“2018 Nissan Qashqai”, CC BY, https://sketchfab.com/3d-models/ef3c5a9808b44b44ac600ad4431b8680"
+  },
+  {
+   "id": "bmw-3-series-touring-2014",
+   "title": "BMW 3 Series Touring 2014",
+   "kind": "car",
+   "body": "estate",
+   "glb": "bmw-3-series-touring-2014.glb",
+   "json": "bmw-3-series-touring-2014.json",
+   "bytes": 11871948,
+   "hero": "bmw-3-series-touring-2014.webp",
+   "summary": "Five-door estate (the F31 Touring) with a tall tailgate.",
+   "parts": 68,
+   "opens": [
+    "bonnet",
+    "door_fl",
+    "door_fr",
+    "door_rl",
+    "door_rr",
+    "tailgate"
+   ],
+   "credit": "“2014 BMW 3 Series (F31)” by DisneyCars, CC BY, https://sketchfab.com/3d-models/2014-bmw-3-series-f31-71746440f98d48ca9ea41ceeaa3504c7"
+  },
+  {
+   "id": "land-rover-defender-works-v8-trophy",
+   "title": "Land Rover Defender Works V8 Trophy 2021",
+   "kind": "car",
+   "body": "4x4",
+   "glb": "land-rover-defender-works-v8-trophy.glb",
+   "json": "land-rover-defender-works-v8-trophy.json",
+   "bytes": 18999652,
+   "hero": "land-rover-defender-works-v8-trophy.webp",
+   "summary": "The classic Defender 110 body, built new by Land Rover Classic in 2021: five doors and a side-hinged rear door.",
+   "parts": 68,
+   "opens": [
+    "bonnet",
+    "door_fl",
+    "door_fr",
+    "door_rl",
+    "door_rr",
+    "tailgate"
+   ],
+   "credit": "“Land Rover Defender Works V8 Trophy 2021” by Nieve5677, CC BY, https://sketchfab.com/3d-models/land-rover-defender-works-v8-trophy-2021-da4ca2911a664f16a925c02777c17b00"
+  },
+  {
+   "id": "porsche-911",
+   "title": "Porsche 911",
+   "kind": "car",
+   "body": "coupe",
+   "glb": "porsche-911.glb",
+   "json": "porsche-911.json",
+   "bytes": 9740284,
+   "hero": "porsche-911.webp",
+   "summary": "Rear-engined sports coupe: the luggage space is at the front, the engine at the back.",
+   "parts": 57,
+   "opens": [
+    "bonnet",
+    "door_fl",
+    "door_fr",
+    "tailgate"
+   ],
+   "credit": "“Porsche 911”, CC BY"
+  },
+  {
+   "id": "renault-master",
+   "title": "Renault Master",
+   "kind": "van",
+   "body": "panel van",
+   "glb": "renault-master.glb",
+   "json": "renault-master.json",
+   "bytes": 6739064,
+   "hero": "renault-master.webp",
+   "summary": "Large panel van with barn doors at the back, each hinged at its outer edge.",
+   "parts": 67,
+   "opens": [
+    "bonnet",
+    "door_bl",
+    "door_br",
+    "door_fl",
+    "door_fr"
+   ],
+   "credit": "“Renault Master Panel Van”, CC BY, https://sketchfab.com/3d-models/b2148d8984144f1a8879ca4352bfccc9"
+  },
+  {
+   "id": "cruiser",
+   "title": "Heavy cruiser motorbike",
+   "kind": "motorbike",
+   "body": "cruiser",
+   "glb": "cruiser.glb",
+   "json": "cruiser.json",
+   "bytes": 870312,
+   "hero": "cruiser.webp",
+   "summary": "A 45-degree V-twin cruiser modelled in code to a Fat Boy-style bike's published sizes. Forty parts come off.",
+   "parts": 40,
+   "opens": [],
+   "credit": "Modelled in code by the ExpertCarCheck GLB machine. No maker's model, badge or lettering."
+  }
+ ]
+}

@@ -630,3 +630,26 @@ modelled; the maker's names are trademarks.
 
     node pipeline/realcar/bikes/cruiser.mjs bike.glb --paint=#121214
     node pipeline/realcar/encode.mjs bike.glb bike_web.glb      # 0.83 MB, validator clean
+
+With `--parts` every piece is its own named node under the pivot it moves
+with, so a trainer can take any one off: frame, swingarm, rear shocks, fork,
+crankcase, cylinders, cylinder heads, rocker covers, pushrod tubes, spark
+plugs, gearbox, primary cover, belt, air cleaner, exhaust, tank, fuel cap,
+speedo, seat, both mudguards, lamps and indicators, bars, mirrors,
+footboards, pedals, both calipers, discs, rims and tyres (40 in all, each
+with `extras.moves_with`). The motion is unchanged, and without the switch
+the file is byte-identical to before.
+
+## App packs
+
+`app_pack.py` turns builds into what an app loads: per vehicle a plain GLB
+and a vehicle file (parts with labels, systems, boxes and which way each
+comes off; hinges with pivot, axis and angle; clips; procedures; the
+engine's real layout beside the teaching engine; the credit). It runs the
+machine itself from a list of requests, so the pack rebuilds from one file;
+`app_hero.mjs` renders a studio picture of each. The Vehicle Analyser app's
+pack and brief are in `apps/vehicle-analyser/`.
+
+    python3 pipeline/realcar/app_pack.py apps/vehicle-analyser/fleet apps/vehicle-analyser/fleet.spec.json
+    node pipeline/realcar/app_hero.mjs apps/vehicle-analyser/fleet
+    python3 pipeline/realcar/app_pack.py --heroes apps/vehicle-analyser/fleet

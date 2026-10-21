@@ -7,9 +7,14 @@
 //   steer_left    the bars, fork, lamp and front wheel turn about the
 //   steer_right   steering axis (raked, as the real one is)
 //   stand_down    the side stand swings down
+// With --parts every piece is its own named node (frame, swingarm, engine
+// parts, exhaust, tank, seat, mudguards, fork, bars, tyres, rims, discs,
+// calipers...), each under the pivot it moves with, so a trainer can take
+// any one off. Without it the output is as before: body, steer, two wheels
+// and the stand.
 // No maker's badge or lettering is modelled.
 //
-//   node pipeline/realcar/bikes/cruiser.mjs out.glb [--paint=#101012] [--name="..."]
+//   node pipeline/realcar/bikes/cruiser.mjs out.glb [--paint=#101012] [--name="..."] [--parts]
 //
 // Frame: +Y up, nose +Z, the rider's left +X, metres, ground at y = 0
 // (the machine's rig frame).
@@ -75,7 +80,8 @@ const MATS = {
 
 // ── parts: [part, material, geometry in world space] ───────────────────
 const parts = [];
-const add = (part, mat, g) => { parts.push([part, mat, g]); return g; };
+let SUB = null;                                  // the named piece being modelled (--parts)
+const add = (part, mat, g) => { parts.push([part, mat, g, SUB]); return g; };
 const V = (x, y, z) => new THREE.Vector3(x, y, z);
 const UPY = V(0, 1, 0);
 
@@ -121,11 +127,13 @@ function wheel(part, A, T, rimHalf, side) {
     const a = ha * Math.sign(s) * Math.abs(s) ** e * (0.86 + 0.14 * (r - rIn) / (2 * hr));
     prof.push([Math.max(r, rIn), a]);
   }
+  SUB = 'tyre';
   add(part, 'rubber', aroundX(prof, A.x, A.y, A.z, 96));
   // a solid disc wheel, faintly dished, with its rim lip and two machined rings
   const disc = [[0.035, -rimHalf * 0.9], [0.07, -0.042], [0.15, -0.050], [RIM_R - 0.03, -0.056], [RIM_R - 0.012, -rimHalf],
     [RIM_R + 0.008, -rimHalf], [RIM_R + 0.008, rimHalf], [RIM_R - 0.012, rimHalf], [RIM_R - 0.03, 0.056],
     [0.15, 0.050], [0.07, 0.042], [0.035, rimHalf * 0.9]];
+  SUB = 'rim';
   add(part, 'alloy', aroundX(disc, A.x, A.y, A.z, 96));
   for (const r of [0.115, 0.185]) for (const sx of [-1, 1]) {
     const t = new THREE.TorusGeometry(r, 0.0025, 8, 96); t.rotateY(Math.PI / 2); t.translate(A.x + sx * (0.047 + r * 0.03), A.y, A.z);
@@ -136,23 +144,27 @@ function wheel(part, A, T, rimHalf, side) {
     add(part, 'chrome', cap);
   }
   // the brake disc on the right
+  SUB = 'disc';
   const bd = aroundX([[0.11, -0.003], [0.15, -0.003], [0.15, 0.003], [0.11, 0.003]], A.x + side * (rimHalf * 0.9 + 0.01), A.y, A.z, 72);
   add(part, 'chrome', bd);
 }
 wheel('wheel_f', AF, TF, 0.062, -1);
 wheel('wheel_r', AR, TR, 0.105, -1);
 // the rear wheel's belt pulley, on the left
+SUB = 'pulley';
 add('wheel_r', 'black', aroundX([[0.06, -0.012], [0.172, -0.012], [0.172, 0.012], [0.06, 0.012]], AR.x + 0.125, AR.y, AR.z, 72));
 add('wheel_r', 'chrome', aroundX([[0.12, -0.014], [0.15, -0.014], [0.15, 0.014], [0.12, 0.014]], AR.x + 0.127, AR.y, AR.z, 72));
 
 // ── the front end (steers) ───────────────────────────────────────────────
 for (const sx of [-1, 1]) {
   const x = sx * FORK_X;
+  SUB = 'fork';
   add('steer', 'alloy', rod(forkAt(-0.03, x), forkAt(0.30, x), 0.030));            // lower legs
   add('steer', 'chrome', rod(forkAt(0.27, x), forkAt(S_CLAMP1 + 0.01, x), 0.043, 28)); // the wide shrouds
   add('steer', 'black', rod(forkAt(-0.02, x).add(V(sx * 0.012, 0, 0)), forkAt(0.02, x).add(V(sx * 0.012, 0, 0)), 0.034)); // axle clamp
 }
 // the axle through both legs
+SUB = 'fork';
 add('steer', 'chrome', rod(V(-FORK_X - 0.04, AF.y, AF.z), V(FORK_X + 0.04, AF.y, AF.z), 0.012));
 // triple clamps: plates square to the axis joining both legs and the stem
 for (const s of [S_CLAMP0, S_CLAMP1]) {
@@ -163,6 +175,7 @@ for (const s of [S_CLAMP0, S_CLAMP1]) {
 }
 // the lamp nacelle between the shrouds and the round lamp
 {
+  SUB = 'headlamp';
   const c = forkAt(S_CLAMP0 + 0.05, 0).addScaledVector(N, 0.07);
   add('steer', 'paint', ball(c, 0.12, 1.05, 0.62, 0.9));
   const lampC = forkAt(S_CLAMP0 + 0.06, 0).addScaledVector(N, 0.175);
@@ -174,6 +187,7 @@ for (const s of [S_CLAMP0, S_CLAMP1]) {
   const ring = new THREE.TorusGeometry(0.075, 0.006, 8, 64); ring.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(V(0, 0, 1), N));
   const rc = lampC.clone().addScaledVector(N, 0.05); ring.translate(rc.x, rc.y, rc.z); add('steer', 'chrome', ring);
   for (const sx of [-1, 1]) {                       // the front turn signals on the lower clamp
+    SUB = 'indicators_front';
     const p = forkAt(S_CLAMP0 - 0.02, sx * (FORK_X + 0.07)).addScaledVector(N, 0.05);
     add('steer', 'chrome', rod(forkAt(S_CLAMP0 - 0.02, sx * FORK_X), p, 0.007));
     add('steer', 'amber_lens', ball(p.clone().addScaledVector(N, 0.02), 0.025, 1, 1, 1.3));
@@ -181,11 +195,13 @@ for (const s of [S_CLAMP0, S_CLAMP1]) {
 }
 // risers and the wide, pulled-back bar
 {
+  SUB = 'handlebar';
   const top = forkAt(S_CLAMP1, 0).addScaledVector(N, -0.025);
   const up = top.clone().addScaledVector(U, 0.11);
   for (const sx of [-1, 1]) add('steer', 'chrome', rod(top.clone().add(V(sx * 0.05, 0, 0)), up.clone().add(V(sx * 0.05, 0, 0)), 0.016));
   const bar = [];
   for (const sx of [-1, 1]) {
+    SUB = 'handlebar';
     const side = [V(0, up.y + 0.01, up.z + 0.005), V(sx * 0.16, up.y + 0.015, up.z - 0.005), V(sx * 0.30, up.y + 0.045, up.z - 0.09),
       V(sx * 0.40, up.y + 0.06, up.z - 0.17), V(sx * 0.47, up.y + 0.062, up.z - 0.20)];
     add('steer', 'chrome', tube(side, 0.0125, 48, 12));
@@ -195,6 +211,7 @@ for (const s of [S_CLAMP0, S_CLAMP1]) {
     add('steer', 'black', roundedBox(0.05, 0.045, 0.06, 0.012, side[3].clone().add(V(-sx * 0.04, 0.01, 0.0)))); // switches
     add('steer', 'chrome', tube([side[3].clone().add(V(-sx * 0.03, 0.015, 0.02)), side[3].clone().add(V(sx * 0.03, 0.0, 0.07)),
       side[4].clone().add(V(sx * 0.02, -0.01, 0.07))], 0.006, 16, 8));                // levers
+    SUB = 'mirrors';
     const m0 = side[2].clone().add(V(sx * 0.01, 0.01, 0)), m1 = m0.clone().add(V(sx * 0.12, 0.15, 0.02));
     add('steer', 'chrome', tube([m0, m0.clone().add(V(sx * 0.05, 0.09, 0.01)), m1], 0.006, 20, 8));   // mirror stalks
     const mh = new THREE.CylinderGeometry(0.055, 0.055, 0.025, 32); mh.rotateX(Math.PI / 2); mh.rotateY(-sx * 0.25); mh.translate(m1.x, m1.y + 0.03, m1.z);
@@ -205,6 +222,7 @@ for (const s of [S_CLAMP0, S_CLAMP1]) {
 }
 // the short front mudguard, hugging the tyre
 {
+  SUB = 'mudguard_front';
   const r0 = TF.R + 0.03, w = 0.105;
   const prof = [];
   for (let i = 0; i <= 12; i++) { const a = -w + 2 * w * i / 12; prof.push([r0 + 0.012 * (1 - (a / w) ** 2), a]); }
@@ -214,6 +232,7 @@ for (const s of [S_CLAMP0, S_CLAMP1]) {
 
 // ── the frame ────────────────────────────────────────────────────────────
 const headTop = axisAt(T_HEAD1), headBot = axisAt(T_HEAD0);
+SUB = 'frame';
 add('body', 'black', rod(headBot.clone().addScaledVector(U, -0.02), headTop.clone().addScaledVector(U, 0.02), 0.032, 24));   // head tube
 add('body', 'black', tube([headTop, V(0, 0.86, 0.30), V(0, 0.80, 0.05), V(0, 0.73, -0.22), V(0, 0.66, -0.42)], 0.024));       // backbone
 for (const sx of [-1, 1]) {
@@ -221,33 +240,48 @@ for (const sx of [-1, 1]) {
   add('body', 'black', tube([headBot.clone().add(V(x * 0.5, 0, 0)), V(x, 0.62, 0.43), V(x, 0.34, 0.37), V(x, 0.16, 0.25),
     V(x, 0.12, 0.05), V(x, 0.13, -0.20), V(x * 1.2, 0.30, -0.27), V(x * 1.35, 0.55, -0.33), V(x * 1.5, 0.64, -0.45),
     V(x * 1.7, 0.68, -0.80)], 0.019, 120));                                           // downtube, cradle, seat rail
+  SUB = 'swingarm';
   const p0 = V(sx * 0.150, 0.34, -0.26), p1 = V(sx * 0.150, AR.y, AR.z);
   add('body', 'black', tube([p0, V(sx * 0.152, 0.335, -0.55), p1], 0.022, 40));        // swingarm, lower
   add('body', 'black', tube([V(sx * 0.15, 0.52, -0.33), V(sx * 0.152, 0.45, -0.55), p1.clone().add(V(0, 0.03, 0.04))], 0.017, 40)); // upper
+  SUB = 'rear_shocks';
   add('body', 'black', rod(V(sx * 0.15, 0.33, -0.48), V(sx * 0.152, 0.47, -0.50), 0.012));
+  SUB = 'swingarm';
+  SUB = 'swingarm';
   add('body', 'chrome', rod(V(sx * 0.145, AR.y, AR.z), V(sx * 0.175, AR.y, AR.z), 0.022));   // axle ends
 }
+SUB = 'swingarm';
 add('body', 'black', rod(V(-0.16, 0.34, -0.26), V(0.16, 0.34, -0.26), 0.024));          // swingarm pivot
 add('body', 'chrome', rod(V(-0.16, AR.y, AR.z), V(0.16, AR.y, AR.z), 0.011));
 
 // ── the V-twin ───────────────────────────────────────────────────────────
 const CR = V(0, 0.30, 0.06);                                                              // crank
+SUB = 'crankcase';
 add('body', 'alloy', roundedBox(0.22, 0.22, 0.34, 0.06, V(0, 0.27, 0.05)));               // crankcase
+SUB = 'gearbox';
 add('body', 'black', roundedBox(0.18, 0.17, 0.24, 0.04, V(0, 0.27, -0.20)));              // gearbox
 for (const [tilt, base] of [[+22.5, V(0, 0.37, 0.12)], [-22.5, V(0, 0.37, -0.01)]]) {
   const th = THREE.MathUtils.degToRad(tilt), d = V(0, Math.cos(th), Math.sin(th));
   const at = s => base.clone().addScaledVector(d, s);
+  SUB = 'cylinders';
+  SUB = 'cylinders';
   add('body', 'fins', rod(at(0), at(0.24), 0.058, 32));                                  // barrel
   for (let k = 0; k < 15; k++) add('body', 'fins', rod(at(0.012 + k * 0.0145), at(0.017 + k * 0.0145), 0.088, 40));   // fins
+  SUB = 'cylinder_heads';
   add('body', 'alloy', rod(at(0.24), at(0.33), 0.074, 32));                              // head
+  SUB = 'cylinder_heads';
   for (let k = 0; k < 5; k++) add('body', 'fins', rod(at(0.248 + k * 0.016), at(0.254 + k * 0.016), 0.094, 40));
+  SUB = 'rocker_covers';
   add('body', 'chrome', ball(at(0.355), 0.078, 1.15, 0.45, 1.25));                       // rocker cover
+  SUB = 'pushrod_tubes';
   for (const ox of [-0.022, 0.022]) add('body', 'chrome', rod(V(-0.075 + ox * 0.3, 0.30, 0.05 + ox), at(0.27).add(V(-0.07, 0, ox)), 0.009, 12)); // pushrod tubes
+  SUB = 'spark_plugs';
   add('body', 'chrome', ball(at(0.29).add(V(0.10, 0, 0)), 0.018));                       // spark plug cap
 }
 // the primary cover on the left, a kidney of two rounds
 {
   const s = new THREE.Shape();
+  SUB = 'primary_cover';
   const c1 = [0.09, 0.30], r1 = 0.075, c2 = [-0.20, 0.32], r2 = 0.13;                  // (z, y): engine sprocket, clutch
   s.absarc(c1[0], c1[1], r1, -Math.PI / 2, Math.PI / 2, false);
   s.absarc(c2[0], c2[1], r2, Math.PI / 2, Math.PI * 1.5, false);
@@ -260,6 +294,7 @@ for (const [tilt, base] of [[+22.5, V(0, 0.37, 0.12)], [-22.5, V(0, 0.37, -0.01)
 }
 // the round air cleaner on the right, in the V
 {
+  SUB = 'air_cleaner';
   const ac = new THREE.CylinderGeometry(0.118, 0.12, 0.075, 64); ac.rotateZ(Math.PI / 2); ac.translate(-0.17, 0.57, 0.055);
   add('body', 'chrome', ac);
   const face = new THREE.CylinderGeometry(0.09, 0.11, 0.012, 64); face.rotateZ(Math.PI / 2); face.translate(-0.214, 0.57, 0.055);
@@ -268,6 +303,7 @@ for (const [tilt, base] of [[+22.5, V(0, 0.37, 0.12)], [-22.5, V(0, 0.37, -0.01)
 }
 // the shotgun exhaust on the right: two pipes, two stacked silencers
 {
+  SUB = 'exhaust';
   const fp = [V(-0.05, 0.60, 0.30), V(-0.15, 0.52, 0.36), V(-0.20, 0.33, 0.27), V(-0.205, 0.25, 0.05), V(-0.21, 0.27, -0.30), V(-0.215, 0.30, -0.52)];
   const rp = [V(-0.05, 0.62, -0.13), V(-0.15, 0.58, -0.19), V(-0.20, 0.47, -0.32), V(-0.215, 0.42, -0.50)];
   add('body', 'chrome', tube(fp, 0.022, 80));
@@ -281,6 +317,7 @@ for (const [tilt, base] of [[+22.5, V(0, 0.37, 0.12)], [-22.5, V(0, 0.37, -0.01)
 }
 // the belt, on the left, and its guard
 {
+  SUB = 'belt';
   const p0 = V(0.125, 0.30, -0.20), r0 = 0.07, r1 = 0.17;
   for (const sgn of [1, -1]) add('body', 'black', rod(V(0.125, p0.y + sgn * r0, p0.z), V(0.125, AR.y + sgn * r1, AR.z), 0.007, 8));
   add('body', 'chrome', tube([V(0.13, p0.y + r0 + 0.03, p0.z), V(0.13, AR.y + r1 + 0.025, -0.60), V(0.13, AR.y + r1 + 0.02, AR.z + 0.05)], 0.012, 24, 8));
@@ -288,6 +325,7 @@ for (const [tilt, base] of [[+22.5, V(0, 0.37, 0.12)], [-22.5, V(0, 0.37, -0.01)
 
 // ── tank, seat, mudguard, lamps ──────────────────────────────────────────
 // the fat tank: a teardrop seen from above, a flat underside on the backbone
+SUB = 'tank';
 add('body', 'paint', new ParametricGeometry((u, v, target) => {
   const z = 0.43 - 0.56 * u;                                   // nose to tail
   const w = 0.19 * Math.sin(Math.PI * (0.18 + 0.82 * u)) ** 0.55 * (1 - 0.22 * u);   // half width
@@ -297,13 +335,16 @@ add('body', 'paint', new ParametricGeometry((u, v, target) => {
   const y0 = 0.79 + 0.035 * u;
   target.set(w * sq(c, 0.7), y0 + (s > 0 ? h * sq(s, 0.75) : 0.02 * s), z);
 }, 64, 48));
+SUB = 'speedo';
 add('body', 'chrome', roundedBox(0.075, 0.012, 0.42, 0.005, V(0, 0.918, 0.18)));        // the console on the tank
 {
   const sp = new THREE.CylinderGeometry(0.045, 0.048, 0.018, 48); sp.translate(0, 0.927, 0.10); add('body', 'chrome', sp);
   const face = new THREE.CircleGeometry(0.038, 40); face.rotateX(-Math.PI / 2); face.translate(0, 0.937, 0.10); add('body', 'gloss_black', face);
+  SUB = 'fuel_cap';
   const cap = new THREE.CylinderGeometry(0.03, 0.032, 0.012, 32); cap.translate(0.08, 0.905, 0.30); add('body', 'chrome', cap);
 }
 // the seat: a deep rider's dish and a pillion pad
+SUB = 'seat';
 add('body', 'leather', new ParametricGeometry((u, v, target) => {
   const z = -0.10 - 0.70 * u;
   const rider = u < 0.62;
@@ -314,36 +355,45 @@ add('body', 'leather', new ParametricGeometry((u, v, target) => {
 }, 64, 40));
 // the wide rear mudguard and its struts
 {
+  SUB = 'mudguard_rear';
   const r0 = TR.R + 0.035, w = 0.155, prof = [];
   for (let i = 0; i <= 14; i++) { const a = -w + 2 * w * i / 14; prof.push([r0 + 0.02 * (1 - (a / w) ** 2), a]); }
   add('body', 'paint', aroundX(prof, AR.x, AR.y, AR.z, 64, -Math.PI * 1.05, Math.PI * 0.70));   // over the top, down behind
   for (const sx of [-1, 1]) add('body', 'chrome', tube([V(sx * 0.16, 0.66, -0.55), V(sx * 0.17, 0.62, -0.85), V(sx * 0.165, 0.50, -1.08)], 0.011, 32, 8));
+  SUB = 'tail_lamp';
   const tl = roundedBox(0.12, 0.035, 0.05, 0.012, V(0, 0.47, -1.20)); add('body', 'red_lens', tl);
   for (const sx of [-1, 1]) {
+    SUB = 'indicators_rear';
     add('body', 'chrome', rod(V(sx * 0.165, 0.52, -1.05), V(sx * 0.24, 0.53, -1.08), 0.006));
     add('body', 'amber_lens', ball(V(sx * 0.255, 0.53, -1.09), 0.022, 1, 1, 1.3));
   }
 }
 // floorboards, pedals, pillion pegs
 for (const sx of [-1, 1]) {
+  SUB = 'footboards';
   add('body', 'chrome', roundedBox(0.13, 0.02, 0.30, 0.008, V(sx * 0.31, 0.30, 0.31)));
   add('body', 'rubber', roundedBox(0.11, 0.008, 0.27, 0.003, V(sx * 0.31, 0.314, 0.31)));
   add('body', 'black', rod(V(sx * 0.10, 0.20, 0.30), V(sx * 0.25, 0.29, 0.30), 0.012));
   add('body', 'chrome', rod(V(sx * 0.16, 0.42, -0.62), V(sx * 0.27, 0.40, -0.64), 0.012));
   add('body', 'rubber', rod(V(sx * 0.23, 0.40, -0.64), V(sx * 0.30, 0.40, -0.645), 0.016));
 }
+SUB = 'brake_pedal';
 add('body', 'chrome', tube([V(-0.15, 0.24, 0.12), V(-0.25, 0.26, 0.30), V(-0.29, 0.30, 0.47)], 0.009, 20, 8));   // brake pedal
+SUB = 'gear_lever';
 add('body', 'chrome', tube([V(0.15, 0.27, 0.10), V(0.24, 0.29, 0.30), V(0.28, 0.32, 0.47)], 0.009, 20, 8));     // gear lever
+SUB = 'caliper_rear';
 add('body', 'black', roundedBox(0.04, 0.06, 0.05, 0.01, V(-0.14, AR.y + 0.05, AR.z + 0.09)));                     // rear caliper
 
 // the side stand, on the left: folded back along the frame
 const STAND_PIVOT = V(0.165, 0.20, 0.10);
 const STAND_FOLDED = V(0.06, 0.10, -1).normalize(), STAND_DOWN = V(0.30, -0.93, 0.21).normalize();
+SUB = 'side_stand';
 add('stand', 'black', rod(STAND_PIVOT, STAND_PIVOT.clone().addScaledVector(STAND_FOLDED, 0.29), 0.012));
 add('stand', 'black', ball(STAND_PIVOT.clone().addScaledVector(STAND_FOLDED, 0.30), 0.022, 1.3, 0.6, 1.3));
 add('stand', 'chrome', rod(STAND_PIVOT.clone().add(V(-0.02, 0, 0)), STAND_PIVOT.clone().add(V(0.02, 0, 0)), 0.018));
 // the front brake caliper rides on the right fork leg (steers, does not spin)
 {
+  SUB = 'caliper_front';
   const c = forkAt(0.05, -FORK_X).add(V(0.02, 0, 0)).addScaledVector(N, -0.11);
   add('steer', 'black', roundedBox(0.04, 0.10, 0.06, 0.012, c));
 }
@@ -390,11 +440,18 @@ for (const p of ['steer', 'wheel_r', 'wheel_f', 'stand']) {
   nodes[p] = n;
 }
 let tris = 0;
+const SPLIT = !!args.parts;
+// a piece's node name: the wheels' tyre, rim, disc and pulley take the end
+// they belong to (tyre_f, rim_r); every other piece is named once
+const pieceName = (part, sub) => part.startsWith('wheel_') ? `${sub}_${part.slice(-1)}` : sub;
 for (const part of ['body', 'steer', 'wheel_f', 'wheel_r', 'stand']) {
+  const subs = SPLIT ? [...new Set(parts.filter(p => p[0] === part).map(p => p[3]))] : [undefined];
+  for (const sub of subs) {
   const byMat = {};
-  for (const [pp, m, g] of parts) if (pp === part) (byMat[m] ||= []).push(clean(g));
+  for (const [pp, m, g, ss] of parts) if (pp === part && (!SPLIT || ss === sub)) (byMat[m] ||= []).push(clean(g));
   const off = part === 'body' ? V(0, 0, 0) : worldPivot(part);
-  const mesh = doc.createMesh(part);
+  const name = SPLIT ? pieceName(part, sub || part) : part;
+  const mesh = doc.createMesh(name);
   for (const [m, gs] of Object.entries(byMat)) {
     const g = mergeGeometries(gs, false); g.translate(-off.x, -off.y, -off.z);
     const pos = doc.createAccessor().setArray(new Float32Array(g.attributes.position.array)).setType('VEC3').setBuffer(buf);
@@ -403,9 +460,11 @@ for (const part of ['body', 'steer', 'wheel_f', 'wheel_r', 'stand']) {
     tris += g.index.count / 3;
     mesh.addPrimitive(doc.createPrimitive().setAttribute('POSITION', pos).setAttribute('NORMAL', nor).setIndices(idx).setMaterial(mats[m]));
   }
-  const holder = part === 'body' ? doc.createNode('body') : doc.createNode(part + '_mesh');
+  const holder = SPLIT ? doc.createNode(name) : part === 'body' ? doc.createNode('body') : doc.createNode(part + '_mesh');
   holder.setMesh(mesh);
+  if (SPLIT) holder.setExtras({ moves_with: part });
   (part === 'body' ? root : nodes[part]).addChild(holder);
+  }
 }
 
 // ── clips ────────────────────────────────────────────────────────────────
@@ -431,5 +490,6 @@ doc.getRoot().getAsset().copyright = `${B.name}: modelled in code by the ExpertC
 await new NodeIO().registerExtensions([KHRMaterialsClearcoat, KHRMaterialsEmissiveStrength]).write(OUT, doc);
 const L = Math.max(AF.z + TF.R, 0) - Math.min(-1.215, AR.z - TR.R);
 console.log(JSON.stringify({ wrote: OUT, triangles: Math.round(tris), parts: [...new Set(parts.map(p => p[0]))],
+  pieces: SPLIT ? [...new Set(parts.map(p => pieceName(p[0], p[3] || p[0])))] : undefined,
   front_tyre_d_m: +(2 * TF.R).toFixed(3), rear_tyre_d_m: +(2 * TR.R).toFixed(3), length_m: +L.toFixed(3),
   fork_offset_m: +new THREE.Vector3().subVectors(AF, G).dot(N).toFixed(3) }));

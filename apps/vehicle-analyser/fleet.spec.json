@@ -1,0 +1,195 @@
+[
+ {
+  "id": "volkswagen-golf-2017",
+  "request": "Volkswagen Golf 2017 red",
+  "kind": "car",
+  "body": "hatchback",
+  "title": "Volkswagen Golf 2017",
+  "summary": "Five-door hatchback. All four doors, the bonnet and the tailgate open, and every panel comes off.",
+  "real_layout": "Transverse engine at the front driving the front wheels (four-wheel drive on some versions): the same layout as the teaching engine."
+ },
+ {
+  "id": "nissan-qashqai-2018",
+  "request": "Nissan Qashqai 2018 grey",
+  "kind": "car",
+  "body": "SUV",
+  "title": "Nissan Qashqai 2018",
+  "summary": "Compact SUV, for years the UK's best seller. All four doors, the bonnet and the tailgate open.",
+  "real_layout": "Transverse engine at the front driving the front wheels (four-wheel drive on some versions): the same layout as the teaching engine."
+ },
+ {
+  "id": "bmw-3-series-touring-2014",
+  "request": "BMW 3 Series 2014 white",
+  "kind": "car",
+  "body": "estate",
+  "title": "BMW 3 Series Touring 2014",
+  "summary": "Five-door estate (the F31 Touring) with a tall tailgate.",
+  "real_layout": "The real car's engine sits lengthways at the front and drives the rear wheels (xDrive versions drive all four). The teaching engine shown is transverse front-drive, so the real layout differs."
+ },
+ {
+  "id": "land-rover-defender-works-v8-trophy",
+  "request": "Land Rover Defender 2021 green 5 door",
+  "kind": "car",
+  "body": "4x4",
+  "title": "Land Rover Defender Works V8 Trophy 2021",
+  "summary": "The classic Defender 110 body, built new by Land Rover Classic in 2021: five doors and a side-hinged rear door.",
+  "real_layout": "The real Works V8 has a 5.0-litre V8 mounted lengthways at the front and permanent four-wheel drive. The teaching engine shown is transverse front-drive, so the real layout differs."
+ },
+ {
+  "id": "porsche-911",
+  "request": "Porsche 911 silver",
+  "kind": "car",
+  "body": "coupe",
+  "title": "Porsche 911",
+  "summary": "Rear-engined sports coupe: the luggage space is at the front, the engine at the back.",
+  "real_layout": "A flat-six engine behind the rear axle drives the rear wheels (Carrera 4 and Turbo versions drive all four). The teaching engine is placed at the back to show where the engine lives; the real one is a flat-six, not an inline four.",
+  "labels": {
+   "bonnet": "Front luggage lid",
+   "tailgate": "Engine lid"
+  }
+ },
+ {
+  "id": "renault-master",
+  "request": "Renault Master van white",
+  "kind": "van",
+  "body": "panel van",
+  "title": "Renault Master",
+  "summary": "Large panel van with barn doors at the back, each hinged at its outer edge.",
+  "real_layout": "Engine at the front; most versions drive the front wheels, heavier ones the rear."
+ },
+ {
+  "id": "cruiser",
+  "kind": "motorbike",
+  "body": "cruiser",
+  "title": "Heavy cruiser motorbike",
+  "summary": "A 45-degree V-twin cruiser modelled in code to a Fat Boy-style bike's published sizes. Forty parts come off.",
+  "real_layout": "Engine in the middle of the frame, gearbox behind it, primary drive on the left and a belt to the rear wheel.",
+  "procedures": [
+   {
+    "title": "Pre-ride check (T-CLOCS)",
+    "steps": [
+     {
+      "text": "Tyres and wheels: pressures cold, tread depth across the width, no cuts, bulges or nails; wheels true with no cracks.",
+      "view": "part",
+      "parts": [
+       "tyre_f",
+       "tyre_r",
+       "rim_f",
+       "rim_r"
+      ],
+      "open": []
+     },
+     {
+      "text": "Controls: levers and pedals move freely and return; the throttle snaps shut on its own with the bars at full lock both ways.",
+      "view": "part",
+      "parts": [
+       "handlebar",
+       "brake_pedal",
+       "gear_lever"
+      ],
+      "open": []
+     },
+     {
+      "text": "Lights and electrics: headlamp high and low, tail and brake lamp from both brakes, all four indicators, horn.",
+      "view": "part",
+      "parts": [
+       "headlamp",
+       "tail_lamp",
+       "indicators_front",
+       "indicators_rear"
+      ],
+      "open": []
+     },
+     {
+      "text": "Oil and fluids: engine oil level on the level ground, no leaks from the crankcase, primary or gearbox; brake fluid between the marks.",
+      "view": "part",
+      "parts": [
+       "crankcase",
+       "primary_cover",
+       "gearbox"
+      ],
+      "open": []
+     },
+     {
+      "text": "Chassis: fork seals dry and the fork smooth when you push the front down; rear shocks not leaking; belt tension and teeth.",
+      "view": "part",
+      "parts": [
+       "fork",
+       "rear_shocks",
+       "belt"
+      ],
+      "open": []
+     },
+     {
+      "text": "Stand: the side stand springs fully up on its own and holds the bike when down.",
+      "view": "part",
+      "parts": [
+       "side_stand"
+      ],
+      "open": []
+     }
+    ]
+   },
+   {
+    "title": "Brakes",
+    "steps": [
+     {
+      "text": "Front: pads thicker than the wear line, the disc smooth with no deep scoring or blueing.",
+      "view": "part",
+      "parts": [
+       "caliper_front",
+       "disc_f"
+      ],
+      "open": []
+     },
+     {
+      "text": "Rear: the same check at the rear caliper and disc; the pedal firm, not spongy.",
+      "view": "part",
+      "parts": [
+       "caliper_rear",
+       "disc_r",
+       "brake_pedal"
+      ],
+      "open": []
+     }
+    ]
+   },
+   {
+    "title": "Engine top end",
+    "steps": [
+     {
+      "text": "The two cylinders sit in a 45-degree V on one crankcase; each has a finned barrel for air cooling and a head on top.",
+      "view": "part",
+      "parts": [
+       "cylinders",
+       "cylinder_heads",
+       "crankcase"
+      ],
+      "open": []
+     },
+     {
+      "text": "Pushrods in the chromed tubes carry the cam's lift up to the rockers under the rocker covers, which open the valves.",
+      "view": "part",
+      "parts": [
+       "pushrod_tubes",
+       "rocker_covers"
+      ],
+      "open": []
+     },
+     {
+      "text": "Air comes in through the air cleaner on the right; burnt gas leaves through the two exhaust pipes.",
+      "view": "part",
+      "parts": [
+       "air_cleaner",
+       "exhaust"
+      ],
+      "open": []
+     }
+    ]
+   }
+  ],
+  "bike": {
+   "paint": "#121214"
+  }
+ }
+]

@@ -1,0 +1,1436 @@
+{
+ "schema": "expertcarcheck.vehicle/1",
+ "id": "cruiser",
+ "title": "Heavy cruiser motorbike",
+ "kind": "motorbike",
+ "body": "cruiser",
+ "glb": "cruiser.glb",
+ "bytes": 870312,
+ "frame": "metres; +Y up, nose +Z, the rider's left +X; ground at y = 0",
+ "box": {
+  "min": [
+   -0.507,
+   -0.0,
+   -1.236
+  ],
+  "max": [
+   0.507,
+   1.291,
+   1.157
+  ]
+ },
+ "paint": {
+  "hex": "#121214",
+  "materials": [
+   "paint"
+  ]
+ },
+ "hinges": [],
+ "clips": [
+  "wheels_spin",
+  "steer_left",
+  "steer_right",
+  "stand_down"
+ ],
+ "pivots": {
+  "steer": {
+   "node": "steer",
+   "moves": "the fork, wheel, lamp and bars turn about the raked steering axis"
+  },
+  "wheel_f": {
+   "node": "wheel_f",
+   "moves": "the front wheel turns on its axle"
+  },
+  "wheel_r": {
+   "node": "wheel_r",
+   "moves": "the rear wheel turns on its axle"
+  },
+  "stand": {
+   "node": "stand",
+   "moves": "the side stand swings down"
+  }
+ },
+ "parts": [
+  {
+   "id": "air_cleaner",
+   "label": "Air cleaner",
+   "system": "Air and fuel",
+   "node": "air_cleaner",
+   "node_loaded": "air_cleaner",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.22,
+     0.45,
+     -0.065
+    ],
+    "max": [
+     -0.044,
+     0.69,
+     0.175
+    ]
+   },
+   "remove": {
+    "dir": [
+     -0.768,
+     0.64,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "belt",
+   "label": "Final drive belt",
+   "system": "Transmission",
+   "node": "belt",
+   "node_loaded": "belt",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.118,
+     0.148,
+     -0.834
+    ],
+    "max": [
+     0.142,
+     0.535,
+     -0.197
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "brake_pedal",
+   "label": "Rear brake pedal",
+   "system": "Brakes",
+   "node": "brake_pedal",
+   "node_loaded": "brake_pedal",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.299,
+     0.231,
+     0.116
+    ],
+    "max": [
+     -0.142,
+     0.309,
+     0.473
+    ]
+   },
+   "remove": {
+    "dir": [
+     -0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "caliper_front",
+   "label": "Front brake caliper",
+   "system": "Brakes",
+   "node": "caliper_front",
+   "node_loaded": "caliper_front",
+   "moves_with": "steer",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.118,
+     0.252,
+     0.671
+    ],
+    "max": [
+     -0.078,
+     0.374,
+     0.753
+    ]
+   },
+   "remove": {
+    "dir": [
+     -0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "caliper_rear",
+   "label": "Rear brake caliper",
+   "system": "Brakes",
+   "node": "caliper_rear",
+   "node_loaded": "caliper_rear",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.16,
+     0.336,
+     -0.777
+    ],
+    "max": [
+     -0.12,
+     0.414,
+     -0.708
+    ]
+   },
+   "remove": {
+    "dir": [
+     -0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "crankcase",
+   "label": "Crankcase",
+   "system": "Engine",
+   "node": "crankcase",
+   "node_loaded": "crankcase",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.11,
+     0.106,
+     -0.174
+    ],
+    "max": [
+     0.11,
+     0.434,
+     0.274
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "cylinder_heads",
+   "label": "Cylinder heads",
+   "system": "Engine",
+   "node": "cylinder_heads",
+   "node_loaded": "cylinder_heads",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.094,
+     0.563,
+     -0.219
+    ],
+    "max": [
+     0.094,
+     0.703,
+     0.329
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "cylinders",
+   "label": "Cylinders (barrels)",
+   "system": "Engine",
+   "node": "cylinders",
+   "node_loaded": "cylinders",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.088,
+     0.347,
+     -0.175
+    ],
+    "max": [
+     0.088,
+     0.614,
+     0.285
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "disc_f",
+   "label": "Front brake disc",
+   "system": "Brakes",
+   "node": "disc_f",
+   "node_loaded": "disc_f",
+   "moves_with": "wheel_f",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.069,
+     0.175,
+     0.683
+    ],
+    "max": [
+     -0.063,
+     0.475,
+     0.983
+    ]
+   },
+   "remove": {
+    "dir": [
+     -0.981,
+     0.196,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "disc_r",
+   "label": "Rear brake disc",
+   "system": "Brakes",
+   "node": "disc_r",
+   "node_loaded": "disc_r",
+   "moves_with": "wheel_r",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.108,
+     0.175,
+     -0.983
+    ],
+    "max": [
+     -0.101,
+     0.475,
+     -0.683
+    ]
+   },
+   "remove": {
+    "dir": [
+     -0.981,
+     0.196,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "exhaust",
+   "label": "Exhaust",
+   "system": "Exhaust",
+   "node": "exhaust",
+   "node_loaded": "exhaust",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.27,
+     0.224,
+     -1.021
+    ],
+    "max": [
+     -0.035,
+     0.641,
+     0.382
+    ]
+   },
+   "remove": {
+    "dir": [
+     -0.768,
+     0.64,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "footboards",
+   "label": "Footboards and pegs",
+   "system": "Body",
+   "node": "footboards",
+   "node_loaded": "footboards",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.375,
+     0.19,
+     -0.661
+    ],
+    "max": [
+     0.375,
+     0.432,
+     0.467
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "fork",
+   "label": "Front fork",
+   "system": "Suspension",
+   "node": "fork",
+   "node_loaded": "fork",
+   "moves_with": "steer",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.168,
+     0.284,
+     0.409
+    ],
+    "max": [
+     0.168,
+     0.953,
+     0.873
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "frame",
+   "label": "Frame",
+   "system": "Chassis",
+   "node": "frame",
+   "node_loaded": "frame",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.146,
+     0.09,
+     -0.802
+    ],
+    "max": [
+     0.032,
+     0.951,
+     0.552
+    ]
+   },
+   "remove": {
+    "dir": [
+     -0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "fuel_cap",
+   "label": "Fuel cap",
+   "system": "Air and fuel",
+   "node": "fuel_cap",
+   "node_loaded": "fuel_cap",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.048,
+     0.899,
+     0.268
+    ],
+    "max": [
+     0.112,
+     0.911,
+     0.332
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.768,
+     0.64,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "gear_lever",
+   "label": "Gear lever",
+   "system": "Transmission",
+   "node": "gear_lever",
+   "node_loaded": "gear_lever",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.142,
+     0.261,
+     0.096
+    ],
+    "max": [
+     0.289,
+     0.329,
+     0.472
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "gearbox",
+   "label": "Gearbox",
+   "system": "Transmission",
+   "node": "gearbox",
+   "node_loaded": "gearbox",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.09,
+     0.149,
+     -0.356
+    ],
+    "max": [
+     0.09,
+     0.391,
+     -0.044
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "handlebar",
+   "label": "Handlebar and controls",
+   "system": "Steering",
+   "node": "handlebar",
+   "node_loaded": "handlebar",
+   "moves_with": "steer",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.507,
+     0.897,
+     0.187
+    ],
+    "max": [
+     0.507,
+     1.104,
+     0.482
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "headlamp",
+   "label": "Headlamp",
+   "system": "Electrical",
+   "node": "headlamp",
+   "node_loaded": "headlamp",
+   "moves_with": "steer",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.126,
+     0.783,
+     0.498
+    ],
+    "max": [
+     0.126,
+     1.026,
+     0.779
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "indicators_front",
+   "label": "Front indicators",
+   "system": "Electrical",
+   "node": "indicators_front",
+   "node_loaded": "indicators_front",
+   "moves_with": "steer",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.213,
+     0.755,
+     0.574
+    ],
+    "max": [
+     0.213,
+     0.822,
+     0.673
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "indicators_rear",
+   "label": "Rear indicators",
+   "system": "Electrical",
+   "node": "indicators_rear",
+   "node_loaded": "indicators_rear",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.277,
+     0.508,
+     -1.119
+    ],
+    "max": [
+     0.277,
+     0.552,
+     -1.044
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "mirrors",
+   "label": "Mirrors",
+   "system": "Body",
+   "node": "mirrors",
+   "node_loaded": "mirrors",
+   "moves_with": "steer",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.486,
+     1.053,
+     0.317
+    ],
+    "max": [
+     0.486,
+     1.291,
+     0.369
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "mudguard_front",
+   "label": "Front mudguard",
+   "system": "Body",
+   "node": "mudguard_front",
+   "node_loaded": "mudguard_front",
+   "moves_with": "steer",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.105,
+     0.515,
+     0.698
+    ],
+    "max": [
+     0.105,
+     0.691,
+     1.142
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "mudguard_rear",
+   "label": "Rear mudguard",
+   "system": "Body",
+   "node": "mudguard_rear",
+   "node_loaded": "mudguard_rear",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.181,
+     0.265,
+     -1.212
+    ],
+    "max": [
+     0.181,
+     0.704,
+     -0.549
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "primary_cover",
+   "label": "Primary drive cover",
+   "system": "Transmission",
+   "node": "primary_cover",
+   "node_loaded": "primary_cover",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.09,
+     0.178,
+     -0.342
+    ],
+    "max": [
+     0.178,
+     0.462,
+     0.177
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.768,
+     0.64,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "pulley_r",
+   "label": "Rear belt pulley",
+   "system": "Transmission",
+   "node": "pulley_r",
+   "node_loaded": "pulley_r",
+   "moves_with": "wheel_r",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.113,
+     0.153,
+     -1.005
+    ],
+    "max": [
+     0.141,
+     0.497,
+     -0.66
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "pushrod_tubes",
+   "label": "Pushrod tubes",
+   "system": "Engine",
+   "node": "pushrod_tubes",
+   "node_loaded": "pushrod_tubes",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.091,
+     0.296,
+     -0.143
+    ],
+    "max": [
+     -0.059,
+     0.624,
+     0.253
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "rear_shocks",
+   "label": "Rear shock absorbers",
+   "system": "Suspension",
+   "node": "rear_shocks",
+   "node_loaded": "rear_shocks",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.164,
+     0.328,
+     -0.512
+    ],
+    "max": [
+     0.164,
+     0.472,
+     -0.468
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "rim_f",
+   "label": "Front wheel",
+   "system": "Wheels",
+   "node": "rim_f",
+   "node_loaded": "rim_f",
+   "moves_with": "wheel_f",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.083,
+     0.088,
+     0.596
+    ],
+    "max": [
+     0.083,
+     0.561,
+     1.069
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.981,
+     0.196,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "rim_r",
+   "label": "Rear wheel",
+   "system": "Wheels",
+   "node": "rim_r",
+   "node_loaded": "rim_r",
+   "moves_with": "wheel_r",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.121,
+     0.088,
+     -1.069
+    ],
+    "max": [
+     0.121,
+     0.561,
+     -0.596
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.981,
+     0.196,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "rocker_covers",
+   "label": "Rocker covers",
+   "system": "Engine",
+   "node": "rocker_covers",
+   "node_loaded": "rocker_covers",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.09,
+     0.663,
+     -0.243
+    ],
+    "max": [
+     0.09,
+     0.733,
+     0.353
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "seat",
+   "label": "Seat",
+   "system": "Body",
+   "node": "seat",
+   "node_loaded": "seat",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.18,
+     0.64,
+     -0.8
+    ],
+    "max": [
+     0.18,
+     0.78,
+     -0.1
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "side_stand",
+   "label": "Side stand",
+   "system": "Chassis",
+   "node": "side_stand",
+   "node_loaded": "side_stand",
+   "moves_with": "stand",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.145,
+     0.182,
+     -0.227
+    ],
+    "max": [
+     0.211,
+     0.243,
+     0.118
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "spark_plugs",
+   "label": "Spark plugs",
+   "system": "Electrical",
+   "node": "spark_plugs",
+   "node_loaded": "spark_plugs",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.082,
+     0.62,
+     -0.139
+    ],
+    "max": [
+     0.118,
+     0.656,
+     0.249
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "speedo",
+   "label": "Speedometer console",
+   "system": "Electrical",
+   "node": "speedo",
+   "node_loaded": "speedo",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.048,
+     0.908,
+     -0.034
+    ],
+    "max": [
+     0.048,
+     0.937,
+     0.394
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "swingarm",
+   "label": "Swingarm",
+   "system": "Suspension",
+   "node": "swingarm",
+   "node_loaded": "swingarm",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.175,
+     0.09,
+     -0.854
+    ],
+    "max": [
+     0.175,
+     0.789,
+     0.531
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "tail_lamp",
+   "label": "Tail lamp",
+   "system": "Electrical",
+   "node": "tail_lamp",
+   "node_loaded": "tail_lamp",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.06,
+     0.442,
+     -1.236
+    ],
+    "max": [
+     0.06,
+     0.498,
+     -1.164
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "tank",
+   "label": "Fuel tank",
+   "system": "Air and fuel",
+   "node": "tank",
+   "node_loaded": "tank",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.175,
+     0.77,
+     -0.13
+    ],
+    "max": [
+     0.175,
+     0.926,
+     0.43
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "tyre_f",
+   "label": "Front tyre",
+   "system": "Wheels",
+   "node": "tyre_f",
+   "node_loaded": "tyre_f",
+   "moves_with": "wheel_f",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.076,
+     -0.0,
+     0.508
+    ],
+    "max": [
+     0.076,
+     0.649,
+     1.157
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.981,
+     0.196,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "tyre_r",
+   "label": "Rear tyre",
+   "system": "Wheels",
+   "node": "tyre_r",
+   "node_loaded": "tyre_r",
+   "moves_with": "wheel_r",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.113,
+     -0.0,
+     -1.157
+    ],
+    "max": [
+     0.113,
+     0.649,
+     -0.508
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.981,
+     0.196,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  }
+ ],
+ "procedures": [
+  {
+   "title": "Pre-ride check (T-CLOCS)",
+   "steps": [
+    {
+     "text": "Tyres and wheels: pressures cold, tread depth across the width, no cuts, bulges or nails; wheels true with no cracks.",
+     "view": "part",
+     "parts": [
+      "tyre_f",
+      "tyre_r",
+      "rim_f",
+      "rim_r"
+     ],
+     "open": []
+    },
+    {
+     "text": "Controls: levers and pedals move freely and return; the throttle snaps shut on its own with the bars at full lock both ways.",
+     "view": "part",
+     "parts": [
+      "handlebar",
+      "brake_pedal",
+      "gear_lever"
+     ],
+     "open": []
+    },
+    {
+     "text": "Lights and electrics: headlamp high and low, tail and brake lamp from both brakes, all four indicators, horn.",
+     "view": "part",
+     "parts": [
+      "headlamp",
+      "tail_lamp",
+      "indicators_front",
+      "indicators_rear"
+     ],
+     "open": []
+    },
+    {
+     "text": "Oil and fluids: engine oil level on the level ground, no leaks from the crankcase, primary or gearbox; brake fluid between the marks.",
+     "view": "part",
+     "parts": [
+      "crankcase",
+      "primary_cover",
+      "gearbox"
+     ],
+     "open": []
+    },
+    {
+     "text": "Chassis: fork seals dry and the fork smooth when you push the front down; rear shocks not leaking; belt tension and teeth.",
+     "view": "part",
+     "parts": [
+      "fork",
+      "rear_shocks",
+      "belt"
+     ],
+     "open": []
+    },
+    {
+     "text": "Stand: the side stand springs fully up on its own and holds the bike when down.",
+     "view": "part",
+     "parts": [
+      "side_stand"
+     ],
+     "open": []
+    }
+   ]
+  },
+  {
+   "title": "Brakes",
+   "steps": [
+    {
+     "text": "Front: pads thicker than the wear line, the disc smooth with no deep scoring or blueing.",
+     "view": "part",
+     "parts": [
+      "caliper_front",
+      "disc_f"
+     ],
+     "open": []
+    },
+    {
+     "text": "Rear: the same check at the rear caliper and disc; the pedal firm, not spongy.",
+     "view": "part",
+     "parts": [
+      "caliper_rear",
+      "disc_r",
+      "brake_pedal"
+     ],
+     "open": []
+    }
+   ]
+  },
+  {
+   "title": "Engine top end",
+   "steps": [
+    {
+     "text": "The two cylinders sit in a 45-degree V on one crankcase; each has a finned barrel for air cooling and a head on top.",
+     "view": "part",
+     "parts": [
+      "cylinders",
+      "cylinder_heads",
+      "crankcase"
+     ],
+     "open": []
+    },
+    {
+     "text": "Pushrods in the chromed tubes carry the cam's lift up to the rockers under the rocker covers, which open the valves.",
+     "view": "part",
+     "parts": [
+      "pushrod_tubes",
+      "rocker_covers"
+     ],
+     "open": []
+    },
+    {
+     "text": "Air comes in through the air cleaner on the right; burnt gas leaves through the two exhaust pipes.",
+     "view": "part",
+     "parts": [
+      "air_cleaner",
+      "exhaust"
+     ],
+     "open": []
+    }
+   ]
+  }
+ ],
+ "engine": {
+  "representative": false,
+  "at": "middle",
+  "note": "Modelled in code by the machine: a 45-degree air-cooled pushrod V-twin with a separate gearbox, a primary drive on the left and a belt final drive.",
+  "real_layout": "Engine in the middle of the frame, gearbox behind it, primary drive on the left and a belt to the rear wheel."
+ },
+ "notes": [],
+ "credit": {
+  "title": "Heavy cruiser motorbike",
+  "author": "ExpertCarCheck GLB machine (bikes/cruiser.mjs)",
+  "licence": "ExpertCarCheck own work",
+  "url": null,
+  "commercial": true,
+  "line": "Modelled in code by the ExpertCarCheck GLB machine. No maker's model, badge or lettering."
+ },
+ "summary": "A 45-degree V-twin cruiser modelled in code to a Fat Boy-style bike's published sizes. Forty parts come off.",
+ "hero": "cruiser.webp"
+}
