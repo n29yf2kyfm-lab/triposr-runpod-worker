@@ -99,6 +99,7 @@ def layout_of(item):
 WRONG_CAR = {
     "honda-jazz-2018-v1": "is a Toyota RAV4 (badge and 'JPRAV4' plate)",
     "mini-cooper-w7-v1": "is the classic Mini, not the BMW MINI on UK roads",
+    "ford-ranger-2023-v1": "is a Suzuki Vitara ('VITARA' on its tailgate), not a Ford Ranger",
 }
 
 

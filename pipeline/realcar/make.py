@@ -207,8 +207,10 @@ def find(want, cat, skip=()):
             break
     if want["model_words"] is None:
         want["model_words"] = " ".join(toks[1:])
+    # a file that is another car (batch.WRONG_CAR) is never built as the car it is filed under
     pool = [i for i in cat.values() if norm(i["make"]) == norm(make) and i.get("publicationStatus") == "approved"
-            and i.get("desktopGlbUrl") and i["assetId"] not in skip and not batch.is_game(i)]
+            and i.get("desktopGlbUrl") and i["assetId"] not in skip and i["assetId"] not in batch.WRONG_CAR
+            and not batch.is_game(i)]
 
     def names(i):
         return {norm(n) for n in [i.get("model"), i.get("modelFamily"), *(i.get("modelAliases") or [])] if n}
@@ -422,7 +424,8 @@ def _choose(want, cat, exact, skip):
         if want.get("make"):           # what the catalogue does have for that make
             report["catalogue_has"] = sorted({batch.model_of(i)[1].title() for i in cat.values()
                                               if i["make"].lower() == want["make"]
-                                              and i.get("publicationStatus") == "approved"})[:40]
+                                              and i.get("publicationStatus") == "approved"
+                                              and i["assetId"] not in batch.WRONG_CAR})[:40]
         return report, None
     if want.get("trim_used"):
         report["trim"] = want.pop("trim_used")
@@ -580,7 +583,7 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
     out, short = [], incomplete()
     for i in cat.values():
         if i.get("publicationStatus") != "approved" or not i.get("desktopGlbUrl") or i["assetId"] in skip \
-                or batch.is_game(i):
+                or i["assetId"] in batch.WRONG_CAR or batch.is_game(i):
             continue
         mk, md = batch.model_of(i)
         b = _generation(mk, md, i.get("yearStart")) or {}

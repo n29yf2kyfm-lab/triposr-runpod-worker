@@ -1446,13 +1446,16 @@ def finish(src, spec, out, base_dir="."):
             return pack.j["nodes"][i].get("name", "")
         # a 911's radiators are in its nose: the pack's, at the back of a
         # turned-round bay, stay out (and the engine goes further back)
-        left_out = (lambda nm: nm.startswith("bay:radiator")) if rear_engine else (lambda nm: False)
-        pts = []
+        no_room = set()          # pack parts that still break through after the moves: left out
+        no_room_cm = {}
+        left_out = lambda nm: nm in no_room or (rear_engine and nm.startswith("bay:radiator"))  # noqa: E731
+        pts, by_top = [], {}
         for i, nd in enumerate(pack.j["nodes"]):
             if "mesh" in nd and i not in stray and top_of(i) not in PACK_REAR | PACK_EXHAUST and not left_out(top_of(i)):
                 for pr in pack.j["meshes"][nd["mesh"]]["primitives"]:
                     Pp = pack.accessor(pr["attributes"]["POSITION"])
                     pts.append(Pp[:: max(1, len(Pp) // 400)] @ PW[i][:3, :3].T + PW[i][:3, 3])
+                    by_top.setdefault(top_of(i), []).append(pts[-1])
         Mf = np.array(front).reshape(4, 4).T
         Q = np.vstack(pts) @ Mf[:3, :3].T + Mf[:3, 3]
         bon = [to_out(r["P"][r["I"][r["tri_part"] == lid_part]].reshape(-1, 3)) for r in recs if (r["tri_part"] == lid_part).any()]
@@ -1502,6 +1505,64 @@ def finish(src, spec, out, base_dir="."):
             dz = min(0.12, overshoot(qn, nose, (0, 1), 2, np.maximum, 0.04)) if len(qn) and len(nose) else 0.0
         Mf[1, 3] -= dy
         Mf[2, 3] -= dz
+        # Lowering and moving back stop at 15 and 12 cm. In a short nose (the
+        # Focus RS's) the cooling pack still came out through the bumper, a
+        # black box in front of the grille: a part still out through the lid's
+        # or the nose's outer skin by more than a centimetre (where it shows,
+        # not where it merely touches the inside) is left out, as a 911's
+        # radiators are, and the log names it
+
+        def beyond(P, ref, axes, ax, cell=0.05, reach=2):
+            """How far points P stand out past the outer envelope of ref along
+            axis ax: ref's furthest point in each 5 cm cell, widened to the
+            furthest within 25 cm, so a grille or intake opening is not taken
+            for the outside of the car. Only points with ref around them count."""
+            a0, a1 = axes
+            lo0, lo1 = ref[:, a0].min(), ref[:, a1].min()
+            i0 = np.floor((ref[:, a0] - lo0) / cell).astype(int)
+            i1 = np.floor((ref[:, a1] - lo1) / cell).astype(int)
+            grid = np.full((i0.max() + 1, i1.max() + 1), -np.inf)
+            np.maximum.at(grid, (i0, i1), ref[:, ax])
+            env = grid.copy()
+            for d0 in range(-reach, reach + 1):
+                for d1 in range(-reach, reach + 1):
+                    sh = np.full_like(grid, -np.inf)
+                    s0 = slice(max(0, d0), grid.shape[0] + min(0, d0)); t0 = slice(max(0, -d0), grid.shape[0] + min(0, -d0))
+                    s1 = slice(max(0, d1), grid.shape[1] + min(0, d1)); t1 = slice(max(0, -d1), grid.shape[1] + min(0, -d1))
+                    sh[t0, t1] = grid[s0, s1]
+                    env = np.maximum(env, sh)
+            q0 = np.floor((P[:, a0] - lo0) / cell).astype(int)
+            q1 = np.floor((P[:, a1] - lo1) / cell).astype(int)
+            ok = (q0 >= 0) & (q0 < grid.shape[0]) & (q1 >= 0) & (q1 < grid.shape[1])
+            if not ok.any():
+                return 0.0
+            lim = env[q0[ok], q1[ok]]
+            fin = np.isfinite(lim)
+            return float(max(0.0, (P[ok][fin, ax] - lim[fin]).max())) if fin.any() else 0.0
+
+        for nm, ps in by_top.items():
+            Pn = np.vstack(ps) @ Mf[:3, :3].T + Mf[:3, 3]
+            # past the lid's outer skin (its top in each cell), not merely its underside
+            through = beyond(Pn, np.vstack(bon), (0, 2), 1) if bon else 0.0
+            t_lid = through
+            # every height: the envelope test ignores what has no body round it
+            # (the arms under the floor), and a tray out under the bumper shows
+            up = Pn
+            if len(up):
+                if rear_engine:
+                    tail = skin_pts[skin_pts[:, 2] < zr_o] * np.array([1.0, 1.0, -1.0])
+                    if len(tail):
+                        through = max(through, beyond(up * np.array([1.0, 1.0, -1.0]), tail, (0, 1), 2))
+                else:
+                    # the nose's front face is the body and the lid together:
+                    # where the bonnet alone covers the front, it is the skin
+                    face = np.vstack([skin_pts] + ([np.vstack(bon)] if bon else []))
+                    face = face[face[:, 2] > zf_o]
+                    if len(face):
+                        through = max(through, beyond(up, face, (0, 1), 2))
+            if through > 0.01:
+                no_room.add(nm)
+                no_room_cm[nm] = [round(t_lid * 100, 1), round(through * 100, 1)]
         front = [float(v) for v in Mf.T.ravel()]
         # exhaust: from where the front pipe hands over to 30 cm inside the tail:
         # under the floor, seen from below, never a second tailpipe beside the
@@ -1573,7 +1634,8 @@ def finish(src, spec, out, base_dir="."):
         log["engine_pack"] = {"file": os.path.basename(spec["engine_pack"]), "scale": [round(sx, 4), round(sy, 4), round(sl, 4)],
                               "lowered_m": round(dy, 3), "moved_back_m": round(dz - back, 3),
                               "width_ratios": [round(x, 3) for x in ratios],
-                              "exhaust_stretch": round(az / sl, 4), "strays_dropped": len(stray)}
+                              "exhaust_stretch": round(az / sl, 4), "strays_dropped": len(stray),
+                              **({"left_out_no_room": sorted(no_room), "no_room_cm": no_room_cm} if no_room else {})}
 
     # ── cabin: a model with nothing inside gets the cabin pack (the 1998
     # Micra: a shell), fitted between its axles; the pack's maker is credited

@@ -6,7 +6,7 @@
  "body": "4x4",
  "machine_key": "car-land-rover-defender-2021-w7-v1",
  "glb": "land-rover-defender-works-v8-trophy.glb",
- "bytes": 18999652,
+ "bytes": 18999644,
  "frame": "metres; +Y up, nose +Z, the vehicle's left +X; ground at y = 0",
  "box": {
   "min": [
