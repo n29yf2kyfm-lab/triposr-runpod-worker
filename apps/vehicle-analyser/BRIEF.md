@@ -17,14 +17,14 @@ Base URL (raw files on GitHub, branch `claude/lovable-connection-ki7jch`):
 | File | What it is |
 |---|---|
 | `fleet/index.json` | The vehicles: id, title, kind (`car`, `van`, `motorbike`), body, hero image, part count, what opens, credit line |
-| `fleet/<id>.glb` | The vehicle. meshopt-compressed glTF: load with `GLTFLoader` + `MeshoptDecoder` (drei's `useGLTF` does this by default) |
+| `<id>.glb` | The vehicle. meshopt-compressed glTF: load with `GLTFLoader` + `MeshoptDecoder` (drei's `useGLTF` does this by default). **Not in git**: the repository keeps car GLBs out of git on purpose, so they are handed to the app as file uploads, and rebuilt any time with `app_pack.py` |
 | `fleet/<id>.json` | Everything about it (schema `expertcarcheck.vehicle/1`, below) |
 | `fleet/<id>.webp` | A studio picture with a transparent background, for the garage |
 | `kit/running-engine.js` | A running, cut-open inline four (ES module) |
 | `kit/suspension-corner.js` | A working MacPherson-strut front corner (ES module) |
 
-Copy every file into the project's own assets once (the way
-`engine_pack.glb` was brought in). Do not load from GitHub at run time.
+Copy every file into the project's own assets once (the GLBs from the
+uploads, the rest from the URL above). Do not load from GitHub at run time.
 
 Vehicles: Volkswagen Golf 2017, Nissan Qashqai 2018, BMW 3 Series Touring
 2014, Land Rover Defender Works V8 Trophy 2021, Porsche 911, Renault Master

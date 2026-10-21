@@ -8,7 +8,7 @@ app's build brief.
 | Path | |
 |---|---|
 | `fleet.spec.json` | What is in the fleet: each vehicle as the request the machine is asked (or the bike), with its kind, body, summary and the real layout to show beside the teaching engine |
-| `fleet/` | The built pack: `<id>.glb`, `<id>.json`, `<id>.webp`, `index.json` |
+| `fleet/` | The built pack: `<id>.json`, `<id>.webp`, `index.json`. The `<id>.glb` files are built beside them but stay out of git (the repository ignores car GLBs on purpose); the app gets them as uploads |
 | `kit/running-engine.js` | The car page's running inline four as an ES module |
 | `kit/suspension-corner.js` | A MacPherson-strut front corner, solved live: bump, droop, steer, brake, teardown |
 
