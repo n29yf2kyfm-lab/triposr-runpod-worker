@@ -58,6 +58,24 @@
   "real_layout": "Engine at the front; most versions drive the front wheels, heavier ones the rear."
  },
  {
+  "id": "nissan-nv200-2010",
+  "request": "Nissan NV200 2010 white",
+  "kind": "van",
+  "body": "small panel van",
+  "title": "Nissan NV200 2010",
+  "summary": "Small panel van: a sliding door on each side and two barn doors at the back.",
+  "real_layout": "Transverse engine at the front driving the front wheels: the same layout as the teaching engine."
+ },
+ {
+  "id": "mercedes-benz-vito",
+  "request": "Mercedes-Benz Vito van",
+  "kind": "van",
+  "body": "panel van",
+  "title": "Mercedes-Benz Vito",
+  "summary": "Mid-size panel van: a sliding door on the right and two barn doors at the back. The model has no left sliding door.",
+  "real_layout": "The real van's engine sits lengthways at the front and drives the rear wheels (some versions drive all four). The teaching engine shown is transverse front-drive, so the real layout differs."
+ },
+ {
   "id": "cruiser",
   "kind": "motorbike",
   "body": "cruiser",

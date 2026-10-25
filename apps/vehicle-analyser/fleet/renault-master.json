@@ -6,7 +6,7 @@
  "body": "panel van",
  "machine_key": "car-renault-master-v1",
  "glb": "renault-master.glb",
- "bytes": 6739064,
+ "bytes": 6741480,
  "frame": "metres; +Y up, nose +Z, the vehicle's left +X; ground at y = 0",
  "box": {
   "min": [
@@ -56,7 +56,7 @@
    "node": "door_bl_hinge",
    "node_loaded": "door_bl_hinge",
    "pivot": [
-    0.938,
+    0.951,
     1.516,
     -2.778
    ],
@@ -73,7 +73,7 @@
    "node": "door_br_hinge",
    "node_loaded": "door_br_hinge",
    "pivot": [
-    -0.938,
+    -0.951,
     1.516,
     -2.793
    ],
@@ -271,7 +271,7 @@
      -2.798
     ],
     "max": [
-     0.958,
+     0.971,
      2.445,
      -2.54
     ]
@@ -297,7 +297,7 @@
    "removable": true,
    "box": {
     "min": [
-     -0.958,
+     -0.971,
      0.586,
      -2.813
     ],

@@ -8,7 +8,7 @@
    "body": "hatchback",
    "glb": "volkswagen-golf-2017.glb",
    "json": "volkswagen-golf-2017.json",
-   "bytes": 11467976,
+   "bytes": 11365868,
    "hero": "volkswagen-golf-2017.webp",
    "summary": "Five-door hatchback. All four doors, the bonnet and the tailgate open, and every panel comes off.",
    "parts": 68,
@@ -111,7 +111,7 @@
    "body": "panel van",
    "glb": "renault-master.glb",
    "json": "renault-master.json",
-   "bytes": 6739064,
+   "bytes": 6741480,
    "hero": "renault-master.webp",
    "summary": "Large panel van with barn doors at the back, each hinged at its outer edge.",
    "parts": 67,
@@ -123,6 +123,49 @@
     "door_fr"
    ],
    "credit": "“Renault Master Panel Van”, CC BY, https://sketchfab.com/3d-models/b2148d8984144f1a8879ca4352bfccc9"
+  },
+  {
+   "id": "nissan-nv200-2010",
+   "title": "Nissan NV200 2010",
+   "kind": "van",
+   "body": "small panel van",
+   "glb": "nissan-nv200-2010.glb",
+   "json": "nissan-nv200-2010.json",
+   "bytes": 11457744,
+   "hero": "nissan-nv200-2010.webp",
+   "summary": "Small panel van: a sliding door on each side and two barn doors at the back.",
+   "parts": 69,
+   "opens": [
+    "bonnet",
+    "door_bl",
+    "door_br",
+    "door_fl",
+    "door_fr",
+    "door_rl",
+    "door_rr"
+   ],
+   "credit": "“Nissan NV200 2010” by Nieve5677, CC BY, https://sketchfab.com/models/d984c799f3c44f19a04ba30afb7b28e0"
+  },
+  {
+   "id": "mercedes-benz-vito",
+   "title": "Mercedes-Benz Vito",
+   "kind": "van",
+   "body": "panel van",
+   "glb": "mercedes-benz-vito.glb",
+   "json": "mercedes-benz-vito.json",
+   "bytes": 17563632,
+   "hero": "mercedes-benz-vito.webp",
+   "summary": "Mid-size panel van: a sliding door on the right and two barn doors at the back. The model has no left sliding door.",
+   "parts": 68,
+   "opens": [
+    "bonnet",
+    "door_bl",
+    "door_br",
+    "door_fl",
+    "door_fr",
+    "door_rr"
+   ],
+   "credit": "“Mercedes Vito Utility Car” by solid3DDD, CC BY, https://sketchfab.com/3d-models/fe704a2aa87a4921990d4973a6eef36d"
   },
   {
    "id": "cruiser",

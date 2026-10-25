@@ -40,4 +40,7 @@ that is really a Suzuki Vitara, neither of which the build log caught.
   they actually sit. The engine pack's own names have its driveshaft-output
   flanges the other way round, and in the 911 the pack is turned round at the
   back, so its "front left" strut is the rear right one.
+- A van's sliding side doors are hinges of `"type": "slide"`: they move out
+  and back along the body (`slide.out_x`, `slide.back_z`), they do not turn.
+  The Vito's model has its sliding door on the right only.
 - Each car's credit line (CC BY) is in its file and must be shown.
