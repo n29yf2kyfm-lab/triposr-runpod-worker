@@ -633,6 +633,103 @@ def wheel_strays(recs, mats, log):
     return moved
 
 
+def close_cracks(recs, paint_ids, log, tol=0.05, gap=0.004, small=0.02, turn=60):
+    """A model whose painted panels do not meet (the 2022 Caddy: torn edges
+    along the bonnet, the A-pillars and the roof rails, the dark cabin showing
+    through in shards): each open edge's corners go onto the nearest open edge
+    of another panel within 5 cm that faces the same way (within 60 degrees:
+    a bonnet's edge rolls over onto the wing). Panels of one part
+    are closed up; a door or a lid and the body keep a clean 4 mm shut line,
+    each side moving half way. Pieces under 0.02 m2 (a handle's cover, a
+    badge's surround) stay as they are. For a model listed as torn only: on a
+    sound one this would close every shut line."""
+    segs, verts = [], []
+    pid = 0
+    for ri, r in enumerate(recs):
+        if r["mat"] not in paint_ids or not len(r["I"]):
+            continue
+        T = r["P"][r["I"]]
+        lab, vid = islands(T, weld=1e-4)
+        a, nrm = tri_area_normal(T)
+        parts = np.unique(r["tri_part"], return_inverse=True)[1]
+        key = lab * (parts.max() + 1) + parts          # a piece: one island, one part
+        _, piece = np.unique(key, return_inverse=True)
+        area = np.bincount(piece, weights=a)
+        nv = int(vid.max()) + 1
+        vn = np.zeros((nv, 3))
+        np.add.at(vn, vid.ravel(), np.repeat(nrm * a[:, None], 3, axis=0))
+        vn /= np.maximum(np.linalg.norm(vn, axis=1), 1e-12)[:, None]
+        pos = np.zeros((nv, 3))
+        pos[vid.ravel()] = T.reshape(-1, 3)
+        orig = np.zeros(nv, int)                     # one of the rec's own vertices at each welded one
+        orig[vid.ravel()] = r["I"].ravel()
+        E = np.c_[vid[:, [0, 1]], vid[:, [1, 2]], vid[:, [2, 0]]].reshape(-1, 2)
+        ep = np.repeat(piece, 3)
+        Es = np.sort(E, axis=1)
+        k = (Es[:, 0].astype(np.int64) * nv + Es[:, 1]) * (piece.max() + 1) + ep
+        _, first, cnt = np.unique(k, return_index=True, return_counts=True)
+        open_ = first[cnt == 1]                      # an edge one face of its piece uses
+        if not len(open_):
+            pid += piece.max() + 1
+            continue
+        big = area[ep[open_]] >= small
+        e, epc = E[open_][big], ep[open_][big]
+        prt = np.zeros(piece.max() + 1, object)
+        prt[piece] = r["tri_part"]
+        for (i, j), q in zip(e, epc):
+            segs.append((pos[i], pos[j], vn[i] + vn[j], pid + q, prt[q]))
+        bv = np.unique(e)
+        vp = np.zeros(nv, int)
+        vp[e[:, 0]] = epc
+        vp[e[:, 1]] = epc
+        verts.append((ri, bv, pos[bv], vn[bv], pid + vp[bv], prt[vp[bv]], vid, r["I"]))
+        pid += piece.max() + 1
+    if not segs:
+        return 0
+    A = np.array([x[0] for x in segs])
+    B = np.array([x[1] for x in segs])
+    SN = np.array([x[2] for x in segs])
+    SN /= np.maximum(np.linalg.norm(SN, axis=1), 1e-12)[:, None]
+    SP = np.array([x[3] for x in segs])
+    SR = np.array([x[4] for x in segs], object)
+    tree = cKDTree((A + B) / 2)
+    reach = tol + np.linalg.norm(B - A, axis=1).max() / 2
+    cos = np.cos(np.radians(turn))
+    moved, closed, lines = 0, 0, 0
+    for ri, bv, P, N, pids, prts, vid, I in verts:
+        r = recs[ri]
+        newpos = {}
+        for i, cs in enumerate(tree.query_ball_point(P, reach)):
+            cs = np.array([c for c in cs if SP[c] != pids[i]], int)
+            if not len(cs):
+                continue
+            a, ab = A[cs], B[cs] - A[cs]
+            t = np.clip(((P[i] - a) * ab).sum(1) / np.maximum((ab * ab).sum(1), 1e-18), 0, 1)
+            q = a + t[:, None] * ab
+            d = np.linalg.norm(q - P[i], axis=1)
+            ok = (d <= tol) & ((SN[cs] * N[i]).sum(1) > cos)
+            if not ok.any():
+                continue
+            j = int(np.argmin(np.where(ok, d, np.inf)))
+            if SR[cs[j]] == prts[i]:
+                if d[j] > 1e-4:
+                    newpos[bv[i]] = q[j]
+                    closed += 1
+            elif d[j] > 2 * gap:
+                newpos[bv[i]] = P[i] + (q[j] - P[i]) * (0.5 - gap / 2 / d[j])
+                lines += 1
+        if newpos:
+            r["P"] = r["P"].copy()
+            w = vid.ravel()
+            hit = np.isin(w, list(newpos))
+            for k in np.flatnonzero(hit):
+                r["P"][I.ravel()[k]] = newpos[w[k]]
+            moved += len(newpos)
+    if moved:
+        log["cracks_closed"] = {"corners_moved": moved, "closed": closed, "to_shut_line": lines}
+    return moved
+
+
 def right_hand_drive(g, recs, mats, log, ground, xc):
     """A left-hand-drive model made right-hand drive (a UK car): the cabin
     mirrored across the car's centre plane, its steering wheel carried across
@@ -1561,6 +1658,59 @@ def finish(src, spec, out, base_dir="."):
                     cx_ = r["P"][r["I"]].mean(1)[:, 0]
                     r["tri_part"] = np.where(on, np.where(cx_ > xm, "door_bl", "door_br"), r["tri_part"])
             log["barn_doors"] = {"split_x": round(float(xm), 3), "why": "a van: the back opens as two doors"}
+
+    # a sliding door is its painted skin and what lies on it: a strip the
+    # model runs on past it (the ID Buzz's waist moulding, back to the tail
+    # lamps) stays on the body, or it would slide out behind the van
+    for d in ("door_rl", "door_rr"):
+        if not ((spec.get("hinges") or {}).get(d) or {}).get("slide"):
+            continue
+        sk = [r["P"][r["I"][r["tri_part"] == d]].reshape(-1, 3)[:, 2] for r in recs
+              if r["mat"] in paint_ids and (r["tri_part"] == d).any()]
+        if not sk:
+            continue
+        z0, z1 = np.percentile(np.concatenate(sk), [1, 99])
+        n = 0
+        for r in recs:
+            on = r["tri_part"] == d
+            if on.any():
+                cz = r["P"][r["I"]].mean(1)[:, 2]
+                past = on & ((cz < z0 - 0.05) | (cz > z1 + 0.05))
+                if past.any():
+                    r["tri_part"] = np.where(past, "body", r["tri_part"])
+                    n += int(past.sum())
+        if n:
+            log.setdefault("sliding_door_trimmed", {})[d] = n
+
+    # a side door stays on its own side of the car: a piece of it reaching
+    # across the centreline is the body's (the ID Buzz's right front door
+    # took a black strip as wide as the cabin, and swung it out over the roof)
+    xs_ = np.concatenate([r["P"][np.unique(r["I"]), 0] for r in recs if len(r["I"])])
+    cx_, half_ = (xs_.min() + xs_.max()) / 2, (xs_.max() - xs_.min()) / 2
+    for d in ("door_fl", "door_fr", "door_rl", "door_rr"):
+        sg = 1.0 if d.endswith("l") else -1.0
+        moved = []
+        for r in recs:
+            idx = np.flatnonzero(r["tri_part"] == d)
+            if not len(idx):
+                continue
+            lab, _ = islands(r["P"][r["I"][idx]])
+            across = [idx[lab == k] for k in np.unique(lab)
+                      if (sg * (r["P"][r["I"][idx[lab == k]]][..., 0] - cx_)).min() < -0.2 * half_]
+            if across:
+                tp = r["tri_part"].copy()
+                for sel in across:
+                    tp[sel] = "body"
+                    V = r["P"][r["I"][sel]].reshape(-1, 3)
+                    moved.append({"triangles": len(sel), "mat": mats[r["mat"]].get("name") if r["mat"] is not None else None,
+                                  "lo": [round(float(v), 2) for v in V.min(0)], "hi": [round(float(v), 2) for v in V.max(0)]})
+                r["tri_part"] = tp
+        if moved:
+            log.setdefault("door_strays_across", {})[d] = moved
+
+    # ── a model listed as torn: its painted panels closed up (close_cracks) ──
+    if spec.get("close_cracks"):
+        close_cracks(recs, paint_ids, log)
 
     # ── right-hand drive asked for (a UK car) from a left-hand-drive model ──
     if spec.get("drive") == "right":

@@ -202,7 +202,8 @@ def procedures(cat, opens, rear_engine=False, electric=False):
         step("Rear left corner: tyre and wheel as at the front; the arch lip.", "wheel:rl", ["wheel_rl"]),
         step("Rear: tailgate shut lines, lamps, bumper. A boot that does not close flush has been hit.", "rear", ["tailgate"]),
         step("Rear right corner.", "wheel:rr", ["wheel_rr"]),
-        step("Right side: the same as the left, and the fuel filler area.", "offside", ["door_fr", "door_rr"]),
+        step("Right side: the same as the left, and the " + ("charge port flap." if electric else "fuel filler area."),
+             "offside", ["door_fr", "door_rr"]),
         step("Front right corner.", "wheel:fr", ["wheel_fr"]),
     ]
     lid = "tailgate" if rear_engine else "bonnet"

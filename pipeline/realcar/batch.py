@@ -103,6 +103,14 @@ WRONG_CAR = {
 }
 
 
+# Catalogue models whose painted panels do not meet (seen on the check
+# sheets): the finisher closes them up (finish.close_cracks). Only these: on
+# a sound model the same rule would close every shut line.
+TORN = {
+    "volkswagen-caddy-2022-v1": "bonnet, A-pillars and roof rails torn: the dark cabin shows through",
+}
+
+
 # a model ripped from a video game, a toy or a low-poly game asset: never built
 # (the owner's rule). "Gran Turismo" alone is a real body (BMW, Maserati)
 GAME = re.compile(r"gran turismo (?:\d|sport)\b|grand turismo|\bforza\b|\bgta ?[ivx\d]|grand theft|need for speed|"
@@ -532,6 +540,8 @@ def one(target, item, args, out):
     # a van opens at the back as two barn doors (finish.py)
     if str(item.get("bodyStyle") or "").lower() == "van" or (st or {}).get("body") == "van":
         spec["body_family"] = "van"
+    if aid in TORN:
+        spec["close_cracks"] = True
     # a 911: the engine under the rear lid, which lifts 60 degrees from the
     # rear window; luggage under the front lid
     if layout_of(item) == "rear":
@@ -552,7 +562,18 @@ def one(target, item, args, out):
     # sliding side doors: the rig's own judgement (a name, the van signature),
     # and every van's, and a tall MPV's (2.6 wheels or more: the ID Buzz, the
     # Multivan; a Touran or a Galaxy is lower and hinged)
-    slide = {p for p, m in (rig_res.get("motion") or {}).items() if (m or {}).get("type") == "slide"}
+    # The van signature is the rig's guess from door heights alone: a car body
+    # the catalogue or the wheelbase table knows keeps its rear doors hinged
+    # (the 2016 Jazz and the 2023 Clio pass it: tall cabins, and rear doors
+    # modelled taller than the front ones). A slider by name still slides.
+    try:
+        known = wheelbase.lookup(*model_of(item), item.get("yearStart") or getattr(args, "year", None) or 2015)
+    except Exception:
+        known = {}
+    fam = wheelbase.body_family((st or {}).get("body") or item.get("bodyStyle")) \
+        or wheelbase.body_family((known or {}).get("body"))
+    slide = {p for p, m in (rig_res.get("motion") or {}).items() if (m or {}).get("type") == "slide"
+             and (fam in (None, "van", "mpv") or "signature" not in (m.get("why") or ""))}
     rep_p = os.path.join(rig, "src.report.json")
     sig = (json.load(open(rep_p)).get("door_signature") if os.path.exists(rep_p) else None) or {}
     tall = max([v.get("height_in_wheels") or 0 for v in sig.values()] or [0])
@@ -584,7 +605,7 @@ def one(target, item, args, out):
     rec["finish"] = {k: flog.get(k) for k in ("opens", "missing", "layout", "bonnet", "tailgate", "door_trims", "rescale",
                                               "glass_cleared", "measured", "bay_cleared_m2", "engine_pack", "cabin_pack", "paint_set",
                                               "manual", "wheel_strays", "wheel_tyres_from_body", "right_hand_drive",
-                                              "powertrain", "sliding")}
+                                              "powertrain", "sliding", "cracks_closed")}
     # validator, web copy and check sheet at the same time: the sheet is drawn
     # from the finished file, so it need not wait for the compression
     web = os.path.join(d, "web.glb")

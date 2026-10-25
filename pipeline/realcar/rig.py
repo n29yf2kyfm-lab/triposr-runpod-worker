@@ -43,7 +43,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "template"))
 from gltf import GLTF, row_ids  # noqa: E402
 
-VERSION = "2.3.0-py"
+VERSION = "2.4.0-py"
 
 
 class Refused(Exception):
@@ -1356,6 +1356,62 @@ def shut_line(car, o, refs, z0, z1, length):
     return None, prof
 
 
+def surface_points(T, step):
+    """Points over each triangle no further apart than about `step`: its
+    corners, its centre and, on a big triangle, a grid across it."""
+    e = np.linalg.norm(T[:, [1, 2, 0]] - T, axis=2).max(1)
+    k = np.clip(np.ceil(e / step).astype(int), 1, 40)
+    out = [T.reshape(-1, 3), T.mean(1)]
+    for kk in np.unique(k[k > 1]):
+        t = T[k == kk]
+        i, j = np.meshgrid(np.arange(kk + 1), np.arange(kk + 1), indexing="ij")
+        ok = i + j <= kk
+        u, v = (i[ok] / kk)[None, :, None], (j[ok] / kk)[None, :, None]
+        out.append((t[:, None, 0] * (1 - u - v) + t[:, None, 1] * u + t[:, None, 2] * v).reshape(-1, 3))
+    return np.vstack(out)
+
+
+def flank_skin(car, objs, lo, hi, cx, cell=.05):
+    """The outer skin seen from each side: for every 5 cm cell along and up
+    the car, how far out from the centreline the body or its glass reaches."""
+    nz, ny = int((hi[2] - lo[2]) / cell) + 2, int((hi[1] - lo[1]) / cell) + 2
+    m = {"l": np.full((nz, ny), -np.inf), "r": np.full((nz, ny), -np.inf)}
+    for q in objs:
+        if q["kind"] not in ("body", "glazing") or not car.nfaces(q):
+            continue
+        P = surface_points(car.tris(q)[0], cell)
+        iz = np.clip(((P[:, 2] - lo[2]) / cell).astype(int), 0, nz - 1)
+        iy = np.clip(((P[:, 1] - lo[1]) / cell).astype(int), 0, ny - 1)
+        for sd, sg in (("l", 1), ("r", -1)):
+            np.maximum.at(m[sd], (iz, iy), sg * (P[:, 0] - cx))
+    return m, cell
+
+
+def inside_skin(car, o, c, side, skin, lo, cx):
+    """Share of an island's side-facing area (either way: a lining faces the
+    cabin, a modeller's flipped skin faces in) lying where the body reaches
+    more than 3 cm further out than the island itself does (flank_skin). A
+    door's own card, behind its skin, does not count against it."""
+    m, cell = skin
+    T = car.tris(o)[0][c["ix"]]
+    a, n = tri_area_normal(T)
+    sd = np.abs(n[:, 0]) > .5
+    if a[sd].sum() <= 0:
+        return 0.0
+    sg = 1 if side == "l" else -1
+    nz, ny = m[side].shape
+
+    def cells(P):
+        return (np.clip(((P[:, 2] - lo[2]) / cell).astype(int), 0, nz - 1),
+                np.clip(((P[:, 1] - lo[1]) / cell).astype(int), 0, ny - 1))
+    own = np.full((nz, ny), -np.inf)
+    P = surface_points(T[sd], cell)
+    np.maximum.at(own, cells(P), sg * (P[:, 0] - cx))
+    iz, iy = cells(T[sd].mean(1))
+    cov = m[side][iz, iy] > own[iz, iy] + .03
+    return float(a[sd][cov].sum() / a[sd].sum())
+
+
 def find_doors(car, objs, wheels, lo, hi, rep, body_style=""):
     """Doors that are LOOSE PIECES inside a body mesh (the RS6): wholly on one
     flank, 45% of the car's height from low down, 15-60% of its length,
@@ -1366,6 +1422,8 @@ def find_doors(car, objs, wheels, lo, hi, rep, body_style=""):
     wz = [centre(car, [o])[2] for o in wheels]
     zf, zr = max(wz), min(wz)
     found = {"l": [], "r": []}
+    info = rep.setdefault("door_finder", {})
+    skin = None
     for o in objs:
         if o["kind"] != "body" or car.nfaces(o) < 50:
             continue
@@ -1376,8 +1434,17 @@ def find_doors(car, objs, wheels, lo, hi, rep, body_style=""):
                 continue
             if not (.15 * L < b1[2] - b0[2] < .6 * L and zr < (b0[2] + b1[2]) / 2 < zf):
                 continue
+            # a piece the body's own skin covers from outside is a cabin
+            # lining or a door card, not a door: the 2022 Caddy's, whose door
+            # skins are each two strips too short to be found, and the
+            # Sprinter's, a sliding door long, behind its sliding door
+            skin = skin if skin is not None else flank_skin(car, objs, lo, hi, cx)
+            cov = inside_skin(car, o, c, side, skin, lo, cx)
+            if cov > .5:
+                info.setdefault("inside_skin", []).append(
+                    {"side": side, "z": [round(float(b0[2]), 2), round(float(b1[2]), 2)], "covered": round(cov, 2)})
+                continue
             found[side].append((c["area"], o, c["refs"], b0, b1))
-    info = rep.setdefault("door_finder", {})
     if not found["l"] or not found["r"]:
         info["result"] = f"no door-shaped piece on {'both sides' if not (found['l'] or found['r']) else 'one side'}"
         return []
@@ -1399,8 +1466,12 @@ def find_doors(car, objs, wheels, lo, hi, rep, body_style=""):
     pairs, used = [], set()
     for tl in found["l"]:
         l0, l1 = tl[3], tl[4]
-        if any(min(l1[2], p[0][4][2]) - max(l0[2], p[0][3][2]) > .5 * (l1[2] - l0[2]) for p in pairs):
-            continue                                # the same door again (its frame, its skin)
+        # the same door again (its frame, its skin), or a piece holding most of
+        # a kept door along its length: the Sprinter's cargo-bay lining runs
+        # from its sliding door to the back, and is no door at all
+        if any(min(l1[2], p[0][4][2]) - max(l0[2], p[0][3][2])
+               > .5 * min(l1[2] - l0[2], p[0][4][2] - p[0][3][2]) for p in pairs):
+            continue
         j = next((j for j, tr in enumerate(found["r"]) if j not in used
                   and abs(l0[2] - tr[3][2]) <= .05 * L and abs(l1[2] - tr[4][2]) <= .05 * L), None)
         if j is not None:
@@ -1932,7 +2003,7 @@ def implausible(car, parts, hinge):
 
 def motion(car, parts, height, rep, override=None):
     """Which doors SLIDE: an override, a name, or the van signature (rear
-    door >= 1.04x the front door's height, vehicle >= 2.6 wheels tall:
+    doors >= 1.04x the front doors' height, vehicle >= 2.6 wheels tall:
     catches the Vito, none of 23 hinged cars). An MPV (Sharan) needs an
     override; never judge in metres (the catalogue's scale spread)."""
     override = override or {}
@@ -1952,6 +2023,10 @@ def motion(car, parts, height, rep, override=None):
         return b1[1] - b0[1], b1[2] - b0[2]
     fh = [dh(k)[0] for k in ("door_fl", "door_fr") if k in parts]
     fh = sum(fh) / len(fh) if fh else 0
+    # the rear pair is judged together, as the front height is the pair's:
+    # the Sprinter's left slider is modelled 30 cm taller than its right
+    rh = [dh(k)[0] for k in ("door_rl", "door_rr") if k in parts]
+    pair = sum(rh) / len(rh) / fh if rh and fh else 0
     sig = {}
     for pid in ("door_rl", "door_rr"):
         if pid not in parts:
@@ -1965,11 +2040,11 @@ def motion(car, parts, height, rep, override=None):
                 mo[pid] = {"type": "slide", "out": 0.07, "back": round(float(0.82 * l), 3), "why": "override"}
             continue
         named = any(SLIDE_NAME.search(o["chain"]) for o in parts[pid])
-        van = wd and fh and ratio >= 1.04 and height / wd >= 2.6
+        van = wd and fh and pair >= 1.04 and height / wd >= 2.6
         if named or van:
             mo[pid] = {"type": "slide", "out": 0.07, "back": round(float(0.82 * l), 3),
                        "why": "named sliding" if named else
-                       f"van signature: rear door {ratio:.2f}x the front door, vehicle {height / wd:.2f} wheels tall"}
+                       f"van signature: rear doors {pair:.2f}x the front doors, vehicle {height / wd:.2f} wheels tall"}
     rep["door_signature"] = sig
     return mo
 
