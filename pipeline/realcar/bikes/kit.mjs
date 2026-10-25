@@ -198,7 +198,7 @@ export function brakeDisc(A, x, rOut, rIn, t = 0.0025) {
 // order their meshes are written; clips(nodes, clip, q): makes the clips;
 // pivotExtras: {part: extras} (a hinge's axis and angle, as a car's)
 export async function writeBike({ out, sceneName, extras, mats: MATS, pieces, pivots, parents, order, meshOrder,
-  split, pieceName, clips, copyright, doubleSided = [], pivotExtras = {} }) {
+  split, pieceName, clips, copyright, doubleSided = [], pivotExtras = {}, scale = 1 }) {
   const doc = new Document();
   const buf = doc.createBuffer();
   const clear = doc.createExtension(KHRMaterialsClearcoat);
@@ -223,7 +223,13 @@ export async function writeBike({ out, sceneName, extras, mats: MATS, pieces, pi
     return x;
   };
   const scene = doc.createScene(sceneName);
+  // SCALE (--scale on the command line): the whole bike to another bike's
+  // wheelbase, on the root node, so a preset serves bikes of its kind near
+  // its size; the sizes it reports are scaled with it
+  if (scale !== 1) extras = { ...Object.fromEntries(Object.entries(extras).map(([k, v]) => [k, k.endsWith('_m') && typeof v === 'number' ? +(v * scale).toFixed(3) : v])),
+    scaled: +scale.toFixed(4) };
   const root = doc.createNode(sceneName).setExtras(extras);
+  if (scale !== 1) root.setScale([scale, scale, scale]);
   scene.addChild(root);
   const nodes = { body: root };
   const worldPivot = p => pivots[p] || V(0, 0, 0);

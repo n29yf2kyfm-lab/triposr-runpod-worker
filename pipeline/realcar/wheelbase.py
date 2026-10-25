@@ -58,6 +58,8 @@ def raw(title, _seen=None):
     """Page wikitext, redirects followed (twice at most). None when the page
     does not exist (_LAST.missing) or could not be reached."""
     _LAST.missing = False
+    if not _seen:
+        _LAST.anchor = ""
     with _PACE:                                # a few requests a second: Wikipedia throttles bursts
         time.sleep(max(0.0, _PACE.next - time.time()))
         _PACE.next = time.time() + 0.35
@@ -77,8 +79,11 @@ def raw(title, _seen=None):
             time.sleep(2 * (attempt + 1))
     else:
         return None, title
-    m = re.match(r"\s*#REDIRECT\s*\[\[([^\]|#]+)", t, re.I)
+    m = re.match(r"\s*#REDIRECT\s*\[\[([^\]|#]+)(?:#([^\]|]+))?", t, re.I)
     if m and (_seen or 0) < 2:
+        # a redirect to a section ("Hyundai ix35" -> "Hyundai Tucson#LM")
+        # names the generation: kept for _boxes_for
+        _LAST.anchor = (m.group(2) or "").strip() or getattr(_LAST, "anchor", "")
         return raw(m.group(1).strip(), (_seen or 0) + 1)
     return t, title
 
@@ -97,7 +102,11 @@ def _mm(v, lo=1500, hi=7000):
     a length by default, a width or a height given its own range."""
     v = _clean(v)
     m = re.search(r"\{\{\s*(?:convert|cvt)\s*\|([^{}]*?)\|\s*mm\b", v, re.I)
-    if m:
+    inch = re.search(r"\{\{\s*(?:convert|cvt)\s*\|([\d.,\s\-–]+?)\|\s*in\b", v, re.I)
+    if inch and not (m and m.start() < inch.start()):
+        # an American page's inches ({{convert|101.0|in|mm|0}}): to mm
+        nums = [float(x.replace(",", "")) * 25.4 for x in re.findall(r"[\d,]+(?:\.\d+)?", inch.group(1))]
+    elif m:
         nums = [float(x.replace(",", "")) for x in re.findall(r"[\d,]+(?:\.\d+)?", m.group(1))]
     else:
         m = re.search(r"([\d,]{4,6})\s*(?:[-–]\s*([\d,]{4,6})\s*)?mm", v)
@@ -146,7 +155,7 @@ def _years(v):
 
 def infoboxes(text, title):
     out = []
-    for m in re.finditer(r"\{\{\s*Infobox automobile", text, re.I):
+    for m in re.finditer(r"\{\{\s*Infobox (?:automobile|electric vehicle)", text, re.I):
         depth, i = 0, m.start()
         while i < len(text):
             if text.startswith("{{", i):
@@ -169,7 +178,7 @@ def infoboxes(text, title):
         if not wb:
             continue
         yr = _years(fields.get("production", "")) or _years(fields.get("model_years", ""))
-        out.append({"page": title, "name": re.sub(r"\[\[|\]\]|'''|''", "", fields.get("name", "")).strip()[:80],
+        out.append({"page": title, "at": m.start(), "name": re.sub(r"\[\[|\]\]|'''|''", "", fields.get("name", "")).strip()[:80],
                     "years": yr, "wheelbase": wb, "length": _mm(fields.get("length", "")),
                     "width": _mm(fields.get("width", ""), 1300, 2700), "height": _mm(fields.get("height", ""), 1000, 2600),
                     "body": _text(fields.get("body_style", ""))[:80], "class": _text(fields.get("class", ""))[:80]})
@@ -177,6 +186,8 @@ def infoboxes(text, title):
 
 
 # a make's other name, for when its own page has no generations
+# a make Wikipedia titles with its accent, when the plain name has no page
+ACCENT = {"skoda": "Škoda", "citroen": "Citroën"}
 SISTER = {"vauxhall": "Opel", "opel": "Vauxhall", "mini": "Mini", "dacia": "Renault", "seat": "SEAT"}
 # a model's other page name
 ALIAS = {("mini", "cooper"): "Mini Hatch", ("mini", "hatch"): "Mini Hatch", ("honda", "jazz"): "Honda Fit"}
@@ -195,7 +206,38 @@ def _generation_link(link, stem):
 
 def _boxes_for(base):
     """(boxes, generation pages, title, pages that could not be reached)."""
+    return _anchored(base)
+
+
+def _anchored(base):
+    """_boxes_all's, only the generation a redirect's section names when one
+    does: the box of that name, else the first box after that section's
+    heading or anchor on the page."""
+    boxes, pages, title, unreached = _boxes_all(base)
+    anchor, text = getattr(_LAST, "anchor_of_base", ""), getattr(_LAST, "text_of_base", "")
+    if anchor:
+        a = re.sub(r"[^a-z0-9]", "", anchor.lower())
+        keep = [b for b in boxes if a and a in re.sub(r"[^a-z0-9]", "", (b.get("name") or "").lower())]
+        if not keep and text:
+            w = re.escape(anchor)
+            m = re.search(r"\{\{\s*anchors?\s*\|[^}]*\b" + w + r"\b|^==+.*\b" + w + r"\b.*==+\s*$", text, re.I | re.M)
+            line = text[m.start():text.find("\n", m.start())] if m else ""
+            if m and not re.search(r"generation|\(|\bmk\s?\d|\bseries\b", re.sub(r"<[^>]+>", "", line), re.I):
+                m = None                          # a section that is no generation ("History"): all of them
+            keep = sorted((b for b in boxes if m and b.get("page") == title and b.get("at", -1) >= m.start()),
+                          key=lambda b: b["at"])[:1]
+            # the section's own page ({{Main|Hyundai Tucson (LM)}} under its heading)
+            main = re.search(r"\{\{\s*main\s*\|\s*([^}|]+)", text[m.end():m.end() + 600], re.I) if m and not keep else None
+            if main:
+                keep = [b for b in boxes if b.get("page", "").lower() == main.group(1).strip().lower()]
+        if keep:
+            boxes = keep
+    return boxes, pages, title, unreached
+
+
+def _boxes_all(base):
     text, title = raw(base)
+    _LAST.anchor_of_base, _LAST.text_of_base = getattr(_LAST, "anchor", ""), text or ""
     boxes, pages = [], []
     if not text:
         return boxes, pages, title, 0 if getattr(_LAST, "missing", False) else 1
@@ -213,6 +255,8 @@ def _boxes_for(base):
             if not text:
                 return boxes, pages, title, 0 if getattr(_LAST, "missing", False) else 1
     boxes += infoboxes(text, title)
+    if not boxes:
+        boxes += _twin_boxes(text, title)
     stem = title.split(" (")[0]
     for link in re.findall(r"(?:\[\[|\{\{\s*(?:main|see also|further)\s*\|)\s*(" + re.escape(stem) + r"[^\]|}#]*)", text, re.I):
         link = link.strip()
@@ -227,6 +271,32 @@ def _boxes_for(base):
         if t and tt.split()[0].lower() == stem.split()[0].lower():
             boxes += infoboxes(t, tt)
     return boxes, pages, title, unreached
+
+
+def _twin_boxes(text, title):
+    """A car whose page gives no size (the Peugeot 108: the Aygo and the C1
+    built beside it): the size of the car its infobox calls related or
+    also known as, of the generation built in the same years, named so."""
+    m = re.search(r"\{\{\s*Infobox automobile(.*?)\n\}\}", text or "", re.S | re.I)
+    if not m:
+        return []
+    box = m.group(1)
+    yr = _years((re.search(r"\|\s*production\s*=([^\n]*)", box) or [None, ""])[1])
+    links = []
+    for k in ("related", "aka"):
+        f = re.search(r"\|\s*" + k + r"\s*=([^\n]*)", box)
+        links += re.findall(r"\[\[([^\]|#]+)", f.group(1)) if f else []
+    out = []
+    for link in list(dict.fromkeys(l.strip() for l in links))[:3]:
+        t, tt = raw(link)
+        for b in infoboxes(t or "", tt):
+            by = b.get("years")
+            if yr and by and by[0] - 1 <= yr[0] <= by[1] + 1 and b.get("length"):
+                out.append(dict(b, page=title, years=yr, name=f"{title} (sized as the {tt} {b.get('name') or ''})".strip(),
+                                twin_of=tt))
+        if out:
+            break
+    return out
 
 
 _LOCK = threading.Lock()                       # batch.py builds cars side by side
@@ -245,7 +315,10 @@ def table():
     if not _TABLE and os.path.exists(TABLE):
         _TABLE.update(json.load(open(TABLE)))
         try:
-            _TABLE.update({k: v for k, v in json.load(open(local_table_path())).items() if k not in _TABLE})
+            # this machine's own lookups: what the shipped table lacks, or has
+            # found nothing for (a page the reader of its day could not read)
+            _TABLE.update({k: v for k, v in json.load(open(local_table_path())).items()
+                           if k not in _TABLE or (not _TABLE[k].get("boxes") and v.get("boxes"))})
         except (OSError, ValueError):
             pass
     return _TABLE
@@ -254,7 +327,7 @@ def table():
 def wiki_title(model):
     """A model name as Wikipedia titles it: Micra, E-Class, CR-V, GT-R, CX-5."""
     def word(w):
-        if re.fullmatch(r"[ie]\d+", w):           # i10, i30: Hyundai keeps the small i
+        if re.fullmatch(r"[ie]x?\d+", w):         # i10, i30, ix35: Hyundai keeps the small i
             return w
         return re.sub(r"[a-z]+", lambda m: m.group(0).upper() if len(m.group(0)) <= 2 and re.search(r"[\d-]", w)
                       else m.group(0).title(), w)
@@ -272,6 +345,13 @@ def fetch(make, model):
         spaced = wiki_title(model.replace("-", " "))
         bases.append(f"{mt} {spaced}")
         bases.append(f"{mt} " + " ".join(w.upper() if len(w) <= 2 else w for w in spaced.split()))   # GR Yaris
+    m = re.fullmatch(r"([a-z]{1,3})[ -]class", model.lower())
+    if m:
+        bases.append(f"{mt} {m.group(1).upper()}-Class")        # Mercedes-Benz SLK-Class, A-Class
+    if len(model) <= 3 and model.isalpha():
+        bases.append(f"{mt} {model.upper()}")                   # MG HS, MG ZS: short names in capitals
+    if make.lower() in ACCENT:
+        bases.append(f"{ACCENT[make.lower()]} {mdl}")
     bases += EXTRA.get((make.lower(), model.lower()), [])
     if make.lower() in SISTER:
         bases.append(f"{SISTER[make.lower()]} {mdl}")
@@ -282,7 +362,7 @@ def fetch(make, model):
         tried += [title] + pages[:12]
         seen = {(tuple(b["years"] or ()), b["wheelbase"]) for b in uniq}
         uniq += [dict(b, base=k) for b in boxes if (tuple(b["years"] or ()), b["wheelbase"]) not in seen]
-    out = {"boxes": uniq, "tried": tried}
+    out = {"boxes": uniq, "tried": tried, "fetch_v": FETCH_V}
     if failed:
         out["failed"] = True                      # fetched again by the next --build
     return out
@@ -358,10 +438,17 @@ def few_doors(make, model, year=None):
         else "3-door"
 
 
+# the page reader's version: an entry an older reader found nothing in is
+# read again once (inches, electric cars' infoboxes, a twin's sizes, short
+# names in capitals came with 2)
+FETCH_V = 2
+
+
 def lookup(make, model, year, ratio=None, online=None, doors=None):
     key = f"{make}|{model}".lower()
     ent = table().get(key)
-    if ent is None:
+    if ent is None or (not ent.get("boxes") and ent.get("fetch_v", 1) < FETCH_V
+                       and (online if online is not None else os.environ.get("GLBMACHINE_ONLINE") == "1")):
         if not (online if online is not None else os.environ.get("GLBMACHINE_ONLINE") == "1"):
             return {"wheelbase": None, "why": f"{make} {model} is not in the wheelbase table"}
         ent = fetch(make, model)

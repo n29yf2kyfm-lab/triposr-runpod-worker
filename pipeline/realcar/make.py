@@ -99,7 +99,9 @@ def parse(text):
                 want["nickname_trim"] = m.group(trim).upper().replace(" ", "")
             t = t[:m.start()] + " " + ("" if placed else canon) + " " + t[m.end():]
             placed = True
-    m = re.search(r"\b(19[5-9]\d|20[0-3]\d)\b(?:[\s-]*(?:plate|reg)\b)?", t)
+    # a model named like a year is the model: the Peugeot 2008 (and e-2008)
+    m = next((m for m in re.finditer(r"\b(19[5-9]\d|20[0-3]\d)\b(?:[\s-]*(?:plate|reg)\b)?", t)
+              if not re.search(r"(?:peugeot\s+(?:e-?)?|\be-)$", t[:m.start()])), None)
     if m:
         want["year"] = int(m.group(1))         # "2024 plate": the year, the word "plate" with it
         t = t[:m.start()] + " " + t[m.end():]
@@ -199,8 +201,9 @@ def find(want, cat, skip=()):
     want["make"], want["model_words"] = make, None
     if not make:
         return None, [], "no make recognised"
-    # the model words as typed, for a search outside the catalogue
-    toks = want["words"].replace("-", " ").split()
+    # the model words as typed, for a search outside the catalogue; a hyphen
+    # in the model's name stays ("C-HR", "T-Roc": the sizes are filed so)
+    toks = want["words"].split()
     for k in range(len(toks), 0, -1):           # the longest: "mercedes benz", not "mercedes"
         if norm(" ".join(toks[:k])) in (norm(make), *[a for a, b in MAKES.items() if b == make]):
             want["model_words"] = " ".join(toks[k:])
@@ -225,13 +228,18 @@ def find(want, cat, skip=()):
                 break
     if not hits:
         # a one-letter slip ("micro" for Micra): the nearest name within one
-        # edit of a word in the request, if there is exactly one such name
+        # edit of a word in the request, if there is exactly one such name.
+        # A word that is itself a model name of this make (a 208 whose only
+        # files are refused or held back) is no slip, and nor is a model
+        # number: 208 and 2008 are two cars
         words = [norm(x) for x in want["words"].replace("-", " ").split()]
+        known = {n.replace(norm(make), "") for i in cat.values() if norm(i["make"]) == norm(make) for n in names(i)}
+        words = [w for w in words if w not in known and not any(c.isdigit() for c in w)]
         near = {}
         for i in pool:
             for n in names(i):
                 n2 = n.replace(norm(make), "")
-                if len(n2) >= 4 and any(edits(n2, w) == 1 for w in words):
+                if len(n2) >= 4 and not any(c.isdigit() for c in n2) and any(edits(n2, w) == 1 for w in words):
                     near.setdefault(n2, []).append(i)
         if len(near) == 1:
             (n2, hits), = near.items()
@@ -505,9 +513,18 @@ def _remember_refused(asset, why, missing=None):
 
 def _generation(make, model, year, online=False):
     """The wheelbase table's generation of MAKE MODEL built in YEAR (the newest
-    with no year), with its size and body family; None without a full size."""
+    with no year), with its size and body family; None without a full size.
+    With no year, a model no longer made (the Fiesta, to 2023) or whose new
+    generation's size is not published yet (the 2023 Transit Custom) is its
+    newest generation the table has a full size for."""
     try:
         b = wheelbase.lookup(make, model, year or 2100, online=online)
+        size = ("wheelbase", "length", "width", "height")
+        if not year and not all(b.get(k) for k in size):
+            full = [x for x in (wheelbase.table().get(f"{make}|{model}".lower()) or {}).get("boxes", [])
+                    if x.get("years") and all(x.get(k) for k in size)]
+            if full:
+                b = wheelbase.choose(full, None)
     except Exception:
         return None
     if not b.get("wheelbase"):
@@ -650,6 +667,13 @@ def _standin(want, report, item, cat, skip):
     # generation's (an M5 Touring is made from an estate, not from the M5
     # saloon the catalogue has); its size is the generation's published one
     bm = want.get("body_missing")
+    if not gen.get("family"):
+        # a page that names no body (the C-HR's): the body the catalogue's own
+        # files of the model give, held back or refused ones too, if they agree
+        own = {RECORD_BODY.get(str(i.get("bodyStyle") or "").lower()) for i in cat.values()
+               if [x.lower() for x in batch.model_of(i)] == [make.lower(), model.lower()]} - {None}
+        if len(own) == 1:
+            gen = dict(gen, family=own.pop(), family_from="the catalogue's files of the model")
     fam = RECORD_BODY.get(want.get("body") or "", None) or gen.get("family")
     other = bool(gen.get("family") and fam != gen["family"])         # not the body the table's size is for
     if other:

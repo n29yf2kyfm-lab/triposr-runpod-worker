@@ -384,7 +384,7 @@ const pieceName = (part, sub) => part.startsWith('wheel_') && ['tyre', 'rim', 'd
 const X = V(1, 0, 0);
 const STEER = 28;
 const { tris } = await writeBike({
-  out: OUT, sceneName: 'sports', mats: MATS, pieces: parts, pivots: PIVOT, parents: PARENT, split: SPLIT, pieceName,
+  out: OUT, scale: +(args.scale || 1), sceneName: 'sports', mats: MATS, pieces: parts, pivots: PIVOT, parents: PARENT, split: SPLIT, pieceName,
   doubleSided: ['screen', 'white'],
   extras: { kind: 'motorbike', model: B.name, wheelbase_m: B.wheelbase, length_m: B.length, rake_deg: B.rake, trail_m: B.trail,
     tyres: [`${B.front_tyre[0]}/${B.front_tyre[1]}ZR${B.rim}`, `${B.rear_tyre[0]}/${B.rear_tyre[1]}ZR${B.rim}`],
