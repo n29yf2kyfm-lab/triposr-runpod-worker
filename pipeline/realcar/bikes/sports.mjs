@@ -388,7 +388,7 @@ const { tris } = await writeBike({
   doubleSided: ['screen', 'white'],
   extras: { kind: 'motorbike', model: B.name, wheelbase_m: B.wheelbase, length_m: B.length, rake_deg: B.rake, trail_m: B.trail,
     tyres: [`${B.front_tyre[0]}/${B.front_tyre[1]}ZR${B.rim}`, `${B.rear_tyre[0]}/${B.rear_tyre[1]}ZR${B.rim}`],
-    clips: ['wheels_spin', 'steer_left', 'steer_right', 'stand_down'], generator: 'bikes/sports.mjs',
+    sizes_note: args.sizes || null, clips: ['wheels_spin', 'steer_left', 'steer_right', 'stand_down'], generator: 'bikes/sports.mjs',
     engine_note: 'Modelled in code by the machine: a liquid-cooled inline four, its cylinders leaning forward, with the gearbox '
       + 'behind the crank in the same cases, a chain to the rear wheel, the radiator in front and a four-into-one exhaust.',
     pivots: { steer: 'the fork, clip-on bars, front wheel, discs and calipers turn about the raked steering axis (the fairing stays)',
@@ -401,7 +401,7 @@ const { tris } = await writeBike({
     clip('steer_right', [[nodes.steer, [0, 1], [q(U, 0), q(U, -STEER)]]]);
     clip('stand_down', [[nodes.stand, [0, 1], [[0, 0, 0, 1], new THREE.Quaternion().setFromUnitVectors(STAND_FOLDED, STAND_DOWN).toArray()]]]);
   },
-  copyright: `${B.name}: modelled in code by the ExpertCarCheck GLB machine (bikes/sports.mjs), to the published sizes. No maker's model, badge or lettering.`,
+  copyright: `${B.name}: modelled in code by the ExpertCarCheck GLB machine (bikes/sports.mjs), ${args.sizes || "to its preset's published sizes"}. No maker's model, badge or lettering.`,
 });
 const L = (AF.z + TF.R + 0.02) - (-1.02);
 console.log(JSON.stringify({ wrote: OUT, triangles: Math.round(tris), parts: [...new Set(parts.map(p => p[0]))],

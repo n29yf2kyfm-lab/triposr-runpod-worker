@@ -41,8 +41,18 @@ catalogue has only under CC BY-NC is made as a stand-in from one that may be
 sold; the report names the model left out (`noncommercial_left_out`) and
 says `"licence_mode": "commercial only"`. A demo may allow them per car
 (`--allow-noncommercial`, or `"noncommercial": true` in the API request) or
-for the whole server (`GLBMACHINE_COMMERCIAL_ONLY=0`). Of the UK's 40 best
-sellers, only the Ford Fiesta has no commercial model.
+for the whole server (`GLBMACHINE_COMMERCIAL_ONLY=0`).
+
+What a model's licence is comes from up to three records, kept in
+`authors_table.json` (built by `authors.py`): the catalogue's field, the
+licence written into the file when it was downloaded (a Sketchfab file's
+glTF `asset.extras`: source page, author, title, licence) and the model's
+Sketchfab page now. The catalogue's field is wrong for some models
+(NonCommercial models filed as CC BY), and some authors changed a model's
+licence after it was downloaded. A model is used commercially only when
+every record there is allows it, and only when it can be credited: a CC BY
+model with neither its author nor its source recorded is not used. The
+credit names the author and says when the records differ.
 
 The web API (`serve`): `POST /v1/cars {"request": "...", "spec": "...",
 "sheet": false, "noncommercial": false}` answers with an id; `GET /v1/cars/ID` gives the status and
@@ -664,6 +674,24 @@ output is byte-identical on it):
 
     node pipeline/realcar/bikes/sports.mjs sports.glb --parts       # validator clean
     node pipeline/realcar/bikes/scooter.mjs scooter.glb --parts     # validator clean
+
+`bikes/standard.mjs` builds every other kind of bike to one bike's figures:
+naked, commuter, adventure, trail, retro, mini, tourer and sports tourer.
+A spec gives what is published (wheelbase, length, seat height, rake,
+trail, tyre sizes, engine size, layout and cooling); the kind gives the
+rest (frame, bars, lamp, fairing or beak, exhaust, cast or wire wheels,
+twin shocks or a monoshock, luggage) and a typical figure for anything the
+spec leaves out. The tank, seat, swingarm pivot, cases and cylinders are
+placed from those figures, so a Tiger 800 and an MT-07 come out as the two
+kinds of bike they are, each at its own size. Parts move and come off as
+the other bikes' do.
+
+    node pipeline/realcar/bikes/standard.mjs bike.glb --spec=mt07.json --parts   # validator clean
+    node pipeline/realcar/bikes/standard.mjs bike.glb --kind=adventure           # the kind's own figures
+
+The three preset bikes take `--scale=K` (the whole bike on its root node,
+its reported sizes scaled with it) to stand for another bike of their kind
+near their size: a YZF-R125 is the supersport at its own wheelbase.
 
 ## App packs
 

@@ -372,7 +372,7 @@ const { tris } = await writeBike({
   out: OUT, scale: +(args.scale || 1), sceneName: 'cruiser', mats: MATS, pieces: parts, pivots: PIVOT, parents: PARENT, split: SPLIT, pieceName,
   extras: { kind: 'motorbike', model: B.name, wheelbase_m: B.wheelbase, length_m: B.length, rake_deg: B.rake, trail_m: B.trail,
     tyres: [`${B.front_tyre[0]}/${B.front_tyre[1]}R${B.rim}`, `${B.rear_tyre[0]}/${B.rear_tyre[1]}R${B.rim}`],
-    clips: ['wheels_spin', 'steer_left', 'steer_right', 'stand_down'] },
+    sizes_note: args.sizes || null, clips: ['wheels_spin', 'steer_left', 'steer_right', 'stand_down'] },
   order: ['steer', 'wheel_r', 'wheel_f', 'stand'], meshOrder: ['body', 'steer', 'wheel_f', 'wheel_r', 'stand'],
   clips: (nodes, clip, q) => {
     const spin = [0, 90, 180, 270, 360].map(d => q(X, d));
@@ -382,7 +382,7 @@ const { tris } = await writeBike({
     const sq = new THREE.Quaternion().setFromUnitVectors(STAND_FOLDED, STAND_DOWN).toArray();
     clip('stand_down', [[nodes.stand, [0, 1], [[0, 0, 0, 1], sq]]]);
   },
-  copyright: `${B.name}: modelled in code by the ExpertCarCheck GLB machine (bikes/cruiser.mjs), to the published sizes. No maker's model, badge or lettering.`,
+  copyright: `${B.name}: modelled in code by the ExpertCarCheck GLB machine (bikes/cruiser.mjs), ${args.sizes || "to its preset's published sizes"}. No maker's model, badge or lettering.`,
 });
 const L = Math.max(AF.z + TF.R, 0) - Math.min(-1.215, AR.z - TR.R);
 console.log(JSON.stringify({ wrote: OUT, triangles: Math.round(tris), parts: [...new Set(parts.map(p => p[0]))],

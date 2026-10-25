@@ -509,7 +509,12 @@ def convert(car, rep, override=None, body_style=""):
     dx = -(WV[:, 0].min() + WV[:, 0].max()) / 2
     lo0, hi0 = bbox(allv())
     dxb = -(lo0[0] + hi0[0]) / 2
-    if abs(dx - dxb) > .05 * (hi0[0] - lo0[0]):
+    wspan = WV[:, 0].max() - WV[:, 0].min()
+    # only when the wheels cannot be the car's own four: their span across
+    # is under 60% of the body's width (one side's wheels, or a stray among
+    # them); a car with a door left open or a stray piece still centres on
+    # its wheels
+    if abs(dx - dxb) > .05 * (hi0[0] - lo0[0]) and wspan < .6 * (hi0[0] - lo0[0]):
         rep["centred_on_body"] = {"wheels_said": round(float(dx), 4), "body_says": round(float(dxb), 4)}
         dx = dxb
     if abs(dx) <= .02 * (hi0[0] - lo0[0]):

@@ -203,7 +203,7 @@ def find(want, cat, skip=()):
         return None, [], "no make recognised"
     # the model words as typed, for a search outside the catalogue; a hyphen
     # in the model's name stays ("C-HR", "T-Roc": the sizes are filed so)
-    toks = want["words"].split()
+    toks = [t for t in want["words"].split() if norm(t)]          # a lone "-" ("Fiesta - red") is no word
     for k in range(len(toks), 0, -1):           # the longest: "mercedes benz", not "mercedes"
         if norm(" ".join(toks[:k])) in (norm(make), *[a for a, b in MAKES.items() if b == make]):
             want["model_words"] = " ".join(toks[k:])

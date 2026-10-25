@@ -695,7 +695,7 @@ const { tris } = await writeBike({
   extras: { kind: 'motorbike', type: KIND, model: B.name, wheelbase_m: W, length_m: +(box.max.z - box.min.z).toFixed(3),
     height_m: +box.max.y.toFixed(3), width_m: +(box.max.x - box.min.x).toFixed(3), seat_m: B.seat, rake_deg: B.rake, trail_m: B.trail,
     tyres: [tyreName(B.front), tyreName(B.rear)], engine: `${Math.round(B.cc)} cc ${AIR ? 'air' : 'liquid'}-cooled ${ENGINE}`,
-    clips: ['wheels_spin', 'steer_left', 'steer_right', 'stand_down'], generator: 'bikes/standard.mjs',
+    sizes_note: args.sizes || null, clips: ['wheels_spin', 'steer_left', 'steer_right', 'stand_down'], generator: 'bikes/standard.mjs',
     engine_note: `Modelled in code by the machine: a representative ${AIR ? 'air' : 'liquid'}-cooled ${ENGINE} of about ${Math.round(B.cc)} cc `
       + 'with its gearbox in the same cases and a chain to the rear wheel. Not the maker\'s engine: its size and layout only.',
     pivots: { steer: 'the fork, bars, front wheel, discs and calipers turn about the raked steering axis',
@@ -708,7 +708,7 @@ const { tris } = await writeBike({
     clip('steer_right', [[nodes.steer, [0, 1], [q(U, 0), q(U, -STEER)]]]);
     clip('stand_down', [[nodes.stand, [0, 1], [[0, 0, 0, 1], new THREE.Quaternion().setFromUnitVectors(STAND_FOLDED, STAND_DOWN).toArray()]]]);
   },
-  copyright: `${B.name}: modelled in code by the ExpertCarCheck GLB machine (bikes/standard.mjs), to the published sizes. No maker's model, badge or lettering.`,
+  copyright: `${B.name}: modelled in code by the ExpertCarCheck GLB machine (bikes/standard.mjs), ${args.sizes || "to the figures its spec gives, the rest its kind's typical ones"}. No maker's model, badge or lettering.`,
 });
 console.log(JSON.stringify({ wrote: OUT, kind: KIND, triangles: Math.round(tris), parts: [...new Set(parts.map(p => p[0]))],
   pieces: SPLIT ? [...new Set(parts.map(p => pieceName(p[0], p[3] || p[0])))] : undefined,

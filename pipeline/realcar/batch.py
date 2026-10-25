@@ -236,19 +236,52 @@ LICENCE = [(r"royalty[- ]free", "royalty-free"), (r"own work|owner", "owner-supp
            (r"share-?alike|by-sa", "CC BY-SA"), (r"cc0|public domain", "CC0"), (r"attribution|cc-by|cc by", "CC BY")]
 
 
+COMMERCIAL = ("CC BY", "CC BY-SA", "CC0", "owner-supplied", "royalty-free")
+
+
+def _licence_name(raw):
+    if re.search(r"free standard|\bstandard\b", raw or "", re.I):
+        return "royalty-free"                   # Sketchfab's Free Standard: commercial use in a project
+    return next((name for rx, name in LICENCE if re.search(rx, raw or "", re.I)), raw or "unknown")
+
+
 def credit_of(item):
     """Who made the model and under what licence, from the catalogue record
-    alone (no outside call). A record without its author's name is credited
-    by title and link, and says so."""
-    raw = item.get("licence") or ""
-    lic = next((name for rx, name in LICENCE if re.search(rx, raw, re.I)), raw or "unknown")
+    and the provenance table (authors_table.json, built by authors.py): no
+    outside call. Up to three records of the licence: the catalogue's, the
+    one in the file as downloaded (its glTF asset.extras) and the model's
+    Sketchfab page now. The catalogue's is wrong for some (NonCommercial
+    models filed as CC BY) and some authors changed a model's licence after
+    it was downloaded: a model is used commercially only when every record
+    there is allows it, and the credit says when they differ. A CC BY model
+    with neither its author nor its source to credit is not used commercially."""
+    # a stand-in is its donor's model: the donor's record, not "<donor>--as-..."
+    prov = authors().get(item.get("standin_donor") or item.get("assetId")) or {}
+    emb = (prov.get("embedded") or {}).get("license")
+    now = prov.get("licence")
+    known = [x for x in (now, emb) if x] or [item.get("licence") or ""]
+    names = [_licence_name(x) for x in known]
+    lic = names[0]
     make, model = model_of(item)
-    title = item.get("sourceTitle") or " ".join(w.upper() if len(w) <= 2 else w.capitalize()
-                                                for w in f"{make} {model}".replace("-", " ").split())   # Toyota GR Yaris
-    author = item.get("sourceCreator") or (authors().get(item.get("assetId")) or {}).get("author")
-    return {"title": title, "author": author or None, "licence": lic, "url": item.get("sourceUrl"),
-            "commercial": lic in ("CC BY", "CC BY-SA", "CC0", "owner-supplied", "royalty-free"),
-            "author_missing": not author}
+    title = item.get("sourceTitle") or (prov.get("embedded") or {}).get("title") or prov.get("title") or \
+        " ".join(w.upper() if len(w) <= 2 else w.capitalize() for w in f"{make} {model}".replace("-", " ").split())   # Toyota GR Yaris
+    author = item.get("sourceCreator") or prov.get("author")
+    url = item.get("sourceUrl") or prov.get("source")
+    commercial = all(n in COMMERCIAL for n in names) and (bool(author or url) or lic in ("CC0", "owner-supplied"))
+    out = {"title": title, "author": author or None, "licence": lic, "url": url, "commercial": commercial,
+           "author_missing": not author}
+    if len(set(names)) > 1:
+        out["licence_note"] = (f"the file was downloaded under {_licence_name(emb)}; its Sketchfab page now says "
+                               f"{_licence_name(now)}") if emb and now else f"licence records differ: {', '.join(sorted(set(names)))}"
+    # the source page's own title, when it is not the catalogue's: the
+    # credit then shows both, for a person to check it is the same model
+    pt = prov.get("title") or (prov.get("embedded") or {}).get("title")
+    norm_t = lambda t: re.sub(r"[^a-z0-9]", "", str(t or "").lower())  # noqa: E731
+    if pt and norm_t(pt) != norm_t(title):
+        out["page_title"] = pt
+    if not commercial and all(n in COMMERCIAL for n in names):
+        out["licence_note"] = "neither its author nor its source is recorded, so it cannot be credited as its licence asks"
+    return out
 
 
 _AUTHORS = {}

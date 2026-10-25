@@ -216,11 +216,13 @@ def _anchored(base):
     boxes, pages, title, unreached = _boxes_all(base)
     anchor, text = getattr(_LAST, "anchor_of_base", ""), getattr(_LAST, "text_of_base", "")
     if anchor:
-        a = re.sub(r"[^a-z0-9]", "", anchor.lower())
-        keep = [b for b in boxes if a and a in re.sub(r"[^a-z0-9]", "", (b.get("name") or "").lower())]
+        # the anchor as a whole word of the box's name ("LM" in "Second
+        # generation (LM)", never "ST" inside "first"); (?<!\w) and (?!\w)
+        # also hold beside a bracket, where \b does not
+        w = r"(?<![\w])" + re.escape(anchor) + r"(?![\w])"
+        keep = [b for b in boxes if re.search(w, b.get("name") or "", re.I)]
         if not keep and text:
-            w = re.escape(anchor)
-            m = re.search(r"\{\{\s*anchors?\s*\|[^}]*\b" + w + r"\b|^==+.*\b" + w + r"\b.*==+\s*$", text, re.I | re.M)
+            m = re.search(r"\{\{\s*anchors?\s*\|[^}]*" + w + r"|^==+.*" + w + r".*==+\s*$", text, re.I | re.M)
             line = text[m.start():text.find("\n", m.start())] if m else ""
             if m and not re.search(r"generation|\(|\bmk\s?\d|\bseries\b", re.sub(r"<[^>]+>", "", line), re.I):
                 m = None                          # a section that is no generation ("History"): all of them
@@ -255,8 +257,6 @@ def _boxes_all(base):
             if not text:
                 return boxes, pages, title, 0 if getattr(_LAST, "missing", False) else 1
     boxes += infoboxes(text, title)
-    if not boxes:
-        boxes += _twin_boxes(text, title)
     stem = title.split(" (")[0]
     for link in re.findall(r"(?:\[\[|\{\{\s*(?:main|see also|further)\s*\|)\s*(" + re.escape(stem) + r"[^\]|}#]*)", text, re.I):
         link = link.strip()
@@ -270,6 +270,9 @@ def _boxes_all(base):
         # a link can redirect to another make's car ("Toyota Yaris R" is the Mazda2)
         if t and tt.split()[0].lower() == stem.split()[0].lower():
             boxes += infoboxes(t, tt)
+    if not boxes:
+        # neither the page nor its generation pages give a size: its twin's
+        boxes += _twin_boxes(text, title)
     return boxes, pages, title, unreached
 
 
@@ -287,13 +290,18 @@ def _twin_boxes(text, title):
         f = re.search(r"\|\s*" + k + r"\s*=([^\n]*)", box)
         links += re.findall(r"\[\[([^\]|#]+)", f.group(1)) if f else []
     out = []
+    if not yr:
+        return out
     for link in list(dict.fromkeys(l.strip() for l in links))[:3]:
         t, tt = raw(link)
         for b in infoboxes(t or "", tt):
             by = b.get("years")
-            if yr and by and by[0] - 1 <= yr[0] <= by[1] + 1 and b.get("length"):
-                out.append(dict(b, page=title, years=yr, name=f"{title} (sized as the {tt} {b.get('name') or ''})".strip(),
-                                twin_of=tt))
+            # each twin generation built in this car's years, for those years
+            # only: an S3 made 1999 on is the A3 of each generation after it,
+            # never the 1996 A3 for all of them
+            if by and b.get("length") and max(by[0], yr[0]) < min(by[1], yr[1]):
+                out.append(dict(b, page=title, years=(max(by[0], yr[0]), min(by[1], yr[1])),
+                                name=f"{title} (sized as the {tt} {b.get('name') or ''})".strip(), twin_of=tt))
         if out:
             break
     return out
@@ -318,7 +326,8 @@ def table():
             # this machine's own lookups: what the shipped table lacks, or has
             # found nothing for (a page the reader of its day could not read)
             _TABLE.update({k: v for k, v in json.load(open(local_table_path())).items()
-                           if k not in _TABLE or (not _TABLE[k].get("boxes") and v.get("boxes"))})
+                           if k not in _TABLE or (not _TABLE[k].get("boxes") and (v.get("boxes") or
+                                                  v.get("fetch_v", 1) > _TABLE[k].get("fetch_v", 1)))})
         except (OSError, ValueError):
             pass
     return _TABLE
@@ -327,7 +336,7 @@ def table():
 def wiki_title(model):
     """A model name as Wikipedia titles it: Micra, E-Class, CR-V, GT-R, CX-5."""
     def word(w):
-        if re.fullmatch(r"[ie]x?\d+", w):         # i10, i30, ix35: Hyundai keeps the small i
+        if re.fullmatch(r"i\d+|ix\d+|e\d+", w):  # i10, i30, ix35: Hyundai keeps the small i (not Volvo's EX30)
             return w
         return re.sub(r"[a-z]+", lambda m: m.group(0).upper() if len(m.group(0)) <= 2 and re.search(r"[\d-]", w)
                       else m.group(0).title(), w)
@@ -348,6 +357,9 @@ def fetch(make, model):
     m = re.fullmatch(r"([a-z]{1,3})[ -]class", model.lower())
     if m:
         bases.append(f"{mt} {m.group(1).upper()}-Class")        # Mercedes-Benz SLK-Class, A-Class
+        bases.append(f"{mt} {m.group(1).upper()}")              # Mercedes-Benz EQA: no "-Class"
+    if re.fullmatch(r"ix\d*", model.lower()):
+        bases.append(f"{mt} iX{model[2:]}")                     # BMW iX1, iX3
     if len(model) <= 3 and model.isalpha():
         bases.append(f"{mt} {model.upper()}")                   # MG HS, MG ZS: short names in capitals
     if make.lower() in ACCENT:
@@ -441,7 +453,7 @@ def few_doors(make, model, year=None):
 # the page reader's version: an entry an older reader found nothing in is
 # read again once (inches, electric cars' infoboxes, a twin's sizes, short
 # names in capitals came with 2)
-FETCH_V = 2
+FETCH_V = 3                                      # 3: EX30, iX1, EQA spelt as titled; empty entries read again
 
 
 def lookup(make, model, year, ratio=None, online=None, doors=None):

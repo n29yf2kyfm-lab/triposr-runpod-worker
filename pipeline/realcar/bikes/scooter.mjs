@@ -288,7 +288,7 @@ const { tris } = await writeBike({
   doubleSided: ['screen'], pivotExtras: { seat_hinge: { axis: [1, 0, 0], open_deg: SEAT_DEG } },
   extras: { kind: 'motorbike', model: B.name, wheelbase_m: B.wheelbase, length_m: B.length, rake_deg: B.rake, trail_m: B.trail,
     tyres: [`${B.front_tyre[0]}/${B.front_tyre[1]}-${B.front_rim}`, `${B.rear_tyre[0]}/${B.rear_tyre[1]}-${B.rear_rim}`],
-    clips: ['wheels_spin', 'steer_left', 'steer_right', 'stand_down', 'centre_stand_down', 'seat_open'], generator: 'bikes/scooter.mjs',
+    sizes_note: args.sizes || null, clips: ['wheels_spin', 'steer_left', 'steer_right', 'stand_down', 'centre_stand_down', 'seat_open'], generator: 'bikes/scooter.mjs',
     engine_note: 'Modelled in code by the machine: a liquid-cooled single, its cylinder lying forward, driving the rear wheel '
       + 'through a belt CVT in the case on the left; engine and case swing together with the rear wheel (a unit-swing engine).',
     pivots: { steer: 'the bars and their cover, the fork, front wheel, disc and caliper turn about the raked steering axis',
@@ -306,7 +306,7 @@ const { tris } = await writeBike({
     clip('centre_stand_down', [[nodes.centre_stand, [0, 1], [[0, 0, 0, 1], new THREE.Quaternion().setFromUnitVectors(CS_FOLDED, CS_DOWN).toArray()]]]);
     clip('seat_open', [[nodes.seat_hinge, [0, 1], [q(X, 0), q(X, SEAT_DEG)]]]);
   },
-  copyright: `${B.name}: modelled in code by the ExpertCarCheck GLB machine (bikes/scooter.mjs), to the published sizes. No maker's model, badge or lettering.`,
+  copyright: `${B.name}: modelled in code by the ExpertCarCheck GLB machine (bikes/scooter.mjs), ${args.sizes || "to its preset's published sizes"}. No maker's model, badge or lettering.`,
 });
 const L = (AF.z + TF.R + 0.02) - (-1.01);
 console.log(JSON.stringify({ wrote: OUT, triangles: Math.round(tris), parts: [...new Set(parts.map(p => p[0]))],
