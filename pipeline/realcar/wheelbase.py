@@ -190,7 +190,9 @@ def infoboxes(text, title):
 ACCENT = {"skoda": "Škoda", "citroen": "Citroën"}
 SISTER = {"vauxhall": "Opel", "opel": "Vauxhall", "mini": "Mini", "dacia": "Renault", "seat": "SEAT"}
 # a model's other page name
-ALIAS = {("mini", "cooper"): "Mini Hatch", ("mini", "hatch"): "Mini Hatch", ("honda", "jazz"): "Honda Fit"}
+ALIAS = {("mini", "cooper"): "Mini Hatch", ("mini", "hatch"): "Mini Hatch", ("honda", "jazz"): "Honda Fit",
+         ("hyundai", "ix20"): "Kia Venga",          # the ix20's page is the Venga's: the same car
+         ("nissan", "pixo"): "Suzuki Alto"}         # the UK Pixo is the 2009-2013 Alto
 # more pages that hold a model's generations: the first three Yaris
 # generations are filed under the Japanese name
 EXTRA = {("toyota", "yaris"): ["Toyota Vitz"]}
@@ -358,6 +360,8 @@ def fetch(make, model):
     if m:
         bases.append(f"{mt} {m.group(1).upper()}-Class")        # Mercedes-Benz SLK-Class, A-Class
         bases.append(f"{mt} {m.group(1).upper()}")              # Mercedes-Benz EQA: no "-Class"
+    if re.fullmatch(r"e\d+", model.lower()):
+        bases.append(f"{mt} E{model[1:]}")                      # Omoda E5: titled with a capital E
     if re.fullmatch(r"ix\d*", model.lower()):
         bases.append(f"{mt} iX{model[2:]}")                     # BMW iX1, iX3
     if len(model) <= 3 and model.isalpha():

@@ -109,7 +109,7 @@ def parse(text):
         # a UK registration plate: "12 Yaris", "62-plate Corsa": 02-29 is that
         # March's year, 51-79 that September's (fifty on)
         yy = time.localtime().tm_year % 100
-        m = re.search(r"(?<![\w.])(\d\d)(?:[\s-]*(?:plate|reg))?(?![\w.])", t)
+        m = re.search(r"(?<![\w.-])(\d\d)(?:[\s-]*(?:plate|reg))?(?![\w.])", t)     # not the 60 of "CX-60"
         if m and (2 <= int(m.group(1)) <= yy or 51 <= int(m.group(1)) <= yy + 50):
             n = int(m.group(1))
             want["year"] = 2000 + (n if n < 50 else n - 50)
@@ -173,7 +173,18 @@ def in_words(name, text):
     return name in joins or (len(name) >= 3 and any(j.startswith(name) and j[len(name):].isdigit() for j in joins))
 
 
+# a file held back as another car (batch.WRONG_CAR) that is the right car
+# for these requests: the catalogue's "Mini Cooper" is the classic Mini, so
+# an Austin, Rover or Morris Mini (1959-2000) is built from it
+CLASSIC = [(re.compile(r"\b(?:austin|rover|morris|bmc|leyland)\s+mini\b|\bclassic\s+mini\b|\bmini\s+classic\b"),
+            "mini-cooper-w7-v1", "the classic Mini (1959-2000)")]
+
+
 def find(want, cat, skip=()):
+    for rx, aid, what in CLASSIC:
+        if rx.search(want["words"]) and aid in cat and aid not in skip:
+            want["make"], want["model_words"], want["classic"] = cat[aid]["make"].lower(), "mini", what
+            return cat[aid], [], "exact generation"
     q = norm(want["words"])
     makes = {norm(i["make"]): i["make"].lower() for i in cat.values()}
     make, rest = None, q
@@ -198,6 +209,13 @@ def find(want, cat, skip=()):
             make = next(iter(by_model))
             rest = q
             want["make_from_model"] = True
+    if not make:
+        # a make the catalogue has no car of (Saab, Morris, Chery): its first
+        # word, so a stand-in can still be sized from the car's own page
+        first = (want["words"].split() or [""])[0]
+        if re.fullmatch(r"[a-z][a-z-]{2,}", first) and len(want["words"].split()) > 1:
+            make, rest = first, q[len(norm(first)):]
+            want["make_unknown"] = True
     want["make"], want["model_words"] = make, None
     if not make:
         return None, [], "no make recognised"
@@ -232,14 +250,18 @@ def find(want, cat, skip=()):
         # A word that is itself a model name of this make (a 208 whose only
         # files are refused or held back) is no slip, and nor is a model
         # number: 208 and 2008 are two cars
+        # A word that is itself a model name of this make is no slip, except
+        # to a variant of it: the name with a letter on the end ("cooper" to
+        # the Cooper S, whose plain files are held back)
         words = [norm(x) for x in want["words"].replace("-", " ").split()]
         known = {n.replace(norm(make), "") for i in cat.values() if norm(i["make"]) == norm(make) for n in names(i)}
-        words = [w for w in words if w not in known and not any(c.isdigit() for c in w)]
+        words = [w for w in words if not any(c.isdigit() for c in w)]
         near = {}
         for i in pool:
             for n in names(i):
                 n2 = n.replace(norm(make), "")
-                if len(n2) >= 4 and not any(c.isdigit() for c in n2) and any(edits(n2, w) == 1 for w in words):
+                if len(n2) >= 4 and not any(c.isdigit() for c in n2) and \
+                        any(edits(n2, w) == 1 and (w not in known or n2.startswith(w)) for w in words):
                     near.setdefault(n2, []).append(i)
         if len(near) == 1:
             (n2, hits), = near.items()
