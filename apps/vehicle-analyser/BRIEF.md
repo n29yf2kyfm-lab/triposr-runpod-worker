@@ -28,8 +28,9 @@ uploads, the rest from the URL above). Do not load from GitHub at run time.
 
 Vehicles: Volkswagen Golf 2017, Nissan Qashqai 2018, BMW 3 Series Touring
 2014, Land Rover Defender Works V8 Trophy 2021, Porsche 911, three vans
-(Renault Master, Nissan NV200 2010, Mercedes-Benz Vito), and a heavy cruiser
-motorbike modelled in code. GLBs are 0.9 to 19 MB.
+(Renault Master, Nissan NV200 2010, Mercedes-Benz Vito), and three motorbikes
+modelled in code: a heavy cruiser, a 600 cc supersport and a 125 cc scooter.
+GLBs are 0.8 to 19 MB.
 
 ### The vehicle file
 
@@ -49,15 +50,16 @@ vehicle's left towards +X, the ground at y = 0.
   - `remove`: `{dir, dist}`, the way it comes off: doors out sideways, the bonnet up and forward,
     a tailgate up and back, a van's barn doors back and out, wheels off the hub, engine parts up out of the bay.
   - `representative`: true for the engine-bay parts (see the rules below).
-  - Motorbike parts also have `moves_with` (`steer`, `wheel_f`, `wheel_r`, `stand` or `body`).
+  - Motorbike parts also have `moves_with` (`steer`, `wheel_f`, `wheel_r`, `stand`, `body`; the scooter's
+    `centre_stand` and `seat_hinge`). The scooter's seat is a hinge like a car's lid (`hinges[]`).
 - `hinges[]`: `{part, node, node_loaded, pivot, axis, open_deg, clip}`. To open a part, rotate the
   `<part>_hinge` node about its local `axis` (also in the node's `userData.axis`) by `open_deg` degrees.
   Drive it with a spring, not a linear tween. `clip` names the baked open animation if you would rather play that.
   A van's sliding side door has `"type": "slide"` and `slide: {out_x, back_z}` instead of `axis` and `open_deg`:
   move the `<part>_hinge` node out sideways by `out_x` first, then back along the body by `back_z` (metres;
   its clip does the same). It never turns.
-- `clips[]`: baked animations (`door_fl_open`, `all_open` ...; the bike has `wheels_spin`, `steer_left`,
-  `steer_right`, `stand_down`).
+- `clips[]`: baked animations (`door_fl_open`, `all_open` ...; the bikes have `wheels_spin`, `steer_left`,
+  `steer_right`, `stand_down`; the scooter also `centre_stand_down` and `seat_open`).
 - `procedures[]`: `{title, steps[{text, view, parts, open}]}`. Real inspection routines written by the machine
   (walk-round, under the bonnet, doors and cabin, boot and underside; the bike has T-CLOCS, brakes, engine top end).
   `open` lists what must be open for the step; `parts` what to highlight; `view` is a hint
@@ -90,7 +92,7 @@ Top bar: back, title, info (summary, `real_layout`, credit). A glass bottom shee
 three heights, with tabs:
 
 - **Explore**: a button for each hinged part and "Open all". Doors swing on springs with a slight overshoot.
-  Bike: steer left and right, side stand, spin the wheels (its clips).
+  Bike: steer left and right, side stand, spin the wheels (its clips); the scooter also its centre stand and seat.
 - **Strip**: the parts by section. Tap a part: the others fade, it glows, the camera flies to it, its label pins to it.
   "Remove" runs a short unbolt (four bolt heads turn and lift), then the part lifts along `remove.dir`, arcs out by
   `remove.dist` and settles on the workshop floor beside the vehicle with its own shadow. "Refit" reverses it.
@@ -123,7 +125,7 @@ three heights, with tabs:
 
 ## Done means
 
-- All nine vehicles load. The NV200's and the Vito's side doors slide back along the body, never swing. Every hinge opens and closes. Every removable part comes off and goes back,
+- All eleven vehicles load. The NV200's and the Vito's side doors slide back along the body, never swing. Every hinge opens and closes. Every removable part comes off and goes back,
   and the counter returns to zero.
 - The "Teaching engine" chip, the real layout and the credit line show where they should.
 - The running engine shows four pistons moving, the stroke chips cycling and firing in the order 1-3-4-2.

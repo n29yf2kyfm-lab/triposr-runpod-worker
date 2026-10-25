@@ -1,0 +1,1775 @@
+{
+ "schema": "expertcarcheck.vehicle/1",
+ "id": "scooter",
+ "title": "125 cc scooter",
+ "kind": "motorbike",
+ "body": "scooter",
+ "glb": "scooter.glb",
+ "bytes": 840640,
+ "frame": "metres; +Y up, nose +Z, the rider's left +X; ground at y = 0",
+ "box": {
+  "min": [
+   -0.361,
+   -0.0,
+   -1.027
+  ],
+  "max": [
+   0.361,
+   1.293,
+   0.912
+  ]
+ },
+ "paint": {
+  "hex": "#c8ccd2",
+  "materials": [
+   "paint"
+  ]
+ },
+ "hinges": [
+  {
+   "part": "seat",
+   "node": "seat_hinge",
+   "node_loaded": "seat_hinge",
+   "pivot": [
+    0.0,
+    0.735,
+    -0.06
+   ],
+   "axis": [
+    1,
+    0,
+    0
+   ],
+   "open_deg": 70,
+   "clip": "seat_open"
+  }
+ ],
+ "clips": [
+  "wheels_spin",
+  "steer_left",
+  "steer_right",
+  "stand_down",
+  "centre_stand_down",
+  "seat_open"
+ ],
+ "pivots": {
+  "steer": {
+   "node": "steer",
+   "moves": "the bars and their cover, the fork, front wheel, disc and caliper turn about the raked steering axis"
+  },
+  "wheel_f": {
+   "node": "wheel_f",
+   "moves": "the front wheel turns on its axle"
+  },
+  "wheel_r": {
+   "node": "wheel_r",
+   "moves": "the rear wheel turns on its axle"
+  },
+  "stand": {
+   "node": "stand",
+   "moves": "the side stand swings down"
+  },
+  "centre_stand": {
+   "node": "centre_stand",
+   "moves": "the centre stand swings down"
+  },
+  "seat_hinge": {
+   "node": "seat_hinge",
+   "moves": "the seat lifts on its front hinge over the storage bin"
+  }
+ },
+ "parts": [
+  {
+   "id": "air_filter",
+   "label": "Air filter box",
+   "system": "Air and fuel",
+   "node": "air_filter",
+   "node_loaded": "air_filter",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.019,
+     0.375,
+     -0.597
+    ],
+    "max": [
+     0.16,
+     0.587,
+     -0.097
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "battery",
+   "label": "Battery",
+   "system": "Electrical",
+   "node": "battery",
+   "node_loaded": "battery",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.05,
+     0.568,
+     -0.752
+    ],
+    "max": [
+     0.05,
+     0.68,
+     -0.608
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "body_left",
+   "label": "Left body panel",
+   "system": "Body",
+   "node": "body_left",
+   "node_loaded": "body_left",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.028,
+     0.346,
+     -0.94
+    ],
+    "max": [
+     0.19,
+     0.788,
+     -0.1
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "body_right",
+   "label": "Right body panel",
+   "system": "Body",
+   "node": "body_right",
+   "node_loaded": "body_right",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.19,
+     0.346,
+     -0.94
+    ],
+    "max": [
+     -0.028,
+     0.788,
+     -0.1
+    ]
+   },
+   "remove": {
+    "dir": [
+     -0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "caliper_front",
+   "label": "Front brake caliper",
+   "system": "Brakes",
+   "node": "caliper_front",
+   "node_loaded": "caliper_front",
+   "moves_with": "steer",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.043,
+     0.271,
+     0.539
+    ],
+    "max": [
+     0.073,
+     0.379,
+     0.606
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "cam_cover",
+   "label": "Cam cover",
+   "system": "Engine",
+   "node": "cam_cover",
+   "node_loaded": "cam_cover",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.055,
+     0.274,
+     -0.089
+    ],
+    "max": [
+     0.055,
+     0.412,
+     -0.008
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "centre_stand",
+   "label": "Centre stand",
+   "system": "Chassis",
+   "node": "centre_stand",
+   "node_loaded": "centre_stand",
+   "moves_with": "centre_stand",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.141,
+     0.188,
+     -0.465
+    ],
+    "max": [
+     0.141,
+     0.26,
+     -0.248
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "crankcase",
+   "label": "Crankcase",
+   "system": "Engine",
+   "node": "crankcase",
+   "node_loaded": "crankcase",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.11,
+     0.179,
+     -0.421
+    ],
+    "max": [
+     0.11,
+     0.421,
+     -0.179
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "cvt_case",
+   "label": "CVT case (belt drive)",
+   "system": "Transmission",
+   "node": "cvt_case",
+   "node_loaded": "cvt_case",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.1,
+     0.19,
+     -0.757
+    ],
+    "max": [
+     0.17,
+     0.43,
+     -0.18
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.768,
+     0.64,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "cylinder",
+   "label": "Cylinder",
+   "system": "Engine",
+   "node": "cylinder",
+   "node_loaded": "cylinder",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.06,
+     0.238,
+     -0.256
+    ],
+    "max": [
+     0.06,
+     0.403,
+     -0.107
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "cylinder_head",
+   "label": "Cylinder head",
+   "system": "Engine",
+   "node": "cylinder_head",
+   "node_loaded": "cylinder_head",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.065,
+     0.25,
+     -0.159
+    ],
+    "max": [
+     0.065,
+     0.42,
+     -0.037
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "dash",
+   "label": "Instrument panel",
+   "system": "Electrical",
+   "node": "dash",
+   "node_loaded": "dash",
+   "moves_with": "steer",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.1,
+     1.082,
+     0.153
+    ],
+    "max": [
+     0.1,
+     1.157,
+     0.27
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "disc_f",
+   "label": "Front brake disc",
+   "system": "Brakes",
+   "node": "disc_f",
+   "node_loaded": "disc_f",
+   "moves_with": "wheel_f",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.056,
+     0.145,
+     0.548
+    ],
+    "max": [
+     0.06,
+     0.365,
+     0.767
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.981,
+     0.196,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "drum_r",
+   "label": "Rear drum brake",
+   "system": "Brakes",
+   "node": "drum_r",
+   "node_loaded": "drum_r",
+   "moves_with": "wheel_r",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.08,
+     0.181,
+     -0.733
+    ],
+    "max": [
+     -0.045,
+     0.331,
+     -0.582
+    ]
+   },
+   "remove": {
+    "dir": [
+     -0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "exhaust",
+   "label": "Exhaust",
+   "system": "Exhaust",
+   "node": "exhaust",
+   "node_loaded": "exhaust",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.231,
+     0.103,
+     -0.934
+    ],
+    "max": [
+     -0.004,
+     0.443,
+     -0.055
+    ]
+   },
+   "remove": {
+    "dir": [
+     -0.768,
+     0.64,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "final_drive",
+   "label": "Final drive gearbox",
+   "system": "Transmission",
+   "node": "final_drive",
+   "node_loaded": "final_drive",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.07,
+     0.176,
+     -0.738
+    ],
+    "max": [
+     0.13,
+     0.336,
+     -0.577
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.768,
+     0.64,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "floor_skirt_left",
+   "label": "Left floor skirt",
+   "system": "Body",
+   "node": "floor_skirt_left",
+   "node_loaded": "floor_skirt_left",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.058,
+     0.131,
+     -0.18
+    ],
+    "max": [
+     0.2,
+     0.23,
+     0.3
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "floor_skirt_right",
+   "label": "Right floor skirt",
+   "system": "Body",
+   "node": "floor_skirt_right",
+   "node_loaded": "floor_skirt_right",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.2,
+     0.131,
+     -0.18
+    ],
+    "max": [
+     -0.058,
+     0.23,
+     0.3
+    ]
+   },
+   "remove": {
+    "dir": [
+     -0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "floorboard",
+   "label": "Floorboard",
+   "system": "Body",
+   "node": "floorboard",
+   "node_loaded": "floorboard",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.19,
+     0.279,
+     -0.169
+    ],
+    "max": [
+     0.19,
+     0.321,
+     0.269
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "footpegs",
+   "label": "Footpegs and rearsets",
+   "system": "Body",
+   "node": "footpegs",
+   "node_loaded": "footpegs",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.25,
+     0.348,
+     -0.27
+    ],
+    "max": [
+     0.25,
+     0.372,
+     -0.21
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "fork",
+   "label": "Front fork",
+   "system": "Suspension",
+   "node": "fork",
+   "node_loaded": "fork",
+   "moves_with": "steer",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.12,
+     0.217,
+     0.216
+    ],
+    "max": [
+     0.12,
+     1.014,
+     0.692
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "frame",
+   "label": "Frame",
+   "system": "Chassis",
+   "node": "frame",
+   "node_loaded": "frame",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.138,
+     0.164,
+     -0.784
+    ],
+    "max": [
+     0.138,
+     0.885,
+     0.435
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "front_cowl",
+   "label": "Front cowl",
+   "system": "Body",
+   "node": "front_cowl",
+   "node_loaded": "front_cowl",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.2,
+     0.34,
+     0.28
+    ],
+    "max": [
+     0.2,
+     0.97,
+     0.58
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "fuel_tank",
+   "label": "Fuel tank (under the floor)",
+   "system": "Air and fuel",
+   "node": "fuel_tank",
+   "node_loaded": "fuel_tank",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.13,
+     0.163,
+     -0.077
+    ],
+    "max": [
+     0.13,
+     0.337,
+     0.277
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "grab_rail",
+   "label": "Grab rail",
+   "system": "Body",
+   "node": "grab_rail",
+   "node_loaded": "grab_rail",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.167,
+     0.788,
+     -0.912
+    ],
+    "max": [
+     0.167,
+     0.843,
+     -0.499
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "handlebar",
+   "label": "Handlebar and controls",
+   "system": "Steering",
+   "node": "handlebar",
+   "node_loaded": "handlebar",
+   "moves_with": "steer",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.361,
+     1.016,
+     0.087
+    ],
+    "max": [
+     0.361,
+     1.079,
+     0.214
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "handlebar_cover",
+   "label": "Handlebar cover",
+   "system": "Body",
+   "node": "handlebar_cover",
+   "node_loaded": "handlebar_cover",
+   "moves_with": "steer",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.19,
+     0.925,
+     0.111
+    ],
+    "max": [
+     0.19,
+     1.115,
+     0.351
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "headlamp",
+   "label": "Headlamp",
+   "system": "Electrical",
+   "node": "headlamp",
+   "node_loaded": "headlamp",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.081,
+     0.767,
+     0.528
+    ],
+    "max": [
+     0.081,
+     0.833,
+     0.582
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "indicators_front",
+   "label": "Front indicators",
+   "system": "Electrical",
+   "node": "indicators_front",
+   "node_loaded": "indicators_front",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.146,
+     0.687,
+     0.454
+    ],
+    "max": [
+     0.146,
+     0.713,
+     0.526
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "indicators_rear",
+   "label": "Rear indicators",
+   "system": "Electrical",
+   "node": "indicators_rear",
+   "node_loaded": "indicators_rear",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.092,
+     0.703,
+     -0.966
+    ],
+    "max": [
+     0.092,
+     0.727,
+     -0.934
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "kick_panel",
+   "label": "Lower panel",
+   "system": "Body",
+   "node": "kick_panel",
+   "node_loaded": "kick_panel",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.15,
+     0.141,
+     -0.194
+    ],
+    "max": [
+     0.15,
+     0.259,
+     -0.146
+    ]
+   },
+   "remove": {
+    "dir": [
+     -0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "leg_shield",
+   "label": "Leg shield",
+   "system": "Body",
+   "node": "leg_shield",
+   "node_loaded": "leg_shield",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.205,
+     0.3,
+     0.26
+    ],
+    "max": [
+     0.205,
+     0.93,
+     0.29
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "mirrors",
+   "label": "Mirrors",
+   "system": "Body",
+   "node": "mirrors",
+   "node_loaded": "mirrors",
+   "moves_with": "steer",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.339,
+     1.073,
+     0.152
+    ],
+    "max": [
+     0.339,
+     1.293,
+     0.203
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "mudguard_front",
+   "label": "Front mudguard",
+   "system": "Body",
+   "node": "mudguard_front",
+   "node_loaded": "mudguard_front",
+   "moves_with": "steer",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.07,
+     0.38,
+     0.404
+    ],
+    "max": [
+     0.07,
+     0.54,
+     0.871
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "number_plate",
+   "label": "Number plate and hanger",
+   "system": "Body",
+   "node": "number_plate",
+   "node_loaded": "number_plate",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.1,
+     0.386,
+     -1.027
+    ],
+    "max": [
+     0.1,
+     0.565,
+     -0.831
+    ]
+   },
+   "remove": {
+    "dir": [
+     -0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "oil_filler",
+   "label": "Oil filler",
+   "system": "Engine",
+   "node": "oil_filler",
+   "node_loaded": "oil_filler",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.137,
+     0.337,
+     -0.192
+    ],
+    "max": [
+     -0.098,
+     0.403,
+     -0.158
+    ]
+   },
+   "remove": {
+    "dir": [
+     -0.768,
+     0.64,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "radiator",
+   "label": "Radiator",
+   "system": "Cooling",
+   "node": "radiator",
+   "node_loaded": "radiator",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.154,
+     0.224,
+     -0.366
+    ],
+    "max": [
+     -0.115,
+     0.396,
+     -0.174
+    ]
+   },
+   "remove": {
+    "dir": [
+     -0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "rear_mudguard",
+   "label": "Rear mudguard",
+   "system": "Body",
+   "node": "rear_mudguard",
+   "node_loaded": "rear_mudguard",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.08,
+     0.126,
+     -0.944
+    ],
+    "max": [
+     0.08,
+     0.528,
+     -0.746
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "rear_shocks",
+   "label": "Rear shock absorbers",
+   "system": "Suspension",
+   "node": "rear_shocks",
+   "node_loaded": "rear_shocks",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.156,
+     0.297,
+     -0.611
+    ],
+    "max": [
+     0.206,
+     0.603,
+     -0.516
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "rim_f",
+   "label": "Front wheel",
+   "system": "Wheels",
+   "node": "rim_f",
+   "node_loaded": "rim_f",
+   "moves_with": "wheel_f",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.04,
+     0.067,
+     0.47
+    ],
+    "max": [
+     0.04,
+     0.443,
+     0.845
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.981,
+     0.196,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "rim_r",
+   "label": "Rear wheel",
+   "system": "Wheels",
+   "node": "rim_r",
+   "node_loaded": "rim_r",
+   "moves_with": "wheel_r",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.048,
+     0.081,
+     -0.833
+    ],
+    "max": [
+     0.048,
+     0.431,
+     -0.482
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.981,
+     0.196,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "seat",
+   "label": "Seat",
+   "system": "Body",
+   "node": "seat",
+   "node_loaded": "seat",
+   "moves_with": "seat_hinge",
+   "representative": false,
+   "opens": true,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.17,
+     0.735,
+     -0.83
+    ],
+    "max": [
+     0.17,
+     0.799,
+     -0.05
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "side_stand",
+   "label": "Side stand",
+   "system": "Chassis",
+   "node": "side_stand",
+   "node_loaded": "side_stand",
+   "moves_with": "stand",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.129,
+     0.18,
+     -0.39
+    ],
+    "max": [
+     0.176,
+     0.238,
+     -0.118
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "spark_plug",
+   "label": "Spark plug",
+   "system": "Electrical",
+   "node": "spark_plug",
+   "node_loaded": "spark_plug",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.012,
+     0.398,
+     -0.105
+    ],
+    "max": [
+     0.012,
+     0.448,
+     -0.071
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "storage_bin",
+   "label": "Storage bin (under the seat)",
+   "system": "Body",
+   "node": "storage_bin",
+   "node_loaded": "storage_bin",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.13,
+     0.498,
+     -0.637
+    ],
+    "max": [
+     0.13,
+     0.752,
+     -0.123
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "tail_cowl",
+   "label": "Tail cowl",
+   "system": "Body",
+   "node": "tail_cowl",
+   "node_loaded": "tail_cowl",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.097,
+     0.6,
+     -0.96
+    ],
+    "max": [
+     0.097,
+     0.79,
+     -0.86
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "tail_lamp",
+   "label": "Tail lamp",
+   "system": "Electrical",
+   "node": "tail_lamp",
+   "node_loaded": "tail_lamp",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.07,
+     0.723,
+     -0.979
+    ],
+    "max": [
+     0.07,
+     0.777,
+     -0.931
+    ]
+   },
+   "remove": {
+    "dir": [
+     -0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "tyre_f",
+   "label": "Front tyre",
+   "system": "Wheels",
+   "node": "tyre_f",
+   "node_loaded": "tyre_f",
+   "moves_with": "wheel_f",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.052,
+     0.0,
+     0.403
+    ],
+    "max": [
+     0.052,
+     0.51,
+     0.912
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.981,
+     0.196,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "tyre_r",
+   "label": "Rear tyre",
+   "system": "Wheels",
+   "node": "tyre_r",
+   "node_loaded": "tyre_r",
+   "moves_with": "wheel_r",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.062,
+     -0.0,
+     -0.914
+    ],
+    "max": [
+     0.062,
+     0.512,
+     -0.401
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.981,
+     0.196,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  },
+  {
+   "id": "windscreen",
+   "label": "Windscreen",
+   "system": "Body",
+   "node": "windscreen",
+   "node_loaded": "windscreen",
+   "moves_with": "body",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.12,
+     0.905,
+     0.43
+    ],
+    "max": [
+     0.12,
+     1.085,
+     0.57
+    ]
+   },
+   "remove": {
+    "dir": [
+     -0.958,
+     0.287,
+     0.0
+    ],
+    "dist": 0.5
+   }
+  }
+ ],
+ "procedures": [
+  {
+   "title": "Pre-ride check (T-CLOCS)",
+   "steps": [
+    {
+     "text": "Tyres and wheels: pressures cold, tread depth across the width, no cuts, bulges or nails; wheels true with no cracks.",
+     "view": "part",
+     "parts": [
+      "tyre_f",
+      "tyre_r",
+      "rim_f",
+      "rim_r"
+     ],
+     "open": []
+    },
+    {
+     "text": "Controls: both brake levers firm and returning; the throttle snaps shut on its own with the bars at full lock both ways.",
+     "view": "part",
+     "parts": [
+      "handlebar"
+     ],
+     "open": []
+    },
+    {
+     "text": "Lights and electrics: headlamp high and low, tail and brake lamp from both levers, all four indicators, horn.",
+     "view": "part",
+     "parts": [
+      "headlamp",
+      "tail_lamp",
+      "indicators_front",
+      "indicators_rear"
+     ],
+     "open": []
+    },
+    {
+     "text": "Oil and coolant: engine oil on the dipstick with the scooter on its centre stand, coolant between the marks.",
+     "view": "part",
+     "parts": [
+      "oil_filler",
+      "radiator",
+      "crankcase"
+     ],
+     "open": []
+    },
+    {
+     "text": "Chassis: fork seals dry, both rear shocks not leaking; the stands spring up on their own.",
+     "view": "part",
+     "parts": [
+      "fork",
+      "rear_shocks",
+      "side_stand",
+      "centre_stand"
+     ],
+     "open": []
+    }
+   ]
+  },
+  {
+   "title": "Brakes",
+   "steps": [
+    {
+     "text": "Front: pads thicker than the wear line, the disc smooth with no deep scoring.",
+     "view": "part",
+     "parts": [
+      "caliper_front",
+      "disc_f"
+     ],
+     "open": []
+    },
+    {
+     "text": "Rear: a drum brake in the hub; the lever's free play within the figure, the wear indicator inside its range.",
+     "view": "part",
+     "parts": [
+      "drum_r"
+     ],
+     "open": []
+    }
+   ]
+  },
+  {
+   "title": "Under the seat and the panels",
+   "steps": [
+    {
+     "text": "Lift the seat: the storage bin is under it; the battery sits behind it, under the tail.",
+     "view": "part",
+     "parts": [
+      "seat",
+      "storage_bin",
+      "battery"
+     ],
+     "open": []
+    },
+    {
+     "text": "The fuel tank lies under the floorboard, between the frame's tubes.",
+     "view": "part",
+     "parts": [
+      "floorboard",
+      "fuel_tank",
+      "frame"
+     ],
+     "open": []
+    },
+    {
+     "text": "The engine and its CVT case form one unit that swings with the rear wheel: the cylinder lies forward, the belt drive runs back in the case on the left.",
+     "view": "part",
+     "parts": [
+      "cylinder",
+      "cylinder_head",
+      "cvt_case",
+      "final_drive"
+     ],
+     "open": []
+    },
+    {
+     "text": "Air comes in through the filter box on top of the case; the exhaust runs under the engine to the silencer on the right.",
+     "view": "part",
+     "parts": [
+      "air_filter",
+      "exhaust"
+     ],
+     "open": []
+    }
+   ]
+  }
+ ],
+ "engine": {
+  "representative": false,
+  "at": "middle",
+  "note": "Modelled in code by the machine: a liquid-cooled single, its cylinder lying forward, driving the rear wheel through a belt CVT in the case on the left; engine and case swing together with the rear wheel (a unit-swing engine).",
+  "real_layout": "A single cylinder lying forward under the seat, driving the rear wheel through a belt CVT; engine and drive swing with the rear wheel."
+ },
+ "notes": [],
+ "credit": {
+  "title": "125 cc scooter",
+  "author": "ExpertCarCheck GLB machine (bikes/scooter.mjs)",
+  "licence": "ExpertCarCheck own work",
+  "url": null,
+  "commercial": true,
+  "line": "Modelled in code by the ExpertCarCheck GLB machine. No maker's model, badge or lettering."
+ },
+ "summary": "A 125 cc scooter modelled in code to a PCX125-style scooter's published sizes. The seat lifts over the storage bin, both stands swing down and fifty parts come off.",
+ "hero": "scooter.webp"
+}

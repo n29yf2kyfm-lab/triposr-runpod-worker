@@ -209,5 +209,307 @@
   "bike": {
    "paint": "#121214"
   }
+ },
+ {
+  "id": "sports-bike",
+  "kind": "motorbike",
+  "body": "supersport",
+  "title": "Supersport motorbike",
+  "summary": "A 600 cc inline-four supersport modelled in code to an R6-style bike's published sizes. Fifty-nine parts come off, from the fairing panels to the chain.",
+  "real_layout": "Inline four across the frame, leaning forward, with the gearbox in the same cases behind the crank; a chain drives the rear wheel.",
+  "bike": {
+   "model": "sports",
+   "paint": "#1b3a8c"
+  },
+  "procedures": [
+   {
+    "title": "Pre-ride check (T-CLOCS)",
+    "steps": [
+     {
+      "text": "Tyres and wheels: pressures cold, tread depth across the width, no cuts, bulges or nails; wheels true with no cracks.",
+      "view": "part",
+      "parts": [
+       "tyre_f",
+       "tyre_r",
+       "rim_f",
+       "rim_r"
+      ],
+      "open": []
+     },
+     {
+      "text": "Controls: levers and pedals move freely and return; the throttle snaps shut on its own with the bars at full lock both ways.",
+      "view": "part",
+      "parts": [
+       "handlebar",
+       "brake_pedal",
+       "gear_lever"
+      ],
+      "open": []
+     },
+     {
+      "text": "Lights and electrics: both headlamps high and low, tail and brake lamp from both brakes, all four indicators, horn.",
+      "view": "part",
+      "parts": [
+       "headlamps",
+       "tail_lamp",
+       "indicators_front",
+       "indicators_rear"
+      ],
+      "open": []
+     },
+     {
+      "text": "Oil and coolant: engine oil level on level ground with the bike upright, no leaks from the cases; coolant between the marks, hoses firm.",
+      "view": "part",
+      "parts": [
+       "crankcase",
+       "sump",
+       "radiator",
+       "coolant_hoses"
+      ],
+      "open": []
+     },
+     {
+      "text": "Chassis: fork seals dry, the shock not leaking; chain slack within the figure, the chain lubed, sprocket teeth not hooked.",
+      "view": "part",
+      "parts": [
+       "fork",
+       "rear_shock",
+       "chain",
+       "sprocket_r",
+       "sprocket_front"
+      ],
+      "open": []
+     },
+     {
+      "text": "Stand: the side stand springs fully up on its own and holds the bike when down.",
+      "view": "part",
+      "parts": [
+       "side_stand"
+      ],
+      "open": []
+     }
+    ]
+   },
+   {
+    "title": "Brakes",
+    "steps": [
+     {
+      "text": "Front: two discs, a radial caliper on each fork leg; pads thicker than the wear line, the discs smooth with no deep scoring or blueing.",
+      "view": "part",
+      "parts": [
+       "caliper_front",
+       "disc_f"
+      ],
+      "open": []
+     },
+     {
+      "text": "Rear: the same check at the rear caliper and disc; the pedal firm, not spongy.",
+      "view": "part",
+      "parts": [
+       "caliper_rear",
+       "disc_r",
+       "brake_pedal"
+      ],
+      "open": []
+     }
+    ]
+   },
+   {
+    "title": "Under the fairing",
+    "steps": [
+     {
+      "text": "Take off the side panels: the radiator sits behind the front wheel, the exhaust headers run down in front of the engine.",
+      "view": "part",
+      "parts": [
+       "fairing_left",
+       "fairing_right",
+       "radiator",
+       "exhaust_headers"
+      ],
+      "open": []
+     },
+     {
+      "text": "Four cylinders in one block lean forward; the head and the cam cover sit on top, a coil on each spark plug.",
+      "view": "part",
+      "parts": [
+       "cylinder_block",
+       "cylinder_head",
+       "cam_cover",
+       "spark_plugs"
+      ],
+      "open": []
+     },
+     {
+      "text": "Air comes in through the airbox under the tank and four throttle bodies into the back of the head.",
+      "view": "part",
+      "parts": [
+       "airbox",
+       "throttle_bodies",
+       "tank"
+      ],
+      "open": []
+     },
+     {
+      "text": "The clutch sits behind its cover on the right, the alternator behind its cover on the left; the oil filter is at the front, low down.",
+      "view": "part",
+      "parts": [
+       "clutch_cover",
+       "alternator_cover",
+       "oil_filter"
+      ],
+      "open": []
+     },
+     {
+      "text": "Under the seat and its side covers: the battery and the subframe.",
+      "view": "part",
+      "parts": [
+       "seat",
+       "side_cover_left",
+       "side_cover_right",
+       "battery",
+       "subframe"
+      ],
+      "open": []
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "scooter",
+  "kind": "motorbike",
+  "body": "scooter",
+  "title": "125 cc scooter",
+  "summary": "A 125 cc scooter modelled in code to a PCX125-style scooter's published sizes. The seat lifts over the storage bin, both stands swing down and fifty parts come off.",
+  "real_layout": "A single cylinder lying forward under the seat, driving the rear wheel through a belt CVT; engine and drive swing with the rear wheel.",
+  "bike": {
+   "model": "scooter",
+   "paint": "#c8ccd2"
+  },
+  "procedures": [
+   {
+    "title": "Pre-ride check (T-CLOCS)",
+    "steps": [
+     {
+      "text": "Tyres and wheels: pressures cold, tread depth across the width, no cuts, bulges or nails; wheels true with no cracks.",
+      "view": "part",
+      "parts": [
+       "tyre_f",
+       "tyre_r",
+       "rim_f",
+       "rim_r"
+      ],
+      "open": []
+     },
+     {
+      "text": "Controls: both brake levers firm and returning; the throttle snaps shut on its own with the bars at full lock both ways.",
+      "view": "part",
+      "parts": [
+       "handlebar"
+      ],
+      "open": []
+     },
+     {
+      "text": "Lights and electrics: headlamp high and low, tail and brake lamp from both levers, all four indicators, horn.",
+      "view": "part",
+      "parts": [
+       "headlamp",
+       "tail_lamp",
+       "indicators_front",
+       "indicators_rear"
+      ],
+      "open": []
+     },
+     {
+      "text": "Oil and coolant: engine oil on the dipstick with the scooter on its centre stand, coolant between the marks.",
+      "view": "part",
+      "parts": [
+       "oil_filler",
+       "radiator",
+       "crankcase"
+      ],
+      "open": []
+     },
+     {
+      "text": "Chassis: fork seals dry, both rear shocks not leaking; the stands spring up on their own.",
+      "view": "part",
+      "parts": [
+       "fork",
+       "rear_shocks",
+       "side_stand",
+       "centre_stand"
+      ],
+      "open": []
+     }
+    ]
+   },
+   {
+    "title": "Brakes",
+    "steps": [
+     {
+      "text": "Front: pads thicker than the wear line, the disc smooth with no deep scoring.",
+      "view": "part",
+      "parts": [
+       "caliper_front",
+       "disc_f"
+      ],
+      "open": []
+     },
+     {
+      "text": "Rear: a drum brake in the hub; the lever's free play within the figure, the wear indicator inside its range.",
+      "view": "part",
+      "parts": [
+       "drum_r"
+      ],
+      "open": []
+     }
+    ]
+   },
+   {
+    "title": "Under the seat and the panels",
+    "steps": [
+     {
+      "text": "Lift the seat: the storage bin is under it; the battery sits behind it, under the tail.",
+      "view": "part",
+      "parts": [
+       "seat",
+       "storage_bin",
+       "battery"
+      ],
+      "open": []
+     },
+     {
+      "text": "The fuel tank lies under the floorboard, between the frame's tubes.",
+      "view": "part",
+      "parts": [
+       "floorboard",
+       "fuel_tank",
+       "frame"
+      ],
+      "open": []
+     },
+     {
+      "text": "The engine and its CVT case form one unit that swings with the rear wheel: the cylinder lies forward, the belt drive runs back in the case on the left.",
+      "view": "part",
+      "parts": [
+       "cylinder",
+       "cylinder_head",
+       "cvt_case",
+       "final_drive"
+      ],
+      "open": []
+     },
+     {
+      "text": "Air comes in through the filter box on top of the case; the exhaust runs under the engine to the silencer on the right.",
+      "view": "part",
+      "parts": [
+       "air_filter",
+       "exhaust"
+      ],
+      "open": []
+     }
+    ]
+   }
+  ]
  }
 ]

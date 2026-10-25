@@ -21,9 +21,7 @@
 // ExpertCarCheck. Proprietary: see ../LICENSE.
 import * as THREE from 'three';
 import { ParametricGeometry } from 'three/addons/geometries/ParametricGeometry.js';
-import { mergeGeometries, mergeVertices } from 'three/addons/utils/BufferGeometryUtils.js';
-import { Document, NodeIO } from '@gltf-transform/core';
-import { KHRMaterialsClearcoat, KHRMaterialsEmissiveStrength } from '@gltf-transform/extensions';
+import { cli, V, UPY, rod, tube, ball, aroundX, roundedBox, hex, writeBike } from './kit.mjs';
 
 // ── the bike's figures ───────────────────────────────────────────────────
 // a 2018-on 114 cu in heavy cruiser of the Fat Boy kind, from the maker's
@@ -34,11 +32,7 @@ export const FATBOY = {
   seat: 0.675, rim: 18, front_tyre: [160, 60], rear_tyre: [240, 40],
 };
 
-const args = Object.fromEntries(process.argv.slice(3).filter(a => a.startsWith('--')).map(a => {
-  const [k, ...v] = a.slice(2).split('='); return [k, v.join('=') || true];
-}));
-const OUT = process.argv[2];
-if (!OUT) { console.error('usage: node cruiser.mjs out.glb [--paint=#hex] [--name=...]'); process.exit(2); }
+const { out: OUT, args } = cli('usage: node cruiser.mjs out.glb [--paint=#hex] [--name=...] [--parts]');
 const B = { ...FATBOY, ...(args.name ? { name: args.name } : {}) };
 
 // tyre sizes to metres: radius, width
@@ -62,7 +56,6 @@ const S_CLAMP0 = (HEAD.y - AF.y) / U.y, S_CLAMP1 = (axisAt(T_HEAD1).y - AF.y) / 
 const FORK_X = 0.118;
 
 // ── materials ────────────────────────────────────────────────────────────
-const hex = h => { const c = new THREE.Color(h); return [c.r, c.g, c.b]; };   // sRGB in, linear out
 const MATS = {
   paint: { color: hex(args.paint || '#121214'), metal: 0.0, rough: 0.28, clearcoat: 1 },
   chrome: { color: [0.92, 0.92, 0.93], metal: 1, rough: 0.07 },
@@ -82,38 +75,6 @@ const MATS = {
 const parts = [];
 let SUB = null;                                  // the named piece being modelled (--parts)
 const add = (part, mat, g) => { parts.push([part, mat, g, SUB]); return g; };
-const V = (x, y, z) => new THREE.Vector3(x, y, z);
-const UPY = V(0, 1, 0);
-
-function along(g, p0, p1) {                       // a Y-axis primitive laid from p0 to p1
-  const d = p1.clone().sub(p0), L = d.length();
-  g.scale(1, L / (g.userData.h || 1), 1);
-  g.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(UPY, d.normalize()));
-  g.translate(...p0.clone().add(p1).multiplyScalar(0.5).toArray());
-  return g;
-}
-const rod = (p0, p1, r, seg = 20, r1 = r) => {
-  const g = new THREE.CylinderGeometry(r1, r, 1, seg, 1, false); g.userData.h = 1; return along(g, p0, p1);
-};
-const tube = (pts, r, seg = 64, rad = 14) => new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), seg, r, rad, false);
-const ball = (p, r, sx = 1, sy = 1, sz = 1) => { const g = new THREE.SphereGeometry(r, 24, 16); g.scale(sx, sy, sz); g.translate(p.x, p.y, p.z); return g; };
-// a body of revolution about the X axis (the axles), from a (radius, along-x) profile
-function aroundX(profile, cx, cy, cz, seg = 72, phi0 = 0, phiL = Math.PI * 2) {
-  const g = new THREE.LatheGeometry(profile.map(([r, a]) => new THREE.Vector2(r, a)), seg, phi0, phiL);
-  g.rotateZ(-Math.PI / 2);                        // lathe axis Y -> X
-  g.translate(cx, cy, cz);
-  return g;
-}
-function roundedBox(w, h, d, r, at) {             // w along x, h along y, d along z
-  const s = new THREE.Shape(), x = d / 2 - r, y = h / 2 - r;
-  s.moveTo(-x, -h / 2); s.lineTo(x, -h / 2); s.quadraticCurveTo(d / 2, -h / 2, d / 2, -y);
-  s.lineTo(d / 2, y); s.quadraticCurveTo(d / 2, h / 2, x, h / 2); s.lineTo(-x, h / 2);
-  s.quadraticCurveTo(-d / 2, h / 2, -d / 2, y); s.lineTo(-d / 2, -y); s.quadraticCurveTo(-d / 2, -h / 2, -x, -h / 2);
-  const g = new THREE.ExtrudeGeometry(s, { depth: w - 2 * r, bevelEnabled: true, bevelThickness: r, bevelSize: r * 0.9, bevelSegments: 4, curveSegments: 10 });
-  g.translate(0, 0, -(w - 2 * r) / 2); g.rotateY(Math.PI / 2);      // extrusion along x
-  g.translate(at.x, at.y, at.z);
-  return g;
-}
 
 // ── wheels ───────────────────────────────────────────────────────────────
 function wheel(part, A, T, rimHalf, side) {
@@ -402,92 +363,27 @@ add('stand', 'chrome', rod(STAND_PIVOT.clone().add(V(-0.02, 0, 0)), STAND_PIVOT.
 const PIVOT = { steer: axisAt(T_HEAD0 + 0.08), wheel_f: AF.clone(), wheel_r: AR.clone(), stand: STAND_PIVOT.clone() };
 const PARENT = { steer: null, wheel_f: 'steer', wheel_r: null, stand: null };
 
-const doc = new Document();
-const buf = doc.createBuffer();
-const clear = doc.createExtension(KHRMaterialsClearcoat);
-const glow = doc.createExtension(KHRMaterialsEmissiveStrength);
-const mats = {};
-for (const [k, m] of Object.entries(MATS)) {
-  const mt = doc.createMaterial(k).setBaseColorFactor([...m.color, 1]).setMetallicFactor(m.metal).setRoughnessFactor(m.rough);
-  if (k === 'mirror' || k === 'lamp' || k === 'red_lens' || k === 'amber_lens') mt.setDoubleSided(true);
-  if (k === 'paint' || k === 'leather') mt.setDoubleSided(true);
-  if (m.clearcoat) mt.setExtension('KHR_materials_clearcoat', clear.createClearcoat().setClearcoatFactor(1).setClearcoatRoughnessFactor(0.04));
-  if (m.emissive) {
-    mt.setEmissiveFactor(m.emissive);
-    if (m.strength > 1) mt.setExtension('KHR_materials_emissive_strength', glow.createEmissiveStrength().setEmissiveStrength(m.strength));
-  }
-  mats[k] = mt;
-}
-function clean(g) {                                   // position + normal only, indexed
-  let x = g.index ? g : mergeVertices(g, 1e-6);
-  for (const a of Object.keys(x.attributes)) if (a !== 'position' && a !== 'normal') x.deleteAttribute(a);
-  if (!x.attributes.normal) x.computeVertexNormals();
-  return x;
-}
-const scene = doc.createScene('cruiser');
-const root = doc.createNode('cruiser').setExtras({
-  kind: 'motorbike', model: B.name, wheelbase_m: B.wheelbase, length_m: B.length, rake_deg: B.rake, trail_m: B.trail,
-  tyres: [`${B.front_tyre[0]}/${B.front_tyre[1]}R${B.rim}`, `${B.rear_tyre[0]}/${B.rear_tyre[1]}R${B.rim}`],
-  clips: ['wheels_spin', 'steer_left', 'steer_right', 'stand_down'] });
-scene.addChild(root);
-const nodes = { body: root };
-const worldPivot = p => PIVOT[p] || V(0, 0, 0);
-for (const p of ['steer', 'wheel_r', 'wheel_f', 'stand']) {
-  const parent = PARENT[p] ? nodes[PARENT[p]] : root;
-  const rel = worldPivot(p).clone().sub(PARENT[p] ? worldPivot(PARENT[p]) : V(0, 0, 0));
-  const n = doc.createNode(p).setTranslation(rel.toArray());
-  parent.addChild(n);
-  nodes[p] = n;
-}
-let tris = 0;
 const SPLIT = !!args.parts;
 // a piece's node name: the wheels' tyre, rim, disc and pulley take the end
 // they belong to (tyre_f, rim_r); every other piece is named once
 const pieceName = (part, sub) => part.startsWith('wheel_') ? `${sub}_${part.slice(-1)}` : sub;
-for (const part of ['body', 'steer', 'wheel_f', 'wheel_r', 'stand']) {
-  const subs = SPLIT ? [...new Set(parts.filter(p => p[0] === part).map(p => p[3]))] : [undefined];
-  for (const sub of subs) {
-  const byMat = {};
-  for (const [pp, m, g, ss] of parts) if (pp === part && (!SPLIT || ss === sub)) (byMat[m] ||= []).push(clean(g));
-  const off = part === 'body' ? V(0, 0, 0) : worldPivot(part);
-  const name = SPLIT ? pieceName(part, sub || part) : part;
-  const mesh = doc.createMesh(name);
-  for (const [m, gs] of Object.entries(byMat)) {
-    const g = mergeGeometries(gs, false); g.translate(-off.x, -off.y, -off.z);
-    const pos = doc.createAccessor().setArray(new Float32Array(g.attributes.position.array)).setType('VEC3').setBuffer(buf);
-    const nor = doc.createAccessor().setArray(new Float32Array(g.attributes.normal.array)).setType('VEC3').setBuffer(buf);
-    const idx = doc.createAccessor().setArray(new Uint32Array(g.index.array)).setType('SCALAR').setBuffer(buf);
-    tris += g.index.count / 3;
-    mesh.addPrimitive(doc.createPrimitive().setAttribute('POSITION', pos).setAttribute('NORMAL', nor).setIndices(idx).setMaterial(mats[m]));
-  }
-  const holder = SPLIT ? doc.createNode(name) : part === 'body' ? doc.createNode('body') : doc.createNode(part + '_mesh');
-  holder.setMesh(mesh);
-  if (SPLIT) holder.setExtras({ moves_with: part });
-  (part === 'body' ? root : nodes[part]).addChild(holder);
-  }
-}
-
-// ── clips ────────────────────────────────────────────────────────────────
-const q = (axis, deg) => new THREE.Quaternion().setFromAxisAngle(axis.clone().normalize(), THREE.MathUtils.degToRad(deg)).toArray();
-function clip(name, channels) {
-  const a = doc.createAnimation(name);
-  for (const [node, times, quats] of channels) {
-    const s = doc.createAnimationSampler()
-      .setInput(doc.createAccessor().setArray(new Float32Array(times)).setType('SCALAR').setBuffer(buf))
-      .setOutput(doc.createAccessor().setArray(new Float32Array(quats.flat())).setType('VEC4').setBuffer(buf))
-      .setInterpolation('LINEAR');
-    a.addSampler(s).addChannel(doc.createAnimationChannel().setTargetNode(node).setTargetPath('rotation').setSampler(s));
-  }
-}
-const X = V(1, 0, 0), spin = [0, 90, 180, 270, 360].map(d => q(X, d));
-clip('wheels_spin', [[nodes.wheel_f, [0, 0.25, 0.5, 0.75, 1], spin], [nodes.wheel_r, [0, 0.25, 0.5, 0.75, 1], spin]]);
-clip('steer_left', [[nodes.steer, [0, 1], [q(U, 0), q(U, 32)]]]);
-clip('steer_right', [[nodes.steer, [0, 1], [q(U, 0), q(U, -32)]]]);
-const sq = new THREE.Quaternion().setFromUnitVectors(STAND_FOLDED, STAND_DOWN).toArray();
-clip('stand_down', [[nodes.stand, [0, 1], [[0, 0, 0, 1], sq]]]);
-
-doc.getRoot().getAsset().copyright = `${B.name}: modelled in code by the ExpertCarCheck GLB machine (bikes/cruiser.mjs), to the published sizes. No maker's model, badge or lettering.`;
-await new NodeIO().registerExtensions([KHRMaterialsClearcoat, KHRMaterialsEmissiveStrength]).write(OUT, doc);
+const X = V(1, 0, 0);
+const { tris } = await writeBike({
+  out: OUT, sceneName: 'cruiser', mats: MATS, pieces: parts, pivots: PIVOT, parents: PARENT, split: SPLIT, pieceName,
+  extras: { kind: 'motorbike', model: B.name, wheelbase_m: B.wheelbase, length_m: B.length, rake_deg: B.rake, trail_m: B.trail,
+    tyres: [`${B.front_tyre[0]}/${B.front_tyre[1]}R${B.rim}`, `${B.rear_tyre[0]}/${B.rear_tyre[1]}R${B.rim}`],
+    clips: ['wheels_spin', 'steer_left', 'steer_right', 'stand_down'] },
+  order: ['steer', 'wheel_r', 'wheel_f', 'stand'], meshOrder: ['body', 'steer', 'wheel_f', 'wheel_r', 'stand'],
+  clips: (nodes, clip, q) => {
+    const spin = [0, 90, 180, 270, 360].map(d => q(X, d));
+    clip('wheels_spin', [[nodes.wheel_f, [0, 0.25, 0.5, 0.75, 1], spin], [nodes.wheel_r, [0, 0.25, 0.5, 0.75, 1], spin]]);
+    clip('steer_left', [[nodes.steer, [0, 1], [q(U, 0), q(U, 32)]]]);
+    clip('steer_right', [[nodes.steer, [0, 1], [q(U, 0), q(U, -32)]]]);
+    const sq = new THREE.Quaternion().setFromUnitVectors(STAND_FOLDED, STAND_DOWN).toArray();
+    clip('stand_down', [[nodes.stand, [0, 1], [[0, 0, 0, 1], sq]]]);
+  },
+  copyright: `${B.name}: modelled in code by the ExpertCarCheck GLB machine (bikes/cruiser.mjs), to the published sizes. No maker's model, badge or lettering.`,
+});
 const L = Math.max(AF.z + TF.R, 0) - Math.min(-1.215, AR.z - TR.R);
 console.log(JSON.stringify({ wrote: OUT, triangles: Math.round(tris), parts: [...new Set(parts.map(p => p[0]))],
   pieces: SPLIT ? [...new Set(parts.map(p => pieceName(p[0], p[3] || p[0])))] : undefined,

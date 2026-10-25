@@ -648,6 +648,20 @@ footboards, pedals, both calipers, discs, rims and tyres (40 in all, each
 with `extras.moves_with`). The motion is unchanged, and without the switch
 the file is byte-identical to before.
 
+Two more are built the same way, from what the bikes share in `bikes/kit.mjs`
+(the geometry helpers, the cast wheel and tyre, the writer; the cruiser's
+output is byte-identical on it):
+
+| | `bikes/sports.mjs` | `bikes/scooter.mjs` |
+| --- | --- | --- |
+| Kind | 600 cc inline-four supersport (the `SUPERSPORT` preset, an R6-style 600) | 125 cc scooter (the `SCOOTER125` preset, a PCX125-style) |
+| Sizes | 1,375 mm wheelbase, 2,040 mm long, 24 deg rake, 97 mm trail (33 mm fork offset), 850 mm seat, 120/70ZR17 and 180/55ZR17 | 1,315 mm wheelbase, 1,935 mm long, 27 deg rake, 86 mm trail (39 mm offset), 764 mm seat, 110/70-14 and 130/70-13 |
+| Moves | `wheels_spin`, `steer_left` / `steer_right` (28 deg; the fairing stays), `stand_down` | the same (35 deg; the bar cover steers), `centre_stand_down`, `seat_open` (the seat lifts 70 deg on its front hinge, `seat_hinge`, over the storage bin) |
+| Pieces (`--parts`) | 59: twin-spar frame, subframe, braced swingarm, monoshock, upside-down fork, twin discs and radial calipers, the four's crankcase, block, head, cam cover, coils, clutch and alternator covers, oil filter, sump, throttle bodies, airbox, radiator and hoses, four headers and the silencer, chain and sprockets, upper fairing, both lowers, belly pan, screen, headlamps, dash, tank, seats, side covers, tail, battery ... | 50: step-through frame, front cowl, leg shield, floorboard, the fuel tank under it, floor skirts, both body panels, tail cowl, storage bin, the single's crankcase, cylinder, head, cam cover, CVT case, final drive, air filter, radiator, exhaust, twin shocks, disc and caliper, rear drum, bar cover, dash, both stands, seat ... |
+
+    node pipeline/realcar/bikes/sports.mjs sports.glb --parts       # validator clean
+    node pipeline/realcar/bikes/scooter.mjs scooter.glb --parts     # validator clean
+
 ## App packs
 
 `app_pack.py` turns builds into what an app loads: per vehicle a plain GLB

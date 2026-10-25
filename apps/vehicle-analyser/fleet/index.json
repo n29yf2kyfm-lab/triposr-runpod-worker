@@ -180,6 +180,36 @@
    "parts": 40,
    "opens": [],
    "credit": "Modelled in code by the ExpertCarCheck GLB machine. No maker's model, badge or lettering."
+  },
+  {
+   "id": "sports-bike",
+   "title": "Supersport motorbike",
+   "kind": "motorbike",
+   "body": "supersport",
+   "glb": "sports-bike.glb",
+   "json": "sports-bike.json",
+   "bytes": 1780336,
+   "hero": "sports-bike.webp",
+   "summary": "A 600 cc inline-four supersport modelled in code to an R6-style bike's published sizes. Fifty-nine parts come off, from the fairing panels to the chain.",
+   "parts": 59,
+   "opens": [],
+   "credit": "Modelled in code by the ExpertCarCheck GLB machine. No maker's model, badge or lettering."
+  },
+  {
+   "id": "scooter",
+   "title": "125 cc scooter",
+   "kind": "motorbike",
+   "body": "scooter",
+   "glb": "scooter.glb",
+   "json": "scooter.json",
+   "bytes": 840640,
+   "hero": "scooter.webp",
+   "summary": "A 125 cc scooter modelled in code to a PCX125-style scooter's published sizes. The seat lifts over the storage bin, both stands swing down and fifty parts come off.",
+   "parts": 50,
+   "opens": [
+    "seat"
+   ],
+   "credit": "Modelled in code by the ExpertCarCheck GLB machine. No maker's model, badge or lettering."
   }
  ]
 }

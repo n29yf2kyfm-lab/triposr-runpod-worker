@@ -21,7 +21,7 @@ From the repository root, with the machine set up (`GLBMACHINE_HOME` if used):
     python3 pipeline/realcar/app_pack.py --heroes apps/vehicle-analyser/fleet
 
 The first builds every vehicle through `glbmachine.py car` (seconds each for
-cars rigged before) and the bike with `bikes/cruiser.mjs --parts`, and
+cars rigged before) and the bikes with `bikes/<model>.mjs --parts`, and
 writes the files. Rebuilt from the same spec, the vehicle files are the same
 and the GLBs byte-identical. The second renders a studio picture of each
 (headless Chromium); the third crops them to WebP.

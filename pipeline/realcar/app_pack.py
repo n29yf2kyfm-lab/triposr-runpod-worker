@@ -10,12 +10,14 @@ come off and which way, where each part sits, who made the model) as data.
 
 fleet.json lists the vehicles. Each names what to build, the way the user
 would ask for it ("request", which this runs through `glbmachine.py car`), or
-a bike modelled in code ("bike", built with bikes/cruiser.mjs --parts), or a
-file already made ("answer": the JSON the machine printed; "glb"):
+a bike modelled in code ("bike": its model, built with bikes/<model>.mjs
+--parts: cruiser, sports or scooter), or a file already made ("answer": the
+JSON the machine printed; "glb"):
 
     [{"id": "volkswagen-golf-2017", "request": "Volkswagen Golf 2017 red",
       "kind": "car", "body": "hatchback", "real_layout": "..."},
-     {"id": "cruiser", "bike": {"paint": "#121214"}, "kind": "motorbike", ...}]
+     {"id": "cruiser", "bike": {"paint": "#121214"}, "kind": "motorbike", ...},
+     {"id": "scooter", "bike": {"model": "scooter"}, "kind": "motorbike", ...}]
 
 It writes OUT_DIR/<id>.glb, OUT_DIR/<id>.json and OUT_DIR/index.json. Then
 
@@ -91,7 +93,38 @@ BIKE_PARTS = {
     "tyre_f": ("Front tyre", "Wheels"), "tyre_r": ("Rear tyre", "Wheels"),
     "rim_f": ("Front wheel", "Wheels"), "rim_r": ("Rear wheel", "Wheels"),
     "side_stand": ("Side stand", "Chassis"),
+    # the sports bike's (bikes/sports.mjs)
+    "subframe": ("Rear subframe", "Chassis"), "rear_shock": ("Rear shock absorber (monoshock)", "Suspension"),
+    "sump": ("Oil sump", "Engine"), "cylinder_block": ("Cylinder block", "Engine"), "cylinder_head": ("Cylinder head", "Engine"),
+    "cam_cover": ("Cam cover", "Engine"), "clutch_cover": ("Clutch cover", "Transmission"),
+    "alternator_cover": ("Alternator cover", "Electrical"), "oil_filter": ("Oil filter", "Engine"),
+    "sprocket_front": ("Front sprocket and cover", "Transmission"), "sprocket_r": ("Rear sprocket", "Transmission"),
+    "chain": ("Drive chain", "Transmission"), "throttle_bodies": ("Throttle bodies", "Air and fuel"),
+    "airbox": ("Airbox", "Air and fuel"), "radiator": ("Radiator", "Cooling"), "coolant_hoses": ("Coolant hoses", "Cooling"),
+    "exhaust_headers": ("Exhaust headers", "Exhaust"), "silencer": ("Silencer", "Exhaust"),
+    "fairing_upper": ("Upper fairing", "Body"), "fairing_left": ("Left fairing panel", "Body"),
+    "fairing_right": ("Right fairing panel", "Body"), "belly_pan": ("Belly pan", "Body"), "windscreen": ("Windscreen", "Body"),
+    "headlamps": ("Headlamps", "Electrical"), "dash": ("Instrument panel", "Electrical"), "tail_unit": ("Tail unit", "Body"),
+    "pillion_seat": ("Pillion seat", "Body"), "side_cover_left": ("Left side cover", "Body"),
+    "side_cover_right": ("Right side cover", "Body"), "number_plate": ("Number plate and hanger", "Body"),
+    "hugger": ("Rear hugger", "Body"), "footpegs": ("Footpegs and rearsets", "Body"), "battery": ("Battery", "Electrical"),
+    # the scooter's (bikes/scooter.mjs)
+    "drum_r": ("Rear drum brake", "Brakes"), "handlebar_cover": ("Handlebar cover", "Body"), "cylinder": ("Cylinder", "Engine"),
+    "spark_plug": ("Spark plug", "Electrical"), "cvt_case": ("CVT case (belt drive)", "Transmission"),
+    "final_drive": ("Final drive gearbox", "Transmission"), "air_filter": ("Air filter box", "Air and fuel"),
+    "oil_filler": ("Oil filler", "Engine"), "front_cowl": ("Front cowl", "Body"), "leg_shield": ("Leg shield", "Body"),
+    "floorboard": ("Floorboard", "Body"), "fuel_tank": ("Fuel tank (under the floor)", "Air and fuel"),
+    "floor_skirt_left": ("Left floor skirt", "Body"), "floor_skirt_right": ("Right floor skirt", "Body"),
+    "body_left": ("Left body panel", "Body"), "body_right": ("Right body panel", "Body"), "tail_cowl": ("Tail cowl", "Body"),
+    "storage_bin": ("Storage bin (under the seat)", "Body"), "grab_rail": ("Grab rail", "Body"),
+    "rear_mudguard": ("Rear mudguard", "Body"), "kick_panel": ("Lower panel", "Body"), "centre_stand": ("Centre stand", "Chassis"),
 }
+# the cruiser's own words (its file carries none: it is kept as it was built)
+CRUISER_NOTE = ("Modelled in code by the machine: a 45-degree air-cooled pushrod V-twin with "
+                "a separate gearbox, a primary drive on the left and a belt final drive.")
+CRUISER_PIVOTS = {"steer": "the fork, wheel, lamp and bars turn about the raked steering axis",
+                  "wheel_f": "the front wheel turns on its axle", "wheel_r": "the rear wheel turns on its axle",
+                  "stand": "the side stand swings down"}
 
 
 def loader_name(name):
@@ -385,28 +418,34 @@ def bike_entry(spec, out_dir):
         else:
             d = [side * 1.0, 0.3, 0.0]
         parts.append({"id": pid, "label": label, "system": system, "node": pid, "node_loaded": loader_name(pid),
-                      "moves_with": moves, "representative": False, "opens": False, "removable": True,
+                      "moves_with": moves, "representative": False, "opens": bool(moves and moves.endswith("_hinge")),
+                      "removable": True,
                       "box": {"min": _r(lo), "max": _r(hi)}, "remove": {"dir": unit(d), "dist": 0.5}})
     vid = spec["id"]
     open(os.path.join(out_dir, f"{vid}.glb"), "wb").write(glb)
+    ex = j["nodes"][j["scenes"][j.get("scene", 0)]["nodes"][0]].get("extras") or {}
+    gen = ex.get("generator") or "bikes/cruiser.mjs"
+    # a hinged piece (the scooter's seat): its pivot node, as a car's
+    hinges = []
+    for i, n in enumerate(j["nodes"]):
+        if n.get("name", "").endswith("_hinge") and "axis" in (n.get("extras") or {}):
+            pid = n["name"][:-len("_hinge")]
+            clip = f"{pid}_open" if any(a.get("name") == f"{pid}_open" for a in j.get("animations", [])) else None
+            hinges.append({"part": pid, "node": n["name"], "node_loaded": loader_name(n["name"]), "pivot": _r(world(i)[:3, 3]),
+                           "axis": n["extras"]["axis"], "open_deg": n["extras"]["open_deg"], "clip": clip})
     return {
         "schema": SCHEMA, "id": vid, "title": spec.get("title") or "Heavy cruiser motorbike",
         "kind": "motorbike", "body": spec.get("body") or "cruiser", "glb": f"{vid}.glb", "bytes": len(glb),
         "frame": "metres; +Y up, nose +Z, the rider's left +X; ground at y = 0",
         "box": {"min": _r(lo_all), "max": _r(hi_all)},
         "paint": {"hex": spec.get("paint"), "materials": ["paint"]},
-        "hinges": [], "clips": [a.get("name") for a in j.get("animations", [])],
-        "pivots": {n: {"node": n, "moves": m} for n, m in
-                   (("steer", "the fork, wheel, lamp and bars turn about the raked steering axis"),
-                    ("wheel_f", "the front wheel turns on its axle"), ("wheel_r", "the rear wheel turns on its axle"),
-                    ("stand", "the side stand swings down"))},
+        "hinges": hinges, "clips": [a.get("name") for a in j.get("animations", [])],
+        "pivots": {n: {"node": n, "moves": m} for n, m in (ex.get("pivots") or CRUISER_PIVOTS).items()},
         "parts": parts, "procedures": spec.get("procedures", []),
-        "engine": {"representative": False, "at": "middle",
-                   "note": "Modelled in code by the machine: a 45-degree air-cooled pushrod V-twin with "
-                           "a separate gearbox, a primary drive on the left and a belt final drive.",
+        "engine": {"representative": False, "at": "middle", "note": ex.get("engine_note") or CRUISER_NOTE,
                    "real_layout": spec.get("real_layout")},
         "notes": spec.get("notes", []),
-        "credit": {"title": spec.get("title"), "author": "ExpertCarCheck GLB machine (bikes/cruiser.mjs)",
+        "credit": {"title": spec.get("title"), "author": f"ExpertCarCheck GLB machine ({gen})",
                    "licence": "ExpertCarCheck own work", "url": None, "commercial": True,
                    "line": "Modelled in code by the ExpertCarCheck GLB machine. No maker's model, badge or lettering."},
     }
@@ -429,8 +468,9 @@ def build(spec, work):
         spec["answer"] = path
     elif spec.get("bike") is not None:
         raw, web = os.path.join(work, f"{spec['id']}_raw.glb"), os.path.join(work, f"{spec['id']}.glb")
-        paint = (spec["bike"] or {}).get("paint") or "#121214"
-        subprocess.run(["node", os.path.join(HERE, "bikes", "cruiser.mjs"), raw, f"--paint={paint}", "--parts"],
+        model = (spec["bike"] or {}).get("model") or "cruiser"         # bikes/<model>.mjs
+        paint = (spec["bike"] or {}).get("paint") or {"cruiser": "#121214", "sports": "#1b3a8c", "scooter": "#c8ccd2"}.get(model)
+        subprocess.run(["node", os.path.join(HERE, "bikes", f"{model}.mjs"), raw, f"--paint={paint}", "--parts"],
                        check=True, capture_output=True, timeout=300)
         subprocess.run(["node", os.path.join(HERE, "encode.mjs"), raw, web], check=True, capture_output=True, timeout=300)
         spec.setdefault("paint", paint)
