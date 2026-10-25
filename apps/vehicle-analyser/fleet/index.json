@@ -111,16 +111,18 @@
    "body": "panel van",
    "glb": "renault-master.glb",
    "json": "renault-master.json",
-   "bytes": 6741480,
+   "bytes": 6759496,
    "hero": "renault-master.webp",
-   "summary": "Large panel van with barn doors at the back, each hinged at its outer edge.",
-   "parts": 67,
+   "summary": "Large panel van: hinged cab doors, a sliding door on each side and barn doors at the back, each hinged at its outer edge.",
+   "parts": 69,
    "opens": [
     "bonnet",
     "door_bl",
     "door_br",
     "door_fl",
-    "door_fr"
+    "door_fr",
+    "door_rl",
+    "door_rr"
    ],
    "credit": "“Renault Master Panel Van”, CC BY, https://sketchfab.com/3d-models/b2148d8984144f1a8879ca4352bfccc9"
   },
@@ -131,7 +133,7 @@
    "body": "small panel van",
    "glb": "nissan-nv200-2010.glb",
    "json": "nissan-nv200-2010.json",
-   "bytes": 11457744,
+   "bytes": 11448492,
    "hero": "nissan-nv200-2010.webp",
    "summary": "Small panel van: a sliding door on each side and two barn doors at the back.",
    "parts": 69,
@@ -166,6 +168,49 @@
     "door_rr"
    ],
    "credit": "“Mercedes Vito Utility Car” by solid3DDD, CC BY, https://sketchfab.com/3d-models/fe704a2aa87a4921990d4973a6eef36d"
+  },
+  {
+   "id": "mercedes-benz-sprinter-2019",
+   "title": "Mercedes-Benz Sprinter 2019",
+   "kind": "van",
+   "body": "large van",
+   "glb": "mercedes-benz-sprinter-2019.glb",
+   "json": "mercedes-benz-sprinter-2019.json",
+   "bytes": 9414600,
+   "hero": "mercedes-benz-sprinter-2019.webp",
+   "summary": "Large van: hinged cab doors, a sliding door on each side and two barn doors at the back.",
+   "parts": 69,
+   "opens": [
+    "bonnet",
+    "door_bl",
+    "door_br",
+    "door_fl",
+    "door_fr",
+    "door_rl",
+    "door_rr"
+   ],
+   "credit": "“2019 Mercedes-Benz Sprinter”, CC BY, https://sketchfab.com/3d-models/5788a290ddb5483fbbd5831aeef829a1"
+  },
+  {
+   "id": "volkswagen-id-buzz",
+   "title": "Volkswagen ID. Buzz",
+   "kind": "van",
+   "body": "electric people carrier",
+   "glb": "volkswagen-id-buzz.glb",
+   "json": "volkswagen-id-buzz.json",
+   "bytes": 7685676,
+   "hero": "volkswagen-id-buzz.webp",
+   "summary": "Electric people carrier: hinged front doors, a sliding door on each side and a tailgate.",
+   "parts": 11,
+   "opens": [
+    "bonnet",
+    "door_fl",
+    "door_fr",
+    "door_rl",
+    "door_rr",
+    "tailgate"
+   ],
+   "credit": "“2023 Volkswagen ID Buzz”, CC BY, https://sketchfab.com/3d-models/e9fa6481f6b042129b811a263199bef9"
   },
   {
    "id": "cruiser",

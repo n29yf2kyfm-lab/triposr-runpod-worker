@@ -1,0 +1,2530 @@
+{
+ "schema": "expertcarcheck.vehicle/1",
+ "id": "mercedes-benz-sprinter-2019",
+ "title": "Mercedes-Benz Sprinter 2019",
+ "kind": "van",
+ "body": "large van",
+ "machine_key": "car-mercedes-benz-sprinter-v1",
+ "glb": "mercedes-benz-sprinter-2019.glb",
+ "bytes": 9414600,
+ "frame": "metres; +Y up, nose +Z, the vehicle's left +X; ground at y = 0",
+ "box": {
+  "min": [
+   -1.058,
+   -0.0,
+   -3.262
+  ],
+  "max": [
+   1.057,
+   2.437,
+   2.81
+  ]
+ },
+ "paint": {
+  "hex": null,
+  "finish": null,
+  "materials": [
+   "CarPaint"
+  ],
+  "wheel_materials": [
+   "Black2",
+   "CarPaint"
+  ],
+  "caliper_materials": []
+ },
+ "hinges": [
+  {
+   "part": "bonnet",
+   "node": "bonnet_hinge",
+   "node_loaded": "bonnet_hinge",
+   "pivot": [
+    0.0,
+    1.293,
+    1.944
+   ],
+   "axis": [
+    1,
+    0,
+    0
+   ],
+   "open_deg": -55,
+   "clip": "bonnet_open"
+  },
+  {
+   "part": "door_bl",
+   "node": "door_bl_hinge",
+   "node_loaded": "door_bl_hinge",
+   "pivot": [
+    0.846,
+    1.383,
+    -3.012
+   ],
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "open_deg": -95,
+   "clip": "door_bl_open"
+  },
+  {
+   "part": "door_br",
+   "node": "door_br_hinge",
+   "node_loaded": "door_br_hinge",
+   "pivot": [
+    -0.846,
+    1.383,
+    -3.015
+   ],
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "open_deg": 95,
+   "clip": "door_br_open"
+  },
+  {
+   "part": "door_fl",
+   "node": "door_fl_hinge",
+   "node_loaded": "door_fl_hinge",
+   "pivot": [
+    0.869,
+    1.144,
+    1.683
+   ],
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "open_deg": -65,
+   "clip": "door_fl_open"
+  },
+  {
+   "part": "door_fr",
+   "node": "door_fr_hinge",
+   "node_loaded": "door_fr_hinge",
+   "pivot": [
+    -0.87,
+    1.144,
+    1.671
+   ],
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "open_deg": 65,
+   "clip": "door_fr_open"
+  },
+  {
+   "part": "door_rl",
+   "node": "door_rl_hinge",
+   "node_loaded": "door_rl_hinge",
+   "pivot": [
+    0.86,
+    1.31,
+    0.627
+   ],
+   "type": "slide",
+   "slide": {
+    "out_x": 0.07,
+    "back_z": -1.134
+   },
+   "clip": "door_rl_open"
+  },
+  {
+   "part": "door_rr",
+   "node": "door_rr_hinge",
+   "node_loaded": "door_rr_hinge",
+   "pivot": [
+    -0.86,
+    1.158,
+    0.627
+   ],
+   "type": "slide",
+   "slide": {
+    "out_x": -0.07,
+    "back_z": -1.134
+   },
+   "clip": "door_rr_open"
+  }
+ ],
+ "clips": [
+  "bonnet_open",
+  "all_open",
+  "door_bl_open",
+  "door_br_open",
+  "door_fl_open",
+  "doors_open",
+  "door_fr_open",
+  "door_rl_open",
+  "door_rr_open"
+ ],
+ "parts": [
+  {
+   "id": "body",
+   "label": "Body shell",
+   "section": "Body and openings",
+   "system": "Body",
+   "node": "body",
+   "node_loaded": "body",
+   "representative": false,
+   "opens": false,
+   "removable": false,
+   "box": {
+    "min": [
+     -1.058,
+     0.276,
+     -3.262
+    ],
+    "max": [
+     1.057,
+     2.437,
+     2.81
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bonnet",
+   "label": "Bonnet",
+   "section": "Body and openings",
+   "system": "Body",
+   "node": "bonnet",
+   "node_loaded": "bonnet",
+   "representative": false,
+   "opens": true,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.825,
+     0.971,
+     1.924
+    ],
+    "max": [
+     0.825,
+     1.303,
+     2.744
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     0.944,
+     0.33
+    ],
+    "dist": 0.8
+   }
+  },
+  {
+   "id": "door_fl",
+   "label": "Front left door",
+   "section": "Body and openings",
+   "system": "Body",
+   "node": "door_fl",
+   "node_loaded": "door_fl",
+   "representative": false,
+   "opens": true,
+   "removable": true,
+   "box": {
+    "min": [
+     0.625,
+     0.335,
+     0.653
+    ],
+    "max": [
+     0.899,
+     1.953,
+     1.713
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.989,
+     0.148,
+     0.0
+    ],
+    "dist": 0.9
+   }
+  },
+  {
+   "id": "door_fr",
+   "label": "Front right door",
+   "section": "Body and openings",
+   "system": "Body",
+   "node": "door_fr",
+   "node_loaded": "door_fr",
+   "representative": false,
+   "opens": true,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.9,
+     0.335,
+     0.653
+    ],
+    "max": [
+     -0.686,
+     1.953,
+     1.701
+    ]
+   },
+   "remove": {
+    "dir": [
+     -0.989,
+     0.148,
+     0.0
+    ],
+    "dist": 0.9
+   }
+  },
+  {
+   "id": "door_rl",
+   "label": "Sliding door, left",
+   "section": "Body and openings",
+   "system": "Body",
+   "node": "door_rl",
+   "node_loaded": "door_rl",
+   "representative": false,
+   "opens": true,
+   "removable": true,
+   "box": {
+    "min": [
+     0.644,
+     0.338,
+     -0.726
+    ],
+    "max": [
+     0.89,
+     2.282,
+     0.657
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.989,
+     0.148,
+     0.0
+    ],
+    "dist": 0.9
+   }
+  },
+  {
+   "id": "door_rr",
+   "label": "Sliding door, right",
+   "section": "Body and openings",
+   "system": "Body",
+   "node": "door_rr",
+   "node_loaded": "door_rr",
+   "representative": false,
+   "opens": true,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.89,
+     0.338,
+     -0.726
+    ],
+    "max": [
+     -0.709,
+     1.978,
+     0.657
+    ]
+   },
+   "remove": {
+    "dir": [
+     -0.989,
+     0.148,
+     0.0
+    ],
+    "dist": 0.9
+   }
+  },
+  {
+   "id": "door_bl",
+   "label": "Back door, left",
+   "section": "Body and openings",
+   "system": "Body",
+   "node": "door_bl",
+   "node_loaded": "door_bl",
+   "representative": false,
+   "opens": true,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.776,
+     0.443,
+     -3.032
+    ],
+    "max": [
+     0.866,
+     2.323,
+     -2.703
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.445,
+     0.089,
+     -0.891
+    ],
+    "dist": 0.9
+   }
+  },
+  {
+   "id": "door_br",
+   "label": "Back door, right",
+   "section": "Body and openings",
+   "system": "Body",
+   "node": "door_br",
+   "node_loaded": "door_br",
+   "representative": false,
+   "opens": true,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.866,
+     0.443,
+     -3.035
+    ],
+    "max": [
+     0.776,
+     2.323,
+     -2.703
+    ]
+   },
+   "remove": {
+    "dir": [
+     -0.445,
+     0.089,
+     -0.891
+    ],
+    "dist": 0.9
+   }
+  },
+  {
+   "id": "wheel_fl",
+   "label": "Front left wheel",
+   "section": "Wheels",
+   "system": "Wheels",
+   "node": "wheel_fl",
+   "node_loaded": "wheel_fl",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.654,
+     -0.0,
+     1.546
+    ],
+    "max": [
+     0.879,
+     0.68,
+     2.227
+    ]
+   },
+   "remove": {
+    "dir": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "dist": 0.7
+   }
+  },
+  {
+   "id": "wheel_fr",
+   "label": "Front right wheel",
+   "section": "Wheels",
+   "system": "Wheels",
+   "node": "wheel_fr",
+   "node_loaded": "wheel_fr",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.879,
+     -0.0,
+     1.546
+    ],
+    "max": [
+     -0.654,
+     0.68,
+     2.227
+    ]
+   },
+   "remove": {
+    "dir": [
+     -1.0,
+     0.0,
+     0.0
+    ],
+    "dist": 0.7
+   }
+  },
+  {
+   "id": "wheel_rl",
+   "label": "Rear left wheel",
+   "section": "Wheels",
+   "system": "Wheels",
+   "node": "wheel_rl",
+   "node_loaded": "wheel_rl",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.654,
+     -0.0,
+     -2.227
+    ],
+    "max": [
+     0.879,
+     0.68,
+     -1.546
+    ]
+   },
+   "remove": {
+    "dir": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "dist": 0.7
+   }
+  },
+  {
+   "id": "wheel_rr",
+   "label": "Rear right wheel",
+   "section": "Wheels",
+   "system": "Wheels",
+   "node": "wheel_rr",
+   "node_loaded": "wheel_rr",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.879,
+     -0.0,
+     -2.227
+    ],
+    "max": [
+     -0.654,
+     0.68,
+     -1.546
+    ]
+   },
+   "remove": {
+    "dir": [
+     -1.0,
+     0.0,
+     0.0
+    ],
+    "dist": 0.7
+   }
+  },
+  {
+   "id": "bay:battery-assembly",
+   "label": "Battery",
+   "section": "Engine bay",
+   "system": "Electrical",
+   "node": "bay:battery-assembly",
+   "node_loaded": "baybattery-assembly",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.233,
+     0.546,
+     1.54
+    ],
+    "max": [
+     0.571,
+     0.832,
+     1.863
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:battery-negative-earth-lead",
+   "label": "Battery earth lead",
+   "section": "Engine bay",
+   "system": "Electrical",
+   "node": "bay:battery-negative-earth-lead",
+   "node_loaded": "baybattery-negative-earth-lead",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.333,
+     0.498,
+     1.615
+    ],
+    "max": [
+     0.523,
+     0.802,
+     1.83
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:radiator-condenser-cooling-pack",
+   "label": "Radiator and cooling pack",
+   "section": "Engine bay",
+   "system": "Cooling",
+   "node": "bay:radiator-condenser-cooling-pack",
+   "node_loaded": "bayradiator-condenser-cooling-pack",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.534,
+     0.379,
+     2.538
+    ],
+    "max": [
+     0.534,
+     0.782,
+     2.683
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:radiator-upper-hose",
+   "label": "Radiator top hose",
+   "section": "Engine bay",
+   "system": "Cooling",
+   "node": "bay:radiator-upper-hose",
+   "node_loaded": "bayradiator-upper-hose",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.262,
+     0.657,
+     1.868
+    ],
+    "max": [
+     0.587,
+     0.751,
+     2.582
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:radiator-lower-hose",
+   "label": "Radiator bottom hose",
+   "section": "Engine bay",
+   "system": "Cooling",
+   "node": "bay:radiator-lower-hose",
+   "node_loaded": "bayradiator-lower-hose",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.544,
+     0.382,
+     1.978
+    ],
+    "max": [
+     -0.235,
+     0.506,
+     2.583
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:radiator-upper-engine-hose-clamp",
+   "label": "Top hose clamp, engine end",
+   "section": "Engine bay",
+   "system": "Cooling",
+   "node": "bay:radiator-upper-engine-hose-clamp",
+   "node_loaded": "bayradiator-upper-engine-hose-clamp",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.239,
+     0.677,
+     1.855
+    ],
+    "max": [
+     0.304,
+     0.685,
+     1.947
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:radiator-upper-radiator-hose-clamp",
+   "label": "Top hose clamp, radiator end",
+   "section": "Engine bay",
+   "system": "Cooling",
+   "node": "bay:radiator-upper-radiator-hose-clamp",
+   "node_loaded": "bayradiator-upper-radiator-hose-clamp",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.399,
+     0.708,
+     2.515
+    ],
+    "max": [
+     0.465,
+     0.715,
+     2.607
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:radiator-lower-radiator-hose-clamp",
+   "label": "Bottom hose clamp, radiator end",
+   "section": "Engine bay",
+   "system": "Cooling",
+   "node": "bay:radiator-lower-radiator-hose-clamp",
+   "node_loaded": "bayradiator-lower-radiator-hose-clamp",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.443,
+     0.441,
+     2.518
+    ],
+    "max": [
+     -0.381,
+     0.449,
+     2.604
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:radiator-lower-engine-hose-clamp",
+   "label": "Bottom hose clamp, engine end",
+   "section": "Engine bay",
+   "system": "Cooling",
+   "node": "bay:radiator-lower-engine-hose-clamp",
+   "node_loaded": "bayradiator-lower-engine-hose-clamp",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.282,
+     0.481,
+     1.959
+    ],
+    "max": [
+     -0.221,
+     0.489,
+     2.045
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:coolant-expansion-reservoir",
+   "label": "Coolant expansion tank",
+   "section": "Engine bay",
+   "system": "Cooling",
+   "node": "bay:coolant-expansion-reservoir",
+   "node_loaded": "baycoolant-expansion-reservoir",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.575,
+     0.638,
+     1.606
+    ],
+    "max": [
+     -0.35,
+     0.904,
+     1.881
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:coolant-degas-hose",
+   "label": "Coolant degas hose",
+   "section": "Engine bay",
+   "system": "Cooling",
+   "node": "bay:coolant-degas-hose",
+   "node_loaded": "baycoolant-degas-hose",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.452,
+     0.768,
+     1.79
+    ],
+    "max": [
+     -0.284,
+     0.827,
+     2.066
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:gearbox-case",
+   "label": "Gearbox",
+   "section": "Engine bay",
+   "system": "Transmission",
+   "node": "bay:gearbox-case",
+   "node_loaded": "baygearbox-case",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.592,
+     0.348,
+     1.792
+    ],
+    "max": [
+     -0.344,
+     0.642,
+     2.111
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:bellhousing",
+   "label": "Bell housing",
+   "section": "Engine bay",
+   "system": "Transmission",
+   "node": "bay:bellhousing",
+   "node_loaded": "baybellhousing",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.376,
+     0.307,
+     1.775
+    ],
+    "max": [
+     -0.242,
+     0.636,
+     2.271
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:mechatronic-cover",
+   "label": "Gearbox control unit cover",
+   "section": "Engine bay",
+   "system": "Transmission",
+   "node": "bay:mechatronic-cover",
+   "node_loaded": "baymechatronic-cover",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.531,
+     0.376,
+     1.754
+    ],
+    "max": [
+     -0.338,
+     0.553,
+     1.808
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:transmission-oil-filter",
+   "label": "Transmission oil filter",
+   "section": "Engine bay",
+   "system": "Transmission",
+   "node": "bay:transmission-oil-filter",
+   "node_loaded": "baytransmission-oil-filter",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.508,
+     0.622,
+     1.898
+    ],
+    "max": [
+     -0.443,
+     0.705,
+     1.99
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:transmission-oil-cooler",
+   "label": "Transmission oil cooler",
+   "section": "Engine bay",
+   "system": "Transmission",
+   "node": "bay:transmission-oil-cooler",
+   "node_loaded": "baytransmission-oil-cooler",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.402,
+     0.646,
+     1.908
+    ],
+    "max": [
+     -0.309,
+     0.729,
+     2.049
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:integrated-front-differential",
+   "label": "Front differential",
+   "section": "Engine bay",
+   "system": "Transmission",
+   "node": "bay:integrated-front-differential",
+   "node_loaded": "bayintegrated-front-differential",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.559,
+     0.269,
+     1.695
+    ],
+    "max": [
+     -0.306,
+     0.417,
+     1.906
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:cv-output-left",
+   "label": "Driveshaft output, right",
+   "section": "Engine bay",
+   "system": "Transmission",
+   "node": "bay:cv-output-left",
+   "node_loaded": "baycv-output-left",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.603,
+     0.29,
+     1.71
+    ],
+    "max": [
+     -0.567,
+     0.369,
+     1.822
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:cv-output-right",
+   "label": "Driveshaft output, left",
+   "section": "Engine bay",
+   "system": "Transmission",
+   "node": "bay:cv-output-right",
+   "node_loaded": "baycv-output-right",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.288,
+     0.29,
+     1.71
+    ],
+    "max": [
+     -0.252,
+     0.369,
+     1.822
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:blk",
+   "label": "Engine block",
+   "section": "Engine bay",
+   "system": "Engine",
+   "node": "bay:blk",
+   "node_loaded": "bayblk",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.231,
+     0.346,
+     1.906
+    ],
+    "max": [
+     0.191,
+     0.616,
+     2.323
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:sump",
+   "label": "Oil sump",
+   "section": "Engine bay",
+   "system": "Engine",
+   "node": "bay:sump",
+   "node_loaded": "baysump",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.216,
+     0.231,
+     1.934
+    ],
+    "max": [
+     0.176,
+     0.354,
+     2.258
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:head",
+   "label": "Cylinder head",
+   "section": "Engine bay",
+   "system": "Engine",
+   "node": "bay:head",
+   "node_loaded": "bayhead",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.219,
+     0.619,
+     1.939
+    ],
+    "max": [
+     0.179,
+     0.778,
+     2.334
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:cam_cover",
+   "label": "Cam cover",
+   "section": "Engine bay",
+   "system": "Engine",
+   "node": "bay:cam_cover",
+   "node_loaded": "baycam_cover",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.216,
+     0.728,
+     1.941
+    ],
+    "max": [
+     0.176,
+     0.815,
+     2.249
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:timing_cover",
+   "label": "Timing cover",
+   "section": "Engine bay",
+   "system": "Engine",
+   "node": "bay:timing_cover",
+   "node_loaded": "baytiming_cover",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.206,
+     0.341,
+     1.928
+    ],
+    "max": [
+     0.243,
+     0.82,
+     2.281
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:coolant_pump",
+   "label": "Coolant pump",
+   "section": "Engine bay",
+   "system": "Cooling",
+   "node": "bay:coolant_pump",
+   "node_loaded": "baycoolant_pump",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.221,
+     0.597,
+     1.787
+    ],
+    "max": [
+     -0.151,
+     0.727,
+     1.943
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:dgea_coils",
+   "label": "Ignition coils",
+   "section": "Engine bay",
+   "system": "Electrical",
+   "node": "bay:dgea_coils",
+   "node_loaded": "baydgea_coils",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.195,
+     0.722,
+     2.058
+    ],
+    "max": [
+     0.166,
+     0.858,
+     2.192
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:dgea_filler",
+   "label": "Oil filler cap",
+   "section": "Engine bay",
+   "system": "Engine",
+   "node": "bay:dgea_filler",
+   "node_loaded": "baydgea_filler",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.123,
+     0.777,
+     2.101
+    ],
+    "max": [
+     0.175,
+     0.836,
+     2.236
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:dgea_intake",
+   "label": "Intake manifold",
+   "section": "Engine bay",
+   "system": "Air and fuel",
+   "node": "bay:dgea_intake",
+   "node_loaded": "baydgea_intake",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.261,
+     0.441,
+     2.21
+    ],
+    "max": [
+     0.248,
+     0.773,
+     2.443
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:dgea_airbox",
+   "label": "Air filter box",
+   "section": "Engine bay",
+   "system": "Air and fuel",
+   "node": "bay:dgea_airbox",
+   "node_loaded": "baydgea_airbox",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.392,
+     0.67,
+     1.769
+    ],
+    "max": [
+     0.151,
+     0.924,
+     2.547
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:dgea_chargepipe",
+   "label": "Charge pipe",
+   "section": "Engine bay",
+   "system": "Air and fuel",
+   "node": "bay:dgea_chargepipe",
+   "node_loaded": "baydgea_chargepipe",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.336,
+     0.663,
+     1.678
+    ],
+    "max": [
+     -0.171,
+     0.837,
+     2.38
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:dgea_turbo",
+   "label": "Turbocharger",
+   "section": "Engine bay",
+   "system": "Air and fuel",
+   "node": "bay:dgea_turbo",
+   "node_loaded": "baydgea_turbo",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.266,
+     0.403,
+     1.689
+    ],
+    "max": [
+     0.104,
+     0.775,
+     1.953
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:dgea_mount",
+   "label": "Engine mount",
+   "section": "Engine bay",
+   "system": "Engine",
+   "node": "bay:dgea_mount",
+   "node_loaded": "baydgea_mount",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.23,
+     0.599,
+     1.991
+    ],
+    "max": [
+     0.262,
+     0.777,
+     2.23
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:dgea_pulley",
+   "label": "Crank pulley and belt",
+   "section": "Engine bay",
+   "system": "Engine",
+   "node": "bay:dgea_pulley",
+   "node_loaded": "baydgea_pulley",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.234,
+     0.308,
+     1.985
+    ],
+    "max": [
+     0.28,
+     0.462,
+     2.204
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:dgea_thermo",
+   "label": "Thermostat housing",
+   "section": "Engine bay",
+   "system": "Cooling",
+   "node": "bay:dgea_thermo",
+   "node_loaded": "baydgea_thermo",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.394,
+     0.4,
+     1.554
+    ],
+    "max": [
+     -0.066,
+     0.743,
+     2.55
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:dgea_oilfilter",
+   "label": "Oil filter",
+   "section": "Engine bay",
+   "system": "Engine",
+   "node": "bay:dgea_oilfilter",
+   "node_loaded": "baydgea_oilfilter",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.007,
+     0.348,
+     2.29
+    ],
+    "max": [
+     0.068,
+     0.504,
+     2.414
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:dgea_epump",
+   "label": "Electric coolant pump",
+   "section": "Engine bay",
+   "system": "Cooling",
+   "node": "bay:dgea_epump",
+   "node_loaded": "baydgea_epump",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.058,
+     0.429,
+     2.296
+    ],
+    "max": [
+     0.221,
+     0.542,
+     2.419
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:dgea_loom",
+   "label": "Engine wiring loom",
+   "section": "Engine bay",
+   "system": "Electrical",
+   "node": "bay:dgea_loom",
+   "node_loaded": "baydgea_loom",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.307,
+     0.564,
+     2.233
+    ],
+    "max": [
+     0.243,
+     0.794,
+     2.313
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:exhaust_front",
+   "label": "Front exhaust pipe",
+   "section": "Engine bay",
+   "system": "Exhaust",
+   "node": "bay:exhaust_front",
+   "node_loaded": "bayexhaust_front",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.09,
+     0.139,
+     1.022
+    ],
+    "max": [
+     0.171,
+     0.558,
+     1.844
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:subframe_f",
+   "label": "Front subframe",
+   "section": "Engine bay",
+   "system": "Suspension",
+   "node": "bay:subframe_f",
+   "node_loaded": "baysubframe_f",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.589,
+     0.186,
+     1.277
+    ],
+    "max": [
+     0.589,
+     0.471,
+     1.967
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:arb_f",
+   "label": "Front anti-roll bar",
+   "section": "Engine bay",
+   "system": "Suspension",
+   "node": "bay:arb_f",
+   "node_loaded": "bayarb_f",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.584,
+     0.271,
+     1.407
+    ],
+    "max": [
+     0.584,
+     0.366,
+     1.63
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:knuckle_fl",
+   "label": "Hub carrier, front left",
+   "section": "Engine bay",
+   "system": "Suspension",
+   "node": "bay:knuckle_fl",
+   "node_loaded": "bayknuckle_fl",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.587,
+     0.242,
+     1.525
+    ],
+    "max": [
+     0.726,
+     0.551,
+     1.875
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:strut_fl",
+   "label": "Strut, front left",
+   "section": "Engine bay",
+   "system": "Suspension",
+   "node": "bay:strut_fl",
+   "node_loaded": "baystrut_fl",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.493,
+     0.438,
+     1.607
+    ],
+    "max": [
+     0.691,
+     0.963,
+     1.871
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:droplink_fl",
+   "label": "Anti-roll bar drop link, front left",
+   "section": "Engine bay",
+   "system": "Suspension",
+   "node": "bay:droplink_fl",
+   "node_loaded": "baydroplink_fl",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.551,
+     0.347,
+     1.583
+    ],
+    "max": [
+     0.598,
+     0.623,
+     1.729
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:tre_fl",
+   "label": "Track rod end, front left",
+   "section": "Engine bay",
+   "system": "Steering",
+   "node": "bay:tre_fl",
+   "node_loaded": "baytre_fl",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.587,
+     0.223,
+     1.523
+    ],
+    "max": [
+     0.662,
+     0.262,
+     1.578
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:bj_fl",
+   "label": "Ball joint, front left",
+   "section": "Engine bay",
+   "system": "Suspension",
+   "node": "bay:bj_fl",
+   "node_loaded": "baybj_fl",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.649,
+     0.164,
+     1.695
+    ],
+    "max": [
+     0.74,
+     0.274,
+     1.813
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:arm_fl",
+   "label": "Lower arm, front left",
+   "section": "Engine bay",
+   "system": "Suspension",
+   "node": "bay:arm_fl",
+   "node_loaded": "bayarm_fl",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.333,
+     0.148,
+     1.328
+    ],
+    "max": [
+     0.753,
+     0.253,
+     1.843
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:ds_fl",
+   "label": "Driveshaft, front left",
+   "section": "Engine bay",
+   "system": "Transmission",
+   "node": "bay:ds_fl",
+   "node_loaded": "bayds_fl",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.251,
+     0.281,
+     1.695
+    ],
+    "max": [
+     0.788,
+     0.379,
+     1.836
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:knuckle_fr",
+   "label": "Hub carrier, front right",
+   "section": "Engine bay",
+   "system": "Suspension",
+   "node": "bay:knuckle_fr",
+   "node_loaded": "bayknuckle_fr",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.726,
+     0.242,
+     1.525
+    ],
+    "max": [
+     -0.587,
+     0.551,
+     1.875
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:strut_fr",
+   "label": "Strut, front right",
+   "section": "Engine bay",
+   "system": "Suspension",
+   "node": "bay:strut_fr",
+   "node_loaded": "baystrut_fr",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.691,
+     0.438,
+     1.608
+    ],
+    "max": [
+     -0.493,
+     0.963,
+     1.872
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:droplink_fr",
+   "label": "Anti-roll bar drop link, front right",
+   "section": "Engine bay",
+   "system": "Suspension",
+   "node": "bay:droplink_fr",
+   "node_loaded": "baydroplink_fr",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.598,
+     0.347,
+     1.583
+    ],
+    "max": [
+     -0.551,
+     0.623,
+     1.73
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:tre_fr",
+   "label": "Track rod end, front right",
+   "section": "Engine bay",
+   "system": "Steering",
+   "node": "bay:tre_fr",
+   "node_loaded": "baytre_fr",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.662,
+     0.223,
+     1.524
+    ],
+    "max": [
+     -0.587,
+     0.262,
+     1.578
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:bj_fr",
+   "label": "Ball joint, front right",
+   "section": "Engine bay",
+   "system": "Suspension",
+   "node": "bay:bj_fr",
+   "node_loaded": "baybj_fr",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.74,
+     0.164,
+     1.696
+    ],
+    "max": [
+     -0.649,
+     0.274,
+     1.814
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:arm_fr",
+   "label": "Lower arm, front right",
+   "section": "Engine bay",
+   "system": "Suspension",
+   "node": "bay:arm_fr",
+   "node_loaded": "bayarm_fr",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.753,
+     0.148,
+     1.328
+    ],
+    "max": [
+     -0.333,
+     0.253,
+     1.844
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:ds_fr",
+   "label": "Driveshaft, front right",
+   "section": "Engine bay",
+   "system": "Transmission",
+   "node": "bay:ds_fr",
+   "node_loaded": "bayds_fr",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.788,
+     0.281,
+     1.696
+    ],
+    "max": [
+     -0.604,
+     0.379,
+     1.837
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:fuel_tank",
+   "label": "Fuel tank",
+   "section": "Under the car",
+   "system": "Air and fuel",
+   "node": "bay:fuel_tank",
+   "node_loaded": "bayfuel_tank",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.432,
+     0.375,
+     -2.004
+    ],
+    "max": [
+     0.74,
+     1.034,
+     -1.381
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bay:susp_rear",
+   "label": "Rear suspension",
+   "section": "Under the car",
+   "system": "Suspension",
+   "node": "bay:susp_rear",
+   "node_loaded": "baysusp_rear",
+   "representative": true,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.636,
+     0.204,
+     -2.111
+    ],
+    "max": [
+     0.636,
+     0.644,
+     -1.475
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "exhaust",
+   "label": "Exhaust system",
+   "section": "Under the car",
+   "system": "Exhaust",
+   "node": "exhaust",
+   "node_loaded": "exhaust",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.024,
+     0.148,
+     -2.962
+    ],
+    "max": [
+     0.603,
+     0.372,
+     1.149
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  }
+ ],
+ "procedures": [
+  {
+   "title": "Walk-round inspection",
+   "steps": [
+    {
+     "text": "Front: bonnet shut line even both sides, lamps clear and matching, bumper paint matching the wings.",
+     "view": "front",
+     "parts": [
+      "bonnet"
+     ],
+     "open": []
+    },
+    {
+     "text": "Front left corner: tyre tread and wear across the width, wheel for kerbing, arch for rust.",
+     "view": "wheel:fl",
+     "parts": [
+      "wheel_fl"
+     ],
+     "open": []
+    },
+    {
+     "text": "Left side: door gaps even, paint matching panel to panel, sills straight. Look along the side for ripples.",
+     "view": "nearside",
+     "parts": [
+      "door_fl",
+      "door_rl"
+     ],
+     "open": []
+    },
+    {
+     "text": "Rear left corner: tyre and wheel as at the front; the arch lip.",
+     "view": "wheel:rl",
+     "parts": [
+      "wheel_rl"
+     ],
+     "open": []
+    },
+    {
+     "text": "Rear: tailgate shut lines, lamps, bumper. A boot that does not close flush has been hit.",
+     "view": "rear",
+     "parts": [],
+     "open": []
+    },
+    {
+     "text": "Rear right corner.",
+     "view": "wheel:rr",
+     "parts": [
+      "wheel_rr"
+     ],
+     "open": []
+    },
+    {
+     "text": "Right side: the same as the left, and the fuel filler area.",
+     "view": "offside",
+     "parts": [
+      "door_fr",
+      "door_rr"
+     ],
+     "open": []
+    },
+    {
+     "text": "Front right corner.",
+     "view": "wheel:fr",
+     "parts": [
+      "wheel_fr"
+     ],
+     "open": []
+    }
+   ]
+  },
+  {
+   "title": "Under the bonnet",
+   "steps": [
+    {
+     "text": "Open the lid. Look for fresh paint on the slam panel and bolt heads: a sign of front-end repair.",
+     "view": "bay",
+     "parts": [
+      "bonnet"
+     ],
+     "open": [
+      "bonnet"
+     ]
+    },
+    {
+     "text": "Battery: terminals clean, clamp tight, no white deposits.",
+     "view": "part",
+     "parts": [
+      "bay:battery-assembly"
+     ],
+     "open": [
+      "bonnet"
+     ]
+    },
+    {
+     "text": "Coolant tank: level between the marks, no oil film on the coolant.",
+     "view": "part",
+     "parts": [
+      "bay:coolant-expansion-reservoir"
+     ],
+     "open": [
+      "bonnet"
+     ]
+    },
+    {
+     "text": "Radiator and hoses: hoses firm, clamps dry, radiator fins straight.",
+     "view": "part",
+     "parts": [
+      "bay:radiator-condenser-cooling-pack",
+      "bay:radiator-upper-hose",
+      "bay:radiator-lower-hose"
+     ],
+     "open": [
+      "bonnet"
+     ]
+    },
+    {
+     "text": "Oil filler and cam cover: no mayonnaise under the cap, no oil weeping from the cover gasket.",
+     "view": "part",
+     "parts": [
+      "bay:dgea_filler",
+      "bay:cam_cover"
+     ],
+     "open": [
+      "bonnet"
+     ]
+    },
+    {
+     "text": "Air box and intake: clips in place, no split ducting.",
+     "view": "part",
+     "parts": [
+      "bay:dgea_airbox",
+      "bay:dgea_intake"
+     ],
+     "open": [
+      "bonnet"
+     ]
+    },
+    {
+     "text": "Belt and pulley: belt not glazed or cracked.",
+     "view": "part",
+     "parts": [
+      "bay:dgea_pulley"
+     ],
+     "open": [
+      "bonnet"
+     ]
+    },
+    {
+     "text": "Engine mount and wiring loom: mount rubber whole, loom tidy and clipped.",
+     "view": "part",
+     "parts": [
+      "bay:dgea_mount",
+      "bay:dgea_loom"
+     ],
+     "open": [
+      "bonnet"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Doors and cabin",
+   "steps": [
+    {
+     "text": "Open the front left door: hinges and check strap, door card fit, window operation.",
+     "view": "door:fl",
+     "parts": [
+      "door_fl"
+     ],
+     "open": [
+      "door_fl"
+     ]
+    },
+    {
+     "text": "Open the front right door: hinges and check strap, door card fit, window operation.",
+     "view": "door:fr",
+     "parts": [
+      "door_fr"
+     ],
+     "open": [
+      "door_fr"
+     ]
+    },
+    {
+     "text": "Open the sliding door, left: it runs smoothly on its rollers and track, holds open on its catch, and shuts flush and latches; seals whole.",
+     "view": "door:rl",
+     "parts": [
+      "door_rl"
+     ],
+     "open": [
+      "door_rl"
+     ]
+    },
+    {
+     "text": "Open the sliding door, right: it runs smoothly on its rollers and track, holds open on its catch, and shuts flush and latches; seals whole.",
+     "view": "door:rr",
+     "parts": [
+      "door_rr"
+     ],
+     "open": [
+      "door_rr"
+     ]
+    }
+   ]
+  }
+ ],
+ "engine": {
+  "representative": true,
+  "at": "front",
+  "lid": "bonnet",
+  "note": "The engine bay is the machine's teaching engine pack: a representative transverse four-cylinder with its gearbox, cooling, front suspension and driveshafts. It is the same in every car here, not this vehicle's own engine.",
+  "real_layout": "The real van's engine sits lengthways at the front and drives the rear wheels (some versions drive all four; a front-drive version mounts it across the front). The teaching engine shown is transverse front-drive, so the usual layout differs."
+ },
+ "notes": [],
+ "credit": {
+  "title": "2019 Mercedes-Benz Sprinter",
+  "author": null,
+  "licence": "CC BY",
+  "url": "https://sketchfab.com/3d-models/5788a290ddb5483fbbd5831aeef829a1",
+  "commercial": true,
+  "line": "“2019 Mercedes-Benz Sprinter”, CC BY, https://sketchfab.com/3d-models/5788a290ddb5483fbbd5831aeef829a1"
+ },
+ "summary": "Large van: hinged cab doors, a sliding door on each side and two barn doors at the back.",
+ "hero": "mercedes-benz-sprinter-2019.webp"
+}

@@ -6,7 +6,7 @@
  "body": "small panel van",
  "machine_key": "car-nissan-nv200-2010-w5-v1",
  "glb": "nissan-nv200-2010.glb",
- "bytes": 11457744,
+ "bytes": 11448492,
  "frame": "metres; +Y up, nose +Z, the vehicle's left +X; ground at y = 0",
  "box": {
   "min": [
@@ -91,7 +91,7 @@
    "node_loaded": "door_fl_hinge",
    "pivot": [
     0.8,
-    1.034,
+    1.035,
     0.918
    ],
    "axis": [
@@ -108,7 +108,7 @@
    "node_loaded": "door_fr_hinge",
    "pivot": [
     -0.8,
-    1.034,
+    1.035,
     0.918
    ],
    "axis": [
@@ -131,7 +131,7 @@
    "type": "slide",
    "slide": {
     "out_x": 0.07,
-    "back_z": -0.812
+    "back_z": -0.819
    },
    "clip": "door_rl_open"
   },
@@ -238,12 +238,12 @@
    "removable": true,
    "box": {
     "min": [
-     0.619,
-     0.318,
-     -0.124
+     0.651,
+     0.32,
+     -0.123
     ],
     "max": [
-     0.83,
+     0.829,
      1.75,
      0.948
     ]
@@ -269,12 +269,12 @@
    "removable": true,
    "box": {
     "min": [
-     -0.83,
-     0.318,
-     -0.124
+     -0.829,
+     0.32,
+     -0.123
     ],
     "max": [
-     -0.619,
+     -0.651,
      1.75,
      0.948
     ]
@@ -300,12 +300,12 @@
    "removable": true,
    "box": {
     "min": [
-     0.63,
+     0.653,
      0.302,
-     -1.115
+     -1.124
     ],
     "max": [
-     0.829,
+     0.828,
      1.752,
      -0.125
     ]
@@ -336,7 +336,7 @@
      -1.122
     ],
     "max": [
-     -0.63,
+     -0.653,
      1.752,
      -0.125
     ]

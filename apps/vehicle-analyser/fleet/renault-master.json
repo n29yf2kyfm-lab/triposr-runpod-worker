@@ -6,7 +6,7 @@
  "body": "panel van",
  "machine_key": "car-renault-master-v1",
  "glb": "renault-master.glb",
- "bytes": 6741480,
+ "bytes": 6759496,
  "frame": "metres; +Y up, nose +Z, the vehicle's left +X; ground at y = 0",
  "box": {
   "min": [
@@ -90,9 +90,9 @@
    "node": "door_fl_hinge",
    "node_loaded": "door_fl_hinge",
    "pivot": [
-    0.943,
-    1.512,
-    0.368
+    0.948,
+    1.208,
+    1.557
    ],
    "axis": [
     0,
@@ -107,9 +107,9 @@
    "node": "door_fr_hinge",
    "node_loaded": "door_fr_hinge",
    "pivot": [
-    -0.943,
-    1.513,
-    0.375
+    -0.948,
+    1.328,
+    1.552
    ],
    "axis": [
     0,
@@ -118,6 +118,38 @@
    ],
    "open_deg": 65,
    "clip": "door_fr_open"
+  },
+  {
+   "part": "door_rl",
+   "node": "door_rl_hinge",
+   "node_loaded": "door_rl_hinge",
+   "pivot": [
+    0.956,
+    1.337,
+    0.397
+   ],
+   "type": "slide",
+   "slide": {
+    "out_x": 0.07,
+    "back_z": -1.26
+   },
+   "clip": "door_rl_open"
+  },
+  {
+   "part": "door_rr",
+   "node": "door_rr_hinge",
+   "node_loaded": "door_rr_hinge",
+   "pivot": [
+    -0.956,
+    1.334,
+    0.397
+   ],
+   "type": "slide",
+   "slide": {
+    "out_x": -0.07,
+    "back_z": -1.248
+   },
+   "clip": "door_rr_open"
   }
  ],
  "clips": [
@@ -127,7 +159,9 @@
   "door_br_open",
   "door_fl_open",
   "doors_open",
-  "door_fr_open"
+  "door_fr_open",
+  "door_rl_open",
+  "door_rr_open"
  ],
  "parts": [
   {
@@ -204,14 +238,14 @@
    "removable": true,
    "box": {
     "min": [
-     0.732,
-     0.667,
-     -1.094
+     0.831,
+     0.308,
+     0.401
     ],
     "max": [
-     0.973,
-     2.358,
-     0.398
+     0.978,
+     2.107,
+     1.587
     ]
    },
    "remove": {
@@ -235,14 +269,76 @@
    "removable": true,
    "box": {
     "min": [
-     -0.973,
-     0.667,
-     -1.09
+     -0.978,
+     0.293,
+     0.399
     ],
     "max": [
-     -0.732,
+     -0.772,
+     2.364,
+     1.582
+    ]
+   },
+   "remove": {
+    "dir": [
+     -0.989,
+     0.148,
+     0.0
+    ],
+    "dist": 0.9
+   }
+  },
+  {
+   "id": "door_rl",
+   "label": "Sliding door, left",
+   "section": "Body and openings",
+   "system": "Body",
+   "node": "door_rl",
+   "node_loaded": "door_rl",
+   "representative": false,
+   "opens": true,
+   "removable": true,
+   "box": {
+    "min": [
+     0.718,
+     0.316,
+     -1.11
+    ],
+    "max": [
+     0.986,
      2.358,
-     0.405
+     0.427
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.989,
+     0.148,
+     0.0
+    ],
+    "dist": 0.9
+   }
+  },
+  {
+   "id": "door_rr",
+   "label": "Sliding door, right",
+   "section": "Body and openings",
+   "system": "Body",
+   "node": "door_rr",
+   "node_loaded": "door_rr",
+   "representative": false,
+   "opens": true,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.986,
+     0.31,
+     -1.096
+    ],
+    "max": [
+     -0.718,
+     2.358,
+     0.427
     ]
    },
    "remove": {
@@ -489,7 +585,7 @@
     ],
     "max": [
      0.567,
-     0.868,
+     0.867,
      1.785
     ]
    },
@@ -520,7 +616,7 @@
     ],
     "max": [
      0.578,
-     0.847,
+     0.846,
      2.619
     ]
    },
@@ -736,7 +832,7 @@
      1.567
     ],
     "max": [
-     -0.379,
+     -0.378,
      0.978,
      1.836
     ]
@@ -794,7 +890,7 @@
    "box": {
     "min": [
      -0.641,
-     0.377,
+     0.376,
      1.749
     ],
     "max": [
@@ -1104,7 +1200,7 @@
    "box": {
     "min": [
      -0.237,
-     0.67,
+     0.669,
      1.892
     ],
     "max": [
@@ -1135,7 +1231,7 @@
    "box": {
     "min": [
      -0.234,
-     0.788,
+     0.787,
      1.894
     ],
     "max": [
@@ -1294,7 +1390,7 @@
      2.157
     ],
     "max": [
-     0.269,
+     0.268,
      0.836,
      2.385
     ]
@@ -1351,7 +1447,7 @@
    "removable": true,
    "box": {
     "min": [
-     -0.364,
+     -0.363,
      0.718,
      1.637
     ],
@@ -1418,7 +1514,7 @@
      1.943
     ],
     "max": [
-     0.284,
+     0.283,
      0.841,
      2.177
     ]
@@ -1573,7 +1669,7 @@
      2.179
     ],
     "max": [
-     0.263,
+     0.262,
      0.859,
      2.258
     ]
@@ -1821,7 +1917,7 @@
      1.654
     ],
     "max": [
-     0.801,
+     0.8,
      0.297,
      1.77
     ]
@@ -2033,7 +2129,7 @@
    "removable": true,
    "box": {
     "min": [
-     -0.801,
+     -0.8,
      0.177,
      1.654
     ],
@@ -2232,7 +2328,8 @@
      "text": "Left side: door gaps even, paint matching panel to panel, sills straight. Look along the side for ripples.",
      "view": "nearside",
      "parts": [
-      "door_fl"
+      "door_fl",
+      "door_rl"
      ],
      "open": []
     },
@@ -2262,7 +2359,8 @@
      "text": "Right side: the same as the left, and the fuel filler area.",
      "view": "offside",
      "parts": [
-      "door_fr"
+      "door_fr",
+      "door_rr"
      ],
      "open": []
     },
@@ -2388,6 +2486,26 @@
      "open": [
       "door_fr"
      ]
+    },
+    {
+     "text": "Open the sliding door, left: it runs smoothly on its rollers and track, holds open on its catch, and shuts flush and latches; seals whole.",
+     "view": "door:rl",
+     "parts": [
+      "door_rl"
+     ],
+     "open": [
+      "door_rl"
+     ]
+    },
+    {
+     "text": "Open the sliding door, right: it runs smoothly on its rollers and track, holds open on its catch, and shuts flush and latches; seals whole.",
+     "view": "door:rr",
+     "parts": [
+      "door_rr"
+     ],
+     "open": [
+      "door_rr"
+     ]
     }
    ]
   }
@@ -2408,6 +2526,6 @@
   "commercial": true,
   "line": "“Renault Master Panel Van”, CC BY, https://sketchfab.com/3d-models/b2148d8984144f1a8879ca4352bfccc9"
  },
- "summary": "Large panel van with barn doors at the back, each hinged at its outer edge.",
+ "summary": "Large panel van: hinged cab doors, a sliding door on each side and barn doors at the back, each hinged at its outer edge.",
  "hero": "renault-master.webp"
 }

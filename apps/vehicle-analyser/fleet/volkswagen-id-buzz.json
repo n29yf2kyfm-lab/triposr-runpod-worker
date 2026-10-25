@@ -1,0 +1,669 @@
+{
+ "schema": "expertcarcheck.vehicle/1",
+ "id": "volkswagen-id-buzz",
+ "title": "Volkswagen ID. Buzz",
+ "kind": "van",
+ "body": "electric people carrier",
+ "machine_key": "car-volkswagen-id-buzz-v1",
+ "glb": "volkswagen-id-buzz.glb",
+ "bytes": 7685676,
+ "frame": "metres; +Y up, nose +Z, the vehicle's left +X; ground at y = 0",
+ "box": {
+  "min": [
+   -1.036,
+   0.0,
+   -2.309
+  ],
+  "max": [
+   1.06,
+   1.882,
+   2.191
+  ]
+ },
+ "paint": {
+  "hex": null,
+  "finish": null,
+  "materials": [
+   "body_paint"
+  ],
+  "wheel_materials": [
+   "black",
+   "chrome",
+   "refl_black",
+   "wheel_rim"
+  ],
+  "caliper_materials": []
+ },
+ "hinges": [
+  {
+   "part": "bonnet",
+   "node": "bonnet_hinge",
+   "node_loaded": "bonnet_hinge",
+   "pivot": [
+    0.0,
+    0.904,
+    1.608
+   ],
+   "axis": [
+    1,
+    0,
+    0
+   ],
+   "open_deg": -55,
+   "clip": "bonnet_open"
+  },
+  {
+   "part": "door_fl",
+   "node": "door_fl_hinge",
+   "node_loaded": "door_fl_hinge",
+   "pivot": [
+    1.03,
+    1.023,
+    1.538
+   ],
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "open_deg": -65,
+   "clip": "door_fl_open"
+  },
+  {
+   "part": "door_fr",
+   "node": "door_fr_hinge",
+   "node_loaded": "door_fr_hinge",
+   "pivot": [
+    -1.006,
+    1.023,
+    1.538
+   ],
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "open_deg": 65,
+   "clip": "door_fr_open"
+  },
+  {
+   "part": "door_rl",
+   "node": "door_rl_hinge",
+   "node_loaded": "door_rl_hinge",
+   "pivot": [
+    0.918,
+    1.031,
+    -0.01
+   ],
+   "type": "slide",
+   "slide": {
+    "out_x": 0.07,
+    "back_z": -0.804
+   },
+   "clip": "door_rl_open"
+  },
+  {
+   "part": "door_rr",
+   "node": "door_rr_hinge",
+   "node_loaded": "door_rr_hinge",
+   "pivot": [
+    -0.894,
+    1.031,
+    -0.01
+   ],
+   "type": "slide",
+   "slide": {
+    "out_x": -0.07,
+    "back_z": -0.804
+   },
+   "clip": "door_rr_open"
+  },
+  {
+   "part": "tailgate",
+   "node": "tailgate_hinge",
+   "node_loaded": "tailgate_hinge",
+   "pivot": [
+    0.0,
+    1.16,
+    -2.116
+   ],
+   "axis": [
+    1,
+    0,
+    0
+   ],
+   "open_deg": 75,
+   "clip": "tailgate_open"
+  }
+ ],
+ "clips": [
+  "bonnet_open",
+  "all_open",
+  "door_fl_open",
+  "doors_open",
+  "door_fr_open",
+  "door_rl_open",
+  "door_rr_open",
+  "tailgate_open"
+ ],
+ "parts": [
+  {
+   "id": "body",
+   "label": "Body shell",
+   "section": "Body and openings",
+   "system": "Body",
+   "node": "body",
+   "node_loaded": "body",
+   "representative": false,
+   "opens": false,
+   "removable": false,
+   "box": {
+    "min": [
+     -0.921,
+     0.003,
+     -2.309
+    ],
+    "max": [
+     0.945,
+     1.882,
+     2.191
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "dist": 0.6
+   }
+  },
+  {
+   "id": "bonnet",
+   "label": "Bonnet",
+   "section": "Body and openings",
+   "system": "Body",
+   "node": "bonnet",
+   "node_loaded": "bonnet",
+   "representative": false,
+   "opens": true,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.912,
+     0.239,
+     1.588
+    ],
+    "max": [
+     0.936,
+     0.914,
+     2.188
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     0.944,
+     0.33
+    ],
+    "dist": 0.8
+   }
+  },
+  {
+   "id": "door_fl",
+   "label": "Front left door",
+   "section": "Body and openings",
+   "system": "Body",
+   "node": "door_fl",
+   "node_loaded": "door_fl",
+   "representative": false,
+   "opens": true,
+   "removable": true,
+   "box": {
+    "min": [
+     0.652,
+     0.305,
+     -0.094
+    ],
+    "max": [
+     1.06,
+     1.74,
+     1.568
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.989,
+     0.148,
+     0.0
+    ],
+    "dist": 0.9
+   }
+  },
+  {
+   "id": "door_fr",
+   "label": "Front right door",
+   "section": "Body and openings",
+   "system": "Body",
+   "node": "door_fr",
+   "node_loaded": "door_fr",
+   "representative": false,
+   "opens": true,
+   "removable": true,
+   "box": {
+    "min": [
+     -1.036,
+     0.305,
+     -0.094
+    ],
+    "max": [
+     -0.629,
+     1.74,
+     1.568
+    ]
+   },
+   "remove": {
+    "dir": [
+     -0.989,
+     0.148,
+     0.0
+    ],
+    "dist": 0.9
+   }
+  },
+  {
+   "id": "door_rl",
+   "label": "Sliding door, left",
+   "section": "Body and openings",
+   "system": "Body",
+   "node": "door_rl",
+   "node_loaded": "door_rl",
+   "representative": false,
+   "opens": true,
+   "removable": true,
+   "box": {
+    "min": [
+     0.703,
+     0.324,
+     -1.355
+    ],
+    "max": [
+     0.948,
+     1.738,
+     0.02
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.989,
+     0.148,
+     0.0
+    ],
+    "dist": 0.9
+   }
+  },
+  {
+   "id": "door_rr",
+   "label": "Sliding door, right",
+   "section": "Body and openings",
+   "system": "Body",
+   "node": "door_rr",
+   "node_loaded": "door_rr",
+   "representative": false,
+   "opens": true,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.924,
+     0.324,
+     -1.355
+    ],
+    "max": [
+     -0.68,
+     1.738,
+     0.02
+    ]
+   },
+   "remove": {
+    "dir": [
+     -0.989,
+     0.148,
+     0.0
+    ],
+    "dist": 0.9
+   }
+  },
+  {
+   "id": "tailgate",
+   "label": "Tailgate",
+   "section": "Body and openings",
+   "system": "Body",
+   "node": "tailgate",
+   "node_loaded": "tailgate",
+   "representative": false,
+   "opens": true,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.68,
+     0.575,
+     -2.26
+    ],
+    "max": [
+     0.704,
+     1.17,
+     -2.106
+    ]
+   },
+   "remove": {
+    "dir": [
+     0.0,
+     0.928,
+     -0.371
+    ],
+    "dist": 0.8
+   }
+  },
+  {
+   "id": "wheel_fl",
+   "label": "Front left wheel",
+   "section": "Wheels",
+   "system": "Wheels",
+   "node": "wheel_fl",
+   "node_loaded": "wheel_fl",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.688,
+     0.0,
+     1.126
+    ],
+    "max": [
+     0.944,
+     0.706,
+     1.767
+    ]
+   },
+   "remove": {
+    "dir": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "dist": 0.7
+   }
+  },
+  {
+   "id": "wheel_fr",
+   "label": "Front right wheel",
+   "section": "Wheels",
+   "system": "Wheels",
+   "node": "wheel_fr",
+   "node_loaded": "wheel_fr",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.92,
+     0.0,
+     1.126
+    ],
+    "max": [
+     -0.664,
+     0.706,
+     1.767
+    ]
+   },
+   "remove": {
+    "dir": [
+     -1.0,
+     0.0,
+     0.0
+    ],
+    "dist": 0.7
+   }
+  },
+  {
+   "id": "wheel_rl",
+   "label": "Rear left wheel",
+   "section": "Wheels",
+   "system": "Wheels",
+   "node": "wheel_rl",
+   "node_loaded": "wheel_rl",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     0.688,
+     0.027,
+     -1.803
+    ],
+    "max": [
+     0.944,
+     0.733,
+     -1.097
+    ]
+   },
+   "remove": {
+    "dir": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "dist": 0.7
+   }
+  },
+  {
+   "id": "wheel_rr",
+   "label": "Rear right wheel",
+   "section": "Wheels",
+   "system": "Wheels",
+   "node": "wheel_rr",
+   "node_loaded": "wheel_rr",
+   "representative": false,
+   "opens": false,
+   "removable": true,
+   "box": {
+    "min": [
+     -0.92,
+     0.027,
+     -1.803
+    ],
+    "max": [
+     -0.664,
+     0.733,
+     -1.097
+    ]
+   },
+   "remove": {
+    "dir": [
+     -1.0,
+     0.0,
+     0.0
+    ],
+    "dist": 0.7
+   }
+  }
+ ],
+ "procedures": [
+  {
+   "title": "Walk-round inspection",
+   "steps": [
+    {
+     "text": "Front: bonnet shut line even both sides, lamps clear and matching, bumper paint matching the wings.",
+     "view": "front",
+     "parts": [
+      "bonnet"
+     ],
+     "open": []
+    },
+    {
+     "text": "Front left corner: tyre tread and wear across the width, wheel for kerbing, arch for rust.",
+     "view": "wheel:fl",
+     "parts": [
+      "wheel_fl"
+     ],
+     "open": []
+    },
+    {
+     "text": "Left side: door gaps even, paint matching panel to panel, sills straight. Look along the side for ripples.",
+     "view": "nearside",
+     "parts": [
+      "door_fl",
+      "door_rl"
+     ],
+     "open": []
+    },
+    {
+     "text": "Rear left corner: tyre and wheel as at the front; the arch lip.",
+     "view": "wheel:rl",
+     "parts": [
+      "wheel_rl"
+     ],
+     "open": []
+    },
+    {
+     "text": "Rear: tailgate shut lines, lamps, bumper. A boot that does not close flush has been hit.",
+     "view": "rear",
+     "parts": [
+      "tailgate"
+     ],
+     "open": []
+    },
+    {
+     "text": "Rear right corner.",
+     "view": "wheel:rr",
+     "parts": [
+      "wheel_rr"
+     ],
+     "open": []
+    },
+    {
+     "text": "Right side: the same as the left, and the charge port flap.",
+     "view": "offside",
+     "parts": [
+      "door_fr",
+      "door_rr"
+     ],
+     "open": []
+    },
+    {
+     "text": "Front right corner.",
+     "view": "wheel:fr",
+     "parts": [
+      "wheel_fr"
+     ],
+     "open": []
+    }
+   ]
+  },
+  {
+   "title": "Electric car checks",
+   "steps": [
+    {
+     "text": "Front lid: open it. Under it is a front boot or a service area: dry, no ripples in the floor, the washer and coolant fillers where the car has them.",
+     "view": "bay",
+     "parts": [
+      "bonnet"
+     ],
+     "open": [
+      "bonnet"
+     ]
+    },
+    {
+     "text": "Charge port: find its flap (on a wing or a rear quarter). It opens and shuts cleanly; the socket's pins are straight and clean, with no scorch marks.",
+     "view": "nearside",
+     "parts": [],
+     "open": []
+    },
+    {
+     "text": "Underneath: the battery pack runs the length of the floor. Its casing free of scrapes, dents and cracks: it is the car's most costly part.",
+     "view": "under",
+     "parts": [],
+     "open": []
+    },
+    {
+     "text": "Tyres: an electric car is heavy and pulls hard from rest, so tyres wear faster. Tread across the whole width on all four.",
+     "view": "wheel:fl",
+     "parts": [
+      "wheel_fl",
+      "wheel_fr",
+      "wheel_rl",
+      "wheel_rr"
+     ],
+     "open": []
+    }
+   ]
+  },
+  {
+   "title": "Doors and cabin",
+   "steps": [
+    {
+     "text": "Open the front left door: hinges and check strap, door card fit, window operation.",
+     "view": "door:fl",
+     "parts": [
+      "door_fl"
+     ],
+     "open": [
+      "door_fl"
+     ]
+    },
+    {
+     "text": "Open the front right door: hinges and check strap, door card fit, window operation.",
+     "view": "door:fr",
+     "parts": [
+      "door_fr"
+     ],
+     "open": [
+      "door_fr"
+     ]
+    },
+    {
+     "text": "Open the sliding door, left: it runs smoothly on its rollers and track, holds open on its catch, and shuts flush and latches; seals whole.",
+     "view": "door:rl",
+     "parts": [
+      "door_rl"
+     ],
+     "open": [
+      "door_rl"
+     ]
+    },
+    {
+     "text": "Open the sliding door, right: it runs smoothly on its rollers and track, holds open on its catch, and shuts flush and latches; seals whole.",
+     "view": "door:rr",
+     "parts": [
+      "door_rr"
+     ],
+     "open": [
+      "door_rr"
+     ]
+    }
+   ]
+  }
+ ],
+ "engine": {
+  "representative": false,
+  "electric": true,
+  "at": null,
+  "lid": "bonnet",
+  "note": "An electric car: it has no engine, so the machine's teaching engine pack is not fitted. Under the front lid is the car's own front end.",
+  "real_layout": "Electric: a motor at the back drives the rear wheels (the GTX adds one at the front), with the battery under the floor. It has no engine."
+ },
+ "notes": [
+  "An electric car: it has no engine, so the teaching engine pack (a petrol engine with its radiator, gearbox, fuel tank and exhaust) is not fitted. The front lid opens on the car's own front end."
+ ],
+ "credit": {
+  "title": "2023 Volkswagen ID Buzz",
+  "author": null,
+  "licence": "CC BY",
+  "url": "https://sketchfab.com/3d-models/e9fa6481f6b042129b811a263199bef9",
+  "commercial": true,
+  "line": "“2023 Volkswagen ID Buzz”, CC BY, https://sketchfab.com/3d-models/e9fa6481f6b042129b811a263199bef9"
+ },
+ "summary": "Electric people carrier: hinged front doors, a sliding door on each side and a tailgate.",
+ "hero": "volkswagen-id-buzz.webp"
+}

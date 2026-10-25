@@ -54,7 +54,7 @@
   "kind": "van",
   "body": "panel van",
   "title": "Renault Master",
-  "summary": "Large panel van with barn doors at the back, each hinged at its outer edge.",
+  "summary": "Large panel van: hinged cab doors, a sliding door on each side and barn doors at the back, each hinged at its outer edge.",
   "real_layout": "Engine at the front; most versions drive the front wheels, heavier ones the rear."
  },
  {
@@ -74,6 +74,24 @@
   "title": "Mercedes-Benz Vito",
   "summary": "Mid-size panel van: a sliding door on the right and two barn doors at the back. The model has no left sliding door.",
   "real_layout": "The real van's engine sits lengthways at the front and drives the rear wheels (some versions drive all four). The teaching engine shown is transverse front-drive, so the real layout differs."
+ },
+ {
+  "id": "mercedes-benz-sprinter-2019",
+  "request": "Mercedes-Benz Sprinter 2019 van",
+  "kind": "van",
+  "body": "large van",
+  "title": "Mercedes-Benz Sprinter 2019",
+  "summary": "Large van: hinged cab doors, a sliding door on each side and two barn doors at the back.",
+  "real_layout": "The real van's engine sits lengthways at the front and drives the rear wheels (some versions drive all four; a front-drive version mounts it across the front). The teaching engine shown is transverse front-drive, so the usual layout differs."
+ },
+ {
+  "id": "volkswagen-id-buzz",
+  "request": "Volkswagen ID Buzz",
+  "kind": "van",
+  "body": "electric people carrier",
+  "title": "Volkswagen ID. Buzz",
+  "summary": "Electric people carrier: hinged front doors, a sliding door on each side and a tailgate.",
+  "real_layout": "Electric: a motor at the back drives the rear wheels (the GTX adds one at the front), with the battery under the floor. It has no engine."
  },
  {
   "id": "cruiser",

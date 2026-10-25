@@ -27,9 +27,10 @@ Copy every file into the project's own assets once (the GLBs from the
 uploads, the rest from the URL above). Do not load from GitHub at run time.
 
 Vehicles: Volkswagen Golf 2017, Nissan Qashqai 2018, BMW 3 Series Touring
-2014, Land Rover Defender Works V8 Trophy 2021, Porsche 911, three vans
-(Renault Master, Nissan NV200 2010, Mercedes-Benz Vito), and three motorbikes
-modelled in code: a heavy cruiser, a 600 cc supersport and a 125 cc scooter.
+2014, Land Rover Defender Works V8 Trophy 2021, Porsche 911, five vans
+(Renault Master, Nissan NV200 2010, Mercedes-Benz Vito, Mercedes-Benz Sprinter
+2019, and the electric Volkswagen ID. Buzz), and three motorbikes modelled in
+code: a heavy cruiser, a 600 cc supersport and a 125 cc scooter.
 GLBs are 0.8 to 19 MB.
 
 ### The vehicle file
@@ -65,6 +66,7 @@ vehicle's left towards +X, the ground at y = 0.
   `open` lists what must be open for the step; `parts` what to highlight; `view` is a hint
   (`front`, `nearside`, `wheel:fl`, `door:fl`, `bay`, `boot`, `under`, `part`).
 - `engine`: `{representative, at, lid, note, real_layout}`. `at` is `front` or `rear` (the 911), `lid` the part over it.
+  An electric vehicle (the ID. Buzz) has `"electric": true`, `representative: false` and `at: null`: no engine-bay parts.
 - `paint`: `{hex, finish, materials, wheel_materials, caliper_materials}`: material names for a recolour.
 - `credit`: `{line, title, author, licence, url}`.
 
@@ -73,7 +75,9 @@ vehicle's left towards +X, the ground at y = 0.
 1. **The engine bay is a teaching engine.** Every car carries the machine's engine pack: one representative
    transverse four-cylinder with its gearbox, cooling, front suspension and driveshafts, the same in each car.
    Wherever an engine-bay part is shown, show a small "Teaching engine" chip, and in the vehicle's info show
-   `engine.note` and `engine.real_layout`. Never call it the vehicle's own engine.
+   `engine.note` and `engine.real_layout`. Never call it the vehicle's own engine. An electric vehicle has no
+   engine pack: no chip, no engine steps; show `engine.note` and `engine.real_layout`, and keep *See the engine run*
+   as the general teaching model, labelled as not this vehicle's.
 2. **Credit the model.** Show `credit.line` in each vehicle's info sheet (the models are CC BY).
 3. **No invented facts.** No power, torque, engine codes or prices that are not in the files.
 4. Respect `prefers-reduced-motion`: keep the springs, drop the long camera flights and auto-orbit.
@@ -125,7 +129,7 @@ three heights, with tabs:
 
 ## Done means
 
-- All eleven vehicles load. The NV200's and the Vito's side doors slide back along the body, never swing. Every hinge opens and closes. Every removable part comes off and goes back,
+- All thirteen vehicles load. The vans' side doors (Master, NV200, Vito, Sprinter, ID. Buzz) slide back along the body, never swing. Every hinge opens and closes. Every removable part comes off and goes back,
   and the counter returns to zero.
 - The "Teaching engine" chip, the real layout and the credit line show where they should.
 - The running engine shows four pistons moving, the stroke chips cycling and firing in the order 1-3-4-2.
