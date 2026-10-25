@@ -100,6 +100,9 @@ WRONG_CAR = {
     "honda-jazz-2018-v1": "is a Toyota RAV4 (badge and 'JPRAV4' plate)",
     "mini-cooper-w7-v1": "is the classic Mini, not the BMW MINI on UK roads",
     "ford-ranger-2023-v1": "is a Suzuki Vitara ('VITARA' on its tailgate), not a Ford Ranger",
+    # seen on the 1,000-vehicle check sheets
+    "audi-a1-quattro-v1": "is a Citroen C4 saloon (the same pack's file), not an Audi A1",
+    "skoda-octavia-estate-v1": "is a Peugeot 307 hatchback (its lion on the grille), not a Skoda Octavia estate",
 }
 
 
@@ -242,9 +245,26 @@ def credit_of(item):
     make, model = model_of(item)
     title = item.get("sourceTitle") or " ".join(w.upper() if len(w) <= 2 else w.capitalize()
                                                 for w in f"{make} {model}".replace("-", " ").split())   # Toyota GR Yaris
-    return {"title": title, "author": item.get("sourceCreator") or None, "licence": lic, "url": item.get("sourceUrl"),
+    author = item.get("sourceCreator") or (authors().get(item.get("assetId")) or {}).get("author")
+    return {"title": title, "author": author or None, "licence": lic, "url": item.get("sourceUrl"),
             "commercial": lic in ("CC BY", "CC BY-SA", "CC0", "owner-supplied", "royalty-free"),
-            "author_missing": not item.get("sourceCreator")}
+            "author_missing": not author}
+
+
+_AUTHORS = {}
+
+
+def authors():
+    """The authors the catalogue leaves out, as their Sketchfab pages name
+    them (authors_table.json, built by authors.py from Sketchfab's public
+    model pages): {assetId: {"author", "username", "title"}}."""
+    if not _AUTHORS:
+        p = os.path.join(HERE, "authors_table.json")
+        try:
+            _AUTHORS.update(json.load(open(p)))
+        except (OSError, ValueError):
+            _AUTHORS["_none"] = {}
+    return _AUTHORS
 
 
 def run(cmd, timeout, log=None, **kw):

@@ -502,9 +502,16 @@ def convert(car, rep, override=None, body_style=""):
                            "why": "not metre scale; wheels set to 0.68 m tall (typical, not measured)"}
     WV = np.vstack([car.verts(o) for o in wheels])
     ground = WV[:, 1].min()
-    # CENTRE ACROSS when off-centre by more than 2% of the width (Model Y, Corolla)
+    # CENTRE ACROSS when off-centre by more than 2% of the width (Model Y,
+    # Corolla): on the wheels, unless their middle is not the body's (wheels
+    # read from one side, or something else among them: the Passat scan was
+    # moved 0.8 m sideways so), then on the body itself
     dx = -(WV[:, 0].min() + WV[:, 0].max()) / 2
     lo0, hi0 = bbox(allv())
+    dxb = -(lo0[0] + hi0[0]) / 2
+    if abs(dx - dxb) > .05 * (hi0[0] - lo0[0]):
+        rep["centred_on_body"] = {"wheels_said": round(float(dx), 4), "body_says": round(float(dxb), 4)}
+        dx = dxb
     if abs(dx) <= .02 * (hi0[0] - lo0[0]):
         dx = 0.0
     else:
