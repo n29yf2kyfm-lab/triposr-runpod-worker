@@ -26,6 +26,7 @@ PART = 15_000_000                     # base64 characters a part: a multiple of 
 PART_NAMES = {"door_fl": "Front left door", "door_fr": "Front right door", "door_rl": "Rear left door",
               "door_rr": "Rear right door", "bonnet": "Bonnet", "tailgate": "Tailgate",
               "door_bl": "Back door, left", "door_br": "Back door, right"}
+SLIDING_NAMES = {"door_rl": "Sliding door, left", "door_rr": "Sliding door, right"}
 TYRE = re.compile(r"tyre|tire|pneu|rubber|reifen|lastik|gomma|neumatico|band", re.I)
 RIM = re.compile(r"\brim|rims?_|wheel|roda|jante|felge|alloy|rueda|cerchio|velg", re.I)
 CALIPER = re.compile(r"caliper|calliper|freio|pinca|pinza|bremse|sattel|etrier|brake", re.I)
@@ -153,8 +154,12 @@ def catalogue(j):
         return [nodes[c].get("name") for c in (nodes[i].get("children") or [])] if i is not None else []
     groups = []
 
+    # a van's sliding side door says so (its hinge node slides, not turns)
+    sliding = {nodes[c].get("name", "")[:-len("_hinge")] for c in top.values()
+               if "slide" in ((nodes[c].get("extras") or {}) if nodes[c].get("name", "").endswith("_hinge") else {})}
+
     def group(title, names, drill=None):
-        items = [{"id": n, "label": part_label(n)} for n in names if n]
+        items = [{"id": n, "label": SLIDING_NAMES[n] if n in sliding else part_label(n)} for n in names if n]
         if items:
             groups.append({"title": title, "drill": drill, "items": items})
     body = [n for n in ("body", "bonnet", "door_fl", "door_fr", "door_rl", "door_rr", "door_bl", "door_br", "tailgate")
@@ -175,7 +180,7 @@ def catalogue(j):
     return groups
 
 
-def procedures(cat, opens, rear_engine=False):
+def procedures(cat, opens, rear_engine=False, electric=False):
     """Step-by-step checks over the car, as a maintenance manual walks a
     procedure: each step says what to look at, which parts to open and
     highlight, and where the camera goes. Only steps whose parts this car
@@ -183,10 +188,11 @@ def procedures(cat, opens, rear_engine=False):
     have = {it["id"] for g in cat for it in g["items"]}
     opens = set(opens or [])
 
-    def step(text, view, parts=(), open_=(), note=None):
+    def step(text, view, parts=(), open_=(), note=None, always=False):
         parts = [p for p in parts if p in have]
         open_ = [p for p in open_ if p in opens]
-        return {"text": text, "view": view, "parts": parts, "open": open_, **({"note": note} if note else {})}
+        return {"text": text, "view": view, "parts": parts, "open": open_, **({"note": note} if note else {}),
+                **({"always": True} if always else {})}
     walk = [
         step("Front: bonnet shut line even both sides, lamps clear and matching, bumper paint matching the wings.", "front",
              ["bonnet"]),
@@ -213,8 +219,14 @@ def procedures(cat, opens, rear_engine=False):
         step("Belt and pulley: belt not glazed or cracked.", "part", ["bay:dgea_pulley"], [lid]),
         step("Engine mount and wiring loom: mount rubber whole, loom tidy and clipped.", "part", ["bay:dgea_mount", "bay:dgea_loom"], [lid]),
     ]
-    doors = [step(f"Open the {part_label(d).lower()}: hinges and check strap, door card fit, window operation.",
-                  "door:" + d[-2:], [d], [d]) for d in ("door_fl", "door_fr", "door_rl", "door_rr") if d in opens]
+    label = {it["id"]: it["label"] for g in cat for it in g["items"]}
+
+    def door_check(d):
+        if label.get(d, "").startswith("Sliding"):        # a van's: it runs on rollers in a track
+            return (f"Open the {label[d].lower()}: it runs smoothly on its rollers and track, holds open on its "
+                    "catch, and shuts flush and latches; seals whole.")
+        return f"Open the {part_label(d).lower()}: hinges and check strap, door card fit, window operation."
+    doors = [step(door_check(d), "door:" + d[-2:], [d], [d]) for d in ("door_fl", "door_fr", "door_rl", "door_rr") if d in opens]
     doors.append(step("Cabin: seat bolsters, steering wheel wear against the mileage, warning lights at ignition.", "cabin",
                       ["cabin"], [d for d in ("door_fl",) if d in opens]))
     under = [
@@ -224,10 +236,23 @@ def procedures(cat, opens, rear_engine=False):
         step("Turn the car over: fuel tank straps, rear suspension bushes, exhaust hangers and corrosion.", "under",
              ["bay:fuel_tank", "bay:susp_rear", "exhaust"]),
     ]
+    # an electric car: no engine bay to check, and what wears or costs is different
+    ev = [
+        step("Front lid: open it. Under it is a front boot or a service area: dry, no ripples in the floor, the "
+             "washer and coolant fillers where the car has them.", "bay", ["bonnet"], ["bonnet"], always=True),
+        step("Charge port: find its flap (on a wing or a rear quarter). It opens and shuts cleanly; the socket's pins "
+             "are straight and clean, with no scorch marks.", "nearside", always=True),
+        step("Underneath: the battery pack runs the length of the floor. Its casing free of scrapes, dents and cracks: "
+             "it is the car's most costly part.", "under", always=True),
+        step("Tyres: an electric car is heavy and pulls hard from rest, so tyres wear faster. Tread across the "
+             "whole width on all four.", "wheel:fl", ["wheel_fl", "wheel_fr", "wheel_rl", "wheel_rr"]),
+    ] if electric else []
     out = []
     for title, steps in (("Walk-round inspection", walk), ("Under the bonnet" if not rear_engine else "Under the engine lid", bay),
-                         ("Doors and cabin", doors), ("Boot and underside", under)):
-        steps = [st for st in steps if st["parts"] or st["view"] in ("front", "rear", "nearside", "offside")]
+                         ("Electric car checks", ev), ("Doors and cabin", doors), ("Boot and underside", under)):
+        steps = [st for st in steps if st["parts"] or st.pop("always", False) or st["view"] in ("front", "rear", "nearside", "offside")]
+        for st in steps:
+            st.pop("always", None)
         if len(steps) >= 2:
             out.append({"title": title, "steps": steps})
     return out
@@ -266,7 +291,8 @@ def write(report, out):
     year = asked.get("year")
     title = f"{name} {year}" if year and not st else name
     rear = fin.get("layout") == "rear engine"
-    names = dict(PART_NAMES, **({"bonnet": "Front lid", "tailgate": "Engine lid"} if rear else {}))
+    names = dict(PART_NAMES, **({"bonnet": "Front lid", "tailgate": "Engine lid"} if rear else {}),
+                 **{p: SLIDING_NAMES[p] for p in (fin.get("sliding") or {}) if p in SLIDING_NAMES})
     opens = fin.get("opens") or []
     parts = [[p, names[p]] for p in names if p in opens]
     try:
@@ -324,6 +350,10 @@ def write(report, out):
     if closed:
         notes.append("The model is a 5-door: its rear doors are closed into the body (handles off, shut lines "
                      "covered), so it reads as the 3-door asked for.")
+    electric = fin.get("powertrain") == "electric"
+    if electric:
+        notes.append("An electric car: it has no engine, so the teaching engine pack (a petrol engine with its "
+                     "radiator, gearbox, fuel tank and exhaust) is not fitted. The front lid opens on the car's own front end.")
     cr = res.get("credit") or {}
     cab = fin.get("cabin_pack") or {}
     if cab:
@@ -337,8 +367,8 @@ def write(report, out):
            "sub": f"{name}" + (f", {colour}" if colour else "") + ".", "swatch": f"rgb({srgb[0]}, {srgb[1]}, {srgb[2]})" if srgb else None,
            "facts": facts, "notes": notes, "parts": parts, "files": files, "sheet": bool(sheet and os.path.exists(sheet)),
            "lab": lab_parts(j, paint_names), "key": "car-" + re.sub(r"[^a-z0-9-]", "", str(report.get("asset") or "x").lower()),
-           "catalogue": cat, "procedures": procedures(cat, opens, rear),
-           "engine": {"lid": "tailgate" if rear else "bonnet"},
+           "catalogue": cat, "procedures": procedures(cat, opens, rear, electric),
+           "engine": {"lid": "tailgate" if rear else "bonnet", **({"electric": True} if electric else {})},
            "start": start_finish(asked, finish, srgb),
            "credit": {"title": cr.get("title") or "", "author": cr.get("author"), "licence": cr.get("licence"),
                       "url": cr.get("url"), "commercial": bool(cr.get("commercial")),

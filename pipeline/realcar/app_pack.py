@@ -271,10 +271,14 @@ def car_entry(spec, out_dir):
     for i, n in enumerate(j["nodes"]):
         if n.get("name", "").endswith("_hinge") and n.get("extras"):
             pid = n["name"][:-len("_hinge")]
-            hinges.append({"part": pid, "node": n["name"], "node_loaded": loader_name(n["name"]),
-                           "pivot": _r(world(i)[:3, 3]), "axis": n["extras"]["axis"],
-                           "open_deg": n["extras"]["open_deg"],
-                           "clip": f"{pid}_open" if any(a.get("name") == f"{pid}_open" for a in j.get("animations", [])) else None})
+            h = {"part": pid, "node": n["name"], "node_loaded": loader_name(n["name"]), "pivot": _r(world(i)[:3, 3])}
+            if "slide" in n["extras"]:          # a sliding side door: it moves (out, then back), it does not turn
+                h.update({"type": "slide", "slide": {"out_x": n["extras"]["slide"]["out"],
+                                                     "back_z": n["extras"]["slide"]["back"]}})
+            else:
+                h.update({"axis": n["extras"]["axis"], "open_deg": n["extras"]["open_deg"]})
+            h["clip"] = f"{pid}_open" if any(a.get("name") == f"{pid}_open" for a in j.get("animations", [])) else None
+            hinges.append(h)
     hinged = {h["part"] for h in hinges}
 
     parts = []
@@ -311,6 +315,7 @@ def car_entry(spec, out_dir):
             parts.append(entry)
 
     engine_lid = (cfg.get("engine") or {}).get("lid") or "bonnet"
+    electric = bool((cfg.get("engine") or {}).get("electric"))
     blk = by_part.get("bay:blk")
     engine_at = "rear" if blk is not None and (blk[0][2] + blk[1][2]) / 2 < (car_lo[2] + car_hi[2]) / 2 else "front"
     credit = cfg.get("credit") or {}
@@ -332,11 +337,15 @@ def car_entry(spec, out_dir):
         "clips": [a.get("name") for a in j.get("animations", [])],
         "parts": parts,
         "procedures": cfg.get("procedures", []),
-        "engine": {"representative": True, "at": engine_at, "lid": engine_lid,
-                   "note": "The engine bay is the machine's teaching engine pack: a representative "
-                           "transverse four-cylinder with its gearbox, cooling, front suspension and "
-                           "driveshafts. It is the same in every car here, not this vehicle's own engine.",
-                   "real_layout": spec.get("real_layout")},
+        "engine": ({"representative": False, "electric": True, "at": None, "lid": engine_lid,
+                    "note": "An electric car: it has no engine, so the machine's teaching engine pack is not "
+                            "fitted. Under the front lid is the car's own front end.",
+                    "real_layout": spec.get("real_layout")} if electric else
+                   {"representative": True, "at": engine_at, "lid": engine_lid,
+                    "note": "The engine bay is the machine's teaching engine pack: a representative "
+                            "transverse four-cylinder with its gearbox, cooling, front suspension and "
+                            "driveshafts. It is the same in every car here, not this vehicle's own engine.",
+                    "real_layout": spec.get("real_layout")}),
         "notes": ans.get("notes") or [],
         "credit": {"title": credit.get("title"), "author": credit.get("author"),
                    "licence": credit.get("licence"), "url": credit.get("url"),

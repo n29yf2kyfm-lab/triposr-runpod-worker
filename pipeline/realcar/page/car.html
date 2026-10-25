@@ -341,7 +341,7 @@ section h2 { font: 600 22px/1.1 var(--display); margin: 8px 0 10px; letter-spaci
           <div id="engineList"></div>
           <p class="empty" id="noEngine" hidden>This file has no engine parts.</p>
 
-          <h3>See how an engine runs</h3>
+          <h3 id="runHead">See how an engine runs</h3>
           <div class="card" id="runCard">
             <p class="note">A four-cylinder petrol engine, cut open and modelled by the machine so you can watch it work: pistons, rods, crankshaft, camshafts, valves and timing chain, all moving together. It is a teaching model of how this kind of engine runs, not a scan of this car's own engine.</p>
           </div>
@@ -1846,6 +1846,13 @@ function runSystem(sys) {
   redraw();
 }
 function runSetup() {
+  if (CAR.engine && CAR.engine.electric) {
+    // an electric car: no engine of its own; the running engine stays as a lesson in how a petrol one works
+    $('noEngine').textContent = 'An electric car: no engine, radiator, fuel tank or exhaust. Under the front lid is the car\u2019s own front end.';
+    $('runHead').textContent = 'How a petrol engine works';
+    const note = $('runCard').querySelector('.note');
+    if (note) note.textContent = 'This car is electric and has no engine. To compare, here is a four-cylinder petrol engine, cut open and modelled by the machine: pistons, rods, crankshaft, camshafts, valves and timing chain, all moving together.';
+  }
   $('runEngine').addEventListener('click', () => runView(!RUN.on));
   document.querySelectorAll('#runMode button').forEach(b => b.addEventListener('click', () => runMode(b.dataset.m)));
   $('runPlay').addEventListener('click', () => { RUN.play = !RUN.play; $('runPlay').setAttribute('aria-pressed', String(RUN.play)); $('runPlay').textContent = RUN.play ? 'Pause' : 'Play'; redraw(); });

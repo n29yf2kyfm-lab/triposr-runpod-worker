@@ -110,6 +110,37 @@ GAME = re.compile(r"gran turismo (?:\d|sport)\b|grand turismo|\bforza\b|\bgta ?[
                   r"die-?cast|matchbox|cartoon|chibi|\brc car\b", re.I)
 
 
+# an electric car has no engine: the engine pack (a petrol four, its radiator,
+# gearbox, fuel tank and exhaust) is not fitted (the Tesla had all of them).
+# Only models sold as electric only; a plug-in or hybrid keeps its engine, and
+# a name used for both (Volvo's "Recharge", BYD's DM models) is left alone
+ELECTRIC = re.compile(
+    r"\btesla\b|\bmodel [3sxy]\b|\bi[3457]\b|\bix\d?\b|\bid\.?\s?[34567]\b|\bid\.?\s?buzz\b|\be-?golf\b|\be-?up\b|"
+    r"\be-?tron\b|\beq[abcesv]\b|\bleaf\b|\bariya\b|\bzoe\b|\be-?tech electric\b|\bev[3569]\b|\be-?niro\b|\bniro ev\b|"
+    r"\bioniq ?[56]\b|\bkona electric\b|\be-(?:208|2008|308|3008|5008|rifter|partner|expert|traveller)\b|\bcorsa-?e\b|"
+    r"\bmokka-?e\b|\b500e\b|\be500\b|\btaycan\b|\bmg ?4\b|\bzs ev\b|\benyaq\b|\belroq\b|\bborn\b|\bi-?pace\b|"
+    r"\bex(?:30|40|90)\b|\bc40\b|\bmach-?e\b|\bhonda e\b|\beletre\b|\bsmart #\d|\beq fortwo\b|\brivian\b|\blucid\b|"
+    r"\belectric\b|\b(?:ev|bev)\b", re.I)
+BYD_ELECTRIC = {"atto 2", "atto 3", "dolphin", "dolphin mini", "seagull", "seal", "sealion 7", "yuan plus", "m6",
+                "yangwang u7", "yangwang u9"}
+NOT_ELECTRIC = re.compile(r"hybrid|phev|plug-?in|\bi8\b|\bdm-?i\b|\bdm\b|\ba3\b.*e-?tron|\bt8\b|range extender", re.I)
+
+
+def is_electric(item, *more):
+    """Whether a catalogue record (or a stand-in's target name) is an
+    electric-only car."""
+    text = " ".join([str(item.get(k) or "") for k in ("make", "model", "modelFamily", "sourceTitle", "assetId")]
+                    + [str(m or "") for m in more])
+    text = re.sub(r"[-_](?=\w)", " ", text)
+    make = str(item.get("make") or "").lower()
+    if make == "polestar":
+        return True
+    if make == "byd":            # BYD sells its names as electric and as DM plug-ins: the electric-only ones by name
+        model = re.sub(r"[-_\s]+", " ", str(item.get("model") or "").lower()).strip()
+        return model in BYD_ELECTRIC
+    return bool(ELECTRIC.search(text)) and not NOT_ELECTRIC.search(text)
+
+
 def is_game(item):
     return bool(GAME.search(" ".join(str(item.get(k) or "") for k in ("sourceTitle", "model", "assetId", "sourceUrl"))))
 
@@ -495,6 +526,9 @@ def one(target, item, args, out):
         spec["paint"] = list(args.paint)
     if getattr(args, "drive", None):
         spec["drive"] = args.drive
+    # an electric car: no engine pack (finish.py keeps its own front end)
+    if is_electric(item, (st or {}).get("name")):
+        spec["electric"] = True
     # a van opens at the back as two barn doors (finish.py)
     if str(item.get("bodyStyle") or "").lower() == "van" or (st or {}).get("body") == "van":
         spec["body_family"] = "van"
@@ -511,9 +545,21 @@ def one(target, item, args, out):
         spec["wheelbase"] = auto_wheelbase(item, rep, rec, getattr(args, "year", None))
     # a person's corrections from the Studio (edits.py): parts set by hand and
     # hinge choices
-    rig_hinges = (json.load(open(rr_path)).get("hinges") if os.path.exists(rr_path) else None) or {}
+    rig_res = json.load(open(rr_path)) if os.path.exists(rr_path) else {}
+    rig_hinges = rig_res.get("hinges") or {}
     if rig_hinges:                               # the rig's own: a back door carrying the spare swings sideways
         spec["hinges"] = {**spec.get("hinges", {}), **rig_hinges}
+    # sliding side doors: the rig's own judgement (a name, the van signature),
+    # and every van's, and a tall MPV's (2.6 wheels or more: the ID Buzz, the
+    # Multivan; a Touran or a Galaxy is lower and hinged)
+    slide = {p for p, m in (rig_res.get("motion") or {}).items() if (m or {}).get("type") == "slide"}
+    rep_p = os.path.join(rig, "src.report.json")
+    sig = (json.load(open(rep_p)).get("door_signature") if os.path.exists(rep_p) else None) or {}
+    tall = max([v.get("height_in_wheels") or 0 for v in sig.values()] or [0])
+    if spec.get("body_family") == "van" or (str(item.get("bodyStyle") or "").lower() == "mpv" and tall >= 2.6):
+        slide |= set(sig)
+    for p in sorted(slide & {"door_rl", "door_rr"}):
+        spec.setdefault("hinges", {})[p] = {**spec.get("hinges", {}).get(p, {}), "slide": True}
     ed_p = os.path.join(rig, "edits.json")
     if os.path.exists(ed_p):
         ed = json.load(open(ed_p))
@@ -537,7 +583,8 @@ def one(target, item, args, out):
     tm["finish"] = round(time.time() - t0, 1)
     rec["finish"] = {k: flog.get(k) for k in ("opens", "missing", "layout", "bonnet", "tailgate", "door_trims", "rescale",
                                               "glass_cleared", "measured", "bay_cleared_m2", "engine_pack", "cabin_pack", "paint_set",
-                                              "manual", "wheel_strays", "wheel_tyres_from_body", "right_hand_drive")}
+                                              "manual", "wheel_strays", "wheel_tyres_from_body", "right_hand_drive",
+                                              "powertrain", "sliding")}
     # validator, web copy and check sheet at the same time: the sheet is drawn
     # from the finished file, so it need not wait for the compression
     web = os.path.join(d, "web.glb")

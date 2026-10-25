@@ -18,9 +18,11 @@ SPEC.json:
      "credit": "2023 Volkswagen Polo GTI by … (CC BY 4.0)",   # optional, -> asset.copyright
      "paint": [20, 20, 22],                                   # optional, sRGB 0-255
      "keep_native_engine": false,                             # optional: keep a model's own bay
+     "electric": false,                                       # optional: an electric car, no engine pack
      "manual": ["bonnet", "door_fl"],                         # optional: parts set by hand in the
                                                               # Studio (edits.py): taken as they are
-     "hinges": {"bonnet": {"edge": "front", "deg": 50}}}      # optional: hinge edge and angle
+     "hinges": {"bonnet": {"edge": "front", "deg": 50},       # optional: hinge edge and angle,
+                "door_rl": {"slide": true}}}                  # or a side door that slides back
 Relative paths are taken from the spec file's folder.
 
 What it does, in order:
@@ -133,22 +135,28 @@ def islands(T, weld=2e-4):
     return lab[:nt], vid
 
 
-def surface_points(T, step=0.008):
+def surface_points(T, step=0.008, with_index=False):
     """Vertices plus points spread over each triangle about `step` apart, so a
-    nearest-point query measures distance to the surface, not to corners."""
+    nearest-point query measures distance to the surface, not to corners.
+    With with_index, also the triangle each point lies on."""
     a, _ = tri_area_normal(T)
     pts = [T.reshape(-1, 3)]
+    idx = [np.repeat(np.arange(len(T)), 3)]
     k = np.clip(np.ceil(np.sqrt(a) / step), 1, 40).astype(int)
     for n in np.unique(k):
         if n < 2:
             continue
-        sel = T[k == n]
+        on = np.where(k == n)[0]
+        sel = T[on]
         u, v = np.meshgrid(np.arange(n + 1), np.arange(n + 1))
         keep = (u + v) <= n
         u, v = u[keep] / n, v[keep] / n
         w = 1 - u - v
         P = (sel[:, None, 0] * w[None, :, None] + sel[:, None, 1] * u[None, :, None] + sel[:, None, 2] * v[None, :, None])
         pts.append(P.reshape(-1, 3))
+        idx.append(np.repeat(on, len(u)))
+    if with_index:
+        return np.vstack(pts), np.concatenate(idx)
     return np.vstack(pts)
 
 
@@ -241,6 +249,82 @@ def _alpha_soft(g, mat):
         return float(np.mean((a >= 0.1) & (a <= 0.9)))
     except Exception:
         return None
+
+
+def lamp_lens(mat):
+    """A lamp's lens: by its name (lamp, light, lens, red, amber ...; never a
+    brake disc's), or, as many models name nothing, by its colour: red or
+    amber (the 1998 Micra's tail lamps are "Material.005", a see-through red)."""
+    name = mat.get("name", "")
+    if re.search(r"disc|disk|caliper|rotor|pad", name, re.I):
+        return False
+    if re.search(r"lamp|light|lens|reflector|indicator|signal|red|amber|orange", name, re.I):
+        return True
+    r, g, b = mat.get("pbrMetallicRoughness", {}).get("baseColorFactor", [1, 1, 1, 1])[:3]
+    return r >= 0.25 and b < 0.4 * r and g < 0.65 * r
+
+
+def tail_lamps_inside(T, tmat, nrm, lamps, zback, ylo, yhi):
+    """The inner edge (|x|) of the tail lamps on a car's back: lens triangles
+    facing back within 25 cm of the rearmost point, between ylo and yhi,
+    off the middle (not a plate lamp or a high brake light). None if none."""
+    c = T.mean(1)
+    lt = np.isin(tmat, lamps) & (c[:, 2] < zback + 0.25) & (nrm[:, 2] < -0.5) & (c[:, 1] > ylo) & (c[:, 1] < yhi) \
+        & (np.abs(c[:, 0]) > 0.25)
+    if not lt.any() or tri_area_normal(T[lt])[0].sum() <= 0.003:
+        return None
+    return float(np.percentile(np.abs(T[lt].reshape(-1, 3)[:, 0]), 2))
+
+
+def bumper_top(T, keep, x_lo, x_hi, ytop, ylow, zmax, below=0.10, painted=None):
+    """Going down a car's back from ytop, off its middle (|x| in x_lo..x_hi),
+    the bumper's top, at least `below` under ytop: the first place the back
+    either steps back 2 cm or more in 1 cm and 4 cm or more in 3 cm, beyond
+    the lean of the surface higher up (a sloping tailgate, a rounded lip),
+    and stays back (a lamp's lip comes forward again; a number plate's recess
+    steps back less); or, with `painted` (the triangles in the body colour),
+    turns from paint to something else for the next 15 cm (a black bumper
+    nearly flush with the doors, the Master's; a number plate or a trim strip
+    is not that tall). The rearmost surface in 1 cm steps, from points spread
+    over the triangles `keep` (their corners alone leave steps empty or deep
+    inside), the rearmost within 1 cm. None if not found."""
+    c = T.mean(1)
+    sel = keep & (np.abs(c[:, 0]) > x_lo - 0.05) & (np.abs(c[:, 0]) < x_hi + 0.05) & (c[:, 2] < zmax) \
+        & (c[:, 1] < ytop + 0.05) & (c[:, 1] > ylow - 0.05)
+    if not sel.any():
+        return None
+    on = np.where(sel)[0]
+    P, ti = surface_points(T[on], 0.01, with_index=True)
+    pa = painted[on][ti] if painted is not None else np.zeros(len(P), bool)
+    m = (np.abs(P[:, 0]) > x_lo) & (np.abs(P[:, 0]) < x_hi) & (P[:, 2] < zmax)
+    P, pa = P[m], pa[m]
+    yb = np.arange(ytop, ylow, -0.01)
+    hb = np.floor((ytop - P[:, 1]) / 0.01).astype(np.int64)
+    ok = (hb >= 0) & (hb < len(yb))
+    P, pa, hb = P[ok], pa[ok], hb[ok]
+    zb = np.full(len(yb), np.inf)
+    np.minimum.at(zb, hb, P[:, 2])
+    fb = np.zeros(len(yb), bool)                 # the rearmost point of each step painted
+    o = np.lexsort((P[:, 2], hb))
+    first = np.r_[True, hb[o][1:] != hb[o][:-1]]
+    fb[hb[o][first]] = pa[o][first]
+    # a 1 cm gap between panels: the rearmost within 1 cm
+    zs = np.stack([zb, np.r_[zb[1:], np.inf], np.r_[np.inf, zb[:-1]]])
+    fs = np.stack([fb, np.r_[fb[1:], False], np.r_[False, fb[:-1]]])
+    j = zs.argmin(0)
+    zb, fb = zs[j, np.arange(len(yb))], fs[j, np.arange(len(yb))]
+    for k in range(max(int(round(below / 0.01)) + 1, 11), len(yb) - 10):
+        z0 = zb[k - 1]
+        if not (np.isfinite(z0) and np.isfinite(zb[k - 11]) and np.isfinite(zb[k - 6])):
+            continue
+        lean = max((zb[k - 11] - zb[k - 6]) / 5, 0.0)    # metres further back per step, higher up
+        if zb[k] < z0 - lean - 0.02 and zb[k + 2] < z0 - 3 * lean - 0.04 \
+                and np.median(zb[k:k + 10]) <= zb[k] + 0.01:
+            return float(yb[k - 1]) - 0.01
+        if painted is not None and fb[k - 3:k].all() and k + 15 <= len(yb) \
+                and np.isfinite(zb[k:k + 15]).all() and (~fb[k:k + 15]).mean() >= 0.9:
+            return float(yb[k - 1]) - 0.01
+    return None
 
 
 def is_clear_glass(mat):
@@ -429,6 +513,51 @@ def fit_cabin(g, recs, path, to_out, s, ground, zf, zr):
     return root, {"from": cr.get("title"), "author": cr.get("author"), "licence": cr.get("licence"), "url": cr.get("url"),
                   "scale": [round(sx, 3), round(sy * shrink, 3), round(sz, 3)], "back_m": round(-dz, 3),
                   "down_m": round(-dy, 3), "outside": round(out, 4)}
+
+
+def wheel_outliers(recs, log):
+    """Pieces the rig gave a wheel that lie wholly outside it: past its
+    tyre's sides by more than 3 cm, or past its tread by more than 5%. The
+    2017 Golf's model has a small black, plastic and chrome piece floating by
+    each wheel (out beside the front tyres, down to the ground; behind the
+    rears): left in, they set the ground 10 cm under the tyres and the wheels'
+    cylinders too big. The tyre's radius is the wheel's piece of the largest
+    diameter; its width, all its pieces on that axle. A small piece (under a
+    tenth of the wheel's area) is dropped; a larger one goes back to the body."""
+    groups = {}
+    for r in recs:
+        if r["rig"].startswith("wheel_") and len(r["I"]):
+            groups.setdefault(r["rig"], []).append(r)
+    dropped, to_body = {}, {}
+    for k, rs in groups.items():
+        boxes = [(r["P"][np.unique(r["I"])].min(0), r["P"][np.unique(r["I"])].max(0)) for r in rs]
+        dia = [max(hi[1] - lo[1], hi[2] - lo[2]) for lo, hi in boxes]
+        lo_t, hi_t = boxes[int(np.argmax(dia))]
+        c, R = (lo_t + hi_t) / 2, max(dia) / 2
+        # its width: every piece on the same axle (tyre, rim, disc, hub; a
+        # tyre modelled as two sidewalls and a tread, the M5's), centred
+        # within a tenth of the radius
+        on_axle = [b for b in boxes if np.hypot((b[0][1] + b[1][1]) / 2 - c[1], (b[0][2] + b[1][2]) / 2 - c[2]) < 0.1 * R]
+        lo_t = np.min([b[0] for b in on_axle], 0)
+        hi_t = np.max([b[1] for b in on_axle], 0)
+        areas = [float(tri_area_normal(r["P"][r["I"]])[0].sum()) for r in rs]
+        for r, a in zip(rs, areas):
+            V = r["P"][np.unique(r["I"])]
+            out = (V[:, 0] < lo_t[0] - 0.03) | (V[:, 0] > hi_t[0] + 0.03) \
+                | (np.hypot(V[:, 1] - c[1], V[:, 2] - c[2]) > 1.05 * R)
+            if not out.all():
+                continue
+            if a < 0.1 * sum(areas):
+                dropped[k] = dropped.get(k, 0) + len(r["I"])
+                r["I"] = r["I"][:0]
+            else:
+                to_body[k] = to_body.get(k, 0) + len(r["I"])
+                r["rig"] = "body"
+    if dropped:
+        log["wheel_outliers_dropped"] = dropped
+    if to_body:
+        log["wheel_outliers_to_body"] = to_body
+    recs[:] = [r for r in recs if len(r["I"])]
 
 
 def wheel_strays(recs, mats, log):
@@ -658,6 +787,8 @@ def finish(src, spec, out, base_dir="."):
 
 
     # ── frame: wheels give the axles, the ground and the track ──
+    if not any(p.startswith("wheel_") for p in manual):
+        wheel_outliers(recs, log)
     wc = {}
     for r in recs:
         if r["rig"].startswith("wheel_"):
@@ -773,6 +904,25 @@ def finish(src, spec, out, base_dir="."):
         if up_area > 0.5:
             glass.add(i)
             m["alphaMode"] = "BLEND"
+    # Tinted windows: a blended, colourless material too dark or too opaque
+    # for clear glass (the 1998 Micra's grey at 0.79), any name, with over a
+    # square metre above the waist, all round the car (front and back of the
+    # cabin, both sides): no lamp or trim covers that
+    for i, m in enumerate(mats):
+        if i in glass or m.get("alphaMode") != "BLEND":
+            continue
+        c = m.get("pbrMetallicRoughness", {}).get("baseColorFactor", [1, 1, 1, 1])
+        if not (c[3] < 0.9 and max(c[:3]) - min(c[:3]) < 0.08):
+            continue
+        Tu = [t[t.mean(1)[:, 1] > waist] for t in (tris(r) for r in recs if r["mat"] == i)]
+        Tu = np.vstack(Tu) if Tu else np.zeros((0, 3, 3))
+        if not len(Tu) or float(tri_area_normal(Tu)[0].sum()) < 1.0:
+            continue
+        cu = Tu.mean(1)
+        if (cu[:, 0] > 0.3).any() and (cu[:, 0] < -0.3).any() and (cu[:, 2] > zr + 0.3 * (zf - zr)).any() \
+                and (cu[:, 2] < zr + 0.2 * (zf - zr)).any():
+            glass.add(i)
+            log.setdefault("glass_tinted", []).append(m.get("name"))
 
     label = np.array(["body"] * nl, dtype=object)
     glass_m2 = mat_area[:, sorted(glass)].sum(1) if glass else np.zeros(nl)
@@ -939,14 +1089,59 @@ def finish(src, spec, out, base_dir="."):
     named_tg = area[grear].sum() > 0.15 and area[grear & rig_tg0].sum() > 0.5 * area[grear].sum()
     if named_tg:
         log["tailgate_named"] = True
-    if area[grear].sum() > 0.15 and "tailgate" not in manual and not named_tg:
-        Rv = T[grear].reshape(-1, 3)
-        rw_lo, rw_hi, rw_cz, rw_m2 = Rv.min(0), Rv.max(0), float(tri_c[grear, 2].mean()), float(area[grear].sum())
-        xb = max(abs(rw_lo[0]), abs(rw_hi[0])) + 0.08
-        zfront = rw_hi[2] + 0.10
-        under = [i for i in range(nl) if dom[i] == paint and abs(hi[i, 1] - rw_lo[1]) < 0.04
-                 and cz[i] < rw_cz and max(abs(lo[i, 0]), abs(hi[i, 0])) < xb and isl_area[i] > 0.1]
-        ybot = (min(lo[i, 1] for i in under) if under else rw_lo[1] - 0.35) - 0.01
+    # A panel van has no rear window to start from (the NV200's back is all
+    # steel): the opening is then the van's painted back. Sides: inside the
+    # tail lamps in the rear pillars; top: just under the roof's edge; bottom:
+    # going down the back off-centre (the number plate's recess is not a
+    # step), the first step back of 2 cm or more, which is the bumper's top.
+    # The back leans forward as it rises (17 cm on the NV200), so it is taken
+    # by its facing, not by its depth. The barn-door split further on halves
+    # it. A van with rear glass, or a back its model names, is found as before.
+    van_back = None
+    if area[grear].sum() <= 0.15 and spec.get("body_family") == "van" and "tailgate" not in manual and not named_tg \
+            and (tmat == paint).any():
+        zmin_v = float(T[tmat == paint].reshape(-1, 3)[:, 2].min())
+        back_paint_v = (tmat == paint) & (tri_c[:, 2] < min(zr, zmin_v + 0.35)) & (nrm[:, 2] < -0.6) \
+            & (tri_c[:, 1] > ground + 0.9 * (wheel_top - ground))
+        if area[back_paint_v].sum() > 0.6:
+            Pb_v = T[back_paint_v].reshape(-1, 3)
+            xh_v = float(np.percentile(np.abs(Pb_v[:, 0]), 98)) - 0.10
+            ytop_v = float(np.percentile(Pb_v[:, 1], 99)) - 0.04
+            # the tail lamps in the rear pillars, under the roof
+            li_v = tail_lamps_inside(T, tmat, nrm, [i for i in range(nm) if i not in paint_ids and lamp_lens(mats[i])],
+                                     zmin_v, ground + 0.9 * (wheel_top - ground), ytop_v - 0.15)
+            if li_v is not None:
+                xh_v = min(xh_v, li_v - 0.02)
+            # the bumper's top, as for a welded tailgate below, everything but
+            # glass; at least 40 cm under the roof's edge
+            keep_v = ~np.isin(tmat, list(glass))
+            ybot_v = bumper_top(T, keep_v, 0.25, max(0.45, 0.6 * xh_v), ytop_v, ground + 0.3 * (wheel_top - ground),
+                                zmin_v + 0.35, below=0.40, painted=np.isin(tmat, list(paint_ids)))
+            # the back's front edge: the most forward of its rearmost surface
+            # (in 1 cm steps) along the top 40 cm
+            Pt_v = T[keep_v].reshape(-1, 3)
+            Pt_v = Pt_v[(np.abs(Pt_v[:, 0]) > 0.25) & (np.abs(Pt_v[:, 0]) < max(0.45, 0.6 * xh_v))
+                        & (Pt_v[:, 1] <= ytop_v) & (Pt_v[:, 1] > ytop_v - 0.41) & (Pt_v[:, 2] < zmin_v + 0.35)]
+            if len(Pt_v):
+                rb_v = np.full(41, np.inf)
+                np.minimum.at(rb_v, np.floor((ytop_v - Pt_v[:, 1]) / 0.01).astype(np.int64), Pt_v[:, 2])
+                rb_v = rb_v[np.isfinite(rb_v)]
+            if xh_v > 0.3 and ybot_v is not None and ytop_v - ybot_v > 0.6 and len(Pt_v):
+                van_back = {"x_half": xh_v, "top_y": ytop_v, "bottom_y": ybot_v, "z_front": float(rb_v.max()) + 0.05,
+                            "m2": float(area[back_paint_v].sum())}
+                log["van_back"] = {k: round(v, 3) for k, v in van_back.items()}
+    if (area[grear].sum() > 0.15 or van_back) and "tailgate" not in manual and not named_tg:
+        if van_back:
+            rw_m2 = van_back["m2"]
+            xb, zfront, ybot = van_back["x_half"], van_back["z_front"], van_back["bottom_y"]
+        else:
+            Rv = T[grear].reshape(-1, 3)
+            rw_lo, rw_hi, rw_cz, rw_m2 = Rv.min(0), Rv.max(0), float(tri_c[grear, 2].mean()), float(area[grear].sum())
+            xb = max(abs(rw_lo[0]), abs(rw_hi[0])) + 0.08
+            zfront = rw_hi[2] + 0.10
+            under = [i for i in range(nl) if dom[i] == paint and abs(hi[i, 1] - rw_lo[1]) < 0.04
+                     and cz[i] < rw_cz and max(abs(lo[i, 0]), abs(hi[i, 0])) < xb and isl_area[i] > 0.1]
+            ybot = (min(lo[i, 1] for i in under) if under else rw_lo[1] - 0.35) - 0.01
         if rear_engine:
             # the engine lid: from the rear window's lower edge back, above the
             # rear lamps (the 992's light bar stays on the body), the window
@@ -976,6 +1171,8 @@ def finish(src, spec, out, base_dir="."):
         near_share = np.bincount(lab3, weights=near.astype(float), minlength=nl) / np.maximum(
             np.bincount(lab3, minlength=nl), 1)
         inside = (np.abs(lo[:, 0]) <= xb) & (np.abs(hi[:, 0]) <= xb) & (lo[:, 1] >= ybot) & (hi[:, 2] <= zfront)
+        if van_back:                           # the high brake light on the roof stays
+            inside &= hi[:, 1] <= van_back["top_y"] + 0.02
         tg = inside & (near_share > 0.5)
         # the window pane can be modelled twice (outer and inner face): both go
         if not rear_engine:
@@ -1008,35 +1205,90 @@ def finish(src, spec, out, base_dir="."):
             del log["tailgate"]
         elif tg_paint < 0.3 and shells_r:
             sh = max(shells_r, key=lambda i: mat_area[i, paint])
-            tp_ = np.where(tmat == paint)[0]
             # the panel's full thickness: paint and the liner behind it, within
-            # 8 cm of the rearmost surface, in 3 cm cells
+            # 8 cm of the rearmost surface, in 3 cm cells. The surface from
+            # points spread over the rear half's triangles: a big triangle's
+            # corners alone leave cells where a trim inside the boot (the
+            # 1998 Micra's) looks like the skin
             ts = np.where(~np.isin(tmat, list(glass)))[0]
             cen = T[ts].mean(1)
-            on_skin = skin(cen, T[ts].reshape(-1, 3), (0, 1), -1, 0.08)
+            back_ts = ts[cen[:, 2] < zr]
+            skin_pts = surface_points(T[back_ts], 0.02) if len(back_ts) else T[ts].reshape(-1, 3)
+            on_skin = skin(cen, skin_pts, (0, 1), -1, 0.08)
             if rear_engine:                    # an engine lid lies flat: its top skin too
                 on_skin |= skin(cen, T[ts].reshape(-1, 3), (0, 2), 1, 0.07)
-            sp = T[tp_].reshape(-1, 3)
-            mid = sp[np.abs(sp[:, 0]) < 0.15]
-            ytop_b = rw_lo[1]
-            yb = np.arange(ytop_b, 0.6 * wheel_top, -0.01)
-            zb = np.array([mid[(mid[:, 1] <= y) & (mid[:, 1] > y - 0.01), 2].min()
-                           if ((mid[:, 1] <= y) & (mid[:, 1] > y - 0.01)).any() else np.nan for y in yb])
-            ycut = rw_lo[1] - 0.35
-            for k in range(11, len(yb)):
-                if np.isfinite(zb[k]) and np.isfinite(zb[k - 1]) and zb[k] < zb[k - 1] - 0.02:
-                    ycut = float(yb[k - 1])
-                    break
-            xt = max(abs(rw_lo[0]), abs(rw_hi[0])) + 0.02
-            ztop = rw_hi[2] + 0.02
+            ytopc, xt_low, ywin = np.inf, None, None
+            if van_back:                       # the van's back, as found above
+                xt, ycut, ztop, ytopc = van_back["x_half"], van_back["bottom_y"], van_back["z_front"], van_back["top_y"]
+            else:
+                xt = max(abs(rw_lo[0]), abs(rw_hi[0])) + 0.02
+                # under the window, inside the tail lamps when they sit in the
+                # body's corners and reach just inside the window's width (the
+                # Micra's): they stay on the body
+                li = tail_lamps_inside(T, tmat, nrm, [i for i in range(nm) if i not in paint_ids and lamp_lens(mats[i])],
+                                       float(T[np.isin(tmat, list(paint_ids))].reshape(-1, 3)[:, 2].min()),
+                                       ground + 0.5 * (wheel_top - ground), rw_lo[1])
+                # (lamps far inside the window's width are on the lid, or a
+                # light bar across it: the Focus's, the Roma's)
+                if li is not None and 0.85 * xt <= li - 0.02 < xt and not rear_engine:
+                    xt_low, ywin = li - 0.02, rw_lo[1]
+                    log["tailgate"]["inside_lamps_x"] = round(xt_low, 3)
+                # A boot lid (a saloon's, a coupe's: a deck of 35 cm or more
+                # from the rear window to the tail) ends at its own lip: the
+                # first step back in the paint down the middle. A tailgate
+                # runs down to the bumper (bumper_top).
+                # (the window's lower edge by area: a lamp's clear lens behind it
+                # is small, the 128i coupe's)
+                gy, ga = tri_c[grear, 1], area[grear]
+                o_ = np.argsort(gy)
+                y5 = float(gy[o_][np.searchsorted(np.cumsum(ga[o_]), 0.05 * ga.sum())])
+                low = grear & (np.abs(tri_c[:, 1] - y5) < 0.03)
+                deck = float(np.percentile(tri_c[low, 2], 5) - T[np.isin(tmat, list(paint_ids))].reshape(-1, 3)[:, 2].min())
+                log["tailgate"]["deck_m"] = round(deck, 3)
+                ycut = None
+                if deck >= 0.35:
+                    sp = T[np.isin(tmat, list(paint_ids))].reshape(-1, 3)
+                    mid = sp[np.abs(sp[:, 0]) < 0.15]
+                    yb = np.arange(rw_lo[1], 0.6 * wheel_top, -0.01)
+                    zb = np.array([mid[(mid[:, 1] <= y) & (mid[:, 1] > y - 0.01), 2].min()
+                                   if ((mid[:, 1] <= y) & (mid[:, 1] > y - 0.01)).any() else np.nan for y in yb])
+                    for k in range(11, len(yb)):
+                        if np.isfinite(zb[k]) and np.isfinite(zb[k - 1]) and zb[k] < zb[k - 1] - 0.02:
+                            ycut = float(yb[k - 1])
+                            break
+                else:
+                    ycut = bumper_top(T, ~np.isin(tmat, list(glass)), 0.2, max(0.4, 0.6 * xt), rw_lo[1], 0.3 * wheel_top,
+                                      rw_hi[2] + 0.30, painted=np.isin(tmat, list(paint_ids)))
+                if ycut is None:
+                    ycut = rw_lo[1] - 0.35
+                ztop = rw_hi[2] + 0.02
             if rear_engine:                    # the engine lid's box, as above
                 ycut, ztop = ybot, zfront
 
-            def tfield(P, xt=xt, ycut=ycut, ztop=ztop):
-                return np.maximum.reduce([np.abs(P[:, 0]) - xt, ycut - P[:, 1], P[:, 2] - ztop])
+            xw = xt if xt_low is None else xt_low
+
+            def tfield(P, xt=xt, xw=xw, ywin=ywin, ycut=ycut, ztop=ztop, ytopc=ytopc):
+                xs = np.abs(P[:, 0]) - (xt if ywin is None else np.where(P[:, 1] >= ywin, xt, xw))
+                return np.maximum.reduce([xs, ycut - P[:, 1], P[:, 2] - ztop, P[:, 1] - ytopc])
+            if not rear_engine:
+                # a floor meeting the back at the sill (a van's load floor) is
+                # not the panel: near the bottom edge, what faces up or down
+                # goes with it only within 3 cm of the skin (its own edges)
+                on_skin &= (np.abs(nrm[ts, 1]) < 0.7) | (cen[:, 1] > ycut + 0.15) \
+                    | skin(cen, skin_pts, (0, 1), -1, 0.03)
             cuts.append(("tailgate", ts[on_skin], tfield))
             log["tailgate"]["cut"] = {"from": "the body shell's rear skin", "x_half": round(float(xt), 3),
                                       "bottom_y": round(ycut, 3)}
+            # the pieces on the cut panel go with it (the 1998 Micra's
+            # number plate and badge, under the window's box above)
+            if not rear_engine and ycut < ybot:
+                # (lying on it: a boot-floor trim reaching into the car is not)
+                more = (np.abs(lo[:, 0]) <= xw) & (np.abs(hi[:, 0]) <= xw) & (lo[:, 1] >= ycut - 0.01) \
+                    & (hi[:, 1] <= ytopc + 0.02) & (hi[:, 2] <= ztop) & (hi[:, 2] - lo[:, 2] < 0.10) \
+                    & (near_share > 0.5) & (label == "body") & ~np.isin(dom, list(paint_ids))
+                label[more] = "tailgate"
+                if more.any():
+                    log["tailgate"]["cut"]["pieces_on_it"] = int(more.sum())
 
     # no tailgate found here: the rig machine's tailgate stands, as the islands
     # mostly made of its triangles
@@ -1196,7 +1448,7 @@ def finish(src, spec, out, base_dir="."):
     lid_part = "tailgate" if rear_engine else "bonnet"
     bt = [r["P"][r["I"][r["tri_part"] == lid_part]] for r in recs if (r["tri_part"] == lid_part).any()]
     cleared = 0.0
-    if bt and spec.get("engine_pack") and not spec.get("keep_native_engine"):
+    if bt and spec.get("engine_pack") and not spec.get("keep_native_engine") and not spec.get("electric"):
         B = np.vstack(bt).reshape(-1, 3)
         wd = wheel_top - ground
         z0, z1, ytop = B[:, 2].min() + 0.05, B[:, 2].max() - 0.12, B[:, 1].min()
@@ -1275,9 +1527,13 @@ def finish(src, spec, out, base_dir="."):
                 cleared += float(tri_area_normal(Tr[inb])[0].sum())
                 r["tri_part"][body_t[inb]] = "drop"
         log["bay_cleared_m2"] = round(cleared, 3)
-    elif spec.get("keep_native_engine"):
+    elif spec.get("keep_native_engine") or spec.get("electric"):
+        # an electric car has no engine, radiator, fuel tank or exhaust to
+        # fit: its own front end (a front boot, often) stays as modelled
         spec = dict(spec, engine_pack=None)
-        log["engine_pack"] = {"skipped": "keep_native_engine"}
+        log["engine_pack"] = {"skipped": "electric" if spec.get("electric") else "keep_native_engine"}
+    if spec.get("electric"):
+        log["powertrain"] = "electric"
 
     # ── output frame: centred on the wheelbase, scaled to the published one ──
     def to_out(P):
@@ -1362,11 +1618,24 @@ def finish(src, spec, out, base_dir="."):
             h = (spec.get("hinges") or {}).get(part) or (spec.get("hinges") or {}).get(pname) or {}
             piv, axis, deg = hinge_line(pname, V.min(0), V.max(0), h.get("edge"), h.get("deg"))
             hv = len(nodes)
-            nodes.append({"name": pname + "_hinge", "translation": piv, "children": [hv + 1],
-                          "extras": {"axis": axis, "open_deg": deg}})
+            if h.get("slide") and pname in ("door_rl", "door_rr"):
+                # a van's sliding side door: out from the body 7 cm, then
+                # back along it by most of its own length (0.82 of it, as the
+                # rig machine judges a slider); its node moves, it does not turn
+                # (never past the tail: its rear edge stops 15 cm short of it)
+                lo_d, hi_d = V.min(0), V.max(0)
+                side = 1.0 if (lo_d[0] + hi_d[0]) / 2 > 0 else -1.0
+                tail = min(float(g.accessor(pr["attributes"]["POSITION"])[:, 2].min()) for pr in by_part.get("body", []))
+                back = min(0.82 * float(hi_d[2] - lo_d[2]), max(float(lo_d[2]) - tail - 0.15, 0.0))
+                move = {"out": round(0.07 * side, 3), "back": round(-back, 3)}
+                extras = {"slide": move}
+                log.setdefault("sliding", {})[pname] = move
+            else:
+                extras = {"axis": axis, "open_deg": deg}
+            nodes.append({"name": pname + "_hinge", "translation": piv, "children": [hv + 1], "extras": extras})
             nodes.append({"name": pname, "translation": [-c for c in piv], "mesh": mi})
             nodes[0]["children"].append(hv)
-            pivots[pname] = (hv, axis, deg)
+            pivots[pname] = (hv, axis, deg) if "axis" in extras else (hv, ("slide", piv, extras["slide"]), None)
         else:
             nodes.append({"name": pname, "mesh": mi})
             nodes[0]["children"].append(len(nodes) - 1)
@@ -1720,17 +1989,27 @@ def finish(src, spec, out, base_dir="."):
         log["blend_to_mask"] = masked
 
     # ── animation clips ──
+    # a hinged part turns its hinge node; a sliding door moves its node out
+    # from the body over the first fifth, then back along it
     tin = g.add_accessor(np.array([0.0, 1.0]), minmax=True)
+    tin3 = None
     clips = {}
     for part, (hv, axis, deg) in pivots.items():
-        q = g.add_accessor(np.array([[0, 0, 0, 1], quat(axis, deg)]))
-        clips.setdefault(part + "_open", []).append((hv, q))
+        if axis[0] == "slide":
+            _, piv, mv = axis
+            tin3 = tin3 if tin3 is not None else g.add_accessor(np.array([0.0, 0.2, 1.0]), minmax=True)
+            p0 = np.array(piv, dtype=float)
+            q = g.add_accessor(np.array([p0, p0 + [mv["out"], 0, -0.02], p0 + [mv["out"], 0, mv["back"]]]))
+            ch = (hv, q, tin3, "translation")
+        else:
+            ch = (hv, g.add_accessor(np.array([[0, 0, 0, 1], quat(axis, deg)])), tin, "rotation")
+        clips.setdefault(part + "_open", []).append(ch)
         if part.startswith("door") and part not in BARN:
-            clips.setdefault("doors_open", []).append((hv, q))
-        clips.setdefault("all_open", []).append((hv, q))
-    j["animations"] = [{"name": nm_, "samplers": [{"input": tin, "output": q, "interpolation": "LINEAR"} for _, q in ch],
-                        "channels": [{"sampler": i, "target": {"node": pv, "path": "rotation"}}
-                                     for i, (pv, _) in enumerate(ch)]}
+            clips.setdefault("doors_open", []).append(ch)
+        clips.setdefault("all_open", []).append(ch)
+    j["animations"] = [{"name": nm_, "samplers": [{"input": t_, "output": q, "interpolation": "LINEAR"} for _, q, t_, _ in ch],
+                        "channels": [{"sampler": i, "target": {"node": pv, "path": path}}
+                                     for i, (pv, _, _, path) in enumerate(ch)]}
                        for nm_, ch in clips.items()]
     if spec.get("credit"):
         j.setdefault("asset", {})["copyright"] = spec["credit"]
