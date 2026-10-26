@@ -75,6 +75,14 @@ GENERATION_FIX = {
 }
 
 
+# Catalogue models whose paint is a livery, not the road car's (an art car's
+# print): built in a plain paint of the model when no colour is asked, as the
+# car itself and as a stand-in's donor (sRGB)
+PLAIN_PAINT = {
+    "mercedes-benz-glc-mw1-v2": (172, 175, 178),      # an art-car print; built in a plain silver
+}
+
+
 # Engines behind the rear axle under an engine lid (finish.py "layout":
 # "rear"): every 911, under whatever name the catalogue gives it. (A Smart's
 # or a Twingo's engine is under the boot floor, its tailgate a hatch: not
@@ -601,6 +609,8 @@ def one(target, item, args, out):
                       + "igged, glass cleared and engine bay fitted by the ExpertCarCheck GLB machine."}
     if getattr(args, "paint", None):
         spec["paint"] = list(args.paint)
+    elif (item.get("standin_donor") or item["assetId"]) in PLAIN_PAINT:
+        spec["paint"] = list(PLAIN_PAINT[item.get("standin_donor") or item["assetId"]])
     if getattr(args, "drive", None):
         spec["drive"] = args.drive
     # an electric car: no engine pack (finish.py keeps its own front end)
