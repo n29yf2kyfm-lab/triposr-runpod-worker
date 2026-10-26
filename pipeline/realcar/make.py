@@ -835,8 +835,11 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
             # a size not known counts against the donor: it may be any size
             # (an A6 for a Morris Minor), not one that fits
             return abs(b[k] / target[k] - 1) * w if b.get(k) else 0.2 * w
-        # a van's roof is an option on the one body (low, medium, high): its height counts little
-        size = off("length", 1.0) + off("height", 0.25 if fam == "van" else 1.5) + off("width", 1.0)
+        # a van's roof is an option on the one body (low, medium, high): its
+        # height counts less than a car's, but a high-roof crew van reshaped
+        # down still reads as one (the build review: a Sprinter for every
+        # Transit Custom, Tourneo and Caravelle)
+        size = off("length", 1.0) + off("height", 0.75 if fam == "van" else 1.5) + off("width", 1.0)
         # likeness beyond size: the era (a record with no year: its generation's),
         # the roof's height, a race car or an exotic only for its own kind, and
         # an off-roader for an off-roader
@@ -884,11 +887,16 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
         # Polo for the 2017-on Ibiza), counted from the nearer end
         ty1 = (target.get("years") or [None, None])[1] or (2100 if ty else None)
         gap = 0 if dy and ty and ty <= dy <= ty1 else abs(dy - (ty1 if ty and dy > ty1 else (ty or 2015))) if dy else None
-        age = min(gap * 0.015, 0.3) if dy else 0.15
+        # (a van's shape lasts: half as much for one)
+        age = (min(gap * 0.015, 0.3) if dy else 0.15) * (0.5 if fam == "van" else 1)
         a_, b_ = (x.lower().replace(" ", "-") for x in (mk, make))
         kin = 0 if a_ == b_ or (t_off and d_off) else 0.08 if GROUP.get(a_, a_) == GROUP.get(b_, b_) else 0.15
         tier = 0 if kin < 0.15 else 1                 # the make or its group (a Picanto for an i10), or another maker
-        score = (size + age + variant + likeness + (0 if (mk.lower(), md.lower()) == model_key else 0.3) + kin
+        # the asked model's other generation looks like it when near in time; a
+        # successor a decade on is another design (a 2021 Tucson for a 2010
+        # ix35, a Carnival for a Sedona: the build review's finding)
+        own = (mk.lower(), md.lower()) == model_key and (gap is None or gap <= 6)
+        score = (size + age + variant + likeness + (0 if own else 0.3) + kin
                  + doors_off + (0 if batch.credit_of(i)["commercial"] else 0.04)     # a tie-break: commercial-only builds skip the others
                  + 0.25 * len(lacks)          # it came out short of these parts before
                  + 0.03 * batch.GRADE.get(i.get("qualityGrade"), 3))

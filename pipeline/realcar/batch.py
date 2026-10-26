@@ -85,6 +85,29 @@ NOSE_BACK = {"bentley-continental-x-undated-v1": "its studio picture showed its 
 # published production dates (the catalogue keeps the source's title year).
 GENERATION_FIX = {
     "mercedes-benz-a-class-2018-w12-v1": {"yearStart": 2012, "yearEnd": 2018, "generation": "W176"},
+    # dated by the build review (each build looked at beside a photo of the
+    # generation its record gave); a start a year into the generation where its
+    # first year is also its forerunner's last (the 2010 Alhambra, the 2016 Prius)
+    "audi-s1-ad1-v1": {"yearStart": 2011, "yearEnd": 2018, "generation": "First generation (8X)"},
+    "audi-s3-ad1-v1": {"yearStart": 2014, "yearEnd": 2020, "generation": "Third generation (8V)"},
+    "jaguar-xf-jgw1-v1": {"yearStart": 2008, "yearEnd": 2015, "generation": "First generation (X250)"},
+    "mercedes-benz-c-class-mw1-v2": {"yearStart": 2001, "yearEnd": 2007, "generation": "W203"},
+    "mercedes-benz-cls-2013-mw1-v1": {"yearStart": 2012, "yearEnd": 2018, "generation": "W218"},
+    "mercedes-benz-glc-mw1-v2": {"yearStart": 2016, "yearEnd": 2022, "generation": "X253"},
+    "mercedes-benz-s-class-1999-mw1-v1": {"yearStart": 1992, "yearEnd": 1998, "generation": "W140"},
+    "mercedes-benz-gl-class-2012-mw1-v1": {"yearStart": 2007, "yearEnd": 2012, "generation": "X164"},
+    "mercedes-benz-mercedes-vito-w5-v1": {"model": "Vito", "modelFamily": "Vito", "yearStart": 2004, "yearEnd": 2014,
+                                          "generation": "W639"},
+    "mg-mg4-2025-m1-v1": {"yearStart": 2022, "yearEnd": 2025, "generation": "First generation"},
+    "peugeot-508-v1": {"yearStart": 2019, "yearEnd": 2026, "generation": "Second generation"},
+    "renault-captur-v1": {"yearStart": 2014, "yearEnd": 2019, "generation": "First generation"},
+    "renault-master-v1": {"yearStart": 2011, "yearEnd": 2024, "generation": "Third generation"},
+    "seat-alhambra-2010-st1-v1": {"yearStart": 2011, "yearEnd": 2020, "generation": "Second generation (7N)"},
+    "toyota-avensis-tw1-v1": {"yearStart": 2003, "yearEnd": 2008, "generation": "Second generation (T25)"},
+    "toyota-prius-2016-tw1-v1": {"yearStart": 2017, "yearEnd": 2022, "generation": "Fourth generation (XW50)"},
+    "volvo-xc90-v1": {"yearStart": 2017, "yearEnd": 2026, "generation": "Second generation"},
+    "bmw-x5-2019-w12-v1": {"yearStart": 2019, "yearEnd": 2025, "generation": "Fourth generation (G05)"},
+    "toyota-land-cruiser-2024-tw1-v1": {"yearStart": 2021, "yearEnd": 2026, "generation": "J300"},
     # a first-generation Yaris (XP10: its sheet, and the 2001 in its id),
     # recorded as the 2020 car
     "toyota-yaris-2001-v1": {"yearStart": 1999, "yearEnd": 2005, "generation": "XP10"},
