@@ -395,8 +395,17 @@ def find(want, cat, skip=()):
         if any(n.replace(norm(make), "") != b and n.replace(norm(make), "").startswith(b)
                and not re.fullmatch(r"\s*\d{2,3}", n.replace(norm(make), "")[len(b):]) for n in names(i) for b in asked):
             return 1
-        return 1 if re.search(rf"\b(?:{model_rx})\s+(?:l|lwb|long|allspace|xl|grand|max|limited)\b",
-                              str(i.get("sourceTitle") or ""), re.I) else 0
+        if re.search(rf"\b(?:{model_rx})\s+(?:l|lwb|long|allspace|xl|grand|max|limited)\b",
+                     str(i.get("sourceTitle") or ""), re.I):
+            return 1
+        # a special version its record does not name (a Focus RS filed as a
+        # Focus), or the model's coupe-SUV (a GLE 63 Coupe for a GLE), unless
+        # asked: the build review's "a track car for the road car"
+        said = f"{want.get('words') or ''} {want.get('spec') or ''}"
+        special = batch.SPECIAL_VERSION.get(i["assetId"])
+        title = " ".join(str(i.get(k) or "") for k in ("sourceTitle", "model", "assetId"))
+        return 1 if (special and not re.search(special, said, re.I)) \
+            or (COUPE_SUV.search(title) and not COUPE_SUV.search(said)) else 0
 
     def generation(i):
         # when the record's generation started (the wheelbase table's), so two
@@ -790,6 +799,14 @@ OFFROAD = re.compile(r"jimny|defender|g-?class|g ?wagon|wrangler|grenadier|land 
                      r"gladiator|samurai|land[- ]?rover[- ](?:series|88|109|90|110)\b", re.I)
 
 
+# a coupe-SUV's sloping roof is its look: one for a coupe-SUV, and an upright
+# SUV's after the upright ones (the build review: an X4 for the X3, an ID.5
+# for the Q4, a Mach-E for the Explorer, an Eclipse Cross for the Duster)
+COUPE_SUV = re.compile(r"\b(?:i?x[246])\b|\bid\.? ?5\b|gl[aceq]\b.{0,10}coup[eé]|coup[eé][ -]suv|\bq[35] ?sportback|"
+                       r"e-?tron sportback|\bs?q8\b|eclipse cross|mach-?e|kodiaq gt|\bgt ?coup|\bc40\b|ex30 cross|"
+                       r"\bcx-?60 ?coup|\bfx\d\d\b|\bqx55\b|\burus\b|\bcayenne coup|\bevoque coup", re.I)
+
+
 # the make or its group goes first only for a donor of the car's time and
 # kind: not a 2002 Stagea for a 2021 Jogger, nor a GT-R for an Eclipse
 GROUP_YEARS = 12
@@ -840,10 +857,11 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
         t_off, d_off = bool(OFFROAD.search(asked)), bool(OFFROAD.search(text))
         t_sport = bool(SPORTS.search(asked) or re.search(r"sports? (?:car|tourer)", str(target.get("class") or ""), re.I))
         d_sport = bool(SPORTS.search(text))
+        t_slope, d_slope = bool(COUPE_SUV.search(asked)), bool(COUPE_SUV.search(text))
         # and a donor stretched or cut more than AXIS does not look like it, however close its year
         likeness = (0 if era_ok else 0.6) + (0 if tall_ok else 0.3) + (0 if len_ok else 0.3) + (0.5 if odd else 0) \
             + (0.2 if d_off and not t_off else 0) + (0.5 if t_off and not d_off else 0) \
-            + (0.3 if d_sport and not t_sport else 0)
+            + (0.3 if d_sport and not t_sport else 0) + (0.35 if d_slope and not t_slope else 0)
         lacks = set(short.get(i["assetId"], ())) - rear
         three = bool(re.search(r"\b[23][- ]?(?:door|dr)\b|coup[eé]", str(i.get("sourceTitle") or ""), re.I)) \
             or (i.get("doors") and int(i["doors"]) <= 3)
@@ -876,7 +894,7 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
                  + 0.03 * batch.GRADE.get(i.get("qualityGrade"), 3))
         out.append((round(score, 4), i["assetId"], i, tier,
                     size <= REACH and axis_ok and not lacks and era_ok and tall_ok and (gap or 0) <= GROUP_YEARS
-                    and not odd and not (d_sport and not t_sport) and d_off == t_off,
+                    and not odd and not (d_sport and not t_sport) and d_off == t_off and not (d_slope and not t_slope),
                     round(size, 4)))
     # the reshape makes any donor the car's size, so its face counts most: when
     # the body is known (every donor has it), the make or its group first if
