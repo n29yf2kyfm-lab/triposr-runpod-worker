@@ -274,7 +274,10 @@ def find(want, cat, skip=()):
         # A word that is itself a model name of this make is no slip, except
         # to a variant of it: the name with a letter on the end ("cooper" to
         # the Cooper S, whose plain files are held back)
-        words = [norm(x) for x in want["words"].replace("-", " ").split()]
+        # a hyphenated name is one word, and a slip keeps the name's first
+        # letter: C-Max is not a slip for the S-Max, F-Pace for the I-Pace,
+        # S-Cross for the Across
+        words = [norm(x) for x in want["words"].split()]
         known = {n.replace(norm(make), "") for i in cat.values() if norm(i["make"]) == norm(make) for n in names(i)}
         words = [w for w in words if not any(c.isdigit() for c in w)]
         near = {}
@@ -282,7 +285,7 @@ def find(want, cat, skip=()):
             for n in names(i):
                 n2 = n.replace(norm(make), "")
                 if len(n2) >= 4 and not any(c.isdigit() for c in n2) and \
-                        any(edits(n2, w) == 1 and (w not in known or n2.startswith(w)) for w in words):
+                        any(edits(n2, w) == 1 and n2[0] == w[0] and (w not in known or n2.startswith(w)) for w in words):
                     near.setdefault(n2, []).append(i)
         if len(near) == 1:
             (n2, hits), = near.items()
