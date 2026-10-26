@@ -351,9 +351,11 @@ def find(want, cat, skip=()):
     def years(i):
         # the generation's own production years from the wheelbase table (the
         # catalogue often records one model year: its 2011 Corsa is the
-        # 2006-2014 Corsa D), else the record's, else seven years from its start
-        y0 = i.get("yearStart") or 0
-        if y0 and (i.get("yearEnd") or y0) == y0:     # only a record that gives one year is widened
+        # 2006-2014 Corsa D), else the record's, else seven years from its start.
+        # The car's year is its title's when the record's is its model line's
+        # (the "2019 Jetta" recorded from 1979: record_year)
+        y0 = record_year(i) or 0
+        if y0 and (i.get("yearEnd") or y0) <= y0:     # only a record that gives one year is widened
             g = wheelbase.lookup(*batch.model_of(i), y0).get("years")
             if g and g[0] - 1 <= y0 <= g[1]:
                 return min(g[0], y0), max(min(g[1], time.localtime().tm_year), i.get("yearEnd") or y0)
@@ -377,7 +379,7 @@ def find(want, cat, skip=()):
     def generation(i):
         # when the record's generation started (the wheelbase table's), so two
         # records of one generation are told from a newer generation's
-        y0 = i.get("yearStart") or 0
+        y0 = record_year(i) or 0
         g = wheelbase.lookup(*batch.model_of(i), y0).get("years") if y0 else None
         return g[0] if g and g[0] <= y0 + 1 else y0
 
