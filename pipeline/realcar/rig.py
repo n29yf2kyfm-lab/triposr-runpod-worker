@@ -43,7 +43,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "template"))
 from gltf import GLTF, row_ids  # noqa: E402
 
-VERSION = "2.4.0-py"
+VERSION = "2.5.0-py"
 
 
 class Refused(Exception):
@@ -1207,8 +1207,13 @@ def split_pairs(car, objs, width):
         zs = T[:, :, 2]
         cross = (zs.min(1) < zm) & (zs.max(1) > zm)
         front = ~cross & (zs.mean(1) > zm)
+        rear = ~cross & ~front
         n = len(T)
-        if not n or cross.sum() > .02 * n or not (.2 * n <= front.sum() <= .8 * n):
+        if not n or cross.sum() > .02 * n or not front.any() or not rear.any():
+            continue
+        # two wheels: each half a wheel's length, however its triangles are
+        # shared (the 2024 Vitara's tyres: 85% of one piece's at the rear)
+        if max(np.ptp(zs[front]), np.ptp(zs[rear])) > .3 * L:
             continue
         objs.append(car.lift(o, [refs[front]])[0])
         done.append(f"{o['name'][:40]} (wheel, front/rear)")
