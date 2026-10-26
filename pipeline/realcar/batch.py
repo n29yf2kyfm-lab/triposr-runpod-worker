@@ -82,8 +82,16 @@ GENERATION_FIX = {
     "chevrolet-corvette-v1": {"yearStart": 2020, "yearEnd": 2026, "generation": "C8"},
     # the 1992 Escort RS Cosworth its title names, recorded as every Escort of 1968-2000
     "ford-escort-v1": {"yearStart": 1992, "yearEnd": 1996, "generation": "Mk5 (RS Cosworth)"},
+    # a first-generation Fabia (its grille, lamps and bumpers), recorded with no year
+    "skoda-fabia-w7-v1": {"yearStart": 1999, "yearEnd": 2007, "generation": "Mk1 (6Y)"},
 }
 
+
+# Catalogue models of a special version their records do not name (a Focus RS
+# filed as a Focus): built as their car, but a stand-in's donor after a plain
+# car, as a named badge's is (make.VARIANT), unless the request names it
+SPECIAL_VERSION = {"ford-focus-v1": r"\brs\b", "jaguar-xe-v1": r"project ?8|\bsv\b",
+                   "jaguar-xe-2018-jgw1-v1": r"project ?8|\bsv\b"}
 
 # Catalogue models whose paint is a livery, not the road car's (an art car's
 # print): built in a plain paint of the model when no colour is asked, as the
@@ -138,6 +146,7 @@ WRONG_CAR = {
     "fiat-500-2016-v1": "is an Audi hatchback (Audi grille and rings, 'Audi A6' plate), not a Fiat 500",
     "mercedes-benz-cls-2022-v1": "is a Skoda Octavia vRS estate (Skoda grille and badge), not a CLS 53",
     "mercedes-benz-s-class-v1": "is a first-generation A-Class (W168), not the S65 (W222) it is titled",
+    "alfa-romeo-milano-2023-v1": "is a Cupra Formentor (Cupra badge and copper wheels), not an Alfa Romeo Milano/Junior",
     "audi-a8-2008-v1": "is an Audi Q5 Sportback (its grille and roofline), not a 2008 A8; and broken as the next three are",
     # files the catalogue cut down to about 150,000 triangles, their inner
     # panels merged through the paint: the cabin and the bay show through in

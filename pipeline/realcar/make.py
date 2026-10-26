@@ -49,7 +49,7 @@ COLOURS = {                       # longer names first: "dark grey" before "grey
 }
 MAKES = {"mercedes": "mercedes-benz", "merc": "mercedes-benz", "benz": "mercedes-benz", "vw": "volkswagen",
          "landrover": "land-rover", "rangerover": "land-rover", "alfa": "alfa-romeo", "astonmartin": "aston-martin",
-         "rollsroyce": "rolls-royce", "opel": "vauxhall"}
+         "rollsroyce": "rolls-royce", "opel": "vauxhall", "ds": "ds"}
 BODIES = ("hatchback", "saloon", "sedan", "estate", "coupe", "convertible", "suv", "mpv", "van", "pickup", "roadster")
 # makers' own names for a body; an "Active Tourer" or "Gran Tourer" is not an
 # estate (its body is left to the table: no body is asked), nor a 911 GT3
@@ -216,7 +216,11 @@ def find(want, cat, skip=()):
     makes = {norm(i["make"]): i["make"].lower() for i in cat.values()}
     make, rest = None, q
     for k in sorted(set(makes) | set(MAKES), key=len, reverse=True):
-        if q.startswith(k) or k in q:
+        # a make of two letters is a word of its own (the DS of "DS DS3", not
+        # the "ds" in "Ford S-Max", nor the DS3 itself, a Citroen's model), or
+        # a catalogue make's start of a model ("MG4")
+        if (q.startswith(k) or k in q) if len(k) > 2 else (
+                re.search(rf"(?<![a-z0-9]){k}(?![a-z0-9])", want["words"]) or (q.startswith(k) and k in makes)):
             make = MAKES.get(k, makes.get(k))
             rest = q.replace(k, "", 1)
             break
@@ -717,15 +721,18 @@ PICKUP_MODEL = re.compile(r"ranger|hilux|navara|l200|amarok|d-?max|tacoma|tundra
 
 
 REACH = 0.35      # a donor's size term (length + 1.5 height + width off) the reshape still carries well: about 10% each
+AXIS = 0.15       # and no more than this off in length or width: a Picanto stretched 17% is no Ceed, whatever its badge
 CLASSIC_BEFORE = 1990    # a car first made before this is a classic: its stand-in comes from a classic, and the other way
-TALL = 0.12              # a donor more than this much taller or lower than the car does not look like it
+TALL = 0.12              # a donor more than this much taller or lower than the car does not look like it (a van's
+                         # roof is an option, low, medium or high, on the one body: not for vans)
 # race cars and exotics: a donor only for one of their own kind (the DB9 had a
 # GT3's wing, the Spitfire an SLR McLaren's body)
 RACE = re.compile(r"\bgt[234]\b|gt[23] ?rs|\bcup\b|\brsr\b|racing|race ?car|black series|\bdtm\b|\bwrc\b", re.I)
 EXOTIC = re.compile(r"\bslr\b|mclaren|enzo|laferrari|veyron|chiron|\bsenna\b|\bp1\b|carrera gt|one-77|valkyrie|zonda|huayra|"
                     r"aventador|murci[eé]lago|countach|\b959\b|\b918\b", re.I)
 # off-roaders look like each other more than like an SUV of their size (a
-# Jimny from a G-Class, not from a Nissan Cube)
+# Jimny from a G-Class, not from a Nissan Cube): an off-roader for an
+# off-roader, and only for one
 OFFROAD = re.compile(r"jimny|defender|g-?class|g ?wagon|wrangler|grenadier|land ?cruiser|pajero|shogun|niva|bronco|"
                      r"gladiator|samurai|land[- ]?rover[- ](?:series|88|109|90|110)\b", re.I)
 
@@ -751,7 +758,8 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
             # a size not known counts against the donor: it may be any size
             # (an A6 for a Morris Minor), not one that fits
             return abs(b[k] / target[k] - 1) * w if b.get(k) else 0.2 * w
-        size = off("length", 1.0) + off("height", 1.5) + off("width", 1.0)
+        # a van's roof is an option on the one body (low, medium, high): its height counts less
+        size = off("length", 1.0) + off("height", 0.5 if fam == "van" else 1.5) + off("width", 1.0)
         # likeness beyond size: the era (a record with no year: its generation's),
         # the roof's height, a race car or an exotic only for its own kind, and
         # an off-roader for an off-roader
@@ -762,10 +770,13 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
         dy = record_year(i) or (b.get("years") or [None])[0]
         # a donor of no known year is most likely a modern car, as the catalogue's are
         era_ok = (ty < CLASSIC_BEFORE) == ((dy or 2015) < CLASSIC_BEFORE) if ty else True
-        tall_ok = not (b.get("height") and target.get("height")) or abs(b["height"] / target["height"] - 1) <= TALL
+        tall_ok = fam == "van" or not (b.get("height") and target.get("height")) \
+            or abs(b["height"] / target["height"] - 1) <= TALL
+        axis_ok = all(abs(b[k] / target[k] - 1) <= AXIS for k in ("length", "width") if b.get(k) and target.get(k))
         odd = bool((RACE.search(text) and not RACE.search(asked)) or (EXOTIC.search(text) and not EXOTIC.search(asked)))
         t_off, d_off = bool(OFFROAD.search(asked)), bool(OFFROAD.search(text))
-        likeness = (0 if era_ok else 0.6) + (0 if tall_ok else 0.3) + (0.5 if odd else 0) + (0.2 if d_off and not t_off else 0)
+        likeness = (0 if era_ok else 0.6) + (0 if tall_ok else 0.3) + (0.5 if odd else 0) + (0.2 if d_off and not t_off else 0) \
+            + (0.5 if t_off and not d_off else 0)
         three = bool(re.search(r"\b[23][- ]?(?:door|dr)\b|coup[eé]", str(i.get("sourceTitle") or ""), re.I)) \
             or (i.get("doors") and int(i["doors"]) <= 3)
         doors_off = 0.0
@@ -776,8 +787,10 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
         # a sporting or special version ("Golf GTI" for a Golf) after the plain
         # car, unless the request or spec names it
         badge = VARIANT.search(" ".join(str(i.get(k) or "") for k in ("model", "modelFamily", "sourceTitle", "assetId")))
-        variant = 0.15 if badge and badge.group(0).lower() not in (str(want.get("words") or "") + " "
-                                                                     + str(want.get("spec") or "")).lower() else 0.0
+        said = (str(want.get("words") or "") + " " + str(want.get("spec") or "")).lower()
+        special = batch.SPECIAL_VERSION.get(i["assetId"])
+        variant = 0.15 if (badge and badge.group(0).lower() not in said) \
+            or (special and not re.search(special, said)) else 0.0
         # styles date: a 2004 hatch is not a 2019 one; no known year, a middling guess
         age = min(abs(dy - (ty or 2015)) * 0.015, 0.3) if dy else 0.15
         a_, b_ = (x.lower().replace(" ", "-") for x in (mk, make))
@@ -788,7 +801,7 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
                  + 0.25 * len(short.get(i["assetId"], ()))          # it came out short of these parts before
                  + 0.03 * batch.GRADE.get(i.get("qualityGrade"), 3))
         out.append((round(score, 4), i["assetId"], i, tier,
-                    size <= REACH and not short.get(i["assetId"]) and era_ok and tall_ok and not odd))
+                    size <= REACH and axis_ok and not short.get(i["assetId"]) and era_ok and tall_ok and not odd))
     # the reshape makes any donor the car's size, so its face counts most: when
     # the body is known (every donor has it), the make or its group first if
     # one is within reach of the size (a BMW estate stretched 10% reads as a

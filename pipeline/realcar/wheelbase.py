@@ -396,6 +396,17 @@ def local_table_path():
     return os.path.join(home, "wheelbase_local.json")
 
 
+# sizes a page gives wrongly, set from the maker's published figures as
+# listed by CarsGuide and Caroom: {(page, generation): sizes}
+PAGE_FIX = {("Renault Trafic", "Second generation (X83)"): {
+    "height": 1959, "fixed": "height 1,959 mm, the low-roof van (CarsGuide, Caroom): the page's 1,380 mm is no van's"}}
+
+
+def _fixed(boxes):
+    return [dict(b, **PAGE_FIX[(b.get("page"), b.get("name"))]) if (b.get("page"), b.get("name")) in PAGE_FIX else b
+            for b in boxes]
+
+
 def table():
     if not _TABLE and os.path.exists(TABLE):
         _TABLE.update(json.load(open(TABLE)))
@@ -407,6 +418,9 @@ def table():
                                                   v.get("fetch_v", 1) > _TABLE[k].get("fetch_v", 1)))})
         except (OSError, ValueError):
             pass
+        for v in _TABLE.values():
+            if v.get("boxes"):
+                v["boxes"] = _fixed(v["boxes"])
     return _TABLE
 
 
@@ -567,7 +581,7 @@ def lookup(make, model, year, ratio=None, online=None, doors=None):
             os.makedirs(os.path.dirname(p), exist_ok=True)
             json.dump(loc, open(p + ".tmp", "w"), indent=0, sort_keys=True)
             os.replace(p + ".tmp", p)
-    return choose(named_wheelbase(ent["boxes"], model), year, ratio, doors)
+    return choose(named_wheelbase(_fixed(ent["boxes"]), model), year, ratio, doors)       # a fresh read's too
 
 
 def named_wheelbase(boxes, model):
