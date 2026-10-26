@@ -845,6 +845,72 @@ def right_hand_drive(g, recs, mats, log, ground, xc):
                                "wheel_moved_m": round(float(dx), 3)}
 
 
+LAMPISH = re.compile(r"lamp|light|lens|indicat|reflect|brake|calip|badge|logo|emblem|^detail-|engine|bay|interior|seat|"
+                     r"dash|leather|fabric|carpet|stitch|plate|licen|tail|rear.?l|marker|signal", re.I)
+
+
+def _lin_to_lab(c):
+    """CIE Lab of a glTF colour factor (linear RGB, D65)."""
+    r, g_, b = (float(x) for x in c[:3])
+    X = (0.4124 * r + 0.3576 * g_ + 0.1805 * b) / 0.95047
+    Y = 0.2126 * r + 0.7152 * g_ + 0.0722 * b
+    Z = (0.0193 * r + 0.1192 * g_ + 0.9505 * b) / 1.08883
+    f = lambda t: t ** (1 / 3) if t > 0.008856 else 7.787 * t + 16 / 116  # noqa: E731
+    return 116 * f(Y) - 16, 500 * (f(X) - f(Y)), 200 * (f(Y) - f(Z))
+
+
+def same_paint(mats, paint, glass):
+    """Materials of the paint's own colour under other names: solid, not a
+    lamp, badge or engine-bay part, the same clear hue (a coloured paint only:
+    a white or black paint's colour is every trim's too)."""
+    pbr = mats[paint].get("pbrMetallicRoughness") or {}
+    if "baseColorTexture" in pbr:
+        return set()
+    L0, a0, b0 = _lin_to_lab(pbr.get("baseColorFactor") or [1, 1, 1])
+    C0 = math.hypot(a0, b0)
+    if C0 < 20:
+        return set()
+    h0 = math.degrees(math.atan2(b0, a0))
+    out = set()
+    for i, m in enumerate(mats):
+        p = m.get("pbrMetallicRoughness") or {}
+        if i == paint or i in glass or m.get("alphaMode") == "BLEND" or "baseColorTexture" in p or LAMPISH.search(m.get("name", "")):
+            continue
+        L, a, b = _lin_to_lab(p.get("baseColorFactor") or [1, 1, 1])
+        C, h = math.hypot(a, b), math.degrees(math.atan2(b, a))
+        if C > 0.6 * C0 and abs((h - h0 + 180) % 360 - 180) < 15 and abs(L - L0) < 25:
+            out.add(i)
+    return out
+
+
+def _paint_one(pm, spec, j):
+    """The colour asked for (sRGB 0-255) on one paint material."""
+    pbr = pm.setdefault("pbrMetallicRoughness", {})
+    pbr.pop("baseColorTexture", None)
+    lin = [float(c / 255 / 12.92 if c / 255 <= 0.04045 else ((c / 255 + 0.055) / 1.055) ** 2.4) for c in spec["paint"][:3]]
+    pbr["baseColorFactor"] = lin + [1.0]
+    # the finish follows the colour, not the model's paint: white on the 2001
+    # Yaris's metallic silver (metallic 0.8) read as silver. A silver
+    # (colourless and light) is lightly metallic: at 0.6 it showed mid grey
+    # in the studio (the build review's commonest colour fault); a mid grey
+    # is solid, metal darkened it to gunmetal
+    r_, g_, b_ = spec["paint"][:3]
+    light, chroma = (max(r_, g_, b_) + min(r_, g_, b_)) / 2, max(r_, g_, b_) - min(r_, g_, b_)
+    metallic = spec.get("paint_metallic", 0.25 if chroma < 20 and 150 < light < 215 else 0.0)
+    pbr["metallicFactor"] = float(metallic)
+    pbr["roughnessFactor"] = 0.3 if metallic else 0.35
+    pbr.pop("metallicRoughnessTexture", None)
+    sp = (pm.get("extensions") or {}).get("KHR_materials_specular")
+    if sp:                                      # a specular map painted for the old colour
+        sp.pop("specularTexture", None)
+        sp.pop("specularColorTexture", None)
+    # a car's paint is lacquered: a clear coat over the colour gives the sharp
+    # reflections a photo of the car shows
+    pm.setdefault("extensions", {})["KHR_materials_clearcoat"] = {"clearcoatFactor": 1.0, "clearcoatRoughnessFactor": 0.04}
+    if "KHR_materials_clearcoat" not in j.setdefault("extensionsUsed", []):
+        j["extensionsUsed"].append("KHR_materials_clearcoat")
+
+
 def panel_sides(g, glass, paint):
     """A panel van's sides behind the cab are steel: its model's side glass
     there (a windowed minibus's, the Sprinter file's) takes the body's paint.
@@ -2159,32 +2225,18 @@ def finish(src, spec, out, base_dir="."):
 
     # ── paint: a colour asked for (sRGB 0-255) replaces the model's own ──
     if spec.get("paint"):
+        # every piece of the paint, not only the one material found: a model
+        # splits its paint over materials of one name (the Astra's two
+        # "carpaint", the Octavia's two "body_paint"), or names its bonnet and
+        # roof's paint otherwise in the same colour (the Octavia's red
+        # "material"); left alone, they kept the model's colour beside the new one
+        coats = sorted(set(paint_ids) | same_paint(mats, paint, glass))
+        for i in coats:
+            _paint_one(mats[i], spec, j)
         pm = mats[paint]
-        pbr = pm.setdefault("pbrMetallicRoughness", {})
-        pbr.pop("baseColorTexture", None)
-        lin = [float(c / 255 / 12.92 if c / 255 <= 0.04045 else ((c / 255 + 0.055) / 1.055) ** 2.4)
-               for c in spec["paint"][:3]]
-        pbr["baseColorFactor"] = lin + [1.0]
-        # the finish follows the colour, not the model's paint: white on the
-        # 2001 Yaris's metallic silver (metallic 0.8) read as silver. Silver
-        # and grey (colourless, mid-light) stay metallic; the rest are solid.
-        r_, g_, b_ = spec["paint"][:3]
-        light, chroma = (max(r_, g_, b_) + min(r_, g_, b_)) / 2, max(r_, g_, b_) - min(r_, g_, b_)
-        metallic = spec.get("paint_metallic", 0.6 if chroma < 20 and 90 < light < 215 else 0.0)
-        pbr["metallicFactor"] = float(metallic)
-        pbr["roughnessFactor"] = 0.3 if metallic else 0.35
-        pbr.pop("metallicRoughnessTexture", None)
-        sp = (pm.get("extensions") or {}).get("KHR_materials_specular")
-        if sp:                                      # a specular map painted for the old colour
-            sp.pop("specularTexture", None)
-            sp.pop("specularColorTexture", None)
-        # a car's paint is lacquered: a clear coat over the colour gives the
-        # sharp reflections a photo of the car shows
-        pm.setdefault("extensions", {})["KHR_materials_clearcoat"] = {"clearcoatFactor": 1.0, "clearcoatRoughnessFactor": 0.04}
-        if "KHR_materials_clearcoat" not in j.setdefault("extensionsUsed", []):
-            j["extensionsUsed"].append("KHR_materials_clearcoat")
+        metallic = pm["pbrMetallicRoughness"]["metallicFactor"]
         log["paint_set"] = {"material": pm.get("name"), "srgb": list(spec["paint"][:3]), "metallic": float(metallic),
-                            "clearcoat": True}
+                            "clearcoat": True, "materials": [mats[i].get("name") for i in coats]}
 
     # ── a panel van asked: no windows behind the cab ──
     if spec.get("panel_van"):
