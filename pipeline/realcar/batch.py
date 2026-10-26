@@ -222,7 +222,14 @@ def auto_wheelbase(item, rep, rec, year=None):
         if wb and ratio:
             k = wb / 1000.0 / base
             wheel = 0.68 * k if rescaled else None
-            if (rescaled and not 0.50 <= wheel <= 0.85) or (not rescaled and not 0.75 <= k <= 1.33):
+            # the body's length at that scale against the published length: when
+            # they agree (within 8%) the scale is right, whatever the wheels
+            # measured (the rig can measure a rim without its tyre, and then
+            # blows the whole car up: a 2020 Jazz 7.4 m long)
+            fits = bool(ans.get("length")) and abs(base / ratio * k * 1000.0 / ans["length"] - 1) <= 0.08
+            if fits and ((rescaled and not 0.50 <= wheel <= 0.85) or (not rescaled and not 0.75 <= k <= 1.33)):
+                info["accepted"] = f"scale x{k:.2f}: the body's length then matches the published {ans['length']} mm"
+            elif (rescaled and not 0.50 <= wheel <= 0.85) or (not rescaled and not 0.75 <= k <= 1.33):
                 info["refused"] = f"would scale x{k:.2f}" + (f", wheels {wheel:.2f} m" if wheel else "")
                 wb = None
         if not wb and rescaled:

@@ -629,6 +629,8 @@ def record_body(i, gen=None):
     return f
 
 
+# the Series Land Rovers: the classic Defender's body (filed as a pickup), not an SUV's (a Nissan Cube's)
+UTILITY = {("land-rover", "88"), ("land-rover", "109"), ("land-rover", "series")}
 # models that are pickups whatever their page's box says (the Ranger's boxes name no body)
 PICKUP_MODEL = re.compile(r"ranger|hilux|navara|l200|amarok|d-?max|tacoma|tundra|f-?150|f-?250|silverado|"
                           r"sierra|ram|gladiator|x-class|frontier|colorado|musso|bt-50|triton|np300|t60|landtrek|grafter")
@@ -721,7 +723,7 @@ def _standin(want, report, item, cat, skip):
                if [x.lower() for x in batch.model_of(i)] == [make.lower(), model.lower()]} - {None}
         if len(own) == 1:
             gen = dict(gen, family=own.pop(), family_from="the catalogue's files of the model")
-    if PICKUP_MODEL.fullmatch(str(model).lower()):
+    if PICKUP_MODEL.fullmatch(str(model).lower()) or (make, str(model).lower()) in UTILITY:
         gen = dict(gen, family="pickup")         # a pickup from a pickup, never an SUV (the Ranger from a Mach-E)
     fam = RECORD_BODY.get(want.get("body") or "", None) or gen.get("family")
     other = bool(gen.get("family") and fam != gen["family"])         # not the body the table's size is for

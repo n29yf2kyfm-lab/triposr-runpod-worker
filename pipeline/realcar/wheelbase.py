@@ -197,12 +197,20 @@ ALIAS = {("mini", "cooper"): "Mini Hatch", ("mini", "hatch"): "Mini Hatch", ("ho
          ("geely", "starray"): "Geely Galaxy Starship 7",     # the export name of the Starship 7 EM-i
          ("smart", "city"): "Smart Fortwo", ("smart", "city coupe"): "Smart Fortwo",
          ("ds", "ds3"): "DS 3", ("ds", "ds4"): "DS 4", ("ds", "ds5"): "DS 5", ("ds", "ds7"): "DS 7",
-         ("ds", "ds9"): "DS 9"}   # the City-Coupé, renamed in 2004
+         ("ds", "ds9"): "DS 9",
+         ("alfa-romeo", "giulietta"): "Alfa Romeo Giulietta (2010)",   # "Alfa Romeo Giulietta" lists three cars
+         ("citroen", "e-c3"): "Citroën C3", ("audi", "sq2"): "Audi Q2", ("bmw", "x3 m"): "BMW X3",   # on their cars' pages
+         ("kgm", "musso"): "SsangYong Musso",               # KGM is SsangYong's new name
+         ("hyundai", "iload"): "Hyundai Starex",            # the UK iLoad is the Starex (H-1)
+         ("ldv", "v80"): "LDV Maxus",                       # the V80 is the LDV Maxus, made on by SAIC
+         ("jaecoo", "omoda 5"): "Chery Omoda 5", ("land-rover", "series"): "Land Rover series"}   # the City-Coupé, renamed in 2004
 # more pages that hold a model's generations: the first three Yaris
 # generations are filed under the Japanese name
 EXTRA = {("toyota", "yaris"): ["Toyota Vitz"],
          ("daihatsu", "sirion"): ["Daihatsu Boon"],
-         ("fiat", "600"): ["Fiat 600 (2023)"]}           # the 2023 600's own page; "Fiat 600" is the 1955 car     # the second Sirion (M300, 2004-2010) is filed as the Boon
+         ("fiat", "600"): ["Fiat 600 (2023)"],           # the 2023 600's own page; "Fiat 600" is the 1955 car
+         ("volkswagen", "transporter"): ["Volkswagen Transporter (T4)", "Volkswagen Transporter (T5)",
+                                         "Volkswagen Transporter (T6)"]}   # each generation's own page     # the second Sirion (M300, 2004-2010) is filed as the Boon
 
 
 def _generation_link(link, stem):
@@ -373,6 +381,8 @@ def fetch(make, model):
         bases.append(f"{mt} iX{model[2:]}")                     # BMW iX1, iX3
     if len(model) <= 3 and model.isalpha():
         bases.append(f"{mt} {model.upper()}")                   # MG HS, MG ZS: short names in capitals
+    if len(make) <= 3 and make.isalpha() and mt != make.upper():
+        bases.append(f"{make.upper()} {mdl}")                   # TVR, KGM, LDV: a short make in capitals
     if make.lower() in ACCENT:
         bases.append(f"{ACCENT[make.lower()]} {mdl}")
     bases += EXTRA.get((make.lower(), model.lower()), [])
@@ -464,7 +474,7 @@ def few_doors(make, model, year=None):
 # the page reader's version: an entry an older reader found nothing in is
 # read again once (inches, electric cars' infoboxes, a twin's sizes, short
 # names in capitals came with 2)
-FETCH_V = 3                                      # 3: EX30, iX1, EQA spelt as titled; empty entries read again
+FETCH_V = 4                                      # 3: EX30, iX1, EQA spelt as titled; 4: TVR, KGM in capitals
 
 
 def lookup(make, model, year, ratio=None, online=None, doors=None):
