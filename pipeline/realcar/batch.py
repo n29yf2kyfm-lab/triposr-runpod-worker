@@ -74,7 +74,8 @@ BODY_FIX = {"opel-astra-1998-w7-v1": "saloon",     # an Astra G saloon, boot and
 # Catalogue models whose own cues put the nose at the wrong end (seen on the
 # check sheets: built tail first, its "tailgate" the bonnet): the rigger is
 # told the nose is the other end
-NOSE_BACK = {"mercedes-benz-gl-class-2012-mw1-v1": "the height over the axles reads it backwards"}
+NOSE_BACK = {"bentley-continental-x-undated-v1": "its studio picture showed its tail at the front",
+             "mercedes-benz-gl-class-2012-mw1-v1": "the height over the axles reads it backwards"}
 
 
 # Catalogue years corrected by looking at the model against the generation's
@@ -98,6 +99,11 @@ GENERATION_FIX = {
     # Classic), this one a 110 station wagon: the One Ten of 1983 on, not the 2019 Defender
     "land-rover-defender-2021-w7-v1": {"model": "110", "modelFamily": "110", "yearStart": 1983, "yearEnd": 2016,
                                        "generation": "One Ten"},
+    # seen on the review: the 2007-14 Fortwo (451), the 2011-18 Continental GT,
+    # the GR Supra its title names, all recorded from their model lines' starts
+    "smart-fortwo-v1": {"yearStart": 2007, "yearEnd": 2014, "generation": "451"},
+    "bentley-continental-x-undated-v1": {"yearStart": 2011, "yearEnd": 2018, "generation": "Second generation"},
+    "toyota-gr-supra-v1": {"yearStart": 2019, "yearEnd": 2026, "generation": "A90"},
     # the Land Cruiser 300 its title names, recorded as every Land Cruiser from 1985
     "toyota-land-cruiser-v1": {"yearStart": 2021, "yearEnd": 2026, "generation": "J300"},
     # the C8 its title names ("2019 Chevrolet Corvette C8 Stingray"), recorded from 1997

@@ -278,7 +278,8 @@ def infoboxes(text, title):
 ACCENT = {"skoda": "Škoda", "citroen": "Citroën"}
 SISTER = {"vauxhall": "Opel", "opel": "Vauxhall", "mini": "Mini", "dacia": "Renault", "seat": "SEAT"}
 # a model's other page name
-ALIAS = {("mini", "cooper"): "Mini Hatch", ("mini", "hatch"): "Mini Hatch", ("honda", "jazz"): "Honda Fit",
+ALIAS = {("vauxhall", "zafira"): "Opel Zafira",     # the Vauxhall page puts the Zafira A and B in one box
+         ("mini", "cooper"): "Mini Hatch", ("mini", "hatch"): "Mini Hatch", ("honda", "jazz"): "Honda Fit",
          ("hyundai", "ix20"): "Kia Venga",          # the ix20's page is the Venga's: the same car
          # the 2016-2020 SLC is the renamed SLK (R172); "SLC" alone finds the 1971 SLC coupe
          ("mercedes-benz", "slc"): "Mercedes-Benz R172", ("mercedes-benz", "slc class"): "Mercedes-Benz R172",

@@ -20401,11 +20401,17 @@
 ]
 },
 "vauxhall|zafira": {
+"asked": [
+"Opel Zafira",
+"Opel Zafira"
+],
 "boxes": [
 {
+"at": 2607,
 "base": 0,
 "body": "",
 "class": "Compact MPV",
+"doors": null,
 "height": 1684,
 "length": 4317,
 "name": "Zafira",
@@ -20418,9 +20424,28 @@
 ]
 },
 {
+"at": 12492,
 "base": 0,
 "body": "",
 "class": "Compact MPV",
+"doors": null,
+"height": 1801,
+"length": 4468,
+"name": "Zafira B",
+"page": "Opel Zafira",
+"wheelbase": 2703,
+"width": 1801,
+"years": [
+2005,
+2014
+]
+},
+{
+"at": 23032,
+"base": 0,
+"body": "",
+"class": "Compact MPV",
+"doors": null,
 "height": 1690,
 "length": 4660,
 "name": "Zafira C/Zafira Tourer",
@@ -20433,6 +20458,7 @@
 ]
 }
 ],
+"fetch_v": 8,
 "tried": [
 "Opel Zafira",
 "Opel Zafira"

@@ -372,11 +372,16 @@ def find(want, cat, skip=()):
         # a record whose own years are another car's (its title dates it 2009,
         # its record 2015-2019): its generation's, as one that gives one year
         retitled = bool(y0 and i.get("yearStart") and y0 != i["yearStart"])
-        if y0 and (retitled or (i.get("yearEnd") or y0) <= y0):     # only a record that gives one year is widened
-            g = wheelbase.lookup(*batch.model_of(i), y0).get("years")
-            if g and g[0] - 1 <= y0 <= g[1]:
-                return min(g[0], y0), max(min(g[1], time.localtime().tm_year), y0 if retitled else (i.get("yearEnd") or y0))
-        return y0, (y0 + 7 if retitled else i.get("yearEnd") or y0 + 7)
+        g = wheelbase.lookup(*batch.model_of(i), y0).get("years") if y0 else None
+        g = g if g and g[0] - 1 <= y0 <= g[1] else None
+        # and one whose years outlast its generation's by more than a facelift
+        # (the 2002 Zafira recorded 1999-2019): its model line's, not the car's
+        line = bool(g and not i.get("generation_fixed") and (i.get("yearEnd") or 0) > g[1] + 2)
+        if y0 and (retitled or line or (i.get("yearEnd") or y0) <= y0):     # only a record that gives one year is widened
+            if g:
+                return min(g[0], y0), max(min(g[1], time.localtime().tm_year),
+                                          y0 if retitled or line else (i.get("yearEnd") or y0))
+        return y0, (y0 + 7 if retitled or line else i.get("yearEnd") or y0 + 7)
     asked = {n.replace(norm(make), "") for i in hits for n in names(i)}
     asked = {b for b in asked if b and b in rest and in_words(b, want["words"])}
     model_rx = "|".join(re.escape(w) for w in sorted({x for i in hits for x in [str(i.get("model") or "")] if x}, key=len,
