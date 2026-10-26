@@ -3562,9 +3562,75 @@
 ]
 },
 "bmw|z4": {
-"boxes": [],
+"asked": [
+"BMW Z4",
+"BMW Z4 (E85)",
+"BMW Z4 (E89)",
+"BMW Z4 (G29)"
+],
+"boxes": [
+{
+"at": 36,
+"base": 1,
+"body": "2-door roadster",
+"class": "Sports car (S)",
+"doors": 2,
+"height": 1300,
+"length": 4090,
+"name": "BMW Z4 (E85/E86)",
+"page": "BMW Z4 (E85)",
+"wheelbase": 2495,
+"width": 1780,
+"years": [
+2002,
+2008
+]
+},
+{
+"at": 93,
+"base": 1,
+"body": "2-door coup\u00e9 convertible",
+"class": "Sports car (S)",
+"doors": 2,
+"height": 1291,
+"length": 4239,
+"name": "BMW Z4 (E89)",
+"page": "BMW Z4 (E89)",
+"wheelbase": 2495,
+"width": 1790,
+"years": [
+2009,
+2016
+]
+},
+{
+"at": 34,
+"base": 2,
+"body": "2-door roadster",
+"class": "Sports car (S)",
+"doors": 2,
+"height": 1304,
+"length": 4324,
+"name": "BMW Z4 (G29)",
+"page": "BMW Z4 (G29)",
+"wheelbase": 2470,
+"width": 1864,
+"years": [
+2018,
+2026
+]
+}
+],
+"fetch_v": 8,
 "tried": [
-"BMW Z"
+"BMW Z",
+"BMW Z4 (E85)",
+"BMW Z4 (E89)",
+"BMW Z4 (E89)",
+"BMW Z4 (E85)",
+"BMW Z4 (G29)",
+"BMW Z4 (G29)",
+"BMW Z4 (E89)"
 ]
 },
 "bmw|z4 coupe (2008)": {

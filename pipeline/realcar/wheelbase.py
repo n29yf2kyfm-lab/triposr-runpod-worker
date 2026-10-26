@@ -302,7 +302,8 @@ ALIAS = {("mini", "cooper"): "Mini Hatch", ("mini", "hatch"): "Mini Hatch", ("ho
          ("jaecoo", "omoda 5"): "Chery Omoda 5", ("land-rover", "series"): "Land Rover series"}   # the City-Coupé, renamed in 2004
 # more pages that hold a model's generations: the first three Yaris
 # generations are filed under the Japanese name
-EXTRA = {("toyota", "yaris"): ["Toyota Vitz"],
+EXTRA = {("bmw", "z4"): ["BMW Z4 (E85)", "BMW Z4 (E89)", "BMW Z4 (G29)"],   # "BMW Z4" redirects to the Z family's page
+         ("toyota", "yaris"): ["Toyota Vitz"],
          ("daihatsu", "sirion"): ["Daihatsu Boon"],
          ("fiat", "600"): ["Fiat 600 (2023)"],           # the 2023 600's own page; "Fiat 600" is the 1955 car
          ("land-rover", "88"): ["Land Rover series"], ("land-rover", "109"): ["Land Rover series"],

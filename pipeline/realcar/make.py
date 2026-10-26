@@ -872,6 +872,10 @@ def _standin(want, report, item, cat, skip, retry=False):
     if item is not None:
         make, model = (x.lower() for x in batch.model_of(item))
         gen = _generation(make, model, want.get("year"))
+        if not gen and want.get("make") and want.get("model_words"):
+            # the file's name is not the table's (a badge in it: "Z4 M Coupe"): the request's words
+            make, model = want["make"], want["model_words"]
+            gen = _generation(make, model, want.get("year"), online=True)
     elif want.get("make") and want.get("model_words"):
         make, model = want["make"], want["model_words"]
         gen = _generation(make, model, want.get("year"), online=True)     # the agent's one outside call
