@@ -799,8 +799,12 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
         special = batch.SPECIAL_VERSION.get(i["assetId"])
         variant = 0.15 if (badge and badge.group(0).lower() not in said) \
             or (special and not re.search(special, said)) else 0.0
-        # styles date: a 2004 hatch is not a 2019 one; no known year, a middling guess
-        age = min(abs(dy - (ty or 2015)) * 0.015, 0.3) if dy else 0.15
+        # styles date: a 2004 hatch is not a 2019 one; no known year, a middling guess.
+        # A donor of the car's own production years is of its time (a 2021
+        # Polo for the 2017-on Ibiza), counted from the nearer end
+        ty1 = (target.get("years") or [None, None])[1] or (2100 if ty else None)
+        gap = 0 if dy and ty and ty <= dy <= ty1 else abs(dy - (ty1 if ty and dy > ty1 else (ty or 2015))) if dy else None
+        age = min(gap * 0.015, 0.3) if dy else 0.15
         a_, b_ = (x.lower().replace(" ", "-") for x in (mk, make))
         kin = 0 if a_ == b_ or (t_off and d_off) else 0.08 if GROUP.get(a_, a_) == GROUP.get(b_, b_) else 0.15
         tier = 0 if kin < 0.15 else 1                 # the make or its group (a Picanto for an i10), or another maker
