@@ -845,6 +845,91 @@ def right_hand_drive(g, recs, mats, log, ground, xc):
                                "wheel_moved_m": round(float(dx), 3)}
 
 
+def panel_sides(g, glass, paint):
+    """A panel van's sides behind the cab are steel: its model's side glass
+    there (a windowed minibus's, the Sprinter file's) takes the body's paint.
+    Behind the front doors' rear edge, facing sideways; the windscreen, the
+    cab's own windows and the back doors' glass stay."""
+    j = g.j
+    W, _ = g.world_matrices()
+    rear_edges = []
+    for ni, n in enumerate(j["nodes"]):
+        # by now a door's piece is its own node under its hinge ("door_fl")
+        if "mesh" in n and re.match(r"(?:SB_)?door_f[lr](?:__\d+)?$", n.get("name") or ""):
+            for p in j["meshes"][n["mesh"]]["primitives"]:
+                P = g.accessor(p["attributes"]["POSITION"])
+                rear_edges.append(float((P @ W[ni][:3, :3].T + W[ni][:3, 3])[:, 2].min()))
+    if not rear_edges:
+        return {"skipped": "no front doors found"}
+    zb = min(rear_edges) - 0.02
+    cx = float(np.mean([W[ni][0, 3] for ni, n in enumerate(j["nodes"]) if re.match(r"(?:SB_)?door_f[lr](?:__\d+)?$", n.get("name") or "")]))
+    n_tri, meshes = 0, set()
+    mats = j["materials"]
+
+    def seal(i):
+        # a window's rubber: dark, untextured or named so
+        m = mats[i] if i is not None and i < len(mats) else {}
+        pbr = m.get("pbrMetallicRoughness") or {}
+        c = (pbr.get("baseColorFactor") or [1, 1, 1])[:3]
+        return bool(re.search(r"rubber|seal|gasket|window.?(?:frame|trim)|black", m.get("name", ""), re.I)) \
+            or ("baseColorTexture" not in pbr and max(c) < 0.06)
+    panes = []                                  # the blanked glass's centres: its seals lie round them
+    for stage in ("glass", "seals"):
+        if stage == "seals":
+            if not panes:
+                break
+            from scipy.spatial import cKDTree
+            near = cKDTree(np.vstack(panes))
+        n_tri, meshes = _panel_stage(g, j, W, glass, paint, zb, cx, stage, seal, panes,
+                                     near if stage == "seals" else None, n_tri, meshes)
+    return {"behind_z": round(zb, 3), "triangles": n_tri, "meshes": sorted(meshes)[:12]}
+
+
+def _panel_stage(g, j, W, glass, paint, zb, cx, stage, seal, panes, near, n_tri, meshes):
+    for ni, n in enumerate(j["nodes"]):
+        if "mesh" not in n:
+            continue
+        mesh, M = j["meshes"][n["mesh"]], W[ni]
+        new = []
+        for p in mesh["primitives"]:
+            if p.get("mode", 4) != 4 or "indices" not in p:
+                continue
+            if (stage == "glass") != (p.get("material") in glass) or (stage == "seals" and not seal(p.get("material"))):
+                continue
+            P = g.accessor(p["attributes"]["POSITION"]) @ M[:3, :3].T + M[:3, 3]
+            I = g.accessor(p["indices"]).ravel().astype(np.int64)
+            I = I[:len(I) // 3 * 3].reshape(-1, 3)
+            T = P[I]
+            _, nrm = tri_area_normal(T)
+            sel = (np.abs(nrm[:, 0]) > 0.5) & (T.mean(1)[:, 2] < zb)
+            if stage == "seals" and sel.any():
+                d, _ = near.query(T.mean(1)[sel], distance_upper_bound=0.06)
+                sel[np.where(sel)[0][~np.isfinite(d)]] = False
+            if not sel.any():
+                continue
+            if stage == "glass":
+                panes.append(T.mean(1)[sel])
+            # the paint is one-sided: each panel turned to face out (a pane
+            # modelled facing in would show the cabin through it)
+            S = I[sel].copy()
+            inward = np.sign(nrm[sel, 0]) != np.sign(T[sel].mean(1)[:, 0] - cx)
+            S[inward] = S[inward][:, ::-1]
+            if not sel.all():
+                p["indices"] = g.add_accessor(I[~sel].ravel().astype(np.uint32), ctype=5125, atype="SCALAR", target=34963)
+            q = {k: v for k, v in p.items() if k not in ("indices", "material")}
+            q["indices"] = g.add_accessor(S.ravel().astype(np.uint32), ctype=5125, atype="SCALAR", target=34963)
+            q["material"] = paint
+            if sel.all():
+                p.clear()
+                p.update(q)
+            else:
+                new.append(q)
+            n_tri += int(sel.sum())
+            meshes.add(mesh.get("name") or n.get("name") or str(ni))
+        mesh["primitives"].extend(new)
+    return n_tri, meshes
+
+
 def finish(src, spec, out, base_dir="."):
     log = {"src": os.path.basename(src)}
     # parts a person set by hand in the Studio stand as they are: no search,
@@ -2100,6 +2185,10 @@ def finish(src, spec, out, base_dir="."):
             j["extensionsUsed"].append("KHR_materials_clearcoat")
         log["paint_set"] = {"material": pm.get("name"), "srgb": list(spec["paint"][:3]), "metallic": float(metallic),
                             "clearcoat": True}
+
+    # ── a panel van asked: no windows behind the cab ──
+    if spec.get("panel_van"):
+        log["panel_van"] = panel_sides(g, glass, paint)
 
     # ── clear glass ──
     cleared = []

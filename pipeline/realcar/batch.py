@@ -493,6 +493,10 @@ def body_of(item, args):
 
 
 RIG_FILES = ("src.glb", "src.report.json", "result.json")
+# a van built to carry people, not goods: its side windows stay
+PASSENGER_VAN = re.compile(r"kombi|combi\b|shuttle|minibus|\bbus\b|caravelle|multivan|tourneo|passenger|camper|california|"
+                           r"motor ?home|motor ?caravan|crew ?(?:van|cab)|space ?tourer|traveller|\blife\b|multispace|"
+                           r"v-class|viano|marco polo|westfalia|\bmpv\b|people ?carrier|\bwindow van", re.I)
 
 
 def rig_cache(item, body):
@@ -704,6 +708,11 @@ def one(target, item, args, out):
     # a van opens at the back as two barn doors (finish.py)
     if str(item.get("bodyStyle") or "").lower() == "van" or (st or {}).get("body") == "van":
         spec["body_family"] = "van"
+        # a panel van asked (a Transit, not a Tourneo or a minibus): steel
+        # sides behind the cab, whatever its model's own windows (the
+        # Sprinter file is a windowed minibus: the photo review's commonest find)
+        if not PASSENGER_VAN.search(f"{target.get('genModel') or ''} {(st or {}).get('name') or ''}"):
+            spec["panel_van"] = True
     if aid in TORN:
         spec["close_cracks"] = True
     # a 911 (or a mid-engined car): the engine under the rear lid, which lifts
