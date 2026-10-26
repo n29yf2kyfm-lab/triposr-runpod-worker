@@ -955,6 +955,34 @@
 "Audi Q4 E-Tron"
 ]
 },
+"audi|q6": {
+"asked": [
+"Audi Q6 e-tron"
+],
+"boxes": [
+{
+"at": 215,
+"base": 0,
+"body": "5-door SUV",
+"class": "Compact luxury crossover SUV",
+"doors": 5,
+"height": 1648,
+"length": 4771,
+"name": "Audi Q6 e-tron",
+"page": "Audi Q6 e-tron",
+"wheelbase": 2899,
+"width": 1939,
+"years": [
+2023,
+2100
+]
+}
+],
+"fetch_v": 8,
+"tried": [
+"Audi Q6 e-tron"
+]
+},
 "audi|q8": {
 "boxes": [
 {
@@ -5470,6 +5498,34 @@
 "Ford Focus (fourth generation)"
 ]
 },
+"ford|fusion": {
+"asked": [
+"Ford Fusion (Europe)"
+],
+"boxes": [
+{
+"at": 119,
+"base": 0,
+"body": "5-door hatchback",
+"class": "Mini MPV (M)",
+"doors": 5,
+"height": 1500,
+"length": 4020,
+"name": "Ford Fusion",
+"page": "Ford Fusion (Europe)",
+"wheelbase": 2490,
+"width": 1710,
+"years": [
+2002,
+2012
+]
+}
+],
+"fetch_v": 7,
+"tried": [
+"Ford Fusion (Europe)"
+]
+},
 "ford|gt40": {
 "boxes": [],
 "tried": [
@@ -5564,8 +5620,13 @@
 ]
 },
 "ford|mondeo": {
+"asked": [
+"Ford Mondeo",
+"Ford Fusion (Americas)"
+],
 "boxes": [
 {
+"at": 157,
 "base": 0,
 "body": "4-door saloon",
 "class": "Midsize (D)",
@@ -5582,6 +5643,24 @@
 ]
 },
 {
+"at": 27701,
+"base": 0,
+"body": "4-door sedan",
+"class": "",
+"doors": 4,
+"height": 1382,
+"length": 4671,
+"name": "Ford Contour<br />Mercury Mystique",
+"page": "Ford Mondeo (first generation)",
+"wheelbase": 2705,
+"width": 1753,
+"years": [
+1994,
+2000
+]
+},
+{
+"at": 266,
 "base": 0,
 "body": "4-door saloon",
 "class": "Large family car (D)",
@@ -5598,6 +5677,7 @@
 ]
 },
 {
+"at": 70,
 "base": 0,
 "body": "4-door saloon",
 "class": "Large family car/Compact executive car (D)",
@@ -5614,6 +5694,24 @@
 ]
 },
 {
+"at": 170,
+"base": 0,
+"body": "4-door saloon",
+"class": "Large family car",
+"doors": 5,
+"height": 1476,
+"length": 4869,
+"name": "Ford Mondeo<br />(fourth generation)",
+"page": "Ford Mondeo (fourth generation)",
+"wheelbase": 2850,
+"width": 1852,
+"years": [
+2013,
+2022
+]
+},
+{
+"at": 139,
 "base": 0,
 "body": "4-door sedan",
 "class": "Full-size car (E)",
@@ -5628,15 +5726,55 @@
 2022,
 2100
 ]
+},
+{
+"at": 4678,
+"base": 1,
+"body": "",
+"class": "",
+"doors": null,
+"height": 1453,
+"length": 4831,
+"name": "First generation",
+"page": "Ford Fusion (Americas)",
+"page_body": "4-door sedan",
+"page_class": "Mid-size car (D)",
+"wheelbase": 2728,
+"width": 1834,
+"years": [
+2005,
+2012
+]
+},
+{
+"at": 35649,
+"base": 1,
+"body": "",
+"class": "",
+"doors": null,
+"height": 1476,
+"length": 4869,
+"name": "Second generation",
+"page": "Ford Fusion (Americas)",
+"page_body": "4-door sedan",
+"page_class": "Mid-size car (D)",
+"wheelbase": 2850,
+"width": 1852,
+"years": [
+2012,
+2020
+]
 }
 ],
+"fetch_v": 8,
 "tried": [
 "Ford Mondeo",
 "Ford Mondeo (first generation)",
 "Ford Mondeo (second generation)",
 "Ford Mondeo (third generation)",
 "Ford Mondeo (fourth generation)",
-"Ford Mondeo (fifth generation)"
+"Ford Mondeo (fifth generation)",
+"Ford Fusion (Americas)"
 ]
 },
 "ford|mustang": {

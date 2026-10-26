@@ -300,10 +300,14 @@ ALIAS = {("vauxhall", "zafira"): "Opel Zafira",     # the Vauxhall page puts the
          ("kgm", "musso"): "SsangYong Musso",               # KGM is SsangYong's new name
          ("hyundai", "iload"): "Hyundai Starex",            # the UK iLoad is the Starex (H-1)
          ("ldv", "v80"): "LDV Maxus",                       # the V80 is the LDV Maxus, made on by SAIC
-         ("jaecoo", "omoda 5"): "Chery Omoda 5", ("land-rover", "series"): "Land Rover series"}   # the City-Coupé, renamed in 2004
+         ("jaecoo", "omoda 5"): "Chery Omoda 5", ("land-rover", "series"): "Land Rover series",
+         ("audi", "q6"): "Audi Q6 e-tron"}      # the UK's Q6 is the 2024 electric car; "Audi Q6" is the Chinese SUV   # the City-Coupé, renamed in 2004
 # more pages that hold a model's generations: the first three Yaris
 # generations are filed under the Japanese name
 EXTRA = {("bmw", "z4"): ["BMW Z4 (E85)", "BMW Z4 (E89)", "BMW Z4 (G29)"],   # "BMW Z4" redirects to the Z family's page
+         # the European Mondeo of 2014-2022 is filed as the second Fusion (the
+         # US name of the same car); the model's page goes from the 2007 car to the Chinese one
+         ("ford", "mondeo"): ["Ford Fusion (Americas)"],
          ("toyota", "yaris"): ["Toyota Vitz"],
          ("daihatsu", "sirion"): ["Daihatsu Boon"],
          ("fiat", "600"): ["Fiat 600 (2023)"],           # the 2023 600's own page; "Fiat 600" is the 1955 car
@@ -451,9 +455,19 @@ PAGE_FIX = {("Renault Trafic", "Second generation (X83)"): {
     "length": 4470, "wheelbase": 2640,
     "fixed": "the five-door's length and wheelbase, most of them (Carsales): the page gives the three-door's"},
     # a box that names no body, the page's text does
+    # the Mondeo Mk5's box on the Fusion's page: the years it was sold in Europe, and its name here
+    ("Ford Fusion (Americas)", "Second generation"): {
+    "years": [2014, 2022], "fixed": "years of the Mondeo Mk5, sold in Europe 2014-2022 (the US Fusion ended in 2020)"},
     ("Triumph Stag", "Triumph Stag"): {
     "body": "2-door convertible", "doors": 2,
     "fixed": "body from the page's text: 'All Stags were four-seater convertible coupés'"}}
+
+
+# a model whose page is read as another car's: its published size by hand
+# (the Paceman's page leads to the Aceman, its successor in name only)
+HAND = {"mini|paceman": [{"name": "Mini Paceman (R61)", "years": [2012, 2016], "length": 4115, "width": 1786,
+                          "height": 1518, "wheelbase": 2595, "body": "3-door SUV coupe", "doors": 3,
+                          "page": "Mini Paceman", "source": "by hand: Mini's published R61 dimensions"}]}
 
 
 def _fixed(boxes):
@@ -639,6 +653,9 @@ def lookup(make, model, year, ratio=None, online=None, doors=None):
             os.makedirs(os.path.dirname(p), exist_ok=True)
             json.dump(loc, open(p + ".tmp", "w"), indent=0, sort_keys=True)
             os.replace(p + ".tmp", p)
+    if key in HAND:
+        got = choose(HAND[key], year, ratio, doors)
+        return got if got.get("wheelbase") else choose(HAND[key], None, ratio, doors)
     return choose(named_wheelbase(_fixed(ent["boxes"]), model), year, ratio, doors)       # a fresh read's too
 
 
