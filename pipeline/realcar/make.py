@@ -562,11 +562,17 @@ def incomplete():
         return {}
 
 
-def _forget(asset):
+def _forget(asset, have=None):
+    """Takes ASSET's entry out, when it came out with the parts it lacked
+    before (HAVE: the parts it opens; None: whatever they were): a coupe built
+    as a coupe still lacks the rear doors a 4-door car wants."""
     p = _refused_path()
     try:
         d = json.load(open(p))
     except (OSError, ValueError):
+        return
+    lacked = {x for x in (d.get(asset) or {}).get("missing") or () if re.fullmatch(r"door_\w+|bonnet|tailgate", x)}
+    if have is not None and not lacked <= set(have):
         return
     if d.pop(asset, None) is not None:
         json.dump(d, open(p + ".tmp", "w"), indent=1)
@@ -738,11 +744,23 @@ TALL = 0.12              # a donor more than this much taller or lower than the 
 RACE = re.compile(r"\bgt[234]\b|gt[23] ?rs|\bcup\b|\brsr\b|racing|race ?car|black series|\bdtm\b|\bwrc\b", re.I)
 EXOTIC = re.compile(r"\bslr\b|mclaren|enzo|laferrari|veyron|chiron|\bsenna\b|\bp1\b|carrera gt|one-77|valkyrie|zonda|huayra|"
                     r"aventador|murci[eé]lago|countach|\b959\b|\b918\b", re.I)
+# a sports car's shape is its own (a 911's lamps and fastback): one for a
+# sports car, after the others for a coupe or a convertible of another kind
+# (the Hyundai Coupe from a Silvia, not a 911)
+SPORTS = re.compile(r"\b911\b|\b9(?:64|9[1-7])\b|boxster|cayman|f-type|e-type|\b[34]70z\b|\b350z\b|\b300zx\b|\brx-?[78]\b|mx-?5|miata|"
+                    r"\bz[348]\b|\bslk\b|\bslc\b|\bsl\b|amg gt|\btts?\b|tt ?rs|\br8\b|vantage|\bdb\d+\b|aston martin|"
+                    r"corvette|viper|supra|gt ?86|\bgr ?86\b|\bbrz\b|s2000|\bnsx\b|gt-r\b|elise|exige|evora|\belan\b|"
+                    r"midget|spitfire|\bmgb\b|\bmgf\b|\bmg ?tf\b|\btr[2-8]\b|sprite|\b4c\b|a110|ferrari|lamborghini", re.I)
 # off-roaders look like each other more than like an SUV of their size (a
 # Jimny from a G-Class, not from a Nissan Cube): an off-roader for an
 # off-roader, and only for one
-OFFROAD = re.compile(r"jimny|defender|g-?class|g ?wagon|wrangler|grenadier|land ?cruiser|pajero|shogun|niva|bronco|"
+OFFROAD = re.compile(r"jimny|defender|g-?class|g ?wagon|wrangler|grenadier|land ?cruiser|pajero|shogun|\bniva\b|bronco|"
                      r"gladiator|samurai|land[- ]?rover[- ](?:series|88|109|90|110)\b", re.I)
+
+
+# the make or its group goes first only for a donor of the car's time and
+# kind: not a 2002 Stagea for a 2021 Jogger, nor a GT-R for an Eclipse
+GROUP_YEARS = 12
 
 
 def donors(target, fam, cat, make, model_key, want, skip=()):
@@ -753,6 +771,8 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
     doors asked for, a model ExpertCarCheck may use commercially and the
     better grade breaking ties."""
     out, short = [], incomplete()
+    # rear doors a donor lacked for a 4-door car are no fault for a 2-door one (a coupe's)
+    rear = {"door_rl", "door_rr"} if target.get("side_doors") == 2 else set()
     for i in cat.values():
         if i.get("publicationStatus") != "approved" or not i.get("desktopGlbUrl") or i["assetId"] in skip \
                 or i["assetId"] in batch.WRONG_CAR or batch.is_game(i):
@@ -786,14 +806,20 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
         len_ok = bool(b.get("length") and target.get("length")) and abs(b["length"] / target["length"] - 1) <= AXIS
         odd = bool((RACE.search(text) and not RACE.search(asked)) or (EXOTIC.search(text) and not EXOTIC.search(asked)))
         t_off, d_off = bool(OFFROAD.search(asked)), bool(OFFROAD.search(text))
+        t_sport = bool(SPORTS.search(asked) or re.search(r"sports? (?:car|tourer)", str(target.get("class") or ""), re.I))
+        d_sport = bool(SPORTS.search(text))
         # and a donor stretched or cut more than AXIS does not look like it, however close its year
         likeness = (0 if era_ok else 0.6) + (0 if tall_ok else 0.3) + (0 if len_ok else 0.3) + (0.5 if odd else 0) \
-            + (0.2 if d_off and not t_off else 0) + (0.5 if t_off and not d_off else 0)
+            + (0.2 if d_off and not t_off else 0) + (0.5 if t_off and not d_off else 0) \
+            + (0.3 if d_sport and not t_sport else 0)
+        lacks = set(short.get(i["assetId"], ())) - rear
         three = bool(re.search(r"\b[23][- ]?(?:door|dr)\b|coup[eé]", str(i.get("sourceTitle") or ""), re.I)) \
             or (i.get("doors") and int(i["doors"]) <= 3)
         doors_off = 0.0
         if want.get("doors"):
-            doors_off = 0.0 if three == (want["doors"] <= 3) else 0.4
+            # rear doors too many are closed up (a 3-door from a 5-door, the
+            # Corsa's for the DS3), too few cannot be made: the latter counts more
+            doors_off = 0.0 if three == (want["doors"] <= 3) else 0.4 if three else 0.2
         elif three:
             doors_off = 0.1                      # most cars on the road have rear doors
         # a sporting or special version ("Golf GTI" for a Golf) after the plain
@@ -814,10 +840,11 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
         tier = 0 if kin < 0.15 else 1                 # the make or its group (a Picanto for an i10), or another maker
         score = (size + age + variant + likeness + (0 if (mk.lower(), md.lower()) == model_key else 0.3) + kin
                  + doors_off + (0 if batch.credit_of(i)["commercial"] else 0.04)     # a tie-break: commercial-only builds skip the others
-                 + 0.25 * len(short.get(i["assetId"], ()))          # it came out short of these parts before
+                 + 0.25 * len(lacks)          # it came out short of these parts before
                  + 0.03 * batch.GRADE.get(i.get("qualityGrade"), 3))
         out.append((round(score, 4), i["assetId"], i, tier,
-                    size <= REACH and axis_ok and not short.get(i["assetId"]) and era_ok and tall_ok and not odd,
+                    size <= REACH and axis_ok and not lacks and era_ok and tall_ok and (gap or 0) <= GROUP_YEARS
+                    and not odd and not (d_sport and not t_sport) and d_off == t_off,
                     round(size, 4)))
     # the reshape makes any donor the car's size, so its face counts most: when
     # the body is known (every donor has it), the make or its group first if
@@ -873,11 +900,11 @@ def _standin(want, report, item, cat, skip, retry=False):
     if other:
         name = f"{name} {str(want.get('body_word') or BODY_NAME.get(fam, fam)).title()}"
     # the side doors it must open: the request's, else the most its body has ("3/5-door hatchback": 4)
-    nd = [int(x) for x in re.findall(r"([2-5])(?=[-/ ]?(?:\d-?)?door)", str(gen.get("body") or ""))]
-    nd = want.get("doors") or (max(nd) if nd else None)
+    nd = [int(x) for x in re.findall(r"([2-5])(?=[-/ ]?(?:\d-?)?door)", str(gen.get("body") or ""))] + [gen.get("doors") or 0]
+    nd = want.get("doors") or (max(nd) or None)
     target = {"name": name, "length": gen["length"], "wheelbase": gen["wheelbase"], "width": gen["width"],
               "height": gen["height"], "years": [y[0], None if (y[1] or 0) >= 2100 else y[1]],
-              "body": fam, "source": gen.get("source"),
+              "body": fam, "source": gen.get("source"), "class": gen.get("class"),
               "side_doors": (2 if nd <= 3 else 4) if nd else None}
     if other:
         target["no_photo"] = True     # the model's photos would be of its other body: the donor's own roof stays
@@ -1116,7 +1143,7 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
             continue
         if built:
             if item.get("standin"):
-                _forget(item["standin_donor"])     # complete now: no longer short of parts
+                _forget(item["standin_donor"], ((rec.get("finish") or {}).get("opens") or []))     # complete now: no longer short of parts
             break
         rig = rec.get("rig") or {}
         passed.append({"asset": item.get("standin_donor") or item["assetId"], "source": item.get("sourceTitle"),

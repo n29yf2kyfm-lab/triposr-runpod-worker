@@ -131,6 +131,14 @@ def _text(v):
     return (_lines(v) or [""])[0]
 
 
+def _doors(v):
+    """The most doors any of a box's bodies has ('3-door hatchback<br>5-door
+    hatchback': 5, the C1's), its body naming only the first; None when none
+    says."""
+    n = [int(x) for x in re.findall(r"([2-5])(?=[-/ ]?(?:\d-?)?door)", " ".join(_lines(v)))]
+    return max(n) if n else None
+
+
 def body_family(body, cls="", name=""):
     """hatch, saloon, estate, suv, mpv, coupe, convertible, pickup or van,
     from a generation's body style, else its class, else its name."""
@@ -158,7 +166,35 @@ def _years(v):
     return min(ys), (2100 if present and len(ys) == 1 else max(ys))
 
 
-WB_LABEL = re.compile(r"\((SWB|LWB|XLWB|short wheelbase|long wheelbase)\)", re.I)
+# a wheelbase's label: its length in words, or the model it is (the Land
+# Rover Ninety's "(90)", "(110)")
+WB_LABEL = re.compile(r"\((SWB|LWB|XLWB|short wheelbase|long wheelbase|\d{2,3})\)", re.I)
+
+
+def _items(v):
+    """A field's entries as written, templates kept: its <br> lines, or its
+    list template's items ("{{ubl|{{convert|92.9|in|mm}} (90)|...}}")."""
+    m = re.match(r"\s*\{\{\s*(?:ubl|unbulleted list|plainlist|flatlist)\s*\|", v, re.I)
+    if not m:
+        return [x for x in re.split(r"<br\s*/?>", v, flags=re.I) if x.strip()]
+    out, depth, cur, i = [], 0, "", m.end()
+    while i < len(v):
+        two = v[i:i + 2]
+        if two in ("{{", "[["):
+            depth, cur, i = depth + 1, cur + two, i + 2
+            continue
+        if two in ("}}", "]]"):
+            if depth == 0:
+                break
+            depth, cur, i = depth - 1, cur + two, i + 2
+            continue
+        if v[i] == "|" and depth == 0:
+            out.append(cur)
+            cur, i = "", i + 1
+            continue
+        cur, i = cur + v[i], i + 1
+    out.append(cur)
+    return [y for x in out for y in re.split(r"<br\s*/?>|\n\s*\*", x, flags=re.I) if y.strip(" *\n")]
 
 
 def _by_wheelbase(fields):
@@ -167,7 +203,7 @@ def _by_wheelbase(fields):
     takes its label's line (the latest of them), a size given once is shared.
     [(label or None, fields)]."""
     sizes = ("wheelbase", "length", "width", "height")
-    lines = {k: [x for x in re.split(r"<br\s*/?>", fields.get(k, ""), flags=re.I) if x.strip()] for k in sizes}
+    lines = {k: _items(fields.get(k, "")) for k in sizes}
     labels = []
     for x in lines["wheelbase"]:
         g = WB_LABEL.search(x)
@@ -180,7 +216,12 @@ def _by_wheelbase(fields):
         f = dict(fields)
         for k in sizes:
             own = [x for x in lines[k] if (g := WB_LABEL.search(x)) and g.group(1).upper() == lab]
-            f[k] = own[-1] if own else (lines[k][0] if len(lines[k]) == 1 else "")
+            if not own and lab.isdigit():
+                # "(2000s 90)", "(110 Hardtop)": the model's number among the label's words
+                own = [x for x in lines[k] if re.search(rf"\([^()]*\b{lab}\b[^()]*\)", x)]
+            # a width or height given once for all, then by year: the first
+            f[k] = own[-1] if own else (lines[k][0] if len(lines[k]) == 1 or (k in ("width", "height") and lines[k]
+                                                                          and not WB_LABEL.search(lines[k][0])) else "")
         out.append((lab, f))
     return out
 
@@ -224,7 +265,8 @@ def infoboxes(text, title):
             out.append({"page": title, "at": m.start(), "name": f"{name} ({label})" if label else name,
                         "years": yr, "wheelbase": _mm(f.get("wheelbase", "")), "length": _mm(f.get("length", "")),
                         "width": _mm(f.get("width", ""), 1300, 2700), "height": _mm(f.get("height", ""), 1000, 2600),
-                        "body": _text(fields.get("body_style", ""))[:80], "class": _text(fields.get("class", ""))[:80]})
+                        "body": _text(fields.get("body_style", ""))[:80], "class": _text(fields.get("class", ""))[:80],
+                        "doors": _doors(fields.get("body_style", ""))})
     for b in out:
         if not (b["body"] or b["class"]):
             b.update({k: v for k, v in page.items() if v})
@@ -405,7 +447,11 @@ PAGE_FIX = {("Renault Trafic", "Second generation (X83)"): {
     "height": 1959, "fixed": "height 1,959 mm, the low-roof van (CarsGuide, Caroom): the page's 1,380 mm is no van's"},
     ("Suzuki Vitara", "Third generation"): {
     "length": 4470, "wheelbase": 2640,
-    "fixed": "the five-door's length and wheelbase, most of them (Carsales): the page gives the three-door's"}}
+    "fixed": "the five-door's length and wheelbase, most of them (Carsales): the page gives the three-door's"},
+    # a box that names no body, the page's text does
+    ("Triumph Stag", "Triumph Stag"): {
+    "body": "2-door convertible", "doors": 2,
+    "fixed": "body from the page's text: 'All Stags were four-seater convertible coupés'"}}
 
 
 def _fixed(boxes):
@@ -417,11 +463,14 @@ def table():
     if not _TABLE and os.path.exists(TABLE):
         _TABLE.update(json.load(open(TABLE)))
         try:
-            # this machine's own lookups: what the shipped table lacks, or has
-            # found nothing for (a page the reader of its day could not read)
+            # this machine's own lookups: what the shipped table lacks, has
+            # found nothing for (a page the reader of its day could not read),
+            # or a newer reader read again with more pages (the 2023 Fiat 600's)
             _TABLE.update({k: v for k, v in json.load(open(local_table_path())).items()
                            if k not in _TABLE or (not _TABLE[k].get("boxes") and (v.get("boxes") or
-                                                  v.get("fetch_v", 1) > _TABLE[k].get("fetch_v", 1)))})
+                                                  v.get("fetch_v", 1) > _TABLE[k].get("fetch_v", 1)))
+                           or (v.get("boxes") and not v.get("failed")
+                               and v.get("fetch_v", 1) > _TABLE[k].get("fetch_v", 1))})
         except (OSError, ValueError):
             pass
         for v in _TABLE.values():
@@ -513,7 +562,7 @@ def choose(boxes, year, ratio=None, doors=None):
     # race and rally cars (Fiesta R5, Polo R WRC) are not the road car's generation
     road = [b for b in boxes if not RACE.search(b.get("name") or "")]
     if doors and doors >= 4:
-        road = [b for b in road if not FEW_DOORS.search(b.get("body") or "")] or road
+        road = [b for b in road if not FEW_DOORS.search(b.get("body") or "") or (b.get("doors") or 0) >= 4] or road
     boxes = _succeeded(road or boxes)
     # the generation that was built that year; failing that, one that started
     # the year after (a car registered the year after it was built)
@@ -545,7 +594,8 @@ def few_doors(make, model, year=None):
     if year:
         boxes = [b for b in boxes if b.get("years") and b["years"][0] - 1 <= year <= b["years"][1]]
     bodies = [b.get("body") or "" for b in boxes]
-    if not bodies or not all(FEW_DOORS.search(x) for x in bodies) or any(re.search(r"[45][- ]?door|/\s*[45]", x) for x in bodies):
+    if not bodies or not all(FEW_DOORS.search(x) for x in bodies) or any(re.search(r"[45][- ]?door|/\s*[45]", x) for x in bodies) \
+            or any((b.get("doors") or 0) >= 4 for b in boxes):
         return None
     return "2-door" if all(re.search(r"\b2[- ]?door|coupe|coupé|convertible|cabrio|roadster", x, re.I) for x in bodies) \
         else "3-door"
@@ -554,8 +604,8 @@ def few_doors(make, model, year=None):
 # the page reader's version: an entry an older reader found nothing in is
 # read again once (inches, electric cars' infoboxes, a twin's sizes, short
 # names in capitals came with 2)
-FETCH_V = 7                                      # 3: EX30, iX1, EQA spelt as titled; 4: TVR, KGM in capitals; 5: inch ranges
-# 6, 7: the lead box's body (when it names one) for generations that name none
+FETCH_V = 8                                      # 3: EX30, iX1, EQA spelt as titled; 4: TVR, KGM in capitals; 5: inch ranges
+# 6, 7: the lead box's body (when it names one) for generations that name none; 8: the most doors of its bodies
 
 
 def lookup(make, model, year, ratio=None, online=None, doors=None):
@@ -594,7 +644,8 @@ def named_wheelbase(boxes, model):
     """For a model named by its wheelbase in inches (the Land Rover 88, 109),
     the boxes of that wheelbase, when the page gives them; else BOXES."""
     if re.fullmatch(r"\d{2,3}", str(model)) and 80 <= int(model) <= 135:
-        return [b for b in boxes if b.get("wheelbase") and abs(b["wheelbase"] - int(model) * 25.4) <= 20] or boxes
+        return [b for b in boxes if str(b.get("name") or "").endswith(f"({model})")] \
+            or [b for b in boxes if b.get("wheelbase") and abs(b["wheelbase"] - int(model) * 25.4) <= 20] or boxes
     return boxes
 
 

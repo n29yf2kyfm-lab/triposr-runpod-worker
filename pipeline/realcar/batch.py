@@ -65,7 +65,8 @@ WHEELBASE = {
 # Catalogue bodies corrected by looking at the model: a file whose record
 # names no body takes its generation's first ("3/5-door hatchback" for the
 # Astra G), which is not always the body modelled
-BODY_FIX = {"opel-astra-1998-w7-v1": "saloon"}     # an Astra G saloon, boot and all
+BODY_FIX = {"opel-astra-1998-w7-v1": "saloon",     # an Astra G saloon, boot and all
+            "fiat-tipo-fw1-v1": "saloon"}          # the 2016 Tipo saloon
 
 
 # Catalogue models whose own cues put the nose at the wrong end (seen on the
@@ -90,6 +91,9 @@ GENERATION_FIX = {
     "mercedes-benz-e-class-mw1-v5": {"yearStart": 1976, "yearEnd": 1986, "generation": "W123"},
     # the 1968 Beetle its title names, recorded as the 1997-2019 New Beetle and Beetle
     "volkswagen-beetle-v1": {"yearStart": 1968, "yearEnd": 1968, "generation": "Type 1"},
+    "fiat-tipo-fw1-v1": {"yearStart": 2016, "yearEnd": 2020, "generation": "356"},   # untitled: the 2016 saloon, not the 1988 Tipo
+    # the Land Cruiser 300 its title names, recorded as every Land Cruiser from 1985
+    "toyota-land-cruiser-v1": {"yearStart": 2021, "yearEnd": 2026, "generation": "J300"},
     # the C8 its title names ("2019 Chevrolet Corvette C8 Stingray"), recorded from 1997
     "chevrolet-corvette-v1": {"yearStart": 2020, "yearEnd": 2026, "generation": "C8"},
     # the 1992 Escort RS Cosworth its title names, recorded as every Escort of 1968-2000
@@ -103,14 +107,15 @@ GENERATION_FIX = {
 # filed as a Focus): built as their car, but a stand-in's donor after a plain
 # car, as a named badge's is (make.VARIANT), unless the request names it
 SPECIAL_VERSION = {"ford-focus-v1": r"\brs\b", "jaguar-xe-v1": r"project ?8|\bsv\b",
-                   "jaguar-xe-2018-jgw1-v1": r"project ?8|\bsv\b"}
+                   "jaguar-xe-2018-jgw1-v1": r"project ?8|\bsv\b",
+                   "ford-mustang-v1": r"shelby|gt ?500",       # its rear wing and vented bonnet
+                   "porsche-911-2019-pw2-v4": r"gt ?3"}        # untitled: a GT3 RS, wing and all
 
 # Catalogue models whose paint is a livery, not the road car's (an art car's
 # print): built in a plain paint of the model when no colour is asked, as the
 # car itself and as a stand-in's donor (sRGB)
 PLAIN_PAINT = {
     "mercedes-benz-glc-mw1-v2": (172, 175, 178),      # an art-car print; built in a plain silver
-    "kia-stinger-v1": (96, 100, 106),                 # a camouflage wrap; built in a plain grey
 }
 
 
@@ -161,6 +166,7 @@ WRONG_CAR = {
     "alfa-romeo-milano-2023-v1": "is a Cupra Formentor (Cupra badge and copper wheels), not an Alfa Romeo Milano/Junior",
     "bmw-5-series-e60-v1": "is the Audi A4 (B5) model again (its rings and grille; 'A4' in the file), not a BMW E60",
     "jeep-wrangler-jpw1-v2": "is modelled with its doors and roof off (a Rubicon stripped for the trail), not the closed car",
+    "kia-stinger-v1": "is a track build (a roll cage inside) whose body is two shells on one surface: blotched in any paint",
     "audi-a8-2008-v1": "is an Audi Q5 Sportback (its grille and roofline), not a 2008 A8; and broken as the next three are",
     # files the catalogue cut down to about 150,000 triangles, their inner
     # panels merged through the paint: the cabin and the bay show through in
