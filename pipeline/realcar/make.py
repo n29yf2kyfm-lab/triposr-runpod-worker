@@ -780,11 +780,15 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
         era_ok = (ty < CLASSIC_BEFORE) == ((dy or 2015) < CLASSIC_BEFORE) if ty else True
         tall_ok = fam == "van" or not (b.get("height") and target.get("height")) \
             or abs(b["height"] / target["height"] - 1) <= TALL
-        axis_ok = all(abs(b[k] / target[k] - 1) <= AXIS for k in ("length", "width") if b.get(k) and target.get(k))
+        axis_ok = all(b.get(k) and target.get(k) and abs(b[k] / target[k] - 1) <= AXIS for k in ("length", "width"))
+        # its length within AXIS (not its width: a 1960s roadster is narrower than any car since); a length not known
+        # counts against it, as its size does
+        len_ok = bool(b.get("length") and target.get("length")) and abs(b["length"] / target["length"] - 1) <= AXIS
         odd = bool((RACE.search(text) and not RACE.search(asked)) or (EXOTIC.search(text) and not EXOTIC.search(asked)))
         t_off, d_off = bool(OFFROAD.search(asked)), bool(OFFROAD.search(text))
-        likeness = (0 if era_ok else 0.6) + (0 if tall_ok else 0.3) + (0.5 if odd else 0) + (0.2 if d_off and not t_off else 0) \
-            + (0.5 if t_off and not d_off else 0)
+        # and a donor stretched or cut more than AXIS does not look like it, however close its year
+        likeness = (0 if era_ok else 0.6) + (0 if tall_ok else 0.3) + (0 if len_ok else 0.3) + (0.5 if odd else 0) \
+            + (0.2 if d_off and not t_off else 0) + (0.5 if t_off and not d_off else 0)
         three = bool(re.search(r"\b[23][- ]?(?:door|dr)\b|coup[eé]", str(i.get("sourceTitle") or ""), re.I)) \
             or (i.get("doors") and int(i["doors"]) <= 3)
         doors_off = 0.0
