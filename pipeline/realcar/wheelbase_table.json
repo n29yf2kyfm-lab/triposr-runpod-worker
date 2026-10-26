@@ -5410,6 +5410,87 @@
 "Ford GT40"
 ]
 },
+"ford|ka": {
+"asked": [
+"Ford Ka",
+"Ford KA"
+],
+"boxes": [
+{
+"at": 3596,
+"base": 0,
+"body": "3-door hatchback",
+"class": "",
+"doors": 3,
+"height": 1388,
+"length": 3635,
+"name": "First generation",
+"page": "Ford Ka",
+"wheelbase": 2452,
+"width": 1663,
+"years": [
+1996,
+2008
+]
+},
+{
+"at": 23617,
+"base": 0,
+"body": "3-door hatchback",
+"class": "",
+"doors": 3,
+"height": 1505,
+"length": 3620,
+"name": "Second generation (Europe)",
+"page": "Ford Ka",
+"wheelbase": 2300,
+"width": 1658,
+"years": [
+2008,
+2016
+]
+},
+{
+"at": 29666,
+"base": 0,
+"body": "3-door hatchback",
+"class": "Subcompact car",
+"doors": 3,
+"height": 1420,
+"length": 3836,
+"name": "Second generation (Latin America)",
+"page": "Ford Ka",
+"wheelbase": 2452,
+"width": 1641,
+"years": [
+2008,
+2013
+]
+},
+{
+"at": 34255,
+"base": 0,
+"body": "5-door hatchback",
+"class": "Subcompact car",
+"doors": 5,
+"height": 1525,
+"length": 3908,
+"name": "Third generation",
+"page": "Ford Ka",
+"wheelbase": 2491,
+"width": 1695,
+"years": [
+2014,
+2021
+]
+}
+],
+"fetch_v": 8,
+"tried": [
+"Ford Ka",
+"Ford Ka"
+]
+},
 "ford|ka sedan": {
 "boxes": [],
 "tried": [

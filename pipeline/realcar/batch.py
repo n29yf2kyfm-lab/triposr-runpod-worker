@@ -277,12 +277,18 @@ def pick(target, cat):
 TRIM = re.compile(r"(?<![\w-])(gti|gtd|gte|gt|r|rs\d?|st|amg|s|se|sport|line|hybrid|phev|ev|e|turbo|quattro|xdrive|\d{3}i|a\d\d)(?![\w-])", re.I)
 
 
+BODY_WORD = re.compile(r"[-\s]+(?:sedan|saloon|hatchback|hatch|estate|wagon|coup[eé]|convertible|cabrio(?:let)?|"
+                       r"gran coup[eé]|sportback)$", re.I)
+
+
 def model_of(item):
-    """(make, model) as the wheelbase table knows it: trim words and the make
-    taken off ('volkswagen', 'polo' from 'Volkswagen Polo GTI')."""
+    """(make, model) as the wheelbase table knows it: trim words, the make
+    and a body word taken off ('volkswagen', 'polo' from 'Volkswagen Polo
+    GTI'; 'ford', 'ka' from 'Ford Ka Sedan', whose page is the Ka's)."""
     model = TRIM.sub(" ", item.get("modelFamily") or item.get("model") or "")
     make_rx = r"[-\s]".join(re.escape(w) for w in re.split(r"[-\s]+", item["make"]))   # land-rover = land rover
     model = re.sub(make_rx + r"\s*", "", model, flags=re.I).strip(" -") or item.get("model")
+    model = BODY_WORD.sub("", model) or model           # the body stays in its record (bodyStyle, the title)
     return item["make"], " ".join(model.split())
 
 
