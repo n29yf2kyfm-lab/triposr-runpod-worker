@@ -75,7 +75,10 @@ BODY_FIX = {"opel-astra-1998-w7-v1": "saloon",     # an Astra G saloon, boot and
 # check sheets: built tail first, its "tailgate" the bonnet): the rigger is
 # told the nose is the other end
 NOSE_BACK = {"bentley-continental-x-undated-v1": "its studio picture showed its tail at the front",
-             "mercedes-benz-gl-class-2012-mw1-v1": "the height over the axles reads it backwards"}
+             "mercedes-benz-gl-class-2012-mw1-v1": "the height over the axles reads it backwards",
+             # the build review saw their tails where their noses should be
+             "mini-countryman-v2": "its studio picture showed its tail at the front",
+             "volkswagen-beetle-v1": "its studio picture showed its engine lid at the front"}
 
 
 # Catalogue years corrected by looking at the model against the generation's

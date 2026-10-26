@@ -1034,6 +1034,12 @@ def finish(src, spec, out, base_dir="."):
         return r["P"][r["I"]]
 
 
+    # a wheel modelled inside out (the 2017 Golf's front left, seen from its
+    # side) shows its inner faces: drawn from both sides, it is solid
+    for r in recs:
+        if r["rig"].startswith("wheel_") and r["mat"] is not None:
+            mats[r["mat"]]["doubleSided"] = True
+
     # ── frame: wheels give the axles, the ground and the track ──
     if not any(p.startswith("wheel_") for p in manual):
         wheel_outliers(recs, log)
@@ -1131,6 +1137,15 @@ def finish(src, spec, out, base_dir="."):
         if alt:
             log["paint_over_plastic"] = mats[paint].get("name")
             paint = max(alt, key=lambda i: door_area[i])
+    # a material the model names as its paint, nearly as much of the side as
+    # one it does not (the 2017 Countryman's "varnish_paint" over a "panel"
+    # under it): the named one is the paint seen
+    if paint < nm and not re.search(r"paint|lack|body", mats[paint].get("name", ""), re.I):
+        named = [i for i in range(nm) if re.search(r"paint|lack", mats[i].get("name", ""), re.I)
+                 and not mats[i].get("name", "").startswith("detail-") and door_area[i] >= 0.6 * door_area[paint]]
+        if named:
+            log["paint_by_name_over"] = mats[paint].get("name")
+            paint = max(named, key=lambda i: door_area[i])
     log["paint"] = mats[paint].get("name")
     log["paint_side_m2"] = {mats[i].get("name") if i < nm else "-": round(float(door_area[i]), 3)
                             for i in np.argsort(-door_area)[:3] if door_area[i] > 0}
