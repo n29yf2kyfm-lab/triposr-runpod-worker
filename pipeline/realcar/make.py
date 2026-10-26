@@ -47,6 +47,15 @@ COLOURS = {                       # longer names first: "dark grey" before "grey
     "gold": (182, 150, 80), "bronze": (140, 100, 60), "purple": (78, 30, 92), "maroon": (88, 14, 24),
     "turquoise": (28, 140, 140), "pink": (220, 120, 160), "cream": (236, 226, 196),
 }
+
+
+def paint_rgb(colour):
+    """sRGB of a colour as asked: a DVLA name's typical paint, or an exact "#rrggbb"."""
+    if colour and re.fullmatch(r"#[0-9a-f]{6}", colour):
+        return tuple(int(colour[i:i + 2], 16) for i in (1, 3, 5))
+    return COLOURS.get(colour)
+
+
 MAKES = {"mercedes": "mercedes-benz", "merc": "mercedes-benz", "benz": "mercedes-benz", "vw": "volkswagen",
          "landrover": "land-rover", "rangerover": "land-rover", "alfa": "alfa-romeo", "astonmartin": "aston-martin",
          "rollsroyce": "rolls-royce", "opel": "vauxhall", "ds": "ds"}
@@ -141,7 +150,12 @@ def parse(text):
     if m:
         want["finish"] = "satin" if m.group(1) == "satin" else "matt"
         t = t[:m.start()] + " " + t[m.end():]
-    for c in COLOURS:
+    # an exact paint ("#3a4f7a": the colour of a photo of the car), else a DVLA colour name
+    m = re.search(r"#([0-9a-f]{6})\b", t)
+    if m:
+        want["colour"] = "#" + m.group(1)
+        t = t[:m.start()] + " " + t[m.end():]
+    for c in COLOURS if not want.get("colour") else ():
         if re.search(rf"\b{c}\b", t):
             want["colour"] = c
             t = re.sub(rf"\b{c}\b", " ", t)
@@ -355,11 +369,14 @@ def find(want, cat, skip=()):
         # The car's year is its title's when the record's is its model line's
         # (the "2019 Jetta" recorded from 1979: record_year)
         y0 = record_year(i) or 0
-        if y0 and (i.get("yearEnd") or y0) <= y0:     # only a record that gives one year is widened
+        # a record whose own years are another car's (its title dates it 2009,
+        # its record 2015-2019): its generation's, as one that gives one year
+        retitled = bool(y0 and i.get("yearStart") and y0 != i["yearStart"])
+        if y0 and (retitled or (i.get("yearEnd") or y0) <= y0):     # only a record that gives one year is widened
             g = wheelbase.lookup(*batch.model_of(i), y0).get("years")
             if g and g[0] - 1 <= y0 <= g[1]:
-                return min(g[0], y0), max(min(g[1], time.localtime().tm_year), i.get("yearEnd") or y0)
-        return y0, i.get("yearEnd") or y0 + 7
+                return min(g[0], y0), max(min(g[1], time.localtime().tm_year), y0 if retitled else (i.get("yearEnd") or y0))
+        return y0, (y0 + 7 if retitled else i.get("yearEnd") or y0 + 7)
     asked = {n.replace(norm(make), "") for i in hits for n in names(i)}
     asked = {b for b in asked if b and b in rest and in_words(b, want["words"])}
     model_rx = "|".join(re.escape(w) for w in sorted({x for i in hits for x in [str(i.get("model") or "")] if x}, key=len,
@@ -677,7 +694,11 @@ def record_year(i):
         return y                 # set by hand from the model itself (batch.GENERATION_FIX): its title's year is not
     # a number that is the model's name is no year (the Peugeot 2008, 3008)
     named = set(re.findall(r"\d{4}", " ".join(str(i.get(k) or "") for k in ("model", "modelFamily"))))
-    m = next((x for x in re.findall(r"\b(19[3-9]\d|20[0-3]\d)\b", str(i.get("sourceTitle") or "")) if x not in named), None)
+    # the catalogue's title, else the model's own: its Sketchfab page's and the
+    # file's ("2009 BMW 1-series 128i Coupe", recorded as from 2015)
+    prov = batch.authors().get(i.get("assetId")) or {}
+    titles = (i.get("sourceTitle"), prov.get("title"), (prov.get("embedded") or {}).get("title"))
+    m = next((x for t in titles for x in re.findall(r"\b(19[3-9]\d|20[0-3]\d)\b", str(t or "")) if x not in named), None)
     return int(m) if m and (not y or abs(int(m) - y) > 3) else y
 
 
@@ -1091,7 +1112,7 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
                            "licence": batch.credit_of(i0)["licence"]}
         except Exception:
             nc_best = None
-    args.paint = COLOURS.get(want.get("colour"))
+    args.paint = paint_rgb(want.get("colour"))
     args.drive = want.get("drive")                       # "right": a left-hand-drive model's cabin turned round
     # the doors asked for decide the body the rigger cuts: "2 door" / "3 door"
     # is a three-door hatch or a coupe (one door each side), "4/5 door" not
