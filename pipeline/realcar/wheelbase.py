@@ -192,10 +192,17 @@ SISTER = {"vauxhall": "Opel", "opel": "Vauxhall", "mini": "Mini", "dacia": "Rena
 # a model's other page name
 ALIAS = {("mini", "cooper"): "Mini Hatch", ("mini", "hatch"): "Mini Hatch", ("honda", "jazz"): "Honda Fit",
          ("hyundai", "ix20"): "Kia Venga",          # the ix20's page is the Venga's: the same car
-         ("nissan", "pixo"): "Suzuki Alto"}         # the UK Pixo is the 2009-2013 Alto
+         ("nissan", "pixo"): "Suzuki Alto",         # the UK Pixo is the 2009-2013 Alto
+         ("mg", "mgf"): "MG F / MG TF", ("mg", "f"): "MG F / MG TF",
+         ("geely", "starray"): "Geely Galaxy Starship 7",     # the export name of the Starship 7 EM-i
+         ("smart", "city"): "Smart Fortwo", ("smart", "city coupe"): "Smart Fortwo",
+         ("ds", "ds3"): "DS 3", ("ds", "ds4"): "DS 4", ("ds", "ds5"): "DS 5", ("ds", "ds7"): "DS 7",
+         ("ds", "ds9"): "DS 9"}   # the City-Coupé, renamed in 2004
 # more pages that hold a model's generations: the first three Yaris
 # generations are filed under the Japanese name
-EXTRA = {("toyota", "yaris"): ["Toyota Vitz"]}
+EXTRA = {("toyota", "yaris"): ["Toyota Vitz"],
+         ("daihatsu", "sirion"): ["Daihatsu Boon"],
+         ("fiat", "600"): ["Fiat 600 (2023)"]}           # the 2023 600's own page; "Fiat 600" is the 1955 car     # the second Sirion (M300, 2004-2010) is filed as the Boon
 
 
 def _generation_link(link, stem):
@@ -378,7 +385,7 @@ def fetch(make, model):
         tried += [title] + pages[:12]
         seen = {(tuple(b["years"] or ()), b["wheelbase"]) for b in uniq}
         uniq += [dict(b, base=k) for b in boxes if (tuple(b["years"] or ()), b["wheelbase"]) not in seen]
-    out = {"boxes": uniq, "tried": tried, "fetch_v": FETCH_V}
+    out = {"boxes": uniq, "tried": tried, "fetch_v": FETCH_V, "asked": bases}
     if failed:
         out["failed"] = True                      # fetched again by the next --build
     return out
@@ -463,7 +470,10 @@ FETCH_V = 3                                      # 3: EX30, iX1, EQA spelt as ti
 def lookup(make, model, year, ratio=None, online=None, doors=None):
     key = f"{make}|{model}".lower()
     ent = table().get(key)
-    if ent is None or (not ent.get("boxes") and ent.get("fetch_v", 1) < FETCH_V
+    # a page named for the model since it was read (ALIAS, EXTRA): read again, once
+    need = [x for x in [ALIAS.get((make.lower(), model.lower())), *EXTRA.get((make.lower(), model.lower()), [])] if x]
+    unread = ent is not None and any(x not in (ent.get("asked") or ent.get("tried") or []) for x in need)
+    if ent is None or (((not ent.get("boxes") and ent.get("fetch_v", 1) < FETCH_V) or unread)
                        and (online if online is not None else os.environ.get("GLBMACHINE_ONLINE") == "1")):
         if not (online if online is not None else os.environ.get("GLBMACHINE_ONLINE") == "1"):
             return {"wheelbase": None, "why": f"{make} {model} is not in the wheelbase table"}

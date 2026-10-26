@@ -103,6 +103,7 @@ WRONG_CAR = {
     # seen on the 1,000-vehicle check sheets
     "audi-a1-quattro-v1": "is a Citroen C4 saloon (the same pack's file), not an Audi A1",
     "skoda-octavia-estate-v1": "is a Peugeot 307 hatchback (its lion on the grille), not a Skoda Octavia estate",
+    "bmw-8-series-v1": "is a BMW X7 (an SUV with the X7's grille), not the 8 Series coupe it is titled",
 }
 
 

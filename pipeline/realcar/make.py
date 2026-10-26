@@ -114,6 +114,8 @@ def parse(text):
             n = int(m.group(1))
             want["year"] = 2000 + (n if n < 50 else n - 50)
             want["plate"] = m.group(1)
+            if not re.search(r"plate|reg", m.group(0)) and t[:m.start()].strip():
+                want["plate_bare"] = True        # after a word, no "plate" with it: maybe a model's number ("Rover 75"), find()
             t = t[:m.start()] + " " + t[m.end():]
     m = re.search(r"\b([2-5])[\s-]*(?:door|dr)s?\b", t)
     if m:
@@ -147,6 +149,7 @@ def parse(text):
     for b in BODIES:
         if re.search(rf"\b{b}\b", t):
             want["body"] = "saloon" if b == "sedan" else b
+            want["body_text"] = b                # a model of that name ("Hyundai Coupe", "MINI Roadster"): find()
             t = re.sub(rf"\b{b}\b", " ", t)
     # what makers call their estates ("M5 Touring", "RS6 Avant", "308 SW") and
     # MPVs ("Active Tourer"): the body, but the word stays in the request, as
@@ -170,7 +173,9 @@ def in_words(name, text):
     "iX4" is not the iX, "X5" not an X."""
     w = [norm(x) for x in re.split(r"[\s\-_/.,]+", text or "") if norm(x)]
     joins = {"".join(w[a:b]) for a in range(len(w)) for b in range(a + 1, len(w) + 1)}
-    return name in joins or (len(name) >= 3 and any(j.startswith(name) and j[len(name):].isdigit() for j in joins))
+    # a name ending in a digit with more digits after it is another number: the MX-3 is not the MX-30
+    return name in joins or (len(name) >= 3 and not name[-1].isdigit()
+                             and any(j.startswith(name) and j[len(name):].isdigit() for j in joins))
 
 
 # a file held back as another car (batch.WRONG_CAR) that is the right car
@@ -200,7 +205,7 @@ def find(want, cat, skip=()):
         for i in cat.values():
             for n in {norm(x) for x in [i.get("model"), i.get("modelFamily")] if x}:
                 n2 = n.replace(norm(i["make"]), "")
-                if len(n2) >= 3 and n2 in q:
+                if len(n2) >= 3 and in_words(n2, want["words"]):      # whole words: "Sirion" has no Kia Rio in it
                     by_model.setdefault(i["make"].lower(), set()).add(n2)
         for uk, other in (("vauxhall", "opel"),):          # the UK badge of the same car
             if uk in by_model and other in by_model:
@@ -213,7 +218,7 @@ def find(want, cat, skip=()):
         # a make the catalogue has no car of (Saab, Morris, Chery): its first
         # word, so a stand-in can still be sized from the car's own page
         first = (want["words"].split() or [""])[0]
-        if re.fullmatch(r"[a-z][a-z-]{2,}", first) and len(want["words"].split()) > 1:
+        if re.fullmatch(r"[a-z][a-z-]{1,}", first) and (len(want["words"].split()) > 1 or want.get("plate_bare")):
             make, rest = first, q[len(norm(first)):]
             want["make_unknown"] = True
     want["make"], want["model_words"] = make, None
@@ -227,7 +232,18 @@ def find(want, cat, skip=()):
             want["model_words"] = " ".join(toks[k:])
             break
     if want["model_words"] is None:
-        want["model_words"] = " ".join(toks[1:])
+        want["model_words"] = " ".join(toks if want.get("make_from_model") else toks[1:])     # "12 Yaris": all of it
+    if not want["model_words"] and want.get("plate_bare") and not want.get("make_from_model"):
+        # the make and a bare number only: the number is the model ("Rover
+        # 75", "Rover 25"), not a registration plate
+        want["model_words"] = want.pop("plate")
+        want["words"] = f'{want["words"]} {want["model_words"]}'
+        want.pop("year", None)
+        want.pop("plate_bare")
+    if not want["model_words"] and want.get("body_text"):
+        # the make and a body word only: the body word is the model's name
+        # (the Hyundai Coupe, the MINI Roadster), of that body
+        want["model_words"] = want["body_text"]
     # a file that is another car (batch.WRONG_CAR) is never built as the car it is filed under
     pool = [i for i in cat.values() if norm(i["make"]) == norm(make) and i.get("publicationStatus") == "approved"
             and i.get("desktopGlbUrl") and i["assetId"] not in skip and i["assetId"] not in batch.WRONG_CAR
