@@ -573,12 +573,18 @@ def _generation(make, model, year, online=False):
         # else its proportions: tall for its length is an SUV
         ent = wheelbase.table().get(f"{make}|{model}".lower()) or {}
         y0 = (b.get("years") or [year or 2015])[0]
-        near = sorted(((abs((x.get("years") or [9999])[0] - y0), wheelbase.body_family(x.get("body"), x.get("class"),
-                                                                                       x.get("name")))
-                       for x in ent.get("boxes", []) if x is not b), key=lambda t: t[0])
-        fam = next((f for _, f in near if f), None)          # the nearest generation in time
+        near = sorted(((x.get("page") != b.get("page"), abs((x.get("years") or [9999])[0] - y0),
+                        wheelbase.body_family(x.get("body"), x.get("class"), x.get("name")))
+                       for x in ent.get("boxes", []) if x is not b), key=lambda t: t[:2])
+        # the nearest generation in time on the same page; else its
+        # proportions (tall for its length is an SUV, short and of a car's
+        # height a hatch); a box on another page last (the Aygo X's page is
+        # not the 2014 Aygo's)
+        fam = next((f for other, _, f in near if f and not other), None)
         if not fam and b.get("height") and b.get("length"):
-            fam = "suv" if b["height"] >= 1560 and b["height"] / b["length"] >= 0.355 else None
+            fam = "suv" if b["height"] >= 1560 and b["height"] / b["length"] >= 0.355 else \
+                "hatch" if b["length"] < 4100 and 1380 <= b["height"] < 1560 else None
+        fam = fam or next((f for _, _, f in near if f), None)
     return dict(b, family=fam)
 
 
@@ -618,11 +624,14 @@ def record_body(i, gen=None):
         f = "estate"
     elif re.search(r"cabrio|convertible|roadster|spider|spyder", title, re.I):
         f = "convertible"
-    elif re.search(r"pick[- ]?up|double cab|crew cab|single cab|\bute\b", title, re.I) or \
-            re.fullmatch(r"ranger|hilux|navara|l200|amarok|d-?max|tacoma|tundra|f-?150|f-?250|silverado|"
-                         r"sierra|ram|gladiator|x-class|frontier|colorado|musso|bt-50|triton", md.lower()):
+    elif re.search(r"pick[- ]?up|double cab|crew cab|single cab|\bute\b", title, re.I) or PICKUP_MODEL.fullmatch(md.lower()):
         f = "pickup"                             # an open load bed: not an SUV's shape (the Defender 130 pickup)
     return f
+
+
+# models that are pickups whatever their page's box says (the Ranger's boxes name no body)
+PICKUP_MODEL = re.compile(r"ranger|hilux|navara|l200|amarok|d-?max|tacoma|tundra|f-?150|f-?250|silverado|"
+                          r"sierra|ram|gladiator|x-class|frontier|colorado|musso|bt-50|triton|np300|t60|landtrek|grafter")
 
 
 REACH = 0.35      # a donor's size term (length + 1.5 height + width off) the reshape still carries well: about 10% each
@@ -712,6 +721,8 @@ def _standin(want, report, item, cat, skip):
                if [x.lower() for x in batch.model_of(i)] == [make.lower(), model.lower()]} - {None}
         if len(own) == 1:
             gen = dict(gen, family=own.pop(), family_from="the catalogue's files of the model")
+    if PICKUP_MODEL.fullmatch(str(model).lower()):
+        gen = dict(gen, family="pickup")         # a pickup from a pickup, never an SUV (the Ranger from a Mach-E)
     fam = RECORD_BODY.get(want.get("body") or "", None) or gen.get("family")
     other = bool(gen.get("family") and fam != gen["family"])         # not the body the table's size is for
     if other:
