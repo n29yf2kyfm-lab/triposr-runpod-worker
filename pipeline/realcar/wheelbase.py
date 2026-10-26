@@ -241,6 +241,7 @@ ALIAS = {("mini", "cooper"): "Mini Hatch", ("mini", "hatch"): "Mini Hatch", ("ho
          # the 2016-2020 SLC is the renamed SLK (R172); "SLC" alone finds the 1971 SLC coupe
          ("mercedes-benz", "slc"): "Mercedes-Benz R172", ("mercedes-benz", "slc class"): "Mercedes-Benz R172",
          ("suzuki", "e vitara"): "Suzuki e Vitara",       # its own electric car, titled with a small e
+         ("ford", "fusion"): "Ford Fusion (Europe)",      # the UK's Fusion: the 2002-2012 Fiesta-based car, not the US saloon
          # the 2024 Milano, renamed the Junior before sale ("Milano" alone is the US name of the 1985 Alfa 75)
          ("alfa-romeo", "milano"): "Alfa Romeo Junior", ("alfa-romeo", "junior"): "Alfa Romeo Junior",
          ("nissan", "pixo"): "Suzuki Alto",         # the UK Pixo is the 2009-2013 Alto
@@ -267,6 +268,7 @@ EXTRA = {("toyota", "yaris"): ["Toyota Vitz"],
                               "Honda Civic (tenth generation)", "Honda Civic (eleventh generation)"],
          ("jeep", "cherokee"): ["Jeep Cherokee (KL)"], ("volvo", "v40"): ["Volvo V40 (2012–2019)"],
          ("mercedes-benz", "gl-class"): ["Mercedes-Benz GL-Class (X164)", "Mercedes-Benz GL-Class (X166)"],
+         ("vauxhall", "viva"): ["Opel Karl"],              # the 2015-2019 Viva is the Opel Karl
          ("volkswagen", "transporter"): ["Volkswagen Transporter (T4)", "Volkswagen Transporter (T5)",
                                          "Volkswagen Transporter (T6)"]}   # each generation's own page     # the second Sirion (M300, 2004-2010) is filed as the Boon
 

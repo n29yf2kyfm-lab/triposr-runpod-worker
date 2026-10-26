@@ -72,6 +72,16 @@ GENERATION_FIX = {
     # recorded with no year: a 992 Turbo (its sheet: full-width rear light
     # bar, flush door handles, 992 bumpers and side intakes)
     "porsche-911-pw2-v7": {"yearStart": 2020, "generation": "992"},
+    # an Audi A4 (B5) recorded as from 2015 (its title names the B5)
+    "audi-a4-v1": {"yearStart": 1994, "yearEnd": 2001, "generation": "B5"},
+    # a W123 E-Class (its grille, bumpers and glasshouse), recorded with no year
+    "mercedes-benz-e-class-mw1-v5": {"yearStart": 1976, "yearEnd": 1986, "generation": "W123"},
+    # the 1968 Beetle its title names, recorded as the 1997-2019 New Beetle and Beetle
+    "volkswagen-beetle-v1": {"yearStart": 1968, "yearEnd": 1968, "generation": "Type 1"},
+    # the C8 its title names ("2019 Chevrolet Corvette C8 Stingray"), recorded from 1997
+    "chevrolet-corvette-v1": {"yearStart": 2020, "yearEnd": 2026, "generation": "C8"},
+    # the 1992 Escort RS Cosworth its title names, recorded as every Escort of 1968-2000
+    "ford-escort-v1": {"yearStart": 1992, "yearEnd": 1996, "generation": "Mk5 (RS Cosworth)"},
 }
 
 
@@ -80,6 +90,7 @@ GENERATION_FIX = {
 # car itself and as a stand-in's donor (sRGB)
 PLAIN_PAINT = {
     "mercedes-benz-glc-mw1-v2": (172, 175, 178),      # an art-car print; built in a plain silver
+    "kia-stinger-v1": (96, 100, 106),                 # a camouflage wrap; built in a plain grey
 }
 
 
@@ -88,6 +99,12 @@ PLAIN_PAINT = {
 # or a Twingo's engine is under the boot floor, its tailgate a hatch: not
 # these.)
 REAR_ENGINE = re.compile(r"^porsche\|(911|930|959|964|993|996|997|991|992)\b")
+# and behind the seats (mid-engined): built the same way, the engine under
+# the rear lid and luggage under the front one. The Corvette from its 2020
+# C8 (every one before it has its engine in front)
+MID_ENGINE = re.compile(r"^(?:porsche\|(?:boxster|cayman|718|914|918|carrera gt)|audi\|r8|ferrari\||lamborghini\||mclaren\||"
+                        r"lotus\|(?:elise|exige|evora|emira|europa)|alpine\|a110|honda\|nsx|toyota\|mr2|fiat\|x1-?9|ford\|gt\b|"
+                        r"bugatti\||pagani\||koenigsegg\|)")
 
 
 def layout_of(item):
@@ -99,7 +116,10 @@ def layout_of(item):
         make, model = str(of.get("make") or ""), str(of.get("model") or "")
     else:
         make, model = model_of(item)
-    return "rear" if REAR_ENGINE.search(f"{make.lower()}|{model.lower()}") else None
+    key = f"{make.lower()}|{model.lower()}"
+    year = (item.get("standin") or {}).get("years", [None])[0] if item.get("standin") else item.get("yearStart")
+    c8 = key.startswith("chevrolet|corvette") and (year or 0) >= 2020
+    return "rear" if REAR_ENGINE.search(key) or MID_ENGINE.search(key) or c8 else None
 
 
 # Catalogue models held back (seen on the check sheets): files that are not
@@ -113,6 +133,11 @@ WRONG_CAR = {
     "audi-a1-quattro-v1": "is a Citroen C4 saloon (the same pack's file), not an Audi A1",
     "skoda-octavia-estate-v1": "is a Peugeot 307 hatchback (its lion on the grille), not a Skoda Octavia estate",
     "bmw-8-series-v1": "is a BMW X7 (an SUV with the X7's grille), not the 8 Series coupe it is titled",
+    "hyundai-i30-2010-v1": "is a Volkswagen Arteon Shooting Brake (VW grille and badge), not a 2010 Hyundai i30",
+    "ford-s-max-v1": "is a Ford Fiesta ST hatchback ('FIESTA ST' plate, ST badges), not an S-MAX people carrier",
+    "fiat-500-2016-v1": "is an Audi hatchback (Audi grille and rings, 'Audi A6' plate), not a Fiat 500",
+    "mercedes-benz-cls-2022-v1": "is a Skoda Octavia vRS estate (Skoda grille and badge), not a CLS 53",
+    "mercedes-benz-s-class-v1": "is a first-generation A-Class (W168), not the S65 (W222) it is titled",
     "audi-a8-2008-v1": "is an Audi Q5 Sportback (its grille and roofline), not a 2008 A8; and broken as the next three are",
     # files the catalogue cut down to about 150,000 triangles, their inner
     # panels merged through the paint: the cabin and the bay show through in
@@ -120,6 +145,14 @@ WRONG_CAR = {
     "citroen-c5-2022-v1": "a broken file: its inner panels show through the paint in shards",
     "lexus-rx-v1": "a broken file: its inner panels show through the paint in shards",
     "honda-zr-v-2023-v1": "a broken file: its inner panels show through the paint in shards",
+    "suzuki-swift-2017-v1": "a broken file: its inner panels show through the paint in shards",
+    "bmw-320i-2023-v1": "a broken file: its inner panels show through the paint in shards",
+    "bmw-ix-v1": "a broken file: its inner panels show through the paint in shards",
+    "volkswagen-caddy-2022-v1": "a broken file: its inner panels show through the paint in shards",
+    "citroen-c4-2008-v1": "a broken file: its paint is see-through, the inner panels in shards",
+    "mazda-3-2020-v1": "a broken file: its inner panels show through the paint in shards",
+    "mercedes-benz-gls-2022-v1": "a broken file: its inner panels show through the paint in shards",
+    "peugeot-307-2008-v1": "a broken file: its inner panels show through the paint in shards",
 }
 
 
@@ -621,8 +654,8 @@ def one(target, item, args, out):
         spec["body_family"] = "van"
     if aid in TORN:
         spec["close_cracks"] = True
-    # a 911: the engine under the rear lid, which lifts 60 degrees from the
-    # rear window; luggage under the front lid
+    # a 911 (or a mid-engined car): the engine under the rear lid, which lifts
+    # 60 degrees from the rear window; luggage under the front lid
     if layout_of(item) == "rear":
         spec["layout"] = "rear"
         spec.setdefault("hinges", {})["tailgate"] = {"deg": 60}
