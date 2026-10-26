@@ -2093,7 +2093,13 @@ def finish(src, spec, out, base_dir="."):
         if sp:                                      # a specular map painted for the old colour
             sp.pop("specularTexture", None)
             sp.pop("specularColorTexture", None)
-        log["paint_set"] = {"material": pm.get("name"), "srgb": list(spec["paint"][:3]), "metallic": float(metallic)}
+        # a car's paint is lacquered: a clear coat over the colour gives the
+        # sharp reflections a photo of the car shows
+        pm.setdefault("extensions", {})["KHR_materials_clearcoat"] = {"clearcoatFactor": 1.0, "clearcoatRoughnessFactor": 0.04}
+        if "KHR_materials_clearcoat" not in j.setdefault("extensionsUsed", []):
+            j["extensionsUsed"].append("KHR_materials_clearcoat")
+        log["paint_set"] = {"material": pm.get("name"), "srgb": list(spec["paint"][:3]), "metallic": float(metallic),
+                            "clearcoat": True}
 
     # ── clear glass ──
     cleared = []
