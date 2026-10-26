@@ -766,8 +766,8 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
             # a size not known counts against the donor: it may be any size
             # (an A6 for a Morris Minor), not one that fits
             return abs(b[k] / target[k] - 1) * w if b.get(k) else 0.2 * w
-        # a van's roof is an option on the one body (low, medium, high): its height counts less
-        size = off("length", 1.0) + off("height", 0.5 if fam == "van" else 1.5) + off("width", 1.0)
+        # a van's roof is an option on the one body (low, medium, high): its height counts little
+        size = off("length", 1.0) + off("height", 0.25 if fam == "van" else 1.5) + off("width", 1.0)
         # likeness beyond size: the era (a record with no year: its generation's),
         # the roof's height, a race car or an exotic only for its own kind, and
         # an off-roader for an off-roader
@@ -813,14 +813,16 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
                  + 0.25 * len(short.get(i["assetId"], ()))          # it came out short of these parts before
                  + 0.03 * batch.GRADE.get(i.get("qualityGrade"), 3))
         out.append((round(score, 4), i["assetId"], i, tier,
-                    size <= REACH and axis_ok and not short.get(i["assetId"]) and era_ok and tall_ok and not odd))
+                    size <= REACH and axis_ok and not short.get(i["assetId"]) and era_ok and tall_ok and not odd,
+                    round(size, 4)))
     # the reshape makes any donor the car's size, so its face counts most: when
     # the body is known (every donor has it), the make or its group first if
     # one is within reach of the size (a BMW estate stretched 10% reads as a
     # BMW, a Ford of the right size as a Ford); otherwise the nearest in
     # size, as scored
     best = min((r[3] for r in out if r[4]), default=1) if fam else 1
-    return [r[2] for r in sorted(out, key=lambda r: (r[3] > best, r[0], r[1]))]
+    # a tie goes to the nearer size
+    return [r[2] for r in sorted(out, key=lambda r: (r[3] > best, r[0], r[5], r[1]))]
 
 
 def _standin(want, report, item, cat, skip, retry=False):
@@ -878,7 +880,11 @@ def _standin(want, report, item, cat, skip, retry=False):
     ranked = donors(target, fam, cat, make, (make, model), want, skip)
     if not ranked:
         return None
-    d = ranked[0]
+    # a donor that is the very generation asked for (the 350Z file for a "Nissan 350", its
+    # name not the request's) is the car itself, whatever donor scores ahead of it
+    d = next((x for x in ranked[:12] if gen.get("page") and
+              ((record_generation(x) or {}).get("name"), (record_generation(x) or {}).get("page"))
+              == (gen.get("name"), gen.get("page"))), ranked[0])
     dg = record_generation(d) or {}
     if retry and not (all(dg.get(k) and abs(dg[k] / target[k] - 1) <= AXIS for k in ("length", "width"))
                       and (fam == "van" or abs(dg.get("height", 0) / target["height"] - 1) <= TALL)):
