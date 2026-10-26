@@ -159,6 +159,7 @@ WRONG_CAR = {
     "mercedes-benz-cls-2022-v1": "is a Skoda Octavia vRS estate (Skoda grille and badge), not a CLS 53",
     "mercedes-benz-s-class-v1": "is a first-generation A-Class (W168), not the S65 (W222) it is titled",
     "alfa-romeo-milano-2023-v1": "is a Cupra Formentor (Cupra badge and copper wheels), not an Alfa Romeo Milano/Junior",
+    "bmw-5-series-e60-v1": "is the Audi A4 (B5) model again (its rings and grille; 'A4' in the file), not a BMW E60",
     "audi-a8-2008-v1": "is an Audi Q5 Sportback (its grille and roofline), not a 2008 A8; and broken as the next three are",
     # files the catalogue cut down to about 150,000 triangles, their inner
     # panels merged through the paint: the cabin and the bay show through in

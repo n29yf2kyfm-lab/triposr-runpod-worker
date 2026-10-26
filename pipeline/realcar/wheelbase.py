@@ -396,10 +396,14 @@ def local_table_path():
     return os.path.join(home, "wheelbase_local.json")
 
 
-# sizes a page gives wrongly, set from the maker's published figures as
-# listed by CarsGuide and Caroom: {(page, generation): sizes}
+# sizes a page gives wrongly, or for the body few of the cars are, set from
+# the maker's published figures as listed by CarsGuide, Caroom, Carsales:
+# {(page, generation): sizes}
 PAGE_FIX = {("Renault Trafic", "Second generation (X83)"): {
-    "height": 1959, "fixed": "height 1,959 mm, the low-roof van (CarsGuide, Caroom): the page's 1,380 mm is no van's"}}
+    "height": 1959, "fixed": "height 1,959 mm, the low-roof van (CarsGuide, Caroom): the page's 1,380 mm is no van's"},
+    ("Suzuki Vitara", "Third generation"): {
+    "length": 4470, "wheelbase": 2640,
+    "fixed": "the five-door's length and wheelbase, most of them (Carsales): the page gives the three-door's"}}
 
 
 def _fixed(boxes):

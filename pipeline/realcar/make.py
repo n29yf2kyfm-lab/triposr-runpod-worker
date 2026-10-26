@@ -819,7 +819,7 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
     return [r[2] for r in sorted(out, key=lambda r: (r[3] > best, r[0], r[1]))]
 
 
-def _standin(want, report, item, cat, skip):
+def _standin(want, report, item, cat, skip, retry=False):
     """For a car the catalogue does not have (or not in the year asked), a
     stand-in: the nearest catalogue car of the same body, reshaped to the
     real car's size (standin.py). (report, item) for it, or None to build as
@@ -876,6 +876,12 @@ def _standin(want, report, item, cat, skip):
         return None
     d = ranked[0]
     dg = record_generation(d) or {}
+    if retry and not (all(dg.get(k) and abs(dg[k] / target[k] - 1) <= AXIS for k in ("length", "width"))
+                      and (fam == "van" or abs(dg.get("height", 0) / target["height"] - 1) <= TALL)):
+        # a try after a donor that was built short of a part: only one of the
+        # car's size; a van a third taller is worse than one whose tailgate
+        # stays shut (the Berlingo from a Sprinter), so that try is kept
+        return None
     if other and gen["family"] == "hatch" and fam in ("estate", "saloon") and dg.get("length") and dg.get("wheelbase"):
         # a hatch's estate or saloon is longer behind (a Golf estate is 30 cm
         # on the hatch): the donor's own overhangs on the car's wheelbase,
@@ -1056,7 +1062,8 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
         skip = {p["asset"] for p in passed} | known
         report, item = _choose(want, cat, exact, skip)
         if standin and not exact:
-            st = _standin(report["asked"], report, item, cat, skip)
+            # after a try that was built short of a part, only a donor of the car's size (else that try stays)
+            st = _standin(report["asked"], report, item, cat, skip, retry=best is not None)
             if st:
                 report, item = st
                 if photos and item.get("standin") and not item["standin"].get("no_photo") and search is None:
