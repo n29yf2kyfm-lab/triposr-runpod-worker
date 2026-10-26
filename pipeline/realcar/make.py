@@ -659,8 +659,10 @@ def record_year(i):
     ("2019 Volkswagen Jetta"), when the record's start year is its model
     line's (1979) and not the car's; else its start year."""
     y = i.get("yearStart")
-    m = re.search(r"\b(19[3-9]\d|20[0-3]\d)\b", str(i.get("sourceTitle") or ""))
-    return int(m.group(1)) if m and (not y or abs(int(m.group(1)) - y) > 3) else y
+    # a number that is the model's name is no year (the Peugeot 2008, 3008)
+    named = set(re.findall(r"\d{4}", " ".join(str(i.get(k) or "") for k in ("model", "modelFamily"))))
+    m = next((x for x in re.findall(r"\b(19[3-9]\d|20[0-3]\d)\b", str(i.get("sourceTitle") or "")) if x not in named), None)
+    return int(m) if m and (not y or abs(int(m) - y) > 3) else y
 
 
 def record_generation(i):

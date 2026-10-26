@@ -241,6 +241,8 @@ ALIAS = {("mini", "cooper"): "Mini Hatch", ("mini", "hatch"): "Mini Hatch", ("ho
          # the 2016-2020 SLC is the renamed SLK (R172); "SLC" alone finds the 1971 SLC coupe
          ("mercedes-benz", "slc"): "Mercedes-Benz R172", ("mercedes-benz", "slc class"): "Mercedes-Benz R172",
          ("suzuki", "e vitara"): "Suzuki e Vitara",       # its own electric car, titled with a small e
+         # the 2024 Milano, renamed the Junior before sale ("Milano" alone is the US name of the 1985 Alfa 75)
+         ("alfa-romeo", "milano"): "Alfa Romeo Junior", ("alfa-romeo", "junior"): "Alfa Romeo Junior",
          ("nissan", "pixo"): "Suzuki Alto",         # the UK Pixo is the 2009-2013 Alto
          ("mg", "mgf"): "MG F / MG TF", ("mg", "f"): "MG F / MG TF",
          ("geely", "starray"): "Geely Galaxy Starship 7",     # the export name of the Starship 7 EM-i
@@ -259,6 +261,12 @@ EXTRA = {("toyota", "yaris"): ["Toyota Vitz"],
          ("daihatsu", "sirion"): ["Daihatsu Boon"],
          ("fiat", "600"): ["Fiat 600 (2023)"],           # the 2023 600's own page; "Fiat 600" is the 1955 car
          ("land-rover", "88"): ["Land Rover series"], ("land-rover", "109"): ["Land Rover series"],
+         # generations on pages of their own the model's page does not link as one
+         ("fiat", "tipo"): ["Fiat Tipo (2015)"], ("fiat", "bravo"): ["Fiat Bravo (2007)"],
+         ("honda", "civic"): ["Honda Civic (eighth generation)", "Honda Civic (ninth generation)",
+                              "Honda Civic (tenth generation)", "Honda Civic (eleventh generation)"],
+         ("jeep", "cherokee"): ["Jeep Cherokee (KL)"], ("volvo", "v40"): ["Volvo V40 (2012–2019)"],
+         ("mercedes-benz", "gl-class"): ["Mercedes-Benz GL-Class (X164)", "Mercedes-Benz GL-Class (X166)"],
          ("volkswagen", "transporter"): ["Volkswagen Transporter (T4)", "Volkswagen Transporter (T5)",
                                          "Volkswagen Transporter (T6)"]}   # each generation's own page     # the second Sirion (M300, 2004-2010) is filed as the Boon
 
