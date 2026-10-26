@@ -7,6 +7,11 @@
 //   steer_left    the bars, fork, lamp and front wheel turn about the
 //   steer_right   steering axis (raked, as the real one is)
 //   stand_down    the side stand swings down
+// With --bagger it is a touring bike instead (an Electra Glide's kind): the
+// TOURING chassis's figures, hard panniers and its fairing: --bagger=batwing
+// (a fairing on the fork), sharknose (on the frame, twin lamps) or screen (a
+// windscreen over the lamp nacelle, passing lamps); --tourpak adds a top box,
+// --lowers the leg shields, --wheels=19 the 19/18 in wheels (else 17/16).
 // With --parts every piece is its own named node (frame, swingarm, engine
 // parts, exhaust, tank, seat, mudguards, fork, bars, tyres, rims, discs,
 // calipers...), each under the pivot it moves with, so a trainer can take
@@ -15,13 +20,14 @@
 // No maker's badge or lettering is modelled.
 //
 //   node pipeline/realcar/bikes/cruiser.mjs out.glb [--paint=#101012] [--name="..."] [--parts]
+//        [--bagger=batwing|sharknose|screen [--tourpak] [--lowers] [--wheels=17|19]]
 //
 // Frame: +Y up, nose +Z, the rider's left +X, metres, ground at y = 0
 // (the machine's rig frame).
 // ExpertCarCheck. Proprietary: see ../LICENSE.
 import * as THREE from 'three';
 import { ParametricGeometry } from 'three/addons/geometries/ParametricGeometry.js';
-import { cli, V, UPY, rod, tube, ball, aroundX, roundedBox, hex, writeBike } from './kit.mjs';
+import { cli, V, UPY, rod, tube, ball, aroundX, roundedBox, sidePanel, lofted, hex, writeBike } from './kit.mjs';
 
 // ── the bike's figures ───────────────────────────────────────────────────
 // a 2018-on 114 cu in heavy cruiser of the Fat Boy kind, from the maker's
@@ -32,13 +38,27 @@ export const FATBOY = {
   seat: 0.675, rim: 18, front_tyre: [160, 60], rear_tyre: [240, 40],
 };
 
-const { out: OUT, args } = cli('usage: node cruiser.mjs out.glb [--paint=#hex] [--name=...] [--parts]');
-const B = { ...FATBOY, ...(args.name ? { name: args.name } : {}) };
+// Harley-Davidson's touring chassis (2017 on), from the maker's published
+// figures: 1,625 mm wheelbase, 26 deg rake, 170 mm trail; the Electra Glide,
+// Ultra Limited and Road King on 130/80B17 and 180/65B16 tyres (2,415 mm long
+// without a top box), the Street and Road Glide on 130/60B19 and 180/55B18
+export const TOURING = {
+  17: { name: 'Touring bagger (Electra Glide-style)', wheelbase: 1.625, length: 2.415, rake: 26, trail: 0.170,
+    seat: 0.690, rim: [17, 16], front_tyre: [130, 80], rear_tyre: [180, 65] },
+  19: { name: 'Touring bagger (Street Glide-style)', wheelbase: 1.625, length: 2.400, rake: 26, trail: 0.170,
+    seat: 0.690, rim: [19, 18], front_tyre: [130, 60], rear_tyre: [180, 55] },
+};
 
-// tyre sizes to metres: radius, width
-const RIM_R = B.rim * 0.0254 / 2;
-const tyre = ([w, ar]) => ({ R: RIM_R + w * ar / 100 / 1000, W: w / 1000 });
-const TF = tyre(B.front_tyre), TR = tyre(B.rear_tyre);
+const { out: OUT, args } = cli('usage: node cruiser.mjs out.glb [--paint=#hex] [--name=...] [--parts] [--bagger=batwing|sharknose|screen]');
+const BAG = typeof args.bagger === 'string' ? args.bagger : null;
+if (BAG && !['batwing', 'sharknose', 'screen'].includes(BAG)) { console.error(`unknown --bagger=${BAG}`); process.exit(2); }
+const B = { ...(BAG ? TOURING[+args.wheels === 19 ? 19 : 17] : FATBOY), ...(args.name ? { name: args.name } : {}) };
+
+// tyre sizes to metres: radius, width (a rim size each end: 17 in and 16 in)
+const RIMS = Array.isArray(B.rim) ? B.rim : [B.rim, B.rim];
+const RIM_F = RIMS[0] * 0.0254 / 2, RIM_RR = RIMS[1] * 0.0254 / 2;
+const tyre = ([w, ar], rimR) => ({ R: rimR + w * ar / 100 / 1000, W: w / 1000 });
+const TF = tyre(B.front_tyre, RIM_F), TR = tyre(B.rear_tyre, RIM_RR);
 const ZF = B.wheelbase / 2, ZR = -B.wheelbase / 2;
 const AF = new THREE.Vector3(0, TF.R, ZF), AR = new THREE.Vector3(0, TR.R, ZR);   // axles
 
@@ -69,6 +89,7 @@ const MATS = {
   red_lens: { color: [0.55, 0.02, 0.02], metal: 0, rough: 0.1, emissive: [0.6, 0.0, 0.0], strength: 1 },
   amber_lens: { color: [0.9, 0.42, 0.02], metal: 0, rough: 0.1, emissive: [0.5, 0.2, 0.0], strength: 1 },
   mirror: { color: [0.95, 0.95, 0.97], metal: 1, rough: 0.02 },
+  screen: { color: [0.16, 0.17, 0.19], metal: 0, rough: 0.04, alpha: 0.45 },
 };
 
 // ── parts: [part, material, geometry in world space] ───────────────────
@@ -77,7 +98,7 @@ let SUB = null;                                  // the named piece being modell
 const add = (part, mat, g) => { parts.push([part, mat, g, SUB]); return g; };
 
 // ── wheels ───────────────────────────────────────────────────────────────
-function wheel(part, A, T, rimHalf, side) {
+function wheel(part, A, T, rimHalf, side, RIM_R) {
   // the tyre: a squarish section, the rim's bead to the crown
   const rIn = RIM_R - 0.004, rc = (rIn + T.R) / 2, hr = (T.R - rIn) / 2, ha = T.W / 2;
   const prof = [];
@@ -109,8 +130,9 @@ function wheel(part, A, T, rimHalf, side) {
   const bd = aroundX([[0.11, -0.003], [0.15, -0.003], [0.15, 0.003], [0.11, 0.003]], A.x + side * (rimHalf * 0.9 + 0.01), A.y, A.z, 72);
   add(part, 'chrome', bd);
 }
-wheel('wheel_f', AF, TF, 0.062, -1);
-wheel('wheel_r', AR, TR, 0.105, -1);
+// the rim's half width: the tyre's section (a 240 rear tyre's rim is wider)
+wheel('wheel_f', AF, TF, BAG ? 0.050 : 0.062, -1, RIM_F);
+wheel('wheel_r', AR, TR, BAG ? 0.078 : 0.105, -1, RIM_RR);
 // the rear wheel's belt pulley, on the left
 SUB = 'pulley';
 add('wheel_r', 'black', aroundX([[0.06, -0.012], [0.172, -0.012], [0.172, 0.012], [0.06, 0.012]], AR.x + 0.125, AR.y, AR.z, 72));
@@ -134,11 +156,13 @@ for (const s of [S_CLAMP0, S_CLAMP1]) {
   g.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(UPY, U)); g.translate(c.x, c.y, c.z);
   add('steer', s === S_CLAMP1 ? 'chrome' : 'black', g);
 }
-// the lamp nacelle between the shrouds and the round lamp
-{
+// the lamp nacelle between the shrouds and the round lamp (a frame-mounted
+// fairing carries its own lamps; a fork fairing hides the nacelle)
+const LAMP_C = forkAt(S_CLAMP0 + 0.06, 0).addScaledVector(N, 0.175);
+if (BAG !== 'sharknose') {
   SUB = 'headlamp';
   const c = forkAt(S_CLAMP0 + 0.05, 0).addScaledVector(N, 0.07);
-  add('steer', 'paint', ball(c, 0.12, 1.05, 0.62, 0.9));
+  if (BAG !== 'batwing') add('steer', 'paint', ball(c, 0.12, 1.05, 0.62, 0.9));
   const lampC = forkAt(S_CLAMP0 + 0.06, 0).addScaledVector(N, 0.175);
   const bucket = new THREE.CylinderGeometry(0.098, 0.085, 0.09, 48); bucket.rotateX(Math.PI / 2);
   bucket.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(V(0, 0, 1), N)); bucket.translate(lampC.x, lampC.y, lampC.z);
@@ -147,7 +171,7 @@ for (const s of [S_CLAMP0, S_CLAMP1]) {
   const lc = lampC.clone().addScaledVector(N, 0.046); lens.translate(lc.x, lc.y, lc.z); add('steer', 'lamp', lens);
   const ring = new THREE.TorusGeometry(0.075, 0.006, 8, 64); ring.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(V(0, 0, 1), N));
   const rc = lampC.clone().addScaledVector(N, 0.05); ring.translate(rc.x, rc.y, rc.z); add('steer', 'chrome', ring);
-  for (const sx of [-1, 1]) {                       // the front turn signals on the lower clamp
+  for (const sx of BAG === 'batwing' ? [] : [-1, 1]) {   // the front turn signals on the lower clamp
     SUB = 'indicators_front';
     const p = forkAt(S_CLAMP0 - 0.02, sx * (FORK_X + 0.07)).addScaledVector(N, 0.05);
     add('steer', 'chrome', rod(forkAt(S_CLAMP0 - 0.02, sx * FORK_X), p, 0.007));
@@ -262,8 +286,21 @@ for (const [tilt, base] of [[+22.5, V(0, 0.37, 0.12)], [-22.5, V(0, 0.37, -0.01)
   add('body', 'black', face);
   add('body', 'chrome', rod(V(-0.13, 0.57, 0.055), V(-0.05, 0.56, 0.055), 0.05, 24));
 }
-// the shotgun exhaust on the right: two pipes, two stacked silencers
-{
+// the shotgun exhaust on the right: two pipes, two stacked silencers (a
+// bagger's: true duals, a silencer low under each pannier)
+if (BAG) {
+  SUB = 'exhaust';
+  add('body', 'chrome', tube([V(-0.05, 0.60, 0.30), V(-0.15, 0.52, 0.36), V(-0.20, 0.33, 0.27), V(-0.205, 0.23, 0.05),
+    V(-0.22, 0.23, -0.30), V(-0.235, 0.26, -0.52)], 0.022, 80));
+  add('body', 'chrome', tube([V(-0.05, 0.62, -0.13), V(-0.15, 0.58, -0.19), V(-0.20, 0.40, -0.30), V(-0.222, 0.27, -0.45)], 0.022, 60));
+  add('body', 'chrome', tube([V(-0.15, 0.53, 0.35), V(-0.20, 0.36, 0.28), V(-0.205, 0.28, 0.10)], 0.031, 30));   // heat shield
+  add('body', 'black', tube([V(-0.205, 0.22, -0.02), V(0, 0.17, -0.10), V(0.20, 0.21, -0.22), V(0.235, 0.26, -0.52)], 0.02, 60)); // crossover
+  for (const sx of [-1, 1]) {
+    add('body', 'chrome', rod(V(sx * 0.235, 0.26, -0.52), V(sx * 0.245, 0.27, -1.12), 0.048, 40, 0.052));
+    const tip = new THREE.CircleGeometry(0.048, 40); tip.rotateY(Math.PI); tip.translate(sx * 0.245, 0.27, -1.121);
+    add('body', 'black', tip);
+  }
+} else {
   SUB = 'exhaust';
   const fp = [V(-0.05, 0.60, 0.30), V(-0.15, 0.52, 0.36), V(-0.20, 0.33, 0.27), V(-0.205, 0.25, 0.05), V(-0.21, 0.27, -0.30), V(-0.215, 0.30, -0.52)];
   const rp = [V(-0.05, 0.62, -0.13), V(-0.15, 0.58, -0.19), V(-0.20, 0.47, -0.32), V(-0.215, 0.42, -0.50)];
@@ -325,6 +362,10 @@ add('body', 'leather', new ParametricGeometry((u, v, target) => {
   const tl = roundedBox(0.12, 0.035, 0.05, 0.012, V(0, 0.47, -1.20)); add('body', 'red_lens', tl);
   for (const sx of [-1, 1]) {
     SUB = 'indicators_rear';
+    if (BAG) {                                       // on the panniers' tails
+      add('body', 'amber_lens', ball(V(sx * 0.31, 0.50, -1.105), 0.024, 1.3, 1, 1));
+      continue;
+    }
     add('body', 'chrome', rod(V(sx * 0.165, 0.52, -1.05), V(sx * 0.24, 0.53, -1.08), 0.006));
     add('body', 'amber_lens', ball(V(sx * 0.255, 0.53, -1.09), 0.022, 1, 1, 1.3));
   }
@@ -335,6 +376,12 @@ for (const sx of [-1, 1]) {
   add('body', 'chrome', roundedBox(0.13, 0.02, 0.30, 0.008, V(sx * 0.31, 0.30, 0.31)));
   add('body', 'rubber', roundedBox(0.11, 0.008, 0.27, 0.003, V(sx * 0.31, 0.314, 0.31)));
   add('body', 'black', rod(V(sx * 0.10, 0.20, 0.30), V(sx * 0.25, 0.29, 0.30), 0.012));
+  if (BAG) {                                         // the passenger's boards, ahead of the panniers
+    add('body', 'black', rod(V(sx * 0.15, 0.40, -0.36), V(sx * 0.23, 0.41, -0.38), 0.012));
+    add('body', 'chrome', roundedBox(0.10, 0.02, 0.18, 0.008, V(sx * 0.28, 0.41, -0.39)));
+    add('body', 'rubber', roundedBox(0.085, 0.008, 0.16, 0.003, V(sx * 0.28, 0.422, -0.39)));
+    continue;
+  }
   add('body', 'chrome', rod(V(sx * 0.16, 0.42, -0.62), V(sx * 0.27, 0.40, -0.64), 0.012));
   add('body', 'rubber', rod(V(sx * 0.23, 0.40, -0.64), V(sx * 0.30, 0.40, -0.645), 0.016));
 }
@@ -359,6 +406,95 @@ add('stand', 'chrome', rod(STAND_PIVOT.clone().add(V(-0.02, 0, 0)), STAND_PIVOT.
   add('steer', 'black', roundedBox(0.04, 0.10, 0.06, 0.012, c));
 }
 
+// ── a bagger's fairing, panniers, top box and lowers ────────────────────
+// a windscreen: a clear sheet rising from its base line, raked back and
+// wrapped round at the sides (one surface: drawn both sides)
+function windscreen(part, base, halfW, h, rake, wrap) {
+  return add(part, 'screen', new ParametricGeometry((u, v, target) => {
+    const w = halfW * (1 - 0.22 * v ** 2.5), x = (2 * u - 1) * w * (1 - 0.25 * (v > 0.85 ? (v - 0.85) / 0.15 : 0) ** 2 * Math.abs(2 * u - 1) ** 6);
+    target.set(base.x + x, base.y + h * v, base.z - rake * h * v - wrap * (x / halfW) ** 2);
+  }, 32, 16));
+}
+// a fairing lofted from its back (wide) to its nose (narrower), raked back
+// by TILT about its centre C
+function fairingShell(part, C, depth, back, front, tilt) {
+  const g = lofted(u => {
+    const k = u ** 1.4;
+    return { z: C.z - depth / 2 + depth * u, w: back.w + (front.w - back.w) * k, yt: C.y + back.yt + (front.yt - back.yt) * k,
+      yb: C.y + back.yb + (front.yb - back.yb) * k, e: back.e + (front.e - back.e) * u };
+  }, 40, 56, true);
+  g.translate(-C.x, -C.y, -C.z); g.rotateX(-tilt); g.translate(C.x, C.y, C.z);
+  return add(part, 'paint', g);
+}
+const lens = (part, c, r, mat = 'lamp') => {        // a round lamp facing forward, in its chrome ring
+  const l = new THREE.CircleGeometry(r, 40); l.translate(c.x, c.y, c.z + 0.002); add(part, mat, l);
+  const ring = new THREE.TorusGeometry(r, 0.008, 8, 48); ring.translate(c.x, c.y, c.z); add(part, 'chrome', ring);
+  const cup = new THREE.CylinderGeometry(r + 0.004, r * 0.8, 0.05, 40); cup.rotateX(Math.PI / 2); cup.translate(c.x, c.y, c.z - 0.025);
+  add(part, 'chrome', cup);
+};
+if (BAG === 'batwing') {
+  // a fairing on the fork (it steers): wide wings, the round lamp in its nose,
+  // the indicators at its lower corners, a short screen on top and the dash behind
+  SUB = 'fairing';
+  const C = LAMP_C.clone().add(V(0, 0.02, -0.12));
+  fairingShell('steer', C, 0.24, { w: 0.46, yt: 0.18, yb: -0.24, e: 0.42 }, { w: 0.25, yt: 0.06, yb: -0.14, e: 0.75 }, 0.22);
+  SUB = 'windscreen';
+  windscreen('steer', C.clone().add(V(0, 0.15, -0.02)), 0.33, 0.22, 0.55, 0.10);
+  SUB = 'dash';
+  add('steer', 'gloss_black', roundedBox(0.40, 0.13, 0.05, 0.02, C.clone().add(V(0, 0.05, -0.15))));
+  SUB = 'indicators_front';
+  for (const sx of [-1, 1]) add('steer', 'amber_lens', ball(C.clone().add(V(sx * 0.34, -0.12, 0.04)), 0.026, 1.3, 1, 1));
+} else if (BAG === 'sharknose') {
+  // a fairing on the frame (it does not steer): a pointed nose with two lamps
+  SUB = 'fairing';
+  const C = LAMP_C.clone().add(V(0, 0.03, -0.06));
+  fairingShell('body', C, 0.30, { w: 0.45, yt: 0.17, yb: -0.17, e: 0.32 }, { w: 0.30, yt: 0.05, yb: -0.11, e: 0.55 }, 0.12);
+  SUB = 'headlamp';
+  for (const sx of [-1, 1]) lens('body', C.clone().add(V(sx * 0.11, -0.04, 0.165)), 0.062);
+  SUB = 'windscreen';
+  windscreen('body', C.clone().add(V(0, 0.13, 0.02)), 0.30, 0.14, 0.9, 0.08);
+  SUB = 'indicators_front';
+  for (const sx of [-1, 1]) add('body', 'amber_lens', ball(C.clone().add(V(sx * 0.38, -0.08, 0.06)), 0.026, 1.3, 1, 1));
+} else if (BAG === 'screen') {
+  // a tall screen over the nacelle, and two passing lamps on a bar below it
+  SUB = 'windscreen';
+  windscreen('steer', LAMP_C.clone().add(V(0, 0.09, -0.04)), 0.27, 0.44, 0.30, 0.10);
+  for (const sx of [-1, 1]) add('steer', 'chrome', rod(forkAt(S_CLAMP1 - 0.02, sx * FORK_X), LAMP_C.clone().add(V(sx * 0.22, 0.10, -0.06)), 0.006));
+  SUB = 'passing_lamps';
+  const bar = forkAt(S_CLAMP0 - 0.12, 0).addScaledVector(N, 0.07);
+  add('steer', 'chrome', rod(bar.clone().add(V(-0.21, 0, 0)), bar.clone().add(V(0.21, 0, 0)), 0.011));
+  for (const sx of [-1, 1]) lens('steer', bar.clone().add(V(sx * 0.21, 0.02, 0.05)), 0.055);
+}
+if (BAG) {
+  // the hard panniers: a D in side view (flat lid, round tail), each with its
+  // lid's seam and a chrome latch
+  for (const sx of [-1, 1]) {
+    SUB = 'panniers';
+    const D = [[-0.50, 0.67], [-0.96, 0.67], [-1.03, 0.655], [-1.075, 0.62], [-1.10, 0.57], [-1.105, 0.51], [-1.09, 0.45],
+      [-1.06, 0.40], [-1.01, 0.37], [-0.95, 0.36], [-0.58, 0.36], [-0.53, 0.38], [-0.505, 0.42], [-0.50, 0.47]];
+    add('body', 'paint', sidePanel(D, 0.20, 0.21, sx, 0.03));
+    add('body', 'black', sidePanel([[-0.495, 0.604], [-1.085, 0.604], [-1.085, 0.596], [-0.495, 0.596]], 0.205, 0.207, sx, 0.002));
+    add('body', 'chrome', roundedBox(0.012, 0.05, 0.10, 0.004, V(sx * 0.412, 0.585, -0.80)));
+  }
+  if (args.tourpak) {
+    // the top box on its rack behind the pillion, a backrest on its front and its lamps on the back
+    SUB = 'top_box';
+    add('body', 'paint', roundedBox(0.44, 0.30, 0.40, 0.07, V(0, 0.99, -1.00)));
+    add('body', 'black', roundedBox(0.445, 0.012, 0.405, 0.005, V(0, 1.035, -1.00)));
+    add('body', 'leather', roundedBox(0.30, 0.20, 0.07, 0.03, V(0, 0.96, -0.79)));
+    for (const sx of [-1, 1]) {
+      add('body', 'chrome', rod(V(sx * 0.17, 0.66, -0.84), V(sx * 0.17, 0.85, -0.86), 0.010));
+      add('body', 'chrome', rod(V(sx * 0.17, 0.66, -1.12), V(sx * 0.17, 0.85, -1.12), 0.010));
+      add('body', 'red_lens', roundedBox(0.11, 0.035, 0.02, 0.008, V(sx * 0.14, 0.95, -1.205)));
+    }
+  }
+  if (args.lowers) {
+    // the leg shields either side of the cylinders
+    SUB = 'lowers';
+    for (const sx of [-1, 1]) add('body', 'paint', ball(V(sx * 0.27, 0.52, 0.40), 0.15, 0.42, 1.0, 0.62));
+  }
+}
+
 // ── hierarchy: one pivot per moving part ─────────────────────────────────
 const PIVOT = { steer: axisAt(T_HEAD0 + 0.08), wheel_f: AF.clone(), wheel_r: AR.clone(), stand: STAND_PIVOT.clone() };
 const PARENT = { steer: null, wheel_f: 'steer', wheel_r: null, stand: null };
@@ -369,9 +505,10 @@ const SPLIT = !!args.parts;
 const pieceName = (part, sub) => part.startsWith('wheel_') ? `${sub}_${part.slice(-1)}` : sub;
 const X = V(1, 0, 0);
 const { tris } = await writeBike({
-  out: OUT, scale: +(args.scale || 1), sceneName: 'cruiser', mats: MATS, pieces: parts, pivots: PIVOT, parents: PARENT, split: SPLIT, pieceName,
+  out: OUT, scale: +(args.scale || 1), sceneName: BAG ? 'bagger' : 'cruiser', mats: MATS, pieces: parts, pivots: PIVOT, parents: PARENT,
+  split: SPLIT, pieceName, doubleSided: ['screen'],
   extras: { kind: 'motorbike', model: B.name, wheelbase_m: B.wheelbase, length_m: B.length, rake_deg: B.rake, trail_m: B.trail,
-    tyres: [`${B.front_tyre[0]}/${B.front_tyre[1]}R${B.rim}`, `${B.rear_tyre[0]}/${B.rear_tyre[1]}R${B.rim}`],
+    tyres: [`${B.front_tyre[0]}/${B.front_tyre[1]}R${RIMS[0]}`, `${B.rear_tyre[0]}/${B.rear_tyre[1]}R${RIMS[1]}`],
     sizes_note: args.sizes || null, clips: ['wheels_spin', 'steer_left', 'steer_right', 'stand_down'] },
   order: ['steer', 'wheel_r', 'wheel_f', 'stand'], meshOrder: ['body', 'steer', 'wheel_f', 'wheel_r', 'stand'],
   clips: (nodes, clip, q) => {
@@ -384,7 +521,7 @@ const { tris } = await writeBike({
   },
   copyright: `${B.name}: modelled in code by the ExpertCarCheck GLB machine (bikes/cruiser.mjs), ${args.sizes || "to its preset's published sizes"}. No maker's model, badge or lettering.`,
 });
-const L = Math.max(AF.z + TF.R, 0) - Math.min(-1.215, AR.z - TR.R);
+const L = Math.max(AF.z + TF.R, 0) - Math.min(-1.215, AR.z - TR.R, BAG ? -1.125 : 0);
 console.log(JSON.stringify({ wrote: OUT, triangles: Math.round(tris), parts: [...new Set(parts.map(p => p[0]))],
   pieces: SPLIT ? [...new Set(parts.map(p => pieceName(p[0], p[3] || p[0])))] : undefined,
   front_tyre_d_m: +(2 * TF.R).toFixed(3), rear_tyre_d_m: +(2 * TR.R).toFixed(3), length_m: +L.toFixed(3),
