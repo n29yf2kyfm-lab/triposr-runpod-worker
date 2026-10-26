@@ -190,6 +190,23 @@ CLASSIC = [(re.compile(r"\b(?:austin|rover|morris|bmc|leyland)\s+mini\b|\bclassi
             "mini-cooper-w7-v1", "the classic Mini (1959-2000)")]
 
 
+def own_e_model(make, words):
+    """An electric model named for another ("e Vitara") that Wikipedia files
+    as its own car, on a page of its own: not the model it is named for. The
+    e-208 and e-C4 are the 208 and C4 (one page): no."""
+    m = re.search(r"(?<![a-z0-9])e[\s-]+(?!class\b)([a-z][\w-]*)", (words or "").lower())     # the E-Class is no e-model
+    if not m:
+        return False
+    online = os.environ.get("GLBMACHINE_ONLINE") == "1"
+    try:
+        own = wheelbase.lookup(make, f"e {m.group(1)}", 2100, online=online).get("page") \
+            or (wheelbase.table().get(f"{make}|e {m.group(1)}".lower()) or {}).get("boxes", [{}])[0].get("page")
+        base = (wheelbase.table().get(f"{make}|{m.group(1)}".lower()) or {}).get("boxes", [{}])[0].get("page")
+    except Exception:
+        return False
+    return bool(own and base and own != base and re.search(r"(?<![a-z])e[\s-]", own.lower()))
+
+
 def find(want, cat, skip=()):
     for rx, aid, what in CLASSIC:
         if rx.search(want["words"]) and aid in cat and aid not in skip:
@@ -298,6 +315,8 @@ def find(want, cat, skip=()):
         if len(near) == 1:
             (n2, hits), = near.items()
             want["spelling"] = f"read as {n2}"
+    if hits and own_e_model(make, want["words"]):
+        hits = []                    # the e Vitara is its own car, not the Vitara (an e-208 is a 208)
     if not hits:
         return None, [], "not in the catalogue"
     if want.get("body"):

@@ -240,6 +240,7 @@ ALIAS = {("mini", "cooper"): "Mini Hatch", ("mini", "hatch"): "Mini Hatch", ("ho
          ("hyundai", "ix20"): "Kia Venga",          # the ix20's page is the Venga's: the same car
          # the 2016-2020 SLC is the renamed SLK (R172); "SLC" alone finds the 1971 SLC coupe
          ("mercedes-benz", "slc"): "Mercedes-Benz R172", ("mercedes-benz", "slc class"): "Mercedes-Benz R172",
+         ("suzuki", "e vitara"): "Suzuki e Vitara",       # its own electric car, titled with a small e
          ("nissan", "pixo"): "Suzuki Alto",         # the UK Pixo is the 2009-2013 Alto
          ("mg", "mgf"): "MG F / MG TF", ("mg", "f"): "MG F / MG TF",
          ("geely", "starray"): "Geely Galaxy Starship 7",     # the export name of the Starship 7 EM-i
