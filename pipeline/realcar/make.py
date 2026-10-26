@@ -172,6 +172,11 @@ def in_words(name, text):
     short name with digits after it is another model, not a generation:
     "iX4" is not the iX, "X5" not an X."""
     w = [norm(x) for x in re.split(r"[\s\-_/.,]+", text or "") if norm(x)]
+    if name.isdigit():
+        # a model number is not the number in another model's name: the
+        # Mazda 3 is not the CX-3 (the hyphen keeps its word whole), but
+        # the e-208 is a 208
+        w = [norm(x) for x in re.split(r"[\s_/.,]+|(?<=\be)-", text or "", flags=re.I) if norm(x)]
     joins = {"".join(w[a:b]) for a in range(len(w)) for b in range(a + 1, len(w) + 1)}
     # a name ending in a digit with more digits after it is another number: the MX-3 is not the MX-30
     return name in joins or (len(name) >= 3 and not name[-1].isdigit()
