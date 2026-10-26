@@ -66,7 +66,9 @@ WHEELBASE = {
 # names no body takes its generation's first ("3/5-door hatchback" for the
 # Astra G), which is not always the body modelled
 BODY_FIX = {"opel-astra-1998-w7-v1": "saloon",     # an Astra G saloon, boot and all
-            "fiat-tipo-fw1-v1": "saloon"}          # the 2016 Tipo saloon
+            "fiat-tipo-fw1-v1": "saloon",          # the 2016 Tipo saloon
+            "honda-accord-1998-hw1-v1": "saloon",  # recorded a coupe: the four-door saloon
+            "fiat-tempra-1990-fw1-v1": "saloon"}   # its page leads with Brazil's coupe: the saloon
 
 
 # Catalogue models whose own cues put the nose at the wrong end (seen on the
@@ -92,6 +94,10 @@ GENERATION_FIX = {
     # the 1968 Beetle its title names, recorded as the 1997-2019 New Beetle and Beetle
     "volkswagen-beetle-v1": {"yearStart": 1968, "yearEnd": 1968, "generation": "Type 1"},
     "fiat-tipo-fw1-v1": {"yearStart": 2016, "yearEnd": 2020, "generation": "356"},   # untitled: the 2016 saloon, not the 1988 Tipo
+    # a Works V8 Trophy is the old Defender's body (built 2021 by Land Rover
+    # Classic), this one a 110 station wagon: the One Ten of 1983 on, not the 2019 Defender
+    "land-rover-defender-2021-w7-v1": {"model": "110", "modelFamily": "110", "yearStart": 1983, "yearEnd": 2016,
+                                       "generation": "One Ten"},
     # the Land Cruiser 300 its title names, recorded as every Land Cruiser from 1985
     "toyota-land-cruiser-v1": {"yearStart": 2021, "yearEnd": 2026, "generation": "J300"},
     # the C8 its title names ("2019 Chevrolet Corvette C8 Stingray"), recorded from 1997
@@ -249,7 +255,7 @@ def catalogue():
         cat.update(json.load(open(local_catalogue_path())))
     for aid, fix in GENERATION_FIX.items():
         if aid in cat:
-            cat[aid] = {**cat[aid], **fix}
+            cat[aid] = {**cat[aid], **fix, "generation_fixed": True}
     for aid, body in BODY_FIX.items():
         if aid in cat:
             cat[aid] = {**cat[aid], "bodyStyle": body}

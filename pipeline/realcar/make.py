@@ -367,7 +367,9 @@ def find(want, cat, skip=()):
         # a long or special body the request did not name: an alias that is the
         # asked model plus words ("Tiguan Allspace"), or a title that says so
         # ("Tiguan L 430 PHEV"); the plain car comes first
-        if any(n.replace(norm(make), "") != b and n.replace(norm(make), "").startswith(b) for n in names(i) for b in asked):
+        # (not a body named by its wheelbase in inches, the Defender 90 and 110: each is the plain car)
+        if any(n.replace(norm(make), "") != b and n.replace(norm(make), "").startswith(b)
+               and not re.fullmatch(r"\s*\d{2,3}", n.replace(norm(make), "")[len(b):]) for n in names(i) for b in asked):
             return 1
         return 1 if re.search(rf"\b(?:{model_rx})\s+(?:l|lwb|long|allspace|xl|grand|max|limited)\b",
                               str(i.get("sourceTitle") or ""), re.I) else 0
@@ -669,6 +671,8 @@ def record_year(i):
     ("2019 Volkswagen Jetta"), when the record's start year is its model
     line's (1979) and not the car's; else its start year."""
     y = i.get("yearStart")
+    if i.get("generation_fixed"):
+        return y                 # set by hand from the model itself (batch.GENERATION_FIX): its title's year is not
     # a number that is the model's name is no year (the Peugeot 2008, 3008)
     named = set(re.findall(r"\d{4}", " ".join(str(i.get(k) or "") for k in ("model", "modelFamily"))))
     m = next((x for x in re.findall(r"\b(19[3-9]\d|20[0-3]\d)\b", str(i.get("sourceTitle") or "")) if x not in named), None)
@@ -902,6 +906,8 @@ def _standin(want, report, item, cat, skip, retry=False):
     # the side doors it must open: the request's, else the most its body has ("3/5-door hatchback": 4)
     nd = [int(x) for x in re.findall(r"([2-5])(?=[-/ ]?(?:\d-?)?door)", str(gen.get("body") or ""))] + [gen.get("doors") or 0]
     nd = want.get("doors") or (max(nd) or None)
+    if not want.get("doors") and fam in ("coupe", "convertible"):
+        nd = 2           # a coupe asked of a model whose page counts its saloon's doors too (the CLC of the W203)
     target = {"name": name, "length": gen["length"], "wheelbase": gen["wheelbase"], "width": gen["width"],
               "height": gen["height"], "years": [y[0], None if (y[1] or 0) >= 2100 else y[1]],
               "body": fam, "source": gen.get("source"), "class": gen.get("class"),
