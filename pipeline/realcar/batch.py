@@ -62,6 +62,18 @@ WHEELBASE = {
 }
 
 
+# Catalogue bodies corrected by looking at the model: a file whose record
+# names no body takes its generation's first ("3/5-door hatchback" for the
+# Astra G), which is not always the body modelled
+BODY_FIX = {"opel-astra-1998-w7-v1": "saloon"}     # an Astra G saloon, boot and all
+
+
+# Catalogue models whose own cues put the nose at the wrong end (seen on the
+# check sheets: built tail first, its "tailgate" the bonnet): the rigger is
+# told the nose is the other end
+NOSE_BACK = {"mercedes-benz-gl-class-2012-mw1-v1": "the height over the axles reads it backwards"}
+
+
 # Catalogue years corrected by looking at the model against the generation's
 # published production dates (the catalogue keeps the source's title year).
 GENERATION_FIX = {
@@ -230,6 +242,9 @@ def catalogue():
     for aid, fix in GENERATION_FIX.items():
         if aid in cat:
             cat[aid] = {**cat[aid], **fix}
+    for aid, body in BODY_FIX.items():
+        if aid in cat:
+            cat[aid] = {**cat[aid], "bodyStyle": body}
     return cat
 
 
@@ -519,7 +534,9 @@ def rig_model(item, d, body, tools, lg, tm):
     run(["node", os.path.join(tools, "decode.mjs"), src, plain], 600, lg)
     tm["decode"] = round(time.time() - t0, 1)
     t0 = time.time()
-    p = run([sys.executable, os.path.join(HERE, "rig.py"), plain, rig, f"--body={body}"], 1200, lg)
+    back = (item.get("standin_donor") or item["assetId"]) in NOSE_BACK
+    p = run([sys.executable, os.path.join(HERE, "rig.py"), plain, rig, f"--body={body}", *(["--nose=back"] if back else [])],
+            1200, lg)
     tm["rig"] = round(time.time() - t0, 1)
     for f in (src, plain):
         if os.path.exists(f):

@@ -701,14 +701,14 @@ def record_body(i, gen=None):
     if gen is None:
         gen = record_generation(i) or {}
     f = RECORD_BODY.get(str(i.get("bodyStyle") or "").lower()) or gen.get("family")
-    title, md = str(i.get("sourceTitle") or ""), batch.model_of(i)[1]
+    title, (mk, md) = str(i.get("sourceTitle") or ""), batch.model_of(i)
     if re.search(r"\b(?:active|gran) tourer\b", title, re.I):
         f = "mpv"
     elif TITLE_ESTATE.search(title):
         f = "estate"
     elif re.search(r"cabrio|convertible|roadster|spider|spyder", title, re.I):
         f = "convertible"
-    elif re.search(r"pick[- ]?up|double cab|crew cab|single cab|\bute\b", title, re.I) or PICKUP_MODEL.fullmatch(md.lower()):
+    elif re.search(r"pick[- ]?up|double cab|crew cab|single cab|\bute\b", title, re.I) or pickup_model(mk, md):
         f = "pickup"                             # an open load bed: not an SUV's shape (the Defender 130 pickup)
     return f
 
@@ -718,10 +718,18 @@ UTILITY = {("land-rover", "88"), ("land-rover", "109"), ("land-rover", "series")
 # models that are pickups whatever their page's box says (the Ranger's boxes name no body)
 PICKUP_MODEL = re.compile(r"ranger|hilux|navara|l200|amarok|d-?max|tacoma|tundra|f-?150|f-?250|silverado|"
                           r"sierra|ram|gladiator|x-class|frontier|colorado|musso|bt-50|triton|np300|t60|landtrek|grafter")
+# a pickup's name only for its own make: GMC's Sierra, not Ford's (a hatchback)
+PICKUP_OF = {"sierra": ("gmc",)}
+
+
+def pickup_model(make, model):
+    m = str(model).lower()
+    return bool(PICKUP_MODEL.fullmatch(m)) and str(make).lower() in PICKUP_OF.get(m, (str(make).lower(),))
 
 
 REACH = 0.35      # a donor's size term (length + 1.5 height + width off) the reshape still carries well: about 10% each
-AXIS = 0.15       # and no more than this off in length or width: a Picanto stretched 17% is no Ceed, whatever its badge
+AXIS = 0.12       # and no more than this off in length or width: a Picanto stretched 17% is no Ceed, a Mach-E
+                  # cut 13% no Puma, whatever the badge (and a donor is debadged)
 CLASSIC_BEFORE = 1990    # a car first made before this is a classic: its stand-in comes from a classic, and the other way
 TALL = 0.12              # a donor more than this much taller or lower than the car does not look like it (a van's
                          # roof is an option, low, medium or high, on the one body: not for vans)
@@ -832,7 +840,10 @@ def _standin(want, report, item, cat, skip):
     if want.get("year") and y[0] and not (y[0] - 1 <= want["year"] <= y[1]):
         return None                              # the table has no generation for that year either
     title = wheelbase.MAKE_TITLE.get(make, make.title())
-    name = re.sub(r"<[^>]+>|\s+", " ", str(gen.get("name") or "")).strip()
+    # a box's name as text: "{{ubl|Mercedes-Benz W201|(190, 190 E, 190 D)}}" is the W201
+    name = re.sub(r"\{\{\s*(?:ubl|unbulleted list|plainlist|nowrap)\s*\|([^|}]*)[^}]*\}\}", r"\1",
+                  str(gen.get("name") or ""), flags=re.I)
+    name = re.sub(r"<[^>]+>|\{\{[^}]*\}\}|\s+", " ", name).strip()
     name = name if name.lower().startswith(title.lower()) else f"{title} {wheelbase.wiki_title(model)} ({name})"
     # the body the stand-in must have: the one asked for, else the
     # generation's (an M5 Touring is made from an estate, not from the M5
@@ -845,7 +856,7 @@ def _standin(want, report, item, cat, skip):
                if [x.lower() for x in batch.model_of(i)] == [make.lower(), model.lower()]} - {None}
         if len(own) == 1:
             gen = dict(gen, family=own.pop(), family_from="the catalogue's files of the model")
-    if PICKUP_MODEL.fullmatch(str(model).lower()) or (make, str(model).lower()) in UTILITY:
+    if pickup_model(make, model) or (make, str(model).lower()) in UTILITY:
         gen = dict(gen, family="pickup")         # a pickup from a pickup, never an SUV (the Ranger from a Mach-E)
     fam = RECORD_BODY.get(want.get("body") or "", None) or gen.get("family")
     other = bool(gen.get("family") and fam != gen["family"])         # not the body the table's size is for

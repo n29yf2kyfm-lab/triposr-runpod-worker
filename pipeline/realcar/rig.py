@@ -485,6 +485,10 @@ def convert(car, rep, override=None, body_style=""):
     nose = ends[0] if ends else cues["steering"]
     if len(set(cues.values())) > 1:
         rep["nose_overruled"] = cues
+    if (override or {}).get("nose") == "back":
+        # a file whose own cues read it backwards, seen by eye (batch.NOSE_BACK)
+        nose = -nose
+        rep["nose_fixed"] = "the other end, as checked by eye"
     if nose < 0:
         car.transform(rot_y(180))
     # SCALE: a car outside 2.5-7.5 long is set so its wheels are 0.68 m tall
@@ -2167,5 +2171,5 @@ def run(src, out, override=None, body_style=""):
 if __name__ == "__main__":
     a = [x for x in sys.argv[1:] if not x.startswith("--")]
     body = next((x.split("=", 1)[1] for x in sys.argv if x.startswith("--body=")), "")
-    r = run(a[0], a[1], body_style=body)
+    r = run(a[0], a[1], override={"nose": "back"} if "--nose=back" in sys.argv else None, body_style=body)
     print(json.dumps({k: r.get(k) for k in ("car", "status", "opens", "missing", "refused", "seconds", "body_style")}))
