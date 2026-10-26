@@ -277,14 +277,22 @@ def find(want, cat, skip=()):
         # a hyphenated name is one word, and a slip keeps the name's first
         # letter: C-Max is not a slip for the S-Max, F-Pace for the I-Pace,
         # S-Cross for the Across
-        words = [norm(x) for x in want["words"].split()]
+        # a letter and the word after it are one name, as is a name and
+        # "Class" ("B Class", "CLK Class": the B-Class, the CLK-Class; their
+        # "class" no slip for the C-Class)
+        toks, words = want["words"].split(), []
+        while toks:
+            k = 2 if len(toks) > 1 and (len(norm(toks[0])) == 1 or norm(toks[1]) == "class") else 1
+            words.append(norm("".join(toks[:k])))
+            toks = toks[k:]
         known = {n.replace(norm(make), "") for i in cat.values() if norm(i["make"]) == norm(make) for n in names(i)}
         words = [w for w in words if not any(c.isdigit() for c in w)]
         near = {}
         for i in pool:
             for n in names(i):
                 n2 = n.replace(norm(make), "")
-                if len(n2) >= 4 and not any(c.isdigit() for c in n2) and \
+                # a Mercedes class's letters are its name: the SLK-Class is no slip for the SL-Class
+                if len(n2) >= 4 and not any(c.isdigit() for c in n2) and not n2.endswith("class") and \
                         any(edits(n2, w) == 1 and n2[0] == w[0] and (w not in known or n2.startswith(w)) for w in words):
                     near.setdefault(n2, []).append(i)
         if len(near) == 1:
@@ -499,7 +507,7 @@ RECORD_BODY = {"hatchback": "hatch", "hatch": "hatch", "saloon": "saloon", "seda
 BODY_NAME = {"hatch": "hatchback", "suv": "SUV", "mpv": "MPV"}     # a body family in words; the rest as they are
 
 
-VARIANT = re.compile(r"\b(?:GTI|GTD|GTE|GTS|R32|RS ?\d?|ST|AMG|Type R|GR|Nismo|JCW|Cupra|vRS|SVR|Allspace|LWB|"
+VARIANT = re.compile(r"\b(?:GTI|GTD|GTE|GTS|R32|RS ?\d?|ST|AMG|Type R|GR|Nismo|JCW|Cupra|vRS|SVR|Allspace|LWB|bmw[- ]m[2-8]|"
                      r"Cabrio(?:let)?|Convertible|Coup[eé]|Works|Trophy|Rally|WRC)\b|\bgolf-r\b|\bgolf r\b|\b(?:tiguan|range rover|a6|a8|5 series) l\b",
                      re.I)
 
@@ -567,7 +575,8 @@ def _generation(make, model, year, online=False):
         b = wheelbase.lookup(make, model, year or 2100, online=online)
         size = ("wheelbase", "length", "width", "height")
         if not year and not all(b.get(k) for k in size):
-            full = [x for x in (wheelbase.table().get(f"{make}|{model}".lower()) or {}).get("boxes", [])
+            full = [x for x in wheelbase.named_wheelbase((wheelbase.table().get(f"{make}|{model}".lower()) or {})
+                                                         .get("boxes", []), model)
                     if x.get("years") and all(x.get(k) for k in size)]
             if full:
                 b = wheelbase.choose(full, None)
@@ -581,18 +590,28 @@ def _generation(make, model, year, online=False):
         # else its proportions: tall for its length is an SUV
         ent = wheelbase.table().get(f"{make}|{model}".lower()) or {}
         y0 = (b.get("years") or [year or 2015])[0]
-        near = sorted(((x.get("page") != b.get("page"), abs((x.get("years") or [9999])[0] - y0),
+        # a box with no years is no production car (the Leaf Nismo RC racer's)
+        near = sorted(((x.get("page") != b.get("page"), abs(x["years"][0] - y0),
                         wheelbase.body_family(x.get("body"), x.get("class"), x.get("name")))
-                       for x in ent.get("boxes", []) if x is not b), key=lambda t: t[:2])
-        # the nearest generation in time on the same page; else its
-        # proportions (tall for its length is an SUV, short and of a car's
-        # height a hatch); a box on another page last (the Aygo X's page is
-        # not the 2014 Aygo's)
+                       for x in ent.get("boxes", []) if x is not b and x.get("years")), key=lambda t: t[:2])
+        # the nearest generation in time on the same page; else the page's
+        # lead box (its class first when that names a shape: the Cube's
+        # "Mini MPV", not its "5-door hatchback"); else its proportions (tall
+        # for its length is an SUV, short and of a car's height a hatch, short
+        # and low an open two-seater); a box on another page last (the Aygo
+        # X's page is not the 2014 Aygo's)
         fam = next((f for other, _, f in near if f and not other), None)
+        if not fam:
+            shape = wheelbase.body_family(b.get("page_class"))
+            fam = shape if shape in ("mpv", "suv", "pickup", "van") else \
+                wheelbase.body_family(b.get("page_body"), b.get("page_class"))
         if not fam and b.get("height") and b.get("length"):
             fam = "suv" if b["height"] >= 1560 and b["height"] / b["length"] >= 0.355 else \
-                "hatch" if b["length"] < 4100 and 1380 <= b["height"] < 1560 else None
+                "hatch" if b["length"] < 4100 and 1380 <= b["height"] < 1560 else \
+                "convertible" if b["length"] < 4100 and b["height"] < 1300 else None
         fam = fam or next((f for _, _, f in near if f), None)
+    if fam == "convertible" and OFFROAD.search(f"{make} {model}".replace("-", " ")):
+        fam = "suv"                              # a soft-top off-roader ("2-door convertible" Jimny, Wrangler) is a 4x4's shape
     return dict(b, family=fam)
 
 
@@ -616,6 +635,38 @@ GROUP = {m: g for g, ms in {
 TITLE_ESTATE = re.compile(r"\bestate\b|" + ESTATE_WORDS, re.I)     # a record's title: the request's estate words, and "Estate" itself
 
 
+def record_year(i):
+    """The year of the car a catalogue record holds: the one its title names
+    ("2019 Volkswagen Jetta"), when the record's start year is its model
+    line's (1979) and not the car's; else its start year."""
+    y = i.get("yearStart")
+    m = re.search(r"\b(19[3-9]\d|20[0-3]\d)\b", str(i.get("sourceTitle") or ""))
+    return int(m.group(1)) if m and (not y or abs(int(m.group(1)) - y) > 3) else y
+
+
+def record_generation(i):
+    """The wheelbase table's generation of the car a catalogue record holds:
+    of its year (record_year), or of the generation its title names in
+    brackets when that disagrees ("Audi A4 (B5)", recorded as from 2015)."""
+    mk, md = batch.model_of(i)
+    y = record_year(i)
+    # the code in its title's brackets, else at the end of its model's name
+    # ("a6 c7", "5 Series E60": looked up as that name, then without the code)
+    in_title = re.search(r"\(([A-Z]{1,2}\d{1,3}[A-Z]?|Mk ?\d+)\)", str(i.get("sourceTitle") or ""))
+    in_name = None if in_title else re.search(r"\s((?:[a-z]{1,2}\d{1,3}[a-z]?|mk ?\d+))$", md, re.I)
+    code = in_title or in_name
+    if code:
+        rx = rf"(?<![A-Za-z0-9]){re.escape(code.group(1))}(?![A-Za-z0-9])"
+        for name in (md, md[:in_name.start()].strip()) if in_name else (md,):
+            hit = [b for b in (wheelbase.table().get(f"{mk}|{name}".lower()) or {}).get("boxes", [])
+                   if b.get("years") and re.search(rx, b.get("name") or "", re.I)]
+            if hit:
+                g = _generation(mk, name, y if y and hit[0]["years"][0] <= y <= hit[0]["years"][1] else hit[0]["years"][0])
+                if g:
+                    return g
+    return _generation(mk, md, y)
+
+
 def record_body(i, gen=None):
     """A catalogue record's body family (hatch, saloon, estate, suv, ...): its
     own bodyStyle, else the wheelbase table's for its generation; a title
@@ -623,7 +674,7 @@ def record_body(i, gen=None):
     one its page leads with: "BMW 3 Series touring (E46)"). None when nothing
     says."""
     if gen is None:
-        gen = _generation(*batch.model_of(i), i.get("yearStart")) or {}
+        gen = record_generation(i) or {}
     f = RECORD_BODY.get(str(i.get("bodyStyle") or "").lower()) or gen.get("family")
     title, md = str(i.get("sourceTitle") or ""), batch.model_of(i)[1]
     if re.search(r"\b(?:active|gran) tourer\b", title, re.I):
@@ -645,6 +696,17 @@ PICKUP_MODEL = re.compile(r"ranger|hilux|navara|l200|amarok|d-?max|tacoma|tundra
 
 
 REACH = 0.35      # a donor's size term (length + 1.5 height + width off) the reshape still carries well: about 10% each
+CLASSIC_BEFORE = 1990    # a car first made before this is a classic: its stand-in comes from a classic, and the other way
+TALL = 0.12              # a donor more than this much taller or lower than the car does not look like it
+# race cars and exotics: a donor only for one of their own kind (the DB9 had a
+# GT3's wing, the Spitfire an SLR McLaren's body)
+RACE = re.compile(r"\bgt[234]\b|gt[23] ?rs|\bcup\b|\brsr\b|racing|race ?car|black series|\bdtm\b|\bwrc\b", re.I)
+EXOTIC = re.compile(r"\bslr\b|mclaren|enzo|laferrari|veyron|chiron|\bsenna\b|\bp1\b|carrera gt|one-77|valkyrie|zonda|huayra|"
+                    r"aventador|murci[eé]lago|countach|\b959\b|\b918\b", re.I)
+# off-roaders look like each other more than like an SUV of their size (a
+# Jimny from a G-Class, not from a Nissan Cube)
+OFFROAD = re.compile(r"jimny|defender|g-?class|g ?wagon|wrangler|grenadier|land ?cruiser|pajero|shogun|niva|bronco|"
+                     r"gladiator|samurai|land[- ]?rover[- ](?:series|88|109|90|110)\b", re.I)
 
 
 def donors(target, fam, cat, make, model_key, want, skip=()):
@@ -660,13 +722,29 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
                 or i["assetId"] in batch.WRONG_CAR or batch.is_game(i):
             continue
         mk, md = batch.model_of(i)
-        b = _generation(mk, md, i.get("yearStart")) or {}
+        b = record_generation(i) or {}
         f = record_body(i, b)
         if fam and f != fam:
             continue
         def off(k, w):
-            return abs(b[k] / target[k] - 1) * w if b.get(k) else 0.12 * w
+            # a size not known counts against the donor: it may be any size
+            # (an A6 for a Morris Minor), not one that fits
+            return abs(b[k] / target[k] - 1) * w if b.get(k) else 0.2 * w
         size = off("length", 1.0) + off("height", 1.5) + off("width", 1.0)
+        # likeness beyond size: the era (a record with no year: its generation's),
+        # the roof's height, a race car or an exotic only for its own kind, and
+        # an off-roader for an off-roader
+        text = " ".join(str(x or "") for x in (i.get("model"), i.get("modelFamily"), i.get("sourceTitle"), i["assetId"],
+                                                b.get("name")))
+        asked = f"{want.get('words') or ''} {want.get('spec') or ''} {target.get('name') or ''}"
+        ty = (target.get("years") or [None])[0]
+        dy = record_year(i) or (b.get("years") or [None])[0]
+        # a donor of no known year is most likely a modern car, as the catalogue's are
+        era_ok = (ty < CLASSIC_BEFORE) == ((dy or 2015) < CLASSIC_BEFORE) if ty else True
+        tall_ok = not (b.get("height") and target.get("height")) or abs(b["height"] / target["height"] - 1) <= TALL
+        odd = bool((RACE.search(text) and not RACE.search(asked)) or (EXOTIC.search(text) and not EXOTIC.search(asked)))
+        t_off, d_off = bool(OFFROAD.search(asked)), bool(OFFROAD.search(text))
+        likeness = (0 if era_ok else 0.6) + (0 if tall_ok else 0.3) + (0.5 if odd else 0) + (0.2 if d_off and not t_off else 0)
         three = bool(re.search(r"\b[23][- ]?(?:door|dr)\b|coup[eé]", str(i.get("sourceTitle") or ""), re.I)) \
             or (i.get("doors") and int(i["doors"]) <= 3)
         doors_off = 0.0
@@ -679,15 +757,17 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
         badge = VARIANT.search(" ".join(str(i.get(k) or "") for k in ("model", "modelFamily", "sourceTitle", "assetId")))
         variant = 0.15 if badge and badge.group(0).lower() not in (str(want.get("words") or "") + " "
                                                                      + str(want.get("spec") or "")).lower() else 0.0
-        age = min(abs((i.get("yearStart") or target["years"][0] or 2015) - (target["years"][0] or 2015)) * 0.01, 0.15)
+        # styles date: a 2004 hatch is not a 2019 one; no known year, a middling guess
+        age = min(abs(dy - (ty or 2015)) * 0.015, 0.3) if dy else 0.15
         a_, b_ = (x.lower().replace(" ", "-") for x in (mk, make))
-        kin = 0 if a_ == b_ else 0.08 if GROUP.get(a_, a_) == GROUP.get(b_, b_) else 0.15
+        kin = 0 if a_ == b_ or (t_off and d_off) else 0.08 if GROUP.get(a_, a_) == GROUP.get(b_, b_) else 0.15
         tier = 0 if kin < 0.15 else 1                 # the make or its group (a Picanto for an i10), or another maker
-        score = (size + age + variant + (0 if (mk.lower(), md.lower()) == model_key else 0.3) + kin
-                 + doors_off + (0 if batch.credit_of(i)["commercial"] else 0.12)
+        score = (size + age + variant + likeness + (0 if (mk.lower(), md.lower()) == model_key else 0.3) + kin
+                 + doors_off + (0 if batch.credit_of(i)["commercial"] else 0.04)     # a tie-break: commercial-only builds skip the others
                  + 0.25 * len(short.get(i["assetId"], ()))          # it came out short of these parts before
                  + 0.03 * batch.GRADE.get(i.get("qualityGrade"), 3))
-        out.append((round(score, 4), i["assetId"], i, tier, size <= REACH and not short.get(i["assetId"])))
+        out.append((round(score, 4), i["assetId"], i, tier,
+                    size <= REACH and not short.get(i["assetId"]) and era_ok and tall_ok and not odd))
     # the reshape makes any donor the car's size, so its face counts most: when
     # the body is known (every donor has it), the make or its group first if
     # one is within reach of the size (a BMW estate stretched 10% reads as a
@@ -750,7 +830,7 @@ def _standin(want, report, item, cat, skip):
     if not ranked:
         return None
     d = ranked[0]
-    dg = _generation(*batch.model_of(d), d.get("yearStart")) or {}
+    dg = record_generation(d) or {}
     if other and gen["family"] == "hatch" and fam in ("estate", "saloon") and dg.get("length") and dg.get("wheelbase"):
         # a hatch's estate or saloon is longer behind (a Golf estate is 30 cm
         # on the hatch): the donor's own overhangs on the car's wheelbase,

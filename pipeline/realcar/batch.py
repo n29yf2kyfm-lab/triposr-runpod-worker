@@ -94,8 +94,9 @@ def layout_of(item):
     return "rear" if REAR_ENGINE.search(f"{make.lower()}|{model.lower()}") else None
 
 
-# Catalogue models that are not the car their record says (seen on the
-# check sheets): never picked for that target.
+# Catalogue models held back (seen on the check sheets): files that are not
+# the car their record says, and files too broken to build from. Never
+# picked for their car, nor as a stand-in's donor.
 WRONG_CAR = {
     "honda-jazz-2018-v1": "is a Toyota RAV4 (badge and 'JPRAV4' plate)",
     "mini-cooper-w7-v1": "is the classic Mini, not the BMW MINI on UK roads",
@@ -104,6 +105,13 @@ WRONG_CAR = {
     "audi-a1-quattro-v1": "is a Citroen C4 saloon (the same pack's file), not an Audi A1",
     "skoda-octavia-estate-v1": "is a Peugeot 307 hatchback (its lion on the grille), not a Skoda Octavia estate",
     "bmw-8-series-v1": "is a BMW X7 (an SUV with the X7's grille), not the 8 Series coupe it is titled",
+    "audi-a8-2008-v1": "is an Audi Q5 Sportback (its grille and roofline), not a 2008 A8; and broken as the next three are",
+    # files the catalogue cut down to about 150,000 triangles, their inner
+    # panels merged through the paint: the cabin and the bay show through in
+    # shards on the bonnet, pillars and roof. Nothing in them to mend
+    "citroen-c5-2022-v1": "a broken file: its inner panels show through the paint in shards",
+    "lexus-rx-v1": "a broken file: its inner panels show through the paint in shards",
+    "honda-zr-v-2023-v1": "a broken file: its inner panels show through the paint in shards",
 }
 
 
