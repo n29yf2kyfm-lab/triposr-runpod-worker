@@ -240,6 +240,8 @@ ALIAS = {("mini", "cooper"): "Mini Hatch", ("mini", "hatch"): "Mini Hatch", ("ho
          ("hyundai", "ix20"): "Kia Venga",          # the ix20's page is the Venga's: the same car
          # the 2016-2020 SLC is the renamed SLK (R172); "SLC" alone finds the 1971 SLC coupe
          ("mercedes-benz", "slc"): "Mercedes-Benz R172", ("mercedes-benz", "slc class"): "Mercedes-Benz R172",
+         # "Aston Martin Vantage" is a list of every Vantage: the 2018 car's own page
+         ("aston-martin", "vantage"): "Aston Martin Vantage (2018)",
          ("suzuki", "e vitara"): "Suzuki e Vitara",       # its own electric car, titled with a small e
          ("ford", "fusion"): "Ford Fusion (Europe)",      # the UK's Fusion: the 2002-2012 Fiesta-based car, not the US saloon
          # the 2024 Milano, renamed the Junior before sale ("Milano" alone is the US name of the 1985 Alfa 75)
