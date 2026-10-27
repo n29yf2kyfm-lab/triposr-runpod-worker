@@ -122,6 +122,24 @@ def test_a_roof_fault_asks_for_the_roof_painted_in_the_rebuild(run):
     assert fleet._roof_words("car-fiesta") == ["#eeefed", "roof"]
 
 
+def test_the_roof_pass_records_and_queues_and_its_checked_roofs_teach(run):
+    build_review.roof("car-fiesta", "same")
+    assert paths.load(str(run / "roof_check.json"))["car-fiesta"]["answer"] == "same"
+    assert "car-fiesta" not in paths.load(str(run / "needs_rebuild.json"), {})
+    with pytest.raises(build_review.Refused, match="same, body or a colour family"):
+        build_review.roof("car-note", "sameish")
+    # the Kamiq: its model's black roof beside a photo of a silver car
+    gold.add("roof", "car-note", "body", "the model's black roof; the photo's car is silver all over")
+    with pytest.raises(build_review.Refused, match="checked by hand and is body"):
+        build_review.roof("car-note", "same")
+    build_review.roof("car-note", "body")
+    assert paths.load(str(run / "roof_label.json"))["car-note"]["roof"] == "body"
+    assert "car-note" in paths.load(str(run / "needs_rebuild.json"))
+    # a checked roof is about that build: after a rebuild it drops out
+    paths.append_row({"key": "car-note", "status": "standin", "built_at": "2026-10-28 09:00:00"})
+    assert gold.judge("roof", "car-note", "same") is None
+
+
 # ── gold: a wrong answer on a checked item teaches, and is counted ───────
 
 def test_a_wrong_answer_on_a_checked_build_is_refused_and_counted(run):

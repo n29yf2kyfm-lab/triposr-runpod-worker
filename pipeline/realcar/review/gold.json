@@ -363,5 +363,43 @@
     "checked": "2026-10-27 12:11:08"
    }
   }
+ },
+ "roof": {
+  "car-skoda-kamiq": {
+   "answer": "body",
+   "built_at": "2026-10-27 10:58:37",
+   "why": "the build has its model's black roof; the photo's Kamiq is silver all over, its roof too",
+   "checked": "2026-10-27 13:28:12"
+  },
+  "car-jaecoo-7": {
+   "answer": "black",
+   "built_at": "2026-10-27 10:58:19",
+   "why": "the photo's white Jaecoo 7 has a black roof; the build's roof is white",
+   "checked": "2026-10-27 13:28:13"
+  },
+  "car-skoda-superb": {
+   "answer": "same",
+   "built_at": "2026-10-27 10:58:38",
+   "why": "both white, roof and all",
+   "checked": "2026-10-27 13:28:13"
+  },
+  "car-audi-a4": {
+   "answer": "same",
+   "built_at": "2026-10-27 09:08:09",
+   "why": "both red, roof and all",
+   "checked": "2026-10-27 13:28:13"
+  },
+  "car-ford-focus": {
+   "answer": "same",
+   "built_at": "2026-10-27 09:08:11",
+   "why": "both white, roof and all",
+   "checked": "2026-10-27 13:28:14"
+  },
+  "car-kia-picanto": {
+   "answer": "same",
+   "built_at": "2026-10-27 09:08:12",
+   "why": "both light blue, roof and all",
+   "checked": "2026-10-27 13:28:14"
+  }
  }
 }

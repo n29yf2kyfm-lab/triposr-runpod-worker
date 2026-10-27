@@ -8,6 +8,7 @@ on an older build or photo is seen as stale (check.py).
     python3 build_review.py verdict KEY ok
     python3 build_review.py verdict KEY bad "fault, fault" "what is wrong, in a few words"
     python3 build_review.py verdict KEY bad "roof" "what is wrong" --roof body|FAMILY
+    python3 build_review.py roof KEY same|body|FAMILY ["note"]       # the roof pass: the roof alone
 
 Faults (one or more, comma separated):
   body        another body style (an estate for a hatch, an SUV for a saloon, a panel van for a pickup)
@@ -71,8 +72,8 @@ def cell(path, W, H):
     return c
 
 
-def sheet(out, keys, batch=None, n_gold=0):
-    keys = gold.mix(keys, "build", n_gold, out, batch) if n_gold else list(keys)
+def sheet(out, keys, batch=None, n_gold=0, kind="build"):
+    keys = gold.mix(keys, kind, n_gold, out, batch) if n_gold else list(keys)
     if not n_gold:
         gold.note_sheet(out, batch, keys, [])
     rows = paths.rows()[0]
@@ -170,8 +171,51 @@ def verdict(key, v, faults, note, roof=None):
             paths.save(paths.f("needs_label.json"), q)
 
 
+def roof(key, answer, note=""):
+    """The roof pass: the build's roof against the photo's. "same" (as the
+    photo's: one colour, or both two-tone alike), "body" (the photo's roof is
+    the body's colour, the build's is not) or a colour family (the photo's
+    roof is that colour, the build's is not). Anything but "same" asks the
+    rebuild for the photo's roof."""
+    from paint_label import FAMILY
+    rows = paths.rows()[0]
+    r = rows.get(key)
+    if not r:
+        raise Refused(f"{key} is not a key of this run: copy it exactly from the red line on the sheet")
+    if r.get("status") not in ("built", "standin"):
+        raise Refused(f"{key} was not built ({r.get('status')}): it has no build to judge")
+    if answer not in ("same", "body") and answer not in FAMILY:
+        raise Refused(f"the roof is same, body or a colour family: {' '.join(FAMILY)}")
+    g = gold.judge("roof", key, answer)
+    if g is not None:
+        gold.log("roof", key, answer, g["right"])
+        if not g["right"]:
+            raise Refused(f"not recorded: this roof was checked by hand and is {g['expected']}: {g['why']}. "
+                          "Look at it again, then at every roof you have answered on this sheet, before you go on; "
+                          "then answer this one again.")
+    with paths.lock("roof_check"):
+        d = paths.load(paths.f("roof_check.json"))
+        d[key] = {"answer": answer, "note": note, "at": paths.now(), "built_at": r.get("built_at"),
+                  "photo_sha": paths.sha(paths.photo(key))}
+        paths.save(paths.f("roof_check.json"), d)
+    if answer != "same":
+        with paths.lock("roof_label"):
+            rl = paths.load(paths.f("roof_label.json"))
+            rl[key] = {"roof": answer, "by": "roof pass", "at": paths.now()}
+            paths.save(paths.f("roof_label.json"), rl)
+        paths.queue_rebuild(key, "its roof in the body's colour, as the photo's" if answer == "body"
+                            else f"its roof {answer}, as the photo's")
+
+
 def main():
     a = sys.argv[1:]
+    if a[:1] == ["roof"] and len(a) >= 3:
+        try:
+            roof(a[1], a[2], a[3] if len(a) > 3 else "")
+        except Refused as e:
+            print("REFUSED:", e)
+            raise SystemExit(2)
+        return print("recorded roof", a[1], a[2])
     if not a:
         raise SystemExit(__doc__)
     if a[0] == "sheet":

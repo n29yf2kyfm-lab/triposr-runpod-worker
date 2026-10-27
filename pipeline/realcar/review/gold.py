@@ -14,6 +14,7 @@ rebuild or a new photo the item is left out until it is checked again.
     python3 gold.py add build KEY ok|bad ["fault,fault"] "why"
     python3 gold.py add side KEY left|right "why"
     python3 gold.py add paint KEY FAMILY "why"
+    python3 gold.py add roof KEY same|body|FAMILY "why"   # the build's roof against the photo's
     python3 gold.py withdraw build KEY "why"   # a checked answer found wrong or arguable: no longer used or scored
     python3 gold.py resolved BATCH "how"       # a batch that missed one, its sheets looked at again
     python3 gold.py list            # every checked item, and whether it still holds
@@ -31,7 +32,7 @@ import sys
 
 import paths
 
-KINDS = ("build", "side", "paint")
+KINDS = ("build", "side", "paint", "roof")
 
 
 def gold_path():
@@ -54,7 +55,7 @@ def manifest_path():
 
 def _holds(kind, key, item, rows=None):
     """Whether a checked answer is still about what is there now."""
-    if kind == "build":
+    if kind in ("build", "roof"):                # about the build beside its photo: holds for that build
         rows = rows if rows is not None else paths.rows()[0]
         r = rows.get(key) or {}
         return bool(item.get("built_at")) and r.get("built_at") == item["built_at"] and r.get("status") in ("built", "standin")
@@ -63,7 +64,7 @@ def _holds(kind, key, item, rows=None):
 
 def active(kind, rows=None):
     g = load()[kind]
-    rows = rows if rows is not None or kind != "build" else paths.rows()[0]
+    rows = rows if rows is not None or kind not in ("build", "roof") else paths.rows()[0]
     return {k: v for k, v in g.items() if _holds(kind, k, v, rows)}
 
 
@@ -172,15 +173,21 @@ def add(kind, key, answer, why, faults=()):
         raise SystemExit(f"kind is one of {KINDS}")
     g = paths.load(gold_path())
     g.setdefault(kind, {})
-    if kind == "build":
+    if kind in ("build", "roof"):
         r = paths.rows()[0].get(key)
         if not r or r.get("status") not in ("built", "standin"):
             raise SystemExit(f"{key} has no build to check")
         if not r.get("built_at"):
             raise SystemExit(f"{key}'s build has no built_at: build it with fleet.py first")
+    if kind == "build":
         if answer not in ("ok", "bad") or (answer == "bad") != bool(faults):
             raise SystemExit("a checked build is ok with no faults, or bad with at least one")
         g[kind][key] = {"verdict": answer, "faults": list(faults), "built_at": r["built_at"], "why": why, "checked": paths.now()}
+    elif kind == "roof":
+        from paint_label import FAMILY
+        if answer not in ("same", "body") and answer not in FAMILY:
+            raise SystemExit("a checked roof is same, body or a colour family")
+        g[kind][key] = {"answer": answer, "built_at": r["built_at"], "why": why, "checked": paths.now()}
     else:
         sha = paths.sha(paths.photo(key))
         if not sha:

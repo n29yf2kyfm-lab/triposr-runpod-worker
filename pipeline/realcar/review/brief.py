@@ -5,6 +5,7 @@ edited by hand between batches.
     python3 brief.py build  NAME KEY ... [--per 8]  [--gold 1]
     python3 brief.py side   NAME KEY ... [--per 12] [--gold 1]
     python3 brief.py colour NAME KEY ... [--per 12] [--gold 1]
+    python3 brief.py roof   NAME KEY ... [--per 8]  [--gold 1]
     python3 brief.py photo  NAME KEY ... [--per 12]
     (KEY ... may be @file: one key a line)
 
@@ -19,8 +20,9 @@ import paint_label
 import paths
 import web_photo
 
-PROMPT = {"build": "build_review.md", "side": "side_label.md", "colour": "colour_label.md", "photo": "photo_review.md"}
-PER = {"build": 8, "side": 12, "colour": 12, "photo": 12}
+PROMPT = {"build": "build_review.md", "side": "side_label.md", "colour": "colour_label.md", "photo": "photo_review.md",
+          "roof": "roof_review.md"}
+PER = {"build": 8, "side": 12, "colour": 12, "photo": 12, "roof": 8}
 
 
 def keys_of(args):
@@ -38,7 +40,7 @@ def brief(kind, name, keys, per=None, n_gold=1):
     missing = [k for k in keys if k not in rows]
     if missing:
         raise SystemExit(f"no such keys: {missing[:5]}")
-    if kind in ("build",):
+    if kind in ("build", "roof"):
         keys = [k for k in keys if rows[k].get("status") in ("built", "standin")]
     per = per or PER[kind]
     d = paths.f("sheets")
@@ -47,8 +49,8 @@ def brief(kind, name, keys, per=None, n_gold=1):
     for i in range(0, len(keys), per):
         out = os.path.join(d, f"{name}_s{i // per:02d}.jpg")
         chunk = keys[i:i + per]
-        if kind == "build":
-            build_review.sheet(out, chunk, name, n_gold)
+        if kind in ("build", "roof"):
+            build_review.sheet(out, chunk, name, n_gold, kind=kind)
         elif kind == "side":
             paint_label.sheet(out, chunk, name, n_gold, kind="side", ask="name the way each car points")
         elif kind == "colour":

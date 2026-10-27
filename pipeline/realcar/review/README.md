@@ -22,10 +22,11 @@ own `GLBMACHINE_HOME`. Run every tool from the repository root:
 3. **Rebuild what changed**: `fleet.py redo`.
 4. **Review**: `brief.py build NAME @keys.txt` per batch of about 120 builds, one agent each. A replaced photo
    brings its own colour and side and queues its rebuild by itself.
-5. **Gate**: `check.py`. It must say "all clear" before the report is published. If it lists rebuilds, go to 3;
+5. **Roofs**: `brief.py roof NAME @keys.txt`, one agent per batch of about 240: the roof alone against the photo's (the general review missed about one in twelve). A roof that is not the photo's is rebuilt so by itself: go to 3, then 4 for those.
+6. **Gate**: `check.py`. It must say "all clear" before the report is published. If it lists rebuilds, go to 3;
    if it lists verdicts, review those builds (4); if it lists a batch that missed a checked item, give that
    batch's sheets to a new agent.
-6. `webp.py` makes the small pictures for the report; `webp.py --prune` removes the full ones once every review is done.
+7. `webp.py` makes the small pictures for the report; `webp.py --prune` removes the full ones once every review is done.
 
 `brief.py` makes a batch's sheets and fills in its instructions from `prompts/`: never edit a prompt by hand for
 one batch. Change the prompt file, and every batch after gets the change.
@@ -45,6 +46,7 @@ photo (its fingerprint). After a rebuild or a new photo the item drops out until
     python3 pipeline/realcar/review/gold.py add build KEY bad "body" "why"
     python3 pipeline/realcar/review/gold.py add side KEY left "why"
     python3 pipeline/realcar/review/gold.py add paint KEY white "why"
+    python3 pipeline/realcar/review/gold.py add roof KEY same|body|FAMILY "why"
     python3 pipeline/realcar/review/gold.py withdraw build KEY "why"      # an answer found wrong or arguable
     python3 pipeline/realcar/review/gold.py resolved BATCH "how"          # its sheets looked at again
 
