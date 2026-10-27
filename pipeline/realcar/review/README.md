@@ -75,6 +75,9 @@ either way.
 | A 5-door stand-in for a 3-door car passed as a small difference | the door count is body, in the fault list and the past mistakes |
 | A donor's black roof on a one-colour car, or a photo's white roof missing | the fault `roof` with `--roof body` or `--roof FAMILY`: the rebuild paints the roof so |
 | A batch that missed one stayed on the gate after its sheets were looked at again | `gold.py resolved BATCH "how"` |
+| The roof command failed on every call (a name in `main()` hid the function); its tests had called the function only | every command the prompts give is tested as typed (`test_the_commands_as_the_agents_type_them`) |
+| The runner, moved into the repo, dropped the run's choice of models (any licence): 36 vehicles came out of other models | `fleet.py licence any|commercial` keeps it in `run.json`; the gate stops a build that left it out |
+| Roofs left in a donor's or the model's colour, and photos' two-tone roofs missing (about one in twelve builds) | the roof pass; the machine paints the roof as the photo's |
 
 The machine's own rules that went wrong are pinned by `pipeline/realcar/test_rules.py` ("black" is no paint name,
 "carpaint.198" no inside, "M Sport Touring" an estate, a wheel in the paint's colour never painted, people
