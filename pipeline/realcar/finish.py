@@ -1025,8 +1025,13 @@ def roof_in_paint(g, mats, paint, painted, glass, waist=0.78, band=0.06, up=0.5,
             sel = np.where((nrm[:, 1] > 0.92) & (cy > top - band * h))[0]
         else:
             sel = np.where((nrm[:, 1] > up) & (cy > ground + waist * h))[0]
+        # a material the model names its roof's (the RAV4's "BlackRoof", the
+        # Swift's "exterior-roof"): its sides and pillars over the waist too,
+        # once its top is taken for the roof (only its top left them black)
+        named = not is_glass and bool(re.search(r"roof", mats[p["material"]].get("name", ""), re.I))
+        whole = np.where(cy > ground + waist * h)[0] if named else None
         if len(sel):
-            picks.append((p, I, sel))
+            picks.append((p, I, sel, whole))
             Ts.append(T[sel])
     if not Ts:
         return None
@@ -1034,7 +1039,7 @@ def roof_in_paint(g, mats, paint, painted, glass, waist=0.78, band=0.06, up=0.5,
     area, _ = tri_area_normal(T)
     # the pieces, each of one material: a trim touching the roof's edge is
     # not the roof
-    tm = np.concatenate([np.full(len(sel), p.get("material")) for p, _, sel in picks])
+    tm = np.concatenate([np.full(len(sel), p.get("material")) for p, _, sel, _ in picks])
     lab = np.zeros(len(T), np.int64)
     nxt = 0
     for m_ in np.unique(tm):
@@ -1066,12 +1071,14 @@ def roof_in_paint(g, mats, paint, painted, glass, waist=0.78, band=0.06, up=0.5,
         mats.append(rm)
         to = len(mats) - 1
     out, at, names = 0, 0, set()
-    for p, I, sel in picks:
+    for p, I, sel, whole in picks:
         k = keep[at:at + len(sel)]
         at += len(sel)
         mine = sel[k]
         if not len(mine):
             continue
+        if whole is not None:
+            mine = np.union1d(mine, whole)
         names.add(mats[p["material"]].get("name"))
         rest = np.setdiff1d(np.arange(len(I)), mine)
         q = {kk: v for kk, v in p.items() if kk not in ("indices", "material")}

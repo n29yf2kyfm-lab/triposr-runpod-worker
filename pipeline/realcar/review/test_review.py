@@ -153,6 +153,17 @@ def test_the_commands_as_the_agents_type_them(run, monkeypatch, capsys):
     assert paths.load(str(run / "roof_label.json"))["car-note"]["roof"] == "body"
 
 
+def test_a_checked_roof_holds_for_a_verdict_too(run):
+    # round 2: the Captur's white roof called missing, by a verdict, not the roof command
+    gold.add("roof", "car-fiesta", "same", "both blue with a white roof")
+    with pytest.raises(build_review.Refused, match="roof was checked by hand and is same"):
+        build_review.verdict("car-fiesta", "bad", ["roof"], "black roof, the photo's is white", "white")
+    build_review.verdict("car-fiesta", "bad", ["broken"], "grille and fog lamps painted body blue")
+    gold.add("roof", "car-note", "body", "the model's black roof on a silver car")
+    with pytest.raises(build_review.Refused, match="roof was checked by hand and is body"):
+        build_review.verdict("car-note", "ok", [], "")
+
+
 # ── gold: a wrong answer on a checked item teaches, and is counted ───────
 
 def test_a_wrong_answer_on_a_checked_build_is_refused_and_counted(run):

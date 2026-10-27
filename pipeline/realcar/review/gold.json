@@ -110,13 +110,6 @@
    "why": "the same vehicle as the photo, its colour, nothing broken",
    "checked": "2026-10-27 12:11:08"
   },
-  "car-peugeot-205": {
-   "verdict": "ok",
-   "faults": [],
-   "built_at": "2026-10-27 10:58:31",
-   "why": "the same vehicle as the photo, its colour, nothing broken",
-   "checked": "2026-10-27 12:11:08"
-  },
   "car-seat-mii": {
    "verdict": "bad",
    "faults": [
@@ -366,6 +359,18 @@
     "verdict": "ok",
     "faults": [],
     "built_at": "2026-10-27 10:58:23",
+    "why": "the same vehicle as the photo, its colour, nothing broken",
+    "checked": "2026-10-27 12:11:08"
+   }
+  },
+  "build:car-peugeot-205": {
+   "why": "wrong: the build is a 5-door (two equal side windows), the photo then a 3-door GTI; the photo was rightly replaced in round 2",
+   "at": "2026-10-27 15:19:33",
+   "log_lines": 235,
+   "was": {
+    "verdict": "ok",
+    "faults": [],
+    "built_at": "2026-10-27 10:58:31",
     "why": "the same vehicle as the photo, its colour, nothing broken",
     "checked": "2026-10-27 12:11:08"
    }

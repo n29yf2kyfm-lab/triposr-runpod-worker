@@ -144,7 +144,7 @@ def test_a_mesh_shaded_its_own_way_all_over_is_left(tmp_path):
 
 # ── a stand-in's roof in its donor's colour ──────────────────────────────
 
-def _car_glb(path, top_name="2020_Peugeot_e-2008_black", roof_mat=1, slope=0.0):
+def _car_glb(path, top_name="2020_Peugeot_e-2008_black", roof_mat=1, slope=0.0, roof_side=False):
     """A box car 4 m long, 1.8 m wide, 1.52 m high: painted sides, a roof in
     another material, a thin roof rail in it too, and a wheel."""
     from gltf import GLTF  # noqa: F401
@@ -156,8 +156,12 @@ def _car_glb(path, top_name="2020_Peugeot_e-2008_black", roof_mat=1, slope=0.0):
             P = [[x0, y0, z0], [x0, y1, z0], [x0, y1, z1], [x0, y0, z1]]
             I = [0, 1, 2, 0, 2, 3]
         return P, I
+    roof = quad(-0.7, 0.7, 1.5, 1.5, 1, 3, "y")
+    if roof_side:                                         # the roof's own side, upright, in the same piece
+        sp, si = quad(0.7, 0.7, 1.3, 1.5, 1, 3, "x")
+        roof = (roof[0] + sp, roof[1] + [i + 4 for i in si])
     parts = [("body", *quad(0.9, 0.9, 0.3, 1.2, 0, 4, "x"), 0), ("body", *quad(-0.9, -0.9, 0.3, 1.2, 0, 4, "x"), 0),
-             ("body", *quad(-0.7, 0.7, 1.5, 1.5, 1, 3, "y"), roof_mat),   # the roof: 2.8 m², 39% of the footprint
+             ("body", *roof, roof_mat),                   # the roof: 2.8 m², 39% of the footprint
              ("body", *quad(0.75, 0.8, 1.52, 1.52, 1, 3, "y"), 1),        # a rail: 0.1 m², 1.4%
              ("wheel_fl", *quad(0.9, 0.9, 0.0, 0.6, 3.2, 3.8, "x"), 2)]
     blob, views, accs, prims = b"", [], [], []
@@ -196,6 +200,16 @@ def test_a_stand_ins_black_roof_takes_the_paint_and_its_rails_keep_theirs(tmp_pa
     assert out and out["triangles"] == 2 and out["materials"] == ["2020_Peugeot_e-2008_black"]
     mats = [p["material"] for m in g.j["meshes"] for p in m["primitives"]]
     assert mats == [0, 0, 0, 1, 2]                        # the roof painted, the rail and the wheel left
+
+
+def test_a_material_named_for_the_roof_is_painted_down_its_sides(tmp_path):
+    # the RAV4's "BlackRoof" and the Swift's "exterior-roof": their sides and pillars stayed black
+    from gltf import GLTF
+    for name, n in (("BlackRoof", 4), ("2020_Peugeot_e-2008_black", 2)):
+        _car_glb(str(tmp_path / "c.glb"), top_name=name, roof_side=True)
+        g = GLTF(str(tmp_path / "c.glb"))
+        out = finish.roof_in_paint(g, g.j["materials"], 0, {0}, set())
+        assert out and out["triangles"] == n            # its side too when named the roof's; else the top only
 
 
 def test_a_roof_sloping_to_the_tail_is_painted_to_its_end(tmp_path):

@@ -145,6 +145,16 @@ def verdict(key, v, faults, note, roof=None):
             raise Refused(f"not recorded: this pair was checked by hand and is {g['expected']}: {g['why']}. "
                           "Look at it again, then at every pair you have judged on this sheet, against the "
                           "fault list in your instructions, before you go on; then record this one again.")
+    # a roof checked by hand holds for a verdict too: a roof fault on a roof
+    # that is the photo's, or the photo's roof named wrong (the Captur's white
+    # roof called missing, the Kamiq's silver one called black, in round 2)
+    gr = gold.judge("roof", key, roof if "roof" in faults else "same")
+    if gr is not None:
+        gold.log("roof", key, roof if "roof" in faults else "same (no roof fault)", gr["right"])
+        if not gr["right"]:
+            raise Refused(f"not recorded: this roof was checked by hand and is {gr['expected']}: {gr['why']} "
+                          "(same: no roof fault; body or a colour: the fault 'roof' with --roof that). Look at it "
+                          "again, then at every roof on this sheet, before you go on; then record this one again.")
     r = rows[key]
     with paths.lock("build_review"):
         d = paths.load(OUT())
