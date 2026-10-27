@@ -120,7 +120,9 @@ await new Promise(r => server.listen(0, r));
 const port = server.address().port;
 let browser = null;
 const launch = async () => puppeteer.launch({ executablePath: process.env.CHROME_PATH || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome',
-  args: ['--no-sandbox', '--use-gl=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
+  // no disk cache: each build it loads was kept, about a gigabyte a renderer an hour, and filled the disk
+  args: ['--no-sandbox', '--use-gl=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist',
+    '--disk-cache-size=1', '--media-cache-size=1', '--disk-cache-dir=/dev/null'] });
 browser = await launch();
 for (;;) {
   const todo = fs.readdirSync(PEND).filter(f => f.endsWith('.glb') && !f.endsWith('.part.glb') && mine(f)).sort();

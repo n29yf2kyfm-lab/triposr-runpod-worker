@@ -438,3 +438,26 @@ def test_a_roof_answer_taken_back_undoes_what_it_asked(run):
     build_review.roof("car-note", "black")
     build_review.verdict("car-note", "ok", [], "")
     assert paths.load(str(run / "roof_label.json"))["car-note"]["roof"] == "black"
+
+
+def test_a_door_count_fault_asks_the_rebuild_for_the_photos(run, monkeypatch):
+    # round 4: 5-door stand-ins for the 3-door Mii, Escort, Adam and Mini One,
+    # judged bad round after round and built the same, as nothing asked for 3
+    with pytest.raises(build_review.Refused, match="goes with the fault 'body'"):
+        build_review.verdict("car-note", "bad", ["broken"], "a 5-door for the 3-door photo", doors=3)
+    with pytest.raises(build_review.Refused, match="2, 3"):
+        build_review.verdict("car-note", "bad", ["body"], "a 5-door for the 3-door photo", doors=7)
+    build_review.verdict("car-note", "bad", ["body"], "a 5-door for the 3-door in the photo", doors=3)
+    assert paths.load(str(run / "doors_label.json"))["car-note"]["doors"] == 3
+    assert "car-note" in paths.load(str(run / "needs_rebuild.json"))
+    assert fleet._door_words("car-note") == ["3", "door"]
+    # built asking for 3 and still not right: the machine's limit, not built again
+    paths.save(str(run / "needs_rebuild.json"), {})
+    paths.append_row({"key": "car-note", "status": "standin", "built_at": "2026-10-28 09:00:00", "doors": 3})
+    build_review.verdict("car-note", "bad", ["body"], "still five doors on the 3-door car", doors=3)
+    assert "car-note" not in paths.load(str(run / "needs_rebuild.json"))
+    assert paths.load(str(run / "doors_limits.json"))["car-note"]["doors"] == 3
+    monkeypatch.setattr(sys, "argv", ["build_review.py", "verdict", "car-fiesta", "bad", "body",
+                                      "a 5-door for the 3-door photo", "--doors", "3"])
+    build_review.main()
+    assert paths.load(str(run / "doors_label.json"))["car-fiesta"]["doors"] == 3

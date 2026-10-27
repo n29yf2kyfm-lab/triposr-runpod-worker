@@ -251,6 +251,54 @@ def _alpha_soft(g, mat):
         return None
 
 
+def _tex_mean(g, mat):
+    """The mean colour (sRGB, 0-1) of a material's base-colour texture; None
+    when it has none, or it cannot be read."""
+    t = mat.get("pbrMetallicRoughness", {}).get("baseColorTexture")
+    if not t:
+        return None
+    try:
+        tex = g.j["textures"][t["index"]]
+        src = tex.get("source", next((e.get("source") for e in (tex.get("extensions") or {}).values()
+                                      if isinstance(e, dict) and "source" in e), None))
+        bv = g.j["bufferViews"][g.j["images"][src]["bufferView"]]
+        data = (g.bin + bytes(g.extra))[bv.get("byteOffset", 0): bv.get("byteOffset", 0) + bv["byteLength"]]
+        from PIL import Image
+        im = Image.open(io.BytesIO(data)).convert("RGB")
+        im.thumbnail((64, 64))
+        return np.asarray(im, np.float32).reshape(-1, 3).mean(0) / 255
+    except Exception:
+        return None
+
+
+def trims_to_black(g, mats, names, skip):
+    """Trim the road car has in black, left in a colour by the model: by name
+    (batch.TRIM_BLACK: a GT's blue splitter, an M's red lines), and any
+    near-black trim tinted another colour than a lamp's red or amber (the
+    2008's mirrors, pillars and inserts in a dark purple, the S1's splitter in
+    a dark blue: in the studio's light their colour showed). Neither the paint
+    (SKIP), glass, a lamp, a badge, the plate nor the cabin. Returns the names."""
+    out = []
+    for i, m in enumerate(mats):
+        name = m.get("name") or ""
+        pbr = m.setdefault("pbrMetallicRoughness", {})
+        if name not in names:
+            if i in skip or m.get("alphaMode") == "BLEND" or LAMPISH.search(name) or INSIDE.search(name) \
+                    or lamp_lens(m) or re.search(r"paint|(?<!b)lack|body|glass|window|vetri|screen", name, re.I):
+                continue
+            f = np.array((pbr.get("baseColorFactor") or [1, 1, 1, 1])[:3], np.float64)
+            tm = _tex_mean(g, m)
+            lin = f if tm is None else f * np.power(tm, 2.2)
+            L, a, b = _lin_to_lab(lin)
+            hue = math.degrees(math.atan2(b, a)) % 360
+            if not (L < 12 and math.hypot(a, b) > 5 and 75 <= hue <= 330):
+                continue
+        pbr.pop("baseColorTexture", None)
+        pbr.update(baseColorFactor=[0.035, 0.035, 0.035, 1.0], metallicFactor=0.0, roughnessFactor=0.5)
+        out.append(name)
+    return out
+
+
 def lamp_lens(mat):
     """A lamp's lens: by its name (lamp, light, lens, red, amber ...; never a
     brake disc's), or, as many models name nothing, by its colour: red or
@@ -1270,6 +1318,61 @@ def _corner_attrs(g, attrs, S):
         A = A.reshape(len(A), -1)
         out[an] = g.add_accessor(A[S].reshape(-1, A.shape[1]).astype(np.float32), target=34962)
     return out
+
+
+def smooth_flat(g, mat_ids, crease=35.0, flat_share=0.8):
+    """A paint exported flat-shaded, every triangle on corners of its own with
+    its face's normal (the 2022 Tucson's: faceted and blotchy in the studio's
+    light, on it and the Kuga, ix35 and Tiggo 7 made from it): its normals
+    made smooth, each corner the area-weighted mean of the faces meeting
+    there, except across a crease of CREASE degrees or more (a panel's edge, a
+    character line), which stays sharp. Only a piece that is FLAT_SHARE flat;
+    a model's own smooth shading is left as it is. Returns triangles smoothed."""
+    j, n_tri, cos_c = g.j, 0, math.cos(math.radians(crease))
+    for mesh in j["meshes"]:
+        for p in mesh["primitives"]:
+            at = p.get("attributes") or {}
+            if p.get("mode", 4) != 4 or "indices" not in p or p.get("material") not in mat_ids or p.get("targets"):
+                continue
+            P = g.accessor(at["POSITION"]).astype(np.float64)
+            I = g.accessor(p["indices"]).ravel().astype(np.int64)
+            I = I[:len(I) // 3 * 3].reshape(-1, 3)
+            if not len(I):
+                continue
+            area, fn = tri_area_normal(P[I])
+            if "NORMAL" in at:
+                N = g.accessor(at["NORMAL"]).astype(np.float64)[I]
+                N /= np.maximum(np.linalg.norm(N, axis=2, keepdims=True), 1e-12)
+                flat = np.einsum("kcj,kj->kc", N, fn).min(1) > 0.999
+                if area[flat].sum() < flat_share * max(area.sum(), 1e-12):
+                    continue
+            span = float(np.ptp(P, axis=0).max()) or 1.0
+            vid = np.unique(np.round(P / (1e-5 * span)).astype(np.int64), axis=0, return_inverse=True)[1].ravel()
+            cv, ct = I.ravel(), np.repeat(np.arange(len(I)), 3)
+            # each corner: the faces meeting at its point within CREASE of its own
+            # (a plain mean leans to the side with more triangles there, and a
+            # box's edge came out rounded)
+            o = np.argsort(vid[cv], kind="stable")
+            k = vid[cv][o]
+            first = np.r_[True, k[1:] != k[:-1]]
+            starts = np.flatnonzero(first)
+            size = np.diff(np.r_[starts, len(k)])
+            g_of = np.cumsum(first) - 1
+            st, sz = starts[g_of], size[g_of]
+            a_ = np.repeat(np.arange(len(k)), sz)
+            b_ = np.repeat(st, sz) + (np.arange(sz.sum()) - np.repeat(np.cumsum(sz) - sz, sz))
+            fo, ao = fn[ct[o]], area[ct[o]]
+            near = np.einsum("ij,ij->i", fo[a_], fo[b_]) >= cos_c
+            acc = np.zeros((len(k), 3))
+            np.add.at(acc, a_[near], ao[b_[near], None] * fo[b_[near]])
+            sm = np.empty_like(acc)
+            sm[o] = acc / np.maximum(np.linalg.norm(acc, axis=1, keepdims=True), 1e-12)
+            out = np.zeros_like(P)
+            out[cv[::-1]] = sm[::-1]                   # a corner shared by several faces: its first face's
+            at["NORMAL"] = g.add_accessor(out.astype(np.float32), target=34962)
+            at.pop("TANGENT", None)
+            n_tri += len(I)
+    return n_tri
 
 
 def mend_normals(g, mat_ids, cos_max=0.26):
@@ -2702,6 +2805,8 @@ def finish(src, spec, out, base_dir="."):
                   and not mats[i].get("name", "").startswith("detail-") and not INSIDE.search(mats[i].get("name", ""))
                   and not TRIMMISH.search(mats[i].get("name", "")) and not LAMPISH.search(mats[i].get("name", ""))
                   and not dark_plastic(mats[i]) and mat_m2.get(i, 0) >= 0.4 * mat_m2.get(paint, 1e9)}
+        # and parts the road car has in its paint, the model in carbon (batch.TRIM_PAINT)
+        named |= {i for i, m in enumerate(mats) if m.get("name") in set(spec.get("trim_paint") or [])}
         coats = sorted(set(paint_ids) | same_paint(mats, paint, glass, mat_m2) | named)
         # a wheel's material in the model's own paint colour: a wheel's dark grey
         wip = wheels_in_paint(mats, paint, glass)
@@ -2741,7 +2846,13 @@ def finish(src, spec, out, base_dir="."):
     if spec.get("panel_van"):
         log["panel_van"] = panel_sides(g, glass, paint)
     # ── the paint's shading where the model broke it ──
+    log["smoothed"] = smooth_flat(g, set(coats) | {paint} if spec.get("paint") else paint_ids)
     log["normals_mended"] = mend_normals(g, set(coats) | {paint} if spec.get("paint") else paint_ids)
+    # ── trim in black where the model has it in a livery's colour ──
+    tb = trims_to_black(g, mats, set(spec.get("trim_black") or []),
+                        (set(coats) | {paint}) if spec.get("paint") else set(paint_ids))
+    if tb:
+        log["trim_black"] = tb
 
     # ── clear glass, a glass roof dark ──
     rg = roof_glass_dark(g, mats, glass)

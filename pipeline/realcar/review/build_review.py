@@ -8,10 +8,12 @@ on an older build or photo is seen as stale (check.py).
     python3 build_review.py verdict KEY ok
     python3 build_review.py verdict KEY bad "fault, fault" "what is wrong, in a few words"
     python3 build_review.py verdict KEY bad "roof" "what is wrong" --roof body|FAMILY
+    python3 build_review.py verdict KEY bad "body" "a 5-door for the 3-door in the photo" --doors 3
     python3 build_review.py roof KEY same|body|FAMILY ["note"]       # the roof pass: the roof alone
 
 Faults (one or more, comma separated):
-  body        another body style (an estate for a hatch, an SUV for a saloon, a panel van for a pickup)
+  body        another body style (an estate for a hatch, an SUV for a saloon, a panel van for a pickup),
+              or another door count: --doors N, the photo's (3 for a three-door hatch): rebuilt with it
   generation  another generation of the car (a 2008 shape for a 2020 car)
   kind        a stand-in of another kind of vehicle (an MPV for a sports car, a van for an SUV)
   proportions stretched, squashed, too tall or too low (a high-roof van for a low-roof one)
@@ -100,7 +102,7 @@ class Refused(Exception):
     """A verdict that cannot be right: not recorded."""
 
 
-def check(key, verdict, faults, note, rows=None, roof=None):
+def check(key, verdict, faults, note, rows=None, roof=None, doors=None):
     """The reason a verdict cannot stand, or None."""
     r = (rows if rows is not None else paths.rows()[0]).get(key)
     if not r:
@@ -125,6 +127,11 @@ def check(key, verdict, faults, note, rows=None, roof=None):
         from paint_label import FAMILY
         if roof != "body" and roof not in FAMILY:
             return f"--roof is body or a colour family: {' '.join(FAMILY)}"
+    if doors is not None:
+        if "body" not in faults:
+            return "--doors goes with the fault 'body': the door count is the body's"
+        if doors not in (2, 3, 4, 5):
+            return "--doors is the photo's door count as the car is sold: 2, 3 (a hatch's two and its tailgate), 4 or 5"
     if "photo" in faults:
         rv = paths.load(paths.f("photo_review.json")).get(key) or {}
         if not rv.get("replaced_at") or (r.get("built_at") and rv["replaced_at"] < r["built_at"]):
@@ -133,9 +140,9 @@ def check(key, verdict, faults, note, rows=None, roof=None):
     return None
 
 
-def verdict(key, v, faults, note, roof=None):
+def verdict(key, v, faults, note, roof=None, doors=None):
     rows = paths.rows()[0]
-    why = check(key, v, faults, note, rows, roof)
+    why = check(key, v, faults, note, rows, roof, doors)
     if why:
         raise Refused(why)
     g = gold.judge("build", key, v, faults)
@@ -167,6 +174,8 @@ def verdict(key, v, faults, note, roof=None):
         ask_roof(key, roof, "build review", r)
     else:
         take_back_roof(key, "build review", r)
+    if doors is not None:
+        ask_doors(key, doors, "build review", r)
     if "side" in faults or "colour" in faults:
         # the side and the colour are named by eye (view_label.py, paint_label.py):
         # one the build shows wrong is named again before it is rebuilt
@@ -204,6 +213,27 @@ def ask_roof(key, roof, by, row):
         return
     paths.queue_rebuild(key, "its roof in the body's colour, as the photo's" if roof == "body"
                         else f"its roof {roof}, as the photo's")
+
+
+def ask_doors(key, doors, by, row):
+    """The photo's door count, as the rebuild is to ask for it ("3 door": a
+    donor with as many, or a five-door's rear doors closed up). A build made
+    asking for that count already is the machine's limit, not built again."""
+    with paths.lock("doors_label"):
+        dl = paths.load(paths.f("doors_label.json"))
+        e = dl.get(key) or {}
+        built_asking = row.get("doors") == doors and e.get("doors") == doors
+        if not built_asking:
+            was = e.get("was") if e.get("asked_on") == row.get("built_at") else (e or None)
+            dl[key] = {"doors": doors, "by": by, "at": paths.now(), "asked_on": row.get("built_at"), "was": was}
+            paths.save(paths.f("doors_label.json"), dl)
+    if built_asking:
+        with paths.lock("doors_limits"):
+            lim = paths.load(paths.f("doors_limits.json"))
+            lim[key] = {"doors": doors, "built_at": row.get("built_at"), "by": by, "at": paths.now()}
+            paths.save(paths.f("doors_limits.json"), lim)
+        return
+    paths.queue_rebuild(key, f"its doors: {doors}, as the photo's")
 
 
 def take_back_roof(key, by, row):
@@ -289,10 +319,14 @@ def main():
         # (not "roof": a local of that name hid the roof() function above, and
         # every "roof KEY ..." call failed: the roof pass's first batch found it)
         roof_is = a[a.index("--roof") + 1] if "--roof" in a and a.index("--roof") + 1 < len(a) else None
-        a = [x for i, x in enumerate(a) if x != "--roof" and (i == 0 or a[i - 1] != "--roof")]
+        doors = a[a.index("--doors") + 1] if "--doors" in a and a.index("--doors") + 1 < len(a) else None
+        if doors is not None and not doors.isdigit():
+            print("REFUSED: --doors is a number: 2, 3, 4 or 5")
+            raise SystemExit(2)
+        a = [x for i, x in enumerate(a) if x not in ("--roof", "--doors") and (i == 0 or a[i - 1] not in ("--roof", "--doors"))]
         faults = [x.strip() for x in (a[3] if len(a) > 3 else "").split(",") if x.strip()]
         try:
-            verdict(a[1], a[2], faults, a[4] if len(a) > 4 else "", roof_is)
+            verdict(a[1], a[2], faults, a[4] if len(a) > 4 else "", roof_is, int(doors) if doors else None)
         except Refused as e:
             print("REFUSED:", e)
             raise SystemExit(2)

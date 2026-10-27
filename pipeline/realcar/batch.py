@@ -164,6 +164,19 @@ SPECIAL_VERSION = {"ford-focus-v1": r"\brs\b", "jaguar-xe-v1": r"project ?8|\bsv
 # and wings are its "wheel_rim" silver: left silver on every colour)
 PAINT_ALSO = {"renault-captur-v1": ["wheel_rim"]}
 
+# Catalogue models with trim in a livery's colour that the road car's is not
+# (the build review): made near-black, on the car and on every stand-in made
+# from it, by material name
+TRIM_BLACK = {
+    "peugeot-308-2026-pw1-v1": ["vehicle_mesh.004", "vehicle_tire.005"],   # a GT's blue splitter, skirts and
+                                                                           # wheel rings (on the 208 and XCeed)
+    "bmw-m2-2023-bm3-v1": ["body_red"],                                    # red lines on its splitter and sills
+}
+# and parts the road car has in its paint that the model has in carbon
+TRIM_PAINT = {
+    "land-rover-range-rover-sport-2018-v1": ["Carbon"],                    # an SVR's carbon bonnet and mirror caps
+}
+
 # Catalogue models whose paint is a livery, not the road car's (an art car's
 # print): built in a plain paint of the model when no colour is asked, as the
 # car itself and as a stand-in's donor (sRGB)
@@ -743,6 +756,9 @@ def one(target, item, args, out):
         spec["paint"] = list(PLAIN_PAINT[item.get("standin_donor") or item["assetId"]])
     if (item.get("standin_donor") or item["assetId"]) in PAINT_ALSO:
         spec["paint_also"] = PAINT_ALSO[item.get("standin_donor") or item["assetId"]]
+    for tab, k_ in ((TRIM_BLACK, "trim_black"), (TRIM_PAINT, "trim_paint")):
+        if (item.get("standin_donor") or item["assetId"]) in tab:
+            spec[k_] = tab[item.get("standin_donor") or item["assetId"]]
     if getattr(args, "drive", None):
         spec["drive"] = args.drive
     # the roof in the body's colour: a stand-in's roof is its donor's (the
@@ -830,7 +846,7 @@ def one(target, item, args, out):
                                               "glass_cleared", "measured", "bay_cleared_m2", "engine_pack", "cabin_pack", "paint_set",
                                               "manual", "wheel_strays", "wheel_tyres_from_body", "right_hand_drive",
                                               "powertrain", "sliding", "cracks_closed", "paint", "paint_side_m2",
-                                              "paint_by_name_over", "paint_over_plastic", "paint_over_inside", "panel_van", "normals_mended", "wheels_in_paint", "roof_in_paint", "roof_glass_dark")}
+                                              "paint_by_name_over", "paint_over_plastic", "paint_over_inside", "panel_van", "normals_mended", "smoothed", "wheels_in_paint", "roof_in_paint", "roof_glass_dark", "trim_black")}
     # validator, web copy and check sheet at the same time: the sheet is drawn
     # from the finished file, so it need not wait for the compression
     web = os.path.join(d, "web.glb")

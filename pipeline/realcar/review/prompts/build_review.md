@@ -14,7 +14,7 @@ Record each pair:
     build_review.py verdict KEY bad "fault, fault" "what is wrong, in a few words"
 
 Faults (comma separated, only these):
-- body: another body style or door count. An estate for a hatch, a hatch for a saloon, an SUV for a saloon, a 5-door for a 3-door (or the reverse: count the side doors in both pictures), a panel van for a pickup or for a people carrier with windows, a coupe for a roadster.
+- body: another body style or door count. An estate for a hatch, a hatch for a saloon, an SUV for a saloon, a 5-door for a 3-door (or the reverse: count the side doors in both pictures), a panel van for a pickup or for a people carrier with windows, a coupe for a roadster. When a STAND-IN has another door count than the photo, say the photo's with `--doors N`, the count the car is sold as (3 for a hatch with two side doors and a tailgate, 5 for four and a tailgate, 2 or 4 for a coupe or saloon): the car is rebuilt asking for it. Example: `build_review.py verdict KEY bad "body" "a 5-door Picanto for the 3-door Mii in the photo" --doors 3`. For an OWN MODEL beside a photo with another door count, replace the photo instead (see "The photo").
 - generation: an own model that is another generation than the photo (the build is what the catalogue has, so this usually means the photo is wrong: see "photo").
 - kind: a stand-in of another kind of vehicle (an MPV or a van for an SUV, a van for a pickup, a crossover for a saloon).
 - proportions: stretched, squashed, too tall or too low. A high-roof van standing in for a low-roof one IS proportions.
@@ -33,7 +33,7 @@ Mark ok only when an own model is clearly the same vehicle as the photo, or a st
 4. Missing a wheel or panel left in the donor's colour because the rest was right. Look at the whole car: bumpers, wheels, bonnet, roof. (A roof left black is "roof", not "broken".)
 5. Calling a colour wrong when it is the same family in other light. A silver build beside a photo of a silver car in shade is ok.
 6. Marking "side" when the noses point the same way but the photo is more side-on. Side means the opposite way, or the opposite end.
-7. Passing a 5-door stand-in for a 3-door car as a small difference (a Kia Picanto for the 3-door SEAT Mii, a 2012 Focus for the 3-door Escort). The door count is never a small difference: it is body.
+7. Passing a 5-door stand-in for a 3-door car as a small difference (a Kia Picanto for the 3-door SEAT Mii, a 2012 Focus for the 3-door Escort). The door count is never a small difference: it is body, with `--doors` (without it nothing asked the machine for three doors, and the same 5-door came back round after round).
 8. Leaving an own model beside a photo with another door count (a 3-door Fiesta build beside a 5-door Fiesta photo). Replace the photo with one of the build's door count (see "The photo").
 9. Passing a patch of body colour on a windscreen as "small paint bleed". It is broken: a checked answer that called such a build fine was wrong, and was taken back.
 10. Counting a 3-door's long door and fixed rear window as two doors (the 205). Count the door handles and the shut lines.

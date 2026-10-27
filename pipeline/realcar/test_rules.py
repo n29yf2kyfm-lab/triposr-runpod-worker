@@ -383,3 +383,66 @@ def test_a_low_roof_van_takes_its_height_out_of_a_high_roof_donors_roof():
     # a high-roof van asked, a tall one, or a car: the even stretch as before
     for t2 in (dict(t, high_roof=True), dict(t, height=2524), dict(t, body="mpv")):
         assert "roof_lowered" not in standin.plan(SPRINTER, t2)["log"]
+
+
+def _prims_glb(path, prims):
+    """A GLB of one node per primitive: (positions (n, 3), indices, normals or None, material)."""
+    blob, views, accs, meshes = b"", [], [], []
+    def put(arr, typ, ct):
+        nonlocal blob
+        views.append({"buffer": 0, "byteOffset": len(blob), "byteLength": arr.nbytes})
+        acc = {"bufferView": len(views) - 1, "componentType": ct, "count": len(arr) if typ == "VEC3" else arr.size, "type": typ}
+        if typ == "VEC3":
+            acc.update(min=arr.min(0).tolist(), max=arr.max(0).tolist())
+        accs.append(acc)
+        blob += arr.tobytes()
+        return len(accs) - 1
+    for P, I, N, mat in prims:
+        at = {"POSITION": put(np.asarray(P, np.float32), "VEC3", 5126)}
+        if N is not None:
+            at["NORMAL"] = put(np.asarray(N, np.float32), "VEC3", 5126)
+        meshes.append({"primitives": [{"attributes": at, "indices": put(np.asarray(I, np.uint32).ravel(), "SCALAR", 5125),
+                                       "material": mat}]})
+    j = {"asset": {"version": "2.0"}, "scene": 0, "scenes": [{"nodes": list(range(len(meshes)))}],
+         "nodes": [{"name": f"body_{i}", "mesh": i} for i in range(len(meshes))],
+         "materials": [{"name": "paint"}], "meshes": meshes, "buffers": [{"byteLength": len(blob)}],
+         "bufferViews": views, "accessors": accs}
+    js = json.dumps(j).encode()
+    js += b" " * (-len(js) % 4)
+    blob += b"\0" * (-len(blob) % 4)
+    with open(path, "wb") as fh:
+        fh.write(struct.pack("<III", 0x46546C67, 2, 12 + 8 + len(js) + 8 + len(blob)))
+        fh.write(struct.pack("<II", len(js), 0x4E4F534A) + js)
+        fh.write(struct.pack("<II", len(blob), 0x004E4942) + blob)
+
+
+def _flat(P, I):
+    """Triangles on corners of their own, each with its face's normal: a flat-shaded export."""
+    T = np.asarray(P, np.float64)[np.asarray(I)]
+    _, fn = finish.tri_area_normal(T)
+    return T.reshape(-1, 3), np.arange(T.size // 3).reshape(-1, 3), np.repeat(fn, 3, axis=0)
+
+
+def test_a_paint_exported_flat_is_smoothed_its_creases_kept(tmp_path):
+    # the 2022 Tucson's paint, every triangle flat: faceted and blotchy in the
+    # studio's light on it and three cars made from it (round 4)
+    from gltf import GLTF
+    th = np.linspace(0, np.pi / 2, 9)                    # a quarter-round panel, 8 facets around, 1 m long
+    ring = np.stack([np.cos(th), np.sin(th)], 1)
+    P = [[x, y, z] for z in (0.0, 1.0) for x, y in ring]
+    I = [[k, k + 1, 9 + k] for k in range(8)] + [[k + 1, 10 + k, 9 + k] for k in range(8)]
+    box = [[0, 0, 0], [1, 0, 0], [1, 1, 0], [0, 1, 0], [0, 0, 1], [1, 0, 1], [1, 1, 1], [0, 1, 1]]
+    bi = [[0, 2, 1], [0, 3, 2], [4, 5, 6], [4, 6, 7], [0, 1, 5], [0, 5, 4], [1, 2, 6], [1, 6, 5]]
+    Pr, Ir, Nr = _flat(P, I)
+    Pb, Ib, Nb = _flat([[x + 3, y, z] for x, y, z in box], bi)
+    smooth_n = Pr / np.linalg.norm(Pr * [1, 1, 0] + 1e-12, axis=1, keepdims=True) * [1, 1, 0]   # a model's own smooth normals
+    _prims_glb(str(tmp_path / "c.glb"), [(Pr, Ir, Nr, 0), (Pb, Ib, Nb, 0), (Pr + [0, 0, 3], Ir, smooth_n, 0)])
+    g = GLTF(str(tmp_path / "c.glb"))
+    assert finish.smooth_flat(g, {0}) == len(Ir) + len(Ib)       # the flat two; the smooth one left
+    prims = [m["primitives"][0] for m in g.j["meshes"]]
+    n_r = g.accessor(prims[0]["attributes"]["NORMAL"])
+    radial = Pr[:, :2] / np.linalg.norm(Pr[:, :2], axis=1, keepdims=True)
+    inner = (np.abs(np.arctan2(Pr[:, 1], Pr[:, 0])) > 0.05) & (np.abs(np.arctan2(Pr[:, 1], Pr[:, 0]) - np.pi / 2) > 0.05)
+    assert (np.einsum("ij,ij->i", n_r[inner][:, :2], radial[inner]) > 0.999).all()   # round: each corner the surface's
+    n_b = g.accessor(prims[1]["attributes"]["NORMAL"])
+    assert np.allclose(np.abs(n_b), np.abs(Nb), atol=1e-6)        # a box keeps its edges

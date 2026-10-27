@@ -88,6 +88,14 @@ def _roof_words(key):
     return ROOF_WORDS.get(r) or ([FAMILY[r], "roof"] if r in FAMILY else [])
 
 
+def _door_words(key):
+    """The photo's door count, named by the build review ("a 5-door stand-in
+    for the 3-door Mii"): asked of the machine ("3 door"), which picks a donor
+    with as many or closes a five-door's rear doors up."""
+    n = (paths.load(paths.f("doors_label.json")).get(key) or {}).get("doors")
+    return [str(n), "door"] if n else []
+
+
 def one(t):
     """One target's row, always: a fault in reading what the build left
     (a broken record, a failed copy) is that target's failure, never the
@@ -126,8 +134,11 @@ def _one(t):
         roof = _roof_words(t["key"]) if t["class"] in ("car", "van") else []
         if roof:
             row["roof"] = roof[0]
+        doors = _door_words(t["key"]) if t["class"] in ("car", "van") else []
+        if doors:
+            row["doors"] = int(doors[0])
         p = subprocess.run([sys.executable, "pipeline/realcar/glbmachine.py", "car", *t["request"].split(),
-                            *([paint] if paint else []), *roof],
+                            *doors, *([paint] if paint else []), *roof],
                            cwd=paths.REPO, env=env, capture_output=True, text=True, timeout=900)
         ans = json.loads(p.stdout) if p.stdout.strip() else {"error": (p.stderr or "no answer")[-300:]}
     except subprocess.TimeoutExpired:
