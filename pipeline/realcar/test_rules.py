@@ -208,11 +208,17 @@ def test_a_roof_sloping_to_the_tail_is_painted_to_its_end(tmp_path):
     assert [p["material"] for m in g.j["meshes"] for p in m["primitives"]][2] == 0
 
 
-def test_a_glass_roof_stays_dark(tmp_path):
+def test_a_flat_glass_roof_is_a_roof_and_a_raked_pane_is_not(tmp_path):
+    # the 207's dark panoramic roof on the DS3 made from it, whose photo's roof is white
     from gltf import GLTF
     _car_glb(str(tmp_path / "c.glb"), top_name="panoramic_glass_roof")
     g = GLTF(str(tmp_path / "c.glb"))
-    assert finish.roof_in_paint(g, g.j["materials"], 0, {0}, set()) is None
+    out = finish.roof_in_paint(g, g.j["materials"], 0, {0}, {1})
+    assert out and out["materials"] == ["panoramic_glass_roof"]
+    # glass raked like a windscreen (24 degrees and more): never painted
+    _car_glb(str(tmp_path / "d.glb"), top_name="windscreen_glass", slope=0.9)
+    g = GLTF(str(tmp_path / "d.glb"))
+    assert finish.roof_in_paint(g, g.j["materials"], 0, {0}, {1}) is None
 
 
 def test_a_white_roof_asked_is_painted_white_on_a_roof_in_the_body_paint(tmp_path):

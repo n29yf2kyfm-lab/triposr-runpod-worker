@@ -955,16 +955,18 @@ def _paint_one(pm, spec, j):
 ROOF_GLASS = re.compile(r"glass|vitre|window|sunroof|moonroof|pano|screen", re.I)
 
 
-def roof_in_paint(g, mats, paint, painted, glass, waist=0.78, band=0.06, up=0.5, share=0.05, colour=None):
+def roof_in_paint(g, mats, paint, painted, glass, waist=0.78, band=0.06, up=0.5, share=0.05, crumb=0.005, colour=None):
     """A roof in another colour than the body, left from a stand-in's donor
     (the bZ4X's and the 2008's black roofs on the white Fiat 600, Lexus RZ and
     Omoda 9 made from them, in the build review): the roof takes the paint.
-    The roof is each piece of the up-facing skin over WAIST of the car's
-    height that reaches its top (within BAND), whole, so a roof sloping to
-    the tail is painted to its end (the top tenth only left most of the
-    Captur's and the RAV4's black). Only pieces of at least SHARE of the
-    car's footprint, so roof rails and an aerial keep theirs; never glass, a
-    lamp or the cabin, and never a mesh used twice.
+    The roof is the up-facing skin over WAIST of the car's height, in pieces
+    that reach over the glasshouse, whole: a roof sloping to the tail is
+    painted to its end (the top tenth only left most of the Captur's black),
+    and one modelled in strips is painted strip by strip (the RAV4's, each
+    under 5% of the car). A glass roof lying flat on top (the 207's) is a
+    roof too; a windscreen never. It is done when it comes to SHARE of the
+    car's footprint or more; crumbs (under CRUMB: an aerial's) keep theirs,
+    as do lamps, the cabin and a mesh used twice.
     With COLOUR (sRGB), a roof of that colour on the body's paint (the
     Captur's and the Mini's white roofs): the paint's own top too, in a
     material of its own made from the paint's."""
@@ -992,14 +994,13 @@ def roof_in_paint(g, mats, paint, painted, glass, waist=0.78, band=0.06, up=0.5,
             a_, _ = tri_area_normal(P[I])
             body_t.append((P[I][:, :, 1].mean(1), a_))
             m = p.get("material")
-            if m is None or (colour is None and (m == paint or m in painted)) or m in glass \
-                    or uses[n["mesh"]] > 1 or p.get("targets"):
+            if m is None or (colour is None and (m == paint or m in painted)) or uses[n["mesh"]] > 1 or p.get("targets"):
                 continue
             name = mats[m].get("name", "")
-            if mats[m].get("alphaMode") == "BLEND" or LAMPISH.search(name) or INSIDE.search(name) \
-                    or ROOF_GLASS.search(name):
+            is_glass = m in glass or mats[m].get("alphaMode") == "BLEND" or bool(ROOF_GLASS.search(name))
+            if (LAMPISH.search(name) or INSIDE.search(name)) and not is_glass:
                 continue
-            cand.append((p, P, I))
+            cand.append((p, P, I, is_glass))
     if not cand or not wheel_y or not body_v:
         return None
     V = np.vstack(body_v)
@@ -1016,10 +1017,14 @@ def roof_in_paint(g, mats, paint, painted, glass, waist=0.78, band=0.06, up=0.5,
     foot = float((x1 - x0) * (z1 - z0))
     h = top - ground
     picks, Ts = [], []
-    for p, P, I in cand:
+    for p, P, I, is_glass in cand:
         T = P[I]
         _, nrm = tri_area_normal(T)
-        sel = np.where((nrm[:, 1] > up) & (T.mean(1)[:, 1] > ground + waist * h))[0]
+        cy = T.mean(1)[:, 1]
+        if is_glass:                              # a glass roof: flat, on top
+            sel = np.where((nrm[:, 1] > 0.92) & (cy > top - band * h))[0]
+        else:
+            sel = np.where((nrm[:, 1] > up) & (cy > ground + waist * h))[0]
         if len(sel):
             picks.append((p, I, sel))
             Ts.append(T[sel])
@@ -1027,12 +1032,30 @@ def roof_in_paint(g, mats, paint, painted, glass, waist=0.78, band=0.06, up=0.5,
         return None
     T = np.vstack(Ts)
     area, _ = tri_area_normal(T)
-    lab, _ = islands(T, weld=2e-4 * max(h, 1e-6) / 1.5)
+    # the pieces, each of one material: a trim touching the roof's edge is
+    # not the roof
+    tm = np.concatenate([np.full(len(sel), p.get("material")) for p, _, sel in picks])
+    lab = np.zeros(len(T), np.int64)
+    nxt = 0
+    for m_ in np.unique(tm):
+        w_ = np.where(tm == m_)[0]
+        l_, _ = islands(T[w_], weld=1e-3 * max(h, 1e-6) / 1.5)
+        lab[w_] = l_ + nxt
+        nxt += int(l_.max()) + 1
     hi = np.full(lab.max() + 1, -np.inf)
     np.maximum.at(hi, lab, T[:, :, 1].max(1))
-    keep_isl = (np.bincount(lab, weights=area) >= share * foot) & (hi >= top - band * h)
+    # pieces over the glasshouse (their top over 88% of the height) that cross
+    # the middle of the car, no crumbs: roof rails and window trims run along
+    # its sides (the RAV4's, its BlackChrome and WindowsTrims), a roof across
+    xc, xw = (x0 + x1) / 2, x1 - x0
+    lo_x = np.full(lab.max() + 1, np.inf)
+    hi_x = np.full(lab.max() + 1, -np.inf)
+    np.minimum.at(lo_x, lab, T[:, :, 0].min(1))
+    np.maximum.at(hi_x, lab, T[:, :, 0].max(1))
+    mid = (lo_x < xc - 0.1 * xw) & (hi_x > xc + 0.1 * xw)
+    keep_isl = (np.bincount(lab, weights=area) >= crumb * foot) & (hi >= ground + 0.88 * h) & mid
     keep = keep_isl[lab]
-    if not keep.any():
+    if area[keep].sum() < share * foot:
         return None
     to = paint
     if colour is not None:
