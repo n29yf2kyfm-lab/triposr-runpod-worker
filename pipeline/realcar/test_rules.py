@@ -446,3 +446,25 @@ def test_a_paint_exported_flat_is_smoothed_its_creases_kept(tmp_path):
     assert (np.einsum("ij,ij->i", n_r[inner][:, :2], radial[inner]) > 0.999).all()   # round: each corner the surface's
     n_b = g.accessor(prims[1]["attributes"]["NORMAL"])
     assert np.allclose(np.abs(n_b), np.abs(Nb), atol=1e-6)        # a box keeps its edges
+
+
+def test_a_paint_with_scrambled_normals_is_mended_a_sound_one_left(tmp_path):
+    # the Taigo's, the HR-V's, the Touareg's: a sixth to a quarter of their
+    # corners far off their surface, crumpled panels in the studio (round 4)
+    from gltf import GLTF
+    th = np.linspace(0, np.pi / 2, 17)
+    P = np.array([[np.cos(t), np.sin(t), z] for z in np.linspace(0, 1, 5) for t in th])
+    I = [[r * 17 + k, r * 17 + k + 1, (r + 1) * 17 + k] for r in range(4) for k in range(16)] + \
+        [[r * 17 + k + 1, (r + 1) * 17 + k + 1, (r + 1) * 17 + k] for r in range(4) for k in range(16)]
+    good = P * [1, 1, 0]
+    good /= np.linalg.norm(good, axis=1, keepdims=True)
+    rng = np.random.default_rng(1)
+    bad = good.copy()
+    pick = rng.random(len(P)) < 0.3
+    bad[pick] = rng.normal(size=(pick.sum(), 3))
+    bad /= np.linalg.norm(bad, axis=1, keepdims=True)
+    _prims_glb(str(tmp_path / "c.glb"), [(P, I, bad, 0), (P + [0, 0, 3], I, good, 0)])
+    g = GLTF(str(tmp_path / "c.glb"))
+    assert finish.smooth_flat(g, {0}) == len(I)                  # the scrambled one only
+    n = g.accessor(g.j["meshes"][0]["primitives"][0]["attributes"]["NORMAL"])
+    assert (np.einsum("ij,ij->i", n, good) > 0.99).all()

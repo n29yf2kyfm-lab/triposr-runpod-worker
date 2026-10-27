@@ -248,6 +248,10 @@ WRONG_CAR = {
     "mazda-3-2020-v1": "a broken file: its inner panels show through the paint in shards",
     "mercedes-benz-gls-2022-v1": "a broken file: its inner panels show through the paint in shards",
     "peugeot-307-2008-v1": "a broken file: its inner panels show through the paint in shards",
+    # its panels crumpled and blotched in any paint, after its normals were
+    # made again from its surface too: the surface itself (the build review,
+    # every round)
+    "honda-hr-v-v1": "a broken file: its side and rear panels crumpled and blotched in any paint",
 }
 
 
@@ -846,7 +850,7 @@ def one(target, item, args, out):
                                               "glass_cleared", "measured", "bay_cleared_m2", "engine_pack", "cabin_pack", "paint_set",
                                               "manual", "wheel_strays", "wheel_tyres_from_body", "right_hand_drive",
                                               "powertrain", "sliding", "cracks_closed", "paint", "paint_side_m2",
-                                              "paint_by_name_over", "paint_over_plastic", "paint_over_inside", "panel_van", "normals_mended", "smoothed", "wheels_in_paint", "roof_in_paint", "roof_glass_dark", "trim_black")}
+                                              "paint_by_name_over", "paint_over_plastic", "paint_over_inside", "panel_van", "paint_also", "normals_mended", "smoothed", "wheels_in_paint", "roof_in_paint", "roof_glass_dark", "trim_black")}
     # validator, web copy and check sheet at the same time: the sheet is drawn
     # from the finished file, so it need not wait for the compression
     web = os.path.join(d, "web.glb")

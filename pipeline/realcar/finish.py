@@ -1320,14 +1320,19 @@ def _corner_attrs(g, attrs, S):
     return out
 
 
-def smooth_flat(g, mat_ids, crease=35.0, flat_share=0.8):
+def smooth_flat(g, mat_ids, crease=35.0, flat_share=0.8, noisy_share=0.12):
     """A paint exported flat-shaded, every triangle on corners of its own with
     its face's normal (the 2022 Tucson's: faceted and blotchy in the studio's
-    light, on it and the Kuga, ix35 and Tiggo 7 made from it): its normals
-    made smooth, each corner the area-weighted mean of the faces meeting
-    there, except across a crease of CREASE degrees or more (a panel's edge, a
-    character line), which stays sharp. Only a piece that is FLAT_SHARE flat;
-    a model's own smooth shading is left as it is. Returns triangles smoothed."""
+    light, on it and the Kuga, ix35 and Tiggo 7 made from it), or with normals
+    scrambled (the Taigo's, the HR-V's, the Touareg's: a sixth to a quarter of
+    their corners 20 degrees or more off their surface, up to 90, crumpled
+    panels in the studio, on them and the Tayron made from the Touareg): its
+    normals made again from its surface, each corner the area-weighted mean of
+    the faces meeting there within CREASE degrees of its own (a panel's edge, a
+    character line stays sharp). Only a piece FLAT_SHARE flat or NOISY_SHARE
+    off; a model's own good shading is left as it is (a sound model's paint
+    has a twentieth of its corners off, at its sharper edges). Returns the
+    triangles mended."""
     j, n_tri, cos_c = g.j, 0, math.cos(math.radians(crease))
     for mesh in j["meshes"]:
         for p in mesh["primitives"]:
@@ -1340,12 +1345,6 @@ def smooth_flat(g, mat_ids, crease=35.0, flat_share=0.8):
             if not len(I):
                 continue
             area, fn = tri_area_normal(P[I])
-            if "NORMAL" in at:
-                N = g.accessor(at["NORMAL"]).astype(np.float64)[I]
-                N /= np.maximum(np.linalg.norm(N, axis=2, keepdims=True), 1e-12)
-                flat = np.einsum("kcj,kj->kc", N, fn).min(1) > 0.999
-                if area[flat].sum() < flat_share * max(area.sum(), 1e-12):
-                    continue
             span = float(np.ptp(P, axis=0).max()) or 1.0
             vid = np.unique(np.round(P / (1e-5 * span)).astype(np.int64), axis=0, return_inverse=True)[1].ravel()
             cv, ct = I.ravel(), np.repeat(np.arange(len(I)), 3)
@@ -1367,6 +1366,14 @@ def smooth_flat(g, mat_ids, crease=35.0, flat_share=0.8):
             np.add.at(acc, a_[near], ao[b_[near], None] * fo[b_[near]])
             sm = np.empty_like(acc)
             sm[o] = acc / np.maximum(np.linalg.norm(acc, axis=1, keepdims=True), 1e-12)
+            if "NORMAL" in at:
+                N = g.accessor(at["NORMAL"]).astype(np.float64)[I]
+                N /= np.maximum(np.linalg.norm(N, axis=2, keepdims=True), 1e-12)
+                flat = np.einsum("kcj,kj->kc", N, fn).min(1) > 0.999
+                off = np.einsum("ij,ij->i", N.reshape(-1, 3), sm) < math.cos(math.radians(20))
+                tot = max(area.sum(), 1e-12)
+                if area[flat].sum() < flat_share * tot and (area[ct] * off).sum() / 3 < noisy_share * tot:
+                    continue
             out = np.zeros_like(P)
             out[cv[::-1]] = sm[::-1]                   # a corner shared by several faces: its first face's
             at["NORMAL"] = g.add_accessor(out.astype(np.float32), target=34962)
@@ -2821,13 +2828,26 @@ def finish(src, spec, out, base_dir="."):
         # those panels take the paint, its own parts (the wheels) keep it
         also = set(spec.get("paint_also") or [])
         if also:
+            # its panels only, a tenth of a square metre or more: the same
+            # material's lamp surrounds, chrome grille bars, badge and steering
+            # wheel keep it (all of it painted, the Captur's grille, fog lamp
+            # surrounds and badge came out in the body's blue, in round 4)
             moved = 0
-            for n in j["nodes"]:
-                if "mesh" not in n or re.match(r"(?:SB_)?wheel", n.get("name") or ""):
+            Wm, _ = g.world_matrices()
+            for ni, n in enumerate(j["nodes"]):
+                if "mesh" not in n or re.match(r"(?:SB_)?(?:wheel|lamps?|light|cabin|steering|interior)", n.get("name") or "", re.I):
                     continue
-                for p in j["meshes"][n["mesh"]]["primitives"]:
-                    if p.get("material") is not None and mats[p["material"]].get("name") in also:
-                        p["material"] = paint
+                for p in list(j["meshes"][n["mesh"]]["primitives"]):
+                    if p.get("material") is None or mats[p["material"]].get("name") not in also or "indices" not in p:
+                        continue
+                    P = g.accessor(p["attributes"]["POSITION"]) @ Wm[ni][:3, :3].T + Wm[ni][:3, 3]
+                    I = g.accessor(p["indices"]).ravel().astype(np.int64)
+                    I = I[:len(I) // 3 * 3].reshape(-1, 3)
+                    a_, _ = tri_area_normal(P[I])
+                    isl, _ = islands(P[I], weld=1e-4)
+                    mine = np.where((np.bincount(isl, weights=a_) >= 0.1)[isl])[0]
+                    if len(mine):
+                        _move_tris(g, p, I, mine, paint)
                         moved += 1
             log["paint_also"] = {"materials": sorted(also), "pieces": moved}
         pm = mats[paint]
