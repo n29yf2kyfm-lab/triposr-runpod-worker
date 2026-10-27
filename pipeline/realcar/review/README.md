@@ -85,7 +85,9 @@ could call either way.
 | Pale and earthy paints built in a family's far darker or brighter paint (a pale sage as a Defender's green, a terracotta as crimson) | the sage, olive, copper and aqua families; the colour prompt asks for the family closest in lightness too |
 | The round-3 roof fix over-trimmed: a roof over hidden panoramic glass half black, a roof's sides left in the old colour, a cleared glass roof showing a white headliner | only raked or upright glass keeps paint off; sides above the side windows are painted; a flat glass roof is tinted dark; pinned in `test_rules.py` |
 | A stand-in with another door count than its photo (the Mii, Escort, Adam) asked for in a note no rebuild read | `verdict ... --doors N` names the photo's count, the rebuild asks for it; `check.py` stops a build that did not ask for its roof or doors (`asked`) |
-| Paint moved onto lamps, cabins and wheels sharing the paint's material | only panels of a shared trim material are painted (islands of 0.1 m² and up, never lamp, cabin or wheel nodes) |
+| Paint moved onto lamps, cabins and wheels sharing the paint's material | only panels of a shared trim material are painted (islands of 0.1 m² and up, never lamp, cabin or wheel nodes; the Captur's 0.3 m²: its fog lamp housings share its bumpers' silver) |
+| Silvers built so light they showed white (40 of 140: read in bright light, too light for the machine's metallic silver) | a silver's reading takes a silver's tone, its tint kept; pinned in `test_review.py` |
+| A roof answered "body" twice on the RAV4's stand-ins, kept as a limit: the machine left its side strips black (its side windows run up under the roof) | the sides are measured from the roof's edge there and its side strips painted; pinned in `test_rules.py` |
 
 The machine's own rules that went wrong are pinned by `pipeline/realcar/test_rules.py` ("black" is no paint name,
 "carpaint.198" no inside, "M Sport Touring" an estate, a wheel in the paint's colour never painted, people
