@@ -60,6 +60,10 @@ def run():
             found["paint"].append(f"{k}: no paint read")
         if not plab.get(k):
             found["colour"].append(k)
+        elif p.get("family") and p["family"] != plab[k]:
+            # the label changed and the paint was not read again (the Enyaq:
+            # named silver, its paint still the light green it was first named)
+            found["paint"].append(f"{k}: paint read for {p['family']}, its photo is named {plab[k]}")
         if r.get("paint") and p.get("hex") and r["paint"] != p["hex"]:
             found["built"].append(f"{k}: built {r['paint']}, its photo's paint is {p['hex']}")
         if not vlab.get(k):

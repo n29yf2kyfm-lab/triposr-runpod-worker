@@ -29,6 +29,9 @@ FAMILY = {
     "red": "#b3131c", "dark-red": "#6b1421", "orange": "#e2601d", "yellow": "#efc21a", "gold": "#b9973e",
     "green": "#2d7a34", "dark-green": "#1e3a2a", "light-green": "#a3b884", "brown": "#5b3e2b", "bronze": "#8b6b49",
     "beige": "#cbbb9b", "champagne": "#c2b190", "purple": "#5a2a6c", "lilac": "#a89bb9",
+    # the muted ones: a steel or slate blue, a sage or grey-green, a taupe
+    # (the build review's: each was painted its family's vivid colour)
+    "grey-blue": "#566c86", "grey-green": "#617863", "taupe": "#7d6a5b",
 }
 
 

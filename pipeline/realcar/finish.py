@@ -955,13 +955,16 @@ def _paint_one(pm, spec, j):
 ROOF_GLASS = re.compile(r"glass|vitre|window|sunroof|moonroof|pano|screen", re.I)
 
 
-def roof_in_paint(g, mats, paint, painted, glass, band=0.10, up=0.85, share=0.05, colour=None):
+def roof_in_paint(g, mats, paint, painted, glass, waist=0.78, band=0.06, up=0.5, share=0.05, colour=None):
     """A roof in another colour than the body, left from a stand-in's donor
     (the bZ4X's and the 2008's black roofs on the white Fiat 600, Lexus RZ and
-    Omoda 9 made from them, in the build review): the up-facing top of the
-    car, within BAND of its height, takes the paint. Only pieces of at least
-    SHARE of the car's footprint, so roof rails and an aerial keep theirs;
-    never glass, a lamp or the cabin, and never a mesh used twice.
+    Omoda 9 made from them, in the build review): the roof takes the paint.
+    The roof is each piece of the up-facing skin over WAIST of the car's
+    height that reaches its top (within BAND), whole, so a roof sloping to
+    the tail is painted to its end (the top tenth only left most of the
+    Captur's and the RAV4's black). Only pieces of at least SHARE of the
+    car's footprint, so roof rails and an aerial keep theirs; never glass, a
+    lamp or the cabin, and never a mesh used twice.
     With COLOUR (sRGB), a roof of that colour on the body's paint (the
     Captur's and the Mini's white roofs): the paint's own top too, in a
     material of its own made from the paint's."""
@@ -971,7 +974,7 @@ def roof_in_paint(g, mats, paint, painted, glass, band=0.10, up=0.85, share=0.05
     for n in j["nodes"]:
         if "mesh" in n:
             uses[n["mesh"]] = uses.get(n["mesh"], 0) + 1
-    wheel_y, body_v, cand = [], [], []
+    wheel_y, body_v, body_t, cand = [], [], [], []
     for ni, n in enumerate(j["nodes"]):
         if "mesh" not in n:
             continue
@@ -983,7 +986,11 @@ def roof_in_paint(g, mats, paint, painted, glass, band=0.10, up=0.85, share=0.05
             if is_wheel:
                 wheel_y.append(float(P[:, 1].min()))
                 continue
+            I = g.accessor(p["indices"]).ravel().astype(np.int64)
+            I = I[:len(I) // 3 * 3].reshape(-1, 3)
             body_v.append(P)
+            a_, _ = tri_area_normal(P[I])
+            body_t.append((P[I][:, :, 1].mean(1), a_))
             m = p.get("material")
             if m is None or (colour is None and (m == paint or m in painted)) or m in glass \
                     or uses[n["mesh"]] > 1 or p.get("targets"):
@@ -992,12 +999,18 @@ def roof_in_paint(g, mats, paint, painted, glass, band=0.10, up=0.85, share=0.05
             if mats[m].get("alphaMode") == "BLEND" or LAMPISH.search(name) or INSIDE.search(name) \
                     or ROOF_GLASS.search(name):
                 continue
-            I = g.accessor(p["indices"]).ravel().astype(np.int64)
-            cand.append((p, P, I[:len(I) // 3 * 3].reshape(-1, 3)))
+            cand.append((p, P, I))
     if not cand or not wheel_y or not body_v:
         return None
     V = np.vstack(body_v)
-    ground, top = min(wheel_y), float(np.percentile(V[:, 1], 99.5))
+    # the top by the skin's area, not its corners: an aerial's thousand
+    # corners stood over the Captur's roof, and no roof reached that top
+    ty = np.concatenate([t for t, _ in body_t])
+    ta = np.concatenate([a for _, a in body_t])
+    o = np.argsort(ty)
+    cum = np.cumsum(ta[o])
+    ground = min(wheel_y)
+    top = float(ty[o][min(np.searchsorted(cum, 0.998 * cum[-1]), len(o) - 1)]) if cum[-1] > 0 else float(V[:, 1].max())
     x0, x1 = np.percentile(V[:, 0], [0.5, 99.5])
     z0, z1 = np.percentile(V[:, 2], [0.5, 99.5])
     foot = float((x1 - x0) * (z1 - z0))
@@ -1006,7 +1019,7 @@ def roof_in_paint(g, mats, paint, painted, glass, band=0.10, up=0.85, share=0.05
     for p, P, I in cand:
         T = P[I]
         _, nrm = tri_area_normal(T)
-        sel = np.where((nrm[:, 1] > up) & (T.mean(1)[:, 1] > top - band * h))[0]
+        sel = np.where((nrm[:, 1] > up) & (T.mean(1)[:, 1] > ground + waist * h))[0]
         if len(sel):
             picks.append((p, I, sel))
             Ts.append(T[sel])
@@ -1015,7 +1028,9 @@ def roof_in_paint(g, mats, paint, painted, glass, band=0.10, up=0.85, share=0.05
     T = np.vstack(Ts)
     area, _ = tri_area_normal(T)
     lab, _ = islands(T, weld=2e-4 * max(h, 1e-6) / 1.5)
-    keep_isl = np.bincount(lab, weights=area) >= share * foot
+    hi = np.full(lab.max() + 1, -np.inf)
+    np.maximum.at(hi, lab, T[:, :, 1].max(1))
+    keep_isl = (np.bincount(lab, weights=area) >= share * foot) & (hi >= top - band * h)
     keep = keep_isl[lab]
     if not keep.any():
         return None

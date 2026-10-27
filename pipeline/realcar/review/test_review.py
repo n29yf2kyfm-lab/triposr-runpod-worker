@@ -282,6 +282,13 @@ def test_the_gate_finds_each_stale_record(run):
     assert any(x.startswith("car-fiesta: verdict on an older photo") for x in found["verdict"])
 
 
+def test_the_gate_finds_a_paint_read_for_another_colour_than_the_label(run):
+    paths.save(str(run / "paint_label.json"), {"car-fiesta": "silver"})
+    paths.save(str(run / "photo_paint.json"), {"car-fiesta": {"hex": "#a3b884", "family": "light-green",
+                                                              "photo_sha": paths.sha(paths.photo("car-fiesta"))}})
+    assert any("named silver" in x for x in check.run()["paint"])
+
+
 def test_the_gate_is_clear_when_all_is_current(run):
     paint_label.label("car-fiesta=white car-note=white")
     view_label.label("car-fiesta=left car-note=left")

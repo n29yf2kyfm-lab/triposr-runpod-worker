@@ -144,13 +144,13 @@ def test_a_mesh_shaded_its_own_way_all_over_is_left(tmp_path):
 
 # ── a stand-in's roof in its donor's colour ──────────────────────────────
 
-def _car_glb(path, top_name="2020_Peugeot_e-2008_black", roof_mat=1):
+def _car_glb(path, top_name="2020_Peugeot_e-2008_black", roof_mat=1, slope=0.0):
     """A box car 4 m long, 1.8 m wide, 1.52 m high: painted sides, a roof in
     another material, a thin roof rail in it too, and a wheel."""
     from gltf import GLTF  # noqa: F401
     def quad(x0, x1, y0, y1, z0, z1, axis):
         if axis == "y":
-            P = [[x0, y0, z0], [x1, y0, z0], [x1, y0, z1], [x0, y0, z1]]
+            P = [[x0, y0 - slope, z0], [x1, y0 - slope, z0], [x1, y0, z1], [x0, y0, z1]]
             I = [0, 2, 1, 0, 3, 2]                          # facing up (+y)
         else:
             P = [[x0, y0, z0], [x0, y1, z0], [x0, y1, z1], [x0, y0, z1]]
@@ -196,6 +196,16 @@ def test_a_stand_ins_black_roof_takes_the_paint_and_its_rails_keep_theirs(tmp_pa
     assert out and out["triangles"] == 2 and out["materials"] == ["2020_Peugeot_e-2008_black"]
     mats = [p["material"] for m in g.j["meshes"] for p in m["primitives"]]
     assert mats == [0, 0, 0, 1, 2]                        # the roof painted, the rail and the wheel left
+
+
+def test_a_roof_sloping_to_the_tail_is_painted_to_its_end(tmp_path):
+    # the Captur's and the RAV4's black roofs: the top tenth of the car only took the front of them
+    from gltf import GLTF
+    _car_glb(str(tmp_path / "c.glb"), slope=0.25)
+    g = GLTF(str(tmp_path / "c.glb"))
+    out = finish.roof_in_paint(g, g.j["materials"], 0, {0}, set())
+    assert out and out["triangles"] == 2
+    assert [p["material"] for m in g.j["meshes"] for p in m["primitives"]][2] == 0
 
 
 def test_a_glass_roof_stays_dark(tmp_path):
