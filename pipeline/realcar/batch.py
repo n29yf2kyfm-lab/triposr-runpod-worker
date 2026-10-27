@@ -149,6 +149,11 @@ SPECIAL_VERSION = {"ford-focus-v1": r"\brs\b", "jaguar-xe-v1": r"project ?8|\bsv
                    "ford-mustang-v1": r"shelby|gt ?500",       # its rear wing and vented bonnet
                    "porsche-911-2019-pw2-v4": r"gt ?3"}        # untitled: a GT3 RS, wing and all
 
+# Catalogue models that use another material for body panels as well as its
+# own part: on the body (not the wheels) it is the paint (the Captur's bumper
+# and wings are its "wheel_rim" silver: left silver on every colour)
+PAINT_ALSO = {"renault-captur-v1": ["wheel_rim"]}
+
 # Catalogue models whose paint is a livery, not the road car's (an art car's
 # print): built in a plain paint of the model when no colour is asked, as the
 # car itself and as a stand-in's donor (sRGB)
@@ -726,6 +731,8 @@ def one(target, item, args, out):
         spec["paint"] = list(args.paint)
     elif (item.get("standin_donor") or item["assetId"]) in PLAIN_PAINT:
         spec["paint"] = list(PLAIN_PAINT[item.get("standin_donor") or item["assetId"]])
+    if (item.get("standin_donor") or item["assetId"]) in PAINT_ALSO:
+        spec["paint_also"] = PAINT_ALSO[item.get("standin_donor") or item["assetId"]]
     if getattr(args, "drive", None):
         spec["drive"] = args.drive
     # an electric car: no engine pack (finish.py keeps its own front end)

@@ -859,17 +859,21 @@ def _lin_to_lab(c):
     return 116 * f(Y) - 16, 500 * (f(X) - f(Y)), 200 * (f(Y) - f(Z))
 
 
-def same_paint(mats, paint, glass):
+TRIMMISH = re.compile(r"chrome|rim\b|wheel|tyre|tire|glass|mirror|metal|steel|alu|grill|trim|plast|rubber|black|carbon|"
+                      r"interior|dash|seat|floor|under|chassis|engine|exhaust|brake|calip|light|lamp|lens|logo|badge|plate", re.I)
+
+
+def same_paint(mats, paint, glass, area=None):
     """Materials of the paint's own colour under other names: solid, not a
-    lamp, badge or engine-bay part, the same clear hue (a coloured paint only:
-    a white or black paint's colour is every trim's too)."""
+    lamp, badge or engine-bay part, the same clear hue. A white or silver
+    paint's colour is many a trim's too: for one, only a material of its very
+    tone, named as no trim, covering a panel's area (the Captur's front,
+    "door_lf_ok.3", left silver on a blue car)."""
     pbr = mats[paint].get("pbrMetallicRoughness") or {}
     if "baseColorTexture" in pbr:
         return set()
     L0, a0, b0 = _lin_to_lab(pbr.get("baseColorFactor") or [1, 1, 1])
     C0 = math.hypot(a0, b0)
-    if C0 < 20:
-        return set()
     h0 = math.degrees(math.atan2(b0, a0))
     out = set()
     for i, m in enumerate(mats):
@@ -878,7 +882,11 @@ def same_paint(mats, paint, glass):
             continue
         L, a, b = _lin_to_lab(p.get("baseColorFactor") or [1, 1, 1])
         C, h = math.hypot(a, b), math.degrees(math.atan2(b, a))
-        if C > 0.6 * C0 and abs((h - h0 + 180) % 360 - 180) < 15 and abs(L - L0) < 25:
+        if C0 >= 20:
+            if C > 0.6 * C0 and abs((h - h0 + 180) % 360 - 180) < 15 and abs(L - L0) < 25:
+                out.add(i)
+        elif L0 > 55 and C < 6 and abs(L - L0) < 6 and not TRIMMISH.search(m.get("name", "")) \
+                and area is not None and area.get(i, 0) >= 0.15:
             out.add(i)
     return out
 
@@ -2245,9 +2253,26 @@ def finish(src, spec, out, base_dir="."):
         # "carpaint", the Octavia's two "body_paint"), or names its bonnet and
         # roof's paint otherwise in the same colour (the Octavia's red
         # "material"); left alone, they kept the model's colour beside the new one
-        coats = sorted(set(paint_ids) | same_paint(mats, paint, glass))
+        mat_m2 = {}
+        for r in recs:
+            if r["mat"] is not None and not r["rig"].startswith("wheel_"):
+                mat_m2[r["mat"]] = mat_m2.get(r["mat"], 0) + float(tri_area_normal(tris(r))[0].sum()) * s * s
+        coats = sorted(set(paint_ids) | same_paint(mats, paint, glass, mat_m2))
         for i in coats:
             _paint_one(mats[i], spec, j)
+        # a material the model also uses for body panels (batch.PAINT_ALSO):
+        # those panels take the paint, its own parts (the wheels) keep it
+        also = set(spec.get("paint_also") or [])
+        if also:
+            moved = 0
+            for n in j["nodes"]:
+                if "mesh" not in n or re.match(r"(?:SB_)?wheel", n.get("name") or ""):
+                    continue
+                for p in j["meshes"][n["mesh"]]["primitives"]:
+                    if p.get("material") is not None and mats[p["material"]].get("name") in also:
+                        p["material"] = paint
+                        moved += 1
+            log["paint_also"] = {"materials": sorted(also), "pieces": moved}
         pm = mats[paint]
         metallic = pm["pbrMetallicRoughness"]["metallicFactor"]
         log["paint_set"] = {"material": pm.get("name"), "srgb": list(spec["paint"][:3]), "metallic": float(metallic),
