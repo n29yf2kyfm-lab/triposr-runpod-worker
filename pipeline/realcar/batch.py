@@ -163,13 +163,21 @@ SPECIAL_VERSION = {"ford-focus-v1": r"\brs\b", "jaguar-xe-v1": r"project ?8|\bsv
 # own part: on the body (not the wheels) it is the paint (the Captur's bumper
 # and wings are its "wheel_rim" silver: left silver on every colour)
 PAINT_ALSO = {"renault-captur-v1": ["wheel_rim"]}
+# the smallest piece of such a material painted (m2): the Captur's fog lamp
+# housings (0.1-0.12) are in its bumpers' silver too, and came out blue
+PAINT_ALSO_MIN = {"renault-captur-v1": 0.3}
 
 # Catalogue models with trim in a livery's colour that the road car's is not
 # (the build review): made near-black, on the car and on every stand-in made
 # from it, by material name
 TRIM_BLACK = {
-    "peugeot-308-2026-pw1-v1": ["vehicle_mesh.004", "vehicle_tire.005"],   # a GT's blue splitter, skirts and
+    "peugeot-308-2026-pw1-v1": ["vehicle_mesh.004", "vehicle_tire.005",    # a GT's blue splitter, skirts and
                                                                            # wheel rings (on the 208 and XCeed)
+                                "vehicle_interior2_009-material", "vehicle_interior2_002-material",
+                                "vehicle_detail2", "vehicle_paint1_001-material", "vehicle_mesh_001-material"],
+                                                                           # and its light-blue seats, blue dash
+                                                                           # and steering wheel, seen through glass
+    "kia-picanto-w6-v1": ["2021_Kia_Picanto_GT-Line_RedTrims"],            # a GT-Line's red sill and bumper lines
     "bmw-m2-2023-bm3-v1": ["body_red"],                                    # red lines on its splitter and sills
 }
 # and parts the road car has in its paint that the model has in carbon
@@ -760,6 +768,7 @@ def one(target, item, args, out):
         spec["paint"] = list(PLAIN_PAINT[item.get("standin_donor") or item["assetId"]])
     if (item.get("standin_donor") or item["assetId"]) in PAINT_ALSO:
         spec["paint_also"] = PAINT_ALSO[item.get("standin_donor") or item["assetId"]]
+        spec["paint_also_min"] = PAINT_ALSO_MIN.get(item.get("standin_donor") or item["assetId"], 0.1)
     for tab, k_ in ((TRIM_BLACK, "trim_black"), (TRIM_PAINT, "trim_paint")):
         if (item.get("standin_donor") or item["assetId"]) in tab:
             spec[k_] = tab[item.get("standin_donor") or item["assetId"]]

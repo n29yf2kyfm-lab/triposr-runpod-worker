@@ -2872,7 +2872,7 @@ def finish(src, spec, out, base_dir="."):
                     I = I[:len(I) // 3 * 3].reshape(-1, 3)
                     a_, _ = tri_area_normal(P[I])
                     isl, _ = islands(P[I], weld=1e-4)
-                    mine = np.where((np.bincount(isl, weights=a_) >= 0.1)[isl])[0]
+                    mine = np.where((np.bincount(isl, weights=a_) >= spec.get("paint_also_min", 0.1))[isl])[0]
                     if len(mine):
                         _move_tris(g, p, I, mine, paint)
                         moved += 1
