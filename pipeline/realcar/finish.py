@@ -408,7 +408,14 @@ def is_clear_glass(mat):
     c = mat.get("pbrMetallicRoughness", {}).get("baseColorFactor", [1, 1, 1, 1])
     # see-through (alpha well under 1) and colourless: windows, headlamp
     # lenses; not a blended decal or stitching texture at full alpha
-    return c[3] < 0.7 and max(c[:3]) - min(c[:3]) < 0.08
+    if c[3] < 0.7 and max(c[:3]) - min(c[:3]) < 0.08:
+        return True
+    # or a window's factory tint, green to cyan (the 206's: its windows and
+    # lamp glass built green); never a lens's red, amber or blue, nor a
+    # layer drawn unseen (alpha near 0)
+    import colorsys
+    hue = colorsys.rgb_to_hsv(*[min(max(float(x), 0.0), 1.0) for x in c[:3]])[0] * 360
+    return 0.2 <= c[3] < 0.7 and 75 <= hue <= 185 and not LAMPISH.search(mat.get("name") or "")
 
 
 def _normal_maps(m):

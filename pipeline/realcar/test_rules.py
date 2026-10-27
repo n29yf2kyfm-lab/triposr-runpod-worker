@@ -489,6 +489,19 @@ def test_a_paint_with_scrambled_normals_is_mended_a_sound_one_left(tmp_path):
     assert (np.einsum("ij,ij->i", n, good) > 0.99).all()
 
 
+def test_a_windows_green_tint_is_glass_a_lamps_red_and_a_hidden_layer_are_not():
+    # round 5: the 206's windows, a green-tinted see-through material, were
+    # not taken for glass and were built green
+    def m(name, c, mode="BLEND"):
+        return {"name": name, "alphaMode": mode, "pbrMetallicRoughness": {"baseColorFactor": c}}
+    assert finish.is_clear_glass(m("Matte__82000000__env_5_spec_trans", [0.377, 0.96, 0.658, 0.586]))
+    assert finish.is_clear_glass(m("glass", [0.2, 0.2, 0.2, 0.4]))
+    assert not finish.is_clear_glass(m("Matte__FFB50000", [0.8, 0.05, 0.0, 0.5]))       # a red lens
+    assert not finish.is_clear_glass(m("Matte__FF20A3FF", [0.034, 0.168, 0.262, 0.0]))  # drawn unseen
+    assert not finish.is_clear_glass(m("headlight_lens_green", [0.3, 0.9, 0.5, 0.5]))
+    assert not finish.is_clear_glass(m("tint", [0.377, 0.96, 0.658, 0.586], "OPAQUE"))
+
+
 def test_a_tyre_left_white_is_rubber_a_whitewall_stays():
     # the Macan's "Pneus" at 0.8 grey and no texture: white rings and arch
     # crescents on the Eletre and Urus built from it (round 4)
