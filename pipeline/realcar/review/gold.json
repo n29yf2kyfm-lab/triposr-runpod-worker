@@ -1,0 +1,332 @@
+{
+ "build": {
+  "car-byd-seal": {
+   "verdict": "bad",
+   "faults": [
+    "body",
+    "kind"
+   ],
+   "built_at": "2026-10-27 10:58:10",
+   "why": "a Hyundai Santa Fe SUV stands in for the BYD Seal saloon in the photo",
+   "checked": "2026-10-27 12:11:08"
+  },
+  "van-suzuki-carry": {
+   "verdict": "bad",
+   "faults": [
+    "body",
+    "kind"
+   ],
+   "built_at": "2026-10-27 10:58:55",
+   "why": "an NV200 panel van stands in for the flat-deck Carry pickup in the photo",
+   "checked": "2026-10-27 12:11:08"
+  },
+  "van-renault-master": {
+   "verdict": "bad",
+   "faults": [
+    "broken"
+   ],
+   "built_at": "2026-10-27 10:58:54",
+   "why": "its side panels are crumpled and blotched, the photo's are smooth",
+   "checked": "2026-10-27 12:11:08"
+  },
+  "car-nissan-note": {
+   "verdict": "bad",
+   "faults": [
+    "body"
+   ],
+   "built_at": "2026-10-27 09:08:15",
+   "why": "a boxy 2010 Nissan Cube stands in for the sleek Note hatchback in the photo",
+   "checked": "2026-10-27 12:11:08"
+  },
+  "car-mini-paceman": {
+   "verdict": "bad",
+   "faults": [
+    "body"
+   ],
+   "built_at": "2026-10-27 10:58:29",
+   "why": "a 5-door BMW X1 stands in for the 3-door Paceman coupe-crossover",
+   "checked": "2026-10-27 12:11:08"
+  },
+  "car-volvo-xc70": {
+   "verdict": "bad",
+   "faults": [
+    "body",
+    "kind"
+   ],
+   "built_at": "2026-10-27 10:58:47",
+   "why": "a Toyota bZ4X electric crossover stands in for the XC70 raised estate",
+   "checked": "2026-10-27 12:11:08"
+  },
+  "car-jeep-wrangler": {
+   "verdict": "bad",
+   "faults": [
+    "side"
+   ],
+   "built_at": "2026-10-27 10:58:20",
+   "why": "the build is shown from behind, the photo from the front",
+   "checked": "2026-10-27 12:11:08"
+  },
+  "car-suzuki-baleno": {
+   "verdict": "bad",
+   "faults": [
+    "body"
+   ],
+   "built_at": "2026-10-27 10:58:39",
+   "why": "a Fiat Punto hatchback stands in for the Baleno saloon in the photo",
+   "checked": "2026-10-27 12:11:08"
+  },
+  "car-ford-fiesta": {
+   "verdict": "ok",
+   "faults": [],
+   "built_at": "2026-10-27 09:08:11",
+   "why": "the same vehicle as the photo, its colour, nothing broken",
+   "checked": "2026-10-27 12:11:08"
+  },
+  "car-nissan-qashqai": {
+   "verdict": "ok",
+   "faults": [],
+   "built_at": "2026-10-27 09:08:15",
+   "why": "the same vehicle as the photo, its colour, nothing broken",
+   "checked": "2026-10-27 12:11:08"
+  },
+  "car-bmw-3-series": {
+   "verdict": "ok",
+   "faults": [],
+   "built_at": "2026-10-27 09:08:09",
+   "why": "the same vehicle as the photo, its colour, nothing broken",
+   "checked": "2026-10-27 12:11:08"
+  },
+  "car-mercedes-v-class": {
+   "verdict": "ok",
+   "faults": [],
+   "built_at": "2026-10-27 10:58:27",
+   "why": "the same vehicle as the photo, its colour, nothing broken",
+   "checked": "2026-10-27 12:11:08"
+  },
+  "car-ford-focus": {
+   "verdict": "ok",
+   "faults": [],
+   "built_at": "2026-10-27 09:08:11",
+   "why": "the same vehicle as the photo, its colour, nothing broken",
+   "checked": "2026-10-27 12:11:08"
+  },
+  "car-volkswagen-polo": {
+   "verdict": "ok",
+   "faults": [],
+   "built_at": "2026-10-27 09:08:19",
+   "why": "the same vehicle as the photo, its colour, nothing broken",
+   "checked": "2026-10-27 12:11:08"
+  },
+  "car-maserati-levante": {
+   "verdict": "ok",
+   "faults": [],
+   "built_at": "2026-10-27 10:58:23",
+   "why": "the same vehicle as the photo, its colour, nothing broken",
+   "checked": "2026-10-27 12:11:08"
+  },
+  "car-toyota-yaris": {
+   "verdict": "ok",
+   "faults": [],
+   "built_at": "2026-10-27 09:08:18",
+   "why": "the same vehicle as the photo, its colour, nothing broken",
+   "checked": "2026-10-27 12:11:08"
+  },
+  "car-peugeot-205": {
+   "verdict": "ok",
+   "faults": [],
+   "built_at": "2026-10-27 10:58:31",
+   "why": "the same vehicle as the photo, its colour, nothing broken",
+   "checked": "2026-10-27 12:11:08"
+  }
+ },
+ "side": {
+  "car-peugeot-205": {
+   "answer": "left",
+   "photo_sha": "f1fd4ea672f825c9",
+   "why": "its front is towards the picture's left edge",
+   "checked": "2026-10-27 12:11:08"
+  },
+  "car-bmw-i7": {
+   "answer": "right",
+   "photo_sha": "e1683f957d420212",
+   "why": "its front is towards the picture's right edge",
+   "checked": "2026-10-27 12:11:08"
+  },
+  "car-ford-transit": {
+   "answer": "right",
+   "photo_sha": "273be29aa6ea9b03",
+   "why": "its front is towards the picture's right edge",
+   "checked": "2026-10-27 12:11:08"
+  },
+  "van-ford-transit": {
+   "answer": "right",
+   "photo_sha": "273be29aa6ea9b03",
+   "why": "its front is towards the picture's right edge",
+   "checked": "2026-10-27 12:11:08"
+  },
+  "car-mg-a": {
+   "answer": "left",
+   "photo_sha": "77bad37376e98b96",
+   "why": "its front is towards the picture's left edge",
+   "checked": "2026-10-27 12:11:08"
+  },
+  "van-citroen-berlingo": {
+   "answer": "right",
+   "photo_sha": "e9ae24aeca3284da",
+   "why": "its front is towards the picture's right edge",
+   "checked": "2026-10-27 12:11:08"
+  },
+  "van-citroen-dispatch": {
+   "answer": "left",
+   "photo_sha": "6c585ecd884b64c1",
+   "why": "its front is towards the picture's left edge",
+   "checked": "2026-10-27 12:11:09"
+  },
+  "van-volkswagen-amarok": {
+   "answer": "right",
+   "photo_sha": "c87b95ca1f25ba2a",
+   "why": "its front is towards the picture's right edge",
+   "checked": "2026-10-27 12:11:09"
+  },
+  "car-nissan-juke": {
+   "answer": "right",
+   "photo_sha": "dd5beea9855fe98e",
+   "why": "its front is towards the picture's right edge",
+   "checked": "2026-10-27 12:11:09"
+  },
+  "car-mercedes-a-class": {
+   "answer": "left",
+   "photo_sha": "64caa32bb6c7f16c",
+   "why": "its front is towards the picture's left edge",
+   "checked": "2026-10-27 12:11:09"
+  },
+  "car-toyota-aygo": {
+   "answer": "left",
+   "photo_sha": "6001bf4c690c7daa",
+   "why": "its front is towards the picture's left edge",
+   "checked": "2026-10-27 12:11:09"
+  },
+  "car-audi-a1": {
+   "answer": "right",
+   "photo_sha": "d4fa075776ba7add",
+   "why": "its front is towards the picture's right edge",
+   "checked": "2026-10-27 12:11:09"
+  },
+  "car-skoda-fabia": {
+   "answer": "left",
+   "photo_sha": "b4eddb51125600bb",
+   "why": "its front is towards the picture's left edge",
+   "checked": "2026-10-27 12:11:09"
+  }
+ },
+ "paint": {
+  "car-ford-focus": {
+   "answer": "white",
+   "photo_sha": "9cf8ae7b15f84c0e",
+   "why": "its body is white in daylight",
+   "checked": "2026-10-27 12:11:09"
+  },
+  "car-volkswagen-polo": {
+   "answer": "red",
+   "photo_sha": "348d8b899d987079",
+   "why": "its body is red in daylight",
+   "checked": "2026-10-27 12:11:09"
+  },
+  "car-maserati-levante": {
+   "answer": "white",
+   "photo_sha": "4093b44e5fc43158",
+   "why": "its body is white in daylight",
+   "checked": "2026-10-27 12:11:09"
+  },
+  "car-peugeot-205": {
+   "answer": "red",
+   "photo_sha": "f1fd4ea672f825c9",
+   "why": "its body is red in daylight",
+   "checked": "2026-10-27 12:11:09"
+  },
+  "car-ford-fiesta": {
+   "answer": "silver",
+   "photo_sha": "0c2e8e4c5d750192",
+   "why": "its body is silver in daylight",
+   "checked": "2026-10-27 12:11:09"
+  },
+  "car-nissan-qashqai": {
+   "answer": "white",
+   "photo_sha": "a58bbb76a9e0d5db",
+   "why": "its body is white in daylight",
+   "checked": "2026-10-27 12:11:09"
+  },
+  "car-bmw-3-series": {
+   "answer": "silver",
+   "photo_sha": "000dd694f7273204",
+   "why": "its body is silver in daylight",
+   "checked": "2026-10-27 12:11:09"
+  },
+  "car-mercedes-v-class": {
+   "answer": "silver",
+   "photo_sha": "002f1cbf6014a148",
+   "why": "its body is silver in daylight",
+   "checked": "2026-10-27 12:11:09"
+  },
+  "car-nissan-juke": {
+   "answer": "red",
+   "photo_sha": "dd5beea9855fe98e",
+   "why": "its body is red in daylight",
+   "checked": "2026-10-27 12:11:09"
+  },
+  "car-mercedes-a-class": {
+   "answer": "white",
+   "photo_sha": "64caa32bb6c7f16c",
+   "why": "its body is white in daylight",
+   "checked": "2026-10-27 12:11:09"
+  },
+  "car-toyota-aygo": {
+   "answer": "red",
+   "photo_sha": "6001bf4c690c7daa",
+   "why": "its body is red in daylight",
+   "checked": "2026-10-27 12:11:09"
+  },
+  "car-hyundai-i10": {
+   "answer": "white",
+   "photo_sha": "ec7302f786e904e0",
+   "why": "its body is white in daylight",
+   "checked": "2026-10-27 12:11:09"
+  },
+  "car-land-rover-discovery": {
+   "answer": "black",
+   "photo_sha": "ebb5665545b32fd9",
+   "why": "its body is black in daylight",
+   "checked": "2026-10-27 12:11:09"
+  },
+  "car-skoda-fabia": {
+   "answer": "silver",
+   "photo_sha": "b4eddb51125600bb",
+   "why": "its body is silver in daylight",
+   "checked": "2026-10-27 12:11:09"
+  },
+  "car-bmw-i7": {
+   "answer": "white",
+   "photo_sha": "e1683f957d420212",
+   "why": "its body is white in daylight",
+   "checked": "2026-10-27 12:11:09"
+  },
+  "car-ford-tourneo": {
+   "answer": "red",
+   "photo_sha": "44df0b14b07dc2ee",
+   "why": "its body is red in daylight",
+   "checked": "2026-10-27 12:11:09"
+  },
+  "van-ford-transit-custom": {
+   "answer": "white",
+   "photo_sha": "67ada3156c141271",
+   "why": "its body is white in daylight",
+   "checked": "2026-10-27 12:11:09"
+  },
+  "car-citroen-c3": {
+   "answer": "white",
+   "photo_sha": "a0a792003a57db29",
+   "why": "its body is white in daylight",
+   "checked": "2026-10-27 12:11:09"
+  }
+ }
+}

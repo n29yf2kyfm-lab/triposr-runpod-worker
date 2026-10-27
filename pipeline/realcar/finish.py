@@ -859,6 +859,10 @@ def _lin_to_lab(c):
     return 116 * f(Y) - 16, 500 * (f(X) - f(Y)), 200 * (f(Y) - f(Z))
 
 
+# a material the model names as its paint ("carpaint", "Paint1", German "Lack"),
+# never "black" (the "lack" in it painted black trim the body colour on 32 cars)
+PAINT_NAME = re.compile(r"paint|(?<!b)lack", re.I)
+PAINT_OR_BODY = re.compile(r"paint|(?<!b)lack|body", re.I)
 WHEELISH = re.compile(r"wheel|\brims?\b|tyre|tire|hub ?cap", re.I)        # a wheel's material, by name
 TRIMMISH = re.compile(r"chrome|rim\b|wheel|tyre|tire|glass|mirror|metal|steel|alu|grill|trim|plast|rubber|black|carbon|"
                       r"interior|dash|seat|floor|under|chassis|engine|exhaust|brake|calip|light|lamp|lens|logo|badge|plate", re.I)
@@ -1248,8 +1252,8 @@ def finish(src, spec, out, base_dir="."):
     # a material the model names as its paint, nearly as much of the side as
     # one it does not (the 2017 Countryman's "varnish_paint" over a "panel"
     # under it): the named one is the paint seen
-    if paint < nm and not re.search(r"paint|(?<!b)lack|body", mats[paint].get("name", ""), re.I):
-        named = [i for i in range(nm) if re.search(r"paint|(?<!b)lack", mats[i].get("name", ""), re.I)
+    if paint < nm and not PAINT_OR_BODY.search(mats[paint].get("name", "")):
+        named = [i for i in range(nm) if PAINT_NAME.search(mats[i].get("name", ""))
                  and not mats[i].get("name", "").startswith("detail-") and door_area[i] >= 0.6 * door_area[paint]]
         if named:
             log["paint_by_name_over"] = mats[paint].get("name")
@@ -1259,7 +1263,7 @@ def finish(src, spec, out, base_dir="."):
     # paint-named one has a real share of the side (the build review: five
     # cars kept their model's colour, the photo's painted on their insides)
     if paint < nm and INSIDE.search(mats[paint].get("name", "")):
-        named = [i for i in range(nm) if re.search(r"paint|(?<!b)lack|body", mats[i].get("name", ""), re.I)
+        named = [i for i in range(nm) if PAINT_OR_BODY.search(mats[i].get("name", ""))
                  and not INSIDE.search(mats[i].get("name", "")) and door_area[i] >= 0.25 * door_area[paint]]
         if named:
             log["paint_over_inside"] = mats[paint].get("name")
@@ -2386,7 +2390,7 @@ def finish(src, spec, out, base_dir="."):
         # (never a trim, a lamp or a colourless near-black plastic: the review
         # of this rule found "black" painted the body colour on 32 cars)
         named |= {i for i in range(len(mats)) if i != paint and i not in glass
-                  and re.search(r"paint|(?<!b)lack", mats[i].get("name", ""), re.I)
+                  and PAINT_NAME.search(mats[i].get("name", ""))
                   and not mats[i].get("name", "").startswith("detail-") and not INSIDE.search(mats[i].get("name", ""))
                   and not TRIMMISH.search(mats[i].get("name", "")) and not LAMPISH.search(mats[i].get("name", ""))
                   and not dark_plastic(mats[i]) and mat_m2.get(i, 0) >= 0.4 * mat_m2.get(paint, 1e9)}

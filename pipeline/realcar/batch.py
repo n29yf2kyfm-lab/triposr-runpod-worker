@@ -102,6 +102,9 @@ GENERATION_FIX = {
     "mercedes-benz-gl-class-2012-mw1-v1": {"yearStart": 2007, "yearEnd": 2012, "generation": "X164"},
     "mercedes-benz-mercedes-vito-w5-v1": {"model": "Vito", "modelFamily": "Vito", "yearStart": 2004, "yearEnd": 2014,
                                           "generation": "W639"},
+    # the classic Mini, filed with no year: a photo review agent gave its Austin and
+    # Rover Mini builds a modern Mini's photo, as nothing said which Mini it was
+    "mini-cooper-w7-v1": {"yearStart": 1959, "yearEnd": 2000, "generation": "the classic Mini (1959-2000)"},
     # an R34 wagon with a GT-R nose, filed with no year (so as the 2014 V37, the Q50's twin)
     "nissan-skyline-nw1-v3": {"yearStart": 1998, "yearEnd": 2001, "generation": "Tenth generation (R34)"},
     "mg-mg4-2025-m1-v1": {"yearStart": 2022, "yearEnd": 2025, "generation": "First generation"},
