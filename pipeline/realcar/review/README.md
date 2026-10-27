@@ -88,6 +88,7 @@ could call either way.
 | Paint moved onto lamps, cabins and wheels sharing the paint's material | only panels of a shared trim material are painted (islands of 0.1 m² and up, never lamp, cabin or wheel nodes; the Captur's 0.3 m²: its fog lamp housings share its bumpers' silver) |
 | Silvers built so light they showed white (40 of 140: read in bright light, too light for the machine's metallic silver) | a silver's reading takes a silver's tone, its tint kept; pinned in `test_review.py` |
 | A roof answered "body" twice on the RAV4's stand-ins, kept as a limit: the machine left its side strips black (its side windows run up under the roof) | the sides are measured from the roof's edge there and its side strips painted; pinned in `test_rules.py` |
+| Windows built green on 15 models (a green-tinted see-through material was not taken for glass); a two-tone's black bonnet left on the bZ4X's 13 stand-ins, the 718's carbon stripes, the 508 PSE's lime calipers | a see-through green or cyan material is glass; `PAINT_ALSO_UP` paints such a material's up-facing pieces above the waist; `TRIM_BLACK` names the lime; pinned in `test_rules.py` |
 
 The machine's own rules that went wrong are pinned by `pipeline/realcar/test_rules.py` ("black" is no paint name,
 "carpaint.198" no inside, "M Sport Touring" an estate, a wheel in the paint's colour never painted, people
