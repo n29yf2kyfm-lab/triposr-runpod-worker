@@ -50,8 +50,8 @@ photo (its fingerprint). After a rebuild or a new photo the item drops out until
     python3 pipeline/realcar/review/gold.py withdraw build KEY "why"      # an answer found wrong or arguable
     python3 pipeline/realcar/review/gold.py resolved BATCH "how"          # its sheets looked at again
 
-Only add what you have looked at yourself and are sure of; leave out anything a careful reviewer could call
-either way.
+Only add what you have looked at yourself, at full size, and are sure of; leave out anything a careful reviewer
+could call either way.
 
 **Answers that cannot be right are refused**, each with the reason, before anything is written:
 
@@ -78,6 +78,9 @@ either way.
 | The roof command failed on every call (a name in `main()` hid the function); its tests had called the function only | every command the prompts give is tested as typed (`test_the_commands_as_the_agents_type_them`) |
 | The runner, moved into the repo, dropped the run's choice of models (any licence): 36 vehicles came out of other models | `fleet.py licence any|commercial` keeps it in `run.json`; the gate stops a build that left it out |
 | Roofs left in a donor's or the model's colour, and photos' two-tone roofs missing (about one in twelve builds) | the roof pass; the machine paints the roof as the photo's |
+| The roof rule's paint on windscreens and A-pillars (about 18 builds in round 3): a windscreen's black band far from its glass's corners, a donor's roof running down the pillars, a roof-named material painted whole | the rule measures to the glass's surface, paints nothing ahead of the roof's front edge, and no material whole; pinned in `test_rules.py` |
+| A roof the machine cannot make (a Smart's frame, an ID Buzz's white upper half) asked for again on every review, so rebuilt again and again | a roof asked for again on a build already made asking for it goes to `roof_limits.json`, not the queue |
+| Checked answers made from a sheet's thumbnail (an MG HS and a Swift called ok, a Kamiq Monte Carlo's black roof missed) | withdrawn; an answer is checked on the full-size photo and build, or not added |
 
 The machine's own rules that went wrong are pinned by `pipeline/realcar/test_rules.py` ("black" is no paint name,
 "carpaint.198" no inside, "M Sport Touring" an estate, a wheel in the paint's colour never painted, people
