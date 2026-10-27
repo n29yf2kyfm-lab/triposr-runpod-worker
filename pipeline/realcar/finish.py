@@ -951,6 +951,108 @@ def _paint_one(pm, spec, j):
         j["extensionsUsed"].append("KHR_materials_clearcoat")
 
 
+# a roof's glass or opening by its name: it stays dark when the roof is painted
+ROOF_GLASS = re.compile(r"glass|vitre|window|sunroof|moonroof|pano|screen", re.I)
+
+
+def roof_in_paint(g, mats, paint, painted, glass, band=0.10, up=0.85, share=0.05, colour=None):
+    """A roof in another colour than the body, left from a stand-in's donor
+    (the bZ4X's and the 2008's black roofs on the white Fiat 600, Lexus RZ and
+    Omoda 9 made from them, in the build review): the up-facing top of the
+    car, within BAND of its height, takes the paint. Only pieces of at least
+    SHARE of the car's footprint, so roof rails and an aerial keep theirs;
+    never glass, a lamp or the cabin, and never a mesh used twice.
+    With COLOUR (sRGB), a roof of that colour on the body's paint (the
+    Captur's and the Mini's white roofs): the paint's own top too, in a
+    material of its own made from the paint's."""
+    j = g.j
+    W, _ = g.world_matrices()
+    uses = {}
+    for n in j["nodes"]:
+        if "mesh" in n:
+            uses[n["mesh"]] = uses.get(n["mesh"], 0) + 1
+    wheel_y, body_v, cand = [], [], []
+    for ni, n in enumerate(j["nodes"]):
+        if "mesh" not in n:
+            continue
+        is_wheel = bool(re.match(r"(?:SB_)?wheel", n.get("name") or ""))
+        for p in j["meshes"][n["mesh"]]["primitives"]:
+            if p.get("mode", 4) != 4 or "indices" not in p:
+                continue
+            P = g.accessor(p["attributes"]["POSITION"]) @ W[ni][:3, :3].T + W[ni][:3, 3]
+            if is_wheel:
+                wheel_y.append(float(P[:, 1].min()))
+                continue
+            body_v.append(P)
+            m = p.get("material")
+            if m is None or (colour is None and (m == paint or m in painted)) or m in glass \
+                    or uses[n["mesh"]] > 1 or p.get("targets"):
+                continue
+            name = mats[m].get("name", "")
+            if mats[m].get("alphaMode") == "BLEND" or LAMPISH.search(name) or INSIDE.search(name) \
+                    or ROOF_GLASS.search(name):
+                continue
+            I = g.accessor(p["indices"]).ravel().astype(np.int64)
+            cand.append((p, P, I[:len(I) // 3 * 3].reshape(-1, 3)))
+    if not cand or not wheel_y or not body_v:
+        return None
+    V = np.vstack(body_v)
+    ground, top = min(wheel_y), float(np.percentile(V[:, 1], 99.5))
+    x0, x1 = np.percentile(V[:, 0], [0.5, 99.5])
+    z0, z1 = np.percentile(V[:, 2], [0.5, 99.5])
+    foot = float((x1 - x0) * (z1 - z0))
+    h = top - ground
+    picks, Ts = [], []
+    for p, P, I in cand:
+        T = P[I]
+        _, nrm = tri_area_normal(T)
+        sel = np.where((nrm[:, 1] > up) & (T.mean(1)[:, 1] > top - band * h))[0]
+        if len(sel):
+            picks.append((p, I, sel))
+            Ts.append(T[sel])
+    if not Ts:
+        return None
+    T = np.vstack(Ts)
+    area, _ = tri_area_normal(T)
+    lab, _ = islands(T, weld=2e-4 * max(h, 1e-6) / 1.5)
+    keep_isl = np.bincount(lab, weights=area) >= share * foot
+    keep = keep_isl[lab]
+    if not keep.any():
+        return None
+    to = paint
+    if colour is not None:
+        import copy
+        rm = copy.deepcopy(mats[paint])
+        rm["name"] = (rm.get("name") or "paint") + "_roof"
+        _paint_one(rm, {"paint": list(colour)}, j)
+        mats.append(rm)
+        to = len(mats) - 1
+    out, at, names = 0, 0, set()
+    for p, I, sel in picks:
+        k = keep[at:at + len(sel)]
+        at += len(sel)
+        mine = sel[k]
+        if not len(mine):
+            continue
+        names.add(mats[p["material"]].get("name"))
+        rest = np.setdiff1d(np.arange(len(I)), mine)
+        q = {kk: v for kk, v in p.items() if kk not in ("indices", "material")}
+        q["indices"] = g.add_accessor(I[mine].ravel().astype(np.uint32), ctype=5125, atype="SCALAR", target=34963)
+        q["material"] = to
+        if len(rest):
+            p["indices"] = g.add_accessor(I[rest].ravel().astype(np.uint32), ctype=5125, atype="SCALAR", target=34963)
+            for mesh in j["meshes"]:
+                if any(x is p for x in mesh["primitives"]):
+                    mesh["primitives"].append(q)
+                    break
+        else:
+            p.clear()
+            p.update(q)
+        out += len(mine)
+    return {"triangles": int(out), "share_of_footprint": round(float(area[keep].sum()) / foot, 3),
+            "materials": sorted(n for n in names if n), **({"colour": list(colour)} if colour is not None else {})}
+
+
 def _corner_attrs(g, attrs, S):
     """The other vertex attributes (UVs, colours, tangents) of the triangles S
     (k, 3), one value a corner, for a primitive remade on corners of its own."""
@@ -2422,6 +2524,13 @@ def finish(src, spec, out, base_dir="."):
         log["paint_set"] = {"material": pm.get("name"), "srgb": list(spec["paint"][:3]), "metallic": float(metallic),
                             "clearcoat": True, "materials": [mats[i].get("name") for i in coats]}
 
+    # ── a roof in the body's colour: a stand-in's donor's black roof (batch.py
+    # asks it of every stand-in, unless the request asks for a contrasting roof)
+    if spec.get("roof") == "body" or isinstance(spec.get("roof"), (list, tuple)):
+        rp = roof_in_paint(g, mats, paint, set(coats) if spec.get("paint") else paint_ids, glass,
+                           colour=spec["roof"] if isinstance(spec["roof"], (list, tuple)) else None)
+        if rp:
+            log["roof_in_paint"] = rp
     # ── a panel van asked: no windows behind the cab ──
     if spec.get("panel_van"):
         log["panel_van"] = panel_sides(g, glass, paint)

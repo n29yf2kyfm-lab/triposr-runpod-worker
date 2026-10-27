@@ -7,6 +7,7 @@ on an older build or photo is seen as stale (check.py).
     python3 build_review.py info KEY
     python3 build_review.py verdict KEY ok
     python3 build_review.py verdict KEY bad "fault, fault" "what is wrong, in a few words"
+    python3 build_review.py verdict KEY bad "roof" "what is wrong" --roof body|FAMILY
 
 Faults (one or more, comma separated):
   body        another body style (an estate for a hatch, an SUV for a saloon, a panel van for a pickup)
@@ -17,6 +18,9 @@ Faults (one or more, comma separated):
   broken      holes, torn or crumpled panels, blotches, parts missing or floating, wheels out of place,
               a panel or the wheels left in the model's own colour
   side        seen from the other side or end than the photo
+  roof        the build's roof is not the photo's: --roof body when the photo's roof is the body's colour
+              (a donor's black roof on a one-colour car), --roof FAMILY (white, black ...) when the photo's
+              roof is another colour than its body (the Captur's white one): rebuilt with it painted
   photo       the photo itself is wrong (only after replacing it: web_photo.py choose)
 
 A verdict is refused, with the reason, when it cannot be right: a key with no
@@ -32,7 +36,7 @@ import numpy as np
 import gold
 import paths
 
-FAULTS = {"body", "generation", "kind", "proportions", "colour", "broken", "side", "photo"}
+FAULTS = {"body", "generation", "kind", "proportions", "colour", "broken", "side", "roof", "photo"}
 
 
 def OUT():
@@ -95,7 +99,7 @@ class Refused(Exception):
     """A verdict that cannot be right: not recorded."""
 
 
-def check(key, verdict, faults, note, rows=None):
+def check(key, verdict, faults, note, rows=None, roof=None):
     """The reason a verdict cannot stand, or None."""
     r = (rows if rows is not None else paths.rows()[0]).get(key)
     if not r:
@@ -113,6 +117,13 @@ def check(key, verdict, faults, note, rows=None):
         return "a bad build names at least one fault"
     if verdict == "bad" and len(note.split()) < 3:
         return "say what is wrong in a few words (the note): the next person fixes it from that"
+    if ("roof" in faults) != bool(roof):
+        return ("a roof fault says what the photo's roof is: --roof body (the body's colour) or --roof FAMILY "
+                "(white, black, ...)" if "roof" in faults else "--roof goes with the fault 'roof'")
+    if roof:
+        from paint_label import FAMILY
+        if roof != "body" and roof not in FAMILY:
+            return f"--roof is body or a colour family: {' '.join(FAMILY)}"
     if "photo" in faults:
         rv = paths.load(paths.f("photo_review.json")).get(key) or {}
         if not rv.get("replaced_at") or (r.get("built_at") and rv["replaced_at"] < r["built_at"]):
@@ -121,9 +132,9 @@ def check(key, verdict, faults, note, rows=None):
     return None
 
 
-def verdict(key, v, faults, note):
+def verdict(key, v, faults, note, roof=None):
     rows = paths.rows()[0]
-    why = check(key, v, faults, note, rows)
+    why = check(key, v, faults, note, rows, roof)
     if why:
         raise Refused(why)
     g = gold.judge("build", key, v, faults)
@@ -139,6 +150,15 @@ def verdict(key, v, faults, note):
         d[key] = {"verdict": v, "faults": faults, "note": note, "at": paths.now(), "built_at": r.get("built_at"),
                   "photo_sha": paths.sha(paths.photo(key))}
         paths.save(OUT(), d)
+    if "roof" in faults:
+        # the photo's roof is the body's colour: the rebuild paints the
+        # build's (fleet.py asks for it from roof_label.json)
+        with paths.lock("roof_label"):
+            rl = paths.load(paths.f("roof_label.json"))
+            rl[key] = {"roof": roof, "by": "build review", "at": paths.now()}
+            paths.save(paths.f("roof_label.json"), rl)
+        paths.queue_rebuild(key, "its roof in the body's colour, as the photo's" if roof == "body"
+                            else f"its roof {roof}, as the photo's")
     if "side" in faults or "colour" in faults:
         # the side and the colour are named by eye (view_label.py, paint_label.py):
         # one the build shows wrong is named again before it is rebuilt
@@ -165,9 +185,11 @@ def main():
     if a[0] == "verdict":
         if len(a) < 3:
             raise SystemExit(__doc__)
+        roof = a[a.index("--roof") + 1] if "--roof" in a and a.index("--roof") + 1 < len(a) else None
+        a = [x for i, x in enumerate(a) if x != "--roof" and (i == 0 or a[i - 1] != "--roof")]
         faults = [x.strip() for x in (a[3] if len(a) > 3 else "").split(",") if x.strip()]
         try:
-            verdict(a[1], a[2], faults, a[4] if len(a) > 4 else "")
+            verdict(a[1], a[2], faults, a[4] if len(a) > 4 else "", roof)
         except Refused as e:
             print("REFUSED:", e)
             raise SystemExit(2)

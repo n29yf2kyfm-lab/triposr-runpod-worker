@@ -105,9 +105,16 @@ def measure(path, key=None):
     if len(ys) < 0.05 * m.size:
         return {"px": [w0, h0], "error": "no car found in it"}
     h, w = m.shape
+    # cut off: the car meets a side of the frame along 80% of its height or
+    # more (the Insight's, the TGE's). Only touching it was the old test, and
+    # a row of parked cars or a kerb behind a whole car touched it (the MG4's,
+    # the 206's); at half its height, a dealer's banner or border joined to
+    # the outline still did (the 6 Series', the Laguna's)
+    bh = ys.max() - ys.min() + 1
+    edge = max(int(m[:, :int(0.045 * w) + 1].any(1).sum()), int(m[:, int(0.955 * w):].any(1).sum())) / bh
     out = {"px": [w0, h0], "fill": round((xs.max() - xs.min()) * (ys.max() - ys.min()) / (w * h), 2),
            "wide": round((xs.max() - xs.min()) / max(1, ys.max() - ys.min()), 2),
-           "off_frame": bool(xs.min() <= 0.045 * w or xs.max() >= 0.955 * w)}
+           "edge": round(edge, 2), "off_frame": bool(edge >= 0.8)}
     hero = key and paths.picture(key)
     if hero:
         a = cv2.imread(hero, cv2.IMREAD_UNCHANGED)

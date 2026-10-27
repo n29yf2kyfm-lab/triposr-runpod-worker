@@ -136,6 +136,23 @@ def parse(text):
     if m:
         want["drive"] = "right"
         t = t[:m.start()] + " " + t[m.end():]
+    # the roof ("white with a black roof", "contrast roof", "two-tone"): read
+    # before the paint, so its colour is not taken for the body's; a stand-in
+    # otherwise has its roof in the body's colour (batch.py)
+    names_ = "|".join(re.escape(c) for c in COLOURS)
+    m = re.search(rf"(?:\b(?:with\s+)?(?:an?\s+)?)?(?:(#[0-9a-f]{{6}}\b|\b(?:{names_})|\bcontrast(?:ing)?)\s+roof|\btwo[\s-]?tone)\b", t)
+    if m:
+        # a roof of a colour named ("a white roof": the Captur's, a Mini's; an
+        # exact "#eeefed roof" from the fleet) is painted that colour;
+        # "contrast"/"two-tone": the model's own kept
+        c = m.group(1)
+        want["roof"] = c if c and (c in COLOURS or c.startswith("#")) else "contrast"
+        t = t[:m.start()] + " " + t[m.end():]
+    else:
+        m = re.search(r"\b(?:with\s+)?(?:an?\s+)?(?:body[\s-]?colou?red|same[\s-]colou?r)\s+roof\b", t)
+        if m:
+            want["roof"] = "body"
+            t = t[:m.start()] + " " + t[m.end():]
     # the wheels' colour ("black wheels", "gloss black alloys"): read first,
     # so its colour is not taken for the paint; the page starts the rims in it
     names = "|".join(re.escape(c) for c in COLOURS)
@@ -1188,6 +1205,8 @@ def build(request, engine_pack, tools, view_dir, out=None, port=8791, exact=Fals
             nc_best = None
     args.paint = paint_rgb(want.get("colour"))
     args.drive = want.get("drive")                       # "right": a left-hand-drive model's cabin turned round
+    # "body", "contrast" or a colour's sRGB as asked; else batch.py decides
+    args.roof = list(paint_rgb(want["roof"])) if want.get("roof") not in (None, "body", "contrast") else want.get("roof")
     # the doors asked for decide the body the rigger cuts: "2 door" / "3 door"
     # is a three-door hatch or a coupe (one door each side), "4/5 door" not
     if want.get("doors"):

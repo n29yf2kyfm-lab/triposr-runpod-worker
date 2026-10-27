@@ -106,6 +106,22 @@ def test_side_and_colour_faults_ask_for_the_label_again(run):
     assert "car-note" not in paths.load(str(run / "needs_label.json"))["side"]
 
 
+def test_a_roof_fault_asks_for_the_roof_painted_in_the_rebuild(run):
+    # the donor's black roof on the white Fiat 600: the reviewer's fault is the fix
+    with pytest.raises(build_review.Refused, match="--roof body"):
+        build_review.verdict("car-note", "bad", ["roof"], "the donor's black roof; the photo's is white")
+    with pytest.raises(build_review.Refused, match="colour family"):
+        build_review.verdict("car-note", "bad", ["roof"], "the donor's black roof; the photo's is white", "snow")
+    build_review.verdict("car-note", "bad", ["roof"], "the donor's black roof; the photo's is white", "body")
+    assert paths.load(str(run / "roof_label.json"))["car-note"]["roof"] == "body"
+    assert "car-note" in paths.load(str(run / "needs_rebuild.json"))
+    assert fleet._roof_words("car-note") == ["body", "coloured", "roof"]
+    assert fleet._roof_words("car-fiesta") == []
+    # the Captur's photo: a white roof on a blue body
+    build_review.verdict("car-fiesta", "bad", ["roof"], "black roof; the photo's roof is white on blue", "white")
+    assert fleet._roof_words("car-fiesta") == ["#eeefed", "roof"]
+
+
 # ── gold: a wrong answer on a checked item teaches, and is counted ───────
 
 def test_a_wrong_answer_on_a_checked_build_is_refused_and_counted(run):
@@ -118,7 +134,46 @@ def test_a_wrong_answer_on_a_checked_build_is_refused_and_counted(run):
         build_review.verdict("car-note", "bad", ["colour"], "colour is a bit bright")    # bad, but not for the reason
     build_review.verdict("car-note", "bad", ["body"], "a boxy Cube for a modern hatch")
     s = gold.scores()["batch5"]
-    assert s == {"answered": 1, "missed": 1, "misses": ["build car-note: said ok"]}
+    assert s == {"answered": 1, "missed": 1, "misses": ["build car-note: said ok"], "resolved": None}
+
+
+def test_an_answer_counts_for_the_batch_that_gave_it(run, monkeypatch):
+    # two batches' sheets carried the same checked item: only the one whose
+    # agent answered wrongly is charged (October 2026: rev6 was charged rev1's)
+    gold.add("build", "car-note", "bad", "a Cube box stands in for the Note hatch", ["body"])
+    gold.note_sheet(str(run / "sheets" / "a_s00.jpg"), "batchA", ["car-note"], ["car-note"])
+    gold.note_sheet(str(run / "sheets" / "b_s00.jpg"), "batchB", ["car-note"], ["car-note"])
+    monkeypatch.setenv("F1K_BATCH", "batchA")
+    with pytest.raises(build_review.Refused):
+        build_review.verdict("car-note", "ok", [], "")
+    monkeypatch.setenv("F1K_BATCH", "batchB")
+    build_review.verdict("car-note", "bad", ["body"], "a boxy Cube for a modern hatch")
+    sc = gold.scores()
+    assert sc["batchA"]["missed"] == 1 and sc["batchB"]["missed"] == 0
+    # the manifest is kept away from the sheets the agents open
+    assert not (run / "sheets" / "manifest.json").exists()
+
+
+def test_a_withdrawn_answer_is_not_used_or_scored_and_a_resolved_batch_passes(run):
+    gold.add("build", "car-note", "ok", "looked right at the time")
+    with pytest.raises(build_review.Refused):
+        build_review.verdict("car-note", "bad", ["broken"], "grey tyres and flat grey grille")
+    assert gold.scores()["?"]["missed"] == 1
+    gold.withdraw("build", "car-note", "arguable: grey tyres are a fault to some")
+    assert gold.judge("build", "car-note", "bad", ["broken"]) is None
+    assert "?" not in gold.scores()
+    gold.add("build", "car-note", "bad", "a Cube for the Note", ["body"])
+    with pytest.raises(build_review.Refused):
+        build_review.verdict("car-note", "ok", [], "")
+    assert check.run()["gold"]
+    gold.resolved("?", "its sheets judged again by batch7")
+    assert not check.run()["gold"]
+
+
+def test_a_build_checked_ok_takes_photo_alone_after_its_photo_is_replaced(run):
+    gold.add("build", "car-fiesta", "ok", "the same car as the photo")
+    assert gold.judge("build", "car-fiesta", "bad", ["photo"])["right"]
+    assert not gold.judge("build", "car-fiesta", "bad", ["photo", "broken"])["right"]
 
 
 def test_a_checked_build_no_longer_counts_after_a_rebuild(run):
@@ -155,7 +210,7 @@ def test_sheets_mix_in_checked_items_and_note_them(run):
     out = str(run / "sheets" / "v00.jpg")
     keys = gold.mix(["car-fiesta"], "side", 1, out, "side1")
     assert sorted(keys) == ["car-fiesta", "car-note"]
-    assert paths.load(str(run / "sheets" / "manifest.json"))[out]["gold"] == ["car-note"]
+    assert paths.load(str(run / "review_runs" / "manifest.json"))[out]["gold"] == ["car-note"]
 
 
 # ── a new photo: everything it needs at once ─────────────────────────────
@@ -176,6 +231,21 @@ def test_a_photo_of_no_whole_car_is_refused(run):
     _cand(run, "car-fiesta", 1, error="no car found in it")
     with pytest.raises(web_photo.Refused, match="no car found"):
         web_photo.choose("car-fiesta", 1, (2008, 2017), "Mk7", "white", "left")
+
+
+def test_a_whole_car_with_parked_cars_behind_it_is_not_cut_off(run, monkeypatch):
+    # the MG4's and the 206's photos: a row of parked cars behind, joined to
+    # the car's outline, touched the frame; the car itself was whole
+    p = str(run / "w.jpg")
+    cv2.imwrite(p, np.full((300, 480, 3), 128, np.uint8))
+    m = np.zeros((300, 480), np.uint8)
+    m[100:250, 60:400] = 1
+    m[110:125, 0:60] = 1
+    monkeypatch.setattr(photo_paint, "car_mask", lambda img: m)
+    assert not web_photo.measure(p)["off_frame"]
+    m[:] = 0
+    m[60:250, 0:300] = 1                                  # the front cut off by the frame
+    assert web_photo.measure(p)["off_frame"]
 
 
 def test_a_photo_of_another_generation_is_refused(run):

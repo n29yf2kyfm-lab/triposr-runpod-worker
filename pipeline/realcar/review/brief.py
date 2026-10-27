@@ -56,11 +56,16 @@ def brief(kind, name, keys, per=None, n_gold=1):
         else:
             web_photo.sheet(out, chunk)
         sheets.append(out)
-    with open(os.path.join(d, f"{name}.keys"), "w") as fh:
+    # the batch's own keys, kept away from the sheets: an agent that found them
+    # could tell the checked items on its sheets from its own
+    runs = paths.f("review_runs")
+    os.makedirs(runs, exist_ok=True)
+    with open(os.path.join(runs, f"{name}.keys"), "w") as fh:
         fh.write("\n".join(keys) + "\n")
     text = open(os.path.join(paths.REVIEW, "prompts", PROMPT[kind])).read()
     sheet_list = f"{len(sheets)} sheets, {sheets[0]} to {sheets[-1]}" if len(sheets) > 1 else sheets[0]
-    text = text.replace("{REPO}", paths.REPO).replace("{F1K_HOME}", paths.home()).replace("{SHEETS}", sheet_list)
+    text = text.replace("{REPO}", paths.REPO).replace("{F1K_HOME}", paths.home()).replace("{SHEETS}", sheet_list) \
+        .replace("{BATCH}", name)
     md = os.path.join(d, f"{name}.md")
     with open(md, "w") as fh:
         fh.write(text)

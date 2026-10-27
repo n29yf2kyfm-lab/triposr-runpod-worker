@@ -744,6 +744,12 @@ def one(target, item, args, out):
         spec["paint_also"] = PAINT_ALSO[item.get("standin_donor") or item["assetId"]]
     if getattr(args, "drive", None):
         spec["drive"] = args.drive
+    # the roof in the body's colour: a stand-in's roof is its donor's (the
+    # bZ4X's black one on a white Fiat 600, in the build review), not the
+    # car's asked for; an own model keeps its own unless asked
+    roof = getattr(args, "roof", None) or ("body" if st else None)
+    if roof:
+        spec["roof"] = roof
     # an electric car: no engine pack (finish.py keeps its own front end)
     if is_electric(item, (st or {}).get("name")):
         spec["electric"] = True
@@ -823,7 +829,7 @@ def one(target, item, args, out):
                                               "glass_cleared", "measured", "bay_cleared_m2", "engine_pack", "cabin_pack", "paint_set",
                                               "manual", "wheel_strays", "wheel_tyres_from_body", "right_hand_drive",
                                               "powertrain", "sliding", "cracks_closed", "paint", "paint_side_m2",
-                                              "paint_by_name_over", "paint_over_plastic", "paint_over_inside", "panel_van", "normals_mended", "wheels_in_paint")}
+                                              "paint_by_name_over", "paint_over_plastic", "paint_over_inside", "panel_van", "normals_mended", "wheels_in_paint", "roof_in_paint")}
     # validator, web copy and check sheet at the same time: the sheet is drawn
     # from the finished file, so it need not wait for the compression
     web = os.path.join(d, "web.glb")

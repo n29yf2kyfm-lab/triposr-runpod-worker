@@ -66,6 +66,19 @@ def _paints():
     return _PAINT
 
 
+# the words that ask the machine for a roof (make.py): "body" paints a model's
+# contrasting roof the body's colour, "contrast" keeps a stand-in's donor's
+ROOF_WORDS = {"body": ["body", "coloured", "roof"], "contrast": ["contrast", "roof"]}
+
+
+def _roof_words(key):
+    """A roof of a colour named by eye ("white": the Captur's) is asked in
+    that colour's paint ("#eeefed roof")."""
+    from paint_label import FAMILY
+    r = (paths.load(paths.f("roof_label.json")).get(key) or {}).get("roof")
+    return ROOF_WORDS.get(r) or ([FAMILY[r], "roof"] if r in FAMILY else [])
+
+
 def one(t):
     """One target's row, always: a fault in reading what the build left
     (a broken record, a failed copy) is that target's failure, never the
@@ -95,8 +108,11 @@ def _one(t):
         paint = (_paints().get(t["key"]) or {}).get("hex") if t["class"] in ("car", "van") else None
         if paint:
             row["paint"] = paint
+        roof = _roof_words(t["key"]) if t["class"] in ("car", "van") else []
+        if roof:
+            row["roof"] = roof[0]
         p = subprocess.run([sys.executable, "pipeline/realcar/glbmachine.py", "car", *t["request"].split(),
-                            *([paint] if paint else [])],
+                            *([paint] if paint else []), *roof],
                            cwd=paths.REPO, env=env, capture_output=True, text=True, timeout=900)
         ans = json.loads(p.stdout) if p.stdout.strip() else {"error": (p.stderr or "no answer")[-300:]}
     except subprocess.TimeoutExpired:
@@ -120,6 +136,8 @@ def _one(t):
                seconds_to_file=ans.get("seconds_to_file"), web_mb=round((rec.get("web_bytes") or 0) / 1e6, 1),
                # the generation the build stands for: a stand-in's car's, an own model's own
                years=(item.get("standin") or {}).get("years") or rec.get("years"))
+    if fin.get("roof_in_paint"):
+        row["roof_painted"] = fin["roof_in_paint"].get("share_of_footprint")
     if st:
         row["standin"] = {"target": st.get("target"), "large_change": st.get("large_change"),
                           "roof_from_photo": bool(st.get("roof")), "debadged": st.get("debadged")}

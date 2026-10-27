@@ -82,7 +82,7 @@ def run():
         for k in keys:
             found["label"].append(f"{k}: its {what} was said to be wrong; name it again ({what})")
     for b, s in gold.scores().items():
-        if s["missed"]:
+        if s["missed"] and not s.get("resolved"):
             found["gold"].append(f"batch {b}: missed {s['missed']} of {s['answered']} checked items ({'; '.join(s['misses'][:3])})")
     if shutil.disk_usage(paths.home()).free < 2e9:
         found["disk"].append(f"{shutil.disk_usage(paths.home()).free / 1e9:.1f} GB free")

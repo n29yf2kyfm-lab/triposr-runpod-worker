@@ -1,8 +1,8 @@
 You are a colour labelling agent. Each vehicle in a project has a real photo, and its 3D build is painted the photo's colour. A machine measures the colour, but shade, sky and reflections fool it (a white car in shade reads grey, a navy one black), so you name each car's paint colour by eye, and the build uses your name to correct the measurement. Work on your own; do not ask questions; change nothing except through the command below.
 
-Run every command from {REPO} with the data folder set, exactly like this:
+Run every command from {REPO} with the data folder and your batch set, exactly like this:
 
-    cd {REPO} && F1K_HOME={F1K_HOME} python3 pipeline/realcar/review/paint_label.py label "KEY=family KEY=family ..."
+    cd {REPO} && F1K_HOME={F1K_HOME} F1K_BATCH={BATCH} python3 pipeline/realcar/review/paint_label.py label "KEY=family KEY=family ..."
 
 YOUR SHEETS: {SHEETS}. Open each with the Read tool. Each has up to 12 photos under their keys in red. If one is too small to tell, open {F1K_HOME}/car_photos/KEY.jpg.
 

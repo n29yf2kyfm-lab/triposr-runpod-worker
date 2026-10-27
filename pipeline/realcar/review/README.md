@@ -45,6 +45,8 @@ photo (its fingerprint). After a rebuild or a new photo the item drops out until
     python3 pipeline/realcar/review/gold.py add build KEY bad "body" "why"
     python3 pipeline/realcar/review/gold.py add side KEY left "why"
     python3 pipeline/realcar/review/gold.py add paint KEY white "why"
+    python3 pipeline/realcar/review/gold.py withdraw build KEY "why"      # an answer found wrong or arguable
+    python3 pipeline/realcar/review/gold.py resolved BATCH "how"          # its sheets looked at again
 
 Only add what you have looked at yourself and are sure of; leave out anything a careful reviewer could call
 either way.
@@ -64,6 +66,13 @@ either way.
 | Verdicts left on builds that were rebuilt since | every verdict records the build and photo it judged; `check.py` finds stale ones |
 | A results line cut short by a full disk stopping the next run | whole-line writes; the reader reads past a bad line; the runner stops cleanly on a low disk |
 | Full pictures deleted while agents were still opening them | `webp.py` keeps them unless told `--prune` |
+| A checked answer that was wrong (the 3-door Fiesta's 5-door photo called fine) taught agents the wrong rule | `gold.py withdraw` takes it back with the reason; its answers stop counting; only what you are sure of is checked |
+| An answer charged to every batch whose sheets carried the item | each command carries `F1K_BATCH` (brief.py puts it in the prompt): the batch that answered is charged |
+| Agents could find the checked items from the key lists beside the sheets | the manifest and key lists are kept in `review_runs/`, away from the sheets |
+| Whole cars refused as cut off (a row of parked cars behind them touched the frame), so agents overrode the guard | cut off means the car meets the frame along 80% of its height |
+| A 5-door stand-in for a 3-door car passed as a small difference | the door count is body, in the fault list and the past mistakes |
+| A donor's black roof on a one-colour car, or a photo's white roof missing | the fault `roof` with `--roof body` or `--roof FAMILY`: the rebuild paints the roof so |
+| A batch that missed one stayed on the gate after its sheets were looked at again | `gold.py resolved BATCH "how"` |
 
 The machine's own rules that went wrong are pinned by `pipeline/realcar/test_rules.py` ("black" is no paint name,
 "carpaint.198" no inside, "M Sport Touring" an estate, a wheel in the paint's colour never painted, people

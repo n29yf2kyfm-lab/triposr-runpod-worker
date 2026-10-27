@@ -43,7 +43,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "template"))
 from gltf import GLTF  # noqa: E402
 
-VERSION = "1.10"                    # a change here reshapes stand-ins built before
+VERSION = "1.11"                    # a change here reshapes stand-ins built before
 WHEEL = re.compile(r"^SB_wheel_(fl|fr|rl|rr)")
 
 
@@ -107,9 +107,24 @@ def measure(g, parts):
     H = float(np.max(median_filter(top, size=9))) if len(top) >= 9 else float(np.percentile(body[:, 1], 99.5))
     low = body[body[:, 1] < 0.55 * H]                       # below the mirrors
     W = float(2 * np.percentile(np.abs(low[:, 0]), 99.7))
+    # the windscreen's top: the see-through glass ahead of the cab's middle,
+    # near the centre line (a high-roof van's roof rises half a metre over it)
+    zf_ = float((c["fl"]["centre"][2] + c["fr"]["centre"][2]) / 2)
+    ws = []
+    for i, name, M in parts:
+        if WHEEL.match(name):
+            continue
+        for prim in g.j["meshes"][g.j["nodes"][i]["mesh"]]["primitives"]:
+            m = g.j["materials"][prim["material"]] if prim.get("material") is not None else {}
+            if m.get("alphaMode") != "BLEND" or re.search(r"tail|lamp|light|lens|indic", m.get("name", ""), re.I):
+                continue
+            v = g.accessor(prim["attributes"]["POSITION"]) @ M[:3, :3].T + M[:3, 3]
+            ws.append(v[(v[:, 2] > zf_ - 1.0) & (np.abs(v[:, 0]) < 0.15 * W)])
+    ws = np.vstack(ws) if ws else np.zeros((0, 3))
+    cab_top = float(np.percentile(ws[:, 1], 99)) if len(ws) >= 20 else None
     return {"wheels": c, "R": R, "zf": zf, "zr": zr, "wheelbase": zf - zr,
             "zmin": float(allv[:, 2].min()), "zmax": float(allv[:, 2].max()),
-            "length": float(allv[:, 2].max() - allv[:, 2].min()), "width": W, "height": H,
+            "length": float(allv[:, 2].max() - allv[:, 2].min()), "width": W, "height": H, "cab_top": cab_top,
             "track": float(np.mean([abs(c["fl"]["centre"][0] - c["fr"]["centre"][0]),
                                     abs(c["rl"]["centre"][0] - c["rr"]["centre"][0])]))}
 
@@ -140,6 +155,20 @@ def plan(d, t):
     ys, yt = [0.0, ya, d["height"]], [0.0, ya * s, H]
     if yt[2] <= yt[1] + 0.2:                                  # a car lower than its arches cannot be
         yt[2] = yt[1] + 0.2
+    # a low-roof van (2.2 m or less: a Transit, a Transit Custom, an iLoad) made
+    # from a high-roof one (the Sprinter's roof rises half a metre over its
+    # windscreen): the height comes out of the roof, not evenly; squeezed
+    # evenly, every one still looked a high-roof van (the build review's
+    # commonest proportions fault). Its roof 11% of its height over the
+    # windscreen, the cab the rest
+    lowered = None
+    ct = d.get("cab_top")
+    if t.get("body") == "van" and not t.get("high_roof") and ct and H <= 2.2 \
+            and d["height"] - ct > 0.3 and (d["height"] - ct) / d["height"] > 0.15 and ya < ct < d["height"]:
+        ct_t = max(H * 0.89, ya * s + 0.6)
+        if ct_t < H - 0.05:
+            ys, yt = [0.0, ya, ct, d["height"]], [0.0, ya * s, ct_t, H]
+            lowered = {"roof_over_windscreen_m": [round(d["height"] - ct, 3), round(H - ct_t, 3)]}
     sx = Wd / d["width"]
     return {"z": PchipInterpolator(zs, zt, extrapolate=True), "y": PchipInterpolator(ys, yt, extrapolate=True),
             "sx": sx, "s": s, "zf_t": zf_t, "zr_t": zr_t, "track_t": d["track"] * sx,
@@ -147,7 +176,8 @@ def plan(d, t):
                     "along": [round(zt[-1] - zt[0], 3), round(d["length"], 3)],
                     "wheelbase_m": [round(d["wheelbase"], 3), round(WB, 3)],
                     "overhangs_m": {"front": [round(of, 3), round(of_t, 3)], "rear": [round(orr, 3), round(or_t, 3)]},
-                    "height_m": [round(d["height"], 3), round(H, 3)], "width_m": [round(d["width"], 3), round(Wd, 3)]}}
+                    "height_m": [round(d["height"], 3), round(H, 3)], "width_m": [round(d["width"], 3), round(Wd, 3)],
+                    **({"roof_lowered": lowered} if lowered else {})}}
 
 
 def _top(v, half_width, z0, z1, step=0.05):

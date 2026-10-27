@@ -476,6 +476,15 @@ HAND = {"mini|paceman": [{"name": "Mini Paceman (R61)", "years": [2012, 2016], "
                                       "width": 1848, "height": 1844, "wheelbase": 2785, "body": "MPV", "doors": 5,
                                       "page": "Toyota Proace City", "source": "by hand: Toyota's published Proace City Verso Medium dimensions"}]}
 HAND["toyota|proace city verso"] = HAND["toyota|proace-city-verso"]        # as a request spells it
+# read from the Fiat Ducato's page, whose newest box is the 2006 Ducato's: the
+# Talento sold in the UK is the 2016 one, the Renault Trafic's twin; the
+# Talbot Express is the first Ducato's twin, sold 1982-1994
+HAND["fiat|talento"] = [{"name": "Fiat Talento (2016, the Trafic's twin)", "years": [2016, 2021], "length": 4999,
+                         "width": 1956, "height": 1971, "wheelbase": 3098, "body": "van", "doors": 4,
+                         "page": "Fiat Talento", "source": "by hand: Fiat's published Talento L1H1 panel van dimensions"}]
+HAND["talbot|express"] = [{"name": "Talbot Express (the first Ducato's twin)", "years": [1982, 1994], "length": 5146,
+                           "width": 1960, "height": 2070, "wheelbase": 3288, "body": "van", "doors": 3,
+                           "page": "Fiat Ducato", "source": "the Fiat Ducato page's first-generation box"}]
 
 
 def _fixed(boxes):

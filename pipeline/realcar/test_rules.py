@@ -140,3 +140,115 @@ def test_a_mesh_shaded_its_own_way_all_over_is_left(tmp_path):
     _glb(str(tmp_path / "m.glb"), P, [[0, 0, -1]] * 3, [0, 1, 2])
     g = GLTF(str(tmp_path / "m.glb"))
     assert finish.mend_normals(g, {0}) == 0
+
+
+# ── a stand-in's roof in its donor's colour ──────────────────────────────
+
+def _car_glb(path, top_name="2020_Peugeot_e-2008_black", roof_mat=1):
+    """A box car 4 m long, 1.8 m wide, 1.52 m high: painted sides, a roof in
+    another material, a thin roof rail in it too, and a wheel."""
+    from gltf import GLTF  # noqa: F401
+    def quad(x0, x1, y0, y1, z0, z1, axis):
+        if axis == "y":
+            P = [[x0, y0, z0], [x1, y0, z0], [x1, y0, z1], [x0, y0, z1]]
+            I = [0, 2, 1, 0, 3, 2]                          # facing up (+y)
+        else:
+            P = [[x0, y0, z0], [x0, y1, z0], [x0, y1, z1], [x0, y0, z1]]
+            I = [0, 1, 2, 0, 2, 3]
+        return P, I
+    parts = [("body", *quad(0.9, 0.9, 0.3, 1.2, 0, 4, "x"), 0), ("body", *quad(-0.9, -0.9, 0.3, 1.2, 0, 4, "x"), 0),
+             ("body", *quad(-0.7, 0.7, 1.5, 1.5, 1, 3, "y"), roof_mat),   # the roof: 2.8 m², 39% of the footprint
+             ("body", *quad(0.75, 0.8, 1.52, 1.52, 1, 3, "y"), 1),        # a rail: 0.1 m², 1.4%
+             ("wheel_fl", *quad(0.9, 0.9, 0.0, 0.6, 3.2, 3.8, "x"), 2)]
+    blob, views, accs, prims = b"", [], [], []
+    for name, P, I, mat in parts:
+        P, I = np.asarray(P, np.float32), np.asarray(I, np.uint32)
+        for arr, typ, ct in ((P, "VEC3", 5126), (I, "SCALAR", 5125)):
+            views.append({"buffer": 0, "byteOffset": len(blob), "byteLength": arr.nbytes})
+            acc = {"bufferView": len(views) - 1, "componentType": ct, "count": len(arr) if typ == "VEC3" else arr.size, "type": typ}
+            if typ == "VEC3":
+                acc.update(min=P.min(0).tolist(), max=P.max(0).tolist())
+            accs.append(acc)
+            blob += arr.tobytes()
+        prims.append((name, {"attributes": {"POSITION": len(accs) - 2}, "indices": len(accs) - 1, "material": mat}))
+    nodes, meshes = [], []
+    for name, p in prims:
+        meshes.append({"primitives": [p]})
+        nodes.append({"name": name, "mesh": len(meshes) - 1})
+    j = {"asset": {"version": "2.0"}, "scene": 0, "scenes": [{"nodes": list(range(len(nodes)))}], "nodes": nodes,
+         "materials": [{"name": "Bianca_White_paint"}, {"name": top_name}, {"name": "tyre"}], "meshes": meshes,
+         "buffers": [{"byteLength": len(blob)}], "bufferViews": views, "accessors": accs}
+    js = json.dumps(j).encode()
+    js += b" " * (-len(js) % 4)
+    blob += b"\0" * (-len(blob) % 4)
+    with open(path, "wb") as fh:
+        fh.write(struct.pack("<III", 0x46546C67, 2, 12 + 8 + len(js) + 8 + len(blob)))
+        fh.write(struct.pack("<II", len(js), 0x4E4F534A) + js)
+        fh.write(struct.pack("<II", len(blob), 0x004E4942) + blob)
+
+
+def test_a_stand_ins_black_roof_takes_the_paint_and_its_rails_keep_theirs(tmp_path):
+    # the bZ4X's and the 2008's black roofs on the white Fiat 600, Lexus RZ, Omoda 9 (build review)
+    from gltf import GLTF
+    _car_glb(str(tmp_path / "c.glb"))
+    g = GLTF(str(tmp_path / "c.glb"))
+    out = finish.roof_in_paint(g, g.j["materials"], 0, {0}, set())
+    assert out and out["triangles"] == 2 and out["materials"] == ["2020_Peugeot_e-2008_black"]
+    mats = [p["material"] for m in g.j["meshes"] for p in m["primitives"]]
+    assert mats == [0, 0, 0, 1, 2]                        # the roof painted, the rail and the wheel left
+
+
+def test_a_glass_roof_stays_dark(tmp_path):
+    from gltf import GLTF
+    _car_glb(str(tmp_path / "c.glb"), top_name="panoramic_glass_roof")
+    g = GLTF(str(tmp_path / "c.glb"))
+    assert finish.roof_in_paint(g, g.j["materials"], 0, {0}, set()) is None
+
+
+def test_a_white_roof_asked_is_painted_white_on_a_roof_in_the_body_paint(tmp_path):
+    # the Captur's and the Mini First's photos: a white roof on a blue body
+    from gltf import GLTF
+    _car_glb(str(tmp_path / "c.glb"), roof_mat=0)
+    g = GLTF(str(tmp_path / "c.glb"))
+    out = finish.roof_in_paint(g, g.j["materials"], 0, {0}, set(), colour=(245, 245, 242))
+    assert out and out["triangles"] == 2
+    roof = g.j["materials"][-1]
+    assert roof["name"] == "Bianca_White_paint_roof" and roof["pbrMetallicRoughness"]["baseColorFactor"][0] > 0.85
+    mats = [p["material"] for m in g.j["meshes"] for p in m["primitives"]]
+    assert mats == [0, 0, len(g.j["materials"]) - 1, 1, 2]
+    # with no colour asked, a roof in the body's paint is the paint: nothing to do
+    _car_glb(str(tmp_path / "d.glb"), roof_mat=0)
+    g = GLTF(str(tmp_path / "d.glb"))
+    assert finish.roof_in_paint(g, g.j["materials"], 0, {0}, set()) is None
+
+
+@pytest.mark.parametrize("text, colour, roof", [
+    ("Mini Cooper blue with a white roof", "blue", "white"),
+    ("Mini Cooper white with a contrast roof", "white", "contrast"),
+    ("Fiat 500 two-tone red", "red", "contrast"),
+    ("Nissan Juke blue with body coloured roof", "blue", "body"),
+    ("Peugeot 2008 black", "black", None),               # the paint, not a roof
+    ("Renault Captur #106baf #eeefed roof", "#106baf", "#eeefed"),     # the fleet's: the photo's paint and roof
+])
+def test_the_roof_asked_for_is_read_before_the_paint(text, colour, roof):
+    w = make.parse(text)
+    assert w.get("colour") == colour and w.get("roof") == roof
+
+
+# ── a low-roof van made from a high-roof one ─────────────────────────────
+
+SPRINTER = {"R": 0.34, "zf": -0.917, "zr": -4.69, "wheelbase": 3.773, "zmin": -6.066, "zmax": 0.006, "length": 6.072,
+            "width": 2.098, "height": 2.388, "cab_top": 1.898, "track": 1.526}
+
+
+def test_a_low_roof_van_takes_its_height_out_of_a_high_roof_donors_roof():
+    # every Transit, Transit Custom and iLoad made from the Sprinter still looked a high-roof van (build review)
+    import standin
+    t = {"length": 4863, "wheelbase": 2933, "width": 1974, "height": 2083, "body": "van"}
+    p = standin.plan(SPRINTER, t)
+    rise = p["log"]["roof_lowered"]["roof_over_windscreen_m"]
+    assert rise[0] == 0.49 and rise[1] < 0.25
+    assert abs(float(p["y"](SPRINTER["height"])) - 2.083) < 1e-6          # the published height kept
+    # a high-roof van asked, a tall one, or a car: the even stretch as before
+    for t2 in (dict(t, high_roof=True), dict(t, height=2524), dict(t, body="mpv")):
+        assert "roof_lowered" not in standin.plan(SPRINTER, t2)["log"]
