@@ -63,7 +63,7 @@ BODIES = ("hatchback", "saloon", "sedan", "estate", "coupe", "convertible", "suv
 # makers' own names for a body; an "Active Tourer" or "Gran Tourer" is not an
 # estate (its body is left to the table: no body is asked), nor a 911 GT3
 # Touring or a Grand Touring
-ESTATE_WORDS = (r"(?<!gt3\s)(?<!grand\s)(?<!sport\s)\btouring\b|\bsports?\s?tourer\b|\bavant\b|\bvariant\b|\bsports?\s?wagon\b"
+ESTATE_WORDS = (r"(?<!gt3\s)(?<!grand\s)(?<!(?<!m\s)sport\s)\btouring\b|\bsports?\s?tourer\b|\bavant\b|\bvariant\b|\bsports?\s?wagon\b"
                 r"|\bwagon\b(?![\s-]?r\b)|\bshooting\s+brake\b|\bk?combi\b|\bsw\b")      # a Wagon R is a hatch
 BODY_WORDS = [
     (re.compile(r"\b(?:active|gran)\s+tourer\b"), None),
@@ -900,7 +900,7 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
             + (0.3 if d_sport and not t_sport else 0) + (0.35 if d_slope and not t_slope else 0) + (0.4 if blind else 0) \
             + (0.2 if fam == "mpv" and not target.get("passenger") and VAN_BASED.search(text) and not VAN_BASED.search(asked) else 0)
         lacks = set(short.get(i["assetId"], ())) - rear
-        three = bool(re.search(r"\b[23][- ]?(?:door|dr)\b|coup[eé]", str(i.get("sourceTitle") or ""), re.I)) \
+        three = bool(re.search(r"\b[23][- ]?(?:door|dr)\b|coup[eé]", str(i.get("sourceTitle") or batch.credit_of(i).get("title") or ""), re.I)) \
             or (i.get("doors") and int(i["doors"]) <= 3)
         doors_off = 0.0
         if want.get("doors"):

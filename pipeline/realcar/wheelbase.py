@@ -475,6 +475,7 @@ HAND = {"mini|paceman": [{"name": "Mini Paceman (R61)", "years": [2012, 2016], "
         "toyota|proace-city-verso": [{"name": "Toyota Proace City Verso (K9)", "years": [2019, 2026], "length": 4403,
                                       "width": 1848, "height": 1844, "wheelbase": 2785, "body": "MPV", "doors": 5,
                                       "page": "Toyota Proace City", "source": "by hand: Toyota's published Proace City Verso Medium dimensions"}]}
+HAND["toyota|proace city verso"] = HAND["toyota|proace-city-verso"]        # as a request spells it
 
 
 def _fixed(boxes):

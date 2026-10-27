@@ -919,6 +919,19 @@ def _paint_one(pm, spec, j):
         j["extensionsUsed"].append("KHR_materials_clearcoat")
 
 
+def _corner_attrs(g, attrs, S):
+    """The other vertex attributes (UVs, colours, tangents) of the triangles S
+    (k, 3), one value a corner, for a primitive remade on corners of its own."""
+    out = {}
+    for an, ai in attrs.items():
+        if an in ("POSITION", "NORMAL") or an.startswith(("JOINTS", "WEIGHTS")):
+            continue
+        A = g.accessor(ai)
+        A = A.reshape(len(A), -1)
+        out[an] = g.add_accessor(A[S].reshape(-1, A.shape[1]).astype(np.float32), target=34962)
+    return out
+
+
 def mend_normals(g, mat_ids, cos_max=0.26):
     """A model's shading broken on its paint: triangles whose corners' normals
     point 75 degrees or more off their own face (the Sprinter's rear quarter,
@@ -946,9 +959,7 @@ def mend_normals(g, mat_ids, cos_max=0.26):
             q = {k: v for k, v in p.items() if k not in ("indices", "attributes")}
             q["attributes"] = {"POSITION": g.add_accessor(P[S].reshape(-1, 3).astype(np.float32), minmax=True, target=34962),
                                "NORMAL": g.add_accessor(np.repeat(fn[bad], 3, axis=0).astype(np.float32), target=34962)}
-            if "TEXCOORD_0" in at:
-                q["attributes"]["TEXCOORD_0"] = g.add_accessor(
-                    g.accessor(at["TEXCOORD_0"])[S].reshape(-1, 2).astype(np.float32), target=34962)
+            q["attributes"].update(_corner_attrs(g, at, S))
             q["indices"] = g.add_accessor(np.arange(S.size, dtype=np.uint32), ctype=5125, atype="SCALAR", target=34963)
             new.append(q)
             n_tri += int(bad.sum())
@@ -1009,7 +1020,7 @@ def _panel_stage(g, j, W, glass, paint, zb, cx, stage, seal, panes, near, n_tri,
         mesh, M = j["meshes"][n["mesh"]], W[ni]
         new = []
         for p in mesh["primitives"]:
-            if p.get("mode", 4) != 4 or "indices" not in p:
+            if p.get("mode", 4) != 4 or "indices" not in p or p.get("targets"):
                 continue
             if (stage == "glass") != (p.get("material") in glass) or (stage == "seals" and not seal(p.get("material"))):
                 continue
@@ -1041,7 +1052,7 @@ def _panel_stage(g, j, W, glass, paint, zb, cx, stage, seal, panes, near, n_tri,
             out_side = np.sign(T[sel].mean(1)[:, 0] - cx)[:, None]
             if "NORMAL" in p["attributes"]:
                 N = g.accessor(p["attributes"]["NORMAL"])[S].astype(np.float64)          # (k, 3, 3), the node's frame
-                facing = np.sign((N @ M[:3, :3].T)[..., 0]) * out_side
+                facing = np.sign((N @ np.linalg.pinv(M[:3, :3]))[..., 0]) * out_side     # a normal goes by the inverse
                 N *= np.where(facing < 0, -1.0, 1.0)[..., None]
             else:
                 f_ = nrm[sel] * np.where(inward, -1.0, 1.0)[:, None] @ M[:3, :3]     # a normal goes by the transpose
@@ -1052,10 +1063,7 @@ def _panel_stage(g, j, W, glass, paint, zb, cx, stage, seal, panes, near, n_tri,
             q = {k: v for k, v in p.items() if k not in ("indices", "material", "attributes")}
             q["attributes"] = {"POSITION": g.add_accessor(P0[S].reshape(-1, 3).astype(np.float32), minmax=True, target=34962),
                                "NORMAL": g.add_accessor(N.astype(np.float32), target=34962)}
-            if "TEXCOORD_0" in p["attributes"]:
-                q["attributes"]["TEXCOORD_0"] = g.add_accessor(
-                    g.accessor(p["attributes"]["TEXCOORD_0"])[S].reshape(-1, 2).astype(np.float32), target=34962)
-            q.pop("targets", None)
+            q["attributes"].update(_corner_attrs(g, p["attributes"], S))
             q["indices"] = g.add_accessor(np.arange(S.size, dtype=np.uint32), ctype=5125, atype="SCALAR", target=34963)
             q["material"] = paint
             if sel.all():
@@ -1212,8 +1220,8 @@ def finish(src, spec, out, base_dir="."):
     # a material the model names as its paint, nearly as much of the side as
     # one it does not (the 2017 Countryman's "varnish_paint" over a "panel"
     # under it): the named one is the paint seen
-    if paint < nm and not re.search(r"paint|lack|body", mats[paint].get("name", ""), re.I):
-        named = [i for i in range(nm) if re.search(r"paint|lack", mats[i].get("name", ""), re.I)
+    if paint < nm and not re.search(r"paint|(?<!b)lack|body", mats[paint].get("name", ""), re.I):
+        named = [i for i in range(nm) if re.search(r"paint|(?<!b)lack", mats[i].get("name", ""), re.I)
                  and not mats[i].get("name", "").startswith("detail-") and door_area[i] >= 0.6 * door_area[paint]]
         if named:
             log["paint_by_name_over"] = mats[paint].get("name")
@@ -1223,7 +1231,7 @@ def finish(src, spec, out, base_dir="."):
     # paint-named one has a real share of the side (the build review: five
     # cars kept their model's colour, the photo's painted on their insides)
     if paint < nm and INSIDE.search(mats[paint].get("name", "")):
-        named = [i for i in range(nm) if re.search(r"paint|lack|body", mats[i].get("name", ""), re.I)
+        named = [i for i in range(nm) if re.search(r"paint|(?<!b)lack|body", mats[i].get("name", ""), re.I)
                  and not INSIDE.search(mats[i].get("name", "")) and door_area[i] >= 0.25 * door_area[paint]]
         if named:
             log["paint_over_inside"] = mats[paint].get("name")
@@ -2341,16 +2349,19 @@ def finish(src, spec, out, base_dir="."):
         stem = mats[paint].get("name", "")
         named |= {i for i in range(len(mats)) if i != paint and len(stem) >= 4 and i not in glass
                   and re.fullmatch(re.escape(stem) + r"[ _.\-]?[a-z0-9]{1,3}", mats[i].get("name", ""), re.I)
-                  and mat_m2.get(i, 0) >= 0.5}
+                  and not INSIDE.search(mats[i].get("name", "")) and mat_m2.get(i, 0) >= 0.5}
 
         # and a two-tone's other paint, named as paint, over the waist where the
         # side's skin is not counted: as much as 40% of the paint's own area
         # (the ID Buzz's white "Carpaint_Simple_Ruby" upper half, kept on a red
         # Tourneo): the photo's car is one colour
+        # (never a trim, a lamp or a colourless near-black plastic: the review
+        # of this rule found "black" painted the body colour on 32 cars)
         named |= {i for i in range(len(mats)) if i != paint and i not in glass
-                  and re.search(r"paint|lack", mats[i].get("name", ""), re.I)
+                  and re.search(r"paint|(?<!b)lack", mats[i].get("name", ""), re.I)
                   and not mats[i].get("name", "").startswith("detail-") and not INSIDE.search(mats[i].get("name", ""))
-                  and mat_m2.get(i, 0) >= 0.4 * mat_m2.get(paint, 1e9)}
+                  and not TRIMMISH.search(mats[i].get("name", "")) and not LAMPISH.search(mats[i].get("name", ""))
+                  and not dark_plastic(mats[i]) and mat_m2.get(i, 0) >= 0.4 * mat_m2.get(paint, 1e9)}
         coats = sorted(set(paint_ids) | same_paint(mats, paint, glass, mat_m2) | named)
         for i in coats:
             _paint_one(mats[i], spec, j)
