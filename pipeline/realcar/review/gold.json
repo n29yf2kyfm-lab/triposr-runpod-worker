@@ -135,20 +135,6 @@
    "why": "a red 3-door 205 (one long door, a fixed rear window) beside a photo of a red 3-door 205",
    "checked": "2026-10-27 16:26:44"
   },
-  "car-suzuki-swift": {
-   "verdict": "ok",
-   "faults": [],
-   "built_at": "2026-10-27 16:03:42",
-   "why": "the same 5-door Swift as the photo, orange-red, roof and all, nothing broken",
-   "checked": "2026-10-27 16:26:44"
-  },
-  "car-mg-hs": {
-   "verdict": "ok",
-   "faults": [],
-   "built_at": "2026-10-27 16:04:42",
-   "why": "a RAV4 stand-in of the same kind and size, white, roof and all, nothing broken",
-   "checked": "2026-10-27 16:26:44"
-  },
   "car-renault-captur": {
    "verdict": "bad",
    "faults": [
@@ -420,15 +406,44 @@
     "why": "both white, roof and all",
     "checked": "2026-10-27 14:42:12"
    }
+  },
+  "roof:car-skoda-kamiq": {
+   "why": "wrong: the photo is a Kamiq Monte Carlo, whose roof is black (seen at full size); 'same' was right, and the three roof batches were refused for it",
+   "at": "2026-10-27 17:04:56",
+   "log_lines": 261,
+   "was": {
+    "answer": "body",
+    "built_at": "2026-10-27 10:58:37",
+    "why": "the build has its model's black roof; the photo's Kamiq is silver all over, its roof too",
+    "checked": "2026-10-27 13:28:12"
+   }
+  },
+  "build:car-mg-hs": {
+   "why": "called ok from a thumbnail; at full size the build had body paint on the A-pillar trims (round 3, r3b1 was refused for seeing it)",
+   "at": "2026-10-27 17:31:10",
+   "log_lines": 264,
+   "was": {
+    "verdict": "ok",
+    "faults": [],
+    "built_at": "2026-10-27 16:04:42",
+    "why": "a RAV4 stand-in of the same kind and size, white, roof and all, nothing broken",
+    "checked": "2026-10-27 16:26:44"
+   }
+  },
+  "build:car-suzuki-swift": {
+   "why": "called ok from a thumbnail, never checked at full size",
+   "at": "2026-10-27 17:31:10",
+   "log_lines": 264,
+   "was": {
+    "verdict": "ok",
+    "faults": [],
+    "built_at": "2026-10-27 16:03:42",
+    "why": "the same 5-door Swift as the photo, orange-red, roof and all, nothing broken",
+    "checked": "2026-10-27 16:26:44"
+   }
   }
  },
  "roof": {
-  "car-skoda-kamiq": {
-   "answer": "body",
-   "built_at": "2026-10-27 10:58:37",
-   "why": "the build has its model's black roof; the photo's Kamiq is silver all over, its roof too",
-   "checked": "2026-10-27 13:28:12"
-  },
   "car-jaecoo-7": {
    "answer": "black",
    "built_at": "2026-10-27 10:58:19",

@@ -164,6 +164,20 @@ def test_a_checked_roof_holds_for_a_verdict_too(run):
         build_review.verdict("car-note", "ok", [], "")
 
 
+def test_a_roof_already_asked_for_is_not_built_again(run):
+    # round 3: roofs the machine had been asked for and did not make, called again
+    build_review.verdict("car-note", "bad", ["roof"], "the donor's black roof; the photo's is white", "body")
+    assert "car-note" in paths.load(str(run / "needs_rebuild.json"))
+    paths.save(str(run / "needs_rebuild.json"), {})
+    paths.append_row({"key": "car-note", "status": "standin", "built_at": "2026-10-28 09:00:00", "roof": "body"})
+    build_review.verdict("car-note", "bad", ["roof"], "still the donor's black roof on a white car", "body")
+    assert "car-note" not in paths.load(str(run / "needs_rebuild.json"))
+    assert paths.load(str(run / "roof_limits.json"))["car-note"]["roof"] == "body"
+    # another roof than the one asked: built again
+    build_review.verdict("car-note", "bad", ["roof"], "the photo's roof is black, not white", "black")
+    assert "car-note" in paths.load(str(run / "needs_rebuild.json"))
+
+
 # ── gold: a wrong answer on a checked item teaches, and is counted ───────
 
 def test_a_wrong_answer_on_a_checked_build_is_refused_and_counted(run):

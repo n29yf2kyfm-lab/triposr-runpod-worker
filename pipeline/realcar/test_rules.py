@@ -144,9 +144,15 @@ def test_a_mesh_shaded_its_own_way_all_over_is_left(tmp_path):
 
 # ── a stand-in's roof in its donor's colour ──────────────────────────────
 
-def _car_glb(path, top_name="2020_Peugeot_e-2008_black", roof_mat=1, slope=0.0, roof_side=False, flat_strip=False):
+def _car_glb(path, top_name="2020_Peugeot_e-2008_black", roof_mat=1, slope=0.0, roof_side=False, flat_strip=False,
+            windscreen=False, hidden_glass=False):
     """A box car 4 m long, 1.8 m wide, 1.52 m high: painted sides, a roof in
-    another material, a thin roof rail in it too, and a wheel."""
+    another material, a thin roof rail in it too, and a wheel. WINDSCREEN: a
+    raked one ahead of the roof, two triangles of glass, trims of the roof's
+    material along its sides joined to it, an A-pillar of it away from the
+    glass, and a black band lying on it.
+    HIDDEN_GLASS: the roof's front edge a row of small triangles over glass
+    running on under it, every other one of them near it."""
     from gltf import GLTF  # noqa: F401
     def quad(x0, x1, y0, y1, z0, z1, axis):
         if axis == "y":
@@ -156,17 +162,40 @@ def _car_glb(path, top_name="2020_Peugeot_e-2008_black", roof_mat=1, slope=0.0, 
             P = [[x0, y0, z0], [x0, y1, z0], [x0, y1, z1], [x0, y0, z1]]
             I = [0, 1, 2, 0, 2, 3]
         return P, I
-    roof = quad(-0.7, 0.7, 1.5, 1.5, 1, 3, "y")
+    roof = quad(-0.7, 0.7, 1.5, 1.5, 1, 2.9 if hidden_glass else 3, "y")
+    if hidden_glass:                                      # the front edge, z 2.9 to 3: ten teeth up, nine down
+        xs = np.linspace(-0.7, 0.7, 11)
+        fp = [[x, 1.5, 3.0] for x in xs] + [[(a + b) / 2, 1.5, 2.9] for a, b in zip(xs[:-1], xs[1:])]
+        fi = []
+        for k in range(10):
+            fi += [k, k + 1, 11 + k]                      # a tooth on the front edge, over the glass
+            if k < 9:
+                fi += [k + 1, 12 + k, 11 + k]             # one between, behind it
+        roof = (roof[0] + fp, roof[1] + [i + 4 for i in fi])
     if roof_side:                                         # the roof's own side, upright, in the same piece
         sp, si = quad(0.7, 0.7, 1.3, 1.5, 1, 3, "x")
         roof = (roof[0] + sp, roof[1] + [i + 4 for i in si])
     if flat_strip:                                        # a flat strip on its top end, in the same piece
         fp = [[-0.7, 1.5, 3.0], [0.7, 1.5, 3.0], [0.7, 1.5, 3.2], [-0.7, 1.5, 3.2]]
         roof = (roof[0] + fp, roof[1] + [4, 6, 5, 4, 7, 6])
+    def raked(x0, x1, z1=3.6, lift=0.0):                  # from the roof's front edge down to z1, facing up and forward
+        n = np.array([0, 0.6, 0.3]) / np.linalg.norm([0, 0.6, 0.3]) * lift
+        y1 = 1.5 - 0.5 * (z1 - 3.0)
+        return [list(np.add(q, n)) for q in ([x0, 1.5, 3.0], [x1, 1.5, 3.0], [x1, y1, z1], [x0, y1, z1])], [0, 3, 1, 1, 3, 2]
+    extra = []
+    if hidden_glass:                                      # the windscreen's top, on under the roof's edge
+        extra = [("body", [[-0.7, 1.48, 3.0], [0.7, 1.48, 3.0], [0.7, 1.497, 2.97], [-0.7, 1.497, 2.97]],
+                  [0, 3, 1, 1, 3, 2], 3)]
+    if windscreen:
+        for x0, x1 in ((0.6, 0.62), (-0.62, -0.6), (0.66, 0.7)):  # trims along its sides, a pillar, in the roof's piece
+            ap, ai = raked(x0, x1)
+            roof = (roof[0] + ap, roof[1] + [i + len(roof[0]) for i in ai])
+        extra = [("body", *raked(-0.6, 0.6), 3),           # the windscreen: two triangles
+                 ("body", *raked(-0.5, 0.5, z1=3.1, lift=0.002), roof_mat)]   # its black band, on the glass
     parts = [("body", *quad(0.9, 0.9, 0.3, 1.2, 0, 4, "x"), 0), ("body", *quad(-0.9, -0.9, 0.3, 1.2, 0, 4, "x"), 0),
              ("body", *roof, roof_mat),                   # the roof: 2.8 m², 39% of the footprint
              ("body", *quad(0.75, 0.8, 1.52, 1.52, 1, 3, "y"), 1),        # a rail: 0.1 m², 1.4%
-             ("wheel_fl", *quad(0.9, 0.9, 0.0, 0.6, 3.2, 3.8, "x"), 2)]
+             ("wheel_fl", *quad(0.9, 0.9, 0.0, 0.6, 3.2, 3.8, "x"), 2)] + extra
     blob, views, accs, prims = b"", [], [], []
     for name, P, I, mat in parts:
         P, I = np.asarray(P, np.float32), np.asarray(I, np.uint32)
@@ -183,7 +212,8 @@ def _car_glb(path, top_name="2020_Peugeot_e-2008_black", roof_mat=1, slope=0.0, 
         meshes.append({"primitives": [p]})
         nodes.append({"name": name, "mesh": len(meshes) - 1})
     j = {"asset": {"version": "2.0"}, "scene": 0, "scenes": [{"nodes": list(range(len(nodes)))}], "nodes": nodes,
-         "materials": [{"name": "Bianca_White_paint"}, {"name": top_name}, {"name": "tyre"}], "meshes": meshes,
+         "materials": [{"name": "Bianca_White_paint"}, {"name": top_name}, {"name": "tyre"},
+                       {"name": "windscreen", "alphaMode": "BLEND"}], "meshes": meshes,
          "buffers": [{"byteLength": len(blob)}], "bufferViews": views, "accessors": accs}
     js = json.dumps(j).encode()
     js += b" " * (-len(js) % 4)
@@ -205,14 +235,38 @@ def test_a_stand_ins_black_roof_takes_the_paint_and_its_rails_keep_theirs(tmp_pa
     assert mats == [0, 0, 0, 1, 2]                        # the roof painted, the rail and the wheel left
 
 
-def test_a_material_named_for_the_roof_is_painted_down_its_sides(tmp_path):
-    # the RAV4's "BlackRoof" and the Swift's "exterior-roof": their sides and pillars stayed black
+def test_a_roofs_own_sides_stay_as_they_are(tmp_path):
+    # round 3: a roof-named piece painted whole spilt down the pillars
     from gltf import GLTF
-    for name, n in (("BlackRoof", 4), ("2020_Peugeot_e-2008_black", 2)):
-        _car_glb(str(tmp_path / "c.glb"), top_name=name, roof_side=True)
-        g = GLTF(str(tmp_path / "c.glb"))
-        out = finish.roof_in_paint(g, g.j["materials"], 0, {0}, set())
-        assert out and out["triangles"] == n            # its side too when named the roof's; else the top only
+    _car_glb(str(tmp_path / "c.glb"), top_name="BlackRoof", roof_side=True)
+    g = GLTF(str(tmp_path / "c.glb"))
+    out = finish.roof_in_paint(g, g.j["materials"], 0, {0}, set())
+    assert out and out["triangles"] == 2                 # the top, not its upright side
+
+
+def test_what_lies_on_the_glass_is_never_painted(tmp_path):
+    # round 3: a windscreen's black band (the Fiat 600's, its glass two big
+    # triangles, so far from their corners), the trims along it and the
+    # A-pillars joined to the roof were painted with it, patches of body
+    # colour on the windscreen and the pillars
+    from gltf import GLTF
+    _car_glb(str(tmp_path / "c.glb"), windscreen=True)
+    g = GLTF(str(tmp_path / "c.glb"))
+    out = finish.roof_in_paint(g, g.j["materials"], 0, {0}, set())
+    assert out and out["triangles"] == 2                 # the roof alone
+    by_node = [(n["name"], p["material"]) for n in g.j["nodes"] for p in g.j["meshes"][n["mesh"]]["primitives"]]
+    assert by_node[-1] == ("body", 1)                    # the band keeps its black
+    assert ("body", 3) in by_node                        # the glass its own
+
+
+def test_a_roofs_edge_over_glass_running_on_under_it_is_painted_whole(tmp_path):
+    # the RAV4's windscreen runs on under the roof: its front edge, triangle
+    # by triangle near the glass or not, was left a saw's teeth of black
+    from gltf import GLTF
+    _car_glb(str(tmp_path / "c.glb"), hidden_glass=True)
+    g = GLTF(str(tmp_path / "c.glb"))
+    out = finish.roof_in_paint(g, g.j["materials"], 0, {0}, set())
+    assert out and out["triangles"] == 2 + 19             # the roof and its whole edge
 
 
 def test_a_roof_sloping_to_the_tail_is_painted_to_its_end(tmp_path):

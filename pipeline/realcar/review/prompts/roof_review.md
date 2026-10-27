@@ -17,7 +17,8 @@ Only what you can see. A glass sunroof or panoramic roof with body-coloured edge
 ## What goes wrong
 1. Calling the black pillars and window frames a black roof. Look at the panel between them.
 2. Missing a photo's contrasting roof because the body draws the eye (a Mini's white roof, a Juke's black one).
-3. Missing the model's own black roof on an own model (a Skoda Kamiq built with a black roof beside a photo of a silver car with a silver roof): it is `body`.
+3. Missing the model's own black roof on an own model beside a photo of a car that is one colour all over (a RAV4 built with a black roof beside a photo of a silver RAV4): it is `body`.
+4. Calling a dark roof the body's colour, or the reverse, from the thumbnail: open the photo full size and look at the panel between the roof rails. A trim with a black roof (a Kamiq Monte Carlo, an Aygo x-wave) has one: a checked answer that missed the Kamiq's was wrong, and was taken back.
 
 ## Checked pairs
 Some pairs were answered by hand beforehand. If you answer one wrongly the tool says "REFUSED: ... checked by hand ..." with the right answer and why: look at that pair again until you see it, then at every roof you have answered on that sheet (answer any again that you got wrong: the latest answer counts), then answer the refused one again. Each refusal counts against your batch.

@@ -164,12 +164,7 @@ def verdict(key, v, faults, note, roof=None):
     if "roof" in faults:
         # the photo's roof is the body's colour: the rebuild paints the
         # build's (fleet.py asks for it from roof_label.json)
-        with paths.lock("roof_label"):
-            rl = paths.load(paths.f("roof_label.json"))
-            rl[key] = {"roof": roof, "by": "build review", "at": paths.now()}
-            paths.save(paths.f("roof_label.json"), rl)
-        paths.queue_rebuild(key, "its roof in the body's colour, as the photo's" if roof == "body"
-                            else f"its roof {roof}, as the photo's")
+        ask_roof(key, roof, "build review", r)
     if "side" in faults or "colour" in faults:
         # the side and the colour are named by eye (view_label.py, paint_label.py):
         # one the build shows wrong is named again before it is rebuilt
@@ -179,6 +174,30 @@ def verdict(key, v, faults, note, roof=None):
                 if what in faults:
                     q.setdefault(what, {})[key] = paths.now()
             paths.save(paths.f("needs_label.json"), q)
+
+
+def ask_roof(key, roof, by, row):
+    """The photo's roof, as a rebuild is to ask for it. A build already made
+    asking for that roof is not built again for it: the machine did what it
+    can (a Smart's coloured frame, an ID Buzz's white upper half, a roof it
+    did not find), and another build would come out the same, the review
+    calling it again and again (round 3). It is kept as the machine's limit
+    (roof_limits.json), for the report and for the machine's next fix."""
+    with paths.lock("roof_label"):
+        rl = paths.load(paths.f("roof_label.json"))
+        before = (rl.get(key) or {}).get("roof")
+        built_asking = bool(row.get("roof")) and before == roof
+        if not built_asking:
+            rl[key] = {"roof": roof, "by": by, "at": paths.now()}
+            paths.save(paths.f("roof_label.json"), rl)
+    if built_asking:
+        with paths.lock("roof_limits"):
+            lim = paths.load(paths.f("roof_limits.json"))
+            lim[key] = {"roof": roof, "built_at": row.get("built_at"), "by": by, "at": paths.now()}
+            paths.save(paths.f("roof_limits.json"), lim)
+        return
+    paths.queue_rebuild(key, "its roof in the body's colour, as the photo's" if roof == "body"
+                        else f"its roof {roof}, as the photo's")
 
 
 def roof(key, answer, note=""):
@@ -209,12 +228,7 @@ def roof(key, answer, note=""):
                   "photo_sha": paths.sha(paths.photo(key))}
         paths.save(paths.f("roof_check.json"), d)
     if answer != "same":
-        with paths.lock("roof_label"):
-            rl = paths.load(paths.f("roof_label.json"))
-            rl[key] = {"roof": answer, "by": "roof pass", "at": paths.now()}
-            paths.save(paths.f("roof_label.json"), rl)
-        paths.queue_rebuild(key, "its roof in the body's colour, as the photo's" if answer == "body"
-                            else f"its roof {answer}, as the photo's")
+        ask_roof(key, answer, "roof pass", r)
 
 
 def main():
