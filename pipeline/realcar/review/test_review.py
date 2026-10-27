@@ -140,6 +140,19 @@ def test_the_roof_pass_records_and_queues_and_its_checked_roofs_teach(run):
     assert gold.judge("roof", "car-note", "same") is None
 
 
+def test_the_commands_as_the_agents_type_them(run, monkeypatch, capsys):
+    # every command the prompts give, through main(): the roof pass's first
+    # batch found "roof KEY same" failing on a name main() hid
+    for argv in (["roof", "car-fiesta", "same"],
+                 ["verdict", "car-note", "bad", "roof", "the donor's black roof on a white car", "--roof", "body"],
+                 ["verdict", "car-fiesta", "ok"]):
+        monkeypatch.setattr(sys, "argv", ["build_review.py", *argv])
+        build_review.main()
+    out = capsys.readouterr().out
+    assert "recorded roof car-fiesta same" in out and "recorded car-note bad" in out
+    assert paths.load(str(run / "roof_label.json"))["car-note"]["roof"] == "body"
+
+
 # ── gold: a wrong answer on a checked item teaches, and is counted ───────
 
 def test_a_wrong_answer_on_a_checked_build_is_refused_and_counted(run):

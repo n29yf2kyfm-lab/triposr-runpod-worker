@@ -229,11 +229,13 @@ def main():
     if a[0] == "verdict":
         if len(a) < 3:
             raise SystemExit(__doc__)
-        roof = a[a.index("--roof") + 1] if "--roof" in a and a.index("--roof") + 1 < len(a) else None
+        # (not "roof": a local of that name hid the roof() function above, and
+        # every "roof KEY ..." call failed: the roof pass's first batch found it)
+        roof_is = a[a.index("--roof") + 1] if "--roof" in a and a.index("--roof") + 1 < len(a) else None
         a = [x for i, x in enumerate(a) if x != "--roof" and (i == 0 or a[i - 1] != "--roof")]
         faults = [x.strip() for x in (a[3] if len(a) > 3 else "").split(",") if x.strip()]
         try:
-            verdict(a[1], a[2], faults, a[4] if len(a) > 4 else "", roof)
+            verdict(a[1], a[2], faults, a[4] if len(a) > 4 else "", roof_is)
         except Refused as e:
             print("REFUSED:", e)
             raise SystemExit(2)
