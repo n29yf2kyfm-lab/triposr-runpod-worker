@@ -28,7 +28,8 @@ import gold
 import paths
 import view_label
 
-BLOCKING = ("results", "photo", "paint", "colour", "built", "side", "picture", "verdict", "queue", "label", "gold")
+BLOCKING = ("results", "photo", "paint", "colour", "built", "side", "picture", "verdict", "queue", "label", "gold",
+            "licence")
 
 
 def run():
@@ -40,6 +41,7 @@ def run():
     pp, plab = paths.load(paths.f("photo_paint.json")), paths.load(paths.f("paint_label.json"))
     vlab, taken = paths.load(paths.f("view_label.json")), view_label.taken()
     rev = paths.load(paths.f("build_review.json"))
+    any_licence = paths.load(paths.f("run.json")).get("licence") == "any"
     for t in targets:
         k = t["key"]
         r = rows.get(k)
@@ -58,6 +60,10 @@ def run():
             found["paint"].append(f"{k}: paint read from an older photo")
         elif not p.get("hex"):
             found["paint"].append(f"{k}: no paint read")
+        if any_licence and any("non-commercial licence" in (n or "") for n in (r.get("notes") or [])):
+            # a run that may use any model, built from another for its licence
+            # (a redo that dropped the run's choice built 36 so)
+            found["licence"].append(f"{k}: built from {r.get('asset')}, a closer model left out for its licence")
         if not plab.get(k):
             found["colour"].append(k)
         elif p.get("family") and p["family"] != plab[k]:

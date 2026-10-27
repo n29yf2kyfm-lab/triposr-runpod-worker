@@ -320,6 +320,13 @@ def test_the_gate_finds_a_paint_read_for_another_colour_than_the_label(run):
     assert any("named silver" in x for x in check.run()["paint"])
 
 
+def test_the_gate_finds_a_build_that_left_out_the_runs_licence(run):
+    paths.save(str(run / "run.json"), {"licence": "any"})
+    paths.append_row({"key": "car-fiesta", "status": "standin", "built_at": "2026-10-28 09:00:00", "asset": "ford-focus",
+                      "notes": ["A closer model exists under a non-commercial licence; it was left out because this car may be sold."]})
+    assert check.run()["licence"]
+
+
 def test_the_gate_is_clear_when_all_is_current(run):
     paint_label.label("car-fiesta=white car-note=white")
     view_label.label("car-fiesta=left car-note=left")
