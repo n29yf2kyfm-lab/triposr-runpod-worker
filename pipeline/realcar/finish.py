@@ -2342,6 +2342,15 @@ def finish(src, spec, out, base_dir="."):
         named |= {i for i in range(len(mats)) if i != paint and len(stem) >= 4 and i not in glass
                   and re.fullmatch(re.escape(stem) + r"[ _.\-]?[a-z0-9]{1,3}", mats[i].get("name", ""), re.I)
                   and mat_m2.get(i, 0) >= 0.5}
+
+        # and a two-tone's other paint, named as paint, over the waist where the
+        # side's skin is not counted: as much as 40% of the paint's own area
+        # (the ID Buzz's white "Carpaint_Simple_Ruby" upper half, kept on a red
+        # Tourneo): the photo's car is one colour
+        named |= {i for i in range(len(mats)) if i != paint and i not in glass
+                  and re.search(r"paint|lack", mats[i].get("name", ""), re.I)
+                  and not mats[i].get("name", "").startswith("detail-") and not INSIDE.search(mats[i].get("name", ""))
+                  and mat_m2.get(i, 0) >= 0.4 * mat_m2.get(paint, 1e9)}
         coats = sorted(set(paint_ids) | same_paint(mats, paint, glass, mat_m2) | named)
         for i in coats:
             _paint_one(mats[i], spec, j)
