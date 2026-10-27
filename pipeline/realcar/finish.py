@@ -896,6 +896,29 @@ def same_paint(mats, paint, glass, area=None):
     return out
 
 
+def wheels_in_paint(mats, paint, glass):
+    """A wheel's material coloured in the model's own paint (the 2022 Swift's
+    "WHEEL_BLACK_MAT" is its paint's red): shown red on a white car made
+    from it. Named for a wheel, untextured, the paint's clear hue."""
+    pbr = mats[paint].get("pbrMetallicRoughness") or {}
+    if "baseColorTexture" in pbr:
+        return set()
+    L0, a0, b0 = _lin_to_lab(pbr.get("baseColorFactor") or [1, 1, 1])
+    C0, h0 = math.hypot(a0, b0), math.degrees(math.atan2(b0, a0))
+    if C0 < 20:
+        return set()
+    out = set()
+    for i, m in enumerate(mats):
+        p = m.get("pbrMetallicRoughness") or {}
+        if i == paint or i in glass or "baseColorTexture" in p or not WHEELISH.search(m.get("name", "")):
+            continue
+        L, a, b = _lin_to_lab(p.get("baseColorFactor") or [1, 1, 1])
+        C, h = math.hypot(a, b), math.degrees(math.atan2(b, a))
+        if C > 0.6 * C0 and abs((h - h0 + 180) % 360 - 180) < 15 and abs(L - L0) < 25:
+            out.add(i)
+    return out
+
+
 def _paint_one(pm, spec, j):
     """The colour asked for (sRGB 0-255) on one paint material."""
     pbr = pm.setdefault("pbrMetallicRoughness", {})
@@ -2368,6 +2391,13 @@ def finish(src, spec, out, base_dir="."):
                   and not TRIMMISH.search(mats[i].get("name", "")) and not LAMPISH.search(mats[i].get("name", ""))
                   and not dark_plastic(mats[i]) and mat_m2.get(i, 0) >= 0.4 * mat_m2.get(paint, 1e9)}
         coats = sorted(set(paint_ids) | same_paint(mats, paint, glass, mat_m2) | named)
+        # a wheel's material in the model's own paint colour: a wheel's dark grey
+        wip = wheels_in_paint(mats, paint, glass)
+        for i in wip:
+            (mats[i].setdefault("pbrMetallicRoughness", {})).update(
+                {"baseColorFactor": [0.03, 0.03, 0.03, 1.0], "metallicFactor": 0.3, "roughnessFactor": 0.55})
+        if wip:
+            log["wheels_in_paint"] = [mats[i].get("name") for i in sorted(wip)]
         for i in coats:
             _paint_one(mats[i], spec, j)
         # a material the model also uses for body panels (batch.PAINT_ALSO):
