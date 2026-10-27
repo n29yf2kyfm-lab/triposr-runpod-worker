@@ -83,6 +83,9 @@ could call either way.
 | Checked answers made from a sheet's thumbnail (an MG HS and a Swift called ok, a Kamiq Monte Carlo's black roof missed) | withdrawn; an answer is checked on the full-size photo and build, or not added |
 | A roof answer corrected to "same" on the same build left its label, its rebuild and its limit behind (three in round 4) | `take_back_roof`: the later "same", from the same kind of pass, undoes all three; a verdict that leaves the roof out does not undo the roof pass's |
 | Pale and earthy paints built in a family's far darker or brighter paint (a pale sage as a Defender's green, a terracotta as crimson) | the sage, olive, copper and aqua families; the colour prompt asks for the family closest in lightness too |
+| The round-3 roof fix over-trimmed: a roof over hidden panoramic glass half black, a roof's sides left in the old colour, a cleared glass roof showing a white headliner | only raked or upright glass keeps paint off; sides above the side windows are painted; a flat glass roof is tinted dark; pinned in `test_rules.py` |
+| A stand-in with another door count than its photo (the Mii, Escort, Adam) asked for in a note no rebuild read | `verdict ... --doors N` names the photo's count, the rebuild asks for it; `check.py` stops a build that did not ask for its roof or doors (`asked`) |
+| Paint moved onto lamps, cabins and wheels sharing the paint's material | only panels of a shared trim material are painted (islands of 0.1 m² and up, never lamp, cabin or wheel nodes) |
 
 The machine's own rules that went wrong are pinned by `pipeline/realcar/test_rules.py` ("black" is no paint name,
 "carpaint.198" no inside, "M Sport Touring" an estate, a wheel in the paint's colour never painted, people
