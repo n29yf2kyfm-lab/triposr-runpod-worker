@@ -285,7 +285,10 @@ def tyres_black(mats):
     for m in mats:
         name = m.get("name") or ""
         pbr = m.setdefault("pbrMetallicRoughness", {})
-        if not TYRE_NAME.search(name) or re.search(r"white|wall", name, re.I) or "baseColorTexture" in pbr:
+        # nor a rim, hub or brake named with its tyre ("Tire_Rim"): silver, rightly
+        if not TYRE_NAME.search(name) or re.search(r"white|wall", name, re.I) or "baseColorTexture" in pbr \
+                or re.search(r"rim(?![a-z])|(?<![a-z])rim|felge|cerch|jant|llant|hub|chrom|alloy|metal|brake|disc|calip",
+                             name, re.I):
             continue
         c = (pbr.get("baseColorFactor") or [1, 1, 1, 1])[:3]
         if min(c) > 0.5:
@@ -300,7 +303,8 @@ def trims_to_black(g, mats, names, skip):
     near-black trim tinted another colour than a lamp's red or amber (the
     2008's mirrors, pillars and inserts in a dark purple, the S1's splitter in
     a dark blue: in the studio's light their colour showed). Neither the paint
-    (SKIP), glass, a lamp, a badge, the plate nor the cabin. Returns the names."""
+    nor the glass (SKIP: a tinted glass made black and whole), a lamp, a badge,
+    the plate nor the cabin. Returns the names."""
     out = []
     for i, m in enumerate(mats):
         name = m.get("name") or ""
@@ -2893,7 +2897,7 @@ def finish(src, spec, out, base_dir="."):
     log["normals_mended"] = mend_normals(g, set(coats) | {paint} if spec.get("paint") else paint_ids)
     # ── trim in black where the model has it in a livery's colour ──
     tb = trims_to_black(g, mats, set(spec.get("trim_black") or []),
-                        (set(coats) | {paint}) if spec.get("paint") else set(paint_ids))
+                        ((set(coats) | {paint}) if spec.get("paint") else set(paint_ids)) | glass)
     if tb:
         log["trim_black"] = tb
     ty = tyres_black(mats)

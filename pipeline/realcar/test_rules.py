@@ -476,6 +476,28 @@ def test_a_tyre_left_white_is_rubber_a_whitewall_stays():
     mats = [{"name": "00_-_Porsche_Macan_GTS_-_Pneus", "pbrMetallicRoughness": {"baseColorFactor": [0.8, 0.8, 0.8, 1]}},
             {"name": "tire_white", "pbrMetallicRoughness": {"baseColorFactor": [0.94, 0.94, 0.94, 1]}},
             {"name": "Tires", "pbrMetallicRoughness": {"baseColorFactor": [1, 1, 1, 1], "baseColorTexture": {"index": 0}}},
-            {"name": "Brake_Disc", "pbrMetallicRoughness": {"baseColorFactor": [1, 1, 1, 1]}}]
-    assert finish.tyres_black(mats) == ["00_-_Porsche_Macan_GTS_-_Pneus"]
+            {"name": "Brake_Disc", "pbrMetallicRoughness": {"baseColorFactor": [1, 1, 1, 1]}},
+            {"name": "Tire_Rim", "pbrMetallicRoughness": {"baseColorFactor": [0.8, 0.8, 0.8, 1]}},
+            {"name": "TyreRim", "pbrMetallicRoughness": {"baseColorFactor": [0.8, 0.8, 0.8, 1]}}]
+    assert finish.tyres_black(mats) == ["00_-_Porsche_Macan_GTS_-_Pneus"]   # a rim named with its tyre stays silver
     assert mats[0]["pbrMetallicRoughness"]["baseColorFactor"][0] < 0.05
+
+
+def test_trim_in_a_livery_colour_is_black_lamps_glass_and_paint_are_not():
+    # the 2008's mirrors and pillars in a dark purple, the S1's splitter in a
+    # dark blue (round 4); a lamp's dark red, the paint, a tinted glass and the
+    # cabin keep theirs
+    def m(name, c):
+        return {"name": name, "pbrMetallicRoughness": {"baseColorFactor": list(c) + [1]}}
+    mats = [m("Material.012", [0.012, 0.003, 0.02]),       # dark purple trim
+            m("Material.013", [0.002, 0.004, 0.02]),       # dark blue trim
+            m("Material.014", [0.02, 0.002, 0.002]),       # dark red: a lamp's
+            m("Material.015", [0.002, 0.004, 0.02]),       # the paint (skipped)
+            m("Material.016", [0.002, 0.004, 0.02]),       # a tinted glass (skipped)
+            m("Interior_dark", [0.002, 0.004, 0.02]),
+            m("vehicle_mesh.004", [0.05, 0.2, 0.6]),       # by name (a GT's blue splitter)
+            m("Material.017", [0.3, 0.3, 0.35])]           # light: not near-black
+    out = finish.trims_to_black(None, mats, {"vehicle_mesh.004"}, {3, 4})
+    assert out == ["Material.012", "Material.013", "vehicle_mesh.004"]
+    assert mats[0]["pbrMetallicRoughness"]["baseColorFactor"][:3] == [0.035] * 3
+    assert mats[4]["pbrMetallicRoughness"]["baseColorFactor"][:3] == [0.002, 0.004, 0.02]
