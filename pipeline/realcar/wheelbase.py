@@ -485,6 +485,11 @@ HAND["fiat|talento"] = [{"name": "Fiat Talento (2016, the Trafic's twin)", "year
 HAND["talbot|express"] = [{"name": "Talbot Express (the first Ducato's twin)", "years": [1982, 1994], "length": 5146,
                            "width": 1960, "height": 2070, "wheelbase": 3288, "body": "van", "doors": 3,
                            "page": "Fiat Ducato", "source": "the Fiat Ducato page's first-generation box"}]
+# the table's "BYD Seal" was the Seal U's page, which is the Song Plus SUV's:
+# the Seal saloon was built as an SUV from a Santa Fe (the build review)
+HAND["byd|seal"] = [{"name": "BYD Seal (the saloon)", "years": [2022, 2026], "length": 4800, "width": 1875,
+                     "height": 1460, "wheelbase": 2920, "body": "4-door fastback saloon", "doors": 4,
+                     "page": "BYD Seal", "source": "by hand: BYD's published Seal dimensions"}]
 
 
 def _fixed(boxes):
