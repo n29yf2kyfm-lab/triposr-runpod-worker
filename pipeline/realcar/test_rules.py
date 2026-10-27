@@ -144,7 +144,7 @@ def test_a_mesh_shaded_its_own_way_all_over_is_left(tmp_path):
 
 # ── a stand-in's roof in its donor's colour ──────────────────────────────
 
-def _car_glb(path, top_name="2020_Peugeot_e-2008_black", roof_mat=1, slope=0.0, roof_side=False):
+def _car_glb(path, top_name="2020_Peugeot_e-2008_black", roof_mat=1, slope=0.0, roof_side=False, flat_strip=False):
     """A box car 4 m long, 1.8 m wide, 1.52 m high: painted sides, a roof in
     another material, a thin roof rail in it too, and a wheel."""
     from gltf import GLTF  # noqa: F401
@@ -160,6 +160,9 @@ def _car_glb(path, top_name="2020_Peugeot_e-2008_black", roof_mat=1, slope=0.0, 
     if roof_side:                                         # the roof's own side, upright, in the same piece
         sp, si = quad(0.7, 0.7, 1.3, 1.5, 1, 3, "x")
         roof = (roof[0] + sp, roof[1] + [i + 4 for i in si])
+    if flat_strip:                                        # a flat strip on its top end, in the same piece
+        fp = [[-0.7, 1.5, 3.0], [0.7, 1.5, 3.0], [0.7, 1.5, 3.2], [-0.7, 1.5, 3.2]]
+        roof = (roof[0] + fp, roof[1] + [4, 6, 5, 4, 7, 6])
     parts = [("body", *quad(0.9, 0.9, 0.3, 1.2, 0, 4, "x"), 0), ("body", *quad(-0.9, -0.9, 0.3, 1.2, 0, 4, "x"), 0),
              ("body", *roof, roof_mat),                   # the roof: 2.8 m², 39% of the footprint
              ("body", *quad(0.75, 0.8, 1.52, 1.52, 1, 3, "y"), 1),        # a rail: 0.1 m², 1.4%
@@ -232,6 +235,11 @@ def test_a_flat_glass_roof_is_a_roof_and_a_raked_pane_is_not(tmp_path):
     # glass raked like a windscreen (24 degrees and more): never painted
     _car_glb(str(tmp_path / "d.glb"), top_name="windscreen_glass", slope=0.9)
     g = GLTF(str(tmp_path / "d.glb"))
+    assert finish.roof_in_paint(g, g.j["materials"], 0, {0}, {1}) is None
+    # nor a raked pane whose top strip lies flat (a windscreen curving into the
+    # roof: the Fiat 600's mirror-mount patch): judged as a whole pane
+    _car_glb(str(tmp_path / "e.glb"), top_name="windscreen_glass", slope=0.9, flat_strip=True)
+    g = GLTF(str(tmp_path / "e.glb"))
     assert finish.roof_in_paint(g, g.j["materials"], 0, {0}, {1}) is None
 
 

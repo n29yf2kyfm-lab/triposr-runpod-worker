@@ -127,13 +127,6 @@
    "built_at": "2026-10-27 10:58:15",
    "why": "a 5-door 2012 Focus stands in for the 3-door Escort in the photo: the door count always counts",
    "checked": "2026-10-27 12:43:16"
-  },
-  "car-fiat-600": {
-   "verdict": "ok",
-   "faults": [],
-   "built_at": "2026-10-27 14:18:16",
-   "why": "a Peugeot 2008 stand-in of the same kind and size, white roof and all, nothing broken",
-   "checked": "2026-10-27 14:42:11"
   }
  },
  "side": {
@@ -374,6 +367,29 @@
     "why": "the same vehicle as the photo, its colour, nothing broken",
     "checked": "2026-10-27 12:11:08"
    }
+  },
+  "build:car-fiat-600": {
+   "why": "wrong: its build had a patch of body paint on the windscreen round the mirror's mount (the roof rule's, since fixed); checked too quickly, it taught round 2 that paint on glass is no fault",
+   "at": "2026-10-27 16:00:36",
+   "log_lines": 245,
+   "was": {
+    "verdict": "ok",
+    "faults": [],
+    "built_at": "2026-10-27 14:18:16",
+    "why": "a Peugeot 2008 stand-in of the same kind and size, white roof and all, nothing broken",
+    "checked": "2026-10-27 14:42:11"
+   }
+  },
+  "roof:car-fiat-600": {
+   "why": "its build is to be rebuilt; withdrawn with its build item",
+   "at": "2026-10-27 16:00:36",
+   "log_lines": 245,
+   "was": {
+    "answer": "same",
+    "built_at": "2026-10-27 14:18:16",
+    "why": "both white, roof and all",
+    "checked": "2026-10-27 14:42:12"
+   }
   }
  },
  "roof": {
@@ -412,12 +428,6 @@
    "built_at": "2026-10-27 09:08:12",
    "why": "both light blue, roof and all",
    "checked": "2026-10-27 13:28:14"
-  },
-  "car-fiat-600": {
-   "answer": "same",
-   "built_at": "2026-10-27 14:18:16",
-   "why": "both white, roof and all",
-   "checked": "2026-10-27 14:42:12"
   },
   "car-renault-captur": {
    "answer": "same",

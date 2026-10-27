@@ -1021,8 +1021,18 @@ def roof_in_paint(g, mats, paint, painted, glass, waist=0.78, band=0.06, up=0.5,
         T = P[I]
         _, nrm = tri_area_normal(T)
         cy = T.mean(1)[:, 1]
-        if is_glass:                              # a glass roof: flat, on top
-            sel = np.where((nrm[:, 1] > 0.92) & (cy > top - band * h))[0]
+        if is_glass:
+            # a glass roof: a pane lying flat on top, the whole pane; a
+            # windscreen's top strip curves flat into the roof too, and was
+            # painted (the Fiat 600's, the Captur's: a patch of body colour
+            # round the mirror's mount, in round 2), but most of it is raked
+            a_, _ = tri_area_normal(T)
+            gl, _ = islands(T, weld=1e-3 * max(top - ground, 1e-6) / 1.5)
+            flat_a = np.bincount(gl, weights=a_ * (nrm[:, 1] > 0.92))
+            all_a = np.maximum(np.bincount(gl, weights=a_), 1e-12)
+            gy = np.bincount(gl, weights=a_ * cy) / all_a
+            pane = (flat_a / all_a >= 0.7) & (gy > top - band * (top - ground))
+            sel = np.where(pane[gl])[0]
         else:
             sel = np.where((nrm[:, 1] > up) & (cy > ground + waist * h))[0]
         # a material the model names its roof's (the RAV4's "BlackRoof", the
@@ -1049,16 +1059,18 @@ def roof_in_paint(g, mats, paint, painted, glass, waist=0.78, band=0.06, up=0.5,
         nxt += int(l_.max()) + 1
     hi = np.full(lab.max() + 1, -np.inf)
     np.maximum.at(hi, lab, T[:, :, 1].max(1))
-    # pieces over the glasshouse (their top over 88% of the height) that cross
-    # the middle of the car, no crumbs: roof rails and window trims run along
-    # its sides (the RAV4's, its BlackChrome and WindowsTrims), a roof across
+    # pieces over the glasshouse (their top over 82% of the height: a roof's
+    # rear section stepping down to the tail counts, which 88% left in the
+    # donor's colour on the Kona, the Compass, the bZ4X) that cross the middle
+    # of the car, no crumbs: roof rails and window trims run along its sides
+    # (the RAV4's, its BlackChrome and WindowsTrims), a roof across
     xc, xw = (x0 + x1) / 2, x1 - x0
     lo_x = np.full(lab.max() + 1, np.inf)
     hi_x = np.full(lab.max() + 1, -np.inf)
     np.minimum.at(lo_x, lab, T[:, :, 0].min(1))
     np.maximum.at(hi_x, lab, T[:, :, 0].max(1))
     mid = (lo_x < xc - 0.1 * xw) & (hi_x > xc + 0.1 * xw)
-    keep_isl = (np.bincount(lab, weights=area) >= crumb * foot) & (hi >= ground + 0.88 * h) & mid
+    keep_isl = (np.bincount(lab, weights=area) >= crumb * foot) & (hi >= ground + 0.82 * h) & mid
     keep = keep_isl[lab]
     if area[keep].sum() < share * foot:
         return None
