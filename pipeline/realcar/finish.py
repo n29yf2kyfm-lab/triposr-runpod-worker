@@ -967,7 +967,8 @@ def _edge_pairs(T, weld):
     return np.concatenate([a, b]), np.concatenate([b, a])
 
 
-def roof_in_paint(g, mats, paint, painted, glass, waist=0.78, band=0.06, up=0.5, share=0.05, crumb=0.005, colour=None):
+def roof_in_paint(g, mats, paint, painted, glass, waist=0.78, up=0.5, share=0.05, crumb=0.005, colour=None,
+                  trace=None):
     """A roof in another colour than the body, left from a stand-in's donor
     (the bZ4X's and the 2008's black roofs on the white Fiat 600, Lexus RZ and
     Omoda 9 made from them, in the build review): the roof takes the paint.
@@ -1032,58 +1033,57 @@ def roof_in_paint(g, mats, paint, painted, glass, waist=0.78, band=0.06, up=0.5,
     foot = float((x1 - x0) * (z1 - z0))
     h = top - ground
     from scipy.spatial import cKDTree
+    weld = 1e-3 * max(h, 1e-6) / 1.5
     G = [P[I] for p, P, I, is_glass in cand if is_glass] + glass_v
     G = np.vstack(G) if G else np.zeros((0, 3, 3))
-    glass_pts = cKDTree(surface_points(G, 0.01 * h)) if len(G) else None
+    gn = tri_area_normal(G)[1] if len(G) else np.zeros((0, 3))
+    # the glass a trim can lie on: a windscreen, a rear screen, side windows;
+    # not a glass roof lying flat under the roof's skin (the bZ4X's, under its
+    # black roof, which was taken for a trim on it and two thirds left black)
+    Gs = G[np.abs(gn[:, 1]) < 0.9]
+    glass_pts = cKDTree(surface_points(Gs, 0.01 * h)) if len(Gs) else None
+    # the side windows' top along the car: a roof's sides above it are the
+    # roof's (the Captur's, left black down to the windows, a two-tone roof
+    # seen from the side); the pillars below it are not
+    sw = G[(np.abs(gn[:, 0]) > 0.5) & (G.mean(1)[:, 1] > ground + 0.5 * h)] if len(G) else G
+    wz = wy = None
+    if len(sw):
+        P_ = sw.reshape(-1, 3)
+        edges = np.linspace(P_[:, 2].min(), P_[:, 2].max(), 13)
+        b_ = np.clip(np.searchsorted(edges, P_[:, 2]) - 1, 0, 11)
+        wy = np.full(12, np.nan)
+        np.fmax.at(wy, b_, P_[:, 1])
+        ok = np.isfinite(wy)
+        wz, wy = ((edges[:-1] + edges[1:]) / 2)[ok], wy[ok]
     picks, Ts = [], []
     for p, P, I, is_glass in cand:
         T = P[I]
         _, nrm = tri_area_normal(T)
         cy = T.mean(1)[:, 1]
         if is_glass:
-            # a glass roof: a pane lying flat on top, the whole pane; a
-            # windscreen's top strip curves flat into the roof too, and was
-            # painted (the Fiat 600's, the Captur's: a patch of body colour
-            # round the mirror's mount, in round 2), but most of it is raked
-            a_, _ = tri_area_normal(T)
-            gl, _ = islands(T, weld=1e-3 * max(top - ground, 1e-6) / 1.5)
-            flat_a = np.bincount(gl, weights=a_ * (nrm[:, 1] > 0.92))
-            all_a = np.maximum(np.bincount(gl, weights=a_), 1e-12)
-            gy = np.bincount(gl, weights=a_ * cy) / all_a
-            pane = (flat_a / all_a >= 0.7) & (gy > top - band * (top - ground))
-            sel = np.where(pane[gl])[0]
+            # a glass roof, the whole pane: the same panes a glass roof is
+            # darkened by (roof_glass_dark), so a roof asked in the body's
+            # colour is never left a dark glass one (the bZ4X's)
+            sel = np.where(_roof_panes(T, ground, h, weld))[0]
         else:
             sel = np.where((nrm[:, 1] > up) & (cy > ground + waist * h))[0]
-        if len(sel) and not is_glass and glass_pts is not None:
-            # never what lies on the glass: a windscreen's dotted black band,
-            # the mirror's housing, the trims along the windows (painted, they
-            # were patches of body colour on the windscreen and the A-pillars
-            # of 18 builds, in round 3); a roof's own sides stay as they are.
-            # The glass by its surface, not its corners: the Fiat 600's
-            # windscreen is two triangles, its band far from their corners
-            near = np.isfinite(glass_pts.query(T[sel].mean(1), distance_upper_bound=0.02 * h)[0])
-            if near.any():
-                # but one near glass among painted ones, two of its edges on
-                # them, is the roof's own edge over a windscreen running on
-                # under it (the RAV4's): left, its edge was a saw's teeth
-                a_, b_ = _edge_pairs(T[sel], 1e-3 * h / 1.5)
-                near &= np.bincount(a_, weights=~near[b_], minlength=len(sel)) < 2
-                sel = sel[~near]
         if len(sel):
-            picks.append((p, I, sel))
+            picks.append((p, P, I, sel, is_glass))
             Ts.append(T[sel])
+            if trace is not None:
+                trace.append(("up", mats[p["material"]].get("name"), float(tri_area_normal(T[sel])[0].sum() / foot)))
     if not Ts:
         return None
     T = np.vstack(Ts)
     area, _ = tri_area_normal(T)
     # the pieces, each of one material: a trim touching the roof's edge is
     # not the roof
-    tm = np.concatenate([np.full(len(sel), p.get("material")) for p, _, sel in picks])
+    tm = np.concatenate([np.full(len(sel), p.get("material")) for p, _, _, sel, _ in picks])
     lab = np.zeros(len(T), np.int64)
     nxt = 0
     for m_ in np.unique(tm):
         w_ = np.where(tm == m_)[0]
-        l_, _ = islands(T[w_], weld=1e-3 * max(h, 1e-6) / 1.5)
+        l_, _ = islands(T[w_], weld=weld)
         lab[w_] = l_ + nxt
         nxt += int(l_.max()) + 1
     hi = np.full(lab.max() + 1, -np.inf)
@@ -1099,15 +1099,61 @@ def roof_in_paint(g, mats, paint, painted, glass, waist=0.78, band=0.06, up=0.5,
     np.minimum.at(lo_x, lab, T[:, :, 0].min(1))
     np.maximum.at(hi_x, lab, T[:, :, 0].max(1))
     mid = (lo_x < xc - 0.1 * xw) & (hi_x > xc + 0.1 * xw)
-    keep_isl = (np.bincount(lab, weights=area) >= crumb * foot) & (hi >= ground + 0.82 * h) & mid
-    keep = keep_isl[lab]
-    mid_t = keep & (T[:, :, 0].min(1) < xc + 0.1 * xw) & (T[:, :, 0].max(1) > xc - 0.1 * xw)
-    if mid_t.any():
+    keep = ((np.bincount(lab, weights=area) >= crumb * foot) & (hi >= ground + 0.82 * h) & mid)[lab]
+    if trace is not None:
+        for m_ in np.unique(tm):
+            trace.append(("pieces", mats[m_].get("name"), float(area[keep & (tm == m_)].sum() / foot)))
+
+    def off_glass(T_, ix):
+        # never what lies on the glass: a windscreen's dotted black band, the
+        # mirror's housing, the trims along the windows (painted, they were
+        # patches of body colour on the windscreen and the A-pillars of 18
+        # builds, in round 3), by the glass's surface, not its corners (the
+        # Fiat 600's windscreen is two triangles, its band far from their
+        # corners). But one near it among painted ones, two of its edges on
+        # them, is the roof's own edge over a windscreen running on under it
+        # (the RAV4's): left, its edge was a saw's teeth
+        if not len(ix) or glass_pts is None:
+            return ix
+        near = np.isfinite(glass_pts.query(T_[ix].mean(1), distance_upper_bound=0.02 * h)[0])
+        if near.any():
+            a_, b_ = _edge_pairs(T_[ix], weld)
+            near &= np.bincount(a_, weights=~near[b_], minlength=len(ix)) < 2
+        return ix[~near]
+
+    chosen, at = [], 0
+    for p, P, I, sel, is_glass in picks:
+        mine = sel[keep[at:at + len(sel)]]
+        at += len(sel)
+        if len(mine) and not is_glass:
+            T_ = P[I]
+            mine = off_glass(T_, mine)
+            if wz is not None and len(mine):
+                c_ = T_.mean(1)
+                above = np.setdiff1d(np.where(c_[:, 1] > np.interp(c_[:, 2], wz, wy, left=np.inf, right=np.inf)
+                                              + 0.01 * h)[0], mine)
+                if len(above):
+                    # the roof's sides: its own material, joined to it
+                    sub = np.concatenate([mine, above])
+                    l_, _ = islands(T_[sub], weld=weld)
+                    add = above[np.isin(l_[len(mine):], l_[:len(mine)])]
+                    mine = np.union1d(mine, off_glass(T_, add))
+        chosen.append(mine)
+    Tc = [P[I][c_] for (p, P, I, _, _), c_ in zip(picks, chosen)]
+    allT = np.vstack([t for t in Tc if len(t)]) if any(len(t) for t in Tc) else np.zeros((0, 3, 3))
+    mid_t = (allT[:, :, 0].min(1) < xc + 0.1 * xw) & (allT[:, :, 0].max(1) > xc - 0.1 * xw) if len(allT) else []
+    if len(allT) and mid_t.any():
         # nothing ahead of the roof's own front edge at the middle: the
         # A-pillars, the donor's roof running down beside the windscreen from
         # its corners (a wedge of the Fiat 600's was left in body colour)
-        keep &= T.mean(1)[:, 2] <= T[mid_t][:, :, 2].max() + 0.005 * h
-    if area[keep].sum() < share * foot:
+        zf = allT[mid_t][:, :, 2].max() + 0.005 * h
+        chosen = [c_[t[:, :, 2].mean(1) <= zf] if len(c_) else c_ for c_, t in zip(chosen, Tc)]
+    total = sum(float(tri_area_normal(P[I][c_])[0].sum()) for (p, P, I, _, _), c_ in zip(picks, chosen) if len(c_))
+    if trace is not None:
+        for (p, P, I, _, _), c_ in zip(picks, chosen):
+            trace.append(("painted", mats[p["material"]].get("name"),
+                          float(tri_area_normal(P[I][c_])[0].sum() / foot) if len(c_) else 0.0))
+    if total < share * foot:
         return None
     to = paint
     if colour is not None:
@@ -1117,30 +1163,100 @@ def roof_in_paint(g, mats, paint, painted, glass, waist=0.78, band=0.06, up=0.5,
         _paint_one(rm, {"paint": list(colour)}, j)
         mats.append(rm)
         to = len(mats) - 1
-    out, at, names = 0, 0, set()
-    for p, I, sel in picks:
-        k = keep[at:at + len(sel)]
-        at += len(sel)
-        mine = sel[k]
+    out, names = 0, set()
+    for (p, P, I, _, _), mine in zip(picks, chosen):
         if not len(mine):
             continue
         names.add(mats[p["material"]].get("name"))
-        rest = np.setdiff1d(np.arange(len(I)), mine)
-        q = {kk: v for kk, v in p.items() if kk not in ("indices", "material")}
-        q["indices"] = g.add_accessor(I[mine].ravel().astype(np.uint32), ctype=5125, atype="SCALAR", target=34963)
-        q["material"] = to
-        if len(rest):
-            p["indices"] = g.add_accessor(I[rest].ravel().astype(np.uint32), ctype=5125, atype="SCALAR", target=34963)
-            for mesh in j["meshes"]:
-                if any(x is p for x in mesh["primitives"]):
-                    mesh["primitives"].append(q)
-                    break
-        else:
-            p.clear()
-            p.update(q)
+        _move_tris(g, p, I, mine, to)
         out += len(mine)
-    return {"triangles": int(out), "share_of_footprint": round(float(area[keep].sum()) / foot, 3),
+    return {"triangles": int(out), "share_of_footprint": round(total / foot, 3),
             "materials": sorted(n for n in names if n), **({"colour": list(colour)} if colour is not None else {})}
+
+
+def _roof_panes(T, ground, h, weld, share=0.6):
+    """Which triangles of glass T are a glass roof's: in pieces lying mostly
+    (SHARE) flat, under 21 degrees, over the top of the car. A windscreen,
+    raked 30 degrees or so, is not one, though its top strip curves flat into
+    the roof (painted with it, a patch of body colour round the mirror's mount
+    on the Fiat 600 and the Captur, in round 2)."""
+    a_, nrm = tri_area_normal(T)
+    gl, _ = islands(T, weld=weld)
+    flat = (np.abs(nrm[:, 1]) > 0.93) & (T.mean(1)[:, 1] > ground + 0.85 * h)
+    on_top = np.bincount(gl, weights=a_ * flat) / np.maximum(np.bincount(gl, weights=a_), 1e-12)
+    return (on_top >= share)[gl]
+
+
+def _move_tris(g, p, I, mine, to):
+    """The triangles MINE of primitive p (its indices I, (n, 3)) put in
+    material TO: a primitive of their own beside it, or all of it."""
+    rest = np.setdiff1d(np.arange(len(I)), mine)
+    q = {kk: v for kk, v in p.items() if kk not in ("indices", "material")}
+    q["indices"] = g.add_accessor(I[mine].ravel().astype(np.uint32), ctype=5125, atype="SCALAR", target=34963)
+    q["material"] = to
+    if len(rest):
+        p["indices"] = g.add_accessor(I[rest].ravel().astype(np.uint32), ctype=5125, atype="SCALAR", target=34963)
+        for mesh in g.j["meshes"]:
+            if any(x is p for x in mesh["primitives"]):
+                mesh["primitives"].append(q)
+                break
+    else:
+        p.clear()
+        p.update(q)
+
+
+def roof_glass_dark(g, mats, glass, share=0.6):
+    """A glass roof is dark seen from outside (a panoramic roof's tinted
+    glass); cleared like the windows, the headliner showed through it, a white
+    roof on the Polestar 3 made from a Model Y, whose photo's is black. Each
+    glass piece lying mostly (SHARE) flat over the top of the car is put in a
+    dark glass of its own; the windscreen, raked, stays clear."""
+    import copy
+    j = g.j
+    W, _ = g.world_matrices()
+    rows, wheel_y, ys = [], [], []
+    for ni, n in enumerate(j["nodes"]):
+        if "mesh" not in n:
+            continue
+        wheel = bool(re.match(r"(?:SB_)?wheel", n.get("name") or ""))
+        for p in j["meshes"][n["mesh"]]["primitives"]:
+            if p.get("mode", 4) != 4 or "indices" not in p:
+                continue
+            P = g.accessor(p["attributes"]["POSITION"]) @ W[ni][:3, :3].T + W[ni][:3, 3]
+            if wheel:
+                wheel_y.append(float(P[:, 1].min()))
+                continue
+            ys.append(P[:, 1])
+            if p.get("material") in glass and not p.get("targets"):
+                I = g.accessor(p["indices"]).ravel().astype(np.int64)
+                rows.append((p, P, I[:len(I) // 3 * 3].reshape(-1, 3)))
+    if not rows or not wheel_y:
+        return None
+    ground = min(wheel_y)
+    h = float(np.percentile(np.concatenate(ys), 99.5)) - ground
+    dark, area = None, 0.0
+    for p, P, I in rows:
+        T = P[I]
+        a_, _ = tri_area_normal(T)
+        mine = np.where(_roof_panes(T, ground, h, 1e-3 * max(h, 1e-6) / 1.5, share))[0]
+        if not len(mine):
+            continue
+        if dark is None:
+            m = copy.deepcopy(mats[p["material"]])
+            m["name"] = "roof_glass"
+            pbr = m.setdefault("pbrMetallicRoughness", {})
+            pbr.pop("baseColorTexture", None)
+            pbr.update(baseColorFactor=[0.03, 0.035, 0.04, 0.9], metallicFactor=0.0, roughnessFactor=0.05)
+            m["alphaMode"], m["doubleSided"] = "BLEND", True
+            for ext in ("KHR_materials_transmission", "KHR_materials_volume"):
+                (m.get("extensions") or {}).pop(ext, None)
+            if m.get("extensions") == {}:
+                m.pop("extensions")
+            mats.append(m)
+            dark = len(mats) - 1
+        area += float(a_[mine].sum())
+        _move_tris(g, p, I, mine, dark)
+    return {"m2": round(area, 2)} if dark is not None else None
 
 
 def _corner_attrs(g, attrs, S):
@@ -2627,7 +2743,10 @@ def finish(src, spec, out, base_dir="."):
     # ── the paint's shading where the model broke it ──
     log["normals_mended"] = mend_normals(g, set(coats) | {paint} if spec.get("paint") else paint_ids)
 
-    # ── clear glass ──
+    # ── clear glass, a glass roof dark ──
+    rg = roof_glass_dark(g, mats, glass)
+    if rg:
+        log["roof_glass_dark"] = rg
     cleared = []
     for i in glass:
         m = mats[i]
