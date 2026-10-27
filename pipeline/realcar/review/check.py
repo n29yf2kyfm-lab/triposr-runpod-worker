@@ -10,6 +10,7 @@ published. Every check here is a mistake that was made once:
   picture     no studio picture of the build
   verdict     no verdict, or one on an older build or an older photo
   queue       a rebuild queued (a new photo, colour or side) and not yet done
+  asked       a roof or door count named for its photo that its build did not ask for (fleet.py redo builds it)
   label       a side or colour a verdict said was wrong, not yet named again
   gold        a batch that answered a checked item wrongly: its sheets are looked at again
   disk        under 2 GB free: the next run would stop part-way
@@ -28,8 +29,8 @@ import gold
 import paths
 import view_label
 
-BLOCKING = ("results", "photo", "paint", "colour", "built", "side", "picture", "verdict", "queue", "label", "gold",
-            "licence")
+BLOCKING = ("results", "photo", "paint", "colour", "built", "side", "picture", "verdict", "queue", "asked", "label",
+            "gold", "licence")
 
 
 def run():
@@ -88,6 +89,9 @@ def run():
     for k, q in paths.load(paths.f("needs_rebuild.json")).items():
         if (rows.get(k) or {}).get("built_at", "") < q["at"]:
             found["queue"].append(f"{k}: {q['why']}")
+    import fleet
+    for k, why in fleet.unasked(rows).items():
+        found["asked"].append(f"{k}: {why}")
     for what, keys in paths.load(paths.f("needs_label.json")).items():
         for k in keys:
             found["label"].append(f"{k}: its {what} was said to be wrong; name it again ({what})")

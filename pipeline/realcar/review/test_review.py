@@ -461,3 +461,18 @@ def test_a_door_count_fault_asks_the_rebuild_for_the_photos(run, monkeypatch):
                                       "a 5-door for the 3-door photo", "--doors", "3"])
     build_review.main()
     assert paths.load(str(run / "doors_label.json"))["car-fiesta"]["doors"] == 3
+
+
+def test_a_label_its_build_did_not_ask_for_blocks_and_is_built(run):
+    # round 5: door counts named while a run with older code was building the
+    # cars; that run met their queue entries without asking for the doors
+    paths.save(str(run / "doors_label.json"), {"car-note": {"doors": 3}})
+    paths.save(str(run / "roof_label.json"), {"car-fiesta": {"roof": "white"}})
+    rows = paths.rows()[0]
+    got = fleet.unasked(rows)
+    assert set(got) >= {"car-note", "car-fiesta"}
+    import check
+    assert any(i.startswith("car-note") for i in check.run()["asked"])
+    paths.append_row({**rows["car-note"], "doors": 3, "built_at": "2026-10-28 09:00:00"})
+    paths.append_row({**rows["car-fiesta"], "roof": "#eeefed", "built_at": "2026-10-28 09:00:00"})
+    assert not fleet.unasked(paths.rows()[0])

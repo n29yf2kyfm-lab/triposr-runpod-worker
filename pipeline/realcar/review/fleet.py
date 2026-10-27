@@ -96,6 +96,27 @@ def _door_words(key):
     return [str(n), "door"] if n else []
 
 
+def unasked(rows):
+    """Built cars whose build did not ask for what is now known of their photo:
+    a roof or a door count named after it was built (a label set while a run
+    using older code was building it, whose queue entry that run then met)."""
+    from paint_label import FAMILY
+    rl, dl = paths.load(paths.f("roof_label.json")), paths.load(paths.f("doors_label.json"))
+    out = {}
+    for k, r in rows.items():
+        if r.get("status") not in ("built", "standin") or not k.startswith(("car-", "van-")):
+            continue
+        want = (rl.get(k) or {}).get("roof")
+        if want:
+            asked = "body" if want == "body" else "contrast" if want == "contrast" else FAMILY.get(want)
+            if r.get("roof") != asked:
+                out[k] = f"its roof ({want}) not asked by its build"
+        n = (dl.get(k) or {}).get("doors")
+        if n and r.get("doors") != n:
+            out[k] = f"its doors ({n}) not asked by its build"
+    return out
+
+
 def one(t):
     """One target's row, always: a fault in reading what the build left
     (a broken record, a failed copy) is that target's failure, never the
@@ -246,6 +267,7 @@ def redo():
     mh = paths.machine_home()
     refused = paths.load(os.path.join(mh, "rig_refused.json"))
     rows, _ = paths.rows()
+    again |= set(unasked(rows))
     keep = []
     for r in rows.values():
         # a width up to 2.6 m is across the mirrors (a van's, or a big car's): not a broken shape
