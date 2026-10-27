@@ -468,3 +468,14 @@ def test_a_paint_with_scrambled_normals_is_mended_a_sound_one_left(tmp_path):
     assert finish.smooth_flat(g, {0}) == len(I)                  # the scrambled one only
     n = g.accessor(g.j["meshes"][0]["primitives"][0]["attributes"]["NORMAL"])
     assert (np.einsum("ij,ij->i", n, good) > 0.99).all()
+
+
+def test_a_tyre_left_white_is_rubber_a_whitewall_stays():
+    # the Macan's "Pneus" at 0.8 grey and no texture: white rings and arch
+    # crescents on the Eletre and Urus built from it (round 4)
+    mats = [{"name": "00_-_Porsche_Macan_GTS_-_Pneus", "pbrMetallicRoughness": {"baseColorFactor": [0.8, 0.8, 0.8, 1]}},
+            {"name": "tire_white", "pbrMetallicRoughness": {"baseColorFactor": [0.94, 0.94, 0.94, 1]}},
+            {"name": "Tires", "pbrMetallicRoughness": {"baseColorFactor": [1, 1, 1, 1], "baseColorTexture": {"index": 0}}},
+            {"name": "Brake_Disc", "pbrMetallicRoughness": {"baseColorFactor": [1, 1, 1, 1]}}]
+    assert finish.tyres_black(mats) == ["00_-_Porsche_Macan_GTS_-_Pneus"]
+    assert mats[0]["pbrMetallicRoughness"]["baseColorFactor"][0] < 0.05

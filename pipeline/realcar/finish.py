@@ -271,6 +271,29 @@ def _tex_mean(g, mat):
         return None
 
 
+# a tyre's material by its name, in the languages the catalogue's models are
+# named in (the Macan's "Pneus", Portuguese)
+TYRE_NAME = re.compile(r"tyre|tire|pneu|reifen|gomma|neum[aá]tic|opon[ay]|d[aä]ck", re.I)
+
+
+def tyres_black(mats):
+    """A tyre's material left a plain light grey, with no texture to darken it
+    (the Macan's "Pneus" at 0.8: a white ring round each tyre and white
+    crescents on the arch liners made in it, on the Eletre and Urus built from
+    it): rubber's near-black. Not a whitewall named so. Returns the names."""
+    out = []
+    for m in mats:
+        name = m.get("name") or ""
+        pbr = m.setdefault("pbrMetallicRoughness", {})
+        if not TYRE_NAME.search(name) or re.search(r"white|wall", name, re.I) or "baseColorTexture" in pbr:
+            continue
+        c = (pbr.get("baseColorFactor") or [1, 1, 1, 1])[:3]
+        if min(c) > 0.5:
+            pbr.update(baseColorFactor=[0.025, 0.025, 0.025, 1.0], metallicFactor=0.0, roughnessFactor=0.85)
+            out.append(name)
+    return out
+
+
 def trims_to_black(g, mats, names, skip):
     """Trim the road car has in black, left in a colour by the model: by name
     (batch.TRIM_BLACK: a GT's blue splitter, an M's red lines), and any
@@ -2873,6 +2896,9 @@ def finish(src, spec, out, base_dir="."):
                         (set(coats) | {paint}) if spec.get("paint") else set(paint_ids))
     if tb:
         log["trim_black"] = tb
+    ty = tyres_black(mats)
+    if ty:
+        log["tyres_black"] = ty
 
     # ── clear glass, a glass roof dark ──
     rg = roof_glass_dark(g, mats, glass)
