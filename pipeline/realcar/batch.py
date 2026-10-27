@@ -192,6 +192,9 @@ TRIM_BLACK = {
                                                                            # and steering wheel, seen through glass
     "kia-picanto-w6-v1": ["2021_Kia_Picanto_GT-Line_RedTrims"],            # a GT-Line's red sill and bumper lines
     "peugeot-508-v1": ["2021_Peugeot_508_PSE_Calipers"],                   # a PSE's lime calipers and bumper fangs
+    "rolls-royce-ghost-v1": ["rrghost_leatherblue", "rrghost_leatherblue.001", "rrghost_leatherlight",
+                             "rrghost_leatherlight.001", "rrghost_carpet1"],  # a bespoke purple cabin, pink through
+                                                                           # the glass of the i7 made from it
     "bmw-m2-2023-bm3-v1": ["body_red"],                                    # red lines on its splitter and sills
 }
 # and parts the road car has in its paint that the model has in carbon
