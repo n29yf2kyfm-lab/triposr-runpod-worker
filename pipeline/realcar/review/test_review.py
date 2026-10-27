@@ -414,3 +414,27 @@ def test_a_pale_colour_named_by_eye_is_built_in_its_familys_paint():
     assert photo_paint.resolve(grey, "sage")["hex"] == "#b3bcad"
     assert photo_paint.resolve(dict(grey), "silver")["hex"] == "#babfbe"    # a silver keeps its reading
     assert photo_paint.resolve({"rgb": [73, 66, 66], "hex": "#494242"}, "copper")["hex"] == "#9e4a30"
+
+
+def test_a_roof_answer_taken_back_undoes_what_it_asked(run):
+    # round 4: an agent answered "black", looked again and answered "same";
+    # the black stayed as a limit, and its label would have asked for it
+    build_review.roof("car-fiesta", "black")
+    assert paths.load(str(run / "roof_label.json"))["car-fiesta"]["roof"] == "black"
+    assert "car-fiesta" in paths.load(str(run / "needs_rebuild.json"))
+    build_review.roof("car-fiesta", "same")
+    assert "car-fiesta" not in paths.load(str(run / "roof_label.json"))
+    assert "car-fiesta" not in paths.load(str(run / "needs_rebuild.json"), {})
+    # an answer on a build asked for its roof (a limit) taken back too, the label as it was
+    build_review.roof("car-note", "body")
+    paths.save(str(run / "needs_rebuild.json"), {})
+    paths.append_row({"key": "car-note", "status": "standin", "built_at": "2026-10-28 09:00:00", "roof": "body"})
+    build_review.roof("car-note", "body")
+    assert paths.load(str(run / "roof_limits.json"))["car-note"]["roof"] == "body"
+    build_review.roof("car-note", "same")
+    assert "car-note" not in paths.load(str(run / "roof_limits.json"))
+    assert paths.load(str(run / "roof_label.json"))["car-note"]["roof"] == "body"
+    # a verdict leaving the roof out does not take back the roof pass's answer
+    build_review.roof("car-note", "black")
+    build_review.verdict("car-note", "ok", [], "")
+    assert paths.load(str(run / "roof_label.json"))["car-note"]["roof"] == "black"

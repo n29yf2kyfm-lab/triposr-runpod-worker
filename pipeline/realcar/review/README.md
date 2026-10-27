@@ -81,6 +81,8 @@ could call either way.
 | The roof rule's paint on windscreens and A-pillars (about 18 builds in round 3): a windscreen's black band far from its glass's corners, a donor's roof running down the pillars, a roof-named material painted whole | the rule measures to the glass's surface, paints nothing ahead of the roof's front edge, and no material whole; pinned in `test_rules.py` |
 | A roof the machine cannot make (a Smart's frame, an ID Buzz's white upper half) asked for again on every review, so rebuilt again and again | a roof asked for again on a build already made asking for it goes to `roof_limits.json`, not the queue |
 | Checked answers made from a sheet's thumbnail (an MG HS and a Swift called ok, a Kamiq Monte Carlo's black roof missed) | withdrawn; an answer is checked on the full-size photo and build, or not added |
+| A roof answer corrected to "same" on the same build left its label, its rebuild and its limit behind (three in round 4) | `take_back_roof`: the later "same", from the same kind of pass, undoes all three; a verdict that leaves the roof out does not undo the roof pass's |
+| Pale and earthy paints built in a family's far darker or brighter paint (a pale sage as a Defender's green, a terracotta as crimson) | the sage, olive, copper and aqua families; the colour prompt asks for the family closest in lightness too |
 
 The machine's own rules that went wrong are pinned by `pipeline/realcar/test_rules.py` ("black" is no paint name,
 "carpaint.198" no inside, "M Sport Touring" an estate, a wheel in the paint's colour never painted, people

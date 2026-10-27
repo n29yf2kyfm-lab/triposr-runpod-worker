@@ -136,6 +136,16 @@ def queue_rebuild(key, why):
         save(f("needs_rebuild.json"), q)
 
 
+def unqueue(key, why_starts):
+    """A rebuild asked for and taken back (a roof answer corrected on the same
+    build): off the queue, if it is still there for that reason."""
+    with lock("needs_rebuild"):
+        q = load(f("needs_rebuild.json"), {})
+        if (q.get(key) or {}).get("why", "").startswith(why_starts):
+            q.pop(key)
+            save(f("needs_rebuild.json"), q)
+
+
 def labelled(what, keys):
     """Keys whose side or colour was named again: off the needs_label list."""
     with lock("needs_label"):

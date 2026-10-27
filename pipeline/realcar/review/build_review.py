@@ -165,6 +165,8 @@ def verdict(key, v, faults, note, roof=None):
         # the photo's roof is the body's colour: the rebuild paints the
         # build's (fleet.py asks for it from roof_label.json)
         ask_roof(key, roof, "build review", r)
+    else:
+        take_back_roof(key, "build review", r)
     if "side" in faults or "colour" in faults:
         # the side and the colour are named by eye (view_label.py, paint_label.py):
         # one the build shows wrong is named again before it is rebuilt
@@ -185,10 +187,14 @@ def ask_roof(key, roof, by, row):
     (roof_limits.json), for the report and for the machine's next fix."""
     with paths.lock("roof_label"):
         rl = paths.load(paths.f("roof_label.json"))
-        before = (rl.get(key) or {}).get("roof")
+        e = rl.get(key) or {}
+        before = e.get("roof")
         built_asking = bool(row.get("roof")) and before == roof
         if not built_asking:
-            rl[key] = {"roof": roof, "by": by, "at": paths.now()}
+            # the label as it was before this build was first judged, kept so
+            # an answer taken back on the same build can be undone
+            was = e.get("was") if e.get("asked_on") == row.get("built_at") else (e or None)
+            rl[key] = {"roof": roof, "by": by, "at": paths.now(), "asked_on": row.get("built_at"), "was": was}
             paths.save(paths.f("roof_label.json"), rl)
     if built_asking:
         with paths.lock("roof_limits"):
@@ -198,6 +204,31 @@ def ask_roof(key, roof, by, row):
         return
     paths.queue_rebuild(key, "its roof in the body's colour, as the photo's" if roof == "body"
                         else f"its roof {roof}, as the photo's")
+
+
+def take_back_roof(key, by, row):
+    """A roof answer taken back on the same build, by the same kind of pass (a
+    roof pass's "black" answered "same" later: the agent looked again): what
+    the earlier answer asked is undone, its label, its rebuild and its place
+    among the machine's limits (round 4: three corrected answers stayed as
+    limits, and their labels would have asked the next build for a black
+    roof). A verdict that leaves out the roof does not take back a roof pass's
+    answer: the general review misses roofs the roof pass is there to see."""
+    with paths.lock("roof_label"):
+        rl = paths.load(paths.f("roof_label.json"))
+        e = rl.get(key) or {}
+        if e.get("by") == by and e.get("asked_on") == row.get("built_at"):
+            if e.get("was"):
+                rl[key] = e["was"]
+            else:
+                rl.pop(key, None)
+            paths.save(paths.f("roof_label.json"), rl)
+            paths.unqueue(key, "its roof")
+    with paths.lock("roof_limits"):
+        lim = paths.load(paths.f("roof_limits.json"))
+        if (lim.get(key) or {}).get("by") == by and lim[key].get("built_at") == row.get("built_at"):
+            lim.pop(key)
+            paths.save(paths.f("roof_limits.json"), lim)
 
 
 def roof(key, answer, note=""):
@@ -229,6 +260,8 @@ def roof(key, answer, note=""):
         paths.save(paths.f("roof_check.json"), d)
     if answer != "same":
         ask_roof(key, answer, "roof pass", r)
+    else:
+        take_back_roof(key, "roof pass", r)
 
 
 def main():
