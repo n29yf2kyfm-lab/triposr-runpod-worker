@@ -2257,7 +2257,11 @@ def finish(src, spec, out, base_dir="."):
         for r in recs:
             if r["mat"] is not None and not r["rig"].startswith("wheel_"):
                 mat_m2[r["mat"]] = mat_m2.get(r["mat"], 0) + float(tri_area_normal(tris(r))[0].sum()) * s * s
-        coats = sorted(set(paint_ids) | same_paint(mats, paint, glass, mat_m2))
+        # and a second material the model names as paint with a real share of
+        # the side (the Jazz's "Paint1" beside its "Main_Color_paint")
+        named = {i for i in range(min(len(mats), len(door_area))) if i != paint and re.search(r"paint", mats[i].get("name", ""), re.I)
+                 and not mats[i].get("name", "").startswith("detail-") and door_area[i] >= 0.3 * door_area[paint]}
+        coats = sorted(set(paint_ids) | same_paint(mats, paint, glass, mat_m2) | named)
         for i in coats:
             _paint_one(mats[i], spec, j)
         # a material the model also uses for body panels (batch.PAINT_ALSO):
