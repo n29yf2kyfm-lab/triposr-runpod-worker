@@ -145,7 +145,7 @@ def test_a_mesh_shaded_its_own_way_all_over_is_left(tmp_path):
 # ── a stand-in's roof in its donor's colour ──────────────────────────────
 
 def _car_glb(path, top_name="2020_Peugeot_e-2008_black", roof_mat=1, slope=0.0, roof_side=False, flat_strip=False,
-            windscreen=False, hidden_glass=False, glass_roof=False, side_window=False):
+            windscreen=False, hidden_glass=False, glass_roof=False, side_window=False, loose_side=False):
     """A box car 4 m long, 1.8 m wide, 1.52 m high: painted sides, a roof in
     another material, a thin roof rail in it too, and a wheel. WINDSCREEN: a
     raked one ahead of the roof, two triangles of glass, trims of the roof's
@@ -154,7 +154,9 @@ def _car_glb(path, top_name="2020_Peugeot_e-2008_black", roof_mat=1, slope=0.0, 
     HIDDEN_GLASS: the roof's front edge a row of small triangles over glass
     running on under it, every other one of them near it. GLASS_ROOF: a flat
     glass roof a centimetre under the roof's skin. SIDE_WINDOW: a side window
-    under the roof's side, and a pillar of the roof's material beside it."""
+    under the roof's side, and a pillar of the roof's material beside it.
+    LOOSE_SIDE: the roof's side a strip of its own, not joined to its top, over
+    a side window running on up under it (the RAV4's)."""
     from gltf import GLTF  # noqa: F401
     def quad(x0, x1, y0, y1, z0, z1, axis):
         if axis == "y":
@@ -177,6 +179,9 @@ def _car_glb(path, top_name="2020_Peugeot_e-2008_black", roof_mat=1, slope=0.0, 
     if roof_side:                                         # the roof's own side, upright, in the same piece
         sp, si = quad(0.7, 0.7, 1.3, 1.5, 1, 3, "x")
         roof = (roof[0] + sp, roof[1] + [i + 4 for i in si])
+    if loose_side:                                        # the roof's side, 2 cm out, not joined to its top
+        sp, si = quad(0.72, 0.72, 1.33, 1.5, 1, 3, "x")
+        roof = (roof[0] + sp, roof[1] + [i + len(roof[0]) for i in si])
     if flat_strip:                                        # a flat strip on its top end, in the same piece
         fp = [[-0.7, 1.5, 3.0], [0.7, 1.5, 3.0], [0.7, 1.5, 3.2], [-0.7, 1.5, 3.2]]
         roof = (roof[0] + fp, roof[1] + [4, 6, 5, 4, 7, 6])
@@ -191,6 +196,8 @@ def _car_glb(path, top_name="2020_Peugeot_e-2008_black", roof_mat=1, slope=0.0, 
         extra += [("body", *quad(0.72, 0.72, 0.95, 1.25, 1.2, 2.8, "x"), 3)]
         pp, pi = quad(0.7, 0.7, 0.95, 1.25, 1.95, 2.05, "x")   # a pillar beside it, in the roof's piece
         roof = (roof[0] + pp, roof[1] + [i + len(roof[0]) for i in pi])
+    if loose_side:                                        # a side window, its top 1 cm under the roof's
+        extra += [("body", *quad(0.73, 0.73, 0.95, 1.49, 1.2, 2.8, "x"), 3)]
     if hidden_glass:                                      # the windscreen's top, on under the roof's edge
         extra += [("body", [[-0.7, 1.48, 3.0], [0.7, 1.48, 3.0], [0.7, 1.497, 2.97], [-0.7, 1.497, 2.97]],
                   [0, 3, 1, 1, 3, 2], 3)]
@@ -255,6 +262,18 @@ def test_a_roofs_sides_down_to_the_windows_are_painted_its_pillars_are_not(tmp_p
     g = GLTF(str(tmp_path / "s.glb"))
     out = finish.roof_in_paint(g, g.j["materials"], 0, {0}, set())
     assert out and out["triangles"] == 4                 # the top and its side; not the pillar
+
+
+def test_a_roofs_side_strip_over_a_window_running_on_under_it_is_painted(tmp_path):
+    # round 5: the RAV4's side windows run up under its roof to 98% of its
+    # height, and its roof's sides are strips of their own: none was painted,
+    # and the MG HS made from it was black-roofed from the side in every review
+    from gltf import GLTF
+    _car_glb(str(tmp_path / "c.glb"), top_name="BlackRoof", loose_side=True)
+    g = GLTF(str(tmp_path / "c.glb"))
+    out = finish.roof_in_paint(g, g.j["materials"], 0, {0}, set())
+    assert out and out["triangles"] == 4                 # the top and the strip; the rail keeps its own
+    assert [p["material"] for m in g.j["meshes"] for p in m["primitives"]][3] == 1
 
 
 def test_a_roof_over_a_flat_glass_roof_is_painted_whole(tmp_path):

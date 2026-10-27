@@ -1117,6 +1117,10 @@ def roof_in_paint(g, mats, paint, painted, glass, waist=0.78, up=0.5, share=0.05
     # black roof, which was taken for a trim on it and two thirds left black)
     Gs = G[np.abs(gn[:, 1]) < 0.9]
     glass_pts = cKDTree(surface_points(Gs, 0.01 * h)) if len(Gs) else None
+    # and without the side windows: a roof's own side lies on them where they
+    # run on up under it (the RAV4's, to 98% of its height)
+    Gf = Gs[np.abs(tri_area_normal(Gs)[1][:, 0]) <= 0.5] if len(Gs) else Gs
+    front_pts = cKDTree(surface_points(Gf, 0.01 * h)) if len(Gf) else None
     # the side windows' top along the car: a roof's sides above it are the
     # roof's (the Captur's, left black down to the windows, a two-tone roof
     # seen from the side); the pillars below it are not
@@ -1179,7 +1183,7 @@ def roof_in_paint(g, mats, paint, painted, glass, waist=0.78, up=0.5, share=0.05
         for m_ in np.unique(tm):
             trace.append(("pieces", mats[m_].get("name"), float(area[keep & (tm == m_)].sum() / foot)))
 
-    def off_glass(T_, ix):
+    def off_glass(T_, ix, pts="all"):
         # never what lies on the glass: a windscreen's dotted black band, the
         # mirror's housing, the trims along the windows (painted, they were
         # patches of body colour on the windscreen and the A-pillars of 18
@@ -1188,14 +1192,29 @@ def roof_in_paint(g, mats, paint, painted, glass, waist=0.78, up=0.5, share=0.05
         # corners). But one near it among painted ones, two of its edges on
         # them, is the roof's own edge over a windscreen running on under it
         # (the RAV4's): left, its edge was a saw's teeth
-        if not len(ix) or glass_pts is None:
+        pts = glass_pts if pts == "all" else pts
+        if not len(ix) or pts is None:
             return ix
-        near = np.isfinite(glass_pts.query(T_[ix].mean(1), distance_upper_bound=0.02 * h)[0])
+        near = np.isfinite(pts.query(T_[ix].mean(1), distance_upper_bound=0.02 * h)[0])
         if near.any():
             a_, b_ = _edge_pairs(T_[ix], weld)
             near &= np.bincount(a_, weights=~near[b_], minlength=len(ix)) < 2
         return ix[~near]
 
+    rz = np.zeros(0)
+    if wz is not None:
+        # the side windows' top, or a tenth of the height under the roof where
+        # they run on up under it: their top was at the roof's own and none of
+        # the RAV4's sides were painted (the MG HS made from it, black-roofed
+        # from the side in every review)
+        kept = T[keep]
+        if len(kept):
+            kz, ky = kept.reshape(-1, 3)[:, 2], kept.reshape(-1, 3)[:, 1]
+            rt = np.full(12, np.nan)
+            np.fmax.at(rt, np.clip(np.searchsorted(edges, kz) - 1, 0, 11), ky)
+            rt = rt[ok]
+            wy = np.where(np.isfinite(rt), np.minimum(wy, rt - 0.1 * h), wy)
+            rz, rt = wz[np.isfinite(rt)], rt[np.isfinite(rt)]
     chosen, at = [], 0
     for p, P, I, sel, is_glass in picks:
         mine = sel[keep[at:at + len(sel)]]
@@ -1211,8 +1230,18 @@ def roof_in_paint(g, mats, paint, painted, glass, waist=0.78, up=0.5, share=0.05
                     # the roof's sides: its own material, joined to it
                     sub = np.concatenate([mine, above])
                     l_, _ = islands(T_[sub], weld=weld)
-                    add = above[np.isin(l_[len(mine):], l_[:len(mine)])]
-                    mine = np.union1d(mine, off_glass(T_, add))
+                    la = l_[len(mine):]
+                    add = above[np.isin(la, l_[:len(mine)])]
+                    # and a strip of its own along each side of the roof (the
+                    # RAV4's, not joined to its top): long, at the side, not
+                    # over the roof's top as a rail is; a pillar's top is short
+                    for isl in np.unique(la[~np.isin(la, l_[:len(mine)])]) if len(rz) else []:
+                        w_ = above[la == isl]
+                        Q = T_[w_].reshape(-1, 3)
+                        if (np.ptp(Q[:, 2]) >= 0.25 * (z1 - z0) and abs(Q[:, 0].mean() - xc) > 0.25 * xw
+                                and (Q[:, 1] <= np.interp(Q[:, 2], rz, rt) + 0.01 * h).all()):
+                            add = np.union1d(add, w_)
+                    mine = np.union1d(mine, off_glass(T_, add, front_pts))
         chosen.append(mine)
     Tc = [P[I][c_] for (p, P, I, _, _), c_ in zip(picks, chosen)]
     allT = np.vstack([t for t in Tc if len(t)]) if any(len(t) for t in Tc) else np.zeros((0, 3, 3))
