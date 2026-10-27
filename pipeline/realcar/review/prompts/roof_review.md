@@ -10,7 +10,7 @@ YOUR SHEETS: {SHEETS}. Open each with the Read tool. Each sheet has up to 8 pair
 Look at the roof panel itself, from the top of the windscreen back: not the pillars, the window frames, the roof rails or an aerial.
 - `same`: the build's roof is the colour the photo's is. Both one colour with the body, or both a contrasting roof of about the same colour (a black roof on both).
 - `body`: the photo's roof is the body's colour, the build's is not (the model's or a donor's black roof on a car that is one colour in the photo).
-- a colour family: the photo's roof is that colour, and not the body's, and the build's roof is not it (a white roof on a blue Captur, a black roof on a white DS3). Families: white pearl-white silver grey dark-grey black dark-blue blue grey-blue light-blue turquoise red dark-red orange yellow gold green dark-green light-green grey-green brown taupe bronze beige champagne purple lilac.
+- a colour family: the photo's roof is that colour, and not the body's, and the build's roof is not it (a white roof on a blue Captur, a black roof on a white DS3). Families: white pearl-white silver grey dark-grey black dark-blue blue grey-blue light-blue turquoise aqua red dark-red orange copper yellow gold green dark-green light-green grey-green sage olive brown taupe bronze beige champagne purple lilac.
 
 Only what you can see. A glass sunroof or panoramic roof with body-coloured edges counts as the body's colour on a build, and a dark glass roof you can see on the photo counts as black. When the photo shows too little of the roof to tell (a low view, the roof out of the frame), answer `same`. The answer `same` is also right when the build's roof is a little lighter or darker in the studio's light: only another colour counts.
 

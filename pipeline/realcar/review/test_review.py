@@ -404,3 +404,13 @@ def test_the_runner_stamps_each_row_and_meets_the_queue(run, monkeypatch):
     rows, bad = paths.rows()
     assert bad == 0 and set(rows) == {"car-fiesta", "car-note", "car-gone"}
     assert "car-fiesta" not in paths.load(str(run / "needs_rebuild.json"))
+
+
+def test_a_pale_colour_named_by_eye_is_built_in_its_familys_paint():
+    # round 4: a pale sage read as plain grey (the EX40's Sage Green) kept the
+    # grey; named grey-green it was built a Defender's mid green
+    import photo_paint
+    grey = {"rgb": [186, 191, 190], "hex": "#babfbe", "kind": "light"}
+    assert photo_paint.resolve(grey, "sage")["hex"] == "#b3bcad"
+    assert photo_paint.resolve(dict(grey), "silver")["hex"] == "#babfbe"    # a silver keeps its reading
+    assert photo_paint.resolve({"rgb": [73, 66, 66], "hex": "#494242"}, "copper")["hex"] == "#9e4a30"

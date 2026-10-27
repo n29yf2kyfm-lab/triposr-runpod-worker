@@ -194,14 +194,17 @@ def resolve(reading, family):
     a, b = _lab(reading["rgb"]), _lab(rr)
     ca, cb = np.hypot(*a[1:]), np.hypot(*b[1:])
     dh = abs((np.degrees(np.arctan2(a[2], a[1])) - np.degrees(np.arctan2(b[2], b[1])) + 180) % 360 - 180)
-    if cb < 12:
+    neutral = family in ("silver", "grey", "dark-grey")
+    if neutral:
         # silver, grey, dark grey: a colourless reading near the family's tone
+        # (not a sage's or a taupe's, faint as their colour is: a grey reading
+        # of the EX40's Sage Green was kept and built a plain grey)
         keep = ca < 12 and abs(a[0] - b[0]) < 12
     else:
         # a colour: the family's hue, near its tone, and nearly as strong (a
         # vivid blue read pale lavender, a red read pink, are not kept)
         keep = dh < 18 and abs(a[0] - b[0]) < 18 and ca >= 0.7 * cb
-    if cb < 12:
+    if neutral:
         return dict(reading, family=family, measured=reading.get("hex"), **{"from": "photo"}) if keep else out
     # a colour: the reading drawn toward its family's paint, a quarter of the
     # way when it is of the family, half when only its hue is (a vivid paint

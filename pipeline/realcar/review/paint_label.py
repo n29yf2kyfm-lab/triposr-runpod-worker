@@ -32,6 +32,11 @@ FAMILY = {
     # the muted ones: a steel or slate blue, a sage or grey-green, a taupe
     # (the build review's: each was painted its family's vivid colour)
     "grey-blue": "#566c86", "grey-green": "#617863", "taupe": "#7d6a5b",
+    # and those a family's paint was still far from (round 4): a pale sage
+    # painted a Defender's mid green (the Smart #1, the EX40's Sage Green), a
+    # khaki-olive painted green (the e Vitara), a terracotta painted crimson
+    # (the Bigster), a pale aqua painted sky blue (the Anglia)
+    "sage": "#b3bcad", "olive": "#6b6b55", "copper": "#9e4a30", "aqua": "#9ccbc5",
 }
 
 
