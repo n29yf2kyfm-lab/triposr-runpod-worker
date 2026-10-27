@@ -416,6 +416,16 @@ def test_a_pale_colour_named_by_eye_is_built_in_its_familys_paint():
     assert photo_paint.resolve({"rgb": [73, 66, 66], "hex": "#494242"}, "copper")["hex"] == "#9e4a30"
 
 
+def test_a_silver_read_in_bright_light_is_built_a_silvers_tone():
+    # round 5: the 3 Series' silver read #d7dde2 was built so, with no metal
+    # (too light for the machine's silver), and showed white in the studio
+    import photo_paint
+    r = photo_paint.resolve({"rgb": [215, 221, 226], "hex": "#d7dde2"}, "silver")
+    light = (max(r["rgb"]) + min(r["rgb"])) / 2
+    assert 150 < light < 215 and r["rgb"][2] > r["rgb"][0]          # a silver's tone, its cool tint kept
+    assert photo_paint.resolve({"rgb": [201, 204, 206], "hex": "#c9ccce"}, "silver")["hex"] == "#c9ccce"
+
+
 def test_a_roof_answer_taken_back_undoes_what_it_asked(run):
     # round 4: an agent answered "black", looked again and answered "same";
     # the black stayed as a limit, and its label would have asked for it

@@ -204,6 +204,15 @@ def resolve(reading, family):
         # a colour: the family's hue, near its tone, and nearly as strong (a
         # vivid blue read pale lavender, a red read pink, are not kept)
         keep = dh < 18 and abs(a[0] - b[0]) < 18 and ca >= 0.7 * cb
+    if neutral and keep and family == "silver" and a[0] > b[0] + 3:
+        # a silver read in bright light (the 3 Series' at #d7dde2): built so,
+        # too light for a silver's metal, it showed white in the studio (40 of
+        # 140 silvers). Its tone is the family's, a little lighter; its tint kept
+        m = np.array([b[0] + 3, a[1], a[2]])
+        lab8 = np.array([m[0] * 255 / 100, m[1] + 128, m[2] + 128])
+        rgb = cv2.cvtColor(np.uint8([[np.clip(lab8, 0, 255)]]), cv2.COLOR_LAB2RGB)[0, 0].tolist()
+        return dict(reading, rgb=rgb, hex="#%02x%02x%02x" % tuple(rgb), family=family, measured=reading.get("hex"),
+                    **{"from": "photo, a silver's tone"})
     if neutral:
         return dict(reading, family=family, measured=reading.get("hex"), **{"from": "photo"}) if keep else out
     # a colour: the reading drawn toward its family's paint, a quarter of the
