@@ -350,6 +350,18 @@ def test_the_runner_starts_nothing_on_a_full_disk(run, monkeypatch):
     assert e.value.code == 3 and rows.read_text() == ""
 
 
+def test_the_run_keeps_its_licence_choice_for_every_build(run, monkeypatch):
+    seen = []
+    monkeypatch.setattr(fleet.subprocess, "run", lambda cmd, **kw: seen.append(kw["env"]["GLBMACHINE_COMMERCIAL_ONLY"])
+                        or type("P", (), {"stdout": "", "stderr": "no answer", "returncode": 1})())
+    t = {"key": "car-fiesta", "class": "car", "rank": 1, "genModel": "F", "make": "M", "model": "f", "licensed": 1, "request": "f"}
+    fleet._one(t)
+    monkeypatch.setattr(sys, "argv", ["fleet.py", "licence", "any"])
+    fleet.main()
+    fleet._one(t)
+    assert seen == ["1", "0"]
+
+
 def test_the_runner_stamps_each_row_and_meets_the_queue(run, monkeypatch):
     (run / "results.jsonl").write_text("")
     paths.queue_rebuild("car-fiesta", "new photo")

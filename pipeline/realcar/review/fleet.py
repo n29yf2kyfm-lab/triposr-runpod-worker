@@ -2,6 +2,15 @@
 
     python3 fleet.py build [--workers 3] [--class car|van] [--limit N]
     python3 fleet.py redo [--workers 3]      # again: the failed, redo.txt and the rebuild queue
+    python3 fleet.py licence any|commercial  # the models a run may use, kept for every build of it
+
+The run's models: "commercial" (the machine's own rule: only models that may
+be used commercially) unless the run says "any" (each vehicle from its
+closest model whatever its licence, the credit naming the licence: the
+owner's choice for the private October 2026 report). It is kept in
+F1K_HOME/run.json, so a redo builds as the run did: a redo that had dropped
+it built 36 vehicles from other models than the run's (the Fiesta as a
+stand-in, the 2025 Golf as the 2017 one).
 
 Each target in targets.json is asked of glbmachine as its request, in the
 colour of its photo (photo_paint.json). One line per target goes to
@@ -97,8 +106,14 @@ def one(t):
             {"status": "failed", "error": f"the run's own step failed: {type(e).__name__}: {e}"[:300], "built_at": paths.now()}
 
 
+def licence():
+    """The run's models: "any" or "commercial" (F1K_HOME/run.json; commercial when unset)."""
+    return (paths.load(paths.f("run.json")).get("licence") or "commercial")
+
+
 def _one(t):
-    env = dict(os.environ, GLBMACHINE_HOME=paths.machine_home(), GLBMACHINE_DEADLINE_S=DEADLINE, GLBMACHINE_ONLINE="1")
+    env = dict(os.environ, GLBMACHINE_HOME=paths.machine_home(), GLBMACHINE_DEADLINE_S=DEADLINE, GLBMACHINE_ONLINE="1",
+               GLBMACHINE_COMMERCIAL_ONLY="0" if licence() == "any" else "1")
     t0 = time.time()
     row = {k: t[k] for k in ("key", "class", "rank", "genModel", "make", "model", "licensed", "request")}
     if t.get("base_note"):
@@ -248,6 +263,11 @@ def main():
     global DEADLINE
     a = sys.argv[1:]
     w = int(a[a.index("--workers") + 1]) if "--workers" in a else 3
+    if a[:1] == ["licence"] and len(a) == 2 and a[1] in ("any", "commercial"):
+        run = paths.load(paths.f("run.json"))
+        run.update(licence=a[1], licence_set=paths.now())
+        paths.save(paths.f("run.json"), run)
+        return print(f"this run's models: {a[1]}")
     if a and a[0] == "redo":
         DEADLINE = "400"
         redo()
