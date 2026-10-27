@@ -859,6 +859,7 @@ def _lin_to_lab(c):
     return 116 * f(Y) - 16, 500 * (f(X) - f(Y)), 200 * (f(Y) - f(Z))
 
 
+WHEELISH = re.compile(r"wheel|\brims?\b|tyre|tire|hub ?cap", re.I)        # a wheel's material, by name
 TRIMMISH = re.compile(r"chrome|rim\b|wheel|tyre|tire|glass|mirror|metal|steel|alu|grill|trim|plast|rubber|black|carbon|"
                       r"interior|dash|seat|floor|under|chassis|engine|exhaust|brake|calip|light|lamp|lens|logo|badge|plate", re.I)
 
@@ -883,7 +884,11 @@ def same_paint(mats, paint, glass, area=None):
         L, a, b = _lin_to_lab(p.get("baseColorFactor") or [1, 1, 1])
         C, h = math.hypot(a, b), math.degrees(math.atan2(b, a))
         if C0 >= 20:
-            if C > 0.6 * C0 and abs((h - h0 + 180) % 360 - 180) < 15 and abs(L - L0) < 25:
+            # (never a wheel's or an inside's, whatever its colour: the 2022
+            # Swift's "WHEEL_BLACK_MAT" is its paint's red, and was painted on
+            # eight cars made from it)
+            if C > 0.6 * C0 and abs((h - h0 + 180) % 360 - 180) < 15 and abs(L - L0) < 25 \
+                    and not WHEELISH.search(m.get("name", "")) and not INSIDE.search(m.get("name", "")):
                 out.add(i)
         elif L0 > 55 and C < 6 and abs(L - L0) < 6 and not TRIMMISH.search(m.get("name", "")) \
                 and area is not None and area.get(i, 0) >= 0.15:
