@@ -63,7 +63,7 @@ BODIES = ("hatchback", "saloon", "sedan", "estate", "coupe", "convertible", "suv
 # makers' own names for a body; an "Active Tourer" or "Gran Tourer" is not an
 # estate (its body is left to the table: no body is asked), nor a 911 GT3
 # Touring or a Grand Touring
-ESTATE_WORDS = (r"(?<!gt3\s)(?<!grand\s)\btouring\b|\bsports?\s?tourer\b|\bavant\b|\bvariant\b|\bsports?\s?wagon\b"
+ESTATE_WORDS = (r"(?<!gt3\s)(?<!grand\s)(?<!sport\s)\btouring\b|\bsports?\s?tourer\b|\bavant\b|\bvariant\b|\bsports?\s?wagon\b"
                 r"|\bwagon\b(?![\s-]?r\b)|\bshooting\s+brake\b|\bk?combi\b|\bsw\b")      # a Wagon R is a hatch
 BODY_WORDS = [
     (re.compile(r"\b(?:active|gran)\s+tourer\b"), None),
@@ -749,12 +749,19 @@ def record_body(i, gen=None):
         gen = record_generation(i) or {}
     f = RECORD_BODY.get(str(i.get("bodyStyle") or "").lower()) or gen.get("family")
     title, (mk, md) = str(i.get("sourceTitle") or ""), batch.model_of(i)
+    if not title and i.get("assetId") not in batch.BODY_FIX:
+        # a record with no title: its model's own name ("Nissan Skyline
+        # Wagon", which stood in for a Q50 saloon), unless its body was set by eye
+        title = str(batch.credit_of(i).get("title") or "")
     if re.search(r"\b(?:active|gran) tourer\b", title, re.I):
         f = "mpv"
     elif TITLE_ESTATE.search(title):
         f = "estate"
-    elif re.search(r"cabrio|convertible|roadster|spider|spyder", title, re.I):
+    elif re.search(r"cabrio|convertible|roadster|spider|spyder|speedster|volante", title, re.I):
         f = "convertible"
+    elif f in ("saloon", "hatch", "convertible") and re.search(r"(?<!gran\s)(?<!door\s)\bcoup[eé]\b", title, re.I) \
+            and not re.search(r"\bcl[as]\b|\bgt 4\b", title, re.I):
+        f = "coupe"                              # its page's first body is not the one modelled (the F-Type SVR Coupé)
     elif re.search(r"pick[- ]?up|double cab|crew cab|single cab|\bute\b", title, re.I) or pickup_model(mk, md):
         f = "pickup"                             # an open load bed: not an SUV's shape (the Defender 130 pickup)
     return f
@@ -806,6 +813,22 @@ COUPE_SUV = re.compile(r"\b(?:i?x[246])\b|\bid\.? ?5\b|gl[aceq]\b.{0,10}coup[eé
                        r"e-?tron sportback|\bs?q8\b|eclipse cross|mach-?e|kodiaq gt|\bgt ?coup|\bc40\b|ex30 cross|"
                        r"\bcx-?60 ?coup|\bfx\d\d\b|\bqx55\b|\burus\b|\bcayenne coup|\bevoque coup", re.I)
 
+# a van's model sold as a people carrier, unless "van" is asked (the DfT's
+# cars, not its vans: a Berlingo licensed as a car has seats and windows)
+PASSENGER_MODEL = re.compile(r"rifter|\bi800\b|\bh-?1\b|staria|space ?tourer|traveller|multivan|caravelle|tourneo|"
+                             r"\bv[- ]?class\b|viano|\beqv\b|combo life|proace (?:city )?verso|zafira life|vivaro life|"
+                             r"berlingo|tepee|kangoo|doblo|\bqubo\b|nemo|bipper|townstar|\bnv200\b|e-?nv200|caddy|\bshuttle\b", re.I)
+
+
+# rebadged twins: the same body under another make's badge, (make, model) -> the models it is
+# (and its face is the maker's that built it: no Toyota's, for a Previa)
+TWIN = {("toyota", "proace-city-verso"): (re.compile(r"berlingo|rifter|partner|combo|doblo", re.I), "citroen"),
+        ("toyota", "proace"): (re.compile(r"space ?tourer|traveller|dispatch|jumpy|expert|vivaro|zafira life|scudo|ulysse", re.I),
+                               "citroen")}
+# a people carrier on a van's body: boxy, for a car-shaped MPV only after the others (an EQV for a Galaxy)
+VAN_BASED = re.compile(r"\beqv\b|proace|id\.? ?buzz|multivan|caravelle|v-class|vito|viano|transporter|"
+                       r"berlingo|kangoo|caddy|doblo|nv200|townstar|combo life|rifter|tourneo", re.I)
+
 
 # the make or its group goes first only for a donor of the car's time and
 # kind: not a 2002 Stagea for a 2021 Jogger, nor a GT-R for an Eclipse
@@ -829,7 +852,11 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
         mk, md = batch.model_of(i)
         b = record_generation(i) or {}
         f = record_body(i, b)
-        if fam and f != fam:
+        # a people carrier on a van's body from a people carrier too (the EQV
+        # for the V-Class, the Proace City Verso for the Rifter): the build
+        # review's commonest fault was a blind panel van or a high-roof crew
+        # van for every Tourneo, Multivan and Berlingo
+        if fam and f != fam and not (target.get("passenger") and f == "mpv"):
             continue
         def off(k, w):
             # a size not known counts against the donor: it may be any size
@@ -843,20 +870,26 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
         # likeness beyond size: the era (a record with no year: its generation's),
         # the roof's height, a race car or an exotic only for its own kind, and
         # an off-roader for an off-roader
-        text = " ".join(str(x or "") for x in (i.get("model"), i.get("modelFamily"), i.get("sourceTitle"), i["assetId"],
-                                                b.get("name")))
+        # (a record with no title: its model's own name, as record_body reads it)
+        text = " ".join(str(x or "") for x in (i.get("model"), i.get("modelFamily"), i.get("sourceTitle")
+                                                or batch.credit_of(i).get("title"), i["assetId"], b.get("name")))
         asked = f"{want.get('words') or ''} {want.get('spec') or ''} {target.get('name') or ''}"
         ty = (target.get("years") or [None])[0]
         dy = record_year(i) or (b.get("years") or [None])[0]
         # a donor of no known year is most likely a modern car, as the catalogue's are
         era_ok = (ty < CLASSIC_BEFORE) == ((dy or 2015) < CLASSIC_BEFORE) if ty else True
-        tall_ok = fam == "van" or not (b.get("height") and target.get("height")) \
+        # (a people carrier's roof is its own: low, not a crew van's high one)
+        tall_ok = (fam == "van" and not target.get("passenger")) or not (b.get("height") and target.get("height")) \
             or abs(b["height"] / target["height"] - 1) <= TALL
+        # a panel van's blind sides behind the cab are no people carrier's windows
+        blind = bool(target.get("passenger") and f == "van" and not batch.PASSENGER_VAN.search(text))
         axis_ok = all(b.get(k) and target.get(k) and abs(b[k] / target[k] - 1) <= AXIS for k in ("length", "width"))
         # its length within AXIS (not its width: a 1960s roadster is narrower than any car since); a length not known
         # counts against it, as its size does
         len_ok = bool(b.get("length") and target.get("length")) and abs(b["length"] / target["length"] - 1) <= AXIS
-        odd = bool((RACE.search(text) and not RACE.search(asked)) or (EXOTIC.search(text) and not EXOTIC.search(asked)))
+        # (and a concept car, a show car's shape: the I-Pace Concept for the EQS)
+        odd = bool((RACE.search(text) and not RACE.search(asked)) or (EXOTIC.search(text) and not EXOTIC.search(asked))
+                   or (re.search(r"\bconcept\b", text, re.I) and not re.search(r"\bconcept\b", asked, re.I)))
         t_off, d_off = bool(OFFROAD.search(asked)), bool(OFFROAD.search(text))
         t_sport = bool(SPORTS.search(asked) or re.search(r"sports? (?:car|tourer)", str(target.get("class") or ""), re.I))
         d_sport = bool(SPORTS.search(text))
@@ -864,7 +897,8 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
         # and a donor stretched or cut more than AXIS does not look like it, however close its year
         likeness = (0 if era_ok else 0.6) + (0 if tall_ok else 0.3) + (0 if len_ok else 0.3) + (0.5 if odd else 0) \
             + (0.2 if d_off and not t_off else 0) + (0.5 if t_off and not d_off else 0) \
-            + (0.3 if d_sport and not t_sport else 0) + (0.35 if d_slope and not t_slope else 0)
+            + (0.3 if d_sport and not t_sport else 0) + (0.35 if d_slope and not t_slope else 0) + (0.4 if blind else 0) \
+            + (0.2 if fam == "mpv" and not target.get("passenger") and VAN_BASED.search(text) and not VAN_BASED.search(asked) else 0)
         lacks = set(short.get(i["assetId"], ())) - rear
         three = bool(re.search(r"\b[23][- ]?(?:door|dr)\b|coup[eé]", str(i.get("sourceTitle") or ""), re.I)) \
             or (i.get("doors") and int(i["doors"]) <= 3)
@@ -890,7 +924,12 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
         # (a van's shape lasts: half as much for one)
         age = (min(gap * 0.015, 0.3) if dy else 0.15) * (0.5 if fam == "van" else 1)
         a_, b_ = (x.lower().replace(" ", "-") for x in (mk, make))
-        kin = 0 if a_ == b_ or (t_off and d_off) else 0.08 if GROUP.get(a_, a_) == GROUP.get(b_, b_) else 0.15
+        # a twin under another badge is the car itself (the Proace City Verso is a Berlingo)
+        tw = TWIN.get((a_, md.lower().replace(" ", "-")))
+        twin = bool(tw and tw[0].search(str(model_key[1])))
+        if tw and not twin:
+            a_ = tw[1]
+        kin = 0 if a_ == b_ or twin or (t_off and d_off) else 0.08 if GROUP.get(a_, a_) == GROUP.get(b_, b_) else 0.15
         tier = 0 if kin < 0.15 else 1                 # the make or its group (a Picanto for an i10), or another maker
         # the asked model's other generation looks like it when near in time; a
         # successor a decade on is another design (a 2021 Tucson for a 2010
@@ -902,7 +941,8 @@ def donors(target, fam, cat, make, model_key, want, skip=()):
                  + 0.03 * batch.GRADE.get(i.get("qualityGrade"), 3))
         out.append((round(score, 4), i["assetId"], i, tier,
                     size <= REACH and axis_ok and not lacks and era_ok and tall_ok and (gap or 0) <= GROUP_YEARS
-                    and not odd and not (d_sport and not t_sport) and d_off == t_off and not (d_slope and not t_slope),
+                    and not odd and not (d_sport and not t_sport) and d_off == t_off and not (d_slope and not t_slope)
+                    and not blind,
                     round(size, 4)))
     # the reshape makes any donor the car's size, so its face counts most: when
     # the body is known (every donor has it), the make or its group first if
@@ -970,6 +1010,9 @@ def _standin(want, report, item, cat, skip, retry=False):
               "height": gen["height"], "years": [y[0], None if (y[1] or 0) >= 2100 else y[1]],
               "body": fam, "source": gen.get("source"), "class": gen.get("class"),
               "side_doors": (2 if nd <= 3 else 4) if nd else None}
+    said = f"{want.get('words') or ''} {want.get('spec') or ''}"
+    if fam == "van" and want.get("body") != "van" and (batch.PASSENGER_VAN.search(said) or PASSENGER_MODEL.search(f"{model} {said}")):
+        target["passenger"] = True      # seats and windows all round: a people carrier's donor (donors)
     if other:
         target["no_photo"] = True     # the model's photos would be of its other body: the donor's own roof stays
     ranked = donors(target, fam, cat, make, (make, model), want, skip)

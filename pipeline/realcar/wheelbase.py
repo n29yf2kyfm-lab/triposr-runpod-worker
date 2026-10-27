@@ -467,7 +467,14 @@ PAGE_FIX = {("Renault Trafic", "Second generation (X83)"): {
 # (the Paceman's page leads to the Aceman, its successor in name only)
 HAND = {"mini|paceman": [{"name": "Mini Paceman (R61)", "years": [2012, 2016], "length": 4115, "width": 1786,
                           "height": 1518, "wheelbase": 2595, "body": "3-door SUV coupe", "doors": 3,
-                          "page": "Mini Paceman", "source": "by hand: Mini's published R61 dimensions"}]}
+                          "page": "Mini Paceman", "source": "by hand: Mini's published R61 dimensions"}],
+        # the people carriers a passenger van is made from: no page of their own to read
+        "mercedes-benz|eqv": [{"name": "Mercedes-Benz EQV (W447)", "years": [2019, 2026], "length": 5140, "width": 1928,
+                               "height": 1901, "wheelbase": 3200, "body": "MPV", "doors": 5,
+                               "page": "Mercedes-Benz EQV", "source": "by hand: Mercedes-Benz's published EQV long dimensions"}],
+        "toyota|proace-city-verso": [{"name": "Toyota Proace City Verso (K9)", "years": [2019, 2026], "length": 4403,
+                                      "width": 1848, "height": 1844, "wheelbase": 2785, "body": "MPV", "doors": 5,
+                                      "page": "Toyota Proace City", "source": "by hand: Toyota's published Proace City Verso Medium dimensions"}]}
 
 
 def _fixed(boxes):
@@ -626,6 +633,10 @@ FETCH_V = 8                                      # 3: EX30, iX1, EQA spelt as ti
 
 def lookup(make, model, year, ratio=None, online=None, doors=None):
     key = f"{make}|{model}".lower()
+    if key in HAND:
+        # sizes set by hand win, with no page read (a model no page gives: the EQV)
+        got = choose(HAND[key], year, ratio, doors)
+        return got if got.get("wheelbase") else choose(HAND[key], None, ratio, doors)
     ent = table().get(key)
     # a page named for the model since it was read (ALIAS, EXTRA): read again, once
     need = [x for x in [ALIAS.get((make.lower(), model.lower())), *EXTRA.get((make.lower(), model.lower()), [])] if x]
@@ -653,9 +664,6 @@ def lookup(make, model, year, ratio=None, online=None, doors=None):
             os.makedirs(os.path.dirname(p), exist_ok=True)
             json.dump(loc, open(p + ".tmp", "w"), indent=0, sort_keys=True)
             os.replace(p + ".tmp", p)
-    if key in HAND:
-        got = choose(HAND[key], year, ratio, doors)
-        return got if got.get("wheelbase") else choose(HAND[key], None, ratio, doors)
     return choose(named_wheelbase(_fixed(ent["boxes"]), model), year, ratio, doors)       # a fresh read's too
 
 

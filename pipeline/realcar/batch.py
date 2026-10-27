@@ -68,7 +68,11 @@ WHEELBASE = {
 BODY_FIX = {"opel-astra-1998-w7-v1": "saloon",     # an Astra G saloon, boot and all
             "fiat-tipo-fw1-v1": "saloon",          # the 2016 Tipo saloon
             "honda-accord-1998-hw1-v1": "saloon",  # recorded a coupe: the four-door saloon
-            "fiat-tempra-1990-fw1-v1": "saloon"}   # its page leads with Brazil's coupe: the saloon
+            "fiat-tempra-1990-fw1-v1": "saloon",   # its page leads with Brazil's coupe: the saloon
+            # the build review: filed under their page's first body
+            "jaguar-f-type-jgw1-v3": "coupe",      # the fixed-roof F-Type (it stood in for the SLC roadster)
+            "jaguar-i-pace-jgw1-v1": "suv",        # the I-Pace concept, a crossover (it stood in for the EQS saloon)
+            "subaru-ascent-2019-sbw1-v1": "suv"}   # "Touring" is its trim, not an estate
 
 
 # Catalogue models whose own cues put the nose at the wrong end (seen on the
@@ -98,6 +102,8 @@ GENERATION_FIX = {
     "mercedes-benz-gl-class-2012-mw1-v1": {"yearStart": 2007, "yearEnd": 2012, "generation": "X164"},
     "mercedes-benz-mercedes-vito-w5-v1": {"model": "Vito", "modelFamily": "Vito", "yearStart": 2004, "yearEnd": 2014,
                                           "generation": "W639"},
+    # an R34 wagon with a GT-R nose, filed with no year (so as the 2014 V37, the Q50's twin)
+    "nissan-skyline-nw1-v3": {"yearStart": 1998, "yearEnd": 2001, "generation": "Tenth generation (R34)"},
     "mg-mg4-2025-m1-v1": {"yearStart": 2022, "yearEnd": 2025, "generation": "First generation"},
     "peugeot-508-v1": {"yearStart": 2019, "yearEnd": 2026, "generation": "Second generation"},
     "renault-captur-v1": {"yearStart": 2014, "yearEnd": 2019, "generation": "First generation"},
@@ -739,12 +745,14 @@ def one(target, item, args, out):
     if is_electric(item, (st or {}).get("name")):
         spec["electric"] = True
     # a van opens at the back as two barn doors (finish.py)
-    if str(item.get("bodyStyle") or "").lower() == "van" or (st or {}).get("body") == "van":
+    # (a people carrier made from one keeps its own tailgate: the EQV's for a V-Class)
+    if str(item.get("bodyStyle") or "").lower() == "van" or ((st or {}).get("body") == "van" and not st.get("passenger")):
         spec["body_family"] = "van"
         # a panel van asked (a Transit, not a Tourneo or a minibus): steel
         # sides behind the cab, whatever its model's own windows (the
         # Sprinter file is a windowed minibus: the photo review's commonest find)
-        if not PASSENGER_VAN.search(f"{target.get('genModel') or ''} {(st or {}).get('name') or ''}"):
+        if not (st or {}).get("passenger") and \
+                not PASSENGER_VAN.search(f"{target.get('genModel') or ''} {(st or {}).get('name') or ''}"):
             spec["panel_van"] = True
     if aid in TORN:
         spec["close_cracks"] = True
@@ -811,7 +819,8 @@ def one(target, item, args, out):
     rec["finish"] = {k: flog.get(k) for k in ("opens", "missing", "layout", "bonnet", "tailgate", "door_trims", "rescale",
                                               "glass_cleared", "measured", "bay_cleared_m2", "engine_pack", "cabin_pack", "paint_set",
                                               "manual", "wheel_strays", "wheel_tyres_from_body", "right_hand_drive",
-                                              "powertrain", "sliding", "cracks_closed")}
+                                              "powertrain", "sliding", "cracks_closed", "paint", "paint_side_m2",
+                                              "paint_by_name_over", "paint_over_plastic", "paint_over_inside", "panel_van", "normals_mended")}
     # validator, web copy and check sheet at the same time: the sheet is drawn
     # from the finished file, so it need not wait for the compression
     web = os.path.join(d, "web.glb")

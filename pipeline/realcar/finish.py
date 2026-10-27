@@ -919,6 +919,49 @@ def _paint_one(pm, spec, j):
         j["extensionsUsed"].append("KHR_materials_clearcoat")
 
 
+def mend_normals(g, mat_ids, cos_max=0.26):
+    """A model's shading broken on its paint: triangles whose corners' normals
+    point 75 degrees or more off their own face (the Sprinter's rear quarter,
+    lit as grey triangles on every van made from it, in the build review) are
+    put on corners of their own, flat, by their face."""
+    j, n_tri = g.j, 0
+    for mesh in j["meshes"]:
+        new = []
+        for p in mesh["primitives"]:
+            at = p.get("attributes") or {}
+            if p.get("mode", 4) != 4 or "indices" not in p or p.get("material") not in mat_ids or "NORMAL" not in at \
+                    or p.get("targets"):
+                continue
+            P = g.accessor(at["POSITION"]).astype(np.float64)
+            N = g.accessor(at["NORMAL"]).astype(np.float64)
+            I = g.accessor(p["indices"]).ravel().astype(np.int64)
+            I = I[:len(I) // 3 * 3].reshape(-1, 3)
+            area, fn = tri_area_normal(P[I])
+            nv = N[I] / np.maximum(np.linalg.norm(N[I], axis=2, keepdims=True), 1e-12)
+            bad = (np.einsum("kcj,kj->kc", nv, fn) < cos_max).any(1) & (area > 1e-7)
+            if not bad.any() or bad.all():
+                continue                         # all of it: the model's way, not a fault in places
+            S = I[bad]
+            p["indices"] = g.add_accessor(I[~bad].ravel().astype(np.uint32), ctype=5125, atype="SCALAR", target=34963)
+            q = {k: v for k, v in p.items() if k not in ("indices", "attributes")}
+            q["attributes"] = {"POSITION": g.add_accessor(P[S].reshape(-1, 3).astype(np.float32), minmax=True, target=34962),
+                               "NORMAL": g.add_accessor(np.repeat(fn[bad], 3, axis=0).astype(np.float32), target=34962)}
+            if "TEXCOORD_0" in at:
+                q["attributes"]["TEXCOORD_0"] = g.add_accessor(
+                    g.accessor(at["TEXCOORD_0"])[S].reshape(-1, 2).astype(np.float32), target=34962)
+            q["indices"] = g.add_accessor(np.arange(S.size, dtype=np.uint32), ctype=5125, atype="SCALAR", target=34963)
+            new.append(q)
+            n_tri += int(bad.sum())
+        mesh["primitives"].extend(new)
+    return n_tri
+
+
+# a material of the car's inside, by its name: "Interior", "internal", "Carro_Interno", a seat's (not
+# "carpaint.198": the "int." in it is the paint's)
+INSIDE = re.compile(r"(?:^|[^a-z])int(?:erior|ernal|erno)?(?![a-z])|interior|internal|interno|seat|leather|"
+                    r"fabric|carpet|cloth", re.I)
+
+
 def panel_sides(g, glass, paint):
     """A panel van's sides behind the cab are steel: its model's side glass
     there (a windowed minibus's, the Sprinter file's) takes the body's paint.
@@ -984,14 +1027,36 @@ def _panel_stage(g, j, W, glass, paint, zb, cx, stage, seal, panes, near, n_tri,
             if stage == "glass":
                 panes.append(T.mean(1)[sel])
             # the paint is one-sided: each panel turned to face out (a pane
-            # modelled facing in would show the cabin through it)
+            # modelled facing in would show the cabin through it), on corners
+            # of its own whose normals face out too: turned on the glass's
+            # shared corners, a pane lit from inside came out grey triangles
+            # among white ones (the Sprinter's, in the build review)
             S = I[sel].copy()
             inward = np.sign(nrm[sel, 0]) != np.sign(T[sel].mean(1)[:, 0] - cx)
             S[inward] = S[inward][:, ::-1]
             if not sel.all():
                 p["indices"] = g.add_accessor(I[~sel].ravel().astype(np.uint32), ctype=5125, atype="SCALAR", target=34963)
-            q = {k: v for k, v in p.items() if k not in ("indices", "material")}
-            q["indices"] = g.add_accessor(S.ravel().astype(np.uint32), ctype=5125, atype="SCALAR", target=34963)
+            # the pane's own smooth normals, each turned out where it faced in
+            # (a flat one a triangle each showed the studio's reflection in patches)
+            out_side = np.sign(T[sel].mean(1)[:, 0] - cx)[:, None]
+            if "NORMAL" in p["attributes"]:
+                N = g.accessor(p["attributes"]["NORMAL"])[S].astype(np.float64)          # (k, 3, 3), the node's frame
+                facing = np.sign((N @ M[:3, :3].T)[..., 0]) * out_side
+                N *= np.where(facing < 0, -1.0, 1.0)[..., None]
+            else:
+                f_ = nrm[sel] * np.where(inward, -1.0, 1.0)[:, None] @ M[:3, :3]     # a normal goes by the transpose
+                N = np.repeat(f_[:, None, :], 3, axis=1)
+            N = N.reshape(-1, 3)
+            N /= np.maximum(np.linalg.norm(N, axis=1, keepdims=True), 1e-12)
+            P0 = g.accessor(p["attributes"]["POSITION"])
+            q = {k: v for k, v in p.items() if k not in ("indices", "material", "attributes")}
+            q["attributes"] = {"POSITION": g.add_accessor(P0[S].reshape(-1, 3).astype(np.float32), minmax=True, target=34962),
+                               "NORMAL": g.add_accessor(N.astype(np.float32), target=34962)}
+            if "TEXCOORD_0" in p["attributes"]:
+                q["attributes"]["TEXCOORD_0"] = g.add_accessor(
+                    g.accessor(p["attributes"]["TEXCOORD_0"])[S].reshape(-1, 2).astype(np.float32), target=34962)
+            q.pop("targets", None)
+            q["indices"] = g.add_accessor(np.arange(S.size, dtype=np.uint32), ctype=5125, atype="SCALAR", target=34963)
             q["material"] = paint
             if sel.all():
                 p.clear()
@@ -1127,8 +1192,7 @@ def finish(src, spec, out, base_dir="."):
         sk = skin(cab, pab, (1, 2), 1, 0.03) & (n_[:, 0] * np.sign(c_[:, 0]) > 0.3) \
             & (c_[:, 1] > ground + 0.9 * (wheel_top - ground)) & (c_[:, 1] < waist_ + 0.1) \
             & (c_[:, 2] > zr) & (c_[:, 2] < zf)
-        w_ = np.array([0.5 if re.search(r"int(erior)?\b|int\.|seat|leather|fabric|carpet|cloth", m.get("name", ""), re.I)
-                       else 1.0 for m in mats] + [1.0])
+        w_ = np.array([0.5 if INSIDE.search(m.get("name", "")) else 1.0 for m in mats] + [1.0])
         np.add.at(door_area, ms[sk], a_[sk] * w_[ms[sk]])
     paint = int(door_area.argmax())
     # a door card or sill moulding of colourless near-black plastic lying ON
@@ -1153,6 +1217,16 @@ def finish(src, spec, out, base_dir="."):
                  and not mats[i].get("name", "").startswith("detail-") and door_area[i] >= 0.6 * door_area[paint]]
         if named:
             log["paint_by_name_over"] = mats[paint].get("name")
+            paint = max(named, key=lambda i: door_area[i])
+    # an inside's material (the Levante's textured "internal", the Courier's
+    # "Interior") showing through a thin door skin is never the paint when a
+    # paint-named one has a real share of the side (the build review: five
+    # cars kept their model's colour, the photo's painted on their insides)
+    if paint < nm and INSIDE.search(mats[paint].get("name", "")):
+        named = [i for i in range(nm) if re.search(r"paint|lack|body", mats[i].get("name", ""), re.I)
+                 and not INSIDE.search(mats[i].get("name", "")) and door_area[i] >= 0.25 * door_area[paint]]
+        if named:
+            log["paint_over_inside"] = mats[paint].get("name")
             paint = max(named, key=lambda i: door_area[i])
     log["paint"] = mats[paint].get("name")
     log["paint_side_m2"] = {mats[i].get("name") if i < nm else "-": round(float(door_area[i]), 3)
@@ -2261,6 +2335,13 @@ def finish(src, spec, out, base_dir="."):
         # the side (the Jazz's "Paint1" beside its "Main_Color_paint")
         named = {i for i in range(min(len(mats), len(door_area))) if i != paint and re.search(r"paint", mats[i].get("name", ""), re.I)
                  and not mats[i].get("name", "").startswith("detail-") and door_area[i] >= 0.3 * door_area[paint]}
+        # and one named for the paint itself with a letter or number after it,
+        # of real panels (the Ghost's "rrghost_paint_b", its two-tone's
+        # bonnet, which stayed black on the white i7 made from it)
+        stem = mats[paint].get("name", "")
+        named |= {i for i in range(len(mats)) if i != paint and len(stem) >= 4 and i not in glass
+                  and re.fullmatch(re.escape(stem) + r"[ _.\-]?[a-z0-9]{1,3}", mats[i].get("name", ""), re.I)
+                  and mat_m2.get(i, 0) >= 0.5}
         coats = sorted(set(paint_ids) | same_paint(mats, paint, glass, mat_m2) | named)
         for i in coats:
             _paint_one(mats[i], spec, j)
@@ -2285,6 +2366,8 @@ def finish(src, spec, out, base_dir="."):
     # ── a panel van asked: no windows behind the cab ──
     if spec.get("panel_van"):
         log["panel_van"] = panel_sides(g, glass, paint)
+    # ── the paint's shading where the model broke it ──
+    log["normals_mended"] = mend_normals(g, set(coats) | {paint} if spec.get("paint") else paint_ids)
 
     # ── clear glass ──
     cleared = []
