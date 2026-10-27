@@ -1,14 +1,11 @@
 {
  "build": {
   "car-byd-seal": {
-   "verdict": "bad",
-   "faults": [
-    "body",
-    "kind"
-   ],
-   "built_at": "2026-10-27 10:58:10",
-   "why": "a Hyundai Santa Fe SUV stands in for the BYD Seal saloon in the photo",
-   "checked": "2026-10-27 12:11:08"
+   "verdict": "ok",
+   "faults": [],
+   "built_at": "2026-10-27 21:29:51",
+   "why": "a 4-door fastback saloon (a CLA) stands in for the Seal saloon in the photo, its grey-blue, nothing broken",
+   "checked": "2026-10-27 22:14:28"
   },
   "van-suzuki-carry": {
    "verdict": "bad",
@@ -92,9 +89,9 @@
   "car-mercedes-v-class": {
    "verdict": "ok",
    "faults": [],
-   "built_at": "2026-10-27 10:58:27",
-   "why": "the same vehicle as the photo, its colour, nothing broken",
-   "checked": "2026-10-27 12:11:08"
+   "built_at": "2026-10-27 21:59:03",
+   "why": "an EQV stands in for the V-Class in the photo: the same body, windows and all, silver, nothing broken",
+   "checked": "2026-10-27 22:14:29"
   },
   "car-ford-focus": {
    "verdict": "ok",
@@ -111,22 +108,18 @@
    "checked": "2026-10-27 12:11:08"
   },
   "car-seat-mii": {
-   "verdict": "bad",
-   "faults": [
-    "body"
-   ],
-   "built_at": "2026-10-27 10:58:36",
-   "why": "a 5-door Kia Picanto stands in for the 3-door Mii in the photo: the door count always counts",
-   "checked": "2026-10-27 12:43:16"
+   "verdict": "ok",
+   "faults": [],
+   "built_at": "2026-10-27 21:50:42",
+   "why": "a 3-door Fox stands in for the 3-door Mii in the photo: the same body and door count, black, nothing broken",
+   "checked": "2026-10-27 22:14:28"
   },
   "car-ford-escort": {
-   "verdict": "bad",
-   "faults": [
-    "body"
-   ],
-   "built_at": "2026-10-27 10:58:15",
-   "why": "a 5-door 2012 Focus stands in for the 3-door Escort in the photo: the door count always counts",
-   "checked": "2026-10-27 12:43:16"
+   "verdict": "ok",
+   "faults": [],
+   "built_at": "2026-10-27 21:56:26",
+   "why": "a 3-door 2009 Fiesta stands in for the 3-door Escort in the photo: the same body and door count, white, nothing broken",
+   "checked": "2026-10-27 22:14:29"
   },
   "car-peugeot-205": {
    "verdict": "ok",

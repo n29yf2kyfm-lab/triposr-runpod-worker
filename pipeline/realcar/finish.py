@@ -1421,6 +1421,11 @@ def smooth_flat(g, mat_ids, crease=35.0, flat_share=0.8, noisy_share=0.12):
             size = np.diff(np.r_[starts, len(k)])
             g_of = np.cumsum(first) - 1
             st, sz = starts[g_of], size[g_of]
+            # a point with hundreds of corners on it (a mesh collapsed to a
+            # point, a fan's centre) is no corner: its own face only, or the
+            # pairs below would be the square of that
+            big = sz > 128
+            st, sz = np.where(big, np.arange(len(k)), st), np.where(big, 1, sz)
             a_ = np.repeat(np.arange(len(k)), sz)
             b_ = np.repeat(st, sz) + (np.arange(sz.sum()) - np.repeat(np.cumsum(sz) - sz, sz))
             fo, ao = fn[ct[o]], area[ct[o]]
@@ -2890,29 +2895,48 @@ def finish(src, spec, out, base_dir="."):
         # a material the model also uses for body panels (batch.PAINT_ALSO):
         # those panels take the paint, its own parts (the wheels) keep it
         also = set(spec.get("paint_also") or [])
-        if also:
+        also_up = spec.get("paint_also_up") or {}
+        if also or also_up:
             # its panels only, a tenth of a square metre or more: the same
             # material's lamp surrounds, chrome grille bars, badge and steering
             # wheel keep it (all of it painted, the Captur's grille, fog lamp
-            # surrounds and badge came out in the body's blue, in round 4)
+            # surrounds and badge came out in the body's blue, in round 4).
+            # ALSO_UP (batch.PAINT_ALSO_UP): a two-tone's bonnet, roof or
+            # tailgate top in a material shared with trim that stays black
+            # (the bZ4X's, the 718's carbon stripes): its pieces facing up by
+            # the share given, 0.15 m2 and more, above the waist
             moved = 0
             Wm, _ = g.world_matrices()
+            ys = [(g.accessor(p["attributes"]["POSITION"]) @ Wm[ni][:3, :3].T + Wm[ni][:3, 3])[:, 1]
+                  for ni, n in enumerate(j["nodes"]) if "mesh" in n
+                  for p in j["meshes"][n["mesh"]]["primitives"] if "POSITION" in (p.get("attributes") or {})]
+            y0 = min(float(y.min()) for y in ys)
+            h = max(float(y.max()) for y in ys) - y0
             for ni, n in enumerate(j["nodes"]):
                 if "mesh" not in n or re.match(r"(?:SB_)?(?:wheel|lamps?|light|cabin|steering|interior)", n.get("name") or "", re.I):
                     continue
                 for p in list(j["meshes"][n["mesh"]]["primitives"]):
-                    if p.get("material") is None or mats[p["material"]].get("name") not in also or "indices" not in p:
+                    name = mats[p["material"]].get("name") if p.get("material") is not None else None
+                    if name is None or (name not in also and name not in also_up) or "indices" not in p:
                         continue
                     P = g.accessor(p["attributes"]["POSITION"]) @ Wm[ni][:3, :3].T + Wm[ni][:3, 3]
                     I = g.accessor(p["indices"]).ravel().astype(np.int64)
                     I = I[:len(I) // 3 * 3].reshape(-1, 3)
-                    a_, _ = tri_area_normal(P[I])
+                    a_, nr = tri_area_normal(P[I])
                     isl, _ = islands(P[I], weld=1e-4)
-                    mine = np.where((np.bincount(isl, weights=a_) >= spec.get("paint_also_min", 0.1))[isl])[0]
+                    tot = np.bincount(isl, weights=a_)
+                    if name in also:
+                        ok = tot >= spec.get("paint_also_min", 0.1)
+                    else:
+                        up = np.bincount(isl, weights=a_ * (nr[:, 1] > 0.5), minlength=len(tot))
+                        top = np.full(len(tot), -np.inf)
+                        np.maximum.at(top, isl, P[I][:, :, 1].max(1))
+                        ok = (tot >= 0.15) & (up >= also_up[name] * tot) & (top >= y0 + 0.45 * h)
+                    mine = np.where(ok[isl])[0]
                     if len(mine):
                         _move_tris(g, p, I, mine, paint)
                         moved += 1
-            log["paint_also"] = {"materials": sorted(also), "pieces": moved}
+            log["paint_also"] = {"materials": sorted(also | set(also_up)), "pieces": moved}
         pm = mats[paint]
         metallic = pm["pbrMetallicRoughness"]["metallicFactor"]
         log["paint_set"] = {"material": pm.get("name"), "srgb": list(spec["paint"][:3]), "metallic": float(metallic),

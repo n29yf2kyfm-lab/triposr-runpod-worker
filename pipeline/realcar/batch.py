@@ -167,6 +167,19 @@ PAINT_ALSO = {"renault-captur-v1": ["wheel_rim"]}
 # housings (0.1-0.12) are in its bumpers' silver too, and came out blue
 PAINT_ALSO_MIN = {"renault-captur-v1": 0.3}
 
+# Catalogue models with a two-tone's second colour on a bonnet, roof or
+# tailgate top, in a material shared with black trim that stays (the bZ4X's
+# black bonnet and roof in its "black.001", with its sills, pillars and
+# cladding; the 718 Spyder RS's carbon bonnet stripes, in its carbon with its
+# side intakes; the Dolphin's dark bonnet and roof): the material's pieces
+# facing up, by the share given, 0.15 m2 and more, above the waist, are
+# painted; the rest keep the material
+PAINT_ALSO_UP = {
+    "toyota-bz4x-tw1-v1": (["black.001"], 0.6),
+    "porsche-718-2024-pw2-v1": (["Porsche_718SpyderRSRewardRecycled_2024Carbon1M_Material"], 0.35),
+    "byd-dolphin-2021-bw1-v1": (["D_Color_2"], 0.5),
+}
+
 # Catalogue models with trim in a livery's colour that the road car's is not
 # (the build review): made near-black, on the car and on every stand-in made
 # from it, by material name
@@ -770,6 +783,9 @@ def one(target, item, args, out):
     if (item.get("standin_donor") or item["assetId"]) in PAINT_ALSO:
         spec["paint_also"] = PAINT_ALSO[item.get("standin_donor") or item["assetId"]]
         spec["paint_also_min"] = PAINT_ALSO_MIN.get(item.get("standin_donor") or item["assetId"], 0.1)
+    if (item.get("standin_donor") or item["assetId"]) in PAINT_ALSO_UP:
+        names, share = PAINT_ALSO_UP[item.get("standin_donor") or item["assetId"]]
+        spec["paint_also_up"] = {n_: share for n_ in names}
     for tab, k_ in ((TRIM_BLACK, "trim_black"), (TRIM_PAINT, "trim_paint")):
         if (item.get("standin_donor") or item["assetId"]) in tab:
             spec[k_] = tab[item.get("standin_donor") or item["assetId"]]
