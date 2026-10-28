@@ -355,7 +355,8 @@ def test_the_gate_finds_a_build_that_left_out_the_runs_licence(run):
 def test_the_gate_is_clear_when_all_is_current(run):
     paint_label.label("car-fiesta=white car-note=white")
     view_label.label("car-fiesta=left car-note=left")
-    paths.append_row({"key": "car-note", "status": "standin", "paint": "#eeefed", "built_at": "2026-10-28 09:00:00"})
+    # rebuilt after its label queued it (a fixed time here passed once that time had gone by)
+    paths.append_row({"key": "car-note", "status": "standin", "paint": "#eeefed", "built_at": paths.now()})
     build_review.verdict("car-fiesta", "ok", [], "")
     build_review.verdict("car-note", "ok", [], "")
     found = check.run()
