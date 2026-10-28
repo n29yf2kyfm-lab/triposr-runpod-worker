@@ -13,6 +13,7 @@ Each head is a logistic regression (sklearn to train; numpy to run). Its
 weights are kept in heads.json, which any language can read: a score is
 x @ W.T + b, then a softmax (or, for one row, a sigmoid).
 """
+import colorsys
 import json
 
 import numpy as np
@@ -48,10 +49,26 @@ def lab100(hex_):
     return np.array([v[0] * 100 / 255, v[1] - 128, v[2] - 128])
 
 
+# the paints from white to black: one another's next shade, never a colour's
+NEUTRAL = ("white", "pearl-white", "silver", "grey", "dark-grey", "black")
+
+
+def shade_group(paint, a):
+    """A family's group: the neutrals as one, the rest by their paint's hue (reds and yellows, greens, blues)."""
+    if a in NEUTRAL:
+        return "neutral"
+    h = colorsys.rgb_to_hls(*(int(paint[a][i:i + 2], 16) / 255 for i in (1, 3, 5)))[0]
+    return "reds" if h < 0.19 or h > 0.92 else "greens" if h < 0.47 else "blues"
+
+
 def next_shade(paint, a, b, limit=25.0):
     """Two families close enough to be one paint in another light (grey and dark grey, white and pearl):
-    their paints (PAINT, family -> '#rrggbb') within LIMIT of each other (CIE76)."""
-    return a == b or float(np.linalg.norm(lab100(paint[a]) - lab100(paint[b]))) < limit
+    their paints (PAINT, family -> '#rrggbb') within LIMIT of each other (CIE76), and in one group
+    (shade_group: a pale aqua is near white, but a colour, and a dark blue near dark grey)."""
+    if a == b:
+        return True
+    return shade_group(paint, a) == shade_group(paint, b) and \
+        float(np.linalg.norm(lab100(paint[a]) - lab100(paint[b]))) < limit
 
 
 def colour_hist(im, mid=0.6):

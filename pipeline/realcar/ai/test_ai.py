@@ -4,6 +4,8 @@
 """
 import json
 import os
+import shutil
+import subprocess
 import sys
 
 import numpy as np
@@ -124,6 +126,11 @@ def test_next_shades():
     assert H.next_shade(paint, "white", "pearl-white")
     assert not H.next_shade(paint, "red", "blue")
     assert not H.next_shade(paint, "white", "black")
+    # near in Lab, but a colour against a neutral, or one hue against another: not one paint
+    for a, b in (("white", "aqua"), ("silver", "lilac"), ("dark-grey", "dark-blue"), ("light-green", "beige"),
+                 ("grey", "grey-blue"), ("black", "dark-green")):
+        assert not H.next_shade(paint, a, b) and not H.next_shade(paint, b, a), (a, b)
+    assert H.next_shade(paint, "beige", "champagne") and H.next_shade(paint, "brown", "bronze")
 
 
 def test_the_trained_heads_are_whole():
@@ -178,6 +185,15 @@ def test_the_threshold_is_where_answers_are_right_99_in_100():
     assert 0.59 < train.threshold(ps, rights) < 0.62
     assert 0.59 < train.threshold(ps, rights, want=0.97) < 0.62
     assert train.threshold(ps, np.zeros(200, bool)) > 1          # never sure enough: never counts
+
+
+def test_a_threshold_is_tried_on_the_half_it_was_not_set_on():
+    import train
+    ps, halves = np.linspace(0.5, 1, 400), np.arange(400) % 2
+    rights = np.where(halves == 0, ps > 0.6, ps > 0.8)       # half 1 is harder: right only over 0.8
+    a, b = train.split_half(ps, rights, halves, train.threshold)
+    assert 0.59 < a["threshold"] < 0.62 and 0.45 < a["right_when_this_sure"] < 0.55  # set on 0, tried on 1
+    assert 0.79 < b["threshold"] < 0.82 and b["right_when_this_sure"] == 1.0
 
 
 def test_scores_with_nothing_to_score_are_none_not_a_crash():
@@ -239,6 +255,19 @@ def test_the_phone_page_has_its_slots_and_its_twin_rules():
     assert str(list(H.HIST_BINS)).replace(" ", "") in page.replace(" ", "")
     assert "clip-b32-int8" in vision.ENCODERS
 
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="needs node")
+def test_the_phone_pages_next_shade_is_pythons_on_every_pair():
+    page = open(os.path.join(HERE, "web", "index.html")).read()
+    paint = json.load(open(HEADS))["card"]["paint"]
+    js = page[page.index("function lab("):page.index("function colourHist(")] + (
+        f"\nconst P = {json.dumps(paint)}, out = {{}};"
+        "for (const a in P) for (const b in P) out[a + '|' + b] = nextShade(P, a, b);"
+        "console.log(JSON.stringify(out));")
+    got = json.loads(subprocess.run(["node", "-e", js], capture_output=True, text=True, check=True).stdout)
+    assert len(got) == len(paint) ** 2
+    assert {k for k, v in got.items() if v != H.next_shade(paint, *k.split("|"))} == set()
 
 if __name__ == "__main__":
     sys.exit(pytest.main([__file__, "-q"]))

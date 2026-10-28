@@ -24,15 +24,31 @@ fold. Each fold was answered by heads trained on the other four, so every
 number here is on photos and builds the model had not seen (`heads.json`'s
 `card` keeps them all):
 
-| Question | On | Right | |
-|---|---|---|---|
-| kind | 936 photos | 94.0% | every mistake a car read as a van or a van as a car |
-| | 711 builds | 93.0% | |
-| side | 711 photos | 95.1% | |
-| | 711 builds | 99.7% | |
-| colour | 722 photos | 67.2% | 89.2% its family or the next shade (grey for dark grey, silver for white); 87.5% in its top 3. The measurer it can replace (`photo_paint.py` before the colour agents) named 41% |
-| | 711 builds | 92.3% | 97.5% its family or the next shade |
-| match | 650 builds with their own photo, 3,555 with other vehicles' | 0.88 | the chance a build scores higher with its own photo than with another vehicle's (AUC; 0.5 is a coin, 1 is never wrong) |
+| Question | On | Right | Always the commonest answer | |
+|---|---|---|---|---|
+| kind | 936 photos | 94.0% | 63.9% (car) | every mistake a car read as a van or a van as a car |
+| | 722 photos of cars and vans | 92.2% | 82.8% (car) | the motorbikes left out: they are the easy ones |
+| | 711 builds | 93.0% | 84.0% (car) | |
+| side | 711 photos | 95.1% | 54.0% (right) | |
+| | 711 builds | 99.7% | 54.0% (right) | |
+| colour | 722 photos | 67.2% | 28.7% (white) | 83.2% its family or the next shade (always white: 49.6%); 87.5% in its top 3. The measurer it can replace (`photo_paint.py` before the colour agents) named 41% |
+| | 711 builds | 92.3% | 28.3% (white) | 96.6% its family or the next shade |
+| match | 650 builds with their own photo, 3,555 with other vehicles' | 0.88 | 0.50 | the chance a build scores higher with its own photo than with another vehicle's (AUC; 0.5 is a coin, 1 is never wrong) |
+
+The next shade is a family within 25 of it in Lab and in its group (white to
+black as one group, the rest by hue): grey for dark grey, silver for white, not
+aqua for white. Until 28 October it had no groups and counted 51 pairs, white
+and aqua and dark grey and dark blue among them (found by the audit, below); it
+counts 17, and photos' colour to the next shade fell from 89.2% to 83.2%.
+
+**Sure.** Each head's threshold is the lowest `p` from which photos were right
+99 times in 100, held out. That is set and scored on the same answers, so set
+on one half of the vehicles (by fold) and tried on the other: answers that sure
+were right 98% and 100% of the time for kind, 97.5% and 98.9% for side, 96.8%
+and 98.6% for colour (its family or the next shade). Read the 99 as about 98.
+
+Some settings (the heads' `C`, `REAL_WRONG`, `SURE_RIGHT`) were picked after
+looking at these held-out scores: they may flatter them a little.
 
 A correction: until 28 October the folds went by key alone, and 75 shared
 pictures sat in two folds, so some vehicles were scored on a picture the heads
@@ -40,13 +56,19 @@ had trained on (found by the code's audit, below). Fixed, photos' colour fell
 from 70.4% to 67.2%, and the shape check's catch of the reviewers' wrong builds
 from 60% to 40%: the numbers here are the fixed ones.
 
-The match against what the run knows was wrong:
+The match against what the run knows was wrong, beside the encoder untrained
+(the cosine of the photo's and the build's embeddings, its threshold set the same way):
 
-| | AUC | Flagged (below 0.48) |
-|---|---|---|
-| 251 builds of the photo's own model, against 458 stand-ins (another model's body reshaped) | 0.76 | 10% of own-model builds (the threshold is set so), 40% of stand-ins |
-| the reviewers' 107 passed builds, against the 10 they found the wrong shape on the build there now | 0.64 | 4 of the 10 |
-| ... against the 61 whose last verdict named a shape fault (on that build or an earlier one) | 0.64 | 38% |
+| | AUC | Flagged (below 0.48) | Untrained: AUC, flagged |
+|---|---|---|---|
+| 251 builds of the photo's own model, against 458 stand-ins (another model's body reshaped) | 0.76 | 10% of own-model builds (the threshold is set so), 40% of stand-ins | 0.72, 29% of stand-ins |
+| the reviewers' 107 passed builds, against the 10 they found the wrong shape on the build there now | 0.64 | 4 of the 10 | 0.43, 2 of the 10 |
+| ... against the 61 whose last verdict named a shape fault (on that build or an earlier one) | 0.64 | 38% | 0.52, 16% |
+
+Training adds to CLIP here, but not much on the reviewers' wrong builds, and
+10 is a small number. 64% of the builds are stand-ins. The threshold set on one
+half of the vehicles and tried on the other flags 9% and 12% of own-model
+builds, 46% and 37% of stand-ins.
 
 The reviewers' passed builds are flagged 27% of the time: most of those are
 stand-ins, which they pass when the body is the right sort.
@@ -96,6 +118,11 @@ cannot fail; a model always answering "silver" passed the grey check; three
 hand answers had been loosened ("car or van") after the model missed them; the
 colour swap was scored by a swatch's tint; the training pictures were not
 published, so "never trained on" could not be checked; and the leak above.
+Sonnet's second pass found more, fixed too: the next shade counted 51 pairs
+(white and aqua among them); no score stood beside a baseline (always "car" is
+right on 83% of cars and vans); the 99-in-100 threshold was set and scored on
+the same answers; the settings tuned on held-out scores were not said; and the
+phone page's example is a vehicle the model was trained on (the page now says so).
 
 ## Use it
 
@@ -168,7 +195,7 @@ every 97th value of it within 0.00001 (the page normalises in one step, Python
 in three, so the last bit of rounding differs), and on the page's own numbers
 Python's heads give the page's every answer. It does not show the page's
 answers are right: on the 29 unseen photos of `try_it.py` the page itself, in
-Chromium, scores kind 28 of 29, side 27 of 29 and colour 18 of 28 strictly (20
+Chromium, scores kind 28 of 29, side 27 of 29 and colour 18 of 29 strictly (20
 leniently).
 
 The browser's engine does the 8-bit arithmetic a little otherwise than
@@ -176,10 +203,12 @@ onnxruntime here (its numbers 0.99 alike), so the page's heads are trained on th
 page's own reading of every picture (`web/features.py`). WebAssembly's
 arithmetic is specified to be the same on every device, so a phone should read
 as Chromium does here; not checked on a phone. Held out, as above, the page reads kind on 93.7% of
-photos, side on 90.9% (the full model 95.1%: the 8-bit encoder keeps less of
-which way a vehicle points), colour on 66.9% (89.2% to the next shade) and
-builds' colour on 91.7%; it tells a build's own photo from another vehicle's at
-an AUC of 0.86 and flags 37% of the stand-ins.
+photos, side on 90.9% of photos and 91.4% of builds (the full model 95.1% and
+99.7%: the 8-bit encoder keeps less of which way a vehicle points), colour on
+66.9% (83.2% to the next shade) and builds' colour on 91.7%; it tells a build's
+own photo from another vehicle's at an AUC of 0.86 and flags 36.5% of the
+stand-ins, but only 1 of the reviewers' 10 wrong-shape builds (the full model 4,
+the untrained encoder 2). For checking builds, use the full model.
 
 To make it again after training:
 
@@ -199,7 +228,7 @@ onnxruntime's `.wasm` and the example's two pictures.
 
 After a review round (new labels, new verdicts, rebuilt builds):
 
-    pip install scikit-learn
+    pip install scikit-learn opencv-python-headless      # (the run's paint families come with OpenCV's colour code)
     F1K_HOME=/path/to/f1k python3 pipeline/realcar/ai/train.py
 
 reads every label in `$F1K_HOME` (`dataset.py` says which) and every picture
@@ -214,7 +243,7 @@ A verdict is used only on the build and photo it was made on.
 
 - **Not a replacement for the review.** The match sees whether a build looks like
   the photo's model; it does not see a wrong door count, a small error in
-  proportion, a roof or a broken part. A third of the reviewers' wrong-shape
+  proportion, a roof or a broken part. Six of the reviewers' ten wrong-shape
   builds pass it. Use it to put the builds to look at first at the top, and to
   catch the stand-ins furthest from their car.
 - **It learned one run**: 936 vehicles, labelled by agents with gold checks. A
@@ -228,7 +257,8 @@ A verdict is used only on the build and photo it was made on.
   ahead or behind has no answer worth reading. Its `p` is seldom above 0.8 even
   when right (the picture and its mirror are averaged).
 - **Kind**: cars and vans that share a body (a Berlingo, a Nemo, a Vito) are where
-  it errs, as the target list does.
+  it errs, as the target list does. On cars and vans alone it beats always saying
+  "car" by less than ten points (92.2% against 82.8%).
 
 ## Files
 

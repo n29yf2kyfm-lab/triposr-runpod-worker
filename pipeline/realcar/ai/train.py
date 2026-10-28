@@ -128,6 +128,10 @@ def match_pairs(its, feat, rng, real=REAL_WRONG, n_random=3, n_hard=2):
     return np.stack(X), np.array(y), np.array(w, float)
 
 
+def cos(a, b):
+    return float(np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b)))
+
+
 def auc(pos, neg):
     """The chance a POS score is above a NEG one (ties half): None when either is empty."""
     pos, neg = np.asarray(pos, float), np.asarray(neg, float)
@@ -185,13 +189,28 @@ def threshold(ps, rights, want=SURE_RIGHT, at_least=20):
     return 1.01
 
 
-def scores(answers):
-    """Each head's held-out scores on photos and on builds, and its threshold."""
+def split_half(ps, rights, halves, pick):
+    """A threshold set on one half of the vehicles (HALVES: by fold) and tried on the other, both ways round:
+    whether answers that sure are as right on vehicles it was not set on."""
+    ps, rights, halves = np.asarray(ps, float), np.asarray(rights, bool), np.asarray(halves)
+    out = []
+    for h in (0, 1):
+        t = pick(ps[halves == h], rights[halves == h])
+        p, r = ps[halves != h], rights[halves != h]
+        above = p >= t
+        out.append({"threshold": r3(t), "photos_this_sure": r3(above.mean()) if len(p) else None,
+                    "right_when_this_sure": r3(r[above].mean()) if above.any() else None})
+    return out
+
+
+def scores(answers, fold_of):
+    """Each head's held-out scores on photos and on builds, against always giving the commonest answer,
+    and its threshold (tried on the half of the vehicles it was not set on)."""
     truth = {"photo": {"kind": "kind", "side": "side", "colour": "colour"},
              "build": {"kind": "kind", "side": "side", "colour": "build_colour"}}
     out, th = {}, {}
     for what in ("kind", "side", "colour"):
-        ps, rights = [], []
+        ps, rights, halves = [], [], []
         for src in ("photo", "build"):
             xs = [(it, a[what]) for s, it, a in answers if s == src and it.get(truth[src][what])]
             if not xs:
@@ -199,19 +218,29 @@ def scores(answers):
             ys = [it[truth[src][what]] for it, _ in xs]
             got = [a["answer"] for _, a in xs]
             right = [g == y for g, y in zip(got, ys)]
+            common = collections.Counter(ys).most_common(1)[0][0]
             o = {"n": len(xs), "right": r3(np.mean(right)),
+                 "always_the_commonest": {"answer": common, "right": r3(np.mean([y == common for y in ys]))},
                  "mistakes": collections.Counter(f"{y}->{g}" for g, y in zip(got, ys) if g != y).most_common(8)}
-            if what == "colour":
+            if what == "kind":          # motorbikes are easy (built in code, two wheels): cars and vans alone
+                cv = [(g, y) for g, y in zip(got, ys) if y in ("car", "van")]
+                o["cars_and_vans"] = {"n": len(cv), "right": r3(np.mean([g == y for g, y in cv])),
+                                      "always_car": r3(np.mean([y == "car" for _, y in cv]))}
+            if what == "colour":        # from here on, right is its family or the next shade
                 right = [H.next_shade(dataset.FAMILY, g, y) for g, y in zip(got, ys)]
                 o["right_or_next_shade"] = r3(np.mean(right))
+                o["always_the_commonest"]["right_or_next_shade"] = r3(np.mean([H.next_shade(dataset.FAMILY, common, y)
+                                                                                for y in ys]))
                 o["in_top_3"] = r3(np.mean([y in [c for c, _ in a["top3"]] for (_, a), y in zip(xs, ys)]))
             out[f"{what}_{src}"] = o
             if src == "photo":          # the harder of the two to read: sure enough on photos is surer on builds
                 ps, rights = [a["p"] for _, a in xs], right
+                halves = [fold_of[it["key"]] % 2 for it, _ in xs]
         th[what] = threshold(ps, rights)
         above = np.asarray(ps) >= th[what]
         out[f"{what}_sure"] = {"threshold": r3(th[what]), "photos_this_sure": r3(above.mean()) if ps else None,
-                               "right_when_this_sure": r3(np.asarray(rights)[above].mean()) if above.any() else None}
+                               "right_when_this_sure": r3(np.asarray(rights)[above].mean()) if above.any() else None,
+                               "set_on_one_half_tried_on_the_other": split_half(ps, rights, halves, threshold)}
     return out, th
 
 
@@ -258,7 +287,7 @@ def main():
     looks = {it["key"]: vision.dhash(vision.load(it["photo"])) for it in its}
     fold_of = dataset.folds(its, FOLDS, looks)
     answers, scored, pairs_ = held_out(its, feat, fold_of)
-    test, th = scores(answers)
+    test, th = scores(answers, fold_of)
     pm = [float(hs["match"].proba(H.pair(feat[it["photo"]][0], feat[it["build"]][0]))[0, 1]) for it, hs in scored]
     # the match's threshold: one in ten builds of the photo's own model (not a stand-in, no shape fault) below it
     own = [s for s, (it, _) in zip(pm, scored) if not it.get("standin") and not it.get("shape_fault_last")]
@@ -266,6 +295,25 @@ def main():
     ps, ys = (np.array([p for p, _ in pairs_]), np.array([y for _, y in pairs_])) if pairs_ else (np.zeros(0), np.zeros(0))
     test["match_pairs"] = {"n_own": int(ys.sum()), "n_other": int((ys == 0).sum()), "auc": r3(auc(ps[ys == 1], ps[ys == 0]))}
     faults = reviewed(list(zip(pm, [it for it, _ in scored])), th["match"])
+    # the same threshold rule, set on one half of the vehicles and tried on the other
+    halves = np.array([fold_of[it["key"]] % 2 for it, _ in scored])
+    own_of = np.array([not it.get("standin") and not it.get("shape_fault_last") for it, _ in scored])
+    st_of = np.array([bool(it.get("standin")) for it, _ in scored])
+    pm_ = np.array(pm)
+    faults["set_on_one_half_tried_on_the_other"] = [
+        {"threshold": r3(t), "own_model_flagged": r3(np.mean(pm_[(halves != h) & own_of] < t)),
+         "standin_flagged": r3(np.mean(pm_[(halves != h) & st_of] < t))}
+        for h in (0, 1) for t in [float(np.quantile(pm_[(halves == h) & own_of], OWN_FLAGGED))]]
+    faults["standin_share"] = r3(st_of.mean())
+    # against the encoder untrained: the photo's and the build's embeddings' cosine, the same threshold rule
+    raw = [float(cos(feat[it["photo"]][0], feat[it["build"]][0])) for it, _ in scored]
+    raw_th = float(np.quantile([c for c, o in zip(raw, own_of) if o], OWN_FLAGGED))
+    rr = reviewed(list(zip(raw, [it for it, _ in scored])), raw_th)
+    faults["untrained_cosine"] = {"threshold": rr["threshold"],
+                                  "on_their_builds_now": {k: v for k, v in rr["on_their_builds_now"].items()
+                                                          if k != "wrong_shape"},
+                                  "shape_fault_on_last_verdict": rr["shape_fault_on_last_verdict"],
+                                  "own_model_vs_standin": rr["own_model_vs_standin"]}
     trained = time.strftime("%Y-%m-%d %H:%M:%S")
     second = {}
     for it, hs in scored:
@@ -284,7 +332,9 @@ def main():
         "held_out_scores": test, "reviewers_wrong_shape_builds": faults,
         "paint": dataset.FAMILY, "thresholds": th,
         "note": f"Scores are held out: every vehicle answered by heads trained on the other {FOLDS - 1} of "
-                f"{FOLDS} folds. The heads written were then trained on all.",
+                f"{FOLDS} folds. The heads written were then trained on all. Some settings (C, REAL_WRONG, "
+                f"SURE_RIGHT) were picked after looking at these same held-out scores: they may flatter "
+                f"them a little.",
     }
     H.save(a.out, final, card)
     seen = sorted({vision.dhash(vision.load(f)) for f in files})
