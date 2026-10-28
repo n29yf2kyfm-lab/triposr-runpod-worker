@@ -27,6 +27,10 @@ own `GLBMACHINE_HOME`. Run every tool from the repository root:
    if it lists verdicts, review those builds (4); if it lists a batch that missed a checked item, give that
    batch's sheets to a new agent.
 7. `webp.py` makes the small pictures for the report; `webp.py --prune` removes the full ones once every review is done.
+8. **A second opinion from the trained model** (`../ai/`): `python3 pipeline/realcar/ai/predict.py run` checks every
+   build against its photo (`ai_review.json`) and lists the builds it would look at that the reviewers passed: give
+   those to the build review first. After a round, `python3 pipeline/realcar/ai/train.py` trains it again on the
+   round's answers. What it can and cannot see is in `../ai/README.md`.
 
 `brief.py` makes a batch's sheets and fills in its instructions from `prompts/`: never edit a prompt by hand for
 one batch. Change the prompt file, and every batch after gets the change.
