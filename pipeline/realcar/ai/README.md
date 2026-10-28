@@ -2,7 +2,8 @@
 
 A real trained model, not written rules: it learned from the run's own answers
 (1,647 pictures: 936 photos and 711 builds, named by the colour, side and
-review agents, with their hand-checked gold items) on top of CLIP, an image model OpenAI trained on
+review agents, with their hand-checked gold items, and the machine's own record
+of which builds are stand-ins) on top of CLIP, an image model OpenAI trained on
 400 million pictures. It answers four questions the review agents answer:
 
 | Question | Of | Answers |
@@ -17,78 +18,104 @@ and `check` puts them together into a second opinion on a build: what looks wron
 
 ## How good it is
 
-Scores on vehicles the model was never trained on (a fifth of the run, held out
-by a fixed draw; `heads.json`'s `card` keeps every number):
+Every vehicle is in one of five folds (by its key). Each fold was answered by
+heads trained on the other four, so every number here is on photos and builds
+the model had not seen (`heads.json`'s `card` keeps them all):
 
 | Question | On | Right | |
 |---|---|---|---|
-| kind | 187 photos | 92.5% | every mistake a car read as a van or a van as a car |
-| | 147 builds | 94.6% | |
-| side | 147 photos | 97.3% | |
-| | 147 builds | 98.6% | |
-| colour | 150 photos | 73.3% | 94.0% its family or the next shade (grey for dark grey, silver for white); 90.0% in its top 3. The measurer it can replace (`photo_paint.py` before the colour agents) named 41.3% |
-| | 147 builds | 89.1% | 97.3% its family or the next shade |
-| match | 131 builds with their own photo, 735 with other vehicles' | 0.87 | the chance a build scores higher with its own photo than another vehicle's build does (AUC) |
+| kind | 936 photos | 92.7% | every mistake a car read as a van or a van as a car |
+| | 711 builds | 92.7% | |
+| side | 711 photos | 95.2% | |
+| | 711 builds | 99.6% | |
+| colour | 722 photos | 68.8% | 89.3% its family or the next shade (grey for dark grey, silver for white); 88.0% in its top 3. The measurer it can replace (`photo_paint.py` before the colour agents) named 41% |
+| | 711 builds | 90.6% | 97.6% its family or the next shade |
+| match | 650 builds with their own photo, 3,555 with other vehicles' | 0.89 | the chance a build scores higher with its own photo than with another vehicle's (AUC; 0.5 is a coin, 1 is never wrong) |
 
-The match against what the run knows was wrong (every build scored by heads that
-had not seen it, five rounds of a fifth each):
+The match against what the run knows was wrong:
 
-| | AUC | Below the threshold (0.47) |
+| | AUC | Flagged (below 0.49) |
 |---|---|---|
-| 251 builds of the photo's own model, against 458 stand-ins (another model's body reshaped) | 0.74 | 10% of own-model builds, 34% of stand-ins |
-| the reviewers' 107 passed builds, against the 10 they found the wrong shape on the build there now | 0.66 | 5 of the 10 |
-| ... against the 61 they ever found the wrong shape (some fixed since) | 0.72 | 59% |
+| 251 builds of the photo's own model, against 458 stand-ins (another model's body reshaped) | 0.76 | 10% of own-model builds (the threshold is set so), 42% of stand-ins |
+| the reviewers' 107 passed builds, against the 10 they found the wrong shape on the build there now | 0.71 | 6 of the 10 |
+| ... against the 61 whose last verdict named a shape fault (on that build or an earlier one) | 0.76 | 66% |
 
-And by eye: `predict.py run` over the run's 711 builds flagged 124 as the wrong
-shape (a run over vehicles the model was trained on). Of every third of them, 42,
-looked at photo beside build: 38 are stand-ins wearing another model's body (a
-Caravelle built as an ID Buzz, a Mini Clubman as a BMW 3 Series Touring, a Saab
-9-5 as an Audi A6, a Citroën 2CV as a 1964 Skyline), 3 are builds the reviewers
-had failed for another fault (purple glass, grey bumpers), and 1 is a false alarm
-(a Mondeo estate). The reviewers' last verdict was ok on 59 of the 124.
+The reviewers' passed builds are flagged 27% of the time: most of those are
+stand-ins, which they pass when the body is the right sort.
 
-These are the run's labels, which are the agents' answers checked by gold items,
-not certain truth: a "mistake" is sometimes the label's.
+**By eye.** Of the 217 builds the held-out answers flag as the wrong shape, every
+fifth (43) was looked at photo beside build: 39 are another model or another
+generation (a Kia Rio built as a Golf, a Rover 25 as a Punto, a Kia Stinger as a
+Genesis G70, a Mini Paceman as a BMW X1); 4 are false alarms, all builds of the
+photo's own model (a Scénic, a Fiesta, a GT-R, a 300C). Of the 217, 192 are
+stand-ins; the reviewers' verdict on the build there now was ok on 29.
+
+**On photos from outside the run.** 34 Wikimedia photos of the run's vehicles
+that it never trained on, named by hand: kind 31 of 34 (the three misses are a
+California, a Multivan and a Master the target list calls cars, read as vans),
+side 30 of 33 (a wheel close-up left out), colour 26 of 32 (counting a shade
+either name would fit).
+
+The run's labels are the agents' answers checked by gold items, not certain
+truth: a "mistake" is sometimes the label's.
 
 ## Use it
 
     pip install numpy pillow onnxruntime
-    python3 pipeline/realcar/ai/predict.py photo car.jpg
+    python3 pipeline/realcar/ai/predict.py photo car.jpg [more.jpg ...]
     python3 pipeline/realcar/ai/predict.py check car.jpg build.png
     F1K_HOME=/path/to/f1k python3 pipeline/realcar/ai/predict.py key car-ford-fiesta
     F1K_HOME=/path/to/f1k python3 pipeline/realcar/ai/predict.py run     # every build: $F1K_HOME/ai_review.json
 
 The first run fetches the image encoder (350 MB, pinned and checked by its
-SHA-256) into `$VEHICLE_AI_HOME` (default `~/.cache/vehicle-ai`). From Python:
+SHA-256) into `$VEHICLE_AI_HOME` (default `~/.cache/vehicle-ai`). A file it
+cannot read (missing, broken, not a picture, under 64 pixels a side) gets
+`{"error": ...}` and the others go on. From Python:
 
 ```python
 import sys; sys.path.insert(0, "pipeline/realcar/ai")
 from predict import VehicleAI
 ai = VehicleAI()
 ai.photo("car.jpg")
-# {"kind": {"answer": "car", "p": 0.99}, "side": {"answer": "left", "p": 0.97},
-#  "colour": {"answer": "white", "p": 0.71, "paint": "#eeefed", "top3": [...]}}
+# {"file": "car.jpg", "kind": {"answer": "car", "p": 0.9}, "side": {"answer": "right", "p": 0.68},
+#  "colour": {"answer": "silver", "p": 0.97, "paint": "#c4c7ca", "top3": [...]}}
 ai.check("car.jpg", "build.png")
-# {"photo": {...}, "build": {...}, "match": 0.91, "flags": [], "answer": "ok"}
+# {"photo": {...}, "build": {...}, "match": 0.93, "flags": [], "answer": "ok"}
 ```
 
-About 0.2 s a picture on one CPU core (a check reads two); no GPU, no PyTorch.
+`p` is how sure the head is. A kind, side or colour that differs between photo
+and build is only flagged when both readings are at least as sure as the
+head's threshold in the card: photos read that surely were right 99 times in
+100, held out. The run's labels are about that good, so on this run those flags
+are rare (3 of 711) and the shape flag is the one that finds things.
+
+`run` is the run's second opinion. `train.py` leaves every build's held-out
+answer in `ai_review.json`; `run` keeps those while the build and photo are the
+ones answered, checks with the final heads only a build or photo that is newer,
+and lists the flagged builds the reviewers passed (their verdict counts only
+on the build and photo it was made on). About 0.2 s a picture on one CPU core
+(a check reads two); no GPU, no PyTorch.
 
 ## Take it with you
 
     python3 pipeline/realcar/ai/bundle.py vehicle-ai
 
-makes `vehicle-ai/` and `vehicle-ai.zip`: the code, the trained heads and the
-encoder in one folder that runs anywhere with Python 3.9+, offline:
+makes `vehicle-ai/` and `vehicle-ai.zip` (about 210 MB): the code, the trained
+heads and the encoder in one folder that runs anywhere with Python 3.9+, offline:
 
     cd vehicle-ai && pip install -r requirements.txt && python3 predict.py photo car.jpg
+
+(`key` and `run` read a run's data folder and need the repository.)
 
 The encoder is a standard ONNX file and `heads.json` is plain numbers (a score
 is `x @ W.T + b`, then a softmax), so the model also runs outside Python: in a
 browser or Node with onnxruntime-web, or in any language with an ONNX runtime.
-The encoder's input is the picture padded to a square of CLIP's mean colour, 224
-pixels a side, normalised (`vision.prep`); the colour head also takes the
-picture's middle as a Lab histogram (`heads.colour_hist`).
+To match it there: a cut-out (a picture with a see-through background) is
+cropped to its vehicle and put on white (`vision.load`); the picture is padded
+to a square of CLIP's mean colour, 224 pixels a side, normalised
+(`vision.prep`); the colour head also takes the picture's middle as a Lab
+histogram (`heads.colour_hist`); side reads the picture and its mirror
+(`heads.side_proba`).
 
 ## Train it again
 
@@ -97,42 +124,43 @@ After a review round (new labels, new verdicts, rebuilt builds):
     pip install scikit-learn
     F1K_HOME=/path/to/f1k python3 pipeline/realcar/ai/train.py
 
-reads every label in `$F1K_HOME` (`dataset.py` says which), reads every picture
-once (about 5 minutes on 4 CPUs; kept in a cache, so a second run takes
-under a minute), trains the heads without the held-out vehicles, scores them on those,
-then trains them on all and writes `heads.json`. A verdict is only used on the
-build and photo it was made on; a build since rebuilt is not.
+reads every label in `$F1K_HOME` (`dataset.py` says which) and every picture
+(about 5 minutes on 4 CPUs the first time; kept in a cache by encoder and
+feature version, so later runs read only new pictures), answers each fold with
+heads trained on the others, sets the thresholds from those answers, writes
+them as the run's second opinion, then trains the heads on all and writes
+`heads.json`. A vehicle keeps its fold when others are added, so rounds compare.
+A verdict is used only on the build and photo it was made on.
 
 ## What it is not
 
 - **Not a replacement for the review.** The match sees whether a build looks like
   the photo's model; it does not see a wrong door count, a small error in
-  proportion, a roof or a broken part. Half of the reviewers' wrong-shape builds
-  pass it. Use it to put the builds to look at first at the top, and to catch the
-  stand-ins furthest from their car.
+  proportion, a roof or a broken part. A third of the reviewers' wrong-shape
+  builds pass it. Use it to put the builds to look at first at the top, and to
+  catch the stand-ins furthest from their car.
 - **It learned one run**: 936 vehicles, labelled by agents with gold checks. A
   label is sometimes wrong, so is a score.
+- **It does not know a vehicle from no vehicle.** A wheel close-up or an interior
+  still gets a kind, a side and a colour.
 - **Colour**: five families have four examples or fewer (purple, olive, beige,
   bronze, copper); it seldom answers them. Silver against white and grey against
   dark grey are its usual slips.
 - **Side** is the way a side or three-quarter view points; a photo from straight
-  ahead or behind has no answer worth reading.
-- **Kind**: cars and vans that share a body (a Berlingo, a Nemo, a Bipper) are where it errs.
-- In `check`, the colour and side flags seldom fire on this run's builds: they are
-  built in the photo's paint and pictured from its side. They are for builds that
-  are not.
-- **The int8 encoder** (`bundle.py --int8`, 90 MB instead of 350 MB) reads side
-  worse: 89% of photos, held out. Colour, kind and match stay within about a point.
+  ahead or behind has no answer worth reading. Its `p` is seldom above 0.8 even
+  when right (the picture and its mirror are averaged).
+- **Kind**: cars and vans that share a body (a Berlingo, a Nemo, a Vito) are where
+  it errs, as the target list does.
 
 ## Files
 
 | File | What it does |
 |---|---|
 | `vision.py` | the image encoder: fetch, check, read a picture, 512 numbers |
-| `heads.py` | the trained heads: colour histogram, fit, run, save |
-| `dataset.py` | the run's labels as training examples, the held-out draw |
-| `train.py` | trains, scores on the held-out vehicles, writes `heads.json` |
+| `heads.py` | the trained heads: colour histogram, fit, run, save; a photo's answers; a build's check |
+| `dataset.py` | the run's labels as training examples, the folds |
+| `train.py` | trains, answers every fold held out, sets the thresholds, writes `heads.json` and `ai_review.json` |
 | `predict.py` | the model for the tool and for code: photo, check, key, run |
 | `bundle.py` | the model as one folder and zip, encoder included |
-| `heads.json` | the trained weights and their card (scores, data, encoder) |
+| `heads.json` | the trained weights and their card (scores, data, encoder, thresholds) |
 | `test_ai.py` | `python3 -m pytest pipeline/realcar/ai/test_ai.py -q` |

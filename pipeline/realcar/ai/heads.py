@@ -1,7 +1,7 @@
-"""heads.py: the trained part: small models on the encoder's numbers.
+"""heads.py: the trained part: small models on the encoder's numbers, and the rules that read them.
 
-- colour: the paint family of a photo or a build (29 families), from the
-  embedding and a colour histogram of the picture's middle
+- colour: the paint family of a photo or a build (the review's families),
+  from the embedding and a colour histogram of the picture's middle
 - side: the way the vehicle points (left, right), from the embedding, read on
   the picture and on its mirror image (so a mirrored picture always reads the
   other way)
@@ -20,7 +20,11 @@ from PIL import Image
 
 from vision import load
 
+# what a picture's features are made of: the encoder's reading of vision.prep's square (a cut-out
+# cropped to its vehicle, vision.load) and colour_hist below. Changed, the training cache is read anew.
+FEATURES_VERSION = 2
 HIST_BINS = (8, 6, 6)
+HIST_RANGE = ((0, 256), (64, 192), (64, 192))
 
 
 def lab(rgb):
@@ -35,13 +39,28 @@ def lab(rgb):
     return np.stack([L * 255 / 100, 500 * (f[:, 0] - f[:, 1]) + 128, 200 * (f[:, 1] - f[:, 2]) + 128], 1)
 
 
+def lab100(hex_):
+    """A paint '#rrggbb' as CIE Lab in its own units (L 0-100)."""
+    v = lab([[int(hex_[i:i + 2], 16) for i in (1, 3, 5)]])[0]
+    return np.array([v[0] * 100 / 255, v[1] - 128, v[2] - 128])
+
+
+def next_shade(paint, a, b, limit=25.0):
+    """Two families close enough to be one paint in another light (grey and dark grey, white and pearl):
+    their paints (PAINT, family -> '#rrggbb') within LIMIT of each other (CIE76)."""
+    return a == b or float(np.linalg.norm(lab100(paint[a]) - lab100(paint[b]))) < limit
+
+
 def colour_hist(im, mid=0.6):
-    """The middle of the picture (where the vehicle is), as a Lab histogram, square-rooted."""
+    """The middle of the picture (where the vehicle is), as a Lab histogram, square-rooted. Colours past
+    the outer bins (a strong yellow, red or blue) are counted in the outer bins, not left out."""
     a = np.asarray(im.resize((160, 100), Image.BILINEAR))
     h, w = a.shape[:2]
     y0, x0 = int(h * (1 - mid) / 2), int(w * (1 - mid) / 2)
     px = lab(a[y0:h - y0, x0:w - x0].reshape(-1, 3))
-    H, _ = np.histogramdd(px, bins=HIST_BINS, range=((0, 256), (64, 192), (64, 192)))
+    for i, (lo, hi) in enumerate(HIST_RANGE):
+        px[:, i] = np.clip(px[:, i], lo, hi - 1e-6)
+    H, _ = np.histogramdd(px, bins=HIST_BINS, range=HIST_RANGE)
     return np.sqrt(H.ravel() / max(H.sum(), 1)).astype(np.float32)
 
 
@@ -103,3 +122,36 @@ def features(enc, paths_):
     """Embedding, mirrored embedding and colour histogram of each picture file."""
     ims = [load(p) for p in paths_]
     return enc.embed(ims), enc.embed(ims, flip=True), np.stack([colour_hist(im) for im in ims])
+
+
+def read(hs, paint, f):
+    """The three answers on one picture's features F = (embedding, mirrored embedding, histogram)."""
+    e, ef, h = f
+
+    def top(head, p, n):
+        return [[head.classes[i], round(float(p[i]), 3)] for i in np.argsort(-p)[:n]]
+    kh, sh, ch = hs["kind"], hs["side"], hs["colour"]
+    (k, kp), = top(kh, kh.proba(e)[0], 1)
+    (s, sp), = top(sh, side_proba(sh, e[None], ef[None])[0], 1)
+    c3 = top(ch, ch.proba(np.concatenate([e, h]))[0], 3)
+    return {"kind": {"answer": k, "p": kp}, "side": {"answer": s, "p": sp},
+            "colour": {"answer": c3[0][0], "p": c3[0][1], "paint": paint.get(c3[0][0]), "top3": c3}}
+
+
+def judge(hs, th, paint, P, B):
+    """A build's picture against its photo's, from their features: both pictures' answers, the match,
+    and what looks wrong. An answer only counts against the build when both readings are at least as
+    sure as TH says (each head's threshold: photos read that surely were right 99 times in 100, held out)."""
+    a, b = read(hs, paint, P), read(hs, paint, B)
+    pm = float(hs["match"].proba(pair(P[0], B[0]))[0, 1])
+    sure = lambda what: min(a[what]["p"], b[what]["p"]) >= th[what]  # noqa: E731
+    flags = []
+    if a["kind"]["answer"] != b["kind"]["answer"] and sure("kind"):
+        flags.append(f"kind: the photo shows a {a['kind']['answer']}, the build a {b['kind']['answer']}")
+    if a["side"]["answer"] != b["side"]["answer"] and sure("side"):
+        flags.append(f"side: the photo's vehicle points {a['side']['answer']}, the build {b['side']['answer']}")
+    if not next_shade(paint, a["colour"]["answer"], b["colour"]["answer"]) and sure("colour"):
+        flags.append(f"colour: the photo's paint reads {a['colour']['answer']}, the build's {b['colour']['answer']}")
+    if pm < th["match"]:
+        flags.append(f"shape: the build may not be the photo's vehicle (match {pm:.2f})")
+    return {"photo": a, "build": b, "match": round(pm, 3), "flags": flags, "answer": "look" if flags else "ok"}

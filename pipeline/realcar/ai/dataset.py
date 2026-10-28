@@ -8,7 +8,7 @@ Everything is read from the review's data folder ($F1K_HOME, see
   (results.jsonl), so the colour model also reads builds
 - side: the way each photo's car points (view_label.json), and every photo
   mirrored with the other side
-- kind: car, van or motorbike, from the target list, for every photo
+- kind: car, van or motorbike, from the target list, for every photo and build
 - match: each build beside its own photo; whether the build is of the photo's
   own model or a stand-in (another model's body reshaped to its size: the
   machine's own record, results.jsonl); the build reviews whose verdict is on
@@ -18,15 +18,18 @@ Everything is read from the review's data folder ($F1K_HOME, see
 An answer is only as good as the agents' and the hand checks behind it: the
 labels are the run's, checked by gold items, not certain.
 """
+import hashlib
 import os
 import sys
 
 import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(os.path.dirname(HERE), "review"))
 
 import paths  # noqa: E402
+from heads import lab100  # noqa: E402
 from paint_label import FAMILY  # noqa: E402
 
 KINDS = ["car", "van", "motorbike"]
@@ -35,22 +38,17 @@ SIDES = ["left", "right"]
 SHAPE_FAULTS = {"body", "kind", "generation", "proportions"}
 
 
-def _lab(hexes):
-    rgb = np.array([[int(h[i:i + 2], 16) / 255 for i in (1, 3, 5)] for h in hexes])
-    lin = np.where(rgb <= 0.04045, rgb / 12.92, ((rgb + 0.055) / 1.055) ** 2.4)
-    xyz = lin @ np.array([[0.4124, 0.3576, 0.1805], [0.2126, 0.7152, 0.0722], [0.0193, 0.1192, 0.9505]]).T
-    xyz /= np.array([0.95047, 1.0, 1.08883])
-    f = np.where(xyz > 216 / 24389, np.cbrt(xyz), (24389 / 27 * xyz + 16) / 116)
-    return np.stack([116 * f[:, 1] - 16, 500 * (f[:, 0] - f[:, 1]), 200 * (f[:, 1] - f[:, 2])], 1)
-
-
-FAMILIES = list(FAMILY)
-_FAM_LAB = _lab([FAMILY[k] for k in FAMILIES])
-
-
 def nearest_family(hex_):
-    d = np.linalg.norm(_FAM_LAB - _lab([hex_])[0], axis=1)
-    return FAMILIES[int(d.argmin())]
+    """The family whose paint is nearest HEX (CIE76)."""
+    want = lab100(hex_)
+    return min(FAMILY, key=lambda k: float(np.linalg.norm(lab100(FAMILY[k]) - want)))
+
+
+def fresh(verdict, row, photo):
+    """A review's verdict only if it was made on this build (its built_at) and this photo (its fingerprint)."""
+    v = verdict or {}
+    return v if v.get("built_at") and v.get("built_at") == (row or {}).get("built_at") \
+        and v.get("photo_sha") == paths.sha(photo) else None
 
 
 def bike_photo(rank):
@@ -81,8 +79,10 @@ def items():
               "colour": colour.get(k), "side": side.get(k)}
         r = rows.get(k) or {}
         if r.get("status") in ("built", "standin"):
+            # the full studio picture, or its small copy once the full ones are pruned (webp.py):
+            # both are read cropped to the vehicle (vision.load), so they read alike
             pic = paths.picture(k)
-            if pic and pic.endswith(".png"):
+            if pic:
                 it["build"] = pic
                 # built from another model's body, reshaped to this one's size (the catalogue has none of its own)
                 it["standin"] = r["status"] == "standin"
@@ -92,19 +92,17 @@ def items():
                     same = (paint.get(k) or {}).get("hex") == r["paint"] and it["colour"]
                     it["build_colour"] = it["colour"] if same else nearest_family(r["paint"])
                 v = review.get(k) or {}
-                if v.get("built_at") == r.get("built_at") and v.get("photo_sha") == paths.sha(p):
+                if fresh(v, r, p):
                     it["verdict"] = v["verdict"]
                     it["faults"] = v.get("faults") or []
-                # a shape fault on an earlier build of it too: most rebuilds since changed its
-                # paint, roof or glass, not its body, so it is not taken as a match
-                it["shape_fault_ever"] = bool(set(v.get("faults") or []) & SHAPE_FAULTS)
+                # the last verdict named a shape fault, on this build or an earlier one (build_review.json
+                # keeps one verdict a key): most rebuilds since changed its paint, roof or glass, not its
+                # body, so it is not taken as a match
+                it["shape_fault_last"] = bool(set(v.get("faults") or []) & SHAPE_FAULTS)
         out.append(it)
     return out
 
 
-def split(keys, test_share=0.2, seed=0):
-    """Held-out keys, by a fixed draw: the same vehicles are held out on every run."""
-    rng = np.random.default_rng(seed)
-    keys = sorted(keys)
-    pick = rng.permutation(len(keys))[:int(round(len(keys) * test_share))]
-    return {keys[i] for i in pick}
+def fold(key, n=5):
+    """The key's fold, 0 to N-1, from its own name only: a vehicle stays in its fold when others come and go."""
+    return int(hashlib.sha1(key.encode()).hexdigest()[:8], 16) % n
