@@ -3,9 +3,9 @@
   "car-byd-seal": {
    "verdict": "ok",
    "faults": [],
-   "built_at": "2026-10-27 21:29:51",
+   "built_at": "2026-10-28 00:29:53",
    "why": "a 4-door fastback saloon (a CLA) stands in for the Seal saloon in the photo, its grey-blue, nothing broken",
-   "checked": "2026-10-27 22:14:28"
+   "checked": "2026-10-28 00:51:37"
   },
   "van-suzuki-carry": {
    "verdict": "bad",
@@ -40,9 +40,9 @@
    "faults": [
     "body"
    ],
-   "built_at": "2026-10-27 10:58:29",
-   "why": "a 5-door BMW X1 stands in for the 3-door Paceman coupe-crossover",
-   "checked": "2026-10-27 12:11:08"
+   "built_at": "2026-10-27 22:05:02",
+   "why": "a 5-door BMW X1 stands in for the 3-door Paceman coupe-crossover: the door count always counts",
+   "checked": "2026-10-28 00:51:37"
   },
   "car-volvo-xc70": {
    "verdict": "bad",
@@ -50,9 +50,9 @@
     "body",
     "kind"
    ],
-   "built_at": "2026-10-27 10:58:47",
+   "built_at": "2026-10-28 00:34:08",
    "why": "a Toyota bZ4X electric crossover stands in for the XC70 raised estate",
-   "checked": "2026-10-27 12:11:08"
+   "checked": "2026-10-28 00:51:37"
   },
   "car-jeep-wrangler": {
    "verdict": "ok",
