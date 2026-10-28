@@ -89,7 +89,7 @@ truth: a "mistake" is sometimes the label's.
 
 `try_it.py` checks the model with nothing of this run's: paste it into a Google
 Colab cell (works from a phone's browser) or run `python3 try_it.py` anywhere;
-about 2 minutes. It downloads the code and weights from GitHub at a pinned
+about 3 minutes. It downloads the code and weights from GitHub at a pinned
 commit (refusing any file whose SHA-256 is not the one it prints), and then:
 
 - checks its 29 Wikimedia test photos were not trained on: each against the
@@ -97,7 +97,7 @@ commit (refusing any file whose SHA-256 is not the one it prints), and then:
   `train_pictures.json`
 - scores the answers against a person's, strictly (the one answer a person
   gives) and leniently (a fair second: a Multivan is a van but registered as a
-  car), beside what guessing would score
+  car), beside random guessing and always giving the commonest answer
 - runs the same code with the trained weights swapped for random ones: it falls
   to guessing, so the skill is in the training, not in the code
 - recolours the photos on the spot (red and blue swapped; grey) and sees whether
@@ -106,7 +106,16 @@ commit (refusing any file whose SHA-256 is not the one it prints), and then:
   you see before it shows the model's answer (`BLIND`)
 
 The mirror is not a check: the side reading averages a picture with its mirror,
-so a mirrored picture always reads the other way. Its run here: RUN_RESULTS
+so a mirrored picture always reads the other way.
+
+Its run here (28 October, a new Python environment, 2 min 50 s with the
+download): no test photo within 61 bits of a training picture; kind 27 of 29
+strictly, 29 leniently (always "car": 20); side 28 of 29 (always "left": 19);
+colour 20 of 29 strictly, 22 leniently (always "white": 9). With random weights:
+kind 9, side 10, colour 1. Red and blue swapped, the paint moved with it on 3 of
+the 7 coloured cars (a weakness: a swapped red reads dark red or white, a
+swapped dark blue black); turned grey, the colour went on 7 of 7. Random noise
+still reads as a car (50%).
 
 ## Checked by other AIs
 
