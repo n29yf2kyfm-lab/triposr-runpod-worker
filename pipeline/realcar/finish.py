@@ -1128,6 +1128,16 @@ def roof_in_paint(g, mats, paint, painted, glass, waist=0.78, up=0.5, share=0.05
     # run on up under it (the RAV4's, to 98% of its height)
     Gf = Gs[np.abs(tri_area_normal(Gs)[1][:, 0]) <= 0.5] if len(Gs) else Gs
     front_pts = cKDTree(surface_points(Gf, 0.01 * h)) if len(Gf) else None
+    # the roof stops at the windscreen's top: a tall bonnet rising over the
+    # waist (the Dolphin's, once its two-tone bonnet and roof were one skin in
+    # the paint) was painted the roof's black to its middle, in a saw's teeth
+    z_cap = None
+    if len(G):
+        gc = G.mean(1)
+        ws = (gn[:, 1] > 0.3) & (gn[:, 1] < 0.93) & (gc[:, 2] > (z0 + z1) / 2) & (gc[:, 1] > ground + 0.5 * h)
+        if ws.any():
+            V_ = G[ws].reshape(-1, 3)
+            z_cap = float(V_[V_[:, 1] >= V_[:, 1].max() - 0.03 * h][:, 2].max()) + 0.03 * h
     # the side windows' top along the car: a roof's sides above it are the
     # roof's (the Captur's, left black down to the windows, a two-tone roof
     # seen from the side); the pillars below it are not
@@ -1250,6 +1260,8 @@ def roof_in_paint(g, mats, paint, painted, glass, waist=0.78, up=0.5, share=0.05
                             add = np.union1d(add, w_)
                     mine = np.union1d(mine, off_glass(T_, add, front_pts))
         chosen.append(mine)
+    if z_cap is not None:
+        chosen = [c_[P[I][c_][:, :, 2].mean(1) <= z_cap] if len(c_) else c_ for (p, P, I, _, _), c_ in zip(picks, chosen)]
     Tc = [P[I][c_] for (p, P, I, _, _), c_ in zip(picks, chosen)]
     allT = np.vstack([t for t in Tc if len(t)]) if any(len(t) for t in Tc) else np.zeros((0, 3, 3))
     mid_t = (allT[:, :, 0].min(1) < xc + 0.1 * xw) & (allT[:, :, 0].max(1) > xc - 0.1 * xw) if len(allT) else []

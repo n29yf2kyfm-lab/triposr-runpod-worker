@@ -145,7 +145,8 @@ def test_a_mesh_shaded_its_own_way_all_over_is_left(tmp_path):
 # ── a stand-in's roof in its donor's colour ──────────────────────────────
 
 def _car_glb(path, top_name="2020_Peugeot_e-2008_black", roof_mat=1, slope=0.0, roof_side=False, flat_strip=False,
-            windscreen=False, hidden_glass=False, glass_roof=False, side_window=False, loose_side=False):
+            windscreen=False, hidden_glass=False, glass_roof=False, side_window=False, loose_side=False,
+            tall_bonnet=False):
     """A box car 4 m long, 1.8 m wide, 1.52 m high: painted sides, a roof in
     another material, a thin roof rail in it too, and a wheel. WINDSCREEN: a
     raked one ahead of the roof, two triangles of glass, trims of the roof's
@@ -201,6 +202,8 @@ def _car_glb(path, top_name="2020_Peugeot_e-2008_black", roof_mat=1, slope=0.0, 
     if hidden_glass:                                      # the windscreen's top, on under the roof's edge
         extra += [("body", [[-0.7, 1.48, 3.0], [0.7, 1.48, 3.0], [0.7, 1.497, 2.97], [-0.7, 1.497, 2.97]],
                   [0, 3, 1, 1, 3, 2], 3)]
+    if tall_bonnet:                                       # a bonnet ahead of the windscreen, up over the waist, in the roof's material
+        extra += [("body", *quad(-0.7, 0.7, 1.25, 1.25, 3.65, 4.0, "y"), roof_mat)]
     if windscreen:
         for x0, x1 in ((0.6, 0.62), (-0.62, -0.6), (0.66, 0.7)):  # trims along its sides, a pillar, in the roof's piece
             ap, ai = raked(x0, x1)
@@ -274,6 +277,18 @@ def test_a_roofs_side_strip_over_a_window_running_on_under_it_is_painted(tmp_pat
     out = finish.roof_in_paint(g, g.j["materials"], 0, {0}, set())
     assert out and out["triangles"] == 4                 # the top and the strip; the rail keeps its own
     assert [p["material"] for m in g.j["meshes"] for p in m["primitives"]][3] == 1
+
+
+def test_a_tall_bonnet_over_the_waist_is_not_the_roof(tmp_path):
+    # round 5: the Dolphin's bonnet rises over the waist near its windscreen;
+    # one skin with its roof, it was painted the roof's black to its middle
+    from gltf import GLTF
+    _car_glb(str(tmp_path / "c.glb"), top_name="BlackRoof", windscreen=True, tall_bonnet=True)
+    g = GLTF(str(tmp_path / "c.glb"))
+    out = finish.roof_in_paint(g, g.j["materials"], 0, {0}, set())
+    assert out and out["triangles"] == 2                 # the roof; the bonnet ahead of the windscreen's top is not
+    mats = [p["material"] for m in g.j["meshes"] for p in m["primitives"]]
+    assert 0 in mats[2:] and mats[-1] == 1               # the roof painted, the bonnet strip left
 
 
 def test_a_roof_over_a_flat_glass_roof_is_painted_whole(tmp_path):

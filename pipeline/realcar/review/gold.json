@@ -13,27 +13,27 @@
     "body",
     "kind"
    ],
-   "built_at": "2026-10-27 10:58:55",
+   "built_at": "2026-10-27 22:55:59",
    "why": "an NV200 panel van stands in for the flat-deck Carry pickup in the photo",
-   "checked": "2026-10-27 12:11:08"
+   "checked": "2026-10-28 00:38:08"
   },
   "van-renault-master": {
    "verdict": "bad",
    "faults": [
     "broken"
    ],
-   "built_at": "2026-10-27 10:58:54",
+   "built_at": "2026-10-27 22:46:52",
    "why": "its side panels are crumpled and blotched, the photo's are smooth",
-   "checked": "2026-10-27 12:11:08"
+   "checked": "2026-10-28 00:38:08"
   },
   "car-nissan-note": {
    "verdict": "bad",
    "faults": [
     "body"
    ],
-   "built_at": "2026-10-27 09:08:15",
+   "built_at": "2026-10-28 00:25:32",
    "why": "a boxy 2010 Nissan Cube stands in for the sleek Note hatchback in the photo",
-   "checked": "2026-10-27 12:11:08"
+   "checked": "2026-10-28 00:38:08"
   },
   "car-mini-paceman": {
    "verdict": "bad",
@@ -55,36 +55,34 @@
    "checked": "2026-10-27 12:11:08"
   },
   "car-jeep-wrangler": {
-   "verdict": "bad",
-   "faults": [
-    "side"
-   ],
-   "built_at": "2026-10-27 10:58:20",
-   "why": "the build is shown from behind, the photo from the front",
-   "checked": "2026-10-27 12:11:08"
+   "verdict": "ok",
+   "faults": [],
+   "built_at": "2026-10-27 22:10:41",
+   "why": "the same car as the photo, dark red, seen from the same side, nothing broken",
+   "checked": "2026-10-28 00:38:08"
   },
   "car-suzuki-baleno": {
    "verdict": "bad",
    "faults": [
     "body"
    ],
-   "built_at": "2026-10-27 10:58:39",
+   "built_at": "2026-10-27 22:14:53",
    "why": "a Fiat Punto hatchback stands in for the Baleno saloon in the photo",
-   "checked": "2026-10-27 12:11:08"
+   "checked": "2026-10-28 00:38:08"
   },
   "car-nissan-qashqai": {
    "verdict": "ok",
    "faults": [],
-   "built_at": "2026-10-27 09:08:15",
-   "why": "the same vehicle as the photo, its colour, nothing broken",
-   "checked": "2026-10-27 12:11:08"
+   "built_at": "2026-10-27 21:04:12",
+   "why": "the same car as the photo, white, nothing broken",
+   "checked": "2026-10-28 00:38:08"
   },
   "car-bmw-3-series": {
    "verdict": "ok",
    "faults": [],
-   "built_at": "2026-10-27 09:08:09",
-   "why": "the same vehicle as the photo, its colour, nothing broken",
-   "checked": "2026-10-27 12:11:08"
+   "built_at": "2026-10-28 00:20:20",
+   "why": "the same car as the photo, silver, nothing broken",
+   "checked": "2026-10-28 00:38:08"
   },
   "car-mercedes-v-class": {
    "verdict": "ok",
@@ -96,16 +94,16 @@
   "car-ford-focus": {
    "verdict": "ok",
    "faults": [],
-   "built_at": "2026-10-27 09:08:11",
-   "why": "the same vehicle as the photo, its colour, nothing broken",
-   "checked": "2026-10-27 12:11:08"
+   "built_at": "2026-10-27 21:04:42",
+   "why": "the same car as the photo, white, nothing broken",
+   "checked": "2026-10-28 00:38:08"
   },
   "car-volkswagen-polo": {
    "verdict": "ok",
    "faults": [],
-   "built_at": "2026-10-27 09:08:19",
-   "why": "the same vehicle as the photo, its colour, nothing broken",
-   "checked": "2026-10-27 12:11:08"
+   "built_at": "2026-10-28 00:20:20",
+   "why": "the same car as the photo, red, nothing broken",
+   "checked": "2026-10-28 00:38:08"
   },
   "car-seat-mii": {
    "verdict": "ok",
@@ -124,18 +122,44 @@
   "car-peugeot-205": {
    "verdict": "ok",
    "faults": [],
-   "built_at": "2026-10-27 16:17:16",
+   "built_at": "2026-10-27 22:34:01",
    "why": "a red 3-door 205 (one long door, a fixed rear window) beside a photo of a red 3-door 205",
-   "checked": "2026-10-27 16:26:44"
+   "checked": "2026-10-28 00:38:08"
   },
   "car-renault-captur": {
-   "verdict": "bad",
-   "faults": [
-    "broken"
-   ],
-   "built_at": "2026-10-27 16:03:16",
-   "why": "its lower grille, fog lamp surrounds and badge are painted body blue; the photo's are black and chrome",
-   "checked": "2026-10-27 16:26:44"
+   "verdict": "ok",
+   "faults": [],
+   "built_at": "2026-10-28 00:23:03",
+   "why": "the same car as the photo, blue with its white roof, its grille and fog lamp surrounds silver, nothing broken",
+   "checked": "2026-10-28 00:38:08"
+  },
+  "car-hyundai-i10": {
+   "verdict": "ok",
+   "faults": [],
+   "built_at": "2026-10-28 00:21:49",
+   "why": "a Picanto stands in for the i10: the same body and door count, white, nothing broken",
+   "checked": "2026-10-28 00:38:08"
+  },
+  "car-peugeot-208": {
+   "verdict": "ok",
+   "faults": [],
+   "built_at": "2026-10-28 00:22:23",
+   "why": "a 308 stands in for the 208: a 5-door hatch like the photo's, blue with a black roof, nothing broken",
+   "checked": "2026-10-28 00:38:08"
+  },
+  "car-suzuki-swift": {
+   "verdict": "ok",
+   "faults": [],
+   "built_at": "2026-10-28 00:23:41",
+   "why": "the same car as the photo, orange-red with black pillars, nothing broken",
+   "checked": "2026-10-28 00:38:08"
+  },
+  "car-mg-hs": {
+   "verdict": "ok",
+   "faults": [],
+   "built_at": "2026-10-28 00:25:51",
+   "why": "a RAV4 stands in for the MG HS: the same kind and body, white all over like the photo, nothing broken",
+   "checked": "2026-10-28 00:38:08"
   }
  },
  "side": {
@@ -451,51 +475,51 @@
  "roof": {
   "car-jaecoo-7": {
    "answer": "black",
-   "built_at": "2026-10-27 10:58:19",
+   "built_at": "2026-10-28 00:30:18",
    "why": "the photo's white Jaecoo 7 has a black roof; the build's roof is white",
-   "checked": "2026-10-27 13:28:13"
+   "checked": "2026-10-28 00:38:09"
   },
   "car-skoda-superb": {
    "answer": "same",
-   "built_at": "2026-10-27 10:58:38",
+   "built_at": "2026-10-27 21:23:39",
    "why": "both white, roof and all",
-   "checked": "2026-10-27 13:28:13"
+   "checked": "2026-10-28 00:38:09"
   },
   "car-audi-a4": {
    "answer": "same",
-   "built_at": "2026-10-27 09:08:09",
+   "built_at": "2026-10-27 21:07:44",
    "why": "both red, roof and all",
-   "checked": "2026-10-27 13:28:13"
+   "checked": "2026-10-28 00:38:09"
   },
   "car-ford-focus": {
    "answer": "same",
-   "built_at": "2026-10-27 09:08:11",
+   "built_at": "2026-10-27 21:04:42",
    "why": "both white, roof and all",
-   "checked": "2026-10-27 13:28:14"
+   "checked": "2026-10-28 00:38:09"
   },
   "car-kia-picanto": {
    "answer": "same",
-   "built_at": "2026-10-27 09:08:12",
+   "built_at": "2026-10-27 21:08:12",
    "why": "both light blue, roof and all",
-   "checked": "2026-10-27 13:28:14"
+   "checked": "2026-10-28 00:38:09"
   },
   "car-renault-captur": {
    "answer": "same",
-   "built_at": "2026-10-27 16:03:16",
+   "built_at": "2026-10-28 00:23:03",
    "why": "both blue with a white roof",
-   "checked": "2026-10-27 16:26:44"
+   "checked": "2026-10-28 00:38:09"
   },
   "car-suzuki-swift": {
    "answer": "same",
-   "built_at": "2026-10-27 16:03:42",
+   "built_at": "2026-10-28 00:23:41",
    "why": "both orange-red, roof and all, black pillars on both",
-   "checked": "2026-10-27 16:26:44"
+   "checked": "2026-10-28 00:38:09"
   },
   "car-mg-hs": {
    "answer": "same",
-   "built_at": "2026-10-27 16:04:42",
-   "why": "both white, roof and all",
-   "checked": "2026-10-27 16:26:44"
+   "built_at": "2026-10-28 00:25:51",
+   "why": "both white, roof and all, its sides too",
+   "checked": "2026-10-28 00:38:09"
   }
  }
 }
