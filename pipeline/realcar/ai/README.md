@@ -28,8 +28,8 @@ the model had not seen (`heads.json`'s `card` keeps them all):
 | | 711 builds | 92.7% | |
 | side | 711 photos | 95.2% | |
 | | 711 builds | 99.6% | |
-| colour | 722 photos | 68.8% | 89.3% its family or the next shade (grey for dark grey, silver for white); 88.0% in its top 3. The measurer it can replace (`photo_paint.py` before the colour agents) named 41% |
-| | 711 builds | 90.6% | 97.6% its family or the next shade |
+| colour | 722 photos | 70.4% | 90.2% its family or the next shade (grey for dark grey, silver for white); 88.0% in its top 3. The measurer it can replace (`photo_paint.py` before the colour agents) named 41% |
+| | 711 builds | 92.3% | 97.7% its family or the next shade |
 | match | 650 builds with their own photo, 3,555 with other vehicles' | 0.89 | the chance a build scores higher with its own photo than with another vehicle's (AUC; 0.5 is a coin, 1 is never wrong) |
 
 The match against what the run knows was wrong:
@@ -87,7 +87,7 @@ ai.check("car.jpg", "build.png")
 and build is only flagged when both readings are at least as sure as the
 head's threshold in the card: photos read that surely were right 99 times in
 100, held out. The run's labels are about that good, so on this run those flags
-are rare (3 of 711) and the shape flag is the one that finds things.
+are rare (2 of 711) and the shape flag is the one that finds things.
 
 `run` is the run's second opinion. `train.py` leaves every build's held-out
 answer in `ai_review.json`; `run` keeps those while the build and photo are the
@@ -116,6 +116,40 @@ to a square of CLIP's mean colour, 224 pixels a side, normalised
 (`vision.prep`); the colour head also takes the picture's middle as a Lab
 histogram (`heads.colour_hist`); side reads the picture and its mirror
 (`heads.side_proba`).
+
+## On a phone
+
+`web/` is the model as a web page that runs in the phone's browser: nothing is
+installed and the pictures never leave the phone. It uses the encoder's 8-bit
+copy (90 MB, downloaded once and kept by the browser) with onnxruntime-web, and
+heads trained for it (`web/heads.json`). Its JavaScript repeats `vision.load`,
+`vision.prep`, `heads.colour_hist`, `heads.read` and `heads.judge` step for step
+(Pillow's resampling included), and `web/check.py` holds it to them in a real
+browser: the picture handed to the encoder is Python's to the last bit of
+rounding, and on the page's own numbers Python's heads give the page's every answer.
+
+The browser's engine does the 8-bit arithmetic a little otherwise than
+onnxruntime here (its numbers 0.99 alike), so the page's heads are trained on the
+page's own reading of every picture (`web/features.py`); WebAssembly gives the
+same numbers on every phone. Held out, as above, the page reads kind on 92.7% of
+photos, side on 90.6% (the full model 95.2%: the 8-bit encoder keeps less of
+which way a vehicle points), colour on 69.9% (90.0% to the next shade) and
+builds' colour on 91.8%; it tells a build's own photo from another vehicle's at
+an AUC of 0.87 and flags 40% of the stand-ins.
+
+To make it again after training:
+
+    python3 pipeline/realcar/ai/web/build.py SITE --example ""              # the page, to read the pictures with
+    python3 pipeline/realcar/ai/web/features.py SITE features.npz           # every picture read by the page (Chromium)
+    python3 pipeline/realcar/ai/train.py --encoder INT8.onnx --features features.npz \
+        --out pipeline/realcar/ai/web/heads.json --review /tmp/phone_review.json
+    python3 pipeline/realcar/ai/web/build.py SITE --features features.npz   # the page with its heads and example
+    python3 pipeline/realcar/ai/web/check.py SITE                          # it answers as Python does
+
+then publish `SITE`'s files together on any web host (or as a claude.ai
+artifact): the page, `heads.json`, the encoder's pieces (`encoder.N.txt`, base64
+text under 15 MB each: an artifact serves text and media, not raw bytes),
+onnxruntime's `.wasm` and the example's two pictures.
 
 ## Train it again
 
@@ -163,4 +197,8 @@ A verdict is used only on the build and photo it was made on.
 | `predict.py` | the model for the tool and for code: photo, check, key, run |
 | `bundle.py` | the model as one folder and zip, encoder included |
 | `heads.json` | the trained weights and their card (scores, data, encoder, thresholds) |
+| `web/index.html` | the phone page: the model in the browser |
+| `web/heads.json` | the phone page's heads, trained on its own reading (8-bit encoder) |
+| `web/build.py`, `web/features.py`, `web/check.py` | the page's folder; every picture read by the page; the page held to Python |
+| `web/check_page.cjs`, `web/features.cjs` | the browser side of those two (Playwright) |
 | `test_ai.py` | `python3 -m pytest pipeline/realcar/ai/test_ai.py -q` |

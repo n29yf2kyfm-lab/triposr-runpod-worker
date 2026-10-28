@@ -21,6 +21,10 @@ from PIL import Image, ImageOps
 ENCODERS = {
     "clip-b32": ("Xenova/clip-vit-base-patch32", "d15189d7028b43f1d3e65039190477f6af591c2a", "onnx/vision_model.onnx",
                  "fd6e1402a588279d1723c7534d4bcba5bc0b14b47dfab0e46f8c47b8270d7d40", 351685709),
+    # the same, its weights in 8 bits (90 MB): the phone page's (web/), with heads trained on it (web/heads.json)
+    "clip-b32-int8": ("Xenova/clip-vit-base-patch32", "d15189d7028b43f1d3e65039190477f6af591c2a",
+                      "onnx/vision_model_quantized.onnx",
+                      "583fd1110a514667812fee7d684952aaf82a99b959760c8d7dca7e0ab9839299", 89117001),
 }
 SIZE = 224
 MEAN = np.array([0.48145466, 0.4578275, 0.40821073], np.float32)

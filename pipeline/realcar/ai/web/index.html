@@ -1,0 +1,543 @@
+<title>Vehicle AI</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one column, phone first: the model's state, a two-way switch, the picture slots, the answer sheet. */
+:root {
+  --bg: #eef1f4; --surface: #ffffff; --ink: #14202b; --muted: #556270; --line: #d3dae2;
+  --accent: #1f4e79; --ok: #1d7448; --look: #a8401a; --track: #e3e8ee;
+  --plate: #f7d117; --plate-ink: #121212;      /* a UK rear number plate's yellow */
+  --display: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --body: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0e141a; --surface: #16202a; --ink: #e6ecf2; --muted: #9aa7b4; --line: #2a3745;
+  --accent: #86b4e2; --ok: #5cc18c; --look: #f08a5d; --track: #22303d; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0e141a; --surface: #16202a; --ink: #e6ecf2; --muted: #9aa7b4; --line: #2a3745;
+  --accent: #86b4e2; --ok: #5cc18c; --look: #f08a5d; --track: #22303d; color-scheme: dark }
+
+* { box-sizing: border-box }
+[hidden] { display: none !important }
+body { background: var(--bg); color: var(--ink); font: 16px/1.5 var(--body); margin: 0 }
+.wrap { max-width: 640px; margin: 0 auto; padding-block: 20px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 18px }
+h1 { font: 700 2.4rem/1 var(--display); letter-spacing: .01em; margin: 0; text-wrap: balance }
+h2 { font: 600 1.35rem/1.1 var(--display); letter-spacing: .02em; margin: 0; text-wrap: balance }
+.lede { margin: 6px 0 0; color: var(--muted); max-width: 60ch }
+.label { font: 600 .8rem/1 var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+.mono, .num { font-family: var(--mono); font-variant-numeric: tabular-nums }
+
+.status { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; padding: 12px 14px;
+  border: 1px solid var(--line); border-radius: 10px; background: var(--surface) }
+.status p { margin: 0; flex: 1 1 14em; min-width: 0 }
+.bar { height: 6px; border-radius: 3px; background: var(--track); overflow: hidden; flex-basis: 100% }
+.bar > i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s }
+
+.switch { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 10px; overflow: hidden }
+.switch button { font: 600 1.05rem/1 var(--display); letter-spacing: .03em; padding: 12px 8px; border: 0;
+  background: var(--surface); color: var(--muted); cursor: pointer }
+.switch button[aria-pressed="true"] { background: var(--ink); color: var(--bg) }
+
+.slots { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) }
+.slot { position: relative; display: grid; place-items: center; text-align: center; aspect-ratio: 3 / 2; max-width: 100%;
+  border: 2px dashed var(--line); border-radius: 10px; background: var(--surface); overflow: hidden; cursor: pointer }
+.slot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain }
+.slot span { padding: 8px; color: var(--muted); font-size: .95rem }
+.slot input { position: absolute; inset: 0; opacity: 0; cursor: pointer }
+.slot:focus-within { outline: 3px solid var(--accent); outline-offset: 2px }
+.go { font: 700 1.15rem/1 var(--display); letter-spacing: .04em; padding: 14px; border-radius: 10px; border: 0;
+  background: var(--accent); color: var(--surface); cursor: pointer }
+.go:disabled { opacity: .45; cursor: default }
+button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px }
+
+.sheet { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 16px; display: grid; gap: 14px }
+.sheet header { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap }
+.tag { font: 600 .75rem/1 var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+  border: 1px solid var(--line); border-radius: 4px; padding: 4px 6px }
+.rows { display: grid; gap: 12px }
+.row { display: grid; grid-template-columns: 6.5em 1fr; gap: 10px; align-items: start }
+.row > div { min-width: 0 }
+.answer { font: 600 1.5rem/1.1 var(--display); letter-spacing: .02em }
+.p { color: var(--muted); font-size: .9rem }
+.sure { color: var(--ok) } .unsure { color: var(--muted) }
+.swatch { display: inline-block; width: 1.5em; height: 1.5em; border-radius: 4px; vertical-align: -0.3em;
+  border: 1px solid var(--line); margin-right: .35em }
+.top3 { display: grid; gap: 4px; margin-top: 6px }
+.top3 div { display: grid; grid-template-columns: 7.5em 1fr 3.2em; gap: 8px; align-items: center; font-size: .9rem }
+.top3 b { height: 6px; border-radius: 3px; background: var(--track); overflow: hidden; display: block }
+.top3 b > i { display: block; height: 100%; background: var(--accent) }
+.arrow { display: inline-block; font-family: var(--mono); margin-left: .3em }
+
+.plate { font: 700 1.6rem/1 var(--display); letter-spacing: .12em; background: var(--plate); color: var(--plate-ink);
+  padding: 6px 14px; border-radius: 5px; border: 2px solid var(--plate-ink) }
+.flags { margin: 0; padding-left: 1.1em; display: grid; gap: 6px }
+.flags li::marker { color: var(--look) }
+.meter { position: relative; height: 10px; border-radius: 5px; background: var(--track); margin-top: 6px }
+.meter > i { position: absolute; inset: 0 auto 0 0; border-radius: 5px; background: var(--accent) }
+.meter > s { position: absolute; top: -4px; bottom: -4px; width: 2px; background: var(--ink) }
+.cmp { display: grid; grid-template-columns: 5.2em minmax(0, 1fr) minmax(0, 1fr); gap: 8px 10px; align-items: baseline;
+  border-top: 1px solid var(--line); padding-top: 10px }
+.cmp b { font: 600 1.15rem/1.15 var(--display); letter-spacing: .02em; overflow-wrap: anywhere }
+.cmp small { color: var(--muted); font-family: var(--mono); font-size: .8rem; margin-left: .25em }
+.thumbs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px }
+.thumbs img { width: 100%; aspect-ratio: 3 / 2; object-fit: contain; background: var(--track); border-radius: 6px }
+.error { color: var(--look); margin: 0 }
+details { border-top: 1px solid var(--line); padding-top: 12px }
+summary { font: 600 1.15rem/1.2 var(--display); letter-spacing: .02em; cursor: pointer }
+details p, details li { color: var(--muted); max-width: 62ch }
+table { border-collapse: collapse; width: 100%; font-size: .92rem }
+td, th { text-align: left; padding: 6px 8px 6px 0; border-bottom: 1px solid var(--line); vertical-align: top }
+.scroll { overflow-x: auto }
+.credit { font-size: .8rem; color: var(--muted) }
+.credit a { color: inherit }
+@media (prefers-reduced-motion: reduce) { .bar > i { transition: none } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Vehicle AI</h1>
+    <p class="lede">The trained vehicle model, running on this phone. It reads a photo (car, van or motorbike, the way it points, its paint)
+      and checks a 3D build against its photo. Your pictures stay on the phone.</p>
+  </header>
+
+  <section class="status" aria-live="polite">
+    <p id="status">The model (90 MB) downloads the first time you check a picture, then stays on this phone.</p>
+    <button class="go" id="load" type="button">Get the model</button>
+    <div class="bar" id="bar" hidden><i id="barfill"></i></div>
+  </section>
+
+  <div class="switch" role="group" aria-label="What to do">
+    <button type="button" id="mode-read" aria-pressed="true">Read a photo</button>
+    <button type="button" id="mode-check" aria-pressed="false">Check a build</button>
+  </div>
+
+  <section class="slots" id="slots">
+    <label class="slot" id="slot-a"><span id="slot-a-text">Take or choose a photo of a vehicle</span>
+      <input id="file-a" type="file" accept="image/*" aria-label="Photo of a vehicle"></label>
+    <label class="slot" id="slot-b" hidden><span>Choose the build's picture</span>
+      <input id="file-b" type="file" accept="image/*" aria-label="Picture of the build"></label>
+  </section>
+  <button class="go" id="run" type="button" disabled>Read the photo</button>
+  <p class="error" id="error" hidden></p>
+
+  <section class="sheet" id="sheet" aria-live="polite"></section>
+
+  <details>
+    <summary>How good it is</summary>
+    <div id="scores"></div>
+  </details>
+  <details>
+    <summary>What it can't do</summary>
+    <ul>
+      <li>It is a second opinion, not a review. The shape check sees whether a build looks like the photo's model; it doesn't see a wrong
+        door count, a roof colour or a broken part.</li>
+      <li>It can't tell a vehicle from no vehicle: a wheel close-up still gets a kind, a side and a colour.</li>
+      <li>Side is the way a side or three-quarter view points. A photo from straight ahead or behind has no answer worth reading.
+        On the phone it reads side a little worse than the full model on a computer (91 photos in 100 against 95): the phone's copy
+        of the image model is the 90 MB one.</li>
+      <li>Colours it confuses most: silver with white, grey with dark grey.</li>
+      <li>It learned from one run of 936 vehicles, labelled by agents with checked items. A label is sometimes wrong, and so is an answer.</li>
+    </ul>
+  </details>
+  <p class="credit" id="credit"></p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/ort.wasm.min.js"></script>
+<script>
+"use strict";
+// The model: CLIP's image encoder (ViT-B/32, int8, as published for transformers.js) and the heads trained
+// on it (heads.json): the Python package pipeline/realcar/ai, ported. Every step below mirrors its Python twin.
+const ORT_MJS = "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/ort-wasm-simd-threaded.mjs";
+const MODEL = /*MODEL*/{"chunks": [], "size": 0, "sha256": ""}/*END*/;
+const EXAMPLE = /*EXAMPLE*/null/*END*/;
+const SIZE = 224, MIN_SIDE = 64;
+const MEAN = [0.48145466, 0.4578275, 0.40821073], STD = [0.26862954, 0.26130258, 0.27577711];
+const HIST_BINS = [8, 7, 7], HIST_RANGE = [[0, 256], [64, 192], [64, 192]];
+
+class Unreadable extends Error {}
+
+// Python's round(): halves to even
+function pyRound(x) { const f = Math.floor(x), d = x - f; return d > 0.5 ? f + 1 : d < 0.5 ? f : (f % 2 === 0 ? f : f + 1); }
+
+// ---- reading a picture (vision.load) ----
+async function decode(file) {
+  const url = URL.createObjectURL(file);
+  try {
+    const img = new Image();
+    img.src = url;
+    try { await img.decode(); } catch (e) { throw new Unreadable("That file isn't a picture it can read."); }
+    let w = img.naturalWidth, h = img.naturalHeight;
+    if (!w || !h) throw new Unreadable("That file isn't a picture it can read.");
+    const s = Math.min(1, Math.sqrt(16e6 / (w * h)));             // a phone's canvas holds about 16 MP
+    w = Math.max(1, Math.round(w * s)); h = Math.max(1, Math.round(h * s));
+    const c = document.createElement("canvas"); c.width = w; c.height = h;
+    const g = c.getContext("2d", { willReadFrequently: true });
+    g.drawImage(img, 0, 0, w, h);
+    return g.getImageData(0, 0, w, h);
+  } finally { URL.revokeObjectURL(url); }
+}
+
+// A cut-out (see-through background) cropped to its vehicle, 4% round it, on white; then RGB.
+function toRGB(id) {
+  let { width: w, height: h, data: d } = id;
+  let alpha = false;
+  for (let i = 3; i < d.length; i += 4) if (d[i] < 255) { alpha = true; break; }
+  let x0 = 0, y0 = 0, x1 = w, y1 = h;
+  if (alpha) {
+    let l = w, t = h, r = -1, b = -1;
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) if (d[(y * w + x) * 4 + 3] > 8) {
+      if (x < l) l = x; if (x > r) r = x; if (y < t) t = y; if (y > b) b = y;
+    }
+    if (r >= 0) {
+      const m = pyRound(0.04 * Math.max(r + 1 - l, b + 1 - t));
+      x0 = Math.max(0, l - m); y0 = Math.max(0, t - m); x1 = Math.min(w, r + 1 + m); y1 = Math.min(h, b + 1 + m);
+    }
+  }
+  const W = x1 - x0, H = y1 - y0;
+  if (Math.min(W, H) < MIN_SIDE) throw new Unreadable(`That picture is ${W}x${H}: too small to read (under ${MIN_SIDE} px a side).`);
+  const out = new Uint8Array(W * H * 3);
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    const i = ((y + y0) * w + x + x0) * 4, o = (y * W + x) * 3;
+    if (!alpha) { out[o] = d[i]; out[o + 1] = d[i + 1]; out[o + 2] = d[i + 2]; continue; }
+    // Pillow's alpha_composite onto white, its integer sums
+    const sa = d[i + 3], c1 = sa * 128, c2 = 255 * 128 - c1;
+    for (let k = 0; k < 3; k++) { const t = d[i + k] * c1 + 255 * c2 + (0x80 << 7); out[o + k] = ((((t >> 8) + t) >> 8) >> 7); }
+  }
+  return { w: W, h: H, rgb: out };
+}
+
+// ---- Pillow's resize, its 8-bit fixed-point passes ----
+const FILTERS = {
+  bicubic: [2, x => { const a = -0.5; x = Math.abs(x); return x < 1 ? ((a + 2) * x - (a + 3)) * x * x + 1 : x < 2 ? (((x - 5) * x + 8) * x - 4) * a : 0; }],
+  bilinear: [1, x => { x = Math.abs(x); return x < 1 ? 1 - x : 0; }],
+};
+const PB = 22, ONE = 2 ** PB, HALF = 2 ** (PB - 1);
+function coeffs(inSize, outSize, [support0, f]) {
+  const scale = inSize / outSize, fs = Math.max(scale, 1), support = support0 * fs, ss = 1 / fs;
+  const bounds = [], kk = [];
+  for (let xx = 0; xx < outSize; xx++) {
+    const center = (xx + 0.5) * scale;
+    let xmin = Math.trunc(center - support + 0.5); if (xmin < 0) xmin = 0;
+    let xmax = Math.trunc(center + support + 0.5); if (xmax > inSize) xmax = inSize;
+    xmax -= xmin;
+    const k = new Float64Array(xmax); let ww = 0;
+    for (let x = 0; x < xmax; x++) { k[x] = f((x + xmin - center + 0.5) * ss); ww += k[x]; }
+    const ki = new Float64Array(xmax);
+    for (let x = 0; x < xmax; x++) { const v = ww !== 0 ? k[x] / ww : k[x]; ki[x] = v < 0 ? Math.trunc(-0.5 + v * ONE) : Math.trunc(0.5 + v * ONE); }
+    bounds.push(xmin, xmax); kk.push(ki);
+  }
+  return { bounds, kk };
+}
+const clip8 = s => s >= ONE * 256 ? 255 : s <= 0 ? 0 : Math.floor(s / ONE);
+function resize(img, W, H, filter) {
+  const { w, h, rgb } = img, F = FILTERS[filter];
+  let src = rgb, sw = w;
+  if (W !== w) {
+    const { bounds, kk } = coeffs(w, W, F), tmp = new Uint8Array(W * h * 3);
+    for (let y = 0; y < h; y++) for (let xx = 0; xx < W; xx++) {
+      const xmin = bounds[2 * xx], n = bounds[2 * xx + 1], k = kk[xx];
+      let s0 = HALF, s1 = HALF, s2 = HALF;
+      for (let x = 0; x < n; x++) { const i = (y * w + x + xmin) * 3, c = k[x]; s0 += rgb[i] * c; s1 += rgb[i + 1] * c; s2 += rgb[i + 2] * c; }
+      const o = (y * W + xx) * 3; tmp[o] = clip8(s0); tmp[o + 1] = clip8(s1); tmp[o + 2] = clip8(s2);
+    }
+    src = tmp; sw = W;
+  }
+  if (H === h) return { w: W, h, rgb: src };
+  const { bounds, kk } = coeffs(h, H, F), out = new Uint8Array(W * H * 3);
+  for (let yy = 0; yy < H; yy++) {
+    const ymin = bounds[2 * yy], n = bounds[2 * yy + 1], k = kk[yy];
+    for (let x = 0; x < W; x++) {
+      let s0 = HALF, s1 = HALF, s2 = HALF;
+      for (let y = 0; y < n; y++) { const i = ((y + ymin) * sw + x) * 3, c = k[y]; s0 += src[i] * c; s1 += src[i + 1] * c; s2 += src[i + 2] * c; }
+      const o = (yy * W + x) * 3; out[o] = clip8(s0); out[o + 1] = clip8(s1); out[o + 2] = clip8(s2);
+    }
+  }
+  return { w: W, h: H, rgb: out };
+}
+
+// The whole picture on a square of CLIP's mean colour, 224 a side, normalised; and its mirror (vision.prep)
+function prep(img) {
+  const s = SIZE / Math.max(img.w, img.h);
+  const w = Math.max(1, pyRound(img.w * s)), h = Math.max(1, pyRound(img.h * s));
+  const r = resize(img, w, h, "bicubic");
+  const ox = Math.floor((SIZE - w) / 2), oy = Math.floor((SIZE - h) / 2);
+  const fill = MEAN.map(m => pyRound(m * 255));
+  const x = new Float32Array(2 * 3 * SIZE * SIZE);
+  for (let k = 0; k < 2; k++) for (let y = 0; y < SIZE; y++) for (let xx = 0; xx < SIZE; xx++) {
+    const sx = k ? w - 1 - (xx - ox) : xx - ox, sy = y - oy;
+    const inside = xx - ox >= 0 && xx - ox < w && sy >= 0 && sy < h;
+    for (let c = 0; c < 3; c++) {
+      const v = inside ? r.rgb[(sy * w + sx) * 3 + c] : fill[c];
+      x[k * 3 * SIZE * SIZE + c * SIZE * SIZE + y * SIZE + xx] = (v / 255 - MEAN[c]) / STD[c];
+    }
+  }
+  return x;
+}
+
+// ---- colour (heads.lab, heads.colour_hist) ----
+function lab(r, g, b) {
+  const lin = c => { c /= 255; return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
+  const R = lin(r), G = lin(g), B = lin(b);
+  let X = (0.412453 * R + 0.357580 * G + 0.180423 * B) / 0.950456;
+  let Y = 0.212671 * R + 0.715160 * G + 0.072169 * B;
+  let Z = (0.019334 * R + 0.119193 * G + 0.950227 * B) / 1.088754;
+  const f = t => t > 0.008856 ? Math.cbrt(t) : 7.787 * t + 16 / 116;
+  const L = Y > 0.008856 ? 116 * f(Y) - 16 : 903.3 * Y;
+  return [L * 255 / 100, 500 * (f(X) - f(Y)) + 128, 200 * (f(Y) - f(Z)) + 128];
+}
+function lab100(hex) { const v = lab(parseInt(hex.slice(1, 3), 16), parseInt(hex.slice(3, 5), 16), parseInt(hex.slice(5, 7), 16)); return [v[0] * 100 / 255, v[1] - 128, v[2] - 128]; }
+function nextShade(paint, a, b) {
+  if (a === b) return true;
+  const p = lab100(paint[a]), q = lab100(paint[b]);
+  return Math.hypot(p[0] - q[0], p[1] - q[1], p[2] - q[2]) < 25;
+}
+function colourHist(img) {
+  const r = resize(img, 160, 100, "bilinear"), h = 100, w = 160, y0 = Math.trunc(h * (1 - 0.6) / 2), x0 = Math.trunc(w * (1 - 0.6) / 2);
+  const edges = HIST_BINS.map((n, i) => Array.from({ length: n + 1 }, (_, j) => HIST_RANGE[i][0] + j * ((HIST_RANGE[i][1] - HIST_RANGE[i][0]) / n)));
+  const H = new Float64Array(HIST_BINS[0] * HIST_BINS[1] * HIST_BINS[2]); let n = 0;
+  for (let y = y0; y < h - y0; y++) for (let x = x0; x < w - x0; x++) {
+    const i = (y * w + x) * 3, v = lab(r.rgb[i], r.rgb[i + 1], r.rgb[i + 2]), bin = [];
+    for (let d = 0; d < 3; d++) {
+      const [lo, hi] = HIST_RANGE[d], t = Math.min(Math.max(v[d], lo), hi - 1e-6), e = edges[d];
+      let j = 0; while (j < HIST_BINS[d] - 1 && e[j + 1] <= t) j++;
+      bin.push(j);
+    }
+    H[(bin[0] * HIST_BINS[1] + bin[1]) * HIST_BINS[2] + bin[2]]++; n++;
+  }
+  return Float32Array.from(H, c => Math.sqrt(c / Math.max(n, 1)));
+}
+
+// ---- the heads (heads.Head, side_proba, read, judge) ----
+function proba(head, x) {
+  const z = head.W.map((w, i) => { let s = head.b[i]; for (let j = 0; j < w.length; j++) s += w[j] * x[j]; return s; });
+  if (head.classes.length === 2 && head.W.length === 1) { const p1 = 1 / (1 + Math.exp(-z[0])); return [1 - p1, p1]; }
+  const m = Math.max(...z), e = z.map(v => Math.exp(v - m)), t = e.reduce((a, b) => a + b, 0);
+  return e.map(v => v / t);
+}
+const r3 = v => Math.round(v * 1000) / 1000;
+function best(head, p, n) { return p.map((v, i) => [head.classes[i], v]).sort((a, b) => b[1] - a[1]).slice(0, n).map(([c, v]) => [c, r3(v)]); }
+function read(hs, paint, f) {
+  const [k] = best(hs.kind, proba(hs.kind, f.e), 1);
+  const p = proba(hs.side, f.e), pf = proba(hs.side, f.ef), ps = p.map((v, i) => (v + pf[pf.length - 1 - i]) / 2);
+  const [s] = best(hs.side, ps, 1);
+  const x = new Float32Array(f.e.length + f.h.length); x.set(f.e); x.set(f.h, f.e.length);
+  const c3 = best(hs.colour, proba(hs.colour, x), 3);
+  return { kind: { answer: k[0], p: k[1] }, side: { answer: s[0], p: s[1] },
+           colour: { answer: c3[0][0], p: c3[0][1], paint: paint[c3[0][0]] || null, top3: c3 } };
+}
+function judge(hs, th, paint, P, B) {
+  const a = read(hs, paint, P), b = read(hs, paint, B);
+  const x = new Float32Array(1024);
+  for (let i = 0; i < 512; i++) { x[i] = P.e[i] * B.e[i]; x[512 + i] = Math.abs(P.e[i] - B.e[i]); }
+  const pm = proba(hs.match, x)[1], sure = w => Math.min(a[w].p, b[w].p) >= th[w], flags = [];
+  if (a.kind.answer !== b.kind.answer && sure("kind")) flags.push(`kind: the photo shows a ${a.kind.answer}, the build a ${b.kind.answer}`);
+  if (a.side.answer !== b.side.answer && sure("side")) flags.push(`side: the photo's vehicle points ${a.side.answer}, the build ${b.side.answer}`);
+  if (!nextShade(paint, a.colour.answer, b.colour.answer) && sure("colour")) flags.push(`colour: the photo's paint reads ${a.colour.answer}, the build's ${b.colour.answer}`);
+  if (pm < th.match) flags.push(`shape: the build may not be the photo's vehicle (match ${pm.toFixed(2)})`);
+  return { photo: a, build: b, match: r3(pm), flags, answer: flags.length ? "look" : "ok" };
+}
+
+// ---- the encoder ----
+let HEADS = null, CARD = null, SESSION = null, loading = null;
+function idb() {
+  return new Promise((ok, no) => { try { const r = indexedDB.open("vehicle-ai", 1);
+    r.onupgradeneeded = () => r.result.createObjectStore("files"); r.onsuccess = () => ok(r.result); r.onerror = () => no(r.error);
+  } catch (e) { no(e); } });
+}
+async function stored(key) {
+  try { const db = await idb(); return await new Promise(ok => { const q = db.transaction("files").objectStore("files").get(key); q.onsuccess = () => ok(q.result || null); q.onerror = () => ok(null); }); }
+  catch (e) { return null; }
+}
+async function store(key, value) {
+  try { const db = await idb(); await new Promise(ok => { const t = db.transaction("files", "readwrite"); t.objectStore("files").put(value, key); t.oncomplete = ok; t.onerror = ok; t.onabort = ok; }); }
+  catch (e) { /* the model is fetched again next time */ }
+}
+async function sha256hex(buf) {
+  if (!(crypto && crypto.subtle)) return null;
+  const h = await crypto.subtle.digest("SHA-256", buf);
+  return Array.from(new Uint8Array(h), b => b.toString(16).padStart(2, "0")).join("");
+}
+function setStatus(text, frac) {
+  $("status").textContent = text;
+  $("bar").hidden = frac == null; if (frac != null) $("barfill").style.width = `${Math.round(frac * 100)}%`;
+}
+async function fetchText(url) { const r = await fetch(url); if (!r.ok) throw new Error(`${url}: ${r.status}`); return (await r.text()).trim(); }
+// the encoder's pieces are base64 text (the page's host serves text, not raw bytes)
+function fromBase64(s) {
+  if (Uint8Array.fromBase64) return Uint8Array.fromBase64(s);
+  const t = atob(s), out = new Uint8Array(t.length);
+  for (let i = 0; i < t.length; i++) out[i] = t.charCodeAt(i);
+  return out;
+}
+async function fetchBytes(url) { const r = await fetch(url); if (!r.ok) throw new Error(`${url}: ${r.status}`); return new Uint8Array(await r.arrayBuffer()); }
+
+async function getModel() {
+  const key = `encoder-${MODEL.sha256.slice(0, 16)}`;
+  let buf = await stored(key);
+  if (!buf) {
+    buf = new Uint8Array(MODEL.size); let at = 0;
+    for (const c of MODEL.chunks) {
+      setStatus(`Downloading the model: ${Math.round(at / 1e6)} of ${Math.round(MODEL.size / 1e6)} MB`, at / MODEL.size);
+      const b = fromBase64(await fetchText(c)); buf.set(b, at); at += b.length;
+    }
+    if (at !== MODEL.size) throw new Error(`the model came ${at} bytes, not ${MODEL.size}`);
+    setStatus("Checking the model\u2026", 1);
+    const got = await sha256hex(buf);
+    if (got && got !== MODEL.sha256) throw new Error("the model downloaded is not the one the heads were trained on");
+    await store(key, buf);
+  }
+  return buf;
+}
+async function load() {
+  if (SESSION) return;
+  if (loading) return loading;
+  loading = (async () => {
+    $("load").disabled = true;
+    try {
+      if (typeof ort === "undefined") throw new Error("the model's engine (onnxruntime) did not load");
+      const [heads, wasm] = await Promise.all([fetch("heads.json").then(r => r.json()),
+        stored("ort-wasm-1.20.1").then(b => b || fetchBytes("ort-wasm-simd-threaded.wasm").then(async b => { await store("ort-wasm-1.20.1", b); return b; }))]);
+      HEADS = heads.heads; CARD = heads.card;
+      const model = await getModel();
+      setStatus("Starting the model\u2026", 1);
+      ort.env.wasm.numThreads = 1;
+      ort.env.wasm.wasmPaths = { mjs: ORT_MJS };
+      ort.env.wasm.wasmBinary = wasm;
+      SESSION = await ort.InferenceSession.create(model, { executionProviders: ["wasm"], graphOptimizationLevel: "all" });
+      setStatus("Ready. The model runs on this phone; your pictures don't leave it.", null);
+      $("load").hidden = true;
+      scores();
+    } catch (e) {
+      loading = null; $("load").disabled = false;
+      const wasmBlocked = /WebAssembly|wasm|CompileError/i.test(String(e));
+      setStatus(wasmBlocked ? `This browser would not start the model's engine (WebAssembly): ${e.message || e}. Try it in Safari or Chrome.`
+                            : `The model didn't load: ${e.message || e}. Tap "Get the model" to try again.`, null);
+      throw e;
+    }
+  })();
+  return loading;
+}
+async function features(file) {
+  const img = toRGB(await decode(file));
+  const x = prep(img);
+  const out = await SESSION.run({ pixel_values: new ort.Tensor("float32", x, [2, 3, SIZE, SIZE]) });
+  const raw = out.image_embeds.data, unit = v => { const n = Math.hypot(...v) || 1e-8; return Float32Array.from(v, t => t / n); };
+  return { e: unit(raw.slice(0, 512)), ef: unit(raw.slice(512, 1024)), h: colourHist(img) };
+}
+
+// ---- the page ----
+const $ = id => document.getElementById(id);
+let mode = "read";
+const files = { a: null, b: null };
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+const pct = p => p >= 0.99 && p < 1 ? `${(Math.floor(p * 1000) / 10).toFixed(1)}%` : `${Math.round(p * 100)}%`;
+function sureNote(what, p) {
+  const t = CARD && CARD.thresholds[what];
+  return t != null && t <= 1 && p >= t ? `<span class="sure">sure</span>` : "";
+}
+function readRows(r) {
+  const arrow = r.side.answer === "left" ? "&larr;" : "&rarr;";
+  const top3 = r.colour.top3.map(([c, p]) => `<div><span>${esc(c)}</span><b><i style="width:${pct(p)}"></i></b><span class="num">${pct(p)}</span></div>`).join("");
+  return `<div class="rows">
+    <div class="row"><span class="label">Kind</span><div><div class="answer">${esc(r.kind.answer)}</div><div class="p"><span class="num">${pct(r.kind.p)}</span> ${sureNote("kind", r.kind.p)}</div></div></div>
+    <div class="row"><span class="label">Points</span><div><div class="answer">${esc(r.side.answer)}<span class="arrow">${arrow}</span></div><div class="p"><span class="num">${pct(r.side.p)}</span> ${sureNote("side", r.side.p)}</div></div></div>
+    <div class="row"><span class="label">Paint</span><div><div class="answer"><span class="swatch" style="background:${esc(r.colour.paint || "transparent")}"></span>${esc(r.colour.answer)}</div>
+      <div class="p"><span class="num">${pct(r.colour.p)}</span> ${sureNote("colour", r.colour.p)} &middot; built as <span class="mono">${esc(r.colour.paint || "")}</span></div>
+      <div class="top3">${top3}</div></div></div></div>`;
+}
+function compare(a, b) {
+  const cell = (r, w) => `<span><b>${w === "colour" ? `<span class="swatch" style="background:${esc(r.colour.paint || "transparent")}"></span>` : ""}${esc(r[w].answer)}${w === "side" ? (r.side.answer === "left" ? " &larr;" : " &rarr;") : ""}</b><small>${pct(r[w].p)}</small></span>`;
+  return `<div class="cmp"><span></span><span class="label">Photo</span><span class="label">Build</span>
+    ${[["kind", "Kind"], ["side", "Points"], ["colour", "Paint"]].map(([w, l]) => `<span class="label">${l}</span>${cell(a, w)}${cell(b, w)}`).join("")}</div>`;
+}
+function thumbs(urls) { return `<div class="thumbs">${urls.map(u => `<img alt="" src="${esc(u)}">`).join("")}</div>`; }
+function showRead(r, urls, tag) {
+  $("sheet").innerHTML = `<header><h2>The photo</h2><span class="tag">${esc(tag)}</span></header>${urls ? thumbs(urls) : ""}${readRows(r)}`;
+}
+function showCheck(c, urls, tag) {
+  const th = CARD ? CARD.thresholds.match : 0.5;
+  const flags = c.flags.length ? `<ul class="flags">${c.flags.map(f => `<li>${esc(f)}</li>`).join("")}</ul>` : `<p>Nothing looks wrong.</p>`;
+  $("sheet").innerHTML = `<header><h2>The build against its photo</h2><span class="tag">${esc(tag)}</span></header>${urls ? thumbs(urls) : ""}
+    <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><span class="plate">${c.answer === "ok" ? "OK" : "LOOK"}</span>
+      <span>${c.answer === "ok" ? "A second opinion: nothing to look at." : "A second opinion: look at this one."}</span></div>
+    ${flags}
+    <div><span class="label">Match</span> <span class="num">${pct(c.match)}</span>
+      <div class="meter" role="img" aria-label="Match ${pct(c.match)}, flagged below ${pct(th)}"><i style="width:${pct(c.match)}"></i><s style="left:${pct(th)}"></s></div>
+      <div class="p">Flagged below the line (${pct(th)}): where one in ten builds of the photo's own model fall.</div></div>
+    ${compare(c.photo, c.build)}`;
+}
+function scores() {
+  const s = CARD.held_out_scores, f = CARD.reviewers_wrong_shape_builds;
+  const row = (q, on, v, note) => `<tr><td>${q}</td><td>${on}</td><td class="num">${v}</td><td>${note || ""}</td></tr>`;
+  $("scores").innerHTML = `<p>Every number is on vehicles the model had not seen: the run's 936 vehicles in five parts, each answered by a model trained on the other four.</p>
+    <div class="scroll"><table><thead><tr><th>Question</th><th>On</th><th>Right</th><th></th></tr></thead><tbody>
+    ${row("Kind", `${s.kind_photo.n} photos`, pct(s.kind_photo.right), "a car read as a van, or a van as a car")}
+    ${row("Side", `${s.side_photo.n} photos`, pct(s.side_photo.right))}
+    ${row("Paint", `${s.colour_photo.n} photos`, pct(s.colour_photo.right), `${pct(s.colour_photo.right_or_next_shade)} its colour or the next shade`)}
+    ${row("Paint", `${s.colour_build.n} builds`, pct(s.colour_build.right), `${pct(s.colour_build.right_or_next_shade)} with the next shade`)}
+    ${row("Match", `${s.match_pairs.n_own} own pairs, ${s.match_pairs.n_other} others`, s.match_pairs.auc.toFixed(2), "the chance a build scores higher with its own photo than with another vehicle's (1 is never wrong)")}
+    ${row("Shape check", `${f.own_model_vs_standin.n_standin} stand-ins`, pct(f.own_model_vs_standin.standin_flagged), `flagged, against ${pct(f.own_model_vs_standin.own_model_flagged)} of builds of the photo's own model`)}
+    </tbody></table></div>
+    <p>"Sure" means photos read that surely were right 99 times in 100. Trained ${esc(CARD.trained)}.</p>`;
+}
+function setMode(m) {
+  mode = m;
+  $("mode-read").setAttribute("aria-pressed", m === "read"); $("mode-check").setAttribute("aria-pressed", m === "check");
+  $("slot-b").hidden = m === "read";
+  $("slot-a-text").textContent = m === "read" ? "Take or choose a photo of a vehicle" : "Take or choose the vehicle's photo";
+  $("run").textContent = m === "read" ? "Read the photo" : "Check the build";
+  ready();
+}
+function ready() { $("run").disabled = !(files.a && (mode === "read" || files.b)); }
+function pick(slot, input) {
+  const f = input.files && input.files[0]; files[slot] = f || null;
+  const box = $(`slot-${slot}`); let img = box.querySelector("img");
+  if (f) { if (!img) { img = document.createElement("img"); img.alt = ""; box.prepend(img); } img.src = URL.createObjectURL(f); }
+  else if (img) img.remove();
+  $("error").hidden = true; ready();
+}
+async function run() {
+  $("error").hidden = true; $("run").disabled = true;
+  try {
+    await load();
+    setStatus("Reading\u2026", null);
+    const urls = [files.a, files.b].filter(Boolean).map(f => URL.createObjectURL(f));
+    delete $("sheet").dataset.example;
+    if (mode === "read") showRead(read(HEADS, CARD.paint, await features(files.a)), urls.slice(0, 1), "Your photo");
+    else showCheck(judge(HEADS, CARD.thresholds, CARD.paint, await features(files.a), await features(files.b)), urls, "Your pictures");
+    setStatus("Ready. The model runs on this phone; your pictures don't leave it.", null);
+  } catch (e) {
+    $("error").textContent = e instanceof Unreadable ? e.message : `It couldn't read that: ${e.message || e}`;
+    $("error").hidden = false;
+    if (SESSION) setStatus("Ready. The model runs on this phone; your pictures don't leave it.", null);
+  } finally { ready(); }
+}
+$("mode-read").onclick = () => setMode("read");
+$("mode-check").onclick = () => setMode("check");
+$("file-a").onchange = e => pick("a", e.target);
+$("file-b").onchange = e => pick("b", e.target);
+$("run").onclick = run;
+$("load").onclick = () => load().catch(() => {});
+if (EXAMPLE) {
+  showCheck(EXAMPLE.check, [EXAMPLE.photo, EXAMPLE.build], "Example");
+  $("sheet").dataset.example = "1";
+  $("credit").innerHTML = `Example photo: ${esc(EXAMPLE.credit)}. Its build is the car machine's stand-in.`;
+}
+fetch("heads.json").then(r => r.json()).then(h => {
+  if (!CARD) { CARD = h.card; HEADS = h.heads; }
+  scores();
+  if (EXAMPLE && $("sheet").dataset.example) showCheck(EXAMPLE.check, [EXAMPLE.photo, EXAMPLE.build], "Example");   // its threshold, now known
+}).catch(() => {});
+
+// for the check that this page answers as the Python model does (web/check.py)
+window.vehicleAI = { load, features: async f => { await load(); return features(f); },
+  prepare: async f => { const img = toRGB(await decode(f)); return { x: Array.from(prep(img)), h: Array.from(colourHist(img)), w: img.w, hh: img.h, rgb: Array.from(img.rgb.slice(0, 3000)) }; },
+  embed: async x => { await load(); const o = await SESSION.run({ pixel_values: new ort.Tensor("float32", Float32Array.from(x), [x.length / (3 * SIZE * SIZE), 3, SIZE, SIZE]) }); return Array.from(o.image_embeds.data); },
+  read: async f => { await load(); return read(HEADS, CARD.paint, await features(f)); },
+  check: async (a, b) => { await load(); return judge(HEADS, CARD.thresholds, CARD.paint, await features(a), await features(b)); } };
+</script>

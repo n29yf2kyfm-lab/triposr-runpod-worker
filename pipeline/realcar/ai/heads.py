@@ -22,8 +22,11 @@ from vision import load
 
 # what a picture's features are made of: the encoder's reading of vision.prep's square (a cut-out
 # cropped to its vehicle, vision.load) and colour_hist below. Changed, the training cache is read anew.
-FEATURES_VERSION = 2
-HIST_BINS = (8, 6, 6)
+FEATURES_VERSION = 3
+# a and b in an odd number of bins: a neutral (white, grey, black: a = b = 128) falls in the middle of
+# one, not on the edge between two, where the last digit of the arithmetic picked the bin (6 bins did:
+# a white car's and a studio background's whites split between two bins by rounding, machine by machine)
+HIST_BINS = (8, 7, 7)
 HIST_RANGE = ((0, 256), (64, 192), (64, 192))
 
 

@@ -90,6 +90,15 @@ def test_the_colour_histogram_counts_every_paint(paint):
     assert h.reshape(H.HIST_BINS)[tuple(i)] > 0.9                # the paint's own bin holds the middle
 
 
+def test_a_neutral_colour_is_in_the_middle_of_a_bin_not_on_an_edge():
+    # white, grey and black are a = b = 128: on an edge, the last digit of the arithmetic picks the bin
+    for (lo, hi), n in list(zip(H.HIST_RANGE, H.HIST_BINS))[1:]:
+        edges = np.linspace(lo, hi, n + 1)
+        assert np.abs(edges - 128).min() > 5
+    for rgb in ((255, 255, 255), (0, 0, 0), (200, 200, 200)):
+        assert H.colour_hist(Image.new("RGB", (300, 200), rgb)).max() > 0.99    # all in one bin
+
+
 def test_a_head_gives_probabilities_as_sklearn_does():
     LogisticRegression = pytest.importorskip("sklearn.linear_model").LogisticRegression
     rng = np.random.default_rng(0)
@@ -202,6 +211,16 @@ def test_a_verdict_counts_only_on_the_build_and_photo_it_judged(tmp_path):
     assert dataset.fresh(v, {"built_at": "2026-10-28 09:00:00"}, str(ph)) is None     # rebuilt since
     ph.write_bytes(b"another photo")
     assert dataset.fresh(v, {"built_at": "2026-10-27 10:00:00"}, str(ph)) is None     # a new photo since
+
+
+def test_the_phone_page_has_its_slots_and_its_twin_rules():
+    # build.py fills these in; the page's reading mirrors vision and heads (web/check.py runs both on pictures)
+    page = open(os.path.join(HERE, "web", "index.html")).read()
+    for slot in ("/*MODEL*/", "/*EXAMPLE*/", "/*END*/"):
+        assert slot in page
+    assert f"MIN_SIDE = {vision.MIN_SIDE}" in page and f"SIZE = {vision.SIZE}" in page
+    assert str(list(H.HIST_BINS)).replace(" ", "") in page.replace(" ", "")
+    assert "clip-b32-int8" in vision.ENCODERS
 
 
 if __name__ == "__main__":

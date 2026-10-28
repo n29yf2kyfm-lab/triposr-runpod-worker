@@ -75,6 +75,16 @@ def featurise(files, enc, cache, encoder_sha):
     return {f: (old[i + ":e"], old[i + ":f"], old[i + ":h"]) for i, f in zip(ids, files)}
 
 
+def read_features(files, path):
+    """Features made elsewhere, keyed as the cache is (the picture's fingerprint): every picture must be there."""
+    got = dict(np.load(path))
+    ids = [paths.sha(f) for f in files]
+    missing = [f for i, f in zip(ids, files) if i + ":e" not in got]
+    if missing:
+        raise SystemExit(f"train: {len(missing)} pictures have no features in {path}, e.g. {missing[:3]}")
+    return {f: (got[i + ":e"], got[i + ":f"], got[i + ":h"]) for i, f in zip(ids, files)}
+
+
 def stack(feat, files, part):
     return np.stack([feat[f][part] for f in files])
 
@@ -236,13 +246,15 @@ def main():
     ap.add_argument("--cache", default=os.path.join(vision.home(), "cache"))
     ap.add_argument("--out", default=os.path.join(HERE, "heads.json"))
     ap.add_argument("--review", default=None, help="the second opinion's file (default $F1K_HOME/ai_review.json)")
+    ap.add_argument("--features", default=None, help="the pictures' features read elsewhere (web/features.py: the "
+                    "phone page's own reading), instead of the encoder's here; --encoder names the encoder they came from")
     a = ap.parse_args()
-    enc = vision.Encoder(a.encoder)
+    enc = vision.Encoder(a.encoder) if not a.features else type("Read", (), {"path": a.encoder or vision.fetch()})
     enc_sha = vision.file_sha256(enc.path)
     its = dataset.items()
     files = sorted({it[s] for it in its for s in ("photo", "build") if it.get(s)})
     print(f"{len(its)} vehicles, {len(files)} pictures", flush=True)
-    feat = featurise(files, enc, a.cache, enc_sha)
+    feat = featurise(files, enc, a.cache, enc_sha) if not a.features else read_features(files, a.features)
     answers, scored, pairs_ = held_out(its, feat)
     test, th = scores(answers)
     pm = [float(hs["match"].proba(H.pair(feat[it["photo"]][0], feat[it["build"]][0]))[0, 1]) for it, hs in scored]
@@ -262,6 +274,7 @@ def main():
     final = fit_all(its, feat, np.random.default_rng(0))
     card = {
         "trained": trained, "encoder": os.path.basename(enc.path), "encoder_sha256": enc_sha,
+        "features": "read by " + (a.features and os.path.basename(a.features) or "onnxruntime here"),
         "examples": {"vehicles": len(its), "pictures": len(files),
                      "colour": sum(1 for it in its if it.get("colour")) + sum(1 for it in its if it.get("build_colour")),
                      "side": 2 * sum(1 for it in its if it.get("side")),
