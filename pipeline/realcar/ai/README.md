@@ -59,6 +59,19 @@ either name would fit).
 The run's labels are the agents' answers checked by gold items, not certain
 truth: a "mistake" is sometimes the label's.
 
+## Try it yourself
+
+`try_it.py` checks the model with nothing of this run's: paste it into a Google
+Colab cell (works from a phone's browser) or run `python3 try_it.py` anywhere.
+It downloads the code and weights from GitHub at a pinned commit (refusing any
+file whose SHA-256 is not the one it prints), reads 29 Wikimedia photos the
+model never trained on against answers written by looking at each, and runs
+checks a faked model could not pass: the photos mirrored, recoloured (red and
+blue swapped) and turned grey on the spot. About 1.5 minutes. Its run here:
+kind 29 of 29, side 28 of 29, colour 22 of 28; mirrored 29 of 29 flip, grey 29
+of 29 read neutral, but red and blue swapped only 3 of 5 swap (a red Z4 still
+reads dark red, a 205 white): the colour leans on the car as well as its pixels.
+
 ## Use it
 
     pip install numpy pillow onnxruntime
@@ -202,3 +215,4 @@ A verdict is used only on the build and photo it was made on.
 | `web/build.py`, `web/features.py`, `web/check.py` | the page's folder; every picture read by the page; the page held to Python |
 | `web/check_page.cjs`, `web/features.cjs` | the browser side of those two (Playwright) |
 | `test_ai.py` | `python3 -m pytest pipeline/realcar/ai/test_ai.py -q` |
+| `try_it.py` | anyone's own check: unseen photos, and pictures changed on the spot |
