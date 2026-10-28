@@ -18,43 +18,47 @@ and `check` puts them together into a second opinion on a build: what looks wron
 
 ## How good it is
 
-Every vehicle is in one of five folds (by its key). Each fold was answered by
-heads trained on the other four, so every number here is on photos and builds
-the model had not seen (`heads.json`'s `card` keeps them all):
+Every vehicle is in one of five folds; vehicles that share a picture (twins
+with one photo, a van and its car version with one build: 88 pictures) share a
+fold. Each fold was answered by heads trained on the other four, so every
+number here is on photos and builds the model had not seen (`heads.json`'s
+`card` keeps them all):
 
 | Question | On | Right | |
 |---|---|---|---|
-| kind | 936 photos | 92.7% | every mistake a car read as a van or a van as a car |
-| | 711 builds | 92.7% | |
-| side | 711 photos | 95.2% | |
-| | 711 builds | 99.6% | |
-| colour | 722 photos | 70.4% | 90.2% its family or the next shade (grey for dark grey, silver for white); 88.0% in its top 3. The measurer it can replace (`photo_paint.py` before the colour agents) named 41% |
-| | 711 builds | 92.3% | 97.7% its family or the next shade |
-| match | 650 builds with their own photo, 3,555 with other vehicles' | 0.89 | the chance a build scores higher with its own photo than with another vehicle's (AUC; 0.5 is a coin, 1 is never wrong) |
+| kind | 936 photos | 94.0% | every mistake a car read as a van or a van as a car |
+| | 711 builds | 93.0% | |
+| side | 711 photos | 95.1% | |
+| | 711 builds | 99.7% | |
+| colour | 722 photos | 67.2% | 89.2% its family or the next shade (grey for dark grey, silver for white); 87.5% in its top 3. The measurer it can replace (`photo_paint.py` before the colour agents) named 41% |
+| | 711 builds | 92.3% | 97.5% its family or the next shade |
+| match | 650 builds with their own photo, 3,555 with other vehicles' | 0.88 | the chance a build scores higher with its own photo than with another vehicle's (AUC; 0.5 is a coin, 1 is never wrong) |
+
+A correction: until 28 October the folds went by key alone, and 75 shared
+pictures sat in two folds, so some vehicles were scored on a picture the heads
+had trained on (found by the code's audit, below). Fixed, photos' colour fell
+from 70.4% to 67.2%, and the shape check's catch of the reviewers' wrong builds
+from 60% to 40%: the numbers here are the fixed ones.
 
 The match against what the run knows was wrong:
 
-| | AUC | Flagged (below 0.49) |
+| | AUC | Flagged (below 0.48) |
 |---|---|---|
-| 251 builds of the photo's own model, against 458 stand-ins (another model's body reshaped) | 0.76 | 10% of own-model builds (the threshold is set so), 42% of stand-ins |
-| the reviewers' 107 passed builds, against the 10 they found the wrong shape on the build there now | 0.71 | 6 of the 10 |
-| ... against the 61 whose last verdict named a shape fault (on that build or an earlier one) | 0.76 | 66% |
+| 251 builds of the photo's own model, against 458 stand-ins (another model's body reshaped) | 0.76 | 10% of own-model builds (the threshold is set so), 40% of stand-ins |
+| the reviewers' 107 passed builds, against the 10 they found the wrong shape on the build there now | 0.64 | 4 of the 10 |
+| ... against the 61 whose last verdict named a shape fault (on that build or an earlier one) | 0.64 | 38% |
 
 The reviewers' passed builds are flagged 27% of the time: most of those are
 stand-ins, which they pass when the body is the right sort.
 
-**By eye.** Of the 217 builds the held-out answers flag as the wrong shape, every
-fifth (43) was looked at photo beside build: 39 are another model or another
+**By eye.** Of the builds the held-out answers flagged as the wrong shape, every
+fifth (43) was looked at photo beside build: 39 were another model or another
 generation (a Kia Rio built as a Golf, a Rover 25 as a Punto, a Kia Stinger as a
-Genesis G70, a Mini Paceman as a BMW X1); 4 are false alarms, all builds of the
-photo's own model (a Scénic, a Fiesta, a GT-R, a 300C). Of the 217, 192 are
-stand-ins; the reviewers' verdict on the build there now was ok on 29.
-
-**On photos from outside the run.** 34 Wikimedia photos of the run's vehicles
-that it never trained on, named by hand: kind 31 of 34 (the three misses are a
-California, a Multivan and a Master the target list calls cars, read as vans),
-side 30 of 33 (a wheel close-up left out), colour 26 of 32 (counting a shade
-either name would fit).
+Genesis G70, a Mini Paceman as a BMW X1) and 4 false alarms, all builds of the
+photo's own model (a Scénic, a Fiesta, a GT-R, a 300C). That was before the
+correction; after it 207 are flagged, 35 of those 43 among them (31 another
+model, the same 4 false alarms). Of the 207, 182 are stand-ins; the reviewers'
+verdict on the build there now was ok on 29.
 
 The run's labels are the agents' answers checked by gold items, not certain
 truth: a "mistake" is sometimes the label's.
@@ -62,15 +66,36 @@ truth: a "mistake" is sometimes the label's.
 ## Try it yourself
 
 `try_it.py` checks the model with nothing of this run's: paste it into a Google
-Colab cell (works from a phone's browser) or run `python3 try_it.py` anywhere.
-It downloads the code and weights from GitHub at a pinned commit (refusing any
-file whose SHA-256 is not the one it prints), reads 29 Wikimedia photos the
-model never trained on against answers written by looking at each, and runs
-checks a faked model could not pass: the photos mirrored, recoloured (red and
-blue swapped) and turned grey on the spot. About 1.5 minutes. Its run here:
-kind 29 of 29, side 28 of 29, colour 22 of 28; mirrored 29 of 29 flip, grey 29
-of 29 read neutral, but red and blue swapped only 3 of 5 swap (a red Z4 still
-reads dark red, a 205 white): the colour leans on the car as well as its pixels.
+Colab cell (works from a phone's browser) or run `python3 try_it.py` anywhere;
+about 2 minutes. It downloads the code and weights from GitHub at a pinned
+commit (refusing any file whose SHA-256 is not the one it prints), and then:
+
+- checks its 29 Wikimedia test photos were not trained on: each against the
+  looks (`vision.dhash`) of every training picture, published in
+  `train_pictures.json`
+- scores the answers against a person's, strictly (the one answer a person
+  gives) and leniently (a fair second: a Multivan is a van but registered as a
+  car), beside what guessing would score
+- runs the same code with the trained weights swapped for random ones: it falls
+  to guessing, so the skill is in the training, not in the code
+- recolours the photos on the spot (red and blue swapped; grey) and sees whether
+  the paint read moves with them
+- shows photos picked at random as it runs, that nobody chose, and asks you what
+  you see before it shows the model's answer (`BLIND`)
+
+The mirror is not a check: the side reading averages a picture with its mirror,
+so a mirrored picture always reads the other way. Its run here: RUN_RESULTS
+
+## Checked by other AIs
+
+Three other models (Claude Haiku, Sonnet and Fable) ran `try_it.py` from a
+fresh copy and audited the code without being told what to find. All three
+found a real model (Fable: the same code with random weights scores at chance).
+They also found what was overstated, all of it fixed since: the mirror check
+cannot fail; a model always answering "silver" passed the grey check; three
+hand answers had been loosened ("car or van") after the model missed them; the
+colour swap was scored by a swatch's tint; the training pictures were not
+published, so "never trained on" could not be checked; and the leak above.
 
 ## Use it
 
@@ -138,17 +163,23 @@ copy (90 MB, downloaded once and kept by the browser) with onnxruntime-web, and
 heads trained for it (`web/heads.json`). Its JavaScript repeats `vision.load`,
 `vision.prep`, `heads.colour_hist`, `heads.read` and `heads.judge` step for step
 (Pillow's resampling included), and `web/check.py` holds it to them in a real
-browser: the picture handed to the encoder is Python's to the last bit of
-rounding, and on the page's own numbers Python's heads give the page's every answer.
+browser: the picture handed to the encoder is the same size as Python's and
+every 97th value of it within 0.00001 (the page normalises in one step, Python
+in three, so the last bit of rounding differs), and on the page's own numbers
+Python's heads give the page's every answer. It does not show the page's
+answers are right: on the 29 unseen photos of `try_it.py` the page itself, in
+Chromium, scores kind 28 of 29, side 27 of 29 and colour 18 of 28 strictly (20
+leniently).
 
 The browser's engine does the 8-bit arithmetic a little otherwise than
 onnxruntime here (its numbers 0.99 alike), so the page's heads are trained on the
-page's own reading of every picture (`web/features.py`); WebAssembly gives the
-same numbers on every phone. Held out, as above, the page reads kind on 92.7% of
-photos, side on 90.6% (the full model 95.2%: the 8-bit encoder keeps less of
-which way a vehicle points), colour on 69.9% (90.0% to the next shade) and
-builds' colour on 91.8%; it tells a build's own photo from another vehicle's at
-an AUC of 0.87 and flags 40% of the stand-ins.
+page's own reading of every picture (`web/features.py`). WebAssembly's
+arithmetic is specified to be the same on every device, so a phone should read
+as Chromium does here; not checked on a phone. Held out, as above, the page reads kind on 93.7% of
+photos, side on 90.9% (the full model 95.1%: the 8-bit encoder keeps less of
+which way a vehicle points), colour on 66.9% (89.2% to the next shade) and
+builds' colour on 91.7%; it tells a build's own photo from another vehicle's at
+an AUC of 0.86 and flags 37% of the stand-ins.
 
 To make it again after training:
 
@@ -215,4 +246,5 @@ A verdict is used only on the build and photo it was made on.
 | `web/build.py`, `web/features.py`, `web/check.py` | the page's folder; every picture read by the page; the page held to Python |
 | `web/check_page.cjs`, `web/features.cjs` | the browser side of those two (Playwright) |
 | `test_ai.py` | `python3 -m pytest pipeline/realcar/ai/test_ai.py -q` |
-| `try_it.py` | anyone's own check: unseen photos, and pictures changed on the spot |
+| `try_it.py` | anyone's own check: unseen photos, controls, a blind test |
+| `train_pictures.json` | the looks of every training picture (`vision.dhash`), to check a photo was not trained on |

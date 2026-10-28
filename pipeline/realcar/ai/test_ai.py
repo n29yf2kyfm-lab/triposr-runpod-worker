@@ -202,6 +202,23 @@ def test_a_vehicle_keeps_its_fold_when_others_come_and_go():
     assert share.min() > 0.15 and share.max() < 0.25
 
 
+def test_vehicles_sharing_a_picture_share_a_fold(tmp_path):
+    # twins with one photo, a van and its car version with one build: tested on a picture trained on, otherwise
+    import dataset
+    a, b, c = tmp_path / "a.jpg", tmp_path / "b.jpg", tmp_path / "c.jpg"
+    a.write_bytes(b"one photo")
+    b.write_bytes(b"another")
+    c.write_bytes(b"a third")
+    its = [{"key": f"k{i}", "photo": str(a if i in (0, 7) else b if i == 3 else c)} for i in range(12)]
+    its[5]["build"] = str(b)
+    f = dataset.folds(its)
+    assert f["k0"] == f["k7"] and f["k3"] == f["k5"]
+    looks = {it["key"]: "0" * 64 for it in its}
+    looks["k1"], looks["k2"] = "f" * 64, "f" * 63 + "e"             # one photo saved twice: 1 bit apart
+    f = dataset.folds(its, looks={"k1": looks["k1"], "k2": looks["k2"]})
+    assert f["k1"] == f["k2"]
+
+
 def test_a_verdict_counts_only_on_the_build_and_photo_it_judged(tmp_path):
     import dataset
     ph = tmp_path / "p.jpg"

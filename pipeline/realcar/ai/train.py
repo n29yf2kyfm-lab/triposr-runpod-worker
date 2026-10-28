@@ -2,7 +2,7 @@
 
     F1K_HOME=/path/to/f1k python3 pipeline/realcar/ai/train.py [--encoder FILE] [--cache DIR] [--out FILE]
 
-Every vehicle is in one of five folds (dataset.fold, from its key alone).
+Every vehicle is in one of five folds (dataset.folds: vehicles sharing a picture share a fold).
 Five times over, the heads are trained on four folds and answer for the
 fifth, so every photo and build is answered by heads that never saw it:
 those answers are the scores in heads.json's card, they set each head's
@@ -157,12 +157,12 @@ def fit_all(its, feat, rng):
     }
 
 
-def held_out(its, feat):
+def held_out(its, feat, fold_of):
     """Every picture answered, and every build matched, by heads trained without its vehicle's fold."""
     answers, scored, pairs_ = [], [], []
     for r in range(FOLDS):
-        fold = [it for it in its if dataset.fold(it["key"], FOLDS) == r]
-        hs = fit_all([it for it in its if dataset.fold(it["key"], FOLDS) != r], feat, np.random.default_rng(r))
+        fold = [it for it in its if fold_of[it["key"]] == r]
+        hs = fit_all([it for it in its if fold_of[it["key"]] != r], feat, np.random.default_rng(r))
         for it in fold:
             for src in ("photo", "build"):
                 if it.get(src):
@@ -255,7 +255,9 @@ def main():
     files = sorted({it[s] for it in its for s in ("photo", "build") if it.get(s)})
     print(f"{len(its)} vehicles, {len(files)} pictures", flush=True)
     feat = featurise(files, enc, a.cache, enc_sha) if not a.features else read_features(files, a.features)
-    answers, scored, pairs_ = held_out(its, feat)
+    looks = {it["key"]: vision.dhash(vision.load(it["photo"])) for it in its}
+    fold_of = dataset.folds(its, FOLDS, looks)
+    answers, scored, pairs_ = held_out(its, feat, fold_of)
     test, th = scores(answers)
     pm = [float(hs["match"].proba(H.pair(feat[it["photo"]][0], feat[it["build"]][0]))[0, 1]) for it, hs in scored]
     # the match's threshold: one in ten builds of the photo's own model (not a stand-in, no shape fault) below it
@@ -285,6 +287,10 @@ def main():
                 f"{FOLDS} folds. The heads written were then trained on all.",
     }
     H.save(a.out, final, card)
+    seen = sorted({vision.dhash(vision.load(f)) for f in files})
+    with open(os.path.join(os.path.dirname(os.path.abspath(a.out)), "train_pictures.json"), "w") as fh:
+        json.dump({"about": "vision.dhash of every picture the heads were trained on (photos and builds): "
+                            "a photo within ~10 bits of one of these was trained on", "dhash": seen}, fh)
     review = a.review or paths.f("ai_review.json")
     paths.save(review, second)
     print(json.dumps({"held_out_scores": test, "reviewers_wrong_shape_builds": faults, "thresholds": th}, indent=1))

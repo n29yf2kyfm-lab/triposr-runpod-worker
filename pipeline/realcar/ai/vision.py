@@ -92,6 +92,18 @@ def load(path):
     return im.convert("RGB")
 
 
+def dhash(im):
+    """A picture's fingerprint by its looks (256 bits, as 64 hex digits): the same photo resized or saved
+    again is a few bits from it, another photo is a hundred or so (difference hash, 17x16 grey)."""
+    a = np.asarray(im.convert("L").resize((17, 16), Image.BILINEAR), np.int16)
+    return np.packbits((a[:, 1:] > a[:, :-1]).ravel()).tobytes().hex()
+
+
+def dhash_bits(a, b):
+    """How many of the 256 bits two dhashes differ in."""
+    return bin(int(a, 16) ^ int(b, 16)).count("1")
+
+
 def prep(im):
     """The whole picture on a square of CLIP's mean colour (zero once normalised), 224 a side."""
     s = SIZE / max(im.size)

@@ -29,6 +29,7 @@ sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(os.path.dirname(HERE), "review"))
 
 import paths  # noqa: E402
+import vision  # noqa: E402
 from heads import lab100  # noqa: E402
 from paint_label import FAMILY  # noqa: E402
 
@@ -104,5 +105,40 @@ def items():
 
 
 def fold(key, n=5):
-    """The key's fold, 0 to N-1, from its own name only: a vehicle stays in its fold when others come and go."""
+    """The key's own fold, 0 to N-1, from its name only."""
     return int(hashlib.sha1(key.encode()).hexdigest()[:8], 16) % n
+
+
+SAME_PHOTO_BITS = 10        # photos this near (of 256 bits, vision.dhash) are one photo saved twice
+
+
+def folds(its, n=5, looks=None):
+    """Each vehicle's fold. Vehicles that share a picture (the same file, or photos LOOKS, key -> dhash, finds
+    within SAME_PHOTO_BITS: one photo resized) are one group and share a fold: no picture is answered by
+    heads trained on it (88 pictures are shared, by twins and a van's car version). A group's fold is its
+    first key's, so a vehicle keeps its fold unless one sharing its picture comes."""
+    parent = {it["key"]: it["key"] for it in its}
+
+    def find(k):
+        while parent[k] != k:
+            parent[k] = parent[parent[k]]
+            k = parent[k]
+        return k
+    first = {}
+    for it in its:
+        for s in ("photo", "build"):
+            if it.get(s):
+                h = paths.sha(it[s])
+                if h in first:
+                    parent[find(it["key"])] = find(first[h])
+                first.setdefault(h, it["key"])
+    if looks:
+        ks = sorted(looks)
+        for i, a in enumerate(ks):
+            for b in ks[i + 1:]:
+                if vision.dhash_bits(looks[a], looks[b]) <= SAME_PHOTO_BITS:
+                    parent[find(a)] = find(b)
+    groups = {}
+    for it in sorted(its, key=lambda x: x["key"]):
+        groups.setdefault(find(it["key"]), it["key"])
+    return {it["key"]: fold(groups[find(it["key"])], n) for it in its}
