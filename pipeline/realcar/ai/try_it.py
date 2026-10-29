@@ -1,14 +1,14 @@
 """try_it.py: test the vehicle model yourself, on photos it never saw, against controls.
 
 Paste it all into a Google Colab cell (colab.research.google.com, works from a phone's browser) and run it,
-or on any computer:  python3 try_it.py   It needs Python 3.9+ and the internet; about 3 minutes, most of it
-the 350 MB image encoder downloading. Three AI models (Claude Haiku, Sonnet and Fable) ran and audited it
-before you; what they found wrong was fixed.
+or on any computer:  python3 try_it.py   It needs Python 3.9+ and the internet; about 5 minutes, most of it
+the two image encoders downloading (720 MB). Three AI models (Claude Haiku, Sonnet and Fable) ran and
+audited it before you; what they found wrong was fixed.
 
 What it does, in the open:
 1. Downloads the model's code and trained weights from GitHub at one fixed commit, and stops if any
-   file's SHA-256 is not the one printed here; then the image encoder (OpenAI's CLIP, from Hugging Face),
-   checked the same way by the code.
+   file's SHA-256 is not the one printed here; then the image encoders (Google's SigLIP and Meta's DINOv2,
+   from Hugging Face), checked the same way by the code.
 2. Checks that the 29 test photos (Wikimedia Commons) were not trained on: each is compared by its looks
    with every picture the model was trained on (their fingerprints are published with it).
 3. Scores the model's answers against answers written by a person looking at each photo: strictly (the
@@ -34,12 +34,12 @@ for mod, pkg in (("numpy", "numpy"), ("PIL", "pillow"), ("onnxruntime", "onnxrun
 import numpy as np
 from PIL import Image
 
-COMMIT = "9caed4d53af1f87350272e2c1f109dd3eb797a3c"
+COMMIT = "786b305b4ab2d2927c101389636219c7b8b5f2e8"
 REPO = f"https://raw.githubusercontent.com/n29yf2kyfm-lab/triposr-runpod-worker/{COMMIT}/pipeline/realcar/ai/"
-FILES = {"vision.py": "6eb6475baef5100d593e528f1d7be2a2bbc5ceb1d1989e9897db3efcd1bfdacd",
-         "heads.py": "2f764d849663ead902a00777a2b929d2b09a60a7215c48d5892bf124dfdd2aaf",
-         "heads.json": "c8c0fd8546ec8fce8cdd18102db98b2f6e329dda2a591e0872d6c3468844faef",
-         "train_pictures.json": "e4bb4e5c58502a00da67f9a9f09990301989ac50f381f414f6b291e9c4f6d78e"}
+FILES = {"vision.py": "5029ec0b2214a6abd7a5d0c2026fff040cf4aa090e0809a8d74404ac39d88416",
+         "heads.py": "5ebed26f65fbf2bdbe6f9aade5e51464d542aeafb35ee1f36d87a283731ecefc",
+         "heads.json": "a27c839c5be3cc3963822703dfc152586d1858cbe04f19b0ecce389f51267d37",
+         "train_pictures.json": "8995a3b9d25602ae55b587e511d5acf4f35b38ccd29f3cb520dca75e560b6d57"}
 UA = {"User-Agent": "vehicle-ai-try-it/2.0 (https://github.com/n29yf2kyfm-lab/triposr-runpod-worker)"}
 HERE = os.path.abspath("vehicle_ai_try")
 os.makedirs(HERE, exist_ok=True)
@@ -68,8 +68,9 @@ os.environ.setdefault("VEHICLE_AI_HOME", os.path.join(HERE, "cache"))
 import vision, heads as H
 hs, card = H.load_heads(os.path.join(HERE, "heads.json"))
 seen = json.load(open(os.path.join(HERE, "train_pictures.json")))["dhash"]
-enc = vision.Encoder()             # downloads the encoder once (350 MB) and checks its SHA-256
-print(f"   image encoder {os.path.basename(enc.path)} checked; heads trained {card['trained']} on {len(seen)} pictures")
+enc = vision.encoders(",".join(e["name"] for e in card["encoders"]))      # downloaded once, each checked by its SHA-256
+print(f"   image encoders {enc.path.replace(os.path.dirname(enc.path.split(',')[0]) + '/', '')} checked;"
+      f" heads trained {card['trained']} on {len(seen)} pictures")
 
 
 def features(im):
