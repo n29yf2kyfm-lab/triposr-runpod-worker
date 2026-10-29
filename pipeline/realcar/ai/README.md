@@ -148,7 +148,15 @@ the one it prints), and then:
 The mirror is not a check: the side reading averages a picture with its mirror,
 so a mirrored picture always reads the other way.
 
-Its run here: TRY_RESULTS
+Its run here (29 October, the model that tells a vehicle from none, a new Python
+environment): no test photo within 61 bits of a training picture; kind 29 of 29,
+side 29 of 29, colour 20 of 29 strictly and 22 leniently, as before; the 29 vehicle
+photos read as a vehicle 29 of 29, the 16 photos of none as none 16 of 16 (always
+saying vehicle: 29 and 0), and random noise as none (100%). With random weights,
+ten draws averaged: kind 12.4, side 13.6, colour 1.1, vehicle 11.6 of 29 and none
+8.8 of 16. (One draw can land far from half for side, which reads a picture
+against its mirror: a random direction gets nearly all right or nearly all wrong
+by its sign, 26 and 6 in two draws; hence the ten.)
 
 The v2 model's run (29 October, a new Python environment, about 5 minutes with the
 720 MB download): no test photo within 61 bits of a training picture; kind 29 of

@@ -220,14 +220,20 @@ if vr and nones:
           f" always saying vehicle would get {len(pics)} and 0")
 
 print("\n4. Controls")
-rng = np.random.default_rng(1)
-fake = {k: H.Head(h.classes, rng.normal(0, h.W.std(), h.W.shape), rng.normal(0, h.b.std() + 1e-3, h.b.shape))
-        for k, h in hs.items()}
-fres, _ = score(fake)
-fv = vehicle_read(fake)
-print("   the same code with the trained weights swapped for random ones:",
-      ", ".join(f"{w} {s} of {n}" for w, (s, l, n, gs, gl) in fres.items())
-      + (f", vehicle {fv[0]} of {len(pics)} and none {fv[1]} of {len(nones)}" if fv and nones else ""),
+# ten draws of random weights, averaged: one draw can land far from half by luck (side reads a picture against its
+# mirror, so a random direction gets nearly all of them right, or nearly all wrong, by its sign)
+draws = []
+for seed in range(1, 11):
+    rng = np.random.default_rng(seed)
+    fake = {k: H.Head(h.classes, rng.normal(0, h.W.std(), h.W.shape), rng.normal(0, h.b.std() + 1e-3, h.b.shape))
+            for k, h in hs.items()}
+    fres, _ = score(fake)
+    draws.append(([fres[w][0] for w in fres], vehicle_read(fake)))
+mean = lambda xs: sum(xs) / len(xs)  # noqa: E731
+words = ", ".join(f"{w} {mean([d[0][i] for d in draws]):.1f} of {fres[w][2]}" for i, w in enumerate(fres))
+if draws[0][1] and nones:
+    words += f", vehicle {mean([d[1][0] for d in draws]):.1f} of {len(pics)} and none {mean([d[1][1] for d in draws]):.1f} of {len(nones)}"
+print("   the same code with the trained weights swapped for random ones, ten draws averaged:", words,
       "(guessing level: the skill is in the training)")
 moved = asked = greyed = grey_asked = 0
 for name, truth, im, f, _ in pics:
