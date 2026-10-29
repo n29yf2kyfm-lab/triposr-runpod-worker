@@ -396,7 +396,8 @@ def write(report, out):
     if own:
         m = own["matched"]
         ev = bool(own["spec"].get("electric"))
-        notes.append(f"{'Motor' if ev else 'Engine'}: {own['words']}, from the parts catalogue ({own['part_count']} parts "
+        built = f", {own['built_words']}" if own.get("built_words") else ""
+        notes.append(f"{'Motor' if ev else 'Engine'}: {own['words']}{built}, from the parts catalogue ({own['part_count']} parts "
                      f"listed for it; {', '.join(m['models'][:3])}{' …' if m['models_n'] > 3 else ''}, "
                      f"{m['year'] or m['years'] or 'all years'})."
                      + ("" if ev else " The running engine on the Engine tab is built to it.")

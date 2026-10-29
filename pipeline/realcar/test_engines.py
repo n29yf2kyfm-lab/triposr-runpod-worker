@@ -122,3 +122,34 @@ def test_a_trim_read_as_a_model_only_when_that_model_was_asked(tmp_path, monkeyp
     monkeypatch.setattr(engines, "_IDX", idx)
     own = page.own_engine({"make": "porsche", "model_words": "911", "spec": "carrera", "year": 2019}, False)
     assert own["spec"]["layout"] == "flat"
+
+
+def build_of(make, engine, names):
+    import collections
+    return engines.construction(collections.Counter(names), engines.spec(engine), make)
+
+
+def test_a_gm_or_chrysler_v8_is_a_pushrod_engine_their_overhead_cam_ones_not():
+    assert build_of("chevrolet", "6.2L V8 - Gas", ["Engine Camshaft"])["valvetrain"] == "pushrod"
+    assert build_of("dodge", "5.7L V8 - Gas", [])["valvetrain"] == "pushrod"
+    assert build_of("chevrolet", "4.3L V6 - Gas", [])["valvetrain"] == "pushrod"
+    # the Corvette Z06's flat-plane 5.5, Cadillac's Northstar, Chrysler's 4.7: overhead cams; so is every BMW V8
+    for make, e in (("chevrolet", "5.5L V8 - Gas"), ("cadillac", "4.6L V8 - Gas"), ("jeep", "4.7L V8 - Gas"), ("bmw", "4.4L V8 - Gas")):
+        assert build_of(make, e, [])["valvetrain"] == "overhead cam", (make, e)
+
+
+def test_a_turbo_or_supercharger_is_drawn_only_where_the_catalogue_lists_one():
+    m3 = build_of("bmw", "3.0L L6 - Gas", ["Turbocharger Adapter", "Engine Timing Chain"])
+    assert (m3["induction"], m3["turbos"], m3["timing"]) == ("turbo", 1, "chain")
+    assert build_of("porsche", "3.8L H6 - Gas", ["Turbocharger"])["turbos"] == 2          # a flat six: one a bank
+    assert build_of("dodge", "6.2L V8 - Gas", ["Supercharger Drive Belt"])["induction"] == "supercharged"
+    # none listed is not "naturally aspirated": the catalogue lists no turbo part for some turbo engines
+    assert build_of("porsche", "3.0L H6 - Gas", ["Engine Timing Chain"])["induction"] is None
+
+
+def test_a_timing_belt_a_hybrid_and_an_electric_car():
+    golf = build_of("volkswagen", "1.4L L4 - Gas", ["Engine Timing Belt", "Engine Timing Belt Tensioner"])
+    assert golf["timing"] == "belt" and golf["evidence"]["timing"][0] == "Engine Timing Belt"
+    assert build_of("toyota", "1.8L L4 - FULL HYBRID EV-GAS (FHEV)", [])["hybrid"]
+    assert build_of("tesla", "Electric", []) is None
+    assert "twin-turbo" in engines.built_words(build_of("porsche", "3.8L H6 - Gas", ["Turbocharger"]))

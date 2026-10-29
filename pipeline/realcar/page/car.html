@@ -1648,6 +1648,7 @@ function engineSpec(sp) {
 }
 const ESPEC = engineSpec(OWN && OWN.spec);
 const DIESEL = ESPEC.fuel === 'diesel';
+const BUILT = (OWN && OWN.construction) || {};          // engines.construction: valvetrain, timing, induction, hybrid
 // engine geometry, in metres, from its litres: each cylinder square (stroke = bore)
 const EG = (() => {
   const n = ESPEC.n || 4, per = (ESPEC.litres || 2) / Math.max(1, n) / 1000;
@@ -1674,6 +1675,7 @@ const EG = (() => {
   g.halfX = Math.max(...g.cyl.map(c => Math.abs(c.x))) + g.s * 0.62;
   return g;
 })();
+const PUSHROD = BUILT.valvetrain === 'pushrod' && EG.banks === 2;   // one camshaft in the V, pushrods up to rockers
 const RUN = { on: false, play: true, mode: 'run', speed: 0.26, strip: 0, theta: 0, group: null, sys: 'none',
   pistons: [], rods: [], crank: null, cams: [], valves: [], sprockets: [], plugs: [], flashes: [], save: null,
   banks: [], parts: {}, partSel: null, motor: null };
@@ -1690,15 +1692,18 @@ const SYSTEMS = [
 ];
 // the parts that come off, in the order a mechanic takes them: their catalogue systems and words
 const EPARTS = [
-  ['cover', 'Cam cover', 'Cylinder head', /valve cover|cam cover|rocker cover|grommet/i],
+  ['cover', PUSHROD ? 'Rocker covers' : 'Cam cover', 'Cylinder head', /valve cover|cam cover|rocker (arm )?cover|grommet/i],
   ['plugs', DIESEL ? 'Injectors and glow plugs' : 'Spark plugs and coils', DIESEL ? 'Fuel' : 'Ignition', DIESEL ? /injector|glow/i : /./],
+  ...(BUILT.induction === 'supercharged' ? [['supercharger', 'Supercharger', null, /supercharg|intercooler|charge air/i]] : []),
+  ...(BUILT.induction === 'turbo' ? [['turbo', BUILT.turbos === 2 ? 'Turbochargers' : 'Turbocharger', null, /turbo|wastegate|boost|intercooler|charge air/i]] : []),
   ['manifolds', 'Intake and exhaust manifolds', 'Air and intake', /manifold|plenum|runner|header|throttle body/i],
   ['chain', 'Timing chain', 'Timing', /./],
-  ['cams', 'Camshafts', 'Valvetrain', /camshaft|follower|rocker|lifter|tappet/i],
+  ['cams', PUSHROD ? 'Camshaft, lifters, pushrods and rockers' : 'Camshafts', 'Valvetrain', /camshaft|follower|rocker|lifter|tappet|push ?rod/i],
   ['head', 'Cylinder head and valves', 'Cylinder head', /cylinder head|head gasket|head bolt|valve/i],
   ['sump', 'Sump and oil pump', 'Lubrication', /oil pan|sump|oil pump|drain|pickup/i],
   ['pistons', 'Pistons and rods', 'Block and crank', /piston|connecting rod|rod bearing|wrist pin|piston pin/i],
   ['crank', 'Crankshaft', 'Block and crank', /crankshaft|main bearing|thrust washer|flywheel|flexplate|balancer|damper/i],
+  ...(BUILT.hybrid ? [['motor', 'Hybrid motor', null, /motor|inverter|hybrid|generator/i]] : []),
   ['block', 'Engine block', 'Block and crank', /engine block|cylinder block|core plug|liner|short block|long block/i],
 ];
 // an electric car's: the motor's parts, the catalogue's words for them in any system
@@ -1716,6 +1721,7 @@ function partName(key) {
   return q ? q[1] : key;
 }
 const PART_OFF = { cover: 0.24, plugs: 0.34, manifolds: 0.16, chain: 0.16, cams: 0.18, head: 0.12, sump: 0.12, pistons: 0.10, crank: 0.12, block: 0,
+  turbo: 0.2, supercharger: 0.22, motor: 0.18,
   case: 0.2, stator: 0.2, rotor: 0.2, gear: 0.16 };
 function emat(hex, m, ro, clip) {
   const mat = new THREE.MeshStandardMaterial({ color: hex, metalness: m, roughness: ro });
@@ -1808,7 +1814,7 @@ function makeRunEngine() {
       const cam = new THREE.Group(); cam.position.set(0, EG.camY, side * EG.vz);
       const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.01 * k, 0.01 * k, len, seg), mSteel); shaft.rotation.z = Math.PI / 2; shaft.position.x = mid; cam.add(shaft);
       for (const x of xs) { const lobe = new THREE.Mesh(new THREE.CylinderGeometry(0.016 * k, 0.016 * k, 0.016 * k, seg), mSteel); lobe.scale.y = 1.5; lobe.rotation.z = Math.PI / 2; lobe.position.x = x; cam.add(lobe); }
-      camsG.add(cam); RUN.cams.push(cam);
+      if (!PUSHROD) { camsG.add(cam); RUN.cams.push(cam); }
       const kind = side === inSide ? 'in' : 'ex';
       for (const c of cyls) {
         const v = new THREE.Group(); v.position.set(c.x, EG.deck + 0.032 * k, side * EG.vz);
@@ -1816,6 +1822,10 @@ function makeRunEngine() {
         const vh = new THREE.Mesh(new THREE.CylinderGeometry(0.018 * k, 0.012 * k, 0.008 * k, seg), mValves[kind]); vh.position.y = -0.036 * k; v.add(vh);
         const spring = new THREE.Mesh(new THREE.CylinderGeometry(0.013 * k, 0.013 * k, 0.03 * k, 12, 1, true), mSprings[kind]); spring.position.y = 0.014 * k; v.add(spring);
         headG.add(v); RUN.valves.push({ g: v, cyl: c.i - 1, kind, y0: v.position.y });
+        if (PUSHROD) {          // the rocker: from the pushrod, on the valley side, over to the valve's tip
+          const zr = inSide * EG.vz * 1.9, rk = new THREE.Mesh(new THREE.BoxGeometry(0.01 * k, 0.008 * k, Math.abs(zr - side * EG.vz) + 0.012 * k), mSteel);
+          rk.position.set(c.x + (kind === 'in' ? -0.012 : 0.012) * k, EG.deck + EG.headH + 0.004 * k, (zr + side * EG.vz) / 2); camsG.add(rk);
+        }
       }
     }
     for (const c of cyls) {
@@ -1840,10 +1850,45 @@ function makeRunEngine() {
   const blockG = partBox('block'); G.add(blockG);
   RUN.parts.block = { key: 'block', objs: [], k: 0, want: 0, fixed: true, meshes: blockParts };
 
-  // timing: a sprocket on the crank nose and on each cam nose, a chain loop round each bank's
+  // a pushrod V: one camshaft in the block, in the V above the crank; a lifter on each lobe and a pushrod up
+  // to its rocker on the head (the overhead cams are left out)
+  RUN.pushrods = []; RUN.spin = [];
+  const camYb = 0.72 * EG.bore;
+  if (PUSHROD) {
+    const pg = partBox('cams'), cam = new THREE.Group(); cam.position.set(0, camYb, 0);
+    const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.012 * k, 0.012 * k, EG.halfX * 2, seg), mSteel); shaft.rotation.z = Math.PI / 2; cam.add(shaft);
+    for (const c of EG.cyl) for (const dx of [-0.012, 0.012]) {
+      const lobe = new THREE.Mesh(new THREE.CylinderGeometry(0.019 * k, 0.019 * k, 0.012 * k, seg), mSteel); lobe.scale.y = 1.4; lobe.rotation.z = Math.PI / 2; lobe.position.x = c.x + dx * k; cam.add(lobe);
+    }
+    pg.add(cam); RUN.cams.push(cam);
+    const mRod = emat(0x9aa0a6, 0.9, 0.3);
+    for (const c of EG.cyl) {
+      const inSide = c.bank === 1 ? 1 : -1, cb = Math.cos(c.beta), sb = Math.sin(c.beta);
+      const world = (y, z) => new THREE.Vector3(0, y * cb - z * sb, y * sb + z * cb);
+      for (const [kind, dx] of [['in', -0.012], ['ex', 0.012]]) {
+        const top = world(EG.deck + EG.headH, inSide * EG.vz * 1.9).setX(c.x + dx * k);
+        const bot = new THREE.Vector3(c.x + dx * k, camYb, 0).add(new THREE.Vector3(0, cb, sb).multiplyScalar(0.03 * k));
+        const len = top.distanceTo(bot), axis = top.clone().sub(bot).normalize();
+        const rod = new THREE.Mesh(new THREE.CylinderGeometry(0.004 * k, 0.004 * k, len, 10), mRod);
+        rod.position.copy(top).add(bot).multiplyScalar(0.5); rod.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), axis); pg.add(rod);
+        const lifter = new THREE.Mesh(new THREE.CylinderGeometry(0.008 * k, 0.008 * k, 0.022 * k, 14), mSteel);
+        lifter.position.copy(bot); lifter.quaternion.copy(rod.quaternion); pg.add(lifter);
+        RUN.pushrods.push({ m: rod, l: lifter, base: rod.position.clone(), lbase: lifter.position.clone(), axis, cyl: c.i - 1, kind });
+      }
+    }
+    G.add(pg); regPart('cams', pg, new THREE.Vector3(0, 1, 0));
+  }
+
+  // timing: a sprocket on the crank nose and on each cam nose, a chain loop round each bank's (one short loop
+  // up to the block's camshaft on a pushrod engine)
   const chainG = partBox('chain'), nose = EG.halfX + 0.012;
   const sC = new THREE.Mesh(new THREE.CylinderGeometry(0.028 * k, 0.028 * k, 0.012, seg), mSprocket); sC.rotation.z = Math.PI / 2; sC.position.set(nose, 0, 0); chainG.add(sC); RUN.sprockets.push({ m: sC, ratio: 1 });
-  for (const B of RUN.banks) {
+  if (PUSHROD) {
+    const sc = new THREE.Mesh(new THREE.CylinderGeometry(0.05 * k, 0.05 * k, 0.012, seg), mSprocket); sc.rotation.z = Math.PI / 2; sc.position.set(nose, camYb, 0); chainG.add(sc); RUN.sprockets.push({ m: sc, ratio: 0.5 });
+    const pts = [new THREE.Vector3(nose, -0.03 * k, 0), new THREE.Vector3(nose, 0, 0.032 * k), new THREE.Vector3(nose, camYb, 0.054 * k),
+                 new THREE.Vector3(nose, camYb + 0.054 * k, 0), new THREE.Vector3(nose, camYb, -0.054 * k), new THREE.Vector3(nose, 0, -0.032 * k)];
+    chainG.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts, true), 60, 0.006 * k, 6, true), mChain));
+  } else for (const B of RUN.banks) {
     const beta = B.rotation.x, rot = (y, z) => new THREE.Vector3(nose, y * Math.cos(beta) - z * Math.sin(beta), y * Math.sin(beta) + z * Math.cos(beta));
     for (const side of [-1, 1]) {
       const p = rot(EG.camY, side * EG.vz);
@@ -1854,6 +1899,77 @@ function makeRunEngine() {
   }
   G.add(chainG); regPart('chain', chainG, new THREE.Vector3(1, 0, 0));
   RUN.manifolds = headParts.manifolds;
+  RUN.forced = { air: [], exhaust: [] };
+
+  // a turbocharger at the exhaust collector's end (one a bank on a V or flat six and up): the turbine (hot
+  // side) on the exhaust, the compressor (alloy) on one shaft, and the charge pipe over to the intake plenum
+  if (BUILT.induction === 'turbo') {
+    const mHot = emat(0x8a5a3c, 0.6, 0.45), mAlloy = emat(0xc9ccd0, 0.7, 0.3), mPipe = emat(0x3b6fb0, 0.3, 0.5);
+    RUN.banks.slice(0, BUILT.turbos === 2 ? 2 : 1).forEach((B, b) => {
+      const cyls = EG.cyl.filter(c => c.bank === b), xs = cyls.map(c => c.x);
+      const lo = Math.min(...xs) - EG.s * 0.62, hi = Math.max(...xs) + EG.s * 0.62;
+      const inSide = EG.banks > 1 && b === 1 ? 1 : -1, y = EG.deck + EG.headH * 0.8, zx = -inSide * 0.15 * k;
+      const tg = partBox('turbo'); tg.position.set(EG.banks === 1 ? hi + 0.05 * k : lo - 0.05 * k, y, zx);
+      // the shaft runs out from the bank (z): the turbine's housing on the exhaust, the compressor's beyond it
+      const hot = new THREE.Mesh(new THREE.TorusGeometry(0.03 * k, 0.016 * k, 12, seg), mHot); tg.add(hot);
+      const cold = new THREE.Mesh(new THREE.TorusGeometry(0.03 * k, 0.016 * k, 12, seg), mAlloy); cold.position.z = inSide * 0.05 * k; tg.add(cold);
+      const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.012 * k, 0.012 * k, 0.05 * k, 16), mAlloy); shaft.rotation.x = Math.PI / 2; shaft.position.z = inSide * 0.025 * k; tg.add(shaft);
+      const wheel = new THREE.Group(); wheel.position.z = inSide * 0.05 * k;
+      for (let f = 0; f < 8; f++) { const fin = new THREE.Mesh(new THREE.BoxGeometry(0.003 * k, 0.024 * k, 0.01 * k), mAlloy); fin.rotation.z = f * Math.PI / 4; wheel.add(fin); }
+      tg.add(wheel); RUN.spin.push({ m: wheel, ratio: 9, axis: 'z' });
+      const railEnd = new THREE.Vector3((EG.banks === 1 ? lo : hi) - tg.position.x, 0, inSide * 0.15 * k - zx);
+      const pipe = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(0, 0.02 * k, inSide * 0.06 * k),
+        new THREE.Vector3(railEnd.x * 0.25, EG.camY - y + 0.07 * k, inSide * 0.02 * k), new THREE.Vector3(railEnd.x * 0.75, EG.camY - y + 0.07 * k, railEnd.z * 0.8), railEnd]), 30, 0.014 * k, 10), mPipe);
+      tg.add(pipe);
+      B.add(tg); regPart('turbo', tg, new THREE.Vector3(0, 0.6, -inSide));
+      RUN.forced.exhaust.push(hot); RUN.forced.air.push(cold, pipe, wheel);
+    });
+  }
+  // a supercharger in the V's valley (on an inline engine, beside the head on its intake side): its rotors
+  // seen through the casing, driven by a belt off the crank
+  if (BUILT.induction === 'supercharged') {
+    const sg = partBox('supercharger'), mCase = emat(0xb8bcc2, 0.7, 0.35), mRotor = emat(0x6d7278, 0.9, 0.3), mBelt = emat(0x2b2e33, 0.2, 0.8);
+    mCase.transparent = true; mCase.opacity = 0.6; mCase.depthWrite = false;
+    // on top of the intake: the plenum rails' height in the V (a bank's, turned to its angle), and its own half-height above
+    const half = EG.bankDeg / 2 * Math.PI / 180, rail = (EG.deck + EG.headH * 0.8) * Math.cos(half) + 0.15 * k * Math.sin(half);
+    const L = EG.halfX * 1.5, top = EG.banks === 2 ? rail + 0.06 * k : EG.camY;
+    sg.position.set(0, EG.bankDeg >= 180 ? EG.r + 0.14 * k : top, EG.banks === 1 ? -0.2 * k : 0);
+    sg.add(new THREE.Mesh(new THREE.BoxGeometry(L, 0.08 * k, 0.15 * k), mCase));
+    for (const z of [-0.032, 0.032]) {
+      const r = new THREE.Group(); r.position.z = z * k;
+      for (let l = 0; l < 3; l++) { const lobe = new THREE.Mesh(new THREE.BoxGeometry(L * 0.94, 0.05 * k, 0.014 * k), mRotor); lobe.rotation.x = l * Math.PI / 3; r.add(lobe); }
+      sg.add(r); RUN.spin.push({ m: r, ratio: z > 0 ? 2.4 : -2.4, axis: 'x' });
+    }
+    const pul = new THREE.Mesh(new THREE.CylinderGeometry(0.03 * k, 0.03 * k, 0.014, seg), mRotor); pul.rotation.z = Math.PI / 2; pul.position.set(L / 2 + 0.03, 0, 0); sg.add(pul);
+    const beltPts = [new THREE.Vector3(L / 2 + 0.03, 0.03 * k, 0), new THREE.Vector3(L / 2 + 0.03, 0, 0.03 * k), new THREE.Vector3(nose + 0.012 - sg.position.x, -sg.position.y, 0.03 * k - sg.position.z),
+                     new THREE.Vector3(nose + 0.012 - sg.position.x, -sg.position.y - 0.03 * k, -sg.position.z), new THREE.Vector3(nose + 0.012 - sg.position.x, -sg.position.y, -0.03 * k - sg.position.z), new THREE.Vector3(L / 2 + 0.03, 0, -0.03 * k)];
+    sg.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(beltPts, true), 50, 0.005 * k, 6, true), mBelt));
+    G.add(sg); regPart('supercharger', sg, new THREE.Vector3(0, 1, 0));
+    RUN.forced.air.push(...sg.children.filter(m => m.isMesh));
+  }
+  // a hybrid: its motor between the engine and the gearbox, its rotor on the crank, an orange cable to the battery
+  if (BUILT.hybrid) {
+    const mg = partBox('motor'), R = 0.11 * k * (EG.banks > 1 ? 1.2 : 1), x = -EG.halfX - 0.07;
+    const caseM = emat(0x767c85, 0.55, 0.5); caseM.transparent = true; caseM.opacity = 0.35; caseM.depthWrite = false;
+    const housing = new THREE.Mesh(new THREE.CylinderGeometry(R, R, 0.07, seg, 1, true), caseM); housing.rotation.z = Math.PI / 2; mg.add(housing);
+    const stator = new THREE.Mesh(new THREE.TorusGeometry(R * 0.8, R * 0.14, 12, seg), emat(0xb87333, 0.8, 0.35)); stator.rotation.y = Math.PI / 2; mg.add(stator);
+    const rotor = new THREE.Group(), disc = new THREE.Mesh(new THREE.CylinderGeometry(R * 0.58, R * 0.58, 0.04, seg), emat(0x55595e, 0.85, 0.35)); disc.rotation.z = Math.PI / 2; rotor.add(disc);
+    for (let m = 0; m < 8; m++) { const mag = new THREE.Mesh(new THREE.BoxGeometry(0.042, R * 0.16, R * 0.1), emat(m % 2 ? 0xc8102e : 0x1f5fbf, 0.3, 0.5)); mag.position.set(0, Math.cos(m * Math.PI / 4) * R * 0.5, Math.sin(m * Math.PI / 4) * R * 0.5); mag.rotation.x = -m * Math.PI / 4; rotor.add(mag); }
+    mg.add(rotor); RUN.spin.push({ m: rotor, ratio: 1, axis: 'x' });
+    mg.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(0, R, 0), new THREE.Vector3(-0.04, R + 0.06, 0.02), new THREE.Vector3(-0.16, R + 0.08, 0.05)]), 20, 0.008 * k, 8), emat(0xf26a1b, 0.2, 0.6)));
+    mg.position.set(x, 0, 0); G.add(mg); regPart('motor', mg, new THREE.Vector3(-1, 0, 0));
+  }
+  // balance shafts: two, under the crank of an inline engine, turning the other way at twice its speed
+  if (BUILT.balance_shafts && EG.banks === 1) {
+    const bg = partBox('sump');
+    for (const z of [-0.034, 0.034]) {
+      const sh = new THREE.Group(); sh.position.set(0, -EG.r * 1.2, z * k);
+      const rod = new THREE.Mesh(new THREE.CylinderGeometry(0.008 * k, 0.008 * k, EG.halfX * 1.6, 16), mSteel); rod.rotation.z = Math.PI / 2; sh.add(rod);
+      for (const xe of [-EG.halfX * 0.6, EG.halfX * 0.6]) { const w = new THREE.Mesh(new THREE.BoxGeometry(0.03 * k, 0.018 * k, 0.012 * k), mSteel); w.position.set(xe, 0.01 * k, 0); sh.add(w); }
+      bg.add(sh); RUN.spin.push({ m: sh, ratio: z > 0 ? 2 : -2, axis: 'x' });
+    }
+    G.add(bg); regPart('sump', bg, new THREE.Vector3(0, -1, 0));
+  }
 
   // the parts each "system" lights up
   RUN.sysTag = { air: [], fuel: [], spark: [], exhaust: [], cooling: [], oil: [] };
@@ -1862,6 +1978,7 @@ function makeRunEngine() {
   RUN.sysTag.oil.push(crank, sumpG); RUN.cams.forEach(c => RUN.sysTag.oil.push(c));
   blockParts.forEach(m => RUN.sysTag.cooling.push(m));
   RUN.manifolds.forEach(g => g.children.forEach(m => { if (m.userData.sys) RUN.sysTag[m.userData.sys].push(m); }));
+  RUN.sysTag.air.push(...RUN.forced.air); RUN.sysTag.exhaust.push(...RUN.forced.exhaust);
   RUN.sysTag.fuel = RUN.sysTag.fuel.concat(RUN.sysTag.air);
   if (DIESEL) RUN.sysTag.spark = RUN.plugs.slice();
 
@@ -1946,6 +2063,15 @@ function runUpdate(dt) {
   RUN.crank.rotation.x = th;
   RUN.cams.forEach(c => { c.rotation.x = th / 2; });
   RUN.sprockets.forEach(s => { s.m.rotation.x = th * s.ratio; });
+  RUN.spin.forEach(s => { s.m.rotation[s.axis] = th * s.ratio; });       // turbo wheels, supercharger rotors, the hybrid's rotor
+  RUN.pushrods.forEach(p => {          // each rides its lobe: up as its valve opens
+    const { phi } = strokeOf(p.cyl, th);
+    let lift = 0;
+    if (p.kind === 'in' && phi < 200) lift = Math.sin(Math.PI * Math.min(phi, 180) / 180);
+    if (p.kind === 'ex' && phi > 520) lift = Math.sin(Math.PI * (Math.min(phi, 720) - 540) / 180);
+    const d = Math.max(0, lift) * 0.008 * EG.k;
+    p.m.position.copy(p.base).addScaledVector(p.axis, d); p.l.position.copy(p.lbase).addScaledVector(p.axis, d);
+  });
   // valves: open on their stroke (intake 0–180, exhaust 540–720), cam-driven lift
   RUN.valves.forEach(v => {
     const { phi } = strokeOf(v.cyl, th);
@@ -2041,7 +2167,7 @@ function catalogueFor(key) {
   const q = (ESPEC.electric ? MPARTS : EPARTS).find(p => p[0] === key);
   const own = OWN && OWN.parts;
   if (!q || !own) return [];
-  const sys = ESPEC.electric ? Object.keys(own) : key === 'manifolds' ? ['Air and intake', 'Exhaust'] : key === 'head' ? ['Cylinder head', 'Valvetrain'] : [q[2]];
+  const sys = ESPEC.electric || !q[2] ? Object.keys(own) : key === 'manifolds' ? ['Air and intake', 'Exhaust'] : key === 'head' ? ['Cylinder head', 'Valvetrain'] : [q[2]];
   return sys.flatMap(s => own[s] || []).filter(([name]) => q[3].test(name)).slice(0, 10);
 }
 function runPartSelect(key) {
@@ -2085,7 +2211,7 @@ function runSetup() {
     const shape = EG.layout === 'inline' ? `${EG.n}-cylinder inline` : EG.layout === 'flat' ? `flat-${EG.n}` : `V${EG.n}`;
     $('runHead').textContent = own ? 'See its engine run' : 'See how an engine runs';
     if (note) note.textContent = (own
-      ? `This car’s engine, from your parts catalogue: a ${own.words}. Modelled by the machine to that layout and size (${(ESPEC.litres || 2).toFixed(1)} litres, ${Math.round(EG.bore * 1000)} mm bores) and cut open so you can watch it work. Each part comes off and goes back; tap one to see the catalogue’s parts for it.`
+      ? `This car’s engine, from your parts catalogue: a ${own.words}${own.built_words ? `, ${own.built_words}` : ''}. Modelled by the machine to that layout, size and build (${(ESPEC.litres || 2).toFixed(1)} litres, ${Math.round(EG.bore * 1000)} mm bores) and cut open so you can watch it work. Each part comes off and goes back; tap one to see the catalogue’s parts for it. Its castings are drawn, not this engine’s own: the catalogue lists its parts, not their shapes.`
       : `A ${shape} petrol engine, cut open and modelled by the machine so you can watch it work. This car is not in your parts catalogue, so this is a teaching model of how an engine runs, not this car’s own.`)
       + (ESPEC.note ? ' ' + ESPEC.note : '');
   }
@@ -2117,6 +2243,21 @@ function renderOwnParts(own) {
   box.hidden = false;
   const m = own.matched || {};
   $('ownPartsNote').textContent = `${own.part_count} parts for the ${own.words}, from your catalogue (${(m.models || []).slice(0, 3).join(', ')}${m.year ? ', ' + m.year : m.years ? ', ' + m.years : ''}). The most fitted first, with their OEM numbers.`;
+  const c = own.construction;
+  if (c) {               // how it is built, and what in the catalogue (or which rule) says so
+    const say = { valvetrain: c.valvetrain === 'pushrod' ? 'Pushrod valves: one camshaft in the block' : 'Overhead camshafts',
+      timing: c.timing && `Timing ${c.timing}`, induction: c.induction && (c.induction === 'turbo' ? (c.turbos === 2 ? 'Twin turbochargers' : 'Turbocharger') : 'Supercharger'),
+      balance_shafts: c.balance_shafts && 'Balance shafts', hybrid: c.hybrid && 'Hybrid: a motor between engine and gearbox' };
+    const d = el('details'), sm = el('summary', 'How it is built'), ul = el('ul'); ul.className = 'cat';
+    for (const [k, v] of Object.entries(say)) {
+      if (!v) continue;
+      const li = el('li'), ev = (c.evidence || {})[k];
+      li.append(el('span', v), ' ', el('code', ev ? ev.join(', ') : k === 'hybrid' ? 'its engine’s words' : ''));
+      ul.append(li);
+    }
+    if (!c.induction) { const li = el('li'); li.append(el('span', 'No turbo or supercharger part listed'), ' ', el('code', 'drawn without')); ul.append(li); }
+    d.append(sm, ul); d.open = true; $('ownPartsList').append(d);
+  }
   for (const [sys, rows] of Object.entries(own.parts)) {
     const d = el('details'), s = el('summary', `${sys} (${rows.length})`), ul = el('ul'); ul.className = 'cat';
     for (const [name, oem] of rows) { const li = el('li'); li.append(el('span', name), ' ', el('code', oem || '')); ul.append(li); }

@@ -291,7 +291,8 @@ NOT_ELECTRIC = {"Timing", "Valvetrain", "Cylinder head", "Block and crank", "Ign
 def own_parts(idx, mk, ms, e, years, electric=False):
     """The parts the catalogue names for engine E in models MS (of make MK) in YEARS (first, last): by system,
     [name, OEM numbers, years named], one row a name (its OEM numbers, the most used first: a switch in 14
-    paints is one switch), the most named first. With the part count and how many rows were left out."""
+    paints is one switch), the most named first. With the part count, how many rows were left out, and every
+    part name kept (construction() reads the engine's build from them)."""
     rows = collections.defaultdict(dict)
     for m in ms:
         for s, ps in ((idx.get("parts") or {}).get(f"{mk}|{m}|{e}") or {}).items():
@@ -311,7 +312,64 @@ def own_parts(idx, mk, ms, e, years, electric=False):
         named = sorted(by_name.items(), key=lambda x: -max(n for _, n in x[1]))[:PARTS_A_SYSTEM]
         out[s] = [[nm, ", ".join(o for o, _ in v[:2] if o) + (f" +{len(v) - 2} more" if len(v) > 2 else ""),
                    max(n for _, n in v)] for nm, v in named]
-    return out, sum(len(v) for s, v in rows.items() if not (electric and s in NOT_ELECTRIC)), left_out
+    names = collections.Counter(nm for s, v in rows.items() if not (electric and s in NOT_ELECTRIC) for nm, _ in v)
+    return out, sum(len(v) for s, v in rows.items() if not (electric and s in NOT_ELECTRIC)), left_out, names
+
+
+# makes whose V8s (and GM's 4.3 V6) carry one camshaft in the block, pushing the valves through pushrods and
+# rockers: the catalogue does not name the pushrods (GM's lists "Engine Camshaft" and "Valve Rocker Arm Cover"),
+# so it is read from what the engine is. Their overhead-cam V8s are the exceptions (litres): Cadillac's
+# Northstar and Blackwing, the Corvette Z06's flat-plane 5.5, Chrysler's 4.7
+PUSHROD = {"chevrolet": "gm", "gmc": "gm", "cadillac": "gm", "buick": "gm", "pontiac": "gm", "hummer": "gm",
+           "dodge": "chrysler", "ram": "chrysler", "chrysler": "chrysler", "jeep": "chrysler"}
+OHC_V8 = {"gm": {4.2, 4.4, 4.6, 5.5}, "chrysler": {4.7}}
+TURBO = re.compile(r"\bturbo(?:charger)?\b|wastegate", re.I)
+SUPER = re.compile(r"supercharg", re.I)
+
+
+def construction(names, sp, make):
+    """How the engine is built, from its part NAMES (own_parts') and its spec: valvetrain (pushrod or overhead
+    cam), timing (belt or chain), induction (turbo or supercharged, and turbos: how many; None when the catalogue
+    lists neither, which is not the same as none: it lists no turbo part for some turbo engines), balance shafts
+    and hybrid (a motor in the driveline). Each with the parts that say so (evidence), or the rule (PUSHROD)."""
+    if not sp or sp.get("electric"):
+        return None
+    has = lambda rx: sorted(n for n in names if rx.search(n))  # noqa: E731
+    out, ev = {}, {}
+    fam = PUSHROD.get(make)
+    L = round(sp.get("litres") or 0, 1)
+    pushrod = bool(fam) and ((sp["layout"] == "v" and sp["cylinders"] == 8 and L not in OHC_V8[fam] and
+                              (fam == "gm" or L >= 5.2)) or
+                             (fam == "gm" and sp["layout"] == "v" and sp["cylinders"] == 6 and L == 4.3))
+    out["valvetrain"] = "pushrod" if pushrod else "overhead cam"
+    if pushrod:
+        ev["valvetrain"] = [f"{make.title()}'s {L}-litre V{sp['cylinders']}: a pushrod engine"]
+    belt, chain = has(re.compile(r"timing belt", re.I)), has(re.compile(r"timing chain", re.I))
+    out["timing"] = "belt" if belt and not chain else "chain" if chain or pushrod else None
+    ev["timing"] = (belt if out["timing"] == "belt" else chain)[:3]
+    t, sc = has(TURBO), has(SUPER)
+    out["induction"] = "turbo" if t else "supercharged" if sc else None
+    if t:                 # a V or flat six and up: a turbo a bank
+        out["turbos"] = 2 if sp["layout"] in ("v", "flat") and sp["cylinders"] >= 6 else 1
+    ev["induction"] = (t or sc)[:3]
+    bs = has(re.compile(r"balance shaft", re.I))
+    out["balance_shafts"] = bool(bs)
+    if bs:
+        ev["balance_shafts"] = bs[:2]
+    out["hybrid"] = sp.get("fuel") in ("hybrid", "plug-in hybrid")
+    out["evidence"] = {k: v for k, v in ev.items() if v}
+    return out
+
+
+def built_words(c):
+    """construction()'s answer in words: "twin-turbo, overhead camshafts, timing chain" (a hybrid's is in its
+    engine's words already: describe's "petrol hybrid")."""
+    if not c:
+        return ""
+    w = [{"turbo": "twin-turbo" if c.get("turbos") == 2 else "turbo", "supercharged": "supercharged"}.get(c["induction"]),
+         "pushrod valves (one camshaft in the block)" if c["valvetrain"] == "pushrod" else "overhead camshafts",
+         f"timing {c['timing']}" if c["timing"] else None, "balance shafts" if c["balance_shafts"] else None]
+    return ", ".join(x for x in w if x)
 
 
 def look(make, model, year=None, idx=None, trim=None):
@@ -364,8 +422,10 @@ def look(make, model, year=None, idx=None, trim=None):
     sp = info.get("spec") or spec(e)
     span = (int(want), int(want)) if want and want.isdigit() else (int(recent[0]), int(recent[-1])) \
         if recent and recent[0].isdigit() else None
-    parts, count, left_out = own_parts(idx, mk, ms, e, span, bool(sp and sp.get("electric")))
-    return {"engine": e, "spec": sp, "words": info.get("words") or describe(sp),
+    parts, count, left_out, names = own_parts(idx, mk, ms, e, span, bool(sp and sp.get("electric")))
+    built = construction(names, sp, mk)
+    return {"engine": e, "spec": sp, "words": info.get("words") or describe(sp), "construction": built,
+            "built_words": built_words(built),
             "others": [{"engine": o, "words": describe(spec(o))} for o in ranked[1:6]],
             "parts": parts, "part_count": count, "left_out": left_out,
             "matched": {"make": mk, "models": ms[:4], "models_n": len(ms), "year": want, "asked_year": year,

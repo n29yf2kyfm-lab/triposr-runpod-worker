@@ -205,7 +205,21 @@ engine's words ("3.0L H6 - Gas", "L84 5.3L Petrol V8", "BATTERY EV") give
 the layout, cylinders, litres and fuel. Its parts are that model's own for that
 year: "3.0L L6 - Gas" is the same words on an M3 and an X5, not the same parts.
 An electric car's list leaves out the fuel, ignition and timing rows a
-catalogue sometimes files under it. The index stays in the machine's home, out
+catalogue sometimes files under it.
+
+How the engine is built is read from those parts too (`construction`), and the
+running engine is drawn to it: a timing belt or chain; a turbocharger at the
+exhaust (one a bank on a V or flat six and up) with its charge pipe to the
+intake, or a supercharger on top of the intake, belted to the crank, its rotors
+seen through the casing; balance shafts under an inline engine's crank; a hybrid's
+motor between engine and gearbox. Each comes off like the other parts, and the
+Engine tab's "How it is built" lists the catalogue parts that say so. Two limits:
+the catalogue does not name pushrods, so GM's and Chrysler's V8s (and GM's 4.3
+V6) are drawn as the pushrod engines they are by rule (`PUSHROD`), their
+overhead-cam V8s left out of it; and it lists no turbo part for some turbo
+engines (a 911 Carrera's 3.0, a Golf's 1.8 TSI), which are then drawn without one,
+and the page says none is listed rather than calling the engine unblown. The
+castings are drawn, not the engine's own: the catalogue gives parts, not shapes. The index stays in the machine's home, out
 of git (the catalogue is its owner's); its pictures are not read or fetched.
 With no index, or a car the catalogue does not have, the page shows the
 teaching engine and says so.
