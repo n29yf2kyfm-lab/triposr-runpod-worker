@@ -36,11 +36,11 @@ for mod, pkg in (("numpy", "numpy"), ("PIL", "pillow"), ("onnxruntime", "onnxrun
 import numpy as np
 from PIL import Image
 
-COMMIT = "a5d22269932d085f6ce16dd97adaf37b70cb9b36"
+COMMIT = "1a4c6445921442a4f8cc717f9245c5f0cf978c2f"
 REPO = f"https://raw.githubusercontent.com/n29yf2kyfm-lab/triposr-runpod-worker/{COMMIT}/pipeline/realcar/ai/"
 FILES = {"vision.py": "5029ec0b2214a6abd7a5d0c2026fff040cf4aa090e0809a8d74404ac39d88416",
-         "heads.py": "6f7f1c2ed62dea24b25eaaa55db753d8166028700f80534fb1a96a0edb89d39e",
-         "heads.json": "e986206257e6d212f42cda45c4c853d167dc382c164656a4d71fa0c8a73be533",
+         "heads.py": "8cadf61b88ad5d524f6f196e74639d2f6cb696a826c314955f3947c7deb1af0f",
+         "heads.json": "52a8ad3120205bbaa6290971f87092f5894dda9417a1b7f6a0a533f8f58da2f6",
          "train_pictures.json": "6b05cd55cb38623cb0dff69f5fe59d037614016d77dcadea99be5563dc0aad91"}
 UA = {"User-Agent": "vehicle-ai-try-it/2.0 (https://github.com/n29yf2kyfm-lab/triposr-runpod-worker)"}
 HERE = os.path.abspath("vehicle_ai_try")

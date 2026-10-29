@@ -170,7 +170,17 @@ the one it prints), and then:
 The mirror is not a check: the side reading averages a picture with its mirror,
 so a mirrored picture always reads the other way.
 
-Its run here (29 October, the model that tells a vehicle from none, a new Python
+Its run here (29 October, the colour head with SigLIP's words, pinned to that
+commit): no test photo within 61 bits of a training picture; kind 29 of 29, side
+29 of 29, colour 27 of 29 strictly and leniently (it was 20 and 22; the misses: a
+silver Boxster read grey, a white Mini Coupe pearl-white); the vehicle photos read
+as a vehicle 29 of 29, the 16 photos of none as none 16 of 16, random noise as
+none. Red and blue swapped, the paint moved with it on 8 of the 9 coloured cars
+(it was 4: a champagne S-Class swapped still reads silver); turned grey, the
+colour went on 9 of 9. With random weights, ten draws averaged: kind 12.4, side
+13.6, colour 0.5, vehicle 11.6 of 29 and none 8.8 of 16.
+
+The run before (29 October, the model that tells a vehicle from none, a new Python
 environment): no test photo within 61 bits of a training picture; kind 29 of 29,
 side 29 of 29, colour 20 of 29 strictly and 22 leniently, as before; the 29 vehicle
 photos read as a vehicle 29 of 29, the 16 photos of none as none 16 of 16 (always
