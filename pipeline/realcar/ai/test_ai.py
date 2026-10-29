@@ -113,6 +113,23 @@ def test_a_head_gives_probabilities_as_sklearn_does():
         assert np.allclose(h2.proba(X), m.predict_proba(X), atol=1e-4)
 
 
+def test_a_colour_head_fitted_with_the_words_answers_the_same_folded():
+    # train.py fits the colour head with each picture's likeness to the families' words beside its numbers,
+    # and writes it folded into the embedding's weights: the phone page and predict.py read the same numbers
+    import words
+    rng = np.random.default_rng(1)
+    E = rng.normal(size=(90, words.WIDTH + 40))
+    hist = rng.random((90, 12))
+    T = rng.normal(size=(6, words.WIDTH))
+    T /= np.linalg.norm(T, axis=1, keepdims=True)
+    X = np.hstack([E, hist])
+    y = [["red", "blue", "silver"][i % 3] for i in range(90)]
+    fitted = H.Head.fit(np.hstack([X, words.likeness(X, T, 30.0)]), y, C=10)
+    folded = H.fold_words(fitted, T, 30.0)
+    assert folded.W.shape == (3, X.shape[1])
+    assert np.allclose(folded.proba(X), fitted.proba(np.hstack([X, words.likeness(X, T, 30.0)])), atol=1e-5)
+
+
 def test_a_mirrored_picture_reads_the_other_side():
     rng = np.random.default_rng(1)
     h = H.Head(["left", "right"], rng.normal(size=(1, 8)), [0.3])

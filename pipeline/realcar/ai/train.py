@@ -30,6 +30,7 @@ sys.path.insert(0, HERE)
 import dataset  # noqa: E402
 import heads as H  # noqa: E402
 import vision  # noqa: E402
+import words  # noqa: E402
 
 paths = dataset.paths
 FLIP = {"left": "right", "right": "left"}
@@ -51,6 +52,10 @@ SURE_RIGHT = 0.99
 # a photo from outside the run (--extra) counts this much of one of the run's: its kind and coarse colour are
 # a person's (Commons' categories), its fine family the model's own guess within that colour
 EXTRA_WEIGHT = 0.5
+# the colour head also reads each picture's likeness to every family's words (words.py), this loud against the
+# embedding and histogram: the run's photos read 74.8% right held out without them, 74.4% at 3, 78.1% at 10,
+# 79.6% at 30 (picked on those same held-out scores; 100 took three times as long to fit and was not finished)
+WORDS_WEIGHT = 30.0
 
 
 def r3(x):
@@ -170,13 +175,15 @@ def pseudo_label(hs, feat, extras):
     return out
 
 
-def fit_all(its, feat, rng, extras=()):
+def fit_all(its, feat, rng, extras=(), T=None):
     """The heads, trained on these vehicles; the colour and kind heads also on EXTRAS (photos from outside
     the run, at EXTRA_WEIGHT each), their fine colour first guessed by heads trained on the run alone. With
     pictures of no vehicle among the extras (kind "none": extra/none.py), the vehicle head too: every other
-    picture is a vehicle."""
+    picture is a vehicle. With T (words.directions, the families' words), the colour head is fitted with each
+    picture's likeness to them beside its numbers, and written folded (heads.fold_words): it reads the same
+    numbers as one without."""
     if extras:
-        extras = pseudo_label(fit_all(its, feat, rng), feat, extras)
+        extras = pseudo_label(fit_all(its, feat, rng, T=T), feat, extras)
     col = [(it["photo"], it["colour"], 1.0) for it in its if it.get("colour")]
     col += [(it["build"], it["build_colour"], 1.0) for it in its if it.get("build_colour")]
     col += [(it["photo"], it["colour"], EXTRA_WEIGHT) for it in extras if it.get("colour")]
@@ -191,15 +198,18 @@ def fit_all(its, feat, rng, extras=()):
         if n < 10:
             raise SystemExit(f"train: {n} examples for the {what} head: too few to train it (check $F1K_HOME)")
     Xc = np.hstack([stack(feat, [f for f, _, _ in col], 0), stack(feat, [f for f, _, _ in col], 2)])
+    if T is not None:
+        Xc = np.hstack([Xc, words.likeness(Xc, T, WORDS_WEIGHT)])
     Xs = np.vstack([stack(feat, [f for f, _ in sd], 0), stack(feat, [f for f, _ in sd], 1)])
     ys = [s for _, s in sd] + [FLIP[s] for _, s in sd]
     vehicle = {}
     if any(v == "none" for _, v in vd):
         vehicle["vehicle"] = H.Head.fit(stack(feat, [f for f, _ in vd], 0), [v for _, v in vd], C=C["vehicle"],
                                         class_weight="balanced")
+    colour = H.Head.fit(Xc, [c for _, c, _ in col], C=C["colour"], sample_weight=np.array([w for _, _, w in col]))
     return {
         **vehicle,
-        "colour": H.Head.fit(Xc, [c for _, c, _ in col], C=C["colour"], sample_weight=np.array([w for _, _, w in col])),
+        "colour": colour if T is None else H.fold_words(colour, T, WORDS_WEIGHT),
         "side": H.Head.fit(Xs, ys, C=C["side"]),
         "kind": H.Head.fit(stack(feat, [f for f, _, _ in kd], 0), [k for _, k, _ in kd], C=C["kind"], class_weight="balanced",
                            sample_weight=np.array([w for _, _, w in kd])),
@@ -207,14 +217,14 @@ def fit_all(its, feat, rng, extras=()):
     }
 
 
-def held_out(its, feat, fold_of, extras=()):
+def held_out(its, feat, fold_of, extras=(), T=None):
     """Every picture answered, and every build matched, by heads trained without its vehicle's fold
     (the extra photos too: answered as "extra", by heads trained on the other folds' extras)."""
     answers, scored, pairs_ = [], [], []
     for r in range(FOLDS):
         fold = [it for it in its if fold_of[it["key"]] == r]
         hs = fit_all([it for it in its if fold_of[it["key"]] != r], feat, np.random.default_rng(r),
-                     [it for it in extras if fold_of[it["key"]] != r])
+                     [it for it in extras if fold_of[it["key"]] != r], T)
         for it in fold:
             for src in ("photo", "build"):
                 if it.get(src):
@@ -402,7 +412,9 @@ def main():
         feat = featurise(files + [it["photo"] for it in extras], enc, a.cache, enc_sha)
     looks = {it["key"]: vision.dhash(vision.load(it["photo"])) for it in its + extras}
     fold_of = dataset.folds(its + extras, FOLDS, looks)
-    answers, scored, pairs_ = held_out(its, feat, fold_of, extras)
+    # the families' words, where the encoder's first numbers are SigLIP's (the words' own space)
+    T = words.directions(list(dataset.FAMILY)) if encoders[0]["name"] in words.SPACE else None
+    answers, scored, pairs_ = held_out(its, feat, fold_of, extras, T)
     test, th = scores(answers, fold_of)
     pm = [float(hs["match"].proba(H.pair(feat[it["photo"]][0], feat[it["build"]][0]))[0, 1]) for it, hs in scored]
     # the match's threshold: one in ten builds of the photo's own model (not a stand-in, no shape fault) below it
@@ -445,7 +457,7 @@ def main():
         second[it["key"]] = {**v, "photo_sha": paths.sha(it["photo"]), "build_sha": paths.sha(it["build"]),
                              "heads": trained, "by": "heads trained without this vehicle",
                              "reviewers": it.get("verdict")}
-    final = fit_all(its, feat, np.random.default_rng(0), extras)
+    final = fit_all(its, feat, np.random.default_rng(0), extras, T)
     card = {
         "trained": trained, "encoder": "+".join(e["file"] for e in encoders), "encoder_sha256": enc_sha,
         "encoders": encoders,
@@ -460,9 +472,13 @@ def main():
                      "extra_kinds": collections.Counter(it["kind"] for it in extras).most_common()},
         "held_out_scores": test, "reviewers_wrong_shape_builds": faults,
         "paint": dataset.FAMILY, "thresholds": th,
+        "colour_words": None if T is None else {"model": words.TEXT["siglip-b16-text.onnx"][0],
+                                                "weight": WORDS_WEIGHT, "templates": words.TEMPLATES,
+                                                "how": "fitted with the likeness to each family's words, folded "
+                                                       "into the embedding's weights (heads.fold_words)"},
         "note": f"Scores are held out: every vehicle answered by heads trained on the other {FOLDS - 1} of "
                 f"{FOLDS} folds. The heads written were then trained on all. Some settings (C, REAL_WRONG, "
-                f"SURE_RIGHT) were picked after looking at these same held-out scores: they may flatter "
+                f"SURE_RIGHT, WORDS_WEIGHT) were picked after looking at these same held-out scores: they may flatter "
                 f"them a little.",
     }
     H.save(a.out, final, card)

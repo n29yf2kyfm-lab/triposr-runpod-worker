@@ -8,7 +8,9 @@ titles name a vehicle and its colour, and from 1,905 pictures of no vehicle
 (1,684 Flickr photos of landscapes, animals, food, rooms, people; 221 drawn:
 noise, plain colours), on top of two image models: SigLIP (Google's, trained on
 10 billion captioned pictures) and DINOv2 (Meta's, trained without captions to
-tell pictures apart). It answers the review agents' questions, and one more:
+tell pictures apart). The colour head also reads how near a picture is to
+SigLIP's own reading of each paint's words ("a photo of a silver car",
+`words.py`). It answers the review agents' questions, and one more:
 
 | Question | Of | Answers |
 |---|---|---|
@@ -36,8 +38,8 @@ commonest answer would score:
 | | 722 photos of cars and vans | 97.6% | 81.7% (car) | |
 | | 1,776 Flickr photos | 94.8% | 89.1% (car) | strangers' pictures, of every angle and light |
 | side | 711 photos | 100% | 54.0% (right) | not one miss; 100% on the builds too |
-| colour | 722 photos | 74.8% | 28.7% (white) | 88.6% its family or the next shade (always white: 49.6%); 90.9% in its top 3 |
-| | 711 builds | 90.7% | 28.3% (white) | 95.1% its family or the next shade |
+| colour | 722 photos | 79.4% | 28.7% (white) | 91.6% its family or the next shade (always white: 49.6%); 95.4% in its top 3 |
+| | 711 builds | 93.0% | 28.3% (white) | 97.3% its family or the next shade |
 | match | 650 builds with their own photo, 3,555 with other vehicles' | 0.95 | 0.50 | the chance a build scores higher with its own photo than with another vehicle's (AUC; 0.5 is a coin, 1 is never wrong) |
 | vehicle | 1,684 photos of no vehicle | 99.9% none | 0% (always "a vehicle") | 2 missed: a family, a sunset; the 221 drawn pictures all none |
 | | 1,647 run photos and builds | 100% a vehicle | | and 98.0% of the 1,776 Flickr vehicle photos (31 cars read as none) |
@@ -61,8 +63,11 @@ list's classes instead, kind is 94%: the difference is the list, not the model.
 
 **Sure.** Each head's threshold is the lowest `p` from which photos were right
 99 times in 100, held out; set on one half of the vehicles and tried on the
-other, read the 99 as about 98. Some settings (the heads' `C`, `REAL_WRONG`,
-`SURE_RIGHT`) were picked after looking at held-out scores: they may flatter
+other, read the 99 as about 98. Colour is now that sure on 56% of photos (it was
+36%), but set on one half and tried on the other it holds on one half (97.7%
+right on 58% of photos) and on the other no threshold reaches 99 in 100: read
+its `sure` with care. Some settings (the heads' `C`, `REAL_WRONG`, `SURE_RIGHT`,
+`WORDS_WEIGHT`) were picked after looking at held-out scores: they may flatter
 them a little.
 
 The match against what the run knows was wrong, beside the encoders untrained
@@ -122,6 +127,23 @@ Later the same day: the vehicle head (pictures of no vehicle, `extra/none.py`:
 Flickr photos by topic, each held to CLIP against vehicle prompts, and drawn
 noise), and the stand-ins' own line for the shape check (see above). Neither
 moved the other heads' scores.
+
+In the evening, colour (74.8% of photos right, held out). Tried on the same
+folds, and no better: a smaller or larger `C` (73.6%, 73.0%), standardised
+numbers (74.8%), paint statistics of the picture's middle (72.0%), the mirror's
+reading averaged in (73.1%) or trained on (74.4%), 1,106 more Flickr photos
+naming one colour and a make (74.7%), and the run's coloured photos and builds
+with their paint's hue turned, to teach it to follow the paint (72.2%). What
+worked: SigLIP read the run's photos' colour from words alone, untrained, 62%
+right (86% to the next shade), so its words for each family are a direction in
+the pictures' own space that thousands of captioned pictures set. Given each
+picture's likeness to them beside its numbers, the head scores 74.4% at weight
+3, 78.1% at 10 and 79.6% at 30 (trained in: 79.4%), on both halves of the
+vehicles, and the paint moves with it more: with red and blue swapped, held out,
+a coloured car's colour moved to the swapped paint's group on 91% of 215 photos
+(83% of 199 before); turned grey, the colour went on 97% (99.5% before). The
+head is written folded: the words' weights become the embedding's, so
+`heads.json`, `predict.py` and the phone page read the same numbers as before.
 
 ## Try it yourself
 
@@ -289,7 +311,8 @@ After a review round (new labels, new verdicts, rebuilt builds):
 
 reads every label in `$F1K_HOME` (`dataset.py` says which; `kind_by_eye.json`
 corrects the list's class where the photo shows the other kind) and every
-picture (about 20 minutes on 4 CPUs the first time; kept in a cache by encoder
+picture (about 20 minutes on 4 CPUs the first time, and SigLIP's text half, 110 MB,
+fetched once and pinned, for the colour words; kept in a cache by encoder
 and feature version, so later runs read only new pictures), answers each fold
 with heads trained on the others, sets the thresholds from those answers,
 writes them as the run's second opinion, then trains the heads on all and
@@ -310,12 +333,12 @@ compare. A verdict is used only on the build and photo it was made on.
 - **It learned one run**: 936 vehicles, labelled by agents with gold checks, and
   Flickr photos labelled by their photographers' words. A label is sometimes
   wrong, so is a score.
-- **It does not know a vehicle from no vehicle.** A wheel close-up or an interior
-  still gets a kind, a side and a colour.
-- **Colour** is the weak point, at 72%: silver against white and grey against
-  dark grey are its usual slips, and five families have four examples or fewer
-  (purple, olive, bronze, copper, beige), so it seldom answers them. In a photo
-  these are often a toss-up for a person too.
+- **Part of a vehicle is a vehicle.** An engine bay, a wheel close-up or an
+  interior reads as a vehicle, and still gets a kind, a side and a colour.
+- **Colour** is still the weakest answer, at 79%: silver against white and grey
+  against dark grey or silver are its usual slips, and five families have four
+  examples or fewer (purple, olive, bronze, copper, beige), so it seldom answers
+  them. In a photo these are often a toss-up for a person too.
 - **Side** is the way a side or three-quarter view points; a photo from straight
   ahead or behind has no answer worth reading.
 - **Kind**: a car and a van that share a body (a Berlingo, a Nemo, a Vito) are
@@ -327,6 +350,7 @@ compare. A verdict is used only on the build and photo it was made on.
 |---|---|
 | `vision.py` | the image encoders: fetch, check, read a picture, numbers side by side |
 | `heads.py` | the trained heads: colour histogram, fit, run, save; a photo's answers; a build's check |
+| `words.py` | each paint family's words as SigLIP reads them, for training the colour head |
 | `dataset.py` | the run's labels as training examples, the folds, the extra photos |
 | `kind_by_eye.json` | the photos whose kind, looked at, is not the list's class |
 | `train.py` | trains, answers every fold held out, sets the thresholds, writes `heads.json` and `ai_review.json` |

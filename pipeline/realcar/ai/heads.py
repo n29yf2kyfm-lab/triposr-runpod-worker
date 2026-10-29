@@ -133,6 +133,16 @@ class Head:
         return cls(d["classes"], d["W"], d["b"])
 
 
+def fold_words(head, T, weight):
+    """HEAD, fitted on [embedding, histogram, words.likeness(embedding, T, WEIGHT)], as a head on [embedding,
+    histogram] that answers the same: the likeness is the embedding's first numbers times WEIGHT * T, so its
+    weights fold into theirs."""
+    n, width = T.shape
+    W = head.W[:, :-n].astype(np.float64)
+    W[:, :width] += weight * head.W[:, -n:].astype(np.float64) @ T
+    return Head(head.classes, W, head.b)
+
+
 def side_proba(head, e, ef):
     """Left/right from a picture's embedding and its mirror's: the two readings averaged, the mirror's swapped."""
     p, pf = head.proba(e), head.proba(ef)
