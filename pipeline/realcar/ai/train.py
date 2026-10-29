@@ -54,10 +54,12 @@ SURE_RIGHT = 0.99
 EXTRA_WEIGHT = 0.5
 # the colour head also reads each picture's likeness to every family's words (words.py), this loud against the
 # embedding and histogram: the run's photos read 74.8% right held out without them, 74.4% at 3, 78.1% at 10,
-# 79.6% at 30. At 30 its answers are so sure that the surest wrong ones decide where SURE_RIGHT falls: set on
-# one half of the vehicles no threshold reached it, and the phone's heads found none (colour never counted
-# against a build there); at 10 it holds on both halves (picked on those same held-out scores)
-WORDS_WEIGHT = 10.0
+# 79.6% at 30 (picked on those same held-out scores). At 30 its surest wrong answers decide where SURE_RIGHT
+# falls: set on one half of the vehicles no threshold reached it, and the phone's heads found none, so colour
+# seldom or never counts against a build. At 10 it held, but the rarer paints (beige, champagne, green) went to
+# commoner neighbours (try_it: 23 of 29 against 27), and with it holding no build on the run was flagged for
+# colour (0 of 711): the reading is worth more than the flag
+WORDS_WEIGHT = 30.0
 
 
 def r3(x):

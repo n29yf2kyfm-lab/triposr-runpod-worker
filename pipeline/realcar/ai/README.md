@@ -38,8 +38,8 @@ commonest answer would score:
 | | 722 photos of cars and vans | 97.6% | 81.7% (car) | |
 | | 1,776 Flickr photos | 94.8% | 89.1% (car) | strangers' pictures, of every angle and light |
 | side | 711 photos | 100% | 54.0% (right) | not one miss; 100% on the builds too |
-| colour | 722 photos | 77.8% | 28.7% (white) | 90.7% its family or the next shade (always white: 49.6%); 95.3% in its top 3 |
-| | 711 builds | 92.5% | 28.3% (white) | 97.3% its family or the next shade |
+| colour | 722 photos | 79.4% | 28.7% (white) | 91.6% its family or the next shade (always white: 49.6%); 95.4% in its top 3 |
+| | 711 builds | 93.0% | 28.3% (white) | 97.3% its family or the next shade |
 | match | 650 builds with their own photo, 3,555 with other vehicles' | 0.95 | 0.50 | the chance a build scores higher with its own photo than with another vehicle's (AUC; 0.5 is a coin, 1 is never wrong) |
 | vehicle | 1,684 photos of no vehicle | 99.9% none | 0% (always "a vehicle") | 2 missed: a family, a sunset; the 221 drawn pictures all none |
 | | 1,647 run photos and builds | 100% a vehicle | | and 98.0% of the 1,776 Flickr vehicle photos (31 cars read as none) |
@@ -63,8 +63,10 @@ list's classes instead, kind is 94%: the difference is the list, not the model.
 
 **Sure.** Each head's threshold is the lowest `p` from which photos were right
 99 times in 100, held out; set on one half of the vehicles and tried on the
-other, read the 99 as about 98. Colour is now that sure on half the photos (it
-was 36%); set on one half and tried on the other, 98.1% and 99.0% right. Some settings (the heads' `C`, `REAL_WRONG`, `SURE_RIGHT`,
+other, read the 99 as about 98. Colour is now that sure on 56% of photos (it was
+36%), but set on one half and tried on the other it holds on one half (97.7%
+right on 58% of photos) and on the other no threshold reaches 99 in 100: read
+its `sure` with care. Some settings (the heads' `C`, `REAL_WRONG`, `SURE_RIGHT`,
 `WORDS_WEIGHT`) were picked after looking at held-out scores: they may flatter
 them a little.
 
@@ -136,14 +138,17 @@ worked: SigLIP read the run's photos' colour from words alone, untrained, 62%
 right (86% to the next shade), so its words for each family are a direction in
 the pictures' own space that thousands of captioned pictures set. Given each
 picture's likeness to them beside its numbers, the head scores 74.4% at weight
-3, 78.1% at 10 and 79.6% at 30, on both halves of the vehicles. At 30 its
-answers were so sure that its surest wrong ones decided where the 99-in-100
-`sure` line fell: on one half of the vehicles there was none, and the phone's
-heads found none, so colour never counted against a build there. At 10 the line
-holds on both halves, so 10 it is (trained in: 77.8%). The paint moves with it
-more: with red and blue swapped, held out, a coloured car's colour moved to the
-swapped paint's group on 89% of 208 photos (83% of 199 before; 91% at 30); turned grey,
-the colour went on 98.6% (99.5% before). The head is written folded: the words' weights become the embedding's, so
+3, 78.1% at 10 and 79.6% at 30 (trained in: 79.4%), on both halves of the
+vehicles. At 30 its surest wrong answers decide where the 99-in-100 `sure` line
+falls (see **Sure** above; the phone's heads find none), so colour seldom counts
+against a build. 10 was tried too: its line held on both halves, but the rarer
+paints went to commoner neighbours (`try_it.py`: 23 of 29 against 27: a beige
+Alto read yellow, a champagne S-Class silver), and with its line holding no
+build on the run was flagged for colour anyway (0 of 711; at 30, 1). So 30. The paint
+moves with it more: with red and blue swapped, held out,
+a coloured car's colour moved to the swapped paint's group on 91% of 215 photos
+(83% of 199 before); turned grey, the colour went on 97% (99.5% before). The
+head is written folded: the words' weights become the embedding's, so
 `heads.json`, `predict.py` and the phone page read the same numbers as before.
 
 ## Try it yourself
@@ -293,8 +298,9 @@ Python's heads give the page's every answer. Its check here, on 12 of the run's
 vehicles (24 pictures and 13 build checks, the page's example among them): every
 answer Python's, each encoder's numbers this machine's (cosine 1.0000), about 8 s a
 picture in a headless browser with no graphics card. The phone's heads score as
-the full model's to a point or two: kind 98.4%, side 100%, colour 72.6% (86.7%
-its family or the next shade), match 0.95, no vehicle read as none on all 1,684
+the full model's to a point or two: kind 98.4%, side 100%, colour 79.4% (91.0%
+its family or the next shade; no colour reading is sure enough to count against a
+build, see **Sure**), match 0.95, no vehicle read as none on all 1,684
 photos of none, the shape check flagging 11% of the builds the reviewers passed
 (`web/heads.json`'s card). A build to check can be marked a stand-in on the page.
 
@@ -346,7 +352,7 @@ compare. A verdict is used only on the build and photo it was made on.
   wrong, so is a score.
 - **Part of a vehicle is a vehicle.** An engine bay, a wheel close-up or an
   interior reads as a vehicle, and still gets a kind, a side and a colour.
-- **Colour** is still the weakest answer, at 78%: silver against white and grey
+- **Colour** is still the weakest answer, at 79%: silver against white and grey
   against dark grey or silver are its usual slips, and five families have four
   examples or fewer (purple, olive, bronze, copper, beige), so it seldom answers
   them. In a photo these are often a toss-up for a person too.
