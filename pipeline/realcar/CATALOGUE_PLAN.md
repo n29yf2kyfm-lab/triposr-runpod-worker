@@ -1,7 +1,24 @@
 # Parts catalogue in Supabase: the plan
 
-Waiting on the owner's Supabase project. Nothing is uploaded until its keys are in the
-environment (below).
+Waiting on the owner's Supabase keys. Nothing is uploaded until they are in the environment
+(below).
+
+## Where it goes
+
+The owner's Supabase project is `tfkvthprsntexrcuqpyd` (`https://tfkvthprsntexrcuqpyd.supabase.co`).
+It already holds a catalogue that another Claude session on the owner's Mac imported from
+their Drive (checkpoint 206, 21 October). That catalogue has:
+
+- 271,326 records: Volkswagen, Audi, brakes, AC and more.
+- Its own private schema, `catalogue_drive_private`, with the tables `observations`,
+  `assets`, `observation_images` and `batches`.
+- Its own private bucket, `catalogue-source-captures`.
+
+That work is left alone: nothing here writes to its schema or its bucket.
+
+The MASTER OEM catalogue goes beside it in its own schema, `catalogue_master_oem`, with its
+own buckets. The two can then be read together by OEM number; Volkswagen and Audi are in
+both. Merging them into one set of tables is the owner's call, made later.
 
 ## What goes in
 
@@ -95,7 +112,7 @@ Then a check: row counts match, and 20 OEM numbers picked at random read back ri
 
 Set these in the cloud environment's settings, as environment variables or network secrets:
 
-- `SUPABASE_URL`: the project's address, `https://<project>.supabase.co`.
+- `SUPABASE_URL`: `https://tfkvthprsntexrcuqpyd.supabase.co`.
 - `SUPABASE_SERVICE_ROLE_KEY`: writes the rows and images.
 - `SUPABASE_ACCESS_TOKEN`: a personal access token, so the tables can be made here. This one is
   optional. Without it, the owner pastes one SQL script into Supabase's SQL editor.
