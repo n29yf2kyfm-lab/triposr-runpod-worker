@@ -150,13 +150,18 @@ td, th { text-align: left; padding: 6px 8px 6px 0; border-bottom: 1px solid var(
 <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/ort.wasm.min.js"></script>
 <script>
 "use strict";
-// The model: CLIP's image encoder (ViT-B/32, int8, as published for transformers.js) and the heads trained
-// on it (heads.json): the Python package pipeline/realcar/ai, ported. Every step below mirrors its Python twin.
+// The model: one or more image encoders (small copies, as published for transformers.js: SigLIP's, DINOv2's
+// or CLIP's) read side by side, and the heads trained on their numbers (heads.json): the Python package
+// pipeline/realcar/ai, ported. Every step below mirrors its Python twin. MODELS lists each encoder: its
+// pieces, its kind (which output is read, and how the picture is normalised: vision.Encoder) and its width.
 const ORT_MJS = "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/ort-wasm-simd-threaded.mjs";
-const MODEL = /*MODEL*/{"chunks": [], "size": 0, "sha256": ""}/*END*/;
+const MODELS = /*MODEL*/[{"chunks": [], "size": 0, "sha256": "", "name": "clip-b32-int8", "kind": "clip", "width": 512}]/*END*/;
 const EXAMPLE = /*EXAMPLE*/null/*END*/;
 const SIZE = 224, MIN_SIDE = 64;
-const MEAN = [0.48145466, 0.4578275, 0.40821073], STD = [0.26862954, 0.26130258, 0.27577711];
+const CLIP_MEAN = [0.48145466, 0.4578275, 0.40821073], CLIP_STD = [0.26862954, 0.26130258, 0.27577711];
+const NORM = { clip: [CLIP_MEAN, CLIP_STD], dino: [[0.485, 0.456, 0.406], [0.229, 0.224, 0.225]], siglip: [[0.5, 0.5, 0.5], [0.5, 0.5, 0.5]] };
+const WIDTH = MODELS.reduce((n, m) => n + m.width, 0);
+const MODEL = MODELS[0];
 const HIST_BINS = [8, 7, 7], HIST_RANGE = [[0, 256], [64, 192], [64, 192]];
 
 class Unreadable extends Error {}
@@ -260,13 +265,15 @@ function resize(img, W, H, filter) {
   return { w: W, h: H, rgb: out };
 }
 
-// The whole picture on a square of CLIP's mean colour, 224 a side, normalised; and its mirror (vision.prep)
-function prep(img) {
+// The whole picture on a square of CLIP's mean colour, 224 a side, normalised the encoder's way (its kind:
+// NORM); and its mirror (vision.prep)
+function prep(img, kind = MODEL.kind) {
+  const [MEAN, STD] = NORM[kind];
   const s = SIZE / Math.max(img.w, img.h);
   const w = Math.max(1, pyRound(img.w * s)), h = Math.max(1, pyRound(img.h * s));
   const r = resize(img, w, h, "bicubic");
   const ox = Math.floor((SIZE - w) / 2), oy = Math.floor((SIZE - h) / 2);
-  const fill = MEAN.map(m => pyRound(m * 255));
+  const fill = CLIP_MEAN.map(m => pyRound(m * 255));
   const x = new Float32Array(2 * 3 * SIZE * SIZE);
   for (let k = 0; k < 2; k++) for (let y = 0; y < SIZE; y++) for (let xx = 0; xx < SIZE; xx++) {
     const sx = k ? w - 1 - (xx - ox) : xx - ox, sy = y - oy;
@@ -306,9 +313,9 @@ function shadeGroup(paint, a) {
 }
 function nextShade(paint, a, b) {
   if (a === b) return true;
-  if (shadeGroup(paint, a) !== shadeGroup(paint, b)) return false;
   const p = lab100(paint[a]), q = lab100(paint[b]);
-  return Math.hypot(p[0] - q[0], p[1] - q[1], p[2] - q[2]) < 25;
+  const alike = shadeGroup(paint, a) === shadeGroup(paint, b) || (p[0] < 32 && q[0] < 32);
+  return alike && Math.hypot(p[0] - q[0], p[1] - q[1], p[2] - q[2]) < 25;
 }
 function colourHist(img) {
   const r = resize(img, 160, 100, "bilinear"), h = 100, w = 160, y0 = Math.trunc(h * (1 - 0.6) / 2), x0 = Math.trunc(w * (1 - 0.6) / 2);
@@ -346,8 +353,8 @@ function read(hs, paint, f) {
 }
 function judge(hs, th, paint, P, B) {
   const a = read(hs, paint, P), b = read(hs, paint, B);
-  const x = new Float32Array(1024);
-  for (let i = 0; i < 512; i++) { x[i] = P.e[i] * B.e[i]; x[512 + i] = Math.abs(P.e[i] - B.e[i]); }
+  const n = P.e.length, x = new Float32Array(2 * n);       // heads.pair: the product, then the difference
+  for (let i = 0; i < n; i++) { x[i] = P.e[i] * B.e[i]; x[n + i] = Math.abs(P.e[i] - B.e[i]); }
   const pm = proba(hs.match, x)[1], sure = w => Math.min(a[w].p, b[w].p) >= th[w], flags = [];
   if (a.kind.answer !== b.kind.answer && sure("kind")) flags.push(`kind: the photo shows a ${a.kind.answer}, the build a ${b.kind.answer}`);
   if (a.side.answer !== b.side.answer && sure("side")) flags.push(`side: the photo's vehicle points ${a.side.answer}, the build ${b.side.answer}`);
@@ -357,7 +364,7 @@ function judge(hs, th, paint, P, B) {
 }
 
 // ---- the encoder ----
-let HEADS = null, CARD = null, SESSION = null, loading = null;
+let HEADS = null, CARD = null, SESSIONS = [], SESSION = null, loading = null;
 function idb() {
   return new Promise((ok, no) => { try { const r = indexedDB.open("vehicle-ai", 1);
     r.onupgradeneeded = () => r.result.createObjectStore("files"); r.onsuccess = () => ok(r.result); r.onerror = () => no(r.error);
@@ -390,19 +397,19 @@ function fromBase64(s) {
 }
 async function fetchBytes(url) { const r = await fetch(url); if (!r.ok) throw new Error(`${url}: ${r.status}`); return new Uint8Array(await r.arrayBuffer()); }
 
-async function getModel() {
-  const key = `encoder-${MODEL.sha256.slice(0, 16)}`;
+async function getModel(m, done, total) {
+  const key = `encoder-${m.sha256.slice(0, 16)}`;
   let buf = await stored(key);
   if (!buf) {
-    buf = new Uint8Array(MODEL.size); let at = 0;
-    for (const c of MODEL.chunks) {
-      setStatus(`Downloading the model: ${Math.round(at / 1e6)} of ${Math.round(MODEL.size / 1e6)} MB`, at / MODEL.size);
+    buf = new Uint8Array(m.size); let at = 0;
+    for (const c of m.chunks) {
+      setStatus(`Downloading the model: ${Math.round((done + at) / 1e6)} of ${Math.round(total / 1e6)} MB`, (done + at) / total);
       const b = fromBase64(await fetchText(c)); buf.set(b, at); at += b.length;
     }
-    if (at !== MODEL.size) throw new Error(`the model came ${at} bytes, not ${MODEL.size}`);
+    if (at !== m.size) throw new Error(`${m.name} came ${at} bytes, not ${m.size}`);
     setStatus("Checking the model\u2026", 1);
     const got = await sha256hex(buf);
-    if (got && got !== MODEL.sha256) throw new Error("the model downloaded is not the one the heads were trained on");
+    if (got && got !== m.sha256) throw new Error(`the ${m.name} downloaded is not the one the heads were trained on`);
     await store(key, buf);
   }
   return buf;
@@ -417,12 +424,16 @@ async function load() {
       const [heads, wasm] = await Promise.all([fetch("heads.json").then(r => r.json()),
         stored("ort-wasm-1.20.1").then(b => b || fetchBytes("ort-wasm-simd-threaded.wasm").then(async b => { await store("ort-wasm-1.20.1", b); return b; }))]);
       HEADS = heads.heads; CARD = heads.card;
-      const model = await getModel();
+      const total = MODELS.reduce((n, m) => n + m.size, 0), bufs = [];
+      let done = 0;
+      for (const m of MODELS) { bufs.push(await getModel(m, done, total)); done += m.size; }
       setStatus("Starting the model\u2026", 1);
       ort.env.wasm.numThreads = 1;
       ort.env.wasm.wasmPaths = { mjs: ORT_MJS };
       ort.env.wasm.wasmBinary = wasm;
-      SESSION = await ort.InferenceSession.create(model, { executionProviders: ["wasm"], graphOptimizationLevel: "all" });
+      SESSIONS = [];
+      for (const b of bufs) SESSIONS.push(await ort.InferenceSession.create(b, { executionProviders: ["wasm"], graphOptimizationLevel: "all" }));
+      SESSION = SESSIONS[0];
       setStatus("Ready. The model runs on this phone; your pictures don't leave it.", null);
       $("load").hidden = true;
       scores();
@@ -439,9 +450,32 @@ async function load() {
 async function features(file) {
   const img = toRGB(await decode(file));
   const x = prep(img);
-  const out = await SESSION.run({ pixel_values: new ort.Tensor("float32", x, [2, 3, SIZE, SIZE]) });
-  const raw = out.image_embeds.data, unit = v => { const n = Math.hypot(...v) || 1e-8; return Float32Array.from(v, t => t / n); };
-  return { e: unit(raw.slice(0, 512)), ef: unit(raw.slice(512, 1024)), h: colourHist(img) };
+  // each encoder's numbers, of unit length, side by side (vision.Encoders): the picture's, then its mirror's
+  const unit = v => { let n = 0; for (const t of v) n += t * t; n = Math.sqrt(n) || 1e-8; return Float32Array.from(v, t => t / n); };
+  const e = new Float32Array(WIDTH), ef = new Float32Array(WIDTH);
+  let at = 0;
+  for (let i = 0; i < MODELS.length; i++) {
+    const raw = await embedRaw(i === 0 ? x : prep(img, MODELS[i].kind), i), w = MODELS[i].width;
+    e.set(unit(raw.slice(0, w)), at); ef.set(unit(raw.slice(w, 2 * w)), at); at += w;
+  }
+  return { e, ef, h: colourHist(img) };
+}
+// Encoder I's numbers for N prepared pictures (x: N x 3 x SIZE x SIZE), one row of its width each: CLIP's
+// image_embeds and SigLIP's pooler_output as they are; DINOv2's class token then the mean of its 256 patch
+// tokens (vision.Encoder)
+async function embedRaw(x, i = 0) {
+  const n = x.length / (3 * SIZE * SIZE), m = MODELS[i];
+  const out = await SESSIONS[i].run({ pixel_values: new ort.Tensor("float32", x, [n, 3, SIZE, SIZE]) });
+  if (m.kind === "clip") return out.image_embeds.data;
+  if (m.kind === "siglip") return out.pooler_output.data;
+  const t = out.last_hidden_state, d = t.dims[2], tokens = t.dims[1], raw = new Float32Array(n * 2 * d);
+  for (let i = 0; i < n; i++) {
+    const base = i * tokens * d;
+    for (let k = 0; k < d; k++) raw[i * 2 * d + k] = t.data[base + k];
+    for (let j = 1; j < tokens; j++) for (let k = 0; k < d; k++) raw[i * 2 * d + d + k] += t.data[base + j * d + k];
+    for (let k = 0; k < d; k++) raw[i * 2 * d + d + k] /= tokens - 1;
+  }
+  return raw;
 }
 
 // ---- the page ----
@@ -555,7 +589,8 @@ fetch("heads.json").then(r => r.json()).then(h => {
 // for the check that this page answers as the Python model does (web/check.py)
 window.vehicleAI = { load, features: async f => { await load(); return features(f); },
   prepare: async f => { const img = toRGB(await decode(f)); return { x: Array.from(prep(img)), h: Array.from(colourHist(img)), w: img.w, hh: img.h, rgb: Array.from(img.rgb.slice(0, 3000)) }; },
-  embed: async x => { await load(); const o = await SESSION.run({ pixel_values: new ort.Tensor("float32", Float32Array.from(x), [x.length / (3 * SIZE * SIZE), 3, SIZE, SIZE]) }); return Array.from(o.image_embeds.data); },
+  embed: async (x, i = 0) => { await load(); return Array.from(await embedRaw(Float32Array.from(x), i)); },
+  models: MODELS.map(m => ({ name: m.name, kind: m.kind, width: m.width })),
   read: async f => { await load(); return read(HEADS, CARD.paint, await features(f)); },
   check: async (a, b) => { await load(); return judge(HEADS, CARD.thresholds, CARD.paint, await features(a), await features(b)); } };
 </script>

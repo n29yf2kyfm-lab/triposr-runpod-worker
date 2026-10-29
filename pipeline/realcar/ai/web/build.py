@@ -2,15 +2,15 @@
 
     F1K_HOME=/path/to/f1k python3 pipeline/realcar/ai/web/build.py OUT_DIR [--example KEY]
 
-The page (index.html) runs the model in the phone's browser: the int8 encoder
-(90 MB, vision.ENCODERS["clip-b32-int8"]) with onnxruntime-web, and the heads
-trained on that encoder (web/heads.json: train.py --encoder that file --out
+The page (index.html) runs the model in the phone's browser: the encoders' small
+copies (vision.ENCODERS, the heads' card's) with onnxruntime-web, and the heads
+trained on those copies (web/heads.json: train.py --encoder them --out
 web/heads.json). OUT_DIR gets:
 
-- index.html, with the encoder's pieces and the example filled in
+- index.html, with the encoders' pieces and the example filled in
 - heads.json
-- encoder.0.txt ... : the encoder in pieces of 11 MB, as base64 text (a claude.ai artifact serves
-  text and media, not raw bytes, and a file of at most 16 MB: 15 MB of text a piece)
+- encoder.0.txt ..., encoder1.0.txt ...: each encoder in pieces of 11 MB, as base64 text (a claude.ai
+  artifact serves text and media, not raw bytes, and a file of at most 16 MB: 15 MB of text a piece)
 - ort-wasm-simd-threaded.wasm: onnxruntime-web's engine (fetched pinned, checked by SHA-256)
 - example-photo.jpg, example-build.png and the example's answer, worked out here by the
   Python model on those very files (web/check.py checks the page gives the same)
@@ -47,6 +47,14 @@ def fetch_pinned(url, out, want):
     return out
 
 
+def encoder_names(card):
+    """The encoders the card's heads were trained on, by name."""
+    es = card.get("encoders") or []
+    if es:
+        return [e["name"] for e in es]
+    return [next((n for n, v in vision.ENCODERS.items() if v[3] == card.get("encoder_sha256")), "clip-b32-int8")]
+
+
 def example(out, key, heads, features=None):
     """The example's pictures (the photo at most 1280 px wide) and the model's check of them: on the page's own
     reading of them (FEATURES, from web/features.py) when there is one, as the page itself would answer."""
@@ -63,7 +71,7 @@ def example(out, key, heads, features=None):
     b = vision.load(build)              # cropped to the vehicle, on white: what the model reads
     b.thumbnail((1280, 1280))
     b.save(os.path.join(out, "example-build.png"))
-    ai = predict.VehicleAI(heads=heads, encoder=vision.fetch("clip-b32-int8"))
+    ai = predict.VehicleAI(heads=heads)
     files = [os.path.join(out, "example-photo.jpg"), os.path.join(out, "example-build.png")]
     got = dict(np.load(features)) if features else {}
     ids = [paths.sha(f) for f in files]
@@ -84,35 +92,44 @@ def main():
     ap.add_argument("--heads", default=os.path.join(HERE, "heads.json"))
     ap.add_argument("--example", default="car-kia-rio", help="a key of the run ($F1K_HOME), shown before any picture")
     ap.add_argument("--features", default=None, help="the page's own reading of the pictures (web/features.py)")
+    ap.add_argument("--encoder", default=None, help="the page's encoders (vision.ENCODERS names, small copies, "
+                    "comma-separated; default: the heads' card's)")
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     card = json.load(open(a.heads))["card"]
-    want = vision.ENCODERS["clip-b32-int8"][3]
-    if card["encoder_sha256"] != want:
-        raise SystemExit(f"build: {a.heads} was not trained on the int8 encoder (train.py --encoder it)")
+    names = (a.encoder or "").split(",") if a.encoder else encoder_names(card)
+    want = [vision.ENCODERS[n][3] for n in names]
+    if [e["sha256"] for e in card.get("encoders", [])] != want and card["encoder_sha256"] != want[0]:
+        raise SystemExit(f"build: {a.heads} was not trained on {','.join(names)} (train.py --encoder {','.join(names)}): "
+                         f"its card says {card.get('encoder')}")
     shutil.copy2(a.heads, os.path.join(a.out, "heads.json"))
-    for old in glob.glob(os.path.join(a.out, "encoder.*")):
+    for old in glob.glob(os.path.join(a.out, "encoder*.txt")):
         os.remove(old)
-    enc = vision.fetch("clip-b32-int8")
-    chunks = []
-    with open(enc, "rb") as fh:
-        for i, part in enumerate(iter(lambda: fh.read(PIECE), b"")):
-            name = f"encoder.{i}.txt"
-            with open(os.path.join(a.out, name), "wb") as o:
-                o.write(base64.b64encode(part))
-            chunks.append(name)
+    models = []
+    for k, name in enumerate(names):
+        enc = vision.fetch(name)
+        chunks = []
+        with open(enc, "rb") as fh:
+            for i, part in enumerate(iter(lambda: fh.read(PIECE), b"")):
+                piece = f"encoder{k}.{i}.txt" if k else f"encoder.{i}.txt"
+                with open(os.path.join(a.out, piece), "wb") as o:
+                    o.write(base64.b64encode(part))
+                chunks.append(piece)
+        e = vision.Encoder(enc)
+        models.append({"chunks": chunks, "size": os.path.getsize(enc), "sha256": vision.ENCODERS[name][3],
+                       "name": name, "kind": e.kind, "width": e.width})
     fetch_pinned(ORT + ORT_WASM[0], os.path.join(a.out, ORT_WASM[0]), ORT_WASM[1])
     ex = example(a.out, a.example, a.heads, a.features) if a.example else None
     page = open(os.path.join(HERE, "index.html")).read()
-    model = {"chunks": chunks, "size": os.path.getsize(enc), "sha256": want}
-    for tag, value in (("MODEL", model), ("EXAMPLE", ex)):
+    for tag, value in (("MODEL", models), ("EXAMPLE", ex)):
         start, end = f"/*{tag}*/", "/*END*/"
         i = page.index(start)
         j = page.index(end, i)
         page = page[:i + len(start)] + json.dumps(value) + page[j:]
     with open(os.path.join(a.out, "index.html"), "w") as fh:
         fh.write(page)
-    print(json.dumps({"out": a.out, "chunks": len(chunks), "example": ex and ex["check"]["answer"]}))
+    print(json.dumps({"out": a.out, "encoders": names, "chunks": sum(len(m["chunks"]) for m in models),
+                      "example": ex and ex["check"]["answer"]}))
 
 
 if __name__ == "__main__":

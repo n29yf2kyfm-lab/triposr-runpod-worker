@@ -61,14 +61,20 @@ def shade_group(paint, a):
     return "reds" if h < 0.19 or h > 0.92 else "greens" if h < 0.47 else "blues"
 
 
+# a paint darker than this (Lab L) is a dark one: black, dark blue and dark green are one another's next
+# shade in a photo (looked at, the run's "mistakes" between them are mostly a toss-up)
+DARK_L = 32.0
+
+
 def next_shade(paint, a, b, limit=25.0):
-    """Two families close enough to be one paint in another light (grey and dark grey, white and pearl):
-    their paints (PAINT, family -> '#rrggbb') within LIMIT of each other (CIE76), and in one group
-    (shade_group: a pale aqua is near white, but a colour, and a dark blue near dark grey)."""
+    """Two families close enough to be one paint in another light (grey and dark grey, white and pearl,
+    black and dark blue): their paints (PAINT, family -> '#rrggbb') within LIMIT of each other (CIE76),
+    and in one group (shade_group: a pale aqua is near white, but a colour) or both dark (DARK_L)."""
     if a == b:
         return True
-    return shade_group(paint, a) == shade_group(paint, b) and \
-        float(np.linalg.norm(lab100(paint[a]) - lab100(paint[b]))) < limit
+    la, lb = lab100(paint[a]), lab100(paint[b])
+    alike = shade_group(paint, a) == shade_group(paint, b) or (la[0] < DARK_L and lb[0] < DARK_L)
+    return alike and float(np.linalg.norm(la - lb)) < limit
 
 
 def colour_hist(im, mid=0.6):

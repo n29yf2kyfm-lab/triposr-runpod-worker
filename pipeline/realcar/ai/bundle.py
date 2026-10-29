@@ -3,8 +3,9 @@
     python3 pipeline/realcar/ai/bundle.py OUT_DIR
 
 OUT_DIR gets the code that runs the model (vision.py, heads.py, predict.py),
-the trained heads (heads.json), the image encoder (clip-b32.onnx, about
-350 MB), a requirements.txt and the README; and OUT_DIR.zip beside it.
+the trained heads (heads.json), the image encoders the heads' card names
+(siglip-b16.onnx and dinov2-base.onnx, about 720 MB together), a
+requirements.txt and the README; and OUT_DIR.zip beside it.
 Unzipped anywhere with Python 3.9+:
 
     pip install -r requirements.txt
@@ -14,6 +15,7 @@ Unzipped anywhere with Python 3.9+:
 needs no download and no network. (`key` and `run` read a run's data folder
 and need the repository.)
 """
+import json
 import os
 import shutil
 import sys
@@ -34,8 +36,11 @@ def main():
     os.makedirs(out, exist_ok=True)
     for f in CODE:
         shutil.copy2(os.path.join(HERE, f), os.path.join(out, f))
-    # beside vision.py, under the name fetch() looks for there
-    shutil.copy2(os.path.realpath(vision.fetch()), os.path.join(out, "clip-b32.onnx"))
+    # beside vision.py, under the names fetch() looks for there
+    card = json.load(open(os.path.join(HERE, "heads.json")))["card"]
+    names = [e["name"] for e in card.get("encoders", [])] or vision.DEFAULT_ENCODERS
+    for name in names:
+        shutil.copy2(os.path.realpath(vision.fetch(name)), os.path.join(out, name + ".onnx"))
     with open(os.path.join(out, "requirements.txt"), "w") as fh:
         fh.write(REQUIREMENTS)
     z = shutil.make_archive(out, "zip", out)

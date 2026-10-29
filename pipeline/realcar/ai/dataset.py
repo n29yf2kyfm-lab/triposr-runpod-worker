@@ -29,7 +29,6 @@ sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(os.path.dirname(HERE), "review"))
 
 import paths  # noqa: E402
-import vision  # noqa: E402
 from heads import lab100  # noqa: E402
 from paint_label import FAMILY  # noqa: E402
 
@@ -58,9 +57,12 @@ def bike_photo(rank):
 
 
 def items():
-    """One dict a vehicle: key, kind, photo, build picture and every answer the run has on them."""
+    """One dict a vehicle: key, kind, photo, build picture and every answer the run has on them. The kind is what
+    the photo shows (kind_by_eye.json: a panel van the target list registers as a car is a van here);
+    registered_kind is the list's. A build of the other kind than its photo (the same file) is not a kind example."""
     rows, _ = paths.rows()
     targets = paths.load(paths.f("targets.json"), [])
+    eye = paths.load(os.path.join(HERE, "kind_by_eye.json"), {})
     colour = paths.load(paths.f("paint_label.json"), {})
     side = paths.load(paths.f("view_label.json"), {})
     review = paths.load(paths.f("build_review.json"), {})
@@ -76,8 +78,9 @@ def items():
         p = paths.photo(k)
         if not p:
             continue
-        it = {"key": k, "kind": cls, "photo": p, "make": t.get("make"), "model": t.get("model"),
-              "colour": colour.get(k), "side": side.get(k)}
+        it = {"key": k, "kind": eye.get("kind", {}).get(k, cls), "registered_kind": cls, "photo": p,
+              "make": t.get("make"), "model": t.get("model"), "colour": colour.get(k), "side": side.get(k),
+              "build_other_kind": k in eye.get("build_is_other_kind", {})}
         r = rows.get(k) or {}
         if r.get("status") in ("built", "standin"):
             # the full studio picture, or its small copy once the full ones are pruned (webp.py):
@@ -101,6 +104,50 @@ def items():
                 # body, so it is not taken as a match
                 it["shape_fault_last"] = bool(set(v.get("faults") or []) & SHAPE_FAULTS)
         out.append(it)
+    return out
+
+
+# photos from outside the run, by a coarse colour (Wikimedia Commons' categories, extra/harvest.py): the run's
+# families each may be. The fine family is the model's own best guess within the group (train.py)
+GROUPS = {
+    "Red": ["red", "dark-red"], "White": ["white", "pearl-white"], "Blue": ["blue", "dark-blue", "light-blue", "grey-blue"],
+    "Black": ["black"], "Silver": ["silver"], "Gray": ["grey", "dark-grey"], "Grey": ["grey", "dark-grey"],
+    "Green": ["green", "dark-green", "light-green", "grey-green", "sage", "olive"], "Yellow": ["yellow"],
+    "Orange": ["orange", "copper"], "Beige": ["beige", "champagne", "taupe"], "Brown": ["brown", "bronze", "taupe"],
+    "Purple": ["purple", "lilac"], "Gold": ["gold", "champagne"], "Pink": ["lilac"],
+}
+
+
+def extra_items(folders, min_side=200):
+    """Photos from outside the run (FOLDERS, comma-separated, each with files.jsonl, img/, qa.json: see extra/), as items with a
+    kind, a coarse colour group and its FAMILIES (None when the picture's paint belies its colour word), a licence
+    and an author; no build, side or fine colour.
+    Only pictures qa.py kept (an exterior view of one vehicle). Each picture's licence and author are in
+    attrib.json once attrib.py has fetched them (Commons hosts free content only; "pending" until then)."""
+    import json
+    if "," in folders:
+        return [it for f in folders.split(",") if f for it in extra_items(f, min_side)]
+    folder = folders
+    qa = paths.load(os.path.join(folder, "qa.json"), {})
+    attrib = paths.load(os.path.join(folder, "attrib.json"), {})
+    out = []
+    with open(os.path.join(folder, "files.jsonl")) as fh:
+        for line in fh:
+            r = json.loads(line)
+            p = os.path.join(folder, "img", f"{r['id']}.jpg")
+            q = qa.get(str(r["id"]))
+            if not os.path.exists(p) or not q or not q.get("keep") or r["colour"] not in GROUPS:
+                continue
+            if (r.get("w") or 0) < min_side or (r.get("h") or 0) < min_side:
+                continue
+            a = attrib.get(r["id"]) or {}
+            # a colour word its picture does not bear out (qa.py's paint check) is not a colour example
+            paint_ok = q.get("paint_ok", True)
+            out.append({"key": f"extra-{r['id']}", "kind": r["kind"], "photo": p, "group": r["colour"] if paint_ok else None,
+                        "families": GROUPS[r["colour"]] if paint_ok else None,
+                        "licence": a.get("licence") or r.get("licence") or "pending",
+                        "author": a.get("author") or r.get("author"), "page": r.get("page"), "title": r["title"],
+                        "source": os.path.basename(os.path.normpath(folder)), "extra": True})
     return out
 
 
@@ -133,11 +180,12 @@ def folds(its, n=5, looks=None):
                     parent[find(it["key"])] = find(first[h])
                 first.setdefault(h, it["key"])
     if looks:
-        ks = sorted(looks)
-        for i, a in enumerate(ks):
-            for b in ks[i + 1:]:
-                if vision.dhash_bits(looks[a], looks[b]) <= SAME_PHOTO_BITS:
-                    parent[find(a)] = find(b)
+        ks = sorted(k for k in looks if k in parent)
+        bits = np.unpackbits(np.array([list(bytes.fromhex(looks[k])) for k in ks], np.uint8), axis=1).astype(np.float32)
+        # the bits that differ between every two: a@(1-b) + (1-a)@b
+        near = bits @ (1 - bits).T + (1 - bits) @ bits.T <= SAME_PHOTO_BITS
+        for i, j in zip(*np.nonzero(np.triu(near, 1))):
+            parent[find(ks[i])] = find(ks[j])
     groups = {}
     for it in sorted(its, key=lambda x: x["key"]):
         groups.setdefault(find(it["key"]), it["key"])

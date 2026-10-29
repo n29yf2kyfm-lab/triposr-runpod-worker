@@ -25,10 +25,37 @@ ENCODERS = {
     "clip-b32-int8": ("Xenova/clip-vit-base-patch32", "d15189d7028b43f1d3e65039190477f6af591c2a",
                       "onnx/vision_model_quantized.onnx",
                       "583fd1110a514667812fee7d684952aaf82a99b959760c8d7dca7e0ab9839299", 89117001),
+    # CLIP ViT-L/14 (1.2 GB, 768 numbers a picture): far better at whether a build is the photo's vehicle
+    "clip-l14": ("Xenova/clip-vit-large-patch14", "c307790166907339eed5a9a53a249af534102536", "onnx/vision_model.onnx",
+                 "ff49f8aa57c7abfd26e382eb083e4dbf988505223a9bd3767dbfd4e729206709", 1216438437),
+    "clip-l14-int8": ("Xenova/clip-vit-large-patch14", "c307790166907339eed5a9a53a249af534102536",
+                      "onnx/vision_model_int8.onnx",
+                      "d6eac98fc74a89ef2e50ba635c6b4c7f005dd324dcc6aeb6be89872f58d7b3fd", 306348752),
+    # DINOv2 (Meta's, self-supervised; 350 MB, 1536 numbers: its class token and its patches' mean): reads
+    # which way a vehicle points without a miss
+    "dinov2-base": ("Xenova/dinov2-base", "d623d125a29e343851bcedff293fdc8b6bda292b", "onnx/model.onnx",
+                    "de9c675d214f0171285f90f1d1d7716bce1c5e280e93826d071d57f7b9314d98", 346555570),
+    "dinov2-base-int8": ("Xenova/dinov2-base", "d623d125a29e343851bcedff293fdc8b6bda292b", "onnx/model_quantized.onnx",
+                         "1a1210212e3d8c2924d2ad985e46207bb407ac9a9763a240cacdeb94cd0bbf9c", 90974542),
+    "dinov2-base-q4": ("Xenova/dinov2-base", "d623d125a29e343851bcedff293fdc8b6bda292b", "onnx/model_q4f16.onnx",
+                       "86d3711c68b1937d666ce6af8336c2296a54a783617070a5cb33458e33eb17f4", 49539422),
+    # SigLIP (Google's, base, patch 16; 370 MB, 768 numbers: its pooled output): the best of these at a vehicle's
+    # kind and colour, and at whether a build is the photo's vehicle; poor at which way it points
+    "siglip-b16": ("Xenova/siglip-base-patch16-224", "4649052661e53c7000355844105f8a1792088239", "onnx/vision_model.onnx",
+                   "f89d41bac7f4d4b87e010a467d93f98689d708916ed22f5a07f96fdfa26f475f", 371819850),
+    "siglip-b16-q4": ("Xenova/siglip-base-patch16-224", "4649052661e53c7000355844105f8a1792088239",
+                      "onnx/vision_model_q4f16.onnx",
+                      "c9eb383bddf748212d240d90ca765415137d7994c60dd8be97bdb3adad30c682", 54625339),
 }
+DEFAULT_ENCODERS = ["siglip-b16", "dinov2-base"]
 SIZE = 224
 MEAN = np.array([0.48145466, 0.4578275, 0.40821073], np.float32)
 STD = np.array([0.26862954, 0.26130258, 0.27577711], np.float32)
+# DINOv2 was trained on pictures normalised ImageNet's way, SigLIP on ones scaled to -1..1; the square is
+# still padded with CLIP's mean colour for all of them
+IMAGENET_MEAN = np.array([0.485, 0.456, 0.406], np.float32)
+IMAGENET_STD = np.array([0.229, 0.224, 0.225], np.float32)
+HALF = np.array([0.5, 0.5, 0.5], np.float32)
 MIN_SIDE = 64          # a picture smaller than this on its short side is not read: there is no vehicle to see
 
 
@@ -104,18 +131,21 @@ def dhash_bits(a, b):
     return bin(int(a, 16) ^ int(b, 16)).count("1")
 
 
-def prep(im):
-    """The whole picture on a square of CLIP's mean colour (zero once normalised), 224 a side."""
+def prep(im, mean=MEAN, std=STD):
+    """The whole picture on a square of CLIP's mean colour (zero once normalised CLIP's way), 224 a side."""
     s = SIZE / max(im.size)
     w, h = max(1, round(im.width * s)), max(1, round(im.height * s))
     im = im.resize((w, h), Image.BICUBIC)
     sq = Image.new("RGB", (SIZE, SIZE), tuple(int(round(m * 255)) for m in MEAN))
     sq.paste(im, ((SIZE - w) // 2, (SIZE - h) // 2))
-    a = (np.asarray(sq, np.float32) / 255.0 - MEAN) / STD
+    a = (np.asarray(sq, np.float32) / 255.0 - mean) / std
     return a.transpose(2, 0, 1)
 
 
 class Encoder:
+    """One image encoder (ONNX), told apart by the file's own outputs: CLIP's (image_embeds), SigLIP's
+    (pooler_output) or DINOv2's (last_hidden_state alone: the class token and the patches' mean, side by side)."""
+
     def __init__(self, path=None, threads=None):
         import onnxruntime as ort
         so = ort.SessionOptions()
@@ -123,6 +153,12 @@ class Encoder:
             so.intra_op_num_threads = threads
         self.path = path or fetch()
         self.sess = ort.InferenceSession(self.path, so, providers=["CPUExecutionProvider"])
+        outs = {o.name: o for o in self.sess.get_outputs()}
+        self.kind = "siglip" if "pooler_output" in outs else "dino" if "last_hidden_state" in outs else "clip"
+        self.out = outs[{"siglip": "pooler_output", "dino": "last_hidden_state"}.get(self.kind, "image_embeds")]
+        self.dino = self.kind == "dino"
+        self.mean, self.std = {"dino": (IMAGENET_MEAN, IMAGENET_STD), "siglip": (HALF, HALF)}.get(self.kind, (MEAN, STD))
+        self.width = int(self.out.shape[-1]) * (2 if self.dino else 1)      # numbers a picture: 512, 768 or 1536
 
     def embed(self, images, flip=False, batch=16):
         """Unit-length embeddings of PIL images (mirrored first if FLIP), one row each."""
@@ -131,7 +167,27 @@ class Encoder:
             ims = images[i:i + batch]
             if flip:
                 ims = [im.transpose(Image.FLIP_LEFT_RIGHT) for im in ims]
-            x = np.stack([prep(im) for im in ims]).astype(np.float32)
-            out.append(self.sess.run(None, {"pixel_values": x})[0])
-        e = np.concatenate(out) if out else np.zeros((0, 512), np.float32)
+            x = np.stack([prep(im, self.mean, self.std) for im in ims]).astype(np.float32)
+            y = self.sess.run([self.out.name], {"pixel_values": x})[0]
+            out.append(np.concatenate([y[:, 0], y[:, 1:].mean(1)], 1) if self.dino else y)
+        e = np.concatenate(out) if out else np.zeros((0, self.width), np.float32)
         return e / np.linalg.norm(e, axis=1, keepdims=True).clip(1e-8)
+
+
+class Encoders:
+    """Several encoders read as one: their embeddings side by side (each of unit length)."""
+
+    def __init__(self, paths=None, threads=None):
+        paths = paths or [fetch(n) for n in DEFAULT_ENCODERS]
+        self.parts = [Encoder(p, threads) for p in paths]
+        self.path = ",".join(e.path for e in self.parts)
+        self.width = sum(e.width for e in self.parts)
+
+    def embed(self, images, flip=False, batch=16):
+        return np.hstack([e.embed(images, flip, batch) for e in self.parts])
+
+
+def encoders(spec=None):
+    """The encoders SPEC names: paths or ENCODERS names, comma-separated (default DEFAULT_ENCODERS)."""
+    names = [x for x in (spec or "").split(",") if x] or list(DEFAULT_ENCODERS)
+    return Encoders([fetch(n) if n in ENCODERS else n for n in names])

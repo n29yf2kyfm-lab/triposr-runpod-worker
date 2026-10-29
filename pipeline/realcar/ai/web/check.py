@@ -81,6 +81,8 @@ def same_answers(a, b):
         return a.keys() == b.keys() and all(same_answers(a[k], b[k]) for k in a)
     if isinstance(a, (list, tuple)):
         return len(a) == len(b) and all(same_answers(x, y) for x, y in zip(a, b))
+    if a is None or b is None:                     # one side with no answer where the other has one
+        return a is b
     if isinstance(a, float) or isinstance(b, float):
         return abs(float(a) - float(b)) <= 0.0015
     return a == b
@@ -93,7 +95,8 @@ def main():
     ap.add_argument("--n", type=int, default=24)
     a = ap.parse_intermixed_args()
     hs, card = H.load_heads(os.path.join(a.site, "heads.json"))
-    enc = vision.Encoder(vision.fetch("clip-b32-int8"))
+    enc = vision.Encoders([vision.fetch(n) for n in build.encoder_names(card)])
+    first = enc.parts[0]
     cdn = os.path.join(vision.home(), "ortweb")
     os.makedirs(cdn, exist_ok=True)
     for f, sha in CDN.items():
@@ -128,7 +131,8 @@ def main():
         feats = {}
         for p in reads:
             im = vision.load(os.path.join(a.site, p))
-            x = np.stack([vision.prep(im), vision.prep(im.transpose(Image.FLIP_LEFT_RIGHT))]).ravel()
+            x = np.stack([vision.prep(im, first.mean, first.std),
+                          vision.prep(im.transpose(Image.FLIP_LEFT_RIGHT), first.mean, first.std)]).ravel()
             f = js["features"][p]
             q = f["prep"]
             off = abs(q["sum"] - float(x.astype(np.float64).sum()))
@@ -137,7 +141,11 @@ def main():
             # (the page normalises each value in one step, Python in three float32 steps: the last bit of
             # rounding differs, a few thousandths over the 301,056 values; one pixel level is 0.015 alone)
             e, ef = enc.embed([im]), enc.embed([im.transpose(Image.FLIP_LEFT_RIGHT)])
-            cs += [cos(f["e"], e[0]), cos(f["ef"], ef[0])]
+            at = 0
+            for part in enc.parts:          # each encoder's numbers against this machine's, one by one
+                cs += [cos(f["e"][at:at + part.width], e[0][at:at + part.width]),
+                       cos(f["ef"][at:at + part.width], ef[0][at:at + part.width])]
+                at += part.width
             d = float(np.abs(np.asarray(f["h"]) - H.colour_hist(im)).max())
             hs_diff.append(d)
             if d > 0.02:                       # a pixel moved is 0.013 (60x96 of them)
@@ -152,7 +160,11 @@ def main():
             py = H.judge(hs, card["thresholds"], card["paint"], P, B)
             if not same_answers(c["result"], py):
                 bad.append(f"{c['photo']}: the page's check {c['result']['answer']} {c['result']['match']}, Python's {py['answer']} {py['match']}")
-            if ex and c["photo"] == ex["photo"] and not same_answers(c["result"], ex["check"]):
+            # the example's answer was Python's on this machine's numbers, the page's on the browser's: the same
+            # answer, its match within the two engines' difference (the heads are held to Python's just above)
+            if ex and c["photo"] == ex["photo"] and (c["result"]["answer"] != ex["check"]["answer"]
+                                                     or c["result"]["match"] is None
+                                                     or abs(c["result"]["match"] - ex["check"]["match"]) > 0.01):
                 bad.append(f"the example says {ex['check']['answer']} {ex['check']['match']}, the page {c['result']['answer']} {c['result']['match']}")
         res = {"pictures": len(reads), "checks": len(js["check"]),
                "engine_cosine_min": round(min(cs), 4), "engine_cosine_mean": round(float(np.mean(cs)), 4),

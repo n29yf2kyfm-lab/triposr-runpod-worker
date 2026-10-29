@@ -14,7 +14,6 @@ SITE_DIR is build.py's folder; the run's pictures are linked into it while
 the browser reads them (features.cjs), then unlinked.
 """
 import argparse
-import functools
 import json
 import os
 import subprocess
@@ -38,16 +37,26 @@ def main():
     ap.add_argument("site")
     ap.add_argument("out")
     ap.add_argument("--pages", type=int, default=3)
+    ap.add_argument("--extra", default=None, help="folders of photos from outside the run (train.py --extra)")
     a = ap.parse_args()
     its = dataset.items()
     files = sorted({it[s] for it in its for s in ("photo", "build") if it.get(s)})
+    extras = sorted(it["photo"] for it in dataset.extra_items(a.extra)) if a.extra else []
     home = os.path.realpath(dataset.paths.home())
     link = os.path.join(a.site, "_train")
     if os.path.lexists(link):
         os.remove(link)
     os.symlink(home, link)
+    links = [link]
     try:
         served = {f: "_train/" + os.path.relpath(os.path.realpath(f), home) for f in files}
+        for i, folder in enumerate(sorted({os.path.dirname(f) for f in extras})):
+            ln = os.path.join(a.site, f"_extra{i}")
+            if os.path.lexists(ln):
+                os.remove(ln)
+            os.symlink(os.path.realpath(folder), ln)
+            links.append(ln)
+            served.update({f: f"_extra{i}/" + os.path.basename(f) for f in extras if os.path.dirname(f) == folder})
         for f in ("example-photo.jpg", "example-build.png"):     # the page's example, worked out from these
             if os.path.exists(os.path.join(a.site, f)):
                 served[os.path.join(a.site, f)] = f
@@ -63,7 +72,8 @@ def main():
                         lst, lines, cdn, str(a.pages)], check=True, env=env)
         srv.shutdown()
     finally:
-        os.remove(link)
+        for ln in links:
+            os.remove(ln)
     got = {}
     for line in open(lines):
         r = json.loads(line)

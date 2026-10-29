@@ -16,6 +16,7 @@ the encoder makes of each picture is kept in the cache.
 """
 import argparse
 import collections
+import hashlib
 import json
 import os
 import sys
@@ -44,6 +45,9 @@ OWN_FLAGGED = 0.1
 # own labels, which its builds are made from, are right about 99 times in 100 (their gold checks):
 # at 97 in 100 nine flags in ten on the run were the model's own misreadings
 SURE_RIGHT = 0.99
+# a photo from outside the run (--extra) counts this much of one of the run's: its kind and coarse colour are
+# a person's (Commons' categories), its fine family the model's own guess within that colour
+EXTRA_WEIGHT = 0.5
 
 
 def r3(x):
@@ -61,6 +65,11 @@ def featurise(files, enc, cache, encoder_sha):
     old = dict(np.load(store)) if os.path.exists(store) else {}
     ids = [paths.sha(f) for f in files]
     todo = [(i, f) for i, f in zip(ids, files) if i + ":e" not in old]
+    os.makedirs(cache, exist_ok=True)
+
+    def keep():                 # written as it goes: a stop loses at most the last few hundred pictures
+        np.savez(store + ".part.npz", **old)
+        os.replace(store + ".part.npz", store)
     t0 = time.time()
     for n in range(0, len(todo), 64):
         chunk = todo[n:n + 64]
@@ -68,21 +77,25 @@ def featurise(files, enc, cache, encoder_sha):
         for (i, _), a, b, c in zip(chunk, e, ef, h):
             old[i + ":e"], old[i + ":f"], old[i + ":h"] = a, b, c
         print(f"  pictures read: {min(n + 64, len(todo))}/{len(todo)} ({time.time() - t0:.0f} s)", flush=True)
+        if (n // 64) % 5 == 4:
+            keep()
     if todo:
-        os.makedirs(cache, exist_ok=True)
-        np.savez(store + ".part.npz", **old)
-        os.replace(store + ".part.npz", store)
+        keep()
     return {f: (old[i + ":e"], old[i + ":f"], old[i + ":h"]) for i, f in zip(ids, files)}
 
 
-def read_features(files, path):
-    """Features made elsewhere, keyed as the cache is (the picture's fingerprint): every picture must be there."""
+def read_features(files, path, optional=()):
+    """Features made elsewhere, keyed as the cache is (the picture's fingerprint): every picture must be there
+    but the OPTIONAL ones, which are left out when they are not."""
     got = dict(np.load(path))
     ids = [paths.sha(f) for f in files]
     missing = [f for i, f in zip(ids, files) if i + ":e" not in got]
     if missing:
         raise SystemExit(f"train: {len(missing)} pictures have no features in {path}, e.g. {missing[:3]}")
-    return {f: (got[i + ":e"], got[i + ":f"], got[i + ":h"]) for i, f in zip(ids, files)}
+    opt = [(paths.sha(f), f) for f in optional]
+    if optional:
+        print(f"  {sum(1 for i, _ in opt if i + ':e' in got)} of {len(opt)} extra photos have features in {path}")
+    return {f: (got[i + ":e"], got[i + ":f"], got[i + ":h"]) for i, f in list(zip(ids, files)) + opt if i + ":e" in got}
 
 
 def stack(feat, files, part):
@@ -140,39 +153,65 @@ def auc(pos, neg):
     return float(((pos[:, None] > neg[None, :]).mean() + 0.5 * (pos[:, None] == neg[None, :]).mean()))
 
 
-def fit_all(its, feat, rng):
-    """The four heads, trained on these vehicles."""
-    col = [(it["photo"], it["colour"]) for it in its if it.get("colour")]
-    col += [(it["build"], it["build_colour"]) for it in its if it.get("build_colour")]
+def pseudo_label(hs, feat, extras):
+    """Each extra photo's fine colour: the colour head HS's likeliest family within the photo's coarse group."""
+    out = []
+    for it in extras:
+        if not it.get("families"):
+            out.append({**it, "colour": None})
+            continue
+        e, _, h = feat[it["photo"]]
+        p = hs["colour"].proba(np.concatenate([e, h]))[0]
+        inside = [(p[i], c) for i, c in enumerate(hs["colour"].classes) if c in it["families"]]
+        out.append({**it, "colour": max(inside)[1] if inside else it["families"][0]})
+    return out
+
+
+def fit_all(its, feat, rng, extras=()):
+    """The four heads, trained on these vehicles; the colour and kind heads also on EXTRAS (photos from outside
+    the run, at EXTRA_WEIGHT each), their fine colour first guessed by heads trained on the run alone."""
+    if extras:
+        extras = pseudo_label(fit_all(its, feat, rng), feat, extras)
+    col = [(it["photo"], it["colour"], 1.0) for it in its if it.get("colour")]
+    col += [(it["build"], it["build_colour"], 1.0) for it in its if it.get("build_colour")]
+    col += [(it["photo"], it["colour"], EXTRA_WEIGHT) for it in extras if it.get("colour")]
     sd = [(it["photo"], it["side"]) for it in its if it.get("side")]
-    kd = [(it["photo"], it["kind"]) for it in its] + [(it["build"], it["kind"]) for it in its if it.get("build")]
+    kd = [(it["photo"], it["kind"], 1.0) for it in its]
+    kd += [(it["build"], it["kind"], 1.0) for it in its if it.get("build") and not it.get("build_other_kind")]
+    kd += [(it["photo"], it["kind"], EXTRA_WEIGHT) for it in extras]
     Xm, ym, wm = match_pairs(its, feat, rng)
     for what, n in (("colour", len(col)), ("side", len(sd)), ("kind", len(kd)), ("match", int(ym.sum()))):
         if n < 10:
             raise SystemExit(f"train: {n} examples for the {what} head: too few to train it (check $F1K_HOME)")
-    Xc = np.hstack([stack(feat, [f for f, _ in col], 0), stack(feat, [f for f, _ in col], 2)])
+    Xc = np.hstack([stack(feat, [f for f, _, _ in col], 0), stack(feat, [f for f, _, _ in col], 2)])
     Xs = np.vstack([stack(feat, [f for f, _ in sd], 0), stack(feat, [f for f, _ in sd], 1)])
     ys = [s for _, s in sd] + [FLIP[s] for _, s in sd]
     return {
-        "colour": H.Head.fit(Xc, [c for _, c in col], C=C["colour"]),
+        "colour": H.Head.fit(Xc, [c for _, c, _ in col], C=C["colour"], sample_weight=np.array([w for _, _, w in col])),
         "side": H.Head.fit(Xs, ys, C=C["side"]),
-        "kind": H.Head.fit(stack(feat, [f for f, _ in kd], 0), [k for _, k in kd], C=C["kind"], class_weight="balanced"),
+        "kind": H.Head.fit(stack(feat, [f for f, _, _ in kd], 0), [k for _, k, _ in kd], C=C["kind"], class_weight="balanced",
+                           sample_weight=np.array([w for _, _, w in kd])),
         "match": H.Head.fit(Xm, ym, C=C["match"], sample_weight=wm, class_weight="balanced"),
     }
 
 
-def held_out(its, feat, fold_of):
-    """Every picture answered, and every build matched, by heads trained without its vehicle's fold."""
+def held_out(its, feat, fold_of, extras=()):
+    """Every picture answered, and every build matched, by heads trained without its vehicle's fold
+    (the extra photos too: answered as "extra", by heads trained on the other folds' extras)."""
     answers, scored, pairs_ = [], [], []
     for r in range(FOLDS):
         fold = [it for it in its if fold_of[it["key"]] == r]
-        hs = fit_all([it for it in its if fold_of[it["key"]] != r], feat, np.random.default_rng(r))
+        hs = fit_all([it for it in its if fold_of[it["key"]] != r], feat, np.random.default_rng(r),
+                     [it for it in extras if fold_of[it["key"]] != r])
         for it in fold:
             for src in ("photo", "build"):
                 if it.get(src):
                     answers.append((src, it, H.read(hs, dataset.FAMILY, feat[it[src]])))
             if it.get("build"):
                 scored.append((it, hs))
+        for it in extras:
+            if fold_of[it["key"]] == r:
+                answers.append(("extra", it, H.read(hs, dataset.FAMILY, feat[it["photo"]])))
         Xm, ym, _ = match_pairs(fold, feat, np.random.default_rng(100 + r), real=0)
         if len(ym):
             pairs_ += list(zip(hs["match"].proba(Xm)[:, 1], ym))
@@ -241,6 +280,22 @@ def scores(answers, fold_of):
         out[f"{what}_sure"] = {"threshold": r3(th[what]), "photos_this_sure": r3(above.mean()) if ps else None,
                                "right_when_this_sure": r3(np.asarray(rights)[above].mean()) if above.any() else None,
                                "set_on_one_half_tried_on_the_other": split_half(ps, rights, halves, threshold)}
+    ex = [(it, a) for s, it, a in answers if s == "extra"]
+    if ex:                      # photos from outside the run: a person's kind and coarse colour, held out the same way
+        ks = [it["kind"] for it, _ in ex]
+        ck = collections.Counter(ks).most_common(1)[0][0]
+        out["kind_extra"] = {"n": len(ex), "right": r3(np.mean([a["kind"]["answer"] == k for (_, a), k in zip(ex, ks)])),
+                             "always_the_commonest": {"answer": ck, "right": r3(np.mean([k == ck for k in ks]))},
+                             "mistakes": collections.Counter(f"{k}->{a['kind']['answer']}" for (_, a), k in zip(ex, ks)
+                                                             if a["kind"]["answer"] != k).most_common(6)}
+        ex = [(it, a) for it, a in ex if it.get("families")]
+    if ex:
+        gs = [it["group"] for it, _ in ex]
+        cg = collections.Counter(gs).most_common(1)[0][0]
+        out["colour_extra"] = {"n": len(ex), "right_group": r3(np.mean([a["colour"]["answer"] in it["families"] for it, a in ex])),
+                               "always_the_commonest": {"answer": cg, "right_group": r3(np.mean([g == cg for g in gs]))},
+                               "mistakes": collections.Counter(f"{it['group']}->{a['colour']['answer']}" for it, a in ex
+                                                               if a["colour"]["answer"] not in it["families"]).most_common(10)}
     return out, th
 
 
@@ -271,22 +326,33 @@ def reviewed(scored, th):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--encoder", default=None, help="the encoder's .onnx (default: fetched, see vision.py)")
+    ap.add_argument("--encoder", default=None, help="the encoders' .onnx files or names, comma-separated "
+                    "(default vision.DEFAULT_ENCODERS, fetched)")
     ap.add_argument("--cache", default=os.path.join(vision.home(), "cache"))
     ap.add_argument("--out", default=os.path.join(HERE, "heads.json"))
     ap.add_argument("--review", default=None, help="the second opinion's file (default $F1K_HOME/ai_review.json)")
     ap.add_argument("--features", default=None, help="the pictures' features read elsewhere (web/features.py: the "
                     "phone page's own reading), instead of the encoder's here; --encoder names the encoder they came from")
+    ap.add_argument("--extra", default=None, help="folders of photos from outside the run (extra/, comma-separated), "
+                    "for the colour and kind heads")
     a = ap.parse_args()
-    enc = vision.Encoder(a.encoder) if not a.features else type("Read", (), {"path": a.encoder or vision.fetch()})
-    enc_sha = vision.file_sha256(enc.path)
+    enc = vision.encoders(a.encoder)
+    shas = [vision.file_sha256(p) for p in enc.path.split(",")]
+    enc_sha = shas[0] if len(shas) == 1 else hashlib.sha256(",".join(shas).encode()).hexdigest()
+    encoders = [{"name": next((n for n, v in vision.ENCODERS.items() if v[3] == sha), os.path.basename(p)),
+                 "file": os.path.basename(p), "sha256": sha} for p, sha in zip(enc.path.split(","), shas)]
     its = dataset.items()
+    extras = dataset.extra_items(a.extra) if a.extra else []
     files = sorted({it[s] for it in its for s in ("photo", "build") if it.get(s)})
-    print(f"{len(its)} vehicles, {len(files)} pictures", flush=True)
-    feat = featurise(files, enc, a.cache, enc_sha) if not a.features else read_features(files, a.features)
-    looks = {it["key"]: vision.dhash(vision.load(it["photo"])) for it in its}
-    fold_of = dataset.folds(its, FOLDS, looks)
-    answers, scored, pairs_ = held_out(its, feat, fold_of)
+    print(f"{len(its)} vehicles, {len(files)} pictures, {len(extras)} extra photos", flush=True)
+    if a.features:
+        feat = read_features(files, a.features, optional=[it["photo"] for it in extras])
+        extras = [it for it in extras if it["photo"] in feat]
+    else:
+        feat = featurise(files + [it["photo"] for it in extras], enc, a.cache, enc_sha)
+    looks = {it["key"]: vision.dhash(vision.load(it["photo"])) for it in its + extras}
+    fold_of = dataset.folds(its + extras, FOLDS, looks)
+    answers, scored, pairs_ = held_out(its, feat, fold_of, extras)
     test, th = scores(answers, fold_of)
     pm = [float(hs["match"].proba(H.pair(feat[it["photo"]][0], feat[it["build"]][0]))[0, 1]) for it, hs in scored]
     # the match's threshold: one in ten builds of the photo's own model (not a stand-in, no shape fault) below it
@@ -321,14 +387,19 @@ def main():
         second[it["key"]] = {**v, "photo_sha": paths.sha(it["photo"]), "build_sha": paths.sha(it["build"]),
                              "heads": trained, "by": "heads trained without this vehicle",
                              "reviewers": it.get("verdict")}
-    final = fit_all(its, feat, np.random.default_rng(0))
+    final = fit_all(its, feat, np.random.default_rng(0), extras)
     card = {
-        "trained": trained, "encoder": os.path.basename(enc.path), "encoder_sha256": enc_sha,
+        "trained": trained, "encoder": "+".join(e["file"] for e in encoders), "encoder_sha256": enc_sha,
+        "encoders": encoders,
         "features": "read by " + (a.features and os.path.basename(a.features) or "onnxruntime here"),
         "examples": {"vehicles": len(its), "pictures": len(files),
                      "colour": sum(1 for it in its if it.get("colour")) + sum(1 for it in its if it.get("build_colour")),
                      "side": 2 * sum(1 for it in its if it.get("side")),
-                     "reviewed_builds": sum(1 for it in its if it.get("verdict"))},
+                     "reviewed_builds": sum(1 for it in its if it.get("verdict")),
+                     "extra_photos": len(extras), "extra_weight": EXTRA_WEIGHT if extras else None,
+                     "extra_sources": collections.Counter(it["source"] for it in extras).most_common(),
+                     "extra_licences": collections.Counter(it["licence"] for it in extras).most_common(8),
+                     "extra_kinds": collections.Counter(it["kind"] for it in extras).most_common()},
         "held_out_scores": test, "reviewers_wrong_shape_builds": faults,
         "paint": dataset.FAMILY, "thresholds": th,
         "note": f"Scores are held out: every vehicle answered by heads trained on the other {FOLDS - 1} of "
@@ -337,7 +408,7 @@ def main():
                 f"them a little.",
     }
     H.save(a.out, final, card)
-    seen = sorted({vision.dhash(vision.load(f)) for f in files})
+    seen = sorted({vision.dhash(vision.load(f)) for f in files} | {looks[it["key"]] for it in extras})
     with open(os.path.join(os.path.dirname(os.path.abspath(a.out)), "train_pictures.json"), "w") as fh:
         json.dump({"about": "vision.dhash of every picture the heads were trained on (photos and builds): "
                             "a photo within ~10 bits of one of these was trained on", "dhash": seen}, fh)

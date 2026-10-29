@@ -127,10 +127,13 @@ def test_next_shades():
     assert not H.next_shade(paint, "red", "blue")
     assert not H.next_shade(paint, "white", "black")
     # near in Lab, but a colour against a neutral, or one hue against another: not one paint
-    for a, b in (("white", "aqua"), ("silver", "lilac"), ("dark-grey", "dark-blue"), ("light-green", "beige"),
-                 ("grey", "grey-blue"), ("black", "dark-green")):
+    for a, b in (("white", "aqua"), ("silver", "lilac"), ("light-green", "beige"), ("grey", "grey-blue"),
+                 ("grey", "taupe"), ("silver", "sage")):
         assert not H.next_shade(paint, a, b) and not H.next_shade(paint, b, a), (a, b)
     assert H.next_shade(paint, "beige", "champagne") and H.next_shade(paint, "brown", "bronze")
+    # the dark paints: one another's next shade in a photo, but not a dark red's (too far in Lab)
+    assert H.next_shade(paint, "black", "dark-blue") and H.next_shade(paint, "black", "dark-green")
+    assert H.next_shade(paint, "dark-grey", "dark-blue") and not H.next_shade(paint, "black", "dark-red")
 
 
 def test_the_trained_heads_are_whole():
@@ -139,16 +142,19 @@ def test_the_trained_heads_are_whole():
     assert hs["side"].classes == ["left", "right"]
     assert set(hs["kind"].classes) == {"car", "van", "motorbike"}
     assert set(hs["colour"].classes) <= set(card["paint"])
-    assert hs["colour"].W.shape[1] == 512 + int(np.prod(H.HIST_BINS))
-    assert hs["match"].W.shape[1] == 1024
-    assert card["encoder_sha256"] == vision.ENCODERS["clip-b32"][3]
+    w = hs["side"].W.shape[1]                         # the encoders' numbers a picture, side by side
+    assert w == 768 + 1536                             # SigLIP's pooled output, DINOv2's class token and patch mean
+    assert hs["colour"].W.shape[1] == w + int(np.prod(H.HIST_BINS))
+    assert hs["match"].W.shape[1] == 2 * w
+    assert [e["name"] for e in card["encoders"]] == vision.DEFAULT_ENCODERS
+    assert all(e["sha256"] == vision.ENCODERS[e["name"]][3] for e in card["encoders"])
     assert set(card["thresholds"]) == {"kind", "side", "colour", "match"}
     for k in ("colour_photo", "side_photo", "kind_photo", "match_pairs"):
         assert k in card["held_out_scores"]
 
 
-def _feats(rng):
-    e = rng.normal(size=512)
+def _feats(rng, w):
+    e = rng.normal(size=w)
     e /= np.linalg.norm(e)
     h = np.zeros(int(np.prod(H.HIST_BINS)), np.float32)
     h[0] = 1
@@ -158,7 +164,8 @@ def _feats(rng):
 def test_check_flags_a_build_that_is_not_the_photos_vehicle():
     hs, card = H.load_heads(HEADS)
     rng = np.random.default_rng(2)
-    p, b = _feats(rng), _feats(rng)
+    w = hs["side"].W.shape[1]
+    p, b = _feats(rng, w), _feats(rng, w)
     same = H.judge(hs, card["thresholds"], card["paint"], p, p)
     other = H.judge(hs, card["thresholds"], card["paint"], p, b)
     assert same["match"] > other["match"]
@@ -253,7 +260,10 @@ def test_the_phone_page_has_its_slots_and_its_twin_rules():
         assert slot in page
     assert f"MIN_SIDE = {vision.MIN_SIDE}" in page and f"SIZE = {vision.SIZE}" in page
     assert str(list(H.HIST_BINS)).replace(" ", "") in page.replace(" ", "")
-    assert "clip-b32-int8" in vision.ENCODERS
+    for s in ("const MODELS = /*MODEL*/", "NORM = {", "pooler_output", "last_hidden_state", "image_embeds"):
+        assert s in page                                    # one or more encoders, each read its own way
+    assert all(n in vision.ENCODERS for n in vision.DEFAULT_ENCODERS)
+    assert "siglip-b16-q4" in vision.ENCODERS and "dinov2-base-q4" in vision.ENCODERS
 
 
 
@@ -268,6 +278,80 @@ def test_the_phone_pages_next_shade_is_pythons_on_every_pair():
     got = json.loads(subprocess.run(["node", "-e", js], capture_output=True, text=True, check=True).stdout)
     assert len(got) == len(paint) ** 2
     assert {k for k, v in got.items() if v != H.next_shade(paint, *k.split("|"))} == set()
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="needs node")
+@pytest.mark.parametrize("heads_file", [HEADS, os.path.join(HERE, "web", "heads.json")])
+def test_the_phone_pages_check_is_pythons_at_the_encoders_width(heads_file, tmp_path):
+    # the page's match once read 512 numbers a picture, CLIP's: on SigLIP and DINOv2's 2,304 it gave no match
+    # and passed every build
+    page = open(os.path.join(HERE, "web", "index.html")).read()
+    hs, card = H.load_heads(heads_file)
+    w = hs["side"].W.shape[1]
+    rng = np.random.default_rng(5)
+    feats = [_feats(rng, w) for _ in range(3)]
+    pairs = [(0, 0), (0, 1), (1, 2)]
+    want = [H.judge(hs, card["thresholds"], card["paint"], feats[i], feats[j]) for i, j in pairs]
+    f = tmp_path / "in.json"
+    f.write_text(json.dumps({"feats": [{"e": e.tolist(), "ef": ef.tolist(), "h": h.tolist()} for e, ef, h in feats],
+                             "pairs": pairs, "heads": heads_file}))
+    js = page[page.index("function lab("):page.index("// ---- the encoder ----")] + (
+        f"\nconst I = JSON.parse(require('fs').readFileSync({json.dumps(str(f))}));"
+        "const J = JSON.parse(require('fs').readFileSync(I.heads)), F = I.feats.map(x => ({e: Float32Array.from(x.e),"
+        " ef: Float32Array.from(x.ef), h: Float32Array.from(x.h)}));"
+        "console.log(JSON.stringify(I.pairs.map(([i, j]) => judge(J.heads, J.card.thresholds, J.card.paint, F[i], F[j]))));")
+    got = json.loads(subprocess.run(["node", "-e", js], capture_output=True, text=True, check=True).stdout)
+    for g, p in zip(got, want):
+        assert g["match"] is not None and abs(g["match"] - p["match"]) <= 0.0015
+        assert (g["answer"], g["flags"]) == (p["answer"], p["flags"])
+
+
+def test_several_encoders_read_as_one(monkeypatch):
+    class Fake:
+        def __init__(self, path, threads=None):
+            self.path, self.width = path, {"a": 2, "b": 3}[path]
+
+        def embed(self, images, flip=False, batch=16):
+            v = np.full((len(images), self.width), -1.0 if flip else 1.0, np.float32)
+            return v / np.linalg.norm(v, axis=1, keepdims=True)
+    monkeypatch.setattr(vision, "Encoder", Fake)
+    monkeypatch.setattr(vision, "fetch", lambda name="x": name)
+    enc = vision.encoders("a,b")
+    assert enc.width == 5 and enc.path == "a,b"
+    e, ef = enc.embed([None, None]), enc.embed([None], flip=True)
+    assert e.shape == (2, 5) and ef.shape == (1, 5)
+    assert np.allclose(np.linalg.norm(e[0, :2]), 1) and np.allclose(np.linalg.norm(e[0, 2:]), 1)  # each part unit length
+    assert (ef < 0).all()
+
+
+def test_extra_photos_become_items_with_their_colour_group(tmp_path):
+    import dataset
+    (tmp_path / "img").mkdir()
+    rows = [{"id": "f1", "title": "Red Mini", "colour": "Red", "kind": "car", "w": 500, "h": 333, "licence": "CC BY 2.0", "author": "a"},
+            {"id": "f2", "title": "interior", "colour": "Blue", "kind": "van", "w": 500, "h": 333, "licence": "CC BY 2.0"},
+            {"id": "f3", "title": "tiny", "colour": "Gray", "kind": "car", "w": 120, "h": 90, "licence": "CC BY 2.0"},
+            {"id": "f4", "title": "pending", "colour": "Gray", "kind": "car", "w": 500, "h": 333}]
+    (tmp_path / "files.jsonl").write_text("\n".join(json.dumps(r) for r in rows) + "\n")
+    for r in rows:
+        Image.new("RGB", (8, 8)).save(tmp_path / "img" / f"{r['id']}.jpg")
+    json.dump({"f1": {"keep": True}, "f2": {"keep": False}, "f3": {"keep": True}, "f4": {"keep": True}}, open(tmp_path / "qa.json", "w"))
+    its = dataset.extra_items(str(tmp_path))
+    assert [it["key"] for it in its] == ["extra-f1", "extra-f4"]        # f2 not an exterior view, f3 too small
+    assert its[0]["families"] == ["red", "dark-red"] and its[0]["licence"] == "CC BY 2.0" and its[0]["extra"]
+    assert its[1]["families"] == ["grey", "dark-grey"] and its[1]["licence"] == "pending"
+    assert dataset.extra_items(f"{tmp_path},{tmp_path}")[2]["key"] == "extra-f1"      # several folders
+
+
+def test_the_paint_check_reads_a_pictures_colour_word():
+    sys.path.insert(0, os.path.join(HERE, "extra"))
+    import qa
+    red, grey, blue = (Image.new("RGB", (120, 80), c) for c in ((190, 30, 40), (150, 150, 150), (30, 60, 180)))
+    assert qa.paint_check(red, "Red")[0] and not qa.paint_check(red, "Blue")[0] and not qa.paint_check(red, "White")[0]
+    assert qa.paint_check(grey, "Silver")[0] and not qa.paint_check(grey, "Green")[0]
+    assert qa.paint_check(blue, "Blue")[0] and not qa.paint_check(blue, "Yellow")[0]
+    sky = red.copy()
+    sky.paste((120, 170, 240), (0, 0, 120, 25))                 # a strip of sky: still red
+    assert qa.paint_check(sky, "Red")[0]
 
 if __name__ == "__main__":
     sys.exit(pytest.main([__file__, "-q"]))

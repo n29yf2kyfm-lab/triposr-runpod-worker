@@ -41,7 +41,8 @@ import vision  # noqa: E402
 class VehicleAI:
     def __init__(self, heads=None, encoder=None):
         self.heads, self.card = H.load_heads(heads or os.path.join(HERE, "heads.json"))
-        self.enc = vision.Encoder(encoder)
+        # the encoders the heads were trained on (the card's), unless told which files to use
+        self.enc = vision.encoders(encoder or ",".join(e["name"] for e in self.card.get("encoders", [])))
         self.th = self.card["thresholds"]
         self.paint = self.card["paint"]           # each family's paint, as the review builds it
 
@@ -108,7 +109,8 @@ def main():
     ap.add_argument("what", choices=["photo", "check", "key", "run"])
     ap.add_argument("files", nargs="*")
     ap.add_argument("--heads", default=None)
-    ap.add_argument("--encoder", default=None, help="the encoder's .onnx (default: fetched once, see vision.py)")
+    ap.add_argument("--encoder", default=None, help="the encoders' .onnx files or names, comma-separated (default: "
+                    "the card's, fetched once; see vision.py)")
     ap.add_argument("--out", default=None, help="run: where to write (default $F1K_HOME/ai_review.json)")
     a = ap.parse_args()
     if a.what == "check" and len(a.files) != 2:
